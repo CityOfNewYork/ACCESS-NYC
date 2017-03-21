@@ -1,0 +1,659 @@
+# Translation of Stable (latest release) in Spanish (Spain)
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-08-07 09:56:14+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#: view/options.php:108
+msgid "Are you sure you want to delete everything?"
+msgstr "¿Estás seguro de que quieres eliminar todo?"
+
+#: view/item-edit.php:35
+msgid "Advanced Settings"
+msgstr "Ajustes avanzados"
+
+#: matches/login.php:7
+msgid "URL and login status"
+msgstr "Estado de URL y conexión"
+
+#: matches/login.php:16
+msgid "The target URL will be chosen from one of the following URLs, depending if the user is logged in or out.  Leaving a URL blank means that the user is not redirected."
+msgstr "La URL destino será elegida entre las URL que siguen, dependiendo si el usuario se encuentra validado o no. Si deja la URL vacía el usuario no serà redireccionado."
+
+#: matches/login.php:23 matches/login.php:25
+msgid "Logged In"
+msgstr "Conectado"
+
+#: matches/login.php:35 matches/login.php:37
+msgid "Logged Out"
+msgstr "Desconectado"
+
+#: matches/referrer.php:8
+msgid "URL and referrer"
+msgstr "URL y referente"
+
+#: matches/referrer.php:20 models/pager.php:480 models/pager.php:611
+msgid "Referrer"
+msgstr "Referente"
+
+#: matches/referrer.php:23 view/item-edit.php:7
+msgid "Regex"
+msgstr "Expresión regular"
+
+#: matches/referrer.php:27 matches/referrer.php:37 matches/url.php:20
+#: matches/user-agent.php:38
+msgid "HTTP Code"
+msgstr "Código HTTP"
+
+#: matches/referrer.php:39
+msgid "The visitor will be redirected from the source URL if the referrer matches.  You can specify a <em>matched</em> target URL as the address to send visitors if they do match, and <em>not matched</em> if they don't match.  Leaving a URL blank means that the visitor is not redirected."
+msgstr "El visitante será redireccionado de la URL origen si el referente concuerda. Puede especificar una URL destino si <em>concuerda</em> como la dirección a donde enviar los visitantes en caso de concordancia, y <em>no concuerda</em> en caso de que no lo haga. Si deja la URL vacía el visitante no será redireccionado"
+
+#: matches/referrer.php:45 matches/referrer.php:47 matches/user-agent.php:58
+#: matches/user-agent.php:60
+msgid "Matched"
+msgstr "Concuerda"
+
+#: matches/referrer.php:55 matches/referrer.php:57 matches/user-agent.php:68
+#: matches/user-agent.php:70
+msgid "Not matched"
+msgstr "Sin coincidencia"
+
+#: matches/url.php:5
+msgid "URL only"
+msgstr "Sólo URL"
+
+#: matches/url.php:12 view/add.php:32
+msgid "Target URL"
+msgstr "URL destino"
+
+#: matches/user-agent.php:7
+msgid "URL and user agent"
+msgstr "URL y cliente de usuario (user agent)"
+
+#: matches/user-agent.php:12
+msgid "FeedBurner"
+msgstr "FeedBurner"
+
+#: matches/user-agent.php:13
+msgid "Internet Explorer"
+msgstr "Internet Explorer"
+
+#: matches/user-agent.php:14
+msgid "FireFox"
+msgstr "FireFox"
+
+#: matches/user-agent.php:15
+msgid "Opera"
+msgstr "Opera"
+
+#: matches/user-agent.php:16
+msgid "Safari"
+msgstr "Safari"
+
+#: matches/user-agent.php:17
+msgid "iPhone"
+msgstr "iPhone"
+
+#: matches/user-agent.php:18
+msgid "iPad"
+msgstr "iPad"
+
+#: matches/user-agent.php:19
+msgid "Android"
+msgstr "Android"
+
+#: matches/user-agent.php:20
+msgid "Nintendo Wii"
+msgstr "Nintendo Wii"
+
+#: matches/user-agent.php:25
+msgid "User Agent"
+msgstr "Agente usuario HTTP"
+
+#: matches/user-agent.php:51
+msgid "The visitor will be redirected from the source URL if the user agent matches.  You can specify a <em>matched</em> target URL as the address to send visitors if they do match, and <em>not matched</em> if they don't match.  Leaving a URL blank means that the visitor is not redirected. <strong>All matches are performed as regular expressions</strong>.\n"
+msgstr "El visitante será redireccionado de la URL origen si el agente de usuario concuerda. Puede especificar una URL destino si <em>concuerda</em> como la dirección a donde enviar los visitantes en caso de concordancia, y <em>no concuerda</em> en caso de que no lo haga. Si deja la URL vacía el visitante no será redireccionado.\n"
+
+#: models/database.php:98 models/group.php:109 view/item-list.php:5
+msgid "Redirections"
+msgstr "Redirecciones"
+
+#: models/database.php:99
+msgid "Modified Posts"
+msgstr "Entradas modificadas"
+
+#: models/pager.php:28
+msgid "Type"
+msgstr "Tipo"
+
+#: models/pager.php:29
+msgid "URL"
+msgstr "URL"
+
+#: models/pager.php:30
+msgid "Hits"
+msgstr "Hits"
+
+#: models/pager.php:31
+msgid "Last Access"
+msgstr "Último acceso"
+
+#: models/pager.php:53 models/pager.php:253
+msgid "Edit"
+msgstr "Editar"
+
+#: models/pager.php:54 models/pager.php:101 models/pager.php:254
+#: models/pager.php:300 models/pager.php:498 models/pager.php:628
+#: view/options.php:108
+msgid "Delete"
+msgstr "Eliminar"
+
+#: models/pager.php:59 models/pager.php:103 models/pager.php:260
+#: models/pager.php:302
+msgid "Disable"
+msgstr "Desactivar"
+
+#: models/pager.php:61 models/pager.php:102 models/pager.php:262
+#: models/pager.php:301
+msgid "Enable"
+msgstr "Habilitar"
+
+#: models/pager.php:104
+msgid "Reset Hits"
+msgstr "Reiniciar cuenta"
+
+#: models/pager.php:151
+msgid "No group filter"
+msgstr "Sin filtro de grupo"
+
+#: models/pager.php:164 models/pager.php:364
+msgid "Filter"
+msgstr "Filtro"
+
+#: models/pager.php:243 view/group-edit.php:4 view/group-list.php:30
+msgid "Name"
+msgstr "Nombre"
+
+#: models/pager.php:244 models/pager.php:710 view/submenu.php:6
+msgid "Redirects"
+msgstr "Redirecciones"
+
+#: models/pager.php:245 models/pager.php:709 view/group-edit.php:8
+msgid "Module"
+msgstr "Módulo"
+
+#: models/pager.php:255
+msgid "View Redirects"
+msgstr "Ver redirecciones"
+
+#: models/pager.php:279
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: models/pager.php:356
+msgid "All modules"
+msgstr "Todos los módulos"
+
+#: models/pager.php:441 models/pager.php:575
+msgid "Add redirect"
+msgstr "Añadir redirección"
+
+#: models/pager.php:478 models/pager.php:609
+msgid "Date"
+msgstr "Fecha"
+
+#: models/pager.php:479 models/pager.php:610 view/add.php:13
+#: view/item-edit.php:4
+msgid "Source URL"
+msgstr "URL origen"
+
+#: models/pager.php:481 models/pager.php:612
+msgid "IP"
+msgstr "IP"
+
+#: models/pager.php:581
+msgid "Show only this IP"
+msgstr "Mostrar sólo esta IP"
+
+#: models/pager.php:720
+msgid "Configure"
+msgstr "Configurar"
+
+#: models/redirect.php:160
+msgid "Source and target URL must be different"
+msgstr "La URL de origen y destino deben ser diferentes"
+
+#: models/redirect.php:166
+msgid "You can only redirect from a relative URL (<code>%s</code>) on this domain (<code>%s</code>)."
+msgstr "Solo puedes redireccionar de una URL relativa (<code>%s</code>) en este dominio (<code>%s</code>)."
+
+#: models/redirect.php:174
+msgid "Invalid group when creating redirect"
+msgstr "Grupo no válido a la hora de crear la redirección"
+
+#: models/redirect.php:177
+msgid "Invalid source URL when creating redirect for given match type"
+msgstr "URL de origen no válida a la hora de crear una redirección desde un tipo de conexión previo"
+
+#: models/redirect.php:213
+msgid "Unable to add new redirect - delete Redirection from the options page and re-install"
+msgstr "Imposible añadir una nueva redirección - elimina Redirection desde la página de opciones y reinstala"
+
+#: models/redirect.php:394
+msgid "Redirect to URL"
+msgstr "Redirigir a URL"
+
+#: models/redirect.php:395
+msgid "Redirect to random post"
+msgstr "Redirigir a entrada aleatoria"
+
+#: models/redirect.php:396
+msgid "Pass-through"
+msgstr "Pasar directo"
+
+#: models/redirect.php:397
+msgid "Error (404)"
+msgstr "Error (404)"
+
+#: models/redirect.php:398
+msgid "Do nothing"
+msgstr "No hacer nada"
+
+#: modules/apache.php:63
+msgid "Cannot write to chosen location - check path and permissions."
+msgstr "No puedo escribir en el sitio indicado - comprueba la ruta y los permisos."
+
+#: modules/apache.php:76
+msgid ".htaccess Location"
+msgstr "Ubicación de .htaccess"
+
+#: modules/apache.php:80
+msgid "If you want Redirection to automatically update your <code>.htaccess</code> file then enter the full path and filename here. You can also download the file and update it manually."
+msgstr "Si quieres que Redirection automáticamente actualice tu archivo <code>.htaccess</code>, introduce la ruta completa y nombre de archivo aquí. También puedes descargar el archivo y actualizarlo manualmente."
+
+#: modules/apache.php:81
+msgid "WordPress is installed in: <code>%s</code>"
+msgstr "WordPress está instalado en: <code>%s</code>"
+
+#: modules/apache.php:85
+msgid "Canonical URL"
+msgstr "URL canónica"
+
+#: modules/apache.php:88
+msgid "Default server"
+msgstr "Servidor por defecto"
+
+#: modules/apache.php:89
+msgid "Remove WWW (%s)"
+msgstr "Borrar WWW (%s)"
+
+#: modules/apache.php:90
+msgid "Add WWW (www.%s)"
+msgstr "Añadir WWW (www.%s)"
+
+#: modules/apache.php:93
+msgid "Automatically remove or add www to your site."
+msgstr "Eliminar o añadir automáticamente www a tu sitio."
+
+#: modules/apache.php:102
+msgid "<code>.htaccess</code> saved to %s"
+msgstr "<code>.htaccess</code> guardado en %s"
+
+#: modules/apache.php:108
+msgid "Apache"
+msgstr "Apache"
+
+#: modules/apache.php:112
+msgid "Uses Apache <code>.htaccess</code> files. Requires further configuration. The redirect happens without loading WordPress. No tracking of hits."
+msgstr "Utiliza archivos <code>.htaccess</code> de Apache. Requiere configuración adicional. La redirección se realiza sin cargar WordPress. No se realiza un registro de accesos."
+
+#: modules/nginx.php:41
+msgid "Nginx"
+msgstr "Nginx"
+
+#: modules/nginx.php:45
+msgid "For use with Nginx server. Requires manual configuration. The redirect happens without loading WordPress. No tracking of hits. This is an experimental module."
+msgstr "Para utilizar en servidores Nginx. Requiere configuración manual. La redirección sucede sin cargar WordPress. No hay registro de accesos. Es un módulo experimental."
+
+#: modules/wordpress.php:128
+msgid "WordPress"
+msgstr "WordPress"
+
+#: modules/wordpress.php:132
+msgid "WordPress-powered redirects. This requires no further configuration, and you can track hits."
+msgstr "Redirecciones gestionadas por WordPress. No requiere configuración adicional y puedes registrar los accesos"
+
+#: redirection-admin.php:135
+msgid "Settings"
+msgstr "Ajustes"
+
+#: redirection-admin.php:147
+msgid "Log entries"
+msgstr "Entradas del registro"
+
+#: redirection-admin.php:153
+msgid "Sorry, unable to do that. Please try refreshing the page."
+msgstr "Lo siento, no se puede hacer eso. Por favor, intenta refrescando la página."
+
+#. #-#-#-#-#  tmp-redirection.pot (Redirection 2.4.5)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: redirection-admin.php:158
+msgid "Redirection"
+msgstr "Redirection"
+
+#: redirection-admin.php:225 redirection-admin.php:241
+msgid "Your options were updated"
+msgstr "Tus ajustes se actualizaron"
+
+#: redirection-admin.php:250
+msgid "Redirection data has been deleted and the plugin disabled"
+msgstr "Los datos de Redirection se eliminaron y el plugin deshabilitado"
+
+#: redirection-admin.php:257
+msgid "%d redirection was successfully imported"
+msgid_plural "%d redirections were successfully imported"
+msgstr[0] "%d redirección importada correctamente"
+msgstr[1] "%d redirecciones importadas correctamente"
+
+#: redirection-admin.php:259
+msgid "No items were imported"
+msgstr "Ningún elemento importado"
+
+#: redirection-admin.php:271 redirection-admin.php:291
+msgid "Your logs have been deleted"
+msgstr "Se han borrado sus registros"
+
+#: redirection-admin.php:305
+msgid "Your group was added successfully"
+msgstr "Tu grupo ha sido agregado correctamente."
+
+#: redirection-admin.php:308
+msgid "Please specify a group name"
+msgstr "Por favor especifica un nombre para el grupo"
+
+#: redirection-admin.php:355 redirection-admin.php:367
+#: redirection-admin.php:394 redirection-admin.php:408
+#: redirection-admin.php:430 redirection-admin.php:442
+#: redirection-admin.php:464
+msgid "Unable to perform action"
+msgstr "No se pudo realizar la acción"
+
+#: redirection-admin.php:484
+msgid "Sorry, but your redirection was not created"
+msgstr "Lo siento, pero tu redirección no fue creada"
+
+#: redirection-admin.php:490
+msgid "Invalid module"
+msgstr "Módulo no válido"
+
+#: redirection-admin.php:506
+msgid "Download"
+msgstr "Descargar"
+
+#: redirection-admin.php:507 view/group-edit.php:22 view/item-edit.php:33
+#: view/module-edit.php:13
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: view/add.php:4
+msgid "Add new redirection"
+msgstr "Añadir nueva redirección"
+
+#: view/add.php:7
+msgid "Your redirection has been added."
+msgstr "Se ha agregado tu redirección"
+
+#: view/add.php:17
+msgid "Match"
+msgstr "Coincidencia"
+
+#: view/add.php:23
+msgid "Action"
+msgstr "Acción"
+
+#: view/add.php:28
+msgid "Regular expression"
+msgstr "Expresión regular"
+
+#: view/add.php:36 view/item-edit.php:18
+msgid "Group"
+msgstr "Grupo"
+
+#: view/add.php:46
+msgid "Add Redirection"
+msgstr "Añadir redirección"
+
+#: view/group-edit.php:21 view/item-edit.php:32 view/module-edit.php:12
+msgid "Save"
+msgstr "Guardar"
+
+#: view/group-list.php:5 view/submenu.php:11
+msgid "Groups"
+msgstr "Grupos"
+
+#: view/group-list.php:13 view/item-list.php:12 view/log.php:13
+msgid "Search"
+msgstr "Buscar"
+
+#: view/group-list.php:22
+msgid "Add Group"
+msgstr "Añadir grupo"
+
+#: view/group-list.php:24
+msgid "Use groups to organise your redirects. Groups are assigned to a module, which affects how the redirects in that group work. If you are unsure then stick to the WordPress module."
+msgstr "Utiliza grupos para organizar tus redirecciones. Los grupos se asignan a un módulo, lo cual afecta a cómo se realizan las redirecciones en ese grupo. Si no estás seguro entonces utiliza el módulo WordPress."
+
+#: view/group-list.php:44
+msgid "Add"
+msgstr "Añadir"
+
+#: view/item-edit.php:11
+msgid "Description"
+msgstr "Copias de seguridad de bases de datos"
+
+#: view/item-edit.php:14
+msgid "optional"
+msgstr "opcional"
+
+#: view/log.php:5
+msgid "Redirection Log"
+msgstr "Registro de redirecciones"
+
+#: view/log.php:19
+msgid "Log Management"
+msgstr "Gestión de registros"
+
+#: view/log.php:23
+msgid "These apply to the current search term, if any, otherwise all logs."
+msgstr "Esto se aplica al término de búsqueda actual, si existe alguno. En caso contrario, en todos los registros."
+
+#: view/log.php:25
+msgid "Delete All"
+msgstr "Borrar todo"
+
+#: view/log.php:28
+msgid "Export To CSV"
+msgstr "Exportar a CSV"
+
+#: view/module-list.php:5 view/submenu.php:16
+msgid "Modules"
+msgstr "Módulos"
+
+#: view/options.php:6
+msgid "No logs"
+msgstr "No hay logs"
+
+#: view/options.php:7
+msgid "A day"
+msgstr "Un dia"
+
+#: view/options.php:8
+msgid "A week"
+msgstr "Una semana"
+
+#: view/options.php:9
+msgid "A month"
+msgstr "Un mes"
+
+#: view/options.php:10
+msgid "Two months"
+msgstr "Dos meses"
+
+#: view/options.php:11
+msgid "Keep forever"
+msgstr "Mantener para siempre"
+
+#: view/options.php:19 view/submenu.php:42
+msgid "Options"
+msgstr "Opciones"
+
+#: view/options.php:27
+msgid "Plugin Support"
+msgstr "Soporte del plugin"
+
+#: view/options.php:30
+msgid "I'm a nice person and I have helped support the author of this plugin"
+msgstr "Soy una buena persona y ayude al autor de este plugin"
+
+#: view/options.php:34
+msgid "Redirect Logs"
+msgstr "Registros de redirecciones"
+
+#: view/options.php:40 view/options.php:50
+msgid "(time to keep logs for)"
+msgstr "(tiempo que se mantendrán los registros)"
+
+#: view/options.php:44
+msgid "404 Logs"
+msgstr "Registros 404"
+
+#: view/options.php:54
+msgid "Monitor changes to posts"
+msgstr "Monitorizar cambios en entradas"
+
+#: view/options.php:57
+msgid "Don't monitor"
+msgstr "No detectar"
+
+#: view/options.php:63
+msgid "RSS Token"
+msgstr "Token RSS"
+
+#: view/options.php:66
+msgid "A unique token allowing feed readers access to Redirection log RSS (leave blank to auto-generate)"
+msgstr "Un token único que permite acceso de los lectores de feeds a los registros RSS de Redirection (déjalo en blanco para que se genere automáticamente)"
+
+#: view/options.php:70
+msgid "Auto-generate URL"
+msgstr "Auto generar URL"
+
+#: view/options.php:74
+msgid "This will be used to auto-generate a URL if no URL is given.  You can use the special tags <code>$dec$</code> or <code>$hex$</code> to have a unique ID inserted (either decimal or hex)"
+msgstr "Esto será usado para generar automáticamente una URL si no ha sido dada previamente. Puedes usar las etiquetas especiales <code>$dec$</code> o <code>$hex$</code> para tener una ID única insertada (tanto decimal como hexadecimal)"
+
+#: view/options.php:79
+msgid "Update"
+msgstr "Actualizar"
+
+#: view/options.php:85
+msgid "Import"
+msgstr "Importar"
+
+#: view/options.php:87
+msgid "Here you can import redirections from an existing <code>.htaccess</code> file, or a CSV file."
+msgstr "Aquí puedes importar tus redirecciones desde un archivo <code>.htaccess</code> existente, o un archivo CSV."
+
+#: view/options.php:94
+msgid "Import into"
+msgstr "Importar a"
+
+#: view/options.php:97
+msgid "Upload"
+msgstr "Subir"
+
+#: view/options.php:102
+msgid "Delete Redirection"
+msgstr "Borrar Redirection"
+
+#: view/options.php:103
+msgid "Selecting this option will delete all redirections, all logs, and any options associated with the Redirection plugin.  Make sure this is what you want to do."
+msgstr "Seleccionando esta opción borrara todas las  redirecciones, todos los registros, y cualquier opción asociada con el plugin Redirection.  Asegurese que es esto lo que desea hacer."
+
+#: view/submenu.php:23
+msgid "Log"
+msgstr "Log"
+
+#: view/submenu.php:32
+msgid "404s from %s"
+msgstr "404s desde %s"
+
+#: view/submenu.php:34
+msgid "404s"
+msgstr "404s"
+
+#: view/submenu.php:47
+msgid "Support"
+msgstr "Soporte"
+
+#: view/support.php:5
+msgid "Redirection Support"
+msgstr "Soporte de Redirection"
+
+#: view/support.php:9
+msgid "Redirection is free to use - life is wonderful and lovely!  However, it has required a great deal of time and effort to develop and if it has been useful you can help support this development by <strong>making a small donation</strong>."
+msgstr "Redirection se puede usar gratis - ¡La vida es maravillosa y encantadora! Sin embargo, ha requerido una gran cantidad de tiempo y esfuerzo desarrollarlo y, si te ha sido útil, puedes puedes ayudar a este desarrollo <strong>haciendo una pequeña donación</strong>. "
+
+#: view/support.php:10
+msgid "This will act as an incentive for me to carry on developing. You get some useful software and I get to carry on making it.  Everybody wins."
+msgstr "Esto servirá como incentivo para mí para seguir desarrollando. Tú consigues software de utilidad y yo puedo seguir haciéndolo posible. Todo el mundo gana."
+
+#: view/support.php:13
+msgid "Please note that a donation is just a donation - it is not a payment for support. I am not a business, this is not a product, and I'm afraid I cannot provide paid support"
+msgstr "Por favor, ten en cuenta que una donación es sólo una donación - no es un pago para obtener soporte. No soy un negocio, y esto no es un producto, y no puedo ofrecer soporte a través de pagos"
+
+#: view/support.php:15
+msgid "If you are using this plugin in a commercial setup, or feel that it's been particularly useful, then you may want to consider a <strong>commercial donation</strong>."
+msgstr "Si estás utilizando este plugin en un proyecto comercial, o crees que te ha sido especialmente útil, podrías considerar realizar una <strong>donación comercial</strong>."
+
+#: view/support.php:38
+msgid "Individual<br/>Donation"
+msgstr "Donación<br/>Individual"
+
+#: view/support.php:58
+msgid "Commercial<br/>Donation"
+msgstr "Donación<br/>Comercial"
+
+#: view/support.php:62
+msgid "Translations"
+msgstr "Traducciones"
+
+#: view/support.php:64
+msgid "If you're multi-lingual then you may want to consider donating a translation:"
+msgstr "Si tu proyecto es multilingüe podrías considerar donar una traducción:"
+
+#: view/support.php:72
+msgid "Full details of producing a translation can be found in this <a href=\"http://urbangiraffe.com/articles/translating-wordpress-themes-and-plugins/\">guide to translating WordPress plugins</a>."
+msgstr "Los detalles completos para realizar una traducción pueden encontrarse en la siguiente <a href=\"http://urbangiraffe.com/articles/translating-wordpress-themes-and-plugins/\">guía para traducir plugins de WordPress</a>."
+
+#. Plugin URI of the plugin/theme
+msgid "http://urbangiraffe.com/plugins/redirection/"
+msgstr "http://urbangiraffe.com/plugins/redirection/"
+
+#. Description of the plugin/theme
+msgid "Manage all your 301 redirects and monitor 404 errors"
+msgstr "Gestiona todas tus redirecciones 301 y monitoriza tus errores 404"
+
+#. Author of the plugin/theme
+msgid "John Godley"
+msgstr "John Godley"
+
+#. Author URI of the plugin/theme
+msgid "http://urbangiraffe.com"
+msgstr "http://urbangiraffe.com"

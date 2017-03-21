@@ -1,0 +1,570 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FacetWP\n"
+"POT-Creation-Date: 2015-10-15 19:01-0400\n"
+"PO-Revision-Date: 2015-10-15 19:01-0400\n"
+"Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
+"Language-Team: VBurlak <vburlak.ru@gmail.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.5\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-ajax.php:203
+msgid "Settings saved"
+msgstr "Настройки сохранены"
+
+#: includes/class-ajax.php:206
+msgid "Error: invalid JSON"
+msgstr "Ошибка: недопустимый JSON"
+
+#: includes/class-ajax.php:343
+msgid "Nothing to import"
+msgstr "Нечего импортировать"
+
+#: includes/class-ajax.php:379
+msgid "Imported"
+msgstr "Импортировано"
+
+#: includes/class-ajax.php:382
+msgid "Skipped"
+msgstr "Пропущено"
+
+#: includes/class-ajax.php:413
+msgid "Error"
+msgstr "Ошибка"
+
+#: includes/class-facet.php:374 includes/class-facet.php:491
+msgid "of"
+msgstr "из"
+
+#: includes/class-facet.php:408 includes/facets/checkboxes.php:340
+#: includes/facets/dropdown.php:232 includes/facets/hierarchy.php:225
+msgid "Sort by"
+msgstr "Сортировать по"
+
+#: includes/class-facet.php:412
+msgid "Title (A-Z)"
+msgstr "Заголовок (А-Я)"
+
+#: includes/class-facet.php:419
+msgid "Title (Z-A)"
+msgstr "Заголовок (Я-А)"
+
+#: includes/class-facet.php:426
+msgid "Date (Newest)"
+msgstr "Дата (Сначала Новые)"
+
+#: includes/class-facet.php:433
+msgid "Date (Oldest)"
+msgstr "Дата (Сначала Старые)"
+
+#: includes/class-facet.php:490
+msgid "Page"
+msgstr "Страница"
+
+#: includes/class-facet.php:541
+msgid "Per page"
+msgstr "На страницу"
+
+#: includes/class-helper.php:369
+msgid "Posts"
+msgstr "Записи"
+
+#: includes/class-helper.php:371
+msgid "Post Type"
+msgstr "Тип Записи"
+
+#: includes/class-helper.php:372
+msgid "Post Date"
+msgstr "Дата Записи"
+
+#: includes/class-helper.php:373
+msgid "Post Modified"
+msgstr "Запись Изменена"
+
+#: includes/class-helper.php:374
+msgid "Post Title"
+msgstr "Название записи"
+
+#: includes/class-helper.php:375
+msgid "Post Author"
+msgstr "Автор Записи"
+
+#: includes/class-helper.php:379
+msgid "Taxonomies"
+msgstr "Таксономии"
+
+#: includes/class-helper.php:383
+msgid "Custom Fields"
+msgstr "Произвольные поля"
+
+#: includes/class-updater.php:100
+msgid "Please activate or renew your license for automatic updates."
+msgstr ""
+"Просьба активировать или обновить лицензию для автоматического обновления."
+
+#: includes/facets/autocomplete.php:7
+msgid "Autocomplete"
+msgstr "Автозаполнение"
+
+#: includes/facets/autocomplete.php:23
+msgid "Start typing..."
+msgstr "Начните ввод"
+
+#: includes/facets/autocomplete.php:24
+msgid "Update"
+msgstr "Обновить"
+
+#: includes/facets/checkboxes.php:7
+msgid "Checkboxes"
+msgstr "Чекбоксы"
+
+#: includes/facets/checkboxes.php:325 includes/facets/dropdown.php:217
+msgid "Parent term"
+msgstr "Родительский элемент"
+
+#: includes/facets/checkboxes.php:343 includes/facets/dropdown.php:235
+#: includes/facets/hierarchy.php:228
+msgid "Highest Count"
+msgstr "Высокий игр"
+
+#: includes/facets/checkboxes.php:344 includes/facets/dropdown.php:236
+#: includes/facets/hierarchy.php:229
+msgid "Display Value"
+msgstr "Отображаемое Значение"
+
+#: includes/facets/checkboxes.php:345 includes/facets/dropdown.php:237
+#: includes/facets/hierarchy.php:230
+msgid "Raw Value"
+msgstr "Необработанное Значение"
+
+#: includes/facets/checkboxes.php:351
+msgid "Behavior"
+msgstr "Поведение"
+
+#: includes/facets/checkboxes.php:354
+msgid "How should multiple selections affect the results?"
+msgstr "Как множественный выбор должен влиять на результаты?"
+
+#: includes/facets/checkboxes.php:359
+msgid "Narrow the result set"
+msgstr "Ограниченный набор результатов"
+
+#: includes/facets/checkboxes.php:360
+msgid "Widen the result set"
+msgstr "Расширенный набор результатов"
+
+#: includes/facets/checkboxes.php:366 includes/facets/dropdown.php:243
+msgid "Hierarchical"
+msgstr "По иерархии"
+
+#: includes/facets/checkboxes.php:369 includes/facets/dropdown.php:246
+msgid "Is this a hierarchical taxonomy?"
+msgstr "Это иерархической таксономии?"
+
+#: includes/facets/checkboxes.php:374 includes/facets/checkboxes.php:389
+#: includes/facets/checkboxes.php:404 includes/facets/dropdown.php:251
+#: includes/integrations/acf/acf.php:175
+msgid "No"
+msgstr "Нет"
+
+#: includes/facets/checkboxes.php:375 includes/facets/checkboxes.php:390
+#: includes/facets/checkboxes.php:405 includes/facets/dropdown.php:252
+#: includes/integrations/acf/acf.php:175
+msgid "Yes"
+msgstr "Да"
+
+#: includes/facets/checkboxes.php:381
+msgid "Show ghosts"
+msgstr "Показать призраков"
+
+#: includes/facets/checkboxes.php:384
+msgid "Show choices that would return zero results?"
+msgstr "Показать варианты, которые будут возвращать нулевой результат?"
+
+#: includes/facets/checkboxes.php:396
+msgid "Preserve ghost order"
+msgstr "Сохранять порядок призрак"
+
+#: includes/facets/checkboxes.php:399
+msgid "Keep ghost choices in the same order?"
+msgstr "Держать в том же порядке призрак выбор?"
+
+#: includes/facets/checkboxes.php:411 includes/facets/dropdown.php:258
+#: includes/facets/hierarchy.php:236
+msgid "Count"
+msgstr "Сколько выводить"
+
+#: includes/facets/checkboxes.php:414 includes/facets/dropdown.php:261
+#: includes/facets/hierarchy.php:239
+msgid "The maximum number of facet choices to show"
+msgstr ""
+"Максимальное количество выбранных вариантов, которые будут отображаться"
+
+#: includes/facets/date_range.php:7
+msgid "Date Range"
+msgstr "Выбор в диапазоне Дат"
+
+#: includes/facets/date_range.php:24 includes/facets/date_range.php:151
+msgid "Start Date"
+msgstr "Дата с"
+
+#: includes/facets/date_range.php:27 includes/facets/date_range.php:152
+msgid "End Date"
+msgstr "Дата по"
+
+#: includes/facets/date_range.php:127 includes/facets/number_range.php:111
+#: includes/facets/slider.php:265
+msgid "Other data source"
+msgstr "Другой источник данных"
+
+#: includes/facets/date_range.php:130 includes/facets/number_range.php:114
+#: includes/facets/slider.php:268
+msgid "Use a separate value for the upper limit?"
+msgstr "Используйте отдельное значение для верхний предел?"
+
+#: includes/facets/date_range.php:135 includes/facets/number_range.php:119
+#: includes/facets/slider.php:273
+msgid "None"
+msgstr "Ничего"
+
+#: includes/facets/date_range.php:147
+msgid "Fields to show"
+msgstr "Поля, чтобы показать"
+
+#: includes/facets/date_range.php:150
+msgid "Both"
+msgstr "Оба"
+
+#: includes/facets/dropdown.php:7
+msgid "Dropdown"
+msgstr "Выпадающий список"
+
+#: includes/facets/dropdown.php:87 includes/facets/dropdown.php:212
+#: includes/facets/hierarchy.php:71
+msgid "Any"
+msgstr "Любой"
+
+#: includes/facets/dropdown.php:203
+msgid "Default label"
+msgstr "По умолчанию метка"
+
+#: includes/facets/hierarchy.php:7
+msgid "Hierarchy"
+msgstr "Иерархия"
+
+#: includes/facets/hierarchy.php:122
+msgid "More"
+msgstr "Больше"
+
+#: includes/facets/hierarchy.php:123
+msgid "Less"
+msgstr "Меньше"
+
+#: includes/facets/number_range.php:7
+msgid "Number Range"
+msgstr "Выбор в диапазоне Чисел"
+
+#: includes/facets/number_range.php:21
+msgid "Min"
+msgstr "Мин"
+
+#: includes/facets/number_range.php:23
+msgid "Max"
+msgstr "Макс"
+
+#: includes/facets/proximity.php:19
+msgid "Proximity"
+msgstr "Расстояние"
+
+#: includes/facets/proximity.php:46
+msgid "Enter location"
+msgstr "Введите Местоположение"
+
+#: includes/facets/proximity.php:262
+msgid "Unit of measurement"
+msgstr "Единица измерения"
+
+#: includes/facets/proximity.php:266
+msgid "Miles"
+msgstr "мили"
+
+#: includes/facets/proximity.php:267
+msgid "Kilometers"
+msgstr "Километров"
+
+#: includes/facets/proximity.php:309
+msgid "Distance"
+msgstr "Расстояние"
+
+#: includes/facets/search.php:7
+msgid "Search"
+msgstr "Поиск"
+
+#: includes/facets/search.php:19
+msgid "Enter keywords"
+msgstr "Введите ключевые слова"
+
+#: includes/facets/search.php:117
+msgid "Search engine"
+msgstr "Поисковик"
+
+#: includes/facets/search.php:120
+msgid "WP Default"
+msgstr "WP по умолчанию"
+
+#: includes/facets/search.php:128
+msgid "Placeholder text"
+msgstr "Рыба"
+
+#: includes/facets/slider.php:7
+msgid "Slider"
+msgstr "Слайдер"
+
+#: includes/facets/slider.php:24
+msgid "Reset"
+msgstr "Сброс"
+
+#: includes/facets/slider.php:286
+msgid "Prefix"
+msgstr "Префикс"
+
+#: includes/facets/slider.php:289
+msgid "Text that appears before each slider value"
+msgstr "Текст, который появляется перед каждое значение ползунка"
+
+#: includes/facets/slider.php:296
+msgid "Suffix"
+msgstr "Суффикс"
+
+#: includes/facets/slider.php:299
+msgid "Text that appears after each slider value"
+msgstr "Текст, который появляется после каждого значения ползунка"
+
+#: includes/facets/slider.php:306
+msgid "Format"
+msgstr "Формат"
+
+#: includes/facets/slider.php:309
+msgid "The number format"
+msgstr "Числовой формат"
+
+#: includes/facets/slider.php:330
+msgid "Step"
+msgstr "Шаг"
+
+#: includes/facets/slider.php:333
+msgid "The amount of increase between intervals"
+msgstr "Размер увеличения между интервалами"
+
+#: includes/integrations/searchwp/searchwp.php:108
+msgid "Default"
+msgstr "По умолчанию"
+
+#: includes/integrations/woocommerce/woocommerce.php:28
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/integrations/woocommerce/woocommerce.php:30
+msgid "Stock Status"
+msgstr "Есть ли в наличии"
+
+#: includes/integrations/woocommerce/woocommerce.php:66
+msgid "In Stock"
+msgstr "Есть в наличии"
+
+#: includes/integrations/woocommerce/woocommerce.php:66
+msgid "Out of Stock"
+msgstr "Нет в наличии"
+
+#: templates/page-settings.php:7
+msgid "All post types"
+msgstr "Все типы советов"
+
+#: templates/page-settings.php:8
+msgid "Indexing complete"
+msgstr "Индексирование полностью"
+
+#: templates/page-settings.php:9
+msgid "Indexing"
+msgstr "Index"
+
+#: templates/page-settings.php:10
+msgid "Saving"
+msgstr "Сохраняется"
+
+#: templates/page-settings.php:11
+msgid "Importing"
+msgstr "Импорт"
+
+#: templates/page-settings.php:12
+msgid "Activating"
+msgstr "Активация"
+
+#: templates/page-settings.php:13
+msgid "Are you sure?"
+msgstr "Вы уверены?"
+
+#: templates/page-settings.php:35
+msgid "Not yet activated"
+msgstr "Еще не активировано"
+
+#: templates/page-settings.php:40
+msgid "License active"
+msgstr "Лицензия активирована"
+
+#: templates/page-settings.php:41
+msgid "expires"
+msgstr "истекает"
+
+#: templates/page-settings.php:88
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#: templates/page-settings.php:89 templates/page-settings.php:109
+msgid "Facets"
+msgstr "Фасеты"
+
+#: templates/page-settings.php:90 templates/page-settings.php:114
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: templates/page-settings.php:91
+msgid "Settings"
+msgstr "Настройки"
+
+#: templates/page-settings.php:92
+msgid "Support"
+msgstr "Поддержка"
+
+#: templates/page-settings.php:104
+msgid "Welcome to FacetWP"
+msgstr "Добро пожаловать на FacetWP"
+
+#: templates/page-settings.php:131 templates/page-settings.php:155
+msgid "Add New"
+msgstr "Добавить местоположение"
+
+#: templates/page-settings.php:134 templates/page-settings.php:158
+msgid "Back"
+msgstr "Назад"
+
+#: templates/page-settings.php:138
+msgid "Re-index"
+msgstr "Повторное индексирование"
+
+#: templates/page-settings.php:139 templates/page-settings.php:162
+#: templates/page-settings.php:179
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: templates/page-settings.php:186
+msgid "License Key"
+msgstr "Лицензионный ключ"
+
+#: templates/page-settings.php:189
+msgid "Activate"
+msgstr "Активировать"
+
+#: templates/page-settings.php:200
+msgid "Permalink Type"
+msgstr "Постоянная ссылка тип"
+
+#: templates/page-settings.php:203
+msgid "How should permalinks be constructed?"
+msgstr "Каким образом должны быть построены постоянные?"
+
+#: templates/page-settings.php:208
+msgid "GET variables"
+msgstr "ПОЛУЧАТЬ переменные"
+
+#: templates/page-settings.php:209
+msgid "URL Hash"
+msgstr "URL хэш"
+
+#: templates/page-settings.php:215
+msgid "Separators"
+msgstr "Сепаратор"
+
+#: templates/page-settings.php:218
+msgid "Thousands"
+msgstr "Тысяча"
+
+#: templates/page-settings.php:220
+msgid "Decimal"
+msgstr "Десятичный"
+
+#: templates/page-settings.php:231 templates/page-settings.php:239
+msgid "Export"
+msgstr "Экспорт"
+
+#: templates/page-settings.php:250 templates/page-settings.php:255
+msgid "Import"
+msgstr "Импорт"
+
+#: templates/page-settings.php:253
+msgid "Paste the import code here"
+msgstr "Вставьте код импорта здесь"
+
+#: templates/page-settings.php:254
+msgid "Overwrite existing items?"
+msgstr "Заменить существующие данные?"
+
+#: templates/page-settings.php:275
+msgid "This facet type has no additional settings."
+msgstr "Этот тип facet имеет никаких дополнительных настроек."
+
+#: templates/page-settings.php:295
+msgid "Label"
+msgstr "Лейбл"
+
+#: templates/page-settings.php:299 templates/page-settings.php:342
+msgid "Name"
+msgstr "Имя"
+
+#: templates/page-settings.php:303
+msgid "Facet type"
+msgstr "Тип Фасета"
+
+#: templates/page-settings.php:314
+msgid "Data source"
+msgstr "Источник данных"
+
+#: templates/page-settings.php:329
+msgid "Other settings"
+msgstr "Другие настройки"
+
+#: templates/page-settings.php:345
+msgid "Open query builder"
+msgstr "Открыть построитель"
+
+#: templates/page-settings.php:346
+msgid "Query Arguments"
+msgstr "Аргументы Запроса"
+
+#: templates/page-settings.php:350
+msgid "What goes here?"
+msgstr "То, что происходит здесь?"
+
+#: templates/page-settings.php:351
+msgid "Display Code"
+msgstr "Отображаемый код"
+
+#: templates/page-settings.php:365
+msgid "Query Builder"
+msgstr "Построитель Запросов"
+
+#: templates/page-settings.php:369
+msgid "Which posts would you like to use for the content listing?"
+msgstr "Какие сообщения вы хотите использовать для контента списка?"
+
+#: templates/page-settings.php:378
+msgid "Send to editor"
+msgstr "Отправить редактор"

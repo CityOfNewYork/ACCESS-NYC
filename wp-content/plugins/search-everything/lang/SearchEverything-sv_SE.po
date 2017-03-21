@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Everything 4.7\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Mikael Jorhult <mikael@mishkin.se>\n"
+"Language-Team: mishkin.se <mikael@mishkin.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: Sweden\n"
+
+#: search-everything/SE-Admin.php:29
+msgid "Search Everything Options  <strong>Updated</strong>."
+msgstr "Search Everything Inställningar <strong>uppdaterades</strong>."
+
+#: search-everything/SE-Admin.php:59
+msgid "The options selected below will be used in every search query on this site; in addition to the built-in post search."
+msgstr "Inställningarna nedan används vid varje sökning som görs på webbplatsen."
+
+#: search-everything/SE-Admin.php:63
+msgid "SE Search Options"
+msgstr "SE sökinställningar"
+
+#: search-everything/SE-Admin.php:64
+msgid "Use this form to configure your search options."
+msgstr "Använd detta formulär för att konfigurera dina sökinställningar."
+
+#: search-everything/SE-Admin.php:67
+msgid "Search Options Form"
+msgstr "Formulär för sökinställningar"
+
+#: search-everything/SE-Admin.php:69
+msgid "Exclude some post or page IDs"
+msgstr "Exkludera vissa inlägg eller sidor via ID"
+
+#: search-everything/SE-Admin.php:70
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr "ID för inlägg separerade med komma (exempel: 1, 5, 9)"
+
+#: search-everything/SE-Admin.php:75
+msgid "Exclude Categories"
+msgstr "Exkludera kategorier"
+
+#: search-everything/SE-Admin.php:76
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr "ID för kategorier separerade med komma (exempel: 1, 4)"
+
+#: search-everything/SE-Admin.php:81
+msgid "Search every page (non-password protected)"
+msgstr "Sök på alla sidor (icke-lösenordsskyddade)"
+
+#: search-everything/SE-Admin.php:83
+msgid "Search approved pages only?"
+msgstr "Sök endast på godkända sidor?"
+
+#: search-everything/SE-Admin.php:89
+msgid "Search every tag"
+msgstr "Sök alla etiketter"
+
+#: search-everything/SE-Admin.php:94
+msgid "Search every comment"
+msgstr "Sök i alla kommentarer"
+
+#: search-everything/SE-Admin.php:97
+msgid "Search approved comments only?"
+msgstr "Sök endast godkända kommentarer?"
+
+#: search-everything/SE-Admin.php:100
+msgid "Search every excerpt"
+msgstr "Sök i alla utdrag"
+
+#: search-everything/SE-Admin.php:103
+msgid "Search every draft"
+msgstr "Sök i alla utkast"
+
+#: search-everything/SE-Admin.php:106
+msgid "Search every attachment"
+msgstr "Sök i alla bifogade filer"
+
+#: search-everything/SE-Admin.php:109
+msgid "Search every custom field (metadata)"
+msgstr "Sök i alla egna fält (metadata)"
+
+#: search-everything/SE-Admin.php:115
+msgid "Update Options"
+msgstr "Uppdatera inställningar"
+
+#: search-everything/SE-Admin.php:121
+msgid "SE Search Form"
+msgstr "SE Sökformulär"
+
+#: search-everything/SE-Admin.php:122
+msgid "Use this search form to run a live search test."
+msgstr "Använd detta sökformulär för att söka på webbplatsen."
+
+#: search-everything/SE-Admin.php:125
+msgid "Site Search"
+msgstr "Sök på webbplatsen"
+
+#: search-everything/SE-Admin.php:127
+msgid "Enter search terms"
+msgstr "Skriv in sökord"
+
+#: search-everything/SE-Admin.php:129
+msgid "Run Test Search"
+msgstr "Kör testsökning"
+

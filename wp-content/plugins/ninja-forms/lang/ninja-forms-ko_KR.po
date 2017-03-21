@@ -1,0 +1,6451 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Ninja Forms 3.0\n"
+"POT-Creation-Date: 2016-08-29 09:53-0500\n"
+"PO-Revision-Date: 2016-08-29 08:57-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x;_ex\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ninja-forms.php:463
+msgid "Notice: JavaScript is required for this content."
+msgstr "알림: 이 콘텐츠에는 JavaScript가 필요합니다."
+
+#: deprecated/ninja-forms.php:139 deprecated/ninja-forms.php:151
+msgid "Cheatin&#8217; huh?"
+msgstr "누굴 속이시려고?"
+
+#: deprecated/ninja-forms.php:674
+#, php-format
+msgid "Fields marked with an %s*%s are required"
+msgstr "%s*%s로 표시된 필드는 필수입니다."
+
+#: deprecated/ninja-forms.php:676
+msgid "Please ensure all required fields are completed."
+msgstr "모든 필수 필드가 작성되었는지 확인해 주십시오."
+
+#: deprecated/ninja-forms.php:677
+msgid "This is a required field"
+msgstr "이것은 필수 필수입니다."
+
+#: deprecated/ninja-forms.php:678
+msgid "Please answer the anti-spam question correctly."
+msgstr "스팸 방지 질문에 정확하게 대답해 주십시오."
+
+#: deprecated/ninja-forms.php:679
+msgid "Please leave the spam field blank."
+msgstr "스팸 필드를 비워둔 채로 두십시오."
+
+#: deprecated/ninja-forms.php:680
+msgid "Please wait to submit the form."
+msgstr "양식을 제출하려면 기다려 주십시오."
+
+#: deprecated/ninja-forms.php:681
+msgid "You cannot submit the form without Javascript enabled."
+msgstr "귀하는 자바스크립트를 활성화하지 않고 그 양식을 제출할 수는 없습니다."
+
+#: deprecated/ninja-forms.php:682 deprecated/includes/fields/textbox.php:294
+msgid "Please enter a valid email address."
+msgstr "유효한 이메일 주소를 입력합니다."
+
+#: deprecated/ninja-forms.php:683
+#: deprecated/includes/admin/step-processing.php:11
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:29
+#: includes/Config/FieldSettings.php:820
+msgid "Processing"
+msgstr "처리중"
+
+#: deprecated/ninja-forms.php:684
+msgid "The passwords provided do not match."
+msgstr "제공된 암호가 일치하지 않습니다."
+
+#: deprecated/classes/add-form-modal.php:41
+#: deprecated/classes/add-form-modal.php:99 includes/Admin/AddFormModal.php:41
+msgid "Add Form"
+msgstr "양식 추가"
+
+#: deprecated/classes/add-form-modal.php:72 includes/Admin/AddFormModal.php:55
+msgid "Select a form or type to search"
+msgstr "양식 선택 또는 검색할 내용 입력"
+
+#: deprecated/classes/add-form-modal.php:89
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:123
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:71
+#: deprecated/includes/fields/list.php:176
+#: includes/Templates/ui-nf-header.html.php:12
+msgid "Cancel"
+msgstr "취소"
+
+#: deprecated/classes/add-form-modal.php:92
+msgid "Insert"
+msgstr "삽입"
+
+#: deprecated/classes/download-all-subs.php:39
+msgid "Invalid form id"
+msgstr "유효하지 않은 양식 ID"
+
+#: deprecated/classes/notices-multipart.php:62
+#: deprecated/classes/notices-save-progress.php:62
+msgid "Increase Conversions"
+msgstr "변환 증가"
+
+#: deprecated/classes/notices-multipart.php:63
+msgid ""
+"Did you know that you can increase form conversion by breaking larger forms "
+"into smaller, more easily digested parts?<p>The Multi-Part Forms extension "
+"for Ninja Forms makes this quick and easy.</p>"
+msgstr ""
+"큰 양식을 작게 나누고, 더 쉽게 간소화한 부분으로 나누어 양식 변환을 늘릴 수 있다는 사실을 아셨나요?<p>Ninja Form을 위한 "
+"여러 부분으로 나누어진 양식 확장 기능이 이 작업을 빠르고 쉽게 해줍니다.</p>"
+
+#: deprecated/classes/notices-multipart.php:64
+msgid "Learn More About Multi-Part Forms"
+msgstr "여러 부분으로 나누어진 양식에 대해 자세히 알아보기"
+
+#: deprecated/classes/notices-multipart.php:65
+#: deprecated/classes/notices-save-progress.php:65
+msgid "Maybe Later"
+msgstr "나중에"
+
+#: deprecated/classes/notices-multipart.php:66
+#: deprecated/classes/notices-save-progress.php:66
+#: deprecated/includes/admin/notices.php:57 includes/Config/AdminNotices.php:16
+msgid "Dismiss"
+msgstr "해제"
+
+#: deprecated/classes/notices-save-progress.php:63
+msgid ""
+"Users are more likely to complete long forms when they can save and return "
+"to complete their submission later.<p>The Save Progress extension for Ninja "
+"Forms makes this quick and easy.</p>"
+msgstr ""
+"사용자는 나중에 제출을 완료하기 위해 저장했다가 다시 돌아갈 때 긴 양식을 완료할 가능성이 많습니다.<p>Ninja Form을 위한 저장 "
+"진행률 확장 기능이 이 작업을 빠르고 쉽게 해줍니다.</p>"
+
+#: deprecated/classes/notices-save-progress.php:64
+msgid "Learn More About Save Progress"
+msgstr "저장 진행률에 대해 자세히 알아보기"
+
+#: deprecated/classes/notification-email.php:19 includes/Actions/Email.php:35
+#: includes/Config/MergeTagsUser.php:66 includes/Database/MockData.php:81
+#: includes/Database/MockData.php:262 includes/Database/MockData.php:294
+#: includes/Database/MockData.php:663 includes/Fields/Email.php:26
+msgid "Email"
+msgstr "이메일"
+
+#: deprecated/classes/notification-email.php:56
+#: includes/Config/ActionEmailSettings.php:70
+msgid "From Name"
+msgstr "보낸 사람 이름"
+
+#: deprecated/classes/notification-email.php:58
+#: includes/Config/ActionEmailSettings.php:71
+msgid "Name or fields"
+msgstr "이름 또는 필드"
+
+#: deprecated/classes/notification-email.php:59
+msgid "Email will appear to be from this name."
+msgstr "이메일은 이 이름으로 나타납니다."
+
+#: deprecated/classes/notification-email.php:63
+#: includes/Config/ActionEmailSettings.php:85
+msgid "From Address"
+msgstr "보낸 사람 주소"
+
+#: deprecated/classes/notification-email.php:65
+#: deprecated/classes/notification-email.php:141
+#: includes/Config/ActionEmailSettings.php:86
+msgid "One email address or field"
+msgstr "하나의 이메일 주소 또는 필드"
+
+#: deprecated/classes/notification-email.php:66
+msgid "Email will appear to be from this email address."
+msgstr "이메일은 이 이메일 주소로 나타납니다."
+
+#: deprecated/classes/notification-email.php:70
+#: includes/Config/ActionEmailSettings.php:19
+msgid "To"
+msgstr "받는 사람"
+
+#: deprecated/classes/notification-email.php:72
+#: deprecated/classes/notification-email.php:147
+#: deprecated/classes/notification-email.php:153
+msgid "Email addresses or search for a field"
+msgstr "이메일 주소 또는 필드 검색"
+
+#: deprecated/classes/notification-email.php:73
+msgid "Who should this email be sent to?"
+msgstr "누가 이 이메일을 받게 되나요?"
+
+#: deprecated/classes/notification-email.php:77
+#: includes/Config/ActionEmailSettings.php:34
+msgid "Subject"
+msgstr "제목"
+
+#: deprecated/classes/notification-email.php:79
+msgid "Subject Text or search for a field"
+msgstr "제목 텍스트 또는 필드 검색"
+
+#: deprecated/classes/notification-email.php:80
+msgid "This will be the subject of the email."
+msgstr "이메일의 제목이 됩니다."
+
+#: deprecated/classes/notification-email.php:84
+#: includes/Config/ActionEmailSettings.php:49
+msgid "Email Message"
+msgstr "이메일 메시지"
+
+#: deprecated/classes/notification-email.php:95
+msgid "Attachments"
+msgstr "첨부 파일"
+
+#: deprecated/classes/notification-email.php:101
+msgid "Submission CSV"
+msgstr "제출 CSV"
+
+#: deprecated/classes/notification-email.php:126
+#: deprecated/includes/admin/edit-field/li.php:428
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:88
+#: includes/Config/PluginSettingsGroups.php:17
+msgid "Advanced Settings"
+msgstr "고급 설정"
+
+#: deprecated/classes/notification-email.php:130
+#: includes/Config/ActionEmailSettings.php:117
+#: includes/Config/FieldSettings.php:378
+msgid "Format"
+msgstr "형식"
+
+#: deprecated/classes/notification-email.php:133
+#: deprecated/includes/fields/calc.php:95
+#: includes/Config/ActionEmailSettings.php:113 includes/Fields/HTML.php:37
+#: includes/Fields/Note.php:31
+msgid "HTML"
+msgstr "HTML"
+
+#: deprecated/classes/notification-email.php:134
+#: includes/Config/ActionEmailSettings.php:114
+msgid "Plain Text"
+msgstr "일반 텍스트"
+
+#: deprecated/classes/notification-email.php:139
+#: includes/Config/ActionEmailSettings.php:99
+msgid "Reply To"
+msgstr "다음에게 회신"
+
+#: deprecated/classes/notification-email.php:145
+#: includes/Config/ActionEmailSettings.php:130
+msgid "Cc"
+msgstr "참조"
+
+#: deprecated/classes/notification-email.php:151
+#: includes/Config/ActionEmailSettings.php:144
+msgid "Bcc"
+msgstr "숨은 참조"
+
+#: deprecated/classes/notification-redirect.php:19
+#: deprecated/includes/admin/upgrades/convert-notifications.php:243
+#: includes/Actions/Redirect.php:35
+msgid "Redirect"
+msgstr "리디렉션"
+
+#: deprecated/classes/notification-redirect.php:33
+msgid "Url"
+msgstr "URL"
+
+#: deprecated/classes/notification-success-message.php:19
+#: deprecated/includes/admin/upgrades/convert-notifications.php:234
+#: includes/Actions/SuccessMessage.php:35
+#: includes/Config/FormActionDefaults.php:7 includes/Database/MockData.php:953
+#: includes/Database/MockData.php:1014 includes/Database/MockData.php:1117
+#: includes/Database/MockData.php:1156
+msgid "Success Message"
+msgstr "성공 메시지"
+
+#: deprecated/classes/notification-success-message.php:35
+msgid "Before Form"
+msgstr "이전 양식"
+
+#: deprecated/classes/notification-success-message.php:36
+msgid "After Form"
+msgstr "이후 양식"
+
+#: deprecated/classes/notification-success-message.php:41
+msgid "Location"
+msgstr "위치"
+
+#: deprecated/classes/notification-success-message.php:55
+#: includes/Config/ActionSuccessMessageSettings.php:13
+#: includes/Database/MockData.php:105
+msgid "Message"
+msgstr "메시지"
+
+#: deprecated/classes/notification.php:116
+msgid "duplicate"
+msgstr "복사"
+
+#: deprecated/classes/notifications-table.php:117
+#: deprecated/classes/notifications-table.php:222
+#: deprecated/classes/notifications.php:170
+msgid "Deactivate"
+msgstr "비활성화"
+
+#: deprecated/classes/notifications-table.php:117
+#: deprecated/classes/notifications-table.php:221
+#: deprecated/classes/notifications.php:169
+#: includes/Templates/admin-menu-settings-licenses.html.php:27
+msgid "Activate"
+msgstr "활성화"
+
+#: deprecated/classes/notifications-table.php:129
+#: deprecated/classes/subs-cpt.php:389
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:188
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:10
+#: includes/Templates/admin-menu-new-form.html.php:144
+#: includes/Templates/ui-item-controls.html.php:4
+msgid "Edit"
+msgstr "편집"
+
+#: deprecated/classes/notifications-table.php:130
+#: deprecated/classes/notifications-table.php:223
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:102
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:189
+#: includes/Admin/AllFormsTable.php:216 includes/Admin/Menus/Settings.php:80
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:15
+#: includes/Templates/ui-item-controls.html.php:2
+#: includes/Templates/ui-nf-drawer-buttons.html.php:2
+msgid "Delete"
+msgstr "제거하기"
+
+#: deprecated/classes/notifications-table.php:131
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:190
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:19
+#: includes/Templates/ui-item-controls.html.php:3
+#: includes/Templates/ui-nf-drawer-buttons.html.php:3
+msgid "Duplicate"
+msgstr "복사"
+
+#: deprecated/classes/notifications-table.php:175
+#: includes/Database/MockData.php:66 includes/Database/MockData.php:255
+#: includes/Templates/admin-menu-new-form.html.php:154
+msgid "Name"
+msgstr "이름"
+
+#: deprecated/classes/notifications-table.php:176
+#: deprecated/classes/notifications.php:259
+#: includes/Config/FieldSettings.php:745
+#: includes/Templates/admin-menu-new-form.html.php:155
+msgid "Type"
+msgstr "형식"
+
+#: deprecated/classes/notifications-table.php:177
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:160
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:220
+msgid "Date Updated"
+msgstr "날짜가 업데이트됨"
+
+#: deprecated/classes/notifications-table.php:241
+msgid "- View All Types"
+msgstr "- 모든 유형 보기"
+
+#: deprecated/classes/notifications-table.php:250
+msgid "Get More Types"
+msgstr "더 많은 유형 가져오기"
+
+#: deprecated/classes/notifications.php:78
+#: deprecated/classes/notifications.php:219
+msgid "Email & Actions"
+msgstr "이메일 및 동작"
+
+#: deprecated/classes/notifications.php:219 deprecated/classes/subs-cpt.php:118
+#: deprecated/includes/admin/admin.php:6
+#: deprecated/includes/admin/admin.php:101
+#: deprecated/includes/fields/list.php:149 includes/Admin/CPT/Submission.php:47
+#: includes/Config/FieldSettings.php:153 includes/Config/FieldSettings.php:950
+#: includes/Config/FormCalculationSettings.php:12
+msgid "Add New"
+msgstr "새로 추가"
+
+#: deprecated/classes/notifications.php:242
+msgid "New Action"
+msgstr "새 동작"
+
+#: deprecated/classes/notifications.php:245
+msgid "Edit Action"
+msgstr "동작 편집"
+
+#: deprecated/classes/notifications.php:249
+msgid "Back To List"
+msgstr "목록으로 돌아가기"
+
+#: deprecated/classes/notifications.php:255
+#: includes/Config/ActionSettings.php:13
+msgid "Action Name"
+msgstr "동작 이름"
+
+#: deprecated/classes/notifications.php:270
+msgid "Get More Actions"
+msgstr "더 많은 동작 가져오기"
+
+#: deprecated/classes/notifications.php:334
+#: deprecated/classes/notifications.php:339
+msgid "Action Updated"
+msgstr "동작이 업데이트됨"
+
+#: deprecated/classes/notifications.php:500
+msgid "Select a field or type to search"
+msgstr "필드 선택 또는 검색할 내용 입력"
+
+#: deprecated/classes/notifications.php:513
+msgid "Insert Field"
+msgstr "필드 삽입"
+
+#: deprecated/classes/notifications.php:513
+msgid "Insert All Fields"
+msgstr "모든 필드 삽입"
+
+#: deprecated/classes/subs-cpt.php:103 includes/Admin/CPT/Submission.php:249
+msgid "Please select a form to view submissions"
+msgstr "제출을 보려면 양식을 선택하기 바랍니다."
+
+#: deprecated/classes/subs-cpt.php:105 includes/Admin/CPT/Submission.php:251
+msgid "No Submissions Found"
+msgstr "제출을 찾을 수 없음"
+
+#: deprecated/classes/subs-cpt.php:108 deprecated/classes/subs-cpt.php:195
+#: deprecated/includes/admin/admin.php:120
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:6
+#: includes/Admin/CPT/Submission.php:40 includes/Admin/CPT/Submission.php:42
+#: includes/Admin/CPT/Submission.php:43
+msgid "Submissions"
+msgstr "제출"
+
+#: deprecated/classes/subs-cpt.php:117 includes/Admin/CPT/Submission.php:41
+#: includes/Admin/CPT/Submission.php:57
+msgid "Submission"
+msgstr "제출"
+
+#: deprecated/classes/subs-cpt.php:119
+msgid "Add New Submission"
+msgstr "새 제출 추가"
+
+#: deprecated/classes/subs-cpt.php:120
+msgid "Edit Submission"
+msgstr "제출 편집"
+
+#: deprecated/classes/subs-cpt.php:121
+msgid "New Submission"
+msgstr "새 제출"
+
+#: deprecated/classes/subs-cpt.php:122
+msgid "View Submission"
+msgstr "제출 보기"
+
+#: deprecated/classes/subs-cpt.php:123
+msgid "Search Submissions"
+msgstr "제출 검색"
+
+#: deprecated/classes/subs-cpt.php:125
+msgid "No Submissions Found In The Trash"
+msgstr "휴지통에서 제출을 찾을 수 없음"
+
+#: deprecated/classes/subs-cpt.php:279 deprecated/classes/subs-cpt.php:993
+#: deprecated/classes/subs.php:174 includes/Admin/CPT/Submission.php:92
+#: includes/Admin/Menus/Submissions.php:77
+msgid "#"
+msgstr "#"
+
+#: deprecated/classes/subs-cpt.php:315
+#: deprecated/includes/fields/textbox.php:175
+#: includes/Admin/CPT/Submission.php:111
+#: includes/Admin/Menus/Submissions.php:92
+#: includes/Config/FieldSettings.php:214 includes/Config/MergeTagsSystem.php:27
+#: includes/Database/MockData.php:620 includes/Fields/Date.php:30
+msgid "Date"
+msgstr "날짜"
+
+#: deprecated/classes/subs-cpt.php:389
+msgid "Edit this item"
+msgstr "이 아이템 편집하기"
+
+#: deprecated/classes/subs-cpt.php:390
+msgid "Export this item"
+msgstr "이 항목 내보내기"
+
+#: deprecated/classes/subs-cpt.php:390 deprecated/classes/subs-cpt.php:691
+#: deprecated/classes/subs-cpt.php:692 includes/Admin/Menus/Submissions.php:234
+#: includes/Admin/Menus/Submissions.php:235
+msgid "Export"
+msgstr "내보내기"
+
+#: deprecated/classes/subs-cpt.php:396
+msgid "Move this item to the Trash"
+msgstr "이 아이템을 휴지통으로 이동"
+
+#: deprecated/classes/subs-cpt.php:396
+msgid "Trash"
+msgstr "휴지통"
+
+#: deprecated/classes/subs-cpt.php:402
+msgid "Restore this item from the Trash"
+msgstr "이 아이템을 휴지통에서 복구"
+
+#: deprecated/classes/subs-cpt.php:402
+msgid "Restore"
+msgstr "복구"
+
+#: deprecated/classes/subs-cpt.php:403
+msgid "Delete this item permanently"
+msgstr "이 아이템을 영구적으로 삭제"
+
+#: deprecated/classes/subs-cpt.php:403
+msgid "Delete Permanently"
+msgstr "영구적으로 삭제"
+
+#: deprecated/classes/subs-cpt.php:410
+msgid "Unpublished"
+msgstr "미발행"
+
+#: deprecated/classes/subs-cpt.php:420
+#, php-format
+msgid "%s ago"
+msgstr "%s 이전"
+
+#: deprecated/classes/subs-cpt.php:432 deprecated/classes/subs-cpt.php:998
+msgid "Submitted"
+msgstr "제출됨"
+
+#: deprecated/classes/subs-cpt.php:492
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:67
+#: includes/Templates/admin-metabox-import-export-forms-export.html.php:9
+msgid "Select a form"
+msgstr "양식 선택"
+
+#: deprecated/classes/subs-cpt.php:501
+msgid "Begin Date"
+msgstr "날짜 시작"
+
+#: deprecated/classes/subs-cpt.php:502
+#: includes/Templates/admin-menu-subs-filter.html.php:13
+msgid "End Date"
+msgstr "종료 날짜"
+
+#: deprecated/classes/subs-cpt.php:646 deprecated/classes/subs-cpt.php:649
+#, php-format
+msgid "%s updated."
+msgstr "%s이(가) 업데이트되었습니다."
+
+#: deprecated/classes/subs-cpt.php:647
+msgid "Custom field updated."
+msgstr "사용자 정의 필드 업데이트됨."
+
+#: deprecated/classes/subs-cpt.php:648
+msgid "Custom field deleted."
+msgstr "사용자정의 필드 삭제됨."
+
+#: deprecated/classes/subs-cpt.php:651
+#, php-format
+msgid "%1$s restored to revision from %2$s."
+msgstr "%1$s이(가) %2$s(으)로부터 수정을 위해 복원되었습니다."
+
+#: deprecated/classes/subs-cpt.php:652
+#, php-format
+msgid "%s published."
+msgstr "%s이(가) 게시되었습니다."
+
+#: deprecated/classes/subs-cpt.php:653
+#, php-format
+msgid "%s saved."
+msgstr "%s이(가) 저장되었습니다."
+
+#: deprecated/classes/subs-cpt.php:654
+#, php-format
+msgid "%1$s submitted. <a href=\"%2$s\" target=\"_blank\">Preview %3$s</a>"
+msgstr "%1$s이(가) 제출되었습니다. <a href=\"%2$s\" target=\"_blank\">%3$s 미리 보기</a>"
+
+#: deprecated/classes/subs-cpt.php:655
+#, php-format
+msgid ""
+"%1$s scheduled for: <strong>%2$s</strong>. <a href=\"%3$s\" target=\"_blank"
+"\">Preview %4$s</a>"
+msgstr ""
+"%1$s이(가) 다음에 대해 예약됨: <strong>%2$s</strong> <a href=\"%3$s\" "
+"target=\"_blank\">%4$s 미리 보기</a>"
+
+#: deprecated/classes/subs-cpt.php:656
+#, php-format
+msgid "%1$s draft updated. <a href=\"%2$s\" target=\"_blank\">Preview %3$s</a>"
+msgstr "%1$s 초안이 업데이트되었습니다. <a href=\"%2$s\" target=\"_blank\">%3$s 미리 보기</a>"
+
+#: deprecated/classes/subs-cpt.php:709 includes/Admin/Menus/Submissions.php:252
+msgid "Download All Submissions"
+msgstr "모든 제출 다운로드"
+
+#: deprecated/classes/subs-cpt.php:807
+msgid "Back to list"
+msgstr "목록으로 돌아가기"
+
+#: deprecated/classes/subs-cpt.php:865 includes/Admin/CPT/Submission.php:174
+msgid "User Submitted Values"
+msgstr "사용자가 제출한 값"
+
+#: deprecated/classes/subs-cpt.php:867
+msgid "Submission Stats"
+msgstr "제출 통계"
+
+#: deprecated/classes/subs-cpt.php:897
+#: includes/Templates/admin-menu-forms.html.php:7
+#: includes/Templates/admin-metabox-sub-fields.html.php:7
+msgid "Field"
+msgstr "필드"
+
+#: deprecated/classes/subs-cpt.php:898 deprecated/includes/fields/list.php:103
+#: deprecated/includes/fields/list.php:588
+#: includes/Config/FieldSettings.php:169 includes/Config/FieldSettings.php:965
+#: includes/Templates/admin-metabox-sub-fields.html.php:8
+msgid "Value"
+msgstr "값"
+
+#: deprecated/classes/subs-cpt.php:997
+msgid "Status"
+msgstr "상태"
+
+#: deprecated/classes/subs-cpt.php:1002
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:119
+#: includes/Admin/AllFormsTable.php:20 includes/Admin/Menus/ImportExport.php:99
+#: includes/MergeTags/Form.php:15
+msgid "Form"
+msgstr "형식"
+
+#: deprecated/classes/subs-cpt.php:1007
+msgid "Submitted on"
+msgstr "제출 날짜:"
+
+#: deprecated/classes/subs-cpt.php:1013
+msgid "Modified on"
+msgstr "수정 날짜:"
+
+#: deprecated/classes/subs-cpt.php:1021
+msgid "Submitted By"
+msgstr "제출한 사람:"
+
+#: deprecated/classes/subs-cpt.php:1035 deprecated/classes/subs-cpt.php:1036
+#: includes/Templates/admin-metabox-sub-info.html.php:27
+msgid "Update"
+msgstr "업데이트"
+
+#: deprecated/classes/subs.php:177 includes/Database/Models/Submission.php:293
+msgid "Date Submitted"
+msgstr "제출된 날짜"
+
+#: deprecated/includes/activation.php:216
+msgid ""
+"Ninja Forms cannot be network activated. Please visit each site's dashboard "
+"to activate the plugin."
+msgstr "Ninja Form을 네트워크 활성화할 수 없습니다. 플러그인을 활성화하려면 각가의 사이트 대시보드를 방문하시기 바랍니다."
+
+#: deprecated/includes/class-extension-updater.php:65
+msgid "You will find this included with your purchase email."
+msgstr "구매 이메일이 포함되어 있습니다."
+
+#: deprecated/includes/class-extension-updater.php:75
+msgid "Key"
+msgstr "키"
+
+#: deprecated/includes/class-extension-updater.php:152
+#: includes/Integrations/EDD/class-extension-updater.php:88
+msgid "Could not activate license. Please verify your license key"
+msgstr "라이선스를 활성화할 수 없습니다. 귀하의 라이선스 키를 확인하세요."
+
+#: deprecated/includes/class-extension-updater.php:276
+msgid "Deactivate License"
+msgstr "라이선스 비활성화"
+
+#: deprecated/includes/deprecated.php:466
+#: deprecated/includes/deprecated.php:475
+msgid "User Submitted Values:"
+msgstr "사용자가 제출한 값:"
+
+#: deprecated/includes/deprecated.php:664
+msgid "Thank you for filling out this form."
+msgstr "이 양식을 작성해 주셔서 감사합니다."
+
+#: deprecated/includes/EDD_SL_Plugin_Updater.php:177
+#: includes/Integrations/EDD/EDD_SL_Plugin_Updater.php:177
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
+msgstr ""
+"%1$s의 새 버전을 사용할 수 있습니다. <a target=\"_blank\" class=\"thickbox\" "
+"href=\"%2$s\">버전 %3$s 세부 사항을 봅니다</a>."
+
+#: deprecated/includes/EDD_SL_Plugin_Updater.php:184
+#: includes/Integrations/EDD/EDD_SL_Plugin_Updater.php:184
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s"
+"\">update now</a>."
+msgstr ""
+"%1$s의 새 버전을 사용할 수 있습니다. <a target=\"_blank\" class=\"thickbox\" "
+"href=\"%2$s\">버전 %3$s 세부 사항을 보거나</a> <a href=\"%4$s\">지금 업데이트</a>합니다."
+
+#: deprecated/includes/EDD_SL_Plugin_Updater.php:324
+#: includes/Integrations/EDD/EDD_SL_Plugin_Updater.php:324
+msgid "You do not have permission to install plugin updates"
+msgstr "플러그인 업데이트를 설치할 수 있는 권한이 없습니다."
+
+#: deprecated/includes/EDD_SL_Plugin_Updater.php:324
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:35
+#: includes/Integrations/EDD/EDD_SL_Plugin_Updater.php:324
+msgid "Error"
+msgstr "에러"
+
+#: deprecated/includes/field-type-groups.php:5
+msgid "Standard Fields"
+msgstr "표준 필드"
+
+#: deprecated/includes/field-type-groups.php:10
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/layout-fields.php:6
+msgid "Layout Elements"
+msgstr "레이아웃 요소"
+
+#: deprecated/includes/field-type-groups.php:19
+msgid "Post Creation"
+msgstr "게시물 생성"
+
+#: deprecated/includes/functions.php:526
+#, php-format
+msgid ""
+"Please rate %sNinja Forms%s %s on %sWordPress.org%s to help us keep this "
+"plugin free.  Thank you from the WP Ninjas team!"
+msgstr ""
+"이 플러그인을 무료로 유지하려면 %sWordPress.org%s에서 %sNinja Forms%s %s를 평가해 주세요.  워드프레스 "
+"Ninja 팀의 감사를 전해 드립니다!"
+
+#: deprecated/includes/widget.php:14 deprecated/includes/admin/welcome.php:364
+#: includes/Widget.php:14
+msgid "Ninja Forms Widget"
+msgstr "Ninja Form 위젯"
+
+#: deprecated/includes/widget.php:89 includes/Widget.php:82
+msgid "Display Title"
+msgstr "제목 표시"
+
+#: deprecated/includes/widget.php:96
+#: deprecated/includes/admin/post-metabox.php:39
+#: deprecated/includes/admin/edit-field/desc.php:40
+#: deprecated/includes/admin/edit-field/user-info-fields.php:27
+#: deprecated/includes/fields/hidden.php:55
+#: deprecated/includes/fields/number.php:72
+#: deprecated/includes/fields/textbox.php:125
+#: deprecated/includes/fields/textbox.php:173 includes/Widget.php:89
+#: includes/Admin/Metaboxes/AppendAForm.php:55
+#: includes/Config/PluginSettingsAdvanced.php:58
+msgid "None"
+msgstr "없음"
+
+#: deprecated/includes/admin/admin.php:4 deprecated/includes/admin/admin.php:5
+#: deprecated/includes/admin/admin.php:101
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:119
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:6
+#: includes/Admin/AllFormsTable.php:21
+msgid "Forms"
+msgstr "폼"
+
+#: deprecated/includes/admin/admin.php:5
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:28
+msgid "All Forms"
+msgstr "모든 양식"
+
+#: deprecated/includes/admin/admin.php:8
+msgid "Ninja Forms Upgrades"
+msgstr "Ninja Form 업그레이드"
+
+#: deprecated/includes/admin/admin.php:8
+msgid "Upgrades"
+msgstr "업그레이드"
+
+#: deprecated/includes/admin/admin.php:29
+msgid "Import/Export"
+msgstr "가져오기/내보내기"
+
+#: deprecated/includes/admin/admin.php:29
+#: includes/Templates/admin-menu-import-export.html.php:3
+msgid "Import / Export"
+msgstr "가져오기/내보내기"
+
+#: deprecated/includes/admin/admin.php:30
+msgid "Ninja Form Settings"
+msgstr "Ninja Form 설정"
+
+#: deprecated/includes/admin/admin.php:30
+#: deprecated/includes/admin/welcome.php:335
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:7
+#: includes/Admin/Menus/Settings.php:25 includes/Config/FieldSettings.php:754
+#: includes/Templates/admin-menu-settings.html.php:3
+#: includes/Templates/ui-nf-header.html.php:7
+#: includes/Templates/ui-nf-menu-drawer.html.php:8
+msgid "Settings"
+msgstr "설정"
+
+#: deprecated/includes/admin/admin.php:31
+msgid "System Status"
+msgstr "시스템 상태"
+
+#: deprecated/includes/admin/admin.php:32
+#: includes/Templates/admin-menu-addons.html.php:3
+msgid "Add-Ons"
+msgstr "추가 기능"
+
+#: deprecated/includes/admin/admin.php:119 includes/Display/Preview.php:40
+#: includes/Templates/ui-nf-menu-drawer.html.php:9
+msgid "Preview"
+msgstr "미리보기"
+
+#: deprecated/includes/admin/admin.php:178
+#: deprecated/includes/admin/scripts.php:75
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/edit-field-ul.php:7
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/edit-field-ul.php:19
+#: includes/Actions/Save.php:35
+msgid "Save"
+msgstr "저장"
+
+#: deprecated/includes/admin/ajax.php:180
+msgid "character(s) left"
+msgstr "왼쪽에 문자(들)"
+
+#: deprecated/includes/admin/ajax.php:631
+msgid "Do not show these terms"
+msgstr "해당 용어 표시 안 함"
+
+#: deprecated/includes/admin/display-screen-options.php:87
+msgid "Save Options"
+msgstr "옵션 저장"
+
+#: deprecated/includes/admin/form-preview.php:39
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:23
+msgid "Preview Form"
+msgstr "양식 미리 보기"
+
+#: deprecated/includes/admin/notices.php:23
+#: deprecated/upgrade/class-submenu.php:57
+msgid "Upgrade to Ninja Forms THREE"
+msgstr "Ninja Forms THREE로 업그레이드"
+
+#: deprecated/includes/admin/notices.php:24
+#, php-format
+msgid ""
+"You are eligible to upgrade to the Ninja Forms THREE Release Candidate! "
+"%sUpgrade Now%s"
+msgstr "귀하는 Ninja Forms THREE 릴리스 후보로 업그레이드할 수 있습니다! %s지금 업그레이드%s"
+
+#: deprecated/includes/admin/notices.php:38
+msgid "THREE is coming!"
+msgstr "THREE 출시 예정입니다!"
+
+#: deprecated/includes/admin/notices.php:39
+#, php-format
+msgid ""
+"A major update is coming to Ninja Forms. %sLearn more about new features, "
+"backwards compatibility, and more Frequently Asked Questions.%s"
+msgstr ""
+"Ninja Forms에 주요 업데이트가 예정되어 있습니다. %s새 기능, 이전 버전과의 호환성 및 자주 묻는 질문에 대해 자세히 알아봅니다.%s"
+
+#: deprecated/includes/admin/notices.php:53 includes/Config/AdminNotices.php:12
+msgid "How's It Going?"
+msgstr "요즘 어떠세요?"
+
+#: deprecated/includes/admin/notices.php:54 includes/Config/AdminNotices.php:13
+msgid ""
+"Thank you for using Ninja Forms! We hope that you've found everything you "
+"need, but if you have any questions:"
+msgstr "Ninja Form을 사용해 주셔서 감사합니다! 필요한 모든 사항을 찾으셨기를 바랍니다. 그래도 문의 사항이 있으신 경우:"
+
+#: deprecated/includes/admin/notices.php:55 includes/Config/AdminNotices.php:14
+msgid "Check out our documentation"
+msgstr "설명서 확인"
+
+#: deprecated/includes/admin/notices.php:56 includes/Config/AdminNotices.php:15
+msgid "Get Some Help"
+msgstr "도움 받기"
+
+#: deprecated/includes/admin/output-tab-metabox.php:47
+#: deprecated/includes/admin/sidebar.php:57
+#: deprecated/includes/admin/edit-field/li.php:109
+#: includes/Templates/admin-menu-settings.html.php:33
+msgid "Edit Menu Item"
+msgstr "메뉴 항목 편집"
+
+#: deprecated/includes/admin/output-tab-metabox.php:290
+msgid "Select All"
+msgstr "모두 선택"
+
+#: deprecated/includes/admin/post-metabox.php:12
+#: deprecated/includes/admin/post-metabox.php:20
+msgid "Append A Ninja Form"
+msgstr "Ninja Form 추가"
+
+#: deprecated/includes/admin/scripts.php:52
+msgid "What would you like to name this favorite?"
+msgstr "이 즐겨찾기 이름을 무엇으로 지정하겠습니까?"
+
+#: deprecated/includes/admin/scripts.php:52
+msgid "You must supply a name for this favorite."
+msgstr "이 즐겨찾기에 이름을 지정해야 합니다."
+
+#: deprecated/includes/admin/scripts.php:52
+msgid "Really deactivate all licenses?"
+msgstr "모든 라이선스를 비활성화하겠습니까?"
+
+#: deprecated/includes/admin/scripts.php:53
+msgid "Reset the form conversion process for v2.9+"
+msgstr "v2.9 이상에 대한 양식 전환 과정 재설정"
+
+#: deprecated/includes/admin/scripts.php:54
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:93
+#: includes/Config/PluginSettingsAdvanced.php:14
+msgid "Remove ALL Ninja Forms data upon uninstall?"
+msgstr "제거 시 모든 Ninja Form 데이터를 제거하겠습니까?"
+
+#: deprecated/includes/admin/scripts.php:75 includes/Admin/Menus/Forms.php:158
+msgid "Edit Form"
+msgstr "양식 편집"
+
+#: deprecated/includes/admin/scripts.php:75
+msgid "Saved"
+msgstr "저장됨"
+
+#: deprecated/includes/admin/scripts.php:75
+msgid "Saving..."
+msgstr "저장 중..."
+
+#: deprecated/includes/admin/scripts.php:75
+msgid "Remove this field? It will be removed even if you do not save."
+msgstr "이 필드를 제거하겠습니까? 저장하지 않아도 제거됩니다."
+
+#: deprecated/includes/admin/sidebar.php:155
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:192
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:27
+msgid "View Submissions"
+msgstr "제출 보기"
+
+#: deprecated/includes/admin/step-processing.php:11
+msgid "Ninja Forms Processing"
+msgstr "Ninja Form 처리 중"
+
+#: deprecated/includes/admin/step-processing.php:78
+#: deprecated/includes/admin/upgrades/upgrades.php:34
+msgid "Ninja Forms - Processing"
+msgstr "Ninja Form - 처리 중"
+
+#: deprecated/includes/admin/step-processing.php:111
+msgid "Loading..."
+msgstr "로드 중..."
+
+#: deprecated/includes/admin/step-processing.php:116
+msgid "No Action Specified..."
+msgstr "지정된 동작 없음..."
+
+#: deprecated/includes/admin/step-processing.php:141
+#: deprecated/includes/admin/upgrades/upgrades.php:39
+#: deprecated/includes/admin/upgrades/upgrades.php:53
+msgid ""
+"The process has started, please be patient. This could take several minutes. "
+"You will be automatically redirected when the process is finished."
+msgstr "과정이 시작되었습니다. 잠시 기다려 주세요. 몇 분 정도 걸릴 수 있습니다. 과정이 완료되면 자동으로 리디렉션됩니다."
+
+#: deprecated/includes/admin/welcome.php:42
+#: deprecated/includes/admin/welcome.php:412
+#, php-format
+msgid "Welcome to Ninja Forms %s"
+msgstr "Ninja Form %s 사용 시작"
+
+#: deprecated/includes/admin/welcome.php:43
+#, php-format
+msgid ""
+"Thank you for updating! Ninja Forms %s makes form building easier than ever "
+"before!"
+msgstr "업데이트해 주셔서 감사합니다! Ninja Form %s은(는) 전에 비해 양식 구축을 쉽게 해줍니다!"
+
+#: deprecated/includes/admin/welcome.php:57
+#: deprecated/includes/admin/welcome.php:58
+msgid "Welcome to Ninja Forms"
+msgstr "Ninja Form 시작"
+
+#: deprecated/includes/admin/welcome.php:66
+#: deprecated/includes/admin/welcome.php:67
+msgid "Ninja Forms Changelog"
+msgstr "Ninja Form 변경 로그"
+
+#: deprecated/includes/admin/welcome.php:75
+#: deprecated/includes/admin/welcome.php:76
+msgid "Getting started with Ninja Forms"
+msgstr "Ninja Form 시작하기"
+
+#: deprecated/includes/admin/welcome.php:84
+#: deprecated/includes/admin/welcome.php:85
+msgid "The people who build Ninja Forms"
+msgstr "Ninja Form을 구축하는 사람"
+
+#: deprecated/includes/admin/welcome.php:165
+msgid "What's New"
+msgstr "새로운 소식"
+
+#: deprecated/includes/admin/welcome.php:168
+msgid "Getting Started"
+msgstr "시작하기"
+
+#: deprecated/includes/admin/welcome.php:171
+msgid "Credits"
+msgstr "크레딧"
+
+#: deprecated/includes/admin/welcome.php:189
+#: deprecated/includes/admin/welcome.php:283
+#: deprecated/includes/admin/welcome.php:315
+#: deprecated/includes/admin/welcome.php:414
+#, php-format
+msgid "Version %s"
+msgstr "버전 %s"
+
+#: deprecated/includes/admin/welcome.php:198
+msgid "A simplified and more powerful form building experience."
+msgstr "간소화되고 더욱 강력해진 양식 구축 경험."
+
+#: deprecated/includes/admin/welcome.php:204
+msgid "New Builder Tab"
+msgstr "새 빌더 탭"
+
+#: deprecated/includes/admin/welcome.php:205
+msgid ""
+"When creating and editing forms, go directly to the section that matters "
+"most."
+msgstr "양식을 작성하고 편집할 때 가장 중요한 섹션으로 바로 이동합니다."
+
+#: deprecated/includes/admin/welcome.php:210
+msgid "Better Organized Field Settings"
+msgstr "보다 잘 조직된 필드 설정"
+
+#: deprecated/includes/admin/welcome.php:211
+msgid ""
+"The most common settings are shown immediately, while other, non-essential, "
+"settings are tucked away inside expandable sections."
+msgstr "가장 일반적인 설정은 바로 표시되는데 반해, 필수적이지 않은 설정은 확장 가능한 섹션 안에 접혀 있습니다."
+
+#: deprecated/includes/admin/welcome.php:222
+msgid "Improved clarity"
+msgstr "개선된 투명도"
+
+#: deprecated/includes/admin/welcome.php:223
+msgid ""
+"Along with the \"Build Your Form\" tab, we've removed \"Notifications\" in "
+"favor of \"Emails & Actions.\" This is a much clearer indication of what can "
+"be done on this tab."
+msgstr ""
+"“이메일 및 동작”을 위해 “양식 구축” 탭과 함께 “알림”을 제거했습니다. 이 탭에서 무엇을 수행할 수 있는지 훨씬 분명하게 알 수 있습니다."
+
+#: deprecated/includes/admin/welcome.php:228
+msgid "Remove all Ninja Forms data"
+msgstr "모든 Ninja Form 데이터 제거"
+
+#: deprecated/includes/admin/welcome.php:229
+msgid ""
+"We've added the option to remove all Ninja Forms data (submissions, forms, "
+"fields, options) when you delete the plugin. We call it the nuclear option."
+msgstr ""
+"플러그인을 삭제하면 모든 Ninja Form 데이터(제출, 양식, 필드, 옵션)를 제거하는 옵션을 추가했습니다. 저희는 이것을 핵 "
+"옵션이라고 부릅니다."
+
+#: deprecated/includes/admin/welcome.php:234
+msgid "Better license management"
+msgstr "더 나아진 라이선스 관리"
+
+#: deprecated/includes/admin/welcome.php:235
+msgid ""
+"Deactivate Ninja Forms extension licenses individually or as a group from "
+"the settings tab."
+msgstr "설정 탭에서 Ninja Form 확장 기능 라이선스를 개별적으로 또는 그룹으로 비활성화합니다."
+
+#: deprecated/includes/admin/welcome.php:245
+msgid "More to come"
+msgstr "앞으로도 기대하세요."
+
+#: deprecated/includes/admin/welcome.php:246
+msgid ""
+"The interface updates in this version lay the groundwork for some great "
+"improvements in the future. Version 3.0 will build on these changes to make "
+"Ninja Forms an even more stable, powerful, and user-friendly form builder."
+msgstr ""
+"이 버전에서 인터페이스 업데이트가 향후 엄청난 개선을 위해 기반을 다지고 있습니다. Ninja Form을 보다 안정적이고, 강력하며, "
+"사용자 친화적인 양식 빌더로 만들기 위해 버전 3.0이 구축됩니다."
+
+#: deprecated/includes/admin/welcome.php:250
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:65
+#: includes/Templates/admin-menu-addons.html.php:46
+msgid "Documentation"
+msgstr "문서"
+
+#: deprecated/includes/admin/welcome.php:251
+msgid "Take a look at our in-depth Ninja Forms documentation below."
+msgstr "아래의 자세한 Ninja Form 설명서를 살펴 보시기 바랍니다."
+
+#: deprecated/includes/admin/welcome.php:253
+msgid "Ninja Forms Documentation"
+msgstr "Ninja Form 설명서"
+
+#: deprecated/includes/admin/welcome.php:254
+msgid "Get Support"
+msgstr "지원 받기"
+
+#: deprecated/includes/admin/welcome.php:263
+msgid "Return to Ninja Forms"
+msgstr "Ninja Form으로 돌아가기"
+
+#: deprecated/includes/admin/welcome.php:264
+msgid "View the Full Changelog"
+msgstr "전체 변경 로그 보기"
+
+#: deprecated/includes/admin/welcome.php:288
+msgid "Full Changelog"
+msgstr "전체 변경 로그"
+
+#: deprecated/includes/admin/welcome.php:296
+msgid "Go to Ninja Forms"
+msgstr "Ninja Form으로 이동"
+
+#: deprecated/includes/admin/welcome.php:319
+msgid ""
+"Use the tips below to get started using Ninja Forms. You will be up and "
+"running in no time!"
+msgstr "Ninja Form을 시작하려면 아래 팁을 사용하세요. 지체 없이 바로 사용할 수 있습니다."
+
+#: deprecated/includes/admin/welcome.php:324
+msgid "All About Forms"
+msgstr "Form에 대한 모든 정보"
+
+#: deprecated/includes/admin/welcome.php:327
+#, php-format
+msgid ""
+"The Forms menu is your access point for all things Ninja Forms. We've "
+"already created your first %scontact form%s so that you have an example. You "
+"can also create your own by clicking %sAdd New%s."
+msgstr ""
+"Form 메뉴는 Ninja Form의 모든 것에 대한 액세스 지점입니다. 저희가 이미 귀하의 첫 번째 %s연락처 양식%s을 만들었으니 "
+"예시로 사용하세요. %s새로 추가%s를 클릭하여 자신만의 양식을 만들 수도 있습니다."
+
+#: deprecated/includes/admin/welcome.php:329
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:11
+msgid "Build Your Form"
+msgstr "양식 구축"
+
+#: deprecated/includes/admin/welcome.php:330
+msgid ""
+"This is where you'll build your form by adding fields and dragging them into "
+"the order you want them to appear. Each field will have an assortment of "
+"options such as label, label position, and placeholder."
+msgstr ""
+"필드를 추가하고 표시할 순서대로 끌어 놓아 양식을 구축하는 곳입니다. 각각의 필드에는 레이블, 레이블 위치 및 자리 표시자와 같은 옵션 "
+"모음이 있습니다."
+
+#: deprecated/includes/admin/welcome.php:332
+#: includes/Templates/ui-nf-header.html.php:6
+#: includes/Templates/ui-nf-menu-drawer.html.php:7
+msgid "Emails & Actions"
+msgstr "이메일 및 동작"
+
+#: deprecated/includes/admin/welcome.php:333
+msgid ""
+"If you would like for your form to notify you via email when a user clicks "
+"submit, you can set those up on this tab. You can create an unlimited number "
+"of emails, including emails sent to the user who filled out the form."
+msgstr ""
+"사용자가 제출을 클릭하면 이메일을 통해 귀하에게 알림이 오도록 양식을 지정하려는 경우, 이 탭에서 설정할 수 있습니다. 양식을 입력한 "
+"사용자에게 전송되는 이메일을 비롯하여 이메일을 제한 없이 만들 수 있습니다."
+
+#: deprecated/includes/admin/welcome.php:336
+msgid ""
+"This tab hold general form settings, such as title and submission method, as "
+"well as display settings like hiding a form when it is successfully "
+"completed."
+msgstr "이 탭에는 제목 및 제출 방식과 같은 일반 양식 설정뿐 아니라 성공적으로 완료되면 양식 숨기기와 같은 표시 설정도 있습니다."
+
+#: deprecated/includes/admin/welcome.php:345
+msgid "Displaying Your Form"
+msgstr "양식 표시하기"
+
+#: deprecated/includes/admin/welcome.php:350
+msgid "Append to Page"
+msgstr "페이지에 추가"
+
+#: deprecated/includes/admin/welcome.php:351
+msgid ""
+"Under Basic Form Behavior in the Form Settings you can easily select a page "
+"that you would like the form automatically appended to the end of that "
+"page's content. A similiar option is avaiable in every content edit screen "
+"in its sidebar."
+msgstr ""
+"양식 설정의 기본 양식 동작에서 해당 페이지의 콘텐츠 끝 부분에 양식을 자동으로 추가하려는 페이지를 쉽게 선택할 수 있습니다. 해당 "
+"사이드바의 모든 콘텐츠 편집 화면에서 유사한 옵션을 사용할 수 있습니다."
+
+#: deprecated/includes/admin/welcome.php:355
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:158
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:218
+#: includes/Admin/AllFormsTable.php:69
+msgid "Shortcode"
+msgstr "단축 코드"
+
+#: deprecated/includes/admin/welcome.php:356
+#, php-format
+msgid ""
+"Place %s in any area that accepts shortcodes to display your form anywhere "
+"you like. Even in the middle of your page or posts content."
+msgstr ""
+"원하는 어디든지 양식을 표시하도록 단축 코드를 수락하는 영역에 %s을(를) 둡니다. 페이지 중앙이나 게시물 콘텐츠 내에도 가능합니다."
+
+#: deprecated/includes/admin/welcome.php:365
+msgid ""
+"Ninja Forms provides a widget that you can place in any widgetized area of "
+"your site and select exactly which form you would like displayed in that "
+"space."
+msgstr ""
+"Ninja Form은 사이트의 위젯화된 영역에 배치할 수 있고 해당 공간에 표시하려는 양식을 정확하게 선택할 수 있는 위젯을 제공합니다."
+
+#: deprecated/includes/admin/welcome.php:369
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:159
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:219
+msgid "Template Function"
+msgstr "템플릿 함수"
+
+#: deprecated/includes/admin/welcome.php:370
+#, php-format
+msgid ""
+"Ninja Forms also comes with a simple template function that can be placed "
+"directly into a php template file. %s"
+msgstr "Ninja Form은 php 템플릿 파일에 직접 배치할 수 있는 간단한 템플릿 함수와 함께 제공됩니다. %s"
+
+#: deprecated/includes/admin/welcome.php:380
+msgid "Need Help?"
+msgstr "도움이 필요한가요?"
+
+#: deprecated/includes/admin/welcome.php:385
+msgid "Growing Documentation"
+msgstr "확대되는 설명서"
+
+#: deprecated/includes/admin/welcome.php:386
+#, php-format
+msgid ""
+"Documentation is available covering everything from %sTroubleshooting%s to "
+"our %sDeveloper API%s. New Documents are always being added."
+msgstr "설명서는 %s문제 해결%s부터 %s개발자 API%s까지 모든 것을 다룰 수 있습니다. 항상 새 문서가 추가되고 있습니다."
+
+#: deprecated/includes/admin/welcome.php:390
+msgid "Best Support in the Business"
+msgstr "비즈니스에 있어 최고의 지원"
+
+#: deprecated/includes/admin/welcome.php:391
+#, php-format
+msgid ""
+"We do all we can to provide every Ninja Forms user with the best support "
+"possible. If you encounter a problem or have a question, %splease contact us"
+"%s."
+msgstr ""
+"모든 Ninja Form 사용자에게 가능한 최고의 지원을 제공하기 위해 저희가 할 수 있는 모든 노력을 기울이고 있습니다. 문제가 생기거나 "
+"문의 사항이 있는 경우 %s저희에게 문의%s 주시기 바랍니다."
+
+#: deprecated/includes/admin/welcome.php:413
+#, php-format
+msgid ""
+"Thank you for updating to the latest version! Ninja Forms %s is primed to "
+"make your experience managing submissions an enjoyable one!"
+msgstr ""
+"최신 버전으로 업데이트해 주셔서 감사합니다! Ninja Form %s은(는) 즐거운 제출 관리 경험을 만들기 위해 준비되었습니다."
+
+#: deprecated/includes/admin/welcome.php:418
+msgid ""
+"Ninja Forms is created by a worldwide team of developers who aim to provide "
+"the #1 WordPress community form creation plugin."
+msgstr ""
+"Ninja Form은 최고의 워드프레스 커뮤니티 양식 생성 플러그인을 제공하는 것을 목표로 하는 전 세계적인 개발자 팀을 통해 만들어집니다."
+
+#: deprecated/includes/admin/welcome.php:436
+msgid "No valid changelog was found."
+msgstr "유효한 변경 로그를 찾을 수 없습니다."
+
+#: deprecated/includes/admin/welcome.php:474
+#, php-format
+msgid "View %s"
+msgstr "%s 보기"
+
+#: deprecated/includes/admin/edit-field/autocomplete-off.php:16
+#: includes/Config/FieldSettings.php:695
+msgid "Disable Browser Autocomplete"
+msgstr "브라우저 자동 완성 해제"
+
+#: deprecated/includes/admin/edit-field/calc.php:44
+#, php-format
+msgid "%sChecked%s Calculation Value"
+msgstr "%s확인된%s 계산 값"
+
+#: deprecated/includes/admin/edit-field/calc.php:44
+#, php-format
+msgid "This is the value that will be used if %sChecked%s."
+msgstr "%s확인된%s 경우 사용되는 값입니다."
+
+#: deprecated/includes/admin/edit-field/calc.php:45
+#, php-format
+msgid "%sUnchecked%s Calculation Value"
+msgstr "%s확인되지 않은%s 계산 값"
+
+#: deprecated/includes/admin/edit-field/calc.php:45
+#, php-format
+msgid "This is the value that will be used if %sUnchecked%s."
+msgstr "%s확인되지 않은%s 경우 사용되는 값입니다."
+
+#: deprecated/includes/admin/edit-field/calc.php:48
+msgid "Include in the auto-total? (If enabled)"
+msgstr "자동 합계에 포함되나요? (설정된 경우)"
+
+#: deprecated/includes/admin/edit-field/custom-class.php:20
+msgid "Custom CSS Classes"
+msgstr "사용자 지정 CSS 클래스"
+
+#: deprecated/includes/admin/edit-field/desc.php:41
+msgid "Before Everything"
+msgstr "맨 앞"
+
+#: deprecated/includes/admin/edit-field/desc.php:43
+msgid "Before Label"
+msgstr "레이블 앞"
+
+#: deprecated/includes/admin/edit-field/desc.php:44
+msgid "After Label"
+msgstr "레이블 뒤"
+
+#: deprecated/includes/admin/edit-field/desc.php:46
+msgid "After Everything"
+msgstr "맨 뒤"
+
+#: deprecated/includes/admin/edit-field/desc.php:52
+#, php-format
+msgid ""
+"If \"desc text\" is enabled, there will be a question mark %s placed next to "
+"the input field. Hovering over this question mark will show the desc text."
+msgstr ""
+"“설명 텍스트”가 설정된 경우, 입력 필드 옆에 물음표 %s가 생깁니다. 이 물음표 위로 마우스를 옮기면 설명 텍스트가 표시됩니다."
+
+#: deprecated/includes/admin/edit-field/desc.php:53
+msgid "Add Description"
+msgstr "설명 추가"
+
+#: deprecated/includes/admin/edit-field/desc.php:62
+msgid "Description Position"
+msgstr "설명 위치"
+
+#: deprecated/includes/admin/edit-field/desc.php:63
+msgid "Description Content"
+msgstr "설명 콘텐츠"
+
+#: deprecated/includes/admin/edit-field/help.php:32
+#: deprecated/includes/fields/calc.php:278
+#, php-format
+msgid ""
+"If \"help text\" is enabled, there will be a question mark %s placed next to "
+"the input field. Hovering over this question mark will show the help text."
+msgstr ""
+"“도움말 텍스트”가 설정된 경우, 입력 필드 옆에 물음표 %s가 생깁니다. 이 물음표 위로 마우스를 옮기면 도움말 텍스트가 표시됩니다."
+
+#: deprecated/includes/admin/edit-field/help.php:33
+#: deprecated/includes/fields/calc.php:279
+msgid "Show Help Text"
+msgstr "도움말 텍스트 표시"
+
+#: deprecated/includes/admin/edit-field/help.php:37
+#: deprecated/includes/display/fields/help.php:26
+#: deprecated/includes/fields/calc.php:283
+#: includes/Config/FieldSettings.php:475
+msgid "Help Text"
+msgstr "도움말 텍스트"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:38
+msgid "If you leave the box empty, no limit will be used"
+msgstr "빈 상자로 두면 사용 제한이 없습니다."
+
+#: deprecated/includes/admin/edit-field/input-limit.php:39
+msgid "Limit input to this number"
+msgstr "이 숫자만큼 입력 제한"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:40
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:119
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:144
+msgid "of"
+msgstr "/"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:40
+msgid "Characters"
+msgstr "글자 수"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:40
+msgid "Words"
+msgstr "단어"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:42
+msgid "Text to appear after character/word counter"
+msgstr "자/단어 수 뒤에 나타나는 텍스트"
+
+#: deprecated/includes/admin/edit-field/label.php:39
+#: deprecated/includes/fields/calc.php:122
+#: deprecated/includes/fields/checkbox.php:29
+#: includes/Config/FieldSettings.php:50
+#: includes/Config/FormDisplaySettings.php:81
+msgid "Left of Element"
+msgstr "요소의 왼쪽"
+
+#: deprecated/includes/admin/edit-field/label.php:40
+#: deprecated/includes/fields/calc.php:123
+#: deprecated/includes/fields/checkbox.php:30
+#: includes/Config/FieldSettings.php:42
+#: includes/Config/FormDisplaySettings.php:73
+msgid "Above Element"
+msgstr "요소의 위"
+
+#: deprecated/includes/admin/edit-field/label.php:41
+#: deprecated/includes/fields/calc.php:124
+#: deprecated/includes/fields/checkbox.php:31
+#: includes/Config/FieldSettings.php:46
+#: includes/Config/FormDisplaySettings.php:77
+msgid "Below Element"
+msgstr "요소의 아래"
+
+#: deprecated/includes/admin/edit-field/label.php:42
+#: deprecated/includes/fields/calc.php:125
+#: deprecated/includes/fields/checkbox.php:32
+#: includes/Config/FieldSettings.php:54
+#: includes/Config/FormDisplaySettings.php:85
+msgid "Right of Element"
+msgstr "요소의 오른쪽"
+
+#: deprecated/includes/admin/edit-field/label.php:43
+msgid "Inside Element"
+msgstr "요소의 내부"
+
+#: deprecated/includes/admin/edit-field/label.php:56
+#: deprecated/includes/fields/calc.php:127 includes/Config/FieldSettings.php:35
+#: includes/Templates/admin-menu-forms.html.php:25
+msgid "Label Position"
+msgstr "레이블 위치"
+
+#: deprecated/includes/admin/edit-field/li.php:332
+msgid "Field ID"
+msgstr "필드 ID"
+
+#: deprecated/includes/admin/edit-field/li.php:426
+msgid "Restriction Settings"
+msgstr "제한 설정"
+
+#: deprecated/includes/admin/edit-field/li.php:427
+msgid "Calculation Settings"
+msgstr "계산 설정"
+
+#: deprecated/includes/admin/edit-field/li.php:506
+#: deprecated/includes/admin/edit-field/remove-button.php:13
+msgid "Remove"
+msgstr "제거하기"
+
+#: deprecated/includes/admin/edit-field/list-terms.php:45
+msgid "Populate this with the taxonomy"
+msgstr "분류하여 채우기"
+
+#: deprecated/includes/admin/edit-field/list-terms.php:48
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:32
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:33
+#: deprecated/includes/fields/calc.php:93
+msgid "- None"
+msgstr "- 없음"
+
+#: deprecated/includes/admin/edit-field/placeholder.php:19
+#: includes/Config/FieldSettings.php:311
+msgid "Placeholder"
+msgstr "플레이스홀더"
+
+#: deprecated/includes/admin/edit-field/req.php:21
+msgid "Required"
+msgstr "필수"
+
+#: deprecated/includes/admin/edit-field/save-button.php:5
+msgid "Save Field Settings"
+msgstr "필드 설정 저장"
+
+#: deprecated/includes/admin/edit-field/sub-settings.php:31
+msgid "Sort as numeric"
+msgstr "숫자로 정렬"
+
+#: deprecated/includes/admin/edit-field/sub-settings.php:31
+msgid ""
+"If this box is checked, this column in the submissions table will sort by "
+"number."
+msgstr "이 상자가 표시되면 제출 표에 있는 이 열은 숫자로 정렬됩니다."
+
+#: deprecated/includes/admin/edit-field/sub-settings.php:68
+#: includes/Config/FieldSettings.php:461
+msgid "Admin Label"
+msgstr "관리자 레이블"
+
+#: deprecated/includes/admin/edit-field/sub-settings.php:68
+msgid "This is the label used when viewing/editing/exporting submissions."
+msgstr "제출을 보고/편집하고/내보낼 때 사용되는 레이블입니다."
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:28
+msgid "Billing"
+msgstr "청구:"
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:29
+#: includes/Database/MockData.php:724 includes/Database/MockData.php:925
+#: includes/Database/MockData.php:986 includes/Database/MockData.php:1089
+#: includes/Fields/Shipping.php:30
+msgid "Shipping"
+msgstr "배송"
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:30
+#: deprecated/includes/fields/hidden.php:65
+#: deprecated/includes/fields/number.php:75
+#: deprecated/includes/fields/textbox.php:135
+#: deprecated/includes/fields/textbox.php:177 includes/Actions/Custom.php:35
+#: includes/Config/FieldSettings.php:218
+msgid "Custom"
+msgstr "사용자 정의"
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:51
+msgid "User Info Field Group"
+msgstr "사용자 정보 필드 그룹"
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:52
+msgid "Custom Field Group"
+msgstr "사용자 지정 필드 그룹"
+
+#: deprecated/includes/admin/pages/system-status-html.php:3
+#: includes/Templates/admin-menu-system-status.html.php:14
+msgid "Please include this information when requesting support:"
+msgstr "지원 요청 시 이 정보를 포함해 주시기 바랍니다:"
+
+#: deprecated/includes/admin/pages/system-status-html.php:4
+#: includes/Templates/admin-menu-system-status.html.php:16
+msgid "Get System Report"
+msgstr "시스템 보고서 받기"
+
+#: deprecated/includes/admin/pages/system-status-html.php:12
+#: includes/Templates/admin-menu-system-status.html.php:29
+msgid "Environment"
+msgstr "환경"
+
+#: deprecated/includes/admin/pages/system-status-html.php:17
+#: includes/Admin/Menus/SystemStatus.php:111
+msgid "Home URL"
+msgstr "홈 URL"
+
+#: deprecated/includes/admin/pages/system-status-html.php:21
+#: includes/Admin/Menus/SystemStatus.php:112
+msgid "Site URL"
+msgstr "사이트 URL"
+
+#: deprecated/includes/admin/pages/system-status-html.php:25
+#: includes/Admin/Menus/SystemStatus.php:113
+msgid "Ninja Forms Version"
+msgstr "Ninja Form 버전"
+
+#: deprecated/includes/admin/pages/system-status-html.php:29
+#: includes/Admin/Menus/SystemStatus.php:114
+msgid "WP Version"
+msgstr "워드프레스 버전"
+
+#: deprecated/includes/admin/pages/system-status-html.php:33
+#: includes/Admin/Menus/SystemStatus.php:115
+msgid "WP Multisite Enabled"
+msgstr "WP 멀티사이트 설정됨"
+
+#: deprecated/includes/admin/pages/system-status-html.php:34
+#: deprecated/includes/admin/pages/system-status-html.php:73
+#: deprecated/includes/admin/pages/system-status-html.php:102
+#: includes/Admin/Menus/SystemStatus.php:27
+#: includes/Admin/Menus/SystemStatus.php:44
+#: includes/Admin/Menus/SystemStatus.php:64
+msgid "Yes"
+msgstr "네"
+
+#: deprecated/includes/admin/pages/system-status-html.php:34
+#: deprecated/includes/admin/pages/system-status-html.php:73
+#: deprecated/includes/admin/pages/system-status-html.php:102
+#: includes/Admin/Menus/SystemStatus.php:29
+#: includes/Admin/Menus/SystemStatus.php:46
+#: includes/Admin/Menus/SystemStatus.php:66
+msgid "No"
+msgstr "아니오"
+
+#: deprecated/includes/admin/pages/system-status-html.php:37
+#: includes/Admin/Menus/SystemStatus.php:116
+msgid "Web Server Info"
+msgstr "웹 서버 정보"
+
+#: deprecated/includes/admin/pages/system-status-html.php:41
+#: includes/Admin/Menus/SystemStatus.php:117
+msgid "PHP Version"
+msgstr "PHP 버전"
+
+#: deprecated/includes/admin/pages/system-status-html.php:45
+#: includes/Admin/Menus/SystemStatus.php:119
+msgid "MySQL Version"
+msgstr "MySQL 버전"
+
+#: deprecated/includes/admin/pages/system-status-html.php:55
+#: includes/Admin/Menus/SystemStatus.php:120
+msgid "PHP Locale"
+msgstr "PHP 로캘"
+
+#: deprecated/includes/admin/pages/system-status-html.php:64
+#: includes/Admin/Menus/SystemStatus.php:122
+msgid "WP Memory Limit"
+msgstr "WP 메모리 한도"
+
+#: deprecated/includes/admin/pages/system-status-html.php:72
+#: includes/Admin/Menus/SystemStatus.php:123
+msgid "WP Debug Mode"
+msgstr "WP 디버그 모드"
+
+#: deprecated/includes/admin/pages/system-status-html.php:76
+#: includes/Admin/Menus/SystemStatus.php:124
+msgid "WP Language"
+msgstr "WP 언어"
+
+#: deprecated/includes/admin/pages/system-status-html.php:77
+#: includes/Admin/Menus/SystemStatus.php:53
+msgid "Default"
+msgstr "기본"
+
+#: deprecated/includes/admin/pages/system-status-html.php:80
+#: includes/Admin/Menus/SystemStatus.php:125
+msgid "WP Max Upload Size"
+msgstr "WP 최대 업로드 크기"
+
+#: deprecated/includes/admin/pages/system-status-html.php:85
+#: includes/Admin/Menus/SystemStatus.php:126
+msgid "PHP Post Max Size"
+msgstr "PHP 포스트 최대 사이즈"
+
+#: deprecated/includes/admin/pages/system-status-html.php:89
+#: includes/Admin/Menus/SystemStatus.php:127
+msgid "Max Input Nesting Level"
+msgstr "최대 입력 중첩 수준"
+
+#: deprecated/includes/admin/pages/system-status-html.php:93
+#: includes/Admin/Menus/SystemStatus.php:128
+msgid "PHP Time Limit"
+msgstr "PHP 시간 한도"
+
+#: deprecated/includes/admin/pages/system-status-html.php:97
+#: includes/Admin/Menus/SystemStatus.php:129
+msgid "PHP Max Input Vars"
+msgstr "PHP Max Input Vars"
+
+#: deprecated/includes/admin/pages/system-status-html.php:101
+#: includes/Admin/Menus/SystemStatus.php:130
+msgid "SUHOSIN Installed"
+msgstr "수호신 설치됨"
+
+#: deprecated/includes/admin/pages/system-status-html.php:105
+#: includes/Admin/Menus/SystemStatus.php:133
+msgid "SMTP"
+msgstr "SMTP"
+
+#: deprecated/includes/admin/pages/system-status-html.php:114
+#: includes/Admin/Menus/SystemStatus.php:135
+msgid "Default Timezone"
+msgstr "기본 시간대"
+
+#: deprecated/includes/admin/pages/system-status-html.php:118
+#, php-format
+msgid "Default timezone is %s - it should be UTC"
+msgstr "기본 타임존은 %s입니다 - UTC이어야 합니다"
+
+#: deprecated/includes/admin/pages/system-status-html.php:120
+#, php-format
+msgid "Default timezone is %s"
+msgstr "기본 시간대는 %s입니다."
+
+#: deprecated/includes/admin/pages/system-status-html.php:131
+msgid "Your server has fsockopen and cURL enabled."
+msgstr "귀하의 서버는 fsockopen 및 cURL이 설정되었습니다."
+
+#: deprecated/includes/admin/pages/system-status-html.php:133
+msgid "Your server has fsockopen enabled, cURL is disabled."
+msgstr "귀하의 서버는 fsockopen이 설정되었으며, cURL이 해제되었습니다."
+
+#: deprecated/includes/admin/pages/system-status-html.php:135
+msgid "Your server has cURL enabled, fsockopen is disabled."
+msgstr "귀하의 서버는 cURL이 설정되었으며, fsockopen이 해제되었습니다."
+
+#: deprecated/includes/admin/pages/system-status-html.php:139
+msgid ""
+"Your server does not have fsockopen or cURL enabled - PayPal IPN and other "
+"scripts which communicate with other servers will not work. Contact your "
+"hosting provider."
+msgstr ""
+"서버가 fsockopen이나 cURL가 가능하지 않습니다 - 다른 서버와 통신하는 PayPal IPN과 다른 스크립트가 작동하지 않을 "
+"것입니다. 호스팅 서비스에 연락하세요."
+
+#: deprecated/includes/admin/pages/system-status-html.php:144
+msgid "SOAP Client"
+msgstr "SOAP 클라이언트"
+
+#: deprecated/includes/admin/pages/system-status-html.php:146
+msgid "Your server has the SOAP Client class enabled."
+msgstr "귀하의 서버는 SOAP 클라이언트 클래스가 설정되었습니다."
+
+#: deprecated/includes/admin/pages/system-status-html.php:149
+#, php-format
+msgid ""
+"Your server does not have the %sSOAP Client%s class enabled - some gateway "
+"plugins which use SOAP may not work as expected."
+msgstr ""
+"귀하의 서버는 %sSOAP 클라이언트%s 클래스가 설정되었습니다. SOAP를 사용하는 일부 게이트웨이 플러그인은 예상대로 작동하지 않을 수 있습니다."
+
+#: deprecated/includes/admin/pages/system-status-html.php:154
+msgid "WP Remote Post"
+msgstr "WP 원격 게시"
+
+#: deprecated/includes/admin/pages/system-status-html.php:165
+msgid "wp_remote_post() was successful - PayPal IPN is working."
+msgstr "wp_remote_post()에 성공했습니다. - PayPal IPN이 동작 중입니다."
+
+#: deprecated/includes/admin/pages/system-status-html.php:168
+msgid ""
+"wp_remote_post() failed. PayPal IPN won't work with your server. Contact "
+"your hosting provider. Error:"
+msgstr ""
+"wp_remote_post()에 실패했습니다. PayPal IPN이 귀하의 서버와 동작하지 않습니다. 귀하의 호스팅 제공업체에 문의하세요. 오류:"
+
+#: deprecated/includes/admin/pages/system-status-html.php:171
+msgid "wp_remote_post() failed. PayPal IPN may not work with your server."
+msgstr "wp_remote_post()에 실패했습니다. PayPal IPN이 귀하의 서버와 동작하지 않을 수 있습니다."
+
+#: deprecated/includes/admin/pages/system-status-html.php:178
+#: includes/Templates/admin-menu-system-status.html.php:42
+msgid "Plugins"
+msgstr "플러그인"
+
+#: deprecated/includes/admin/pages/system-status-html.php:183
+#: includes/Templates/admin-menu-system-status.html.php:47
+msgid "Installed Plugins"
+msgstr "설치된 플러그인"
+
+#: deprecated/includes/admin/pages/system-status-html.php:203
+#: includes/Admin/Menus/SystemStatus.php:93
+msgid "Visit plugin homepage"
+msgstr "플러그인 홈페이지 방문"
+
+#: deprecated/includes/admin/pages/system-status-html.php:206
+#: includes/Admin/Menus/SystemStatus.php:96
+msgid "by"
+msgstr "올린이"
+
+#: deprecated/includes/admin/pages/system-status-html.php:206
+#: includes/Admin/Menus/SystemStatus.php:96
+msgid "version"
+msgstr "버전"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:44
+msgid "Give your form a title. This is how you'll find the form later."
+msgstr "양식의 제목을 지정하세요. 제목은 나중에 양식을 찾는 수단이 됩니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:49
+msgid "You have not added a submit button to your form."
+msgstr "양식에 제출 버튼을 추가하지 않았습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:7
+#: deprecated/includes/fields/textbox.php:170
+#: includes/Config/FieldSettings.php:200
+msgid "Input Mask"
+msgstr "입력 마스크"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:15
+msgid ""
+"Any character you place in the \"custom mask\" box that is not in the list "
+"below will be automatically entered for the user as they type and will not "
+"be removeable"
+msgstr ""
+"아래 목록에 없는 “사용자 지정 마스크” 상자에 귀하가 입력한 문자는 사용자가 입력한 대로 자동으로 입력되며 제거할 수 없습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:16
+msgid "These are the predefined masking characters"
+msgstr "다음은 미리 정의된 마스킹 문자입니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:18
+msgid ""
+"a - Represents an alpha character (A-Z,a-z) - Only allows letters to be "
+"entered"
+msgstr "a - 알파벳(A-Z,a-z)을 나타냄 - 문자 입력만 허용"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:19
+msgid ""
+"9 - Represents a numeric character (0-9) - Only allows numbers to be entered"
+msgstr "9 - 숫자(0-9)를 나타냄 - 숫자 입력만 허용"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:20
+msgid ""
+"* - Represents an alphanumeric character (A-Z,a-z,0-9) - This allows both "
+"numbers and letters to be entered"
+msgstr "* - 영숫자(A-Z,a-z,0-9)를 나타냄 - 숫자와 문자 모두 입력 허용"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid ""
+"So, if you wanted to create a mask for an American Social Security Number, "
+"you would type 999-99-9999 into the box"
+msgstr "따라서 미국 사회 보장 번호에 대한 마스크를 만들려는 경우 상자에 999-99-9999를 입력하게 됩니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid ""
+"The 9s would represent any number, and the -s would be automatically added"
+msgstr "9s는 임의의 숫자를 나타내며, -s는 자동으로 추가됩니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid "This would prevent the user from putting in anything other than numbers"
+msgstr "이는 사용자가 숫자가 아닌 것을 입력하지 못하도록 합니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:27
+msgid "You can also combine these for specific applications"
+msgstr "특정 애플리케이션을 위해 이들을 결합할 수도 있습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:27
+msgid ""
+"For instance, if you had a product key that was in the form of A4B51.989."
+"B.43C, you could mask it with: a9a99.999.a.99a, which would force all the "
+"a's to be letters and the 9s to be numbers"
+msgstr ""
+"예를 들어, A4B51.989.B.43C 양식으로 제품 키가 있었다면, 모든 a는 문자가 되고 9s는 숫자가 되도록 하는 "
+"a9a99.999.a.99a로 마스킹할 수 있습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/def-fields.php:6
+msgid "Defined Fields"
+msgstr "정의된 필드"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/fav-fields.php:6
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:7
+#: includes/Admin/Menus/ImportExport.php:100
+#: includes/Templates/admin-metabox-import-export-favorite-fields-export.html.php:9
+msgid "Favorite Fields"
+msgstr "즐겨찾기 필드"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/payment-fields.php:12
+msgid "Payment Fields"
+msgstr "결제 필드"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/template-fields.php:6
+msgid "Template Fields"
+msgstr "템플릿 필드"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/user-info.php:12
+msgid "User Information"
+msgstr "사용자 정보"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:96
+msgid "All"
+msgstr "모두"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:101
+msgid "Bulk Actions"
+msgstr "일괄 작업"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:104
+msgid "Apply"
+msgstr "적용하기"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:112
+msgid "Forms Per Page"
+msgstr "페이지당 양식"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:113
+msgid "Go"
+msgstr "가기"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:142
+msgid "Go to the first page"
+msgstr "첫 번째 페이지로 이동"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:143
+msgid "Go to the previous page"
+msgstr "이전 페이지로 이동"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:144
+msgid "Current page"
+msgstr "현재 페이지"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:145
+msgid "Go to the next page"
+msgstr "폐이지 넘기기"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:146
+msgid "Go to the last page"
+msgstr "마지막 페이지로 이동"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:157
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:217
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:55
+#: includes/Admin/AllFormsTable.php:68
+#: includes/Config/FormDisplaySettings.php:12
+msgid "Form Title"
+msgstr "양식 제목"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:189
+msgid "Delete this form"
+msgstr "이 양식 삭제"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:190
+msgid "Duplicate Form"
+msgstr "양식 복제"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:236
+msgid "Forms Deleted"
+msgstr "양식 삭제됨"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:238
+msgid "Form Deleted"
+msgstr "양식 삭제됨"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-preview/form-preview.php:11
+msgid "Form Preview"
+msgstr "양식 미리 보기"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:49
+#: includes/Config/SettingsGroups.php:24
+msgid "Display"
+msgstr "표시하기"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:60
+#: includes/Config/FormDisplaySettings.php:26
+msgid "Display Form Title"
+msgstr "양식 제목 표시"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:66
+msgid "Add form to this page"
+msgstr "이 페이지에 양식 추가"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:75
+msgid "Submit via AJAX (without page reload)?"
+msgstr "AJAX를 통해 제출하겠습니까(페이지 다시 로드하지 않음)?"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:83
+#: includes/Config/FormDisplaySettings.php:40
+msgid "Clear successfully completed form?"
+msgstr "성공적으로 완료된 양식을 지우겠습니까?"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:85
+#: includes/Config/FormDisplaySettings.php:44
+msgid ""
+"If this box is checked, Ninja Forms will clear the form values after it has "
+"been successfully submitted."
+msgstr "이 상자를 선택하면 성공적으로 제출된 후에 Ninja Form이 양식 값을 지웁니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:92
+#: includes/Config/FormDisplaySettings.php:54
+msgid "Hide successfully completed form?"
+msgstr "성공적으로 완료된 양식을 숨기겠습니까?"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:94
+#: includes/Config/FormDisplaySettings.php:58
+msgid ""
+"If this box is checked, Ninja Forms will hide the form after it has been "
+"successfully submitted."
+msgstr "이 상자를 선택하면 성공적으로 제출된 후에 Ninja Form이 양식을 숨깁니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:105
+#: includes/Config/FormSettingsTypes.php:12
+#: includes/Config/SettingsGroups.php:19
+msgid "Restrictions"
+msgstr "제한 사항"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:112
+#: includes/Config/FormRestrictionSettings.php:20
+msgid "Require user to be logged in to view form?"
+msgstr "양식을 보기 위해 사용자가 로그인해야 합니까?"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:119
+#: includes/Config/FormRestrictionSettings.php:34
+msgid "Not Logged-In Message"
+msgstr "로그인되지 않음 메시지"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:120
+msgid ""
+"Message shown to users if the \"logged in\" checkbox above is checked and "
+"they are not logged-in."
+msgstr "위의 “로그인” 확인란이 선택되는 경우 사용자에게 표시되는 메시지이며 사용자가 로그인되지 않습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:127
+#: includes/Config/FormRestrictionSettings.php:45
+msgid "Limit Submissions"
+msgstr "제출 제한"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:129
+msgid ""
+"Select the number of submissions that this form will accept. Leave empty for "
+"no limit."
+msgstr "이 양식이 허용하는 제출의 수를 선택합니다. 제한이 없는 경우는 비워 두십시오."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:137
+#: includes/Config/FormRestrictionSettings.php:74
+msgid "Limit Reached Message"
+msgstr "제한에 도달했음 메시지"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:138
+msgid ""
+"Please enter a message that you want displayed when this form has reached "
+"its submission limit and will not accept new submissions."
+msgstr "이 양식이 해당 제출 제한에 도달하여 새 제출을 허용하지 않을 때 표시할 메시지를 입력하세요."
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:160
+msgid "Form Settings Saved"
+msgstr "양식 설정 저장됨"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/help.php:7
+msgid "Basic Settings"
+msgstr "기본 설정"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/help.php:15
+msgid "Ninja Forms basic help goes here."
+msgstr "Ninja Form 기본 도움말은 여기로 이동하세요."
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:6
+msgid "Extend Ninja Forms"
+msgstr "Ninja Form 확장"
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:67
+#: includes/Templates/admin-menu-addons.html.php:49
+msgid "Documentation coming soon."
+msgstr "설명서가 예정되어 있습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:72
+#: includes/Config/ActionSettings.php:27
+#: includes/Templates/admin-menu-addons.html.php:57
+msgid "Active"
+msgstr "활성"
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:74
+#: includes/Config/i18nBuilder.php:12
+#: includes/Templates/admin-menu-addons.html.php:61
+msgid "Installed"
+msgstr "설치됨"
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:76
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:79
+#: includes/Templates/admin-menu-addons.html.php:65
+#: includes/Templates/admin-menu-addons.html.php:71
+msgid "Learn More"
+msgstr "자세한 정보"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:6
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:20
+msgid "Backup / Restore"
+msgstr "백업/복원"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:22
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:24
+msgid "Backup Ninja Forms"
+msgstr "Ninja Form 백업"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:28
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:32
+msgid "Restore Ninja Forms"
+msgstr "Ninja Form 복원"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:37
+msgid "Data restored successfully!"
+msgstr "데이터가 성공적으로 복원되었습니다!"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:23
+#: includes/Admin/Menus/ImportExport.php:142
+msgid "Import Favorite Fields"
+msgstr "즐겨찾기 필드 가져오기"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:28
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:27
+#: includes/Config/i18nFrontEnd.php:13
+#: includes/Templates/admin-metabox-import-export-favorite-fields-import.html.php:9
+#: includes/Templates/admin-metabox-import-export-forms-import.html.php:9
+msgid "Select a file"
+msgstr "파일 선택"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:36
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:132
+msgid "Import Favorites"
+msgstr "즐겨찾기 가져오기"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:57
+msgid "No Favorite Fields Found"
+msgstr "즐겨찾기 필드를 찾을 수 없음"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:63
+#: includes/Admin/Menus/ImportExport.php:149
+msgid "Export Favorite Fields"
+msgstr "즐겨찾기 필드 내보내기"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:81
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:93
+#: includes/Templates/admin-metabox-import-export-favorite-fields-export.html.php:24
+#: includes/Templates/admin-metabox-import-export-favorite-fields-export.html.php:27
+msgid "Export Fields"
+msgstr "필드 내보내기"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:130
+msgid "Please select favorite fields to export."
+msgstr "내보낼 즐겨찾기 필드를 선택하세요."
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:144
+msgid "Favorites imported successfully."
+msgstr "즐겨찾기를 성공적으로 가져왔습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:146
+msgid "Please select a valid favorite fields file."
+msgstr "유효한 즐겨찾기 필드 파일을 선택하세요."
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:22
+msgid "Import a form"
+msgstr "양식 가져오기"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:35
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:162
+#: includes/Templates/admin-metabox-import-export-forms-import.html.php:17
+#: includes/Templates/admin-metabox-import-export-forms-import.html.php:20
+msgid "Import Form"
+msgstr "가져오기 양식"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:62
+msgid "Export a form"
+msgstr "양식 내보내기"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:75
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:156
+#: includes/Templates/admin-metabox-import-export-forms-export.html.php:21
+#: includes/Templates/admin-metabox-import-export-forms-export.html.php:24
+msgid "Export Form"
+msgstr "내보내기 양식"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:160
+msgid "Please select a form."
+msgstr "양식을 선택하세요."
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:166
+#: includes/Templates/admin-notice-form-import.html.php:3
+msgid "Form Imported Successfully."
+msgstr "양식을 성공적으로 가져왔습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:169
+msgid "Please select a valid exported form file."
+msgstr "유효한 내보내기 양식 파일을 선택하세요."
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:18
+msgid "Import / Export Submissions"
+msgstr "제출 가져오기/내보내기"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:20
+msgid "Date Settings"
+msgstr "날짜 설정"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:6
+msgid "General"
+msgstr "일반"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:29
+#: includes/Config/PluginSettingsGroups.php:7
+msgid "General Settings"
+msgstr "일반 설정"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:34
+#: includes/Config/PluginSettingsGeneral.php:14
+msgid "Version"
+msgstr "버전"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:40
+#: includes/Config/PluginSettingsGeneral.php:27
+msgid "Date Format"
+msgstr "날짜 형식"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:41
+#: includes/Config/PluginSettingsGeneral.php:28
+#, php-format
+msgid ""
+"Tries to follow the %sPHP date() function%s specifications, but not every "
+"format is supported."
+msgstr "%sPHP date() 함수%s 사양을 시도해 보십시오. 하지만 일부 형식은 지원되지 않습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:46
+#: includes/Config/PluginSettingsGeneral.php:40
+msgid "Currency Symbol"
+msgstr "통화 기호"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:57
+msgid "reCAPTCHA Settings"
+msgstr "reCAPTCHA 설정"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:62
+#: includes/Config/PluginSettingsReCaptcha.php:14
+msgid "reCAPTCHA Site Key"
+msgstr "reCAPTCHA 사이트 키"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:63
+#: includes/Config/PluginSettingsReCaptcha.php:15
+#, php-format
+msgid "Get a site key for your domain by registering  %shere%s"
+msgstr "%s여기%s에서 등록하여 도메인의 사이트 키 얻기"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:68
+#: includes/Config/PluginSettingsReCaptcha.php:27
+msgid "reCAPTCHA Secret Key"
+msgstr "reCAPTCHA 비밀 키"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:74
+#: includes/Config/PluginSettingsReCaptcha.php:40
+msgid "reCAPTCHA Language"
+msgstr "reCAPTCHA 언어"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:75
+#: includes/Config/PluginSettingsReCaptcha.php:41
+#, php-format
+msgid ""
+"Language used by reCAPTCHA. To get the code for your language click %shere%s"
+msgstr "reCAPTCHA가 사용하는 언어입니다. 언어에 해당하는 코드를 받으려면 %s여기%s를 클릭하세요."
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:94
+#: includes/Config/PluginSettingsAdvanced.php:15
+#, php-format
+msgid ""
+"If this box is checked, ALL Ninja Forms data will be removed from the "
+"database upon deletion. %sAll form and submission data will be unrecoverable."
+"%s"
+msgstr ""
+"이 상자를 선택하면, 삭제 시 데이터베이스에서 모든 Ninja Form 데이터가 제거됩니다. %s모든 양식 및 제출 데이터를 복구할 수 "
+"없게 됩니다.%s"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:104
+#: includes/Config/PluginSettingsAdvanced.php:42
+msgid "Disable Admin Notices"
+msgstr "관리자 알림 해제"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:105
+#: includes/Config/PluginSettingsAdvanced.php:43
+msgid ""
+"Never see an admin notice on the dashboard from Ninja Forms. Uncheck to see "
+"them again."
+msgstr "Ninja Form의 대시보드에서 관리자 알림을 보지 않습니다. 다시 보려면 선택을 해제합니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:119
+#: includes/Config/PluginSettingsAdvanced.php:27
+msgid ""
+"This setting will COMPLETELY remove anything Ninja Forms related upon plugin "
+"deletion. This includes SUBMISSIONS and FORMS. It cannot be undone."
+msgstr ""
+"이 설정은 플러그인 삭제 시 관련된 모든 Ninja Form을 완전히 제거합니다. 여기에는 제출 및 양식이 포함됩니다. 이 작업은 실행 "
+"취소할 수 없습니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:126
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:74
+msgid "Continue"
+msgstr "계속하기"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:141
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:102
+msgid "Settings Saved"
+msgstr "설정 저장됨"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:6
+msgid "Labels"
+msgstr "레이블"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:23
+msgid "Message Labels"
+msgstr "메시지 레이블"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:28
+msgid "Required Field Label"
+msgstr "필수 필드 레이블"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:35
+msgid "Required field symbol"
+msgstr "필요 필드 기호"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:40
+msgid "Error message given if all required fields are not completed"
+msgstr "필수 필드가 전부 완료되지 않으면 오류 메시지가 표시됩니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:45
+msgid "Required Field Error"
+msgstr "필수 필드 오류"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:51
+msgid "Anti-spam error message"
+msgstr "스팸 방지 오류 메시지"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:57
+msgid "Honeypot error message"
+msgstr "허니팟 오류 메시지"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:63
+msgid "Timer error message"
+msgstr "타이머 오류 메시지"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:69
+msgid "JavaScript disabled error message"
+msgstr "JavaScript 해제 오류 메시지"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:75
+msgid "Please enter a valid email address"
+msgstr "유효한 이메일 주소를 다시 입력하세요."
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:81
+msgid "Processing Submission Label"
+msgstr "제출 레이블 처리 중"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:82
+msgid ""
+"This message is shown inside the submit button whenever a user clicks "
+"\"submit\" to let them know it is processing."
+msgstr "이 메시지는 처리 중임을 알리기 위해 사용자가 “제출”을 클릭할 때마다 제출 버튼 내에 표시됩니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:87
+msgid "Password Mismatch Label"
+msgstr "암호 불일치 레이블"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:88
+msgid ""
+"This message is shown to a user when non-matching values are placed in the "
+"password field."
+msgstr "이 메시지는 암호 필드에 일치하지 않는 값이 입력되면 사용자에게 표시됩니다."
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:4
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:21
+#: includes/Admin/Menus/Settings.php:26
+msgid "Licenses"
+msgstr "라이선스"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:60
+msgid "Save & Activate"
+msgstr "저장 및 활성화"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:66
+msgid "Deactivate All Licenses"
+msgstr "모든 라이선스 비활성화"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:84
+#: includes/Templates/admin-menu-settings-licenses.html.php:3
+#, php-format
+msgid ""
+"To activate licenses for Ninja Forms extensions you must first %sinstall and "
+"activate%s the chosen extension. License settings will then appear below."
+msgstr ""
+"Ninja Form 확장 기능에 대한 라이선스를 활성화하려면 먼저 선택한 확장 기능을 %s설치 및 활성화%s해야 합니다. 그러면 라이선스 "
+"설정이 아래 나타납니다."
+
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:24
+msgid "Reset Forms Conversion"
+msgstr "양식 전환 재설정"
+
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:46
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:58
+msgid "Reset Form Conversion"
+msgstr "양식 전환 재설정"
+
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:60
+msgid ""
+"If your forms are \"missing\" after updating to 2.9, this button will "
+"attempt to reconvert your old forms to show them in 2.9.  All current forms "
+"will remain in the \"All Forms\" table."
+msgstr ""
+"2.9로 업데이트한 후 양식이 “유실”되는 경우 이 버튼은 2.9에서 양식을 표시하기 위해 이전 양식의 재변환을 시도합니다.  모든 현재 "
+"양식이 “모든 양식” 표에 남게 됩니다."
+
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:65
+msgid ""
+"All current forms will remain in the \"All Forms\" table. In some cases some "
+"forms may be duplicated during this process."
+msgstr "모든 현재 양식이 “모든 양식” 표에 남게 됩니다. 일부 경우 어떤 양식은 이 과정 중에 중복될 수 있습니다."
+
+#: deprecated/includes/admin/upgrades/convert-notifications.php:102
+#: includes/Config/FormActionDefaults.php:16
+#: includes/Config/MergeTagsSystem.php:14
+msgid "Admin Email"
+msgstr "관리자 이메일"
+
+#: deprecated/includes/admin/upgrades/convert-notifications.php:194
+msgid "User Email"
+msgstr "사용자 이메일"
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:31
+#, php-format
+msgid ""
+"Ninja Forms needs to upgrade your form notifications, click %shere%s to "
+"start the upgrade."
+msgstr "Ninja Form에서 양식 알림을 업그레이드해야 합니다. 업그레이드를 시작하려면 %s여기%s를 클릭하세요."
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:40
+#, php-format
+msgid ""
+"Ninja Forms needs to update your email settings, click %shere%s to start the "
+"upgrade."
+msgstr "Ninja Form에서 이메일 설정을 업데이트해야 합니다. 업그레이드를 시작하려면 %s여기%s를 클릭하세요."
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:55
+#, php-format
+msgid ""
+"Ninja Forms needs to upgrade the submissions table, click %shere%s to start "
+"the upgrade."
+msgstr "Ninja Form에서 제출 표를 업그레이드해야 합니다. 업그레이드를 시작하려면 %s여기%s를 클릭하세요."
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:64
+msgid ""
+"Thank you for updating to version 2.7 of Ninja Forms. Please update any "
+"Ninja Forms extensions from "
+msgstr ""
+"Ninja Form 버전 2.7로 업데이트해 주셔서 감사합니다. 모든 Ninja Form 확장 기능을 업데이트해 주시기 바랍니다. "
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:70
+msgid ""
+"Your version of the Ninja Forms File Upload extension isn't compatible with "
+"version 2.7 of Ninja Forms. It needs to be at least version 1.3.5. Please "
+"update this extension at "
+msgstr ""
+"Ninja Form 파일 업로드 확장 기능 버전이 Ninja Form 버전 2.7과 호환되지 않습니다. 버전 1.3.5 이상이어야 합니다. "
+"이 확장 기능을 업데이트해 주시기 바랍니다. "
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:74
+msgid ""
+"Your version of the Ninja Forms Save Progress extension isn't compatible "
+"with version 2.7 of Ninja Forms. It needs to be at least version 1.1.3. "
+"Please update this extension at "
+msgstr ""
+"Ninja Form 저장 진행률 확장 기능 버전이 Ninja Form 버전 2.7과 호환되지 않습니다. 버전 1.1.3 이상이어야 합니다. "
+"이 확장 기능을 업데이트해 주시기 바랍니다. "
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:80
+msgid "Updating Form Database"
+msgstr "양식 데이터베이스 업데이트하기"
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:82
+#, php-format
+msgid ""
+"Ninja Forms needs to upgrade your form settings, click %shere%s to start the "
+"upgrade."
+msgstr "Ninja Form에서 양식 설정을 업그레이드해야 합니다. 업그레이드를 시작하려면 %s여기%s를 클릭하세요."
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:3
+msgid "Ninja Forms Upgrade Processing"
+msgstr "Ninja Form 업그레이드 처리 중"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:41
+#, php-format
+msgid "Please %scontact support%s with the error seen above."
+msgstr "위에 보이는 오류와 함께 %s지원에 문의%s하시기 바랍니다."
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:52
+msgid "Ninja Forms has completed all available upgrades!"
+msgstr "Ninja Form에 가능한 모든 업그레이드가 완료되었습니다!"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:56
+msgid "Go to Forms"
+msgstr "양식으로 이동"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.php:17
+msgid "Ninja Forms Upgrade"
+msgstr "Ninja Form 업그레이드"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.php:18
+#: deprecated/upgrade/class-submenu.php:56
+msgid "Upgrade"
+msgstr "업그레이드"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.php:68
+msgid "Upgrades Complete"
+msgstr "업그레이드 완료"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.php:113
+#, php-format
+msgid ""
+"Ninja Forms needs to process %s upgrade(s). This may take a few minutes to "
+"complete. %sStart Upgrade%s"
+msgstr ""
+"Ninja Form에서 %s개의 업그레이드를 처리해야 합니다. 완료하는 데 몇 분 정도 걸릴 수도 있습니다. %s업그레이드 시작%s"
+
+#: deprecated/includes/admin/upgrades/upgrades.php:41
+#, php-format
+msgid "Step %d of approximately %d running"
+msgstr "대략 %d 실행 중 %d 단계"
+
+#: deprecated/includes/classes/class-nf-system-status.php:36
+msgid "Ninja Forms System Status"
+msgstr "Ninja Form 시스템 상태"
+
+#: deprecated/includes/display/scripts.php:274
+#: deprecated/includes/fields/password.php:128
+msgid "Strength indicator"
+msgstr "강도 지표"
+
+#: deprecated/includes/display/scripts.php:275
+msgid "Very weak"
+msgstr "매우 약함"
+
+#: deprecated/includes/display/scripts.php:276
+msgid "Weak"
+msgstr "약함"
+
+#: deprecated/includes/display/scripts.php:278
+msgid "Medium"
+msgstr "중간"
+
+#: deprecated/includes/display/scripts.php:279
+msgid "Strong"
+msgstr "강력"
+
+#: deprecated/includes/display/scripts.php:280
+msgid "Mismatch"
+msgstr "불일치"
+
+#: deprecated/includes/display/fields/list-term-filter.php:51
+#: deprecated/includes/fields/country.php:11
+msgid "- Select One"
+msgstr "- 한 개 선택"
+
+#: deprecated/includes/display/form/honeypot.php:14
+#: deprecated/includes/fields/honeypot.php:10
+msgid "If you are a human and are seeing this field, please leave it blank."
+msgstr "귀하가 로봇이 아니며 이 필드가 보이는 경우에는 이 부분을 비워 두시기 바랍니다."
+
+#: deprecated/includes/display/form/required-label.php:16
+msgid "Fields marked with a * are required."
+msgstr "*로 표시된 필드는 필수입니다."
+
+#: deprecated/includes/display/processing/req-fields-pre-process.php:65
+#: includes/Config/i18nFrontEnd.php:15
+msgid "This is a required field."
+msgstr "필요한 필드입니다."
+
+#: deprecated/includes/display/processing/req-fields-pre-process.php:71
+msgid "Please check required fields."
+msgstr "필수 필드를 확인하시기 바랍니다."
+
+#: deprecated/includes/fields/calc.php:10
+#: deprecated/includes/fields/calc.php:70
+#: deprecated/includes/fields/calc.php:111
+msgid "Calculation"
+msgstr "계산"
+
+#: deprecated/includes/fields/calc.php:42
+msgid "Number of decimal places."
+msgstr "소수 자릿수."
+
+#: deprecated/includes/fields/calc.php:94
+#: deprecated/includes/fields/textbox.php:4 includes/Database/MockData.php:356
+#: includes/Database/MockData.php:361 includes/Database/MockData.php:521
+#: includes/Templates/admin-menu-forms.html.php:48
+#: includes/Templates/admin-menu-forms.html.php:49
+#: includes/Templates/admin-menu-forms.html.php:50
+#: includes/Templates/admin-menu-forms.html.php:51
+#: includes/Templates/admin-menu-forms.html.php:52
+#: includes/Templates/admin-menu-forms.html.php:58
+#: includes/Templates/admin-menu-forms.html.php:86
+#: includes/Templates/admin-menu-forms.html.php:114
+#: includes/Templates/admin-menu-forms.html.php:142
+#: includes/Templates/admin-menu-forms.html.php:170
+msgid "Textbox"
+msgstr "텍스트 상자"
+
+#: deprecated/includes/fields/calc.php:100
+msgid "Output calculation as"
+msgstr "다음으로 출력 계산"
+
+#: deprecated/includes/fields/calc.php:113
+#: deprecated/includes/fields/list.php:98
+#: deprecated/includes/fields/list.php:193
+#: deprecated/includes/fields/list.php:585
+#: deprecated/includes/fields/timed-submit.php:9
+#: deprecated/includes/fields/timed-submit.php:17
+#: includes/Config/FieldSettings.php:21 includes/Config/FieldSettings.php:164
+#: includes/Config/FieldSettings.php:618 includes/Config/FieldSettings.php:634
+#: includes/Config/FieldSettings.php:960
+msgid "Label"
+msgstr "라벨"
+
+#: deprecated/includes/fields/calc.php:135
+msgid "Disable input?"
+msgstr "입력을 해제하겠습니까?"
+
+#: deprecated/includes/fields/calc.php:151
+msgid ""
+"Use the following shortcode to insert the final calculation: "
+"[ninja_forms_calc]"
+msgstr "최종 계산을 삽입하려면 다음 단축 코드를 사용합니다. [ninja_forms_calc]"
+
+#: deprecated/includes/fields/calc.php:188
+#, php-format
+msgid ""
+"You can enter calculation equations here using field_x where x is the ID of "
+"the field you want to use. For example, %sfield_53 + field_28 + field_65%s."
+msgstr ""
+"x가 사용하려는 필드의 ID인 field_x를 사용하여 여기에 계산식을 입력하세요. 예: %sfield_53 + field_28 + field_65%s."
+
+#: deprecated/includes/fields/calc.php:189
+#, php-format
+msgid ""
+"Complex equations can be created by adding parentheses: %s( field_45 * "
+"field_2 ) / 2%s."
+msgstr "복합 수식은 다음과 같이 괄호를 추가하여 만들 수 있습니다. %s( field_45 * field_2 ) / 2%s."
+
+#: deprecated/includes/fields/calc.php:190
+msgid ""
+"Please use these operators: + - * /. This is an advanced feature. Watch out "
+"for things like division by 0."
+msgstr "다음 연산자를 사용하세요. + - * /. 이 기능은 고급 기능입니다. 0으로 나누기와 같은 경우에 주의하세요."
+
+#: deprecated/includes/fields/calc.php:192
+msgid "Automatically Total Calculation Values"
+msgstr "자동 총 계산 값"
+
+#: deprecated/includes/fields/calc.php:193
+msgid "Specify Operations And Fields (Advanced)"
+msgstr "연산 및 필드 지정(고급)"
+
+#: deprecated/includes/fields/calc.php:194
+msgid "Use An Equation (Advanced)"
+msgstr "수식 사용(고급)"
+
+#: deprecated/includes/fields/calc.php:196
+msgid "Calculation Method"
+msgstr "계산 방식"
+
+#: deprecated/includes/fields/calc.php:202
+msgid "Field Operations"
+msgstr "필드 연산"
+
+#: deprecated/includes/fields/calc.php:202
+msgid "Add Operation"
+msgstr "연산 추가"
+
+#: deprecated/includes/fields/calc.php:220
+msgid "Advanced Equation"
+msgstr "고급 수식"
+
+#: deprecated/includes/fields/calc.php:238
+msgid "Calculation name"
+msgstr "계산 이름"
+
+#: deprecated/includes/fields/calc.php:238
+msgid ""
+"This is the programmatic name of your field. Examples are: my_calc, "
+"price_total, user-total."
+msgstr "이 이름은 필드의 프로그램식 이름입니다. 예: my_calc, price_total, user-total."
+
+#: deprecated/includes/fields/calc.php:239
+#: deprecated/includes/fields/checkbox.php:19
+#: deprecated/includes/fields/desc.php:11
+#: deprecated/includes/fields/hidden.php:53
+#: deprecated/includes/fields/number.php:69
+#: deprecated/includes/fields/number.php:83
+#: deprecated/includes/fields/textarea.php:11
+#: deprecated/includes/fields/textbox.php:122
+#: includes/Config/FieldSettings.php:129 includes/Config/FieldSettings.php:326
+#: includes/Fields/ListCountry.php:30
+msgid "Default Value"
+msgstr "기본 값"
+
+#: deprecated/includes/fields/calc.php:275
+msgid "Custom CSS Class"
+msgstr "사용자 지정 CSS 클래스"
+
+#: deprecated/includes/fields/calc.php:392
+msgid "- Select a Field"
+msgstr "- 필드 선택"
+
+#: deprecated/includes/fields/checkbox.php:4 includes/Database/MockData.php:443
+#: includes/Database/MockData.php:531
+#: includes/Templates/admin-menu-forms.html.php:64
+#: includes/Templates/admin-menu-forms.html.php:92
+#: includes/Templates/admin-menu-forms.html.php:120
+#: includes/Templates/admin-menu-forms.html.php:148
+#: includes/Templates/admin-menu-forms.html.php:176
+msgid "Checkbox"
+msgstr "확인란"
+
+#: deprecated/includes/fields/checkbox.php:10
+#: includes/Config/FieldSettings.php:132
+msgid "Unchecked"
+msgstr "선택 해제됨"
+
+#: deprecated/includes/fields/checkbox.php:14
+#: includes/Config/FieldSettings.php:136
+msgid "Checked"
+msgstr "선택됨"
+
+#: deprecated/includes/fields/checkbox.php:44
+#: deprecated/includes/fields/list.php:35
+#: deprecated/includes/fields/recaptcha.php:25
+msgid "Show This"
+msgstr "표시"
+
+#: deprecated/includes/fields/checkbox.php:49
+#: deprecated/includes/fields/list.php:40
+#: deprecated/includes/fields/recaptcha.php:30
+msgid "Hide This"
+msgstr "숨기기"
+
+#: deprecated/includes/fields/checkbox.php:54
+#: deprecated/includes/fields/hidden.php:23
+msgid "Change Value"
+msgstr "변경 값"
+
+#: deprecated/includes/fields/country.php:12
+#: deprecated/includes/fields/country.php:315
+#: includes/Config/CountryList.php:11
+msgid "Afghanistan"
+msgstr "아프가니스탄"
+
+#: deprecated/includes/fields/country.php:13
+#: deprecated/includes/fields/country.php:316
+#: includes/Config/CountryList.php:12
+msgid "Albania"
+msgstr "Albania"
+
+#: deprecated/includes/fields/country.php:14
+#: deprecated/includes/fields/country.php:317
+#: includes/Config/CountryList.php:13
+msgid "Algeria"
+msgstr "Algeria"
+
+#: deprecated/includes/fields/country.php:15
+#: deprecated/includes/fields/country.php:318
+#: includes/Config/CountryList.php:14
+msgid "American Samoa"
+msgstr "American Samoa"
+
+#: deprecated/includes/fields/country.php:16
+#: deprecated/includes/fields/country.php:319
+#: includes/Config/CountryList.php:15
+msgid "Andorra"
+msgstr "Andorra"
+
+#: deprecated/includes/fields/country.php:17
+#: deprecated/includes/fields/country.php:320
+#: includes/Config/CountryList.php:16
+msgid "Angola"
+msgstr "Angola"
+
+#: deprecated/includes/fields/country.php:18
+#: deprecated/includes/fields/country.php:321
+#: includes/Config/CountryList.php:17
+msgid "Anguilla"
+msgstr "Anguilla"
+
+#: deprecated/includes/fields/country.php:19
+#: deprecated/includes/fields/country.php:322
+#: includes/Config/CountryList.php:18
+msgid "Antarctica"
+msgstr "Antarctica"
+
+#: deprecated/includes/fields/country.php:20
+#: deprecated/includes/fields/country.php:323
+#: includes/Config/CountryList.php:19
+msgid "Antigua And Barbuda"
+msgstr "Antigua and Barbuda"
+
+#: deprecated/includes/fields/country.php:21
+#: deprecated/includes/fields/country.php:324
+#: includes/Config/CountryList.php:20
+msgid "Argentina"
+msgstr "Argentina"
+
+#: deprecated/includes/fields/country.php:22
+#: deprecated/includes/fields/country.php:325
+#: includes/Config/CountryList.php:21
+msgid "Armenia"
+msgstr "Armenia"
+
+#: deprecated/includes/fields/country.php:23
+#: deprecated/includes/fields/country.php:326
+#: includes/Config/CountryList.php:22
+msgid "Aruba"
+msgstr "Aruba"
+
+#: deprecated/includes/fields/country.php:24
+#: deprecated/includes/fields/country.php:327
+#: includes/Config/CountryList.php:23
+msgid "Australia"
+msgstr "Australia"
+
+#: deprecated/includes/fields/country.php:25
+#: deprecated/includes/fields/country.php:328
+#: includes/Config/CountryList.php:24
+msgid "Austria"
+msgstr "Austria"
+
+#: deprecated/includes/fields/country.php:26
+#: deprecated/includes/fields/country.php:329
+#: includes/Config/CountryList.php:25
+msgid "Azerbaijan"
+msgstr "Azerbaijan"
+
+#: deprecated/includes/fields/country.php:27
+#: deprecated/includes/fields/country.php:330
+#: includes/Config/CountryList.php:26
+msgid "Bahamas"
+msgstr "Bahamas"
+
+#: deprecated/includes/fields/country.php:28
+#: deprecated/includes/fields/country.php:331
+#: includes/Config/CountryList.php:27
+msgid "Bahrain"
+msgstr "Bahrain"
+
+#: deprecated/includes/fields/country.php:29
+#: deprecated/includes/fields/country.php:332
+#: includes/Config/CountryList.php:28
+msgid "Bangladesh"
+msgstr "Bangladesh"
+
+#: deprecated/includes/fields/country.php:30
+#: deprecated/includes/fields/country.php:333
+#: includes/Config/CountryList.php:29
+msgid "Barbados"
+msgstr "Barbados"
+
+#: deprecated/includes/fields/country.php:31
+#: deprecated/includes/fields/country.php:334
+#: includes/Config/CountryList.php:30
+msgid "Belarus"
+msgstr "Belarus"
+
+#: deprecated/includes/fields/country.php:32
+#: deprecated/includes/fields/country.php:335
+#: includes/Config/CountryList.php:31
+msgid "Belgium"
+msgstr "Belgium"
+
+#: deprecated/includes/fields/country.php:33
+#: deprecated/includes/fields/country.php:336
+#: includes/Config/CountryList.php:32
+msgid "Belize"
+msgstr "Belize"
+
+#: deprecated/includes/fields/country.php:34
+#: deprecated/includes/fields/country.php:337
+#: includes/Config/CountryList.php:33
+msgid "Benin"
+msgstr "Benin"
+
+#: deprecated/includes/fields/country.php:35
+#: deprecated/includes/fields/country.php:338
+#: includes/Config/CountryList.php:34
+msgid "Bermuda"
+msgstr "Bermuda"
+
+#: deprecated/includes/fields/country.php:36
+#: deprecated/includes/fields/country.php:339
+#: includes/Config/CountryList.php:35
+msgid "Bhutan"
+msgstr "Bhutan"
+
+#: deprecated/includes/fields/country.php:37
+#: deprecated/includes/fields/country.php:340
+#: includes/Config/CountryList.php:36
+msgid "Bolivia"
+msgstr "Bolivia"
+
+#: deprecated/includes/fields/country.php:38
+#: deprecated/includes/fields/country.php:341
+#: includes/Config/CountryList.php:37
+msgid "Bosnia And Herzegowina"
+msgstr "보스니아 헤르체코비나"
+
+#: deprecated/includes/fields/country.php:39
+#: deprecated/includes/fields/country.php:342
+#: includes/Config/CountryList.php:38
+msgid "Botswana"
+msgstr "Botswana"
+
+#: deprecated/includes/fields/country.php:40
+#: deprecated/includes/fields/country.php:343
+#: includes/Config/CountryList.php:39
+msgid "Bouvet Island"
+msgstr "Bouvet Island"
+
+#: deprecated/includes/fields/country.php:41
+#: deprecated/includes/fields/country.php:344
+#: includes/Config/CountryList.php:40
+msgid "Brazil"
+msgstr "Brazil"
+
+#: deprecated/includes/fields/country.php:42
+#: deprecated/includes/fields/country.php:345
+#: includes/Config/CountryList.php:41
+msgid "British Indian Ocean Territory"
+msgstr "British Indian Ocean Territory"
+
+#: deprecated/includes/fields/country.php:43
+#: deprecated/includes/fields/country.php:346
+#: includes/Config/CountryList.php:42
+msgid "Brunei Darussalam"
+msgstr "브루나이"
+
+#: deprecated/includes/fields/country.php:44
+#: deprecated/includes/fields/country.php:347
+#: includes/Config/CountryList.php:43
+msgid "Bulgaria"
+msgstr "Bulgaria"
+
+#: deprecated/includes/fields/country.php:45
+#: deprecated/includes/fields/country.php:348
+#: includes/Config/CountryList.php:44
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+#: deprecated/includes/fields/country.php:46
+#: deprecated/includes/fields/country.php:349
+#: includes/Config/CountryList.php:45
+msgid "Burundi"
+msgstr "Burundi"
+
+#: deprecated/includes/fields/country.php:47
+#: deprecated/includes/fields/country.php:350
+#: includes/Config/CountryList.php:46
+msgid "Cambodia"
+msgstr "Cambodia"
+
+#: deprecated/includes/fields/country.php:48
+#: deprecated/includes/fields/country.php:351
+#: includes/Config/CountryList.php:47
+msgid "Cameroon"
+msgstr "Cameroon"
+
+#: deprecated/includes/fields/country.php:49
+#: deprecated/includes/fields/country.php:352
+#: includes/Config/CountryList.php:48
+msgid "Canada"
+msgstr "Canada"
+
+#: deprecated/includes/fields/country.php:50
+#: deprecated/includes/fields/country.php:353
+#: includes/Config/CountryList.php:49
+msgid "Cape Verde"
+msgstr "Cape Verde"
+
+#: deprecated/includes/fields/country.php:51
+#: deprecated/includes/fields/country.php:354
+#: includes/Config/CountryList.php:50
+msgid "Cayman Islands"
+msgstr "Cayman Islands"
+
+#: deprecated/includes/fields/country.php:52
+#: deprecated/includes/fields/country.php:355
+#: includes/Config/CountryList.php:51
+msgid "Central African Republic"
+msgstr "Central African Republic"
+
+#: deprecated/includes/fields/country.php:53
+#: deprecated/includes/fields/country.php:356
+#: includes/Config/CountryList.php:52
+msgid "Chad"
+msgstr "Chad"
+
+#: deprecated/includes/fields/country.php:54
+#: deprecated/includes/fields/country.php:357
+#: includes/Config/CountryList.php:53
+msgid "Chile"
+msgstr "Chile"
+
+#: deprecated/includes/fields/country.php:55
+#: deprecated/includes/fields/country.php:358
+#: includes/Config/CountryList.php:54
+msgid "China"
+msgstr "China"
+
+#: deprecated/includes/fields/country.php:56
+#: deprecated/includes/fields/country.php:359
+#: includes/Config/CountryList.php:55
+msgid "Christmas Island"
+msgstr "Christmas Island"
+
+#: deprecated/includes/fields/country.php:57
+#: deprecated/includes/fields/country.php:360
+#: includes/Config/CountryList.php:56
+msgid "Cocos (Keeling) Islands"
+msgstr "Cocos (Keeling) Islands"
+
+#: deprecated/includes/fields/country.php:58
+#: deprecated/includes/fields/country.php:361
+#: includes/Config/CountryList.php:57
+msgid "Colombia"
+msgstr "Colombia"
+
+#: deprecated/includes/fields/country.php:59
+#: deprecated/includes/fields/country.php:362
+#: includes/Config/CountryList.php:58
+msgid "Comoros"
+msgstr "Comoros"
+
+#: deprecated/includes/fields/country.php:60
+#: deprecated/includes/fields/country.php:363
+#: includes/Config/CountryList.php:59
+msgid "Congo"
+msgstr "콩고"
+
+#: deprecated/includes/fields/country.php:61
+#: deprecated/includes/fields/country.php:364
+#: includes/Config/CountryList.php:60
+msgid "Congo, The Democratic Republic Of The"
+msgstr "콩고 민주 공화국"
+
+#: deprecated/includes/fields/country.php:62
+#: deprecated/includes/fields/country.php:365
+#: includes/Config/CountryList.php:61
+msgid "Cook Islands"
+msgstr "Cook Islands"
+
+#: deprecated/includes/fields/country.php:63
+#: deprecated/includes/fields/country.php:366
+#: includes/Config/CountryList.php:62
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#: deprecated/includes/fields/country.php:64
+#: deprecated/includes/fields/country.php:367
+#: includes/Config/CountryList.php:63
+msgid "Cote D'Ivoire"
+msgstr "코트디부아르"
+
+#: deprecated/includes/fields/country.php:65
+#: deprecated/includes/fields/country.php:368
+#: includes/Config/CountryList.php:64
+msgid "Croatia (Local Name: Hrvatska)"
+msgstr "크로아티아(현지 이름: 흐르바트스카)"
+
+#: deprecated/includes/fields/country.php:66
+#: deprecated/includes/fields/country.php:369
+#: includes/Config/CountryList.php:65
+msgid "Cuba"
+msgstr "Cuba"
+
+#: deprecated/includes/fields/country.php:67
+#: deprecated/includes/fields/country.php:370
+#: includes/Config/CountryList.php:66
+msgid "Cyprus"
+msgstr "Cyprus"
+
+#: deprecated/includes/fields/country.php:68
+#: deprecated/includes/fields/country.php:371
+#: includes/Config/CountryList.php:67
+msgid "Czech Republic"
+msgstr "Czech Republic"
+
+#: deprecated/includes/fields/country.php:69
+#: deprecated/includes/fields/country.php:372
+#: includes/Config/CountryList.php:68
+msgid "Denmark"
+msgstr "Denmark"
+
+#: deprecated/includes/fields/country.php:70
+#: deprecated/includes/fields/country.php:373
+#: includes/Config/CountryList.php:69
+msgid "Djibouti"
+msgstr "Djibouti"
+
+#: deprecated/includes/fields/country.php:71
+#: deprecated/includes/fields/country.php:374
+#: includes/Config/CountryList.php:70
+msgid "Dominica"
+msgstr "Dominica"
+
+#: deprecated/includes/fields/country.php:72
+#: deprecated/includes/fields/country.php:375
+#: includes/Config/CountryList.php:71
+msgid "Dominican Republic"
+msgstr "Dominican Republic"
+
+#: deprecated/includes/fields/country.php:73
+#: deprecated/includes/fields/country.php:376
+#: includes/Config/CountryList.php:72
+msgid "Timor-Leste (East Timor)"
+msgstr "티모르-레스테(동티모르)"
+
+#: deprecated/includes/fields/country.php:74
+#: deprecated/includes/fields/country.php:377
+#: includes/Config/CountryList.php:73
+msgid "Ecuador"
+msgstr "Ecuador"
+
+#: deprecated/includes/fields/country.php:75
+#: deprecated/includes/fields/country.php:378
+#: includes/Config/CountryList.php:74
+msgid "Egypt"
+msgstr "Egypt"
+
+#: deprecated/includes/fields/country.php:76
+#: deprecated/includes/fields/country.php:379
+#: includes/Config/CountryList.php:75
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#: deprecated/includes/fields/country.php:77
+#: deprecated/includes/fields/country.php:380
+#: includes/Config/CountryList.php:76
+msgid "Equatorial Guinea"
+msgstr "Equatorial Guinea"
+
+#: deprecated/includes/fields/country.php:78
+#: deprecated/includes/fields/country.php:381
+#: includes/Config/CountryList.php:77
+msgid "Eritrea"
+msgstr "Eritrea"
+
+#: deprecated/includes/fields/country.php:79
+#: deprecated/includes/fields/country.php:382
+#: includes/Config/CountryList.php:78
+msgid "Estonia"
+msgstr "Estonia"
+
+#: deprecated/includes/fields/country.php:80
+#: deprecated/includes/fields/country.php:383
+#: includes/Config/CountryList.php:79
+msgid "Ethiopia"
+msgstr "Ethiopia"
+
+#: deprecated/includes/fields/country.php:81
+#: deprecated/includes/fields/country.php:384
+#: includes/Config/CountryList.php:80
+msgid "Falkland Islands (Malvinas)"
+msgstr "포클랜드 제도(말비나스)"
+
+#: deprecated/includes/fields/country.php:82
+#: deprecated/includes/fields/country.php:385
+#: includes/Config/CountryList.php:81
+msgid "Faroe Islands"
+msgstr "Faroe Islands"
+
+#: deprecated/includes/fields/country.php:83
+#: deprecated/includes/fields/country.php:386
+#: includes/Config/CountryList.php:82
+msgid "Fiji"
+msgstr "Fiji"
+
+#: deprecated/includes/fields/country.php:84
+#: deprecated/includes/fields/country.php:387
+#: includes/Config/CountryList.php:83
+msgid "Finland"
+msgstr "Finland"
+
+#: deprecated/includes/fields/country.php:85
+#: deprecated/includes/fields/country.php:388
+#: includes/Config/CountryList.php:84
+msgid "France"
+msgstr "France"
+
+#: deprecated/includes/fields/country.php:86
+#: deprecated/includes/fields/country.php:389
+#: includes/Config/CountryList.php:85
+msgid "France, Metropolitan"
+msgstr "프랑스, 메트로폴리탄"
+
+#: deprecated/includes/fields/country.php:87
+#: deprecated/includes/fields/country.php:390
+#: includes/Config/CountryList.php:86
+msgid "French Guiana"
+msgstr "French Guiana"
+
+#: deprecated/includes/fields/country.php:88
+#: deprecated/includes/fields/country.php:391
+#: includes/Config/CountryList.php:87
+msgid "French Polynesia"
+msgstr "French Polynesia"
+
+#: deprecated/includes/fields/country.php:89
+#: deprecated/includes/fields/country.php:392
+#: includes/Config/CountryList.php:88
+msgid "French Southern Territories"
+msgstr "French Southern Territories"
+
+#: deprecated/includes/fields/country.php:90
+#: deprecated/includes/fields/country.php:393
+#: includes/Config/CountryList.php:89
+msgid "Gabon"
+msgstr "Gabon"
+
+#: deprecated/includes/fields/country.php:91
+#: deprecated/includes/fields/country.php:394
+#: includes/Config/CountryList.php:90
+msgid "Gambia"
+msgstr "Gambia"
+
+#: deprecated/includes/fields/country.php:92
+#: deprecated/includes/fields/country.php:395
+#: includes/Config/CountryList.php:91
+msgid "Georgia"
+msgstr "Georgia"
+
+#: deprecated/includes/fields/country.php:93
+#: deprecated/includes/fields/country.php:396
+#: includes/Config/CountryList.php:92
+msgid "Germany"
+msgstr "Germany"
+
+#: deprecated/includes/fields/country.php:94
+#: deprecated/includes/fields/country.php:397
+#: includes/Config/CountryList.php:93
+msgid "Ghana"
+msgstr "Ghana"
+
+#: deprecated/includes/fields/country.php:95
+#: deprecated/includes/fields/country.php:398
+#: includes/Config/CountryList.php:94
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#: deprecated/includes/fields/country.php:96
+#: deprecated/includes/fields/country.php:399
+#: includes/Config/CountryList.php:95
+msgid "Greece"
+msgstr "Greece"
+
+#: deprecated/includes/fields/country.php:97
+#: deprecated/includes/fields/country.php:400
+#: includes/Config/CountryList.php:96
+msgid "Greenland"
+msgstr "Greenland"
+
+#: deprecated/includes/fields/country.php:98
+#: deprecated/includes/fields/country.php:401
+#: includes/Config/CountryList.php:97
+msgid "Grenada"
+msgstr "Grenada"
+
+#: deprecated/includes/fields/country.php:99
+#: deprecated/includes/fields/country.php:402
+#: includes/Config/CountryList.php:98
+msgid "Guadeloupe"
+msgstr "Guadeloupe"
+
+#: deprecated/includes/fields/country.php:100
+#: deprecated/includes/fields/country.php:403
+#: includes/Config/CountryList.php:99
+msgid "Guam"
+msgstr "Guam"
+
+#: deprecated/includes/fields/country.php:101
+#: deprecated/includes/fields/country.php:404
+#: includes/Config/CountryList.php:100
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: deprecated/includes/fields/country.php:102
+#: deprecated/includes/fields/country.php:405
+#: includes/Config/CountryList.php:101
+msgid "Guinea"
+msgstr "Guinea"
+
+#: deprecated/includes/fields/country.php:103
+#: deprecated/includes/fields/country.php:406
+#: includes/Config/CountryList.php:102
+msgid "Guinea-Bissau"
+msgstr "Guinea-Bissau"
+
+#: deprecated/includes/fields/country.php:104
+#: deprecated/includes/fields/country.php:407
+#: includes/Config/CountryList.php:103
+msgid "Guyana"
+msgstr "Guyana"
+
+#: deprecated/includes/fields/country.php:105
+#: deprecated/includes/fields/country.php:408
+#: includes/Config/CountryList.php:104
+msgid "Haiti"
+msgstr "Haiti"
+
+#: deprecated/includes/fields/country.php:106
+#: deprecated/includes/fields/country.php:409
+#: includes/Config/CountryList.php:105
+msgid "Heard And Mc Donald Islands"
+msgstr "허드 맥도널드 제도"
+
+#: deprecated/includes/fields/country.php:107
+#: deprecated/includes/fields/country.php:410
+#: includes/Config/CountryList.php:106
+msgid "Holy See (Vatican City State)"
+msgstr "바티칸 시국"
+
+#: deprecated/includes/fields/country.php:108
+#: deprecated/includes/fields/country.php:411
+#: includes/Config/CountryList.php:107
+msgid "Honduras"
+msgstr "Honduras"
+
+#: deprecated/includes/fields/country.php:109
+#: deprecated/includes/fields/country.php:412
+#: includes/Config/CountryList.php:108
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#: deprecated/includes/fields/country.php:110
+#: deprecated/includes/fields/country.php:413
+#: includes/Config/CountryList.php:109
+msgid "Hungary"
+msgstr "Hungary"
+
+#: deprecated/includes/fields/country.php:111
+#: deprecated/includes/fields/country.php:414
+#: includes/Config/CountryList.php:110
+msgid "Iceland"
+msgstr "Iceland"
+
+#: deprecated/includes/fields/country.php:112
+#: deprecated/includes/fields/country.php:415
+#: includes/Config/CountryList.php:111
+msgid "India"
+msgstr "India"
+
+#: deprecated/includes/fields/country.php:113
+#: deprecated/includes/fields/country.php:416
+#: includes/Config/CountryList.php:112
+msgid "Indonesia"
+msgstr "Indonesia"
+
+#: deprecated/includes/fields/country.php:114
+#: deprecated/includes/fields/country.php:417
+#: includes/Config/CountryList.php:113
+msgid "Iran (Islamic Republic Of)"
+msgstr "이란(이슬람 공화국)"
+
+#: deprecated/includes/fields/country.php:115
+#: deprecated/includes/fields/country.php:418
+#: includes/Config/CountryList.php:114
+msgid "Iraq"
+msgstr "Iraq"
+
+#: deprecated/includes/fields/country.php:116
+#: deprecated/includes/fields/country.php:419
+#: includes/Config/CountryList.php:115
+msgid "Ireland"
+msgstr "아일랜드"
+
+#: deprecated/includes/fields/country.php:117
+#: deprecated/includes/fields/country.php:420
+#: includes/Config/CountryList.php:116
+msgid "Israel"
+msgstr "Israel"
+
+#: deprecated/includes/fields/country.php:118
+#: deprecated/includes/fields/country.php:421
+#: includes/Config/CountryList.php:117
+msgid "Italy"
+msgstr "Italy"
+
+#: deprecated/includes/fields/country.php:119
+#: deprecated/includes/fields/country.php:422
+#: includes/Config/CountryList.php:118
+msgid "Jamaica"
+msgstr "Jamaica"
+
+#: deprecated/includes/fields/country.php:120
+#: deprecated/includes/fields/country.php:423
+#: includes/Config/CountryList.php:119
+msgid "Japan"
+msgstr "Japan"
+
+#: deprecated/includes/fields/country.php:121
+#: deprecated/includes/fields/country.php:424
+#: includes/Config/CountryList.php:120
+msgid "Jordan"
+msgstr "Jordan"
+
+#: deprecated/includes/fields/country.php:122
+#: deprecated/includes/fields/country.php:425
+#: includes/Config/CountryList.php:121
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
+
+#: deprecated/includes/fields/country.php:123
+#: deprecated/includes/fields/country.php:426
+#: includes/Config/CountryList.php:122
+msgid "Kenya"
+msgstr "Kenya"
+
+#: deprecated/includes/fields/country.php:124
+#: deprecated/includes/fields/country.php:427
+#: includes/Config/CountryList.php:123
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#: deprecated/includes/fields/country.php:125
+#: deprecated/includes/fields/country.php:428
+#: includes/Config/CountryList.php:124
+msgid "Korea, Democratic People's Republic Of"
+msgstr "조선민주주의 인민공화국"
+
+#: deprecated/includes/fields/country.php:126
+#: deprecated/includes/fields/country.php:429
+#: includes/Config/CountryList.php:125
+msgid "Korea, Republic Of"
+msgstr "대한민국"
+
+#: deprecated/includes/fields/country.php:127
+#: deprecated/includes/fields/country.php:430
+#: includes/Config/CountryList.php:126
+msgid "Kuwait"
+msgstr "Kuwait"
+
+#: deprecated/includes/fields/country.php:128
+#: deprecated/includes/fields/country.php:431
+#: includes/Config/CountryList.php:127
+msgid "Kyrgyzstan"
+msgstr "Kyrgyzstan"
+
+#: deprecated/includes/fields/country.php:129
+#: deprecated/includes/fields/country.php:432
+#: includes/Config/CountryList.php:128
+msgid "Lao People's Democratic Republic"
+msgstr "라오스 민주공화국"
+
+#: deprecated/includes/fields/country.php:130
+#: deprecated/includes/fields/country.php:433
+#: includes/Config/CountryList.php:129
+msgid "Latvia"
+msgstr "Latvia"
+
+#: deprecated/includes/fields/country.php:131
+#: deprecated/includes/fields/country.php:434
+#: includes/Config/CountryList.php:130
+msgid "Lebanon"
+msgstr "Lebanon"
+
+#: deprecated/includes/fields/country.php:132
+#: deprecated/includes/fields/country.php:435
+#: includes/Config/CountryList.php:131
+msgid "Lesotho"
+msgstr "Lesotho"
+
+#: deprecated/includes/fields/country.php:133
+#: deprecated/includes/fields/country.php:436
+#: includes/Config/CountryList.php:132
+msgid "Liberia"
+msgstr "Liberia"
+
+#: deprecated/includes/fields/country.php:134
+#: deprecated/includes/fields/country.php:437
+#: includes/Config/CountryList.php:133
+msgid "Libyan Arab Jamahiriya"
+msgstr "리비아"
+
+#: deprecated/includes/fields/country.php:135
+#: deprecated/includes/fields/country.php:438
+#: includes/Config/CountryList.php:134
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#: deprecated/includes/fields/country.php:136
+#: deprecated/includes/fields/country.php:439
+#: includes/Config/CountryList.php:135
+msgid "Lithuania"
+msgstr "Lithuania"
+
+#: deprecated/includes/fields/country.php:137
+#: deprecated/includes/fields/country.php:440
+#: includes/Config/CountryList.php:136
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+#: deprecated/includes/fields/country.php:138
+#: deprecated/includes/fields/country.php:441
+#: includes/Config/CountryList.php:137
+msgid "Macau"
+msgstr "마카오"
+
+#: deprecated/includes/fields/country.php:139
+#: deprecated/includes/fields/country.php:442
+#: includes/Config/CountryList.php:138
+msgid "Macedonia, Former Yugoslav Republic Of"
+msgstr "구 유고슬라비아 마케도니아 공화국"
+
+#: deprecated/includes/fields/country.php:140
+#: deprecated/includes/fields/country.php:443
+#: includes/Config/CountryList.php:139
+msgid "Madagascar"
+msgstr "Madagascar"
+
+#: deprecated/includes/fields/country.php:141
+#: deprecated/includes/fields/country.php:444
+#: includes/Config/CountryList.php:140
+msgid "Malawi"
+msgstr "Malawi"
+
+#: deprecated/includes/fields/country.php:142
+#: deprecated/includes/fields/country.php:445
+#: includes/Config/CountryList.php:141
+msgid "Malaysia"
+msgstr "Malaysia"
+
+#: deprecated/includes/fields/country.php:143
+#: deprecated/includes/fields/country.php:446
+#: includes/Config/CountryList.php:142
+msgid "Maldives"
+msgstr "Maldives"
+
+#: deprecated/includes/fields/country.php:144
+#: deprecated/includes/fields/country.php:447
+#: includes/Config/CountryList.php:143
+msgid "Mali"
+msgstr "Mali"
+
+#: deprecated/includes/fields/country.php:145
+#: deprecated/includes/fields/country.php:448
+#: includes/Config/CountryList.php:144
+msgid "Malta"
+msgstr "Malta"
+
+#: deprecated/includes/fields/country.php:146
+#: deprecated/includes/fields/country.php:449
+#: includes/Config/CountryList.php:145
+msgid "Marshall Islands"
+msgstr "Marshall Islands"
+
+#: deprecated/includes/fields/country.php:147
+#: deprecated/includes/fields/country.php:450
+#: includes/Config/CountryList.php:146
+msgid "Martinique"
+msgstr "Martinique"
+
+#: deprecated/includes/fields/country.php:148
+#: deprecated/includes/fields/country.php:451
+#: includes/Config/CountryList.php:147
+msgid "Mauritania"
+msgstr "Mauritania"
+
+#: deprecated/includes/fields/country.php:149
+#: deprecated/includes/fields/country.php:452
+#: includes/Config/CountryList.php:148
+msgid "Mauritius"
+msgstr "Mauritius"
+
+#: deprecated/includes/fields/country.php:150
+#: deprecated/includes/fields/country.php:453
+#: includes/Config/CountryList.php:149
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#: deprecated/includes/fields/country.php:151
+#: deprecated/includes/fields/country.php:454
+#: includes/Config/CountryList.php:150
+msgid "Mexico"
+msgstr "Mexico"
+
+#: deprecated/includes/fields/country.php:152
+#: deprecated/includes/fields/country.php:455
+#: includes/Config/CountryList.php:151
+msgid "Micronesia, Federated States Of"
+msgstr "미크로네시아연방 공화국"
+
+#: deprecated/includes/fields/country.php:153
+#: deprecated/includes/fields/country.php:456
+#: includes/Config/CountryList.php:152
+msgid "Moldova, Republic Of"
+msgstr "몰도바 공화국"
+
+#: deprecated/includes/fields/country.php:154
+#: deprecated/includes/fields/country.php:457
+#: includes/Config/CountryList.php:153
+msgid "Monaco"
+msgstr "Monaco"
+
+#: deprecated/includes/fields/country.php:155
+#: deprecated/includes/fields/country.php:458
+#: includes/Config/CountryList.php:154
+msgid "Mongolia"
+msgstr "Mongolia"
+
+#: deprecated/includes/fields/country.php:156
+#: deprecated/includes/fields/country.php:459
+#: includes/Config/CountryList.php:155
+msgid "Montenegro"
+msgstr "Montenegro"
+
+#: deprecated/includes/fields/country.php:157
+#: deprecated/includes/fields/country.php:460
+#: includes/Config/CountryList.php:156
+msgid "Montserrat"
+msgstr "Montserrat"
+
+#: deprecated/includes/fields/country.php:158
+#: deprecated/includes/fields/country.php:461
+#: includes/Config/CountryList.php:157
+msgid "Morocco"
+msgstr "Morocco"
+
+#: deprecated/includes/fields/country.php:159
+#: deprecated/includes/fields/country.php:462
+#: includes/Config/CountryList.php:158
+msgid "Mozambique"
+msgstr "Mozambique"
+
+#: deprecated/includes/fields/country.php:160
+#: deprecated/includes/fields/country.php:463
+#: includes/Config/CountryList.php:159
+msgid "Myanmar"
+msgstr "Myanmar"
+
+#: deprecated/includes/fields/country.php:161
+#: deprecated/includes/fields/country.php:464
+#: includes/Config/CountryList.php:160
+msgid "Namibia"
+msgstr "Namibia"
+
+#: deprecated/includes/fields/country.php:162
+#: deprecated/includes/fields/country.php:465
+#: includes/Config/CountryList.php:161
+msgid "Nauru"
+msgstr "Nauru"
+
+#: deprecated/includes/fields/country.php:163
+#: deprecated/includes/fields/country.php:466
+#: includes/Config/CountryList.php:162
+msgid "Nepal"
+msgstr "Nepal"
+
+#: deprecated/includes/fields/country.php:164
+#: deprecated/includes/fields/country.php:467
+#: includes/Config/CountryList.php:163
+msgid "Netherlands"
+msgstr "Netherlands"
+
+#: deprecated/includes/fields/country.php:165
+#: deprecated/includes/fields/country.php:468
+#: includes/Config/CountryList.php:164
+msgid "Netherlands Antilles"
+msgstr "네덜란드령 앤틸리스"
+
+#: deprecated/includes/fields/country.php:166
+#: deprecated/includes/fields/country.php:469
+#: includes/Config/CountryList.php:165
+msgid "New Caledonia"
+msgstr "New Caledonia"
+
+#: deprecated/includes/fields/country.php:167
+#: deprecated/includes/fields/country.php:470
+#: includes/Config/CountryList.php:166
+msgid "New Zealand"
+msgstr "New Zealand"
+
+#: deprecated/includes/fields/country.php:168
+#: deprecated/includes/fields/country.php:471
+#: includes/Config/CountryList.php:167
+msgid "Nicaragua"
+msgstr "Nicaragua"
+
+#: deprecated/includes/fields/country.php:169
+#: deprecated/includes/fields/country.php:472
+#: includes/Config/CountryList.php:168
+msgid "Niger"
+msgstr "Niger"
+
+#: deprecated/includes/fields/country.php:170
+#: deprecated/includes/fields/country.php:473
+#: includes/Config/CountryList.php:169
+msgid "Nigeria"
+msgstr "Nigeria"
+
+#: deprecated/includes/fields/country.php:171
+#: deprecated/includes/fields/country.php:474
+#: includes/Config/CountryList.php:170
+msgid "Niue"
+msgstr "Niue"
+
+#: deprecated/includes/fields/country.php:172
+#: deprecated/includes/fields/country.php:475
+#: includes/Config/CountryList.php:171
+msgid "Norfolk Island"
+msgstr "Norfolk Island"
+
+#: deprecated/includes/fields/country.php:173
+#: deprecated/includes/fields/country.php:476
+#: includes/Config/CountryList.php:172
+msgid "Northern Mariana Islands"
+msgstr "Northern Mariana Islands"
+
+#: deprecated/includes/fields/country.php:174
+#: deprecated/includes/fields/country.php:477
+#: includes/Config/CountryList.php:173
+msgid "Norway"
+msgstr "Norway"
+
+#: deprecated/includes/fields/country.php:175
+#: deprecated/includes/fields/country.php:478
+#: includes/Config/CountryList.php:174
+msgid "Oman"
+msgstr "Oman"
+
+#: deprecated/includes/fields/country.php:176
+#: deprecated/includes/fields/country.php:479
+#: includes/Config/CountryList.php:175
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#: deprecated/includes/fields/country.php:177
+#: deprecated/includes/fields/country.php:480
+#: includes/Config/CountryList.php:176
+msgid "Palau"
+msgstr "팔라우"
+
+#: deprecated/includes/fields/country.php:178
+#: deprecated/includes/fields/country.php:481
+#: includes/Config/CountryList.php:177
+msgid "Panama"
+msgstr "Panama"
+
+#: deprecated/includes/fields/country.php:179
+#: deprecated/includes/fields/country.php:482
+#: includes/Config/CountryList.php:178
+msgid "Papua New Guinea"
+msgstr "Papua New Guinea"
+
+#: deprecated/includes/fields/country.php:180
+#: deprecated/includes/fields/country.php:483
+#: includes/Config/CountryList.php:179
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#: deprecated/includes/fields/country.php:181
+#: deprecated/includes/fields/country.php:484
+#: includes/Config/CountryList.php:180
+msgid "Peru"
+msgstr "Peru"
+
+#: deprecated/includes/fields/country.php:182
+#: deprecated/includes/fields/country.php:485
+#: includes/Config/CountryList.php:181
+msgid "Philippines"
+msgstr "Philippines"
+
+#: deprecated/includes/fields/country.php:183
+#: deprecated/includes/fields/country.php:486
+#: includes/Config/CountryList.php:182
+msgid "Pitcairn"
+msgstr "Pitcairn"
+
+#: deprecated/includes/fields/country.php:184
+#: deprecated/includes/fields/country.php:487
+#: includes/Config/CountryList.php:183
+msgid "Poland"
+msgstr "Poland"
+
+#: deprecated/includes/fields/country.php:185
+#: deprecated/includes/fields/country.php:488
+#: includes/Config/CountryList.php:184
+msgid "Portugal"
+msgstr "Portugal"
+
+#: deprecated/includes/fields/country.php:186
+#: deprecated/includes/fields/country.php:489
+#: includes/Config/CountryList.php:185
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
+
+#: deprecated/includes/fields/country.php:187
+#: deprecated/includes/fields/country.php:490
+#: includes/Config/CountryList.php:186
+msgid "Qatar"
+msgstr "Qatar"
+
+#: deprecated/includes/fields/country.php:188
+#: deprecated/includes/fields/country.php:491
+#: includes/Config/CountryList.php:187
+msgid "Reunion"
+msgstr "Reunion"
+
+#: deprecated/includes/fields/country.php:189
+#: deprecated/includes/fields/country.php:492
+#: includes/Config/CountryList.php:188
+msgid "Romania"
+msgstr "Romania"
+
+#: deprecated/includes/fields/country.php:190
+#: deprecated/includes/fields/country.php:493
+#: includes/Config/CountryList.php:189
+msgid "Russian Federation"
+msgstr "러시아 연방"
+
+#: deprecated/includes/fields/country.php:191
+#: deprecated/includes/fields/country.php:494
+#: includes/Config/CountryList.php:190
+msgid "Rwanda"
+msgstr "Rwanda"
+
+#: deprecated/includes/fields/country.php:192
+#: deprecated/includes/fields/country.php:495
+#: includes/Config/CountryList.php:191
+msgid "Saint Kitts And Nevis"
+msgstr "Saint Kitts and Nevis"
+
+#: deprecated/includes/fields/country.php:193
+#: deprecated/includes/fields/country.php:496
+#: includes/Config/CountryList.php:192
+msgid "Saint Lucia"
+msgstr "Saint Lucia"
+
+#: deprecated/includes/fields/country.php:194
+#: deprecated/includes/fields/country.php:497
+#: includes/Config/CountryList.php:193
+msgid "Saint Vincent And The Grenadines"
+msgstr "Saint Vincent and the Grenadines"
+
+#: deprecated/includes/fields/country.php:195
+#: deprecated/includes/fields/country.php:498
+#: includes/Config/CountryList.php:194
+msgid "Samoa"
+msgstr "사모아"
+
+#: deprecated/includes/fields/country.php:196
+#: deprecated/includes/fields/country.php:499
+#: includes/Config/CountryList.php:195
+msgid "San Marino"
+msgstr "San Marino"
+
+#: deprecated/includes/fields/country.php:197
+#: deprecated/includes/fields/country.php:500
+#: includes/Config/CountryList.php:196
+msgid "Sao Tome And Principe"
+msgstr "상투메 프린시페"
+
+#: deprecated/includes/fields/country.php:198
+#: deprecated/includes/fields/country.php:501
+#: includes/Config/CountryList.php:197
+msgid "Saudi Arabia"
+msgstr "Saudi Arabia"
+
+#: deprecated/includes/fields/country.php:199
+#: deprecated/includes/fields/country.php:502
+#: includes/Config/CountryList.php:198
+msgid "Senegal"
+msgstr "Senegal"
+
+#: deprecated/includes/fields/country.php:200
+#: deprecated/includes/fields/country.php:503
+#: includes/Config/CountryList.php:199
+msgid "Serbia"
+msgstr "Serbia"
+
+#: deprecated/includes/fields/country.php:201
+#: deprecated/includes/fields/country.php:504
+#: includes/Config/CountryList.php:200
+msgid "Seychelles"
+msgstr "Seychelles"
+
+#: deprecated/includes/fields/country.php:202
+#: deprecated/includes/fields/country.php:505
+#: includes/Config/CountryList.php:201
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+#: deprecated/includes/fields/country.php:203
+#: deprecated/includes/fields/country.php:506
+#: includes/Config/CountryList.php:202
+msgid "Singapore"
+msgstr "Singapore"
+
+#: deprecated/includes/fields/country.php:204
+#: deprecated/includes/fields/country.php:507
+#: includes/Config/CountryList.php:203
+msgid "Slovakia (Slovak Republic)"
+msgstr "슬로바키아(슬로바키아 제1공화국)"
+
+#: deprecated/includes/fields/country.php:205
+#: deprecated/includes/fields/country.php:508
+#: includes/Config/CountryList.php:204
+msgid "Slovenia"
+msgstr "Slovenia"
+
+#: deprecated/includes/fields/country.php:206
+#: deprecated/includes/fields/country.php:509
+#: includes/Config/CountryList.php:205
+msgid "Solomon Islands"
+msgstr "Solomon Islands"
+
+#: deprecated/includes/fields/country.php:207
+#: deprecated/includes/fields/country.php:510
+#: includes/Config/CountryList.php:206
+msgid "Somalia"
+msgstr "Somalia"
+
+#: deprecated/includes/fields/country.php:208
+#: deprecated/includes/fields/country.php:511
+#: includes/Config/CountryList.php:207
+msgid "South Africa"
+msgstr "South Africa"
+
+#: deprecated/includes/fields/country.php:209
+#: deprecated/includes/fields/country.php:512
+#: includes/Config/CountryList.php:208
+msgid "South Georgia, South Sandwich Islands"
+msgstr "사우스조지아 사우스샌드위치 제도"
+
+#: deprecated/includes/fields/country.php:210
+#: deprecated/includes/fields/country.php:514
+#: includes/Config/CountryList.php:209
+msgid "Spain"
+msgstr "Spain"
+
+#: deprecated/includes/fields/country.php:211
+#: deprecated/includes/fields/country.php:515
+#: includes/Config/CountryList.php:210
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+#: deprecated/includes/fields/country.php:212
+#: deprecated/includes/fields/country.php:516
+#: includes/Config/CountryList.php:211
+msgid "St. Helena"
+msgstr "세인트헬레나"
+
+#: deprecated/includes/fields/country.php:213
+#: deprecated/includes/fields/country.php:517
+#: includes/Config/CountryList.php:212
+msgid "St. Pierre And Miquelon"
+msgstr "생피에르에 미클롱 섬"
+
+#: deprecated/includes/fields/country.php:214
+#: deprecated/includes/fields/country.php:518
+#: includes/Config/CountryList.php:213
+msgid "Sudan"
+msgstr "Sudan"
+
+#: deprecated/includes/fields/country.php:215
+#: deprecated/includes/fields/country.php:519
+#: includes/Config/CountryList.php:214
+msgid "Suriname"
+msgstr "Suriname"
+
+#: deprecated/includes/fields/country.php:216
+#: deprecated/includes/fields/country.php:520
+#: includes/Config/CountryList.php:215
+msgid "Svalbard And Jan Mayen Islands"
+msgstr "스발바르 얀마웬 제도"
+
+#: deprecated/includes/fields/country.php:217
+#: deprecated/includes/fields/country.php:521
+#: includes/Config/CountryList.php:216
+msgid "Swaziland"
+msgstr "Swaziland"
+
+#: deprecated/includes/fields/country.php:218
+#: deprecated/includes/fields/country.php:522
+#: includes/Config/CountryList.php:217
+msgid "Sweden"
+msgstr "Sweden"
+
+#: deprecated/includes/fields/country.php:219
+#: deprecated/includes/fields/country.php:523
+#: includes/Config/CountryList.php:218
+msgid "Switzerland"
+msgstr "Switzerland"
+
+#: deprecated/includes/fields/country.php:220
+#: deprecated/includes/fields/country.php:524
+#: includes/Config/CountryList.php:219
+msgid "Syrian Arab Republic"
+msgstr "시리아 아랍공화국"
+
+#: deprecated/includes/fields/country.php:221
+#: deprecated/includes/fields/country.php:525
+#: includes/Config/CountryList.php:220
+msgid "Taiwan"
+msgstr "Taiwan"
+
+#: deprecated/includes/fields/country.php:222
+#: deprecated/includes/fields/country.php:526
+#: includes/Config/CountryList.php:221
+msgid "Tajikistan"
+msgstr "Tajikistan"
+
+#: deprecated/includes/fields/country.php:223
+#: deprecated/includes/fields/country.php:527
+#: includes/Config/CountryList.php:222
+msgid "Tanzania, United Republic Of"
+msgstr "탄자니아 합중국"
+
+#: deprecated/includes/fields/country.php:224
+#: deprecated/includes/fields/country.php:528
+#: includes/Config/CountryList.php:223
+msgid "Thailand"
+msgstr "Thailand"
+
+#: deprecated/includes/fields/country.php:225
+#: deprecated/includes/fields/country.php:529
+#: includes/Config/CountryList.php:224
+msgid "Togo"
+msgstr "Togo"
+
+#: deprecated/includes/fields/country.php:226
+#: deprecated/includes/fields/country.php:530
+#: includes/Config/CountryList.php:225
+msgid "Tokelau"
+msgstr "Tokelau"
+
+#: deprecated/includes/fields/country.php:227
+#: deprecated/includes/fields/country.php:531
+#: includes/Config/CountryList.php:226
+msgid "Tonga"
+msgstr "Tonga"
+
+#: deprecated/includes/fields/country.php:228
+#: deprecated/includes/fields/country.php:532
+#: includes/Config/CountryList.php:227
+msgid "Trinidad And Tobago"
+msgstr "Trinidad and Tobago"
+
+#: deprecated/includes/fields/country.php:229
+#: deprecated/includes/fields/country.php:533
+#: includes/Config/CountryList.php:228
+msgid "Tunisia"
+msgstr "Tunisia"
+
+#: deprecated/includes/fields/country.php:230
+#: deprecated/includes/fields/country.php:534
+#: includes/Config/CountryList.php:229
+msgid "Turkey"
+msgstr "Turkey"
+
+#: deprecated/includes/fields/country.php:231
+#: deprecated/includes/fields/country.php:535
+#: includes/Config/CountryList.php:230
+msgid "Turkmenistan"
+msgstr "Turkmenistan"
+
+#: deprecated/includes/fields/country.php:232
+#: deprecated/includes/fields/country.php:536
+#: includes/Config/CountryList.php:231
+msgid "Turks And Caicos Islands"
+msgstr "Turks and Caicos Islands"
+
+#: deprecated/includes/fields/country.php:233
+#: deprecated/includes/fields/country.php:537
+#: includes/Config/CountryList.php:232
+msgid "Tuvalu"
+msgstr "Tuvalu"
+
+#: deprecated/includes/fields/country.php:234
+#: deprecated/includes/fields/country.php:538
+#: includes/Config/CountryList.php:233
+msgid "Uganda"
+msgstr "Uganda"
+
+#: deprecated/includes/fields/country.php:235
+#: deprecated/includes/fields/country.php:539
+#: includes/Config/CountryList.php:234
+msgid "Ukraine"
+msgstr "Ukraine"
+
+#: deprecated/includes/fields/country.php:236
+#: deprecated/includes/fields/country.php:540
+#: includes/Config/CountryList.php:235
+msgid "United Arab Emirates"
+msgstr "United Arab Emirates"
+
+#: deprecated/includes/fields/country.php:237
+#: deprecated/includes/fields/country.php:541
+#: includes/Config/CountryList.php:236
+msgid "United Kingdom"
+msgstr "영국"
+
+#: deprecated/includes/fields/country.php:238
+#: deprecated/includes/fields/country.php:542
+#: includes/Config/CountryList.php:237
+msgid "United States"
+msgstr "미국"
+
+#: deprecated/includes/fields/country.php:239
+#: deprecated/includes/fields/country.php:543
+#: includes/Config/CountryList.php:238
+msgid "United States Minor Outlying Islands"
+msgstr "미국령 군소 제도"
+
+#: deprecated/includes/fields/country.php:240
+#: deprecated/includes/fields/country.php:544
+#: includes/Config/CountryList.php:239
+msgid "Uruguay"
+msgstr "Uruguay"
+
+#: deprecated/includes/fields/country.php:241
+#: deprecated/includes/fields/country.php:545
+#: includes/Config/CountryList.php:240
+msgid "Uzbekistan"
+msgstr "Uzbekistan"
+
+#: deprecated/includes/fields/country.php:242
+#: deprecated/includes/fields/country.php:546
+#: includes/Config/CountryList.php:241
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#: deprecated/includes/fields/country.php:243
+#: deprecated/includes/fields/country.php:547
+#: includes/Config/CountryList.php:242
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#: deprecated/includes/fields/country.php:244
+#: deprecated/includes/fields/country.php:548
+#: includes/Config/CountryList.php:243
+msgid "Viet Nam"
+msgstr "베트남"
+
+#: deprecated/includes/fields/country.php:245
+#: deprecated/includes/fields/country.php:549
+#: includes/Config/CountryList.php:244
+msgid "Virgin Islands (British)"
+msgstr "버진 아일랜드(영국령)"
+
+#: deprecated/includes/fields/country.php:246
+#: deprecated/includes/fields/country.php:550
+#: includes/Config/CountryList.php:245
+msgid "Virgin Islands (U.S.)"
+msgstr "버진 제도(미국령)"
+
+#: deprecated/includes/fields/country.php:247
+#: deprecated/includes/fields/country.php:551
+#: includes/Config/CountryList.php:246
+msgid "Wallis And Futuna Islands"
+msgstr "월리스푸투나"
+
+#: deprecated/includes/fields/country.php:248
+#: deprecated/includes/fields/country.php:552
+#: includes/Config/CountryList.php:247
+msgid "Western Sahara"
+msgstr "Western Sahara"
+
+#: deprecated/includes/fields/country.php:249
+#: deprecated/includes/fields/country.php:553
+#: includes/Config/CountryList.php:248
+msgid "Yemen"
+msgstr "Yemen"
+
+#: deprecated/includes/fields/country.php:250
+#: deprecated/includes/fields/country.php:554
+#: includes/Config/CountryList.php:249
+msgid "Yugoslavia"
+msgstr "유고슬라비아"
+
+#: deprecated/includes/fields/country.php:251
+#: deprecated/includes/fields/country.php:555
+#: includes/Config/CountryList.php:250
+msgid "Zambia"
+msgstr "Zambia"
+
+#: deprecated/includes/fields/country.php:252
+#: deprecated/includes/fields/country.php:556
+#: includes/Config/CountryList.php:251
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+#: deprecated/includes/fields/country.php:260
+#: includes/Fields/ListCountry.php:22
+msgid "Country"
+msgstr "국가"
+
+#: deprecated/includes/fields/country.php:270
+msgid "Default Country"
+msgstr "기본 국가"
+
+#: deprecated/includes/fields/country.php:277
+#: includes/Config/FieldSettings.php:721
+msgid "Use a custom first option"
+msgstr "사용자 지정 첫 번째 옵션 사용"
+
+#: deprecated/includes/fields/country.php:283
+#: includes/Config/FieldSettings.php:734
+msgid "Custom first option"
+msgstr "사용자 지정 첫 번째 옵션"
+
+#: deprecated/includes/fields/country.php:513
+msgid "South Sudan"
+msgstr "South Sudan"
+
+#: deprecated/includes/fields/credit-card.php:14
+#: includes/Fields/CreditCard.php:26
+msgid "Credit Card"
+msgstr "신용 카드"
+
+#: deprecated/includes/fields/credit-card.php:35
+msgid "Card Number Label"
+msgstr "카드 번호 레이블"
+
+#: deprecated/includes/fields/credit-card.php:36
+#: deprecated/includes/fields/credit-card.php:145
+msgid "Card Number"
+msgstr "카드 번호"
+
+#: deprecated/includes/fields/credit-card.php:43
+msgid "Card Number Description"
+msgstr "카드 번호 설명"
+
+#: deprecated/includes/fields/credit-card.php:44
+#: deprecated/includes/fields/credit-card.php:146
+msgid "The (typically) 16 digits on the front of your credit card."
+msgstr "(일반적으로) 신용 카드 앞면의 16자리입니다."
+
+#: deprecated/includes/fields/credit-card.php:51
+msgid "Card CVC Label"
+msgstr "카드 CVC 레이블"
+
+#: deprecated/includes/fields/credit-card.php:52
+#: deprecated/includes/fields/credit-card.php:148
+msgid "CVC"
+msgstr "CVC"
+
+#: deprecated/includes/fields/credit-card.php:59
+msgid "Card CVC Description"
+msgstr "카드 CVC 설명"
+
+#: deprecated/includes/fields/credit-card.php:60
+#: deprecated/includes/fields/credit-card.php:149
+msgid "The 3 digit (back) or 4 digit (front) value on your card."
+msgstr "카드의 3자리(뒷면) 또는 4자리(앞면) 값입니다."
+
+#: deprecated/includes/fields/credit-card.php:67
+msgid "Card Name Label"
+msgstr "카드 이름 레이블"
+
+#: deprecated/includes/fields/credit-card.php:68
+#: deprecated/includes/fields/credit-card.php:151
+msgid "Name on the card"
+msgstr "카드에 표시된 이름"
+
+#: deprecated/includes/fields/credit-card.php:75
+msgid "Card Name Description"
+msgstr "카드 이름 설명"
+
+#: deprecated/includes/fields/credit-card.php:76
+#: deprecated/includes/fields/credit-card.php:152
+msgid "The name printed on the front of your credit card."
+msgstr "신용 카드 앞면에 인쇄된 이름입니다."
+
+#: deprecated/includes/fields/credit-card.php:83
+msgid "Card Expiry Month Label"
+msgstr "카드 만료 월 레이블"
+
+#: deprecated/includes/fields/credit-card.php:84
+#: deprecated/includes/fields/credit-card.php:154
+msgid "Expiration month (MM)"
+msgstr "만료 월(MM)"
+
+#: deprecated/includes/fields/credit-card.php:91
+msgid "Card Expiry Month Description"
+msgstr "카드 만료 월 설명"
+
+#: deprecated/includes/fields/credit-card.php:92
+#: deprecated/includes/fields/credit-card.php:155
+msgid "The month your credit card expires, typically on the front of the card."
+msgstr "신용 카드가 만료되는 달, 일반적으로 카드 앞면에 있습니다."
+
+#: deprecated/includes/fields/credit-card.php:99
+msgid "Card Expiry Year Label"
+msgstr "카드 만료 연도 레이블"
+
+#: deprecated/includes/fields/credit-card.php:100
+#: deprecated/includes/fields/credit-card.php:157
+msgid "Expiration year (YYYY)"
+msgstr "만료 연도(YYYY)"
+
+#: deprecated/includes/fields/credit-card.php:107
+msgid "Card Expiry Year Description"
+msgstr "카드 만료 연도 설명"
+
+#: deprecated/includes/fields/credit-card.php:108
+#: deprecated/includes/fields/credit-card.php:158
+msgid "The year your credit card expires, typically on the front of the card."
+msgstr "신용 카드가 만료되는 연도, 일반적으로 카드 앞면에 있습니다."
+
+#: deprecated/includes/fields/desc.php:4
+msgid "Text"
+msgstr "Text"
+
+#: deprecated/includes/fields/desc.php:18
+msgid "Text Element"
+msgstr "텍스트 요소"
+
+#: deprecated/includes/fields/hidden.php:4
+#: includes/Templates/admin-menu-forms.html.php:76
+#: includes/Templates/admin-menu-forms.html.php:104
+#: includes/Templates/admin-menu-forms.html.php:132
+#: includes/Templates/admin-menu-forms.html.php:160
+#: includes/Templates/admin-menu-forms.html.php:188
+msgid "Hidden Field"
+msgstr "숨김 필드"
+
+#: deprecated/includes/fields/hidden.php:56
+#: deprecated/includes/fields/number.php:73
+#: deprecated/includes/fields/textbox.php:126
+msgid "User ID (If logged in)"
+msgstr "사용자 ID(로그인한 경우)"
+
+#: deprecated/includes/fields/hidden.php:57
+#: deprecated/includes/fields/textbox.php:127
+msgid "User Firstname (If logged in)"
+msgstr "사용자 이름(로그인한 경우)"
+
+#: deprecated/includes/fields/hidden.php:58
+#: deprecated/includes/fields/textbox.php:128
+msgid "User Lastname (If logged in)"
+msgstr "사용자 성(로그인한 경우)"
+
+#: deprecated/includes/fields/hidden.php:59
+#: deprecated/includes/fields/textbox.php:129
+msgid "User Display Name (If logged in)"
+msgstr "사용자 표시 이름(로그인한 경우)"
+
+#: deprecated/includes/fields/hidden.php:60
+#: deprecated/includes/fields/textbox.php:130
+msgid "User Email (If logged in)"
+msgstr "사용자 이메일(로그인한 경우)"
+
+#: deprecated/includes/fields/hidden.php:61
+#: deprecated/includes/fields/number.php:74
+#: deprecated/includes/fields/textbox.php:131
+msgid "Post / Page ID (If available)"
+msgstr "게시물/페이지 ID(해당되는 경우)"
+
+#: deprecated/includes/fields/hidden.php:62
+#: deprecated/includes/fields/textbox.php:132
+msgid "Post / Page Title (If available)"
+msgstr "게시물/페이지 제목(해당되는 경우)"
+
+#: deprecated/includes/fields/hidden.php:63
+#: deprecated/includes/fields/textbox.php:133
+msgid "Post / Page URL (If available)"
+msgstr "게시물/페이지 URL(해당되는 경우)"
+
+#: deprecated/includes/fields/hidden.php:64
+#: deprecated/includes/fields/textbox.php:134
+msgid "Today's Date"
+msgstr "오늘 날짜"
+
+#: deprecated/includes/fields/hidden.php:66
+#: deprecated/includes/fields/textbox.php:136
+msgid "Querystring Variable"
+msgstr "쿼리문자열 변수"
+
+#: deprecated/includes/fields/hidden.php:74
+#: deprecated/includes/fields/textbox.php:145
+msgid "This keyword is reserved by WordPress. Please try another."
+msgstr "이 키워드는 워드플레스를 통해 예약됩니다. 다른 키워드를 사용하세요."
+
+#: deprecated/includes/fields/hidden.php:94
+msgid "Is this an email address?"
+msgstr "이메일 주소인가요?"
+
+#: deprecated/includes/fields/hidden.php:102
+msgid ""
+"If this box is checked, Ninja Forms will validate this input as an email "
+"address."
+msgstr "이 상자를 선택하면 Ninja Form이 이 입력을 이메일 주소로 확인합니다."
+
+#: deprecated/includes/fields/hidden.php:109
+msgid "Send a copy of the form to this address?"
+msgstr "양식 사본을 이 주소로 보낼까요?"
+
+#: deprecated/includes/fields/hidden.php:117
+msgid ""
+"If this box is checked, Ninja Forms will send a copy of this form (and any "
+"messages attached) to this address."
+msgstr "이 상자를 선택하면 Ninja Form이 이 양식 사본(및 연결된 모든 메시지)을 이 주소로 보냅니다."
+
+#: deprecated/includes/fields/honeypot.php:4
+msgid "Honey Pot"
+msgstr "허니팟"
+
+#: deprecated/includes/fields/hr.php:4
+msgid "hr"
+msgstr "hr"
+
+#: deprecated/includes/fields/list.php:4 includes/Database/MockData.php:152
+msgid "List"
+msgstr "목록"
+
+#: deprecated/includes/fields/list.php:17
+#: deprecated/includes/fields/textbox.php:68
+msgid "This is the user's state"
+msgstr "사용자의 상태입니다."
+
+#: deprecated/includes/fields/list.php:45
+msgid "Selected Value"
+msgstr "선택한 값"
+
+#: deprecated/includes/fields/list.php:50
+msgid "Add Value"
+msgstr "값 추가"
+
+#: deprecated/includes/fields/list.php:55
+msgid "Remove Value"
+msgstr "값 제거"
+
+#: deprecated/includes/fields/list.php:112
+#: deprecated/includes/fields/list.php:591
+msgid "Calc"
+msgstr "계산"
+
+#: deprecated/includes/fields/list.php:134
+#: includes/Templates/admin-menu-forms.html.php:67
+#: includes/Templates/admin-menu-forms.html.php:95
+#: includes/Templates/admin-menu-forms.html.php:123
+#: includes/Templates/admin-menu-forms.html.php:151
+#: includes/Templates/admin-menu-forms.html.php:179
+msgid "Dropdown"
+msgstr "드랍다운"
+
+#: deprecated/includes/fields/list.php:135
+msgid "Radio"
+msgstr "라디오"
+
+#: deprecated/includes/fields/list.php:136
+msgid "Checkboxes"
+msgstr "확인란"
+
+#: deprecated/includes/fields/list.php:137
+#: includes/Fields/ListMultiSelect.php:24
+msgid "Multi-Select"
+msgstr "다중 선택"
+
+#: deprecated/includes/fields/list.php:140
+msgid "List Type"
+msgstr "목록 유형"
+
+#: deprecated/includes/fields/list.php:145
+msgid "Multi-Select Box Size"
+msgstr "다중 선택 상자 크기"
+
+#: deprecated/includes/fields/list.php:150
+msgid "Import List Items"
+msgstr "목록 항목 가져오기"
+
+#: deprecated/includes/fields/list.php:156
+msgid "Show list item values"
+msgstr "목록 항목 값 표시"
+
+#: deprecated/includes/fields/list.php:175
+msgid "Import"
+msgstr "가져오기"
+
+#: deprecated/includes/fields/list.php:177
+msgid "To use this feature, you can paste your CSV into the textarea above."
+msgstr "이 기능을 사용하기 위해 귀하의 CSV를 위의 텍스트 영역에 붙일 수 있습니다."
+
+#: deprecated/includes/fields/list.php:178
+msgid "The format should look like the following:"
+msgstr "해당 포맷은 다음과 같이 보입니다."
+
+#: deprecated/includes/fields/list.php:181
+msgid "Label,Value,Calc"
+msgstr "레이블,값,계산"
+
+#: deprecated/includes/fields/list.php:190
+msgid ""
+"If you want to send an empty value or calc, you should use '' for those."
+msgstr "빈 값 또는 계산을 보내려는 경우 ‘’를 사용해야 합니다."
+
+#: deprecated/includes/fields/list.php:594
+msgid "Selected"
+msgstr "선택됨"
+
+#: deprecated/includes/fields/number.php:4 includes/Database/MockData.php:625
+#: includes/Fields/Number.php:28
+msgid "Number"
+msgstr "숫자"
+
+#: deprecated/includes/fields/number.php:12
+msgid "Minimum Value"
+msgstr "최솟값"
+
+#: deprecated/includes/fields/number.php:18
+msgid "Maximum Value"
+msgstr "최댓값"
+
+#: deprecated/includes/fields/number.php:24
+msgid "Step (amount to increment by)"
+msgstr "단계(증가할 양)"
+
+#: deprecated/includes/fields/organizer.php:6
+msgid "Organizer"
+msgstr "구성 도우미"
+
+#: deprecated/includes/fields/password.php:4 includes/Fields/Password.php:22
+msgid "Password"
+msgstr "비밀번호"
+
+#: deprecated/includes/fields/password.php:28
+msgid "Use this as a registration password field"
+msgstr "등록 암호 필드로 사용"
+
+#: deprecated/includes/fields/password.php:30
+msgid ""
+"If this box is checked, both password and re-password textboxes will be "
+"output."
+msgstr "이 상자를 선택하면 암호 및 암호 확인 텍스트 상자가 모두 출력됩니다."
+
+#: deprecated/includes/fields/password.php:36
+msgid "Re-enter Password Label"
+msgstr "암호 다시 입력 레이블"
+
+#: deprecated/includes/fields/password.php:38
+msgid "Re-enter Password"
+msgstr "암호 다시 입력"
+
+#: deprecated/includes/fields/password.php:44
+msgid "Show Password Strength Indicator"
+msgstr "암호 강도 지표 표시"
+
+#: deprecated/includes/fields/password.php:129
+msgid ""
+"Hint: The password should be at least seven characters long. To make it "
+"stronger, use upper and lower case letters, numbers and symbols like ! \" ? "
+"$ % ^ &amp; )."
+msgstr ""
+"힌트: 암호는 7자 이상이어야 합니다. 더 강력하게 하려면 대문자와 소문자, 숫자 및 특수문자(! “ ? $ % ^ &amp;)를 사용하십시오."
+
+#: deprecated/includes/fields/password.php:147
+#: includes/Fields/PasswordConfirm.php:72
+msgid "Passwords do not match"
+msgstr "암호가 일치하지 않음"
+
+#: deprecated/includes/fields/rating.php:4 includes/Database/MockData.php:768
+#: includes/Fields/StarRating.php:36
+msgid "Star Rating"
+msgstr "별점"
+
+#: deprecated/includes/fields/rating.php:13
+#: includes/Config/FieldSettings.php:682
+msgid "Number of stars"
+msgstr "별 수"
+
+#: deprecated/includes/fields/recaptcha.php:6
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: deprecated/includes/fields/recaptcha.php:12
+msgid "Confirm that you are not a bot"
+msgstr "귀하가 로봇이 아님을 확인합니다."
+
+#: deprecated/includes/fields/recaptcha.php:87
+msgid "Please complete the captcha field"
+msgstr "Captcha 필드를 완료하세요."
+
+#: deprecated/includes/fields/recaptcha.php:98 includes/Fields/Recaptcha.php:63
+msgid "Please make sure you have entered your Site & Secret keys correctly"
+msgstr "귀하의 사이트 및 비밀 키를 정확하게 입력했는지 확인하세요."
+
+#: deprecated/includes/fields/recaptcha.php:100
+#: includes/Fields/Recaptcha.php:65
+msgid "Captcha mismatch. Please enter the correct value in captcha field"
+msgstr "Captcha가 일치하지 않습니다. Captcha 필드에 올바른 값을 입력하세요."
+
+#: deprecated/includes/fields/spam.php:4 includes/Fields/Spam.php:24
+msgid "Anti-Spam"
+msgstr "스팸 방지"
+
+#: deprecated/includes/fields/spam.php:29
+#: deprecated/includes/fields/spam.php:65
+msgid "Spam Question"
+msgstr "스팸 질문"
+
+#: deprecated/includes/fields/spam.php:36
+#: deprecated/includes/fields/spam.php:71
+msgid "Spam Answer"
+msgstr "스팸 답변"
+
+#: deprecated/includes/fields/submit.php:4
+#: deprecated/includes/fields/timed-submit.php:11
+#: deprecated/includes/fields/timed-submit.php:36
+#: deprecated/includes/fields/timed-submit.php:81
+#: includes/Database/MockData.php:165 includes/Database/MockData.php:483
+#: includes/Database/MockData.php:802 includes/Fields/Submit.php:26
+msgid "Submit"
+msgstr "저장하기"
+
+#: deprecated/includes/fields/tax.php:11
+msgid "Tax"
+msgstr "세금"
+
+#: deprecated/includes/fields/tax.php:21
+msgid "Tax Percentage"
+msgstr "세금 백분율"
+
+#: deprecated/includes/fields/tax.php:23
+msgid "Should be entered as a percentage. e.g. 8.25%, 4%"
+msgstr "백분율로 입력해야 합니다(예: 8.25%, 4%)."
+
+#: deprecated/includes/fields/textarea.php:4 includes/Database/MockData.php:382
+#: includes/Database/MockData.php:526
+#: includes/Templates/admin-menu-forms.html.php:61
+#: includes/Templates/admin-menu-forms.html.php:89
+#: includes/Templates/admin-menu-forms.html.php:117
+#: includes/Templates/admin-menu-forms.html.php:145
+#: includes/Templates/admin-menu-forms.html.php:173
+msgid "Textarea"
+msgstr "텍스트 영역"
+
+#: deprecated/includes/fields/textarea.php:18
+#: includes/Config/FieldSettings.php:777
+msgid "Show Rich Text Editor"
+msgstr "서식 있는 텍스트 편집기 표시"
+
+#: deprecated/includes/fields/textarea.php:23
+#: includes/Config/FieldSettings.php:787
+msgid "Show Media Upload Button"
+msgstr "미디어 업로드 버튼 표시"
+
+#: deprecated/includes/fields/textarea.php:28
+#: includes/Config/FieldSettings.php:799
+msgid "Disable Rich Text Editor on Mobile"
+msgstr "모바일에서 서식 있는 텍스트 편집기 해제"
+
+#: deprecated/includes/fields/textbox.php:52
+msgid "Validate as an email address? (Field must be required)"
+msgstr "이메일 주소로 확인할까요? (필드는 필수여야 함)"
+
+#: deprecated/includes/fields/textbox.php:56
+#: includes/Config/FieldSettings.php:707
+msgid "Disable Input"
+msgstr "입력 해제"
+
+#: deprecated/includes/fields/textbox.php:64
+msgid "Datepicker"
+msgstr "Datepicker"
+
+#: deprecated/includes/fields/textbox.php:174
+msgid "Phone - (555) 555-5555"
+msgstr "전화 - (555) 555-5555"
+
+#: deprecated/includes/fields/textbox.php:176
+msgid "Currency"
+msgstr "통화"
+
+#: deprecated/includes/fields/textbox.php:185
+msgid "Custom Mask Definition"
+msgstr "사용자 지정 마스크 정의"
+
+#: deprecated/includes/fields/textbox.php:185
+msgid "Help"
+msgstr "도움말"
+
+#: deprecated/includes/fields/timed-submit.php:4
+msgid "Timed Submit"
+msgstr "시간이 초과된 제출"
+
+#: deprecated/includes/fields/timed-submit.php:10
+msgid "Submit button text after timer expires"
+msgstr "타이머가 만료된 후의 제출 버튼 텍스트"
+
+#: deprecated/includes/fields/timed-submit.php:18
+#: deprecated/includes/fields/timed-submit.php:69
+#: includes/Config/FieldSettings.php:636
+msgid "Please wait %n seconds"
+msgstr "%n초 기다려 주십시오."
+
+#: deprecated/includes/fields/timed-submit.php:19
+msgid "%n will be used to signify the number of seconds"
+msgstr "초 수를 구분하기 위해 %n이(가) 사용됩니다."
+
+#: deprecated/includes/fields/timed-submit.php:26
+msgid "Number of seconds for countdown"
+msgstr "카운트다운 시간(초)"
+
+#: deprecated/includes/fields/timed-submit.php:27
+msgid "This is how long a user must wait to submit the form"
+msgstr "사용자가 양식 제출을 위해 기다려야 하는 시간입니다."
+
+#: deprecated/includes/fields/timed-submit.php:102
+msgid "If you are a human, please slow down."
+msgstr "귀하가 로봇이 아닌 경우에는 천천히 하시기 바랍니다."
+
+#: deprecated/includes/fields/timed-submit.php:108
+msgid ""
+"You need JavaScript to submit this form. Please enable it and try again."
+msgstr "이 양식을 제출하려면 JavaScript가 필요합니다. 설정한 후에 다시 시도하십시오."
+
+#: includes/Abstracts/ActionNewsletter.php:113
+msgid "js-newsletter-list-update extra"
+msgstr "js-newsletter-list-update extra"
+
+#: includes/Abstracts/ActionNewsletter.php:113
+msgid "dashicons dashicons-update"
+msgstr "dashicons dashicons-update"
+
+#: includes/Abstracts/ActionNewsletter.php:142
+msgid "List Field Mapping"
+msgstr "목록 필드 매핑"
+
+#: includes/Abstracts/ActionNewsletter.php:150
+msgid "Interest Groups"
+msgstr "관심 그룹"
+
+#: includes/Abstracts/FieldOptIn.php:39
+msgid "Single"
+msgstr "단일"
+
+#: includes/Abstracts/FieldOptIn.php:43
+msgid "Multiple"
+msgstr "복수"
+
+#: includes/Abstracts/FieldOptIn.php:51
+msgid "Lists"
+msgstr "목록"
+
+#: includes/Abstracts/FieldOptIn.php:51
+msgid "refresh"
+msgstr "새로고침"
+
+#: includes/Abstracts/Metabox.php:25
+msgid "Metabox"
+msgstr "메타박스"
+
+#: includes/Abstracts/SubmissionMetabox.php:21
+msgid "Submission Metabox"
+msgstr "제출 메타박스"
+
+#: includes/Abstracts/UserInfo.php:25
+msgid "User Meta (if logged in)"
+msgstr "사용자 메타(로그인한 경우)"
+
+#: includes/Actions/CollectPayment.php:40
+msgid "Collect Payment"
+msgstr "요금 결제"
+
+#: includes/Admin/AllFormsTable.php:27
+msgid "No forms found."
+msgstr "양식을 찾을 수 없습니다."
+
+#: includes/Admin/AllFormsTable.php:70
+msgid "Date Created"
+msgstr "생성일"
+
+#: includes/Admin/AllFormsTable.php:94
+msgid "title"
+msgstr "제목"
+
+#: includes/Admin/AllFormsTable.php:95
+msgid "updated"
+msgstr "업데이트됨"
+
+#: includes/Admin/AllFormsTable.php:232 includes/Admin/AllFormsTable.php:248
+#: includes/Admin/AllFormsTable.php:267
+msgid "Go get a life, script kiddies"
+msgstr "귀하의 시도가 실패했습니다."
+
+#: includes/Admin/CPT/Submission.php:44
+msgid "Parent Item:"
+msgstr "상위 항목:"
+
+#: includes/Admin/CPT/Submission.php:45
+msgid "All Items"
+msgstr "모든 항목"
+
+#: includes/Admin/CPT/Submission.php:46
+msgid "Add New Item"
+msgstr "새 항목 추가"
+
+#: includes/Admin/CPT/Submission.php:48
+msgid "New Item"
+msgstr "새 항목"
+
+#: includes/Admin/CPT/Submission.php:49
+msgid "Edit Item"
+msgstr "항목 편집"
+
+#: includes/Admin/CPT/Submission.php:50
+msgid "Update Item"
+msgstr "항목 업데이트"
+
+#: includes/Admin/CPT/Submission.php:51
+msgid "View Item"
+msgstr "항목 보기"
+
+#: includes/Admin/CPT/Submission.php:52
+msgid "Search Item"
+msgstr "항목 검색"
+
+#: includes/Admin/CPT/Submission.php:54
+msgid "Not found in Trash"
+msgstr "휴지통에 없음"
+
+#: includes/Admin/CPT/Submission.php:58
+msgid "Form Submissions"
+msgstr "양식 제출"
+
+#: includes/Admin/CPT/Submission.php:183
+msgid "Submission Info"
+msgstr "제출 정보"
+
+#: includes/Admin/Menus/Forms.php:77
+msgid "Add New Form"
+msgstr "새 양식 추가"
+
+#: includes/Admin/Menus/Forms.php:100
+msgid "Form Template Import Error."
+msgstr "양식 템플릿 가져오기 오류입니다."
+
+#: includes/Admin/Menus/Forms.php:416 includes/MergeTags/Fields.php:13
+msgid "Fields"
+msgstr "필드"
+
+#: includes/Admin/Menus/ImportExport.php:37
+msgid "There uploaded file is not a valid format."
+msgstr "업로드된 파일의 형식이 유효하지 않습니다."
+
+#: includes/Admin/Menus/ImportExport.php:38
+msgid "Invalid Form Upload."
+msgstr "유효하지 않은 양식이 업로드되었습니다."
+
+#: includes/Admin/Menus/ImportExport.php:125
+msgid "Import Forms"
+msgstr "양식 가져오기"
+
+#: includes/Admin/Menus/ImportExport.php:132
+msgid "Export Forms"
+msgstr "양식 내보내기"
+
+#: includes/Admin/Menus/ImportExport.php:216
+msgid "Equation (Advanced)"
+msgstr "수식(고급)"
+
+#: includes/Admin/Menus/ImportExport.php:219
+msgid "Operations and Fields (Advanced)"
+msgstr "연산 및 필드(고급)"
+
+#: includes/Admin/Menus/ImportExport.php:222
+msgid "Auto-Total Fields"
+msgstr "자동 합계 필드"
+
+#: includes/Admin/Menus/ImportExport.php:340
+msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
+msgstr "업로드한 파일이 php.ini에서 upload_max_filesize 지시문을 초과했습니다."
+
+#: includes/Admin/Menus/ImportExport.php:343
+msgid ""
+"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
+"the HTML form."
+msgstr "업로드한 파일이 HTML 양식에서 지정된 MAX_FILE_SIZE 지시문을 초과했습니다."
+
+#: includes/Admin/Menus/ImportExport.php:346
+msgid "The uploaded file was only partially uploaded."
+msgstr "업로드된 파일은 부분만 업로드됐습니다."
+
+#: includes/Admin/Menus/ImportExport.php:349
+msgid "No file was uploaded."
+msgstr "업로드한 파일이 없습니다."
+
+#: includes/Admin/Menus/ImportExport.php:352
+msgid "Missing a temporary folder."
+msgstr "임시 폴더가 없습니다."
+
+#: includes/Admin/Menus/ImportExport.php:355
+msgid "Failed to write file to disk."
+msgstr "디스크에 파일을 작성하지 못했습니다."
+
+#: includes/Admin/Menus/ImportExport.php:358
+msgid "File upload stopped by extension."
+msgstr "확장자에 의해 파일 업로드가 중단되었습니다."
+
+#: includes/Admin/Menus/ImportExport.php:361
+msgid "Unknown upload error."
+msgstr "알려지지 않은 업로드 오류입니다."
+
+#: includes/Admin/Menus/ImportExport.php:366
+msgid "File Upload Error"
+msgstr "파일 업로드 오류"
+
+#: includes/Admin/Menus/Licenses.php:46
+msgid "Add-On Licenses"
+msgstr "애드온 라이선스"
+
+#: includes/Admin/Menus/MockData.php:33
+msgid "Migrations and Mock Data complete. "
+msgstr "마이그레이션 및 모의 데이터 완료. "
+
+#: includes/Admin/Menus/MockData.php:34
+msgid "View Forms"
+msgstr "양식 보기"
+
+#: includes/Admin/Menus/Settings.php:39
+msgid "Save Settings"
+msgstr "변경 사항 저장"
+
+#: includes/Admin/Menus/Submissions.php:252
+msgid "button-secondary nf-download-all"
+msgstr "button-secondary nf-download-all"
+
+#: includes/Admin/Menus/SystemStatus.php:131
+msgid "Server IP Address"
+msgstr "서버 IP 주소"
+
+#: includes/Admin/Menus/SystemStatus.php:132
+msgid "Host Name"
+msgstr "호스트 이름"
+
+#: includes/Admin/Menus/SystemStatus.php:134
+msgid "smtp_port"
+msgstr "smtp_port"
+
+#: includes/Admin/Metaboxes/AppendAForm.php:11
+msgid "Append a Ninja Forms"
+msgstr "Ninja Form 추가"
+
+#: includes/AJAX/Controllers/Form.php:16
+msgid "Form Not Found"
+msgstr "양식을 찾을 수 없음"
+
+#: includes/AJAX/Controllers/SavedFields.php:17
+#: includes/AJAX/Controllers/SavedFields.php:38
+#: includes/AJAX/Controllers/SavedFields.php:50
+msgid "Field Not Found"
+msgstr "영역을 찾을 수 없음"
+
+#: includes/AJAX/Controllers/Submission.php:44
+msgid "An unexpected error occurred."
+msgstr "예기치 못한 오류가 발생했습니다."
+
+#: includes/AJAX/Controllers/Submission.php:62
+msgid "Preview does not exist."
+msgstr "미리 보기가 존재하지 않습니다"
+
+#: includes/Config/ActionCollectPaymentSettings.php:14
+msgid "Payment Gateways"
+msgstr "지불 게이트웨이"
+
+#: includes/Config/ActionCollectPaymentSettings.php:35
+msgid "Payment Total"
+msgstr "결제 합계"
+
+#: includes/Config/ActionCustomSettings.php:13
+msgid "Hook Tag"
+msgstr "후크 태그"
+
+#: includes/Config/ActionEmailSettings.php:20
+msgid "Email address or search for a field"
+msgstr "이메일 주소 또는 필드 검색"
+
+#: includes/Config/ActionEmailSettings.php:35
+msgid "Subject Text or seach for a field"
+msgstr "제목 텍스트 또는 필드 검색"
+
+#: includes/Config/ActionEmailSettings.php:158
+msgid "Attach CSV"
+msgstr "CSV 첨부"
+
+#: includes/Config/ActionRedirectSettings.php:13
+msgid "URL"
+msgstr "URL"
+
+#: includes/Config/AdminNotices.php:16
+msgid "one_week_support"
+msgstr "one_week_support"
+
+#: includes/Config/Example.php:21
+msgid "Label Here"
+msgstr "여기에 레이블 삽입"
+
+#: includes/Config/Example.php:25
+msgid "Help Text Here"
+msgstr "여기에 도움말 텍스트"
+
+#: includes/Config/FieldSettings.php:25
+msgid ""
+"Enter the label of the form field. This is how users will identify "
+"individual fields."
+msgstr "양식 필드의 레이블을 입력하십시오. 사용자는 이런 식으로 개별 필드를 식별할 수 있습니다."
+
+#: includes/Config/FieldSettings.php:38
+msgid "Form Default"
+msgstr "양식 기본값"
+
+#: includes/Config/FieldSettings.php:58 includes/Config/FieldSettings.php:923
+#: includes/Config/FormDisplaySettings.php:89
+#: includes/Database/MockData.php:376 includes/Database/MockData.php:633
+#: includes/Fields/Hidden.php:38
+msgid "Hidden"
+msgstr "보이지 않음"
+
+#: includes/Config/FieldSettings.php:65
+msgid "Select the position of your label relative to the field element itself."
+msgstr "필드 요소 자체에 대해 상대적인, 레이블의 위치를 선택하십시오."
+
+#: includes/Config/FieldSettings.php:76
+msgid "Required Field"
+msgstr "필수 필드"
+
+#: includes/Config/FieldSettings.php:80
+msgid ""
+"Ensure that this field is completed before allowing the form to be submitted."
+msgstr "양식을 제출하기 전에 이 필드를 반드시 작성해야 합니다."
+
+#: includes/Config/FieldSettings.php:90
+msgid "Number Options"
+msgstr "숫자 옵션"
+
+#: includes/Config/FieldSettings.php:98
+msgid "Min"
+msgstr "최소"
+
+#: includes/Config/FieldSettings.php:105
+msgid "Max"
+msgstr "최대"
+
+#: includes/Config/FieldSettings.php:113
+msgid "Step"
+msgstr "단계"
+
+#: includes/Config/FieldSettings.php:153
+msgid "Options"
+msgstr "선택사항"
+
+#: includes/Config/FieldSettings.php:158 includes/Config/FieldSettings.php:954
+#: includes/Database/MockData.php:127
+msgid "One"
+msgstr "1"
+
+#: includes/Config/FieldSettings.php:158
+msgid "one"
+msgstr "1"
+
+#: includes/Config/FieldSettings.php:159 includes/Config/FieldSettings.php:955
+#: includes/Database/MockData.php:134
+msgid "Two"
+msgstr "2"
+
+#: includes/Config/FieldSettings.php:159
+msgid "two"
+msgstr "2"
+
+#: includes/Config/FieldSettings.php:160 includes/Config/FieldSettings.php:956
+#: includes/Database/MockData.php:141
+msgid "Three"
+msgstr "3"
+
+#: includes/Config/FieldSettings.php:160
+msgid "three"
+msgstr "3"
+
+#: includes/Config/FieldSettings.php:173
+msgid "Calc Value"
+msgstr "계산 값"
+
+#: includes/Config/FieldSettings.php:203
+msgid "Restricts the kind of input your users can put into this field."
+msgstr "귀하의 사용자가 이 필드에 입력할 수 있는 종류를 제한합니다."
+
+#: includes/Config/FieldSettings.php:206
+msgid "none"
+msgstr "없음"
+
+#: includes/Config/FieldSettings.php:210
+msgid "US Phone"
+msgstr "미국 전화"
+
+#: includes/Config/FieldSettings.php:219
+msgid "custom"
+msgstr "사용자 정의"
+
+#: includes/Config/FieldSettings.php:231
+msgid "Custom Mask"
+msgstr "사용자 지정 마스크"
+
+#: includes/Config/FieldSettings.php:240
+msgid ""
+"<ul>\n"
+"                            <li>a - Represents an alpha character (A-Z,a-z) "
+"- Only allows letters to be entered. </li>\n"
+"                            <li>9 - Represents a numeric character (0-9) - "
+"Only allows numbers to be entered.</li>\n"
+"                            <li>* - Represents an alphanumeric character (A-"
+"Z,a-z,0-9) - This allows both numbers and\n"
+"                            letters to be entered.</li>\n"
+"                        </ul>"
+msgstr ""
+"<ul>\n                            <li>a - 알파벳(A-Z,a-z)을 나타냄 - 문자 입력만 허용. "
+"</li>\n                            <li>9 - 숫자(0-9)를 나타냄 - 숫자 입력만 "
+"허용.</li>\n                            <li>* - 영숫자(A-Z,a-z,0-9)를 나타냄 - "
+"숫자와\n                            문자 모두 입력 허용.</li>\n                        </ul>"
+
+#: includes/Config/FieldSettings.php:255
+msgid "Limit Input to this Number"
+msgstr "이 숫자만큼 입력 제한"
+
+#: includes/Config/FieldSettings.php:271
+msgid "Character(s)"
+msgstr "자"
+
+#: includes/Config/FieldSettings.php:275
+msgid "Word(s)"
+msgstr "단어"
+
+#: includes/Config/FieldSettings.php:285
+msgid "Text to Appear After Counter"
+msgstr "카운터 후에 나타낼 텍스트"
+
+#: includes/Config/FieldSettings.php:286 includes/Config/FieldSettings.php:288
+msgid "Character(s) left"
+msgstr "왼쪽에 문자(들)"
+
+#: includes/Config/FieldSettings.php:315
+msgid ""
+"Enter text you would like displayed in the field before a user enters any "
+"data."
+msgstr "사용자가 데이터를 입력하기 전에 필드에 표시하려는 텍스트를 입력합니다."
+
+#: includes/Config/FieldSettings.php:344
+#: includes/Config/FormDisplaySettings.php:103
+msgid "Custom Class Names"
+msgstr "사용자 지정 클래스 이름"
+
+#: includes/Config/FieldSettings.php:352
+msgid "Container"
+msgstr "컨테이너"
+
+#: includes/Config/FieldSettings.php:356 includes/Fields/Recaptcha.php:35
+msgid "Adds an extra class to your field wrapper."
+msgstr "필드 래퍼에 추가 클래스를 추가합니다."
+
+#: includes/Config/FieldSettings.php:361
+#: includes/Config/FormDisplaySettings.php:119
+msgid "Element"
+msgstr "요소"
+
+#: includes/Config/FieldSettings.php:366
+msgid "Adds an extra class to your field element."
+msgstr "필드 요소에 추가 클래스를 추가합니다."
+
+#: includes/Config/FieldSettings.php:383
+msgid "DD/MM/YYYY"
+msgstr "DD/MM/YYYY"
+
+#: includes/Config/FieldSettings.php:387
+msgid "DD-MM-YYYY"
+msgstr "DD-MM-YYYY"
+
+#: includes/Config/FieldSettings.php:391
+msgid "MM/DD/YYYY"
+msgstr "MM/DD/YYYY"
+
+#: includes/Config/FieldSettings.php:395
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-YYYY"
+
+#: includes/Config/FieldSettings.php:399
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+#: includes/Config/FieldSettings.php:403
+msgid "YYYY/MM/DD"
+msgstr "YYYY/MM/DD"
+
+#: includes/Config/FieldSettings.php:407
+msgid "Friday, November 18, 2019"
+msgstr "2019년 11월 18일 금요일"
+
+#: includes/Config/FieldSettings.php:421
+msgid "Default To Current Date"
+msgstr "현재 날짜로 기본값 지정"
+
+#: includes/Config/FieldSettings.php:433
+msgid "Number of seconds for timed submit."
+msgstr "제출 시간 초과 시간(초)."
+
+#: includes/Config/FieldSettings.php:447
+msgid "Field Key"
+msgstr "필드 키"
+
+#: includes/Config/FieldSettings.php:451
+msgid ""
+"Creates a unique key to identify and target your field for custom "
+"development."
+msgstr "사용자 지정 개발을 위한 필드를 확인 및 대상으로 지정할 고유한 키를 만듭니다."
+
+#: includes/Config/FieldSettings.php:465
+msgid "Label used when viewing and exporting submissions."
+msgstr "제출을 보고 내보낼 때 사용되는 레이블입니다."
+
+#: includes/Config/FieldSettings.php:477
+msgid "Shown to users as a hover."
+msgstr "가리킨 항목으로 표시됩니다."
+
+#: includes/Config/FieldSettings.php:502
+msgid "Description"
+msgstr "설명"
+
+#: includes/Config/FieldSettings.php:561
+msgid "Sort as Numeric"
+msgstr "숫자로 정렬"
+
+#: includes/Config/FieldSettings.php:565
+msgid "This column in the submissions table will sort by number."
+msgstr "제출 표에 있는 이 열은 숫자로 정렬됩니다."
+
+#: includes/Config/FieldSettings.php:649
+msgid "Number of seconds for the countdown"
+msgstr "카운트다운 시간(초)"
+
+#: includes/Config/FieldSettings.php:666
+msgid ""
+"Use this as a reistration password field. If this box is check, both\n"
+"                        password and re-password textboxes will be output"
+msgstr ""
+"등록 암호 필드로 사용합니다. 이 상자를 선택하면,\n                        암호 및 암호 확인 텍스트 상자가 모두 출력됩니다."
+
+#: includes/Config/FieldSettings.php:763 includes/Database/Models/Form.php:505
+msgid "Confirm"
+msgstr "확인"
+
+#: includes/Config/FieldSettings.php:781
+msgid "Allows rich text input."
+msgstr "서식 있는 텍스트 입력을 허용합니다."
+
+#: includes/Config/FieldSettings.php:817
+msgid "Processing Label"
+msgstr "레이블 처리 중"
+
+#: includes/Config/FieldSettings.php:832
+msgid "Checked Calculation Value"
+msgstr "확인된 계산 값"
+
+#: includes/Config/FieldSettings.php:835
+msgid "This number will be used in calculations if the box is checked."
+msgstr "이 숫자는 상자가 선택된 경우 계산에서 사용됩니다."
+
+#: includes/Config/FieldSettings.php:841
+msgid "Unchecked Calculation Value"
+msgstr "확인되지 않은 계산 값"
+
+#: includes/Config/FieldSettings.php:844
+msgid "This number will be used in calculations if the box is unchecked."
+msgstr "이 숫자는 상자가 선택되지 않은 경우 계산에서 사용됩니다."
+
+#: includes/Config/FieldSettings.php:855
+msgid "Display This Calculation Variable"
+msgstr "이 계산 변수 표시"
+
+#: includes/Config/FieldSettings.php:861
+msgid "- Select a Variable"
+msgstr "- 변수 선택"
+
+#: includes/Config/FieldSettings.php:874
+msgid "Price"
+msgstr "가격"
+
+#: includes/Config/FieldSettings.php:887
+msgid "Use Quantity"
+msgstr "사용 수량"
+
+#: includes/Config/FieldSettings.php:891
+msgid "Allows users to choose more than one of this product."
+msgstr "사용자가 이 제품을 하나 이상 선택할 수 있도록 허용합니다."
+
+#: includes/Config/FieldSettings.php:898
+msgid "Product Type"
+msgstr "상품 형식"
+
+#: includes/Config/FieldSettings.php:903
+msgid "Single Product (default)"
+msgstr "단일 제품(기본)"
+
+#: includes/Config/FieldSettings.php:907
+msgid "Multi Product - Dropdown"
+msgstr "여러 제품 - 드롭다운"
+
+#: includes/Config/FieldSettings.php:911
+msgid "Multi Product - Choose Many"
+msgstr "여러 제품 - 다수 선택"
+
+#: includes/Config/FieldSettings.php:915
+msgid "Multi Product - Choose One"
+msgstr "여러 제품 - 한 개 선택"
+
+#: includes/Config/FieldSettings.php:919
+msgid "User Entry"
+msgstr "사용자 입력"
+
+#: includes/Config/FieldSettings.php:934
+msgid "Cost"
+msgstr "비용"
+
+#: includes/Config/FieldSettings.php:950
+msgid "Cost Options"
+msgstr "비용 옵션"
+
+#: includes/Config/FieldSettings.php:979
+msgid "Single Cost"
+msgstr "단일 비용"
+
+#: includes/Config/FieldSettings.php:983
+msgid "Cost Dropdown"
+msgstr "비용 드롭다운"
+
+#: includes/Config/FieldSettings.php:987
+msgid "Cost Type"
+msgstr "비용 유형"
+
+#: includes/Config/FieldSettings.php:996 includes/Database/MockData.php:898
+#: includes/Database/MockData.php:974 includes/Fields/Product.php:32
+msgid "Product"
+msgstr "제품"
+
+#: includes/Config/FieldSettings.php:1002
+msgid "- Select a Product"
+msgstr "- 제품 선택"
+
+#: includes/Config/FieldSettings.php:1019
+msgid "Answer"
+msgstr "응답"
+
+#: includes/Config/FieldSettings.php:1023
+msgid "A case sensitive answer to help prevent spam submissions of your form."
+msgstr "양식의 스팸 제출을 방지하기 위한 대소문자 구분 답변."
+
+#: includes/Config/FieldSettings.php:1039
+msgid "Taxonomy"
+msgstr "분류법"
+
+#: includes/Config/FieldSettings.php:1057
+msgid "Add New Terms"
+msgstr "새 용어 추가"
+
+#: includes/Config/FieldSettings.php:1071
+msgid "This is a user's state."
+msgstr "사용자의 상태입니다."
+
+#: includes/Config/FieldSettings.php:1075
+msgid "Used for marking a field for processing."
+msgstr "처리 중인 필드를 표시하는 데 사용됩니다."
+
+#: includes/Config/FieldTypeSections.php:13
+#: includes/Config/PluginSettingsGroups.php:22
+msgid "Saved Fields"
+msgstr "저장된 필드"
+
+#: includes/Config/FieldTypeSections.php:26
+msgid "Common Fields"
+msgstr "일반 필드"
+
+#: includes/Config/FieldTypeSections.php:38 includes/Database/MockData.php:648
+msgid "User Information Fields"
+msgstr "사용자 정보 필드"
+
+#: includes/Config/FieldTypeSections.php:50 includes/Database/MockData.php:696
+msgid "Pricing Fields"
+msgstr "가격 필드"
+
+#: includes/Config/FieldTypeSections.php:62
+msgid "Layout Fields"
+msgstr "레이아웃 필드"
+
+#: includes/Config/FieldTypeSections.php:74 includes/Database/MockData.php:763
+msgid "Miscellaneous Fields"
+msgstr "기타 필드"
+
+#: includes/Config/FormActionDefaults.php:9
+msgid "Your form has been successfully submitted."
+msgstr "귀하의 양식이 성공적으로 제출되었습니다."
+
+#: includes/Config/FormActionDefaults.php:19
+msgid "Ninja Forms Submission"
+msgstr "닌자 양식 제출"
+
+#: includes/Config/FormActionDefaults.php:27
+msgid "Save Submission"
+msgstr "저장 제출"
+
+#: includes/Config/FormCalculationSettings.php:18
+msgid "Variable Name"
+msgstr "변수 이름"
+
+#: includes/Config/FormCalculationSettings.php:22
+msgid "Equation"
+msgstr "수식"
+
+#: includes/Config/FormDisplaySettings.php:68
+msgid "Default Label Position"
+msgstr "기본 레이블 위치"
+
+#: includes/Config/FormDisplaySettings.php:111 includes/Fields/Recaptcha.php:30
+msgid "Wrapper"
+msgstr "래퍼"
+
+#: includes/Config/FormDisplaySettings.php:135
+msgid "Form Key"
+msgstr "양식 키"
+
+#: includes/Config/FormDisplaySettings.php:139
+msgid "Programmatic name that can be used to reference this form."
+msgstr "이 양식을 참조하는 데 사용할 수 있는 프로그래밍 방식 이름."
+
+#: includes/Config/FormDisplaySettings.php:149
+msgid "Add Submit Button"
+msgstr "제출 버튼 추가"
+
+#: includes/Config/FormDisplaySettings.php:153
+msgid ""
+"We've noticed that don't have a submit button on your form. We can add one "
+"for your automatically."
+msgstr "귀하의 양식에 제출 버튼이 없습니다. 저희가 자동으로 제출 버튼을 추가해 드릴 수 있습니다."
+
+#: includes/Config/FormRestrictionSettings.php:8
+msgid "Logged In"
+msgstr "로그인 됨"
+
+#: includes/Config/FormRestrictionSettings.php:24
+msgid "Does apply to form preview."
+msgstr "양식 미리 보기에 적용됩니다."
+
+#: includes/Config/FormRestrictionSettings.php:57
+msgid "Submission Limit"
+msgstr "제출 제한"
+
+#: includes/Config/FormRestrictionSettings.php:61
+msgid "Does NOT apply to form preview."
+msgstr "양식 미리 보기에 적용되지 않습니다."
+
+#: includes/Config/FormSettingsTypes.php:7
+msgid "Display Settings"
+msgstr "표시 설정"
+
+#: includes/Config/FormSettingsTypes.php:17 includes/MergeTags/Calcs.php:15
+msgid "Calculations"
+msgstr "계산"
+
+#: includes/Config/i18nBuilder.php:5 includes/Config/i18nFrontEnd.php:5
+msgid "Ninja Forms"
+msgstr "Ninja Form"
+
+#: includes/Config/i18nBuilder.php:6
+msgid "Price:"
+msgstr "가격:"
+
+#: includes/Config/i18nBuilder.php:7
+msgid "Quantity:"
+msgstr "수량:"
+
+#: includes/Config/i18nBuilder.php:8
+#: includes/Templates/admin-menu-new-form.html.php:263
+msgid "Add"
+msgstr "추가하기"
+
+#: includes/Config/i18nBuilder.php:9
+msgid "Open in new window"
+msgstr "새 창에서 열기"
+
+#: includes/Config/i18nBuilder.php:10
+msgid "If you are a human seeing this field, please leave it empty."
+msgstr "귀하가 로봇이 아니며 이 필드가 보이는 경우에는 이 부분을 비워 두시기 바랍니다."
+
+#: includes/Config/i18nBuilder.php:11
+msgid "Available"
+msgstr "사용 가능"
+
+#: includes/Config/i18nFrontEnd.php:6
+msgid "Please enter a valid email address!"
+msgstr "유효한 이메일 주소를 입력하시기 바랍니다!"
+
+#: includes/Config/i18nFrontEnd.php:7
+msgid "These fields must match!"
+msgstr "영역이 일치해야 합니다!"
+
+#: includes/Config/i18nFrontEnd.php:8
+msgid "Number Min Error"
+msgstr "최소 수 오류"
+
+#: includes/Config/i18nFrontEnd.php:9
+msgid "Number Max Error"
+msgstr "최대 수 오류"
+
+#: includes/Config/i18nFrontEnd.php:10
+msgid "Please increment by "
+msgstr "증가: "
+
+#: includes/Config/i18nFrontEnd.php:11
+msgid "Insert Link"
+msgstr "링크 삽입"
+
+#: includes/Config/i18nFrontEnd.php:12
+msgid "Insert Media"
+msgstr "미디어 삽입"
+
+#: includes/Config/i18nFrontEnd.php:14
+msgid "Please correct errors before submitting this form."
+msgstr "이 양식을 제출하기 전에 오류를 수정하시기 바랍니다."
+
+#: includes/Config/i18nFrontEnd.php:16
+msgid "Honeypot Error"
+msgstr "허니팟 오류"
+
+#: includes/Config/i18nFrontEnd.php:17
+msgid "File Upload in Progress."
+msgstr "파일 업로드 진행 중."
+
+#: includes/Config/i18nFrontEnd.php:18
+msgid "FILE UPLOAD"
+msgstr "파일 업로드"
+
+#: includes/Config/MergeTagsFields.php:14
+msgid "All Fields"
+msgstr "모든 필드"
+
+#: includes/Config/MergeTagsForm.php:14
+msgid "Sub Sequence"
+msgstr "하위 시퀀스"
+
+#: includes/Config/MergeTagsPost.php:14
+msgid "Post ID"
+msgstr "게시물 ID"
+
+#: includes/Config/MergeTagsPost.php:27
+msgid "Post Title"
+msgstr "글 제목"
+
+#: includes/Config/MergeTagsPost.php:40
+msgid "Post URL"
+msgstr "글 URL"
+
+#: includes/Config/MergeTagsSystem.php:40
+msgid "IP Address"
+msgstr "IP 주소"
+
+#: includes/Config/MergeTagsUser.php:14
+msgid "User ID"
+msgstr "사용자 ID"
+
+#: includes/Config/MergeTagsUser.php:27 includes/Database/MockData.php:366
+#: includes/Database/MockData.php:653 includes/Fields/FirstName.php:25
+msgid "First Name"
+msgstr "이름"
+
+#: includes/Config/MergeTagsUser.php:40 includes/Database/MockData.php:371
+#: includes/Database/MockData.php:658 includes/Fields/LastName.php:25
+msgid "Last Name"
+msgstr "성"
+
+#: includes/Config/MergeTagsUser.php:53
+msgid "Display Name"
+msgstr "이름 보이기"
+
+#: includes/Config/PluginSettingsAdvanced.php:55
+msgid "Opinionated Styles"
+msgstr "독단적인 스타일"
+
+#: includes/Config/PluginSettingsAdvanced.php:62
+#: includes/Config/PluginSettingsReCaptcha.php:54
+msgid "Light"
+msgstr "밝음"
+
+#: includes/Config/PluginSettingsAdvanced.php:66
+#: includes/Config/PluginSettingsReCaptcha.php:55
+msgid "Dark"
+msgstr "어두움"
+
+#: includes/Config/PluginSettingsAdvanced.php:70
+msgid "Use default Ninja Forms styling conventions."
+msgstr "기본 Ninja Form 스타일링 규칙을 사용합니다."
+
+#: includes/Config/PluginSettingsAdvanced.php:83
+msgid "Rollback"
+msgstr "롤백"
+
+#: includes/Config/PluginSettingsAdvanced.php:84
+msgid "Rollback to v2.9.x"
+msgstr "v2.9.x(으)로 롤백"
+
+#: includes/Config/PluginSettingsAdvanced.php:85
+msgid "Rollback to the most recent 2.9.x release."
+msgstr "최신 2.9.x 릴리스로 롤백합니다."
+
+#: includes/Config/PluginSettingsDefaults.php:5 includes/Fields/Date.php:51
+#: includes/Fields/Date.php:53
+msgid "m/d/Y"
+msgstr "m/d/Y"
+
+#: includes/Config/PluginSettingsGroups.php:12
+msgid "reCaptcha Settings"
+msgstr "reCaptcha 설정"
+
+#: includes/Config/PluginSettingsReCaptcha.php:57
+msgid "reCAPTCHA Theme"
+msgstr "reCAPTCHA 테마"
+
+#: includes/Config/SettingsGroups.php:14
+msgid "Rich Text Editor (RTE)"
+msgstr "서식 있는 텍스트 편집기(RTE)"
+
+#: includes/Config/SettingsGroups.php:30
+msgid "Advanced"
+msgstr "고급"
+
+#: includes/Config/SettingsGroups.php:36
+msgid "Administration"
+msgstr "관리"
+
+#: includes/Database/MockData.php:14
+msgid "Foo"
+msgstr "Foo"
+
+#: includes/Database/MockData.php:21
+msgid "Bar"
+msgstr "Bar"
+
+#: includes/Database/MockData.php:28
+msgid "Baz"
+msgstr "Baz"
+
+#: includes/Database/MockData.php:42
+msgid "Blank Forms"
+msgstr "빈 양식"
+
+#: includes/Database/MockData.php:54
+msgid "Contact Me"
+msgstr "문의"
+
+#: includes/Database/MockData.php:176
+msgid "Mock Success Message Action"
+msgstr "모의 성공 메시지 동작"
+
+#: includes/Database/MockData.php:178
+msgid "Thank you {field:name} for filling out my form!"
+msgstr "{field:name}, 이 양식을 작성해 주셔서 감사합니다!"
+
+#: includes/Database/MockData.php:190
+msgid "Mock Email Action"
+msgstr "모의 이메일 동작"
+
+#: includes/Database/MockData.php:193
+msgid "This is an email action."
+msgstr "이것은 이메일 동작입니다."
+
+#: includes/Database/MockData.php:194
+msgid "Hello, Ninja Forms!"
+msgstr "안녕하세요! Ninja Form입니다."
+
+#: includes/Database/MockData.php:206 includes/Database/MockData.php:332
+#: includes/Database/MockData.php:490 includes/Database/MockData.php:810
+msgid "Mock Save Action"
+msgstr "모의 저장 동작"
+
+#: includes/Database/MockData.php:216 includes/Database/MockData.php:220
+msgid "Foo Bar"
+msgstr "Foo Bar"
+
+#: includes/Database/MockData.php:217
+msgid "foo@wpninjas.com"
+msgstr "foo@wpninjas.com"
+
+#: includes/Database/MockData.php:218
+msgid "This is a test"
+msgstr "이것은 테스트입니다."
+
+#: includes/Database/MockData.php:227 includes/Database/MockData.php:231
+msgid "John Doe"
+msgstr "홍길동"
+
+#: includes/Database/MockData.php:228
+msgid "user@gmail.com"
+msgstr "user@gmail.com"
+
+#: includes/Database/MockData.php:229
+msgid "This is another test."
+msgstr "이것은 또 다른 테스트입니다."
+
+#: includes/Database/MockData.php:242
+#: includes/Templates/admin-menu-system-status.html.php:3
+msgid "Get Help"
+msgstr "지원 받기"
+
+#: includes/Database/MockData.php:269
+msgid "What Can We Help You With?"
+msgstr "무엇을 도와드릴까요?"
+
+#: includes/Database/MockData.php:276
+msgid "Agree?"
+msgstr "동의하십니까?"
+
+#: includes/Database/MockData.php:283
+msgid "Best Contact Method?"
+msgstr "가장 좋은 연락 수단은 무엇인가요?"
+
+#: includes/Database/MockData.php:287 includes/Database/MockData.php:668
+#: includes/Fields/Phone.php:24
+msgid "Phone"
+msgstr "전화"
+
+#: includes/Database/MockData.php:301
+msgid "Snail Mail"
+msgstr "일반 우편"
+
+#: includes/Database/MockData.php:315
+msgid "Send"
+msgstr "보내기"
+
+#: includes/Database/MockData.php:343
+msgid "Kitchen Sink"
+msgstr "Kitchen Sink"
+
+#: includes/Database/MockData.php:387 includes/Database/MockData.php:536
+msgid "Select List"
+msgstr "목록 선택"
+
+#: includes/Database/MockData.php:390 includes/Database/MockData.php:418
+#: includes/Database/MockData.php:539 includes/Database/MockData.php:567
+#: includes/Database/MockData.php:595
+msgid "Option One"
+msgstr "첫 번째 옵션"
+
+#: includes/Database/MockData.php:397 includes/Database/MockData.php:425
+#: includes/Database/MockData.php:546 includes/Database/MockData.php:574
+#: includes/Database/MockData.php:602
+msgid "Option Two"
+msgstr "두 번째 옵션"
+
+#: includes/Database/MockData.php:404 includes/Database/MockData.php:432
+#: includes/Database/MockData.php:553 includes/Database/MockData.php:581
+#: includes/Database/MockData.php:609
+msgid "Option Three"
+msgstr "세 번째 옵션"
+
+#: includes/Database/MockData.php:415 includes/Database/MockData.php:564
+#: includes/Fields/ListRadio.php:24
+#: includes/Templates/admin-menu-forms.html.php:73
+#: includes/Templates/admin-menu-forms.html.php:101
+#: includes/Templates/admin-menu-forms.html.php:129
+#: includes/Templates/admin-menu-forms.html.php:157
+#: includes/Templates/admin-menu-forms.html.php:185
+msgid "Radio List"
+msgstr "라디오 목록"
+
+#: includes/Database/MockData.php:501
+msgid "Bathroom Sink"
+msgstr "욕실 세면대"
+
+#: includes/Database/MockData.php:592 includes/Fields/ListCheckbox.php:26
+msgid "Checkbox List"
+msgstr "확인란 목록"
+
+#: includes/Database/MockData.php:649
+msgid "These are all the fields in the User Information section."
+msgstr "다음은 모두 사용자 정보 섹션에 있는 영역입니다."
+
+#: includes/Database/MockData.php:673 includes/Fields/Address.php:25
+msgid "Address"
+msgstr "주소"
+
+#: includes/Database/MockData.php:678 includes/Fields/City.php:25
+msgid "City"
+msgstr "도시"
+
+#: includes/Database/MockData.php:688
+msgid "Zip Code"
+msgstr "우편 번호"
+
+#: includes/Database/MockData.php:697
+msgid "These are all the fields in the Pricing section."
+msgstr "다음은 모두 가격 섹션에 있는 영역입니다."
+
+#: includes/Database/MockData.php:701
+msgid "Product (quanitity included)"
+msgstr "제품(수량 포함)"
+
+#: includes/Database/MockData.php:708
+msgid "Product (seperate quantity)"
+msgstr "제품(개별 수량)"
+
+#: includes/Database/MockData.php:715 includes/Database/MockData.php:910
+#: includes/Fields/Quantity.php:30
+msgid "Quantity"
+msgstr "수량"
+
+#: includes/Database/MockData.php:730 includes/Database/MockData.php:934
+#: includes/Database/MockData.php:995 includes/Database/MockData.php:1098
+#: includes/Fields/Total.php:28
+msgid "Total"
+msgstr "총합"
+
+#: includes/Database/MockData.php:735 includes/Fields/CreditCardFullName.php:25
+msgid "Credit Card Full Name"
+msgstr "신용 카드 전체 이름"
+
+#: includes/Database/MockData.php:740 includes/Fields/CreditCardNumber.php:25
+msgid "Credit Card Number"
+msgstr "신용 카드 번호"
+
+#: includes/Database/MockData.php:745
+msgid "Credit Card CVV"
+msgstr "신용 카드 CVV"
+
+#: includes/Database/MockData.php:750
+#: includes/Fields/CreditCardExpiration.php:26
+msgid "Credit Card Expiration"
+msgstr "신용 카드 만료"
+
+#: includes/Database/MockData.php:755
+msgid "Credit Card Zip Code"
+msgstr "신용 카드 우편 번호"
+
+#: includes/Database/MockData.php:764
+msgid "These are various special fields."
+msgstr "다음은 다양한 특별 영역입니다."
+
+#: includes/Database/MockData.php:774
+msgid "Anti-Spam Question (Answer = answer)"
+msgstr "스팸 방지 질문(답변 = 답변)"
+
+#: includes/Database/MockData.php:776
+msgid "answer"
+msgstr "응답"
+
+#: includes/Database/MockData.php:805
+msgid "processing"
+msgstr "처리중"
+
+#: includes/Database/MockData.php:822
+msgid "Long Form - "
+msgstr "긴 양식 - "
+
+#: includes/Database/MockData.php:822
+#: includes/Templates/admin-menu-new-form.html.php:364
+msgid " Fields"
+msgstr " 필드"
+
+#: includes/Database/MockData.php:835
+msgid "Field #"
+msgstr "필드 번호"
+
+#: includes/Database/MockData.php:851
+msgid "Email Subscription Form"
+msgstr "이메일 구독 양식"
+
+#: includes/Database/MockData.php:863
+msgid "Email Address"
+msgstr "이메일 주소"
+
+#: includes/Database/MockData.php:867
+msgid "Enter your email address"
+msgstr "이메일 주소를 입력하십시오."
+
+#: includes/Database/MockData.php:876
+msgid "Subscribe"
+msgstr "구독"
+
+#: includes/Database/MockData.php:888
+msgid "Product Form (with Quantity Field)"
+msgstr "제품 양식(수량 영역 포함)"
+
+#: includes/Database/MockData.php:943 includes/Database/MockData.php:1004
+#: includes/Database/MockData.php:1107 includes/Database/MockData.php:1150
+msgid "Purchase"
+msgstr "구매"
+
+#: includes/Database/MockData.php:955 includes/Database/MockData.php:1016
+#: includes/Database/MockData.php:1119
+msgid "You purchased "
+msgstr "구매함 "
+
+#: includes/Database/MockData.php:956
+msgid "product(s) for "
+msgstr "제품 "
+
+#: includes/Database/MockData.php:964
+msgid "Product Form (Inline Quantity)"
+msgstr "제품 양식(인라인 수량)"
+
+#: includes/Database/MockData.php:1017
+msgid " product(s) for "
+msgstr " 제품 "
+
+#: includes/Database/MockData.php:1025
+msgid "Product Form (Multiple Products)"
+msgstr "제품 양식(여러 제품)"
+
+#: includes/Database/MockData.php:1035
+msgid "Product A"
+msgstr "제품 A"
+
+#: includes/Database/MockData.php:1047
+msgid "Quantity for Product A"
+msgstr "제품 A 수량"
+
+#: includes/Database/MockData.php:1062
+msgid "Product B"
+msgstr "제품 B"
+
+#: includes/Database/MockData.php:1074
+msgid "Quantity for Product B"
+msgstr "제품 B 수량"
+
+#: includes/Database/MockData.php:1120
+msgid "of Product A and "
+msgstr "제품 A 및 "
+
+#: includes/Database/MockData.php:1121
+msgid "of Product B for $"
+msgstr "제품 B($)"
+
+#: includes/Database/MockData.php:1132
+msgid "Form with Calculations"
+msgstr "계산 포함 양식"
+
+#: includes/Database/MockData.php:1136
+msgid "My First Calculation"
+msgstr "나의 첫 번째 계산"
+
+#: includes/Database/MockData.php:1140
+msgid "My Second Calculation"
+msgstr "나의 두 번째 계산"
+
+#: includes/Database/MockData.php:1158
+msgid ""
+"Calculations are returned with the AJAX response ( response -> data -> calcs"
+msgstr "계산은 AJAX 응답(응답 -> 데이터 -> 계산)을 반환합니다."
+
+#: includes/Database/Models/Form.php:117
+msgid "copy"
+msgstr "복사"
+
+#: includes/Database/Models/Form.php:267
+msgid "Save Form"
+msgstr "양식 저장"
+
+#: includes/Database/Models/Form.php:529 includes/Fields/CreditCardZip.php:23
+msgid "Credit Card Zip"
+msgstr "신용 카드 지역 코드"
+
+#: includes/Display/Preview.php:48
+msgid "You must be logged in to preview a form."
+msgstr "양식 미리 보기로 로그인해야 합니다."
+
+#: includes/Display/Render.php:80 includes/Display/Render.php:246
+msgid "No Fields Found."
+msgstr "필드를 찾을 수 없습니다."
+
+#: includes/Display/Shortcodes.php:36
+msgid "Notice: Ninja Forms shortcode used without specifying a form."
+msgstr "알림: 양식 지정 없이 사용되는 Ninja Form 단축 코드입니다."
+
+#: includes/Display/Shortcodes.php:43
+msgid "Ninja Forms shortcode used without specifying a form."
+msgstr "양식 지정 없이 사용되는 Ninja Form 단축 코드입니다."
+
+#: includes/Fields/Address2.php:23
+msgid "Address 2"
+msgstr "주소 2"
+
+#: includes/Fields/Button.php:26
+#: includes/Templates/admin-menu-forms.html.php:79
+#: includes/Templates/admin-menu-forms.html.php:107
+#: includes/Templates/admin-menu-forms.html.php:135
+#: includes/Templates/admin-menu-forms.html.php:163
+#: includes/Templates/admin-menu-forms.html.php:191
+msgid "Button"
+msgstr "버튼"
+
+#: includes/Fields/Checkbox.php:30
+msgid "Single Checkbox"
+msgstr "단일 확인란"
+
+#: includes/Fields/Checkbox.php:49
+msgid "checked"
+msgstr "선택됨"
+
+#: includes/Fields/Checkbox.php:49
+msgid "unchecked"
+msgstr "선택 해제됨"
+
+#: includes/Fields/CreditCardCVC.php:25
+msgid "Credit Card CVC"
+msgstr "신용 카드 CVC"
+
+#: includes/Fields/Date.php:52
+msgid "d-m-Y"
+msgstr "d-m-Y"
+
+#: includes/Fields/Date.php:54
+msgid "m-d-Y"
+msgstr "m-d-Y"
+
+#: includes/Fields/Date.php:55
+msgid "Y-m-d"
+msgstr "Y-m-d"
+
+#: includes/Fields/Date.php:56
+msgid "Y/m/d"
+msgstr "Y/m/d"
+
+#: includes/Fields/Date.php:57
+msgid "l, F d Y"
+msgstr "l, F d Y"
+
+#: includes/Fields/hr.php:28
+msgid "Divider"
+msgstr "Divider"
+
+#: includes/Fields/ListSelect.php:26
+msgid "Select"
+msgstr "Select"
+
+#: includes/Fields/LIstState.php:26
+msgid "State"
+msgstr "주"
+
+#: includes/Fields/Note.php:43
+msgid "Note text can be edited in the note field's advanced settings below."
+msgstr "참고 텍스트는 아래 참고 필드의 고급 설정에서 편집할 수 있습니다."
+
+#: includes/Fields/Note.php:45
+msgid "Note"
+msgstr "참고"
+
+#: includes/Fields/PasswordConfirm.php:24
+msgid "Password Confirm"
+msgstr "암호 확인"
+
+#: includes/Fields/PasswordConfirm.php:26
+msgid "password"
+msgstr "비밀번호"
+
+#: includes/Fields/Recaptcha.php:24
+msgid "Recaptcha"
+msgstr "Recaptcha"
+
+#: includes/Fields/Recaptcha.php:51
+msgid "Please complete the recaptcha"
+msgstr "Recaptcha를 완료하세요."
+
+#: includes/Fields/Shipping.php:41
+msgid "Advanced Shipping"
+msgstr "사전 배송"
+
+#: includes/Fields/Spam.php:27
+msgid "Question"
+msgstr "문항"
+
+#: includes/Fields/Spam.php:28
+msgid "Question Position"
+msgstr "질문 위치"
+
+#: includes/Fields/Spam.php:57
+msgid "Incorrect Answer"
+msgstr "부정확한 답변"
+
+#: includes/Fields/StarRating.php:28
+msgid "Number of Stars"
+msgstr "별 수"
+
+#: includes/Fields/Terms.php:31
+msgid "Terms List"
+msgstr "용어 목록"
+
+#: includes/Fields/Terms.php:84
+#, php-format
+msgid "No available terms for this taxonomy. %sAdd a term%s"
+msgstr "이 분류법에 사용 가능한 용어가 없습니다. %s용어 추가%s"
+
+#: includes/Fields/Terms.php:99
+msgid "No taxonomy selected."
+msgstr "선택된 분류법이 없습니다."
+
+#: includes/Fields/Terms.php:108
+msgid "Available Terms"
+msgstr "사용 가능한 용어"
+
+#: includes/Fields/Textarea.php:26
+msgid "Paragraph Text"
+msgstr "단락 텍스트"
+
+#: includes/Fields/Textbox.php:28
+msgid "Single Line Text"
+msgstr "단일 줄 텍스트"
+
+#: includes/Fields/Zip.php:25
+msgid "Zip"
+msgstr "우편번호"
+
+#: includes/MergeTags/Post.php:13
+msgid "Post"
+msgstr "올리기"
+
+#: includes/MergeTags/QueryStrings.php:13
+msgid "Query Strings"
+msgstr "쿼리 문자열"
+
+#: includes/MergeTags/QueryStrings.php:18
+msgid "Query String"
+msgstr "쿼리 문자열"
+
+#: includes/MergeTags/System.php:13
+msgid "System"
+msgstr "시스템"
+
+#: includes/MergeTags/User.php:13
+msgid "User"
+msgstr "사용자"
+
+#: includes/Templates/admin-menu-addons.html.php:9
+msgid " requires an update. You have version "
+msgstr " 업데이트가 필요합니다. 버전 "
+
+#: includes/Templates/admin-menu-addons.html.php:9
+msgid " installed. The current version is "
+msgstr " 이(가) 설치되어 있습니다. 현재 버전은 "
+
+#: includes/Templates/admin-menu-forms.html.php:17
+msgid "Editing Field"
+msgstr "편집 영역"
+
+#: includes/Templates/admin-menu-forms.html.php:21
+msgid "Label Name"
+msgstr "레이블 이름"
+
+#: includes/Templates/admin-menu-forms.html.php:27
+msgid "Above Field"
+msgstr "위의 영역"
+
+#: includes/Templates/admin-menu-forms.html.php:28
+msgid "Below Field"
+msgstr "아래 영역"
+
+#: includes/Templates/admin-menu-forms.html.php:29
+msgid "Left of Field"
+msgstr "영역 왼쪽"
+
+#: includes/Templates/admin-menu-forms.html.php:30
+msgid "Right of Field"
+msgstr "영역 오른쪽"
+
+#: includes/Templates/admin-menu-forms.html.php:31
+msgid "Hide Label"
+msgstr "레이블 숨기기"
+
+#: includes/Templates/admin-menu-forms.html.php:35
+msgid "Class Name"
+msgstr "클래스 이름"
+
+#: includes/Templates/admin-menu-forms.html.php:55
+#: includes/Templates/admin-menu-forms.html.php:83
+#: includes/Templates/admin-menu-forms.html.php:111
+#: includes/Templates/admin-menu-forms.html.php:139
+#: includes/Templates/admin-menu-forms.html.php:167
+msgid "Basic Fields"
+msgstr "기본 영역"
+
+#: includes/Templates/admin-menu-forms.html.php:70
+#: includes/Templates/admin-menu-forms.html.php:98
+#: includes/Templates/admin-menu-forms.html.php:126
+#: includes/Templates/admin-menu-forms.html.php:154
+#: includes/Templates/admin-menu-forms.html.php:182
+msgid "Mult-Select"
+msgstr "다중 선택"
+
+#: includes/Templates/admin-menu-new-form.html.php:30
+#: includes/Templates/admin-menu-new-form.html.php:32
+#: includes/Templates/ui-nf-header.html.php:17
+msgid "Add new field"
+msgstr "새 영역 추가"
+
+#: includes/Templates/admin-menu-new-form.html.php:37
+#: includes/Templates/admin-menu-new-form.html.php:39
+msgid "Add new action"
+msgstr "새 동작 추가"
+
+#: includes/Templates/admin-menu-new-form.html.php:60
+msgid "Expand Menu"
+msgstr "메뉴 확장"
+
+#: includes/Templates/admin-menu-new-form.html.php:64
+#: includes/Templates/admin-menu-new-form.html.php:179
+#: includes/Templates/admin-menu-new-form.html.php:355
+#: includes/Templates/ui-nf-menu-drawer.html.php:3
+msgid "Publish"
+msgstr "게시"
+
+#: includes/Templates/admin-menu-new-form.html.php:64
+msgid "PUBLISH"
+msgstr "게시"
+
+#: includes/Templates/admin-menu-new-form.html.php:68
+msgid "Loading"
+msgstr "로드 중"
+
+#: includes/Templates/admin-menu-new-form.html.php:80
+msgid "View Changes"
+msgstr "변경 사항 보기"
+
+#: includes/Templates/admin-menu-new-form.html.php:97
+msgid "Add form fields"
+msgstr "양식 영역 추가"
+
+#: includes/Templates/admin-menu-new-form.html.php:98
+msgid "Get started by adding your first form field."
+msgstr "첫 번째 양식 영역을 추가하여 시작합니다."
+
+#: includes/Templates/admin-menu-new-form.html.php:98
+msgid "Add New Field"
+msgstr "새 영역 추가"
+
+#: includes/Templates/admin-menu-new-form.html.php:98
+msgid "Just click here and select the fields you want."
+msgstr "여기를 클릭하고 원하는 영역을 선택하세요."
+
+#: includes/Templates/admin-menu-new-form.html.php:98
+msgid "It's that easy. Or..."
+msgstr "이렇게 간단합니다. 또는..."
+
+#: includes/Templates/admin-menu-new-form.html.php:99
+msgid "Start from a template"
+msgstr "템플릿으로 시작하세요."
+
+#: includes/Templates/admin-menu-new-form.html.php:102
+msgid "Contact Us"
+msgstr "연락처"
+
+#: includes/Templates/admin-menu-new-form.html.php:103
+msgid ""
+"Allow your users to contact you with this simple contact form. You can add "
+"and remove fields as needed."
+msgstr "간단한 연락처 양식으로 사용자가 귀하에게 연락할 수 있습니다. 필요에 따라 영역을 추가 및 제거할 수 있습니다."
+
+#: includes/Templates/admin-menu-new-form.html.php:109
+msgid "Quote Request"
+msgstr "견적 요청"
+
+#: includes/Templates/admin-menu-new-form.html.php:110
+msgid ""
+"Manage quote requests from your website easily with this remplate. You can "
+"add and remove fields as needed."
+msgstr "이 템플릿으로 웹사이트에서 견적 요청을 쉽게 관리합니다. 필요에 따라 영역을 추가 및 제거할 수 있습니다."
+
+#: includes/Templates/admin-menu-new-form.html.php:115
+msgid "Event Registration"
+msgstr "이벤트 등록"
+
+#: includes/Templates/admin-menu-new-form.html.php:116
+msgid ""
+"Allow user to register for your next event this easy to complete form. You "
+"can add and remove fields as needed."
+msgstr "사용자가 다음 이벤트를 등록하여 쉽게 양식을 완료할 수 있습니다. 필요에 따라 영역을 추가 및 제거할 수 있습니다."
+
+#: includes/Templates/admin-menu-new-form.html.php:121
+msgid "Newsletter Sign Up Form"
+msgstr "뉴스레터 등록 양식"
+
+#: includes/Templates/admin-menu-new-form.html.php:122
+msgid ""
+"Add subscribers and grow your email list with this newsletter signup form. "
+"You can add and remove fields as needed."
+msgstr "이 뉴스레터 등록 양식으로 구독자를 추가하고 이메일 목록을 추가합니다. 필요에 따라 영역을 추가 및 제거할 수 있습니다."
+
+#: includes/Templates/admin-menu-new-form.html.php:131
+msgid "Add form actions"
+msgstr "양식 추가 동작"
+
+#: includes/Templates/admin-menu-new-form.html.php:132
+msgid ""
+"Get started by adding your first form field. Just click the plus and select "
+"the actions you want. It's that easy."
+msgstr "첫 번째 양식 영역을 추가하여 시작합니다. 더하기 기호를 클릭하여 원하는 동작을 선택합니다. 이렇게 간단합니다."
+
+#: includes/Templates/admin-menu-new-form.html.php:145
+msgid "Duplicate (^ + C + click)"
+msgstr "복제(^ + C + 클릭)"
+
+#: includes/Templates/admin-menu-new-form.html.php:146
+msgid "Delete (^ + D + click)"
+msgstr "삭제(^ + D + 클릭)"
+
+#: includes/Templates/admin-menu-new-form.html.php:156
+msgid "Actions"
+msgstr "작업"
+
+#: includes/Templates/admin-menu-new-form.html.php:191
+msgid "Toggle Drawer"
+msgstr "서랍 설정/해제"
+
+#: includes/Templates/admin-menu-new-form.html.php:192
+#: includes/Templates/ui-nf-toggle-drawer.html.php:2
+msgid "Full screen"
+msgstr "전체 화면"
+
+#: includes/Templates/admin-menu-new-form.html.php:192
+#: includes/Templates/ui-nf-toggle-drawer.html.php:2
+msgid "Half screen"
+msgstr "절반 화면"
+
+#: includes/Templates/admin-menu-new-form.html.php:231
+msgid "Undo"
+msgstr "실행 취소"
+
+#: includes/Templates/admin-menu-new-form.html.php:324
+#: includes/Templates/admin-menu-new-form.html.php:330
+#: includes/Templates/admin-menu-new-form.html.php:339
+msgid "Done"
+msgstr "완료"
+
+#: includes/Templates/admin-menu-new-form.html.php:337
+msgid "Undo All"
+msgstr "모두 실행 취소"
+
+#: includes/Templates/admin-menu-new-form.html.php:337
+msgid " Undo All"
+msgstr " 모두 실행 취소"
+
+#: includes/Templates/admin-menu-new-form.html.php:345
+msgid "Almost there..."
+msgstr "거의 다 끝나갑니다..."
+
+#: includes/Templates/admin-menu-new-form.html.php:353
+msgid "Not Yet"
+msgstr "아직 실행 안 함"
+
+#: includes/Templates/admin-menu-new-form.html.php:626
+msgid " Open in new window"
+msgstr " 새 창에서 열기"
+
+#: includes/Templates/admin-menu-settings-licenses.html.php:29
+msgid "De-activate"
+msgstr "비활성화"
+
+#: includes/Templates/admin-menu-settings.html.php:25
+msgid "Fix it."
+msgstr "수정합니다."
+
+#: includes/Templates/admin-menu-subs-filter.html.php:2
+msgid "- Select a form"
+msgstr "- 양식 선택"
+
+#: includes/Templates/admin-menu-subs-filter.html.php:11
+msgid "Being Date"
+msgstr "실제 날짜"
+
+#: includes/Templates/admin-menu-system-status.html.php:4
+msgid "Before requesting help from our support team please review:"
+msgstr "저희 지원 팀의 도움을 요청하기 전에 다음을 검토하시기 바랍니다."
+
+#: includes/Templates/admin-menu-system-status.html.php:6
+msgid "Ninja Forms THREE documentation"
+msgstr "Ninja Form 3 설명서"
+
+#: includes/Templates/admin-menu-system-status.html.php:7
+msgid "What to try before contacting support"
+msgstr "지원에 문의하기 전에 점검할 사항"
+
+#: includes/Templates/admin-menu-system-status.html.php:8
+msgid "Our Scope of Support"
+msgstr "지원 범위"
+
+#: includes/Templates/admin-metabox-import-export-favorite-fields-import.html.php:17
+#: includes/Templates/admin-metabox-import-export-favorite-fields-import.html.php:20
+msgid "Import Fields"
+msgstr "필드 가져오기"
+
+#: includes/Templates/admin-metabox-sub-info.html.php:17
+msgid "Updated on: "
+msgstr "업데이트 날짜: "
+
+#: includes/Templates/admin-metabox-sub-info.html.php:18
+msgid "Submitted on: "
+msgstr "제출 날짜: "
+
+#: includes/Templates/admin-metabox-sub-info.html.php:20
+msgid "Submitted by: "
+msgstr "제출: "
+
+#: includes/Templates/admin-metabox-submission-example.php:1
+msgid "Submission Data"
+msgstr "제출 데이터"
+
+#: includes/Templates/admin-notice-form-import.html.php:4
+msgid "View"
+msgstr "보기"
+
+#: includes/Templates/admin-wp-die.html.php:7
+msgid "Show More"
+msgstr "더 보기"
+
+#: includes/Templates/ui-item-controls.html.php:4
+msgid "Editing field"
+msgstr "편집 영역"
+
+#: includes/Templates/ui-nf-header.html.php:5
+#: includes/Templates/ui-nf-menu-drawer.html.php:6
+msgid "Form Fields"
+msgstr "양식 영역"
+
+#: includes/Templates/ui-nf-header.html.php:8
+msgid "Preview Changes"
+msgstr "변경 사항 미리 보기"
+
+#: includes/Templates/ui-nf-header.html.php:18
+msgid "Contact Form"
+msgstr "연락 형식"
+
+#: lib/NF_AddonChecker.php:42
+#, php-format
+msgid ""
+"Oops! That addon is not yet compatible with Ninja Forms THREE. %sLearn More"
+"%s."
+msgstr "이런! 해당 애드온은 아직 Ninja Forms THREE와 호환되지 않습니다. %s자세히 알아봅니다%s."
+
+#: lib/NF_AddonChecker.php:43
+#, php-format
+msgid "%s was deactivated."
+msgstr "%s이(가) 비활성화되었습니다!"
+
+#: lib/NF_Tracking.php:78
+msgid "Please help us improve Ninja Forms!"
+msgstr "Ninja Form의 개선을 위해 도와주십시오!"
+
+#: lib/NF_Tracking.php:80
+msgid ""
+"If you opt-in, some data about your installation of Ninja Forms will be sent "
+"to NinjaForms.com (this does NOT include your submissions)."
+msgstr ""
+"여기에 참여하시면 Ninja Form 설치에 대한 일부 데이터가 NinjaForms.com으로 전송됩니다(귀하의 제출은 포함되지 않음)."
+
+#: lib/NF_Tracking.php:81
+msgid "If you skip this, that's okay! Ninja Forms will still work just fine."
+msgstr "이 과정은 건너 뛰어도 괜찮습니다! Ninja Form이 동작하는 데에는 문제가 없습니다."
+
+#: lib/NF_Tracking.php:84
+#, php-format
+msgid "%sAllow%s"
+msgstr "%s허용%s"
+
+#: lib/NF_Tracking.php:85
+#, php-format
+msgid "%sDo not allow%s"
+msgstr "%s허용 안 함%s"
+
+#: lib/NF_VersionSwitcher.php:24 lib/NF_VersionSwitcher.php:40
+msgid "You do not have permission."
+msgstr "귀하는 권한이 없습니다."
+
+#: lib/NF_VersionSwitcher.php:25 lib/NF_VersionSwitcher.php:41
+msgid "Permission Denied"
+msgstr "권한이 거부됨"
+
+#: lib/NF_VersionSwitcher.php:70
+msgid "Ninja Forms Dev"
+msgstr "Ninja Form 개발"
+
+#: lib/NF_VersionSwitcher.php:80
+msgid "DEBUG: Switch to 2.9.x"
+msgstr "디버그: 2.9.x로 전환"
+
+#: lib/NF_VersionSwitcher.php:83
+msgid "DEBUG: Switch to 3.0.x"
+msgstr "디버그: 3.0.x로 전환"

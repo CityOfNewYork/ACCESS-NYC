@@ -1,0 +1,107 @@
+.search-box {
+  @include position(absolute, null 0 null 0);
+  visibility: hidden;
+  z-index: 8;
+
+  &.active {
+    visibility: visible;
+  }
+}
+
+.search-box-inner {
+  @include transition(all .2s ease-out);
+  background: $color-grey-lightest;
+  max-height: 0px;
+  overflow: hidden;
+
+  .active & {
+    border-bottom: 3px solid $color-grey-light;
+    max-height: 1000px;
+    padding: $spacing-base 0;
+  }
+}
+
+.search-box-close {
+  float: $text-direction-end;
+}
+
+.search-form,
+.search-suggestions {
+  clear: both;
+  margin: 2*$spacing-base auto;
+  max-width: 800px;
+}
+
+.search-form label {
+  display: block;
+  margin-bottom: .5*$spacing-base;
+}
+
+.search-form-field-container {
+  $search-icon-height: 24px;
+  $search-icon-width: 24px;
+  position: relative;
+
+  .search-form-field {
+    display: block;
+    padding: $spacing-base;
+    padding-#{$text-direction-end}: 2*$spacing-base + $search-icon-width;
+    width: 100%;
+  }
+  .search-form-submit {
+    @include size($search-icon-width $search-icon-height);
+    #{$text-direction-end}: $spacing-base;
+    line-height: $search-icon-height;
+    margin: -$search-icon-height/2 0 0 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+
+    .icon {
+      @include size($search-icon-width $search-icon-height);
+    }
+  }
+}
+
+.search-suggestions-header {
+  @include align-items(flex-end);
+  @include display(flex);
+  @include justify-content(space-between);
+  margin-bottom: $spacing-base;
+
+  h3 {
+    margin-bottom: 0;
+  }
+}
+
+.search-suggestions-body {
+  @include align-items(flex-start);
+  @include display(flex);
+  @include flex-wrap(wrap);
+}
+
+.search-suggestions-item {
+  font-weight: $font-weight-bold;
+  padding-#{$text-direction-end}: $spacing-base;
+  margin-bottom: $spacing-base;
+  width: percentage(1/2);
+
+  @include media($bp-tablet-up) {
+    width: percentage(1/3);
+  }
+}
+
+.program-search {
+  background: $color-blue-dark;
+  margin-bottom: $spacing-base;
+  padding: $spacing-base 0 2*$spacing-base;
+}
+
+.program-search-form {
+  margin: 0;
+  max-width: none;
+
+  label {
+    color: $color-white;
+  }
+}

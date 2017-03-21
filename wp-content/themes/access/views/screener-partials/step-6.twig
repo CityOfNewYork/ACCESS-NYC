@@ -1,0 +1,30 @@
+<fieldset class="screener-body-step js-screener-step" id="step-6">
+  <div class="screener-step">{{ __('Step 6 of 10', 'accessnyc-screener') }}</div>
+  <h1 class="screener-title">{{ __('Describe your expenses.', 'accessnyc-screener') }}</h1>
+  <div class="screener-question">
+    <label class="screener-label">{{ __('Do you have any expenses?', 'accessnyc-screener') }}</label>
+    <p class="screener-explanation">{{ __('This includes costs like child care, child support, rent, medical expenses, heating bills and more.', 'accessnyc-screener') }}</p>
+    <div class="screener-radio-buttons js-screener-radio-group">
+      <label class="screener-radio screener-label js-screener-radio-label">
+        <input class="screener-radio-input js-screener-toggle js-add-section sr-only"
+            value="1"
+            type="radio"
+            name="person-0-has-expenses"
+            data-type="boolean"
+            data-shows="#screener-expense"
+            data-renders="#screener-person-0-expense-0"
+            data-render-target="#screener-expense"
+            data-matrix="expense"
+            data-matrix-index="0"
+            data-person-index="0">
+        <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+      </label>
+      <label class="screener-radio screener-label js-screener-radio-label">
+        <input class="screener-radio-input js-screener-toggle sr-only" value="0" type="radio" name="person-0-has-expenses" data-type="boolean" data-hides="#screener-expense" checked/>
+        <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+      </label>
+    </div>
+  </div>
+  <div class="hidden js-screener-matrix screener-matrix" id="screener-expense"></div>
+  <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-7">{{ __('Continue', 'accessnyc-screener') }}</a></p>
+</fieldset>{# /#step-6 #}

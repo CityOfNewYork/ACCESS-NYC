@@ -1,0 +1,318 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-08 22:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: actions/admin_notices.php:10
+#, php-format
+msgid ""
+"<b>%s Plugin</b>: WP All Import must be installed. Free edition of WP All "
+"Import at <a href=\"http://wordpress.org/plugins/wp-all-import/\" "
+"target=\"_blank\">http://wordpress.org/plugins/wp-all-import/</a> and the "
+"paid edition at <a href=\"http://www.wpallimport.com/\">http://www."
+"wpallimport.com/</a>"
+msgstr ""
+
+#: actions/admin_notices.php:24
+#, php-format
+msgid ""
+"<b>%s Plugin</b>: Please update your WP All Import to the latest version"
+msgstr ""
+
+#: actions/admin_notices.php:37
+#, php-format
+msgid ""
+"<b>%s Plugin</b>: <a target=\"_blank\" href=\"http://wordpress."
+"org/plugins/advanced-custom-fields/\">Advanced Custom Fields</a> must be "
+"installed"
+msgstr ""
+
+#: actions/pmxi_reimport.php:57
+msgid "Advanced Custom Fields"
+msgstr ""
+
+#: actions/pmxi_reimport.php:61
+msgid "Update all ACF fields"
+msgstr ""
+
+#: actions/pmxi_reimport.php:65
+msgid "Update only mapped ACF fields"
+msgstr ""
+
+#: actions/pmxi_reimport.php:69
+msgid "Update only these ACF fields, leave the rest alone"
+msgstr ""
+
+#: actions/pmxi_reimport.php:78
+msgid "Leave these ACF fields alone, update all other ACF fields"
+msgstr ""
+
+#: actions/wp_ajax_get_acf.php:6 actions/wp_ajax_get_acf.php:10
+msgid "Security check"
+msgstr ""
+
+#: classes/updater.php:65
+msgid "View WP All Import - ACF Add-On Pro Changelog"
+msgstr ""
+
+#: classes/updater.php:65
+msgid "Changelog"
+msgstr ""
+
+#: helpers/pmai_render_field.php:45
+msgid ""
+"Specify the user ID, username, or user e-mail address. Separate multiple "
+"values with commas."
+msgstr ""
+
+#: helpers/pmai_render_field.php:52
+msgid "Specify the form ID."
+msgstr ""
+
+#: helpers/pmai_render_field.php:59
+msgid "Enter the ID, slug, or Title. Separate multiple entries with commas."
+msgstr ""
+
+#: helpers/pmai_render_field.php:67
+msgid ""
+"Enter the ID, slug, or Title. Separate multiple entries with separator "
+"character."
+msgstr ""
+
+#: helpers/pmai_render_field.php:74 helpers/pmai_render_field.php:84
+msgid "Specify the URL to the image or file."
+msgstr ""
+
+#: helpers/pmai_render_field.php:77 helpers/pmai_render_field.php:87
+#: helpers/pmai_render_field.php:99
+msgid ""
+"Search through the Media Library for existing images before importing new "
+"images"
+msgstr ""
+
+#: helpers/pmai_render_field.php:78 helpers/pmai_render_field.php:88
+#: helpers/pmai_render_field.php:100
+msgid ""
+"If an image with the same file name is found in the Media Library then that "
+"image will be attached to this record instead of importing a new image. "
+"Disable this setting if your import has different images with the same file "
+"name."
+msgstr ""
+
+#: helpers/pmai_render_field.php:94
+msgid "Enter image URL one per line, or separate them with a"
+msgstr ""
+
+#: helpers/pmai_render_field.php:103
+msgid ""
+"Append only new images and do not touch existing during updating gallery "
+"field."
+msgstr ""
+
+#: helpers/pmai_render_field.php:111
+msgid "Specify the hex code the color preceded with a # - e.g. #ea5f1a."
+msgstr ""
+
+#: helpers/pmai_render_field.php:135 helpers/pmai_render_field.php:141
+msgid "Use any format supported by the PHP strtotime function."
+msgstr ""
+
+#: helpers/pmai_render_field.php:147
+msgid "Use H:i:s format."
+msgstr ""
+
+#: helpers/pmai_render_field.php:267
+msgid "Select value for all records"
+msgstr ""
+
+#: helpers/pmai_render_field.php:313 helpers/pmai_render_field.php:383
+msgid "Set with XPath"
+msgstr ""
+
+#: helpers/pmai_render_field.php:323
+msgid ""
+"Specify the value. For multiple values, separate with commas. If the choices "
+"are of the format option : Option, option-2 : Option 2, use option and "
+"option-2 for values."
+msgstr ""
+
+#: helpers/pmai_render_field.php:327
+msgid "Specify the 0 for false, 1 for true."
+msgstr ""
+
+#: helpers/pmai_render_field.php:415 helpers/pmai_render_field.php:424
+#: helpers/pmai_render_field.php:432
+msgid "Assign post to the taxonomy."
+msgstr ""
+
+#: helpers/pmai_render_field.php:441
+msgid "Add more"
+msgstr ""
+
+#: helpers/pmai_render_field.php:462
+msgid "Fixed Repeater Mode"
+msgstr ""
+
+#: helpers/pmai_render_field.php:470
+msgid "Ignore blank fields"
+msgstr ""
+
+#: helpers/pmai_render_field.php:471
+msgid ""
+"If the value of the element or column in your file is blank, it will be "
+"ignored. Use this option when some records in your file have a different "
+"number of repeating elements than others."
+msgstr ""
+
+#: helpers/pmai_render_field.php:477
+msgid "Variable Repeater Mode (XML)"
+msgstr ""
+
+#: helpers/pmai_render_field.php:481
+msgid "Variable Repeater Mode (CSV)"
+msgstr ""
+
+#: helpers/pmai_render_field.php:489
+msgid "(documentation)"
+msgstr ""
+
+#: helpers/pmai_render_field.php:499
+msgid ""
+"Use this option when importing a CSV file with a column or columns that "
+"contains the repeating data, separated by separators. For example, if you "
+"had a repeater with two fields - image URL and caption, and your CSV file "
+"had two columns, image URL and caption, with values like 'url1,url2,url3' "
+"and 'caption1,caption2,caption3', use this option and specify a comma as the "
+"separator."
+msgstr ""
+
+#: helpers/pmai_render_field.php:719
+msgid "Delete Row"
+msgstr ""
+
+#: helpers/pmai_render_field.php:722
+msgid "Add Row"
+msgstr ""
+
+#: helpers/pmai_render_field.php:832 helpers/pmai_render_field.php:1253
+msgid ""
+"This field type is not supported. E-mail support@soflyy.com with the details "
+"of the custom ACF field you are trying to import to, as well as a link to "
+"download the plugin to install to add this field type to ACF, and we will "
+"investigate the possiblity ot including support for it in the ACF add-on."
+msgstr ""
+
+#: helpers/pmai_render_field.php:1239
+msgid "Delete Layout"
+msgstr ""
+
+#: models/import/record.php:43
+msgid "Composing advanced custom fields..."
+msgstr ""
+
+#: models/import/record.php:864
+msgid "<strong>ACF ADD-ON:</strong>"
+msgstr ""
+
+#: models/import/record.php:888
+#, php-format
+msgid "- Importing field `%s`"
+msgstr ""
+
+#: models/import/record.php:892
+#, php-format
+msgid "- Field `%s` is skipped attempted to import options"
+msgstr ""
+
+#: models/import/record.php:1468
+#, php-format
+msgid "- Field `%s` updated with value `%s`"
+msgstr ""
+
+#: models/import/record.php:1556
+#, php-format
+msgid "- <b>WARNING</b>: Image %s not found in media gallery."
+msgstr ""
+
+#: models/import/record.php:1560
+#, php-format
+msgid "- Using existing image `%s`..."
+msgstr ""
+
+#: models/import/record.php:1585
+#, php-format
+msgid "- <b>WARNING</b>: File %s cannot be saved locally as %s"
+msgstr ""
+
+#: models/import/record.php:1588
+#, php-format
+msgid ""
+"- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured "
+"one"
+msgstr ""
+
+#: models/import/record.php:1615 models/import/record.php:1692
+#: models/import/record.php:1717
+msgid "- <b>WARNING</b>"
+msgstr ""
+
+#: models/import/record.php:1666
+#, php-format
+msgid ""
+"- <b>WARNING</b>: File %s is not a valid image and cannot be set as ACF image"
+msgstr ""
+
+#: models/import/record.php:1676
+#, php-format
+msgid "- <b>WARNING</b>: Attachment file %s cannot be saved locally as %s"
+msgstr ""
+
+#: models/import/record.php:1679
+#, php-format
+msgid "- <b>WARNING</b>: Can't detect attachment file type %s"
+msgstr ""
+
+#: models/import/record.php:1764
+msgid "<b>ERROR</b> Could not insert term relationship into the database"
+msgstr ""
+
+#: views/admin/import/index.php:4
+msgid "Advanced Custom Fields Add-On"
+msgstr ""
+
+#: views/admin/import/index.php:54
+msgid "Please choose your Field Groups."
+msgstr ""
+
+#: views/admin/import/index.php:81
+msgid "Please create Field Groups."
+msgstr ""
+
+#. Name of the plugin
+msgid "WP All Import - ACF Add-On"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Import to Advanced Custom Fields. Requires WP All Import & Advanced Custom "
+"Fields."
+msgstr ""
+
+#. URI of the plugin
+msgid "http://www.wpallimport.com/"
+msgstr ""
+
+#. Author of the plugin
+msgid "Soflyy"
+msgstr ""

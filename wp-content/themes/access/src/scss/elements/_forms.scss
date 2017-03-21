@@ -1,0 +1,114 @@
+#{$all-text-inputs} {
+  color: $color-grey-mid;
+}
+
+input,
+textarea {
+  @include placeholder {
+    color: $color-grey-mid;
+  }
+}
+
+#{$all-text-inputs},
+textarea,
+select {
+  @include appearance(none);
+  border: 1px solid $color-grey-mid;
+  border-radius: 0;
+  display: block;
+  max-width: 100%;
+  min-width: 200px;
+  width: 100%;
+
+  @include media($bp-tablet-up) {
+    width: auto;
+  }
+
+  .error & {
+    border-color: $color-red;
+  }
+}
+
+select {
+  background-color: $color-white;
+  background-image: url('/wp-content/themes/access/assets/img/arrow-down.svg');
+  background-position: $text-direction-end .5rem center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  padding: .75 * $spacing-base;
+  padding-#{$text-direction-end}: 1.8rem;
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+fieldset {
+  border-width: 0;
+  padding: 0;
+}
+
+[type='checkbox'],
+[type='radio'] {
+  display: inline;
+}
+
+#{$all-text-inputs},
+textarea {
+  padding: (.75 * $spacing-base);
+}
+
+input[type="number"] {
+  @include appearance(textfield);
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    @include appearance(none);
+    margin: 0;
+  }
+}
+
+.styled-checkbox {
+  cursor: pointer;
+  display: block;
+  padding-#{$text-direction-start}: 40px;
+  position: relative;
+
+  input {
+    @include sr-only();
+  }
+}
+
+.styled-checkbox-label {
+  &::before {
+    @include size($checkbox-size);
+    @include transition(all .2s);
+    @if $text-direction == 'rtl' {
+      @include position(absolute, 0 0 null null);
+    } @else {
+      @include position(absolute, 0 null null 0);
+    }
+    background: $color-white;
+    border: 1px solid $color-grey-mid;
+    border-radius: $checkbox-radius;
+    content: '';
+    display: inline-block;
+    min-width: $checkbox-size;
+  }
+
+  input:checked + & {
+    &::before {
+      background: $color-blue url('/wp-content/themes/access/assets/img/icon-checkmark.svg') no-repeat;
+      background-size: cover;
+      border: 0;
+    }
+  }
+
+  input:focus + & {
+    &::before {
+      border: 0;
+      box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #0071bc;
+    }
+  }
+}
+

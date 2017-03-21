@@ -1,0 +1,9 @@
+{% if cat != '' %}
+  {% for post in posts if cat in post.terms('category') %}
+    {% include 'partials/post-teaser-block.twig' %}
+  {% endfor %}
+{% else %}
+  {% for post in posts %}
+    {% include 'partials/post-teaser-block.twig' %}
+  {% endfor %}
+{% endif %}

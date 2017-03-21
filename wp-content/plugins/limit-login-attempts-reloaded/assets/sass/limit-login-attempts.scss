@@ -1,0 +1,11 @@
+.limit-login-log {
+  table {
+    background-color: #fff;
+    th, td {
+      padding: 10px;
+    }
+    tr:nth-child(even) {
+      background-color: rgba(#000, .09);
+    }
+  }
+}

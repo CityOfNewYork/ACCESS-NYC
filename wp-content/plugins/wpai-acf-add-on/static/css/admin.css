@@ -1,0 +1,1836 @@
+/*---------------------------------------------------------------------------------------------
+*
+*  Post Box
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf-hidden {
+	display: none !important;
+}
+
+.acf_postbox {
+	display: block;
+}
+
+.acf_postbox .inside,
+#poststuff .acf_postbox .inside {
+	margin: 0;
+	padding: 0;
+}
+
+.acf_postbox.no_box {
+	border: 0 none;
+	background: transparent;
+}
+
+.acf_postbox.no_box > h3,
+.acf_postbox.no_box > .handlediv {
+	display: none;
+}
+
+.acf_postbox .widefat th, 
+.acf_postbox .widefat td {
+	overflow: visible;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Field
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf_postbox .field {
+	position: relative;
+	color: #333333;
+}
+
+.acf_postbox > .inside > .field {
+	padding: 15px 10px;
+	border-top: #e8e8e8 solid 1px;
+	overflow: hidden;
+}
+
+.acf_postbox > .inside > .field:first-child {
+	border-top: none;
+}
+
+.acf_postbox.no_box > .inside > .field { 
+    border-top: 0 none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+/* Field Error */
+.acf_postbox{
+	margin-bottom: 20px !important;
+}
+.acf_postbox .field.error {
+	border: #CC0000 solid 1px !important;
+	background: #FFEBE8 !important;
+}
+
+.acf_postbox .field .acf-error-message {
+	display: none;
+	position: relative;
+	
+	background: #CC0000;
+	color: #fff;
+	text-shadow: none;
+	
+	border-radius: 3px;
+	padding: 5px 10px;
+	
+	font-size: 12px;
+	line-height: 14px;
+	
+	margin: 5px 0 0;
+}
+
+.acf_postbox .field .acf-error-message .bit {
+	width: 0;
+	height: 0;
+	border: transparent 5px solid;
+	border-bottom-color: #CC0000;
+	
+	display: block;
+	position: absolute;
+	top: -10px;
+	left: 10px;
+}
+
+.acf_postbox .field.error .acf-error-message {
+	display: inline-block;
+}
+
+.acf_postbox .field.error label.field_label {
+	color: #CC0000;
+}
+
+.acf_postbox.no_box > .inside > .field.error { 
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.acf_postbox > .inside > .field.error + .field.error {
+	border-top: 0 none !important;
+}
+
+
+
+
+/* Field Label */
+.acf_postbox p.label {
+	font-size: 11px;
+	line-height: 1.1em;
+	margin: 0 0 1em;
+	padding: 0;
+	color: #666666;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.acf_postbox p.label label {
+	color: #333333;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0 0 3px;
+    display: block;
+    vertical-align: text-bottom;
+}
+
+.acf_postbox .field.required label span.required {
+	color: #CC0000;
+}
+
+.acf_postbox label.field_label:first-child {
+	padding-top: 0;
+}
+
+/*.acf_postbox .field_type-message p.label {
+	display: none !important;
+} */
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Basic Field Styles
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf_postbox .field input[type="text"],
+.acf_postbox .field input[type="number"],
+.acf_postbox .field input[type="password"],
+.acf_postbox .field input[type="email"],
+.acf_postbox .field textarea{
+	width: 100%;
+	padding: 5px;
+	resize: none;
+	margin: 0;
+	height: 36px;
+}
+
+.acf_postbox .field textarea {
+	resize: vertical;
+	min-height: 150px;
+}
+
+.acf_postbox .field select{
+	width: 100%;
+	padding: 2px;
+	resize: none;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;	
+	height: 32px;
+}
+
+.acf_postbox .field select optgroup {
+	padding: 5px;
+	background: #fff;
+}
+
+.acf_postbox .field select option {
+	padding: 3px;
+}
+
+.acf_postbox .field select optgroup option {
+	padding-left: 5px;
+}
+
+.acf_postbox .field select optgroup:nth-child(2n) {
+    background: #F9F9F9;
+}
+
+.acf-input-wrap input[type="radio"],
+.acf-input-wrap input[type="checkbox"]{
+	height: 16px !important;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Field: WYSIWYG
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf_wysiwyg {
+	
+}
+
+.acf_wysiwyg .wp_themeSkin table.mceToolbarRow1 {
+    margin-top: 2px !important;
+}
+
+.acf_wysiwyg iframe{ 
+	min-height: 250px;
+}
+
+#post-body .acf_wysiwyg .wp_themeSkin .mceStatusbar a.mceResize {
+	top: -2px !important;
+}
+
+.acf_wysiwyg .wp-editor-container {
+	background: #fff;
+	border-color: #CCCCCC #CCCCCC #DFDFDF;
+    border-style: solid;
+    border-radius: 3px 3px 0 0;
+    border-width: 1px;
+}
+
+
+/*
+*  WP 3.5 z-index fix for full screen wysiwyg
+*/
+
+#mce_fullscreen_container {
+	z-index: 150005 !important;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Field: Image
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf-image-uploader {
+	position: relative;
+}
+
+.acf-image-uploader .has-image { display: none; float: left; position: relative; max-width: 100%; }
+.acf-image-uploader .no-image { display: block; float: left; position: relative; max-width: 100%; }
+
+.acf-image-uploader.active .has-image { display: block; }
+.acf-image-uploader.active .no-image { display: none; }
+
+
+.acf-image-uploader img {
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+	width: 100%;
+	height: auto;
+	display: block;
+	min-width: 30px;
+	min-height: 30px;
+	background: #f1f1f1;
+	margin: 0 0 0 2px;
+}
+
+.acf-image-uploader .no-image p {
+	display: block;
+	margin: 0 !important;
+}
+
+.acf-image-uploader input.button {
+	width: auto;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	
+	.acf-image-uploader img {
+		width: auto;
+		max-width: 100%;
+	}
+	
+}
+
+
+/*
+*  Hover
+*/
+
+.acf-image-uploader .hover {
+	position: absolute;
+	top: -11px;
+	right: -11px;
+	
+	-webkit-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+	-moz-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 	
+	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 
+	
+	visibility: hidden;
+	opacity: 0;
+}
+
+.acf-image-uploader .has-image:hover .hover {
+	-webkit-transition-delay:0s;
+	-moz-transition-delay:0s;
+	-o-transition-delay:0s;
+	transition-delay:0s;
+	
+	visibility: visible;
+	opacity: 1;
+}
+
+.acf-image-uploader .hover ul {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.acf-image-uploader .hover ul li {
+	margin: 0 0 5px 0;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Media Model
+*
+*---------------------------------------------------------------------------------------------*/
+
+.media-modal { 
+	
+}
+
+.media-modal .field {
+	padding: 0;
+}
+
+
+/* WP sets tables to act as divs. ACF uses tables, so these muct be reset */
+.media-modal .compat-attachment-fields td.field table {
+	display: table;
+}
+.media-modal .compat-attachment-fields td.field table tbody {
+	display: table-row-group;
+}
+.media-modal .compat-attachment-fields td.field table tr {
+	display: table-row;
+}
+.media-modal .compat-attachment-fields td.field table td,
+.media-modal .compat-attachment-fields td.field table th {
+	display: table-cell;
+}
+
+.compat-item table.widefat {
+	border: #DFDFDF solid 1px;
+}
+
+
+/* Expand / Collapse button */
+.media-modal .acf-expand-details {
+	float: right;
+	padding: 1px 10px;
+	margin-right: 6px;
+	height: 18px;
+	line-height: 18px;
+	color: #AAAAAA;
+	font-size: 12px;
+}
+
+.media-modal .acf-expand-details:hover {
+	color: #999;
+}
+
+.media-modal .acf-expand-details:focus,
+.media-modal .acf-expand-details:active {
+	outline: 0 none;
+}
+
+.media-modal .acf-expand-details span {
+	display: block;
+	float: left;
+}
+
+.media-modal .acf-expand-details .icon {
+	height: 15px;
+	width: 15px;
+	float: left;
+	
+	background: url(../images/arrows.png) 0 -72px no-repeat;
+	border: #C7C7C7 solid 1px;
+	
+	border-radius: 10px;
+	margin: 0 4px 0 0;
+}
+
+.media-modal .acf-expand-details:hover .icon {
+	border-color: #AAAAAA;
+}
+
+.media-modal.acf-expanded .acf-expand-details .icon {
+	background-position: 0 -108px;
+}
+
+.media-modal .acf-expand-details .is-open { display: none; }
+.media-modal .acf-expand-details .is-closed { display: block; }
+
+.media-modal.acf-expanded .acf-expand-details .is-open { display: block; }
+.media-modal.acf-expanded .acf-expand-details .is-closed { display: none; }
+
+
+/* Expand / Collapse views */
+.media-modal .media-toolbar,
+.media-modal .attachments,
+.media-modal .media-sidebar {
+	-webkit-transition: all 0.25s ease-out;  /* Safari 3.2+, Chrome */
+       -moz-transition: all 0.25s ease-out;  /* Firefox 4-15 */
+         -o-transition: all 0.25s ease-out;  /* Opera 10.5–12.00 */
+            transition: all 0.25s ease-out;  /* Firefox 16+, Opera 12.50+ */
+}
+
+.media-modal.acf-expanded .media-toolbar { right: 700px; }
+.media-modal.acf-expanded .attachments { right: 700px; }
+.media-modal.acf-expanded .media-sidebar { width: 667px; }
+
+
+/* Sidebar: Collapse */
+.media-modal .compat-item .label {
+	margin: 0;	
+}
+
+.media-modal .media-sidebar .setting span, 
+.media-modal .compat-item label span,
+.media-modal .media-sidebar .setting input, 
+.media-modal .media-sidebar .setting textarea,
+.media-modal .compat-item .field {
+	min-height: 0;
+	margin: 5px 0 0;
+}
+
+.media-modal .media-sidebar .setting span, 
+.media-modal .compat-item label span {
+	padding-top: 7px;	
+}
+
+.media-modal .attachment-display-settings .setting span {
+	margin-top: 0;
+	margin-right: 3%;
+}
+
+
+/* Sidebar: Expand */
+.media-modal.acf-expanded .attachment-info .thumbnail {
+	width: 20%;
+	max-width: none;
+	max-height: 150px;
+	margin-right: 3%;
+	overflow: hidden;
+}
+
+.media-modal.acf-expanded .media-sidebar .setting span,
+.media-modal.acf-expanded .compat-item .label {
+	min-width: 20%;	
+}
+
+.media-modal.acf-expanded .media-sidebar .setting input, 
+.media-modal.acf-expanded .media-sidebar .setting textarea,
+.media-modal.acf-expanded .compat-item .field {
+	width: 77%;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Media Model (Edit Mode)
+*
+*---------------------------------------------------------------------------------------------*/
+
+.media-modal.acf-media-modal {
+	left: 15%;
+	right: 15%;
+	top: 100px;
+	bottom: 100px;
+}
+
+/* Expand / Collapse views */
+.media-modal.acf-media-modal .media-toolbar,
+.media-modal.acf-media-modal .attachments,
+.media-modal.acf-media-modal .media-sidebar {
+	-webkit-transition: none;  /* Safari 3.2+, Chrome */
+       -moz-transition: none;  /* Firefox 4-15 */
+         -o-transition: none;  /* Opera 10.5–12.00 */
+            transition: none;  /* Firefox 16+, Opera 12.50+ */
+}
+
+.media-modal.acf-media-modal .media-frame-router,
+.media-modal.acf-media-modal .attachments,
+.media-modal.acf-media-modal .media-frame-content .media-toolbar {
+    display: none;
+}
+
+.media-modal.acf-media-modal .media-frame-content {
+    top: 45px;
+}
+
+.media-modal.acf-media-modal .media-frame-title {
+    border-bottom: 1px solid #DFDFDF;
+    box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
+}
+
+.media-modal.acf-media-modal .media-frame-content .media-sidebar {
+    width: auto;
+    left: 0px;
+}
+
+.media-modal.acf-media-modal .media-toolbar {
+    right: 0;
+}
+
+
+@media (max-width: 960px) {
+	
+	.media-modal.acf-media-modal {
+		left: 10%;
+		right: 10%;
+	}
+	
+}
+
+@media (max-width: 760px) {
+	
+	.media-modal.acf-expanded .media-sidebar .setting span,
+	.media-modal.acf-expanded .compat-item .label {
+		min-width: 100%;
+		text-align: left;
+		min-height: 0;
+		padding: 0;
+	}
+	
+	.media-modal.acf-expanded .compat-item .label br {
+		display: none;
+	}
+	
+	.media-modal.acf-expanded .media-sidebar .setting input, 
+	.media-modal.acf-expanded .media-sidebar .setting textarea,
+	.media-modal.acf-expanded .compat-item .field {
+		width: 100%;
+	}
+	
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  ACF Message Wrapper (used by image / file / gallery)
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf-message-wrapper {
+	margin: 10px 0;
+}
+
+.acf-message-wrapper .message {
+	margin: 0 !important;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Field: File
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf-file-uploader {
+	position: relative;
+	line-height: 1.5em;
+}
+
+.acf-file-uploader .has-file {
+	display: none;
+	float: left;
+}
+
+.acf-file-uploader .no-file {
+	display: block;
+}
+
+.acf-file-uploader.active .has-file {
+	display: block;
+}
+
+.acf-file-uploader.active .no-file {
+	display: none;
+}
+
+.acf-file-uploader li {
+	position: relative;
+	margin: 0 10px 0 0;
+}
+
+.acf-file-uploader img {
+	min-height: 60px;
+	min-width: 46px;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+	display: block;
+	background: #f1f1f1;
+}
+
+.acf-file-uploader input.button {
+	width: auto;
+}
+
+.acf-file-uploader a {
+	text-decoration: none;
+}
+
+.acf-file-uploader p {
+	margin: 0 0 4px;
+}
+
+
+/*
+*  Hover
+*/
+
+.acf-file-uploader .hover {
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	
+	-webkit-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+	-moz-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 	
+	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 
+	
+	visibility: hidden;
+	opacity: 0;
+}
+
+.acf-file-uploader .has-file:hover .hover {
+	-webkit-transition-delay:0s;
+	-moz-transition-delay:0s;
+	-o-transition-delay:0s;
+	transition-delay:0s;
+	
+	visibility: visible;
+	opacity: 1;
+}
+
+.acf-file-uploader .hover ul {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.acf-file-uploader .hover ul li {
+	margin: 0 0 3px 0;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Field: Select
+*
+*---------------------------------------------------------------------------------------------*/
+
+#wpcontent select[multiple] {
+	height: auto;
+}
+
+#wpcontent select optgroup {
+	padding: 0 2px
+}
+
+#wpcontent select optgroup option {
+	padding-left: 6px;
+}
+
+ul.acf-checkbox-list {
+	background: transparent !important;
+	margin: 0;
+}
+ul.acf-radio-list{
+	margin: 0;
+}
+
+#createuser ul.acf-checkbox-list input {
+    width: auto;
+}
+.acf-input-wrap{
+	padding-bottom: 3px;
+}
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Input Table
+*
+*---------------------------------------------------------------------------------------------*/
+
+table.acf-input-table {
+	border-radius: 0 0 0 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+table.acf-input-table > thead { }
+table.acf-input-table > thead > tr > td { 
+	padding: 8px !important;
+	position: relative;
+	
+	vertical-align: top;
+	border-right: 1px solid #e1e1e1;
+}
+
+table.acf-input-table > tbody {}
+
+table.acf-input-table > tbody > tr {
+	background: #fff;
+}
+
+td.acf_input-wrap {
+	padding: 0 !important;
+}
+
+table.acf_input > tbody > tr > td {
+	background: transparent;
+	border: 0 none;
+   
+    border-top: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+     
+    padding: 8px !important;
+    position: relative;
+}
+
+table.acf_input > tbody > tr > td {
+	background: transparent;
+	border: 0 none;
+   
+    border-top: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+     
+    padding: 8px !important;
+    position: relative;
+}
+
+table.acf-input-table.row_layout > tbody > tr > td {
+	border-top-color: #DFDFDF;
+}
+
+table.acf-input-table > tbody > tr:first-child > td {
+	border-top: 0 none;
+}
+
+table.acf-input-table > tbody > tr > td:last-child {
+	border-right: 0 none;
+}
+
+.sub-field-instructions {
+	color: #999999;
+    display: block;
+    font-family: sans-serif;
+    font-size: 12px;
+    text-shadow: 0 1px 0 #FFFFFF;
+    
+    font-weight: normal;
+}
+table.acf_input tbody tr td.label{
+	background: none repeat scroll 0 0 #F9F9F9;
+	border-right: 1px solid #E1E1E1;
+	border-top: 1px solid #F0F0F0;
+	vertical-align: top;
+	width: 24%;
+	font-weight: bold;
+}
+
+/*---------------------------------------------------------------------------------------------
+*
+*	Field: Relationship
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf_relationship {
+	position: relative;
+	overflow: hidden;
+}
+
+.acf_relationship .relationship_left {
+	width: 50%;
+	float: left;
+}
+
+.acf_relationship .relationship_right {
+	width: 50%;
+	float: left;
+}
+
+.acf_relationship .relationship_label {
+	font-size: 12px;
+	font-family: sans-serif;
+	color: #999;
+	position: absolute;
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+.acf_relationship .widefat {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.acf_relationship .widefat th {
+	border-bottom: 0 none;
+}
+
+
+.acf_relationship .relationship_search {
+	margin: 0;
+	font-size: 12px;
+	line-height: 13px;
+	border-radius: 13px;
+	font-family: sans-serif;
+	padding: 5px 9px !important;
+}
+
+.acf_relationship .relationship_list {
+	background: #fff;
+	position: relative;
+	overflow: auto;
+	height: 150px;
+	border: #DFDFDF solid 1px;
+	border-top-width: 0;
+}
+
+.acf_relationship .relationship_list li.hide {
+	background: #f8f8f8;
+}
+
+.acf_relationship .relationship_list li.hide a {
+	cursor: default;
+	color: #21759B !important;
+	opacity: 0.5;
+	background: transparent !important;
+}
+
+.acf_relationship .relationship_list li {
+	border-bottom: #f8f8f8 solid 1px;
+}
+
+.acf_relationship .relationship_list li a {
+	display: block;
+	position: relative;
+	padding: 7px 9px;
+	text-decoration: none;
+}
+
+.acf_relationship .relationship_list li a .relationship-item-info {
+	color: #CCC;
+	text-transform: uppercase;
+	float: right;
+	font-size: 11px;
+}
+
+.acf_relationship .relationship_list li:hover a .relationship-item-info {
+	padding-right: 24px;
+	color: #999;
+}
+
+.acf_relationship .relationship_list li.hide:hover a .relationship-item-info {
+	padding-right: 0;
+	color: #CCC;
+}
+
+.acf_relationship .relationship_list li a:hover,
+.acf_relationship .relationship_list li a:focus {
+	background: #eaf2fa;
+	color: #000;
+	box-shadow: #d6e1ec 0 0 0 1px;
+}
+
+.acf_relationship .relationship_right .relationship_list {
+	margin-left: 10px;
+	height: 193px;
+	min-height: 193px;
+	border-top-width:1px; 
+}
+
+.acf_relationship .relationship_list li a .acf-button-add,
+.acf_relationship .relationship_list li a .acf-button-remove {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: none;
+	
+	cursor: pointer;
+}
+
+.acf_relationship .relationship_list li a:hover .acf-button-add,
+.acf_relationship .relationship_list li a:hover .acf-button-remove {
+	display: block;
+}
+
+.acf_relationship .relationship_list li.hide a:hover .acf-button-add {
+	display: none;
+}
+
+
+.acf_relationship .relationship_right .relationship_list li a {
+	cursor: move;
+}
+
+.acf_relationship .load-more .acf-loading {
+	padding: 0;
+	box-shadow: none;
+	background-color: transparent;
+}
+
+.acf_relationship.no-results .load-more {
+	display: none;
+}
+
+
+.acf_relationship select {
+	font-family: sans-serif;
+	font-size: 12px;
+	
+}
+
+.acf_relationship .widefat tr + tr th {
+	border-radius: 0;
+	border-top: #DFDFDF solid 1px;
+	background: #F3F3F3;
+	
+}
+
+.acf_relationship .relationship_list .result-thumbnail {
+	width:21px; 
+	height:21px; 
+	background:#F9F9F9; 
+	border:#E1E1E1 solid 1px; 
+	float:left; 
+	margin:-3px 5px 0 0;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*  Field: Taxonomy
+*
+*---------------------------------------------------------------------------------------------*/
+
+.acf-taxonomy-field {
+	
+}
+
+.acf-taxonomy-field ul {
+	
+}
+
+.acf-taxonomy-field .categorychecklist-holder {
+	border: #DFDFDF solid 1px;
+	padding: 5px;
+	max-height: 200px;
+	overflow: auto;
+}
+
+.acf-taxonomy-field .categorychecklist {
+	margin: 0;
+	padding: 10px;
+}
+
+.acf-taxonomy-field ul li {
+	
+}
+
+.acf-taxonomy-field ul.children {
+	padding-left: 18px;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*	Field: Tab
+*
+*---------------------------------------------------------------------------------------------*/
+
+.field_type-tab {
+	display: none !important;
+}
+
+.acf-tab-group {
+	border-top: #E8E8E8 solid 1px;
+	border-bottom: #DFDFDF solid 1px;
+	margin: 0 0 10px;
+	padding: 10px 4px 0 10px;
+	
+	background: #F3F3F3;
+}
+
+.acf-tab-group li {
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
+	font-size: 23px;
+    line-height: 29px;
+    margin: 0 6px -1px 0;
+    
+}
+
+.acf-tab-group li a {
+	padding: 10px;
+	display: block;
+	border-radius: 3px 3px 0 0;
+	
+	color: #AAAAAA;
+	font-size: 20px;
+    font-weight: 200;
+    line-height: 1em;
+    padding: 5px 10px 7px;
+    
+    border: #DFDFDF solid 1px;
+    text-decoration: none;
+    background: #F8F8F8;
+    
+}
+
+.acf-tab-group li a:hover, 
+.acf-tab-group li.active a {
+    color: #d54e21
+}
+
+.acf-tab-group li.active a {
+	color: #464646;
+	border-color: #CCCCCC;
+    border-bottom-color: #F7F7F7;
+}
+
+.acf_postbox > .inside > .field_type-tab + .field {
+	border-top: 0 none;
+}
+
+
+/*
+*  No Box
+*/
+
+.acf_postbox.no_box .acf-tab-group {
+	padding-left: 0;
+	border-top: 0 none;
+	border-bottom-color: #CCC;
+	background: transparent;
+}
+
+.acf_postbox.no_box .acf-tab-group li.active a {
+    border-bottom-color: #fff;
+}
+
+
+.acf_postbox.no_box .acf-tab-group li a {
+    background: #fff;
+    
+}
+
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*	Field: Date Picker
+*
+*---------------------------------------------------------------------------------------------*/
+
+.ui-acf .ui-datepicker {
+	z-index: 999999999 !important;
+}
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*	Other
+*
+*---------------------------------------------------------------------------------------------*/
+
+.form-field.field input[type="checkbox"],
+.form-field.field input[type="radio"] {
+	width: auto !important;
+}
+
+#createuser input,
+#your-profile input {
+	max-width: 25em;
+}
+
+/*--------------------------------------------------------------------------
+*
+*	Tab Group
+*	
+*-------------------------------------------------------------------------*/
+
+.acf-tab_group-show {
+	display: block;
+}
+tr.acf-tab_group-show {
+	display: table-row;
+}
+.acf-tab_group-hide {
+	display: none;
+}
+
+
+/*--------------------------------------------------------------------------
+*
+*	Conditional Logic
+*	
+*-------------------------------------------------------------------------*/
+
+/* Show */
+.acf-conditional_logic-show {
+	display: block;
+}
+
+tr.acf-conditional_logic-show {
+	display: table-row;
+}
+
+td.acf-conditional_logic-show,
+th.acf-conditional_logic-show {
+    display: table-cell;
+}
+
+
+/* Hide */
+.acf-conditional_logic-hide,
+tr.acf-conditional_logic-hide,
+td.acf-conditional_logic-hide,
+th.acf-conditional_logic-hide {
+    display: none;
+}
+
+
+/* Hide (show blank) */
+td.acf-conditional_logic-hide.acf-show-blank,
+th.acf-conditional_logic-hide.acf-show-blank {
+    display: table-cell;
+}
+
+td.acf-conditional_logic-hide.acf-show-blank .inner,
+th.acf-conditional_logic-hide.acf-show-blank .inner {
+	display: none;
+}
+
+
+/*--------------------------------------------------------------------------
+*
+*	Conditional Logic + Tabs
+*	
+*-------------------------------------------------------------------------*/
+
+.acf-tab_group-hide.acf-conditional_logic-show {
+	display: none;
+}
+
+.hl.acf-tab-group > li.acf-conditional_logic-hide {
+	display: none;
+}
+
+
+/*--------------------------------------------------------------------------
+*
+*	Field: Color picker
+*	
+*-------------------------------------------------------------------------*/
+
+.acf-color_picker {
+	
+}
+
+.acf-color_picker input[type="text"] {
+	display: inline;
+	width: 80px !important;
+}
+
+.acf-color_picker .ui-slider-vertical {
+	width: auto;
+	height: auto;
+	background: transparent;
+	border: 0 none;
+}
+
+.acf-color_picker .ui-slider-vertical .ui-slider-handle {
+	margin-bottom: 0;
+}
+
+/* Hack for color picker in media popup */
+.media-frame .acf-color_picker .wp-color-result {
+	border-bottom: #BBBBBB solid 1px;
+}
+
+.compat-item .field .acf-color_picker input {
+	width: auto;
+	margin: 0 0 0 6px;
+}
+
+.compat-item .field .acf-color_picker .button {
+	height: 24px;
+	padding: 0 10px 1px;
+}
+
+
+/*--------------------------------------------------------------------------
+*
+*	Field: Location
+*	
+*-------------------------------------------------------------------------*/
+
+.acf-google-map {
+	position: relative;
+	border: #DFDFDF solid 1px;
+	background: #fff;
+}
+
+.acf-google-map .title {
+	position: relative;
+	border-bottom: #DFDFDF solid 1px;
+}
+
+.acf-google-map .has-value { display: none; }
+.acf-google-map .no-value { display: block; }
+
+.acf-google-map.active .has-value { display: block; }
+.acf-google-map.active .no-value { display: none; }
+
+.acf-google-map .title h4,
+.acf-google-map .title input[type="text"] {
+	margin: 0;
+	font-size: 12px;
+	line-height: 16px;
+	padding: 10px;
+	border: 0 none;
+	box-shadow: none;
+	border-radius: 0;
+	font-family: inherit;
+	cursor: text;
+}
+
+.acf-google-map .title input[type="text"] {
+	height: 36px;
+	line-height: normal;
+}
+
+.acf-google-map .title .search {
+	height: auto;
+	border: 0 none;
+}
+
+.acf-google-map .acf-sprite-remove,
+.acf-google-map .acf-sprite-locate {
+	right: 7px;
+	top: 7px;
+	position: absolute;
+}
+
+.acf-google-map .acf-sprite-remove {
+	background-position: -71px -221px;
+	height: 9px;
+	width: 9px;
+	border: 6px solid transparent;
+}
+.acf-google-map .acf-sprite-remove:hover { background-position: -71px -271px; }
+
+.acf-google-map .acf-sprite-locate {
+	background-position: -50px -300px;
+	width: 13px;
+	height: 13px;
+	border: 5px solid transparent;
+}
+.acf-google-map .acf-sprite-locate:hover { background-position: -50px -350px; }
+
+.acf-google-map .canvas {
+	height: 400px;
+}
+
+.pac-container {
+	margin-left: -1px;
+	margin-top: -1px;
+	padding: 5px 0;
+	border-color: #DFDFDF;
+}
+
+.pac-container:after {
+	display: none;
+}
+
+.pac-container .pac-item {
+	padding: 5px;
+	margin: 0 5px;
+}
+
+.row-clone{
+	display: none;
+}
+
+/*--------------------------------------------------------------------------------------------
+*
+*	Buttons
+*
+*--------------------------------------------------------------------------------------------*/
+
+.hl{
+	overflow: hidden;
+}
+
+.hl > li.right{
+	float: right;
+	display: block;
+}
+
+a.acf-button,
+input[type="submit"].acf-button {
+	display: block;	
+	text-decoration: none !important;
+	border-radius: 3px;
+	
+	border: #21759B solid 1px;
+    border-color: #21759B #21759B #1E6A8D;
+    
+    
+	background: #21759B;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#2A95C5), to(#21759B)); /* Safari 4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #2A95C5, #21759B); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+	background-image:    -moz-linear-gradient(top, #2A95C5, #21759B); /* Firefox 3.6-15 */
+	background-image:      -o-linear-gradient(top, #2A95C5, #21759B); /* Opera 11.10+ */
+	background-image:         linear-gradient(to bottom, #2A95C5, #21759B); /* Firefox 16+ */
+	
+    color: #FFFFFF !important;
+    font-weight: normal;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+    font-size: 13px;
+    line-height: 1em;
+    padding: 6px 11px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 0 rgba(120, 200, 230, 0.5) inset;
+	cursor: pointer;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+}
+
+a.acf-button:hover,
+input[type="submit"].acf-button:hover {
+
+	background-color: #3b97c9;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#3b97c9), to(#246f99)); /* Safari 4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #3b97c9, #246f99); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+	background-image:    -moz-linear-gradient(top, #3b97c9, #246f99); /* Firefox 3.6-15 */
+	background-image:      -o-linear-gradient(top, #3b97c9, #246f99); /* Opera 11.10+ */
+	background-image:         linear-gradient(to bottom, #3b97c9, #246f99); /* Firefox 16+ */
+
+    border-color: #1B607F;
+
+    color: #FFFFFF;
+    
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 0 rgba(120, 200, 230, 0.6) inset;
+}
+
+a.acf-button:active,
+input[type="submit"].acf-button:active {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+	top: 1px;
+	
+}
+
+a.acf-button.grey,
+input[type="submit"].acf-button.grey {
+	border-color: #bbb;
+	text-shadow: 0 1px 0 #fff;
+	color: #454545;
+	
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 1px rgba(255, 255, 255, 1) inset;
+	
+	background: #fff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ececec)); /* Safari 4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #ffffff, #ececec); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+	background-image:    -moz-linear-gradient(top, #ffffff, #ececec); /* Firefox 3.6-15 */
+	background-image:      -o-linear-gradient(top, #ffffff, #ececec); /* Opera 11.10+ */
+	background-image:         linear-gradient(to bottom, #ffffff, #ececec); /* Firefox 16+ */
+	
+}
+
+a.acf-button.grey:hover,
+input[type="submit"].acf-button.grey:hover {
+	border-color: #aaa;
+	
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(255, 255, 255, 1) inset;
+}
+
+a.acf-button[disabled],
+a.acf-button.disabled,
+input[type="submit"].acf-button[disabled] {
+	opacity: 0.7;
+}
+
+a.acf-button[disabled]:hover,
+a.acf-button.disabled:hover,
+input[type="submit"].acf-button[disabled]:hover {
+	
+}
+
+a.acf-button-big {
+	font-size: 16px;
+	padding: 13px;
+}
+
+div.error a.acf-button {
+	color: #fff;
+}
+
+.repeater {
+	
+}
+
+.repeater > table {
+	margin: 0 0 8px;
+}
+
+.repeater > table.acf-input-table > tbody > tr > td.field {
+	padding: 8px !important;
+	border: 1px solid #ededed;
+}
+
+.repeater > table > thead > tr > td:last-child {
+	border-right: 0 none;
+}
+
+.repeater > table > tbody > tr > td.remove > a.acf-button-add,
+.repeater > table > tbody > tr > td.remove > a.acf-button-remove {
+	position: absolute;
+	
+	-webkit-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+	-moz-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
+	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 	
+	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 
+	
+	visibility: hidden;
+	opacity: 0;
+}
+
+.repeater > table > tbody > tr > td.remove > a.acf-button-remove {
+	position: relative;
+}
+
+.repeater > table > tbody > tr:hover > td.remove > a.acf-button-add,
+.repeater > table > tbody > tr:hover > td.remove > a.acf-button-remove {
+
+	-webkit-transition-delay:0s;
+	-moz-transition-delay:0s;
+	-o-transition-delay:0s;
+	transition-delay:0s;
+	
+	visibility: visible;
+	opacity: 1;
+}
+
+.repeater.disabled > table > tbody > tr:hover > td.remove > a.acf-button-add {
+	visibility: hidden !important;
+}
+
+.repeater > table > thead > tr > td.order,
+.repeater > table > tbody > tr > td.order{
+	width: 16px !important;
+	text-align: center !important;
+	vertical-align: middle;
+	color: #aaa;
+	text-shadow: #fff 0 1px 0;
+	border: 1px solid #ededed;
+}
+
+.repeater > table > tbody > tr > td.order {
+	border-right-color: #E1E1E1;
+	background: #f4f4f4;
+}
+
+.repeater > table > tbody > tr > td.remove {
+	background: #F9F9F9;
+}
+
+
+.repeater > table > thead > tr > th.order:hover,
+.repeater > table > tbody > tr > td.order:hover {
+	color: #666;
+}
+
+.repeater > table > thead > tr > th.remove,
+.repeater > table > tbody > tr > td.remove{
+	width: 16px !important;
+	vertical-align: middle;
+}
+
+.repeater tr.row-clone {
+	display: none !important;
+}
+
+.repeater > table > tbody > tr.ui-sortable-helper {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+
+.repeater > table > tbody > tr.ui-sortable-placeholder {
+	visibility: visible !important;
+}
+
+.repeater > table > tbody > tr.ui-sortable-placeholder td {
+	border: 0 none !important;
+	box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+	background: rgba(0,0,0,0.075);
+}
+
+
+/*
+*  Empty
+*/
+
+.repeater.empty table thead th {
+	border-bottom: 0 none;
+}
+
+.repeater.empty table.row_layout {
+	box-shadow: none;
+	border: 0 none;
+	margin: 0;
+}
+.repeater p.label{
+	display: none;
+}
+
+/*
+*  Conditiona Logic
+*/
+
+
+
+
+/*---------------------------------------------------------------------------------------------
+*
+*	Everythign Field fixes
+*
+*---------------------------------------------------------------------------------------------*/
+
+.media-item .describe .repeater > table > thead > tr > th {
+	width: auto;
+}
+
+
+.clones .layout{
+	display: none;
+}
+
+.add_layout{
+	margin: 10px 0px;
+}
+
+.layout{
+	margin: 15px 0px;
+}
+
+.acf_groups .pmai_preloader{
+	background: url("../img/preloader.png");
+	width: 80px;
+	height: 10px;
+	margin: 20px auto;	
+}
+.pmai_foreach{
+	width: 50% !important;
+	margin: 10px !important;
+}
+.pmai_variable_separator{
+	width: 50px !important;
+	margin: 10px !important;
+	text-align: center;
+}
+
+.acf-flexible-content {
+	position: relative;
+}
+
+.acf-flexible-content .layout {
+	margin: 20px 0 0;
+	position: relative;
+	
+	border-radius: 0;
+   
+    background: #fff;
+}
+
+.acf-flexible-content .layout:first-child {
+	margin-top: 0;
+}
+
+.acf-flexible-content .layout .acf-fc-layout-handle {
+	display: block;
+	position: relative;
+	padding: 0 10px;
+	
+	cursor: move;
+	
+	box-shadow: 0 1px 0 #FFFFFF inset;
+	border: #DFDFDF solid 1px;
+	
+	background: #F1F1F1;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#F9F9F9), to(#ECECEC)); /* Safari 4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #F9F9F9, #ECECEC); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+	background-image:    -moz-linear-gradient(top, #F9F9F9, #ECECEC); /* Firefox 3.6-15 */
+	background-image:      -o-linear-gradient(top, #F9F9F9, #ECECEC); /* Opera 11.10+ */
+	background-image:         linear-gradient(to bottom, #F9F9F9, #ECECEC); /* Firefox 16+ */
+	
+	
+	color: #666;
+	text-shadow: 0 1px 0 #FFFFFF;
+	font-size: 12px;
+	line-height: 35px;
+	
+}
+
+.acf-flexible-content .layout.popup-open .acf-fc-layout-controlls {
+	visibility: visible !important;	
+}
+
+.acf-flexible-content .layout .acf-fc-layout-controlls {
+	visibility: hidden;
+	
+	position: absolute;
+	top: 9px;
+	right: 9px;
+	
+	z-index: 1;
+}
+
+.acf-flexible-content .layout:hover .acf-fc-layout-controlls {
+	visibility: visible;
+}
+
+.acf-flexible-content .layout .acf-fc-layout-controlls > li {
+	margin: 0 0 0 5px;
+}
+
+.acf-flexible-content .layout .acf-fc-layout-controlls .acf-button-add,
+.acf-flexible-content .layout .acf-fc-layout-controlls .acf-button-remove {
+	box-shadow: 0 0 0px 1px #cbcbcb;
+}
+
+.acf-flexible-content .clones {
+	display: none;
+}
+
+.acf-flexible-content > .values > .ui-sortable-placeholder {
+	visibility: visible !important;
+	border: #DFDFDF dashed 2px;
+	border-radius: 3px;
+	box-shadow: none;
+}
+
+.acf-flexible-content .layout > .acf-input-table {
+	border-top: 0 none;
+	box-shadow: none;
+}
+
+.acf-flexible-content .layout > .acf-input-table > tbody > tr {
+	background: #fff;
+}
+
+.acf-flexible-content .layout > .acf-input-table > thead > tr > td {
+	background: none repeat scroll 0 0 #F9F9F9;
+    border-bottom: 1px solid #E1E1E1;
+    border-right: 1px solid #E1E1E1;    
+    font-size: 12px;
+	font-family: sans-serif;
+	font-weight: bold;
+}
+
+.acf-flexible-content .layout > .acf-input-table > tbody > tr > td {
+	padding: 8px !important;
+}
+
+.acf-flexible-content .layout > .acf-input-table > thead > tr > td:last-child {
+	border-right: 0 none;
+}
+
+.acf-fc-popup {
+	position: absolute;
+	
+	border-radius: 3px;
+	background: #333739;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+	
+	min-width: 135px;
+	z-index: 999;
+}
+
+.acf-fc-popup .bit {
+	position: absolute;
+	
+	left: 50%;
+	margin: 0 0 0 -10px;
+	
+	width: 0;
+	height: 0;
+	
+	border: transparent solid 10px;
+	border-top-color: #333739;
+	
+	z-index: 2;
+}
+
+.acf-fc-popup .bit.top {
+	top: 0;
+	margin-top: -20px;
+	
+	border: transparent solid 10px;
+	border-bottom-color: #333739;
+}
+
+.acf-fc-popup ul,
+.acf-fc-popup ul li {
+	list-style: none;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.acf-fc-popup ul li {
+	position: relative;
+	float: none;
+	
+	border-top: #2B2F31 solid 1px;
+}
+
+.acf-fc-popup ul li:first-child {
+	margin: 0;
+	border-top: 0 none;
+}
+
+.acf-fc-popup ul li a {
+	color: #F9F9F9;
+	font-size: 12px;
+	line-height: 14px;
+	padding: 6px 8px;
+	display: block;
+	text-decoration: none;
+	position: relative;
+}
+
+.acf-fc-popup ul li a:hover {
+	color: #fff;
+	background: #288FBC;
+	text-shadow: #1E698B 0 1px 0;
+}
+
+.acf-fc-popup ul li a .status {
+	display: block;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	height: 14px;
+	width: 14px;
+	border-radius: 8px;
+	font-size: 8px;
+	line-height: 15px;
+	
+	border: #288FBC solid 1px;
+	
+	text-align: center;
+	color: #DFDFDF;
+
+	display: none;
+}
+
+.acf-fc-popup ul li a .status.warning {
+	border-color: #e86740;
+}
+
+.acf-fc-popup ul li a:hover .status {
+	border-color: #fff;
+	color: #fff;
+}
+
+.acf-fc-popup ul li:first-child a {
+	border-radius: 3px 3px 0 0;
+}
+
+.acf-fc-popup ul li:last-child a {
+	border-radius: 0 0 3px 3px;
+}
+
+.acf-fc-popup ul li:only-child a {
+	border-radius: 3px;
+}
+
+.acf-flexible-content .no_value_message {
+	padding: 19px;
+	border: #ccc dashed 1px;
+	text-align: center;
+}
+
+.acf-flexible-content .flexible-footer {
+	margin: 20px 0 0;
+}
+
+.acf-fc-popup a.focus {
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 100%;
+	top: 0;
+	opacity: 0;
+}
+.w95{
+	width: 95% !important;
+}
+.pmai_taxonomy{
+	width:100%; 
+	clear:both;
+}
+/*.pmai_taxonomy .drag-element .widefat{
+	width: 80% !important;
+}*/
+.wpallimport-plugin .acf-button:focus, 
+.wpallimport-plugin .acf-button:active{
+	line-height: 13px !important;
+}

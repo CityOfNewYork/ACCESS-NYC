@@ -1,0 +1,119 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enable Media Replace v2.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-09-18 07:29:17+0000\n"
+"Last-Translator: Tunghsiao Liu <info@sparanoid.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: PEOPLE'S REPUBLIC OF CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: enable-media-replace.php:39
+#: enable-media-replace.php:67
+#@ enable-media-replace
+msgid "Replace media"
+msgstr "替换媒体"
+
+#: enable-media-replace.php:67
+#@ enable-media-replace
+msgid "Upload a new file"
+msgstr "上传新文件"
+
+#: enable-media-replace.php:67
+#@ enable-media-replace
+msgid "To replace the current file, click the link and upload a replacement."
+msgstr "想要替换当前文件，点击上述链接并上传新文件"
+
+#: popup.php:14
+#: upload.php:3
+#@ enable-media-replace
+#@ default
+msgid "You do not have permission to upload files."
+msgstr "您没有权限上传文件"
+
+#: popup.php:30
+#@ enable-media-replace
+msgid "Replace Media Upload"
+msgstr "替换媒体文件"
+
+#: popup.php:46
+#@ enable-media-replace
+msgid "NOTE: You are about to replace the media file"
+msgstr "注意：您将要替换媒体文件"
+
+#: popup.php:46
+#@ enable-media-replace
+msgid "There is no undo. Think about it!"
+msgstr "此操作无法撤销。"
+
+#: popup.php:48
+#@ enable-media-replace
+msgid "Choose a file to upload from your computer"
+msgstr "从计算机中选择文件上传"
+
+#: popup.php:52
+#@ enable-media-replace
+msgid "Select media replacement type:"
+msgstr "选择媒体替换类型"
+
+#: popup.php:54
+#@ enable-media-replace
+msgid "Just replace the file"
+msgstr "仅替换文件"
+
+#: popup.php:55
+#@ enable-media-replace
+msgid "Note: This option requires you to upload a file of the same type ("
+msgstr "说明：此选项要求您上传与之前文件相同的文件类型（"
+
+#: popup.php:55
+#@ enable-media-replace
+msgid ") as the one you are replacing. The name of the attachment will stay the same ("
+msgstr "），替换后，无论您上传的文件名是什么，上传后的媒体文件名称与地址都会保持不变（"
+
+#: popup.php:55
+#@ enable-media-replace
+msgid ") no matter what the file you upload is called."
+msgstr "）。"
+
+#: popup.php:57
+#@ enable-media-replace
+msgid "Replace the file, use new file name and update all links"
+msgstr "替换文件，使用新文件名并更新所有链接"
+
+#: popup.php:58
+#@ enable-media-replace
+msgid "Note: If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file ("
+msgstr "说明：使用此选项，将会使用新文件的文件名及文件类型，所有包含文件名（"
+
+#: popup.php:58
+#@ enable-media-replace
+msgid ") will be updated to point to the new file name."
+msgstr "）的链接也将会被替换成新文件名。"
+
+#: popup.php:60
+#@ enable-media-replace
+msgid "Upload"
+msgstr "上传"
+
+#: popup.php:60
+#@ enable-media-replace
+msgid "Cancel"
+msgstr "取消"
+
+#: upload.php:33
+#@ default
+msgid "File type does not meet security guidelines. Try another."
+msgstr "文件类型不符合安全规范，请尝试其他文件。"
+

@@ -1,0 +1,101 @@
+.program-filter-header {
+  background: $color-blue-bright;
+  border-radius: $btn-radius;
+  color: $color-white;
+  display: block;
+  font-weight: $font-weight-bold;
+  padding: .75*$spacing-base $spacing-base;
+  text-decoration: none;
+
+  &:link,
+  &:visited,
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color-white;
+  }
+
+  &::after {
+    @include triangle(.6em .4em, $color-white, down);
+    content: '';
+    display: inline-block;
+    float: $text-direction-end;
+    margin-top: .5em;
+  }
+
+  .program-filter.active & {
+    border-radius: $btn-radius $btn-radius 0 0;
+
+    &::after {
+      @include triangle(.6em .4em, $color-white, up);
+      border-top: 0;
+      content: '';
+      display: inline-block;
+      float: $text-direction-end;
+      margin-top: .5em;
+    }
+  }
+}
+
+.program-filter-body {
+  visibility: hidden;
+
+  .program-filter.active & {
+    visibility: visible;
+  }
+}
+
+.program-filter-list {
+  @include transition(all .3s ease-out);
+  list-style: none;
+  margin: 0 0 $spacing-base;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+
+  .program-filter.active & {
+    max-height: 2000px;
+  }
+}
+
+.program-filter-item {
+  background: $color-blue-dark;
+  color: $color-white;
+  display: block;
+  margin: 0;
+  padding: .75*$spacing-base $spacing-base;
+  text-decoration: none;
+
+  .program-filter-list li:last-child & {
+    border-radius: 0 0 $btn-radius $btn-radius;
+  }
+}
+
+label.program-filter-item,
+a.program-filter-item {
+  @include transition(background .2s ease-in);
+
+  &:link,
+  &:visited {
+    color: $color-white;
+  }
+
+  &:hover,
+  &:active,
+  &:focus,
+  &.focused {
+    background: $color-blue;
+    color: $color-white;
+    cursor: pointer;
+  }
+
+  &.active {
+    &:hover,
+    &:active,
+    &:focus,
+    &.focused {
+      background: $color-blue-dark;
+      cursor: default;
+    }
+  }
+}

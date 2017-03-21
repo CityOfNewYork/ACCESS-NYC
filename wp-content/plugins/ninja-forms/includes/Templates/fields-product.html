@@ -1,0 +1,29 @@
+<script id="tmpl-nf-field-product" type="text/template">
+    <div class="nf-product-field {{{ data.renderClasses() }}}">
+        {{{ data.renderProduct() }}}
+    </div>
+</script>
+
+<script id="tmpl-nf-product-single" type="text/template">
+    <span class="nf-product-price-label">{{{ nfi18n.fieldsProductsPrice }}}</span>
+    <span class="nf-product-price">{{{ data.currencySymbol() }}}{{{ data.product_price }}}</span>
+    {{{ data.renderProductQuantity() }}}
+</script>
+
+<script id="tmpl-nf-product-dropdown" type="text/template">
+    <span for="nf-field-{{{ data.id }}}">
+    <select id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element">
+        {{{ data.renderOptions() }}}
+        {{{ data.renderProductQuantity() }}}
+    </select>
+    </span>
+</script>
+
+<script id="tmpl-nf-product-dropdown-option" type="text/template">
+    <option value="{{{ data.value }}}" {{{ ( 1 == data.selected ) ? 'selected="selected"' : '' }}}{{{ data.label }}}</option>
+</script>
+
+<script id="tmpl-nf-product-quantity" type="text/template">
+    <span class="nf-product-quantity-label">{{{ nfi18n.fieldsProductsQuantity }}}</span>
+    <span class="nf-product-quantity"><input id="nf-field-qty-{{{ data.id }}}" name="nf-field-qty-{{{ data.id }}}" class="nf-field-qty nf-element" type="number" min="0" size="10" value="{{{ data.value }}}"></span></span>
+</script>

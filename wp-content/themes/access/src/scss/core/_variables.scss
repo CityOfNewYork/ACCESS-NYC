@@ -1,0 +1,229 @@
+// Site Variables
+//
+
+/**
+ * Colors
+ */
+$color-black: #000;
+$color-blue: #184e9e;
+$color-blue-bright: #118df0;
+$color-blue-dark: #112e51;
+$color-blue-light: #e1eeff;
+$color-green: #05ce7c;
+$color-green-dark: #094727;
+$color-green-mid: #0d6b3b;
+$color-green-light: #d4ffe7;
+$color-grey-dark: #172129;
+$color-grey-light: #d1d5d9;
+$color-grey-lightest: #eef3f7;
+$color-grey-mid: #505c66;
+$color-pink: #f1647c;
+$color-pink-light: #f1b3bd;
+$color-purple: #4c2c92;
+$color-red: #c6252b;
+$color-yellow-access: #fbb720;
+$color-yellow-light: #ffe6a9;
+$color-white: #fff;
+
+/**
+ * Typography
+ */
+$font-path: '/wp-content/themes/access/assets/fonts';
+
+$em-base: 22;
+
+$font-size-small: rem(16);
+$font-size-base: #{$em-base}px;
+$font-size-medium: rem(24);
+$font-size-large: rem(26);
+$font-size-larger: rem(32);
+$font-size-largest: rem(40);
+$font-size-jumbo: rem(56);
+
+$font-weight-normal: normal;
+$font-weight-bold: bold;
+
+@mixin typography-jumbo() {
+  font: $font-weight-normal #{$font-size-largest}/1.3 $font-family-serif;
+
+  @include media($bp-tablet-up) {
+    font-size: $font-size-jumbo;
+  }
+}
+
+@mixin typography-h1() {
+  color: $color-blue-dark;
+  font: $font-weight-normal #{$font-size-larger}/1.3 $font-family-serif;
+
+  @include media($bp-tablet-up) {
+    font-size: $font-size-largest;
+  }
+}
+
+@mixin typography-h2() {
+  font: $font-weight-bold #{$font-size-larger}/1.3 $font-family-serif;
+}
+
+@mixin typography-h3() {
+  color: $color-blue-dark;
+  font: $font-weight-bold #{$font-size-large}/1.3 $font-family-serif;
+}
+
+@mixin typography-h4() {
+  font: $font-weight-bold #{$font-size-medium}/1.3 $font-family-sans;
+}
+
+@mixin typography-h5() {
+  color: $color-grey-mid;
+  font: $font-weight-normal #{$font-size-base}/1.3 $font-family-sans;
+}
+
+@mixin typography-lead() {
+  font: #{$font-size-base}/1.3 $font-family-serif;
+
+  @include media($bp-tablet-up) {
+    font-size: $font-size-larger;
+  }
+}
+
+@mixin typography-base() {
+  color: $color-black;
+  font: #{$font-size-base}/1.4 $font-family-sans;
+}
+
+@mixin typography-supplemental() {
+  color: $color-grey-mid;
+  font: $font-weight-normal #{$font-size-base}/1.3 $font-family-sans;
+}
+
+@mixin typography-nav() {
+  font: $font-weight-normal #{$font-size-small}/1.3 $font-family-sans;
+
+  @include media($bp-tablet-up) {
+    font-size: $font-size-base;
+  }
+}
+
+@mixin typography-blockquote() {
+  color: $color-black;
+  font: #{$font-size-large}/1.3 $font-family-serif;
+}
+
+@mixin typography-program-subheading() {
+  color: $color-grey-mid;
+  font: $font-weight-normal #{$font-size-small}/1.3 $font-family-sans;
+}
+
+/**
+ * Accessibility
+ */
+@mixin sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+@mixin sr-only-focusable {
+  &:active,
+  &:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+
+/**
+ * Breakpoints
+ */
+$screen-desktop: 960px;
+$screen-tablet: 768px;
+$screen-mobile: 480px;
+$screen-sm-mobile: 400px;
+
+$bp-desktop-up: new-breakpoint(min-width $screen-desktop);
+$bp-below-desktop: new-breakpoint(max-width ($screen-desktop - 1));
+$bp-tablet-up: new-breakpoint(min-width $screen-tablet);
+$bp-below-tablet: new-breakpoint(max-width ($screen-tablet - 1));
+$bp-mobile-up: new-breakpoint(min-width $screen-mobile);
+
+/**
+ * LTR/RTL
+ */
+$text-direction: ltr;
+$text-direction-start: left;
+$text-direction-end: right;
+
+@if $language == 'ar' {
+  $default-layout-direction: RTL !global;
+  // Below variable is used for the USWDS grid which built on an old version
+  // of Neat where $layout-direction is used rather than the current name
+  // above.
+  $layout-direction: $default-layout-direction !global;
+  $text-direction: rtl;
+  $text-direction-start: right;
+  $text-direction-end: left;
+}
+
+/*
+ * Magic Numbers
+ */
+$spacing-base: 20px;
+$btn-radius: 5px;
+$checkbox-radius: 8px;
+$checkbox-size: 30px;
+$homepage-max-width: 800px;
+$program-detail-icon-size: 36px;
+$radio-size: 25px;
+$site-max-width: 1200px;
+$site-margins: 20px;
+$site-margins-mobile: 15px;
+$site-min-width: 320px;
+
+/*
+ * Flex Grid Builder
+ * Make sure your parent element has the following attributes:
+ *  display: flex;
+ *  flex-flow: row wrap;
+ */
+
+@mixin flex-grid-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+@mixin flex-grid($number, $margin) {
+  $width: 100% / $number;
+  $subtract: ($number - 1) * $margin / $number;
+  flex-basis: calc(#{$width} - #{$subtract});
+  max-width: calc(#{$width} - #{$subtract});
+
+  &:not(:nth-child(#{$number}n + #{$number})) {
+    margin-#{$text-direction-end}: $margin;
+  }
+}
+
+/*
+ * Homepage Margin Fix
+ * Removes the margins on flush elements at mobile sizes to keep
+ * up with the larger max-width element
+ */
+
+@mixin full-width-home-margins() {
+  .home-body & {
+    margin-left: -#{$spacing-base};
+    margin-right: -#{$spacing-base};
+
+    @include media($bp-tablet-up) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

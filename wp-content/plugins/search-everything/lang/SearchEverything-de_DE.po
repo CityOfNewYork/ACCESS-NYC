@@ -1,0 +1,280 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Everything v6.3.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-10-30 16:00+0100\n"
+"Last-Translator: admin <administration@terrarienpflanzen-lexikon.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: views/options.php:54
+#: views/options.php:61
+#@ SearchEverything
+msgid "Your default search settings have been <strong>updated</strong> by Search Everything. </p><p> What are you waiting for? Go check out the new search results!"
+msgstr "Ihre Einstellungen für Search Everything wurden <strong>aktualisiert.</strong> </p><p> Was wartest du noch? Teste die neuen Suchergebnisse!"
+
+#: views/options.php:71
+#@ SearchEverything
+msgid "Search Everything Version:"
+msgstr "Search Everything Version:"
+
+#: views/options.php:76
+#: views/options.php:281
+#@ SearchEverything
+msgid "Update Options"
+msgstr "Einstellungen aktualisieren"
+
+#: views/options.php:84
+#@ SearchEverything
+msgid "Basic Configuration"
+msgstr "Grundkonfiguration"
+
+#: views/options.php:92
+#@ SearchEverything
+msgid "Search every page"
+msgstr "Durchsuche jede Seite"
+
+#: views/options.php:96
+#: views/options.php:107
+#: views/options.php:121
+#: views/options.php:135
+#: views/options.php:146
+#: views/options.php:156
+#: views/options.php:166
+#: views/options.php:176
+#: views/options.php:189
+#: views/options.php:200
+#: views/options.php:210
+#: views/options.php:220
+#: views/options.php:230
+#@ SearchEverything
+msgid "Yes"
+msgstr "Ja"
+
+#: views/options.php:103
+#@ SearchEverything
+msgid "Search approved pages only"
+msgstr "Durchsuche nur veröffentlichte Seiten"
+
+#: views/options.php:117
+#@ SearchEverything
+msgid "Search every tag name"
+msgstr "Durchsuche alle Tag-Namen"
+
+#: views/options.php:131
+#@ SearchEverything
+msgid "Search every category name and description"
+msgstr "Durchsuche alle Kategorie-Namen und Beschreibungen"
+
+#: views/options.php:142
+#@ SearchEverything
+msgid "Search every comment"
+msgstr "Durchsuche jeden Kommentar"
+
+#: views/options.php:152
+#@ SearchEverything
+msgid "Search comment authors"
+msgstr "Durchsuche Kommentar-Autoren"
+
+#: views/options.php:162
+#@ SearchEverything
+msgid "Search approved comments only"
+msgstr "Durchsuche nur genehmigte Kommentare"
+
+#: views/options.php:172
+#@ SearchEverything
+msgid "Search every excerpt"
+msgstr "Durchsuche jeden Auszug"
+
+#: views/options.php:185
+#@ SearchEverything
+msgid "Search every draft"
+msgstr "Durchsuche jeden Entwurf"
+
+#: views/options.php:196
+#@ SearchEverything
+msgid "Search every attachment"
+msgstr "Durchsuche alle Anhänge"
+
+#: views/options.php:196
+#@ SearchEverything
+msgid "(post type = attachment)"
+msgstr "(Artikel-Typ = Anhang)"
+
+#: views/options.php:206
+#@ SearchEverything
+msgid "Search every custom field"
+msgstr "Durchsuche alle benutzerdefinierten Felder"
+
+#: views/options.php:206
+#@ SearchEverything
+msgid "(metadata)"
+msgstr "(Metadaten)"
+
+#: views/options.php:216
+#@ SearchEverything
+msgid "Search every author"
+msgstr "Durchsuche alle Autoren"
+
+#: views/options.php:226
+#@ SearchEverything
+msgid "Highlight Search Terms"
+msgstr "Hebe Suchbegriffe hervor"
+
+#: views/options.php:236
+#@ SearchEverything
+msgid "Highlight Background Color"
+msgstr "Highlight Hintergrundfarbe"
+
+#: views/options.php:239
+#@ SearchEverything
+msgid "Examples:<br/>'#FFF984' or 'red\\"
+msgstr "Beispiele:<br/>'#FFF984' oder 'red\\"
+
+#: views/options.php:249
+#@ SearchEverything
+msgid "Advanced Configuration - Exclusion"
+msgstr "Erweiterte Konfiguration - Ausschlüsse"
+
+#: views/options.php:255
+#@ SearchEverything
+msgid "Exclude some post or page IDs"
+msgstr "Schliesse einige Post- oder Seiten-IDs aus"
+
+#: views/options.php:258
+#@ SearchEverything
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr "Post-IDs durch Komma getrennt (Beispiel: 1, 5, 9)"
+
+#: views/options.php:262
+#@ SearchEverything
+msgid "Exclude Categories"
+msgstr "Schliesse Kategorien aus"
+
+#: views/options.php:265
+#@ SearchEverything
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr "Kategorie-IDs durch Kommas trennen (Beispiel: 1, 4)"
+
+#: views/options.php:269
+#@ SearchEverything
+msgid "Full Highlight Style"
+msgstr "Fortgeschrittenes Highlight Styling"
+
+#: views/options.php:271
+#@ SearchEverything
+msgid "Important: 'Highlight Background Color' must be blank to use this advanced styling."
+msgstr "Wichtig: 'Highlight Hintergrundfarbe' muss leer sein, um das fortgeschrittene Styling zu verwenden."
+
+#: views/options.php:273
+#@ SearchEverything
+msgid "Example:<br/>background-color: #FFF984; font-weight: bold; color: #000; padding: 0 1px;"
+msgstr "Beispiel:<br/>background-color: #FFF984; font-weight: bold; color: #000; padding: 0 1px;"
+
+#: views/options.php:286
+#@ SearchEverything
+msgid "Developed by Dan Cameron of"
+msgstr "Herausgegeben von Dan Cameron, "
+
+#: views/options.php:286
+#@ SearchEverything
+msgid "Sprout Venture"
+msgstr " Sprout Venture"
+
+#: views/options.php:286
+#@ SearchEverything
+msgid "We Provide custom WordPress Plugins and Themes and a whole lot more."
+msgstr "Wir bieten individuelle WordPress Plugins, Themes und vieles mehr."
+
+#: views/options.php:290
+#@ SearchEverything
+msgid "Reset Button"
+msgstr "Reset-Button"
+
+#: views/options.php:298
+#@ SearchEverything
+msgid "Find a bug?"
+msgstr "Einen Bug gefunden?"
+
+#: views/options.php:298
+#@ SearchEverything
+msgid "Post it as a new issue"
+msgstr "Poste es als eine neue Bug-Meldung"
+
+#: views/options.php:305
+#@ SearchEverything
+msgid "Test Search Form"
+msgstr "Teste Suchformular"
+
+#: views/options.php:312
+#@ SearchEverything
+msgid "Use this search form to run a live search test."
+msgstr "Du kannst die neue Suche live testen:"
+
+#: views/options.php:318
+#@ SearchEverything
+msgid "Run Test Search"
+msgstr "Starte Test-Suche"
+
+#: views/options.php:329
+#@ SearchEverything
+msgid "News"
+msgstr "News"
+
+#: views/options.php:330
+#@ SearchEverything
+msgid "Development Support"
+msgstr "Development Support"
+
+#: views/options.php:331
+#@ SearchEverything
+msgid "Localization Support"
+msgstr "Lokalisation Support"
+
+#: views/options.php:337
+#@ SearchEverything
+msgid "LOCALIZATION SUPPORT:"
+msgstr "LOKALISATION SUPPORT:"
+
+#: views/options.php:337
+#@ SearchEverything
+msgid "Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, "
+msgstr "Version 6 hatte ein großes Update, ein paar Bereiche benötigen neue Lokalisierungen. Wenn Du helfen möchtest, sende mir deine Übersetzungen: "
+
+#: views/options.php:337
+#@ SearchEverything
+msgid "here"
+msgstr " hier"
+
+#: views/options.php:338
+#@ SearchEverything
+msgid "Thank You!"
+msgstr "Danke!"
+
+#: views/options.php:338
+#@ SearchEverything
+msgid "The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support."
+msgstr "Search Everything verdankt seine Entwicklung seit der ersten Version der WordPress-Community. Ich bedanke mich für Eure engagierte und kontinuierliche Unterstützung!"
+
+#: views/options.php:348
+#@ SearchEverything
+msgid "and many more..."
+msgstr "und vieles mehr ..."
+
+#: views/options.php:348
+#@ SearchEverything
+msgid "how about you?"
+msgstr "Und Du?"
+

@@ -1,0 +1,61 @@
+html {
+  @include typography-base();
+  @if $text-direction == 'rtl' {
+    direction: rtl;
+  }
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  background-color: $color-grey-lightest;
+  height: auto;
+  margin: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+// for IE < 11, see:
+// <http://caniuse.com/#feat=hidden>
+[hidden] {
+  // scss-lint:disable ImportantRule
+  display: none !important;
+}
+
+// Fix for IE <= 11 where use elements within svgs would swallow click events
+// and prevent the event from propagating up.
+// See: https://connect.microsoft.com/IE/feedback/details/796745/mouse-events-are-not-delivered-at-all-anymore-when-inside-an-svg-a-use-is-removed-from-the-dom
+use {
+  pointer-events: none;
+}
+
+.page-wrapper {
+  @include display(flex);
+  @include flex-direction(column);
+  margin: 0 auto;
+  max-width: $site-max-width;
+  min-height: 100%;
+  min-width: $site-min-width;
+}
+
+.main-content {
+  @include flex(1 1 auto);
+  background: $color-white;
+}
+
+.usa-grid {
+  width: 100%;
+}
+
+.home-body {
+  margin: 1.5*$spacing-base auto;
+  max-width: $homepage-max-width + ($spacing-base * 2);
+  padding: 0 $spacing-base;
+}

@@ -1,0 +1,27 @@
+{
+  "name": "BSDSignupFormWidget",
+  "version": "1.0.0",
+  "description": "WordPress widget for adding signup forms",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Blue State Digital",
+  "license": "ISC",
+  "browserify-shim": {
+    "jquery": "global:jQuery"
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
+  "devDependencies": {
+    "browserify": "^11.0.0",
+    "browserify-shim": "^3.8.10",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "vinyl-source-stream": "^1.1.0"
+  } 
+}

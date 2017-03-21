@@ -1,0 +1,39 @@
+.fyi {
+  margin: 1.5*$spacing-base 0;
+
+  @include media($bp-tablet-up) {
+    margin: 1.5*$spacing-base auto;
+  }
+}
+
+.fyi-title {
+  border-bottom: 1px solid $color-green-mid;
+  margin-bottom: $spacing-base;
+  padding-bottom: $spacing-base;
+  position: relative;
+
+  &::after {
+    @include size(130px 5px);
+    #{$text-direction-start}: 0;
+    background: $color-yellow-access;
+    bottom: -3px;
+    content: '';
+    display: block;
+    position: absolute;
+  }
+}
+
+.fyi-touts {
+  @include media($bp-tablet-up) {
+    @include display(flex);
+  }
+}
+
+.fyi-tout {
+  margin-bottom: $spacing-base;
+
+  @include media($bp-tablet-up) {
+    padding: 0 20px;
+    width: 50%;
+  }
+}

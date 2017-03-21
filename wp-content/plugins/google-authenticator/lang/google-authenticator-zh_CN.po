@@ -1,0 +1,126 @@
+# Copyright (C) 2010 Google Authenticator
+# This file is distributed under the same license as the Google Authenticator package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Authenticator 0.37\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/google-authenticator\n"
+"POT-Creation-Date: 2014-01-11 07:14:22+00:00\n"
+"PO-Revision-Date: 2014-01-13 13:48+0800\n"
+"Last-Translator: Kaijia Feng <fengkaijia@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: google-authenticator.php:166
+msgid ""
+"If you don't have Google Authenticator enabled for your WordPress account, "
+"leave this field empty."
+msgstr "如果您的帐号没有启用Google Authenticator身份验证功能，请不必填写此栏。"
+
+#: google-authenticator.php:166
+msgid "Google Authenticator code"
+msgstr "Google Authenticator验证码"
+
+#: google-authenticator.php:231
+msgid "<strong>ERROR</strong>: The Google Authenticator password is incorrect."
+msgstr "<strong>错误</strong>：Google Authenticator验证码有误。"
+
+#: google-authenticator.php:234
+msgid ""
+"<strong>ERROR</strong>: The Google Authenticator code is incorrect or has "
+"expired."
+msgstr "<strong>错误</strong>：Google Authenticator验证码有误或者已经失效。"
+
+#: google-authenticator.php:274
+msgid "WordPressBlog"
+msgstr "WordPressBlog"
+
+#: google-authenticator.php:277 google-authenticator.php:469
+msgid "Google Authenticator Settings"
+msgstr "Google Authenticator设置"
+
+#: google-authenticator.php:282 google-authenticator.php:481
+msgid "Active"
+msgstr "启用"
+
+#: google-authenticator.php:290
+msgid "Relaxed mode"
+msgstr "宽松模式"
+
+#: google-authenticator.php:292
+msgid ""
+" Relaxed mode allows for more time drifting on your phone clock (&#177;4 "
+"min)."
+msgstr " 在宽松模式下你可以有更长的时间输入验证码（&#177;4分钟）。"
+
+#: google-authenticator.php:297
+msgid "Description"
+msgstr "描述"
+
+#: google-authenticator.php:298
+msgid ""
+" Description that you'll see in the Google Authenticator app on your phone."
+msgstr " 在Google Authenticator应用中显示的帐户描述。"
+
+#: google-authenticator.php:302
+msgid "Secret"
+msgstr "密钥"
+
+#: google-authenticator.php:305
+msgid "Create new secret"
+msgstr "创建新密钥"
+
+#: google-authenticator.php:306
+msgid "Show/Hide QR code"
+msgstr "显示/隐藏QR码"
+
+#: google-authenticator.php:315
+msgid "Scan this with the Google Authenticator app."
+msgstr "使用Google Authenticator应用扫描此图像。"
+
+#: google-authenticator.php:320
+msgid "Enable App password"
+msgstr "启用应用专用密码"
+
+#: google-authenticator.php:322
+msgid " Enabling an App password will decrease your overall login security."
+msgstr " 启用应用专用密码将会在总体上降低登录的安全性。"
+
+#: google-authenticator.php:330
+msgid "Create new password"
+msgstr "创建新密码"
+
+#: google-authenticator.php:331
+msgid ""
+" Password is not stored in cleartext, this is your only chance to see it."
+msgstr " 密码将不会明文储存，这将是你唯一一次看见密码。"
+
+#: google-authenticator.php:474
+msgid "Hide settings from user"
+msgstr "不对用户显示设置"
+
+#. Plugin Name of the plugin/theme
+msgid "Google Authenticator"
+msgstr "Google Authenticator"
+
+#. Plugin URI of the plugin/theme
+msgid "http://henrik.schack.dk/google-authenticator-for-wordpress"
+msgstr "http://henrik.schack.dk/google-authenticator-for-wordpress"
+
+#. Description of the plugin/theme
+msgid ""
+"Two-Factor Authentication for WordPress using the Android/iPhone/Blackberry "
+"app as One Time Password generator."
+msgstr ""
+"使用Android/iPhone/Blackberry一次性密码生成应用为WordPress提供两步验证。"
+
+#. Author of the plugin/theme
+msgid "Henrik Schack"
+msgstr "Henrik Schack"
+
+#. Author URI of the plugin/theme
+msgid "http://henrik.schack.dk/"
+msgstr "http://henrik.schack.dk/"

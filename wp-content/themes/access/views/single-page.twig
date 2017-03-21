@@ -1,0 +1,38 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <main class="main-content" id="content">
+    <article class="content-article">
+      <div class="usa-grid">
+        <header class="content-header usa-width-one-whole">
+          <h1>{{ post.title }}</h1>
+          {{ post.get_field('lead') }}
+        </header>
+      </div>
+      <div class="usa-grid">
+        <nav class="content-nav usa-width-one-third">
+          <ul class="nav-list">
+            {% for section in post.get_field('sections') %}
+            <li>
+              <a href="#section-{{ loop.index }}">{{ section.section_title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
+        <div class="content-body usa-width-two-thirds">
+          {% for section in post.get_field('sections') %}
+          <section id="section-{{ loop.index }}">
+            <h2>{{ section.section_title }}</h2>
+            {{ section.section_content }}
+          </section>
+          {% endfor %}
+        </div>
+        <div class="usa-grid">
+          <footer class="content-footer usa-width-one-whole">
+            <small>{{ __('Updated', 'accessnyc-page') }} {{ post.post_date_modified|date }}</small>
+          </footer>
+        </div>
+      </div>
+    </article>
+  </main>
+{% endblock %}

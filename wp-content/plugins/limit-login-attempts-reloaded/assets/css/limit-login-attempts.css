@@ -1,0 +1,6 @@
+.limit-login-log table {
+  background-color: #fff; }
+  .limit-login-log table th, .limit-login-log table td {
+    padding: 10px; }
+  .limit-login-log table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.09); }

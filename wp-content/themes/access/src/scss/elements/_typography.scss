@@ -1,0 +1,62 @@
+.type-jumbo {
+  @include typography-jumbo();
+}
+
+h1,
+.type-h1 {
+  @include margin(0 null rem(strip-units($spacing-base)));
+  @include typography-h1();
+}
+
+h2,
+.type-h2 {
+  @include margin(0 null rem(strip-units($spacing-base)));
+  @include typography-h2();
+}
+
+h3,
+.type-h3 {
+  @include margin(0 null rem(strip-units($spacing-base)));
+  @include typography-h3();
+}
+
+h4,
+.type-h4 {
+  @include margin(0 null rem(strip-units($spacing-base)));
+  @include typography-h4();
+}
+
+h5,
+.type-h5 {
+  @include margin(0 null rem(strip-units($spacing-base)));
+  @include typography-h5();
+}
+
+small,
+.type-small {
+  @include margin(0 null rem(strip-units($spacing-base)));
+  @include typography-supplemental();
+}
+
+blockquote {
+  @include margin(rem(strip-units(.5*$spacing-base)) null rem(strip-units(1.5*$spacing-base)));
+  @include typography-blockquote();
+}
+
+html {
+  $text-increment: 2;
+  $min-text-step: -3;
+  $max-text-step: 3;
+
+  @for $i from $min-text-step through $max-text-step {
+    &.text-size-#{$i} {
+      font-size: #{$em-base + ($text-increment * $i)}px;
+    }
+  }
+}
+
+p,
+ul,
+ol {
+  @include margin(0 null rem(strip-units($spacing-base)));
+}

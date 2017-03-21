@@ -1,0 +1,11 @@
+<script id="tmpl-nf-field-terms" type="text/template">
+    <ul>
+        {{{ data.renderOptions() }}}
+        <# if( ( 'undefined' != typeof add_new_terms ) && add_new_terms ) { #>
+        <li>
+            <input type="text" class="extra-value nf-element">
+            <button class="extra">{{{ nfi18n.fieldsTermsAdd }}}</button>
+        </li>
+        <# } #>
+    </ul>
+</script>

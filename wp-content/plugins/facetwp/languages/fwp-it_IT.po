@@ -1,0 +1,567 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FacetWP\n"
+"POT-Creation-Date: 2015-10-15 19:01-0400\n"
+"PO-Revision-Date: 2015-10-15 19:01-0400\n"
+"Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
+"Language-Team: Matt Gibbs <hello@facetwp.com>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.5\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-ajax.php:203
+msgid "Settings saved"
+msgstr "Impostazioni salvate"
+
+#: includes/class-ajax.php:206
+msgid "Error: invalid JSON"
+msgstr "Errore: non valido JSON"
+
+#: includes/class-ajax.php:343
+msgid "Nothing to import"
+msgstr "Nessun elemento da importare"
+
+#: includes/class-ajax.php:379
+msgid "Imported"
+msgstr "Importato"
+
+#: includes/class-ajax.php:382
+msgid "Skipped"
+msgstr "Tralasciato"
+
+#: includes/class-ajax.php:413
+msgid "Error"
+msgstr "Errore"
+
+#: includes/class-facet.php:374 includes/class-facet.php:491
+msgid "of"
+msgstr "di"
+
+#: includes/class-facet.php:408 includes/facets/checkboxes.php:340
+#: includes/facets/dropdown.php:232 includes/facets/hierarchy.php:225
+msgid "Sort by"
+msgstr "Ordina per"
+
+#: includes/class-facet.php:412
+msgid "Title (A-Z)"
+msgstr "Titolo (A-Z)"
+
+#: includes/class-facet.php:419
+msgid "Title (Z-A)"
+msgstr "Titolo (Z-A)"
+
+#: includes/class-facet.php:426
+msgid "Date (Newest)"
+msgstr "Data (Più recenti)"
+
+#: includes/class-facet.php:433
+msgid "Date (Oldest)"
+msgstr "Data (Meno recenti)"
+
+#: includes/class-facet.php:490
+msgid "Page"
+msgstr "Pagina"
+
+#: includes/class-facet.php:541
+msgid "Per page"
+msgstr "Per pagina"
+
+#: includes/class-helper.php:369
+msgid "Posts"
+msgstr "Post"
+
+#: includes/class-helper.php:371
+msgid "Post Type"
+msgstr "Post Type"
+
+#: includes/class-helper.php:372
+msgid "Post Date"
+msgstr "Data"
+
+#: includes/class-helper.php:373
+msgid "Post Modified"
+msgstr "Modificato"
+
+#: includes/class-helper.php:374
+msgid "Post Title"
+msgstr "Titolo"
+
+#: includes/class-helper.php:375
+msgid "Post Author"
+msgstr "Autore"
+
+#: includes/class-helper.php:379
+msgid "Taxonomies"
+msgstr "Tassonomie"
+
+#: includes/class-helper.php:383
+msgid "Custom Fields"
+msgstr "Custom fields"
+
+#: includes/class-updater.php:100
+msgid "Please activate or renew your license for automatic updates."
+msgstr "Si prega di attivare o rinnovare la licenza per gli aggiornamenti automatici."
+
+#: includes/facets/autocomplete.php:7
+msgid "Autocomplete"
+msgstr "Autocompletamento"
+
+#: includes/facets/autocomplete.php:23
+msgid "Start typing..."
+msgstr "Inizia a scrivere..."
+
+#: includes/facets/autocomplete.php:24
+msgid "Update"
+msgstr "Aggiorna"
+
+#: includes/facets/checkboxes.php:7
+msgid "Checkboxes"
+msgstr "Checkbox"
+
+#: includes/facets/checkboxes.php:325 includes/facets/dropdown.php:217
+msgid "Parent term"
+msgstr "Termine padre"
+
+#: includes/facets/checkboxes.php:343 includes/facets/dropdown.php:235
+#: includes/facets/hierarchy.php:228
+msgid "Highest Count"
+msgstr "Massima Conte"
+
+#: includes/facets/checkboxes.php:344 includes/facets/dropdown.php:236
+#: includes/facets/hierarchy.php:229
+msgid "Display Value"
+msgstr "Etichetta"
+
+#: includes/facets/checkboxes.php:345 includes/facets/dropdown.php:237
+#: includes/facets/hierarchy.php:230
+msgid "Raw Value"
+msgstr "Slug"
+
+#: includes/facets/checkboxes.php:351
+msgid "Behavior"
+msgstr "Comportamento"
+
+#: includes/facets/checkboxes.php:354
+msgid "How should multiple selections affect the results?"
+msgstr "Come influenzano i risultati le selezioni multiple?"
+
+#: includes/facets/checkboxes.php:359
+msgid "Narrow the result set"
+msgstr "Restringere il numero di risultati"
+
+#: includes/facets/checkboxes.php:360
+msgid "Widen the result set"
+msgstr "Ampliare il numero di risultati"
+
+#: includes/facets/checkboxes.php:366 includes/facets/dropdown.php:243
+msgid "Hierarchical"
+msgstr "Gerarchico"
+
+#: includes/facets/checkboxes.php:369 includes/facets/dropdown.php:246
+msgid "Is this a hierarchical taxonomy?"
+msgstr "Questa tassonomia è gerarchica?"
+
+#: includes/facets/checkboxes.php:374 includes/facets/checkboxes.php:389
+#: includes/facets/checkboxes.php:404 includes/facets/dropdown.php:251
+#: includes/integrations/acf/acf.php:175
+msgid "No"
+msgstr "No"
+
+#: includes/facets/checkboxes.php:375 includes/facets/checkboxes.php:390
+#: includes/facets/checkboxes.php:405 includes/facets/dropdown.php:252
+#: includes/integrations/acf/acf.php:175
+msgid "Yes"
+msgstr "Sì"
+
+#: includes/facets/checkboxes.php:381
+msgid "Show ghosts"
+msgstr "Mostra elementi vuoti"
+
+#: includes/facets/checkboxes.php:384
+msgid "Show choices that would return zero results?"
+msgstr "Mostrare gli elementi senza risultati?"
+
+#: includes/facets/checkboxes.php:396
+msgid "Preserve ghost order"
+msgstr "Mantieni l'ordine degli elementi vuoti"
+
+#: includes/facets/checkboxes.php:399
+msgid "Keep ghost choices in the same order?"
+msgstr "Mantenere gli elementi vuoti nello stesso ordine?"
+
+#: includes/facets/checkboxes.php:411 includes/facets/dropdown.php:258
+#: includes/facets/hierarchy.php:236
+msgid "Count"
+msgstr "Conteggio"
+
+#: includes/facets/checkboxes.php:414 includes/facets/dropdown.php:261
+#: includes/facets/hierarchy.php:239
+msgid "The maximum number of facet choices to show"
+msgstr "Il numero massimo di opzioni da visualizzare"
+
+#: includes/facets/date_range.php:7
+msgid "Date Range"
+msgstr "Range di Date"
+
+#: includes/facets/date_range.php:24 includes/facets/date_range.php:151
+msgid "Start Date"
+msgstr "Inizio"
+
+#: includes/facets/date_range.php:27 includes/facets/date_range.php:152
+msgid "End Date"
+msgstr "Fine"
+
+#: includes/facets/date_range.php:127 includes/facets/number_range.php:111
+#: includes/facets/slider.php:265
+msgid "Other data source"
+msgstr "Altra origine dati"
+
+#: includes/facets/date_range.php:130 includes/facets/number_range.php:114
+#: includes/facets/slider.php:268
+msgid "Use a separate value for the upper limit?"
+msgstr "Utilizzare un valore separato per il limite superiore?"
+
+#: includes/facets/date_range.php:135 includes/facets/number_range.php:119
+#: includes/facets/slider.php:273
+msgid "None"
+msgstr "Niente"
+
+#: includes/facets/date_range.php:147
+msgid "Fields to show"
+msgstr "Campi da mostrare"
+
+#: includes/facets/date_range.php:150
+msgid "Both"
+msgstr "Entrambi"
+
+#: includes/facets/dropdown.php:7
+msgid "Dropdown"
+msgstr "Dropdown"
+
+#: includes/facets/dropdown.php:87 includes/facets/dropdown.php:212
+#: includes/facets/hierarchy.php:71
+msgid "Any"
+msgstr "Qualsiasi"
+
+#: includes/facets/dropdown.php:203
+msgid "Default label"
+msgstr "Etichetta di default"
+
+#: includes/facets/hierarchy.php:7
+msgid "Hierarchy"
+msgstr "Gerarchia"
+
+#: includes/facets/hierarchy.php:122
+msgid "More"
+msgstr "Di più"
+
+#: includes/facets/hierarchy.php:123
+msgid "Less"
+msgstr "Di meno"
+
+#: includes/facets/number_range.php:7
+msgid "Number Range"
+msgstr "Range numerico"
+
+#: includes/facets/number_range.php:21
+msgid "Min"
+msgstr "Min"
+
+#: includes/facets/number_range.php:23
+msgid "Max"
+msgstr "Max"
+
+#: includes/facets/proximity.php:19
+msgid "Proximity"
+msgstr "Distanza"
+
+#: includes/facets/proximity.php:46
+msgid "Enter location"
+msgstr "Immettere percorso:"
+
+#: includes/facets/proximity.php:262
+msgid "Unit of measurement"
+msgstr "Unità di misura"
+
+#: includes/facets/proximity.php:266
+msgid "Miles"
+msgstr "Miglia"
+
+#: includes/facets/proximity.php:267
+msgid "Kilometers"
+msgstr "Chilometri"
+
+#: includes/facets/proximity.php:309
+msgid "Distance"
+msgstr "Distanza"
+
+#: includes/facets/search.php:7
+msgid "Search"
+msgstr "Ricerca"
+
+#: includes/facets/search.php:19
+msgid "Enter keywords"
+msgstr "Inserisci parole chiave"
+
+#: includes/facets/search.php:117
+msgid "Search engine"
+msgstr "Motore di ricerca"
+
+#: includes/facets/search.php:120
+msgid "WP Default"
+msgstr "Default di WP"
+
+#: includes/facets/search.php:128
+msgid "Placeholder text"
+msgstr "Testo riempitivo"
+
+#: includes/facets/slider.php:7
+msgid "Slider"
+msgstr "Slider"
+
+#: includes/facets/slider.php:24
+msgid "Reset"
+msgstr "Reset"
+
+#: includes/facets/slider.php:286
+msgid "Prefix"
+msgstr "Prefisso"
+
+#: includes/facets/slider.php:289
+msgid "Text that appears before each slider value"
+msgstr "Testo che appare prima di ciascun elemento dello slider"
+
+#: includes/facets/slider.php:296
+msgid "Suffix"
+msgstr "Suffisso"
+
+#: includes/facets/slider.php:299
+msgid "Text that appears after each slider value"
+msgstr "Testo che appare dopo ogni elemento dello slider"
+
+#: includes/facets/slider.php:306
+msgid "Format"
+msgstr "Formato"
+
+#: includes/facets/slider.php:309
+msgid "The number format"
+msgstr "Il formato del numero"
+
+#: includes/facets/slider.php:330
+msgid "Step"
+msgstr "Step"
+
+#: includes/facets/slider.php:333
+msgid "The amount of increase between intervals"
+msgstr "L'entità dell'incremento fra gli intervalli"
+
+#: includes/integrations/searchwp/searchwp.php:108
+msgid "Default"
+msgstr "Default"
+
+#: includes/integrations/woocommerce/woocommerce.php:28
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/integrations/woocommerce/woocommerce.php:30
+msgid "Stock Status"
+msgstr "Archivio di stato"
+
+#: includes/integrations/woocommerce/woocommerce.php:66
+msgid "In Stock"
+msgstr "Disponibile"
+
+#: includes/integrations/woocommerce/woocommerce.php:66
+msgid "Out of Stock"
+msgstr "Esaurito"
+
+#: templates/page-settings.php:7
+msgid "All post types"
+msgstr "Tutti i tipi di messaggi"
+
+#: templates/page-settings.php:8
+msgid "Indexing complete"
+msgstr "L’indicizzazione completa"
+
+#: templates/page-settings.php:9
+msgid "Indexing"
+msgstr "Indicizzazione"
+
+#: templates/page-settings.php:10
+msgid "Saving"
+msgstr "Salvataggio"
+
+#: templates/page-settings.php:11
+msgid "Importing"
+msgstr "Importazione"
+
+#: templates/page-settings.php:12
+msgid "Activating"
+msgstr "Attivazione"
+
+#: templates/page-settings.php:13
+msgid "Are you sure?"
+msgstr "Sei sicuro?"
+
+#: templates/page-settings.php:35
+msgid "Not yet activated"
+msgstr "Non ancora attivata"
+
+#: templates/page-settings.php:40
+msgid "License active"
+msgstr "Licenza attiva"
+
+#: templates/page-settings.php:41
+msgid "expires"
+msgstr "scade"
+
+#: templates/page-settings.php:88
+msgid "Welcome"
+msgstr "Benvenuto"
+
+#: templates/page-settings.php:89 templates/page-settings.php:109
+msgid "Facets"
+msgstr "Facet"
+
+#: templates/page-settings.php:90 templates/page-settings.php:114
+msgid "Templates"
+msgstr "Template"
+
+#: templates/page-settings.php:91
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: templates/page-settings.php:92
+msgid "Support"
+msgstr "Supporto"
+
+#: templates/page-settings.php:104
+msgid "Welcome to FacetWP"
+msgstr "Benvenuto a FacetWP"
+
+#: templates/page-settings.php:131 templates/page-settings.php:155
+msgid "Add New"
+msgstr "Aggiungi nuovo"
+
+#: templates/page-settings.php:134 templates/page-settings.php:158
+msgid "Back"
+msgstr "Indietro"
+
+#: templates/page-settings.php:138
+msgid "Re-index"
+msgstr "Re-indicizza"
+
+#: templates/page-settings.php:139 templates/page-settings.php:162
+#: templates/page-settings.php:179
+msgid "Save Changes"
+msgstr "Salva modifiche"
+
+#: templates/page-settings.php:186
+msgid "License Key"
+msgstr "License Key"
+
+#: templates/page-settings.php:189
+msgid "Activate"
+msgstr "Attiva"
+
+#: templates/page-settings.php:200
+msgid "Permalink Type"
+msgstr "Tipologia di Permalink"
+
+#: templates/page-settings.php:203
+msgid "How should permalinks be constructed?"
+msgstr "Come devono essere strutturati i permalink?"
+
+#: templates/page-settings.php:208
+msgid "GET variables"
+msgstr "Variabili GET"
+
+#: templates/page-settings.php:209
+msgid "URL Hash"
+msgstr "URL Hash"
+
+#: templates/page-settings.php:215
+msgid "Separators"
+msgstr "Separatori"
+
+#: templates/page-settings.php:218
+msgid "Thousands"
+msgstr "Migliaia"
+
+#: templates/page-settings.php:220
+msgid "Decimal"
+msgstr "Decimale"
+
+#: templates/page-settings.php:231 templates/page-settings.php:239
+msgid "Export"
+msgstr "Esporta"
+
+#: templates/page-settings.php:250 templates/page-settings.php:255
+msgid "Import"
+msgstr "Importa"
+
+#: templates/page-settings.php:253
+msgid "Paste the import code here"
+msgstr "Incolla qui il codice per l'importazione"
+
+#: templates/page-settings.php:254
+msgid "Overwrite existing items?"
+msgstr "Sovrascrivere gli elementi esistenti?"
+
+#: templates/page-settings.php:275
+msgid "This facet type has no additional settings."
+msgstr "Questo tipo di facet non dispone di ulteriori impostazioni."
+
+#: templates/page-settings.php:295
+msgid "Label"
+msgstr "Etichetta"
+
+#: templates/page-settings.php:299 templates/page-settings.php:342
+msgid "Name"
+msgstr "Nome"
+
+#: templates/page-settings.php:303
+msgid "Facet type"
+msgstr "Tipo di Facet"
+
+#: templates/page-settings.php:314
+msgid "Data source"
+msgstr "Sorgente dei dati"
+
+#: templates/page-settings.php:329
+msgid "Other settings"
+msgstr "Altre impostazioni"
+
+#: templates/page-settings.php:345
+msgid "Open query builder"
+msgstr "Generatore di query aperta"
+
+#: templates/page-settings.php:346
+msgid "Query Arguments"
+msgstr "Parametri della query"
+
+#: templates/page-settings.php:350
+msgid "What goes here?"
+msgstr "Cosa succede qui?"
+
+#: templates/page-settings.php:351
+msgid "Display Code"
+msgstr "Visualizza codice"
+
+#: templates/page-settings.php:365
+msgid "Query Builder"
+msgstr "Generatore di query"
+
+#: templates/page-settings.php:369
+msgid "Which posts would you like to use for the content listing?"
+msgstr "Quali messaggi vuoi utilizzare per il profilo contenuto?"
+
+#: templates/page-settings.php:378
+msgid "Send to editor"
+msgstr "Inviare all’editor"

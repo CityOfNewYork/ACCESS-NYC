@@ -1,0 +1,301 @@
+# Limit Login Attempts German Translation
+# Copyright (C) 2009 Johan Eenfeldt
+# This file is distributed under the same license as the Wordpress package.
+# Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: limit-login-attempts 1.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 18:08+0300\n"
+"PO-Revision-Date: 2016-06-23 18:08+0300\n"
+"Last-Translator: canarkadas <durustem@gmail.com>\n"
+"Language-Team: German <michael@skerwiderski.de>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d Saat"
+msgstr[1] "%d Saat"
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d Dakika"
+msgstr[1] "%d Dakika"
+
+#: core/LimitLoginAttempts.php:532
+#, fuzzy, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr "[%s]  Hatalı giriş denemeleri bilgisi"
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s]  Hatalı giriş denemeleri bilgisi"
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr ""
+"%d başarısız giriş denemesi (%d). Aynı IP adresi ile yapılan deneme: %s "
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Denemede kullanılan isim: %s"
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "%s no'lu IP engellendi"
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr "<strong>HATA</strong>: Çok fazla sayıda başarısız giriş denemesi."
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr "Lütfen daha sonra tekrar deneyin."
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "Lütfen %d saat sonra tekrar deneyin."
+msgstr[1] "Lütfen %d saat sonra tekrar deneyin."
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "Lütfen %d dakika sonra tekrar deneyin."
+msgstr[1] "Lütfen %d dakika sonra tekrar deneyin."
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>HATA</ strong>: Yanlış kullanıcı adı veya şifre."
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "<strong>%d</strong> kez daha giriş yapmayı deneyebilirsiniz."
+msgstr[1] "<strong>%d</strong> kez daha giriş yapmayı deneyebilirsiniz."
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr "IP denemesi yapanların bilgileri silindi"
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr "Giriş denemeleri sayacı sıfırlandı"
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr "Giriş denemeleri silindi"
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr "Seçenekler değiştirildi"
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr "Sizin IP adresiniz: %s (bu IP ile site gezilebilir)."
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your "
+"IP: %s)"
+msgstr ""
+"Proxy sunucusu kullanıyorsunuz (proxy IP: %s) %s IP adresinizle ile site "
+"gezilebilir."
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it "
+"is correct. Further information can be found <a href=\"%s\" title=\"FAQ"
+"\">here</a>"
+msgstr ""
+"<strong>Seçenekler geçersiz</strong>. Girdilerin doğru olduğundan emin olun, "
+"daha fazla bilgi için <a href=\"%s\" title=\"FAQ\">bakınız.</a>"
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr "Limit Login Attempts Ayarlar"
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr "İstatistik"
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr "Tüm giriş denemeleri"
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr "Sayacı Sıfırla"
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "En son sıfırlamadan sonra gerçekleşen giriş denemesi sayısı %d "
+msgstr[1] "En son sıfırlamadan sonra gerçekleşen giriş denemesi sayısı %d "
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr "Henüz giriş denemesi yok"
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr "Aktif giriş denemesi"
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr "Giriş denemelerini düzenleyin"
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "%d no'lu IP halen engelleniyor"
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr "Tercihler"
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr "Giriş denemeleri"
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr "Müsaade edilen giriş denemesi sayınızı yazınız."
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr "Dakika sonra yeniden giriş denemesi yapılabilsin."
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr "Defadan fazla giriş denemesi yapılamasın."
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr "(Saat içinde)"
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr "Sıfırlamaya kadar yapılabilecek giriş denemesi sayınızı yazınız."
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr "Site bağlantınız"
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr "Direk bağlantı"
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr "Bir proxy (vekil, aracı sunucu) arkasından"
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr "Çerezler kullanılarak giriş yapılabilsin"
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr "Evet"
+
+#: views/options-page.php:178
+msgid "No"
+msgstr "Hayır"
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr ""
+"Giriş denemeleri bildirilsin (Yazacağınız sayı giriş denemesini değil, her "
+"IP no'su adına ayrı bir kullanıcıyı ifade eder)"
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr "IP kayıtları dahil"
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr "Site yöneticisi"
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr "giriş denemesi olduğunda e-posta ile bilgilendirilsin."
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr "KAYDET"
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr "Giriş denemesi kayıtları"
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr "Kayıtları Sil"
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+#, fuzzy
+msgctxt "Internet address"
+msgid "IP"
+msgstr "IP was geblokkeerd voor %s."
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr "İsim ve deneme sayısı"
+
+#~ msgid "IP|Internet address"
+#~ msgstr "IP No"
+
+#~ msgid "%d lockout"
+#~ msgid_plural "%d lockouts"
+#~ msgstr[0] "%d giriş denemesi"
+#~ msgstr[1] "%d giriş denemesi"
+
+#~ msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+#~ msgstr ""
+#~ "<strong>NOT:</strong> Eklenti sadece Wordpress 2.7 ve daha sonrası ile "
+#~ "çalışır."
+
+#~ msgid "Limit Login Attempts"
+#~ msgstr "Limit Login Attempts"
+
+#~ msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+#~ msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#~ msgid ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+#~ msgstr "Her IP için giriş deneme sayısı (çerezler dahil)."
+
+#~ msgid "Johan Eenfeldt"
+#~ msgstr "Johan Eenfeldt"
+
+#~ msgid "http://devel.kostdoktorn.se"
+#~ msgstr "http://devel.kostdoktorn.se"

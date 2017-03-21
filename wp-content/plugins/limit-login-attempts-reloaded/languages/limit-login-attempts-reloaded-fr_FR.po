@@ -1,0 +1,304 @@
+# Limit Login Attempts German Translation
+# Copyright (C) 2009 Johan Eenfeldt
+# This file is distributed under the same license as the Wordpress package.
+# Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: limit-login-attempts 1.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 18:06+0300\n"
+"PO-Revision-Date: 2016-06-23 18:06+0300\n"
+"Last-Translator: ova <djovaweb@gmail.com>\n"
+"Language-Team: ova <ova13lastar@gmail.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d heure"
+msgstr[1] "%d heures"
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minute"
+msgstr[1] "%d minutes"
+
+#: core/LimitLoginAttempts.php:532
+#, fuzzy, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr "[%s] Trop de tentatives de connexions ont échouées"
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] Trop de tentatives de connexions ont échouées"
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr ""
+"%d tentatives d'accès ont échouées (%d bloqué(s)) depuis l'adresse IP: %s"
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Dernière tentative de l'utilisateur: %s"
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "L'adresse IP a été bloquée pour %s"
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr ""
+"<strong>ERREUR</strong>: Trop de tentatives de connexions ont échouées."
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr "Merci de retenter de vous connecter plus tard."
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "Merci de retenter de vous connecter dans %d heure."
+msgstr[1] "Merci de retenter de vous connecter dans %d heures."
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "Merci de retenter de vous connecter dans %d minute."
+msgstr[1] "Merci de retenter de vous connecter dans %d minutes."
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>ERREUR</strong>: Nom d'utilisateur ou mot de passe incorrect."
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "<strong>%d</strong> tentative restante."
+msgstr[1] "<strong>%d</strong> tentatives restantes."
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr "Journal d'IP effacé"
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr "Réinitialiser le nombre de blocage"
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr "Effacer les blocages actuels"
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr "Options modifiées"
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr ""
+"Il semble que le site soit directement accessible (depuis votre IP: %s)"
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your "
+"IP: %s)"
+msgstr ""
+"Il semble que le site soit accessible via un serveur proxy (IP du proxy: %s, "
+"votre IP: %s)"
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it "
+"is correct. Further information can be found <a href=\"%s\" title=\"FAQ"
+"\">here</a>"
+msgstr ""
+"<strong>Le réglage actuel semble être invalide</strong>. Merci de vous "
+"assurer qu'il est correct. Pour plus d'informations, <a href=\"%s\" title="
+"\"FAQ\">cliquez ici</a>"
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr "Paramètres des tentatives d'accès"
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr "Blocages totaux"
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr "Réinitialiser le compteur"
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "%d blocage depuis la dernière réinitialisation."
+msgstr[1] "%d blocages depuis la dernière réinitialisation."
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr "Aucun blocage"
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr "Blocages actifs"
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr "Restaurer les blocages"
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "L'adresse IP %d est actuellement bloquée pour se connecter"
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr "Options"
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr "Blocage"
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr "tentatives autorisées"
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr "minutes de blocage"
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr "blocages augmentent le temps de blocage à"
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr "heures"
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr "heures jusqu'à ce que les tentatives soient réinitialisées"
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr "Connexion"
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr "Connexion directe"
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr "Derrière un serveur proxy"
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr "Gérer les cookies de connexion"
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr "Oui"
+
+#: views/options-page.php:178
+msgid "No"
+msgstr "Non"
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr "Notifier lors d'un blocage"
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr "Enregistrer l'adresse IP"
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr "Envoyer un email à l'administrateur après"
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr "blocages"
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr "Modifier options"
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr "Journal de blocage"
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr "Effacer le journal"
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+#, fuzzy
+msgctxt "Internet address"
+msgid "IP"
+msgstr "L'adresse IP a été bloquée pour %s"
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr "Tentez de vous connecter en tant que"
+
+#~ msgid "IP|Internet address"
+#~ msgstr "IP|Adresse Internet"
+
+#~ msgid "%d lockout"
+#~ msgid_plural "%d lockouts"
+#~ msgstr[0] "%d blocage"
+#~ msgstr[1] "%d blocages"
+
+#~ msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+#~ msgstr ""
+#~ "<strong>NOTE:</strong> Cette extension ne fonctionne qu'avec la version "
+#~ "2.7 de Wordpress 2.7 ou un version supérieure"
+
+#~ msgid "Limit Login Attempts"
+#~ msgstr "Limiter les tentatives de connexion"
+
+#~ msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+#~ msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#~ msgid ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+#~ msgstr ""
+#~ "Limiter le taux de tentatives de connexion, y compris par voie de "
+#~ "cookies, pour chaque adresse IP."
+
+#~ msgid "Johan Eenfeldt"
+#~ msgstr "Johan Eenfeldt"
+
+#~ msgid "http://devel.kostdoktorn.se"
+#~ msgstr "http://devel.kostdoktorn.se"

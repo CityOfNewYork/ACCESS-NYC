@@ -1,0 +1,26 @@
+<article class="program-card">
+  <div class="program-icon">
+    {% include 'partials/category-icon.twig' %}
+    {# TODO: Add logic to the below conditional for "new" posts - @onebrightlight
+    {% if loop.index == 3 %}<div class="program-label program-label-secondary status-warning">New</div>{% endif %} #}
+  </div>
+  <div class="program-card-body">
+    <a href="{{ post.get_permalink }}">
+      <h3 class="program-card-title type-h4">
+        {{ post.plain_language_program_name }}
+        {# TODO: Add logic to the below conditional for "new" posts - @onebrightlight
+        {% if loop.index == 3 %}<div class="program-label program-label-secondary status-warning">New</div>{% endif %} #}
+      </h3>
+    </a>
+    {% if not short_post %}<p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>{% endif %}
+    <div class="program-card-summary">
+      {% if post.brief_excerpt and not short_post %}<p>{{ post.brief_excerpt }}</p>{% endif %}
+      <p class="hide-for-print"><a href="{{ post.get_permalink }}">{{__('Learn more', 'accessnyctheme')}}</a></p>
+      {% if show_apply %}
+      <p class="hide-for-print">
+        <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=how-to-apply">{{__('Apply', 'accessnyc-results')}}</a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</article>

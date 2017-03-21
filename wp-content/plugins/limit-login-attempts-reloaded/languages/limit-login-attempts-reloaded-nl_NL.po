@@ -1,0 +1,301 @@
+# Limit Login Attempts German Translation
+# Copyright (C) 2009 Johan Eenfeldt
+# This file is distributed under the same license as the Wordpress package.
+# Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: limit-login-attempts 1.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 18:06+0300\n"
+"PO-Revision-Date: 2016-06-23 18:06+0300\n"
+"Last-Translator: BjornW <burobjorn@burobjorn.nl>\n"
+"Language-Team: German <michael@skerwiderski.de>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d uur"
+msgstr[1] "%d uren"
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minute"
+msgstr[1] "%d minuten"
+
+#: core/LimitLoginAttempts.php:532
+#, fuzzy, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr "[%s] Teveel gefaalde login pogingen"
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] Teveel gefaalde login pogingen"
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr "%d gefaalde login pogingen (%d blokkades) van IP: %s"
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Laatste inlogpoging werd gedaan met de gebruikersnaam: %s"
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "IP was geblokkeerd voor %s."
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr "<strong>FOUT</strong>: Teveel gefaalde inlogpogingen."
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr "Probeer het later nogmaals"
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] ".Probeer het over %d uur nogmaals."
+msgstr[1] "Probeer het over %d uren nogmaals."
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "Probeer het over %d minuut nogmaals"
+msgstr[1] "Probeer het over %d minuten nogmaals."
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>FOUT</strong>: Ongeldige gebruikersnaam of wachtwoord."
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "Nog <strong>%d</strong> loginpoging mogelijk."
+msgstr[1] "Nog <strong>%d</strong> loginpogingen mogelijk."
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr "IP log is gewist"
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr "Reset blokkades teller"
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr "Actieve blokkades zijn gewist"
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr "Instellingen zijn gewijzigd"
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr "Het lijkt erop dat de site direct te bereiken is (van uw IP-adres: %s)"
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your "
+"IP: %s)"
+msgstr ""
+"Het lijkt erop dat de site te bereiken is via een proxy server,  (Proxy "
+"Server IP adres: %s, Uw IP-adres: %s)"
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it "
+"is correct. Further information can be found <a href=\"%s\" title=\"FAQ"
+"\">here</a>"
+msgstr ""
+"<strong>De huidige instelling lijkt ongeldig te zijn</strong>. Pas deze zo "
+"aan dat deze wel geldig is, informatie over hoe u dit kunt doen kunt u "
+"vinden in de <a href=\"%s\" title=\"FAQ\">FAQ</a> (in het Engels)."
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr "Limit Login Attempts Instellingen"
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr "Statistieken"
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr "Totaal aantal blokkades"
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr "Teller resetten"
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "%d Blokkade sinds de laatste reset"
+msgstr[1] "%d Blokkades sinds de laatste reset"
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr "Nog geen blokkades actief"
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr "Actieve blokkades"
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr "Blokkades opheffen"
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "%d IP is op dit moment voor inloggen geblokkeerd"
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr "Instellingen"
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr "Blokkade"
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr "mogelijke inlogpogingen"
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr "Aantal minuten geblokkeerd na een gefaalde inlogpoging"
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr "Blokkades verhogen de blokkade tijd naar"
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr "uren"
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr "aantal uren voordat het aantal ondernomen pogingen wordt gereset"
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr "Verbinding naar deze website"
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr "Directe verbinding"
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr "Via een reverse-proxy"
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr "Omgaan met cookie loginverzoeken"
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr "Ja"
+
+#: views/options-page.php:178
+msgid "No"
+msgstr "Nee"
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr "Waarschuwen in het geval van een blokkade"
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr "Log IP adres"
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr "Email de beheerder na"
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr "Blokkades"
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr "Instellingen aanpassen"
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr "Log van blokkades"
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr "Log wissen"
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+#, fuzzy
+msgctxt "Internet address"
+msgid "IP"
+msgstr "IP kayıtları dahil"
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr "Inlogpoging als"
+
+#~ msgid "IP|Internet address"
+#~ msgstr "IP|Internet adres"
+
+#~ msgid "%d lockout"
+#~ msgid_plural "%d lockouts"
+#~ msgstr[0] "%d Blokkade"
+#~ msgstr[1] "%d Blokkades"
+
+#~ msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+#~ msgstr ""
+#~ "<strong>NB:</strong> Werkt alleen vanaf Wordpress 2.7 of hogere versie "
+#~ "nummers"
+
+#~ msgid "Limit Login Attempts"
+#~ msgstr "Limit Login Attempts"
+
+#~ msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+#~ msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#~ msgid ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+#~ msgstr ""
+#~ "Beperkt het aantal inlogpogingen, inclusief bij het gebruik van cookies, "
+#~ "voor elk IP adres."
+
+#~ msgid "Johan Eenfeldt"
+#~ msgstr "Johan Eenfeldt"
+
+#~ msgid "http://devel.kostdoktorn.se"
+#~ msgstr "http://devel.kostdoktorn.se"

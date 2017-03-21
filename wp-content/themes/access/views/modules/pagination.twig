@@ -1,0 +1,11 @@
+{% if pagination.pages | length %}
+  <nav class="program-pagination">
+    <h4>{{__('See more results:', 'accessnyctheme')}}</h4>
+      {% if pagination.prev %}
+        <a class="btn btn-secondary btn-previous" href="{{pagination.prev.link}}">{{__('Previous', 'accessnyctheme')}}</a>
+      {% endif %}
+      {% if pagination.next %}
+        <a class="btn btn-secondary btn-next" href="{{pagination.next.link}}">{{__('Next', 'accessnyctheme')}}</a>
+      {% endif %}
+  </nav>
+{% endif %}

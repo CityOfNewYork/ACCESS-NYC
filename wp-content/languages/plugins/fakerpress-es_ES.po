@@ -1,0 +1,1637 @@
+# Translation of Development (trunk) in Spanish (Spain)
+# This file is distributed under the same license as the Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-04-24 19:25:13+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
+"Project-Id-Version: Development (trunk)\n"
+
+#: inc/class-fp-utils.php:1332
+msgid "Zimbabwe"
+msgstr "Zimbawe"
+
+#: inc/class-fp-utils.php:1322
+msgid "Yemen"
+msgstr "Jemen"
+
+#: inc/class-fp-utils.php:1327
+msgid "Zambia"
+msgstr "Zambia"
+
+#: inc/class-fp-utils.php:1307
+msgid "Vietnam"
+msgstr "Vietnam"
+
+#: inc/class-fp-utils.php:1312
+msgid "Wallis and Futuna"
+msgstr "Wallis and Futuna"
+
+#: inc/class-fp-utils.php:1317
+msgid "Western Sahara"
+msgstr "Shara Occidental"
+
+#: inc/class-fp-utils.php:1292
+msgid "Uzbekistan"
+msgstr "Usbekistán"
+
+#: inc/class-fp-utils.php:1297
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#: inc/class-fp-utils.php:1302
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#: inc/class-fp-utils.php:1282
+msgid "United States"
+msgstr "United States"
+
+#: inc/class-fp-utils.php:1287
+msgid "Uruguay"
+msgstr "Uruguay"
+
+#: inc/class-fp-utils.php:1267
+msgid "Ukraine"
+msgstr "Ukraine"
+
+#: inc/class-fp-utils.php:1272
+msgid "United Arab Emirates"
+msgstr "Emiratos Árabes"
+
+#: inc/class-fp-utils.php:1277
+msgid "United Kingdom"
+msgstr "Inglaterra"
+
+#: inc/class-fp-utils.php:1252
+msgid "Turks and Caicos Islands"
+msgstr "Turks and Caicos Islands"
+
+#: inc/class-fp-utils.php:1257
+msgid "Tuvalu"
+msgstr "Tavalu"
+
+#: inc/class-fp-utils.php:1262
+msgid "Uganda"
+msgstr "Uganda"
+
+#: inc/class-fp-utils.php:1237
+msgid "Tunisia"
+msgstr "Tunisia"
+
+#: inc/class-fp-utils.php:1242
+msgid "Turkey"
+msgstr "Turkey"
+
+#: inc/class-fp-utils.php:1247
+msgid "Turkmenistan"
+msgstr "Turkmenistan"
+
+#: inc/class-fp-utils.php:1222
+msgid "Tokelau"
+msgstr "Tokelau"
+
+#: inc/class-fp-utils.php:1227
+msgid "Tonga"
+msgstr "Tonga"
+
+#: inc/class-fp-utils.php:1232
+msgid "Trinidad and Tobago"
+msgstr "Trinidad and Tobago"
+
+#: inc/class-fp-utils.php:1212
+msgid "East Timor"
+msgstr "East Timor"
+
+#: inc/class-fp-utils.php:1217
+msgid "Togo"
+msgstr "Togo"
+
+#: inc/class-fp-utils.php:1197
+msgid "Tajikistan"
+msgstr "Pakistan"
+
+#: inc/class-fp-utils.php:1202
+msgid "Tanzania"
+msgstr "Tanzania"
+
+#: inc/class-fp-utils.php:1207
+msgid "Thailand"
+msgstr "Thailand"
+
+#: inc/class-fp-utils.php:1187
+msgid "Syria"
+msgstr "Syria"
+
+#: inc/class-fp-utils.php:1192
+msgid "Taiwan"
+msgstr "Taiwan"
+
+#: inc/class-fp-utils.php:1172
+msgid "Swaziland"
+msgstr "Swaziland"
+
+#: inc/class-fp-utils.php:1177
+msgid "Sweden"
+msgstr "Suecia"
+
+#: inc/class-fp-utils.php:1182
+msgid "Switzerland"
+msgstr "Switzerland"
+
+#: inc/class-fp-utils.php:1157
+msgid "Sudan"
+msgstr "Sudan"
+
+#: inc/class-fp-utils.php:1162
+msgid "Suriname"
+msgstr "Suriname"
+
+#: inc/class-fp-utils.php:1167
+msgid "Svalbard and Jan Mayen"
+msgstr "Svalbard and Jan Mayen"
+
+#: inc/class-fp-utils.php:1142
+msgid "South Sudan"
+msgstr "South Sudan"
+
+#: inc/class-fp-utils.php:1147
+msgid "Spain"
+msgstr "España"
+
+#: inc/class-fp-utils.php:1152
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+#: inc/class-fp-utils.php:1132
+msgid "South Georgia"
+msgstr "Georgia del Sur"
+
+#: inc/class-fp-utils.php:1137
+msgid "South Korea"
+msgstr "South Korea"
+
+#: inc/class-fp-utils.php:1117
+msgid "Solomon Islands"
+msgstr "Isla Salomn"
+
+#: inc/class-fp-utils.php:1122
+msgid "Somalia"
+msgstr "Somalia"
+
+#: inc/class-fp-utils.php:1127
+msgid "South Africa"
+msgstr "Sur de Africa"
+
+#: inc/class-fp-utils.php:1102
+msgid "Sint Maarten"
+msgstr "Sint Maarten"
+
+#: inc/class-fp-utils.php:1107
+msgid "Slovakia"
+msgstr "Slovakia"
+
+#: inc/class-fp-utils.php:1112
+msgid "Slovenia"
+msgstr "Slovenia"
+
+#: inc/class-fp-utils.php:1092
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+#: inc/class-fp-utils.php:1097
+msgid "Singapore"
+msgstr "Singapore"
+
+#: inc/class-fp-utils.php:1077
+msgid "Senegal"
+msgstr "Senegal"
+
+#: inc/class-fp-utils.php:1082
+msgid "Serbia"
+msgstr "Serbia"
+
+#: inc/class-fp-utils.php:1087
+msgid "Seychelles"
+msgstr "Seychelles"
+
+#: inc/class-fp-utils.php:1072
+msgid "Saudi Arabia"
+msgstr "Arabia Saud"
+
+#: inc/class-fp-utils.php:1057
+msgid "Samoa"
+msgstr "Samoa"
+
+#: inc/class-fp-utils.php:1062
+msgid "San Marino"
+msgstr "San Marino"
+
+#: inc/class-fp-utils.php:1037
+msgid "Saint Lucia"
+msgstr "Saint Lucia"
+
+#: inc/class-fp-utils.php:1042
+msgid "Saint Martin"
+msgstr "Saint Martin"
+
+#: inc/class-fp-utils.php:1047
+msgid "Saint Pierre and Miquelon"
+msgstr "Saint Pierre and Miquelon"
+
+#: inc/class-fp-utils.php:1052
+msgid "Saint Vincent and the Grenadines"
+msgstr "San Vincente y las Granadinas"
+
+#: inc/class-fp-utils.php:1017
+msgid "Rwanda"
+msgstr "Rwanda"
+
+#: inc/class-fp-utils.php:1022
+msgid "Saint Barthélemy"
+msgstr "San Bartolom"
+
+#: inc/class-fp-utils.php:1027
+msgid "Saint Helena"
+msgstr "Santa Helena"
+
+#: inc/class-fp-utils.php:1032
+msgid "Saint Kitts and Nevis"
+msgstr "Saint Kitts and Nevis"
+
+#: inc/class-fp-utils.php:1007
+msgid "Romania"
+msgstr "Rumanía"
+
+#: inc/class-fp-utils.php:1012
+msgid "Russia"
+msgstr "Rusia"
+
+#: inc/class-fp-utils.php:992
+msgid "Qatar"
+msgstr "Catar"
+
+#: inc/class-fp-utils.php:982
+msgid "Portugal"
+msgstr "Portugal"
+
+#: inc/class-fp-utils.php:987
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
+
+#: inc/class-fp-utils.php:962
+msgid "Peru"
+msgstr "Perú"
+
+#: inc/class-fp-utils.php:967
+msgid "Philippines"
+msgstr "Philippines"
+
+#: inc/class-fp-utils.php:972
+msgid "Pitcairn Islands"
+msgstr "Islas Pitcairn"
+
+#: inc/class-fp-utils.php:977
+msgid "Poland"
+msgstr "Poland"
+
+#: inc/class-fp-utils.php:952
+msgid "Papua New Guinea"
+msgstr "Papua New Guinea"
+
+#: inc/class-fp-utils.php:957
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#: inc/class-fp-utils.php:942
+msgid "Palestine"
+msgstr "Palestina"
+
+#: inc/class-fp-utils.php:947
+msgid "Panama"
+msgstr "Panam"
+
+#: inc/class-fp-utils.php:927
+msgid "Oman"
+msgstr "Oman"
+
+#: inc/class-fp-utils.php:932
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#: inc/class-fp-utils.php:937
+msgid "Palau"
+msgstr "Palaos"
+
+#: inc/class-fp-utils.php:917
+msgid "Northern Mariana Islands"
+msgstr "Northern Mariana Islands"
+
+#: inc/class-fp-utils.php:922
+msgid "Norway"
+msgstr "Noruega"
+
+#: inc/class-fp-utils.php:902
+msgid "Niue"
+msgstr "Niue"
+
+#: inc/class-fp-utils.php:907
+msgid "Norfolk Island"
+msgstr "Norfolk Island"
+
+#: inc/class-fp-utils.php:912
+msgid "North Korea"
+msgstr "North Korea"
+
+#: inc/class-fp-utils.php:892
+msgid "Niger"
+msgstr "Nigeria"
+
+#: inc/class-fp-utils.php:897
+msgid "Nigeria"
+msgstr "Nigeria"
+
+#: inc/class-fp-utils.php:877
+msgid "New Caledonia"
+msgstr "New Caledonia"
+
+#: inc/class-fp-utils.php:882
+msgid "New Zealand"
+msgstr "Nueva Zelandia"
+
+#: inc/class-fp-utils.php:887
+msgid "Nicaragua"
+msgstr "Nicaragua"
+
+#: inc/class-fp-utils.php:867
+msgid "Nepal"
+msgstr "Nepal"
+
+#: inc/class-fp-utils.php:872
+msgid "Netherlands"
+msgstr "Netherlands"
+
+#: inc/class-fp-utils.php:852
+msgid "Myanmar"
+msgstr "Myanmar "
+
+#: inc/class-fp-utils.php:857
+msgid "Namibia"
+msgstr "Namibia"
+
+#: inc/class-fp-utils.php:862
+msgid "Nauru"
+msgstr "Nauru"
+
+#: inc/class-fp-utils.php:842
+msgid "Morocco"
+msgstr "Morocco"
+
+#: inc/class-fp-utils.php:847
+msgid "Mozambique"
+msgstr "Mozambique"
+
+#: inc/class-fp-utils.php:827
+msgid "Mongolia"
+msgstr "Mongolia"
+
+#: inc/class-fp-utils.php:832
+msgid "Montenegro"
+msgstr "Montenegro"
+
+#: inc/class-fp-utils.php:837
+msgid "Montserrat"
+msgstr "Montserrat"
+
+#: inc/class-fp-utils.php:812
+msgid "Federated States of Micronesia"
+msgstr "Estados Federados de Micronesia"
+
+#: inc/class-fp-utils.php:817
+msgid "Moldova"
+msgstr "Moldova"
+
+#: inc/class-fp-utils.php:822
+msgid "Monaco"
+msgstr "Monaco"
+
+#: inc/class-fp-utils.php:802
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#: inc/class-fp-utils.php:807
+msgid "Mexico"
+msgstr "Mexico"
+
+#: inc/class-fp-utils.php:792
+msgid "Mauritania"
+msgstr "Mauritania"
+
+#: inc/class-fp-utils.php:797
+msgid "Mauritius"
+msgstr "Mauritius"
+
+#: inc/class-fp-utils.php:787
+msgid "Martinique"
+msgstr "Martinique"
+
+#: inc/class-fp-utils.php:777
+msgid "Malta"
+msgstr "Malta"
+
+#: inc/class-fp-utils.php:782
+msgid "Marshall Islands"
+msgstr "Marshall Islands"
+
+#: inc/class-fp-utils.php:767
+msgid "Maldives"
+msgstr "Maldives"
+
+#: inc/class-fp-utils.php:772
+msgid "Mali"
+msgstr "Mali"
+
+#: inc/class-fp-utils.php:752
+msgid "Madagascar"
+msgstr "Madagascar"
+
+#: inc/class-fp-utils.php:757
+msgid "Malawi"
+msgstr "Malawi"
+
+#: inc/class-fp-utils.php:762
+msgid "Malaysia"
+msgstr "Malaysia"
+
+#: inc/class-fp-utils.php:742
+msgid "Macau"
+msgstr "Macao"
+
+#: inc/class-fp-utils.php:727
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#: inc/class-fp-utils.php:732
+msgid "Lithuania"
+msgstr "Lithuania"
+
+#: inc/class-fp-utils.php:737
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+#: inc/class-fp-utils.php:717
+msgid "Liberia"
+msgstr "Liberia"
+
+#: inc/class-fp-utils.php:722
+msgid "Libya"
+msgstr "Libya"
+
+#: inc/class-fp-utils.php:702
+msgid "Latvia"
+msgstr "Latvia"
+
+#: inc/class-fp-utils.php:707
+msgid "Lebanon"
+msgstr "Libano"
+
+#: inc/class-fp-utils.php:712
+msgid "Lesotho"
+msgstr "Lesotho"
+
+#: inc/class-fp-utils.php:692
+msgid "Kyrgyzstan"
+msgstr "Kyrgyzstan"
+
+#: inc/class-fp-utils.php:697
+msgid "Laos"
+msgstr "Laos"
+
+#: inc/class-fp-utils.php:682
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#: inc/class-fp-utils.php:687
+msgid "Kuwait"
+msgstr "Kuwait"
+
+#: inc/class-fp-utils.php:667
+msgid "Jordan"
+msgstr "Jordan"
+
+#: inc/class-fp-utils.php:672
+msgid "Kazakhstan"
+msgstr "Kazajstn"
+
+#: inc/class-fp-utils.php:677
+msgid "Kenya"
+msgstr "Kenya"
+
+#: inc/class-fp-utils.php:657
+msgid "Japan"
+msgstr "Japn"
+
+#: inc/class-fp-utils.php:662
+msgid "Jersey"
+msgstr "Jersey"
+
+#: inc/class-fp-utils.php:652
+msgid "Jamaica"
+msgstr "Jamaica"
+
+#: inc/class-fp-utils.php:642
+msgid "Israel"
+msgstr "Israel"
+
+#: inc/class-fp-utils.php:647
+msgid "Italy"
+msgstr "Italy"
+
+#: inc/class-fp-utils.php:627
+msgid "Iraq"
+msgstr "Iraq"
+
+#: inc/class-fp-utils.php:632
+msgid "Republic of Ireland"
+msgstr "República de Irlanda"
+
+#: inc/class-fp-utils.php:637
+msgid "Isle of Man"
+msgstr "Isle of Man"
+
+#: inc/class-fp-utils.php:612
+msgid "Indonesia"
+msgstr "Indonesia"
+
+#: inc/class-fp-utils.php:617
+msgid "Ivory Coast"
+msgstr "Ivory Coast"
+
+#: inc/class-fp-utils.php:622
+msgid "Iran"
+msgstr "Iran"
+
+#: inc/class-fp-utils.php:597
+msgid "Hungary"
+msgstr "Hungaria"
+
+#: inc/class-fp-utils.php:602
+msgid "Iceland"
+msgstr "Iceland"
+
+#: inc/class-fp-utils.php:607
+msgid "India"
+msgstr "India"
+
+#: inc/class-fp-utils.php:587
+msgid "Honduras"
+msgstr "Honduras"
+
+#: inc/class-fp-utils.php:592
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#: inc/class-fp-utils.php:577
+msgid "Haiti"
+msgstr "Haiti"
+
+#: inc/class-fp-utils.php:582
+msgid "Heard Island and McDonald Islands"
+msgstr "Heard Island and McDonald Islands"
+
+#: inc/class-fp-utils.php:562
+msgid "Guinea"
+msgstr "República de Guinea"
+
+#: inc/class-fp-utils.php:567
+msgid "Guinea-Bissau"
+msgstr "Guinea Bissau"
+
+#: inc/class-fp-utils.php:572
+msgid "Guyana"
+msgstr "Guayana"
+
+#: inc/class-fp-utils.php:552
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: inc/class-fp-utils.php:557
+msgid "Guernsey"
+msgstr "Guernsey"
+
+#: inc/class-fp-utils.php:547
+msgid "Guam"
+msgstr "Guam"
+
+#: inc/class-fp-utils.php:537
+msgid "Grenada"
+msgstr "Granada"
+
+#: inc/class-fp-utils.php:542
+msgid "Guadeloupe"
+msgstr "Guadeloupe"
+
+#: inc/class-fp-utils.php:527
+msgid "Greece"
+msgstr "Greece"
+
+#: inc/class-fp-utils.php:532
+msgid "Greenland"
+msgstr "Groelandia"
+
+#: inc/class-fp-utils.php:512
+msgid "Germany"
+msgstr "Alemanía"
+
+#: inc/class-fp-utils.php:517
+msgid "Ghana"
+msgstr "Ghana"
+
+#: inc/class-fp-utils.php:522
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#: inc/class-fp-utils.php:497
+msgid "Gabon"
+msgstr "Gabon"
+
+#: inc/class-fp-utils.php:507
+msgid "Georgia"
+msgstr "Georgia"
+
+#: inc/class-fp-utils.php:477
+msgid "France"
+msgstr "France"
+
+#: inc/class-fp-utils.php:482
+msgid "French Guiana"
+msgstr "Guiana francés"
+
+#: inc/class-fp-utils.php:487
+msgid "French Polynesia"
+msgstr "French Polynesia"
+
+#: inc/class-fp-utils.php:467
+msgid "Fiji"
+msgstr "Fidji"
+
+#: inc/class-fp-utils.php:472
+msgid "Finland"
+msgstr "Finland"
+
+#: inc/class-fp-utils.php:457
+msgid "Falkland Islands"
+msgstr "Islas Falkland"
+
+#: inc/class-fp-utils.php:462
+msgid "Faroe Islands"
+msgstr "Faroe Islands"
+
+#: inc/class-fp-utils.php:442
+msgid "Eritrea"
+msgstr "Eritrea"
+
+#: inc/class-fp-utils.php:447
+msgid "Estonia"
+msgstr "Estonia"
+
+#: inc/class-fp-utils.php:452
+msgid "Ethiopia"
+msgstr "Etiopa"
+
+#: inc/class-fp-utils.php:432
+msgid "El Salvador"
+msgstr "El  Emiratos"
+
+#: inc/class-fp-utils.php:437
+msgid "Equatorial Guinea"
+msgstr "Equatorial Guinea"
+
+#: inc/class-fp-utils.php:417
+msgid "Dominican Republic"
+msgstr "Repblica Dominicana"
+
+#: inc/class-fp-utils.php:422
+msgid "Ecuador"
+msgstr "Ecuador"
+
+#: inc/class-fp-utils.php:427
+msgid "Egypt"
+msgstr "Egypt"
+
+#: inc/class-fp-utils.php:412
+msgid "Dominica"
+msgstr "Dominica"
+
+#: inc/class-fp-utils.php:397
+msgid "Czech Republic"
+msgstr "Repblica Checa"
+
+#: inc/class-fp-utils.php:402
+msgid "Denmark"
+msgstr "Denmark"
+
+#: inc/class-fp-utils.php:407
+msgid "Djibouti"
+msgstr "Yibuti"
+
+#: inc/class-fp-utils.php:377
+msgid "Croatia"
+msgstr "Croatia"
+
+#: inc/class-fp-utils.php:382
+msgid "Cuba"
+msgstr "Cuba"
+
+#: inc/class-fp-utils.php:392
+msgid "Cyprus"
+msgstr "Cyprus"
+
+#: inc/class-fp-utils.php:372
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#: inc/class-fp-utils.php:357
+msgid "Republic of the Congo"
+msgstr "República del Congo"
+
+#: inc/class-fp-utils.php:362
+msgid "Democratic Republic of the Congo"
+msgstr "República Democrática del Congo"
+
+#: inc/class-fp-utils.php:367
+msgid "Cook Islands"
+msgstr "Cook Islands"
+
+#: inc/class-fp-utils.php:342
+msgid "Cocos (Keeling) Islands"
+msgstr "Cocos (Keeling)"
+
+#: inc/class-fp-utils.php:347
+msgid "Colombia"
+msgstr "Columbia"
+
+#: inc/class-fp-utils.php:352
+msgid "Comoros"
+msgstr "Comoros"
+
+#: inc/class-fp-utils.php:327
+msgid "Chile"
+msgstr "Chile"
+
+#: inc/class-fp-utils.php:332
+msgid "China"
+msgstr "China"
+
+#: inc/class-fp-utils.php:337
+msgid "Christmas Island"
+msgstr "Islas Christmas"
+
+#: inc/class-fp-utils.php:312
+msgid "Cayman Islands"
+msgstr "Cayman Islands"
+
+#: inc/class-fp-utils.php:317
+msgid "Central African Republic"
+msgstr "Repbica centroafricana"
+
+#: inc/class-fp-utils.php:322
+msgid "Chad"
+msgstr "Chad"
+
+#: inc/class-fp-utils.php:307
+msgid "Cape Verde"
+msgstr "Cape Verde"
+
+#: inc/class-fp-utils.php:292
+msgid "Cambodia"
+msgstr "Cambodia"
+
+#: inc/class-fp-utils.php:297
+msgid "Cameroon"
+msgstr "Camerun"
+
+#: inc/class-fp-utils.php:302
+msgid "Canada"
+msgstr "Canada"
+
+#: inc/class-fp-utils.php:277
+msgid "Bulgaria"
+msgstr "Bulgaria"
+
+#: inc/class-fp-utils.php:282
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+#: inc/class-fp-utils.php:287
+msgid "Burundi"
+msgstr "Burundi"
+
+#: inc/class-fp-utils.php:267
+msgid "British Virgin Islands"
+msgstr "Islas Británicas vírgenes"
+
+#: inc/class-fp-utils.php:272
+msgid "Brunei"
+msgstr "Brunéi"
+
+#: inc/class-fp-utils.php:257
+msgid "British Indian Ocean Territory"
+msgstr "Isla de Territorio ManBritish Ocano ndico"
+
+#: inc/class-fp-utils.php:262
+msgid "United States Minor Outlying Islands"
+msgstr "Estados Unidos Islas Menores"
+
+#: inc/class-fp-utils.php:242
+msgid "Botswana"
+msgstr "Botsuana"
+
+#: inc/class-fp-utils.php:247
+msgid "Bouvet Island"
+msgstr "Bouvet Island"
+
+#: inc/class-fp-utils.php:252
+msgid "Brazil"
+msgstr "Brasil"
+
+#: inc/class-fp-utils.php:222
+msgid "Bhutan"
+msgstr "Butn"
+
+#: inc/class-fp-utils.php:227
+msgid "Bolivia"
+msgstr "Bolivia"
+
+#: inc/class-fp-utils.php:237
+msgid "Bosnia and Herzegovina"
+msgstr "Bosnia Herzegovina"
+
+#: inc/class-fp-utils.php:217
+msgid "Bermuda"
+msgstr "Bermuda"
+
+#: inc/class-fp-utils.php:212
+msgid "Benin"
+msgstr "Benín"
+
+#: inc/class-fp-utils.php:202
+msgid "Belgium"
+msgstr "Belgica"
+
+#: inc/class-fp-utils.php:207
+msgid "Belize"
+msgstr "Belice"
+
+#: inc/class-fp-utils.php:192
+msgid "Barbados"
+msgstr "Barbados"
+
+#: inc/class-fp-utils.php:197
+msgid "Belarus"
+msgstr "Belarus"
+
+#: inc/class-fp-utils.php:187
+msgid "Bangladesh"
+msgstr "Bangladés"
+
+#: inc/class-fp-utils.php:172
+msgid "Azerbaijan"
+msgstr "Acerbayan"
+
+#: inc/class-fp-utils.php:182
+msgid "Bahrain"
+msgstr "Baréin"
+
+#: inc/class-fp-utils.php:167
+msgid "Austria"
+msgstr "Austria"
+
+#: inc/class-fp-utils.php:157
+msgid "Aruba"
+msgstr "Arabia"
+
+#: inc/class-fp-utils.php:162
+msgid "Australia"
+msgstr "Australia"
+
+#: inc/class-fp-utils.php:147
+msgid "Argentina"
+msgstr "Argentina"
+
+#: inc/class-fp-utils.php:152
+msgid "Armenia"
+msgstr "Armenia"
+
+#: inc/class-fp-utils.php:137
+msgid "Anguilla"
+msgstr "Antártida"
+
+#: inc/class-fp-utils.php:142
+msgid "Antigua and Barbuda"
+msgstr "Antigua and Barbuda"
+
+#: inc/class-fp-utils.php:132
+msgid "Angola"
+msgstr "Angola"
+
+#: inc/class-fp-utils.php:122
+msgid "American Samoa"
+msgstr "America Samoa"
+
+#: inc/class-fp-utils.php:127
+msgid "Andorra"
+msgstr "Andorra"
+
+#: inc/class-fp-utils.php:112
+msgid "Albania"
+msgstr "Albania"
+
+#: inc/class-fp-utils.php:117
+msgid "Algeria"
+msgstr "Argelia "
+
+#: inc/class-fp-utils.php:102
+msgid "Afghanistan"
+msgstr "Afganistan"
+
+#: view/settings.php:38
+msgid "Save"
+msgstr "Guardar"
+
+#: view/users.php:19
+msgid "Use HTML on your randomized user description?"
+msgstr "¿Utilizar HTML en la descripción de usuario aleatoria?"
+
+#: view/users.php:42
+msgid "Select the group of tags that can be selected to print on the User Description."
+msgstr "Selecciona el grupo de etiquetas que puede ser seleccionado para imprimirse en el contenido de la descripción de usuario."
+
+#: view/users.php:64
+msgid "Roles"
+msgstr "Roles"
+
+#: view/users.php:65
+msgid "Sampling roles to be used"
+msgstr "Roles a usar"
+
+#: view/users.php:76
+msgid "Use the fields below to configure a set of rules for your generated users"
+msgstr "Utiliza los campos a continuación para configurar un conjunto de reglas para los usuarios generados"
+
+#. Plugin URI of the plugin/theme
+msgid "https://fakerpress.com"
+msgstr "https://fakerpress.com"
+
+#. Description of the plugin/theme
+msgid "FakerPress is a clean way to generate fake data to your WordPress instalation, great for developers who need testing"
+msgstr "FakerPress permite crear de manera sencilla datos de prueba para tu instalación de WordPress, especialmente para desarrolladores que necesitan realizar pruebas"
+
+#. Author of the plugin/theme
+msgid "Gustavo Bordoni"
+msgstr "Gustavo Bordoni"
+
+#. Author URI of the plugin/theme
+msgid "http://bordoni.me"
+msgstr "http://bordoni.me"
+
+#: fakerpress.php:52
+msgid "<b>FakerPress</b> requires PHP 5.3 or higher, and the plugin has now disabled itself."
+msgstr "<b>FakerPress</b> requiere la versión 5.3 de PHP o superior para funcionar. El plugin se ha desactivado."
+
+#: fakerpress.php:54
+msgid "To allow better control over dates, advanced security improvements and performance gain."
+msgstr "Para permitir un mejor control sobre fechas, mejoras sobre seguridad y performance."
+
+#: fakerpress.php:56
+msgid "Contact your Hosting or your system administrator and ask for this Upgrade to version 5.3 of PHP."
+msgstr "Contacta a tus proveedores de hosting o a los administradores de tu servidor y pídeles que actualicen PHP a la versión 5.3."
+
+#: inc/class-fp-admin.php:87 inc/class-fp-admin.php:276
+msgid "Settings"
+msgstr "Ajustes"
+
+#. #-#-#-#-#  tmp-fakerpress.pot (FakerPress 0.4.7)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: inc/class-fp-admin.php:88
+msgid "FakerPress"
+msgstr "FakerPress"
+
+#: inc/class-fp-admin.php:426
+msgid "Changelog"
+msgstr "Changelog"
+
+#: inc/class-fp-admin.php:430
+msgid "Not Found (404)"
+msgstr "No encontrado (404)"
+
+#: inc/class-fp-admin.php:445
+msgid "%s on FakerPress"
+msgstr "%s en FakerPress"
+
+#: inc/class-fp-admin.php:506
+msgid "Contact Support"
+msgstr "Contactar a soporte"
+
+#: inc/class-fp-admin.php:510
+msgid "Add your [stars] on [wp.org] to spread the love."
+msgstr "Añade tus [estrellas] en [wp.org] y esparce el amor."
+
+#: inc/class-fp-admin.php:531
+msgid "Help us with Translations for the FakerPress project"
+msgstr "Ayúdanos con las traducciones para FakerPress"
+
+#: inc/class-fp-admin.php:532
+msgid "Version"
+msgstr "Versión"
+
+#: inc/class-fp-admin.php:532
+msgid "View what changed in this version"
+msgstr "Ver el changelog de esta versión"
+
+#: inc/class-fp-admin.php:579
+msgid "Updated 500px Customer Application settings"
+msgstr "Se actualizaron los ajustes de aplicación de 500px"
+
+#: inc/class-fp-admin.php:591
+msgid "The verification to erase the data has failed, you have to let it go..."
+msgstr "La verificación para eliminar los datos ha fallado, debes dejarlos ir..."
+
+#: inc/class-fp-admin.php:607
+msgid "All data is gone for good."
+msgstr "Todos los datos han sido eliminados."
+
+#: inc/class-fp-ajax.php:21 inc/class-fp-ajax.php:84 inc/class-fp-ajax.php:154
+#: inc/class-fp-ajax.php:194
+msgid "Your request has failed"
+msgstr "Tu petición ha fallado"
+
+#: inc/class-fp-ajax.php:32
+msgid "Security fail, refresh the page and try again!"
+msgstr "Falla de seguridad, refresca la página y proba nuevamente!"
+
+#: inc/class-fp-ajax.php:110 inc/class-fp-ajax.php:176
+#: inc/class-fp-ajax.php:213
+msgid "Request successful"
+msgstr "Petición exitosa"
+
+#: inc/class-fp-dates.php:19
+msgid "Today"
+msgstr "Hoy"
+
+#: inc/class-fp-dates.php:25
+msgid "Yesterday"
+msgstr "Ayer"
+
+#: inc/class-fp-dates.php:31
+msgid "Tomorrow"
+msgstr "Mañana"
+
+#: inc/class-fp-dates.php:37
+msgid "This week"
+msgstr "Esta semana"
+
+#: inc/class-fp-dates.php:43
+msgid "This month"
+msgstr "Este mes"
+
+#: inc/class-fp-dates.php:49
+msgid "This year"
+msgstr "Este año"
+
+#: inc/class-fp-dates.php:55
+msgid "Last 15 days"
+msgstr "Últimos 15 días"
+
+#: inc/class-fp-dates.php:61
+msgid "Next 15 Days"
+msgstr "Próximos 15 días"
+
+#: inc/class-fp-field.php:817
+msgid "e.g.: 3"
+msgstr "ej.: 3"
+
+#: inc/class-fp-field.php:841
+msgid "e.g.: 12"
+msgstr "ej.: 12"
+
+#: inc/class-fp-field.php:926 view/terms.php:40
+msgid "Taxonomies"
+msgstr "Taxonomías"
+
+#: inc/class-fp-field.php:954 modules/term.php:20
+msgid "Terms"
+msgstr "Términos"
+
+#: inc/class-fp-field.php:973 inc/class-fp-field.php:981
+msgid "Rate"
+msgstr "Tasa"
+
+#: inc/class-fp-field.php:991 inc/class-fp-field.php:1209
+#: view/attachments.php:11 view/comments.php:8 view/posts.php:11
+#: view/terms.php:8 view/users.php:8
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: inc/class-fp-field.php:1122
+msgid "Type"
+msgstr "Tipo"
+
+#: inc/class-fp-field.php:1123
+msgid "Select a type of the Meta Field"
+msgstr "Selecciona un tipo de campo meta"
+
+#: inc/class-fp-field.php:1130
+msgid "Name"
+msgstr "Nombre"
+
+#: inc/class-fp-field.php:1131
+msgid "Select the name for Meta Field"
+msgstr "Selecciona el nombre para el campo meta"
+
+#: inc/class-fp-field.php:1138
+msgid "Configuration"
+msgstr "Configuración"
+
+#: inc/class-fp-field.php:1102
+msgid "Select a Field type"
+msgstr "Selecciona un tipo de campo"
+
+#: inc/class-fp-field.php:1112
+msgid "Newborn Meta needs a Name, E.g.: _new_image"
+msgstr "El nuevo campo meta necesita un nombre, ej.: _nueva_imagen"
+
+#: inc/class-fp-field.php:1190
+msgid "E.g.: , "
+msgstr "ej.: ,"
+
+#: inc/class-fp-field.php:1191
+msgid "Separator"
+msgstr "Separador"
+
+#: inc/class-fp-field.php:1201
+msgid "E.g.: 55"
+msgstr "ej.: 55"
+
+#: inc/class-fp-field.php:1202
+msgid "Weight"
+msgstr "Peso"
+
+#: inc/class-fp-field.php:1218
+msgid "Number"
+msgstr "Número"
+
+#: inc/class-fp-field.php:1225
+msgid "Range of possible numbers"
+msgstr "Rango de números posibles"
+
+#: inc/class-fp-field.php:1237
+msgid "WP_Query"
+msgstr "WP_Query"
+
+#: inc/class-fp-field.php:1245
+msgid "category=2&posts_per_page=10"
+msgstr "category=2&posts_per_page=10"
+
+#: inc/class-fp-field.php:1246
+msgid "Uses <a href=\"http://codex.wordpress.org/Class_Reference/WP_Query\" target=\"_blank\">WP_Query</a>"
+msgstr "Utiliza <a href=\"http://codex.wordpress.org/Class_Reference/WP_Query\" target=\"_blank\">WP_Query</a>"
+
+#: inc/class-fp-field.php:1299
+msgid "Elements"
+msgstr "Elementos"
+
+#: inc/class-fp-field.php:1309
+msgid "Type all possible elements (Tab or Return)"
+msgstr "Ingresa todos los elementos posibles (Tab o Enter)"
+
+#: inc/class-fp-field.php:1323
+msgid "Letter"
+msgstr "Letra"
+
+#: inc/class-fp-field.php:1333
+msgid "Words"
+msgstr "Palabras"
+
+#: inc/class-fp-field.php:1345
+msgid "Text"
+msgstr "Texto"
+
+#: inc/class-fp-field.php:1353
+msgid "Sentences"
+msgstr "Oraciones"
+
+#: inc/class-fp-field.php:1357
+msgid "Paragraphs"
+msgstr "Párrafos"
+
+#: inc/class-fp-field.php:1366
+msgid "Separator <b space>&mdash;</b> New Line: \"\\n\""
+msgstr "Separador <b space>&mdash;</b> Nueva linea: \"\\n\""
+
+#: inc/class-fp-field.php:1379
+msgid "HTML"
+msgstr "HTML"
+
+#: inc/class-fp-field.php:1390
+msgid "HTML Tags, without &lt; or &gt;"
+msgstr "Etiquetas HTML, sin &lt; o &gt;"
+
+#: inc/class-fp-field.php:1402
+msgid "Lexify"
+msgstr "Lexify"
+
+#: inc/class-fp-field.php:1409
+msgid "E.g.: John ##??"
+msgstr "ej.: Juan ##??"
+
+#: inc/class-fp-field.php:1410
+msgid "John ##?? <b spacer>&raquo;</b> John 29ze"
+msgstr "Juan ##?? <b spacer>&raquo;</b> Juan 29ze"
+
+#: inc/class-fp-field.php:1421
+msgid "Asciify"
+msgstr "Asciify"
+
+#: inc/class-fp-field.php:1428
+msgid "E.g.: John ****"
+msgstr "ej.: Juan ****"
+
+#: inc/class-fp-field.php:1429
+msgid "John **** <b spacer>&raquo;</b> John r9\"+"
+msgstr "Juan **** <b spacer>&raquo;</b> Juan r9\"+"
+
+#: inc/class-fp-field.php:1440
+msgid "Regexify"
+msgstr "Regexify"
+
+#: inc/class-fp-field.php:1447
+msgid "E.g.: [A-Z0-9._%+-]+@[A-Z0-9.-]"
+msgstr "Ej.: [A-Z0-9._%+-]+@[A-Z0-9.-]"
+
+#: inc/class-fp-field.php:1448
+msgid "[A-Z0-9._%+-]+@[A-Z0-9.-] <b spacer>&raquo;</b> sm0@y8k96a"
+msgstr "[A-Z0-9._%+-]+@[A-Z0-9.-] <b spacer>&raquo;</b> sm0@y8k96a"
+
+#: inc/class-fp-field.php:1459
+msgid "Person"
+msgstr "Persona"
+
+#: inc/class-fp-field.php:1469
+msgid "Title"
+msgstr "Título"
+
+#: inc/class-fp-field.php:1473
+msgid "First Name"
+msgstr "Nombre"
+
+#: inc/class-fp-field.php:1477
+msgid "Last Name"
+msgstr "Apellido"
+
+#: inc/class-fp-field.php:1481 inc/class-fp-field.php:1628
+msgid "Suffix"
+msgstr "Sufijo"
+
+#: inc/class-fp-field.php:1489
+msgid "Name Template"
+msgstr "Nombre de plantilla"
+
+#: inc/class-fp-field.php:1497
+msgid "Male"
+msgstr "Masculino"
+
+#: inc/class-fp-field.php:1501
+msgid "Female"
+msgstr "Femenino"
+
+#: inc/class-fp-field.php:1518
+msgid "Geo Information"
+msgstr "Información geográfica"
+
+#: inc/class-fp-field.php:1528
+msgid "Country"
+msgstr "País"
+
+#: inc/class-fp-field.php:1540
+msgid "City Prefix"
+msgstr "Prefijo de Ciudad"
+
+#: inc/class-fp-field.php:1544
+msgid "City Suffix"
+msgstr "Sufijo de Ciudad"
+
+#: inc/class-fp-field.php:1548
+msgid "City"
+msgstr "Ciudad"
+
+#: inc/class-fp-field.php:1552
+msgid "State"
+msgstr "Estado"
+
+#: inc/class-fp-field.php:1556
+msgid "State Abbr"
+msgstr "Abreviación de Estado"
+
+#: inc/class-fp-field.php:1560
+msgid "Address"
+msgstr "Dirección"
+
+#: inc/class-fp-field.php:1564
+msgid "Secondary Address"
+msgstr "Dirección Secundaria"
+
+#: inc/class-fp-field.php:1568
+msgid "Building Number"
+msgstr "Número de Edificio"
+
+#: inc/class-fp-field.php:1572
+msgid "Street Name"
+msgstr "Nombre de calle"
+
+#: inc/class-fp-field.php:1576
+msgid "Street Address"
+msgstr "Dirección"
+
+#: inc/class-fp-field.php:1580
+msgid "Postal Code"
+msgstr "Código Postal"
+
+#: inc/class-fp-field.php:1584
+msgid "Latitude"
+msgstr "Latitud"
+
+#: inc/class-fp-field.php:1588
+msgid "Longitude"
+msgstr "Longitud"
+
+#: inc/class-fp-field.php:1595
+msgid "Address Format"
+msgstr "Formato de dirección"
+
+#: inc/class-fp-field.php:1606 inc/class-fp-field.php:1624
+msgid "Company"
+msgstr "Compañía"
+
+#: inc/class-fp-field.php:1635
+msgid "Company Format"
+msgstr "Formato de compañía"
+
+#: inc/class-fp-field.php:1646 view/attachments.php:23 view/comments.php:50
+#: view/posts.php:23
+msgid "Date"
+msgstr "Fecha"
+
+#: inc/class-fp-field.php:1660
+msgid "Date Format <b space>&mdash;</b> See <a href=\"http://php.net/manual/function.date.php\" target=\"_blank\">PHP Date</a>"
+msgstr "Formato de fecha <b space>&mdash;</b> Ver la función <a href=\"http://php.net/manual/function.date.php\" target=\"_blank\">PHP Date</a>"
+
+#: inc/class-fp-field.php:1672
+msgid "TimeZone"
+msgstr "Huso horario"
+
+#: inc/class-fp-field.php:1682
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: inc/class-fp-field.php:1692
+msgid "Domain"
+msgstr "Dominio"
+
+#: inc/class-fp-field.php:1702
+msgid "IP"
+msgstr "IP"
+
+#: inc/class-fp-field.php:1712
+msgid "Browser User Agent"
+msgstr "Navegador"
+
+#: inc/class-fp-field.php:1739 inc/class-fp-field.php:1748
+msgid "yyyy-mm-dd"
+msgstr "yyyy-mm-dd"
+
+#: inc/class-fp-field.php:1755
+msgid "Select an Interval"
+msgstr "Selecciona un intervalo"
+
+#: inc/class-fp-variable.php:90
+msgid "Invalid use, type must be one of INPUT_* family."
+msgstr "Uso no válido, el tipo debe ser uno de la familia INPUT_*"
+
+#: modules/comment.php:20
+msgid "Comments"
+msgstr "Comentarios"
+
+#: modules/comment.php:21
+msgid "Generate Comments"
+msgstr "Generar comentarios"
+
+#: modules/comment.php:118
+msgid "Zero is not a good number of comments to fake..."
+msgstr "Cero no es buen número de comentarios a crear..."
+
+#: modules/comment.php:176
+msgid "comment"
+msgid_plural "comments"
+msgstr[0] "comentario"
+msgstr[1] "comentarios"
+
+#: modules/post.php:20
+msgid "Posts"
+msgstr "Entradas"
+
+#: modules/post.php:21
+msgid "Generate Posts"
+msgstr "Generar Entradas"
+
+#: modules/post.php:120
+msgid "Zero is not a good number of posts to fake..."
+msgstr "Cero no es buen número de posts a crear..."
+
+#: modules/post.php:209
+msgid "post"
+msgid_plural "posts"
+msgstr[0] "entrada"
+msgstr[1] "entradas"
+
+#: modules/term.php:21
+msgid "Generate Terms"
+msgstr "Generar Términos"
+
+#: modules/term.php:100
+msgid "Zero is not a good number of terms to fake..."
+msgstr "Cero no es buen número de términos a crear..."
+
+#: modules/term.php:160
+msgid "term"
+msgid_plural "terms"
+msgstr[0] "término"
+msgstr[1] "términos"
+
+#: modules/user.php:19
+msgid "Users"
+msgstr "Usuarios"
+
+#: modules/user.php:20
+msgid "Generate Users"
+msgstr "Generar Usuarios"
+
+#: modules/user.php:123
+msgid "Zero is not a good number of users to fake..."
+msgstr "Cero no es buen número de usuarios a crear..."
+
+#: modules/user.php:184
+msgid "user"
+msgid_plural "users"
+msgstr[0] "usuario"
+msgstr[1] "usuarios"
+
+#: view/attachments.php:12 view/posts.php:12
+msgid "How many posts should be generated, use both fields to get a randomized number of posts within the given range."
+msgstr "Qué cantidad de Entradas deberían ser generadas, utiliza ambos campos para obtener un número aleatorio de entradas en un rango específico."
+
+#: view/attachments.php:24 view/comments.php:51 view/posts.php:24
+msgid "Choose the range for the posts dates."
+msgstr "Selecciona el rango de fechas de las entradas"
+
+#: view/attachments.php:36 view/posts.php:67
+msgid "Parents"
+msgstr "Padres"
+
+#: view/attachments.php:37 view/posts.php:68
+msgid "What posts can be choosen as Parent to the ones created"
+msgstr "Qué entradas pueden ser seleccionadas como padres para las creadas"
+
+#: view/attachments.php:50 view/posts.php:81
+msgid "Allow Comments"
+msgstr "Permitir Comentarios"
+
+#: view/attachments.php:54 view/posts.php:85
+msgid "Comments closed"
+msgstr "Comentarios cerrados"
+
+#: view/attachments.php:59 view/posts.php:90
+msgid "Comments Status"
+msgstr "Estado de Comentarios"
+
+#: view/attachments.php:70 view/posts.php:101
+msgid "Use HTML on your randomized post content?"
+msgstr "¿Utilizar HTML en el contenido aleatorio de las entradas?"
+
+#: view/attachments.php:77 view/comments.php:26 view/posts.php:108
+#: view/users.php:26
+msgid "Use HTML"
+msgstr "Utilizar HTML"
+
+#: view/attachments.php:92 view/comments.php:41 view/posts.php:123
+#: view/users.php:41
+msgid "HTML tags"
+msgstr "Etiquetas HTML"
+
+#: view/attachments.php:93 view/posts.php:124
+msgid "Select the group of tags that can be selected to print on the Post Content"
+msgstr "Selecciona el grupo de etiquetas que puede ser seleccionado para imprimirse en el contenido de la entrada"
+
+#: view/attachments.php:171 view/posts.php:167
+msgid "Author"
+msgstr "Autor"
+
+#: view/attachments.php:172 view/posts.php:168
+msgid "Choose some users to be authors of posts generated."
+msgstr "Selecciona algunos usuarios para ser autores de las entradas generadas."
+
+#: view/attachments.php:183 view/comments.php:61 view/posts.php:197
+#: view/terms.php:52 view/users.php:75
+msgid "Meta Field Rules"
+msgstr "Reglas para los campos meta"
+
+#: view/attachments.php:184 view/posts.php:198
+msgid "Use the fields below to configure a set of rules for your generated Posts"
+msgstr "Utiliza los campos a continuación para configurar un conjunto de reglas para tus entradas generadas"
+
+#: view/attachments.php:200 view/comments.php:83 view/posts.php:217
+#: view/terms.php:71 view/users.php:93
+msgid "Generate"
+msgstr "Generar"
+
+#: view/changelog.php:2
+msgid "What has Changed in FakerPress"
+msgstr "¿Qué hay de nuevo en FakerPress?"
+
+#: view/changelog.php:4
+msgid "Sorry but this page still doesn't have the information available."
+msgstr "Lo sentimos, pero esta página aún no cuenta con la información disponible."
+
+#: view/comments.php:9
+msgid "How many comments should be generated, use both fields to get a randomized number of comments within the given range."
+msgstr "Qué cantidad de comentarios deberían ser generados, utiliza ambos campos para obtener un número aleatorio de comentarios en un rango específico."
+
+#: view/comments.php:20
+msgid "Use HTML on your randomized comment content?"
+msgstr "¿Utilizar HTML en el contenido aleatorio de los comentarios?"
+
+#: view/comments.php:42
+msgid "Select the group of tags that can be selected to print on the Comment Content."
+msgstr "Selecciona el grupo de etiquetas que puede ser seleccionado para imprimirse en el contenido del comentario."
+
+#: view/comments.php:62
+msgid "Use the fields below to configure a set of rules for your generated Comments"
+msgstr "Utiliza los campos a continuación para configurar un conjunto de reglas para tus comentarios generados"
+
+#: view/error.php:14
+msgid "Oops, 404 Error!"
+msgstr "Ups, ¡Error 404!"
+
+#: view/error.php:16
+msgid ""
+"Yeah... Something went very wrong somewhere along your last actions.\n"
+"\n"
+"Right now we feel ashamed about this problem, <a href='%s' target='_blank'>poke us on twitter!</a>"
+msgstr "Si... Hay algo que no estuvo funcionando desde tu última acción. En este momento nos sentimos avergonzados por este problema, <a href='%s' target='_blank'>escríbenos en twitter!</a>"
+
+#: view/posts.php:54
+msgid "Post Type"
+msgstr "Post Type"
+
+#: view/posts.php:137
+msgid "Image Providers"
+msgstr "Proveedores de imágenes"
+
+#: inc/class-fp-field.php:1285 view/posts.php:138
+msgid "Which image services will the generator use?"
+msgstr "¿Qué servicios de imágenes utilizará el generador?"
+
+#: view/posts.php:178
+msgid "Taxonomy Field Rules"
+msgstr "Reglas para los campos de taxonomía"
+
+#: view/posts.php:179
+msgid "Use the fields below to configure the rules for the Taxonomy and Terms selected"
+msgstr "Utiliza los campos a continuación para configurar un conjunto de reglas para las taxonomías y términos seleccionados"
+
+#: view/settings.php:10
+msgid "Erase faked data"
+msgstr "Eliminar datos generados"
+
+#: view/settings.php:11
+msgid "To erase all data generated type \"<b>Let it Go!</b>\"."
+msgstr "Para eliminar todos los datos generados ingresa \"<b>Let it Go!</b>\"."
+
+#: view/settings.php:13
+msgid "Delete!"
+msgstr "¡Eliminar!"
+
+#: view/settings.php:22
+msgid "API: <i>500px</i>"
+msgstr "API: <i>500px</i>"
+
+#: view/settings.php:23
+msgid "Setting up 500px API connection is fully optional."
+msgstr "Configurar la API de 500px es opcional"
+
+#: view/settings.php:31
+msgid "E.g.: fU3TlASxi2uL76TcP5PAd946fYGZTVsfle6v13No"
+msgstr "ej.: fU3TlASxi2uL76TcP5PAd946fYGZTVsfle6v13No"

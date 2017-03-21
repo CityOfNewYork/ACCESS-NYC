@@ -1,0 +1,75 @@
+.share-toggle {
+  &.active {
+    @include border-bottom-radius(0);
+    background: $color-blue-dark;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+      @if $text-direction == 'rtl' {
+        @include position(absolute, null null (.3 * -$spacing-base) 1.5em);
+      } @else {
+        @include position(absolute, null 1.5em (.3 * -$spacing-base) null);
+      }
+      @include triangle($spacing-base (.3 * $spacing-base), $color-blue-dark, down);
+      content: '';
+      display: block;
+      z-index: 0;
+    }
+  }
+}
+
+.share-form {
+  .program-detail-status-buttons & {
+    margin-bottom: $spacing-base;
+  }
+
+  .error-message {
+    color: $color-red;
+    font-size: $font-size-small;
+    margin-top: (.5 * $spacing-base);
+    width: 100%;
+  }
+
+  .success-message {
+    color: $color-green-mid;
+    display: none;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+  }
+
+  .success {
+    .success-message {
+      display: block;
+      padding: (.75 * $spacing-base);
+    }
+  }
+}
+
+.share-form-controls {
+  @include align-items(center);
+  @include display(flex);
+  background: $color-white;
+  border: 1px solid $color-grey-mid;
+  padding-#{$text-direction-end}: .5 * $spacing-base;
+
+  .error & {
+    border-color: $color-red;
+  }
+
+  input {
+    @include flex-grow(1);
+    border: none;
+    min-width: 0;
+  }
+
+  .btn-submit {
+    margin: 0;
+    padding: (.75 * $spacing-base);
+
+    .success & {
+      display: none;
+    }
+  }
+}

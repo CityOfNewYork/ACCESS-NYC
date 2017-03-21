@@ -1,0 +1,68 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+  <main class="main-content" id="content">
+    <form class="program-landing js-filtered-search" method="get" action="/">
+      {{ fn('do_action', 'wpml_add_language_form_field' ) }}
+      <div class="program-search">
+        <div class="usa-grid">
+          <div class="usa-width-one-whole">
+            <div class="search-form program-search-form">
+              <label class="type-small" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
+              <div class="search-form-field-container">
+                <input class="search-form-field" name="s" type="text" value="{{query}}" id="program-search-field">
+                <button class="btn-text search-form-submit" type="submit">
+                  <svg class="icon icon-search">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use>
+                  </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="usa-grid program-landing-body">
+        <aside>
+          <h4>{{__('Filter Programs', 'accessnyctheme')}}:</h4>
+          <div class="program-filter js-program-filter js-program-search-filter">
+            <!-- The copy for this should be whatever the active filter is.--><a class="program-filter-header js-toggle-filter" id="#program-options">{% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{__('All Programs', 'accessnyctheme')}}{% endif %}</a>
+            <div class="program-filter-body">
+              <ul class="program-filter-list" id="program-options">
+                <!-- The active category is not linked.-->
+                <li>
+                  <label class="program-filter-item">
+                    <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="">{{__('All Programs', 'accessnyctheme')}}
+                  </label>
+                </li>
+                {% for category in categories %}
+                  <li>
+                    <label class="program-filter-item">
+                      <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" value="{{ category.slug }}">{{ category.name }}
+                    </label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </aside>
+        <div class="content-body">
+          <div class="program-cards">
+            {% if not posts | length %}
+              <div class="program-no-results">
+                <!-- The js filter reset should point to the search landing page with no search params.-->
+                <p>{{__('Sorry, we couldn’t find anything matching your search.', 'accessnyctheme')}} <a class="js-filter-reset" href="/?s={{query}}">{{__('Clear filters.', 'accessnyctheme')}}</a></p>
+              </div>
+            {% else %}
+              {% include 'partials/post-teaser.twig' %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="usa-grid">
+          <footer class="content-footer usa-width-one-whole">
+            {# {% include 'partials/was-this-page-helpful.twig' %} #}
+          </footer>
+        </div>
+      </div>
+    </form>
+  </main>
+{% endblock %}

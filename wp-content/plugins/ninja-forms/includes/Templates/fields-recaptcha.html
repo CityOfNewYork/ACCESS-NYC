@@ -1,0 +1,5 @@
+<script id="tmpl-nf-field-recaptcha" type="text/template">
+	<input id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element" type="hidden" value="{{{ data.value }}}" />
+
+	<div class="g-recaptcha" data-callback="nf_recaptcha_response" data-theme="{{{ data.theme }}}" data-sitekey="{{{ data.site_key }}}"></div>
+</script>

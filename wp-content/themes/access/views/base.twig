@@ -1,0 +1,162 @@
+{% if language_code == 'en' %}
+    {% set urlBase = '' %}
+{% else %}
+    {% set urlBase = '/' ~ language_code %}
+{% endif %}
+<!DOCTYPE html>
+<html lang="{{ language_code }}"
+    {% if language_code == 'ar' %}dir="rtl"{% endif %}
+    {% if is_print %}class="print-view"{% endif %}>
+  <head>
+    {% block html_head_container %}
+      {% include 'partials/html-header.twig' %}
+      {% block head %}{% endblock %}
+    {% endblock %}
+  </head>
+  <body data-template="base.twig"{% set _bodyClass = block('body_class') %}{% if _bodyClass %} class="{{ _bodyClass|trim }}"{% endif %}>
+    <div class="page-wrapper">
+      <a class="sr-only sr-only-focusable" href="#content">{{__('Skip to main content', 'accessnyctheme')}}</a>
+      <header class="site-header">
+        <div class="site-topline">
+          <div class="logo-nyc">
+            <svg class="icon icon-logo-nyc">
+              <use xlink:href="#icon-logo-nyc"></use>
+            </svg>
+            <span class="logo-nyc-tag">{{__('Official website of the City of New York', 'accessnyctheme')}}</span>
+          </div>
+          <div class="js-text-controller text-controller">
+            {% spaceless %}
+            <a class="js-text-controller-toggle text-controller-toggle" href="#text-controls">
+              <svg class="icon icon-gear">
+                <use xlink:href="#icon-gear"></use>
+              </svg>
+              <span class="text-controller-title-full">{{__('Translate &amp; Adjust Text', 'accessnyctheme')}}</span>
+              <span class="text-controller-title-short">{{__('Translate Text', 'accessnyctheme')}}</span>
+            </a>
+            {% endspaceless %}
+            <div class="js-text-controller-options text-controller-options hidden" id="text-controls">
+              {% do action('icl_language_selector') %}
+              <div class="text-controller-sizer">
+                <em class="text-small">{{__('Adjust text size', 'accessnyctheme')}}</em>
+                <button class="btn-text js-text-larger">
+                  <svg class="icon icon-plus">
+                    <use xlink:href="#icon-plus"></use>
+                  </svg>
+                  <div class="sr-only">{{__('Larger', 'accessnyctheme')}}</div>
+                </button>
+                <button class="btn-text js-text-smaller">
+                  <svg class="icon icon-minus">
+                    <use xlink:href="#icon-minus"></use>
+                  </svg>
+                  <div class="sr-only">{{__('Smaller', 'accessnyctheme')}}</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <div class="logo-access">
+            <a href="{{ urlBase }}/">
+              <svg class="icon icon-logo-full">
+                <use xlink:href="#icon-logo-full"></use>
+              </svg><span class="sr-only">{{__('Access NYC', 'accessnyctheme')}}</span>
+            </a>
+          </div>
+          <div class="site-nav-toggle">
+            <a class="js-show-nav" href="#mobile-nav">{{__('Menu', 'accessnyctheme')}}</a>
+          </div>
+          <ul class="nav-list site-desktop-nav">
+            {% include 'partials/nav.twig' %}
+          </ul>
+          <div class="site-search-toggle">
+            <a class="js-toggle-search" href="#search">
+              <svg class="icon icon-search">
+                <use xlink:href="#icon-search"></use>
+              </svg>{{__('Search', 'accessnyctheme')}}
+            </a>
+          </div>
+          <div class="site-mobile-nav" id="mobile-nav">
+            <a class="site-nav-close js-hide-nav" href="#content">{{__('close &amp; return to site', 'accessnyctheme')}}
+              <svg class="icon icon-close">
+                <use xlink:href="#icon-close"></use>
+              </svg>
+            </a>
+            <div class="site-mobile-nav-inner">
+              <h4 class="site-mobile-nav-header">{{__('Get help now', 'accessnyctheme')}}</h4>
+              <ul class="nav-list">
+                {% include 'partials/nav.twig' %}
+              </ul>
+              <div class="site-search-toggle">
+                <a href="{{ urlBase }}/?s=">
+                  <svg class="icon icon-search">
+                    <use xlink:href="#icon-search"></use>
+                  </svg>{{__('Search', 'accessnyctheme')}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="search-box js-search-box" id="search" aria-hidden="true">
+          <div class="search-box-inner">
+            <div class="usa-grid">
+              <div class="usa-width-one-whole"><a class="search-box-close js-hide-search" href="#content">
+                  <svg class="icon icon-close">
+                    <use xlink:href="#icon-close"></use>
+                  </svg><span class="sr-only">{{__('Close search', 'accessnyctheme')}}</span></a>
+                <form class="search-form" method="get" action="/">
+                  {{ fn('do_action', 'wpml_add_language_form_field' ) }}
+                  <label class="type-small" for="search-field">{{__('Search', 'accessnyctheme')}}</label>
+                  <div class="search-form-field-container">
+                    <input class="search-form-field" name="s" type="text" value="" placeholder="{{__('Search for programs or services', 'accessnyctheme')}}" id="search-field">
+                    <button class="btn-text search-form-submit" type="submit">
+                      <svg class="icon icon-search">
+                        <use xlink:href="#icon-search"></use>
+                      </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
+                    </button>
+                  </div>
+                </form>
+                <div class="search-suggestions">
+                  <div class="search-suggestions-header">
+                    <h3>{{__('Programs', 'accessnyctheme')}}</h3>
+                    <a class="link-more" href="{{ urlBase }}/programs">{{__('see all programs', 'accessnyctheme')}}</a>
+                  </div>
+                  {% if search_links %}
+                    <div class="search-suggestions-body">
+                      {% for link in search_links[0].get_field('program_links') %}
+                        <div class="search-suggestions-item"><a href="{{ link.link }}">{{ link.plain_language_program_name }}</a></div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {% block content %}
+      {% endblock %}
+
+      {% block footer %}
+        <footer class="site-footer">
+          {% include 'partials/footer.twig' %}
+        </footer>
+      {% endblock %}
+    </div>
+    {{wp_footer}}
+    <script src="https://www.google.com/jsapi"></script>
+    {% if is_debug %}
+      <script src="/wp-content/themes/access/assets/js/main.js?v={{ date().timestamp }}"></script>
+    {% else %}
+      <script src="/wp-content/themes/access/assets/js/main.min.js"></script>
+    {% endif %}
+
+    {# Webtrends integration #}
+    <script>
+      var prod_dcsId_val = "dcs222viqww0txf1nujrjyybv_3i9q";
+      var prod_host = "access.nyc.gov";
+    </script>
+    <script src="https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js"></script>
+    {# /Webtrends integration #}
+  </body>
+</html>

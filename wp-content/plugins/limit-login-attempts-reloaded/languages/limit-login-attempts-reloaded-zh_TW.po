@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Johan Eenfeldt
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Limit Login Attempts v1.5\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 18:08+0300\n"
+"PO-Revision-Date: 2016-06-23 18:08+0300\n"
+"Last-Translator: Denny Huang <bigexplorations@bigexplorations.com.tw>\n"
+"Language-Team: 小弟的大發現 <bigexplorations@bigexplorations.com.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d 小時"
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d 分鐘"
+
+#: core/LimitLoginAttempts.php:532
+#, fuzzy, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr "[%s] 嘗試過多次的失敗登入"
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] 嘗試過多次的失敗登入"
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr "登入失敗嘗試次數: %d (%d 鎖定) 來自 IP: %s"
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "最後一位使用者嘗試: %s"
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "IP已被封鎖。 原因： %s"
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr "<strong>錯誤</strong>: 嘗試過多次失敗登入"
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr "請稍候再試."
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "請在%d小時後再重試。"
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "請在%d分鐘後再重試。"
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>錯誤</strong>: 帳號或密碼錯誤."
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "嘗試次數剩<strong>%d</strong>次."
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr "清除IP紀錄"
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr "重設鎖定計數器"
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr "目前鎖定次數已重設"
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr "設定已儲存"
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr "網站與您的電腦(IP: %s)似乎是直接連線"
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your "
+"IP: %s)"
+msgstr "網站似乎是透過代理伺服器(IP:%s)再與您的電腦(IP: %s)連線"
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it "
+"is correct. Further information can be found <a href=\"%s\" title=\"FAQ"
+"\">here</a>"
+msgstr ""
+"<strong>目前設定有些問題</strong>. 請再次檢查. 更多資訊可以在 <a href=\"%s"
+"\" title=\"FAQ\">這邊</a>找到"
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr "Limit Login Attempts 設定"
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr "數據"
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr "總共鎖定次數"
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr "重設計數器"
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "自從上次重設，已有%d次鎖定。"
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr "未有任何鎖定紀錄"
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr "解除鎖定"
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr "還原鎖定"
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "IP: %d嘗試登入，但目前已被阻擋"
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr "選項"
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr "鎖定"
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr "允許嘗試次數"
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr "分鐘鎖定"
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr "次鎖定後，將鎖定時間增加為"
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr "小時"
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr "小時直到重設登入嘗試"
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr "網站連結"
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr "直接連線"
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr "透過代理伺服器"
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr "控管Cookie登入"
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr "是"
+
+#: views/options-page.php:178
+msgid "No"
+msgstr "否"
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr "鎖定的提醒"
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr "紀錄 IP"
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr "Email 給管理員當超過"
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr "鎖定次數"
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr "儲存設定"
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr "鎖定紀錄"
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr "清除記錄"
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+#, fuzzy
+msgctxt "Internet address"
+msgid "IP"
+msgstr "IP已被封鎖。 原因： %s"
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr "嘗試登入為"
+
+#~ msgid "IP|Internet address"
+#~ msgstr "IP|網路位址"
+
+#~ msgid "%d lockout"
+#~ msgid_plural "%d lockouts"
+#~ msgstr[0] "%d 次鎖定"
+
+#~ msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+#~ msgstr "<strong>注意:</strong> 只在 Wordpress 2.7 或以後版本有效"
+
+#~ msgid "Limit Login Attempts"
+#~ msgstr "Limit Login Attempts"
+
+#~ msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+#~ msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#~ msgid ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+#~ msgstr ""
+#~ "限制登入嘗試比率(包含Cookies 和 IP) [外掛中文化： <a href=\"http://blog."
+#~ "bigexplorations.com.tw/\" target=\"_blank\" title=\"小弟的大發現\">Denny "
+#~ "Huang</a>]"
+
+#~ msgid "Johan Eenfeldt"
+#~ msgstr "Johan Eenfeldt"
+
+#~ msgid "http://devel.kostdoktorn.se"
+#~ msgstr "http://devel.kostdoktorn.se"

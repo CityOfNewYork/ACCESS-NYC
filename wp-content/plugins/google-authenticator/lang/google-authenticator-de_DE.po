@@ -1,0 +1,119 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Authenticator 0.30\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/google-authenticator\n"
+"POT-Creation-Date: 2011-05-17 19:38:36+00:00\n"
+"PO-Revision-Date: 2011-06-25 16:20+0100\n"
+"Last-Translator: Tobias Bäthge <wordpress@tobias.baethge.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: google-authenticator.php:118
+#@ google-authenticator
+msgid "Google Authenticator code"
+msgstr "&quot;Google Authenticator&quot;-Code"
+
+#: google-authenticator.php:172
+#: google-authenticator.php:267
+#@ google-authenticator
+msgid "Active"
+msgstr "Aktivieren"
+
+#: google-authenticator.php:184
+#@ google-authenticator
+msgid "Description"
+msgstr "Beschreibung"
+
+#: google-authenticator.php:189
+#@ google-authenticator
+msgid "Secret"
+msgstr "Geheimschlüssel"
+
+#: google-authenticator.php:192
+#@ google-authenticator
+msgid "Create new secret"
+msgstr "Neuen Geheimschlüssel erzeugen"
+
+#: google-authenticator.php:193
+#@ google-authenticator
+msgid "Show/Hide QR code"
+msgstr "QR-Code anzeigen/verstecken"
+
+#. translators: plugin header field 'Name'
+#: google-authenticator.php:0
+#@ google-authenticator
+msgid "Google Authenticator"
+msgstr "Google Authenticator"
+
+#. translators: plugin header field 'PluginURI'
+#: google-authenticator.php:0
+#@ google-authenticator
+msgid "http://henrik.schack.dk/google-authenticator-for-wordpress"
+msgstr "http://henrik.schack.dk/google-authenticator-for-wordpress"
+
+#. translators: plugin header field 'Author'
+#: google-authenticator.php:0
+#@ google-authenticator
+msgid "Henrik Schack"
+msgstr "Henrik Schack"
+
+#. translators: plugin header field 'AuthorURI'
+#: google-authenticator.php:0
+#@ google-authenticator
+msgid "http://henrik.schack.dk/"
+msgstr "http://henrik.schack.dk/"
+
+#. translators: plugin header field 'Version'
+#: google-authenticator.php:0
+#@ google-authenticator
+msgid "0.30"
+msgstr "0.30"
+
+#: google-authenticator.php:143
+#@ google-authenticator
+msgid "<strong>ERROR</strong>: The Google Authenticator code is incorrect or has expired."
+msgstr "<strong>FEHLER</strong>: Der eingegebene &quot;Google Authenticator&quot;-Code ist falsch oder abgelaufen."
+
+#: google-authenticator.php:165
+#@ google-authenticator
+msgid "WordPress Blog"
+msgstr "WordPress-Blog"
+
+#: google-authenticator.php:167
+#: google-authenticator.php:263
+#@ google-authenticator
+msgid "Google Authenticator Settings"
+msgstr "Einstellungen zu Google Authenticator"
+
+#: google-authenticator.php:201
+#@ google-authenticator
+msgid "Scan this with the Google Authenticator app."
+msgstr "Scanne diesen QR-Code mit der &quot;Google Authenticator&quot;-App deines Smartphones."
+
+#: google-authenticator.php:118
+#@ google-authenticator
+msgid "If you don't have Google Authenticator enabled for your WordPress account, leave this field empty."
+msgstr "Falls die Nutzung von &quot;Google Authenticator&quot; für dieses WordPress-Konto nicht aktiviert ist, dieses Feld leer lassen."
+
+#: google-authenticator.php:185
+#@ google-authenticator
+msgid " Description that you'll see in the Google Authenticator app on your phone."
+msgstr "Beschreibung, die in der &quot;Google Authenticator&quot;-App auf dem Smartphone angezeigt wird."
+
+#. translators: plugin header field 'Description'
+#: google-authenticator.php:0
+#@ google-authenticator
+msgid "Two-Factor Authentication for WordPress using the Android/iPhone/Blackberry app as One Time Password generator."
+msgstr "Zwei-Faktor-Authentifizierung für WordPress mit der &quot;Google Authenticator&quot;-App für Android/iPhone/Blackberry"
+

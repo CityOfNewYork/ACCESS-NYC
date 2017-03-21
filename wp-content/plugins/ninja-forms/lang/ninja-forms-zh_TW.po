@@ -1,0 +1,6408 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Ninja Forms 3.0\n"
+"POT-Creation-Date: 2016-08-29 09:53-0500\n"
+"PO-Revision-Date: 2016-08-29 08:57-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x;_ex\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ninja-forms.php:463
+msgid "Notice: JavaScript is required for this content."
+msgstr "注意： 此內容需要 JavaScript。"
+
+#: deprecated/ninja-forms.php:139 deprecated/ninja-forms.php:151
+msgid "Cheatin&#8217; huh?"
+msgstr "作弊喔？"
+
+#: deprecated/ninja-forms.php:674
+#, php-format
+msgid "Fields marked with an %s*%s are required"
+msgstr "標有 %s*%s 為必填欄位"
+
+#: deprecated/ninja-forms.php:676
+msgid "Please ensure all required fields are completed."
+msgstr "請確保所有必填欄位已填妥。"
+
+#: deprecated/ninja-forms.php:677
+msgid "This is a required field"
+msgstr "這是必填欄位。"
+
+#: deprecated/ninja-forms.php:678
+msgid "Please answer the anti-spam question correctly."
+msgstr "請正確回答反垃圾郵件的提問。"
+
+#: deprecated/ninja-forms.php:679
+msgid "Please leave the spam field blank."
+msgstr "請在垃圾郵件欄位留空。"
+
+#: deprecated/ninja-forms.php:680
+msgid "Please wait to submit the form."
+msgstr "請等待提交表單。"
+
+#: deprecated/ninja-forms.php:681
+msgid "You cannot submit the form without Javascript enabled."
+msgstr "若未啟用 JavaScript 則不能提交表單。"
+
+#: deprecated/ninja-forms.php:682 deprecated/includes/fields/textbox.php:294
+msgid "Please enter a valid email address."
+msgstr "請輸入有效的電子郵件地址。"
+
+#: deprecated/ninja-forms.php:683
+#: deprecated/includes/admin/step-processing.php:11
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:29
+#: includes/Config/FieldSettings.php:820
+msgid "Processing"
+msgstr "處理中"
+
+#: deprecated/ninja-forms.php:684
+msgid "The passwords provided do not match."
+msgstr "輸入的密碼不相符。"
+
+#: deprecated/classes/add-form-modal.php:41
+#: deprecated/classes/add-form-modal.php:99 includes/Admin/AddFormModal.php:41
+msgid "Add Form"
+msgstr "新增表單"
+
+#: deprecated/classes/add-form-modal.php:72 includes/Admin/AddFormModal.php:55
+msgid "Select a form or type to search"
+msgstr "選取要搜尋的表單或類型"
+
+#: deprecated/classes/add-form-modal.php:89
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:123
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:71
+#: deprecated/includes/fields/list.php:176
+#: includes/Templates/ui-nf-header.html.php:12
+msgid "Cancel"
+msgstr "取消"
+
+#: deprecated/classes/add-form-modal.php:92
+msgid "Insert"
+msgstr "插入"
+
+#: deprecated/classes/download-all-subs.php:39
+msgid "Invalid form id"
+msgstr "表單 ID 無效"
+
+#: deprecated/classes/notices-multipart.php:62
+#: deprecated/classes/notices-save-progress.php:62
+msgid "Increase Conversions"
+msgstr "增加轉換率"
+
+#: deprecated/classes/notices-multipart.php:63
+msgid ""
+"Did you know that you can increase form conversion by breaking larger forms "
+"into smaller, more easily digested parts?<p>The Multi-Part Forms extension "
+"for Ninja Forms makes this quick and easy.</p>"
+msgstr ""
+"您知道可以將較大的表單分成多個較小且易於處理的表單，以增加表單轉換率嗎？<p>適用於 Ninja Form 的多份表單擴充功能可輕鬆快速做到這點。</p>"
+
+#: deprecated/classes/notices-multipart.php:64
+msgid "Learn More About Multi-Part Forms"
+msgstr "深入瞭解多份表單"
+
+#: deprecated/classes/notices-multipart.php:65
+#: deprecated/classes/notices-save-progress.php:65
+msgid "Maybe Later"
+msgstr "稍後"
+
+#: deprecated/classes/notices-multipart.php:66
+#: deprecated/classes/notices-save-progress.php:66
+#: deprecated/includes/admin/notices.php:57 includes/Config/AdminNotices.php:16
+msgid "Dismiss"
+msgstr "隱藏"
+
+#: deprecated/classes/notices-save-progress.php:63
+msgid ""
+"Users are more likely to complete long forms when they can save and return "
+"to complete their submission later.<p>The Save Progress extension for Ninja "
+"Forms makes this quick and easy.</p>"
+msgstr ""
+"如果使用者可以先儲存之後再回來完成提交，他們會比較願意填寫較長的表單。<p>Ninja Form 的儲存進度擴充功能可輕鬆快速做到這點。</p>"
+
+#: deprecated/classes/notices-save-progress.php:64
+msgid "Learn More About Save Progress"
+msgstr "深入瞭解儲存進度"
+
+#: deprecated/classes/notification-email.php:19 includes/Actions/Email.php:35
+#: includes/Config/MergeTagsUser.php:66 includes/Database/MockData.php:81
+#: includes/Database/MockData.php:262 includes/Database/MockData.php:294
+#: includes/Database/MockData.php:663 includes/Fields/Email.php:26
+msgid "Email"
+msgstr "電子郵件"
+
+#: deprecated/classes/notification-email.php:56
+#: includes/Config/ActionEmailSettings.php:70
+msgid "From Name"
+msgstr "寄件者名稱"
+
+#: deprecated/classes/notification-email.php:58
+#: includes/Config/ActionEmailSettings.php:71
+msgid "Name or fields"
+msgstr "名稱或欄位"
+
+#: deprecated/classes/notification-email.php:59
+msgid "Email will appear to be from this name."
+msgstr "會依此名稱建立電子郵件。"
+
+#: deprecated/classes/notification-email.php:63
+#: includes/Config/ActionEmailSettings.php:85
+msgid "From Address"
+msgstr "寄件者電子郵件地址"
+
+#: deprecated/classes/notification-email.php:65
+#: deprecated/classes/notification-email.php:141
+#: includes/Config/ActionEmailSettings.php:86
+msgid "One email address or field"
+msgstr "一個電子郵件地址或欄位"
+
+#: deprecated/classes/notification-email.php:66
+msgid "Email will appear to be from this email address."
+msgstr "會依此電子郵件地址建立電子郵件。"
+
+#: deprecated/classes/notification-email.php:70
+#: includes/Config/ActionEmailSettings.php:19
+msgid "To"
+msgstr "收件人"
+
+#: deprecated/classes/notification-email.php:72
+#: deprecated/classes/notification-email.php:147
+#: deprecated/classes/notification-email.php:153
+msgid "Email addresses or search for a field"
+msgstr "電子郵件地址或搜尋欄位"
+
+#: deprecated/classes/notification-email.php:73
+msgid "Who should this email be sent to?"
+msgstr "誰會收到此封電子郵件？"
+
+#: deprecated/classes/notification-email.php:77
+#: includes/Config/ActionEmailSettings.php:34
+msgid "Subject"
+msgstr "主旨"
+
+#: deprecated/classes/notification-email.php:79
+msgid "Subject Text or search for a field"
+msgstr "主旨文字或搜尋欄位"
+
+#: deprecated/classes/notification-email.php:80
+msgid "This will be the subject of the email."
+msgstr "這會是電子郵件主旨。"
+
+#: deprecated/classes/notification-email.php:84
+#: includes/Config/ActionEmailSettings.php:49
+msgid "Email Message"
+msgstr "電子郵件訊息"
+
+#: deprecated/classes/notification-email.php:95
+msgid "Attachments"
+msgstr "附件"
+
+#: deprecated/classes/notification-email.php:101
+msgid "Submission CSV"
+msgstr "提交 CSV"
+
+#: deprecated/classes/notification-email.php:126
+#: deprecated/includes/admin/edit-field/li.php:428
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:88
+#: includes/Config/PluginSettingsGroups.php:17
+msgid "Advanced Settings"
+msgstr "進階設定"
+
+#: deprecated/classes/notification-email.php:130
+#: includes/Config/ActionEmailSettings.php:117
+#: includes/Config/FieldSettings.php:378
+msgid "Format"
+msgstr "格式"
+
+#: deprecated/classes/notification-email.php:133
+#: deprecated/includes/fields/calc.php:95
+#: includes/Config/ActionEmailSettings.php:113 includes/Fields/HTML.php:37
+#: includes/Fields/Note.php:31
+msgid "HTML"
+msgstr "HTML"
+
+#: deprecated/classes/notification-email.php:134
+#: includes/Config/ActionEmailSettings.php:114
+msgid "Plain Text"
+msgstr "純文字"
+
+#: deprecated/classes/notification-email.php:139
+#: includes/Config/ActionEmailSettings.php:99
+msgid "Reply To"
+msgstr "回覆"
+
+#: deprecated/classes/notification-email.php:145
+#: includes/Config/ActionEmailSettings.php:130
+msgid "Cc"
+msgstr "副本"
+
+#: deprecated/classes/notification-email.php:151
+#: includes/Config/ActionEmailSettings.php:144
+msgid "Bcc"
+msgstr "密件副本"
+
+#: deprecated/classes/notification-redirect.php:19
+#: deprecated/includes/admin/upgrades/convert-notifications.php:243
+#: includes/Actions/Redirect.php:35
+msgid "Redirect"
+msgstr "重新導向"
+
+#: deprecated/classes/notification-redirect.php:33
+msgid "Url"
+msgstr "URL"
+
+#: deprecated/classes/notification-success-message.php:19
+#: deprecated/includes/admin/upgrades/convert-notifications.php:234
+#: includes/Actions/SuccessMessage.php:35
+#: includes/Config/FormActionDefaults.php:7 includes/Database/MockData.php:953
+#: includes/Database/MockData.php:1014 includes/Database/MockData.php:1117
+#: includes/Database/MockData.php:1156
+msgid "Success Message"
+msgstr "成功信息"
+
+#: deprecated/classes/notification-success-message.php:35
+msgid "Before Form"
+msgstr "表單之前"
+
+#: deprecated/classes/notification-success-message.php:36
+msgid "After Form"
+msgstr "表單之後"
+
+#: deprecated/classes/notification-success-message.php:41
+msgid "Location"
+msgstr "地點"
+
+#: deprecated/classes/notification-success-message.php:55
+#: includes/Config/ActionSuccessMessageSettings.php:13
+#: includes/Database/MockData.php:105
+msgid "Message"
+msgstr "訊息"
+
+#: deprecated/classes/notification.php:116
+msgid "duplicate"
+msgstr "複製"
+
+#: deprecated/classes/notifications-table.php:117
+#: deprecated/classes/notifications-table.php:222
+#: deprecated/classes/notifications.php:170
+msgid "Deactivate"
+msgstr "停用"
+
+#: deprecated/classes/notifications-table.php:117
+#: deprecated/classes/notifications-table.php:221
+#: deprecated/classes/notifications.php:169
+#: includes/Templates/admin-menu-settings-licenses.html.php:27
+msgid "Activate"
+msgstr "啟用"
+
+#: deprecated/classes/notifications-table.php:129
+#: deprecated/classes/subs-cpt.php:389
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:188
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:10
+#: includes/Templates/admin-menu-new-form.html.php:144
+#: includes/Templates/ui-item-controls.html.php:4
+msgid "Edit"
+msgstr "編輯"
+
+#: deprecated/classes/notifications-table.php:130
+#: deprecated/classes/notifications-table.php:223
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:102
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:189
+#: includes/Admin/AllFormsTable.php:216 includes/Admin/Menus/Settings.php:80
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:15
+#: includes/Templates/ui-item-controls.html.php:2
+#: includes/Templates/ui-nf-drawer-buttons.html.php:2
+msgid "Delete"
+msgstr "刪除"
+
+#: deprecated/classes/notifications-table.php:131
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:190
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:19
+#: includes/Templates/ui-item-controls.html.php:3
+#: includes/Templates/ui-nf-drawer-buttons.html.php:3
+msgid "Duplicate"
+msgstr "複製"
+
+#: deprecated/classes/notifications-table.php:175
+#: includes/Database/MockData.php:66 includes/Database/MockData.php:255
+#: includes/Templates/admin-menu-new-form.html.php:154
+msgid "Name"
+msgstr "名稱"
+
+#: deprecated/classes/notifications-table.php:176
+#: deprecated/classes/notifications.php:259
+#: includes/Config/FieldSettings.php:745
+#: includes/Templates/admin-menu-new-form.html.php:155
+msgid "Type"
+msgstr "類型"
+
+#: deprecated/classes/notifications-table.php:177
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:160
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:220
+msgid "Date Updated"
+msgstr "更新日期"
+
+#: deprecated/classes/notifications-table.php:241
+msgid "- View All Types"
+msgstr "- 檢視所有類型"
+
+#: deprecated/classes/notifications-table.php:250
+msgid "Get More Types"
+msgstr "取得更多類型"
+
+#: deprecated/classes/notifications.php:78
+#: deprecated/classes/notifications.php:219
+msgid "Email & Actions"
+msgstr "電子郵件與動作"
+
+#: deprecated/classes/notifications.php:219 deprecated/classes/subs-cpt.php:118
+#: deprecated/includes/admin/admin.php:6
+#: deprecated/includes/admin/admin.php:101
+#: deprecated/includes/fields/list.php:149 includes/Admin/CPT/Submission.php:47
+#: includes/Config/FieldSettings.php:153 includes/Config/FieldSettings.php:950
+#: includes/Config/FormCalculationSettings.php:12
+msgid "Add New"
+msgstr "新增項目"
+
+#: deprecated/classes/notifications.php:242
+msgid "New Action"
+msgstr "新動作"
+
+#: deprecated/classes/notifications.php:245
+msgid "Edit Action"
+msgstr "編輯動作"
+
+#: deprecated/classes/notifications.php:249
+msgid "Back To List"
+msgstr "返回清單"
+
+#: deprecated/classes/notifications.php:255
+#: includes/Config/ActionSettings.php:13
+msgid "Action Name"
+msgstr "動作名稱"
+
+#: deprecated/classes/notifications.php:270
+msgid "Get More Actions"
+msgstr "取得更多動作"
+
+#: deprecated/classes/notifications.php:334
+#: deprecated/classes/notifications.php:339
+msgid "Action Updated"
+msgstr "更新動作"
+
+#: deprecated/classes/notifications.php:500
+msgid "Select a field or type to search"
+msgstr "選取要搜尋的欄位或類型"
+
+#: deprecated/classes/notifications.php:513
+msgid "Insert Field"
+msgstr "插入欄位"
+
+#: deprecated/classes/notifications.php:513
+msgid "Insert All Fields"
+msgstr "插入所有欄位"
+
+#: deprecated/classes/subs-cpt.php:103 includes/Admin/CPT/Submission.php:249
+msgid "Please select a form to view submissions"
+msgstr "請選取表單以檢視提交項目"
+
+#: deprecated/classes/subs-cpt.php:105 includes/Admin/CPT/Submission.php:251
+msgid "No Submissions Found"
+msgstr "找不到提交項目"
+
+#: deprecated/classes/subs-cpt.php:108 deprecated/classes/subs-cpt.php:195
+#: deprecated/includes/admin/admin.php:120
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:6
+#: includes/Admin/CPT/Submission.php:40 includes/Admin/CPT/Submission.php:42
+#: includes/Admin/CPT/Submission.php:43
+msgid "Submissions"
+msgstr "提交項目"
+
+#: deprecated/classes/subs-cpt.php:117 includes/Admin/CPT/Submission.php:41
+#: includes/Admin/CPT/Submission.php:57
+msgid "Submission"
+msgstr "提交項目"
+
+#: deprecated/classes/subs-cpt.php:119
+msgid "Add New Submission"
+msgstr "新增提交項目"
+
+#: deprecated/classes/subs-cpt.php:120
+msgid "Edit Submission"
+msgstr "編輯提交項目"
+
+#: deprecated/classes/subs-cpt.php:121
+msgid "New Submission"
+msgstr "新提交項目"
+
+#: deprecated/classes/subs-cpt.php:122
+msgid "View Submission"
+msgstr "檢視提交項目"
+
+#: deprecated/classes/subs-cpt.php:123
+msgid "Search Submissions"
+msgstr "搜尋提交項目"
+
+#: deprecated/classes/subs-cpt.php:125
+msgid "No Submissions Found In The Trash"
+msgstr "垃圾筒中找不到提交項目"
+
+#: deprecated/classes/subs-cpt.php:279 deprecated/classes/subs-cpt.php:993
+#: deprecated/classes/subs.php:174 includes/Admin/CPT/Submission.php:92
+#: includes/Admin/Menus/Submissions.php:77
+msgid "#"
+msgstr "#"
+
+#: deprecated/classes/subs-cpt.php:315
+#: deprecated/includes/fields/textbox.php:175
+#: includes/Admin/CPT/Submission.php:111
+#: includes/Admin/Menus/Submissions.php:92
+#: includes/Config/FieldSettings.php:214 includes/Config/MergeTagsSystem.php:27
+#: includes/Database/MockData.php:620 includes/Fields/Date.php:30
+msgid "Date"
+msgstr "日期"
+
+#: deprecated/classes/subs-cpt.php:389
+msgid "Edit this item"
+msgstr "編輯這個項目"
+
+#: deprecated/classes/subs-cpt.php:390
+msgid "Export this item"
+msgstr "匯出此項目"
+
+#: deprecated/classes/subs-cpt.php:390 deprecated/classes/subs-cpt.php:691
+#: deprecated/classes/subs-cpt.php:692 includes/Admin/Menus/Submissions.php:234
+#: includes/Admin/Menus/Submissions.php:235
+msgid "Export"
+msgstr "匯出"
+
+#: deprecated/classes/subs-cpt.php:396
+msgid "Move this item to the Trash"
+msgstr "將此項目移至垃圾桶"
+
+#: deprecated/classes/subs-cpt.php:396
+msgid "Trash"
+msgstr "垃圾桶"
+
+#: deprecated/classes/subs-cpt.php:402
+msgid "Restore this item from the Trash"
+msgstr "從垃圾桶中回復此項目"
+
+#: deprecated/classes/subs-cpt.php:402
+msgid "Restore"
+msgstr "回復"
+
+#: deprecated/classes/subs-cpt.php:403
+msgid "Delete this item permanently"
+msgstr "永久刪除這個項目"
+
+#: deprecated/classes/subs-cpt.php:403
+msgid "Delete Permanently"
+msgstr "永久刪除"
+
+#: deprecated/classes/subs-cpt.php:410
+msgid "Unpublished"
+msgstr "未發佈"
+
+#: deprecated/classes/subs-cpt.php:420
+#, php-format
+msgid "%s ago"
+msgstr "%s 前"
+
+#: deprecated/classes/subs-cpt.php:432 deprecated/classes/subs-cpt.php:998
+msgid "Submitted"
+msgstr "已提交"
+
+#: deprecated/classes/subs-cpt.php:492
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:67
+#: includes/Templates/admin-metabox-import-export-forms-export.html.php:9
+msgid "Select a form"
+msgstr "選取表單"
+
+#: deprecated/classes/subs-cpt.php:501
+msgid "Begin Date"
+msgstr "開始日期"
+
+#: deprecated/classes/subs-cpt.php:502
+#: includes/Templates/admin-menu-subs-filter.html.php:13
+msgid "End Date"
+msgstr "結束日期"
+
+#: deprecated/classes/subs-cpt.php:646 deprecated/classes/subs-cpt.php:649
+#, php-format
+msgid "%s updated."
+msgstr "已更新。"
+
+#: deprecated/classes/subs-cpt.php:647
+msgid "Custom field updated."
+msgstr "自定欄位更新。"
+
+#: deprecated/classes/subs-cpt.php:648
+msgid "Custom field deleted."
+msgstr "自定欄位刪除。"
+
+#: deprecated/classes/subs-cpt.php:651
+#, php-format
+msgid "%1$s restored to revision from %2$s."
+msgstr "已從 %2$s 還原 %1$s 以修訂。"
+
+#: deprecated/classes/subs-cpt.php:652
+#, php-format
+msgid "%s published."
+msgstr "已發佈 %s。"
+
+#: deprecated/classes/subs-cpt.php:653
+#, php-format
+msgid "%s saved."
+msgstr "%s 已儲存。"
+
+#: deprecated/classes/subs-cpt.php:654
+#, php-format
+msgid "%1$s submitted. <a href=\"%2$s\" target=\"_blank\">Preview %3$s</a>"
+msgstr "已提交 %1$s。 <a href=\"%2$s\" target=\"_blank\">預覽%3$s</a>"
+
+#: deprecated/classes/subs-cpt.php:655
+#, php-format
+msgid ""
+"%1$s scheduled for: <strong>%2$s</strong>. <a href=\"%3$s\" target=\"_blank"
+"\">Preview %4$s</a>"
+msgstr ""
+"已為以下項目排程 %1$s： <strong>%2$s</strong>。 <a href=\"%3$s\" target=\"_blank\">預覽%4$s</a>"
+
+#: deprecated/classes/subs-cpt.php:656
+#, php-format
+msgid "%1$s draft updated. <a href=\"%2$s\" target=\"_blank\">Preview %3$s</a>"
+msgstr "已更新 %1$s 份草稿。 <a href=\"%2$s\" target=\"_blank\">預覽%3$s</a>"
+
+#: deprecated/classes/subs-cpt.php:709 includes/Admin/Menus/Submissions.php:252
+msgid "Download All Submissions"
+msgstr "下載所有提交項目"
+
+#: deprecated/classes/subs-cpt.php:807
+msgid "Back to list"
+msgstr "返回清單"
+
+#: deprecated/classes/subs-cpt.php:865 includes/Admin/CPT/Submission.php:174
+msgid "User Submitted Values"
+msgstr "使用者提交值"
+
+#: deprecated/classes/subs-cpt.php:867
+msgid "Submission Stats"
+msgstr "提交項目狀態"
+
+#: deprecated/classes/subs-cpt.php:897
+#: includes/Templates/admin-menu-forms.html.php:7
+#: includes/Templates/admin-metabox-sub-fields.html.php:7
+msgid "Field"
+msgstr "欄位"
+
+#: deprecated/classes/subs-cpt.php:898 deprecated/includes/fields/list.php:103
+#: deprecated/includes/fields/list.php:588
+#: includes/Config/FieldSettings.php:169 includes/Config/FieldSettings.php:965
+#: includes/Templates/admin-metabox-sub-fields.html.php:8
+msgid "Value"
+msgstr "值"
+
+#: deprecated/classes/subs-cpt.php:997
+msgid "Status"
+msgstr "狀態"
+
+#: deprecated/classes/subs-cpt.php:1002
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:119
+#: includes/Admin/AllFormsTable.php:20 includes/Admin/Menus/ImportExport.php:99
+#: includes/MergeTags/Form.php:15
+msgid "Form"
+msgstr "表格"
+
+#: deprecated/classes/subs-cpt.php:1007
+msgid "Submitted on"
+msgstr "提交日期"
+
+#: deprecated/classes/subs-cpt.php:1013
+msgid "Modified on"
+msgstr "修改日期"
+
+#: deprecated/classes/subs-cpt.php:1021
+msgid "Submitted By"
+msgstr "提交人員"
+
+#: deprecated/classes/subs-cpt.php:1035 deprecated/classes/subs-cpt.php:1036
+#: includes/Templates/admin-metabox-sub-info.html.php:27
+msgid "Update"
+msgstr "更新"
+
+#: deprecated/classes/subs.php:177 includes/Database/Models/Submission.php:293
+msgid "Date Submitted"
+msgstr "提交日期"
+
+#: deprecated/includes/activation.php:216
+msgid ""
+"Ninja Forms cannot be network activated. Please visit each site's dashboard "
+"to activate the plugin."
+msgstr "網路無法啟動 Ninja Form。 請造訪每個網站的儀表板以啟動外掛程式。"
+
+#: deprecated/includes/class-extension-updater.php:65
+msgid "You will find this included with your purchase email."
+msgstr "您會在購買電子郵件中找到此資訊。"
+
+#: deprecated/includes/class-extension-updater.php:75
+msgid "Key"
+msgstr "金鑰"
+
+#: deprecated/includes/class-extension-updater.php:152
+#: includes/Integrations/EDD/class-extension-updater.php:88
+msgid "Could not activate license. Please verify your license key"
+msgstr "無法啟動授權。 請檢查您的授權金鑰。"
+
+#: deprecated/includes/class-extension-updater.php:276
+msgid "Deactivate License"
+msgstr "停用授權"
+
+#: deprecated/includes/deprecated.php:466
+#: deprecated/includes/deprecated.php:475
+msgid "User Submitted Values:"
+msgstr "使用者提交值："
+
+#: deprecated/includes/deprecated.php:664
+msgid "Thank you for filling out this form."
+msgstr "感謝您填寫此表單。"
+
+#: deprecated/includes/EDD_SL_Plugin_Updater.php:177
+#: includes/Integrations/EDD/EDD_SL_Plugin_Updater.php:177
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
+msgstr ""
+"有可用的新版本 %1$s。 <a target=\"_blank\" class=\"thickbox\" href=\"%2$s\">檢視版本 %3$s 詳細資料</a>。"
+
+#: deprecated/includes/EDD_SL_Plugin_Updater.php:184
+#: includes/Integrations/EDD/EDD_SL_Plugin_Updater.php:184
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s"
+"\">update now</a>."
+msgstr ""
+"有可用的新版本 %1$s。 <a target=\"_blank\" class=\"thickbox\" href=\"%2$s\">檢視版本 %3$s "
+"詳細資料</a>或<a href=\"%4$s\">立即更新</a>。"
+
+#: deprecated/includes/EDD_SL_Plugin_Updater.php:324
+#: includes/Integrations/EDD/EDD_SL_Plugin_Updater.php:324
+msgid "You do not have permission to install plugin updates"
+msgstr "您沒有安裝此外掛程式更新的權限"
+
+#: deprecated/includes/EDD_SL_Plugin_Updater.php:324
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:35
+#: includes/Integrations/EDD/EDD_SL_Plugin_Updater.php:324
+msgid "Error"
+msgstr "錯誤"
+
+#: deprecated/includes/field-type-groups.php:5
+msgid "Standard Fields"
+msgstr "標準欄位"
+
+#: deprecated/includes/field-type-groups.php:10
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/layout-fields.php:6
+msgid "Layout Elements"
+msgstr "版面配置元素"
+
+#: deprecated/includes/field-type-groups.php:19
+msgid "Post Creation"
+msgstr "建立文章"
+
+#: deprecated/includes/functions.php:526
+#, php-format
+msgid ""
+"Please rate %sNinja Forms%s %s on %sWordPress.org%s to help us keep this "
+"plugin free.  Thank you from the WP Ninjas team!"
+msgstr ""
+"請在 %sWordPress.org%s 上為 %sNinja Form%s %s 評分，協助我們提供免費的應用程式。  WP Ninjas 團隊感謝您！"
+
+#: deprecated/includes/widget.php:14 deprecated/includes/admin/welcome.php:364
+#: includes/Widget.php:14
+msgid "Ninja Forms Widget"
+msgstr "Ninja Form 小工具"
+
+#: deprecated/includes/widget.php:89 includes/Widget.php:82
+msgid "Display Title"
+msgstr "顯示標題"
+
+#: deprecated/includes/widget.php:96
+#: deprecated/includes/admin/post-metabox.php:39
+#: deprecated/includes/admin/edit-field/desc.php:40
+#: deprecated/includes/admin/edit-field/user-info-fields.php:27
+#: deprecated/includes/fields/hidden.php:55
+#: deprecated/includes/fields/number.php:72
+#: deprecated/includes/fields/textbox.php:125
+#: deprecated/includes/fields/textbox.php:173 includes/Widget.php:89
+#: includes/Admin/Metaboxes/AppendAForm.php:55
+#: includes/Config/PluginSettingsAdvanced.php:58
+msgid "None"
+msgstr "無"
+
+#: deprecated/includes/admin/admin.php:4 deprecated/includes/admin/admin.php:5
+#: deprecated/includes/admin/admin.php:101
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:119
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:6
+#: includes/Admin/AllFormsTable.php:21
+msgid "Forms"
+msgstr "表單"
+
+#: deprecated/includes/admin/admin.php:5
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:28
+msgid "All Forms"
+msgstr "所有表單"
+
+#: deprecated/includes/admin/admin.php:8
+msgid "Ninja Forms Upgrades"
+msgstr "Ninja Forms 更新"
+
+#: deprecated/includes/admin/admin.php:8
+msgid "Upgrades"
+msgstr "升級"
+
+#: deprecated/includes/admin/admin.php:29
+msgid "Import/Export"
+msgstr "匯入/匯出"
+
+#: deprecated/includes/admin/admin.php:29
+#: includes/Templates/admin-menu-import-export.html.php:3
+msgid "Import / Export"
+msgstr "匯入/匯出"
+
+#: deprecated/includes/admin/admin.php:30
+msgid "Ninja Form Settings"
+msgstr "Ninja Form 設定"
+
+#: deprecated/includes/admin/admin.php:30
+#: deprecated/includes/admin/welcome.php:335
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:7
+#: includes/Admin/Menus/Settings.php:25 includes/Config/FieldSettings.php:754
+#: includes/Templates/admin-menu-settings.html.php:3
+#: includes/Templates/ui-nf-header.html.php:7
+#: includes/Templates/ui-nf-menu-drawer.html.php:8
+msgid "Settings"
+msgstr "設定"
+
+#: deprecated/includes/admin/admin.php:31
+msgid "System Status"
+msgstr "系統狀態"
+
+#: deprecated/includes/admin/admin.php:32
+#: includes/Templates/admin-menu-addons.html.php:3
+msgid "Add-Ons"
+msgstr "附加元件"
+
+#: deprecated/includes/admin/admin.php:119 includes/Display/Preview.php:40
+#: includes/Templates/ui-nf-menu-drawer.html.php:9
+msgid "Preview"
+msgstr "預覽"
+
+#: deprecated/includes/admin/admin.php:178
+#: deprecated/includes/admin/scripts.php:75
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/edit-field-ul.php:7
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/edit-field-ul.php:19
+#: includes/Actions/Save.php:35
+msgid "Save"
+msgstr "儲存"
+
+#: deprecated/includes/admin/ajax.php:180
+msgid "character(s) left"
+msgstr "剩餘字元"
+
+#: deprecated/includes/admin/ajax.php:631
+msgid "Do not show these terms"
+msgstr "不要顯示這些字詞"
+
+#: deprecated/includes/admin/display-screen-options.php:87
+msgid "Save Options"
+msgstr "儲存選項"
+
+#: deprecated/includes/admin/form-preview.php:39
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:23
+msgid "Preview Form"
+msgstr "預覽表單"
+
+#: deprecated/includes/admin/notices.php:23
+#: deprecated/upgrade/class-submenu.php:57
+msgid "Upgrade to Ninja Forms THREE"
+msgstr "升級為 Ninja Form 3"
+
+#: deprecated/includes/admin/notices.php:24
+#, php-format
+msgid ""
+"You are eligible to upgrade to the Ninja Forms THREE Release Candidate! "
+"%sUpgrade Now%s"
+msgstr "您符合升級為 Ninja Form 3 版本的候選人！ %s立即升級%s"
+
+#: deprecated/includes/admin/notices.php:38
+msgid "THREE is coming!"
+msgstr "第 3 版來了！"
+
+#: deprecated/includes/admin/notices.php:39
+#, php-format
+msgid ""
+"A major update is coming to Ninja Forms. %sLearn more about new features, "
+"backwards compatibility, and more Frequently Asked Questions.%s"
+msgstr "Ninja Form 即將有重大更新。 %s深入瞭解新功能、向下相容以及其他常見問題。%s"
+
+#: deprecated/includes/admin/notices.php:53 includes/Config/AdminNotices.php:12
+msgid "How's It Going?"
+msgstr "一切都還好嗎？"
+
+#: deprecated/includes/admin/notices.php:54 includes/Config/AdminNotices.php:13
+msgid ""
+"Thank you for using Ninja Forms! We hope that you've found everything you "
+"need, but if you have any questions:"
+msgstr "感謝您使用 Ninja Form！ 我們希望您找到了一切所需的功能，但如果您有任何問題："
+
+#: deprecated/includes/admin/notices.php:55 includes/Config/AdminNotices.php:14
+msgid "Check out our documentation"
+msgstr "請查看我們的文件"
+
+#: deprecated/includes/admin/notices.php:56 includes/Config/AdminNotices.php:15
+msgid "Get Some Help"
+msgstr "取得幫助"
+
+#: deprecated/includes/admin/output-tab-metabox.php:47
+#: deprecated/includes/admin/sidebar.php:57
+#: deprecated/includes/admin/edit-field/li.php:109
+#: includes/Templates/admin-menu-settings.html.php:33
+msgid "Edit Menu Item"
+msgstr "編輯功能表項目"
+
+#: deprecated/includes/admin/output-tab-metabox.php:290
+msgid "Select All"
+msgstr "選擇全部"
+
+#: deprecated/includes/admin/post-metabox.php:12
+#: deprecated/includes/admin/post-metabox.php:20
+msgid "Append A Ninja Form"
+msgstr "附錄 A Ninja Form"
+
+#: deprecated/includes/admin/scripts.php:52
+msgid "What would you like to name this favorite?"
+msgstr "您要將此最愛命名為？"
+
+#: deprecated/includes/admin/scripts.php:52
+msgid "You must supply a name for this favorite."
+msgstr "您必須為此最愛提供名稱。"
+
+#: deprecated/includes/admin/scripts.php:52
+msgid "Really deactivate all licenses?"
+msgstr "確定要停用所有授權？"
+
+#: deprecated/includes/admin/scripts.php:53
+msgid "Reset the form conversion process for v2.9+"
+msgstr "為 v2.9+ 重設表單轉換程序"
+
+#: deprecated/includes/admin/scripts.php:54
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:93
+#: includes/Config/PluginSettingsAdvanced.php:14
+msgid "Remove ALL Ninja Forms data upon uninstall?"
+msgstr "在解除安裝時移除「所有」Ninja Form 資料？"
+
+#: deprecated/includes/admin/scripts.php:75 includes/Admin/Menus/Forms.php:158
+msgid "Edit Form"
+msgstr "編輯表單"
+
+#: deprecated/includes/admin/scripts.php:75
+msgid "Saved"
+msgstr "已儲存"
+
+#: deprecated/includes/admin/scripts.php:75
+msgid "Saving..."
+msgstr "正在儲存..."
+
+#: deprecated/includes/admin/scripts.php:75
+msgid "Remove this field? It will be removed even if you do not save."
+msgstr "移除此欄位？ 即使您未儲存也會移除。"
+
+#: deprecated/includes/admin/sidebar.php:155
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:192
+#: includes/Templates/admin-menu-all-forms-column-title.html.php:27
+msgid "View Submissions"
+msgstr "檢視提交項目"
+
+#: deprecated/includes/admin/step-processing.php:11
+msgid "Ninja Forms Processing"
+msgstr "Ninja Form 處理"
+
+#: deprecated/includes/admin/step-processing.php:78
+#: deprecated/includes/admin/upgrades/upgrades.php:34
+msgid "Ninja Forms - Processing"
+msgstr "Ninja Form - 處理"
+
+#: deprecated/includes/admin/step-processing.php:111
+msgid "Loading..."
+msgstr "正在載入..."
+
+#: deprecated/includes/admin/step-processing.php:116
+msgid "No Action Specified..."
+msgstr "無需進行特定動作..."
+
+#: deprecated/includes/admin/step-processing.php:141
+#: deprecated/includes/admin/upgrades/upgrades.php:39
+#: deprecated/includes/admin/upgrades/upgrades.php:53
+msgid ""
+"The process has started, please be patient. This could take several minutes. "
+"You will be automatically redirected when the process is finished."
+msgstr "已開始程序，感謝您的耐心。 可能需要數分鐘的時間。 程序完成時，系統會將您自動導向。"
+
+#: deprecated/includes/admin/welcome.php:42
+#: deprecated/includes/admin/welcome.php:412
+#, php-format
+msgid "Welcome to Ninja Forms %s"
+msgstr "歡迎使用 Ninja Form %s"
+
+#: deprecated/includes/admin/welcome.php:43
+#, php-format
+msgid ""
+"Thank you for updating! Ninja Forms %s makes form building easier than ever "
+"before!"
+msgstr "謝謝您的更新！ Ninja Form %s 讓您輕鬆建立表單！"
+
+#: deprecated/includes/admin/welcome.php:57
+#: deprecated/includes/admin/welcome.php:58
+msgid "Welcome to Ninja Forms"
+msgstr "歡迎使用 Ninja Form "
+
+#: deprecated/includes/admin/welcome.php:66
+#: deprecated/includes/admin/welcome.php:67
+msgid "Ninja Forms Changelog"
+msgstr "Ninja Form 變更記錄"
+
+#: deprecated/includes/admin/welcome.php:75
+#: deprecated/includes/admin/welcome.php:76
+msgid "Getting started with Ninja Forms"
+msgstr "開始使用 Ninja Form"
+
+#: deprecated/includes/admin/welcome.php:84
+#: deprecated/includes/admin/welcome.php:85
+msgid "The people who build Ninja Forms"
+msgstr "Ninja Form 團隊"
+
+#: deprecated/includes/admin/welcome.php:165
+msgid "What's New"
+msgstr "最新動向"
+
+#: deprecated/includes/admin/welcome.php:168
+msgid "Getting Started"
+msgstr "開始進行"
+
+#: deprecated/includes/admin/welcome.php:171
+msgid "Credits"
+msgstr "信用"
+
+#: deprecated/includes/admin/welcome.php:189
+#: deprecated/includes/admin/welcome.php:283
+#: deprecated/includes/admin/welcome.php:315
+#: deprecated/includes/admin/welcome.php:414
+#, php-format
+msgid "Version %s"
+msgstr "版本 %s"
+
+#: deprecated/includes/admin/welcome.php:198
+msgid "A simplified and more powerful form building experience."
+msgstr "簡化且更強大的表單製作體驗。"
+
+#: deprecated/includes/admin/welcome.php:204
+msgid "New Builder Tab"
+msgstr "新架設大師索引標籤"
+
+#: deprecated/includes/admin/welcome.php:205
+msgid ""
+"When creating and editing forms, go directly to the section that matters "
+"most."
+msgstr "建立和編輯表單時，直接瞭解最重要的部份。"
+
+#: deprecated/includes/admin/welcome.php:210
+msgid "Better Organized Field Settings"
+msgstr "更有組織的欄位設定"
+
+#: deprecated/includes/admin/welcome.php:211
+msgid ""
+"The most common settings are shown immediately, while other, non-essential, "
+"settings are tucked away inside expandable sections."
+msgstr "系統會立即顯示最常見的設定，其他較不重要的設定則位於可擴充的區段中。"
+
+#: deprecated/includes/admin/welcome.php:222
+msgid "Improved clarity"
+msgstr "改善明確性"
+
+#: deprecated/includes/admin/welcome.php:223
+msgid ""
+"Along with the \"Build Your Form\" tab, we've removed \"Notifications\" in "
+"favor of \"Emails & Actions.\" This is a much clearer indication of what can "
+"be done on this tab."
+msgstr "我們移除了「製作表單」和「通知」索引標籤，並加入了「電子郵件和動作」。 此索引標籤中包含了更清楚的可進行事項說明。"
+
+#: deprecated/includes/admin/welcome.php:228
+msgid "Remove all Ninja Forms data"
+msgstr "移除所有 Ninja Form 資料"
+
+#: deprecated/includes/admin/welcome.php:229
+msgid ""
+"We've added the option to remove all Ninja Forms data (submissions, forms, "
+"fields, options) when you delete the plugin. We call it the nuclear option."
+msgstr "我們已新增選項，在您刪除外掛程式時移除所有 Ninja Form 資料 (提交項目、表單、欄位、選項)。 我們稱該選項為核子選項。"
+
+#: deprecated/includes/admin/welcome.php:234
+msgid "Better license management"
+msgstr "更佳的授權管理"
+
+#: deprecated/includes/admin/welcome.php:235
+msgid ""
+"Deactivate Ninja Forms extension licenses individually or as a group from "
+"the settings tab."
+msgstr "從設定索引標籤中個別或以群組方式停用 Ninja Form 擴充功能授權。"
+
+#: deprecated/includes/admin/welcome.php:245
+msgid "More to come"
+msgstr "更多新功能"
+
+#: deprecated/includes/admin/welcome.php:246
+msgid ""
+"The interface updates in this version lay the groundwork for some great "
+"improvements in the future. Version 3.0 will build on these changes to make "
+"Ninja Forms an even more stable, powerful, and user-friendly form builder."
+msgstr ""
+"此版本的介面更新為未來可能的增強功能提供了良好的基礎。 版本 3.0 會建置這些變更，讓 Ninja Form 成為更穩定、更強大且更友善的表單架設大師。"
+
+#: deprecated/includes/admin/welcome.php:250
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:65
+#: includes/Templates/admin-menu-addons.html.php:46
+msgid "Documentation"
+msgstr "文件"
+
+#: deprecated/includes/admin/welcome.php:251
+msgid "Take a look at our in-depth Ninja Forms documentation below."
+msgstr "深入查看以下的 Ninja Form 文件。"
+
+#: deprecated/includes/admin/welcome.php:253
+msgid "Ninja Forms Documentation"
+msgstr "Ninja Form 文件"
+
+#: deprecated/includes/admin/welcome.php:254
+msgid "Get Support"
+msgstr "取得支援"
+
+#: deprecated/includes/admin/welcome.php:263
+msgid "Return to Ninja Forms"
+msgstr "返回 Ninja Form"
+
+#: deprecated/includes/admin/welcome.php:264
+msgid "View the Full Changelog"
+msgstr "檢視完整的變更記錄"
+
+#: deprecated/includes/admin/welcome.php:288
+msgid "Full Changelog"
+msgstr "完整的變更記錄"
+
+#: deprecated/includes/admin/welcome.php:296
+msgid "Go to Ninja Forms"
+msgstr "前往 Ninja Form"
+
+#: deprecated/includes/admin/welcome.php:319
+msgid ""
+"Use the tips below to get started using Ninja Forms. You will be up and "
+"running in no time!"
+msgstr "使用下方的小秘訣開始使用 Ninja Form。 您很快就能上手！"
+
+#: deprecated/includes/admin/welcome.php:324
+msgid "All About Forms"
+msgstr "有關 Ninja Form"
+
+#: deprecated/includes/admin/welcome.php:327
+#, php-format
+msgid ""
+"The Forms menu is your access point for all things Ninja Forms. We've "
+"already created your first %scontact form%s so that you have an example. You "
+"can also create your own by clicking %sAdd New%s."
+msgstr ""
+"「表單」功能表中包含 Ninja Form 的所有功能。 我們已建立了第一個%s聯絡人表單%s可以做為您的範例。 您也可以按一下%s新增項目%s自行建立。"
+
+#: deprecated/includes/admin/welcome.php:329
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:11
+msgid "Build Your Form"
+msgstr "建置您的表單"
+
+#: deprecated/includes/admin/welcome.php:330
+msgid ""
+"This is where you'll build your form by adding fields and dragging them into "
+"the order you want them to appear. Each field will have an assortment of "
+"options such as label, label position, and placeholder."
+msgstr "您可以新增欄位並將其以您希望的順序拖曳，以製作表單。 每個欄位都包含標籤、標籤位置以及預留位置等選項。"
+
+#: deprecated/includes/admin/welcome.php:332
+#: includes/Templates/ui-nf-header.html.php:6
+#: includes/Templates/ui-nf-menu-drawer.html.php:7
+msgid "Emails & Actions"
+msgstr "電子郵件與動作"
+
+#: deprecated/includes/admin/welcome.php:333
+msgid ""
+"If you would like for your form to notify you via email when a user clicks "
+"submit, you can set those up on this tab. You can create an unlimited number "
+"of emails, including emails sent to the user who filled out the form."
+msgstr "如果您希望在使用者按下提交時收到電子郵件通知，可以在此索引標籤中設定。 您可以建立無限量的電子郵件，包括寄送給填寫表單之使用者的電子郵件。"
+
+#: deprecated/includes/admin/welcome.php:336
+msgid ""
+"This tab hold general form settings, such as title and submission method, as "
+"well as display settings like hiding a form when it is successfully "
+"completed."
+msgstr "此索引標籤保有常用的表單設定以及顯示設定，例如在成功完成之後隱藏表單。"
+
+#: deprecated/includes/admin/welcome.php:345
+msgid "Displaying Your Form"
+msgstr "顯示您的表單"
+
+#: deprecated/includes/admin/welcome.php:350
+msgid "Append to Page"
+msgstr "附加至頁面"
+
+#: deprecated/includes/admin/welcome.php:351
+msgid ""
+"Under Basic Form Behavior in the Form Settings you can easily select a page "
+"that you would like the form automatically appended to the end of that "
+"page's content. A similiar option is avaiable in every content edit screen "
+"in its sidebar."
+msgstr ""
+"在「表單設定」中的「基本表單行為」下，您可以輕鬆選取您要在頁面內容的結尾處自動弣加表單的頁面。 每個內容編輯畫面的側邊欄都有相似的選項可供使用。"
+
+#: deprecated/includes/admin/welcome.php:355
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:158
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:218
+#: includes/Admin/AllFormsTable.php:69
+msgid "Shortcode"
+msgstr "短代碼"
+
+#: deprecated/includes/admin/welcome.php:356
+#, php-format
+msgid ""
+"Place %s in any area that accepts shortcodes to display your form anywhere "
+"you like. Even in the middle of your page or posts content."
+msgstr "將 %s 放置在接受短碼的所有區域中，以在您選擇的位置顯示表單。 您可以在頁面或貼文內容中間顯示表單。"
+
+#: deprecated/includes/admin/welcome.php:365
+msgid ""
+"Ninja Forms provides a widget that you can place in any widgetized area of "
+"your site and select exactly which form you would like displayed in that "
+"space."
+msgstr "Ninja Form 提供小工具可讓您放置在網站任何可放置小工具的區域，也可選取要在該空間顯示的表格。"
+
+#: deprecated/includes/admin/welcome.php:369
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:159
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:219
+msgid "Template Function"
+msgstr "範本功能"
+
+#: deprecated/includes/admin/welcome.php:370
+#, php-format
+msgid ""
+"Ninja Forms also comes with a simple template function that can be placed "
+"directly into a php template file. %s"
+msgstr "Ninja Form 也搭配了簡易的範本功能，可以直接放置在 PHP 範本檔案中。 %s"
+
+#: deprecated/includes/admin/welcome.php:380
+msgid "Need Help?"
+msgstr "需要幫助？"
+
+#: deprecated/includes/admin/welcome.php:385
+msgid "Growing Documentation"
+msgstr "更多的文件"
+
+#: deprecated/includes/admin/welcome.php:386
+#, php-format
+msgid ""
+"Documentation is available covering everything from %sTroubleshooting%s to "
+"our %sDeveloper API%s. New Documents are always being added."
+msgstr "我們提供更多的文件，內容包含%s疑難排解%s及%s開發人員 API%s，應有盡有。 我們會隨時加入新文件。"
+
+#: deprecated/includes/admin/welcome.php:390
+msgid "Best Support in the Business"
+msgstr "業界最佳的支援服務"
+
+#: deprecated/includes/admin/welcome.php:391
+#, php-format
+msgid ""
+"We do all we can to provide every Ninja Forms user with the best support "
+"possible. If you encounter a problem or have a question, %splease contact us"
+"%s."
+msgstr "我們致力於提供每位使用 Ninja Form 的使用者更好的支援服務。 如果您遇到問題或有任何疑問，%s請與我們聯絡%s。"
+
+#: deprecated/includes/admin/welcome.php:413
+#, php-format
+msgid ""
+"Thank you for updating to the latest version! Ninja Forms %s is primed to "
+"make your experience managing submissions an enjoyable one!"
+msgstr "感謝您更新為最新版本！ Ninja Form %s 的目的就是要讓您的管理提交項目工作更有趣！"
+
+#: deprecated/includes/admin/welcome.php:418
+msgid ""
+"Ninja Forms is created by a worldwide team of developers who aim to provide "
+"the #1 WordPress community form creation plugin."
+msgstr "Ninja Form 是由一群來自世界各地的開發人員所建立，目標是提供最棒的 WordPress 社群表單建立外掛程式。"
+
+#: deprecated/includes/admin/welcome.php:436
+msgid "No valid changelog was found."
+msgstr "找不到有效的變更記錄。"
+
+#: deprecated/includes/admin/welcome.php:474
+#, php-format
+msgid "View %s"
+msgstr "檢視 %s"
+
+#: deprecated/includes/admin/edit-field/autocomplete-off.php:16
+#: includes/Config/FieldSettings.php:695
+msgid "Disable Browser Autocomplete"
+msgstr "停用瀏覽器自動完成功能"
+
+#: deprecated/includes/admin/edit-field/calc.php:44
+#, php-format
+msgid "%sChecked%s Calculation Value"
+msgstr "%s勾選的%s計算值"
+
+#: deprecated/includes/admin/edit-field/calc.php:44
+#, php-format
+msgid "This is the value that will be used if %sChecked%s."
+msgstr "如果%s已勾選%s，則會使用該值。"
+
+#: deprecated/includes/admin/edit-field/calc.php:45
+#, php-format
+msgid "%sUnchecked%s Calculation Value"
+msgstr "%s取消勾選的%s計算值"
+
+#: deprecated/includes/admin/edit-field/calc.php:45
+#, php-format
+msgid "This is the value that will be used if %sUnchecked%s."
+msgstr "如果%s已取消勾選%s，則會使用該值。"
+
+#: deprecated/includes/admin/edit-field/calc.php:48
+msgid "Include in the auto-total? (If enabled)"
+msgstr "包含在自動總計中？ (如果已啟用該功能)"
+
+#: deprecated/includes/admin/edit-field/custom-class.php:20
+msgid "Custom CSS Classes"
+msgstr "自訂 CSS 類別"
+
+#: deprecated/includes/admin/edit-field/desc.php:41
+msgid "Before Everything"
+msgstr "在所有項目之前"
+
+#: deprecated/includes/admin/edit-field/desc.php:43
+msgid "Before Label"
+msgstr "在標籤之前"
+
+#: deprecated/includes/admin/edit-field/desc.php:44
+msgid "After Label"
+msgstr "在標籤之後"
+
+#: deprecated/includes/admin/edit-field/desc.php:46
+msgid "After Everything"
+msgstr "在所有項目之後"
+
+#: deprecated/includes/admin/edit-field/desc.php:52
+#, php-format
+msgid ""
+"If \"desc text\" is enabled, there will be a question mark %s placed next to "
+"the input field. Hovering over this question mark will show the desc text."
+msgstr "如果啟用「描述文字」功能，輸入欄位旁會出現問號 %s。 讓滑鼠在問號上暫留會顯示描述文字。"
+
+#: deprecated/includes/admin/edit-field/desc.php:53
+msgid "Add Description"
+msgstr "新增描述"
+
+#: deprecated/includes/admin/edit-field/desc.php:62
+msgid "Description Position"
+msgstr "描述位置"
+
+#: deprecated/includes/admin/edit-field/desc.php:63
+msgid "Description Content"
+msgstr "描述內容"
+
+#: deprecated/includes/admin/edit-field/help.php:32
+#: deprecated/includes/fields/calc.php:278
+#, php-format
+msgid ""
+"If \"help text\" is enabled, there will be a question mark %s placed next to "
+"the input field. Hovering over this question mark will show the help text."
+msgstr "如果啟用「說明文字」功能，輸入欄位旁會出現問號 %s。 讓滑鼠在問號上暫留會顯示說明文字。"
+
+#: deprecated/includes/admin/edit-field/help.php:33
+#: deprecated/includes/fields/calc.php:279
+msgid "Show Help Text"
+msgstr "顯示說明文字"
+
+#: deprecated/includes/admin/edit-field/help.php:37
+#: deprecated/includes/display/fields/help.php:26
+#: deprecated/includes/fields/calc.php:283
+#: includes/Config/FieldSettings.php:475
+msgid "Help Text"
+msgstr "說明文字"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:38
+msgid "If you leave the box empty, no limit will be used"
+msgstr "如果您將方塊留白，則不會使用限制"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:39
+msgid "Limit input to this number"
+msgstr "限制輸入為此號碼"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:40
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:119
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:144
+msgid "of"
+msgstr "的"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:40
+msgid "Characters"
+msgstr "字元"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:40
+msgid "Words"
+msgstr "字詞"
+
+#: deprecated/includes/admin/edit-field/input-limit.php:42
+msgid "Text to appear after character/word counter"
+msgstr "字元/字詞計數之後顯示的文字"
+
+#: deprecated/includes/admin/edit-field/label.php:39
+#: deprecated/includes/fields/calc.php:122
+#: deprecated/includes/fields/checkbox.php:29
+#: includes/Config/FieldSettings.php:50
+#: includes/Config/FormDisplaySettings.php:81
+msgid "Left of Element"
+msgstr "元素左側"
+
+#: deprecated/includes/admin/edit-field/label.php:40
+#: deprecated/includes/fields/calc.php:123
+#: deprecated/includes/fields/checkbox.php:30
+#: includes/Config/FieldSettings.php:42
+#: includes/Config/FormDisplaySettings.php:73
+msgid "Above Element"
+msgstr "元素上方"
+
+#: deprecated/includes/admin/edit-field/label.php:41
+#: deprecated/includes/fields/calc.php:124
+#: deprecated/includes/fields/checkbox.php:31
+#: includes/Config/FieldSettings.php:46
+#: includes/Config/FormDisplaySettings.php:77
+msgid "Below Element"
+msgstr "元素下方"
+
+#: deprecated/includes/admin/edit-field/label.php:42
+#: deprecated/includes/fields/calc.php:125
+#: deprecated/includes/fields/checkbox.php:32
+#: includes/Config/FieldSettings.php:54
+#: includes/Config/FormDisplaySettings.php:85
+msgid "Right of Element"
+msgstr "元素右側"
+
+#: deprecated/includes/admin/edit-field/label.php:43
+msgid "Inside Element"
+msgstr "元素中"
+
+#: deprecated/includes/admin/edit-field/label.php:56
+#: deprecated/includes/fields/calc.php:127 includes/Config/FieldSettings.php:35
+#: includes/Templates/admin-menu-forms.html.php:25
+msgid "Label Position"
+msgstr "標籤位置"
+
+#: deprecated/includes/admin/edit-field/li.php:332
+msgid "Field ID"
+msgstr "欄位 ID"
+
+#: deprecated/includes/admin/edit-field/li.php:426
+msgid "Restriction Settings"
+msgstr "限制設定"
+
+#: deprecated/includes/admin/edit-field/li.php:427
+msgid "Calculation Settings"
+msgstr "計算設定"
+
+#: deprecated/includes/admin/edit-field/li.php:506
+#: deprecated/includes/admin/edit-field/remove-button.php:13
+msgid "Remove"
+msgstr "刪除"
+
+#: deprecated/includes/admin/edit-field/list-terms.php:45
+msgid "Populate this with the taxonomy"
+msgstr "以分類法植入"
+
+#: deprecated/includes/admin/edit-field/list-terms.php:48
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:32
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:33
+#: deprecated/includes/fields/calc.php:93
+msgid "- None"
+msgstr "- 無"
+
+#: deprecated/includes/admin/edit-field/placeholder.php:19
+#: includes/Config/FieldSettings.php:311
+msgid "Placeholder"
+msgstr "標記符號"
+
+#: deprecated/includes/admin/edit-field/req.php:21
+msgid "Required"
+msgstr "必填"
+
+#: deprecated/includes/admin/edit-field/save-button.php:5
+msgid "Save Field Settings"
+msgstr "儲存欄位設定"
+
+#: deprecated/includes/admin/edit-field/sub-settings.php:31
+msgid "Sort as numeric"
+msgstr "依數值排序"
+
+#: deprecated/includes/admin/edit-field/sub-settings.php:31
+msgid ""
+"If this box is checked, this column in the submissions table will sort by "
+"number."
+msgstr "如果勾選此方塊，提交項目中的此欄位會依數字排序。"
+
+#: deprecated/includes/admin/edit-field/sub-settings.php:68
+#: includes/Config/FieldSettings.php:461
+msgid "Admin Label"
+msgstr "管理標籤"
+
+#: deprecated/includes/admin/edit-field/sub-settings.php:68
+msgid "This is the label used when viewing/editing/exporting submissions."
+msgstr "這是在檢視/編輯/匯出提交項目時使用的標籤。"
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:28
+msgid "Billing"
+msgstr "帳單："
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:29
+#: includes/Database/MockData.php:724 includes/Database/MockData.php:925
+#: includes/Database/MockData.php:986 includes/Database/MockData.php:1089
+#: includes/Fields/Shipping.php:30
+msgid "Shipping"
+msgstr "運送方式"
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:30
+#: deprecated/includes/fields/hidden.php:65
+#: deprecated/includes/fields/number.php:75
+#: deprecated/includes/fields/textbox.php:135
+#: deprecated/includes/fields/textbox.php:177 includes/Actions/Custom.php:35
+#: includes/Config/FieldSettings.php:218
+msgid "Custom"
+msgstr "自訂"
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:51
+msgid "User Info Field Group"
+msgstr "使用者資訊欄位群組"
+
+#: deprecated/includes/admin/edit-field/user-info-fields.php:52
+msgid "Custom Field Group"
+msgstr "自訂欄位群組"
+
+#: deprecated/includes/admin/pages/system-status-html.php:3
+#: includes/Templates/admin-menu-system-status.html.php:14
+msgid "Please include this information when requesting support:"
+msgstr "請在要求支援時提供此資訊："
+
+#: deprecated/includes/admin/pages/system-status-html.php:4
+#: includes/Templates/admin-menu-system-status.html.php:16
+msgid "Get System Report"
+msgstr "取得系統報表"
+
+#: deprecated/includes/admin/pages/system-status-html.php:12
+#: includes/Templates/admin-menu-system-status.html.php:29
+msgid "Environment"
+msgstr "環境"
+
+#: deprecated/includes/admin/pages/system-status-html.php:17
+#: includes/Admin/Menus/SystemStatus.php:111
+msgid "Home URL"
+msgstr "WordPress 網址"
+
+#: deprecated/includes/admin/pages/system-status-html.php:21
+#: includes/Admin/Menus/SystemStatus.php:112
+msgid "Site URL"
+msgstr "網站網址"
+
+#: deprecated/includes/admin/pages/system-status-html.php:25
+#: includes/Admin/Menus/SystemStatus.php:113
+msgid "Ninja Forms Version"
+msgstr "Ninja Form 版本"
+
+#: deprecated/includes/admin/pages/system-status-html.php:29
+#: includes/Admin/Menus/SystemStatus.php:114
+msgid "WP Version"
+msgstr "WP 版本"
+
+#: deprecated/includes/admin/pages/system-status-html.php:33
+#: includes/Admin/Menus/SystemStatus.php:115
+msgid "WP Multisite Enabled"
+msgstr "啟用 WP 多網站"
+
+#: deprecated/includes/admin/pages/system-status-html.php:34
+#: deprecated/includes/admin/pages/system-status-html.php:73
+#: deprecated/includes/admin/pages/system-status-html.php:102
+#: includes/Admin/Menus/SystemStatus.php:27
+#: includes/Admin/Menus/SystemStatus.php:44
+#: includes/Admin/Menus/SystemStatus.php:64
+msgid "Yes"
+msgstr "是"
+
+#: deprecated/includes/admin/pages/system-status-html.php:34
+#: deprecated/includes/admin/pages/system-status-html.php:73
+#: deprecated/includes/admin/pages/system-status-html.php:102
+#: includes/Admin/Menus/SystemStatus.php:29
+#: includes/Admin/Menus/SystemStatus.php:46
+#: includes/Admin/Menus/SystemStatus.php:66
+msgid "No"
+msgstr "否"
+
+#: deprecated/includes/admin/pages/system-status-html.php:37
+#: includes/Admin/Menus/SystemStatus.php:116
+msgid "Web Server Info"
+msgstr "Web 伺服器資訊"
+
+#: deprecated/includes/admin/pages/system-status-html.php:41
+#: includes/Admin/Menus/SystemStatus.php:117
+msgid "PHP Version"
+msgstr "PHP 版本"
+
+#: deprecated/includes/admin/pages/system-status-html.php:45
+#: includes/Admin/Menus/SystemStatus.php:119
+msgid "MySQL Version"
+msgstr "MySQL 版本"
+
+#: deprecated/includes/admin/pages/system-status-html.php:55
+#: includes/Admin/Menus/SystemStatus.php:120
+msgid "PHP Locale"
+msgstr "PHP 地區"
+
+#: deprecated/includes/admin/pages/system-status-html.php:64
+#: includes/Admin/Menus/SystemStatus.php:122
+msgid "WP Memory Limit"
+msgstr "WP 記憶體限制"
+
+#: deprecated/includes/admin/pages/system-status-html.php:72
+#: includes/Admin/Menus/SystemStatus.php:123
+msgid "WP Debug Mode"
+msgstr "WP 偵錯模式"
+
+#: deprecated/includes/admin/pages/system-status-html.php:76
+#: includes/Admin/Menus/SystemStatus.php:124
+msgid "WP Language"
+msgstr "WP 語言"
+
+#: deprecated/includes/admin/pages/system-status-html.php:77
+#: includes/Admin/Menus/SystemStatus.php:53
+msgid "Default"
+msgstr "預設"
+
+#: deprecated/includes/admin/pages/system-status-html.php:80
+#: includes/Admin/Menus/SystemStatus.php:125
+msgid "WP Max Upload Size"
+msgstr "WP 最大上傳大小"
+
+#: deprecated/includes/admin/pages/system-status-html.php:85
+#: includes/Admin/Menus/SystemStatus.php:126
+msgid "PHP Post Max Size"
+msgstr "PHP Post Max Size"
+
+#: deprecated/includes/admin/pages/system-status-html.php:89
+#: includes/Admin/Menus/SystemStatus.php:127
+msgid "Max Input Nesting Level"
+msgstr "最大輸入巢狀等級"
+
+#: deprecated/includes/admin/pages/system-status-html.php:93
+#: includes/Admin/Menus/SystemStatus.php:128
+msgid "PHP Time Limit"
+msgstr "PHP Time Limit"
+
+#: deprecated/includes/admin/pages/system-status-html.php:97
+#: includes/Admin/Menus/SystemStatus.php:129
+msgid "PHP Max Input Vars"
+msgstr "PHP Max Input Vars"
+
+#: deprecated/includes/admin/pages/system-status-html.php:101
+#: includes/Admin/Menus/SystemStatus.php:130
+msgid "SUHOSIN Installed"
+msgstr "SUHOSIN 已安裝"
+
+#: deprecated/includes/admin/pages/system-status-html.php:105
+#: includes/Admin/Menus/SystemStatus.php:133
+msgid "SMTP"
+msgstr "SMTP"
+
+#: deprecated/includes/admin/pages/system-status-html.php:114
+#: includes/Admin/Menus/SystemStatus.php:135
+msgid "Default Timezone"
+msgstr "預設時區"
+
+#: deprecated/includes/admin/pages/system-status-html.php:118
+#, php-format
+msgid "Default timezone is %s - it should be UTC"
+msgstr "預設時區為 %s - 應該為 UTC"
+
+#: deprecated/includes/admin/pages/system-status-html.php:120
+#, php-format
+msgid "Default timezone is %s"
+msgstr "預設時區為 %s"
+
+#: deprecated/includes/admin/pages/system-status-html.php:131
+msgid "Your server has fsockopen and cURL enabled."
+msgstr "您的伺服器已啟用 fsockopen 和 cURL。"
+
+#: deprecated/includes/admin/pages/system-status-html.php:133
+msgid "Your server has fsockopen enabled, cURL is disabled."
+msgstr "您的伺服器已啟用 fsockopen，停用 cURL。"
+
+#: deprecated/includes/admin/pages/system-status-html.php:135
+msgid "Your server has cURL enabled, fsockopen is disabled."
+msgstr "您的伺服器已啟用 cURL，停用 fsockopen。"
+
+#: deprecated/includes/admin/pages/system-status-html.php:139
+msgid ""
+"Your server does not have fsockopen or cURL enabled - PayPal IPN and other "
+"scripts which communicate with other servers will not work. Contact your "
+"hosting provider."
+msgstr ""
+"你的伺服器未啟用 fsockopen 或 cURL - PayPal IPN 及需與其他伺服器通訊的腳本將無法使用。請與你的主機服務商聯絡。 "
+
+#: deprecated/includes/admin/pages/system-status-html.php:144
+msgid "SOAP Client"
+msgstr "SOAP 用戶端"
+
+#: deprecated/includes/admin/pages/system-status-html.php:146
+msgid "Your server has the SOAP Client class enabled."
+msgstr "您的伺服器已啟用 SOAP 用戶端類別。"
+
+#: deprecated/includes/admin/pages/system-status-html.php:149
+#, php-format
+msgid ""
+"Your server does not have the %sSOAP Client%s class enabled - some gateway "
+"plugins which use SOAP may not work as expected."
+msgstr "您的伺服器並未啟用 %sSOAP 用戶端%s類別 - 使用 SOAP 的部分閘道外掛程式可能無法如預期運作。"
+
+#: deprecated/includes/admin/pages/system-status-html.php:154
+msgid "WP Remote Post"
+msgstr "WP 遠端貼文"
+
+#: deprecated/includes/admin/pages/system-status-html.php:165
+msgid "wp_remote_post() was successful - PayPal IPN is working."
+msgstr "wp_remote_post() 成功 - PayPal IPN 運作正常。"
+
+#: deprecated/includes/admin/pages/system-status-html.php:168
+msgid ""
+"wp_remote_post() failed. PayPal IPN won't work with your server. Contact "
+"your hosting provider. Error:"
+msgstr "wp_remote_post() 失敗。 PayPal IPN 無法搭配您的伺服器運作。 連絡您的主機提供者。 錯誤："
+
+#: deprecated/includes/admin/pages/system-status-html.php:171
+msgid "wp_remote_post() failed. PayPal IPN may not work with your server."
+msgstr "wp_remote_post() 失敗。 PayPal IPN 無法搭配您的伺服器運作。"
+
+#: deprecated/includes/admin/pages/system-status-html.php:178
+#: includes/Templates/admin-menu-system-status.html.php:42
+msgid "Plugins"
+msgstr "外掛程式"
+
+#: deprecated/includes/admin/pages/system-status-html.php:183
+#: includes/Templates/admin-menu-system-status.html.php:47
+msgid "Installed Plugins"
+msgstr "已安裝外掛程式"
+
+#: deprecated/includes/admin/pages/system-status-html.php:203
+#: includes/Admin/Menus/SystemStatus.php:93
+msgid "Visit plugin homepage"
+msgstr "前往外掛主頁"
+
+#: deprecated/includes/admin/pages/system-status-html.php:206
+#: includes/Admin/Menus/SystemStatus.php:96
+msgid "by"
+msgstr "由"
+
+#: deprecated/includes/admin/pages/system-status-html.php:206
+#: includes/Admin/Menus/SystemStatus.php:96
+msgid "version"
+msgstr "版本"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:44
+msgid "Give your form a title. This is how you'll find the form later."
+msgstr "為表單建立標題。 稍後您可利用此標題找到表單。"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:49
+msgid "You have not added a submit button to your form."
+msgstr "您尚未在表單中新增提交按鈕。"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:7
+#: deprecated/includes/fields/textbox.php:170
+#: includes/Config/FieldSettings.php:200
+msgid "Input Mask"
+msgstr "輸入遮罩"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:15
+msgid ""
+"Any character you place in the \"custom mask\" box that is not in the list "
+"below will be automatically entered for the user as they type and will not "
+"be removeable"
+msgstr "您在「自訂遮罩」方塊中輸入的任何不在下方清單中的字元，會在使用者鍵入時自動輸入，且無法移除"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:16
+msgid "These are the predefined masking characters"
+msgstr "這些是預先定義的遮罩字元"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:18
+msgid ""
+"a - Represents an alpha character (A-Z,a-z) - Only allows letters to be "
+"entered"
+msgstr "a - 表示字母字元 (A-Z,a-z) - 只能輸入字母"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:19
+msgid ""
+"9 - Represents a numeric character (0-9) - Only allows numbers to be entered"
+msgstr "a - 表示數值字元 (A-Z,a-z) - 只能輸入數字"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:20
+msgid ""
+"* - Represents an alphanumeric character (A-Z,a-z,0-9) - This allows both "
+"numbers and letters to be entered"
+msgstr "* - 表示英數字元 (A-Z、a-z、0-9) - 可輸入字母及數字"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid ""
+"So, if you wanted to create a mask for an American Social Security Number, "
+"you would type 999-99-9999 into the box"
+msgstr "因此，如果您希望建立美國社會安全碼的遮罩，您應該在方塊中輸入 999-99-9999"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid ""
+"The 9s would represent any number, and the -s would be automatically added"
+msgstr "這些 9 表示任何數字，而 - 會自動加入"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid "This would prevent the user from putting in anything other than numbers"
+msgstr "這可防止使用者輸入數字以外的字元"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:27
+msgid "You can also combine these for specific applications"
+msgstr "您也可以針對特定的應用程式結合兩者"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/help.php:27
+msgid ""
+"For instance, if you had a product key that was in the form of A4B51.989."
+"B.43C, you could mask it with: a9a99.999.a.99a, which would force all the "
+"a's to be letters and the 9s to be numbers"
+msgstr ""
+"例如，如果您的產品金鑰格式為 A4B51.989.B.43C，您可以用下列遮罩：a9a99.999.a.99a，如此會強制所有 s 必須是字母，而所有 9 必須是數字"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/def-fields.php:6
+msgid "Defined Fields"
+msgstr "定義欄位"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/fav-fields.php:6
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:7
+#: includes/Admin/Menus/ImportExport.php:100
+#: includes/Templates/admin-metabox-import-export-favorite-fields-export.html.php:9
+msgid "Favorite Fields"
+msgstr "最愛欄位"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/payment-fields.php:12
+msgid "Payment Fields"
+msgstr "付款欄位"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/template-fields.php:6
+msgid "Template Fields"
+msgstr "範本欄位"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/user-info.php:12
+msgid "User Information"
+msgstr "使用者資訊"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:96
+msgid "All"
+msgstr "全部"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:101
+msgid "Bulk Actions"
+msgstr "批量操作"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:104
+msgid "Apply"
+msgstr "套用"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:112
+msgid "Forms Per Page"
+msgstr "每個頁面的表單"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:113
+msgid "Go"
+msgstr "送出"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:142
+msgid "Go to the first page"
+msgstr "跳至第一頁"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:143
+msgid "Go to the previous page"
+msgstr "跳至上一頁"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:144
+msgid "Current page"
+msgstr "目前頁面"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:145
+msgid "Go to the next page"
+msgstr "跳至下一頁"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:146
+msgid "Go to the last page"
+msgstr "跳至最後一頁"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:157
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:217
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:55
+#: includes/Admin/AllFormsTable.php:68
+#: includes/Config/FormDisplaySettings.php:12
+msgid "Form Title"
+msgstr "表單標題"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:189
+msgid "Delete this form"
+msgstr "刪除此表單"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:190
+msgid "Duplicate Form"
+msgstr "複製表單"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:236
+msgid "Forms Deleted"
+msgstr "已刪除表單"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:238
+msgid "Form Deleted"
+msgstr "已刪除表單"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-preview/form-preview.php:11
+msgid "Form Preview"
+msgstr "已刪除預覽"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:49
+#: includes/Config/SettingsGroups.php:24
+msgid "Display"
+msgstr "顯示"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:60
+#: includes/Config/FormDisplaySettings.php:26
+msgid "Display Form Title"
+msgstr "顯示表單標題"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:66
+msgid "Add form to this page"
+msgstr "在頁面中新增表單"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:75
+msgid "Submit via AJAX (without page reload)?"
+msgstr "透過 AJAX 提交 (無需頁面重新載入)？"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:83
+#: includes/Config/FormDisplaySettings.php:40
+msgid "Clear successfully completed form?"
+msgstr "清除成功完成的表單？"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:85
+#: includes/Config/FormDisplaySettings.php:44
+msgid ""
+"If this box is checked, Ninja Forms will clear the form values after it has "
+"been successfully submitted."
+msgstr "如果勾選此方塊，Ninja Form 會在成功提交之後清除表單。"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:92
+#: includes/Config/FormDisplaySettings.php:54
+msgid "Hide successfully completed form?"
+msgstr "隱藏成功完成的表單？"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:94
+#: includes/Config/FormDisplaySettings.php:58
+msgid ""
+"If this box is checked, Ninja Forms will hide the form after it has been "
+"successfully submitted."
+msgstr "如果勾選此方塊，Ninja Form 會在成功提交之後隱藏表單。"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:105
+#: includes/Config/FormSettingsTypes.php:12
+#: includes/Config/SettingsGroups.php:19
+msgid "Restrictions"
+msgstr "限制"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:112
+#: includes/Config/FormRestrictionSettings.php:20
+msgid "Require user to be logged in to view form?"
+msgstr "使用者必須登入才能檢視表單？"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:119
+#: includes/Config/FormRestrictionSettings.php:34
+msgid "Not Logged-In Message"
+msgstr "未登入訊息"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:120
+msgid ""
+"Message shown to users if the \"logged in\" checkbox above is checked and "
+"they are not logged-in."
+msgstr "如果上方的「已登入」核取方塊已勾選但使用者並未登入，會向使用者顯示此訊息。"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:127
+#: includes/Config/FormRestrictionSettings.php:45
+msgid "Limit Submissions"
+msgstr "限制提交項目"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:129
+msgid ""
+"Select the number of submissions that this form will accept. Leave empty for "
+"no limit."
+msgstr "選取此表單接受的提交項目數量。 無限制者留空白。"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:137
+#: includes/Config/FormRestrictionSettings.php:74
+msgid "Limit Reached Message"
+msgstr "限制到達訊息"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:138
+msgid ""
+"Please enter a message that you want displayed when this form has reached "
+"its submission limit and will not accept new submissions."
+msgstr "請輸入您要在表單達到提交項目限制且不接受新提交項目時顯示的訊息。"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:160
+msgid "Form Settings Saved"
+msgstr "已儲存表單設定"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/help.php:7
+msgid "Basic Settings"
+msgstr "基本設定"
+
+#: deprecated/includes/admin/pages/ninja-forms/tabs/form-settings/help.php:15
+msgid "Ninja Forms basic help goes here."
+msgstr "Ninja Form 基本說明在此。"
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:6
+msgid "Extend Ninja Forms"
+msgstr "延伸 Ninja Form"
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:67
+#: includes/Templates/admin-menu-addons.html.php:49
+msgid "Documentation coming soon."
+msgstr "文件即將上線。"
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:72
+#: includes/Config/ActionSettings.php:27
+#: includes/Templates/admin-menu-addons.html.php:57
+msgid "Active"
+msgstr "啟用"
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:74
+#: includes/Config/i18nBuilder.php:12
+#: includes/Templates/admin-menu-addons.html.php:61
+msgid "Installed"
+msgstr "已安裝"
+
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:76
+#: deprecated/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:79
+#: includes/Templates/admin-menu-addons.html.php:65
+#: includes/Templates/admin-menu-addons.html.php:71
+msgid "Learn More"
+msgstr "學習更多"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:6
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:20
+msgid "Backup / Restore"
+msgstr "備份/還原"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:22
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:24
+msgid "Backup Ninja Forms"
+msgstr "備份 Ninja Form"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:28
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:32
+msgid "Restore Ninja Forms"
+msgstr "還原 Ninja Form"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:37
+msgid "Data restored successfully!"
+msgstr "資料成功還原！"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:23
+#: includes/Admin/Menus/ImportExport.php:142
+msgid "Import Favorite Fields"
+msgstr "匯入最愛欄位"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:28
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:27
+#: includes/Config/i18nFrontEnd.php:13
+#: includes/Templates/admin-metabox-import-export-favorite-fields-import.html.php:9
+#: includes/Templates/admin-metabox-import-export-forms-import.html.php:9
+msgid "Select a file"
+msgstr "選取檔案"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:36
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:132
+msgid "Import Favorites"
+msgstr "匯入最愛"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:57
+msgid "No Favorite Fields Found"
+msgstr "找不到最愛欄位"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:63
+#: includes/Admin/Menus/ImportExport.php:149
+msgid "Export Favorite Fields"
+msgstr "匯出最愛欄位"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:81
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:93
+#: includes/Templates/admin-metabox-import-export-favorite-fields-export.html.php:24
+#: includes/Templates/admin-metabox-import-export-favorite-fields-export.html.php:27
+msgid "Export Fields"
+msgstr "匯出欄位"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:130
+msgid "Please select favorite fields to export."
+msgstr "請選取要匯出的最愛欄位。"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:144
+msgid "Favorites imported successfully."
+msgstr "最愛成功匯入！"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:146
+msgid "Please select a valid favorite fields file."
+msgstr "請選取有效的最愛欄位檔案。"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:22
+msgid "Import a form"
+msgstr "匯入表單"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:35
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:162
+#: includes/Templates/admin-metabox-import-export-forms-import.html.php:17
+#: includes/Templates/admin-metabox-import-export-forms-import.html.php:20
+msgid "Import Form"
+msgstr "匯入表單"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:62
+msgid "Export a form"
+msgstr "匯出表單"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:75
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:156
+#: includes/Templates/admin-metabox-import-export-forms-export.html.php:21
+#: includes/Templates/admin-metabox-import-export-forms-export.html.php:24
+msgid "Export Form"
+msgstr "匯出表單"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:160
+msgid "Please select a form."
+msgstr "請選取表單。"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:166
+#: includes/Templates/admin-notice-form-import.html.php:3
+msgid "Form Imported Successfully."
+msgstr "表單成功匯入。"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:169
+msgid "Please select a valid exported form file."
+msgstr "請選取有效的已匯出表單檔案。"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:18
+msgid "Import / Export Submissions"
+msgstr "匯入/匯出提交項目"
+
+#: deprecated/includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:20
+msgid "Date Settings"
+msgstr "日期設定"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:6
+msgid "General"
+msgstr "一般"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:29
+#: includes/Config/PluginSettingsGroups.php:7
+msgid "General Settings"
+msgstr "一般設定"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:34
+#: includes/Config/PluginSettingsGeneral.php:14
+msgid "Version"
+msgstr "版本"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:40
+#: includes/Config/PluginSettingsGeneral.php:27
+msgid "Date Format"
+msgstr "日期格式"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:41
+#: includes/Config/PluginSettingsGeneral.php:28
+#, php-format
+msgid ""
+"Tries to follow the %sPHP date() function%s specifications, but not every "
+"format is supported."
+msgstr "試著遵循 %sPHP date() 函式%s規格，但並不支援每一種格式。"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:46
+#: includes/Config/PluginSettingsGeneral.php:40
+msgid "Currency Symbol"
+msgstr "貨幣符號"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:57
+msgid "reCAPTCHA Settings"
+msgstr "reCAPTCHA 設定"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:62
+#: includes/Config/PluginSettingsReCaptcha.php:14
+msgid "reCAPTCHA Site Key"
+msgstr "reCAPTCHA 網站金鑰"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:63
+#: includes/Config/PluginSettingsReCaptcha.php:15
+#, php-format
+msgid "Get a site key for your domain by registering  %shere%s"
+msgstr "%s在這裡%s註冊以取得網域的網站金鑰"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:68
+#: includes/Config/PluginSettingsReCaptcha.php:27
+msgid "reCAPTCHA Secret Key"
+msgstr "reCAPTCHA 祕密金鑰"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:74
+#: includes/Config/PluginSettingsReCaptcha.php:40
+msgid "reCAPTCHA Language"
+msgstr "reCAPTCHA 語言"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:75
+#: includes/Config/PluginSettingsReCaptcha.php:41
+#, php-format
+msgid ""
+"Language used by reCAPTCHA. To get the code for your language click %shere%s"
+msgstr "reCAPTCHA 使用的語言。 要取得您語言的代碼請安一下%s這裡%s"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:94
+#: includes/Config/PluginSettingsAdvanced.php:15
+#, php-format
+msgid ""
+"If this box is checked, ALL Ninja Forms data will be removed from the "
+"database upon deletion. %sAll form and submission data will be unrecoverable."
+"%s"
+msgstr "如果已勾選此方塊，刪除 Ninja Form 也會一併移除「所有」Ninja Form 資料。 %s無法復原所有表單及提交項目資料。%s"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:104
+#: includes/Config/PluginSettingsAdvanced.php:42
+msgid "Disable Admin Notices"
+msgstr "停用管理員通知"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:105
+#: includes/Config/PluginSettingsAdvanced.php:43
+msgid ""
+"Never see an admin notice on the dashboard from Ninja Forms. Uncheck to see "
+"them again."
+msgstr "不要在 Ninja Form 儀表板上看到管理員通知。 取消勾選就能看到通知。"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:119
+#: includes/Config/PluginSettingsAdvanced.php:27
+msgid ""
+"This setting will COMPLETELY remove anything Ninja Forms related upon plugin "
+"deletion. This includes SUBMISSIONS and FORMS. It cannot be undone."
+msgstr "此設定會在刪除外掛程式時「完全」移除與 Ninja Form 相關的所有資料。 包括「提交項目」及「表單」。 此動作無法復原。"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:126
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:74
+msgid "Continue"
+msgstr "繼續"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:141
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:102
+msgid "Settings Saved"
+msgstr "已儲存設定"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:6
+msgid "Labels"
+msgstr "標籤"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:23
+msgid "Message Labels"
+msgstr "訊息標籤"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:28
+msgid "Required Field Label"
+msgstr "需要欄位標籤"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:35
+msgid "Required field symbol"
+msgstr "需要欄位符號"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:40
+msgid "Error message given if all required fields are not completed"
+msgstr "如果所有必要欄位都未完成， 則會出現錯誤訊息"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:45
+msgid "Required Field Error"
+msgstr "需要欄位標籤"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:51
+msgid "Anti-spam error message"
+msgstr "反垃圾錯誤訊息"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:57
+msgid "Honeypot error message"
+msgstr "Honeypot 錯誤訊息"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:63
+msgid "Timer error message"
+msgstr "計時錯誤訊息"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:69
+msgid "JavaScript disabled error message"
+msgstr "停用 JavaScript 錯誤訊息"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:75
+msgid "Please enter a valid email address"
+msgstr "請輸入有效的電子郵件地址"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:81
+msgid "Processing Submission Label"
+msgstr "處理提交項目標籤"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:82
+msgid ""
+"This message is shown inside the submit button whenever a user clicks "
+"\"submit\" to let them know it is processing."
+msgstr "當使用者按下「提交」時，會在提交按鈕中顯示此訊息，讓使用者知道正在處理提交。"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:87
+msgid "Password Mismatch Label"
+msgstr "密碼不符標籤"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:88
+msgid ""
+"This message is shown to a user when non-matching values are placed in the "
+"password field."
+msgstr "當密碼欄位出現了不相符的值時，會向使用者顯示此訊息。"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:4
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:21
+#: includes/Admin/Menus/Settings.php:26
+msgid "Licenses"
+msgstr "授權"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:60
+msgid "Save & Activate"
+msgstr "儲存並啟動"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:66
+msgid "Deactivate All Licenses"
+msgstr "取消啟動所有授權"
+
+#: deprecated/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:84
+#: includes/Templates/admin-menu-settings-licenses.html.php:3
+#, php-format
+msgid ""
+"To activate licenses for Ninja Forms extensions you must first %sinstall and "
+"activate%s the chosen extension. License settings will then appear below."
+msgstr "要啟動 Ninja Form 擴充功能的授權，您必須先%s安裝和啟動%s選取的擴充功能。 接著授權設定會在下方顯示。"
+
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:24
+msgid "Reset Forms Conversion"
+msgstr "重設表單轉換"
+
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:46
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:58
+msgid "Reset Form Conversion"
+msgstr "重設表單轉換"
+
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:60
+msgid ""
+"If your forms are \"missing\" after updating to 2.9, this button will "
+"attempt to reconvert your old forms to show them in 2.9.  All current forms "
+"will remain in the \"All Forms\" table."
+msgstr ""
+"如果您在更新至 2.9 之後表單「消失」，此按鈕會嘗試重新轉換您的舊表單，以便在 2.9 中顯示。  目前所有表單仍然位於「所有表單」表格中。"
+
+#: deprecated/includes/admin/upgrades/convert-forms-reset.php:65
+msgid ""
+"All current forms will remain in the \"All Forms\" table. In some cases some "
+"forms may be duplicated during this process."
+msgstr "目前所有表單仍然位於「所有表單」表格中。 在部分情況下，一些表單可能會在此程序期間加以複製。"
+
+#: deprecated/includes/admin/upgrades/convert-notifications.php:102
+#: includes/Config/FormActionDefaults.php:16
+#: includes/Config/MergeTagsSystem.php:14
+msgid "Admin Email"
+msgstr "管理者電郵地址"
+
+#: deprecated/includes/admin/upgrades/convert-notifications.php:194
+msgid "User Email"
+msgstr "使用者電子郵件"
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:31
+#, php-format
+msgid ""
+"Ninja Forms needs to upgrade your form notifications, click %shere%s to "
+"start the upgrade."
+msgstr "Ninja Form 需要升級您的表單通知，按一下%s這裡%s以開始升級。"
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:40
+#, php-format
+msgid ""
+"Ninja Forms needs to update your email settings, click %shere%s to start the "
+"upgrade."
+msgstr "Ninja Form 需要更新您的電子郵件設定，按一下%s這裡%s以開始升級。"
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:55
+#, php-format
+msgid ""
+"Ninja Forms needs to upgrade the submissions table, click %shere%s to start "
+"the upgrade."
+msgstr "Ninja Form 需要升級提交項目表格，按一下%s這裡%s以開始升級。"
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:64
+msgid ""
+"Thank you for updating to version 2.7 of Ninja Forms. Please update any "
+"Ninja Forms extensions from "
+msgstr "感謝您更新為 2.7 版本的 Ninja Form。 請更新所有 Ninja Form 擴充功能 "
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:70
+msgid ""
+"Your version of the Ninja Forms File Upload extension isn't compatible with "
+"version 2.7 of Ninja Forms. It needs to be at least version 1.3.5. Please "
+"update this extension at "
+msgstr ""
+"您的 Ninja Form 檔案上傳擴充功能與 2.7 版本的 Ninja Form 不相容。 至少需要 1.3.5 版本。 請在下列位置更新此擴充功能： "
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:74
+msgid ""
+"Your version of the Ninja Forms Save Progress extension isn't compatible "
+"with version 2.7 of Ninja Forms. It needs to be at least version 1.1.3. "
+"Please update this extension at "
+msgstr ""
+"您的 Ninja Form 儲存進度擴充功能與 2.7 版本的 Ninja Form 不相容。 至少需要 1.1.3 版本。 請在下列位置更新此擴充功能： "
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:80
+msgid "Updating Form Database"
+msgstr "更新表單資料庫"
+
+#: deprecated/includes/admin/upgrades/upgrade-functions.php:82
+#, php-format
+msgid ""
+"Ninja Forms needs to upgrade your form settings, click %shere%s to start the "
+"upgrade."
+msgstr "Ninja Form 需要升級您的表單設定，按一下%s這裡%s以開始升級。"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:3
+msgid "Ninja Forms Upgrade Processing"
+msgstr "Ninja Form 升級處理"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:41
+#, php-format
+msgid "Please %scontact support%s with the error seen above."
+msgstr "請%s聯絡支援中心%s以協助處理出現的錯誤。"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:52
+msgid "Ninja Forms has completed all available upgrades!"
+msgstr "Ninja Form 已完成所有可用的更新！"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.html.php:56
+msgid "Go to Forms"
+msgstr "前往表單"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.php:17
+msgid "Ninja Forms Upgrade"
+msgstr "Ninja Form 升級"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.php:18
+#: deprecated/upgrade/class-submenu.php:56
+msgid "Upgrade"
+msgstr "升級"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.php:68
+msgid "Upgrades Complete"
+msgstr "升級完成"
+
+#: deprecated/includes/admin/upgrades/upgrade-handler-page.php:113
+#, php-format
+msgid ""
+"Ninja Forms needs to process %s upgrade(s). This may take a few minutes to "
+"complete. %sStart Upgrade%s"
+msgstr "Ninja Form 需要處理 %s 個更新。 此操作可能需要幾分鐘。 %s開始升級%s"
+
+#: deprecated/includes/admin/upgrades/upgrades.php:41
+#, php-format
+msgid "Step %d of approximately %d running"
+msgstr "步驟 %d，大約有 %d 個正在執行"
+
+#: deprecated/includes/classes/class-nf-system-status.php:36
+msgid "Ninja Forms System Status"
+msgstr "Ninja Form 系統狀態"
+
+#: deprecated/includes/display/scripts.php:274
+#: deprecated/includes/fields/password.php:128
+msgid "Strength indicator"
+msgstr "強度指示器"
+
+#: deprecated/includes/display/scripts.php:275
+msgid "Very weak"
+msgstr "非常弱"
+
+#: deprecated/includes/display/scripts.php:276
+msgid "Weak"
+msgstr "弱"
+
+#: deprecated/includes/display/scripts.php:278
+msgid "Medium"
+msgstr "中"
+
+#: deprecated/includes/display/scripts.php:279
+msgid "Strong"
+msgstr "强"
+
+#: deprecated/includes/display/scripts.php:280
+msgid "Mismatch"
+msgstr "不符合"
+
+#: deprecated/includes/display/fields/list-term-filter.php:51
+#: deprecated/includes/fields/country.php:11
+msgid "- Select One"
+msgstr "- 選取一個"
+
+#: deprecated/includes/display/form/honeypot.php:14
+#: deprecated/includes/fields/honeypot.php:10
+msgid "If you are a human and are seeing this field, please leave it blank."
+msgstr "如果您不是機器人而且看得到此欄位，請留白。"
+
+#: deprecated/includes/display/form/required-label.php:16
+msgid "Fields marked with a * are required."
+msgstr "標有 * 為必填欄位。"
+
+#: deprecated/includes/display/processing/req-fields-pre-process.php:65
+#: includes/Config/i18nFrontEnd.php:15
+msgid "This is a required field."
+msgstr "這是必填欄位。"
+
+#: deprecated/includes/display/processing/req-fields-pre-process.php:71
+msgid "Please check required fields."
+msgstr "請檢查所有必填欄位。"
+
+#: deprecated/includes/fields/calc.php:10
+#: deprecated/includes/fields/calc.php:70
+#: deprecated/includes/fields/calc.php:111
+msgid "Calculation"
+msgstr "計算"
+
+#: deprecated/includes/fields/calc.php:42
+msgid "Number of decimal places."
+msgstr "小數點數目。"
+
+#: deprecated/includes/fields/calc.php:94
+#: deprecated/includes/fields/textbox.php:4 includes/Database/MockData.php:356
+#: includes/Database/MockData.php:361 includes/Database/MockData.php:521
+#: includes/Templates/admin-menu-forms.html.php:48
+#: includes/Templates/admin-menu-forms.html.php:49
+#: includes/Templates/admin-menu-forms.html.php:50
+#: includes/Templates/admin-menu-forms.html.php:51
+#: includes/Templates/admin-menu-forms.html.php:52
+#: includes/Templates/admin-menu-forms.html.php:58
+#: includes/Templates/admin-menu-forms.html.php:86
+#: includes/Templates/admin-menu-forms.html.php:114
+#: includes/Templates/admin-menu-forms.html.php:142
+#: includes/Templates/admin-menu-forms.html.php:170
+msgid "Textbox"
+msgstr "文字方塊"
+
+#: deprecated/includes/fields/calc.php:100
+msgid "Output calculation as"
+msgstr "將計算輸出為"
+
+#: deprecated/includes/fields/calc.php:113
+#: deprecated/includes/fields/list.php:98
+#: deprecated/includes/fields/list.php:193
+#: deprecated/includes/fields/list.php:585
+#: deprecated/includes/fields/timed-submit.php:9
+#: deprecated/includes/fields/timed-submit.php:17
+#: includes/Config/FieldSettings.php:21 includes/Config/FieldSettings.php:164
+#: includes/Config/FieldSettings.php:618 includes/Config/FieldSettings.php:634
+#: includes/Config/FieldSettings.php:960
+msgid "Label"
+msgstr "標籤"
+
+#: deprecated/includes/fields/calc.php:135
+msgid "Disable input?"
+msgstr "停用輸入？"
+
+#: deprecated/includes/fields/calc.php:151
+msgid ""
+"Use the following shortcode to insert the final calculation: "
+"[ninja_forms_calc]"
+msgstr "使用下列短碼插入最終計算： [ninja_forms_calc]"
+
+#: deprecated/includes/fields/calc.php:188
+#, php-format
+msgid ""
+"You can enter calculation equations here using field_x where x is the ID of "
+"the field you want to use. For example, %sfield_53 + field_28 + field_65%s."
+msgstr ""
+"您可以在此使用 field_x 輸入計算等式，其中 x 表示您要使用的欄位 ID。 例如，%sfield_53 + field_28 + field_65%s。"
+
+#: deprecated/includes/fields/calc.php:189
+#, php-format
+msgid ""
+"Complex equations can be created by adding parentheses: %s( field_45 * "
+"field_2 ) / 2%s."
+msgstr "您可以新增括弧來建立複雜等式： %s( field_45 * field_2 ) / 2%s。"
+
+#: deprecated/includes/fields/calc.php:190
+msgid ""
+"Please use these operators: + - * /. This is an advanced feature. Watch out "
+"for things like division by 0."
+msgstr "請使用這些運算子： + - * /。 這是進階功能。 特別注意用 0 相除的項目。"
+
+#: deprecated/includes/fields/calc.php:192
+msgid "Automatically Total Calculation Values"
+msgstr "自動加總值"
+
+#: deprecated/includes/fields/calc.php:193
+msgid "Specify Operations And Fields (Advanced)"
+msgstr "指定操作和欄位 (進階)"
+
+#: deprecated/includes/fields/calc.php:194
+msgid "Use An Equation (Advanced)"
+msgstr "使用等式 (進階)"
+
+#: deprecated/includes/fields/calc.php:196
+msgid "Calculation Method"
+msgstr "計算方法"
+
+#: deprecated/includes/fields/calc.php:202
+msgid "Field Operations"
+msgstr "欄位操作"
+
+#: deprecated/includes/fields/calc.php:202
+msgid "Add Operation"
+msgstr "新增操作"
+
+#: deprecated/includes/fields/calc.php:220
+msgid "Advanced Equation"
+msgstr "進階等式"
+
+#: deprecated/includes/fields/calc.php:238
+msgid "Calculation name"
+msgstr "計算名稱"
+
+#: deprecated/includes/fields/calc.php:238
+msgid ""
+"This is the programmatic name of your field. Examples are: my_calc, "
+"price_total, user-total."
+msgstr "這是您欄位的程式設計名稱。  範例為：my_calc、price_total、user-total。"
+
+#: deprecated/includes/fields/calc.php:239
+#: deprecated/includes/fields/checkbox.php:19
+#: deprecated/includes/fields/desc.php:11
+#: deprecated/includes/fields/hidden.php:53
+#: deprecated/includes/fields/number.php:69
+#: deprecated/includes/fields/number.php:83
+#: deprecated/includes/fields/textarea.php:11
+#: deprecated/includes/fields/textbox.php:122
+#: includes/Config/FieldSettings.php:129 includes/Config/FieldSettings.php:326
+#: includes/Fields/ListCountry.php:30
+msgid "Default Value"
+msgstr "預設值"
+
+#: deprecated/includes/fields/calc.php:275
+msgid "Custom CSS Class"
+msgstr "自訂 CSS 類別"
+
+#: deprecated/includes/fields/calc.php:392
+msgid "- Select a Field"
+msgstr "- 選取欄位"
+
+#: deprecated/includes/fields/checkbox.php:4 includes/Database/MockData.php:443
+#: includes/Database/MockData.php:531
+#: includes/Templates/admin-menu-forms.html.php:64
+#: includes/Templates/admin-menu-forms.html.php:92
+#: includes/Templates/admin-menu-forms.html.php:120
+#: includes/Templates/admin-menu-forms.html.php:148
+#: includes/Templates/admin-menu-forms.html.php:176
+msgid "Checkbox"
+msgstr "勾選方塊"
+
+#: deprecated/includes/fields/checkbox.php:10
+#: includes/Config/FieldSettings.php:132
+msgid "Unchecked"
+msgstr "取消勾選"
+
+#: deprecated/includes/fields/checkbox.php:14
+#: includes/Config/FieldSettings.php:136
+msgid "Checked"
+msgstr "已勾選"
+
+#: deprecated/includes/fields/checkbox.php:44
+#: deprecated/includes/fields/list.php:35
+#: deprecated/includes/fields/recaptcha.php:25
+msgid "Show This"
+msgstr "顯示此項目"
+
+#: deprecated/includes/fields/checkbox.php:49
+#: deprecated/includes/fields/list.php:40
+#: deprecated/includes/fields/recaptcha.php:30
+msgid "Hide This"
+msgstr "隱藏此項目"
+
+#: deprecated/includes/fields/checkbox.php:54
+#: deprecated/includes/fields/hidden.php:23
+msgid "Change Value"
+msgstr "變更值"
+
+#: deprecated/includes/fields/country.php:12
+#: deprecated/includes/fields/country.php:315
+#: includes/Config/CountryList.php:11
+msgid "Afghanistan"
+msgstr "阿富汗"
+
+#: deprecated/includes/fields/country.php:13
+#: deprecated/includes/fields/country.php:316
+#: includes/Config/CountryList.php:12
+msgid "Albania"
+msgstr "阿爾巴尼亞"
+
+#: deprecated/includes/fields/country.php:14
+#: deprecated/includes/fields/country.php:317
+#: includes/Config/CountryList.php:13
+msgid "Algeria"
+msgstr "阿爾及利亞"
+
+#: deprecated/includes/fields/country.php:15
+#: deprecated/includes/fields/country.php:318
+#: includes/Config/CountryList.php:14
+msgid "American Samoa"
+msgstr "美屬薩摩亞"
+
+#: deprecated/includes/fields/country.php:16
+#: deprecated/includes/fields/country.php:319
+#: includes/Config/CountryList.php:15
+msgid "Andorra"
+msgstr "安道爾"
+
+#: deprecated/includes/fields/country.php:17
+#: deprecated/includes/fields/country.php:320
+#: includes/Config/CountryList.php:16
+msgid "Angola"
+msgstr "安哥拉"
+
+#: deprecated/includes/fields/country.php:18
+#: deprecated/includes/fields/country.php:321
+#: includes/Config/CountryList.php:17
+msgid "Anguilla"
+msgstr "安圭拉"
+
+#: deprecated/includes/fields/country.php:19
+#: deprecated/includes/fields/country.php:322
+#: includes/Config/CountryList.php:18
+msgid "Antarctica"
+msgstr "南極洲"
+
+#: deprecated/includes/fields/country.php:20
+#: deprecated/includes/fields/country.php:323
+#: includes/Config/CountryList.php:19
+msgid "Antigua And Barbuda"
+msgstr "安提瓜和巴布達"
+
+#: deprecated/includes/fields/country.php:21
+#: deprecated/includes/fields/country.php:324
+#: includes/Config/CountryList.php:20
+msgid "Argentina"
+msgstr "阿根廷"
+
+#: deprecated/includes/fields/country.php:22
+#: deprecated/includes/fields/country.php:325
+#: includes/Config/CountryList.php:21
+msgid "Armenia"
+msgstr "亞美尼亞"
+
+#: deprecated/includes/fields/country.php:23
+#: deprecated/includes/fields/country.php:326
+#: includes/Config/CountryList.php:22
+msgid "Aruba"
+msgstr "阿魯巴"
+
+#: deprecated/includes/fields/country.php:24
+#: deprecated/includes/fields/country.php:327
+#: includes/Config/CountryList.php:23
+msgid "Australia"
+msgstr "澳大利亞"
+
+#: deprecated/includes/fields/country.php:25
+#: deprecated/includes/fields/country.php:328
+#: includes/Config/CountryList.php:24
+msgid "Austria"
+msgstr "奧地利"
+
+#: deprecated/includes/fields/country.php:26
+#: deprecated/includes/fields/country.php:329
+#: includes/Config/CountryList.php:25
+msgid "Azerbaijan"
+msgstr "阿塞拜疆"
+
+#: deprecated/includes/fields/country.php:27
+#: deprecated/includes/fields/country.php:330
+#: includes/Config/CountryList.php:26
+msgid "Bahamas"
+msgstr "巴哈馬"
+
+#: deprecated/includes/fields/country.php:28
+#: deprecated/includes/fields/country.php:331
+#: includes/Config/CountryList.php:27
+msgid "Bahrain"
+msgstr "巴林"
+
+#: deprecated/includes/fields/country.php:29
+#: deprecated/includes/fields/country.php:332
+#: includes/Config/CountryList.php:28
+msgid "Bangladesh"
+msgstr "孟加拉國"
+
+#: deprecated/includes/fields/country.php:30
+#: deprecated/includes/fields/country.php:333
+#: includes/Config/CountryList.php:29
+msgid "Barbados"
+msgstr "巴巴多斯"
+
+#: deprecated/includes/fields/country.php:31
+#: deprecated/includes/fields/country.php:334
+#: includes/Config/CountryList.php:30
+msgid "Belarus"
+msgstr "白俄羅斯"
+
+#: deprecated/includes/fields/country.php:32
+#: deprecated/includes/fields/country.php:335
+#: includes/Config/CountryList.php:31
+msgid "Belgium"
+msgstr "比利時"
+
+#: deprecated/includes/fields/country.php:33
+#: deprecated/includes/fields/country.php:336
+#: includes/Config/CountryList.php:32
+msgid "Belize"
+msgstr "伯利茲"
+
+#: deprecated/includes/fields/country.php:34
+#: deprecated/includes/fields/country.php:337
+#: includes/Config/CountryList.php:33
+msgid "Benin"
+msgstr "貝寧"
+
+#: deprecated/includes/fields/country.php:35
+#: deprecated/includes/fields/country.php:338
+#: includes/Config/CountryList.php:34
+msgid "Bermuda"
+msgstr "百慕大"
+
+#: deprecated/includes/fields/country.php:36
+#: deprecated/includes/fields/country.php:339
+#: includes/Config/CountryList.php:35
+msgid "Bhutan"
+msgstr "不丹"
+
+#: deprecated/includes/fields/country.php:37
+#: deprecated/includes/fields/country.php:340
+#: includes/Config/CountryList.php:36
+msgid "Bolivia"
+msgstr "玻利維亞"
+
+#: deprecated/includes/fields/country.php:38
+#: deprecated/includes/fields/country.php:341
+#: includes/Config/CountryList.php:37
+msgid "Bosnia And Herzegowina"
+msgstr "波士尼亞與赫塞哥維納"
+
+#: deprecated/includes/fields/country.php:39
+#: deprecated/includes/fields/country.php:342
+#: includes/Config/CountryList.php:38
+msgid "Botswana"
+msgstr "博茨瓦納"
+
+#: deprecated/includes/fields/country.php:40
+#: deprecated/includes/fields/country.php:343
+#: includes/Config/CountryList.php:39
+msgid "Bouvet Island"
+msgstr "布威島"
+
+#: deprecated/includes/fields/country.php:41
+#: deprecated/includes/fields/country.php:344
+#: includes/Config/CountryList.php:40
+msgid "Brazil"
+msgstr "巴西"
+
+#: deprecated/includes/fields/country.php:42
+#: deprecated/includes/fields/country.php:345
+#: includes/Config/CountryList.php:41
+msgid "British Indian Ocean Territory"
+msgstr "英屬印度洋領地"
+
+#: deprecated/includes/fields/country.php:43
+#: deprecated/includes/fields/country.php:346
+#: includes/Config/CountryList.php:42
+msgid "Brunei Darussalam"
+msgstr "汶萊"
+
+#: deprecated/includes/fields/country.php:44
+#: deprecated/includes/fields/country.php:347
+#: includes/Config/CountryList.php:43
+msgid "Bulgaria"
+msgstr "保加利亞"
+
+#: deprecated/includes/fields/country.php:45
+#: deprecated/includes/fields/country.php:348
+#: includes/Config/CountryList.php:44
+msgid "Burkina Faso"
+msgstr "布基納法索"
+
+#: deprecated/includes/fields/country.php:46
+#: deprecated/includes/fields/country.php:349
+#: includes/Config/CountryList.php:45
+msgid "Burundi"
+msgstr "布隆迪"
+
+#: deprecated/includes/fields/country.php:47
+#: deprecated/includes/fields/country.php:350
+#: includes/Config/CountryList.php:46
+msgid "Cambodia"
+msgstr "柬埔寨"
+
+#: deprecated/includes/fields/country.php:48
+#: deprecated/includes/fields/country.php:351
+#: includes/Config/CountryList.php:47
+msgid "Cameroon"
+msgstr "喀麥隆"
+
+#: deprecated/includes/fields/country.php:49
+#: deprecated/includes/fields/country.php:352
+#: includes/Config/CountryList.php:48
+msgid "Canada"
+msgstr "加拿大"
+
+#: deprecated/includes/fields/country.php:50
+#: deprecated/includes/fields/country.php:353
+#: includes/Config/CountryList.php:49
+msgid "Cape Verde"
+msgstr "佛得角"
+
+#: deprecated/includes/fields/country.php:51
+#: deprecated/includes/fields/country.php:354
+#: includes/Config/CountryList.php:50
+msgid "Cayman Islands"
+msgstr "開曼群島"
+
+#: deprecated/includes/fields/country.php:52
+#: deprecated/includes/fields/country.php:355
+#: includes/Config/CountryList.php:51
+msgid "Central African Republic"
+msgstr "中非共和國"
+
+#: deprecated/includes/fields/country.php:53
+#: deprecated/includes/fields/country.php:356
+#: includes/Config/CountryList.php:52
+msgid "Chad"
+msgstr "乍得"
+
+#: deprecated/includes/fields/country.php:54
+#: deprecated/includes/fields/country.php:357
+#: includes/Config/CountryList.php:53
+msgid "Chile"
+msgstr "智利"
+
+#: deprecated/includes/fields/country.php:55
+#: deprecated/includes/fields/country.php:358
+#: includes/Config/CountryList.php:54
+msgid "China"
+msgstr "中國"
+
+#: deprecated/includes/fields/country.php:56
+#: deprecated/includes/fields/country.php:359
+#: includes/Config/CountryList.php:55
+msgid "Christmas Island"
+msgstr "聖誕島"
+
+#: deprecated/includes/fields/country.php:57
+#: deprecated/includes/fields/country.php:360
+#: includes/Config/CountryList.php:56
+msgid "Cocos (Keeling) Islands"
+msgstr "科科斯群島"
+
+#: deprecated/includes/fields/country.php:58
+#: deprecated/includes/fields/country.php:361
+#: includes/Config/CountryList.php:57
+msgid "Colombia"
+msgstr "哥倫比亞"
+
+#: deprecated/includes/fields/country.php:59
+#: deprecated/includes/fields/country.php:362
+#: includes/Config/CountryList.php:58
+msgid "Comoros"
+msgstr "科摩羅"
+
+#: deprecated/includes/fields/country.php:60
+#: deprecated/includes/fields/country.php:363
+#: includes/Config/CountryList.php:59
+msgid "Congo"
+msgstr "剛果"
+
+#: deprecated/includes/fields/country.php:61
+#: deprecated/includes/fields/country.php:364
+#: includes/Config/CountryList.php:60
+msgid "Congo, The Democratic Republic Of The"
+msgstr "剛果民主共和國"
+
+#: deprecated/includes/fields/country.php:62
+#: deprecated/includes/fields/country.php:365
+#: includes/Config/CountryList.php:61
+msgid "Cook Islands"
+msgstr "庫克群島"
+
+#: deprecated/includes/fields/country.php:63
+#: deprecated/includes/fields/country.php:366
+#: includes/Config/CountryList.php:62
+msgid "Costa Rica"
+msgstr "哥斯達黎加"
+
+#: deprecated/includes/fields/country.php:64
+#: deprecated/includes/fields/country.php:367
+#: includes/Config/CountryList.php:63
+msgid "Cote D'Ivoire"
+msgstr "象牙海岸"
+
+#: deprecated/includes/fields/country.php:65
+#: deprecated/includes/fields/country.php:368
+#: includes/Config/CountryList.php:64
+msgid "Croatia (Local Name: Hrvatska)"
+msgstr "克羅埃西亞 (本地名稱： Hrvatska)"
+
+#: deprecated/includes/fields/country.php:66
+#: deprecated/includes/fields/country.php:369
+#: includes/Config/CountryList.php:65
+msgid "Cuba"
+msgstr "古巴"
+
+#: deprecated/includes/fields/country.php:67
+#: deprecated/includes/fields/country.php:370
+#: includes/Config/CountryList.php:66
+msgid "Cyprus"
+msgstr "塞浦路斯"
+
+#: deprecated/includes/fields/country.php:68
+#: deprecated/includes/fields/country.php:371
+#: includes/Config/CountryList.php:67
+msgid "Czech Republic"
+msgstr "捷克共和國"
+
+#: deprecated/includes/fields/country.php:69
+#: deprecated/includes/fields/country.php:372
+#: includes/Config/CountryList.php:68
+msgid "Denmark"
+msgstr "丹麥"
+
+#: deprecated/includes/fields/country.php:70
+#: deprecated/includes/fields/country.php:373
+#: includes/Config/CountryList.php:69
+msgid "Djibouti"
+msgstr "吉布提"
+
+#: deprecated/includes/fields/country.php:71
+#: deprecated/includes/fields/country.php:374
+#: includes/Config/CountryList.php:70
+msgid "Dominica"
+msgstr "多米尼加"
+
+#: deprecated/includes/fields/country.php:72
+#: deprecated/includes/fields/country.php:375
+#: includes/Config/CountryList.php:71
+msgid "Dominican Republic"
+msgstr "多米尼加共和國"
+
+#: deprecated/includes/fields/country.php:73
+#: deprecated/includes/fields/country.php:376
+#: includes/Config/CountryList.php:72
+msgid "Timor-Leste (East Timor)"
+msgstr "東帝汶"
+
+#: deprecated/includes/fields/country.php:74
+#: deprecated/includes/fields/country.php:377
+#: includes/Config/CountryList.php:73
+msgid "Ecuador"
+msgstr "厄瓜多爾"
+
+#: deprecated/includes/fields/country.php:75
+#: deprecated/includes/fields/country.php:378
+#: includes/Config/CountryList.php:74
+msgid "Egypt"
+msgstr "埃及"
+
+#: deprecated/includes/fields/country.php:76
+#: deprecated/includes/fields/country.php:379
+#: includes/Config/CountryList.php:75
+msgid "El Salvador"
+msgstr "薩爾瓦多"
+
+#: deprecated/includes/fields/country.php:77
+#: deprecated/includes/fields/country.php:380
+#: includes/Config/CountryList.php:76
+msgid "Equatorial Guinea"
+msgstr "赤道幾內亞"
+
+#: deprecated/includes/fields/country.php:78
+#: deprecated/includes/fields/country.php:381
+#: includes/Config/CountryList.php:77
+msgid "Eritrea"
+msgstr "厄立特里亞"
+
+#: deprecated/includes/fields/country.php:79
+#: deprecated/includes/fields/country.php:382
+#: includes/Config/CountryList.php:78
+msgid "Estonia"
+msgstr "愛沙尼亞"
+
+#: deprecated/includes/fields/country.php:80
+#: deprecated/includes/fields/country.php:383
+#: includes/Config/CountryList.php:79
+msgid "Ethiopia"
+msgstr "埃塞俄比亞"
+
+#: deprecated/includes/fields/country.php:81
+#: deprecated/includes/fields/country.php:384
+#: includes/Config/CountryList.php:80
+msgid "Falkland Islands (Malvinas)"
+msgstr "福克蘭群島"
+
+#: deprecated/includes/fields/country.php:82
+#: deprecated/includes/fields/country.php:385
+#: includes/Config/CountryList.php:81
+msgid "Faroe Islands"
+msgstr "法羅群島"
+
+#: deprecated/includes/fields/country.php:83
+#: deprecated/includes/fields/country.php:386
+#: includes/Config/CountryList.php:82
+msgid "Fiji"
+msgstr "斐"
+
+#: deprecated/includes/fields/country.php:84
+#: deprecated/includes/fields/country.php:387
+#: includes/Config/CountryList.php:83
+msgid "Finland"
+msgstr "芬蘭"
+
+#: deprecated/includes/fields/country.php:85
+#: deprecated/includes/fields/country.php:388
+#: includes/Config/CountryList.php:84
+msgid "France"
+msgstr "法國"
+
+#: deprecated/includes/fields/country.php:86
+#: deprecated/includes/fields/country.php:389
+#: includes/Config/CountryList.php:85
+msgid "France, Metropolitan"
+msgstr "法國本土"
+
+#: deprecated/includes/fields/country.php:87
+#: deprecated/includes/fields/country.php:390
+#: includes/Config/CountryList.php:86
+msgid "French Guiana"
+msgstr "法屬圭亞那"
+
+#: deprecated/includes/fields/country.php:88
+#: deprecated/includes/fields/country.php:391
+#: includes/Config/CountryList.php:87
+msgid "French Polynesia"
+msgstr "法屬波利尼西亞"
+
+#: deprecated/includes/fields/country.php:89
+#: deprecated/includes/fields/country.php:392
+#: includes/Config/CountryList.php:88
+msgid "French Southern Territories"
+msgstr "法國南部領土"
+
+#: deprecated/includes/fields/country.php:90
+#: deprecated/includes/fields/country.php:393
+#: includes/Config/CountryList.php:89
+msgid "Gabon"
+msgstr "加蓬"
+
+#: deprecated/includes/fields/country.php:91
+#: deprecated/includes/fields/country.php:394
+#: includes/Config/CountryList.php:90
+msgid "Gambia"
+msgstr "岡比亞"
+
+#: deprecated/includes/fields/country.php:92
+#: deprecated/includes/fields/country.php:395
+#: includes/Config/CountryList.php:91
+msgid "Georgia"
+msgstr "喬治亞州"
+
+#: deprecated/includes/fields/country.php:93
+#: deprecated/includes/fields/country.php:396
+#: includes/Config/CountryList.php:92
+msgid "Germany"
+msgstr "德國"
+
+#: deprecated/includes/fields/country.php:94
+#: deprecated/includes/fields/country.php:397
+#: includes/Config/CountryList.php:93
+msgid "Ghana"
+msgstr "加納"
+
+#: deprecated/includes/fields/country.php:95
+#: deprecated/includes/fields/country.php:398
+#: includes/Config/CountryList.php:94
+msgid "Gibraltar"
+msgstr "直布羅陀"
+
+#: deprecated/includes/fields/country.php:96
+#: deprecated/includes/fields/country.php:399
+#: includes/Config/CountryList.php:95
+msgid "Greece"
+msgstr "希臘"
+
+#: deprecated/includes/fields/country.php:97
+#: deprecated/includes/fields/country.php:400
+#: includes/Config/CountryList.php:96
+msgid "Greenland"
+msgstr "格陵蘭"
+
+#: deprecated/includes/fields/country.php:98
+#: deprecated/includes/fields/country.php:401
+#: includes/Config/CountryList.php:97
+msgid "Grenada"
+msgstr "格林納達"
+
+#: deprecated/includes/fields/country.php:99
+#: deprecated/includes/fields/country.php:402
+#: includes/Config/CountryList.php:98
+msgid "Guadeloupe"
+msgstr "瓜德羅普島"
+
+#: deprecated/includes/fields/country.php:100
+#: deprecated/includes/fields/country.php:403
+#: includes/Config/CountryList.php:99
+msgid "Guam"
+msgstr "關島"
+
+#: deprecated/includes/fields/country.php:101
+#: deprecated/includes/fields/country.php:404
+#: includes/Config/CountryList.php:100
+msgid "Guatemala"
+msgstr "危地馬拉"
+
+#: deprecated/includes/fields/country.php:102
+#: deprecated/includes/fields/country.php:405
+#: includes/Config/CountryList.php:101
+msgid "Guinea"
+msgstr "幾內亞"
+
+#: deprecated/includes/fields/country.php:103
+#: deprecated/includes/fields/country.php:406
+#: includes/Config/CountryList.php:102
+msgid "Guinea-Bissau"
+msgstr "幾內亞比紹"
+
+#: deprecated/includes/fields/country.php:104
+#: deprecated/includes/fields/country.php:407
+#: includes/Config/CountryList.php:103
+msgid "Guyana"
+msgstr "圭亞那"
+
+#: deprecated/includes/fields/country.php:105
+#: deprecated/includes/fields/country.php:408
+#: includes/Config/CountryList.php:104
+msgid "Haiti"
+msgstr "海地"
+
+#: deprecated/includes/fields/country.php:106
+#: deprecated/includes/fields/country.php:409
+#: includes/Config/CountryList.php:105
+msgid "Heard And Mc Donald Islands"
+msgstr "赫德島和麥克唐納群島"
+
+#: deprecated/includes/fields/country.php:107
+#: deprecated/includes/fields/country.php:410
+#: includes/Config/CountryList.php:106
+msgid "Holy See (Vatican City State)"
+msgstr "教廷 (梵締岡)"
+
+#: deprecated/includes/fields/country.php:108
+#: deprecated/includes/fields/country.php:411
+#: includes/Config/CountryList.php:107
+msgid "Honduras"
+msgstr "洪都拉斯"
+
+#: deprecated/includes/fields/country.php:109
+#: deprecated/includes/fields/country.php:412
+#: includes/Config/CountryList.php:108
+msgid "Hong Kong"
+msgstr "香港"
+
+#: deprecated/includes/fields/country.php:110
+#: deprecated/includes/fields/country.php:413
+#: includes/Config/CountryList.php:109
+msgid "Hungary"
+msgstr "匈牙利"
+
+#: deprecated/includes/fields/country.php:111
+#: deprecated/includes/fields/country.php:414
+#: includes/Config/CountryList.php:110
+msgid "Iceland"
+msgstr "冰島"
+
+#: deprecated/includes/fields/country.php:112
+#: deprecated/includes/fields/country.php:415
+#: includes/Config/CountryList.php:111
+msgid "India"
+msgstr "印度"
+
+#: deprecated/includes/fields/country.php:113
+#: deprecated/includes/fields/country.php:416
+#: includes/Config/CountryList.php:112
+msgid "Indonesia"
+msgstr "印尼"
+
+#: deprecated/includes/fields/country.php:114
+#: deprecated/includes/fields/country.php:417
+#: includes/Config/CountryList.php:113
+msgid "Iran (Islamic Republic Of)"
+msgstr "伊朗 (伊斯蘭共和國 )"
+
+#: deprecated/includes/fields/country.php:115
+#: deprecated/includes/fields/country.php:418
+#: includes/Config/CountryList.php:114
+msgid "Iraq"
+msgstr "伊拉克"
+
+#: deprecated/includes/fields/country.php:116
+#: deprecated/includes/fields/country.php:419
+#: includes/Config/CountryList.php:115
+msgid "Ireland"
+msgstr "愛爾蘭"
+
+#: deprecated/includes/fields/country.php:117
+#: deprecated/includes/fields/country.php:420
+#: includes/Config/CountryList.php:116
+msgid "Israel"
+msgstr "以色列"
+
+#: deprecated/includes/fields/country.php:118
+#: deprecated/includes/fields/country.php:421
+#: includes/Config/CountryList.php:117
+msgid "Italy"
+msgstr "意大利"
+
+#: deprecated/includes/fields/country.php:119
+#: deprecated/includes/fields/country.php:422
+#: includes/Config/CountryList.php:118
+msgid "Jamaica"
+msgstr "牙買加"
+
+#: deprecated/includes/fields/country.php:120
+#: deprecated/includes/fields/country.php:423
+#: includes/Config/CountryList.php:119
+msgid "Japan"
+msgstr "日本"
+
+#: deprecated/includes/fields/country.php:121
+#: deprecated/includes/fields/country.php:424
+#: includes/Config/CountryList.php:120
+msgid "Jordan"
+msgstr "約旦"
+
+#: deprecated/includes/fields/country.php:122
+#: deprecated/includes/fields/country.php:425
+#: includes/Config/CountryList.php:121
+msgid "Kazakhstan"
+msgstr "哈薩克斯坦"
+
+#: deprecated/includes/fields/country.php:123
+#: deprecated/includes/fields/country.php:426
+#: includes/Config/CountryList.php:122
+msgid "Kenya"
+msgstr "肯尼亞"
+
+#: deprecated/includes/fields/country.php:124
+#: deprecated/includes/fields/country.php:427
+#: includes/Config/CountryList.php:123
+msgid "Kiribati"
+msgstr "基里巴斯"
+
+#: deprecated/includes/fields/country.php:125
+#: deprecated/includes/fields/country.php:428
+#: includes/Config/CountryList.php:124
+msgid "Korea, Democratic People's Republic Of"
+msgstr "韓國，朝鮮民主主義人民共和國"
+
+#: deprecated/includes/fields/country.php:126
+#: deprecated/includes/fields/country.php:429
+#: includes/Config/CountryList.php:125
+msgid "Korea, Republic Of"
+msgstr "大韓民國"
+
+#: deprecated/includes/fields/country.php:127
+#: deprecated/includes/fields/country.php:430
+#: includes/Config/CountryList.php:126
+msgid "Kuwait"
+msgstr "科威特"
+
+#: deprecated/includes/fields/country.php:128
+#: deprecated/includes/fields/country.php:431
+#: includes/Config/CountryList.php:127
+msgid "Kyrgyzstan"
+msgstr "吉爾吉斯斯坦"
+
+#: deprecated/includes/fields/country.php:129
+#: deprecated/includes/fields/country.php:432
+#: includes/Config/CountryList.php:128
+msgid "Lao People's Democratic Republic"
+msgstr "寮人民民主共和國"
+
+#: deprecated/includes/fields/country.php:130
+#: deprecated/includes/fields/country.php:433
+#: includes/Config/CountryList.php:129
+msgid "Latvia"
+msgstr "拉脫維亞"
+
+#: deprecated/includes/fields/country.php:131
+#: deprecated/includes/fields/country.php:434
+#: includes/Config/CountryList.php:130
+msgid "Lebanon"
+msgstr "黎巴嫩"
+
+#: deprecated/includes/fields/country.php:132
+#: deprecated/includes/fields/country.php:435
+#: includes/Config/CountryList.php:131
+msgid "Lesotho"
+msgstr "萊索托"
+
+#: deprecated/includes/fields/country.php:133
+#: deprecated/includes/fields/country.php:436
+#: includes/Config/CountryList.php:132
+msgid "Liberia"
+msgstr "利比里亞"
+
+#: deprecated/includes/fields/country.php:134
+#: deprecated/includes/fields/country.php:437
+#: includes/Config/CountryList.php:133
+msgid "Libyan Arab Jamahiriya"
+msgstr "利比亞阿拉伯群眾國"
+
+#: deprecated/includes/fields/country.php:135
+#: deprecated/includes/fields/country.php:438
+#: includes/Config/CountryList.php:134
+msgid "Liechtenstein"
+msgstr "列支敦士登"
+
+#: deprecated/includes/fields/country.php:136
+#: deprecated/includes/fields/country.php:439
+#: includes/Config/CountryList.php:135
+msgid "Lithuania"
+msgstr "立陶宛"
+
+#: deprecated/includes/fields/country.php:137
+#: deprecated/includes/fields/country.php:440
+#: includes/Config/CountryList.php:136
+msgid "Luxembourg"
+msgstr "盧森堡"
+
+#: deprecated/includes/fields/country.php:138
+#: deprecated/includes/fields/country.php:441
+#: includes/Config/CountryList.php:137
+msgid "Macau"
+msgstr "澳門"
+
+#: deprecated/includes/fields/country.php:139
+#: deprecated/includes/fields/country.php:442
+#: includes/Config/CountryList.php:138
+msgid "Macedonia, Former Yugoslav Republic Of"
+msgstr "馬其頓，前南斯拉夫共和國"
+
+#: deprecated/includes/fields/country.php:140
+#: deprecated/includes/fields/country.php:443
+#: includes/Config/CountryList.php:139
+msgid "Madagascar"
+msgstr "馬達加斯加"
+
+#: deprecated/includes/fields/country.php:141
+#: deprecated/includes/fields/country.php:444
+#: includes/Config/CountryList.php:140
+msgid "Malawi"
+msgstr "馬拉維"
+
+#: deprecated/includes/fields/country.php:142
+#: deprecated/includes/fields/country.php:445
+#: includes/Config/CountryList.php:141
+msgid "Malaysia"
+msgstr "馬來西亞"
+
+#: deprecated/includes/fields/country.php:143
+#: deprecated/includes/fields/country.php:446
+#: includes/Config/CountryList.php:142
+msgid "Maldives"
+msgstr "馬爾代夫"
+
+#: deprecated/includes/fields/country.php:144
+#: deprecated/includes/fields/country.php:447
+#: includes/Config/CountryList.php:143
+msgid "Mali"
+msgstr "馬里"
+
+#: deprecated/includes/fields/country.php:145
+#: deprecated/includes/fields/country.php:448
+#: includes/Config/CountryList.php:144
+msgid "Malta"
+msgstr "馬耳他"
+
+#: deprecated/includes/fields/country.php:146
+#: deprecated/includes/fields/country.php:449
+#: includes/Config/CountryList.php:145
+msgid "Marshall Islands"
+msgstr "馬紹爾群島"
+
+#: deprecated/includes/fields/country.php:147
+#: deprecated/includes/fields/country.php:450
+#: includes/Config/CountryList.php:146
+msgid "Martinique"
+msgstr "馬提尼克島"
+
+#: deprecated/includes/fields/country.php:148
+#: deprecated/includes/fields/country.php:451
+#: includes/Config/CountryList.php:147
+msgid "Mauritania"
+msgstr "毛里塔尼亞"
+
+#: deprecated/includes/fields/country.php:149
+#: deprecated/includes/fields/country.php:452
+#: includes/Config/CountryList.php:148
+msgid "Mauritius"
+msgstr "毛里求斯"
+
+#: deprecated/includes/fields/country.php:150
+#: deprecated/includes/fields/country.php:453
+#: includes/Config/CountryList.php:149
+msgid "Mayotte"
+msgstr "馬約特島"
+
+#: deprecated/includes/fields/country.php:151
+#: deprecated/includes/fields/country.php:454
+#: includes/Config/CountryList.php:150
+msgid "Mexico"
+msgstr "墨西哥"
+
+#: deprecated/includes/fields/country.php:152
+#: deprecated/includes/fields/country.php:455
+#: includes/Config/CountryList.php:151
+msgid "Micronesia, Federated States Of"
+msgstr "克羅尼西亞聯邦"
+
+#: deprecated/includes/fields/country.php:153
+#: deprecated/includes/fields/country.php:456
+#: includes/Config/CountryList.php:152
+msgid "Moldova, Republic Of"
+msgstr "摩爾多瓦共和國"
+
+#: deprecated/includes/fields/country.php:154
+#: deprecated/includes/fields/country.php:457
+#: includes/Config/CountryList.php:153
+msgid "Monaco"
+msgstr "摩納哥"
+
+#: deprecated/includes/fields/country.php:155
+#: deprecated/includes/fields/country.php:458
+#: includes/Config/CountryList.php:154
+msgid "Mongolia"
+msgstr "蒙古"
+
+#: deprecated/includes/fields/country.php:156
+#: deprecated/includes/fields/country.php:459
+#: includes/Config/CountryList.php:155
+msgid "Montenegro"
+msgstr "黑山"
+
+#: deprecated/includes/fields/country.php:157
+#: deprecated/includes/fields/country.php:460
+#: includes/Config/CountryList.php:156
+msgid "Montserrat"
+msgstr "蒙特塞拉特"
+
+#: deprecated/includes/fields/country.php:158
+#: deprecated/includes/fields/country.php:461
+#: includes/Config/CountryList.php:157
+msgid "Morocco"
+msgstr "摩洛哥"
+
+#: deprecated/includes/fields/country.php:159
+#: deprecated/includes/fields/country.php:462
+#: includes/Config/CountryList.php:158
+msgid "Mozambique"
+msgstr "莫桑比克"
+
+#: deprecated/includes/fields/country.php:160
+#: deprecated/includes/fields/country.php:463
+#: includes/Config/CountryList.php:159
+msgid "Myanmar"
+msgstr "緬甸"
+
+#: deprecated/includes/fields/country.php:161
+#: deprecated/includes/fields/country.php:464
+#: includes/Config/CountryList.php:160
+msgid "Namibia"
+msgstr "納米比亞"
+
+#: deprecated/includes/fields/country.php:162
+#: deprecated/includes/fields/country.php:465
+#: includes/Config/CountryList.php:161
+msgid "Nauru"
+msgstr "瑙魯"
+
+#: deprecated/includes/fields/country.php:163
+#: deprecated/includes/fields/country.php:466
+#: includes/Config/CountryList.php:162
+msgid "Nepal"
+msgstr "尼泊爾"
+
+#: deprecated/includes/fields/country.php:164
+#: deprecated/includes/fields/country.php:467
+#: includes/Config/CountryList.php:163
+msgid "Netherlands"
+msgstr "荷蘭"
+
+#: deprecated/includes/fields/country.php:165
+#: deprecated/includes/fields/country.php:468
+#: includes/Config/CountryList.php:164
+msgid "Netherlands Antilles"
+msgstr "荷屬安的列斯"
+
+#: deprecated/includes/fields/country.php:166
+#: deprecated/includes/fields/country.php:469
+#: includes/Config/CountryList.php:165
+msgid "New Caledonia"
+msgstr "新喀裡多尼亞"
+
+#: deprecated/includes/fields/country.php:167
+#: deprecated/includes/fields/country.php:470
+#: includes/Config/CountryList.php:166
+msgid "New Zealand"
+msgstr "紐西蘭"
+
+#: deprecated/includes/fields/country.php:168
+#: deprecated/includes/fields/country.php:471
+#: includes/Config/CountryList.php:167
+msgid "Nicaragua"
+msgstr "尼加拉瓜"
+
+#: deprecated/includes/fields/country.php:169
+#: deprecated/includes/fields/country.php:472
+#: includes/Config/CountryList.php:168
+msgid "Niger"
+msgstr "尼日爾"
+
+#: deprecated/includes/fields/country.php:170
+#: deprecated/includes/fields/country.php:473
+#: includes/Config/CountryList.php:169
+msgid "Nigeria"
+msgstr "尼日利亞"
+
+#: deprecated/includes/fields/country.php:171
+#: deprecated/includes/fields/country.php:474
+#: includes/Config/CountryList.php:170
+msgid "Niue"
+msgstr "紐埃"
+
+#: deprecated/includes/fields/country.php:172
+#: deprecated/includes/fields/country.php:475
+#: includes/Config/CountryList.php:171
+msgid "Norfolk Island"
+msgstr "諾福克島"
+
+#: deprecated/includes/fields/country.php:173
+#: deprecated/includes/fields/country.php:476
+#: includes/Config/CountryList.php:172
+msgid "Northern Mariana Islands"
+msgstr "北馬里亞納群島"
+
+#: deprecated/includes/fields/country.php:174
+#: deprecated/includes/fields/country.php:477
+#: includes/Config/CountryList.php:173
+msgid "Norway"
+msgstr "挪威"
+
+#: deprecated/includes/fields/country.php:175
+#: deprecated/includes/fields/country.php:478
+#: includes/Config/CountryList.php:174
+msgid "Oman"
+msgstr "阿曼"
+
+#: deprecated/includes/fields/country.php:176
+#: deprecated/includes/fields/country.php:479
+#: includes/Config/CountryList.php:175
+msgid "Pakistan"
+msgstr "巴基斯坦"
+
+#: deprecated/includes/fields/country.php:177
+#: deprecated/includes/fields/country.php:480
+#: includes/Config/CountryList.php:176
+msgid "Palau"
+msgstr "帕勞"
+
+#: deprecated/includes/fields/country.php:178
+#: deprecated/includes/fields/country.php:481
+#: includes/Config/CountryList.php:177
+msgid "Panama"
+msgstr "巴拿馬"
+
+#: deprecated/includes/fields/country.php:179
+#: deprecated/includes/fields/country.php:482
+#: includes/Config/CountryList.php:178
+msgid "Papua New Guinea"
+msgstr "巴布亞新幾內亞"
+
+#: deprecated/includes/fields/country.php:180
+#: deprecated/includes/fields/country.php:483
+#: includes/Config/CountryList.php:179
+msgid "Paraguay"
+msgstr "巴拉圭"
+
+#: deprecated/includes/fields/country.php:181
+#: deprecated/includes/fields/country.php:484
+#: includes/Config/CountryList.php:180
+msgid "Peru"
+msgstr "秘魯"
+
+#: deprecated/includes/fields/country.php:182
+#: deprecated/includes/fields/country.php:485
+#: includes/Config/CountryList.php:181
+msgid "Philippines"
+msgstr "菲律賓"
+
+#: deprecated/includes/fields/country.php:183
+#: deprecated/includes/fields/country.php:486
+#: includes/Config/CountryList.php:182
+msgid "Pitcairn"
+msgstr "皮特凱恩"
+
+#: deprecated/includes/fields/country.php:184
+#: deprecated/includes/fields/country.php:487
+#: includes/Config/CountryList.php:183
+msgid "Poland"
+msgstr "波蘭"
+
+#: deprecated/includes/fields/country.php:185
+#: deprecated/includes/fields/country.php:488
+#: includes/Config/CountryList.php:184
+msgid "Portugal"
+msgstr "葡萄牙"
+
+#: deprecated/includes/fields/country.php:186
+#: deprecated/includes/fields/country.php:489
+#: includes/Config/CountryList.php:185
+msgid "Puerto Rico"
+msgstr "波多黎各"
+
+#: deprecated/includes/fields/country.php:187
+#: deprecated/includes/fields/country.php:490
+#: includes/Config/CountryList.php:186
+msgid "Qatar"
+msgstr "卡塔爾"
+
+#: deprecated/includes/fields/country.php:188
+#: deprecated/includes/fields/country.php:491
+#: includes/Config/CountryList.php:187
+msgid "Reunion"
+msgstr "留尼旺島"
+
+#: deprecated/includes/fields/country.php:189
+#: deprecated/includes/fields/country.php:492
+#: includes/Config/CountryList.php:188
+msgid "Romania"
+msgstr "羅馬尼亞"
+
+#: deprecated/includes/fields/country.php:190
+#: deprecated/includes/fields/country.php:493
+#: includes/Config/CountryList.php:189
+msgid "Russian Federation"
+msgstr "俄羅斯聯邦"
+
+#: deprecated/includes/fields/country.php:191
+#: deprecated/includes/fields/country.php:494
+#: includes/Config/CountryList.php:190
+msgid "Rwanda"
+msgstr "盧旺達"
+
+#: deprecated/includes/fields/country.php:192
+#: deprecated/includes/fields/country.php:495
+#: includes/Config/CountryList.php:191
+msgid "Saint Kitts And Nevis"
+msgstr "聖基茨和尼維斯"
+
+#: deprecated/includes/fields/country.php:193
+#: deprecated/includes/fields/country.php:496
+#: includes/Config/CountryList.php:192
+msgid "Saint Lucia"
+msgstr "聖盧西亞"
+
+#: deprecated/includes/fields/country.php:194
+#: deprecated/includes/fields/country.php:497
+#: includes/Config/CountryList.php:193
+msgid "Saint Vincent And The Grenadines"
+msgstr "聖文森特和格林納丁斯"
+
+#: deprecated/includes/fields/country.php:195
+#: deprecated/includes/fields/country.php:498
+#: includes/Config/CountryList.php:194
+msgid "Samoa"
+msgstr "薩摩亞"
+
+#: deprecated/includes/fields/country.php:196
+#: deprecated/includes/fields/country.php:499
+#: includes/Config/CountryList.php:195
+msgid "San Marino"
+msgstr "聖馬力諾"
+
+#: deprecated/includes/fields/country.php:197
+#: deprecated/includes/fields/country.php:500
+#: includes/Config/CountryList.php:196
+msgid "Sao Tome And Principe"
+msgstr "聖多美和普林西比"
+
+#: deprecated/includes/fields/country.php:198
+#: deprecated/includes/fields/country.php:501
+#: includes/Config/CountryList.php:197
+msgid "Saudi Arabia"
+msgstr "沙特阿拉伯"
+
+#: deprecated/includes/fields/country.php:199
+#: deprecated/includes/fields/country.php:502
+#: includes/Config/CountryList.php:198
+msgid "Senegal"
+msgstr "塞內加爾"
+
+#: deprecated/includes/fields/country.php:200
+#: deprecated/includes/fields/country.php:503
+#: includes/Config/CountryList.php:199
+msgid "Serbia"
+msgstr "塞爾維亞"
+
+#: deprecated/includes/fields/country.php:201
+#: deprecated/includes/fields/country.php:504
+#: includes/Config/CountryList.php:200
+msgid "Seychelles"
+msgstr "塞舌爾"
+
+#: deprecated/includes/fields/country.php:202
+#: deprecated/includes/fields/country.php:505
+#: includes/Config/CountryList.php:201
+msgid "Sierra Leone"
+msgstr "塞拉利昂"
+
+#: deprecated/includes/fields/country.php:203
+#: deprecated/includes/fields/country.php:506
+#: includes/Config/CountryList.php:202
+msgid "Singapore"
+msgstr "新加坡"
+
+#: deprecated/includes/fields/country.php:204
+#: deprecated/includes/fields/country.php:507
+#: includes/Config/CountryList.php:203
+msgid "Slovakia (Slovak Republic)"
+msgstr "斯洛伐克 (斯洛伐克共和國)"
+
+#: deprecated/includes/fields/country.php:205
+#: deprecated/includes/fields/country.php:508
+#: includes/Config/CountryList.php:204
+msgid "Slovenia"
+msgstr "斯洛文尼亞"
+
+#: deprecated/includes/fields/country.php:206
+#: deprecated/includes/fields/country.php:509
+#: includes/Config/CountryList.php:205
+msgid "Solomon Islands"
+msgstr "索羅門群島"
+
+#: deprecated/includes/fields/country.php:207
+#: deprecated/includes/fields/country.php:510
+#: includes/Config/CountryList.php:206
+msgid "Somalia"
+msgstr "索馬里"
+
+#: deprecated/includes/fields/country.php:208
+#: deprecated/includes/fields/country.php:511
+#: includes/Config/CountryList.php:207
+msgid "South Africa"
+msgstr "南非"
+
+#: deprecated/includes/fields/country.php:209
+#: deprecated/includes/fields/country.php:512
+#: includes/Config/CountryList.php:208
+msgid "South Georgia, South Sandwich Islands"
+msgstr "南喬治亞島，南桑威奇群島"
+
+#: deprecated/includes/fields/country.php:210
+#: deprecated/includes/fields/country.php:514
+#: includes/Config/CountryList.php:209
+msgid "Spain"
+msgstr "西班牙"
+
+#: deprecated/includes/fields/country.php:211
+#: deprecated/includes/fields/country.php:515
+#: includes/Config/CountryList.php:210
+msgid "Sri Lanka"
+msgstr "斯里蘭卡"
+
+#: deprecated/includes/fields/country.php:212
+#: deprecated/includes/fields/country.php:516
+#: includes/Config/CountryList.php:211
+msgid "St. Helena"
+msgstr "聖赫勒拿島"
+
+#: deprecated/includes/fields/country.php:213
+#: deprecated/includes/fields/country.php:517
+#: includes/Config/CountryList.php:212
+msgid "St. Pierre And Miquelon"
+msgstr "聖皮埃爾和密克隆"
+
+#: deprecated/includes/fields/country.php:214
+#: deprecated/includes/fields/country.php:518
+#: includes/Config/CountryList.php:213
+msgid "Sudan"
+msgstr "蘇丹"
+
+#: deprecated/includes/fields/country.php:215
+#: deprecated/includes/fields/country.php:519
+#: includes/Config/CountryList.php:214
+msgid "Suriname"
+msgstr "蘇里南"
+
+#: deprecated/includes/fields/country.php:216
+#: deprecated/includes/fields/country.php:520
+#: includes/Config/CountryList.php:215
+msgid "Svalbard And Jan Mayen Islands"
+msgstr "斯瓦巴和揚馬延"
+
+#: deprecated/includes/fields/country.php:217
+#: deprecated/includes/fields/country.php:521
+#: includes/Config/CountryList.php:216
+msgid "Swaziland"
+msgstr "斯威士蘭"
+
+#: deprecated/includes/fields/country.php:218
+#: deprecated/includes/fields/country.php:522
+#: includes/Config/CountryList.php:217
+msgid "Sweden"
+msgstr "瑞典"
+
+#: deprecated/includes/fields/country.php:219
+#: deprecated/includes/fields/country.php:523
+#: includes/Config/CountryList.php:218
+msgid "Switzerland"
+msgstr "瑞士"
+
+#: deprecated/includes/fields/country.php:220
+#: deprecated/includes/fields/country.php:524
+#: includes/Config/CountryList.php:219
+msgid "Syrian Arab Republic"
+msgstr "敘利亞阿拉伯共和國"
+
+#: deprecated/includes/fields/country.php:221
+#: deprecated/includes/fields/country.php:525
+#: includes/Config/CountryList.php:220
+msgid "Taiwan"
+msgstr "台灣"
+
+#: deprecated/includes/fields/country.php:222
+#: deprecated/includes/fields/country.php:526
+#: includes/Config/CountryList.php:221
+msgid "Tajikistan"
+msgstr "塔吉克斯坦"
+
+#: deprecated/includes/fields/country.php:223
+#: deprecated/includes/fields/country.php:527
+#: includes/Config/CountryList.php:222
+msgid "Tanzania, United Republic Of"
+msgstr "坦尚尼亞聯合共和國"
+
+#: deprecated/includes/fields/country.php:224
+#: deprecated/includes/fields/country.php:528
+#: includes/Config/CountryList.php:223
+msgid "Thailand"
+msgstr "泰國"
+
+#: deprecated/includes/fields/country.php:225
+#: deprecated/includes/fields/country.php:529
+#: includes/Config/CountryList.php:224
+msgid "Togo"
+msgstr "多哥"
+
+#: deprecated/includes/fields/country.php:226
+#: deprecated/includes/fields/country.php:530
+#: includes/Config/CountryList.php:225
+msgid "Tokelau"
+msgstr "托克勞"
+
+#: deprecated/includes/fields/country.php:227
+#: deprecated/includes/fields/country.php:531
+#: includes/Config/CountryList.php:226
+msgid "Tonga"
+msgstr "湯加"
+
+#: deprecated/includes/fields/country.php:228
+#: deprecated/includes/fields/country.php:532
+#: includes/Config/CountryList.php:227
+msgid "Trinidad And Tobago"
+msgstr "特里尼達和多巴哥"
+
+#: deprecated/includes/fields/country.php:229
+#: deprecated/includes/fields/country.php:533
+#: includes/Config/CountryList.php:228
+msgid "Tunisia"
+msgstr "突尼斯"
+
+#: deprecated/includes/fields/country.php:230
+#: deprecated/includes/fields/country.php:534
+#: includes/Config/CountryList.php:229
+msgid "Turkey"
+msgstr "土耳其"
+
+#: deprecated/includes/fields/country.php:231
+#: deprecated/includes/fields/country.php:535
+#: includes/Config/CountryList.php:230
+msgid "Turkmenistan"
+msgstr "土庫曼斯坦"
+
+#: deprecated/includes/fields/country.php:232
+#: deprecated/includes/fields/country.php:536
+#: includes/Config/CountryList.php:231
+msgid "Turks And Caicos Islands"
+msgstr "特克斯和凱科斯群島"
+
+#: deprecated/includes/fields/country.php:233
+#: deprecated/includes/fields/country.php:537
+#: includes/Config/CountryList.php:232
+msgid "Tuvalu"
+msgstr "圖瓦盧"
+
+#: deprecated/includes/fields/country.php:234
+#: deprecated/includes/fields/country.php:538
+#: includes/Config/CountryList.php:233
+msgid "Uganda"
+msgstr "烏干達"
+
+#: deprecated/includes/fields/country.php:235
+#: deprecated/includes/fields/country.php:539
+#: includes/Config/CountryList.php:234
+msgid "Ukraine"
+msgstr "烏克蘭"
+
+#: deprecated/includes/fields/country.php:236
+#: deprecated/includes/fields/country.php:540
+#: includes/Config/CountryList.php:235
+msgid "United Arab Emirates"
+msgstr "阿拉伯聯合大公國"
+
+#: deprecated/includes/fields/country.php:237
+#: deprecated/includes/fields/country.php:541
+#: includes/Config/CountryList.php:236
+msgid "United Kingdom"
+msgstr "英國"
+
+#: deprecated/includes/fields/country.php:238
+#: deprecated/includes/fields/country.php:542
+#: includes/Config/CountryList.php:237
+msgid "United States"
+msgstr "美國"
+
+#: deprecated/includes/fields/country.php:239
+#: deprecated/includes/fields/country.php:543
+#: includes/Config/CountryList.php:238
+msgid "United States Minor Outlying Islands"
+msgstr "美國外島"
+
+#: deprecated/includes/fields/country.php:240
+#: deprecated/includes/fields/country.php:544
+#: includes/Config/CountryList.php:239
+msgid "Uruguay"
+msgstr "烏拉圭"
+
+#: deprecated/includes/fields/country.php:241
+#: deprecated/includes/fields/country.php:545
+#: includes/Config/CountryList.php:240
+msgid "Uzbekistan"
+msgstr "烏茲別克斯坦"
+
+#: deprecated/includes/fields/country.php:242
+#: deprecated/includes/fields/country.php:546
+#: includes/Config/CountryList.php:241
+msgid "Vanuatu"
+msgstr "瓦努阿圖"
+
+#: deprecated/includes/fields/country.php:243
+#: deprecated/includes/fields/country.php:547
+#: includes/Config/CountryList.php:242
+msgid "Venezuela"
+msgstr "委內瑞拉"
+
+#: deprecated/includes/fields/country.php:244
+#: deprecated/includes/fields/country.php:548
+#: includes/Config/CountryList.php:243
+msgid "Viet Nam"
+msgstr "越南"
+
+#: deprecated/includes/fields/country.php:245
+#: deprecated/includes/fields/country.php:549
+#: includes/Config/CountryList.php:244
+msgid "Virgin Islands (British)"
+msgstr "英屬維京群島"
+
+#: deprecated/includes/fields/country.php:246
+#: deprecated/includes/fields/country.php:550
+#: includes/Config/CountryList.php:245
+msgid "Virgin Islands (U.S.)"
+msgstr "維爾京群島 (英屬)"
+
+#: deprecated/includes/fields/country.php:247
+#: deprecated/includes/fields/country.php:551
+#: includes/Config/CountryList.php:246
+msgid "Wallis And Futuna Islands"
+msgstr "瓦利斯和富圖納群島"
+
+#: deprecated/includes/fields/country.php:248
+#: deprecated/includes/fields/country.php:552
+#: includes/Config/CountryList.php:247
+msgid "Western Sahara"
+msgstr "西撒哈拉"
+
+#: deprecated/includes/fields/country.php:249
+#: deprecated/includes/fields/country.php:553
+#: includes/Config/CountryList.php:248
+msgid "Yemen"
+msgstr "也門"
+
+#: deprecated/includes/fields/country.php:250
+#: deprecated/includes/fields/country.php:554
+#: includes/Config/CountryList.php:249
+msgid "Yugoslavia"
+msgstr "南斯拉夫"
+
+#: deprecated/includes/fields/country.php:251
+#: deprecated/includes/fields/country.php:555
+#: includes/Config/CountryList.php:250
+msgid "Zambia"
+msgstr "贊比亞"
+
+#: deprecated/includes/fields/country.php:252
+#: deprecated/includes/fields/country.php:556
+#: includes/Config/CountryList.php:251
+msgid "Zimbabwe"
+msgstr "津巴布韋"
+
+#: deprecated/includes/fields/country.php:260
+#: includes/Fields/ListCountry.php:22
+msgid "Country"
+msgstr "國家"
+
+#: deprecated/includes/fields/country.php:270
+msgid "Default Country"
+msgstr "預設國家/地區"
+
+#: deprecated/includes/fields/country.php:277
+#: includes/Config/FieldSettings.php:721
+msgid "Use a custom first option"
+msgstr "使用第一個自訂選項"
+
+#: deprecated/includes/fields/country.php:283
+#: includes/Config/FieldSettings.php:734
+msgid "Custom first option"
+msgstr "第一個自訂選項"
+
+#: deprecated/includes/fields/country.php:513
+msgid "South Sudan"
+msgstr "南蘇丹"
+
+#: deprecated/includes/fields/credit-card.php:14
+#: includes/Fields/CreditCard.php:26
+msgid "Credit Card"
+msgstr "信用卡"
+
+#: deprecated/includes/fields/credit-card.php:35
+msgid "Card Number Label"
+msgstr "卡片號碼標籤"
+
+#: deprecated/includes/fields/credit-card.php:36
+#: deprecated/includes/fields/credit-card.php:145
+msgid "Card Number"
+msgstr "卡號"
+
+#: deprecated/includes/fields/credit-card.php:43
+msgid "Card Number Description"
+msgstr "卡片號碼描述"
+
+#: deprecated/includes/fields/credit-card.php:44
+#: deprecated/includes/fields/credit-card.php:146
+msgid "The (typically) 16 digits on the front of your credit card."
+msgstr "通常是信用卡前面的 16 位數字。"
+
+#: deprecated/includes/fields/credit-card.php:51
+msgid "Card CVC Label"
+msgstr "卡片 CVC 標籤"
+
+#: deprecated/includes/fields/credit-card.php:52
+#: deprecated/includes/fields/credit-card.php:148
+msgid "CVC"
+msgstr "CVC"
+
+#: deprecated/includes/fields/credit-card.php:59
+msgid "Card CVC Description"
+msgstr "卡片 CVC 描述"
+
+#: deprecated/includes/fields/credit-card.php:60
+#: deprecated/includes/fields/credit-card.php:149
+msgid "The 3 digit (back) or 4 digit (front) value on your card."
+msgstr "卡片背面 3 位數或前面 4 位數字。"
+
+#: deprecated/includes/fields/credit-card.php:67
+msgid "Card Name Label"
+msgstr "卡片名稱標籤"
+
+#: deprecated/includes/fields/credit-card.php:68
+#: deprecated/includes/fields/credit-card.php:151
+msgid "Name on the card"
+msgstr "卡片姓名"
+
+#: deprecated/includes/fields/credit-card.php:75
+msgid "Card Name Description"
+msgstr "卡片姓名描述"
+
+#: deprecated/includes/fields/credit-card.php:76
+#: deprecated/includes/fields/credit-card.php:152
+msgid "The name printed on the front of your credit card."
+msgstr "印在信用卡前面的姓名。"
+
+#: deprecated/includes/fields/credit-card.php:83
+msgid "Card Expiry Month Label"
+msgstr "卡片到期月份標籤"
+
+#: deprecated/includes/fields/credit-card.php:84
+#: deprecated/includes/fields/credit-card.php:154
+msgid "Expiration month (MM)"
+msgstr "到期月份 (MM)"
+
+#: deprecated/includes/fields/credit-card.php:91
+msgid "Card Expiry Month Description"
+msgstr "卡片到期月份描述"
+
+#: deprecated/includes/fields/credit-card.php:92
+#: deprecated/includes/fields/credit-card.php:155
+msgid "The month your credit card expires, typically on the front of the card."
+msgstr "信用卡到期月份，通常在卡片前面。"
+
+#: deprecated/includes/fields/credit-card.php:99
+msgid "Card Expiry Year Label"
+msgstr "卡片到期年份標籤"
+
+#: deprecated/includes/fields/credit-card.php:100
+#: deprecated/includes/fields/credit-card.php:157
+msgid "Expiration year (YYYY)"
+msgstr "到期年份 (YYYY)"
+
+#: deprecated/includes/fields/credit-card.php:107
+msgid "Card Expiry Year Description"
+msgstr "卡片到期年份描述"
+
+#: deprecated/includes/fields/credit-card.php:108
+#: deprecated/includes/fields/credit-card.php:158
+msgid "The year your credit card expires, typically on the front of the card."
+msgstr "信用卡到期年份，通常在卡片前面。"
+
+#: deprecated/includes/fields/desc.php:4
+msgid "Text"
+msgstr "文字"
+
+#: deprecated/includes/fields/desc.php:18
+msgid "Text Element"
+msgstr "文字元素"
+
+#: deprecated/includes/fields/hidden.php:4
+#: includes/Templates/admin-menu-forms.html.php:76
+#: includes/Templates/admin-menu-forms.html.php:104
+#: includes/Templates/admin-menu-forms.html.php:132
+#: includes/Templates/admin-menu-forms.html.php:160
+#: includes/Templates/admin-menu-forms.html.php:188
+msgid "Hidden Field"
+msgstr "隱藏欄位"
+
+#: deprecated/includes/fields/hidden.php:56
+#: deprecated/includes/fields/number.php:73
+#: deprecated/includes/fields/textbox.php:126
+msgid "User ID (If logged in)"
+msgstr "使用者 ID (如果已登入)"
+
+#: deprecated/includes/fields/hidden.php:57
+#: deprecated/includes/fields/textbox.php:127
+msgid "User Firstname (If logged in)"
+msgstr "使用者名字 (如果已登入)"
+
+#: deprecated/includes/fields/hidden.php:58
+#: deprecated/includes/fields/textbox.php:128
+msgid "User Lastname (If logged in)"
+msgstr "使用者姓氏 (如果已登入)"
+
+#: deprecated/includes/fields/hidden.php:59
+#: deprecated/includes/fields/textbox.php:129
+msgid "User Display Name (If logged in)"
+msgstr "使用者顯示名稱 (如果已登入)"
+
+#: deprecated/includes/fields/hidden.php:60
+#: deprecated/includes/fields/textbox.php:130
+msgid "User Email (If logged in)"
+msgstr "使用者電子郵件 (如果已登入)"
+
+#: deprecated/includes/fields/hidden.php:61
+#: deprecated/includes/fields/number.php:74
+#: deprecated/includes/fields/textbox.php:131
+msgid "Post / Page ID (If available)"
+msgstr "文章/頁面 ID (如果有)"
+
+#: deprecated/includes/fields/hidden.php:62
+#: deprecated/includes/fields/textbox.php:132
+msgid "Post / Page Title (If available)"
+msgstr "文章/頁面標題 (如果有)"
+
+#: deprecated/includes/fields/hidden.php:63
+#: deprecated/includes/fields/textbox.php:133
+msgid "Post / Page URL (If available)"
+msgstr "文章/頁面 URL (如果有)"
+
+#: deprecated/includes/fields/hidden.php:64
+#: deprecated/includes/fields/textbox.php:134
+msgid "Today's Date"
+msgstr "今天日期"
+
+#: deprecated/includes/fields/hidden.php:66
+#: deprecated/includes/fields/textbox.php:136
+msgid "Querystring Variable"
+msgstr "查詢字串變數"
+
+#: deprecated/includes/fields/hidden.php:74
+#: deprecated/includes/fields/textbox.php:145
+msgid "This keyword is reserved by WordPress. Please try another."
+msgstr "此關鍵字由 WordPress 保留。 請嘗試其他關鍵字。"
+
+#: deprecated/includes/fields/hidden.php:94
+msgid "Is this an email address?"
+msgstr "這是電子郵件地址嗎？"
+
+#: deprecated/includes/fields/hidden.php:102
+msgid ""
+"If this box is checked, Ninja Forms will validate this input as an email "
+"address."
+msgstr "如果已勾選此方塊，Ninja Form 會驗證此輸入為電子郵件地址。"
+
+#: deprecated/includes/fields/hidden.php:109
+msgid "Send a copy of the form to this address?"
+msgstr "寄送表單副本到該地址嗎？"
+
+#: deprecated/includes/fields/hidden.php:117
+msgid ""
+"If this box is checked, Ninja Forms will send a copy of this form (and any "
+"messages attached) to this address."
+msgstr "如果已勾選此方塊，Ninja Form 會寄送表單副本 (以及任何附加的訊息) 到該地址"
+
+#: deprecated/includes/fields/honeypot.php:4
+msgid "Honey Pot"
+msgstr "蜂蜜罐"
+
+#: deprecated/includes/fields/hr.php:4
+msgid "hr"
+msgstr "hr"
+
+#: deprecated/includes/fields/list.php:4 includes/Database/MockData.php:152
+msgid "List"
+msgstr "清單"
+
+#: deprecated/includes/fields/list.php:17
+#: deprecated/includes/fields/textbox.php:68
+msgid "This is the user's state"
+msgstr "這是使用者狀態"
+
+#: deprecated/includes/fields/list.php:45
+msgid "Selected Value"
+msgstr "已選取的值"
+
+#: deprecated/includes/fields/list.php:50
+msgid "Add Value"
+msgstr "新增值"
+
+#: deprecated/includes/fields/list.php:55
+msgid "Remove Value"
+msgstr "移除值"
+
+#: deprecated/includes/fields/list.php:112
+#: deprecated/includes/fields/list.php:591
+msgid "Calc"
+msgstr "計算"
+
+#: deprecated/includes/fields/list.php:134
+#: includes/Templates/admin-menu-forms.html.php:67
+#: includes/Templates/admin-menu-forms.html.php:95
+#: includes/Templates/admin-menu-forms.html.php:123
+#: includes/Templates/admin-menu-forms.html.php:151
+#: includes/Templates/admin-menu-forms.html.php:179
+msgid "Dropdown"
+msgstr "下拉"
+
+#: deprecated/includes/fields/list.php:135
+msgid "Radio"
+msgstr "收音機"
+
+#: deprecated/includes/fields/list.php:136
+msgid "Checkboxes"
+msgstr "勾選方塊"
+
+#: deprecated/includes/fields/list.php:137
+#: includes/Fields/ListMultiSelect.php:24
+msgid "Multi-Select"
+msgstr "複選"
+
+#: deprecated/includes/fields/list.php:140
+msgid "List Type"
+msgstr "清單類型"
+
+#: deprecated/includes/fields/list.php:145
+msgid "Multi-Select Box Size"
+msgstr "複選方塊大小"
+
+#: deprecated/includes/fields/list.php:150
+msgid "Import List Items"
+msgstr "匯入清單項目"
+
+#: deprecated/includes/fields/list.php:156
+msgid "Show list item values"
+msgstr "顯示清單項目值"
+
+#: deprecated/includes/fields/list.php:175
+msgid "Import"
+msgstr "匯入"
+
+#: deprecated/includes/fields/list.php:177
+msgid "To use this feature, you can paste your CSV into the textarea above."
+msgstr "要使用此功能，您可以將 CSV 貼到上方的文字區域。"
+
+#: deprecated/includes/fields/list.php:178
+msgid "The format should look like the following:"
+msgstr "格式看起來應該像是："
+
+#: deprecated/includes/fields/list.php:181
+msgid "Label,Value,Calc"
+msgstr "標籤，值，計算"
+
+#: deprecated/includes/fields/list.php:190
+msgid ""
+"If you want to send an empty value or calc, you should use '' for those."
+msgstr "如果您要寄送空值或計算，應該使用 \"。"
+
+#: deprecated/includes/fields/list.php:594
+msgid "Selected"
+msgstr "已選取"
+
+#: deprecated/includes/fields/number.php:4 includes/Database/MockData.php:625
+#: includes/Fields/Number.php:28
+msgid "Number"
+msgstr "數字"
+
+#: deprecated/includes/fields/number.php:12
+msgid "Minimum Value"
+msgstr "最小值"
+
+#: deprecated/includes/fields/number.php:18
+msgid "Maximum Value"
+msgstr "最大值"
+
+#: deprecated/includes/fields/number.php:24
+msgid "Step (amount to increment by)"
+msgstr "步驟 (增量數)"
+
+#: deprecated/includes/fields/organizer.php:6
+msgid "Organizer"
+msgstr "組織人員"
+
+#: deprecated/includes/fields/password.php:4 includes/Fields/Password.php:22
+msgid "Password"
+msgstr "密碼"
+
+#: deprecated/includes/fields/password.php:28
+msgid "Use this as a registration password field"
+msgstr "作為註冊密碼欄位"
+
+#: deprecated/includes/fields/password.php:30
+msgid ""
+"If this box is checked, both password and re-password textboxes will be "
+"output."
+msgstr "如果已勾選此方塊，則會輸出密碼和重新輸入密碼文字區域。"
+
+#: deprecated/includes/fields/password.php:36
+msgid "Re-enter Password Label"
+msgstr "重新輸入密碼標籤"
+
+#: deprecated/includes/fields/password.php:38
+msgid "Re-enter Password"
+msgstr "重新輸入密碼"
+
+#: deprecated/includes/fields/password.php:44
+msgid "Show Password Strength Indicator"
+msgstr "顯示密碼強度指示器"
+
+#: deprecated/includes/fields/password.php:129
+msgid ""
+"Hint: The password should be at least seven characters long. To make it "
+"stronger, use upper and lower case letters, numbers and symbols like ! \" ? "
+"$ % ^ &amp; )."
+msgstr "秘訣： 密碼必須至少有 7 個字元長度。 要加強安全性，請使用大小寫字母、數字及符號，例如 ! \" ? $ % ^ &amp; )。"
+
+#: deprecated/includes/fields/password.php:147
+#: includes/Fields/PasswordConfirm.php:72
+msgid "Passwords do not match"
+msgstr "密碼不相符"
+
+#: deprecated/includes/fields/rating.php:4 includes/Database/MockData.php:768
+#: includes/Fields/StarRating.php:36
+msgid "Star Rating"
+msgstr "星號評等"
+
+#: deprecated/includes/fields/rating.php:13
+#: includes/Config/FieldSettings.php:682
+msgid "Number of stars"
+msgstr "星號數目"
+
+#: deprecated/includes/fields/recaptcha.php:6
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: deprecated/includes/fields/recaptcha.php:12
+msgid "Confirm that you are not a bot"
+msgstr "確認您不是機器人"
+
+#: deprecated/includes/fields/recaptcha.php:87
+msgid "Please complete the captcha field"
+msgstr "請完成 captcha 驗證欄位"
+
+#: deprecated/includes/fields/recaptcha.php:98 includes/Fields/Recaptcha.php:63
+msgid "Please make sure you have entered your Site & Secret keys correctly"
+msgstr "請確定您已正確輸入網站和秘密金鑰"
+
+#: deprecated/includes/fields/recaptcha.php:100
+#: includes/Fields/Recaptcha.php:65
+msgid "Captcha mismatch. Please enter the correct value in captcha field"
+msgstr "Captcha 不符。 請在 captcha 欄位中輸入正確的值"
+
+#: deprecated/includes/fields/spam.php:4 includes/Fields/Spam.php:24
+msgid "Anti-Spam"
+msgstr "防垃圾留言"
+
+#: deprecated/includes/fields/spam.php:29
+#: deprecated/includes/fields/spam.php:65
+msgid "Spam Question"
+msgstr "垃圾問題"
+
+#: deprecated/includes/fields/spam.php:36
+#: deprecated/includes/fields/spam.php:71
+msgid "Spam Answer"
+msgstr "垃圾回答"
+
+#: deprecated/includes/fields/submit.php:4
+#: deprecated/includes/fields/timed-submit.php:11
+#: deprecated/includes/fields/timed-submit.php:36
+#: deprecated/includes/fields/timed-submit.php:81
+#: includes/Database/MockData.php:165 includes/Database/MockData.php:483
+#: includes/Database/MockData.php:802 includes/Fields/Submit.php:26
+msgid "Submit"
+msgstr "送出"
+
+#: deprecated/includes/fields/tax.php:11
+msgid "Tax"
+msgstr "稅金"
+
+#: deprecated/includes/fields/tax.php:21
+msgid "Tax Percentage"
+msgstr "稅金百分比"
+
+#: deprecated/includes/fields/tax.php:23
+msgid "Should be entered as a percentage. e.g. 8.25%, 4%"
+msgstr "請輸入百分比數字，例如 8.25%、4%"
+
+#: deprecated/includes/fields/textarea.php:4 includes/Database/MockData.php:382
+#: includes/Database/MockData.php:526
+#: includes/Templates/admin-menu-forms.html.php:61
+#: includes/Templates/admin-menu-forms.html.php:89
+#: includes/Templates/admin-menu-forms.html.php:117
+#: includes/Templates/admin-menu-forms.html.php:145
+#: includes/Templates/admin-menu-forms.html.php:173
+msgid "Textarea"
+msgstr "文字區域"
+
+#: deprecated/includes/fields/textarea.php:18
+#: includes/Config/FieldSettings.php:777
+msgid "Show Rich Text Editor"
+msgstr "顯示 RTF 編輯器"
+
+#: deprecated/includes/fields/textarea.php:23
+#: includes/Config/FieldSettings.php:787
+msgid "Show Media Upload Button"
+msgstr "顯示媒體上傳按鈕"
+
+#: deprecated/includes/fields/textarea.php:28
+#: includes/Config/FieldSettings.php:799
+msgid "Disable Rich Text Editor on Mobile"
+msgstr "在行動裝置上停用 RTF 編輯器"
+
+#: deprecated/includes/fields/textbox.php:52
+msgid "Validate as an email address? (Field must be required)"
+msgstr "驗證為電子郵件地址？ (欄位為必填)"
+
+#: deprecated/includes/fields/textbox.php:56
+#: includes/Config/FieldSettings.php:707
+msgid "Disable Input"
+msgstr "停用輸入"
+
+#: deprecated/includes/fields/textbox.php:64
+msgid "Datepicker"
+msgstr "日期挑選器"
+
+#: deprecated/includes/fields/textbox.php:174
+msgid "Phone - (555) 555-5555"
+msgstr "電話 - (555) 555-5555"
+
+#: deprecated/includes/fields/textbox.php:176
+msgid "Currency"
+msgstr "貨幣"
+
+#: deprecated/includes/fields/textbox.php:185
+msgid "Custom Mask Definition"
+msgstr "自訂遮罩定義"
+
+#: deprecated/includes/fields/textbox.php:185
+msgid "Help"
+msgstr "說明"
+
+#: deprecated/includes/fields/timed-submit.php:4
+msgid "Timed Submit"
+msgstr "提交逾時"
+
+#: deprecated/includes/fields/timed-submit.php:10
+msgid "Submit button text after timer expires"
+msgstr "逾時之後的提交按鈕文字"
+
+#: deprecated/includes/fields/timed-submit.php:18
+#: deprecated/includes/fields/timed-submit.php:69
+#: includes/Config/FieldSettings.php:636
+msgid "Please wait %n seconds"
+msgstr "請稍候 %n 秒鐘"
+
+#: deprecated/includes/fields/timed-submit.php:19
+msgid "%n will be used to signify the number of seconds"
+msgstr "%n 會用來表示秒數"
+
+#: deprecated/includes/fields/timed-submit.php:26
+msgid "Number of seconds for countdown"
+msgstr "倒數秒數"
+
+#: deprecated/includes/fields/timed-submit.php:27
+msgid "This is how long a user must wait to submit the form"
+msgstr "這是使用者提交表單時必須等待的時間"
+
+#: deprecated/includes/fields/timed-submit.php:102
+msgid "If you are a human, please slow down."
+msgstr "如果您不是機器人，請別急。"
+
+#: deprecated/includes/fields/timed-submit.php:108
+msgid ""
+"You need JavaScript to submit this form. Please enable it and try again."
+msgstr "您需要 JavaScript 才能提交此表單。 請啟用並重試。"
+
+#: includes/Abstracts/ActionNewsletter.php:113
+msgid "js-newsletter-list-update extra"
+msgstr "js-newsletter-list-update extra"
+
+#: includes/Abstracts/ActionNewsletter.php:113
+msgid "dashicons dashicons-update"
+msgstr "dashicons dashicons-update"
+
+#: includes/Abstracts/ActionNewsletter.php:142
+msgid "List Field Mapping"
+msgstr "清單欄位對應"
+
+#: includes/Abstracts/ActionNewsletter.php:150
+msgid "Interest Groups"
+msgstr "興趣群組"
+
+#: includes/Abstracts/FieldOptIn.php:39
+msgid "Single"
+msgstr "單一"
+
+#: includes/Abstracts/FieldOptIn.php:43
+msgid "Multiple"
+msgstr "多數"
+
+#: includes/Abstracts/FieldOptIn.php:51
+msgid "Lists"
+msgstr "列表"
+
+#: includes/Abstracts/FieldOptIn.php:51
+msgid "refresh"
+msgstr "重新整理"
+
+#: includes/Abstracts/Metabox.php:25
+msgid "Metabox"
+msgstr "中繼方塊"
+
+#: includes/Abstracts/SubmissionMetabox.php:21
+msgid "Submission Metabox"
+msgstr "提交項目中繼方塊"
+
+#: includes/Abstracts/UserInfo.php:25
+msgid "User Meta (if logged in)"
+msgstr "使用者中繼 (如果已登入)"
+
+#: includes/Actions/CollectPayment.php:40
+msgid "Collect Payment"
+msgstr "收集款項"
+
+#: includes/Admin/AllFormsTable.php:27
+msgid "No forms found."
+msgstr "找不到表單。"
+
+#: includes/Admin/AllFormsTable.php:70
+msgid "Date Created"
+msgstr "建立的日期"
+
+#: includes/Admin/AllFormsTable.php:94
+msgid "title"
+msgstr "標題"
+
+#: includes/Admin/AllFormsTable.php:95
+msgid "updated"
+msgstr "已更新"
+
+#: includes/Admin/AllFormsTable.php:232 includes/Admin/AllFormsTable.php:248
+#: includes/Admin/AllFormsTable.php:267
+msgid "Go get a life, script kiddies"
+msgstr "別老是寫程式碼！"
+
+#: includes/Admin/CPT/Submission.php:44
+msgid "Parent Item:"
+msgstr "父項目："
+
+#: includes/Admin/CPT/Submission.php:45
+msgid "All Items"
+msgstr "所有項目"
+
+#: includes/Admin/CPT/Submission.php:46
+msgid "Add New Item"
+msgstr "新增項目"
+
+#: includes/Admin/CPT/Submission.php:48
+msgid "New Item"
+msgstr "新項目"
+
+#: includes/Admin/CPT/Submission.php:49
+msgid "Edit Item"
+msgstr "編輯項目"
+
+#: includes/Admin/CPT/Submission.php:50
+msgid "Update Item"
+msgstr "更新項目"
+
+#: includes/Admin/CPT/Submission.php:51
+msgid "View Item"
+msgstr "檢視項目"
+
+#: includes/Admin/CPT/Submission.php:52
+msgid "Search Item"
+msgstr "搜尋項目"
+
+#: includes/Admin/CPT/Submission.php:54
+msgid "Not found in Trash"
+msgstr "在垃圾筒中找不到"
+
+#: includes/Admin/CPT/Submission.php:58
+msgid "Form Submissions"
+msgstr "表單提交項目"
+
+#: includes/Admin/CPT/Submission.php:183
+msgid "Submission Info"
+msgstr "提交項目資訊"
+
+#: includes/Admin/Menus/Forms.php:77
+msgid "Add New Form"
+msgstr "新增表單"
+
+#: includes/Admin/Menus/Forms.php:100
+msgid "Form Template Import Error."
+msgstr "表格範本匯入錯誤。"
+
+#: includes/Admin/Menus/Forms.php:416 includes/MergeTags/Fields.php:13
+msgid "Fields"
+msgstr "區塊 "
+
+#: includes/Admin/Menus/ImportExport.php:37
+msgid "There uploaded file is not a valid format."
+msgstr "上傳的檔案格式無效。"
+
+#: includes/Admin/Menus/ImportExport.php:38
+msgid "Invalid Form Upload."
+msgstr "上傳的表單無效。"
+
+#: includes/Admin/Menus/ImportExport.php:125
+msgid "Import Forms"
+msgstr "匯入表單"
+
+#: includes/Admin/Menus/ImportExport.php:132
+msgid "Export Forms"
+msgstr "匯出表單"
+
+#: includes/Admin/Menus/ImportExport.php:216
+msgid "Equation (Advanced)"
+msgstr "等式 (進階)"
+
+#: includes/Admin/Menus/ImportExport.php:219
+msgid "Operations and Fields (Advanced)"
+msgstr "操作和欄位 (進階)"
+
+#: includes/Admin/Menus/ImportExport.php:222
+msgid "Auto-Total Fields"
+msgstr "自動加總欄位"
+
+#: includes/Admin/Menus/ImportExport.php:340
+msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
+msgstr "上傳的檔案超過 php.ini 中的 upload_max_filesize 指示詞。"
+
+#: includes/Admin/Menus/ImportExport.php:343
+msgid ""
+"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
+"the HTML form."
+msgstr "上傳的檔案超過 HTML 表單中指定的MAX_FILE_SIZE 指示詞。"
+
+#: includes/Admin/Menus/ImportExport.php:346
+msgid "The uploaded file was only partially uploaded."
+msgstr "上傳的檔案不完整。"
+
+#: includes/Admin/Menus/ImportExport.php:349
+msgid "No file was uploaded."
+msgstr "沒有檔案被上傳。"
+
+#: includes/Admin/Menus/ImportExport.php:352
+msgid "Missing a temporary folder."
+msgstr "找不到暫存資料夾。"
+
+#: includes/Admin/Menus/ImportExport.php:355
+msgid "Failed to write file to disk."
+msgstr "檔案無法寫入。"
+
+#: includes/Admin/Menus/ImportExport.php:358
+msgid "File upload stopped by extension."
+msgstr "檔案上傳已被擴充功能暫停。"
+
+#: includes/Admin/Menus/ImportExport.php:361
+msgid "Unknown upload error."
+msgstr "發生未知的上傳。"
+
+#: includes/Admin/Menus/ImportExport.php:366
+msgid "File Upload Error"
+msgstr "檔案上傳錯誤"
+
+#: includes/Admin/Menus/Licenses.php:46
+msgid "Add-On Licenses"
+msgstr "附加元件授權"
+
+#: includes/Admin/Menus/MockData.php:33
+msgid "Migrations and Mock Data complete. "
+msgstr "移轉及模擬資料完成。 "
+
+#: includes/Admin/Menus/MockData.php:34
+msgid "View Forms"
+msgstr "檢視表格"
+
+#: includes/Admin/Menus/Settings.php:39
+msgid "Save Settings"
+msgstr "保存設定"
+
+#: includes/Admin/Menus/Submissions.php:252
+msgid "button-secondary nf-download-all"
+msgstr "button-secondary nf-download-all"
+
+#: includes/Admin/Menus/SystemStatus.php:131
+msgid "Server IP Address"
+msgstr "伺服器 IP 位址"
+
+#: includes/Admin/Menus/SystemStatus.php:132
+msgid "Host Name"
+msgstr "主機名稱"
+
+#: includes/Admin/Menus/SystemStatus.php:134
+msgid "smtp_port"
+msgstr "smtp_port"
+
+#: includes/Admin/Metaboxes/AppendAForm.php:11
+msgid "Append a Ninja Forms"
+msgstr "附加 Ninja Form"
+
+#: includes/AJAX/Controllers/Form.php:16
+msgid "Form Not Found"
+msgstr "模擬表單"
+
+#: includes/AJAX/Controllers/SavedFields.php:17
+#: includes/AJAX/Controllers/SavedFields.php:38
+#: includes/AJAX/Controllers/SavedFields.php:50
+msgid "Field Not Found"
+msgstr "找不到欄位"
+
+#: includes/AJAX/Controllers/Submission.php:44
+msgid "An unexpected error occurred."
+msgstr "突然發生錯誤。"
+
+#: includes/AJAX/Controllers/Submission.php:62
+msgid "Preview does not exist."
+msgstr "預覽不存在。"
+
+#: includes/Config/ActionCollectPaymentSettings.php:14
+msgid "Payment Gateways"
+msgstr "付款金流"
+
+#: includes/Config/ActionCollectPaymentSettings.php:35
+msgid "Payment Total"
+msgstr "總款項"
+
+#: includes/Config/ActionCustomSettings.php:13
+msgid "Hook Tag"
+msgstr "勾點標記"
+
+#: includes/Config/ActionEmailSettings.php:20
+msgid "Email address or search for a field"
+msgstr "電子郵件地址或搜尋欄位"
+
+#: includes/Config/ActionEmailSettings.php:35
+msgid "Subject Text or seach for a field"
+msgstr "主旨文字或搜尋欄位"
+
+#: includes/Config/ActionEmailSettings.php:158
+msgid "Attach CSV"
+msgstr "附加 CSV"
+
+#: includes/Config/ActionRedirectSettings.php:13
+msgid "URL"
+msgstr "URL"
+
+#: includes/Config/AdminNotices.php:16
+msgid "one_week_support"
+msgstr "one_week_support"
+
+#: includes/Config/Example.php:21
+msgid "Label Here"
+msgstr "標籤在此"
+
+#: includes/Config/Example.php:25
+msgid "Help Text Here"
+msgstr "說明文字在此"
+
+#: includes/Config/FieldSettings.php:25
+msgid ""
+"Enter the label of the form field. This is how users will identify "
+"individual fields."
+msgstr "輸入表單欄位標籤。 這是使用者如何識別個別欄位的方法。"
+
+#: includes/Config/FieldSettings.php:38
+msgid "Form Default"
+msgstr "表單預設"
+
+#: includes/Config/FieldSettings.php:58 includes/Config/FieldSettings.php:923
+#: includes/Config/FormDisplaySettings.php:89
+#: includes/Database/MockData.php:376 includes/Database/MockData.php:633
+#: includes/Fields/Hidden.php:38
+msgid "Hidden"
+msgstr "隱藏"
+
+#: includes/Config/FieldSettings.php:65
+msgid "Select the position of your label relative to the field element itself."
+msgstr "選取與欄位元素本身相關的標籤位置。"
+
+#: includes/Config/FieldSettings.php:76
+msgid "Required Field"
+msgstr "必填欄位"
+
+#: includes/Config/FieldSettings.php:80
+msgid ""
+"Ensure that this field is completed before allowing the form to be submitted."
+msgstr "在允許提交表單前，請確定此欄位已完成。"
+
+#: includes/Config/FieldSettings.php:90
+msgid "Number Options"
+msgstr "數字選項"
+
+#: includes/Config/FieldSettings.php:98
+msgid "Min"
+msgstr "最少"
+
+#: includes/Config/FieldSettings.php:105
+msgid "Max"
+msgstr "最多"
+
+#: includes/Config/FieldSettings.php:113
+msgid "Step"
+msgstr "步驟"
+
+#: includes/Config/FieldSettings.php:153
+msgid "Options"
+msgstr "設定選項"
+
+#: includes/Config/FieldSettings.php:158 includes/Config/FieldSettings.php:954
+#: includes/Database/MockData.php:127
+msgid "One"
+msgstr "一"
+
+#: includes/Config/FieldSettings.php:158
+msgid "one"
+msgstr "一"
+
+#: includes/Config/FieldSettings.php:159 includes/Config/FieldSettings.php:955
+#: includes/Database/MockData.php:134
+msgid "Two"
+msgstr "二"
+
+#: includes/Config/FieldSettings.php:159
+msgid "two"
+msgstr "二"
+
+#: includes/Config/FieldSettings.php:160 includes/Config/FieldSettings.php:956
+#: includes/Database/MockData.php:141
+msgid "Three"
+msgstr "三"
+
+#: includes/Config/FieldSettings.php:160
+msgid "three"
+msgstr "三"
+
+#: includes/Config/FieldSettings.php:173
+msgid "Calc Value"
+msgstr "計算值"
+
+#: includes/Config/FieldSettings.php:203
+msgid "Restricts the kind of input your users can put into this field."
+msgstr "限制使用者可以輸入此欄位的值。"
+
+#: includes/Config/FieldSettings.php:206
+msgid "none"
+msgstr "无"
+
+#: includes/Config/FieldSettings.php:210
+msgid "US Phone"
+msgstr "美國電話"
+
+#: includes/Config/FieldSettings.php:219
+msgid "custom"
+msgstr "自訂"
+
+#: includes/Config/FieldSettings.php:231
+msgid "Custom Mask"
+msgstr "自訂遮罩"
+
+#: includes/Config/FieldSettings.php:240
+msgid ""
+"<ul>\n"
+"                            <li>a - Represents an alpha character (A-Z,a-z) "
+"- Only allows letters to be entered. </li>\n"
+"                            <li>9 - Represents a numeric character (0-9) - "
+"Only allows numbers to be entered.</li>\n"
+"                            <li>* - Represents an alphanumeric character (A-"
+"Z,a-z,0-9) - This allows both numbers and\n"
+"                            letters to be entered.</li>\n"
+"                        </ul>"
+msgstr ""
+"<ul>\n                            <li>a - 表示字母字元 (A-Z,a-z) - 只能輸入字母。</li> "
+"\n                            <li>a - 表示數值字元 (A-Z,a-z) - "
+"只能輸入數字。</li>\n                            <li>* - 表示英數字元 (A-Z、a-z、0-9) - "
+"可輸入字母及數字。</li>\n                        </ul>"
+
+#: includes/Config/FieldSettings.php:255
+msgid "Limit Input to this Number"
+msgstr "限制輸入為此號碼"
+
+#: includes/Config/FieldSettings.php:271
+msgid "Character(s)"
+msgstr "字元"
+
+#: includes/Config/FieldSettings.php:275
+msgid "Word(s)"
+msgstr "字詞"
+
+#: includes/Config/FieldSettings.php:285
+msgid "Text to Appear After Counter"
+msgstr "在計數器之後出現的文字"
+
+#: includes/Config/FieldSettings.php:286 includes/Config/FieldSettings.php:288
+msgid "Character(s) left"
+msgstr "剩餘字元"
+
+#: includes/Config/FieldSettings.php:315
+msgid ""
+"Enter text you would like displayed in the field before a user enters any "
+"data."
+msgstr "輸入使用者輸入任何資料前，在欄位中顯示的文字。"
+
+#: includes/Config/FieldSettings.php:344
+#: includes/Config/FormDisplaySettings.php:103
+msgid "Custom Class Names"
+msgstr "自訂類別名稱"
+
+#: includes/Config/FieldSettings.php:352
+msgid "Container"
+msgstr "容器"
+
+#: includes/Config/FieldSettings.php:356 includes/Fields/Recaptcha.php:35
+msgid "Adds an extra class to your field wrapper."
+msgstr "將其他類別新增到欄位包裝函式。"
+
+#: includes/Config/FieldSettings.php:361
+#: includes/Config/FormDisplaySettings.php:119
+msgid "Element"
+msgstr "元素"
+
+#: includes/Config/FieldSettings.php:366
+msgid "Adds an extra class to your field element."
+msgstr "將其他類別新增到欄位元素。"
+
+#: includes/Config/FieldSettings.php:383
+msgid "DD/MM/YYYY"
+msgstr "DD/MM/YYYY"
+
+#: includes/Config/FieldSettings.php:387
+msgid "DD-MM-YYYY"
+msgstr "DD-MM-YYYY"
+
+#: includes/Config/FieldSettings.php:391
+msgid "MM/DD/YYYY"
+msgstr "MM/DD/YYYY"
+
+#: includes/Config/FieldSettings.php:395
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-YYYY"
+
+#: includes/Config/FieldSettings.php:399
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+#: includes/Config/FieldSettings.php:403
+msgid "YYYY/MM/DD"
+msgstr "YYYY/MM/DD"
+
+#: includes/Config/FieldSettings.php:407
+msgid "Friday, November 18, 2019"
+msgstr "2019 年 11 月 18 日星期五"
+
+#: includes/Config/FieldSettings.php:421
+msgid "Default To Current Date"
+msgstr "預設為目前日期"
+
+#: includes/Config/FieldSettings.php:433
+msgid "Number of seconds for timed submit."
+msgstr "逾時提交的秒數"
+
+#: includes/Config/FieldSettings.php:447
+msgid "Field Key"
+msgstr "欄位金鑰"
+
+#: includes/Config/FieldSettings.php:451
+msgid ""
+"Creates a unique key to identify and target your field for custom "
+"development."
+msgstr "建立唯一金鑰，以識別要自訂開發的欄位。"
+
+#: includes/Config/FieldSettings.php:465
+msgid "Label used when viewing and exporting submissions."
+msgstr "檢視和匯出提交項目時使用的標籤。"
+
+#: includes/Config/FieldSettings.php:477
+msgid "Shown to users as a hover."
+msgstr "在滑鼠暫留時向使用者顯示。"
+
+#: includes/Config/FieldSettings.php:502
+msgid "Description"
+msgstr "說明"
+
+#: includes/Config/FieldSettings.php:561
+msgid "Sort as Numeric"
+msgstr "依數值排序"
+
+#: includes/Config/FieldSettings.php:565
+msgid "This column in the submissions table will sort by number."
+msgstr "提交項目中的此欄位會依數字排序。"
+
+#: includes/Config/FieldSettings.php:649
+msgid "Number of seconds for the countdown"
+msgstr "倒數秒數"
+
+#: includes/Config/FieldSettings.php:666
+msgid ""
+"Use this as a reistration password field. If this box is check, both\n"
+"                        password and re-password textboxes will be output"
+msgstr "作為登記密碼欄位。 如果已勾選此方塊，則會輸出密碼和重新輸入密碼文字區域。"
+
+#: includes/Config/FieldSettings.php:763 includes/Database/Models/Form.php:505
+msgid "Confirm"
+msgstr "確認"
+
+#: includes/Config/FieldSettings.php:781
+msgid "Allows rich text input."
+msgstr "允許 RTF 輸入。"
+
+#: includes/Config/FieldSettings.php:817
+msgid "Processing Label"
+msgstr "處理標籤"
+
+#: includes/Config/FieldSettings.php:832
+msgid "Checked Calculation Value"
+msgstr "勾選的計算值"
+
+#: includes/Config/FieldSettings.php:835
+msgid "This number will be used in calculations if the box is checked."
+msgstr "如果勾選方塊，此數字會用來計算。"
+
+#: includes/Config/FieldSettings.php:841
+msgid "Unchecked Calculation Value"
+msgstr "取消勾選的計算值"
+
+#: includes/Config/FieldSettings.php:844
+msgid "This number will be used in calculations if the box is unchecked."
+msgstr "如果取消勾選方塊，此數字會用來計算。"
+
+#: includes/Config/FieldSettings.php:855
+msgid "Display This Calculation Variable"
+msgstr "顯示此計算變數"
+
+#: includes/Config/FieldSettings.php:861
+msgid "- Select a Variable"
+msgstr "- 選取變數"
+
+#: includes/Config/FieldSettings.php:874
+msgid "Price"
+msgstr "定價"
+
+#: includes/Config/FieldSettings.php:887
+msgid "Use Quantity"
+msgstr "使用數量"
+
+#: includes/Config/FieldSettings.php:891
+msgid "Allows users to choose more than one of this product."
+msgstr "允許使用者選擇一個以上的產品。"
+
+#: includes/Config/FieldSettings.php:898
+msgid "Product Type"
+msgstr "商品類型"
+
+#: includes/Config/FieldSettings.php:903
+msgid "Single Product (default)"
+msgstr "單一產品 (預設)"
+
+#: includes/Config/FieldSettings.php:907
+msgid "Multi Product - Dropdown"
+msgstr "多個產品 - 下拉式選單"
+
+#: includes/Config/FieldSettings.php:911
+msgid "Multi Product - Choose Many"
+msgstr "多個產品 - 選取許多"
+
+#: includes/Config/FieldSettings.php:915
+msgid "Multi Product - Choose One"
+msgstr "多個產品 - 選取一個"
+
+#: includes/Config/FieldSettings.php:919
+msgid "User Entry"
+msgstr "使用者輸入"
+
+#: includes/Config/FieldSettings.php:934
+msgid "Cost"
+msgstr "費用"
+
+#: includes/Config/FieldSettings.php:950
+msgid "Cost Options"
+msgstr "成本選項"
+
+#: includes/Config/FieldSettings.php:979
+msgid "Single Cost"
+msgstr "單一成本"
+
+#: includes/Config/FieldSettings.php:983
+msgid "Cost Dropdown"
+msgstr "降低成本"
+
+#: includes/Config/FieldSettings.php:987
+msgid "Cost Type"
+msgstr "成本類型"
+
+#: includes/Config/FieldSettings.php:996 includes/Database/MockData.php:898
+#: includes/Database/MockData.php:974 includes/Fields/Product.php:32
+msgid "Product"
+msgstr "商品"
+
+#: includes/Config/FieldSettings.php:1002
+msgid "- Select a Product"
+msgstr "- 選取產品"
+
+#: includes/Config/FieldSettings.php:1019
+msgid "Answer"
+msgstr "答案"
+
+#: includes/Config/FieldSettings.php:1023
+msgid "A case sensitive answer to help prevent spam submissions of your form."
+msgstr "區分大小寫的回答可協助防止提交垃圾表單。"
+
+#: includes/Config/FieldSettings.php:1039
+msgid "Taxonomy"
+msgstr "分類法"
+
+#: includes/Config/FieldSettings.php:1057
+msgid "Add New Terms"
+msgstr "新增條款"
+
+#: includes/Config/FieldSettings.php:1071
+msgid "This is a user's state."
+msgstr "這是使用者狀態。"
+
+#: includes/Config/FieldSettings.php:1075
+msgid "Used for marking a field for processing."
+msgstr "用來處理欄位。"
+
+#: includes/Config/FieldTypeSections.php:13
+#: includes/Config/PluginSettingsGroups.php:22
+msgid "Saved Fields"
+msgstr "已儲存欄位"
+
+#: includes/Config/FieldTypeSections.php:26
+msgid "Common Fields"
+msgstr "一般欄位"
+
+#: includes/Config/FieldTypeSections.php:38 includes/Database/MockData.php:648
+msgid "User Information Fields"
+msgstr "使用者資訊欄位"
+
+#: includes/Config/FieldTypeSections.php:50 includes/Database/MockData.php:696
+msgid "Pricing Fields"
+msgstr "價格欄位"
+
+#: includes/Config/FieldTypeSections.php:62
+msgid "Layout Fields"
+msgstr "版面配置欄位"
+
+#: includes/Config/FieldTypeSections.php:74 includes/Database/MockData.php:763
+msgid "Miscellaneous Fields"
+msgstr "雜項欄位"
+
+#: includes/Config/FormActionDefaults.php:9
+msgid "Your form has been successfully submitted."
+msgstr "您的表格已成功提交。"
+
+#: includes/Config/FormActionDefaults.php:19
+msgid "Ninja Forms Submission"
+msgstr "忍者表單提交"
+
+#: includes/Config/FormActionDefaults.php:27
+msgid "Save Submission"
+msgstr "儲存提交"
+
+#: includes/Config/FormCalculationSettings.php:18
+msgid "Variable Name"
+msgstr "變數名稱"
+
+#: includes/Config/FormCalculationSettings.php:22
+msgid "Equation"
+msgstr "等式"
+
+#: includes/Config/FormDisplaySettings.php:68
+msgid "Default Label Position"
+msgstr "預設標籤位置"
+
+#: includes/Config/FormDisplaySettings.php:111 includes/Fields/Recaptcha.php:30
+msgid "Wrapper"
+msgstr "包裝函式"
+
+#: includes/Config/FormDisplaySettings.php:135
+msgid "Form Key"
+msgstr "表單金鑰"
+
+#: includes/Config/FormDisplaySettings.php:139
+msgid "Programmatic name that can be used to reference this form."
+msgstr "可用來參照此表單的程式設計名稱。"
+
+#: includes/Config/FormDisplaySettings.php:149
+msgid "Add Submit Button"
+msgstr "新增提交按鈕"
+
+#: includes/Config/FormDisplaySettings.php:153
+msgid ""
+"We've noticed that don't have a submit button on your form. We can add one "
+"for your automatically."
+msgstr "我們注意到您的表單沒有提交按鈕。 我們可以自動為您新增此按鈕。"
+
+#: includes/Config/FormRestrictionSettings.php:8
+msgid "Logged In"
+msgstr "登入"
+
+#: includes/Config/FormRestrictionSettings.php:24
+msgid "Does apply to form preview."
+msgstr "套用至表單預覽。"
+
+#: includes/Config/FormRestrictionSettings.php:57
+msgid "Submission Limit"
+msgstr "提交限制"
+
+#: includes/Config/FormRestrictionSettings.php:61
+msgid "Does NOT apply to form preview."
+msgstr "並未套用至表單預覽。"
+
+#: includes/Config/FormSettingsTypes.php:7
+msgid "Display Settings"
+msgstr "顯示設定"
+
+#: includes/Config/FormSettingsTypes.php:17 includes/MergeTags/Calcs.php:15
+msgid "Calculations"
+msgstr "計算"
+
+#: includes/Config/i18nBuilder.php:5 includes/Config/i18nFrontEnd.php:5
+msgid "Ninja Forms"
+msgstr "Ninja 表單"
+
+#: includes/Config/i18nBuilder.php:6
+msgid "Price:"
+msgstr "價格："
+
+#: includes/Config/i18nBuilder.php:7
+msgid "Quantity:"
+msgstr "數量："
+
+#: includes/Config/i18nBuilder.php:8
+#: includes/Templates/admin-menu-new-form.html.php:263
+msgid "Add"
+msgstr "新增"
+
+#: includes/Config/i18nBuilder.php:9
+msgid "Open in new window"
+msgstr "在新視窗中開啟"
+
+#: includes/Config/i18nBuilder.php:10
+msgid "If you are a human seeing this field, please leave it empty."
+msgstr "如果您不是機器人而且看得到此欄位，請留白。"
+
+#: includes/Config/i18nBuilder.php:11
+msgid "Available"
+msgstr "可用"
+
+#: includes/Config/i18nFrontEnd.php:6
+msgid "Please enter a valid email address!"
+msgstr "請輸入有效的電子郵件地址！"
+
+#: includes/Config/i18nFrontEnd.php:7
+msgid "These fields must match!"
+msgstr "這些欄位必須相符！"
+
+#: includes/Config/i18nFrontEnd.php:8
+msgid "Number Min Error"
+msgstr "最小數字錯誤訊息"
+
+#: includes/Config/i18nFrontEnd.php:9
+msgid "Number Max Error"
+msgstr "最大數字錯誤訊息"
+
+#: includes/Config/i18nFrontEnd.php:10
+msgid "Please increment by "
+msgstr "請以此數字遞增： "
+
+#: includes/Config/i18nFrontEnd.php:11
+msgid "Insert Link"
+msgstr "插入連結"
+
+#: includes/Config/i18nFrontEnd.php:12
+msgid "Insert Media"
+msgstr "插入媒體"
+
+#: includes/Config/i18nFrontEnd.php:14
+msgid "Please correct errors before submitting this form."
+msgstr "請先更正錯誤再提交此表單。"
+
+#: includes/Config/i18nFrontEnd.php:16
+msgid "Honeypot Error"
+msgstr "Honeypot 錯誤訊息"
+
+#: includes/Config/i18nFrontEnd.php:17
+msgid "File Upload in Progress."
+msgstr "正在上傳檔案。"
+
+#: includes/Config/i18nFrontEnd.php:18
+msgid "FILE UPLOAD"
+msgstr "檔案上傳"
+
+#: includes/Config/MergeTagsFields.php:14
+msgid "All Fields"
+msgstr "所有欄位"
+
+#: includes/Config/MergeTagsForm.php:14
+msgid "Sub Sequence"
+msgstr "子序列"
+
+#: includes/Config/MergeTagsPost.php:14
+msgid "Post ID"
+msgstr "博文ID"
+
+#: includes/Config/MergeTagsPost.php:27
+msgid "Post Title"
+msgstr "博文標題"
+
+#: includes/Config/MergeTagsPost.php:40
+msgid "Post URL"
+msgstr "文章網址"
+
+#: includes/Config/MergeTagsSystem.php:40
+msgid "IP Address"
+msgstr "IP位置"
+
+#: includes/Config/MergeTagsUser.php:14
+msgid "User ID"
+msgstr "使用者 ID"
+
+#: includes/Config/MergeTagsUser.php:27 includes/Database/MockData.php:366
+#: includes/Database/MockData.php:653 includes/Fields/FirstName.php:25
+msgid "First Name"
+msgstr "名"
+
+#: includes/Config/MergeTagsUser.php:40 includes/Database/MockData.php:371
+#: includes/Database/MockData.php:658 includes/Fields/LastName.php:25
+msgid "Last Name"
+msgstr "姓"
+
+#: includes/Config/MergeTagsUser.php:53
+msgid "Display Name"
+msgstr "顯示名稱"
+
+#: includes/Config/PluginSettingsAdvanced.php:55
+msgid "Opinionated Styles"
+msgstr "固定樣式"
+
+#: includes/Config/PluginSettingsAdvanced.php:62
+#: includes/Config/PluginSettingsReCaptcha.php:54
+msgid "Light"
+msgstr "淡色系"
+
+#: includes/Config/PluginSettingsAdvanced.php:66
+#: includes/Config/PluginSettingsReCaptcha.php:55
+msgid "Dark"
+msgstr "暗"
+
+#: includes/Config/PluginSettingsAdvanced.php:70
+msgid "Use default Ninja Forms styling conventions."
+msgstr "使用預設 Ninja Form 樣式慣例。"
+
+#: includes/Config/PluginSettingsAdvanced.php:83
+msgid "Rollback"
+msgstr "回復"
+
+#: includes/Config/PluginSettingsAdvanced.php:84
+msgid "Rollback to v2.9.x"
+msgstr "回復為 v2.9.x"
+
+#: includes/Config/PluginSettingsAdvanced.php:85
+msgid "Rollback to the most recent 2.9.x release."
+msgstr "回復為最近的 2.9.x 版本。"
+
+#: includes/Config/PluginSettingsDefaults.php:5 includes/Fields/Date.php:51
+#: includes/Fields/Date.php:53
+msgid "m/d/Y"
+msgstr "m/d/Y"
+
+#: includes/Config/PluginSettingsGroups.php:12
+msgid "reCaptcha Settings"
+msgstr "reCaptcha 設定"
+
+#: includes/Config/PluginSettingsReCaptcha.php:57
+msgid "reCAPTCHA Theme"
+msgstr "reCAPTCHA 主題"
+
+#: includes/Config/SettingsGroups.php:14
+msgid "Rich Text Editor (RTE)"
+msgstr "RTF 編輯器 (RTE)"
+
+#: includes/Config/SettingsGroups.php:30
+msgid "Advanced"
+msgstr "進階設置"
+
+#: includes/Config/SettingsGroups.php:36
+msgid "Administration"
+msgstr "管理"
+
+#: includes/Database/MockData.php:14
+msgid "Foo"
+msgstr "Foo"
+
+#: includes/Database/MockData.php:21
+msgid "Bar"
+msgstr "Bar"
+
+#: includes/Database/MockData.php:28
+msgid "Baz"
+msgstr "Baz"
+
+#: includes/Database/MockData.php:42
+msgid "Blank Forms"
+msgstr "空白表單"
+
+#: includes/Database/MockData.php:54
+msgid "Contact Me"
+msgstr "聯絡我"
+
+#: includes/Database/MockData.php:176
+msgid "Mock Success Message Action"
+msgstr "模擬成功訊息動作"
+
+#: includes/Database/MockData.php:178
+msgid "Thank you {field:name} for filling out my form!"
+msgstr "{field:name}，感謝您填寫此表單！"
+
+#: includes/Database/MockData.php:190
+msgid "Mock Email Action"
+msgstr "模擬電子郵件動作"
+
+#: includes/Database/MockData.php:193
+msgid "This is an email action."
+msgstr "這是電子郵件動作。"
+
+#: includes/Database/MockData.php:194
+msgid "Hello, Ninja Forms!"
+msgstr "哈囉，Ninja 表單！"
+
+#: includes/Database/MockData.php:206 includes/Database/MockData.php:332
+#: includes/Database/MockData.php:490 includes/Database/MockData.php:810
+msgid "Mock Save Action"
+msgstr "模擬儲存動作"
+
+#: includes/Database/MockData.php:216 includes/Database/MockData.php:220
+msgid "Foo Bar"
+msgstr "Foo Bar"
+
+#: includes/Database/MockData.php:217
+msgid "foo@wpninjas.com"
+msgstr "foo@wpninjas.com"
+
+#: includes/Database/MockData.php:218
+msgid "This is a test"
+msgstr "這是測試"
+
+#: includes/Database/MockData.php:227 includes/Database/MockData.php:231
+msgid "John Doe"
+msgstr "John Doe"
+
+#: includes/Database/MockData.php:228
+msgid "user@gmail.com"
+msgstr "user@gmail.com"
+
+#: includes/Database/MockData.php:229
+msgid "This is another test."
+msgstr "這是另一個測試。"
+
+#: includes/Database/MockData.php:242
+#: includes/Templates/admin-menu-system-status.html.php:3
+msgid "Get Help"
+msgstr "取得說明"
+
+#: includes/Database/MockData.php:269
+msgid "What Can We Help You With?"
+msgstr "您需要什麼協助？"
+
+#: includes/Database/MockData.php:276
+msgid "Agree?"
+msgstr "是否同意？"
+
+#: includes/Database/MockData.php:283
+msgid "Best Contact Method?"
+msgstr "最佳的聯絡方法？"
+
+#: includes/Database/MockData.php:287 includes/Database/MockData.php:668
+#: includes/Fields/Phone.php:24
+msgid "Phone"
+msgstr "座機"
+
+#: includes/Database/MockData.php:301
+msgid "Snail Mail"
+msgstr "蝸牛郵件"
+
+#: includes/Database/MockData.php:315
+msgid "Send"
+msgstr "傳送"
+
+#: includes/Database/MockData.php:343
+msgid "Kitchen Sink"
+msgstr "Kitchen Sink"
+
+#: includes/Database/MockData.php:387 includes/Database/MockData.php:536
+msgid "Select List"
+msgstr "選取清單"
+
+#: includes/Database/MockData.php:390 includes/Database/MockData.php:418
+#: includes/Database/MockData.php:539 includes/Database/MockData.php:567
+#: includes/Database/MockData.php:595
+msgid "Option One"
+msgstr "選項一"
+
+#: includes/Database/MockData.php:397 includes/Database/MockData.php:425
+#: includes/Database/MockData.php:546 includes/Database/MockData.php:574
+#: includes/Database/MockData.php:602
+msgid "Option Two"
+msgstr "選項二"
+
+#: includes/Database/MockData.php:404 includes/Database/MockData.php:432
+#: includes/Database/MockData.php:553 includes/Database/MockData.php:581
+#: includes/Database/MockData.php:609
+msgid "Option Three"
+msgstr "選項三"
+
+#: includes/Database/MockData.php:415 includes/Database/MockData.php:564
+#: includes/Fields/ListRadio.php:24
+#: includes/Templates/admin-menu-forms.html.php:73
+#: includes/Templates/admin-menu-forms.html.php:101
+#: includes/Templates/admin-menu-forms.html.php:129
+#: includes/Templates/admin-menu-forms.html.php:157
+#: includes/Templates/admin-menu-forms.html.php:185
+msgid "Radio List"
+msgstr "圓鈕清單"
+
+#: includes/Database/MockData.php:501
+msgid "Bathroom Sink"
+msgstr "浴缸"
+
+#: includes/Database/MockData.php:592 includes/Fields/ListCheckbox.php:26
+msgid "Checkbox List"
+msgstr "核取方塊清單"
+
+#: includes/Database/MockData.php:649
+msgid "These are all the fields in the User Information section."
+msgstr "這些是使用者資訊區段中的所有欄位。"
+
+#: includes/Database/MockData.php:673 includes/Fields/Address.php:25
+msgid "Address"
+msgstr "地址"
+
+#: includes/Database/MockData.php:678 includes/Fields/City.php:25
+msgid "City"
+msgstr "市"
+
+#: includes/Database/MockData.php:688
+msgid "Zip Code"
+msgstr "郵遞區號"
+
+#: includes/Database/MockData.php:697
+msgid "These are all the fields in the Pricing section."
+msgstr "這些是價格區段中的所有欄位。"
+
+#: includes/Database/MockData.php:701
+msgid "Product (quanitity included)"
+msgstr "產品 (包括數量)"
+
+#: includes/Database/MockData.php:708
+msgid "Product (seperate quantity)"
+msgstr "產品 (不包括數量)"
+
+#: includes/Database/MockData.php:715 includes/Database/MockData.php:910
+#: includes/Fields/Quantity.php:30
+msgid "Quantity"
+msgstr "數量"
+
+#: includes/Database/MockData.php:730 includes/Database/MockData.php:934
+#: includes/Database/MockData.php:995 includes/Database/MockData.php:1098
+#: includes/Fields/Total.php:28
+msgid "Total"
+msgstr "總合"
+
+#: includes/Database/MockData.php:735 includes/Fields/CreditCardFullName.php:25
+msgid "Credit Card Full Name"
+msgstr "信用卡全名"
+
+#: includes/Database/MockData.php:740 includes/Fields/CreditCardNumber.php:25
+msgid "Credit Card Number"
+msgstr "信用卡卡號"
+
+#: includes/Database/MockData.php:745
+msgid "Credit Card CVV"
+msgstr "信用卡 CVV"
+
+#: includes/Database/MockData.php:750
+#: includes/Fields/CreditCardExpiration.php:26
+msgid "Credit Card Expiration"
+msgstr "信用卡到期"
+
+#: includes/Database/MockData.php:755
+msgid "Credit Card Zip Code"
+msgstr "信用卡郵遞區號"
+
+#: includes/Database/MockData.php:764
+msgid "These are various special fields."
+msgstr "這些是各種特殊欄位。"
+
+#: includes/Database/MockData.php:774
+msgid "Anti-Spam Question (Answer = answer)"
+msgstr "防垃圾郵件問題 (Answer = answer)"
+
+#: includes/Database/MockData.php:776
+msgid "answer"
+msgstr "答案"
+
+#: includes/Database/MockData.php:805
+msgid "processing"
+msgstr "處理中"
+
+#: includes/Database/MockData.php:822
+msgid "Long Form - "
+msgstr "複雜格式 - "
+
+#: includes/Database/MockData.php:822
+#: includes/Templates/admin-menu-new-form.html.php:364
+msgid " Fields"
+msgstr " 欄位"
+
+#: includes/Database/MockData.php:835
+msgid "Field #"
+msgstr "欄位編號"
+
+#: includes/Database/MockData.php:851
+msgid "Email Subscription Form"
+msgstr "電子郵件訂閱表單"
+
+#: includes/Database/MockData.php:863
+msgid "Email Address"
+msgstr "電子郵件地址"
+
+#: includes/Database/MockData.php:867
+msgid "Enter your email address"
+msgstr "輸入電子郵件地址"
+
+#: includes/Database/MockData.php:876
+msgid "Subscribe"
+msgstr "訂閱"
+
+#: includes/Database/MockData.php:888
+msgid "Product Form (with Quantity Field)"
+msgstr "產品表單 (包括數量欄位)"
+
+#: includes/Database/MockData.php:943 includes/Database/MockData.php:1004
+#: includes/Database/MockData.php:1107 includes/Database/MockData.php:1150
+msgid "Purchase"
+msgstr "購買"
+
+#: includes/Database/MockData.php:955 includes/Database/MockData.php:1016
+#: includes/Database/MockData.php:1119
+msgid "You purchased "
+msgstr "已購買 "
+
+#: includes/Database/MockData.php:956
+msgid "product(s) for "
+msgstr "以下產品給 "
+
+#: includes/Database/MockData.php:964
+msgid "Product Form (Inline Quantity)"
+msgstr "產品表單 (內含數量)"
+
+#: includes/Database/MockData.php:1017
+msgid " product(s) for "
+msgstr " 以下產品給 "
+
+#: includes/Database/MockData.php:1025
+msgid "Product Form (Multiple Products)"
+msgstr "產品表單 (多個產品)"
+
+#: includes/Database/MockData.php:1035
+msgid "Product A"
+msgstr "產品 A"
+
+#: includes/Database/MockData.php:1047
+msgid "Quantity for Product A"
+msgstr "產品 A 的數量"
+
+#: includes/Database/MockData.php:1062
+msgid "Product B"
+msgstr "產品 B"
+
+#: includes/Database/MockData.php:1074
+msgid "Quantity for Product B"
+msgstr "產品 B 的數量"
+
+#: includes/Database/MockData.php:1120
+msgid "of Product A and "
+msgstr "個產品 A 以及 "
+
+#: includes/Database/MockData.php:1121
+msgid "of Product B for $"
+msgstr "個產品 B 價格為"
+
+#: includes/Database/MockData.php:1132
+msgid "Form with Calculations"
+msgstr "可計算表單"
+
+#: includes/Database/MockData.php:1136
+msgid "My First Calculation"
+msgstr "我的第一筆計算"
+
+#: includes/Database/MockData.php:1140
+msgid "My Second Calculation"
+msgstr "找的第二筆計算"
+
+#: includes/Database/MockData.php:1158
+msgid ""
+"Calculations are returned with the AJAX response ( response -> data -> calcs"
+msgstr "計算會以 AJAX 回應 (回應 -> 資料 -> 計算"
+
+#: includes/Database/Models/Form.php:117
+msgid "copy"
+msgstr "複製"
+
+#: includes/Database/Models/Form.php:267
+msgid "Save Form"
+msgstr "儲存表單"
+
+#: includes/Database/Models/Form.php:529 includes/Fields/CreditCardZip.php:23
+msgid "Credit Card Zip"
+msgstr "信用卡壓縮"
+
+#: includes/Display/Preview.php:48
+msgid "You must be logged in to preview a form."
+msgstr "您必須登入才能預覽表單。"
+
+#: includes/Display/Render.php:80 includes/Display/Render.php:246
+msgid "No Fields Found."
+msgstr "找不到欄位。"
+
+#: includes/Display/Shortcodes.php:36
+msgid "Notice: Ninja Forms shortcode used without specifying a form."
+msgstr "注意： 使用 Ninja Form 短碼而未指定表單。"
+
+#: includes/Display/Shortcodes.php:43
+msgid "Ninja Forms shortcode used without specifying a form."
+msgstr "使用 Ninja Form 短碼而未指定表單。"
+
+#: includes/Fields/Address2.php:23
+msgid "Address 2"
+msgstr "地址 2"
+
+#: includes/Fields/Button.php:26
+#: includes/Templates/admin-menu-forms.html.php:79
+#: includes/Templates/admin-menu-forms.html.php:107
+#: includes/Templates/admin-menu-forms.html.php:135
+#: includes/Templates/admin-menu-forms.html.php:163
+#: includes/Templates/admin-menu-forms.html.php:191
+msgid "Button"
+msgstr "按鈕"
+
+#: includes/Fields/Checkbox.php:30
+msgid "Single Checkbox"
+msgstr "單一核取方塊"
+
+#: includes/Fields/Checkbox.php:49
+msgid "checked"
+msgstr "已勾選"
+
+#: includes/Fields/Checkbox.php:49
+msgid "unchecked"
+msgstr "取消勾選"
+
+#: includes/Fields/CreditCardCVC.php:25
+msgid "Credit Card CVC"
+msgstr "信用卡 CVC"
+
+#: includes/Fields/Date.php:52
+msgid "d-m-Y"
+msgstr "d-m-Y"
+
+#: includes/Fields/Date.php:54
+msgid "m-d-Y"
+msgstr "m-d-Y"
+
+#: includes/Fields/Date.php:55
+msgid "Y-m-d"
+msgstr "Y-m-d"
+
+#: includes/Fields/Date.php:56
+msgid "Y/m/d"
+msgstr "Y/m/d"
+
+#: includes/Fields/Date.php:57
+msgid "l, F d Y"
+msgstr "l, F d Y"
+
+#: includes/Fields/hr.php:28
+msgid "Divider"
+msgstr "Divider"
+
+#: includes/Fields/ListSelect.php:26
+msgid "Select"
+msgstr "選擇"
+
+#: includes/Fields/LIstState.php:26
+msgid "State"
+msgstr "州"
+
+#: includes/Fields/Note.php:43
+msgid "Note text can be edited in the note field's advanced settings below."
+msgstr "請注意您可以在下列附註欄位的進階設定編輯文字。"
+
+#: includes/Fields/Note.php:45
+msgid "Note"
+msgstr "註記"
+
+#: includes/Fields/PasswordConfirm.php:24
+msgid "Password Confirm"
+msgstr "密碼確認"
+
+#: includes/Fields/PasswordConfirm.php:26
+msgid "password"
+msgstr "密碼"
+
+#: includes/Fields/Recaptcha.php:24
+msgid "Recaptcha"
+msgstr "Recaptcha"
+
+#: includes/Fields/Recaptcha.php:51
+msgid "Please complete the recaptcha"
+msgstr "請完成 recaptcha 驗證"
+
+#: includes/Fields/Shipping.php:41
+msgid "Advanced Shipping"
+msgstr "進階傳送"
+
+#: includes/Fields/Spam.php:27
+msgid "Question"
+msgstr "問題"
+
+#: includes/Fields/Spam.php:28
+msgid "Question Position"
+msgstr "問題位置"
+
+#: includes/Fields/Spam.php:57
+msgid "Incorrect Answer"
+msgstr "不正確的回答"
+
+#: includes/Fields/StarRating.php:28
+msgid "Number of Stars"
+msgstr "星號數目"
+
+#: includes/Fields/Terms.php:31
+msgid "Terms List"
+msgstr "詞彙清單"
+
+#: includes/Fields/Terms.php:84
+#, php-format
+msgid "No available terms for this taxonomy. %sAdd a term%s"
+msgstr "此分類法沒有可用的詞彙。 %s新增詞彙%s"
+
+#: includes/Fields/Terms.php:99
+msgid "No taxonomy selected."
+msgstr "未選取分類法。"
+
+#: includes/Fields/Terms.php:108
+msgid "Available Terms"
+msgstr "可用詞彙"
+
+#: includes/Fields/Textarea.php:26
+msgid "Paragraph Text"
+msgstr "段落文字"
+
+#: includes/Fields/Textbox.php:28
+msgid "Single Line Text"
+msgstr "單一行文字"
+
+#: includes/Fields/Zip.php:25
+msgid "Zip"
+msgstr "郵政編碼"
+
+#: includes/MergeTags/Post.php:13
+msgid "Post"
+msgstr "文章"
+
+#: includes/MergeTags/QueryStrings.php:13
+msgid "Query Strings"
+msgstr "查詢字串"
+
+#: includes/MergeTags/QueryStrings.php:18
+msgid "Query String"
+msgstr "查詢字串"
+
+#: includes/MergeTags/System.php:13
+msgid "System"
+msgstr "系統"
+
+#: includes/MergeTags/User.php:13
+msgid "User"
+msgstr "用戶"
+
+#: includes/Templates/admin-menu-addons.html.php:9
+msgid " requires an update. You have version "
+msgstr " 需要更新。您安裝的是版本 "
+
+#: includes/Templates/admin-menu-addons.html.php:9
+msgid " installed. The current version is "
+msgstr " 。目前版本為 "
+
+#: includes/Templates/admin-menu-forms.html.php:17
+msgid "Editing Field"
+msgstr "編輯欄位"
+
+#: includes/Templates/admin-menu-forms.html.php:21
+msgid "Label Name"
+msgstr "標籤名稱"
+
+#: includes/Templates/admin-menu-forms.html.php:27
+msgid "Above Field"
+msgstr "上方欄位"
+
+#: includes/Templates/admin-menu-forms.html.php:28
+msgid "Below Field"
+msgstr "下方欄位"
+
+#: includes/Templates/admin-menu-forms.html.php:29
+msgid "Left of Field"
+msgstr "左側欄位"
+
+#: includes/Templates/admin-menu-forms.html.php:30
+msgid "Right of Field"
+msgstr "右側欄位"
+
+#: includes/Templates/admin-menu-forms.html.php:31
+msgid "Hide Label"
+msgstr "隱藏標籤"
+
+#: includes/Templates/admin-menu-forms.html.php:35
+msgid "Class Name"
+msgstr "類別名稱"
+
+#: includes/Templates/admin-menu-forms.html.php:55
+#: includes/Templates/admin-menu-forms.html.php:83
+#: includes/Templates/admin-menu-forms.html.php:111
+#: includes/Templates/admin-menu-forms.html.php:139
+#: includes/Templates/admin-menu-forms.html.php:167
+msgid "Basic Fields"
+msgstr "基本欄位"
+
+#: includes/Templates/admin-menu-forms.html.php:70
+#: includes/Templates/admin-menu-forms.html.php:98
+#: includes/Templates/admin-menu-forms.html.php:126
+#: includes/Templates/admin-menu-forms.html.php:154
+#: includes/Templates/admin-menu-forms.html.php:182
+msgid "Mult-Select"
+msgstr "複選"
+
+#: includes/Templates/admin-menu-new-form.html.php:30
+#: includes/Templates/admin-menu-new-form.html.php:32
+#: includes/Templates/ui-nf-header.html.php:17
+msgid "Add new field"
+msgstr "新增欄位"
+
+#: includes/Templates/admin-menu-new-form.html.php:37
+#: includes/Templates/admin-menu-new-form.html.php:39
+msgid "Add new action"
+msgstr "新增動作"
+
+#: includes/Templates/admin-menu-new-form.html.php:60
+msgid "Expand Menu"
+msgstr "展開選單"
+
+#: includes/Templates/admin-menu-new-form.html.php:64
+#: includes/Templates/admin-menu-new-form.html.php:179
+#: includes/Templates/admin-menu-new-form.html.php:355
+#: includes/Templates/ui-nf-menu-drawer.html.php:3
+msgid "Publish"
+msgstr "發佈"
+
+#: includes/Templates/admin-menu-new-form.html.php:64
+msgid "PUBLISH"
+msgstr "發佈"
+
+#: includes/Templates/admin-menu-new-form.html.php:68
+msgid "Loading"
+msgstr "加載中"
+
+#: includes/Templates/admin-menu-new-form.html.php:80
+msgid "View Changes"
+msgstr "檢視變更"
+
+#: includes/Templates/admin-menu-new-form.html.php:97
+msgid "Add form fields"
+msgstr "新增表單欄位"
+
+#: includes/Templates/admin-menu-new-form.html.php:98
+msgid "Get started by adding your first form field."
+msgstr "從新增第一個表單欄位開始。"
+
+#: includes/Templates/admin-menu-new-form.html.php:98
+msgid "Add New Field"
+msgstr "新增欄位"
+
+#: includes/Templates/admin-menu-new-form.html.php:98
+msgid "Just click here and select the fields you want."
+msgstr "按一下此處並選取想要的欄位。"
+
+#: includes/Templates/admin-menu-new-form.html.php:98
+msgid "It's that easy. Or..."
+msgstr "就是這麼簡單。您也可以..."
+
+#: includes/Templates/admin-menu-new-form.html.php:99
+msgid "Start from a template"
+msgstr "從範本開始"
+
+#: includes/Templates/admin-menu-new-form.html.php:102
+msgid "Contact Us"
+msgstr "聯絡我們"
+
+#: includes/Templates/admin-menu-new-form.html.php:103
+msgid ""
+"Allow your users to contact you with this simple contact form. You can add "
+"and remove fields as needed."
+msgstr "讓使用者透過簡單的聯絡表格與您聯絡。您可以依需要新增或移除欄位。"
+
+#: includes/Templates/admin-menu-new-form.html.php:109
+msgid "Quote Request"
+msgstr "報價要求"
+
+#: includes/Templates/admin-menu-new-form.html.php:110
+msgid ""
+"Manage quote requests from your website easily with this remplate. You can "
+"add and remove fields as needed."
+msgstr "透過此範本，輕鬆從網站管理報價。您可以依需要新增或移除欄位。"
+
+#: includes/Templates/admin-menu-new-form.html.php:115
+msgid "Event Registration"
+msgstr "活動註冊"
+
+#: includes/Templates/admin-menu-new-form.html.php:116
+msgid ""
+"Allow user to register for your next event this easy to complete form. You "
+"can add and remove fields as needed."
+msgstr "讓使用者完成表單，輕鬆註冊下次活動。您可以依需要新增或移除欄位。"
+
+#: includes/Templates/admin-menu-new-form.html.php:121
+msgid "Newsletter Sign Up Form"
+msgstr "電子報註冊表單"
+
+#: includes/Templates/admin-menu-new-form.html.php:122
+msgid ""
+"Add subscribers and grow your email list with this newsletter signup form. "
+"You can add and remove fields as needed."
+msgstr "新增訂閱者並透過此電子報註冊表單壯大您的電子郵件清單。您可以依需要新增或移除欄位。"
+
+#: includes/Templates/admin-menu-new-form.html.php:131
+msgid "Add form actions"
+msgstr "新增表單動作"
+
+#: includes/Templates/admin-menu-new-form.html.php:132
+msgid ""
+"Get started by adding your first form field. Just click the plus and select "
+"the actions you want. It's that easy."
+msgstr "從新增第一個表單欄位開始。只需按一下加號並選取您要的動作。就是這麼簡單。"
+
+#: includes/Templates/admin-menu-new-form.html.php:145
+msgid "Duplicate (^ + C + click)"
+msgstr "複製 (^ + C + 點選)"
+
+#: includes/Templates/admin-menu-new-form.html.php:146
+msgid "Delete (^ + D + click)"
+msgstr "刪除 (^ + D + 點選)"
+
+#: includes/Templates/admin-menu-new-form.html.php:156
+msgid "Actions"
+msgstr "操作"
+
+#: includes/Templates/admin-menu-new-form.html.php:191
+msgid "Toggle Drawer"
+msgstr "切換瀏覽選單"
+
+#: includes/Templates/admin-menu-new-form.html.php:192
+#: includes/Templates/ui-nf-toggle-drawer.html.php:2
+msgid "Full screen"
+msgstr "全螢幕"
+
+#: includes/Templates/admin-menu-new-form.html.php:192
+#: includes/Templates/ui-nf-toggle-drawer.html.php:2
+msgid "Half screen"
+msgstr "半螢幕"
+
+#: includes/Templates/admin-menu-new-form.html.php:231
+msgid "Undo"
+msgstr "復原"
+
+#: includes/Templates/admin-menu-new-form.html.php:324
+#: includes/Templates/admin-menu-new-form.html.php:330
+#: includes/Templates/admin-menu-new-form.html.php:339
+msgid "Done"
+msgstr "完成"
+
+#: includes/Templates/admin-menu-new-form.html.php:337
+msgid "Undo All"
+msgstr "全部復原"
+
+#: includes/Templates/admin-menu-new-form.html.php:337
+msgid " Undo All"
+msgstr " 全部復原"
+
+#: includes/Templates/admin-menu-new-form.html.php:345
+msgid "Almost there..."
+msgstr "即將完成…"
+
+#: includes/Templates/admin-menu-new-form.html.php:353
+msgid "Not Yet"
+msgstr "不，不要變更"
+
+#: includes/Templates/admin-menu-new-form.html.php:626
+msgid " Open in new window"
+msgstr " 在新視窗中開啟"
+
+#: includes/Templates/admin-menu-settings-licenses.html.php:29
+msgid "De-activate"
+msgstr "停用"
+
+#: includes/Templates/admin-menu-settings.html.php:25
+msgid "Fix it."
+msgstr "修復它。"
+
+#: includes/Templates/admin-menu-subs-filter.html.php:2
+msgid "- Select a form"
+msgstr "- 選取表單"
+
+#: includes/Templates/admin-menu-subs-filter.html.php:11
+msgid "Being Date"
+msgstr "目前日期"
+
+#: includes/Templates/admin-menu-system-status.html.php:4
+msgid "Before requesting help from our support team please review:"
+msgstr "向支援中心要求協助前，請先查看："
+
+#: includes/Templates/admin-menu-system-status.html.php:6
+msgid "Ninja Forms THREE documentation"
+msgstr "Ninja 表單 3 文件"
+
+#: includes/Templates/admin-menu-system-status.html.php:7
+msgid "What to try before contacting support"
+msgstr "聯絡支援中心前要嘗試的動作"
+
+#: includes/Templates/admin-menu-system-status.html.php:8
+msgid "Our Scope of Support"
+msgstr "我們的支援範圍"
+
+#: includes/Templates/admin-metabox-import-export-favorite-fields-import.html.php:17
+#: includes/Templates/admin-metabox-import-export-favorite-fields-import.html.php:20
+msgid "Import Fields"
+msgstr "匯入欄位"
+
+#: includes/Templates/admin-metabox-sub-info.html.php:17
+msgid "Updated on: "
+msgstr "更新時間： "
+
+#: includes/Templates/admin-metabox-sub-info.html.php:18
+msgid "Submitted on: "
+msgstr "提交日期： "
+
+#: includes/Templates/admin-metabox-sub-info.html.php:20
+msgid "Submitted by: "
+msgstr "提交人員： "
+
+#: includes/Templates/admin-metabox-submission-example.php:1
+msgid "Submission Data"
+msgstr "提交資料"
+
+#: includes/Templates/admin-notice-form-import.html.php:4
+msgid "View"
+msgstr "查看"
+
+#: includes/Templates/admin-wp-die.html.php:7
+msgid "Show More"
+msgstr "顯示更多"
+
+#: includes/Templates/ui-item-controls.html.php:4
+msgid "Editing field"
+msgstr "編輯欄位"
+
+#: includes/Templates/ui-nf-header.html.php:5
+#: includes/Templates/ui-nf-menu-drawer.html.php:6
+msgid "Form Fields"
+msgstr "表單欄位"
+
+#: includes/Templates/ui-nf-header.html.php:8
+msgid "Preview Changes"
+msgstr "預覽變更"
+
+#: includes/Templates/ui-nf-header.html.php:18
+msgid "Contact Form"
+msgstr "聯絡表格"
+
+#: lib/NF_AddonChecker.php:42
+#, php-format
+msgid ""
+"Oops! That addon is not yet compatible with Ninja Forms THREE. %sLearn More"
+"%s."
+msgstr "糟糕了！ 該附加元件與 Ninja Form 3 不相容。 %s更多資訊%s。"
+
+#: lib/NF_AddonChecker.php:43
+#, php-format
+msgid "%s was deactivated."
+msgstr "%s 已停用。"
+
+#: lib/NF_Tracking.php:78
+msgid "Please help us improve Ninja Forms!"
+msgstr "請協助我們改善 Ninja 表單！"
+
+#: lib/NF_Tracking.php:80
+msgid ""
+"If you opt-in, some data about your installation of Ninja Forms will be sent "
+"to NinjaForms.com (this does NOT include your submissions)."
+msgstr "如果您選擇使用，您安裝 Ninja 表單的部份相關資料會傳送給 NinjaForms.com (不包括提交項目)。"
+
+#: lib/NF_Tracking.php:81
+msgid "If you skip this, that's okay! Ninja Forms will still work just fine."
+msgstr "您也可以略過此步驟！Ninja 表單會如常運作。"
+
+#: lib/NF_Tracking.php:84
+#, php-format
+msgid "%sAllow%s"
+msgstr "%s允許%s"
+
+#: lib/NF_Tracking.php:85
+#, php-format
+msgid "%sDo not allow%s"
+msgstr "%s不允許%s"
+
+#: lib/NF_VersionSwitcher.php:24 lib/NF_VersionSwitcher.php:40
+msgid "You do not have permission."
+msgstr "您沒有權限。"
+
+#: lib/NF_VersionSwitcher.php:25 lib/NF_VersionSwitcher.php:41
+msgid "Permission Denied"
+msgstr "已拒絕權限"
+
+#: lib/NF_VersionSwitcher.php:70
+msgid "Ninja Forms Dev"
+msgstr "Ninja 表單開發"
+
+#: lib/NF_VersionSwitcher.php:80
+msgid "DEBUG: Switch to 2.9.x"
+msgstr "偵錯：切換至 2.9.x"
+
+#: lib/NF_VersionSwitcher.php:83
+msgid "DEBUG: Switch to 3.0.x"
+msgstr "偵錯：切換至 3.0.x"

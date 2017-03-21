@@ -1,0 +1,434 @@
+[
+  {
+    "title": "Conditional Logic",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2012/10/conditional-logic.png",
+    "content": "Show or hide fields, change field values, or send specific notifications all based upon user input.",
+    "link": "https://ninjaforms.com/extensions/conditional-logic/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Conditional+Logic",
+    "plugin": "ninja-forms-conditional-logic/ninja-forms-conditional-logic.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Conditional+Logic&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Conditional+Logic+Docs",
+    "version": "1.4.0"
+  },
+  {
+    "title": "Multi-Part Forms",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2012/10/multi-part-forms.png",
+    "content": "Easily break up long forms into multiple pages. Control animation and direction. Show a confirmation page.",
+    "link": "https://ninjaforms.com/extensions/multi-part-forms/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Multi-Part+Forms",
+    "plugin": "ninja-forms-multi-part/ninja-forms-multi-part.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Multi-Part+Forms&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Multi-Part+Forms+Docs",
+    "version": "1.3.5"
+  },
+  {
+    "title": "Front-End Posting",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2012/10/front-end-posting.png",
+    "content": "Create posts, pages, or any custom post type from the front-end.",
+    "link": "https://ninjaforms.com/extensions/front-end-posting/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Front-End+Posting",
+    "plugin": "ninja-forms-post-creation/post-creation.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Front-End+Posting&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Front-End+Posting+Docs",
+    "version": "3.0.0"
+  },
+  {
+    "title": "File Uploads",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2012/10/file-uploads1.png",
+    "content": "Add file upload fields to save files to your server or send them to Dropbox or Amazon S3 securely.",
+    "link": "https://ninjaforms.com/extensions/file-uploads/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=File+Uploads",
+    "plugin": "ninja-forms-uploads/file-uploads.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=File+Uploads&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=File+Uploads+Docs",
+    "version": "1.4.9"
+  },
+  {
+    "title": "Save User Progress",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2012/10/save-user-progress.png",
+    "content": "Allow users to save their form progress and return later to complete their submissions.",
+    "link": "https://ninjaforms.com/extensions/save-user-progress/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Save+User+Progress",
+    "plugin": "ninja-forms-save-progress/save-progress.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Save+User+Progress&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Save+User+Progress+Docs",
+    "version": "1.2.2"
+  },
+  {
+    "title": "Layout and Styles",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/01/layout-styles.png",
+    "content": "Easily create multi-column form layouts and beautifully styled form elements without mastering CSS.",
+    "link": "https://ninjaforms.com/extensions/layout-styles/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Layout+and+Styles",
+    "plugin": "ninja-forms-layout-styles/ninja-forms-style.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Layout+and+Styles&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Layout+and+Styles+Docs",
+    "version": "3.0.1"
+  },
+  {
+    "title": "Front-End Editor",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/03/front-end-editor.png",
+    "content": "Edit posts, pages, custom post types, user profiles, and more from the front-end. Customizable registration and login.",
+    "link": "https://ninjaforms.com/extensions/front-end-editor/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Front-End+Editor",
+    "plugin": "ninja-forms-front-end-editor/front-end-editor.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Front-End+Editor&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Front-End+Editor+Docs",
+    "version": "1.0.8"
+  },
+  {
+    "title": "MailChimp",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/04/mailchimp-for-ninja-forms.png",
+    "content": "Quickly create newsletter signup forms for your MailChimp account.",
+    "link": "https://ninjaforms.com/extensions/mail-chimp/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=MailChimp",
+    "plugin": "ninja-forms-mail-chimp/ninja-forms-mail-chimp.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=MailChimp&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=MailChimp+Docs",
+    "version": "3.0.1"
+  },
+  {
+    "title": "Campaign Monitor",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/05/campaign-monitor-header2.png",
+    "content": "Quickly create newsletter signup forms for your Campaign Monitor account. ",
+    "link": "https://ninjaforms.com/extensions/campaign-monitor/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Campaign+Monitor",
+    "plugin": "ninja-forms-campaign-monitor/ninja-forms-campaign-monitor.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Campaign+Monitor&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Campaign+Monitor+Docs",
+    "version": "3.0"
+  },
+  {
+    "title": "User Analytics",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/05/user-analytics-header.png",
+    "content": "Collect data about users who submit your forms. Capture: OS, IP address, Browser, Region, etc.",
+    "link": "https://ninjaforms.com/extensions/user-analytics/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=User+Analytics",
+    "plugin": "ninja-forms-user-analytics/ninja-forms-user-analytics.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=User+Analytics&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=User+Analytics+Docs",
+    "version": "1.2.5"
+  },
+  {
+    "title": "Constant Contact",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/07/constant-contact.png",
+    "content": "Quickly create newsletter signup forms for your Constant Contact account.",
+    "link": "https://ninjaforms.com/extensions/constant-contact/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Constant+Contact",
+    "plugin": "ninja-forms-constant-contact/ninja-forms-constant-contact.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Constant+Contact&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Constant+Contact+Docs",
+    "version": "3.0"
+  },
+  {
+    "title": "Pushover",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/07/pushover.png",
+    "content": "Send push notifications of form submissions to your Android and iOS devices with Pushover.",
+    "link": "https://ninjaforms.com/extensions/pushover/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Pushover",
+    "plugin": "ninja-forms-pushover/ninja-forms-pushover.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Pushover&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Pushover+Docs",
+    "version": "1.0.3"
+  },
+  {
+    "title": "FreshBooks",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/07/freshbooks.png",
+    "content": "Automatically insert Ninja Forms data right into Freshbooks when your potential clients submit forms.",
+    "link": "https://ninjaforms.com/extensions/freshbooks/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=FreshBooks",
+    "plugin": "ninja-forms-freshbooks/ninja-forms-freshbooks.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=FreshBooks&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=FreshBooks+Docs",
+    "version": "1.0.1"
+  },
+  {
+    "title": "AWeber",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/08/aweber.png",
+    "content": "Use Ninja Forms to quickly create flexible newsletter signup forms for your AWeber email marketing account.",
+    "link": "https://ninjaforms.com/extensions/aweber/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=AWeber",
+    "plugin": "ninja-forms-aweber/ninja-forms-aweber.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=AWeber&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=AWeber+Docs",
+    "version": "3.0"
+  },
+  {
+    "title": "PayPal Express",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/09/paypal-express.png",
+    "content": "Use PayPal Express to accept payments using your Ninja Forms.",
+    "link": "https://ninjaforms.com/extensions/paypal-express/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=PayPal+Express",
+    "plugin": "ninja-forms-paypal-express/ninja-forms-paypal-express.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=PayPal+Express&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=PayPal+Express+Docs",
+    "version": "1.0.9"
+  },
+  {
+    "title": "MailPoet",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/09/mailpoet.png",
+    "content": "The MailPoet (formerly Wisija) extension allows you to quickly create newsletter signup forms for your mailing lists using...",
+    "link": "https://ninjaforms.com/extensions/mailpoet/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=MailPoet",
+    "plugin": "ninja-forms-mailpoet/nf-mailpoet.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=MailPoet&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=MailPoet+Docs",
+    "version": "1.1.3"
+  },
+  {
+    "title": "Text Message Notifications",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/10/text-message-notifications.png",
+    "content": "Send text message notifications to a site administrator when a form has been submitted.",
+    "link": "https://ninjaforms.com/extensions/text-message-notifications/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Text+Message+Notifications",
+    "plugin": "ninja-forms-text-message-notifications/nf-text-message-notifications.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Text+Message+Notifications&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Text+Message+Notifications+Docs",
+    "version": "1.1"
+  },
+  {
+    "title": "Modal Forms",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/11/modal-forms.png",
+    "content": "Open your Ninja Forms with a simple and clean modal pop-up.",
+    "link": "https://ninjaforms.com/extensions/modal-forms/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Modal+Forms",
+    "plugin": "ninja-forms-modal/ninja-forms-modal.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Modal+Forms&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Modal+Forms+Docs",
+    "version": "1.0.1"
+  },
+  {
+    "title": "Mad Mimi",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/12/mad-mini.png",
+    "content": "Use Ninja Forms to quickly create flexible newsletter signup forms for your Mad Mimi email marketing account.",
+    "link": "https://ninjaforms.com/extensions/mad-mimi/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Mad+Mimi",
+    "plugin": "ninja-forms-mad-mimi/ninja-forms-mad-mimi.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Mad+Mimi&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Mad+Mimi+Docs",
+    "version": "1.0.2"
+  },
+  {
+    "title": "Zoho CRM",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/12/zoho-crm.png",
+    "content": "Easily integrate your Zoho CRM and convert more inquiries into sales",
+    "link": "https://ninjaforms.com/extensions/zoho-crm/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zoho+CRM",
+    "plugin": "ninja-forms-zoho-crm/zoho-integration.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Zoho+CRM&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zoho+CRM+Docs",
+    "version": "1.7.1"
+  },
+  {
+    "title": "Table Editor",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/01/table-editor.png",
+    "content": "Collect tabular data in your form from users with a spreadsheet-like table editor.",
+    "link": "https://ninjaforms.com/extensions/table-editor/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Table+Editor",
+    "plugin": "ninja-forms-table-editor/ninja-forms-table-editor.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Table+Editor&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Table+Editor+Docs",
+    "version": "1.3.9"
+  },
+  {
+    "title": "Capsule CRM",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/01/capsule.png",
+    "content": "Create a new contact, opportunity, and task automatically from your contact us form.",
+    "link": "https://ninjaforms.com/extensions/capsule-crm/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Capsule+CRM",
+    "plugin": "ninja-forms-capsule-crm/ninja-forms-casule-crm.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Capsule+CRM&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Capsule+CRM+Docs",
+    "version": "1.5.2"
+  },
+  {
+    "title": "Secure Form",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/03/secure-form.png",
+    "content": "Control who can see your form based on a password or popular WordPress eCommerce systems.",
+    "link": "https://ninjaforms.com/extensions/secure-form/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Secure+Form",
+    "plugin": "ninja-forms-secure-form/ninja-forms-secure-form.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Secure+Form&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Secure+Form+Docs",
+    "version": "1.1.2"
+  },
+  {
+    "title": "Stripe",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2013/09/stripe.png",
+    "content": "Use Stripe to accept payments using your Ninja Forms.",
+    "link": "https://ninjaforms.com/extensions/stripe/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Stripe",
+    "plugin": "ninja-forms-stripe/ninja-forms-stripe.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Stripe&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Stripe+Docs",
+    "version": "1.0.10"
+  },
+  {
+    "title": "WP Ninjas User Bundle",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/user-bundle.png",
+    "content": "Get all the extensions developed by the WP Ninjas, the creators of the Ninja Forms plugin, at an amazingly discounted price.",
+    "link": "https://ninjaforms.com/extensions/wp-ninjas-user-bundle/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=WP+Ninjas+User+Bundle",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=WP+Ninjas+User+Bundle&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=WP+Ninjas+User+Bundle+Docs",
+    "version": ""
+  },
+  {
+    "title": "Insightly CRM",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/insightly.png",
+    "content": "Create contacts, opportunities, projects, tasks, and notes from your form!",
+    "link": "https://ninjaforms.com/extensions/insightly-crm/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Insightly+CRM",
+    "plugin": "ninja-forms-insightly-crm/ninja-forms-insightly-crm.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Insightly+CRM&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Insightly+CRM+Docs",
+    "version": "1.6"
+  },
+  {
+    "title": "PDF Form Submission",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/pdfsubmission.png",
+    "content": "Easily create PDF copies of your form submissions",
+    "link": "https://ninjaforms.com/extensions/pdf-form-submissions/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=PDF+Form+Submission",
+    "plugin": "ninja-forms-pdf-submissions/nf-pdf-submissions.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=PDF+Form+Submission&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=PDF+Form+Submission+Docs",
+    "version": "1.3.5"
+  },
+  {
+    "title": "White Label",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/whitelabelforms.png",
+    "content": "Brand the amazing Ninja Forms plugin however you like. Change \"Ninja Forms\" to your name and removes user facing references to Ninja Forms.",
+    "link": "https://ninjaforms.com/extensions/white-label-forms/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=White+Label",
+    "plugin": "ninja-forms-white-label/ninja-forms-white-label.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=White+Label&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=White+Label+Docs",
+    "version": "1.0.5"
+  },
+  {
+    "title": "Batchbook CRM",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/batchbookcrm.png",
+    "content": "Connect WordPress to your Batchbook CRM to automatically create contacts and companies.",
+    "link": "https://ninjaforms.com/extensions/batchbook-crm/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Batchbook+CRM",
+    "plugin": "ninja-forms-batchbook-crm/ninja-forms-batchbook-crm.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Batchbook+CRM&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Batchbook+CRM+Docs",
+    "version": "1.3.3"
+  },
+  {
+    "title": "Sendy",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/sendy1.png",
+    "content": "Sendy extension for Ninja Forms lets you subscribe user’s using Ninja Forms.",
+    "link": "https://ninjaforms.com/extensions/sendy/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Sendy",
+    "plugin": "ninja-forms-sendy/ninja-forms-sendy.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Sendy&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Sendy+Docs",
+    "version": "1.0.2"
+  },
+  {
+    "title": "Trello",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/trello.png",
+    "content": "Create Trello cards from your Ninja Forms submissions.",
+    "link": "https://ninjaforms.com/extensions/trello/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Trello",
+    "plugin": "ninja-forms-trello/ninja-forms-trello.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Trello&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Trello+Docs",
+    "version": "1.1.1"
+  },
+  {
+    "title": "Elavon",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/elavon.png",
+    "content": "Collect credit card payments into your Elavon merchant account (requires SSL certificate)",
+    "link": "https://ninjaforms.com/extensions/elavon/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Elavon",
+    "plugin": "ninja-forms-elavon-payment-gateway/ninja-forms-elavon-payment-gateway.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Elavon&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Elavon+Docs",
+    "version": "1.4"
+  },
+  {
+    "title": "Zapier",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2014/08/zapier.png",
+    "content": "Easily integrate Ninja Forms with Zapier.",
+    "link": "https://ninjaforms.com/extensions/zapier/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zapier",
+    "plugin": "ninja-forms-zapier/ninja-forms-zapier.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Zapier&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zapier+Docs",
+    "version": "3.0"
+  },
+  {
+    "title": "SalesForce CRM",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/01/salesforce.png",
+    "content": "Connect your forms to your Salesforce CRM account",
+    "link": "https://ninjaforms.com/extensions/salesforce-crm/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=SalesForce+CRM",
+    "plugin": "ninja-forms-salesforce-crm/ninja-forms-salesforce-crm.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=SalesForce+CRM&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=SalesForce+CRM+Docs",
+    "version": "1.2.2"
+  },
+  {
+    "title": "Zoho Creator",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/01/zohocreator.png",
+    "content": "Use Ninja Forms as a front end form for your Zoho Creator database applications.",
+    "link": "https://ninjaforms.com/extensions/zoho-creator/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zoho+Creator",
+    "plugin": "ninja-forms-soho-creator/zoho-creator.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Zoho+Creator&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zoho+Creator+Docs",
+    "version": "1.1"
+  },
+  {
+    "title": "Vimeo Uploader",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/03/vimeo-uploader.png",
+    "content": "Allow uploads to your Vimeo account from your WordPress site",
+    "link": "https://ninjaforms.com/extensions/vimeo-uploader/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Vimeo+Uploader",
+    "plugin": "ninja-forms-vimeo-uploader/vimeo-uploader.php",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Vimeo+Uploader&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Vimeo+Uploader+Docs",
+    "version": "1.0.3"
+  },
+  {
+    "title": "iContact",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/03/icontact.png",
+    "content": "Add users to your lists in iContact using Ninja Forms",
+    "link": "https://ninjaforms.com/extensions/icontact/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=iContact",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=iContact&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=iContact+Docs",
+    "version": "1.0"
+  },
+  {
+    "title": "GetResponse",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/03/getresponse.png",
+    "content": "GetResponse Addon for Ninja Forms lets you add user’s to your Campaigns in GetResponse using Ninja Forms",
+    "link": "https://ninjaforms.com/extensions/getresponse/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=GetResponse",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=GetResponse&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=GetResponse+Docs",
+    "version": "1.2.1"
+  },
+  {
+    "title": "Slack",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/03/slack.png",
+    "content": "Get Slack notifications every time a user submits a form.",
+    "link": "https://ninjaforms.com/extensions/slack/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Slack",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Slack&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Slack+Docs",
+    "version": "1.1"
+  },
+  {
+    "title": "CleverReach",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/03/ninja-forms-cleverreach.png",
+    "content": "Connect your Ninja Forms to your Cleverreach newsletter",
+    "link": "https://ninjaforms.com/extensions/cleverreach/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=CleverReach",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=CleverReach&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=CleverReach+Docs",
+    "version": "1.1"
+  },
+  {
+    "title": "Webhooks",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/04/webhooks.png",
+    "content": "Send user-submitted data to any external URL using a GET or POST request.",
+    "link": "https://ninjaforms.com/extensions/webhooks/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Webhooks",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Webhooks&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Webhooks+Docs",
+    "version": "1.0.2"
+  },
+  {
+    "title": "Ninja Forms Membership Bundle",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/04/membership-bundle.png",
+    "content": "Get every single Ninja Forms add-ons, at an amazingly discounted price.",
+    "link": "https://ninjaforms.com/extensions/ninja-forms-membership-bundle/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Ninja+Forms+Membership+Bundle",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Ninja+Forms+Membership+Bundle&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Ninja+Forms+Membership+Bundle+Docs",
+    "version": ""
+  },
+  {
+    "title": "Excel Export",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/07/excel-export.png",
+    "content": "Export Ninja Forms submissions to an Excel file",
+    "link": "https://ninjaforms.com/extensions/excel-export/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Excel+Export",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Excel+Export&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Excel+Export+Docs",
+    "version": "1.4"
+  },
+  {
+    "title": "WebMerge",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/07/webmerge.png",
+    "content": "Easily populate PDFs, Excel spreadsheets, Word docs, or PowerPoint shows using webmerge.me.",
+    "link": "https://ninjaforms.com/extensions/webmerge/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=WebMerge",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=WebMerge&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=WebMerge+Docs",
+    "version": "1.0.3"
+  },
+  {
+    "title": "Help Scout",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/07/helpscout.png",
+    "content": "Create tickets (conversations) in Help Scout from Ninja Forms submissions",
+    "link": "https://ninjaforms.com/extensions/help-scout/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Help+Scout",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Help+Scout&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Help+Scout+Docs",
+    "version": "1.0"
+  },
+  {
+    "title": "Emma",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/07/emma.png",
+    "content": "Add users to Emma newsletters using Ninja Forms",
+    "link": "https://ninjaforms.com/extensions/emma/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Emma",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Emma&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Emma+Docs",
+    "version": "3.0.1"
+  },
+  {
+    "title": "Custom Form Labels",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/07/customformlabels.png",
+    "content": "Use per-form labels instead of those found in the plugin settings: required fields, submission processing, etc.",
+    "link": "https://ninjaforms.com/extensions/custom-form-labels/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Custom+Form+Labels",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Custom+Form+Labels&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Custom+Form+Labels+Docs",
+    "version": "1.0.4"
+  },
+  {
+    "title": "Business Bundle",
+    "image": "https://ninjaforms.com/wp-content/uploads/edd/2015/09/business.png",
+    "content": "Get our 8 most popular add-ons at an amazingly discounted price. Perfect for your Do It Yourself business owner.",
+    "link": "https://ninjaforms.com/extensions/business-bundle/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Business+Bundle",
+    "plugin": "",
+    "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Business+Bundle&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Business+Bundle+Docs",
+    "version": ""
+  }
+]

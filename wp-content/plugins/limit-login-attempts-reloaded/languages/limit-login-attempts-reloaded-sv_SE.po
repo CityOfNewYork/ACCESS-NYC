@@ -1,0 +1,296 @@
+# Limit Login Attempts Swedish Translation
+# Copyright (C) 2009 Johan Eenfeldt
+# This file is distributed under the same license as the Wordpress package.
+# Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: limit-login-attempts 1.2\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 18:07+0300\n"
+"PO-Revision-Date: 2016-06-23 18:07+0300\n"
+"Last-Translator: Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>\n"
+"Language-Team: Swedish\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d timme"
+msgstr[1] "%d timmar"
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minut"
+msgstr[1] "%d minuter"
+
+#: core/LimitLoginAttempts.php:532
+#, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr "[%s] För många misslyckade inloggningar från IP i vitlista"
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] För många misslyckade inloggningar"
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr "%d misslyckade inloggningar (blockad %d gång(er)) från IP: %s"
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Misslyckades senast med användare : %s"
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr "IP blockerades INTE på grund av extern vitlista."
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "IP blockerades i %s"
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr ""
+"<strong>Fel</strong>: F&ouml;r m&aring;nga misslyckade f&ouml;rs&ouml;k."
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr "F&ouml;rs&ouml;k igen senare."
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "F&ouml;rs&ouml;k igen om %d timme."
+msgstr[1] "F&ouml;rs&ouml;k igen om %d timmar."
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "F&ouml;rs&ouml;k igen om %d minut."
+msgstr[1] "F&ouml;rs&ouml;k igen om %d minuter."
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>Fel</strong>: Felaktigt anv&auml;ndarnamn eller l&ouml;senord."
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "<strong>%d</strong> f&ouml;rs&ouml;k &aring;terst&aring;r."
+msgstr[1] "<strong>%d</strong> f&ouml;rs&ouml;k &aring;terst&aring;r."
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr "Rensade IP loggen"
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr "Nollst&auml;llde r&auml;knaren f&ouml;r blockeringar"
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr "Tog bort aktuella blockeringar"
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr "Inst&auml;llningar &auml;ndrade"
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr "Sajten tycks vara direktansluten (från din IP: %s)"
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your "
+"IP: %s)"
+msgstr "Sajten tycks ansluta genom en proxy server (proxy IP: %s, din IP: %s)"
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it "
+"is correct. Further information can be found <a href=\"%s\" title=\"FAQ"
+"\">here</a>"
+msgstr ""
+"<strong>Nuvarande inställningar kan vara fel</strong>. Säkerställ att de är "
+"korrekta. Mer information kan hittas <a href=\"%s\" title=\"FAQ\">här</a>"
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr "Limit Login Attempts Inst&auml;llningar"
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr "Statistik"
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr "Antal blockeringar"
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr "Nollst&auml;ll r&auml;knare"
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "%d blockering sedan r&auml;knaren nollst&auml;lldes"
+msgstr[1] "%d blockeringar sedan r&auml;knaren nollst&auml;lldes"
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr "Inga blockeringar har skett &auml;nnu"
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr "Aktiva blockeringar"
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr "Ta bort blockeringar"
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr ""
+"%d IP &auml;r f&ouml;r n&auml;rvarande blockerade fr&aring;n att logga in"
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr "Inst&auml;llningar"
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr "Blockering"
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr "till&aring;tna misslyckanden"
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr "minuters blockering"
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr "blockeringar &ouml;kar tiden till"
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr "timmar"
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr "timmar tills misslyckanden nollst&auml;lls"
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr "Sajten ansluter"
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr "Direktansluten"
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr "Bakom en reverse proxy"
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr "Hantera inloggning med kakor"
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr "Ja"
+
+#: views/options-page.php:178
+msgid "No"
+msgstr "Nej"
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr "Notifiera om blockering"
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr "Logga IP"
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr "E-post till administrat&ouml;r efter"
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr "blockeringar"
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr "&Auml;ndra Inst&auml;llningar"
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr "Log &ouml;ver blockeringar"
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr "Rensa Log"
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+msgctxt "Internet address"
+msgid "IP"
+msgstr "IP"
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr "F&ouml;rs&ouml;kte logga in som"
+
+#~ msgid "%d lockout"
+#~ msgid_plural "%d lockouts"
+#~ msgstr[0] "%d blockering"
+#~ msgstr[1] "%d blockeringar"
+
+#~ msgid "Limit Login Attempts"
+#~ msgstr "Limit Login Attempts"
+
+#~ msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+#~ msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#~ msgid ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+#~ msgstr ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+
+#~ msgid "Johan Eenfeldt"
+#~ msgstr "Johan Eenfeldt"
+
+#~ msgid "http://devel.kostdoktorn.se"
+#~ msgstr "http://devel.kostdoktorn.se"
+
+#~ msgid "IP|Internet address"
+#~ msgstr "IP"
+
+#~ msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+#~ msgstr "<strong>OBS:</strong> Fungerar endast i WordPress 2.7 eller senare"

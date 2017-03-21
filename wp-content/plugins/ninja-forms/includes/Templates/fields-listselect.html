@@ -1,0 +1,11 @@
+<script id="tmpl-nf-field-listselect" type="text/template">
+    <select id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element" {{{ data.renderOtherAttributes() }}}>
+        {{{ data.renderOptions() }}}
+    </select>
+    <div for="nf-field-{{{ data.id }}}"></div>
+</script>
+
+<script id="tmpl-nf-field-listselect-option" type="text/template">
+	<# if ( ! data.visible ) { return ''; } #>
+	<option value="{{{ data.value }}}" {{{ ( 1 == data.selected ) ? 'selected="selected"' : '' }}} >{{{ data.label }}}</option>
+</script>

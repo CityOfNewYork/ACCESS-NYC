@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Everything\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-06-13 21:05+0300\n"
+"Last-Translator: Fat Cow <zhr@tut.by>\n"
+"Language-Team: Fat Cower\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Belarusian\n"
+"X-Poedit-Country: BELARUS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: search-everything/SE-Admin.php:29
+msgid "Search Everything Options  <strong>Updated</strong>."
+msgstr "Налады Search Everything <strong>абноўленыя</strong>"
+
+#: search-everything/SE-Admin.php:59
+msgid "The options selected below will be used in every search query on this site; in addition to the built-in post search."
+msgstr "Налады, вылучаныя ніжэй, будуць ужытыя да кожнага пошукавага запыту на гэтым сайце. У адваротным выпадку, будзе скарыстаны ўбудаваны пошук."
+
+#: search-everything/SE-Admin.php:63
+msgid "SE Search Options"
+msgstr "SE налады пошуку"
+
+#: search-everything/SE-Admin.php:64
+msgid "Use this form to configure your search options."
+msgstr "Выкарыстайце гэтую форму для налады параметраў пошуку."
+
+#: search-everything/SE-Admin.php:67
+msgid "Search Options Form"
+msgstr "Форма налады пошуку"
+
+#: search-everything/SE-Admin.php:69
+msgid "Exclude some post or page IDs"
+msgstr "Выключыць некаторыя запісы або ID старонак"
+
+#: search-everything/SE-Admin.php:70
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr "ID запісаў, падзеленыя коскі (прыклад: 1, 5, 9)"
+
+#: search-everything/SE-Admin.php:75
+msgid "Exclude Categories"
+msgstr "Выключыць катэгорыі"
+
+#: search-everything/SE-Admin.php:76
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr "ID катэгорый, падзеленыя коскі (прыклад: 1, 4)"
+
+#: search-everything/SE-Admin.php:81
+msgid "Search every page (non-password protected)"
+msgstr "Шукаць на кожнай старонцы (не абароненай паролем)"
+
+#: search-everything/SE-Admin.php:83
+msgid "Search approved pages only?"
+msgstr "Шукаць толькі на апублікаваных старонках"
+
+#: search-everything/SE-Admin.php:89
+msgid "Search every tag"
+msgstr "Шукаць кожны тэг"
+
+#: search-everything/SE-Admin.php:94
+msgid "Search every comment"
+msgstr "Шукаць кожны каментар"
+
+#: search-everything/SE-Admin.php:97
+msgid "Search approved comments only?"
+msgstr "Шукаць толькі ў апублікаваных каментарах"
+
+#: search-everything/SE-Admin.php:100
+msgid "Search every excerpt"
+msgstr "Шукаць кожную вытрымку"
+
+#: search-everything/SE-Admin.php:103
+msgid "Search every draft"
+msgstr "Шукаць кожны чарнавік"
+
+#: search-everything/SE-Admin.php:106
+msgid "Search every attachment"
+msgstr "Шукаць кожны прымацаваны файл"
+
+#: search-everything/SE-Admin.php:109
+msgid "Search every custom field (metadata)"
+msgstr "Шукаць кожнае сваё поле (метададзеныя)"
+
+#: search-everything/SE-Admin.php:115
+msgid "Update Options"
+msgstr "Абнавіць налады"
+
+#: search-everything/SE-Admin.php:121
+msgid "SE Search Form"
+msgstr "SE форма пошуку"
+
+#: search-everything/SE-Admin.php:122
+msgid "Use this search form to run a live search test."
+msgstr "Выкарыстайце гэтую форму для тэставання пошуку."
+
+#: search-everything/SE-Admin.php:125
+msgid "Site Search"
+msgstr "Пошук па сайце"
+
+#: search-everything/SE-Admin.php:127
+msgid "Enter search terms"
+msgstr "Увядзіце, што будзем шукаць"
+
+#: search-everything/SE-Admin.php:129
+msgid "Run Test Search"
+msgstr "Шукаць"
+
+msgid "Search every category"
+msgstr "Шукаць у кожнай катэгорыі"
+

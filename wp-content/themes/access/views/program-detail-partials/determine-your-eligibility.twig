@@ -1,0 +1,31 @@
+<div id='determine-your-eligibility' class="program-detail-step{% if step in sectionArray | keys %} active{% endif %}">
+  <div class="program-detail-header">
+    <h3 class="program-detail-title">{{ stepNumber }}.
+      {{__('Determine your eligibility', 'accessnyc-program-detail')}}</h3>
+  </div>
+  {% if post.plain_language_eligibility | length %}
+    <div class="program-detail-eligibility">
+      {{ post.get_field('plain_language_eligibility') }}
+    </div>
+  {% endif %}
+  {% if post.display_screen_for_eligibility_box %}
+    <div class="program-detail-status status-info hide-for-print">
+      <div class="icon program-detail-status-icon"></div>
+      <div class="program-detail-status-text">
+        <p>
+          {{__('Take a short survey to see if you might be eligible for this or 30 other programs.', 'accessnyc-program-detail')}}
+        </p>
+        <div class="program-detail-status-buttons">
+          <a class="btn btn-primary" href="{{ urlBase }}/eligibility">
+            <svg class="icon icon-screening">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-screening"></use>
+            </svg>
+            {{__('Am I Eligible?', 'accessnyc-program-detail')}}</a>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% if nextStep != '' %}
+    {% include 'program-detail-partials/next-button.twig' %}
+  {% endif %}
+</div>

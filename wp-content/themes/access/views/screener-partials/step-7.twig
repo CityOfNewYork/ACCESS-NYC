@@ -1,0 +1,13 @@
+<fieldset class="screener-body-step js-screener-step" id="step-7">
+  <div class="screener-step">{{ __('Step 7 of 10', 'accessnyc-screener') }}</div>
+  <h1 class="screener-title">{{ __('Tell us about your household.', 'accessnyc-screener') }}</h1>
+  <div class="screener-question">
+    <label class="screener-label" for="household-members">{{ __('Including you, how many people are in your household?', 'accessnyc-screener') }}</label>
+    <p class="screener-explanation">{{ __('This is usually family members who you both live with and share important resources like food and bills. Only count your roommates if you often buy and prepare food together.', 'accessnyc-screener') }}</p>
+    <label class="screener-label screener-sub-label" for="household-members">{{ __('Number of People (max. 8)', 'accessnyc-screener') }}</label>
+    <div class="screener-question-container">
+      <input id="household-members" type="number" name="Household.members" data-type="integer" value="1" min="1" max="8">
+    </div>
+  </div>
+  <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-8">{{ __('Continue', 'accessnyc-screener') }}</a></p>
+</fieldset>{# /#step-7 #}

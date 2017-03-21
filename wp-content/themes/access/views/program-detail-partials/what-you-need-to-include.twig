@@ -1,0 +1,30 @@
+<div id='what-you-need-to-include' class="program-detail-step{% if step in sectionArray | keys %} active{% endif %}">
+  <div class="program-detail-header">
+    <h3 class="program-detail-title">{{ stepNumber }}.
+      {{__('What you need to include', 'accessnyc-program-detail')}}</h3>
+  </div>
+  {{ post.get_field('what_you_need_to_include_intro_text') }}
+  {% for item in post.get_field('what_you_need_to_include') %}
+    {% if loop.index == 1 %}
+      {% set articleStatus = 'open' %}
+      {% set articleToggle = 'hide' %}
+    {% else %}
+      {% set articleStatus = '' %}
+      {% set articleToggle = 'show' %}
+    {% endif %}
+    <article class="program-detail-what-you-need-to-include js-program-detail-what-you-need-to-include no-js-open {{ articleStatus }}">
+      <header class="program-detail-what-you-need-to-include-header">
+        <p>{{ item.heading }}</p>
+        <div class="hide-or-show-list js-hide-or-show-list {{ articleToggle }} no-js-hidden hide-for-print"><span class="show-list">+<span class="hide-or-show-string"> {{__('show this list', 'accessnyc-program-detail')}}</span></span><span class="hide-list">-<span class="hide-or-show-string"> {{__('hide this list', 'accessnyc-program-detail')}}</span></span></div>
+      </header>
+      <div class="program-detail-what-you-need-to-include-body">
+        <div class="program-detail-what-you-need-to-include-padding">
+          {{ item.body }}
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+  {% if nextStep != '' %}
+    {% include 'program-detail-partials/next-button.twig' %}
+  {% endif %}
+</div>

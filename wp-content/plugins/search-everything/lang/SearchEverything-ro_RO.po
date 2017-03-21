@@ -1,0 +1,249 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Everything 6.2.5\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/search-everything\n"
+"POT-Creation-Date: 2009-06-11 23:25+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Radu <radub@x3studios.com>\n"
+"Language-Team: X3 Studios <radub@x3studios.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: ROMANIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: views/options.php:54
+#: views/options.php:61
+msgid "Your default search settings have been <strong>updated</strong> by Search Everything. </p><p> What are you waiting for? Go check out the new search results!"
+msgstr "Search Everything ţi-a <strong>actualizat</strong> setările implicite.</p><p> Ce mai aştepţi? Uite-te cum funcţionează noua căutare!"
+
+#: views/options.php:71
+msgid "Search Everything Version:"
+msgstr "Search Everything versiunea"
+
+#: views/options.php:76
+#: views/options.php:278
+msgid "Update Options"
+msgstr "Actualizează setările"
+
+#: views/options.php:84
+msgid "Basic Configuration"
+msgstr "Configurare simplă"
+
+#: views/options.php:90
+msgid "Search every page"
+msgstr "Caută în toate paginile"
+
+#: views/options.php:90
+msgid "(non-password protected)"
+msgstr "(neprotejate prin parolă)"
+
+#: views/options.php:94
+#: views/options.php:105
+#: views/options.php:118
+#: views/options.php:132
+#: views/options.php:143
+#: views/options.php:153
+#: views/options.php:163
+#: views/options.php:173
+#: views/options.php:186
+#: views/options.php:197
+#: views/options.php:207
+#: views/options.php:217
+#: views/options.php:227
+msgid "Yes"
+msgstr "Da"
+
+#: views/options.php:101
+msgid "Search approved pages only"
+msgstr "Caută doar în paginile aprobate"
+
+#: views/options.php:114
+msgid "Search every tag name"
+msgstr "Caută în toate numele etichetelor"
+
+#: views/options.php:128
+msgid "Search every category name and description"
+msgstr "Caută în toate numele şi descrierile categoriilor"
+
+#: views/options.php:139
+msgid "Search every comment"
+msgstr "Caută în toate comentariile"
+
+#: views/options.php:149
+msgid "Search comment authors"
+msgstr "Caută în autorii comentariilor"
+
+#: views/options.php:159
+msgid "Search approved comments only"
+msgstr "Cauută doar în comentariile aprobate"
+
+#: views/options.php:169
+msgid "Search every excerpt"
+msgstr "Caută în toate fragmentele (\"excerpt\")"
+
+#: views/options.php:182
+msgid "Search every draft"
+msgstr "Caută în toate ciornele"
+
+#: views/options.php:193
+msgid "Search every attachment"
+msgstr "Caută în toate ataşamentele"
+
+#: views/options.php:193
+msgid "(post type = attachment)"
+msgstr "(tip articol = ataşament)"
+
+#: views/options.php:203
+msgid "Search every custom field"
+msgstr "Caută în toate câmpurile personalizate"
+
+#: views/options.php:203
+msgid "(metadata)"
+msgstr "(metadata)"
+
+#: views/options.php:213
+msgid "Search every author"
+msgstr "Caută în fiecare autor"
+
+#: views/options.php:223
+msgid "Highlight Search Terms"
+msgstr "Evidenţiază termenii de căutare"
+
+#: views/options.php:233
+msgid "Highlight Background Color"
+msgstr "Culoare de fundal pentru evidenţiere"
+
+#: views/options.php:236
+msgid "Examples:<br/>'#FFF984' or 'red'"
+msgstr "Exemple:<br>'#FFF984' sau 'red'"
+
+#: views/options.php:246
+msgid "Advanced Configuration - Exclusion"
+msgstr "Configurare avansată - Excluderi"
+
+#: views/options.php:252
+msgid "Exclude some post or page IDs"
+msgstr "Exclude un articol sau o pagină după ID"
+
+#: views/options.php:255
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr "ID-uri separate cu virgulă (de exemplu: 1, 5, 9)"
+
+#: views/options.php:259
+msgid "Exclude Categories"
+msgstr "Exclude categorii"
+
+#: views/options.php:262
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr "ID-uri de categorii separate cu virgulă (de exemplu: 1, 4, 5)"
+
+#: views/options.php:266
+msgid "Full Highlight Style"
+msgstr "Stil de evidenţiere avansat"
+
+#: views/options.php:268
+msgid "Important: 'Highlight Background Color' must be blank to use this advanced styling."
+msgstr "Important: pentru a folosi această setare, 'Culoarea de fundal pentru evidenţierer' trebuie să fie nedefinită."
+
+#: views/options.php:270
+msgid "Example:<br/>background-color: #FFF984; font-weight: bold; color: #000; padding: 0 1px;"
+msgstr "Exemplu:<br>background-color: #FFF984; font-weight: bold; color: #000; padding: 0 1px;"
+
+#: views/options.php:283
+msgid "Developed by Dan Cameron of"
+msgstr "Dezvoltat de Dan Cameron de la "
+
+#: views/options.php:283
+msgid "Sprout Venture"
+msgstr "Sprout Venture"
+
+#: views/options.php:283
+msgid "We Provide custom WordPress Plugins and Themes and a whole lot more."
+msgstr "Ei oferă plugin-uri şi teme personalizate de WordPress şi multe altele"
+
+#: views/options.php:287
+msgid "Reset Button"
+msgstr "Buton Reset"
+
+#: views/options.php:295
+msgid "Find a bug?"
+msgstr "Ai găsit un bug?"
+
+#: views/options.php:295
+msgid "Post it as a new issue"
+msgstr "Trimite-l"
+
+#: views/options.php:302
+msgid "Test Search Form"
+msgstr "Testează formularul de căutare"
+
+#: views/options.php:309
+msgid "Use this search form to run a live search test."
+msgstr "Foloseşte acest formular pentru a face o căutare"
+
+#: views/options.php:315
+msgid "Run Test Search"
+msgstr "Porneşte o căutare de test"
+
+#: views/options.php:326
+msgid "News"
+msgstr "Noutăţi"
+
+#: views/options.php:327
+msgid "Development Support"
+msgstr "Asistenţă pentru dezvoltatori"
+
+#: views/options.php:328
+msgid "Localization Support"
+msgstr "Asistenţă pentru traduceri"
+
+#: views/options.php:334
+msgid "LOCALIZATION SUPPORT:"
+msgstr "Asistenţă pentru traduceri:"
+
+#: views/options.php:334
+msgid "Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, "
+msgstr "Versiunea 6 a fost o actualizare importantă şi unele lucruri necesită modificări ale traducerilor. Dacă poţi ajuta, trimite-mi traducerea ta la \"new issue\", "
+
+#: views/options.php:334
+msgid "here"
+msgstr "aici"
+
+#: views/options.php:335
+msgid "Thank You!"
+msgstr "Mersi!"
+
+#: views/options.php:335
+msgid "The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support."
+msgstr "Dezvoltarea Search Everything de la prima versiune încoace s-a făcut în primul rând de către comunitatea WordPress, le sunt recunoscător pentru aportul lor continuu şi pasionat."
+
+#: views/options.php:345
+msgid "and many more..."
+msgstr "şi altele..."
+
+#: views/options.php:345
+msgid "how about you?"
+msgstr "dar tu?"
+
+#. Plugin Name of an extension
+msgid "Search Everything"
+msgstr "Search Everything"
+
+#. Plugin URI of an extension
+msgid "https://core.sproutventure.com/projects/show/search-everything"
+msgstr "https://core.sproutventure.com/projects/show/search-everything"
+
+#. Description of an extension
+msgid "Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content."
+msgstr "Adaugă suport pentru căutare fără a modifica vreun şablon: activează, configurează, caută. Opţiuni: evidenţierea termenilor de căutare, pagini de căutare, fragmente, ataşamente, ciorne, comentarii, etichete şi câmpuri personalizate (metadata). În plus, oferă posibilitatea excluderii unor pagini sau articole. Nu caută în conţinutul protejat prin parolă."
+
+#. Author of an extension
+msgid "Dan Cameron of Sprout Venture"
+msgstr "Dan Cameron de la Sprout Venture"
+
+#. Author URI of an extension
+msgid "http://sproutventure.com/"
+msgstr "http://sproutventure.com/"
+

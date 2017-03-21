@@ -1,0 +1,143 @@
+# Copyright (C) 2010 Google Authenticator
+# This file is distributed under the same license as the Google Authenticator package.
+# Aldo Latino <aldolat@gmail.com>, 2012, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Authenticator 0.37\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/google-authenticator\n"
+"POT-Creation-Date: 2014-01-11 07:14:22+00:00\n"
+"PO-Revision-Date: 2014-01-12 21:24+0100\n"
+"Last-Translator: Aldo Latino <aldolat@gmail.com>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: google-authenticator.php:166
+msgid ""
+"If you don't have Google Authenticator enabled for your WordPress account, "
+"leave this field empty."
+msgstr ""
+"Se Google Authenticator non è attivo per il tuo account WordPress, lascia "
+"vuoto questo campo."
+
+#: google-authenticator.php:166
+msgid "Google Authenticator code"
+msgstr "Codice di Google Authenticator"
+
+#: google-authenticator.php:231
+msgid "<strong>ERROR</strong>: The Google Authenticator password is incorrect."
+msgstr ""
+"<strong>ERRORE</strong>: la password di Google Authenticator non è corretta.."
+
+#: google-authenticator.php:234
+msgid ""
+"<strong>ERROR</strong>: The Google Authenticator code is incorrect or has "
+"expired."
+msgstr ""
+"<strong>ERRORE</strong>: Il codice di Google Authenticator non è corretto o "
+"è scaduto."
+
+#: google-authenticator.php:274
+msgid "WordPressBlog"
+msgstr "WordPress Blog"
+
+#: google-authenticator.php:277 google-authenticator.php:469
+msgid "Google Authenticator Settings"
+msgstr "Impostazioni di Google Authenticator"
+
+#: google-authenticator.php:282 google-authenticator.php:481
+msgid "Active"
+msgstr "Attivo"
+
+#: google-authenticator.php:290
+msgid "Relaxed mode"
+msgstr "Modalità comoda"
+
+#: google-authenticator.php:292
+msgid ""
+" Relaxed mode allows for more time drifting on your phone clock (&#177;4 "
+"min)."
+msgstr ""
+" La modalità comoda permette uno scostamento di tempo più esteso rispetto "
+"all'orologio del telefono (&#177;4 min)."
+
+#: google-authenticator.php:297
+msgid "Description"
+msgstr "Descrizione"
+
+#: google-authenticator.php:298
+msgid ""
+" Description that you'll see in the Google Authenticator app on your phone."
+msgstr ""
+" La descrizione che si vede nell'app Google Authenticator sul telefono."
+
+#: google-authenticator.php:302
+msgid "Secret"
+msgstr "Chiave segreta"
+
+#: google-authenticator.php:305
+msgid "Create new secret"
+msgstr "Crea una nuova chiave segreta"
+
+#: google-authenticator.php:306
+msgid "Show/Hide QR code"
+msgstr "Mostra/nascondi il codice QR"
+
+#: google-authenticator.php:315
+msgid "Scan this with the Google Authenticator app."
+msgstr "Effettua la scansione con l'app Google Authenticator."
+
+#: google-authenticator.php:320
+msgid "Enable App password"
+msgstr "Abilita la password delle App"
+
+#: google-authenticator.php:322
+msgid " Enabling an App password will decrease your overall login security."
+msgstr ""
+" L'abilitazione della password delle App abbasserà il livello di sicurezza "
+"generale del login."
+
+#: google-authenticator.php:330
+msgid "Create new password"
+msgstr "Crea una nuova password"
+
+#: google-authenticator.php:331
+msgid ""
+" Password is not stored in cleartext, this is your only chance to see it."
+msgstr ""
+" La password non è conservata in chiaro: questo l'unico momento in cui la si "
+"può vedere."
+
+#: google-authenticator.php:474
+msgid "Hide settings from user"
+msgstr "Nascondi le impostazioni agli utenti"
+
+#. Plugin Name of the plugin/theme
+msgid "Google Authenticator"
+msgstr "Google Authenticator"
+
+#. Plugin URI of the plugin/theme
+msgid "http://henrik.schack.dk/google-authenticator-for-wordpress"
+msgstr "http://henrik.schack.dk/google-authenticator-for-wordpress"
+
+#. Description of the plugin/theme
+msgid ""
+"Two-Factor Authentication for WordPress using the Android/iPhone/Blackberry "
+"app as One Time Password generator."
+msgstr ""
+"Autenticazione a due fattori per WordPress utilizzando un'app su Android/"
+"iPhone/Blackberry come generatore di Password usa-e-getta."
+
+#. Author of the plugin/theme
+msgid "Henrik Schack"
+msgstr "Henrik Schack"
+
+#. Author URI of the plugin/theme
+msgid "http://henrik.schack.dk/"
+msgstr "http://henrik.schack.dk/"
+
+

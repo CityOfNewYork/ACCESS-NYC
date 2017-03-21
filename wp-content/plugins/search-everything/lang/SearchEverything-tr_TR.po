@@ -1,0 +1,105 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Everything\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-10-11 01:59+0200\n"
+"Last-Translator: Baris Unver <baris.unver@beyn.org>\n"
+"Language-Team: Baris Unver <baris.unver@beyn.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: c:\\wamp\\www\\wordpress212\\wp-content\\plugins\\\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: search-everything\n"
+
+#: search-everything/SE-Admin.php:
+msgid "The options selected below will be used in every search query on this site; in addition to the built-in post search."
+msgstr "Aşağıda belirleyeceğiniz seçenekler, Wordpress'in varsayılan arama kutusuyla yapılan aramalarda etkili olacaktır."
+
+#: search-everything/SE-Admin.php:
+msgid "Exclude some post or page IDs"
+msgstr "Belirteceğim yazıları hariç tut"
+
+#: search-everything/SE-Admin.php:
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr "Virgülle ayırarak ID(ler) girin (örn. 1, 5, 9)"
+
+#: search-everything/SE-Admin.php:
+msgid "Exclude Categories <strong><small>(Wordpress 2.2 Only)</strong></small>"
+msgstr "Belirteceğim kategorileri hariç tut <strong><small>(Yalnızca Wordpress 2.2)</strong></small>"
+
+#: search-everything/SE-Admin.php:
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr "Virgülle ayırarak ID(ler) girin (örn. 1, 4)"
+
+#: search-everything/SE-Admin.php:
+msgid "Search every page (non-password protected)"
+msgstr "Sayfaları ara (şifre konmamışları)"
+
+#: search-everything/SE-Admin.php:
+msgid "Search approved pages only?"
+msgstr "Yalnızca onaylanmış sayfaları ara"
+
+#: search-everything/SE-Admin.php:
+msgid "Search every comment"
+msgstr "Yorumları ara"
+
+#: search-everything/SE-Admin.php:
+msgid "Search approved comments only?"
+msgstr "Yalnızca onaylanmış yorumları ara"
+
+#: search-everything/SE-Admin.php:
+msgid "Search every excerpt"
+msgstr "Excerpt'leri ara"
+
+#: search-everything/SE-Admin.php:
+msgid "Search every draft"
+msgstr "Taslakları ara"
+
+#: search-everything/SE-Admin.php:
+msgid "Search every attachment"
+msgstr "Eklentileri ara"
+
+#: search-everything/SE-Admin.php:
+msgid "Search every custom field (metadata)"
+msgstr "Özel alanları ara (metadata)"
+
+#: search-everything/SE-Admin.php:
+msgid "Update Options"
+msgstr "Seçenekleri Güncelle"
+
+#: search-everything/SE-Admin.php:
+msgid "SE Search Form"
+msgstr "SE Arama Formu"
+
+#: search-everything/SE-Admin.php:
+msgid "SE Search Options"
+msgstr "SE Arama Seçenekleri"
+
+#: search-everything/SE-Admin.php:
+msgid "Use this form to configure your search options."
+msgstr "Bu bölümü arama seçeneklerini belirlemek için kullanın."
+
+#: search-everything/SE-Admin.php:
+msgid "Search Options Form"
+msgstr "Arama Seçenekleri Formu"
+
+#: search-everything/SE-Admin.php:
+msgid "Use this search form to run a live search test."
+msgstr "Örnek bir arama yapmak için bu formu kullanın."
+
+#: search-everything/SE-Admin.php:
+msgid "Site Search"
+msgstr "Site Araması"
+
+#: search-everything/SE-Admin.php:
+msgid "Enter search terms"
+msgstr "Arama kriterlerini girin"
+
+#: search-everything/SE-Admin.php:
+msgid "Run Test Search"
+msgstr "Deneme Araması"
+

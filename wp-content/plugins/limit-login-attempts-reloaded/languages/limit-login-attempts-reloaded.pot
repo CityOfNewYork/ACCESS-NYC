@@ -1,0 +1,265 @@
+# Copyright (C) 2012 Limit Login Attempts
+# This file is distributed under the same license as the Limit Login Attempts package.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Limit Login Attempts 1.7.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 17:55+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.8.5\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;"
+"_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;esc_attr__;esc_attr_e;"
+"esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets\n"
+"X-Poedit-SearchPathExcluded-1: languages\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/LimitLoginAttempts.php:532
+#, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr ""
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr ""
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr ""
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr ""
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr ""
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr ""
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr ""
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr ""
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr ""
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr ""
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your IP: %s)"
+msgstr ""
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it is "
+"correct. Further information can be found <a href=\"%s\" title=\"FAQ\">here</a>"
+msgstr ""
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr ""
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr ""
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr ""
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr ""
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr ""
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr ""
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr ""
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr ""
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr ""
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr ""
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr ""
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr ""
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr ""
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr ""
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr ""
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr ""
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr ""
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr ""
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr ""
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr ""
+
+#: views/options-page.php:178
+msgid "No"
+msgstr ""
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr ""
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr ""
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr ""
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr ""
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr ""
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr ""
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr ""
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+msgctxt "Internet address"
+msgid "IP"
+msgstr ""
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr ""

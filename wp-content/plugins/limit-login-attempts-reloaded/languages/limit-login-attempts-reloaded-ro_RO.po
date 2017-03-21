@@ -1,0 +1,300 @@
+# Limit Login Attempts German Translation
+# Copyright (C) 2009 Johan Eenfeldt
+# This file is distributed under the same license as the Wordpress package.
+# Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: limit-login-attempts 1.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 18:07+0300\n"
+"PO-Revision-Date: 2016-06-23 18:07+0300\n"
+"Last-Translator: Robert Tudor <egipt@egt-design.com>\n"
+"Language-Team: German <michael@skerwiderski.de>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d ora"
+msgstr[1] "%d ore"
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d Minut"
+msgstr[1] "%d Minute"
+
+#: core/LimitLoginAttempts.php:532
+#, fuzzy, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr "[%s] Prea multe incercari nereusite"
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] Prea multe incercari nereusite"
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr "%d incercari de logare nereusite (%d inchidere(i)) de la IP: %s"
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Ultimul incercare: %s"
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "IP-ul a fost blocat pentru %s."
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr "<strong>EROARE</strong>: Prea multe incercari nereusite."
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr "Va rugam incercati mai tarziu."
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "Va rugam incercati in %d ora."
+msgstr[1] "Va rugam incercati in %d ore"
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "Va rugam incercati in %d Minut."
+msgstr[1] "Va rugam incercati in %d Minute."
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>EROARE</strong>: Nume de utilizator sau parola incorecta."
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "incercare ramasa <strong>%d</strong>"
+msgstr[1] "incercari ramasa <strong>%d</strong>"
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr "Am curatat logul cu IP"
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr "Reseteaza numaratoarea inchiderilor"
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr "Am curatat numaratoarea inchiderilor"
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr "Optiuni schimbate"
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr "Se pare ca site-ul este accesat direct (de la IP-ul dvs: %s)"
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your "
+"IP: %s)"
+msgstr ""
+"Se pare ca site-ul este accesat printr-un adresa PROXY (IP Proxy: %s, IP "
+"dvs.: %s)"
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it "
+"is correct. Further information can be found <a href=\"%s\" title=\"FAQ"
+"\">here</a>"
+msgstr ""
+"<strong>Se pare ca setarile curente sunt invalide</strong>. Verificati "
+"corectitudinea lor. Mai multe informatii pot fi gasite <a href=\"%s\" title="
+"\"FAQ\">aici</a>"
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr "Setari Limitari Incercari Access"
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr "Statistici"
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr "Total inchideri"
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr "Reseteaza numaratoarea"
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "%d inchidere de la ultima resetare"
+msgstr[1] "%d inchideri de la ultima resetare"
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr "Nici o inchidere pana acum"
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr "Inchideri active"
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr "Restaureaza inchideri"
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "IP-ul %d are momentan accesul de intrare blocat."
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr "Optiuni"
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr "Inchidere"
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr "incercari permise"
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr "inchidere in minute"
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr "inchiderile maresc timpul in"
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr "ore"
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr "ore pana cand incercarile sunt resetate"
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr "Conexie site"
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr "Conexie directa"
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr "In spatele unui proxy"
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr "Logare tip cookie"
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr "Da"
+
+#: views/options-page.php:178
+msgid "No"
+msgstr "Nu"
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr "Notifica-ma de inchidere"
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr "Logheaza IP"
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr "Notifica adminul dupa"
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr "inchideri"
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr "Schimba optiunile"
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr "Log de inchidere"
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr "Sterge log"
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+#, fuzzy
+msgctxt "Internet address"
+msgid "IP"
+msgstr "IP wurde gesperrt für %s."
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr "A incercat sa se logheze ca"
+
+#~ msgid "IP|Internet address"
+#~ msgstr "IP"
+
+#~ msgid "%d lockout"
+#~ msgid_plural "%d lockouts"
+#~ msgstr[0] "%d inchidere"
+#~ msgstr[1] "%d inchideri"
+
+#~ msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+#~ msgstr ""
+#~ "<strong>NOTA:</strong> Functioneaza doar in Wordpress 2.7 sau mai nou."
+
+#~ msgid "Limit Login Attempts"
+#~ msgstr "Limiteaza incercarile de logare"
+
+#~ msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+#~ msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#~ msgid ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+#~ msgstr ""
+#~ "Limiteaza ratia incercarilor de logare, incluzand cookie, pentru fiecare "
+#~ "IP."
+
+#~ msgid "Johan Eenfeldt"
+#~ msgstr "Johan Eenfeldt"
+
+#~ msgid "http://devel.kostdoktorn.se"
+#~ msgstr "http://devel.kostdoktorn.se"

@@ -1,0 +1,94 @@
+<div id="screener-person-<%= personIndex %>-income-<%= matrixIndex %>" class="matrix-item js-matrix-item">
+  <hr class="screener-divider">
+  <div class="screener-question">
+    <div class="prime-label">
+      <label class="screener-label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
+        <% if (personIndex === 0) { %>
+        {{ __('What type of income have you had most recently?', 'accessnyc-screener') }}
+        <% } else { %>
+        {{ __('What type of income have they had most recently?', 'accessnyc-screener') }}
+        <% } %>
+      </label>
+      <p class="screener-explanation">{{ __('Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.', 'accessnyc-screener') }}</p>
+    </div>
+    <div class="non-prime-label">
+      <label class="screener-label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
+        <% if (personIndex === 0) { %>
+        {{ __('If you receive another type of income, select it below.', 'accessnyc-screener') }}
+        <% } else { %>
+        {{ __('If they receive another type of income, select it below.', 'accessnyc-screener') }}
+        <% } %>
+      </label>
+    </div>
+    <div class="screener-question-container">
+      <select class="screener-select js-matrix-select js-add-section js-screener-toggle"
+          id="person-<%= personIndex %>-incomes-<%= matrixIndex %>"
+          name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].type"
+          data-toggles="#screener-person-<%= personIndex %>-income-<%= matrixIndex %>-details"
+          data-renders="#screener-person-<%= personIndex %>-income-<% print(matrixIndex + 1) %>"
+          data-matrix="income"
+          data-matrix-index="<% print(matrixIndex + 1) %>"
+          data-person-index="<%= personIndex %>">
+        <option value="" selected>{{ __('Click to add an income type', 'accessnyc-screener') }}</option>
+        <option value="Wages">{{ __('wages, salaries, tips', 'accessnyc-screener') }}</option>
+        <option value="SelfEmployment">{{ __('self-employment Income', 'accessnyc-screener') }}</option>
+        <option value="Unemployment">{{ __('unemployment benefits', 'accessnyc-screener') }}</option>
+        <option value="CashAssistance">{{ __('Cash Assistance grant', 'accessnyc-screener') }}</option>
+        <option value="ChildSupport">{{ __('child support (received)', 'accessnyc-screener') }}</option>
+        <option value="DisabilityMedicaid">{{ __('disability-related Medicaid', 'accessnyc-screener') }}</option>
+        <option value="SSI">{{ __('Supplemental Security Income (SSI)', 'accessnyc-screener') }}</option>
+        <option value="SSDependent">{{ __('Social Security Dependent Benefits', 'accessnyc-screener') }}</option>
+        <option value="SSDisability">{{ __('Social Security Disability Benefits', 'accessnyc-screener') }}</option>
+        <option value="SSSurvivor">{{ __('Social Security Survivor’s Benefits', 'accessnyc-screener') }}</option>
+        <option value="SSRetirement">{{ __('Social Security Retirement Benefits', 'accessnyc-screener') }}</option>
+        <option value="NYSDisability">{{ __('New York State Disability Benefits', 'accessnyc-screener') }}</option>
+        <option value="Veteran">{{ __('Veteran’s Pension or Benefits', 'accessnyc-screener') }}</option>
+        <option value="Pension">{{ __('Government or Private Pension', 'accessnyc-screener') }}</option>
+        <option value="DeferredComp">{{ __('Withdrawals from Deferred Compensation (IRA, Keogh, etc.)', 'accessnyc-screener') }}</option>
+        <option value="WorkersComp">{{ __('Worker’s Compensation', 'accessnyc-screener') }}</option>
+        <option value="Alimony">{{ __('alimony (received)', 'accessnyc-screener') }}</option>
+        <option value="Boarder">{{ __('boarder or lodger', 'accessnyc-screener') }}</option>
+        <option value="Gifts">{{ __('gifts/contributions (received)', 'accessnyc-screener') }}</option>
+        <option value="Rental">{{ __('rental income', 'accessnyc-screener') }}</option>
+        <option value="Investment">{{ __('investment income (interest, dividends, and profit from selling stocks)', 'accessnyc-screener') }}</option>
+      </select>
+    </div>
+  </div>
+  <div id="screener-person-<%= personIndex %>-income-<%= matrixIndex %>-details" class="hidden">
+    <div class="screener-question">
+      <label class="screener-label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount">
+        <% if (personIndex === 0) { %>
+        {{ __('How much do you receive for this type of income:', 'accessnyc-screener') }}
+        <% } else { %>
+        {{ __('How much do they receive for this type of income:', 'accessnyc-screener') }}
+        <% } %>
+        <span class="screener-transaction-type"></span>?
+      </label>
+      <div class="screener-question-container">
+        <div class="currency-usd">
+          <input id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].amount" type="number" data-type="float" required>
+        </div>
+      </div>
+    </div>
+    <div class="screener-question">
+      <label class="screener-label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency">
+        <% if (personIndex === 0) { %>
+        {{ __('How often do you receive this income:', 'accessnyc-screener') }}
+        <% } else { %>
+        {{ __('How often do they receive this income:', 'accessnyc-screener') }}
+        <% } %>
+        <span class="screener-transaction-type"></span>?
+      </label>
+      <div class="screener-question-container">
+        <select class="screener-select" id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].frequency" required>
+          <option value="">{{ __('Click to add an income frequency', 'accessnyc-screener') }}</option>
+          <option value="weekly">{{ __('Every week', 'accessnyc-screener') }}</option>
+          <option value="biweekly">{{ __('Every 2 weeks', 'accessnyc-screener') }}</option>
+          <option value="monthly">{{ __('Monthly', 'accessnyc-screener') }}</option>
+          <option value="semimonthly">{{ __('Twice a month', 'accessnyc-screener') }}</option>
+          <option value="yearly">{{ __('Every year', 'accessnyc-screener') }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+.site-footer {
+  @include padding(2*$spacing-base null);
+  border-top: 3px solid $color-blue-dark;
+
+  .nav-list {
+    @include clearfix();
+    @include row();
+    @include typography-nav();
+    list-style: none;
+    margin: 0 0 $spacing-base;
+    padding: 0;
+
+    .type-h3 {
+      margin-bottom: $spacing-base;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0 0 2*$spacing-base;
+      padding: 0;
+
+      > li {
+        margin-bottom: $spacing-base;
+      }
+    }
+
+    > li {
+      @include span-columns(12);
+      display: block;
+      padding: 0 $spacing-base;
+
+      @include media($bp-tablet-up) {
+        @include span-columns(4);
+
+        &:nth-child(3n) {
+          @include omega();
+        }
+
+        &:last-child {
+          @include span-columns(12);
+        }
+      }
+
+      @include media($bp-desktop-up) {
+        @include span-columns(3);
+
+        &:last-child {
+          @include omega();
+          @include span-columns(3);
+        }
+      }
+    }
+  }
+
+  .copyright {
+    margin: 0 $spacing-base;
+  }
+}
+
+.copyright {
+  @include align-items(stretch);
+  @include clearfix();
+  @include display(flex);
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+  color: $color-grey-dark;
+  font-size: 12px; // TODO(jjandoc): Variable?
+
+  .icon-logo-nyc {
+    @include size(90px 30px);
+    float: $text-direction-start;
+    margin-#{$text-direction-end}: .5*$spacing-base;
+  }
+}

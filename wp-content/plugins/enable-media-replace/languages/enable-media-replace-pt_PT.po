@@ -1,0 +1,151 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enable-media-replace\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-10 08:48+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
+"Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-WPHeader: enable-media-replace.php\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: enable-media-replace.php:38 enable-media-replace.php:64
+#: enable-media-replace.php:105
+msgid "Replace media"
+msgstr "Substituir multimédia"
+
+#: enable-media-replace.php:64
+msgid "Upload a new file"
+msgstr "Carregar novo ficheiro"
+
+#: enable-media-replace.php:64
+msgid "To replace the current file, click the link and upload a replacement."
+msgstr ""
+"Para subtituir o ficheiro actual, clique na ligação e carregue um substituto."
+
+#: enable-media-replace.php:156
+msgid "Revised"
+msgstr "Revisto"
+
+#: popup.php:14 upload.php:3
+msgid "You do not have permission to upload files."
+msgstr "Não tem permissão para carregar ficheiros."
+
+#: popup.php:29
+msgid "Replace Media Upload"
+msgstr "Carregar multimédia de substituição"
+
+#: popup.php:45
+#, php-format
+msgid ""
+"NOTE: You are about to replace the media file \"%s\". There is no undo. "
+"Think about it!"
+msgstr ""
+"NOTA: Está prestes a substituir o ficheiro multimédia \"%s\". Não será "
+"possível voltar a trás!"
+
+#: popup.php:47
+msgid "Choose a file to upload from your computer"
+msgstr "Escolher um ficheiro para carregar a partir do computador"
+
+#: popup.php:54
+msgid "Select media replacement type:"
+msgstr "Seleccione o tipo de substituição de multimédia:"
+
+#: popup.php:56
+msgid "Just replace the file"
+msgstr "Apenas substituir o ficheiro"
+
+#: popup.php:57
+#, php-format
+msgid ""
+"Note: This option requires you to upload a file of the same type (%s) as the "
+"one you are replacing. The name of the attachment will stay the same (%s) no "
+"matter what the file you upload is called."
+msgstr ""
+"Nota: Esta opção requer o carregamento de um ficheiro do mesmo tipo (%s) "
+"daquele a substituir. O nome do ficheiro permanecerá o mesmo (%s), "
+"independentemente do nome do ficheiro carregado."
+
+#: popup.php:60
+msgid "Replace the file, use new file name and update all links"
+msgstr ""
+"Substituir o ficheiro, usar o novo nome de ficheiro e actualizar todas as "
+"ligações"
+
+#: popup.php:61
+#, php-format
+msgid ""
+"Note: If you check this option, the name and type of the file you are about "
+"to upload will replace the old file. All links pointing to the current file "
+"(%s) will be updated to point to the new file name."
+msgstr ""
+"Nota: Se seleccionar esta opção, o nome e tipo do ficheiro que está prestes "
+"a carregar irá substituir os do ficheiro antigo. Todas as ligações que "
+"referenciam o ficheiro actual (%s) serão actualizadas de modo a referenciar "
+"o novo nome de ficheiro."
+
+#: popup.php:62
+msgid ""
+"Please note that if you upload a new image, only embeds/links of the "
+"original size image will be replaced in your posts."
+msgstr ""
+"Por favor tenha em atenção que se carregar uma nova imagem, apenas as "
+"imagens incorporadas e ligações com o tamanho original serão substituídas "
+"nos seus artigos."
+
+#: popup.php:67
+msgid "Upload"
+msgstr "Carregar"
+
+#: popup.php:67
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: upload.php:26
+#, php-format
+msgid ""
+"The file %1$s can not be deleted by the web server, most likely because the "
+"permissions on the file are wrong."
+msgstr ""
+"O ficheiro %1$s não pode ser apagado pelo servidor web, provavelmente porque "
+"as permissões do ficheiro estão incorrectas."
+
+#: upload.php:84
+msgid "File type does not meet security guidelines. Try another."
+msgstr ""
+"O tipo de ficheiro não está de acordo com os padrões de segurança. Tente "
+"outro."
+
+#. Plugin Name of the plugin/theme
+msgid "Enable Media Replace"
+msgstr "Enable Media Replace"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.mansjonasson.se/enable-media-replace"
+msgstr "http://www.mansjonasson.se/enable-media-replace"
+
+#. Description of the plugin/theme
+msgid ""
+"Enable replacing media files by uploading a new file in the \"Edit Media\" "
+"section of the WordPress Media Library."
+msgstr ""
+"Permite substituir ficheiros multimédia através de carregar um novo ficheiro "
+"na secção \"Editar multimédia\" da biblioteca multimédia do WordPress."
+
+#. Author of the plugin/theme
+msgid "Måns Jonasson"
+msgstr "Måns Jonasson"
+
+#. Author URI of the plugin/theme
+msgid "http://www.mansjonasson.se"
+msgstr "http://www.mansjonasson.se"

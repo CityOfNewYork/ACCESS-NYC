@@ -1,0 +1,145 @@
+#nfThreeFormConvert {
+    display: none;
+}
+
+html,
+body {
+    background: #fff;
+}
+h1 {
+    line-height: 32px;
+}
+h2 {
+    margin: 40px auto 20px;
+}
+p {
+    font-size: 16px;
+    padding-top: 20px;
+}
+ol {
+    font-size: 16px;
+    margin-left: 40px;
+    list-style-type: none;
+}
+hr {
+    margin: 50px 20px;
+}
+img {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+th {
+    text-align: left;
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th:nth-child( 1 ),
+td:nth-child( 1 ) {
+    width: 90%;
+}
+th:nth-child( 2 ),
+td:nth-child( 2 ) {
+    width: 10%;
+}
+
+
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2
+}
+
+.opt-in {
+    text-align: center;
+}
+
+.nf-logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 300px;
+}
+.nf-upgrade {
+    margin: 0 auto 50px auto;
+    max-width: 800px;
+}
+
+/*
+ * Dashicons
+ */
+
+.dashicons-yes {
+    color: green;
+}
+.dashicons-no {
+    color: #EF4748;
+}
+.dashicons-flag {
+    color: #ffba00; /* WP Update Nag Yellow */
+}
+.dashicons-warning {
+    color: gray;
+}
+
+.dashicons-update {
+    margin-left: -1px;
+    animation: dashicons-spin 1s infinite;
+    animation-timing-function: linear;
+}
+@keyframes dashicons-spin {
+    0% {
+        transform: rotate( 0deg );
+    }
+    100% {
+        transform: rotate( 360deg );
+    }
+}
+
+ol .dashicons {
+    margin-top: 2px;
+    margin-right: 8px;
+    margin-left: -30px;
+}
+
+/*
+ * Progress Bar
+ */
+.progress-bar,
+.progress-bar--wrapper {
+    height: 10px;
+}
+.progress-bar {
+    width: 0;
+    background-color: green;
+}
+.progress-bar--wrapper {
+    width: 100%;
+}
+
+/*
+ * Button
+ */
+
+.nf-upgrade-button {
+    color: white;
+    background-color: #2BAAE7;
+    cursor: pointer;
+    padding: 10px 20px;
+    height: auto;
+    display: block;
+    margin: auto;
+    border: 2px solid transparent;
+    transition: all .5s;
+}
+.nf-upgrade-button:hover,
+.nf-upgrade-button:active {
+    color: #2BAAE7;
+    border-color: #2BAAE7;
+    background-color: white;
+}

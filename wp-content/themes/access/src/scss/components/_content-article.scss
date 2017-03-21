@@ -1,0 +1,32 @@
+.content-header {
+  @include margin(2*$spacing-base null);
+
+  p {
+    @include typography-lead();
+  }
+}
+
+.content-body {
+  @include omega();
+}
+
+.content-nav {
+  border-bottom: 3px solid $color-blue-dark;
+  margin-bottom: $spacing-base;
+
+  .nav-list {
+    @include typography-nav();
+    list-style: none;
+    margin: 0;
+    padding: 0 0 $spacing-base;
+
+    li {
+      margin-bottom: $spacing-base;
+      padding-#{$text-direction-start}: $spacing-base;
+    }
+  }
+}
+
+.content-footer {
+  @include margin(2*$spacing-base null);
+}

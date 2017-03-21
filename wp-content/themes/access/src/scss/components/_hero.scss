@@ -1,0 +1,62 @@
+.hero {
+  background: $color-blue-dark;
+  color: $color-white;
+  padding: 1.5*$spacing-base;
+}
+
+.hero-inner {
+  margin: auto;
+  max-width: $homepage-max-width;
+}
+
+.hero-title {
+  border-bottom: 1px solid $color-white;
+  color: $color-white;
+  margin-bottom: 1.5*$spacing-base;
+  padding-bottom: 1.5*$spacing-base;
+  position: relative;
+
+  &::after {
+    @include size(130px 5px);
+    #{$text-direction-start}: 0;
+    content: '';
+    bottom: -3px;
+    background: $color-yellow-access;
+    display: block;
+    position: absolute;
+  }
+}
+
+.hero-touts {
+  @include media($bp-tablet-up) {
+    @include display(flex);
+  }
+}
+
+.hero-tout {
+  margin-bottom: 1.5*$spacing-base;
+
+  @include media($bp-tablet-up) {
+    @include display(flex);
+    @include flex-direction(column);
+    padding-#{$text-direction-end}: 1.5*$spacing-base;
+    width: 50%;
+  }
+}
+
+.hero-tout-title {
+  color: $color-white;
+}
+
+.hero-tout-body {
+  @include media($bp-tablet-up) {
+    @include flex(1 1 auto);
+  }
+}
+
+.hero-tout-cta {
+  .btn {
+    min-height: 60px;
+    line-height: 30px;
+  }
+}

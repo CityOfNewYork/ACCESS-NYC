@@ -1,0 +1,86 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
+  <main class="main-content map js-map" id="content" data-source="/locations/json">
+    <div class="map-mapbox js-map-mapbox"></div>
+    <div class="map-controls js-map-controls">
+      <input type="text" class="map-search js-map-searchbox" placeholder="Enter an address or zip code">
+      <div class="map-filter-container js-map-filter">
+        <a href="#map-filter-settings" class="map-filter-header btn btn-primary btn-block js-toggle-filter js-main-filter-toggle"><span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span></a>
+        <div id="map-filter-settings" class="map-filter-body" aria-hidden="true">
+          <ul class="map-filter-list">
+            {% for filter in filters %}
+            <li class="map-filter-category">
+              <div class="map-filter-category-header">
+                <label class="styled-checkbox">
+                  <input type="checkbox" data-toggles="#program-{{ filter.category.slug }}" class="js-map-filter-parent-input" tabindex="-1">
+                  <span class="styled-checkbox-label">{{ filter.category.name }}</span>
+                </label>
+                <a href="#program-{{ filter.category.slug }}" class="map-filter-toggle js-toggle-filter"  tabindex="-1">
+                  <span class="sr-only map-filter-expand">{{__('Expand category', 'accessnyc-locations')}}</span>
+                  <span class="sr-only map-filter-collapse">{{__('Collapse category', 'accessnyc-locations')}}</span>
+                </a>
+              </div>
+              <div id="program-{{ filter.category.slug }}" class="map-filter-programs js-map-filter-program-group" aria-hidden="true">
+                <ul class="map-filter-program-list">
+                  {% for program in filter.programs %}
+                  <li class="map-filter-program">
+                    <label class="styled-checkbox">
+                      <input type="checkbox" value="{{ program.uid }}" class="js-map-filter-program-input" tabindex="-1">
+                      <span class="styled-checkbox-label">{{ program.post_title }}</span>
+                    </label>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="map-results-container js-map-results-container">
+        <div class="map-results">
+          <ul class="js-map-results map-location-list">
+          </ul>
+          <p class="map-loading">{{__('Loading&hellip;', 'accessnyc-locations')}}</p>
+          <p class="map-no-results">{{__('No results.', 'accessnyc-locations')}}</p>
+        </div>
+      </div>
+      <div class="js-map-pagination"></div>
+    </div>
+  </main>
+  <script>
+    window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+    window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([{% for filter in filters %}{% for program in filter.programs %}
+      {
+        "label": {{ program.post_title|json_encode() }},
+        "slug": {{ program.uid|json_encode() }}
+      },{% endfor %}{% endfor %}
+      {
+        "label": {{__('Government Office', 'accessnyc-locations')|trim|json_encode()}},
+        "slug": "GOVERNMENT_OFFICE"
+      }
+    ]);
+  </script>
+  <script type="text/template" id="map-location-template">
+    <% _.each(locations, function(location) { %>
+    <li class="js-map-location map-location<% if (location.isGovtOffice) { print(' govt-office') } %>" data-marker="<%= location.id %>" tabindex="0">
+      <h3 class="map-location-name"><%= location.name %></h3>
+      <div class="map-location-details"><% print(_.compact([location.type, location.address.street]).join(' | ')) %></div>
+      <div class="map-location-details">
+        <% print(_.map(location.programs, function(program) { return localize(program) }).join(', ')) %>
+      </div>
+      <a href="<%= location.link %>" class="link-more">{{__('more about this location', 'accessnyc-locations')}}</a>
+    </li>
+    <% }); %>
+  </script>
+  <script type="text/template" id="map-pagination-template">
+    <div class="map-pagination-body">
+      {{__('Showing', 'accessnyc-locations')}} <%= displayedCount %> {{__('of', 'accessnyc-locations')}} <%= totalCount %>
+      <% if (displayedCount < totalCount) { %>
+      <button class="btn btn-secondary btn-next btn-small js-map-more">{{__('Show more', 'accessnyc-locations')}}</button>
+      <% } %>
+    </div>
+  </script>
+{% endblock %}

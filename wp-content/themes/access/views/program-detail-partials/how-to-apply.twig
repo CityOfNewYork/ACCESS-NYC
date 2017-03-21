@@ -1,0 +1,94 @@
+<div id='how-to-apply' class="program-detail-step{% if step in sectionArray | keys %} active{% endif %}">
+  <div class="program-detail-header">
+    <h3 class="program-detail-title">{{ stepNumber }}.
+      {{__('How to apply', 'accessnyc-program-detail')}}</h3>
+    <h4 class="program-detail-subtitle">{{__('Here are your options.', 'accessnyc-program-detail')}}</h4>
+  </div>
+  {% if post.how_to_apply_or_enroll_online != '' %}
+    <div class="program-detail-application-method program-detail-apply-online">
+      <h3>{{__('Apply online', 'accessnyc-program-detail')}}</h3>
+      {{ post.get_field('how_to_apply_or_enroll_online') }}
+      {% if post.apply_online_call_to_action != '' %}
+        <p class="hide-for-print">
+          <a class="btn btn-secondary btn-next" href="{{ post.url_of_online_application }}">{{ post.apply_online_call_to_action }}</a>
+        </p>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if post.how_to_apply_or_enroll_by_mail != '' %}
+    <div class="program-detail-application-method program-detail-apply-by-mail">
+      <h3>{{__('Apply by mail', 'accessnyc-program-detail')}}</h3>
+      {{ post.get_field('how_to_apply_or_enroll_by_mail') }}
+      {% if post.apply_by_mail_call_to_action != '' %}
+        <p class="hide-for-print">
+          <a class="btn btn-secondary btn-next" href="{% if post.url_of_pdf_application_forms != '' %}{{ post.url_of_pdf_application_forms }}{% else %}{{ post.application_forms_pdfs }}{% endif %}">{{ post.apply_by_mail_call_to_action }}</a>
+        </p>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if post.how_to_apply_or_enroll_by_phone != '' %}
+    <div class="program-detail-application-method program-detail-apply-by-phone">
+      <h3>{{__('Apply by phone', 'accessnyc-program-detail')}}</h3>
+      {{ post.get_field('how_to_apply_or_enroll_by_phone') }}
+      {{ post.get_field('phone_numbers') }}
+    </div>
+  {% endif %}
+  {% if post.how_to_apply_or_enroll_in_person != '' %}
+    <div class="program-detail-application-method program-detail-apply-in-person">
+      <h3>{{__('Apply in person', 'accessnyc-program-detail')}}</h3>
+      {{ post.get_field('how_to_apply_or_enroll_in_person') }}
+      {% if post.office_locations_url != '' %}
+        {% if post.apply_in_person_call_to_action != '' %}
+          <p class="hide-for-print">
+            <a class="btn btn-secondary btn-next" href="{{ post.office_locations_url }}">{{ post.apply_in_person_call_to_action|striptags }}</a>
+          </p>
+        {% endif %}
+      {% endif %}
+    </div>
+  {% endif %}
+  <div class="program-detail-status status-info hide-for-print">
+    <div class="icon program-detail-status-icon"></div>
+    <div class="program-detail-status-text">
+      <p>
+        <b>{{__('Come back to it later.', 'accessnyc-program-detail')}}</b><br/>
+        {{__('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail')}}</p>
+        <div class="program-detail-status-buttons">
+          {# Commenting out SMS share functionality until Twilio is set up. #}
+{#
+          <div class="program-detail-status-button">
+            <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-text">{{__('Text', 'accessnyc-program-detail')}}</a>
+            <div id="share-by-text" class="share-form hidden">
+              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
+                <input type="hidden" name="action" value="sms_send">
+                <input type="hidden" name="url" value="{{ shareUrl }}">
+                <input type="hidden" name="hash" value="{{ shareHash }}">
+                <div class="share-form-controls">
+                  <input type="tel" name="to" placeholder="{{__('Telephone number', 'accessnyc-program-detail')}}" required>
+                  <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
+                  <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
+                </div>
+              </form>
+            </div>
+          </div>
+#}
+          <div class="program-detail-status-button">
+            <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-email">{{__('Email', 'accessnyc-program-detail')}}</a>
+            <div id="share-by-email" class="share-form hidden">
+              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
+                <input type="hidden" name="action" value="email_send">
+                <input type="hidden" name="url" value="{{ shareUrl }}">
+                <input type="hidden" name="hash" value="{{ shareHash }}">
+                <div class="share-form-controls">
+                  <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-program-detail')}}" required>
+                  <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
+                  <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </p>
+    </div>
+  </div>
+</div>
+{% include 'partials/localized-strings-share.twig' %}

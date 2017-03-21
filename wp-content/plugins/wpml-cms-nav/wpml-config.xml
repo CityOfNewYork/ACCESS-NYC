@@ -1,0 +1,7 @@
+<wpml-config>
+    <custom-fields>
+        <custom-field action="copy">_cms_nav_minihome</custom-field>
+        <custom-field action="translate">_cms_nav_section</custom-field>
+        <custom-field action="copy">_top_nav_excluded</custom-field>
+    </custom-fields>  
+</wpml-config>

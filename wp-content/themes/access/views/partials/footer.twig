@@ -1,0 +1,48 @@
+<nav class="footer-nav">
+  <ul class="nav-list">
+    <li>
+      <div class="type-h3">{{ footer_get_help_now_menu.name }}</div>
+      <ul>
+      {% for menu_item in footer_get_help_now_menu.get_items %}
+        <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
+      {% endfor %}
+      </ul>
+      <div class="type-h3">{{ footer_for_caseworkers_menu.name }}</div>
+      <ul>
+        {% for menu_item in footer_for_caseworkers_menu.get_items %}
+          <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    <li>
+      <div class="type-h3">{{ footer_programs_menu.name }}</div>
+      <ul>
+        {% for menu_item in footer_programs_menu.get_items %}
+          <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    <li>
+      <div class="type-h3">{{ footer_about_access_nyc_menu.name }}</div>
+      <ul>
+        {% for menu_item in footer_about_access_nyc_menu.get_items %}
+          <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    <li>
+      <svg class="icon icon-logo-full">
+        <use xlink:href="#icon-logo-full"></use>
+      </svg>
+    </li>
+  </ul>
+</nav>
+<div class="copyright">
+  <svg class="icon icon-logo-nyc">
+    <use xlink:href="#icon-logo-nyc"></use>
+  </svg>
+  <p>{{__('City of New York,','accessnyctheme')}} {{ 'now'|date('Y') }} {{__('All Rights Reserved.', 'accessnyctheme')}}
+    <br>
+    {{__('NYC is a trademark and service mark of the City of New York.', 'accessnyctheme')}}
+  </p>
+</div>

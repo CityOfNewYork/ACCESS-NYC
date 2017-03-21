@@ -1,0 +1,271 @@
+#. Loco Gettext template
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/search-everything\n"
+"POT-Creation-Date: 2009-06-11 23:25+0000\n"
+"POT-Revision-Date: Sun Jan 26 2014 16:52:44 GMT+0100 (CET)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Loco-Source-Locale: en_GB\n"
+"X-Loco-Parser: loco_parse_po\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: views/options.php:54 views/options.php:61
+msgid ""
+"Your default search settings have been <strong>updated</strong> by Search "
+"Everything. </p><p> What are you waiting for? Go check out the new search "
+"results!"
+msgstr ""
+
+#: views/options.php:71
+msgid "Search Everything Version:"
+msgstr ""
+
+#: views/options.php:76 views/options.php:278
+msgid "Update Options"
+msgstr ""
+
+#: views/options.php:84
+msgid "Basic Configuration"
+msgstr ""
+
+#: views/options.php:90
+msgid "Search every page"
+msgstr ""
+
+#: views/options.php:90
+msgid "(non-password protected)"
+msgstr ""
+
+#: views/options.php:94 views/options.php:105 views/options.php:118
+#: views/options.php:132 views/options.php:143 views/options.php:153
+#: views/options.php:163 views/options.php:173 views/options.php:186
+#: views/options.php:197 views/options.php:207 views/options.php:217
+#: views/options.php:227
+msgid "Yes"
+msgstr ""
+
+#: views/options.php:101
+msgid "Search approved pages only"
+msgstr ""
+
+#: views/options.php:114
+msgid "Search every tag name"
+msgstr ""
+
+#: views/options.php:128
+msgid "Search every category name and description"
+msgstr ""
+
+#: views/options.php:139
+msgid "Search every comment"
+msgstr ""
+
+#: views/options.php:149
+msgid "Search comment authors"
+msgstr ""
+
+#: views/options.php:159
+msgid "Search approved comments only"
+msgstr ""
+
+#: views/options.php:169
+msgid "Search every excerpt"
+msgstr ""
+
+#: views/options.php:182
+msgid "Search every draft"
+msgstr ""
+
+#: views/options.php:193
+msgid "Search every attachment"
+msgstr ""
+
+#: views/options.php:193
+msgid "(post type = attachment)"
+msgstr ""
+
+#: views/options.php:203
+msgid "Search every custom field"
+msgstr ""
+
+#: views/options.php:203
+msgid "(metadata)"
+msgstr ""
+
+#: views/options.php:213
+msgid "Search every author"
+msgstr ""
+
+#: views/options.php:223
+msgid "Highlight Search Terms"
+msgstr ""
+
+#: views/options.php:233
+msgid "Highlight Background Color"
+msgstr ""
+
+#: views/options.php:236
+msgid "Examples:<br/>'#FFF984' or 'red'"
+msgstr ""
+
+#: views/options.php:246
+msgid "Advanced Configuration - Exclusion"
+msgstr ""
+
+#: views/options.php:252
+msgid "Exclude some post or page IDs"
+msgstr ""
+
+#: views/options.php:255
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr ""
+
+#: views/options.php:259
+msgid "Exclude Categories"
+msgstr ""
+
+#: views/options.php:262
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr ""
+
+#: views/options.php:266
+msgid "Full Highlight Style"
+msgstr ""
+
+#: views/options.php:268
+msgid ""
+"Important: 'Highlight Background Color' must be blank to use this advanced "
+"styling."
+msgstr ""
+
+#: views/options.php:270
+msgid ""
+"Example:<br/>background-color: #FFF984; font-weight: bold; color: #000; padding:"
+" 0 1px;"
+msgstr ""
+
+#: views/options.php:283
+msgid "Developed by Dan Cameron of"
+msgstr ""
+
+#: views/options.php:283
+msgid "Sprout Venture"
+msgstr ""
+
+#: views/options.php:283
+msgid "We Provide custom WordPress Plugins and Themes and a whole lot more."
+msgstr ""
+
+#: views/options.php:287
+msgid "Reset Button"
+msgstr ""
+
+#: views/options.php:295
+msgid "Find a bug?"
+msgstr ""
+
+#: views/options.php:295
+msgid "Post it as a new issue"
+msgstr ""
+
+#: views/options.php:302
+msgid "Test Search Form"
+msgstr ""
+
+#: views/options.php:309
+msgid "Use this search form to run a live search test."
+msgstr ""
+
+#: views/options.php:315
+msgid "Run Test Search"
+msgstr ""
+
+#: views/options.php:326
+msgid "News"
+msgstr ""
+
+#: views/options.php:327
+msgid "Development Support"
+msgstr ""
+
+#: views/options.php:328
+msgid "Localization Support"
+msgstr ""
+
+#: views/options.php:334
+msgid "LOCALIZATION SUPPORT:"
+msgstr ""
+
+#: views/options.php:334
+msgid ""
+"Version 6 was a major update and a few areas need new localization support. If "
+"you can help send me your translations by posting them as a new issue, "
+msgstr ""
+
+#: views/options.php:334
+msgid "here"
+msgstr ""
+
+#: views/options.php:335
+msgid "Thank You!"
+msgstr ""
+
+#: views/options.php:335
+msgid ""
+"The development of Search Everything since Version one has primarily come from "
+"the WordPress community, I&#8217;m grateful for their dedicated and continued "
+"support."
+msgstr ""
+
+#: views/options.php:345
+msgid "and many more..."
+msgstr ""
+
+#: views/options.php:345
+msgid "how about you?"
+msgstr ""
+
+#. Plugin Name of an extension
+msgid "Search Everything"
+msgstr ""
+
+#. Plugin URI of an extension
+msgid "https://core.sproutventure.com/projects/show/search-everything"
+msgstr ""
+
+#. Description of an extension
+msgid ""
+"Adds search functionality without modifying any template pages: Activate, "
+"Configure and Search. Options Include: search highlight, search pages, excerpts,"
+" attachments, drafts, comments, tags and custom fields (metadata). Also offers "
+"the ability to exclude specific pages and posts. Does not search password-"
+"protected content."
+msgstr ""
+
+#. Author of an extension
+msgid "Dan Cameron of Sprout Venture"
+msgstr ""
+
+#. Author URI of an extension
+msgid "http://sproutventure.com/"
+msgstr ""
+
+#. Shown in options title after plugin name
+msgctxt "options.php"
+msgid "settings"
+msgstr ""
+
+#. Shown below title on options page.
+msgctxt "options.php"
+msgid "Customize your search by checking one or more options below."
+msgstr ""

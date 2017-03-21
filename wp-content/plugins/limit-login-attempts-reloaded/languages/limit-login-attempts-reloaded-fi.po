@@ -1,0 +1,293 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-limit-login-attempts-plugin\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 18:01+0300\n"
+"PO-Revision-Date: 2016-06-23 18:01+0300\n"
+"Last-Translator: AriK <ari.kontiainen@gmail.com>\n"
+"Language-Team: Finnish\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d tunti"
+msgstr[1] "%d tuntia"
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuutti(a)"
+msgstr[1] "%d minuutti(a)"
+
+#: core/LimitLoginAttempts.php:532
+#, fuzzy, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr "[%s] Liikaa epäonnistuneita kirjautumisyrityksiä"
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] Liikaa epäonnistuneita kirjautumisyrityksiä"
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr "%d epäonnistunutta kirjautumisyritystä (%d lukitus(ta)) IP:stä %s"
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Viimeisin käyttäjä yritti: %s"
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "IP estettiin: %s"
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr ""
+"<strong>VIRHE:</strong> Liian monta epäonnistunutta kirjautumisyritystä."
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr "Yritä myöhemmin uudelleen."
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "Yritä uudelleen %d tunnin kuluttua."
+msgstr[1] "Yritä uudelleen %d tunnin kuluttua."
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "Yritä uudelleen %d minuutin kuluttua."
+msgstr[1] "Yritä uudelleen %d minuutin kuluttua."
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>VIRHE:</strong> Virheellinen käyttäjätunnus tai salasana."
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "<strong>%d</strong> yritys jäljellä."
+msgstr[1] "<strong>%d</strong> yritystä jäljellä."
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr "IP loki tyhjennetty"
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr "Nollaa lukitusten laskuri"
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr "Lukitusten laskuri nollattu"
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr "Asetuksia muutettu"
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr "Sivustolle näytään tulevan suoraan (IP-osoitteesta: %s)"
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your "
+"IP: %s)"
+msgstr ""
+"Sivustolle näytään tulevan välityspalvelimen kautta (proxy IP: %s, koneen "
+"IP: %s)"
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it "
+"is correct. Further information can be found <a href=\"%s\" title=\"FAQ"
+"\">here</a>"
+msgstr ""
+"<strong>Nykyinen asetus saattaa olla virheellinen.</strong> Varmista "
+"oikeellisuus. Lisätietoja löytyy <a href=\"%s\" title=\"UKK\">tästä</a>"
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr "Limit Login Attempts asetukset"
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr "Tilastotietoa"
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr "Lukituksia yhteensä"
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr "Nollaa laskuri"
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "%d lukitus edellisen nollauksen jälkeen"
+msgstr[1] "%d lukitusta edellisen nollauksen jälkeen"
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr "Ei lukituksia"
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr "Aktiiviset lukitukset"
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr "Palauta lukitukset"
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "IP-osoitteesta %d on tällä hetkellä estetty kirjautuminen"
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr "Asetukset"
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr "Lukitus"
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr "uudelleenyritystä sallitaan"
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr "minuutin lukitus"
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr "lukitusta lisää lukitusaikaa"
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr "tuntiin"
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr "tuntia, kunnes uudelleenyritykset nollataan"
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr "Sivuston yhteys"
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr "Suora yhteys"
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr "Käänteisen välityspalvelimen (proxy) takana"
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr "Käsittele evästesisäänkirjautuminen"
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr "Kyllä"
+
+#: views/options-page.php:178
+msgid "No"
+msgstr "Ei"
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr "Ilmoita lukituksesta"
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr "Kirjaa IP"
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr "Lähetä sähköposti ylläpitäjälle"
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr "lukituksen jälkeen"
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr "Muuta asetuksia"
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr "Lukitusloki"
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr "Tyhjennä loki"
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+#, fuzzy
+msgctxt "Internet address"
+msgid "IP"
+msgstr "IP estettiin: %s"
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr "Yritti kirjautua tunnuksella"
+
+#~ msgid "IP|Internet address"
+#~ msgstr "IP | Internet-osoite"
+
+#~ msgid "%d lockout"
+#~ msgid_plural "%d lockouts"
+#~ msgstr[0] "%d lukitus"
+#~ msgstr[1] "%d lukitusta"
+
+#~ msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+#~ msgstr "<strong>HUOM:</strong> Toimii vain WordPress 2.7 tai uudemmassa"
+
+#~ msgid "Limit Login Attempts"
+#~ msgstr "Limit Login Attempts"
+
+#~ msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+#~ msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#~ msgid ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+#~ msgstr ""
+#~ "Rajaa sisäänkirjautumisten määrää, mukaalukien evästeillä, per IP-osoite."
+
+#~ msgid "Johan Eenfeldt"
+#~ msgstr "Johan Eenfeldt"
+
+#~ msgid "http://devel.kostdoktorn.se"
+#~ msgstr "http://devel.kostdoktorn.se"

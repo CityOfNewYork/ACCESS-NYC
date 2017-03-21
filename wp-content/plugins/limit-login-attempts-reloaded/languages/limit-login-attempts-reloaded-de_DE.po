@@ -1,0 +1,300 @@
+# Limit Login Attempts German Translation
+# Copyright (C) 2009 Johan Eenfeldt
+# This file is distributed under the same license as the Wordpress package.
+# Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: limit-login-attempts 1.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2016-06-23 18:00+0300\n"
+"PO-Revision-Date: 2016-06-23 18:00+0300\n"
+"Last-Translator: Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>\n"
+"Language-Team: German <michael@skerwiderski.de>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: core/LimitLoginAttempts.php:520
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d Stunde"
+msgstr[1] "%d Stunden"
+
+#: core/LimitLoginAttempts.php:526
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d Minute"
+msgstr[1] "%d Minuten"
+
+#: core/LimitLoginAttempts.php:532
+#, fuzzy, php-format
+msgid "[%s] Failed login attempts from whitelisted IP"
+msgstr "[%s] Zu viele ungültige Anmeldeversuche"
+
+#: core/LimitLoginAttempts.php:536
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] Zu viele ungültige Anmeldeversuche"
+
+#: core/LimitLoginAttempts.php:541
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr "%d ungültige Anmeldeversuche (%d Sperrung(en)) von IP: %s"
+
+#: core/LimitLoginAttempts.php:545
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Letzter Anmeldeversuch erfolgte mit dem Benutzernamen: %s"
+
+#: core/LimitLoginAttempts.php:549
+msgid "IP was NOT blocked because of external whitelist."
+msgstr ""
+
+#: core/LimitLoginAttempts.php:551
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "IP wurde gesperrt für %s."
+
+#: core/LimitLoginAttempts.php:718
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr "<strong>FEHLER</strong>: Zuviele ung&uuml;ltige Anmeldeversuche."
+
+#: core/LimitLoginAttempts.php:722
+msgid "Please try again later."
+msgstr "Bitte versuchen Sie es sp&auml;ter noch einmal."
+
+#: core/LimitLoginAttempts.php:730
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "Bitte versuchen Sie es in %d Stunde noch einmal."
+msgstr[1] "Bitte versuchen Sie es in %d Stunden noch einmal."
+
+#: core/LimitLoginAttempts.php:732
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "Bitte versuchen Sie es in %d Minute noch einmal."
+msgstr[1] "Bitte versuchen Sie es in %d Minuten noch einmal."
+
+#: core/LimitLoginAttempts.php:799
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>FEHLER</strong>: Ung&uuml;ltiger Benutzername oder Passwort."
+
+#: core/LimitLoginAttempts.php:866
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "Es ist noch <strong>%d</strong> Anmeldeversuch m&ouml;glich."
+msgstr[1] "Es sind noch <strong>%d</strong> Anmeldeversuche m&ouml;glich."
+
+#: views/options-page.php:22
+msgid "Cleared IP log"
+msgstr "Protokoll wurde gel&ouml;scht"
+
+#: views/options-page.php:28
+msgid "Reset lockout count"
+msgstr "Anzahl Sperrungen zur&uuml;cksetzen"
+
+#: views/options-page.php:34
+msgid "Cleared current lockouts"
+msgstr "Sperrungen wurden deaktiviert"
+
+#: views/options-page.php:61
+msgid "Options changed"
+msgstr "Einstellungen wurden ge&auml;ndert"
+
+#: views/options-page.php:78
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr ""
+"Der Zugriff auf diese Webseite erfolgt auf direktem Weg (von Ihrer IP: %s)"
+
+#: views/options-page.php:80
+#, php-format
+msgid ""
+"It appears the site is reached through a proxy server (proxy IP: %s, your "
+"IP: %s)"
+msgstr ""
+"Der Zugriff auf diese Webseite erfolgt über einen Proxy Server (IP des Proxy "
+"Servers: %s, Ihre IP: %s)"
+
+#: views/options-page.php:88
+#, php-format
+msgid ""
+"<strong>Current setting appears to be invalid</strong>. Please make sure it "
+"is correct. Further information can be found <a href=\"%s\" title=\"FAQ"
+"\">here</a>"
+msgstr ""
+"<strong>Die aktuellen Einstellungen sind u.U. nicht korrekt, bzw. nicht "
+"konsistent</strong>. Weitere Infos zu den Einstellungen finden Sie <a href="
+"\"%s\" title=\"FAQ\">hier</a>"
+
+#: views/options-page.php:96
+msgid "Limit Login Attempts Settings"
+msgstr "Limit Login Attempts Einstellungen"
+
+#: views/options-page.php:97
+msgid "Statistics"
+msgstr "Statistik"
+
+#: views/options-page.php:102
+msgid "Total lockouts"
+msgstr "Bisher vorgenommene Sperrungen"
+
+#: views/options-page.php:106
+msgid "Reset Counter"
+msgstr "Z&auml;hler zur&uuml;cksetzen"
+
+#: views/options-page.php:108
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "%d Sperrung seit letztem Zur&uuml;cksetzen"
+msgstr[1] "%d Sperrungen seit letztem Zur&uuml;cksetzen"
+
+#: views/options-page.php:110
+msgid "No lockouts yet"
+msgstr "Derzeit sind keine Sperrungen aktiv"
+
+#: views/options-page.php:117
+msgid "Active lockouts"
+msgstr "Aktive Sperrungen"
+
+#: views/options-page.php:120
+msgid "Restore Lockouts"
+msgstr "Sperrungen aufheben"
+
+#: views/options-page.php:122
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "%d IP ist derzeit f&uuml;r Anmeldeversuche gesperrt"
+
+#: views/options-page.php:128
+msgid "Options"
+msgstr "Einstellungen"
+
+#: views/options-page.php:133
+msgid "Lockout"
+msgstr "Sperrung"
+
+#: views/options-page.php:137
+msgid "allowed retries"
+msgstr "erlaubte Anmeldeversuche"
+
+#: views/options-page.php:141
+msgid "minutes lockout"
+msgstr ""
+"Minuten Sperrung nach &Uuml;berschreiten der zul&auml;ssigen Anmeldeversuche"
+
+#: views/options-page.php:145
+msgid "lockouts increase lockout time to"
+msgstr "Sperrungen erh&ouml;hen die insgesamte Sperrzeit um"
+
+#: views/options-page.php:148
+msgid "hours"
+msgstr "Stunden"
+
+#: views/options-page.php:151
+msgid "hours until retries are reset"
+msgstr "Stunden bis fehlgeschlagene Anmeldeversuche zur&uuml;ckgesetzt werden"
+
+#: views/options-page.php:155
+msgid "Site connection"
+msgstr "Verbindungsweg zu dieser Webseite"
+
+#: views/options-page.php:161
+msgid "Direct connection"
+msgstr "Direkte Verbindung"
+
+#: views/options-page.php:166
+msgid "From behind a reversy proxy"
+msgstr "&Uuml;ber einen Reverse Proxy Server"
+
+#: views/options-page.php:173
+msgid "Handle cookie login"
+msgstr "Anmeldungen via Cockies ber&uuml;cksichtigen"
+
+#: views/options-page.php:176
+msgid "Yes"
+msgstr "Ja"
+
+#: views/options-page.php:178
+msgid "No"
+msgstr "Nein"
+
+#: views/options-page.php:183
+msgid "Notify on lockout"
+msgstr "Benachrichtigung im Falle einer Sperrung"
+
+#: views/options-page.php:186
+msgid "Log IP"
+msgstr "IP protokollieren"
+
+#: views/options-page.php:188
+msgid "Email to admin after"
+msgstr "Email an den Administrator nach"
+
+#: views/options-page.php:191
+msgid "lockouts"
+msgstr "Sperrungen"
+
+#: views/options-page.php:196
+msgid "Change Options"
+msgstr "Einstellungen speichern"
+
+#: views/options-page.php:203
+msgid "Lockout log"
+msgstr "Protokoll der durchgef&uuml;hrten Sperrungen"
+
+#: views/options-page.php:208
+msgid "Clear Log"
+msgstr "Protokoll zur&uuml;cksetzen"
+
+#: views/options-page.php:216
+msgid "Date"
+msgstr ""
+
+#: views/options-page.php:217
+#, fuzzy
+msgctxt "Internet address"
+msgid "IP"
+msgstr "IP-ul a fost blocat pentru %s."
+
+#: views/options-page.php:218
+msgid "Tried to log in as"
+msgstr "Anmeldeversuch als"
+
+#~ msgid "IP|Internet address"
+#~ msgstr "IP"
+
+#~ msgid "%d lockout"
+#~ msgid_plural "%d lockouts"
+#~ msgstr[0] "%d Sperrung"
+#~ msgstr[1] "%d Sperrungen"
+
+#~ msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+#~ msgstr "<strong>Hinweis:</strong> Erst ab Wordpress 2.7 verwendbar"
+
+#~ msgid "Limit Login Attempts"
+#~ msgstr "Limit Login Attempts"
+
+#~ msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+#~ msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#~ msgid ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+#~ msgstr ""
+#~ "Limit rate of login attempts, including by way of cookies, for each IP."
+
+#~ msgid "Johan Eenfeldt"
+#~ msgstr "Johan Eenfeldt"
+
+#~ msgid "http://devel.kostdoktorn.se"
+#~ msgstr "http://devel.kostdoktorn.se"

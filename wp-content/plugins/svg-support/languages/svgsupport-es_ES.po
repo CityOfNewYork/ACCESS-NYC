@@ -1,0 +1,281 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SVG Support 2.2.3.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-16 20:19:06+00:00\n"
+"PO-Revision-Date: Mon May 16 2016 13:54:01 GMT-0700 (PDT)\n"
+"Last-Translator: root <benbodhi@gmail.com>\n"
+"Language-Team: Benbodhi <wp@benbodhi.com>\n"
+"Language: Spanish (Spain)\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Loco-Target-Locale: es_ES\n"
+"X-Poedit-SearchPath-0: ."
+
+#. URI of the plugin
+msgid "http://wordpress.org/plugins/svg-support"
+msgstr ""
+
+#: ../admin/plugin-action-meta-links.php:32
+msgid "$25 Free Credit from GoWebben"
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:57
+msgid "Output JS in Footer?"
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:62
+msgid ""
+" Normally, scripts are placed in <code>head</code> of the HTML document. If "
+"this parameter is true, the script is placed before the closing "
+"<code>body</code> tag. This requires the theme to have the "
+"<code>wp_footer()</code> template tag in the appropriate place."
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:68
+msgid "Automatically insert class?"
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:73
+msgid ""
+" Checking this will make sure that either the default class or the custom "
+"one you set below is inserted into the style attributes of <code>img</code> "
+"tags when you insert images. Additionally, it will remove all of the default "
+"WordPress classes."
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:112
+msgid "Please Note:"
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:113
+msgid ""
+"- You will need to set your own height and width in your CSS for SVG files "
+"to display correctly."
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:114
+msgid ""
+"- Your uploaded image needs to be an SVG file for this plugin to replace the "
+"img tag with the inline SVG code. It will not create SVG files for you."
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:131
+msgid "Plugin Features"
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:145
+msgid "About The Plugin"
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:157
+msgid "GoWebben Hosting"
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:159
+msgid "Claim your FREE $25 credit from"
+msgstr ""
+
+#: ../admin/svgs-settings-page.php:159
+msgid ""
+"No catch, just free credit for using this plugin! It will be applied "
+"automatically using the link provided, but in any case you can simply use "
+"code: SVGSUPPORT during checkout."
+msgstr ""
+
+msgid "SVG Support"
+msgstr "SVG Support"
+
+msgid ""
+"Allow SVG file uploads using the WordPress Media Library uploader plus "
+"direct styling of SVG elements using CSS."
+msgstr ""
+"Permitir la subida de archivos SVG a través de la librería de medios además "
+"de dar formato a los elementos SVG usando CSS."
+
+msgid "Benbodhi"
+msgstr "Benbodhi"
+
+msgid "http://benbodhi.com"
+msgstr "http://benbodhi.com"
+
+#: ../admin/admin-init.php:15
+msgid "SVG Support Options and Instructions"
+msgstr "SVG Support Opciones e Instrucciones"
+
+#: ../admin/admin-init.php:29
+msgid "You can't play with this."
+msgstr "No puedes jugar con esto."
+
+#: ../admin/plugin-action-meta-links.php:30
+msgid "Get Support"
+msgstr "Obtener soporte"
+
+#: ../admin/plugin-action-meta-links.php:31
+msgid "Donate to author"
+msgstr "Donar al autor"
+
+#: ../admin/svgs-settings-page.php:4
+msgid "SVG Support Settings and Usage"
+msgstr "SVG Support Configuración y Uso"
+
+#: ../admin/svgs-settings-page.php:12
+msgid "Introduction"
+msgstr "Introducción"
+
+#: ../admin/svgs-settings-page.php:15
+msgid ""
+"When using SVG images on your WordPress site, it can be hard to style "
+"elements within the SVG using CSS. <strong>Now you can, easily!</strong>"
+msgstr ""
+"Al usar imágenes SVG en un sitio de WordPress es complicado darle formato a "
+"los elementos SVG usando CSS. <strong>¡Ahora esto es sencillo!</strong>"
+
+#: ../admin/svgs-settings-page.php:16
+msgid ""
+"This plugin not only provides SVG Support like the name says, it also allows "
+"you to easily embed your full SVG file's code using a simple IMG tag. By "
+"adding the class <code>style-svg</code> to your IMG elements, this plugin "
+"dynamically replaces any IMG elements containing the <code>style-svg</code> "
+"class with your complete SVG."
+msgstr ""
+"Este plugin no solo da soporte SVG como su nombre indica, sino que además "
+"permite insertar el código completo SVG utilizando una simple etiqueta IMG. "
+"Añadiendo la clase <code>style-svg</code> a los elementos IMG este plugin "
+"los reemplaza de forma dinámica con los SVG completos."
+
+#: ../admin/svgs-settings-page.php:17
+msgid ""
+"The main purpose of this is to allow styling of SVG elements. Usually your "
+"styling options are restricted when using <code>embed</code>, "
+"<code>object</code> or <code>img</code> tags alone."
+msgstr ""
+"El objetivo principal es permitir darle formato a los elementos SVG. "
+"Normalmente las opciones de formato están restringidas al usar solo las "
+"etiquetas <code>embed</code>, <code>object</code> o <code>img</code>."
+
+#: ../admin/svgs-settings-page.php:34
+msgid "Settings"
+msgstr "Configuración"
+
+#: ../admin/svgs-settings-page.php:46
+msgid "Restrict to Administrators"
+msgstr "Restringir a los administradores"
+
+#: ../admin/svgs-settings-page.php:51 ../admin/svgs-settings-page.php:62 ..
+#: admin/svgs-settings-page.php:73
+msgid "Yes"
+msgstr "Si"
+
+#: ../admin/svgs-settings-page.php:51
+msgid " Restricts SVG upload priveledges to Administrators."
+msgstr " Restringe la subida de archivos SVG a los administradores."
+
+#: ../admin/svgs-settings-page.php:78
+msgid "CSS Class to target"
+msgstr "Clase CSS objetivo"
+
+#: ../admin/svgs-settings-page.php:81
+msgid ""
+"The default target class is <code>style-svg</code>. You can change it to "
+"your own class such as <code>my-class</code> by typing it here.<br />Leave "
+"blank to use the default class."
+msgstr ""
+"La clase por defecto es <code>style-svg</code>. Puedes cambiarla por una "
+"clase propia como <code>my-class</code> tecleándola aquí.<br />Déjalo en "
+"blanco para usar la clase por defecto."
+
+#: ../admin/svgs-settings-page.php:87
+msgid "Save Changes"
+msgstr "Guardar cambios"
+
+#: ../admin/svgs-settings-page.php:98
+msgid "Usage"
+msgstr "Uso"
+
+#: ../admin/svgs-settings-page.php:101
+msgid "You can simply upload SVG images to your media library like any other file."
+msgstr ""
+"Puedes subir fácilmente imágenes SVG a tu librería de medios como otros "
+"formatos de archivo."
+
+#: ../admin/svgs-settings-page.php:102
+msgid ""
+"Now, embed your SVG image like a standard image with the addition of adding "
+"the class <code>style-svg</code> (or your custom class from above) to any "
+"IMG tags that you want this plugin to swap out with your actual SVG code."
+msgstr ""
+"Ahora, incluye tu imagen SVG como una imágen estándar añadiendo la clase "
+"<code>style-svg</code> (o tu clase propia definida arriba) a cualquier "
+"etiqueta IMG que quieres que se cambie por el código SVG."
+
+#: ../admin/svgs-settings-page.php:103
+msgid "For example:"
+msgstr "por ejemplo:"
+
+#: ../admin/svgs-settings-page.php:106
+msgid "or"
+msgstr "o"
+
+#: ../admin/svgs-settings-page.php:109
+msgid ""
+"The whole IMG tag element will now be dynamically replaced by the actual "
+"code of your SVG, making the inner content targetable."
+msgstr ""
+"Toda la etiqueta IMG ahora se reemplaza de forma dinámica con el código del "
+"SVG haciendo su contenido accesible."
+
+#: ../admin/svgs-settings-page.php:110
+msgid "This allows you to target elements within your SVG using CSS."
+msgstr "Esto permite acceder a los elementos SVG usando CSS."
+
+#: ../admin/svgs-settings-page.php:134
+msgid "SVG Support for your media library"
+msgstr "Soporte SVG para la librería de medios"
+
+#: ../admin/svgs-settings-page.php:135
+msgid "Style SVG elements directly using CSS"
+msgstr "Dar formato a los elementos SVG usando CSS"
+
+#: ../admin/svgs-settings-page.php:136
+msgid "Restrict to Administrators only"
+msgstr "Restringido para administradores"
+
+#: ../admin/svgs-settings-page.php:137
+msgid "Extremely Simple To Use"
+msgstr "Muy fácil de usar"
+
+#: ../admin/svgs-settings-page.php:147
+msgid "You can read about this plugin in detail on"
+msgstr "Puedes leer todo sobre el plugin en"
+
+#: ../admin/svgs-settings-page.php:147
+msgid "The WordPress Plugin Repository"
+msgstr "El repositorio de plugins de WordPress"
+
+#: ../admin/svgs-settings-page.php:148
+msgid "Need help?"
+msgstr "¿Necesitas ayuda?"
+
+#: ../admin/svgs-settings-page.php:148
+msgid "Visit Support"
+msgstr "Visitar soporte"
+
+#: ../admin/svgs-settings-page.php:149
+msgid "Buy Benbodhi a Beer &rarr;"
+msgstr "Comprar una cerveza para Benbodhi  &rarr;"
+
+#: ../admin/svgs-settings-page.php:150
+msgid "from"
+msgstr "de"

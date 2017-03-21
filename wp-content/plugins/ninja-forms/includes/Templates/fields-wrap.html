@@ -1,0 +1,48 @@
+<script id="tmpl-nf-field-wrap" type="text/template">
+	<div id="nf-field-{{{ data.id }}}-wrap" class="{{{ data.renderWrapClass() }}}" data-field-id="{{{ data.id }}}">
+		<#
+		/*
+		 * This is our main field template. It's called for every field type.
+		 * Note that must have ONE top-level, wrapping element. i.e. a div/span/etc that wraps all of the template.
+		 *
+		 * <div>
+		 * 	 <div>
+		 *   	Cool Stuff
+		 * 	 </div>
+		 *   <span>
+		 * 		Hello World!
+		 *   </span>
+		 * </div>
+		 *
+		 * is OK.
+		 *
+		 * <div>
+		 * 		Cool Stuff
+		 * </div>
+		 * <span>
+		 * 		Hello World!
+		 * </span>
+		 *
+		 * is NOT ok because each of those items is on the top-level.
+		 */
+        #>
+		<#
+		/*
+		 * Render our label.
+		 */
+        #>
+		{{{ data.renderLabel() }}}
+		<#
+		/*
+		 * Render our field element. Uses the template for the field being rendered.
+		 */
+        #>
+		<div class="nf-field-element">{{{ data.renderElement() }}}</div>
+		<#
+		/*
+		 * Render our Description Text.
+		 */
+        #>
+		{{{ data.renderDescText() }}}
+	</div>
+</script>

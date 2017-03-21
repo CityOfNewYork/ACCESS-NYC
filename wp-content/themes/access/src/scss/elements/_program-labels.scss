@@ -1,0 +1,13 @@
+$label-padding: 8px;
+$label-radius: 8px;
+
+.program-label {
+  @include typography-supplemental();
+  border-radius: $label-radius;
+  display: inline-block;
+  font-weight: normal;
+  margin-left: .5*$spacing-base;
+  padding: $label-padding;
+  text-transform: uppercase;
+  vertical-align: middle;
+}

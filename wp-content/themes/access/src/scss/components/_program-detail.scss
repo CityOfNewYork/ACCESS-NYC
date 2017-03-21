@@ -1,0 +1,380 @@
+.program-header-icon {
+  margin-bottom: 0;
+}
+
+.program-detail-lead {
+  @include typography-lead;
+  margin-bottom: $spacing-base * 2;
+}
+
+.program-detail-heads-up {
+  > ul {
+    list-style: none;
+    padding: 0;
+
+    > li {
+      background-position: $text-direction-start top;
+      background-repeat: no-repeat;
+      background-size: $em-base * 1.5 + px auto;
+      padding-#{$text-direction-start}: $spacing-base * 2.25;
+      padding-bottom: $spacing-base * 1.5;
+    }
+  }
+}
+
+.program-descriptor {
+  @include typography-h1()
+  margin-bottom: 2px;
+}
+
+.program-information {
+  @include typography-supplemental();
+}
+
+.program-nav {
+  @include typography-nav();
+  margin-bottom: 40px;
+
+  @include media($bp-desktop-up) {
+    ol {
+      list-style-position: inside;
+      padding-#{$text-direction-start}: 0;
+    }
+  }
+
+  li {
+    margin-bottom: 14px;
+    @include media($bp-desktop-up) {
+      border-bottom: 1px solid $color-blue-dark;
+      margin-bottom: $spacing-base;
+      padding-bottom: $spacing-base;
+
+      &:last-of-type {
+        border-bottom: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .active {
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+.program-detail-content {
+  margin-bottom: 30px;
+
+  .btn {
+    font-size: $font-size-small;
+  }
+
+  ol {
+    ol {
+      list-style: lower-alpha;
+    }
+  }
+}
+
+.program-next-section {
+  h4 {
+    font-size: $font-size-small;
+    margin-bottom: 5px;
+  }
+}
+
+.program-related-categories {
+  h5 {
+    font-size: $font-size-small;
+    margin-bottom: 0;
+  }
+}
+
+.program-share-links {
+  border-top: 4px solid $color-blue-dark;
+  padding-top: $spacing-base;
+  text-align: $text-direction-end;
+
+  .icon {
+    display: inline-block;
+    height: $spacing-base;
+    margin-#{$text-direction-end}: $spacing-base / 2;
+    vertical-align: middle;
+    width: $spacing-base;
+  }
+
+  @include media($bp-desktop-up) {
+    padding-top: $spacing-base * 2;
+    text-align: $text-direction-start;
+  }
+}
+
+.program-print-page {
+  margin-#{$text-direction-end}: $spacing-base;
+  @include media($bp-desktop-up) {
+    display: block;
+    margin-#{$text-direction-end}: 0;
+    margin-bottom: $spacing-base;
+  }
+}
+
+.quick-feedback {
+  button {
+    @include typography-h4();
+    background-color: $color-white;
+    border: 1px solid $color-blue-dark;
+    border-radius: 10px;
+    font-size: $font-size-small;
+    line-height: 1;
+    margin: ($spacing-base * .5) ($spacing-base * .5) 0 0;
+    padding: $spacing-base * .5;
+  }
+}
+
+.program-detail-body-print {
+  .content-body {
+    float: none;
+    width: 100%;
+  }
+
+  .program-detail-help-container {
+    display: block;
+    flex-flow: column nowrap;
+  }
+}
+
+.program-detail-step {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+
+  &.active,
+  &.program-detail-print-step {
+    height: auto;
+    opacity: 1;
+    overflow: visible;
+  }
+}
+
+.program-detail-help {
+  border-top: 2px solid $color-yellow-access;
+  clear: both;
+  margin: ($spacing-base * 1.5) 0;
+  padding: ($spacing-base * 1.5) 0;
+
+  .program-detail-body-print & {
+    border-top: 0;
+    padding: 10px 0;
+  }
+}
+
+.program-detail-help-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.program-detail-help-method {
+  margin-bottom: $spacing-base;
+
+  p {
+    &:first-of-type {
+      margin-bottom: $spacing-base / 3;
+
+      strong {
+        @include typography-h3;
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  h3 {
+    @include typography-h3;
+    font-size: $font-size-base;
+    margin-bottom: $spacing-base / 3;
+  }
+
+  @include media($bp-desktop-up) {
+    @include flex-grid(2, $site-margins * 2);
+    margin-bottom: $spacing-base * 1.5;
+  }
+}
+
+.last-updated {
+  @include typography-supplemental();
+  margin: 2 * $spacing-base 0;
+}
+
+.program-detail-eligibility {
+  > ul {
+    list-style: none;
+
+    > li {
+      background-image: url('assets/img/icon-eligibilitycheck.png');
+      background-position: $text-direction-start 3px;
+      background-repeat: no-repeat;
+      background-size: auto 26px;
+      margin: 30px 0;
+      padding-#{$text-direction-start}: $spacing-base * 2;
+    }
+  }
+
+  li {
+    li {
+      list-style: disc;
+      margin: ($spacing-base * .75) 0;
+    }
+  }
+}
+
+.program-detail-status {
+  @include display(flex);
+  @include flex-direction(column);
+  margin-bottom: $spacing-base;
+  padding: $spacing-base;
+
+  @include media($bp-tablet-up) {
+    @include flex-direction(row);
+  }
+}
+
+.program-detail-status-icon {
+  margin-#{$text-direction-end}: $spacing-base;
+  margin-bottom: $spacing-base;
+  position: relative;
+  width: $program-detail-icon-size;
+
+  &:after {
+    @include size($program-detail-icon-size);
+    background: $color-black;
+    border-radius: 50%;
+    color: $color-white;
+    content: 'i';
+    display: block;
+    font-family: $font-family-serif;
+    font-size: $font-size-medium;
+    font-weight: $font-weight-bold;
+    text-align: center;
+  }
+}
+
+.program-detail-status-buttons {
+  .program-detail-status-button {
+    display: inline-block;
+    margin-#{$text-direction-end}: $spacing-base;
+    vertical-align: top;
+
+    &:last-child {
+      margin-#{$text-direction-end}: 0;
+    }
+  }
+}
+
+.program-detail-what-you-need-to-include {
+  background-color: $color-grey-lightest;
+  margin: $spacing-base 0;
+}
+
+.program-detail-what-you-need-to-include-header {
+  align-items: center;
+  background-color: $color-blue-dark;
+  color: $color-white;
+  display: flex;
+  overflow: hidden;
+  padding: $spacing-base;
+
+  p {
+    flex: 1;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+  }
+}
+
+.hide-or-show-list {
+  cursor: pointer;
+  font-style: italic;
+
+  &.hide {
+    .show-list {
+      display: none;
+    }
+
+    .hide-list {
+      display: block;
+    }
+  }
+
+  &.show {
+    .show-list {
+      display: block;
+    }
+
+    .hide-list {
+      display: none;
+    }
+  }
+}
+
+.hide-or-show-string {
+  @include media($bp-below-tablet) {
+    @include sr-only();
+  }
+}
+
+.no-js-hidden {
+  display: none;
+}
+
+.program-detail-what-you-need-to-include-body {
+  @include transition(all 1s);
+  max-height: 0;
+  overflow: hidden;
+
+  .open &,
+  .no-js-open & {
+    max-height: 10000px;
+    overflow: visible;
+  }
+
+  h5 {
+    color: $color-black;
+    font-weight: bold;
+    margin-top: $spacing-base * 2;
+  }
+
+  li {
+    margin: .25rem 0;
+  }
+}
+
+.program-detail-what-you-need-to-include-padding {
+  padding: ($spacing-base * 2) $spacing-base ($spacing-base * 1.5);
+}
+
+.program-detail-status-text {
+  .icon-screening {
+    @include size($spacing-base);    height: 21px;
+    margin-#{$text-direction-end}: $spacing-base/2;
+    vertical-align: sub;
+  }
+}
+
+.program-detail-application-method {
+  margin: $spacing-base*2 0;
+}
+
+.program-detail-print-step {
+  margin: $spacing-base*2 0;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.back-to-program-start {
+  padding: $spacing-base*2 0 0;
+}
