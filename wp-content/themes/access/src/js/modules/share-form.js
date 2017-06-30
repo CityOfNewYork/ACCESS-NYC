@@ -71,8 +71,10 @@ class ShareForm {
       validity = this._validateRequired($email[0]) &&
           this._validateEmail($email[0]);
     }
+
     if ($tel.length) {
-      validity = this._validateRequired($tel[0]);
+      validity = this._validateRequired($tel[0]) &&
+          this._validatePhoneNumber($tel[0]);
     }
 
     this._isValid = validity;
@@ -101,6 +103,32 @@ class ShareForm {
     } else {
       return true;
     }
+  }
+
+  /**
+   * For a given input, checks to see if its value is a valid Phone Number.
+   * If not, displays an error message and sets an error class on the element.
+   * @param {HTMLElement} input - The html form element for the component.
+   * @return {boolean} - Valid Phone Number.
+   */
+  _validatePhoneNumber(input) {
+    let num = input.value.match(/\d+/g); // get only digits
+    num = (num) ? num.join('') : 0; // did regex capture numbers?
+
+    if (num.length === 11) return true; // assume it is phone number
+    if (num.length === 10) {
+      num = '1' + num;
+      input.value = num;
+      return true;
+    } // has no code, assume US number, prepend country code
+
+    if (num.length === 7) {
+      this._showError(ShareForm.Message.PHONE_AREA);
+      return false;
+    } // assume number but ask to add area code
+
+    this._showError(ShareForm.Message.PHONE);
+    return false;
   }
 
   /**
@@ -194,6 +222,8 @@ ShareForm.CssClass = {
  */
 ShareForm.Message = {
   EMAIL: 'ERROR_EMAIL',
+  PHONE: 'ERROR_PHONE',
+  PHONE_AREA: 'ERROR_PHONE_AREA_CODE',
   REQUIRED: 'ERROR_REQUIRED',
   SERVER: 'ERROR_SERVER'
 };
