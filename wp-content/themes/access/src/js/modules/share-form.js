@@ -72,7 +72,7 @@ class ShareForm {
           this._validateEmail($email[0]);
     }
     if ($tel.length) {
-      validity = this._validateRequired($email[0]);
+      validity = this._validateRequired($tel[0]);
     }
 
     this._isValid = validity;
@@ -160,9 +160,13 @@ class ShareForm {
           this._isDisabled = false;
         });
       } else {
+        /* eslint-disable no-console, no-debugger */
+         console.log(response);
         this._showError(ShareForm.Message.SERVER);
       }
     }).fail((response) => {
+      /* eslint-disable no-console, no-debugger */
+      // console.log(response);
       this._showError(ShareForm.Message.SERVER);
     }).always(() => {
       $(this._el).find('input').prop('disabled', false);

@@ -3118,6 +3118,9 @@ a.program-filter-item {
   display: block;
   padding: 15px; }
 
+.share-form.active {
+  margin-bottom: 20px; }
+
 .share-form-controls {
   -webkit-box-align: center;
   -moz-box-align: center;
