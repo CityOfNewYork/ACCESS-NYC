@@ -336,7 +336,8 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 
 	var attachPresetColorsEvent = function() {
 		formAndDialogBox.on('change', '.js-wpml-ls-colorpicker-preset', function(){
-			var slug = $(this).val();
+			var slug = $(this).val(),
+				subform = $(this).parents('.js-wpml-ls-subform');
 
 			if (slug) {
 				var pickerSets = $(this).parents('.js-wpml-ls-panel-colors'),
@@ -348,7 +349,7 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 					inputTags.parents('.wp-picker-container').find('.wp-color-result').css('background-color', v);
 				});
 
-				pickerSets.find('.js-wpml-ls-colorpicker').trigger('change');
+				updatePreview(subform);
 			}
 		});
 	};

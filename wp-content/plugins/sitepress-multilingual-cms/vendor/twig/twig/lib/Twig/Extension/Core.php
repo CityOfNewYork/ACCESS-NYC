@@ -163,7 +163,7 @@ class Twig_Extension_Core extends Twig_Extension
             new Twig_SimpleFilter('upper', 'strtoupper'),
             new Twig_SimpleFilter('lower', 'strtolower'),
             new Twig_SimpleFilter('striptags', 'strip_tags'),
-            new Twig_SimpleFilter('trim', 'trim'),
+            new Twig_SimpleFilter('trim', 'twig_trim_filter'),
             new Twig_SimpleFilter('nl2br', 'nl2br', array('pre_escape' => 'html', 'is_safe' => array('html'))),
 
             // array helpers
@@ -946,6 +946,31 @@ function twig_in_filter($value, $compare)
 }
 
 /**
+ * Returns a trimmed string.
+ *
+ * @return string
+ *
+ * @throws Twig_Error_Runtime When an invalid trimming side is used (not a string or not 'left', 'right', or 'both')
+ */
+function twig_trim_filter($string, $characterMask = null, $side = 'both')
+{
+    if (null === $characterMask) {
+        $characterMask = " \t\n\r\0\x0B";
+    }
+
+    switch ($side) {
+        case 'both':
+            return trim($string, $characterMask);
+        case 'left':
+            return ltrim($string, $characterMask);
+        case 'right':
+            return rtrim($string, $characterMask);
+        default:
+            throw new Twig_Error_Runtime('Trimming side must be "left", "right" or "both".');
+    }
+}
+
+/**
  * Escapes a string.
  *
  * @param Twig_Environment $env
@@ -1143,8 +1168,13 @@ function _twig_escape_js_callback($matches)
 
     // \uHHHH
     $char = twig_convert_encoding($char, 'UTF-16BE', 'UTF-8');
+    $char = strtoupper(bin2hex($char));
 
-    return '\\u'.strtoupper(substr('0000'.bin2hex($char), -4));
+    if (4 >= strlen($char)) {
+        return sprintf('\u%04s', $char);
+    }
+
+    return sprintf('\u%04s\u%04s', substr($char, 0, -4), substr($char, -4));
 }
 
 function _twig_escape_css_callback($matches)
@@ -1234,7 +1264,15 @@ if (function_exists('mb_get_info')) {
      */
     function twig_length_filter(Twig_Environment $env, $thing)
     {
-        return is_scalar($thing) ? mb_strlen($thing, $env->getCharset()) : count($thing);
+        if (is_scalar($thing)) {
+            return mb_strlen($thing, $env->getCharset());
+        }
+
+        if (is_object($thing) && method_exists($thing, '__toString') && !$thing instanceof \Countable) {
+            return mb_strlen((string) $thing, $env->getCharset());
+        }
+
+        return count($thing);
     }
 
     /**
@@ -1317,7 +1355,15 @@ else {
      */
     function twig_length_filter(Twig_Environment $env, $thing)
     {
-        return is_scalar($thing) ? strlen($thing) : count($thing);
+        if (is_scalar($thing)) {
+            return strlen($thing);
+        }
+
+        if (is_object($thing) && method_exists($thing, '__toString') && !$thing instanceof \Countable) {
+            return strlen((string) $thing);
+        }
+
+        return count($thing);
     }
 
     /**
@@ -1377,6 +1423,10 @@ function twig_test_empty($value)
 {
     if ($value instanceof Countable) {
         return 0 == count($value);
+    }
+
+    if (is_object($value) && method_exists($value, '__toString')) {
+        return '' === (string) $value;
     }
 
     return '' === $value || false === $value || null === $value || array() === $value;

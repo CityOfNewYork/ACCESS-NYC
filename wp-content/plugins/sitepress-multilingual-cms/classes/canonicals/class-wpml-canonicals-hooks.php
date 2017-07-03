@@ -8,13 +8,18 @@ class WPML_Canonicals_Hooks {
 	/** @var SitePress $sitepress */
 	private $sitepress;
 
+	/** @var  WPML_URL_Converter $url_converter */
+	private $url_converter;
+
 	/**
 	 * WPML_Canonicals_Hooks constructor.
 	 *
-	 * @param SitePress $sitepress
+	 * @param SitePress          $sitepress
+	 * @param WPML_URL_Converter $url_converter
 	 */
-	public function __construct( SitePress $sitepress ) {
-		$this->sitepress = $sitepress;
+	public function __construct( SitePress $sitepress, WPML_URL_Converter $url_converter ) {
+		$this->sitepress     = $sitepress;
+		$this->url_converter = $url_converter;
 	}
 
 	public function add_hooks() {
@@ -27,47 +32,25 @@ class WPML_Canonicals_Hooks {
 		}
 
 		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) && strpos( strtolower( $_SERVER['SERVER_SOFTWARE'] ), 'nginx' ) !== false ) {
-			add_action( 'template_redirect', array( $this, 'maybe_fix_nginx_redirection_callback' ) );
+			add_action( 'redirect_canonical', array( $this, 'maybe_fix_nginx_redirection_callback' ) );
 		}
 	}
 
 	public function redirect_pages_from_root_to_default_lang_dir() {
-		if ( is_page() ) {
-			$current_path   = wpml_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
-			$canonical_url  = get_permalink( get_queried_object_id() );
-			$canonical_path = wpml_parse_url( $canonical_url, PHP_URL_PATH );
-			$canonical_path = $this->get_paginated_canonical_path( $canonical_path );
+		if ( is_page() && ! WPML_Root_Page::is_current_request_root() ) {
+			$lang = $this->sitepress->get_current_language();
+			$current_uri = $_SERVER['REQUEST_URI'];
+			$abs_home    = $this->url_converter->get_abs_home();
+			$install_subdir = wpml_parse_url( $abs_home, PHP_URL_PATH );
+			$actual_uri  = preg_replace( '#^' . $install_subdir . '#', '', $current_uri );
+			$actual_uri  = '/' . ltrim( $actual_uri, '/' );
 
-			if ( $current_path !== $canonical_path ) {
-				$current_query = wpml_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
-				parse_str( $current_query, $current_query_array );
-				$canonical_url = add_query_arg( $current_query_array, $canonical_url );
-				$this->sitepress->get_wp_api()->wp_safe_redirect( $canonical_url, 301 );
+			if ( 0 !== strpos( $actual_uri, '/' . $lang . '/' ) ) {
+				$canonical_uri = trailingslashit( $install_subdir ) . $lang . $actual_uri;
+				$canonical_uri = user_trailingslashit( $canonical_uri );
+				$this->sitepress->get_wp_api()->wp_safe_redirect( $canonical_uri, 301 );
 			}
 		}
-	}
-
-	/**
-	 * @param string $canonical_path
-	 *
-	 * @return string
-	 */
-	private function get_paginated_canonical_path( $canonical_path ) {
-		global $wp_rewrite;
-
-		$paged = get_query_var( 'page' );
-
-		if ( $paged ) {
-			$pagination_base = '';
-
-			if ( is_front_page() ) {
-				$pagination_base = trailingslashit( $wp_rewrite->pagination_base );
-			}
-
-			$canonical_path = trailingslashit( $canonical_path ) . $pagination_base . user_trailingslashit( $paged );
-		}
-
-		return $canonical_path;
 	}
 
 	/**
@@ -82,5 +65,4 @@ class WPML_Canonicals_Hooks {
 
 		return $redirect;
 	}
-
 }

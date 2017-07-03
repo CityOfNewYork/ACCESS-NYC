@@ -41,6 +41,9 @@ class WPML_ST_Upgrade_Command_Factory {
 			case 'WPML_ST_Upgrade_DB_String_Packages' :
 				$result = new WPML_ST_Upgrade_DB_String_Packages( $this->wpdb );
 				break;
+			case 'WPML_ST_Upgrade_DB_String_Location' :
+				$result = new WPML_ST_Upgrade_DB_String_Location( $this->wpdb );
+				break;
 			default:
 				throw new WPML_ST_Upgrade_Command_Not_Found_Exception( $class_name );
 		}

@@ -51,7 +51,13 @@ class WPML_PB_API_Hooks_Strategy implements IWPML_PB_Strategy {
 	public function get_package_strings( $package_data ) {
 		$this->factory->get_string_translations( $this )->get_package_strings( $package_data );
 	}
+
 	public function remove_string( $string_data ) {
 		$this->factory->get_string_translations( $this )->remove_string( $string_data );
 	}
+
+	public function migrate_location( $post_id, $post_content ) {
+
+	}
+
 }

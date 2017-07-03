@@ -17,7 +17,7 @@ class WPML_Post_Edit_Ajax {
 		$slug        = filter_var( $_POST['slug'], FILTER_SANITIZE_STRING );
 		$name        = filter_var( $_POST['name'], FILTER_SANITIZE_STRING );
 		$trid        = filter_var( $_POST['trid'], FILTER_SANITIZE_NUMBER_INT );
-		$description = filter_var( $_POST['description'], FILTER_SANITIZE_NUMBER_INT );
+		$description = filter_var( $_POST['description'], FILTER_SANITIZE_STRING );
 		$meta_data   = isset( $_POST['meta_data'] ) ? $_POST['meta_data'] : array();
 
 		$new_term_object = self::save_term_ajax( $sitepress, $lang, $taxonomy, $slug, $name, $trid, $description, $meta_data );
@@ -195,7 +195,7 @@ class WPML_Post_Edit_Ajax {
 				$sitepress->set_element_language_details( $post_id, $wpml_post_type, $trid, $to );
 				// Synchronize the posts terms languages. Do not create automatic translations though.
 				WPML_Terms_Translations::sync_post_terms_language( $post_id );
-				require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+				require_once WPML_PLUGIN_PATH . '/inc/cache.php';
 				icl_cache_clear( $post_type . 's_per_language', true );
 
 				$result = $to;

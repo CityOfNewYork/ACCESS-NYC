@@ -5,6 +5,7 @@
  * @package wpml-core
  */
 class SitePress extends WPML_WPDB_User{
+	private $taxonomy_translation;
 	private $template_real_path;
 	/** @var  WPML_Meta_Boxes_Post_Edit_HTML $post_edit_metabox */
 	private $post_edit_metabox;
@@ -26,10 +27,8 @@ class SitePress extends WPML_WPDB_User{
 	private $_admin_notices = array();
 	private $this_lang;
 	private $wp_query;
-	private $admin_language = null;
+	private $admin_language;
 	private $user_preferences = array();
-	private $is_mobile;
-    private $is_tablet;
 	private $always_translatable_post_types;
 	private $always_translatable_taxonomies;
 	/** @var  WPML_WP_API $wp_api */
@@ -88,28 +87,27 @@ class SitePress extends WPML_WPDB_User{
 
 		parent::__construct( $wpdb );
 		$this->locale_utils = new WPML_Locale( $wpdb, $this, $locale );
-        $sitepress_settings = get_option('icl_sitepress_settings');
+	  $sitepress_settings = get_option( 'icl_sitepress_settings' );
 		$this->settings = &$sitepress_settings;
 		$this->always_translatable_post_types = array( 'post', 'page' );
 		$this->always_translatable_taxonomies = array( 'category', 'post_tag' );
 		$this->post_translation = &$wpml_post_translations;
 		$this->term_translation = &$wpml_term_translations;
-		//TODO: [WPML 3.5] To remove in WPML 3.5
 		//@since 3.1
 		if(is_admin() && !$this->get_setting('icl_capabilities_verified')) {
 			icl_enable_capabilities();
 			$sitepress_settings = get_option('icl_sitepress_settings');
 		}
 
-		if ( is_null( $pagenow ) && is_multisite() ) {
-			include ICL_PLUGIN_PATH . '/inc/hacks/vars-php-multisite.php';
+	  if ( null === $pagenow && is_multisite() ) {
+			include WPML_PLUGIN_PATH . '/inc/hacks/vars-php-multisite.php';
 		}
 
-		if ( false != $this->settings ) {
+	  if ( $this->settings ) {
 			$this->verify_settings();
 		}
 
-		if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php' && isset( $_GET[ 'debug_action' ] ) ) {
+	  if ( isset( $_GET['page'], $_GET['debug_action'] ) && WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' === $_GET['page'] ) {
 			ob_start();
 		}
 
@@ -124,7 +122,8 @@ class SitePress extends WPML_WPDB_User{
 
 		$this->initialize_cache( );
 
-		$this->flags = new WPML_Flags( $wpdb );
+		$flags_factory = new WPML_Flags_Factory( $wpdb );
+		$this->flags = $flags_factory->create();
 
 		add_action( 'plugins_loaded', array( $this, 'init' ), 1 );
 		add_action( 'wp_loaded', array( $this, 'maybe_set_this_lang' ) );
@@ -135,7 +134,7 @@ class SitePress extends WPML_WPDB_User{
 
 		add_action( 'init', array( $this, 'plugin_localization' ) );
 
-		if ( $this->get_setting('existing_content_language_verified') && ( $this->get_setting('setup_complete') || ( !empty($_GET[ 'page' ]) && $this->get_setting('setup_wizard_step') > 1 && $_GET[ 'page' ] == ICL_PLUGIN_FOLDER . '/menu/languages.php'  ) ) ) {
+		if ( $this->get_setting('existing_content_language_verified') && ( $this->get_setting('setup_complete') || ( !empty($_GET[ 'page' ]) && $this->get_setting('setup_wizard_step') > 1 && $_GET[ 'page' ] == WPML_PLUGIN_FOLDER . '/menu/languages.php'  ) ) ) {
 
 		// Post/page language box
 
@@ -148,7 +147,7 @@ class SitePress extends WPML_WPDB_User{
 
 			add_filter( 'the_posts', array( $this, 'the_posts' ), 10 );
 
-			if ( $pagenow == 'edit.php' ) {
+		if ( $pagenow === 'edit.php' ) {
 				add_action( 'quick_edit_custom_box', array( 'WPML_Terms_Translations', 'quick_edit_terms_removal' ), 10, 2 );
 			}
 
@@ -171,6 +170,7 @@ class SitePress extends WPML_WPDB_User{
 
 			// Ajax Action for the updating of term names on the troubleshooting page
 			add_action( 'wp_ajax_wpml_update_term_names_troubleshoot', array( 'WPML_Troubleshooting_Terms_Menu', 'wpml_update_term_names_troubleshoot' ) );
+			add_action( 'wp_ajax_wpml_generate_term_slug', array( $this->get_term_actions_helper(), 'generate_unique_term_slug_ajax_handler' ) );
 
 			// short circuit get default category
 			add_filter( 'pre_option_default_category', array( $this, 'pre_option_default_category' ) );
@@ -183,12 +183,6 @@ class SitePress extends WPML_WPDB_User{
 			add_action( 'admin_print_styles', array( $this, 'rtl_fix' ) );
 
 			add_action( 'restrict_manage_posts', array( $this, 'restrict_manage_posts' ) );
-
-			// adjacent posts links
-			add_filter( 'get_previous_post_join', array( $this, 'get_adjacent_post_join' ) );
-			add_filter( 'get_next_post_join', array( $this, 'get_adjacent_post_join' ) );
-			add_filter( 'get_previous_post_where', array( $this, 'get_adjacent_post_where' ) );
-			add_filter( 'get_next_post_where', array( $this, 'get_adjacent_post_where' ) );
 
 			// feeds links
 			add_filter( 'feed_link', array( $this, 'feed_link' ) );
@@ -231,7 +225,7 @@ class SitePress extends WPML_WPDB_User{
 				add_action( 'wp_head', array( $this, 'meta_generator_tag' ) );
 			}
 
-			require_once ICL_PLUGIN_PATH . '/inc/wp-nav-menus/class-wpml-nav-menu.php';
+			require_once WPML_PLUGIN_PATH . '/inc/wp-nav-menus/class-wpml-nav-menu.php';
 			$icl_nav_menu = new WPML_Nav_Menu( $this, $wpdb, $wpml_post_translations, $wpml_term_translations );
 			$icl_nav_menu->init_hooks();
 
@@ -248,7 +242,7 @@ class SitePress extends WPML_WPDB_User{
 
 		add_filter( 'core_version_check_locale', array( $this, 'wp_upgrade_locale' ) );
 
-		if ( $pagenow === 'post.php' && isset( $_REQUEST[ 'action' ] ) && $_REQUEST[ 'action' ] == 'edit' && isset( $_GET[ 'post' ] ) ) {
+	  if ( $pagenow === 'post.php' && isset( $_REQUEST['action'], $_GET['post'] ) && $_REQUEST['action'] === 'edit' ) {
 			add_action( 'init', '_icl_trash_restore_prompt' );
 		}
 
@@ -270,11 +264,25 @@ class SitePress extends WPML_WPDB_User{
 	 * @since 3.2
 	 */
 	public function api_hooks() {
-		//TODO: [WPML 3.5] to deprecate in favour of lowercased namespaces
+	  /**
+	   * @deprecated in favour of lowercased namespaces
+	   */
 		add_filter( 'WPML_get_setting', array( $this, 'filter_get_setting' ), 10, 2 );
+	  /**
+	   * @deprecated in favour of lowercased namespaces
+	   */
 		add_filter( 'WPML_get_current_language', array( $this, 'get_current_language' ), 10, 0 );
+	  /**
+	   * @deprecated in favour of lowercased namespaces
+	   */
 		add_filter( 'WPML_get_user_admin_language', array( $this, 'get_user_admin_language_filter' ), 10, 2 );
+	  /**
+	   * @deprecated in favour of lowercased namespaces
+	   */
 		add_filter( 'WPML_is_admin_action_from_referer', array( $this, 'check_if_admin_action_from_referer' ), 10, 0 );
+	  /**
+	   * @deprecated in favour of lowercased namespaces
+	   */
 		add_filter( 'WPML_current_user', array( $this, 'get_current_user' ), 10, 0 );
 
 		add_filter( 'wpml_get_setting', array( $this, 'filter_get_setting' ), 10, 2 );
@@ -300,6 +308,10 @@ class SitePress extends WPML_WPDB_User{
 		 * @since 3.2
 		 */
 		add_filter( 'wpml_get_element_translations_filter', array( $this, 'get_element_translations_filter' ), 10, 6 );
+	  /**
+	   * @deprecated it has a wrong hook tag
+	   * @since      3.2
+	   */
 		add_filter( 'wpml_get_element_translations', array( $this, 'get_element_translations_filter' ), 10, 6 );
 		add_filter( 'wpml_is_original_content', array( $this, 'is_original_content_filter'), 10, 3 );
 		add_filter( 'wpml_original_element_id', array( $this, 'get_original_element_id_filter'), 10, 3 );
@@ -332,6 +344,7 @@ class SitePress extends WPML_WPDB_User{
 		add_filter( 'wpml_language_is_active', 'wpml_language_is_active_filter', 10, 2 );
 
 		add_action( 'wpml_admin_make_post_duplicates', 'wpml_admin_make_post_duplicates_action', 10, 1 );
+
 		/**
 		 * @deprecated This actions will be removed in future releases.
 		 */
@@ -374,24 +387,17 @@ class SitePress extends WPML_WPDB_User{
 		$theme_localization_type->add_hooks();
 
 		//Run only if existing content language has been verified, and is front-end or settings are not corrupted
-		if ( ! empty( $this->settings['existing_content_language_verified'] ) ) {
+	  if ( $this->get_setting( 'existing_content_language_verified' ) ) {
 			add_action( 'wpml_verify_post_translations', array(
 				$this,
 				'verify_post_translations_action'
 			), 10, 1 );
 
-			if ($this->settings[ 'language_negotiation_type' ] == 2) {
+		  if ( 2 === (int) $this->get_setting( 'language_negotiation_type' ) ) {
 				add_filter( 'allowed_redirect_hosts', array( $this, 'allowed_redirect_hosts' ) );
 			}
 
-			//reorder active language to put 'this_lang' in front
-            $active_languages = $this->get_active_languages();
-			foreach ( $active_languages as $k => $active_lang ) {
-				if ( $k === $this->this_lang ) {
-					unset( $this->active_languages[ $k ] );
-					$this->active_languages = array_merge( array( $k => $active_lang ), $this->active_languages );
-				}
-			}
+	    $this->move_current_language_to_the_top();
 
 			add_filter( 'mod_rewrite_rules', array( $this, 'rewrite_rules_filter' ), 10 ,1 );
 
@@ -409,8 +415,8 @@ class SitePress extends WPML_WPDB_User{
 				}
 			}
 
-			if ( !is_admin() && defined( 'DISQUS_VERSION' ) ) {
-				include ICL_PLUGIN_PATH . '/modules/disqus.php';
+		  if ( defined( 'DISQUS_VERSION' ) && ! is_admin() ) {
+				include WPML_PLUGIN_PATH . '/modules/disqus.php';
 			}
 		}
 
@@ -418,7 +424,7 @@ class SitePress extends WPML_WPDB_User{
 			$GLOBALS[ 'text_direction' ] = 'rtl';
 		}
 
-		if ( !wpml_is_ajax() && is_admin() && empty( $this->settings[ 'dont_show_help_admin_notice' ] ) ) {
+	  if ( ! wpml_is_ajax() && is_admin() && ! $this->get_setting( 'dont_show_help_admin_notice' ) ) {
 			WPML_Troubleshooting_Terms_Menu::display_terms_with_suffix_admin_notice();
 
 			if ( !$this->get_setting( 'setup_wizard_step' )
@@ -429,13 +435,13 @@ class SitePress extends WPML_WPDB_User{
 		}
 
 		$short_v = implode( '.', array_slice( explode( '.', ICL_SITEPRESS_VERSION ), 0, 3 ) );
-		if ( is_admin() && ( !isset( $this->settings[ 'hide_upgrade_notice' ] ) || $this->settings[ 'hide_upgrade_notice' ] != $short_v ) ) {
+	  if ( is_admin() && ( ! isset( $this->settings['hide_upgrade_notice'] ) || $this->get_setting( 'hide_upgrade_notice' ) !== $short_v ) ) {
 			add_action( 'admin_notices', array( $this, 'upgrade_notice' ) );
 		}
 
-		require ICL_PLUGIN_PATH . '/inc/template-constants.php';
+		require WPML_PLUGIN_PATH . '/inc/template-constants.php';
 		if ( defined( 'WPML_LOAD_API_SUPPORT' ) ) {
-			require ICL_PLUGIN_PATH . '/inc/wpml-api.php';
+			require WPML_PLUGIN_PATH . '/inc/wpml-api.php';
 		}
 
 		add_action( 'wp_footer', array( $this, 'display_wpml_footer' ), 20 );
@@ -450,30 +456,23 @@ class SitePress extends WPML_WPDB_User{
 		// set language to default and remove language switcher when in Taxonomy Translation page
 		// If the page uses AJAX and the language must be forced to default, please use the
 		// if ( $pagenow == 'admin-ajax.php' )above
-		if ( is_admin()
-		     && ( isset( $_GET[ 'page' ] )
-		          && ( $_GET[ 'page' ] == ICL_PLUGIN_FOLDER . '/menu/taxonomy-translation.php'
-		               || $_GET[ 'page' ] == ICL_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php'
-		               || $_GET[ 'page' ] == ICL_PLUGIN_FOLDER . '/menu/term-taxonomy-menus/taxonomy-translation-display.class.php' )
-		          || ( $pagenow == 'admin-ajax.php'
-		               && isset( $_POST[ 'action' ] )
-		               && $_POST[ 'action' ] == 'wpml_tt_save_labels_translation' ) )
-		) {
-			$default_language = $this->get_admin_language();
-			$this->switch_lang( $default_language, true );
-			add_action( 'init', array( $this, 'remove_admin_language_switcher' ) );
-		}
+	  if ( is_admin()
+	       && ( $this->is_taxonomy_related_page()
+	            || $this->is_saving_taxonomy_labels() )
+	  ) {
+		  $this->switch_to_admin_language();
+		  add_action( 'init', array( $this, 'remove_admin_language_switcher' ) );
+	  }
 
 		/* Posts and new inline created terms, can only be saved in an active language.
 		 * Also the content of the post-new.php should always be filtered for one specific
 		 * active language, so to display the correct taxonomy terms for selection.
 		 */
-		if ( $pagenow == 'post-new.php' ) {
-			if ( ! $this->is_active_language( $this->get_current_language() ) ) {
-				$default_language = $this->get_admin_language();
-				$this->switch_lang( $default_language, true );
-			}
-		}
+	  if ( $pagenow === 'post-new.php' ) {
+		  if ( ! $this->is_active_language( $this->get_current_language() ) ) {
+			  $this->switch_to_admin_language();
+		  }
+	  }
 
 		//Code to run when reactivating the plugin
 		$recently_activated = $this->get_setting('just_reactivated');
@@ -488,11 +487,12 @@ class SitePress extends WPML_WPDB_User{
 		do_action('wpml_after_init');
 		do_action('wpml_loaded');
 
-		if ( is_admin()
-		     && isset( $_GET[ 'page' ] )
-		          && $_GET[ 'page' ] == ICL_PLUGIN_FOLDER . '/menu/taxonomy-translation.php' ) {
-			$this->taxonomy_translation = new WPML_Taxonomy_Translation( '', array(), new WPML_UI_Screen_Options_Factory( $this ) );
-		}
+	  if ( isset( $_GET['page'] )
+	       && WPML_PLUGIN_FOLDER . '/menu/taxonomy-translation.php' === $_GET['page']
+	       && is_admin()
+	  ) {
+		  $this->taxonomy_translation = new WPML_Taxonomy_Translation( '', array(), new WPML_UI_Screen_Options_Factory( $this ) );
+	  }
 
 		if ( WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN === (int) $this->get_setting( 'language_negotiation_type' )
 		     && $this->get_setting( 'language_per_domain_sso_enabled', false )
@@ -510,10 +510,11 @@ class SitePress extends WPML_WPDB_User{
 	 * functionality.
 	 */
 	public function maybe_set_this_lang() {
+	  /** @var WPML_Request $wpml_request_handler */
 		global $wpml_request_handler, $pagenow, $wpml_language_resolution;
 
 		if ( ! defined( 'WP_ADMIN' ) && isset( $_SERVER['HTTP_HOST'] ) && did_action( 'init' ) ) {
-			require_once ICL_PLUGIN_PATH . '/inc/request-handling/redirection/wpml-frontend-redirection.php';
+			require_once WPML_PLUGIN_PATH . '/inc/request-handling/redirection/wpml-frontend-redirection.php';
 			/** @var WPML_Frontend_Request $wpml_request_handler */
 			$redirect_helper = _wpml_get_redirect_helper();
 			$redirection = new WPML_Frontend_Redirection( $this,
@@ -622,7 +623,7 @@ class SitePress extends WPML_WPDB_User{
 
 	function ajax_setup()
 	{
-		require ICL_PLUGIN_PATH . '/ajax.php';
+		require WPML_PLUGIN_PATH . '/ajax.php';
 	}
 
 	function check_if_admin_action_from_referer() {
@@ -806,7 +807,7 @@ class SitePress extends WPML_WPDB_User{
 	}
 
 	function initialize_cache() {
-		require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+		require_once WPML_PLUGIN_PATH . '/inc/cache.php';
 	}
 
 	/**
@@ -919,23 +920,23 @@ class SitePress extends WPML_WPDB_User{
 
 	function administration_menu() {
 		ICL_AdminNotifier::removeMessage( 'setup-incomplete' );
-		$main_page = apply_filters( 'icl_menu_main_page', basename( ICL_PLUGIN_PATH ) . '/menu/languages.php' );
+		$main_page = apply_filters( 'icl_menu_main_page', WPML_PLUGIN_FOLDER . '/menu/languages.php' );
 		$wpml_setup_is_complete = SitePress_Setup::setup_complete();
 		if ( $wpml_setup_is_complete ) {
 			add_menu_page( __( 'WPML', 'sitepress' ), __( 'WPML', 'sitepress' ), 'wpml_manage_languages', $main_page, null, ICL_PLUGIN_URL . '/res/img/icon16.png' );
 
-			add_submenu_page( $main_page, __( 'Languages', 'sitepress' ), __( 'Languages', 'sitepress' ), 'wpml_manage_languages', basename( ICL_PLUGIN_PATH ) . '/menu/languages.php' );
+			add_submenu_page( $main_page, __( 'Languages', 'sitepress' ), __( 'Languages', 'sitepress' ), 'wpml_manage_languages', WPML_PLUGIN_FOLDER . '/menu/languages.php' );
 			//By Gen, moved Translation management after language, because problems with permissions
 			do_action( 'icl_wpml_top_menu_added' );
 
 			$wpml_setup_is_complete = $this->get_setting( 'existing_content_language_verified' ) && 2 <= count( $this->get_active_languages() );
 			if ( $wpml_setup_is_complete ) {
 				add_submenu_page( $main_page, __( 'Theme and plugins localization', 'sitepress' ), __( 'Theme and plugins localization', 'sitepress' ), 'wpml_manage_theme_and_plugin_localization',
-				                  basename( ICL_PLUGIN_PATH )
-				                  . '/menu/theme-localization.php' );
+					WPML_PLUGIN_FOLDER
+					. '/menu/theme-localization.php' );
 
 				if ( ! defined( 'WPML_TM_VERSION' ) ) {
-					add_submenu_page( $main_page, __( 'Translation options', 'sitepress' ), __( 'Translation options', 'sitepress' ), 'wpml_manage_translation_options', basename( ICL_PLUGIN_PATH ) . '/menu/translation-options.php' );
+					add_submenu_page( $main_page, __( 'Translation options', 'sitepress' ), __( 'Translation options', 'sitepress' ), 'wpml_manage_translation_options', WPML_PLUGIN_FOLDER . '/menu/translation-options.php' );
 				}
 			}
 
@@ -946,12 +947,12 @@ class SitePress extends WPML_WPDB_User{
 			);
 			do_action( 'wpml_admin_menus', $wpml_admin_menus_args );
 		} else {
-			$main_page = basename( ICL_PLUGIN_PATH ) . '/menu/languages.php';
+			$main_page = WPML_PLUGIN_FOLDER . '/menu/languages.php';
 			add_menu_page( __( 'WPML', 'sitepress' ), __( 'WPML', 'sitepress' ), 'manage_options', $main_page, null, ICL_PLUGIN_URL . '/res/img/icon16.png' );
 			add_submenu_page( $main_page, __( 'Languages', 'sitepress' ), __( 'Languages', 'sitepress' ), 'wpml_manage_languages', $main_page );
 
 			if ( ! $this->is_troubleshooting_page() && ! SitePress_Setup::languages_table_is_complete() ) {
-				$troubleshooting_url  = admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php' );
+				$troubleshooting_url  = admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' );
 				$troubleshooting_link = '<a href="' . $troubleshooting_url . '" title="' . esc_attr( __( 'Troubleshooting', 'sitepress' ) ) . '">' . __( 'Troubleshooting', 'sitepress' ) . '</a>';
 				$message = '';
 				$message .= __( 'WPML is missing some records in the languages tables and it cannot fully work until this issue is fixed.', 'sitepress' );
@@ -966,29 +967,29 @@ class SitePress extends WPML_WPDB_User{
 			}
 		}
 
-		add_submenu_page( $main_page, __( 'Support', 'sitepress' ), __( 'Support', 'sitepress' ), 'wpml_manage_support', ICL_PLUGIN_FOLDER . '/menu/support.php' );
-		$this->troubleshooting_menu(ICL_PLUGIN_FOLDER . '/menu/support.php');
-		$this->debug_information_menu(ICL_PLUGIN_FOLDER . '/menu/support.php');
+		add_submenu_page( $main_page, __( 'Support', 'sitepress' ), __( 'Support', 'sitepress' ), 'wpml_manage_support', WPML_PLUGIN_FOLDER . '/menu/support.php' );
+		$this->troubleshooting_menu(WPML_PLUGIN_FOLDER . '/menu/support.php');
+		$this->debug_information_menu(WPML_PLUGIN_FOLDER . '/menu/support.php');
 	}
 
 	private function troubleshooting_menu( $main_page ) {
-		$submenu_slug = basename( ICL_PLUGIN_PATH ) . '/menu/troubleshooting.php';
+		$submenu_slug = WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php';
 			add_submenu_page( $main_page, __( 'Troubleshooting', 'sitepress' ), __( 'Troubleshooting', 'sitepress' ), 'wpml_manage_troubleshooting', $submenu_slug );
 
 			return $submenu_slug;
 	}
 
 	private function debug_information_menu( $main_page ) {
-		$submenu_slug = basename( ICL_PLUGIN_PATH ) . '/menu/debug-information.php';
+		$submenu_slug = WPML_PLUGIN_FOLDER . '/menu/debug-information.php';
 		add_submenu_page( $main_page, __( 'Debug information', 'sitepress' ), __( 'Debug information', 'sitepress' ), 'wpml_manage_troubleshooting', $submenu_slug );
 		return $submenu_slug;
 	}
 
 	// lower priority
 	function administration_menu2() {
-		$main_page = apply_filters( 'icl_menu_main_page', ICL_PLUGIN_FOLDER . '/menu/languages.php' );
+		$main_page = apply_filters( 'icl_menu_main_page', WPML_PLUGIN_FOLDER . '/menu/languages.php' );
 		if ( $this->setup() ) {
-			add_submenu_page( $main_page, __( 'Taxonomy Translation', 'sitepress' ), __( 'Taxonomy Translation', 'sitepress' ), 'wpml_manage_taxonomy_translation', ICL_PLUGIN_FOLDER . '/menu/taxonomy-translation.php', array( $this, 'taxonomy_translation_page' ) );
+			add_submenu_page( $main_page, __( 'Taxonomy Translation', 'sitepress' ), __( 'Taxonomy Translation', 'sitepress' ), 'wpml_manage_taxonomy_translation', WPML_PLUGIN_FOLDER . '/menu/taxonomy-translation.php', array( $this, 'taxonomy_translation_page' ) );
 		}
 	}
 
@@ -1168,24 +1169,28 @@ class SitePress extends WPML_WPDB_User{
 		}
 	}
 
-    function get_active_languages( $refresh = false, $major_first = false, $order_by = 'english_name' ) {
-	    /** @var WPML_Request  $wpml_request_handler*/
+	/**
+	 * @param bool   $refresh
+	 * @param bool   $major_first
+	 * @param string $order_by
+	 *
+	 * @return array
+	 */
+	function get_active_languages( $refresh = false, $major_first = false, $order_by = 'english_name' ) {
+		/** @var WPML_Request $wpml_request_handler */
 		global $wpml_request_handler;
 
-        $in_language = defined( 'WP_ADMIN' ) && $this->admin_language ? $this->admin_language : null;
-        $in_language = $in_language === null ? $this->get_current_language() : $in_language;
-        $in_language = $in_language ? $in_language : $this->get_default_language();
+		$in_language = defined( 'WP_ADMIN' ) && $this->admin_language ? $this->admin_language : null;
+		$in_language = $in_language === null ? $this->get_current_language() : $in_language;
+		$in_language = $in_language ? $in_language : $this->get_default_language();
 
-        $active_languages       = $this->get_languages( $in_language, true, $refresh, $major_first, $order_by );
-        $active_languages       = isset($active_languages[$in_language]) ? $active_languages
-                                    : $this->get_languages( $in_language, true, true, $major_first, $order_by );
-        $active_languages       = $active_languages ? $active_languages : array();
-	    $this->active_languages = $wpml_request_handler->show_hidden()
-		    ? $active_languages
-		    : array_diff_key( $active_languages, array_fill_keys($this->get_setting ( 'hidden_languages', array()), 1) );
+		$active_languages       = $this->get_languages( $in_language, true, $refresh, $major_first, $order_by );
+		$active_languages       = isset( $active_languages[ $in_language ] ) ? $active_languages : $this->get_languages( $in_language, true, true, $major_first, $order_by );
+		$active_languages       = $active_languages ? $active_languages : array();
+		$this->active_languages = $wpml_request_handler->show_hidden() ? $active_languages : array_diff_key( $active_languages, array_fill_keys( $this->get_setting( 'hidden_languages', array() ), 1 ) );
 
-        return $this->active_languages;
-    }
+		return $this->active_languages;
+	}
 
 	/**
 	 * Returns an input array of languages, that are in the form of associative arrays,
@@ -1409,7 +1414,7 @@ class SitePress extends WPML_WPDB_User{
 			}
 
 			wp_enqueue_script( 'sitepress-scripts', ICL_PLUGIN_URL . '/res/js/scripts.js', array( 'jquery' ), ICL_SITEPRESS_VERSION );
-			if ( isset( $page_basename ) && file_exists( ICL_PLUGIN_PATH . '/res/js/' . $page_basename . '.js' ) ) {
+			if ( isset( $page_basename ) && file_exists( WPML_PLUGIN_PATH . '/res/js/' . $page_basename . '.js' ) ) {
 				$dependencies = array();
 				$localization = false;
 				$color_picker_handler = 'wp-color-picker';
@@ -1425,13 +1430,14 @@ class SitePress extends WPML_WPDB_User{
 						$localization = array(
 							'object_name' => 'troubleshooting_strings',
 							'strings'     => array(
-								'success_1'       => __( "Post type and source language assignment have been fixed for ", 'sitepress' ),
-								'success_2'       => __( " elements", 'sitepress' ),
-								'no_problems'     => __( "No errors were found in the assignment of post types." ),
-								'suffixesRemoved' => __( "Language suffixes were removed from the selected terms." ),
-								'done'            => __( 'Done', 'sitepress' ),
-								'termNamesNonce'  => wp_create_nonce('update_term_names_nonce'),
-								'cacheClearNonce' => wp_create_nonce('cache_clear'),
+								'success_1'         => __( "Post type and source language assignment have been fixed for ", 'sitepress' ),
+								'success_2'         => __( " elements", 'sitepress' ),
+								'no_problems'       => __( "No errors were found in the assignment of post types." ),
+								'suffixesRemoved'   => __( "Language suffixes were removed from the selected terms." ),
+								'done'              => __( 'Done', 'sitepress' ),
+								'termNamesNonce'    => wp_create_nonce('update_term_names_nonce'),
+								'cacheClearNonce'   => wp_create_nonce('cache_clear'),
+								'syncPostsTaxNonce' => wp_create_nonce( WPML_Troubleshoot_Action::SYNC_POSTS_TAXONOMIES_SLUG ),
 							)
 						);
 						wp_enqueue_style("wp-jquery-ui-dialog");
@@ -1494,24 +1500,6 @@ class SitePress extends WPML_WPDB_User{
 	}
 
 	function process_forms() {
-
-		if ( isset( $_POST[ 'icl_post_action' ] ) ) {
-			switch ( $_POST[ 'icl_post_action' ] ) {
-				case 'save_theme_localization':
-					$locales = array();
-					foreach ( $_POST as $k => $v ) {
-						if ( 0 !== strpos( $k, 'locale_file_name_' ) || !trim( $v ) ) {
-							continue;
-						}
-						$locales[ str_replace( 'locale_file_name_', '', $k ) ] = $v;
-					}
-					if ( !empty( $locales ) ) {
-						$this->set_locale_file_names( $locales );
-					}
-					break;
-			}
-			return;
-		}
 
 		if ( wp_verify_nonce(
 			(string)filter_input( INPUT_POST, 'icl_initial_languagenonce', FILTER_SANITIZE_STRING ),
@@ -1596,7 +1584,7 @@ class SitePress extends WPML_WPDB_User{
 					 * @var int $original_post_id
 					 */
 					foreach ( $translations as $translated_id ) {
-						$this->_sync_custom_field($original_post_id, $translated_id, $custom_field_name);
+						$this->sync_custom_field($original_post_id, $translated_id, $custom_field_name);
 					}
 				}
 			}
@@ -1729,7 +1717,7 @@ class SitePress extends WPML_WPDB_User{
 		return $details;
 	}
 
-	public function _sync_custom_field( $post_id_from, $post_id_to, $meta_key ) {
+	public function sync_custom_field( $post_id_from, $post_id_to, $meta_key ) {
 		$sql         = "SELECT meta_value FROM {$this->wpdb->postmeta} WHERE post_id=%d AND meta_key=%s";
 		$values_from = $this->wpdb->get_results( $this->wpdb->prepare( $sql, array( $post_id_from, $meta_key ) ), ARRAY_N );
 		$values_to   = $this->wpdb->get_results( $this->wpdb->prepare( $sql, array( $post_id_to, $meta_key ) ), ARRAY_N );
@@ -1758,23 +1746,30 @@ class SitePress extends WPML_WPDB_User{
 	}
 
 	function copy_custom_fields( $post_id_from, $post_id_to ) {
-		$cf_copy = array();
+		$custom_fields_to_copy = $this->get_custom_fields_translation_settings( WPML_COPY_CUSTOM_FIELD );
 
-		if ( isset( $this->settings[ 'translation-management' ][ 'custom_fields_translation' ] ) ) {
-			foreach ( $this->settings[ 'translation-management' ][ 'custom_fields_translation' ] as $meta_key => $option ) {
-				if ( $option == WPML_COPY_CUSTOM_FIELD ) {
-					$cf_copy[ ] = $meta_key;
+		foreach ( $custom_fields_to_copy as $meta_key ) {
+			$meta_from = get_post_meta( $post_id_from, $meta_key );
+			$meta_to   = get_post_meta( $post_id_to, $meta_key );
+			if ( $meta_from || $meta_to ) {
+				$this->sync_custom_field( $post_id_from, $post_id_to, $meta_key );
+			}
+		}
+	}
+
+	public function get_custom_fields_translation_settings( $mode ) {
+		$custom_fields_for_mode = array();
+
+		if ( isset( $this->settings['translation-management']['custom_fields_translation'] ) ) {
+			foreach ( $this->settings['translation-management']['custom_fields_translation'] as $meta_key => $option ) {
+				if ( $option == $mode ) {
+					$custom_fields_for_mode[] = $meta_key;
 				}
 			}
 		}
 
-		foreach ( $cf_copy as $meta_key ) {
-			$meta_from = get_post_meta($post_id_from, $meta_key) ;
-			$meta_to = get_post_meta($post_id_to, $meta_key) ;
-			if($meta_from || $meta_to) {
-				$this->_sync_custom_field( $post_id_from, $post_id_to, $meta_key );
-			}
-		}
+		return $custom_fields_for_mode;
+
 	}
 
 	/**
@@ -2208,7 +2203,7 @@ class SitePress extends WPML_WPDB_User{
 				</p>
 				<?php
 
-				$settings_menu    = new WPML_TM_Post_Edit_Custom_Field_Settings_Menu( $this, $settings_factory, $post );
+				$settings_menu    = new WPML_TM_Post_Edit_Custom_Field_Settings_Menu( $settings_factory, $post );
 				echo $settings_menu->render();
 				$custom_keys = $settings_menu->is_rendered();
 			}
@@ -2275,7 +2270,7 @@ class SitePress extends WPML_WPDB_User{
 	}
 
 	function language_filter() {
-		require ICL_PLUGIN_PATH . '/menu/post-menus/wpml-post-language-filter.class.php';
+		require WPML_PLUGIN_PATH . '/menu/post-menus/wpml-post-language-filter.class.php';
 		$post_lang_filter = new WPML_Post_Language_Filter( $this->wpdb, $this );
 		$post_lang_filter->register_scripts();
 
@@ -3290,50 +3285,6 @@ class SitePress extends WPML_WPDB_User{
 		return $catlink;
 	}
 
-	// adjacent posts links
-	function get_adjacent_post_join( $join ) {
-		$post_type = get_query_var( 'post_type' );
-		$cache_key = md5( wp_json_encode( array( $post_type, $join ) ) );
-		$cache_group = 'adjacent_post_join';
-
-		$temp_join = wp_cache_get( $cache_key, $cache_group );
-		if ( $temp_join ) {
-			return $temp_join;
-		}
-
-		if ( !$post_type ) {
-			$post_type = 'post';
-		}
-		if ( $this->is_translated_post_type( $post_type ) ) {
-			$join .= $this->wpdb->prepare(" JOIN {$this->wpdb->prefix}icl_translations t
-                                        ON t.element_id = p.ID AND t.element_type = %s",
-                                    'post_' . $post_type );
-		}
-		wp_cache_set( $cache_key, $join, $cache_group );
-
-		return $join;
-	}
-
-	function get_adjacent_post_where( $where ) {
-		$post_type = get_query_var( 'post_type' );
-		$cache_key   = md5(wp_json_encode( array( $post_type, $where ) ) );
-		$cache_group = 'adjacent_post_where';
-		$temp_where = wp_cache_get( $cache_key, $cache_group );
-		if ( $temp_where ) {
-			return $temp_where;
-		}
-		if ( !$post_type ) {
-			$post_type = 'post';
-		}
-		if ( $this->is_translated_post_type( $post_type ) ) {
-			$where .= " AND language_code = '" . esc_sql( $this->this_lang ) . "'";
-		}
-		wp_cache_set( $cache_key, $where, $cache_group );
-
-		return $where;
-
-	}
-
 	// feeds links
 	function feed_link( $out ) {
 		return $this->convert_url( $out );
@@ -3465,7 +3416,7 @@ class SitePress extends WPML_WPDB_User{
 
 	// Localization
 	function plugin_localization() {
-		load_plugin_textdomain( 'sitepress', false, ICL_PLUGIN_FOLDER . '/locale' );
+		load_plugin_textdomain( 'sitepress', false, WPML_PLUGIN_FOLDER . '/locale' );
 	}
 
 	/**
@@ -3527,11 +3478,6 @@ class SitePress extends WPML_WPDB_User{
 	function get_locale_file_names() {
 
 		return $this->locale_utils->get_locale_file_names();
-	}
-
-	function set_locale_file_names( $locale_file_names_pairs ) {
-
-		return $this->locale_utils->set_locale_file_names( $locale_file_names_pairs );
 	}
 
 	function pre_option_page_on_front() {
@@ -3669,7 +3615,7 @@ class SitePress extends WPML_WPDB_User{
 			</p>
 			<p>
 				<input type="hidden" id="icl_dismiss_help_nonce" value="<?php echo $icl_dhn = wp_create_nonce( 'dismiss_help_nonce' ) ?>"/>
-				<a href="admin.php?page=<?php echo basename( ICL_PLUGIN_PATH ) . '/menu/languages.php' ?>" class="button-primary"><?php _e( 'Configure WPML', 'sitepress' ) ?></a>&nbsp;
+				<a href="admin.php?page=<?php echo WPML_PLUGIN_FOLDER . '/menu/languages.php' ?>" class="button-primary configure-wpml"><?php _e( 'Configure WPML', 'sitepress' ) ?></a>&nbsp;
 				<a href="https://wpml.org/documentation/getting-started-guide/?utm_source=wpmlplugin&utm_medium=wpadmin&utm_term=getting-started&utm_content=getting-started&utm_campaign=wpml" target="_blank">
 					<?php _e( 'Getting started guide', 'sitepress' ) ?>
 				</a>
@@ -3680,7 +3626,7 @@ class SitePress extends WPML_WPDB_User{
 	}
 
 	function upgrade_notice() {
-		include ICL_PLUGIN_PATH . '/menu/upgrade_notice.php';
+		include WPML_PLUGIN_PATH . '/menu/upgrade_notice.php';
 	}
 
 	function display_wpml_footer() {
@@ -4043,7 +3989,7 @@ class SitePress extends WPML_WPDB_User{
 	}
 
 	function admin_language_switcher() {
-		require_once ICL_PLUGIN_PATH . '/menu/wpml-admin-lang-switcher.class.php';
+		require_once WPML_PLUGIN_PATH . '/menu/wpml-admin-lang-switcher.class.php';
 		$admin_lang_switcher = new WPML_Admin_Language_Switcher();
 		$admin_lang_switcher->render();
 	}
@@ -4195,7 +4141,7 @@ class SitePress extends WPML_WPDB_User{
 		// we have this object here
 		global $absolute_links_object;
 		if (!isset($absolute_links_object) || !is_a($absolute_links_object, 'AbsoluteLinks') || $is_language_in_domain ) {
-			require_once ICL_PLUGIN_PATH . '/inc/absolute-links/absolute-links.class.php';
+			require_once WPML_PLUGIN_PATH . '/inc/absolute-links/absolute-links.class.php';
 			$absolute_links_object = new AbsoluteLinks();
 		}
 
@@ -4336,11 +4282,20 @@ class SitePress extends WPML_WPDB_User{
 		$query      = isset( $parsed_url[ 'query' ] ) ? $parsed_url[ 'query' ] : "";
 
 		parse_str ( $query, $vars );
-		$inurl   = isset( $vars[ 'page_id' ] ) ? 'page_id' : null;
-		$inurl   = $inurl === null && isset( $vars[ 'p' ] ) ? 'p' : null;
-		$post_id = $inurl !== null ? $vars[ $inurl ] : null;
 
-		if ( isset( $post_id ) ) {
+	  $post_id = null;
+	  $inurl   = null;
+	  if ( isset( $vars['page_id'] ) ) {
+		  $inurl = 'page_id';
+	  } elseif ( isset( $vars['p'] ) ) {
+		  $inurl = 'p';
+	  }
+
+		if ( $inurl ) {
+			$post_id = $vars[ $inurl ];
+		}
+
+		if ( $post_id ) {
 			$post_type     = get_post_type ( $post_id );
 			$post_language = $this->get_language_for_element ( $post_id, 'post_' . $post_type );
 			$url_language  = $this->get_language_from_url ( $original_url );
@@ -4375,7 +4330,7 @@ class SitePress extends WPML_WPDB_User{
 	}
 
 	function update_index_screen(){
-		return include ICL_PLUGIN_PATH . '/menu/theme-plugins-compatibility.php';
+		return include WPML_PLUGIN_PATH . '/menu/theme-plugins-compatibility.php';
 	}
 
 	/**
@@ -4579,7 +4534,7 @@ class SitePress extends WPML_WPDB_User{
 	}
 
 	private function is_troubleshooting_page() {
-		return isset( $_REQUEST[ 'page' ] ) && $_REQUEST[ 'page' ] == ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php';
+		return isset( $_REQUEST[ 'page' ] ) && $_REQUEST[ 'page' ] == WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php';
 	}
 
 	public function handle_head_hreflang() {
@@ -4623,5 +4578,46 @@ class SitePress extends WPML_WPDB_User{
 	 */
 	public function load_core_tm() {
 		$iclTranslationManagement = wpml_load_core_tm();
+	}
+
+	public function is_setup_complete() {
+		return $this->get_setting('setup_complete');
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function is_taxonomy_related_page() {
+		return isset( $_GET['page'] )
+		       && ( $_GET['page'] == WPML_PLUGIN_FOLDER . '/menu/taxonomy-translation.php'
+		            || $_GET['page'] == WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php'
+		            || $_GET['page'] == WPML_PLUGIN_FOLDER . '/menu/term-taxonomy-menus/taxonomy-translation-display.class.php' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function is_saving_taxonomy_labels() {
+		global $pagenow;
+
+		return ( $pagenow === 'admin-ajax.php'
+		         && isset( $_POST['action'] )
+		         && $_POST['action'] === 'wpml_tt_save_labels_translation' );
+	}
+
+	private function switch_to_admin_language() {
+		$this->switch_lang( $this->get_admin_language(), true );
+	}
+
+	private function move_current_language_to_the_top() {
+	  $active_languages = $this->get_active_languages();
+	  foreach ( $active_languages as $k => $active_lang ) {
+		  if ( $k === $this->this_lang ) {
+			  unset( $this->active_languages[ $k ] );
+			  /** @noinspection SlowArrayOperationsInLoopInspection */
+			  $this->active_languages = array_merge( array( $k => $active_lang ), $this->active_languages );
+			  break;
+		  }
+	  }
 	}
 }

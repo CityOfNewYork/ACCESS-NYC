@@ -6,9 +6,9 @@ class WPML_ST_String_Factory {
 	/**
 	 * WPML_ST_String_Factory constructor.
 	 *
-	 * @param WPDB $wpdb
+	 * @param wpdb $wpdb
 	 */
-	public function __construct( WPDB $wpdb ) {
+	public function __construct( wpdb $wpdb ) {
 		$this->wpdb = $wpdb;
 	}
 

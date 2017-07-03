@@ -219,12 +219,25 @@ class WPML_Menu_Item_Sync extends WPML_Menu_Sync_Functionality {
 																		$trid,
 																		$language );
 					}
+
+					$translated_menu_id = $menus[ $menu_id ]['translations'][ $language ]['id'];
+					$this->assign_orphan_item_to_menu( $translated_item_id, $translated_menu_id );
 				}
 			}
 		}
 		$this->fix_hierarchy_moved_items( $moved_data );
 
 		return $menus;
+	}
+
+	/**
+	 * @param int $item_id
+	 * @param int $menu_id
+	 */
+	private function assign_orphan_item_to_menu( $item_id, $menu_id ) {
+		if ( ! wp_get_object_terms( $item_id, 'nav_menu' ) ) {
+			wp_set_object_terms( $item_id, array( $menu_id ), 'nav_menu' );
+		}
 	}
 
 	function sync_caption( $label_change_data ) {

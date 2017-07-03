@@ -68,6 +68,7 @@ class WPML_Taxonomy_Translation_Table_Display {
 			"wpml_save_term_nonce"                  => wp_create_nonce( 'wpml_save_term_nonce' ),
 			"wpml_tt_save_labels_translation_nonce" => wp_create_nonce( 'wpml_tt_save_labels_translation_nonce' ),
 			"wpml_tt_sync_hierarchy_nonce"          => wp_create_nonce( 'wpml_tt_sync_hierarchy_nonce' ),
+			"wpml_generate_unique_slug_nonce"       => wp_create_nonce( 'wpml_generate_unique_slug_nonce' ),
 
 			"addTranslation"   => __( "Add translation", "sitepress" ),
 			"editTranslation"  => __( "Edit translation", "sitepress" ),
@@ -153,6 +154,10 @@ class WPML_Taxonomy_Translation_Table_Display {
 		foreach ( $need_enqueue as $handle ) {
 			wp_enqueue_script( $handle );
 		}
+
+		wp_register_script( 'taxonomy-hierarchy-sync-message', ICL_PLUGIN_URL . '/res/js/taxonomy-hierarchy-sync-message.js', array( 'jquery' ) );
+		wp_enqueue_script( 'taxonomy-hierarchy-sync-message' );
+
 	}
 
 	public static function wpml_get_table_taxonomies( SitePress $sitepress ) {

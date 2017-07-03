@@ -4,7 +4,7 @@ wp_cache_add_global_groups( array( 'sitepress_ms' ) );
 $filtered_action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE  );
 $filtered_action = $filtered_action ? $filtered_action : filter_input( INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE  );
 if( 0 === strcmp( $filtered_action, 'resetwpml' ) ) {
-    include_once ICL_PLUGIN_PATH . '/inc/functions-troubleshooting.php';    
+    include_once WPML_PLUGIN_PATH . '/inc/functions-troubleshooting.php';
 }
 
 add_action('network_admin_menu', 'icl_network_administration_menu');
@@ -28,16 +28,16 @@ function icl_network_administration_menu() {
         __ ( 'WPML', 'sitepress' ),
         __ ( 'WPML', 'sitepress' ),
         'manage_sitess',
-        basename ( ICL_PLUGIN_PATH ) . '/menu/network.php',
+        WPML_PLUGIN_FOLDER . '/menu/network.php',
         null,
         ICL_PLUGIN_URL . '/res/img/icon16.png'
     );
     add_submenu_page (
-        basename ( ICL_PLUGIN_PATH ) . '/menu/network.php',
+	    WPML_PLUGIN_FOLDER . '/menu/network.php',
         __ ( 'Network settings', 'sitepress' ),
         __ ( 'Network settings', 'sitepress' ),
         'manage_sites',
-        basename ( ICL_PLUGIN_PATH ) . '/menu/network.php'
+	    WPML_PLUGIN_FOLDER . '/menu/network.php'
     );
 }
 
@@ -45,7 +45,7 @@ function icl_network_reset_wpml( ) {
 	
 	icl_reset_wpml();
 	
-	wp_redirect( network_admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/network.php&updated=true&action=resetwpml' ) );
+	wp_redirect( network_admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/network.php&updated=true&action=resetwpml' ) );
 }
 
 function icl_network_deactivate_wpml($blog_id = false){
@@ -72,7 +72,7 @@ function icl_network_deactivate_wpml($blog_id = false){
         restore_current_blog();
     }    
 
-    wp_redirect(network_admin_url('admin.php?page='.ICL_PLUGIN_FOLDER.'/menu/network.php&updated=true&action=deactivatewpml'));
+    wp_redirect(network_admin_url('admin.php?page='.WPML_PLUGIN_FOLDER.'/menu/network.php&updated=true&action=deactivatewpml'));
 }
 
 function icl_network_activate_wpml( $blog_id = false ) {
@@ -99,6 +99,6 @@ function icl_network_activate_wpml( $blog_id = false ) {
 		restore_current_blog();
 	}
 
-    wp_redirect(network_admin_url('admin.php?page='.ICL_PLUGIN_FOLDER.'/menu/network.php&updated=true&action=activatewpml'));
+    wp_redirect(network_admin_url('admin.php?page='.WPML_PLUGIN_FOLDER.'/menu/network.php&updated=true&action=activatewpml'));
     exit();
 }

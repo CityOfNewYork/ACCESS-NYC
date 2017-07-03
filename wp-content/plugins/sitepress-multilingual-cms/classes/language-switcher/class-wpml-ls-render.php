@@ -44,11 +44,6 @@ class WPML_LS_Render extends WPML_SP_User {
 			add_filter( 'the_content',                   array( $this, 'the_content_filter' ), 100 );
 			add_action( 'wp_footer',                     array( $this, 'wp_footer_action' ), 19 );
 
-			//@deprecated see 'wpml_add_language_selector'
-			add_action( 'icl_language_selector',         array( $this, 'wpml_add_language_selector_action' ) );
-			add_action( 'wpml_add_language_selector',    array( $this, 'wpml_add_language_selector_action' ) );
-			add_action( 'wpml_footer_language_selector', array( $this, 'wpml_footer_language_selector_action' ) );
-
 			$this->assets->init_hooks();
 		}
 	}
@@ -65,7 +60,7 @@ class WPML_LS_Render extends WPML_SP_User {
 		if ( ! $this->is_hidden( $slot ) ) {
 
 			$this->assets->maybe_late_enqueue_template( $slot->template() );
-			$this->current_template = $this->templates->get_template( $slot->template() );
+			$this->current_template = clone $this->templates->get_template( $slot->template() );
 
 			if ( $slot->template_string() ) {
 				$this->current_template->set_template_string( $slot->template_string() );
@@ -223,7 +218,7 @@ class WPML_LS_Render extends WPML_SP_User {
 	 */
 	private function is_hidden( $slot ) {
 		if ( ! function_exists( 'wpml_home_url_ls_hide_check' ) ) {
-			require ICL_PLUGIN_PATH . '/inc/post-translation/wpml-root-page-actions.class.php';
+			require WPML_PLUGIN_PATH . '/inc/post-translation/wpml-root-page-actions.class.php';
 		}
 
 		return wpml_home_url_ls_hide_check() && ! $slot->is_shortcode_actions();
@@ -285,16 +280,5 @@ class WPML_LS_Render extends WPML_SP_User {
 		if( $slot->is_enabled() ) {
 			echo $this->render( $slot );
 		}
-	}
-
-	public function wpml_add_language_selector_action() {
-		$slot = $this->settings->get_slot( 'statics', 'shortcode_actions' );
-		echo $this->render( $slot );
-	}
-
-	public function wpml_footer_language_selector_action() {
-		$slot = clone $this->settings->get_slot( 'statics', 'footer' );
-		$slot->set( 'show', 1 );
-		echo $this->render( $slot );
 	}
 }

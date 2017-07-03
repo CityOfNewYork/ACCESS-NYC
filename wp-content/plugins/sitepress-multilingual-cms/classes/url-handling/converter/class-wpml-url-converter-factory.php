@@ -123,7 +123,7 @@ class WPML_URL_Converter_Factory {
 		);
 		$wpml_fix_url_domain->add_hooks();
 
-		$xdomain_data_parser = new WPML_XDomain_Data_Parser( $this->settings );
+		$xdomain_data_parser = new WPML_XDomain_Data_Parser( $this->settings, new WPML_Data_Encryptor() );
 		$xdomain_data_parser->init_hooks();
 
 		return $wpml_url_converter;

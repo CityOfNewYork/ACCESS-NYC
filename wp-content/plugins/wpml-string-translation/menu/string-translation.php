@@ -386,7 +386,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
                                 <br/>
                             </div>
                             <h3 class="hndle">
-                                <span><?php echo __('Track where string appear on the site', 'wpml-string-translation')?></span>
+                                <span><?php echo __('Track where strings appear on the site', 'wpml-string-translation')?></span>
                             </h3>
                             <div class="inside">
                                 <p class="sub"><?php echo __("WPML can keep track of where strings are used on the public pages. Activating this feature will enable the 'view in page' functionality and make translation easier.", 'wpml-string-translation')?></p>
@@ -461,7 +461,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
                                 <p class="sub"><?php echo esc_html__('WPML can automatically register strings for translation. This allows you to translate user-generated content with minimal PHP code.', 'wpml-string-translation')?></p>
 
                                 <p class="wpml-st-excluded-info"
-                                   data-all-included="<?php echo esc_attr__('Strings from all text domains will be auto-registred', 'wpml-string-translation') ?>"
+                                   data-all-included="<?php echo esc_attr__('Strings from all text domains will be auto-registered', 'wpml-string-translation') ?>"
                                    data-all-excluded="<?php echo esc_attr__('Strings from all text domains are excluded', 'wpml-string-translation') ?>"
                                    data-excluded-preview="<?php echo esc_attr__('You exluded: ', 'wpml-string-translation') ?>"
                                    data-included-preview="<?php echo esc_attr__('You included: ', 'wpml-string-translation') ?>"
