@@ -13,12 +13,13 @@ class WPML_PB_Shortcode_Strategy implements IWPML_PB_Strategy {
 			if ( ! in_array( $tag, $this->shortcodes ) ) {
 				$this->shortcodes[ $tag ] = array(
 					'encoding' => $shortcode['tag']['encoding'],
+					'type' => isset( $shortcode['tag']['type'] ) ? $shortcode['tag']['type'] : '',
 					'attributes' => array(),
 				);
 			}
 			if ( isset( $shortcode['attributes'] ) ) {
 				foreach ( $shortcode['attributes'] as $attribute ) {
-					$this->shortcodes[ $tag ]['attributes'][ $attribute['value'] ] = $attribute['encoding'];
+					$this->shortcodes[ $tag ]['attributes'][ $attribute['value'] ] = $attribute;
 				}
 			}
 		}
@@ -36,8 +37,22 @@ class WPML_PB_Shortcode_Strategy implements IWPML_PB_Strategy {
 		return $this->shortcodes[ $tag ]['encoding'];
 	}
 
+	public function get_shortcode_tag_type( $tag ) {
+		if ( $this->shortcodes[ $tag ]['type'] ) {
+			return strtoupper( $this->shortcodes[ $tag ]['type'] );
+		}
+		return 'VISUAL';
+	}
+
 	public function get_shortcode_attribute_encoding( $tag, $attribute ) {
-		return $this->shortcodes[ $tag ]['attributes'][ $attribute ];
+		return $this->shortcodes[ $tag ]['attributes'][ $attribute ]['encoding'];
+	}
+
+	public function get_shortcode_attribute_type( $tag, $attribute ) {
+		if ( $this->shortcodes[ $tag ]['attributes'][ $attribute ]['type'] ) {
+			return strtoupper( $this->shortcodes[ $tag ]['attributes'][ $attribute ]['type'] );
+		}
+		return 'LINE';
 	}
 
 	public function get_shortcode_parser() {
@@ -85,5 +100,14 @@ class WPML_PB_Shortcode_Strategy implements IWPML_PB_Strategy {
 	public function remove_string( $string_data ) {
 		return $this->factory->get_string_translations( $this )->remove_string( $string_data );
 
+	}
+
+	/**
+	 * @param int $post_id
+	 * @param object $post_content
+	 */
+	public function migrate_location( $post_id, $post_content ) {
+		$migrate_locations = $this->factory->get_register_shortcodes( $this, true );
+		$migrate_locations->register_shortcode_strings( $post_id, $post_content );
 	}
 }

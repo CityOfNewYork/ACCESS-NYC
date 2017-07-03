@@ -53,7 +53,11 @@ class WPML_Custom_Field_Setting_Factory extends WPML_TM_User {
 	 * @return array
 	 */
 	public function filter_custom_field_keys( $keys ) {
-		return array_filter( $keys, array( $this, 'filter_custom_field_key' ) );
+		if ( is_array( $keys ) ) {
+			return array_filter( $keys, array( $this, 'filter_custom_field_key' ) );
+		} else {
+			return array();
+		}
 	}
 
 }

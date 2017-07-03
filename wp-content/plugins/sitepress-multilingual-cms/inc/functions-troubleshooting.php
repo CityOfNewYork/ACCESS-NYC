@@ -79,12 +79,11 @@ function icl_reset_wpml( $blog_id = false ) {
 		do_action( 'wpml_reset_plugins_after' );
 		
 		$wpmu_sitewide_plugins = (array) maybe_unserialize( get_site_option( 'active_sitewide_plugins' ) );
-		if ( ! isset( $wpmu_sitewide_plugins[ ICL_PLUGIN_FOLDER . '/sitepress.php' ] ) ) {
-			$file = plugin_basename( WP_PLUGIN_DIR . '/' . ICL_PLUGIN_FOLDER . '/sitepress.php' );
-			remove_action( 'deactivate_' . $file, 'icl_sitepress_deactivate' );
-			deactivate_plugins( basename( ICL_PLUGIN_PATH ) . '/sitepress.php' );
+		if ( ! isset( $wpmu_sitewide_plugins[ WPML_PLUGIN_BASENAME ] ) ) {
+			remove_action( 'deactivate_' . WPML_PLUGIN_BASENAME, 'icl_sitepress_deactivate' );
+			deactivate_plugins( WPML_PLUGIN_BASENAME );
 			$ra                                                   = get_option( 'recently_activated' );
-			$ra[ basename( ICL_PLUGIN_PATH ) . '/sitepress.php' ] = time();
+			$ra[ WPML_PLUGIN_BASENAME ] = time();
 			update_option( 'recently_activated', $ra );
 		} else {
 			update_option( '_wpml_inactive', true );

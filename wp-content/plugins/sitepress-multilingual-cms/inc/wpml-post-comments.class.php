@@ -80,7 +80,7 @@ class WPML_Post_Comments extends WPML_WPDB_User {
 	 */
 	public function enqueue_scripts( $hook ) {
 		wp_register_script( 'wpml-orphan-comments', ICL_PLUGIN_URL . '/res/js/orphan-comments.js', array( 'jquery' ), ICL_SITEPRESS_VERSION, true );
-		if ( basename( ICL_PLUGIN_PATH ) . '/menu/troubleshooting.php' === $hook ) {
+		if ( WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' === $hook ) {
 			wp_enqueue_script( 'wpml-orphan-comments' );
 		}
 	}

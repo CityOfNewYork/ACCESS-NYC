@@ -27,7 +27,7 @@ class WPML_PB_String_Translation {
 			$package = $this->factory->get_wpml_package( $package_id );
 			if ( $package->post_id && $this->strategy->get_package_kind() === $package->kind ) {
 				$this->add_package_to_update_list( $package, $language );
-				if ( DEFINED( 'DOING_AJAX' ) && DOING_AJAX ) {
+				if ( defined( 'DOING_AJAX' ) && DOING_AJAX || defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
 					$this->save_translations_to_post();
 				}
 			}
@@ -84,10 +84,12 @@ class WPML_PB_String_Translation {
 			if ( ! empty( $package_strings ) ) {
 				foreach ( $package_strings as $string ) {
 					$strings[ md5( $string->value ) ] = array(
+						'value'      => $string->value,
 						'context'    => $string->context,
 						'name'       => $string->name,
 						'id'         => $string->id,
 						'package_id' => $package_id,
+						'location'   => $string->location,
 					);
 				}
 			}
@@ -96,9 +98,30 @@ class WPML_PB_String_Translation {
 	}
 
 	public function remove_string( $string_data ) {
-		icl_unregister_string( $string_data['context'], $string_data['name'] );
 		$field_type = 'package-string-' . $string_data['package_id'] . '-' . $string_data['id'];
-		$this->wpdb->delete( $this->wpdb->prefix . 'icl_translate', array( 'field_type' => $field_type ), array( '%s' ) );
+		$job_id = $this->get_job_id( $field_type );
+		if ( ! $job_id || ! $this->is_job_in_progress( $job_id ) ) {
+			icl_unregister_string( $string_data['context'], $string_data['name'] );
+			$this->wpdb->delete( $this->wpdb->prefix . 'icl_translate', array( 'field_type' => $field_type ), array( '%s' ) );
+		}
+	}
+
+	/**
+	 * @param string $field_type
+	 *
+	 * @return bool
+	 */
+	private function get_job_id( $field_type ) {
+		return $this->wpdb->get_var( $this->wpdb->prepare( "SELECT job_id FROM {$this->wpdb->prefix}icl_translate WHERE field_type = %s", $field_type ) );
+	}
+
+	/**
+	 * @param int $job_id
+	 *
+	 * @return bool
+	 */
+	private function is_job_in_progress( $job_id ) {
+		return ! (bool) $this->wpdb->get_var( $this->wpdb->prepare( "SELECT translated FROM {$this->wpdb->prefix}icl_translate_job WHERE job_id = %d", $job_id ) );
 	}
 
 	private function get_package_id( $package_data ) {

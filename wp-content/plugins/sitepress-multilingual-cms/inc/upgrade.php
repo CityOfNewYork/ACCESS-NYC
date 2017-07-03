@@ -22,7 +22,7 @@ function icl_plugin_upgrade(){
     
     $iclsettings = get_option('icl_sitepress_settings');
     
-    require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+    require_once WPML_PLUGIN_PATH . '/inc/cache.php';
     icl_cache_clear('locale_cache_class');
     icl_cache_clear('flags_cache_class');
     icl_cache_clear('language_name_cache_class');
@@ -80,7 +80,7 @@ function icl_plugin_upgrade(){
     }
     
     if(get_option('icl_sitepress_version') && version_compare(get_option('icl_sitepress_version'), '2.0.0', '<')){    
-        include_once ICL_PLUGIN_PATH . '/inc/upgrade-functions/upgrade-2.0.0.php';
+        include_once WPML_PLUGIN_PATH . '/inc/upgrade-functions/upgrade-2.0.0.php';
         
         if(empty($iclsettings['migrated_2_0_0'])){
             define('ICL_MULTI_STEP_UPGRADE', true);
@@ -143,7 +143,7 @@ function icl_upgrade_version($version, $force = false){
 	}
 
 	if($force || (get_option('icl_sitepress_version') && version_compare(get_option('icl_sitepress_version'), $version, '<' ))){
-        $upg_file = ICL_PLUGIN_PATH . '/inc/upgrade-functions/upgrade-' . $version . '.php';        
+        $upg_file = WPML_PLUGIN_PATH . '/inc/upgrade-functions/upgrade-' . $version . '.php';
         if(file_exists($upg_file) && is_readable($upg_file)){
             if(!defined('WPML_DOING_UPGRADE')){
                 define('WPML_DOING_UPGRADE', true);    

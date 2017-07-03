@@ -698,40 +698,6 @@ function wpml_cf_translation_preferences( $id, $custom_field = false, $class = '
 }
 
 /**
- *
- * @deprecated It will be removed in WPML 3.8.0
- *
- * @since 3.7.0
- *
- * @param $id
- * @param $custom_field
- *
- * @return bool
- */
-function wpml_cf_translation_preferences_store( $id, $custom_field ) {
-	if ( defined( 'WPML_TM_VERSION' ) ) {
-		if ( empty( $id ) || empty( $custom_field )
-		     || ! isset( $_POST[ 'wpml_cf_translation_preferences' ][ $id ] )
-		) {
-			return false;
-		}
-		$custom_field = sanitize_text_field( $custom_field );
-		$action       = (int) $_POST[ 'wpml_cf_translation_preferences' ][ $id ];
-		/** @var TranslationManagement $iclTranslationManagement */
-		global $iclTranslationManagement;
-		if ( ! empty( $iclTranslationManagement ) ) {
-			$iclTranslationManagement->settings[ 'custom_fields_translation' ][ $custom_field ] = $action;
-			$iclTranslationManagement->save_settings();
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	return false;
-}
-
-/**
  * @todo: [WPML 3.3] refactor in 3.3
  * wpml_get_copied_fields_for_post_edit
  * return a list of fields that are marked for copying and the
@@ -889,8 +855,8 @@ function wpml_custom_post_translation_options() {
 		$link  = admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=mcsetup#icl_custom_posts_sync_options' );
 		$link2 = admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=mcsetup#icl_slug_translation' );
 	} else {
-		$link  = admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/translation-options.php#icl_custom_posts_sync_options' );
-		$link2 = admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/translation-options.php#icl_slug_translation' );
+		$link  = admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/translation-options.php#icl_custom_posts_sync_options' );
+		$link2 = admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/translation-options.php#icl_slug_translation' );
 	}
 
 	if ( $translated ) {

@@ -54,7 +54,6 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			add_filter( 'wpml_tm_element_type', array( $this, 'get_element_type' ), 10, 2 );
 			add_filter( 'wpml_tm_dashboard_title_locations', array( $this, 'add_title_db_location' ), 10, 2 );
 
-			add_filter( 'wpml_string_id_from_package', array( $this, 'string_id_from_package_filter' ), 10, 4 );
 			add_filter( 'wpml_string_title_from_id', array( $this, 'string_title_from_id_filter' ), 10, 2 );
 			//TODO: deprecated, use the 'wpml_register_string' action
 			add_filter( 'WPML_register_string', array( $this, 'register_string_for_translation' ), 10, 5 );
@@ -122,6 +121,8 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 		add_action( 'wpml_start_string_package_registration', array( $this, 'start_string_package_registration_action' ), 10, 1 );
 		add_action( 'wpml_delete_unused_package_strings', array( $this, 'delete_unused_package_strings_action' ), 10, 1 );
 		add_filter( 'wpml_st_get_post_string_packages', array( $this, 'get_post_string_packages' ), 10, 2 );
+
+		add_filter( 'wpml_string_id_from_package', array( $this, 'string_id_from_package_filter' ), 10, 4 );
 
 		/* API Hooks */
 		add_filter( 'wpml_is_external', array( $this, 'is_external' ), 10, 2 );

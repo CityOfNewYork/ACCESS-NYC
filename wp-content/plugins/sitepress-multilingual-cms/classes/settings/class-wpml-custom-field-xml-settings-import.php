@@ -46,13 +46,6 @@ class WPML_Custom_Field_XML_Settings_Import extends WPML_WPDB_User {
 						$setting_constructor
 					), array( trim( $c['value'] ) ) );
 					$this->import_action( $c, $setting );
-					if ( $c['attr']['action'] === 'translate' ) {
-						$setting->set_to_translatable();
-					} elseif ( $c['attr']['action'] === 'copy' ) {
-						$setting->set_to_copy();
-					} else {
-						$setting->set_to_nothing();
-					}
 					$setting->make_read_only();
 					$this->import_editor_settings( $c, $setting );
 					if ( isset( $c[ 'attr' ][ 'translate_link_target' ] ) || isset( $c[ 'custom-field' ] ) ) {
@@ -65,14 +58,24 @@ class WPML_Custom_Field_XML_Settings_Import extends WPML_WPDB_User {
 			}
 		}
 	}
-	
+
 	private function import_action( $c, $setting ) {
-		if ( $c['attr']['action'] === 'translate' ) {
-			$setting->set_to_translatable();
-		} elseif ( $c['attr']['action'] === 'copy' ) {
-			$setting->set_to_copy();
-		} else {
-			$setting->set_to_nothing();
+		switch( $c['attr']['action'] ) {
+			case 'translate':
+				$setting->set_to_translatable();
+				break;
+
+			case 'copy':
+				$setting->set_to_copy();
+				break;
+
+			case 'copy-once':
+				$setting->set_to_copy_once();
+				break;
+
+			default:
+				$setting->set_to_nothing();
+				break;
 		}
 	}
 	

@@ -38,6 +38,7 @@ class WPML_Requirements_Notification {
 	}
 
 	public function get_settings( $integrations ) {
+
 		if ( $integrations ) {
 			$model = array(
 				'strings' => array(

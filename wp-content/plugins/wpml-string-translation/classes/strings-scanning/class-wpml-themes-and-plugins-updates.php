@@ -5,6 +5,8 @@
  */
 class WPML_ST_Themes_And_Plugins_Updates {
 
+	const WPML_WP_UPDATED_MO_FILES = 'wpml_wp_updated_mo_files';
+
 	/** @var WPML_Notices */
 	private $admin_notices;
 	/** @var WPML_ST_Themes_And_Plugins_Settings */
@@ -27,6 +29,7 @@ class WPML_ST_Themes_And_Plugins_Updates {
 			add_action( 'updated_option', array( $this, 'updated_option' ), 10, 3 );
 			$this->settings->init_hooks();
 		}
+		add_action( 'upgrader_process_complete', array( $this, 'store_mo_file_update' ), 10, 2 );
 	}
 
 	public function data_is_valid( $thing ) {
@@ -167,5 +170,29 @@ class WPML_ST_Themes_And_Plugins_Updates {
 
 	public function remove_notice( $id ) {
 		$this->admin_notices->remove_notice( $this->settings->get_notices_group(), $id );
+	}
+
+	/**
+	 * @param WP_Upgrader $upgrader
+	 * @param $language_translations
+	 *
+	 * @return bool
+	 */
+	public function store_mo_file_update( WP_Upgrader $upgrader, $language_translations ) {
+		if ( is_wp_error( $upgrader->result ) ) {
+			return false;
+		}
+
+		$action = $language_translations['action'];
+		if ( in_array( $action, array( 'update', 'install' ), true ) ) {
+			if ( 'translation' === $language_translations['type'] ) {
+				$last_update = get_option( self::WPML_WP_UPDATED_MO_FILES, array() );
+				$translations = $language_translations['translations'];
+				foreach ( $translations as $translation ) {
+					$last_update[ $translation['type'] ][ $translation['slug'] ] = time();
+				}
+				update_option( self::WPML_WP_UPDATED_MO_FILES, $last_update, false );
+			}
+		}
 	}
 }

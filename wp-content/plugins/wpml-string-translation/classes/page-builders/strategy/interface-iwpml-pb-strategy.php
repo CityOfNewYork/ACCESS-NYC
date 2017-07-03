@@ -20,4 +20,5 @@ interface IWPML_PB_Strategy {
 	public function get_content_updater();
 	public function get_package_strings( $package_data );
 	public function remove_string( $string_data );
+	public function migrate_location( $post_id, $post_content );
 }

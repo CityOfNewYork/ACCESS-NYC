@@ -15,7 +15,7 @@ class WPML_Troubleshooting_Terms_Menu {
 				$message .= sprintf( __( "This version of WPML allows the use of taxonomy terms with the same name across multiple languages. Your site currently has %d taxonomy terms that require an update, so they will not be displayed with language suffixes.", "sitepress" ), $suffix_count );
 				$message .= '</p>';
 				if ( defined( 'ICL_PLUGIN_URL' ) ) {
-					$message .= '<p><a href="' . admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php#termsuffixupdate' ) . '"><button class="button-primary">Open terms update page</button></a>';
+					$message .= '<p><a href="' . admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php#termsuffixupdate' ) . '"><button class="button-primary">Open terms update page</button></a>';
 				}
 
 				ICL_AdminNotifier::addMessage( "termssuffixnotice", $message, 'error', true, false, false, 'terms-suffix', true );

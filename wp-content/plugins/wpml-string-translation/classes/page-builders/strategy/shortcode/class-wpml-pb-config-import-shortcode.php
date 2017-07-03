@@ -29,6 +29,7 @@ class WPML_PB_Config_Import_Shortcode {
 							$single_attribute   = true;
 							$attribute_value    = $attribute;
 							$attribute_encoding = '';
+							$attribute_type     = '';
 						} else if ( isset( $attribute['value'] ) ) {
 							$attribute_value = $attribute['value'];
 						}
@@ -37,11 +38,16 @@ class WPML_PB_Config_Import_Shortcode {
 								if ( isset( $attribute['encoding'] ) ) {
 									$attribute_encoding = $attribute['encoding'];
 								}
+								if ( isset( $attribute['type'] ) ) {
+									$attribute_type = $attribute['type'];
+								}
 							} else {
 								$attribute_encoding = isset( $attribute['attr']['encoding'] ) ? $attribute['attr']['encoding'] : '';
+								$attribute_type     = isset( $attribute['attr']['type'] ) ? $attribute['attr']['type'] : '';
 								$attributes[]       = array(
 									'value'    => $attribute_value,
-									'encoding' => $attribute_encoding
+									'encoding' => $attribute_encoding,
+									'type'     => $attribute_type,
 								);
 							}
 						}
@@ -49,7 +55,8 @@ class WPML_PB_Config_Import_Shortcode {
 					if ( $single_attribute ) {
 						$attributes[] = array(
 							'value'    => $attribute_value,
-							'encoding' => $attribute_encoding
+							'encoding' => $attribute_encoding,
+							'type'     => $attribute_type,
 						);
 					}
 				}
@@ -57,6 +64,7 @@ class WPML_PB_Config_Import_Shortcode {
 					'tag'        => array(
 						'value'    => $data['tag']['value'],
 						'encoding' => isset( $data['tag']['attr']['encoding'] ) ? $data['tag']['attr']['encoding'] : '',
+						'type'     => isset( $data['tag']['attr']['type'] ) ? $data['tag']['attr']['type'] : '',
 					),
 					'attributes' => $attributes,
 				);

@@ -14,9 +14,9 @@ class WPML_Config {
 			'theme_options',
 			'plugins.php',
 			'themes.php',
-			ICL_PLUGIN_FOLDER . '/menu/languages.php',
-			ICL_PLUGIN_FOLDER . '/menu/theme-localization.php',
-			ICL_PLUGIN_FOLDER . '/menu/translation-options.php',
+			WPML_PLUGIN_FOLDER . '/menu/languages.php',
+			WPML_PLUGIN_FOLDER . '/menu/theme-localization.php',
+			WPML_PLUGIN_FOLDER . '/menu/translation-options.php',
 		);
 		if (defined('WPML_ST_FOLDER')) {
 			$white_list_pages[] = WPML_ST_FOLDER . '/menu/string-translation.php';

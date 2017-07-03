@@ -15,12 +15,12 @@ jQuery(document).ready(function(){
         });
     });
     jQuery('.icl_edit_languages_use_upload').click(function(){
-        jQuery(this).closest('ul').find('.wpml-edit-languages-flag-use-field').hide();
+        jQuery(this).closest('ul').find('.wpml-edit-languages-flag-wpml-wrapper').hide();
         jQuery(this).closest('ul').find('.wpml-edit-languages-flag-upload-wrapper').show();
     });
     jQuery('.icl_edit_languages_use_field').click(function(){
         jQuery(this).closest('ul').find('.wpml-edit-languages-flag-upload-wrapper').hide();
-        jQuery(this).closest('ul').find('.wpml-edit-languages-flag-use-field').show();
+        jQuery(this).closest('ul').find('.wpml-edit-languages-flag-wpml-wrapper').show();
     });
     jQuery('#icl_edit_languages_form').find(':submit').attr('disabled','disabled');
     jQuery('#icl_edit_languages_form input, #icl_edit_languages_form select').click(function(){

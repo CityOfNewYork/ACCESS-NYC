@@ -54,6 +54,7 @@ class WPML_Language_Per_Domain_SSO {
 	 * Delete expired key for SSO.
 	 */
 	public function wpml_delete_sso_logged_in_time_option() {
+		$this->remove_hash_key_from_db();
 	    delete_option( 'wpml_sso_logged_in_time' );
 	}
 
@@ -72,23 +73,22 @@ class WPML_Language_Per_Domain_SSO {
 					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhr.send(params);
 				}
-				window.onmessage = function(e) {
-					var payload = JSON.parse(e.data),
-						params = '',
-						domains = '<?php echo json_encode( $this->domains ); ?>';
+                window.onmessage = function (e) {
+                    var payload = JSON.parse(e.data),
+                        params = '',
+                        domains = <?php echo json_encode( array_values( $this->domains ) ); ?>;
 
-					domains = Object.values( JSON.parse( domains ) );
-					if ( -1 === domains.indexOf(e.origin) ) {
-						return;
-					}
+                    if (-1 === domains.indexOf(e.origin)) {
+                        return;
+                    }
 
-					if ( 'wpml_is_user_signed_in' === payload.key ) {
-						params = 'action=wpml_sign_in_user&nonce=' + "<?php echo esc_attr( $nonce ); ?>" + '&user_id=' + parseInt(payload.data);
-					} else if ( 'wpml_is_user_signed_out' === payload.key ) {
-						params = 'action=wpml_sign_out_user&nonce=' + "<?php echo esc_attr( $nonce ); ?>";
-					}
-					sendXHRHttpRequest( params );
-				};
+                    if ('wpml_is_user_signed_in' === payload.key) {
+                        params = 'action=wpml_sign_in_user&nonce=<?php echo esc_attr( $nonce ); ?>&user_id=' + parseInt(payload.data);
+                    } else if ('wpml_is_user_signed_out' === payload.key) {
+                        params = 'action=wpml_sign_out_user&nonce=<?php echo esc_attr( $nonce ); ?>';
+                    }
+                    sendXHRHttpRequest(params);
+                };
 			</script>
 			<?php
 			exit();
@@ -144,9 +144,8 @@ class WPML_Language_Per_Domain_SSO {
 		     && $sso_nonce_from_origin === $url_hash ) {
 
 			wp_set_auth_cookie( $user_id );
-			delete_option( $url_hash );
-			wp_schedule_single_event( time() + self::WPML_LANGUAGE_PER_DOMAIN_SSO_TIMEOUT, 'wpml_delete_sso_logged_in_time_option' );
 		}
+		$this->schedule_cron();
 	}
 
 	/**
@@ -155,10 +154,8 @@ class WPML_Language_Per_Domain_SSO {
 	public function sign_out_user() {
 		if ( $this->is_valid_ajax() && is_user_logged_in() ) {
 			wp_clear_auth_cookie();
-			$url_hash = $this->get_url_hash();
-			delete_option( $url_hash );
-			wp_schedule_single_event( time() + self::WPML_LANGUAGE_PER_DOMAIN_SSO_TIMEOUT, 'wpml_delete_sso_logged_in_time_option' );
 		}
+		$this->schedule_cron();
 	}
 
 	/**
@@ -174,6 +171,7 @@ class WPML_Language_Per_Domain_SSO {
 	 * Store specific key to DB, to check later in other domains.
 	 */
 	public function store_hash_key_in_db() {
+	    $this->wpml_delete_sso_logged_in_time_option();
 		update_option( 'wpml_sso_logged_in_time', time(), false );
 		foreach ( $this->domains as $domain ) {
 			$hash_url = $this->get_url_hash( $domain );
@@ -234,5 +232,12 @@ class WPML_Language_Per_Domain_SSO {
 		       && $_GET['gen_iframe']
 		       && ! $this->is_valid_ajax()
 		       && $this->get_url_hash() === $_GET['_wpml_gen_iframe_nonce'];
+	}
+
+	private function schedule_cron() {
+		if ( wp_next_scheduled( 'wpml_delete_sso_logged_in_time_option' ) ) {
+			wp_clear_scheduled_hook( 'wpml_delete_sso_logged_in_time_option' );
+		}
+		wp_schedule_single_event( time() + self::WPML_LANGUAGE_PER_DOMAIN_SSO_TIMEOUT, 'wpml_delete_sso_logged_in_time_option' );
 	}
 }

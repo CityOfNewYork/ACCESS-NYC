@@ -55,6 +55,10 @@ abstract class WPML_Custom_Field_Setting extends WPML_TM_User {
 		$this->set_state( WPML_COPY_CUSTOM_FIELD );
 	}
 
+	public function set_to_copy_once() {
+		$this->set_state( WPML_COPY_ONCE_CUSTOM_FIELD );
+	}
+
 	public function set_to_translatable() {
 		$this->set_state( WPML_TRANSLATE_CUSTOM_FIELD );
 	}
