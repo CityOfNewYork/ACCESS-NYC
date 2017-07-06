@@ -198,9 +198,16 @@ class ShareForm {
   _submit() {
     this._isBusy = true;
     let $tel = this._el.querySelector('input[type="tel"]'); // get phone number
+    let $submit = this._el.querySelector('button[type="submit"]');
+    let $spinner = this._el.querySelector(`.${ShareForm.CssClass.SPINNER}`);
+    let $inputs = $(this._el).find('input');
     if ($tel) $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
     const payload = $(this._el).serialize();
-    $(this._el).find('input').prop('disabled', true); // disable inputs
+    $inputs.prop('disabled', true); // disable inputs
+    if ($spinner) {
+      $submit.style = 'display: none'; // hide submit button
+      $spinner.style = ''; // show spinner
+    }
     return $.post($(this._el).attr('action'), payload).done((response) => {
       if (response.success) {
         this._showSuccess();
@@ -215,8 +222,12 @@ class ShareForm {
     }).fail((response) => {
       this._showError(ShareForm.Message.SERVER);
     }).always(() => {
-      $(this._el).find('input').prop('disabled', false); // enable inputs
+      $inputs.prop('disabled', false); // enable inputs
       if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
+      if ($spinner) {
+        $submit.style = ''; // show submit button
+        $spinner.style = 'display: none'; // hide spinner;
+      }
       this._isBusy = false;
     });
   }
@@ -232,7 +243,8 @@ ShareForm.CssClass = {
   FORM: 'js-share-form',
   HIDDEN: 'hidden',
   SUBMIT_BTN: 'btn-submit',
-  SUCCESS: 'success'
+  SUCCESS: 'success',
+  SPINNER: 'js-spinner'
 };
 
 /**

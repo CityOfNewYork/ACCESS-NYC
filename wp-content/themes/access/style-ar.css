@@ -3160,6 +3160,9 @@ a.program-filter-item {
     .success .share-form-controls .btn-submit {
       display: none; }
 
+.share-form__spinner {
+  flex: 0 0 70px; }
+
 .site-footer {
   padding-top: 40px;
   padding-bottom: 40px;

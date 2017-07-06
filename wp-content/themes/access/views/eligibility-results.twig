@@ -38,6 +38,7 @@
               <div class="share-form-controls">
                 <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-results')}}">
                 <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
+                {% include 'partials/share-form-spinner.twig' %}
                 <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
               </div>
             </form>
@@ -53,6 +54,7 @@
               <div class="share-form-controls">
                 <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-results')}}" required>
                 <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
+                {% include 'partials/share-form-spinner.twig' %}
                 <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
               </div>
             </form>
