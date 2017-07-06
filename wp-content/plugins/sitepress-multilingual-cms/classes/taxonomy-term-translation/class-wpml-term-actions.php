@@ -13,6 +13,24 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 	private $delete_recursion_flag = false;
 
 	/**
+	 * Handle AJAX request to generate unique slug.
+	 */
+	public function generate_unique_term_slug_ajax_handler() {
+		if ( $this->sitepress->get_wp_api()->is_ajax() && wp_verify_nonce( $_POST['nonce'], 'wpml_generate_unique_slug_nonce' ) ) {
+			$term = array_key_exists( 'term', $_POST ) ? sanitize_text_field( $_POST['term'] ) : '';
+			$taxonomy = array_key_exists( 'taxonomy', $_POST ) ? sanitize_text_field( $_POST['taxonomy'] ) : '';
+			$language_code = array_key_exists( 'language_code', $_POST ) ? sanitize_text_field( $_POST['language_code'] ) : '';
+			wp_send_json_success(
+				array(
+					'slug' => $this->term_translations->generate_unique_term_slug( $term, '', $taxonomy, $language_code ),
+				)
+			);
+		} else {
+			wp_send_json_error();
+		}
+	}
+
+	/**
 	 * @param int                    $tt_id    Taxonomy Term ID of the saved Term
 	 * @param string                 $taxonomy Taxonomy of the saved Term
 	 */
@@ -37,8 +55,12 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 	 */
 	function delete_term_actions( $tt_id, $taxonomy ) {
 		$icl_el_type = 'tax_' . $taxonomy;
-		$trid        = $this->sitepress->get_element_trid( $tt_id, $icl_el_type );
+		$trid = false;
 		$lang_details = $this->sitepress->get_element_language_details( $tt_id, $icl_el_type );
+		if ( $lang_details ) {
+			$trid = $lang_details->trid;
+		}
+
 		if ( $this->sitepress->get_setting( 'sync_delete_tax' )
 		     && $this->delete_recursion_flag === false
 		     && empty( $lang_details->source_language_code )

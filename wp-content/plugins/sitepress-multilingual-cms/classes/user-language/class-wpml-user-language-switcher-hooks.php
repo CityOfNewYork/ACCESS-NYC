@@ -38,7 +38,7 @@ class WPML_User_Language_Switcher_Hooks {
 			'auto_refresh_page' => 0,
 		);
 
-		$args = array_replace( $defaults, $args );
+		$args = array_merge( $defaults, $args );
 
 		$model = $this->user_language_switcher->get_model( $args['mail'] );
 		echo $this->user_language_switcher_ui->language_switcher( $args, $model );

@@ -91,8 +91,16 @@ class WPML_Integrations_Requirements {
 
 	private function update_should_create_editor_notice() {
 		$editor_translation_set = ( 1 === (int) $this->tm_settings['doc_translation_method'] );
+		$requires_tm_editor     = false;
 
-		$this->should_create_editor_notice = ! $editor_translation_set && ! $this->issues && $this->integrations;
+		foreach ( $this->integrations as $integration_item ) {
+			if ( in_array( 'wpml-translation-editor', $integration_item['notices-display'], true ) ) {
+				$requires_tm_editor = true;
+				break;
+			}
+		}
+
+		$this->should_create_editor_notice = ! $editor_translation_set && ! $this->issues && $requires_tm_editor;
 	}
 
 	public function set_translation_editor_callback() {
@@ -135,12 +143,21 @@ class WPML_Integrations_Requirements {
 	}
 
 	/**
+	 * @param $notice_type
+	 *
 	 * @return array
 	 */
-	private function get_integrations_names() {
-		$integrations = $this->integrations;
+	private function get_integrations_names( $notice_type ) {
+		$names = array();
 
-		return array_values( wp_list_pluck( $integrations, 'name' ) );
+		foreach ( $this->integrations as $integration ) {
+			if ( in_array( $notice_type, $integration['notices-display'], true ) &&
+			     ! in_array( $integration['name'], $names, true ) ) {
+				$names[] = $integration['name'];
+			}
+		}
+
+		return $names;
 	}
 
 	/**
@@ -149,7 +166,7 @@ class WPML_Integrations_Requirements {
 	private function get_notice_model() {
 		if ( ! $this->requirements_notification ) {
 			$template_paths   = array(
-				ICL_PLUGIN_PATH . '/templates/warnings/',
+				WPML_PLUGIN_PATH . '/templates/warnings/',
 			);
 			$twig_loader      = new Twig_Loader_Filesystem( $template_paths );
 			$environment_args = array();
@@ -195,9 +212,11 @@ class WPML_Integrations_Requirements {
 	 * @param WPML_WP_API $wp_api
 	 */
 	private function add_callbacks( WPML_Notice $notice, WPML_WP_API $wp_api ) {
-		$notice->add_display_callback( array( $wp_api, 'is_core_page' ) );
-		$notice->add_display_callback( array( $wp_api, 'is_plugins_page' ) );
-		$notice->add_display_callback( array( $wp_api, 'is_themes_page' ) );
+		if ( method_exists( $notice, 'add_display_callback' ) ) {
+			$notice->add_display_callback( array( $wp_api, 'is_core_page' ) );
+			$notice->add_display_callback( array( $wp_api, 'is_plugins_page' ) );
+			$notice->add_display_callback( array( $wp_api, 'is_themes_page' ) );
+		}
 	}
 
 	/**
@@ -227,7 +246,8 @@ class WPML_Integrations_Requirements {
 			$requirements_scripts = new WPML_Integrations_Requirements_Scripts();
 			$requirements_scripts->init();
 
-			$text   = $notice_model->get_settings( $this->get_integrations_names() );
+			$integrations_names = $this->get_integrations_names( 'wpml-translation-editor' );
+			$text   = $notice_model->get_settings( $integrations_names );
 			$notice = new WPML_Notice( self::EDITOR_NOTICE_ID, $text, self::NOTICE_GROUP );
 			$notice->set_css_class_types( 'info' );
 

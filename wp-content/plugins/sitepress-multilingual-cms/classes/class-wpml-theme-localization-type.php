@@ -1,8 +1,8 @@
 <?php
 
-class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_Ajax_Action {
-	const USE_ST = 1;
-	const USE_MO_FILES = 2;
+class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_AJAX_Action {
+	const USE_ST                 = 1;
+	const USE_MO_FILES           = 2;
 	const USE_ST_AND_NO_MO_FILES = 3;
 
 	/**
@@ -35,9 +35,9 @@ class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_Aj
 	public function run() {
 		$iclsettings = $this->sitepress->get_settings();
 
-		$iclsettings['theme_localization_type'] = $this->retrieve_theme_localization_type();
+		$iclsettings['theme_localization_type']            = $this->retrieve_theme_localization_type();
 		$iclsettings['theme_localization_load_textdomain'] = $this->retrieve_theme_localization_load_textdomain();
-		$iclsettings['gettext_theme_domain_name'] = array_key_exists( 'textdomain_value', $_POST ) ? filter_var( $_POST['textdomain_value'], FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE ) : false;
+		$iclsettings['gettext_theme_domain_name']          = array_key_exists( 'textdomain_value', $_POST ) ? filter_var( $_POST['textdomain_value'], FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE ) : false;
 
 		if ( self::USE_MO_FILES === $iclsettings['theme_localization_type'] ) {
 			$iclsettings['theme_language_folders'] = $this->get_mo_file_search()->find_theme_mo_dirs();
@@ -68,7 +68,7 @@ class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_Aj
 	private function retrieve_theme_localization_type() {
 		$result = self::USE_MO_FILES;
 		if ( array_key_exists( 'icl_theme_localization_type', $_POST ) ) {
-			$var = filter_var( $_POST['icl_theme_localization_type'], FILTER_VALIDATE_INT );
+			$var     = filter_var( $_POST['icl_theme_localization_type'], FILTER_VALIDATE_INT );
 			$options = array( self::USE_ST, self::USE_MO_FILES, self::USE_ST_AND_NO_MO_FILES );
 			if ( in_array( $var, $options, true ) ) {
 				$result = $var;
@@ -115,15 +115,14 @@ class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_Aj
 	/**
 	 * Block loading of all MO files regardless domain or mofile name
 	 *
-	 * @param bool $override
+	 * @param bool   $override
 	 * @param string $domain
 	 * @param string $mofile
 	 *
 	 * @return bool
 	 */
 	public function block_mo_loading_handler( $override, $domain, $mofile ) {
-		$override = true;
-		return $override;
+		return true;
 	}
 
 	/**
@@ -139,10 +138,12 @@ class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_Aj
 
 	/**
 	 * @param WPML_MO_File_Search $mo_file_search
+	 *
 	 * @return WPML_Theme_Localization_Type
 	 */
 	public function set_mo_file_search( WPML_MO_File_Search $mo_file_search ) {
 		$this->mo_file_search = $mo_file_search;
+
 		return $this;
 	}
 }

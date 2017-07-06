@@ -1,6 +1,21 @@
 <?php
 
-class WPML_Debug_Information extends WPML_WPDB_And_SP_User {
+class WPML_Debug_Information {
+
+	/** @var WPDB $wpdb */
+	public $wpdb;
+
+	/** @var SitePress $sitepress */
+	protected $sitepress;
+
+	/**
+	 * @param wpdb      $wpdb
+	 * @param SitePress $sitepress
+	 */
+	public function __construct( $wpdb, $sitepress ) {
+		$this->wpdb      = $wpdb;
+		$this->sitepress = $sitepress;
+	}
 
 	public function run() {
 		$info = array( 'core', 'plugins', 'theme', 'extra-debug' );
@@ -104,6 +119,7 @@ class WPML_Debug_Information extends WPML_WPDB_And_SP_User {
 				'Version'    => $this->sitepress->get_wp_api()->get_theme_version(),
 				'TextDomain' => $this->sitepress->get_wp_api()->get_theme_textdomain(),
 				'DomainPath' => $this->sitepress->get_wp_api()->get_theme_domainpath(),
+				'ParentName' => $this->sitepress->get_wp_api()->get_theme_parent_name(),
 			);
 		}
 

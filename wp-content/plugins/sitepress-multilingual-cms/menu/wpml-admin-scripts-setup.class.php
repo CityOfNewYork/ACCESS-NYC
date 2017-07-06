@@ -1,5 +1,5 @@
 <?php
-require ICL_PLUGIN_PATH . '/menu/post-menus/post-edit-screen/wpml-sync-custom-field-note.class.php';
+require WPML_PLUGIN_PATH . '/menu/post-menus/post-edit-screen/wpml-sync-custom-field-note.class.php';
 
 class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 
@@ -25,7 +25,7 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 		if ( defined( 'FORCE_SSL_ADMIN' ) && FORCE_SSL_ADMIN ) {
 			$icl_ajax_url_root = str_replace( 'http://', 'https://', $icl_ajax_url_root );
 		}
-		$icl_ajax_url = $icl_ajax_url_root . '/wp-admin/admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/languages.php';
+		$icl_ajax_url = $icl_ajax_url_root . '/wp-admin/admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/languages.php';
 		?>
         <script type="text/javascript">
             // <![CDATA[
@@ -420,7 +420,7 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 			$page_basename = preg_replace('/[^\w-]/', '', $page_basename);
 		}
 		wp_enqueue_style( 'sitepress-style', ICL_PLUGIN_URL . '/res/css/style.css', array(), ICL_SITEPRESS_VERSION );
-		if ( isset( $page_basename ) && file_exists( ICL_PLUGIN_PATH . '/res/css/' . $page_basename . '.css' ) ) {
+		if ( isset( $page_basename ) && file_exists( WPML_PLUGIN_PATH . '/res/css/' . $page_basename . '.css' ) ) {
 			wp_enqueue_style( 'sitepress-' . $page_basename, ICL_PLUGIN_URL . '/res/css/' . $page_basename . '.css', array(), ICL_SITEPRESS_VERSION );
 		}
 
