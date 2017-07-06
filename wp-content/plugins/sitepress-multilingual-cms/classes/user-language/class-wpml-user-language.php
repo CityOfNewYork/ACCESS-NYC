@@ -11,6 +11,7 @@ class WPML_User_Language {
 	private $language_changes_history       = array();
 	private $admin_language_changes_history = array();
 	private $language_switched              = false;
+	private $wp_locale_fixup = array( 'el' => 'el' );
 
 	/**
 	 * WPML_User_Language constructor.
@@ -42,7 +43,7 @@ class WPML_User_Language {
 			add_filter( 'get_available_languages', array( $this, 'intersect_wpml_wp_languages' ) );
 		}
 
-		register_activation_hook( WP_PLUGIN_DIR . '/' . ICL_PLUGIN_FOLDER . '/sitepress.php',  array( $this, 'update_user_lang_on_site_setup' ) );
+		register_activation_hook( WPML_PLUGIN_PATH . '/' . WPML_PLUGIN_FILE,  array( $this, 'update_user_lang_on_site_setup' ) );
 	}
 
 	/**
@@ -163,11 +164,11 @@ class WPML_User_Language {
 	 */
 	public function update_user_lang_on_cookie_update( $lang ) {
 		$user_id = get_current_user_id();
-		$wp_lang = $this->sitepress->get_language_details( $lang );
+		$wp_lang = $this->get_wp_locale( $this->sitepress->get_language_details( $lang ) );
 
 		if( $this->user_needs_sync_admin_lang() && $user_id && $this->user_admin_language_for_edit( $user_id ) ) {
 			update_user_meta( $user_id, 'icl_admin_language', $lang );
-			update_user_meta( $user_id, 'locale', $wp_lang['default_locale'] );
+			update_user_meta( $user_id, 'locale', $wp_lang );
 		}
 	}
 
@@ -179,6 +180,16 @@ class WPML_User_Language {
 	private function is_editing_other_profile() {
 		global $pagenow;
 		return isset( $pagenow ) && 'user-edit.php' === $pagenow;
+	}
+
+	private function get_wp_locale( $lang_details ) {
+		$locale = $lang_details['default_locale'];
+
+		if ( array_key_exists( $lang_details['code'], $this->wp_locale_fixup ) ) {
+			$locale = $this->wp_locale_fixup[ $lang_details['code'] ];
+		}
+
+		return $locale;
 	}
 
 	public function update_user_lang_on_site_setup() {

@@ -141,9 +141,11 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 		// The setting should not be updated in DB
 		$sitepress_settings['auto_adjust_ids'] = 0;
 
-		if ( !$this->is_per_domain() && !$this->has_root_page() ) {
+		if ( ! $this->is_per_domain() && ! $this->has_root_page() ) {
 			remove_filter( 'terms_clauses', array( $this->sitepress, 'terms_clauses' ), 10 );
 		}
+
+		remove_filter( 'category_link', array( $this->sitepress, 'category_link_adjust_id' ), 1 );
 
 		return $type;
 	}

@@ -54,11 +54,11 @@
 	?>
 
     <p style="margin-top: 20px;">
-		<?php printf( esc_html__( 'For advanced access or to completely uninstall WPML and remove all language information, use the %stroubleshooting%s page.', 'sitepress' ), '<a href="' . esc_url( admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) ) . '">', '</a>' ); ?>
+		<?php printf( esc_html__( 'For advanced access or to completely uninstall WPML and remove all language information, use the %stroubleshooting%s page.', 'sitepress' ), '<a href="' . esc_url( admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) ) . '">', '</a>' ); ?>
     </p>
 
     <p style="margin-top: 20px;">
-		<?php printf( esc_html__( 'For retrieving debug information if asked by support person, use the %sdebug information%s page.', 'sitepress' ), '<a href="' . esc_url( admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/debug-information.php' ) ) . '">', '</a>' ); ?>
+		<?php printf( esc_html__( 'For retrieving debug information if asked by support person, use the %sdebug information%s page.', 'sitepress' ), '<a href="' . esc_url( admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/debug-information.php' ) ) . '">', '</a>' ); ?>
     </p>
 
 	<?php do_action( 'wpml_support_page_after' ); ?>

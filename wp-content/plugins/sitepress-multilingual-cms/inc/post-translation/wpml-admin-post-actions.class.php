@@ -32,19 +32,19 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		return $trid;
 	}
 
-	public function save_post_actions( $pidd, $post ) {
+	public function save_post_actions( $post_id, $post ) {
 		global $sitepress;
 
 		wp_defer_term_counting( true );
-		$post = isset( $post ) ? $post : get_post( $pidd );
+		$post = isset( $post ) ? $post : get_post( $post_id );
 		// exceptions
 		if ( ! $this->has_save_post_action( $post ) ) {
 			wp_defer_term_counting( false );
 
 			return;
 		}
-		if ( WPML_WordPress_Actions::is_bulk_trash( $pidd ) ||
-		     WPML_WordPress_Actions::is_bulk_untrash( $pidd ) ||
+		if ( WPML_WordPress_Actions::is_bulk_trash( $post_id ) ||
+		     WPML_WordPress_Actions::is_bulk_untrash( $post_id ) ||
 		     WPML_WordPress_Actions::is_heartbeat( )
 		) {
 
@@ -57,11 +57,13 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		}
 
 		$post_vars['post_type'] = isset( $post_vars['post_type'] ) ? $post_vars['post_type'] : $post->post_type;
-		$post_id                = $pidd;
+
 		if ( isset( $post_vars['action'] ) && $post_vars['action'] === 'post-quickpress-publish' ) {
 			$language_code = $default_language;
 		} else {
-			$post_id       = isset( $post_vars['post_ID'] ) ? $post_vars['post_ID'] : $pidd; //latter case for XML-RPC publishing
+			if( isset( $post_vars['post_ID'] ) ){
+				$post_id = $post_vars['post_ID'];
+			}
 			$language_code = $this->get_save_post_lang( $post_id, $sitepress );
 		}
 

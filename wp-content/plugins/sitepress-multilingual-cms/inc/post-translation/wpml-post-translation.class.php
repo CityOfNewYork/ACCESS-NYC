@@ -246,7 +246,7 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 		$translation_sync->sync_with_translations( $original_id ? $original_id : $post_vars['ID'], $post_vars );
 		$translation_sync->sync_with_duplicates( $post_vars['ID'] );
 		if ( ! function_exists( 'icl_cache_clear' ) ) {
-			require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+			require_once WPML_PLUGIN_PATH . '/inc/cache.php';
 		}
 		icl_cache_clear( $post_vars['post_type'] . 's_per_language', true );
 		wp_defer_term_counting( false );

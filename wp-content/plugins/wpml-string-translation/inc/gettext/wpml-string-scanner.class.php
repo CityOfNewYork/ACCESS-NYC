@@ -1,6 +1,9 @@
 <?php
 
 class WPML_String_Scanner {
+
+	const UPDATE_LAST_MO_SCAN_TIMESTAMP = 'wpml_update_last_mo_scan_timestamp';
+
 	/**
 	 * @param string|NULL $type 'plugin' or 'theme'
 	 */
@@ -119,6 +122,7 @@ class WPML_String_Scanner {
 					}
 				}
 			}
+			$this->update_last_mo_scan_timestamp( $this->current_type, $this->current_path );
 		}
 	}
 
@@ -697,6 +701,19 @@ class WPML_String_Scanner {
 		}
 
 		return $is_string_preview;
+	}
+
+	/**
+	 * @param string $type
+	 * @param string $path
+	 *
+	 * @return bool
+	 */
+	public function update_last_mo_scan_timestamp( $type, $path ) {
+		$name = basename( $path );
+		$existing_dates = get_option( self::UPDATE_LAST_MO_SCAN_TIMESTAMP, array() );
+		$existing_dates[ $type ][ $name ] = time();
+		return update_option( self::UPDATE_LAST_MO_SCAN_TIMESTAMP, $existing_dates, false );
 	}
 }
 

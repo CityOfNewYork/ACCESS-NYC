@@ -38,6 +38,8 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 				$icl_taxonomy = 'tax_' . $taxonomy;
 				$trid         = $this->term_translation->trid_from_tax_and_id( $term_id, $taxonomy );
 				$translations = $this->sitepress->get_element_translations( $trid, $icl_taxonomy, false );
+			} elseif ( 'post_format' === $taxonomy ) {
+				$translations = $this->get_post_format_translations( $taxonomy, $term_id );
 			} else {
 				$translations[ $this->sitepress->get_current_language() ] = (object) array(
 					'translation_id' => 0,
@@ -100,6 +102,10 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 				$lang['translated_url'] = $this->sitepress->get_wp_api()
 				                                          ->get_term_link( (int) $translations[ $lang['code'] ]->term_id, $taxonomy );
 				$lang['missing']        = 0;
+
+				if ( 'post_format' === $taxonomy  ) {
+					$lang['translated_url'] = $this->sitepress->convert_url( $lang['translated_url'], $lang['code'] );
+				}
 			}
 		}
 
@@ -353,6 +359,28 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 		}
 
 		return array( $taxonomy, $term_id );
+	}
+
+	/**
+	 * @param $taxonomy
+	 * @param $term_id
+	 *
+	 * @return array
+	 */
+	private function get_post_format_translations( $taxonomy, $term_id ) {
+		$translations = array();
+
+		foreach ( $this->sitepress->get_active_languages() as $code => $active_language ) {
+			$translations[ $code ] = (object) array(
+				'translation_id' => 0,
+				'language_code'  => $code,
+				'original'       => 1,
+				'name'           => $taxonomy,
+				'term_id'        => $term_id
+			);
+		}
+
+		return $translations;
 	}
 
 	private function sort_by_id( $array_a, $array_b ) {

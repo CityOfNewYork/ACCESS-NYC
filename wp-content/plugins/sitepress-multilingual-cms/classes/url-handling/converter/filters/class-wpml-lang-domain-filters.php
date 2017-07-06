@@ -61,7 +61,9 @@ class WPML_Lang_Domain_Filters {
 	 * @return string
 	 */
 	public function siteurl_callback( $url ) {
-		if ( ! $this->debug_backtrace->is_function_in_call_stack( 'get_home_path' ) ) {
+		$getting_network_site_url = $this->debug_backtrace->is_function_in_call_stack( 'get_admin_url' ) && is_multisite();
+
+		if ( ! $this->debug_backtrace->is_function_in_call_stack( 'get_home_path' ) && ! $getting_network_site_url ) {
 			$parsed_url = wpml_parse_url( $url );
 			$host       = is_array( $parsed_url ) && isset( $parsed_url['host'] );
 			if ( $host && isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] ) {

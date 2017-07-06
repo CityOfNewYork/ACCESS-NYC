@@ -138,4 +138,19 @@ class WPML_Term_Translation extends WPML_Element_Translation {
 			}
 		}
 	}
+
+	/**
+	 * @param $term
+	 * @param string $slug
+	 * @param $taxonomy
+	 * @param $lang_code
+	 *
+	 * @return string
+	 */
+	public function generate_unique_term_slug( $term, $slug = '', $taxonomy, $lang_code ) {
+		if ( '' === trim( $slug ) ) {
+			$slug = sanitize_title( $term );
+		}
+		return WPML_Terms_Translations::term_unique_slug( $slug, $taxonomy, $lang_code );
+	}
 }

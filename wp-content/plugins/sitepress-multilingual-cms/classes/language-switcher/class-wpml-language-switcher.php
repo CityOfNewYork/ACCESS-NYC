@@ -30,6 +30,7 @@ class WPML_Language_Switcher extends WPML_SP_User {
 		$this->dependencies->settings()->init_hooks();
 		$this->dependencies->render()->init_hooks();
 		$this->dependencies->shortcodes()->init_hooks();
+		$this->dependencies->actions()->init_hooks();
 		$this->dependencies->inline_styles()->init_hooks();
 
 		if ( is_admin() ) {

@@ -60,7 +60,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 	 * @return string
 	 */
 	public static function get_page_hook() {
-		return ICL_PLUGIN_FOLDER . '/menu/languages.php';
+		return WPML_PLUGIN_FOLDER . '/menu/languages.php';
 	}
 
 	/**
@@ -253,7 +253,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 
 	protected function init_template_base_dir() {
 		$this->template_paths = array(
-			ICL_PLUGIN_PATH . '/templates/language-switcher-admin-ui/',
+			WPML_PLUGIN_PATH . '/templates/language-switcher-admin-ui/',
 		);
 	}
 

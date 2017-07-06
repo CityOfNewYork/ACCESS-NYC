@@ -7,7 +7,7 @@ function icl_get_languages_names() {
 	static $__icl_lang_names_cached = null;
 
 	if ( $__icl_lang_names_cached === null ) {
-		$serialized_languages = file_get_contents(ICL_PLUGIN_PATH . '/res/languages.json');
+		$serialized_languages = file_get_contents(WPML_PLUGIN_PATH . '/res/languages.json');
 		$__icl_lang_names = json_decode($serialized_languages, true);
 
 		$__icl_lang_names_cached = $__icl_lang_names;
@@ -224,19 +224,19 @@ function icl_get_languages_locales() {
 			'be'      => 'be_BY',
 			'bg'      => 'bg_BG',
 			'bn'      => 'bn_BD',
-			'ca'      => 'ca_ES',
+			'ca'      => 'ca',
 			'cs'      => 'cs_CZ',
 			'cy'      => 'cy_GB',
 			'da'      => 'da_DK',
 			'de'      => 'de_DE',
-			'el'      => 'el_GR',
+			'el'      => 'el',
 			'en'      => 'en_US',
 			'eo'      => 'eo_UY',
 			'es'      => 'es_ES',
-			'et'      => 'et_EE',
+			'et'      => 'et',
 			'eu'      => 'eu_ES',
 			'fa'      => 'fa_IR',
-			'fi'      => 'fi_FI',
+			'fi'      => 'fi',
 			'fo'      => 'fo_FO',
 			'fr'      => 'fr_FR',
 			'gl'      => 'gl_ES',

@@ -281,7 +281,9 @@ function search_filter($query) {
   return $query;
 }
 
-add_filter('pre_get_posts','search_filter');
+if (!is_admin()) {
+  add_filter('pre_get_posts','search_filter');
+}
 
 /**
 * Filter posts by multiple categories

@@ -4,7 +4,7 @@
  */
 
 if ( ! class_exists( 'WPML_Translator' ) ) {
-	require_once ICL_PLUGIN_PATH . '/inc/translation-management/wpml-translator.class.php';
+	require_once WPML_PLUGIN_PATH . '/inc/translation-management/wpml-translator.class.php';
 }
 
 /**
@@ -966,7 +966,7 @@ class TranslationManagement {
 	private function get_comment_duplicator() {
 
 		if ( ! $this->comment_duplicator ) {
-			require ICL_PLUGIN_PATH . '/inc/post-translation/wpml-comment-duplication.class.php';
+			require WPML_PLUGIN_PATH . '/inc/post-translation/wpml-comment-duplication.class.php';
 			$this->comment_duplicator = new WPML_Comment_Duplication();
 		}
 

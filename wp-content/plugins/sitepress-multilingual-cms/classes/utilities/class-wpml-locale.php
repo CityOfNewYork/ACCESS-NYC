@@ -156,7 +156,7 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 				unset( $l10n[ 'sitepress' ] );
 			}
 			load_textdomain( 'sitepress',
-			                 ICL_PLUGIN_PATH . '/locale/sitepress-' . $this->get_locale( $lang_code ) . '.mo' );
+				WPML_PLUGIN_PATH . '/locale/sitepress-' . $this->get_locale( $lang_code ) . '.mo' );
 		} else { // switch back
 			$l10n[ 'sitepress' ] = $original_l10n;
 		}
@@ -172,29 +172,6 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 		}
 
 		return $locales;
-	}
-
-	public function set_locale_file_names( $locale_file_names_pairs ) {
-		$lfn = $this->get_locale_file_names();
-		$new = array_diff( array_keys( $locale_file_names_pairs ), array_keys( $lfn ) );
-		if ( ! empty( $new ) ) {
-			foreach ( $new as $code ) {
-				$this->wpdb->insert( $this->wpdb->prefix . 'icl_locale_map',
-				                     array( 'code' => $code, 'locale' => $locale_file_names_pairs[ $code ] ) );
-			}
-		}
-		$remove = array_diff( array_keys( $lfn ), array_keys( $locale_file_names_pairs ) );
-		if ( ! empty( $remove ) ) {
-			$this->wpdb->query( "DELETE FROM {$this->wpdb->prefix}icl_locale_map
-                           WHERE code IN (" . wpml_prepare_in( $remove ) . ")" );
-		}
-
-		$update = array_diff( $locale_file_names_pairs, $lfn );
-		foreach ( $update as $code => $locale ) {
-			$this->wpdb->update( $this->wpdb->prefix . 'icl_locale_map', array( 'locale' => $locale ), array( 'code' => $code ) );
-		}
-
-		return true;
 	}
 
 	private function language_needs_title_sanitization() {

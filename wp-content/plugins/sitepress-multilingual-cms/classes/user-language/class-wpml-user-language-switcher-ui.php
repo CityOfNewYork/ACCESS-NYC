@@ -30,7 +30,7 @@ class WPML_User_Language_Switcher_UI {
 	 */
 	protected function get_view( $model ) {
 		$template_paths = array(
-			ICL_PLUGIN_PATH . '/templates/user-language/',
+			WPML_PLUGIN_PATH . '/templates/user-language/',
 		);
 
 		$template = 'language-switcher.twig';

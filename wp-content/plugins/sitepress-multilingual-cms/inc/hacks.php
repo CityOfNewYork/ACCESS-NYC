@@ -4,10 +4,10 @@
 add_action('init', 'icl_load_hacks');  
 
 function icl_load_hacks(){    
-    if(file_exists(ICL_PLUGIN_PATH . '/inc/hacks/misc-constants.php')){
-        include ICL_PLUGIN_PATH . '/inc/hacks/misc-constants.php';           
+    if(file_exists(WPML_PLUGIN_PATH . '/inc/hacks/misc-constants.php')){
+        include WPML_PLUGIN_PATH . '/inc/hacks/misc-constants.php';
     }    
-    include ICL_PLUGIN_PATH . '/inc/hacks/language-canonical-redirects.php';            
+    include WPML_PLUGIN_PATH . '/inc/hacks/language-canonical-redirects.php';
     
     
     if(is_admin() && !defined('ICL_PRODUCTION_MODE')){
@@ -25,4 +25,4 @@ function icl_load_hacks(){
 }
 
 
-include ICL_PLUGIN_PATH . '/inc/hacks/missing-php-functions.php';
+include WPML_PLUGIN_PATH . '/inc/hacks/missing-php-functions.php';

@@ -326,7 +326,7 @@ class WPML_LS_Model_Build extends WPML_SP_User {
     private function add_user_agent_touch_device_classes($classes ) {
 
         if ( is_null( $this->mobile_detect ) ) {
-            require_once ICL_PLUGIN_PATH . '/lib/mobile-detect.php';
+            require_once WPML_PLUGIN_PATH . '/lib/mobile-detect.php';
             $this->mobile_detect   = new WPML_Mobile_Detect();
             $this->is_touch_screen = $this->mobile_detect->isMobile() || $this->mobile_detect->isTablet();
         }

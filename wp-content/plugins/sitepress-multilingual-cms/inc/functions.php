@@ -154,9 +154,8 @@ function icl_get_settings() {
  * @return array
  */
 function icl_plugin_action_links( $links, $file ) {
-	$this_plugin = basename( ICL_PLUGIN_PATH ) . '/sitepress.php';
-	if ( $file == $this_plugin ) {
-		$links[ ] = '<a href="admin.php?page=' . basename( ICL_PLUGIN_PATH ) . '/menu/languages.php">' . __( 'Configure', 'sitepress' ) . '</a>';
+	if ( $file == WPML_PLUGIN_BASENAME ) {
+		$links[ ] = '<a href="admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/languages.php">' . __( 'Configure', 'sitepress' ) . '</a>';
 	}
 
 	return $links;
@@ -508,9 +507,9 @@ function is_not_installing_plugins() {
 		return true;
 	} elseif ( $_REQUEST[ 'action' ] != 'activate' && $_REQUEST[ 'action' ] != 'activate-selected' ) {
 		return true;
-	} elseif ( ( ! isset( $_REQUEST[ 'plugin' ] ) || $_REQUEST[ 'plugin' ] != basename( ICL_PLUGIN_PATH ) . '/' . basename( __FILE__ ) ) && ! in_array( ICL_PLUGIN_FOLDER . '/' . basename( __FILE__ ), $checked ) ) {
+	} elseif ( ( ! isset( $_REQUEST[ 'plugin' ] ) || $_REQUEST[ 'plugin' ] != WPML_PLUGIN_FOLDER . '/' . basename( __FILE__ ) ) && ! in_array( WPML_PLUGIN_FOLDER . '/' . basename( __FILE__ ), $checked ) ) {
 		return true;
-	} elseif ( in_array( ICL_PLUGIN_FOLDER . '/' . basename( __FILE__ ), $checked ) && ! isset( $sitepress ) ) {
+	} elseif ( in_array( WPML_PLUGIN_FOLDER . '/' . basename( __FILE__ ), $checked ) && ! isset( $sitepress ) ) {
 		return true;
 	}
 
@@ -550,14 +549,14 @@ function wpml_version_is( $version_to_check, $comparison = '==' ) {
  */
 function icl_suppress_activation() {
 	$active_plugins    = get_option( 'active_plugins' );
-	$icl_sitepress_idx = array_search( ICL_PLUGIN_FOLDER . '/sitepress.php', $active_plugins );
+	$icl_sitepress_idx = array_search( WPML_PLUGIN_BASENAME, $active_plugins );
 	if ( false !== $icl_sitepress_idx ) {
 		unset( $active_plugins[ $icl_sitepress_idx ] );
 		update_option( 'active_plugins', $active_plugins );
 		unset( $_GET[ 'activate' ] );
 		$recently_activated = get_option( 'recently_activated' );
-		if ( ! isset( $recently_activated[ ICL_PLUGIN_FOLDER . '/sitepress.php' ] ) ) {
-			$recently_activated[ ICL_PLUGIN_FOLDER . '/sitepress.php' ] = time();
+		if ( ! isset( $recently_activated[ WPML_PLUGIN_BASENAME ] ) ) {
+			$recently_activated[ WPML_PLUGIN_BASENAME ] = time();
 			update_option( 'recently_activated', $recently_activated );
 		}
 	}
@@ -568,7 +567,7 @@ function icl_suppress_activation() {
  */
 function activate_installer( $sitepress = null ) {
 	// installer hook - start
-	include_once ICL_PLUGIN_PATH . '/vendor/otgs/installer/loader.php'; //produces global variable $wp_installer_instance
+	include_once WPML_PLUGIN_PATH . '/vendor/otgs/installer/loader.php'; //produces global variable $wp_installer_instance
 	$args = array(
 		'plugins_install_tab' => 1,
 		'high_priority'       => 1,

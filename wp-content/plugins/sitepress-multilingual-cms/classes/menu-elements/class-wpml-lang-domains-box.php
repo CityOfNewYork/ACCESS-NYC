@@ -90,7 +90,15 @@ class WPML_Lang_Domains_Box extends WPML_SP_User {
 		</table>
 		<div id="language_per_domain_sso_description" style="display:none;">
 			<p>
-				<?php esc_html_e( 'This feature allows the theme and plugins to work correctly when on sites that use languages in domains.<br/>It requires a call to each of the site\'s language domains on both log-in and log-out, so there\'s a small performance penalty to using it.' );?>
+					<?php
+					/* translators: this is the first of two sentences explaining the "Auto sign-in and sign-out users from all domains" feature */
+					echo esc_html_x( 'This feature allows the theme and plugins to work correctly when on sites that use languages in domains.', 'Tooltip: Auto sign-in and sign-out users from all domains', 'sitepress' );
+					?>
+					<br>
+					<?php
+					/* translators: this is the second of two sentences explaining the "Auto sign-in and sign-out users from all domains" feature */
+					echo esc_html_x( "It requires a call to each of the site's language domains on both log-in and log-out, so there's a small performance penalty to using it.", 'Tooltip: Auto sign-in and sign-out users from all domains', 'sitepress' );
+					?>
 			</p>
 		</div>
 		<?php
