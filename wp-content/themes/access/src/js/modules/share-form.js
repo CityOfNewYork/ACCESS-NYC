@@ -3,6 +3,9 @@
 
 import $ from 'jquery';
 import Utility from 'modules/utility';
+import Cleave from 'cleave.js/dist/cleave.min';
+import 'cleave.js/dist/addons/cleave-phone.us';
+
 
 /**
  * This component handles validation and submission for share by email and
@@ -40,6 +43,9 @@ class ShareForm {
     if (this._initialized) {
       return this;
     }
+
+    let selected = this._el.querySelector('input[type="tel"]');
+    if (selected) this._maskPhone(selected);
 
     $(this._el).on('submit', (e) => {
       e.preventDefault();
@@ -85,6 +91,21 @@ class ShareForm {
   }
 
   /**
+   * Mask each phone number and properly format it
+   * @param  {HTMLElement} input the "tel" input to mask
+   * @return {constructor}       the input mask
+   */
+  _maskPhone(input) {
+    let cleave = new Cleave(input, {
+      phone: true,
+      phoneRegionCode: 'us',
+      delimiter: '-'
+    });
+    input.cleave = cleave;
+    return input;
+  }
+
+  /**
    * For a given input, checks to see if its value is a valid email. If not,
    * displays an error message and sets an error class on the element.
    * @param {HTMLElement} input
@@ -112,23 +133,22 @@ class ShareForm {
    * @return {boolean} - Valid Phone Number.
    */
   _validatePhoneNumber(input) {
-    let num = input.value.match(/\d+/g); // get only digits
-    num = (num) ? num.join('') : 0; // did regex capture numbers?
-
-    if (num.length === 11) return true; // assume it is phone number
+    let num = this._parsePhoneNumber(input.value); // parse the number
+    num = (num) ? num.join('') : 0; // if num is null, there are no numbers
     if (num.length === 10) {
-      num = '1' + num;
-      input.value = num;
-      return true;
-    } // has no code, assume US number, prepend country code
-
-    if (num.length === 7) {
-      this._showError(ShareForm.Message.PHONE_AREA);
-      return false;
-    } // assume number but ask to add area code
-
+      return true; // assume it is phone number
+    }
     this._showError(ShareForm.Message.PHONE);
     return false;
+  }
+
+  /**
+   * Get just the phone number of a given value
+   * @param  {string} value The string to get numbers from
+   * @return {array}       An array with matched blocks
+   */
+  _parsePhoneNumber(value) {
+    return value.match(/\d+/g); // get only digits
   }
 
   /**
@@ -177,8 +197,10 @@ class ShareForm {
    */
   _submit() {
     this._isBusy = true;
+    let $tel = this._el.querySelector('input[type="tel"]'); // get phone number
+    if ($tel) $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
     const payload = $(this._el).serialize();
-    $(this._el).find('input').prop('disabled', true);
+    $(this._el).find('input').prop('disabled', true); // disable inputs
     return $.post($(this._el).attr('action'), payload).done((response) => {
       if (response.success) {
         this._showSuccess();
@@ -188,16 +210,13 @@ class ShareForm {
           this._isDisabled = false;
         });
       } else {
-        /* eslint-disable no-console, no-debugger */
-         console.log(response);
         this._showError(ShareForm.Message.SERVER);
       }
     }).fail((response) => {
-      /* eslint-disable no-console, no-debugger */
-      // console.log(response);
       this._showError(ShareForm.Message.SERVER);
     }).always(() => {
-      $(this._el).find('input').prop('disabled', false);
+      $(this._el).find('input').prop('disabled', false); // enable inputs
+      if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
       this._isBusy = false;
     });
   }
@@ -223,7 +242,6 @@ ShareForm.CssClass = {
 ShareForm.Message = {
   EMAIL: 'ERROR_EMAIL',
   PHONE: 'ERROR_PHONE',
-  PHONE_AREA: 'ERROR_PHONE_AREA_CODE',
   REQUIRED: 'ERROR_REQUIRED',
   SERVER: 'ERROR_SERVER'
 };
