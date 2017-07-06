@@ -80,7 +80,7 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		                                                                    'post_' . $master_post->post_type );
 		$id                           = $this->save_duplicate( $post_array, $lang );
 
-		require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+		require_once WPML_PLUGIN_PATH . '/inc/cache.php';
 		icl_cache_clear();
 
 		global $ICL_Pro_Translation;

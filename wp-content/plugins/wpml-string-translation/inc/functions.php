@@ -552,37 +552,12 @@ function icl_get_string_translations_by_id($string_id){
 }
 
 function icl_get_relative_translation_status( $string_id ) {
-	global $wpdb, $sitepress, $sitepress_settings;
+	global $wpdb, $sitepress;
 
-    $current_user = $sitepress->get_current_user();
-    $user_lang_pairs = get_user_meta($current_user->ID, $wpdb->prefix.'language_pairs', true);
-	$src_langs = array_intersect( array_keys( $sitepress->get_active_languages() ),
-	                              array_keys( $user_lang_pairs[ $sitepress_settings[ 'st' ][ 'strings_language' ] ] ) );
+	$string_factory              = wpml_st_load_string_factory();
+	$relative_translation_status = new WPML_ST_Relative_Translation_Status( $wpdb, $sitepress, $string_factory );
 
-    if(empty($src_langs)) return ICL_TM_NOT_TRANSLATED;
-
-    $sql = "SELECT st.status
-            FROM {$wpdb->prefix}icl_strings s 
-            JOIN {$wpdb->prefix}icl_string_translations st ON s.id = st.string_id
-            WHERE st.language IN (" . wpml_prepare_in( $src_langs ) . ") AND s.id = %d
-    ";
-    $statuses = $wpdb->get_col($wpdb->prepare($sql, $string_id));
-
-    $status = ICL_TM_NOT_TRANSLATED;
-    $one_incomplete = false;
-    foreach($statuses as $s){
-        if($s == ICL_TM_COMPLETE){
-            $status = ICL_TM_COMPLETE;
-        }elseif($s == ICL_TM_NOT_TRANSLATED){
-            $one_incomplete = true;
-        }
-    }
-
-    if($status == ICL_TM_COMPLETE && $one_incomplete){
-        $status = ICL_STRING_TRANSLATION_PARTIAL;
-    }
-
-    return $status;
+	return $relative_translation_status->get( $string_id );
 }
 
 function icl_get_strings_tracked_in_pages($string_translations){

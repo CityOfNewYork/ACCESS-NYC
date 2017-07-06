@@ -45,34 +45,4 @@ class WPML_LS_Shortcodes extends WPML_LS_Public_API {
 		return $args;
 	}
 
-	/**
-	 * @param array $args
-	 *
-	 * @return array
-	 */
-	private function convert_shortcode_args_aliases( $args ) {
-		$aliases_map = self::get_argument_aliases();
-
-		foreach ( $aliases_map as $alias => $key ) {
-			if ( array_key_exists( $alias, $args ) ) {
-				$args[ $key ] = $args[ $alias ];
-				unset( $args[ $alias ] );
-			}
-		}
-
-		return $args;
-	}
-
-	/**
-	 * @return array
-	 */
-	public static function get_argument_aliases() {
-		return array(
-			'flags'        => 'display_flags',
-			'link_current' => 'display_link_for_current_lang',
-			'native'       => 'display_names_in_native_lang',
-			'translated'   => 'display_names_in_current_lang',
-		);
-	}
-
 }

@@ -379,7 +379,7 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 			) {
 				continue;
 			}
-			if ( ! file_exists( ICL_PLUGIN_PATH . '/res/flags/' . $code . '.png' ) ) {
+			if ( ! file_exists( WPML_PLUGIN_PATH . '/res/flags/' . $code . '.png' ) ) {
 				$file = 'nil.png';
 			} else {
 				$file = $code . '.png';

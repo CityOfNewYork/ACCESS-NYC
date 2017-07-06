@@ -38,7 +38,7 @@ class WPML_ST_Strings {
 		if ( $current_user_can_translate_strings ) {
 			$active_languages = $this->sitepress->get_active_languages();
 			foreach ( $active_languages as $l ) {
-				$language_code_aliases[] = esc_sql( str_replace( '-', '', $l['code'] ) );
+				$language_code_aliases[ $l['code'] ] = esc_sql( str_replace( '-', '', $l['code'] ) );
 			}
 
 			foreach ( $user_lang_pairs as $source_lang_code => $pair ) {
@@ -116,18 +116,18 @@ class WPML_ST_Strings {
 
 			$_joins = $_sels = $_where = array();
 
-			foreach ( $language_code_aliases as $language_code_alias ) {
-				$_sels[]             = "str_{$language_code_alias}.id AS id_{$language_code_alias},
+			foreach ( $language_code_aliases as $lang_code => $language_code_alias ) {
+					$_sels[]             = "str_{$language_code_alias}.id AS id_{$language_code_alias},
 	                             str_{$language_code_alias}.status AS status_{$language_code_alias},
 	                             str_{$language_code_alias}.value AS value_{$language_code_alias},
 	                             str_{$language_code_alias}.translator_id AS translator_{$language_code_alias},
 	                             str_{$language_code_alias}.translation_date AS date_{$language_code_alias}
 	                             ";
 				$_joins[]            = $this->wpdb->prepare( "LEFT JOIN {$this->wpdb->prefix}icl_string_translations str_{$language_code_alias}
-	                                                ON str_{$language_code_alias}.string_id = s.id AND str_{$language_code_alias}.language = %s ", $l['code'] );
+	                                                ON str_{$language_code_alias}.string_id = s.id AND str_{$language_code_alias}.language = %s ", $lang_code );
 
 				if ( empty( $status_filter_lang ) ) {
-					if ( $status_filter == ICL_TM_COMPLETE ) {
+					if ( $status_filter == ICL_TM_COMPLETE && $language_code_alias !== $source_lang_code ) {
 						$_where[] .= " AND str_{$language_code_alias}.status = " . ICL_TM_COMPLETE;
 					} else {
 						if ( empty( $_lwhere ) ) {
@@ -147,9 +147,9 @@ class WPML_ST_Strings {
 
 			$sql_query = empty( $status_filter_lang )
 				? " WHERE s.language IN ( " . wpml_prepare_in( array_keys( $user_lang_pairs ) ) . " ) " . join( ' ', $_where )
-				: $this->wpdb->prepare( " WHERE str_{$status_filter_lang}.status = %d
-											AND (str_{$status_filter_lang}.translator_id IS NULL
-													OR str_{$status_filter_lang}.translator_id = %d)",
+				: $this->wpdb->prepare( " WHERE str_{$language_code_aliases[$status_filter_lang]}.status = %d
+											AND (str_{$language_code_aliases[$status_filter_lang]}.translator_id IS NULL
+													OR str_{$language_code_aliases[$status_filter_lang]}.translator_id = %d)",
 					array( ICL_TM_WAITING_FOR_TRANSLATOR, $current_user->ID ) );
 			$res       = $this->get_results( $sql_query, $extra_cond, $offset, $limit, $_joins, $_sels );
 			if ( $res ) {

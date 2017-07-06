@@ -3118,6 +3118,9 @@ a.program-filter-item {
   display: block;
   padding: 15px; }
 
+.share-form.active {
+  margin-bottom: 20px; }
+
 .share-form-controls {
   -webkit-box-align: center;
   -moz-box-align: center;
@@ -3152,6 +3155,9 @@ a.program-filter-item {
     padding: 15px; }
     .success .share-form-controls .btn-submit {
       display: none; }
+
+.share-form__spinner {
+  flex: 0 0 70px; }
 
 .site-footer {
   padding-top: 40px;

@@ -45,6 +45,10 @@
       padding: (.75 * $spacing-base);
     }
   }
+
+  &.active {
+    margin-bottom: $spacing-base;
+  }
 }
 
 .share-form-controls {
@@ -72,4 +76,8 @@
       display: none;
     }
   }
+}
+
+.share-form__spinner {
+  flex: 0 0 70px;
 }

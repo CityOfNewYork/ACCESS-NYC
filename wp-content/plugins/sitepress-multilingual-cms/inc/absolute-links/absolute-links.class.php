@@ -521,23 +521,26 @@ class AbsoluteLinks{
 		
 		return array( $lang, $dir_path );
 	}
-	
-	
-	function process_string( $st_id, $translation = true ) {
+
+
+	function process_string( $st_id ) {
 		global $wpdb;
 		if ( $st_id ) {
-			if ( $translation ) {
-				$string_value = $wpdb->get_var( $wpdb->prepare( "SELECT value FROM {$wpdb->prefix}icl_string_translations WHERE id=%d", $st_id ) );
+
+			$table = $wpdb->prefix . 'icl_string_translations';
+
+			$data         = $wpdb->get_row( $wpdb->prepare( "SELECT value, string_id, language FROM {$table} WHERE id=%d", $st_id ) );
+			$string_value = $data->value;
+			$string_type  = $wpdb->get_var( $wpdb->prepare( "SELECT type FROM {$wpdb->prefix}icl_strings WHERE id=%d", $data->string_id ) );
+
+			if ( 'LINK' === $string_type ) {
+				$string_value_up = $this->convert_url( $string_value, $data->language );
 			} else {
-				$string_value = $wpdb->get_var( $wpdb->prepare( "SELECT value FROM {$wpdb->prefix}icl_strings WHERE id=%d", $st_id ) );
+				$string_value_up = $this->convert_text( $string_value );
 			}
-			$string_value_up  = $this->convert_text( $string_value );
+
 			if ( $string_value_up != $string_value ) {
-				if ( $translation ) {
-					$wpdb->update( $wpdb->prefix . 'icl_string_translations', array( 'value' => $string_value_up ), array( 'id' => $st_id ) );
-				} else {
-					$wpdb->update( $wpdb->prefix . 'icl_strings', array( 'value' => $string_value_up ), array( 'id' => $st_id ) );
-				}
+				$wpdb->update( $table, array( 'value' => $string_value_up, 'status' => ICL_STRING_TRANSLATION_COMPLETE ), array( 'id' => $st_id ) );
 			}
 		}
 	}
@@ -571,6 +574,25 @@ class AbsoluteLinks{
 	function convert_text ( $text ) {
 		$alp_broken_links = array();
 		return $this->_process_generic_text( $text, $alp_broken_links );
+	}
+
+	public function convert_url( $url, $lang = null ) {
+		global $sitepress;
+
+		if ( $this->is_home( $url ) ) {
+			$absolute_url = $sitepress->convert_url( $url, $lang );
+		} else {
+
+			$html         = '<a href="' . $url . '">removeit</a>';
+			$html         = $this->convert_text( $html );
+			$absolute_url = str_replace( array( '<a href="', '">removeit</a>' ), array( '', '' ), $html );
+		}
+
+		return $absolute_url;
+	}
+
+	public function is_home( $url ) {
+		return untrailingslashit( get_home_url() ) ===  untrailingslashit( $url );
 	}
 
 }

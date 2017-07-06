@@ -60,6 +60,7 @@ class WPML_Requirements {
 			'requirements' => array(
 				'gravityforms-multilingual',
 				'wpml-string-translation',
+				'wpml-translation-management',
 			),
 		),
 		'buddypress'    => array(
@@ -69,6 +70,12 @@ class WPML_Requirements {
 			),
 		),
 		'bb-plugin'    => array(
+			'url'          => '#',
+			'requirements' => array(
+				'wpml-page-builders',
+			),
+		),
+		'elementor-plugin'    => array(
 			'url'          => '#',
 			'requirements' => array(
 				'wpml-page-builders',

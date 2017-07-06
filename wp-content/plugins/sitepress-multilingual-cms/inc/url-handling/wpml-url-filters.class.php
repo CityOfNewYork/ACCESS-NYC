@@ -156,19 +156,25 @@ class WPML_URL_Filters {
 			return $link;
 		}
 
-		/** @var int $post */
+		$post_id = $post;
+
 		if ( is_object( $post ) ) {
-			$post = $post->ID;
+			$post_id = $post->ID;
 		}
 
-		$canonical_url = $this->canonicals->permalink_filter( $link, $post );
+		/** @var int $post_id */
+		if ( $post_id < 1 ) {
+			return $link;
+		}
+
+		$canonical_url = $this->canonicals->permalink_filter( $link, $post_id );
 		if ( $canonical_url ) {
 			return $canonical_url;
 		}
 
-		$post_element = new WPML_Post_Element( $post, $this->sitepress );
+		$post_element = new WPML_Post_Element( $post_id, $this->sitepress );
 		if ( $post_element->is_translatable() ) {
-				$link = $this->get_translated_permalink( $link, $post, $post_element );
+				$link = $this->get_translated_permalink( $link, $post_id, $post_element );
 		}
 		return $link;
 	}
@@ -235,9 +241,18 @@ class WPML_URL_Filters {
 		/** @var array $urls */
 		$urls = $this->sitepress->get_setting( 'urls' );
 
-		return isset( $urls['root_page'] ) && isset( $urls['show_on_root'] )
-		       && ! empty( $urls['directory_for_default_language'] )
-		       && ( $urls['show_on_root'] === 'page' || $urls['show_on_root'] === 'html_file' );
+		if ( is_admin() ) {
+			$uses_root = isset( $urls['root_page'], $urls['show_on_root'] )
+			             && ! empty( $urls['directory_for_default_language'] )
+			             && ( in_array( $urls['show_on_root'], array( 'page', 'html_file' ) ) );
+		} else {
+			$uses_root = isset( $urls['root_page'], $urls['show_on_root'] )
+			             && ! empty( $urls['directory_for_default_language'] )
+			             && ( ( $urls['root_page'] > 0 && 'page' === $urls['show_on_root'] )
+			                  || ( $urls['root_html_file_path'] && 'html_file' === $urls['show_on_root'] ) );
+		}
+
+		return $uses_root;
 	}
 
 	/**

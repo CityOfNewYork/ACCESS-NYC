@@ -3,7 +3,7 @@
 function new_duplicated_terms_filter( $post_ids, $duplicates_only = true ) {
 	global $wpdb, $sitepress, $wpml_admin_notices;
 
-	require_once ICL_PLUGIN_PATH . '/inc/taxonomy-term-translation/wpml-term-hierarchy-duplication.class.php';
+	require_once WPML_PLUGIN_PATH . '/inc/taxonomy-term-translation/wpml-term-hierarchy-duplication.class.php';
 	$hier_dupl  = new WPML_Term_Hierarchy_Duplication( $wpdb, $sitepress );
 	$taxonomies = $hier_dupl->duplicates_require_sync( $post_ids, $duplicates_only );
 	if ( (bool) $taxonomies ) {
@@ -16,7 +16,7 @@ function new_duplicated_terms_filter( $post_ids, $duplicates_only = true ) {
 
 		foreach ( $taxonomies as $taxonomy ) {
 			$text .= '<p><a href="admin.php?page='
-			         . ICL_PLUGIN_FOLDER . '/menu/taxonomy-translation.php&taxonomy='
+			         . WPML_PLUGIN_FOLDER . '/menu/taxonomy-translation.php&taxonomy='
 			         . $taxonomy . '&sync=1">' . get_taxonomy_labels(
 				         get_taxonomy( $taxonomy )
 			         )->name . '</a></p>';
@@ -51,14 +51,6 @@ function remove_taxonomy_hierarchy_message() {
 }
 
 add_action( 'wpml_sync_term_hierarchy_done', 'remove_taxonomy_hierarchy_message' );
-
-function taxonomy_hierarchy_sync_message_script() {
-	wp_register_script( 'taxonomy_hierarchy_sync_message', ICL_PLUGIN_URL . '/res/js/taxonomy-hierarchy-sync-message.js', array( 'jquery' ) );
-	wp_enqueue_script( 'taxonomy_hierarchy_sync_message' );
-}
-
-add_action( 'admin_enqueue_scripts', 'taxonomy_hierarchy_sync_message_script' );
-
 
 /**
  * @return WPML_Notices

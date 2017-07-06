@@ -46,6 +46,7 @@ class WPML_ST_Upgrade {
 		$this->maybe_run( 'WPML_ST_Upgrade_Db_Cache_Command' );
 		$this->maybe_run( 'WPML_ST_Upgrade_Display_Strings_Scan_Notices' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages' );
+		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Location' );
 	}
 
 	private function run_ajax() {

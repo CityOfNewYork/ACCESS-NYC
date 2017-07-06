@@ -4,7 +4,7 @@ function update_icl_strings_charset_and_collations() {
 	global $wpdb;
 
 	if ( ! icl_table_column_exists( 'icl_strings', 'domain_name_context_md5' ) ) {
-		include_once __DIR__ . '/upgrade-3.2.3.php';
+		include_once dirname(__FILE__) . '/upgrade-3.2.3.php';
 	}
 	
 	$collate = false;

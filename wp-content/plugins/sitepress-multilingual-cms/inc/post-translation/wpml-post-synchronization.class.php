@@ -100,7 +100,7 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 			$this->set_new_original( $trid, $lang_code );
 		}
 		$this->post_translation->reload();
-		require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+		require_once WPML_PLUGIN_PATH . '/inc/cache.php';
 		icl_cache_clear( $post_type . 's_per_language', true );
 		$this->maybe_fix_translated_parent( $post_type );
 	}
@@ -133,7 +133,7 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 			}
 		}
 		$post_type = get_post_type( $post_id );
-		require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+		require_once WPML_PLUGIN_PATH . '/inc/cache.php';
 		icl_cache_clear( $post_type . 's_per_language', true );
 	}
 

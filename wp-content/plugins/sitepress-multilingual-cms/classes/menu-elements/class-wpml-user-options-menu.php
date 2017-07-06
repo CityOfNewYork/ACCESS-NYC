@@ -84,6 +84,8 @@ class WPML_User_Options_Menu {
 		<?php
 		$this->get_hidden_languages_options( $use_admin_language_for_edit );
 
+		do_action( 'wpml_user_profile_options', $this->current_user->ID );
+
 		return ob_get_clean();
 	}
 
