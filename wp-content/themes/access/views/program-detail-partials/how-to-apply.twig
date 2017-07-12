@@ -62,7 +62,7 @@
                 <input type="hidden" name="url" value="{{ shareUrl }}">
                 <input type="hidden" name="hash" value="{{ shareHash }}">
                 <div class="share-form-controls">
-                  <input type="tel" name="to" placeholder="{{__('Telephone number', 'accessnyc-program-detail')}}" required>
+                  <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-program-detail')}}" required>
                   <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
                   {% include 'partials/share-form-spinner.twig' %}
                   <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
