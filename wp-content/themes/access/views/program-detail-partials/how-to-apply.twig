@@ -58,9 +58,9 @@
             <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-text">{{__('Text', 'accessnyc-program-detail')}}</a>
             <div id="share-by-text" class="share-form hidden">
               <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-                <input type="hidden" name="action" value="sms_send">
-                <input type="hidden" name="url" value="{{ shareUrl }}">
-                <input type="hidden" name="hash" value="{{ shareHash }}">
+                <input type="hidden" name="action" value="sms_send" readonly>
+                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
                 <div class="share-form-controls">
                   <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-program-detail')}}" required>
                   <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
@@ -74,9 +74,9 @@
             <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-email">{{__('Email', 'accessnyc-program-detail')}}</a>
             <div id="share-by-email" class="share-form hidden">
               <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-                <input type="hidden" name="action" value="email_send">
-                <input type="hidden" name="url" value="{{ shareUrl }}">
-                <input type="hidden" name="hash" value="{{ shareHash }}">
+                <input type="hidden" name="action" value="email_send" readonly>
+                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
                 <div class="share-form-controls">
                   <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-program-detail')}}" required>
                   <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
