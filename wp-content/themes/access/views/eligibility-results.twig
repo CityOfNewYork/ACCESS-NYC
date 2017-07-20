@@ -32,9 +32,9 @@
           <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
           <div id="share-by-sms" class="share-form hidden">
             <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
-              <input type="hidden" name="url" value="{{ shareUrl }}">
-              <input type="hidden" name="hash" value="{{ shareHash }}">
-              <input type="hidden" name="GUID" value="{{ getParams.guid }}">
+              <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+              <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
+              <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
               <div class="share-form-controls">
                 <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-results')}}">
                 <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
@@ -47,10 +47,10 @@
           <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
           <div id="share-by-email" class="share-form hidden">
             <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-              <input type="hidden" name="action" value="email_send">
-              <input type="hidden" name="url" value="{{ shareUrl }}">
-              <input type="hidden" name="hash" value="{{ shareHash }}">
-              <input type="hidden" name="GUID" value="{{ getParams.guid }}">
+              <input type="hidden" name="action" value="email_send" readonly>
+              <input type="hidden" name="url" value="{{ shareUrl }}"  readonly>
+              <input type="hidden" name="hash" value="{{ shareHash }}"  readonly>
+              <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
               <div class="share-form-controls">
                 <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-results')}}" required>
                 <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>

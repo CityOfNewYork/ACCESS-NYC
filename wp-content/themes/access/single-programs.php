@@ -7,7 +7,9 @@ $context = Timber::get_context();
 
 // Gets the url parameter on the page for navigating each section.
 if (isset($_GET['step'])) {
-  $context['step'] = htmlspecialchars($_GET['step']);
+  $context['step'] = urlencode(
+    validate_params('step', urldecode(htmlspecialchars($_GET['step'])))
+  );
 } else {
   $context['step'] = '';
 }
