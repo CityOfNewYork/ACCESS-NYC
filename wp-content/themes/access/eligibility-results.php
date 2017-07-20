@@ -39,7 +39,7 @@ if (isset($_GET['programs'])) {
 
 if (isset($_GET['categories'])) {
   $categoryBlob = urlencode(
-    validate('categories', urldecode(htmlspecialchars($_GET['categories'])))
+    validate_params('categories', urldecode(htmlspecialchars($_GET['categories'])))
   );
   $context['resultCategories'] = explode(',', $categoryBlob);
   $query['categories'] = $categoryBlob;
@@ -49,7 +49,7 @@ if (isset($_GET['categories'])) {
 
 if (isset($_GET['date'])) {
   $dateBlob = urlencode(
-    validate('date', urldecode(htmlspecialchars($_GET['date'])))
+    validate_params('date', urldecode(htmlspecialchars($_GET['date'])))
   );
   $context['resultDate'] = $dateBlob;
   $query['date'] = $dateBlob;
@@ -59,7 +59,7 @@ if (isset($_GET['date'])) {
 
 if (isset($_GET['guid'])) {
   $guidBlob = urlencode(
-    validate('guid', urldecode(htmlspecialchars($_GET['guid'])))
+    validate_params('guid', urldecode(htmlspecialchars($_GET['guid'])))
   );
   $context['guid'] = $guidBlob;
   $query['guid'] = $guidBlob;
