@@ -28,28 +28,39 @@ $query = array();
 
 // Gets the URL Parameters for the search value,
 if (isset($_GET['programs'])) {
-  $programBlob = htmlspecialchars($_GET['programs']);
+  $programBlob = urlencode(
+    validate_params('programs', urldecode(htmlspecialchars($_GET['programs'])))
+  );
   $context['resultPrograms'] = explode(',', $programBlob);
   $query['programs'] = $programBlob;
 } else {
   $context['resultPrograms'] = '';
 }
+
 if (isset($_GET['categories'])) {
-  $categoryBlob = htmlspecialchars($_GET['categories']);
+  $categoryBlob = urlencode(
+    validate_params('categories', urldecode(htmlspecialchars($_GET['categories'])))
+  );
   $context['resultCategories'] = explode(',', $categoryBlob);
   $query['categories'] = $categoryBlob;
 } else {
   $context['resultCategories'] = '';
 }
+
 if (isset($_GET['date'])) {
-  $dateBlob = htmlspecialchars($_GET['date']);
+  $dateBlob = urlencode(
+    validate_params('date', urldecode(htmlspecialchars($_GET['date'])))
+  );
   $context['resultDate'] = $dateBlob;
   $query['date'] = $dateBlob;
 } else {
   $context['resultDate'] = '';
 }
+
 if (isset($_GET['guid'])) {
-  $guidBlob = htmlspecialchars($_GET['guid']);
+  $guidBlob = urlencode(
+    validate_params('guid', urldecode(htmlspecialchars($_GET['guid'])))
+  );
   $context['guid'] = $guidBlob;
   $query['guid'] = $guidBlob;
 } else {

@@ -469,6 +469,18 @@ function my_jquery_enqueue() {
    wp_deregister_script('jquery');
 }
 
+function validate_params($namespace, $subject) {
+  $patterns = array(
+    'programs'=> '/^[A-Z0-9,]*$/',
+    'categories'=> '/^[a-z,-]*$/',
+    'date'=> '/^[0-9]*$/',
+    'guid'=> '/^[a-zA-Z0-9]{13,13}$/',
+    'step'=> '/^[a-z,-]*$/'
+  );
+  preg_match($patterns[$namespace], $subject, $matches);
+  return (isset($matches[0])) ? $matches[0] : ''; // fail silently
+}
+
 Routes::map('locations', function() {
   Routes::load('locations.php', null, null, 200);
 });
