@@ -48,7 +48,6 @@ if (isset($_GET['categories'])) {
 }
 
 if (isset($_GET['date'])) {
-  // is date
   $dateBlob = urlencode(
     validate('date', urldecode(htmlspecialchars($_GET['date'])))
   );
