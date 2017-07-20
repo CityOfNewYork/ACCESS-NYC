@@ -24,27 +24,34 @@ if ( ! class_exists( 'Timber' ) ) {
 $context = Timber::get_context();
 $programBlob = '';
 $categoryBlob = '';
+$query = array();
 
 // Gets the URL Parameters for the search value,
 if (isset($_GET['programs'])) {
-  $programBlob = $_GET['programs'];
+  $programBlob = htmlspecialchars($_GET['programs']);
   $context['resultPrograms'] = explode(',', $programBlob);
+  $query['programs'] = $programBlob;
 } else {
   $context['resultPrograms'] = '';
 }
 if (isset($_GET['categories'])) {
-  $categoryBlob = $_GET['categories'];
+  $categoryBlob = htmlspecialchars($_GET['categories']);
   $context['resultCategories'] = explode(',', $categoryBlob);
+  $query['categories'] = $categoryBlob;
 } else {
   $context['resultCategories'] = '';
 }
 if (isset($_GET['date'])) {
-  $context['resultDate'] = $_GET['programs'];
+  $dateBlob = htmlspecialchars($_GET['date']);
+  $context['resultDate'] = $dateBlob;
+  $query['date'] = $dateBlob;
 } else {
   $context['resultDate'] = '';
 }
 if (isset($_GET['guid'])) {
-  $context['guid'] = $_GET['guid'];
+  $guidBlob = htmlspecialchars($_GET['guid']);
+  $context['guid'] = $guidBlob;
+  $query['guid'] = $guidBlob;
 } else {
   $context['guid'] = '';
 }
@@ -81,11 +88,16 @@ $additionalProgramArgs = array(
 'meta_value'	=> $context['resultPrograms']
 );
 
+// Rebuild the query from entity stripped params
+$get = $query;
+$query = http_build_query($query);
+$query = (isset($query)) ? '?'.$query : '';
+
 // Share by email/sms fields.
 $context['shareAction'] = admin_url( 'admin-ajax.php' );
-$context['shareUrl'] = \SMNYC\get_current_url();
+$context['shareUrl'] = $params['link'].$query;
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
-$context['getParams'] = $_GET;
+$context['getParams'] = $get; // pass safe parameters
 
 $context['selectedPrograms'] = Timber::get_posts( $selectedProgramArgs );
 $context['additionalPrograms'] = Timber::get_posts( $additionalProgramArgs );

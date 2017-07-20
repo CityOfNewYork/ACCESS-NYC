@@ -482,5 +482,7 @@ Routes::map('eligibility', function() {
 });
 
 Routes::map('eligibility/results', function() {
-  Routes::load('eligibility-results.php', null, null, 200);
+  $params = array();
+  $params['link'] = home_url().'/eligibility/results/';
+  Routes::load('eligibility-results.php', $params, null, 200);
 });
