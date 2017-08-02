@@ -2,6 +2,14 @@
 * Utility classes
 */
 
+.f-left {
+  float: left
+}
+
+.m-0 {
+  margin: 0
+}
+
 .sr-only {
   @include sr-only();
 }

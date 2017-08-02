@@ -60,6 +60,11 @@ import Utility from 'modules/utility';
   }).on('click', '.js-toggle-filter', (e) => {
     e.preventDefault();
     $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
+  }).on('click', '.js-show-disclaimer', (e) => {
+    // Hides the search drawer in the main nav.
+    e.preventDefault();
+    console.log('Show Disclaimer!');
+    // $('#search').removeClass('active');
   });
 
   // On the search results page, submits the search form when a category is

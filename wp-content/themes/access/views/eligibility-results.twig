@@ -28,8 +28,7 @@
           <h4>{{__('Save your results.', 'accessnyc-results')}}</h4>
           <a class="btn btn-primary" href="javascript:window.print()">{{__('Print', 'accessnyc-results')}}</a>
 
-          {# Commenting out SMS share functionality until Twilio is set up. #}
-          <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
+          <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
           <div id="share-by-sms" class="share-form hidden">
             <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
               <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
@@ -59,6 +58,28 @@
               </div>
             </form>
           </div>
+
+          <div class="screener-disclaimer m-0">
+            <p>
+              <small>
+                <svg class="icon icon-info screener-disclaimer__icon screener-disclaimer__icon--pre f-left">
+                  <use xlink:href="#icon-info"></use>
+                </svg>
+                By providing your email address or phone number, you agree
+                to be contacted by the City of New York regarding your ACCESS
+                NYC public benefit screening results. Your activity on ACCESS
+                NYC is anonymous, but providing your phone number may identify
+                you and reveal that you used the website. To find out more about
+                how the City might use the data you share with ACCESS NYC, visit
+                the
+                <a href="http://www1.nyc.gov/home/terms-of-use.page" target="_blank">
+                Terms of Use for NYC.gov</a>, and
+                <a href="http://www1.nyc.gov/home/privacy-policy.page" target="_blank">
+                Privacy Policy for NYC.gov</a>.
+              </small>
+            </p>
+          </div>
+
         </div>
       </aside>
       <div class="content-body">

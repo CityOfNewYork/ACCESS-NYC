@@ -32,6 +32,7 @@ $font-path: '/wp-content/themes/access/assets/fonts';
 
 $em-base: 22;
 
+$font-size-xsmall: rem(12);
 $font-size-small: rem(16);
 $font-size-base: #{$em-base}px;
 $font-size-medium: rem(24);
@@ -112,6 +113,11 @@ $font-weight-bold: bold;
 @mixin typography-program-subheading() {
   color: $color-grey-mid;
   font: $font-weight-normal #{$font-size-small}/1.3 $font-family-sans;
+}
+
+@mixin typography-dislaimer-small() {
+  font-size: $font-size-xsmall;
+  line-height: 1.4;
 }
 
 /**
