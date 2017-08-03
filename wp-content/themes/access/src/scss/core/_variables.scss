@@ -2,6 +2,12 @@
 //
 
 /**
+ * Animation
+ */
+$animate-scss-speed: 0.75s !default;
+$animate-timing-function: cubic-bezier(0.23, 1, 0.32, 1) !default;
+
+/**
  * Colors
  */
 $color-black: #000;
@@ -149,10 +155,12 @@ $font-weight-bold: bold;
 /**
  * Breakpoints
  */
-$screen-desktop: 960px;
-$screen-tablet: 768px;
-$screen-mobile: 480px;
-$screen-sm-mobile: 400px;
+// Variables stored in ../variables.json
+$screen-desktop: $screen-desktop + 0px;
+$screen-desktop: $screen-desktop + 0px;
+$screen-tablet: $screen-tablet + 0px;
+$screen-tablet: $screen-tablet + 0px;
+$screen-mobile: $screen-mobile + 0px;
 
 $bp-desktop-up: new-breakpoint(min-width $screen-desktop);
 $bp-below-desktop: new-breakpoint(max-width ($screen-desktop - 1));

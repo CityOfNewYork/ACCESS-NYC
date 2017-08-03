@@ -28,8 +28,8 @@
           <h4>{{__('Save your results.', 'accessnyc-results')}}</h4>
           <a class="btn btn-primary" href="javascript:window.print()">{{__('Print', 'accessnyc-results')}}</a>
 
-          <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
-          <div id="share-by-sms" class="share-form hidden">
+          <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
+          <div id="share-by-sms" class="share-form js-needs-disclaimer hidden">
             <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
               <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
               <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
@@ -43,8 +43,8 @@
             </form>
           </div>
 
-          <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
-          <div id="share-by-email" class="share-form hidden">
+          <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
+          <div id="share-by-email" class="share-form js-needs-disclaimer hidden">
             <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
               <input type="hidden" name="action" value="email_send" readonly>
               <input type="hidden" name="url" value="{{ shareUrl }}"  readonly>
@@ -59,10 +59,10 @@
             </form>
           </div>
 
-          <div class="screener-disclaimer m-0">
+          <div id="js-disclaimer" class="screener-disclaimer m-0 hidden" aria-hidden="true">
             <p>
               <small>
-                <svg class="icon icon-info screener-disclaimer__icon screener-disclaimer__icon--pre f-left">
+                <svg class="icon icon-info screener-disclaimer__icon screener-disclaimer__icon--pre">
                   <use xlink:href="#icon-info"></use>
                 </svg>
                 By providing your email address or phone number, you agree

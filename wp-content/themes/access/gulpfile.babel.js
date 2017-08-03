@@ -42,7 +42,6 @@ function handleError() {
 
 // BUILD SUBTASKS
 // ---------------
-
 // Styles
 gulp.task('styles_dev', () => {
   return gulp.src([
@@ -64,7 +63,10 @@ gulp.task('styles', () => {
   return gulp.src([
     `${src}/scss/style.scss`,
     `${src}/scss/style-*.scss`
-  ])
+  ]).pipe($.jsonToSass({
+    jsonPath: `${src}/variables.json`,
+    scssPath: `${src}/_variables.json.scss`
+  }))
   .pipe($.sourcemaps.init())
   .pipe($.sass({
     includePaths: ['node_modules']
@@ -95,6 +97,8 @@ gulp.task('lint', () =>
 
 // Scripts
 gulp.task('scripts', () => {
+  // const d = require(`${src}/variables.json`);
+
   const b = browserify({
     entries: `${src}/js/main.js`,
     debug: true,
@@ -104,6 +108,7 @@ gulp.task('scripts', () => {
   return b.transform('babelify', {
     presets: ['es2015']
   })
+  // .transform($.browserifyData)
   .bundle()
   .pipe(sourcestream('main.js'))
   .pipe(buffer())

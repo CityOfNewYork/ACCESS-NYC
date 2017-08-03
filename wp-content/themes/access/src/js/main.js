@@ -12,6 +12,7 @@ import Utility from 'modules/utility';
   'use strict';
 
   const google = window.google;
+  const variables = require('../variables.json');
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
@@ -61,10 +62,23 @@ import Utility from 'modules/utility';
     e.preventDefault();
     $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
   }).on('click', '.js-show-disclaimer', (e) => {
-    // Hides the search drawer in the main nav.
     e.preventDefault();
-    console.log('Show Disclaimer!');
-    // $('#search').removeClass('active');
+    let $cnt = $('.js-needs-disclaimer.active').length;
+    let $el = $('#js-disclaimer');
+    let $hidden = ($cnt > 0) ? 'removeClass' : 'addClass';
+    let $animate = ($cnt > 0) ? 'addClass' : 'removeClass';
+    $el[$hidden]('hidden');
+    $el[$animate]('animated fadeInUp');
+    $el.attr('aria-hidden', ($cnt === 0));
+    // Scroll-to functionality for mobile
+    if (
+      window.scrollTo &&
+      $cnt != 0 &&
+      window.innerWidth < variables['screen-desktop']
+    ) {
+      let $target = $(e.target);
+      window.scrollTo(0, $target.offset().top - $target.data('scrollOffset'));
+    }
   });
 
   // On the search results page, submits the search form when a category is

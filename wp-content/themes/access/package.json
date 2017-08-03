@@ -28,6 +28,7 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.8.0",
     "browserify": "^11.0.0",
+    "browserify-data": "^0.2.0",
     "browserify-shim": "^3.8.10",
     "del": "^1.2.0",
     "dotenv": "^2.0.0",
@@ -43,6 +44,7 @@
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^2.3.0",
     "gulp-jshint": "^1.11.2",
+    "gulp-json-to-sass": "0.0.4",
     "gulp-load-plugins": "^1.4.0",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
@@ -56,6 +58,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "animate.scss": "0.0.6",
     "bourbon": "^4.2.7",
     "bourbon-neat": "^1.8.0",
     "cleave.js": "^0.7.23",
