@@ -10,7 +10,7 @@
 
 // PLUGINS
 // --------
-import 'dotenv/config'
+import 'dotenv/config';
 import browserify from 'browserify';
 import browserSync from 'browser-sync';
 import del from 'del';
@@ -97,18 +97,14 @@ gulp.task('lint', () =>
 
 // Scripts
 gulp.task('scripts', () => {
-  // const d = require(`${src}/variables.json`);
-
   const b = browserify({
     entries: `${src}/js/main.js`,
     debug: true,
     paths: ['node_modules',`${src}/js`]
   });
-
   return b.transform('babelify', {
     presets: ['es2015']
   })
-  // .transform($.browserifyData)
   .bundle()
   .pipe(sourcestream('main.js'))
   .pipe(buffer())
