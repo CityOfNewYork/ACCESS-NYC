@@ -12,6 +12,7 @@ import Utility from 'modules/utility';
   'use strict';
 
   const google = window.google;
+  /* eslint no-undef: "off" */
   const variables = require('../variables.json');
 
   // Get SVG sprite file.
