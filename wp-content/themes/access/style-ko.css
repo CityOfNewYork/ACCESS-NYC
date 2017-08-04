@@ -3644,6 +3644,21 @@ a.program-filter-item {
 .m-0 {
   margin: 0; }
 
+.c-black {
+  color: #000; }
+
+.c-grey-dark {
+  color: #172129; }
+
+.f-black {
+  fill: #000; }
+
+.f-grey-mid {
+  fill: #505c66; }
+
+.f-grey-dark {
+  fill: #172129; }
+
 .sr-only {
   border: 0;
   clip: rect(0, 0, 0, 0);
