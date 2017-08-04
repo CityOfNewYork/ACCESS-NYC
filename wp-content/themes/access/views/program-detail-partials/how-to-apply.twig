@@ -55,8 +55,8 @@
         <div class="program-detail-status-buttons">
           {# Commenting out SMS share functionality until Twilio is set up. #}
           <div class="program-detail-status-button">
-            <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-text">{{__('Text', 'accessnyc-program-detail')}}</a>
-            <div id="share-by-text" class="share-form hidden">
+            <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-text">{{__('Text', 'accessnyc-program-detail')}}</a>
+            <div id="share-by-text" class="share-form hidden js-needs-disclaimer">
               <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
                 <input type="hidden" name="action" value="sms_send" readonly>
                 <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
@@ -71,8 +71,8 @@
             </div>
           </div>
           <div class="program-detail-status-button">
-            <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-email">{{__('Email', 'accessnyc-program-detail')}}</a>
-            <div id="share-by-email" class="share-form hidden">
+            <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-program-detail')}}</a>
+            <div id="share-by-email" class="share-form hidden js-needs-disclaimer">
               <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
                 <input type="hidden" name="action" value="email_send" readonly>
                 <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
@@ -86,6 +86,9 @@
               </form>
             </div>
           </div>
+
+          {% include 'partials/share-form-disclaimer.twig' %}
+
         </div>
       </p>
     </div>
