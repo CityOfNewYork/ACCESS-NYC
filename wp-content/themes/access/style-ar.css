@@ -2750,11 +2750,22 @@ input:focus + .screener-radio-label::before {
     text-align: center; }
 
 .program-detail-status-buttons .program-detail-status-button {
-  display: inline-block;
-  margin-left: 20px;
+  margin-bottom: 20px;
   vertical-align: top; }
-  .program-detail-status-buttons .program-detail-status-button:last-child {
-    margin-left: 0; }
+  .program-detail-status-buttons .program-detail-status-button > .btn {
+    display: block; }
+  .program-detail-status-buttons .program-detail-status-button .share-form {
+    margin-bottom: 0px; }
+  @media screen and (min-width: 768px) {
+    .program-detail-status-buttons .program-detail-status-button {
+      display: inline-block;
+      width: 50%;
+      padding-right: 10px; } }
+
+@media screen and (min-width: 768px) {
+  .program-detail-status-buttons .program-detail-status-button + .program-detail-status-button {
+    padding-right: 0;
+    padding-left: 10px; } }
 
 .program-detail-what-you-need-to-include {
   background-color: #eef3f7;
@@ -3019,7 +3030,7 @@ a.program-filter-item {
   .screener-results-icon use {
     fill: #05ce7c; }
 
-.save-your-results .btn {
+.save-your-results > .btn {
   display: block;
   margin-bottom: 20px; }
 
@@ -3165,7 +3176,7 @@ a.program-filter-item {
   .share-toggle.active::after {
     position: absolute;
     bottom: -6px;
-    left: 1.5em;
+    left: 34px;
     height: 0;
     width: 0;
     border-left: 10px solid transparent;
@@ -3215,8 +3226,7 @@ a.program-filter-item {
   display: -ms-flexbox;
   display: flex;
   background: #fff;
-  border: 1px solid #505c66;
-  padding-left: 10px; }
+  border: 1px solid #505c66; }
   .error .share-form-controls {
     border-color: #c6252b; }
   .share-form-controls input {
@@ -3225,15 +3235,19 @@ a.program-filter-item {
     flex-grow: 1;
     -ms-flex-positive: 1;
     border: none;
-    min-width: 0; }
+    min-width: 0px;
+    width: 100%;
+    text-overflow: ellipsis;
+    padding-left: 0; }
   .share-form-controls .btn-submit {
     margin: 0;
     padding: 15px; }
     .success .share-form-controls .btn-submit {
       display: none; }
 
-.share-form__spinner {
-  flex: 0 0 69.89px; }
+.share-form-controls__right {
+  flex: 0 0 69.89px;
+  padding: 0 10px; }
 
 .site-footer {
   padding-top: 40px;

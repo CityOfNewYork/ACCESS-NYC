@@ -260,14 +260,33 @@
 
 .program-detail-status-buttons {
   .program-detail-status-button {
-    display: inline-block;
-    margin-#{$text-direction-end}: $spacing-base;
+
+    margin-bottom: 20px;
     vertical-align: top;
 
-    &:last-child {
-      margin-#{$text-direction-end}: 0;
+    > .btn {
+      display: block;
+    }
+
+    .share-form {
+      margin-bottom: 0px;
+    }
+
+    @include media($bp-tablet-up) {
+      display: inline-block;
+      width: 50%;
+      padding-right: $spacing-base/2;
+    }
+
+  }
+
+  @include media($bp-tablet-up) {
+    .program-detail-status-button + .program-detail-status-button {
+      padding-right: 0;
+      padding-left: $spacing-base/2;
     }
   }
+
 }
 
 .program-detail-what-you-need-to-include {
