@@ -140,6 +140,25 @@
   > p:last-child {
     margin-bottom: 0;
   }
+
+  small {
+    @include typography-dislaimer-small();
+    margin: 0;
+    display: inline-block;
+  }
+
+}
+
+.screener-disclaimer__icon {
+  width: 24px;
+  height: 24px
+}
+
+.screener-disclaimer__icon--pre {
+  float: left;
+  margin-right: 7px;
+  position: relative;
+  bottom: -3px
 }
 
 .screener-disclaimer-instruction {

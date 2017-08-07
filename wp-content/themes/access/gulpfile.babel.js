@@ -10,7 +10,7 @@
 
 // PLUGINS
 // --------
-import 'dotenv/config'
+import 'dotenv/config';
 import browserify from 'browserify';
 import browserSync from 'browser-sync';
 import del from 'del';
@@ -42,7 +42,6 @@ function handleError() {
 
 // BUILD SUBTASKS
 // ---------------
-
 // Styles
 gulp.task('styles_dev', () => {
   return gulp.src([
@@ -64,7 +63,10 @@ gulp.task('styles', () => {
   return gulp.src([
     `${src}/scss/style.scss`,
     `${src}/scss/style-*.scss`
-  ])
+  ]).pipe($.jsonToSass({
+    jsonPath: `${src}/variables.json`,
+    scssPath: `${src}/_variables.json.scss`
+  }))
   .pipe($.sourcemaps.init())
   .pipe($.sass({
     includePaths: ['node_modules']
@@ -100,7 +102,6 @@ gulp.task('scripts', () => {
     debug: true,
     paths: ['node_modules',`${src}/js`]
   });
-
   return b.transform('babelify', {
     presets: ['es2015']
   })

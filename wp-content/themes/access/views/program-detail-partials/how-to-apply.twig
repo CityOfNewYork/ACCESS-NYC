@@ -55,37 +55,43 @@
         <div class="program-detail-status-buttons">
           {# Commenting out SMS share functionality until Twilio is set up. #}
           <div class="program-detail-status-button">
-            <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-text">{{__('Text', 'accessnyc-program-detail')}}</a>
-            <div id="share-by-text" class="share-form hidden">
+            <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-text">{{__('Text', 'accessnyc-program-detail')}}</a>
+            <div id="share-by-text" class="share-form hidden js-needs-disclaimer">
               <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-                <input type="hidden" name="action" value="sms_send">
-                <input type="hidden" name="url" value="{{ shareUrl }}">
-                <input type="hidden" name="hash" value="{{ shareHash }}">
+                <input type="hidden" name="action" value="sms_send" readonly>
+                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
                 <div class="share-form-controls">
-                  <input type="tel" name="to" placeholder="{{__('Telephone number', 'accessnyc-program-detail')}}" required>
-                  <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
-                  {% include 'partials/share-form-spinner.twig' %}
-                  <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
+                  <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-program-detail')}}" required>
+                  <div class="share-form-controls__right">
+                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
+                    {% include 'partials/share-form-spinner.twig' %}
+                    <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
+                  </div>
                 </div>
               </form>
             </div>
-          </div>
-          <div class="program-detail-status-button">
-            <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-email">{{__('Email', 'accessnyc-program-detail')}}</a>
-            <div id="share-by-email" class="share-form hidden">
+          </div><div class="program-detail-status-button">
+            <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-program-detail')}}</a>
+            <div id="share-by-email" class="share-form hidden js-needs-disclaimer">
               <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-                <input type="hidden" name="action" value="email_send">
-                <input type="hidden" name="url" value="{{ shareUrl }}">
-                <input type="hidden" name="hash" value="{{ shareHash }}">
+                <input type="hidden" name="action" value="email_send" readonly>
+                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
                 <div class="share-form-controls">
                   <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-program-detail')}}" required>
-                  <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
-                  {% include 'partials/share-form-spinner.twig' %}
-                  <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
+                  <div class="share-form-controls__right">
+                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
+                    {% include 'partials/share-form-spinner.twig' %}
+                    <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
+                  </div>
                 </div>
               </form>
             </div>
           </div>
+
+          {% include 'partials/share-form-disclaimer.twig' %}
+
         </div>
       </p>
     </div>
