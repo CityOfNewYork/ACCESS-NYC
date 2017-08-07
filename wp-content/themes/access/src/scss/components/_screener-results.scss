@@ -44,7 +44,7 @@ $icon-size: 55px;
 }
 
 .save-your-results {
-  .btn {
+  > .btn {
     display: block;
     margin-bottom: $spacing-base;
   }
