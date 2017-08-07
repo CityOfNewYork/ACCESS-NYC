@@ -2731,7 +2731,8 @@ input:focus + .screener-radio-label::before {
   margin-right: 20px;
   margin-bottom: 20px;
   position: relative;
-  width: 36px; }
+  width: 36px;
+  flex: 0 0 36px; }
   .program-detail-status-icon:after {
     height: 36px;
     width: 36px;
