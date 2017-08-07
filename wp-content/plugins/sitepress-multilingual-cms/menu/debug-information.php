@@ -1,6 +1,6 @@
 <?php
 
-include_once ICL_PLUGIN_PATH . '/inc/functions-debug-information.php';
+include_once WPML_PLUGIN_PATH . '/inc/functions-debug-information.php';
 $debug_info = get_debug_info();
 $debug_data = $debug_info->run();
 

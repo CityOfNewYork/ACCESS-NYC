@@ -2,30 +2,38 @@
 
 class WPML_Localization {
 
-	public function get_theme_localization_stats() {
-		$theme_localization_domains = icl_get_sub_setting( 'st', 'theme_localization_domains' );
+	/**
+	 * WPML_Localization constructor.
+	 *
+	 * @param wpdb $wpdb
+	 */
+	public function __construct( wpdb $wpdb ) {
+		$this->wpdb = $wpdb;
+	}
+
+	public function get_theme_localization_stats( $theme_localization_domains = array() ) {
+		if ( empty( $theme_localization_domains ) || ! is_array( $theme_localization_domains ) ) {
+			$theme_localization_domains = icl_get_sub_setting( 'st', 'theme_localization_domains' );
+		}
 		return $this->get_domain_stats( $theme_localization_domains, 'theme' );
 	}
-	
+
 	private function get_domain_stats( $localization_domains, $default, $no_wordpress = false ) {
-		global $wpdb;
-		
-		$results                    = array();
+		$results = array();
 		if ( $localization_domains ) {
 			$domains = array();
 
 			foreach ( (array) $localization_domains as $domain ) {
-				if ( ! ($no_wordpress && $domain == 'WordPress' ) ) {
-					$domains[ ] = $domain ? $domain : $default;
+				if ( ! ( $no_wordpress && 'WordPress' === $domain ) ) {
+					$domains[] = $domain ? $domain : $default;
 				}
 			}
 			if ( ! empty( $domains ) ) {
-				$results = $wpdb->get_results( "
-		            SELECT context, status, COUNT(id) AS c
-		            FROM {$wpdb->prefix}icl_strings
-		            WHERE context IN ('" . join( "','", $domains ) . "')
-		            GROUP BY context, status
-		        " );
+				$sql = "SELECT context, status, COUNT(id) AS c 
+						FROM {$this->wpdb->prefix}icl_strings 
+						WHERE context IN ('" . join( "','", $domains ) . "') 
+						GROUP BY context, status";
+				$results = $this->wpdb->get_results( $sql );
 			}
 		}
 
@@ -33,21 +41,31 @@ class WPML_Localization {
 	}
 
 	public function get_plugin_localization_stats() {
-		$plugin_localization_domains = icl_get_sub_setting( 'st', 'plugin_localization_domains', array() );
-		$results = array();
-		
+		$plugin_localization_domains = apply_filters( 'wpml_sub_setting', array(), 'st', 'plugin_localization_domains' );
+		$results                     = array();
+		$all_domains                 = array();
+
 		foreach ( $plugin_localization_domains as $plugin => $localization_domains ) {
-			$results[ $plugin ] = $this->get_domain_stats( array_keys( $localization_domains ), 'plugin', true );
+			$all_domains = array_merge( $all_domains, array_keys( $localization_domains ) );
 		}
+
+		$all_results = $this->get_domain_stats( $all_domains, 'plugin', true );
+		foreach ( $plugin_localization_domains as $plugin => $localization_domains ) {
+			$domains = array_keys( $localization_domains );
+			foreach ( $domains as $domain ) {
+				if ( array_key_exists( $domain, $all_results ) ) {
+					$results[ $plugin ][ $domain ] = $all_results[ $domain ];
+				}
+			}
+		}
+
 		return $results;
 	}
 
 	public function get_wrong_plugin_localization_stats() {
-		global $wpdb;
-
-		$results = $wpdb->get_results( "
+		$results = $this->wpdb->get_results( "
 	        SELECT context, status, COUNT(id) AS c
-	        FROM {$wpdb->prefix}icl_strings
+	        FROM {$this->wpdb->prefix}icl_strings
 	        WHERE context LIKE ('plugin %')
 	        GROUP BY context, status
 	    " );
@@ -56,11 +74,9 @@ class WPML_Localization {
 	}
 	
 	public function get_wrong_theme_localization_stats() {
-		global $wpdb;
-
-		$results = $wpdb->get_results( "
+		$results = $this->wpdb->get_results( "
 	        SELECT context, status, COUNT(id) AS c
-	        FROM {$wpdb->prefix}icl_strings
+	        FROM {$this->wpdb->prefix}icl_strings
 	        WHERE context LIKE ('theme %')
 	        GROUP BY context, status
 	    " );
@@ -77,15 +93,14 @@ class WPML_Localization {
 	}
 	
 	public function does_theme_require_rescan() {
-		global $wpdb;
-	
+
 		$theme_path = TEMPLATEPATH;
 		$old_theme_context = 'theme ' . basename( $theme_path );
 
 
-		$result = $wpdb->get_var( $wpdb->prepare( "
+		$result = $this->wpdb->get_var( $this->wpdb->prepare( "
 	        SELECT COUNT(id) AS c
-	        FROM {$wpdb->prefix}icl_strings
+	        FROM {$this->wpdb->prefix}icl_strings
 	        WHERE context = %s",
 			$old_theme_context
 			) );

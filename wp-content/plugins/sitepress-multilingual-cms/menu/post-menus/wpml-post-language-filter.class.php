@@ -1,5 +1,5 @@
 <?php
-require_once ICL_PLUGIN_PATH . '/menu/wpml-language-filter-bar.class.php';
+require_once WPML_PLUGIN_PATH . '/menu/wpml-language-filter-bar.class.php';
 
 class WPML_Post_Language_Filter extends WPML_Language_Filter_Bar {
 

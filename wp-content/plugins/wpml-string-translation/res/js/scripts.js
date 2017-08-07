@@ -72,7 +72,6 @@ jQuery(document).ready(function(){
             }
         }
     );
-    icl_auto_download_mo.init();
 });
 
 function icl_st_toggler(){
@@ -139,14 +138,28 @@ function icl_st_filter_context(){
 }
 
 function icl_st_filter_search(){
-    var val = jQuery('#icl_st_filter_search').val();
-    var exact_match = jQuery('#icl_st_filter_search_em').attr('checked');
-    var qs = val != '' ? '&search=' + encodeURIComponent(val) : '';
-     qs = qs.replace(/&em=1/g,'');
-    if(exact_match){
-        qs += '&em=1';
-    }
-    location.href=location.href.replace(/#(.*)$/,'').replace(/&paged=([0-9]+)/,'').replace(/&updated=true/,'').replace(/&search=(.*)/g,'') + qs;
+	var context      = jQuery('select[name="icl_st_filter_context"]').val(),
+		search_text  = jQuery('#icl_st_filter_search').val(),
+		exact_match  = jQuery('#icl_st_filter_search_em').attr('checked'),
+		query_string = search_text != '' ? '&search=' + encodeURIComponent(search_text) : '',
+		url          = location.href;
+
+	query_string = query_string.replace(/&em=1/g,'');
+
+	if(exact_match){
+		query_string += '&em=1';
+	}
+
+	url = url.replace(/#(.*)$/,'')
+			.replace(/&paged=([0-9]+)/,'')
+			.replace(/&updated=true/,'')
+			.replace(/&search=(.*)/g,'') + query_string;
+
+	if ( '' == context ) {
+		url = url.replace(/&context=(.*)/g,'');
+	}
+
+	location.href = url;
 }
 
 function icl_st_filter_search_remove(){
@@ -405,15 +418,25 @@ function icl_st_ow_export_close(){
 }
 
 function iclThemeLocalizationRescan(){
-    var thisb = jQuery(this);
+    var thisb = jQuery(this)
+        data = {};
     thisb.next().fadeIn();
-    var data = "action=st_theme_localization_rescan";
+    data['action'] = 'st_theme_localization_rescan';
     if(jQuery('#icl_load_mo_themes').attr('checked')){
-        data += '&icl_load_mo=1';
+        data['icl_load_mo'] = 1;
     }
 	if (jQuery('input[name="wpml_st_theme_localization_type_wpml_td"]').prop('checked')) {
-		data += '&auto_text_domain=1';
+        data['auto_text_domain'] = 1;
 	}
+
+	var selected_themes = jQuery('#wpml_themes_form').closest('form').find('input:checkbox:checked');
+    if( selected_themes.length ) {
+        data['theme'] = [];
+        selected_themes.each(function(index, element) {
+            data['theme'].push( jQuery(element).val() );
+        });
+    }
+
     jQuery.ajax({
         type: "POST",
         url: ajaxurl,
@@ -422,7 +445,7 @@ function iclThemeLocalizationRescan(){
             thisb.next().fadeOut();
             var spl = msg.split('|');
             jQuery('#icl_tl_scan_stats').html(spl[1]).fadeIn();
-            jQuery("#icl_strings_in_theme_wrap").load(location.href.replace(/#(.*)$/,'') + ' #icl_strings_in_theme');
+            jQuery("#icl_strings_in_theme_wrap").load(location.href.replace(/#(.*)$/,'') + ' #wpml_strings_in_themes');
         }
     });    
     return false;
@@ -442,7 +465,7 @@ function iclThemeLocalizationRescanP(){
             thisf.contents().find('input:submit').removeAttr('disabled');
             var spl = msg.split('|');
             jQuery('#icl_tl_scan_stats_p').html(spl[1]).fadeIn();
-            jQuery("#icl_strings_in_plugins_wrap").load(location.href.replace(/#(.*)$/,'') + ' #icl_strings_in_plugins');
+            jQuery("#icl_strings_in_plugins_wrap").load(location.href.replace(/#(.*)$/,'') + ' #wpml_strings_in_plugins');
         }
     });    
     return false;
@@ -486,68 +509,3 @@ function icl_st_change_service(){
     }
     
 }
-
-var icl_auto_download_mo = {
-    
-    init: function(){
-        
-        icl_auto_download_mo.list_form_setup();
-        
-        jQuery(document).delegate('#icl_auto_download_mo', 'submit', icl_auto_download_mo.save_preferences);
-        jQuery(document).delegate('#icl_adm_update_check', 'click', icl_auto_download_mo.updates_check);
-        
-    },
-    
-    save_preferences: function(){
-        var thisf = jQuery(this);
-        var data = thisf.serialize();        
-        thisf.find('input:last').after(icl_ajxloaderimg);
-        jQuery.ajax({
-            type: "POST",
-            url: ajaxurl,
-            data: data,
-            dataType: 'json',
-            success: function(msg){
-                if(msg.enabled){
-                    jQuery('#icl_adm_update_check').fadeIn();
-                }else{
-                    jQuery('#icl_adm_update_check').fadeOut();
-                }                         
-                thisf.find('input:last').next().hide();                
-                try{
-                    jQuery('#icl_adm_options').pointer('close');
-
-                } catch (err) {
-                }
-                location.href = location.href.replace(/#(.+)$/, '');
-                
-            }
-        });    
-        return false;
-    },
-        
-    list_form_setup: function(){
-        
-        jQuery(document).delegate('#icl_admo_list_table thead :checkbox', 'change', function(){
-            if(jQuery(this).is(':checked')){
-                jQuery('#icl_admo_list_table').find(':checkbox').attr('checked', 'checked');
-            }else{
-                jQuery('#icl_admo_list_table').find(':checkbox').removeAttr('checked');
-            }
-        })
-    },
-    
-    updates_check: function(){
-        jQuery('#icl_adm_updates').fadeIn().html(icl_ajxloaderimg);
-        jQuery.ajax({
-            type: "POST",
-            url: ajaxurl,
-            data: {action: 'icl_adm_updates_check'},
-            dataType: 'json',
-            success: function(msg){
-                jQuery('#icl_adm_updates').html(msg.html);        
-            }
-        });    
-        return false;
-    }
-};

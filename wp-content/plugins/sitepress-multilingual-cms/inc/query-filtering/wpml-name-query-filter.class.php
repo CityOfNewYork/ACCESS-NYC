@@ -64,6 +64,7 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 				if ( isset( $pid ) ) {
 					if ( ! isset( $page_query->queried_object_id ) || $pid != $page_query->queried_object_id ) {
 						$page_query = $this->maybe_adjust_query_by_pid( $page_query, $pid, $index );
+						break;
 					} else {
 						unset( $pid );
 					}

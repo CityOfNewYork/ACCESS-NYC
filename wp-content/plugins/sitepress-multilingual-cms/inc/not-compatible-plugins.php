@@ -30,14 +30,14 @@ if(!empty($icl_ncp_plugins)){
 }
 
 $filtered_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE);
-if( 0 === strcmp( $filtered_page, ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) || isset($pagenow) && $pagenow=='index.php'){
+if( 0 === strcmp( $filtered_page, WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) || isset($pagenow) && $pagenow=='index.php'){
     $icl_ncp_plugins2 = array(
         'wp-no-category-base/no-category-base.php'
     );  
     $active_plugins = get_option('active_plugins');
     $icl_ncp_plugins2 = array_intersect($icl_ncp_plugins2, $active_plugins);
     if(!empty($icl_ncp_plugins2)){
-	    if( 0 === strcmp( $filtered_page, ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) ){
+	    if( 0 === strcmp( $filtered_page, WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) ){
             add_action('admin_notices', 'icl_incomp_plugins_warn2');
 		    function icl_incomp_plugins_warn2() {
 			    global $icl_ncp_plugins2;

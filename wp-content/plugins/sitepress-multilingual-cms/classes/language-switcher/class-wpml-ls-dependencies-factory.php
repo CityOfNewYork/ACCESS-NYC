@@ -32,6 +32,9 @@ class WPML_LS_Dependencies_Factory {
 	/** @var WPML_LS_Shortcodes */
 	private $shortcodes;
 
+	/** @var  WPML_LS_Actions */
+	private $actions;
+
 	/**
 	 * WPML_LS_Dependencies_Factory constructor.
 	 *
@@ -145,6 +148,17 @@ class WPML_LS_Dependencies_Factory {
 		}
 
 		return $this->shortcodes;
+	}
+
+	/**
+	 * @return WPML_LS_Shortcodes
+	 */
+	public function actions() {
+		if ( ! $this->actions ) {
+			$this->actions = new WPML_LS_Actions( $this->settings(), $this->render(), $this->sitepress() );
+		}
+
+		return $this->actions;
 	}
 
 }

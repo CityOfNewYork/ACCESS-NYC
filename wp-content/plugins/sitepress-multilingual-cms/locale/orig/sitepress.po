@@ -757,7 +757,7 @@ msgid "WPML"
 msgstr ""
 
 # 
-# add_submenu_page( $main_page, __( 'Languages', 'sitepress' ), __( 'Languages', 'sitepress' ), 'wpml_manage_languages', basename( ICL_PLUGIN_PATH ) . '/menu/languages.php' );
+# add_submenu_page( $main_page, __( 'Languages', 'sitepress' ), __( 'Languages', 'sitepress' ), 'wpml_manage_languages', basename( WPML_PLUGIN_PATH ) . '/menu/languages.php' );
 # //By Gen, moved Translation management after language, because problems with permissions
 
 msgid "Languages"
@@ -765,19 +765,19 @@ msgstr ""
 
 # if ( $wpml_setup_is_complete ) {
 # add_submenu_page( $main_page, __( 'Theme and plugins localization', 'sitepress' ), __( 'Theme and plugins localization', 'sitepress' ), 'wpml_manage_theme_and_plugin_localization',
-# basename( ICL_PLUGIN_PATH )
+# basename( WPML_PLUGIN_PATH )
 
 msgid "Theme and plugins localization"
 msgstr ""
 
 # if ( ! defined( 'WPML_TM_VERSION' ) ) {
-# add_submenu_page( $main_page, __( 'Translation options', 'sitepress' ), __( 'Translation options', 'sitepress' ), 'wpml_manage_translation_options', basename( ICL_PLUGIN_PATH ) . '/menu/translation-options.php' );
+# add_submenu_page( $main_page, __( 'Translation options', 'sitepress' ), __( 'Translation options', 'sitepress' ), 'wpml_manage_translation_options', basename( WPML_PLUGIN_PATH ) . '/menu/translation-options.php' );
 # }
 
 msgid "Translation options"
 msgstr ""
 
-# $troubleshooting_url  = admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php' );
+# $troubleshooting_url  = admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' );
 # $troubleshooting_link = '<a href="' . $troubleshooting_url . '" title="' . esc_attr( __( 'Troubleshooting', 'sitepress' ) ) . '">' . __( 'Troubleshooting', 'sitepress' ) . '</a>';
 # $message = '';
 
@@ -813,13 +813,13 @@ msgid "This warning will disappear once this issue is fixed."
 msgstr ""
 
 # 
-# add_submenu_page( $main_page, __( 'Support', 'sitepress' ), __( 'Support', 'sitepress' ), 'wpml_manage_support', ICL_PLUGIN_FOLDER . '/menu/support.php' );
-# $this->troubleshooting_menu(ICL_PLUGIN_FOLDER . '/menu/support.php');
+# add_submenu_page( $main_page, __( 'Support', 'sitepress' ), __( 'Support', 'sitepress' ), 'wpml_manage_support', WPML_PLUGIN_FOLDER . '/menu/support.php' );
+# $this->troubleshooting_menu(WPML_PLUGIN_FOLDER . '/menu/support.php');
 
 msgid "Support"
 msgstr ""
 
-# $submenu_slug = basename( ICL_PLUGIN_PATH ) . '/menu/debug-information.php';
+# $submenu_slug = basename( WPML_PLUGIN_PATH ) . '/menu/debug-information.php';
 # add_submenu_page( $main_page, __( 'Debug information', 'sitepress' ), __( 'Debug information', 'sitepress' ), 'wpml_manage_troubleshooting', $submenu_slug );
 # return $submenu_slug;
 
@@ -827,7 +827,7 @@ msgid "Debug information"
 msgstr ""
 
 # if ( $this->setup() ) {
-# add_submenu_page( $main_page, __( 'Taxonomy Translation', 'sitepress' ), __( 'Taxonomy Translation', 'sitepress' ), 'wpml_manage_taxonomy_translation', ICL_PLUGIN_FOLDER . '/menu/taxonomy-translation.php', array( $this, 'taxonomy_translation_page' ) );
+# add_submenu_page( $main_page, __( 'Taxonomy Translation', 'sitepress' ), __( 'Taxonomy Translation', 'sitepress' ), 'wpml_manage_taxonomy_translation', WPML_PLUGIN_FOLDER . '/menu/taxonomy-translation.php', array( $this, 'taxonomy_translation_page' ) );
 # }
 
 msgid "Taxonomy Translation"
@@ -1093,7 +1093,7 @@ msgid "You need to configure WPML before you can start translating."
 msgstr ""
 
 # <input type="hidden" id="icl_dismiss_help_nonce" value="<?php echo $icl_dhn = wp_create_nonce( 'dismiss_help_nonce' ) ?>"/>
-# <a href="admin.php?page=<?php echo basename( ICL_PLUGIN_PATH ) . '/menu/languages.php' ?>" class="button-primary"><?php _e( 'Configure WPML', 'sitepress' ) ?></a>&nbsp;
+# <a href="admin.php?page=<?php echo basename( WPML_PLUGIN_PATH ) . '/menu/languages.php' ?>" class="button-primary"><?php _e( 'Configure WPML', 'sitepress' ) ?></a>&nbsp;
 # <a href="https://wpml.org/documentation/getting-started-guide/?utm_source=wpmlplugin&utm_medium=wpadmin&utm_term=getting-started&utm_content=getting-started&utm_campaign=wpml" target="_blank">
 
 msgid "Configure WPML"
@@ -2943,14 +2943,14 @@ msgid "No"
 msgstr ""
 
 # <p style="margin-top: 20px;">
-# <?php printf( esc_html__( 'For advanced access or to completely uninstall WPML and remove all language information, use the %stroubleshooting%s page.', 'sitepress' ), '<a href="' . esc_url( admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) ) . '">', '</a>' ); ?>
+# <?php printf( esc_html__( 'For advanced access or to completely uninstall WPML and remove all language information, use the %stroubleshooting%s page.', 'sitepress' ), '<a href="' . esc_url( admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) ) . '">', '</a>' ); ?>
 # </p>
 
 msgid "For advanced access or to completely uninstall WPML and remove all language information, use the %stroubleshooting%s page."
 msgstr ""
 
 # <p style="margin-top: 20px;">
-# <?php printf( esc_html__( 'For retrieving debug information if asked by support person, use the %sdebug information%s page.', 'sitepress' ), '<a href="' . esc_url( admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/debug-information.php' ) ) . '">', '</a>' ); ?>
+# <?php printf( esc_html__( 'For retrieving debug information if asked by support person, use the %sdebug information%s page.', 'sitepress' ), '<a href="' . esc_url( admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/debug-information.php' ) ) . '">', '</a>' ); ?>
 # </p>
 
 msgid "For retrieving debug information if asked by support person, use the %sdebug information%s page."
@@ -4245,7 +4245,7 @@ msgstr ""
 msgid "This function is available through the Network Admin section."
 msgstr ""
 
-# network_admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/network.php' )
+# network_admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/network.php' )
 # ) ?>"><?php _e( 'Go to WPML Network settings.', 'sitepress' ) ?></a>
 # <p><small><?php _e( 'Note: WPML must be activated on the primary site or must be network activated.', 'sitepress' ); ?></small></p>
 
@@ -5315,13 +5315,13 @@ msgstr ""
 
 # </table>
 # <span class="icl_error_text icl_edit_languages_show" style="display: none; margin:10px;"><p><?php _e('Please note: language codes cannot be changed after adding languages. Make sure you enter the correct code.', 'sitepress'); ?></p></span>
-# <p class="submit"><a href="admin.php?page=<?php echo ICL_PLUGIN_FOLDER ?>/menu/languages.php">&laquo;&nbsp;<?php _e('Back to languages', 'sitepress'); ?></a></p>
+# <p class="submit"><a href="admin.php?page=<?php echo WPML_PLUGIN_FOLDER ?>/menu/languages.php">&laquo;&nbsp;<?php _e('Back to languages', 'sitepress'); ?></a></p>
 
 msgid "Please note: language codes cannot be changed after adding languages. Make sure you enter the correct code."
 msgstr ""
 
 # <span class="icl_error_text icl_edit_languages_show" style="display: none; margin:10px;"><p><?php _e('Please note: language codes cannot be changed after adding languages. Make sure you enter the correct code.', 'sitepress'); ?></p></span>
-# <p class="submit"><a href="admin.php?page=<?php echo ICL_PLUGIN_FOLDER ?>/menu/languages.php">&laquo;&nbsp;<?php _e('Back to languages', 'sitepress'); ?></a></p>
+# <p class="submit"><a href="admin.php?page=<?php echo WPML_PLUGIN_FOLDER ?>/menu/languages.php">&laquo;&nbsp;<?php _e('Back to languages', 'sitepress'); ?></a></p>
 # 
 
 msgid "Back to languages"
@@ -5362,7 +5362,7 @@ msgstr ""
 msgid "Use flag from WPML"
 msgstr ""
 
-# <a href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/languages.php&amp;trop=1&amp;action=delete-language&amp;id=' .
+# <a href="<?php echo admin_url('admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/languages.php&amp;trop=1&amp;action=delete-language&amp;id=' .
 # $lang['id'] . '&amp;icl_nonce=' . wp_create_nonce('delete-language' . $lang['id'])) ?>" title="<?php esc_attr_e('Delete', 'sitepress')
 # ?>" onclick="if(!confirm('<?php echo esc_js(sprintf(__('Are you sure you want to delete this language?%sALL the data associated with this language will be ERASED!', 'sitepress'), "\n"))
 
@@ -5411,7 +5411,7 @@ msgstr ""
 msgid "HTTP code: %s (%s)"
 msgstr ""
 
-# basename ( ICL_PLUGIN_PATH ) . '/menu/network.php',
+# basename ( WPML_PLUGIN_PATH ) . '/menu/network.php',
 # __ ( 'Network settings', 'sitepress' ),
 # __ ( 'Network settings', 'sitepress' ),
 
@@ -5728,7 +5728,7 @@ msgstr ""
 
 # $stop = 0;
 # $message = __('Starting the upgrade process...', 'sitepress');
-# include_once ICL_PLUGIN_PATH . '/inc/upgrade-functions/2.0.0/stepper.php';
+# include_once WPML_PLUGIN_PATH . '/inc/upgrade-functions/2.0.0/stepper.php';
 
 msgid "Starting the upgrade process..."
 msgstr ""
@@ -5797,7 +5797,7 @@ msgid "add translation"
 msgstr ""
 
 # $langsel .= '<div class="howto icl_nav_menu_text" style="float:right;">';
-# $langsel .= '<div><a href="'.admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php').'">' . __('Synchronize menus between languages.', 'sitepress') . '</a></div>';
+# $langsel .= '<div><a href="'.admin_url('admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php').'">' . __('Synchronize menus between languages.', 'sitepress') . '</a></div>';
 # $langsel .= '</div>';
 
 msgid "Synchronize menus between languages."
@@ -6028,7 +6028,7 @@ msgid "%s is not translated. %sClick here to make this post type translatable.%s
 msgstr ""
 
 # if ( $file == $this_plugin ) {
-# $links[ ] = '<a href="admin.php?page=' . basename( ICL_PLUGIN_PATH ) . '/menu/languages.php">' . __( 'Configure', 'sitepress' ) . '</a>';
+# $links[ ] = '<a href="admin.php?page=' . basename( WPML_PLUGIN_PATH ) . '/menu/languages.php">' . __( 'Configure', 'sitepress' ) . '</a>';
 # }
 
 msgid "Configure"

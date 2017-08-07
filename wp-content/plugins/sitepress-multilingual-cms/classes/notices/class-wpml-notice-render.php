@@ -1,8 +1,6 @@
 <?php
 
 /**
- * @deprecated This file should be removed in WPML 3.8.0: it has been kept to allow error-less updates from pre 3.6.2.
- * @since 3.6.2
  * @author OnTheGo Systems
  */
 class WPML_Notice_Render {

@@ -1,5 +1,5 @@
 <?php
-require ICL_PLUGIN_PATH . '/inc/taxonomy-term-translation/nav-menu-translation/wpml-nav-menu-actions.class.php';
+require WPML_PLUGIN_PATH . '/inc/taxonomy-term-translation/nav-menu-translation/wpml-nav-menu-actions.class.php';
 
 class WPML_Nav_Menu {
     private $current_menu;
@@ -138,7 +138,7 @@ class WPML_Nav_Menu {
 			}
 			
 			global $icl_menus_sync,$wpdb, $wpml_post_translations, $wpml_term_translations, $sitepress;
-			include_once ICL_PLUGIN_PATH . '/inc/wp-nav-menus/menus-sync.php';
+			include_once WPML_PLUGIN_PATH . '/inc/wp-nav-menus/menus-sync.php';
 			$icl_menus_sync = new ICLMenusSync( $sitepress, $wpdb, $wpml_post_translations, $wpml_term_translations );
 			$icl_menus_sync->init( isset( $_SESSION[ 'wpml_menu_sync_menu' ] ) ? $_SESSION[ 'wpml_menu_sync_menu' ] : null );
 			$results = $icl_menus_sync->do_sync( $_POST['sync']);
@@ -152,7 +152,7 @@ class WPML_Nav_Menu {
 
 	public function get_links_for_menu_strings_translation_ajax() {
 		global $icl_menus_sync, $wpml_post_translations, $wpml_term_translations;
-		include_once ICL_PLUGIN_PATH . '/inc/wp-nav-menus/menus-sync.php';
+		include_once WPML_PLUGIN_PATH . '/inc/wp-nav-menus/menus-sync.php';
 		$icl_menus_sync = new ICLMenusSync( $this->sitepress, $this->wpdb, $wpml_post_translations, $wpml_term_translations );
 		wp_send_json_success( $icl_menus_sync->get_links_for_menu_strings_translation() );
 	}
@@ -162,10 +162,10 @@ class WPML_Nav_Menu {
 		global $sitepress;
 		if(!isset($sitepress) || !$sitepress->get_setting( 'setup_complete' )) return;
 
-		$top_page = apply_filters('icl_menu_main_page', ICL_PLUGIN_FOLDER.'/menu/languages.php');
+		$top_page = apply_filters('icl_menu_main_page', WPML_PLUGIN_FOLDER.'/menu/languages.php');
         add_submenu_page( $top_page, 
             __( 'WP Menus Sync', 'sitepress' ), __( 'WP Menus Sync', 'sitepress' ), 
-            'wpml_manage_wp_menus_sync', ICL_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php' );
+            'wpml_manage_wp_menus_sync', WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php' );
     }
 
 	/**
@@ -340,7 +340,7 @@ class WPML_Nav_Menu {
 						}
             $langsel .= '</div><br />';    
             $langsel .= '<div class="howto icl_nav_menu_text" style="float:right;">';    
-            $langsel .= '<div><a href="'.admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php').'">' . __('Synchronize menus between languages.', 'sitepress') . '</a></div>';
+            $langsel .= '<div><a href="'.admin_url('admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php').'">' . __('Synchronize menus between languages.', 'sitepress') . '</a></div>';
             $langsel .= '</div>';    
             
         }
@@ -743,7 +743,7 @@ class WPML_Nav_Menu {
 
 	private function setup_menu_synchronization() {
 		global $icl_menus_sync, $wpml_post_translations, $wpml_term_translations;
-		include_once ICL_PLUGIN_PATH . '/inc/wp-nav-menus/menus-sync.php';
+		include_once WPML_PLUGIN_PATH . '/inc/wp-nav-menus/menus-sync.php';
 		$icl_menus_sync = new ICLMenusSync( $this->sitepress, $this->wpdb, $wpml_post_translations, $wpml_term_translations );
 	}
 

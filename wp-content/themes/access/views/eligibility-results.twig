@@ -27,35 +27,44 @@
         <div class="save-your-results">
           <h4>{{__('Save your results.', 'accessnyc-results')}}</h4>
           <a class="btn btn-primary" href="javascript:window.print()">{{__('Print', 'accessnyc-results')}}</a>
-          {# Commenting out SMS share functionality until Twilio is set up. #}
-          {# <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
-          <div id="share-by-sms" class="share-form hidden">
-            <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
-              <input type="hidden" name="url" value="{{ shareUrl }}">
-              <input type="hidden" name="hash" value="{{ shareHash }}">
-              <input type="hidden" name="GUID" value="{{ getParams.guid }}">
-              <div class="share-form-controls">
-                <input type="tel" name="to" placeholder="{{__('Telephone number', 'accessnyc-results')}}" required>
-                <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
-                <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
-              </div>
-            </form>
-          </div> #}
 
-          <a class="btn btn-primary share-toggle js-simple-toggle" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
-          <div id="share-by-email" class="share-form hidden">
-            <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-              <input type="hidden" name="action" value="email_send">
-              <input type="hidden" name="url" value="{{ shareUrl }}">
-              <input type="hidden" name="hash" value="{{ shareHash }}">
-              <input type="hidden" name="GUID" value="{{ getParams.guid }}">
+          <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
+          <div id="share-by-sms" class="share-form js-needs-disclaimer hidden">
+            <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
+              <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+              <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
+              <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
               <div class="share-form-controls">
-                <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-results')}}" required>
-                <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
-                <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
+                <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-results')}}">
+                <div class="share-form-controls__right">
+                  <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
+                  {% include 'partials/share-form-spinner.twig' %}
+                  <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
+                </div>
               </div>
             </form>
           </div>
+
+          <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
+          <div id="share-by-email" class="share-form js-needs-disclaimer hidden">
+            <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
+              <input type="hidden" name="action" value="email_send" readonly>
+              <input type="hidden" name="url" value="{{ shareUrl }}"  readonly>
+              <input type="hidden" name="hash" value="{{ shareHash }}"  readonly>
+              <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
+              <div class="share-form-controls">
+                <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-results')}}" required>
+                <div class="share-form-controls__right">
+                  <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
+                  {% include 'partials/share-form-spinner.twig' %}
+                  <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          {% include 'partials/share-form-disclaimer.twig' %}
+
         </div>
       </aside>
       <div class="content-body">

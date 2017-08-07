@@ -62,7 +62,7 @@ $dropdown->add_language_selector_to_page (
 );
 
 if ( icl_get_setting('setup_complete') ) {
-    require ICL_PLUGIN_PATH . '/menu/wpml-translation-selector.class.php';
+    require WPML_PLUGIN_PATH . '/menu/wpml-translation-selector.class.php';
     $selector = new WPML_Translation_Selector( $sitepress, $default_language, $source_language, $element_id );
     $selector->add_translation_of_selector_to_page (
         $trid,

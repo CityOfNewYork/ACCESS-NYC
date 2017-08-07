@@ -22,8 +22,13 @@ function wpml_plugins_integration_setup(){
 
     // NextGen Gallery
     if ( defined( 'NEXTGEN_GALLERY_PLUGIN_VERSION' ) ){
-        require_once ICL_PLUGIN_PATH . '/inc/plugin-integration-nextgen.php';
+        require_once WPML_PLUGIN_PATH . '/inc/plugin-integration-nextgen.php';
     }
+
+	if ( defined( 'WPB_VC_VERSION' ) ) {
+		$wpml_visual_composer = new WPML_Compatibility_Plugin_Visual_Composer( new WPML_Debug_BackTrace( phpversion(), 12 ) );
+		$wpml_visual_composer->add_hooks();
+	}
 }
 
 add_action( 'after_setup_theme', 'wpml_themes_integration_setup' );
@@ -35,7 +40,8 @@ function wpml_themes_integration_setup() {
 	}
 
 	if ( function_exists( 'avia_lang_setup' ) ) {
-		$enfold = new WPML_Compatibility_Theme_Enfold();
+		global $iclTranslationManagement;
+		$enfold = new WPML_Compatibility_Theme_Enfold( $iclTranslationManagement );
 		$enfold->init_hooks();
 	}
 }

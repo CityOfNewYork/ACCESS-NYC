@@ -13,12 +13,15 @@ Description: Custom theme
 @import 'neat';
 @import 'normalize.scss/normalize';
 @import 'uswds/src/stylesheets/core/variables';
+@import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
 
 /**
  * General Settings
  */
+@import '../_variables.json.scss';
 @import 'core/variables';
 @import 'core/fonts';
+@import 'core/animate';
 
 /**
  * U.S. Web Design Standards Framework

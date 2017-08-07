@@ -20,7 +20,7 @@ class WPML_Tax_Menu_Loader extends WPML_WPDB_And_SP_User {
 
 	public function init(){
 		$tax_get = filter_input(INPUT_GET, 'taxonomy');
-		require ICL_PLUGIN_PATH . '/menu/term-taxonomy-menus/wpml-term-language-filter.class.php';
+		require WPML_PLUGIN_PATH . '/menu/term-taxonomy-menus/wpml-term-language-filter.class.php';
 		if ( ( $trid = filter_input ( INPUT_GET, 'trid' ) )
 		     && ( $source_lang = filter_input ( INPUT_GET, 'source_lang' ) )
 		     && get_taxonomy ( $tax_get ) !== false
@@ -100,7 +100,7 @@ class WPML_Tax_Menu_Loader extends WPML_WPDB_And_SP_User {
 	 * @param Object $term
 	 */
 	public function wpml_edit_term_form( $term ) {
-		include ICL_PLUGIN_PATH . '/menu/term-taxonomy-menus/taxonomy-menu.php';
+		include WPML_PLUGIN_PATH . '/menu/term-taxonomy-menus/taxonomy-menu.php';
 	}
 
 	function _tax_adding() {

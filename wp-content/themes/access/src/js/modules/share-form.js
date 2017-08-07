@@ -3,6 +3,9 @@
 
 import $ from 'jquery';
 import Utility from 'modules/utility';
+import Cleave from 'cleave.js/dist/cleave.min';
+import 'cleave.js/dist/addons/cleave-phone.us';
+
 
 /**
  * This component handles validation and submission for share by email and
@@ -41,6 +44,9 @@ class ShareForm {
       return this;
     }
 
+    let selected = this._el.querySelector('input[type="tel"]');
+    if (selected) this._maskPhone(selected);
+
     $(this._el).on('submit', (e) => {
       e.preventDefault();
       this._validate();
@@ -71,8 +77,10 @@ class ShareForm {
       validity = this._validateRequired($email[0]) &&
           this._validateEmail($email[0]);
     }
+
     if ($tel.length) {
-      validity = this._validateRequired($email[0]);
+      validity = this._validateRequired($tel[0]) &&
+          this._validatePhoneNumber($tel[0]);
     }
 
     this._isValid = validity;
@@ -80,6 +88,21 @@ class ShareForm {
       $(this._el).removeClass(ShareForm.CssClass.ERROR);
     }
     return this;
+  }
+
+  /**
+   * Mask each phone number and properly format it
+   * @param  {HTMLElement} input the "tel" input to mask
+   * @return {constructor}       the input mask
+   */
+  _maskPhone(input) {
+    let cleave = new Cleave(input, {
+      phone: true,
+      phoneRegionCode: 'us',
+      delimiter: '-'
+    });
+    input.cleave = cleave;
+    return input;
   }
 
   /**
@@ -101,6 +124,31 @@ class ShareForm {
     } else {
       return true;
     }
+  }
+
+  /**
+   * For a given input, checks to see if its value is a valid Phone Number.
+   * If not, displays an error message and sets an error class on the element.
+   * @param {HTMLElement} input - The html form element for the component.
+   * @return {boolean} - Valid Phone Number.
+   */
+  _validatePhoneNumber(input) {
+    let num = this._parsePhoneNumber(input.value); // parse the number
+    num = (num) ? num.join('') : 0; // if num is null, there are no numbers
+    if (num.length === 10) {
+      return true; // assume it is phone number
+    }
+    this._showError(ShareForm.Message.PHONE);
+    return false;
+  }
+
+  /**
+   * Get just the phone number of a given value
+   * @param  {string} value The string to get numbers from
+   * @return {array}       An array with matched blocks
+   */
+  _parsePhoneNumber(value) {
+    return value.match(/\d+/g); // get only digits
   }
 
   /**
@@ -149,8 +197,17 @@ class ShareForm {
    */
   _submit() {
     this._isBusy = true;
+    let $tel = this._el.querySelector('input[type="tel"]'); // get phone number
+    let $submit = this._el.querySelector('button[type="submit"]');
+    let $spinner = this._el.querySelector(`.${ShareForm.CssClass.SPINNER}`);
+    let $inputs = $(this._el).find('input');
+    if ($tel) $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
     const payload = $(this._el).serialize();
-    $(this._el).find('input').prop('disabled', true);
+    $inputs.prop('disabled', true); // disable inputs
+    if ($spinner) {
+      $submit.style.cssText = 'display: none'; // hide submit button
+      $spinner.style.cssText = ''; // show spinner
+    }
     return $.post($(this._el).attr('action'), payload).done((response) => {
       if (response.success) {
         this._showSuccess();
@@ -165,7 +222,12 @@ class ShareForm {
     }).fail((response) => {
       this._showError(ShareForm.Message.SERVER);
     }).always(() => {
-      $(this._el).find('input').prop('disabled', false);
+      $inputs.prop('disabled', false); // enable inputs
+      if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
+      if ($spinner) {
+        $submit.style.cssText = ''; // show submit button
+        $spinner.style.cssText = 'display: none'; // hide spinner;
+      }
       this._isBusy = false;
     });
   }
@@ -181,7 +243,8 @@ ShareForm.CssClass = {
   FORM: 'js-share-form',
   HIDDEN: 'hidden',
   SUBMIT_BTN: 'btn-submit',
-  SUCCESS: 'success'
+  SUCCESS: 'success',
+  SPINNER: 'js-spinner'
 };
 
 /**
@@ -190,6 +253,7 @@ ShareForm.CssClass = {
  */
 ShareForm.Message = {
   EMAIL: 'ERROR_EMAIL',
+  PHONE: 'ERROR_PHONE',
   REQUIRED: 'ERROR_REQUIRED',
   SERVER: 'ERROR_SERVER'
 };

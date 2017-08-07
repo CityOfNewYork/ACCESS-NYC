@@ -1,0 +1,6 @@
+{
+  "screen-desktop": 960,
+  "screen-tablet": 768,
+  "screen-mobile": 480,
+  "screen-sm-mobile": 400
+}
