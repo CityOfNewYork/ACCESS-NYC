@@ -8,9 +8,9 @@
 
     &::after {
       @if $text-direction == 'rtl' {
-        @include position(absolute, null null (.3 * -$spacing-base) 1.5em);
+        @include position(absolute, null null (.3 * -$spacing-base) 34px);
       } @else {
-        @include position(absolute, null 1.5em (.3 * -$spacing-base) null);
+        @include position(absolute, null 34px (.3 * -$spacing-base) null);
       }
       @include triangle($spacing-base (.3 * $spacing-base), $color-blue-dark, down);
       content: '';
@@ -56,7 +56,7 @@
   @include display(flex);
   background: $color-white;
   border: 1px solid $color-grey-mid;
-  padding-#{$text-direction-end}: .5 * $spacing-base;
+  // padding-#{$text-direction-end}: .5 * $spacing-base;
 
   .error & {
     border-color: $color-red;
@@ -65,7 +65,10 @@
   input {
     @include flex-grow(1);
     border: none;
-    min-width: 0;
+    min-width: 0px;
+    width: 100%;
+    text-overflow: ellipsis;
+    padding-#{$text-direction-end}: 0;
   }
 
   .btn-submit {
@@ -78,6 +81,11 @@
   }
 }
 
-.share-form__spinner {
-  flex: 0 0 69.89px; // same width as send button
+.share-form-controls__right {
+  flex: 0 0 69.89px;
+  padding: 0 10px;
 }
+
+// .share-form__spinner {
+//   flex: 0 0 69.89px; // same width as send button
+// }
