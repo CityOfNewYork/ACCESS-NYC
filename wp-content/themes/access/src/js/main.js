@@ -1,7 +1,9 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
+// import SmoothScroll from 'smoothscroll-polyfill';
 import OfficeMap from 'modules/office-map';
 import Screener from 'modules/screener';
+import ScreenerProto from 'modules/screener-proto';
 import ShareForm from 'modules/share-form';
 import StaticMap from 'modules/static-map';
 import TextSizer from 'modules/text-sizer';
@@ -14,6 +16,7 @@ import Utility from 'modules/utility';
   const google = window.google;
   /* eslint no-undef: "off" */
   const variables = require('../variables.json');
+  require('smoothscroll-polyfill').polyfill();
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
@@ -34,9 +37,22 @@ import Utility from 'modules/utility';
     const $target = $(e.currentTarget).attr('href') ?
         $($(e.currentTarget).attr('href')) :
         $($(e.currentTarget).data('target'));
+
     $(e.currentTarget).toggleClass('active');
     $target.toggleClass('active hidden')
         .prop('aria-hidden', $target.hasClass('hidden'));
+
+    // function to hide all elements
+    if ($(e.currentTarget).data('hide')) {
+      $($(e.currentTarget).data('hide')).not($target)
+        .addClass('hidden')
+        .removeClass('active')
+        .prop('aria-hidden', true);
+    }
+
+    if ($(e.currentTarget).data('loc')) {
+      window.location.hash = $(e.currentTarget).data('loc');
+    }
   }).on('click', '.js-show-nav', (e) => {
     // Shows the mobile nav by applying "nav-active" cass to the body.
     e.preventDefault();
@@ -177,6 +193,11 @@ import Utility from 'modules/utility';
   // Initialize eligibility screener.
   $(`.${Screener.CssClass.FORM}`).each((i, el) => {
     const screener = new Screener(el);
+    screener.init();
+  });
+
+  $(`.${ScreenerProto.CssClass.FORM}`).each((i, el) => {
+    const screener = new ScreenerProto(el);
     screener.init();
   });
 

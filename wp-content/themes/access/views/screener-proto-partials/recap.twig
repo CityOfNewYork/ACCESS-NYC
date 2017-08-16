@@ -1,0 +1,192 @@
+<fieldset class="screener-body-page js-screener-page" id="page-recap">
+
+  <div class="p-top-2">
+
+    <h1 class="recap-title">{{ __('Confirmation', 'accessnyc-screener') }}</h1>
+
+    <div class="recap-container">
+      <div id="recap-body"></div>
+      <div id="screener-recaptcha-container" class="recap-captcha hidden">
+        <p>{{ __('Check the "I’m not a robot" box below and click Continue to get your results.', 'accessnyc-screener') }}</p>
+        <div class="screener-question-container">
+          <div id="screener-recaptcha"></div>
+        </div>
+      </div>
+      <p class="screener-next-step"><button type="button" class="js-screener-submit btn btn-primary btn-next btn-small" data-action="{{ formAction }}">{{ __('Yes, continue to my results', 'accessnyc-screener') }}</button></p>
+    </div>
+
+  </div>
+
+</fieldset>
+
+<script type="text/template" id="screener-recap-template">
+  <h2 class="recap-confirmation">{{ __('Is all of your information correct?', 'accessnyc-screener') }}</h2>
+  <div class="recap-body">
+    <div class="recap-section">
+      <h3 class="recap-section-heading">{{ __('Looking for help with', 'accessnyc-screener') }}<span class="recap-edit-section"><a href="#question-help">{{ __('Edit', 'accessnyc-screener') }}</a></span></h3>
+      <div class="recap-program-categories">
+        <% if (categories.length === 0) { %>
+          <p class="text-small">{{ __('No categories selected.', 'accessnyc-screener') }}</p>
+        <% } %>
+        <% _.each(categories, function(category) { %>
+        {% if language_code == 'en' %}
+        <% var slug = category.slug %>
+        {% else %}
+        <% var slug = category.slug.substring(0, category.slug.lastIndexOf('-{{ language_code }}')); %>
+        {% endif %}
+        <div class="program-category">
+          <div class="program-icon">
+            <span class="icon">
+              <svg class="icon icon-<%= slug %>">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-<%= slug %>"></use>
+              </svg>
+            </span>
+          </div>
+          <div class="program-card-body"><%= category.label %></div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <hr class="screener-divider">
+    <div class="recap-section recap-household">
+      <h3 class="recap-section-heading">
+        {{ __('Your household:', 'accessnyc-screener') }}
+        <%= members.length %>
+        <% if (members.length === 1) { %>
+          {{ __('person', 'accessnyc-screener') }}
+        <% } else { %>
+          {{ __('people', 'accessnyc-screener') }}
+        <% } %>
+      </h3>
+
+      <ul class="screener-household-summary">
+        <% _.each(members, function(member, index) { %>
+        <li class="recap-household-member">
+          <h4 class="recap-household-member-heading">
+            <% if (index === 0 && !member.isHoh) { %><div class="recap-household-member-heading-item">{{ __('You', 'accessnyc-screener') }}</div><% } %>
+            <div class="recap-household-member-heading-item"><%= member.relation %></div>
+            <div class="recap-household-member-heading-item"><%= member.age %></div>
+            <% if (index === 0 && member.isHoh) { %><div class="recap-household-member-heading-item">{{ __('Head of household', 'accessnyc-screener') }}</div><% } %>
+          </h4>
+          <div class="recap-edit-section">
+            <a href="#question-screener-is-submitter-head-of-household" data-person="<%= index %>" class="js-edit-person btn-text btn-link">{{ __('Edit', 'accessnyc-screener') }}</a>
+            <% if (index !== 0 && !member.isHoh) { %><button type="button" data-person="<%= index %>" class="js-remove-person btn-text btn-link">{{ __('Remove', 'accessnyc-screener') }}</button><% } %>
+          </div>
+
+          <% if (member.conditions.length) { %>
+          <div class="recap-household-member-detail">
+            <div class="recap-detail-name">{{ __('Conditions:', 'accessnyc-screener') }}</div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <% _.each(member.conditions, function(condition) { %>
+              <li><%= condition %></li>
+              <% }); %>
+            </ul>
+          </div>
+          <% } %>
+          <% if (member.benefits.length) { %>
+          <div class="recap-household-member-detail">
+            <div class="recap-detail-name">{{ __('Benefits:', 'accessnyc-screener') }}</div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <% _.each(member.benefits, function(benefit) { %>
+              <li><%= benefit %></li>
+              <% }); %>
+            </ul>
+          </div>
+          <% } %>
+          <% if (member.incomes.length) { %>
+          <div class="recap-household-member-detail">
+            <div class="recap-detail-name">{{ __('Income:', 'accessnyc-screener') }}</div>
+            <ul class="recap-detail-info">
+              <% _.each(member.incomes, function(income) { %>
+              <li>
+                <div class="recap-detail-info-item"><%= income.amount %></div>
+                <div class="recap-detail-info-item"><%= income.type %></div>
+                <div class="recap-detail-info-item"><%= income.frequency %></div>
+              </li>
+              <% }); %>
+            </ul>
+          </div>
+          <% } %>
+          <% if (member.expenses.length) { %>
+          <div class="recap-household-member-detail">
+            <div class="recap-detail-name">{{ __('Expenses:', 'accessnyc-screener') }}</div>
+            <ul class="recap-detail-info">
+              <% _.each(member.expenses, function(expense) { %>
+              <li>
+                <div class="recap-detail-info-item"><%= expense.amount %></div>
+                <div class="recap-detail-info-item"><%= expense.type %></div>
+                <div class="recap-detail-info-item"><%= expense.frequency %></div>
+              </li>
+              <% }); %>
+            </ul>
+          </div>
+          <% } %>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+    <hr class="screener-divider">
+    <div class="recap-section recap-resources">
+      <h3 class="recap-section-heading">{{ __('Household resources:', 'accessnyc-screener') }} <span class="force-ltr"><%= household.assets %></span> <span class="recap-edit-section"><a href="#question-household-assets">{{ __('Edit', 'accessnyc-screener') }}</a></span></h3>
+      <div class="recap-section-description">
+        <p>{{ __('This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.', 'accessnyc-screener') }}</p>
+      </div>
+    </div>
+    <hr class="screener-divider">
+    <div class="recap-section recap-resources">
+      <h3 class="recap-section-heading">
+        {{ __('Housing', 'accessnyc-screener') }}
+        <span class="recap-edit-section"><a href="#question-housing">{{ __('Edit', 'accessnyc-screener') }}</a></span>
+      </h3>
+      <ul class="recap-detail-info">
+        <% _.each(household.types, function(type) { %>
+
+        <li>
+          <div class="recap-detail-info-item"><%= type.label %></div>
+          <% if (type.slug === 'Renting') { %>
+            <% if (household.rentalType) { %>
+            <div class="recap-detail-info-item">
+              <%= household.rentalType %>
+            </div>
+            <% } %>
+          <div class="recap-detail-info-item">
+            <% if (household.renters.length === 1) { %>
+              <% if (household.renters[0].slug === 'Self') { %>
+              {{ __('You are on the lease', 'accessnyc-screener') }}
+              <% } else { %>
+              <%= household.renters[0].label %> {{ __('is on the lease', 'accessnyc-screener') }}
+              <% } %>
+            <% } else { %>
+              <% _.each(household.renters, function(renter) { %>
+              <span class="recap-inline-item"><%= renter.label %></span>
+              <% }); %>
+              {{ __('are on the lease', 'accessnyc-screener') }}
+            <% } %>
+          </div>
+          <% } else if (type.slug === 'Owner') { %>
+          <div class="recap-detail-info-item">
+            <% if (household.owners.length === 1) { %>
+              <% if (household.owners[0].slug === 'Self') { %>
+              {{ __('You are the owner', 'accessnyc-screener') }}
+              <% } else { %>
+              <%= household.owners[0].label %> {{ __('is the owner', 'accessnyc-screener') }}
+              <% } %>
+            <% } else { %>
+              <% _.each(household.owners, function(owner) { %>
+              <span class="recap-inline-item"><%= owner.label %></span>
+              <% }); %>
+              {{ __('are the owners', 'accessnyc-screener') }}
+            <% } %>
+          </div>
+          <% } %>
+        </li>
+
+        <% }); %>
+      </ul>
+    </div>
+    <hr class="screener-divider">
+    <div class="recap-section recap-resources">
+      <h3 class="recap-section-heading">{{ __('Your zip code:', 'accessnyc-screener') }} <%= household.zip %><span class="recap-edit-section"><a href="#question-contact-information">{{ __('Edit', 'accessnyc-screener') }}</a></span></h3>
+    </div>
+  </div>
+</script>

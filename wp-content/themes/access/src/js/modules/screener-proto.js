@@ -25,7 +25,7 @@ import _ from 'underscore';
  * those views to the current language.
  * @class
  */
-class Screener {
+class ScreenerProto {
   /**
    * @param {HTMLElement} el - The form element for the component.
    * @constructor
@@ -35,7 +35,9 @@ class Screener {
     this._el = el;
 
     /** @private {jQuery} jQuery element array of screener steps. */
-    this._$steps = $(this._el).find(`.${Screener.CssClass.STEP}`);
+    this._$steps = $(this._el).find(`.${ScreenerProto.CssClass.STEP}`);
+
+    this._$pages = $(this._el).find(`.${ScreenerProto.CssClass.PAGE}`);
 
     /** @private {array<string>} array of selected category IDs */
     this._categories = [];
@@ -71,34 +73,73 @@ class Screener {
     window.addEventListener('hashchange', (e) => {
       const hash = window.location.hash;
       const $section = $(hash);
-      if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
-        this._goToStep($section[0]);
+      const type = window.location.hash.split('-')[0];
+
+      if ($section.length && $section.hasClass(ScreenerProto.CssClass.PAGE)) {
+        this._goToPage($section[0]);
         $(window).scrollTop(0);
+        $('#js-layout-body').scrollTop(0);
       }
+
+      if (type === '#question') {
+        // let selector = window.location.hash.replace('#','.id-');
+        // let selector = window.location.hash;
+        this._goToQuestion(window.location.hash);
+      }
+
+      if (type === '#section') {
+        this._goToSection(window.location.hash);
+      }
+
     });
+
+    // var optionsObserver = {
+    //   root: document.querySelector('#js-layout-body'),
+    //   rootMargin: '0px',
+    //   threshold: 1.0
+    // }
+
+    // var observer = new IntersectionObserver((event) => {
+    //   console.dir(event);
+    //   window.location.hash = event[0].target.id;
+    //   // this._goToSection(`#${event[0].target.id}`);
+    // }, optionsObserver);
+
+    // var target = document.querySelector('#section-household');
+    // observer.observe(target);
 
     $(this._el).on('change', 'input[type="checkbox"]', (e) => {
       this._toggleCheckbox(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.TOGGLE}`, (e) => {
+    }).on('change', `.${ScreenerProto.CssClass.TOGGLE}`, (e) => {
       this._handleToggler(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.ADD_SECTION}`, (e) => {
+    }).on('change', `.${ScreenerProto.CssClass.ADD_SECTION}`, (e) => {
       this._addMatrixSection(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.MATRIX_SELECT}`, (e) => {
+    }).on('change', `.${ScreenerProto.CssClass.MATRIX_SELECT}`, (e) => {
       this._toggleMatrix(e.currentTarget);
-    }).on('click', `.${Screener.CssClass.VALIDATE_STEP}`, (e) => {
-      const $step = $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`);
+    }).on('click', `.${ScreenerProto.CssClass.VALIDATE_STEP}`, (e) => {
+      const $step = $(e.currentTarget)
+        .closest(`.${ScreenerProto.CssClass.STEP}`);
       return this._validateStep($step);
-    }).on('click', `.${Screener.CssClass.SUBMIT}`, (e) => {
+    }).on('blur change', `.${ScreenerProto.CssClass.VALIDATE_STEP_UI}`, (e) => {
+      const $step = $(e.currentTarget)
+        .closest(`.${ScreenerProto.CssClass.STEP}`);
+      const valid = this._validateStep($step);
+      if (valid) {
+        const goToStep = $(e.currentTarget).data('goToStep');
+        // if (goToStep) window.location.hash = goToStep;
+      }
+      return valid;
+    }).on('click', `.${ScreenerProto.CssClass.SUBMIT}`, (e) => {
       if (!this._recaptchaRequired) {
         this._submit($(e.currentTarget).data('action'));
       } else {
-        $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`)
-          .find(`.${Screener.CssClass.ERROR_MSG}`).remove();
+        $(e.currentTarget).closest(`.${ScreenerProto.CssClass.STEP}`)
+          .find(`.${ScreenerProto.CssClass.ERROR_MSG}`).remove();
         if (this._recaptchaVerified) {
           this._submit($(e.currentTarget).data('action'));
         } else {
           this._showError($('#screener-recaptcha')[0],
-              Screener.ErrorMessage.REQUIRED);
+              ScreenerProto.ErrorMessage.REQUIRED);
         }
       }
     }).on('blur', '[data-type="integer"]', (e) => {
@@ -117,40 +158,42 @@ class Screener {
           e.keyCode === 189) { // '-' key
         e.preventDefault();
       }
-    }).on('click', `.${Screener.CssClass.REMOVE_PERSON}`, (e) => {
+    }).on('click', `.${ScreenerProto.CssClass.REMOVE_PERSON}`, (e) => {
       this._removePerson(parseInt($(e.currentTarget).data('person'), 10))
           ._renderRecap();
-    }).on('click', `.${Screener.CssClass.EDIT_PERSON}`, (e) => {
+    }).on('click', `.${ScreenerProto.CssClass.EDIT_PERSON}`, (e) => {
       this._editPerson(parseInt($(e.currentTarget).data('person'), 10));
     }).on('keyup', 'input[maxlength]', (e) => {
       this._enforceMaxLength(e.currentTarget);
+    }).on('click', `.${ScreenerProto.CssClass.RENDER_RECAP}`, (e) => {
+      this._renderRecap();
     }).on('submit', (e) => {
       e.preventDefault();
-      this._$steps.filter(`.${Screener.CssClass.ACTIVE}`)
-        .find(`.${Screener.CssClass.VALIDATE_STEP},` +
-        `.${Screener.CssClass.SUBMIT}`).trigger('click');
+      this._$steps.filter(`.${ScreenerProto.CssClass.ACTIVE}`)
+        .find(`.${ScreenerProto.CssClass.VALIDATE_STEP},` +
+        `.${ScreenerProto.CssClass.SUBMIT}`).trigger('click');
     });
 
     // Determine whether or not to initialize ReCAPTCHA. This should be
     // initialized only on every 10th view which is determined via an
     // incrementing cookie.
-    let viewCount = Cookies.get('screenerViews') ?
-        parseInt(Cookies.get('screenerViews'), 10) : 1;
-    if (viewCount >= 10) {
-      this._initRecaptcha();
-      viewCount = 0;
-    }
-    // `2/1440` sets the cookie to expire after two minutes.
-    Cookies.set('screenerViews', ++viewCount, {expires: (2/1440)});
+    // let viewCount = Cookies.get('screenerViews') ?
+    //     parseInt(Cookies.get('screenerViews'), 10) : 1;
+    // if (viewCount >= 10) {
+    //   this._initRecaptcha();
+    //   viewCount = 0;
+    // }
+    // // `2/1440` sets the cookie to expire after two minutes.
+    // Cookies.set('screenerViews', ++viewCount, {expires: (2/1440)});
 
-    if (Utility.getUrlParameter('debug') === '1') {
-      if (window.location.hash) {
-        this._goToStep($(window.location.hash)[0]);
-      }
-    } else {
-      window.location.hash = this._$steps.eq(0).attr('id');
-      this._goToStep(this._$steps[0]);
-    }
+    // if (Utility.getUrlParameter('debug') === '1') {
+    //   if (window.location.hash) {
+    //     this._goToStep($(window.location.hash)[0]);
+    //   }
+    // } else {
+    //   window.location.hash = this._$steps.eq(0).attr('id');
+    //   this._goToStep(this._$steps[0]);
+    // }
 
     return this;
   }
@@ -176,7 +219,8 @@ class Screener {
         'callback': 'screenerRecaptcha',
         'expired-callback': 'screenerRecaptchaReset'
       });
-      $('#screener-recaptcha-container').removeClass(Screener.CssClass.HIDDEN);
+      $('#screener-recaptcha-container')
+        .removeClass(ScreenerProto.CssClass.HIDDEN);
       this._recaptchaRequired = true;
     };
 
@@ -202,18 +246,20 @@ class Screener {
    */
   _toggleCheckbox(el) {
     const $checkbox = $(el);
-    const $group = $checkbox.closest(`.${Screener.CssClass.CHECKBOX_GROUP}`);
+    const $group = $checkbox
+        .closest(`.${ScreenerProto.CssClass.CHECKBOX_GROUP}`);
     if ($checkbox.prop('checked')) {
-      if ($checkbox.hasClass(Screener.CssClass.CLEAR_GROUP)) {
+      if ($checkbox.hasClass(ScreenerProto.CssClass.CLEAR_GROUP)) {
         $group.find('input[type="checkbox"]').not(el).prop('checked', false)
             .trigger('change');
       } else {
-        $group.find(`.${Screener.CssClass.CLEAR_GROUP}`).prop('checked', false)
+        $group.find(`.${ScreenerProto.CssClass.CLEAR_GROUP}`)
+            .prop('checked', false)
             .trigger('change');
       }
     } else {
       if ($group.find('input[type="checkbox"]:checked').length === 0) {
-        $group.find(`.${Screener.CssClass.CLEAR_GROUP}`)
+        $group.find(`.${ScreenerProto.CssClass.CLEAR_GROUP}`)
             .prop('checked', true).trigger('change');
       }
     }
@@ -237,16 +283,16 @@ class Screener {
           ($el.prop('checked') && Boolean(parseInt($el.val(), 10))) ||
           ($el.is('select') && $el.val())
       ) {
-        $target.removeClass(Screener.CssClass.HIDDEN);
+        $target.removeClass(ScreenerProto.CssClass.HIDDEN);
       } else {
-        $target.addClass(Screener.CssClass.HIDDEN);
+        $target.addClass(ScreenerProto.CssClass.HIDDEN);
       }
     }
     if ($el.data('shows')) {
-      $($el.data('shows')).removeClass(Screener.CssClass.HIDDEN);
+      $($el.data('shows')).removeClass(ScreenerProto.CssClass.HIDDEN);
     }
     if ($el.data('hides')) {
-      $($el.data('hides')).addClass(Screener.CssClass.HIDDEN);
+      $($el.data('hides')).addClass(ScreenerProto.CssClass.HIDDEN);
     }
     return this;
   }
@@ -287,11 +333,11 @@ class Screener {
     });
     const $renderTarget = $el.data('renderTarget') ?
         $($el.data('renderTarget')) :
-        $el.closest(`.${Screener.CssClass.MATRIX}`);
+        $el.closest(`.${ScreenerProto.CssClass.MATRIX}`);
     if ($target.length) {
-      $target.removeClass(Screener.CssClass.HIDDEN);
+      $target.removeClass(ScreenerProto.CssClass.HIDDEN);
     } else if (!$el.data('renderTarget') ||
-        !$renderTarget.find(`.${Screener.CssClass.MATRIX_ITEM}`).length) {
+        !$renderTarget.find(`.${ScreenerProto.CssClass.MATRIX_ITEM}`).length) {
       $renderTarget.append(renderedTemplate);
     }
     return this;
@@ -307,9 +353,9 @@ class Screener {
    */
   _toggleMatrix(el) {
     const $el = $(el);
-    const $matrixItem = $el.closest(`.${Screener.CssClass.MATRIX_ITEM}`);
+    const $matrixItem = $el.closest(`.${ScreenerProto.CssClass.MATRIX_ITEM}`);
     if ($el.val()) {
-      $matrixItem.find(`.${Screener.CssClass.TRANSACTION_LABEL}`)
+      $matrixItem.find(`.${ScreenerProto.CssClass.TRANSACTION_LABEL}`)
           .text($el.find('option:selected').text());
     } else if (!$matrixItem.is(':last-of-type')) {
       $matrixItem.remove();
@@ -324,98 +370,201 @@ class Screener {
    * @return {this} Screener
    */
   _goToStep(section) {
-    this._$steps.removeClass(Screener.CssClass.ACTIVE)
-        .attr('aria-hidden', 'true').find(':input, a').attr('tabindex', '-1')
-        .end().filter(section).addClass(Screener.CssClass.ACTIVE)
-        .removeAttr('aria-hidden').find(':input, a').removeAttr('tabindex');
+    // This shows and hides the screener steps
+    this._$steps.removeClass(ScreenerProto.CssClass.ACTIVE)
+      .attr('aria-hidden', 'true').find(':input, a').attr('tabindex', '-1')
+      .end().filter(section).addClass(ScreenerProto.CssClass.ACTIVE)
+      .removeAttr('aria-hidden').find(':input, a').removeAttr('tabindex');
+    // const id = $(section).attr('id');
 
-    if ($(section).attr('id') === 'step-9') {
-      // add in family members here
-      const members = [];
-      _.each(this._people.slice(0,
-          this._household.get('members')), (person, i) => {
-        const member = {
-          age: person.get('age'),
-          isHoh: person.get('headOfHousehold'),
-          relation: Utility.localize(person.get('headOfHouseholdRelation'))
-        };
-        if (person.get('headOfHousehold')) {
-          if (i === 0) {
-            member.relation = Utility.localize('Self');
-          } else {
-            member.relation = Utility.localize('HeadOfHousehold');
-          }
-        }
-        members.push(member);
-      });
-      const summaryTemplate = $('#screener-member-summary-template').html();
-      const renderedSummaryTemplate = _.template(summaryTemplate)({
-        members: members
-      });
-      $('#screener-household-summary').html(renderedSummaryTemplate);
+    // console.log(id);
 
-      // Render member form.
-      let personIndex = null;
-      if ($(section).data('personIndex')) {
-        personIndex = parseInt($(section).data('personIndex'), 10);
-      } else {
-        personIndex = this._people.length;
-        $(section).data('personIndex', personIndex);
-      }
-      const formTemplate = $('#screener-member-template').html();
-      const templateData = {
-        personIndex: personIndex,
-        person: new ScreenerPerson().toObject(),
-        localize: Utility.localize
-      };
+    // if (id === 'step-8')
+      // this._populate(this._household.get('members'));
 
-      if (this._people[personIndex]) {
-        templateData.person = this._people[personIndex].toObject();
-      }
+    // if (id === 'step-9')
+      // this._renderFamily(section);
 
-      const renderedFormTemplate = _.template(formTemplate)(templateData);
-      $('#screener-household-member').html(renderedFormTemplate);
-    }
+    // if (id === 'step-10')
+    //   this._renderAddFamily();
 
-    if ($(section).attr('id') === 'step-10') {
-      // add in family members here
-      const template = $('#screener-member-option-template').html();
-      const people = [];
-      _.each(this._people, (person, i) => {
-        const obj = {
-          age: person.get('age'),
-          owner: person.get('livingOwnerOnDeed'),
-          leasee: person.get('livingRentalOnLease')
-        };
-        if (i === 0) {
-          obj.relation = Utility.localize('Self');
-        } else if (person.get('headOfHousehold')) {
-          obj.relation = Utility.localize('HeadOfHousehold');
-        } else {
-          obj.relation =
-              Utility.localize(person.get('headOfHouseholdRelation'));
-        }
-        people.push(obj);
-      });
-
-      const ownerTemplate = _.template(template)({
-        attribute: 'livingOwnerOnDeed',
-        people: people
-      });
-      $('#screener-possible-owners').html(ownerTemplate);
-
-      const leaseeTemplate = _.template(template)({
-        attribute: 'livingRentalOnLease',
-        people: people
-      });
-      $('#screener-possible-leasees').html(leaseeTemplate);
-    }
-
-    if ($(section).attr('id') === 'recap') {
-      this._renderRecap();
-    }
+    // if (id === 'recap')
+      // this._renderRecap();
 
     return this;
+  }
+
+  _goToPage(section) {
+    // This shows and hides the screener pages
+    // console.dir(this._$pages);
+    this._$pages.removeClass(ScreenerProto.CssClass.ACTIVE)
+      .attr('aria-hidden', 'true').find(':input, a').attr('tabindex', '-1')
+      .end().filter(section).addClass(ScreenerProto.CssClass.ACTIVE)
+      .removeAttr('aria-hidden').find(':input, a').removeAttr('tabindex');
+
+    if ($(section).attr('id') === ScreenerProto.CssClass.PAGE_RECAP)
+      this._renderRecap();
+
+    return this;
+  }
+
+  _goToQuestion(hash) {
+    let $page = $(hash)
+      .closest(`.${ScreenerProto.CssClass.PAGE}`);
+    if (!$page.hasClass('active')) {
+      this._goToPage($page[0]);
+      // $(window).scrollTop(0);
+      // $('#js-layout-body').scrollTop(0);
+    }
+    let $target = $(hash)
+      .find(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`);
+    if (!$target.hasClass('active')) {
+      $(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`)
+        .addClass('hidden').removeClass('active')
+        .prop('aria-hidden', true);
+      $target.addClass('active').removeClass('hidden')
+        .prop('aria-hidden', false);
+      // console.dir([$(hash).offset().top, window.outerHeight, $('header').height()]);
+      // if ($(hash).offset().top > (window.clientHeight/3)) {
+      // setTimeout(() => {
+      // document.querySelector('#js-layout-body')
+      //   .scroll({
+      //     top: $(hash).offset().top - $('header').height()/* + 110*/,
+      //     left: 0,
+      //     behavior: 'auto'
+      //   });
+      // },1)
+      // }
+    } /*else {
+      $target.addClass('hidden').removeClass('active')
+        .prop('aria-hidden', true);
+    }*/
+  }
+
+  _goToSection(hash) {
+    $(`a[href="${hash}"]`).addClass('bg-blue-light')
+      .siblings().removeClass('bg-blue-light');
+    let $page = $(hash)
+      .closest(`.${ScreenerProto.CssClass.PAGE}`);
+    if (!$page.hasClass('active')) {
+      this._goToPage($page[0]);
+      $(window).scrollTop(0);
+      $('#js-layout-body').scrollTop(0);
+    }
+  }
+
+  /**
+   * Populate the family, start at one because the first person exists by
+   * default
+   */
+  _populate(number) {
+    let dif = number - this._people.length;
+    if (dif > 0) { // add members if positive
+      for (let i = 0; i <= dif - 1; i++) {
+        this._people.push(new ScreenerPerson());
+      }
+    } else if (dif < 0) { // remove members if negative
+      this._people = this._people.slice(0, this._people.length + dif);
+    }
+  }
+
+  _renderFamily(people) {
+    // add in family members here
+    const members = [];
+    _.each(people, (person, i) => {
+      const member = person._attrs;
+      if (person.get('headOfHousehold')) {
+        if (i === 0) {
+          member.relation = Utility.localize('Self');
+        } else {
+          member.relation = Utility.localize('HeadOfHousehold');
+        }
+      }
+      members.push(member);
+    });
+
+    // const summaryTemplate = $('#screener-member-summary-template').html();
+    // const renderedSummaryTemplate = _.template(summaryTemplate)({
+    //   members: members
+    // });
+    // $('#screener-household-summary').html(renderedSummaryTemplate);
+
+    // Render member form.
+    // let personIndex = null;
+    // if ($(section).data('personIndex')) {
+    //   personIndex = parseInt($(section).data('personIndex'), 10);
+    // } else {
+    //   personIndex = this._people.length;
+    //   $(section).data('personIndex', personIndex);
+    // }
+    const formTemplate = $('#screener-member-template').html();
+    // const templateData = {
+    //   personIndex: personIndex,
+    //   person: new ScreenerPerson().toObject(),
+    //   localize: Utility.localize
+    // };
+    // if (this._people[personIndex]) {
+    //   templateData.person = this._people[personIndex].toObject();
+    // }
+    const renderedFormTemplate = _.template(formTemplate)({members:members});
+    $('#screener-household-member').html(renderedFormTemplate);
+  }
+
+  _renderFamilyDetails(people) {
+    // add in family members here
+    let members = [];
+    _.each(people, (person, i) => {
+      const member = person._attrs;
+      if (person.get('headOfHousehold')) {
+        if (i === 0) {
+          member.relation = Utility.localize('Self');
+        } else {
+          member.relation = Utility.localize('HeadOfHousehold');
+        }
+      } else {
+        member.relation = Utility.localize(person.get('headOfHouseholdRelation'));
+      }
+      console.dir(member);
+      members[i] = member;
+    });
+
+    const formDetailsTemplate = $('#screener-member-details-template').html();
+    const renderedFormDetailsTemplate = _.template(formDetailsTemplate)({members:members});
+    $('#screener-household-member-details').html(renderedFormDetailsTemplate);
+  }
+
+  _renderAddFamily() {
+    // add in family members here
+    const template = $('#screener-member-option-template').html();
+    const people = [];
+    _.each(this._people, (person, i) => {
+      const obj = {
+        age: person.get('age'),
+        owner: person.get('livingOwnerOnDeed'),
+        leasee: person.get('livingRentalOnLease')
+      };
+      if (i === 0) {
+        obj.relation = Utility.localize('Self');
+      } else if (person.get('headOfHousehold')) {
+        obj.relation = Utility.localize('HeadOfHousehold');
+      } else {
+        obj.relation =
+            Utility.localize(person.get('headOfHouseholdRelation'));
+      }
+      people.push(obj);
+    });
+
+    const ownerTemplate = _.template(template)({
+      attribute: 'livingOwnerOnDeed',
+      people: people
+    });
+    $('#screener-possible-owners').html(ownerTemplate);
+
+    const leaseeTemplate = _.template(template)({
+      attribute: 'livingRentalOnLease',
+      people: people
+    });
+    $('#screener-possible-leasees').html(leaseeTemplate);
   }
 
   /**
@@ -425,41 +574,53 @@ class Screener {
    */
   _validateStep($step) {
     const stepId = $step.attr('id');
-    $step.find(`.${Screener.CssClass.ERROR}`)
-        .removeClass(Screener.CssClass.ERROR).end()
-        .find(`.${Screener.CssClass.ERROR_MSG}`).remove();
+    console.dir('---------------------');
 
-    $step.find(':input:visible').filter('[required]').each((i, el) => {
-      this._validateRequiredField(el);
-    }).end().filter('[data-type="integer"]').each((i, el) => {
-      this._validateIntegerField(el);
-    }).end().filter('[data-type="float"]').each((i, el) => {
-      this._validateFloatField(el);
-    }).end().filter('[name="Household.zip"]').each((i, el) => {
-      this._validateZipField(el);
-    });
+    // Required Validation
+    // $step.find(`.${ScreenerProto.CssClass.ERROR}`)
+    //     .removeClass(ScreenerProto.CssClass.ERROR).end()
+    //     .find(`.${ScreenerProto.CssClass.ERROR_MSG}`).remove();
 
-    const $errors = $step.find(`.${Screener.CssClass.ERROR}:visible`);
-    if ($errors.length) {
-      const $firstError = $errors.first()
-          .closest(`.${Screener.CssClass.QUESTION_CONTAINER}`);
+    // $step.find(':input:visible').filter('[required]').each((i, el) => {
+    //   this._validateRequiredField(el);
+    // }).end().filter('[data-type="integer"]').each((i, el) => {
+    //   this._validateIntegerField(el);
+    // }).end().filter('[data-type="float"]').each((i, el) => {
+    //   this._validateFloatField(el);
+    // }).end().filter('[name="Household.zip"]').each((i, el) => {
+    //   this._validateZipField(el);
+    // });
 
-      $firstError.find(':input').first().focus();
-      $(window).scrollTop(0);
+    // const $errors = $step.find(`.${ScreenerProto.CssClass.ERROR}:visible`);
+    // if ($errors.length) {
+    //   const $firstError = $errors.first()
+    //       .closest(`.${ScreenerProto.CssClass.QUESTION_CONTAINER}`);
 
-      return false;
-    }
+    //   $firstError.find(':input').first().focus();
+    //   // $(window).scrollTop(0);
+
+    //   return false;
+    // }
+    // Required Validation - END
 
     let stepValid = true;
 
     switch (stepId) {
       case 'step-1': {
-        // Add program categories.
+        const $inputCategory = $step.find('input[name="category"]:checked');
+        // if ($inputCategory) {
         const categories = [];
-        $step.find('input[name="category"]:checked').each((i, el) => {
+        $inputCategory.each((i, el) => {
           categories.push($(el).val());
         });
         this._categories = categories;
+        // }
+        // Add program categories.
+        // const categories = [];
+        // $step.find('input[name="category"]:checked').each((i, el) => {
+        //   categories.push($(el).val());
+        // });
+        // this._categories = categories;
         break;
       }
       case 'step-2': {
@@ -474,73 +635,81 @@ class Screener {
             .set('zip', $step.find('input[name="Household.zip"]').val());
         break;
       }
-      case 'step-4': {
-        // Set all checked attributes. Unset any that are not checked.
-        $step.find(`.${Screener.CssClass.CHECKBOX_GROUP}`).find(':input')
-            .each((i, el) => {
-              if ($(el).val() && $(el).attr('name')) {
-                const key = $(el).attr('name').split('.')[1];
-                if ($(el).is(':visible') && $(el).is(':checked')) {
-                  this._people[0].set(key, Screener.getTypedVal(el));
-                } else {
-                  this._people[0].set(key, false);
-                }
-              }
-            });
-        // Set the attribute according to the radio button value.
-        $step.find(`.${Screener.CssClass.RADIO_GROUP}`)
-            .find(':input:checked').each((i, el) => {
-              if ($(el).val() && $(el).attr('name')) {
-                const key = $(el).attr('name').split('.')[1];
-                if ($(el).is(':visible')) {
-                  if ($(el).is(':checked')) {
-                    this._people[0].set(key, Screener.getTypedVal(el));
-                  }
-                } else {
-                  this._people[0].set(key, false);
-                }
-              }
-            });
-        break;
-      }
-      case 'step-5':
-      case 'step-6': {
-        // For step 5, add incomes. For step 6, add expenses.
-        const key = stepId === 'step-5' ? 'incomes' : 'expenses';
-        const person = this._people[0];
-        person.set(key, []);
-        $step.find('[name$="amount"]').filter(':visible').each((i, el) => {
-          const itemIndex = $(el).attr('name').split('[').pop().split(']')[0];
-          const amount = Screener.getTypedVal(el);
-          const type = Screener.getTypedVal(
-              $step.find(`[name="Person[0].${key}[${itemIndex}].type"]`)[0]);
-          const frequency = Screener.getTypedVal($step
-              .find(`[name="Person[0].${key}[${itemIndex}].frequency"]`)[0]);
-          if (amount && type && frequency) {
-            if (key === 'incomes') {
-              person.addIncome(amount, type, frequency);
-            } else {
-              person.addExpense(amount, type, frequency);
-            }
-          }
-        });
-        break;
-      }
+      // case 'step-4': {
+      //   // Set all checked attributes. Unset any that are not checked.
+      //   $step.find(`.${ScreenerProto.CssClass.CHECKBOX_GROUP}`).find(':input')
+      //       .each((i, el) => {
+      //         if ($(el).val() && $(el).attr('name')) {
+      //           const key = $(el).attr('name').split('.')[1];
+      //           if ($(el).is(':visible') && $(el).is(':checked')) {
+      //             this._people[0].set(key, ScreenerProto.getTypedVal(el));
+      //           } else {
+      //             this._people[0].set(key, false);
+      //           }
+      //         }
+      //       });
+      //   // Set the attribute according to the radio button value.
+      //   $step.find(`.${ScreenerProto.CssClass.RADIO_GROUP}`)
+      //       .find(':input:checked').each((i, el) => {
+      //         if ($(el).val() && $(el).attr('name')) {
+      //           const key = $(el).attr('name').split('.')[1];
+      //           if ($(el).is(':visible')) {
+      //             if ($(el).is(':checked')) {
+      //               this._people[0].set(key, ScreenerProto.getTypedVal(el));
+      //             }
+      //           } else {
+      //             this._people[0].set(key, false);
+      //           }
+      //         }
+      //       });
+      //   break;
+      // }
+      // case 'step-5':
+      // case 'step-6': {
+      //   // For step 5, add incomes. For step 6, add expenses.
+      //   const key = stepId === 'step-5' ? 'incomes' : 'expenses';
+      //   const person = this._people[0];
+      //   person.set(key, []);
+      //   $step.find('[name$="amount"]').filter(':visible').each((i, el) => {
+      //     const itemIndex = $(el).attr('name').split('[').pop().split(']')[0];
+      //     const amount = ScreenerProto.getTypedVal(el);
+      //     const type = ScreenerProto.getTypedVal(
+      //         $step.find(`[name="Person[0].${key}[${itemIndex}].type"]`)[0]);
+      //     const frequency = ScreenerProto.getTypedVal($step
+      //         .find(`[name="Person[0].${key}[${itemIndex}].frequency"]`)[0]);
+      //     if (amount && type && frequency) {
+      //       if (key === 'incomes') {
+      //         person.addIncome(amount, type, frequency);
+      //       } else {
+      //         person.addExpense(amount, type, frequency);
+      //       }
+      //     }
+      //   });
+      //   break;
+      // }
       case 'step-7': {
         const $memberInput =
             $step.find('input[name="Household.members"]');
-        const memberCount = Screener.getTypedVal($memberInput[0]);
+        const memberCount = ScreenerProto.getTypedVal($memberInput[0]);
 
         // Verify that the inputted value is at least one and not greater than
         // the maximum household size.
         if (memberCount < 1 ||
             memberCount > Utility.CONFIG.SCREENER_MAX_HOUSEHOLD) {
-          this._showError($memberInput[0], Screener.ErrorMessage.HOUSEHOLD);
-          $(window).scrollTop(0);
-          stepValid = false;
+          this._showError($memberInput[0],
+              ScreenerProto.ErrorMessage.HOUSEHOLD);
+          // $(window).scrollTop(0);
+          return false;
         } else {
           this._household.set('members', memberCount);
+          // set inputs for household members here
         }
+
+        // Render the members markup based on household
+        this._populate(this._household.get('members'));
+        this._renderFamily(this._people);
+        this._renderFamilyDetails(this._people);
+
         // If there is only one member, ensure that they are the head of the
         // household and proceed to the final step, returning `false` to
         // prevent the default hash change.
@@ -548,103 +717,161 @@ class Screener {
           this._people[0].set({
             headOfHousehold: true,
             headOfHouseholdRelation: ''
-          });
-          window.location.hash = '#step-10';
+          })
+          // window.location.hash = '#step-10';
           return false;
         }
         break;
       }
       case 'step-8':
       case 'step-9': {
-        const personIndex = stepId === 'step-9' ? $step.data('personIndex') : 1;
-        const member = this._people[personIndex] || new ScreenerPerson();
-        // If this is step 8 set up the Head of the Household Relationship
-        // for the submitter.
-        if (stepId === 'step-8') {
-          const $hohInput =
-              $step.find('input[name="Person[0].headOfHousehold"]:checked');
-          // If the current user is the HoH, update their status and break.
-          if (Screener.getTypedVal($hohInput[0])) {
-            this._people[0].set({
-              headOfHousehold: true,
-              headOfHouseholdRelation: ''
-            });
-            break;
-          } else {
-            member.set('headOfHousehold', true);
-            this._people[0].set({
-              headOfHousehold: false,
-              headOfHouseholdRelation: $step
-                  .find('select[name="Person[0].headOfHouseholdRelation"]')
-                  .val()
-            });
-          }
-        } else {
-          // Set member's relations to HOH.
-          member.set({
-            headOfHousehold: false,
-            headOfHouseholdRelation: $step.find(
-              `select[name="Person[${personIndex}].headOfHouseholdRelation"]`)
-              .val()
-            });
-        }
 
-        member.set('age', Screener.getTypedVal($step
-            .find(`input[name="Person[${personIndex}].age"]`)[0]));
+        // console.dir(this._household);
+        // console.dir(this._people);
+        // console.dir($step.find('.screener-member'));
 
-        // Set member attributes and benefits.
-        $step.find(`.${Screener.CssClass.CHECKBOX_GROUP},
-            .${Screener.CssClass.RADIO_GROUP}`).find('input:checked')
+        // const personIndex = stepId === 'step-9' ? $step.data('personIndex') : 1;
+        // const member = this._people[personIndex] || new ScreenerPerson();
+        //
+        // console.dir( _.findWhere(this._people, {'headOfHousehold': true}) );
+
+        _.each(this._people, (person, personIndex) => {
+
+          let valueHoh = ScreenerProto.getTypedVal($step.find(
+            `input[name="Person[${personIndex}].headOfHousehold"]:checked`));
+          let valueHohRelation = (valueHoh) ? '' : $step.find(
+            `select[name="Person[${personIndex}].headOfHouseholdRelation"]`
+          ).val();
+          let valueRelation = Utility.localize(valueHohRelation);
+          // console.log(personIndex);
+          // console.log(this._people[0].get('headOfHousehold'));
+          // Strange issue where the HOH is not resetting on the person - FIX
+          // if (personIndex > 0 && this._people[0].get('headOfHousehold')) {
+          //   console.log('the first person IS HOH');
+          //   person.set({
+          //     headOfHousehold: false,
+          //     headOfHouseholdRelation: '',
+          //     relation: ''
+          //   });
+          // } else {
+
+          person.set({
+            headOfHousehold: valueHoh,
+            headOfHouseholdRelation: valueHohRelation,
+            relation: valueRelation
+          });
+          // }
+          // console.dir(person);
+
+          // person.set({
+          //   headOfHousehold: valueHoh,
+          //   headOfHouseholdRelation: (valueHoh) ? '' : valueHohRelation
+          // });
+
+          // console.dir( _.where(this._people, {headOfHousehold: true}) );
+
+          // this._people.find((object) => {
+          //     if (object['headOfHousehold'])
+          //       return true
+          //   }
+          // );
+
+          // console.dir([valueP0Hoh, valueP0HohRelation]);
+          // console.dir([person, personIndex]);
+
+          // If this is step 8 set up the Head of the Household Relationship
+          // for the submitter.
+          // if (stepId === 'step-8') {
+          //   const $hohInput =
+          //       $step.find('input[name="Person[0].headOfHousehold"]:checked');
+          //   // If the current user is the HoH, update their status and break.
+          //   if (ScreenerProto.getTypedVal($hohInput[0])) {
+          //     this._people[0].set({
+          //       headOfHousehold: true,
+          //       headOfHouseholdRelation: ''
+          //     });
+          //     break;
+          //   } else {
+          //     member.set('headOfHousehold', true);
+          //     this._people[0].set({
+          //       headOfHousehold: false,
+          //       headOfHouseholdRelation: $step
+          //           .find('select[name="Person[0].headOfHouseholdRelation"]')
+          //           .val()
+          //     });
+          //   }
+          // } else {
+          //   // Set member's relations to HOH.
+          //   member.set({
+          //     headOfHousehold: false,
+          //     headOfHouseholdRelation: $step.find(
+          //       `select[name="Person[${personIndex}].headOfHouseholdRelation"]`)
+          //       .val()
+          //     });
+          // }
+
+          person.set('age', ScreenerProto.getTypedVal(
+            $step.find(`input[name="Person[${personIndex}].age"]`)[0]
+          ));
+
+          // Set person attributes and benefits.
+          $step.find(`.${ScreenerProto.CssClass.CHECKBOX_GROUP},
+            .${ScreenerProto.CssClass.RADIO_GROUP}`).find('input:checked')
             .filter(`[name^="Person[${personIndex}]"]`).each((i, el) => {
               if ($(el).val() && $(el).attr('name')) {
                 const key = $(el).attr('name').split('.')[1];
-                member.set(key, Screener.getTypedVal(el));
+                person.set(key, ScreenerProto.getTypedVal(el));
               }
             });
 
-        // Add income and expenses.
-        member.set({
-          incomes: [],
-          expenses: []
-        });
-        _.each(['incomes', 'expenses'], (key) => {
-          $step.find('[name$="amount"]').filter(':visible')
-              .filter(`[name*="${key}"]`).each((i, el) => {
-            const itemIndex = $(el).attr('name').split('[').pop().split(']')[0];
-            const amount = Screener.getTypedVal(el);
-            const type = Screener.getTypedVal($step.find(
-                `[name="Person[${personIndex}].${key}[${itemIndex}]` +
-                `.type"]`)[0]);
-            const frequency = Screener.getTypedVal($step.find(
-                `[name="Person[${personIndex}].${key}[${itemIndex}]` +
-                `.frequency"]`)[0]);
-            if (amount && type && frequency) {
-              if (key === 'incomes') {
-                member.addIncome(amount, type, frequency);
-              } else {
-                member.addExpense(amount, type, frequency);
-              }
-            }
+          // Add income and expenses.
+          person.set({
+            incomes: [],
+            expenses: []
           });
+
+          _.each(['incomes', 'expenses'], (key) => {
+            $step.find('[name$="amount"]').filter(':visible')
+                .filter(`[name*="${key}"]`).each((i, el) => {
+              const itemIndex = $(el).attr('name').split('[').pop().split(']')[0];
+              const amount = ScreenerProto.getTypedVal(el);
+              const type = ScreenerProto.getTypedVal($step.find(
+                  `[name="Person[${personIndex}].${key}[${itemIndex}]` +
+                  `.type"]`)[0]);
+              const frequency = ScreenerProto.getTypedVal($step.find(
+                  `[name="Person[${personIndex}].${key}[${itemIndex}]` +
+                  `.frequency"]`)[0]);
+              if (amount && type && frequency) {
+                if (key === 'incomes') {
+                  person.addIncome(amount, type, frequency);
+                } else {
+                  person.addExpense(amount, type, frequency);
+                }
+              }
+            });
+          });
+
+          this._people[personIndex] = person;
+
         });
 
-        this._people[personIndex] = member;
+        this._renderFamily(this._people);
 
-        if (stepId === 'step-8') {
-          // If adding a HoH meets the household size, skip ahead to step 10.
-          if (this._people.length >= this._household.get('members')) {
-            window.location.hash = '#step-10';
-            return false;
-          }
-        } else {
-          // If we need to add more non-HoH household members, repeat this step.
-          if (this._people.length < this._household.get('members')) {
-            $step.data('personIndex', personIndex + 1);
-            this._goToStep($step[0]);
-            $(window).scrollTop(0);
-            return false;
-          }
-        }
+        // if (stepId === 'step-8') {
+        //   // If adding a HoH meets the household size, skip ahead to step 10.
+        //   if (this._people.length >= this._household.get('members')) {
+        //     window.location.hash = '#step-10';
+        //     return false;
+        //   }
+        // } else {
+        //   // If we need to add more non-HoH household members, repeat this step.
+        //   if (this._people.length < this._household.get('members')) {
+        //     $step.data('personIndex', personIndex + 1);
+        //     this._goToStep($step[0]);
+        //     // $(window).scrollTop(0);
+        //     return false;
+        //   }
+        // }
         break;
       }
       case 'step-10': {
@@ -663,7 +890,7 @@ class Screener {
           if ($(el).val()) {
             const key = $(el).attr('name').split('.')[1];
             if ($(el).prop('checked')) {
-              this._household.set(key, Screener.getTypedVal(el));
+              this._household.set(key, ScreenerProto.getTypedVal(el));
             } else {
               this._household.set(key, false);
             }
@@ -685,11 +912,11 @@ class Screener {
                 }
               });
             } else {
-              this._showError($inputs[0], Screener.ErrorMessage.REQUIRED);
+              this._showError($inputs[0], ScreenerProto.ErrorMessage.REQUIRED);
               // If the screener step is not yet invalid, scroll to the first
               // error.
               if (stepValid) {
-                $(window).scrollTop(0);
+                // $(window).scrollTop(0);
               }
               stepValid = false;
             }
@@ -709,9 +936,18 @@ class Screener {
           this._household.set('livingRentalType', '');
         }
 
-        this._household.set('cashOnHand', Screener.getTypedVal($step
-            .find('input[name="Household.cashOnHand"]')));
+        // this._household.set('cashOnHand', ScreenerProto.getTypedVal($step
+        //     .find('input[name="Household.cashOnHand"]')));
 
+        break;
+      }
+      case 'step-11': {
+        const $inputCashOnHand = $step.find('input[name="Household.cashOnHand"]');
+        if ($inputCashOnHand.length > 0) {
+          this._household.set('cashOnHand', ScreenerProto.getTypedVal(
+            $inputCashOnHand
+          ));
+        }
         break;
       }
 
@@ -719,8 +955,12 @@ class Screener {
         stepValid = false;
         break;
       }
+
     }
 
+    console.dir(this._categories);
+    console.dir(this._people);
+    console.dir(this._household);
     return stepValid;
   }
 
@@ -730,9 +970,9 @@ class Screener {
    * @return {this} Screener
    */
   _removeError(el) {
-    $(el).closest(`.${Screener.CssClass.QUESTION_CONTAINER}`)
-        .removeClass(Screener.CssClass.ERROR)
-        .find(`.${Screener.CssClass.ERROR_MSG}`).remove();
+    $(el).closest(`.${ScreenerProto.CssClass.QUESTION_CONTAINER}`)
+        .removeClass(ScreenerProto.CssClass.ERROR)
+        .find(`.${ScreenerProto.CssClass.ERROR_MSG}`).remove();
     return this;
   }
 
@@ -746,9 +986,11 @@ class Screener {
    */
   _showError(el, msg) {
     const $error = $(document.createElement('div'));
-    $error.addClass(Screener.CssClass.ERROR_MSG).text(Utility.localize(msg));
-    $(el).closest(`.${Screener.CssClass.QUESTION_CONTAINER}`)
-        .addClass(Screener.CssClass.ERROR).prepend($error);
+    $error.addClass(
+        ScreenerProto.CssClass.ERROR_MSG).text(Utility.localize(msg)
+    );
+    $(el).closest(`.${ScreenerProto.CssClass.QUESTION_CONTAINER}`)
+        .addClass(ScreenerProto.CssClass.ERROR).prepend($error);
     return this;
   }
 
@@ -766,7 +1008,7 @@ class Screener {
         $input.attr('type') === 'radio') && !$input.prop('checked')) ||
         (($input.attr('type') !== 'checkbox' ||
         $input.attr('type') !== 'radio') && !$input.val())) {
-      this._showError(el, Screener.ErrorMessage.REQUIRED);
+      this._showError(el, ScreenerProto.ErrorMessage.REQUIRED);
       $input.one('change keyup', () => {
         this._validateRequiredField(el);
       });
@@ -789,10 +1031,15 @@ class Screener {
     // an integer and not negative.
     if (val && !_.isNaN(parseInt(val, 10)) && _.isNumber(parseInt(val, 10))) {
       let parsed = Math.abs(parseInt(val, 10));
+      // console.log('parse integer');
+      // if (
+      //     $nput.attr('min') && $nput.attr('max') && this._validateMinMax(el)
+      // ) {
       $input.val(parsed);
+      // }
     } else if (val) {
       // Otherwise, show an error message as long as a value was entered.
-      this._showError(el, Screener.ErrorMessage.INTEGER);
+      this._showError(el, ScreenerProto.ErrorMessage.INTEGER);
       $input.one('keyup', () => {
         this._validateIntegerField(el);
       });
@@ -802,6 +1049,35 @@ class Screener {
 
     return this;
   }
+
+  // _validateMinMax(el) {
+    // const $input = $(el);
+    // const val = $input.val();
+    // let max = true;
+    // let min = true;
+    // let MinMax = true;
+    //
+    // message = input must be
+
+    // if there is a min/max value set, make sure it is between them
+    // if ($nput.attr('min') && val < $nput.attr('min')) {
+    //    // greater than min
+    //    min = false
+    //    message += ` greater than ${$nput.attr('min')}`;
+    // }
+
+    // if ($nput.attr('max') && val > $nput.attr('max')) {
+    //    // less than max
+    //    max = false;
+    //    message += ` and less than ${$nput.attr('max')}`
+    // }
+
+    // if (!min || !max) {
+    //   MinMax = false
+    // }
+
+    // return MinMax;
+  // }
 
   /**
    * For a given input, if the input has a value and can be coerced to a
@@ -822,7 +1098,7 @@ class Screener {
       $input.val(Utility.toDollarAmount(sanitizedVal));
     } else if (val) {
       // Otherwise, show an error message as long as a value was entered.
-      this._showError(el, Screener.ErrorMessage.FLOAT);
+      this._showError(el, ScreenerProto.ErrorMessage.FLOAT);
       $input.one('change', () => {
         this._validateFloatField(el);
       });
@@ -869,10 +1145,10 @@ class Screener {
 
     if (val) {
       const formattedVal = val.substring(0, 5);
-      if (Screener.NYC_ZIPS.indexOf(formattedVal) >= 0) {
+      if (ScreenerProto.NYC_ZIPS.indexOf(formattedVal) >= 0) {
         $input.val(formattedVal);
       } else {
-        this._showError(el, Screener.ErrorMessage.ZIP);
+        this._showError(el, ScreenerProto.ErrorMessage.ZIP);
         $input.one('keyup', () => {
           this._validateZipField(el);
         });
@@ -902,6 +1178,10 @@ class Screener {
       },
       members: []
     };
+
+    console.log('------------------');
+    console.log('Recap');
+    console.dir(this._categories);
 
     // Add programs.
     _.each(this._categories, (category) => {
@@ -1170,21 +1450,21 @@ class Screener {
  * @param {HTMLElement} input
  * @return {boolean|Number|string} typed value
  */
-Screener.getTypedVal = function(input) {
+ScreenerProto.getTypedVal = function(input) {
   const $input = $(input);
   const val = $input.val();
   let finalVal = $input.val();
   switch ($input.data('type')) {
-    case Screener.InputType.BOOLEAN: {
+    case ScreenerProto.InputType.BOOLEAN: {
       finalVal = Boolean(parseInt(val, 10));
       break;
     }
-    case Screener.InputType.FLOAT: {
+    case ScreenerProto.InputType.FLOAT: {
       finalVal = (_.isNumber(parseFloat(val)) && !_.isNaN(parseFloat(val))) ?
           parseFloat(val) : 0;
       break;
     }
-    case Screener.InputType.INTEGER: {
+    case ScreenerProto.InputType.INTEGER: {
       finalVal = (_.isNumber(parseInt(val, 10)) &&
           !_.isNaN(parseInt(val, 10))) ?
           parseInt($input.val(), 10) : 0;
@@ -1198,7 +1478,7 @@ Screener.getTypedVal = function(input) {
  * CSS classes used by this component.
  * @enum {string}
  */
-Screener.CssClass = {
+ScreenerProto.CssClass = {
   ACTIVE: 'active',
   ADD_SECTION: 'js-add-section',
   CHECKBOX_GROUP: 'js-screener-checkbox-group',
@@ -1206,7 +1486,7 @@ Screener.CssClass = {
   EDIT_PERSON: 'js-edit-person',
   ERROR: 'error',
   ERROR_MSG: 'error-message',
-  FORM: 'js-screener-form',
+  FORM: 'js-screener-proto-form',
   HIDDEN: 'hidden',
   MATRIX: 'js-screener-matrix',
   MATRIX_ITEM: 'js-matrix-item',
@@ -1216,16 +1496,21 @@ Screener.CssClass = {
   QUESTION_CONTAINER: 'screener-question-container',
   TOGGLE: 'js-screener-toggle',
   STEP: 'js-screener-step',
+  PAGE: 'js-screener-page',
   SUBMIT: 'js-screener-submit',
   TRANSACTION_LABEL: 'screener-transaction-type',
-  VALIDATE_STEP: 'js-screener-validate-step'
+  VALIDATE_STEP: 'js-screener-validate-step',
+  VALIDATE_STEP_UI: 'js-screener-validate-step-ui',
+  RENDER_RECAP: 'js-render-recap',
+  TOGGLE_QUESTION: 'js-toggle-question',
+  PAGE_RECAP: 'page-recap'
 };
 
 /**
  * Localization labels of error messages.
  * @enum {string}
  */
-Screener.ErrorMessage = {
+ScreenerProto.ErrorMessage = {
   FLOAT: 'ERROR_FLOAT',
   HOUSEHOLD: 'ERROR_HOUSEHOLD',
   INTEGER: 'ERROR_INTEGER',
@@ -1237,7 +1522,7 @@ Screener.ErrorMessage = {
  * data-type attributes used by this component.
  * @enum {string}
  */
-Screener.InputType = {
+ScreenerProto.InputType = {
   BOOLEAN: 'boolean',
   FLOAT: 'float',
   INTEGER: 'integer'
@@ -1248,7 +1533,7 @@ Screener.InputType = {
  * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
  * @type {array<String>}
  */
-Screener.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
+ScreenerProto.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
     '10457', '10458', '10459', '10460', '10461', '10462', '10463',
     '10464', '10465', '10466', '10467', '10468', '10469', '10470',
     '10471', '10472', '10473', '10474', '10475', '10499', '11201',
@@ -1305,4 +1590,4 @@ Screener.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
     '12758', '12759', '12763', '12764', '12768', '12779', '12783',
     '12786', '12788', '12789', '13731', '16091', '20459'];
 
-export default Screener;
+export default ScreenerProto;

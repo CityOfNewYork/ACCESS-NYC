@@ -1,0 +1,83 @@
+<fieldset class="screener-body-step active js-screener-step" id="step-10">
+
+  <h1 class="m-left-2 m-top">
+    {{ __('Housing', 'accessnyc-screener') }}
+  </h1>
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-housing">
+
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <label class="screener-label" for="housing-situation" >
+        <a class="d-block p-2" href="#question-housing">
+          {{ __('Which of these best applies to your housing situation?', 'accessnyc-screener') }}
+        </a>
+      </label>
+
+      <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
+
+        <div class="screener-checkboxes js-screener-checkbox-group">
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="js-screener-toggle js-screener-validate-step-ui" type="checkbox" name="Household.livingRenting" value="1" data-toggles="#screener-rental-type" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Renting', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="js-screener-toggle js-screener-validate-step-ui" type="checkbox" name="Household.livingOwner" value="1" data-toggles="#screener-homeowner" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('You or a household member owns the home or apartment', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="js-screener-validate-step-ui" type="checkbox" name="Household.livingStayingWithFriend" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Staying with a friend', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="js-screener-validate-step-ui" type="checkbox" name="Household.livingHotel" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('In a hotel', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="js-screener-validate-step-ui" type="checkbox" name="Household.livingShelter" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('In a shelter or homeless', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="screener-checkboxes-input sr-only js-clear-group js-screener-validate-step-ui" type="checkbox" name="Household.livingPreferNotToSay" value="1" data-type="boolean" checked>
+            <span class="styled-checkbox-label">{{ __('Prefer not to say', 'accessnyc-screener') }}</span>
+          </label>
+        </div>
+
+        <div class="hidden" id="screener-rental-type">
+          <div class="screener-question">
+            <label class="screener-label" for="housing-livingRentalType">{{ __('Which type of rental do you live in?', 'accessnyc-screener') }}</label>
+            <select class="screener-select js-screener-toggle js-screener-validate-step-ui" id="housing-livingRentalType" name="Household.livingRentalType" data-toggles="#screener-lease-owner">
+              <option value="">{{ __('Click to select a rental type', 'accessnyc-screener') }}</option>
+              <option value="MarketRate">{{ __('Non-Regulated or Market Rate apartment', 'accessnyc-screener') }}</option>
+              <option value="RentControlled">{{ __('Rent controlled or rent stabilized apartment', 'accessnyc-screener') }}</option>
+              <option value="FamilyHome">{{ __('Family Home', 'accessnyc-screener') }}</option>
+              <option value="Condo">{{ __('Condo', 'accessnyc-screener') }}</option>
+              <option value="NYCHA">{{ __('NYCHA Housing', 'accessnyc-screener') }}</option>
+              <option value="RentRegulatedHotel">{{ __('Rent Regulated Hotel/Single Room', 'accessnyc-screener') }}</option>
+              <option value="Section213">{{ __('Section 213 apartments', 'accessnyc-screener') }}</option>
+              <option value="LimitedDividendDevelopment">{{ __('Limited Dividend development apartments', 'accessnyc-screener') }}</option>
+              <option value="MitchellLama">{{ __('Mitchell-Lama apartments', 'accessnyc-screener') }}</option>
+              <option value="RedevelopmentCompany">{{ __('Redevelopment Company apartments', 'accessnyc-screener') }}</option>
+              <option value="HDFC">{{ __('Housing Development Fund Company (HDFC) Cooperative', 'accessnyc-screener') }}</option>
+              <option value="">{{ __('None of these apply', 'accessnyc-screener') }}</option>
+            </select>
+          </div>
+          <div class="screener-question js-screener-checkbox-group" id="screener-lease-owner">
+            <label class="screener-label">{{ __('Who is on the lease?', 'accessnyc-screener') }}</label>
+            <div id="screener-possible-leasees" class="screener-checkboxes js-screener-checkbox-group screener-question-container"></div>
+          </div>
+        </div>
+
+        <div class="screener-question hidden" id="screener-homeowner">
+          <label class="screener-label">{{ __('Who is the owner?', 'accessnyc-screener') }}</label>
+          <div id="screener-possible-owners" class="screener-checkboxes js-screener-checkbox-group screener-question-container"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>

@@ -1,0 +1,201 @@
+<fieldset class="screener-body-step active js-screener-step" id="step-8">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white">
+
+    <div id="screener-is-submitter-head-of-household">
+
+      <label class="screener-label">
+        <a class="d-block p-2 js-simple-toggle" href="#head-of-household">
+          {{ __('Are you the head of the household?', 'accessnyc-screener') }}
+        </a>
+      </label>
+
+      <div id="head-of-household" class="hidden">
+
+        <div class="p-horizontal-2 p-bottom-2">
+
+          <div class="screener-radio-buttons js-screener-radio-group m-bottom-2">
+            <label class="screener-radio screener-label js-screener-radio-label">
+              <input class="screener-radio-input js-screener-toggle sr-only js-screener-validate-step-ui" data-go-to-step="#step-9" value="1" type="radio" name="Person[0].headOfHousehold" data-type="boolean" data-hides="#screener-hoh" checked/>
+              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="screener-radio screener-label js-screener-radio-label">
+              <input class="screener-radio-input js-screener-toggle sr-only js-screener-validate-step-ui" value="0" type="radio" name="Person[0].headOfHousehold" data-type="boolean" data-shows="#screener-hoh"/>
+              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
+
+          <h4 class="screener-label m-0">{{ __('This is what the head of household means.', 'accessnyc-screener') }}</h4>
+          <p class="m-0">{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', 'accessnyc-screener') }}</p>
+        </div>
+
+        <div class="p-horizontal-2 p-bottom-2 hidden" id="screener-hoh">
+          {# <div class="screener-question">
+            <label class="screener-label" for="hoh-age">{{ __('Tell us about the head of your household.', 'accessnyc-screener') }} {{ __('How old are they?', 'accessnyc-screener') }}</label>
+            <div class="screener-question-container">
+              <input id="hoh-age" name="Person[1].age" type="number" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>
+            </div>
+          </div> #}
+          <div class="screener-question">
+            <label class="screener-label" for="hoh-relation">{{ __('What is your relationship to the head of the household? I am their:', 'accessnyc-screener') }}</label>
+            <div class="screener-question-container">
+              <select class="screener-select js-screener-validate-step-ui" data-go-to-step="#step-9" id="hoh-relation" name="Person[0].headOfHouseholdRelation" required>
+                <option value="">{{ __('Click to select relationship', 'accessnyc-screener') }}</option>
+                <option value="Child">{{ __('Child', 'accessnyc-screener') }}</option>
+                <option value="FosterChild">{{ __('Foster Child', 'accessnyc-screener') }}</option>
+                <option value="StepChild">{{ __('Step-child', 'accessnyc-screener') }}</option>
+                <option value="Grandchild">{{ __('Grandchild', 'accessnyc-screener') }}</option>
+                <option value="Spouse">{{ __('Spouse', 'accessnyc-screener') }}</option>
+                <option value="Parent">{{ __('Parent', 'accessnyc-screener') }}</option>
+                <option value="FosterParent">{{ __('Foster Parent', 'accessnyc-screener') }}</option>
+                <option value="StepParent">{{ __('Step-parent', 'accessnyc-screener') }}</option>
+                <option value="Grandparent">{{ __('Grandparent', 'accessnyc-screener') }}</option>
+                <option value="SisterBrother">{{ __('Sister/Brother', 'accessnyc-screener') }}</option>
+                <option value="StepSisterStepBrother">{{ __('Step-sister/Step-brother', 'accessnyc-screener') }}</option>
+                <option value="BoyfriendGirlfriend">{{ __('Boyfriend/Girlfriend', 'accessnyc-screener') }}</option>
+                <option value="DomesticPartner">{{ __('Domestic Partner', 'accessnyc-screener') }}</option>
+                <option value="Unrelated">{{ __('Unrelated', 'accessnyc-screener') }}</option>
+                <option value="Other">{{ __('Related in some other way', 'accessnyc-screener') }}</option>
+              </select>
+            </div>
+          </div>
+          {# <hr class="screener-divider">
+          <div class="screener-question">
+            <label class="screener-label">{{ __('Do any of these apply to them?', 'accessnyc-screener') }}</label>
+            <p class="screener-explanation">{{ __('It’s OK to pick more than one.', 'accessnyc-screener') }}</p>
+            <div class="screener-checkboxes js-screener-checkbox-group">
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input class="js-screener-toggle" type="checkbox" name="Person[1].student" value="1" data-toggles="#screener-is-hoh-full-time-student" data-type="boolean">
+                <span class="styled-checkbox-label">{{ __('Student', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input type="checkbox" name="Person[1].pregnant" value="1" data-type="boolean">
+                <span class="styled-checkbox-label">{{ __('Pregnant', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input class="js-screener-toggle" type="checkbox" name="Person[1].unemployed" value="1" data-toggles="#screener-did-hoh-work-last-18-months" data-type="boolean">
+                <span class="styled-checkbox-label">{{ __('Unemployed', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input type="checkbox" name="Person[1].blind" value="1" data-type="boolean">
+                <span class="styled-checkbox-label">{{ __('Blind or visually impaired', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input type="checkbox" name="Person[1].disabled" value="1" data-type="boolean">
+                <span class="styled-checkbox-label">{{ __('Have any disabilities', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input type="checkbox" name="Person[1].veteran" value="1" data-type="boolean">
+                <span class="styled-checkbox-label">{{ __('Served in the U.S. Armed Forces, National Guard or Reserves', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input class="screener-checkboxes-input sr-only js-clear-group" type="checkbox" checked>
+                <span class="styled-checkbox-label">{{ __('None of these apply', 'accessnyc-screener') }}</span>
+              </label>
+            </div>
+          </div>
+          <div class="screener-question hidden" id="screener-is-hoh-full-time-student">
+            <label class="screener-label">{{ __('Are they a full-time student?', 'accessnyc-screener') }}</label>
+            <div class="screener-radio-buttons js-screener-radio-group">
+              <label class="screener-radio screener-label js-screener-radio-label">
+                <input class="screener-radio-input sr-only" value="1" type="radio" name="Person[1].studentFulltime" data-type="boolean"/>
+                <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="screener-radio screener-label js-screener-radio-label">
+                <input class="screener-radio-input sr-only" value="0" type="radio" name="Person[1].studentFulltime" data-type="boolean" checked/>
+                <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+              </label>
+            </div>
+          </div>
+          <div class="screener-question hidden" id="screener-did-hoh-work-last-18-months">
+            <label class="screener-label">{{ __('Did they work in the last 18 months?', 'accessnyc-screener') }}</label>
+            <div class="screener-radio-buttons js-screener-radio-group">
+              <label class="screener-radio screener-label js-screener-radio-label">
+                <input class="screener-radio-input sr-only" value="1" type="radio" name="Person[1].unemployedWorkedLast18Months" data-type="boolean"/>
+                <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="screener-radio screener-label js-screener-radio-label">
+                <input class="screener-radio-input sr-only" value="0" type="radio" name="Person[1].unemployedWorkedLast18Months" data-type="boolean" checked/>
+                <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+              </label>
+            </div>
+          </div>
+          <hr class="screener-divider">
+          <div class="screener-question">
+            <label class="screener-label">{{ __('Do they receive any of these benefits?', 'accessnyc-screener') }}</label>
+            <div class="screener-checkboxes js-screener-checkbox-group">
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input type="checkbox" name="Person[1].benefitsMedicaid" value="1" data-type="boolean">
+                <span class="styled-checkbox-label">{{ __('Medicaid', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input type="checkbox" name="Person[1].benefitsMedicaidDisability" value="1" data-type="boolean">
+                <span class="styled-checkbox-label">{{ __('Disability-related Medicaid', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+                <input class="screener-checkboxes-input sr-only js-clear-group" type="checkbox" checked>
+                <span class="styled-checkbox-label">{{ __('None of these apply', 'accessnyc-screener') }}</span>
+              </label>
+            </div>
+          </div>
+          <hr class="screener-divider">
+          <div class="screener-question">
+            <label class="screener-label">{{ __('Do they have an income?', 'accessnyc-screener') }}</label>
+            <p class="screener-explanation">{{ __('This includes money from jobs, alimony, investments or gifts.', 'accessnyc-screener') }}</p>
+            <div class="screener-radio-buttons js-screener-radio-group">
+              <label class="screener-radio screener-label js-screener-radio-label">
+                <input class="screener-radio-input js-screener-toggle js-add-section sr-only"
+                    value="1"
+                    type="radio"
+                    name="hoh-has-income"
+                    data-type="boolean"
+                    data-shows="#hoh-income"
+                    data-renders="#screener-person-1-income-0"
+                    data-render-target="#hoh-income"
+                    data-matrix="income"
+                    data-matrix-index="0"
+                    data-person-index="1">
+                <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="screener-radio screener-label js-screener-radio-label">
+                <input class="screener-radio-input js-screener-toggle sr-only" value="0" type="radio" name="hoh-has-income" data-type="boolean" data-hides="#hoh-income" checked/>
+                <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+              </label>
+            </div>
+          </div>
+          <div class="hidden js-screener-matrix screener-matrix" id="hoh-income"></div>
+
+          <hr class="screener-divider">
+          <div class="screener-question" id="screener-have-expenses-head-of-household">
+            <label class="screener-label">{{ __('Do they have any expenses?', 'accessnyc-screener') }}</label>
+            <p class="screener-explanation">{{ __('This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.', 'accessnyc-screener') }}</p>
+            <div class="screener-radio-buttons js-screener-radio-group">
+              <label class="screener-radio screener-label js-screener-radio-label">
+                <input class="screener-radio-input js-screener-toggle js-add-section sr-only"
+                    value="1"
+                    type="radio"
+                    name="hoh-has-expenses"
+                    data-type="boolean"
+                    data-shows="#hoh-expense"
+                    data-renders="#screener-person-1-expense-0"
+                    data-render-target="#hoh-expense"
+                    data-matrix="expense"
+                    data-matrix-index="0"
+                    data-person-index="1">
+                <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="screener-radio screener-label js-screener-radio-label">
+                <input class="screener-radio-input js-screener-toggle sr-only" value="0" type="radio" name="hoh-has-expenses" data-type="boolean" data-toggles="#hoh-expense" checked/>
+                <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+              </label>
+            </div>
+          </div>
+          {#<div class="hidden js-screener-matrix screener-matrix" id="hoh-expense"></div> #}
+        </div>
+
+        {# <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-9">{{ __('Continue', 'accessnyc-screener') }}</a></p> #}
+      </div>
+
+  </div>
+
+</fieldset>{# /#step-8 #}

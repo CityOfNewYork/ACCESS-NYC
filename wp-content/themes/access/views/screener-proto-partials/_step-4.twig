@@ -1,0 +1,91 @@
+<fieldset class="screener-body-step active js-screener-step" id="step-4">
+  {# <div class="screener-step">{{ __('Step 4 of 10', 'accessnyc-screener') }}</div> #}
+  <h1 class="screener-title">{{ __('A little more about you.', 'accessnyc-screener') }}</h1>
+
+    <div class="screener-question" id="screener-submitter-applicable-groups">
+      <label class="screener-label"><a class="js-simple-toggle" href="#do-any-of-these-apply-to-you">{{ __('Do any of these apply to you?', 'accessnyc-screener') }}</a></label>
+      <div {# class="hidden" #} id="do-any-of-these-apply-to-you">
+        <p class="screener-explanation">{{ __('It’s OK to pick more than one. You can also leave this blank if none of these apply to you.', 'accessnyc-screener') }}</p>
+        <div class="screener-checkboxes js-screener-checkbox-group">
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="js-screener-toggle" type="checkbox" name="Person[0].student" value="1" data-toggles="#screener-is-submitter-full-time-student" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Student', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input type="checkbox" name="Person[0].pregnant" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Pregnant', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="js-screener-toggle" type="checkbox" name="Person[0].unemployed" value="1" data-toggles="#screener-did-submitter-work-last-18-months" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Unemployed', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input type="checkbox" name="Person[0].blind" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Blind or visually impaired', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input type="checkbox" name="Person[0].disabled" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Have any disabilities', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input type="checkbox" name="Person[0].veteran" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Served in the U.S. Armed Forces, National Guard or Reserves', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="screener-checkboxes-input sr-only js-clear-group" type="checkbox" checked>
+            <span class="styled-checkbox-label">{{ __('None of these apply', 'accessnyc-screener') }}</span>
+          </label>
+        </div>
+        <div class="screener-question hidden" id="screener-is-submitter-full-time-student">
+          <label class="screener-label">{{ __('Are you a full-time student?', 'accessnyc-screener') }}</label>
+          <div class="screener-radio-buttons js-screener-radio-group">
+            <label class="screener-radio screener-label js-screener-radio-label">
+              <input class="screener-radio-input sr-only" type="radio" name="Person[0].studentFulltime" value="1" data-type="boolean" />
+              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="screener-radio screener-label js-screener-radio-label">
+              <input class="screener-radio-input sr-only" type="radio" name="Person[0].studentFulltime" value="0" data-type="boolean" checked />
+              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
+        </div>
+        <div class="screener-question hidden" id="screener-did-submitter-work-last-18-months">
+          <label class="screener-label">{{ __('Did you work in the last 18 months?', 'accessnyc-screener') }}</label>
+          <div class="screener-radio-buttons js-screener-radio-group">
+            <label class="screener-radio screener-label js-screener-radio-label">
+              <input class="screener-radio-input sr-only" type="radio" name="Person[0].unemployedWorkedLast18Months" value="1" data-type="boolean" />
+              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="screener-radio screener-label js-screener-radio-label">
+              <input class="screener-radio-input sr-only" type="radio" name="Person[0].unemployedWorkedLast18Months" value="0" data-type="boolean" checked />
+              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
+        </div>
+        <hr class="screener-divider">
+      </div>
+    </div>
+
+    <div class="screener-question" id="screener-submitter-benefits-received">
+      <label class="screener-label"><a class="js-simple-toggle" href="#do-you-recieve-any-of-these-benefits">{{ __('Do you receive any of these benefits?', 'accessnyc-screener') }}</a></label>
+      <div {# class="hidden" #} id="do-you-recieve-any-of-these-benefits">
+        <div class="screener-checkboxes js-screener-checkbox-group">
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input type="checkbox" name="Person[0].benefitsMedicaid" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Medicaid', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input type="checkbox" name="Person[0].benefitsMedicaidDisability" value="1" data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Disability-related Medicaid', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input class="screener-checkboxes-input sr-only js-clear-group" type="checkbox" checked>
+            <span class="styled-checkbox-label">{{ __('None of these apply', 'accessnyc-screener') }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-5">{{ __('Continue', 'accessnyc-screener') }}</a></p>
+
+</fieldset>{# /#step-4 #}

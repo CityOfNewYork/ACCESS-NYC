@@ -1,0 +1,80 @@
+
+
+@mixin gutters($base, $namespace, $attribute, $multiplier_local: false, $breakpoint: '') {
+
+  $m: $multiplier_local;
+
+  @while $m > 0 {
+
+    $variant: $breakpoint;
+
+    @if $m != 1 {
+      $variant: '-' + $m + $breakpoint;
+    }
+
+    $val: $base * $m;
+
+    .#{$namespace}#{$variant} {
+      #{$attribute}: $val !important
+    }
+
+    .#{$namespace}-top#{$variant} {
+      #{$attribute}-top: $val !important
+    }
+
+    .#{$namespace}-right#{$variant} {
+      #{$attribute}-right: $val !important
+    }
+
+    .#{$namespace}-bottom#{$variant} {
+      #{$attribute}-bottom: $val !important
+    }
+
+    .#{$namespace}-left#{$variant} {
+      #{$attribute}-left: $val !important
+    }
+
+    .#{$namespace}-horizontal#{$variant} {
+      #{$attribute}-left: $val !important;
+      #{$attribute}-right: $val !important
+    }
+
+    .#{$namespace}-vertical#{$variant} {
+      #{$attribute}-top: $val !important;
+      #{$attribute}-bottom: $val !important
+    }
+
+    $m: $m - 1;
+
+  }
+
+  .#{$namespace}-0#{$breakpoint} {
+    #{$attribute}: 0 !important
+  }
+
+}
+
+// Declarations
+@include gutters($spacing-base, 'm', 'margin', 3); // Make margin gutters
+
+@include gutters($spacing-base, 'p', 'padding', 3); // Make padding gutters
+
+.p-0 {
+  padding: 0 !important
+}
+
+.m-0 {
+  margin: 0 !important
+}
+
+.d-flex {
+  display: flex
+}
+
+.f-1 {
+  flex: 1
+}
+
+.ai-center {
+  align-items: center
+}

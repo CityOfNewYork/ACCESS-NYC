@@ -30,6 +30,33 @@ $color-red: #c6252b;
 $color-yellow-access: #fbb720;
 $color-yellow-light: #ffe6a9;
 $color-white: #fff;
+$color-transparent: rgba(255,255,255,0);
+
+$primary: ('blue-dark', $color-blue-dark, $color-white, $color-yellow-access),
+          ('grey-lightest', $color-grey-lightest, $color-black, $color-blue-bright),
+          ('yellow-access', $color-yellow-access, $color-black, $color-white);
+
+$secondary: ('blue', $color-blue, $color-white, $color-blue),
+            ('blue-bright', $color-blue-bright, $color-black, $color-white),
+            ('blue-light', $color-blue-light, $color-black, $color-blue-bright),
+            ('green', $color-green, $color-black, $color-white),
+            ('green-dark', $color-green-dark, $color-black, $color-white),
+            ('green-mid', $color-green-mid, $color-black, $color-white),
+            ('green-light', $color-green-light, $color-black, $color-white),
+            ('grey-dark', $color-grey-dark, $color-black, $color-white),
+            ('grey-light', $color-grey-light, $color-black, $color-white),
+            ('grey-lightest', $color-grey-lightest, $color-black, $color-white),
+            ('grey-mid', $color-grey-mid, $color-black, $color-white),
+            ('pink', $color-pink, $color-black, $color-white),
+            ('pink-light', $color-pink-light, $color-black, $color-white),
+            ('purple', $color-purple, $color-black, $color-white),
+            ('red', $color-red, $color-black, $color-white),
+            ('grey-light', $color-grey-light, $color-black, $color-white),
+            ('yellow-light', $color-yellow-light, $color-black, $color-white);
+
+$base: ('white', $color-white, $color-black, $color-blue-bright),
+       ('black', $color-black, $color-white, $color-blue-bright),
+       ('transparent', $color-transparent, $color-transparent, $color-transparent);
 
 /**
  * Typography

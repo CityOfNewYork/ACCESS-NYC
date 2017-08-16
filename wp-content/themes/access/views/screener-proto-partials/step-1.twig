@@ -1,0 +1,51 @@
+<fieldset class="screener-body-step active js-screener-step" id="step-1">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-help">
+
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <label class="screener-label">
+        <a class="d-block p-2" href="#question-help">{{ __('What kind of help are you looking for?', 'accessnyc-screener') }}</a>
+      </label>
+
+      <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
+
+        <div class="screener-checkboxes screener-categories">
+          {% for category in categories %}
+          {% if language_code != 'en' %}
+            {% set langLength = (language_code | length + 1) * -1 %}
+            {% set catSlug = category.slug | slice(0, langLength) %}
+          {% else %}
+            {% set catSlug = category.slug %}
+          {% endif %}
+          <label class="screener-checkbox styled-checkbox screener-checkboxes-program screener-label">
+            <input class="js-screener-validate-step-ui" type="checkbox" name="category" value="{{ category.slug }}">
+            <span class="styled-checkbox-label">
+              <div class="program-category">
+                <div class="program-icon">
+                  <span class="icon">
+                    <svg class="icon icon-{{ catSlug }}">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ catSlug }}"></use>
+                    </svg>
+                  </span>
+                </div>
+                <div class="program-card-body">{{ category.name }}</div>
+              </div>
+            </span>
+          </label>
+          {% endfor %}
+        </div>
+
+        <h4 class="screener-label m-0">{{ __('What is this?', 'accessnyc-screener') }}</h4>
+        <p>{{ __('On the next few pages, we’ll ask you about yourself and your household to find benefits and programs that you may be interested in. It usually takes about 10 minutes to answer all of the questions.', 'accessnyc-screener') }}</p>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>{# /#step-1 #}

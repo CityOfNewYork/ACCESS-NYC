@@ -6,28 +6,22 @@
   float: left
 }
 
-.m-0 {
-  margin: 0
+.o-hidden {
+  overflow: hidden;
 }
 
-.c-black {
-  color: $color-black
+.p-relative {
+  position: relative;
 }
 
-.c-grey-dark {
-  color: $color-grey-dark
+.p-absolute {
+  position: absolute;
 }
 
-.f-black {
-  fill: $color-black
-}
-
-.f-grey-mid {
-  fill: $color-grey-mid
-}
-
-.f-grey-dark {
-  fill: $color-grey-dark
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .sr-only {
