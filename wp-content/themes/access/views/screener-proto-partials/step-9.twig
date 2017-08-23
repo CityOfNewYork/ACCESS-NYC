@@ -6,36 +6,57 @@
 
     <div class="p-relative">
 
-      <label class="screener-label">
-        <a class="d-block p-2" href="#question-screener-is-submitter-head-of-household">
+      <label data-scope="_household" class="screener-label">
+        <a data-class="(members > 1)?'':'ui-disabled'" class="d-block p-2" href="#question-screener-is-submitter-head-of-household">
           {{ __('Are you the head of the household?', 'accessnyc-screener') }}
         </a>
       </label>
 
-      <div class="js-toggle-question hidden">
+      <div class="js-toggle-question"> {# hidden #}
 
         <div class="p-horizontal-2 p-bottom-2">
 
-          <div class="screener-radio-buttons js-screener-radio-group m-bottom-2">
+          <div data-scope="_people[0]" class="screener-radio-buttons js-screener-radio-group m-bottom-2">
             <label class="screener-radio screener-label js-screener-radio-label">
-              <input class="screener-radio-input js-screener-toggle sr-only js-screener-validate-step-ui" data-go-to-step="#step-9" value="1" type="radio" name="Person[0].headOfHousehold" data-type="boolean" data-hides="#screener-hoh" checked/>
+              <input
+                data-val="headOfHousehold"
+                data-go-to-step="#step-9"
+                data-type="boolean"
+                data-hides="#screener-hoh"
+                class="screener-radio-input js-screener-toggle sr-only js-screener-validate-step-ui"
+                value="true"
+                type="radio"
+                name="Person[0].headOfHousehold"/>
               <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
             </label>
             <label class="screener-radio screener-label js-screener-radio-label">
-              <input class="screener-radio-input js-screener-toggle sr-only js-screener-validate-step-ui" value="0" type="radio" name="Person[0].headOfHousehold" data-type="boolean" data-shows="#screener-hoh"/>
+              <input
+                data-val="headOfHousehold"
+                data-type="boolean"
+                data-shows="#screener-hoh"
+                class="screener-radio-input js-screener-toggle sr-only js-screener-validate-step-ui"
+                value="false"
+                type="radio"
+                name="Person[0].headOfHousehold"/>
               <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
             </label>
           </div>
 
           <h4 class="screener-label m-0">{{ __('This is what the head of household means.', 'accessnyc-screener') }}</h4>
           <p class="m-0">{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', 'accessnyc-screener') }}</p>
+
         </div>
 
-        <div class="p-horizontal-2 p-bottom-2 hidden" id="screener-hoh">
-          <div class="screener-question">
+        <div data-scope="_people[0]">
+          <div data-class="(headOfHousehold)?'hidden':''" class="p-horizontal-2 p-bottom-2">
             <label class="screener-label" for="hoh-relation">{{ __('What is your relationship to the head of the household? I am their:', 'accessnyc-screener') }}</label>
-            <div class="screener-question-container">
-              <select class="screener-select js-screener-validate-step-ui" data-go-to-step="#step-9" id="hoh-relation" name="Person[0].headOfHouseholdRelation" required>
+            <div>
+              <select
+                data-val="headOfHouseholdRelation"
+                class="screener-select js-screener-validate-step-ui"
+                id="hoh-relation"
+                name="Person[0].headOfHouseholdRelation"
+                required>
                 <option value="">{{ __('Click to select relationship', 'accessnyc-screener') }}</option>
                 <option value="Child">{{ __('Child', 'accessnyc-screener') }}</option>
                 <option value="FosterChild">{{ __('Foster Child', 'accessnyc-screener') }}</option>
@@ -62,6 +83,10 @@
 
   </div>
 
+</fieldset>
+
+<fieldset class="screener-body-step active js-screener-step">
+
   <div class="p-bottom">
 
     <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-screener-household-member">
@@ -70,8 +95,8 @@
 
       <div class="p-relative">
 
-        <label class="screener-label">
-          <a class="d-block p-2" href="#question-screener-household-member">
+        <label data-scope="_household" class="screener-label">
+          <a data-class="(members > 1)?'':'ui-disabled'" class="d-block p-2" href="#question-screener-household-member">
             {{ __('Who are the members of your household?', 'accessnyc-screener') }}
           </a>
         </label>
@@ -83,6 +108,10 @@
     </div>
 
   </div>
+
+</fieldset>
+
+<fieldset class="screener-body-step active js-screener-step">
 
   <section id="section-household-members" class="js-section d-block p-bottom o-hidden">
 

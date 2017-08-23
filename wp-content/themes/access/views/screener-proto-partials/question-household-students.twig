@@ -1,0 +1,28 @@
+<fieldset class="screener-body-step active js-screener-step">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-students">
+
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div> {# hidden #}
+
+    <div class="p-relative">
+
+      <label class="screener-label">
+        <a class="d-block p-2" href="#question-household-students">
+          {{ __('Is anyone in your household a full-time student?', 'accessnyc-screener') }}
+        </a>
+      </label>
+
+      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden"> {# hidden #}
+
+        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with {
+          who: 'Who is a full-time student?',
+          dataKey: 'student'
+        } %}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>

@@ -1,0 +1,233 @@
+{% set incomeOptions = [
+  {'value':'', 'text':'Click to add an income type'},
+  {'value':'Wages', 'text':'wages, salaries, tips'},
+  {'value':'SelfEmployment', 'text': 'self-employment Income'},
+  {'value':'Unemployment',  'text': 'unemployment benefits'},
+  {'value':'CashAssistance', 'text':'Cash Assistance grant'},
+  {'value':'ChildSupport', 'text':'child support received'},
+  {'value':'DisabilityMedicaid', 'text':'disability-related Medicaid'},
+  {'value':'SSI', 'text':'Supplemental Security Income SSI'},
+  {'value':'SSDependent', 'text':'Social Security Dependent Benefits'},
+  {'value':'SSDisability', 'text':'Social Security Disability Benefits'},
+  {'value':'SSSurvivor', 'text':'Social Security Survivor’s Benefits'},
+  {'value':'SSRetirement', 'text':'Social Security Retirement Benefits'},
+  {'value':'NYSDisability', 'text':'New York State Disability Benefits'},
+  {'value':'Veteran', 'text':'Veteran’s Pension or Benefits'},
+  {'value':'Pension', 'text':'Government or Private Pension'},
+  {'value':'DeferredComp', 'text':'Withdrawals from Deferred Compensation IRA, Keogh, etc.'},
+  {'value':'WorkersComp', 'text':'Worker’s Compensation'},
+  {'value':'Alimony', 'text':'alimony received'},
+  {'value':'Boarder', 'text':'boarder or lodger'},
+  {'value':'Gifts', 'text':'gifts/contributions received'},
+  {'value':'Rental', 'text':'rental income'},
+  {'value':'Investment', 'text':'investment income interest, dividends, and profit from selling stocks'}
+] %}
+
+{% set frequencyOptions = [
+  {'value':'', 'text':'Click to add an income frequency'},
+  {'value': 'weekly', 'text': 'Every week'},
+  {'value': 'biweekly', 'text': 'Every 2 weeks'},
+  {'value': 'monthly', 'text': 'Monthly'},
+  {'value': 'semimonthly', 'text': 'Twice a month'},
+  {'value': 'yearly', 'text': 'Every year'}
+] %}
+
+<fieldset class="screener-body-step active js-screener-step">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-incomes">
+
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div> {# hidden #}
+
+    <div class="p-relative">
+
+      <label class="screener-label">
+        <a class="d-block p-2" href="#question-household-incomes">
+          {{ __('Do you and/or anyone in your household have an income?', 'accessnyc-screener') }}
+        </a>
+      </label>
+
+      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden"> {# hidden #}
+
+        <div class="screener-radio-buttons m-bottom-2">
+          <label class="screener-radio screener-label">
+            <input
+              data-type="boolean"
+              data-shows="#js-toggle-income"
+              class="js-screener-toggle screener-radio-input sr-only"
+              value="true"
+              type="radio"
+              name="toggle-income"/>
+            <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="screener-radio screener-label">
+            <input
+              data-type="boolean"
+              data-hides="#js-toggle-income"
+              class="js-screener-toggle screener-radio-input sr-only"
+              value="false"
+              type="radio"
+              name="toggle-income" checked/>
+            <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+          </label>
+        </div>
+
+        <div id="js-toggle-income" class="hidden">
+
+          <label class="screener-label d-block m-bottom">
+            {{ __('Who in your household contributes to your total household income?', 'accessnyc-screener') }}
+          </label>
+
+          <p>
+            <em>{{ __('What are sources of income?', 'accessnyc-screener') }}</em><br>
+            {{ __('Sources of income can mean anything from disability-related Medicaid to wages, salaries, and tips.', 'accessnyc-screener') }}
+          </p>
+
+          <div class="p-top" data-scope="_household">
+            <div data-for="members" aria-hidden="true">
+              <script type="text/template">
+                <label class="styled-checkbox screener-checkbox screener-label">
+                  <input
+                    data-toggles="#js-toggle-people-<%= members.index %>-income"
+                    class="js-screener-toggle"
+                    type="checkbox"
+                    name="Person[<%= members.index %>].has-income"
+                    value="1"
+                  />
+                  <span data-scope="_people[<%= members.index %>]" class="styled-checkbox-label">
+                    {% include 'screener-proto-partials/member-format.twig' %}
+                  </span>
+                </label>
+              </script>
+            </div>
+          </div>
+
+          <div class="p-top" data-scope="_household">
+            <div data-for="members" aria-hidden="true">
+              <script type="text/template">
+
+                <div id="js-toggle-people-<%= members.index %>-income" class="hidden"> {# hidden #}
+
+                  <hr class="screener-divider">
+
+                  <label class="screener-label d-block m-bottom">
+                    {{ __('What income have', 'accessnyc-screener') }}
+                    {% include 'screener-proto-partials/member-format.twig' %}
+                    {{ __('received most recently?', 'accessnyc-screener') }}
+                  </label>
+
+                  <select
+                    data-js="pushIncome"
+
+                    data-person="<%= members.index %>"
+                    data-key="incomes"
+                    data-income="0"
+                    data-val="type"
+
+                    class="screener-select m-bottom-2"
+                    id="person-<%= members.index %>-incomes-0"
+                    name="Person[<%= members.index %>].incomes[0].type"
+                    >
+                    {% for option in incomeOptions %}
+                    <option value="{{ option.value }}">
+                      {{ __(option.text, 'accessnyc-screener') }}
+                    </option>
+                    {% endfor %}
+                  </select>
+
+                  <div data-scope="_people[<%= members.index %>]">
+                    <div data-for="income in incomes" aria-hidden="true">
+                      <%= '\<script type="text/template"\>' %>
+
+                        <div>
+
+                          <label class="screener-label d-block m-bottom">
+                            {{ __('How much did', 'accessnyc-screener') }}
+                            {% include 'screener-proto-partials/member-format.twig' %}
+                            {{ __('receive for', 'accessnyc-screener') }} <%= '\<\%\=income.type\%\>' %>{{ __('?', 'accessnyc-screener') }}
+                          </label>
+                          <div class="currency-usd m-bottom-2">
+                            <input
+                              data-js="pushIncome"
+
+                              data-person="<%= members.index %>"
+                              data-key="incomes"
+                              data-income="<%= '\<\%\=income.index\%\>' %>"
+                              data-val="amount"
+
+                              data-type="float"
+                              value="<%= '\<\%\=income.amount\%\>' %>"
+                              id="person-<%= members.index %>-incomes-<%= '\<\%\=income.index + 1\%\>' %>-amount"
+                              name="Person[<%= members.index %>].incomes[<%= '\<\%\=income.index + 1\%\>' %>].amount"
+                              type="number"
+                              required>
+                          </div>
+
+                          <label class="screener-label d-block m-bottom">
+                            {{ __('How often do', 'accessnyc-screener') }}
+                            {% include 'screener-proto-partials/member-format.twig' %}
+                            {{ __('receive', 'accessnyc-screener') }} <%= '\<\%\=income.type\%\>' %>{{ __('?', 'accessnyc-screener') }}
+                          </label>
+                          <select
+                            data-js="pushIncome"
+
+                            data-person="<%= members.index %>"
+                            data-key="incomes"
+                            data-income="<%= '\<\%\=income.index\%\>' %>"
+                            data-val="frequency"
+
+                            class="screener-select m-bottom-2"
+                            id="person-<%= members.index %>-incomes-<%= '\<\%\=income.index\%\>' %>-frequency"
+                            name="Person[<%= members.index %>].incomes[<%= '\<\%\=income.index\%\>' %>].frequency"
+                            required>
+                            {% for option in frequencyOptions %}
+                            <option value="{{ option.value }}" <%= '\<\% if(income.frequency==="{{ option.value }}"){ \%\>selected\<\%}\%\>' %>>
+                              {{ __(option.text, 'accessnyc-screener') }}
+                            </option>
+                            {% endfor %}
+                          </select>
+
+                        </div>
+
+                        <label class="screener-label d-block m-bottom">
+                          {{ __('If', 'accessnyc-screener') }}
+                          {% include 'screener-proto-partials/member-format.twig' %}
+                          {{ __('have another source of income, select it below', 'accessnyc-screener') }}
+                        </label>
+                        <select
+                          data-js="pushIncome"
+
+                          data-person="<%= members.index %>"
+                          data-key="incomes"
+                          data-income="<%= '\<\%\=income.index + 1\%\>' %>"
+                          data-val="type"
+
+                          class="screener-select m-bottom-2"
+                          id="person-<%= members.index %>-incomes-<%= '\<\%\=income.index + 1\%\>' %>"
+                          name="Person[<%= members.index %>].incomes[<%= '\<\%\=income.index + 1\%\>' %>].type"
+                          >
+                          {% for option in incomeOptions %}
+                          <option value="{{ option.value }}">
+                            {{ __(option.text, 'accessnyc-screener') }}
+                          </option>
+                          {% endfor %}
+                        </select>
+
+                      <%= '\</script\>' %>
+                    </div>
+                  </div>
+
+                </div>
+
+              </script>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>

@@ -2,7 +2,7 @@
 'use strict';
 
 import $ from 'jquery';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
 import Utility from 'modules/utility';
@@ -43,12 +43,21 @@ class ScreenerProto {
     this._categories = [];
 
     /** @private {array<ScreenerPerson>} household members, max 8 */
-    this._people = [new ScreenerPerson({
-      headOfHousehold: true
-    })];
+    this._people = [
+      new ScreenerPerson('_people[0]', {headOfHousehold: true}).init()
+    ];
 
     /** @private {ScreenerHousehold} household */
-    this._household = new ScreenerHousehold();
+    this._household = new ScreenerHousehold('_household', {}, {
+      'compile': (event) => {
+        if (event.attr === 'members') {
+          console.dir(event);
+          this._populate(event.value);
+          // this._people[event.value]
+        }
+      }
+    }).init();
+
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
@@ -74,23 +83,19 @@ class ScreenerProto {
       const hash = window.location.hash;
       const $section = $(hash);
       const type = window.location.hash.split('-')[0];
-
       if ($section.length && $section.hasClass(ScreenerProto.CssClass.PAGE)) {
         this._goToPage($section[0]);
         $(window).scrollTop(0);
         $('#js-layout-body').scrollTop(0);
       }
-
       if (type === '#question') {
         // let selector = window.location.hash.replace('#','.id-');
         // let selector = window.location.hash;
         this._goToQuestion(window.location.hash);
       }
-
       if (type === '#section') {
         this._goToSection(window.location.hash);
       }
-
     });
 
     // var optionsObserver = {
@@ -111,6 +116,7 @@ class ScreenerProto {
     $(this._el).on('change', 'input[type="checkbox"]', (e) => {
       this._toggleCheckbox(e.currentTarget);
     }).on('change', `.${ScreenerProto.CssClass.TOGGLE}`, (e) => {
+      console.dir(e);
       this._handleToggler(e.currentTarget);
     }).on('change', `.${ScreenerProto.CssClass.ADD_SECTION}`, (e) => {
       this._addMatrixSection(e.currentTarget);
@@ -124,10 +130,6 @@ class ScreenerProto {
       const $step = $(e.currentTarget)
         .closest(`.${ScreenerProto.CssClass.STEP}`);
       const valid = this._validateStep($step);
-      if (valid) {
-        const goToStep = $(e.currentTarget).data('goToStep');
-        // if (goToStep) window.location.hash = goToStep;
-      }
       return valid;
     }).on('click', `.${ScreenerProto.CssClass.SUBMIT}`, (e) => {
       if (!this._recaptchaRequired) {
@@ -174,6 +176,20 @@ class ScreenerProto {
         `.${ScreenerProto.CssClass.SUBMIT}`).trigger('click');
     });
 
+    // $('[data-scope="_household"] > [data-val="members"]')
+    //   .on('change', (event) => {
+    //     // console.dir(event.currentTarget.value);
+    //     this._populate(event.currentTarget.value);
+    //   });
+
+    $(this._el).on('change', '[data-js="pushIncome"]', (event) => {
+        let data = event.currentTarget.dataset;
+        data.value = event.currentTarget.value;
+        this._pushIncome(data);
+    }).on('change', '[data-js="setIncome"]', (event) => {
+      // this._people[person].set(data.key, incomes);
+    });
+
     // Determine whether or not to initialize ReCAPTCHA. This should be
     // initialized only on every 10th view which is determined via an
     // incrementing cookie.
@@ -204,39 +220,39 @@ class ScreenerProto {
    * @private
    * @return {this} Screener
    */
-  _initRecaptcha() {
-    const $script = $(document.createElement('script'));
-    $script.attr('src',
-        'https://www.google.com/recaptcha/api.js' +
-        '?onload=screenerCallback&render=explicit').prop({
-      async: true,
-      defer: true
-    });
+  // _initRecaptcha() {
+  //   const $script = $(document.createElement('script'));
+  //   $script.attr('src',
+  //       'https://www.google.com/recaptcha/api.js' +
+  //       '?onload=screenerCallback&render=explicit').prop({
+  //     async: true,
+  //     defer: true
+  //   });
 
-    window.screenerCallback = () => {
-      window.grecaptcha.render(document.getElementById('screener-recaptcha'), {
-        'sitekey': Utility.CONFIG.GRECAPTCHA_SITE_KEY,
-        'callback': 'screenerRecaptcha',
-        'expired-callback': 'screenerRecaptchaReset'
-      });
-      $('#screener-recaptcha-container')
-        .removeClass(ScreenerProto.CssClass.HIDDEN);
-      this._recaptchaRequired = true;
-    };
+  //   window.screenerCallback = () => {
+  //     window.grecaptcha.render(document.getElementById('screener-recaptcha'), {
+  //       'sitekey': Utility.CONFIG.GRECAPTCHA_SITE_KEY,
+  //       'callback': 'screenerRecaptcha',
+  //       'expired-callback': 'screenerRecaptchaReset'
+  //     });
+  //     $('#screener-recaptcha-container')
+  //       .removeClass(ScreenerProto.CssClass.HIDDEN);
+  //     this._recaptchaRequired = true;
+  //   };
 
-    window.screenerRecaptcha = () => {
-      this._recaptchaVerified = true;
-      this._removeError(document.getElementById('screener-recaptcha'));
-    };
+  //   window.screenerRecaptcha = () => {
+  //     this._recaptchaVerified = true;
+  //     this._removeError(document.getElementById('screener-recaptcha'));
+  //   };
 
-    window.screenerRecaptchaReset = () => {
-      this._recaptchaVerified = false;
-    };
+  //   window.screenerRecaptchaReset = () => {
+  //     this._recaptchaVerified = false;
+  //   };
 
-    this._recaptchaRequired = true;
-    $('head').append($script);
-    return this;
-  }
+  //   this._recaptchaRequired = true;
+  //   $('head').append($script);
+  //   return this;
+  // }
 
   /**
    * Adds and removes active classes to a checkbox. Also appropriate toggles
@@ -278,6 +294,7 @@ class ScreenerProto {
   _handleToggler(el) {
     const $el = $(el);
     if ($el.data('toggles')) {
+      console.dir(Boolean(parseInt($el.val(), 10)));
       const $target = $($el.data('toggles'));
       if (
           ($el.prop('checked') && Boolean(parseInt($el.val(), 10))) ||
@@ -394,6 +411,11 @@ class ScreenerProto {
     return this;
   }
 
+  /**
+   * [_goToPage description]
+   * @param  {[type]} section [description]
+   * @return {this} Screener
+   */
   _goToPage(section) {
     // This shows and hides the screener pages
     // console.dir(this._$pages);
@@ -408,39 +430,37 @@ class ScreenerProto {
     return this;
   }
 
+  /**
+   * Jumps to screener question
+   * @param  {string} hash The question's hash id
+   * @return {this} Screener
+   */
   _goToQuestion(hash) {
     let $page = $(hash)
       .closest(`.${ScreenerProto.CssClass.PAGE}`);
     if (!$page.hasClass('active')) {
       this._goToPage($page[0]);
-      // $(window).scrollTop(0);
-      // $('#js-layout-body').scrollTop(0);
     }
     let $target = $(hash)
       .find(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`);
     if (!$target.hasClass('active')) {
       $(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`)
-        .addClass('hidden').removeClass('active')
+        .addClass('hidden')
+        .removeClass('active')
         .prop('aria-hidden', true);
-      $target.addClass('active').removeClass('hidden')
+      $target
+        .addClass('active')
+        .removeClass('hidden')
         .prop('aria-hidden', false);
-      // console.dir([$(hash).offset().top, window.outerHeight, $('header').height()]);
-      // if ($(hash).offset().top > (window.clientHeight/3)) {
-      // setTimeout(() => {
-      // document.querySelector('#js-layout-body')
-      //   .scroll({
-      //     top: $(hash).offset().top - $('header').height()/* + 110*/,
-      //     left: 0,
-      //     behavior: 'auto'
-      //   });
-      // },1)
-      // }
-    } /*else {
-      $target.addClass('hidden').removeClass('active')
-        .prop('aria-hidden', true);
-    }*/
+    }
+    return this;
   }
 
+  /**
+   * [_goToSection description]
+   * @param  {[type]} hash [description]
+   * @return {this}      Screener
+   */
   _goToSection(hash) {
     $(`a[href="${hash}"]`).addClass('bg-blue-light')
       .siblings().removeClass('bg-blue-light');
@@ -451,37 +471,87 @@ class ScreenerProto {
       $(window).scrollTop(0);
       $('#js-layout-body').scrollTop(0);
     }
+    return this;
   }
 
   /**
-   * Populate the family, start at one because the first person exists by
-   * default
+   * Populate the family, start at one because
+   * the first person exists by default
+   * @param  {[type]} number [description]
    */
   _populate(number) {
     let dif = number - this._people.length;
     if (dif > 0) { // add members if positive
       for (let i = 0; i <= dif - 1; i++) {
-        this._people.push(new ScreenerPerson());
+        let name = `_people[${this._people.length}]`;
+        let person = new ScreenerPerson(name).init();
+        this._people.push(person);
       }
     } else if (dif < 0) { // remove members if negative
       this._people = this._people.slice(0, this._people.length + dif);
     }
+    /**
+     * this timeout is needed to wait for the DOM to compile. I need to refactor
+     * the data binding class to use proper callbacks or promises.
+     */
+    setTimeout(()=>{
+      for (var i = this._people.length - 1; i >= 0; i--) {
+        this._people[i].init();
+      }
+    }, 500);
   }
 
+  _pushIncome(data) {
+    // let income = (parseInt(data.income));
+    let person = parseInt(data.person);
+    let val = data.val
+    let incomes = this._people[person]._attrs[data.key];
+
+    console.dir(data);
+    console.dir(incomes[data.income]);
+
+    if (typeof incomes[data.income] === 'undefined') {
+      incomes[data.income] = {
+        amount: 0,
+        type: data.value,
+        frequency: ''
+      };
+    } else {
+      incomes[data.income][val] = data.value;
+    }
+
+    this._people[person].set(data.key, incomes)
+
+  }
+
+  /**
+   * [_renderFamily description]
+   * @param  {[type]} people [description]
+   */
   _renderFamily(people) {
+    // let templates = document.querySelectorAll('.js-template-people');
+    // let obj = [];
+    // for (var i = people.length - 1; i >= 0; i--) {
+    //   obj[i] = people[i].toObject();
+    // }
+    // for (let i = templates.length - 1; i >= 0; i--) {
+    //   let node = document.createElement('div');
+    //   node.innerHTML = _.template(templates[i].innerHTML)({people:obj});
+    //   templates[i].parentNode.insertBefore(node, templates[i]);
+    // }
     // add in family members here
-    const members = [];
-    _.each(people, (person, i) => {
-      const member = person._attrs;
-      if (person.get('headOfHousehold')) {
-        if (i === 0) {
-          member.relation = Utility.localize('Self');
-        } else {
-          member.relation = Utility.localize('HeadOfHousehold');
-        }
-      }
-      members.push(member);
-    });
+    // const members = [];
+    // _.each(people, (person, i) => {
+    //   const member = person._attrs;
+    //   if (person.get('headOfHousehold')) {
+    //     if (i === 0) {
+    //       member.relation = Utility.localize('Self');
+    //     } else {
+    //       member.relation = Utility.localize('HeadOfHousehold');
+    //     }
+    //   }
+    //   members.push(member);
+    // });
 
     // const summaryTemplate = $('#screener-member-summary-template').html();
     // const renderedSummaryTemplate = _.template(summaryTemplate)({
@@ -497,7 +567,7 @@ class ScreenerProto {
     //   personIndex = this._people.length;
     //   $(section).data('personIndex', personIndex);
     // }
-    const formTemplate = $('#screener-member-template').html();
+    // const formTemplate = $('#screener-member-template').html();
     // const templateData = {
     //   personIndex: personIndex,
     //   person: new ScreenerPerson().toObject(),
@@ -506,10 +576,14 @@ class ScreenerProto {
     // if (this._people[personIndex]) {
     //   templateData.person = this._people[personIndex].toObject();
     // }
-    const renderedFormTemplate = _.template(formTemplate)({members:members});
-    $('#screener-household-member').html(renderedFormTemplate);
+    // const renderedFormTemplate = _.template(formTemplate)({members: members});
+    // $('#screener-household-member').html(renderedFormTemplate);
   }
 
+  /**
+   * Renders the detail inputs for each household member.
+   * @param  {object} people The people to render
+   */
   _renderFamilyDetails(people) {
     // add in family members here
     let members = [];
@@ -522,17 +596,21 @@ class ScreenerProto {
           member.relation = Utility.localize('HeadOfHousehold');
         }
       } else {
-        member.relation = Utility.localize(person.get('headOfHouseholdRelation'));
+        member.relation = Utility.localize(
+          person.get('headOfHouseholdRelation')
+        );
       }
-      console.dir(member);
       members[i] = member;
     });
 
     const formDetailsTemplate = $('#screener-member-details-template').html();
-    const renderedFormDetailsTemplate = _.template(formDetailsTemplate)({members:members});
-    $('#screener-household-member-details').html(renderedFormDetailsTemplate);
+    const render = _.template(formDetailsTemplate)({members: members});
+    $('#screener-household-member-details').html(render);
   }
 
+  /**
+   * Renders the additional family members
+   */
   _renderAddFamily() {
     // add in family members here
     const template = $('#screener-member-option-template').html();
@@ -574,8 +652,6 @@ class ScreenerProto {
    */
   _validateStep($step) {
     const stepId = $step.attr('id');
-    console.dir('---------------------');
-
     // Required Validation
     // $step.find(`.${ScreenerProto.CssClass.ERROR}`)
     //     .removeClass(ScreenerProto.CssClass.ERROR).end()
@@ -601,7 +677,6 @@ class ScreenerProto {
 
     //   return false;
     // }
-    // Required Validation - END
 
     let stepValid = true;
 
@@ -623,21 +698,22 @@ class ScreenerProto {
         // this._categories = categories;
         break;
       }
-      case 'step-2': {
-        // Nothing to process here.
-        break;
-      }
-      case 'step-3': {
-        // Set submitter age and household.
-        this._people[0].set('age',
-            parseInt($step.find('input[name="Person[0].age"]').val(), 10));
-        this._household.set('city', 'NYC')
-            .set('zip', $step.find('input[name="Household.zip"]').val());
-        break;
-      }
+      // case 'step-2': {
+      //   // Nothing to process here.
+      //   break;
+      // }
+      // case 'step-3': {
+      //   // Set submitter age and household.
+      //   this._people[0].set('age',
+      //       parseInt($step.find('input[name="Person[0].age"]').val(), 10));
+      //   this._household.set('city', 'NYC')
+      //       .set('zip', $step.find('input[name="Household.zip"]').val());
+      //   break;
+      // }
       // case 'step-4': {
       //   // Set all checked attributes. Unset any that are not checked.
-      //   $step.find(`.${ScreenerProto.CssClass.CHECKBOX_GROUP}`).find(':input')
+      //   $step.find(`.${ScreenerProto.CssClass.CHECKBOX_GROUP}`)
+      //     .find(':input')
       //       .each((i, el) => {
       //         if ($(el).val() && $(el).attr('name')) {
       //           const key = $(el).attr('name').split('.')[1];
@@ -671,7 +747,8 @@ class ScreenerProto {
       //   const person = this._people[0];
       //   person.set(key, []);
       //   $step.find('[name$="amount"]').filter(':visible').each((i, el) => {
-      //     const itemIndex = $(el).attr('name').split('[').pop().split(']')[0];
+      //     const itemIndex = $(el).attr('name')
+      //       .split('[').pop().split(']')[0];
       //     const amount = ScreenerProto.getTypedVal(el);
       //     const type = ScreenerProto.getTypedVal(
       //         $step.find(`[name="Person[0].${key}[${itemIndex}].type"]`)[0]);
@@ -687,193 +764,104 @@ class ScreenerProto {
       //   });
       //   break;
       // }
-      case 'step-7': {
-        const $memberInput =
-            $step.find('input[name="Household.members"]');
-        const memberCount = ScreenerProto.getTypedVal($memberInput[0]);
+      // case 'step-7': {
+      //   const $memberInput =
+      //       $step.find('input[name="Household.members"]');
+      //   const memberCount = ScreenerProto.getTypedVal($memberInput[0]);
 
-        // Verify that the inputted value is at least one and not greater than
-        // the maximum household size.
-        if (memberCount < 1 ||
-            memberCount > Utility.CONFIG.SCREENER_MAX_HOUSEHOLD) {
-          this._showError($memberInput[0],
-              ScreenerProto.ErrorMessage.HOUSEHOLD);
-          // $(window).scrollTop(0);
-          return false;
-        } else {
-          this._household.set('members', memberCount);
-          // set inputs for household members here
-        }
+      //   // Verify that the inputted value is at least one and not greater than
+      //   // the maximum household size.
+      //   if (memberCount < 1 ||
+      //       memberCount > Utility.CONFIG.SCREENER_MAX_HOUSEHOLD) {
+      //     this._showError($memberInput[0],
+      //         ScreenerProto.ErrorMessage.HOUSEHOLD);
+      //     // $(window).scrollTop(0);
+      //     return false;
+      //   } else {
+      //     this._household.set('members', memberCount);
+      //     // set inputs for household members here
+      //   }
 
-        // Render the members markup based on household
-        this._populate(this._household.get('members'));
-        this._renderFamily(this._people);
-        this._renderFamilyDetails(this._people);
+      //   // Render the members markup based on household
+      //   this._populate(this._household.get('members'));
+      //   this._renderFamily(this._people);
+      //   this._renderFamilyDetails(this._people);
 
-        // If there is only one member, ensure that they are the head of the
-        // household and proceed to the final step, returning `false` to
-        // prevent the default hash change.
-        if (memberCount === 1) {
-          this._people[0].set({
-            headOfHousehold: true,
-            headOfHouseholdRelation: ''
-          })
-          // window.location.hash = '#step-10';
-          return false;
-        }
-        break;
-      }
-      case 'step-8':
-      case 'step-9': {
+      //   // If there is only one member, ensure that they are the head of the
+      //   // household and proceed to the final step, returning `false` to
+      //   // prevent the default hash change.
+      //   if (memberCount === 1) {
+      //     this._people[0].set({
+      //       headOfHousehold: true,
+      //       headOfHouseholdRelation: ''
+      //     });
+      //     // window.location.hash = '#step-10';
+      //     return false;
+      //   }
+      //   break;
+      // }
+      // case 'step-8':
+      // case 'step-9': {
+      //   _.each(this._people, (person, personIndex) => {
+      //     let valueHoh = ScreenerProto.getTypedVal($step.find(
+      //       `input[name="Person[${personIndex}].headOfHousehold"]:checked`));
+      //     let valueHohRelation = (valueHoh) ? '' : $step.find(
+      //       `select[name="Person[${personIndex}].headOfHouseholdRelation"]`
+      //     ).val();
+      //     let valueRelation = Utility.localize(valueHohRelation);
 
-        // console.dir(this._household);
-        // console.dir(this._people);
-        // console.dir($step.find('.screener-member'));
+      //     person.set({
+      //       headOfHousehold: valueHoh,
+      //       headOfHouseholdRelation: valueHohRelation,
+      //       relation: valueRelation
+      //     });
 
-        // const personIndex = stepId === 'step-9' ? $step.data('personIndex') : 1;
-        // const member = this._people[personIndex] || new ScreenerPerson();
-        //
-        // console.dir( _.findWhere(this._people, {'headOfHousehold': true}) );
+      //     person.set('age', ScreenerProto.getTypedVal(
+      //       $step.find(`input[name="Person[${personIndex}].age"]`)[0]
+      //     ));
 
-        _.each(this._people, (person, personIndex) => {
+      //     // Set person attributes and benefits.
+      //     $step.find(`.${ScreenerProto.CssClass.CHECKBOX_GROUP},
+      //       .${ScreenerProto.CssClass.RADIO_GROUP}`).find('input:checked')
+      //       .filter(`[name^="Person[${personIndex}]"]`).each((i, el) => {
+      //         if ($(el).val() && $(el).attr('name')) {
+      //           const key = $(el).attr('name').split('.')[1];
+      //           person.set(key, ScreenerProto.getTypedVal(el));
+      //         }
+      //       });
 
-          let valueHoh = ScreenerProto.getTypedVal($step.find(
-            `input[name="Person[${personIndex}].headOfHousehold"]:checked`));
-          let valueHohRelation = (valueHoh) ? '' : $step.find(
-            `select[name="Person[${personIndex}].headOfHouseholdRelation"]`
-          ).val();
-          let valueRelation = Utility.localize(valueHohRelation);
-          // console.log(personIndex);
-          // console.log(this._people[0].get('headOfHousehold'));
-          // Strange issue where the HOH is not resetting on the person - FIX
-          // if (personIndex > 0 && this._people[0].get('headOfHousehold')) {
-          //   console.log('the first person IS HOH');
-          //   person.set({
-          //     headOfHousehold: false,
-          //     headOfHouseholdRelation: '',
-          //     relation: ''
-          //   });
-          // } else {
+      //     // Add income and expenses.
+      //     person.set({
+      //       incomes: [],
+      //       expenses: []
+      //     });
 
-          person.set({
-            headOfHousehold: valueHoh,
-            headOfHouseholdRelation: valueHohRelation,
-            relation: valueRelation
-          });
-          // }
-          // console.dir(person);
-
-          // person.set({
-          //   headOfHousehold: valueHoh,
-          //   headOfHouseholdRelation: (valueHoh) ? '' : valueHohRelation
-          // });
-
-          // console.dir( _.where(this._people, {headOfHousehold: true}) );
-
-          // this._people.find((object) => {
-          //     if (object['headOfHousehold'])
-          //       return true
-          //   }
-          // );
-
-          // console.dir([valueP0Hoh, valueP0HohRelation]);
-          // console.dir([person, personIndex]);
-
-          // If this is step 8 set up the Head of the Household Relationship
-          // for the submitter.
-          // if (stepId === 'step-8') {
-          //   const $hohInput =
-          //       $step.find('input[name="Person[0].headOfHousehold"]:checked');
-          //   // If the current user is the HoH, update their status and break.
-          //   if (ScreenerProto.getTypedVal($hohInput[0])) {
-          //     this._people[0].set({
-          //       headOfHousehold: true,
-          //       headOfHouseholdRelation: ''
-          //     });
-          //     break;
-          //   } else {
-          //     member.set('headOfHousehold', true);
-          //     this._people[0].set({
-          //       headOfHousehold: false,
-          //       headOfHouseholdRelation: $step
-          //           .find('select[name="Person[0].headOfHouseholdRelation"]')
-          //           .val()
-          //     });
-          //   }
-          // } else {
-          //   // Set member's relations to HOH.
-          //   member.set({
-          //     headOfHousehold: false,
-          //     headOfHouseholdRelation: $step.find(
-          //       `select[name="Person[${personIndex}].headOfHouseholdRelation"]`)
-          //       .val()
-          //     });
-          // }
-
-          person.set('age', ScreenerProto.getTypedVal(
-            $step.find(`input[name="Person[${personIndex}].age"]`)[0]
-          ));
-
-          // Set person attributes and benefits.
-          $step.find(`.${ScreenerProto.CssClass.CHECKBOX_GROUP},
-            .${ScreenerProto.CssClass.RADIO_GROUP}`).find('input:checked')
-            .filter(`[name^="Person[${personIndex}]"]`).each((i, el) => {
-              if ($(el).val() && $(el).attr('name')) {
-                const key = $(el).attr('name').split('.')[1];
-                person.set(key, ScreenerProto.getTypedVal(el));
-              }
-            });
-
-          // Add income and expenses.
-          person.set({
-            incomes: [],
-            expenses: []
-          });
-
-          _.each(['incomes', 'expenses'], (key) => {
-            $step.find('[name$="amount"]').filter(':visible')
-                .filter(`[name*="${key}"]`).each((i, el) => {
-              const itemIndex = $(el).attr('name').split('[').pop().split(']')[0];
-              const amount = ScreenerProto.getTypedVal(el);
-              const type = ScreenerProto.getTypedVal($step.find(
-                  `[name="Person[${personIndex}].${key}[${itemIndex}]` +
-                  `.type"]`)[0]);
-              const frequency = ScreenerProto.getTypedVal($step.find(
-                  `[name="Person[${personIndex}].${key}[${itemIndex}]` +
-                  `.frequency"]`)[0]);
-              if (amount && type && frequency) {
-                if (key === 'incomes') {
-                  person.addIncome(amount, type, frequency);
-                } else {
-                  person.addExpense(amount, type, frequency);
-                }
-              }
-            });
-          });
-
-          this._people[personIndex] = person;
-
-        });
-
-        this._renderFamily(this._people);
-
-        // if (stepId === 'step-8') {
-        //   // If adding a HoH meets the household size, skip ahead to step 10.
-        //   if (this._people.length >= this._household.get('members')) {
-        //     window.location.hash = '#step-10';
-        //     return false;
-        //   }
-        // } else {
-        //   // If we need to add more non-HoH household members, repeat this step.
-        //   if (this._people.length < this._household.get('members')) {
-        //     $step.data('personIndex', personIndex + 1);
-        //     this._goToStep($step[0]);
-        //     // $(window).scrollTop(0);
-        //     return false;
-        //   }
-        // }
-        break;
-      }
+      //     _.each(['incomes', 'expenses'], (key) => {
+      //       $step.find('[name$="amount"]').filter(':visible')
+      //           .filter(`[name*="${key}"]`).each((i, el) => {
+      //         const itemIndex = $(el)
+      //           .attr('name').split('[').pop().split(']')[0];
+      //         const amount = ScreenerProto.getTypedVal(el);
+      //         const type = ScreenerProto.getTypedVal($step.find(
+      //             `[name="Person[${personIndex}].${key}[${itemIndex}]` +
+      //             `.type"]`)[0]);
+      //         const frequency = ScreenerProto.getTypedVal($step.find(
+      //             `[name="Person[${personIndex}].${key}[${itemIndex}]` +
+      //             `.frequency"]`)[0]);
+      //         if (amount && type && frequency) {
+      //           if (key === 'incomes') {
+      //             person.addIncome(amount, type, frequency);
+      //           } else {
+      //             person.addExpense(amount, type, frequency);
+      //           }
+      //         }
+      //       });
+      //     });
+      //     this._people[personIndex] = person;
+      //   });
+      //   this._renderFamily(this._people);
+      //   break;
+      // }
       case 'step-10': {
         // Big hack fix here. For some reason, the previous break statement
         // just two lines up doesn't actually break out of the switch
@@ -942,7 +930,8 @@ class ScreenerProto {
         break;
       }
       case 'step-11': {
-        const $inputCashOnHand = $step.find('input[name="Household.cashOnHand"]');
+        const $inputCashOnHand = $step
+          .find('input[name="Household.cashOnHand"]');
         if ($inputCashOnHand.length > 0) {
           this._household.set('cashOnHand', ScreenerProto.getTypedVal(
             $inputCashOnHand
@@ -958,9 +947,9 @@ class ScreenerProto {
 
     }
 
-    console.dir(this._categories);
-    console.dir(this._people);
-    console.dir(this._household);
+    // console.dir(this._categories);
+    // console.dir(this._people);
+    // console.dir(this._household);
     return stepValid;
   }
 
@@ -1179,9 +1168,9 @@ class ScreenerProto {
       members: []
     };
 
-    console.log('------------------');
-    console.log('Recap');
-    console.dir(this._categories);
+    // console.log('------------------');
+    // console.log('Recap');
+    // console.dir(this._categories);
 
     // Add programs.
     _.each(this._categories, (category) => {

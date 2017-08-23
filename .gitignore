@@ -13,6 +13,11 @@ wp-content/themes/access/.env
 wp-content/upgrade/
 wp-content/uploads/
 wp-content/wp-cache-config.php
+wp-content/themes/twentyfifteen/*
+wp-content/themes/twentysixteen/*
+wp-content/themes/twentyseventeen/*
+wp-content/plugins/hello.php
+wp-content/plugins/akismet/*
 node_modules
 .idea
 docker-compose.yaml

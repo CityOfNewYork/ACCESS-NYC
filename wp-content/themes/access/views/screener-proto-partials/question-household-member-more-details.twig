@@ -1,0 +1,59 @@
+<fieldset class="screener-body-step active js-screener-step">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-member-more-details">
+
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div> {# hidden #}
+
+    <div class="p-relative">
+
+      <label class="screener-label">
+        <a class="d-block p-2" href="#question-household-member-more-details">
+          {{ __('Tell us a little more about you and your household.', 'accessnyc-screener') }}
+        </a>
+      </label>
+
+      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden"> {# hidden #}
+
+        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with {
+          question: 'Does anyone in your household have disabilities?',
+          who: 'Who currently has disabilities?',
+          dataKey: 'disabled'
+        } %}
+
+        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with {
+          question: 'Is anyone in your household currently pregnant?',
+          who: 'Who is currently pregnant?',
+          dataKey: 'pregnant'
+        } %}
+
+        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with {
+          question: 'Is anyone in your household blind or visually impaired?',
+          who: 'Who is currently blind or visually impaired?',
+          dataKey: 'blind'
+        } %}
+
+        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with {
+          question: 'Did anyone in the household serve in the U.S. Armed Forces, National Gaurd or Reserves?',
+          who: 'Who has served?',
+          dataKey: 'veteran'
+        } %}
+
+        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with {
+          question: 'Is anyone in your household currently on Medicaid?',
+          who: 'Who is on Medicaid?',
+          dataKey: 'benefitsMedicaid'
+        } %}
+
+        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with {
+          question: 'Is anyone currently on disability related Medicaid?',
+          who: 'Who is on on disability related Medicaid?',
+          dataKey: 'benefitsMedicaidDisability'
+        } %}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>

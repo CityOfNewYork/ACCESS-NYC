@@ -1,0 +1,84 @@
+<fieldset class="screener-body-step active js-screener-step" id="step-9">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-head-of-household">
+
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <label data-scope="_household" class="screener-label">
+        <a data-class="(members > 1)?'':'ui-disabled'" class="d-block p-2" href="#question-head-of-household">
+          {{ __('Are you the head of the household?', 'accessnyc-screener') }}
+        </a>
+      </label>
+
+      <div class="js-toggle-question hidden"> {# hidden #}
+
+        <div class="p-horizontal-2 p-bottom-2">
+
+          <div data-scope="_people[0]" class="screener-radio-buttons m-bottom-2">
+            <label class="screener-radio screener-label">
+              <input
+                data-val="headOfHousehold"
+                data-type="boolean"
+                class="screener-radio-input sr-only"
+                value="true"
+                type="radio"
+                name="Person[0].headOfHousehold"/>
+              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="screener-radio screener-label">
+              <input
+                data-val="headOfHousehold"
+                data-type="boolean"
+                class="screener-radio-input sr-only"
+                value="false"
+                type="radio"
+                name="Person[0].headOfHousehold"/>
+              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
+
+          <h4 class="screener-label m-0">{{ __('This is what the head of household means.', 'accessnyc-screener') }}</h4>
+          <p class="m-0">{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', 'accessnyc-screener') }}</p>
+
+        </div>
+
+        <div data-scope="_people[0]">
+          <div data-class="(headOfHousehold)?'hidden':''" class="p-horizontal-2 p-bottom-2">
+            <label class="screener-label" for="hoh-relation">
+              {{ __('What is your relationship to the head of the household? I am their:', 'accessnyc-screener') }}
+            </label>
+            <div>
+              <select
+                data-val="headOfHouseholdRelation"
+                class="screener-select"
+                name="Person[0].headOfHouseholdRelation"
+                required>
+                <option value="">{{ __('Click to select relationship', 'accessnyc-screener') }}</option>
+                <option value="Child">{{ __('Child', 'accessnyc-screener') }}</option>
+                <option value="FosterChild">{{ __('Foster Child', 'accessnyc-screener') }}</option>
+                <option value="StepChild">{{ __('Step-child', 'accessnyc-screener') }}</option>
+                <option value="Grandchild">{{ __('Grandchild', 'accessnyc-screener') }}</option>
+                <option value="Spouse">{{ __('Spouse', 'accessnyc-screener') }}</option>
+                <option value="Parent">{{ __('Parent', 'accessnyc-screener') }}</option>
+                <option value="FosterParent">{{ __('Foster Parent', 'accessnyc-screener') }}</option>
+                <option value="StepParent">{{ __('Step-parent', 'accessnyc-screener') }}</option>
+                <option value="Grandparent">{{ __('Grandparent', 'accessnyc-screener') }}</option>
+                <option value="SisterBrother">{{ __('Sister/Brother', 'accessnyc-screener') }}</option>
+                <option value="StepSisterStepBrother">{{ __('Step-sister/Step-brother', 'accessnyc-screener') }}</option>
+                <option value="BoyfriendGirlfriend">{{ __('Boyfriend/Girlfriend', 'accessnyc-screener') }}</option>
+                <option value="DomesticPartner">{{ __('Domestic Partner', 'accessnyc-screener') }}</option>
+                <option value="Unrelated">{{ __('Unrelated', 'accessnyc-screener') }}</option>
+                <option value="Other">{{ __('Related in some other way', 'accessnyc-screener') }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>

@@ -1,0 +1,43 @@
+<fieldset class="screener-body-step active js-screener-step">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-cash-on-hand">
+
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <label class="screener-label">
+        <a class="d-block p-2" href="#question-cash-on-hand">
+          {{ __('How much does your whole household have right now in:', 'accessnyc-screener') }}
+        </a>
+      </label>
+
+      <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
+
+        <label class="screener-label">
+          &bull; {{ __('Cash on hand?', 'accessnyc-screener') }}<br>
+          &bull; {{ __('Checking or saving accounts?', 'accessnyc-screener') }}<br>
+          &bull; {{ __('Stocks, bonds or mutual funds?', 'accessnyc-screener') }}
+        </label>
+
+        <p class="screener-explanation">
+          {{ __('Answer the best you can. We use this to help show you the programs that will be most helpful right now.', 'accessnyc-screener') }}
+        </p>
+        <div data-scope="_household">
+          <div class="currency-usd">
+            <input
+              data-val="cashOnHand"
+              data-type="float"
+              id="cash-on-hand"
+              type="number"
+              name="Household.cashOnHand"
+              min="0">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>{# /#step-10 #}

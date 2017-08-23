@@ -1,0 +1,52 @@
+{% if (question) %}
+<label class="screener-label">
+  <span class="d-block p-vertical-2">
+    {{ __(question, 'accessnyc-screener') }}
+  </span>
+</label>
+{% endif %}
+<div class="screener-radio-buttons m-bottom-2">
+  <label class="screener-radio screener-label">
+    <input
+      data-type="boolean"
+      data-shows="#js-toggle-{{dataKey}}"
+      class="js-screener-toggle screener-radio-input sr-only"
+      value="true"
+      type="radio"
+      name="toggle-{{dataKey}}"/>
+    <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+  </label>
+  <label class="screener-radio screener-label">
+    <input
+      data-type="boolean"
+      data-hides="#js-toggle-{{dataKey}}"
+      class="js-screener-toggle screener-radio-input sr-only"
+      value="false"
+      type="radio"
+      name="toggle-{{dataKey}}" checked/>
+    <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+  </label>
+</div>
+
+<div id="js-toggle-{{dataKey}}" class="hidden">
+  <label class="screener-label">
+    {{ __(who, 'accessnyc-screener') }}
+  </label>
+  <div class="p-top" data-scope="_household">
+    <div data-for="members" aria-hidden="true">
+      <script type="text/template">
+        <label data-scope="_people[<%= members.index %>]" class="styled-checkbox screener-checkbox screener-label">
+          <input
+            data-val="{{dataKey}}"
+            type="checkbox"
+            name="Person[<%= members.index %>].{{dataKey}}"
+            value="true"
+          />
+          <span class="styled-checkbox-label">
+            {% include 'screener-proto-partials/member-format.twig' %}
+          </span>
+        </label>
+      </script>
+    </div>
+  </div>
+</div>

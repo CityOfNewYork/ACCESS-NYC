@@ -1,0 +1,10 @@
+<% if (members.index === 0) { %>You,<% } %>
+<span data-class="(headOfHousehold)?'':'hidden'">
+  Head of Household,
+</span>
+<% if (members.index !== 0) { %>
+<span data-class="(headOfHousehold)?'hidden':''">
+  <span data-bind="headOfHouseholdRelation"></span>,
+</span>
+<% } %>
+<span data-bind="age">age</span>

@@ -24,21 +24,14 @@
 
 {% block content %}
 
-<main class="main-content layout--nav screener-proto" id="content">
-  <aside class="layout__aside bg-grey-lightest">
-    <nav class="screener-proto__nav">
-      <a class="d-block p-left b-bottom b-white b-4" href="#section-contact">Getting Started</a>
-      <a class="d-block p-left b-bottom b-white b-4" href="#section-household">Household</a>
-      <a class="d-block p-left b-bottom b-white b-4" href="#section-household-members">Household Members</a>
-      <a class="d-block p-left b-bottom b-white b-4" href="#section-housing">Housing</a>
-      <a class="d-block p-left b-bottom b-white b-4" href="#section-savings">Savings</a>
-      <a class="d-block p-left b-bottom b-white b-4" href="#page-recap">Confirmation</a>
-      <a class="d-block p-left b-bottom b-white b-4" href="/eligibility-proto/results/?debug=1&categories=child-care%2Chealth%2Chousing%2Cspecial-needs&programs=S2R011%2CS2R009%2CS2R023%2CS2R032%2CS2R003%2CS2R030%2CS2R026%2CS2R028%2CS2R004%2CS2R021&guid=5994a81a1825a&date=1502914587">Results</a>
-  </aside>
+<main class="main-content layout screener-proto" id="content">
+
   <div class="layout__body bg-white" id="js-layout-body">
-    <form class="screener-body js-screener-proto-form" style="border:none;padding-top:0;padding-bottom:0" action="/eligibility/results/">
-      {% include 'screener-proto-partials/disclaimer.twig' %} {# Disclaimer #}
-      <div class="screener-body-page js-screener-page" id="page-screener">
+
+    <form class="screener-body js-screener-proto-form" style="border:none;padding-top:0;padding-bottom:0">
+
+      <div class="js-screener-page" id="page-screener">
+
         <section class="js-section d-block o-hidden p-bottom" id="section-contact">
           <h1 class="m-left-2 m-top">
             {{ __('Getting Started', 'accessnyc-screener') }}
@@ -46,21 +39,35 @@
           {% include 'screener-proto-partials/step-1.twig' with {'categories': categories} %}
           {% include 'screener-proto-partials/step-3.twig' %}  {# Age/Zip #}
         </section>
-        <section class="js-section d-block o-hidden" id="section-household">
-          {% include 'screener-proto-partials/step-7.twig' %}  {# Household Number #}
-        </section>
-        {% include 'screener-proto-partials/step-9.twig' %}  {# People In Household #}
-        <section class="js-section d-block o-hidden p-bottom" id="section-housing">
-          {% include 'screener-proto-partials/step-10.twig' %} {# Housing Situation #}
-        </section>
-        <section class="js-section d-block o-hidden p-bottom" id="section-savings">
-          {% include 'screener-proto-partials/step-11.twig' %} {# Housing Situation #}
-        </section>
+
+        <h1 class="m-left-2 m-top">{{ __('Household', 'accessnyc-screener') }}</h1>
+        {% include 'screener-proto-partials/question-household-members.twig' %}  {# Household Number #}
+        {% include 'screener-proto-partials/question-head-of-household.twig' %}
+        {% include 'screener-proto-partials/question-household-member-details.twig' %}
+        {% include 'screener-proto-partials/question-household-member-more-details.twig' %}
+        {% include 'screener-proto-partials/question-household-students.twig' %}
+        {% include 'screener-proto-partials/question-household-unemployed.twig' %}
+
+        <h1 class="m-left-2 m-top">{{ __('Household Income', 'accessnyc-screener') }}</h1>
+        {% include 'screener-proto-partials/question-household-incomes.twig' %}
+
+        <h1 class="m-left-2 m-top">{{ __('Household Expenses', 'accessnyc-screener') }}</h1>
+        {% include 'screener-proto-partials/question-household-expenses.twig' %}
+
+        <h1 class="m-left-2 m-top">{{ __('Savings', 'accessnyc-screener') }}</h1>
+        {% include 'screener-proto-partials/question-cash-on-hand.twig' %} {# Housing Situation #}
+
+          <h1 class="m-left-2 m-top">{{ __('Housing', 'accessnyc-screener') }}</h1>
+        {% include 'screener-proto-partials/question-housing.twig' %} {# Housing Situation #}
+
         <section id="section-confirmation" class="js-section d-block o-hidden p-vertical-2">
           <a id="js-render-recap" class="btn btn-primary btn-next btn-small" href="#page-recap">{{ __('Confirm', 'accessnyc-screener') }}</a>
         </section>
+
       </div>
+
       {% include 'screener-proto-partials/recap.twig' with {'formAction': formAction} %}
+
     </form>
   </div>
 
