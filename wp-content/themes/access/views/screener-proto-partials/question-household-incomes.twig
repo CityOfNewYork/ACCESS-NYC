@@ -82,7 +82,7 @@
             {{ __('Sources of income can mean anything from disability-related Medicaid to wages, salaries, and tips.', 'accessnyc-screener') }}
           </p>
 
-          <div class="p-top" data-scope="_household">
+          <div class="screener-members p-top" data-scope="_household">
             <div data-for="members" aria-hidden="true">
               <script type="text/template">
                 <label class="styled-checkbox screener-checkbox screener-label">
@@ -101,7 +101,7 @@
             </div>
           </div>
 
-          <div class="p-top" data-scope="_household">
+          <div class="screener-members p-top" data-scope="_household">
             <div data-for="members" aria-hidden="true">
               <script type="text/template">
 
@@ -109,7 +109,9 @@
 
                   <hr class="screener-divider">
 
-                  <label class="screener-label d-block m-bottom">
+                  <label
+                    data-scope="_people[<%= members.index %>]"
+                    class="screener-label d-block m-bottom">
                     {{ __('What income have', 'accessnyc-screener') }}
                     {% include 'screener-proto-partials/member-format.twig' %}
                     {{ __('received most recently?', 'accessnyc-screener') }}

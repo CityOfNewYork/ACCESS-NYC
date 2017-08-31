@@ -17,7 +17,7 @@
         <div data-scope="_household" class="screener-checkboxes js-screener-checkbox-group">
           <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
             <input
-              class="js-screener-toggle js-screener-validate-step-ui"
+              class="js-screener-toggle"
               type="checkbox"
               name="Household.livingRenting"
               value="1"
@@ -27,7 +27,7 @@
           </label>
           <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
             <input
-              class="js-screener-toggle js-screener-validate-step-ui"
+              class="js-screener-toggle"
               type="checkbox"
               name="Household.livingOwner"
               value="1"
@@ -77,9 +77,9 @@
             <select
               data-val="livingRentalType"
               data-toggles="#screener-lease-owner"
-              class="screener-select js-screener-toggle js-screener-validate-step-ui"
+              class="screener-select js-screener-toggle"
               id="housing-livingRentalType"
-              name="Household.livingRentalType" >
+              name="Household.livingRentalType">
               <option value="">{{ __('Click to select a rental type', 'accessnyc-screener') }}</option>
               <option value="MarketRate">{{ __('Non-Regulated or Market Rate apartment', 'accessnyc-screener') }}</option>
               <option value="RentControlled">{{ __('Rent controlled or rent stabilized apartment', 'accessnyc-screener') }}</option>
@@ -98,7 +98,7 @@
           <div class="screener-question js-screener-checkbox-group" id="screener-lease-owner">
             <label class="screener-label">{{ __('Who is on the lease?', 'accessnyc-screener') }}</label>
 
-            <div class="p-top" data-scope="_household">
+            <div class="screener-members p-top" data-scope="_household">
               <div data-for="members" aria-hidden="true">
                 <script type="text/template">
                   <div data-scope="_people[<% members.index %>]">
@@ -123,7 +123,7 @@
         <div class="screener-question hidden" id="screener-homeowner">
           <label class="screener-label">{{ __('Who is the owner?', 'accessnyc-screener') }}</label>
 
-          <div class="p-top" data-scope="_household">
+          <div class="screener-members p-top" data-scope="_household">
             <div data-for="members" aria-hidden="true">
               <script type="text/template">
                 <div data-scope="_people[<% members.index %>]">

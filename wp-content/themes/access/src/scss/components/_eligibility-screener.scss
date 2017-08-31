@@ -77,8 +77,8 @@
 }
 
 .screener-radio-buttons {
-  height: $spacing-base * 2;
-  margin-top: $spacing-base;
+  // height: $spacing-base * 2;
+  // margin-top: $spacing-base;
 }
 
 .screener-radio {
@@ -92,6 +92,7 @@
   padding: 8px;
   padding-#{$text-direction-start}: $spacing-base * 2;
   position: relative;
+  display: inline-block;
 }
 
 .screener-radio-label {
@@ -499,6 +500,59 @@
       top: .3em;
     }
   }
+}
+
+.screener-members {
+
+  .screener-members__member-icon {
+
+    // @if $text-direction == 'rtl' {
+    //   @include position(absolute, 0 0 null null);
+    // } @else {
+    //   @include position(absolute, 0 null null 0);
+    // }
+
+    @include size(20px);
+    background-color: $color-blue;
+    border-radius: 10px;
+    content: '';
+    display: inline-block;
+    position: relative;
+    top: 2px;
+
+    &.i-0 {
+      background-color: $color-yellow-access;
+    }
+
+    &.i-1 {
+      background-color: $color-blue;
+    }
+
+    &.i-2 {
+      background-color: $color-blue-bright;
+    }
+
+    &.i-3 {
+      background-color: $color-pink;
+    }
+
+    &.i-4 {
+      background-color: $color-green;
+    }
+
+    &.i-5 {
+      background-color: $color-green-mid;
+    }
+
+    &.i-6 {
+      background-color: $color-grey-mid;
+    }
+
+    &.i-7 {
+      background-color: $color-blue-dark;
+    }
+  }
+
 }
 
 .recap-captcha {

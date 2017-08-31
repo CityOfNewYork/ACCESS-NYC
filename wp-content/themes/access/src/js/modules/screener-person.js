@@ -10,8 +10,10 @@ import DataBinding from 'lib/data-binding';
  */
 class ScreenerPerson extends DataBinding {
   /**
-   * @param {string} name - the dom element to bind to the model
-   * @param {?object} obj - initial attributes to set.
+   * @param {string} name      - the dom element to bind to the model
+   * @param {?object} obj      - initial attributes to set.
+   * @param {object} callbacks - collection of functions to hook into
+   *                             data-binding
    * @constructor
    */
   constructor(name, obj, callbacks) {

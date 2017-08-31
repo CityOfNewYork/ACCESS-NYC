@@ -30,6 +30,7 @@
 
                 <label class="screener-label" for="person-<%= members.index %>-age">
                   {{ __('How old are they?', 'accessnyc-screener') }}
+                  <span class="c-red">(*Required)</span>
                 </label>
                 <div data-scope="_people[<%= members.index %>]" class="screener-question">
                   <div class="screener-question-container">
@@ -47,7 +48,7 @@
                   </div>
                 </div>
 
-                <label class="screener-label" for="person-<%= members.index %>-relation">
+                <label class="screener-label d-block m-bottom" for="person-<%= members.index %>-relation">
                   {{ __('Is this person the head of the household?', 'accessnyc-screener') }}
                 </label>
                 <div data-scope="_people[<%= members.index %>]" class="screener-radio-buttons m-bottom-2">
@@ -77,6 +78,7 @@
                   <div data-class="(headOfHousehold)?'hidden':''">
                     <label class="screener-label" for="person-<%= members.index %>-relation">
                       {{ __('What is this person’s relationship to the head of the household?', 'accessnyc-screener') }}
+                      <span class="c-red">(*Required)</span>
                     </label>
                     <select
                       data-val="headOfHouseholdRelation"

@@ -25,7 +25,7 @@
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-expenses">
 
-    <div class="bg-blue-light overlay js-toggle-question"></div> {# hidden #}
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div> {# hidden #}
 
     <div class="p-relative">
 
@@ -35,7 +35,7 @@
         </a>
       </label>
 
-      <div class="p-horizontal-2 p-bottom-2 js-toggle-question"> {# hidden #}
+      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden"> {# hidden #}
 
         <div class="screener-checkboxes">
         {% for option in expenseOptions %}
@@ -63,14 +63,15 @@
             {{ __('Who contributes to', 'accessnyc-screener') }} {{ option.text }}{{ __('?') }}
           </label>
 
-          <div class="p-top" data-scope="_household">
+          <div class="screener-members p-top" data-scope="_household">
             <div data-for="members" aria-hidden="true">
               <script type="text/template">
                 <label class="styled-checkbox screener-checkbox screener-label">
                   <input
-                    data-toggles="#js-toggle-people-<%= members.index %>-expenses"
+                    data-toggles="#js-toggle-people-<%= members.index %>-{{ option.value }}"
                     class="js-screener-toggle"
                     type="checkbox"
+                    name="<%= members.index %>-expenses"
                     value="1"
                   />
                   <span data-scope="_people[<%= members.index %>]" class="styled-checkbox-label">
@@ -81,42 +82,49 @@
             </div>
           </div>
 
-          <div class="p-top" data-scope="_household">
+          <div class="screener-members p-top" data-scope="_household">
             <div data-for="members" aria-hidden="true">
               <script type="text/template">
 
-                <label class="screener-label d-block m-bottom">
-                  {{ __('How much did', 'accessnyc-screener') }}
-                  {% include 'screener-proto-partials/member-format.twig' %}
-                  {{ __('contribute to', 'accessnyc-screener') }} {{ option.text }}{{ __('?') }}
-                </label>
-                <div class="currency-usd m-bottom">
-                  <input
-                    data-type="float"
+                <div
+                  data-scope="_people[<%= members.index %>]"
+                  id="js-toggle-people-<%= members.index %>-{{ option.value }}"
+                  class="p-bottom-2 hidden">
 
-                    id="person-<%= members.index %>-expenses--amount"
-                    name="Person[<%= members.index %>].expenses[].amount"
-                    type="number"
-                    min="0"
+                  <label class="screener-label d-block m-bottom">
+                    {{ __('How much did', 'accessnyc-screener') }}
+                    {% include 'screener-proto-partials/member-format.twig' %}
+                    {{ __('contribute to', 'accessnyc-screener') }} {{ option.text }}{{ __('?') }}
+                  </label>
+                  <div class="currency-usd m-bottom">
+                    <input
+                      data-type="float"
+
+                      id="person-<%= members.index %>-expenses--amount"
+                      name="Person[<%= members.index %>].expenses[].amount"
+                      type="number"
+                      min="0"
+                      required>
+                  </div>
+
+                  <label class="screener-label d-block m-bottom" for="person-<%= members.index %>-expenses--frequency">
+                    {{ __('How often do', 'accessnyc-screener') }}
+                    {% include 'screener-proto-partials/member-format.twig' %}
+                    {{ __('contribute to', 'accessnyc-screener') }} {{ option.text }}{{ __('?') }}
+                  </label>
+                  <select
+                    class="screener-select m-bottom"
+                    id="person-<%= members.index %>-expenses--frequency"
+                    name="Person[<%= members.index %>].expenses[].frequency"
                     required>
-                </div>
+                    {% for option in frequencyOptions %}
+                    <option value="{{ option.value }}">
+                      {{ __(option.text, 'accessnyc-screener') }}
+                    </option>
+                    {% endfor %}
+                  </select>
 
-                <label class="screener-label d-block m-bottom" for="person-<%= members.index %>-expenses--frequency">
-                  {{ __('How often do', 'accessnyc-screener') }}
-                  {% include 'screener-proto-partials/member-format.twig' %}
-                  {{ __('contribute to', 'accessnyc-screener') }} {{ option.text }}{{ __('?') }}
-                </label>
-                <select
-                  class="screener-select m-bottom"
-                  id="person-<%= members.index %>-expenses--frequency"
-                  name="Person[<%= members.index %>].expenses[].frequency"
-                  required>
-                  {% for option in frequencyOptions %}
-                  <option value="{{ option.value }}">
-                    {{ __(option.text, 'accessnyc-screener') }}
-                  </option>
-                  {% endfor %}
-                </select>
+                </div>
 
               </script>
             </div>

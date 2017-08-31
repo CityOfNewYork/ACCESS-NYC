@@ -27,8 +27,11 @@ import _ from 'underscore';
 class DataBinding {
   /**
    * @constructor
+   * @param {string} name      - the name of the parent node element
+   * @param {object} callbacks - collection of functions to hook into
+   *                             data-binding
    */
-  constructor(name, callbacks = {'compile':()=>{}}) {
+  constructor(name, callbacks = {'compile': ()=>{}}) {
     /**
      * Create a key storage
      * @type {Object}
@@ -42,7 +45,7 @@ class DataBinding {
       MANIPULATE: 'manipulate',
       FOR_INDEX: 'index',
       SCOPE: 'scope',
-      ATTRS: 'attrs',
+      ATTRS: 'attrs'
     };
 
     this._callbacks = callbacks;
@@ -67,7 +70,7 @@ class DataBinding {
 
     /**
      * Set the scope
-     * @type {[type]}
+     * @return {object} node list of the scope
      */
     this._scope = () => {
       return document.querySelectorAll(`[data-scope="${this._name}"]`);
@@ -143,7 +146,6 @@ class DataBinding {
      * @param {string|number|boolean|array} value - the value to set the element
      */
     this._val = function(element, key, value) {
-      // console.dir([element, element.value, value, (element.value === value.toString())]);
       if (element.type === 'number' && element.value !== parseInt(value)) {
         element.value = value;
       }
@@ -164,7 +166,6 @@ class DataBinding {
      * @param {collection} value - the data for the loop content
      */
     this._for = function(element, key, value) {
-      console.dir([element, key, value, typeof this._attrs[key]]);
       let loop = [];
       let length = 0;
 
@@ -196,8 +197,8 @@ class DataBinding {
       let clone = element;
 
       for (let i = 0; i <= length - 1; i++) {
-        // value[i][this._keys.FOR_INDEX] = i;
-        obj[subkey] = (value[i]) ? value[i] : {'length' : value}; // set the data for the template
+        // set the data for the template
+        obj[subkey] = (value[i]) ? value[i] : {'length': value};
         obj[subkey][this._keys.FOR_INDEX] = i; // set the index for the data
         clone = element.cloneNode(); // clone template
         let template = element.firstElementChild;
@@ -302,20 +303,9 @@ class DataBinding {
      * @param  {string|number|boolean|array} value -
      */
     this._setAttr = function(key, value) {
-      // console.dir([
-      //   this._attrs[key],
-      //   value,
-      //   typeof this._attrs[key],
-      //   typeof value,
-      //   isNaN(parseInt(this._attrs[key])),
-      //   isNaN(value)//,
-      //   // (isNaN(this._attrs[key]) === isNaN(value))
-      // ]);
       if (
         key in this._attrs &&
-        typeof this._attrs[key] === typeof value //&&
-        /*this._attrs[key] !== value*/ //&&
-        //isNaN(this._attrs[key]) === isNaN(value)
+        typeof this._attrs[key] === typeof value
       ) {
         this._attrs[key] = value;
         // if the model is changing, set the DOM
@@ -324,7 +314,6 @@ class DataBinding {
         // if not, set to default
         this._cycle(key, this._defaults[key]);
       }
-      console.dir(this._attrs);
     };
 
     /**
@@ -345,7 +334,7 @@ class DataBinding {
     this._proxyDom = function(key, value) {
       let namespaces = this._manipulateCycle;
       let selections = this._selections(key, namespaces);
-      // console.dir([selections[this._keys.VAL][i].type, key, value]);
+
       for (let i = selections[this._keys.VAL].length - 1; i >= 0; i--) {
         let input = selections[this._keys.VAL][i];
         if (input.type === 'number') {
@@ -364,7 +353,6 @@ class DataBinding {
         if (input.type === 'select-one') {
           input.addEventListener('change', (event) => {
             // ADD VALIDATION HERE!?
-            console.dir(event.currentTarget);
             this._setAttr(key, event.currentTarget.value);
           });
         }
@@ -396,9 +384,9 @@ class DataBinding {
 
   /**
    * Initialize the DOM proxy for each
+   * @return {object} the class object
    */
   init() {
-    console.log(`${this._name} initialized`);
     this._init();
     return this;
   }

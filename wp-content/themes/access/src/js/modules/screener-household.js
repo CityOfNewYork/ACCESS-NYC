@@ -10,8 +10,10 @@ import DataBinding from 'lib/data-binding';
  */
 class ScreenerHousehold extends DataBinding {
   /**
-   * @param {string} name - the dom element to bind to the model
-   * @param {?object} obj - initial attributes to set.
+   * @param {string} name      - the dom element to bind to the model
+   * @param {?object} obj      - initial attributes to set.
+   * @param {object} callbacks - collection of functions to hook into
+   *                             data-binding
    * @constructor
    */
   constructor(name, obj, callbacks) {
@@ -20,7 +22,7 @@ class ScreenerHousehold extends DataBinding {
     /** @private {object} The attributes that are exposed to Drools. */
     this._attrs = {
       /** @type {string} */
-      zip: '',
+      zip: 0,
       /** @type {string} can be blank string or 'NYC' */
       city: '',
       /** @type {Number} must be an integer */

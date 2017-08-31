@@ -1,0 +1,268 @@
+<fieldset class="screener-body-step active js-screener-step">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-personal-information">
+
+    <div class="bg-blue-light overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <label class="screener-label">
+        <a class="d-block p-2" href="#question-personal-information">
+          {{ __('Getting to know you', 'accessnyc-screener') }}
+        </a>
+      </label>
+
+      <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2 hidden">
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-title">
+            {{ __('Title', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-title" name="Person[0].title" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-first">
+            {{ __('First Name', 'accessnyc-screener') }} <span class="c-red">(*Required)</span>
+          </label>
+          <input id="person-0-first" name="Person[0].first" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-middle">
+            {{ __('Middle Name', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-middle" name="Person[0].middle" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-last">
+            {{ __('Last Name', 'accessnyc-screener') }} <span class="c-red">(*Required)</span>
+          </label>
+          <input id="person-0-last" name="Person[0].last" value="" required>
+        </div>
+
+
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-suffix">
+            {{ __('Suffix', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-suffix" name="Person[0].suffix" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-age">
+            {{ __('How old are you?', 'accessnyc-screener') }} <span class="c-red">(*Required)</span>
+          </label>
+          <div>
+            <p>
+              <button type="button" class="question-info btn btn-text btn-link js-tooltip-trigger" aria-describedby="tooltip-age">
+                {{ __('Here’s why we are asking.', 'accessnyc-screener') }}
+                <svg class="icon icon-info">
+                  <use xlink:href="#icon-info"></use>
+                </svg>
+              </button>
+            </p>
+            <div id="tooltip-age">
+              <p>{{ __('Many benefit programs are meant for people of a specific age group. Sharing your age will help us choose the programs that will be most helpful to you right now. The information you share for the purposes of public benefits screening will be anonymous.', 'accessnyc-screener') }}</p>
+            </div>
+            <div data-scope="_people[0]" class="screener-question-container">
+              <input
+                data-val="age"
+                data-type="integer"
+                id="person-0-age"
+                name="Person[0].age"
+                type="number"
+                value=""
+                min="0"
+                maxlength="3"
+                pattern="[0-9]"
+                step="1"
+                required>
+            </div>
+          </div>
+        </div>
+
+        <hr class="screener-divider">
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-phone">
+            {{ __('Phone', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-phone" name="Person[0].phone" value="" required>
+        </div>
+
+
+        <div class="screener-question">
+
+          <label class="screener-label" for="person-0-phone">
+            {{ __('Best time to contact you?', 'accessnyc-screener') }}
+          </label>
+          <div class="p-top">
+            <label class="styled-checkbox screener-checkbox screener-label d-block">
+              <input
+                type="checkbox"
+                value="1"
+                data-type="boolean">
+              <span class="styled-checkbox-label">{{ __('Morning (10:00 AM - 12:00 PM)', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="styled-checkbox screener-checkbox screener-label d-block">
+              <input
+                type="checkbox"
+                value="1"
+                data-type="boolean">
+              <span class="styled-checkbox-label">{{ __('Noon (12:00 PM - 2:00 PM)', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="styled-checkbox screener-checkbox screener-label d-block">
+              <input
+                type="checkbox"
+                value="1"
+                data-type="boolean">
+              <span class="styled-checkbox-label">{{ __('Afternoon (2:00 AM - 5:00 PM)', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-email">
+            {{ __('Email', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-email" name="Person[0].email" value="" required>
+        </div>
+
+
+        <hr class="screener-divider">
+
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-address-1">
+            {{ __('Street Address 1', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-address-1" name="Person[0].address-1" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-address-2">
+            {{ __('Street Address 2', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-address-2" name="Person[0].address-2" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-state">
+            {{ __('City', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-state" name="Person[0].state" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="household-zip">
+            {{ __('What is your zip code?', 'accessnyc-screener') }}
+            <span class="c-red">(*Required)</span>
+          </label>
+          <div id="what-is-your-zip-code">
+            <div data-scope="_household" class="screener-question-container">
+              <input
+                data-val="zip"
+                data-type="zip"
+                id="household-zip"
+                name="Household.zip"
+                type="number"
+                maxlength="5"
+                pattern="[0-9]"
+                required>
+            </div>
+          </div>
+        </div>
+
+
+        <hr class="screener-divider">
+
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-docket">
+            {{ __('Docket #', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-docket" name="Person[0].docket" value="" required>
+        </div>
+
+        <label class="screener-label">
+            {{ __('Are you currently enrolled in these programs?', 'accessnyc-screener') }}
+          </label>
+        <div class="screener-checkboxes">
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input
+              type="checkbox"
+              value="1"
+              data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('SNAP', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input
+              type="checkbox"
+              value="1"
+              data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Cash Assistance', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input
+              type="checkbox"
+              value="1"
+              data-type="boolean">
+            <span class="styled-checkbox-label">{{ __('Women, Infants, and Children (WIC)', 'accessnyc-screener') }}</span>
+          </label>
+        </div>
+
+
+        <hr class="screener-divider">
+
+
+        <label class="screener-label d-block p-bottom-2">
+          {{ __('PEU Staff Name', 'accessnyc-screener') }}
+        </label>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-title">
+            {{ __('Title', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-title" name="Person[0].title" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-first">
+            {{ __('First Name', 'accessnyc-screener') }} <span class="c-red">(*Required)</span>
+          </label>
+          <input id="person-0-first" name="Person[0].first" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-middle">
+            {{ __('Middle Name', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-middle" name="Person[0].middle" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-last">
+            {{ __('Last Name', 'accessnyc-screener') }} <span class="c-red">(*Required)</span>
+          </label>
+          <input id="person-0-last" name="Person[0].last" value="" required>
+        </div>
+
+        <div class="screener-question">
+          <label class="screener-label" for="person-0-suffix">
+            {{ __('Suffix', 'accessnyc-screener') }}
+          </label>
+          <input id="person-0-suffix" name="Person[0].suffix" value="" required>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>{# /#step-3 #}

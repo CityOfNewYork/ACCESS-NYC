@@ -30,53 +30,63 @@
 
     <form class="screener-body js-screener-proto-form" style="border:none;padding-top:0;padding-bottom:0">
 
-      <div class="js-screener-page" id="page-screener">
+      <div class="screener-body-page js-screener-page" id="page-screener">
 
-        <section class="js-section d-block o-hidden p-bottom" id="section-contact">
-          <h1 class="m-left-2 m-top">
-            {{ __('Getting Started', 'accessnyc-screener') }}
-          </h1>
-          {% include 'screener-proto-partials/step-1.twig' with {'categories': categories} %}
-          {% include 'screener-proto-partials/step-3.twig' %}  {# Age/Zip #}
-        </section>
+        <h1 class="m-left-2 m-top">
+          {{ __('Getting Started', 'accessnyc-screener') }}
+        </h1>
+          {% include 'screener-proto-partials/question-personal-information.twig' %}
+          {% include 'screener-proto-partials/question-what-kind-of-help-are-you-looking-for.twig' with {'categories': categories} %}
 
-        <h1 class="m-left-2 m-top">{{ __('Household', 'accessnyc-screener') }}</h1>
-        {% include 'screener-proto-partials/question-household-members.twig' %}  {# Household Number #}
-        {% include 'screener-proto-partials/question-head-of-household.twig' %}
-        {% include 'screener-proto-partials/question-household-member-details.twig' %}
-        {% include 'screener-proto-partials/question-household-member-more-details.twig' %}
-        {% include 'screener-proto-partials/question-household-students.twig' %}
-        {% include 'screener-proto-partials/question-household-unemployed.twig' %}
+        <h1 class="m-left-2 m-top">
+          {{ __('Household', 'accessnyc-screener') }}
+        </h1>
+          {% include 'screener-proto-partials/question-household-members.twig' %}
+          {% include 'screener-proto-partials/question-head-of-household.twig' %}
+          {% include 'screener-proto-partials/question-household-member-details.twig' %}
+          {% include 'screener-proto-partials/question-household-member-more-details.twig' %}
+          {% include 'screener-proto-partials/question-household-students.twig' %}
+          {% include 'screener-proto-partials/question-household-unemployed.twig' %}
 
         <h1 class="m-left-2 m-top">{{ __('Household Income', 'accessnyc-screener') }}</h1>
-        {% include 'screener-proto-partials/question-household-incomes.twig' %}
+          {% include 'screener-proto-partials/question-household-incomes.twig' %}
 
         <h1 class="m-left-2 m-top">{{ __('Household Expenses', 'accessnyc-screener') }}</h1>
-        {% include 'screener-proto-partials/question-household-expenses.twig' %}
+          {% include 'screener-proto-partials/question-household-expenses.twig' %}
 
         <h1 class="m-left-2 m-top">{{ __('Savings', 'accessnyc-screener') }}</h1>
-        {% include 'screener-proto-partials/question-cash-on-hand.twig' %} {# Housing Situation #}
+          {% include 'screener-proto-partials/question-cash-on-hand.twig' %}
 
-          <h1 class="m-left-2 m-top">{{ __('Housing', 'accessnyc-screener') }}</h1>
-        {% include 'screener-proto-partials/question-housing.twig' %} {# Housing Situation #}
+        <h1 class="m-left-2 m-top">{{ __('Housing', 'accessnyc-screener') }}</h1>
+          {% include 'screener-proto-partials/question-housing.twig' %}
 
-        <section id="section-confirmation" class="js-section d-block o-hidden p-vertical-2">
-          <a id="js-render-recap" class="btn btn-primary btn-next btn-small" href="#page-recap">{{ __('Confirm', 'accessnyc-screener') }}</a>
-        </section>
+        <div class="p-vertical-2">
+
+          <a id="js-render-recap" class="btn btn-primary btn-next btn-small d-block" href="#page-recap">
+            {{ __('Confirm', 'accessnyc-screener') }}
+          </a>
+
+        </div>
 
       </div>
 
-      {% include 'screener-proto-partials/recap.twig' with {'formAction': formAction} %}
+      <div class="screener-body-page js-screener-page" id="page-recap">
+
+        {% include 'screener-proto-partials/recap.twig' with {'formAction': formAction} %}
+
+      </div>
 
     </form>
   </div>
 
+  {#
   <script type="template/html" id="screener-income-template">
     {% include 'screener-proto-partials/template-income.twig' %}
   </script>
   <script type="template/html" id="screener-expense-template">
     {% include 'screener-proto-partials/template-expense.twig' %}
   </script>
+  #}
 
   <script>
     window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
