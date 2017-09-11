@@ -1,118 +1,78 @@
-<fieldset class="screener-body-step js-screener-step active">
+{% set questions = [
+  {
+    question: 'Does anyone in your household have <span class="c-blue">disabilities</span>?',
+    who: 'Who currently has <span class="c-blue">disabilities</span>?',
+    dataKey: 'disabled',
+    styles: styles
+  },
+  {
+    question: 'Is anyone in your household currently <span class="c-blue">pregnant</span>?',
+    who: 'Who is currently <span class="c-blue">pregnant</span>?',
+    dataKey: 'pregnant',
+    styles: styles
+  },
+  {
+    question: 'Is anyone in your household blind or <span class="c-blue">visually impaired</span>?',
+    who: 'Who is currently <span class="c-blue">blind or visually impaired</span>?',
+    dataKey: 'blind',
+    styles: styles
+  },
+  {
+    question: 'Did anyone in the household serve in the <span class="c-blue">U.S. Armed Forces, National Guard or Reserves</span>?',
+    who: 'Who has <span class="c-blue">served</span>?',
+    dataKey: 'veteran',
+    styles: styles
+  },
+  {
+    question: 'Is anyone in your household currently on <span class="c-blue">Medicaid</span>?',
+    who: 'Who is on <span class="c-blue">Medicaid</span>?',
+    dataKey: 'benefitsMedicaid',
+    styles: styles
+  },
+  {
+    question: 'Is anyone currently on <span class="c-blue">disability related Medicaid</span>?',
+    who: 'Who is on <span class="c-blue">disability related Medicaid</span>?',
+    dataKey: 'benefitsMedicaidDisability',
+    styles: styles
+  },
+  {
+    question: 'Who in your household is currently a <span class="c-blue">full-time student</span>?',
+    who: 'Who is a <span class="c-blue">full-time student</span>?',
+    dataKey: 'student',
+    styles: styles
+  }
+] %}
+
+<fieldset class="d-block w-100">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-member-details">
 
-    <div class="bg-blue-light overlay js-toggle-question hidden"></div>
+    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div> {# hidden #}
 
     <div class="p-relative">
 
-      <label data-scope="_household" class="screener-label">
-        <a data-class="(members > 1)?'':'ui-disabled'" class="d-block p-2" href="#question-household-member-details">
-          {{ __('Who are the members of your household?', 'accessnyc-screener') }}
-        </a>
-      </label>
+      <a class="{{styles.questions}}" data-js="question" href="#question-household-member-details">
+        {{ __('Household Member Details', 'accessnyc-screener') }}
+      </a>
 
-      <div class="js-toggle-question hidden"> {# hidden #}
+      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden"> {# hidden #}
 
-        <div data-scope="_household" class="p-bottom-2">
-          <div data-for="members" aria-hidden="true">
-            <script type="text/template">
+        <h4 class="{{styles.labels}}">
+          {{ __('Tell us a little more about you and your household.', 'accessnyc-screener') }}
+        </h4>
 
-              <% if (members.index !== 0) { %>
+        {% for question in questions %}
+        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with question %}
+        {% endfor %}
 
-              <div class="p-horizontal-2">
-
-                <% if (members.index !== 1) { %>
-                <hr class="screener-divider">
-                <% } %>
-
-                <h4>Tell us about the next person in your household</h4>
-
-                <label class="screener-label" for="person-<%= members.index %>-age">
-                  {{ __('How old are they?', 'accessnyc-screener') }}
-                  <span class="c-red">(*Required)</span>
-                </label>
-                <div data-scope="_people[<%= members.index %>]" class="screener-question">
-                  <div class="screener-question-container">
-                    <input
-                      data-val="age"
-                      data-type="integer"
-                      id="person-<%= members.index %>-age"
-                      name="Person[<%= members.index %>].age"
-                      type="number"
-                      min="0"
-                      maxlength="3"
-                      pattern="[0-9]"
-                      step="1"
-                      required>
-                  </div>
-                </div>
-
-                <label class="screener-label d-block m-bottom" for="person-<%= members.index %>-relation">
-                  {{ __('Is this person the head of the household?', 'accessnyc-screener') }}
-                </label>
-                <div data-scope="_people[<%= members.index %>]" class="screener-radio-buttons m-bottom-2">
-                  <label class="screener-radio screener-label">
-                    <input
-                      data-val="headOfHousehold"
-                      data-type="boolean"
-                      class="screener-radio-input sr-only"
-                      value="true"
-                      type="radio"
-                      name="_Person[<%= members.index %>].headOfHousehold"/>
-                    <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
-                  </label>
-                  <label class="screener-radio screener-label">
-                    <input
-                      data-val="headOfHousehold"
-                      data-type="boolean"
-                      class="screener-radio-input sr-only"
-                      value="false"
-                      type="radio"
-                      name="_Person[<%= members.index %>].headOfHousehold"/>
-                    <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
-                  </label>
-                </div>
-
-                <div data-scope="_people[<%= members.index %>]">
-                  <div data-class="(headOfHousehold)?'hidden':''">
-                    <label class="screener-label" for="person-<%= members.index %>-relation">
-                      {{ __('What is this person’s relationship to the head of the household?', 'accessnyc-screener') }}
-                      <span class="c-red">(*Required)</span>
-                    </label>
-                    <select
-                      data-val="headOfHouseholdRelation"
-                      class="screener-select"
-                      id="person<%= members.index %>-relation"
-                      name="Person[<%= members.index %>].headOfHouseholdRelation"
-                      required>
-                      <option value="">{{ __('Click to select relationship', 'accessnyc-screener') }}</option>
-                      <option value="Child">{{ __('Child', 'accessnyc-screener') }}</option>
-                      <option value="FosterChild">{{ __('Foster Child', 'accessnyc-screener') }}</option>
-                      <option value="StepChild">{{ __('Step-child', 'accessnyc-screener') }}</option>
-                      <option value="Grandchild">{{ __('Grandchild', 'accessnyc-screener') }}</option>
-                      <option value="Spouse">{{ __('Spouse', 'accessnyc-screener') }}</option>
-                      <option value="Parent">{{ __('Parent', 'accessnyc-screener') }}</option>
-                      <option value="FosterParent">{{ __('Foster Parent', 'accessnyc-screener') }}</option>
-                      <option value="StepParent">{{ __('Step-parent', 'accessnyc-screener') }}</option>
-                      <option value="Grandparent">{{ __('Grandparent', 'accessnyc-screener') }}</option>
-                      <option value="SisterBrother">{{ __('Sister/Brother', 'accessnyc-screener') }}</option>
-                      <option value="StepSisterStepBrother">{{ __('Step-sister/Step-brother', 'accessnyc-screener') }}</option>
-                      <option value="BoyfriendGirlfriend">{{ __('Boyfriend/Girlfriend', 'accessnyc-screener') }}</option>
-                      <option value="DomesticPartner">{{ __('Domestic Partner', 'accessnyc-screener') }}</option>
-                      <option value="Unrelated">{{ __('Unrelated', 'accessnyc-screener') }}</option>
-                      <option value="Other">{{ __('Related in some other way', 'accessnyc-screener') }}</option>
-                    </select>
-                  </div>
-                </div>
-
-              </div>
-
-              <% } %>
-
-            </script>
-          </div>
-        </div>
+        {% include 'screener-proto-partials/question-toggles-unemployed.twig' with {
+          question: 'Is anyone in your household currently <span class="c-blue">unemployed</span>?',
+          who: 'Who is <span class="c-blue">unemployed</span>?',
+          subQuestion: 'worked in the last 18 months?',
+          dataKey: 'unemployed',
+          dataSubKey: 'unemployedWorkedLast18Months',
+          styles: styles
+        } %}
 
       </div>
 

@@ -90,9 +90,7 @@ class ScreenerProto {
         $('#js-layout-body').scrollTop(0);
       }
       if (type === '#question') {
-        // let selector = window.location.hash.replace('#','.id-');
-        // let selector = window.location.hash;
-        this._goToQuestion(window.location.hash);
+        // this._goToQuestion(window.location.hash);
       }
       if (type === '#section') {
         this._goToSection(window.location.hash);
@@ -165,9 +163,13 @@ class ScreenerProto {
      * Listen for changes to the income data
      */
     $(this._el).on('change', '[data-js="pushIncome"]', (event) => {
-        let data = event.currentTarget.dataset;
-        data.value = event.currentTarget.value;
-        this._pushIncome(data);
+      let data = event.currentTarget.dataset;
+      data.value = event.currentTarget.value;
+      this._pushIncome(data);
+    });
+
+    $(this._el).on('click', '[data-js="question"]', (event) => {
+      this._goToQuestion(event, event.currentTarget.hash);
     });
 
     window.location.hash = 'page-screener';
@@ -336,6 +338,8 @@ class ScreenerProto {
     if ($(section).attr('id') === ScreenerProto.CssClass.PAGE_RECAP)
       this._renderRecap();
 
+    window.location.hash = '';
+
     return this;
   }
 
@@ -344,16 +348,18 @@ class ScreenerProto {
    * @param  {string} hash The question's hash id
    * @return {this} Screener
    */
-  _goToQuestion(hash) {
-    let $page = $(hash)
-      .closest(`.${ScreenerProto.CssClass.PAGE}`);
-    if (!$page.hasClass('active')) {
+  _goToQuestion(event, hash) {
+    let $page = $(hash).closest(`.${ScreenerProto.CssClass.PAGE}`);
+    let $questions = $(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`);
+    let $target = $(hash).find(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`);
+    let target = document.querySelector(hash);
+    let $window = document.querySelector('#js-layout-body');
+
+    if (!$page.hasClass('active'))
       this._goToPage($page[0]);
-    }
-    let $target = $(hash)
-      .find(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`);
+
     if (!$target.hasClass('active')) {
-      $(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`)
+      $questions
         .addClass('hidden')
         .removeClass('active')
         .prop('aria-hidden', true);
@@ -361,7 +367,25 @@ class ScreenerProto {
         .addClass('active')
         .removeClass('hidden')
         .prop('aria-hidden', false);
+
+      // Scrolling Behavior
+      event.preventDefault();
+      target.scrollIntoView({behavior: 'auto'});
+      $window.scrollBy({
+        top: -60,
+        left: 0,
+        behavior: 'auto'
+      });
+    } else {
+      $target
+        .addClass('hidden')
+        .removeClass('active')
+        .prop('aria-hidden', true);
+
+      // Scrolling Behavior
+      event.preventDefault();
     }
+
     return this;
   }
 
@@ -377,8 +401,8 @@ class ScreenerProto {
       .closest(`.${ScreenerProto.CssClass.PAGE}`);
     if (!$page.hasClass('active')) {
       this._goToPage($page[0]);
-      $(window).scrollTop(0);
-      $('#js-layout-body').scrollTop(0);
+      // $(window).scrollTop(0);
+      // $('#js-layout-body').scrollTop(0);
     }
     return this;
   }
@@ -423,9 +447,9 @@ class ScreenerProto {
 
     if (typeof incomes[data.income] === 'undefined') {
       incomes[data.income] = {
-        amount: 0,
+        amount: '',
         type: data.value,
-        frequency: ''
+        frequency: 'monthly'
       };
     } else {
       incomes[data.income][val] = data.value;

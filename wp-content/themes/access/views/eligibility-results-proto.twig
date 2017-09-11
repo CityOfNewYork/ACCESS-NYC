@@ -2,19 +2,19 @@
 
 {% block header %}
 <header class="site-header">
-  <div class="site-topline b-bottom b-white b-4">
-    <div class="logo-nyc">
-      <svg class="icon icon-logo-nyc">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-nyc"></use>
+  <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark b-bottom b-white b-4">
+    {# <div class="logo-nyc"> #}
+      {# <svg class="icon icon-logo-nyc">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-nyc" class="f-white"></use>
       </svg>
-      <span class="logo-nyc-tag">Official website of the City of New York</span>
-      <div style="height: 8px"></div>
+      <span class="logo-nyc-tag">Official website of the City of New York</span> #}
+      {# <div style="height: 8px"></div> #}
       <svg class="icon icon-logo-full" width="163">
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
       </svg>
-    </div>
+    {# </div> #}
     <div class="d-flex ai-center">
-      <a href="/eligibility-proto/?debug=1#page-disclaimer" class="btn btn-primary btn-small">New Client</a>
+      <a href="/eligibility-proto/?debug=1#page-disclaimer" class="btn btn-primary btn-small" onclick="location.reload()">New Client</a>
     </div>
   </div>
 </header>
@@ -25,18 +25,7 @@
 
 {% block content %}
   {% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
-  <main class="main-content screener-proto layout--nav" id="content">
-    <aside class="layout__aside bg-grey-lightest">
-      <nav class="screener-proto__nav">
-          <div class="d-block p-left b-bottom b-white b-4" href="#section-contact">Getting Started</div>
-          <div class="d-block p-left b-bottom b-white b-4" href="#section-household">Household</div>
-          <div class="d-block p-left b-bottom b-white b-4" href="#section-household-members">Household Members</div>
-          <div class="d-block p-left b-bottom b-white b-4" href="#section-housing">Housing</div>
-          <div class="d-block p-left b-bottom b-white b-4" href="#section-savings">Savings</div>
-          <div class="d-block p-left b-bottom b-white b-4" href="#recap">Confirmation</div>
-          <a class="d-block p-left b-bottom b-white b-4" href="/eligibility-proto/results/?debug=1&categories=child-care%2Chealth%2Chousing%2Cspecial-needs&programs=S2R011%2CS2R009%2CS2R023%2CS2R032%2CS2R003%2CS2R030%2CS2R026%2CS2R028%2CS2R004%2CS2R021&guid=5994a81a1825a&date=1502914587">Results</a>
-      </nav>
-    </aside>
+  <main class="main-content screener-proto layout" id="content">
     <div class="layout__body bg-white">
 
       <div class="save-your-results p-2">

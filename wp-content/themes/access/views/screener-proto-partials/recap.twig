@@ -12,7 +12,20 @@
           <div id="screener-recaptcha"></div>
         </div>
       </div>
-      <p class="screener-next-step"><button type="button" class="js-screener-submit btn btn-primary btn-next btn-small" data-action="{{ formAction }}">{{ __('Yes, continue to my results', 'accessnyc-screener') }}</button></p>
+      <p class="screener-next-step">
+        {# <button
+          type="button"
+          class="js-screener-submit btn btn-primary btn-next btn-small"
+          data-action="{{ formAction }}">
+          {{ __('Yes, continue to my results', 'accessnyc-screener') }}
+        </button>
+         #}
+        <a
+          href="/eligibility-proto/results/?categories=child-care%2Chealth%2Chousing%2Cspecial-needs&programs=S2R011%2CS2R009%2CS2R023%2CS2R032%2CS2R003%2CS2R030%2CS2R026%2CS2R028%2CS2R004%2CS2R021&guid=5994a81a1825a&date=1502914587"
+          class="js-screener-submit btn btn-primary btn-next btn-small">
+          {{ __('Yes, continue to my results', 'accessnyc-screener') }}
+        </a>
+      </p>
     </div>
 
   </div>
@@ -23,7 +36,7 @@
   <h2 class="recap-confirmation">{{ __('Is all of your information correct?', 'accessnyc-screener') }}</h2>
   <div class="recap-body">
     <div class="recap-section">
-      <h3 class="recap-section-heading">{{ __('Looking for help with', 'accessnyc-screener') }}<span class="recap-edit-section"><a href="#question-help">{{ __('Edit', 'accessnyc-screener') }}</a></span></h3>
+      <h3 class="recap-section-heading">{{ __('Looking for help with', 'accessnyc-screener') }}<span class="recap-edit-section"><a data-js="question" href="#question-client-needs">{{ __('Edit', 'accessnyc-screener') }}</a></span></h3>
       <div class="recap-program-categories">
         <% if (categories.length === 0) { %>
           <p class="text-small">{{ __('No categories selected.', 'accessnyc-screener') }}</p>
@@ -69,7 +82,7 @@
             <% if (index === 0 && member.isHoh) { %><div class="recap-household-member-heading-item">{{ __('Head of household', 'accessnyc-screener') }}</div><% } %>
           </h4>
           <div class="recap-edit-section">
-            <a href="#question-screener-is-submitter-head-of-household" data-person="<%= index %>" class="js-edit-person btn-text btn-link">{{ __('Edit', 'accessnyc-screener') }}</a>
+            <a data-js="question" href="#question-household-information" data-person="<%= index %>" class="js-edit-person btn-text btn-link">{{ __('Edit', 'accessnyc-screener') }}</a>
             <% if (index !== 0 && !member.isHoh) { %><button type="button" data-person="<%= index %>" class="js-remove-person btn-text btn-link">{{ __('Remove', 'accessnyc-screener') }}</button><% } %>
           </div>
 
@@ -127,7 +140,12 @@
     </div>
     <hr class="screener-divider">
     <div class="recap-section recap-resources">
-      <h3 class="recap-section-heading">{{ __('Household resources:', 'accessnyc-screener') }} <span class="force-ltr"><%= household.assets %></span> <span class="recap-edit-section"><a href="#question-household-assets">{{ __('Edit', 'accessnyc-screener') }}</a></span></h3>
+      <h3 class="recap-section-heading">
+        {{ __('Household resources:', 'accessnyc-screener') }}
+        <span class="force-ltr"><%= household.assets %></span>
+        <span class="recap-edit-section">
+          <a data-js="question" href="#question-household-total-savings">{{ __('Edit', 'accessnyc-screener') }}</a></span>
+      </h3>
       <div class="recap-section-description">
         <p>{{ __('This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.', 'accessnyc-screener') }}</p>
       </div>
@@ -136,7 +154,9 @@
     <div class="recap-section recap-resources">
       <h3 class="recap-section-heading">
         {{ __('Housing', 'accessnyc-screener') }}
-        <span class="recap-edit-section"><a href="#question-housing">{{ __('Edit', 'accessnyc-screener') }}</a></span>
+        <span class="recap-edit-section" >
+          <a data-js="question" href="#question-housing-situation">{{ __('Edit', 'accessnyc-screener') }}</a>
+        </span>
       </h3>
       <ul class="recap-detail-info">
         <% _.each(household.types, function(type) { %>
@@ -186,7 +206,7 @@
     </div>
     <hr class="screener-divider">
     <div class="recap-section recap-resources">
-      <h3 class="recap-section-heading">{{ __('Your zip code:', 'accessnyc-screener') }} <%= household.zip %><span class="recap-edit-section"><a href="#question-contact-information">{{ __('Edit', 'accessnyc-screener') }}</a></span></h3>
+      <h3 class="recap-section-heading">{{ __('Your zip code:', 'accessnyc-screener') }} <%= household.zip %><span class="recap-edit-section"><a data-js="question" href="#question-client-basics">{{ __('Edit', 'accessnyc-screener') }}</a></span></h3>
     </div>
   </div>
 </script>

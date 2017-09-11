@@ -1,10 +1,10 @@
-<article class="program-card bg-grey-lightest">
+<article class="program-card bg-grey-lightest active" id="program-{{ post.id }}">
   <div class="program-icon">
     {% include 'partials/category-icon.twig' %}
     {# TODO: Add logic to the below conditional for "new" posts - @onebrightlight
     {% if loop.index == 3 %}<div class="program-label program-label-secondary status-warning">New</div>{% endif %} #}
   </div>
-  <div class="program-card-body">
+  <div class="program-card-body fg-1">
     <a href="{{ post.get_permalink }}">
       <h3 class="program-card-title type-h4">
         {{ post.plain_language_program_name }}
@@ -18,7 +18,8 @@
       <p class="hide-for-print"><a href="{{ post.get_permalink }}">{{__('Learn more', 'accessnyctheme')}}</a></p>
       {% if show_apply %}
       <p class="hide-for-print">
-        <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=how-to-apply">{{__('Apply', 'accessnyc-results')}}</a>
+        <a class="btn btn-secondary btn-next m-top" href="{{ post.get_permalink }}?step=how-to-apply">{{__('Apply', 'accessnyc-results')}}</a>
+        <a class="btn btn-primary f-right@tablet-up js-simple-toggle m-top" href="#program-{{ post.id }}">Remove Program</a>
       </p>
       {% endif %}
     </div>

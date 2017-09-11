@@ -376,7 +376,12 @@ class DataBinding {
       this._eachAttrsCycle(this._keys.COMPILE);
       // Then we can proxy the dom and run the rest of the functions
       _.each(this._attrs, (value, key) => {
-        this._cycle(key, value); // set initial dom value
+        // set initial dom value, commented out because this isn't desired for
+        // some inputs like "age" or "zip code", prefered to do it manually
+        // in the DOM template
+        this._cycle(key, value);
+        // Added the compile cycle, because it compiles DOM that may be needed
+        // this._setDom(key, value, this._keys.COMPILE);
         this._proxyDom(key, value);
       });
     };

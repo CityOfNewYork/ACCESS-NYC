@@ -1,27 +1,51 @@
-<fieldset class="screener-body-step active js-screener-step" id="step-9">
+<fieldset class="d-block w-100">
 
-  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-head-of-household">
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-information">
 
-    <div class="bg-blue-light overlay js-toggle-question hidden"></div>
+    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
 
     <div class="p-relative">
 
-      <label data-scope="_household" class="screener-label">
-        <a data-class="(members > 1)?'':'ui-disabled'" class="d-block p-2" href="#question-head-of-household">
-          {{ __('Are you the head of the household?', 'accessnyc-screener') }}
-        </a>
-      </label>
+      <a class="{{styles.questions}}" data-js="question" href="#question-household-information">
+        {{ __('Household Information', 'accessnyc-screener') }}
+      </a>
 
-      <div class="js-toggle-question hidden"> {# hidden #}
+      <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2"> {# hidden #}
 
-        <div class="p-horizontal-2 p-bottom-2">
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}">
+            {{ __('Including you, how many people are in your household?', 'accessnyc-screener') }}
+          </label>
+          <div data-scope="_household">
+            <input
+              data-val="members"
+              data-type="integer"
+              data-go-to-step="#step-8"
+              class="js-screener-validate-step-ui"
+              type="number"
+              name="Household.members"
+              min="1"
+              max="8"
+              value="1"
+              required>
+          </div>
+        </div>
 
-          <div data-scope="_people[0]" class="screener-radio-buttons m-bottom-2">
+        <div>
+          <label class="{{styles.labels}}">
+            {{ __('Are you the head of household?', 'accessnyc-screener') }}
+          </label>
+
+          <h4 class="{{styles.explainations}}">{{ __('What does the head of household mean?', 'accessnyc-screener') }}</h4>
+          <p>{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', 'accessnyc-screener') }}</p>
+
+          <div data-scope="_people[0]" class="screener-radio-buttons">
             <label class="screener-radio screener-label">
               <input
                 data-val="headOfHousehold"
                 data-type="boolean"
-                class="screener-radio-input sr-only"
+                data-hides=".js-toggle-head-of-household"
+                class="js-screener-toggle screener-radio-input sr-only"
                 value="true"
                 type="radio"
                 name="Person[0].headOfHousehold"/>
@@ -31,21 +55,18 @@
               <input
                 data-val="headOfHousehold"
                 data-type="boolean"
-                class="screener-radio-input sr-only"
+                data-shows=".js-toggle-head-of-household"
+                class="js-screener-toggle screener-radio-input sr-only"
                 value="false"
                 type="radio"
                 name="Person[0].headOfHousehold"/>
               <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
             </label>
           </div>
-
-          <h4 class="screener-label m-0">{{ __('This is what the head of household means.', 'accessnyc-screener') }}</h4>
-          <p class="m-0">{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', 'accessnyc-screener') }}</p>
-
         </div>
 
         <div data-scope="_people[0]">
-          <div data-class="(headOfHousehold)?'hidden':''" class="p-horizontal-2 p-bottom-2">
+          <div data-class="(headOfHousehold)?'hidden':''" class="m-top-2">
             <label class="screener-label" for="hoh-relation">
               {{ __('What is your relationship to the head of the household? I am their:', 'accessnyc-screener') }}
             </label>
@@ -75,6 +96,7 @@
             </div>
           </div>
         </div>
+
       </div>
 
     </div>

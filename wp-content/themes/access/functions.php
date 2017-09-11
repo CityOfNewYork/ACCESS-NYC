@@ -524,3 +524,7 @@ Routes::map('applications/scrie', function() {
   );
   Routes::load('single-application.php', $params, null, 200);
 });
+
+Routes::map('guide/typography', function() {
+  Routes::load('single-guide.php', null, null, 200);
+});

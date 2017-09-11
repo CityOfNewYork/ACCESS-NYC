@@ -2,17 +2,17 @@
 
 {% block header %}
 <header class="site-header">
-  <div class="site-topline b-bottom b-white b-4">
-    <div class="logo-nyc">
-      <svg class="icon icon-logo-nyc">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-nyc"></use>
+  <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark">
+    {# <div class="logo-nyc"> #}
+      {# <svg class="icon icon-logo-nyc">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-nyc" class="f-white"></use>
       </svg>
-      <span class="logo-nyc-tag">Official website of the City of New York</span>
-      <div style="height: 8px"></div>
+      <span class="logo-nyc-tag">Official website of the City of New York</span> #}
+      {# <div style="height: 8px"></div> #}
       <svg class="icon icon-logo-full" width="163">
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
       </svg>
-    </div>
+    {# </div> #}
     <div class="d-flex ai-center">
       <a href="/eligibility-proto/?debug=1#page-disclaimer" class="btn btn-primary btn-small" onclick="location.reload()">New Client</a>
     </div>
@@ -28,43 +28,87 @@
 
   <div class="layout__body bg-white" id="js-layout-body">
 
-    <form class="screener-body js-screener-proto-form" style="border:none;padding-top:0;padding-bottom:0">
+    <form class="js-screener-proto-form" style="border:none;padding-top:0;padding-bottom:0">
 
-      <div class="screener-body-page js-screener-page" id="page-screener">
+      <div class="screener-body-page js-screener-page active" id="page-screener">
 
-        <h1 class="m-left-2 m-top">
-          {{ __('Getting Started', 'accessnyc-screener') }}
-        </h1>
-          {% include 'screener-proto-partials/question-personal-information.twig' %}
-          {% include 'screener-proto-partials/question-what-kind-of-help-are-you-looking-for.twig' with {'categories': categories} %}
+        <div class="p-horizontal-2 p-bottom-2 p-top b-bottom b-grey-light">
 
-        <h1 class="m-left-2 m-top">
-          {{ __('Household', 'accessnyc-screener') }}
-        </h1>
-          {% include 'screener-proto-partials/question-household-members.twig' %}
-          {% include 'screener-proto-partials/question-head-of-household.twig' %}
-          {% include 'screener-proto-partials/question-household-member-details.twig' %}
-          {% include 'screener-proto-partials/question-household-member-more-details.twig' %}
-          {% include 'screener-proto-partials/question-household-students.twig' %}
-          {% include 'screener-proto-partials/question-household-unemployed.twig' %}
+          <div class="d-flex ai-center">
 
-        <h1 class="m-left-2 m-top">{{ __('Household Income', 'accessnyc-screener') }}</h1>
-          {% include 'screener-proto-partials/question-household-incomes.twig' %}
+            <div class="f-1">
+              <div class="p-right">
+                <label class="{{styles.labels}}" for="staff-first">
+                  {{ __('PEU Staff First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
+                </label>
+                <input class="w-100" id="staff-first" name="Staff.first" value="" required>
+              </div>
+            </div>
 
-        <h1 class="m-left-2 m-top">{{ __('Household Expenses', 'accessnyc-screener') }}</h1>
-          {% include 'screener-proto-partials/question-household-expenses.twig' %}
+            <div class="f-1">
+              <div class="p-right">
+                <label class="{{styles.labels}}" for="staff-last">
+                  {{ __('PEU Staff Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
+                </label>
+                <input class="w-100" id="staff-last" name="Staff.last" value="" required>
+              </div>
+            </div>
 
-        <h1 class="m-left-2 m-top">{{ __('Savings', 'accessnyc-screener') }}</h1>
-          {% include 'screener-proto-partials/question-cash-on-hand.twig' %}
+            <div class="f-1">
+              <div>
+                <label class="{{styles.labels}}" for="staff-email">
+                  {{ __('PEU Staff Email', 'accessnyc-screener') }} <span class="c-red">*</span>
+                </label>
+                <input class="w-100" id="staff-email" name="Staff.email" value="" type="email" required>
+              </div>
+            </div>
 
-        <h1 class="m-left-2 m-top">{{ __('Housing', 'accessnyc-screener') }}</h1>
-          {% include 'screener-proto-partials/question-housing.twig' %}
+          </div>
 
-        <div class="p-vertical-2">
+        </div>
 
-          <a id="js-render-recap" class="btn btn-primary btn-next btn-small d-block" href="#page-recap">
-            {{ __('Confirm', 'accessnyc-screener') }}
-          </a>
+        <div class="p-horizontal-2">
+
+          {% set styles = {
+            'sections': 'type-h1 m-left-2 p-top-2 d-inline-block p-right',
+            'questions': 'type-h2 c-black m-0 d-block p-2',
+            'labels': 'type-h3 c-blue-dark ff-sans-serif d-block',
+            'explainations': 'type-h4 c-black m-0'
+          } %}
+
+          <h1 class="{{styles.sections}}" id="client-information">
+            <a href="#client-information" class="c-blue-dark">{{ __('Client Information', 'accessnyc-screener') }}</a>
+          </h1><span class="screener-step">(1 of 4)</span>
+            {% include 'screener-proto-partials/question-client-needs.twig' with {'styles': styles, 'categories': categories} %}
+            {% include 'screener-proto-partials/question-client-basics.twig' with styles %}
+            {% include 'screener-proto-partials/question-client-contact.twig' with styles %}
+
+          <h1 class="{{styles.sections}}" id="household">
+            <a href="#household" class="c-blue-dark">{{ __('Household', 'accessnyc-screener') }}</a>
+          </h1><span class="screener-step">(2 of 4)</span>
+            {% include 'screener-proto-partials/question-household-information.twig' with styles %}
+            {% include 'screener-proto-partials/question-household-members.twig' with styles %}
+            {% include 'screener-proto-partials/question-household-member-details.twig' with styles %}
+
+          <h1 class="{{styles.sections}}" id="household-income">
+            <a href="#household-income" class="c-blue-dark">{{ __('Household Income', 'accessnyc-screener') }}
+          </h1><span class="screener-step">(3 of 4)</span>
+            {% include 'screener-proto-partials/question-household-income.twig' with styles %}
+            {% include 'screener-proto-partials/question-household-total-savings.twig' with styles %}
+            {% include 'screener-proto-partials/question-household-expenses.twig' with styles %}
+
+          <h1 class="{{styles.sections}}" id="housing">
+            <a href="#housing" class="c-blue-dark">{{ __('Housing', 'accessnyc-screener') }}</a>
+          </h1><span class="screener-step">(4 of 4)</span>
+            {% include 'screener-proto-partials/question-housing-situation.twig' with styles %}
+
+          <div class="p-vertical-2">
+
+            <a id="js-render-recap" class="btn btn-primary btn-next btn-small d-block" href="#page-recap">
+              {{ __('Confirm', 'accessnyc-screener') }}
+            </a>
+
+          </div>
 
         </div>
 
@@ -72,7 +116,11 @@
 
       <div class="screener-body-page js-screener-page" id="page-recap">
 
-        {% include 'screener-proto-partials/recap.twig' with {'formAction': formAction} %}
+        <div class="p-horizontal-2">
+
+          {% include 'screener-proto-partials/recap.twig' with {'formAction': formAction} %}
+
+        </div>
 
       </div>
 

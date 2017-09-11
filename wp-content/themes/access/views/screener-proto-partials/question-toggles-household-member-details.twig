@@ -1,41 +1,42 @@
-<div class="p-bottom">
+<div>
 
-  {% if (question) %}
-  <label class="screener-label d-block m-bottom">
-    {{ __(question, 'accessnyc-screener') }}
-  </label>
-  {% endif %}
-  <div class="screener-radio-buttons m-bottom">
-    <label class="screener-radio screener-label">
-      <input
-        data-type="boolean"
-        data-shows="#js-toggle-{{dataKey}}"
-        class="js-screener-toggle screener-radio-input sr-only"
-        value="true"
-        type="radio"
-        name="toggle-{{dataKey}}"/>
-      <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+  <div class="m-bottom-2">
+    {% if (question) %}
+    <label class="{{styles.labels}}">
+      {{ __(question, 'accessnyc-screener') }}
     </label>
-    <label class="screener-radio screener-label">
-      <input
-        data-type="boolean"
-        data-hides="#js-toggle-{{dataKey}}"
-        class="js-screener-toggle screener-radio-input sr-only"
-        value="false"
-        type="radio"
-        name="toggle-{{dataKey}}" checked/>
-      <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
-    </label>
+    {% endif %}
+    <div class="screener-radio-buttons m-bottom">
+      <label class="screener-radio screener-label">
+        <input
+          data-type="boolean"
+          data-shows="#js-toggle-{{dataKey}}"
+          class="js-screener-toggle screener-radio-input sr-only"
+          value="true"
+          type="radio"
+          name="toggle-{{dataKey}}"/>
+        <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+      </label>
+      <label class="screener-radio screener-label">
+        <input
+          data-type="boolean"
+          data-hides="#js-toggle-{{dataKey}}"
+          class="js-screener-toggle screener-radio-input sr-only"
+          value="false"
+          type="radio"
+          name="toggle-{{dataKey}}" checked/>
+        <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+      </label>
+    </div>
   </div>
 
   <div id="js-toggle-{{dataKey}}" class="hidden">
 
-    <div class="m-top-2">
+    <div class="m-bottom-2">
 
-      <label class="screener-label d-block m-bottom">
+      <label class="{{styles.labels}}">
         {{ __(who, 'accessnyc-screener') }}
       </label>
-
       <div class="screener-members" data-scope="_household">
         <div data-for="members" aria-hidden="true">
           <script type="text/template">

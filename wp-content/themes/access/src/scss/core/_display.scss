@@ -15,3 +15,20 @@
 .d-table {
   display: table
 }
+
+// flexbox
+.bp-justify {
+  box-pack: justify
+}
+
+.jc-space-between {
+  justify-content: space-between
+}
+
+.ai-center {
+  align-items: center
+}
+
+.fg-1 {
+  flex-grow: 1
+}

@@ -1,0 +1,29 @@
+
+
+.p-relative {
+  position: relative
+}
+
+.p-absolute {
+  position: absolute
+}
+
+.f-left {
+  float: left
+}
+
+.f-right {
+  float: right
+}
+
+@include media($bp-tablet-up) {
+
+  .f-left\@tablet-up {
+    float: left
+  }
+
+  .f-right\@tablet-up {
+    float: right
+  }
+
+}

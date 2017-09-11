@@ -8,7 +8,7 @@
 
 .screener-body-step,
 .screener-body-page {
-  @include transition(opacity .2s);
+  transition: opacity .2s;
   height: 0;
   opacity: 0;
   overflow: hidden;
@@ -62,9 +62,9 @@
 }
 
 .screener-checkboxes {
-  @include display(flex);
-  @include flex-flow(row wrap);
-  @include justify-content(space-between);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
   margin-top: $spacing-base;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .screener-radio {
-  @include transition(all .2s);
+  transition: all .2s;
   background: $color-white;
   border: 1px solid $color-grey-mid;
   border-radius: $checkbox-radius;
@@ -97,17 +97,18 @@
 
 .screener-radio-label {
   &::before {
-    @include transition(all.2s);
+    transition: all.2s;
     @include size($radio-size);
     @if $text-direction == 'rtl' {
-      @include position(absolute, 8px 8px null null);
+      @include position(absolute, 50% 8px null null);
     } @else {
-      @include position(absolute, 8px null null 8px);
+      @include position(absolute, 50% null null 8px);
     }
     border: 1px solid $color-grey-mid;
     border-radius: 50%;
     box-shadow: 0;
     content: '';
+    margin-top: ($radio-size/2) * -1;
   }
 
   input:checked + & {
@@ -258,7 +259,7 @@
 
   &::before {
     @include position(absolute, 50% null null 10px);
-    @include transform(translateY(-50%))
+    transform: translateY(-50%);
     color: $color-green-mid;
     content: '$';
     font-size: 22px;
@@ -291,13 +292,13 @@
 
 .recap-program-categories {
   @include media($bp-mobile-up) {
-    @include display(flex);
-    @include flex-wrap(wrap);
+    display: flex;
+    flex-wrap: wrap;
 
     .program-category {
-      @include align-items(center);
+      align-items: center;
       @include calc(width, '50% - #{.5 * $spacing-base}');
-      @include display(flex);
+      display: flex;
     }
   }
 
@@ -319,7 +320,7 @@
   font-weight: $font-weight-normal;
 
   @include media($bp-desktop-up) {
-    @include display(flex);
+    display: flex;
 
     .recap-detail-name {
       padding-#{$text-direction-end}: $spacing-base;
@@ -484,8 +485,8 @@
   }
 
   @include media($bp-tablet-up) {
-    @include display(flex);
-    @include flex-wrap(wrap);
+    display: flex;
+    flex-wrap: wrap;
 
     > li {
       width: 50%;
@@ -577,15 +578,15 @@
 }
 
 .screener-categories {
-  @include align-items(center);
+  align-items: center;
 
   .screener-checkbox {
     padding: 0;
   }
 
   .styled-checkbox-label {
-    @include align-items(center);
-    @include display(flex);
+    align-items: center;
+    display: flex;
 
     &::before {
       margin-#{$text-direction-end}: .5 * $spacing-base;
@@ -594,8 +595,8 @@
   }
 
   .program-category {
-    @include align-items(center);
-    @include display(flex);
+    align-items: center;
+    display: flex;
   }
 
   .program-icon {

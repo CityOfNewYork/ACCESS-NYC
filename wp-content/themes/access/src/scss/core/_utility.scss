@@ -2,26 +2,8 @@
 * Utility classes
 */
 
-.f-left {
-  float: left
-}
-
 .o-hidden {
-  overflow: hidden;
-}
-
-.p-relative {
-  position: relative;
-}
-
-.p-absolute {
-  position: absolute;
-}
-
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  overflow: hidden
 }
 
 .sr-only {
@@ -33,6 +15,10 @@
 }
 
 .hidden {
+  display: none !important;
+}
+
+.next-hidden + * {
   display: none !important;
 }
 

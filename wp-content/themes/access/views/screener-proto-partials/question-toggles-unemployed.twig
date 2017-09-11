@@ -1,8 +1,6 @@
 {% if (question) %}
-<label class="screener-label">
-  <span class="d-block p-vertical-2">
-    {{ __(question, 'accessnyc-screener') }}
-  </span>
+<label class="{{styles.labels}}">
+  {{ __(question, 'accessnyc-screener') }}
 </label>
 {% endif %}
 <div class="screener-radio-buttons">
@@ -32,16 +30,15 @@
 
   <div class="m-top-2">
 
-    <label class="screener-label">
+    <label class="{{styles.labels}}">
       {{ __(who, 'accessnyc-screener') }}
     </label>
-
-    <div class="screener-members p-top" data-scope="_household">
+    <div class="screener-members" data-scope="_household">
       <div data-for="members" aria-hidden="true">
         <script type="text/template">
           <div data-scope="_people[<%= members.index %>]">
 
-            <label class="styled-checkbox screener-checkbox screener-label">
+            <label class="styled-checkbox screener-checkbox screener-label m-top">
               <input
                 data-val="{{dataKey}}"
                 type="checkbox"
@@ -53,9 +50,9 @@
               </span>
             </label>
 
-            <div data-class="({{dataKey}})?'':'hidden'">
+            <div data-class="({{dataKey}})?'':'hidden'" class="hidden">
 
-              <label class="screener-label d-block m-bottom">
+              <label class="screener-label d-block m-bottom m-top">
                 {{ __('Has', 'accessnyc-screener') }}
                 {% include 'screener-proto-partials/member-format.twig' %}
                 {{ __(subQuestion, 'accessnyc-screener') }}

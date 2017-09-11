@@ -1,0 +1,39 @@
+<fieldset class="d-block w-100">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-total-savings">
+
+    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <a class="{{styles.questions}}" data-js="question" href="#question-household-total-savings">
+        {{ __('Household Total Savings', 'accessnyc-screener') }}
+      </a>
+
+      <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
+
+        <label class="{{styles.labels}}">
+          {{ __('How much does your whole household have in total savings?', 'accessnyc-screener') }}
+        </label>
+
+        <h4 class="{{styles.explainations}}">{{ __('What are examples of savings?', 'accessnyc-screener') }}</h4>
+        <p>{{ __('Savings can mean cash on hand, checking or savings accounts, or stocks, bonds and mutual funds', 'accessnyc-screener') }}</p>
+
+        <div data-scope="_household">
+          <div class="currency-usd">
+            <input
+              data-val="cashOnHand"
+              data-type="float"
+              id="cash-on-hand"
+              type="number"
+              name="Household.cashOnHand"
+              min="0">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>{# /#step-10 #}
