@@ -7,6 +7,7 @@ import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
 import Utility from 'modules/utility';
 import _ from 'underscore';
+import Vue from 'vue/dist/vue.common';
 
 /**
  * This component is the controller for the program screener. There's a lot
@@ -44,21 +45,11 @@ class ScreenerProto {
 
     /** @private {array<ScreenerPerson>} household members, max 8 */
     this._people = [
-      new ScreenerPerson('_people[0]', {headOfHousehold: true}).init()
+      new ScreenerPerson({headOfHousehold: true})
     ];
 
     /** @private {ScreenerHousehold} household */
-    this._household = new ScreenerHousehold('_household', {}, {
-      'compile': (event) => {
-        /**
-         * This cycle hook updates the people in the DOM
-         */
-        if (event.attr === 'members') {
-          this._populate(event.value);
-        }
-      }
-    }).init();
-
+    this._household = new ScreenerHousehold();
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
@@ -79,6 +70,111 @@ class ScreenerProto {
     if (this._initialized) {
       return this;
     }
+
+    Vue.component('personlabel', {
+      props: ['index', 'person'],
+      template: '<span class="c-black">' +
+        '<span :class="personIndex(index)"></span> ' +
+        '<span v-if="index == 0">You,</span>' +
+        '<span v-if="person.headOfHousehold"> Head of Household,</span>' +
+        '<span v-if="index != 0"> {{ person.headOfHouseholdRelation }},</span>' +
+        '<span> {{ person.age }}</span>' +
+      '</span>',
+      methods: {
+        personIndex: function(index) {
+          let name = 'i-' + index;
+          let classes = {
+            'screener-members__member-icon': true
+          };
+          classes[name] = true
+          return classes;
+        }
+      }
+    });
+
+    const vue = new Vue({
+      'delimiters': ['v{', '}'],
+      'el': '#vue',
+      'data': {
+        'people': [new ScreenerPerson({headOfHousehold: true})],
+        'household': new ScreenerHousehold()
+      },
+      'methods': {
+        /**
+         * Inforces strict types for certain data
+         * @param  {event} event event listener object, requires data;
+         *                       object {object} 'people' or 'household'
+         *                       index {number} item index in object (optional)
+         *                       key {string} attribute to set
+         *                       type {string} type of attribute
+         * @return {null}
+         */
+        'setAttr': function(event) {
+          let el = event.currentTarget;
+          let obj = el.dataset.object;
+          let index = el.dataset.index;
+          let key = el.dataset.key;
+          // get the typed value;
+          let value = ScreenerProto.getTypedVal(el);
+          console.dir([key, value]);
+          // set the attribute;
+          if (typeof index === 'undefined') {
+            this[obj].set(key, value);
+            console.dir(this[obj]);
+          } else {
+            this[obj][index].set(key, value);
+            console.dir(this[obj][index]);
+          }
+        },
+        /**
+         * Populate the family, start at one because
+         * the first person exists by default
+         * @param  {[type]} number [description]
+         */
+        'populate': function(event) {
+          let number = event.currentTarget.value;
+          let dif = number - this.people.length;
+          // set the data for the model
+          this.setAttr(event);
+          if (dif > 0) { // add members if positive
+            for (let i = 0; i <= dif - 1; i++) {
+              let person = new ScreenerPerson();
+              this.people.push(person);
+            }
+          } else if (dif < 0) { // remove members if negative
+            this.people = this.people.slice(0, this._people.length + dif);
+          }
+        },
+        /**
+         * Collects DOM income data and updates the model, if there is no income
+         * data based on the DOM, it will create a new income object
+         * @param  {object} data - person {index}
+         *                         val {model attribute key}
+         *                         key {income key}
+         *                         value {model attribute value}
+         */
+        'pushIncome': function(event) {
+          let data = event.currentTarget.dataset;
+          let value = event.currentTarget.value;
+          let person = parseInt(data.person);
+          let subkey = data.subkey;
+          let incomes = this.people[person]._attrs[data.key];
+          // if the income exists
+          if (typeof incomes[data.income] === 'undefined') {
+            // create a new income
+            this.people[person]._attrs[data.key].push({
+              amount: '0.00',
+              type: value,
+              frequency: 'monthly'
+            });
+          } else {
+            // update the value of the existing income
+            this.people[person]
+              ._attrs[data.key][data.income][subkey] = value;
+          }
+        }
+      }
+    });
 
     window.addEventListener('hashchange', (e) => {
       const hash = window.location.hash;
@@ -157,15 +253,6 @@ class ScreenerProto {
       this._$steps.filter(`.${ScreenerProto.CssClass.ACTIVE}`)
         .find(`.${ScreenerProto.CssClass.VALIDATE_STEP},` +
         `.${ScreenerProto.CssClass.SUBMIT}`).trigger('click');
-    });
-
-    /**
-     * Listen for changes to the income data
-     */
-    $(this._el).on('change', '[data-js="pushIncome"]', (event) => {
-      let data = event.currentTarget.dataset;
-      data.value = event.currentTarget.value;
-      this._pushIncome(data);
     });
 
     $(this._el).on('click', '[data-js="question"]', (event) => {
@@ -412,27 +499,29 @@ class ScreenerProto {
    * the first person exists by default
    * @param  {[type]} number [description]
    */
-  _populate(number) {
-    let dif = number - this._people.length;
-    if (dif > 0) { // add members if positive
-      for (let i = 0; i <= dif - 1; i++) {
-        let name = `_people[${this._people.length}]`;
-        let person = new ScreenerPerson(name).init();
-        this._people.push(person);
-      }
-    } else if (dif < 0) { // remove members if negative
-      this._people = this._people.slice(0, this._people.length + dif);
-    }
-    /**
-     * this timeout is needed to wait for the DOM to compile. I need to refactor
-     * the data binding class to use proper callbacks or promises.
-     */
-    setTimeout(()=>{
-      for (let i = this._people.length - 1; i >= 0; i--) {
-        this._people[i].init();
-      }
-    }, 500);
-  }
+  // _populate(number) {
+  //   let dif = number - this._people.length;
+  //   if (dif > 0) { // add members if positive
+  //     for (let i = 0; i <= dif - 1; i++) {
+  //       let name = `_people[${this._people.length}]`;
+  //       let person = new ScreenerPerson(name).init();
+  //       this._people.push(person);
+  //       vue.people.push(person);
+  //     }
+  //   } else if (dif < 0) { // remove members if negative
+  //     this._people = this._people.slice(0, this._people.length + dif);
+  //     vue.people = this._people;
+  //   }
+  //   /**
+  //    * this timeout is needed to wait for the DOM to compile. I need to refactor
+  //    * the data binding class to use proper callbacks or promises.
+  //    */
+  //   setTimeout(()=>{
+  //     for (let i = this._people.length - 1; i >= 0; i--) {
+  //       this._people[i].init();
+  //     }
+  //   }, 500);
+  // }
 
   /**
    * Collects DOM income data and updates the model, if there is no income data
@@ -440,23 +529,26 @@ class ScreenerProto {
    * @param  {object} data - person {index}, val {model attribute key},
    *                         key {income key}, value {model attribute value}
    */
-  _pushIncome(data) {
-    let person = parseInt(data.person);
-    let val = data.val;
-    let incomes = this._people[person]._attrs[data.key];
+  // _pushIncome(data) {
+  //   let person = parseInt(data.person);
+  //   let val = data.val;
+  //   let incomes = this._people[person]._attrs[data.key];
+  //   let r = {}
 
-    if (typeof incomes[data.income] === 'undefined') {
-      incomes[data.income] = {
-        amount: '',
-        type: data.value,
-        frequency: 'monthly'
-      };
-    } else {
-      incomes[data.income][val] = data.value;
-    }
+  //   if (typeof incomes[data.income] === 'undefined') {
+  //     incomes[data.income] = {
+  //       amount: '',
+  //       type: data.value,
+  //       frequency: 'monthly'
+  //     };
+  //   } else {
+  //     incomes[data.income][val] = data.value;
+  //   }
 
-    this._people[person].set(data.key, incomes);
-  }
+  //   r[data.key] = incomes;
+
+  //   return [person, r];
+  // }
 
   /**
    * Renders the additional family members
@@ -1284,7 +1376,13 @@ ScreenerProto.getTypedVal = function(input) {
   let finalVal = $input.val();
   switch ($input.data('type')) {
     case ScreenerProto.InputType.BOOLEAN: {
-      finalVal = Boolean(parseInt(val, 10));
+      if (input.type == 'checkbox') {
+        finalVal = input.checked;
+      } else { // assume it's a radio button
+        // if the radio button is using true/false;
+        // if the radio button is using 1 or 0;
+        finalVal = (val === 'true') ? true : Boolean(parseInt(val, 10));
+      }
       break;
     }
     case ScreenerProto.InputType.FLOAT: {
@@ -1299,6 +1397,7 @@ ScreenerProto.getTypedVal = function(input) {
       break;
     }
   }
+  console.log([val, finalVal]);
   return finalVal;
 };
 

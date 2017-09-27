@@ -2,24 +2,33 @@
 'use strict';
 
 import _ from 'underscore';
+import DataBinding from 'lib/data-binding';
 
 /**
  * This component is the object class for screener individuals.
  * @class
  */
-class ScreenerPerson {
+class ScreenerPerson extends DataBinding {
   /**
-   * @param {?object} obj - initial attributes to set.
+   * @param {string} name      - the dom element to bind to the model
+   * @param {?object} obj      - initial attributes to set.
+   * @param {object} callbacks - collection of functions to hook into
+   *                             data-binding
    * @constructor
    */
-  constructor(obj) {
+  constructor(name, obj, callbacks) {
+    super(name, callbacks);
+
     /** @private {object} The attributes that are exposed to Drools. */
     this._attrs = {
       /** @type {Number} must be an integer */
       age: 0,
       /** @type {boolean} is this person the applicant or not */
       applicant: false,
-      /** @type {array<object>} */
+      /**
+       * @type {array<object>}
+       * amount, type, frequency
+       */
       incomes: [],
       /** @type {array<object>} */
       expenses: [],
@@ -52,6 +61,9 @@ class ScreenerPerson {
       /** @type {boolean} */
       livingRentalOnLease: false
     };
+
+    this._defaults = this._attrs;
+
     if (obj) {
       this.set(obj);
     }
@@ -86,7 +98,7 @@ class ScreenerPerson {
    * @param {string} key
    * @param {string|number|boolean|array} value
    */
-  _setAttr(key, value) {
+  setAttr(key, value) {
     if (key in this._attrs && typeof this._attrs[key] === typeof value) {
       this._attrs[key] = value;
     }

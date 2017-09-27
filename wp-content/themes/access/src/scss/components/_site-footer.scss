@@ -60,7 +60,7 @@
 .copyright {
   @include align-items(stretch);
   @include clearfix();
-  @include display(flex);
+  display: flex;
   @include flex-direction(row);
   @include justify-content(flex-start);
   color: $color-grey-dark;

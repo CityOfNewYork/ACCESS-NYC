@@ -7,7 +7,7 @@
 }
 
 .site-topline {
-  @include display(flex);
+  display: flex;
   @include justify-content(space-between);
   background: $color-grey-lightest;
   padding: (.5 * $spacing-base) $spacing-base;
@@ -110,7 +110,7 @@
 
 .site-nav {
   @include align-items(center);
-  @include display(flex);
+  display: flex;
   background: $color-blue-dark;
   color: $color-white;
   padding: (.5 * $spacing-base) $spacing-base;
@@ -195,8 +195,10 @@
 }
 
 .site-mobile-nav {
-  @include transform(translateX(0));
-  @include transition(transform .2s ease-in);
+  // @include transform(translateX(0));
+  transform: translateX(0);
+  // @include transition(transform .2s ease-in);
+  transition: transform .2s ease-in;
   @if $text-direction == 'rtl' {
     @include position(fixed, 0 null 0 -300px);
     padding: $spacing-base $spacing-base $spacing-base 0;
@@ -230,9 +232,11 @@
 
   .nav-active & {
     @if $text-direction == 'rtl' {
-      @include transform(translateX(100%));
+      // @include transform(translateX(100%));
+      transform: translateX(100%)
     } @else {
-      @include transform(translateX(-100%));
+      // @include transform(translateX(-100%));
+      transform: translateX(-100%)
     }
   }
 

@@ -53,7 +53,7 @@
 
 .share-form-controls {
   @include align-items(center);
-  @include display(flex);
+  display: flex;
   background: $color-white;
   border: 1px solid $color-grey-mid;
   // padding-#{$text-direction-end}: .5 * $spacing-base;

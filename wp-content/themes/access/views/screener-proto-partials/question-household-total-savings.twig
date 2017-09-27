@@ -19,16 +19,12 @@
         <h4 class="{{styles.explainations}}">{{ __('What are examples of savings?', 'accessnyc-screener') }}</h4>
         <p>{{ __('Savings can mean cash on hand, checking or savings accounts, or stocks, bonds and mutual funds', 'accessnyc-screener') }}</p>
 
-        <div data-scope="_household">
-          <div class="currency-usd">
-            <input
-              data-val="cashOnHand"
-              data-type="float"
-              id="cash-on-hand"
-              type="number"
-              name="Household.cashOnHand"
-              min="0">
-          </div>
+        <div class="currency-usd">
+          <input id="cash-on-hand" type="number" name="Household.cashOnHand" min="0"
+            data-object="household"
+            data-key="cashOnHand"
+            data-type="float"
+            v-on:change="setAttr">
         </div>
       </div>
 

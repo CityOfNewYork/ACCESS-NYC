@@ -2,17 +2,23 @@
 'use strict';
 
 import _ from 'underscore';
+import DataBinding from 'lib/data-binding';
 
 /**
  * This component is the object class for a "household" in the screener.
  * @class
  */
-class ScreenerHousehold {
+class ScreenerHousehold extends DataBinding {
   /**
-   * @param {?object} obj - initial attributes to set.
+   * @param {string} name      - the dom element to bind to the model
+   * @param {?object} obj      - initial attributes to set.
+   * @param {object} callbacks - collection of functions to hook into
+   *                             data-binding
    * @constructor
    */
-  constructor(obj) {
+  constructor(name, obj, callbacks) {
+    super(name, callbacks);
+
     /** @private {object} The attributes that are exposed to Drools. */
     this._attrs = {
       /** @type {string} */
@@ -39,6 +45,9 @@ class ScreenerHousehold {
       /** @type {boolean} */
       livingPreferNotToSay: false
     };
+
+    this._defaults = this._attrs;
+
     if (obj) {
       this.set(obj);
     }
@@ -68,25 +77,6 @@ class ScreenerHousehold {
   }
 
   /**
-   * Sets an individual attribute, matching for type.
-   * @private
-   * @param {string} key
-   * @param {string|number|boolean|array} value
-   */
-  _setAttr(key, value) {
-    if (key in this._attrs && typeof this._attrs[key] === typeof value) {
-      if (key === 'city' && value !== 'NYC') {
-        this._attrs[key] = '';
-      } else if (key == 'livingRentalType' &&
-          ScreenerHousehold.RENTAL_TYPE.indexOf(value) <= -1) {
-        this._attrs[key] = '';
-      } else {
-        this._attrs[key] = value;
-      }
-    }
-  }
-
-  /**
    * Returns the value of a given key in this._attrs.
    * @method
    * @param {string} key
@@ -95,6 +85,27 @@ class ScreenerHousehold {
   get(key) {
     const value = (key in this._attrs) ? this._attrs[key] : null;
     return value;
+  }
+
+  /**
+   * Sets an individual attribute, matching for type.
+   * @param {string} key
+   * @param {string|number|boolean|array} value
+   */
+  setAttr(key, value) {
+    console.dir([key, value]);
+    if (key in this._attrs && typeof this._attrs[key] === typeof value) {
+      if (key === 'city' && value !== 'NYC') {
+        this._attrs[key] = '';
+        value = '';
+      } else if (key == 'livingRentalType' &&
+          ScreenerHousehold.RENTAL_TYPE.indexOf(value) <= -1) {
+        this._attrs[key] = '';
+        value = '';
+      } else {
+        this._attrs[key] = value;
+      }
+    }
   }
 
   /**

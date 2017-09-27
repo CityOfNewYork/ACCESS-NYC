@@ -33,60 +33,54 @@
     <label class="{{styles.labels}}">
       {{ __(who, 'accessnyc-screener') }}
     </label>
-    <div class="screener-members" data-scope="_household">
-      <div data-for="members" aria-hidden="true">
-        <script type="text/template">
-          <div data-scope="_people[<%= members.index %>]">
+    <div v-for="(p, personIndex) in people">
 
-            <label class="styled-checkbox screener-checkbox screener-label m-top">
-              <input
-                data-val="{{dataKey}}"
-                type="checkbox"
-                name="Person[<%= members.index %>].{{dataKey}}"
-                value="true"
-              />
-              <span class="styled-checkbox-label">
-                {% include 'screener-proto-partials/member-format.twig' %}
-              </span>
-            </label>
+      <label class="styled-checkbox screener-checkbox screener-label m-top">
+        <input type="checkbox" value="1"
+          data-type="boolean"
+          data-object="people"
+          data-key="{{dataKey}}"
+          v-bind:data-index="personIndex"
+          v-bind:name="'Person[' + personIndex + '].{{dataKey}}'"
+          v-on:change="setAttr">
+        <span class="styled-checkbox-label">
+          <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+        </span>
+      </label>
 
-            <div data-class="({{dataKey}})?'':'hidden'" class="hidden">
+      <div v-if="p._attrs.{{dataKey}}">
 
-              <label class="screener-label d-block m-bottom m-top">
-                {{ __('Has', 'accessnyc-screener') }}
-                {% include 'screener-proto-partials/member-format.twig' %}
-                {{ __(subQuestion, 'accessnyc-screener') }}
-              </label>
+        <label class="screener-label d-block m-bottom m-top">
+          {{ __('Has', 'accessnyc-screener') }}
+          <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+          {{ __(subQuestion, 'accessnyc-screener') }}
+        </label>
 
-              <div class="screener-radio-buttons m-bottom-2">
-                <label class="screener-radio screener-label">
-                  <input
-                    data-type="boolean"
-                    data-val="{{dataSubKey}}"
-                    class="screener-radio-input sr-only"
-                    value="true"
-                    type="radio"
-                    name="Person[<%= members.index %>].{{dataSubKey}}"/>
-                  <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
-                </label>
-                <label class="screener-radio screener-label">
-                  <input
-                    data-type="boolean"
-                    data-val="{{dataSubKey}}"
-                    class="screener-radio-input sr-only"
-                    value="false"
-                    type="radio"
-                    name="Person[<%= members.index %>].{{dataSubKey}}"/>
-                  <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
-                </label>
-              </div>
+        <div class="screener-radio-buttons m-bottom-2">
+          <label class="screener-radio screener-label">
+            <input type="radio" value="true" class="screener-radio-input sr-only"
+              data-type="boolean"
+              data-object="people"
+              data-key="{{dataSubKey}}"
+              v-bind:data-index="personIndex"
+              v-bind:name="'Person[' + personIndex + '].{{dataSubKey}}'"
+              v-on:change="setAttr">
+            <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+          </label>
+          <label class="screener-radio screener-label">
+            <input class="screener-radio-input sr-only" value="false" type="radio"
+              data-type="boolean"
+              data-object="people"
+              data-key="{{dataSubKey}}"
+              v-bind:data-index="personIndex"
+              v-bind:name="'Person[' + personIndex + '].{{dataSubKey}}'"
+              v-on:change="setAttr">
+            <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+          </label>
+        </div>
 
-            </div>
-
-          </div>
-
-        </script>
       </div>
+
     </div>
 
   </div>

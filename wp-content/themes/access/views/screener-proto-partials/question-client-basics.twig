@@ -30,19 +30,13 @@
           <label class="{{styles.labels}}" for="person-0-age">
             {{ __('How old are you?', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <div data-scope="_people[0]" class="screener-question-container">
-            <input
-              data-val="age"
+          <div class="screener-question-container">
+            <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" required
               data-type="integer"
-              id="person-0-age"
-              name="Person[0].age"
-              type="number"
-              value=""
-              min="0"
-              maxlength="3"
-              pattern="[0-9]"
-              step="1"
-              required>
+              data-object="people"
+              data-key="age"
+              data-index="0"
+              v-on:change="setAttr">
           </div>
         </div>
 
@@ -52,16 +46,10 @@
             <span class="c-red">*</span>
           </label>
           <div id="what-is-your-zip-code">
-            <div data-scope="_household" class="screener-question-container">
-              <input
-                data-val="zip"
+            <div class="screener-question-container">
+              <input id="household-zip" name="Household.zip" type="number" maxlength="5" pattern="[0-9]" required
                 data-type="zip"
-                id="household-zip"
-                name="Household.zip"
-                type="number"
-                maxlength="5"
-                pattern="[0-9]"
-                required>
+                v-model="household._attrs.zip">
             </div>
           </div>
         </div>

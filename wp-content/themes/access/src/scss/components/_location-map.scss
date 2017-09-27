@@ -108,7 +108,7 @@ $control-width: 33%;
 
 .map-filter-header {
   @include align-items(center);
-  @include display(flex);
+  display: flex;
   @include justify-content(space-between)
   border-radius: 0;
   font-size: $font-size-small;
@@ -161,7 +161,7 @@ $control-width: 33%;
 }
 
 .map-filter-category-header {
-  @include display(flex);
+  display: flex;
   @include justify-content(space-between);
 }
 

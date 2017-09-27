@@ -37,7 +37,7 @@ use {
 }
 
 .page-wrapper {
-  @include display(flex);
+  display: flex;
   @include flex-direction(column);
   margin: 0 auto;
   max-width: $site-max-width;

@@ -65,7 +65,7 @@
 
 .search-suggestions-header {
   @include align-items(flex-end);
-  @include display(flex);
+  display: flex;
   @include justify-content(space-between);
   margin-bottom: $spacing-base;
 
@@ -76,7 +76,7 @@
 
 .search-suggestions-body {
   @include align-items(flex-start);
-  @include display(flex);
+  display: flex;
   @include flex-wrap(wrap);
 }
 

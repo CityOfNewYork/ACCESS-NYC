@@ -53,8 +53,10 @@ gulp.task('styles_dev', () => {
     includePaths: ['node_modules']
       .concat(require('bourbon').includePaths)
       .concat(require('bourbon-neat').includePaths)
-  }).on('error', $.notify.onError()).on('error', $.sass.logError))
-  // .pipe($.autoprefixer('last 2 versions'))
+  })
+  .on('error', $.notify.onError())
+  .on('error', $.sass.logError))
+  .pipe($.autoprefixer('last 2 versions'))
   .pipe($.sourcemaps.write('./'))
   .pipe(gulp.dest('./'))
 });
@@ -73,7 +75,7 @@ gulp.task('styles', () => {
       .concat(require('bourbon').includePaths)
       .concat(require('bourbon-neat').includePaths)
   }).on('error', $.notify.onError()).on('error', $.sass.logError))
-  // .pipe($.autoprefixer())
+  .pipe($.autoprefixer())
   .pipe($.cleanCss())
   .pipe($.sourcemaps.write('./'))
   .pipe(gulp.dest('./'));

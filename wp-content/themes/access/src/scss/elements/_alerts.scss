@@ -1,7 +1,7 @@
 $icon-size: 32px;
 
 .alert {
-  @include display(flex);
+  display: flex;
   @include full-width-home-margins;
   background: $color-grey-lightest;
   margin-bottom: $spacing-base;

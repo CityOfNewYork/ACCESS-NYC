@@ -14,7 +14,7 @@ $icon-size: 55px;
 
   @include media ($bp-mobile-up) {
     @include align-items(flex-top);
-    @include display(flex);
+    display: flex;
     @include flex-direction(row);
 
     .screener-results-text {
