@@ -2,46 +2,67 @@
   {
     question: 'Does anyone in your household have <span class="c-blue">disabilities</span>?',
     who: 'Who currently has <span class="c-blue">disabilities</span>?',
+    label: 'Have disabilities',
     dataKey: 'disabled',
     styles: styles
   },
   {
     question: 'Is anyone in your household currently <span class="c-blue">pregnant</span>?',
     who: 'Who is currently <span class="c-blue">pregnant</span>?',
+    label: 'Pregnant',
     dataKey: 'pregnant',
     styles: styles
   },
   {
     question: 'Is anyone in your household blind or <span class="c-blue">visually impaired</span>?',
     who: 'Who is currently <span class="c-blue">blind or visually impaired</span>?',
+    label: 'Blind or visually impaired',
     dataKey: 'blind',
     styles: styles
   },
   {
     question: 'Did anyone in the household serve in the <span class="c-blue">U.S. Armed Forces, National Guard or Reserves</span>?',
     who: 'Who has <span class="c-blue">served</span>?',
+    label: 'Served U.S. Armed Forces, National Guard or Reserves',
     dataKey: 'veteran',
-    styles: styles
-  },
-  {
-    question: 'Is anyone in your household currently on <span class="c-blue">Medicaid</span>?',
-    who: 'Who is on <span class="c-blue">Medicaid</span>?',
-    dataKey: 'benefitsMedicaid',
-    styles: styles
-  },
-  {
-    question: 'Is anyone currently on <span class="c-blue">disability related Medicaid</span>?',
-    who: 'Who is on <span class="c-blue">disability related Medicaid</span>?',
-    dataKey: 'benefitsMedicaidDisability',
     styles: styles
   },
   {
     question: 'Who in your household is currently a <span class="c-blue">full-time student</span>?',
     who: 'Who is a <span class="c-blue">full-time student</span>?',
+    label: 'Full-time student',
     dataKey: 'student',
     styles: styles
   }
 ] %}
+
+{#   {
+  question: 'Is anyone in your household currently on <span class="c-blue">Medicaid</span>?',
+  who: 'Who is on <span class="c-blue">Medicaid</span>?',
+  dataKey: 'benefitsMedicaid',
+  styles: styles
+},
+{
+  question: 'Is anyone currently on <span class="c-blue">disability related Medicaid</span>?',
+  who: 'Who is on <span class="c-blue">disability related Medicaid</span>?',
+  dataKey: 'benefitsMedicaidDisability',
+  styles: styles
+}, #}
+
+{% set unemployed = {
+  label: 'Unemployed',
+  dataKey: 'unemployed',
+  dataSubKey: 'unemployedWorkedLast18Months',
+  multipleOccupants: {
+    question: 'Is anyone in your household currently <span class="c-blue">unemployed</span>?',
+    who: 'Who is <span class="c-blue">unemployed</span>?',
+    subQuestion: 'worked in the last 18 months?',
+  },
+  singleOccupant: {
+    subQuestion: 'Did you work in the last 18 months?',
+  },
+  styles: styles
+} %}
 
 <fieldset class="d-block w-100">
 
@@ -55,26 +76,87 @@
         {{ __('Household Member Details', 'accessnyc-screener') }}
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden"> {# hidden #}
+      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden">{# hidden #}
+        <div v-if="singleOccupant()">
 
-        <h4 class="{{styles.labels}}">
-          {{ __('Tell us a little more about you and your household.', 'accessnyc-screener') }}
-        </h4>
+          <h4 class="{{styles.labels}}">
+            {{ __('Do any of these apply to you?', 'accessnyc-screener') }}
+          </h4>
 
-        {% for question in questions %}
-        {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with question %}
-        {% endfor %}
+          <div class="screener-checkboxes js-screener-checkbox-group">
+            {% for option in questions %}
+            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+              <input type="checkbox" name="Household.{{option.dataKey}}" value="1"
+                data-type="boolean"
+                data-object="people"
+                data-key="{{option.dataKey}}"
+                data-index="0"
+                data-reset="#household-reset"
+                v-on:change="setAttr">
+              <span class="styled-checkbox-label">{{ __(option.label, 'accessnyc-screener') }}</span>
+            </label>
+            {% endfor %}
+            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+              <input type="checkbox" name="Household.{{unemployed.dataKey}}" value="1"
+                data-type="boolean"
+                data-object="people"
+                data-key="{{unemployed.dataKey}}"
+                data-index="0"
+                v-on:change="setAttr">
+              <span class="styled-checkbox-label">{{ __(unemployed.label, 'accessnyc-screener') }}</span>
+            </label>
+            <div v-if="people[0]._attrs.{{unemployed.dataKey}}" class="m-bottom-2">
+              <label class="{{styles.labels}}">
+                {{ __('Did you work in the last 18 months?', 'accessnyc-screener') }}
+              </label>
+              <div class="screener-radio-buttons">
+                <label class="screener-radio screener-label">
+                  <input name="Person[0].{{unemployed.dataSubKey}}" type="radio" value="true" class="screener-radio-input sr-only"
+                    data-type="boolean"
+                    data-object="people"
+                    data-key="{{unemployed.dataSubKey}}"
+                    data-index="0"
+                    v-on:change="setAttr">
+                  <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+                </label>
+                <label class="screener-radio screener-label">
+                  <input name="Person[0].{{unemployed.dataSubKey}}" class="screener-radio-input sr-only" value="false" type="radio" checked
+                    data-type="boolean"
+                    data-object="people"
+                    data-key="{{unemployed.dataSubKey}}"
+                    data-index="0"
+                    v-on:change="setAttr">
+                  <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+                </label>
+              </div>
+            </div>
+            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+              <input id="household-reset" type="checkbox" value="false" checked
+                data-type="boolean"
+                data-object="people"
+                data-key="{% for option in questions %}{{option.dataKey}},{% endfor %}{{unemployed.dataKey}},{{unemployed.dataSubKey}}"
+                data-index="0"
+                v-on:change="resetAttr">
+              <span class="styled-checkbox-label">{{ __('None of these apply to me', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
 
-        {% include 'screener-proto-partials/question-toggles-unemployed.twig' with {
-          question: 'Is anyone in your household currently <span class="c-blue">unemployed</span>?',
-          who: 'Who is <span class="c-blue">unemployed</span>?',
-          subQuestion: 'worked in the last 18 months?',
-          dataKey: 'unemployed',
-          dataSubKey: 'unemployedWorkedLast18Months',
-          styles: styles
-        } %}
+        </div>
+        <div v-else>
 
+          <h4 class="{{styles.labels}}">
+            {{ __('Tell us a little more about you and your household.', 'accessnyc-screener') }}
+          </h4>
+
+          {% for question in questions %}
+          {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with question %}
+          {% endfor %}
+
+          {% include 'screener-proto-partials/question-toggles-unemployed.twig' with unemployed %}
+
+        </div>
       </div>
+
 
     </div>
 

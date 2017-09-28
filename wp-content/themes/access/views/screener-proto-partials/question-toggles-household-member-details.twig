@@ -8,23 +8,15 @@
     {% endif %}
     <div class="screener-radio-buttons m-bottom">
       <label class="screener-radio screener-label">
-        <input
+        <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="toggle-{{dataKey}}"
           data-type="boolean"
-          data-shows="#js-toggle-{{dataKey}}"
-          class="js-screener-toggle screener-radio-input sr-only"
-          value="true"
-          type="radio"
-          name="toggle-{{dataKey}}"/>
+          data-shows="#js-toggle-{{dataKey}}">
         <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
       </label>
       <label class="screener-radio screener-label">
-        <input
+        <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="toggle-{{dataKey}}" checked
           data-type="boolean"
-          data-hides="#js-toggle-{{dataKey}}"
-          class="js-screener-toggle screener-radio-input sr-only"
-          value="false"
-          type="radio"
-          name="toggle-{{dataKey}}" checked/>
+          data-hides="#js-toggle-{{dataKey}}">
         <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
       </label>
     </div>
@@ -43,8 +35,7 @@
           <label class="styled-checkbox screener-checkbox screener-label">
             <input type="checkbox" value="true"
               data-value="{{dataKey}}"
-              v-bind:name="'Person[' + personIndex + '].{{dataKey}}'"
-            />
+              v-bind:name="'Person[' + personIndex + '].{{dataKey}}'">
             <span class="styled-checkbox-label">
               <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
             </span>

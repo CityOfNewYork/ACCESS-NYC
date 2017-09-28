@@ -35,12 +35,12 @@
         {{ __('Housing Situation', 'accessnyc-screener') }}
       </a>
 
-      <div class="js-toggle-question p-horizontal-2 p-bottom hidden"> {# hidden #}
+      <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden"> {# hidden #}
 
         <label class="{{styles.labels}}">
           {{ __('What is your current housing situation?', 'accessnyc-screener') }}
         </label>
-        <div data-scope="_household" class="screener-checkboxes js-screener-checkbox-group">
+        <div class="screener-checkboxes js-screener-checkbox-group">
           {% for option in rentingOptions %}
           <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
             <input class="js-screener-toggle" type="checkbox" name="Household.{{option.value}}" value="1"
@@ -66,40 +66,98 @@
             </select>
           </div>
 
-          <div class="m-top-2 js-screener-checkbox-group" id="screener-lease-owner">
-            <label class="{{styles.labels}}">
-              {{ __('Who is on the lease?', 'accessnyc-screener') }}
-            </label>
-            <div v-for="(p, personIndex) in people">
-              <label class="styled-checkbox screener-checkbox screener-label">
-                <input type="checkbox" value="true"
-                  data-value="livingOwnerOnDeed">
-                <span class="styled-checkbox-label">
-                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                </span>
+          <div class="m-top-2 js-screener-checkbox-group hidden" id="screener-lease-owner">
+
+            <div v-if="singleOccupant()">
+
+              <label class="{{styles.labels}}">
+                {{ __('Are you on the lease?', 'accessnyc-screener') }}
               </label>
+              <div class="screener-radio-buttons m-bottom">
+                <label class="screener-radio screener-label"
+                  for="person-0-livingRentalOnLease-true">
+                  <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].livingRentalOnLease" id="person-0-livingRentalOnLease-true"
+                    data-type="boolean">
+                  <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+                </label>
+                <label class="screener-radio screener-label"
+                  for="person-0-livingRentalOnLease-false">
+                  <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="Person[0].livingRentalOnLease" id="person-0-livingRentalOnLease-false" checked
+                    data-type="boolean">
+                  <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+                </label>
+              </div>
+
             </div>
+            <div v-else>
+
+              <label class="{{styles.labels}}">
+                {{ __('Who is on the lease?', 'accessnyc-screener') }}
+              </label>
+              <div v-for="(p, personIndex) in people">
+                <label class="styled-checkbox screener-checkbox screener-label"
+                  v-bind:for="'person-' + personIndex + '-livingRentalOnLease'">
+                  <input type="checkbox" value="true"
+                    data-value="livingRentalOnLease"
+                    v-bind:name="'Person[' + personIndex + '].livingRentalOnLease'"
+                    v-bind:id="'person-' + personIndex + '-livingRentalOnLease'">
+                  <span class="styled-checkbox-label">
+                    <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+                  </span>
+                </label>
+              </div>
+
+            </div>
+
           </div>
+
         </div>
 
         <div class="m-top-2 hidden" id="screener-homeowner">
 
-          <label class="{{styles.labels}}">
-            {{ __('Who is the owner?', 'accessnyc-screener') }}
-          </label>
-          <div class="screener-members">
-            <div v-for="(p, personIndex) in people">
-              <label class="styled-checkbox screener-checkbox screener-label">
-                <input type="checkbox" value="true"
-                  data-value="livingRentalOnLease">
-                <span class="styled-checkbox-label">
-                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                </span>
+          <div v-if="singleOccupant()">
+
+            <label class="{{styles.labels}}">
+              {{ __('Are you the owner?', 'accessnyc-screener') }}
+            </label>
+            <div class="screener-radio-buttons m-bottom">
+              <label class="screener-radio screener-label" for="person-0-livingOwnerOnDeed-true">
+                <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].livingRentalOnDeed" id="person-0-livingOwnerOnDeed-true"
+                  data-type="boolean">
+                <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+              </label>
+              <label class="screener-radio screener-label" for="person-0-livingOwnerOnDeed-false">
+                <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="Person[0].livingRentalOnDeed" id="person-0-livingOwnerOnDeed-false" checked
+                  data-type="boolean">
+                <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
               </label>
             </div>
+
+          </div>
+          <div v-else>
+
+            <label class="{{styles.labels}}">
+              {{ __('Who is the owner?', 'accessnyc-screener') }}
+            </label>
+            <div class="screener-members">
+              <div v-for="(p, personIndex) in people">
+                <label class="styled-checkbox screener-checkbox screener-label"
+                  v-bind:for="'person-' + personIndex + '-livingOwnerOnDeed'">
+                  <input type="checkbox" value="true" name="livingRentalOnDeed"
+                    data-value="livingRentalOnLease"
+                    v-bind:id="'person-' + personIndex + '-livingOwnerOnDeed'"
+                    v-bind:name="'Person[' + personIndex + '].livingOwnerOnDeed'">
+                  <span class="styled-checkbox-label">
+                    <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+                  </span>
+                </label>
+              </div>
+            </div>
+
           </div>
 
         </div>
+
       </div>
 
     </div>

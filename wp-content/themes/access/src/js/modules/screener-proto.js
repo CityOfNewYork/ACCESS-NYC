@@ -100,6 +100,24 @@ class ScreenerProto {
         'household': new ScreenerHousehold()
       },
       'methods': {
+        'resetAttr': function(event) {
+          let el = event.currentTarget;
+          let obj = el.dataset.object;
+          let index = el.dataset.index;
+          let keys = el.dataset.key.split(',');
+          let value = (el.value === 'true');
+          for (var i = keys.length - 1; i >= 0; i--) {
+            if (typeof index === 'undefined') {
+              this[obj].set(keys[i], value);
+              console.dir(this[obj]);
+            } else {
+              this[obj][index].set(keys[i], value);
+              console.dir(this[obj][index]);
+            }
+            let el = document.querySelector(`[data-key="${keys[i]}"]`);
+            if (el) el.checked = false;
+          }
+        },
         /**
          * Inforces strict types for certain data
          * @param  {event} event event listener object, requires data;
@@ -114,6 +132,7 @@ class ScreenerProto {
           let obj = el.dataset.object;
           let index = el.dataset.index;
           let key = el.dataset.key;
+          let reset = el.dataset.reset;
           // get the typed value;
           let value = ScreenerProto.getTypedVal(el);
           console.dir([key, value]);
@@ -124,6 +143,10 @@ class ScreenerProto {
           } else {
             this[obj][index].set(key, value);
             console.dir(this[obj][index]);
+          }
+          // reset an element based on this value;
+          if (typeof reset != 'undefined') {
+            document.querySelector(reset).checked = false;
           }
         },
         /**
@@ -142,7 +165,7 @@ class ScreenerProto {
               this.people.push(person);
             }
           } else if (dif < 0) { // remove members if negative
-            this.people = this.people.slice(0, this._people.length + dif);
+            this.people = this.people.slice(0, this.people.length + dif);
           }
         },
         /**
@@ -163,7 +186,7 @@ class ScreenerProto {
           if (typeof incomes[data.income] === 'undefined') {
             // create a new income
             this.people[person]._attrs[data.key].push({
-              amount: '0.00',
+              amount: '',
               type: value,
               frequency: 'monthly'
             });
@@ -172,6 +195,14 @@ class ScreenerProto {
             this.people[person]
               ._attrs[data.key][data.income][subkey] = value;
           }
+        },
+        /**
+         * Check for single occupant of household
+         * @return {boolean} if household is 1 occupant
+         */
+        'singleOccupant': function() {
+          console.dir(['Single', (this.household._attrs.members === 1)]);
+          return (this.household._attrs.members === 1);
         }
       }
     });
@@ -1426,8 +1457,6 @@ ScreenerProto.CssClass = {
   PAGE: 'js-screener-page',
   SUBMIT: 'js-screener-submit',
   TRANSACTION_LABEL: 'screener-transaction-type',
-  VALIDATE_STEP: 'js-screener-validate-step',
-  VALIDATE_STEP_UI: 'js-screener-validate-step-ui',
   RENDER_RECAP: 'js-render-recap',
   TOGGLE_QUESTION: 'js-toggle-question',
   PAGE_RECAP: 'page-recap'

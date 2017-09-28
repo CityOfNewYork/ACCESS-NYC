@@ -13,7 +13,12 @@
       <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
 
         <label class="{{styles.labels}}">
-          {{ __('How much does your whole household have in total savings?', 'accessnyc-screener') }}
+          <span v-if="singleOccupant()">
+            {{ __('How much do you have total in savings?', 'accessnyc-screener') }}
+          </span>
+          <span v-else>
+            {{ __('How much does your whole household have in total savings?', 'accessnyc-screener') }}
+          </span>
         </label>
 
         <h4 class="{{styles.explainations}}">{{ __('What are examples of savings?', 'accessnyc-screener') }}</h4>

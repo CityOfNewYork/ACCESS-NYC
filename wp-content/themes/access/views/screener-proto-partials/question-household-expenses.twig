@@ -36,17 +36,18 @@
 
         <div>
           <label class="{{styles.labels}}">
-            {{ __('What expenses did your household have most recently?', 'accessnyc-screener') }}
+            <span v-if="singleOccupant()">
+              {{ __('Which of these expenses apply to you?', 'accessnyc-screener') }}
+            </span>
+            <span v-else>
+              {{ __('What expenses did your household have most recently?', 'accessnyc-screener') }}
+            </span>
           </label>
           <div class="screener-checkboxes">
             {% for option in expenseOptions %}
             <label class="screener-checkbox styled-checkbox screener-checkboxes-program screener-label">
-              <input
-                data-toggles="#js-toggle-expense-{{ option.value }}"
-                class="js-screener-toggle"
-                type="checkbox"
-                name="category"
-                value="1">
+              <input type="checkbox" class="js-screener-toggle" name="category" value="1"
+                data-toggles="#js-toggle-expense-{{ option.value }}">
               <span class="styled-checkbox-label">
                 {{ option.text }}
               </span>
@@ -55,22 +56,22 @@
           </div>
         </div>
 
-        {% for option in expenseOptions %}
+        {% for expense in expenseOptions %}
 
-        <div id="js-toggle-expense-{{ option.value }}" class="hidden"> {# hidden #}
+        <div id="js-toggle-expense-{{ expense.value }}" class="hidden"> {# hidden #}
 
           <div class="p-top p-bottom-2">
             <hr class="m-0 screener-divider">
           </div>
 
-          <div>
+          <div v-if="!singleOccupant()">
             <label class="{{styles.labels}}">
-              {{ __('Who contributes to', 'accessnyc-screener') }}: <span class="c-blue">{{ option.text }}</span>{{ __('?') }}
+              {{ __('Who contributes to', 'accessnyc-screener') }}: <span class="c-blue">{{ expense.text }}</span>{{ __('?') }}
             </label>
             <div v-for="(p, personIndex) in people">
               <label class="styled-checkbox screener-checkbox screener-label">
                 <input type="checkbox" class="js-screener-toggle" value="1"
-                  v-bind:data-toggles="'#js-toggle-people-' + personIndex + '-{{ option.value }}'"
+                  v-bind:data-toggles="'#js-toggle-people-' + personIndex + '-{{ expense.value }}'"
                   v-bind:name="personIndex + '-expenses'"
                 />
                 <span class="styled-checkbox-label">
@@ -82,16 +83,22 @@
 
           <div v-for="(p, personIndex) in people">
 
-            <div class="hidden"
-              v-bind:id="'js-toggle-people-' + personIndex + '-{{ option.value }}'">
+            <div v-bind:class="{hidden: !singleOccupant()}" v-bind:id="'js-toggle-people-' + personIndex + '-{{ expense.value }}'">
 
               <div class="m-bottom-2">
                 <label class="{{styles.labels}}">
-                  {{ __('How much', 'accessnyc-screener') }}
-                  <span v-if="personIndex == 0">{{ __('do', 'accessnyc-screener') }}</span>
-                  <span v-else>{{ __('does', 'accessnyc-screener') }}</span>
-                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                  {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ option.text }}</span>{{ __('?') }}
+                  <span v-if="singleOccupant()">
+                    {{ __('How much do you pay for: ', 'accessnyc-screener') }}
+                    <span class="c-blue">{{ expense.text }}</span>{{ __('?') }}
+                  </span>
+                  <span v-else>
+                    {{ __('How much', 'accessnyc-screener') }}
+                    <span v-if="personIndex == 0">{{ __('do', 'accessnyc-screener') }}</span>
+                    <span v-else>{{ __('does', 'accessnyc-screener') }}</span>
+                    <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+                    {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ expense.text }}</span>{{ __('?') }}
+                  </span>
+                  <span class="c-red">*</span>
                 </label>
                 <div class="currency-usd m-0">
                   <input data-type="float" type="number" min="0" required
@@ -103,18 +110,25 @@
               <div>
                 <label class="{{styles.labels}}"
                   v-bind:for="'person-' + personIndex + '-expenses--frequency'">
-                  {{ __('How often do', 'accessnyc-screener') }}
-                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                  {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ option.text }}</span>{{ __('?') }}
+                  <span v-if="singleOccupant()">
+                    {{ __('How often do you pay for: ', 'accessnyc-screener') }}
+                    <span class="c-blue">{{ expense.text }}</span>{{ __('?') }}
+                  </span>
+                  <span v-else>
+                    {{ __('How often do', 'accessnyc-screener') }}
+                    <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+                    {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ expense.text }}</span>{{ __('?') }}
+                  </span>
                 </label>
                 <div class="screener-checkboxes">
-                  {% for option in frequencyOptions %}
-                  <label class="screener-checkbox styled-radio screener-checkboxes-program screener-label">
-                    <input type="radio" value="{{ option.value }}" {% if option.value == 'monthly'%}checked{% endif %}
-                      v-bind:id="'person-' + personIndex + '-expenses--frequency'"
-                      v-bind:name="'Person[' + personIndex + '].expenses[].frequency'">
+                  {% for frequency in frequencyOptions %}
+                  <label class="screener-checkbox styled-radio screener-checkboxes-program screener-label"
+                    v-bind:for="'person-' + personIndex + '-expenses-{{ expense.value }}-frequency-{{ frequency.value }}'">
+                    <input type="radio" value="{{ frequency.value }}" {% if frequency.value == 'monthly' %}checked{% endif %}
+                      v-bind:id="'person-' + personIndex + '-expenses-{{ expense.value }}-frequency-{{ frequency.value }}'"
+                      v-bind:name="'Person[' + personIndex + '].expenses[{{ expense.value }}].frequency'">
                     <span class="styled-radio-label">
-                      {{ __(option.text, 'accessnyc-screener') }}
+                      {{ __(frequency.text, 'accessnyc-screener') }}
                     </span>
                   </label>
                   {% endfor %}
