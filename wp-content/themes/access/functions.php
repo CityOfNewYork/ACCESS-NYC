@@ -508,23 +508,3 @@ Routes::map('eligibility-proto/results', function() {
   $params['link'] = home_url().'/eligibility-proto/results/';
   Routes::load('eligibility-results-proto.php', $params, null, 200);
 });
-
-Routes::map('applications', function() {
-  $params = array(
-    'title' => 'Senior Citizen Rent Increase Exemption (SCRIE)',
-    'seamless' => 'https://nycopp.seamlessdocs.com/s/f7ae1f7ceb7fd70f1608a1d830e1a9bc/embed/iframe'
-  );
-  Routes::load('single-application.php', $params, null, 200);
-});
-
-Routes::map('applications/scrie', function() {
-  $params = array(
-    'title' => 'Senior Citizen Rent Increase Exemption (SCRIE)',
-    'seamless' => 'https://nycopp.seamlessdocs.com/s/f7ae1f7ceb7fd70f1608a1d830e1a9bc/embed/iframe'
-  );
-  Routes::load('single-application.php', $params, null, 200);
-});
-
-Routes::map('guide/typography', function() {
-  Routes::load('single-guide.php', null, null, 200);
-});
