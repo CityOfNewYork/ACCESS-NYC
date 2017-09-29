@@ -3,7 +3,6 @@ import jQuery from 'jquery';
 // import SmoothScroll from 'smoothscroll-polyfill';
 import OfficeMap from 'modules/office-map';
 import Screener from 'modules/screener';
-import ScreenerProto from 'modules/screener-proto';
 import ShareForm from 'modules/share-form';
 import StaticMap from 'modules/static-map';
 import TextSizer from 'modules/text-sizer';
@@ -16,7 +15,6 @@ import Utility from 'modules/utility';
   const google = window.google;
   /* eslint no-undef: "off" */
   const variables = require('../variables.json');
-  require('smoothscroll-polyfill').polyfill();
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
@@ -193,11 +191,6 @@ import Utility from 'modules/utility';
   // Initialize eligibility screener.
   $(`.${Screener.CssClass.FORM}`).each((i, el) => {
     const screener = new Screener(el);
-    screener.init();
-  });
-
-  $(`.${ScreenerProto.CssClass.FORM}`).each((i, el) => {
-    const screener = new ScreenerProto(el);
     screener.init();
   });
 

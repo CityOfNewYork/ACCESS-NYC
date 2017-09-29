@@ -170,10 +170,10 @@
                     {% for option in frequencyOptions %}
                     <label
                       class="styled-radio screener-checkbox screener-checkboxes-program screener-label"
-                      v-bind:for="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency'">
+                      v-bind:for="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'">
                       <input type="radio" value="{{ option.value }}"
                         v-model="income.frequency"
-                        v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency'"
+                        v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'"
                         v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency'"/>
                       <span class="styled-radio-label">
                         {{ __(option.text, 'accessnyc-screener') }}

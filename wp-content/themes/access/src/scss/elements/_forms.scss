@@ -141,6 +141,7 @@ input[type="number"] {
   input:checked + & {
     &::before {
       background-color: $color-blue;
+      box-shadow: 0 0 0 2px #184e9e inset, 0 0 0 4px #fff inset;
       border: 0;
     }
   }
@@ -148,7 +149,7 @@ input[type="number"] {
   input:focus + & {
     &::before {
       border: 0;
-      box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #0071bc;
+      box-shadow: 0 0 0 2px #184e9e inset, 0 0 0 4px #fff inset;
     }
   }
 }

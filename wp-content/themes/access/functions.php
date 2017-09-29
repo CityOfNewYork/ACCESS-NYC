@@ -494,7 +494,7 @@ Routes::map('eligibility', function() {
 });
 
 Routes::map('eligibility-proto', function() {
-  Routes::load('screener-proto.php', null, null, 200);
+  Routes::load('screener-single-page.php', null, null, 200);
 });
 
 Routes::map('eligibility/results', function() {

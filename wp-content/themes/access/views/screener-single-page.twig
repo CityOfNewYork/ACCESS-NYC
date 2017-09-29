@@ -1,4 +1,4 @@
-{% extends "base.twig" %}
+{% extends 'base.twig' %}
 
 {% block header %}
 <header class="site-header">
@@ -23,12 +23,11 @@
 {% block footer %}{% endblock %}
 
 {% block content %}
-
 <main class="main-content layout screener-proto" id="content">
 
   <div class="layout__body bg-white" id="js-layout-body">
 
-    <form class="js-screener-proto-form" style="border:none;padding-top:0;padding-bottom:0">
+    <form class="js-screener-single-page-form" style="border:none;padding-top:0;padding-bottom:0">
 
       <div class="screener-body-page js-screener-page active" id="page-screener">
 
@@ -79,28 +78,28 @@
           <h1 class="{{styles.sections}}" id="client-information">
             <a href="#client-information" class="c-blue-dark">{{ __('Client Information', 'accessnyc-screener') }}</a>
           </h1><span class="screener-step">(1 of 4)</span>
-            {% include 'screener-proto-partials/question-client-needs.twig' with {'styles': styles, 'categories': categories} %}
-            {% include 'screener-proto-partials/question-client-basics.twig' with styles %}
-            {% include 'screener-proto-partials/question-client-contact.twig' with styles %}
+            {% include 'screener-single-page-partials/question-client-needs.twig' with {'styles': styles, 'categories': categories} %}
+            {% include 'screener-single-page-partials/question-client-basics.twig' with styles %}
+            {% include 'screener-single-page-partials/question-client-contact.twig' with styles %}
 
           <h1 class="{{styles.sections}}" id="household">
             <a href="#household" class="c-blue-dark">{{ __('Household', 'accessnyc-screener') }}</a>
           </h1><span class="screener-step">(2 of 4)</span>
-            {% include 'screener-proto-partials/question-household-information.twig' with styles %}
-            {% include 'screener-proto-partials/question-household-members.twig' with styles %}
-            {% include 'screener-proto-partials/question-household-member-details.twig' with styles %}
+            {% include 'screener-single-page-partials/question-household-information.twig' with styles %}
+            {% include 'screener-single-page-partials/question-household-members.twig' with styles %}
+            {% include 'screener-single-page-partials/question-household-member-details.twig' with styles %}
 
           <h1 class="{{styles.sections}}" id="household-income">
             <a href="#household-income" class="c-blue-dark">{{ __('Household Income', 'accessnyc-screener') }}
           </h1><span class="screener-step">(3 of 4)</span>
-            {% include 'screener-proto-partials/question-household-income.twig' with styles %}
-            {% include 'screener-proto-partials/question-household-total-savings.twig' with styles %}
-            {% include 'screener-proto-partials/question-household-expenses.twig' with styles %}
+            {% include 'screener-single-page-partials/question-household-income.twig' with styles %}
+            {% include 'screener-single-page-partials/question-household-total-savings.twig' with styles %}
+            {% include 'screener-single-page-partials/question-household-expenses.twig' with styles %}
 
           <h1 class="{{styles.sections}}" id="housing">
             <a href="#housing" class="c-blue-dark">{{ __('Housing', 'accessnyc-screener') }}</a>
           </h1><span class="screener-step">(4 of 4)</span>
-            {% include 'screener-proto-partials/question-housing-situation.twig' with styles %}
+            {% include 'screener-single-page-partials/question-housing-situation.twig' with styles %}
 
           <div class="p-vertical-2">
 
@@ -118,7 +117,7 @@
 
         <div class="p-horizontal-2">
 
-          {% include 'screener-proto-partials/recap.twig' with {'formAction': formAction} %}
+          {% include 'screener-single-page-partials/recap.twig' with {'formAction': formAction} %}
 
         </div>
 
@@ -126,16 +125,25 @@
 
     </form>
   </div>
+{% endblock %}
 
-  {#
-  <script type="template/html" id="screener-income-template">
-    {% include 'screener-proto-partials/template-income.twig' %}
-  </script>
-  <script type="template/html" id="screener-expense-template">
-    {% include 'screener-proto-partials/template-expense.twig' %}
-  </script>
-  #}
-
+{% block scripts %}
+  {# <script type="text/template" id="screener-member-option-template">
+    <% _.each(people, function(person, i) { %>
+    <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+      <input
+          type="checkbox"
+          name="Person[<%= i %>].<%= attribute %>"
+          value="1"
+          data-type="boolean"
+          <% if ((attribute === 'livingRentalOnLease' && person.leasee) || (attribute === 'livingOwnerOnDeed' && person.owner)) { print('checked') } %>>
+      <span class="styled-checkbox-label">
+        <span class="recap-inline-item"><%= person.relation %></span>
+        <span class="recap-inline-item"><%= person.age %></span>
+      </span>
+    </label>
+    <% }); %>
+  </script> #}
   <script>
     window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
     window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
@@ -486,20 +494,9 @@
       "slug": "ERROR_ZIP"
     }]);
   </script>
-  <script type="text/template" id="screener-member-option-template">
-    <% _.each(people, function(person, i) { %>
-    <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-      <input
-          type="checkbox"
-          name="Person[<%= i %>].<%= attribute %>"
-          value="1"
-          data-type="boolean"
-          <% if ((attribute === 'livingRentalOnLease' && person.leasee) || (attribute === 'livingOwnerOnDeed' && person.owner)) { print('checked') } %>>
-      <span class="styled-checkbox-label">
-        <span class="recap-inline-item"><%= person.relation %></span>
-        <span class="recap-inline-item"><%= person.age %></span>
-      </span>
-    </label>
-    <% }); %>
-  </script>
+  {% if is_debug %}
+  <script src="/wp-content/themes/access/assets/js/main.ssp.js?v={{ date().timestamp }}"></script>
+  {% else %}
+  <script src="/wp-content/themes/access/assets/js/main.ssp.min.js"></script>
+  {% endif %}
 {% endblock %}

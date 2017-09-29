@@ -26,7 +26,7 @@ import Vue from 'vue/dist/vue.common';
  * those views to the current language.
  * @class
  */
-class ScreenerProto {
+class ScreenerSinglePage {
   /**
    * @param {HTMLElement} el - The form element for the component.
    * @constructor
@@ -36,9 +36,9 @@ class ScreenerProto {
     this._el = el;
 
     /** @private {jQuery} jQuery element array of screener steps. */
-    this._$steps = $(this._el).find(`.${ScreenerProto.CssClass.STEP}`);
+    this._$steps = $(this._el).find(`.${ScreenerSinglePage.CssClass.STEP}`);
 
-    this._$pages = $(this._el).find(`.${ScreenerProto.CssClass.PAGE}`);
+    this._$pages = $(this._el).find(`.${ScreenerSinglePage.CssClass.PAGE}`);
 
     /** @private {array<string>} array of selected category IDs */
     this._categories = [];
@@ -134,7 +134,7 @@ class ScreenerProto {
           let key = el.dataset.key;
           let reset = el.dataset.reset;
           // get the typed value;
-          let value = ScreenerProto.getTypedVal(el);
+          let value = ScreenerSinglePage.getTypedVal(el);
           console.dir([key, value]);
           // set the attribute;
           if (typeof index === 'undefined') {
@@ -211,14 +211,14 @@ class ScreenerProto {
       const hash = window.location.hash;
       const $section = $(hash);
       const type = window.location.hash.split('-')[0];
-      if ($section.length && $section.hasClass(ScreenerProto.CssClass.PAGE)) {
+      if ($section.length && $section.hasClass(ScreenerSinglePage.CssClass.PAGE)) {
         this._goToPage($section[0]);
         $(window).scrollTop(0);
         $('#js-layout-body').scrollTop(0);
       }
-      if (type === '#question') {
+      // if (type === '#question') {
         // this._goToQuestion(window.location.hash);
-      }
+      // }
       if (type === '#section') {
         this._goToSection(window.location.hash);
       }
@@ -226,32 +226,32 @@ class ScreenerProto {
 
     $(this._el).on('change', 'input[type="checkbox"]', (e) => {
       this._toggleCheckbox(e.currentTarget);
-    }).on('change', `.${ScreenerProto.CssClass.TOGGLE}`, (e) => {
+    }).on('change', `.${ScreenerSinglePage.CssClass.TOGGLE}`, (e) => {
       this._handleToggler(e.currentTarget);
-    }).on('change', `.${ScreenerProto.CssClass.ADD_SECTION}`, (e) => {
+    }).on('change', `.${ScreenerSinglePage.CssClass.ADD_SECTION}`, (e) => {
       this._addMatrixSection(e.currentTarget);
-    }).on('change', `.${ScreenerProto.CssClass.MATRIX_SELECT}`, (e) => {
+    }).on('change', `.${ScreenerSinglePage.CssClass.MATRIX_SELECT}`, (e) => {
       this._toggleMatrix(e.currentTarget);
-    }).on('click', `.${ScreenerProto.CssClass.VALIDATE_STEP}`, (e) => {
+    }).on('click', `.${ScreenerSinglePage.CssClass.VALIDATE_STEP}`, (e) => {
       const $step = $(e.currentTarget)
-        .closest(`.${ScreenerProto.CssClass.STEP}`);
+        .closest(`.${ScreenerSinglePage.CssClass.STEP}`);
       return this._validateStep($step);
-    }).on('blur change', `.${ScreenerProto.CssClass.VALIDATE_STEP_UI}`, (e) => {
+    }).on('blur change', `.${ScreenerSinglePage.CssClass.VALIDATE_STEP_UI}`, (e) => {
       const $step = $(e.currentTarget)
-        .closest(`.${ScreenerProto.CssClass.STEP}`);
+        .closest(`.${ScreenerSinglePage.CssClass.STEP}`);
       const valid = this._validateStep($step);
       return valid;
-    }).on('click', `.${ScreenerProto.CssClass.SUBMIT}`, (e) => {
+    }).on('click', `.${ScreenerSinglePage.CssClass.SUBMIT}`, (e) => {
       if (!this._recaptchaRequired) {
         this._submit($(e.currentTarget).data('action'));
       } else {
-        $(e.currentTarget).closest(`.${ScreenerProto.CssClass.STEP}`)
-          .find(`.${ScreenerProto.CssClass.ERROR_MSG}`).remove();
+        $(e.currentTarget).closest(`.${ScreenerSinglePage.CssClass.STEP}`)
+          .find(`.${ScreenerSinglePage.CssClass.ERROR_MSG}`).remove();
         if (this._recaptchaVerified) {
           this._submit($(e.currentTarget).data('action'));
         } else {
           this._showError($('#screener-recaptcha')[0],
-              ScreenerProto.ErrorMessage.REQUIRED);
+              ScreenerSinglePage.ErrorMessage.REQUIRED);
         }
       }
     }).on('blur', '[data-type="integer"]', (e) => {
@@ -270,20 +270,20 @@ class ScreenerProto {
           e.keyCode === 189) { // '-' key
         e.preventDefault();
       }
-    }).on('click', `.${ScreenerProto.CssClass.REMOVE_PERSON}`, (e) => {
+    }).on('click', `.${ScreenerSinglePage.CssClass.REMOVE_PERSON}`, (e) => {
       this._removePerson(parseInt($(e.currentTarget).data('person'), 10))
           ._renderRecap();
-    }).on('click', `.${ScreenerProto.CssClass.EDIT_PERSON}`, (e) => {
+    }).on('click', `.${ScreenerSinglePage.CssClass.EDIT_PERSON}`, (e) => {
       this._editPerson(parseInt($(e.currentTarget).data('person'), 10));
     }).on('keyup', 'input[maxlength]', (e) => {
       this._enforceMaxLength(e.currentTarget);
-    }).on('click', `.${ScreenerProto.CssClass.RENDER_RECAP}`, (e) => {
+    }).on('click', `.${ScreenerSinglePage.CssClass.RENDER_RECAP}`, (e) => {
       this._renderRecap();
     }).on('submit', (e) => {
       e.preventDefault();
-      this._$steps.filter(`.${ScreenerProto.CssClass.ACTIVE}`)
-        .find(`.${ScreenerProto.CssClass.VALIDATE_STEP},` +
-        `.${ScreenerProto.CssClass.SUBMIT}`).trigger('click');
+      this._$steps.filter(`.${ScreenerSinglePage.CssClass.ACTIVE}`)
+        .find(`.${ScreenerSinglePage.CssClass.VALIDATE_STEP},` +
+        `.${ScreenerSinglePage.CssClass.SUBMIT}`).trigger('click');
     });
 
     $(this._el).on('click', '[data-js="question"]', (event) => {
@@ -291,6 +291,7 @@ class ScreenerProto {
     });
 
     window.location.hash = 'page-screener';
+
     this._goToPage($('#page-screener'));
 
     return this;
@@ -305,19 +306,19 @@ class ScreenerProto {
   _toggleCheckbox(el) {
     const $checkbox = $(el);
     const $group = $checkbox
-        .closest(`.${ScreenerProto.CssClass.CHECKBOX_GROUP}`);
+        .closest(`.${ScreenerSinglePage.CssClass.CHECKBOX_GROUP}`);
     if ($checkbox.prop('checked')) {
-      if ($checkbox.hasClass(ScreenerProto.CssClass.CLEAR_GROUP)) {
+      if ($checkbox.hasClass(ScreenerSinglePage.CssClass.CLEAR_GROUP)) {
         $group.find('input[type="checkbox"]').not(el).prop('checked', false)
             .trigger('change');
       } else {
-        $group.find(`.${ScreenerProto.CssClass.CLEAR_GROUP}`)
+        $group.find(`.${ScreenerSinglePage.CssClass.CLEAR_GROUP}`)
             .prop('checked', false)
             .trigger('change');
       }
     } else {
       if ($group.find('input[type="checkbox"]:checked').length === 0) {
-        $group.find(`.${ScreenerProto.CssClass.CLEAR_GROUP}`)
+        $group.find(`.${ScreenerSinglePage.CssClass.CLEAR_GROUP}`)
             .prop('checked', true).trigger('change');
       }
     }
@@ -341,16 +342,16 @@ class ScreenerProto {
           ($el.prop('checked') && Boolean(parseInt($el.val(), 10))) ||
           ($el.is('select') && $el.val())
       ) {
-        $target.removeClass(ScreenerProto.CssClass.HIDDEN);
+        $target.removeClass(ScreenerSinglePage.CssClass.HIDDEN);
       } else {
-        $target.addClass(ScreenerProto.CssClass.HIDDEN);
+        $target.addClass(ScreenerSinglePage.CssClass.HIDDEN);
       }
     }
     if ($el.data('shows')) {
-      $($el.data('shows')).removeClass(ScreenerProto.CssClass.HIDDEN);
+      $($el.data('shows')).removeClass(ScreenerSinglePage.CssClass.HIDDEN);
     }
     if ($el.data('hides')) {
-      $($el.data('hides')).addClass(ScreenerProto.CssClass.HIDDEN);
+      $($el.data('hides')).addClass(ScreenerSinglePage.CssClass.HIDDEN);
     }
     return this;
   }
@@ -381,25 +382,25 @@ class ScreenerProto {
    * @param {HTMLElement} el
    * @return {this} Screener
    */
-  _addMatrixSection(el) {
-    const $el = $(el);
-    const $target = $($el.data('renders'));
-    const template = $(`#screener-${$el.data('matrix')}-template`).html();
-    const renderedTemplate = _.template(template)({
-      personIndex: parseInt($el.data('personIndex'), 10) || 0,
-      matrixIndex: parseInt($el.data('matrixIndex'), 10) || 0
-    });
-    const $renderTarget = $el.data('renderTarget') ?
-        $($el.data('renderTarget')) :
-        $el.closest(`.${ScreenerProto.CssClass.MATRIX}`);
-    if ($target.length) {
-      $target.removeClass(ScreenerProto.CssClass.HIDDEN);
-    } else if (!$el.data('renderTarget') ||
-        !$renderTarget.find(`.${ScreenerProto.CssClass.MATRIX_ITEM}`).length) {
-      $renderTarget.append(renderedTemplate);
-    }
-    return this;
-  }
+  // _addMatrixSection(el) {
+  //   const $el = $(el);
+  //   const $target = $($el.data('renders'));
+  //   const template = $(`#screener-${$el.data('matrix')}-template`).html();
+  //   const renderedTemplate = _.template(template)({
+  //     personIndex: parseInt($el.data('personIndex'), 10) || 0,
+  //     matrixIndex: parseInt($el.data('matrixIndex'), 10) || 0
+  //   });
+  //   const $renderTarget = $el.data('renderTarget') ?
+  //       $($el.data('renderTarget')) :
+  //       $el.closest(`.${ScreenerSinglePage.CssClass.MATRIX}`);
+  //   if ($target.length) {
+  //     $target.removeClass(ScreenerSinglePage.CssClass.HIDDEN);
+  //   } else if (!$el.data('renderTarget') ||
+  //       !$renderTarget.find(`.${ScreenerSinglePage.CssClass.MATRIX_ITEM}`).length) {
+  //     $renderTarget.append(renderedTemplate);
+  //   }
+  //   return this;
+  // }
 
   /**
    * For a select element in a repeating matrix, if a value exists for the
@@ -409,17 +410,17 @@ class ScreenerProto {
    * @param {HTMLElement} el
    * @return {this} Screener
    */
-  _toggleMatrix(el) {
-    const $el = $(el);
-    const $matrixItem = $el.closest(`.${ScreenerProto.CssClass.MATRIX_ITEM}`);
-    if ($el.val()) {
-      $matrixItem.find(`.${ScreenerProto.CssClass.TRANSACTION_LABEL}`)
-          .text($el.find('option:selected').text());
-    } else if (!$matrixItem.is(':last-of-type')) {
-      $matrixItem.remove();
-    }
-    return this;
-  }
+  // _toggleMatrix(el) {
+  //   const $el = $(el);
+  //   const $matrixItem = $el.closest(`.${ScreenerSinglePage.CssClass.MATRIX_ITEM}`);
+  //   if ($el.val()) {
+  //     $matrixItem.find(`.${ScreenerSinglePage.CssClass.TRANSACTION_LABEL}`)
+  //         .text($el.find('option:selected').text());
+  //   } else if (!$matrixItem.is(':last-of-type')) {
+  //     $matrixItem.remove();
+  //   }
+  //   return this;
+  // }
 
   /**
    * Adds the active class to the provided section. Removes it from all other
@@ -429,9 +430,9 @@ class ScreenerProto {
    */
   _goToStep(section) {
     // This shows and hides the screener steps
-    this._$steps.removeClass(ScreenerProto.CssClass.ACTIVE)
+    this._$steps.removeClass(ScreenerSinglePage.CssClass.ACTIVE)
       .attr('aria-hidden', 'true').find(':input, a').attr('tabindex', '-1')
-      .end().filter(section).addClass(ScreenerProto.CssClass.ACTIVE)
+      .end().filter(section).addClass(ScreenerSinglePage.CssClass.ACTIVE)
       .removeAttr('aria-hidden').find(':input, a').removeAttr('tabindex');
 
     return this;
@@ -444,16 +445,16 @@ class ScreenerProto {
    */
   _goToPage(section) {
     // This shows and hides the screener pages
-    this._$pages.removeClass(ScreenerProto.CssClass.ACTIVE)
+    this._$pages.removeClass(ScreenerSinglePage.CssClass.ACTIVE)
       .attr('aria-hidden', 'true')
       .find(':input, a')
       .attr('tabindex', '-1')
-      .end().filter(section).addClass(ScreenerProto.CssClass.ACTIVE)
+      .end().filter(section).addClass(ScreenerSinglePage.CssClass.ACTIVE)
       .removeAttr('aria-hidden')
       .find(':input, a')
       .removeAttr('tabindex');
 
-    if ($(section).attr('id') === ScreenerProto.CssClass.PAGE_RECAP)
+    if ($(section).attr('id') === ScreenerSinglePage.CssClass.PAGE_RECAP)
       this._renderRecap();
 
     window.location.hash = '';
@@ -467,9 +468,9 @@ class ScreenerProto {
    * @return {this} Screener
    */
   _goToQuestion(event, hash) {
-    let $page = $(hash).closest(`.${ScreenerProto.CssClass.PAGE}`);
-    let $questions = $(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`);
-    let $target = $(hash).find(`.${ScreenerProto.CssClass.TOGGLE_QUESTION}`);
+    let $page = $(hash).closest(`.${ScreenerSinglePage.CssClass.PAGE}`);
+    let $questions = $(`.${ScreenerSinglePage.CssClass.TOGGLE_QUESTION}`);
+    let $target = $(hash).find(`.${ScreenerSinglePage.CssClass.TOGGLE_QUESTION}`);
     let target = document.querySelector(hash);
     let $window = document.querySelector('#js-layout-body');
 
@@ -488,7 +489,7 @@ class ScreenerProto {
 
       // Scrolling Behavior
       event.preventDefault();
-      target.scrollIntoView({behavior: 'auto'});
+      target.scrollIntoView(true);
       $window.scrollBy({
         top: -60,
         left: 0,
@@ -516,7 +517,7 @@ class ScreenerProto {
     $(`a[href="${hash}"]`).addClass('bg-blue-light')
       .siblings().removeClass('bg-blue-light');
     let $page = $(hash)
-      .closest(`.${ScreenerProto.CssClass.PAGE}`);
+      .closest(`.${ScreenerSinglePage.CssClass.PAGE}`);
     if (!$page.hasClass('active')) {
       this._goToPage($page[0]);
       // $(window).scrollTop(0);
@@ -626,9 +627,9 @@ class ScreenerProto {
   _validateStep($step) {
     const stepId = $step.attr('id');
     // Required Validation
-    // $step.find(`.${ScreenerProto.CssClass.ERROR}`)
-    //     .removeClass(ScreenerProto.CssClass.ERROR).end()
-    //     .find(`.${ScreenerProto.CssClass.ERROR_MSG}`).remove();
+    // $step.find(`.${ScreenerSinglePage.CssClass.ERROR}`)
+    //     .removeClass(ScreenerSinglePage.CssClass.ERROR).end()
+    //     .find(`.${ScreenerSinglePage.CssClass.ERROR_MSG}`).remove();
 
     // $step.find(':input:visible').filter('[required]').each((i, el) => {
     //   this._validateRequiredField(el);
@@ -640,10 +641,10 @@ class ScreenerProto {
     //   this._validateZipField(el);
     // });
 
-    // const $errors = $step.find(`.${ScreenerProto.CssClass.ERROR}:visible`);
+    // const $errors = $step.find(`.${ScreenerSinglePage.CssClass.ERROR}:visible`);
     // if ($errors.length) {
     //   const $firstError = $errors.first()
-    //       .closest(`.${ScreenerProto.CssClass.QUESTION_CONTAINER}`);
+    //       .closest(`.${ScreenerSinglePage.CssClass.QUESTION_CONTAINER}`);
 
     //   $firstError.find(':input').first().focus();
     //   // $(window).scrollTop(0);
@@ -685,26 +686,26 @@ class ScreenerProto {
       // }
       // case 'step-4': {
       //   // Set all checked attributes. Unset any that are not checked.
-      //   $step.find(`.${ScreenerProto.CssClass.CHECKBOX_GROUP}`)
+      //   $step.find(`.${ScreenerSinglePage.CssClass.CHECKBOX_GROUP}`)
       //     .find(':input')
       //       .each((i, el) => {
       //         if ($(el).val() && $(el).attr('name')) {
       //           const key = $(el).attr('name').split('.')[1];
       //           if ($(el).is(':visible') && $(el).is(':checked')) {
-      //             this._people[0].set(key, ScreenerProto.getTypedVal(el));
+      //             this._people[0].set(key, ScreenerSinglePage.getTypedVal(el));
       //           } else {
       //             this._people[0].set(key, false);
       //           }
       //         }
       //       });
       //   // Set the attribute according to the radio button value.
-      //   $step.find(`.${ScreenerProto.CssClass.RADIO_GROUP}`)
+      //   $step.find(`.${ScreenerSinglePage.CssClass.RADIO_GROUP}`)
       //       .find(':input:checked').each((i, el) => {
       //         if ($(el).val() && $(el).attr('name')) {
       //           const key = $(el).attr('name').split('.')[1];
       //           if ($(el).is(':visible')) {
       //             if ($(el).is(':checked')) {
-      //               this._people[0].set(key, ScreenerProto.getTypedVal(el));
+      //               this._people[0].set(key, ScreenerSinglePage.getTypedVal(el));
       //             }
       //           } else {
       //             this._people[0].set(key, false);
@@ -722,10 +723,10 @@ class ScreenerProto {
       //   $step.find('[name$="amount"]').filter(':visible').each((i, el) => {
       //     const itemIndex = $(el).attr('name')
       //       .split('[').pop().split(']')[0];
-      //     const amount = ScreenerProto.getTypedVal(el);
-      //     const type = ScreenerProto.getTypedVal(
+      //     const amount = ScreenerSinglePage.getTypedVal(el);
+      //     const type = ScreenerSinglePage.getTypedVal(
       //         $step.find(`[name="Person[0].${key}[${itemIndex}].type"]`)[0]);
-      //     const frequency = ScreenerProto.getTypedVal($step
+      //     const frequency = ScreenerSinglePage.getTypedVal($step
       //         .find(`[name="Person[0].${key}[${itemIndex}].frequency"]`)[0]);
       //     if (amount && type && frequency) {
       //       if (key === 'incomes') {
@@ -740,7 +741,7 @@ class ScreenerProto {
       // case 'step-7': {
       //   const $memberInput =
       //       $step.find('input[name="Household.members"]');
-      //   const memberCount = ScreenerProto.getTypedVal($memberInput[0]);
+      //   const memberCount = ScreenerSinglePage.getTypedVal($memberInput[0]);
 
       //   // Verify that the inputted value is at least one and not greater
       //   than
@@ -748,7 +749,7 @@ class ScreenerProto {
       //   if (memberCount < 1 ||
       //       memberCount > Utility.CONFIG.SCREENER_MAX_HOUSEHOLD) {
       //     this._showError($memberInput[0],
-      //         ScreenerProto.ErrorMessage.HOUSEHOLD);
+      //         ScreenerSinglePage.ErrorMessage.HOUSEHOLD);
       //     // $(window).scrollTop(0);
       //     return false;
       //   } else {
@@ -777,7 +778,7 @@ class ScreenerProto {
       // case 'step-8':
       // case 'step-9': {
       //   _.each(this._people, (person, personIndex) => {
-      //     let valueHoh = ScreenerProto.getTypedVal($step.find(
+      //     let valueHoh = ScreenerSinglePage.getTypedVal($step.find(
       //       `input[name="Person[${personIndex}].headOfHousehold"]:checked`));
       //     let valueHohRelation = (valueHoh) ? '' : $step.find(
       //       `select[name="Person[${personIndex}].headOfHouseholdRelation"]`
@@ -790,17 +791,17 @@ class ScreenerProto {
       //       relation: valueRelation
       //     });
 
-      //     person.set('age', ScreenerProto.getTypedVal(
+      //     person.set('age', ScreenerSinglePage.getTypedVal(
       //       $step.find(`input[name="Person[${personIndex}].age"]`)[0]
       //     ));
 
       //     // Set person attributes and benefits.
-      //     $step.find(`.${ScreenerProto.CssClass.CHECKBOX_GROUP},
-      //       .${ScreenerProto.CssClass.RADIO_GROUP}`).find('input:checked')
+      //     $step.find(`.${ScreenerSinglePage.CssClass.CHECKBOX_GROUP},
+      //       .${ScreenerSinglePage.CssClass.RADIO_GROUP}`).find('input:checked')
       //       .filter(`[name^="Person[${personIndex}]"]`).each((i, el) => {
       //         if ($(el).val() && $(el).attr('name')) {
       //           const key = $(el).attr('name').split('.')[1];
-      //           person.set(key, ScreenerProto.getTypedVal(el));
+      //           person.set(key, ScreenerSinglePage.getTypedVal(el));
       //         }
       //       });
 
@@ -815,11 +816,11 @@ class ScreenerProto {
       //           .filter(`[name*="${key}"]`).each((i, el) => {
       //         const itemIndex = $(el)
       //           .attr('name').split('[').pop().split(']')[0];
-      //         const amount = ScreenerProto.getTypedVal(el);
-      //         const type = ScreenerProto.getTypedVal($step.find(
+      //         const amount = ScreenerSinglePage.getTypedVal(el);
+      //         const type = ScreenerSinglePage.getTypedVal($step.find(
       //             `[name="Person[${personIndex}].${key}[${itemIndex}]` +
       //             `.type"]`)[0]);
-      //         const frequency = ScreenerProto.getTypedVal($step.find(
+      //         const frequency = ScreenerSinglePage.getTypedVal($step.find(
       //             `[name="Person[${personIndex}].${key}[${itemIndex}]` +
       //             `.frequency"]`)[0]);
       //         if (amount && type && frequency) {
@@ -852,7 +853,7 @@ class ScreenerProto {
           if ($(el).val()) {
             const key = $(el).attr('name').split('.')[1];
             if ($(el).prop('checked')) {
-              this._household.set(key, ScreenerProto.getTypedVal(el));
+              this._household.set(key, ScreenerSinglePage.getTypedVal(el));
             } else {
               this._household.set(key, false);
             }
@@ -874,7 +875,7 @@ class ScreenerProto {
                 }
               });
             } else {
-              this._showError($inputs[0], ScreenerProto.ErrorMessage.REQUIRED);
+              this._showError($inputs[0], ScreenerSinglePage.ErrorMessage.REQUIRED);
               // If the screener step is not yet invalid, scroll to the first
               // error.
               if (stepValid) {
@@ -898,7 +899,7 @@ class ScreenerProto {
           this._household.set('livingRentalType', '');
         }
 
-        // this._household.set('cashOnHand', ScreenerProto.getTypedVal($step
+        // this._household.set('cashOnHand', ScreenerSinglePage.getTypedVal($step
         //     .find('input[name="Household.cashOnHand"]')));
 
         break;
@@ -907,7 +908,7 @@ class ScreenerProto {
         const $inputCashOnHand = $step
           .find('input[name="Household.cashOnHand"]');
         if ($inputCashOnHand.length > 0) {
-          this._household.set('cashOnHand', ScreenerProto.getTypedVal(
+          this._household.set('cashOnHand', ScreenerSinglePage.getTypedVal(
             $inputCashOnHand
           ));
         }
@@ -930,9 +931,9 @@ class ScreenerProto {
    * @return {this} Screener
    */
   _removeError(el) {
-    $(el).closest(`.${ScreenerProto.CssClass.QUESTION_CONTAINER}`)
-        .removeClass(ScreenerProto.CssClass.ERROR)
-        .find(`.${ScreenerProto.CssClass.ERROR_MSG}`).remove();
+    $(el).closest(`.${ScreenerSinglePage.CssClass.QUESTION_CONTAINER}`)
+        .removeClass(ScreenerSinglePage.CssClass.ERROR)
+        .find(`.${ScreenerSinglePage.CssClass.ERROR_MSG}`).remove();
     return this;
   }
 
@@ -947,10 +948,10 @@ class ScreenerProto {
   _showError(el, msg) {
     const $error = $(document.createElement('div'));
     $error.addClass(
-        ScreenerProto.CssClass.ERROR_MSG).text(Utility.localize(msg)
+        ScreenerSinglePage.CssClass.ERROR_MSG).text(Utility.localize(msg)
     );
-    $(el).closest(`.${ScreenerProto.CssClass.QUESTION_CONTAINER}`)
-        .addClass(ScreenerProto.CssClass.ERROR).prepend($error);
+    $(el).closest(`.${ScreenerSinglePage.CssClass.QUESTION_CONTAINER}`)
+        .addClass(ScreenerSinglePage.CssClass.ERROR).prepend($error);
     return this;
   }
 
@@ -968,7 +969,7 @@ class ScreenerProto {
         $input.attr('type') === 'radio') && !$input.prop('checked')) ||
         (($input.attr('type') !== 'checkbox' ||
         $input.attr('type') !== 'radio') && !$input.val())) {
-      this._showError(el, ScreenerProto.ErrorMessage.REQUIRED);
+      this._showError(el, ScreenerSinglePage.ErrorMessage.REQUIRED);
       $input.one('change keyup', () => {
         this._validateRequiredField(el);
       });
@@ -994,7 +995,7 @@ class ScreenerProto {
       $input.val(parsed);
     } else if (val) {
       // Otherwise, show an error message as long as a value was entered.
-      this._showError(el, ScreenerProto.ErrorMessage.INTEGER);
+      this._showError(el, ScreenerSinglePage.ErrorMessage.INTEGER);
       $input.one('keyup', () => {
         this._validateIntegerField(el);
       });
@@ -1053,7 +1054,7 @@ class ScreenerProto {
       $input.val(Utility.toDollarAmount(sanitizedVal));
     } else if (val) {
       // Otherwise, show an error message as long as a value was entered.
-      this._showError(el, ScreenerProto.ErrorMessage.FLOAT);
+      this._showError(el, ScreenerSinglePage.ErrorMessage.FLOAT);
       $input.one('change', () => {
         this._validateFloatField(el);
       });
@@ -1100,10 +1101,10 @@ class ScreenerProto {
 
     if (val) {
       const formattedVal = val.substring(0, 5);
-      if (ScreenerProto.NYC_ZIPS.indexOf(formattedVal) >= 0) {
+      if (ScreenerSinglePage.NYC_ZIPS.indexOf(formattedVal) >= 0) {
         $input.val(formattedVal);
       } else {
-        this._showError(el, ScreenerProto.ErrorMessage.ZIP);
+        this._showError(el, ScreenerSinglePage.ErrorMessage.ZIP);
         $input.one('keyup', () => {
           this._validateZipField(el);
         });
@@ -1401,12 +1402,12 @@ class ScreenerProto {
  * @param {HTMLElement} input
  * @return {boolean|Number|string} typed value
  */
-ScreenerProto.getTypedVal = function(input) {
+ScreenerSinglePage.getTypedVal = function(input) {
   const $input = $(input);
   const val = $input.val();
   let finalVal = $input.val();
   switch ($input.data('type')) {
-    case ScreenerProto.InputType.BOOLEAN: {
+    case ScreenerSinglePage.InputType.BOOLEAN: {
       if (input.type == 'checkbox') {
         finalVal = input.checked;
       } else { // assume it's a radio button
@@ -1416,12 +1417,12 @@ ScreenerProto.getTypedVal = function(input) {
       }
       break;
     }
-    case ScreenerProto.InputType.FLOAT: {
+    case ScreenerSinglePage.InputType.FLOAT: {
       finalVal = (_.isNumber(parseFloat(val)) && !_.isNaN(parseFloat(val))) ?
           parseFloat(val) : 0;
       break;
     }
-    case ScreenerProto.InputType.INTEGER: {
+    case ScreenerSinglePage.InputType.INTEGER: {
       finalVal = (_.isNumber(parseInt(val, 10)) &&
           !_.isNaN(parseInt(val, 10))) ?
           parseInt($input.val(), 10) : 0;
@@ -1436,7 +1437,7 @@ ScreenerProto.getTypedVal = function(input) {
  * CSS classes used by this component.
  * @enum {string}
  */
-ScreenerProto.CssClass = {
+ScreenerSinglePage.CssClass = {
   ACTIVE: 'active',
   ADD_SECTION: 'js-add-section',
   CHECKBOX_GROUP: 'js-screener-checkbox-group',
@@ -1444,29 +1445,29 @@ ScreenerProto.CssClass = {
   EDIT_PERSON: 'js-edit-person',
   ERROR: 'error',
   ERROR_MSG: 'error-message',
-  FORM: 'js-screener-proto-form',
+  FORM: 'js-screener-single-page-form',
   HIDDEN: 'hidden',
   MATRIX: 'js-screener-matrix',
   MATRIX_ITEM: 'js-matrix-item',
   MATRIX_SELECT: 'js-matrix-select',
+  PAGE: 'js-screener-page',
+  PAGE_RECAP: 'page-recap',
   RADIO_GROUP: 'js-screener-radio-group',
   REMOVE_PERSON: 'js-remove-person',
+  RENDER_RECAP: 'js-render-recap',
   QUESTION_CONTAINER: 'screener-question-container',
   TOGGLE: 'js-screener-toggle',
-  STEP: 'js-screener-step',
-  PAGE: 'js-screener-page',
-  SUBMIT: 'js-screener-submit',
-  TRANSACTION_LABEL: 'screener-transaction-type',
-  RENDER_RECAP: 'js-render-recap',
   TOGGLE_QUESTION: 'js-toggle-question',
-  PAGE_RECAP: 'page-recap'
+  STEP: 'js-screener-step',
+  SUBMIT: 'js-screener-submit',
+  TRANSACTION_LABEL: 'screener-transaction-type'
 };
 
 /**
  * Localization labels of error messages.
  * @enum {string}
  */
-ScreenerProto.ErrorMessage = {
+ScreenerSinglePage.ErrorMessage = {
   FLOAT: 'ERROR_FLOAT',
   HOUSEHOLD: 'ERROR_HOUSEHOLD',
   INTEGER: 'ERROR_INTEGER',
@@ -1478,7 +1479,7 @@ ScreenerProto.ErrorMessage = {
  * data-type attributes used by this component.
  * @enum {string}
  */
-ScreenerProto.InputType = {
+ScreenerSinglePage.InputType = {
   BOOLEAN: 'boolean',
   FLOAT: 'float',
   INTEGER: 'integer'
@@ -1489,7 +1490,7 @@ ScreenerProto.InputType = {
  * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
  * @type {array<String>}
  */
-ScreenerProto.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
+ScreenerSinglePage.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
     '10457', '10458', '10459', '10460', '10461', '10462', '10463',
     '10464', '10465', '10466', '10467', '10468', '10469', '10470',
     '10471', '10472', '10473', '10474', '10475', '10499', '11201',
@@ -1546,4 +1547,4 @@ ScreenerProto.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
     '12758', '12759', '12763', '12764', '12768', '12779', '12783',
     '12786', '12788', '12789', '13731', '16091', '20459'];
 
-export default ScreenerProto;
+export default ScreenerSinglePage;

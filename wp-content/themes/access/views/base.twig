@@ -145,13 +145,17 @@
         </footer>
       {% endblock %}
     </div>
+
     {{wp_footer}}
-    <script src="https://www.google.com/jsapi"></script>
-    {% if is_debug %}
+
+    {% block scripts %}
+      <script src="https://www.google.com/jsapi"></script>
+      {% if is_debug %}
       <script src="/wp-content/themes/access/assets/js/main.js?v={{ date().timestamp }}"></script>
-    {% else %}
+      {% else %}
       <script src="/wp-content/themes/access/assets/js/main.min.js"></script>
-    {% endif %}
+      {% endif %}
+    {% endblock %}
 
     {# Webtrends integration #}
     <script>

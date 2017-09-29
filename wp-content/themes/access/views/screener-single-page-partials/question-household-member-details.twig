@@ -102,6 +102,7 @@
                 data-object="people"
                 data-key="{{unemployed.dataKey}}"
                 data-index="0"
+                data-reset="#household-reset"
                 v-on:change="setAttr">
               <span class="styled-checkbox-label">{{ __(unemployed.label, 'accessnyc-screener') }}</span>
             </label>
@@ -149,10 +150,10 @@
           </h4>
 
           {% for question in questions %}
-          {% include 'screener-proto-partials/question-toggles-household-member-details.twig' with question %}
+          {% include 'screener-single-page-partials/question-toggles-household-member-details.twig' with question %}
           {% endfor %}
 
-          {% include 'screener-proto-partials/question-toggles-unemployed.twig' with unemployed %}
+          {% include 'screener-single-page-partials/question-toggles-unemployed.twig' with unemployed %}
 
         </div>
       </div>

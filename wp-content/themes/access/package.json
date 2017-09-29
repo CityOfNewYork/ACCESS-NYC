@@ -33,6 +33,7 @@
     "del": "^1.2.0",
     "dotenv": "^2.0.0",
     "eslint-config-google": "^0.7.1",
+    "event-stream": "^3.3.4",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.2",

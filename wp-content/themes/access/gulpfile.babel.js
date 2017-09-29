@@ -19,6 +19,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import path from 'path';
 import buffer from 'vinyl-buffer';
 import sourcestream from 'vinyl-source-stream';
+import es from 'event-stream';
 import p from './package.json';
 
 const $ = gulpLoadPlugins();
@@ -99,23 +100,29 @@ gulp.task('lint', () =>
 
 // Scripts
 gulp.task('scripts', () => {
-  const b = browserify({
-    entries: `${src}/js/main.js`,
-    debug: true,
-    paths: ['node_modules',`${src}/js`]
+ const apps = [
+    'main', 'main.ssp'
+  ];
+  let tasks = apps.map(function(entry) {
+    const b = browserify({
+      entries: [`${src}/js/${entry}.js`],
+      debug: true,
+      paths: ['node_modules',`${src}/js`]
+    });
+    return b.transform('babelify', {
+      presets: ['es2015']
+    })
+    .bundle()
+    .pipe(sourcestream(`${entry}.js`))
+    .pipe(buffer())
+    .pipe(gulp.dest(`${dist}/js`))
+    .pipe($.sourcemaps.init({loadMaps: true}))
+    .pipe($.uglify())
+    .pipe($.sourcemaps.write('./'))
+    .pipe($.rename(`${entry}.min.js`))
+    .pipe(gulp.dest(`${dist}/js`));
   });
-  return b.transform('babelify', {
-    presets: ['es2015']
-  })
-  .bundle()
-  .pipe(sourcestream('main.js'))
-  .pipe(buffer())
-  .pipe(gulp.dest(`${dist}/js`))
-  .pipe($.sourcemaps.init({loadMaps: true}))
-  .pipe($.uglify())
-  .pipe($.sourcemaps.write('./'))
-  .pipe($.rename('main.min.js'))
-  .pipe(gulp.dest(`${dist}/js`));
+  return es.merge.apply(null, tasks);
 });
 
 
