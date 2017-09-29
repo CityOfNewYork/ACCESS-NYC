@@ -34,7 +34,8 @@
           <p>{{ __('Check the box below and then click the button to get started.', 'accessnyc-screener') }}</p>
           <div class="screener-disclaimer-acknowledgment screener-question-container m-0">
             <label class="screener-checkbox styled-checkbox m-0">
-              <input id="disclaimer-agreement" type="checkbox" name="disclaimer-agreement" required>
+              <input id="disclaimer-agreement" type="checkbox" name="disclaimer-agreement" value="true" required
+                v-model="disclaimer">
               <span class="styled-checkbox-label">{{ __('I have read, understand, and agree to the terms of: the ACCESS NYC Disclaimer for Public Benefit Program Screening, the NYC.gov Privacy Policy, and the NYC.gov Terms of Use.', 'accessnyc-screener') }}</span>
             </label>
           </div>

@@ -91,7 +91,8 @@ class ScreenerSinglePage {
         /* these are modules created for the public engagement unit */
         'client': new ScreenerClient(),
         'staff': new ScreenerStaff(),
-        'categoriesCurrent': []
+        'categoriesCurrent': [],
+        'disclaimer': false
       },
       'methods': {
         'resetAttr': function(event) {
@@ -213,6 +214,9 @@ class ScreenerSinglePage {
             this[obj].splice(index, 1);
           }
           console.dir(this[obj]);
+        },
+        'recap': function() {
+          ScreenerSinglePage._renderRecap(this);
         }
       }
     });
@@ -221,16 +225,19 @@ class ScreenerSinglePage {
       const hash = window.location.hash;
       const $section = $(hash);
       const type = window.location.hash.split('-')[0];
-      if ($section.length && $section.hasClass(ScreenerSinglePage.CssClass.PAGE)) {
-        this._goToPage($section[0]);
-        $(window).scrollTop(0);
-        $('#js-layout-body').scrollTop(0);
-      }
+      // if ($section.length && $section.hasClass(ScreenerSinglePage.CssClass.PAGE)) {
+      //   this._goToPage($section[0]);
+      //   $(window).scrollTop(0);
+      //   $('#js-layout-body').scrollTop(0);
+      // }
       // if (type === '#question') {
         // this._goToQuestion(window.location.hash);
       // }
-      if (type === '#section') {
-        this._goToSection(window.location.hash);
+      // if (type === '#section') {
+      //   this._goToSection(window.location.hash);
+      // }
+      if (type === '#page') {
+        this._goToPage(hash);
       }
     });
 
@@ -280,16 +287,16 @@ class ScreenerSinglePage {
           e.keyCode === 189) { // '-' key
         e.preventDefault();
       }
-    }).on('click', `.${ScreenerSinglePage.CssClass.REMOVE_PERSON}`, (e) => {
-      this._removePerson(parseInt($(e.currentTarget).data('person'), 10))
-          ._renderRecap();
-    }).on('click', `.${ScreenerSinglePage.CssClass.EDIT_PERSON}`, (e) => {
+    })//.on('click', `.${ScreenerSinglePage.CssClass.REMOVE_PERSON}`, (e) => {
+      //this._removePerson(parseInt($(e.currentTarget).data('person'), 10))
+      //    ._renderRecap();
+    /*})*/.on('click', `.${ScreenerSinglePage.CssClass.EDIT_PERSON}`, (e) => {
       this._editPerson(parseInt($(e.currentTarget).data('person'), 10));
     }).on('keyup', 'input[maxlength]', (e) => {
       this._enforceMaxLength(e.currentTarget);
-    }).on('click', `.${ScreenerSinglePage.CssClass.RENDER_RECAP}`, (e) => {
+    })/*.on('click', `.${ScreenerSinglePage.CssClass.RENDER_RECAP}`, (e) => {
       this._renderRecap();
-    }).on('submit', (e) => {
+    })*/.on('submit', (e) => {
       e.preventDefault();
       this._$steps.filter(`.${ScreenerSinglePage.CssClass.ACTIVE}`)
         .find(`.${ScreenerSinglePage.CssClass.VALIDATE_STEP},` +
@@ -300,9 +307,9 @@ class ScreenerSinglePage {
       this._goToQuestion(event, event.currentTarget.hash);
     });
 
-    window.location.hash = 'page-screener';
+    window.location.hash = 'page-admin';
 
-    this._goToPage($('#page-screener'));
+    this._goToPage('#page-admin');
 
     return this;
   }
@@ -453,21 +460,26 @@ class ScreenerSinglePage {
    * @param  {[type]} section [description]
    * @return {this} Screener
    */
-  _goToPage(section) {
-    // This shows and hides the screener pages
-    this._$pages.removeClass(ScreenerSinglePage.CssClass.ACTIVE)
+  _goToPage(page) {
+
+    let $window = document.querySelector('#js-layout-body');
+
+    $window.scrollTop = 0;
+
+    $(`.${ScreenerSinglePage.CssClass.PAGE}`)
+      .removeClass(ScreenerSinglePage.CssClass.ACTIVE)
       .attr('aria-hidden', 'true')
       .find(':input, a')
-      .attr('tabindex', '-1')
-      .end().filter(section).addClass(ScreenerSinglePage.CssClass.ACTIVE)
+      .attr('tabindex', '-1');
+
+    $(page).addClass(ScreenerSinglePage.CssClass.ACTIVE)
       .removeAttr('aria-hidden')
       .find(':input, a')
       .removeAttr('tabindex');
 
-    if ($(section).attr('id') === ScreenerSinglePage.CssClass.PAGE_RECAP)
-      this._renderRecap();
-
-    window.location.hash = '';
+    // if ($(page).attr('id') === ScreenerSinglePage.CssClass.PAGE_RECAP)
+      // this._renderRecap();
+    // window.location.hash = '';
 
     return this;
   }
@@ -478,14 +490,15 @@ class ScreenerSinglePage {
    * @return {this} Screener
    */
   _goToQuestion(event, hash) {
-    let $page = $(hash).closest(`.${ScreenerSinglePage.CssClass.PAGE}`);
+    let page = '#' + $(hash).closest(`.${ScreenerSinglePage.CssClass.PAGE}`).attr('id');
     let $questions = $(`.${ScreenerSinglePage.CssClass.TOGGLE_QUESTION}`);
     let $target = $(hash).find(`.${ScreenerSinglePage.CssClass.TOGGLE_QUESTION}`);
     let target = document.querySelector(hash);
     let $window = document.querySelector('#js-layout-body');
 
-    if (!$page.hasClass('active'))
-      this._goToPage($page[0]);
+    if (!$(page).hasClass('active')) {
+      window.location.hash = page;
+    }
 
     if (!$target.hasClass('active')) {
       $questions
@@ -523,18 +536,18 @@ class ScreenerSinglePage {
    * @param  {[type]} hash [description]
    * @return {this}      Screener
    */
-  _goToSection(hash) {
-    $(`a[href="${hash}"]`).addClass('bg-blue-light')
-      .siblings().removeClass('bg-blue-light');
-    let $page = $(hash)
-      .closest(`.${ScreenerSinglePage.CssClass.PAGE}`);
-    if (!$page.hasClass('active')) {
-      this._goToPage($page[0]);
-      // $(window).scrollTop(0);
-      // $('#js-layout-body').scrollTop(0);
-    }
-    return this;
-  }
+  // _goToSection(hash) {
+  //   $(`a[href="${hash}"]`).addClass('bg-blue-light')
+  //     .siblings().removeClass('bg-blue-light');
+  //   let $page = $(hash)
+  //     .closest(`.${ScreenerSinglePage.CssClass.PAGE}`);
+  //   if (!$page.hasClass('active')) {
+  //     this._goToPage($page[0]);
+  //     // $(window).scrollTop(0);
+  //     // $('#js-layout-body').scrollTop(0);
+  //   }
+  //   return this;
+  // }
 
   /**
    * Populate the family, start at one because
@@ -634,8 +647,8 @@ class ScreenerSinglePage {
    * @param {jQuery} $step - step to validate
    * @return {boolean} whether the step is valid
    */
-  _validateStep($step) {
-    const stepId = $step.attr('id');
+  // _validateStep($step) {
+  //   const stepId = $step.attr('id');
     // Required Validation
     // $step.find(`.${ScreenerSinglePage.CssClass.ERROR}`)
     //     .removeClass(ScreenerSinglePage.CssClass.ERROR).end()
@@ -662,26 +675,26 @@ class ScreenerSinglePage {
     //   return false;
     // }
 
-    let stepValid = true;
+    // let stepValid = true;
 
-    switch (stepId) {
-      case 'step-1': {
-        const $inputCategory = $step.find('input[name="category"]:checked');
-        // if ($inputCategory) {
-        const categories = [];
-        $inputCategory.each((i, el) => {
-          categories.push($(el).val());
-        });
-        this._categories = categories;
-        // }
-        // Add program categories.
-        // const categories = [];
-        // $step.find('input[name="category"]:checked').each((i, el) => {
-        //   categories.push($(el).val());
-        // });
-        // this._categories = categories;
-        break;
-      }
+    // switch (stepId) {
+    //   case 'step-1': {
+    //     const $inputCategory = $step.find('input[name="category"]:checked');
+    //     // if ($inputCategory) {
+    //     const categories = [];
+    //     $inputCategory.each((i, el) => {
+    //       categories.push($(el).val());
+    //     });
+    //     this._categories = categories;
+    //     // }
+    //     // Add program categories.
+    //     // const categories = [];
+    //     // $step.find('input[name="category"]:checked').each((i, el) => {
+    //     //   categories.push($(el).val());
+    //     // });
+    //     // this._categories = categories;
+    //     break;
+    //   }
       // case 'step-2': {
       //   // Nothing to process here.
       //   break;
@@ -847,93 +860,93 @@ class ScreenerSinglePage {
       //   this._renderFamily(this._people);
       //   break;
       // }
-      case 'step-10': {
-        // Big hack fix here. For some reason, the previous break statement
-        // just two lines up doesn't actually break out of the switch
-        // (tested in Chrome) and will fire this case. So we are doing an
-        // additional check to make sure we are only handling the apprpirate
-        // case in  question.
-        if (stepId !== 'step-10') {
-          break;
-        }
-        // End big hack fix.
+  //     case 'step-10': {
+  //       // Big hack fix here. For some reason, the previous break statement
+  //       // just two lines up doesn't actually break out of the switch
+  //       // (tested in Chrome) and will fire this case. So we are doing an
+  //       // additional check to make sure we are only handling the apprpirate
+  //       // case in  question.
+  //       if (stepId !== 'step-10') {
+  //         break;
+  //       }
+  //       // End big hack fix.
 
-        // Set the type of the household.
-        $step.find('input[name^="Household"]').each((i, el) => {
-          if ($(el).val()) {
-            const key = $(el).attr('name').split('.')[1];
-            if ($(el).prop('checked')) {
-              this._household.set(key, ScreenerSinglePage.getTypedVal(el));
-            } else {
-              this._household.set(key, false);
-            }
-          }
-        });
+  //       // Set the type of the household.
+  //       $step.find('input[name^="Household"]').each((i, el) => {
+  //         if ($(el).val()) {
+  //           const key = $(el).attr('name').split('.')[1];
+  //           if ($(el).prop('checked')) {
+  //             this._household.set(key, ScreenerSinglePage.getTypedVal(el));
+  //           } else {
+  //             this._household.set(key, false);
+  //           }
+  //         }
+  //       });
 
-        // Set or unset the household members who are on the lease or deed.
-        _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
-          const $inputs = $step.find(`input[name$="${type}"]:visible`);
-          if ($inputs.length) {
-            if ($inputs.filter(':checked').length) {
-              $inputs.each((i, el) => {
-                const personIndex =
-                    parseInt($(el).attr('name').split(']')[0].split('[')[1],
-                    10);
-                const person = this._people[personIndex];
-                if (person) {
-                  person.set(type, $(el).prop('checked'));
-                }
-              });
-            } else {
-              this._showError($inputs[0], ScreenerSinglePage.ErrorMessage.REQUIRED);
-              // If the screener step is not yet invalid, scroll to the first
-              // error.
-              if (stepValid) {
-                // $(window).scrollTop(0);
-              }
-              stepValid = false;
-            }
-          } else {
-            _.each(this._people, (person) => {
-              person.set(type, false);
-            });
-          }
-        });
+  //       // Set or unset the household members who are on the lease or deed.
+  //       _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
+  //         const $inputs = $step.find(`input[name$="${type}"]:visible`);
+  //         if ($inputs.length) {
+  //           if ($inputs.filter(':checked').length) {
+  //             $inputs.each((i, el) => {
+  //               const personIndex =
+  //                   parseInt($(el).attr('name').split(']')[0].split('[')[1],
+  //                   10);
+  //               const person = this._people[personIndex];
+  //               if (person) {
+  //                 person.set(type, $(el).prop('checked'));
+  //               }
+  //             });
+  //           } else {
+  //             this._showError($inputs[0], ScreenerSinglePage.ErrorMessage.REQUIRED);
+  //             // If the screener step is not yet invalid, scroll to the first
+  //             // error.
+  //             if (stepValid) {
+  //               // $(window).scrollTop(0);
+  //             }
+  //             stepValid = false;
+  //           }
+  //         } else {
+  //           _.each(this._people, (person) => {
+  //             person.set(type, false);
+  //           });
+  //         }
+  //       });
 
-        // Set the rental type.
-        const $rentalType =
-            $step.find('select[name="Household.livingRentalType"]');
-        if ($rentalType.is(':visible')) {
-          this._household.set('livingRentalType', $rentalType.val());
-        } else {
-          this._household.set('livingRentalType', '');
-        }
+  //       // Set the rental type.
+  //       const $rentalType =
+  //           $step.find('select[name="Household.livingRentalType"]');
+  //       if ($rentalType.is(':visible')) {
+  //         this._household.set('livingRentalType', $rentalType.val());
+  //       } else {
+  //         this._household.set('livingRentalType', '');
+  //       }
 
-        // this._household.set('cashOnHand', ScreenerSinglePage.getTypedVal($step
-        //     .find('input[name="Household.cashOnHand"]')));
+  //       // this._household.set('cashOnHand', ScreenerSinglePage.getTypedVal($step
+  //       //     .find('input[name="Household.cashOnHand"]')));
 
-        break;
-      }
-      case 'step-11': {
-        const $inputCashOnHand = $step
-          .find('input[name="Household.cashOnHand"]');
-        if ($inputCashOnHand.length > 0) {
-          this._household.set('cashOnHand', ScreenerSinglePage.getTypedVal(
-            $inputCashOnHand
-          ));
-        }
-        break;
-      }
+  //       break;
+  //     }
+  //     case 'step-11': {
+  //       const $inputCashOnHand = $step
+  //         .find('input[name="Household.cashOnHand"]');
+  //       if ($inputCashOnHand.length > 0) {
+  //         this._household.set('cashOnHand', ScreenerSinglePage.getTypedVal(
+  //           $inputCashOnHand
+  //         ));
+  //       }
+  //       break;
+  //     }
 
-      default: {
-        stepValid = false;
-        break;
-      }
+  //     default: {
+  //       stepValid = false;
+  //       break;
+  //     }
 
-    }
+  //   }
 
-    return stepValid;
-  }
+  //   return stepValid;
+  // }
 
   /**
    * Removes error messages on a given input.
@@ -1126,129 +1139,7 @@ class ScreenerSinglePage {
     return this;
   }
 
-  /**
-   * Assembles data for the recap view and renders the recap template.
-   * @private
-   * @return {this} Screener
-   */
-  _renderRecap() {
-    const templateData = {
-      categories: [],
-      household: {
-        assets: `$${this._household.get('cashOnHand')}`,
-        owners: [],
-        rentalType: '',
-        renters: [],
-        types: [],
-        zip: this._household.get('zip')
-      },
-      members: []
-    };
 
-    // Add programs.
-    _.each(this._categories, (category) => {
-      const obj = {
-        slug: category,
-        label: Utility.localize(category)
-      };
-      templateData.categories.push(obj);
-    });
-
-    const housingTypes = [
-      'Renting',
-      'Owner',
-      'StayingWithFriend',
-      'Hotel',
-      'Shelter',
-      'PreferNotToSay'
-    ];
-
-    // Add housing type.
-    _.each(housingTypes, (type) => {
-      if (this._household.get(`living${type}`)) {
-        const obj = {
-          slug: type,
-          label: Utility.localize(`living${type}`)
-        };
-
-        templateData.household.types.push(obj);
-      }
-
-      if (type === 'Renting') {
-        templateData.household.rentalType =
-            Utility.localize(this._household.get('livingRentalType'));
-      }
-    });
-
-    // Add household member data.
-    _.each(this._people.slice(0, this._household.get('members')),
-        (person, i) => {
-      const member = {
-        age: person.get('age'),
-        benefits: [],
-        conditions: [],
-        expenses: [],
-        incomes: [],
-        isHoh: person.get('headOfHousehold'),
-        relation: Utility.localize(person.get('headOfHouseholdRelation'))
-      };
-
-      if (person.get('headOfHousehold')) {
-        if (i === 0) {
-          member.relation = Utility.localize('Self');
-        } else {
-          member.relation = Utility.localize('HeadOfHousehold');
-        }
-      }
-
-      _.each(person.getBenefits(), (value, key) => {
-        if (value) {
-          member.benefits.push(Utility.localize(key));
-        }
-      });
-
-      _.each(person.getConditions(), (value, key) => {
-        if (value) {
-          member.conditions.push(Utility.localize(key));
-        }
-      });
-
-      _.each(['incomes', 'expenses'], (type) => {
-        _.each(person.get(type), (item) => {
-          const obj = {
-            amount: `$${item.amount}`,
-            type: Utility.localize(item.type),
-            frequency: Utility.localize(item.frequency)
-          };
-          member[type].push(obj);
-        });
-      });
-
-      _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
-        if (person.get(type)) {
-          const obj = {};
-          if (person.get('headOfHousehold')) {
-            obj.slug = i === 0 ? 'Self' : 'HeadOfHousehold';
-          } else {
-            obj.slug = person.get('headOfHouseholdRelation');
-          }
-          obj.label = Utility.localize(obj.slug);
-          if (type === 'livingOwnerOnDeed') {
-            templateData.household.owners.push(obj);
-          } else {
-            templateData.household.renters.push(obj);
-          }
-        }
-      });
-
-      templateData.members.push(member);
-    });
-
-    const template = $('#screener-recap-template').html();
-    const renderedTemplate = _.template(template)(templateData);
-    $('#recap-body').html(renderedTemplate);
-    return this;
-  }
 
   /**
    * Removes a user at index `i` from this._people.
@@ -1404,6 +1295,130 @@ class ScreenerSinglePage {
       // TODO(jjandoc): Display error messaging here.
     });
   }
+}
+
+/**
+ * Assembles data for the recap view and renders the recap template.
+ * @private
+ * @return {this} Screener
+ */
+ScreenerSinglePage._renderRecap = function(vue) {
+  const templateData = {
+    categories: [],
+    household: {
+      assets: `$${vue.household.get('cashOnHand')}`,
+      owners: [],
+      rentalType: '',
+      renters: [],
+      types: [],
+      zip: vue.household.get('zip')
+    },
+    members: []
+  };
+
+  // Add programs.
+  _.each(vue.categories, (category) => {
+    const obj = {
+      slug: category,
+      label: Utility.localize(category)
+    };
+    templateData.categories.push(obj);
+  });
+
+  const housingTypes = [
+    'Renting',
+    'Owner',
+    'StayingWithFriend',
+    'Hotel',
+    'Shelter',
+    'PreferNotToSay'
+  ];
+
+  // Add housing type.
+  _.each(housingTypes, (type) => {
+    if (vue.household.get(`living${type}`)) {
+      const obj = {
+        slug: type,
+        label: Utility.localize(`living${type}`)
+      };
+
+      templateData.household.types.push(obj);
+    }
+
+    if (type === 'Renting') {
+      templateData.household.rentalType =
+          Utility.localize(vue.household.get('livingRentalType'));
+    }
+  });
+
+  // Add household member data.
+  _.each(vue.people.slice(0, vue.household.get('members')),
+      (person, i) => {
+    const member = {
+      age: person.get('age'),
+      benefits: [],
+      conditions: [],
+      expenses: [],
+      incomes: [],
+      isHoh: person.get('headOfHousehold'),
+      relation: Utility.localize(person.get('headOfHouseholdRelation'))
+    };
+
+    if (person.get('headOfHousehold')) {
+      if (i === 0) {
+        member.relation = Utility.localize('Self');
+      } else {
+        member.relation = Utility.localize('HeadOfHousehold');
+      }
+    }
+
+    _.each(person.getBenefits(), (value, key) => {
+      if (value) {
+        member.benefits.push(Utility.localize(key));
+      }
+    });
+
+    _.each(person.getConditions(), (value, key) => {
+      if (value) {
+        member.conditions.push(Utility.localize(key));
+      }
+    });
+
+    _.each(['incomes', 'expenses'], (type) => {
+      _.each(person.get(type), (item) => {
+        const obj = {
+          amount: `$${item.amount}`,
+          type: Utility.localize(item.type),
+          frequency: Utility.localize(item.frequency)
+        };
+        member[type].push(obj);
+      });
+    });
+
+    _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
+      if (person.get(type)) {
+        const obj = {};
+        if (person.get('headOfHousehold')) {
+          obj.slug = i === 0 ? 'Self' : 'HeadOfHousehold';
+        } else {
+          obj.slug = person.get('headOfHouseholdRelation');
+        }
+        obj.label = Utility.localize(obj.slug);
+        if (type === 'livingOwnerOnDeed') {
+          templateData.household.owners.push(obj);
+        } else {
+          templateData.household.renters.push(obj);
+        }
+      }
+    });
+
+    templateData.members.push(member);
+  });
+
+  const template = $('#screener-recap-template').html();
+  const renderedTemplate = _.template(template)(templateData);
+  $('#recap-body').html(renderedTemplate);
+  return vue;
 }
 
 /**
