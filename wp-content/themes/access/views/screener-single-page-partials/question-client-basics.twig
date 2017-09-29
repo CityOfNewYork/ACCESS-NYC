@@ -13,17 +13,19 @@
       <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2 hidden">
 
         <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="person-0-first">
+          <label class="{{styles.labels}}" for="client-0-first">
             {{ __('First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <input id="person-0-first" name="Person[0].first" value="" required>
+          <input id="client-0-first" name="Client[0].first" value="" required
+            v-model="client._attrs.firstName">
         </div>
 
         <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="person-0-last">
+          <label class="{{styles.labels}}" for="client-0-last">
             {{ __('Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <input id="person-0-last" name="Person[0].last" value="" required>
+          <input id="client-0-last" name="Client[0].last" value="" required
+            v-model="client._attrs.lastName">
         </div>
 
         <div class="m-bottom-2">
@@ -40,7 +42,7 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
+        <div>
           <label class="{{styles.labels}}" for="household-zip">
             {{ __('Zip code?', 'accessnyc-screener') }}
             <span class="c-red">*</span>
@@ -52,43 +54,6 @@
                 v-model="household._attrs.zip">
             </div>
           </div>
-        </div>
-
-        <div>
-          <label class="{{styles.labels}}" for="staff-email">
-            {{ __('Is this person a current client with PEU?', 'accessnyc-screener') }}
-          </label>
-          <div data-scope="" class="screener-radio-buttons">
-            <label class="screener-radio screener-label">
-              <input
-                data-val="currentClient"
-                data-type="boolean"
-                data-shows="#js-toggle-client-number"
-                class="js-screener-toggle screener-radio-input sr-only"
-                value="true"
-                type="radio"
-                name="Person[0].currentClient"/>
-              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
-            </label>
-            <label class="screener-radio screener-label">
-              <input
-                data-val="currentClient"
-                data-type="boolean"
-                data-hides="#js-toggle-client-number"
-                class="js-screener-toggle screener-radio-input sr-only"
-                value="false"
-                type="radio"
-                name="Person[0].currentClient" checked/>
-              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="m-top-2 hidden" id="js-toggle-client-number">
-          <label class="{{styles.labels}}" for="person-0-number">
-            {{ __('Client #', 'accessnyc-screener') }}
-          </label>
-          <input id="person-0-number" name="Person[0].number" value="" required>
         </div>
 
       </div>

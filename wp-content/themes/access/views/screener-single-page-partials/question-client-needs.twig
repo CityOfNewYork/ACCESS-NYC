@@ -1,3 +1,28 @@
+{% set categoriesCurrent = [
+  {value: 'snap', text: 'SNAP'},
+  {value: 'wic', text: 'Women, Infants, and Children (WIC)'},
+  {value: 'cash-assistance', text: 'Cash Assistance'},
+  {value: 'medicaid', text: 'Medicaid'},
+  {value: 'disability', text: 'Disability-related Medicaid'},
+  {value: 'cityfeps', text: 'CITYFEPS (Family Eviction Prevention Supplement)'},
+  {value: 'dhe', text: 'DHE (Disabled Homeowners’ Exemption)'},
+  {value: 'drie', text: 'DRIE (Disability Rent Increase Exemption)'},
+  {value: 'hasa', text: 'HASA (HIV/AIDS Services)'},
+  {value: 'hud-vash', text: 'HUD-VASH (HUD-Veterans Affairs Supportive Housing)'},
+  {value: 'linc', text: 'LINC (Living in Communities Rental Assistance)'},
+  {value: 'nycha', text: 'NYCHA (NYC Housing Authority Housing)'},
+  {value: 'pension', text: 'Pension'},
+  {value: 'sche', text: 'SCHE (Senior Citizen Homeowners’ Exemption)'},
+  {value: 'scrie', text: 'SCRIE (Senior Citizen Rent Increase Exemption)'},
+  {value: 'section-8', text: 'Section 8'},
+  {value: 'seps', text: 'SEPS (Special Exit and Prevention Supplement)'},
+  {value: 'social-security', text: 'Social Security'},
+  {value: 'ssdi', text: 'SSDI (Social Security Disability Income)'},
+  {value: 'ssi', text: 'SSI (Supplemental Security Income)'},
+  {value: 'state-feps', text: 'State FEPS (Family Eviction Prevention Supplement)'},
+  {value: 'tbra', text: 'TBRA (Tenant-Based Rental Assistance)'}
+] %}
+
 <fieldset class="d-block w-100">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-needs">
@@ -12,7 +37,7 @@
 
       <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
 
-        <div class="m-bottom-2">
+        <div>
           <label class="{{styles.labels}}">
             {{ __('What kind of help are you looking for?', 'accessnyc-screener') }}
           </label>
@@ -27,7 +52,9 @@
               {% set catSlug = category.slug %}
             {% endif %}
             <label class="screener-checkbox styled-checkbox screener-checkboxes-program screener-label">
-              <input class="js-screener-validate-step-ui" type="checkbox" name="category" value="{{ category.slug }}">
+              <input class="js-screener-validate-step-ui" type="checkbox" name="category" value="{{ category.slug }}"
+                data-object="categories"
+                v-on:change="push">
               <span class="styled-checkbox-label">
                 <div class="program-category">
                   <div class="program-icon">
@@ -42,35 +69,6 @@
               </span>
             </label>
             {% endfor %}
-          </div>
-        </div>
-
-        <div>
-          <label class="{{styles.labels}}">
-            {{ __('Are you currently enrolled in these programs?', 'accessnyc-screener') }}
-          </label>
-          <div class="screener-checkboxes">
-            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-              <input
-                type="checkbox"
-                value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('SNAP', 'accessnyc-screener') }}</span>
-            </label>
-            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-              <input
-                type="checkbox"
-                value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Cash Assistance', 'accessnyc-screener') }}</span>
-            </label>
-            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-              <input
-                type="checkbox"
-                value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Women, Infants, and Children (WIC)', 'accessnyc-screener') }}</span>
-            </label>
           </div>
         </div>
 

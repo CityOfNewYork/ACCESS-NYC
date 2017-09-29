@@ -1,18 +1,51 @@
-<fieldset class="screener-body-page active js-screener-page" id="disclaimer">
-  <div class="p-top-2">
-    <div class="screener-disclaimer m-0">
-      <h4 class="screener-label">{{ __('ACCESS NYC Disclaimer for Public Benefit Program Screening', 'accessnyc-screener') }}</h4>
-      <p>{{ __('ACCESS NYC offers a screening tool that recommends public benefits programs for you to consider based upon information you provide about your household.', 'accessnyc-screener') }}</p>
-      <p>{{ __('To enroll in a benefit, you need to apply through the appropriate administering agency. ACCESS NYC will tell you how to apply for any benefit on this website, but cannot guarantee eligibility. The administering agency will determine final eligibility upon your submission of an application for each program.', 'accessnyc-screener') }}</p>
-      <p>{{ __('The information you share for purposes of public benefits screening will be anonymous and can be shared with City agencies to improve access to benefits and programs. To find out more about how the City might use the data you share with ACCESS NYC, visit the <a href="http://www1.nyc.gov/home/terms-of-use.page" target="_blank">Terms of Use for NYC.gov</a>, and <a href="http://www1.nyc.gov/home/privacy-policy.page" target="_blank">Privacy Policy for NYC.gov</a>.', 'accessnyc-screener') }}</p>
+<fieldset class="d-block w-100">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-disclaimer">
+
+    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <a class="{{styles.questions}}" data-js="question" href="#question-disclaimer">
+        {{ __('ACCESS NYC Disclaimer for Public Benefit Program Screening', 'accessnyc-screener') }}
+      </a>
+
+      <div class="js-toggle-question hidden">
+
+        <div class="p-horizontal-2 p-bottom-2">
+
+          <p>{{ __('Before we get started, let me explain what we’ll be doing: ', 'accessnyc-screener') }}</p>
+          <ul>
+           <li>{{ __('We\'ll be asking you about yourself and your household to find benefits and programs that you may be interested in.', 'accessnyc-screener') }}</li>
+           <li>{{ __('It usually takes about 10 minutes to answer all of the questions.', 'accessnyc-screener') }}</li>
+           <li>{{ __('After we’re done you’ll have a list of public benefits programs to consider applying for.', 'accessnyc-screener') }}</li>
+           <li>{{ __('The more we learn about you, the more accurate your screening results will be.', 'accessnyc-screener') }}</li>
+         </ul>
+
+          <p>{{ __('It’s important for you to understand that:', 'accessnyc-screener') }}</p>
+          <ul class="m-0">
+            <li>{{ __('The results of this screener do not guarantee eligibility in a program.', 'accessnyc-screener') }}</li>
+            <li>{{ __('The information you share for purposes of public benefits screening will be anonymous and can be shared with City agencies to improve access to benefits and programs. To find out more about how the City might use the data you share with ACCESS NYC, visit the <a href="http://www1.nyc.gov/home/terms-of-use.page" target="_blank">Terms of Use for NYC.gov</a>, and <a href="http://www1.nyc.gov/home/privacy-policy.page" target="_blank">Privacy Policy for NYC.gov</a>.', 'accessnyc-screener') }}</li>
+          </ul>
+
+        </div>
+
+        <div class="p-2 bg-white">
+          <p>{{ __('Check the box below and then click the button to get started.', 'accessnyc-screener') }}</p>
+          <div class="screener-disclaimer-acknowledgment screener-question-container m-0">
+            <label class="screener-checkbox styled-checkbox m-0">
+              <input id="disclaimer-agreement" type="checkbox" name="disclaimer-agreement" required>
+              <span class="styled-checkbox-label">{{ __('I have read, understand, and agree to the terms of: the ACCESS NYC Disclaimer for Public Benefit Program Screening, the NYC.gov Privacy Policy, and the NYC.gov Terms of Use.', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+
+
     </div>
-    <p class="screener-disclaimer-instruction p-top">{{ __('Check the box below and then click the button to get started.', 'accessnyc-screener') }}</p>
-    <div class="screener-disclaimer-acknowledgment screener-question-container">
-      <label class="screener-checkbox styled-checkbox">
-        <input id="disclaimer-agreement" type="checkbox" name="disclaimer-agreement" required>
-        <span class="styled-checkbox-label">{{ __('I have read, understand, and agree to the terms of: the ACCESS NYC Disclaimer for Public Benefit Program Screening, the NYC.gov Privacy Policy, and the NYC.gov Terms of Use.', 'accessnyc-screener') }}</span>
-      </label>
-    </div>
-    <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small" href="#page-screener">{{ __('Continue', 'accessnyc-screener') }}</a></p>
+
   </div>
-</fieldset>{# /#step-2 #}
+
+</fieldset>

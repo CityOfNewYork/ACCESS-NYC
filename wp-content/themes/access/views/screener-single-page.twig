@@ -1,18 +1,44 @@
+{% set locations = [
+  {value: 'manhattan', text: 'Manhattan'},
+  {value: 'bronx', text: 'Bronx'},
+  {value: 'queens', text: 'Queens'},
+  {value: 'brooklyn', text: 'Brooklyn'},
+  {value: 'statenIsland', text: 'Staten Island'}
+] %}
+
+{% set categoriesCurrent = [
+  {value: 'snap', text: 'SNAP'},
+  {value: 'wic', text: 'Women, Infants, and Children (WIC)'},
+  {value: 'cash-assistance', text: 'Cash Assistance'},
+  {value: 'medicaid', text: 'Medicaid'},
+  {value: 'disability', text: 'Disability-related Medicaid'},
+  {value: 'cityfeps', text: 'CITYFEPS (Family Eviction Prevention Supplement)'},
+  {value: 'dhe', text: 'DHE (Disabled Homeowners’ Exemption)'},
+  {value: 'drie', text: 'DRIE (Disability Rent Increase Exemption)'},
+  {value: 'hasa', text: 'HASA (HIV/AIDS Services)'},
+  {value: 'hud-vash', text: 'HUD-VASH (HUD-Veterans Affairs Supportive Housing)'},
+  {value: 'linc', text: 'LINC (Living in Communities Rental Assistance)'},
+  {value: 'nycha', text: 'NYCHA (NYC Housing Authority Housing)'},
+  {value: 'pension', text: 'Pension'},
+  {value: 'sche', text: 'SCHE (Senior Citizen Homeowners’ Exemption)'},
+  {value: 'scrie', text: 'SCRIE (Senior Citizen Rent Increase Exemption)'},
+  {value: 'section-8', text: 'Section 8'},
+  {value: 'seps', text: 'SEPS (Special Exit and Prevention Supplement)'},
+  {value: 'social-security', text: 'Social Security'},
+  {value: 'ssdi', text: 'SSDI (Social Security Disability Income)'},
+  {value: 'ssi', text: 'SSI (Supplemental Security Income)'},
+  {value: 'state-feps', text: 'State FEPS (Family Eviction Prevention Supplement)'},
+  {value: 'tbra', text: 'TBRA (Tenant-Based Rental Assistance)'}
+] %}
+
 {% extends 'base.twig' %}
 
 {% block header %}
 <header class="site-header">
   <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark">
-    {# <div class="logo-nyc"> #}
-      {# <svg class="icon icon-logo-nyc">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-nyc" class="f-white"></use>
-      </svg>
-      <span class="logo-nyc-tag">Official website of the City of New York</span> #}
-      {# <div style="height: 8px"></div> #}
-      <svg class="icon icon-logo-full" width="163">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
-      </svg>
-    {# </div> #}
+    <svg class="icon icon-logo-full" width="163">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
+    </svg>
     <div class="d-flex ai-center">
       <a href="/eligibility-proto/?debug=1#page-disclaimer" class="btn btn-primary btn-small" onclick="location.reload()">New Client</a>
     </div>
@@ -31,41 +57,6 @@
 
       <div class="screener-body-page js-screener-page active" id="page-screener">
 
-        <div class="p-horizontal-2 p-bottom-2 p-top b-bottom b-grey-light">
-
-          <div class="d-flex ai-center">
-
-            <div class="f-1">
-              <div class="p-right">
-                <label class="{{styles.labels}}" for="staff-first">
-                  {{ __('PEU Staff First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
-                </label>
-                <input class="w-100" id="staff-first" name="Staff.first" value="" required>
-              </div>
-            </div>
-
-            <div class="f-1">
-              <div class="p-right">
-                <label class="{{styles.labels}}" for="staff-last">
-                  {{ __('PEU Staff Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
-                </label>
-                <input class="w-100" id="staff-last" name="Staff.last" value="" required>
-              </div>
-            </div>
-
-            <div class="f-1">
-              <div>
-                <label class="{{styles.labels}}" for="staff-email">
-                  {{ __('PEU Staff Email', 'accessnyc-screener') }} <span class="c-red">*</span>
-                </label>
-                <input class="w-100" id="staff-email" name="Staff.email" value="" type="email" required>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
         <div id="vue" class="p-horizontal-2">
 
           {% set styles = {
@@ -76,9 +67,16 @@
           } %}
 
           <h1 class="{{styles.sections}}" id="client-information">
+            <a href="#first-steps" class="c-blue-dark">{{ __('First Steps', 'accessnyc-screener') }}</a>
+          </h1>
+            {% include 'screener-single-page-partials/question-staff.twig' with {'styles': styles, 'locations': locations} %}
+            {% include 'screener-single-page-partials/disclaimer.twig' with styles %}
+
+          <h1 class="{{styles.sections}}" id="client-information">
             <a href="#client-information" class="c-blue-dark">{{ __('Client Information', 'accessnyc-screener') }}</a>
           </h1><span class="screener-step">(1 of 4)</span>
             {% include 'screener-single-page-partials/question-client-needs.twig' with {'styles': styles, 'categories': categories} %}
+            {% include 'screener-single-page-partials/question-client-services.twig' with {'styles': styles, 'categories': categoriesCurrent} %}
             {% include 'screener-single-page-partials/question-client-basics.twig' with styles %}
             {% include 'screener-single-page-partials/question-client-contact.twig' with styles %}
 

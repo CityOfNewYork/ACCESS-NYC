@@ -1,0 +1,89 @@
+<fieldset class="d-block w-100">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-staff">
+
+    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <a class="{{styles.questions}}" data-js="question" href="#question-staff">
+        {{ __('PEU Staff', 'accessnyc-screener') }}
+      </a>
+
+      <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2 hidden">
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="staff-first">
+            {{ __('PEU Staff First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
+          </label>
+          <input id="staff-first-name" name="Staff.firstName" value="" required
+            v-model="staff._attrs.firstName">
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="staff-last">
+            {{ __('PEU Staff Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
+          </label>
+          <input id="staff-last-name" name="Staff.lastName" value="" required
+            v-model="staff._attrs.lastName">
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="staff-email">
+            {{ __('PEU Staff Email', 'accessnyc-screener') }} <span class="c-red">*</span>
+          </label>
+          <input class="w-input-double" id="staff-email" name="Staff.email" value="" type="email" required
+            v-model="staff._attrs.email">
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="staff-screener-location">
+            {{ __('Screener Location', 'accessnyc-screener') }}
+          </label>
+          <select id="staff-screener-location" name="Staff.screenerLocation" value="" type="email"
+            v-model="staff._attrs.screenerLocation">
+            {% for location in locations %}
+            <option value="{{ location.value }}">{{ __(location.text, 'accessnyc-screener') }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label class="{{styles.labels}}" for="staff-email">
+            {{ __('Is this person a current client with PEU?', 'accessnyc-screener') }}
+          </label>
+          <div class="screener-radio-buttons">
+            <label class="screener-radio screener-label">
+              <input class="screener-radio-input sr-only" value="true" type="radio" name="Client.currentClient"
+                data-type="boolean"
+                data-object="client"
+                data-key="currentClient"
+                v-on:change="setAttr">
+              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="screener-radio screener-label">
+              <input class="screener-radio-input sr-only" value="false" type="radio" name="Client.currentClient" checked
+                data-type="boolean"
+                data-object="client"
+                data-key="currentClient"
+                v-on:change="setAttr">
+              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="m-top-2" v-if="client._attrs.currentClient">
+          <label class="{{styles.labels}}" for="client-0-number">
+            {{ __('PEU Case #', 'accessnyc-screener') }}
+          </label>
+          <input id="client-number" name="Client.number" value="" required
+            v-model="client._attrs.caseNumber">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>

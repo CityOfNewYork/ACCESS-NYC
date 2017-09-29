@@ -1,0 +1,37 @@
+<fieldset class="d-block w-100">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-services">
+
+    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
+
+    <div class="p-relative">
+
+      <a class="{{styles.questions}}" data-js="question" href="#question-client-services">
+        {{ __('Client Services', 'accessnyc-screener') }}
+      </a>
+
+      <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
+
+        <div>
+          <label class="{{styles.labels}}">
+            {{ __('Are you currently enrolled in these programs?', 'accessnyc-screener') }}
+          </label>
+          <div class="screener-checkboxes">
+            {% for category in categories %}
+            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+              <input type="checkbox" value="{{ category.value }}"
+                data-object="categoriesCurrent"
+                v-on:change="push">
+              <span class="styled-checkbox-label">{{ __(category.text, 'accessnyc-screener') }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>{# /#step-1 #}

@@ -5,25 +5,14 @@ import $ from 'jquery';
 // import Cookies from 'js-cookie';
 import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
+import ScreenerClient from 'modules/screener-client';
+import ScreenerStaff from 'modules/screener-staff';
 import Utility from 'modules/utility';
 import _ from 'underscore';
 import Vue from 'vue/dist/vue.common';
 
 /**
- * This component is the controller for the program screener. There's a lot
- * here but essentially how it works is that a hashchange listener is used to
- * progress the user through the screener steps. As they submit each step,
- * a number of validations occur and if everything checks out for that step,
- * the ScreenerPerson and ScreenerHousehold objects are update or created.
- * When the screener is submitted, these objects are compiled into the proper
- * formatting for the Drools rules engine and sent off to the Drools Proxy.
- * Assuming a successful response is received, we then redirect the user to
- * the screener results page, building a redirect URL based on the program
- * codes in the Droosl results, the categories they selected in step 1, the
- * current time, and a `guid` parameter provided by the Drools proxy. The
- * screener relies on Underscore templates to render any dynamic views, and
- * relies on the Utility.localize function to translate any strings within
- * those views to the current language.
+ * Requires Documentation
  * @class
  */
 class ScreenerSinglePage {
@@ -36,20 +25,19 @@ class ScreenerSinglePage {
     this._el = el;
 
     /** @private {jQuery} jQuery element array of screener steps. */
-    this._$steps = $(this._el).find(`.${ScreenerSinglePage.CssClass.STEP}`);
-
+    // this._$steps = $(this._el).find(`.${ScreenerSinglePage.CssClass.STEP}`);
     this._$pages = $(this._el).find(`.${ScreenerSinglePage.CssClass.PAGE}`);
 
     /** @private {array<string>} array of selected category IDs */
-    this._categories = [];
+    // this._categories = [];
 
     /** @private {array<ScreenerPerson>} household members, max 8 */
-    this._people = [
-      new ScreenerPerson({headOfHousehold: true})
-    ];
+    // this._people = [
+    //   new ScreenerPerson({headOfHousehold: true})
+    // ];
 
     /** @private {ScreenerHousehold} household */
-    this._household = new ScreenerHousehold();
+    // this._household = new ScreenerHousehold();
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
@@ -96,8 +84,14 @@ class ScreenerSinglePage {
       'delimiters': ['v{', '}'],
       'el': '#vue',
       'data': {
+        /* these are modules required for the ACCESS NYC screener */
         'people': [new ScreenerPerson({headOfHousehold: true})],
-        'household': new ScreenerHousehold()
+        'household': new ScreenerHousehold(),
+        'categories': [],
+        /* these are modules created for the public engagement unit */
+        'client': new ScreenerClient(),
+        'staff': new ScreenerStaff(),
+        'categoriesCurrent': []
       },
       'methods': {
         'resetAttr': function(event) {
@@ -152,7 +146,7 @@ class ScreenerSinglePage {
         /**
          * Populate the family, start at one because
          * the first person exists by default
-         * @param  {[type]} number [description]
+         * @param  {event} event to pass to setAttr()
          */
         'populate': function(event) {
           let number = event.currentTarget.value;
@@ -201,8 +195,24 @@ class ScreenerSinglePage {
          * @return {boolean} if household is 1 occupant
          */
         'singleOccupant': function() {
-          console.dir(['Single', (this.household._attrs.members === 1)]);
           return (this.household._attrs.members === 1);
+        },
+        /**
+         * Push/Pull items in an array
+         * @param {object} event listener object, requires data;
+         *                       {object} array to push to
+         */
+        'push': function(event) {
+          let el = event.currentTarget;
+          let obj = el.dataset.object;
+          let value = el.value;
+          let index = this[obj].indexOf(value);
+          if (el.checked) {
+            this[obj].push(value);
+          } else if (index > -1) {
+            this[obj].splice(index, 1);
+          }
+          console.dir(this[obj]);
         }
       }
     });

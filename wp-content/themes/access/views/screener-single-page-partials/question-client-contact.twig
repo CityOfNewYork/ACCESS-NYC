@@ -13,6 +13,31 @@
       <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2 hidden">
 
         <div class="m-bottom-2">
+
+          <label class="{{styles.labels}}" for="person-0-phone">
+            {{ __('Best time to contact you?', 'accessnyc-screener') }}
+          </label>
+          <div class="p-top">
+            <label class="styled-checkbox screener-checkbox screener-label d-block">
+              <input type="checkbox" value="1"
+                data-type="boolean">
+              <span class="styled-checkbox-label">{{ __('English', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="styled-checkbox screener-checkbox screener-label d-block">
+              <input type="checkbox" value="1"
+                data-type="boolean">
+              <span class="styled-checkbox-label">{{ __('Spanish', 'accessnyc-screener') }}</span>
+            </label>
+            <label class="styled-checkbox screener-checkbox screener-label d-block">
+              <input type="checkbox" value="1"
+                data-type="boolean">
+              <span class="styled-checkbox-label">{{ __('Other', 'accessnyc-screener') }}</span>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="person-0-phone">
             {{ __('Phone', 'accessnyc-screener') }}
           </label>
