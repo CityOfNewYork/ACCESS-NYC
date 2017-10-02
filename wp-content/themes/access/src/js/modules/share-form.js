@@ -44,9 +44,6 @@ class ShareForm {
       return this;
     }
 
-    let selected = this._el.querySelector('input[type="tel"]');
-    if (selected) this._maskPhone(selected);
-
     $(this._el).on('submit', (e) => {
       e.preventDefault();
       this._validate();
@@ -91,21 +88,6 @@ class ShareForm {
   }
 
   /**
-   * Mask each phone number and properly format it
-   * @param  {HTMLElement} input the "tel" input to mask
-   * @return {constructor}       the input mask
-   */
-  _maskPhone(input) {
-    let cleave = new Cleave(input, {
-      phone: true,
-      phoneRegionCode: 'us',
-      delimiter: '-'
-    });
-    input.cleave = cleave;
-    return input;
-  }
-
-  /**
    * For a given input, checks to see if its value is a valid email. If not,
    * displays an error message and sets an error class on the element.
    * @param {HTMLElement} input
@@ -133,22 +115,10 @@ class ShareForm {
    * @return {boolean} - Valid Phone Number.
    */
   _validatePhoneNumber(input) {
-    let num = this._parsePhoneNumber(input.value); // parse the number
-    num = (num) ? num.join('') : 0; // if num is null, there are no numbers
-    if (num.length === 10) {
-      return true; // assume it is phone number
-    }
+    let valid = Utility.validatePhoneNumber(input.value);
+    if (valid) return true;
     this._showError(ShareForm.Message.PHONE);
     return false;
-  }
-
-  /**
-   * Get just the phone number of a given value
-   * @param  {string} value The string to get numbers from
-   * @return {array}       An array with matched blocks
-   */
-  _parsePhoneNumber(value) {
-    return value.match(/\d+/g); // get only digits
   }
 
   /**

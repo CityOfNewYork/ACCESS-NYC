@@ -256,6 +256,11 @@ import Utility from 'modules/utility';
     shareForm.init();
   });
 
+  // Mask phone numbers
+  $('input[type="tel"]').each((i, el) => {
+    Utility.maskPhone(el);
+  });
+
   // For pages with "print-view" class, print the page on load. Currently only
   // used on program detail pages after the print link is clicked.
   if ($('html').hasClass('print-view')) {

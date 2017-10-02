@@ -2,6 +2,7 @@
 'use strict';
 
 import _ from 'underscore';
+import Cleave from 'cleave.js/dist/cleave.min';
 
 /**
  * Collection of utility functions.
@@ -99,6 +100,56 @@ Utility.isValidEmail = function(email) {
   return typeof input.checkValidity === 'function' ?
       input.checkValidity() : /\S+@\S+\.\S+/.test(email);
 };
+
+/**
+ * For a given input, checks to see if its value is a valid Phone Number.
+ * If not, displays an error message and sets an error class on the element.
+ * @param {HTMLElement} input - The html form element for the component.
+ * @return {boolean} - Valid Phone Number.
+ */
+Utility.validatePhoneNumber = function(number) {
+  let num = Utility.parsePhoneNumber(number); // parse the number
+  num = (num) ? num.join('') : 0; // if num is null, there are no numbers
+  if (num.length === 10) {
+    return true; // assume it is phone number
+  }
+  return false;
+};
+
+/**
+ * Get just the phone number of a given value
+ * @param  {string} value The string to get numbers from
+ * @return {array}       An array with matched blocks
+ */
+Utility.parsePhoneNumber = function(value) {
+  return value.match(/\d+/g); // get only digits
+};
+
+/**
+ * Mask phone number and properly format it
+ * @param  {HTMLElement} input the "tel" input to mask
+ * @return {constructor}       the input mask 000-000-0000
+ */
+Utility.maskPhone = function(input) {
+  let cleave = new Cleave(input, {
+    phone: true,
+    phoneRegionCode: 'us',
+    delimiter: '-'
+  });
+  input.cleave = cleave;
+  return input;
+};
+
+/**
+ * Convert a camel case string into all caps with underscored spaces.
+ * @param  {string} str the string to change, ex. myString
+ * @return {string}     the converted string, ex. MY_STRING
+ */
+Utility.camelToUpper = function(str) {
+  return str.replace(/([A-Z])/g, function($1) {
+    return '_' + $1;
+  }).toUpperCase();
+}
 
 /**
  * Site constants.

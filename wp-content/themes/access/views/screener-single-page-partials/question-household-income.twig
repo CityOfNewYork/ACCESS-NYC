@@ -144,7 +144,7 @@
                     <div class="currency-usd m-0">
                       <input type="number" required
                         data-type="float"
-                        v-model="income.amount"
+                        v-model.number="income.amount"
                         v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
                         v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'">
                     </div>

@@ -1,3 +1,24 @@
+{% set languages = [
+  {'value': 'en', 'text': 'English'},
+  {'value': 'sp', 'text': 'Spanish'},
+  {'value': 'other', 'text': 'Other'}
+] %}
+
+{% set phoneTypes = [
+  {'value': 'cell', 'text': 'Cell'},
+  {'value': 'home', 'text': 'Home'},
+  {'value': 'work', 'text': 'Work'}
+] %}
+
+{% set contactTimes = [
+  {'value': 'morning', 'text': 'Morning (10:00 AM - 12:00 PM)'},
+  {'value': 'noon', 'text': 'Noon (12:00PM - 2:00PM)'},
+  {'value': 'afternoon', 'text': 'Afternoon (2:00PM - 4:00PM)'},
+  {'value': 'evening', 'text': 'Evening (4:00PM - 6:00PM)'},
+  {'value': 'saturday', 'text': 'Saturday (10:00AM - 4:00PM)'}
+] %}
+
+
 <fieldset class="d-block w-100">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-contact">
@@ -15,108 +36,133 @@
         <div class="m-bottom-2">
 
           <label class="{{styles.labels}}" for="person-0-phone">
-            {{ __('Best time to contact you?', 'accessnyc-screener') }}
+            {{ __('Language Spoken', 'accessnyc-screener') }}
           </label>
           <div class="p-top">
+            {% for language in languages %}
             <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input type="checkbox" value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('English', 'accessnyc-screener') }}</span>
+              <input type="checkbox" value="{{ language.value }}"
+                data-object="client"
+                data-key="language"
+                v-on:change="push">
+              <span class="styled-checkbox-label">{{ __(language.text, 'accessnyc-screener') }}</span>
             </label>
-            <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input type="checkbox" value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Spanish', 'accessnyc-screener') }}</span>
-            </label>
-            <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input type="checkbox" value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Other', 'accessnyc-screener') }}</span>
-            </label>
+            {% endfor %}
           </div>
 
         </div>
 
         <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="person-0-phone">
-            {{ __('Phone', 'accessnyc-screener') }}
+          <label class="{{styles.labels}}" for="client-phone">
+            {{ __('Phone Number', 'accessnyc-screener') }}
           </label>
-          <input id="person-0-phone" name="Person[0].phone" value="" required>
+          <input id="client-phone" name="Client.phone" value="" type="tel" required
+            v-model="client._attrs.phone">
         </div>
 
         <div class="m-bottom-2">
+          <label class="{{styles.labels}}">
+            {{ __('Phone Type', 'accessnyc-screener') }}
+          </label>
+          <div class="p-top">
+            {% for option in phoneTypes %}
+            <label class="styled-radio screener-label d-block m-bottom">
+              <input type="radio" value="{{ option.value }}" name="Client.phoneType"
+                data-object="client"
+                data-key="phoneType"
+                v-model="client._attrs.phoneType">
+              <span class="styled-radio-label">{{ __(option.text, 'accessnyc-screener') }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
 
-          <label class="{{styles.labels}}" for="person-0-phone">
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="client-phone">
+            {{ __('Alternate Phone Number', 'accessnyc-screener') }}
+          </label>
+          <input id="client-phone" name="Client.phoneAlt" value="" type="tel" required
+            v-model="client._attrs.phoneAlt">
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}">
+            {{ __('Alternate Phone Type', 'accessnyc-screener') }}
+          </label>
+          <div class="p-top">
+            {% for option in phoneTypes %}
+            <label class="styled-radio screener-label d-block m-bottom">
+              <input type="radio" value="{{ option.value }}" name="Client.phoneAltType"
+                data-object="client"
+                data-key="phoneAltType"
+                v-model="client._attrs.phoneAltType">
+              <span class="styled-radio-label">{{ __(option.text, 'accessnyc-screener') }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}">
             {{ __('Best time to contact you?', 'accessnyc-screener') }}
           </label>
           <div class="p-top">
+            {% for option in contactTimes %}
             <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input
-                type="checkbox"
-                value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Morning (10:00 AM - 12:00 PM)', 'accessnyc-screener') }}</span>
+              <input type="checkbox" value="{{ option.value }}"
+                data-object="client"
+                data-key="contactTimes"
+                v-on:change="push">
+              <span class="styled-checkbox-label">{{ __(option.text, 'accessnyc-screener') }}</span>
             </label>
-            <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input
-                type="checkbox"
-                value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Noon (12:00PM - 2:00PM)', 'accessnyc-screener') }}</span>
-            </label>
-            <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input
-                type="checkbox"
-                value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Afternoon (2:00PM - 4:00PM)', 'accessnyc-screener') }}</span>
-            </label>
-            <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input
-                type="checkbox"
-                value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Evening (4:00PM - 6:00PM)', 'accessnyc-screener') }}</span>
-            </label>
-            <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input
-                type="checkbox"
-                value="1"
-                data-type="boolean">
-              <span class="styled-checkbox-label">{{ __('Saturday (10:00AM - 4:00PM)', 'accessnyc-screener') }}</span>
-            </label>
+            {% endfor %}
           </div>
-
         </div>
 
         <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="person-0-email">
+          <label class="{{styles.labels}}" for="client-email">
             {{ __('Email', 'accessnyc-screener') }}
           </label>
-          <input class="w-input-double" id="person-0-email" name="Person[0].email" value="" required>
+          <input class="w-input-double" id="client-email" name="Client.email" value="" required
+            v-model="client._attrs.email">
         </div>
 
         <hr class="screener-divider">
 
         <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="person-0-address-1">
-            {{ __('Street Address 1', 'accessnyc-screener') }}
+          <label class="{{styles.labels}}" for="client-address-1">
+            {{ __('Street #', 'accessnyc-screener') }}
           </label>
-          <input class="w-input-double" id="person-0-address-1" name="Person[0].address-1" value="" required>
+          <input class="w-input-double" id="client-address-1" name="Client.streetNumber" value="" required
+            v-model="client._attrs.streetNumber">
         </div>
 
         <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="person-0-address-2">
-            {{ __('Street Address 2', 'accessnyc-screener') }}
+          <label class="{{styles.labels}}" for="client-address-2">
+            {{ __('Street Name', 'accessnyc-screener') }}
           </label>
-          <input id="person-0-address-2" name="Person[0].address-2" value="" required>
+          <input id="client-address-2" name="Client.streetName" value="" required
+            v-model="client._attrs.streetName">
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="client-unit">
+            {{ __('Unit #', 'accessnyc-screener') }}
+          </label>
+          <input id="client-unit" name="Client.unit" value="" required
+            v-model="client._attrs.unit">
         </div>
 
         <div>
-          <label class="{{styles.labels}}" for="person-0-state">
-            {{ __('City', 'accessnyc-screener') }}
+          <label class="{{styles.labels}}" for="client-borough">
+            {{ __('Borough', 'accessnyc-screener') }}
           </label>
-          <input id="person-0-state" name="Person[0].state" value="" required>
+          <select id="client-borough" name="Client.borough" value="" required
+            v-model="client._attrs.borough">
+            {% for location in locations %}
+            <option value="{{ location.value }}">{{ __(location.text, 'accessnyc-screener') }}</option>
+            {% endfor %}
+          </select>
         </div>
 
       </div>

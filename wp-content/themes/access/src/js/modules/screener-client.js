@@ -68,7 +68,9 @@ class ScreenerClient {
           this._setAttr(key, param[key]);
         }
       }
-    } else {
+    } /*else if (_.isArray(this.get(param))) {
+      console.dir('array');
+    }*/ else {
       this._setAttr(param, value);
     }
     return this;
@@ -108,8 +110,8 @@ class ScreenerClient {
 }
 
 ScreenerClient.LANGUAGE = [
-  'english',
-  'spanish',
+  'en',
+  'sp',
   'other'
 ];
 
@@ -119,7 +121,7 @@ ScreenerClient.PHONE_TYPE = [
   'work'
 ];
 
-ScreenerClient.CONTACT_TIME = [
+ScreenerClient.CONTACT_TIMES = [
   'morning',
   'noon',
   'afternoon',
