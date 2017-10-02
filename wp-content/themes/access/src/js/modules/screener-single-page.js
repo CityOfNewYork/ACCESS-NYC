@@ -96,7 +96,8 @@ class ScreenerSinglePage {
         'client': new ScreenerClient(),
         'staff': new ScreenerStaff(),
         'categoriesCurrent': [],
-        'disclaimer': false
+        'disclaimer': false,
+        'expenses': []
       },
       'methods': {
         'resetAttr': function(event) {
@@ -161,6 +162,7 @@ class ScreenerSinglePage {
           if (dif > 0) { // add members if positive
             for (let i = 0; i <= dif - 1; i++) {
               let person = new ScreenerPerson();
+              person._attrs.guid = Utility.guid();
               this.people.push(person);
             }
           } else if (dif < 0) { // remove members if negative
@@ -175,37 +177,40 @@ class ScreenerSinglePage {
          *                         key {income key}
          *                         value {model attribute value}
          */
-        'pushIncome': function(event) {
-          let data = event.currentTarget.dataset;
-          let value = ScreenerSinglePage.getTypedVal(event.currentTarget.value);
-          let person = parseInt(data.person);
-          let subkey = data.subkey;
-          let incomes = this.people[person]._attrs[data.key];
+        'pushPayment': function(event) {
+          let el = event.currentTarget;
+          let obj = el.dataset.object;
+          let index = parseInt(el.dataset.index);
+          let value = el.value;
+          let key = el.dataset.key;
+          // let keyIndex = el.dataset.keyIndex;
+          // let keySubKey = el.dataset.keySubKey;
+          // let current = this[obj][index]._attrs[key];
           // if the income exists
-          if (typeof incomes[data.income] === 'undefined') {
-            // create a new income
-            this.people[person]._attrs[data.key].push({
-              amount: 0,
-              type: value,
-              frequency: 'monthly'
-            });
+          if (value === '' || el.checked === false) {
+            // remove income
           } else {
-            // update the value of the existing income
-            this.people[person]
-              ._attrs[data.key][data.income][subkey] = value;
+            // create a new income
+            this[obj][index]._attrs[key].push({
+              amount: '',
+              type: value,
+              frequency: 'monthly',
+              guid: Utility.guid()
+            });
           }
-        },
-        /**
-         * Check for single occupant of household
-         * @return {boolean} if household is 1 occupant
-         */
-        'singleOccupant': function() {
-          return (this.household._attrs.members === 1);
+          /*} else {
+            // update the value of the existing income
+            this[obj][index]
+              ._attrs[key][keyIndex][keySubKey] = value;
+          }*/
+          console.dir(this[obj][index]);
         },
         /**
          * Push/Pull items in an array
          * @param {object} event listener object, requires data;
          *                       {object} array to push to
+         *                       {key} if object is contained in a model,
+         *                       add the data-key parameter
          */
         'push': function(event) {
           let el = event.currentTarget;
@@ -238,6 +243,13 @@ class ScreenerSinglePage {
          */
         'recap': function() {
           ScreenerSinglePage._renderRecap(this);
+        },
+        /**
+         * Check for single occupant of household
+         * @return {boolean} if household is 1 occupant
+         */
+        'singleOccupant': function() {
+          return (this.household._attrs.members === 1);
         }
       }
     });

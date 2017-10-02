@@ -108,14 +108,13 @@
               </label>
 
               <select class="screener-select"
-                data-income="0"
+                data-object="people"
                 data-key="incomes"
-                data-subkey="type"
 
-                v-bind:data-person="personIndex"
+                v-bind:data-index="personIndex"
                 v-bind:id="'person-' + personIndex + '-incomes-0'"
                 v-bind:name="'Person[' + personIndex + '].incomes[0].type'"
-                v-on:change="pushIncome">
+                v-on:change="pushPayment">
                 {% for option in incomeOptions %}
                 <option value="{{ option.value }}">
                   {{ __(option.text, 'accessnyc-screener') }}
@@ -200,13 +199,12 @@
                   </label>
                   <select class="screener-select"
                       data-key="incomes"
-                      data-subkey="type"
+                      data-object="people"
 
-                      v-bind:data-income="incomeIndex + 1"
-                      v-bind:data-person="personIndex"
+                      v-bind:data-index="personIndex"
                       v-bind:id="'person-' + personIndex + '-incomes-' + (incomeIndex + 1) + ''"
                       v-bind:name="'Person[' + personIndex + '].incomes[' + (incomeIndex + 1) + '].type'"
-                      v-on:change="pushIncome">
+                      v-on:change="pushPayment">
                     {% for option in incomeOptions %}
                     <option value="{{ option.value }}">
                       {{ __(option.text, 'accessnyc-screener') }}

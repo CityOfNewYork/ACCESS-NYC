@@ -149,7 +149,20 @@ Utility.camelToUpper = function(str) {
   return str.replace(/([A-Z])/g, function($1) {
     return '_' + $1;
   }).toUpperCase();
-}
+};
+
+/**
+ * Return a globally unique identifier
+ * @return {string} guid
+ */
+Utility.guid = function() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+};
 
 /**
  * Site constants.

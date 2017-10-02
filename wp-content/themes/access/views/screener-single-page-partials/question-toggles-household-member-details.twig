@@ -34,8 +34,11 @@
 
           <label class="styled-checkbox screener-checkbox screener-label">
             <input type="checkbox" value="true"
-              data-value="{{dataKey}}"
-              v-bind:name="'Person[' + personIndex + '].{{dataKey}}'">
+              data-object="people"
+              data-key="{{dataKey}}"
+              v-bind:data-index="personIndex"
+              v-bind:name="'Person[' + personIndex + '].{{dataKey}}'"
+              v-on:change="setAttr">
             <span class="styled-checkbox-label">
               <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
             </span>
