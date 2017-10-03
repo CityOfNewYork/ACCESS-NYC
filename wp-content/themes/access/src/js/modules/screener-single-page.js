@@ -100,6 +100,11 @@ class ScreenerSinglePage {
         'expenses': []
       },
       'methods': {
+        /**
+         * Resets a attribute matrix, ex "none of these apply"
+         * @param  {object} event the click event
+         * @return {null}
+         */
         'resetAttr': function(event) {
           let el = event.currentTarget;
           let obj = el.dataset.object;
@@ -183,14 +188,15 @@ class ScreenerSinglePage {
           let index = parseInt(el.dataset.index);
           let value = el.value;
           let key = el.dataset.key;
-          // let keyIndex = el.dataset.keyIndex;
-          // let keySubKey = el.dataset.keySubKey;
-          // let current = this[obj][index]._attrs[key];
-          // if the income exists
+          // if the payment exists
           if (value === '' || el.checked === false) {
-            // remove income
+            // remove payment
+            let current = _.findIndex(
+              this[obj][index]._attrs[key], {'type': value}
+            );
+            this[obj][index]._attrs[key].splice(current, 1);
           } else {
-            // create a new income
+            // create a new payment
             this[obj][index]._attrs[key].push({
               amount: '',
               type: value,
@@ -198,12 +204,29 @@ class ScreenerSinglePage {
               guid: Utility.guid()
             });
           }
-          /*} else {
-            // update the value of the existing income
-            this[obj][index]
-              ._attrs[key][keyIndex][keySubKey] = value;
-          }*/
           console.dir(this[obj][index]);
+        },
+        // 'getPayments': function(obj, key) {
+        //   console.dir([obj, key]);
+        //   let attrs = _.pluck(this[obj], '_attrs');
+        //   let payments = _.pluck(attrs, key);
+        //   let types = _.pluck(payments[0], 'type');
+        //   console.dir([attrs, payments, types]);
+        //   return types
+        // },
+        /**
+         * Find a payment by type in a collection
+         * @param  {string} obj    the vue opject to search
+         * @param  {integer} index the index of the model within the vue object
+         * @param  {string} key    the key of the model's attr
+         * @param  {[type]} type   the type value to search by
+         * @return {object}        the payment, false if not found
+         */
+        'getPayment': function(obj, index, key, type) {
+          let payment = _.findWhere(
+            this[obj][index]._attrs[key], {'type': type}
+          );
+          return (payment) ? payment : false;
         },
         /**
          * Push/Pull items in an array
@@ -221,13 +244,19 @@ class ScreenerSinglePage {
           // with storage in ._attrs, so we'll get the value for processing
           let current = (typeof key === 'undefined')
             ? this[obj] : this[obj].get(key);
+
+          // get the current index
           let index = current.indexOf(value);
+          // if (index > -1) return;
+
           // if checked, push, if not remove item
           if (el.checked) {
             current.push(value);
           } else if (index > -1) {
             current.splice(index, 1);
           }
+          // remove duplicates
+          current = _.uniq(current);
           // if there is a key, it's probably one of the custom modules
           // with storage in ._attrs
           if (typeof key != 'undefined') {
@@ -236,6 +265,9 @@ class ScreenerSinglePage {
             this[obj] = current;
           }
           console.dir(current);
+        },
+        'checked': function(list, value) {
+          return (this[list].indexOf(value) > -1);
         },
         /**
          * [description]
