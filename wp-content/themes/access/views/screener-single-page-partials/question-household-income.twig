@@ -149,11 +149,11 @@
                       <div class="currency-usd m-0">
                         <input required
                           data-type="float"
-                          data-vv-as="amount"
-                          v-model="income.amount"
                           v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
                           v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'"
-                          v-validate="{required: true, regex: '[0-9.]'}">
+                          v-bind:data-vv-as="income.type + ' income amount'"
+                          v-validate="{required: true, regex: '[0-9.]'}"
+                          v-model="income.amount">
                       </div>
                     </div>
                   </div>
