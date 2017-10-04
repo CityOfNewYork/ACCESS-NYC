@@ -42,7 +42,7 @@
           </label>
           <select id="staff-screener-location" name="Staff.screenerLocation" value=""
             v-model="staff._attrs.screenerLocation">
-            {% for location in locations %}
+            {% for location in screenerLocations %}
             <option value="{{ location.value }}">{{ __(location.text, 'accessnyc-screener') }}</option>
             {% endfor %}
           </select>

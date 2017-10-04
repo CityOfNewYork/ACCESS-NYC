@@ -30,7 +30,7 @@ class ScreenerSinglePage {
 
     /** @private {jQuery} jQuery element array of screener steps. */
     // this._$steps = $(this._el).find(`.${ScreenerSinglePage.CssClass.STEP}`);
-    this._$pages = $(this._el).find(`.${ScreenerSinglePage.CssClass.PAGE}`);
+    // this._$pages = $(this._el).find(`.${ScreenerSinglePage.CssClass.PAGE}`);
 
     /** @private {array<string>} array of selected category IDs */
     // this._categories = [];
@@ -167,7 +167,7 @@ class ScreenerSinglePage {
           if (dif > 0) { // add members if positive
             for (let i = 0; i <= dif - 1; i++) {
               let person = new ScreenerPerson();
-              person._attrs.guid = Utility.guid();
+              // person._attrs.guid = Utility.guid();
               this.people.push(person);
             }
           } else if (dif < 0) { // remove members if negative
@@ -200,8 +200,8 @@ class ScreenerSinglePage {
             this[obj][index]._attrs[key].push({
               amount: '',
               type: value,
-              frequency: 'monthly',
-              guid: Utility.guid()
+              frequency: 'monthly'//,
+              /*guid: Utility.guid()*/
             });
           }
           console.dir(this[obj][index]);
@@ -255,8 +255,10 @@ class ScreenerSinglePage {
           } else if (index > -1) {
             current.splice(index, 1);
           }
+
           // remove duplicates
           current = _.uniq(current);
+
           // if there is a key, it's probably one of the custom modules
           // with storage in ._attrs
           if (typeof key != 'undefined') {
@@ -306,24 +308,24 @@ class ScreenerSinglePage {
       }
     });
 
-    $(this._el).on('change', 'input[type="checkbox"]', (e) => {
+    $(this._el)/*.on('change', 'input[type="checkbox"]', (e) => {
       this._toggleCheckbox(e.currentTarget);
-    }).on('change', `.${ScreenerSinglePage.CssClass.TOGGLE}`, (e) => {
+    })*//*.on('change', `.${ScreenerSinglePage.CssClass.TOGGLE}`, (e) => {
       this._handleToggler(e.currentTarget);
-    }).on('change', `.${ScreenerSinglePage.CssClass.ADD_SECTION}`, (e) => {
+    })*//*.on('change', `.${ScreenerSinglePage.CssClass.ADD_SECTION}`, (e) => {
       this._addMatrixSection(e.currentTarget);
-    }).on('change', `.${ScreenerSinglePage.CssClass.MATRIX_SELECT}`, (e) => {
+    })*//*.on('change', `.${ScreenerSinglePage.CssClass.MATRIX_SELECT}`, (e) => {
       this._toggleMatrix(e.currentTarget);
-    }).on('click', `.${ScreenerSinglePage.CssClass.VALIDATE_STEP}`, (e) => {
+    })*//*.on('click', `.${ScreenerSinglePage.CssClass.VALIDATE_STEP}`, (e) => {
       const $step = $(e.currentTarget)
         .closest(`.${ScreenerSinglePage.CssClass.STEP}`);
       return this._validateStep($step);
-    }).on('blur change', `.${ScreenerSinglePage.CssClass.VALIDATE_STEP_UI}`, (e) => {
+    })*//*.on('blur change', `.${ScreenerSinglePage.CssClass.VALIDATE_STEP_UI}`, (e) => {
       const $step = $(e.currentTarget)
         .closest(`.${ScreenerSinglePage.CssClass.STEP}`);
       const valid = this._validateStep($step);
       return valid;
-    }).on('click', `.${ScreenerSinglePage.CssClass.SUBMIT}`, (e) => {
+    })*/.on('click', `.${ScreenerSinglePage.CssClass.SUBMIT}`, (e) => {
       if (!this._recaptchaRequired) {
         this._submit($(e.currentTarget).data('action'));
       } else {
@@ -355,9 +357,9 @@ class ScreenerSinglePage {
     })//.on('click', `.${ScreenerSinglePage.CssClass.REMOVE_PERSON}`, (e) => {
       //this._removePerson(parseInt($(e.currentTarget).data('person'), 10))
       //    ._renderRecap();
-    /*})*/.on('click', `.${ScreenerSinglePage.CssClass.EDIT_PERSON}`, (e) => {
+    /*})*//*.on('click', `.${ScreenerSinglePage.CssClass.EDIT_PERSON}`, (e) => {
       this._editPerson(parseInt($(e.currentTarget).data('person'), 10));
-    }).on('keyup', 'input[maxlength]', (e) => {
+    })*/.on('keyup', 'input[maxlength]', (e) => {
       this._enforceMaxLength(e.currentTarget);
     })/*.on('click', `.${ScreenerSinglePage.CssClass.RENDER_RECAP}`, (e) => {
       this._renderRecap();

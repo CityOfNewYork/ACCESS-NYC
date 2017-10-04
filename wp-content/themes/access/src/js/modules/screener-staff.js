@@ -86,11 +86,10 @@ class ScreenerStaff {
 }
 
 ScreenerStaff.LOCATION = [
-  'manhattan',
-  'bronx',
-  'queens',
-  'brooklyn',
-  'statenIsland'
+  'community event',
+  'phone call',
+  'door knock',
+  'partner referral'
 ];
 
 export default ScreenerStaff;

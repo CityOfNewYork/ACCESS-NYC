@@ -22,6 +22,8 @@ class ScreenerClient {
       /** @type {array} */
       language: [],
       /** @type {string} */
+      languageOther: '',
+      /** @type {string} */
       phone: '',
       /** @type {string} */
       phoneType: '',
