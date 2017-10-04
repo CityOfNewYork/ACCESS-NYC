@@ -121,7 +121,7 @@ class ScreenerSinglePage {
     // Floats
     $el.on('focus', '[data-type="float"]', this._sanitizeDollarFloat);
     $el.on('keydown', '[data-type="float"]', this._limitDollarFloat);
-    // $el.on('keydown', '[data-type="float"]', this._enforceFloat);
+    $el.on('keydown', '[data-type="float"]', this._enforceFloat);
 
     // Numbers
     $el.on('keydown', 'input[type="number"]', this._enforceNumbersOnly);
@@ -187,16 +187,29 @@ class ScreenerSinglePage {
    * @return [null]
    */
   _enforceFloat(event) {
+    let block = true;
+    let value = event.currentTarget.value;
+
     if (
       (event.keyCode >= 48 && event.keyCode <= 57) || // key board
       (event.keyCode >= 96 && event.keyCode <= 105) || // key pad
-      event.keyCode === 190 || // "." period
-      event.keyCode === 8 // backspace
+      event.keyCode === 190 // "." period
     ) {
-      return true;
-    } else {
-      event.preventDefault();
+      block = false;
+      if (value.indexOf('.') > -1) {
+        let split = value.split('.');
+        if (split[1].length == 2){
+          block = true;
+        }
+      }
     }
+
+    // Backspace
+    if (event.keyCode === 8) {
+      block = false;
+    }
+
+    if (block) event.preventDefault();
   }
 
   /**
@@ -211,6 +224,7 @@ class ScreenerSinglePage {
       numeral: true,
       numeralPositiveOnly: true
     });
+
     event.currentTarget.addEventListener('blur', function(event) {
       let value = event.currentTarget.value;
       let postfix = '';
@@ -234,16 +248,20 @@ class ScreenerSinglePage {
   _limitDollarFloat(event) {
     let value = event.currentTarget.value;
     let block = false;
+
     // if there is a decimal...
-    // and the value length is 8 digits + 1 decimal...
-    if ( value.indexOf('.') > -1 && value.length === 9 ) {
-      // and the key pressed isn't the backspace...
-      block = (event.keyCode !== 8) ? true : block;
+    if (value.indexOf('.') > -1) {
+      // and the value length is 8 digits + 1 decimal...
+      if (value.length === 9) {
+        // and the key pressed isn't the backspace...
+        block = (event.keyCode !== 8) ? true : block;
+      }
     // if the value length is 6 digits...
     } else if (value.length === 6) {
       // and the key pressed isn't the backspace or '.' ...
       block = (event.keyCode !== 8 && event.keyCode !== 190) ? true : block;
     }
+
     if (block) event.preventDefault(); // stop input
   }
 
