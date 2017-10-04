@@ -119,7 +119,7 @@ Utility.validatePhoneNumber = function(number) {
 /**
  * Get just the phone number of a given value
  * @param  {string} value The string to get numbers from
- * @return {array}       An array with matched blocks
+ * @return {array}        An array with matched blocks
  */
 Utility.parsePhoneNumber = function(value) {
   return value.match(/\d+/g); // get only digits

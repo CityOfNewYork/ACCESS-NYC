@@ -16,24 +16,45 @@
           <label class="{{styles.labels}}" for="staff-first">
             {{ __('PEU Staff First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <input id="staff-first-name" name="Staff.firstName" value="" required
-            v-model="staff._attrs.firstName">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Staff.firstName')}">
+            <div class="error-message"
+              v-if="errors.has('Staff.firstName')">v{ errors.first('Staff.firstName') }</div>
+            <input id="staff-first-name" name="Staff.firstName" value="" required
+              data-vv-as="staff's first name"
+              v-validate="{required: true}"
+              v-model="staff._attrs.firstName">
+          </div>
         </div>
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="staff-last">
             {{ __('PEU Staff Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <input id="staff-last-name" name="Staff.lastName" value="" required
-            v-model="staff._attrs.lastName">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Staff.lastName')}">
+            <div class="error-message"
+              v-if="errors.has('Staff.lastName')">v{ errors.first('Staff.lastName') }</div>
+            <input id="staff-last-name" name="Staff.lastName" value="" required
+              data-vv-as="staff's last name"
+              v-validate="{required: true}"
+              v-model="staff._attrs.lastName">
+          </div>
         </div>
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="staff-email">
             {{ __('PEU Staff Email', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <input class="w-input-double" id="staff-email" name="Staff.email" value="" type="email" required
-            v-model="staff._attrs.email">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Staff.email')}">
+            <div class="error-message"
+              v-if="errors.has('Staff.email')">v{ errors.first('Staff.email') }</div>
+            <input class="w-input-double" id="staff-email" name="Staff.email" value="" type="email" required
+              data-vv-as="staff email"
+              v-validate="{required: true, email: true}"
+              v-model="staff._attrs.email">
+          </div>
         </div>
 
         <div class="m-bottom-2">

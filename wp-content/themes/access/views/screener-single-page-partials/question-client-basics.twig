@@ -16,28 +16,47 @@
           <label class="{{styles.labels}}" for="client-0-first">
             {{ __('First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <input id="client-0-first" name="Client[0].first" value="" required
-            v-model="client._attrs.firstName">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Client[0].firstName')}">
+            <div class="error-message"
+              v-if="errors.has('Client[0].firstName')">v{ errors.first('Client[0].firstName') }</div>
+            <input id="client-0-first-name" name="Client[0].firstName" value="" required
+              data-vv-as="client's first name"
+              v-validate="{required: true}"
+              v-model="client._attrs.firstName">
+          </div>
         </div>
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="client-0-last">
             {{ __('Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <input id="client-0-last" name="Client[0].last" value="" required
-            v-model="client._attrs.lastName">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Client[0].lastName')}">
+            <div class="error-message"
+              v-if="errors.has('Client[0].lastName')">v{ errors.first('Client[0].lastName') }</div>
+            <input id="client-0-last-name" name="Client[0].lastName" value="" required
+              data-vv-as="client's last name"
+              v-validate="{required: true}"
+              v-model="client._attrs.firstName">
+          </div>
         </div>
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="person-0-age">
             {{ __('How old are you?', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
-          <div class="screener-question-container">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Person[0].age')}">
+            <div class="error-message"
+              v-if="errors.has('Person[0].age')">v{ errors.first('Person[0].age') }</div>
             <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" required
               data-type="integer"
               data-object="people"
               data-key="age"
               data-index="0"
+              data-vv-as="age"
+              v-validate="{required: true, max: 3, min: 0, regex: '[0-9]', numeric: true}"
               v-on:change="setAttr">
           </div>
         </div>
@@ -47,12 +66,15 @@
             {{ __('Zip code?', 'accessnyc-screener') }}
             <span class="c-red">*</span>
           </label>
-          <div id="what-is-your-zip-code">
-            <div class="screener-question-container">
-              <input id="household-zip" name="Household.zip" type="number" maxlength="5" pattern="[0-9]" required
-                data-type="zip"
-                v-model="household._attrs.zip">
-            </div>
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Household.zip')}">
+            <div class="error-message"
+              v-if="errors.has('Household.zip')">v{ errors.first('Household.zip') }</div>
+            <input id="household-zip" name="Household.zip" type="number" maxlength="5" pattern="[0-9]" required
+              data-type="zip"
+              data-vv-as="zip code"
+              v-validate="{required: true, max: 5, regex: '[0-9]', numeric: true, zip: true}"
+              v-model="household._attrs.zip">
           </div>
         </div>
 

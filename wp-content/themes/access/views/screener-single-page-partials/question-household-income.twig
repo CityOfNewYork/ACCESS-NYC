@@ -140,12 +140,20 @@
                     <span class="c-red">*</span>
                   </label>
                   <div class="m-bottom-2">
-                    <div class="currency-usd m-0">
-                      <input type="number" required
-                        data-type="float"
-                        v-model.number="income.amount"
-                        v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
-                        v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'">
+                    <div class="screener-question-container"
+                      v-bind:class="{'error': errors.has('Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')}">
+                      <div class="error-message"
+                        v-if="errors.has('Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')">
+                          v{ errors.first('Person[' + personIndex + '].incomes[' + incomeIndex + '].amount') }
+                      </div>
+                      <div class="currency-usd m-0">
+                        <input required
+                          data-type="float"
+                          v-model="income.amount"
+                          v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
+                          v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'"
+                          v-validate="{required: true, regex: '[0-9.]'}">
+                      </div>
                     </div>
                   </div>
                 </div>

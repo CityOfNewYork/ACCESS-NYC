@@ -176,7 +176,7 @@ gulp.task('default', ['build'], function() {
     ghostMode: {
       scroll: true
     },
-    open:true
+    open:false
   });
 
   // Watch .scss files
