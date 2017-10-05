@@ -78,16 +78,24 @@
                       <span v-else>{{ __('What is this person’s relationship to the head of the household?', 'accessnyc-screener') }}</span>
                       <span class="c-red">*</span>
                     </label>
-                    <select class="screener-select" required
-                      v-model="p._attrs.headOfHouseholdRelation"
-                      v-bind:id="'person-' + personIndex + '-relation'"
-                      v-bind:name="'Person[' + personIndex + '].headOfHouseholdRelation'">
-                      {% for option in headOfHouseholdRelationOptions %}
-                      <option value="{{ option.value }}">
-                        {{ __(option.text, 'accessnyc-screener') }}
-                      </option>
-                      {% endfor %}
-                    </select>
+                    <div class="screener-question-container"
+                      v-bind:class="{'error': errors.has('Person[' + personIndex + '].headOfHouseholdRelation')}">
+                      <div class="error-message" v-if="errors.has('Person[' + personIndex + '].headOfHouseholdRelation')">
+                        v{ errors.first('Person[' + personIndex + '].headOfHouseholdRelation') }
+                      </div>
+                      <select class="screener-select" required
+                        data-vv-as="head of household relation"
+                        v-validate="{required: true}"
+                        v-model="p._attrs.headOfHouseholdRelation"
+                        v-bind:id="'person-' + personIndex + '-relation'"
+                        v-bind:name="'Person[' + personIndex + '].headOfHouseholdRelation'">
+                        {% for option in headOfHouseholdRelationOptions %}
+                        <option value="{{ option.value }}">
+                          {{ __(option.text, 'accessnyc-screener') }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
                   </div>
                 </div>
 
@@ -96,14 +104,22 @@
                     {{ __('How old are they?', 'accessnyc-screener') }}
                     <span class="c-red">*</span>
                   </label>
+                  <div class="screener-question-container"
+                    v-bind:class="{'error': errors.has('Person[' + personIndex + '].age')}">
+                    <div class="error-message" v-if="errors.has('Person[' + personIndex + '].age')">
+                      v{ errors.first('Person[' + personIndex + '].age') }
+                    </div>
                     <input type="number" min="0" maxlength="3" pattern="[0-9]" step="1" required
                       data-object="people"
                       data-key="age"
                       data-type="integer"
+                      data-vv-as="age"
+                      v-validate="{required: true, max: 3, min: 0, regex: '[0-9]', numeric: true}"
                       v-bind:data-index="personIndex"
                       v-bind:id="'person-' + personIndex + '-age'"
                       v-bind:name="'Person[' + personIndex + '].age'"
                       v-on:change="setAttr">
+                  </div>
                 </div>
 
 

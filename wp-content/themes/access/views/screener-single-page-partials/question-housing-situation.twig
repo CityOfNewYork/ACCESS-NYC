@@ -54,20 +54,28 @@
           {% endfor %}
         </div>
 
-        <div class="hidden" id="screener-rental-type">
+        <div v-if="household._attrs.livingRenting">
 
           <div class="m-top" data-scope="_household">
             <label class="{{styles.labels}}" for="housing-livingRentalType">
               {{ __('Which type of rental do you live in?', 'accessnyc-screener') }}
+              <span class="c-red">*</span>
             </label>
-            <select id="housing-livingRentalType" class="screener-select js-screener-toggle" name="Household.livingRentalType"
-              data-val="livingRentalType"
-              data-toggles="#screener-lease-owner"
-              v-model="household._attrs.livingRentalType">
-              {% for option in housingOptions %}
-              <option value="{{option.value}}">{{ __(option.text, 'accessnyc-screener') }}</option>
-              {% endfor %}
-            </select>
+            <div class="screener-question-container"
+              v-bind:class="{'error': errors.has('Household.livingRentalType')}">
+              <div class="error-message" v-if="errors.has('Household.livingRentalType')">
+                {{ __('Please select a rental type.', 'accessnyc-screener') }}
+              </div>
+              <select id="housing-livingRentalType" class="screener-select js-screener-toggle" name="Household.livingRentalType" required
+                data-val="livingRentalType"
+                data-toggles="#screener-lease-owner"
+                v-model="household._attrs.livingRentalType"
+                v-validate="{required: true}">
+                {% for option in housingOptions %}
+                <option value="{{option.value}}">{{ __(option.text, 'accessnyc-screener') }}</option>
+                {% endfor %}
+              </select>
+            </div>
           </div>
 
           <div class="m-top-2 js-screener-checkbox-group hidden" id="screener-lease-owner">
@@ -104,19 +112,27 @@
               <label class="{{styles.labels}}">
                 {{ __('Who is on the lease?', 'accessnyc-screener') }}
               </label>
-              <div v-for="(p, personIndex) in people">
-                <label class="styled-checkbox screener-checkbox screener-label">
-                  <input type="checkbox" value="true"
-                    data-type="boolean"
-                    data-object="people"
-                    data-key="livingRentalOnLease"
-                    v-bind:data-index="personIndex"
-                    v-bind:name="'Person[' + personIndex + '].livingRentalOnLease'"
-                    v-on:change="setAttr">
-                  <span class="styled-checkbox-label">
-                    <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                  </span>
-                </label>
+              <div class="screener-question-container"
+                v-bind:class="{'error': errors.has('Person.livingRentalOnLease')}">
+                <div class="error-message"
+                  v-if="errors.has('Person.livingRentalOnLease')">
+                    {{ __('Please select at least one person who is on the lease.', 'accessnyc-screener') }}
+                </div>
+                <div v-for="(p, personIndex) in people">
+                  <label class="styled-checkbox screener-checkbox screener-label">
+                    <input type="checkbox" value="true"
+                      data-type="boolean"
+                      data-object="people"
+                      data-key="livingRentalOnLease"
+                      v-validate="{required: true}"
+                      v-bind:data-index="personIndex"
+                      v-bind:name="'Person.livingRentalOnLease'"
+                      v-on:change="setAttr">
+                    <span class="styled-checkbox-label">
+                      <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+                    </span>
+                  </label>
+                </div>
               </div>
 
             </div>
@@ -125,7 +141,7 @@
 
         </div>
 
-        <div class="m-top-2 hidden" id="screener-homeowner">
+        <div class="m-top-2" v-if="household._attrs.livingOwner">
 
           <div v-if="singleOccupant()">
 
@@ -159,15 +175,21 @@
             <label class="{{styles.labels}}">
               {{ __('Who is the owner?', 'accessnyc-screener') }}
             </label>
-            <div class="screener-members">
+            <div class="screener-question-container"
+              v-bind:class="{'error': errors.has('Person.livingOwnerOnDeed')}">
+              <div class="error-message"
+                v-if="errors.has('Person.livingOwnerOnDeed')">
+                  {{ __('Please select at least one owner.', 'accessnyc-screener') }}
+              </div>
               <div v-for="(p, personIndex) in people">
                 <label class="styled-checkbox screener-checkbox screener-label">
                   <input type="checkbox" value="true" name="livingOwnerOnDeed"
                     data-type="boolean"
                     data-object="people"
                     data-key="livingOwnerOnDeed"
+                    v-validate="{required: true}"
                     v-bind:data-index="personIndex"
-                    v-bind:name="'Person[' + personIndex + '].livingOwnerOnDeed'"
+                    v-bind:name="'Person.livingOwnerOnDeed'"
                     v-on:change="setAttr">
                   <span class="styled-checkbox-label">
                     <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>

@@ -82,9 +82,7 @@ class ScreenerSinglePage {
         'push': ScreenerSinglePage.push,
         'checked': ScreenerSinglePage.checked,
         'singleOccupant': ScreenerSinglePage.singleOccupant,
-        'recap': function() {
-          ScreenerSinglePage.renderRecap(this);
-        },
+        'validate': ScreenerSinglePage.validate
       }
     });
 
@@ -242,7 +240,7 @@ class ScreenerSinglePage {
   /**
    * For a given dollar float input, product requirements dictate we should
    * limit values to 6 digits before the decimal point and 2 after.
-   * @param  {object} event the blur event object
+   * @param  {object} event the keydown event object
    * @return {null}
    */
   _limitDollarFloat(event) {
@@ -271,7 +269,6 @@ class ScreenerSinglePage {
    * @return {this} Screener
    */
   _goToPage(page) {
-
     let $window = document.querySelector('#js-layout-body');
 
     $window.scrollTop = 0;
@@ -338,35 +335,6 @@ class ScreenerSinglePage {
   }
 
   /**
-   * For a given input, if the input has a value and can be coerced to a
-   * positive integer then enforce that. Otherwise, show an error message.
-   * @param {HTMLELement} el - Input element to validate.
-   * @return {this} Screener
-   */
-  // _validateIntegerField(el) {
-  //   const $input = $(el);
-  //   const val = $input.val();
-  //   this._removeError(el);
-
-  //   // If there is a value for the element, make sure that it is rounded to
-  //   // an integer and not negative.
-  //   if (val && !_.isNaN(parseInt(val, 10)) && _.isNumber(parseInt(val, 10))) {
-  //     let parsed = Math.abs(parseInt(val, 10));
-  //     $input.val(parsed);
-  //   } else if (val) {
-  //     // Otherwise, show an error message as long as a value was entered.
-  //     this._showError(el, ScreenerSinglePage.ErrorMessage.INTEGER);
-  //     $input.one('keyup', () => {
-  //       this._validateIntegerField(el);
-  //     });
-  //   } else if ($input.prop('required')) {
-  //     this._validateRequiredField(el);
-  //   }
-
-  //   return this;
-  // }
-
-  /**
    * For a given input, if it has the "toggles" data attribute, show or hide
    * another element selected by the toggles values based on the value of the
    * input. If the input has a "shows" or "hides" data attribute, show or hide
@@ -396,8 +364,6 @@ class ScreenerSinglePage {
     }
     return this;
   }
-
-
 
   /**
    * Returns the JSON object for Drools submission.
@@ -533,6 +499,18 @@ ScreenerSinglePage.validateZipField = {
   }
 };
 
+ScreenerSinglePage.validate = function(event) {
+  event.preventDefault();
+  this.$validator.validateAll().then((valid) => {
+    if (valid) {
+      window.location.hash = event.currentTarget.hash;
+      ScreenerSinglePage.renderRecap(this);
+      return;
+    }
+    alert('Some required fields are not filled out.');
+  });
+};
+
 /**
  * Push/Pull items in an array
  * @param {object} event listener object, requires data;
@@ -552,7 +530,6 @@ ScreenerSinglePage.push = function(event) {
 
   // get the current index
   let index = current.indexOf(value);
-  // if (index > -1) return;
 
   // if checked, push, if not remove item
   if (el.checked) {
@@ -571,7 +548,7 @@ ScreenerSinglePage.push = function(event) {
   } else {
     this[obj] = current;
   }
-  console.dir(current);
+  // console.dir(current);
 };
 
 /**
@@ -598,10 +575,10 @@ ScreenerSinglePage.resetAttr = function(event) {
   for (var i = keys.length - 1; i >= 0; i--) {
     if (typeof index === 'undefined') {
       this[obj].set(keys[i], value);
-      console.dir(this[obj]);
+      // console.dir(this[obj]);
     } else {
       this[obj][index].set(keys[i], value);
-      console.dir(this[obj][index]);
+      // console.dir(this[obj][index]);
     }
     let el = document.querySelector(`[data-key="${keys[i]}"]`);
     if (el) el.checked = false;
@@ -625,14 +602,14 @@ ScreenerSinglePage.setAttr = function(event) {
   let reset = el.dataset.reset;
   // get the typed value;
   let value = ScreenerSinglePage.getTypedVal(el);
-  console.dir([key, value]);
+  // console.dir([key, value]);
   // set the attribute;
   if (typeof index === 'undefined') {
     this[obj].set(key, value);
-    console.dir(this[obj]);
+    // console.dir(this[obj]);
   } else {
     this[obj][index].set(key, value);
-    console.dir(this[obj][index]);
+    // console.dir(this[obj][index]);
   }
   // reset an element based on this value;
   if (typeof reset != 'undefined') {
@@ -691,7 +668,7 @@ ScreenerSinglePage.pushPayment = function(event) {
       /*guid: Utility.guid()*/
     });
   }
-  console.dir(this[obj][index]);
+  // console.dir(this[obj][index]);
 };
 
 /**
@@ -874,7 +851,7 @@ ScreenerSinglePage.getTypedVal = function(input) {
       break;
     }
   }
-  console.log([val, finalVal]);
+  // console.log([val, finalVal]);
   return finalVal;
 };
 
