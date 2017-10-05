@@ -68,7 +68,7 @@
             <div class="m-bottom-2">
               <label class="{{styles.labels}}">
                 {{ __('How much do you pay for: ', 'accessnyc-screener') }}
-                <span class="c-blue">v{ expense.type }</span>{{ __('?') }}
+                <span class="c-blue">v{ localString(expense.type) }</span>{{ __('?') }}
                 <span class="c-red">*</span>
               </label>
               <div class="screener-question-container"
@@ -92,7 +92,7 @@
               <label class="{{styles.labels}}"
                 v-bind:for="'person-0-expenses-' + expenseIndex + '-frequency'">
                 {{ __('How often do you pay for: ', 'accessnyc-screener') }}
-                <span class="c-blue">v{ expense.type }</span>{{ __('?') }}
+                <span class="c-blue">v{ localString(expense.type) }</span>{{ __('?') }}
               </label>
               <div class="screener-checkboxes">
                 {% for frequency in frequencyOptions %}
@@ -143,7 +143,7 @@
 
             <div>
               <label class="{{styles.labels}}">
-                {{ __('Who contributes to', 'accessnyc-screener') }}: <span class="c-blue">{{ expense.value }}</span>{{ __('?') }}
+                {{ __('Who contributes to', 'accessnyc-screener') }}: <span class="c-blue">{{ __(expense.text, 'accessnyc-screener') }}</span>{{ __('?') }}
               </label>
               <div v-for="(p, personIndex) in people">
                 <label class="styled-checkbox screener-checkbox screener-label">
@@ -170,7 +170,7 @@
                     <span v-if="personIndex == 0">{{ __('do', 'accessnyc-screener') }}</span>
                     <span v-else>{{ __('does', 'accessnyc-screener') }}</span>
                     <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                    {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ expense.value }}</span>{{ __('?') }}
+                    {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ __(expense.text, 'accessnyc-screener') }}</span>{{ __('?') }}
                     <span class="c-red">*</span>
                   </label>
                   <div class="screener-question-container"
@@ -194,7 +194,7 @@
                     v-bind:for="'person-' + personIndex + '-expenses--frequency'">
                     {{ __('How often do', 'accessnyc-screener') }}
                     <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                    {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ expense.value }}</span>{{ __('?') }}
+                    {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ __(expense.text, 'accessnyc-screener') }}</span>{{ __('?') }}
                   </label>
                   <div class="screener-checkboxes">
                     {% for frequency in frequencyOptions %}

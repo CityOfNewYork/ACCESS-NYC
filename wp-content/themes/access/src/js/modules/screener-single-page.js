@@ -82,7 +82,8 @@ class ScreenerSinglePage {
         'push': ScreenerSinglePage.push,
         'checked': ScreenerSinglePage.checked,
         'singleOccupant': ScreenerSinglePage.singleOccupant,
-        'validate': ScreenerSinglePage.validate
+        'validate': ScreenerSinglePage.validate,
+        'localString': ScreenerSinglePage.localString
       }
     });
 
@@ -856,6 +857,19 @@ ScreenerSinglePage.getTypedVal = function(input) {
 };
 
 /**
+ * Return the local string label for values
+ * @param  {string} slug the slug value of the string
+ * @return {string}      the local string label
+ */
+ScreenerSinglePage.localString = function(slug) {
+  if (slug === '') return slug;
+  return _.findWhere(
+    window.LOCALIZED_STRINGS,
+    {slug: slug}
+  ).label;
+};
+
+/**
  * Component for the person label
  * @type {Object} Vue Component
  */
@@ -863,10 +877,12 @@ ScreenerSinglePage.personLabel = {
   props: ['index', 'person'],
   template: '<span class="c-black">' +
     '<span :class="personIndex(index)"></span> ' +
-    '<span v-if="index == 0">You,</span>' +
-    '<span v-if="person.headOfHousehold"> Head of Household,</span>' +
-    '<span v-if="index != 0"> {{ person.headOfHouseholdRelation }},</span>' +
-    '<span> {{ person.age }}</span>' +
+    '<span v-if="index == 0">You</span>' +
+    '<span v-if="person.headOfHousehold">, Head of Household</span>' +
+    '<span v-if="index != 0 && person.headOfHouseholdRelation != \'\'">' +
+      ', {{ personHeadOfHouseholdRelation(person.headOfHouseholdRelation) }}' +
+    '</span>' +
+    '<span v-if="person.age != 0">, {{ person.age }}</span>' +
   '</span>',
   methods: {
     personIndex: function(index) {
@@ -876,7 +892,8 @@ ScreenerSinglePage.personLabel = {
       };
       classes[name] = true
       return classes;
-    }
+    },
+    personHeadOfHouseholdRelation: ScreenerSinglePage.localString
   }
 };
 

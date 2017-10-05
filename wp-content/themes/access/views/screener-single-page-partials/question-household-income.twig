@@ -127,7 +127,7 @@
                   <label class="{{styles.labels}} m-top-2">
                     <span v-if="singleOccupant()">
                       {{ __('How much do you receive for: ') }}
-                      <span class="c-blue">v{ income.type }</span>{{ __('?', 'accessnyc-screener') }}
+                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
                     </span>
                     <span v-else>
                       {{ __('How much', 'accessnyc-screener') }}
@@ -135,7 +135,7 @@
                       <span v-else>{{ __('does', 'accessnyc-screener') }}</span>
                       <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
                       {{ __('receive for', 'accessnyc-screener') }}:
-                      <span class="c-blue">v{ income.type }</span>{{ __('?', 'accessnyc-screener') }}
+                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
                     </span>
                     <span class="c-red">*</span>
                   </label>
@@ -163,7 +163,7 @@
                   <label class="{{styles.labels}}">
                     <span v-if="singleOccupant()">
                       {{ __('How often do you receive: ') }}
-                      <span class="c-blue">v{ income.type }</span>{{ __('?', 'accessnyc-screener') }}
+                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
                     </span>
                     <span v-else>
                       {{ __('How often', 'accessnyc-screener') }}
@@ -171,7 +171,7 @@
                       <span v-else>{{ __('does', 'accessnyc-screener') }}</span>
                       <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
                       {{ __('receive', 'accessnyc-screener') }}:
-                      <span class="c-blue">v{ income.type }</span>{{ __('?', 'accessnyc-screener') }}
+                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
                     </span>
                   </label>
                   <div class="screener-checkboxes js-screener-checkbox-group">
