@@ -152,22 +152,6 @@
 {% endblock %}
 
 {% block scripts %}
-  {# <script type="text/template" id="screener-member-option-template">
-    <% _.each(people, function(person, i) { %>
-    <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-      <input
-          type="checkbox"
-          name="Person[<%= i %>].<%= attribute %>"
-          value="1"
-          data-type="boolean"
-          <% if ((attribute === 'livingRentalOnLease' && person.leasee) || (attribute === 'livingOwnerOnDeed' && person.owner)) { print('checked') } %>>
-      <span class="styled-checkbox-label">
-        <span class="recap-inline-item"><%= person.relation %></span>
-        <span class="recap-inline-item"><%= person.age %></span>
-      </span>
-    </label>
-    <% }); %>
-  </script> #}
   <script>
     window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
     window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

@@ -1,27 +1,91 @@
-<article class="program-card bg-grey-lightest active" id="program-{{ post.id }}">
-  <div class="program-icon">
-    {% include 'partials/category-icon.twig' %}
-    {# TODO: Add logic to the below conditional for "new" posts - @onebrightlight
-    {% if loop.index == 3 %}<div class="program-label program-label-secondary status-warning">New</div>{% endif %} #}
-  </div>
-  <div class="program-card-body fg-1">
-    <a href="{{ post.get_permalink }}">
-      <h3 class="program-card-title type-h4">
-        {{ post.plain_language_program_name }}
-        {# TODO: Add logic to the below conditional for "new" posts - @onebrightlight
-        {% if loop.index == 3 %}<div class="program-label program-label-secondary status-warning">New</div>{% endif %} #}
-      </h3>
-    </a>
-    {% if not short_post %}<p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>{% endif %}
-    <div class="program-card-summary">
-      {% if post.brief_excerpt and not short_post %}<p>{{ post.brief_excerpt }}</p>{% endif %}
-      <p class="hide-for-print"><a href="{{ post.get_permalink }}">{{__('Learn more', 'accessnyctheme')}}</a></p>
-      {% if show_apply %}
-      <p class="hide-for-print">
-        <a class="btn btn-secondary btn-next m-top" href="{{ post.get_permalink }}?step=how-to-apply">{{__('Apply', 'accessnyc-results')}}</a>
-        <a class="btn btn-primary f-right@tablet-up js-simple-toggle m-top" href="#program-{{ post.id }}">Remove Program</a>
-      </p>
-      {% endif %}
+<article class="p-bottom" id="program-{{ post.id }}">
+
+  <div class="p-2 bg-grey-lightest d-flex">
+
+    <div>
+      {% include 'partials/category-icon.twig' with {width: '80px', height: '80px'} %}
     </div>
+
+    <div class="w-100 p-horizontal">
+
+      <a href="{{ post.get_permalink }}">
+        <h3 class="program-card-title type-h4">
+          {{ post.plain_language_program_name }}
+        </h3>
+      </a>
+      {% if not short_post %}
+        <p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
+      {% endif %}
+
+      <div>
+
+        {% set helpMethods = [
+          'get_help_online',
+          'get_help_in_person',
+          'get_help_by_calling_311'
+        ] %}
+        {% for method in helpMethods %}
+          {% if post.get_field(method) %}
+            <div>
+              {{ post.get_field(method) }}
+            </div>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+    <div class="d-flex fd-column jc-space-between hide-for-print">
+      <div>
+        <a class="btn btn-primary f-right@tablet-up js-simple-toggle" href="#program-{{ post.id }}">Remove&nbsp;Program</a>
+      </div>
+
+      <div>
+        {# <a class="btn btn-secondary js-simple-toggle" href="#program-detail-{{ post.id }}">Learn More</a> #}
+
+        <a class="btn-toggle btn js-simple-toggle" href="#program-detail-{{ post.id }}">
+          Learn More
+        </a>
+      </div>
+    </div>
+
   </div>
+
+  <div class="p-2 d-flex hidden" id="program-detail-{{ post.id }}">
+
+    <div>
+      <div style="width:80px;height:80px;">&nbsp;</div>
+    </div>
+
+    <div class="w-100 p-horizontal">
+
+      <h3>{{__('How it Works', 'accessnyc-program-detail')}}</h3>
+      <div>
+        {{ post.get_field('program_description') }}
+      </div>
+
+      {% if post.heads_up | length %}
+      <h3>{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
+      <div>
+        {{ post.get_field('heads_up') }}
+      </div>
+      <style>
+        {% for icon in post.get_field('heads_up_icons') %}
+        .program-detail-heads-up ul li:nth-child({{ loop.index }}) {
+          background-image: url({{icon.icon.url}});
+        }
+        {% endfor %}
+      </style>
+      {% endif %}
+
+    </div>
+
+  </div>
+
 </article>
+
+
+
+
+
