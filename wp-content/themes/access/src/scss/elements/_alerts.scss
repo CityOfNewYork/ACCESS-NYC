@@ -13,7 +13,7 @@ $icon-size: 32px;
 }
 
 .alert-body {
-  @include flex(1 1 auto);
+  flex: 1 1 auto;
 
   p:last-child {
     margin-bottom: 0;

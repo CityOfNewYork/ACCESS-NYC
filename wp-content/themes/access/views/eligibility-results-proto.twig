@@ -14,7 +14,7 @@
       </svg>
     {# </div> #}
     <div class="d-flex ai-center">
-      <a href="/eligibility-proto/?debug=1#page-disclaimer" class="btn btn-primary btn-small" onclick="location.reload()">New Client</a>
+      <a href="/eligibility-proto/" class="btn btn-primary btn-small" data-js="reload">New Client</a>
     </div>
   </div>
 </header>
@@ -119,4 +119,21 @@
     </div>
   </main>
   {% include 'partials/localized-strings-share.twig' %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
+    {
+      "label": {{ __('Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.', 'accessnyc-screener')|trim|json_encode() }},
+      "slug": "MSG_RELOAD"
+    }
+  ]);
+</script>
+{% if is_debug %}
+<script src="/wp-content/themes/access/assets/js/main.ssp.js?v={{ date().timestamp }}"></script>
+{% else %}
+<script src="/wp-content/themes/access/assets/js/main.ssp.min.js"></script>
+{% endif %}
 {% endblock %}

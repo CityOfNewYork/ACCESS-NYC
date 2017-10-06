@@ -7,16 +7,11 @@ import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
 import ScreenerClient from 'modules/screener-client';
 import ScreenerStaff from 'modules/screener-staff';
-
 import Shared from 'modules/screener';
-
 import Utility from 'modules/utility';
-
 import _ from 'underscore';
 import Vue from 'vue/dist/vue.common';
 import Validator from 'vee-validate';
-
-import Cleave from 'cleave.js/dist/cleave.min';
 
 /**
  * Requires Documentation
@@ -87,35 +82,28 @@ class ScreenerSinglePage {
       }
     });
 
-    window.addEventListener('hashchange', (e) => {
-      const hash = window.location.hash;
-      const $section = $(hash);
-      const type = window.location.hash.split('-')[0];
-      if (type === '#page') {
-        this._goToPage(hash);
-      }
-    });
+
 
     let $el = $(this._el);
 
-    $el.on('click', `.${ScreenerSinglePage.CssClass.SUBMIT}`, (e) => {
-      if (!this._recaptchaRequired) {
-        this._submit($(e.currentTarget).data('action'));
-      } else {
-        $(e.currentTarget).closest(`.${ScreenerSinglePage.CssClass.STEP}`)
-          .find(`.${ScreenerSinglePage.CssClass.ERROR_MSG}`).remove();
-        if (this._recaptchaVerified) {
-          this._submit($(e.currentTarget).data('action'));
-        } else {
-          this._showError($('#screener-recaptcha')[0],
-              ScreenerSinglePage.ErrorMessage.REQUIRED);
-        }
-      }
-    })
+    // $el.on('click', `.${ScreenerSinglePage.CssClass.SUBMIT}`, (e) => {
+    //   if (!this._recaptchaRequired) {
+    //     this._submit($(e.currentTarget).data('action'));
+    //   } else {
+    //     $(e.currentTarget).closest(`.${ScreenerSinglePage.CssClass.STEP}`)
+    //       .find(`.${ScreenerSinglePage.CssClass.ERROR_MSG}`).remove();
+    //     if (this._recaptchaVerified) {
+    //       this._submit($(e.currentTarget).data('action'));
+    //     } else {
+    //       this._showError($('#screener-recaptcha')[0],
+    //           ScreenerSinglePage.Message.REQUIRED);
+    //     }
+    //   }
+    // })
 
-    $el.on(
-      'change', `.${ScreenerSinglePage.CssClass.TOGGLE}`, this._handleToggler
-    );
+    // Basic toggles
+    $el.on('change', `.${ScreenerSinglePage.CssClass.TOGGLE}`,
+      this._handleToggler);
 
     // Floats
     $el.on('focus', '[data-type="float"]', this._sanitizeDollarFloat);
@@ -128,6 +116,14 @@ class ScreenerSinglePage {
     // Max Length
     $el.on('keydown', 'input[maxlength]', this._enforceMaxLength);
 
+    // Mask phone numbers
+    $el.on('focus', 'input[type="tel"]',
+      (event) => Utility.maskPhone(event.currentTarget));
+
+    // $('input[type="tel"]').each((i, el) => {
+    //   Utility.maskPhone(el);
+    // });
+
     // $el.on('submit', (event) => {
     //   event.preventDefault();
     //   this._$steps.filter(`.${ScreenerSinglePage.CssClass.ACTIVE}`)
@@ -135,15 +131,16 @@ class ScreenerSinglePage {
     //     `.${ScreenerSinglePage.CssClass.SUBMIT}`).trigger('click');
     // });
 
-    $el.on('click', '[data-js="question"]', (event) => {
-      this._goToQuestion(event, event.currentTarget.hash);
-    });
-
+    // Routing
+    window.addEventListener('hashchange', (event) => this._router(event));
     window.location.hash = 'page-admin';
+    this._routerPage('#page-admin');
 
-    this._goToPage('#page-admin');
+    $el.on('click', '[data-js="question"]', this._routerQuestion);
+    $el.on('click', '[data-js="page"]', this._routerPage);
 
     return this;
+
   }
 
   /**
@@ -218,12 +215,7 @@ class ScreenerSinglePage {
    * @return {null}
    */
   _sanitizeDollarFloat(event) {
-    new Cleave(event.currentTarget, {
-      delimiter: '',
-      numeral: true,
-      numeralPositiveOnly: true
-    });
-
+    Utility.maskDollarFloat(event.currentTarget);
     event.currentTarget.addEventListener('blur', function(event) {
       let value = event.currentTarget.value;
       let postfix = '';
@@ -236,6 +228,7 @@ class ScreenerSinglePage {
         event.currentTarget.value += '.00';
       }
     });
+    return this;
   }
 
   /**
@@ -262,14 +255,16 @@ class ScreenerSinglePage {
     }
 
     if (block) event.preventDefault(); // stop input
+
+    return this;
   }
 
   /**
-   * [_goToPage description]
-   * @param  {[type]} section [description]
-   * @return {this} Screener
+   * The page to go to.
+   * @param  {string} page the page hash
+   * @return {null}
    */
-  _goToPage(page) {
+  _routerPage(page) {
     let $window = document.querySelector('#js-layout-body');
 
     $window.scrollTop = 0;
@@ -293,7 +288,9 @@ class ScreenerSinglePage {
    * @param  {string} hash The question's hash id
    * @return {this} Screener
    */
-  _goToQuestion(event, hash) {
+  _routerQuestion(event, hash) {
+    hash = hash || event.currentTarget.hash;
+
     let page = '#' + $(hash).closest(`.${ScreenerSinglePage.CssClass.PAGE}`).attr('id');
     let $questions = $(`.${ScreenerSinglePage.CssClass.TOGGLE_QUESTION}`);
     let $target = $(hash).find(`.${ScreenerSinglePage.CssClass.TOGGLE_QUESTION}`);
@@ -332,6 +329,20 @@ class ScreenerSinglePage {
       event.preventDefault();
     }
 
+    return this;
+  }
+
+  /**
+   * The router, listens for hash changes and directs to appropriate pages
+   * @param  {object} event the window hash change event
+   * @return {null}
+   */
+  _router(event) {
+    let hash = window.location.hash;
+    let type = hash.split('-')[0];
+    if (type === '#page') {
+      this._routerPage(hash);
+    }
     return this;
   }
 
@@ -500,16 +511,25 @@ ScreenerSinglePage.validateZipField = {
   }
 };
 
+/**
+ * Validation before confirmation and recap page
+ * @param  {event} event the click event
+ * @return {null}
+ */
 ScreenerSinglePage.validate = function(event) {
-  event.preventDefault();
-  this.$validator.validateAll().then((valid) => {
-    if (valid) {
-      window.location.hash = event.currentTarget.hash;
-      ScreenerSinglePage.renderRecap(this);
-      return;
-    }
-    alert('Some required fields are not filled out.');
-  });
+  if (Utility.getUrlParameter('debug') !== '1') {
+    event.preventDefault();
+    this.$validator.validateAll().then((valid) => {
+      if (valid) {
+        window.location.hash = event.currentTarget.hash;
+        ScreenerSinglePage.renderRecap(this);
+        return;
+      }
+      alert('Some required fields are not filled out.');
+    });
+  } else {
+    ScreenerSinglePage.renderRecap(this);
+  }
 };
 
 /**
@@ -931,12 +951,13 @@ ScreenerSinglePage.CssClass = {
  * Localization labels of error messages.
  * @enum {string}
  */
-ScreenerSinglePage.ErrorMessage = {
+ScreenerSinglePage.Message = {
   FLOAT: 'ERROR_FLOAT',
   HOUSEHOLD: 'ERROR_HOUSEHOLD',
   INTEGER: 'ERROR_INTEGER',
   REQUIRED: 'ERROR_REQUIRED',
-  ZIP: 'ERROR_ZIP'
+  ZIP: 'ERROR_ZIP',
+  RELOAD: 'MSG_RELOAD'
 };
 
 /**

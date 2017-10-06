@@ -141,6 +141,21 @@ Utility.maskPhone = function(input) {
 };
 
 /**
+ * Mask dollar inputs
+ * @param  {HTMLElement} input the "float" input to mask
+ * @return {constructor}       the input mask 0.00
+ */
+Utility.maskDollarFloat = function(input) {
+  let cleave = new Cleave(input, {
+    delimiter: '',
+    numeral: true,
+    numeralPositiveOnly: true
+  });
+  input.cleave = cleave;
+  return input;
+};
+
+/**
  * Convert a camel case string into all caps with underscored spaces.
  * @param  {string} str the string to change, ex. myString
  * @return {string}     the converted string, ex. MY_STRING

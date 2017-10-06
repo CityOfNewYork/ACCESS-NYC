@@ -12,7 +12,7 @@ textarea {
 #{$all-text-inputs},
 textarea,
 select {
-  @include appearance(none);
+  appearance: none;
   border: 1px solid $color-grey-mid;
   border-radius: 0;
   display: block;
@@ -67,11 +67,11 @@ textarea {
 }
 
 input[type="number"] {
-  @include appearance(textfield);
+  appearance: textfield;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
-    @include appearance(none);
+    appearance: none;
     margin: 0;
   }
 }

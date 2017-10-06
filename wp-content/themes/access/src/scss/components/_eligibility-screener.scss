@@ -142,7 +142,7 @@
   width: 100%;
 
   @include media($bp-tablet-up) {
-    @include calc(width, '50% - #{.5 *  $site-margins}');
+    width: calc(50% - #{.5 *  $site-margins});
   }
 }
 
@@ -297,7 +297,7 @@
 
     .program-category {
       align-items: center;
-      @include calc(width, '50% - #{.5 * $spacing-base}');
+      width: calc(50% - #{.5 * $spacing-base});
       display: flex;
     }
   }

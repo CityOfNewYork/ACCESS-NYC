@@ -1,14 +1,11 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
 import SmoothScroll from 'smoothscroll-polyfill';
-// import OfficeMap from 'modules/office-map';
-// import Screener from 'modules/screener';
 import ScreenerProto from 'modules/screener-single-page';
 import ShareForm from 'modules/share-form';
-// import StaticMap from 'modules/static-map';
-// import TextSizer from 'modules/text-sizer';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
+import _ from 'underscore';
 
 (function(window, $) {
   'use strict';
@@ -28,75 +25,75 @@ import Utility from 'modules/utility';
   });
 
   // Attach site-wide event listeners.
-  // $('body').on('click', '.js-simple-toggle', (e) => {
-  //   // Simple toggle that add/removes "active" and "hidden" classes, as well as
-  //   // applying appropriate aria-hidden value to a specified target.
-  //   // TODO: There are a few siimlar toggles on the site that could be
-  //   // refactored to use this class.
-  //   e.preventDefault();
-  //   const $target = $(e.currentTarget).attr('href') ?
-  //       $($(e.currentTarget).attr('href')) :
-  //       $($(e.currentTarget).data('target'));
+  $('body').on('click', '.js-simple-toggle', (e) => {
+    // Simple toggle that add/removes "active" and "hidden" classes, as well as
+    // applying appropriate aria-hidden value to a specified target.
+    // TODO: There are a few siimlar toggles on the site that could be
+    // refactored to use this class.
+    e.preventDefault();
+    const $target = $(e.currentTarget).attr('href') ?
+        $($(e.currentTarget).attr('href')) :
+        $($(e.currentTarget).data('target'));
 
-  //   $(e.currentTarget).toggleClass('active');
-  //   $target.toggleClass('active hidden')
-  //       .prop('aria-hidden', $target.hasClass('hidden'));
+    $(e.currentTarget).toggleClass('active');
+    $target.toggleClass('active hidden')
+        .prop('aria-hidden', $target.hasClass('hidden'));
 
-  //   // function to hide all elements
-  //   if ($(e.currentTarget).data('hide')) {
-  //     $($(e.currentTarget).data('hide')).not($target)
-  //       .addClass('hidden')
-  //       .removeClass('active')
-  //       .prop('aria-hidden', true);
-  //   }
+    // function to hide all elements
+    if ($(e.currentTarget).data('hide')) {
+      $($(e.currentTarget).data('hide')).not($target)
+        .addClass('hidden')
+        .removeClass('active')
+        .prop('aria-hidden', true);
+    }
 
-  //   if ($(e.currentTarget).data('loc')) {
-  //     window.location.hash = $(e.currentTarget).data('loc');
-  //   }
-  // }).on('click', '.js-show-nav', (e) => {
-  //   // Shows the mobile nav by applying "nav-active" cass to the body.
-  //   e.preventDefault();
-  //   $(e.delegateTarget).addClass('nav-active');
-  // }).on('click', '.js-hide-nav', (e) => {
-  //   // Hides the mobile nav.
-  //   e.preventDefault();
-  //   $(e.delegateTarget).removeClass('nav-active');
-  // }).on('click', '.js-toggle-search', (e) => {
-  //   // Shows/hides the search drawer in the main nav.
-  //   e.preventDefault();
-  //   const $search = $('#search');
-  //   $search.toggleClass('active');
-  //   if ($search.hasClass('active')) {
-  //     setTimeout(function() {
-  //       $('#search-field').focus();
-  //     }, 20);
-  //   }
-  // }).on('click', '.js-hide-search', (e) => {
-  //   // Hides the search drawer in the main nav.
-  //   e.preventDefault();
-  //   $('#search').removeClass('active');
-  // }).on('click', '.js-toggle-filter', (e) => {
-  //   e.preventDefault();
-  //   $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
-  // }).on('click', '.js-show-disclaimer', (e) => {
-  //   e.preventDefault();
-  //   let $cnt = $('.js-needs-disclaimer.active').length;
-  //   let $el = $('#js-disclaimer');
-  //   let $hidden = ($cnt > 0) ? 'removeClass' : 'addClass';
-  //   let $animate = ($cnt > 0) ? 'addClass' : 'removeClass';
-  //   $el[$hidden]('hidden');
-  //   $el[$animate]('animated fadeInUp');
-  //   $el.attr('aria-hidden', ($cnt === 0));
-  //   // Scroll-to functionality for mobile
-  //   if (
-  //     window.scrollTo &&
-  //     $cnt != 0 &&
-  //     window.innerWidth < variables['screen-desktop']
-  //   ) {
-  //     let $target = $(e.target);
-  //     window.scrollTo(0, $target.offset().top - $target.data('scrollOffset'));
-  //   }
-  // });
+    // if ($(e.currentTarget).data('loc')) {
+    //   window.location.hash = $(e.currentTarget).data('loc');
+    // }
+  })/*.on('click', '.js-show-nav', (e) => {
+    // Shows the mobile nav by applying "nav-active" cass to the body.
+    e.preventDefault();
+    $(e.delegateTarget).addClass('nav-active');
+  }).on('click', '.js-hide-nav', (e) => {
+    // Hides the mobile nav.
+    e.preventDefault();
+    $(e.delegateTarget).removeClass('nav-active');
+  }).on('click', '.js-toggle-search', (e) => {
+    // Shows/hides the search drawer in the main nav.
+    e.preventDefault();
+    const $search = $('#search');
+    $search.toggleClass('active');
+    if ($search.hasClass('active')) {
+      setTimeout(function() {
+        $('#search-field').focus();
+      }, 20);
+    }
+  }).on('click', '.js-hide-search', (e) => {
+    // Hides the search drawer in the main nav.
+    e.preventDefault();
+    $('#search').removeClass('active');
+  }).on('click', '.js-toggle-filter', (e) => {
+    e.preventDefault();
+    $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
+  })*/.on('click', '.js-show-disclaimer', (e) => {
+    e.preventDefault();
+    let $cnt = $('.js-needs-disclaimer.active').length;
+    let $el = $('#js-disclaimer');
+    let $hidden = ($cnt > 0) ? 'removeClass' : 'addClass';
+    let $animate = ($cnt > 0) ? 'addClass' : 'removeClass';
+    $el[$hidden]('hidden');
+    $el[$animate]('animated fadeInUp');
+    $el.attr('aria-hidden', ($cnt === 0));
+    // Scroll-to functionality for mobile
+    if (
+      window.scrollTo &&
+      $cnt != 0 &&
+      window.innerWidth < variables['screen-desktop']
+    ) {
+      let $target = $(e.target);
+      window.scrollTo(0, $target.offset().top - $target.data('scrollOffset'));
+    }
+  });
 
   // On the search results page, submits the search form when a category is
   // chosen.
@@ -256,9 +253,24 @@ import Utility from 'modules/utility';
     shareForm.init();
   });
 
-  // Mask phone numbers
-  $('input[type="tel"]').each((i, el) => {
-    Utility.maskPhone(el);
+  // Application reloading
+  $('[data-js="reload"]').each((i, el) => {
+    $(el).on('click', (event) => {
+      event.preventDefault();
+      let message = _.findWhere(window.LOCALIZED_STRINGS,
+          {slug: 'MSG_RELOAD'}
+        ).label;
+      console.dir(message);
+      let dialogue = confirm(message);
+      if (dialogue) {
+        if (event.currentTarget.hash) {
+          window.location = event.currentTarget.hash;
+        } else {
+          location.reload();
+        }
+      }
+      return false;
+    });
   });
 
   // For pages with "print-view" class, print the page on load. Currently only

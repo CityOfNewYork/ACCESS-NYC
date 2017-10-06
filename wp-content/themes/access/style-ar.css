@@ -2092,7 +2092,7 @@ input:focus + .screener-radio-label::before {
   margin: 0;
   padding: 0; }
   .map-location-list li {
-    transition: background 0.1s ease-in;
+    transition: background .1s ease-in;
     background-position: right 20px top 26px;
     padding: 20px 60px 20px 20px;
     background-color: #fff;
