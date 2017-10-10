@@ -35,11 +35,16 @@
           <label class="{{styles.labels}}">
             {{ __('Including you, how many people are in your household?', 'accessnyc-screener') }}
           </label>
-          <div>
-            <input type="number" name="Household.members" min="1" max="8" value="1" required
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Household.members')}">
+            <div class="error-message"
+              v-if="errors.has('Household.members')">v{ errors.first('Household.members') }</div>
+            <input type="number" name="Household.members" min="1" max="8" maxlength="1" value="1" required
               data-type="integer"
               data-object="household"
               data-key="members"
+              data-vv-as="household members"
+              v-validate="{required: true, min: 1, max_value: 8, min_value: 1, regex: '[0-9]', numeric: true}"
               v-on:change="populate">
           </div>
         </div>
