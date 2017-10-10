@@ -71,7 +71,8 @@
 
       <div id="vue">
 
-        <div id="page-admin" class="screener-body-page js-screener-page">
+        <div id="page-admin" class="screener-body-page js-screener-page"
+          data-vv-scope="page-admin">
 
           <div class="p-horizontal-2">
 
@@ -81,9 +82,16 @@
               {% include 'screener-single-page-partials/question-staff.twig' with {'styles': styles, 'locations': locations} %}
               {% include 'screener-single-page-partials/disclaimer.twig' with styles %}
 
-            <div class=" animated fadeInUp"
-              v-if="disclaimer">
-              <a class="btn btn-primary btn-next btn-small d-block" href="#page-screener">
+            {# <div class="p-2"
+              v-if="validateSet('staff', ['firstName', 'lastName', 'email'])[0] === false">
+              {{ __('PEU Staff, please fill out your', 'accessnyc-screener') }}
+              <em>v{ validateSet('staff', ['firstName', 'lastName', 'email'])[1] }</em>
+              {{ __('to continue.', 'accessnyc-screener') }}
+            </div> #}
+
+            <div class="p-2 animated fadeInUp" v-if="disclaimer">
+              <a class="btn btn-primary btn-next btn-small d-block" href="#page-screener"
+                data-scope="Staff" v-on:click="validate">
                 {{ __('Let\'s Get Started', 'accessnyc-screener') }}
               </a>
             </div>
@@ -92,7 +100,8 @@
 
         </div>
 
-        <div id="page-screener" class="screener-body-page js-screener-page">
+        <div id="page-screener" class="screener-body-page js-screener-page"
+          data-vv-scope="page-screener">
 
           <div class="p-horizontal-2">
 
@@ -125,7 +134,7 @@
 
             <div class="p-vertical-2">
 
-              <a class="btn btn-primary btn-next btn-small d-block" href="#page-recap" v-on:click="validate">
+              <a class="btn btn-primary btn-next btn-small d-block" href="#page-recap" data-scope="page-screener" v-on:click="validate">
                 {{ __('Confirm', 'accessnyc-screener') }}
               </a>
 
@@ -504,6 +513,18 @@
   {
     "label": {{ __('Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.', 'accessnyc-screener')|trim|json_encode() }},
     "slug": "MSG_RELOAD"
+  },
+  {
+    "label": {{ __('First Name', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "firstName"
+  },
+  {
+    "label": {{ __('Last Name', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "lastName"
+  },
+  {
+    "label": {{ __('Email', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "email"
   }
   ]);
 </script>

@@ -34,34 +34,26 @@ class ScreenerSinglePage {
 
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = false;
-  }
 
-  /**
-   * If this component has not yet been initialized, attaches event listeners.
-   * @method
-   * @return {this} OfficeMap
-   */
-  init() {
+    /** @private {object} The screener's routes and event hooks */
+    this._routes = {
+      'admin': function(vue) {},
+      'screener': function(vue) {},
+      'recap': function(vue) {
+        ScreenerSinglePage.renderRecap(vue);
+      }
+    };
 
-    if (this._initialized) {
-      return this;
-    }
-
-    Validator.Validator.extend('zip', ScreenerSinglePage.validateZipField);
-
-    Vue.use(Validator, {events: 'blur', zip: 'zip'});
-
-    Vue.component('personlabel', ScreenerSinglePage.personLabel);
-
-    const vue = new Vue({
+    /** @private {object} The Vue configuration */
+    this._vue = {
       'delimiters': ['v{', '}'],
       'el': '#vue',
       'data': {
-        /* these are modules required for the ACCESS NYC screener */
+        /* Default ACCESS NYC Modules */
         'people': [new ScreenerPerson({headOfHousehold: true})],
         'household': new ScreenerHousehold(),
         'categories': [],
-        /* these are modules created for the public engagement unit */
+        /* Additional Modules */
         'client': new ScreenerClient(),
         'staff': new ScreenerStaff(),
         'categoriesCurrent': [],
@@ -78,11 +70,40 @@ class ScreenerSinglePage {
         'checked': ScreenerSinglePage.checked,
         'singleOccupant': ScreenerSinglePage.singleOccupant,
         'validate': ScreenerSinglePage.validate,
+        'validateStaff': ScreenerSinglePage.validateStaff,
+        'validScopes': ScreenerSinglePage.validScopes,
         'localString': ScreenerSinglePage.localString
       }
-    });
+    };
 
+  }
 
+  /**
+   * If this component has not yet been initialized, attaches event listeners.
+   * @method
+   * @return {this} OfficeMap
+   */
+  init() {
+
+    if (this._initialized) {
+      return this;
+    }
+
+    /**
+     * Reactive Elements
+     */
+
+    Validator.Validator.extend('zip', ScreenerSinglePage.validateZipField);
+
+    Vue.use(Validator, {events: 'blur', zip: 'zip'});
+
+    Vue.component('personlabel', ScreenerSinglePage.personLabel);
+
+    this._vue = new Vue(this._vue); // Initializes the Vue component
+
+    /**
+     * DOM Event Listeners
+     */
 
     let $el = $(this._el);
 
@@ -113,16 +134,13 @@ class ScreenerSinglePage {
     // Numbers
     $el.on('keydown', 'input[type="number"]', this._enforceNumbersOnly);
 
-    // Max Length
+    // Max Length and Max Value
     $el.on('keydown', 'input[maxlength]', this._enforceMaxLength);
+    $el.on('keydown', 'input[max]', this._enforceMaxValue);
 
     // Mask phone numbers
     $el.on('focus', 'input[type="tel"]',
       (event) => Utility.maskPhone(event.currentTarget));
-
-    // $('input[type="tel"]').each((i, el) => {
-    //   Utility.maskPhone(el);
-    // });
 
     // $el.on('submit', (event) => {
     //   event.preventDefault();
@@ -133,14 +151,13 @@ class ScreenerSinglePage {
 
     // Routing
     window.addEventListener('hashchange', (event) => this._router(event));
-    window.location.hash = 'page-admin';
-    this._routerPage('#page-admin');
 
     $el.on('click', '[data-js="question"]', this._routerQuestion);
     $el.on('click', '[data-js="page"]', this._routerPage);
 
-    return this;
+    this._routerPage('#page-admin');
 
+    return this;
   }
 
   /**
@@ -152,10 +169,28 @@ class ScreenerSinglePage {
    * @return {null}
    */
   _enforceMaxLength(event) {
-    let $input = $(event.currentTarget);
-    let maxlength = parseInt($input.attr('maxlength'), 10);
-    let val = $input.val();
-    if (val.length === maxlength) {
+    let el = event.currentTarget;
+    let maxlength = parseInt(el.maxlength, 10);
+    let value = el.value;
+    if (value.length === maxlength) {
+      // if key code isn't a backspace or is a spacebar
+      if (event.keyCode !== 8 || event.keyCode === 32) event.preventDefault();
+    }
+  }
+
+  /**
+   * Calculates the maximum value as a result of the event and prevents input
+   * if it is greater than the allowed maximum value;
+   * @param  {event} event the key down event
+   * @return {null}
+   */
+  _enforceMaxValue(event) {
+    let el = event.currentTarget;
+    let max = parseInt(el.max, 10);
+    let value = (el.value != '') ? el.value : '0';
+    let key = (_.isNumber(event.key)) ? event.key : '0';
+    let calc = parseInt((value + event.key), 10);
+    if (calc > max) {
       // if key code isn't a backspace or is a spacebar
       if (event.keyCode !== 8 || event.keyCode === 32) event.preventDefault();
     }
@@ -267,6 +302,8 @@ class ScreenerSinglePage {
   _routerPage(page) {
     let $window = document.querySelector('#js-layout-body');
 
+    window.location.hash = page;
+
     $window.scrollTop = 0;
 
     $(`.${ScreenerSinglePage.CssClass.PAGE}`)
@@ -333,16 +370,22 @@ class ScreenerSinglePage {
   }
 
   /**
-   * The router, listens for hash changes and directs to appropriate pages
+   * The router, listens for hash changes and initializes appropriate hooks
    * @param  {object} event the window hash change event
    * @return {null}
    */
   _router(event) {
     let hash = window.location.hash;
     let type = hash.split('-')[0];
+    let route = hash.split('-')[1];
+
     if (type === '#page') {
+
+      this._routes[route](this._vue);
       this._routerPage(hash);
+
     }
+
     return this;
   }
 
@@ -512,24 +555,53 @@ ScreenerSinglePage.validateZipField = {
 };
 
 /**
- * Validation before confirmation and recap page
+ * Validation functionality, if a scope is attatched, it will only validate
+ * against the scope stored in validScopes
  * @param  {event} event the click event
  * @return {null}
  */
 ScreenerSinglePage.validate = function(event) {
-  if (Utility.getUrlParameter('debug') !== '1') {
-    event.preventDefault();
-    this.$validator.validateAll().then((valid) => {
-      if (valid) {
-        window.location.hash = event.currentTarget.hash;
-        ScreenerSinglePage.renderRecap(this);
-        return;
-      }
-      alert('Some required fields are not filled out.');
-    });
+  event.preventDefault();
+  let scope = event.currentTarget.dataset.scope;
+  let validScope = this.validScopes(scope);
+  if (validScope) {
+    this.$validator.validateAll(validScope)
+      .then(ScreenerSinglePage.valid);
   } else {
-    ScreenerSinglePage.renderRecap(this);
+    this.$validator.validateAll()
+      .then(ScreenerSinglePage.valid);
   }
+};
+
+/**
+ * Storage for validation scopes
+ * @param  {string} scope the scope to return
+ * @return {object}       models and fields of the scope, false if none
+ */
+ScreenerSinglePage.validScopes = function(scope) {
+  let scopes = {
+    'Staff': {
+      'Staff.firstName': this.staff._attrs.firstName,
+      'Staff.lastName': this.staff._attrs.lastName,
+      'Staff.email': this.staff._attrs.email
+    }
+  };
+  return (typeof scopes[scope] !== 'undefined') ? scopes[scope] : false;
+}
+
+/**
+ * Validate
+ * @param  {boolean} valid wether the validator passes validation
+ * @return {null}
+ */
+ScreenerSinglePage.valid = function(valid) {
+  if (!valid) {
+    alert('Some required fields are not filled out.');
+  } else {
+    window.location.hash = event.currentTarget.hash;
+  }
+  if (Utility.getUrlParameter('debug') === '1')
+    window.location.hash = event.currentTarget.hash;
 };
 
 /**
@@ -569,7 +641,6 @@ ScreenerSinglePage.push = function(event) {
   } else {
     this[obj] = current;
   }
-  // console.dir(current);
 };
 
 /**
@@ -644,8 +715,9 @@ ScreenerSinglePage.setAttr = function(event) {
  * @param  {event} event to pass to setAttr()
  */
 ScreenerSinglePage.populate = function(event) {
-  let number = event.currentTarget.value;
-  let dif = number - this.people.length;
+  let value = event.currentTarget.value;
+  if (value === '' || parseInt(value, 10) === 0) return;
+  let dif = value - this.people.length;
   // set the data for the model
   this.setAttr(event);
   if (dif > 0) { // add members if positive
@@ -685,11 +757,9 @@ ScreenerSinglePage.pushPayment = function(event) {
     this[obj][index]._attrs[key].push({
       amount: '',
       type: value,
-      frequency: 'monthly'//,
-      /*guid: Utility.guid()*/
+      frequency: 'monthly'
     });
   }
-  // console.dir(this[obj][index]);
 };
 
 /**
@@ -882,11 +952,14 @@ ScreenerSinglePage.getTypedVal = function(input) {
  * @return {string}      the local string label
  */
 ScreenerSinglePage.localString = function(slug) {
-  if (slug === '') return slug;
-  return _.findWhere(
-    window.LOCALIZED_STRINGS,
-    {slug: slug}
-  ).label;
+  try {
+    return _.findWhere(
+      window.LOCALIZED_STRINGS,
+      {slug: slug}
+    ).label;
+  } catch (error) {
+    return slug
+  }
 };
 
 /**
