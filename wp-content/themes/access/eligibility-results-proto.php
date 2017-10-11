@@ -63,32 +63,32 @@ $selectedProgramArgs = array(
   'post_type' => 'programs',
   'tax_query' => array(
     array(
-      'taxonomy' => 'programs',
-      'field' => 'slug',
-      'terms' => $context['resultCategories']
+      'taxonomy'  => 'programs',
+      'field'     => 'slug',
+      'terms'     => $context['resultCategories']
     )
   ),
   'posts_per_page' => -1,
-  'meta_key'		=> 'program_code',
-  'meta_value'	=> $context['resultPrograms']
+  'meta_key'       => 'program_code',
+  'meta_value'     => $context['resultPrograms']
 );
 
 $additionalProgramArgs = array(
-// Get post type project
-'post_type' => 'programs',
-'tax_query' => array(
-  array(
-    'taxonomy' => 'programs',
-    'field' => 'slug',
-    'terms' => $context['resultCategories'],
-    'operator' => 'NOT IN'
-)
-),
-// Get all posts
-'posts_per_page' => -1,
-// Filter posts based on the program code in the URL
-'meta_key'		=> 'program_code',
-'meta_value'	=> $context['resultPrograms']
+  // Get post type project
+  'post_type' => 'programs',
+  'tax_query' => array(
+    array(
+      'taxonomy'  => 'programs',
+      'field'     => 'slug',
+      'terms'     => $context['resultCategories'],
+      'operator'  => 'NOT IN'
+    )
+  ),
+  // Get all posts
+  'posts_per_page' => -1,
+  // Filter posts based on the program code in the URL
+  'meta_key'    => 'program_code',
+  'meta_value'  => $context['resultPrograms']
 );
 
 // Rebuild the query from entity stripped params

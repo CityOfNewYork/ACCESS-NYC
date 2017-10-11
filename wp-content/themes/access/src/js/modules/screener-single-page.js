@@ -475,8 +475,8 @@ class ScreenerSinglePage {
     let postUrl = $(event.currentTarget).data('action');
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) {
-      console.log(this._getDroolsJSON(this._vue));
-      console.log(JSON.stringify(this._getDroolsJSON(this._vue)));
+      console.dir(this._getDroolsJSON(this._vue));
+      console.dir(JSON.stringify(this._getDroolsJSON(this._vue)));
       debugger;
     }
 
@@ -489,15 +489,16 @@ class ScreenerSinglePage {
       }
     }).done((data) => {
       if (Utility.debug()) {
-        console.log(data);
-        console.log(JSON.stringify(data));
+        console.dir(data);
+        console.dir(JSON.stringify(data));
         debugger;
       }
 
       if (data.type !== 'SUCCESS') {
         // TODO(jjandoc): Add error handler.
         if (Utility.debug()) {
-          console.error(data);
+          console.error('ERROR');
+          console.dir(data);
           debugger;
         }
       }
