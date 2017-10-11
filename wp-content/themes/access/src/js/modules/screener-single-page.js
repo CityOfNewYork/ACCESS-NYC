@@ -494,14 +494,15 @@ class ScreenerSinglePage {
       }
     }).done((data) => {
 
+      let result = {
+        'data': data,
+        'url': url,
+        'json': json
+      };
+
       if (data.type !== 'SUCCESS') {
-        // TODO(jjandoc): Add error handler.
         if (Utility.debug()) {
-          console.error({
-            'data': data,
-            'url': url,
-            'json': json
-          });
+          console.error(result);
           debugger;
         }
         alert('There was an error getting results. Please try again later.');
@@ -509,12 +510,15 @@ class ScreenerSinglePage {
       }
 
       if (Utility.debug()) {
-        console.dir(data);
+        console.dir(result);
         debugger;
       }
 
-      const programs = _.chain(Utility.findValues(data, 'code'))
-          .filter((item) => _.isString(item)).uniq().value();
+      const programs = _.chain(
+          Utility.findValues(data, 'code')
+        ).filter(
+          (item) => _.isString(item)
+        ).uniq().value();
 
       const params = {};
 
