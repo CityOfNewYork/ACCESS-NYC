@@ -414,22 +414,42 @@ class ScreenerSinglePage {
    * @return {object}     drools JSON
    */
   _getDroolsJSON(vue) {
-    const droolsJSON = {
+    const json = {
       lookup: 'KieStatelessSession',
-      commands: []
-    };
-    // Insert Household data.
-    droolsJSON.commands.push({
-      insert: {
-        object: {
-          'accessnyc.request.Household': vue.household.toObject()
+      commands: [
+        { // Insert Household data
+          insert: {
+            object: {
+              'accessnyc.request.Household': vue.household.toObject()
+            }
+          }
+        },
+        { // Additional Drools command
+          'fire-all-rules': {
+            'out-identifier': 'rulesFiredCountOut'
+          }
+        },
+        { // Additional Drools command
+          query: {
+            'name': 'findEligibility',
+            'arguments': [],
+            'out-identifier': 'eligibility'
+          }
         }
-      }
-    });
+      ]
+    };
+    // // Insert Household data.
+    // json.commands.push({
+    //   insert: {
+    //     object: {
+    //       'accessnyc.request.Household': vue.household.toObject()
+    //     }
+    //   }
+    // });
     // Insert Person data.
     _.each(vue.people.slice(0, vue.household.get('members')), (person) => {
       if (person) {
-        droolsJSON.commands.push({
+        json.commands.push({
           insert: {
             object: {
               'accessnyc.request.Person': person.toObject()
@@ -439,58 +459,59 @@ class ScreenerSinglePage {
       }
     });
     // Additional Drools commands.
-    droolsJSON.commands.push({
-      'fire-all-rules': {
-        'out-identifier': 'rulesFiredCountOut'
-      }
-    });
-    droolsJSON.commands.push({
-      query: {
-        'name': 'findEligibility',
-        'arguments': [],
-        'out-identifier': 'eligibility'
-      }
-    });
+    // json.commands.push({
+    //   'fire-all-rules': {
+    //     'out-identifier': 'rulesFiredCountOut'
+    //   }
+    // });
+    // json.commands.push({
+    //   query: {
+    //     'name': 'findEligibility',
+    //     'arguments': [],
+    //     'out-identifier': 'eligibility'
+    //   }
+    // });
 
     // This Drools command outputs a large number of debugging variables that
     // are not necessary for production.
     if (Utility.debug()) {
-      droolsJSON.commands.push({
+      json.commands.push({
         'get-objects': {
           'out-identifier': 'getObjects'
         }
       });
     }
 
-    return droolsJSON;
+    return json;
   }
 
   /**
    * Submits the JSON payload to Drools.
    * @private
-   * @param  {string} postUrl - AJAX URL destination.
+   * @param  {object} event - the form submit event
    * @return {jqXHR}
    */
   _submit(event) {
-    let postUrl = $(event.currentTarget).data('action');
+    let url = event.currentTarget.attributes.action.nodeValue;
+    let json = this._getDroolsJSON(this._vue);
+
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) {
-      console.dir(this._getDroolsJSON(this._vue));
-      console.dir(JSON.stringify(this._getDroolsJSON(this._vue)));
+      console.dir(json);
       debugger;
     }
 
     return $.ajax({
-      url: postUrl,
+      url: url,
       type: 'post',
       data: {
         action: 'drools',
-        data: this._getDroolsJSON(this._vue)
+        data: json
       }
     }).done((data) => {
+
       if (Utility.debug()) {
         console.dir(data);
-        console.dir(JSON.stringify(data));
         debugger;
       }
 
@@ -502,26 +523,34 @@ class ScreenerSinglePage {
           debugger;
         }
       }
+
       const programs = _.chain(Utility.findValues(data, 'code'))
           .filter((item) => _.isString(item)).uniq().value();
+
       const params = {};
+
       if (this._vue.categories.length) {
         params.categories = this._vue.categories.join(',');
       }
+
       if (programs.length) {
         params.programs = programs.join(',');
       }
+
       if ('GUID' in data) {
         params.guid = data.GUID;
       }
+
       params.date = Math.floor(Date.now() / 1000);
+
       // For security, reset the form before redirecting so that results are
       // not visible when someone hits back on their browser.
       this._el.reset();
       window.location = `./results?${$.param(params)}`;
-    }).fail(function(error) {
+
+    })/*.fail(function(error) {
       // TODO(jjandoc): Display error messaging here.
-    });
+    })*/;
     /* eslint-enable no-console, no-debugger */
   }
 }
