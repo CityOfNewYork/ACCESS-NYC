@@ -416,36 +416,18 @@ class ScreenerSinglePage {
   _getDroolsJSON(vue) {
     const json = {
       lookup: 'KieStatelessSession',
-      commands: [
-        { // Insert Household data
-          insert: {
-            object: {
-              'accessnyc.request.Household': vue.household.toObject()
-            }
-          }
-        },
-        { // Additional Drools command
-          'fire-all-rules': {
-            'out-identifier': 'rulesFiredCountOut'
-          }
-        },
-        { // Additional Drools command
-          query: {
-            'name': 'findEligibility',
-            'arguments': [],
-            'out-identifier': 'eligibility'
-          }
-        }
-      ]
+      commands: []
     };
-    // // Insert Household data.
-    // json.commands.push({
-    //   insert: {
-    //     object: {
-    //       'accessnyc.request.Household': vue.household.toObject()
-    //     }
-    //   }
-    // });
+
+    // Insert Household data.
+    json.commands.push({
+      insert: {
+        object: {
+          'accessnyc.request.Household': vue.household.toObject()
+        }
+      }
+    });
+
     // Insert Person data.
     _.each(vue.people.slice(0, vue.household.get('members')), (person) => {
       if (person) {
@@ -458,19 +440,21 @@ class ScreenerSinglePage {
         });
       }
     });
+
     // Additional Drools commands.
-    // json.commands.push({
-    //   'fire-all-rules': {
-    //     'out-identifier': 'rulesFiredCountOut'
-    //   }
-    // });
-    // json.commands.push({
-    //   query: {
-    //     'name': 'findEligibility',
-    //     'arguments': [],
-    //     'out-identifier': 'eligibility'
-    //   }
-    // });
+    json.commands.push({
+      'fire-all-rules': {
+        'out-identifier': 'rulesFiredCountOut'
+      }
+    });
+
+    json.commands.push({
+      query: {
+        'name': 'findEligibility',
+        'arguments': [],
+        'out-identifier': 'eligibility'
+      }
+    });
 
     // This Drools command outputs a large number of debugging variables that
     // are not necessary for production.
@@ -496,7 +480,6 @@ class ScreenerSinglePage {
     let json = this._getDroolsJSON(this._vue);
 
     /* eslint-disable no-console, no-debugger */
-    console.dir(event);
     if (Utility.debug()) {
       console.dir(json);
       debugger;
@@ -514,7 +497,11 @@ class ScreenerSinglePage {
       if (data.type !== 'SUCCESS') {
         // TODO(jjandoc): Add error handler.
         if (Utility.debug()) {
-          console.error(data);
+          console.error({
+            'data': data,
+            'url': url,
+            'json': json
+          });
           debugger;
         }
         alert('There was an error getting results. Please try again later.');
@@ -548,8 +535,8 @@ class ScreenerSinglePage {
       // For security, reset the form before redirecting so that results are
       // not visible when someone hits back on their browser.
       this._el.reset();
-      window.location = `./results?${$.param(params)}`;
 
+      window.location = `./results?${$.param(params)}`;
     })/*.fail(function(error) {
       // TODO(jjandoc): Display error messaging here.
     })*/;
