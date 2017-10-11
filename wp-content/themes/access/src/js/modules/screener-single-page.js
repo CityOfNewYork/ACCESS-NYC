@@ -504,8 +504,8 @@ class ScreenerSinglePage {
       const programs = _.chain(Utility.findValues(data, 'code'))
           .filter((item) => _.isString(item)).uniq().value();
       const params = {};
-      if (this._categories.length) {
-        params.categories = this._categories.join(',');
+      if (this._vue.categories.length) {
+        params.categories = this._vue.categories.join(',');
       }
       if (programs.length) {
         params.programs = programs.join(',');
