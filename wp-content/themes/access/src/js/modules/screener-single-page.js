@@ -492,10 +492,11 @@ class ScreenerSinglePage {
    * @return {jqXHR}
    */
   _submit(event) {
-    let url = event.currentTarget.attributes.action.nodeValue;
+    let url = event.target.dataset.action;
     let json = this._getDroolsJSON(this._vue);
 
     /* eslint-disable no-console, no-debugger */
+    console.dir(event);
     if (Utility.debug()) {
       console.dir(json);
       debugger;
@@ -510,18 +511,19 @@ class ScreenerSinglePage {
       }
     }).done((data) => {
 
-      if (Utility.debug()) {
-        console.dir(data);
-        debugger;
-      }
-
       if (data.type !== 'SUCCESS') {
         // TODO(jjandoc): Add error handler.
         if (Utility.debug()) {
-          console.error('ERROR');
-          console.dir(data);
+          console.error(data);
           debugger;
         }
+        alert('There was an error getting results. Please try again later.');
+        return;
+      }
+
+      if (Utility.debug()) {
+        console.dir(data);
+        debugger;
       }
 
       const programs = _.chain(Utility.findValues(data, 'code'))
