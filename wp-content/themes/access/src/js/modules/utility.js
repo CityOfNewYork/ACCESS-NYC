@@ -3,11 +3,18 @@
 
 import _ from 'underscore';
 import Cleave from 'cleave.js/dist/cleave.min';
+import 'cleave.js/dist/addons/cleave-phone.us';
 
 /**
  * Collection of utility functions.
  */
 const Utility = {};
+
+/**
+ * Boolean for debug mode
+ * @return {boolean} wether or not the front-end is in debug mode.
+ */
+Utility.debug = () => (Utility.getUrlParameter('debug') === '1');
 
 /**
  * Returns the value of a given key in a URL query string. If no URL query
@@ -102,7 +109,7 @@ Utility.isValidEmail = function(email) {
 };
 
 /**
- * For a given input, checks to see if its value is a valid Phone Number.
+ * For a given number, checks to see if its value is a valid Phone Number.
  * If not, displays an error message and sets an error class on the element.
  * @param {HTMLElement} input - The html form element for the component.
  * @return {boolean} - Valid Phone Number.
@@ -164,19 +171,6 @@ Utility.camelToUpper = function(str) {
   return str.replace(/([A-Z])/g, function($1) {
     return '_' + $1;
   }).toUpperCase();
-};
-
-/**
- * Return a globally unique identifier
- * @return {string} guid
- */
-Utility.guid = function() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 };
 
 /**

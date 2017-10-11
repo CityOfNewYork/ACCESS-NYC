@@ -70,7 +70,6 @@ class ScreenerSinglePage {
         'checked': ScreenerSinglePage.checked,
         'singleOccupant': ScreenerSinglePage.singleOccupant,
         'validate': ScreenerSinglePage.validate,
-        'validateStaff': ScreenerSinglePage.validateStaff,
         'validScopes': ScreenerSinglePage.validScopes,
         'localString': ScreenerSinglePage.localString
       }
@@ -107,47 +106,35 @@ class ScreenerSinglePage {
 
     let $el = $(this._el);
 
-    // $el.on('click', `.${ScreenerSinglePage.CssClass.SUBMIT}`, (e) => {
-    //   if (!this._recaptchaRequired) {
-    //     this._submit($(e.currentTarget).data('action'));
-    //   } else {
-    //     $(e.currentTarget).closest(`.${ScreenerSinglePage.CssClass.STEP}`)
-    //       .find(`.${ScreenerSinglePage.CssClass.ERROR_MSG}`).remove();
-    //     if (this._recaptchaVerified) {
-    //       this._submit($(e.currentTarget).data('action'));
-    //     } else {
-    //       this._showError($('#screener-recaptcha')[0],
-    //           ScreenerSinglePage.Message.REQUIRED);
-    //     }
-    //   }
-    // })
+    $el.on('click', '[data-js="submit"]', () => this._submit(event));
+      //if (!this._recaptchaRequired) {
+      //  this._submit($(e.currentTarget).data('action'));
+      // } else {
+      //   $(e.currentTarget).closest(`.${ScreenerSinglePage.CssClass.STEP}`)
+      //     .find(`.${ScreenerSinglePage.CssClass.ERROR_MSG}`).remove();
+      //   if (this._recaptchaVerified) {
+      //     this._submit($(e.currentTarget).data('action'));
+      //   } else {
+      //     this._showError($('#screener-recaptcha')[0],
+      //         ScreenerSinglePage.Message.REQUIRED);
+      //   }
+      // }
+    // });
 
     // Basic toggles
-    $el.on('change', `.${ScreenerSinglePage.CssClass.TOGGLE}`,
-      this._handleToggler);
-
+    $el.on('change', `.${ScreenerSinglePage.CssClass.TOGGLE}`, this._toggler);
     // Floats
     $el.on('focus', '[data-type="float"]', this._sanitizeDollarFloat);
     $el.on('keydown', '[data-type="float"]', this._limitDollarFloat);
     $el.on('keydown', '[data-type="float"]', this._enforceFloat);
-
     // Numbers
     $el.on('keydown', 'input[type="number"]', this._enforceNumbersOnly);
-
     // Max Length and Max Value
     $el.on('keydown', 'input[maxlength]', this._enforceMaxLength);
     $el.on('keydown', 'input[max]', this._enforceMaxValue);
-
     // Mask phone numbers
     $el.on('focus', 'input[type="tel"]',
       (event) => Utility.maskPhone(event.currentTarget));
-
-    // $el.on('submit', (event) => {
-    //   event.preventDefault();
-    //   this._$steps.filter(`.${ScreenerSinglePage.CssClass.ACTIVE}`)
-    //     .find(`.${ScreenerSinglePage.CssClass.VALIDATE_STEP},` +
-    //     `.${ScreenerSinglePage.CssClass.SUBMIT}`).trigger('click');
-    // });
 
     // Routing
     window.addEventListener('hashchange', (event) => this._router(event));
@@ -263,7 +250,7 @@ class ScreenerSinglePage {
         event.currentTarget.value += '.00';
       }
     });
-    return this;
+    // return this;
   }
 
   /**
@@ -398,7 +385,7 @@ class ScreenerSinglePage {
    * @param {HTMLElement} el - Input/select element.
    * @return {this} Screener
    */
-  _handleToggler(event) {
+  _toggler(event) {
     const $el = $(event.currentTarget);
     if ($el.data('toggles')) {
       const $target = $($el.data('toggles'));
@@ -423,9 +410,10 @@ class ScreenerSinglePage {
   /**
    * Returns the JSON object for Drools submission.
    * @private
-   * @return {object} drools JSON
+   * @param  {object} vue the data store
+   * @return {object}     drools JSON
    */
-  _getDroolsJSON() {
+  _getDroolsJSON(vue) {
     const droolsJSON = {
       lookup: 'KieStatelessSession',
       commands: []
@@ -434,13 +422,12 @@ class ScreenerSinglePage {
     droolsJSON.commands.push({
       insert: {
         object: {
-          'accessnyc.request.Household': this._household.toObject()
+          'accessnyc.request.Household': vue.household.toObject()
         }
       }
     });
     // Insert Person data.
-    _.each(this._people.slice(0, this._household.get('members')),
-        (person) => {
+    _.each(vue.people.slice(0, vue.household.get('members')), (person) => {
       if (person) {
         droolsJSON.commands.push({
           insert: {
@@ -467,7 +454,7 @@ class ScreenerSinglePage {
 
     // This Drools command outputs a large number of debugging variables that
     // are not necessary for production.
-    if (Utility.getUrlParameter('debug') === '1') {
+    if (Utility.debug()) {
       droolsJSON.commands.push({
         'get-objects': {
           'out-identifier': 'getObjects'
@@ -481,42 +468,38 @@ class ScreenerSinglePage {
   /**
    * Submits the JSON payload to Drools.
    * @private
-   * @param {string} postUrl - AJAX URL destination.
+   * @param  {string} postUrl - AJAX URL destination.
    * @return {jqXHR}
    */
-  _submit(postUrl) {
+  _submit(event) {
+    let postUrl = $(event.currentTarget).data('action');
     /* eslint-disable no-console, no-debugger */
-    if (Utility.getUrlParameter('debug') === '1') {
-      console.log(this._getDroolsJSON());
-      console.log(JSON.stringify(this._getDroolsJSON()));
+    if (Utility.debug()) {
+      console.log(this._getDroolsJSON(this._vue));
+      console.log(JSON.stringify(this._getDroolsJSON(this._vue)));
       debugger;
     }
-    /* eslint-enable no-console, no-debugger */
 
     return $.ajax({
       url: postUrl,
       type: 'post',
       data: {
         action: 'drools',
-        data: this._getDroolsJSON()
+        data: this._getDroolsJSON(this._vue)
       }
     }).done((data) => {
-      /* eslint-disable no-console, no-debugger */
-      if (Utility.getUrlParameter('debug') === '1') {
+      if (Utility.debug()) {
         console.log(data);
         console.log(JSON.stringify(data));
         debugger;
       }
-      /* eslint-enable no-console, no-debugger */
 
       if (data.type !== 'SUCCESS') {
         // TODO(jjandoc): Add error handler.
-        /* eslint-disable no-console, no-debugger */
-        if (Utility.getUrlParameter('debug') === '1') {
+        if (Utility.debug()) {
           console.error(data);
           debugger;
         }
-        /* eslint-enable no-console, no-debugger */
       }
       const programs = _.chain(Utility.findValues(data, 'code'))
           .filter((item) => _.isString(item)).uniq().value();
@@ -538,6 +521,7 @@ class ScreenerSinglePage {
     }).fail(function(error) {
       // TODO(jjandoc): Display error messaging here.
     });
+    /* eslint-enable no-console, no-debugger */
   }
 }
 
@@ -600,7 +584,7 @@ ScreenerSinglePage.valid = function(valid) {
   } else {
     window.location.hash = event.currentTarget.hash;
   }
-  if (Utility.getUrlParameter('debug') === '1')
+  if (Utility.debug())
     window.location.hash = event.currentTarget.hash;
 };
 
@@ -786,6 +770,59 @@ ScreenerSinglePage.singleOccupant = function() {
 };
 
 /**
+ * Returns the value of a supplied input in the type defined by a data-type
+ * attribute on that input.
+ * @param {HTMLElement} input
+ * @return {boolean|Number|string} typed value
+ */
+ScreenerSinglePage.getTypedVal = function(input) {
+  const $input = $(input);
+  const val = $input.val();
+  let finalVal = $input.val();
+  switch ($input.data('type')) {
+    case ScreenerSinglePage.InputType.BOOLEAN: {
+      if (input.type == 'checkbox') {
+        finalVal = input.checked;
+      } else { // assume it's a radio button
+        // if the radio button is using true/false;
+        // if the radio button is using 1 or 0;
+        finalVal = (val === 'true') ? true : Boolean(parseInt(val, 10));
+      }
+      break;
+    }
+    case ScreenerSinglePage.InputType.FLOAT: {
+      finalVal = (_.isNumber(parseFloat(val)) && !_.isNaN(parseFloat(val))) ?
+          parseFloat(val) : 0;
+      break;
+    }
+    case ScreenerSinglePage.InputType.INTEGER: {
+      finalVal = (_.isNumber(parseInt(val, 10)) &&
+          !_.isNaN(parseInt(val, 10))) ?
+          parseInt($input.val(), 10) : 0;
+      break;
+    }
+  }
+  // console.log([val, finalVal]);
+  return finalVal;
+};
+
+/**
+ * Return the local string label for values
+ * @param  {string} slug the slug value of the string
+ * @return {string}      the local string label
+ */
+ScreenerSinglePage.localString = function(slug) {
+  try {
+    return _.findWhere(
+      window.LOCALIZED_STRINGS,
+      {slug: slug}
+    ).label;
+  } catch (error) {
+    return slug
+  }
+};
+
+/**
  * Assembles data for the recap view and renders the recap template.
  * @private
  * @return {this} Screener
@@ -908,59 +945,6 @@ ScreenerSinglePage.renderRecap = function(vue) {
   $('#recap-body').html(renderedTemplate);
   return vue;
 }
-
-/**
- * Returns the value of a supplied input in the type defined by a data-type
- * attribute on that input.
- * @param {HTMLElement} input
- * @return {boolean|Number|string} typed value
- */
-ScreenerSinglePage.getTypedVal = function(input) {
-  const $input = $(input);
-  const val = $input.val();
-  let finalVal = $input.val();
-  switch ($input.data('type')) {
-    case ScreenerSinglePage.InputType.BOOLEAN: {
-      if (input.type == 'checkbox') {
-        finalVal = input.checked;
-      } else { // assume it's a radio button
-        // if the radio button is using true/false;
-        // if the radio button is using 1 or 0;
-        finalVal = (val === 'true') ? true : Boolean(parseInt(val, 10));
-      }
-      break;
-    }
-    case ScreenerSinglePage.InputType.FLOAT: {
-      finalVal = (_.isNumber(parseFloat(val)) && !_.isNaN(parseFloat(val))) ?
-          parseFloat(val) : 0;
-      break;
-    }
-    case ScreenerSinglePage.InputType.INTEGER: {
-      finalVal = (_.isNumber(parseInt(val, 10)) &&
-          !_.isNaN(parseInt(val, 10))) ?
-          parseInt($input.val(), 10) : 0;
-      break;
-    }
-  }
-  // console.log([val, finalVal]);
-  return finalVal;
-};
-
-/**
- * Return the local string label for values
- * @param  {string} slug the slug value of the string
- * @return {string}      the local string label
- */
-ScreenerSinglePage.localString = function(slug) {
-  try {
-    return _.findWhere(
-      window.LOCALIZED_STRINGS,
-      {slug: slug}
-    ).label;
-  } catch (error) {
-    return slug
-  }
-};
 
 /**
  * Component for the person label
