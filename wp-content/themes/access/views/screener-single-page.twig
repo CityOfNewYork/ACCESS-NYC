@@ -47,6 +47,10 @@
 
 {% extends 'base.twig' %}
 
+{% block head %}
+<meta name="robots" content="noindex,nofollow,noarchive">
+{% endblock %}
+
 {% block header %}
 <header class="site-header">
   <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark">
