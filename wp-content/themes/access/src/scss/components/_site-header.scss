@@ -3,12 +3,11 @@
   margin: 0;
   padding: 0;
   position: relative;
-  z-index: 1;
 }
 
 .site-topline {
   display: flex;
-  @include justify-content(space-between);
+  justify-content: space-between;
   background: $color-grey-lightest;
   padding: (.5 * $spacing-base) $spacing-base;
 
@@ -109,7 +108,7 @@
 }
 
 .site-nav {
-  @include align-items(center);
+  align-items: center;
   display: flex;
   background: $color-blue-dark;
   color: $color-white;
@@ -140,7 +139,7 @@
   }
 
   .site-desktop-nav {
-    @include flex(1 1 auto);
+    flex: 1 1 auto;
     display: none;
     text-align: $text-direction-end;
 
@@ -186,7 +185,7 @@
 }
 
 .site-nav-toggle {
-  @include flex(1 1 auto);
+  flex: 1 1 auto;
   text-align: $text-direction-end;
 
   @include media($bp-desktop-up) {
@@ -195,9 +194,7 @@
 }
 
 .site-mobile-nav {
-  // @include transform(translateX(0));
   transform: translateX(0);
-  // @include transition(transform .2s ease-in);
   transition: transform .2s ease-in;
   @if $text-direction == 'rtl' {
     @include position(fixed, 0 null 0 -300px);
@@ -232,10 +229,8 @@
 
   .nav-active & {
     @if $text-direction == 'rtl' {
-      // @include transform(translateX(100%));
       transform: translateX(100%)
     } @else {
-      // @include transform(translateX(-100%));
       transform: translateX(-100%)
     }
   }
