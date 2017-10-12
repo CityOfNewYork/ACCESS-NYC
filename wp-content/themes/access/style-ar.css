@@ -380,6 +380,15 @@ th {
 .fadeInUp {
   animation-name: fadeInUp; }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.fadeIn {
+  animation-name: fadeIn; }
+
 /**
  * General Settings
  */
@@ -3068,8 +3077,7 @@ a.program-filter-item {
   background: #112e51;
   margin: 0;
   padding: 0;
-  position: relative;
-  z-index: 1; }
+  position: relative; }
 
 .site-topline {
   display: -ms-flexbox;
@@ -3647,6 +3655,18 @@ a.program-filter-item {
   -ms-flex-order: -1;
       order: -1; }
 
+.o-1 {
+  -ms-flex-order: 1;
+      order: 1; }
+
+.o-2 {
+  -ms-flex-order: 2;
+      order: 2; }
+
+.o-3 {
+  -ms-flex-order: 3;
+      order: 3; }
+
 .fd-column {
   -ms-flex-direction: column;
       flex-direction: column; }
@@ -3697,6 +3717,98 @@ a.program-filter-item {
 
 .bp-justify {
   box-pack: justify; }
+
+.up {
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2); }
+
+.inset {
+  box-shadow: inset 0 7px 18px rgba(0, 0, 0, 0.2); }
+
+.o-hidden {
+  overflow: hidden; }
+
+.o-scroll {
+  overflow: hidden;
+  overflow-y: auto; }
+
+.o-ellipsis,
+.o-ellipsis-children * {
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.m-auto {
+  margin-left: auto;
+  margin-right: auto; }
+
+/**
+ * Positioning
+ */
+.top {
+  top: 0; }
+
+.bottom {
+  bottom: 0; }
+
+.left {
+  left: 0; }
+
+.right {
+  right: 0; }
+
+.f-left {
+  float: left; }
+
+.f-right {
+  float: right; }
+
+.va-top {
+  vertical-align: top !important; }
+
+.va-middle {
+  vertical-align: middle !important; }
+
+.va-bottom {
+  vertical-align: bottom !important; }
+
+.top-1, .top-2, .top-3, .top-4,
+.bottom-1, .bottom-2, .bottom-3, .bottom-4 {
+  position: relative; }
+
+.top-1 {
+  top: -1px; }
+
+.top-2 {
+  top: -2px; }
+
+.top-3 {
+  top: -3px; }
+
+.top-4 {
+  top: -4px; }
+
+.bottom-1 {
+  bottom: -1px; }
+
+.bottom-2 {
+  bottom: -2px; }
+
+.bottom-3 {
+  bottom: -3px; }
+
+.bottom-4 {
+  bottom: -4px; }
+
+.m--1 {
+  margin-bottom: -1px; }
+
+.m--2 {
+  margin-bottom: -2px; }
+
+.m--3 {
+  margin-bottom: -3px; }
+
+.m--4 {
+  margin-bottom: -4px; }
 
 .b {
   border: 1px solid; }

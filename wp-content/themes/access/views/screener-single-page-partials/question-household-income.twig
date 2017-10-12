@@ -45,6 +45,11 @@
 
       <a class="{{styles.questions}}" data-js="question" href="#question-household-income">
         {{ __('Household Income', 'accessnyc-screener') }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+          v-if="errors.all('HouseholdIncome').length > 0">
+          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </a>
 
       <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden">
@@ -141,14 +146,15 @@
                   </label>
                   <div class="m-bottom-2">
                     <div class="screener-question-container"
-                      v-bind:class="{'error': errors.has('Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')}">
+                      v-bind:class="{'error': errors.has('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')}">
                       <div class="error-message"
-                        v-if="errors.has('Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')">
-                          v{ errors.first('Person[' + personIndex + '].incomes[' + incomeIndex + '].amount') }
+                        v-if="errors.has('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')">
+                          v{ errors.first('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount') }
                       </div>
                       <div class="currency-usd m-0">
                         <input required
                           data-type="float"
+                          data-vv-scope="HouseholdIncome"
                           v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
                           v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'"
                           v-bind:data-vv-as="income.type + ' income amount'"

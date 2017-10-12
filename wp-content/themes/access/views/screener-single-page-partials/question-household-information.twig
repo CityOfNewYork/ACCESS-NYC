@@ -25,8 +25,13 @@
 
     <div class="p-relative">
 
-      <a class="{{styles.questions}}" data-js="question" href="#question-household-information">
+      <a class="{{styles.questions}}" href="#question-household-information" data-js="question">
         {{ __('Household Information', 'accessnyc-screener') }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+          v-if="errors.all('HouseholdInformation').length > 0">
+          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </a>
 
       <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2"> {# hidden #}
@@ -36,14 +41,15 @@
             {{ __('Including you, how many people are in your household?', 'accessnyc-screener') }}
           </label>
           <div class="screener-question-container"
-            v-bind:class="{'error': errors.has('Household.members')}">
+            v-bind:class="{'error': errors.has('HouseholdInformation.Household.members')}">
             <div class="error-message"
-              v-if="errors.has('Household.members')">v{ errors.first('Household.members') }</div>
+              v-if="errors.has('HouseholdInformation.Household.members')">v{ errors.first('HouseholdInformation.Household.members') }</div>
             <input type="number" name="Household.members" min="1" max="8" maxlength="1" value="1" required
               data-type="integer"
               data-object="household"
               data-key="members"
               data-vv-as="household members"
+              data-vv-scope="HouseholdInformation"
               v-validate="{required: true, min: 1, max_value: 8, min_value: 1, regex: '[0-9]', numeric: true}"
               v-on:change="populate">
           </div>
@@ -82,12 +88,20 @@
         </div>
 
         <div v-if="!people[0]._attrs.headOfHousehold" class="m-top-2">
-          <label class="screener-label" for="hoh-relation">
+          <label class="{{styles.labels}}" for="hoh-relation">
             {{ __('What is your relationship to the head of the household? I am their:', 'accessnyc-screener') }}
+            <span class="c-red">*</span>
           </label>
-          <div>
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('HouseholdInformation.Person[0].headOfHouseholdRelation')}">
+            <div class="error-message" v-if="errors.has('HouseholdInformation.Person[0].headOfHouseholdRelation')">
+              {{ __('Please select a your relationship to the head of household.', 'accessnyc-screener') }}
+            </div>
             <select class="screener-select" name="Person[0].headOfHouseholdRelation" required
-              v-model="people[0]._attrs.headOfHouseholdRelation">
+              data-vv-as="head of household relation"
+              data-vv-scope="HouseholdInformation"
+              v-model="people[0]._attrs.headOfHouseholdRelation"
+              v-validate="{required: true}">
               {% for option in headOfHouseholdRelationOptions %}
               <option value="{{ option.value }}">
                 {{ __(option.text, 'accessnyc-screener') }}

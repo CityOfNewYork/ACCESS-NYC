@@ -6,8 +6,13 @@
 
     <div class="p-relative">
 
-      <a class="{{styles.questions}}" data-js="question" href="#question-client-basics">
+      <a class="{{styles.questions}}" href="#question-client-basics" data-js="question">
         {{ __('Client Basics', 'accessnyc-screener') }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+          v-if="errors.all('ClientBasics').length > 0">
+          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </a>
 
       <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2 hidden">
@@ -17,11 +22,12 @@
             {{ __('First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
-            v-bind:class="{'error': errors.has('Client[0].firstName')}">
+            v-bind:class="{'error': errors.has('ClientBasics.Client[0].firstName')}">
             <div class="error-message"
-              v-if="errors.has('Client[0].firstName')">v{ errors.first('Client[0].firstName') }</div>
+              v-if="errors.has('ClientBasics.Client[0].firstName')">v{ errors.first('ClientBasics.Client[0].firstName') }</div>
             <input id="client-0-first-name" name="Client[0].firstName" value="" required
               data-vv-as="client's first name"
+              data-vv-scope="ClientBasics"
               v-validate="{required: true}"
               v-model="client._attrs.firstName">
           </div>
@@ -32,11 +38,12 @@
             {{ __('Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
-            v-bind:class="{'error': errors.has('Client[0].lastName')}">
+            v-bind:class="{'error': errors.has('ClientBasics.Client[0].lastName')}">
             <div class="error-message"
-              v-if="errors.has('Client[0].lastName')">v{ errors.first('Client[0].lastName') }</div>
+              v-if="errors.has('ClientBasics.Client[0].lastName')">v{ errors.first('ClientBasics.Client[0].lastName') }</div>
             <input id="client-0-last-name" name="Client[0].lastName" value="" required
               data-vv-as="client's last name"
+              data-vv-scope="ClientBasics"
               v-validate="{required: true}"
               v-model="client._attrs.lastName">
           </div>
@@ -47,15 +54,16 @@
             {{ __('How old are you?', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
-            v-bind:class="{'error': errors.has('Person[0].age')}">
+            v-bind:class="{'error': errors.has('ClientBasics.Person[0].age')}">
             <div class="error-message"
-              v-if="errors.has('Person[0].age')">v{ errors.first('Person[0].age') }</div>
+              v-if="errors.has('ClientBasics.Person[0].age')">v{ errors.first('ClientBasics.Person[0].age') }</div>
             <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" required
               data-type="integer"
               data-object="people"
               data-key="age"
               data-index="0"
               data-vv-as="age"
+              data-vv-scope="ClientBasics"
               v-validate="{required: true, max: 3, min: 0, regex: '[0-9]', numeric: true}"
               v-on:change="setAttr">
           </div>
@@ -67,12 +75,13 @@
             <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
-            v-bind:class="{'error': errors.has('Household.zip')}">
+            v-bind:class="{'error': errors.has('ClientBasics.Household.zip')}">
             <div class="error-message"
-              v-if="errors.has('Household.zip')">v{ errors.first('Household.zip') }</div>
+              v-if="errors.has('ClientBasics.Household.zip')">v{ errors.first('ClientBasics.Household.zip') }</div>
             <input id="household-zip" name="Household.zip" type="number" maxlength="5" pattern="[0-9]" required
               data-type="zip"
               data-vv-as="zip code"
+              data-vv-scope="ClientBasics"
               v-validate="{required: true, max: 5, regex: '[0-9]', numeric: true, zip: true}"
               v-model="household._attrs.zip">
           </div>

@@ -23,7 +23,7 @@
   {'value': '', 'text': 'None of these apply'}
 ] %}
 
-<fieldset class="d-block w-100">
+<fieldset class="d-block w-100 p-bottom">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-housing-situation">
 
@@ -33,6 +33,11 @@
 
       <a class="{{styles.questions}}" data-js="question" href="#question-housing-situation">
         {{ __('Housing Situation', 'accessnyc-screener') }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+          v-if="errors.all('HousingSituation').length > 0">
+          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </a>
 
       <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden"> {# hidden #}
@@ -62,13 +67,14 @@
               <span class="c-red">*</span>
             </label>
             <div class="screener-question-container"
-              v-bind:class="{'error': errors.has('Household.livingRentalType')}">
-              <div class="error-message" v-if="errors.has('Household.livingRentalType')">
+              v-bind:class="{'error': errors.has('HousingSituation.Household.livingRentalType')}">
+              <div class="error-message" v-if="errors.has('HousingSituation.Household.livingRentalType')">
                 {{ __('Please select a rental type.', 'accessnyc-screener') }}
               </div>
               <select id="housing-livingRentalType" class="screener-select js-screener-toggle" name="Household.livingRentalType" required
                 data-val="livingRentalType"
                 data-toggles="#screener-lease-owner"
+                data-vv-scope="HousingSituation"
                 v-model="household._attrs.livingRentalType"
                 v-validate="{required: true}">
                 {% for option in housingOptions %}
@@ -113,9 +119,9 @@
                 {{ __('Who is on the lease?', 'accessnyc-screener') }}
               </label>
               <div class="screener-question-container"
-                v-bind:class="{'error': errors.has('Person.livingRentalOnLease')}">
+                v-bind:class="{'error': errors.has('HousingSituation.Person.livingRentalOnLease')}">
                 <div class="error-message"
-                  v-if="errors.has('Person.livingRentalOnLease')">
+                  v-if="errors.has('HousingSituation.Person.livingRentalOnLease')">
                     {{ __('Please select at least one person who is on the lease.', 'accessnyc-screener') }}
                 </div>
                 <div v-for="(p, personIndex) in people">
@@ -124,6 +130,7 @@
                       data-type="boolean"
                       data-object="people"
                       data-key="livingRentalOnLease"
+                      data-vv-scope="HousingSituation"
                       v-validate="{required: true}"
                       v-bind:data-index="personIndex"
                       v-bind:name="'Person.livingRentalOnLease'"

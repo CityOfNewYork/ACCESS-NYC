@@ -42,7 +42,10 @@
   'sections': 'type-h1 m-left-2 p-top-2 d-inline-block p-right',
   'questions': 'type-h2 c-black m-0 d-block p-2',
   'labels': 'type-h3 c-blue-dark ff-sans-serif d-block',
-  'explainations': 'type-h4 c-black m-0'
+  'explainations': 'type-h4 c-black m-0',
+  'warning': 'icon icon-warning bottom-3 f-right animated fadeIn',
+  'confirm': 'btn btn-primary btn-next btn-small d-block w-100 animated fadeInUp m-top',
+  'alert': 'alert status-urgent animated fadeInUp m-top'
 } %}
 
 {% extends 'base.twig' %}
@@ -86,18 +89,25 @@
               {% include 'screener-single-page-partials/question-staff.twig' with {'styles': styles, 'locations': locations} %}
               {% include 'screener-single-page-partials/disclaimer.twig' with styles %}
 
-            {# <div class="p-2"
-              v-if="validateSet('staff', ['firstName', 'lastName', 'email'])[0] === false">
-              {{ __('PEU Staff, please fill out your', 'accessnyc-screener') }}
-              <em>v{ validateSet('staff', ['firstName', 'lastName', 'email'])[1] }</em>
-              {{ __('to continue.', 'accessnyc-screener') }}
-            </div> #}
+            <div v-if="disclaimer">
 
-            <div class="p-2 animated fadeInUp" v-if="disclaimer">
-              <a class="btn btn-primary btn-next btn-small d-block" href="#page-screener"
-                data-scope="Staff" v-on:click="validate">
+              <a class="{{ styles.confirm }}" href="#page-screener"
+                data-scope="Staff"
+                v-on:click="validate">
                 {{ __('Let\'s Get Started', 'accessnyc-screener') }}
               </a>
+
+            </div>
+
+            <div class="{{ styles.alert }}" v-if="errors.all('Staff').length > 0">
+              <div class="alert-icon">
+                <svg class="icon icon-warning d-block">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-warning"></use>
+                </svg>
+              </div>
+              <div class="alert-body">
+                {{ __('Some required fields are not filled out.', 'accessnyc-screener') }}
+              </div>
             </div>
 
           </div>
@@ -136,12 +146,24 @@
             </h1><span class="screener-step">(4 of 4)</span>
               {% include 'screener-single-page-partials/question-housing-situation.twig' with styles %}
 
-            <div class="p-vertical-2">
+            <div>
 
-              <a class="btn btn-primary btn-next btn-small d-block" href="#page-recap" data-scope="page-screener" v-on:click="validate">
+              <a class="{{ styles.confirm }}" href="#page-recap"
+                v-on:click="validate">
                 {{ __('Confirm', 'accessnyc-screener') }}
               </a>
 
+            </div>
+
+            <div class="{{ styles.alert }}" v-if="errors.all().length > 0">
+              <div class="alert-icon">
+                <svg class="icon icon-warning d-block">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-warning"></use>
+                </svg>
+              </div>
+              <div class="alert-body">
+                {{ __('Some required fields are not filled out.', 'accessnyc-screener') }}
+              </div>
             </div>
 
           </div>

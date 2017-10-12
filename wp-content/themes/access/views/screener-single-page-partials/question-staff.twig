@@ -6,8 +6,13 @@
 
     <div class="p-relative">
 
-      <a class="{{styles.questions}}" data-js="question" href="#question-staff">
+      <a class="{{styles.questions}}" href="#question-staff" data-js="question">
         {{ __('PEU Staff', 'accessnyc-screener') }}
+        <svg class="{{styles.warning}}" role="alert" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+          v-if="errors.all('Staff').length > 0">
+          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </a>
 
       <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2 hidden">
@@ -17,11 +22,12 @@
             {{ __('PEU Staff First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
-            v-bind:class="{'error': errors.has('Staff.firstName')}">
+            v-bind:class="{'error': errors.has('Staff.firstName', 'Staff')}">
             <div class="error-message"
-              v-if="errors.has('Staff.firstName')">v{ errors.first('Staff.firstName') }</div>
+              v-if="errors.has('Staff.firstName', 'Staff')">v{ errors.first('Staff.firstName', 'Staff') }</div>
             <input id="staff-first-name" name="Staff.firstName" value="" required
               data-vv-as="staff's first name"
+              data-vv-scope="Staff"
               v-validate="{required: true}"
               v-model="staff._attrs.firstName">
           </div>
@@ -32,11 +38,12 @@
             {{ __('PEU Staff Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
-            v-bind:class="{'error': errors.has('Staff.lastName')}">
+            v-bind:class="{'error': errors.has('Staff.lastName', 'Staff')}">
             <div class="error-message"
-              v-if="errors.has('Staff.lastName')">v{ errors.first('Staff.lastName') }</div>
+              v-if="errors.has('Staff.lastName', 'Staff')">v{ errors.first('Staff.lastName', 'Staff') }</div>
             <input id="staff-last-name" name="Staff.lastName" value="" required
               data-vv-as="staff's last name"
+              data-vv-scope="Staff"
               v-validate="{required: true}"
               v-model="staff._attrs.lastName">
           </div>
@@ -47,11 +54,12 @@
             {{ __('PEU Staff Email', 'accessnyc-screener') }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
-            v-bind:class="{'error': errors.has('Staff.email')}">
+            v-bind:class="{'error': errors.has('Staff.email', 'Staff')}">
             <div class="error-message"
-              v-if="errors.has('Staff.email')">v{ errors.first('Staff.email') }</div>
+              v-if="errors.has('Staff.email', 'Staff')">v{ errors.first('Staff.email', 'Staff') }</div>
             <input class="w-input-double" id="staff-email" name="Staff.email" value="" type="email" required
               data-vv-as="staff email"
+              data-vv-scope="Staff"
               v-validate="{required: true, email: true}"
               v-model="staff._attrs.email">
           </div>

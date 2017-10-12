@@ -27,8 +27,13 @@
 
         <div class="p-relative">
 
-          <a class="{{styles.questions}}" data-js="question" href="#question-household-members">
+          <a class="{{styles.questions}}" href="#question-household-members" data-js="question">
             {{ __('Household Members', 'accessnyc-screener') }}
+            <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+              v-if="errors.all('HouseholdMembers').length > 0">
+              <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+              <use xlink:href="#icon-warning"></use>
+            </svg>
           </a>
 
           <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden"> {# hidden #}
@@ -79,12 +84,13 @@
                       <span class="c-red">*</span>
                     </label>
                     <div class="screener-question-container"
-                      v-bind:class="{'error': errors.has('Person[' + personIndex + '].headOfHouseholdRelation')}">
-                      <div class="error-message" v-if="errors.has('Person[' + personIndex + '].headOfHouseholdRelation')">
-                        v{ errors.first('Person[' + personIndex + '].headOfHouseholdRelation') }
+                      v-bind:class="{'error': errors.has('HouseholdMembers.Person[' + personIndex + '].headOfHouseholdRelation')}">
+                      <div class="error-message" v-if="errors.has('HouseholdMembers.Person[' + personIndex + '].headOfHouseholdRelation')">
+                        v{ errors.first('HouseholdMembers.Person[' + personIndex + '].headOfHouseholdRelation') }
                       </div>
                       <select class="screener-select" required
                         data-vv-as="head of household relation"
+                        data-vv-scope="HouseholdMembers"
                         v-validate="{required: true}"
                         v-model="p._attrs.headOfHouseholdRelation"
                         v-bind:id="'person-' + personIndex + '-relation'"
@@ -105,15 +111,16 @@
                     <span class="c-red">*</span>
                   </label>
                   <div class="screener-question-container"
-                    v-bind:class="{'error': errors.has('Person[' + personIndex + '].age')}">
-                    <div class="error-message" v-if="errors.has('Person[' + personIndex + '].age')">
-                      v{ errors.first('Person[' + personIndex + '].age') }
+                    v-bind:class="{'error': errors.has('HouseholdMembers.Person[' + personIndex + '].age')}">
+                    <div class="error-message" v-if="errors.has('HouseholdMembers.Person[' + personIndex + '].age')">
+                      v{ errors.first('HouseholdMembers.Person[' + personIndex + '].age') }
                     </div>
                     <input type="number" min="0" maxlength="3" pattern="[0-9]" step="1" required
                       data-object="people"
                       data-key="age"
                       data-type="integer"
                       data-vv-as="age"
+                      data-vv-scope="HouseholdMembers"
                       v-validate="{required: true, max: 3, min: 0, regex: '[0-9]', numeric: true}"
                       v-bind:data-index="personIndex"
                       v-bind:id="'person-' + personIndex + '-age'"
@@ -121,7 +128,6 @@
                       v-on:change="setAttr">
                   </div>
                 </div>
-
 
               </div>
 

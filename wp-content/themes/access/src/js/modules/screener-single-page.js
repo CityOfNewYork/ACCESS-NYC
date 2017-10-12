@@ -56,6 +56,7 @@ class ScreenerSinglePage {
         /* Additional Modules */
         'client': new ScreenerClient(),
         'staff': new ScreenerStaff(),
+        /* UI Data */
         'categoriesCurrent': [],
         'disclaimer': false,
         'expenses': []
@@ -70,7 +71,6 @@ class ScreenerSinglePage {
         'checked': ScreenerSinglePage.checked,
         'singleOccupant': ScreenerSinglePage.singleOccupant,
         'validate': ScreenerSinglePage.validate,
-        'validScopes': ScreenerSinglePage.validScopes,
         'localString': ScreenerSinglePage.localString
       }
     };
@@ -570,31 +570,14 @@ ScreenerSinglePage.validateZipField = {
 ScreenerSinglePage.validate = function(event) {
   event.preventDefault();
   let scope = event.currentTarget.dataset.scope;
-  let validScope = this.validScopes(scope);
-  if (validScope) {
-    this.$validator.validateAll(validScope)
+  if (typeof scope !== 'undefined') {
+    this.$validator.validateAll(scope)
       .then(ScreenerSinglePage.valid);
   } else {
-    this.$validator.validateAll()
+    this.$validator.validate()
       .then(ScreenerSinglePage.valid);
   }
 };
-
-/**
- * Storage for validation scopes
- * @param  {string} scope the scope to return
- * @return {object}       models and fields of the scope, false if none
- */
-ScreenerSinglePage.validScopes = function(scope) {
-  let scopes = {
-    'Staff': {
-      'Staff.firstName': this.staff._attrs.firstName,
-      'Staff.lastName': this.staff._attrs.lastName,
-      'Staff.email': this.staff._attrs.email
-    }
-  };
-  return (typeof scopes[scope] !== 'undefined') ? scopes[scope] : false;
-}
 
 /**
  * Validate
@@ -603,10 +586,13 @@ ScreenerSinglePage.validScopes = function(scope) {
  */
 ScreenerSinglePage.valid = function(valid) {
   if (!valid) {
-    alert('Some required fields are not filled out.');
+    /* eslint-disable no-console, no-debugger */
+    console.error('Some required fields are not filled out.');
+    /* eslint-enable no-console, no-debugger */
   } else {
     window.location.hash = event.currentTarget.hash;
   }
+  // debug bypasses validation
   if (Utility.debug())
     window.location.hash = event.currentTarget.hash;
 };

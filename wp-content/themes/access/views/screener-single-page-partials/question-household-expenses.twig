@@ -30,6 +30,11 @@
 
       <a class="{{styles.questions}}" data-js="question" href="#question-household-expenses">
         {{ __('Household Expenses', 'accessnyc-screener') }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+          v-if="errors.all('HouseholdExpenses').length > 0">
+          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </a>
 
       <div class="p-horizontal-2 p-bottom js-toggle-question hidden"> {# hidden #}
@@ -72,13 +77,15 @@
                 <span class="c-red">*</span>
               </label>
               <div class="screener-question-container"
-                v-bind:class="{'error': errors.has('Person[0].expenses[' + expenseIndex + '].amount')}">
+                v-bind:class="{'error': errors.has('HouseholdExpenses.Person[0].expenses[' + expenseIndex + '].amount')}">
                 <div class="error-message"
-                  v-if="errors.has('Person[0].expenses[' + expenseIndex + '].amount')">
-                    v{ errors.first('Person[0].expenses[' + expenseIndex + '].amount') }
+                  v-if="errors.has('HouseholdExpenses.Person[0].expenses[' + expenseIndex + '].amount')">
+                    v{ errors.first('HouseholdExpenses.Person[0].expenses[' + expenseIndex + '].amount') }
                 </div>
                 <div class="currency-usd m-0">
-                  <input data-type="float" required
+                  <input required
+                    data-type="float"
+                    data-vv-scope="HouseholdExpenses"
                     v-bind:id="'person-0-expenses-' + expenseIndex + '-amount'"
                     v-bind:name="'Person[0].expenses[' + expenseIndex + '].amount'"
                     v-bind:data-vv-as="expense.type + ' expense amount'"
@@ -174,12 +181,14 @@
                     <span class="c-red">*</span>
                   </label>
                   <div class="screener-question-container"
-                    v-bind:class="{'error': errors.has('Person[' + personIndex + '].expenses[' + expenseIndex + '].amount')}">
+                    v-bind:class="{'error': errors.has('HouseholdExpenses.Person[' + personIndex + '].expenses[' + expenseIndex + '].amount')}">
                     <div class="error-message"
-                      v-if="errors.has('Person[' + personIndex + '].expenses[' + expenseIndex + '].amount')">
-                        v{ errors.first('Person[' + personIndex + '].expenses[' + expenseIndex + '].amount') }</div>
+                      v-if="errors.has('HouseholdExpenses.Person[' + personIndex + '].expenses[' + expenseIndex + '].amount')">
+                        v{ errors.first('HouseholdExpenses.Person[' + personIndex + '].expenses[' + expenseIndex + '].amount') }</div>
                     <div class="currency-usd m-0">
-                      <input data-type="float" required
+                      <input required
+                        data-type="float"
+                        data-vv-scope="HouseholdExpenses"
                         v-bind:id="'person-' + personIndex + '-expenses-' + expenseIndex + '-amount'"
                         v-bind:name="'Person[' + personIndex + '].expenses[' + expenseIndex + '].amount'"
                         v-bind:data-vv-as="e.type + ' expense amount'"
