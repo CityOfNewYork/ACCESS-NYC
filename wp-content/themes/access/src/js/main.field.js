@@ -1,7 +1,9 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
 import _ from 'underscore';
+/* eslint-disable no-unused-vars */
 import SmoothScroll from 'smoothscroll-polyfill';
+/* eslint-enable no-unused-vars */
 import ScreenerField from 'modules/screener.field';
 import ResultsField from 'modules/results.field';
 import ShareForm from 'modules/share-form';
@@ -11,7 +13,9 @@ import Utility from 'modules/utility';
 (function(window, $) {
   'use strict';
 
+  /* eslint-disable no-undef */
   require('smoothscroll-polyfill').polyfill();
+  /* eslint-enable no-undef */
 
   // Get SVG sprite file.
   $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
@@ -45,8 +49,8 @@ import Utility from 'modules/utility';
         ).label;
       let dialogue = confirm(message);
       if (dialogue) {
-        if (event.currentTarget.hash) {
-          window.location = event.currentTarget.hash;
+        if (event.currentTarget.href) {
+          window.location = event.currentTarget.href;
         } else {
           location.reload();
         }
@@ -54,5 +58,4 @@ import Utility from 'modules/utility';
       return false;
     });
   });
-
 })(window, jQuery);

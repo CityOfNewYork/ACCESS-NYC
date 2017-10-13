@@ -14,7 +14,6 @@ const Utility = {};
 /**
  * Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
  * @param  {object} data from get
- * @return {[type]}      [description]
  */
 Utility.svgSprites = function(data) {
   const svgDiv = document.createElement('div');
@@ -27,7 +26,6 @@ Utility.svgSprites = function(data) {
  * Simple toggle that add/removes "active" and "hidden" classes, as well as
  * applying appropriate aria-hidden value to a specified target.
  * @param  {event} event the onclick event
- * @return {null}
  */
 Utility.simpleToggle = function(event) {
   // Simple toggle that add/removes "active" and "hidden" classes, as well as
@@ -156,8 +154,8 @@ Utility.isValidEmail = function(email) {
 /**
  * For a given number, checks to see if its value is a valid Phone Number.
  * If not, displays an error message and sets an error class on the element.
- * @param {HTMLElement} input - The html form element for the component.
- * @return {boolean} - Valid Phone Number.
+ * @param {string} number The html form element for the component.
+ * @return {boolean}      Valid Phone Number.
  */
 Utility.validatePhoneNumber = function(number) {
   let num = Utility.parsePhoneNumber(number); // parse the number

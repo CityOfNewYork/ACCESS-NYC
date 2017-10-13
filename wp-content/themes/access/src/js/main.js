@@ -47,7 +47,7 @@ import Utility from 'modules/utility';
   }).on('click', '.js-toggle-filter', (e) => {
     e.preventDefault();
     $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
-  })
+  });
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);

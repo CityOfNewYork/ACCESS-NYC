@@ -28,7 +28,6 @@ class ResultsField {
    * @return {this} OfficeMap
    */
   init() {
-
     if (this._initialized) {
       return this;
     }
@@ -50,13 +49,11 @@ class ResultsField {
 
     this._initialized = true;
     return this;
-
   }
 
   /**
    * Open links in new window by adding target blank to them.
    * @param  {event} event the onclick event
-   * @return {null}
    */
   _targetBlank(event) {
     $(event.currentTarget).attr('target', '_blank');
@@ -65,7 +62,6 @@ class ResultsField {
   /**
    * Remove program from results, and trim the sharable url
    * @param  {event} event the onclick event
-   * @return {null}
    */
   _removeProgram(event) {
     let categories = Utility.getUrlParameter('categories').split(',');
@@ -76,13 +72,50 @@ class ResultsField {
     let index = programs.indexOf(removeCode);
     let location = window.location;
     let shareUrl = [location.origin, location.pathname, '?'].join('');
+    let card = $(`[data-code="${removeCode}"]`);
+    let selected = card.closest(ResultsField.Selectors.SELECTED_PROGRAMS);
+    let additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
+    let parent = (selected.length) ? selected : additional;
+    let length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).children();
 
     event.preventDefault();
 
+    // Hide the card
+    card.attr('aria-hidden', true)
+      .addClass('hidden hide-for-print')
+      .hide();
+
+    // Get updated length of list
+    length = parent.find(ResultsField.Selectors.PROGRAMS_LIST)
+      .children().filter(':not(.hidden)').length;
+
+    // Update the length if available
+    parent.find(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+
+    // Switch to singular text if only one program is left
+    if (length === 1) {
+      parent.find(ResultsField.Selectors.PROGRAMS_SINGULAR)
+        .attr('aria-hidden', false)
+        .removeClass('hidden hide-for-print');
+      parent.find(ResultsField.Selectors.PROGRAMS_PLURAL)
+        .attr('aria-hidden', true)
+        .addClass('hidden hide-for-print');
+    // Hide title if list is empty
+    } else if (length <= 0) {
+      parent.find(ResultsField.Selectors.PROGRAMS_TITLE)
+        .attr('aria-hidden', true)
+        .addClass('hidden hide-for-print')
+        .hide();
+      parent.find(ResultsField.Selectors.PROGRAMS_LIST)
+        .attr('aria-hidden', true)
+        .addClass('hidden hide-for-print')
+        .hide();
+    }
+
+    // Remove program from url list
     if (index > -1) programs.splice(index, 1);
 
-    $(`[data-code="${removeCode}"]`).hide();
-
+    // Create updated share url
     shareUrl += [
       ['categories=', categories.join('%2C')].join(''),
       ['programs=', programs.join('%2C')].join(''),
@@ -90,6 +123,7 @@ class ResultsField {
       ['date=', date].join('')
     ].join('&');
 
+    // Update share url fields
     $(ResultsField.Selectors.SHARE_URLS).each((index, element) => {
       element.value = shareUrl;
     });
@@ -104,10 +138,17 @@ class ResultsField {
  * @type {Object}
  */
 ResultsField.Selectors = {
+  'ADDITIONAL_PROGRAMS': '[data-js="additional-programs"]',
   'DOM': '[data-js="results"]',
   'HYPERLINKS': 'a[href*]',
   'REMOVE_PROGRAM': '[data-js="remove-program"]',
-  'SHARE_URLS': 'input[name="url"]'
+  'SHARE_URLS': 'input[name="url"]',
+  'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
+  'PROGRAMS_LENGTH': '[data-js="programs-length"]',
+  'PROGRAMS_LIST': '[data-js="programs-list"]',
+  'PROGRAMS_TITLE': '[data-js="programs-title"]',
+  'PROGRAMS_SINGULAR': '[data-js="programs-singular"]',
+  'PROGRAMS_PLURAL': '[data-js="programs-plural"]'
 }
 
 export default ResultsField;

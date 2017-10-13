@@ -50,7 +50,11 @@ class ScreenerField {
       'el': '#vue',
       'data': {
         /* Default ACCESS NYC Modules */
-        'people': [new ScreenerPerson({headOfHousehold: true})],
+        'people': [new ScreenerPerson({
+          headOfHousehold: true,
+          livingOwnerOnDeed: true,
+          livingRentalOnLease: true
+        })],
         'household': new ScreenerHousehold(),
         'categories': [],
         /* Additional Modules */

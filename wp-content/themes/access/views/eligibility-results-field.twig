@@ -90,32 +90,36 @@
       </div>
 
       <div class="content-body">
+
         {% if selectedPrograms | length %}
-          <div class="screener-qualified-programs selected-programs m-0 p-horizontal-2 p-bottom-2">
-            <h3 class="screener-qualified-programs-heading">{{__('These are programs for you in the categories you selected.', 'accessnyc-results')}}</h3>
-            <div>
-              {% for post in selectedPrograms %}
-                {% include 'partials/post-teaser-block-proto.twig' with {'show_apply': true } %}
-              {% endfor %}
-            </div>
+        <div class="screener-qualified-programs selected-programs m-0 p-horizontal-2" data-js="selected-programs">
+          <h3 class="screener-qualified-programs-heading" data-js="programs-title">
+            <span data-js="programs-singular" {% if selectedPrograms | length > 1 %}class="hidden hide-for-print" aria-hidden="true"{% endif %}>{{__('This is the program for you in the categories you selected.', 'accessnyc-results')}}</span>
+            <span data-js="programs-plural" {% if selectedPrograms | length == 1 %}class="hidden hide-for-print" aria-hidden="true"{% endif %}>{{__('These are programs for you in the categories you selected.', 'accessnyc-results')}}</span>
+          </h3>
+          <div class="m-bottom-2" data-js="programs-list">
+            {% for post in selectedPrograms %}
+            {% include 'partials/post-teaser-block-proto.twig' with {'show_apply': true } %}
+            {% endfor %}
           </div>
+        </div>
         {% endif %}
+
         {% if additionalPrograms | length %}
-          <div class="screener-qualified-programs other-programs m-0 p-horizontal-2 p-bottom-2">
-            <h3 class="screener-other-qualified-programs-heading">
-              {% if additionalPrograms | length == 1 %}
-                {{ additionalPrograms | length }} {{__('additional program.', 'accessnyc-results')}}
-              {% else %}
-                {{ additionalPrograms | length }} {{__('additional programs.', 'accessnyc-results')}}
-              {% endif %}
-            </h3>
-            <div>
-              {% for post in additionalPrograms %}
-                {% include 'partials/post-teaser-block-proto.twig' with {'show_apply': true } %}
-              {% endfor %}
-            </div>
+        <div class="screener-qualified-programs other-programs m-0 p-horizontal-2" data-js="additional-programs">
+          <h3 class="screener-other-qualified-programs-heading" data-js="programs-title">
+            <span data-js="programs-length">{{ additionalPrograms | length }}</span>
+            <span data-js="programs-singular" {% if additionalPrograms | length > 1 %}class="hidden hide-for-print" aria-hidden="true"{% endif %}>{{__('additional program', 'accessnyc-results')}}</span>
+            <span data-js="programs-plural" {% if additionalPrograms | length == 1 %}class="hidden hide-for-print" aria-hidden="true"{% endif %}>{{__('additional programs', 'accessnyc-results')}}</span>
+          </h3>
+          <div class="m-bottom-2" data-js="programs-list">
+            {% for post in additionalPrograms %}
+            {% include 'partials/post-teaser-block-proto.twig' with {'show_apply': true } %}
+            {% endfor %}
           </div>
+        </div>
         {% endif %}
+
       </div>
     </div>
   </main>

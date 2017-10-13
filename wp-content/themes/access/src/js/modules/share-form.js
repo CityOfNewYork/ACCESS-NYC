@@ -37,7 +37,6 @@ class ShareForm {
    * @return {this} ShareForm
    */
   init() {
-
     if (this._initialized) {
       return this;
     }
@@ -57,7 +56,6 @@ class ShareForm {
 
     this._initialized = true;
     return this;
-
   }
 
   /**

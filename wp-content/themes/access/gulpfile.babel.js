@@ -85,22 +85,22 @@ gulp.task('styles', () => {
 
 // Script Linter
 gulp.task('lint', () =>
-  gulp.src(`${src}/js/**/*.js`)
-    .pipe($.eslint({
-      "parser": "babel-eslint",
-      "rules": {
-        "strict": 0
+    gulp.src(`${src}/js/**/*.js`)
+      .pipe($.eslint({
+        "parser": "babel-eslint",
+        "rules": {
+          "strict": 0
+        }
       }
-    }
-))
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failOnError()))
+  ))
+  .pipe($.eslint.format())
+  .pipe($.if(!browserSync.active, $.eslint.failOnError()))
 );
 
 
 // Scripts
 gulp.task('scripts', () => {
- const apps = [
+  const apps = [
     'main', 'main.field'
   ];
   let tasks = apps.map(function(entry) {
