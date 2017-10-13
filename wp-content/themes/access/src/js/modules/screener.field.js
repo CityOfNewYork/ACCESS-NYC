@@ -17,7 +17,7 @@ import Validator from 'vee-validate';
  * Requires Documentation
  * @class
  */
-class ScreenerSinglePage {
+class ScreenerField {
   /**
    * @param {HTMLElement} el - The form element for the component.
    * @constructor
@@ -40,7 +40,7 @@ class ScreenerSinglePage {
       'admin': function(vue) {},
       'screener': function(vue) {},
       'recap': function(vue) {
-        ScreenerSinglePage.renderRecap(vue);
+        ScreenerField.renderRecap(vue);
       }
     };
 
@@ -62,16 +62,16 @@ class ScreenerSinglePage {
         'expenses': []
       },
       'methods': {
-        'resetAttr': ScreenerSinglePage.resetAttr,
-        'setAttr': ScreenerSinglePage.setAttr,
-        'populate': ScreenerSinglePage.populate,
-        'pushPayment': ScreenerSinglePage.pushPayment,
-        'getPayment': ScreenerSinglePage.getPayment,
-        'push': ScreenerSinglePage.push,
-        'checked': ScreenerSinglePage.checked,
-        'singleOccupant': ScreenerSinglePage.singleOccupant,
-        'validate': ScreenerSinglePage.validate,
-        'localString': ScreenerSinglePage.localString
+        'resetAttr': ScreenerField.resetAttr,
+        'setAttr': ScreenerField.setAttr,
+        'populate': ScreenerField.populate,
+        'pushPayment': ScreenerField.pushPayment,
+        'getPayment': ScreenerField.getPayment,
+        'push': ScreenerField.push,
+        'checked': ScreenerField.checked,
+        'singleOccupant': ScreenerField.singleOccupant,
+        'validate': ScreenerField.validate,
+        'localString': ScreenerField.localString
       }
     };
 
@@ -92,11 +92,11 @@ class ScreenerSinglePage {
      * Reactive Elements
      */
 
-    Validator.Validator.extend('zip', ScreenerSinglePage.validateZipField);
+    Validator.Validator.extend('zip', ScreenerField.validateZipField);
 
     Vue.use(Validator, {events: 'blur', zip: 'zip'});
 
-    Vue.component('personlabel', ScreenerSinglePage.personLabel);
+    Vue.component('personlabel', ScreenerField.personLabel);
 
     this._vue = new Vue(this._vue); // Initializes the Vue component
 
@@ -110,19 +110,19 @@ class ScreenerSinglePage {
       //if (!this._recaptchaRequired) {
       //  this._submit($(e.currentTarget).data('action'));
       // } else {
-      //   $(e.currentTarget).closest(`.${ScreenerSinglePage.CssClass.STEP}`)
-      //     .find(`.${ScreenerSinglePage.CssClass.ERROR_MSG}`).remove();
+      //   $(e.currentTarget).closest(`.${ScreenerField.Selectors.STEP}`)
+      //     .find(`.${ScreenerField.Selectors.ERROR_MSG}`).remove();
       //   if (this._recaptchaVerified) {
       //     this._submit($(e.currentTarget).data('action'));
       //   } else {
       //     this._showError($('#screener-recaptcha')[0],
-      //         ScreenerSinglePage.Message.REQUIRED);
+      //         ScreenerField.Message.REQUIRED);
       //   }
       // }
     // });
 
     // Basic toggles
-    $el.on('change', `.${ScreenerSinglePage.CssClass.TOGGLE}`, this._toggler);
+    $el.on('change', `.${ScreenerField.Selectors.TOGGLE}`, this._toggler);
     // Floats
     $el.on('focus', '[data-type="float"]', this._sanitizeDollarFloat);
     $el.on('keydown', '[data-type="float"]', this._limitDollarFloat);
@@ -293,13 +293,13 @@ class ScreenerSinglePage {
 
     $window.scrollTop = 0;
 
-    $(`.${ScreenerSinglePage.CssClass.PAGE}`)
-      .removeClass(ScreenerSinglePage.CssClass.ACTIVE)
+    $(`.${ScreenerField.Selectors.PAGE}`)
+      .removeClass(ScreenerField.Selectors.ACTIVE)
       .attr('aria-hidden', 'true')
       .find(':input, a')
       .attr('tabindex', '-1');
 
-    $(page).addClass(ScreenerSinglePage.CssClass.ACTIVE)
+    $(page).addClass(ScreenerField.Selectors.ACTIVE)
       .removeAttr('aria-hidden')
       .find(':input, a')
       .removeAttr('tabindex');
@@ -315,9 +315,9 @@ class ScreenerSinglePage {
   _routerQuestion(event, hash) {
     hash = hash || event.currentTarget.hash;
 
-    let page = '#' + $(hash).closest(`.${ScreenerSinglePage.CssClass.PAGE}`).attr('id');
-    let $questions = $(`.${ScreenerSinglePage.CssClass.TOGGLE_QUESTION}`);
-    let $target = $(hash).find(`.${ScreenerSinglePage.CssClass.TOGGLE_QUESTION}`);
+    let page = '#' + $(hash).closest(`.${ScreenerField.Selectors.PAGE}`).attr('id');
+    let $questions = $(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`);
+    let $target = $(hash).find(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`);
     let target = document.querySelector(hash);
     let $window = document.querySelector('#js-layout-body');
 
@@ -393,16 +393,16 @@ class ScreenerSinglePage {
           ($el.prop('checked') && Boolean(parseInt($el.val(), 10))) ||
           ($el.is('select') && $el.val())
       ) {
-        $target.removeClass(ScreenerSinglePage.CssClass.HIDDEN);
+        $target.removeClass(ScreenerField.Selectors.HIDDEN);
       } else {
-        $target.addClass(ScreenerSinglePage.CssClass.HIDDEN);
+        $target.addClass(ScreenerField.Selectors.HIDDEN);
       }
     }
     if ($el.data('shows')) {
-      $($el.data('shows')).removeClass(ScreenerSinglePage.CssClass.HIDDEN);
+      $($el.data('shows')).removeClass(ScreenerField.Selectors.HIDDEN);
     }
     if ($el.data('hides')) {
-      $($el.data('hides')).addClass(ScreenerSinglePage.CssClass.HIDDEN);
+      $($el.data('hides')).addClass(ScreenerField.Selectors.HIDDEN);
     }
     return this;
   }
@@ -553,10 +553,10 @@ class ScreenerSinglePage {
  * @param {HTMLELement} el - Input element to validate.
  * @return {this} Screener
  */
-ScreenerSinglePage.validateZipField = {
+ScreenerField.validateZipField = {
   getMessage: () => 'Must be a valid NYC zip code',
   validate: function(value) {
-    if (ScreenerSinglePage.NYC_ZIPS.indexOf(value) > -1) return true;
+    if (ScreenerField.NYC_ZIPS.indexOf(value) > -1) return true;
     return false;
   }
 };
@@ -567,15 +567,15 @@ ScreenerSinglePage.validateZipField = {
  * @param  {event} event the click event
  * @return {null}
  */
-ScreenerSinglePage.validate = function(event) {
+ScreenerField.validate = function(event) {
   event.preventDefault();
   let scope = event.currentTarget.dataset.scope;
   if (typeof scope !== 'undefined') {
     this.$validator.validateAll(scope)
-      .then(ScreenerSinglePage.valid);
+      .then(ScreenerField.valid);
   } else {
     this.$validator.validate()
-      .then(ScreenerSinglePage.valid);
+      .then(ScreenerField.valid);
   }
 };
 
@@ -584,7 +584,7 @@ ScreenerSinglePage.validate = function(event) {
  * @param  {boolean} valid wether the validator passes validation
  * @return {null}
  */
-ScreenerSinglePage.valid = function(valid) {
+ScreenerField.valid = function(valid) {
   if (!valid) {
     /* eslint-disable no-console, no-debugger */
     console.error('Some required fields are not filled out.');
@@ -604,7 +604,7 @@ ScreenerSinglePage.valid = function(valid) {
  *                       {key} if object is contained in a model,
  *                       add the data-key parameter
  */
-ScreenerSinglePage.push = function(event) {
+ScreenerField.push = function(event) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let key = el.dataset.key;
@@ -642,7 +642,7 @@ ScreenerSinglePage.push = function(event) {
  * @param  {string} value the name of the value to check
  * @return {boolean}      wether or not the value is in the list or not
  */
-ScreenerSinglePage.checked = function(list, value) {
+ScreenerField.checked = function(list, value) {
   return (this[list].indexOf(value) > -1);
 };
 
@@ -651,7 +651,7 @@ ScreenerSinglePage.checked = function(list, value) {
  * @param  {object} event the click event
  * @return {null}
  */
-ScreenerSinglePage.resetAttr = function(event) {
+ScreenerField.resetAttr = function(event) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let index = el.dataset.index;
@@ -679,14 +679,14 @@ ScreenerSinglePage.resetAttr = function(event) {
  *                       type {string} type of attribute
  * @return {null}
  */
-ScreenerSinglePage.setAttr = function(event) {
+ScreenerField.setAttr = function(event) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let index = el.dataset.index;
   let key = el.dataset.key;
   let reset = el.dataset.reset;
   // get the typed value;
-  let value = ScreenerSinglePage.getTypedVal(el);
+  let value = ScreenerField.getTypedVal(el);
   // console.dir([key, value]);
   // set the attribute;
   if (typeof index === 'undefined') {
@@ -707,7 +707,7 @@ ScreenerSinglePage.setAttr = function(event) {
  * the first person exists by default
  * @param  {event} event to pass to setAttr()
  */
-ScreenerSinglePage.populate = function(event) {
+ScreenerField.populate = function(event) {
   let value = event.currentTarget.value;
   if (value === '' || parseInt(value, 10) === 0) return;
   let dif = value - this.people.length;
@@ -732,7 +732,7 @@ ScreenerSinglePage.populate = function(event) {
  *                         key {income key}
  *                         value {model attribute value}
  */
-ScreenerSinglePage.pushPayment = function(event) {
+ScreenerField.pushPayment = function(event) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let index = parseInt(el.dataset.index);
@@ -763,7 +763,7 @@ ScreenerSinglePage.pushPayment = function(event) {
  * @param  {[type]} type   the type value to search by
  * @return {object}        the payment, false if not found
  */
-ScreenerSinglePage.getPayment = function(obj, index, key, type) {
+ScreenerField.getPayment = function(obj, index, key, type) {
   let payment = _.findWhere(
     this[obj][index]._attrs[key], {'type': type}
   );
@@ -774,7 +774,7 @@ ScreenerSinglePage.getPayment = function(obj, index, key, type) {
  * Check for single occupant of household
  * @return {boolean} if household is 1 occupant
  */
-ScreenerSinglePage.singleOccupant = function() {
+ScreenerField.singleOccupant = function() {
   return (this.household._attrs.members === 1);
 };
 
@@ -784,12 +784,12 @@ ScreenerSinglePage.singleOccupant = function() {
  * @param {HTMLElement} input
  * @return {boolean|Number|string} typed value
  */
-ScreenerSinglePage.getTypedVal = function(input) {
+ScreenerField.getTypedVal = function(input) {
   const $input = $(input);
   const val = $input.val();
   let finalVal = $input.val();
   switch ($input.data('type')) {
-    case ScreenerSinglePage.InputType.BOOLEAN: {
+    case ScreenerField.InputType.BOOLEAN: {
       if (input.type == 'checkbox') {
         finalVal = input.checked;
       } else { // assume it's a radio button
@@ -799,12 +799,12 @@ ScreenerSinglePage.getTypedVal = function(input) {
       }
       break;
     }
-    case ScreenerSinglePage.InputType.FLOAT: {
+    case ScreenerField.InputType.FLOAT: {
       finalVal = (_.isNumber(parseFloat(val)) && !_.isNaN(parseFloat(val))) ?
           parseFloat(val) : 0;
       break;
     }
-    case ScreenerSinglePage.InputType.INTEGER: {
+    case ScreenerField.InputType.INTEGER: {
       finalVal = (_.isNumber(parseInt(val, 10)) &&
           !_.isNaN(parseInt(val, 10))) ?
           parseInt($input.val(), 10) : 0;
@@ -820,7 +820,7 @@ ScreenerSinglePage.getTypedVal = function(input) {
  * @param  {string} slug the slug value of the string
  * @return {string}      the local string label
  */
-ScreenerSinglePage.localString = function(slug) {
+ScreenerField.localString = function(slug) {
   try {
     return _.findWhere(
       window.LOCALIZED_STRINGS,
@@ -836,7 +836,7 @@ ScreenerSinglePage.localString = function(slug) {
  * @private
  * @return {this} Screener
  */
-ScreenerSinglePage.renderRecap = function(vue) {
+ScreenerField.renderRecap = function(vue) {
   const templateData = {
     categories: [],
     household: {
@@ -959,7 +959,7 @@ ScreenerSinglePage.renderRecap = function(vue) {
  * Component for the person label
  * @type {Object} Vue Component
  */
-ScreenerSinglePage.personLabel = {
+ScreenerField.personLabel = {
   props: ['index', 'person'],
   template: '<span class="c-black">' +
     '<span :class="personIndex(index)"></span> ' +
@@ -979,23 +979,23 @@ ScreenerSinglePage.personLabel = {
       classes[name] = true
       return classes;
     },
-    personHeadOfHouseholdRelation: ScreenerSinglePage.localString
+    personHeadOfHouseholdRelation: ScreenerField.localString
   }
 };
 
 /**
- * CSS classes used by this component.
+ * Selectors used by this component.
  * @enum {string}
  */
-ScreenerSinglePage.CssClass = {
+ScreenerField.Selectors = {
   ACTIVE: 'active',
   ADD_SECTION: 'js-add-section',
   CHECKBOX_GROUP: 'js-screener-checkbox-group',
   CLEAR_GROUP: 'js-clear-group',
+  DOM: '[data-js="screener-field"]',
   EDIT_PERSON: 'js-edit-person',
   ERROR: 'error',
   ERROR_MSG: 'error-message',
-  FORM: 'js-screener-single-page-form',
   HIDDEN: 'hidden',
   MATRIX: 'js-screener-matrix',
   MATRIX_ITEM: 'js-matrix-item',
@@ -1017,7 +1017,7 @@ ScreenerSinglePage.CssClass = {
  * Localization labels of error messages.
  * @enum {string}
  */
-ScreenerSinglePage.Message = {
+ScreenerField.Message = {
   FLOAT: 'ERROR_FLOAT',
   HOUSEHOLD: 'ERROR_HOUSEHOLD',
   INTEGER: 'ERROR_INTEGER',
@@ -1030,7 +1030,7 @@ ScreenerSinglePage.Message = {
  * data-type attributes used by this component.
  * @enum {string}
  */
-ScreenerSinglePage.InputType = {
+ScreenerField.InputType = {
   BOOLEAN: 'boolean',
   FLOAT: 'float',
   INTEGER: 'integer'
@@ -1041,6 +1041,6 @@ ScreenerSinglePage.InputType = {
  * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
  * @type {array<String>}
  */
-ScreenerSinglePage.NYC_ZIPS = Shared.NYC_ZIPS;
+ScreenerField.NYC_ZIPS = Shared.NYC_ZIPS;
 
-export default ScreenerSinglePage;
+export default ScreenerField;

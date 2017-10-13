@@ -101,7 +101,7 @@ gulp.task('lint', () =>
 // Scripts
 gulp.task('scripts', () => {
  const apps = [
-    'main', 'main.ssp'
+    'main', 'main.field'
   ];
   let tasks = apps.map(function(entry) {
     const b = browserify({

@@ -4,7 +4,6 @@
 import $ from 'jquery';
 import Utility from 'modules/utility';
 
-
 /**
  * This component handles validation and submission for share by email and
  * share by SMS forms.
@@ -38,9 +37,15 @@ class ShareForm {
    * @return {this} ShareForm
    */
   init() {
+
     if (this._initialized) {
       return this;
     }
+
+    // Mask phone numbers
+    $('input[type="tel"]').each((i, el) => {
+      Utility.maskPhone(el);
+    });
 
     $(this._el).on('submit', (e) => {
       e.preventDefault();
@@ -51,8 +56,8 @@ class ShareForm {
     });
 
     this._initialized = true;
-
     return this;
+
   }
 
   /**
@@ -200,6 +205,32 @@ class ShareForm {
     });
   }
 }
+
+/**
+ * [ShowDisclaimer description]
+ * @param {[type]} event [description]
+ */
+ShareForm.ShowDisclaimer = function(event) {
+  /* eslint no-undef: "off" */
+  const variables = require('../../variables.json');
+  let $cnt = $('.js-needs-disclaimer.active').length;
+  let $el = $('#js-disclaimer');
+  let $hidden = ($cnt > 0) ? 'removeClass' : 'addClass';
+  let $animate = ($cnt > 0) ? 'addClass' : 'removeClass';
+  event.preventDefault();
+  $el[$hidden]('hidden');
+  $el[$animate]('animated fadeInUp');
+  $el.attr('aria-hidden', ($cnt === 0));
+  // Scroll-to functionality for mobile
+  if (
+    window.scrollTo &&
+    $cnt != 0 &&
+    window.innerWidth < variables['screen-desktop']
+  ) {
+    let $target = $(e.target);
+    window.scrollTo(0, $target.offset().top - $target.data('scrollOffset'));
+  }
+};
 
 /**
  * CSS classes used by this component.

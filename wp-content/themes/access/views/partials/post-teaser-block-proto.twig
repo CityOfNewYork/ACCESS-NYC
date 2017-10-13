@@ -1,4 +1,4 @@
-<article class="p-bottom" id="program-{{ post.id }}">
+<article class="p-bottom" data-code="{{ post.program_code }}">
 
   <div class="p-2 bg-grey-lightest d-flex">
 
@@ -8,43 +8,46 @@
 
     <div class="w-100 p-horizontal">
 
-      <a href="{{ post.get_permalink }}">
+      <a href="{{ post.get_permalink }}" target="_blank">
         <h3 class="program-card-title type-h4">
           {{ post.plain_language_program_name }}
         </h3>
       </a>
       {% if not short_post %}
-        <p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
+      <p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
       {% endif %}
 
-      <div>
-
-        {% set helpMethods = [
-          'get_help_online',
-          'get_help_in_person',
-          'get_help_by_calling_311'
-        ] %}
-        {% for method in helpMethods %}
-          {% if post.get_field(method) %}
-            <div>
-              {{ post.get_field(method) }}
-            </div>
-          {% endif %}
-        {% endfor %}
-
-      </div>
+      {{ post.brief_excerpt }}
 
     </div>
 
     <div class="d-flex fd-column jc-space-between hide-for-print">
 
-      <div>
-        <a class="btn btn-primary f-right@tablet-up js-simple-toggle" href="#program-{{ post.id }}">Remove&nbsp;Program</a>
+      <div style="width:205px" class="p-bottom">
+        <div id="remove-{{ post.program_code }}">
+          <a class="btn btn-primary btn-small d-block" href="#confirm-{{ post.program_code }}"
+            data-js="simple-toggle"
+            data-hide="#remove-{{ post.program_code }}">
+            {{ __('Remove Program', 'accessnyc-screener') }}
+          </a>
+        </div>
+        <div id="confirm-{{ post.program_code }}" class="hidden" aria-hidden="true">
+          <p class="type-small ta-center bottom-4">{{ __('Are you sure?', 'accessnyc-screener') }}</p>
+          <div class="d-flex">
+            <a class="f-1 btn btn-primary btn-small"
+              data-js="remove-program"
+              data-remove-code="{{ post.program_code }}">{{ __('Remove', 'accessnyc-screener') }}</a>
+            <a class="f-1 btn btn-secondary btn-small m-left" href="#remove-{{ post.program_code }}"
+              data-js="simple-toggle"
+              data-hide="#confirm-{{ post.program_code }}">{{ __('Keep', 'accessnyc-screener') }}</a>
+          </div>
+        </div>
       </div>
 
       <div>
-        <a class="btn-toggle btn js-simple-toggle" href="#program-detail-{{ post.id }}">
-          Learn More
+        <a class="btn-toggle btn" href="#program-detail-{{ post.program_code }}"
+          data-js="simple-toggle">
+          {{ __('Learn More', 'accessnyc-screener') }}
         </a>
       </div>
 
@@ -52,7 +55,7 @@
 
   </div>
 
-  <div class="p-2 d-flex hidden" id="program-detail-{{ post.id }}">
+  <div class="p-2 d-flex hidden" id="program-detail-{{ post.program_code }}">
 
     <div>
       <div style="width:80px;height:80px;">&nbsp;</div>
@@ -63,6 +66,21 @@
       <h3>{{__('How it Works', 'accessnyc-program-detail')}}</h3>
       <div>
         {{ post.get_field('program_description') }}
+      </div>
+
+      <div>
+        {% set helpMethods = [
+          'get_help_online',
+          'get_help_in_person',
+          'get_help_by_calling_311'
+        ] %}
+        {% for method in helpMethods %}
+        {% if post.get_field(method) %}
+        <div>
+          {{ post.get_field(method) }}
+        </div>
+        {% endif %}
+        {% endfor %}
       </div>
 
       {% if post.heads_up | length %}

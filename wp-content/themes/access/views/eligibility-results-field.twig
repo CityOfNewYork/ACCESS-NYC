@@ -22,7 +22,7 @@
 
 {% block content %}
   {% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
-  <main class="main-content screener-proto layout" id="content">
+  <main class="main-content screener-proto layout" id="content" data-js="results">
     <div class="layout__body bg-white">
 
       <div class="save-your-results p-2">
@@ -38,7 +38,9 @@
 
           <div class="f-1 p-right">
 
-            <a class="d-block btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
+            <a class="d-block btn btn-primary share-toggle js-show-disclaimer" href="#share-by-sms"
+              data-js="simple-toggle"
+              data-scroll-offset="20">{{__('Text', 'accessnyc-results')}}</a>
             <div id="share-by-sms" class="share-form js-needs-disclaimer hidden">
               <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
                 <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
@@ -59,7 +61,9 @@
 
           <div class="f-1">
 
-            <a class="d-block btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
+            <a class="d-block btn btn-primary share-toggle js-show-disclaimer" href="#share-by-email"
+              data-js="simple-toggle"
+              data-scroll-offset="20">{{__('Email', 'accessnyc-results')}}</a>
             <div id="share-by-email" class="share-form js-needs-disclaimer hidden">
               <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
                 <input type="hidden" name="action" value="email_send" readonly>
@@ -129,8 +133,8 @@
   ]);
 </script>
 {% if is_debug %}
-<script src="/wp-content/themes/access/assets/js/main.ssp.js?v={{ date().timestamp }}"></script>
+<script src="/wp-content/themes/access/assets/js/main.field.js?v={{ date().timestamp }}"></script>
 {% else %}
-<script src="/wp-content/themes/access/assets/js/main.ssp.min.js"></script>
+<script src="/wp-content/themes/access/assets/js/main.field.min.js"></script>
 {% endif %}
 {% endblock %}

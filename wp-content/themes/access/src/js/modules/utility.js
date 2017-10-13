@@ -1,6 +1,7 @@
 /* eslint-env browser */
 'use strict';
 
+import $ from 'jquery';
 import _ from 'underscore';
 import Cleave from 'cleave.js/dist/cleave.min';
 import 'cleave.js/dist/addons/cleave-phone.us';
@@ -9,6 +10,50 @@ import 'cleave.js/dist/addons/cleave-phone.us';
  * Collection of utility functions.
  */
 const Utility = {};
+
+/**
+ * Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
+ * @param  {object} data from get
+ * @return {[type]}      [description]
+ */
+Utility.svgSprites = function(data) {
+  const svgDiv = document.createElement('div');
+  svgDiv.innerHTML =
+      new XMLSerializer().serializeToString(data.documentElement);
+  $(svgDiv).css('display', 'none').prependTo('body');
+};
+
+/**
+ * Simple toggle that add/removes "active" and "hidden" classes, as well as
+ * applying appropriate aria-hidden value to a specified target.
+ * @param  {event} event the onclick event
+ * @return {null}
+ */
+Utility.simpleToggle = function(event) {
+  // Simple toggle that add/removes "active" and "hidden" classes, as well as
+  // applying appropriate aria-hidden value to a specified target.
+  let el = event.currentTarget;
+  event.preventDefault();
+  const $target = $(el).attr('href') ?
+      $($(el).attr('href')) :
+      $($(el).data('target'));
+
+  $(el).toggleClass('active');
+  $target.toggleClass('active hidden')
+      .prop('aria-hidden', $target.hasClass('hidden'));
+
+  // function to hide all elements
+  if ($(el).data('hide')) {
+    $($(el).data('hide')).not($target)
+      .addClass('hidden')
+      .removeClass('active')
+      .prop('aria-hidden', true);
+  }
+
+  if ($(el).data('loc')) {
+    window.location.hash = $(el).data('loc');
+  }
+};
 
 /**
  * Boolean for debug mode

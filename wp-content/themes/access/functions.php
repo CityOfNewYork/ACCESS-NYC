@@ -493,18 +493,18 @@ Routes::map('eligibility', function() {
   Routes::load('screener.php', null, null, 200);
 });
 
-Routes::map('eligibility-proto', function() {
-  Routes::load('screener-single-page.php', null, null, 200);
-});
-
 Routes::map('eligibility/results', function() {
   $params = array();
   $params['link'] = home_url().'/eligibility/results/';
   Routes::load('eligibility-results.php', $params, null, 200);
 });
 
+Routes::map('eligibility-proto', function() {
+  Routes::load('screener-field.php', null, null, 200);
+});
+
 Routes::map('eligibility-proto/results', function() {
   $params = array();
   $params['link'] = home_url().'/eligibility-proto/results/';
-  Routes::load('eligibility-results-proto.php', $params, null, 200);
+  Routes::load('eligibility-results-field.php', $params, null, 200);
 });

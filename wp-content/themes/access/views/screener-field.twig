@@ -74,20 +74,19 @@
 
   <div class="layout__body bg-white" id="js-layout-body">
 
-    <form class="js-screener-single-page-form" action="/eligibility-proto/results/" style="border:none;padding-top:0;padding-bottom:0">
+    <form action="/eligibility-proto/results/" style="border:none;padding-top:0;padding-bottom:0" data-js="screener-field">
 
       <div id="vue">
 
-        <div id="page-admin" class="screener-body-page js-screener-page"
-          data-vv-scope="page-admin">
+        <div id="page-admin" class="screener-body-page js-screener-page">
 
           <div class="p-horizontal-2">
 
             <h1 class="{{styles.sections}}" id="first-steps">
               <a href="#first-steps" class="c-blue-dark td-none">{{ __('First Steps', 'accessnyc-screener') }}</a>
             </h1>
-              {% include 'screener-single-page-partials/question-staff.twig' with {'styles': styles, 'locations': locations} %}
-              {% include 'screener-single-page-partials/disclaimer.twig' with styles %}
+              {% include 'screener-field-partials/question-staff.twig' with {'styles': styles, 'locations': locations} %}
+              {% include 'screener-field-partials/disclaimer.twig' with styles %}
 
             <div v-if="disclaimer">
 
@@ -122,29 +121,29 @@
             <h1 class="{{styles.sections}}" id="client-information">
               <a href="#client-information" class="c-blue-dark td-none">{{ __('Client Information', 'accessnyc-screener') }}</a>
             </h1><span class="screener-step">(1 of 4)</span>
-              {% include 'screener-single-page-partials/question-client-needs.twig' with {'styles': styles, 'categories': categories} %}
-              {% include 'screener-single-page-partials/question-client-services.twig' with {'styles': styles, 'categories': categoriesCurrent} %}
-              {% include 'screener-single-page-partials/question-client-basics.twig' with styles %}
-              {% include 'screener-single-page-partials/question-client-contact.twig' with styles %}
+              {% include 'screener-field-partials/question-client-needs.twig' with {'styles': styles, 'categories': categories} %}
+              {% include 'screener-field-partials/question-client-services.twig' with {'styles': styles, 'categories': categoriesCurrent} %}
+              {% include 'screener-field-partials/question-client-basics.twig' with styles %}
+              {% include 'screener-field-partials/question-client-contact.twig' with styles %}
 
             <h1 class="{{styles.sections}}" id="household">
               <a href="#household" class="c-blue-dark td-none">{{ __('Household', 'accessnyc-screener') }}</a>
             </h1><span class="screener-step">(2 of 4)</span>
-              {% include 'screener-single-page-partials/question-household-information.twig' with styles %}
-              {% include 'screener-single-page-partials/question-household-members.twig' with styles %}
-              {% include 'screener-single-page-partials/question-household-member-details.twig' with styles %}
+              {% include 'screener-field-partials/question-household-information.twig' with styles %}
+              {% include 'screener-field-partials/question-household-members.twig' with styles %}
+              {% include 'screener-field-partials/question-household-member-details.twig' with styles %}
 
             <h1 class="{{styles.sections}}" id="household-income">
               <a href="#household-income" class="c-blue-dark td-none">{{ __('Household Income', 'accessnyc-screener') }}
             </h1><span class="screener-step">(3 of 4)</span>
-              {% include 'screener-single-page-partials/question-household-income.twig' with styles %}
-              {% include 'screener-single-page-partials/question-household-total-savings.twig' with styles %}
-              {% include 'screener-single-page-partials/question-household-expenses.twig' with styles %}
+              {% include 'screener-field-partials/question-household-income.twig' with styles %}
+              {% include 'screener-field-partials/question-household-total-savings.twig' with styles %}
+              {% include 'screener-field-partials/question-household-expenses.twig' with styles %}
 
             <h1 class="{{styles.sections}}" id="housing">
               <a href="#housing" class="c-blue-dark td-none">{{ __('Housing', 'accessnyc-screener') }}</a>
             </h1><span class="screener-step">(4 of 4)</span>
-              {% include 'screener-single-page-partials/question-housing-situation.twig' with styles %}
+              {% include 'screener-field-partials/question-housing-situation.twig' with styles %}
 
             <div>
 
@@ -174,7 +173,7 @@
 
           <div class="p-horizontal-2">
 
-            {% include 'screener-single-page-partials/recap.twig' with {'formAction': formAction} %}
+            {% include 'screener-field-partials/recap.twig' with {'formAction': formAction} %}
 
           </div>
 
@@ -555,8 +554,8 @@
   ]);
 </script>
 {% if is_debug %}
-<script src="/wp-content/themes/access/assets/js/main.ssp.js?v={{ date().timestamp }}"></script>
+<script src="/wp-content/themes/access/assets/js/main.field.js?v={{ date().timestamp }}"></script>
 {% else %}
-<script src="/wp-content/themes/access/assets/js/main.ssp.min.js"></script>
+<script src="/wp-content/themes/access/assets/js/main.field.min.js"></script>
 {% endif %}
 {% endblock %}
