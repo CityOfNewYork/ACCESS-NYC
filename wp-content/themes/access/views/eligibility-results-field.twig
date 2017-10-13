@@ -11,7 +11,7 @@
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
       </svg>
     <div class="d-flex ai-center">
-      <a href="/eligibility-proto/" class="btn btn-primary btn-small" data-js="reload">New Client</a>
+      <a href="/peu/" class="btn btn-primary btn-small" data-js="reload">New Client</a>
     </div>
   </div>
 </header>
@@ -22,7 +22,7 @@
 
 {% block content %}
   {% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
-  <main class="main-content screener-proto layout" id="content" data-js="results">
+  <main class="main-content screener-field layout" id="content" data-js="results">
     <div class="layout__body bg-white">
 
       <div class="save-your-results p-2">
@@ -99,7 +99,7 @@
           </h3>
           <div class="m-bottom-2" data-js="programs-list">
             {% for post in selectedPrograms %}
-            {% include 'partials/post-teaser-block-proto.twig' with {'show_apply': true } %}
+            {% include 'partials/post-teaser-block-field.twig' with {'show_apply': true } %}
             {% endfor %}
           </div>
         </div>
@@ -114,7 +114,7 @@
           </h3>
           <div class="m-bottom-2" data-js="programs-list">
             {% for post in additionalPrograms %}
-            {% include 'partials/post-teaser-block-proto.twig' with {'show_apply': true } %}
+            {% include 'partials/post-teaser-block-field.twig' with {'show_apply': true } %}
             {% endfor %}
           </div>
         </div>

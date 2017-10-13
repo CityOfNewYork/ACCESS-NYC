@@ -499,12 +499,12 @@ Routes::map('eligibility/results', function() {
   Routes::load('eligibility-results.php', $params, null, 200);
 });
 
-Routes::map('eligibility-proto', function() {
+Routes::map('peu', function() {
   Routes::load('screener-field.php', null, null, 200);
 });
 
-Routes::map('eligibility-proto/results', function() {
+Routes::map('peu/results', function() {
   $params = array();
-  $params['link'] = home_url().'/eligibility-proto/results/';
+  $params['link'] = home_url().'/peu/results/';
   Routes::load('eligibility-results-field.php', $params, null, 200);
 });
