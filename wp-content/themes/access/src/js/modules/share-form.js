@@ -225,7 +225,7 @@ ShareForm.ShowDisclaimer = function(event) {
     $cnt != 0 &&
     window.innerWidth < variables['screen-desktop']
   ) {
-    let $target = $(e.target);
+    let $target = $(event.target);
     window.scrollTo(0, $target.offset().top - $target.data('scrollOffset'));
   }
 };
