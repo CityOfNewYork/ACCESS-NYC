@@ -211,7 +211,7 @@ class ShareForm {
 ShareForm.ShowDisclaimer = function(event) {
   /* eslint no-undef: "off" */
   const variables = require('../../variables.json');
-  let $cnt = $('.js-needs-disclaimer.active').length;
+  let $cnt = $(`.${ShareForm.CssClass.NEEDS_DISCLAIMER}.active`).length;
   let $el = $('#js-disclaimer');
   let $hidden = ($cnt > 0) ? 'removeClass' : 'addClass';
   let $animate = ($cnt > 0) ? 'addClass' : 'removeClass';
@@ -239,6 +239,7 @@ ShareForm.CssClass = {
   ERROR_MSG: 'error-message',
   FORM: 'js-share-form',
   HIDDEN: 'hidden',
+  NEEDS_DISCLAIMER: 'js-needs-disclaimer',
   SUBMIT_BTN: 'btn-submit',
   SUCCESS: 'success',
   SPINNER: 'js-spinner'
