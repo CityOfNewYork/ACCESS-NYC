@@ -163,19 +163,22 @@ class ScreenerField {
     let el = event.currentTarget;
     let maxlength = parseInt(el.maxlength, 10);
     let value = el.value;
+    let key = event.keyCode;
     if (value.length === maxlength) {
       // if key code isn't a backspace or is a spacebar
-      if (event.keyCode !== 8 || event.keyCode === 32) event.preventDefault();
+      if (key !== 8 || key === 32) event.preventDefault();
     }
+    ScreenerField.key = key;
   }
 
   /**
    * Calculates the maximum value as a result of the event and prevents input
    * if it is greater than the allowed maximum value;
    * @param  {event} event the key down event
-   * @return {null}
    */
   _enforceMaxValue(event) {
+    let keyCode = event.keyCode;
+    if (ScreenerField.paste(keyCode)) return;
     let el = event.currentTarget;
     let max = parseInt(el.max, 10);
     let value = (el.value != '') ? el.value : '0';
@@ -183,39 +186,46 @@ class ScreenerField {
     let calc = parseInt((value + event.key), 10);
     if (calc > max) {
       // if key code isn't a backspace or is a spacebar
-      if (event.keyCode !== 8 || event.keyCode === 32) event.preventDefault();
+      if (keyCode !== 8 || keyCode === 32) event.preventDefault();
     }
+    ScreenerField.key = keyCode;
   }
 
   /**
    * Number inputs still allow certain characters outside of 0-9.
    * @param  {object} event the keypup event object
-   * @return {null}
    */
   _enforceNumbersOnly(event) {
+    let key = event.keyCode;
+    if (ScreenerField.paste(key)) return;
     if (
-      event.keyCode === 69 || // 'e' key, used for scientific notation
-      event.keyCode === 187 || // '=' key (for the '+' sign)
-      event.keyCode === 188 || // ',' key
-      event.keyCode === 189 // '-' key
+      key === 69 || // 'e' key, used for scientific notation
+      key === 187 || // '=' key (for the '+' sign)
+      key === 188 || // ',' key
+      key === 189 // '-' key
     ) {
       event.preventDefault();
     }
+    ScreenerField.key = key;
   }
 
   /**
    * Limits key input to numbers and decimals
    * @param  {event} the keydown input event
-   * @return [null]
    */
   _enforceFloat(event) {
+    let key = event.keyCode;
+    if (ScreenerField.paste(key)) return;
     let block = true;
     let value = event.currentTarget.value;
+    let backspace = (key === 8);
+    let keyperiod = (key === 190);
+    let padperiod = (key === 110);
 
     if (
-      (event.keyCode >= 48 && event.keyCode <= 57) || // key board
-      (event.keyCode >= 96 && event.keyCode <= 105) || // key pad
-      event.keyCode === 190 // "." period
+      (key >= 48 && key <= 57) || // key board
+      (key >= 96 && key <= 105) || // key pad
+      (keyperiod || padperiod) // "." period
     ) {
       block = false;
       if (value.indexOf('.') > -1) {
@@ -226,19 +236,17 @@ class ScreenerField {
       }
     }
 
-    // Backspace
-    if (event.keyCode === 8) {
-      block = false;
-    }
+    if (backspace) block = false;
 
     if (block) event.preventDefault();
+
+    ScreenerField.key = key;
   }
 
   /**
    * Format number value and make sure it has '.00', uses cleave for input
    * masking
    * @param  {object} event the blur event object
-   * @return {null}
    */
   _sanitizeDollarFloat(event) {
     Utility.maskDollarFloat(event.currentTarget);
@@ -254,35 +262,38 @@ class ScreenerField {
         event.currentTarget.value += '.00';
       }
     });
-    // return this;
   }
 
   /**
    * For a given dollar float input, product requirements dictate we should
    * limit values to 6 digits before the decimal point and 2 after.
    * @param  {object} event the keydown event object
-   * @return {null}
    */
   _limitDollarFloat(event) {
+    let key = event.keyCode;
+    if (ScreenerField.paste(key)) return;
     let value = event.currentTarget.value;
     let block = false;
+    let backspace = (key === 8);
+    let keyperiod = (key === 190);
+    let padperiod = (key === 110);
 
     // if there is a decimal...
     if (value.indexOf('.') > -1) {
       // and the value length is 8 digits + 1 decimal...
       if (value.length === 9) {
         // and the key pressed isn't the backspace...
-        block = (event.keyCode !== 8) ? true : block;
+        block = (backspace) ? block : true;
       }
     // if the value length is 6 digits...
     } else if (value.length === 6) {
       // and the key pressed isn't the backspace or '.' ...
-      block = (event.keyCode !== 8 && event.keyCode !== 190) ? true : block;
+      block = (backspace || keyperiod || padperiod) ? block : true;
     }
 
     if (block) event.preventDefault(); // stop input
 
-    return this;
+    ScreenerField.key = key;
   }
 
   /**
@@ -550,6 +561,18 @@ class ScreenerField {
     })*/;
     /* eslint-enable no-console, no-debugger */
   }
+}
+
+/**
+ * Detection for paste event
+ * @param  {number} key the current key code
+ * @return {boolean}    if the paste command is being used
+ */
+ScreenerField.paste = function(key) {
+  let ctrl = (ScreenerField.key === 91);
+  let cmd = (ScreenerField.key === 17);
+  let v = (key === 86);
+  return ((ctrl || cmd) || v);
 }
 
 /**

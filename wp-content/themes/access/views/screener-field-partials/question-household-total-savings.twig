@@ -8,6 +8,11 @@
 
       <a class="{{styles.questions}}" data-js="question" href="#question-household-total-savings">
         {{ __('Household Total Savings', 'accessnyc-screener') }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('There are some validation errors', 'accessnyc-screener') }}"
+          v-if="errors.all('HouseholdTotalSavings').length > 0">
+          <title>{{ __('There are some validation errors', 'accessnyc-screener') }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </a>
 
       <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
@@ -24,12 +29,22 @@
         <h4 class="{{styles.explainations}}">{{ __('What are examples of savings?', 'accessnyc-screener') }}</h4>
         <p>{{ __('Savings can mean cash on hand, checking or savings accounts, or stocks, bonds and mutual funds', 'accessnyc-screener') }}</p>
 
-        <div class="currency-usd">
-          <input id="cash-on-hand" type="number" name="Household.cashOnHand" min="0"
-            data-object="household"
-            data-key="cashOnHand"
-            data-type="float"
-            v-on:change="setAttr">
+        <div class="screener-question-container"
+          v-bind:class="{'error': errors.has('Household.cashOnHand', 'HouseholdTotalSavings')}">
+          <div class="error-message"
+            v-if="errors.has('Household.cashOnHand', 'HouseholdTotalSavings')">
+              v{ errors.first('Household.cashOnHand', 'HouseholdTotalSavings') }
+          </div>
+          <div class="currency-usd">
+            <input id="cash-on-hand" type="number" name="Household.cashOnHand" min="0" maxlength="9"
+              data-object="household"
+              data-key="cashOnHand"
+              data-type="float"
+              data-vv-scope="HouseholdTotalSavings"
+              data-vv-as="{{ __('Total Savings', 'accessnyc-screener') }}"
+              v-on:change="setAttr"
+              v-validate="{regex: '[0-9.]', max: 9}">
+          </div>
         </div>
       </div>
 
