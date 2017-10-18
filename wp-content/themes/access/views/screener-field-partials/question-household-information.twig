@@ -44,7 +44,7 @@
             v-bind:class="{'error': errors.has('HouseholdInformation.Household.members')}">
             <div class="error-message"
               v-if="errors.has('HouseholdInformation.Household.members')">v{ errors.first('HouseholdInformation.Household.members') }</div>
-            <input type="number" name="Household.members" min="1" max="8" maxlength="1" value="1" required
+            <input type="number" name="Household.members" min="1" max="8" value="1" required
               data-type="integer"
               data-object="household"
               data-key="members"

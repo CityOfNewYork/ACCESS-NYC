@@ -29,9 +29,9 @@
 
           <a class="{{styles.questions}}" href="#question-household-members" data-js="question">
             {{ __('Household Members', 'accessnyc-screener') }}
-            <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+            <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', 'accessnyc-screener') }}"
               v-if="errors.all('HouseholdMembers').length > 0">
-              <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+              <title>{{ __('Some fields are invalid', 'accessnyc-screener') }}</title>
               <use xlink:href="#icon-warning"></use>
             </svg>
           </a>

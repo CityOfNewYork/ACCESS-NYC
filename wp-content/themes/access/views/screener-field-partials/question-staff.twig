@@ -8,9 +8,9 @@
 
       <a class="{{styles.questions}}" href="#question-staff" data-js="question">
         {{ __('PEU Staff', 'accessnyc-screener') }}
-        <svg class="{{styles.warning}}" role="alert" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+        <svg class="{{styles.warning}}" role="alert" aria-label="{{ __('Some fields are invalid', 'accessnyc-screener') }}"
           v-if="errors.all('Staff').length > 0">
-          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <title>{{ __('Some fields are invalid', 'accessnyc-screener') }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>

@@ -152,13 +152,13 @@
                           v{ errors.first('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount') }
                       </div>
                       <div class="currency-usd m-0">
-                        <input required
+                        <input type="text" min="0" maxlength="9" pattern="\d*" required
                           data-type="float"
                           data-vv-scope="HouseholdIncome"
                           v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
                           v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'"
                           v-bind:data-vv-as="income.type + ' income amount'"
-                          v-validate="{required: true, regex: '[0-9.]'}"
+                          v-validate="{required: true, regex: '[0-9.]', max: 9}"
                           v-model="income.amount">
                       </div>
                     </div>

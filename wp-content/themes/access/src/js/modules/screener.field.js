@@ -66,6 +66,14 @@ class ScreenerField {
         'expenses': []
       },
       'methods': {
+        // 'deeper': function(path, obj, value) {
+        //   let nest = path.split('.')[];
+        //   if (typeof obj[path]) {
+        //     this.$set(obj, value);
+        //   } else {
+        //     this.deeper()
+        //   }
+        // }
         'resetAttr': ScreenerField.resetAttr,
         'setAttr': ScreenerField.setAttr,
         'populate': ScreenerField.populate,
@@ -136,6 +144,11 @@ class ScreenerField {
     // Max Length and Max Value
     $el.on('keydown', 'input[maxlength]', this._enforceMaxLength);
     $el.on('keydown', 'input[max]', this._enforceMaxValue);
+
+    $el.on('paste', '[data-type="float"]', function(event) {
+      console.dir(event.originalEvent.clipboardData.getData('text'));
+    });
+
     // Mask phone numbers
     $el.on('focus', 'input[type="tel"]',
       (event) => Utility.maskPhone(event.currentTarget));
@@ -146,6 +159,7 @@ class ScreenerField {
     $el.on('click', '[data-js="question"]', this._routerQuestion);
     $el.on('click', '[data-js="page"]', this._routerPage);
 
+    // Set the initial view
     this._routerPage('#page-admin');
 
     return this;
@@ -155,18 +169,27 @@ class ScreenerField {
    * For a given element with a maxlength attribute, enforce the maxlength rule.
    * This is necessary because input[type="number"] elements ignrore the
    * attribute natively.
-   * [_enforceMaxLength description]
    * @param  {object} event the keypup event object
-   * @return {null}
    */
   _enforceMaxLength(event) {
     let el = event.currentTarget;
     let maxlength = parseInt(el.maxlength, 10);
     let value = el.value;
     let key = event.keyCode;
+
+    let arrows = (key >= 37 && key <= 40);
+    let backspace = (key === 8);
+    // let selected = (el.selectionStart === 0);
+
+    // console.dir(event);
+    // console.dir(el.selectionStart);
+    // console.dir(selected);
+
     if (value.length === maxlength) {
-      // if key code isn't a backspace or is a spacebar
-      if (key !== 8 || key === 32) event.preventDefault();
+      if (!backspace && !arrows) {
+        event.preventDefault();
+        if (Utility.debug()) console.log('blocked');
+      }
     }
     ScreenerField.key = key;
   }
@@ -184,9 +207,20 @@ class ScreenerField {
     let value = (el.value != '') ? el.value : '0';
     let key = (_.isNumber(event.key)) ? event.key : '0';
     let calc = parseInt((value + event.key), 10);
+
+    let keyarrows = (keyCode >= 37 && keyCode <= 40);
+    let backspace = (keyCode === 8);
+    // let selected = (el.selectionStart === 0);
+
+    // console.dir(event);
+    // console.dir(el.selectionStart);
+    // console.dir(selected);
+
     if (calc > max) {
-      // if key code isn't a backspace or is a spacebar
-      if (keyCode !== 8 || keyCode === 32) event.preventDefault();
+      if (!backspace && !keyarrows) {
+        event.preventDefault();
+        if (Utility.debug()) console.log('blocked');
+      }
     }
     ScreenerField.key = keyCode;
   }
@@ -218,38 +252,69 @@ class ScreenerField {
     if (ScreenerField.paste(key)) return;
     let block = true;
     let value = event.currentTarget.value;
+
+    let keyboardnumbers = (key >= 48 && key <= 57);
+    let keypadnumbers = (key >= 96 && key <= 105);
+    let arrows = (key >= 37 && key <= 40);
     let backspace = (key === 8);
-    let keyperiod = (key === 190);
-    let padperiod = (key === 110);
+    let period = (key === 190 || key === 110);
 
-    if (
-      (key >= 48 && key <= 57) || // key board
-      (key >= 96 && key <= 105) || // key pad
-      (keyperiod || padperiod) // "." period
-    ) {
-      block = false;
-      if (value.indexOf('.') > -1) {
-        let split = value.split('.');
-        if (split[1].length == 2){
-          block = true;
-        }
-      }
+    // let selected = (event.currentTarget.selectionStart === 0);
+    // block = (selected) ? false || block;
+
+    block = (
+      keyboardnumbers || keypadnumbers || arrows || backspace || period
+    ) ? false : block;
+
+    if (block) {
+      event.preventDefault();
+      if (Utility.debug()) console.log('blocked');
     }
-
-    if (backspace) block = false;
-
-    if (block) event.preventDefault();
 
     ScreenerField.key = key;
   }
 
   /**
-   * Format number value and make sure it has '.00', uses cleave for input
-   * masking
+   * For a given dollar float input, product requirements dictate we should
+   * limit values to 6 digits before the decimal point and 2 after.
+   * @param  {object} event the keydown event object
+   */
+  _limitDollarFloat(event) {
+    const key = event.keyCode;
+    const backspace = (key === 8);
+    const arrows = (key >= 37 && key <= 40);
+
+    if (backspace || arrows) return;
+
+    const value = (event.currentTarget.value) ? event.currentTarget.value : '';
+    const start = event.currentTarget.selectionStart;
+    const end = event.currentTarget.selectionEnd;
+
+    const calc = [
+      value.substring(0, start),
+      event.key,
+      value.substring(end, value.length)
+    ].join('');
+
+    try {
+      const regex = /^([0-9]{1,6})(\.[0-9]{0,2})?$/g;
+      const found = calc.match(regex);
+      if (found.length && Utility.debug()) {
+        console.log('Passed!');
+      }
+    } catch (error) {
+      event.preventDefault(); // stop input
+      if (Utility.debug()) {
+        console.error('Blocked, input will not match valid format');
+      }
+    }
+  }
+
+  /**
+   * Format number value and make sure it has '.00'
    * @param  {object} event the blur event object
    */
   _sanitizeDollarFloat(event) {
-    Utility.maskDollarFloat(event.currentTarget);
     event.currentTarget.addEventListener('blur', function(event) {
       let value = event.currentTarget.value;
       let postfix = '';
@@ -262,38 +327,6 @@ class ScreenerField {
         event.currentTarget.value += '.00';
       }
     });
-  }
-
-  /**
-   * For a given dollar float input, product requirements dictate we should
-   * limit values to 6 digits before the decimal point and 2 after.
-   * @param  {object} event the keydown event object
-   */
-  _limitDollarFloat(event) {
-    let key = event.keyCode;
-    if (ScreenerField.paste(key)) return;
-    let value = event.currentTarget.value;
-    let block = false;
-    let backspace = (key === 8);
-    let keyperiod = (key === 190);
-    let padperiod = (key === 110);
-
-    // if there is a decimal...
-    if (value.indexOf('.') > -1) {
-      // and the value length is 8 digits + 1 decimal...
-      if (value.length === 9) {
-        // and the key pressed isn't the backspace...
-        block = (backspace) ? block : true;
-      }
-    // if the value length is 6 digits...
-    } else if (value.length === 6) {
-      // and the key pressed isn't the backspace or '.' ...
-      block = (backspace || keyperiod || padperiod) ? block : true;
-    }
-
-    if (block) event.preventDefault(); // stop input
-
-    ScreenerField.key = key;
   }
 
   /**
