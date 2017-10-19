@@ -3546,38 +3546,19 @@ a.program-filter-item {
   height: calc(100vh - 90px);
   overflow: hidden; }
 
-@media screen and (min-width: 768px) {
-  .layout__body {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch; } }
+.layout__body {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch; }
 
 .layout__body:after {
   content: '';
   height: 100%;
   display: block; }
-
-@media screen and (min-width: 768px) {
-  .layout--nav .layout__aside {
-    float: left;
-    display: block;
-    width: 25.58941%;
-    box-sizing: content-box;
-    height: calc(100vh - 98px); } }
-
-@media screen and (min-width: 768px) {
-  .layout--nav .layout__body {
-    float: right;
-    display: block;
-    margin-left: 2.35765%;
-    width: 74.41059%;
-    margin-left: 0; }
-    .layout--nav .layout__body:last-child {
-      margin-left: 0; } }
 
 /**
  * Display

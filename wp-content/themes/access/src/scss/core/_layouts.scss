@@ -6,42 +6,19 @@
 }
 
 .layout__body {
-  @include media($bp-tablet-up) {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
-  }
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .layout__body:after {
   content: '';
   height: 100%;
   display: block;
-}
-
-.layout--nav {
-
-  .layout__aside {
-    @include media($bp-tablet-up) {
-      float: left;
-      display: block;
-      width: 25.58941%;
-      box-sizing: content-box;
-      height: calc(100vh - 98px);
-    }
-  }
-
-  .layout__body {
-    @include media($bp-tablet-up) {
-      @include span-columns(9);
-      @include omega();
-    }
-  }
-
 }
 
 

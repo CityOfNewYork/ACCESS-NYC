@@ -1,0 +1,124 @@
+/* eslint-env browser */
+'use strict';
+
+import $ from 'jquery';
+import Utility from 'modules/utility';
+
+class CalcInput {
+
+  constructor(element) {
+
+    this.selector = '[data-js*="calc-input"]';
+
+    this.events = 'keydown paste drop';
+
+    $(element).on(this.events, this.selector, (e)=>{this.bus(e)});
+
+  }
+
+  bus(event) {
+    const key = event.keyCode;
+    const backspace = (key === 8);
+    const arrows = (key >= 37 && key <= 40);
+    if (backspace || arrows) return;
+    if (event.type === 'drop') {
+      const start = event.currentTarget.selectionStart;
+      const end = event.currentTarget.selectionEnd;
+      if (start === end) {
+        this._calc(event.originalEvent.dataTransfer.getData('text'), event);
+      } else {
+        event.preventDefault();
+        /* eslint-disable no-console, no-debugger */
+        if (Utility.debug())
+          console.warn('CalcInput: Blocked. Dropping not allowed from source.');
+        /* eslint-enable no-console, no-debugger */
+      }
+    } else if (event.type === 'paste') {
+      this._calc(event.originalEvent.clipboardData.getData('text'), event);
+    } else if (!this._isPaste(key) || !this._isCopy(key)) {
+      this._calc(event.key, event);
+    }
+    // store previous key for keyboard combination (paste) detection.
+    window[CalcInput.PREVIOUS_KEY] = key;
+  }
+
+  /**
+   * Detection for paste event
+   * @param  {number} key the current key code
+   * @return {boolean}    if the paste command is being used
+   */
+  _isPaste(key) {
+    let ctrl = (window[CalcInput.PREVIOUS_KEY] === 91);
+    let cmd = (window[CalcInput.PREVIOUS_KEY] === 17);
+    let v = (key === 86);
+    return ((ctrl || cmd) || v);
+  }
+
+  /**
+   * Detection for copy event
+   * @param  {number} key the current key code
+   * @return {boolean}    if the copy command is being used
+   */
+  _isCopy(key) {
+    let ctrl = (window[CalcInput.PREVIOUS_KEY] === 91);
+    let cmd = (window[CalcInput.PREVIOUS_KEY] === 17);
+    let v = (key === 67);
+    return ((ctrl || cmd) || v);
+  }
+
+  /**
+   * For a given dollar float input, product requirements dictate we should
+   * limit values to 6 digits before the decimal point and 2 after.
+   * @param  {object} event the keydown event object
+   */
+  _calc(text, event) {
+    const el = event.currentTarget;
+    const value = (el.value) ? el.value : '';
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const calc = [
+      value.substring(0, start), text, value.substring(end, value.length)
+    ].join('');
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug()) {
+      console.dir(['CalcInput', {
+        'selectionStart': start,
+        'text': text,
+        'selectionEnd': end,
+        'calculatedValue': calc
+      }]);
+    }
+    /* eslint-enable no-console, no-debugger */
+    this._testCalc(calc, event);
+  }
+
+  /**
+   * Create the regular expression and test the input
+   * @param  {string} calc  The calculated input
+   * @param  {object} event The original event
+   */
+  _testCalc(calc, event) {
+    /* eslint-disable no-console, no-debugger */
+    try {
+      const r = new RegExp(event.currentTarget.dataset.jsRegex, 'g');
+      /* eslint-disable no-console, no-debugger */
+      if (Utility.debug()) console.log(`CalcInput: ${r}`);
+      /* eslint-enable no-console, no-debugger */
+      const found = calc.match(r);
+      if (found.length && Utility.debug()) {
+        console.log('CalcInput: Passed!');
+      }
+    } catch (error) {
+      event.preventDefault(); // stop input
+      if (Utility.debug()) {
+        console.warn('CalcInput: Blocked. Input will not match valid format');
+      }
+    }
+    /* eslint-enable no-console, no-debugger */
+  }
+
+}
+
+CalcInput.PREVIOUS_KEY = '_prevKey';
+
+export default CalcInput;

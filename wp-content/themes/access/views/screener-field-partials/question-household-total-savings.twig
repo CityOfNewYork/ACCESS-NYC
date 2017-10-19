@@ -36,10 +36,12 @@
               v{ errors.first('Household.cashOnHand', 'HouseholdTotalSavings') }
           </div>
           <div class="currency-usd">
-            <input id="cash-on-hand" name="Household.cashOnHand" type="text" min="0" maxlength="9" pattern="\d*"
+            <input id="cash-on-hand" name="Household.cashOnHand" type="text" pattern="\d*"
+              data-type="float"
               data-object="household"
               data-key="cashOnHand"
-              data-type="float"
+              data-js="calc-input,format-dollars"
+              data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
               data-vv-scope="HouseholdTotalSavings"
               data-vv-as="{{ __('Total Savings', 'accessnyc-screener') }}"
               v-on:change="setAttr"

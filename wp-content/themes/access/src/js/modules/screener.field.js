@@ -12,6 +12,7 @@ import Utility from 'modules/utility';
 import _ from 'underscore';
 import Vue from 'vue/dist/vue.common';
 import Validator from 'vee-validate';
+import CalcInput from 'modules/calc-input';
 
 /**
  * Requires Documentation
@@ -66,14 +67,6 @@ class ScreenerField {
         'expenses': []
       },
       'methods': {
-        // 'deeper': function(path, obj, value) {
-        //   let nest = path.split('.')[];
-        //   if (typeof obj[path]) {
-        //     this.$set(obj, value);
-        //   } else {
-        //     this.deeper()
-        //   }
-        // }
         'resetAttr': ScreenerField.resetAttr,
         'setAttr': ScreenerField.setAttr,
         'populate': ScreenerField.populate,
@@ -136,18 +129,17 @@ class ScreenerField {
     // Basic toggles
     $el.on('change', `.${ScreenerField.Selectors.TOGGLE}`, this._toggler);
     // Floats
-    $el.on('focus', '[data-type="float"]', this._sanitizeDollarFloat);
-    $el.on('keydown', '[data-type="float"]', this._limitDollarFloat);
-    $el.on('keydown', '[data-type="float"]', this._enforceFloat);
-    // Numbers
-    $el.on('keydown', 'input[type="number"]', this._enforceNumbersOnly);
-    // Max Length and Max Value
-    $el.on('keydown', 'input[maxlength]', this._enforceMaxLength);
-    $el.on('keydown', 'input[max]', this._enforceMaxValue);
+    $el.on('blur', '[data-js*="format-dollars"]', this._formatDollars);
 
-    $el.on('paste', '[data-type="float"]', function(event) {
-      console.dir(event.originalEvent.clipboardData.getData('text'));
-    });
+    // Validate calculated inputs based on regular expressions.
+    new CalcInput(this._el);
+
+    // $el.on('keydown', '[data-type="float"]', this._enforceFloat);
+    // Numbers
+    // $el.on('keydown', 'input[type="number"]', this._enforceNumbersOnly);
+    // Max Length and Max Value
+    // $el.on('keydown', 'input[maxlength]', this._enforceMaxLength);
+    // $el.on('keydown', 'input[max]', this._enforceMaxValue);
 
     // Mask phone numbers
     $el.on('focus', 'input[type="tel"]',
@@ -156,8 +148,9 @@ class ScreenerField {
     // Routing
     window.addEventListener('hashchange', (event) => this._router(event));
 
-    $el.on('click', '[data-js="question"]', this._routerQuestion);
-    $el.on('click', '[data-js="page"]', this._routerPage);
+    // Close Questions
+    $el.on('click', '[data-js="question"]',
+      (event)=>{this._routerQuestion(event.currentTarget.hash)});
 
     // Set the initial view
     this._routerPage('#page-admin');
@@ -171,175 +164,137 @@ class ScreenerField {
    * attribute natively.
    * @param  {object} event the keypup event object
    */
-  _enforceMaxLength(event) {
-    let el = event.currentTarget;
-    let maxlength = parseInt(el.maxlength, 10);
-    let value = el.value;
-    let key = event.keyCode;
+  // _enforceMaxLength(event) {
+  //   let el = event.currentTarget;
+  //   let maxlength = parseInt(el.maxlength, 10);
+  //   let value = el.value;
+  //   let key = event.keyCode;
 
-    let arrows = (key >= 37 && key <= 40);
-    let backspace = (key === 8);
-    // let selected = (el.selectionStart === 0);
+  //   let arrows = (key >= 37 && key <= 40);
+  //   let backspace = (key === 8);
+  //   // let selected = (el.selectionStart === 0);
 
-    // console.dir(event);
-    // console.dir(el.selectionStart);
-    // console.dir(selected);
+  //   // console.dir(event);
+  //   // console.dir(el.selectionStart);
+  //   // console.dir(selected);
 
-    if (value.length === maxlength) {
-      if (!backspace && !arrows) {
-        event.preventDefault();
-        if (Utility.debug()) console.log('blocked');
-      }
-    }
-    ScreenerField.key = key;
-  }
+  //   if (value.length === maxlength) {
+  //     if (!backspace && !arrows) {
+  //       event.preventDefault();
+  //       if (Utility.debug()) console.log('blocked');
+  //     }
+  //   }
+  //   ScreenerField.key = key;
+  // }
 
   /**
    * Calculates the maximum value as a result of the event and prevents input
    * if it is greater than the allowed maximum value;
    * @param  {event} event the key down event
    */
-  _enforceMaxValue(event) {
-    let keyCode = event.keyCode;
-    if (ScreenerField.paste(keyCode)) return;
-    let el = event.currentTarget;
-    let max = parseInt(el.max, 10);
-    let value = (el.value != '') ? el.value : '0';
-    let key = (_.isNumber(event.key)) ? event.key : '0';
-    let calc = parseInt((value + event.key), 10);
+  // _enforceMaxValue(event) {
+  //   let keyCode = event.keyCode;
+  //   if (ScreenerField.paste(keyCode)) return;
+  //   let el = event.currentTarget;
+  //   let max = parseInt(el.max, 10);
+  //   let value = (el.value != '') ? el.value : '0';
+  //   let key = (_.isNumber(event.key)) ? event.key : '0';
+  //   let calc = parseInt((value + event.key), 10);
 
-    let keyarrows = (keyCode >= 37 && keyCode <= 40);
-    let backspace = (keyCode === 8);
-    // let selected = (el.selectionStart === 0);
+  //   let keyarrows = (keyCode >= 37 && keyCode <= 40);
+  //   let backspace = (keyCode === 8);
+  //   // let selected = (el.selectionStart === 0);
 
-    // console.dir(event);
-    // console.dir(el.selectionStart);
-    // console.dir(selected);
+  //   // console.dir(event);
+  //   // console.dir(el.selectionStart);
+  //   // console.dir(selected);
 
-    if (calc > max) {
-      if (!backspace && !keyarrows) {
-        event.preventDefault();
-        if (Utility.debug()) console.log('blocked');
-      }
-    }
-    ScreenerField.key = keyCode;
-  }
+  //   if (calc > max) {
+  //     if (!backspace && !keyarrows) {
+  //       event.preventDefault();
+  //       if (Utility.debug()) console.log('blocked');
+  //     }
+  //   }
+  //   ScreenerField.key = keyCode;
+  // }
 
   /**
    * Number inputs still allow certain characters outside of 0-9.
    * @param  {object} event the keypup event object
    */
-  _enforceNumbersOnly(event) {
-    let key = event.keyCode;
-    if (ScreenerField.paste(key)) return;
-    if (
-      key === 69 || // 'e' key, used for scientific notation
-      key === 187 || // '=' key (for the '+' sign)
-      key === 188 || // ',' key
-      key === 189 // '-' key
-    ) {
-      event.preventDefault();
-    }
-    ScreenerField.key = key;
-  }
+  // _enforceNumbersOnly(event) {
+  //   let key = event.keyCode;
+  //   if (ScreenerField.paste(key)) return;
+  //   if (
+  //     key === 69 || // 'e' key, used for scientific notation
+  //     key === 187 || // '=' key (for the '+' sign)
+  //     key === 188 || // ',' key
+  //     key === 189 // '-' key
+  //   ) {
+  //     event.preventDefault();
+  //   }
+  //   ScreenerField.key = key;
+  // }
 
   /**
    * Limits key input to numbers and decimals
    * @param  {event} the keydown input event
    */
-  _enforceFloat(event) {
-    let key = event.keyCode;
-    if (ScreenerField.paste(key)) return;
-    let block = true;
-    let value = event.currentTarget.value;
+  // _enforceFloat(event) {
+  //   let key = event.keyCode;
+  //   if (ScreenerField.paste(key)) return;
+  //   let block = true;
+  //   let value = event.currentTarget.value;
 
-    let keyboardnumbers = (key >= 48 && key <= 57);
-    let keypadnumbers = (key >= 96 && key <= 105);
-    let arrows = (key >= 37 && key <= 40);
-    let backspace = (key === 8);
-    let period = (key === 190 || key === 110);
+  //   let keyboardnumbers = (key >= 48 && key <= 57);
+  //   let keypadnumbers = (key >= 96 && key <= 105);
+  //   let arrows = (key >= 37 && key <= 40);
+  //   let backspace = (key === 8);
+  //   let period = (key === 190 || key === 110);
 
-    // let selected = (event.currentTarget.selectionStart === 0);
-    // block = (selected) ? false || block;
+  //   // let selected = (event.currentTarget.selectionStart === 0);
+  //   // block = (selected) ? false || block;
 
-    block = (
-      keyboardnumbers || keypadnumbers || arrows || backspace || period
-    ) ? false : block;
+  //   block = (
+  //     keyboardnumbers || keypadnumbers || arrows || backspace || period
+  //   ) ? false : block;
 
-    if (block) {
-      event.preventDefault();
-      if (Utility.debug()) console.log('blocked');
-    }
+  //   if (block) {
+  //     event.preventDefault();
+  //     if (Utility.debug()) console.log('blocked');
+  //   }
 
-    ScreenerField.key = key;
-  }
-
-  /**
-   * For a given dollar float input, product requirements dictate we should
-   * limit values to 6 digits before the decimal point and 2 after.
-   * @param  {object} event the keydown event object
-   */
-  _limitDollarFloat(event) {
-    const key = event.keyCode;
-    const backspace = (key === 8);
-    const arrows = (key >= 37 && key <= 40);
-
-    if (backspace || arrows) return;
-
-    const value = (event.currentTarget.value) ? event.currentTarget.value : '';
-    const start = event.currentTarget.selectionStart;
-    const end = event.currentTarget.selectionEnd;
-
-    const calc = [
-      value.substring(0, start),
-      event.key,
-      value.substring(end, value.length)
-    ].join('');
-
-    try {
-      const regex = /^([0-9]{1,6})(\.[0-9]{0,2})?$/g;
-      const found = calc.match(regex);
-      if (found.length && Utility.debug()) {
-        console.log('Passed!');
-      }
-    } catch (error) {
-      event.preventDefault(); // stop input
-      if (Utility.debug()) {
-        console.error('Blocked, input will not match valid format');
-      }
-    }
-  }
+  //   ScreenerField.key = key;
+  // }
 
   /**
    * Format number value and make sure it has '.00'
    * @param  {object} event the blur event object
    */
-  _sanitizeDollarFloat(event) {
-    event.currentTarget.addEventListener('blur', function(event) {
-      let value = event.currentTarget.value;
-      let postfix = '';
-      if (value.indexOf('.') > -1) {
-        let split = value.split('.');
-        postfix = (split[1].length == 1) ? '0' : postfix;
-        postfix = (split[1].length == 0) ? '00' : postfix;
-        event.currentTarget.value += postfix;
-      } else if (value != '') {
-        event.currentTarget.value += '.00';
-      }
-    });
+  _formatDollars(event) {
+    let value = event.currentTarget.value;
+    let postfix = '';
+    if (value.indexOf('.') > -1) {
+      let split = value.split('.');
+      postfix = (split[1].length == 1) ? '0' : postfix;
+      postfix = (split[1].length == 0) ? '00' : postfix;
+      event.currentTarget.value += postfix;
+    } else if (value != '') {
+      event.currentTarget.value += '.00';
+    }
   }
 
   /**
    * The page to go to.
    * @param  {string} page the page hash
-   * @return {null}
    */
   _routerPage(page) {
-    let $window = document.querySelector('#js-layout-body');
+    let view = document.querySelector(ScreenerField.Selectors.VIEW);
+
+    if (Utility.debug()) console.log(`routerPage: ${page}`);
 
     window.location.hash = page;
-
-    $window.scrollTop = 0;
+    view.scrollTop = 0;
 
     $(`.${ScreenerField.Selectors.PAGE}`)
       .removeClass(ScreenerField.Selectors.ACTIVE)
@@ -351,57 +306,49 @@ class ScreenerField {
       .removeAttr('aria-hidden')
       .find(':input, a')
       .removeAttr('tabindex');
-
-    return this;
   }
 
   /**
    * Jumps to screener question
    * @param  {string} hash The question's hash id
-   * @return {this} Screener
    */
-  _routerQuestion(event, hash) {
-    hash = hash || event.currentTarget.hash;
+  _routerQuestion(hash) {
+    // let hash = event.currentTarget.hash;
+    let page = $(hash).closest(`.${ScreenerField.Selectors.PAGE}`);
+    let target = $(hash).find(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`);
 
-    let page = '#' + $(hash).closest(`.${ScreenerField.Selectors.PAGE}`).attr('id');
-    let $questions = $(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`);
-    let $target = $(hash).find(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`);
-    let target = document.querySelector(hash);
-    let $window = document.querySelector('#js-layout-body');
+    if (!page.hasClass('active'))
+      this._routerPage(`#${page.attr('id')}`);
 
-    if (!$(page).hasClass('active')) {
-      window.location.hash = page;
-    }
-
-    if (!$target.hasClass('active')) {
-      $questions
+    // Show
+    if (!target.hasClass('active')) {
+      if (Utility.debug()) console.log(`routerQuestion: Show ${hash}`);
+      $(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`)
         .addClass('hidden')
         .removeClass('active')
         .prop('aria-hidden', true);
-      $target
-        .addClass('active')
+
+      target.addClass('active')
         .removeClass('hidden')
         .prop('aria-hidden', false);
 
       // Scrolling Behavior
       event.preventDefault();
-      target.scrollIntoView(true);
-      $window.scrollBy({
-        top: -60,
-        left: 0,
-        behavior: 'auto'
-      });
+      setTimeout(() => {
+        document.querySelector(hash)
+          .scrollIntoView(true);
+        document.querySelector(ScreenerField.Selectors.VIEW)
+          .scrollBy({top: -60, left: 0, behavior: 'auto'});
+      }, 1);
+    // Hide
     } else {
-      $target
-        .addClass('hidden')
+      if (Utility.debug()) console.log(`routerQuestion: Hide ${hash}`);
+      target.addClass('hidden')
         .removeClass('active')
         .prop('aria-hidden', true);
-
       // Scrolling Behavior
       event.preventDefault();
     }
-
-    return this;
   }
 
   /**
@@ -415,10 +362,12 @@ class ScreenerField {
     let route = hash.split('-')[1];
 
     if (type === '#page') {
-
       this._routes[route](this._vue);
       this._routerPage(hash);
+    }
 
+    if (type === '#question') {
+      this._routerQuestion(hash);
     }
 
     return this;
@@ -529,7 +478,7 @@ class ScreenerField {
 
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) {
-      console.dir(json);
+      console.warn(json);
       debugger;
     }
 
@@ -550,7 +499,7 @@ class ScreenerField {
 
       if (data.type !== 'SUCCESS') {
         if (Utility.debug()) {
-          console.error(result);
+          console.warn(result);
           debugger;
         }
         alert('There was an error getting results. Please try again later.');
@@ -558,7 +507,7 @@ class ScreenerField {
       }
 
       if (Utility.debug()) {
-        console.dir(result);
+        console.warn(result);
         debugger;
       }
 
@@ -594,18 +543,6 @@ class ScreenerField {
     })*/;
     /* eslint-enable no-console, no-debugger */
   }
-}
-
-/**
- * Detection for paste event
- * @param  {number} key the current key code
- * @return {boolean}    if the paste command is being used
- */
-ScreenerField.paste = function(key) {
-  let ctrl = (ScreenerField.key === 91);
-  let cmd = (ScreenerField.key === 17);
-  let v = (key === 86);
-  return ((ctrl || cmd) || v);
 }
 
 /**
@@ -647,7 +584,7 @@ ScreenerField.validate = function(event) {
 ScreenerField.valid = function(valid) {
   if (!valid) {
     /* eslint-disable no-console, no-debugger */
-    console.error('Some required fields are not filled out.');
+    console.warn('Some required fields are not filled out.');
     /* eslint-enable no-console, no-debugger */
   } else {
     window.location.hash = event.currentTarget.hash;
@@ -1066,11 +1003,12 @@ ScreenerField.Selectors = {
   REMOVE_PERSON: 'js-remove-person',
   RENDER_RECAP: 'js-render-recap',
   QUESTION_CONTAINER: 'screener-question-container',
-  TOGGLE: 'js-screener-toggle',
-  TOGGLE_QUESTION: 'js-toggle-question',
   STEP: 'js-screener-step',
   SUBMIT: 'js-screener-submit',
-  TRANSACTION_LABEL: 'screener-transaction-type'
+  TRANSACTION_LABEL: 'screener-transaction-type',
+  TOGGLE: 'js-screener-toggle',
+  TOGGLE_QUESTION: 'js-toggle-question',
+  VIEW: '[data-js="view"]'
 };
 
 /**
@@ -1095,6 +1033,15 @@ ScreenerField.InputType = {
   FLOAT: 'float',
   INTEGER: 'integer'
 };
+
+/**
+ * [regex description]
+ * @type {Object}
+ */
+ScreenerField.regex = {
+  DROOLS_DOLLARS: '^([0-9]{1,6})(\\.[0-9]{0,2})?$',
+  HOUSEHOLD_MEMBERS: '^[1-8]{1}$'
+}
 
 /**
  * Valid zip codes in New York City. Source:
