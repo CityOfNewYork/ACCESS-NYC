@@ -2,8 +2,8 @@
 /**
  * Uploadscreen for selecting and uploading new media file
  *
- * @author      M�ns Jonasson  <http://www.mansjonasson.se>
- * @copyright   M�ns Jonasson 13 sep 2010
+ * @author      Måns Jonasson  <http://www.mansjonasson.se>
+ * @copyright   Måns Jonasson 13 sep 2010
  * @version     $Revision: 2303 $ | $Date: 2010-09-13 11:12:35 +0200 (ma, 13 sep 2010) $
  * @package     wordpress
  * @subpackage  enable-media-replace
