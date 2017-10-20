@@ -48,32 +48,49 @@ class WPML_Translate_Link_Targets_In_Custom_Fields extends WPML_Translate_Link_T
 		if ( array_key_exists( $meta_key, $this->meta_keys ) ) {
 			$custom_field_setting = new WPML_Post_Custom_Field_Setting( $this->tm_instance, $meta_key );
 			if ( $custom_field_setting->is_translate_link_target() ) {
-	
+
+				$sub_fields = $custom_field_setting->get_translate_link_target_sub_fields();
+
 				$this->wp_api->remove_filter( 'get_post_metadata', array( $this, 'maybe_translate_link_targets' ), 10 );
-				$metadata = maybe_unserialize( $this->wp_api->get_post_meta( $object_id, $meta_key, $single ) );
+				$metadata_raw = maybe_unserialize( $this->wp_api->get_post_meta( $object_id, $meta_key, $single ) );
 				$this->wp_api->add_filter( 'get_post_metadata', array( $this, 'maybe_translate_link_targets' ), 10, 4 );
-				if ( $metadata ) {
-					$sub_fields = $custom_field_setting->get_translate_link_target_sub_fields();
-					if ( ! empty( $sub_fields ) ) {
-						foreach ( $sub_fields as $sub_field ) {
-							if ( isset( $sub_field['value'] ) && isset( $sub_field['attr']['translate_link_target'] ) && $sub_field['attr']['translate_link_target'] ) {
-								$key = trim( $sub_field[ 'value' ] );
-								if ( isset( $metadata[ $key ] ) ) {
-									$metadata[ $key ] = $this->convert_text( $metadata[ $key ] );
-								}
-							}
+
+				if ( $metadata_raw ) {
+					if ( $single ) {
+						$metadata_raw = array( $metadata_raw );
+					}
+					foreach ( $metadata_raw as $index => $metadata ) {
+						if ( ! empty( $sub_fields ) ) {
+							$metadata = $this->convert_sub_fields( $sub_fields, $metadata );
+						} else {
+							$metadata = $this->convert_text( $metadata );
 						}
-					} else {
-						$metadata = $this->convert_text( $metadata );
+						$metadata_raw[ $index ] = $metadata;
 					}
 
-					if ( $single ) {
-						$metadata[0] = $metadata;
+					if ( $single && ! is_array( $metadata_raw[0] ) ) {
+						$metadata_raw = $metadata_raw[0];
 					}
 				}
+				$metadata = $metadata_raw;
 			}
 		}
 		return $metadata;
 	}
+
+	private function convert_sub_fields( $sub_fields, $metadata ) {
+		foreach ( $sub_fields as $sub_field ) {
+			if ( isset( $sub_field['value'], $sub_field['attr']['translate_link_target'] ) && $sub_field['attr']['translate_link_target'] ) {
+				$key = trim( $sub_field['value'] );
+				if ( isset( $metadata[ $key ] ) ) {
+					$metadata[ $key ] = $this->convert_text( $metadata[ $key ] );
+				}
+			}
+		}
+
+		return $metadata;
+	}
 }
+
+
 

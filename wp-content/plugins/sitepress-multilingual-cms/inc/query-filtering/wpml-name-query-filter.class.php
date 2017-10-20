@@ -178,6 +178,26 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 	 * @return array
 	 */
 	private function get_single_slug_adjusted_IDs( $page_name_for_query ) {
+		$cache = new WPML_WP_Cache( get_class( $this ) );
+		$cache_key =  'get_single_slug_adjusted_IDs' . $page_name_for_query;
+		$found = false;
+
+		$pages_with_name = $cache->get( $cache_key, $found );
+
+		if ( ! $found ) {
+			$pages_with_name = $this->get_single_slug_adjusted_IDs_from_DB( $page_name_for_query );
+			$cache->set( $cache_key, $pages_with_name );
+		}
+
+		return $pages_with_name;
+	}
+
+	/**
+	 * @param string $page_name_for_query
+	 *
+	 * @return array
+	 */
+	private function get_single_slug_adjusted_IDs_from_DB( $page_name_for_query ) {
 		$pages_with_name = $this->wpdb->get_col(
 			$this->wpdb->prepare(
 				"

@@ -26,28 +26,31 @@ class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_AJ
 		if ( is_admin() ) {
 			$this->init_ajax_actions();
 		}
-
-		if ( self::USE_ST_AND_NO_MO_FILES === $this->get_theme_localization_type() ) {
-			add_filter( 'override_load_textdomain', array( $this, 'block_mo_loading_handler' ), 10, 3 );
-		}
 	}
 
 	public function run() {
+		$type       = $this->retrieve_theme_localization_type();
+		$textdomain = $this->retrieve_theme_localization_load_textdomain();
+
+		$this->save_localization_type( $type, $textdomain );
+
+		return new WPML_Ajax_Response( true, $type );
+	}
+
+	public function save_localization_type( $type, $textdomain = 0 ) {
 		$iclsettings = $this->sitepress->get_settings();
 
-		$iclsettings['theme_localization_type']            = $this->retrieve_theme_localization_type();
-		$iclsettings['theme_localization_load_textdomain'] = $this->retrieve_theme_localization_load_textdomain();
+		$iclsettings['theme_localization_type']            = $type;
+		$iclsettings['theme_localization_load_textdomain'] = $textdomain;
 		$iclsettings['gettext_theme_domain_name']          = array_key_exists( 'textdomain_value', $_POST ) ? filter_var( $_POST['textdomain_value'], FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE ) : false;
 
-		if ( self::USE_MO_FILES === $iclsettings['theme_localization_type'] ) {
+		if ( $this->get_use_mo_files_value() === $iclsettings['theme_localization_type'] ) {
 			$iclsettings['theme_language_folders'] = $this->get_mo_file_search()->find_theme_mo_dirs();
 		}
 
 		$this->sitepress->save_settings( $iclsettings );
 
 		do_action( 'wpml_post_save_theme_localization_type', $iclsettings );
-
-		return new WPML_Ajax_Response( true, $iclsettings['theme_localization_type'] );
 	}
 
 	public function get_class_names() {
@@ -66,10 +69,10 @@ class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_AJ
 	 * @return int
 	 */
 	private function retrieve_theme_localization_type() {
-		$result = self::USE_MO_FILES;
+		$result = $this->get_use_mo_files_value();
 		if ( array_key_exists( 'icl_theme_localization_type', $_POST ) ) {
 			$var     = filter_var( $_POST['icl_theme_localization_type'], FILTER_VALIDATE_INT );
-			$options = array( self::USE_ST, self::USE_MO_FILES, self::USE_ST_AND_NO_MO_FILES );
+			$options = array( $this->get_use_st_value(), $this->get_use_mo_files_value(), $this->get_use_st_and_no_mo_files_value() );
 			if ( in_array( $var, $options, true ) ) {
 				$result = $var;
 			}
@@ -100,29 +103,15 @@ class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_AJ
 		$settings = $this->sitepress->get_settings();
 		if ( isset( $settings['theme_localization_type'] ) ) {
 			return (int) $settings['theme_localization_type'];
-		} else {
-			return self::USE_MO_FILES;
 		}
+		return $this->get_use_mo_files_value();
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function is_st_type() {
-		return in_array( $this->get_theme_localization_type(), array( self::USE_ST, self::USE_ST_AND_NO_MO_FILES ), true );
-	}
-
-	/**
-	 * Block loading of all MO files regardless domain or mofile name
-	 *
-	 * @param bool   $override
-	 * @param string $domain
-	 * @param string $mofile
-	 *
-	 * @return bool
-	 */
-	public function block_mo_loading_handler( $override, $domain, $mofile ) {
-		return true;
+		return in_array( $this->get_theme_localization_type(), array( $this->get_use_st_value(), $this->get_use_st_and_no_mo_files_value() ), true );
 	}
 
 	/**
@@ -145,5 +134,31 @@ class WPML_Theme_Localization_Type extends WPML_Ajax_Factory implements IWPML_AJ
 		$this->mo_file_search = $mo_file_search;
 
 		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function get_use_st_and_no_mo_files_value() {
+		return self::USE_ST_AND_NO_MO_FILES;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function get_use_st_value() {
+		return self::USE_ST;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function get_use_mo_files_value() {
+		return self::USE_MO_FILES;
+	}
+
+	/** @return bool */
+	public function is_mo_loading_disabled() {
+		return self::USE_ST_AND_NO_MO_FILES === $this->get_theme_localization_type();
 	}
 }

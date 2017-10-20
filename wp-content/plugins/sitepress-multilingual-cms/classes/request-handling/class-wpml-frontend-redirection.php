@@ -44,6 +44,6 @@ class WPML_Frontend_Redirection extends WPML_SP_User {
 		};
 
 		// allow forcing the current language when it can't be decoded from the URL
-		return $this->lang_resolution->current_lang_filter( $this->request_handler->get_requested_lang() );
+		return $this->lang_resolution->current_lang_filter( $this->request_handler->get_requested_lang(), $this->request_handler );
 	}
 }

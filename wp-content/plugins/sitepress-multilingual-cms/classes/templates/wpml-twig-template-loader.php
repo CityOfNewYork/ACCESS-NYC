@@ -25,7 +25,7 @@ class WPML_Twig_Template_Loader {
 	public function get_template() {
 		$twig_loader      = new Twig_Loader_Filesystem( $this->paths );
 		$environment_args = array();
-		if ( WP_DEBUG ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			$environment_args['debug'] = true;
 		}
 		$twig = new Twig_Environment( $twig_loader, $environment_args );

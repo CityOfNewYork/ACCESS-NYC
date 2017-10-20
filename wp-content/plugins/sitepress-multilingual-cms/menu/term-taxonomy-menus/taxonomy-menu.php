@@ -35,7 +35,7 @@ if ( $element_id ) {
 		$trid = $wpdb->get_var( $wpdb->prepare( "SELECT trid FROM {$wpdb->prefix}icl_translations WHERE translation_id=%d", array( $translation_id) ) );
 	}
 } else {
-	$trid              = isset( $_GET[ 'trid' ] ) ? intval( $_GET[ 'trid' ] ) : false;
+	$trid = isset( $_GET['trid'] ) ? (int) $_GET['trid'] : false;
 
 	$element_lang_code = $current_language;
 	if( array_key_exists( 'lang', $_GET ) ) {
@@ -47,6 +47,8 @@ $translations = false;
 if ( $trid ) {
 	$translations = $sitepress->get_element_translations( $trid, $icl_element_type );
 }
+$terms_translations = empty( $translations ) ? array() : $translations;
+
 $active_languages = $sitepress->get_active_languages();
 $selected_language = $element_lang_code ? $element_lang_code : $default_language;
 $source_language = isset( $_GET[ 'source_lang' ] ) ? strip_tags( filter_input ( INPUT_GET, 'source_lang', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) : false;
@@ -56,12 +58,14 @@ $dropdown = new WPML_Taxonomy_Element_Language_Dropdown();
 $dropdown->add_language_selector_to_page (
 	$active_languages,
 	$selected_language,
-	(array) $translations,
+  $terms_translations,
 	$element_id,
 	$icl_element_type
 );
 
-if ( icl_get_setting('setup_complete') ) {
+$setup_complete = $sitepress->get_setting( 'setup_complete' );
+
+if ( $setup_complete ) {
     require WPML_PLUGIN_PATH . '/menu/wpml-translation-selector.class.php';
     $selector = new WPML_Translation_Selector( $sitepress, $default_language, $source_language, $element_id );
     $selector->add_translation_of_selector_to_page (
@@ -70,9 +74,29 @@ if ( icl_get_setting('setup_complete') ) {
         $selected_language,
         $untranslated_ids
     );
-}
-$sitepress->add_translate_options( $trid, $active_languages, $selected_language, empty( $translations ) ? array() : $translations, $icl_element_type );
+$sitepress->add_translate_options( $trid, $active_languages, $selected_language, $terms_translations, $icl_element_type );
 
 ?>
-
 </div></div></div></div></div>
+<?php
+	if ( $trid && $sitepress->get_wp_api()->is_term_edit_page() ) {
+	/**
+	 * Extends the translation options for terms
+	 *
+	 * Called after rendering the translation options for terms, after the closing the main container tag
+	 *
+	 * @since 3.8.2
+	 *
+	 * @param array $args              {
+	 *                                 Information about the current term and its translations
+	 *
+	 * @type int    $trid              The translation cluster ID.
+	 * @type array  $active_languages  All active languages data.
+	 * @type string $selected_language The language of the current term being edited.
+	 * @type array  $translations      All the available translations (including the current one).
+	 * @type string $type              The translation element type (e.g. `tax_category`, `tax_{taxonomy}`.
+	 * }
+	 */
+	do_action( 'wpml_translate_options_terms_after', array( 'trid' => $trid, 'active_languages' => $active_languages, 'selected_language' => $selected_language, 'translations' => $terms_translations, 'type' => $icl_element_type ) );
+}
+}

@@ -48,10 +48,10 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 	 * @return string
 	 */
 	public function filter_single_type_join( $join, $post_type ) {
-		if ( $this->sitepress->is_translated_post_type ( $post_type ) ) {
-			$join .= $this->any_post_type_join( false );
-		} elseif ( $post_type === 'any' ) {
+		if ( 'any' === $post_type ) {
 			$join .= $this->any_post_type_join();
+		} elseif ( $this->sitepress->is_translated_post_type ( $post_type ) ) {
+			$join .= $this->any_post_type_join( false );
 		}
 
 		return $join;

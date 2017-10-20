@@ -53,8 +53,11 @@ class WPML_User_Language {
 	 */
 	public function intersect_wpml_wp_languages( $wp_languages ) {
 		$active_wpml_languages = wp_list_pluck( $this->sitepress->get_active_languages(), 'default_locale' );
+		$active_wpml_codes = array_flip( $active_wpml_languages );
+		$intersect_languages_by_locale = array_intersect( $active_wpml_languages, $wp_languages );
+		$intersect_languages_by_code = array_intersect( $active_wpml_codes, $wp_languages );
 
-		return array_intersect( $active_wpml_languages, $wp_languages );
+		return array_merge( $intersect_languages_by_code, $intersect_languages_by_locale );
 	}
 
 	/**

@@ -35,13 +35,13 @@ class WPML_Resolve_Object_Url_Helper {
 	 * @param WPML_Post_Translation $wpml_post_translations
 	 */
 	public function __construct(
-		SitePress $sitepress = null,
-		WP_Query $wp_query = null,
+		SitePress &$sitepress = null,
+		WP_Query &$wp_query = null,
 		WPML_Term_Translation $wpml_term_translations = null,
 		WPML_Post_Translation $wpml_post_translations = null
 	) {
-		$this->sitepress              = $sitepress;
-		$this->wp_query               = $wp_query;
+		$this->sitepress              = &$sitepress;
+		$this->wp_query               = &$wp_query;
 		$this->wpml_term_translations = $wpml_term_translations;
 		$this->wpml_post_translations = $wpml_post_translations;
 	}

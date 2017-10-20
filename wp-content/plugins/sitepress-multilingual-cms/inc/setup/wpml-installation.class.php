@@ -263,7 +263,7 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 			$this->sitepress->get_language_name_cache()->set( 'all_language_' . $display_language . '_' . $major_first . '_' . $order_by, $languages );
 		}
 
-		$this->sitepress->get_language_name_cache()->save_cache_if_requred();
+		$this->sitepress->get_language_name_cache()->save_cache_if_required();
 		
 		return $languages;
 	}
@@ -271,7 +271,7 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 	private function update_languages_order() {
 		$needs_update  = false;
 		$current_order = $this->sitepress->get_setting( 'languages_order', array() );
-		if ( '' === $current_order ) {
+		if ( ! is_array( $current_order ) ) {
 			$current_order = array();
 		}
 		$languages = $this->sitepress->get_languages( false, false, true );

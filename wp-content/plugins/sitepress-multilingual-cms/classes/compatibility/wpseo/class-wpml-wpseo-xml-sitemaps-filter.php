@@ -68,7 +68,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 		unset( $active_langs[ $default_lang ] );
 
 		foreach ( $active_langs as $lang_code => $lang_data ) {
-			$output .= $this->sitemap_url_filter( $this->wpml_url_converter->convert_url( home_url(), $lang_code ) );
+			$output .= $this->sitemap_url_filter( $this->wpml_url_converter->convert_url( home_url( '/' ), $lang_code ) );
 		}
 		return $output;
 	}
@@ -81,7 +81,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 	}
 
 	public function list_domains() {
-		if ( $this->is_per_domain() || $this->has_root_page() ) {
+		if ( $this->is_per_domain() ) {
 
 			echo '<h3>' . esc_html__( 'WPML', 'sitepress' ) . '</h3>';
 			echo esc_html__( 'Sitemaps for each language can be accessed below. You need to submit all these sitemaps to Google.', 'sitepress' );
@@ -141,17 +141,13 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 		// The setting should not be updated in DB
 		$sitepress_settings['auto_adjust_ids'] = 0;
 
-		if ( ! $this->is_per_domain() && ! $this->has_root_page() ) {
+		if ( ! $this->is_per_domain() ) {
 			remove_filter( 'terms_clauses', array( $this->sitepress, 'terms_clauses' ), 10 );
 		}
 
 		remove_filter( 'category_link', array( $this->sitepress, 'category_link_adjust_id' ), 1 );
 
 		return $type;
-	}
-
-	private function has_root_page() {
-		return (bool) $this->sitepress->get_root_page_utils()->get_root_page_id();
 	}
 
 	/**

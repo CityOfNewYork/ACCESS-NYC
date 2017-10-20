@@ -79,13 +79,13 @@ class WPML_Requirements_Notification {
 			$product_names = implode( _x( ' and ', 'between two elements of a list', 'sitepress' ) . ' ', $items );
 
 			return $product_names;
-		} else {
-			$last          = array_slice( $items, - 1 );
-			$first         = implode( ', ', array_slice( $items, 0, - 1 ) );
-			$both          = array_filter( array_merge( array( $first ), $last ), 'strlen' );
-			$product_names = implode( _x( ', and ', 'before the element of a list', 'sitepress' ) . ' ', $both );
-
-			return $product_names;
 		}
+
+		$last          = array_slice( $items, - 1 );
+		$first         = implode( ', ', array_slice( $items, 0, - 1 ) );
+		$both          = array_filter( array_merge( array( $first ), $last ), 'strlen' );
+		$product_names = implode( _x( ', and ', 'before the element of a list', 'sitepress' ) . ' ', $both );
+
+		return $product_names;
 	}
 }

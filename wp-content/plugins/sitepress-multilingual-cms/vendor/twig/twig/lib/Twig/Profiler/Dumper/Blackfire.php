@@ -22,7 +22,7 @@ class Twig_Profiler_Dumper_Blackfire
         $this->dumpProfile('main()', $profile, $data);
         $this->dumpChildren('main()', $profile, $data);
 
-        $start = sprintf('%f', microtime(true));
+        $start = microtime(true);
         $str = <<<EOF
 file-format: BlackfireProbe
 cost-dimensions: wt mu pmu

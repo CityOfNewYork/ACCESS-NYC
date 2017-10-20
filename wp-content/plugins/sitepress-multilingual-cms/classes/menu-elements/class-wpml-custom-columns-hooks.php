@@ -37,7 +37,8 @@ class WPML_Custom_Columns_Hooks extends WPML_WPDB_And_SP_User {
 					}
 					break;
 				default:
-					if ( in_array( $post_type, array_keys( $this->sitepress->get_translatable_documents() ), true ) ) {
+					$translatable_documents = $this->sitepress->get_translatable_documents();
+					if ( array_key_exists( $post_type, $translatable_documents ) ) {
 						add_filter( 'manage_' . $post_type . '_posts_columns', array( $this->get_custom_column_instance(), 'add_posts_management_column' ) );
 						if ( is_post_type_hierarchical( $post_type ) ) {
 							if ( $this->get_custom_column_instance()->show_management_column_content( $post_type ) ) {

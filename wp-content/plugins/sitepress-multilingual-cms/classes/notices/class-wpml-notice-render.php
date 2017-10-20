@@ -85,6 +85,10 @@ class WPML_Notice_Render {
 	}
 
 	public function must_display_notice( WPML_Notice $notice ) {
+		if ( ! $notice->is_for_current_user() || ! $notice->is_user_cap_allowed() ) {
+			return false;
+		}
+
 		$current_page = array_key_exists( 'page', $_GET ) ? $_GET['page'] : null;
 
 		$exclude_from_pages = $notice->get_exclude_from_pages();
@@ -98,7 +102,7 @@ class WPML_Notice_Render {
 		if ( $display_callbacks ) {
 			$allow_by_callback = false;
 			foreach ( $display_callbacks as $callback ) {
-				if ( call_user_func( $callback ) ) {
+				if ( is_callable( $callback ) && call_user_func( $callback ) ) {
 					$allow_by_callback = true;
 					break;
 				}

@@ -50,8 +50,14 @@ class WPML_LS_Widget extends WP_Widget {
 		if ( $ret ) {
 
 			if ( $slot->get( 'widget_title' ) ) {
+				remove_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
+
 				$ret = $args['before_title'] . apply_filters( 'widget_title', $slot->get( 'widget_title' ) )
 				       . $args['after_title'] . $ret;
+
+				if ( function_exists( 'icl_sw_filters_widget_title' ) ) {
+					add_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
+				}
 			}
 
 			echo $args['before_widget'] . $ret . $args['after_widget'];
