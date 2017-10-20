@@ -47,6 +47,9 @@ class WPML_ST_Upgrade {
 		$this->maybe_run( 'WPML_ST_Upgrade_Display_Strings_Scan_Notices' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Location' );
+		$this->maybe_run( 'WPML_ST_Upgrade_MO_Scanning' );
+		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Name_Index' );
+		$this->maybe_run( 'WPML_ST_Upgrade_DB_Longtext_String_Value' );
 	}
 
 	private function run_ajax() {
@@ -54,10 +57,12 @@ class WPML_ST_Upgrade {
 
 		// it has to be maybe_run
 		$this->maybe_run( 'WPML_ST_Upgrade_Db_Cache_Command' );
+		$this->maybe_run( 'WPML_ST_Upgrade_MO_Scanning' );
 	}
 
 	private function run_front_end() {
 		$this->maybe_run( 'WPML_ST_Upgrade_Db_Cache_Command' );
+		$this->maybe_run( 'WPML_ST_Upgrade_MO_Scanning' );
 	}
 	
 	private function maybe_run( $class ) {

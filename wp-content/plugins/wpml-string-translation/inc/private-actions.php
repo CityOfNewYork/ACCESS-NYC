@@ -1,16 +1,17 @@
 <?php
 
-function wpml_st_parse_config( $file ) {
+function wpml_st_parse_config( $file_or_object ) {
 	global $wpdb;
 
 	require_once WPML_ST_PATH . '/inc/admin-texts/wpml-admin-text-import.class.php';
-	$config     = new WPML_Admin_Text_Configuration( $file );
+	$config     = new WPML_Admin_Text_Configuration( $file_or_object );
 	$st_records = new WPML_ST_Records( $wpdb );
 	$import     = new WPML_Admin_Text_Import( $st_records );
 	$import->parse_config( $config->get_config_array() );
 }
 
 add_action( 'wpml_parse_config_file', 'wpml_st_parse_config', 10, 1 );
+add_action( 'wpml_parse_custom_config', 'wpml_st_parse_config', 10, 1 );
 
 /**
  * Action run on the wp_loaded hook that registers widget titles,
@@ -26,7 +27,9 @@ function wpml_st_initialize_basic_strings() {
 		$WPML_String_Translation,
 		$pagenow,
 		isset( $_GET['page'] ) ? $_GET['page'] : '' );
-	$load_action->run();
+	if ( $sitepress->is_setup_complete() ) {
+		$load_action->run();
+	}
 }
 
 if ( is_admin() ) {

@@ -64,7 +64,7 @@ class WPML_PB_Integration {
 	}
 
 	/**
-	 * @param object $post
+	 * @param WP_Post $post
 	 */
 	public function register_all_strings_for_translation( $post ) {
 		if ( $this->is_post_status_ok( $post ) && $this->is_original_post( $post ) ) {
@@ -111,8 +111,10 @@ class WPML_PB_Integration {
 	 * @param stdClass $job
 	 */
 	public function cleanup_strings_after_translation_completed( $new_post_id, array $fields, stdClass $job ) {
-		$original_post = get_post( $job->original_doc_id );
-		$this->register_all_strings_for_translation( $original_post );
+		if ( 'post' === $job->element_type_prefix ) {
+			$original_post = get_post( $job->original_doc_id );
+			$this->register_all_strings_for_translation( $original_post );
+		}
 	}
 
 	public function do_shutdown_action() {
@@ -142,13 +144,17 @@ class WPML_PB_Integration {
 
 	/**
 	 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlst-958
-	 * @param array $translation_package
-	 * @param $post
+	 * @param array                $translation_package
+	 * @param WP_Post|WPML_Package $post
 	 *
 	 * @return array
 	 */
 	public function rescan( array $translation_package, $post ) {
-		return $this->get_rescan()->rescan( $translation_package, $post );
+		if ( $post instanceof WP_Post ) {
+			$translation_package = $this->get_rescan()->rescan( $translation_package, $post );
+		}
+
+		return $translation_package;
 	}
 
 	/**

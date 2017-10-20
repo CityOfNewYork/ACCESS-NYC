@@ -88,7 +88,15 @@ class WPML_ST_String {
 	 */
 	public function get_translation_statuses() {
 
-		return $this->wpdb->get_results( "SELECT language, status " . $this->from_where_snippet( true ) );
+		$statuses = $this->wpdb->get_results( "SELECT language, status, mo_string " . $this->from_where_snippet( true ) );
+		foreach ( $statuses as &$status ) {
+			if ( ! empty( $status->mo_string ) ) {
+				$status->status = ICL_TM_COMPLETE;
+			}
+			unset( $status->mo_string );
+		}
+
+		return $statuses;
 	}
 
 	public function get_translations() {

@@ -13,1353 +13,156 @@ msgstr ""
 "Language:en\n"
 "MIME-Version: 1.0\n"
 
-# $this->admin_notice = '<div class="error wpml-admin-notice">';
-# $this->admin_notice .= '<h3>' . __( 'WPML Update is Incomplete', 'sitepress' ) . '</h3>';
-# $this->admin_notice .= '<p>' . implode( '</p><p>', $notice_paragraphs ) . '</p>';
-
-msgid "WPML Update is Incomplete"
-msgstr ""
-
-# if ( count( $this->valid_plugins ) === 1 ) {
-# $paragraph = __( 'You are running updated %s, but the following component is not updated:', 'sitepress' );
-# $paragraph = sprintf( $paragraph, '<strong>' . $this->valid_plugins[0] . '</strong>' );
-
-msgid "You are running updated %s, but the following component is not updated:"
-msgstr ""
-
-# } else {
-# $paragraph           = __( 'You are running updated %s and %s, but the following components are not updated:', 'sitepress' );
-# $first_valid_plugins = implode( ', ', array_slice( $this->valid_plugins, 0, - 1 ) );
-
-msgid "You are running updated %s and %s, but the following components are not updated:"
-msgstr ""
-
-# } else {
-# $paragraph = __( 'The following components are not updated:', 'sitepress' );
-# }
-
-msgid "The following components are not updated:"
-msgstr ""
-
-# private function get_invalid_plugins_report_footer() {
-# $wpml_org_url = '<a href="https://wpml.org/account/" title="WPML.org account">' . __( 'WPML.org account', 'sitepress' ) . '</a>';
-# 
-
-msgid "WPML.org account"
-msgstr ""
-
-# 
-# $notice_paragraph = __( 'Your site will not work as it should in this configuration', 'sitepress' );
-# $notice_paragraph .= ' ';
-
-msgid "Your site will not work as it should in this configuration"
-msgstr ""
-
-# $notice_paragraph .= ' ';
-# $notice_paragraph .= __( 'Please update all components which you are using.', 'sitepress' );
-# $notice_paragraph .= ' ';
-
-msgid "Please update all components which you are using."
-msgstr ""
-
-# $notice_paragraph .= ' ';
-# $notice_paragraph .= sprintf( __( 'For WPML components you can receive updates from your %s or automatically, after you register WPML.', 'sitepress' ), $wpml_org_url );
-# 
-
-msgid "For WPML components you can receive updates from your %s or automatically, after you register WPML."
-msgstr ""
-
-# $translation_array = array(
-# 'installing'    => __( 'Installing %s', 'installer' ),
-# 'updating'      => __( 'Updating %s', 'installer' ),
-
-msgid "Installing %s"
-msgstr ""
-
-# 'installing'    => __( 'Installing %s', 'installer' ),
-# 'updating'      => __( 'Updating %s', 'installer' ),
-# 'activating'    => __( 'Activating %s', 'installer' )
-
-msgid "Updating %s"
-msgstr ""
-
-# 'updating'      => __( 'Updating %s', 'installer' ),
-# 'activating'    => __( 'Activating %s', 'installer' )
-# );
-
-msgid "Activating %s"
-msgstr ""
-
-# $this->menu_multisite_redirect();
-# add_options_page(__('Installer', 'installer'), __('Installer', 'installer'), 'manage_options', 'installer', array($this, 'show_products'))            ;
 # }else{
-
-msgid "Installer"
-msgstr ""
-
-# public function plugins_action_links_registered($links){
-# $links[] = '<a href="' . $this->menu_url() . '">' . __('Registered', 'installer') . '</a>';
-# return $links;
-
-msgid "Registered"
-msgstr ""
-
-# public function plugins_action_links_not_registered($links){
-# $links[] = '<a href="' . $this->menu_url() . '">' . __('Register', 'installer') . '</a>';
-# return $links;
-
-msgid "Register"
-msgstr ""
-
-# 'type' => 'error',
-# 'text' => sprintf( __( 'You are using an invalid site key defined as the constant %s (most likely in wp-config.php).
-# Please remove it or use the correct value in order to be able to register correctly.', 'installer' ), 'OTGS_INSTALLER_SITE_KEY_' . strtoupper( $repository_id ) )
-
-msgid "You are using an invalid site key defined as the constant %s (most likely in wp-config.php). \n                                                Please remove it or use the correct value in order to be able to register correctly."
-msgstr ""
-
-# echo '<div class="updated error otgs-is-dismissible"><p>';
-# printf(__("To get automatic updates, you need to register %s for this site. %sRegister %s%s", 'sitepress'),
-# $nag['product_name'], '<a class="button-primary" href="' . $this->menu_url() . '">', $nag['product_name'], '</a>');
-
-msgid "To get automatic updates, you need to register %s for this site. %sRegister %s%s"
-msgstr ""
-
-# echo '</p>';
-# echo '<span class="installer-dismiss-nag notice-dismiss" data-repository="' . $nag['repository_id']  . '"><span class="screen-reader-text">' . __('Dismiss', 'sitepress') . '</span></span>';
-# echo '</div>';
-
-msgid "Dismiss"
-msgstr ""
-
-# 
-# $tabs['commercial'] = __('Commercial', 'installer');
-# 
-
-msgid "Commercial"
-msgstr ""
-
-# 
-# $error = sprintf(__("Installer cannot display the products information because the automatic updating for %s was explicitly disabled with the configuration below (usually in wp-config.php):", 'installer'), strtoupper( join(', ', $repository_names) ));
-# $error .= '<br /><br /><code>define("OTGS_DISABLE_AUTO_UPDATES", true);</code><br /><br />';
-
-msgid "Installer cannot display the products information because the automatic updating for %s was explicitly disabled with the configuration below (usually in wp-config.php):"
-msgstr ""
-
-# $error .= '<br /><br /><code>define("OTGS_DISABLE_AUTO_UPDATES", true);</code><br /><br />';
-# $error .= sprintf(__("In order to see the products information, please run the %smanual updates check%s to initialize the products list or (temporarily) remove the above code.", 'installer'), '<a href="' . admin_url('update-core.php') . '">', '</a>');
-# 
-
-msgid "In order to see the products information, please run the %smanual updates check%s to initialize the products list or (temporarily) remove the above code."
-msgstr ""
-
-# 
-# $error = sprintf(__("Installer cannot contact our updates server to get information about the available products and check for new versions. If you are seeing this message for the first time, you can ignore it, as it may be a temporary communication problem. If the problem persists and your WordPress admin is slowing down, you can disable automated version checks. Add the following line to your wp-config.php file:", 'installer'), strtoupper($id));
-# $error .= '<br /><br /><code>define("OTGS_DISABLE_AUTO_UPDATES", true);</code>';
-
-msgid "Installer cannot contact our updates server to get information about the available products and check for new versions. If you are seeing this message for the first time, you can ignore it, as it may be a temporary communication problem. If the problem persists and your WordPress admin is slowing down, you can disable automated version checks. Add the following line to your wp-config.php file:"
-msgstr ""
-
-# 
-# echo '<center>' . __('No repositories defined.', 'installer') . '</center>';
-# 
-
-msgid "No repositories defined."
-msgstr ""
-
-# } else {
-# $error = __( 'Invalid site key for the current site.', 'installer' )
-# . '<br /><div class="installer-footnote">' .  __('Please note that the site key is case sensitive.', 'installer') . '</div>';
-
-msgid "Invalid site key for the current site."
-msgstr ""
-
-# $error = __( 'Invalid site key for the current site.', 'installer' )
-# . '<br /><div class="installer-footnote">' .  __('Please note that the site key is case sensitive.', 'installer') . '</div>';
+# $user_errors[] = __('No action performed. Please select the strings that you need to update or add.', 'wpml-string-translation');
 # }
 
-msgid "Please note that the site key is case sensitive."
+msgid "No action performed. Please select the strings that you need to update or add."
 msgstr ""
 
-# if( preg_match('#Could not resolve host: (.*)#', $error, $matches) || preg_match('#Couldn\'t resolve host \'(.*)\'#', $error, $matches) ){
-# $error = sprintf(__("%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates.", 'installer'),
-# '<strong><i>' . $this->get_generic_product_name($repository_id) . '</i></strong>',
-
-msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates."
-msgstr ""
-
-# unset($this->settings['repositories'][$repository_id]['subscription']);
-# $error = __( 'Invalid site key for the current site. If the error persists, try to unregister first and then register again with the same site key.', 'installer' );
-# }
-
-msgid "Invalid site key for the current site. If the error persists, try to unregister first and then register again with the same site key."
-msgstr ""
-
-# $days       = 30;
-# $message    = __('You will have to renew your subscription in order to continue getting the updates and support.', 'installer');
-# 
-
-msgid "You will have to renew your subscription in order to continue getting the updates and support."
-msgstr ""
-
-# echo $this->_plugins_renew_warnings[$plugin_file]. ' ';
-# printf(__('%sRenew here%s.', 'installer'),
-# '<a href="' . $this->menu_url() . '">', '</a>');
-
-msgid "%sRenew here%s."
-msgstr ""
-
-# $ret = false;
-# $message = __('Your subscription appears to no longer be valid. Please try to register again using a valid site key.', 'installer');
-# }
-
-msgid "Your subscription appears to no longer be valid. Please try to register again using a valid site key."
-msgstr ""
-
-# <p class="installer-q-icon">
-# <?php printf( __('You must have a valid subscription in order to get upgrades or support for this plugin. %sPurchase a subscription or enter an existing site key%s.', 'installer'),
-# '<a href="' . $this->menu_url() . '">', '</a>'); ?>
-
-msgid "You must have a valid subscription in order to get upgrades or support for this plugin. %sPurchase a subscription or enter an existing site key%s."
-msgstr ""
-
-# 
-# $error_message = sprintf(__("%s cannot update because your site's registration is not valid. Please %sregister %s%s again for this site first.", 'installer'),
-# '<strong>' . $plugin_name . '</strong>', '<a target="_top" href="' . $this->menu_url() . '&validate_repository=' . $plugin_repository .
-
-msgid "%s cannot update because your site's registration is not valid. Please %sregister %s%s again for this site first."
-msgstr ""
-
-# echo '<div class="wrap">';
-# echo '<h2>' . __('Update Plugin') . '</h2>';
-# echo '<a href="' . admin_url('plugins.php') . '">' . __('Return to the plugins page') . '</a>';
-
-msgid "Update Plugin"
-msgstr ""
-
-# echo '<h2>' . __('Update Plugin') . '</h2>';
-# echo '<a href="' . admin_url('plugins.php') . '">' . __('Return to the plugins page') . '</a>';
-# echo '</div>';
-
-msgid "Return to the plugins page"
-msgstr ""
-
-# echo '<div><p class="installer-warn-box">' .
-# sprintf(_n('Your subscription expires in %d day.', 'Your subscription expires in %d days.', $days_to_expiration, 'installer'), $days_to_expiration) .
-# '<br />' . $message .
-
-msgid "Your subscription expires in %d day."
-msgstr ""
-
-# echo '<div><p class="installer-warn-box">' .
-# sprintf(_n('Your subscription expires in %d day.', 'Your subscription expires in %d days.', $days_to_expiration, 'installer'), $days_to_expiration) .
-# '<br />' . $message .
-
-msgid "Your subscription expires in %d days."
-msgstr ""
-
-# $theme_repo_name = $this->installer_theme_get_repo_product_name( $frontend_tab_selected );;
-# $response['unregistered_messages'] = sprintf( __( 'To install and update %s, please %sregister%s %s for this site.', 'installer' ),
-# $theme_repo_name, '<a href="' . $registration_url . '">', '</a>', $theme_repo_name );
-
-msgid "To install and update %s, please %sregister%s %s for this site."
-msgstr ""
-
-# public function win_paths_exception_message(){
-# return __('Downloading is not possible. WordPress cannot create required folders because of the
-# 256 characters limitation of the current Windows environment.', 'installer');
-
-msgid "Downloading is not possible. WordPress cannot create required folders because of the\n                                        256 characters limitation of the current Windows environment."
-msgstr ""
-
-# echo '<h2>' . __('Update Plugin') . '</h2>';
-# echo '<a href="' . admin_url('update-core.php') . '">' . __('Return to the updates page', 'installer') . '</a>';
-# echo '</div>';
-
-msgid "Return to the updates page"
-msgstr ""
-
-# <?php if( !WP_Installer()->dependencies->is_uploading_allowed() ): ?>
-# <p><?php printf(__('Downloading is not possible because WordPress cannot write into the plugins folder. %sHow to fix%s.', 'installer'),
-# '<a href="http://codex.wordpress.org/Changing_File_Permissions">', '</a>') ?></p>
-
-msgid "Downloading is not possible because WordPress cannot write into the plugins folder. %sHow to fix%s."
-msgstr ""
-
-# <br clear="all" /><br />
-# <strong><?php _e('Downloads:', 'installer') ?></strong>
-# 
-
-msgid "Downloads:"
-msgstr ""
-
-# <th>&nbsp;</th>
-# <th><?php _e('Plugin', 'installer') ?></th>
-# <th><?php _e('Current version', 'installer') ?></th>
-
-msgid "Plugin"
-msgstr ""
-
-# <th><?php _e('Plugin', 'installer') ?></th>
-# <th><?php _e('Current version', 'installer') ?></th>
-# <th><?php _e('Released', 'installer') ?></th>
-
-msgid "Current version"
-msgstr ""
-
-# <th><?php _e('Current version', 'installer') ?></th>
-# <th><?php _e('Released', 'installer') ?></th>
-# <th><?php _e('Installed version', 'installer') ?></th>
-
-msgid "Released"
-msgstr ""
-
-# <th><?php _e('Released', 'installer') ?></th>
-# <th><?php _e('Installed version', 'installer') ?></th>
-# <th>&nbsp;</th>
-
-msgid "Installed version"
-msgstr ""
-
-# <span class="<?php echo $class ?>"><?php echo $v; ?></span>
-# <?php if($this->plugin_is_embedded_version($download['name'], $download['slug'])): ?>&nbsp;<?php _e('(embedded)', 'installer'); ?><?php endif; ?>
-# <?php endif; ?>
-
-msgid "(embedded)"
-msgstr ""
-
-# <td>
-# <span class="installer-status-installing"><?php _e('installing...', 'installer') ?></span>
-# <span class="installer-status-updating"><?php _e('updating...', 'installer') ?></span>
-
-msgid "installing..."
-msgstr ""
-
-# <span class="installer-status-installing"><?php _e('installing...', 'installer') ?></span>
-# <span class="installer-status-updating"><?php _e('updating...', 'installer') ?></span>
-# <span class="installer-status-installed" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('installed', 'installer') ?></span>
-
-msgid "updating..."
-msgstr ""
-
-# <span class="installer-status-updating"><?php _e('updating...', 'installer') ?></span>
-# <span class="installer-status-installed" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('installed', 'installer') ?></span>
-# <span class="installer-status-updated" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('updated', 'installer') ?></span>
-
-msgid "failed!"
-msgstr ""
-
-# <span class="installer-status-updating"><?php _e('updating...', 'installer') ?></span>
-# <span class="installer-status-installed" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('installed', 'installer') ?></span>
-# <span class="installer-status-updated" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('updated', 'installer') ?></span>
-
-msgid "installed"
-msgstr ""
-
-# <span class="installer-status-installed" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('installed', 'installer') ?></span>
-# <span class="installer-status-updated" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('updated', 'installer') ?></span>
-# </td>
-
-msgid "updated"
-msgstr ""
-
-# <td>
-# <span class="installer-status-activating"><?php _e('activating', 'installer') ?></span>
-# <span class="installer-status-activated"><?php _e('activated', 'installer') ?></span>
-
-msgid "activating"
-msgstr ""
-
-# <span class="installer-status-activating"><?php _e('activating', 'installer') ?></span>
-# <span class="installer-status-activated"><?php _e('activated', 'installer') ?></span>
-# </td>
-
-msgid "activated"
-msgstr ""
-
-# &nbsp;
-# <label><input name="activate" type="checkbox" value="1" disabled="disabled" />&nbsp;<?php _e('Activate after download', 'installer') ?></label>
-# 
-
-msgid "Activate after download"
-msgstr ""
-
-# 
-# <div class="installer-status-success"><?php _e('Operation complete!', 'installer') ?></div>
-# 
-
-msgid "Operation complete!"
-msgstr ""
-
-# 
-# <span class="installer-revalidate-message hidden"><?php _e("Download failed!\n\nPlease refresh the page and try again.", 'installer') ?></span>
-# </form>
-
-msgid "Download failed!\n\nPlease refresh the page and try again."
-msgstr ""
-
-# 
-# <input type="submit" class="button-secondary" value="<?php esc_attr_e('Download', 'installer') ?>" disabled="disabled" />
-# &nbsp;
-
-msgid "Download"
-msgstr ""
-
-# >
-# <?php printf(__('Register %s', 'installer'), $generic_product_name); ?>
-# </a>&nbsp;&nbsp;
-
-msgid "Register %s"
-msgstr ""
-
-# 
-# <div class="alignleft" style="margin-top:6px;"><?php printf(__('1. Go to your %s%s account%s and add this site URL: %s', 'installer'),
-# '<a href="' . $this->settings['repositories'][$repository_id]['data']['site_keys_management_url'] . '?add='.urlencode($this->get_installer_site_url( $repository_id )).'">',
-
-msgid "1. Go to your %s%s account%s and add this site URL: %s"
-msgstr ""
-
-# >
-# <?php printf(__("Unregister %s from this site", 'installer'), $generic_product_name) ?></a>&nbsp;
-# <a class="update_site_key_js button-secondary" href="#" data-repository=<?php echo $repository_id ?>
-
-msgid "Unregister %s from this site"
-msgstr ""
-
-# <?php if($expires = $this->settings['repositories'][$repository_id]['subscription']['data']->expires): ?>
-# <?php printf(__('%s is registered on this site. You will receive automatic updates until %s', 'installer'), $generic_product_name, date_i18n('F j, Y', strtotime($expires))); ?>
-# <?php else: ?>
-
-msgid "%s is registered on this site. You will receive automatic updates until %s"
-msgstr ""
-
-# <?php else: ?>
-# <?php printf(__('%s is registered on this site. Your Lifetime account gives you updates for life.', 'installer'), $generic_product_name); ?>
-# <?php endif; ?>
-
-msgid "%s is registered on this site. Your Lifetime account gives you updates for life."
-msgstr ""
-
-# 
-# <p><i><?php printf(__('This page lets you install plugins and update existing plugins. To remove any of these plugins, go to the %splugins%s page and if you have the permission to remove plugins you should be able to do this.', 'installer'), '<a href="' . admin_url('plugins.php') . '">' , '</a>'); ?></i></p>
-# 
-
-msgid "This page lets you install plugins and update existing plugins. To remove any of these plugins, go to the %splugins%s page and if you have the permission to remove plugins you should be able to do this."
-msgstr ""
-
-# disabled="disabled"
-# title="<?php printf( esc_attr__("Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to register.", 'installer'), 'OTGS_INSTALLER_SITE_KEY_' . strtoupper($repository_id) ) ?>"
-# <?php endif; ?>
-
-msgid "Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to register."
-msgstr ""
-
-# disabled="disabled"
-# title="<?php printf( esc_attr__("Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to unregister.", 'installer'), 'OTGS_INSTALLER_SITE_KEY_' . strtoupper($repository_id) ) ?>"
-# <?php endif; ?>
-
-msgid "Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to unregister."
-msgstr ""
-
-# <div style="text-align: right;">
-# <span><?php _e('Already bought?', 'installer'); ?>&nbsp;</span>
-# <a class="enter_site_key_js button-primary<?php if( WP_Installer::get_repository_hardcoded_site_key( $repository_id ) ): ?> disabled<?php endif ?>" href="#"
-
-msgid "Already bought?"
-msgstr ""
-
-# <input type="hidden" name="repository_id" value="<?php echo $repository_id ?>">
-# <?php _e('2. Enter your site key', 'installer'); ?>
-# <input type="text" size="10" name="site_key_<?php echo $repository_id ?>" placeholder="<?php echo esc_attr('site key') ?>" />
-
-msgid "2. Enter your site key"
-msgstr ""
-
-# <p class="installer-warn-box">
-# <?php _e('Subscription expired. You need to either purchase a new subscription or upgrade if available.', 'installer') ?>
-# <span class="alignright">
-
-msgid "Subscription expired. You need to either purchase a new subscription or upgrade if available."
-msgstr ""
-
-# <a class="update_site_key_js button-secondary" href="#" data-repository=<?php echo $repository_id ?> data-nonce="<?php echo wp_create_nonce('update_site_key_' . $repository_id) ?>">
-# <?php  _e('Revalidate subscription', 'installer'); ?>
-# </a>
-
-msgid "Revalidate subscription"
-msgstr ""
-
-# <br />
-# <span class="details"><?php _e("If you have already purchased or renewed your subscription and you can still see this message, please revalidate your subscription", 'installer') ?></span>
-# </p>
-
-msgid "If you have already purchased or renewed your subscription and you can still see this message, please revalidate your subscription"
-msgstr ""
-
-# data-nonce="<?php echo wp_create_nonce('update_site_key_' . $repository_id) ?>">
-# <?php _e('Check for updates', 'installer'); ?>
-# </a>
-
-msgid "Check for updates"
-msgstr ""
-
-# <?php if($subpackages_expandable): ?>
-# <h5><a class="installer_expand_button" href="#" title="<?php esc_attr_e('Click to see individual components options.', 'installer') ?>"><?php _e('Individual components', 'installer') ?></a></h5>
-# <?php endif; ?>
-
-msgid "Individual components"
-msgstr ""
-
-# <input type="text" size="10" name="site_key_<?php echo $repository_id ?>" placeholder="<?php echo esc_attr('site key') ?>" />
-# <input class="button-primary" type="submit" value="<?php esc_attr_e('OK', 'installer') ?>" />
-# <input class="button-secondary cancel_site_key_js" type="button" value="<?php esc_attr_e('Cancel', 'installer') ?>" />
-
-msgid "OK"
-msgstr ""
-
-# <input class="button-primary" type="submit" value="<?php esc_attr_e('OK', 'installer') ?>" />
-# <input class="button-secondary cancel_site_key_js" type="button" value="<?php esc_attr_e('Cancel', 'installer') ?>" />
-# 
-
-msgid "Cancel"
-msgstr ""
-
-# <a class="remove_site_key_js button-secondary" href="#" data-repository=<?php echo $repository_id ?>
-# data-confirmation="<?php esc_attr_e('Are you sure you want to unregister?', 'installer') ?>"
-# data-nonce="<?php echo wp_create_nonce('remove_site_key_' . $repository_id) ?>"
-
-msgid "Are you sure you want to unregister?"
-msgstr ""
-
-# <?php if($subpackages_expandable): ?>
-# <h5><a class="installer_expand_button" href="#" title="<?php esc_attr_e('Click to see individual components options.', 'installer') ?>"><?php _e('Individual components', 'installer') ?></a></h5>
-# <?php endif; ?>
-
-msgid "Click to see individual components options."
-msgstr ""
-
-# <td class="twelve">
-# <div class="installer-status-downloading"><?php _e('downloading...', 'installer') ?></div>
-# <div class="installer-status-downloaded" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('downloaded', 'installer') ?></div>
-
-msgid "downloading..."
-msgstr ""
-
-# <div class="installer-status-downloading"><?php _e('downloading...', 'installer') ?></div>
-# <div class="installer-status-downloaded" data-fail="<?php _e('failed!', 'installer') ?>"><?php _e('downloaded', 'installer') ?></div>
-# </td>
-
-msgid "downloaded"
-msgstr ""
-
-# 
-# <span class="installer-revalidate-message hidden"><?php _e("Download failed!\n\nClick OK to revalidate your subscription or CANCEL to try again.", 'installer') ?></span>
-# </form>
-
-msgid "Download failed!\n\nClick OK to revalidate your subscription or CANCEL to try again."
-msgstr ""
-
-# <th><?php _e('Plugin', 'installer') ?></th>
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/globe.png" alt="<?php esc_attr_e('Available', 'installer') ?>" width="16" height="16"></th>
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/computer.png" alt="<?php esc_attr_e('Installed', 'installer') ?>" width="16" height="16"></th>
-
-msgid "Available"
-msgstr ""
-
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/globe.png" alt="<?php esc_attr_e('Available', 'installer') ?>" width="16" height="16"></th>
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/computer.png" alt="<?php esc_attr_e('Installed', 'installer') ?>" width="16" height="16"></th>
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/dn2.gif" alt="<?php esc_attr_e('Downloading', 'installer') ?>" width="16" height="16"></th>
-
-msgid "Installed"
-msgstr ""
-
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/computer.png" alt="<?php esc_attr_e('Installed', 'installer') ?>" width="16" height="16"></th>
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/dn2.gif" alt="<?php esc_attr_e('Downloading', 'installer') ?>" width="16" height="16"></th>
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/on.png" alt="<?php esc_attr_e('Activate', 'installer') ?>" width="16" height="16"></th>
-
-msgid "Downloading"
-msgstr ""
-
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/dn2.gif" alt="<?php esc_attr_e('Downloading', 'installer') ?>" width="16" height="16"></th>
-# <th><img src="<?php echo $this->plugin_url() ?>/res/img/on.png" alt="<?php esc_attr_e('Activate', 'installer') ?>" width="16" height="16"></th>
-# </tr>
-
-msgid "Activate"
-msgstr ""
-
-# if(empty($args['repository']) || empty($args['package']) || empty($args['product'])){
-# echo __('Incorrect setup', 'installer');
-# return;
-
-msgid "Incorrect setup"
-msgstr ""
-
-# if(!$product){
-# echo __('Invalid product', 'installer');
-# return;
-
-msgid "Invalid product"
-msgstr ""
-
-# }else{
-# echo __('Unknown repository', 'installer');
-# return;
-
-msgid "Unknown repository"
-msgstr ""
-
-# if($subscription_type != $product['subscription_type'] && !$this->have_superior_subscription($subscription_type, $product) && $site_key){
-# $subscription_no_match = sprintf(__(' Your current site key (%s) does not match the selected product (%s).', 'installer'), $site_key, $product['name']);
-# }
-
-msgid " Your current site key (%s) does not match the selected product (%s)."
-msgstr ""
-
-# 
-# <a class="button-primary" href="<?php echo $this->append_parameters_to_buy_url($product['url'], $repository_id, $args) ?>"><?php printf(__('Buy %s', 'installer'), $args['product_name']) ?></a>
-# 
-
-msgid "Buy %s"
-msgstr ""
-
-# <br />
-# <?php printf(__('Already bought %s?', 'installer'), $args['product_name']) ?>
-# <a class="enter_site_key_js<?php if( WP_Installer::get_repository_hardcoded_site_key( $repository_id ) ): ?> disabled<?php endif ?>" href="#"
-
-msgid "Already bought %s?"
-msgstr ""
-
-# <li>
-# <a href="<?php echo $this->append_parameters_to_buy_url($renewal['url'], $repository_id, $args) ?>"><?php printf(__('Renew %s', 'installer'), $args['product_name']) ?></a>
-# </li>
-
-msgid "Renew %s"
-msgstr ""
-
-# >
-# <?php printf(__("Remove current site key (%s)", 'installer'), $site_key) ?>
-# </a>
-
-msgid "Remove current site key (%s)"
-msgstr ""
-
-# <?php if($support_link): ?>
-# <p><a href="<?php echo $support_link ?>" target="_blank"><?php printf(__('%s support on wpml.org', 'installer'), $args['name'] ) ?></a></p>
-# 
-
-msgid "%s support on wpml.org"
-msgstr ""
-
-# >
-# <?php _e('Enter site key', 'installer') ?>
-# </a>&nbsp;&nbsp;
-
-msgid "Enter site key"
-msgstr ""
-
-# 
-# <div><p class="installer-warn-box"><?php _e('Subscription is expired.', 'installer') ?></p></div>
-# 
-
-msgid "Subscription is expired."
-msgstr ""
-
-# <input type="text" size="10" name="site_key_<?php echo $repository_id ?>" />
-# <input class="button-secondary" type="submit" value="<?php esc_attr_e('Add', 'installer') ?>" />
-# </form>
-
-msgid "Add"
-msgstr ""
-
-# <a class="remove_site_key_js" href="#" data-repository=<?php echo $repository_id ?>
-# data-confirmation="<?php esc_attr_e('Are you sure you want to remove this site key?', 'installer') ?>"
-# data-nonce="<?php echo wp_create_nonce('remove_site_key_' . $repository_id) ?>"
-
-msgid "Are you sure you want to remove this site key?"
-msgstr ""
-
-# public function __construct() {
-# $widget_ops  = array( 'classname' => 'widget_text_icl', 'description' => __( 'Multilingual arbitrary text or HTML', 'sitepress' ) );
-# parent::__construct( 'text_icl', __( 'Multilingual Text', 'sitepress' ), $widget_ops );
-
-msgid "Multilingual arbitrary text or HTML"
-msgstr ""
-
-# $widget_ops  = array( 'classname' => 'widget_text_icl', 'description' => __( 'Multilingual arbitrary text or HTML', 'sitepress' ) );
-# parent::__construct( 'text_icl', __( 'Multilingual Text', 'sitepress' ), $widget_ops );
-# }
-
-msgid "Multilingual Text"
-msgstr ""
-
-# ?>
-# <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
-# <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
-
-msgid "Title:"
-msgstr ""
-
-# 
-# <p><input id="<?php echo $this->get_field_id('filter'); ?>" name="<?php echo $this->get_field_name('filter'); ?>" type="checkbox" <?php checked(isset($instance['filter']) ? $instance['filter'] : 0); ?> />&nbsp;<label for="<?php echo $this->get_field_id('filter'); ?>"><?php _e('Automatically add paragraphs'); ?></label></p>
-# <?php
-
-msgid "Automatically add paragraphs"
-msgstr ""
-
-# return array(
-# 'buttonLabel' => __( 'Recreate ST DB cache tables', 'sitepress' ),
-# 'description' => __( 'Recreate String Translation cache tables when they are missing or are invalid.', 'sitepress' ),
-
-msgid "Recreate ST DB cache tables"
-msgstr ""
-
-# 'buttonLabel' => __( 'Recreate ST DB cache tables', 'sitepress' ),
-# 'description' => __( 'Recreate String Translation cache tables when they are missing or are invalid.', 'sitepress' ),
-# 'successMsg'  => esc_js( __( 'Done', 'sitepress' ) ),
-
-msgid "Recreate String Translation cache tables when they are missing or are invalid."
-msgstr ""
-
-# 'description' => __( 'Recreate String Translation cache tables when they are missing or are invalid.', 'sitepress' ),
-# 'successMsg'  => esc_js( __( 'Done', 'sitepress' ) ),
-# 'nonce'       => wp_create_nonce( 'wpml-st-upgrade-db-cache-command-nonce' ),
-
-msgid "Done"
-msgstr ""
-
-# if ( $_FILES[ 'icl_po_file' ][ 'size' ] === 0 ) {
-# $this->errors = esc_html__( 'File upload error', 'wpml-string-translation' );
-# return null;
-
-msgid "File upload error"
-msgstr ""
-
-# if($this->settings->is_on( ) && $_translate && !$string_id) {
-# $message = sprintf( __( "%s slugs are set to be translated, but they are missing their translation", 'wpml-string-translation'), $custom_post->labels->name);
-# ICL_AdminNotifier::displayInstantMessage( $message, 'error', 'below-h2', false );
-
-msgid "%s slugs are set to be translated, but they are missing their translation"
-msgstr ""
-
-# <input name="translate_slugs[<?php echo $post_type ?>][on]" type="checkbox" value="1" <?php checked(1, $_translate, true) ?> />
-# <?php printf(__('Use different slugs in different languages for %s.', 'wpml-string-translation'), $custom_post->labels->name); ?>
-# </label>
-
-msgid "Use different slugs in different languages for %s."
-msgstr ""
-
-# ?>
-# <em class="icl_st_slug_tr_warn"><?php _e( "Not marked as 'complete'. Press 'Save' to enable.", 'wpml-string-translation' ) ?></em>
-# <?php
-
-msgid "Not marked as 'complete'. Press 'Save' to enable."
-msgstr ""
-
-# ?>
-# <label for="translate_slugs[<?php echo $post_type ?>][langs][<?php echo $language[ 'code' ] ?>]"> <em><?php _e( "(original)", 'wpml-string-translation' ) ?></em></label>
-# </td>
-
-msgid "(original)"
-msgstr ""
-
-# <p>
-# <?php printf(__('WPML needs to update the database. This update will help improve WPML\'s performance when fetching translated strings.', 'wpml-string-translation') ); ?>
-# <br /><br />
-
-msgid "WPML needs to update the database. This update will help improve WPML's performance when fetching translated strings."
-msgstr ""
-
-# <p>
-# <?php printf(__('The database has been updated.', 'wpml-string-translation') ); ?>
-# <br /><br />
-
-msgid "The database has been updated."
-msgstr ""
-
-# <br /><br />
-# <button class="wpml-st-upgrade-migrate-originals"><?php esc_html_e( 'Update Now', 'wpml-string-translation' ); ?></button> <span class="spinner" style="float: none"></span>
-# </p>
-
-msgid "Update Now"
-msgstr ""
-
-# <br /><br />
-# <button class="wpml-st-upgrade-migrate-originals-close"><?php esc_html_e( 'Close', 'wpml-string-translation' ); ?></button>
-# </p>
-
-msgid "Close"
-msgstr ""
-
-# <div class="message error wpml-admin-notice wpml-st-inactive wpml-not-configured">
-# <p><?php printf( __( 'WPML String Translation is enabled but not effective. Please finish the installation of WPML first.', 'wpml-string-translation' ) ); ?></p>
+# <div class="error">
+# <p><?php printf(__('Invalid language: %s', 'wpml-string-translation'), $language) ?></p>
 # </div>
 
-msgid "WPML String Translation is enabled but not effective. Please finish the installation of WPML first."
+msgid "Invalid language: %s"
 msgstr ""
 
-# class="message error wpml-admin-notice wpml-st-inactive wpml-outdated">
-# <p><?php printf( __( 'WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first.', 'wpml-string-translation' ) ); ?></p>
+# <div class="icl_cyan_box">
+# <?php printf(__('This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button.', 'wpml-string-translation'),
+# isset($translations['new']) ? count($translations['new']) : 0,
+
+msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button."
+msgstr ""
+
+# <?php if(!empty($translations['updated'])): ?>
+# <h3><?php printf(__('Updated translations (%d)', 'wpml-string-translation'), count($translations['updated'])) ?></h3>
+#
+
+msgid "Updated translations (%d)"
+msgstr ""
+
+# <?php if(!empty($translations['new'])): ?>
+# <h3><?php printf(__('New translations (%d)', 'wpml-string-translation'), count($translations['new'])) ?></h3>
+# <table class="widefat">
+
+msgid "New translations (%d)"
+msgstr ""
+
+# <div class="wrap">
+# <h2><?php _e('Auto-download WordPress translations', 'wpml-string-translation') ?></h2>
+#
+
+msgid "Auto-download WordPress translations"
+msgstr ""
+
+#
+# <p><strong><?php _e('Success!', 'wpml-string-translation') ?></strong></p>
+# <?php foreach($user_messages as $umessage): ?>
+
+msgid "Success!"
+msgstr ""
+
+# <?php endforeach; ?>
+# <a href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php'); ?>" class="button-secondary"><?php _e('Check other languages', 'wpml-string-translation') ?></a>
+#
+
+msgid "Check other languages"
+msgstr ""
+
+# <div class="error">
+# <p><?php _e('Missing version number for translation.', 'wpml-string-translation') ?></p>
 # </div>
 
-msgid "WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first."
+msgid "Missing version number for translation."
 msgstr ""
 
-# <div class="error wpml-admin-notice wpml-st-inactive wpml-inactive">
-# <p><?php _e( 'Please activate WPML Multilingual CMS to have WPML String Translation working.', 'wpml-string-translation' ); ?></p>
-# </div>
-
-msgid "Please activate WPML Multilingual CMS to have WPML String Translation working."
-msgstr ""
-
-# class="wpml-change-language-dialog"
-# title="<?php _e( 'Change the language of selected strings', 'wpml-string-translation' ); ?>"
-# style="display:none"
-
-msgid "Change the language of selected strings"
-msgstr ""
-
-# style="display:none"
-# data-button-text="<?php _e( 'Apply', 'wpml-string-translation' ); ?>"
-# data-cancel-text="<?php _e( 'Cancel', 'wpml-string-translation' ); ?>" >
-
-msgid "Apply"
-msgstr ""
-
-# data-button-text="<?php _e( 'Apply', 'wpml-string-translation' ); ?>"
-# data-cancel-text="<?php _e( 'Cancel', 'wpml-string-translation' ); ?>" >
-# 
-
-msgid "Cancel"
-msgstr ""
-
-# 
-# <h2 class="summary js-summary" data-text="<?php _e( 'The selected strings are currently in %LANG%', 'wpml-string-translation' ); ?>"></h2>
-# 
-
-msgid "The selected strings are currently in %LANG%"
-msgstr ""
-
-# 
-# <?php _e('Change the language to: ', 'wpml-string-translation'); ?>
-# 
-
-msgid "Change the language to: "
-msgstr ""
-
-# <tr>
-# <td colspan="6" align="center"><?php echo __('No strings found', 'wpml-string-translation')?></td>
-# </tr>
-
-msgid "No strings found"
-msgstr ""
-
-# <th scope="col" class="manage-column column-cb check-column"><input type="checkbox" /></th>
-# <th scope="col"><?php echo __('Domain', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('Context', 'wpml-string-translation') ?></th>
-
-msgid "Domain"
-msgstr ""
-
-# <th scope="col"><?php echo __('Domain', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('Context', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('Name', 'wpml-string-translation') ?></th>
-
-msgid "Context"
-msgstr ""
-
-# <th scope="col"><?php echo __('Context', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('Name', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('View', 'wpml-string-translation') ?></th>
-
-msgid "Name"
-msgstr ""
-
-# <th scope="col"><?php echo __('Name', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('View', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('String', 'wpml-string-translation') ?></th>
-
-msgid "View"
-msgstr ""
-
-# <th scope="col"><?php echo __('View', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('String', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('Status', 'wpml-string-translation') ?></th>
+# <th class="manage-column column-cb check-column" scope="col"><input type="checkbox" name="" value="" checked="checked" /></th>
+# <th><?php _e('String', 'wpml-string-translation') ?></th>
+# <th style="text-align:center;"><?php _e('Existing translation', 'wpml-string-translation') ?></th>
 
 msgid "String"
 msgstr ""
 
-# <th scope="col"><?php echo __('String', 'wpml-string-translation') ?></th>
-# <th scope="col"><?php echo __('Status', 'wpml-string-translation') ?></th>
+# <th><?php _e('String', 'wpml-string-translation') ?></th>
+# <th style="text-align:center;"><?php _e('Existing translation', 'wpml-string-translation') ?></th>
+# <th style="text-align:center;"><?php _e('New translation', 'wpml-string-translation') ?></th>
+
+msgid "Existing translation"
+msgstr ""
+
+# <th style="text-align:center;"><?php _e('Existing translation', 'wpml-string-translation') ?></th>
+# <th style="text-align:center;"><?php _e('New translation', 'wpml-string-translation') ?></th>
 # </tr>
 
-msgid "Status"
+msgid "New translation"
 msgstr ""
 
-# <div style="float:right;">
-# <a href="#icl-st-toggle-translations"><?php echo __('translations','wpml-string-translation') ?></a>
-# </div>
-
-msgid "translations"
-msgstr ""
-
-# <?php endif; ?>
-# <label><input<?php echo $form_disabled ?> type="checkbox" name="icl_st_translation_complete" value="1" <?php echo $tr_complete_checked ?> <?php if(isset($icl_string['translations'][$lang['code']])): ?>id="icl_st_cb_<?php echo $icl_string['translations'][$lang['code']]['id'] ?>"<?php endif;?> /> <?php echo __('Translation is complete','wpml-string-translation')?></label>&nbsp;
-# <input<?php echo $form_disabled ?> type="submit" class="button-secondary action" value="<?php echo __('Save', 'wpml-string-translation')?>" />
-
-msgid "Translation is complete"
-msgstr ""
-
-# <label><input<?php echo $form_disabled ?> type="checkbox" name="icl_st_translation_complete" value="1" <?php echo $tr_complete_checked ?> <?php if(isset($icl_string['translations'][$lang['code']])): ?>id="icl_st_cb_<?php echo $icl_string['translations'][$lang['code']]['id'] ?>"<?php endif;?> /> <?php echo __('Translation is complete','wpml-string-translation')?></label>&nbsp;
-# <input<?php echo $form_disabled ?> type="submit" class="button-secondary action" value="<?php echo __('Save', 'wpml-string-translation')?>" />
-# <?php if ( $form_disabled_reason ): ?>
-
-msgid "Save"
-msgstr ""
-
-# if ( ! $can_translate ) {
-# $form_disabled_reason = __( "You can't translate this string because it hasn't been sent for translation in this language", 'wpml-string-translation' );
-# }
-
-msgid "You can't translate this string because it hasn't been sent for translation in this language"
-msgstr ""
-
-# $can_translate = false;
-# $form_disabled_reason = __( "You can't translate this string because it's assigned to another translator", 'wpml-string-translation' );
-# }
-
-msgid "You can't translate this string because it's assigned to another translator"
-msgstr ""
-
-# ?>
-# <a class="thickbox" title="<?php _e('view in source', 'wpml-string-translation') ?>"
-# href="admin.php?page=<?php echo WPML_ST_FOLDER ?>%2Fmenu%2Fstring-translation.php&amp;icl_action=view_string_in_source&amp;string_id=<?php
-
-msgid "view in source"
-msgstr ""
-
-# echo $string_id ?>&amp;width=810&amp;height=600"><img src="<?php echo WPML_ST_URL ?>/res/img/view-in-source.png" width="16" height="16"
-# alt="<?php _e('view in page', 'wpml-string-translation') ?>" /></a>
-# <?php
-
-msgid "view in page"
-msgstr ""
-
-# class="wpml-change-language-dialog"
-# title="<?php _e( 'Language of domains', 'wpml-string-translation' ); ?>"
-# style="display:none"
-
-msgid "Language of domains"
-msgstr ""
-
-# <label for="wpml-domain-select">
-# <?php _e( 'Select for which domain to set the language: ', 'wpml-string-translation' ); ?>
-# </label>
-
-msgid "Select for which domain to set the language: "
-msgstr ""
-
-# <select id="wpml-domain-select">
-# <option value="" selected="selected"><?php _e( '-- Please select --', 'wpml-string-translation' ); ?></option>
-# <?php
-
-msgid "-- Please select --"
-msgstr ""
-
-# <p class="wpml-cdl-info">
-# <?php _e( 'This domain currently has the following strings:', 'wpml-string-translation'); ?>
-# </p>
-
-msgid "This domain currently has the following strings:"
-msgstr ""
-
-# <td class="manage-column column-cb check-column"><input class="js-all-check" type="checkbox" value="all" /></td>
-# <th><?php _e( 'Current source language', 'wpml-string-translation' ); ?></th>
-# <th class="num"><?php _e( 'Number of strings', 'wpml-string-translation' ); ?></th>
-
-msgid "Current source language"
-msgstr ""
-
-# <th><?php _e( 'Current source language', 'wpml-string-translation' ); ?></th>
-# <th class="num"><?php _e( 'Number of strings', 'wpml-string-translation' ); ?></th>
+# <th><?php _e('String', 'wpml-string-translation') ?></th>
+# <th><?php _e('Translation', 'wpml-string-translation') ?></th>
 # </tr>
 
-msgid "Number of strings"
-msgstr ""
-
-# <div class="js-lang-select-area wpml-cdl-info">
-# <label for="wpml-source-domain-language-change"><?php _e( 'Set the source language of these strings to:', 'wpml-string-translation'); ?></label>
-# <?php
-
-msgid "Set the source language of these strings to:"
-msgstr ""
-
-# <input id="wpml-cdl-set-default" type="checkbox" class="js-default" value="use-as-default" checked="checked" />
-# <?php _e( 'Use this language as the default language for new strings in this domain', 'wpml-string-translation'); ?>
-# </label>
-
-msgid "Use this language as the default language for new strings in this domain"
-msgstr ""
-
-# case ICL_STRING_TRANSLATION_COMPLETE:
-# return __( 'Translation complete', 'wpml-string-translation' );
-# 
-
-msgid "Translation complete"
-msgstr ""
-
-# case ICL_STRING_TRANSLATION_PARTIAL:
-# return __( 'Partial translation', 'wpml-string-translation' );
-# 
-
-msgid "Partial translation"
-msgstr ""
-
-# case ICL_STRING_TRANSLATION_NEEDS_UPDATE:
-# return __( 'Translation needs update', 'wpml-string-translation' );
-# 
-
-msgid "Translation needs update"
-msgstr ""
-
-# case ICL_STRING_TRANSLATION_NOT_TRANSLATED:
-# return __( 'Not translated', 'wpml-string-translation' );
-# 
-
-msgid "Not translated"
-msgstr ""
-
-# case ICL_STRING_TRANSLATION_WAITING_FOR_TRANSLATOR:
-# return __( 'Waiting for translator', 'wpml-string-translation' );
-# 
-
-msgid "Waiting for translator"
-msgstr ""
-
-# if ( 'plugin' === $type ) {
-# $message = __( 'Do you want to scan for translatable strings in the plugin(s)?', 'wpml-string-translation' );
-# }
-
-msgid "Do you want to scan for translatable strings in the plugin(s)?"
-msgstr ""
-
-# if ( 'theme' === $type ) {
-# $message = __( 'Do you want to scan for translatable strings in the theme?', 'wpml-string-translation' );
-# }
-
-msgid "Do you want to scan for translatable strings in the theme?"
-msgstr ""
-
-# if ( 'update' === $action && ( 'plugin' === $type || 'theme' === $type ) ) {
-# $message = __( 'Do you want to scan for new translatable strings?', 'wpml-string-translation' );
-# }
-
-msgid "Do you want to scan for new translatable strings?"
-msgstr ""
-
-# $notice->set_exclude_from_pages( array( $string_scan_page ) );
-# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Scan now', 'wpml-string-translation' ), $url, false, false, true ) );
-# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Skip', 'wpml-string-translation' ), '#', false, true ) );
-
-msgid "Scan now"
-msgstr ""
-
-# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Scan now', 'wpml-string-translation' ), $url, false, false, true ) );
-# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Skip', 'wpml-string-translation' ), '#', false, true ) );
-# $dismiss_all_action = $this->admin_notices->get_new_notice_action( __( 'Dismiss all these notices', 'wpml-string-translation' ), '#', false, false, false );
-
-msgid "Skip"
-msgstr ""
-
-# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Skip', 'wpml-string-translation' ), '#', false, true ) );
-# $dismiss_all_action = $this->admin_notices->get_new_notice_action( __( 'Dismiss all these notices', 'wpml-string-translation' ), '#', false, false, false );
-# $dismiss_all_action->set_group_to_dismiss( $this->settings->get_notices_group() );
-
-msgid "Dismiss all these notices"
-msgstr ""
-
-# $strings = array(
-# 'title'   => __( 'Dismiss all notices', 'wpml-string-translation' ),
-# 'message' => __( 'Also prevent similar messages in the future?', 'wpml-string-translation' ),
-
-msgid "Dismiss all notices"
-msgstr ""
-
-# 'title'   => __( 'Dismiss all notices', 'wpml-string-translation' ),
-# 'message' => __( 'Also prevent similar messages in the future?', 'wpml-string-translation' ),
-# 'no'      => __( 'No - keep showing these message', 'wpml-string-translation' ),
-
-msgid "Also prevent similar messages in the future?"
-msgstr ""
-
-# 'message' => __( 'Also prevent similar messages in the future?', 'wpml-string-translation' ),
-# 'no'      => __( 'No - keep showing these message', 'wpml-string-translation' ),
-# 'yes'     => __( 'Yes - disable these notifications completely', 'wpml-string-translation' ),
-
-msgid "No - keep showing these message"
-msgstr ""
-
-# 'no'      => __( 'No - keep showing these message', 'wpml-string-translation' ),
-# 'yes'     => __( 'Yes - disable these notifications completely', 'wpml-string-translation' ),
-# );
-
-msgid "Yes - disable these notifications completely"
-msgstr ""
-
-# ) {
-# $message = sprintf( __( "%s slugs are set to be translated, but they are missing their translation", 'sitepress' ), $custom_post->labels->name );
-# $notice .= $admin_notifier->display_instant_message( $message, 'error', 'below-h2', true );
-
-msgid "%s slugs are set to be translated, but they are missing their translation"
-msgstr ""
-
-# } else {
-# wp_send_json_error( __( 'Nonce value is invalid', 'wpml-string-translation' ) );
-# }
-
-msgid "Nonce value is invalid"
-msgstr ""
-
-# <input type="hidden" name="action" value="icl_adm_save_preferences" />
-# <h3><?php _e('Select how to get translations for WordPress core', 'wpml-string-translation') ?></h3>
-# 
-
-msgid "Select how to get translations for WordPress core"
-msgstr ""
-
-# <input type="radio" name="auto_download_mo" value="1" <?php if(!empty($sitepress_settings['st']['auto_download_mo'])):?>checked="checked"<?php endif; ?> />
-# &nbsp;<?php _e('WPML will automatically download translations for WordPress', 'wpml-string-translation') ?>
-# </label>
-
-msgid "WPML will automatically download translations for WordPress"
-msgstr ""
-
-# <input type="radio" name="auto_download_mo" value="0" <?php if(empty($sitepress_settings['st']['auto_download_mo'])):?>checked="checked"<?php endif; ?> />
-# &nbsp;<?php _e('I will download translations for WordPress and save .mo files in wp-content/languages', 'wpml-string-translation') ?>
-# </label>
-
-msgid "I will download translations for WordPress and save .mo files in wp-content/languages"
-msgstr ""
-
-# $doing_it_wrong = '<a href="' . $doing_it_wrong_url .'" target="_blank">';
-# $doing_it_wrong .= __('Internationalization: You’re probably doing it wrong', 'wpml-string-translation');
-# $doing_it_wrong .= '</a>';
-
-msgid "Internationalization: You’re probably doing it wrong"
-msgstr ""
-
-# <p class="description">
-# <?php echo sprintf(__( 'Note: It is not safe to use variables, constants or functions in gettext calls. Read "%s" for a detailed explanation.', 'wpml-string-translation' ), $doing_it_wrong); ?>
-# <br />
-
-msgid "Note: It is not safe to use variables, constants or functions in gettext calls. Read \"%s\" for a detailed explanation."
-msgstr ""
-
-# <th scope="col"><?php echo __( 'Domain', 'wpml-string-translation' ) ?></th>
-# <th scope="col"><?php echo __( 'Translation status', 'wpml-string-translation' ) ?></th>
-# <th scope="col" style="text-align:right"><?php echo __( 'Count', 'wpml-string-translation' ) ?></th>
-
-msgid "Translation status"
-msgstr ""
-
-# <th scope="col"><?php echo __( 'Translation status', 'wpml-string-translation' ) ?></th>
-# <th scope="col" style="text-align:right"><?php echo __( 'Count', 'wpml-string-translation' ) ?></th>
-# <th scope="col">&nbsp;</th>
-
-msgid "Count"
-msgstr ""
-
-# } else {
-# $_tmpcomp = $_tmpinco = $_tmptotal = __( 'n/a', 'wpml-string-translation' );
-# }
-
-msgid "n/a"
-msgstr ""
-
-# <tr<?php if ( $theme_requires_rescan ) { echo ' class="st_requires_update"'; } ?>>
-# <td><?php echo $tl_domain ? $tl_domain : '<i>' . __( 'no domain',
-# 'wpml-string-translation' ) . '</i>'; ?></td>
-
-msgid "no domain"
-msgstr ""
-
-# 'wpml-string-translation' ) . '</i>'; ?></td>
-# <td><?php echo __( 'Fully translated', 'wpml-string-translation' ) ?></td>
-# <td align="right"><?php echo $_tmpcomp; ?></td>
-
-msgid "Fully translated"
-msgstr ""
-
-# <a href="admin.php?page=<?php echo WPML_ST_FOLDER ?>/menu/string-translation.php&amp;context=<?php echo $tl_domain ? urlencode( $tl_domain ) : 'WordPress' ?>"
-# class="button-secondary"><?php echo __( "View all the theme's texts",
-# 'wpml-string-translation' ) ?></a>
-
-msgid "View all the theme's texts"
-msgstr ""
-
-# <a href="admin.php?page=<?php echo WPML_ST_FOLDER ?>/menu/string-translation.php&amp;context=<?php echo $tl_domain ? urlencode( $tl_domain ) : 'WordPress' ?>&amp;status=0"
-# class="button-primary"><?php echo __( "View strings that need translation",
-# 'wpml-string-translation' ) ?></a>
-
-msgid "View strings that need translation"
-msgstr ""
-
-# <td></td>
-# <td><?php echo __( 'Not translated or needs update', 'wpml-string-translation' ) ?></td>
-# <td align="right"><?php echo $_tmpinco ?></td>
-
-msgid "Not translated or needs update"
-msgstr ""
-
-# <td></td>
-# <td><strong><?php echo __( 'Total', 'wpml-string-translation' ) ?></strong></td>
-# <td align="right"><strong><?php echo $_tmpcomp + $_tmpinco;
-
-msgid "Total"
-msgstr ""
-
-# <?php else: ?>
-# <p><?php echo __( "To translate your theme's texts, click on the button below. WPML will scan your theme for texts and let you enter translations.",
-# 'wpml-string-translation' ) ?></p>
-
-msgid "To translate your theme's texts, click on the button below. WPML will scan your theme for texts and let you enter translations."
-msgstr ""
-
-# <input id="st_theme_localization_rescan" type="button" class="button-primary"
-# value="<?php echo __( "Scan the theme for strings", 'wpml-string-translation' ) ?>"/>
-# <img class="icl_ajx_loader" src="<?php echo WPML_ST_URL ?>/res/img/ajax-loader.gif" style="display:none;" alt=""/>
-
-msgid "Scan the theme for strings"
-msgstr ""
-
-# <th scope="col" class="column-cb check-column"><input type="checkbox"/></th>
-# <th scope="col"><?php echo __( 'Plugin', 'wpml-string-translation' ) ?></th>
-# <th scope="col"><?php echo __( 'Active', 'wpml-string-translation' ) ?></th>
-
-msgid "Plugin"
-msgstr ""
-
-# <th scope="col"><?php echo __( 'Plugin', 'wpml-string-translation' ) ?></th>
-# <th scope="col"><?php echo __( 'Active', 'wpml-string-translation' ) ?></th>
-# <th scope="col"><?php echo __( 'Translation status', 'wpml-string-translation' ) ?>
-
-msgid "Active"
-msgstr ""
-
-# if ( in_array( $file, $active_plugins ) ) {
-# $plugin_active_status = __( 'Yes', 'wpml-string-translation' );
-# } elseif ( isset( $wpmu_sitewide_plugins[ $file ] ) ) {
-
-msgid "Yes"
-msgstr ""
-
-# } elseif ( isset( $wpmu_sitewide_plugins[ $file ] ) ) {
-# $plugin_active_status = __( 'Network', 'wpml-string-translation' );
-# } elseif ( isset( $mu_plugins_base[ $file ] ) ) {
-
-msgid "Network"
-msgstr ""
-
-# } elseif ( isset( $mu_plugins_base[ $file ] ) ) {
-# $plugin_active_status = __( 'MU', 'wpml-string-translation' );
-# $is_mu_plugin         = true;
-
-msgid "MU"
-msgstr ""
-
-# } else {
-# $plugin_active_status = __( 'No', 'wpml-string-translation' );
-# }
-
-msgid "No"
-msgstr ""
-
-# <a href="admin.php?page=<?php echo WPML_ST_FOLDER ?>/menu/string-translation.php&amp;context=<?php echo $domain_name ?>"
-# class="button-secondary"><?php echo __( "View all the plugin's texts",
-# 'wpml-string-translation' ) ?></a></p>
-
-msgid "View all the plugin's texts"
+msgid "Translation"
 msgstr ""
 
 # <p>
-# <input type="submit" class="button-primary" value="<?php echo __( "Scan the selected plugins for strings", 'wpml-string-translation' ) ?>"/>
-# <img class="icl_ajx_loader_p" src="<?php echo WPML_ST_URL ?>/res/img/ajax-loader.gif" style="display:none;" alt=""/>
-
-msgid "Scan the selected plugins for strings"
-msgstr ""
-
-# <label for="wpml_st_theme_localization_type_<?php echo $for; ?>">
-# <?php _e( 'Automatically use theme or plugin text domains when gettext calls do not use a string literal.', 'wpml-string-translation' ) ?>
-# </label>
-
-msgid "Automatically use theme or plugin text domains when gettext calls do not use a string literal."
-msgstr ""
-
-# <br />
-# <?php _e( 'If your theme or plugins falls in this case, enabling this option, WPML will try to retrieve this from the plugin or theme "Text Domain" header, if set.', 'wpml-string-translation' ); ?>
+# <label><input type="checkbox" name="add_new" value="1" checked="checked" />&nbsp;<?php _e('Add the new translations.', 'wpml-string-translation'); ?></label>
 # </p>
 
-msgid "If your theme or plugins falls in this case, enabling this option, WPML will try to retrieve this from the plugin or theme \"Text Domain\" header, if set."
+msgid "Add the new translations."
 msgstr ""
 
-# 
-# <h3><?php _e( 'Strings in the theme', 'wpml-string-translation' ); ?></h3>
-# 
+# <input type="submit" class="button-primary" value="<?php esc_attr_e('Proceed', 'wpml-string-translation') ?>" />&nbsp;
+# <a class="button-secondary" href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php') ?>"><?php _e('Cancel', 'wpml-string-translation') ?></a>
+# </p>
 
-msgid "Strings in the theme"
+msgid "Cancel"
 msgstr ""
 
-# <p>
-# <i><?php _e( 'Re-scanning the plugins or the themes will reset the strings tracked in the code or the HTML source',
-# 'wpml-string-translation' ) ?></i></p>
+#
+# <p><?php _e('There is nothing to be updated or to be added.', 'wpml-string-translation') ?></p>
+# <p><a href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php'); ?>" class="button-secondary"><?php _e('Check other languages', 'wpml-string-translation') ?></a></p>
 
-msgid "Re-scanning the plugins or the themes will reset the strings tracked in the code or the HTML source"
+msgid "There is nothing to be updated or to be added."
 msgstr ""
 
-# <?php if ( $theme_localization_stats ): ?>
-# <p><?php _e( 'The following strings were found in your theme.', 'wpml-string-translation' ); ?></p>
-# <table id="icl_strings_in_theme" class="widefat" cellspacing="0">
+# <p class="submit">
+# <input type="submit" class="button-primary" value="<?php esc_attr_e('Proceed', 'wpml-string-translation') ?>" />&nbsp;
+# <a class="button-secondary" href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php') ?>"><?php _e('Cancel', 'wpml-string-translation') ?></a>
 
-msgid "The following strings were found in your theme."
+msgid "Proceed"
 msgstr ""
 
-# <td colspan="4">
-# <p class="update-message"> <?php _e('Update required - please rescan this theme', 'wpml-string-translation'); ?></p>
-# </td>
+# if ( ! empty( $translations_add ) ) {
+# $user_messages[] = sprintf( _n( '%d new translation was added.', '%d new translations were added.', count( $translations_add ), 'wpml-string-translation' ), count( $translations_add ) );
+# }
 
-msgid "Update required - please rescan this theme"
+msgid "%d new translation was added."
 msgstr ""
 
-# <label for="icl_load_mo_themes">
-# <?php _e( 'Load translations if found in the .mo files. (it will not override existing translations)', 'wpml-string-translation' ) ?>
-# </label>
+# if ( ! empty( $translations_add ) ) {
+# $user_messages[] = sprintf( _n( '%d new translation was added.', '%d new translations were added.', count( $translations_add ), 'wpml-string-translation' ), count( $translations_add ) );
+# }
 
-msgid "Load translations if found in the .mo files. (it will not override existing translations)"
+msgid "%d new translations were added."
 msgstr ""
 
-# 
-# <h3><?php _e( 'Strings in the plugins', 'wpml-string-translation' ); ?></h3>
-# <?php
+# if ( $translations_updated ) {
+# $user_messages[] = sprintf( _n( '%d translation was updated.', '%d translations were updated.', $translations_updated, 'wpml-string-translation' ), $translations_updated );
+#
 
-msgid "Strings in the plugins"
+msgid "%d translation was updated."
 msgstr ""
 
-# ?>
-# <p class="update-message"> <?php _e('Update required - please rescan this plugin', 'wpml-string-translation'); ?></p>
-# <?php
+# if ( $translations_updated ) {
+# $user_messages[] = sprintf( _n( '%d translation was updated.', '%d translations were updated.', $translations_updated, 'wpml-string-translation' ), $translations_updated );
+#
 
-msgid "Update required - please rescan this plugin"
-msgstr ""
-
-# <a class="wpml_st_pop_download button-secondary"
-# href="#<?php echo urlencode( $file ) ?>"><?php _e( 'create PO file',
-# 'wpml-string-translation' ); ?></a>
-
-msgid "create PO file"
+msgid "%d translations were updated."
 msgstr ""
 
 # <div class="wrap">
 # <h2><?php echo __('String translation', 'wpml-string-translation') ?></h2>
-# 
+#
 
 msgid "String translation"
 msgstr ""
@@ -1373,7 +176,7 @@ msgstr ""
 
 # <p><?php printf(__('The fields with <span%s>red</span> background are text fields and the fields with <span%s>cyan</span> background are numeric.', 'wpml-string-translation'),' class="icl_st_string"',' class="icl_st_numeric"'); ?></p>
 # <p><?php printf(__("Choose the fields you'd like to translate and click on the 'Apply' button. Then, use WPML's <a%s>String translation</a> to translate them.", 'wpml-string-translation'),' href="admin.php?page='.WPML_ST_FOLDER.'/menu/string-translation.php"'); ?></p>
-# 
+#
 
 msgid "Choose the fields you'd like to translate and click on the 'Apply' button. Then, use WPML's <a%s>String translation</a> to translate them."
 msgstr ""
@@ -1399,11 +202,25 @@ msgstr ""
 msgid "Export selected strings as a WPML config file that can be added to themes or plugins"
 msgstr ""
 
+# <input type="button" class="button" id="icl_st_ow_export" value="<?php _e('Export selected strings as a WPML config file that can be added to themes or plugins', 'wpml-string-translation'); ?>" />
+# <input type="button" class="button-primary" id="icl_st_ow_export_close" value="<?php _e('Close', 'wpml-string-translation')?>" />
+# <img class="ajax_loader" src="<?php echo WPML_ST_URL ?>/res/img/ajax-loader.gif" style="display:none" width="16" height="16" />
+
+msgid "Close"
+msgstr ""
+
 # <span id="icl_st_options_write_success" class="hidden updated message fade"><?php printf(__('The selected strings can now be translated using the <a%s>string translation</a> screen', 'wpml-string-translation'), ' href="admin.php?page='.WPML_ST_FOLDER.'/menu/string-translation.php"');?></span>
 # <span id="icl_st_options_write_confirm" class="hidden"><?php _e('You have removed some of the texts that are translated already. The translations will be lost.','wpml-string-translation')?></span>
 # <p class="submit">
 
 msgid "You have removed some of the texts that are translated already. The translations will be lost."
+msgstr ""
+
+# <p class="submit">
+# <input type="submit" class="button-primary" value="<?php _e('Apply', 'wpml-string-translation');?>" />
+# <span class="icl_ajx_response" id="icl_ajx_response"></span>
+
+msgid "Apply"
 msgstr ""
 
 # <?php else: ?>
@@ -1413,21 +230,7 @@ msgstr ""
 msgid "No options found. Make sure you saved your theme options at least once. <br />Some themes only add these to the wp_options table after the user explicitly saves over the theme defaults"
 msgstr ""
 
-# <div class="wpml-section-header">
-# <h3><?php _e('Custom posts slug translation options', 'wpml-string-translation') ?></h3>
-# </div>
-
-msgid "Custom posts slug translation options"
-msgstr ""
-
-# <input type="checkbox" name="icl_slug_translation_on" value="1" <?php checked(1,$sitepress_settings['posts_slug_translation']['on'],true) ?>  />&nbsp;
-# <?php _e("Translate custom posts slugs (via WPML String Translation).", 'wpml-string-translation') ?>
-# </label>
-
-msgid "Translate custom posts slugs (via WPML String Translation)."
-msgstr ""
-
-# 
+#
 # <p><?php printf(__("These are the strings that we found in your .po file. Please carefully review them. Then, click on the 'add' or 'cancel' buttons at the %sbottom of this screen%s. You can exclude individual strings by clearing the check boxes next to them.", 'wpml-string-translation'), '<a href="#add_po_strings_confirm">', '</a>'); ?></p>
 # <form method="post" id="wpml_add_strings" action="<?php echo admin_url("admin.php?page=" . WPML_ST_FOLDER . "/menu/string-translation.php");?>">
 
@@ -1474,6 +277,13 @@ msgstr ""
 # </option>
 
 msgid "Translation needed"
+msgstr ""
+
+# <option value="<?php echo ICL_TM_WAITING_FOR_TRANSLATOR ?>" <?php echo $selected; ?>>
+# <?php echo __( 'Waiting for translator', 'wpml-string-translation' ) ?>
+# </option>
+
+msgid "Waiting for translator"
 msgstr ""
 
 # <span style="white-space:nowrap">
@@ -1532,8 +342,8 @@ msgstr ""
 msgid "Strings per page:"
 msgstr ""
 
-# echo '&amp;status=' . htmlspecialchars( $_GET['status'], ENT_QUOTES );
-# } ?>"><?php echo __( 'Display all results', 'wpml-string-translation' ); ?></a>
+# ?>
+# <a href="<?php echo $url; ?>"><?php echo __( 'Display all results', 'wpml-string-translation' ); ?></a>
 # <?php endif; ?>
 
 msgid "Display all results"
@@ -1575,10 +385,10 @@ msgid "Click to toggle"
 msgstr ""
 
 # <h3 class="hndle">
-# <span><?php echo __('Track where string appear on the site', 'wpml-string-translation')?></span>
+# <span><?php echo __('Track where strings appear on the site', 'wpml-string-translation')?></span>
 # </h3>
 
-msgid "Track where string appear on the site"
+msgid "Track where strings appear on the site"
 msgstr ""
 
 # <div class="inside">
@@ -1709,40 +519,40 @@ msgstr ""
 
 # $tustr .= '</span>';
 # $tustr .= '&nbsp;&nbsp;<a href="#" onclick="jQuery(\'#icl_st_tusers\').slideToggle();return false;">' . __('edit', 'wpml-string-translation') . '</a>';
-# 
+#
 
 msgid "edit"
 msgstr ""
 
 # ?>
 # <?php printf(__('Translating users of types: %s', 'wpml-string-translation'), $tustr); ?>
-# 
+#
 
 msgid "Translating users of types: %s"
 msgstr ""
 
 # <p class="wpml-st-excluded-info"
-# data-all-included="<?php echo esc_attr__('Strings from all text domains will be auto-registred', 'wpml-string-translation') ?>"
+# data-all-included="<?php echo esc_attr__('Strings from all text domains will be auto-registered', 'wpml-string-translation') ?>"
 # data-all-excluded="<?php echo esc_attr__('Strings from all text domains are excluded', 'wpml-string-translation') ?>"
 
-msgid "Strings from all text domains will be auto-registred"
+msgid "Strings from all text domains will be auto-registered"
 msgstr ""
 
-# data-all-included="<?php echo esc_attr__('Strings from all text domains will be auto-registred', 'wpml-string-translation') ?>"
+# data-all-included="<?php echo esc_attr__('Strings from all text domains will be auto-registered', 'wpml-string-translation') ?>"
 # data-all-excluded="<?php echo esc_attr__('Strings from all text domains are excluded', 'wpml-string-translation') ?>"
-# data-excluded-preview="<?php echo esc_attr__('You exluded: ', 'wpml-string-translation') ?>"
+# data-excluded-preview="<?php echo esc_attr__('You excluded: ', 'wpml-string-translation') ?>"
 
 msgid "Strings from all text domains are excluded"
 msgstr ""
 
 # data-all-excluded="<?php echo esc_attr__('Strings from all text domains are excluded', 'wpml-string-translation') ?>"
-# data-excluded-preview="<?php echo esc_attr__('You exluded: ', 'wpml-string-translation') ?>"
+# data-excluded-preview="<?php echo esc_attr__('You excluded: ', 'wpml-string-translation') ?>"
 # data-included-preview="<?php echo esc_attr__('You included: ', 'wpml-string-translation') ?>"
 
-msgid "You exluded: "
+msgid "You excluded: "
 msgstr ""
 
-# data-excluded-preview="<?php echo esc_attr__('You exluded: ', 'wpml-string-translation') ?>"
+# data-excluded-preview="<?php echo esc_attr__('You excluded: ', 'wpml-string-translation') ?>"
 # data-included-preview="<?php echo esc_attr__('You included: ', 'wpml-string-translation') ?>"
 # data-preview-suffix="<?php echo esc_attr__('and others', 'wpml-string-translation') ?>"
 
@@ -1772,7 +582,7 @@ msgstr ""
 
 # <div id="wpml-st-filter-and-select-all-box">
 # <input type="input" name="search" placeholder="<?php echo esc_attr__('Search', 'wpml-string-translation')?>" />
-# 
+#
 
 msgid "Search"
 msgstr ""
@@ -1786,7 +596,7 @@ msgstr ""
 
 # <div class="inside">
 # <p class="sub"><?php echo esc_html__('WPML can automatically register strings for translation. This allows you to translate user-generated content with minimal PHP code.', 'wpml-string-translation')?></p>
-# 
+#
 
 msgid "WPML can automatically register strings for translation. This allows you to translate user-generated content with minimal PHP code."
 msgstr ""
@@ -1812,13 +622,6 @@ msgstr ""
 msgid "Languages of domains"
 msgstr ""
 
-# <input type="checkbox" id="track_strings" name="icl_st[track_strings]" value="1" <?php echo $track_strings_checked; ?> />
-# <label for="track_strings"><?php _e( 'Track where strings appear on the site', 'wpml-string-translation' ); ?></label>
-# <p class="js-track-strings-note" <?php echo $track_strings_display; ?>>
-
-msgid "Track where strings appear on the site"
-msgstr ""
-
 # </p>
 # <p><a href="https://wpml.org/?p=9073" target="_blank"><?php _e('Performance considerations', 'wpml-string-translation') ?>&nbsp;&raquo;</a></p>
 # </li>
@@ -1826,14 +629,14 @@ msgstr ""
 msgid "Performance considerations"
 msgstr ""
 
-# 
+#
 # <a href="admin.php?page=<?php echo WPML_ST_FOLDER ?>/menu/string-translation.php&amp;trop=1"><?php _e('Translate texts in admin screens &raquo;', 'wpml-string-translation'); ?></a>
-# 
+#
 
 msgid "Translate texts in admin screens &raquo;"
 msgstr ""
 
-# 
+#
 # $anchor_text         = _x( 'String Tracking', 'String Tracking warning: sentence 1, anchor text', 'wpml-string-translation' );
 # $message_sentences[] = _x( '%s allows you to see where strings come from, so you can translate them accurately.', 'String Tracking warning: sentence 1', 'wpml-string-translation' );
 
@@ -1867,496 +670,1743 @@ msgstr ""
 
 # $message_sentences[] = _x( 'This feature is CPU-intensive and should only be used while you are developing sites.', 'String Tracking warning: sentence 3', 'wpml-string-translation' );
 # $message_sentences[] = _x( 'Remember to turn it off before going to production, to avoid performance problems.', 'String Tracking warning: sentence 4', 'wpml-string-translation' );
-# 
+#
 
 msgctxt "String Tracking warning: sentence 4"
 msgid "Remember to turn it off before going to production, to avoid performance problems."
 msgstr ""
 
-# }else{
-# $user_errors[] = __('No action performed. Please select the strings that you need to update or add.', 'wpml-string-translation');
+# <div class="wpml-section-header">
+# <h3><?php _e('Custom posts slug translation options', 'wpml-string-translation') ?></h3>
+# </div>
+
+msgid "Custom posts slug translation options"
+msgstr ""
+
+# <input type="checkbox" name="icl_slug_translation_on" value="1" <?php checked(1,$sitepress_settings['posts_slug_translation']['on'],true) ?>  />&nbsp;
+# <?php _e("Translate custom posts slugs (via WPML String Translation).", 'wpml-string-translation') ?>
+# </label>
+
+msgid "Translate custom posts slugs (via WPML String Translation)."
+msgstr ""
+
+# <span class="icl_ajx_response" id="icl_ajx_response_sgtr"></span>
+# <input type="submit" class="button-primary" value="<?php _e('Save', 'wpml-string-translation')?>" />
+# </p>
+
+msgid "Save"
+msgstr ""
+
+#
+# $_tmpcomp = $_tmpinco = $_tmptotal = __( 'n/a', 'wpml-string-translation' );
+# $_tmplink = false;
+
+msgid "n/a"
+msgstr ""
+
+# if ( in_array( $file, $active_plugins ) ) {
+# $plugin_active_status = __( 'Yes', 'wpml-string-translation' );
+# } elseif ( isset( $wpmu_sitewide_plugins[ $file ] ) ) {
+
+msgid "Yes"
+msgstr ""
+
+# } elseif ( isset( $wpmu_sitewide_plugins[ $file ] ) ) {
+# $plugin_active_status = __( 'Network', 'wpml-string-translation' );
+# } elseif ( isset( $mu_plugins_base[ $file ] ) ) {
+
+msgid "Network"
+msgstr ""
+
+# } elseif ( isset( $mu_plugins_base[ $file ] ) ) {
+# $plugin_active_status = __( 'MU', 'wpml-string-translation' );
+# $is_mu_plugin         = true;
+
+msgid "MU"
+msgstr ""
+
+# } else {
+# $plugin_active_status = __( 'No', 'wpml-string-translation' );
 # }
 
-msgid "No action performed. Please select the strings that you need to update or add."
+msgid "No"
 msgstr ""
 
-# <div class="error">
-# <p><?php printf(__('Invalid language: %s', 'wpml-string-translation'), $language) ?></p>
-# </div>
+# $doing_it_wrong = '<a href="' . $doing_it_wrong_url .'" target="_blank">';
+# $doing_it_wrong .= esc_html__( 'Internationalization: You’re probably doing it wrong', 'wpml-string-translation' );
+# $doing_it_wrong .= '</a>';
 
-msgid "Invalid language: %s"
+msgid "Internationalization: You’re probably doing it wrong"
 msgstr ""
 
-# <div class="icl_cyan_box">
-# <?php printf(__('This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button.', 'wpml-string-translation'),
-# isset($translations['new']) ? count($translations['new']) : 0,
+# <p class="description">
+# <?php printf( esc_html__( 'Note: It is not safe to use variables, constants or functions in gettext calls. Read "%s" for a detailed explanation.', 'wpml-string-translation' ), $doing_it_wrong ) ?>
+# <br />
 
-msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button."
+msgid "Note: It is not safe to use variables, constants or functions in gettext calls. Read \"%s\" for a detailed explanation."
 msgstr ""
 
-# <?php if(!empty($translations['updated'])): ?>
-# <h3><?php printf(__('Updated translations (%d)', 'wpml-string-translation'), count($translations['updated'])) ?></h3>
-# 
+# <td><?php echo esc_html( $theme_data[ $tl_domain ]['name'] ); ?></td>
+# <td><?php echo $tl_domain ? esc_html( $tl_domain ) : '<i>' . esc_html__( 'no domain', 'wpml-string-translation' ) . '</i>'; ?></td>
+# <td><?php esc_html_e( 'Fully translated', 'wpml-string-translation' ) ?></td>
 
-msgid "Updated translations (%d)"
-msgstr ""
-
-# <?php if(!empty($translations['new'])): ?>
-# <h3><?php printf(__('New translations (%d)', 'wpml-string-translation'), count($translations['new'])) ?></h3>
-# <table class="widefat">
-
-msgid "New translations (%d)"
-msgstr ""
-
-# <div class="wrap">
-# <h2><?php _e('Auto-download WordPress translations', 'wpml-string-translation') ?></h2>
-# 
-
-msgid "Auto-download WordPress translations"
-msgstr ""
-
-# 
-# <p><strong><?php _e('Success!', 'wpml-string-translation') ?></strong></p>
-# <?php foreach($user_messages as $umessage): ?>
-
-msgid "Success!"
-msgstr ""
-
-# <?php endforeach; ?>
-# <a href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php'); ?>" class="button-secondary"><?php _e('Check other languages', 'wpml-string-translation') ?></a>
-# 
-
-msgid "Check other languages"
-msgstr ""
-
-# <div class="error">
-# <p><?php _e('Missing version number for translation.', 'wpml-string-translation') ?></p>
-# </div>
-
-msgid "Missing version number for translation."
-msgstr ""
-
-# <th><?php _e('String', 'wpml-string-translation') ?></th>
-# <th style="text-align:center;"><?php _e('Existing translation', 'wpml-string-translation') ?></th>
-# <th style="text-align:center;"><?php _e('New translation', 'wpml-string-translation') ?></th>
-
-msgid "Existing translation"
-msgstr ""
-
-# <th style="text-align:center;"><?php _e('Existing translation', 'wpml-string-translation') ?></th>
-# <th style="text-align:center;"><?php _e('New translation', 'wpml-string-translation') ?></th>
-# </tr>
-
-msgid "New translation"
-msgstr ""
-
-# <th><?php _e('String', 'wpml-string-translation') ?></th>
-# <th><?php _e('Translation', 'wpml-string-translation') ?></th>
-# </tr>
-
-msgid "Translation"
+msgid "no domain"
 msgstr ""
 
 # <p>
-# <label><input type="checkbox" name="add_new" value="<?php echo base64_encode(serialize($translations['new'])); ?>" checked="checked" />&nbsp;<?php _e('Add the new translations.', 'wpml-string-translation'); ?></label>
+# <input id="st_theme_localization_rescan" type="button" class="button-primary" value="<?php esc_attr_e( 'Scan themes for strings', 'wpml-string-translation' ) ?>"/>
+# <img class="icl_ajx_loader" src="<?php echo WPML_ST_URL ?>/res/img/ajax-loader.gif" style="display:none;" alt=""/>
+
+msgid "Scan themes for strings"
+msgstr ""
+
+# <label for="wpml_st_theme_localization_type_<?php echo $for; ?>">
+# <?php esc_html_e( 'Automatically use theme or plugin text domains when gettext calls do not use a string literal.', 'wpml-string-translation' ) ?>
+# </label>
+
+msgid "Automatically use theme or plugin text domains when gettext calls do not use a string literal."
+msgstr ""
+
+# <br />
+# <?php esc_html_e( 'If your theme or plugins falls in this case, enabling this option, WPML will try to retrieve this from the plugin or theme "Text Domain" header, if set.', 'wpml-string-translation' ) ?>
 # </p>
 
-msgid "Add the new translations."
+msgid "If your theme or plugins falls in this case, enabling this option, WPML will try to retrieve this from the plugin or theme \"Text Domain\" header, if set."
 msgstr ""
 
-# 
-# <p><?php _e('There is nothing to be updated or to be added.', 'wpml-string-translation') ?></p>
-# <p><a href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php'); ?>" class="button-secondary"><?php _e('Check other languages', 'wpml-string-translation') ?></a></p>
+# <th scope="col" class="column-cb check-column-plugin"><input type="checkbox"/></th>
+# <th scope="col"><?php esc_html_e( 'Plugin', 'wpml-string-translation' ); ?></th>
+# <th scope="col"><?php esc_html_e( 'Active', 'wpml-string-translation' ); ?></th>
 
-msgid "There is nothing to be updated or to be added."
+msgid "Plugin"
 msgstr ""
 
-# <p class="submit">
-# <input type="submit" class="button-primary" value="<?php esc_attr_e('Proceed', 'wpml-string-translation') ?>" />&nbsp;
-# <a class="button-secondary" href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php') ?>"><?php _e('Cancel', 'wpml-string-translation') ?></a>
+# <th scope="col"><?php esc_html_e( 'Plugin', 'wpml-string-translation' ); ?></th>
+# <th scope="col"><?php esc_html_e( 'Active', 'wpml-string-translation' ); ?></th>
+# <th scope="col">
 
-msgid "Proceed"
+msgid "Active"
 msgstr ""
 
-# if(!empty($translations_add)){
-# $user_messages[] = sprintf(_n('%d new translation was added.', '%d new translations were added.', count($translations_add), 'wpml-string-translation'), count($translations_add));
-# }
+# <th scope="col">
+# <?php esc_html_e( 'Translation status', 'wpml-string-translation' ); ?>
+# <div style="float: right;">
 
-msgid "%d new translation was added."
+msgid "Translation status"
 msgstr ""
 
-# if(!empty($translations_add)){
-# $user_messages[] = sprintf(_n('%d new translation was added.', '%d new translations were added.', count($translations_add), 'wpml-string-translation'), count($translations_add));
-# }
+# <div style="float: right;">
+# <?php esc_html_e( 'Count', 'wpml-string-translation' ); ?>
+# </div>
 
-msgid "%d new translations were added."
+msgid "Count"
 msgstr ""
 
-# if($translations_updated){
-# $user_messages[] = sprintf(_n('%d translation was updated.', '%d translations were updated.', $translations_updated, 'wpml-string-translation'), $translations_updated);
-# 
+# <th scope="col" class="column-cb check-column-theme"><input type="checkbox"/></th>
+# <th scope="col"><?php esc_html_e( 'Theme', 'wpml-string-translation' ); ?></th>
+# <th scope="col"><?php esc_html_e( 'Domain', 'wpml-string-translation' ); ?></th>
 
-msgid "%d translation was updated."
+msgid "Theme"
 msgstr ""
 
-# if($translations_updated){
-# $user_messages[] = sprintf(_n('%d translation was updated.', '%d translations were updated.', $translations_updated, 'wpml-string-translation'), $translations_updated);
-# 
+# <th scope="col"><?php esc_html_e( 'Theme', 'wpml-string-translation' ); ?></th>
+# <th scope="col"><?php esc_html_e( 'Domain', 'wpml-string-translation' ); ?></th>
+# <th scope="col"><?php esc_html_e( 'Translation status', 'wpml-string-translation' ); ?></th>
 
-msgid "%d translations were updated."
+msgid "Domain"
 msgstr ""
 
-# $html .= '<tr>';
-# $html .= '<td>' . sprintf(__("Updated %s translation is available", 'wpml-string-translation'),
-# '<strong>' . $l['display_name'] . '</strong>') . '</td>';
+#
+# <h3><?php esc_html_e( 'Strings in the theme', 'wpml-string-translation' ) ?></h3>
+#
 
-msgid "Updated %s translation is available"
+msgid "Strings in the theme"
 msgstr ""
 
-# $html .= '<td align="right">';
-# $html .= '<a href="' . admin_url('admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&amp;download_mo=' . $language . '&amp;version=' . $version_key) . '" class="button-secondary">' .  __('Review changes and update', 'wpml-string-translation') . '</a>';
-# $html .= '</td>';
+# <p>
+# <i><?php esc_html_e( 'Re-scanning the plugins or the themes will reset the strings tracked in the code or the HTML source', 'wpml-string-translation' ) ?></i>
+# </p>
 
-msgid "Review changes and update"
+msgid "Re-scanning the plugins or the themes will reset the strings tracked in the code or the HTML source"
 msgstr ""
 
-# }else{
-# $html .= __('No updates found.', 'wpml-string-translation');
-# }
+# <form id="wpml_themes_form">
+# <p><?php esc_html_e( 'The following strings were found in your theme.', 'wpml-string-translation' ) ?></p>
+# <table id="wpml_strings_in_themes" class="widefat" cellspacing="0">
 
-msgid "No updates found."
+msgid "The following strings were found in your theme."
 msgstr ""
 
-# }
-# $load_xml_error_message .= sprintf(__('Failed downloading the language information file.', 'wpml-string-translation'), $errors);
-# $load_xml_error_message .= '<br/>' . sprintf(__('Errors: %s', 'wpml-string-translation'), $errors);
+# <td><?php echo $tl_domain ? esc_html( $tl_domain ) : '<i>' . esc_html__( 'no domain', 'wpml-string-translation' ) . '</i>'; ?></td>
+# <td><?php esc_html_e( 'Fully translated', 'wpml-string-translation' ) ?></td>
+# <td align="right"><?php echo $_tmpcomp; ?></td>
 
-msgid "Failed downloading the language information file."
+msgid "Fully translated"
 msgstr ""
 
-# $load_xml_error_message .= sprintf(__('Failed downloading the language information file.', 'wpml-string-translation'), $errors);
-# $load_xml_error_message .= '<br/>' . sprintf(__('Errors: %s', 'wpml-string-translation'), $errors);
-# } else {
+# <a href="admin.php?page=<?php echo WPML_ST_FOLDER ?>/menu/string-translation.php&amp;context=<?php echo $tl_domain ? urlencode( $tl_domain ) : 'WordPress' ?>" class="button-secondary">
+# <?php esc_html_e( "View all the theme's texts", 'wpml-string-translation' ) ?>
+# </a>
 
-msgid "Errors: %s"
+msgid "View all the theme's texts"
 msgstr ""
 
-# } else {
-# $load_xml_error_message .= __('Failed downloading the language information file. Please go back and try a little later.', 'wpml-string-translation');
-# }
+# <a href="admin.php?page=<?php echo WPML_ST_FOLDER ?>/menu/string-translation.php&amp;context=<?php echo $tl_domain ? urlencode( $tl_domain ) : 'WordPress' ?>&amp;status=0" class="button-primary">
+# <?php esc_html_e( 'View strings that need translation', 'wpml-string-translation' ) ?>
+# </a>
 
-msgid "Failed downloading the language information file. Please go back and try a little later."
+msgid "View strings that need translation"
 msgstr ""
 
-# if(is_wp_error($response)){
-# $err = __('Error getting the translation file. Please go back and try again.', 'wordpress-language');
-# if(isset($response->errors['http_request_failed'][0])){
+# <td></td>
+# <td><?php esc_html_e( 'Not translated or needs update', 'wpml-string-translation' ) ?></td>
+# <td align="right"><?php echo $_tmpinco ?></td>
 
-msgid "Error getting the translation file. Please go back and try again."
+msgid "Not translated or needs update"
 msgstr ""
 
-# echo '<label><input type="checkbox" name="icl_convert" value="1" />&nbsp;'
-# . __('Convert to multilingual widget', 'sitepress') . '</label>';
-# } else {
+# <td></td>
+# <td><strong><?php esc_html_e( 'Total', 'wpml-string-translation' ) ?></strong></td>
+# <td align="right"><strong><?php echo $_tmpcomp + $_tmpinco;
 
-msgid "Convert to multilingual widget"
+msgid "Total"
 msgstr ""
 
-# if (icl_widget_text_convert_to_multilingual($widget, $instance) === TRUE) {
-# _e('This widget is converted to multilingual', 'sitepress');
-# }
+# <td colspan="4">
+# <p class="update-message"> <?php esc_html_e( 'Update required - please rescan this theme', 'wpml-string-translation' ) ?></p>
+# </td>
 
-msgid "This widget is converted to multilingual"
+msgid "Update required - please rescan this theme"
 msgstr ""
 
-# if (!isset($_POST['sidebar']) || !isset($sidebars[$_POST['sidebar']])) {
-# _e('Converting to multilingual widget failed. No sidebar specified.', 'sitepress');
-# return FALSE;
+# <label for="icl_load_mo_themes">
+# <?php esc_html_e( 'Load translations if found in the .mo files. (it will not override existing translations)', 'wpml-string-translation' ) ?>
+# </label>
 
-msgid "Converting to multilingual widget failed. No sidebar specified."
+msgid "Load translations if found in the .mo files. (it will not override existing translations)"
 msgstr ""
 
-# if (isset($icl_widgets_text[$icl_widget->number])) {
-# _e('Widget is already converted', 'sitepress');
-# return FALSE;
+#
+# <h3><?php esc_html_e( 'Strings in the plugins', 'wpml-string-translation' ) ?></h3>
+# <?php
 
-msgid "Widget is already converted"
+msgid "Strings in the plugins"
 msgstr ""
 
-# 
-# $link_to_bottom_of_page = '<a href="#adm-proceed">' . __( 'bottom of this page', 'wpml-string-translation' ) . '</a>';
-# 
+# <ul class="wpml_plugin_table_filters">
+# <li><a class="active" href="#all"><?php esc_html_e( 'All', 'wpml-string-translation' ); ?> (<?php echo absint( $total_plugins ); ?>)</a></li>
+# <li><a href="#active"><?php esc_html_e( 'Active', 'wpml-string-translation' ); ?> (<?php echo absint( $active_plugins_count ); ?>)</a></li>
 
-msgid "bottom of this page"
+msgid "All"
 msgstr ""
 
-# $html = '<br /><div class="icl_cyan_box">';
-# $html .= sprintf( __( 'This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the %s and click on the Proceed button.', 'wpml-string-translation' ), $number_of_new_strings, $number_of_updated_strings, $link_to_bottom_of_page );
-# $html .= '</div>';
+# <li><a href="#active"><?php esc_html_e( 'Active', 'wpml-string-translation' ); ?> (<?php echo absint( $active_plugins_count ); ?>)</a></li>
+# <li><a href="#inactive"><?php esc_html_e( 'Inactive', 'wpml-string-translation' ); ?> (<?php echo absint( $total_plugins - $active_plugins_count ); ?>)</a></li>
+# </ul>
 
-msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the %s and click on the Proceed button."
+msgid "Inactive"
 msgstr ""
 
-# }
-# $this->add_stat( sprintf( __( 'Scanning theme folder: %s', 'wpml-string-translation' ), $dir_or_file ), true );
-# 
+# <?php if ( $requires_update ) { ?>
+# <p class="update-message"> <?php esc_html_e( 'Update required - please rescan this plugin', 'wpml-string-translation' ) ?></p>
+# <?php } ?>
 
-msgid "Scanning theme folder: %s"
+msgid "Update required - please rescan this plugin"
 msgstr ""
 
-# $recursion ++;
-# $this->add_stat( str_repeat( "\t", $recursion ) . sprintf( __( 'Opening folder: %s', 'wpml-string-translation' ), $dir_or_file . "/" . $file ) );
-# $this->scan_theme_files( $dir_or_file . "/" . $file, $recursion );
+# class="button-secondary">
+# <?php esc_html_e( "View all the plugin's texts", 'wpml-string-translation' ) ?>
+# </a>
 
-msgid "Opening folder: %s"
+msgid "View all the plugin's texts"
 msgstr ""
 
-# // THE potx way
-# $this->add_stat( str_repeat( "\t", $recursion ) . sprintf( __( 'Scanning file: %s', 'wpml-string-translation' ), $dir_or_file . "/" . $file ) );
-# $this->add_scanned_file( $dir_or_file . "/" . $file );
+# <a class="wpml_st_pop_download button-secondary" href="#<?php echo urlencode( $file ) ?>">
+# <?php esc_html_e( 'create PO file', 'wpml-string-translation' ) ?>
+# </a>
 
-msgid "Scanning file: %s"
+msgid "create PO file"
 msgstr ""
 
-# } else {
-# $this->add_stat( str_repeat( "\t", $recursion ) . sprintf( __( 'Skipping file: %s', 'wpml-string-translation' ), $dir_or_file . "/" . $file ) );
-# }
+# <p>
+# <input type="submit" class="button-primary" value="<?php esc_html_e( 'Scan the selected plugins for strings', 'wpml-string-translation' ) ?>"/>
+# <img class="icl_ajx_loader_p" src="<?php echo WPML_ST_URL ?>/res/img/ajax-loader.gif" style="display:none;" alt=""/>
 
-msgid "Skipping file: %s"
+msgid "Scan the selected plugins for strings"
 msgstr ""
 
-# global $__icl_registered_strings;
-# $this->add_stat( __( 'Done scanning files', 'wpml-string-translation' ) );
-# 
+# $this->admin_notice = '<div class="error wpml-admin-notice">';
+# $this->admin_notice .= '<h3>' . __( 'WPML Update is Incomplete', 'sitepress' ) . '</h3>';
+# $this->admin_notice .= '<p>' . implode( '</p><p>', $notice_paragraphs ) . '</p>';
 
-msgid "Done scanning files"
+msgid "WPML Update is Incomplete"
 msgstr ""
 
-# $scanned_files = join( '</li><li>', $this->get_scanned_files() );
-# $pre_stat      = __( '= Your theme was scanned for texts =', 'wpml-string-translation' ) . '<br />';
-# $pre_stat .= __( 'The following files were processed:', 'wpml-string-translation' ) . '<br />';
+# if ( count( $this->valid_plugins ) === 1 ) {
+# $paragraph = __( 'You are running updated %s, but the following component is not updated:', 'sitepress' );
+# $paragraph = sprintf( $paragraph, '<strong>' . $this->valid_plugins[0] . '</strong>' );
 
-msgid "= Your theme was scanned for texts ="
-msgstr ""
-
-# $pre_stat      = __( '= Your theme was scanned for texts =', 'wpml-string-translation' ) . '<br />';
-# $pre_stat .= __( 'The following files were processed:', 'wpml-string-translation' ) . '<br />';
-# $pre_stat .= '<ol style="font-size:10px;"><li>' . $scanned_files;
-
-msgid "The following files were processed:"
-msgstr ""
-
-# $pre_stat .= '</li></ol>';
-# $pre_stat .= sprintf( __( 'WPML found %s strings. They were added to the string translation table.', 'wpml-string-translation' ), count( $__icl_registered_strings ) );
-# $pre_stat .= '<br /><a href="#" onclick="jQuery(this).next().toggle();return false;">' . __( 'More details', 'wpml-string-translation' ) . '</a>';
-
-msgid "WPML found %s strings. They were added to the string translation table."
-msgstr ""
-
-# $pre_stat .= sprintf( __( 'WPML found %s strings. They were added to the string translation table.', 'wpml-string-translation' ), count( $__icl_registered_strings ) );
-# $pre_stat .= '<br /><a href="#" onclick="jQuery(this).next().toggle();return false;">' . __( 'More details', 'wpml-string-translation' ) . '</a>';
-# $pre_stat .= '<textarea style="display:none;width:100%;height:150px;font-size:10px;">';
-
-msgid "More details"
-msgstr ""
-
-# 
-# $this->add_stat( PHP_EOL . sprintf( __( 'Scanned files from %s:', 'wpml-string-translation' ), $plugin ) );
-# $this->scan_plugin_files();
-
-msgid "Scanned files from %s:"
+msgid "You are running updated %s, but the following component is not updated:"
 msgstr ""
 
 # } else {
-# $this->add_stat( sprintf( __( 'Invalid file: %s', 'wpml-string-translation' ), "/" . $plugin_path ) );
-# }
+# $paragraph           = __( 'You are running updated %s and %s, but the following components are not updated:', 'sitepress' );
+# $first_valid_plugins = implode( ', ', array_slice( $this->valid_plugins, 0, - 1 ) );
 
-msgid "Invalid file: %s"
+msgid "You are running updated %s and %s, but the following components are not updated:"
 msgstr ""
 
 # } else {
-# $pre_stats .= __( 'No strings found.', 'wpml-string-translation' ) . PHP_EOL;
+# $paragraph = __( 'The following components are not updated:', 'sitepress' );
 # }
 
-msgid "No strings found."
+msgid "The following components are not updated:"
 msgstr ""
 
-# if ( empty( $this->strings ) ) {
-# $this->error_str = __( 'No string found', 'wpml-string-translation' );
+# private function get_invalid_plugins_report_footer() {
+# $wpml_org_url = '<a href="https://wpml.org/account/" title="WPML.org account">' . __( 'WPML.org account', 'sitepress' ) . '</a>';
+#
+
+msgid "WPML.org account"
+msgstr ""
+
+#
+# $notice_paragraph = __( 'Your site will not work as it should in this configuration', 'sitepress' );
+# $notice_paragraph .= ' ';
+
+msgid "Your site will not work as it should in this configuration"
+msgstr ""
+
+# $notice_paragraph .= ' ';
+# $notice_paragraph .= __( 'Please update all components which you are using.', 'sitepress' );
+# $notice_paragraph .= ' ';
+
+msgid "Please update all components which you are using."
+msgstr ""
+
+# $notice_paragraph .= ' ';
+# $notice_paragraph .= sprintf( __( 'For WPML components you can receive updates from your %s or automatically, after you register WPML.', 'sitepress' ), $wpml_org_url );
+#
+
+msgid "For WPML components you can receive updates from your %s or automatically, after you register WPML."
+msgstr ""
+
+# if ( $_FILES[ 'icl_po_file' ][ 'size' ] === 0 ) {
+# $this->errors = esc_html__( 'File upload error', 'wpml-string-translation' );
+# return null;
+
+msgid "File upload error"
+msgstr ""
+
+# return array(
+# 'buttonLabel' => __( 'Recreate ST DB cache tables', 'wpml-string-translation' ),
+# 'description' => __( 'Recreate String Translation cache tables when they are missing or are invalid.', 'wpml-string-translation' ),
+
+msgid "Recreate ST DB cache tables"
+msgstr ""
+
+# 'buttonLabel' => __( 'Recreate ST DB cache tables', 'wpml-string-translation' ),
+# 'description' => __( 'Recreate String Translation cache tables when they are missing or are invalid.', 'wpml-string-translation' ),
+# 'successMsg'  => esc_js( __( 'Done', 'wpml-string-translation' ) ),
+
+msgid "Recreate String Translation cache tables when they are missing or are invalid."
+msgstr ""
+
+# 'description' => __( 'Recreate String Translation cache tables when they are missing or are invalid.', 'wpml-string-translation' ),
+# 'successMsg'  => esc_js( __( 'Done', 'wpml-string-translation' ) ),
+# 'nonce'       => wp_create_nonce( 'wpml-st-upgrade-db-cache-command-nonce' ),
+
+msgid "Done"
+msgstr ""
+
+# public function add_st_options( $model ) {
+# $model['bottom_tittle']  = __( 'Other options:', 'wpml-string-translation' );
+# $model['bottom_options'] = array(
+
+msgid "Other options:"
+msgstr ""
+
+# 'value'   => 1,
+# 'label'   => __( 'Use theme or plugin text domains when gettext calls do not use a string literal', 'wpml-string-translation' ),
+# 'tooltip' => __( "Some themes and plugins don't properly set the textdomain (second argument) in GetText calls. When you select this option, WPML will assume that the strings found in GetText calls in the PHP files of the theme and plugin should have the textdomain with the theme/plugin's name.", 'wpml-string-translation' ),
+
+msgid "Use theme or plugin text domains when gettext calls do not use a string literal"
+msgstr ""
+
+# 'label'   => __( 'Use theme or plugin text domains when gettext calls do not use a string literal', 'wpml-string-translation' ),
+# 'tooltip' => __( "Some themes and plugins don't properly set the textdomain (second argument) in GetText calls. When you select this option, WPML will assume that the strings found in GetText calls in the PHP files of the theme and plugin should have the textdomain with the theme/plugin's name.", 'wpml-string-translation' ),
+# 'checked' => checked( true, ! empty( $this->st_settings['use_header_text_domains_when_missing'] ), false ),
+
+msgid "Some themes and plugins don't properly set the textdomain (second argument) in GetText calls. When you select this option, WPML will assume that the strings found in GetText calls in the PHP files of the theme and plugin should have the textdomain with the theme/plugin's name."
+msgstr ""
+
+# 'value'   => 1,
+# 'label'   => __( 'Assume that all texts in PHP strings are in English', 'wpml-string-translation' ),
+# 'checked' => checked( true, get_option( WPML_ST_Gettext_Hooks_Factory::ALL_STRINGS_ARE_IN_ENGLISH_OPTION ), false ),
+
+msgid "Assume that all texts in PHP strings are in English"
+msgstr ""
+
+# 'section_label'      => __( 'Strings in the plugins', 'wpml-string-translation' ),
+# 'scan_button_label'  => __( 'Scan selected plugins for strings', 'wpml-string-translation' ),
+# 'completed_title'    => __( 'Completely translated strings', 'wpml-string-translation' ),
+
+msgid "Scan selected plugins for strings"
+msgstr ""
+
+# 'scan_button_label'  => __( 'Scan selected plugins for strings', 'wpml-string-translation' ),
+# 'completed_title'    => __( 'Completely translated strings', 'wpml-string-translation' ),
+# 'needs_update_title' => __( 'Strings in need of translation', 'wpml-string-translation' ),
+
+msgid "Completely translated strings"
+msgstr ""
+
+# 'completed_title'    => __( 'Completely translated strings', 'wpml-string-translation' ),
+# 'needs_update_title' => __( 'Strings in need of translation', 'wpml-string-translation' ),
+# 'component'          => __( 'Plugin', 'wpml-string-translation' ),
+
+msgid "Strings in need of translation"
+msgstr ""
+
+# 'component'          => __( 'Plugin', 'wpml-string-translation' ),
+# 'domain'             => __( 'Textdomain', 'wpml-string-translation' ),
+# 'all_text'           => __( 'All', 'wpml-string-translation' ),
+
+msgid "Textdomain"
+msgstr ""
+
+# if ( ! array_key_exists( 'TextDomain', $plugin_data ) ) {
+# $plugin_data['TextDomain'] = __( 'No TextDomain', 'wpml-string-translation' );
 # }
 
-msgid "No string found"
+msgid "No TextDomain"
+msgstr ""
+
+# 'domain_link' => add_query_arg( array( 'context' => $domain), $this->base_st_url ),
+# 'title_needs_translation' => sprintf( __( 'Translate strings in %s', 'wpml-string-translation' ), $domain),
+# 'title_all_strings' => sprintf( __( 'All strings in %s', 'wpml-string-translation' ), $domain),
+
+msgid "Translate strings in %s"
+msgstr ""
+
+# 'title_needs_translation' => sprintf( __( 'Translate strings in %s', 'wpml-string-translation' ), $domain),
+# 'title_all_strings' => sprintf( __( 'All strings in %s', 'wpml-string-translation' ), $domain),
+# );
+
+msgid "All strings in %s"
+msgstr ""
+
+# $model = array(
+# 'section_label'      => __( 'Strings in the themes', 'wpml-string-translation' ),
+# 'scan_button_label'  => __( 'Scan selected themes for strings', 'wpml-string-translation' ),
+
+msgid "Strings in the themes"
+msgstr ""
+
+# 'section_label'      => __( 'Strings in the themes', 'wpml-string-translation' ),
+# 'scan_button_label'  => __( 'Scan selected themes for strings', 'wpml-string-translation' ),
+# 'completed_title'    => __( 'Completely translated strings', 'wpml-string-translation' ),
+
+msgid "Scan selected themes for strings"
+msgstr ""
+
+# case ICL_STRING_TRANSLATION_COMPLETE:
+# return __( 'Translation complete', 'wpml-string-translation' );
+#
+
+msgid "Translation complete"
+msgstr ""
+
+# case ICL_STRING_TRANSLATION_PARTIAL:
+# return __( 'Partial translation', 'wpml-string-translation' );
+#
+
+msgid "Partial translation"
+msgstr ""
+
+# case ICL_STRING_TRANSLATION_NEEDS_UPDATE:
+# return __( 'Translation needs update', 'wpml-string-translation' );
+#
+
+msgid "Translation needs update"
+msgstr ""
+
+# case ICL_STRING_TRANSLATION_NOT_TRANSLATED:
+# return __( 'Not translated', 'wpml-string-translation' );
+#
+
+msgid "Not translated"
 msgstr ""
 
 # } else {
-# echo '0' . __( 'No strings selected', 'wpml-string-translation' );
+# wp_send_json_error( __( 'Nonce value is invalid', 'wpml-string-translation' ) );
 # }
 
-msgid "No strings selected"
+msgid "Nonce value is invalid"
 msgstr ""
 
-# $wpml_admin_text_config = new WPML_Admin_Text_Configuration();
-# $message = __( 'Save the following to a wpml-config.xml in the root of your theme or plugin.', 'wpml-string-translation' )
-# . "<textarea wrap=\"soft\" spellcheck=\"false\">" . htmlentities($wpml_admin_text_config->get_wpml_config_file($data[ 'icl_admin_options' ] )) .
+# ) {
+# $message = sprintf( __( "%s slugs are set to be translated, but they are missing their translation", 'wpml-string-translation' ), $custom_post->labels->name );
+# $notice .= $admin_notifier->display_instant_message( $message, 'error', 'below-h2', true );
 
-msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgid "%s slugs are set to be translated, but they are missing their translation"
+msgstr ""
+
+# <p>
+# <?php esc_html_e( "WPML needs to update the database. This update will help improve WPML's performance when fetching translated strings.", 'wpml-string-translation' ); ?>
+# <br /><br />
+
+msgid "WPML needs to update the database. This update will help improve WPML's performance when fetching translated strings."
+msgstr ""
+
+# <br /><br />
+# <button class="wpml-st-upgrade-migrate-originals"><?php esc_html_e( 'Update Now', 'wpml-string-translation' ); ?></button> <span class="spinner" style="float: none"></span>
+# </p>
+
+msgid "Update Now"
+msgstr ""
+
+# <p>
+# <?php esc_html_e( 'The database has been updated.', 'wpml-string-translation' ); ?>
+# <br /><br />
+
+msgid "The database has been updated."
+msgstr ""
+
+# $blocks['php']['data']['mbstring'] = array(
+# 'label'    => __( 'Multibyte String extension', 'wpml-string-translation' ),
+# 'value'    => $is_mbstring_extension_loaded ? __( 'Loaded', 'wpml-string-translation' ) : __( 'Not loaded', 'wpml-string-translation' ),
+
+msgid "Multibyte String extension"
+msgstr ""
+
+# 'label'    => __( 'Multibyte String extension', 'wpml-string-translation' ),
+# 'value'    => $is_mbstring_extension_loaded ? __( 'Loaded', 'wpml-string-translation' ) : __( 'Not loaded', 'wpml-string-translation' ),
+# 'url'      => 'http://php.net/manual/book.mbstring.php',
+
+msgid "Loaded"
+msgstr ""
+
+# 'label'    => __( 'Multibyte String extension', 'wpml-string-translation' ),
+# 'value'    => $is_mbstring_extension_loaded ? __( 'Loaded', 'wpml-string-translation' ) : __( 'Not loaded', 'wpml-string-translation' ),
+# 'url'      => 'http://php.net/manual/book.mbstring.php',
+
+msgid "Not loaded"
+msgstr ""
+
+# 'messages' => array(
+# __( 'Multibyte String extension is required for WPML String Translation.', 'wpml-string-translation' ) => 'https://wpml.org/home/minimum-requirements/',
+# ),
+
+msgid "Multibyte String extension is required for WPML String Translation."
+msgstr ""
+
+#
+# $message  = __( 'For String Tracking to work, the option', 'wpml-string-translation' );
+# $message .= '<strong> ' . __( 'Assume that all texts in PHP strings are in English', 'wpml-string-translation' ) . ' </strong>';
+
+msgid "For String Tracking to work, the option"
+msgstr ""
+
+# $message .= '<strong> ' . __( 'Assume that all texts in PHP strings are in English', 'wpml-string-translation' ) . ' </strong>';
+# $message .= __( 'was automatically disabled. To enable it back, go to WPML->Theme and Plugins localization.', 'wpml-string-translation' );
+# $message .= '<input type="hidden" id="' . $options_nonce . '" name="' . $options_nonce . '" value="' . wp_create_nonce( $options_nonce ) . '">';
+
+msgid "was automatically disabled. To enable it back, go to WPML->Theme and Plugins localization."
+msgstr ""
+
+# $notice->set_css_class_types( 'info' );
+# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Cancel and undo changes', 'wpml-string-translation' ), '#', false, false, 'button-primary' ) );
+# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Skip', 'wpml-string-translation' ), '#', false, true ) );
+
+msgid "Cancel and undo changes"
+msgstr ""
+
+# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Cancel and undo changes', 'wpml-string-translation' ), '#', false, false, 'button-primary' ) );
+# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Skip', 'wpml-string-translation' ), '#', false, true ) );
+# $this->admin_notices->add_notice( $notice );
+
+msgid "Skip"
+msgstr ""
+
+# public function __construct() {
+# $widget_ops  = array( 'classname' => 'widget_text_icl', 'description' => __( 'Multilingual arbitrary text or HTML', 'wpml-string-translation' ) );
+# parent::__construct( 'text_icl', __( 'Multilingual Text', 'wpml-string-translation' ), $widget_ops );
+
+msgid "Multilingual arbitrary text or HTML"
+msgstr ""
+
+# $widget_ops  = array( 'classname' => 'widget_text_icl', 'description' => __( 'Multilingual arbitrary text or HTML', 'wpml-string-translation' ) );
+# parent::__construct( 'text_icl', __( 'Multilingual Text', 'wpml-string-translation' ), $widget_ops );
+# }
+
+msgid "Multilingual Text"
+msgstr ""
+
+# ?>
+# <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+# <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
+
+msgid "Title:"
+msgstr ""
+
+#
+# <p><input id="<?php echo $this->get_field_id('filter'); ?>" name="<?php echo $this->get_field_name('filter'); ?>" type="checkbox" <?php checked(isset($instance['filter']) ? $instance['filter'] : 0); ?> />&nbsp;<label for="<?php echo $this->get_field_id('filter'); ?>"><?php _e('Automatically add paragraphs'); ?></label></p>
+# <?php
+
+msgid "Automatically add paragraphs"
+msgstr ""
+
+# type="checkbox" value="1" <?php checked( 1, $_translate, true ) ?> />
+# <?php printf( esc_html__( 'Use different slugs in different languages for %s.', 'wpml-string-translation' ), $custom_post->labels->name ) ?>
+# </label>
+
+msgid "Use different slugs in different languages for %s."
+msgstr ""
+
+# ?>
+# <em class="icl_st_slug_tr_warn"><?php esc_html_e( "Not marked as 'complete'. Press 'Save' to enable.", 'wpml-string-translation' ) ?></em>
+# <?php
+
+msgid "Not marked as 'complete'. Press 'Save' to enable."
+msgstr ""
+
+# <label for="<?php echo $dom_element_id ?>">
+# <em><?php esc_html_e( '(original)', 'wpml-string-translation' ) ?></em>
+# </label>
+
+msgid "(original)"
+msgstr ""
+
+# <div class="error wpml-admin-notice wpml-st-inactive wpml-inactive">
+# <p><?php esc_html_e( 'Please activate WPML Multilingual CMS to have WPML String Translation working.', 'wpml-string-translation' ); ?></p>
+# </div>
+
+msgid "Please activate WPML Multilingual CMS to have WPML String Translation working."
+msgstr ""
+
+# <div class="message error wpml-admin-notice wpml-st-inactive wpml-not-configured">
+# <p><?php esc_html_e( 'WPML String Translation is enabled but not effective. Please finish the installation of WPML first.', 'wpml-string-translation' ); ?></p>
+# </div>
+
+msgid "WPML String Translation is enabled but not effective. Please finish the installation of WPML first."
+msgstr ""
+
+# class="message error wpml-admin-notice wpml-st-inactive wpml-outdated">
+# <p><?php esc_html_e( 'WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first.', 'wpml-string-translation' ); ?></p>
+# </div>
+
+msgid "WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first."
+msgstr ""
+
+# }
+# $messages[] = _x( 'WPML has completed importing the content of .mo files to the String Translation table.', 'MO Import completed 1/3', 'wpml-string-translation' );
+# $messages[] = _x( 'From now on, the following .mo files will not load: %s', 'MO Import completed 2/3', 'wpml-string-translation' );
+
+msgctxt "MO Import completed 1/3"
+msgid "WPML has completed importing the content of .mo files to the String Translation table."
+msgstr ""
+
+# $messages[] = _x( 'WPML has completed importing the content of .mo files to the String Translation table.', 'MO Import completed 1/3', 'wpml-string-translation' );
+# $messages[] = _x( 'From now on, the following .mo files will not load: %s', 'MO Import completed 2/3', 'wpml-string-translation' );
+# $messages[] = _x( 'When you update plugins or the theme, WPML will rescan their translation files.', 'MO Import completed 3/3', 'wpml-string-translation' );
+
+msgctxt "MO Import completed 2/3"
+msgid "From now on, the following .mo files will not load: %s"
+msgstr ""
+
+# $messages[] = _x( 'From now on, the following .mo files will not load: %s', 'MO Import completed 2/3', 'wpml-string-translation' );
+# $messages[] = _x( 'When you update plugins or the theme, WPML will rescan their translation files.', 'MO Import completed 3/3', 'wpml-string-translation' );
+# $this->queue->mark_as_finished();
+
+msgctxt "MO Import completed 3/3"
+msgid "When you update plugins or the theme, WPML will rescan their translation files."
+msgstr ""
+
+# $data[]     = '<strong>' . $this->queue->get_pending() . '</strong>';
+# $messages[] = _x( 'WPML is currently importing translations from the .mo files of themes and plugins into the String Translation table.', 'MO Import im progress 1/3', 'wpml-string-translation' );
+# $messages[] = _x( 'Right now, there are still %s .mo files to scan and import.', 'MO Import im progress 2/3', 'wpml-string-translation' );
+
+msgctxt "MO Import im progress 1/3"
+msgid "WPML is currently importing translations from the .mo files of themes and plugins into the String Translation table."
+msgstr ""
+
+# $messages[] = _x( 'WPML is currently importing translations from the .mo files of themes and plugins into the String Translation table.', 'MO Import im progress 1/3', 'wpml-string-translation' );
+# $messages[] = _x( 'Right now, there are still %s .mo files to scan and import.', 'MO Import im progress 2/3', 'wpml-string-translation' );
+# $messages[] = _x( "This is happening in small pieces, so that the import doesn't impact the speed of your site too much.", 'MO Import im progress 3/3', 'wpml-string-translation' );
+
+msgctxt "MO Import im progress 2/3"
+msgid "Right now, there are still %s .mo files to scan and import."
+msgstr ""
+
+# $messages[] = _x( 'Right now, there are still %s .mo files to scan and import.', 'MO Import im progress 2/3', 'wpml-string-translation' );
+# $messages[] = _x( "This is happening in small pieces, so that the import doesn't impact the speed of your site too much.", 'MO Import im progress 3/3', 'wpml-string-translation' );
+# } else {
+
+msgctxt "MO Import im progress 3/3"
+msgid "This is happening in small pieces, so that the import doesn't impact the speed of your site too much."
+msgstr ""
+
+# $messages   = array();
+# $messages[] = _x( "WPML will gradually import translations from your site's .mo files into the String Translation table. When this import is complete, WPML will prevent the .mo files from loading.", 'MO Loading disabled 1/2', 'wpml-string-translation' );
+# $messages[] = _x( "While this process is ongoing, you are not going to feel a speed improvement. Once it's ready, pages will load faster.", 'MO Loading disabled 2/2', 'wpml-string-translation' );
+
+msgctxt "MO Loading disabled 1/2"
+msgid "WPML will gradually import translations from your site's .mo files into the String Translation table. When this import is complete, WPML will prevent the .mo files from loading."
+msgstr ""
+
+# $messages[] = _x( "WPML will gradually import translations from your site's .mo files into the String Translation table. When this import is complete, WPML will prevent the .mo files from loading.", 'MO Loading disabled 1/2', 'wpml-string-translation' );
+# $messages[] = _x( "While this process is ongoing, you are not going to feel a speed improvement. Once it's ready, pages will load faster.", 'MO Loading disabled 2/2', 'wpml-string-translation' );
+# $message    = '<p>' . implode( '</p><p>', $messages ) . '</p>';
+
+msgctxt "MO Loading disabled 2/2"
+msgid "While this process is ongoing, you are not going to feel a speed improvement. Once it's ready, pages will load faster."
+msgstr ""
+
+# <p>
+# <?php esc_html_e( "The WPML Page Builders plugin that you're using is now part of WPML.", 'wpml-string-translation' ); ?>
+# </p>
+
+msgid "The WPML Page Builders plugin that you're using is now part of WPML."
+msgstr ""
+
+# <p>
+# <?php esc_html_e( 'You need to deactivate the separate plugin.', 'wpml-string-translation' ); ?>
+# </p>
+
+msgid "You need to deactivate the separate plugin."
+msgstr ""
+
+# <p>
+# <?php esc_html_e( 'No worries, the full functionality is preserved in WPML String Translation.', 'wpml-string-translation' ); ?>
+# </p>
+
+msgid "No worries, the full functionality is preserved in WPML String Translation."
+msgstr ""
+
+# <p>
+# <a class="button-primary" href="<?php echo esc_url( $plugins_url ); ?>"><?php esc_html_e( 'Deactivate WPML Page Builders', 'wpml-string-translation' ); ?></a>
+# </p>
+
+msgid "Deactivate WPML Page Builders"
+msgstr ""
+
+# case 'tab_title':
+# return esc_html__( 'Tabs: Title', 'wpml-string-translation' );
+#
+
+msgid "Tabs: Title"
+msgstr ""
+
+# case 'tab_content':
+# return esc_html__( 'Tabs: Content', 'wpml-string-translation' );
+#
+
+msgid "Tabs: Content"
+msgstr ""
+
+# if ( 'title' === $field ) {
+# return esc_html__( 'Price list: title', 'wpml-string-translation' );
+# }
+
+msgid "Price list: title"
+msgstr ""
+
+# if ( 'item_description' === $field ) {
+# return esc_html__( 'Pricing list: description', 'wpml-string-translation' );
+# }
+
+msgid "Pricing list: description"
+msgstr ""
+
+# if ( 'url' === $field ) {
+# return esc_html__( 'Pricing list: link', 'wpml-string-translation' );
+# }
+
+msgid "Pricing list: link"
+msgstr ""
+
+# case 'tab_title':
+# return esc_html__( 'Toggle: Title', 'wpml-string-translation' );
+#
+
+msgid "Toggle: Title"
+msgstr ""
+
+# case 'tab_content':
+# return esc_html__( 'Toggle: Content', 'wpml-string-translation' );
+#
+
+msgid "Toggle: Content"
+msgstr ""
+
+# if ( 'item_text' === $field ) {
+# return esc_html__( 'Price table: text', 'wpml-string-translation' );
+# }
+
+msgid "Price table: text"
+msgstr ""
+
+# case 'text':
+# return esc_html__( 'Icon List: Text', 'wpml-string-translation' );
+#
+
+msgid "Icon List: Text"
+msgstr ""
+
+# case 'url':
+# return esc_html__( 'Icon List: Link URL', 'wpml-string-translation' );
+#
+
+msgid "Icon List: Link URL"
+msgstr ""
+
+# case 'field_label':
+# return esc_html__( 'Form: Field label', 'wpml-string-translation' );
+#
+
+msgid "Form: Field label"
+msgstr ""
+
+# case 'placeholder':
+# return esc_html__( 'Form: Field placeholder', 'wpml-string-translation' );
+#
+
+msgid "Form: Field placeholder"
+msgstr ""
+
+# case 'tab_title':
+# return esc_html__( 'Accordion: Title', 'wpml-string-translation' );
+#
+
+msgid "Accordion: Title"
+msgstr ""
+
+# case 'tab_content':
+# return esc_html__( 'Accordion: Content', 'wpml-string-translation' );
+#
+
+msgid "Accordion: Content"
+msgstr ""
+
+# case 'heading':
+# return esc_html__( 'Slides: heading', 'wpml-string-translation' );
+#
+
+msgid "Slides: heading"
+msgstr ""
+
+# case 'description':
+# return esc_html__( 'Slides: description', 'wpml-string-translation' );
+#
+
+msgid "Slides: description"
+msgstr ""
+
+# case 'button_text':
+# return esc_html__( 'Slides: button text', 'wpml-string-translation' );
+#
+
+msgid "Slides: button text"
+msgstr ""
+
+# 'field'       => 'title',
+# 'type'        => __( 'Heading', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Heading"
+msgstr ""
+
+# 'field'       => 'editor',
+# 'type'        => __( 'Text editor', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Text editor"
+msgstr ""
+
+# 'field'       => 'url',
+# 'type'        => __( 'Icon: Link URL', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Icon: Link URL"
+msgstr ""
+
+# 'field'       => 'link',
+# 'type'        => __( 'Video: Link', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Video: Link"
+msgstr ""
+
+# 'field'       => 'vimeo_link',
+# 'type'        => __( 'Video: Vimeo link', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Video: Vimeo link"
+msgstr ""
+
+# 'field'       => 'button_text',
+# 'type'        => __( 'Login: Button text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Login: Button text"
+msgstr ""
+
+# 'field'       => 'user_label',
+# 'type'        => __( 'Login: User label', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Login: User label"
+msgstr ""
+
+# 'field'       => 'user_placeholder',
+# 'type'        => __( 'Login: User placeholder', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Login: User placeholder"
+msgstr ""
+
+# 'field'       => 'password_label',
+# 'type'        => __( 'Login: Password label', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Login: Password label"
+msgstr ""
+
+# 'field'       => 'password_placeholder',
+# 'type'        => __( 'Login: Password placeholder', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Login: Password placeholder"
+msgstr ""
+
+# 'field'       => 'text',
+# 'type'        => __( 'Button', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Button"
+msgstr ""
+
+# 'field'       => 'url',
+# 'type'        => __( 'Button: Link URL', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Button: Link URL"
+msgstr ""
+
+# 'field'       => 'html',
+# 'type'        => __( 'HTML', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "HTML"
+msgstr ""
+
+# 'field'       => 'caption',
+# 'type'        => __( 'Image: Caption', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Image: Caption"
+msgstr ""
+
+# 'field'       => 'url',
+# 'type'        => __( 'Image: Link URL', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Image: Link URL"
+msgstr ""
+
+# 'field'       => 'alert_title',
+# 'type'        => __( 'Alert title', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Alert title"
+msgstr ""
+
+# 'field'       => 'alert_description',
+# 'type'        => __( 'Alert description', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Alert description"
+msgstr ""
+
+# 'field'       => 'testimonial_content',
+# 'type'        => __( 'Testimonial content', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Testimonial content"
+msgstr ""
+
+# 'field'       => 'testimonial_name',
+# 'type'        => __( 'Testimonial name', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Testimonial name"
+msgstr ""
+
+# 'field'       => 'testimonial_job',
+# 'type'        => __( 'Testimonial job', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Testimonial job"
+msgstr ""
+
+# 'field'       => 'title',
+# 'type'        => __( 'Progress: Title', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Progress: Title"
+msgstr ""
+
+# 'field'       => 'inner_text',
+# 'type'        => __( 'Progress: Inner text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Progress: Inner text"
+msgstr ""
+
+# 'field'       => 'starting_number',
+# 'type'        => __( 'Starting number', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Starting number"
+msgstr ""
+
+# 'field'       => 'title',
+# 'type'        => __( 'Title', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Title"
+msgstr ""
+
+# 'field'       => 'title_text',
+# 'type'        => __( 'Icon Box: Title text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Icon Box: Title text"
+msgstr ""
+
+# 'field'       => 'description_text',
+# 'type'        => __( 'Icon Box: Description text', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Icon Box: Description text"
+msgstr ""
+
+# 'field'       => 'title_text',
+# 'type'        => __( 'Image Box: Title text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Image Box: Title text"
+msgstr ""
+
+# 'field'       => 'description_text',
+# 'type'        => __( 'Image Box: Description text', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Image Box: Description text"
+msgstr ""
+
+# 'field'       => 'title_text_a',
+# 'type'        => __( 'Flip Box: Title text side A', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Flip Box: Title text side A"
+msgstr ""
+
+# 'field'       => 'description_text_a',
+# 'type'        => __( 'Flip Box: Description text side A', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Flip Box: Description text side A"
+msgstr ""
+
+# 'field'       => 'title_text_b',
+# 'type'        => __( 'Flip Box: Title text side B', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Flip Box: Title text side B"
+msgstr ""
+
+# 'field'       => 'description_text_b',
+# 'type'        => __( 'Flip Box: Description text side B', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Flip Box: Description text side B"
+msgstr ""
+
+# 'field'       => 'button_text',
+# 'type'        => __( 'Flip Box: Button text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Flip Box: Button text"
+msgstr ""
+
+# 'field'       => 'heading',
+# 'type'        => __( 'Price Table: Heading', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Price Table: Heading"
+msgstr ""
+
+# 'field'       => 'sub_heading',
+# 'type'        => __( 'Price Table: Sub heading', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Price Table: Sub heading"
+msgstr ""
+
+# 'field'       => 'period',
+# 'type'        => __( 'Price Table: Period', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Price Table: Period"
+msgstr ""
+
+# 'field'       => 'button_text',
+# 'type'        => __( 'Price Table: Button text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Price Table: Button text"
+msgstr ""
+
+# 'field'       => 'footer_additional_info',
+# 'type'        => __( 'Price Table: Footer additional info', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Price Table: Footer additional info"
+msgstr ""
+
+# 'field'       => 'ribbon_title',
+# 'type'        => __( 'Price Table: Ribbon title', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Price Table: Ribbon title"
+msgstr ""
+
+# 'field'       => 'url',
+# 'type'        => __( 'Price Table: Button link', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Price Table: Button link"
+msgstr ""
+
+# 'field'       => 'form_name',
+# 'type'        => __( 'Form: name', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: name"
+msgstr ""
+
+# 'field'       => 'button_text',
+# 'type'        => __( 'Form: Button text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Button text"
+msgstr ""
+
+# 'field'       => 'email_subject',
+# 'type'        => __( 'Form: Email subject', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Email subject"
+msgstr ""
+
+# 'field'       => 'email_from_name',
+# 'type'        => __( 'Form: Email from name', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Email from name"
+msgstr ""
+
+# 'field'       => 'success_message',
+# 'type'        => __( 'Form: Success message', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Success message"
+msgstr ""
+
+# 'field'       => 'error_message',
+# 'type'        => __( 'Form: Error message', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Error message"
+msgstr ""
+
+# 'field'       => 'required_message',
+# 'type'        => __( 'Form: Required message', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Required message"
+msgstr ""
+
+# 'field'       => 'invalid_message',
+# 'type'        => __( 'Form: Invalid message', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Invalid message"
+msgstr ""
+
+# 'field'       => 'classic_read_more_text',
+# 'type'        => __( 'Posts: Read more text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Posts: Read more text"
+msgstr ""
+
+# case 'label':
+# return esc_html__( 'Tab Item Label', 'wpml-string-translation' );
+#
+
+msgid "Tab Item Label"
+msgstr ""
+
+# case 'content':
+# return esc_html__( 'Tab Item Content', 'wpml-string-translation' );
+#
+
+msgid "Tab Item Content"
+msgstr ""
+
+# case 'label':
+# return esc_html__( 'Accordion Item Label', 'wpml-string-translation' );
+#
+
+msgid "Accordion Item Label"
+msgstr ""
+
+# case 'content':
+# return esc_html__( 'Accordion Item Content', 'wpml-string-translation' );
+#
+
+msgid "Accordion Item Content"
+msgstr ""
+
+# case 'title':
+# return esc_html__( 'Content Slider: Slide heading', 'wpml-string-translation' );
+#
+
+msgid "Content Slider: Slide heading"
+msgstr ""
+
+# case 'text':
+# return esc_html__( 'Content Slider: Slide content', 'wpml-string-translation' );
+#
+
+msgid "Content Slider: Slide content"
+msgstr ""
+
+# case 'cta_text':
+# return esc_html__( 'Content Slider: Slide call to action text', 'wpml-string-translation' );
+#
+
+msgid "Content Slider: Slide call to action text"
+msgstr ""
+
+# case 'link':
+# return esc_html__( 'Content Slider: Slide call to action link', 'wpml-string-translation' );
+#
+
+msgid "Content Slider: Slide call to action link"
+msgstr ""
+
+# case 'title':
+# return esc_html__( 'Pricing table: Title', 'wpml-string-translation' );
+#
+
+msgid "Pricing table: Title"
+msgstr ""
+
+# case 'button_text':
+# return esc_html__( 'Pricing table: Button text', 'wpml-string-translation' );
+#
+
+msgid "Pricing table: Button text"
+msgstr ""
+
+# case 'button_url':
+# return esc_html__( 'Pricing table: Button link', 'wpml-string-translation' );
+#
+
+msgid "Pricing table: Button link"
+msgstr ""
+
+# case 'features':
+# return esc_html__( 'Pricing table: Feature', 'wpml-string-translation' );
+#
+
+msgid "Pricing table: Feature"
+msgstr ""
+
+# case 'price':
+# return esc_html__( 'Pricing table: Price', 'wpml-string-translation' );
+#
+
+msgid "Pricing table: Price"
+msgstr ""
+
+# case 'duration':
+# return esc_html__( 'Pricing table: Duration', 'wpml-string-translation' );
+#
+
+msgid "Pricing table: Duration"
+msgstr ""
+
+# case 'link':
+# return esc_html__( 'Icon link', 'wpml-string-translation' );
+#
+
+msgid "Icon link"
+msgstr ""
+
+# 'field'       => 'text',
+# 'type'        => __( 'Text Editor', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Text Editor"
+msgstr ""
+
+# 'field'       => 'link',
+# 'type'        => __( 'Link', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Link"
+msgstr ""
+
+# 'field'       => 'title',
+# 'type'        => __( 'Call to Action: Heading', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Call to Action: Heading"
+msgstr ""
+
+# 'field'       => 'text',
+# 'type'        => __( 'Call to Action: Text', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Call to Action: Text"
+msgstr ""
+
+# 'field'       => 'btn_text',
+# 'type'        => __( 'Call to Action: Button text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Call to Action: Button text"
+msgstr ""
+
+# 'field'       => 'btn_link',
+# 'type'        => __( 'Call to Action: Button link', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Call to Action: Button link"
+msgstr ""
+
+# 'field'       => 'text',
+# 'type'        => __( 'Icon text', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Icon text"
+msgstr ""
+
+# 'field'       => 'title',
+# 'type'        => __( 'Callout: Heading', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Callout: Heading"
+msgstr ""
+
+# 'field'       => 'text',
+# 'type'        => __( 'Callout: Text', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Callout: Text"
+msgstr ""
+
+# 'field'       => 'cta_text',
+# 'type'        => __( 'Callout: Call to action text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Callout: Call to action text"
+msgstr ""
+
+# 'field'       => 'link',
+# 'type'        => __( 'Callout: Link', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Callout: Link"
+msgstr ""
+
+# 'field'       => 'success_message',
+# 'type'        => __( 'Contact Form: Success message', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Contact Form: Success message"
+msgstr ""
+
+# 'field'       => 'btn_text',
+# 'type'        => __( 'Contact Form: Button text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Contact Form: Button text"
+msgstr ""
+
+# 'field'       => 'success_url',
+# 'type'        => __( 'Contact Form: Redirect link', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Contact Form: Redirect link"
+msgstr ""
+
+# 'field'       => 'before_number_text',
+# 'type'        => __( 'Number Counter: Text before number', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Number Counter: Text before number"
+msgstr ""
+
+# 'field'       => 'after_number_text',
+# 'type'        => __( 'Number Counter: Text after number', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Number Counter: Text after number"
+msgstr ""
+
+# 'field'       => 'heading',
+# 'type'        => __( 'Testimonial heading', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Testimonial heading"
+msgstr ""
+
+# 'field'       => 'success_message',
+# 'type'        => __( 'Subscribe form: Success message', 'wpml-string-translation' ),
+# 'editor_type' => 'VISUAL'
+
+msgid "Subscribe form: Success message"
+msgstr ""
+
+# 'field'       => 'btn_text',
+# 'type'        => __( 'Subscribe form: Button text', 'wpml-string-translation' ),
+# 'editor_type' => 'LINE'
+
+msgid "Subscribe form: Button text"
+msgstr ""
+
+# 'field'       => 'success_url',
+# 'type'        => __( 'Subscribe form: Redirect link', 'wpml-string-translation' ),
+# 'editor_type' => 'LINK'
+
+msgid "Subscribe form: Redirect link"
+msgstr ""
+
+# 'positions' => $positions,
+# 'no_results_label' => __( 'No records found', 'wpml-string-translation' ),
+# 'highlight_color' => $highlight_color,
+
+msgid "No records found"
+msgstr ""
+
+# 'theme_localization_type' => array(
+# 'title' => __( "Translate strings with ST and don't load .mo files", 'wpml-string-translation' ),
+# 'description' => __( 'Some themes and plugins have huge .mo files that take a long time to load. WPML already knows the strings in these files and loads only the necessary strings to display each page.', 'wpml-string-translation' ),
+
+msgid "Translate strings with ST and don't load .mo files"
+msgstr ""
+
+# 'title' => __( "Translate strings with ST and don't load .mo files", 'wpml-string-translation' ),
+# 'description' => __( 'Some themes and plugins have huge .mo files that take a long time to load. WPML already knows the strings in these files and loads only the necessary strings to display each page.', 'wpml-string-translation' ),
+# 'value' => 3,
+
+msgid "Some themes and plugins have huge .mo files that take a long time to load. WPML already knows the strings in these files and loads only the necessary strings to display each page."
+msgstr ""
+
+# 'title' => __( 'Assume that all texts in PHP strings are in English', 'wpml-string-translation' ),
+# 'description' => __( "Almost all themes and plugins have texts in English. Reducing the check for the string's language simplifies and shortens the string translation process.", 'wpml-string-translation' ),
+# 'value' => 1,
+
+msgid "Almost all themes and plugins have texts in English. Reducing the check for the string's language simplifies and shortens the string translation process."
+msgstr ""
+
+# $notice->add_display_callback( array( __CLASS__, 'only_display_notice_if_this_class_exists' ) );
+# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Apply those changes', 'wpml-string-translation' ), '#', false, false, 'button-primary' ) );
+# $notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Skip', 'wpml-string-translation' ), '#', false, true ) );
+
+msgid "Apply those changes"
+msgstr ""
+
+# $options_nonce = 'wpml-localization-options-nonce';
+# $message  = '<h3>' . __( 'Your site can run faster', 'wpml-string-translation' ) . '</h3>';
+# $message .= __( 'This version of WPML includes new settings that will help your site run faster. We recommend changing the following settings, which are all available in WPML->Theme and plugins localization:', 'wpml-string-translation' );
+
+msgid "Your site can run faster"
+msgstr ""
+
+# $message  = '<h3>' . __( 'Your site can run faster', 'wpml-string-translation' ) . '</h3>';
+# $message .= __( 'This version of WPML includes new settings that will help your site run faster. We recommend changing the following settings, which are all available in WPML->Theme and plugins localization:', 'wpml-string-translation' );
+#
+
+msgid "This version of WPML includes new settings that will help your site run faster. We recommend changing the following settings, which are all available in WPML->Theme and plugins localization:"
+msgstr ""
+
+# $message .= '<input type="hidden" id="' . $options_nonce . '" name="' . $options_nonce . '" value="' . wp_create_nonce( $options_nonce ) . '">';
+# $message .= '<div style="display:none" class="js-done">' . __( 'Settings saved', 'wpml-string-translation' ) . '</div>';
+# $message .= '<div style="display:none" class="js-error">' . __( 'Error', 'wpml-string-translation' ) . '</div>';
+
+msgid "Settings saved"
+msgstr ""
+
+# $message .= '<div style="display:none" class="js-done">' . __( 'Settings saved', 'wpml-string-translation' ) . '</div>';
+# $message .= '<div style="display:none" class="js-error">' . __( 'Error', 'wpml-string-translation' ) . '</div>';
+#
+
+msgid "Error"
+msgstr ""
+
+# if ( ! $can_translate ) {
+# $form_disabled_reason = __( "You can't translate this string because it hasn't been sent for translation in this language", 'wpml-string-translation' );
+# }
+
+msgid "You can't translate this string because it hasn't been sent for translation in this language"
+msgstr ""
+
+# $can_translate        = false;
+# $form_disabled_reason = __( "You can't translate this string because it's assigned to another translator", 'wpml-string-translation' );
+# }
+
+msgid "You can't translate this string because it's assigned to another translator"
+msgstr ""
+
+# <?php if ( isset( $icl_string['translations'][ $lang['code'] ]['mo_string'] ) && $icl_string['translations'][ $lang['code'] ]['mo_string'] ) { ?>
+# <span class="wpml-st-mo-translation" title="<?php esc_attr_e( 'Imported translation', 'wpml-string-translations' ); ?>">
+# <?php echo $icl_string['translations'][ $lang['code'] ]['mo_string']; ?>
+
+msgid "Imported translation"
+msgstr ""
+
+# ?>
+# <a class="thickbox" title="<?php esc_attr_e( 'view in source', 'wpml-string-translation' ) ?>"
+# href="admin.php?page=<?php echo WPML_ST_FOLDER ?>%2Fmenu%2Fstring-translation.php&amp;icl_action=view_string_in_source&amp;string_id=<?php
+
+msgid "view in source"
+msgstr ""
+
+# src="<?php echo WPML_ST_URL ?>/res/img/view-in-source.png" width="16" height="16"
+# alt="<?php esc_attr_e( 'view in page', 'wpml-string-translation' ) ?>"/></a>
+# <?php
+
+msgid "view in page"
+msgstr ""
+
+# <td colspan="6" align="center">
+# <?php esc_html_e( 'No strings found', 'wpml-string-translation' ) ?>
+# </td>
+
+msgid "No strings found"
+msgstr ""
+
+# <th scope="col"><?php esc_html_e( 'Domain', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php esc_html_e( 'Context', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php esc_html_e( 'Name', 'wpml-string-translation' ) ?></th>
+
+msgid "Context"
+msgstr ""
+
+# <th scope="col"><?php esc_html_e( 'Context', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php esc_html_e( 'Name', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php esc_html_e( 'View', 'wpml-string-translation' ) ?></th>
+
+msgid "Name"
+msgstr ""
+
+# <th scope="col"><?php esc_html_e( 'Name', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php esc_html_e( 'View', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php esc_html_e( 'String', 'wpml-string-translation' ) ?></th>
+
+msgid "View"
+msgstr ""
+
+# <th scope="col"><?php esc_html_e( 'String', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php esc_html_e( 'Status', 'wpml-string-translation' ) ?></th>
+# </tr>
+
+msgid "Status"
+msgstr ""
+
+# <div style="float:right;">
+# <a href="#icl-st-toggle-translations"><?php esc_html_e( 'translations', 'wpml-string-translation' ) ?></a>
+# </div>
+
+msgid "translations"
+msgstr ""
+
+# if ( isset( $icl_string['translations'][ $lang['code'] ]['mo_string'] ) && $icl_string['translations'][ $lang['code'] ]['mo_string'] ) {
+# esc_html_e( 'Use my translation', 'wpml-string-translation' );
+# } else {
+
+msgid "Use my translation"
 msgstr ""
 
 # } else {
-# $message = __( 'Error: no strings selected', 'wpml-string-translation' );
+# esc_html_e( 'Translation is complete', 'wpml-string-translation' );
 # }
 
-msgid "Error: no strings selected"
+msgid "Translation is complete"
 msgstr ""
 
-# add_submenu_page( $top_page,
-# __( 'String Translation', 'wpml-string-translation' ),
-# __( 'String Translation', 'wpml-string-translation' ),
+# class="wpml-change-language-dialog"
+# title="<?php _e( 'Change the language of selected strings', 'wpml-string-translation' ); ?>"
+# style="display:none"
 
-msgid "String Translation"
+msgid "Change the language of selected strings"
 msgstr ""
 
-# $links[ ] = '<a href="admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php">' .
-# __( 'Configure', 'wpml-string-translation' ) . '</a>';
-# }
+#
+# <h2 class="summary js-summary" data-text="<?php _e( 'The selected strings are currently in %LANG%', 'wpml-string-translation' ); ?>"></h2>
+#
 
-msgid "Configure"
+msgid "The selected strings are currently in %LANG%"
 msgstr ""
 
-# 
-# icl_register_string('WP',__('Blog Title','wpml-string-translation'), get_option('blogname'));
-# icl_register_string('WP',__('Tagline', 'wpml-string-translation'), get_option('blogdescription'));
+#
+# <?php _e('Change the language to: ', 'wpml-string-translation'); ?>
+#
 
-msgid "Blog Title"
+msgid "Change the language to: "
 msgstr ""
 
-# icl_register_string('WP',__('Blog Title','wpml-string-translation'), get_option('blogname'));
-# icl_register_string('WP',__('Tagline', 'wpml-string-translation'), get_option('blogdescription'));
-# 
+# class="wpml-change-language-dialog"
+# title="<?php _e( 'Language of domains', 'wpml-string-translation' ); ?>"
+# style="display:none"
 
-msgid "Tagline"
+msgid "Language of domains"
+msgstr ""
+
+# <label for="wpml-domain-select">
+# <?php _e( 'Select for which domain to set the language: ', 'wpml-string-translation' ); ?>
+# </label>
+
+msgid "Select for which domain to set the language: "
+msgstr ""
+
+# <select id="wpml-domain-select">
+# <option value="" selected="selected"><?php _e( '-- Please select --', 'wpml-string-translation' ); ?></option>
+# <?php
+
+msgid "-- Please select --"
+msgstr ""
+
+# <p class="wpml-cdl-info">
+# <?php _e( 'This domain currently has the following strings:', 'wpml-string-translation'); ?>
+# </p>
+
+msgid "This domain currently has the following strings:"
+msgstr ""
+
+# <td class="manage-column column-cb check-column"><input class="js-all-check" type="checkbox" value="all" /></td>
+# <th><?php _e( 'Current source language', 'wpml-string-translation' ); ?></th>
+# <th class="num"><?php _e( 'Number of strings', 'wpml-string-translation' ); ?></th>
+
+msgid "Current source language"
+msgstr ""
+
+# <th><?php _e( 'Current source language', 'wpml-string-translation' ); ?></th>
+# <th class="num"><?php _e( 'Number of strings', 'wpml-string-translation' ); ?></th>
+# </tr>
+
+msgid "Number of strings"
+msgstr ""
+
+# <div class="js-lang-select-area wpml-cdl-info">
+# <label for="wpml-source-domain-language-change"><?php _e( 'Set the source language of these strings to:', 'wpml-string-translation'); ?></label>
+# <?php
+
+msgid "Set the source language of these strings to:"
+msgstr ""
+
+# <input id="wpml-cdl-set-default" type="checkbox" class="js-default" value="use-as-default" checked="checked" />
+# <?php _e( 'Use this language as the default language for new strings in this domain', 'wpml-string-translation'); ?>
+# </label>
+
+msgid "Use this language as the default language for new strings in this domain"
+msgstr ""
+
+# $strings = array(
+# 'title'   => __( 'Dismiss all notices', 'wpml-string-translation' ),
+# 'message' => __( 'Also prevent similar messages in the future?', 'wpml-string-translation' ),
+
+msgid "Dismiss all notices"
+msgstr ""
+
+# 'title'   => __( 'Dismiss all notices', 'wpml-string-translation' ),
+# 'message' => __( 'Also prevent similar messages in the future?', 'wpml-string-translation' ),
+# 'no'      => __( 'No - keep showing these message', 'wpml-string-translation' ),
+
+msgid "Also prevent similar messages in the future?"
+msgstr ""
+
+# 'message' => __( 'Also prevent similar messages in the future?', 'wpml-string-translation' ),
+# 'no'      => __( 'No - keep showing these message', 'wpml-string-translation' ),
+# 'yes'     => __( 'Yes - disable these notifications completely', 'wpml-string-translation' ),
+
+msgid "No - keep showing these message"
+msgstr ""
+
+# 'no'      => __( 'No - keep showing these message', 'wpml-string-translation' ),
+# 'yes'     => __( 'Yes - disable these notifications completely', 'wpml-string-translation' ),
+# );
+
+msgid "Yes - disable these notifications completely"
+msgstr ""
+
+# 'files' => $files,
+# 'no_files_message' => __( 'Files already scanned.', 'wpml-string-translation' ),
+# );
+
+msgid "Files already scanned."
 msgstr ""
 
 # 'type' => 'update',
 # 'text' => __( 'You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!
-# Either submit the current basket and then add the post or delete the posts of differing language in the current basket', 'sitepress' )
+# Either submit the current basket and then add the post or delete the posts of differing language in the current basket', 'wpml-string-translation' )
 
 msgid "You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!\n\t\t\t\t\tEither submit the current basket and then add the post or delete the posts of differing language in the current basket"
 msgstr ""
 
-# 
-# $select_one_lang_message = __( 'Please select at least one language to translate into.', 'sitepress' );
-# 
+#
+# $select_one_lang_message = __( 'Please select at least one language to translate into.', 'wpml-string-translation' );
+#
 
 msgid "Please select at least one language to translate into."
 msgstr ""
 
 # 'type' => 'error',
-# 'text' => __( 'Please select at least one document to translate.', 'sitepress' )
+# 'text' => __( 'Please select at least one document to translate.', 'wpml-string-translation' )
 # ) );
 
 msgid "Please select at least one document to translate."
 msgstr ""
 
 # 'type' => 'update',
-# 'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already in progress.', 'sitepress' ), $post_title, $language_name )
+# 'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already in progress.', 'wpml-string-translation' ), $post_title, $language_name )
 # );
 
 msgid "Post \"%s\" will be ignored for %s, because translation is already in progress."
 msgstr ""
 
 # 'type' => 'update',
-# 'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already waiting for translator.', 'sitepress' ), $post_title, $language_name )
+# 'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already waiting for translator.', 'wpml-string-translation' ), $post_title, $language_name )
 # );
 
 msgid "Post \"%s\" will be ignored for %s, because translation is already waiting for translator."
 msgstr ""
 
-# 
-# $table_title                 = __( 'Package Management', 'wpml-string-translation' );
-# $package_kind_label          = __( 'Display packages for this kind:', 'wpml-string-translation' );
-
-msgid "Package Management"
-msgstr ""
-
-# $table_title                 = __( 'Package Management', 'wpml-string-translation' );
-# $package_kind_label          = __( 'Display packages for this kind:', 'wpml-string-translation' );
-# $package_kind_options[ - 1 ] = __( 'Display packages for this kind:', 'wpml-string-translation' );
-
-msgid "Display packages for this kind:"
-msgstr ""
-
-# 
-# <input id="delete_packages" type="button" class="button-primary" value="<?php echo __( 'Delete Selected Packages', 'wpml-string-translation' ) ?>" disabled="disabled"/>
-# &nbsp;
-
-msgid "Delete Selected Packages"
-msgstr ""
-
-# <span class="spinner"></span>
-# <span style="display:none" class="js-delete-confirm-message"><?php echo __( "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too.", 'wpml-string-translation' ) ?></span>
-# 
-
-msgid "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too."
-msgstr ""
-
-# </th>
-# <th scope="col"><?php echo __( 'Kind', 'wpml-string-translation' ) ?></th>
-# <th scope="col"><?php echo __( 'Name', 'wpml-string-translation' ) ?></th>
-
-msgid "Kind"
-msgstr ""
-
-# <th scope="col"><?php echo __( 'Name', 'wpml-string-translation' ) ?></th>
-# <th scope="col"><?php echo __( 'Info', 'wpml-string-translation' ) ?></th>
-# </tr>
-
-msgid "Info"
-msgstr ""
-
-# public function render_string_package_status( $string_count, $translation_in_progress, $default_package_language ) {
-# $package_statuses[ ] = sprintf( __( 'Contains %s strings', 'wpml-string-translation' ), $string_count );
-# if ( $translation_in_progress ) {
-
-msgid "Contains %s strings"
-msgstr ""
-
-# if ( $translation_in_progress ) {
-# $package_statuses[ ] = '(' . __( 'Translation is in progress', 'wpml-string-translation' ) . ')';
+# if ( ! $all_ok ) {
+# $response[ 'error' ] = __( 'Some of the strings selected belong to packages. You can only change the language of these strings if all strings in the packages are selected.', 'wpml-string-translation');
 # }
 
-msgid "Translation is in progress"
+msgid "Some of the strings selected belong to packages. You can only change the language of these strings if all strings in the packages are selected."
 msgstr ""
 
-# }
-# $package_statuses[ ] = __( 'Default package language', 'wpml-string-translation' ) . ': ' . $default_package_language;
-# 
-
-msgid "Default package language"
-msgstr ""
-
-# <td colspan="6" align="center">
-# <strong><?php echo __( 'No packages found', 'wpml-string-translation' ) ?></strong>
-# </td>
-
-msgid "No packages found"
-msgstr ""
-
-# <label for="select_all_package_<?php echo $position; ?>" style="display: none;">
-# <?php _e( 'Select All', 'wpml-string-translation' ) ?>
-# </label>
-
-msgid "Select All"
-msgstr ""
-
-# $this->top_page_hook = apply_filters( 'icl_menu_main_page', basename( ICL_PLUGIN_PATH ) . '/menu/languages.php' );
-# $this->menu_page_hook = add_submenu_page( $this->top_page_hook, __( 'Packages', 'wpml-string-translation' ), __( 'Packages', 'wpml-string-translation' ), 'wpml_manage_string_translation', 'wpml-package-management', array( 'WPML_Package_Translation_HTML_Packages', 'package_translation_menu' ) );
-# $this->admin_register_scripts();
-
-msgid "Packages"
-msgstr ""
-
-# 
+#
 # $this->metabox_data[ 'title' ]                  = __( 'WPML Translation', 'wpml-string-translation' );
 # if ( $this->is_package_language_active( ) ) {
 
@@ -2433,39 +2483,242 @@ msgstr ""
 msgid "WPML Package Translation is enabled but not effective. It requires <a href=\"%s\">WPML</a>, String Translation and Translation Management in order to work."
 msgstr ""
 
-# if ( ! $all_ok ) {
-# $response[ 'error' ] = __( 'Some of the strings selected belong to packages. You can only change the language of these strings if all strings in the packages are selected.', 'wpml-string-translation');
-# }
+# $this->top_page_hook = apply_filters( 'icl_menu_main_page', basename( ICL_PLUGIN_PATH ) . '/menu/languages.php' );
+# $this->menu_page_hook = add_submenu_page( $this->top_page_hook, __( 'Packages', 'wpml-string-translation' ), __( 'Packages', 'wpml-string-translation' ), 'wpml_manage_string_translation', 'wpml-package-management', array( 'WPML_Package_Translation_HTML_Packages', 'package_translation_menu' ) );
+# $this->admin_register_scripts();
 
-msgid "Some of the strings selected belong to packages. You can only change the language of these strings if all strings in the packages are selected."
+msgid "Packages"
 msgstr ""
 
-# 
+#
+# $table_title                 = __( 'Package Management', 'wpml-string-translation' );
+# $package_kind_label          = __( 'Display packages for this kind:', 'wpml-string-translation' );
+
+msgid "Package Management"
+msgstr ""
+
+# $table_title                 = __( 'Package Management', 'wpml-string-translation' );
+# $package_kind_label          = __( 'Display packages for this kind:', 'wpml-string-translation' );
+# $package_kind_options[ - 1 ] = __( 'Display packages for this kind:', 'wpml-string-translation' );
+
+msgid "Display packages for this kind:"
+msgstr ""
+
+#
+# <input id="delete_packages" type="button" class="button-primary" value="<?php echo __( 'Delete Selected Packages', 'wpml-string-translation' ) ?>" disabled="disabled"/>
+# &nbsp;
+
+msgid "Delete Selected Packages"
+msgstr ""
+
+# <span class="spinner"></span>
+# <span style="display:none" class="js-delete-confirm-message"><?php echo __( "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too.", 'wpml-string-translation' ) ?></span>
+#
+
+msgid "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too."
+msgstr ""
+
+# </th>
+# <th scope="col"><?php echo __( 'Kind', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php echo __( 'Name', 'wpml-string-translation' ) ?></th>
+
+msgid "Kind"
+msgstr ""
+
+# <th scope="col"><?php echo __( 'Name', 'wpml-string-translation' ) ?></th>
+# <th scope="col"><?php echo __( 'Info', 'wpml-string-translation' ) ?></th>
+# </tr>
+
+msgid "Info"
+msgstr ""
+
+# public function render_string_package_status( $string_count, $translation_in_progress, $default_package_language ) {
+# $package_statuses[ ] = sprintf( __( 'Contains %s strings', 'wpml-string-translation' ), $string_count );
+# if ( $translation_in_progress ) {
+
+msgid "Contains %s strings"
+msgstr ""
+
+# if ( $translation_in_progress ) {
+# $package_statuses[ ] = '(' . __( 'Translation is in progress', 'wpml-string-translation' ) . ')';
+# }
+
+msgid "Translation is in progress"
+msgstr ""
+
+# }
+# $package_statuses[ ] = __( 'Default package language', 'wpml-string-translation' ) . ': ' . $default_package_language;
+#
+
+msgid "Default package language"
+msgstr ""
+
+# <td colspan="6" align="center">
+# <strong><?php echo __( 'No packages found', 'wpml-string-translation' ) ?></strong>
+# </td>
+
+msgid "No packages found"
+msgstr ""
+
+# <label for="select_all_package_<?php echo $position; ?>" style="display: none;">
+# <?php _e( 'Select All', 'wpml-string-translation' ) ?>
+# </label>
+
+msgid "Select All"
+msgstr ""
+
+# echo '<label><input type="checkbox" name="icl_convert" value="1" />&nbsp;'
+# . __('Convert to multilingual widget', 'wpml-string-translation') . '</label>';
+# } else {
+
+msgid "Convert to multilingual widget"
+msgstr ""
+
+# if (icl_widget_text_convert_to_multilingual($widget, $instance) === TRUE) {
+# _e('This widget is converted to multilingual', 'wpml-string-translation');
+# }
+
+msgid "This widget is converted to multilingual"
+msgstr ""
+
+# if (!isset($_POST['sidebar']) || !isset($sidebars[$_POST['sidebar']])) {
+# _e('Converting to multilingual widget failed. No sidebar specified.', 'wpml-string-translation');
+# return FALSE;
+
+msgid "Converting to multilingual widget failed. No sidebar specified."
+msgstr ""
+
+# if (isset($icl_widgets_text[$icl_widget->number])) {
+# _e('Widget is already converted', 'wpml-string-translation');
+# return FALSE;
+
+msgid "Widget is already converted"
+msgstr ""
+
+# } else {
+# echo '0' . __( 'No strings selected', 'wpml-string-translation' );
+# }
+
+msgid "No strings selected"
+msgstr ""
+
+# $wpml_admin_text_config = new WPML_Admin_Text_Configuration();
+# $message = __( 'Save the following to a wpml-config.xml in the root of your theme or plugin.', 'wpml-string-translation' )
+# . "<textarea wrap=\"soft\" spellcheck=\"false\">" . htmlentities($wpml_admin_text_config->get_wpml_config_file($data[ 'icl_admin_options' ] )) .
+
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgstr ""
+
+# } else {
+# $message = __( 'Error: no strings selected', 'wpml-string-translation' );
+# }
+
+msgid "Error: no strings selected"
+msgstr ""
+
+# add_submenu_page( $top_page,
+# __( 'String Translation', 'wpml-string-translation' ),
+# __( 'String Translation', 'wpml-string-translation' ),
+
+msgid "String Translation"
+msgstr ""
+
+# $links[ ] = '<a href="admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php">' .
+# __( 'Configure', 'wpml-string-translation' ) . '</a>';
+# }
+
+msgid "Configure"
+msgstr ""
+
+#
+# icl_register_string('WP',__('Blog Title','wpml-string-translation'), get_option('blogname'));
+# icl_register_string('WP',__('Tagline', 'wpml-string-translation'), get_option('blogdescription'));
+
+msgid "Blog Title"
+msgstr ""
+
+# icl_register_string('WP',__('Blog Title','wpml-string-translation'), get_option('blogname'));
+# icl_register_string('WP',__('Tagline', 'wpml-string-translation'), get_option('blogdescription'));
+#
+
+msgid "Tagline"
+msgstr ""
+
+# if ( empty( $this->strings ) ) {
+# $this->error_str = __( 'No string found', 'wpml-string-translation' );
+# }
+
+msgid "No string found"
+msgstr ""
+
+#
+# $this->add_stat( sprintf( __( 'Scanning file: %s', 'wpml-string-translation' ), $file ) );
+# $this->add_scanned_file( $file );
+
+msgid "Scanning file: %s"
+msgstr ""
+
+# } else {
+# $this->add_stat( sprintf( __( 'Skipping file: %s', 'wpml-string-translation' ), $file ) );
+# }
+
+msgid "Skipping file: %s"
+msgstr ""
+
+# if ( $result['strings_found'] ) {
+# $result['scan_successful_message'] .= __( ' They were added to the string translation table.', 'wpml-string-translation' );
+# }
+
+msgid " They were added to the string translation table."
+msgstr ""
+
+# $result = array(
+# 'scan_successful_message' => esc_html__( 'Scan successful! WPML found %s strings.', 'wpml-string-translation' ),
+# 'files_processed_message' => esc_html__( 'The following files were processed:', 'wpml-string-translation' ),
+
+msgid "Scan successful! WPML found %s strings."
+msgstr ""
+
+# 'scan_successful_message' => esc_html__( 'Scan successful! WPML found %s strings.', 'wpml-string-translation' ),
+# 'files_processed_message' => esc_html__( 'The following files were processed:', 'wpml-string-translation' ),
+# 'files_processed' => $this->get_scanned_files(),
+
+msgid "The following files were processed:"
+msgstr ""
+
+#
+# $link_to_bottom_of_page = '<a href="#adm-proceed">' . __( 'bottom of this page', 'wpml-string-translation' ) . '</a>';
+#
+
+msgid "bottom of this page"
+msgstr ""
+
+# $html = '<br /><div class="icl_cyan_box">';
+# $html .= sprintf( __( 'This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the %s and click on the Proceed button.', 'wpml-string-translation' ), $number_of_new_strings, $number_of_updated_strings, $link_to_bottom_of_page );
+# $html .= '</div>';
+
+msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the %s and click on the Proceed button."
+msgstr ""
+
+#
 # $message = __("You have been assigned to a new translation job from %s to %s.
-# 
+#
 
 msgid "You have been assigned to a new translation job from %s to %s.\n\nStart editing: %s\n\nYou can view your other translation jobs here: %s\n\n This message was automatically sent by Translation Management running on WPML. To stop receiving these notifications contact the system administrator at %s.\n\n This email is not monitored for replies.\n\n - The WPML team\n"
 msgstr ""
 
 # $to = $user->user_email;
-# $subject = sprintf(__("You have been assigned to a new translation job on %s.", 'sitepress'), get_bloginfo('name'));
+# $subject = sprintf(__("You have been assigned to a new translation job on %s.", 'wpml-string-translation'), get_bloginfo('name'));
 # $body = sprintf($message,
 
 msgid "You have been assigned to a new translation job on %s."
 msgstr ""
 
 # if ( ! WP_Filesystem() ) {
-# throw new RuntimeException( __( 'Unable to get filesystem access', 'sitepress' ) );
+# throw new RuntimeException( __( 'Unable to get filesystem access', 'wpml-string-translation' ) );
 # }
 
 msgid "Unable to get filesystem access"
-msgstr ""
-
-# }else{
-# _e('No records found', 'wpml-string-translation');
-# }
-
-msgid "No records found"
 msgstr ""
 
 # <div class="updated">
@@ -2473,4 +2726,53 @@ msgstr ""
 # </div>
 
 msgid "Strings translations updated"
+msgstr ""
+
+# $html .= '<tr>';
+# $html .= '<td>' . sprintf( __( "Updated %s translation is available", 'wpml-string-translation' ),
+# '<strong>' . $l['display_name'] . '</strong>' ) . '</td>';
+
+msgid "Updated %s translation is available"
+msgstr ""
+
+# $html .= '<td align="right">';
+# $html .= '<a href="' . admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&amp;download_mo=' . $language . '&amp;version=' . $version_key ) . '" class="button-secondary">' . __( 'Review changes and update', 'wpml-string-translation' ) . '</a>';
+# $html .= '</td>';
+
+msgid "Review changes and update"
+msgstr ""
+
+# } else {
+# $html .= __( 'No updates found.', 'wpml-string-translation' );
+# }
+
+msgid "No updates found."
+msgstr ""
+
+# }
+# $load_xml_error_message .= sprintf(__('Failed downloading the language information file.', 'wpml-string-translation'), $errors);
+# $load_xml_error_message .= '<br/>' . sprintf(__('Errors: %s', 'wpml-string-translation'), $errors);
+
+msgid "Failed downloading the language information file."
+msgstr ""
+
+# $load_xml_error_message .= sprintf(__('Failed downloading the language information file.', 'wpml-string-translation'), $errors);
+# $load_xml_error_message .= '<br/>' . sprintf(__('Errors: %s', 'wpml-string-translation'), $errors);
+# } else {
+
+msgid "Errors: %s"
+msgstr ""
+
+# } else {
+# $load_xml_error_message .= __('Failed downloading the language information file. Please go back and try a little later.', 'wpml-string-translation');
+# }
+
+msgid "Failed downloading the language information file. Please go back and try a little later."
+msgstr ""
+
+# if(is_wp_error($response)){
+# $err = __('Error getting the translation file. Please go back and try again.', 'wordpress-language');
+# if(isset($response->errors['http_request_failed'][0])){
+
+msgid "Error getting the translation file. Please go back and try again."
 msgstr ""

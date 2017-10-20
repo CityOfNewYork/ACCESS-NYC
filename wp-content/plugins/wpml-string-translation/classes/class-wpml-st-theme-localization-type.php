@@ -2,6 +2,8 @@
 
 class WPML_ST_Theme_Localization_Type {
 
+	const USE_ST_AND_NO_MO_FILES = 3;
+
 	/**
 	 * @var wpdb;
 	 */
@@ -27,6 +29,7 @@ class WPML_ST_Theme_Localization_Type {
 	public function add_hooks() {
 		add_action( 'wpml_post_save_theme_localization_type', array( $this, 'save_scaning_alert_settings' ) );
 		add_action( 'wpml_post_save_theme_localization_type', array( $this, 'clear_st_cache' ) );
+		add_action( 'wpml_st_auto_register_default', array( $this, 'save_setting_to_not_load_mo' ) );
 	}
 
 	public function save_scaning_alert_settings() {
@@ -82,5 +85,12 @@ class WPML_ST_Theme_Localization_Type {
 	public function set_themes_and_plugins_settings( WPML_ST_Themes_And_Plugins_Settings $themes_and_plugins_settings ) {
 		$this->themes_and_plugins_settings = $themes_and_plugins_settings;
 		return $this;
+	}
+
+	public function save_setting_to_not_load_mo() {
+		global $sitepress;
+
+		$sitepress->set_setting( 'theme_localization_type', self::USE_ST_AND_NO_MO_FILES );
+		$sitepress->save_settings();
 	}
 }

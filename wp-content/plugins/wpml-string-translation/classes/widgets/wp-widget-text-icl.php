@@ -7,8 +7,8 @@ class WP_Widget_Text_Icl extends WP_Widget {
 	 * WP_Widget_Text_Icl constructor.
 	 */
 	public function __construct() {
-		$widget_ops  = array( 'classname' => 'widget_text_icl', 'description' => __( 'Multilingual arbitrary text or HTML', 'sitepress' ) );
-		parent::__construct( 'text_icl', __( 'Multilingual Text', 'sitepress' ), $widget_ops );
+		$widget_ops  = array( 'classname' => 'widget_text_icl', 'description' => __( 'Multilingual arbitrary text or HTML', 'wpml-string-translation' ) );
+		parent::__construct( 'text_icl', __( 'Multilingual Text', 'wpml-string-translation' ), $widget_ops );
 	}
 
 	function widget($args, $instance) {
