@@ -19,13 +19,27 @@ class WPML_Slash_Management {
 		return strpos( $url, '?lang=' ) !== false || strpos( $url, '&lang=' ) !== false;
 	}
 
+	/**
+	 * @param string $url
+	 * @param string $method
+	 *
+	 * @return mixed|string
+	 */
 	public function maybe_user_trailingslashit( $url, $method ) {
 		global $wp_rewrite;
 
+		$url_parts = wpml_parse_url( $url );
+		$path      = isset( $url_parts['path'] ) ? $url_parts['path'] : '';
+
 		if ( null !== $wp_rewrite ) {
-			return user_trailingslashit( $url );
+			$path = user_trailingslashit( $path );
 		} else {
-			return 'untrailingslashit' === $method ? untrailingslashit( $url ) : trailingslashit( $url );
+			$path = 'untrailingslashit' === $method
+				? untrailingslashit( $path ) : trailingslashit( $path );
 		}
+
+		$url_parts['path'] = $path;
+
+		return ltrim( http_build_url( null, $url_parts ), '/' );
 	}
 }

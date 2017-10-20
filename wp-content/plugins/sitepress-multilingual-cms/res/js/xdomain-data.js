@@ -20,12 +20,12 @@
 
 				/** @namespace icl_vars.current_language */
 				jQuery.ajax({
-					url:      icl_vars.ajax_url,
+					url:      wpml_xdomain_data.ajax_url,
 					type:     'post',
 					dataType: 'json',
 					data:     {
 						action:        'switching_language',
-						from_language: icl_vars.current_language
+						from_language: wpml_xdomain_data.current_language
 					},
 					success:  function (response) {
 						var argsGlue;

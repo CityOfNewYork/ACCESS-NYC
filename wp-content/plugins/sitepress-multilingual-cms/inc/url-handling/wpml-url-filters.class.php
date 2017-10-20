@@ -16,18 +16,32 @@ class WPML_URL_Filters {
 	/** @var WPML_URL_Converter $url_converter */
 	private $url_converter;
 
+	/** @var WPML_Debug_BackTrace */
+	private $debug_backtrace;
+
 	/**
-	 * @param WPML_Post_Translation $post_translation
-	 * @param WPML_URL_Converter    $url_converter
-	 * @param WPML_Canonicals       $canonicals
-	 * @param SitePress             $sitepress
+	 * WPML_URL_Filters constructor.
+	 *
+	 * @param $post_translation
+	 * @param $url_converter
+	 * @param WPML_Canonicals $canonicals
+	 * @param $sitepress
+	 * @param WPML_Debug_BackTrace $debug_backtrace
 	 */
-	public function __construct( &$post_translation, &$url_converter, WPML_Canonicals $canonicals, &$sitepress ) {
+	public function __construct(
+		&$post_translation,
+		&$url_converter,
+		WPML_Canonicals $canonicals,
+		&$sitepress,
+		WPML_Debug_BackTrace $debug_backtrace
+	) {
 		$this->sitepress        = &$sitepress;
 		$this->post_translation = &$post_translation;
 
 		$this->url_converter = &$url_converter;
 		$this->canonicals    = $canonicals;
+		$this->debug_backtrace = $debug_backtrace;
+
 		if ( $this->frontend_uses_root() === true ) {
 			WPML_Root_Page::init();
 		}
@@ -223,6 +237,10 @@ class WPML_URL_Filters {
 	}
 
 	public function home_url_filter( $url, $path, $orig_scheme, $blog_id ) {
+		if ( WPML_LANGUAGE_NEGOTIATION_TYPE_PARAMETER === $this->sitepress->get_setting( 'language_negotiation_type' ) && $this->debug_backtrace->is_function_in_call_stack( 'get_pagenum_link' ) ) {
+			return $url;
+		}
+
 		$server_name = isset( $_SERVER['SERVER_NAME'] ) ? $_SERVER['SERVER_NAME'] : "";
 		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : "";
 		$server_name = strpos( $request_uri, '/' ) === 0
@@ -317,7 +335,7 @@ class WPML_URL_Filters {
 		$code             = $this->get_permalink_filter_lang( $post );
 		$post_id          = $post_element->get_element_id();
 		$current_language = $this->sitepress->get_current_language();
-		if ( ! is_admin()
+		if ( ( ! is_admin() || wp_doing_ajax() )
 		     && $this->sitepress->get_setting( 'auto_adjust_ids' )
 		     && $post_element->get_language_code() !== $this->sitepress->get_current_language()
 		     && ( $post_id = $this->post_translation->element_id_in( $post_id, $current_language ) )

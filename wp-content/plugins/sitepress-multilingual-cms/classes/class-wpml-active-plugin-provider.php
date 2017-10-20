@@ -1,13 +1,6 @@
 <?php
 
 class WPML_Active_Plugin_Provider {
-	/** @var  WPML_WP_API $wp_api */
-	private $wp_api;
-
-	public function __construct( WPML_WP_API $wp_api ) {
-		$this->wp_api = $wp_api;
-	}
-
 	/**
 	 * @return array
 	 */

@@ -30,9 +30,4 @@ abstract class WPML_AJAX_Base_Factory implements IWPML_AJAX_Action_Loader, IWPML
 	public function set_ajax_action_validation( WPML_AJAX_Action_Validation $ajax_action_validation ) {
 		$this->ajax_action_validation = $ajax_action_validation;
 	}
-
-	/**
-	* @return IWPML_Action
-	*/
-	abstract public function create();
 }

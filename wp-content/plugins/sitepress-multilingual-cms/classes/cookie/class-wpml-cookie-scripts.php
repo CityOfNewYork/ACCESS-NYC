@@ -27,7 +27,7 @@ class WPML_Cookie_Scripts {
 	}
 
 	public function add_hooks() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), - PHP_INT_MAX );
 	}
 
 	public function enqueue_scripts() {

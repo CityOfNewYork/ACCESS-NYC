@@ -122,7 +122,7 @@
 
     <?php foreach($packages as $package): ?>
     <tr id="repository-<?php echo $repository_id ?>_<?php echo $package['id'] ?>">
-        <td><img width="140" height="140" src="<?php echo $package['image_url'] ?>" /></td>
+        <td class="installer-repository-image"><img width="140" src="<?php echo $package['image_url'] ?>" /></td>
         <td>
             <p><strong><?php echo $package['name'] ?></strong></p>
             <p><?php echo $package['description'] ?></p>
@@ -137,9 +137,12 @@
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <?php if($package['downloads']): ?>
-            <?php include $this->plugin_path() . '/templates/downloads-list.php'; ?>
-            <?php endif; ?>
+	        <?php
+	        if ( $package['downloads'] ) {
+		        WP_Installer_Channels()->load_channel_selector( $repository_id, $package['downloads'] );
+		        include $this->plugin_path() . '/templates/downloads-list.php';
+	        }
+	        ?>
 
             <?php if(!empty($package['sub-packages'])): ?>
 

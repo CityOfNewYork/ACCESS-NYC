@@ -40,30 +40,58 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 			? $this->sitepress->get_wp_api()->get_post_types( array( 'public' => true ) )
 			: (array) $type;
 		if ( (bool) $types === true ) {
-			$where = $this->wpdb->prepare( "post_name = %s ", $name );
-			$where .= " AND post_type IN ('" . implode( "', '", $types ) . "')";
+
 			$date_snippet = $this->by_date_snippet( $query );
-			$where .= $date_snippet;
-			$res = $this->wpdb->get_row( "
-									 SELECT post_type, post_name
-									 FROM {$this->wpdb->posts} p
-									 LEFT JOIN {$this->wpdb->prefix}icl_translations t
-										ON t.element_id = p.ID
-										 	AND CONCAT('post_', p.post_type) = t.element_type
-									 		AND " . $this->query_filter->in_translated_types_snippet( false, 'p' ) . "
-									 WHERE $where
-									 	AND ( post_status = 'publish'
-									 	    OR ( post_type = 'attachment'
-									 	         AND post_status = 'inherit' ) )
-									 	" . $this->order_by_language_snippet( (bool) $date_snippet) . "
-								     LIMIT 1" );
-			if ( (bool) $res === true ) {
-				$ret = array( $res->post_name, $res->post_type, true );
+
+			$cache     = new WPML_WP_Cache( 'WPML_404_Guess' );
+			$cache_key = 'guess_cpt' . $name . wp_json_encode( $types ) . $date_snippet;
+			$found     = false;
+			$ret       = $cache->get( $cache_key, $found );
+
+			if ( ! $found ) {
+				$ret = $this->find_post_type( $name, $type, $types, $date_snippet );
+				$cache->set( $cache_key, $ret );
 			}
 		}
 
 		return $ret;
 	}
+
+	/**
+	 * Query the database to find the post type
+	 *
+	 * @param string $name
+	 * @param string $type
+	 * @param array $types
+	 * @param string $date_snippet
+	 *
+	 * @return array
+	 */
+	private function find_post_type( $name, $type, $types, $date_snippet ) {
+		$ret   = array( $name, $type, false );
+		$where = $this->wpdb->prepare( "post_name = %s ", $name );
+		$where .= " AND post_type IN ('" . implode( "', '", $types ) . "')";
+		$where .= $date_snippet;
+		$res   = $this->wpdb->get_row( "
+										 SELECT post_type, post_name
+										 FROM {$this->wpdb->posts} p
+										 LEFT JOIN {$this->wpdb->prefix}icl_translations t
+											ON t.element_id = p.ID
+											    AND CONCAT('post_', p.post_type) = t.element_type
+										        AND " . $this->query_filter->in_translated_types_snippet( false, 'p' ) . "
+										 WHERE $where
+										    AND ( post_status = 'publish'
+										        OR ( post_type = 'attachment'
+										             AND post_status = 'inherit' ) )
+										    " . $this->order_by_language_snippet( (bool) $date_snippet ) . "
+									     LIMIT 1" );
+		if ( (bool) $res === true ) {
+			$ret = array( $res->post_name, $res->post_type, true );
+		}
+
+		return $ret;
+	}
+
 
 	/**
 	 * Retrieves year, month and day parameters from the query if they are set and builds the appropriate sql

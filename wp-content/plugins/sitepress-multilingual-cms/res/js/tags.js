@@ -27,7 +27,7 @@ jQuery(document).ready(function(){
         }
 
         jQuery('#posts-filter').parent().load(ajx+url_glue+'lang='+lang + ' #posts-filter', {}, function(resp){
-            strt = resp.indexOf('<span id="icl_subsubsub">');
+            strt = resp.indexOf('<span id="icl_subsubsub" class="icl_subsubsub">');
             endd = resp.indexOf('</span>\'', strt);
             lsubsub = resp.substr(strt,endd-strt+7);
             jQuery('table.widefat').before(lsubsub);

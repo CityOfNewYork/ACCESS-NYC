@@ -88,7 +88,7 @@ class WPML_Upgrade {
 			$results[] = $this->run_command( $command, $default );
 		}
 
-		return array_unique( $results );
+		return $results;
 	}
 
 	private function run_command( WPML_Upgrade_Command_Definition $command, $default ) {

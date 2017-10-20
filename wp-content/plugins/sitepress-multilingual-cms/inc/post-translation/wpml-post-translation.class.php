@@ -307,7 +307,8 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 			return false;
 		}
 		$is_auto_draft              = isset( $post->post_status ) && $post->post_status === 'auto-draft';
-		$is_editing_different_post  = array_key_exists( 'post_ID', $_POST ) && $post->ID != $_POST['post_ID'];
+		$is_editing_different_post  = array_key_exists( 'post_ID', $_POST ) && (int) $_POST['post_ID']
+		                              && $post->ID != $_POST['post_ID'];
 		$is_saving_a_revision       = array_key_exists( 'post_type', $_POST ) && 'revision' === $_POST['post_type'];
 		$is_untrashing              = array_key_exists( 'action', $_GET ) && 'untrash' === $_GET['action'];
 		$is_auto_save               = array_key_exists( 'autosave', $_POST );

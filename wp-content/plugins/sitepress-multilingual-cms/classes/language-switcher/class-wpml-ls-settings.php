@@ -175,7 +175,7 @@ class WPML_LS_Settings {
 		);
 
 		$shortcode_actions = array(
-			'show'                          => 1,
+			'show'                          => 0,
 			'display_names_in_current_lang' => 1,
 			'template'                      => $core_templates['list-horizontal'],
 			'slot_group'                    => 'statics',
@@ -385,7 +385,11 @@ class WPML_LS_Settings {
 		$new_settings['menus']    = array_intersect_key( $new_settings['menus'], $this->get_available_menus() );
 		$new_settings['sidebars'] = array_intersect_key( $new_settings['sidebars'], $this->get_registered_sidebars() );
 		$new_settings             = $this->convert_slot_settings_to_objects( $new_settings );
-		$this->strings->register_all( $new_settings, $this->settings );
+
+		if ( $this->sitepress->is_setup_complete() ) {
+			$this->strings->register_all( $new_settings, $this->settings );
+		}
+		
 		$this->synchronize_widget_instances( $new_settings['sidebars'] );
 		$this->persist_settings( $new_settings );
 		$this->settings = $new_settings;

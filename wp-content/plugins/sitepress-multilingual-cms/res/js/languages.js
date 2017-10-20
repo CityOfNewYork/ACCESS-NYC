@@ -125,7 +125,7 @@ function manageWizardButtonStatesSpinner(){
     var submit_buttons = jQuery( '#icl_initial_language .buttons-wrap .button-primary, #icl_setup_back_2, #icl_setup_nav_3 .button-primary, #installer_registration_form div .button-primary' );
     var forms = jQuery( '#icl_initial_language, #wpml-ls-settings-form, #installer_registration_form' );
     var spinner = jQuery( '<span class="spinner"></span>' );
-    var spinner_location = '#icl_initial_language .buttons-wrap input, #icl_setup_back_1, #icl_setup_back_2, #icl_save_language_switcher_options, #installer_registration_form div .button-primary';
+    var spinner_location = '#icl_initial_language .buttons-wrap input, #icl_setup_back_1, #icl_setup_back_2, #icl_save_language_switcher_options, #installer_registration_form div .button-primary:visible';
 
     spinner.insertBefore( spinner_location );
 
@@ -518,7 +518,11 @@ function iclUseDirectoryToggle() {
 					}
 				} else {
 					formErrors = jQuery('form[name="' + formName + '"] .icl_form_errors');
-					formErrors.html(response.data);
+					if (0 === formErrors.length) {
+						formErrors = jQuery('form[name="' + formName + '"] .wpml-form-errors');
+					}
+					var errors = response.data.join('<br>');
+					formErrors.html(errors);
 					formErrors.fadeIn();
 					fadeInAjxResp('#' + ajxResponse, icl_ajx_error, true);
 				}
@@ -574,10 +578,13 @@ function installer_registration_form_submit(){
     var action = jQuery('#installer_registration_form').find('input[name=button_action]').val();
     thisf.find('.status_msg').html('');
     thisf.find(':submit').attr('disabled', 'disabled');
-    jQuery('<span class="spinner"></span>').css({display: 'inline-block', float: 'none'}).prependTo(thisf.find(':submit:first').parent());        
 
     if(action === 'later'){
-        thisf.find('input[name=installer_site_key]').parent().remove();            
+        thisf.find('input[name=installer_site_key]').parent().remove();
+    }
+
+    if(action === 'finish'){
+    	thisf.find('.spinner').show();
     }
 
     jQuery.ajax({
@@ -587,7 +594,7 @@ function installer_registration_form_submit(){
         data: "icl_ajx_action=registration_form_submit&" + thisf.serialize(),
         success: function (msg) {
             if(action === 'register' || action === 'later'){
-                thisf.find('.spinner').remove();
+                thisf.find('.spinner').hide();
                 if(msg.error){
                     thisf.find('.status_msg').html(msg.error).addClass('icl_error_text');
                 }else{
@@ -597,8 +604,13 @@ function installer_registration_form_submit(){
                 }
                 thisf.find(':submit').removeAttr('disabled', 'disabled');
             }else{ // action = finish
-                location.href = location.href.replace(/#[\w\W]*/, '');                    
+                location.href = location.href.replace(/#[\w\W]*/, '');
             }
+        },
+        fail: function (xhr, status, error) {
+            var err = eval(status + ': ' +  (xhr.responseText) );
+            thisf.find('.status_msg').html(err).addClass('icl_error_text');
+            thisf.find(':submit').removeAttr('disabled', 'disabled');
         }
     });
 

@@ -144,27 +144,29 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 		$term_count_update = new WPML_Update_Term_Count( $wp_api );
 		
 		$post           = get_post ( $post_id );
+		$source_post_status = get_post_status( $post_id );
 		$translated_ids = $this->post_translation->get_element_translations( $post_id, false, true );
 		$post_format = $this->sync_post_format ? get_post_format( $post_id ) : null;
 		$ping_status = $this->sync_ping_status ? ( pings_open( $post_id ) ? 'open' : 'closed' ) : null;
 		$comment_status = $this->sync_comment_status ? ( comments_open( $post_id ) ? 'open' : 'closed' ) : null;
 		$post_password = $this->sync_password ? $post->post_password : null;
-		$sync_parent_private = $this->sync_private_flag && get_post_status( $post_id ) === 'private' ? 'private' : null;
 		$menu_order = $this->sync_menu_order && ! empty( $post->menu_order ) ? $post->menu_order : null;
 		$page_template = $this->sync_page_template && get_post_type( $post_id ) === 'page' ? get_post_meta( $post_id, '_wp_page_template', true ) : null;
 		$post_date = $this->sync_post_date ? $wpdb->get_var( $wpdb->prepare( "SELECT post_date FROM {$wpdb->posts} WHERE ID=%d LIMIT 1", $post_id ) ) : null;
-
 
 		if ( (bool) $post_vars === true ) {
 			$this->sync_sticky_flag ( $this->post_translation->get_element_trid ( $post_id ), $post_vars );
 		}
 
 		foreach ( $translated_ids as $lang_code => $translated_pid ) {
-			if ( 'private' === $sync_parent_private ) {
-				$post_status = 'private';
-			} else {
-				$post_status = get_post_status( $translated_pid );
+			$post_status = get_post_status( $translated_pid );
+
+			$post_status_differs = ( 'private' === $source_post_status && 'publish' === $post_status )
+			                       || ( 'publish' === $source_post_status && 'private' === $post_status );
+			if ( $this->sync_private_flag && $post_status_differs ) {
+				$post_status = $source_post_status;
 			}
+
 			$this->sync_custom_fields ( $post_id, $translated_pid );
 			if ( $post_format !== null ) {
 				set_post_format ( $translated_pid, $post_format );
@@ -175,7 +177,7 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 				$now = gmdate('Y-m-d H:i:59');
 				$allow_post_statuses = array( 'private', 'pending', 'draft' );
 				if ( mysql2date('U', $post_date_gmt, false) > mysql2date('U', $now, false) ) {
-					if ( ! in_array( $post_status, $allow_post_statuses ) ) {
+					if ( ! in_array( $post_status, $allow_post_statuses, true ) ) {
 						$post_status = 'future';
 					}
 				}
@@ -189,8 +191,7 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 			if ( $post_status !== null && ! in_array( get_post_status( $translated_pid ), array( 'auto-draft', 'draft', 'inherit', 'trash' ) ) ) {
 				$wpdb->update ( $wpdb->posts, array( 'post_status' => $post_status ), array( 'ID' => $translated_pid ) );
 				$term_count_update->update_for_post( $translated_pid );
-			}
-			if ( $post_status == null && $this->sync_private_flag && get_post_status( $translated_pid ) == 'private' ) {
+			} elseif ( $post_status == null && $this->sync_private_flag && get_post_status( $translated_pid ) === 'private' ) {
 				$wpdb->update ( $wpdb->posts, array( 'post_status' => get_post_status( $post_id ) ), array( 'ID' => $translated_pid ) );
 				$term_count_update->update_for_post( $translated_pid );
 			}
@@ -211,9 +212,8 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 			$query = $wpdb->prepare(
 				"UPDATE {$wpdb->posts}
 				   SET menu_order=%s
-				   WHERE ID IN (%s)",
-				$menu_order,
-				wpml_prepare_in( $translated_ids, '%d' )
+				   WHERE ID IN (" . wpml_prepare_in( $translated_ids, '%d' ) . ')',
+				$menu_order
 			);
 			$wpdb->query( $query );
 		}

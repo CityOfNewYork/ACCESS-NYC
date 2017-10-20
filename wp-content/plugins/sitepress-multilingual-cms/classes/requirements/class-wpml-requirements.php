@@ -32,10 +32,6 @@ class WPML_Requirements {
 			'name' => 'BuddyPress Multilingual',
 			'url'  => '#',
 		),
-		'wpml-page-builders'          => array(
-			'name' => 'WPML Page Builders',
-			'url'  => '#',
-		),
 	);
 
 	private $modules = array(
@@ -72,13 +68,13 @@ class WPML_Requirements {
 		'bb-plugin'    => array(
 			'url'          => '#',
 			'requirements' => array(
-				'wpml-page-builders',
+				'wpml-string-translation',
 			),
 		),
 		'elementor-plugin'    => array(
 			'url'          => '#',
 			'requirements' => array(
-				'wpml-page-builders',
+				'wpml-string-translation',
 			),
 		),
 	);
@@ -192,7 +188,8 @@ class WPML_Requirements {
 		$components = $this->get_components();
 		if ( array_key_exists( $type, $components ) ) {
 			return $components[ $type ];
-		} elseif ( array_key_exists( $slug, $components ) ) {
+		}
+		if ( array_key_exists( $slug, $components ) ) {
 			return $components[ $slug ];
 		}
 
