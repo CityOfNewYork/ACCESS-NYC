@@ -7,82 +7,27 @@ if( !defined( 'ABSPATH' ) )
  * @var $this Limit_Login_Attempts
  */
 
-if( !current_user_can( 'manage_options' ) ) {
-    wp_die( 'Sorry, but you do not have permissions to change settings.' );
-}
-
-/* Make sure post was from this page */
-if( !empty( $_POST ) ) {
-    check_admin_referer( 'limit-login-attempts-options' );
-}
-
-/* Should we clear log? */
-if( isset( $_POST[ 'clear_log' ] ) ) {
-    delete_option( 'limit_login_logged' );
-    $this->show_error( __( 'Cleared IP log', 'limit-login-attempts-reloaded' ) );
-}
-
-/* Should we reset counter? */
-if( isset( $_POST[ 'reset_total' ] ) ) {
-    update_option( 'limit_login_lockouts_total', 0 );
-    $this->show_error( __( 'Reset lockout count', 'limit-login-attempts-reloaded' ) );
-}
-
-/* Should we restore current lockouts? */
-if( isset( $_POST[ 'reset_current' ] ) ) {
-    update_option( 'limit_login_lockouts', array() );
-    $this->show_error( __( 'Cleared current lockouts', 'limit-login-attempts-reloaded' ) );
-}
-
-/* Should we update options? */
-if( isset( $_POST[ 'update_options' ] ) ) {
-
-    $this->_options[ 'allowed_retries' ]    = $_POST[ 'allowed_retries' ];
-    $this->_options[ 'lockout_duration' ]   = $_POST[ 'lockout_duration' ] * 60;
-    $this->_options[ 'valid_duration' ]     = $_POST[ 'valid_duration' ] * 3600;
-    $this->_options[ 'allowed_lockouts' ]   = $_POST[ 'allowed_lockouts' ];
-    $this->_options[ 'long_duration' ]      = $_POST[ 'long_duration' ] * 3600;
-    $this->_options[ 'notify_email_after' ] = $_POST[ 'email_after' ];
-
-    $white_list = ( !empty( $_POST['lla_whitelist'] ) ) ? explode("\n", str_replace("\r", "", $_POST['lla_whitelist'] ) ) : array();
-
-    if( !empty( $white_list ) ) {
-        foreach( $white_list as $key => $ip ) {
-            if( '' == $ip ) {
-                unset( $white_list[ $key ] );
-            }
-        }
-    }
-
-    $this->_options['whitelist'] = $white_list;
-
-    $notify_methods = array();
-    if( isset( $_POST[ 'lockout_notify_log' ] ) ) {
-        $notify_methods[] = 'log';
-    }
-    if( isset( $_POST[ 'lockout_notify_email' ] ) ) {
-        $notify_methods[] = 'email';
-    }
-    $this->_options[ 'lockout_notify' ] = implode( ',', $notify_methods );
-
-    $this->sanitize_variables();
-    $this->update_options();
-
-    $this->show_error( __( 'Options changed', 'limit-login-attempts-reloaded' ) );
-}
-
-$lockouts_total = get_option( 'limit_login_lockouts_total', 0 );
-$lockouts = get_option( 'limit_login_lockouts' );
+$lockouts_total = $this->get_option( 'lockouts_total', 0 );
+$lockouts = $this->get_option( 'login_lockouts' );
 $lockouts_now = is_array( $lockouts ) ? count( $lockouts ) : 0;
 
 $v = explode( ',', $this->get_option( 'lockout_notify' ) );
 $log_checked = in_array( 'log', $v ) ? ' checked ' : '';
 $email_checked = in_array( 'email', $v ) ? ' checked ' : '';
 
-$white_list = $this->get_option( 'whitelist' );
-$white_list = ( is_array( $white_list ) && !empty( $white_list ) ) ? implode( "\n", $white_list ) : '';
+$white_list_ips = $this->get_option( 'whitelist' );
+$white_list_ips = ( is_array( $white_list_ips ) && !empty( $white_list_ips ) ) ? implode( "\n", $white_list_ips ) : '';
+
+$white_list_usernames = $this->get_option( 'whitelist_usernames' );
+$white_list_usernames = ( is_array( $white_list_usernames ) && !empty( $white_list_usernames ) ) ? implode( "\n", $white_list_usernames ) : '';
+
+$black_list_ips = $this->get_option( 'blacklist' );
+$black_list_ips = ( is_array( $black_list_ips ) && !empty( $black_list_ips ) ) ? implode( "\n", $black_list_ips ) : '';
+
+$black_list_usernames = $this->get_option( 'blacklist_usernames' );
+$black_list_usernames = ( is_array( $black_list_usernames ) && !empty( $black_list_usernames ) ) ? implode( "\n", $black_list_usernames ) : '';
 ?>
-<div class="wrap">
+<div class="wrap limit-login-page-settings">
     <h2><?php echo __( 'Limit Login Attempts Settings', 'limit-login-attempts-reloaded' ); ?></h2>
     <h3><?php echo __( 'Statistics', 'limit-login-attempts-reloaded' ); ?></h3>
     <form action="<?php echo $this->get_options_page_uri(); ?>" method="post">
@@ -118,10 +63,33 @@ $white_list = ( is_array( $white_list ) && !empty( $white_list ) ) ? implode( "\
     <h3><?php echo __( 'Options', 'limit-login-attempts-reloaded' ); ?></h3>
     <form action="<?php echo $this->get_options_page_uri(); ?>" method="post">
         <?php wp_nonce_field( 'limit-login-attempts-options' ); ?>
+        <?php if ( is_network_admin() ): ?>
+		<input type="checkbox" name="allow_local_options" <?php echo $this->get_option( 'allow_local_options' ) ? 'checked' : '' ?> value="1"/> <?php esc_html_e( 'Let network sites use their own settings', 'limit-login-attempts-reloaded' ); ?>
+		<p class="description"><?php esc_html_e('If disabled, the global settings will be forcibly applied to the entire network.') ?></p>
+		<?php elseif ( $this->network_mode ): ?>
+        <input type="checkbox" name="use_global_options" <?php echo $this->get_option('use_local_options' ) ? '' : 'checked' ?> value="1" class="use_global_options"/> <?php echo __( 'Use global settings', 'limit-login-attempts-reloaded' ); ?><br/>
+        <script>
+        jQuery(function($){
+			var first = true;
+			$('.use_global_options').change( function(){
+				var form = $(this).siblings('table');
+				form.stop();
+
+				if ( this.checked )
+					first ? form.hide() : form.fadeOut();
+				else
+					first ? form.show() : form.fadeIn();
+
+				first = false;
+			}).change();
+        });
+        </script>
+        <?php endif ?>
         <table class="form-table">
             <tr>
                 <th scope="row" valign="top"><?php echo __( 'Lockout', 'limit-login-attempts-reloaded' ); ?></th>
                 <td>
+
                     <input type="text" size="3" maxlength="4"
                            value="<?php echo( $this->get_option( 'allowed_retries' ) ); ?>"
                            name="allowed_retries"/> <?php echo __( 'allowed retries', 'limit-login-attempts-reloaded' ); ?>
@@ -146,7 +114,7 @@ $white_list = ( is_array( $white_list ) && !empty( $white_list ) ) ? implode( "\
                     valign="top"><?php echo __( 'Notify on lockout', 'limit-login-attempts-reloaded' ); ?></th>
                 <td>
                     <input type="checkbox" name="lockout_notify_log" <?php echo $log_checked; ?>
-                           value="log"/> <?php echo __( 'Log IP', 'limit-login-attempts-reloaded' ); ?><br/>
+                           value="log"/> <?php echo __( 'Lockout log', 'limit-login-attempts-reloaded' ); ?><br/>
                     <input type="checkbox" name="lockout_notify_email" <?php echo $email_checked; ?>
                            value="email"/> <?php echo __( 'Email to admin after', 'limit-login-attempts-reloaded' ); ?>
                     <input type="text" size="3" maxlength="4"
@@ -156,21 +124,44 @@ $white_list = ( is_array( $white_list ) && !empty( $white_list ) ) ? implode( "\
             </tr>
             <tr>
                 <th scope="row"
-                    valign="top"><?php echo __( 'Whitelist (IP)', 'limit-login-attempts-reloaded' ); ?></th>
+                    valign="top"><?php echo __( 'Whitelist', 'limit-login-attempts-reloaded' ); ?></th>
                 <td>
-                    <p class="description"><?php _e( 'One IP per line.', 'limit-login-attempts-reloaded' ); ?></p>
-                    <textarea name="lla_whitelist" rows="10" cols="50"><?php echo $white_list; ?></textarea>
+                    <div class="field-col">
+                        <p class="description"><?php _e( 'One IP or IP range (1.2.3.4-5.6.7.8) per line', 'limit-login-attempts-reloaded' ); ?></p>
+                        <textarea name="lla_whitelist_ips" rows="10" cols="50"><?php echo $white_list_ips; ?></textarea>
+                    </div>
+                    <div class="field-col">
+                        <p class="description"><?php _e( 'One Username per line', 'limit-login-attempts-reloaded' ); ?></p>
+                        <textarea name="lla_whitelist_usernames" rows="10" cols="50"><?php echo $white_list_usernames; ?></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"
+                    valign="top"><?php echo __( 'Blacklist', 'limit-login-attempts-reloaded' ); ?></th>
+                <td>
+                    <div class="field-col">
+                        <p class="description"><?php _e( 'One IP or IP range (1.2.3.4-5.6.7.8) per line', 'limit-login-attempts-reloaded' ); ?></p>
+                        <textarea name="lla_blacklist_ips" rows="10" cols="50"><?php echo $black_list_ips; ?></textarea>
+                    </div>
+                    <div class="field-col">
+                        <p class="description"><?php _e( 'One Username per line', 'limit-login-attempts-reloaded' ); ?></p>
+                        <textarea name="lla_blacklist_usernames" rows="10" cols="50"><?php echo $black_list_usernames; ?></textarea>
+                    </div>
                 </td>
             </tr>
         </table>
         <p class="submit">
-            <input class="button button-primary" name="update_options" value="<?php echo __( 'Change Options', 'limit-login-attempts-reloaded' ); ?>"
+            <input class="button button-primary" name="update_options" value="<?php echo __( 'Save Options', 'limit-login-attempts-reloaded' ); ?>"
                    type="submit"/>
         </p>
     </form>
     <?php
-    $log = get_option( 'limit_login_logged' );
-//echo '<pre>';print_r($log);exit();
+    $log = $this->get_option( 'logged' );
+    $log = LLA_Helpers::sorted_log_by_date( $log );
+
+    $lockouts = (array)$this->get_option('lockouts');
+
     if( is_array( $log ) && ! empty( $log ) ) { ?>
         <h3><?php echo __( 'Lockout log', 'limit-login-attempts-reloaded' ); ?></h3>
         <form action="<?php echo $this->get_options_page_uri(); ?>" method="post">
@@ -189,30 +180,56 @@ $white_list = ( is_array( $white_list ) && !empty( $white_list ) ) ? implode( "\
                     <th scope="col"><?php echo _x( "IP", "Internet address", 'limit-login-attempts-reloaded' ); ?></th>
                     <th scope="col"><?php _e( 'Tried to log in as', 'limit-login-attempts-reloaded' ); ?></th>
                     <th scope="col"><?php _e( 'Gateway', 'limit-login-attempts-reloaded' ); ?></th>
+                    <th>
                 </tr>
 
-                <?php foreach ( $log as $ip => $users ) : ?>
-                    <?php foreach ( $users as $user_name => $info ) : ?>
-                        <tr>
-                            <?php
-                            // For new plugin version
-                            if( is_array( $info ) ) : ?>
-                            <td class="limit-login-date"><?php echo date_i18n( 'F d, Y H:i', $info['date'] ); ?></td>
-                            <td class="limit-login-ip"><?php echo $ip; ?></td>
-                            <td class="limit-login-max"><?php echo $user_name . ' (' . $info['counter'] .' lockouts)'; ?></td>
-                            <td class="limit-login-gateway"><?php echo ( isset( $info['gateway'] ) && !empty( $info['gateway'] ) ) ? $info['gateway'] : '-'; ?></td>
-                            <?php else : // For old plugin version ?>
-                            <td class="limit-login-date"></td>
-                            <td class="limit-login-ip"><?php echo $ip; ?></td>
-                            <td class="limit-login-max"><?php echo $user_name . ' (' . $info .' lockouts)'; ?></td>
-                            <td class="limit-login-gateway">-</td>
-                            <?php endif; ?>
-                        </tr>
-                    <?php endforeach; ?>
+                <?php foreach ( $log as $date => $user_info ) : ?>
+                    <tr>
+                        <td class="limit-login-date"><?php echo date_i18n( 'F d, Y H:i', $date ); ?></td>
+                        <td class="limit-login-ip"><?php echo $user_info['ip']; ?></td>
+                        <td class="limit-login-max"><?php echo $user_info['username'] . ' (' . $user_info['counter'] .' lockouts)'; ?></td>
+                        <td class="limit-login-gateway"><?php echo $user_info['gateway']; ?></td>
+                        <td>
+                            <?php if ( !empty( $lockouts[ $user_info['ip'] ] ) && $lockouts[ $user_info['ip'] ] > time() ) : ?>
+                            <a href="#" class="button limit-login-unlock" data-ip="<?=esc_attr($user_info['ip'])?>" data-username="<?=esc_attr($user_info['username'])?>">Unlock</a>
+                            <?php elseif ( $user_info['unlocked'] ): ?>
+                            Unlocked
+                            <?php endif ?>
+                    </tr>
                 <?php endforeach; ?>
 
             </table>
         </div>
+        <script>jQuery( function($) {
+          $('.limit-login-log .limit-login-unlock').click( function()
+          {
+              var btn = $(this);
+
+              if ( btn.hasClass('disabled') )
+                return false;
+              btn.addClass( 'disabled' );
+
+              $.post( ajaxurl, {
+                action: 'limit-login-unlock',
+                sec: '<?=wp_create_nonce('limit-login-unlock') ?>',
+                ip: btn.data('ip'),
+                username: btn.data('username')
+              } )
+              .done( function(data) {
+                if ( data === true )
+                  btn.fadeOut( function(){ $(this).parent().text('Unlocked') });
+                else
+                  fail();
+              }).fail( fail );
+
+              function fail() {
+                alert('Connection error');
+                btn.removeClass('disabled');
+              }
+
+              return false;
+            } );
+          } )</script>
         <?php
     } /* if showing $log */
     ?>

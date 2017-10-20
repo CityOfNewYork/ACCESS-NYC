@@ -1,11 +1,17 @@
-.limit-login-log {
-  table {
-    background-color: #fff;
-    th, td {
-      padding: 10px;
-    }
-    tr:nth-child(even) {
-      background-color: rgba(#000, .09);
+.limit-login-page-settings {
+  .field-col {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  .limit-login-log {
+    table {
+      background-color: #fff;
+      th, td {
+        padding: 10px;
+      }
+      tr:nth-child(even) {
+        background-color: rgba(#000, .09);
+      }
     }
   }
 }

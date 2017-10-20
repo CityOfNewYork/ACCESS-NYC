@@ -1,6 +1,9 @@
-.limit-login-log table {
+.limit-login-page-settings .field-col {
+  display: inline-block;
+  margin-right: 20px; }
+.limit-login-page-settings .limit-login-log table {
   background-color: #fff; }
-  .limit-login-log table th, .limit-login-log table td {
+  .limit-login-page-settings .limit-login-log table th, .limit-login-page-settings .limit-login-log table td {
     padding: 10px; }
-  .limit-login-log table tr:nth-child(even) {
+  .limit-login-page-settings .limit-login-log table tr:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.09); }
