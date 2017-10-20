@@ -14,6 +14,7 @@ return array(
     'WPML_ACF_Post_Id' => $baseDir . '/classes/class-wpml-acf-post-id.php',
     'WPML_ACF_Post_Ids' => $baseDir . '/classes/class-wpml-acf-post-ids.php',
     'WPML_ACF_Post_Object_Field' => $baseDir . '/classes/class-wpml-acf-post-object-field.php',
+    'WPML_ACF_Pro' => $baseDir . '/classes/class-wpml-acf-pro.php',
     'WPML_ACF_Processed_Data' => $baseDir . '/classes/class-wpml-acf-processed-data.php',
     'WPML_ACF_Relationship_Field' => $baseDir . '/classes/class-wpml-acf-relationship-field.php',
     'WPML_ACF_Repeater_Field' => $baseDir . '/classes/class-wpml-acf-repeater-field.php',
