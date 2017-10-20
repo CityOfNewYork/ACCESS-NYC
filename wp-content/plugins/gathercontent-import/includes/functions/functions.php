@@ -405,3 +405,28 @@ function available_mapping_post_types() {
 	$post_types = get_post_types( array( 'public' => true ) );
 	return apply_filters( 'gathercontent_mapping_post_types', $post_types );
 }
+
+/**
+ * Detect if HTTP Auth is enabled.
+ *
+ * @since  3.0.7
+ *
+ * @return string|bool The Auth username if enabled, or false.
+ */
+function auth_enabled() {
+	if ( isset( $_SERVER['REMOTE_USER'] ) ) {
+		return $_SERVER['REMOTE_USER'];
+	}
+
+	foreach ( array(
+		'PHP_AUTH_USER',
+		'PHP_AUTH_PW',
+		'HTTP_AUTHORIZATION',
+	) as $var ) {
+		if ( isset( $_SERVER[ $var ] ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}

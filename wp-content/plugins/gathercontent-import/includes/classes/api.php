@@ -387,11 +387,14 @@ class API extends Base {
 		}
 
 		if ( Debug::debug_mode() ) {
-			Debug::debug_log( '$uri: '. print_r( add_query_arg( array(
+			Debug::debug_log( add_query_arg( array(
 				'disable_cache' => $this->disable_cache,
 				'reset_request_cache' => $this->reset_request_cache,
-			), $uri ), true ) );
-			Debug::debug_log( '$args: '. print_r( $args, true ) );
+			), $uri ), 'api $uri' );
+			// Only log if we have more than authorization/accept headers.
+			if ( count( $args ) > 1 || isset( $args['headers'] ) && count( $args['headers'] ) > 2 ) {
+				Debug::debug_log( $args, 'api $args' );
+			}
 		}
 
 		$response = $this->http->{strtolower( $method )}( $uri, $args );
@@ -449,9 +452,13 @@ class API extends Base {
 			}
 		}
 
+		$wp_version     = get_bloginfo( 'version' );
+		$plugin_version = GATHERCONTENT_VERSION;
+
 		$headers = array(
 			'Authorization' => 'Basic ' . base64_encode( $this->user . ':' . $this->api_key ),
 			'Accept'        => 'application/vnd.gathercontent.v0.5+json',
+			'user-agent'    => "Integration-WordPress-{$wp_version}/{$plugin_version}",
 		);
 
 		$args['headers'] = isset( $args['headers'] )

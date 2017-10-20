@@ -1,4 +1,4 @@
-# GatherContent Plugin -- Version 3.0.4 #
+# GatherContent Plugin -- Version 3.1.5 #
 
 This plugin allows you to transfer content from your GatherContent projects into your WordPress site and vice-versa.
 
@@ -46,6 +46,50 @@ Below the text box is a button that will allow you to simply save all of that in
 
 
 ## Changelog ##
+
+### 3.1.5 ###
+* Update to enable the Yoast SEO focus keyword again (a Yoast SEO plugin update changed the field type).
+* Add ACF compatibility shim for transforming ACF checkbox values to/from GatherContent checkbox values.
+* Two new filters, `gc_config_pre_meta_field_value_updated` and `gc_config_meta_field_value_updated`.
+
+### 3.1.4 ###
+* Fix issue where syncing multiple items would not work (only syncing the first). Caused by nested wp-async tasks causing the action name name to be modified and the hooked callbacks not to be called.
+* Fixed "Attempt to modify property of non-object" notice.
+
+### 3.1.3 ###
+* Fix bug where some taxonomy terms were not being set (caused by changes made for [#27](https://github.com/gathercontent/wordpress-plugin/issues/27)).
+
+### 3.1.2 ###
+* Allow side-loading non-image files/media from GatherContent.
+
+### 3.1.1 ###
+* Added ability log the async requests in debug mode.
+* Removed duplicated abstract method. Fixes "Can't inherit abstract function" error which may occur on some servers.
+
+### 3.1.0 ###
+* Do not require logged-in cookies for wp-async requests (which performa push/pull operations). Fixes [#27](https://github.com/gathercontent/wordpress-plugin/issues/27).
+
+### 3.0.9 ###
+* Fix improperly cast object property for php 7 compatibility.
+
+### 3.0.8 ###
+* Update the error message to indicate user may not have proper permission in GatherContent to view GatherContent Templates/Projects.
+* Add "class" and "alt" to whitelisted shortcode attributes for the GatherContent `[media]` shortcode.
+* Add the `wp_get_attachment_image()` attributes array to the `gc_content_image` filter.
+* Add `gc_admin_enqueue_style` and `gc_admin_enqueue_script` actions.
+* Fix issue when BadgeOS is installed. BadgeOS is enqueueing its (old) version of select2 in the entire admin. It is incompatible with the new version, so we need to remove it on our pages.
+* Check multiple server variable keys to detect if HTTP authentication is enabled on the site. ([https://wordpress.org/support/topic/import-hangs-at-1/](https://wordpress.org/support/topic/import-hangs-at-1/))
+* Fix occasional bug when "Do not import" being selected could cause issues when pushing content back to GatherContent.
+
+### 3.0.7 ###
+* Improved percentage accuracy, and loader animations with the import/sync process.
+* Specific to the "1%" sync error, Now detects if site has HTTP authentication enabled, and provides settings fields for storing authentication credentials. (Plugin sync processes will not work if they are not provided)
+
+### 3.0.6 ###
+* Improved stability when importing a very large number of items.
+
+### 3.0.5 ###
+* Add ability to set "Do not change" for WP status updates. Props [@achbed](https://github.com/achbed), [#23](https://github.com/gathercontent/wordpress-plugin/pull/23).
 
 ### 3.0.4 ###
 * Update to complement the 3.0.0.8 release to make sure that the minimum 1.8.3 version of underscore is loaded early so that it works when SCRIPT_DEBUG is disabled.

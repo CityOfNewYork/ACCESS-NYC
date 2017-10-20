@@ -1,5 +1,5 @@
 <legend class="screen-reader-text"><?php _e( 'Items Import Progress', 'gathercontent-import' ); ?></legend>
-<table class="widefat">
+<table class="gc-sync-table">
 	<tbody>
 		<tr>
 			<th id="progress">
@@ -9,5 +9,8 @@
 				</div>
 			</th>
 		</tr>
+		<# if ( data.loader ) { #>
+		<tr id="gc-reload-spinner"><td><span class="gc-loader spinner is-active"> Please Wait&hellip;</span></td></tr>
+		<# } #>
 	</tbody>
 </table>
