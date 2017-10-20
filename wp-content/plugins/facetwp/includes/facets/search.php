@@ -1,6 +1,6 @@
 <?php
 
-class FacetWP_Facet_Search
+class FacetWP_Facet_Search extends FacetWP_Facet
 {
 
     function __construct() {
@@ -18,7 +18,10 @@ class FacetWP_Facet_Search
         $value = empty( $value ) ? '' : stripslashes( $value[0] );
         $placeholder = isset( $params['facet']['placeholder'] ) ? $params['facet']['placeholder'] : __( 'Enter keywords', 'fwp' );
         $placeholder = facetwp_i18n( $placeholder );
-        $output .= '<input type="search" class="facetwp-search" value="' . esc_attr( $value ) . '" placeholder="' . esc_attr( $placeholder ) . '" />';
+        $output .= '<span class="facetwp-search-wrap">';
+        $output .= '<i class="facetwp-btn"></i>';
+        $output .= '<input type="text" class="facetwp-search" value="' . esc_attr( $value ) . '" placeholder="' . esc_attr( $placeholder ) . '" />';
+        $output .= '</span>';
         return $output;
     }
 
@@ -63,7 +66,7 @@ class FacetWP_Facet_Search
         $this.find('.facet-placeholder').val(obj.placeholder);
     });
 
-    wp.hooks.addFilter('facetwp/save/search', function($this, obj) {
+    wp.hooks.addFilter('facetwp/save/search', function(obj, $this) {
         obj['search_engine'] = $this.find('.facet-search-engine').val();
         obj['placeholder'] = $this.find('.facet-placeholder').val();
         return obj;
@@ -71,35 +74,6 @@ class FacetWP_Facet_Search
 
     wp.hooks.addAction('facetwp/change/search', function($this) {
         $this.closest('.facetwp-row').find('.name-source').hide();
-    });
-})(jQuery);
-</script>
-<?php
-    }
-
-
-    /**
-     * Output any front-end scripts
-     */
-    function front_scripts() {
-?>
-<script>
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/search', function($this, facet_name) {
-        var val = $this.find('.facetwp-search').val() || '';
-        FWP.facets[facet_name] = val;
-    });
-
-    wp.hooks.addAction('facetwp/ready', function() {
-        $(document).on('keyup', '.facetwp-facet .facetwp-search', function(e) {
-            if (13 == e.keyCode) {
-                FWP.autoload();
-            }
-        });
-
-        $(document).on('focusout', '.facetwp-facet .facetwp-search', function(e) {
-            FWP.autoload();
-        });
     });
 })(jQuery);
 </script>
