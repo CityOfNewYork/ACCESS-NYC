@@ -29,6 +29,11 @@
 
       <a class="{{styles.questions}}" data-js="question" href="#question-client-contact">
         {{ __('Client Contact', 'accessnyc-screener') }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', 'accessnyc-screener') }}"
+          v-if="errors.all('ClientContact').length > 0">
+          <title>{{ __('Some fields are invalid', 'accessnyc-screener') }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </a>
 
       <div class="js-toggle-question hidden p-horizontal-2 p-bottom-2 hidden">
@@ -52,8 +57,18 @@
             <label class="{{styles.labels}}">
               Please specify other language spoken
             </label>
-            <input type="text" value="" required
-              v-model="client._attrs.languageOther">
+            <div class="screener-question-container"
+              v-bind:class="{'error': errors.has('Client.languageOther', 'ClientContact')}">
+              <div class="error-message"
+                v-if="errors.has('Client.languageOther', 'ClientContact')">
+                  {{ __('Please specify other language.', 'accessnyc-screener') }}
+              </div>
+              <input type="text" name="Client.languageOther" value="" required
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('specify other language', 'accessnyc-screener') }}"
+                v-model="client._attrs.languageOther"
+                v-validate="{required: true}">
+            </div>
           </div>
         </div>
 
@@ -61,8 +76,18 @@
           <label class="{{styles.labels}}" for="client-phone">
             {{ __('Phone Number', 'accessnyc-screener') }}
           </label>
-          <input id="client-phone" name="Client.phone" value="" type="tel" required
-            v-model="client._attrs.phone">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Client.phone', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.phone', 'ClientContact')">
+                v{ errors.first('Client.phone', 'ClientContact') }
+            </div>
+            <input id="client-phone" name="Client.phone" value="" type="tel"
+              data-vv-scope="ClientContact"
+              data-vv-as="{{ __('phone number', 'accessnyc-screener') }}"
+              v-model="client._attrs.phone"
+              v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+          </div>
         </div>
 
         <div class="m-bottom-2">
@@ -86,8 +111,18 @@
           <label class="{{styles.labels}}" for="client-phone">
             {{ __('Alternate Phone Number', 'accessnyc-screener') }}
           </label>
-          <input id="client-phone" name="Client.phoneAlt" value="" type="tel" required
-            v-model="client._attrs.phoneAlt">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Client.phoneAlt', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.phoneAlt', 'ClientContact')">
+                v{ errors.first('Client.phoneAlt', 'ClientContact') }
+            </div>
+            <input id="client-phone" name="Client.phoneAlt" value="" type="tel"
+              data-vv-scope="ClientContact"
+              data-vv-as="{{ __('alternate phone number', 'accessnyc-screener') }}"
+              v-model="client._attrs.phoneAlt"
+              v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+          </div>
         </div>
 
         <div class="m-bottom-2">
@@ -128,8 +163,18 @@
           <label class="{{styles.labels}}" for="client-email">
             {{ __('Email', 'accessnyc-screener') }}
           </label>
-          <input class="w-input-double" id="client-email" name="Client.email" value="" required
-            v-model="client._attrs.email">
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Client.email', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.email', 'ClientContact')">
+                v{ errors.first('Client.email', 'ClientContact') }
+            </div>
+            <input type="email" class="w-input-double" id="client-email" name="Client.email" value=""
+              data-vv-scope="ClientContact"
+              data-vv-as="{{ __('email', 'accessnyc-screener') }}"
+              v-model="client._attrs.email"
+              v-validate="{email: true}">
+          </div>
         </div>
 
         <hr class="screener-divider">
@@ -138,7 +183,7 @@
           <label class="{{styles.labels}}" for="client-address-1">
             {{ __('Street #', 'accessnyc-screener') }}
           </label>
-          <input class="w-input-double" id="client-address-1" name="Client.streetNumber" value="" required
+          <input class="w-input-double" id="client-address-1" name="Client.streetNumber" value=""
             v-model="client._attrs.streetNumber">
         </div>
 
@@ -146,7 +191,7 @@
           <label class="{{styles.labels}}" for="client-address-2">
             {{ __('Street Name', 'accessnyc-screener') }}
           </label>
-          <input id="client-address-2" name="Client.streetName" value="" required
+          <input id="client-address-2" name="Client.streetName" value=""
             v-model="client._attrs.streetName">
         </div>
 
@@ -154,7 +199,7 @@
           <label class="{{styles.labels}}" for="client-unit">
             {{ __('Unit #', 'accessnyc-screener') }}
           </label>
-          <input id="client-unit" name="Client.unit" value="" required
+          <input id="client-unit" name="Client.unit" value=""
             v-model="client._attrs.unit">
         </div>
 
@@ -162,7 +207,7 @@
           <label class="{{styles.labels}}" for="client-borough">
             {{ __('Borough', 'accessnyc-screener') }}
           </label>
-          <select id="client-borough" name="Client.borough" value="" required
+          <select id="client-borough" name="Client.borough" value=""
             v-model="client._attrs.borough">
             {% for location in locations %}
             <option value="{{ location.value }}">{{ __(location.text, 'accessnyc-screener') }}</option>
