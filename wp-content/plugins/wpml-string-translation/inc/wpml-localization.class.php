@@ -40,26 +40,45 @@ class WPML_Localization {
 		return $this->results_to_array( $results );
 	}
 
-	public function get_plugin_localization_stats() {
-		$plugin_localization_domains = apply_filters( 'wpml_sub_setting', array(), 'st', 'plugin_localization_domains' );
+	public function get_localization_stats( $component_type ) {
+		$localization_data = $this->get_localization_data( $component_type );
+
 		$results                     = array();
 		$all_domains                 = array();
 
-		foreach ( $plugin_localization_domains as $plugin => $localization_domains ) {
+		foreach ( $localization_data as $component => $localization_domains ) {
 			$all_domains = array_merge( $all_domains, array_keys( $localization_domains ) );
 		}
 
-		$all_results = $this->get_domain_stats( $all_domains, 'plugin', true );
-		foreach ( $plugin_localization_domains as $plugin => $localization_domains ) {
+		$all_results = $this->get_domain_stats( $all_domains, $component_type, true );
+		foreach ( $localization_data as $component => $localization_domains ) {
 			$domains = array_keys( $localization_domains );
 			foreach ( $domains as $domain ) {
 				if ( array_key_exists( $domain, $all_results ) ) {
-					$results[ $plugin ][ $domain ] = $all_results[ $domain ];
+					$results[ $component ][ $domain ] = $all_results[ $domain ];
 				}
 			}
 		}
 
 		return $results;
+	}
+
+	private function get_localization_data( $component_type ) {
+		$localization_data = apply_filters( 'wpml_sub_setting', array(), 'st', 'plugin' === $component_type ? 'plugin_localization_domains' : 'theme_localization_domains' );
+		if ( ! is_array( current( $localization_data ) ) ) {
+			if ( 'plugin' === $component_type ) {
+				return array();
+			}
+
+			$localization_data = array();
+			foreach ( wp_get_themes() as $theme_folder => $theme ) {
+				if ( $theme->get( 'TextDomain' ) ) {
+					$localization_data[ $theme_folder ] = array( $theme->get( 'TextDomain' ) => 0 );
+				}
+			}
+		}
+
+		return $localization_data;
 	}
 
 	public function get_wrong_plugin_localization_stats() {

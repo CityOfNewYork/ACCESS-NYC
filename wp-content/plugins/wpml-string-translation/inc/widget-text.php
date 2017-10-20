@@ -20,7 +20,7 @@ function icl_widget_text_in_widget_form_hook($widget, $return, $instance) {
         // Convert if necessary
         if ($widget->updated && isset($_POST['icl_convert'])) {
             if (icl_widget_text_convert_to_multilingual($widget, $instance) === TRUE) {
-                _e('This widget is converted to multilingual', 'sitepress');
+                _e('This widget is converted to multilingual', 'wpml-string-translation');
             }
             return '';
         }
@@ -28,9 +28,9 @@ function icl_widget_text_in_widget_form_hook($widget, $return, $instance) {
         if (!icl_widget_text_is_converted($widget)) {
             icl_widget_text_language_selectbox();
             echo '<label><input type="checkbox" name="icl_convert" value="1" />&nbsp;'
-            . __('Convert to multilingual widget', 'sitepress') . '</label>';
+            . __('Convert to multilingual widget', 'wpml-string-translation') . '</label>';
         } else {
-            _e('This widget is converted to multilingual', 'sitepress');
+            _e('This widget is converted to multilingual', 'wpml-string-translation');
         }
     }
 }
@@ -73,14 +73,14 @@ function icl_widget_text_convert_to_multilingual($text_widget, $instance) {
     // Get in which sidebar
     $sidebars = wp_get_sidebars_widgets();
     if (!isset($_POST['sidebar']) || !isset($sidebars[$_POST['sidebar']])) {
-        _e('Converting to multilingual widget failed. No sidebar specified.', 'sitepress');
+        _e('Converting to multilingual widget failed. No sidebar specified.', 'wpml-string-translation');
         return FALSE;
     }
 
     // Add new instance
     $icl_widgets_text = get_option('widget_text_icl', array());
     if (isset($icl_widgets_text[$icl_widget->number])) {
-        _e('Widget is already converted', 'sitepress');
+        _e('Widget is already converted', 'wpml-string-translation');
         return FALSE;
     }
     unset($icl_widgets_text['_multiwidget']);

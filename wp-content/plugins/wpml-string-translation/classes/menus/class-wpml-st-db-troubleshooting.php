@@ -27,9 +27,9 @@ class WPML_ST_DB_Troubleshooting extends WPML_Templates_Factory {
 
 	public function get_model() {
 		return array(
-			'buttonLabel' => __( 'Recreate ST DB cache tables', 'sitepress' ),
-			'description' => __( 'Recreate String Translation cache tables when they are missing or are invalid.', 'sitepress' ),
-			'successMsg'  => esc_js( __( 'Done', 'sitepress' ) ),
+			'buttonLabel' => __( 'Recreate ST DB cache tables', 'wpml-string-translation' ),
+			'description' => __( 'Recreate String Translation cache tables when they are missing or are invalid.', 'wpml-string-translation' ),
+			'successMsg'  => esc_js( __( 'Done', 'wpml-string-translation' ) ),
 			'nonce'       => wp_create_nonce( 'wpml-st-upgrade-db-cache-command-nonce' ),
 		);
 	}

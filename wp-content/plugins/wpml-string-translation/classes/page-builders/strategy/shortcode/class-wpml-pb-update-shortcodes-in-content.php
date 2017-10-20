@@ -71,7 +71,7 @@ class WPML_PB_Update_Shortcodes_In_Content {
 				if ( in_array( $attr, $translatable_attributes, true ) ) {
 					$encoding            = $this->strategy->get_shortcode_attribute_encoding( $shortcode_data['tag'], $attr );
 					$translation         = $this->get_translation( $attr_value, $encoding );
-					$translation         = $this->filter_attribute_translation( $translation );
+					$translation         = $this->filter_attribute_translation( $translation, $encoding );
 					$shortcode_attribute = $this->replace_string_with_translation( $shortcode_attribute, $attr_value, $translation, true );
 				}
 			}
@@ -79,13 +79,16 @@ class WPML_PB_Update_Shortcodes_In_Content {
 	}
 
 	private function replace_string_with_translation( $block, $original, $translation, $is_attribute = false ) {
+		$translation = apply_filters( 'wpml_pb_before_replace_string_with_translation', $translation, $is_attribute );
+
 		$new_block = $block;
 		if ( $translation ) {
 			if ( $is_attribute ) {
 				$pattern   = '/(["\'])' . preg_quote( $original, '/' ) . '(["\'])/';
 				$new_block = preg_replace( $pattern, '${1}' . $translation . '${2}', $block );
 			} else {
-				$new_block = str_replace( ']' . $original . '[', ']' . $translation . '[', $block );
+				$pattern   = '/(]\s*)' . preg_quote( trim( $original ), '/' ) . '(\s*\[)/';
+				$new_block = preg_replace( $pattern, '${1}' . trim( $translation ) . '${2}', $block );
 			}
 			$this->new_content = str_replace( $block, $new_block, $this->new_content );
 		}
@@ -130,12 +133,16 @@ class WPML_PB_Update_Shortcodes_In_Content {
 	}
 
 	/**
-	 * @param $translation
+	 * @param string $translation
+	 * @param string $encoding
 	 *
 	 * @return string
 	 */
-	private function filter_attribute_translation( $translation ) {
-		$translation = htmlspecialchars( $translation );
+	private function filter_attribute_translation( $translation, $encoding ) {
+		if ( 'allow_html_tags' !== $encoding ) {
+			$translation = htmlspecialchars( $translation );
+		}
+
 		$translation = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $translation );
 
 		return $translation;

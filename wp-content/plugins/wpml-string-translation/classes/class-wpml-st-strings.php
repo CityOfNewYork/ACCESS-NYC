@@ -176,7 +176,7 @@ class WPML_ST_Strings {
 				foreach ( $res as $row ) {
 					$string_translations[ $row[ 'string_id' ] ] = $row;
 					$tr                                         = $this->wpdb->get_results( $this->wpdb->prepare( "
-	                    SELECT id, language, status, value, translator_id, translation_date  
+	                    SELECT id, language, status, value, mo_string, translator_id, translation_date  
 	                    FROM {$this->wpdb->prefix}icl_string_translations 
 	                    WHERE string_id=%d {$extra_cond}
 	                ", $row[ 'string_id' ] ), ARRAY_A );
@@ -194,7 +194,7 @@ class WPML_ST_Strings {
 
 	public function get_per_domain_counts( $status ) {
 		$extra_cond = '';
-		$joins      = '';
+		$joins      = array();
 
 		$current_user = $this->sitepress->get_current_user();
 
