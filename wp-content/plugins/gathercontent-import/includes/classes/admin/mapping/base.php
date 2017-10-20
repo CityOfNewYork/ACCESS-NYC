@@ -174,10 +174,11 @@ abstract class Base extends Plugin_Base {
 				break;
 			case 'post_status':
 				$select_options = array(
-					'publish' => __( 'Published', 'gathercontent-import' ),
-					'draft'   => __( 'Draft', 'gathercontent-import' ),
-					'pending' => __( 'Pending', 'gathercontent-import' ),
-					'private' => __( 'Private', 'gathercontent-import' ),
+					'publish'  => __( 'Published', 'gathercontent-import' ),
+					'draft'    => __( 'Draft', 'gathercontent-import' ),
+					'pending'  => __( 'Pending', 'gathercontent-import' ),
+					'private'  => __( 'Private', 'gathercontent-import' ),
+					'nochange' => __( 'Do not change', 'gathercontent-import' ),
 				);
 				break;
 			case 'post_type':
