@@ -1,12 +1,10 @@
 <?php
 
-class FacetWP_Facet_Slider
+class FacetWP_Facet_Slider extends FacetWP_Facet
 {
 
     function __construct() {
         $this->label = __( 'Slider', 'fwp' );
-
-        add_filter( 'facetwp_index_row', array( $this, 'index_row' ), 5, 2 );
     }
 
 
@@ -15,9 +13,7 @@ class FacetWP_Facet_Slider
      */
     function render( $params ) {
 
-        $output = '';
-        $value = $params['selected_values'];
-        $output .= '<div class="facetwp-slider-wrap">';
+        $output = '<div class="facetwp-slider-wrap">';
         $output .= '<div class="facetwp-slider"></div>';
         $output .= '</div>';
         $output .= '<span class="facetwp-slider-label"></span>';
@@ -36,17 +32,36 @@ class FacetWP_Facet_Slider
         $values = $params['selected_values'];
         $where = '';
 
-        if ( !empty( $values[0] ) ) {
-            $where .= " AND CAST(facet_value AS DECIMAL(10,2)) >= '{$values[0]}'";
+        $start = ( '' == $values[0] ) ? false : $values[0];
+        $end = ( '' == $values[1] ) ? false : $values[1];
+
+        $is_dual = ! empty( $facet['source_other'] );
+        $is_intersect = FWP()->helper->facet_is( $facet, 'compare_type', 'intersect' );
+
+        /**
+         * Intersect compare
+         * @link http://stackoverflow.com/a/325964
+         */
+        if ( $is_dual && $is_intersect ) {
+            $start = ( false !== $start ) ? $start : '-999999999999';
+            $end = ( false !== $end ) ? $end : '999999999999';
+
+            $where .= " AND (facet_value + 0) <= '$end'";
+            $where .= " AND (facet_display_value + 0) >= '$start'";
         }
-        if ( !empty( $values[1] ) ) {
-            $where .= " AND CAST(facet_display_value AS DECIMAL(10,2)) <= '{$values[1]}'";
+        else {
+            if ( false !== $start ) {
+                $where .= " AND (facet_value + 0) >= '$start'";
+            }
+            if ( false !== $end ) {
+                $where .= " AND (facet_display_value + 0) <= '$end'";
+            }
         }
 
         $sql = "
         SELECT DISTINCT post_id FROM {$wpdb->prefix}facetwp_index
         WHERE facet_name = '{$facet['name']}' $where";
-        return $wpdb->get_col( $sql );
+        return facetwp_sql( $sql, $facet );
     }
 
 
@@ -69,8 +84,8 @@ class FacetWP_Facet_Slider
         );
         $facet = array_merge( $defaults, $facet );
 
-        $min = $wpdb->get_var( "SELECT facet_value FROM {$wpdb->prefix}facetwp_index WHERE facet_name = '{$facet['name']}' $where_clause ORDER BY (facet_value + 0) ASC LIMIT 1" );
-        $max = $wpdb->get_var( "SELECT facet_display_value FROM {$wpdb->prefix}facetwp_index WHERE facet_name = '{$facet['name']}' $where_clause ORDER BY (facet_display_value + 0) DESC LIMIT 1" );
+        $min = $wpdb->get_var( "SELECT facet_value FROM {$wpdb->prefix}facetwp_index WHERE facet_name = '{$facet['name']}' AND facet_value != '' $where_clause ORDER BY (facet_value + 0) ASC LIMIT 1" );
+        $max = $wpdb->get_var( "SELECT facet_display_value FROM {$wpdb->prefix}facetwp_index WHERE facet_name = '{$facet['name']}' AND facet_display_value != '' $where_clause ORDER BY (facet_display_value + 0) DESC LIMIT 1" );
 
         $selected_min = isset( $selected_values[0] ) ? $selected_values[0] : $min;
         $selected_max = isset( $selected_values[1] ) ? $selected_values[1] : $max;
@@ -101,20 +116,26 @@ class FacetWP_Facet_Slider
     wp.hooks.addAction('facetwp/load/slider', function($this, obj) {
         $this.find('.facet-source').val(obj.source);
         $this.find('.facet-source-other').val(obj.source_other);
+        $this.find('.facet-compare-type').val(obj.compare_type);
         $this.find('.facet-prefix').val(obj.prefix);
         $this.find('.facet-suffix').val(obj.suffix);
         $this.find('.facet-format').val(obj.format);
         $this.find('.facet-step').val(obj.step);
     });
 
-    wp.hooks.addFilter('facetwp/save/slider', function($this, obj) {
+    wp.hooks.addFilter('facetwp/save/slider', function(obj, $this) {
         obj['source'] = $this.find('.facet-source').val();
         obj['source_other'] = $this.find('.facet-source-other').val();
+        obj['compare_type'] = $this.find('.facet-compare-type').val();
         obj['prefix'] = $this.find('.facet-prefix').val();
         obj['suffix'] = $this.find('.facet-suffix').val();
         obj['format'] = $this.find('.facet-format').val();
         obj['step'] = $this.find('.facet-step').val();
         return obj;
+    });
+
+    wp.hooks.addAction('facetwp/change/slider', function($this) {
+        $this.closest('.facetwp-row').find('.facet-source-other').trigger('change');
     });
 })(jQuery);
 </script>
@@ -126,129 +147,9 @@ class FacetWP_Facet_Slider
      * Output any front-end scripts
      */
     function front_scripts() {
-?>
-<link href="<?php echo FACETWP_URL; ?>/assets/js/noUiSlider/nouislider.min.css?ver=8.1.0" rel="stylesheet">
-<script src="<?php echo FACETWP_URL; ?>/assets/js/noUiSlider/nouislider.min.js?ver=8.1.0"></script>
-<script src="<?php echo FACETWP_URL; ?>/assets/js/nummy/nummy.min.js"></script>
-<script>
-
-
-FWP.used_facets = {};
-
-
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/slider', function($this, facet_name) {
-        FWP.facets[facet_name] = [];
-
-        // The settings have already been loaded
-        if ('undefined' !== typeof FWP.used_facets[facet_name]) {
-            if ('undefined' !== typeof $this.find('.facetwp-slider')[0].noUiSlider) {
-                FWP.facets[facet_name] = $this.find('.facetwp-slider')[0].noUiSlider.get();
-            }
-        }
-    });
-
-    wp.hooks.addAction('facetwp/set_label/slider', function($this) {
-        var facet_name = $this.attr('data-name');
-        var min = FWP.settings[facet_name]['lower'];
-        var max = FWP.settings[facet_name]['upper'];
-        var format = FWP.settings[facet_name]['format'];
-        var opts = {
-            decimal_separator: FWP.settings[facet_name]['decimal_separator'],
-            thousands_separator: FWP.settings[facet_name]['thousands_separator']
-        };
-
-        if ( min === max ) {
-            var label = FWP.settings[facet_name]['prefix']
-                + nummy(min).format(format, opts)
-                + FWP.settings[facet_name]['suffix'];
-        }
-        else {
-            var label = FWP.settings[facet_name]['prefix']
-                + nummy(min).format(format, opts)
-                + FWP.settings[facet_name]['suffix']
-                + ' &mdash; '
-                + FWP.settings[facet_name]['prefix']
-                + nummy(max).format(format, opts)
-                + FWP.settings[facet_name]['suffix'];
-        }
-        $this.find('.facetwp-slider-label').html(label);
-    });
-
-    wp.hooks.addFilter('facetwp/selections/slider', function(output, params) {
-        return params.el.find('.facetwp-slider-label').text();
-    });
-
-    $(document).on('facetwp-loaded', function() {
-        $('.facetwp-slider:not(.ready)').each(function() {
-            var $parent = $(this).closest('.facetwp-facet');
-            var facet_name = $parent.attr('data-name');
-            var opts = FWP.settings[facet_name];
-
-            // On first load, check for slider URL variable
-            if (false !== FWP_Helper.get_url_var(facet_name)) {
-                FWP.used_facets[facet_name] = true;
-            }
-
-            // Fail on slider already initialized
-            if ('undefined' != typeof $(this).data('options')) {
-                return;
-            }
-
-            // Fail if start values are null
-            if (null === FWP.settings[facet_name].start[0]) {
-                return;
-            }
-
-            // Fail on invalid ranges
-            if (parseFloat(opts.range.min) >= parseFloat(opts.range.max)) {
-                FWP.settings[facet_name]['lower'] = opts.range.min;
-                FWP.settings[facet_name]['upper'] = opts.range.max;
-                wp.hooks.doAction('facetwp/set_label/slider', $parent);
-                return;
-            }
-
-            // Support custom slider options
-            var slider_opts = wp.hooks.applyFilters('facetwp/set_options/slider', {
-                range: opts.range,
-                start: opts.start,
-                step: parseFloat(opts.step),
-                connect: true
-            }, { 'facet_name': facet_name });
-
-
-            var slider = $(this)[0];
-            noUiSlider.create(slider, slider_opts);
-            slider.noUiSlider.on('update', function(values, handle) {
-                FWP.settings[facet_name]['lower'] = values[0];
-                FWP.settings[facet_name]['upper'] = values[1];
-                wp.hooks.doAction('facetwp/set_label/slider', $parent);
-            });
-            slider.noUiSlider.on('set', function() {
-                FWP.used_facets[facet_name] = true;
-                FWP.static_facet = facet_name;
-                FWP.autoload();
-            });
-
-            $(this).addClass('ready');
-        });
-
-        // Hide reset buttons
-        $('.facetwp-type-slider').each(function() {
-            var name = $(this).attr('data-name');
-            var $button = $(this).find('.facetwp-slider-reset');
-            $.isEmptyObject(FWP.facets[name]) ? $button.hide() : $button.show();
-        });
-    });
-
-    $(document).on('click', '.facetwp-slider-reset', function() {
-        var facet_name = $(this).closest('.facetwp-facet').attr('data-name');
-        delete FWP.used_facets[facet_name];
-        FWP.refresh();
-    });
-})(jQuery);
-</script>
-<?php
+        FWP()->display->assets['nouislider.css'] = FACETWP_URL . '/assets/js/noUiSlider/nouislider.min.css';
+        FWP()->display->assets['nouislider.js'] = FACETWP_URL . '/assets/js/noUiSlider/nouislider.min.js';
+        FWP()->display->assets['nummy.js'] = FACETWP_URL . '/assets/js/src/nummy.js';
     }
 
 
@@ -278,6 +179,15 @@ FWP.used_facets = {};
                         <?php endforeach; ?>
                     </optgroup>
                     <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><?php _e('Compare type', 'fwp'); ?>:</td>
+            <td>
+                <select class="facet-compare-type">
+                    <option value=""><?php _e( 'Basic', 'fwp' ); ?></option>
+                    <option value="intersect"><?php _e( 'Intersect', 'fwp' ); ?></option>
                 </select>
             </td>
         </tr>
@@ -336,23 +246,5 @@ FWP.used_facets = {};
             <td><input type="text" class="facet-step" value="1" /></td>
         </tr>
 <?php
-    }
-
-
-    /**
-     * Index the 2nd data source
-     * @since 2.1.1
-     */
-    function index_row( $params, $class ) {
-        $facet = FWP()->helper->get_facet_by_name( $params['facet_name'] );
-
-        if ( 'slider' == $facet['type'] && ! empty( $facet['source_other'] ) ) {
-            $other_params = $params;
-            $other_params['facet_source'] = $facet['source_other'];
-            $rows = $class->get_row_data( $other_params );
-            $params['facet_display_value'] = $rows[0]['facet_display_value'];
-        }
-
-        return $params;
     }
 }

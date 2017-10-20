@@ -24,7 +24,7 @@ class FacetWP_Upgrade
         global $wpdb;
 
         $sql = "
-        CREATE TABLE {$wpdb->prefix}facetwp_index (
+        CREATE TABLE IF NOT EXISTS {$wpdb->prefix}facetwp_index (
             id BIGINT unsigned not null auto_increment,
             post_id INT unsigned,
             facet_name VARCHAR(255),
@@ -34,6 +34,7 @@ class FacetWP_Upgrade
             term_id INT unsigned default '0',
             parent_id INT unsigned default '0',
             depth INT unsigned default '0',
+            variation_id INT unsigned default '0',
             PRIMARY KEY (id),
             INDEX facet_name_idx (facet_name),
             INDEX facet_source_idx (facet_source)
@@ -41,7 +42,7 @@ class FacetWP_Upgrade
         dbDelta( $sql );
 
         // Add default settings
-        $settings = file_get_contents( FACETWP_DIR . '/assets/js/sample.json' );
+        $settings = file_get_contents( FACETWP_DIR . '/assets/js/src/sample.json' );
         add_option( 'facetwp_settings', $settings );
     }
 
@@ -49,18 +50,7 @@ class FacetWP_Upgrade
     private function run_upgrade() {
         global $wpdb;
 
-        // Add the "facet_name" column
-        if ( version_compare( $this->last_version, '0.6', '<' ) ) {
-            $wpdb->query( "ALTER TABLE {$wpdb->prefix}facetwp_index ADD COLUMN facet_name VARCHAR(255) AFTER post_id" );
-        }
-
-        // Add "parent_id" and "depth" columns
-        if ( version_compare( $this->last_version, '0.9', '<' ) ) {
-            $wpdb->query( "ALTER TABLE {$wpdb->prefix}facetwp_index ADD COLUMN parent_id INT unsigned default '0' AFTER facet_display_value" );
-            $wpdb->query( "ALTER TABLE {$wpdb->prefix}facetwp_index ADD COLUMN depth INT unsigned default '0' AFTER parent_id" );
-        }
-
-        // Add the "term_id" column
+        // Add "term_id" column
         if ( version_compare( $this->last_version, '1.9', '<' ) ) {
             $wpdb->query( "ALTER TABLE {$wpdb->prefix}facetwp_index ADD COLUMN term_id INT unsigned default '0' AFTER facet_display_value" );
 
@@ -72,6 +62,11 @@ class FacetWP_Upgrade
         if ( version_compare( $this->last_version, '2.2.3', '<' ) ) {
             deactivate_plugins( 'facetwp-proximity/facetwp-proximity.php' );
             deactivate_plugins( 'facetwp-proximity-master/facetwp-proximity.php' );
+        }
+
+        // Add "variation_id" column
+        if ( version_compare( $this->last_version, '2.7', '<' ) ) {
+            $wpdb->query( "ALTER TABLE {$wpdb->prefix}facetwp_index ADD COLUMN variation_id INT unsigned default '0' AFTER depth" );
         }
     }
 }

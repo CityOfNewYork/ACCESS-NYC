@@ -1,12 +1,10 @@
 <?php
 
-class FacetWP_Facet_Date_Range
+class FacetWP_Facet_Date_Range extends FacetWP_Facet
 {
 
     function __construct() {
         $this->label = __( 'Date Range', 'fwp' );
-
-        add_filter( 'facetwp_index_row', array( $this, 'index_row' ), 5, 2 );
     }
 
 
@@ -20,11 +18,14 @@ class FacetWP_Facet_Date_Range
         $value = empty( $value ) ? array( '', '' ) : $value;
         $fields = empty( $params['facet']['fields'] ) ? 'both' : $params['facet']['fields'];
 
+        if ( 'exact' == $fields ) {
+            $output .= '<input type="text" class="facetwp-date facetwp-date-min" value="' . esc_attr( $value[0] ) . '" placeholder="' . __( 'Date', 'fwp' ) . '" />';
+        }
         if ( 'both' == $fields || 'start_date' == $fields ) {
-            $output .= '<input type="text" class="facetwp-date facetwp-date-min" value="' . $value[0] . '" placeholder="' . __( 'Start Date', 'fwp' ) . '" />';
+            $output .= '<input type="text" class="facetwp-date facetwp-date-min" value="' . esc_attr( $value[0] ) . '" placeholder="' . __( 'Start Date', 'fwp' ) . '" />';
         }
         if ( 'both' == $fields || 'end_date' == $fields ) {
-            $output .= '<input type="text" class="facetwp-date facetwp-date-max" value="' . $value[1] . '" placeholder="' . __( 'End Date', 'fwp' ) . '" />';
+            $output .= '<input type="text" class="facetwp-date facetwp-date-max" value="' . esc_attr( $value[1] ) . '" placeholder="' . __( 'End Date', 'fwp' ) . '" />';
         }
         return $output;
     }
@@ -37,32 +38,74 @@ class FacetWP_Facet_Date_Range
         global $wpdb;
 
         $facet = $params['facet'];
-        $dates = $params['selected_values'];
+        $values = $params['selected_values'];
         $where = '';
 
-        // For dual ranges, find any overlap
-        if ( ! empty( $facet['source_other'] ) ) {
-            $start = empty( $dates[0] ) ? '0000-01-01' : $dates[0];
-            $end = empty( $dates[1] ) ? '3000-12-31' : $dates[1];
+        $start = empty( $values[0] ) ? false : $values[0];
+        $end = empty( $values[1] ) ? false : $values[1];
 
-            // http://stackoverflow.com/a/325964
-            $where .= " AND (LEFT(facet_value, 10) <= '$end')";
-            $where .= " AND (LEFT(facet_display_value, 10) >= '$start')";
-        }
-        // Otherwise, do a basic comparison
-        else {
-            if ( '' != $dates[0] ) {
-                $where .= " AND LEFT(facet_value, 10) >= '" . $dates[0] . "'";
+        $is_dual = ! empty( $facet['source_other'] );
+        $compare_type = isset( $facet['compare_type'] ) ? $facet['compare_type'] : '';
+
+        if ( $is_dual ) {
+            $start = ( false !== $start ) ? $start : '0000-00-00';
+            $end = ( false !== $end ) ? $end : '3000-12-31';
+
+            /**
+             * Single input, multiple data sources
+             */
+            if ( 'exact' == $facet['fields'] ) {
+                $end = $start;
             }
-            if ( '' != $dates[1] ) {
-                $where .= " AND LEFT(facet_display_value, 10) <= '" . $dates[1] . "'";
+
+            /**
+             * Intersect compare
+             * @link http://stackoverflow.com/a/325964
+             */
+            if ( 'intersect' == $compare_type ) {
+                $where .= " AND (LEFT(facet_value, 10) <= '$end')";
+                $where .= " AND (LEFT(facet_display_value, 10) >= '$start')";
+            }
+
+            /**
+             * Enclose compare
+             * The post's range must surround the user-defined range
+             */
+            elseif ( 'enclose' == $compare_type ) {
+                $where .= " AND LEFT(facet_value, 10) <= '$start'";
+                $where .= " AND LEFT(facet_display_value, 10) >= '$end'";
+            }
+        }
+
+        /**
+         * Exact match
+         */
+        if ( 'exact' == $facet['fields'] && '' == $where ) {
+            if ( $start ) {
+                $where .= " AND LEFT(facet_value, 10) = '$start'";
+            }
+            if ( $end ) {
+                $where .= " AND LEFT(facet_display_value, 10) = '$end'";
+            }
+        }
+
+        /**
+         * Basic compare
+         * The user-defined range must surround the post's range
+         */
+        if ( '' == $where ) {
+            if ( $start ) {
+                $where .= " AND LEFT(facet_value, 10) >= '$start'";
+            }
+            if ( $end ) {
+                $where .= " AND LEFT(facet_display_value, 10) <= '$end'";
             }
         }
 
         $sql = "
         SELECT DISTINCT post_id FROM {$wpdb->prefix}facetwp_index
         WHERE facet_name = '{$facet['name']}' $where";
-        return $wpdb->get_col( $sql );
+        return facetwp_sql( $sql, $facet );
     }
 
 
@@ -76,14 +119,22 @@ class FacetWP_Facet_Date_Range
     wp.hooks.addAction('facetwp/load/date_range', function($this, obj) {
         $this.find('.facet-source').val(obj.source);
         $this.find('.facet-source-other').val(obj.source_other);
+        $this.find('.facet-compare-type').val(obj.compare_type);
         $this.find('.facet-date-fields').val(obj.fields);
+        $this.find('.facet-format').val(obj.format);
     });
 
-    wp.hooks.addFilter('facetwp/save/date_range', function($this, obj) {
+    wp.hooks.addFilter('facetwp/save/date_range', function(obj, $this) {
         obj['source'] = $this.find('.facet-source').val();
         obj['source_other'] = $this.find('.facet-source-other').val();
+        obj['compare_type'] = $this.find('.facet-compare-type').val();
         obj['fields'] = $this.find('.facet-date-fields').val();
+        obj['format'] = $this.find('.facet-format').val();
         return obj;
+    });
+
+    wp.hooks.addAction('facetwp/change/date_range', function($this) {
+        $this.closest('.facetwp-row').find('.facet-source-other').trigger('change');
     });
 })(jQuery);
 </script>
@@ -95,35 +146,19 @@ class FacetWP_Facet_Date_Range
      * Output any front-end scripts
      */
     function front_scripts() {
-?>
-<link href="<?php echo FACETWP_URL; ?>/assets/js/bootstrap-datepicker/datepicker.css?ver=<?php echo FACETWP_VERSION; ?>" rel="stylesheet">
-<script src="<?php echo FACETWP_URL; ?>/assets/js/bootstrap-datepicker/bootstrap-datepicker.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
-<script>
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/date_range', function($this, facet_name) {
-        var min = $this.find('.facetwp-date-min').val() || '';
-        var max = $this.find('.facetwp-date-max').val() || '';
-        FWP.facets[facet_name] = ('' != min || '' != max) ? [min, max] : [];
-    });
+        $locale = get_locale();
+        $locale = empty( $locale ) ? 'en' : substr( $locale, 0, 2 );
 
-    wp.hooks.addFilter('facetwp/selections/date_range', function(output, params) {
-        return params.selected_values[0] + ' - ' + params.selected_values[1];
-    });
+        FWP()->display->json['datepicker'] = array(
+            'locale'    => $locale,
+            'clearText' => __( 'Clear', 'fwp' ),
+        );
+        FWP()->display->assets['flatpickr.css'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.css';
+        FWP()->display->assets['flatpickr.js'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.min.js';
 
-    wp.hooks.addAction('facetwp/ready', function() {
-        $(document).on('facetwp-loaded', function() {
-            $('.facetwp-date').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                clearBtn: true
-            }).on('changeDate', function(e) {
-                FWP.autoload();
-            });
-        });
-    });
-})(jQuery);
-</script>
-<?php
+        if ( 'en' != $locale ) {
+            FWP()->display->assets['flatpickr-l10n.js'] = FACETWP_URL . "/assets/js/flatpickr/l10n/$locale.js";
+        }
     }
 
 
@@ -155,33 +190,45 @@ class FacetWP_Facet_Date_Range
             </td>
         </tr>
         <tr>
+            <td><?php _e('Compare type', 'fwp'); ?>:</td>
+            <td>
+                <select class="facet-compare-type">
+                    <option value=""><?php _e( 'Basic', 'fwp' ); ?></option>
+                    <option value="enclose"><?php _e( 'Enclose', 'fwp' ); ?></option>
+                    <option value="intersect"><?php _e( 'Intersect', 'fwp' ); ?></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td><?php _e('Fields to show', 'fwp'); ?>:</td>
             <td>
                 <select class="facet-date-fields">
-                    <option value="both"><?php _e( 'Both', 'fwp' ); ?></option>
+                    <option value="both"><?php _e( 'Start + End Dates', 'fwp' ); ?></option>
+                    <option value="exact"><?php _e( 'Exact Date', 'fwp' ); ?></option>
                     <option value="start_date"><?php _e( 'Start Date', 'fwp' ); ?></option>
                     <option value="end_date"><?php _e( 'End Date', 'fwp' ); ?></option>
                 </select>
             </td>
+        </tr>
+        <tr>
+            <td>
+                <?php _e('Display format', 'fwp'); ?>:
+                <div class="facetwp-tooltip">
+                    <span class="icon-question">?</span>
+                    <div class="facetwp-tooltip-content">See available <a href="https://chmln.github.io/flatpickr/formatting/" target="_blank">formatting tokens</a></div>
+                </div>
+            </td>
+            <td><input type="text" class="facet-format" value="" placeholder="Y-m-d" /></td>
         </tr>
 <?php
     }
 
 
     /**
-     * Index the 2nd data source
-     * @since 2.1.1
+     * (Front-end) Attach settings to the AJAX response
      */
-    function index_row( $params, $class ) {
-        $facet = FWP()->helper->get_facet_by_name( $params['facet_name'] );
-
-        if ( 'date_range' == $facet['type'] && ! empty( $facet['source_other'] ) ) {
-            $other_params = $params;
-            $other_params['facet_source'] = $facet['source_other'];
-            $rows = $class->get_row_data( $other_params );
-            $params['facet_display_value'] = $rows[0]['facet_display_value'];
-        }
-
-        return $params;
+    function settings_js( $params ) {
+        $format = empty( $params['facet']['format'] ) ? 'Y-m-d' : $params['facet']['format'];
+        return array( 'format' => $format );
     }
 }
