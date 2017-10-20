@@ -9,7 +9,7 @@ class WPML_ACF_Xliff {
 	/** @var SitePress $sitepress */
 	protected $sitepress;
 
-	private $reg_ext_patterns            = array();
+	private $search_patterns            = array();
 	private $cache_key_for_fields_groups = 'get_acf_groups';
 	private $cache_group                 = 'wpml_acf';
 
@@ -31,8 +31,8 @@ class WPML_ACF_Xliff {
 
 	public function save_post() {
 		if ( $this->is_updating_a_translatable_post_with_acf_fields() ) {
-			$this->reg_ext_patterns = array();
-			$fields                 = get_field_objects( $_POST['post_ID'] );
+			$this->search_patterns = array();
+			$fields                = get_field_objects( $_POST['post_ID'] );
 
 			if ( $fields && is_array( $fields ) ) {
 				$this->update_custom_fields_settings( $fields );
@@ -87,20 +87,20 @@ class WPML_ACF_Xliff {
 	}
 
 	private function update_post_meta_settings() {
-		$conditions = count( $this->reg_ext_patterns );
+		$conditions = count( $this->search_patterns );
 
 		if ( $conditions ) {
-			$this->reg_ext_patterns = array_unique( $this->reg_ext_patterns );
+			$this->search_patterns = array_unique( $this->search_patterns );
 
 			$sql_post_meta = "SELECT DISTINCT meta_key FROM {$this->wpdb->postmeta} WHERE ";
 
 			$sql_post_meta_where = array();
 			for ( $i = 0; $i < $conditions; $i ++ ) {
-				$sql_post_meta_where[] = 'meta_key REGEXP %s';
+				$sql_post_meta_where[] = 'meta_key LIKE %s';
 			}
 			$sql_post_meta .= implode( ' OR ', $sql_post_meta_where );
 
-			$sql = $this->wpdb->prepare( $sql_post_meta, $this->reg_ext_patterns );
+			$sql = $this->wpdb->prepare( $sql_post_meta, $this->search_patterns );
 
 			$metas = $this->wpdb->get_col( $sql );
 
@@ -109,7 +109,7 @@ class WPML_ACF_Xliff {
 				$this->set_field_to_be_copied( $meta );
 			}
 
-			$this->reg_ext_patterns = array();
+			$this->search_patterns = array();
 		}
 	}
 
@@ -127,10 +127,10 @@ class WPML_ACF_Xliff {
 	}
 
 	/**
-	 * @param $reg_ex_pattern
+	 * @param $search_pattern
 	 */
-	private function collect_meta_keys_to_update( $reg_ex_pattern ) {
-		$this->reg_ext_patterns[] = '^' . $reg_ex_pattern . '$';
+	private function collect_meta_keys_to_update( $search_pattern ) {
+		$this->search_patterns[] = $search_pattern;
 	}
 
 	private function get_wildcards_field_name( array $field = array() ) {
@@ -164,7 +164,7 @@ class WPML_ACF_Xliff {
 	 * @return string
 	 */
 	private function get_wildcards() {
-		return '[0-9]*';
+		return '%';
 	}
 
 	public function update_acf_field_group() {
@@ -172,9 +172,9 @@ class WPML_ACF_Xliff {
 			$cache = new WPML_WP_Cache( $this->cache_group );
 			$cache->flush_group_cache();
 
-			$this->reg_ext_patterns = array();
-			$group_id               = $_POST['post_ID'];
-			$groups                 = $this->get_acf_groups();
+			$this->search_patterns = array();
+			$group_id              = $_POST['post_ID'];
+			$groups                = $this->get_acf_groups();
 
 			/** @var WP_Post $group */
 			foreach ( $groups as $group ) {
