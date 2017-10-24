@@ -71,7 +71,9 @@ class ResultsField {
     let removeCode = event.currentTarget.dataset.removeCode;
     let index = programs.indexOf(removeCode);
     let location = window.location;
-    let shareUrl = [location.origin, location.pathname, '?'].join('');
+    let shareUrl = [
+        $(ResultsField.Selectors.SHARE_URLS)[0].value.split('?')[0], '?'
+      ].join('');
     let card = $(`[data-code="${removeCode}"]`);
     let selected = card.closest(ResultsField.Selectors.SELECTED_PROGRAMS);
     let additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);

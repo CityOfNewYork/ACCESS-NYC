@@ -98,7 +98,7 @@ $query = (isset($query)) ? '?'.$query : '';
 
 // Share by email/sms fields.
 $context['shareAction'] = admin_url( 'admin-ajax.php' );
-$context['shareUrl'] = $params['link'].$query;
+$context['shareUrl'] = $params['share_link'].$query;
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 $context['getParams'] = $get; // pass safe parameters
 

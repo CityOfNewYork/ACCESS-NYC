@@ -548,6 +548,7 @@ Routes::map('peu/results', function() {
   requires_auth('peu');
   $params = array();
   $params['link'] = home_url().'/peu/results/';
+  $params['share_link'] = home_url().'/eligibility/results';
   Routes::load('eligibility-results-field.php', $params, null, 200);
 });
 
