@@ -1,6 +1,6 @@
 <?php
 /**
- * Tempalte Name: Eligibility Screener Results
+ * Eligibility Screener Results
  * This controls the view at /elgibility/screener. It expects a few URL parameters.
  *   programs: a comma separated list of program codes
  *   categories: a comma separated list of category slugs
@@ -105,6 +105,6 @@ $context['getParams'] = $get; // pass safe parameters
 $context['selectedPrograms'] = Timber::get_posts( $selectedProgramArgs );
 $context['additionalPrograms'] = Timber::get_posts( $additionalProgramArgs );
 
-$templates = array( 'eligibility-results-field.twig' );
+$templates = array('eligibility-results-field.twig');
 
-Timber::render( $templates, $context );
+Timber::render($templates, $context);

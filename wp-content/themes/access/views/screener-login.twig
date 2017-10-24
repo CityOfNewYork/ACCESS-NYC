@@ -1,0 +1,45 @@
+{% extends 'base.twig' %}
+
+{% block head %}
+<meta name="robots" content="noindex,nofollow,noarchive">
+{% endblock %}
+
+{% block header %}
+<header class="site-header">
+  <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark">
+    <svg class="icon icon-logo-full" width="163">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
+    </svg>
+  </div>
+</header>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block content %}
+<main class="main-content layout screener-field" id="content">
+
+  <div class="layout__body bg-white" data-js="view">
+
+    <div class="m-top-3 p-top-3 d-flex jc-center">
+
+      <div>
+        <h1>{{ __('Login', 'accessnyc-screener') }}
+        </h1>
+        {{ function('get_the_password_form') }}
+      </div>
+
+    </div>
+
+  </div>
+
+  </main>
+{% endblock %}
+
+{% block scripts %}
+{% if is_debug %}
+<script src="/wp-content/themes/access/assets/js/main.field.js?v={{ date().timestamp }}"></script>
+{% else %}
+<script src="/wp-content/themes/access/assets/js/main.field.min.js"></script>
+{% endif %}
+{% endblock %}

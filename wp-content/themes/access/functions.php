@@ -481,6 +481,46 @@ function validate_params($namespace, $subject) {
   return (isset($matches[0])) ? $matches[0] : ''; // fail silently
 }
 
+/**
+ * Template for post password form
+ * @return [string] the form markup as a string
+ */
+function password_form() {
+  global $post;
+  $label = 'pwbox-'.(empty($post->ID) ? rand() : $post->ID);
+  $form = '<form action="' . esc_url(site_url('wp-login.php?action=postpass', 'login_post')) . '" method="post">
+    <div class="screener-question-container">
+      <label class="type-h3 c-blue-dark ff-sans-serif d-block" for="' . $label . '">' . __("Please enter your password", 'accessnyc-screener') . ' </label>
+      <input name="post_password" id="' . $label . '" type="password" maxlength="20" class="d-block w-100" />
+      <div class="m-top">
+        <input type="submit" name="Submit" class="btn btn-primary w-100 m-0" value="' . esc_attr__( "Submit" ) . '" />
+      </div>
+    </div>
+  </form>';
+  return $form;
+}
+
+add_filter('the_password_form', 'password_form');
+
+/**
+ * Hack for requiring authentication based on "post views"
+ * @param  [string] $role the path of the page to check authentication against
+ * @return [boolean]      truthy if authenticated
+ */
+function requires_auth($role) {
+  if (post_password_required(get_page_by_path($role)->ID)) {
+    wp_redirect('/peu/login');
+    exit;
+  } else {
+    return true;
+  }
+}
+
+/**
+ * Add expiry filter to post password tokens for one day
+ */
+// apply_filters('post_password_expires', 0);
+
 Routes::map('locations', function() {
   Routes::load('locations.php', null, null, 200);
 });
@@ -500,11 +540,21 @@ Routes::map('eligibility/results', function() {
 });
 
 Routes::map('peu', function() {
+  requires_auth('peu');
   Routes::load('screener-field.php', null, null, 200);
 });
 
 Routes::map('peu/results', function() {
+  requires_auth('peu');
   $params = array();
   $params['link'] = home_url().'/peu/results/';
   Routes::load('eligibility-results-field.php', $params, null, 200);
+});
+
+Routes::map('peu/login', function() {
+  if (!post_password_required(get_page_by_path('peu')->ID)) {
+    wp_redirect('/peu');
+    exit;
+  }
+  Routes::load('screener-login.php', null, null, 200);
 });
