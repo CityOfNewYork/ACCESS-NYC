@@ -191,7 +191,7 @@ gulp.task('default', ['build'], function() {
   gulp.watch(`${src}/scss/**/*.scss`, ['styles_dev', reload]);
 
   // Watch .js files
-  gulp.watch(`${src}/js/**/*.js`, ['lint', 'scripts', reload]);
+  gulp.watch(`${src}/js/**/*.js`, ['lint', 'clean', 'scripts', reload]);
 
   // Watch image files
   gulp.watch(`${src}/img/**/*`, ['images', reload]);
@@ -206,5 +206,5 @@ gulp.task('default', ['build'], function() {
 
 // Build
 gulp.task('build', ['clean'], () => {
-  gulp.start('styles', 'lint', 'scripts', 'svg-sprites');
+  gulp.start('styles', 'lint', 'clean', 'scripts', 'svg-sprites');
 });
