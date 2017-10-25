@@ -115,13 +115,21 @@ gulp.task('scripts', () => {
     .bundle()
     .pipe(sourcestream(`${entry}.js`))
     .pipe(buffer())
+    .pipe($.hashFilename())
+    // .pipe($.sourcemaps.init({loadMaps: true}))
+    // .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(`${dist}/js`))
-    .pipe($.sourcemaps.init({loadMaps: true}))
     .pipe($.uglify())
-    .pipe($.sourcemaps.write('./'))
-    .pipe($.rename(`${entry}.min.js`))
+    .pipe($.rename((path)=>{
+      if (path.basename.indexOf('.js') > -1) {
+        path.basename.split('.js')[0] += '.min.js';
+      } else {
+        path.basename += '.min';
+      }
+    }))
     .pipe(gulp.dest(`${dist}/js`));
   });
+  // console.dir($);
   return es.merge.apply(null, tasks);
 });
 

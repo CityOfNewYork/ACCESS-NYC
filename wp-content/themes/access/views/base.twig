@@ -146,16 +146,9 @@
       {% endblock %}
     </div>
 
-    {{wp_footer}}
+    {% block scripts %}{% endblock %}
 
-    {% block scripts %}
-      <script src="https://www.google.com/jsapi"></script>
-      {% if is_debug %}
-      <script src="/wp-content/themes/access/assets/js/main.js?v={{ date().timestamp }}"></script>
-      {% else %}
-      <script src="/wp-content/themes/access/assets/js/main.min.js"></script>
-      {% endif %}
-    {% endblock %}
+    {{ wp_footer }}
 
     {# Webtrends integration #}
     <script>

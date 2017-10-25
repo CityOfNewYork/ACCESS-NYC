@@ -5,6 +5,8 @@
  * To override for a particular post type, create a template named single-[post_type]
  */
 
+script('main');
+
 $context = Timber::get_context();
 
 $post = Timber::get_post();

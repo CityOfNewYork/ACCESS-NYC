@@ -9,6 +9,8 @@
  * @since   Timber 0.1
  */
 
+script('main');
+
 $templates = array( 'search.twig', 'archive.twig', 'index.twig' );
 $context = Timber::get_context();
 

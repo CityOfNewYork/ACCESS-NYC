@@ -134,13 +134,6 @@ class ScreenerField {
     // Validate calculated inputs based on regular expressions.
     new CalcInput(this._el);
 
-    // $el.on('keydown', '[data-type="float"]', this._enforceFloat);
-    // Numbers
-    // $el.on('keydown', 'input[type="number"]', this._enforceNumbersOnly);
-    // Max Length and Max Value
-    // $el.on('keydown', 'input[maxlength]', this._enforceMaxLength);
-    // $el.on('keydown', 'input[max]', this._enforceMaxValue);
-
     // Mask phone numbers
     $el.on('focus', 'input[type="tel"]',
       (event) => Utility.maskPhone(event.currentTarget));
@@ -584,7 +577,8 @@ ScreenerField.validate = function(event) {
 ScreenerField.valid = function(valid) {
   if (!valid) {
     /* eslint-disable no-console, no-debugger */
-    console.warn('Some required fields are not filled out.');
+    if (Utility.debug())
+      console.warn('Some required fields are not filled out.');
     /* eslint-enable no-console, no-debugger */
   } else {
     window.location.hash = event.currentTarget.hash;

@@ -3,6 +3,8 @@
  * Template anem: Program detail page.
  */
 
+script('main');
+
 $context = Timber::get_context();
 
 // Gets the url parameter on the page for navigating each section.

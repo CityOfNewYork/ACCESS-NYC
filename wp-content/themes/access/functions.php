@@ -517,11 +517,29 @@ function requires_auth($role) {
 }
 
 /**
+ * Enqueue a hashed script based on it's name.
+ * Enqueue the minified version based on debug mode.
+ * @param  [string] $name the name of the script source
+ * @return null
+ */
+function script($name) {
+  $dir = get_template_directory();
+  $files = array_filter(scandir("$dir/assets/js/"), function($var) use ($name) {
+    return (strpos($var, "$name-") !== false);
+  });
+  $hash = str_replace(array("$name-", '.js'), '', array_values($files)[0]);
+  $min = isset($_GET['debug']) ? '' : '.min';
+  $uri = get_template_directory_uri();
+  wp_enqueue_script($name, "$uri/assets/js/$name-$hash$min.js", array(), null, true);
+}
+
+/**
  * Add expiry filter to post password tokens for one day
  */
 // apply_filters('post_password_expires', 0);
 
 Routes::map('locations', function() {
+  script('main');
   Routes::load('locations.php', null, null, 200);
 });
 
@@ -530,10 +548,12 @@ Routes::map('locations/json', function() {
 });
 
 Routes::map('eligibility', function() {
+  script('main');
   Routes::load('screener.php', null, null, 200);
 });
 
 Routes::map('eligibility/results', function() {
+  script('main');
   $params = array();
   $params['link'] = home_url().'/eligibility/results/';
   Routes::load('eligibility-results.php', $params, null, 200);
@@ -541,11 +561,13 @@ Routes::map('eligibility/results', function() {
 
 Routes::map('peu', function() {
   requires_auth('peu');
+  script('main.field');
   Routes::load('screener-field.php', null, null, 200);
 });
 
 Routes::map('peu/results', function() {
   requires_auth('peu');
+  script('main.field');
   $params = array();
   $params['link'] = home_url().'/peu/results/';
   $params['share_link'] = home_url().'/eligibility/results';
@@ -557,5 +579,6 @@ Routes::map('peu/login', function() {
     wp_redirect('/peu');
     exit;
   }
+  script('main.field');
   Routes::load('screener-login.php', null, null, 200);
 });

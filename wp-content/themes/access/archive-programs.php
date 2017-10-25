@@ -4,6 +4,8 @@
  * Controller for the archive view at /programs
  */
 
+script('main');
+
 $context = Timber::get_context();
 
 if (isset($_GET['program_cat'])) {
