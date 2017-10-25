@@ -61,7 +61,7 @@ class ScreenerClient {
    * @param {object|string} param - Object of attributes, or a key for an
    *   individual attribute
    * @param {?string|number|boolean|array} value - Optional value to set.
-   * @return {this} ScreenerPerson
+   * @return {this} ScreenerClient
    */
   set(param, value) {
     if (_.isObject(param)) {
@@ -70,9 +70,7 @@ class ScreenerClient {
           this._setAttr(key, param[key]);
         }
       }
-    } /*else if (_.isArray(this.get(param))) {
-      console.dir('array');
-    }*/ else {
+    } else {
       this._setAttr(param, value);
     }
     return this;

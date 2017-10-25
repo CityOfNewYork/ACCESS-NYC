@@ -41,8 +41,6 @@
           <label class="{{styles.labels}}">
             {{ __('What kind of help are you looking for?', 'accessnyc-screener') }}
           </label>
-          <h4 class="{{styles.explainations}}">{{ __('So how does this work?', 'accessnyc-screener') }}</h4>
-          <p>{{ __('We\'ll be asking you about yourself and your household to find benefits and programs that you may be interested in. It usually takes about 10 minutes to answer all of the questions. The more we learn about you, the more accurate your screening results will be.', 'accessnyc-screener') }}</p>
           <div class="screener-checkboxes screener-categories m-top-2">
             {% for category in categories %}
             {% if language_code != 'en' %}

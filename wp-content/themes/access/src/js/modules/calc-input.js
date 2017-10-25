@@ -4,18 +4,29 @@
 import $ from 'jquery';
 import Utility from 'modules/utility';
 
+/**
+ * Calc Input Class
+ */
 class CalcInput {
 
+  /**
+   * Constructor
+   * @param  {object} element - the element triggering the event
+   */
   constructor(element) {
-
     this.selector = '[data-js*="calc-input"]';
 
     this.events = 'keydown paste drop';
 
-    $(element).on(this.events, this.selector, (e)=>{this.bus(e)});
-
+    $(element).on(this.events, this.selector, (event) => {
+      this.bus(event);
+    });
   }
 
+  /**
+   * The main event processor for drop, past, and key events
+   * @param  {object} event - the triggering event
+   */
   bus(event) {
     const key = event.keyCode;
     const backspace = (key === 8);
@@ -69,7 +80,8 @@ class CalcInput {
   /**
    * For a given dollar float input, product requirements dictate we should
    * limit values to 6 digits before the decimal point and 2 after.
-   * @param  {object} event the keydown event object
+   * @param  {string} text - the text to calculate
+   * @param  {object} event - the original event object
    */
   _calc(text, event) {
     const el = event.currentTarget;

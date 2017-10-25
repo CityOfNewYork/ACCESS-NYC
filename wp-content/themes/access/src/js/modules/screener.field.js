@@ -79,7 +79,6 @@ class ScreenerField {
         'localString': ScreenerField.localString
       }
     };
-
   }
 
   /**
@@ -88,7 +87,6 @@ class ScreenerField {
    * @return {this} OfficeMap
    */
   init() {
-
     if (this._initialized) {
       return this;
     }
@@ -111,20 +109,8 @@ class ScreenerField {
 
     let $el = $(this._el);
 
+    // Submit
     $el.on('click', '[data-js="submit"]', () => this._submit(event));
-      //if (!this._recaptchaRequired) {
-      //  this._submit($(e.currentTarget).data('action'));
-      // } else {
-      //   $(e.currentTarget).closest(`.${ScreenerField.Selectors.STEP}`)
-      //     .find(`.${ScreenerField.Selectors.ERROR_MSG}`).remove();
-      //   if (this._recaptchaVerified) {
-      //     this._submit($(e.currentTarget).data('action'));
-      //   } else {
-      //     this._showError($('#screener-recaptcha')[0],
-      //         ScreenerField.Message.REQUIRED);
-      //   }
-      // }
-    // });
 
     // Basic toggles
     $el.on('change', `.${ScreenerField.Selectors.TOGGLE}`, this._toggler);
@@ -142,8 +128,9 @@ class ScreenerField {
     window.addEventListener('hashchange', (event) => this._router(event));
 
     // Close Questions
-    $el.on('click', '[data-js="question"]',
-      (event)=>{this._routerQuestion(event.currentTarget.hash)});
+    $el.on('click', '[data-js="question"]', (event) => {
+      this._routerQuestion(event.currentTarget.hash);
+    });
 
     // Set the initial view
     this._routerPage('#page-admin');
@@ -284,7 +271,9 @@ class ScreenerField {
   _routerPage(page) {
     let view = document.querySelector(ScreenerField.Selectors.VIEW);
 
+    /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) console.log(`routerPage: ${page}`);
+    /* eslint-enable no-console, no-debugger */
 
     window.location.hash = page;
     view.scrollTop = 0;
@@ -315,7 +304,9 @@ class ScreenerField {
 
     // Show
     if (!target.hasClass('active')) {
+      /* eslint-disable no-console, no-debugger */
       if (Utility.debug()) console.log(`routerQuestion: Show ${hash}`);
+      /* eslint-enable no-console, no-debugger */
       $(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`)
         .addClass('hidden')
         .removeClass('active')
@@ -335,7 +326,9 @@ class ScreenerField {
       }, 1);
     // Hide
     } else {
+      /* eslint-disable no-console, no-debugger */
       if (Utility.debug()) console.log(`routerQuestion: Hide ${hash}`);
+      /* eslint-enable no-console, no-debugger */
       target.addClass('hidden')
         .removeClass('active')
         .prop('aria-hidden', true);
@@ -372,8 +365,7 @@ class ScreenerField {
    * input. If the input has a "shows" or "hides" data attribute, show or hide
    * relevant element accordingly.
    * @private
-   * @param {HTMLElement} el - Input/select element.
-   * @return {this} Screener
+   * @param {object} event - toggle event.
    */
   _toggler(event) {
     const $el = $(event.currentTarget);
@@ -394,7 +386,6 @@ class ScreenerField {
     if ($el.data('hides')) {
       $($el.data('hides')).addClass(ScreenerField.Selectors.HIDDEN);
     }
-    return this;
   }
 
   /**
@@ -483,7 +474,6 @@ class ScreenerField {
         data: json
       }
     }).done((data) => {
-
       let result = {
         'data': data,
         'url': url,
@@ -531,17 +521,13 @@ class ScreenerField {
       this._el.reset();
 
       window.location = `./results?${$.param(params)}`;
-    })/*.fail(function(error) {
-      // TODO(jjandoc): Display error messaging here.
-    })*/;
+    });
     /* eslint-enable no-console, no-debugger */
   }
 }
 
 /**
  * Checks to see if the input's value is a valid NYC zip code.
- * @param {HTMLELement} el - Input element to validate.
- * @return {this} Screener
  */
 ScreenerField.validateZipField = {
   getMessage: () => 'Must be a valid NYC zip code',
@@ -555,7 +541,6 @@ ScreenerField.validateZipField = {
  * Validation functionality, if a scope is attatched, it will only validate
  * against the scope stored in validScopes
  * @param  {event} event the click event
- * @return {null}
  */
 ScreenerField.validate = function(event) {
   event.preventDefault();
@@ -572,7 +557,6 @@ ScreenerField.validate = function(event) {
 /**
  * Validate
  * @param  {boolean} valid wether the validator passes validation
- * @return {null}
  */
 ScreenerField.valid = function(valid) {
   if (!valid) {
@@ -640,7 +624,6 @@ ScreenerField.checked = function(list, value) {
 /**
  * Resets a attribute matrix, ex "none of these apply"
  * @param  {object} event the click event
- * @return {null}
  */
 ScreenerField.resetAttr = function(event) {
   let el = event.currentTarget;
@@ -648,7 +631,7 @@ ScreenerField.resetAttr = function(event) {
   let index = el.dataset.index;
   let keys = el.dataset.key.split(',');
   let value = (el.value === 'true');
-  for (var i = keys.length - 1; i >= 0; i--) {
+  for (let i = keys.length - 1; i >= 0; i--) {
     if (typeof index === 'undefined') {
       this[obj].set(keys[i], value);
       // console.dir(this[obj]);
@@ -668,7 +651,6 @@ ScreenerField.resetAttr = function(event) {
  *                       index {number} item index in object (optional)
  *                       key {string} attribute to set
  *                       type {string} type of attribute
- * @return {null}
  */
 ScreenerField.setAttr = function(event) {
   let el = event.currentTarget;
@@ -718,10 +700,11 @@ ScreenerField.populate = function(event) {
 /**
  * Collects DOM income data and updates the model, if there is no income
  * data based on the DOM, it will create a new income object
- * @param  {object} data - person {index}
- *                         val {model attribute key}
- *                         key {income key}
- *                         value {model attribute value}
+ * @param  {object} event - change event, requires data attributes;
+ *                          person {index}
+ *                          val {model attribute key}
+ *                          key {income key}
+ *                          value {model attribute value}
  */
 ScreenerField.pushPayment = function(event) {
   let el = event.currentTarget;
@@ -818,14 +801,13 @@ ScreenerField.localString = function(slug) {
       {slug: slug}
     ).label;
   } catch (error) {
-    return slug
+    return slug;
   }
 };
 
 /**
  * Assembles data for the recap view and renders the recap template.
- * @private
- * @return {this} Screener
+ * @param  {object} vue - Screener data
  */
 ScreenerField.renderRecap = function(vue) {
   const templateData = {
@@ -943,8 +925,7 @@ ScreenerField.renderRecap = function(vue) {
   const template = $('#screener-recap-template').html();
   const renderedTemplate = _.template(template)(templateData);
   $('#recap-body').html(renderedTemplate);
-  return vue;
-}
+};
 
 /**
  * Component for the person label
@@ -954,12 +935,12 @@ ScreenerField.personLabel = {
   props: ['index', 'person'],
   template: '<span class="c-black">' +
     '<span :class="personIndex(index)"></span> ' +
-    '<span v-if="index == 0">You</span>' +
-    '<span v-if="person.headOfHousehold">, Head of Household</span>' +
+    '<span v-if="index == 0">You, </span>' +
+    '<span v-if="person.headOfHousehold">Head of Household, </span>' +
     '<span v-if="index != 0 && person.headOfHouseholdRelation != \'\'">' +
-      ', {{ personHeadOfHouseholdRelation(person.headOfHouseholdRelation) }}' +
+      '{{ personHeadOfHouseholdRelation(person.headOfHouseholdRelation) }}, ' +
     '</span>' +
-    '<span v-if="person.age != 0">, {{ person.age }}</span>' +
+    '<span v-if="person.age != 0">{{ person.age }}</span>' +
   '</span>',
   methods: {
     personIndex: function(index) {
@@ -967,7 +948,7 @@ ScreenerField.personLabel = {
       let classes = {
         'screener-members__member-icon': true
       };
-      classes[name] = true
+      classes[name] = true;
       return classes;
     },
     personHeadOfHouseholdRelation: ScreenerField.localString
@@ -1035,7 +1016,7 @@ ScreenerField.InputType = {
 ScreenerField.regex = {
   DROOLS_DOLLARS: '^([0-9]{1,6})(\\.[0-9]{0,2})?$',
   HOUSEHOLD_MEMBERS: '^[1-8]{1}$'
-}
+};
 
 /**
  * Valid zip codes in New York City. Source:

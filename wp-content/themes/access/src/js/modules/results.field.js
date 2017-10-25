@@ -62,6 +62,7 @@ class ResultsField {
   /**
    * Remove program from results, and trim the sharable url
    * @param  {event} event the onclick event
+   * @return {string} the new url
    */
   _removeProgram(event) {
     let shareUrl = $(ResultsField.Selectors.SHARE_URLS)[0].value;
@@ -72,7 +73,6 @@ class ResultsField {
     let date = Utility.getUrlParameter('date', shareUrl);
     let removeCode = event.currentTarget.dataset.removeCode;
     let index = programs.indexOf(removeCode);
-    let location = window.location;
     let card = $(`[data-code="${removeCode}"]`);
     let selected = card.closest(ResultsField.Selectors.SELECTED_PROGRAMS);
     let additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
@@ -152,6 +152,6 @@ ResultsField.Selectors = {
   'PROGRAMS_TITLE': '[data-js="programs-title"]',
   'PROGRAMS_SINGULAR': '[data-js="programs-singular"]',
   'PROGRAMS_PLURAL': '[data-js="programs-plural"]'
-}
+};
 
 export default ResultsField;
