@@ -24,6 +24,7 @@
                 v-on:change="push">
               <span class="styled-checkbox-label">{{ __(category.text, 'accessnyc-screener') }}</span>
             </label>
+            {% if category.value == 'disability' %}<hr class="screener-divider m-top m-bottom-3">{% endif %}
             {% endfor %}
           </div>
         </div>
