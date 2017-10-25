@@ -30,21 +30,20 @@
         {{ __(who, 'accessnyc-screener') }}
       </label>
       <div class="screener-members">
-        <div v-for="(p, personIndex) in people">
 
-          <label class="styled-checkbox screener-checkbox screener-label">
-            <input type="checkbox" value="true"
-              data-object="people"
-              data-key="{{dataKey}}"
-              v-bind:data-index="personIndex"
-              v-bind:name="'Person[' + personIndex + '].{{dataKey}}'"
-              v-on:change="setAttr">
-            <span class="styled-checkbox-label">
-              <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-            </span>
-          </label>
+        <label class="styled-checkbox screener-checkbox screener-label"
+          v-for="(p, personIndex) in people">
+          <input type="checkbox" value="true"
+            data-object="people"
+            data-key="{{dataKey}}"
+            v-bind:data-index="personIndex"
+            v-bind:name="'Person[' + personIndex + '].{{dataKey}}'"
+            v-on:change="setAttr">
+          <span class="styled-checkbox-label">
+            <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+          </span>
+        </label>
 
-        </div>
       </div>
 
     </div>

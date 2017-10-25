@@ -85,16 +85,15 @@
             <h4 class="{{styles.explainations}}">{{ __('What are sources of income?', 'accessnyc-screener') }}</h4>
             <p>{{ __('Sources of income can mean anything from disability-related Medicaid to wages, salaries, and tips.', 'accessnyc-screener') }}</p>
 
-            <div v-for="(p, personIndex) in people">
-              <label class="styled-checkbox screener-checkbox screener-label">
-                <input class="js-screener-toggle" type="checkbox" value="1"
-                  v-bind:name="'Person[' + personIndex + '].has-income'"
-                  v-bind:data-toggles="'#js-toggle-people-' + personIndex + '-income'">
-                <span class="styled-checkbox-label">
-                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                </span>
-              </label>
-            </div>
+            <label class="styled-checkbox screener-checkbox screener-label"
+              v-for="(p, personIndex) in people">
+              <input class="js-screener-toggle" type="checkbox" value="1"
+                v-bind:name="'Person[' + personIndex + '].has-income'"
+                v-bind:data-toggles="'#js-toggle-people-' + personIndex + '-income'">
+              <span class="styled-checkbox-label">
+                <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+              </span>
+            </label>
           </div>
 
           <div v-for="(p, personIndex) in people">
@@ -155,11 +154,11 @@
                         <input type="text" pattern="\d*" required
                           data-type="float"
                           data-vv-scope="HouseholdIncome"
+                          data-vv-as="{{ __('income amount', 'accessnyc-screener') }}"
                           data-js="calc-input,format-dollars"
                           data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
                           v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
                           v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'"
-                          v-bind:data-vv-as="income.type + ' income amount'"
                           v-validate="{required: true, regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
                           v-model.lazy="income.amount">
                       </div>
@@ -181,21 +180,32 @@
                       {{ __('receive', 'accessnyc-screener') }}:
                       <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
                     </span>
+                    <span class="c-red">*</span>
                   </label>
-                  <div class="screener-checkboxes js-screener-checkbox-group">
-                    {% for option in frequencyOptions %}
-                    <label
-                      class="styled-radio screener-checkbox screener-checkboxes-program screener-label"
-                      v-bind:for="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'">
-                      <input type="radio" value="{{ option.value }}"
-                        v-model="income.frequency"
-                        v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'"
-                        v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency'"/>
-                      <span class="styled-radio-label">
-                        {{ __(option.text, 'accessnyc-screener') }}
-                      </span>
-                    </label>
-                    {% endfor %}
+                  <div class="screener-question-container"
+                    v-bind:class="{'error': errors.has('Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency', 'HouseholdIncome')}">
+                    <div class="error-message"
+                      v-if="errors.has('Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency', 'HouseholdIncome')">
+                        v{ errors.first('Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency', 'HouseholdIncome') }
+                    </div>
+                    <div class="screener-checkboxes">
+                      {% for option in frequencyOptions %}
+                      <label
+                        class="styled-radio screener-checkbox screener-checkboxes-program screener-label"
+                        v-bind:for="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'">
+                        <input type="radio" value="{{ option.value }}"
+                          data-vv-scope="HouseholdIncome"
+                          data-vv-as="{{ __('income frequency', 'accessnyc-screener') }}"
+                          v-validate="{required: true}"
+                          v-model="income.frequency"
+                          v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'"
+                          v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency'"/>
+                        <span class="styled-radio-label">
+                          {{ __(option.text, 'accessnyc-screener') }}
+                        </span>
+                      </label>
+                      {% endfor %}
+                    </div>
                   </div>
                 </div>
 

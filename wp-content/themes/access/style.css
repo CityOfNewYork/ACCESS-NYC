@@ -1489,13 +1489,20 @@ ol {
       flex-flow: row wrap;
   -ms-flex-pack: justify;
       justify-content: space-between;
-  margin-top: 20px; }
+  margin-top: 20px;
+  margin-bottom: 20px; }
+  @media screen and (min-width: 768px) {
+    .screener-checkboxes {
+      margin-bottom: 30px; } }
 
 .screener-checkbox {
   margin-bottom: 20px; }
   @media screen and (min-width: 768px) {
     .screener-checkbox {
       margin-bottom: 30px; } }
+
+.screener-checkbox:last-of-type {
+  margin-bottom: 0; }
 
 .screener-radio {
   transition: all .2s;

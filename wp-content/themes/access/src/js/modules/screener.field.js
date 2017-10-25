@@ -724,7 +724,7 @@ ScreenerField.pushPayment = function(event) {
     this[obj][index]._attrs[key].push({
       amount: '',
       type: value,
-      frequency: 'monthly'
+      frequency: ''
     });
   }
 };

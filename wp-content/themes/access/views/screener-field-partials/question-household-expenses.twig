@@ -86,11 +86,11 @@
                   <input type="text" pattern="\d*" required
                     data-type="float"
                     data-vv-scope="HouseholdExpenses"
+                    data-vv-as="{{ __('expense amount', 'accessnyc-screener') }}"
                     data-js="calc-input,format-dollars"
                     data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
                     v-bind:id="'person-0-expenses-' + expenseIndex + '-amount'"
                     v-bind:name="'Person[0].expenses[' + expenseIndex + '].amount'"
-                    v-bind:data-vv-as="expense.type + ' expense amount'"
                     v-validate="{required: true, regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
                     v-model.lazy="expense.amount">
                 </div>
@@ -102,20 +102,31 @@
                 v-bind:for="'person-0-expenses-' + expenseIndex + '-frequency'">
                 {{ __('How often do you pay for: ', 'accessnyc-screener') }}
                 <span class="c-blue">v{ localString(expense.type) }</span>{{ __('?') }}
+                <span class="c-red">*</span>
               </label>
-              <div class="screener-checkboxes">
-                {% for frequency in frequencyOptions %}
-                <label class="screener-checkbox styled-radio screener-checkboxes-program screener-label"
-                  v-bind:for="'person-0-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'">
-                  <input type="radio" value="{{ frequency.value }}" {% if frequency.value == 'monthly' %}checked{% endif %}
-                    v-model="expense.frequency"
-                    v-bind:id="'person-0-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'"
-                    v-bind:name="'Person[0].expenses[' + expenseIndex + '].frequency'">
-                  <span class="styled-radio-label">
-                    {{ __(frequency.text, 'accessnyc-screener') }}
-                  </span>
-                </label>
-                {% endfor %}
+              <div class="screener-question-container"
+                v-bind:class="{'error': errors.has('Person[0].expenses[' + expenseIndex + '].frequency', 'HouseholdExpenses')}">
+                <div class="error-message"
+                  v-if="errors.has('Person[0].expenses[' + expenseIndex + '].frequency', 'HouseholdExpenses')">
+                    v{ errors.first('Person[0].expenses[' + expenseIndex + '].frequency', 'HouseholdExpenses') }
+                </div>
+                <div class="screener-checkboxes">
+                  {% for frequency in frequencyOptions %}
+                  <label class="screener-checkbox styled-radio screener-checkboxes-program screener-label"
+                    v-bind:for="'person-0-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'">
+                    <input type="radio" value="{{ frequency.value }}"
+                      data-vv-as="{{ __('expense frequency', 'accessnyc-screener') }}"
+                      data-vv-scope="HouseholdExpenses"
+                      v-model="expense.frequency"
+                      v-validate="{required: true}"
+                      v-bind:id="'person-0-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'"
+                      v-bind:name="'Person[0].expenses[' + expenseIndex + '].frequency'">
+                    <span class="styled-radio-label">
+                      {{ __(frequency.text, 'accessnyc-screener') }}
+                    </span>
+                  </label>
+                  {% endfor %}
+                </div>
               </div>
             </div>
 
@@ -154,8 +165,8 @@
               <label class="{{styles.labels}}">
                 {{ __('Who contributes to', 'accessnyc-screener') }}: <span class="c-blue">{{ __(expense.text, 'accessnyc-screener') }}</span>{{ __('?') }}
               </label>
-              <div v-for="(p, personIndex) in people">
-                <label class="styled-checkbox screener-checkbox screener-label">
+              <div class="m-bottom-2">
+                <label class="styled-checkbox screener-checkbox screener-label" v-for="(p, personIndex) in people">
                   <input type="checkbox"
                     data-object="people"
                     data-key="expenses"
@@ -207,19 +218,29 @@
                     <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
                     {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ __(expense.text, 'accessnyc-screener') }}</span>{{ __('?') }}
                   </label>
-                  <div class="screener-checkboxes">
-                    {% for frequency in frequencyOptions %}
-                    <label class="screener-checkbox styled-radio screener-checkboxes-program screener-label"
-                      v-bind:for="'person-' + personIndex + '-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'">
-                      <input type="radio" value="{{ frequency.value }}" {% if frequency.value == 'monthly' %}checked{% endif %}
-                        v-model="e.frequency"
-                        v-bind:id="'person-' + personIndex + '-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'"
-                        v-bind:name="'Person[' + personIndex + '].expenses[' + expenseIndex + '].frequency'">
-                      <span class="styled-radio-label">
-                        {{ __(frequency.text, 'accessnyc-screener') }}
-                      </span>
-                    </label>
-                    {% endfor %}
+                  <div class="screener-question-container"
+                    v-bind:class="{'error': errors.has('Person[' + personIndex + '].expenses[' + expenseIndex + '].frequency', 'HouseholdExpenses')}">
+                    <div class="error-message"
+                      v-if="errors.has('Person[' + personIndex + '].expenses[' + expenseIndex + '].frequency', 'HouseholdExpenses')">
+                        v{ errors.first('Person[' + personIndex + '].expenses[' + expenseIndex + '].frequency', 'HouseholdExpenses') }
+                    </div>
+                    <div class="screener-checkboxes">
+                      {% for frequency in frequencyOptions %}
+                      <label class="screener-checkbox styled-radio screener-checkboxes-program screener-label"
+                        v-bind:for="'person-' + personIndex + '-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'">
+                        <input type="radio" value="{{ frequency.value }}"
+                          data-vv-scope="HouseholdExpenses"
+                          data-vv-as="{{ __('expense frequency', 'accessnyc-screener') }}"
+                          v-model="e.frequency"
+                          v-validate="{required: true}"
+                          v-bind:id="'person-' + personIndex + '-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'"
+                          v-bind:name="'Person[' + personIndex + '].expenses[' + expenseIndex + '].frequency'">
+                        <span class="styled-radio-label">
+                          {{ __(frequency.text, 'accessnyc-screener') }}
+                        </span>
+                      </label>
+                      {% endfor %}
+                    </div>
                   </div>
                 </div>
 

@@ -55,6 +55,11 @@
   flex-flow: row wrap;
   justify-content: space-between;
   margin-top: $spacing-base;
+  margin-bottom: $spacing-base;
+
+  @include media($bp-tablet-up) {
+    margin-bottom: $spacing-base * 1.5;
+  }
 }
 
 .screener-checkbox {
@@ -63,6 +68,10 @@
   @include media($bp-tablet-up) {
     margin-bottom: $spacing-base * 1.5;
   }
+}
+
+.screener-checkbox:last-of-type {
+  margin-bottom: 0;
 }
 
 .screener-radio-buttons {
