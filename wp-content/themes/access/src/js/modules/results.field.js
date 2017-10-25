@@ -64,16 +64,15 @@ class ResultsField {
    * @param  {event} event the onclick event
    */
   _removeProgram(event) {
-    let categories = Utility.getUrlParameter('categories').split(',');
-    let programs = Utility.getUrlParameter('programs').split(',');
-    let guid = Utility.getUrlParameter('guid');
-    let date = Utility.getUrlParameter('date');
+    let shareUrl = $(ResultsField.Selectors.SHARE_URLS)[0].value;
+    let base = [shareUrl.split('?')[0], '?'].join('');
+    let categories = Utility.getUrlParameter('categories', shareUrl).split(',');
+    let programs = Utility.getUrlParameter('programs', shareUrl).split(',');
+    let guid = Utility.getUrlParameter('guid', shareUrl);
+    let date = Utility.getUrlParameter('date', shareUrl);
     let removeCode = event.currentTarget.dataset.removeCode;
     let index = programs.indexOf(removeCode);
     let location = window.location;
-    let shareUrl = [
-        $(ResultsField.Selectors.SHARE_URLS)[0].value.split('?')[0], '?'
-      ].join('');
     let card = $(`[data-code="${removeCode}"]`);
     let selected = card.closest(ResultsField.Selectors.SELECTED_PROGRAMS);
     let additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
@@ -118,19 +117,21 @@ class ResultsField {
     if (index > -1) programs.splice(index, 1);
 
     // Create updated share url
-    shareUrl += [
-      ['categories=', categories.join('%2C')].join(''),
-      ['programs=', programs.join('%2C')].join(''),
+    base +=
+      (categories[0] != '') ? `categories=${categories.join('%2C')}&` : '';
+    base +=
+      (programs[0] != '') ? `programs=${programs.join('%2C')}&` : '';
+    base += [
       ['guid=', guid].join(''),
       ['date=', date].join('')
     ].join('&');
 
     // Update share url fields
     $(ResultsField.Selectors.SHARE_URLS).each((index, element) => {
-      element.value = shareUrl;
+      element.value = base;
     });
 
-    return shareUrl;
+    return base;
   }
 
 }
