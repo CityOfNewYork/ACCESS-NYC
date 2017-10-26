@@ -72,6 +72,7 @@ class ScreenerField {
         'populate': ScreenerField.populate,
         'pushPayment': ScreenerField.pushPayment,
         'getPayment': ScreenerField.getPayment,
+        'removePayment': ScreenerField.removePayment,
         'push': ScreenerField.push,
         'checked': ScreenerField.checked,
         'singleOccupant': ScreenerField.singleOccupant,
@@ -709,37 +710,58 @@ ScreenerField.populate = function(event) {
 ScreenerField.pushPayment = function(event) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
-  let index = parseInt(el.dataset.index);
-  let value = el.value;
+  let objIndex = parseInt(el.dataset.index);
+  let type = el.value;
   let key = el.dataset.key;
+  let current = _.findIndex(
+    this[obj][objIndex]._attrs[key], {'type': type}
+  );
+
   // if the payment exists
-  if (value === '' || el.checked === false) {
+  /* eslint-disable no-console, no-debugger */
+  if (type === '' || el.checked === false) {
     // remove payment
-    let current = _.findIndex(
-      this[obj][index]._attrs[key], {'type': value}
-    );
-    this[obj][index]._attrs[key].splice(current, 1);
+    if (Utility.debug())
+      console.log(`pushPayment: Remove; ${key}, ${type}`);
+    this[obj][objIndex]._attrs[key].splice(current, 1);
   } else {
-    // create a new payment
-    this[obj][index]._attrs[key].push({
-      amount: '',
-      type: value,
-      frequency: ''
-    });
+    // add payment
+    if (Utility.debug())
+      console.log(`pushPayment: Add; ${key}, ${type}`);
+    this[obj][objIndex].addPayment(key, type);
   }
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
+ * Remove a payment if the element target value is blank
+ * @param  {event} event - change event object
+ */
+ScreenerField.removePayment = function(event) {
+  if (event.currentTarget.value !== '') return;
+  let el = event.currentTarget;
+  let obj = el.dataset.object;
+  let objIndex = parseInt(el.dataset.index);
+  let key = el.dataset.key;
+  let keyIndex = el.dataset.keyIndex;
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+    console.log(`removePayment: ${key}`);
+  /* eslint-enable no-console, no-debugger */
+  this[obj][objIndex]._attrs[key].splice(keyIndex, 1);
 };
 
 /**
  * Find a payment by type in a collection
- * @param  {string} obj    the vue opject to search
- * @param  {integer} index the index of the model within the vue object
- * @param  {string} key    the key of the model's attr
- * @param  {[type]} type   the type value to search by
- * @return {object}        the payment, false if not found
+ * @param  {string} obj       - the vue opject to search
+ * @param  {integer} objIndex - the index of the model within the vue object
+ * @param  {string} key       - the key of the model's attr
+ * @param  {[type]} type      - the type value to search by
+ * @return {object}           - the payment, false if not found
  */
-ScreenerField.getPayment = function(obj, index, key, type) {
+ScreenerField.getPayment = function(obj, objIndex, key, type) {
   let payment = _.findWhere(
-    this[obj][index]._attrs[key], {'type': type}
+    this[obj][objIndex]._attrs[key], {'type': type}
   );
   return (payment) ? payment : false;
 };

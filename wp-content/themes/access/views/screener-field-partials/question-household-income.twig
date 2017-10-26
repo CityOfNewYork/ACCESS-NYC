@@ -114,11 +114,11 @@
               <select class="screener-select"
                 data-object="people"
                 data-key="incomes"
-
                 v-bind:data-index="personIndex"
                 v-bind:id="'person-' + personIndex + '-incomes-0'"
                 v-bind:name="'Person[' + personIndex + '].incomes[0].type'"
-                v-on:change="pushPayment">
+                v-on:change="pushPayment"
+                v-if="p._attrs.incomes.length === 0">
                 {% for option in incomeOptions %}
                 <option value="{{ option.value }}">
                   {{ __(option.text, 'accessnyc-screener') }}
@@ -127,6 +127,23 @@
               </select>
 
               <div v-for="(income, incomeIndex) in p._attrs.incomes">
+
+                <select class="screener-select"
+                  data-object="people"
+                  data-key="incomes"
+                  v-bind:data-index="personIndex"
+                  v-bind:data-key-index="incomeIndex"
+                  v-bind:id="'person-' + personIndex + '-incomes-0'"
+                  v-bind:name="'Person[' + personIndex + '].incomes[0].type'"
+                  v-model="income.type"
+                  v-on:change="removePayment">
+                  {% for option in incomeOptions %}
+                  <option value="{{ option.value }}">
+                    {{ __(option.text, 'accessnyc-screener') }}
+                  </option>
+                  {% endfor %}
+                </select>
+
                 <div>
                   <label class="{{styles.labels}} m-top-2">
                     <span v-if="singleOccupant()">
@@ -227,11 +244,11 @@
                   <select class="screener-select"
                       data-key="incomes"
                       data-object="people"
-
                       v-bind:data-index="personIndex"
                       v-bind:id="'person-' + personIndex + '-incomes-' + (incomeIndex + 1) + ''"
                       v-bind:name="'Person[' + personIndex + '].incomes[' + (incomeIndex + 1) + '].type'"
-                      v-on:change="pushPayment">
+                      v-on:change="pushPayment"
+                      v-if="!p._attrs.incomes[incomeIndex + 1]">
                     {% for option in incomeOptions %}
                     <option value="{{ option.value }}">
                       {{ __(option.text, 'accessnyc-screener') }}
