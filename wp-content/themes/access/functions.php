@@ -327,6 +327,52 @@ function access_filter_posts( $query ) {
 }
 add_action( 'pre_get_posts', 'access_filter_posts' );
 
+// *****
+// modifying program url in the language switcher
+function wpml_switcher_urls($languages) {
+  global $sitepress;
+
+  $cur_prog=$_GET['program_cat'];
+  $original_lang = ICL_LANGUAGE_CODE; // Save the current language
+
+  // switch to english to capture the original taxonomies
+  if($original_lang != 'en'){
+    $sitepress->switch_lang('en');
+  }
+
+  // retrieve the program taxonomies as array
+  $terms = get_terms( array(
+    'taxonomy' => 'programs',
+    'hide_empty' => false,  ) );
+
+  $sitepress->switch_lang($original_lang); //switch back to the original language
+
+  // find the en taxonomy that matches the current program
+  foreach ($terms as $term) {
+    if (strpos($cur_prog, $term->slug) !== false) {
+      $prog = $term->slug;
+    }
+  }
+
+  // reconstruct the language url based on the program filter
+  if(strpos(basename($_SERVER['REQUEST_URI']), 'program_cat') !== false){
+    foreach($languages as $lang_code => $language){
+      if($lang_code == 'en'){
+        $newlang_code="";
+        $languages[$lang_code]['url'] = '/programs/?program_cat='.$prog;
+      }
+      // if not english, then remove the language code and add the correct one
+      elseif($lang_code != 'en' || $lang_code != '' ){   
+        $languages[$lang_code]['url'] = '/'.$lang_code.'/programs/?program_cat='.$prog.'-'.$lang_code;
+      }
+    }
+  }
+  return $languages;
+}
+add_filter('icl_ls_languages', 'wpml_switcher_urls');
+// end modifying url
+// *****
+
 // Define site.
 class BSDStarterSite extends TimberSite {
   function __construct() {
