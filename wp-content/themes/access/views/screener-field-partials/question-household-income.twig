@@ -61,21 +61,23 @@
           </label>
           <div class="screener-radio-buttons">
             <label class="screener-radio screener-label">
-              <input name="toggle-income" type="radio" class="js-screener-toggle screener-radio-input sr-only" value="true"
-                data-type="boolean"
-                data-shows="#js-toggle-income">
+              <input name="toggle-income" type="radio" class="js-screener-toggle screener-radio-input sr-only" value="1"
+                data-key="incomes"
+                v-model.number="income"
+                v-on:change="removeAllPayments">
               <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
             </label>
             <label class="screener-radio screener-label">
-              <input name="toggle-income" class="js-screener-toggle screener-radio-input sr-only" type="radio" value="false" checked
-                data-type="boolean"
-                data-hides="#js-toggle-income">
+              <input name="toggle-income" type="radio" class="js-screener-toggle screener-radio-input sr-only" value="0" checked
+                data-key="incomes"
+                v-model.number="income"
+                v-on:change="removeAllPayments">
               <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
             </label>
           </div>
         </div>
 
-        <div id="js-toggle-income" class="hidden">
+        <div v-if="income">
 
           <div v-if="!singleOccupant()">
             <label class="{{styles.labels}} m-top-2">

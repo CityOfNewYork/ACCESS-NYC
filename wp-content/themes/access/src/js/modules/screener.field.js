@@ -64,7 +64,8 @@ class ScreenerField {
         /* UI Data */
         'categoriesCurrent': [],
         'disclaimer': false,
-        'expenses': []
+        'expenses': [],
+        'income': 0
       },
       'methods': {
         'resetAttr': ScreenerField.resetAttr,
@@ -73,6 +74,7 @@ class ScreenerField {
         'pushPayment': ScreenerField.pushPayment,
         'getPayment': ScreenerField.getPayment,
         'removePayment': ScreenerField.removePayment,
+        'removeAllPayments': ScreenerField.removeAllPayments,
         'push': ScreenerField.push,
         'checked': ScreenerField.checked,
         'singleOccupant': ScreenerField.singleOccupant,
@@ -750,6 +752,19 @@ ScreenerField.removePayment = function(event) {
   /* eslint-enable no-console, no-debugger */
   this[obj][objIndex]._attrs[key].splice(keyIndex, 1);
 };
+
+/**
+ * [removeAllPayments description]
+ * @param  {[type]} event [description]
+ * @return {[type]}       [description]
+ */
+ScreenerField.removeAllPayments = function(event) {
+  if (event.currentTarget.value === 1) return;
+  let key = event.currentTarget.dataset.key;
+  for (let i = this.people.length - 1; i >= 0; i--) {
+    this.people[i]._attrs[key] = [];
+  }
+}
 
 /**
  * Find a payment by type in a collection
