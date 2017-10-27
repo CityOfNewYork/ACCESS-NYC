@@ -34,6 +34,7 @@
         <label class="styled-checkbox screener-checkbox screener-label"
           v-for="(p, personIndex) in people">
           <input type="checkbox" value="true"
+            data-type="boolean"
             data-object="people"
             data-key="{{dataKey}}"
             v-bind:data-index="personIndex"

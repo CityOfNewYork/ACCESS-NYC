@@ -52,11 +52,12 @@ class ScreenerField {
       'data': {
         /* Default ACCESS NYC Modules */
         'people': [new ScreenerPerson({
-          headOfHousehold: true,
-          livingOwnerOnDeed: true,
-          livingRentalOnLease: true
+          headOfHousehold: true
         })],
-        'household': new ScreenerHousehold(),
+        'household': new ScreenerHousehold({
+          'city': 'NYC',
+          'livingPreferNotToSay': true
+        }),
         'categories': [],
         /* Additional Modules */
         'client': new ScreenerClient(),
@@ -340,6 +341,7 @@ class ScreenerField {
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) {
       console.warn(json);
+      console.log(JSON.stringify(json));
       debugger;
     }
 
@@ -698,9 +700,11 @@ ScreenerField.getTypedVal = function(input) {
   const val = input.value;
   let finalVal = input.value;
   /* eslint-disable no-console, no-debugger */
+  console.dir(input);
   switch (input.dataset.type) {
     case ScreenerField.InputType.BOOLEAN: {
-      if (input.type == 'checkbox') {
+      console.log(input.type);
+      if (input.type === 'checkbox') {
         finalVal = input.checked;
       } else { // assume it's a radio button
         // if the radio button is using true/false;

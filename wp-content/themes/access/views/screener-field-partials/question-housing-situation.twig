@@ -3,8 +3,7 @@
   {'value': 'livingOwner', 'text': 'You or a household member owns the home or apartment', 'toggles': '#screener-homeowner'},
   {'value': 'livingStayingWithFriend', 'text': 'Staying with a friend'},
   {'value': 'livingHotel', 'text': 'In a hotel'},
-  {'value': 'livingShelter', 'text': 'In a shelter or homeless'},
-  {'value': 'livingPreferNotToSay', 'text': 'Prefer not to say'},
+  {'value': 'livingShelter', 'text': 'In a shelter or homeless'}
 ] %}
 
 {% set housingOptions = [
@@ -57,6 +56,14 @@
             <span class="styled-checkbox-label">{{ __(option.text, 'accessnyc-screener') }}</span>
           </label>
           {% endfor %}
+          <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+            <input type="checkbox" name="Household.livingPreferNotToSay" value="1" checked
+              data-type="boolean"
+              data-object="household"
+              data-key="livingPreferNotToSay"
+              v-on:change="setAttr">
+            <span class="styled-checkbox-label">{{ __('Prefer not to say', 'accessnyc-screener') }}</span>
+          </label>
         </div>
 
         <div v-if="household._attrs.livingRenting">
@@ -93,7 +100,7 @@
               </label>
               <div class="screener-radio-buttons m-bottom">
                 <label class="screener-radio screener-label">
-                  <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].livingRentalOnLease" id="person-0-livingRentalOnLease-true" checked
+                  <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].livingRentalOnLease" id="person-0-livingRentalOnLease-true"
                     data-type="boolean"
                     data-object="people"
                     data-key="livingRentalOnLease"
@@ -156,7 +163,7 @@
             </label>
             <div class="screener-radio-buttons m-bottom">
               <label class="screener-radio screener-label" for="person-0-livingOwnerOnDeed-true">
-                <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].livingOwnerOnDeed" id="person-0-livingOwnerOnDeed-true" checked
+                <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].livingOwnerOnDeed" id="person-0-livingOwnerOnDeed-true"
                   data-type="boolean"
                   data-object="people"
                   data-key="livingOwnerOnDeed"
