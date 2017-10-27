@@ -42,7 +42,7 @@
           <label class="{{styles.labels}}" for="person-0-phone">
             {{ __('Language Spoken', 'accessnyc-screener') }}
           </label>
-          <div>
+          <div class="m-bottom-2">
             {% for language in languages %}
             <label class="styled-checkbox screener-checkbox screener-label d-block">
               <input type="checkbox" value="{{ language.value }}"

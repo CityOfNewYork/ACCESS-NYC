@@ -696,14 +696,10 @@ ScreenerField.singleOccupant = function() {
  * @return {boolean|Number|string} typed value
  */
 ScreenerField.getTypedVal = function(input) {
-  // const $input = $(input);
   const val = input.value;
   let finalVal = input.value;
-  /* eslint-disable no-console, no-debugger */
-  console.dir(input);
   switch (input.dataset.type) {
     case ScreenerField.InputType.BOOLEAN: {
-      console.log(input.type);
       if (input.type === 'checkbox') {
         finalVal = input.checked;
       } else { // assume it's a radio button
@@ -711,9 +707,11 @@ ScreenerField.getTypedVal = function(input) {
         // if the radio button is using 1 or 0;
         finalVal = (val === 'true') ? true : Boolean(parseInt(val, 10));
       }
+      /* eslint-disable no-console, no-debugger */
       if (Utility.debug())
         console.log(
           `getTypedVal: BOOLEAN, ${finalVal}:${typeof val}>${typeof finalVal}`);
+      /* eslint-enable no-console, no-debugger */
       break;
     }
     case ScreenerField.InputType.FLOAT: {
@@ -721,9 +719,11 @@ ScreenerField.getTypedVal = function(input) {
           _.isNumber(parseFloat(val)) &&
           !_.isNaN(parseFloat(val))
         ) ? parseFloat(val) : 0;
+      /* eslint-disable no-console, no-debugger */
       if (Utility.debug())
         console.log(
           `getTypedVal: FLOAT, ${finalVal}:${typeof val}>${typeof finalVal}`);
+      /* eslint-enable no-console, no-debugger */
       break;
     }
     case ScreenerField.InputType.INTEGER: {
@@ -731,13 +731,14 @@ ScreenerField.getTypedVal = function(input) {
           _.isNumber(parseInt(val, 10)) &&
           !_.isNaN(parseInt(val, 10))
         ) ? parseInt(input.value, 10) : 0;
+      /* eslint-disable no-console, no-debugger */
       if (Utility.debug())
         console.log(
           `getTypedVal: INTEGER, ${finalVal}:${typeof val}>${typeof finalVal}`);
+      /* eslint-enable no-console, no-debugger */
       break;
     }
   }
-  /* eslint-enable no-console, no-debugger */
   return finalVal;
 };
 
@@ -913,42 +914,12 @@ ScreenerField.personLabel = {
  */
 ScreenerField.Selectors = {
   ACTIVE: 'active',
-  ADD_SECTION: 'js-add-section',
-  CHECKBOX_GROUP: 'js-screener-checkbox-group',
-  CLEAR_GROUP: 'js-clear-group',
   DOM: '[data-js="screener-field"]',
-  EDIT_PERSON: 'js-edit-person',
-  ERROR: 'error',
-  ERROR_MSG: 'error-message',
   HIDDEN: 'hidden',
-  MATRIX: 'js-screener-matrix',
-  MATRIX_ITEM: 'js-matrix-item',
-  MATRIX_SELECT: 'js-matrix-select',
   PAGE: 'js-screener-page',
-  PAGE_RECAP: 'page-recap',
-  RADIO_GROUP: 'js-screener-radio-group',
-  REMOVE_PERSON: 'js-remove-person',
-  RENDER_RECAP: 'js-render-recap',
-  QUESTION_CONTAINER: 'screener-question-container',
-  STEP: 'js-screener-step',
-  SUBMIT: 'js-screener-submit',
-  TRANSACTION_LABEL: 'screener-transaction-type',
   TOGGLE: 'js-screener-toggle',
   TOGGLE_QUESTION: 'js-toggle-question',
   VIEW: '[data-js="view"]'
-};
-
-/**
- * Localization labels of error messages.
- * @enum {string}
- */
-ScreenerField.Message = {
-  FLOAT: 'ERROR_FLOAT',
-  HOUSEHOLD: 'ERROR_HOUSEHOLD',
-  INTEGER: 'ERROR_INTEGER',
-  REQUIRED: 'ERROR_REQUIRED',
-  ZIP: 'ERROR_ZIP',
-  RELOAD: 'MSG_RELOAD'
 };
 
 /**
@@ -959,15 +930,6 @@ ScreenerField.InputType = {
   BOOLEAN: 'boolean',
   FLOAT: 'float',
   INTEGER: 'integer'
-};
-
-/**
- * [regex description]
- * @type {Object}
- */
-ScreenerField.regex = {
-  DROOLS_DOLLARS: '^([0-9]{1,6})(\\.[0-9]{0,2})?$',
-  HOUSEHOLD_MEMBERS: '^[1-8]{1}$'
 };
 
 /**
