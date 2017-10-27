@@ -1110,6 +1110,7 @@ class Screener {
   _submit(postUrl) {
     /* eslint-disable no-console, no-debugger */
     if (Utility.getUrlParameter('debug') === '1') {
+      console.dir(this);
       console.log(this._getDroolsJSON());
       console.log(JSON.stringify(this._getDroolsJSON()));
       debugger;

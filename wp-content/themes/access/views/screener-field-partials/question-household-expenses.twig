@@ -87,12 +87,13 @@
                     data-type="float"
                     data-vv-scope="HouseholdExpenses"
                     data-vv-as="{{ __('expense amount', 'accessnyc-screener') }}"
-                    data-js="calc-input,format-dollars"
+                    data-js="calc-input"
                     data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
+                    v-validate="{required: true, regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
                     v-bind:id="'person-0-expenses-' + expenseIndex + '-amount'"
                     v-bind:name="'Person[0].expenses[' + expenseIndex + '].amount'"
-                    v-validate="{required: true, regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
-                    v-model.lazy="expense.amount">
+                    v-on:change="expense.amount = getTypedVal($event.target)"
+                    v-on:blur="formatDollars">
                 </div>
               </div>
             </div>

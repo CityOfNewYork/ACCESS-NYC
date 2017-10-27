@@ -40,12 +40,13 @@
               data-type="float"
               data-object="household"
               data-key="cashOnHand"
-              data-js="calc-input,format-dollars"
+              data-js="calc-input"
               data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
               data-vv-scope="HouseholdTotalSavings"
               data-vv-as="{{ __('Total Savings', 'accessnyc-screener') }}"
+              v-validate="{regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
               v-on:change="setAttr"
-              v-validate="{regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}">
+              v-on:blur="formatDollars">
           </div>
         </div>
       </div>

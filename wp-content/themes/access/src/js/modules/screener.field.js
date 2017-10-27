@@ -79,7 +79,9 @@ class ScreenerField {
         'checked': ScreenerField.checked,
         'singleOccupant': ScreenerField.singleOccupant,
         'validate': ScreenerField.validate,
-        'localString': ScreenerField.localString
+        'localString': ScreenerField.localString,
+        'formatDollars': ScreenerField.formatDollars,
+        'getTypedVal': ScreenerField.getTypedVal
       }
     };
   }
@@ -117,8 +119,6 @@ class ScreenerField {
 
     // Basic toggles
     $el.on('change', `.${ScreenerField.Selectors.TOGGLE}`, this._toggler);
-    // Floats
-    $el.on('blur', '[data-js*="format-dollars"]', this._formatDollars);
 
     // Validate calculated inputs based on regular expressions.
     new CalcInput(this._el);
@@ -139,132 +139,6 @@ class ScreenerField {
     this._routerPage('#page-admin');
 
     return this;
-  }
-
-  /**
-   * For a given element with a maxlength attribute, enforce the maxlength rule.
-   * This is necessary because input[type="number"] elements ignrore the
-   * attribute natively.
-   * @param  {object} event the keypup event object
-   */
-  // _enforceMaxLength(event) {
-  //   let el = event.currentTarget;
-  //   let maxlength = parseInt(el.maxlength, 10);
-  //   let value = el.value;
-  //   let key = event.keyCode;
-
-  //   let arrows = (key >= 37 && key <= 40);
-  //   let backspace = (key === 8);
-  //   // let selected = (el.selectionStart === 0);
-
-  //   // console.dir(event);
-  //   // console.dir(el.selectionStart);
-  //   // console.dir(selected);
-
-  //   if (value.length === maxlength) {
-  //     if (!backspace && !arrows) {
-  //       event.preventDefault();
-  //       if (Utility.debug()) console.log('blocked');
-  //     }
-  //   }
-  //   ScreenerField.key = key;
-  // }
-
-  /**
-   * Calculates the maximum value as a result of the event and prevents input
-   * if it is greater than the allowed maximum value;
-   * @param  {event} event the key down event
-   */
-  // _enforceMaxValue(event) {
-  //   let keyCode = event.keyCode;
-  //   if (ScreenerField.paste(keyCode)) return;
-  //   let el = event.currentTarget;
-  //   let max = parseInt(el.max, 10);
-  //   let value = (el.value != '') ? el.value : '0';
-  //   let key = (_.isNumber(event.key)) ? event.key : '0';
-  //   let calc = parseInt((value + event.key), 10);
-
-  //   let keyarrows = (keyCode >= 37 && keyCode <= 40);
-  //   let backspace = (keyCode === 8);
-  //   // let selected = (el.selectionStart === 0);
-
-  //   // console.dir(event);
-  //   // console.dir(el.selectionStart);
-  //   // console.dir(selected);
-
-  //   if (calc > max) {
-  //     if (!backspace && !keyarrows) {
-  //       event.preventDefault();
-  //       if (Utility.debug()) console.log('blocked');
-  //     }
-  //   }
-  //   ScreenerField.key = keyCode;
-  // }
-
-  /**
-   * Number inputs still allow certain characters outside of 0-9.
-   * @param  {object} event the keypup event object
-   */
-  // _enforceNumbersOnly(event) {
-  //   let key = event.keyCode;
-  //   if (ScreenerField.paste(key)) return;
-  //   if (
-  //     key === 69 || // 'e' key, used for scientific notation
-  //     key === 187 || // '=' key (for the '+' sign)
-  //     key === 188 || // ',' key
-  //     key === 189 // '-' key
-  //   ) {
-  //     event.preventDefault();
-  //   }
-  //   ScreenerField.key = key;
-  // }
-
-  /**
-   * Limits key input to numbers and decimals
-   * @param  {event} the keydown input event
-   */
-  // _enforceFloat(event) {
-  //   let key = event.keyCode;
-  //   if (ScreenerField.paste(key)) return;
-  //   let block = true;
-  //   let value = event.currentTarget.value;
-
-  //   let keyboardnumbers = (key >= 48 && key <= 57);
-  //   let keypadnumbers = (key >= 96 && key <= 105);
-  //   let arrows = (key >= 37 && key <= 40);
-  //   let backspace = (key === 8);
-  //   let period = (key === 190 || key === 110);
-
-  //   // let selected = (event.currentTarget.selectionStart === 0);
-  //   // block = (selected) ? false || block;
-
-  //   block = (
-  //     keyboardnumbers || keypadnumbers || arrows || backspace || period
-  //   ) ? false : block;
-
-  //   if (block) {
-  //     event.preventDefault();
-  //     if (Utility.debug()) console.log('blocked');
-  //   }
-
-  //   ScreenerField.key = key;
-  // }
-
-  /**
-   * Format number value and make sure it has '.00'
-   * @param  {object} event the blur event object
-   */
-  _formatDollars(event) {
-    let value = event.currentTarget.value;
-    let postfix = '';
-    if (value.indexOf('.') > -1) {
-      let split = value.split('.');
-      postfix = (split[1].length == 1) ? '0' : postfix;
-      postfix = (split[1].length == 0) ? '00' : postfix;
-      event.currentTarget.value += postfix;
-    } else if (value != '') {
-      event.currentTarget.value += '.00';
-    }
   }
 
   /**
@@ -530,6 +404,24 @@ class ScreenerField {
 }
 
 /**
+ * Format number value and make sure it has '.00'
+ * @param  {string} event - the blur event
+ */
+ScreenerField.formatDollars = function(event) {
+  let value = event.currentTarget.value;
+  let postfix = '';
+  if (`${value}`.indexOf('.') > -1) {
+    let split = `${value}`.split('.');
+    postfix = (split[1].length == 1) ? '0' : postfix;
+    postfix = (split[1].length == 0) ? '00' : postfix;
+    value += postfix;
+  } else if (value != '') {
+    value += '.00';
+  }
+  event.currentTarget.value = value;
+};
+
+/**
  * Checks to see if the input's value is a valid NYC zip code.
  */
 ScreenerField.validateZipField = {
@@ -635,13 +527,17 @@ ScreenerField.resetAttr = function(event) {
   let keys = el.dataset.key.split(',');
   let value = (el.value === 'true');
   for (let i = keys.length - 1; i >= 0; i--) {
+    /* eslint-disable no-console, no-debugger */
     if (typeof index === 'undefined') {
       this[obj].set(keys[i], value);
-      // console.dir(this[obj]);
+      if (Utility.debug())
+        console.log(`resetAttr: ${obj}, ${keys[i]}, ${value}`);
     } else {
       this[obj][index].set(keys[i], value);
-      // console.dir(this[obj][index]);
+      if (Utility.debug())
+        console.log(`resetAttr: ${obj}, ${index}, ${keys[i]}, ${value}`);
     }
+    /* eslint-enable no-console, no-debugger */
     let el = document.querySelector(`[data-key="${keys[i]}"]`);
     if (el) el.checked = false;
   }
@@ -663,15 +559,18 @@ ScreenerField.setAttr = function(event) {
   let reset = el.dataset.reset;
   // get the typed value;
   let value = ScreenerField.getTypedVal(el);
-  // console.dir([key, value]);
   // set the attribute;
+  /* eslint-disable no-console, no-debugger */
   if (typeof index === 'undefined') {
     this[obj].set(key, value);
-    // console.dir(this[obj]);
+    if (Utility.debug())
+      console.dir(`setAttr: ${obj}, ${key}, ${value}`);
   } else {
     this[obj][index].set(key, value);
-    // console.dir(this[obj][index]);
+    if (Utility.debug())
+      console.dir(`setAttr: ${obj}, ${index}, ${key}, ${value}`);
   }
+  /* eslint-enable no-console, no-debugger */
   // reset an element based on this value;
   if (typeof reset != 'undefined') {
     document.querySelector(reset).checked = false;
@@ -754,9 +653,8 @@ ScreenerField.removePayment = function(event) {
 };
 
 /**
- * [removeAllPayments description]
- * @param  {[type]} event [description]
- * @return {[type]}       [description]
+ * Removes all payments for all persons in household
+ * @param  {object} event the radio button toggle event
  */
 ScreenerField.removeAllPayments = function(event) {
   if (event.currentTarget.value === 1) return;
@@ -764,7 +662,7 @@ ScreenerField.removeAllPayments = function(event) {
   for (let i = this.people.length - 1; i >= 0; i--) {
     this.people[i]._attrs[key] = [];
   }
-}
+};
 
 /**
  * Find a payment by type in a collection
@@ -796,10 +694,11 @@ ScreenerField.singleOccupant = function() {
  * @return {boolean|Number|string} typed value
  */
 ScreenerField.getTypedVal = function(input) {
-  const $input = $(input);
-  const val = $input.val();
-  let finalVal = $input.val();
-  switch ($input.data('type')) {
+  // const $input = $(input);
+  const val = input.value;
+  let finalVal = input.value;
+  /* eslint-disable no-console, no-debugger */
+  switch (input.dataset.type) {
     case ScreenerField.InputType.BOOLEAN: {
       if (input.type == 'checkbox') {
         finalVal = input.checked;
@@ -808,21 +707,33 @@ ScreenerField.getTypedVal = function(input) {
         // if the radio button is using 1 or 0;
         finalVal = (val === 'true') ? true : Boolean(parseInt(val, 10));
       }
+      if (Utility.debug())
+        console.log(
+          `getTypedVal: BOOLEAN, ${finalVal}:${typeof val}>${typeof finalVal}`);
       break;
     }
     case ScreenerField.InputType.FLOAT: {
-      finalVal = (_.isNumber(parseFloat(val)) && !_.isNaN(parseFloat(val))) ?
-          parseFloat(val) : 0;
+      finalVal = (
+          _.isNumber(parseFloat(val)) &&
+          !_.isNaN(parseFloat(val))
+        ) ? parseFloat(val) : 0;
+      if (Utility.debug())
+        console.log(
+          `getTypedVal: FLOAT, ${finalVal}:${typeof val}>${typeof finalVal}`);
       break;
     }
     case ScreenerField.InputType.INTEGER: {
-      finalVal = (_.isNumber(parseInt(val, 10)) &&
-          !_.isNaN(parseInt(val, 10))) ?
-          parseInt($input.val(), 10) : 0;
+      finalVal = (
+          _.isNumber(parseInt(val, 10)) &&
+          !_.isNaN(parseInt(val, 10))
+        ) ? parseInt(input.value, 10) : 0;
+      if (Utility.debug())
+        console.log(
+          `getTypedVal: INTEGER, ${finalVal}:${typeof val}>${typeof finalVal}`);
       break;
     }
   }
-  // console.log([val, finalVal]);
+  /* eslint-enable no-console, no-debugger */
   return finalVal;
 };
 
