@@ -207,7 +207,8 @@
                         v-bind:name="'Person[' + personIndex + '].expenses[' + expenseIndex + '].amount'"
                         v-bind:data-vv-as="e.type + ' expense amount'"
                         v-validate="{required: true, regex: '[0-9.]'}"
-                        v-model.number="e.amount">
+                        v-on:change="e.amount = getTypedVal($event.target)"
+                        v-on:blur="formatDollars">
                     </div>
                   </div>
                 </div>
