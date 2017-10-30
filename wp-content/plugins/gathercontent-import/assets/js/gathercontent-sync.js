@@ -1,8 +1,8 @@
 /**
- * GatherContent Plugin - v3.1.5 - 2017-09-05
+ * GatherContent Plugin - v3.0.4 - 2016-11-21
  * http://www.gathercontent.com
  *
- * Copyright (c) 2017 GatherContent
+ * Copyright (c) 2016 GatherContent
  * Licensed under the GPLv2 license.
  */
 
@@ -522,7 +522,6 @@ module.exports = function (app) {
 'use strict';
 
 module.exports = function (app, $, gc) {
-	var thisView;
 	var percent = gc.percent;
 	app.views.tableSearch = require('./../views/table-search.js')(app, $, gc);
 	app.views.tableNav = require('./../views/table-nav.js')(app, $, gc);
@@ -540,7 +539,6 @@ module.exports = function (app, $, gc) {
 		},
 
 		initialize: function initialize() {
-			thisView = this;
 			app.views.tableBase.prototype.initialize.call(this);
 
 			this.listenTo(this.ajax, 'response', this.ajaxResponse);
@@ -626,15 +624,6 @@ module.exports = function (app, $, gc) {
 			this.setTimeout(this.checkProgress.bind(this));
 
 			if (percent > 99) {
-				// This is to allow the slight css animation.
-				this.renderProgressUpdate(100);
-
-				// This is to render the loading spinner. Wait long enough for css animation to copmlete.
-				window.setTimeout(function () {
-					thisView.renderProgress(100, true);
-				}, 100);
-
-				// Finally, cancel the sync, and redirect.
 				this.cancelSync(window.location.href + '&updated=1&flush_cache=1&redirect=1');
 			} else {
 				this.renderProgressUpdate(percent);
@@ -666,13 +655,7 @@ module.exports = function (app, $, gc) {
 				this.renderProgressUpdate(0);
 				this.cancelSync();
 				if (response.data) {
-					if (response.data.url) {
-						window.alert(response.data.message);
-						window.location.href = response.data.url;
-					} else {
-						window.alert(response.data);
-					}
-					return;
+					return window.alert(response.data);
 				}
 			}
 		},
@@ -681,13 +664,10 @@ module.exports = function (app, $, gc) {
 			this.$('.gc-progress-bar-partial').css({ width: percent + '%' }).find('span').text(percent + '%');
 		},
 
-		renderProgress: function renderProgress(percent, showLoader) {
+		renderProgress: function renderProgress(percent) {
 			this.$el.addClass('gc-sync-progress');
 			this.buttonStatus(false);
-			this.$('#sync-tabs').html(this.progressTemplate({
-				percent: null === percent ? 0 : percent,
-				loader: true === showLoader
-			}));
+			this.$('#sync-tabs').html(this.progressTemplate({ percent: percent }));
 		},
 
 		renderRows: function renderRows(html) {

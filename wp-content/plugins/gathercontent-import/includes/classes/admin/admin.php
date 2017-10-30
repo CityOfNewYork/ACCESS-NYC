@@ -71,18 +71,6 @@ class Admin extends Base {
 
 		}
 
-		if (
-			! defined( 'DOING_AJAX' )
-			&& 'admin.php' === $pagenow && self::SLUG === $this->_get_val( 'page' )
-			&& \GatherContent\Importer\auth_enabled()
-			&& ! $this->get_setting( 'auth_verified' )
-		) {
-
-			$message = __( 'The provided authentication username and/or password is incorrect. If you\'re not sure what this is, please contact your site adminstrator.', 'gathercontent-import' );
-
-			$this->add_settings_error( $this->option_name, 'gc-http-auth-fail', $message, 'error' );
-		}
-
 		if ( $this->step > 0 ) {
 			$this->mapping_wizard = new Mapping_Wizard( $this );
 		}
@@ -128,23 +116,6 @@ class Admin extends Base {
 
 		if ( isset( $settings['account_owner_email'] ) ) {
 			unset( $settings['account_owner_email'] );
-		}
-
-		if ( \GatherContent\Importer\auth_enabled() ) {
-
-			$settings['auth_verified'] = false;
-
-			if ( isset( $settings['auth_username'], $settings['auth_pw'] ) ) {
-
-				$result = wp_remote_head( admin_url( 'admin-post.php' ), array(
-					'sslverify' => apply_filters( 'https_local_ssl_verify', true ),
-					'headers'   => array(
-						'Authorization' => 'Basic ' . base64_encode( $settings['auth_username'] . ':' . $settings['auth_pw'] ),
-					),
-				) );
-
-				$settings['auth_verified'] = isset( $result['response']['code'] ) && 200 === $result['response']['code'];
-			}
 		}
 
 		return $settings;
@@ -225,54 +196,33 @@ class Admin extends Base {
 
 		$section = new Form_Section(
 			'step_1',
-			esc_html__( 'API Credentials', 'gathercontent-import' ),
+			__( 'API Credentials', 'gathercontent-import' ),
 			array( $this, 'api_setup_settings_cb' ),
 			self::SLUG
 		);
 
 		$section->add_field(
 			'account_email',
-			esc_html__( 'GatherContent Email Address', 'gathercontent-import' ),
+			__( 'GatherContent Email Address', 'gathercontent-import' ),
 			array( $this, 'account_email_field_cb' )
 		);
 
 		$section->add_field(
 			'platform_url_slug',
-			esc_html__( 'Platform URL', 'gathercontent-import' ),
+			__( 'Platform URL', 'gathercontent-import' ),
 			array( $this, 'platform_url_slug_field_cb' )
 		);
 
 		$section->add_field(
 			'api_key',
-			esc_html__( 'API Key', 'gathercontent-import' ),
+			__( 'API Key', 'gathercontent-import' ),
 			array( $this, 'api_key_field_cb' )
 		);
-
-		if ( \GatherContent\Importer\auth_enabled() ) {
-			$section = new Form_Section(
-				'auth',
-				esc_html__( 'HTTP Authentication Credentials', 'gathercontent-import' ),
-				$this->view( 'auth-enabled-desc', array(), false),
-				self::SLUG
-			);
-
-			$section->add_field(
-				'auth_username',
-				esc_html__( 'Username', 'gathercontent-import' ),
-				array( $this, 'auth_username_field_cb' )
-			);
-
-			$section->add_field(
-				'auth_pw',
-				esc_html__( 'Password', 'gathercontent-import' ),
-				array( $this, 'auth_pw_field_cb' )
-			);
-		}
 	}
 
 	public function api_setup_settings_cb() {
 		if ( $key = $this->should_migrate() ) {
-			echo '<p><strong>' . esc_html__( 'NOTE:', 'gathercontent-import' ) . '</strong> ' . sprintf( __( 'It looks like you are migrating from a previous version of the GatherContent plugin.<br>You will need to set up new GatherContent API credentials to continue. Instructions for getting your API key can be found <a href="%s" target="_blank">here</a>.', 'gathercontent-import' ), 'https://gathercontent.com/developers/authentication/' ) . '</p>';
+			echo '<p><strong>' . __( 'NOTE:', 'gathercontent-import' ) . '</strong> ' . sprintf( __( 'It looks like you are migrating from a previous version of the GatherContent plugin.<br>You will need to set up new GatherContent API credentials to continue. Instructions for getting your API key can be found <a href="%s" target="_blank">here</a>.', 'gathercontent-import' ), 'https://gathercontent.com/developers/authentication/' ) . '</p>';
 
 			if ( $slug = get_option( $key . '_api_url' ) ) {
 				$this->settings()->options['platform_url_slug'] = $slug;
@@ -328,36 +278,6 @@ class Admin extends Base {
 			'id'      => 'gc-is-migrated',
 			'name'    => $this->option_name .'[migrated]',
 			'value'   => $this->get_setting( 'migrated' ),
-		) );
-	}
-
-	public function auth_username_field_cb( $field ) {
-		$id = $field->param( 'id' );
-
-		$enabled = \GatherContent\Importer\auth_enabled();
-		$this->view( 'input', array(
-			'id'    => $id,
-			'name'  => $this->option_name .'['. $id .']',
-			'value' => esc_attr( $this->get_setting( $id ) ),
-			'placeholder' => is_string( $enabled ) ? esc_attr( $enabled ) : '',
-		) );
-	}
-
-	public function auth_pw_field_cb( $field ) {
-		$id = $field->param( 'id' );
-
-		$this->view( 'input', array(
-			'id'    => $id,
-			'name'  => $this->option_name .'['. $id .']',
-			'value' => esc_attr( $this->get_setting( $id ) ),
-			'type'  => 'password',
-		) );
-
-		$this->view( 'input', array(
-			'type'    => 'hidden',
-			'id'      => 'auth_verified',
-			'name'    => $this->option_name .'[auth_verified]',
-			'value'   => $this->get_setting( 'auth_verified' ),
 		) );
 	}
 

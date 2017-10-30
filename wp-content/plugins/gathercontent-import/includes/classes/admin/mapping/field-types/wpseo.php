@@ -24,7 +24,6 @@ class WPSEO extends Base implements Type {
 		'upload',
 		'radio',
 		'multiselect',
-		'focuskeyword',
 	);
 
 	/**
