@@ -18,8 +18,6 @@ class Sync_Items extends Plugin_Base {
 
 		$this->maybe_cancelling();
 
-		$this->check_http_auth();
-
 		$this->maybe_checking_status();
 
 		$fields = $this->get_fields();
@@ -33,19 +31,6 @@ class Sync_Items extends Plugin_Base {
 			wp_send_json_error( sprintf(
 				__( 'Error %d: Missing required data.', 'gathercontent-import' ),
 				__LINE__
-			) );
-		}
-	}
-
-	protected function check_http_auth() {
-		$admin = General::get_instance()->admin;
-		if (
-			\GatherContent\Importer\auth_enabled()
-			&& ! $admin->get_setting( 'auth_verified' )
-		) {
-			wp_send_json_error( array(
-				'message' => __( 'Syncing is disabled until authentication credentials are provided. Redirecting to the settings page.', 'gathercontent-import' ),
-				'url'     => add_query_arg( 'auth-required', 1, $admin->url ),
 			) );
 		}
 	}
@@ -95,33 +80,11 @@ class Sync_Items extends Plugin_Base {
 			return false;
 		}
 
-		$prev_percent = absint( $this->_post_val( 'percent' ) );
 		$percent = $this->mapping->get_pull_percent();
 
-		if ( $percent < 100 && absint( $percent ) === $prev_percent ) {
-			$this->maybe_trigger_new_pull( $percent );
-		} elseif ( $prev_percent > $percent ) {
-			$percent = $prev_percent;
-		}
+		// do_action( 'gc_pull_items', $this->mapping );
 
 		wp_send_json_success( compact( 'percent' ) );
-	}
-
-	public function maybe_trigger_new_pull( $percent ) {
-		$ids = $this->mapping->get_items_to_pull();
-		if ( empty( $ids['pending'] ) || ! is_array( $ids['pending'] ) ) {
-			return;
-		}
-
-		$id = array_shift( $ids['pending'] );
-
-		$progress_option_key = "gc_pull_item_{$id}";
-		$in_progress = get_option( $progress_option_key );
-
-		if ( ! $in_progress ) {
-			do_action( 'gc_pull_items', $this->mapping );
-		}
-
 	}
 
 	protected function get_fields() {
@@ -163,7 +126,7 @@ class Sync_Items extends Plugin_Base {
 
 		do_action( 'gc_pull_items', $this->mapping );
 
-		$percent = round( ( .25 / count( $fields['import'] ) ) * 100 );
+		$percent = 0.1;
 
 		wp_send_json_success( compact( 'percent' ) );
 	}

@@ -104,7 +104,7 @@ class Debug extends Base {
 	 * @return void
 	 */
 	public function log_sync_results( $maybe_error, $sync ) {
-		self::debug_log( $maybe_error, $sync->direction . ' items result' );
+		self::debug_log( $maybe_error );
 	}
 
 	/**
@@ -142,12 +142,6 @@ class Debug extends Base {
 			__( 'Debug Mode', 'gathercontent-import' ),
 			sprintf( __( 'Debug file location: %s', 'gathercontent-import' ), '<code>wp-content/'. self::$log_file .'</code>' ),
 			Admin::SLUG
-		);
-
-		$section->add_field(
-			'log_importer_requests',
-			__( 'Log Importer Requests?', 'gathercontent-import' ),
-			array( $this, 'debug_checkbox_field_cb' )
 		);
 
 		$section->add_field(
@@ -194,19 +188,13 @@ class Debug extends Base {
 	public function debug_checkbox_field_cb( $field ) {
 		$id = $field->param( 'id' );
 
-		$args = array(
+		$this->view( 'input', array(
 			'id' => $id,
 			'name' => $this->admin->option_name .'[debug]['. $id .']',
 			'type' => 'checkbox',
 			'class' => '',
 			'value' => 1,
-		);
-
-		if ( $this->admin->get_setting( $id ) ) {
-			$args['checked'] = 'checked';
-		}
-
-		$this->view( 'input', $args );
+		) );
 	}
 
 	/**
@@ -219,24 +207,16 @@ class Debug extends Base {
 	 * @return void
 	 */
 	public function do_debug_options_actions( $settings ) {
-		if ( empty( $settings['debug']['log_importer_requests'] ) ) {
-			$settings['log_importer_requests'] = false;
-			unset( $settings['debug'] );
+		if ( ! isset( $settings['debug'] ) || empty( $settings['debug'] ) ) {
 			return $settings;
 		}
 
-		if ( empty( $settings['debug'] ) ) {
-			return $settings;
-		}
-
-		$orig_settings = $settings;
 		$settings = wp_parse_args( $settings['debug'], array(
-			'log_importer_requests' => false,
-			'review_stuck_status'   => false,
-			'delete_stuck_status'   => false,
-			'view_gc_log_file'      => false,
-			'delete_gc_log_file'    => false,
-			'disable_debug_mode'    => false,
+			'review_stuck_status' => false,
+			'delete_stuck_status' => false,
+			'view_gc_log_file'    => false,
+			'delete_gc_log_file'  => false,
+			'disable_debug_mode'  => false,
 		) );
 
 		$back_url = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
@@ -259,10 +239,6 @@ class Debug extends Base {
 			wp_safe_redirect( add_query_arg( 'gathercontent_debug_mode', 0, $back_url ) );
 			exit;
 
-		} elseif ( $settings['log_importer_requests'] ) {
-			$orig_settings['log_importer_requests'] = true;
-			unset( $orig_settings['debug'] );
-			return $orig_settings;
 		}
 
 		wp_die( '<xmp>'. __LINE__ .') $settings: '. print_r( $settings, true ) .'</xmp>' . $back_button, __( 'Debug Mode', 'gathercontent-import' ) );
@@ -402,13 +378,12 @@ class Debug extends Base {
 	 * @since  3.0.1
 	 *
 	 * @param  string  $message Message to write to log file.
-	 * @param  string  $title   Describes what is being logged.
 	 *
 	 * @return void
 	 */
-	public static function debug_log( $message = '', $title = '' ) {
+	public static function debug_log( $message = '' ) {
 		if ( self::$debug_mode ) {
-			self::_debug_log( $message, $title );
+			self::_debug_log( $message );
 		}
 	}
 
@@ -421,12 +396,8 @@ class Debug extends Base {
 	 *
 	 * @return void
 	 */
-	protected static function _debug_log( $message = '', $title = '' ) {
-		$message = print_r( $message, 1 );
-		if ( $title ) {
-			$message = print_r( $title, 1 ) . ': ' . $message;
-		}
-		error_log( date('Y-m-d H:i:s') .': '. $message ."\r\n", 3, self::$log_path );
+	protected static function _debug_log( $message = '' ) {
+		error_log( date('Y-m-d H:i:s') .': '. print_r( $message, 1 ) ."\r\n", 3, self::$log_path );
 	}
 
 }

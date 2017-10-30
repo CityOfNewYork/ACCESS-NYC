@@ -136,12 +136,12 @@ abstract class Base extends Plugin_Base {
 	 *
 	 * @since  3.0.0
 	 *
-	 * @param  int $mapping_post Mapping post object.
+	 * @param  int $mapping_post_id Mapping post ID.
 	 *
 	 * @return mixed Result of sync. WP_Error on failure.
 	 */
-	public function sync_items( $mapping_post ) {
-		$result = $this->_sync_items( $mapping_post );
+	public function sync_items( $mapping_post_id ) {
+		$result = $this->_sync_items( $mapping_post_id );
 		do_action( 'gc_sync_items_result', $result, $this );
 		return $result;
 	}
@@ -151,15 +151,15 @@ abstract class Base extends Plugin_Base {
 	 *
 	 * @since  3.0.0
 	 *
-	 * @param  int $mapping_post Mapping post object.
+	 * @param  int $mapping_post_id Mapping post ID.
 	 *
 	 * @throws Exception On failure.
 	 *
 	 * @return mixed Result of sync.
 	 */
-	protected function _sync_items( $mapping_post ) {
+	protected function _sync_items( $mapping_post_id ) {
 		try {
-			$this->mapping = Mapping_Post::get( $mapping_post, true );
+			$this->mapping = Mapping_Post::get( $mapping_post_id, true );
 
 			$this->check_mapping_data();
 			$ids = $this->get_items_to_sync( $this->direction );
@@ -172,16 +172,14 @@ abstract class Base extends Plugin_Base {
 			return new WP_Error( "gc_{$this->direction}_items_fail_" . $e->getCode(), $e->getMessage(), $e->get_data() );
 		}
 
-		$id                  = array_shift( $ids['pending'] );
-		$progress_option_key = "gc_{$this->direction}_item_{$id}";
-		$in_progress         = get_option( $progress_option_key );
+		$id = array_shift( $ids['pending'] );
 
-		if ( $in_progress ) {
+		if ( get_option( "gc_{$this->direction}_item_{$id}" ) ) {
 			return new WP_Error( "gc_{$this->direction}_item_in_progress", sprintf( __( 'Currently in progress: %d', 'gathercontent-import' ), $id ) );
 		}
 
 		try {
-			update_option( $progress_option_key, time(), false );
+			update_option( "gc_{$this->direction}_item_{$id}", time(), false );
 			$result = $this->do_item( $id );
 		} catch ( \Exception $e ) {
 			$data = $e->get_data();
@@ -197,7 +195,7 @@ abstract class Base extends Plugin_Base {
 		$ids['complete'][] = $id;
 
 		$this->mapping->update_items_to_sync( $ids, $this->direction );
-		delete_option( $progress_option_key );
+		delete_option( "gc_{$this->direction}_item_{$id}" );
 
 		// If we have more items...
 		if ( ! empty( $ids['pending'] ) ) {
@@ -480,14 +478,10 @@ abstract class Base extends Plugin_Base {
 		$image = '';
 
 		$atts = wp_parse_args( $atts, array(
-			'size'   => 'full',
 			'align'  => '',
 			'linkto' => '',
-			'class'  => '',
-			'alt'    => '',
+			'size'   => 'full',
 		) );
-
-		$atts = array_map( 'esc_attr', $atts );
 
 		if ( ! $atts['linkto'] && ! ( $atts['size'] || $atts['align'] ) ) {
 			return $image;
@@ -519,7 +513,7 @@ abstract class Base extends Plugin_Base {
 			$atts['size'] = array_map( 'absint', $atts['size'] );
 			$size_class = join( 'x', $atts['size'] );
 		} else {
-			$atts['size'] = $size_class = $atts['size'];
+			$atts['size'] = $size_class = sanitize_text_field( $atts['size'] );
 			if ( 'full' === $atts['size'] ) {
 				$atts['size'] = '';
 			}
@@ -532,12 +526,8 @@ abstract class Base extends Plugin_Base {
 		$args = array(
 			'data-gcid'   => $media_id,
 			'data-gcatts' => wp_json_encode( array_filter( $atts ) ),
-			'class'       => "gathercontent-image $alignclass attachment-$size_class size-$size_class wp-image-$attach_id" . ( $atts['class'] ? ' ' . $atts['class'] : '' ),
+			'class'       => "gathercontent-image $alignclass attachment-$size_class size-$size_class wp-image-$attach_id",
 		);
-
-		if ( ! empty( $atts['alt'] ) ) {
-			$args['alt'] = $atts['alt'];
-		}
 
 		if ( $atts['linkto'] ) {
 			$image = wp_get_attachment_link(
