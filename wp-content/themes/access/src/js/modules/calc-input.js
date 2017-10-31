@@ -29,7 +29,7 @@ class CalcInput {
    */
   bus(event) {
     const key = event.keyCode;
-    const backspace = (key === 8);
+    const backspace = (key === 8 || key === 46);
     const arrows = (key >= 37 && key <= 40);
     if (backspace || arrows) return;
     if (event.type === 'drop') {

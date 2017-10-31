@@ -593,7 +593,6 @@ ScreenerField.setAllAttr = function(event) {
   let key = el.dataset.key;
   let keys = el.dataset.key.split(',');
   let value = ScreenerField.getTypedVal(el);
-  let reset = el.dataset.reset;
   for (let i = this[obj].length - 1; i >= 0; i--) {
     for (let k = keys.length - 1; k >= 0; k--) {
       this[obj][i].set(keys[k], value);
@@ -619,7 +618,7 @@ ScreenerField.setHousing = function(event) {
   this.household.set(key, value);
 
   if (key === 'livingPreferNotToSay' && value === true) {
-    let keys = el.dataset.keys.split(',');
+    keys = el.dataset.keys.split(',');
     for (let k = keys.length - 1; k >= 0; k--) {
       this.household.set(keys[k], false);
     }
