@@ -9,12 +9,14 @@
   'get_help_in_person'
 ] %}
 
+{% set shownSections = post.get_field('show_sections') %}
+
 <article class="p-bottom" data-code="{{ post.program_code }}">
 
   <div class="p-2 bg-grey-lightest d-flex">
 
     <div>
-      {% include 'partials/category-icon.twig' with {width: '80px', height: '80px'} %}
+      {% include 'partials/category-icon.twig' with {width: '80px', height: '80px', target: '_blank'} %}
     </div>
 
     <div class="w-100 p-horizontal">
@@ -66,7 +68,7 @@
 
   </div>
 
-  <div class="p-2 d-flex hidden" id="program-detail-{{ post.program_code }}">
+  <div class="p-2 d-flex hidden active-for-print" id="program-detail-{{ post.program_code }}">
 
     <div>
       <div style="width:80px;height:80px;">&nbsp;</div>
@@ -74,7 +76,7 @@
 
     <div class="w-100 p-horizontal">
 
-      {% for section in post.get_field('show_sections') %}
+      {% for section in shownSections %}
 
       {% if section.value == 'how-it-works' %}
       <div class="m-bottom-2">
@@ -83,59 +85,127 @@
       </div>
       {% endif %}
 
+      {% endfor %}
+
+      {% if post.heads_up | length %}
+      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }} m-bottom-2">
+        <h3>{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
+        {{ post.get_field('heads_up') }}
+        {% for section in shownSections %}{% if section.value == 'what-you-need-to-include' %}
+        <p class="hide-for-print">
+          <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank">See a full list of required documents</a>
+        </p>
+        {% endif %}{% endfor %}
+      </div>
+      {% endif %}
+
+      {% for section in post.get_field('show_sections') %}
+
       {% if section.value == 'how-to-apply' %}
-      {% set shownHowToApply = true %}
       <div class="m-bottom-2">
+
         <h3>{{__('How to apply', 'accessnyc-program-detail')}}</h3>
+
         {% if post.how_to_apply_or_enroll_online != '' %}
-        <div>
-          <h4>{{__('Apply online', 'accessnyc-program-detail')}}</h4>
-          {{ post.get_field('how_to_apply_or_enroll_online') }}
-          {% if post.apply_online_call_to_action != '' %}
-            <p class="hide-for-print">
-              <a class="btn btn-secondary btn-next" href="{{ post.url_of_online_application }}">{{ post.apply_online_call_to_action }}</a>
-            </p>
-          {% endif %}
-        </div>
-        {% endif %}
-        {% if post.how_to_apply_or_enroll_by_mail != '' %}
-        <div>
-          <h4>{{__('Apply by mail', 'accessnyc-program-detail')}}</h4>
-          {{ post.get_field('how_to_apply_or_enroll_by_mail') }}
-          {% if post.apply_by_mail_call_to_action != '' %}
-            <p class="hide-for-print">
-              <a class="btn btn-secondary btn-next" href="{% if post.url_of_pdf_application_forms != '' %}{{ post.url_of_pdf_application_forms }}{% else %}{{ post.application_forms_pdfs }}{% endif %}">{{ post.apply_by_mail_call_to_action }}</a>
-            </p>
-          {% endif %}
-        </div>
-        {% endif %}
-        {% if post.how_to_apply_or_enroll_by_phone != '' %}
-        <div>
-          <h4>{{__('Apply by phone', 'accessnyc-program-detail')}}</h4>
-          {{ post.get_field('how_to_apply_or_enroll_by_phone') }}
-          {{ post.get_field('phone_numbers') }}
-        </div>
-        {% endif %}
-        {% if post.how_to_apply_or_enroll_in_person != '' %}
-        <div>
-          <h4>{{__('Apply in person', 'accessnyc-program-detail')}}</h4>
-          {{ post.get_field('how_to_apply_or_enroll_in_person') }}
-          {% if post.office_locations_url != '' %}
-            {% if post.apply_in_person_call_to_action != '' %}
+
+        <article class="c-accordion">
+          <header class="c-accordion__header">
+            <p>{{__('Apply online', 'accessnyc-program-detail')}}</p>
+            <a class="c-accordion__toggle" data-js="simple-toggle" href="#apply-online-{{ post.program_code }}">
+              <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
+                    data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+            </a>
+          </header>
+          <div class="c-accordion__body hidden hidden-by-overflow animated active-for-print" id="apply-online-{{ post.program_code }}">
+            <div class="c-accordion__padding">
+              {{ post.get_field('how_to_apply_or_enroll_online') }}
+              {% if post.apply_online_call_to_action != '' %}
               <p class="hide-for-print">
-                <a class="btn btn-secondary btn-next" href="{{ post.office_locations_url }}">{{ post.apply_in_person_call_to_action|striptags }}</a>
+                <a class="btn btn-secondary btn-next" href="{{ post.url_of_online_application }}" target="_blank">{{ post.apply_online_call_to_action }}</a>
               </p>
-            {% endif %}
-          {% endif %}
-        </div>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+
         {% endif %}
+
+        {% if post.how_to_apply_or_enroll_by_mail != '' %}
+
+        <article class="c-accordion">
+          <header class="c-accordion__header">
+            <p>{{__('Apply by mail', 'accessnyc-program-detail')}}</p>
+            <a class="c-accordion__toggle hide-for-print" data-js="simple-toggle" href="#apply-by-mail-{{ post.program_code }}">
+              <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
+                    data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+            </a>
+          </header>
+          <div class="c-accordion__body hidden hidden-by-overflow animated active-for-print" id="apply-by-mail-{{ post.program_code }}">
+            <div class="c-accordion__padding">
+              {{ post.get_field('how_to_apply_or_enroll_by_mail') }}
+              {% if post.apply_by_mail_call_to_action != '' %}
+              <p class="hide-for-print">
+                <a class="btn btn-secondary btn-next" href="{% if post.url_of_pdf_application_forms != '' %}{{ post.url_of_pdf_application_forms }}{% else %}{{ post.application_forms_pdfs }}{% endif %}" target="_blank">{{ post.apply_by_mail_call_to_action }}</a>
+              </p>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+
+        {% endif %}
+
+        {% if post.how_to_apply_or_enroll_by_phone != '' %}
+
+        <article class="c-accordion">
+          <header class="c-accordion__header">
+            <p>{{__('Apply by phone', 'accessnyc-program-detail')}}</p>
+            <a class="c-accordion__toggle hide-for-print" data-js="simple-toggle" href="#apply-by-phone-{{ post.program_code }}">
+              <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
+                    data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+            </a>
+          </header>
+          <div class="c-accordion__body hidden hidden-by-overflow animated active-for-print" id="apply-by-phone-{{ post.program_code }}">
+            <div class="c-accordion__padding">
+              {{ post.get_field('how_to_apply_or_enroll_by_phone') }}
+              {{ post.get_field('phone_numbers') }}
+            </div>
+          </div>
+        </article>
+
+        {% endif %}
+
+        {% if post.how_to_apply_or_enroll_in_person != '' %}
+
+        <article class="c-accordion">
+          <header class="c-accordion__header">
+            <p>{{__('Apply in person', 'accessnyc-program-detail')}}</p>
+            <a class="c-accordion__toggle hide-for-print" data-js="simple-toggle" href="#apply-in-person-{{ post.program_code }}">
+              <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
+                    data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+            </a>
+          </header>
+          <div class="c-accordion__body hidden hidden-by-overflow animated active-for-print" id="apply-in-person-{{ post.program_code }}">
+            <div class="c-accordion__padding">
+              {{ post.get_field('how_to_apply_or_enroll_in_person') }}
+              {% if post.office_locations_url != '' %}
+              {% if post.apply_in_person_call_to_action != '' %}
+              <p class="hide-for-print">
+                <a class="btn btn-secondary btn-next" href="{{ post.office_locations_url }}" target="_blank">{{ post.apply_in_person_call_to_action|striptags }}</a>
+              </p>
+              {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </article>
+
+        {% endif %}
+
       </div>
       {% endif %}
 
       {% endfor %}
 
-      {% if shownHowToApply == false %}
-      <div class="m-bottom-2">
+      <div>
         <h3>{{__('More ways to get help with this program', 'accessnyc-program-detail')}}</h3>
         {% for method in helpMethods %}
         {% if post.get_field(method) %}
@@ -145,14 +215,6 @@
         {% endif %}
         {% endfor %}
       </div>
-      {% endif %}
-
-      {% if post.heads_up | length %}
-      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }}">
-        <h3>{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
-        {{ post.get_field('heads_up') }}
-      </div>
-      {% endif %}
 
     </div>
 

@@ -6,19 +6,22 @@
   {{ post.get_field('what_you_need_to_include_intro_text') }}
   {% for item in post.get_field('what_you_need_to_include') %}
     {% if loop.index == 1 %}
-      {% set articleStatus = 'open' %}
-      {% set articleToggle = 'hide' %}
+      {% set articleStatus = 'active' %}
+      {% set articleToggle = 'active' %}
     {% else %}
       {% set articleStatus = '' %}
-      {% set articleToggle = 'show' %}
+      {% set articleToggle = 'hidden' %}
     {% endif %}
-    <article class="program-detail-what-you-need-to-include js-program-detail-what-you-need-to-include no-js-open {{ articleStatus }}">
-      <header class="program-detail-what-you-need-to-include-header">
+    <article class="c-accordion">
+      <header class="c-accordion__header">
         <p>{{ item.heading }}</p>
-        <div class="hide-or-show-list js-hide-or-show-list {{ articleToggle }} no-js-hidden hide-for-print"><span class="show-list">+<span class="hide-or-show-string"> {{__('show this list', 'accessnyc-program-detail')}}</span></span><span class="hide-list">-<span class="hide-or-show-string"> {{__('hide this list', 'accessnyc-program-detail')}}</span></span></div>
+        <a class="c-accordion__toggle hide-for-print {{ articleStatus }} js-simple-toggle" href="#what-you-need-to-include-{{ loop.index }}">
+          <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
+                data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+        </a>
       </header>
-      <div class="program-detail-what-you-need-to-include-body">
-        <div class="program-detail-what-you-need-to-include-padding">
+      <div class="c-accordion__body {{ articleToggle }} hidden-by-overflow animated active-for-print" id="what-you-need-to-include-{{ loop.index }}">
+        <div class="c-accordion__padding">
           {{ item.body }}
         </div>
       </div>

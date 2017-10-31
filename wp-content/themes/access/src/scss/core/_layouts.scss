@@ -1,4 +1,11 @@
+/**
+ * Layouts
+ */
 
+// Dependencies
+// @import '...';
+
+// Declarations
 .layout {
   position: relative;
   height: calc(100vh - 90px);
@@ -21,4 +28,15 @@
   display: block;
 }
 
+@media print {
 
+  .layout {
+    height: auto;
+    overflow: visible;
+  }
+
+  .layout__body {
+    position: static;
+  }
+
+}

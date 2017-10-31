@@ -64,6 +64,7 @@ Description: Custom theme
 @import 'components/share-form';
 @import 'components/site-footer';
 @import 'components/site-header';
+@import 'components/c-accordion';
 
 /**
  * Utility
@@ -79,4 +80,5 @@ Description: Custom theme
 @import 'nyco-patterns/src/scss/utilities/text';
 @import 'core/borders';
 @import 'core/colors';
+@import 'core/toggles';
 @import 'core/print';
