@@ -1,6 +1,6 @@
 .program-detail-title {
   @include media($bp-mobile-up) {
-    @include align-items(flex-start);
+    align-items: flex-start;
     display: flex;
   }
   margin-bottom: $spacing-base / 2;
@@ -43,7 +43,7 @@
   padding: $spacing-base;
 
   @include media($bp-mobile-up) {
-    @include align-items(flex-start);
+    align-items: flex-start;
     display: flex;
     padding: 1.5*$spacing-base;
   }

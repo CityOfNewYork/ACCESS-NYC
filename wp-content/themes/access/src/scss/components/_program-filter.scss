@@ -46,7 +46,7 @@
 }
 
 .program-filter-list {
-  @include transition(all .3s ease-out);
+  transition: all .3s ease-out;
   list-style: none;
   margin: 0 0 $spacing-base;
   max-height: 0;
@@ -73,7 +73,7 @@
 
 label.program-filter-item,
 a.program-filter-item {
-  @include transition(background .2s ease-in);
+  transition: background .2s ease-in;
 
   &:link,
   &:visited {

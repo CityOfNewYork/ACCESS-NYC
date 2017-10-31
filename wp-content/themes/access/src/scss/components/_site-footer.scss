@@ -58,11 +58,11 @@
 }
 
 .copyright {
-  @include align-items(stretch);
+  align-items: stretch;
   @include clearfix();
   display: flex;
-  @include flex-direction(row);
-  @include justify-content(flex-start);
+  flex-direction: row;
+  justify-content: flex-start;
   color: $color-grey-dark;
   font-size: 12px; // TODO(jjandoc): Variable?
 

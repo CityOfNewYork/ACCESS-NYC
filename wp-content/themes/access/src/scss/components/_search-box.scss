@@ -9,7 +9,7 @@
 }
 
 .search-box-inner {
-  @include transition(all .2s ease-out);
+  transition: all .2s ease-out;
   background: $color-grey-lightest;
   max-height: 0px;
   overflow: hidden;
@@ -64,9 +64,9 @@
 }
 
 .search-suggestions-header {
-  @include align-items(flex-end);
+  align-items: flex-end;
   display: flex;
-  @include justify-content(space-between);
+  justify-content: space-between;
   margin-bottom: $spacing-base;
 
   h3 {
@@ -75,9 +75,9 @@
 }
 
 .search-suggestions-body {
-  @include align-items(flex-start);
+  align-items: flex-start;
   display: flex;
-  @include flex-wrap(wrap);
+  flex-wrap: wrap;
 }
 
 .search-suggestions-item {

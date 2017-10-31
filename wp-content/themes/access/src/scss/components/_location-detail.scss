@@ -5,7 +5,7 @@
 
   @include media($bp-tablet-up) {
     display: flex;
-    @include flex-direction(row-reverse);
+    flex-direction: row-reverse;
     margin: 0 $spacing-base $spacing-base;
     padding: $spacing-base 0;
   }

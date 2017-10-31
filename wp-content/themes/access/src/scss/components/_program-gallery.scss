@@ -22,11 +22,11 @@
 
     display: flex;
 
-    @include flex-wrap(wrap);
+    flex-wrap: wrap;
 
     .program-card {
 
-      @include calc(width, '#{percentage(1/$cards-per-row)} - #{$spacing-base/$cards-per-row}');
+      width: calc(#{percentage(1/$cards-per-row)} - #{$spacing-base/$cards-per-row});
       margin-#{$text-direction-end}: $spacing-base;
 
       &:nth-child(#{$cards-per-row}n) {

@@ -52,7 +52,7 @@
 }
 
 .share-form-controls {
-  @include align-items(center);
+  align-items: center;
   display: flex;
   background: $color-white;
   border: 1px solid $color-grey-mid;
@@ -63,7 +63,7 @@
   }
 
   input {
-    @include flex-grow(1);
+    flex-grow: 1;
     border: none;
     min-width: 0px;
     width: 100%;

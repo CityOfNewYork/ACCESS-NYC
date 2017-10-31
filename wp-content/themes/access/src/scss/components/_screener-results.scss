@@ -13,12 +13,12 @@ $icon-size: 55px;
 
 
   @include media ($bp-mobile-up) {
-    @include align-items(flex-top);
+    align-items: flex-top;
     display: flex;
-    @include flex-direction(row);
+    flex-direction: row;
 
     .screener-results-text {
-      @include flex(1 1 auto);
+      flex: 1 1 auto;
     }
   }
 }
