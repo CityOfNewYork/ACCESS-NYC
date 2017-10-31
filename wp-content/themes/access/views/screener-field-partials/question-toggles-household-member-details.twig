@@ -16,7 +16,10 @@
       <label class="screener-radio screener-label">
         <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="toggle-{{dataKey}}" checked
           data-type="boolean"
-          data-hides="#js-toggle-{{dataKey}}">
+          data-hides="#js-toggle-{{dataKey}}"
+          data-object="people"
+          data-key="{{dataKey}}"
+          v-on:change="setAllAttr">
         <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
       </label>
     </div>
@@ -39,6 +42,7 @@
             data-key="{{dataKey}}"
             v-bind:data-index="personIndex"
             v-bind:name="'Person[' + personIndex + '].{{dataKey}}'"
+            v-bind:checked="p._attrs.{{dataKey}}"
             v-on:change="setAttr">
           <span class="styled-checkbox-label">
             <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>

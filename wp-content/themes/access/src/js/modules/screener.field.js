@@ -71,6 +71,8 @@ class ScreenerField {
       'methods': {
         'resetAttr': ScreenerField.resetAttr,
         'setAttr': ScreenerField.setAttr,
+        'setAllAttr': ScreenerField.setAllAttr,
+        'setHousing': ScreenerField.setHousing,
         'populate': ScreenerField.populate,
         'pushPayment': ScreenerField.pushPayment,
         'getPayment': ScreenerField.getPayment,
@@ -547,11 +549,11 @@ ScreenerField.resetAttr = function(event) {
 
 /**
  * Inforces strict types for certain data
- * @param  {event} event event listener object, requires data;
- *                       object {object} 'people' or 'household'
- *                       index {number} item index in object (optional)
- *                       key {string} attribute to set
- *                       type {string} type of attribute
+ * @param  {event} event - event listener object, requires data;
+ *                       - object {object} 'people' or 'household'
+ *                       - index {number} item index in object (optional)
+ *                       - key {string} attribute to set
+ *                       - type {string} type of attribute
  */
 ScreenerField.setAttr = function(event) {
   let el = event.currentTarget;
@@ -574,8 +576,71 @@ ScreenerField.setAttr = function(event) {
   }
   /* eslint-enable no-console, no-debugger */
   // reset an element based on this value;
-  if (typeof reset != 'undefined') {
+  if (typeof reset != 'undefined')
     document.querySelector(reset).checked = false;
+};
+
+/**
+ * Set attribute for all objects in collection.
+ * @param  {event} event - event listener object, requires data;
+ *                       - object {object} 'people' or 'household'
+ *                       - key {string} attribute to set
+ *                       - type {string} type of attribute
+ */
+ScreenerField.setAllAttr = function(event) {
+  let el = event.currentTarget;
+  let obj = el.dataset.object;
+  let key = el.dataset.key;
+  let keys = el.dataset.key.split(',');
+  let value = ScreenerField.getTypedVal(el);
+  let reset = el.dataset.reset;
+  for (let i = this[obj].length - 1; i >= 0; i--) {
+    for (let k = keys.length - 1; k >= 0; k--) {
+      this[obj][i].set(keys[k], value);
+    }
+  }
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+    console.dir(`setAllAttr: ${obj}, ${key}, ${value}`);
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
+ * Special processor for the household model housing attributes.
+ * @param {event} event - the change event for housing
+ */
+ScreenerField.setHousing = function(event) {
+  let el = event.target;
+  let key = el.dataset.key;
+  let keys = [];
+  let value = ScreenerField.getTypedVal(el);
+  let reset = false;
+
+  this.household.set(key, value);
+
+  if (key === 'livingPreferNotToSay' && value === true) {
+    let keys = el.dataset.keys.split(',');
+    for (let k = keys.length - 1; k >= 0; k--) {
+      this.household.set(keys[k], false);
+    }
+    reset = true;
+  } else {
+    this.household.set('livingPreferNotToSay', false);
+  }
+
+  // rental reset
+  if ((key === 'livingRenting' && value === false) || reset) {
+    this.household.set('livingRentalType', '');
+    for (let r = this.people.length - 1; r >= 0; r--) {
+      this.people[r].set('livingRentalOnLease', false);
+    }
+  }
+
+  // owner reset
+  if ((key === 'livingOwner' && value === false) || reset) {
+    for (let o = this.people.length - 1; o >= 0; o--) {
+      this.people[o].set('livingOwnerOnDeed', false);
+    }
   }
 };
 

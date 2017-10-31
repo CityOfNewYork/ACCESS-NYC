@@ -5,23 +5,18 @@
 {% endif %}
 <div class="screener-radio-buttons">
   <label class="screener-radio screener-label">
-    <input
+    <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="toggle-{{dataKey}}"
       data-type="boolean"
-      data-shows="#js-toggle-{{dataKey}}"
-      class="js-screener-toggle screener-radio-input sr-only"
-      value="true"
-      type="radio"
-      name="toggle-{{dataKey}}"/>
+      data-shows="#js-toggle-{{dataKey}}">
     <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
   </label>
   <label class="screener-radio screener-label">
-    <input
+    <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="toggle-{{dataKey}}" checked
       data-type="boolean"
       data-hides="#js-toggle-{{dataKey}}"
-      class="js-screener-toggle screener-radio-input sr-only"
-      value="false"
-      type="radio"
-      name="toggle-{{dataKey}}" checked/>
+      data-object="people"
+      data-key="{{dataKey}},{{dataSubKey}}"
+      v-on:change="setAllAttr">
     <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
   </label>
 </div>
@@ -42,6 +37,7 @@
           data-key="{{dataKey}}"
           v-bind:data-index="personIndex"
           v-bind:name="'Person[' + personIndex + '].{{dataKey}}'"
+          v-bind:checked="p._attrs.{{dataKey}}"
           v-on:change="setAttr">
         <span class="styled-checkbox-label">
           <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>

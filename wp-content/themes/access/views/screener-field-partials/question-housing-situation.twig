@@ -1,6 +1,6 @@
 {% set rentingOptions = [
-  {'value': 'livingRenting', 'text': 'Renting', 'toggles': '#screener-rental-type'},
-  {'value': 'livingOwner', 'text': 'You or a household member owns the home or apartment', 'toggles': '#screener-homeowner'},
+  {'value': 'livingRenting', 'text': 'Renting'},
+  {'value': 'livingOwner', 'text': 'You or a household member owns the home or apartment'},
   {'value': 'livingStayingWithFriend', 'text': 'Staying with a friend'},
   {'value': 'livingHotel', 'text': 'In a hotel'},
   {'value': 'livingShelter', 'text': 'In a shelter or homeless'}
@@ -47,21 +47,23 @@
         <div class="screener-checkboxes js-screener-checkbox-group">
           {% for option in rentingOptions %}
           <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-            <input class="js-screener-toggle" type="checkbox" name="Household.{{option.value}}" value="1"
-              data-toggles="{{option.toggles}}"
+            <input type="checkbox" name="Household.{{option.value}}" value="1"
               data-type="boolean"
               data-object="household"
               data-key="{{option.value}}"
-              v-on:change="setAttr">
+              v-bind:checked="household._attrs.{{option.value}}"
+              v-on:change="setHousing($event);">
             <span class="styled-checkbox-label">{{ __(option.text, 'accessnyc-screener') }}</span>
           </label>
           {% endfor %}
           <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-            <input type="checkbox" name="Household.livingPreferNotToSay" value="1" checked
+            <input type="checkbox" name="Household.livingPreferNotToSay" value="1"
               data-type="boolean"
               data-object="household"
               data-key="livingPreferNotToSay"
-              v-on:change="setAttr">
+              data-keys="{% for option in rentingOptions %}{{option.value}},{% endfor %}"
+              v-bind:checked="household._attrs.livingPreferNotToSay"
+              v-on:change="setHousing($event);">
             <span class="styled-checkbox-label">{{ __('Prefer not to say', 'accessnyc-screener') }}</span>
           </label>
         </div>
@@ -105,6 +107,7 @@
                     data-object="people"
                     data-key="livingRentalOnLease"
                     data-index="0"
+                    v-bind:checked="people[0]._attrs.livingRentalOnLease"
                     v-on:change="setAttr">
                   <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
                 </label>
@@ -141,6 +144,7 @@
                     v-validate="{required: true}"
                     v-bind:data-index="personIndex"
                     v-bind:name="'Person.livingRentalOnLease'"
+                    v-bind:checked="p._attrs.livingRentalOnLease"
                     v-on:change="setAttr">
                   <span class="styled-checkbox-label">
                     <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
@@ -168,6 +172,7 @@
                   data-object="people"
                   data-key="livingOwnerOnDeed"
                   data-index="0"
+                  v-bind:checked="people[0]._attrs.livingOwnerOnDeed"
                   v-on:change="setAttr">
                 <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
               </label>
@@ -203,6 +208,7 @@
                   v-validate="{required: true}"
                   v-bind:data-index="personIndex"
                   v-bind:name="'Person.livingOwnerOnDeed'"
+                  v-bind:checked="p._attrs.livingOwnerOnDeed"
                   v-on:change="setAttr">
                 <span class="styled-checkbox-label">
                   <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
