@@ -28,6 +28,7 @@ class WPML_Lang_Domain_Filters {
 		add_filter( 'stylesheet_uri', array( $this, 'convert_url' ) );
 		add_filter( 'option_siteurl', array( $this, 'siteurl_callback' ) );
 		add_filter( 'content_url', array( $this, 'siteurl_callback' ) );
+		add_filter( 'plugins_url', array( $this, 'siteurl_callback' ) );
 		add_filter( 'login_url', array( $this, 'convert_url' ) );
 		add_filter( 'logout_url', array( $this, 'convert_logout_url' ) );
 		add_filter( 'admin_url', array( $this, 'admin_url_filter' ), 10, 2 );

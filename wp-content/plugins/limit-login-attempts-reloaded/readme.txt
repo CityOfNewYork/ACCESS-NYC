@@ -1,9 +1,9 @@
 === Limit Login Attempts Reloaded ===
 Contributors: wpchefgadget
 Tags: login, security, authentication, Limit Login Attempts, Limit Login Attempts Reloaded, Limit Login Attempts Revamped, Limit Login Attempts Renovated, Limit Login Attempts Updated, Better Limit Login Attempts, Limit Login Attempts Renewed, Limit Login Attempts Upgraded
-Requires at least: 2.8
-Tested up to: 4.6.1
-Stable tag: 2.3.0
+Requires at least: 3.0
+Tested up to: 4.8
+Stable tag: 2.6.1
 
 Reloaded version of the original Limit Login Attempts plugin for Login Protection by a team of WordPress developers.
 
@@ -20,9 +20,10 @@ Features:
 * Informs the user about the remaining retries or lockout time on the login page.
 * Optional logging and optional email notification.
 * Handles server behind the reverse proxy.
-* It is possible to whitelist IPs using a filter. But you probably shouldn't do this.
-* XMLRPC gateway protection.
-* Woocommerce login page protection.
+* It is possible to whitelist/blacklist IPs and Usernames.
+* **XMLRPC** gateway protection.
+* **Woocommerce** login page protection.
+* **Multi-site** compatibility with extra MU settings.
 
 = Upgrading from the old Limit Login Attempts plugin =
 1. Go to the Plugins section in your site's backend.
@@ -47,6 +48,22 @@ Based on the original code from Limit Login Attemps plugin by Johan Eenfeldt.
 3. Administration interface in WordPress 4.5.3
 
 == Changelog ==
+
+= 2.6.1 =
+Plugin returns the 403 Forbidden header after the limit of login attempts via XMLRPC is reached.
+
+Added support of IP ranges in white/black lists.
+
+Lockouts now can be released selectively.
+
+Fixed the issue with encoding of special symbols in email notifications.
+
+= 2.5.0 =
+* Added Multi-site Compatibility and additional MU settings. https://wordpress.org/support/topic/multisite-compatibility-47/
+
+= 2.4.0 =
+* Usernames and IP addresses can be white-listed and black-listed now. https://wordpress.org/support/topic/banning-specific-usernames/ https://wordpress.org/support/topic/good-831/
+* The lockouts log has been inversed. https://wordpress.org/support/topic/inverse-log/
 
 = 2.3.0 =
 * IP addresses can be white-listed now. https://wordpress.org/support/topic/legal-user/

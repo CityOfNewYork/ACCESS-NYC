@@ -5,7 +5,6 @@ class WPML_PB_Shortcodes {
 	/** @var  WPML_PB_Shortcode_Strategy $shortcode_strategy */
 	private $shortcode_strategy;
 
-
 	public function __construct( WPML_PB_Shortcode_Strategy $shortcode_strategy ) {
 		$this->shortcode_strategy = $shortcode_strategy;
 	}
@@ -24,9 +23,8 @@ class WPML_PB_Shortcodes {
 					'content'    => $matches[5][ $index ],
 				);
 
-				// @todo perhaps here we must check the case when parent tag contains nested shortcode and regular text and ingore recurrent call
 				$nested_shortcodes = array();
-				if ( $shortcode['content'] ) {
+				if ( $shortcode['content'] && ! $this->has_regular_text( $shortcode['content'] ) ) {
 					$nested_shortcodes = $this->get_shortcodes( $shortcode['content'] );
 					if ( count( $nested_shortcodes ) ) {
 						$shortcode['content'] = '';
@@ -41,5 +39,11 @@ class WPML_PB_Shortcodes {
 		}
 
 		return $shortcodes;
+	}
+
+	private function has_regular_text( $content ) {
+		$content_with_stripped_shortcode = preg_replace( '/\[([\S]*)[^\]]*\][\s\S]*\[\/(\1)\]|\[[^\]]*\]/', '', $content );
+		$content_with_stripped_shortcode = trim( $content_with_stripped_shortcode );
+		return ! empty( $content_with_stripped_shortcode );
 	}
 }

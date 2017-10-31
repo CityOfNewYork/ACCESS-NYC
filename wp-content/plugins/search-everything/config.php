@@ -109,6 +109,24 @@ function se_upgrade() {
 	}
 }
 
+function se_migrate_8_1_8() {
+	$se_meta = get_option('se_meta', false);
+	$se_meta['version'] = '8.1.9';
+	update_option('se_meta', $se_meta);
+}
+
+function se_migrate_8_1_7() {
+	$se_meta = get_option('se_meta', false);
+	$se_meta['version'] = '8.1.8';
+	update_option('se_meta', $se_meta);
+}
+
+function se_migrate_8_1_6() {
+	$se_meta = get_option('se_meta', false);
+	$se_meta['version'] = '8.1.7';
+	update_option('se_meta', $se_meta);
+}
+
 function se_migrate_8_1_5() {
 	$se_meta = get_option('se_meta', false);
 	$se_meta['version'] = '8.1.6';
@@ -161,7 +179,7 @@ function se_migrate_8_0() {
 			'notice_visible'			=> true,
 		);
 	}
-	update_option('se_options',$se_options);	
+	update_option('se_options',$se_options);
 
 	se_set_global_notice();
 }

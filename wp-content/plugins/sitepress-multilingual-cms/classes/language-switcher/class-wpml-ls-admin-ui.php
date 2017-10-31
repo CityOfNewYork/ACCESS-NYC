@@ -343,7 +343,6 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 			'label_preview'              => _x( 'Preview', 'Language switcher preview', 'sitepress' ),
 			'label_position'             => _x( 'Position', 'Language switcher preview', 'sitepress' ),
 			'label_actions'              => _x( 'Actions', 'Language switcher preview', 'sitepress' ),
-			'label_actions'              => _x( 'Actions', 'Language switcher preview', 'sitepress' ),
 			'label_action'               => _x( 'Action', 'Language switcher preview', 'sitepress' ),
 			'button_save'                => __( 'Save', 'sitepress' ),
 			'button_cancel'              => __( 'Cancel', 'sitepress' ),
@@ -536,6 +535,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 		return array(
 			'section_title'          => __( 'Custom language switchers', 'sitepress' ),
 			'section_description'    => sprintf( $description, $description_link ),
+			'show'                   => __( 'Enable', 'sitepress' ),
 			'customize_button_label' => __( 'Customize', 'sitepress' ),
 			'dialog_title'           => __( 'Edit Shortcode Actions Language Switcher', 'sitepress' ),
 		);

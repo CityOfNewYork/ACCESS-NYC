@@ -29,9 +29,7 @@ class WPML_String_Shortcode {
 	 * @param string $value
 	 */
 	private function maybe_register_string( $value ) {
-		$query  = 'SELECT id, value, status FROM ' . $this->wpdb->prefix . 'icl_strings WHERE context=%s AND name=%s';
-		$sql    = $this->wpdb->prepare( $query, $this->context, $this->name );
-		$string = $this->wpdb->get_row( $sql );
+		$string = $this->get_registered_string();
 		if ( ! $string || $string->value !== $value ) {
 			icl_register_string( $this->context, $this->name, $value );
 		}
@@ -51,5 +49,36 @@ class WPML_String_Shortcode {
 
 		$this->context = $attributes['context'];
 		$this->name    = $attributes['name'];
+	}
+
+	/**
+	 * @return stdClass
+	 */
+	private function get_registered_string() {
+		$strings = $this->get_strings_registered_in_context();
+		if ( $strings && array_key_exists( $this->name , $strings ) ) {
+			return $strings[ $this->name ];
+		}
+
+		return null;
+	}
+
+	/**
+	 * @return stdClass[]
+	 */
+	private function get_strings_registered_in_context() {
+		$cache_key   = $this->context;
+		$cache_group = 'wpml-string-shortcode';
+
+		$cache_found = false;
+		$string      = wp_cache_get( $cache_key, $cache_group, false, $cache_found );
+		if ( ! $cache_found ) {
+			$query  = 'SELECT name, id, value, status FROM ' . $this->wpdb->prefix . 'icl_strings WHERE context=%s';
+			$sql    = $this->wpdb->prepare( $query, $this->context );
+			$string = $this->wpdb->get_results( $sql, OBJECT_K );
+			wp_cache_set( $cache_key, $string, $cache_group );
+		}
+
+		return $string;
 	}
 }

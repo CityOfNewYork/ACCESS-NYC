@@ -48,6 +48,7 @@
                 <key name="availability_text">This post is also available in: %s</key>
             </key>
             <key name="shortcode_actions">
+                <key name="show">0</key>
                 <key name="display_flags">0</key>
                 <key name="display_names_in_current_lang">1</key>
                 <key name="display_names_in_native_lang">1</key>

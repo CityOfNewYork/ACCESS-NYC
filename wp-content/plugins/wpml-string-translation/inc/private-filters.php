@@ -8,7 +8,10 @@
 function filter_tm_source_langs( $source_languages ) {
 	global $wpdb, $sitepress;
 
-	$tm_filter = new WPML_TM_Filters( $wpdb, $sitepress );
+	static $tm_filter;
+	if ( ! $tm_filter ) {
+		$tm_filter = new WPML_TM_Filters( $wpdb, $sitepress );
+	}
 
 	return $tm_filter->filter_tm_source_langs( $source_languages );
 }

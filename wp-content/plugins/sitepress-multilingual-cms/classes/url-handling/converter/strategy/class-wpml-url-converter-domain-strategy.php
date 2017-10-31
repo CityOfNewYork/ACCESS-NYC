@@ -59,7 +59,7 @@ class WPML_URL_Converter_Domain_Strategy extends WPML_URL_Converter_Abstract_Str
 			: trailingslashit( $original_source_url );
 
 		$converted_url = preg_replace(
-			'#^(https?://)?([^\/]*)\/?#',
+			'#^(https?://)?([^?\/]*)\/?#',
 			'${1}' . $base_url,
 			$original_source_url
 		);

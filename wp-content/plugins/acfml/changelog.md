@@ -1,3 +1,14 @@
+# 0.6
+* Introduced support for clone fields (wpmlbridge-46)
+
+# 0.5.1
+* Fixed impossible duplication of field groups (wpmlbridge-91)
+
+# 0.5
+* Fixed issue with field group overwriting: fields are no longer duplicated
+* Fixed xliff file generation performance (wpmlbridge-25)
+* Fixed maximum nesting level error when duplicating repeater field (wpmlbridge-68)
+
 # 0.4
 * Fixed problem with returned wrong data type after conversion (one-item arrays retruned as strings)
 * Fixed fields dissapearance when translating field groups

@@ -190,6 +190,9 @@ switch($request){
 		if(isset($iclsettings)) {
         	$this->save_settings($iclsettings);
 		}
+
+		do_action( 'wpml_st_strings_tracking_option_saved', (int) $_POST['icl_st']['track_strings'] );
+
         echo 1;
         break;
     case 'icl_st_more_options':

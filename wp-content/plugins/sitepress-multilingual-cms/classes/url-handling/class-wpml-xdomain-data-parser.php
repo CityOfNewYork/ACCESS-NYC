@@ -46,9 +46,11 @@ class WPML_XDomain_Data_Parser {
 
 			$js_xdomain_data = array(
 				'css_selector' => $ls_parameters['css_prefix'] . 'item',
+			    'ajax_url'     => admin_url( 'admin-ajax.php' ),
+			    'current_lang' => apply_filters( 'wpml_current_language', '' ),
 			);
 
-			wp_enqueue_script( self::SCRIPT_HANDLER, ICL_PLUGIN_URL . '/res/js/xdomain-data.js', array( 'jquery', 'sitepress' ), ICL_SITEPRESS_VERSION );
+			wp_enqueue_script( self::SCRIPT_HANDLER, ICL_PLUGIN_URL . '/res/js/xdomain-data.js', array( 'jquery' ), ICL_SITEPRESS_VERSION );
 			wp_localize_script( self::SCRIPT_HANDLER, 'wpml_xdomain_data', $js_xdomain_data );
 		}
 	}

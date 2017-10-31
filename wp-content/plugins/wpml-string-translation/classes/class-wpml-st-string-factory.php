@@ -67,7 +67,7 @@ class WPML_ST_String_Factory {
 	 * @return mixed
 	 */
 	public function get_string_id( $string, $context, $name = false ) {
-		$sql          = "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE value=%s AND context=%s";
+		$sql          = "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE BINARY value=%s AND context=%s";
 		$prepare_args = array( $string, $context );
 		if ( $name !== false ) {
 			$sql .= " AND name = %s ";

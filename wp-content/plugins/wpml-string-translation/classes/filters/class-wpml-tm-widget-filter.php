@@ -32,7 +32,7 @@ class WPML_TM_Widget_Filter extends WPML_SP_User {
 				     && ! empty( $slug_settings['types'][ $k ] )
 				     && ICL_TM_COMPLETE !== $this->string_factory->find_by_name( 'Url slug: ' . $k )->get_status()
 				) {
-					$message = sprintf( __( "%s slugs are set to be translated, but they are missing their translation", 'sitepress' ), $custom_post->labels->name );
+					$message = sprintf( __( "%s slugs are set to be translated, but they are missing their translation", 'wpml-string-translation' ), $custom_post->labels->name );
 					$notice .= $admin_notifier->display_instant_message( $message, 'error', 'below-h2', true );
 				}
 			}

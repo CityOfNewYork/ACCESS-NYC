@@ -237,21 +237,21 @@ class WPML_Root_Page_Actions {
 		} else {
 			remove_action( 'parse_query', array( $this, 'wpml_home_url_parse_query' ) );
 
-			$request_array                  = explode( '/', $_SERVER['REQUEST_URI'] );
-			$sanitized_query                = array_pop( $request_array );
-			$potential_pagination_parameter = array_pop( $request_array );
+			$uri_path  = trim( wpml_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+			$uri_parts = explode( '/', $uri_path );
+			$potential_pagination_parameter = array_pop( $uri_parts );
+
+			$query_args = array();
+			wp_parse_str( wpml_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY ), $query_args );
 
 			if ( is_numeric( $potential_pagination_parameter ) ) {
-				if ( $sanitized_query ) {
-					$sanitized_query .= '&';
-				}
-				$sanitized_query .= 'page=' . $potential_pagination_parameter;
+				$query_args['page'] = $potential_pagination_parameter;
 			}
 
-			$sanitized_query = str_replace( '?', '', $sanitized_query );
-			$q->parse_query( $sanitized_query );
-			$root_id                  = $this->get_root_page_id();
+			$q->parse_query( $query_args );
+			$root_id = $this->get_root_page_id();
 			add_action( 'parse_query', array( $this, 'wpml_home_url_parse_query' ) );
+
 			if ( false !== $root_id ) {
 				$q = $this->set_page_query_parameters( $q, $root_id );
 			} else {
@@ -275,6 +275,7 @@ class WPML_Root_Page_Actions {
 		$q->is_404                = false;
 		$q->query['error']        = null;
 		$q->is_home               = false;
+		$q->is_singular           = true;
 
 		return $q;
 	}

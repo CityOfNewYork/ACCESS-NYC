@@ -91,7 +91,7 @@ class WPML_ST_DB_Cache {
 	 */
 	public function get_translation( $name, $context, $original_value, $gettext_context = '' ) {
 		if ( md5( '' ) == $name && empty( $original_value ) && empty( $gettext_context ) ) {
-			return $original_value;
+			return null;
 		}
 
 		if ( null === $this->translations ) {
