@@ -53,6 +53,7 @@
               data-vv-as="household members"
               data-vv-scope="HouseholdInformation"
               v-validate="{required: true, min: 1, max_value: 8, min_value: 1, regex: '^[1-8]{1}$'}"
+              v-bind:value="people.length"
               v-on:change="populate">
           </div>
         </div>

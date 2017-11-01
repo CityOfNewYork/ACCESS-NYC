@@ -148,7 +148,23 @@
 
           <div class="p-horizontal-2">
 
+            <h1 class="{{styles.sections}}" id="confirmation">
+              <a href="#confirmation" class="c-blue-dark td-none">{{ __('Confirmation', 'accessnyc-screener') }}</a>
+            </h1>
             {% include 'screener-field-partials/recap.twig' with {'formAction': formAction} %}
+
+            <div id="screener-recaptcha-container" class="recap-captcha hidden">
+              <p>{{ __('Check the "I’m not a robot" box below and click Continue to get your results.', 'accessnyc-screener') }}</p>
+              <div class="screener-question-container">
+                <div id="screener-recaptcha"></div>
+              </div>
+            </div>
+
+            <div>
+              <button type="button" class="{{ styles.confirm }}" data-js="submit" data-action="{{ formAction }}">
+                {{ __('Yes, continue to my results', 'accessnyc-screener') }}
+              </button>
+            </div>
 
           </div>
 

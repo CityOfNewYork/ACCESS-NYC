@@ -269,4 +269,28 @@ ScreenerPerson.FREQUENCY = [
   'yearly'
 ];
 
+/**
+ * Attributes for retrieving person's condition
+ * @type {Array}
+ */
+ScreenerPerson.CONDITION_ATTRS = [
+  'student',
+  'studentFulltime',
+  'pregnant',
+  'unemployed',
+  'unemployedWorkedLast18Months',
+  'blind',
+  'disabled',
+  'veteran'
+];
+
+/**
+ * Attributes for retrieving a person's benefits
+ * @type {Array}
+ */
+ScreenerPerson.BENEFIT_ATTRS = [
+  'benefitsMedicaid',
+  'benefitsMedicaidDisability'
+];
+
 export default ScreenerPerson;

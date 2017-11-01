@@ -40,9 +40,7 @@ class ScreenerField {
     this._routes = {
       admin: function(vue) {},
       screener: function(vue) {},
-      recap: function(vue) {
-        ScreenerField.renderRecap(vue);
-      }
+      recap: function(vue) {}
     };
 
     /** @private {object} The Vue configuration */
@@ -50,7 +48,7 @@ class ScreenerField {
       delimiters: ['v{', '}'],
       el: '#vue',
       data: {
-        /* Default ACCESS NYC Modules */
+        /* Models */
         people: [new ScreenerPerson({
           headOfHousehold: true
         })],
@@ -58,10 +56,9 @@ class ScreenerField {
           city: 'NYC',
           livingPreferNotToSay: true
         }),
-        categories: [],
-        /* Additional Modules */
         client: new ScreenerClient(),
         staff: new ScreenerStaff(),
+        categories: [],
         /* UI Data */
         /** @type {array} */
         categoriesCurrent: [],
@@ -72,13 +69,20 @@ class ScreenerField {
         /** @type {array} */
         expenses: [],
         /** @type {Number} */
-        income: 0
+        income: 0,
+        /** @type {array} */
+        conditionAttrs: ScreenerPerson.CONDITION_ATTRS,
+        /** @type {Array} */
+        benefitAttrs: ScreenerPerson.BENEFIT_ATTRS,
+        /** @type {Array} */
+        livingAttrs: ScreenerHousehold.LIVING_ATTRS
       },
       methods: {
         resetAttr: ScreenerField.resetAttr,
         setAttr: ScreenerField.setAttr,
         setAllAttr: ScreenerField.setAllAttr,
         setHousing: ScreenerField.setHousing,
+        getAttrs: ScreenerField.getAttrs,
         populate: ScreenerField.populate,
         pushPayment: ScreenerField.pushPayment,
         getPayment: ScreenerField.getPayment,
@@ -623,6 +627,21 @@ ScreenerField.setAllAttr = function(event) {
 };
 
 /**
+ * Get select truthy or non blank string attributes for a model
+ * @param  {string} object     - the model to retrieve from
+ * @param  {string/array} keys - list of attributes to retrieve
+ * @param  {Number} index      - index of model if in a collection
+ * @return {object} key value pair of truthy values
+ */
+ScreenerField.getAttrs = function(object, keys, index = -1) {
+  let obj = (index > -1) ? this[object][index] : this[object];
+  keys = (typeof keys === 'string') ? keys.split(',') : keys;
+  return _.pick(obj._attrs, (value, key) => {
+    return (keys.indexOf(key) > -1 && (value != '' || value === true));
+  });
+};
+
+/**
  * Special processor for the household model housing attributes.
  * @param {event} event - the change event for housing
  */
@@ -826,8 +845,8 @@ ScreenerField.getTypedVal = function(input) {
 
 /**
  * Return the local string label for values
- * @param  {string} slug the slug value of the string
- * @return {string}      the local string label
+ * @param  {string} slug - the slug value of the string
+ * @return {string}      - the local string label
  */
 ScreenerField.localString = function(slug) {
   try {
@@ -838,128 +857,6 @@ ScreenerField.localString = function(slug) {
   } catch (error) {
     return slug;
   }
-};
-
-/**
- * Assembles data for the recap view and renders the recap template.
- * @param  {object} vue - Screener data
- */
-ScreenerField.renderRecap = function(vue) {
-  const templateData = {
-    categories: [],
-    household: {
-      assets: `$${vue.household.get('cashOnHand')}`,
-      owners: [],
-      rentalType: '',
-      renters: [],
-      types: [],
-      zip: vue.household.get('zip')
-    },
-    members: []
-  };
-
-  // Add programs.
-  _.each(vue.categories, (category) => {
-    const obj = {
-      slug: category,
-      label: Utility.localize(category)
-    };
-    templateData.categories.push(obj);
-  });
-
-  const housingTypes = [
-    'Renting',
-    'Owner',
-    'StayingWithFriend',
-    'Hotel',
-    'Shelter',
-    'PreferNotToSay'
-  ];
-
-  // Add housing type.
-  _.each(housingTypes, (type) => {
-    if (vue.household.get(`living${type}`)) {
-      const obj = {
-        slug: type,
-        label: Utility.localize(`living${type}`)
-      };
-
-      templateData.household.types.push(obj);
-    }
-
-    if (type === 'Renting') {
-      templateData.household.rentalType =
-          Utility.localize(vue.household.get('livingRentalType'));
-    }
-  });
-
-  // Add household member data.
-  _.each(vue.people.slice(0, vue.household.get('members')),
-      (person, i) => {
-    const member = {
-      age: person.get('age'),
-      benefits: [],
-      conditions: [],
-      expenses: [],
-      incomes: [],
-      isHoh: person.get('headOfHousehold'),
-      relation: Utility.localize(person.get('headOfHouseholdRelation'))
-    };
-
-    if (person.get('headOfHousehold')) {
-      if (i === 0) {
-        member.relation = Utility.localize('Self');
-      } else {
-        member.relation = Utility.localize('HeadOfHousehold');
-      }
-    }
-
-    _.each(person.getBenefits(), (value, key) => {
-      if (value) {
-        member.benefits.push(Utility.localize(key));
-      }
-    });
-
-    _.each(person.getConditions(), (value, key) => {
-      if (value) {
-        member.conditions.push(Utility.localize(key));
-      }
-    });
-
-    _.each(['incomes', 'expenses'], (type) => {
-      _.each(person.get(type), (item) => {
-        const obj = {
-          amount: `$${item.amount}`,
-          type: Utility.localize(item.type),
-          frequency: Utility.localize(item.frequency)
-        };
-        member[type].push(obj);
-      });
-    });
-
-    _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
-      if (person.get(type)) {
-        const obj = {};
-        if (person.get('headOfHousehold')) {
-          obj.slug = i === 0 ? 'Self' : 'HeadOfHousehold';
-        } else {
-          obj.slug = person.get('headOfHouseholdRelation');
-        }
-        obj.label = Utility.localize(obj.slug);
-        if (type === 'livingOwnerOnDeed') {
-          templateData.household.owners.push(obj);
-        } else {
-          templateData.household.renters.push(obj);
-        }
-      }
-    });
-
-    templateData.members.push(member);
-  });
-
-  const template = $('#screener-recap-template').html();
-  const renderedTemplate = _.template(template)(templateData);
-  $('#recap-body').html(renderedTemplate);
 };
 
 /**
