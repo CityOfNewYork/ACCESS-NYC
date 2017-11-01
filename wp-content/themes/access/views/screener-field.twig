@@ -13,31 +13,6 @@
   {value: 'partner referral', text: 'partner referral'}
 ] %}
 
-{% set categoriesCurrent = [
-  {value: 'snap', text: 'SNAP'},
-  {value: 'wic', text: 'Women, Infants, and Children (WIC)'},
-  {value: 'cash-assistance', text: 'Cash Assistance'},
-  {value: 'medicaid', text: 'Medicaid'},
-  {value: 'disability', text: 'Disability-related Medicaid'},
-  {value: 'cityfeps', text: 'CITYFEPS (Family Eviction Prevention Supplement)'},
-  {value: 'dhe', text: 'DHE (Disabled Homeowners’ Exemption)'},
-  {value: 'drie', text: 'DRIE (Disability Rent Increase Exemption)'},
-  {value: 'hasa', text: 'HASA (HIV/AIDS Services)'},
-  {value: 'hud-vash', text: 'HUD-VASH (HUD-Veterans Affairs Supportive Housing)'},
-  {value: 'linc', text: 'LINC (Living in Communities Rental Assistance)'},
-  {value: 'nycha', text: 'NYCHA (NYC Housing Authority Housing)'},
-  {value: 'pension', text: 'Pension'},
-  {value: 'sche', text: 'SCHE (Senior Citizen Homeowners’ Exemption)'},
-  {value: 'scrie', text: 'SCRIE (Senior Citizen Rent Increase Exemption)'},
-  {value: 'section-8', text: 'Section 8'},
-  {value: 'seps', text: 'SEPS (Special Exit and Prevention Supplement)'},
-  {value: 'social-security', text: 'Social Security'},
-  {value: 'ssd', text: 'SSD (Social Security Disability)'},
-  {value: 'ss', text: 'SS (Supplemental Security)'},
-  {value: 'state-feps', text: 'State FEPS (Family Eviction Prevention Supplement)'},
-  {value: 'tbra', text: 'TBRA (Tenant-Based Rental Assistance)'}
-] %}
-
 {% set styles = {
   'sections': 'type-h1 m-left-2 p-top-2 d-inline-block p-right',
   'questions': 'type-h2 c-black m-0 d-block p-2 td-none',
@@ -122,7 +97,7 @@
               <a href="#client-information" class="c-blue-dark td-none">{{ __('Client Information', 'accessnyc-screener') }}</a>
             </h1><span class="screener-step">(1 of 4)</span>
               {% include 'screener-field-partials/question-client-needs.twig' with {'styles': styles, 'categories': categories} %}
-              {% include 'screener-field-partials/question-client-services.twig' with {'styles': styles, 'categories': categoriesCurrent} %}
+              {% include 'screener-field-partials/question-client-services.twig' with {'styles': styles} %}
               {% include 'screener-field-partials/question-client-basics.twig' with styles %}
               {% include 'screener-field-partials/question-client-contact.twig' with styles %}
 

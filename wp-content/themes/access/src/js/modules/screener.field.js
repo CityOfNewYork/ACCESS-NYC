@@ -36,55 +36,61 @@ class ScreenerField {
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = false;
 
-    /** @private {object} The screener's routes and event hooks */
+    /** @private {object} The screener routes and event hooks */
     this._routes = {
-      'admin': function(vue) {},
-      'screener': function(vue) {},
-      'recap': function(vue) {
+      admin: function(vue) {},
+      screener: function(vue) {},
+      recap: function(vue) {
         ScreenerField.renderRecap(vue);
       }
     };
 
     /** @private {object} The Vue configuration */
     this._vue = {
-      'delimiters': ['v{', '}'],
-      'el': '#vue',
-      'data': {
+      delimiters: ['v{', '}'],
+      el: '#vue',
+      data: {
         /* Default ACCESS NYC Modules */
-        'people': [new ScreenerPerson({
+        people: [new ScreenerPerson({
           headOfHousehold: true
         })],
-        'household': new ScreenerHousehold({
-          'city': 'NYC',
-          'livingPreferNotToSay': true
+        household: new ScreenerHousehold({
+          city: 'NYC',
+          livingPreferNotToSay: true
         }),
-        'categories': [],
+        categories: [],
         /* Additional Modules */
-        'client': new ScreenerClient(),
-        'staff': new ScreenerStaff(),
+        client: new ScreenerClient(),
+        staff: new ScreenerStaff(),
         /* UI Data */
-        'categoriesCurrent': [],
-        'disclaimer': false,
-        'expenses': [],
-        'income': 0
+        /** @type {array} */
+        categoriesCurrent: [],
+        /** @type {array} */
+        programsFilter: [],
+        /** @type {boolean} */
+        disclaimer: false,
+        /** @type {array} */
+        expenses: [],
+        /** @type {Number} */
+        income: 0
       },
-      'methods': {
-        'resetAttr': ScreenerField.resetAttr,
-        'setAttr': ScreenerField.setAttr,
-        'setAllAttr': ScreenerField.setAllAttr,
-        'setHousing': ScreenerField.setHousing,
-        'populate': ScreenerField.populate,
-        'pushPayment': ScreenerField.pushPayment,
-        'getPayment': ScreenerField.getPayment,
-        'removePayment': ScreenerField.removePayment,
-        'removeAllPayments': ScreenerField.removeAllPayments,
-        'push': ScreenerField.push,
-        'checked': ScreenerField.checked,
-        'singleOccupant': ScreenerField.singleOccupant,
-        'validate': ScreenerField.validate,
-        'localString': ScreenerField.localString,
-        'formatDollars': ScreenerField.formatDollars,
-        'getTypedVal': ScreenerField.getTypedVal
+      methods: {
+        resetAttr: ScreenerField.resetAttr,
+        setAttr: ScreenerField.setAttr,
+        setAllAttr: ScreenerField.setAllAttr,
+        setHousing: ScreenerField.setHousing,
+        populate: ScreenerField.populate,
+        pushPayment: ScreenerField.pushPayment,
+        getPayment: ScreenerField.getPayment,
+        removePayment: ScreenerField.removePayment,
+        removeAllPayments: ScreenerField.removeAllPayments,
+        push: ScreenerField.push,
+        checked: ScreenerField.checked,
+        singleOccupant: ScreenerField.singleOccupant,
+        validate: ScreenerField.validate,
+        localString: ScreenerField.localString,
+        formatDollars: ScreenerField.formatDollars,
+        getTypedVal: ScreenerField.getTypedVal
       }
     };
   }
@@ -379,7 +385,15 @@ class ScreenerField {
           Utility.findValues(data, 'code')
         ).filter(
           (item) => _.isString(item)
+        // filter out the programs they are already receiving
+        ).filter(
+          (item) => (this._vue.programsFilter.indexOf(item) > -1)
         ).uniq().value();
+
+      if (Utility.debug()) {
+        console.warn(programs);
+        debugger;
+      }
 
       const params = {};
 

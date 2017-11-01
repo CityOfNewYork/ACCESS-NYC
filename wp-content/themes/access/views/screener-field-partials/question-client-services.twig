@@ -1,3 +1,28 @@
+{% set categories = [
+  {value: 'snap', text: 'SNAP', slug: 'supplemental-nutrition-assistance-program-snap', code: 'S2R007'},
+  {value: 'wic', text: 'Women, Infants, and Children (WIC)', slug: 'women-infants-and-children-wic', code: 'S2R022'},
+  {value: 'cash-assistance', text: 'Cash Assistance', slug: 'cash-assistance', code: 'S2R010'},
+  {value: 'medicaid', text: 'Medicaid'},
+  {value: 'disability', text: 'Disability-related Medicaid'},
+  {value: 'cityfeps', text: 'CITYFEPS (Family Eviction Prevention Supplement)'},
+  {value: 'dhe', text: 'DHE (Disabled Homeowners’ Exemption)'},
+  {value: 'drie', text: 'DRIE (Disability Rent Increase Exemption)'},
+  {value: 'hasa', text: 'HASA (HIV/AIDS Services)'},
+  {value: 'hud-vash', text: 'HUD-VASH (HUD-Veterans Affairs Supportive Housing)'},
+  {value: 'linc', text: 'LINC (Living in Communities Rental Assistance)'},
+  {value: 'nycha', text: 'NYCHA (NYC Housing Authority Housing)'},
+  {value: 'pension', text: 'Pension'},
+  {value: 'sche', text: 'SCHE (Senior Citizen Homeowners’ Exemption)'},
+  {value: 'scrie', text: 'SCRIE (Senior Citizen Rent Increase Exemption)'},
+  {value: 'section-8', text: 'Section 8'},
+  {value: 'seps', text: 'SEPS (Special Exit and Prevention Supplement)'},
+  {value: 'social-security', text: 'Social Security'},
+  {value: 'ssd', text: 'SSD (Social Security Disability)'},
+  {value: 'ss', text: 'SS (Supplemental Security)'},
+  {value: 'state-feps', text: 'State FEPS (Family Eviction Prevention Supplement)'},
+  {value: 'tbra', text: 'TBRA (Tenant-Based Rental Assistance)'}
+] %}
+
 <fieldset class="d-block w-100">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-services">
@@ -19,8 +44,14 @@
           <div class="screener-checkboxes">
             {% for category in categories %}
             <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-              <input type="checkbox" value="{{ category.value }}"
+              <input type="checkbox"
+                {% if category.code %}
+                value="{{ category.code }}"
+                data-object="programsFilter"
+                {% else %}
+                value="{{ category.value }}"
                 data-object="categoriesCurrent"
+                {% endif %}
                 v-on:change="push">
               <span class="styled-checkbox-label">{{ __(category.text, 'accessnyc-screener') }}</span>
             </label>
