@@ -181,15 +181,17 @@ class ScreenerField {
    * @param  {string} hash The question's hash id
    */
   _routerQuestion(hash) {
-    // let hash = event.currentTarget.hash;
     let page = $(hash).closest(`.${ScreenerField.Selectors.PAGE}`);
     let target = $(hash).find(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`);
+    let show = !target.hasClass('active');
 
-    if (!page.hasClass('active'))
+    if (!page.hasClass('active')) {
       this._routerPage(`#${page.attr('id')}`);
+      show = true;
+    }
 
     // Show
-    if (!target.hasClass('active')) {
+    if (show) {
       /* eslint-disable no-console, no-debugger */
       if (Utility.debug()) console.log(`routerQuestion: Show ${hash}`);
       /* eslint-enable no-console, no-debugger */
@@ -210,17 +212,19 @@ class ScreenerField {
         document.querySelector(ScreenerField.Selectors.VIEW)
           .scrollBy({top: -60, left: 0, behavior: 'auto'});
       }, 1);
-    // Hide
-    } else {
-      /* eslint-disable no-console, no-debugger */
-      if (Utility.debug()) console.log(`routerQuestion: Hide ${hash}`);
-      /* eslint-enable no-console, no-debugger */
-      target.addClass('hidden')
-        .removeClass('active')
-        .prop('aria-hidden', true);
-      // Scrolling Behavior
-      event.preventDefault();
+
+      return;
     }
+
+    // Hide
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug()) console.log(`routerQuestion: Hide ${hash}`);
+    /* eslint-enable no-console, no-debugger */
+    target.addClass('hidden')
+      .removeClass('active')
+      .prop('aria-hidden', true);
+    // Scrolling Behavior
+    event.preventDefault();
   }
 
   /**
