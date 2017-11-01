@@ -387,7 +387,7 @@ class ScreenerField {
           (item) => _.isString(item)
         // filter out the programs they are already receiving
         ).filter(
-          (item) => (this._vue.programsFilter.indexOf(item) > -1)
+          (item) => (this._vue.programsFilter.indexOf(item) === -1)
         ).uniq().value();
 
       if (Utility.debug()) {
