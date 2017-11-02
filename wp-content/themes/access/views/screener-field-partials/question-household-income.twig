@@ -1,40 +1,3 @@
-{% set incomeOptions = [
-  {'value':'', 'text':'Click to add an income type'},
-  {'value':'Wages', 'text':'Wages, salaries, tips'},
-  {'value':'Alimony', 'text':'Alimony received'},
-  {'value':'Boarder', 'text':'Boarder or lodger'},
-  {'value':'CashAssistance', 'text':'Cash Assistance grant'},
-  {'value':'ChildSupport', 'text':'Child support received'},
-  {'value':'DisabilityMedicaid', 'text':'Disability-related Medicaid'},
-  {'value':'Gifts', 'text':'Gifts/contributions received'},
-  {'value':'Pension', 'text':'Government or Private Pension'},
-  {'value':'Investment', 'text':'Investment income interest, dividends, and profit from selling stocks'},
-  {'value':'NYSDisability', 'text':'New York State Disability Benefits'},
-  {'value':'Rental', 'text':'Rental income'},
-  {'value':'SelfEmployment', 'text': 'Self-employment Income'},
-  {'value':'SSDependent', 'text':'Social Security Dependent Benefits'},
-  {'value':'SSDisability', 'text':'Social Security Disability Benefits'},
-  {'value':'SSSurvivor', 'text':'Social Security Survivor’s Benefits'},
-  {'value':'SSRetirement', 'text':'Social Security Retirement Benefits'},
-  {'value':'SSI', 'text':'Supplemental Security Income SSI'},
-  {'value':'Unemployment',  'text': 'Unemployment benefits'},
-  {'value':'Veteran', 'text':'Veteran’s Pension or Benefits'},
-  {'value':'DeferredComp', 'text':'Withdrawals from Deferred Compensation IRA, Keogh, etc.'},
-  {'value':'WorkersComp', 'text':'Worker’s Compensation'}
-] %}
-
-{# {% set frequencyOptions = [
-  {'value':'', 'text':'Click to add an income frequency'}
-] %} #}
-
-{% set frequencyOptions = [
-  {'value': 'weekly', 'text': 'Every week'},
-  {'value': 'biweekly', 'text': 'Every 2 weeks'},
-  {'value': 'monthly', 'text': 'Every month', 'default': true},
-  {'value': 'semimonthly', 'text': 'Every 2 months'},
-  {'value': 'yearly', 'text': 'Every year'}
-] %}
-
 <fieldset class="d-block w-100">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-income">
@@ -44,10 +7,10 @@
     <div class="p-relative">
 
       <a class="{{styles.questions}}" data-js="question" href="#question-household-income">
-        {{ __('Household Income', 'accessnyc-screener') }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+        {{ __('Household Income', translationID) }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', translationID) }}"
           v-if="errors.all('HouseholdIncome').length > 0">
-          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <title>{{ __('Some required fields are not filled out', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
@@ -56,8 +19,8 @@
 
         <div>
           <label class="{{styles.labels}}">
-            <span v-if="singleOccupant()">{{ __('Do you have an income?', 'accessnyc-screener') }}</span>
-            <span v-else>{{ __('Do you and/or anyone in your household have income?', 'accessnyc-screener') }}</span>
+            <span v-if="singleOccupant()">{{ __('Do you have an income?', translationID) }}</span>
+            <span v-else>{{ __('Do you and/or anyone in your household have income?', translationID) }}</span>
           </label>
           <div class="screener-radio-buttons">
             <label class="screener-radio screener-label">
@@ -65,14 +28,14 @@
                 data-key="incomes"
                 v-model.number="income"
                 v-on:change="removeAllPayments">
-              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+              <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
             </label>
             <label class="screener-radio screener-label">
               <input name="toggle-income" type="radio" class="js-screener-toggle screener-radio-input sr-only" value="0" checked
                 data-key="incomes"
                 v-model.number="income"
                 v-on:change="removeAllPayments">
-              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+              <span class="screener-radio-label">{{ __('No', translationID) }}</span>
             </label>
           </div>
         </div>
@@ -81,11 +44,11 @@
 
           <div v-if="!singleOccupant()">
             <label class="{{styles.labels}} m-top-2">
-              {{ __('Who in your household contributes to your total household income?', 'accessnyc-screener') }}
+              {{ __('Who in your household contributes to your total household income?', translationID) }}
             </label>
 
-            <h4 class="{{styles.explainations}}">{{ __('What are sources of income?', 'accessnyc-screener') }}</h4>
-            <p>{{ __('Sources of income can mean anything from disability-related Medicaid to wages, salaries, and tips.', 'accessnyc-screener') }}</p>
+            <h4 class="{{styles.explainations}}">{{ __('What are sources of income?', translationID) }}</h4>
+            <p>{{ __('Sources of income can mean anything from disability-related Medicaid to wages, salaries, and tips.', translationID) }}</p>
 
             <label class="styled-checkbox screener-checkbox screener-label"
               v-for="(p, personIndex) in people">
@@ -105,10 +68,10 @@
 
               <label class="{{styles.labels}}">
                 <span v-if="singleOccupant()">
-                  {{ __('What is your primary income source?', 'accessnyc-screener') }}
+                  {{ __('What is your primary income source?', translationID) }}
                 </span>
                 <span v-else>
-                  {{ __('What is the primary income source for', 'accessnyc-screener') }}
+                  {{ __('What is the primary income source for', translationID) }}
                   <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
                 </span>
               </label>
@@ -123,7 +86,7 @@
                 v-if="p._attrs.incomes.length === 0">
                 {% for option in incomeOptions %}
                 <option value="{{ option.value }}">
-                  {{ __(option.text, 'accessnyc-screener') }}
+                  {{ __(option.text, translationID) }}
                 </option>
                 {% endfor %}
               </select>
@@ -141,7 +104,7 @@
                   v-on:change="removePayment">
                   {% for option in incomeOptions %}
                   <option value="{{ option.value }}">
-                    {{ __(option.text, 'accessnyc-screener') }}
+                    {{ __(option.text, translationID) }}
                   </option>
                   {% endfor %}
                 </select>
@@ -150,15 +113,15 @@
                   <label class="{{styles.labels}} m-top-2">
                     <span v-if="singleOccupant()">
                       {{ __('How much do you receive for: ') }}
-                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
+                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
                     </span>
                     <span v-else>
-                      {{ __('How much', 'accessnyc-screener') }}
-                      <span v-if="personIndex == 0">{{ __('do', 'accessnyc-screener') }}</span>
-                      <span v-else>{{ __('does', 'accessnyc-screener') }}</span>
+                      {{ __('How much', translationID) }}
+                      <span v-if="personIndex == 0">{{ __('do', translationID) }}</span>
+                      <span v-else>{{ __('does', translationID) }}</span>
                       <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                      {{ __('receive for', 'accessnyc-screener') }}:
-                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
+                      {{ __('receive for', translationID) }}:
+                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
                     </span>
                     <span class="c-red">*</span>
                   </label>
@@ -173,7 +136,7 @@
                         <input type="text" pattern="\d*" required
                           data-type="float"
                           data-vv-scope="HouseholdIncome"
-                          data-vv-as="{{ __('income amount', 'accessnyc-screener') }}"
+                          data-vv-as="{{ __('income amount', translationID) }}"
                           data-js="calc-input"
                           data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
                           v-validate="{required: true, regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
@@ -190,15 +153,15 @@
                   <label class="{{styles.labels}}">
                     <span v-if="singleOccupant()">
                       {{ __('How often do you receive: ') }}
-                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
+                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
                     </span>
                     <span v-else>
-                      {{ __('How often', 'accessnyc-screener') }}
-                      <span v-if="personIndex == 0">{{ __('do', 'accessnyc-screener') }}</span>
-                      <span v-else>{{ __('does', 'accessnyc-screener') }}</span>
+                      {{ __('How often', translationID) }}
+                      <span v-if="personIndex == 0">{{ __('do', translationID) }}</span>
+                      <span v-else>{{ __('does', translationID) }}</span>
                       <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                      {{ __('receive', 'accessnyc-screener') }}:
-                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', 'accessnyc-screener') }}
+                      {{ __('receive', translationID) }}:
+                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
                     </span>
                     <span class="c-red">*</span>
                   </label>
@@ -215,13 +178,13 @@
                         v-bind:for="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'">
                         <input type="radio" value="{{ option.value }}"
                           data-vv-scope="HouseholdIncome"
-                          data-vv-as="{{ __('income frequency', 'accessnyc-screener') }}"
+                          data-vv-as="{{ __('income frequency', translationID) }}"
                           v-validate="{required: true}"
                           v-model="income.frequency"
                           v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'"
                           v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency'"/>
                         <span class="styled-radio-label">
-                          {{ __(option.text, 'accessnyc-screener') }}
+                          {{ __(option.text, translationID) }}
                         </span>
                       </label>
                       {% endfor %}
@@ -236,12 +199,12 @@
                 <div>
                   <label class="{{styles.labels}}">
                     <span v-if="singleOccupant()">
-                      {{ __('If you have another source of income, select it below.', 'accessnyc-screener') }}
+                      {{ __('If you have another source of income, select it below.', translationID) }}
                     </span>
                     <span v-else>
-                      {{ __('If', 'accessnyc-screener') }}
+                      {{ __('If', translationID) }}
                       <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                      {{ __('have another source of income, select it below', 'accessnyc-screener') }}
+                      {{ __('have another source of income, select it below', translationID) }}
                     </span>
                   </label>
                   <select class="screener-select"
@@ -254,7 +217,7 @@
                       v-if="!p._attrs.incomes[incomeIndex + 1]">
                     {% for option in incomeOptions %}
                     <option value="{{ option.value }}">
-                      {{ __(option.text, 'accessnyc-screener') }}
+                      {{ __(option.text, translationID) }}
                     </option>
                     {% endfor %}
                   </select>

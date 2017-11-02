@@ -1,27 +1,3 @@
-{% set rentingOptions = [
-  {'value': 'livingRenting', 'text': 'Renting'},
-  {'value': 'livingOwner', 'text': 'You or a household member owns the home or apartment'},
-  {'value': 'livingStayingWithFriend', 'text': 'Staying with a friend'},
-  {'value': 'livingHotel', 'text': 'In a hotel'},
-  {'value': 'livingShelter', 'text': 'In a shelter or homeless'}
-] %}
-
-{% set housingOptions = [
-  {'value': '', 'text': 'Click to select a rental type'},
-  {'value': 'Condo', 'text': 'Condo'},
-  {'value': 'FamilyHome', 'text': 'Family Home'},
-  {'value': 'HDFC', 'text': 'Housing Development Fund Company (HDFC) Cooperative'},
-  {'value': 'LimitedDividendDevelopment', 'text': 'Limited Dividend development apartments'},
-  {'value': 'MitchellLama', 'text': 'Mitchell-Lama apartments'},
-  {'value': 'NYCHA', 'text': 'NYCHA Housing'},
-  {'value': 'MarketRate', 'text': 'Non-Regulated or Market Rate apartment'},
-  {'value': 'RedevelopmentCompany', 'text': 'Redevelopment Company apartments'},
-  {'value': 'RentControlled', 'text': 'Rent controlled or rent stabilized apartment'},
-  {'value': 'RentRegulatedHotel', 'text': 'Rent Regulated Hotel/Single Room'},
-  {'value': 'Section213', 'text': 'Section 213 apartments'},
-  {'value': '', 'text': 'None of these apply'}
-] %}
-
 <fieldset class="d-block w-100 p-bottom">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-housing-situation">
@@ -31,10 +7,10 @@
     <div class="p-relative">
 
       <a class="{{styles.questions}}" data-js="question" href="#question-housing-situation">
-        {{ __('Housing Situation', 'accessnyc-screener') }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', 'accessnyc-screener') }}"
+        {{ __('Housing Situation', translationID) }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('HousingSituation').length > 0">
-          <title>{{ __('Some fields are invalid', 'accessnyc-screener') }}</title>
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
@@ -42,7 +18,7 @@
       <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden"> {# hidden #}
 
         <label class="{{styles.labels}}">
-          {{ __('What is your current housing situation?', 'accessnyc-screener') }}
+          {{ __('What is your current housing situation?', translationID) }}
         </label>
         <div class="screener-checkboxes js-screener-checkbox-group">
           {% for option in rentingOptions %}
@@ -53,7 +29,7 @@
               data-key="{{option.value}}"
               v-bind:checked="household._attrs.{{option.value}}"
               v-on:change="setHousing($event);">
-            <span class="styled-checkbox-label">{{ __(option.text, 'accessnyc-screener') }}</span>
+            <span class="styled-checkbox-label">{{ __(option.text, translationID) }}</span>
           </label>
           {% endfor %}
           <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
@@ -64,7 +40,7 @@
               data-keys="{% for option in rentingOptions %}{{option.value}},{% endfor %}"
               v-bind:checked="household._attrs.livingPreferNotToSay"
               v-on:change="setHousing($event);">
-            <span class="styled-checkbox-label">{{ __('Prefer not to say', 'accessnyc-screener') }}</span>
+            <span class="styled-checkbox-label">{{ __('Prefer not to say', translationID) }}</span>
           </label>
         </div>
 
@@ -72,13 +48,13 @@
 
           <div class="m-top" data-scope="_household">
             <label class="{{styles.labels}}" for="housing-livingRentalType">
-              {{ __('Which type of rental do you live in?', 'accessnyc-screener') }}
+              {{ __('Which type of rental do you live in?', translationID) }}
               <span class="c-red">*</span>
             </label>
             <div class="screener-question-container"
               v-bind:class="{'error': errors.has('HousingSituation.Household.livingRentalType')}">
               <div class="error-message" v-if="errors.has('HousingSituation.Household.livingRentalType')">
-                {{ __('Please select a rental type.', 'accessnyc-screener') }}
+                {{ __('Please select a rental type.', translationID) }}
               </div>
               <select id="housing-livingRentalType" class="screener-select js-screener-toggle" name="Household.livingRentalType" required
                 data-val="livingRentalType"
@@ -87,7 +63,7 @@
                 v-model="household._attrs.livingRentalType"
                 v-validate="{required: true}">
                 {% for option in housingOptions %}
-                <option value="{{option.value}}">{{ __(option.text, 'accessnyc-screener') }}</option>
+                <option value="{{option.value}}">{{ __(option.text, translationID) }}</option>
                 {% endfor %}
               </select>
             </div>
@@ -98,7 +74,7 @@
             <div v-if="singleOccupant()">
 
               <label class="{{styles.labels}}">
-                {{ __('Are you on the lease?', 'accessnyc-screener') }}
+                {{ __('Are you on the lease?', translationID) }}
               </label>
               <div class="screener-radio-buttons m-bottom">
                 <label class="screener-radio screener-label">
@@ -109,7 +85,7 @@
                     data-index="0"
                     v-bind:checked="people[0]._attrs.livingRentalOnLease"
                     v-on:change="setAttr">
-                  <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+                  <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
                 </label>
                 <label class="screener-radio screener-label">
                   <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="Person[0].livingRentalOnLease" id="person-0-livingRentalOnLease-false"
@@ -118,7 +94,7 @@
                     data-key="livingRentalOnLease"
                     data-index="0"
                     v-on:change="setAttr">
-                  <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+                  <span class="screener-radio-label">{{ __('No', translationID) }}</span>
                 </label>
               </div>
 
@@ -126,13 +102,13 @@
             <div v-else>
 
               <label class="{{styles.labels}}">
-                {{ __('Who is on the lease?', 'accessnyc-screener') }}
+                {{ __('Who is on the lease?', translationID) }}
               </label>
               <div class="screener-question-container"
                 v-bind:class="{'error': errors.has('HousingSituation.Person.livingRentalOnLease')}">
                 <div class="error-message"
                   v-if="errors.has('HousingSituation.Person.livingRentalOnLease')">
-                    {{ __('Please select at least one person who is on the lease.', 'accessnyc-screener') }}
+                    {{ __('Please select at least one person who is on the lease.', translationID) }}
                 </div>
                 <label class="styled-checkbox screener-checkbox screener-label"
                   v-for="(p, personIndex) in people">
@@ -163,7 +139,7 @@
           <div v-if="singleOccupant()">
 
             <label class="{{styles.labels}}">
-              {{ __('Are you the owner?', 'accessnyc-screener') }}
+              {{ __('Are you the owner?', translationID) }}
             </label>
             <div class="screener-radio-buttons m-bottom">
               <label class="screener-radio screener-label" for="person-0-livingOwnerOnDeed-true">
@@ -174,7 +150,7 @@
                   data-index="0"
                   v-bind:checked="people[0]._attrs.livingOwnerOnDeed"
                   v-on:change="setAttr">
-                <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+                <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
               </label>
               <label class="screener-radio screener-label" for="person-0-livingOwnerOnDeed-false">
                 <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="Person[0].livingOwnerOnDeed" id="person-0-livingOwnerOnDeed-false"
@@ -183,7 +159,7 @@
                   data-key="livingOwnerOnDeed"
                   data-index="0"
                   v-on:change="setAttr">
-                <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+                <span class="screener-radio-label">{{ __('No', translationID) }}</span>
               </label>
             </div>
 
@@ -191,13 +167,13 @@
           <div v-else>
 
             <label class="{{styles.labels}}">
-              {{ __('Who is the owner?', 'accessnyc-screener') }}
+              {{ __('Who is the owner?', translationID) }}
             </label>
             <div class="screener-question-container"
               v-bind:class="{'error': errors.has('Person.livingOwnerOnDeed')}">
               <div class="error-message"
                 v-if="errors.has('Person.livingOwnerOnDeed')">
-                  {{ __('Please select at least one owner.', 'accessnyc-screener') }}
+                  {{ __('Please select at least one owner.', translationID) }}
               </div>
               <label class="styled-checkbox screener-checkbox screener-label"
                 v-for="(p, personIndex) in people">

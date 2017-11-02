@@ -137,4 +137,11 @@ ScreenerClient.BOROUGH = [
   'statenIsland'
 ];
 
+ScreenerClient.ADDRESS_ATTRS = [
+  'streetNumber',
+  'streetName',
+  'unit',
+  'borough'
+];
+
 export default ScreenerClient;

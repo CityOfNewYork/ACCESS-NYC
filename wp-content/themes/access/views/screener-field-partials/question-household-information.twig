@@ -1,22 +1,3 @@
-{% set headOfHouseholdRelationOptions = [
-  {"value": "", "text": "Click to select relationship"},
-  {"value": "Child", "text": "Child"},
-  {"value": "FosterChild", "text": "Foster Child"},
-  {"value": "StepChild", "text": "Step-child"},
-  {"value": "Grandchild", "text": "Grandchild"},
-  {"value": "Spouse", "text": "Spouse"},
-  {"value": "Parent", "text": "Parent"},
-  {"value": "FosterParent", "text": "Foster Parent"},
-  {"value": "StepParent", "text": "Step-parent"},
-  {"value": "Grandparent", "text": "Grandparent"},
-  {"value": "SisterBrother", "text": "Sister/Brother"},
-  {"value": "StepSisterStepBrother", "text": "Step-sister/Step-brother"},
-  {"value": "BoyfriendGirlfriend", "text": "Boyfriend/Girlfriend"},
-  {"value": "DomesticPartner", "text": "Domestic Partner"},
-  {"value": "Unrelated", "text": "Unrelated"},
-  {"value": "Other", "text": "Related in some other way"}
-] %}
-
 <fieldset class="d-block w-100">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-information">
@@ -26,10 +7,10 @@
     <div class="p-relative">
 
       <a class="{{styles.questions}}" href="#question-household-information" data-js="question">
-        {{ __('Household Information', 'accessnyc-screener') }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+        {{ __('Household Information', translationID) }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', translationID) }}"
           v-if="errors.all('HouseholdInformation').length > 0">
-          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <title>{{ __('Some required fields are not filled out', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
@@ -38,7 +19,7 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}">
-            {{ __('Including you, how many people are in your household?', 'accessnyc-screener') }}
+            {{ __('Including you, how many people are in your household?', translationID) }}
           </label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('HouseholdInformation.Household.members')}">
@@ -60,11 +41,11 @@
 
         <div>
           <label class="{{styles.labels}}">
-            {{ __('Are you the head of household?', 'accessnyc-screener') }}
+            {{ __('Are you the head of household?', translationID) }}
           </label>
 
-          <h4 class="{{styles.explainations}}">{{ __('What does the head of household mean?', 'accessnyc-screener') }}</h4>
-          <p>{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', 'accessnyc-screener') }}</p>
+          <h4 class="{{styles.explainations}}">{{ __('What does the head of household mean?', translationID) }}</h4>
+          <p>{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', translationID) }}</p>
 
           <div class="screener-radio-buttons">
             <label class="screener-radio screener-label">
@@ -75,7 +56,7 @@
                 data-type="boolean"
                 data-hides=".js-toggle-head-of-household"
                 v-on:change="setAttr">
-              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+              <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
             </label>
             <label class="screener-radio screener-label">
               <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="Person[0].headOfHousehold"
@@ -85,20 +66,20 @@
                 data-type="boolean"
                 data-shows=".js-toggle-head-of-household"
                 v-on:change="setAttr">
-              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+              <span class="screener-radio-label">{{ __('No', translationID) }}</span>
             </label>
           </div>
         </div>
 
         <div v-if="!people[0]._attrs.headOfHousehold" class="m-top-2">
           <label class="{{styles.labels}}" for="hoh-relation">
-            {{ __('What is your relationship to the head of the household? I am their:', 'accessnyc-screener') }}
+            {{ __('What is your relationship to the head of the household? I am their:', translationID) }}
             <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('HouseholdInformation.Person[0].headOfHouseholdRelation')}">
             <div class="error-message" v-if="errors.has('HouseholdInformation.Person[0].headOfHouseholdRelation')">
-              {{ __('Please select a your relationship to the head of household.', 'accessnyc-screener') }}
+              {{ __('Please select a your relationship to the head of household.', translationID) }}
             </div>
             <select class="screener-select" name="Person[0].headOfHouseholdRelation" required
               data-vv-as="head of household relation"
@@ -107,7 +88,7 @@
               v-validate="{required: true}">
               {% for option in headOfHouseholdRelationOptions %}
               <option value="{{ option.value }}">
-                {{ __(option.text, 'accessnyc-screener') }}
+                {{ __(option.text, translationID) }}
               </option>
               {% endfor %}
             </select>

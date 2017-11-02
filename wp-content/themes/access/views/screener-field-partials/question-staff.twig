@@ -7,10 +7,10 @@
     <div class="p-relative">
 
       <a class="{{styles.questions}}" href="#question-staff" data-js="question">
-        {{ __('PEU Staff', 'accessnyc-screener') }}
-        <svg class="{{styles.warning}}" role="alert" aria-label="{{ __('Some fields are invalid', 'accessnyc-screener') }}"
+        {{ __('PEU Staff', translationID) }}
+        <svg class="{{styles.warning}}" role="alert" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('Staff').length > 0">
-          <title>{{ __('Some fields are invalid', 'accessnyc-screener') }}</title>
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
@@ -19,7 +19,7 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="staff-first">
-            {{ __('PEU Staff First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
+            {{ __('PEU Staff First Name', translationID) }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('Staff.firstName', 'Staff')}">
@@ -35,7 +35,7 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="staff-last">
-            {{ __('PEU Staff Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
+            {{ __('PEU Staff Last Name', translationID) }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('Staff.lastName', 'Staff')}">
@@ -51,7 +51,7 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="staff-email">
-            {{ __('PEU Staff Email', 'accessnyc-screener') }} <span class="c-red">*</span>
+            {{ __('PEU Staff Email', translationID) }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('Staff.email', 'Staff')}">
@@ -67,19 +67,19 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="staff-screener-location">
-            {{ __('Screener Location', 'accessnyc-screener') }}
+            {{ __('Screener Location', translationID) }}
           </label>
           <select id="staff-screener-location" name="Staff.screenerLocation" value=""
             v-model="staff._attrs.screenerLocation">
             {% for location in screenerLocations %}
-            <option value="{{ location.value }}">{{ __(location.text, 'accessnyc-screener') }}</option>
+            <option value="{{ location.value }}">{{ __(location.text, translationID) }}</option>
             {% endfor %}
           </select>
         </div>
 
         <div>
           <label class="{{styles.labels}}" for="staff-email">
-            {{ __('Is this person a current client with PEU?', 'accessnyc-screener') }}
+            {{ __('Is this person a current client with PEU?', translationID) }}
           </label>
           <div class="screener-radio-buttons">
             <label class="screener-radio screener-label">
@@ -88,7 +88,7 @@
                 data-object="client"
                 data-key="currentClient"
                 v-on:change="setAttr">
-              <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+              <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
             </label>
             <label class="screener-radio screener-label">
               <input class="screener-radio-input sr-only" value="false" type="radio" name="Client.currentClient" checked
@@ -96,14 +96,14 @@
                 data-object="client"
                 data-key="currentClient"
                 v-on:change="setAttr">
-              <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+              <span class="screener-radio-label">{{ __('No', translationID) }}</span>
             </label>
           </div>
         </div>
 
         <div class="m-top-2" v-if="client._attrs.currentClient">
           <label class="{{styles.labels}}" for="client-0-number">
-            {{ __('PEU Case #', 'accessnyc-screener') }}
+            {{ __('PEU Case #', translationID) }}
           </label>
           <input id="client-number" name="Client.number" value="" required
             v-model="client._attrs.caseNumber">

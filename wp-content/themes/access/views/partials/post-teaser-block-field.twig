@@ -41,18 +41,18 @@
           <a class="btn btn-primary btn-small d-block" href="#confirm-{{ post.program_code }}"
             data-js="simple-toggle"
             data-hide="#remove-{{ post.program_code }}">
-            {{ __('Remove Program', 'accessnyc-screener') }}
+            {{ __('Remove Program', translationID) }}
           </a>
         </div>
         <div id="confirm-{{ post.program_code }}" class="hidden" aria-hidden="true">
-          <p class="type-small ta-center bottom-4">{{ __('Are you sure?', 'accessnyc-screener') }}</p>
+          <p class="type-small ta-center bottom-4">{{ __('Are you sure?', translationID) }}</p>
           <div class="d-flex">
             <a class="f-1 btn btn-primary btn-small"
               data-js="remove-program"
-              data-remove-code="{{ post.program_code }}">{{ __('Remove', 'accessnyc-screener') }}</a>
+              data-remove-code="{{ post.program_code }}">{{ __('Remove', translationID) }}</a>
             <a class="f-1 btn btn-secondary btn-small m-left" href="#remove-{{ post.program_code }}"
               data-js="simple-toggle"
-              data-hide="#confirm-{{ post.program_code }}">{{ __('Keep', 'accessnyc-screener') }}</a>
+              data-hide="#confirm-{{ post.program_code }}">{{ __('Keep', translationID) }}</a>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
       <div>
         <a class="btn-toggle btn" href="#program-detail-{{ post.program_code }}"
           data-js="simple-toggle">
-          {{ __('Learn More', 'accessnyc-screener') }}
+          {{ __('Learn More', translationID) }}
         </a>
       </div>
 

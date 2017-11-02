@@ -1,25 +1,3 @@
-{% set expenseOptions = [
-  {'value': 'ChildCare', 'text': 'Child Care'},
-  {'value': 'ChildSupport', 'text': 'Child Support (Paid)'},
-  {'value': 'Cooling', 'text': 'Cooling'},
-  {'value': 'DependentCare', 'text': 'Dependent Care'},
-  {'value': 'Heating', 'text': 'Heating'},
-  {'value': 'Medical', 'text': 'Medical expense'},
-  {'value': 'Mortgage', 'text': 'Mortgage'},
-  {'value': 'Rent', 'text': 'Rent'},
-  {'value': 'Telephone', 'text': 'Telephone'},
-  {'value': 'InsurancePremiums', 'text': 'Third Party Insurance Premiums'},
-  {'value': 'Utilities', 'text': 'Utilities'}
-] %}
-
-{% set frequencyOptions = [
-  {'value': 'weekly', 'text': 'Every week'},
-  {'value': 'biweekly', 'text': 'Every 2 weeks'},
-  {'value': 'monthly', 'text': 'Every month'},
-  {'value': 'semimonthly', 'text': 'Every 2 months'},
-  {'value': 'yearly', 'text': 'Every year'}
-] %}
-
 <fieldset class="d-block w-100">
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-expenses">
@@ -29,10 +7,10 @@
     <div class="p-relative">
 
       <a class="{{styles.questions}}" data-js="question" href="#question-household-expenses">
-        {{ __('Household Expenses', 'accessnyc-screener') }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+        {{ __('Household Expenses', translationID) }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', translationID) }}"
           v-if="errors.all('HouseholdExpenses').length > 0">
-          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <title>{{ __('Some required fields are not filled out', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
@@ -44,7 +22,7 @@
           <div>
             <label class="{{styles.labels}}">
               <span v-if="singleOccupant()">
-                {{ __('Which of these expenses apply to you?', 'accessnyc-screener') }}
+                {{ __('Which of these expenses apply to you?', translationID) }}
               </span>
             </label>
             <div class="screener-checkboxes">
@@ -72,7 +50,7 @@
 
             <div class="m-bottom-2">
               <label class="{{styles.labels}}">
-                {{ __('How much do you pay for: ', 'accessnyc-screener') }}
+                {{ __('How much do you pay for: ', translationID) }}
                 <span class="c-blue">v{ localString(expense.type) }</span>{{ __('?') }}
                 <span class="c-red">*</span>
               </label>
@@ -86,7 +64,7 @@
                   <input type="text" pattern="\d*" required
                     data-type="float"
                     data-vv-scope="HouseholdExpenses"
-                    data-vv-as="{{ __('expense amount', 'accessnyc-screener') }}"
+                    data-vv-as="{{ __('expense amount', translationID) }}"
                     data-js="calc-input"
                     data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
                     v-validate="{required: true, regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
@@ -101,7 +79,7 @@
             <div>
               <label class="{{styles.labels}}"
                 v-bind:for="'person-0-expenses-' + expenseIndex + '-frequency'">
-                {{ __('How often do you pay for: ', 'accessnyc-screener') }}
+                {{ __('How often do you pay for: ', translationID) }}
                 <span class="c-blue">v{ localString(expense.type) }</span>{{ __('?') }}
                 <span class="c-red">*</span>
               </label>
@@ -116,14 +94,14 @@
                   <label class="screener-checkbox styled-radio screener-checkboxes-program screener-label"
                     v-bind:for="'person-0-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'">
                     <input type="radio" value="{{ frequency.value }}"
-                      data-vv-as="{{ __('expense frequency', 'accessnyc-screener') }}"
+                      data-vv-as="{{ __('expense frequency', translationID) }}"
                       data-vv-scope="HouseholdExpenses"
                       v-model="expense.frequency"
                       v-validate="{required: true}"
                       v-bind:id="'person-0-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'"
                       v-bind:name="'Person[0].expenses[' + expenseIndex + '].frequency'">
                     <span class="styled-radio-label">
-                      {{ __(frequency.text, 'accessnyc-screener') }}
+                      {{ __(frequency.text, translationID) }}
                     </span>
                   </label>
                   {% endfor %}
@@ -138,7 +116,7 @@
 
           <div>
             <label class="{{styles.labels}}">
-              {{ __('What expenses did your household have most recently?', 'accessnyc-screener') }}
+              {{ __('What expenses did your household have most recently?', translationID) }}
             </label>
             <div class="screener-checkboxes">
               {% for option in expenseOptions %}
@@ -164,7 +142,7 @@
 
             <div>
               <label class="{{styles.labels}}">
-                {{ __('Who contributes to', 'accessnyc-screener') }}: <span class="c-blue">{{ __(expense.text, 'accessnyc-screener') }}</span>{{ __('?') }}
+                {{ __('Who contributes to', translationID) }}: <span class="c-blue">{{ __(expense.text, translationID) }}</span>{{ __('?') }}
               </label>
               <div class="m-bottom-2">
                 <label class="styled-checkbox screener-checkbox screener-label" v-for="(p, personIndex) in people">
@@ -187,11 +165,11 @@
 
                 <div class="m-bottom-2">
                   <label class="{{styles.labels}}">
-                    {{ __('How much', 'accessnyc-screener') }}
-                    <span v-if="personIndex == 0">{{ __('do', 'accessnyc-screener') }}</span>
-                    <span v-else>{{ __('does', 'accessnyc-screener') }}</span>
+                    {{ __('How much', translationID) }}
+                    <span v-if="personIndex == 0">{{ __('do', translationID) }}</span>
+                    <span v-else>{{ __('does', translationID) }}</span>
                     <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                    {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ __(expense.text, 'accessnyc-screener') }}</span>{{ __('?') }}
+                    {{ __('contribute to', translationID) }}: <span class="c-blue">{{ __(expense.text, translationID) }}</span>{{ __('?') }}
                     <span class="c-red">*</span>
                   </label>
                   <div class="screener-question-container"
@@ -216,9 +194,9 @@
                 <div>
                   <label class="{{styles.labels}}"
                     v-bind:for="'person-' + personIndex + '-expenses--frequency'">
-                    {{ __('How often do', 'accessnyc-screener') }}
+                    {{ __('How often do', translationID) }}
                     <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                    {{ __('contribute to', 'accessnyc-screener') }}: <span class="c-blue">{{ __(expense.text, 'accessnyc-screener') }}</span>{{ __('?') }}
+                    {{ __('contribute to', translationID) }}: <span class="c-blue">{{ __(expense.text, translationID) }}</span>{{ __('?') }}
                   </label>
                   <div class="screener-question-container"
                     v-bind:class="{'error': errors.has('Person[' + personIndex + '].expenses[' + expenseIndex + '].frequency', 'HouseholdExpenses')}">
@@ -232,13 +210,13 @@
                         v-bind:for="'person-' + personIndex + '-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'">
                         <input type="radio" value="{{ frequency.value }}"
                           data-vv-scope="HouseholdExpenses"
-                          data-vv-as="{{ __('expense frequency', 'accessnyc-screener') }}"
+                          data-vv-as="{{ __('expense frequency', translationID) }}"
                           v-model="e.frequency"
                           v-validate="{required: true}"
                           v-bind:id="'person-' + personIndex + '-expenses-' + expenseIndex + '-frequency-{{ frequency.value }}'"
                           v-bind:name="'Person[' + personIndex + '].expenses[' + expenseIndex + '].frequency'">
                         <span class="styled-radio-label">
-                          {{ __(frequency.text, 'accessnyc-screener') }}
+                          {{ __(frequency.text, translationID) }}
                         </span>
                       </label>
                       {% endfor %}

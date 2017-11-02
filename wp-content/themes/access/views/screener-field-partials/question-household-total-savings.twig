@@ -7,10 +7,10 @@
     <div class="p-relative">
 
       <a class="{{styles.questions}}" data-js="question" href="#question-household-total-savings">
-        {{ __('Household Total Savings', 'accessnyc-screener') }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', 'accessnyc-screener') }}"
+        {{ __('Household Total Savings', translationID) }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('HouseholdTotalSavings').length > 0">
-          <title>{{ __('Some fields are invalid', 'accessnyc-screener') }}</title>
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
@@ -19,15 +19,15 @@
 
         <label class="{{styles.labels}}">
           <span v-if="singleOccupant()">
-            {{ __('How much do you have total in savings?', 'accessnyc-screener') }}
+            {{ __('How much do you have total in savings?', translationID) }}
           </span>
           <span v-else>
-            {{ __('How much does your whole household have in total savings?', 'accessnyc-screener') }}
+            {{ __('How much does your whole household have in total savings?', translationID) }}
           </span>
         </label>
 
-        <h4 class="{{styles.explainations}}">{{ __('What are examples of savings?', 'accessnyc-screener') }}</h4>
-        <p>{{ __('Savings can mean cash on hand, checking or savings accounts, or stocks, bonds and mutual funds', 'accessnyc-screener') }}</p>
+        <h4 class="{{styles.explainations}}">{{ __('What are examples of savings?', translationID) }}</h4>
+        <p>{{ __('Savings can mean cash on hand, checking or savings accounts, or stocks, bonds and mutual funds', translationID) }}</p>
 
         <div class="screener-question-container"
           v-bind:class="{'error': errors.has('Household.cashOnHand', 'HouseholdTotalSavings')}">
@@ -43,7 +43,7 @@
               data-js="calc-input"
               data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
               data-vv-scope="HouseholdTotalSavings"
-              data-vv-as="{{ __('Total Savings', 'accessnyc-screener') }}"
+              data-vv-as="{{ __('Total Savings', translationID) }}"
               v-validate="{regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
               v-on:change="setAttr"
               v-on:blur="formatDollars">

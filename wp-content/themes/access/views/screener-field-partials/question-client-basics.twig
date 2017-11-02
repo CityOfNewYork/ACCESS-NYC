@@ -7,10 +7,10 @@
     <div class="p-relative">
 
       <a class="{{styles.questions}}" href="#question-client-basics" data-js="question">
-        {{ __('Client Basics', 'accessnyc-screener') }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', 'accessnyc-screener') }}"
+        {{ __('Client Basics', translationID) }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', translationID) }}"
           v-if="errors.all('ClientBasics').length > 0">
-          <title>{{ __('Some required fields are not filled out', 'accessnyc-screener') }}</title>
+          <title>{{ __('Some required fields are not filled out', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
@@ -19,7 +19,7 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="client-0-first">
-            {{ __('First Name', 'accessnyc-screener') }} <span class="c-red">*</span>
+            {{ __('First Name', translationID) }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('ClientBasics.Client[0].firstName')}">
@@ -35,7 +35,7 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="client-0-last">
-            {{ __('Last Name', 'accessnyc-screener') }} <span class="c-red">*</span>
+            {{ __('Last Name', translationID) }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('ClientBasics.Client[0].lastName')}">
@@ -51,7 +51,7 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="person-0-age">
-            {{ __('How old are you?', 'accessnyc-screener') }} <span class="c-red">*</span>
+            {{ __('How old are you?', translationID) }} <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('ClientBasics.Person[0].age')}">
@@ -71,7 +71,7 @@
 
         <div>
           <label class="{{styles.labels}}" for="household-zip">
-            {{ __('Zip code?', 'accessnyc-screener') }}
+            {{ __('Zip code?', translationID) }}
             <span class="c-red">*</span>
           </label>
           <div class="screener-question-container"

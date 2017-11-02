@@ -1,36 +1,34 @@
 <div>
 
   <div class="m-bottom-2">
-    {% if (question) %}
-    <label class="{{styles.labels}}">
-      {{ __(question, 'accessnyc-screener') }}
-    </label>
+    {% if (question.question) %}
+    <label class="{{styles.labels}}">{{ question.question }}</label>
     {% endif %}
     <div class="screener-radio-buttons m-bottom">
       <label class="screener-radio screener-label">
-        <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="toggle-{{dataKey}}"
+        <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="toggle-{{question.dataKey}}"
           data-type="boolean"
-          data-shows="#js-toggle-{{dataKey}}">
-        <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+          data-shows="#js-toggle-{{question.dataKey}}">
+        <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
       </label>
       <label class="screener-radio screener-label">
-        <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="toggle-{{dataKey}}" checked
+        <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="toggle-{{question.dataKey}}" checked
           data-type="boolean"
-          data-hides="#js-toggle-{{dataKey}}"
+          data-hides="#js-toggle-{{question.dataKey}}"
           data-object="people"
-          data-key="{{dataKey}}"
+          data-key="{{question.dataKey}}"
           v-on:change="setAllAttr">
-        <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+        <span class="screener-radio-label">{{ __('No', translationID) }}</span>
       </label>
     </div>
   </div>
 
-  <div id="js-toggle-{{dataKey}}" class="hidden">
+  <div id="js-toggle-{{question.dataKey}}" class="hidden">
 
     <div class="m-bottom-2">
 
       <label class="{{styles.labels}}">
-        {{ __(who, 'accessnyc-screener') }}
+        {{ __(question.who, translationID) }}
       </label>
       <div class="screener-members">
 
@@ -39,10 +37,10 @@
           <input type="checkbox" value="true"
             data-type="boolean"
             data-object="people"
-            data-key="{{dataKey}}"
+            data-key="{{question.dataKey}}"
             v-bind:data-index="personIndex"
-            v-bind:name="'Person[' + personIndex + '].{{dataKey}}'"
-            v-bind:checked="p._attrs.{{dataKey}}"
+            v-bind:name="'Person[' + personIndex + '].{{question.dataKey}}'"
+            v-bind:checked="p._attrs.{{question.dataKey}}"
             v-on:change="setAttr">
           <span class="styled-checkbox-label">
             <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>

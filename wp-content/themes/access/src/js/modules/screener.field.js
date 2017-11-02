@@ -75,7 +75,9 @@ class ScreenerField {
         /** @type {Array} */
         benefitAttrs: ScreenerPerson.BENEFIT_ATTRS,
         /** @type {Array} */
-        livingAttrs: ScreenerHousehold.LIVING_ATTRS
+        livingAttrs: ScreenerHousehold.LIVING_ATTRS,
+        /** @type {Array} */
+        addressAttrs: ScreenerClient.ADDRESS_ATTRS
       },
       methods: {
         resetAttr: ScreenerField.resetAttr,
@@ -872,7 +874,11 @@ ScreenerField.personLabel = {
     '<span v-if="index != 0 && person.headOfHouseholdRelation != \'\'">' +
       '{{ personHeadOfHouseholdRelation(person.headOfHouseholdRelation) }}, ' +
     '</span>' +
+    '<span v-if="index != 0 && person.headOfHouseholdRelation == \'\'">' +
+      '<em>(relationship)</em>, ' +
+    '</span>' +
     '<span v-if="person.age != 0">{{ person.age }}</span>' +
+    '<span v-else><em>(age)</em></span>' +
   '</span>',
   methods: {
     personIndex: function(index) {

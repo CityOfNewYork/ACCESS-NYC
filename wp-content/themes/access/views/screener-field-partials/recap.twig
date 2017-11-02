@@ -7,17 +7,17 @@
     <div class="p-relative">
 
       <a class="{{styles.questions}}" href="#question-confirmation">
-        {{ __('Is all of your information correct?', 'accessnyc-screener') }}
+        {{ __('Is all of your information correct?', translationID) }}
       </a>
 
       <div class="p-horizontal-2 p-bottom-2"> {# hidden #}
 
-        {# Categories #}
+        {# Client Needs #}
         <div>
 
           <h3 class="{{ styles.labels }}">
-            {{ __('Looking for help with', 'accessnyc-screener') }}
-            <a class="m-horizontal" data-js="question" href="#question-client-needs">{{ __('Edit', 'accessnyc-screener') }}</a>
+            {{ __('Looking for help with', translationID) }}
+            <a class="m-horizontal" data-js="question" href="#question-client-needs">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <div class="recap-program-categories" v-if="categories.length">
@@ -36,9 +36,199 @@
           </div><div v-else>
 
             <p class="text-small">
-              {{ __('No categories selected.', 'accessnyc-screener') }}
+              {{ __('No categories selected.', translationID) }}
             </p>
 
+          </div>
+
+        </div>
+
+        <hr class="screener-divider">
+
+        {# Client Services #}
+        <div>
+
+          <h3 class="{{ styles.labels }}">
+            {{ __('Currently Enrolled Programs', translationID) }}
+            <a class="m-horizontal" data-js="question" href="#question-client-services">{{ __('Edit', translationID) }}</a>
+          </h3>
+
+          <div class="recap-household-member-detail" v-if="programsFilter.length > 0 || categoriesCurrent.length > 0" >
+            <ul class="recap-detail-info w-100">
+              <li class="m-bottom" v-for="(program, index) in programsFilter">v{ localString(program) } <button type="button" class="btn-text btn-link p-horizontal" v-on:click="programsFilter.splice(index, 1)">{{ __('Remove', translationID) }}</button></li>
+              <li class="m-bottom" v-for="(program, index) in categoriesCurrent">v{ localString(program) } <button type="button" class="btn-text btn-link p-horizontal" v-on:click="categoriesCurrent.splice(index, 1)">{{ __('Remove', translationID) }}</button></li>
+            </ul>
+          </div><div v-else>
+
+            <p class="text-small">
+              {{ __('No programs selected.', translationID) }}
+            </p>
+
+          </div>
+
+        </div>
+
+        <hr class="screener-divider">
+
+        {# Client Basics #}
+        <div>
+
+          <h3 class="{{ styles.labels }}">
+            {{ __('Your information', translationID) }}
+            <a class="m-horizontal" data-js="question" href="#question-client-basics">{{ __('Edit', translationID) }}</a>
+          </h3>
+
+          <div class="recap-household-member-detail" v-if="Object.keys(getAttrs('client', 'firstName,lastName')).length > 0">
+            <div class="recap-detail-name">
+              {{ __('Your name:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li>
+                v{ client._attrs.firstName } v{ client._attrs.lastName }
+              </li>
+            </ul>
+          </div><div v-else>
+
+            <p class="text-small">
+              {{ __('Name isn\'t filled out <span class="c-red">*</span>', translationID) }}
+            </p>
+
+          </div>
+
+          <div class="recap-household-member-detail" v-if="people[0]._attrs.age > 0">
+            <div class="recap-detail-name">
+              {{ __('Your age:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li>
+                v{ people[0]._attrs.age }
+              </li>
+            </ul>
+          </div><div v-else>
+
+            <p class="text-small">
+              {{ __('Age isn\'t filled out <span class="c-red">*</span>', translationID) }}
+            </p>
+
+          </div>
+
+          <div class="recap-household-member-detail" v-if="household._attrs.zip !== ''">
+            <div class="recap-detail-name">
+              {{ __('Your zip code:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li>
+                v{ household._attrs.zip }
+              </li>
+            </ul>
+          </div><div v-else>
+
+            <p class="text-small">
+              {{ __('Zip code isn\'t filled out <span class="c-red">*</span>', translationID) }}
+            </p>
+
+          </div>
+
+        </div>
+
+        <hr class="screener-divider">
+
+        {# Client Contact #}
+        <div>
+
+          <h3 class="{{ styles.labels }}">
+            {{ __('Client Contact', translationID) }}
+            <a class="m-horizontal" data-js="question" href="#question-client-contact">{{ __('Edit', translationID) }}</a>
+          </h3>
+
+          <div class="recap-household-member-detail" v-if="client._attrs.language.length > 0">
+            <div class="recap-detail-name">
+              {{ __('Your language:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li v-for="language in client._attrs.language">
+                <span v-if="language === 'other'">v{ client._attrs.languageOther }</span>
+                <span v-else>v{ localString(language) }</span>
+              </li>
+            </ul>
+          </div><div v-else>
+
+            <p class="text-small">
+              {{ __('No preferred language selected.', translationID) }}
+            </p>
+
+          </div>
+
+          <div class="recap-household-member-detail" v-if="client._attrs.phone !== ''">
+            <div class="recap-detail-name">
+              {{ __('Your phone:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li>v{ client._attrs.phone }</li>
+              <li>v{ localString(client._attrs.phoneType) }</li>
+            </ul>
+          </div>
+
+          <div class="recap-household-member-detail" v-if="client._attrs.phoneAlt !== ''">
+            <div class="recap-detail-name">
+              {{ __('Your alternate phone:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li>v{ client._attrs.phoneAlt }</li>
+              <li>v{ localString(client._attrs.phoneAltType) }</li>
+            </ul>
+          </div>
+
+          <div v-if="client._attrs.phone === '' && client._attrs.phoneAlt === ''">
+
+            <p class="text-small">
+              {{ __('No phone numbers added.', translationID) }}
+            </p>
+
+          </div>
+
+          <div class="recap-household-member-detail" v-if="client._attrs.contactTimes.length > 0">
+            <div class="recap-detail-name">
+              {{ __('Best times to contact:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li v-for="time in client._attrs.contactTimes">v{ localString(time) }</li>
+            </ul>
+          </div><div v-else>
+
+            <p class="text-small">
+              {{ __('No contact times selected.', translationID) }}
+            </p>
+
+          </div>
+
+          <div class="recap-household-member-detail" v-if="client._attrs.email !== ''">
+            <div class="recap-detail-name">
+              {{ __('Your email:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li>v{ client._attrs.email }</li>
+            </ul>
+          </div><div v-else>
+
+            <p class="text-small">
+              {{ __('No email added.', translationID) }}
+            </p>
+
+          </div>
+
+
+          <div class="recap-household-member-detail" v-if="Object.keys(getAttrs('client', addressAttrs)).length > 0">
+            <div class="recap-detail-name">
+              {{ __('Your address:', translationID) }}
+            </div>
+            <ul class="recap-detail-info recap-detail-conditions">
+              <li v-for="(value, key) in getAttrs('client', addressAttrs)" v-if="key != 'streetName'">
+                <span v-if="key === 'unit'">Unit # </span>
+                <span v-if="key === 'streetNumber'">v{ value } v{ client._attrs.streetName }</span>
+                <span v-else>v{ localString(value) }</span>
+              </li>
+            </ul>
           </div>
 
         </div>
@@ -49,11 +239,11 @@
         <div>
 
           <h3 class="{{ styles.labels }}">
-            {{ __('Your household:', 'accessnyc-screener') }} v{ people.length }
-            <span v-if="singleOccupant()">{{ __('person', 'accessnyc-screener') }}</span>
-            <span v-else>{{ __('people', 'accessnyc-screener') }}</span>
+            {{ __('Your household:', translationID) }} v{ people.length }
+            <span v-if="singleOccupant()">{{ __('person', translationID) }}</span>
+            <span v-else>{{ __('people', translationID) }}</span>
             <a class="m-horizontal" href="#question-household-information" data-js="question">
-              {{ __('Edit', 'accessnyc-screener') }}
+              {{ __('Edit', translationID) }}
             </a>
           </h3>
 
@@ -64,22 +254,17 @@
 
               <span v-if="personIndex === 0">
                 <a class="btn-text btn-link p-horizontal" href="#question-household-information" data-js="question">
-                  {{ __('Edit', 'accessnyc-screener') }}
+                  {{ __('Edit', translationID) }}
                 </a>
               </span><span v-else>
-                <a class="btn-text btn-link p-horizontal" href="#question-household-members" data-js="question">
-                  {{ __('Edit', 'accessnyc-screener') }}
-                </a>
-                <button type="button" class="btn-text btn-link p-horizontal"
-                  v-on:click="people.splice(personIndex, 1)">
-                  {{ __('Remove', 'accessnyc-screener') }}
-                </button>
+                <a class="btn-text btn-link p-horizontal" href="#question-household-members" data-js="question">{{ __('Edit', translationID) }}</a>
+                <button type="button" class="btn-text btn-link p-horizontal" v-on:click="people.splice(personIndex, 1)">{{ __('Remove', translationID) }}</button>
               </span>
             </div>
 
             {# conditions #}
             <div class="recap-household-member-detail m-bottom" v-if="Object.keys(getAttrs('people', conditionAttrs, personIndex)).length > 0">
-              <div class="recap-detail-name">{{ __('Conditions:', 'accessnyc-screener') }}</div>
+              <div class="recap-detail-name">{{ __('Conditions:', translationID) }}</div>
               <ul class="recap-detail-info recap-detail-conditions">
                 <li v-for="(value, key) in getAttrs('people', conditionAttrs, personIndex)">v{ localString(key) }</li>
               </ul>
@@ -87,7 +272,7 @@
 
             {# benefits #}
             <div class="recap-household-member-detail m-bottom" v-if="Object.keys(getAttrs('people', benefitAttrs, personIndex)).length > 0">
-              <div class="recap-detail-name">{{ __('Benefits:', 'accessnyc-screener') }}</div>
+              <div class="recap-detail-name">{{ __('Benefits:', translationID) }}</div>
               <ul class="recap-detail-info recap-detail-conditions">
                 <li v-for="(value, key) in getAttrs('people', benefitAttrs, personIndex)">v{ localString(key) }</li>
               </ul>
@@ -95,7 +280,7 @@
 
             {# income #}
             <div class="recap-household-member-detail" v-if="p._attrs.incomes.length > 0">
-              <div class="recap-detail-name">{{ __('Income:', 'accessnyc-screener') }}</div>
+              <div class="recap-detail-name">{{ __('Income:', translationID) }}</div>
               <ul class="recap-detail-info">
                 <li v-for="income in p._attrs.incomes">
                   <div class="recap-detail-info-item">v{ '$' + income.amount }</div>
@@ -107,7 +292,7 @@
 
             {# expenses #}
             <div class="recap-household-member-detail" v-if="p._attrs.expenses.length > 0">
-              <div class="recap-detail-name">{{ __('Expenses:', 'accessnyc-screener') }}</div>
+              <div class="recap-detail-name">{{ __('Expenses:', translationID) }}</div>
               <ul class="recap-detail-info">
                 <li v-for="expense in p._attrs.expenses">
                   <div class="recap-detail-info-item">v{ '$' + expense.amount }</div>
@@ -127,12 +312,12 @@
         <div>
 
           <h3 class="{{ styles.labels }}">
-            {{ __('Household resources:', 'accessnyc-screener') }}
+            {{ __('Household resources:', translationID) }}
             <span class="force-ltr">v{ '$' + household._attrs.cashOnHand }</span>
-            <a class="m-horizontal" href="#question-household-total-savings" data-js="question">{{ __('Edit', 'accessnyc-screener') }}</a>
+            <a class="m-horizontal" href="#question-household-total-savings" data-js="question">{{ __('Edit', translationID) }}</a>
           </h3>
 
-          <p>{{ __('This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.', 'accessnyc-screener') }}</p>
+          <p>{{ __('This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.', translationID) }}</p>
 
         </div>
 
@@ -142,47 +327,33 @@
         <div>
 
           <h3 class="{{ styles.labels }}">
-            {{ __('Housing', 'accessnyc-screener') }}
-            <a class="m-horizontal" href="#question-housing-situation" data-js="question">{{ __('Edit', 'accessnyc-screener') }}</a>
+            {{ __('Housing', translationID) }}
+            <a class="m-horizontal" href="#question-housing-situation" data-js="question">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <ul class="recap-detail-info">
             <li v-for="(value, key) in getAttrs('household', livingAttrs)">
 
-              <div class="recap-detail-info-item">v{ localString(key) }<span v-if="key === 'livingRenting'">v{ ' (' + localString(household._attrs.livingRentalType) + ')' }</span></div>
+              <p>v{ localString(key) }<span v-if="key === 'livingRenting'">v{ ' (' + localString(household._attrs.livingRentalType) + ')' }</span></p>
 
-              <div class="m-bottom" v-for="(p, personIndex) in people" v-if="key === 'livingRenting' && p._attrs.livingRentalOnLease">
-                <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                <span v-if="personIndex === 0">
-                  {{ __(', are on the lease', 'accessnyc-screener') }}
-                </span><span v-else>
-                  {{ __(', is on the lease', 'accessnyc-screener') }}
-                </span>
+              <div class="p-bottom" v-if="key === 'livingRenting'">
+                <div class="m-bottom" v-for="(p, personIndex) in people" v-if="p._attrs.livingRentalOnLease">
+                  {% spaceless %}
+                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel><span v-if="personIndex === 0">{{ __(', are on the lease', translationID) }}</span><span v-else>{{ __(', is on the lease', translationID) }}</span>
+                  {% endspaceless %}
+                </div>
               </div>
 
-              <div class="m-bottom" v-for="(p, personIndex) in people" v-if="key === 'livingOwner' && p._attrs.livingOwnerOnDeed">
-                <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                <span v-if="personIndex === 0">
-                  {{ __(', are an owner', 'accessnyc-screener') }}
-                </span><span v-else>
-                  {{ __(', is an owner', 'accessnyc-screener') }}
-                </span>
+              <div class="p-bottom" v-if="key === 'livingOwner'">
+                <div class="m-bottom" v-for="(p, personIndex) in people" v-if="p._attrs.livingOwnerOnDeed">
+                  {% spaceless %}
+                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel><span v-if="personIndex === 0">{{ __(', are an owner', translationID) }}</span><span v-else>{{ __(', is an owner', translationID) }}</span>
+                  {% endspaceless %}
+                </div>
               </div>
 
             </li>
           </ul>
-
-        </div>
-
-        <hr class="screener-divider">
-
-        {# Zip Code #}
-        <div>
-
-          <h3 class="{{ styles.labels }}">
-            {{ __('Your zip code:', 'accessnyc-screener') }} v{ household._attrs.zip }
-            <a class="m-horizontal" href="#question-client-basics" data-js="question">{{ __('Edit', 'accessnyc-screener') }}</a>
-          </h3>
 
         </div>
 
