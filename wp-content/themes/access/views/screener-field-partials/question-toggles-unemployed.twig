@@ -47,8 +47,8 @@
 
       <div v-if="p._attrs.{{question.dataKey}}">
         <label class="screener-label d-block m-bottom m-top">
-          <span v-if="personIndex == 0">{{ __('Have', translationID) }}</span>
-          <span v-else>{{ __('Has', translationID) }}</span>
+          <span v-if="personIndex == 0">{{ question.multipleOccupants.subProunoun }}</span>
+          <span v-else>{{ question.singleOccupant.subProunoun }}</span>
           <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
           {{ question.multipleOccupants.subQuestion }}
         </label>

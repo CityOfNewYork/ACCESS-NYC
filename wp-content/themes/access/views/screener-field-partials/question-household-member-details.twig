@@ -31,6 +31,16 @@
             </label>
             {% endfor %}
             <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+              <input type="checkbox" name="Household.{{studentOptions.dataKey}}" value="1"
+                data-type="boolean"
+                data-object="people"
+                data-key="{{studentOptions.dataKey}}"
+                data-index="0"
+                data-reset="#household-reset"
+                v-on:change="setAttr">
+              <span class="styled-checkbox-label">{{ __(studentOptions.label, translationID) }}</span>
+            </label>
+            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
               <input type="checkbox" name="Household.{{employmentOptions.dataKey}}" value="1"
                 data-type="boolean"
                 data-object="people"
@@ -40,6 +50,34 @@
                 v-on:change="setAttr">
               <span class="styled-checkbox-label">{{ __(employmentOptions.label, translationID) }}</span>
             </label>
+          </div>
+
+          <div>
+            <div v-if="people[0]._attrs.{{studentOptions.dataKey}}" class="m-bottom-2">
+              <label class="{{styles.labels}}">
+                {{ __('Are you a full-time student?', translationID) }}
+              </label>
+              <div class="screener-radio-buttons">
+                <label class="screener-radio screener-label">
+                  <input name="Person[0].{{studentOptions.dataSubKey}}" type="radio" value="true" class="screener-radio-input sr-only"
+                    data-type="boolean"
+                    data-object="people"
+                    data-key="{{studentOptions.dataSubKey}}"
+                    data-index="0"
+                    v-on:change="setAttr">
+                  <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
+                </label>
+                <label class="screener-radio screener-label">
+                  <input name="Person[0].{{studentOptions.dataSubKey}}" class="screener-radio-input sr-only" value="false" type="radio" checked
+                    data-type="boolean"
+                    data-object="people"
+                    data-key="{{studentOptions.dataSubKey}}"
+                    data-index="0"
+                    v-on:change="setAttr">
+                  <span class="screener-radio-label">{{ __('No', translationID) }}</span>
+                </label>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -74,7 +112,7 @@
             <input id="household-reset" type="checkbox" value="false" checked
               data-type="boolean"
               data-object="people"
-              data-key="{% for option in benefitOptions %}{{option.dataKey}},{% endfor %}{{employmentOptions.dataKey}},{{employmentOptions.dataSubKey}}"
+              data-key="{% for option in benefitOptions %}{{option.dataKey}},{% endfor %}{{employmentOptions.dataKey}},{{employmentOptions.dataSubKey}},{{studentOptions.dataKey}},{{studentOptions.dataSubKey}}"
               data-index="0"
               v-on:change="resetAttr">
             <span class="styled-checkbox-label">{{ __('None of these apply to me', translationID) }}</span>
@@ -91,7 +129,13 @@
           {% include 'screener-field-partials/question-toggles-household-member-details.twig' with {question: question} %}
           {% endfor %}
 
-          {% include 'screener-field-partials/question-toggles-unemployed.twig' with {question: employmentOptions} %}
+          <div class="m-bottom-2">
+            {% include 'screener-field-partials/question-toggles-unemployed.twig' with {question: studentOptions} %}
+          </div>
+
+          <div>
+            {% include 'screener-field-partials/question-toggles-unemployed.twig' with {question: employmentOptions} %}
+          </div>
 
         </div>
       </div>
