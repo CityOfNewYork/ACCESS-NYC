@@ -262,9 +262,7 @@
 
             <div v-if="disclaimer">
 
-              <a class="{{ styles.confirm }}" href="#page-screener"
-                data-scope="Staff"
-                v-on:click="validate">
+              <a class="{{ styles.confirm }}" href="#page-screener" data-vv-scope="Staff" v-on:click="validate">
                 {{ __('Let\'s Get Started', translationID) }}
               </a>
 
@@ -502,11 +500,11 @@
   },
   {
     "label": {{ __('You', translationID)|trim|json_encode() }},
-    "slug": "Self"
+    "slug": "you"
   },
   {
     "label": {{ __('Head of the household', translationID)|trim|json_encode() }},
-    "slug": "HeadOfHousehold"
+    "slug": "headOfHousehold"
   },
   // {
   //   "label": {{ __('Medicaid', translationID)|trim|json_encode() }},

@@ -9,7 +9,7 @@
       <a class="{{styles.questions}}" href="#question-household-information" data-js="question">
         {{ __('Household Information', translationID) }}
         <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', translationID) }}"
-          v-if="errors.all('HouseholdInformation').length > 0">
+          v-if="errors.all('HouseholdInformation').length > 0 || errors.all('HeadOfHousehold').length > 0">
           <title>{{ __('Some required fields are not filled out', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
@@ -46,28 +46,36 @@
 
           <h4 class="{{styles.explainations}}">{{ __('What does the head of household mean?', translationID) }}</h4>
           <p>{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', translationID) }}</p>
-
-          <div class="screener-radio-buttons">
-            <label class="screener-radio screener-label">
-              <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].headOfHousehold" checked
-                data-object="people"
-                data-index="0"
-                data-key="headOfHousehold"
-                data-type="boolean"
-                data-hides=".js-toggle-head-of-household"
-                v-on:change="setAttr">
-              <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
-            </label>
-            <label class="screener-radio screener-label">
-              <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="Person[0].headOfHousehold"
-                data-object="people"
-                data-index="0"
-                data-key="headOfHousehold"
-                data-type="boolean"
-                data-shows=".js-toggle-head-of-household"
-                v-on:change="setAttr">
-              <span class="screener-radio-label">{{ __('No', translationID) }}</span>
-            </label>
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Person[0].headOfHousehold', 'HeadOfHousehold')}">
+            <div class="error-message"
+              v-if="errors.has('Person[0].headOfHousehold', 'HeadOfHousehold')">{{ __('At least one head of household is required.', translationID) }}</div>
+            <div class="screener-radio-buttons">
+              <label class="screener-radio screener-label">
+                <input class="screener-radio-input sr-only" type="radio" name="Person[0].headOfHousehold" value="true"
+                  data-object="people"
+                  data-index="0"
+                  data-key="headOfHousehold"
+                  data-type="boolean"
+                  data-vv-delay="1000"
+                  data-vv-scope="HeadOfHousehold"
+                  v-validate="{hoh: true}"
+                  v-bind:checked="people[0]._attrs.headOfHousehold"
+                  v-on:change="setAllAttr($event, false); setAttr($event, true); setAttr($event, '', 'headOfHouseholdRelation'); validate($event)">
+                <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
+              </label>
+              <label class="screener-radio screener-label">
+                <input class="screener-radio-input sr-only" type="radio" name="Person[0].headOfHousehold" value="false"
+                  data-object="people"
+                  data-index="0"
+                  data-key="headOfHousehold"
+                  data-type="boolean"
+                  data-vv-scope="HeadOfHousehold"
+                  v-bind:checked="!people[0]._attrs.headOfHousehold"
+                  v-on:change="setAttr($event, false); validate($event)">
+                <span class="screener-radio-label">{{ __('No', translationID) }}</span>
+              </label>
+            </div>
           </div>
         </div>
 

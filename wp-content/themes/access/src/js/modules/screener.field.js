@@ -115,12 +115,10 @@ class ScreenerField {
      * Reactive Elements
      */
 
-    Validator.Validator.extend('zip', ScreenerField.validateZipField);
-
-    Vue.use(Validator, {events: 'blur', zip: 'zip'});
-
+    Validator.Validator.extend('zip', this._validateZipField());
+    Validator.Validator.extend('hoh', this._validateHeadOfHousehold());
+    Vue.use(Validator, {events: 'blur', zip: 'zip', hoh: 'hoh'});
     Vue.component('personlabel', ScreenerField.personLabel);
-
     this._vue = new Vue(this._vue); // Initializes the Vue component
 
     /**
@@ -135,7 +133,7 @@ class ScreenerField {
     // Basic toggles
     $el.on('change', `.${ScreenerField.Selectors.TOGGLE}`, this._toggler);
 
-    // Validate calculated inputs based on regular expressions.
+    // Validate calculated input against regular expressions
     new CalcInput(this._el);
 
     // Mask phone numbers
@@ -154,6 +152,36 @@ class ScreenerField {
     this._routerPage('#page-admin');
 
     return this;
+  }
+
+    /**
+     * Checks to see if the input's value is a valid NYC zip code.
+     */
+    _validateZipField() {
+      return {
+        getMessage: () => 'Must be a valid NYC zip code',
+        validate: function(value) {
+          if (ScreenerField.NYC_ZIPS.indexOf(value) > -1) return true;
+          return false;
+        }
+      }
+    };
+
+  /**
+   * Makes sure there is at least one head of household.
+   */
+  _validateHeadOfHousehold() {
+    return {
+      getMessage: () => 'At lease one head of household is required',
+      validate: () => {
+        let hoh = false;
+        for (let i = this._vue.people.length - 1; i >= 0; i--) {
+          let valid = this._vue.people[i]._attrs.headOfHousehold;
+          hoh = (valid) ? valid : hoh;
+        }
+        return hoh;
+      }
+    }
   }
 
   /**
@@ -450,30 +478,19 @@ ScreenerField.formatDollars = function(event) {
 };
 
 /**
- * Checks to see if the input's value is a valid NYC zip code.
- */
-ScreenerField.validateZipField = {
-  getMessage: () => 'Must be a valid NYC zip code',
-  validate: function(value) {
-    if (ScreenerField.NYC_ZIPS.indexOf(value) > -1) return true;
-    return false;
-  }
-};
-
-/**
  * Validation functionality, if a scope is attatched, it will only validate
  * against the scope stored in validScopes
- * @param  {event} event the click event
+ * @param  {event} event  - the click event
+ * @param  {string} scope - the scope to validate, if undefined validates all
  */
-ScreenerField.validate = function(event) {
+ScreenerField.validate = function(event, scope) {
   event.preventDefault();
-  let scope = event.currentTarget.dataset.scope;
+  scope = (typeof scope !== 'undefined')
+    ? scope : event.currentTarget.dataset.vvScope;
   if (typeof scope !== 'undefined') {
-    this.$validator.validateAll(scope)
-      .then(ScreenerField.valid);
+    this.$validator.validateAll(scope).then(ScreenerField.valid);
   } else {
-    this.$validator.validate()
-      .then(ScreenerField.valid);
+    this.$validator.validate().then(ScreenerField.valid);
   }
 };
 
@@ -578,15 +595,19 @@ ScreenerField.resetAttr = function(event) {
  *                       - index {number} item index in object (optional)
  *                       - key {string} attribute to set
  *                       - type {string} type of attribute
+ * @param  {string/boolean/number/array} value - if passed, will use this value
+ *                                               instead of the data attribute
+ * @param  {string} attr - if passed, will set this attribute instead of the
+ *                         data attribute
  */
-ScreenerField.setAttr = function(event) {
+ScreenerField.setAttr = function(event, value, attr) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let index = el.dataset.index;
-  let key = el.dataset.key;
+  let key = (typeof attr != 'undefined') ? attr : el.dataset.key;
   let reset = el.dataset.reset;
   // get the typed value;
-  let value = ScreenerField.getTypedVal(el);
+  value = (typeof value != 'undefined') ? value : ScreenerField.getTypedVal(el);
   // set the attribute;
   /* eslint-disable no-console, no-debugger */
   if (typeof index === 'undefined') {
@@ -610,13 +631,17 @@ ScreenerField.setAttr = function(event) {
  *                       - object {object} 'people' or 'household'
  *                       - key {string} attribute to set
  *                       - type {string} type of attribute
+ * @param  {string/boolean/number/array} value - if passed, will use this value
+ *                                               instead of the data attribute
+ * @param  {string} attr - if passed, will set this attribute instead of the
+ *                         data attribute
  */
-ScreenerField.setAllAttr = function(event) {
+ScreenerField.setAllAttr = function(event, value, attr) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
-  let key = el.dataset.key;
+  let key = (typeof attr != 'undefined') ? attr : el.dataset.key;
   let keys = el.dataset.key.split(',');
-  let value = ScreenerField.getTypedVal(el);
+  value = (typeof value != 'undefined') ? value : ScreenerField.getTypedVal(el);
   for (let i = this[obj].length - 1; i >= 0; i--) {
     for (let k = keys.length - 1; k >= 0; k--) {
       this[obj][i].set(keys[k], value);
@@ -868,17 +893,19 @@ ScreenerField.localString = function(slug) {
 ScreenerField.personLabel = {
   props: ['index', 'person'],
   template: '<span class="c-black">' +
-    '<span :class="personIndex(index)"></span> ' +
-    '<span v-if="index == 0">You, </span>' +
-    '<span v-if="person.headOfHousehold">Head of Household, </span>' +
-    '<span v-if="index != 0 && person.headOfHouseholdRelation != \'\'">' +
-      '{{ personHeadOfHouseholdRelation(person.headOfHouseholdRelation) }}, ' +
-    '</span>' +
-    '<span v-if="index != 0 && person.headOfHouseholdRelation == \'\'">' +
-      '<em>(relationship)</em>, ' +
+    '<span v-bind:class="personIndex(index)"></span> ' +
+    '<span v-if="index === 0">{{ localString("you") }}, </span>'+
+    '<span v-if="person.headOfHousehold"> ' +
+      '{{ localString("headOfHousehold") }}, ' +
+    '</span><span v-else>' +
+      '<span v-if="person.headOfHouseholdRelation != \'\'">' +
+        '{{ localString(person.headOfHouseholdRelation) }}, ' +
+      '</span><span v-else>' +
+        '<em>({{ localString("relationship") }})</em>, ' +
+      '</span>' +
     '</span>' +
     '<span v-if="person.age != 0">{{ person.age }}</span>' +
-    '<span v-else><em>(age)</em></span>' +
+    '<span v-else><em>({{ localString("age") }})</em></span>' +
   '</span>',
   methods: {
     personIndex: function(index) {
@@ -889,7 +916,7 @@ ScreenerField.personLabel = {
       classes[name] = true;
       return classes;
     },
-    personHeadOfHouseholdRelation: ScreenerField.localString
+    localString: ScreenerField.localString
   }
 };
 

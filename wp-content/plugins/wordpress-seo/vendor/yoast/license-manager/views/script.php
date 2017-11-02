@@ -2,10 +2,10 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );
 	die;
-} 
+}
 ?><script type="text/javascript">
 (function($) {
-	
+
 	if( typeof YoastLicenseManager !== "undefined" ) {
 		return;
 	}
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			var $formScope = $(this).closest('form');
 			var $actionButton = $formScope.find('.yoast-license-toggler button');
 
-			// fake input field with exact same name => value			
+			// fake input field with exact same name => value
 			$("<input />")
 				.attr('type', 'hidden')
 				.attr( 'name', $(this).attr('name') )
@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		return {
 			init: init
 		}
-	
+
 	})();
 
 	YoastLicenseManager.init();
