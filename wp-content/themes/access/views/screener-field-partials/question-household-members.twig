@@ -4,7 +4,7 @@
 
       <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-members">
 
-        <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
+        <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
 
         <div class="p-relative">
 
@@ -17,7 +17,7 @@
             </svg>
           </a>
 
-          <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden"> {# hidden #}
+          <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
 
             <div v-for="(p, personIndex) in people">
 

@@ -2,7 +2,7 @@
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-disclaimer">
 
-    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
+    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
 
     <div class="p-relative">
 
@@ -10,7 +10,7 @@
         {{ __('ACCESS NYC Disclaimer for Public Benefit Program Screening', translationID) }}
       </a>
 
-      <div class="js-toggle-question hidden">
+      <div data-js="toggle-question">
 
         <div class="p-horizontal-2 p-bottom-2">
 
@@ -35,7 +35,7 @@
           <div class="screener-disclaimer-acknowledgment screener-question-container m-0">
             <label class="screener-checkbox styled-checkbox m-0">
               <input id="disclaimer-agreement" type="checkbox" name="disclaimer-agreement" value="true" required
-                v-model="disclaimer">
+                 v-on:change="disclaimer = $event.target.checked">
               <span class="styled-checkbox-label">{{ __('I have read, understand, and agree to the terms of: the ACCESS NYC Disclaimer for Public Benefit Program Screening, the NYC.gov Privacy Policy, and the NYC.gov Terms of Use.', translationID) }}</span>
             </label>
           </div>

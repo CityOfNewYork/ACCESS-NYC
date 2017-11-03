@@ -2,7 +2,7 @@
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-needs">
 
-    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
+    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
 
     <div class="p-relative">
 
@@ -10,7 +10,7 @@
         {{ __('Client Needs', translationID) }}
       </a>
 
-      <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden">
+      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
 
         <div>
           <label class="{{styles.labels}}">
@@ -26,8 +26,7 @@
             {% endif %}
             <label class="screener-checkbox styled-checkbox screener-checkboxes-program screener-label">
               <input class="js-screener-validate-step-ui" type="checkbox" name="category" value="{{ category.slug }}"
-                data-object="categories"
-                v-on:change="push">
+                data-object="categories">
               <span class="styled-checkbox-label">
                 <div class="program-category">
                   <div class="program-icon">

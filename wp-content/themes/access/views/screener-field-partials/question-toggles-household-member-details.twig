@@ -7,12 +7,14 @@
     <div class="screener-radio-buttons m-bottom">
       <label class="screener-radio screener-label">
         <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="toggle-{{question.dataKey}}"
+          data-js="toggle"
           data-type="boolean"
           data-shows="#js-toggle-{{question.dataKey}}">
         <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
       </label>
       <label class="screener-radio screener-label">
         <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="toggle-{{question.dataKey}}" checked
+          data-js="toggle"
           data-type="boolean"
           data-hides="#js-toggle-{{question.dataKey}}"
           data-object="people"

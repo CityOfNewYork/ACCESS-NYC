@@ -112,6 +112,18 @@ class ScreenerField {
     }
 
     /**
+     * Hide pages and questions on load. Hiding them with CSS (using display:
+     * none) before causes flickering issues on checkbox interactions on IOS.
+     * The CSS could probably afford to be optimized, but this works as well.
+     */
+
+    $(ScreenerField.Selectors.PAGE)
+      .removeClass(ScreenerField.Classes.HIDDEN_OPACITY)
+      .addClass(ScreenerField.Classes.HIDDEN);
+    $(ScreenerField.Selectors.TOGGLE_QUESTION)
+      .addClass(ScreenerField.Classes.HIDDEN);
+
+    /**
      * Reactive Elements
      */
 
@@ -128,10 +140,10 @@ class ScreenerField {
     let $el = $(this._el);
 
     // Submit
-    $el.on('click', '[data-js="submit"]', () => this._submit(event));
+    $el.on('click', ScreenerField.Selectors.SUBMIT, () => this._submit(event));
 
     // Basic toggles
-    $el.on('change', `.${ScreenerField.Selectors.TOGGLE}`, this._toggler);
+    $el.on('change', ScreenerField.Selectors.TOGGLE, this._toggler);
 
     // Validate calculated input against regular expressions
     new CalcInput(this._el);
@@ -144,7 +156,9 @@ class ScreenerField {
     window.addEventListener('hashchange', (event) => this._router(event));
 
     // Close Questions
-    $el.on('click', '[data-js="question"]', this._routerQuestion);
+    $el.on('click', ScreenerField.Selectors.QUESTION, (event) => {
+      this._routerQuestion(event);
+    });
 
     // Set the initial view
     this._routerPage('#page-admin');
@@ -198,13 +212,18 @@ class ScreenerField {
     window.location.hash = page;
     view.scrollTop = 0;
 
-    $(`.${ScreenerField.Selectors.PAGE}`)
-      .removeClass(ScreenerField.Selectors.ACTIVE)
+    $(ScreenerField.Selectors.PAGE)
+      .removeClass(ScreenerField.Classes.ACTIVE)
+      .addClass(ScreenerField.Classes.HIDDEN)
+      .removeClass('fadeIn')
       .attr('aria-hidden', 'true')
       .find(':input, a')
       .attr('tabindex', '-1');
 
-    $(page).addClass(ScreenerField.Selectors.ACTIVE)
+    $(page)
+      .removeClass(ScreenerField.Classes.HIDDEN)
+      .addClass(ScreenerField.Classes.ACTIVE)
+      .addClass('fadeIn')
       .removeAttr('aria-hidden')
       .find(':input, a')
       .removeAttr('tabindex');
@@ -216,12 +235,12 @@ class ScreenerField {
    * @param {string} hash  - The question's hash id.
    */
   _routerQuestion(event, hash) {
-    hash = (typeof hash != 'undefined') ? hash : event.currentTarget.hash;
-    let page = $(hash).closest(`.${ScreenerField.Selectors.PAGE}`);
-    let target = $(hash).find(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`);
-    let show = !target.hasClass('active');
+    hash = (typeof hash != 'undefined') ? hash : event.target.hash;
+    let page = $(hash).closest(ScreenerField.Selectors.PAGE);
+    let target = $(hash).find(ScreenerField.Selectors.TOGGLE_QUESTION);
+    let show = !target.hasClass(ScreenerField.Classes.ACTIVE);
 
-    if (!page.hasClass('active')) {
+    if (!page.hasClass(ScreenerField.Classes.ACTIVE)) {
       this._routerPage(`#${page.attr('id')}`);
       show = true;
     }
@@ -231,13 +250,13 @@ class ScreenerField {
       /* eslint-disable no-console, no-debugger */
       if (Utility.debug()) console.log(`routerQuestion: Show ${hash}`);
       /* eslint-enable no-console, no-debugger */
-      $(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`)
-        .addClass('hidden')
-        .removeClass('active')
+      $(ScreenerField.Selectors.TOGGLE_QUESTION)
+        .addClass(ScreenerField.Classes.HIDDEN)
+        .removeClass(ScreenerField.Classes.ACTIVE)
         .prop('aria-hidden', true);
 
-      target.addClass('active')
-        .removeClass('hidden')
+      target.addClass(ScreenerField.Classes.ACTIVE)
+        .removeClass(ScreenerField.Classes.HIDDEN)
         .prop('aria-hidden', false);
 
       // Scrolling Behavior
@@ -256,8 +275,8 @@ class ScreenerField {
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) console.log(`routerQuestion: Hide ${hash}`);
     /* eslint-enable no-console, no-debugger */
-    target.addClass('hidden')
-      .removeClass('active')
+    target.addClass(ScreenerField.Classes.HIDDEN)
+      .removeClass(ScreenerField.Classes.ACTIVE)
       .prop('aria-hidden', true);
     // Scrolling Behavior
     event.preventDefault();
@@ -301,16 +320,16 @@ class ScreenerField {
           ($el.prop('checked') && Boolean(parseInt($el.val(), 10))) ||
           ($el.is('select') && $el.val())
       ) {
-        $target.removeClass(ScreenerField.Selectors.HIDDEN);
+        $target.removeClass(ScreenerField.Classes.HIDDEN);
       } else {
-        $target.addClass(ScreenerField.Selectors.HIDDEN);
+        $target.addClass(ScreenerField.Classes.HIDDEN);
       }
     }
     if ($el.data('shows')) {
-      $($el.data('shows')).removeClass(ScreenerField.Selectors.HIDDEN);
+      $($el.data('shows')).removeClass(ScreenerField.Classes.HIDDEN);
     }
     if ($el.data('hides')) {
-      $($el.data('hides')).addClass(ScreenerField.Selectors.HIDDEN);
+      $($el.data('hides')).addClass(ScreenerField.Classes.HIDDEN);
     }
   }
 
@@ -934,13 +953,23 @@ ScreenerField.personLabel = {
  * @enum {string}
  */
 ScreenerField.Selectors = {
-  ACTIVE: 'active',
   DOM: '[data-js="screener-field"]',
+  PAGE: '[data-js="page"]',
+  TOGGLE: '[data-js="toggle"]',
+  TOGGLE_QUESTION: '[data-js="toggle-question"]',
+  SUBMIT: '[data-js="submit"]',
+  VIEW: '[data-js="view"]',
+  QUESTION: '[data-js="question"]'
+};
+
+/**
+ * Classes used by this component.
+ * @enum {string}
+ */
+ScreenerField.Classes = {
+  ACTIVE: 'active',
   HIDDEN: 'hidden',
-  PAGE: 'js-screener-page',
-  TOGGLE: 'js-screener-toggle',
-  TOGGLE_QUESTION: 'js-toggle-question',
-  VIEW: '[data-js="view"]'
+  HIDDEN_OPACITY: 'o-00'
 };
 
 /**

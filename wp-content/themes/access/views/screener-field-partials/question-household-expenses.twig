@@ -2,7 +2,7 @@
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-expenses">
 
-    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div> {# hidden #}
+    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
 
     <div class="p-relative">
 
@@ -15,7 +15,7 @@
         </svg>
       </a>
 
-      <div class="p-horizontal-2 p-bottom js-toggle-question hidden"> {# hidden #}
+      <div class="p-horizontal-2 p-bottom" data-js="toggle-question">
 
         <div v-if="singleOccupant()">
 

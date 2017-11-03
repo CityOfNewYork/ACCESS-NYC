@@ -3827,6 +3827,21 @@ a.program-filter-item {
   overflow: hidden;
   text-overflow: ellipsis; }
 
+.o-00 {
+  opacity: 0; }
+
+.o-25 {
+  opacity: 0.25; }
+
+.o-50 {
+  opacity: 0.5; }
+
+.o-75 {
+  opacity: 0.75; }
+
+.o-100 {
+  opacity: 1; }
+
 .m-auto {
   margin-left: auto;
   margin-right: auto; }

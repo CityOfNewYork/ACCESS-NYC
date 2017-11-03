@@ -2,7 +2,7 @@
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-housing-situation">
 
-    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div> {# hidden #}
+    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
 
     <div class="p-relative">
 
@@ -15,7 +15,7 @@
         </svg>
       </a>
 
-      <div class="js-toggle-question p-horizontal-2 p-bottom-2 hidden"> {# hidden #}
+      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
 
         <label class="{{styles.labels}}">
           {{ __('What is your current housing situation?', translationID) }}
@@ -57,7 +57,7 @@
                 {{ __('Please select a rental type.', translationID) }}
               </div>
               <select id="housing-livingRentalType" class="screener-select js-screener-toggle" name="Household.livingRentalType" required
-                data-val="livingRentalType"
+                data-js="toggle"
                 data-toggles="#screener-lease-owner"
                 data-vv-scope="HousingSituation"
                 v-model="household._attrs.livingRentalType"
@@ -79,6 +79,7 @@
               <div class="screener-radio-buttons m-bottom">
                 <label class="screener-radio screener-label">
                   <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].livingRentalOnLease" id="person-0-livingRentalOnLease-true"
+                    data-js="toggle"
                     data-type="boolean"
                     data-object="people"
                     data-key="livingRentalOnLease"
@@ -89,6 +90,7 @@
                 </label>
                 <label class="screener-radio screener-label">
                   <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="Person[0].livingRentalOnLease" id="person-0-livingRentalOnLease-false"
+                    data-js="toggle"
                     data-type="boolean"
                     data-object="people"
                     data-key="livingRentalOnLease"
@@ -144,6 +146,7 @@
             <div class="screener-radio-buttons m-bottom">
               <label class="screener-radio screener-label" for="person-0-livingOwnerOnDeed-true">
                 <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="Person[0].livingOwnerOnDeed" id="person-0-livingOwnerOnDeed-true"
+                  data-js="toggle"
                   data-type="boolean"
                   data-object="people"
                   data-key="livingOwnerOnDeed"
@@ -154,6 +157,7 @@
               </label>
               <label class="screener-radio screener-label" for="person-0-livingOwnerOnDeed-false">
                 <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="Person[0].livingOwnerOnDeed" id="person-0-livingOwnerOnDeed-false"
+                  data-js="toggle"
                   data-type="boolean"
                   data-object="people"
                   data-key="livingOwnerOnDeed"

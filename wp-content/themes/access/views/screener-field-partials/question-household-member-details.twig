@@ -2,7 +2,7 @@
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-member-details">
 
-    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div> {# hidden #}
+    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
 
     <div class="p-relative">
 
@@ -10,7 +10,7 @@
         {{ __('Household Member Details', translationID) }}
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden">{# hidden #}
+      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
         <div v-if="singleOccupant()">
 
           <h4 class="{{styles.labels}}">

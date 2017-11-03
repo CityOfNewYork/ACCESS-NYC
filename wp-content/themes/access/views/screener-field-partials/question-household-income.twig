@@ -2,7 +2,7 @@
 
   <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-income">
 
-    <div class="bg-blue-light ui-overlay js-toggle-question hidden"></div>
+    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
 
     <div class="p-relative">
 
@@ -15,7 +15,7 @@
         </svg>
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2 js-toggle-question hidden">
+      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
 
         <div>
           <label class="{{styles.labels}}">
@@ -25,6 +25,7 @@
           <div class="screener-radio-buttons">
             <label class="screener-radio screener-label">
               <input name="toggle-income" type="radio" class="js-screener-toggle screener-radio-input sr-only" value="1"
+                data-js="toggle"
                 data-key="incomes"
                 v-model.number="income"
                 v-on:change="removeAllPayments">
@@ -32,6 +33,7 @@
             </label>
             <label class="screener-radio screener-label">
               <input name="toggle-income" type="radio" class="js-screener-toggle screener-radio-input sr-only" value="0" checked
+                data-js="toggle"
                 data-key="incomes"
                 v-model.number="income"
                 v-on:change="removeAllPayments">
@@ -53,6 +55,7 @@
             <label class="styled-checkbox screener-checkbox screener-label"
               v-for="(p, personIndex) in people">
               <input class="js-screener-toggle" type="checkbox" value="1"
+                data-js="toggle"
                 v-bind:name="'Person[' + personIndex + '].has-income'"
                 v-bind:data-toggles="'#js-toggle-people-' + personIndex + '-income'">
               <span class="styled-checkbox-label">
