@@ -107,13 +107,6 @@
   }
 ] %}
 
-{#   {
-    question: 'Who in your household is currently a <span class="c-blue">full-time student</span>?',
-    who: 'Who is a <span class="c-blue">full-time student</span>?',
-    label: 'Full-time student',
-    dataKey: 'student'
-  } #}
-
 {# {
   question: 'Is anyone in your household currently on <span class="c-blue">Medicaid</span>?',
   who: 'Who is on <span class="c-blue">Medicaid</span>?',
@@ -422,7 +415,7 @@
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
   {% for category in categories %}
   {
-    "label": {{ category.name|json_encode() }},
+    "label": {{ category.name|json_encode()|replace({'&amp;': '&'}) }},
     "slug": {{ category.slug|json_encode() }}
   },
   {% endfor %}
