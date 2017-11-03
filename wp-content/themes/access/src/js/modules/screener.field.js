@@ -144,9 +144,7 @@ class ScreenerField {
     window.addEventListener('hashchange', (event) => this._router(event));
 
     // Close Questions
-    $el.on('click', '[data-js="question"]', (event) => {
-      this._routerQuestion(event.currentTarget.hash);
-    });
+    $el.on('click', '[data-js="question"]', this._routerQuestion);
 
     // Set the initial view
     this._routerPage('#page-admin');
@@ -154,21 +152,23 @@ class ScreenerField {
     return this;
   }
 
-    /**
-     * Checks to see if the input's value is a valid NYC zip code.
-     */
-    _validateZipField() {
-      return {
-        getMessage: () => 'Must be a valid NYC zip code',
-        validate: function(value) {
-          if (ScreenerField.NYC_ZIPS.indexOf(value) > -1) return true;
-          return false;
-        }
+  /**
+   * Checks to see if the input's value is a valid NYC zip code.
+   * @return {object} The validation object for vee validate
+   */
+  _validateZipField() {
+    return {
+      getMessage: () => 'Must be a valid NYC zip code',
+      validate: function(value) {
+        if (ScreenerField.NYC_ZIPS.indexOf(value) > -1) return true;
+        return false;
       }
     };
+  }
 
   /**
    * Makes sure there is at least one head of household.
+   * @return {object} The validation object for vee validate
    */
   _validateHeadOfHousehold() {
     return {
@@ -181,7 +181,7 @@ class ScreenerField {
         }
         return hoh;
       }
-    }
+    };
   }
 
   /**
@@ -211,10 +211,12 @@ class ScreenerField {
   }
 
   /**
-   * Jumps to screener question
-   * @param  {string} hash The question's hash id
+   * Jumps to screener question.
+   * @param {object} event - The click event if available.
+   * @param {string} hash  - The question's hash id.
    */
-  _routerQuestion(hash) {
+  _routerQuestion(event, hash) {
+    hash = (typeof hash != 'undefined') ? hash : event.currentTarget.hash;
     let page = $(hash).closest(`.${ScreenerField.Selectors.PAGE}`);
     let target = $(hash).find(`.${ScreenerField.Selectors.TOGGLE_QUESTION}`);
     let show = !target.hasClass('active');
@@ -277,7 +279,7 @@ class ScreenerField {
     }
 
     if (type === '#question') {
-      this._routerQuestion(hash);
+      this._routerQuestion(event, hash);
     }
 
     return this;
@@ -480,7 +482,7 @@ ScreenerField.formatDollars = function(event) {
 /**
  * Validation functionality, if a scope is attatched, it will only validate
  * against the scope stored in validScopes
- * @param  {event} event  - the click event
+ * @param  {event}  event - the click event
  * @param  {string} scope - the scope to validate, if undefined validates all
  */
 ScreenerField.validate = function(event, scope) {
@@ -488,28 +490,35 @@ ScreenerField.validate = function(event, scope) {
   scope = (typeof scope !== 'undefined')
     ? scope : event.currentTarget.dataset.vvScope;
   if (typeof scope !== 'undefined') {
-    this.$validator.validateAll(scope).then(ScreenerField.valid);
+    this.$validator.validateAll(scope).then((valid) => {
+      ScreenerField.valid(event.target.hash, valid);
+    });
   } else {
-    this.$validator.validate().then(ScreenerField.valid);
+    this.$validator.validate().then((valid) => {
+      ScreenerField.valid(event.target.hash, valid);
+    });
   }
 };
 
 /**
  * Validate
- * @param  {boolean} valid wether the validator passes validation
+ * @param {string}  hash  - The hash to move to
+ * @param {boolean} valid - Wether the validator passes validation
  */
-ScreenerField.valid = function(valid) {
+ScreenerField.valid = function(hash, valid) {
+  // console.dir(valid);
+  // console.dir(event);
   if (!valid) {
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
       console.warn('Some required fields are not filled out.');
     /* eslint-enable no-console, no-debugger */
   } else {
-    window.location.hash = event.currentTarget.hash;
+    window.location.hash = hash;
   }
   // debug bypasses validation
   if (Utility.debug())
-    window.location.hash = event.currentTarget.hash;
+    window.location.hash = hash;
 };
 
 /**
