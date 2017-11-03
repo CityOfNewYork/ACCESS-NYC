@@ -455,13 +455,13 @@
     "slug": {{ item.value|json_encode() }}
   },
   {% endfor %}
-  {% for item in headOfHouseholdRelationOptions %}{% if item.slug != '' %}
+  {% for item in headOfHouseholdRelationOptions %}{% if item.value != '' %}
   {
     "label": {{ __(item.text, translationID)|trim|json_encode() }},
     "slug": {{ item.value|json_encode() }}
   },
   {% endif %}{% endfor %}
-  {% for item in incomeOptions %}{% if item.slug != '' %}
+  {% for item in incomeOptions %}{% if item.value != '' %}
   {
     "label": {{ __(item.text, translationID)|trim|json_encode() }},
     "slug": {{ item.value|json_encode() }}
