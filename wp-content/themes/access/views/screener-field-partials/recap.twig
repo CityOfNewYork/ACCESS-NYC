@@ -74,13 +74,13 @@
         <div>
 
           <h3 class="{{ styles.labels }}">
-            {{ __('Your information', translationID) }}
+            {{ __('Client information', translationID) }}
             <a class="m-horizontal" data-js="question" href="#question-client-basics">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <div class="recap-household-member-detail" v-if="Object.keys(getAttrs('client', 'firstName,lastName')).length > 0">
             <div class="recap-detail-name">
-              {{ __('Your name:', translationID) }}
+              {{ __('Name:', translationID) }}
             </div>
             <ul class="recap-detail-info recap-detail-conditions">
               <li>
@@ -97,7 +97,7 @@
 
           <div class="recap-household-member-detail" v-if="people[0]._attrs.age > 0">
             <div class="recap-detail-name">
-              {{ __('Your age:', translationID) }}
+              {{ __('Age:', translationID) }}
             </div>
             <ul class="recap-detail-info recap-detail-conditions">
               <li>
@@ -114,7 +114,7 @@
 
           <div class="recap-household-member-detail" v-if="household._attrs.zip !== ''">
             <div class="recap-detail-name">
-              {{ __('Your zip code:', translationID) }}
+              {{ __('Zip code:', translationID) }}
             </div>
             <ul class="recap-detail-info recap-detail-conditions">
               <li>
@@ -143,7 +143,7 @@
 
           <div class="recap-household-member-detail" v-if="client._attrs.language.length > 0">
             <div class="recap-detail-name">
-              {{ __('Your language:', translationID) }}
+              {{ __('Language:', translationID) }}
             </div>
             <ul class="recap-detail-info recap-detail-conditions">
               <li v-for="language in client._attrs.language">
@@ -161,7 +161,7 @@
 
           <div class="recap-household-member-detail" v-if="client._attrs.phone !== ''">
             <div class="recap-detail-name">
-              {{ __('Your phone:', translationID) }}
+              {{ __('Phone:', translationID) }}
             </div>
             <ul class="recap-detail-info recap-detail-conditions">
               <li>v{ client._attrs.phone }</li>
@@ -171,7 +171,7 @@
 
           <div class="recap-household-member-detail" v-if="client._attrs.phoneAlt !== ''">
             <div class="recap-detail-name">
-              {{ __('Your alternate phone:', translationID) }}
+              {{ __('Alternate phone:', translationID) }}
             </div>
             <ul class="recap-detail-info recap-detail-conditions">
               <li>v{ client._attrs.phoneAlt }</li>
@@ -204,7 +204,7 @@
 
           <div class="recap-household-member-detail" v-if="client._attrs.email !== ''">
             <div class="recap-detail-name">
-              {{ __('Your email:', translationID) }}
+              {{ __('Email:', translationID) }}
             </div>
             <ul class="recap-detail-info recap-detail-conditions">
               <li>v{ client._attrs.email }</li>
@@ -220,7 +220,7 @@
 
           <div class="recap-household-member-detail" v-if="Object.keys(getAttrs('client', addressAttrs)).length > 0">
             <div class="recap-detail-name">
-              {{ __('Your address:', translationID) }}
+              {{ __('Address:', translationID) }}
             </div>
             <ul class="recap-detail-info recap-detail-conditions">
               <li v-for="(value, key) in getAttrs('client', addressAttrs)" v-if="key != 'streetName'">
@@ -239,7 +239,7 @@
         <div>
 
           <h3 class="{{ styles.labels }}">
-            {{ __('Your household:', translationID) }} v{ people.length }
+            {{ __('Household:', translationID) }} v{ people.length }
             <span v-if="singleOccupant()">{{ __('person', translationID) }}</span>
             <span v-else>{{ __('people', translationID) }}</span>
             <a class="m-horizontal" href="#question-household-information" data-js="question">
