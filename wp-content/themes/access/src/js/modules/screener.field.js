@@ -127,11 +127,16 @@ class ScreenerField {
      * Reactive Elements
      */
 
+    // Special validations
     Validator.Validator.extend('zip', this._validateZipField());
     Validator.Validator.extend('hoh', this._validateHeadOfHousehold());
     Vue.use(Validator, {events: 'blur', zip: 'zip', hoh: 'hoh'});
+
+    // Components
     Vue.component('personlabel', ScreenerField.personLabel);
-    this._vue = new Vue(this._vue); // Initializes the Vue component
+
+    // Initialize Vue
+    this._vue = new Vue(this._vue);
 
     /**
      * DOM Event Listeners
@@ -140,7 +145,9 @@ class ScreenerField {
     let $el = $(this._el);
 
     // Submit
-    $el.on('click', ScreenerField.Selectors.SUBMIT, () => this._submit(event));
+    $el.on('click', ScreenerField.Selectors.SUBMIT, (event) => {
+      this._submit(event);
+    });
 
     // Basic toggles
     $el.on('change', ScreenerField.Selectors.TOGGLE, this._toggler);
@@ -150,7 +157,7 @@ class ScreenerField {
 
     // Mask phone numbers
     $el.on('focus', 'input[type="tel"]',
-      (event) => Utility.maskPhone(event.currentTarget));
+      (event) => Utility.maskPhone(event.target));
 
     // Routing
     window.addEventListener('hashchange', (event) => this._router(event));
