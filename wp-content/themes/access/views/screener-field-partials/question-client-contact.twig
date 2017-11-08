@@ -18,7 +18,7 @@
       <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
 
         <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="person-0-phone">
+          <label class="{{styles.labels}}">
             {{ __('Language Spoken', translationID) }}
           </label>
           <div class="m-bottom-2">
@@ -61,11 +61,16 @@
               v-if="errors.has('Client.phone', 'ClientContact')">
                 v{ errors.first('Client.phone', 'ClientContact') }
             </div>
-            <input id="client-phone" name="Client.phone" value="" type="tel"
-              data-vv-scope="ClientContact"
-              data-vv-as="{{ __('phone number', translationID) }}"
-              v-model="client._attrs.phone"
-              v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+            <div class="phone-us">
+              <input id="client-phone" name="Client.phone" value="" type="tel"
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('phone number', translationID) }}"
+                data-js="calc-input"
+                data-js-regex="^([0-9]{0,3})(\-[0-9]{0,3})?(\-[0-9]{0,4})?$"
+                v-on:keydown="$event.target.value = filterPhone($event)"
+                v-on:blur="client._attrs.phone = filterPhone($event)"
+                v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+            </div>
           </div>
         </div>
 
@@ -96,11 +101,16 @@
               v-if="errors.has('Client.phoneAlt', 'ClientContact')">
                 v{ errors.first('Client.phoneAlt', 'ClientContact') }
             </div>
-            <input id="client-phone" name="Client.phoneAlt" value="" type="tel"
-              data-vv-scope="ClientContact"
-              data-vv-as="{{ __('alternate phone number', translationID) }}"
-              v-model="client._attrs.phoneAlt"
-              v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+            <div class="phone-us">
+              <input id="client-phone" name="Client.phoneAlt" value="" type="tel"
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('alternate phone number', translationID) }}"
+                data-js="calc-input"
+                data-js-regex="^([0-9]{0,3})(\-[0-9]{0,3})?(\-[0-9]{0,4})?$"
+                v-on:keydown="$event.target.value = filterPhone($event)"
+                v-on:blur="client._attrs.phoneAlt = filterPhone($event)"
+                v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+            </div>
           </div>
         </div>
 

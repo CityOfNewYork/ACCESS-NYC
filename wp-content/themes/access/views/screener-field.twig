@@ -484,7 +484,7 @@
     "slug": {{ item.value|json_encode() }}
   },
   {% endfor %}
-  {% for item in housingOptions %}{% if item.text != '' %}
+  {% for item in housingOptions %}{% if item.value != '' %}
   {
     "label": {{ __(item.text, translationID)|trim|json_encode() }},
     "slug": {{ item.value|json_encode() }}

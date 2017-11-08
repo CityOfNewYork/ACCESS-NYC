@@ -1707,6 +1707,25 @@ input:focus + .screener-radio-label::before {
     text-align: left;
     z-index: 2; }
 
+.phone-us {
+  display: inline-block;
+  position: relative; }
+  .phone-us input {
+    margin: 0;
+    padding-left: 42px;
+    z-index: 3; }
+  .phone-us::before {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #184e9e;
+    content: '+1';
+    font-size: 22px;
+    font-weight: bold;
+    text-align: left;
+    z-index: 2; }
+
 .recap-container {
   background: #eef3f7;
   font-size: 22px;

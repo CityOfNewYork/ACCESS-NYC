@@ -46,7 +46,7 @@
               data-vv-as="{{ __('Total Savings', translationID) }}"
               v-validate="{regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
               v-on:change="setAttr"
-              v-on:blur="formatDollars">
+              v-on:blur="$event.target.value = filterDollars($event)">
           </div>
         </div>
       </div>

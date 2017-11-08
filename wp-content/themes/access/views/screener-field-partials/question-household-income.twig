@@ -146,7 +146,7 @@
                           v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
                           v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'"
                           v-on:change="income.amount = getTypedVal($event.target)"
-                          v-on:blur="formatDollars">
+                          v-on:blur="$event.target.value = filterDollars($event)">
                       </div>
                     </div>
                   </div>

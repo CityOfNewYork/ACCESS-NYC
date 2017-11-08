@@ -267,6 +267,30 @@
   }
 }
 
+.phone-us {
+  display: inline-block;
+  // margin-top: 10px;
+  position: relative;
+
+  input {
+    margin: 0;
+    padding-left: 42px;
+    z-index: 3;
+  }
+
+  &::before {
+    @include position(absolute, 50% null null 10px);
+    transform: translateY(-50%);
+    color: $color-blue;
+    content: '+1';
+    font-size: 22px;
+    font-weight: $font-weight-bold;
+    text-align: left;
+    z-index: 2;
+  }
+}
+
+
 .recap-container {
   background: $color-grey-lightest;
   font-size: $font-size-base;

@@ -95,8 +95,9 @@ class ScreenerField {
         singleOccupant: ScreenerField.singleOccupant,
         validate: ScreenerField.validate,
         localString: ScreenerField.localString,
-        formatDollars: ScreenerField.formatDollars,
-        getTypedVal: ScreenerField.getTypedVal
+        getTypedVal: ScreenerField.getTypedVal,
+        filterDollars: ScreenerField.filterDollars,
+        filterPhone: ScreenerField.filterPhone
       }
     };
   }
@@ -156,8 +157,8 @@ class ScreenerField {
     new CalcInput(this._el);
 
     // Mask phone numbers
-    $el.on('focus', 'input[type="tel"]',
-      (event) => Utility.maskPhone(event.target));
+    // $el.on('focus', 'input[type="tel"]',
+    //   (event) => Utility.maskPhone(event.target));
 
     // Routing
     window.addEventListener('hashchange', (event) => this._router(event));
@@ -488,24 +489,6 @@ class ScreenerField {
 }
 
 /**
- * Format number value and make sure it has '.00'
- * @param  {string} event - the blur event
- */
-ScreenerField.formatDollars = function(event) {
-  let value = event.currentTarget.value;
-  let postfix = '';
-  if (`${value}`.indexOf('.') > -1) {
-    let split = `${value}`.split('.');
-    postfix = (split[1].length == 1) ? '0' : postfix;
-    postfix = (split[1].length == 0) ? '00' : postfix;
-    value += postfix;
-  } else if (value != '') {
-    value += '.00';
-  }
-  event.currentTarget.value = value;
-};
-
-/**
  * Validation functionality, if a scope is attatched, it will only validate
  * against the scope stored in validScopes
  * @param  {event}  event - the click event
@@ -532,8 +515,6 @@ ScreenerField.validate = function(event, scope) {
  * @param {boolean} valid - Wether the validator passes validation
  */
 ScreenerField.valid = function(hash, valid) {
-  // console.dir(valid);
-  // console.dir(event);
   if (!valid) {
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
@@ -658,6 +639,48 @@ ScreenerField.setAttr = function(event, value, attr) {
   // reset an element based on this value;
   if (typeof reset != 'undefined')
     document.querySelector(reset).checked = false;
+};
+
+/**
+ * Format number value and make sure it has '.00'
+ * @param  {string} event - the blur event
+ * @return {string}       - the formatted string
+ */
+ScreenerField.filterDollars = function(event) {
+  let value = event.currentTarget.value;
+  let postfix = '';
+  if (`${value}`.indexOf('.') > -1) {
+    let split = `${value}`.split('.');
+    postfix = (split[1].length == 1) ? '0' : postfix;
+    postfix = (split[1].length == 0) ? '00' : postfix;
+    value += postfix;
+  } else if (value != '') {
+    value += '.00';
+  }
+  return value;
+};
+
+/**
+ * Filter a phone number and add dashes as the user types
+ * @param  {object} event - the key down event object
+ * @return {string}       - the formatted string
+ */
+ScreenerField.filterPhone = function(event) {
+  const key = event.keyCode;
+  const backspace = (key === 8 || key === 46);
+  const arrows = (key >= 37 && key <= 40);
+
+  if (backspace || arrows) return event.target.value;
+
+  let numbers = event.target.value.replace(/[^0-9]/g, '');
+
+  if (numbers.length === 6) {
+    return numbers.replace(/(\d{3})(\d{3})/, '$1-$2-');
+  } else if (numbers.length === 3) {
+    return numbers.replace(/(\d{3})/, '$1-');
+  }
+
+  return event.target.value;
 };
 
 /**
