@@ -59,9 +59,7 @@
               <select id="housing-livingRentalType" class="screener-select js-screener-toggle" name="Household.livingRentalType" required
                 data-js="toggle"
                 data-toggles="#screener-lease-owner"
-                data-vv-scope="HousingSituation"
-                v-model="household._attrs.livingRentalType"
-                v-validate="{required: true}">
+                v-model="household._attrs.livingRentalType">
                 {% for option in housingOptions %}
                 <option value="{{option.value}}">{{ __(option.text, translationID) }}</option>
                 {% endfor %}
