@@ -220,15 +220,14 @@
 
   </div>
 
+  {% if post.heads_up | length %}
+  <style>
+    {% for icon in post.get_field('heads_up_icons') %}
+    .program-detail-heads-up--{{ post.program_code }} ul li:nth-child({{ loop.index }}) {
+      background-image: url({{icon.icon.url}});
+    }
+    {% endfor %}
+  </style>
+  {% endif %}
+
 </article>
-
-
-{% if post.heads_up | length %}
-<style>
-  {% for icon in post.get_field('heads_up_icons') %}
-  .program-detail-heads-up--{{ post.program_code }} ul li:nth-child({{ loop.index }}) {
-    background-image: url({{icon.icon.url}});
-  }
-  {% endfor %}
-</style>
-{% endif %}
