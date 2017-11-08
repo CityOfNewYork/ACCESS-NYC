@@ -123,7 +123,7 @@
               <label class="screener-checkbox styled-checkbox screener-checkboxes-program screener-label">
                 <input type="checkbox" value="{{ option.value }}"
                   data-object="expenses"
-                  v-on:change="push"
+                  v-on:change="push($event); if (!$event.target.checked) removeAllPayments($event, 'expenses', '{{ option.value }}')"
                   v-bind:checked="checked('expenses', '{{ option.value }}')">
                 <span class="styled-checkbox-label">
                   {{ option.text }}

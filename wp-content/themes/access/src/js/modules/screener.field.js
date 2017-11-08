@@ -842,13 +842,20 @@ ScreenerField.removePayment = function(event) {
 
 /**
  * Removes all payments for all persons in household
- * @param  {object} event the radio button toggle event
+ * @param  {object} event - the radio button toggle event
+ * @param  {string} key   - optional way to set the key of the model
+ * @param  {string} type  - an optional type to remove
  */
-ScreenerField.removeAllPayments = function(event) {
+ScreenerField.removeAllPayments = function(event, key, type) {
   if (event.currentTarget.value === 1) return;
-  let key = event.currentTarget.dataset.key;
+  key = (typeof key != 'undefined') ? key : event.currentTarget.dataset.key;
   for (let i = this.people.length - 1; i >= 0; i--) {
-    this.people[i]._attrs[key] = [];
+    if (typeof type != 'undefined') {
+      let index = _.findIndex(this.people[i]._attrs[key], {'type': type});
+      this.people[i]._attrs[key].splice(index, 1);
+    } else {
+      this.people[i]._attrs[key] = [];
+    }
   }
 };
 
