@@ -203,6 +203,6 @@ ResultsField.ShareUrlEndpoint = '/wp-json/api/v1/shareurl/';
  * The base path for the URL
  * @type {String}
  */
-ResultsField.SharePath = '/elibibility/results/';
+ResultsField.SharePath = '/eligibility/results/';
 
 export default ResultsField;
