@@ -42,12 +42,15 @@ class ResultsField {
     $(`.${ShareForm.CssClass.FORM}`).each((i, el) => new ShareForm(el).init());
 
     // Open links in new window
-    $el.on('click', ResultsField.Selectors.HYPERLINK, this._targetBlank);
+    $el.on('click', ResultsField.Selectors.HYPERLINKS, this._targetBlank);
 
     // Remove programs
-    $el.on('click', ResultsField.Selectors.REMOVE_PROGRAM, this._removeProgram);
+    $el.on('click', ResultsField.Selectors.REMOVE_PROGRAM, (event) => {
+      this._removeProgram(event);
+    });
 
     this._initialized = true;
+
     return this;
   }
 
@@ -60,26 +63,46 @@ class ResultsField {
   }
 
   /**
-   * Remove program from results, and trim the sharable url
+   * Wrapper for ajax call
+   * @param {object}   data     - the data to send, should include programs,
+   *                              categories, guid, and date.
+   * @param {function} callback - the callback function to execute when done.
+   */
+  _getUrl(data, callback) {
+    data['path'] = ResultsField.SharePath;
+
+    const action = {
+      url: ResultsField.ShareUrlEndpoint,
+      type: 'get',
+      data: data
+    };
+
+    $.ajax(action).done((data) => {
+      callback(data);
+    });
+  }
+
+  /**
+   * Bus for removing programs from results
    * @param  {event} event the onclick event
-   * @return {string} the new url
    */
   _removeProgram(event) {
-    let shareUrl = $(ResultsField.Selectors.SHARE_URLS)[0].value;
-    let base = [shareUrl.split('?')[0], '?'].join('');
-    let categories = Utility.getUrlParameter('categories', shareUrl).split(',');
-    let programs = Utility.getUrlParameter('programs', shareUrl).split(',');
-    let guid = Utility.getUrlParameter('guid', shareUrl);
-    let date = Utility.getUrlParameter('date', shareUrl);
-    let removeCode = event.currentTarget.dataset.removeCode;
-    let index = programs.indexOf(removeCode);
-    let card = $(`[data-code="${removeCode}"]`);
-    let selected = card.closest(ResultsField.Selectors.SELECTED_PROGRAMS);
-    let additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
-    let parent = (selected.length) ? selected : additional;
-    let length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).children();
-
     event.preventDefault();
+    const code = event.currentTarget.dataset.removeCode;
+    this._updateDOM(code);
+    this._updateURL(code);
+  }
+
+  /**
+   * Hide the program in the DOM
+   * @param  {string} code - the program code to update
+   */
+  _updateDOM(code) {
+    const card = $(`[data-code="${code}"]`);
+    const selected = card.closest(ResultsField.Selectors.SELECTED_PROGRAMS);
+    const additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
+    const parent = (selected.length) ? selected : additional;
+    let length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).children();
 
     // Hide the card
     card.attr('aria-hidden', true)
@@ -112,28 +135,43 @@ class ResultsField {
         .addClass('hidden hide-for-print')
         .hide();
     }
+  }
+
+  /**
+   * Trim the program from the url, and retrieve a new hash for the updated url.
+   * @param  {string} code - the code to remove from the share string
+   */
+  _updateURL(code) {
+    const shareUrl = $(ResultsField.Selectors.SHARE_URLS)[0].value;
+    const categories = Utility.getUrlParameter('categories', shareUrl);
+    const guid = Utility.getUrlParameter('guid', shareUrl);
+    const date = Utility.getUrlParameter('date', shareUrl);
+
+    let programs = Utility.getUrlParameter('programs', shareUrl).split(',');
+    let request = {};
+
+    const index = programs.indexOf(code);
 
     // Remove program from url list
     if (index > -1) programs.splice(index, 1);
 
-    // Create updated share url
-    base +=
-      (categories[0] != '') ? `categories=${categories.join('%2C')}&` : '';
-    base +=
-      (programs[0] != '') ? `programs=${programs.join('%2C')}&` : '';
-    base += [
-      ['guid=', guid].join(''),
-      ['date=', date].join('')
-    ].join('&');
+    if (programs[0] != '') request['programs'] = programs.join('%2C');
+    if (categories[0] != '') request['categories'] = categories;
+    if (guid != '') request['guid'] = guid;
+    if (date != '') request['date'] = date;
 
-    // Update share url fields
-    $(ResultsField.Selectors.SHARE_URLS).each((index, element) => {
-      element.value = base;
+    // Get updated share url
+    this._getUrl(request, (data) => {
+      // Update share url fields
+      $(ResultsField.Selectors.SHARE_URLS).each((index, element) => {
+        element.value = data['url'];
+      });
+      // Udate the hash fields
+      $(ResultsField.Selectors.SHARE_HASH).each((index, element) => {
+        element.value = data['hash'];
+      });
     });
-
-    return base;
   }
-
 }
 
 /**
@@ -143,9 +181,10 @@ class ResultsField {
 ResultsField.Selectors = {
   'ADDITIONAL_PROGRAMS': '[data-js="additional-programs"]',
   'DOM': '[data-js="results"]',
-  'HYPERLINKS': 'a[href*]',
+  'HYPERLINKS': 'a[href*=""]',
   'REMOVE_PROGRAM': '[data-js="remove-program"]',
   'SHARE_URLS': 'input[name="url"]',
+  'SHARE_HASH': 'input[name="hash"]',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
   'PROGRAMS_LIST': '[data-js="programs-list"]',
@@ -153,5 +192,17 @@ ResultsField.Selectors = {
   'PROGRAMS_SINGULAR': '[data-js="programs-singular"]',
   'PROGRAMS_PLURAL': '[data-js="programs-plural"]'
 };
+
+/**
+ * The endpoint for retrieving a new share URL
+ * @type {String}
+ */
+ResultsField.ShareUrlEndpoint = '/wp-json/api/v1/shareurl/';
+
+/**
+ * The base path for the URL
+ * @type {String}
+ */
+ResultsField.SharePath = '/elibibility/results/';
 
 export default ResultsField;

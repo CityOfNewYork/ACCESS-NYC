@@ -19,7 +19,6 @@
 </header>
 {% endblock %}
 
-
 {% block footer %}{% endblock %}
 
 {% block content %}
@@ -44,10 +43,10 @@
               data-js="simple-toggle"
               data-scroll-offset="20">{{__('Text', translationID)}}</a>
             <div id="share-by-sms" class="share-form js-needs-disclaimer hidden">
-              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
-                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
-                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
-                <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
+              <form method="post" action="{{ action }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
+                <input type="hidden" name="url" value="{{ url }}" readonly>
+                <input type="hidden" name="hash" value="{{ hash }}" readonly>
+                <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
                 <div class="share-form-controls">
                   <input type="tel" name="to" placeholder="{{__('Phone Number', translationID)}}">
                   <div class="share-form-controls__right">
@@ -67,11 +66,11 @@
               data-js="simple-toggle"
               data-scroll-offset="20">{{__('Email', translationID)}}</a>
             <div id="share-by-email" class="share-form js-needs-disclaimer hidden">
-              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
+              <form method="post" action="{{ action }}" class="js-share-form" novalidate>
                 <input type="hidden" name="action" value="email_send" readonly>
-                <input type="hidden" name="url" value="{{ shareUrl }}"  readonly>
-                <input type="hidden" name="hash" value="{{ shareHash }}"  readonly>
-                <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
+                <input type="hidden" name="url" value="{{ url }}"  readonly>
+                <input type="hidden" name="hash" value="{{ hash }}"  readonly>
+                <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
                 <div class="share-form-controls">
                   <input type="email" name="to" placeholder="{{__('Email address', translationID)}}" required>
                   <div class="share-form-controls__right">
@@ -133,8 +132,8 @@
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
     {
-      "label": {{ __('Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.', translationID)|trim|json_encode() }},
-      "slug": "MSG_RELOAD"
+      'label': {{ __('Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.', translationID)|trim|json_encode() }},
+      'slug': 'MSG_RELOAD'
     }
   ]);
 </script>

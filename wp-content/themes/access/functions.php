@@ -464,11 +464,17 @@ require_once(get_template_directory() . '/includes/bsdstarter_editor_styles.php'
 require_once(get_template_directory() . '/includes/bsdstarter_shortcodes.php');
 
 // Includes jQuery
-if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
+if (!is_admin()) add_action('wp_enqueue_scripts', 'my_jquery_enqueue', 11);
 function my_jquery_enqueue() {
    wp_deregister_script('jquery');
 }
 
+/**
+ * Validate params through regex
+ * @param  string $namespace - the namespace of the parameter
+ * @param  string $subject   - the string to validate
+ * @return string            - returns blank string if false, parameter if valid
+ */
 function validate_params($namespace, $subject) {
   $patterns = array(
     'programs'=> '/^[A-Z0-9,]*$/',
@@ -479,6 +485,49 @@ function validate_params($namespace, $subject) {
   );
   preg_match($patterns[$namespace], $subject, $matches);
   return (isset($matches[0])) ? $matches[0] : ''; // fail silently
+}
+
+/**
+ * Creates a shareable url along with valid hash
+ * @param  array $params - requires programs, categories, date, guid, share_link
+ * @return array         - 0; the url 1; the hash
+ */
+function share_data($params) {
+  $query = array();
+  $data = array();
+
+  // Gets the URL Parameters for the search value,
+  if ($params['programs']) {
+    $query['programs'] = validate_params(
+      'programs', urldecode(htmlspecialchars($params['programs']))
+    );
+  }
+
+  if ($params['categories']) {
+    $query['categories'] = validate_params(
+      'categories', urldecode(htmlspecialchars($params['categories']))
+    );
+  }
+
+  if ($params['date']) {
+    $query['date'] = validate_params(
+      'date', urldecode(htmlspecialchars($params['date']))
+    );
+  }
+
+  if ($params['guid']) {
+    $query['guid'] = validate_params(
+      'guid', urldecode(htmlspecialchars($params['guid']))
+    );
+  }
+
+  // Build query
+  $http_query = http_build_query($query);
+  $http_query = (isset($http_query)) ? '?'.$http_query : '';
+  $url = home_url().$params['path'].$http_query;
+  $hash = \SMNYC\hash($url);
+
+  return array('url' => $url, 'hash' => $hash, 'query' => $query);
 }
 
 /**
@@ -499,17 +548,25 @@ function password_form() {
   </form>';
   return $form;
 }
-
 add_filter('the_password_form', 'password_form');
 
 /**
- * Hack for requiring authentication based on "post views"
- * @param  [string] $role the path of the page to check authentication against
- * @return [boolean]      truthy if authenticated
+ * Check to see if the user needs to be authenticated to view the page
+ * @param  [string] $role - the path of the page to check authentication against
+ * @return [boolean]      - truthy if needs authentication
  */
-function requires_auth($role) {
-  if (post_password_required(get_page_by_path($role)->ID)) {
-    wp_redirect('/peu/login');
+function authentication_required($role) {
+  return post_password_required(get_page_by_path($role)->ID);
+}
+
+/**
+ * Requiring authentication based on "post view"
+ * @param  [string] $role - the path of the page to check authentication against
+ * @return [boolean]      - truthy if authenticated
+ */
+function authentication_redirect($role) {
+  if (authentication_required($role)) {
+    wp_redirect("/$role/login");
     exit;
   } else {
     return true;
@@ -538,6 +595,9 @@ function script($name) {
  */
 // apply_filters('post_password_expires', 0);
 
+/**
+ * Routes
+ */
 Routes::map('locations', function() {
   script('main');
   Routes::load('locations.php', null, null, 200);
@@ -560,25 +620,52 @@ Routes::map('eligibility/results', function() {
 });
 
 Routes::map('peu', function() {
-  requires_auth('peu');
+  authentication_redirect('peu');
   script('main.field');
   Routes::load('screener-field.php', null, null, 200);
 });
 
 Routes::map('peu/results', function() {
-  requires_auth('peu');
+  authentication_redirect('peu');
   script('main.field');
   $params = array();
-  $params['link'] = home_url().'/peu/results/';
-  $params['share_link'] = home_url().'/eligibility/results';
+  $params['share_path'] = '/eligibility/results/';
   Routes::load('eligibility-results-field.php', $params, null, 200);
 });
 
 Routes::map('peu/login', function() {
-  if (!post_password_required(get_page_by_path('peu')->ID)) {
+  if (!authentication_required('peu')) {
     wp_redirect('/peu');
     exit;
   }
   script('main.field');
   Routes::load('screener-login.php', null, null, 200);
 });
+
+/**
+ * Returns a shareable url and hash
+ * @param  WP_REST_Request $request the request of the api
+ * @return object                   the response
+ */
+function api_share_url(WP_REST_Request $request) {
+  // Create the url
+  $data = share_data($request->get_params());
+  // Create the response object
+  $response = new WP_REST_Response($data);
+  // Add a custom status code
+  $response->set_status(200);
+
+  return $response;
+}
+
+/**
+ * Function hook to initiate routes for the WP JSON Rest API
+ */
+function rest_routes() {
+  register_rest_route('api/v1', '/shareurl/', array(
+    'methods'             => 'GET',
+    'callback'            => 'api_share_url',
+    'permission_callback' => function() { return !(authentication_required('peu')); }
+  ));
+}
+add_action('rest_api_init', 'rest_routes');
