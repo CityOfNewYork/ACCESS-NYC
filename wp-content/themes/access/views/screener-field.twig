@@ -104,19 +104,20 @@
     who: 'Who has <span class="c-blue">served</span>?',
     label: 'Served in the U.S. Armed Forces, National Guard or Reserves',
     dataKey: 'veteran'
+  },
+  {
+    question: 'Is anyone in your household currently on <span class="c-blue">Medicaid</span>?',
+    who: 'Who is on <span class="c-blue">Medicaid</span>?',
+    label: 'Medicaid',
+    dataKey: 'benefitsMedicaid'
+  },
+  {
+    question: 'Is anyone currently on <span class="c-blue">disability related Medicaid</span>?',
+    who: 'Who is on <span class="c-blue">disability related Medicaid</span>?',
+    label: 'Disability related Medicaid',
+    dataKey: 'benefitsMedicaidDisability'
   }
 ] %}
-
-{# {
-  question: 'Is anyone in your household currently on <span class="c-blue">Medicaid</span>?',
-  who: 'Who is on <span class="c-blue">Medicaid</span>?',
-  dataKey: 'benefitsMedicaid'
-},
-{
-  question: 'Is anyone currently on <span class="c-blue">disability related Medicaid</span>?',
-  who: 'Who is on <span class="c-blue">disability related Medicaid</span>?',
-  dataKey: 'benefitsMedicaidDisability'
-}, #}
 
 {% set studentOptions = {
   label: 'Student',
