@@ -6,6 +6,7 @@
  *
  */
 
+style();
 script('main');
 
 if ( ! class_exists( 'Timber' ) ) {

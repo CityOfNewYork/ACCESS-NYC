@@ -591,6 +591,31 @@ function script($name) {
 }
 
 /**
+ * Enqueue a hashed style based on it's name.
+ * @param  [string] $name the name of the stylesheet source
+ * @return null
+ */
+function style($name = "style") {
+  $languages = array('ar', 'ko', 'zh-hant');
+  $lang = ICL_LANGUAGE_CODE;
+  $dir = get_template_directory();
+
+  if (in_array($lang, $languages)) {
+    $name = "$name-$lang";
+  } else {
+    $name = "$name-base";
+  }
+
+  $files = array_filter(scandir($dir), function($var) use ($name) {
+    return (strpos($var, "$name-") !== false);
+  });
+
+  $hash = str_replace(array("$name-", '.css'), '', array_values($files)[0]);
+  $uri = get_template_directory_uri();
+  wp_enqueue_style($name, "$uri/$name-$hash.css", array(), null, 'all');
+}
+
+/**
  * Add expiry filter to post password tokens for one day
  */
 // apply_filters('post_password_expires', 0);
@@ -599,6 +624,7 @@ function script($name) {
  * Routes
  */
 Routes::map('locations', function() {
+  style();
   script('main');
   Routes::load('locations.php', null, null, 200);
 });
@@ -608,11 +634,13 @@ Routes::map('locations/json', function() {
 });
 
 Routes::map('eligibility', function() {
+  style();
   script('main');
   Routes::load('screener.php', null, null, 200);
 });
 
 Routes::map('eligibility/results', function() {
+  style();
   script('main');
   $params = array();
   $params['link'] = home_url().'/eligibility/results/';
@@ -621,12 +649,14 @@ Routes::map('eligibility/results', function() {
 
 Routes::map('peu', function() {
   authentication_redirect('peu');
+  style();
   script('main.field');
   Routes::load('screener-field.php', null, null, 200);
 });
 
 Routes::map('peu/results', function() {
   authentication_redirect('peu');
+  style();
   script('main.field');
   $params = array();
   $params['share_path'] = '/eligibility/results/';
@@ -638,6 +668,7 @@ Routes::map('peu/login', function() {
     wp_redirect('/peu');
     exit;
   }
+  style();
   script('main.field');
   Routes::load('screener-login.php', null, null, 200);
 });

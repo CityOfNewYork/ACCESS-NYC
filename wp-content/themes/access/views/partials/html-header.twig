@@ -21,6 +21,4 @@
 
 <link rel="icon" type="image/x-icon" href="{{theme.path}}/assets/favicon/favicon.ico">
 
-<link rel="stylesheet" href="{{theme.path}}/style{% if language_code == 'ar' or language_code == 'ko' or language_code == 'zh-hant' %}-{{ language_code }}{% endif %}.css{% if is_debug %}?v={{ date().timestamp }}{% endif %}" type="text/css">
-
 {{function('wp_head')}}

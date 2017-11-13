@@ -3,6 +3,7 @@
  * Template anem: Program detail page.
  */
 
+style();
 script('main');
 
 $context = Timber::get_context();

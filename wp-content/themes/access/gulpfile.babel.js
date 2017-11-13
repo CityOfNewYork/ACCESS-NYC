@@ -46,27 +46,9 @@ function handleError() {
 // BUILD SUBTASKS
 // ---------------
 // Styles
-gulp.task('styles_dev', () => {
-  return gulp.src([
-    `${src}/scss/style.scss`,
-    `${src}/scss/style-*.scss`
-  ])
-  .pipe($.sourcemaps.init())
-  .pipe($.sass({
-    includePaths: ['node_modules']
-      .concat(require('bourbon').includePaths)
-      .concat(require('bourbon-neat').includePaths)
-  })
-  .on('error', $.notify.onError())
-  .on('error', $.sass.logError))
-  .pipe($.autoprefixer('last 2 versions'))
-  .pipe($.sourcemaps.write('./'))
-  .pipe(gulp.dest('./'))
-});
-
 gulp.task('styles', () => {
   return gulp.src([
-    `${src}/scss/style.scss`,
+    `${src}/scss/style-latin.scss`,
     `${src}/scss/style-*.scss`
   ]).pipe($.jsonToSass({
     jsonPath: `${src}/variables.json`,
@@ -77,9 +59,12 @@ gulp.task('styles', () => {
     includePaths: ['node_modules']
       .concat(require('bourbon').includePaths)
       .concat(require('bourbon-neat').includePaths)
-  }).on('error', $.notify.onError()).on('error', $.sass.logError))
-  .pipe($.autoprefixer())
+  })
+  .on('error', $.notify.onError())
+  .on('error', $.sass.logError))
+  .pipe($.autoprefixer('last 2 versions'))
   .pipe($.cleanCss())
+  .pipe($.hashFilename())
   .pipe($.sourcemaps.write('./'))
   .pipe(gulp.dest('./'));
 });
@@ -136,10 +121,17 @@ gulp.task('scripts', () => {
 });
 
 
-// Clean
-gulp.task('clean', (callback) => {
+// Clean Scripts
+gulp.task('clean-scripts', (callback) => {
   del([`${dist}/js/*`], callback);
 });
+
+// Clean Styles
+gulp.task('clean-styles', (callback) => {
+  del(['style-*.css', 'style-*.css.map'], callback);
+});
+
+gulp.task('clean', ['clean-scripts', 'clean-styles']);
 
 
 // Images
@@ -190,10 +182,10 @@ gulp.task('default', ['build'], function() {
   });
 
   // Watch .scss files
-  gulp.watch(`${src}/scss/**/*.scss`, ['styles_dev', reload]);
+  gulp.watch(`${src}/scss/**/*.scss`, ['clean-styles', 'styles', reload]);
 
   // Watch .js files
-  gulp.watch(`${src}/js/**/*.js`, ['lint', 'clean', 'scripts', reload]);
+  gulp.watch(`${src}/js/**/*.js`, ['lint', 'clean-scripts', 'scripts', reload]);
 
   // Watch image files
   gulp.watch(`${src}/img/**/*`, ['images', reload]);
@@ -207,6 +199,4 @@ gulp.task('default', ['build'], function() {
 });
 
 // Build
-gulp.task('build', ['clean'], () => {
-  gulp.start('styles', 'lint', 'clean', 'scripts', 'svg-sprites');
-});
+gulp.task('build', ['clean', 'styles', 'lint', 'scripts', 'svg-sprites']);

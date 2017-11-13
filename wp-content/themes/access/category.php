@@ -7,6 +7,7 @@
  *
  */
 
+style();
 script('main');
 
 global $paged;

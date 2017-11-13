@@ -9,6 +9,7 @@
  * @since   Timber 0.1
  */
 
+style();
 script('main');
 
 $templates = array( 'search.twig', 'archive.twig', 'index.twig' );

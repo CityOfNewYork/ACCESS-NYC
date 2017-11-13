@@ -3,6 +3,7 @@
  * Template name: Location detail page.
 */
 
+style();
 script('main');
 
 if ( ! class_exists( 'Timber' ) ) {
