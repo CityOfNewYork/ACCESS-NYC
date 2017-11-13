@@ -390,10 +390,16 @@
             </div>
 
             <div>
+
+              <div class="d-flex jc-center" data-js="recaptcha"></div>
+
               <button type="button" class="{{ styles.confirm }}" data-js="submit" data-action="{{ formAction }}">
                 {{ __('Yes, continue to my results', translationID) }}
               </button>
+
             </div>
+
+
 
           </div>
 
@@ -527,14 +533,6 @@
     "label": {{ __('Head of the household', translationID)|trim|json_encode() }},
     "slug": "headOfHousehold"
   },
-  // {
-  //   "label": {{ __('Medicaid', translationID)|trim|json_encode() }},
-  //   "slug": "benefitsMedicaid"
-  // },
-  // {
-  //   "label": {{ __('Disability-related Medicaid', translationID)|trim|json_encode() }},
-  //   "slug": "benefitsMedicaidDisability"
-  // },
   {
     "label": {{ __('This entry must be a number between 1 and 8.', translationID)|trim|json_encode() }},
     "slug": "ERROR_HOUSEHOLD"

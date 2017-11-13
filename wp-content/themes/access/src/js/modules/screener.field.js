@@ -2,7 +2,7 @@
 'use strict';
 
 import $ from 'jquery';
-// import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
 import ScreenerClient from 'modules/screener-client';
@@ -143,7 +143,7 @@ class ScreenerField {
      * DOM Event Listeners
      */
 
-    let $el = $(this._el);
+    const $el = $(this._el);
 
     // Submit
     $el.on('click', ScreenerField.Selectors.SUBMIT, (event) => {
@@ -156,10 +156,6 @@ class ScreenerField {
     // Validate calculated input against regular expressions
     new CalcInput(this._el);
 
-    // Mask phone numbers
-    // $el.on('focus', 'input[type="tel"]',
-    //   (event) => Utility.maskPhone(event.target));
-
     // Routing
     window.addEventListener('hashchange', (event) => this._router(event));
 
@@ -168,10 +164,62 @@ class ScreenerField {
       this._routerQuestion(event);
     });
 
+    // View cookie
+    // Determine whether or not to initialize ReCAPTCHA. This should be
+    // initialized only on every 10th view which is determined via an
+    // incrementing cookie.
+    let viewCount = Cookies.get(ScreenerField.cookies.VIEWS) ?
+      parseInt(Cookies.get(ScreenerField.cookies.VIEWS), 10) : 1;
+
+    if (viewCount >= 10) {
+      this._initRecaptcha();
+      viewCount = 0;
+    }
+
+    // `2/1440` sets the cookie to expire after two minutes.
+    Cookies.set(ScreenerField.cookies.VIEWS, ++viewCount, {expires: (2/1440)});
+
     // Set the initial view
     this._routerPage('#page-admin');
 
     return this;
+  }
+
+  /**
+   * Asynchronously loads the Google recaptcha script and sets callbacks for
+   * load, success, and expiration.
+   */
+  _initRecaptcha() {
+    const script = $(document.createElement('script'));
+
+    script.attr('src',
+      'https://www.google.com/recaptcha/api.js' +
+      '?onload=screenerCallback&render=explicit').prop({
+        async: true,
+        defer: true
+      });
+
+    window.screenerCallback = () => {
+      window.grecaptcha.render(
+        document.querySelector(ScreenerField.Selectors.RECAPTCHA), {
+          'sitekey': Utility.CONFIG.GRECAPTCHA_SITE_KEY,
+          'callback': 'screenerRecaptcha',
+          'expired-callback': 'screenerRecaptchaReset'
+        });
+      this._recaptchaRequired = true;
+    };
+
+    window.screenerRecaptcha = () => {
+      this._recaptchaVerified = true;
+    };
+
+    window.screenerRecaptchaReset = () => {
+      this._recaptchaVerified = false;
+    };
+
+    this._recaptchaRequired = true;
+
+    $('head').append(script);
   }
 
   /**
@@ -992,6 +1040,7 @@ ScreenerField.personLabel = {
 ScreenerField.Selectors = {
   DOM: '[data-js="screener-field"]',
   PAGE: '[data-js="page"]',
+  RECAPTCHA: '[data-js="recaptcha"]',
   TOGGLE: '[data-js="toggle"]',
   TOGGLE_QUESTION: '[data-js="toggle-question"]',
   SUBMIT: '[data-js="submit"]',
@@ -1017,6 +1066,13 @@ ScreenerField.InputType = {
   BOOLEAN: 'boolean',
   FLOAT: 'float',
   INTEGER: 'integer'
+};
+
+/**
+ * Cookie references
+ */
+ScreenerField.cookies = {
+  VIEWS: 'access_nyc_field_screener_views'
 };
 
 /**
