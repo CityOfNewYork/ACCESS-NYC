@@ -30,9 +30,6 @@ class ScreenerField {
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
 
-    /** @private {boolean} Whether the google reCAPTCHA widget is required. */
-    // this._recaptchaRequired = false;
-
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = true;
 
@@ -58,11 +55,12 @@ class ScreenerField {
         }),
         client: new ScreenerClient(),
         staff: new ScreenerStaff(),
-        categories: [],
         /* UI Data */
+        /** @type {array} program categories to group results in */
+        categories: [],
         /** @type {array} */
         categoriesCurrent: [],
-        /** @type {array} */
+        /** @type {array} programs to filter out of results */
         programsFilter: [],
         /** @type {boolean} */
         disclaimer: false,
@@ -70,13 +68,13 @@ class ScreenerField {
         expenses: [],
         /** @type {Number} */
         income: 0,
-        /** @type {array} */
+        /** @type {array} grouped attrs for selection by getAttrs(recap page) */
         conditionAttrs: ScreenerPerson.CONDITION_ATTRS,
-        /** @type {Array} */
+        /** @type {Array} grouped attrs for selection by getAttrs(recap page) */
         benefitAttrs: ScreenerPerson.BENEFIT_ATTRS,
-        /** @type {Array} */
+        /** @type {Array} grouped attrs for selection by getAttrs(recap page) */
         livingAttrs: ScreenerHousehold.LIVING_ATTRS,
-        /** @type {Array} */
+        /** @type {Array} grouped attrs for selection by getAttrs(recap page) */
         addressAttrs: ScreenerClient.ADDRESS_ATTRS
       },
       methods: {
@@ -196,6 +194,10 @@ class ScreenerField {
    */
   _initRecaptcha() {
     const script = $(document.createElement('script'));
+
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug()) console.warn(`Recaptcah Initialized`);
+    /* eslint-enable no-console, no-debugger */
 
     script.attr('src',
       'https://www.google.com/recaptcha/api.js' +
