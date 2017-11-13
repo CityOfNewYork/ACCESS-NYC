@@ -21,16 +21,14 @@
             <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
               <input type="checkbox"
                 {% if category.code %}
-                value="{{ category.code }}"
-                data-object="programsFilter"
+                value="{{ category.code }}" data-object="programsFilter"
                 {% else %}
-                value="{{ category.value }}"
-                data-object="categoriesCurrent"
+                value="{{ category.value }}" data-object="categoriesCurrent"
                 {% endif %}
                 v-on:change="push">
               <span class="styled-checkbox-label">{{ __(category.text, translationID) }}</span>
             </label>
-            {% if category.value == 'disability' %}<hr class="screener-divider m-top m-bottom-3">{% endif %}
+            {% if category.value == 'cash-assistance' %}<hr class="screener-divider m-top m-bottom-3">{% endif %}
             {% endfor %}
           </div>
         </div>
