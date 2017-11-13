@@ -8,9 +8,9 @@
 
       <a class="{{styles.questions}}" data-js="question" href="#question-household-expenses">
         {{ __('Household Expenses', translationID) }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', translationID) }}"
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('HouseholdExpenses').length > 0">
-          <title>{{ __('Some required fields are not filled out', translationID) }}</title>
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>

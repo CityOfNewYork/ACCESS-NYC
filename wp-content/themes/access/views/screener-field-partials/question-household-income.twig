@@ -8,9 +8,9 @@
 
       <a class="{{styles.questions}}" data-js="question" href="#question-household-income">
         {{ __('Household Income', translationID) }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some required fields are not filled out', translationID) }}"
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('HouseholdIncome').length > 0">
-          <title>{{ __('Some required fields are not filled out', translationID) }}</title>
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
@@ -20,7 +20,7 @@
         <div>
           <label class="{{styles.labels}}">
             <span v-if="singleOccupant()">{{ __('Do you have an income?', translationID) }}</span>
-            <span v-else>{{ __('Do you and/or anyone in your household have income?', translationID) }}</span>
+            <span v-else>{{ __('Do you or does anyone in your household have income?', translationID) }}</span>
           </label>
           <div class="screener-radio-buttons">
             <label class="screener-radio screener-label">
