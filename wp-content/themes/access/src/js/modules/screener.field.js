@@ -31,10 +31,10 @@ class ScreenerField {
     this._initialized = false;
 
     /** @private {boolean} Whether the google reCAPTCHA widget is required. */
-    this._recaptchaRequired = false;
+    // this._recaptchaRequired = false;
 
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
-    this._recaptchaVerified = false;
+    this._recaptchaVerified = true;
 
     /** @private {object} The screener routes and event hooks */
     this._routes = {
@@ -147,7 +147,7 @@ class ScreenerField {
 
     // Submit
     $el.on('click', ScreenerField.Selectors.SUBMIT, (event) => {
-      this._submit(event);
+      if (this._recaptchaVerified) this._submit(event);
     });
 
     // Basic toggles
@@ -156,18 +156,12 @@ class ScreenerField {
     // Validate calculated input against regular expressions
     new CalcInput(this._el);
 
-    // Routing
-    window.addEventListener('hashchange', (event) => this._router(event));
+    /**
+     * Determine whether or not to initialize ReCAPTCHA. This should be
+     * initialized only on every 10th view which is determined via an
+     * incrementing cookie.
+     */
 
-    // Close Questions
-    $el.on('click', ScreenerField.Selectors.QUESTION, (event) => {
-      this._routerQuestion(event);
-    });
-
-    // View cookie
-    // Determine whether or not to initialize ReCAPTCHA. This should be
-    // initialized only on every 10th view which is determined via an
-    // incrementing cookie.
     let viewCount = Cookies.get(ScreenerField.cookies.VIEWS) ?
       parseInt(Cookies.get(ScreenerField.cookies.VIEWS), 10) : 1;
 
@@ -178,6 +172,17 @@ class ScreenerField {
 
     // `2/1440` sets the cookie to expire after two minutes.
     Cookies.set(ScreenerField.cookies.VIEWS, ++viewCount, {expires: (2/1440)});
+
+    /**
+     * Routing
+     */
+
+    window.addEventListener('hashchange', (event) => this._router(event));
+
+    // Close Questions
+    $el.on('click', ScreenerField.Selectors.QUESTION, (event) => {
+      this._routerQuestion(event);
+    });
 
     // Set the initial view
     this._routerPage('#page-admin');
@@ -206,7 +211,6 @@ class ScreenerField {
           'callback': 'screenerRecaptcha',
           'expired-callback': 'screenerRecaptchaReset'
         });
-      this._recaptchaRequired = true;
     };
 
     window.screenerRecaptcha = () => {
@@ -217,7 +221,7 @@ class ScreenerField {
       this._recaptchaVerified = false;
     };
 
-    this._recaptchaRequired = true;
+    this._recaptchaVerified = false;
 
     $('head').append(script);
   }
