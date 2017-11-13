@@ -21,6 +21,8 @@ import buffer from 'vinyl-buffer';
 import sourcestream from 'vinyl-source-stream';
 import es from 'event-stream';
 import p from './package.json';
+import envify from 'envify/custom';
+
 
 const $ = gulpLoadPlugins();
 const reload = function() {
@@ -106,18 +108,19 @@ gulp.task('scripts', () => {
   let tasks = apps.map(function(entry) {
     const b = browserify({
       entries: [`${src}/js/${entry}.js`],
-      debug: true,
+      debug: false,
       paths: ['node_modules',`${src}/js`]
     });
     return b.transform('babelify', {
       presets: ['es2015']
-    })
-    .bundle()
+    }).transform(
+      // Required in order to process node_modules files
+      { global: true },
+      envify({ NODE_ENV: 'production' })
+    ).bundle()
     .pipe(sourcestream(`${entry}.js`))
     .pipe(buffer())
     .pipe($.hashFilename())
-    // .pipe($.sourcemaps.init({loadMaps: true}))
-    // .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(`${dist}/js`))
     .pipe($.uglify())
     .pipe($.rename((path)=>{
@@ -129,7 +132,6 @@ gulp.task('scripts', () => {
     }))
     .pipe(gulp.dest(`${dist}/js`));
   });
-  // console.dir($);
   return es.merge.apply(null, tasks);
 });
 
