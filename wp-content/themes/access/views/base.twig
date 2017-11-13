@@ -10,7 +10,10 @@
   <head>
     {% block html_head_container %}
       {% include 'partials/html-header.twig' %}
-      {% block head %}{% endblock %}
+      {% block head %}
+      <meta name="theme-color" content="#FFFFFF">
+      <link rel="manifest" href="{{theme.path}}/manifest.json">
+      {% endblock %}
     {% endblock %}
   </head>
   <body data-template="base.twig"{% set _bodyClass = block('body_class') %}{% if _bodyClass %} class="{{ _bodyClass|trim }}"{% endif %}>

@@ -1,0 +1,10 @@
+{
+  "name": "ACCESS NYC",
+  "short_name": "ACCESS NYC",
+  "display": "standalone",
+  "theme_color": "#112E51",
+  "background_color": "#FFFFFF",
+  "orientation": "any",
+  "start_url": "/peu/login",
+  "scope": "/peu"
+}
