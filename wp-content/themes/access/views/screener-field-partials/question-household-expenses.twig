@@ -61,7 +61,7 @@
                     v{ errors.first('HouseholdExpenses.Person[0].expenses[' + expenseIndex + '].amount') }
                 </div>
                 <div class="currency-usd m-0">
-                  <input type="text" pattern="\d*" required
+                  <input type="text" pattern="^([0-9]{1,6})(\.[0-9]{0,2})?$" required
                     data-type="float"
                     data-vv-scope="HouseholdExpenses"
                     data-vv-as="{{ __('expense amount', translationID) }}"
