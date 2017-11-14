@@ -21,6 +21,8 @@
           <label class="{{styles.labels}}">
             {{ __('Including you, how many people are in your household?', translationID) }}
           </label>
+          <p>{{ __('This is usually family members who you both live with and share important resources like food and bills. Only count your roommates if you often buy and prepare food together.', translationID) }}</p>
+          <label class="type-h4 c-black d-inline-block m-bottom">Number of People (max. 8)</label>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('HouseholdInformation.Household.members')}">
             <div class="error-message"
