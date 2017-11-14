@@ -3,6 +3,8 @@
  */
 @import 'bourbon';
 @import 'neat';
+@import 'functions/rem'; // Deprecated function overide
+@import 'functions/strip-units'; // Deprecated function overide
 @import 'normalize.scss/normalize';
 @import 'uswds/src/stylesheets/core/variables';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
@@ -11,7 +13,7 @@
 /**
  * General Settings
  */
-@import '../_variables.json.scss';
+@import 'variables-json.scss';
 @import 'core/variables';
 @import 'core/fonts';
 @import 'core/animate';

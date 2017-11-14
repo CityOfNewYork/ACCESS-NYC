@@ -603,7 +603,7 @@ function style($name = "style") {
   if (in_array($lang, $languages)) {
     $name = "$name-$lang";
   } else {
-    $name = "$name-base";
+    $name = "$name-default";
   }
 
   $files = array_filter(scandir($dir), function($var) use ($name) {

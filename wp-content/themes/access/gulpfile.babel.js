@@ -1,5 +1,6 @@
 // WordPress Starterkit Gulpfile
 // (c) Blue State Digital
+// Maintained by NYC Opportunity
 
 // TASKS
 // ------
@@ -22,6 +23,8 @@ import sourcestream from 'vinyl-source-stream';
 import es from 'event-stream';
 import p from './package.json';
 import envify from 'envify/custom';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
 
 const $ = gulpLoadPlugins();
@@ -47,12 +50,16 @@ function handleError() {
 // ---------------
 // Styles
 gulp.task('styles', () => {
+  let plugins = [
+    autoprefixer('last 2 versions'),
+    cssnano()
+  ];
   return gulp.src([
     `${src}/scss/style-latin.scss`,
     `${src}/scss/style-*.scss`
   ]).pipe($.jsonToSass({
     jsonPath: `${src}/variables.json`,
-    scssPath: `${src}/_variables.json.scss`
+    scssPath: `${src}/scss/_variables-json.scss`
   }))
   .pipe($.sourcemaps.init())
   .pipe($.sass({
@@ -62,8 +69,7 @@ gulp.task('styles', () => {
   })
   .on('error', $.notify.onError())
   .on('error', $.sass.logError))
-  .pipe($.autoprefixer('last 2 versions'))
-  .pipe($.cleanCss())
+  .pipe($.postcss(plugins))
   .pipe($.hashFilename())
   .pipe($.sourcemaps.write('./'))
   .pipe(gulp.dest('./'));
@@ -122,16 +128,16 @@ gulp.task('scripts', () => {
 
 
 // Clean Scripts
-gulp.task('clean-scripts', (callback) => {
+gulp.task('clean (scripts)', (callback) => {
   del([`${dist}/js/*`], callback);
 });
 
 // Clean Styles
-gulp.task('clean-styles', (callback) => {
+gulp.task('clean (styles)', (callback) => {
   del(['style-*.css', 'style-*.css.map'], callback);
 });
 
-gulp.task('clean', ['clean-scripts', 'clean-styles']);
+gulp.task('clean', ['clean (scripts)', 'clean (styles)']);
 
 
 // Images
@@ -182,10 +188,10 @@ gulp.task('default', ['build'], function() {
   });
 
   // Watch .scss files
-  gulp.watch(`${src}/scss/**/*.scss`, ['clean-styles', 'styles', reload]);
+  gulp.watch(`${src}/scss/**/*.scss`, ['clean (styles)', 'styles', reload]);
 
   // Watch .js files
-  gulp.watch(`${src}/js/**/*.js`, ['lint', 'clean-scripts', 'scripts', reload]);
+  gulp.watch(`${src}/js/**/*.js`, ['lint', 'clean (scripts)', 'scripts', reload]);
 
   // Watch image files
   gulp.watch(`${src}/img/**/*`, ['images', reload]);
