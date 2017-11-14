@@ -46,7 +46,6 @@
             {{ __('Are you the head of household?', translationID) }}
           </label>
 
-          <h4 class="{{styles.explainations}}">{{ __('What does the head of household mean?', translationID) }}</h4>
           <p>{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', translationID) }}</p>
           <div class="screener-question-container"
             v-bind:class="{'error': errors.has('Person[0].headOfHousehold', 'HeadOfHousehold')}">
