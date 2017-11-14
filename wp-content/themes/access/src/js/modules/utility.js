@@ -225,7 +225,7 @@ Utility.CONFIG = {
   DEFAULT_LNG: -74.0059,
   GOOGLE_API: 'AIzaSyBSjc_JN_p0-_VKyBvjCFqVAmAIWt7ClZc',
   GOOGLE_STATIC_API: 'AIzaSyCt0E7DX_YPFcUnlMP6WHv2zqAwyZE4qIw',
-  GRECAPTCHA_SITE_KEY: '6LeynBUUAAAAANwskTW2UIcektRiaySqLFFwwk48',
+  GRECAPTCHA_SITE_KEY: '6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX',
   SCREENER_MAX_HOUSEHOLD: 8,
   URL_PIN_BLUE: '/wp-content/themes/access/assets/img/map-pin-blue.png',
   URL_PIN_BLUE_2X: '/wp-content/themes/access/assets/img/map-pin-blue-2x.png',
