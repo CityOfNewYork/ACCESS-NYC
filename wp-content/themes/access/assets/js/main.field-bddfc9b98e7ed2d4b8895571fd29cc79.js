@@ -31317,7 +31317,10 @@ ScreenerField.getTypedVal = function (input) {
   return finalVal;
 };
 
-
+/**
+    * Use the model's commit method to save itself to local storage.
+    * @param  {object} event - the change event of the input
+    */
 ScreenerField.commit = function (event) {
   var obj = event.target.dataset.object;
   this[obj].commit();
