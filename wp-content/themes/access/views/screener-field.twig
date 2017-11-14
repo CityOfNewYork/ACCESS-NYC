@@ -395,9 +395,12 @@
 
               <div class="d-flex jc-center" data-js="recaptcha"></div>
 
-              <button type="button" class="{{ styles.confirm }}" data-js="submit" data-action="{{ formAction }}">
+              <button type="button" class="{{ styles.confirm }}" data-js="submit" data-action="{{ formAction }}" v-if="!submitting">
                 {{ __('Yes, continue to my results', translationID) }}
               </button>
+              <div v-else class="d-flex jc-center">
+                {% include 'partials/spinner.twig' %}
+              </div>
 
             </div>
 

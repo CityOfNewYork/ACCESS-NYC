@@ -30391,6 +30391,8 @@ ScreenerField = function () {
         programsFilter: [],
         /** @type {boolean} */
         disclaimer: false,
+        /** @type {Boolean} */
+        submitting: false,
         /** @type {array} */
         expenses: [],
         /** @type {Number} */
@@ -30795,6 +30797,8 @@ ScreenerField = function () {
       var url = event.target.dataset.action;
       var json = this._getDroolsJSON(this._vue);
 
+      this._vue.submitting = true;
+
       /* eslint-disable no-console, no-debugger */
       if (_utility2.default.debug()) {
         console.warn(json);
@@ -30822,6 +30826,7 @@ ScreenerField = function () {
             debugger;
           }
           alert('There was an error getting results. Please try again later.');
+          _this4._vue.submitting = false;
           return;
         }
 

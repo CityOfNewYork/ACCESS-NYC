@@ -64,6 +64,8 @@ class ScreenerField {
         programsFilter: [],
         /** @type {boolean} */
         disclaimer: false,
+        /** @type {Boolean} */
+        submitting: false,
         /** @type {array} */
         expenses: [],
         /** @type {Number} */
@@ -468,6 +470,8 @@ class ScreenerField {
     let url = event.target.dataset.action;
     let json = this._getDroolsJSON(this._vue);
 
+    this._vue.submitting = true;
+
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) {
       console.warn(json);
@@ -495,6 +499,7 @@ class ScreenerField {
           debugger;
         }
         alert('There was an error getting results. Please try again later.');
+        this._vue.submitting = false;
         return;
       }
 
