@@ -2,7 +2,6 @@
 'use strict';
 
 import _ from 'underscore';
-import Cookies from 'js-cookie';
 
 /**
  * This component is the object class for screener individuals.
