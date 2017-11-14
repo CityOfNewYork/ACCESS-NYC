@@ -30194,12 +30194,13 @@ ScreenerPerson;
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
-var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);
+var _jsCookie = require('js-cookie');var _jsCookie2 = _interopRequireDefault(_jsCookie);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
 
 /**
-                                                                                                                                                                                                                                                                                                                                                   * This component is the object class for screener individuals.
-                                                                                                                                                                                                                                                                                                                                                   * @class
-                                                                                                                                                                                                                                                                                                                                                   */var
+                                                                                                                                                                                                                                                                                                                                            * This component is the object class for screener individuals.
+                                                                                                                                                                                                                                                                                                                                            * @class
+                                                                                                                                                                                                                                                                                                                                            */var
 ScreenerStaff = function () {
   /**
                               * @param {?object} obj - initial attributes to set.
@@ -30217,9 +30218,12 @@ ScreenerStaff = function () {
       /** @type {string} */
       screenerLocation: '' };
 
+
     if (obj) {
       this.set(obj);
     }
+
+    this.fetch();
   }
 
   /**
@@ -30275,19 +30279,53 @@ ScreenerStaff = function () {
        */ }, { key: 'toObject', value: function toObject()
     {
       return this._attrs;
+    }
+
+    /**
+       * Save the object as a cookie in the browser
+       */ }, { key: 'commit', value: function commit()
+    {
+      window.sessionStorage.setItem(
+      ScreenerStaff.Cookies.STAFF,
+      JSON.stringify(this.toObject()));
+
+    }
+
+    /**
+       * Fetch the object the object from the browser if it exists
+       */ }, { key: 'fetch', value: function fetch()
+    {
+      var storage = window.sessionStorage;
+      var key = ScreenerStaff.Cookies.STAFF;
+      var staff = storage.getItem(key) ?
+      JSON.parse(storage.getItem(key)) : false;
+      if (staff) {
+        this.set(staff);
+      }
     } }]);return ScreenerStaff;}();
 
 
+/**
+                                     * Options for locations
+                                     * @type {Array}
+                                     */
 ScreenerStaff.LOCATION = [
 'community event',
 'phone call',
 'door knock',
-'partner referral'];exports.default =
+'partner referral'];
+
+
+/**
+                      * Cookie references
+                      */
+ScreenerStaff.Cookies = {
+  STAFF: 'access_nyc_staff' };exports.default =
 
 
 ScreenerStaff;
 
-},{"underscore":6}],16:[function(require,module,exports){
+},{"js-cookie":4,"underscore":6}],16:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -30384,6 +30422,7 @@ ScreenerField = function () {
         validate: ScreenerField.validate,
         localString: ScreenerField.localString,
         getTypedVal: ScreenerField.getTypedVal,
+        commit: ScreenerField.commit,
         filterDollars: ScreenerField.filterDollars,
         filterPhone: ScreenerField.filterPhone } };
 
@@ -31277,6 +31316,12 @@ ScreenerField.getTypedVal = function (input) {
       }}
 
   return finalVal;
+};
+
+
+ScreenerField.commit = function (event) {
+  var obj = event.target.dataset.object;
+  this[obj].commit();
 };
 
 /**

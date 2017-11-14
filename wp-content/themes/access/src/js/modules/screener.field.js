@@ -94,6 +94,7 @@ class ScreenerField {
         validate: ScreenerField.validate,
         localString: ScreenerField.localString,
         getTypedVal: ScreenerField.getTypedVal,
+        commit: ScreenerField.commit,
         filterDollars: ScreenerField.filterDollars,
         filterPhone: ScreenerField.filterPhone
       }
@@ -987,6 +988,12 @@ ScreenerField.getTypedVal = function(input) {
     }
   }
   return finalVal;
+};
+
+
+ScreenerField.commit = function(event) {
+  let obj = event.target.dataset.object;
+  this[obj].commit();
 };
 
 /**

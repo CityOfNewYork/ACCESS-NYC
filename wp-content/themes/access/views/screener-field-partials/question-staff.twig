@@ -28,8 +28,10 @@
             <input id="staff-first-name" name="Staff.firstName" value="" required
               data-vv-as="staff's first name"
               data-vv-scope="Staff"
+              data-object="staff"
               v-validate="{required: true}"
-              v-model="staff._attrs.firstName">
+              v-bind:value="staff._attrs.firstName"
+              v-on:change="staff._attrs.firstName = $event.target.value; commit($event)">
           </div>
         </div>
 
@@ -44,8 +46,10 @@
             <input id="staff-last-name" name="Staff.lastName" value="" required
               data-vv-as="staff's last name"
               data-vv-scope="Staff"
+              data-object="staff"
               v-validate="{required: true}"
-              v-model="staff._attrs.lastName">
+              v-bind:value="staff._attrs.lastName"
+              v-on:change="staff._attrs.lastName = $event.target.value; commit($event)">
           </div>
         </div>
 
@@ -60,8 +64,10 @@
             <input class="w-input-double" id="staff-email" name="Staff.email" value="" type="email" required
               data-vv-as="staff email"
               data-vv-scope="Staff"
+              data-object="staff"
               v-validate="{required: true, email: true}"
-              v-model="staff._attrs.email">
+              v-bind:value="staff._attrs.email"
+              v-on:change="staff._attrs.email = $event.target.value; commit($event)">
           </div>
         </div>
 
@@ -70,7 +76,9 @@
             {{ __('Screener Location', translationID) }}
           </label>
           <select id="staff-screener-location" name="Staff.screenerLocation" value=""
-            v-model="staff._attrs.screenerLocation">
+            data-object="staff"
+            v-bind:value="staff._attrs.screenerLocation"
+            v-on:change="staff._attrs.screenerLocation = $event.target.value; commit($event)">
             {% for location in screenerLocations %}
             <option value="{{ location.value }}">{{ __(location.text, translationID) }}</option>
             {% endfor %}

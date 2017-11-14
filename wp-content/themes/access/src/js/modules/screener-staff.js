@@ -2,6 +2,7 @@
 'use strict';
 
 import _ from 'underscore';
+import Cookies from 'js-cookie';
 
 /**
  * This component is the object class for screener individuals.
@@ -24,9 +25,12 @@ class ScreenerStaff {
       /** @type {string} */
       screenerLocation: ''
     };
+
     if (obj) {
       this.set(obj);
     }
+
+    this.fetch();
   }
 
   /**
@@ -83,13 +87,47 @@ class ScreenerStaff {
   toObject() {
     return this._attrs;
   }
+
+  /**
+   * Save the object as a cookie in the browser
+   */
+  commit() {
+    window.sessionStorage.setItem(
+      ScreenerStaff.Cookies.STAFF,
+      JSON.stringify(this.toObject())
+    );
+  }
+
+  /**
+   * Fetch the object the object from the browser if it exists
+   */
+  fetch() {
+    const storage = window.sessionStorage;
+    const key = ScreenerStaff.Cookies.STAFF;
+    const staff = storage.getItem(key) ?
+      JSON.parse(storage.getItem(key)) : false;
+    if (staff) {
+      this.set(staff);
+    }
+  }
 }
 
+/**
+ * Options for locations
+ * @type {Array}
+ */
 ScreenerStaff.LOCATION = [
   'community event',
   'phone call',
   'door knock',
   'partner referral'
 ];
+
+/**
+ * Cookie references
+ */
+ScreenerStaff.Cookies = {
+  STAFF: 'access_nyc_staff'
+};
 
 export default ScreenerStaff;
