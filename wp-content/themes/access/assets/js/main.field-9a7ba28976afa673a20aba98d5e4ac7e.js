@@ -29271,7 +29271,7 @@ CalcInput = function () {
   function CalcInput(element) {var _this = this;_classCallCheck(this, CalcInput);
     this.selector = '[data-js*="calc-input"]';
 
-    this.events = 'keydown paste drop';
+    this.events = 'keypress paste drop';
 
     (0, _jquery2.default)(element).on(this.events, this.selector, function (event) {
       _this.bus(event);
@@ -29302,7 +29302,16 @@ CalcInput = function () {
       } else if (event.type === 'paste') {
         this._calc(event.originalEvent.clipboardData.getData('text'), event);
       } else if (!this._isPaste(key) || !this._isCopy(key)) {
-        this._calc(event.key, event);
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug())
+        console.dir({
+          'charCode': event.charCode,
+          'fromCharCode': String.fromCharCode(event.charCode),
+          'event': event });
+
+        /* eslint-enable no-console, no-debugger */
+        this._calc(String.fromCharCode(event.charCode), event);
+        // this._calc(event.key, event);
       }
       // store previous key for keyboard combination (paste) detection.
       window[CalcInput.PREVIOUS_KEY] = key;
@@ -29365,23 +29374,23 @@ CalcInput = function () {
        * @param  {object} event The original event
        */ }, { key: '_testCalc', value: function _testCalc(
     calc, event) {
-      /* eslint-disable no-console, no-debugger */
       try {
         var r = new RegExp(event.currentTarget.dataset.jsRegex, 'g');
         /* eslint-disable no-console, no-debugger */
         if (_utility2.default.debug()) console.log('CalcInput: ' + r);
-        /* eslint-enable no-console, no-debugger */
         var found = calc.match(r);
         if (found.length && _utility2.default.debug()) {
           console.log('CalcInput: Passed!');
         }
+        /* eslint-enable no-console, no-debugger */
       } catch (error) {
         event.preventDefault(); // stop input
+        /* eslint-disable no-console, no-debugger */
         if (_utility2.default.debug()) {
           console.warn('CalcInput: Blocked. Input will not match valid format');
         }
+        /* eslint-enable no-console, no-debugger */
       }
-      /* eslint-enable no-console, no-debugger */
     } }]);return CalcInput;}();
 
 
@@ -32935,6 +32944,9 @@ ShareForm = function () {
           });
         } else {
           _this4._showError(ShareForm.Message.SERVER);
+          /* eslint-disable no-console, no-debugger */
+          if (_utility2.default.debug()) console.error(response);
+          /* eslint-enable no-console, no-debugger */
         }
       }).fail(function (response) {
         _this4._showError(ShareForm.Message.SERVER);

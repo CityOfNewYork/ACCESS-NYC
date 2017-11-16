@@ -189,6 +189,9 @@ class ShareForm {
         });
       } else {
         this._showError(ShareForm.Message.SERVER);
+        /* eslint-disable no-console, no-debugger */
+        if (Utility.debug()) console.error(response);
+        /* eslint-enable no-console, no-debugger */
       }
     }).fail((response) => {
       this._showError(ShareForm.Message.SERVER);

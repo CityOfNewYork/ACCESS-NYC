@@ -14934,6 +14934,9 @@ ShareForm = function () {
           });
         } else {
           _this4._showError(ShareForm.Message.SERVER);
+          /* eslint-disable no-console, no-debugger */
+          if (_utility2.default.debug()) console.error(response);
+          /* eslint-enable no-console, no-debugger */
         }
       }).fail(function (response) {
         _this4._showError(ShareForm.Message.SERVER);

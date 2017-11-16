@@ -16,7 +16,7 @@ class CalcInput {
   constructor(element) {
     this.selector = '[data-js*="calc-input"]';
 
-    this.events = 'keydown paste drop';
+    this.events = 'keypress paste drop';
 
     $(element).on(this.events, this.selector, (event) => {
       this.bus(event);
@@ -47,7 +47,16 @@ class CalcInput {
     } else if (event.type === 'paste') {
       this._calc(event.originalEvent.clipboardData.getData('text'), event);
     } else if (!this._isPaste(key) || !this._isCopy(key)) {
-      this._calc(event.key, event);
+      /* eslint-disable no-console, no-debugger */
+      if (Utility.debug())
+        console.dir({
+          'charCode': event.charCode,
+          'fromCharCode': String.fromCharCode(event.charCode),
+          'event': event
+        });
+      /* eslint-enable no-console, no-debugger */
+      this._calc(String.fromCharCode(event.charCode), event);
+      // this._calc(event.key, event);
     }
     // store previous key for keyboard combination (paste) detection.
     window[CalcInput.PREVIOUS_KEY] = key;
@@ -110,23 +119,23 @@ class CalcInput {
    * @param  {object} event The original event
    */
   _testCalc(calc, event) {
-    /* eslint-disable no-console, no-debugger */
     try {
       const r = new RegExp(event.currentTarget.dataset.jsRegex, 'g');
       /* eslint-disable no-console, no-debugger */
       if (Utility.debug()) console.log(`CalcInput: ${r}`);
-      /* eslint-enable no-console, no-debugger */
       const found = calc.match(r);
       if (found.length && Utility.debug()) {
         console.log('CalcInput: Passed!');
       }
+      /* eslint-enable no-console, no-debugger */
     } catch (error) {
       event.preventDefault(); // stop input
+      /* eslint-disable no-console, no-debugger */
       if (Utility.debug()) {
         console.warn('CalcInput: Blocked. Input will not match valid format');
       }
+      /* eslint-enable no-console, no-debugger */
     }
-    /* eslint-enable no-console, no-debugger */
   }
 
 }
