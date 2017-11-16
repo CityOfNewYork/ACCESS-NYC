@@ -497,25 +497,25 @@ function share_data($params) {
   $data = array();
 
   // Gets the URL Parameters for the search value,
-  if ($params['programs']) {
+  if (isset($params['programs'])) {
     $query['programs'] = validate_params(
       'programs', urldecode(htmlspecialchars($params['programs']))
     );
   }
 
-  if ($params['categories']) {
+  if (isset($params['categories'])) {
     $query['categories'] = validate_params(
       'categories', urldecode(htmlspecialchars($params['categories']))
     );
   }
 
-  if ($params['date']) {
+  if (isset($params['date'])) {
     $query['date'] = validate_params(
       'date', urldecode(htmlspecialchars($params['date']))
     );
   }
 
-  if ($params['guid']) {
+  if (isset($params['guid'])) {
     $query['guid'] = validate_params(
       'guid', urldecode(htmlspecialchars($params['guid']))
     );

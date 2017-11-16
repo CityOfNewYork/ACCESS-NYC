@@ -10,10 +10,14 @@ $shareData = share_data($get);
 $context['action'] = admin_url('admin-ajax.php');
 $context['url'] = $shareData['url'];
 $context['hash'] = $shareData['hash'];
-$context['guid'] = $shareData['query']['guid'];
+$context['guid'] = (isset($shareData['query']['guid'])) ?
+  $shareData['query']['guid'] : '';
 
-$categories = explode(',', $shareData['query']['categories']);
-$programs = explode(',', $shareData['query']['programs']);
+$categories = (isset($shareData['query']['categories'])) ?
+  explode(',', $shareData['query']['categories']) : '';
+
+$programs = (isset($shareData['query']['programs'])) ?
+  explode(',', $shareData['query']['programs']) : '';
 
 $selectedProgramArgs = array(
   'post_type' => 'programs',
