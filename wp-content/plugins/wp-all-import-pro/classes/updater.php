@@ -48,7 +48,7 @@ if( ! class_exists('PMXI_Updater') ) {
             add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_update' ), 20 );
             add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );            
             
-            add_action( 'after_plugin_row_' . $this->name, array( $this, 'show_update_notification' ), 10, 2 );
+            add_action( 'after_plugin_row_' . $this->name, array( $this, 'show_update_notification' ), 11, 2 );
             add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
         }
 
@@ -124,12 +124,13 @@ if( ! class_exists('PMXI_Updater') ) {
 
                     if( false === $version_info ) {
                         $version_info = $this->api_request( 'check_update', array( 'slug' => $this->slug ) );
+
                         $transient_result = set_transient( $cache_key, $version_info, 3600 );
 
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . $cache_key) );
                                          
-                        $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", maybe_serialize( $version_info ), $this->slug . '_' . $cache_key) );                        
+                        $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name, autoload ) VALUES ( %s, %s, 'no' )", maybe_serialize( $version_info ), $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", strtotime("+1 hour"), $this->slug . '_timeout_' . $cache_key) );
                         
                     }
@@ -145,7 +146,7 @@ if( ! class_exists('PMXI_Updater') ) {
 
                     if( version_compare( $this->version, $version_info->new_version, '<' ) ) {
 
-                        $_transient_data->response[ $this->name ] = $version_info;                        
+                        $_transient_data->response[ $this->name ] = $version_info;
 
                     }
 
@@ -168,10 +169,6 @@ if( ! class_exists('PMXI_Updater') ) {
         public function show_update_notification( $file, $plugin ) {
 
             if( ! current_user_can( 'update_plugins' ) ) {
-                return;
-            }
-
-            if( ! is_multisite() ) {
                 return;
             }
 
@@ -217,7 +214,7 @@ if( ! class_exists('PMXI_Updater') ) {
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . $cache_key) );
                                          
-                        $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", maybe_serialize( $version_info ), $this->slug . '_' . $cache_key) );                        
+                        $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name, autoload ) VALUES ( %s, %s, 'no' )", maybe_serialize( $version_info ), $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", strtotime("+1 hour"), $this->slug . '_timeout_' . $cache_key) );                       
                         
                     }
@@ -248,33 +245,79 @@ if( ! class_exists('PMXI_Updater') ) {
             // Restore our filter
             add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_update' ), 20 );
 
+            $plugin_title       = $plugin['Name'];
+            $plugin_slug        = sanitize_title( $plugin_title );
+            $active             = is_plugin_active( $file ) ? 'active' : '';
+            $shiny_updates      = version_compare( get_bloginfo( 'version' ), '4.6-beta1-37926', '>=' );
+            $update_msg_classes = $shiny_updates ? 'notice inline notice-warning notice-alt' : 'pre-shiny-updates';
+            $new_version = '';
+
             if ( ! empty( $update_cache->response[ $this->name ] ) && version_compare( $this->version, $version_info->new_version, '<' ) ) {
 
                 // build a plugin list row, with update notification
-                $wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
-                echo '<tr class="plugin-update-tr"><td colspan="' . $wp_list_table->get_column_count() . '" class="plugin-update colspanchange"><div class="update-message">';
-
-                $changelog_link = self_admin_url( 'index.php?edd_sl_action=view_plugin_changelog&plugin=' . $this->name . '&slug=' . $this->slug . '&TB_iframe=true&width=772&height=911' );
-
+                $changelog_link = self_admin_url('plugin-install.php?tab=plugin-information&plugin='. $this->slug .'&section=changelog&TB_iframe=true&width=772&height=412');
                 if ( empty( $version_info->download_link ) ) {
-                    printf(
-                        __( 'There is a new version of %1$s available. <a target="_blank" class="thickbox" href="%2$s">View version %3$s details</a>.', 'edd' ),
-                        esc_html( $version_info->name ),
-                        esc_url( $changelog_link ),
-                        esc_html( $version_info->new_version )
-                    );
+                    if ($shiny_updates) $update_msg_classes .= ' post-shiny-updates';
+                    $new_version = "<span class=\"wp-all-import-pro-new-version-notice\">" . sprintf(
+                        __( 'A new version of WP All Import Pro available. <strong>A valid license is required to enable updates - enter your license key on the <a href="%1$s">Licenses</a> page.</strong>', 'wp_all_import_plugin' ),
+                        esc_url(admin_url('admin.php?page=pmxi-admin-settings'))
+                    ) . "</span>";
+                    $new_version .= "<span class=\"wp-all-import-pro-licence-error-notice\">" . sprintf(
+                        __( 'If you don\'t have a licence key, please see <a href="%1$s" target="_blank">details & pricing</a>. If you do have a licence key, you can access it at the <a href="%2$s" target="_blank">customer portal</a>.', 'wp_all_import_plugin'),
+                        esc_url( 'http://www.wpallimport.com/order-now/' ),
+                        esc_url( 'http://www.wpallimport.com/portal/' )
+                    ) . "</span>";
                 } else {
-                    printf(
-                        __( 'There is a new version of %1$s available. <a target="_blank" class="thickbox" href="%2$s">View version %3$s details</a> or <a href="%4$s">update now</a>.', 'edd' ),
-                        esc_html( $version_info->name ),
+                    $new_version = "<span class=\"wp-all-import-pro-new-version-notice\">" . sprintf(
+                        __( 'There is a new version of WP All Import Pro available. <a target="_blank" class="thickbox" href="%1$s">View version %2$s details</a> or <a href="%3$s" class="update-link">update now</a>.', 'wp_all_import_plugin' ),
                         esc_url( $changelog_link ),
                         esc_html( $version_info->new_version ),
                         esc_url( wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $this->name, 'upgrade-plugin_' . $this->name ) )
-                    );
+                    ) . "</span>";
                 }
-
-                echo '</div></td></tr>';
             }
+
+            if ( empty($new_version) ) {
+                return;
+            }
+
+            ?>
+            <tr class="plugin-update-tr <?php echo $active; ?> wp-all-import-pro-custom">
+                <td colspan="3" class="plugin-update">
+                    <div class="update-message <?php echo $update_msg_classes; ?>">
+                        <p>
+                            <?php echo $new_version; ?>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <?php if ( $new_version ) { // removes the built-in plugin update message ?>
+                <script type="text/javascript">
+                    (function( $ ) {
+                        var wp_all_import_row = jQuery( '[data-slug=<?php echo $plugin_slug; ?>]:first' );
+
+                        // Fallback for earlier versions of WordPress.
+                        if ( ! wp_all_import_row.length ) {
+                            wp_all_import_row = jQuery( '#<?php echo $plugin_slug; ?>' );
+                        }
+
+                        var next_row = wp_all_import_row.next();
+
+                        // If there's a plugin update row - need to keep the original update row available so we can switch it out
+                        // if the user has a successful response from the 'check my license again' link
+                        if ( next_row.hasClass( 'plugin-update-tr' ) && !next_row.hasClass( 'wp-all-import-pro-custom' ) ) {
+                            var original = next_row.clone();
+                            original.add;
+                            next_row.html( next_row.next().html() ).addClass( 'wp-all-import-pro-custom-visible' );
+                            next_row.next().remove();
+                            next_row.after( original );
+                            original.addClass( 'wp-all-import-original-update-row' );
+                        }
+                    })( jQuery );
+                </script>
+                <?php
+            }
+
         }
 
         /**
@@ -343,7 +386,7 @@ if( ! class_exists('PMXI_Updater') ) {
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . $cache_key) );
                                          
-                        $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", maybe_serialize( $_data ), $this->slug . '_' . $cache_key) );                        
+                        $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name, autoload ) VALUES ( %s, %s, 'no' )", maybe_serialize( $_data ), $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", strtotime("+1 hour"), $this->slug . '_timeout_' . $cache_key) );
                                                                       
                     }   
@@ -393,8 +436,8 @@ if( ! class_exists('PMXI_Updater') ) {
             if ( $data['slug'] != $this->slug )
                 return;
 
-            /*if ( empty( $data['license'] ) )
-                return;*/
+//            if ( empty( $data['license'] ) )
+//                return;
 
             if( $this->api_url == home_url() ) {
                 return false; // Don't allow a plugin to ping itself
@@ -412,12 +455,6 @@ if( ! class_exists('PMXI_Updater') ) {
                 'version'    => $this->version,
                 'signature'  => defined('WPALLIMPORT_SIGNATURE') ? WPALLIMPORT_SIGNATURE : ''
             );
-
-            // if ( defined('WP_DEBUG') and WP_DEBUG )
-            // {
-            //     $uploads = wp_upload_dir();
-            //     file_put_contents($uploads['basedir'] . "/log.txt", date("d-m-Y H:i:s") . ' - ' .json_encode($api_params) . "\n", FILE_APPEND);
-            // }            
             
             $request = wp_remote_post( $this->api_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
@@ -457,11 +494,10 @@ if( ! class_exists('PMXI_Updater') ) {
             }
 
             $response = $this->api_request( 'show_changelog', array( 'slug' => $_REQUEST['slug'] ) );
-            
+
             if( $response && isset( $response->sections['changelog'] ) ) {
                 echo '<div style="background:#fff;padding:10px;">' . $response->sections['changelog'] . '</div>';
             }
-
 
             exit;
         }

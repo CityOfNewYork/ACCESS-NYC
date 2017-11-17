@@ -103,13 +103,16 @@ class XmlImportTemplateCodeGenerator
     {
        $filename = @tempnam(XmlImportConfig::getInstance()->getCacheDirectory(), 'xim');
     }
-	  if ( ! $filename or ! @is_writable($filename) ){
+	if ( ! $filename or ! @is_writable($filename) ){
       $uploads  = wp_upload_dir();
       $targetDir = $uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::TEMP_DIRECTORY;
       $filename = $targetDir . DIRECTORY_SEPARATOR . wp_unique_filename($targetDir, 'tmpfile');
     }
     
     file_put_contents($filename, $result);
+    $sleep = apply_filters( 'wp_all_import_shard_delay', 0 );
+    usleep($sleep);
+
     //@chmod($filename, 0666);
     return $filename;
   }

@@ -36,7 +36,9 @@ class PMXI_ArrayToXML
 	            // replace anything not alpha numeric
 	            // preg_replace('/^[0-9]+/i', '', preg_replace('/[^a-z0-9_]/i', '', $key))
 	            $key = preg_replace('/[^a-z0-9_]/i', '', $key);
-	             
+
+                if ($key && is_numeric($key[0])) $key = 'v' . $key;
+
 	            // if there is another array found recrusively call this function
 	            if (is_array($value) or is_object($value))
 	            {

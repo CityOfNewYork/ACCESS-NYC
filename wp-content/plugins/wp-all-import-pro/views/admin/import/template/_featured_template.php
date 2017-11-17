@@ -142,7 +142,7 @@
 										</div>										
 										<h4><?php _e('Files', 'wp_all_import_plugin'); ?></h4>
 										<div class="advanced_options_files">
-											<p style="font-style:italic; display:none;"><?php _e('These options only available if Download images hosted elsewhere is selected above.', 'wp_all_import_plugin'); ?></p>
+											<p style="font-style:italic; display:none;"><?php _e('These options not available if Use images currently in Media Library is selected above.', 'wp_all_import_plugin'); ?></p>
 											<div class="input" style="margin:3px 0px;">
 												<input type="hidden" name="<?php echo $section_slug; ?>auto_rename_images" value="0" />
 												<input type="checkbox" id="<?php echo $section_slug; ?>auto_rename_images" name="<?php echo $section_slug; ?>auto_rename_images" value="1" <?php echo $post[$section_slug . 'auto_rename_images'] ? 'checked="checked"' : ''; ?> class="switcher fix_checkbox"/>

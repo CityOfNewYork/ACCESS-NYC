@@ -56,7 +56,7 @@
 			<div class="wpallimport-content-section wpallimport-console wpallimport-orders-complete-warning">
 				<h3><?php printf(__('<span id="skipped_count">%s</span> orders were skipped during this import', 'wp_all_import_plugin'), $update_previous->skipped); ?></h3>
 				<h4>
-					<?php printf(__('WP All Import is unable import an order when it cannot match the products or customer specified. <a href="%s" style="margin: 0;">See the import log</a> for a list of which orders were skipped and why.', 'wp_all_import_plugin'), add_query_arg(array('id' => $update_previous->id, 'page' => 'pmxi-admin-history', 'action' => 'log', 'history_id' => PMXI_Plugin::$session->history_id, '_wpnonce' => wp_create_nonce( '_wpnonce-download_log' )), $this->baseUrl)); ?>
+					<?php printf(__('WP All Import is unable to import an order when it cannot match the products or customer specified. <a href="%s" style="margin: 0;">See the import log</a> for a list of which orders were skipped and why.', 'wp_all_import_plugin'), add_query_arg(array('id' => $update_previous->id, 'page' => 'pmxi-admin-history', 'action' => 'log', 'history_id' => PMXI_Plugin::$session->history_id, '_wpnonce' => wp_create_nonce( '_wpnonce-download_log' )), $this->baseUrl)); ?>
 				</h4>				
 				<input type="button" class="button button-primary button-hero wpallimport-large-button wpallimport-delete-and-edit" rel="<?php echo add_query_arg(array('id' => $update_previous->id, 'page' => 'pmxi-admin-manage', 'action' => 'delete_and_edit'), $this->baseUrl); ?>" value="<?php _e('Delete & Edit', 'wp_all_import_plugin'); ?>"/>				
 			</div>

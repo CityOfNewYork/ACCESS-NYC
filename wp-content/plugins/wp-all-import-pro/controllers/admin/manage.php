@@ -48,8 +48,7 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 		
 		$this->data['list'] = $list->join($post->getTable(), $list->getTable() . '.id = ' . $post->getTable() . '.import_id', 'LEFT')
 			->setColumns(
-				$list->getTable() . '.*',
-				'COUNT(' . $post->getTable() . '.post_id' . ') AS post_count'
+				$list->getTable() . '.*'
 			)
 			->getBy($by, "$order_by $order", $pagenum, $perPage, $list->getTable() . '.id');
 			
@@ -352,8 +351,8 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 		$history->setColumns('id', 'name', 'registered_on', 'path')->getBy(array('import_id' => $item->id), 'id DESC');				
 		if ($history->count()){
 			foreach ($history as $file){						
-				if (@file_exists($file['path'])) {
-					$this->data['locfilePath'] = $file['path'];
+				if (@file_exists(wp_all_import_get_absolute_path($file['path']))) {
+					$this->data['locfilePath'] = wp_all_import_get_absolute_path($file['path']);
 					break;
 				}				
 			}
@@ -456,10 +455,13 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 								$dom->loadXML($xml); // FIX: libxml xpath doesn't handle default namespace properly, so remove it upon XML load							
 								libxml_use_internal_errors($old);
 								$xpath = new DOMXPath($dom);
-								if (($elements = @$xpath->query($item->xpath)) and !empty($elements) and !empty($elements->length)) $chunks += $elements->length;
-								unset($dom, $xpath, $elements);										
+								if (($elements = @$xpath->query($item->xpath)) and !empty($elements) and !empty($elements->length)){
+                                    $chunks += $elements->length;
+                                }
+
+								unset($dom, $xpath, $elements);
 						    }
-						}	
+						}
 						unset($file);
 					}
 												
@@ -479,7 +481,7 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 				}					
 																		   							
 			}							
-			
+
 			if ( $chunks ) { // xml is valid						
 				
 				if ( ! PMXI_Plugin::is_ajax() and empty(PMXI_Plugin::$session->chunk_number)){					

@@ -3,7 +3,7 @@
 Plugin Name: WP All Import Pro
 Plugin URI: http://www.wpallimport.com/
 Description: The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more.
-Version: 4.4.3
+Version: 4.5.0
 Author: Soflyy
 */
 
@@ -31,7 +31,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 }
 else {
 
-	define('PMXI_VERSION', '4.4.3');
+	define('PMXI_VERSION', '4.5.0');
 
 	define('PMXI_EDITION', 'paid');
 
@@ -88,7 +88,7 @@ else {
 	 * Main plugin file, Introduces MVC pattern
 	 *
 	 * @singletone
-	 * @author Pavel Kulbakin <p.kulbakin@gmail.com>
+	 * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
 	 */
 	final class PMXI_Plugin {
 		/**
@@ -136,6 +136,8 @@ else {
 		public static $csv_path = false;
 
 		public static $capabilities = 'manage_options';
+
+		public static $cache_key = '';
 
 		/**
 		 * WP All Import logs folder
@@ -262,11 +264,17 @@ else {
 				require_once $filePath;
 			}
 
+			$plugin_basename = plugin_basename( __FILE__ );
+
+			self::$cache_key = md5( 'edd_plugin_' . sanitize_key( $plugin_basename ) . '_version_info' );
+
 			// init plugin options
 			$option_name = get_class($this) . '_Options';
 			$options_default = PMXI_Config::createFromFile(self::ROOT_DIR . '/config/options.php')->toArray();
+            $current_options = get_option($option_name, array());
+            if (empty($current_options)) $current_options = array();
 
-			$this->options = array_intersect_key(get_option($option_name, array()), $options_default) + $options_default;
+			$this->options = array_intersect_key($current_options, $options_default) + $options_default;
 			$this->options = array_intersect_key($options_default, array_flip(array('info_api_url'))) + $this->options; // make sure hidden options apply upon plugin reactivation
 			if ('' == $this->options['cron_job_key']) $this->options['cron_job_key'] = wp_all_import_url_title(wp_all_import_rand_char(12));
 			
@@ -289,7 +297,7 @@ else {
 			}
 
 			// add custom message when PRO not activated but update available
-			add_action('in_plugin_update_message-' . plugin_basename( __FILE__ ), array($this, 'in_plugin_update_message'), 10, 2 );
+			//add_action('in_plugin_update_message-' . plugin_basename( __FILE__ ), array($this, 'in_plugin_update_message'), 10, 2 );
 
 			// register filter handlers
 			if (is_dir(self::ROOT_DIR . '/filters')) foreach (PMXI_Helper::safe_glob(self::ROOT_DIR . '/filters/*.php', PMXI_Helper::GLOB_RECURSE | PMXI_Helper::GLOB_PATH) as $filePath) {
@@ -329,9 +337,9 @@ else {
 				return;
 			}
 
-			$m = __('To enable updates, please enter your license key on the <a href="%s">Licenses</a> page. If you don\'t have a licence key, please see <a href="%s">details & pricing</a>', 'wpallimport-plugin');
+			$m = __('<strong>A valid license is required to enable updates - enter your license key on the <a href="%s">Licenses</a> page.</strong> If you don\'t have a licence key, please see <a href="%s">details & pricing</a>. If you do have a license key, you can access it at the <a href="%s">customer portal</a>.', 'wp_all_import_plugin');
 
-			echo '<br />' . sprintf( $m, admin_url('admin.php?page=pmxi-admin-settings'), 'http://www.wpallimport.com/order-now/');
+			echo '<br />' . sprintf( $m, admin_url('admin.php?page=pmxi-admin-settings'), 'http://www.wpallimport.com/order-now/', 'http://www.wpallimport.com/portal/');
 		}
 
 		/**
@@ -341,6 +349,17 @@ else {
 		public function fix_options(){
 
 			global $wpdb;
+
+			$installed_ver = get_option( "wp_all_import_db_version" );
+
+			if ( $installed_ver == PMXI_VERSION ) return true;
+
+			delete_transient(PMXI_Plugin::$cache_key);
+
+			$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", 'wp-all-import-pro_' . PMXI_Plugin::$cache_key) );
+			$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", 'wp-all-import-pro_timeout_' . PMXI_Plugin::$cache_key) );
+
+			delete_site_transient('update_plugins');
 
 			$imports = new PMXI_Import_List();
 			$post    = new PMXI_Post_Record();
@@ -452,6 +471,7 @@ else {
 				}
 				if ($commit_migration) update_option('pmxi_is_migrated', PMXI_VERSION);
 			}
+			update_option( "wp_all_import_db_version", PMXI_VERSION );
 		}
 
 		public function ver_4_transition_fix( &$options ){
@@ -744,15 +764,33 @@ else {
 				throw new Exception("Specified option is not defined for the plugin");
 			}
 			$this->options = $option + $this->options;
+			// encode licenses
+			if (!empty($this->options['licenses'])){
+				foreach ( $this->options['licenses'] as $key => $value){
+					$this->options['licenses'][$key] = self::encode(self::decode($value));
+				}
+			}
 			update_option(get_class($this) . '_Options', $this->options);
 
 			return $this->options;
 		}
 
+		public static function encode( $value ){
+			return base64_encode(md5(AUTH_SALT) . $value . md5(md5(AUTH_SALT)));
+		}
+
+		public static function decode( $encoded ){
+			return preg_match('/^[a-f0-9]{32}$/', $encoded) ? $encoded : str_replace(array(md5(AUTH_SALT), md5(md5(AUTH_SALT))), '', base64_decode($encoded));
+		}
+		
 		/**
 		 * Plugin activation logic
 		 */
 		public function activation() {
+
+			$installer = new PMXI_Installer();
+			$installer->checkActivationConditions();
+
 			// uncaught exception doesn't prevent plugin from being activated, therefore replace it with fatal error so it does
 			set_exception_handler(create_function('$e', 'trigger_error($e->getMessage(), E_USER_ERROR);'));
 
@@ -766,6 +804,13 @@ else {
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 			require self::ROOT_DIR . '/schema.php';
 			global $wpdb;
+
+			delete_transient(PMXI_Plugin::$cache_key);
+
+			$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", 'wp-all-import-pro_' . PMXI_Plugin::$cache_key) );
+			$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", 'wp-all-import-pro_timeout_' . PMXI_Plugin::$cache_key) );
+
+			delete_site_transient('update_plugins');
 
 			if (function_exists('is_multisite') && is_multisite()) {
 		        // check if it is a network activation - if so, run the activation function for each blog id
@@ -1093,6 +1138,7 @@ else {
 				'scheduled_period' => '',
 				'friendly_name' => '',
 				'records_per_request' => 20,
+				'auto_records_per_request' => 1,
 				'auto_rename_images' => 0,
 				'auto_rename_images_suffix' => '',
 				'images_name' => 'filename',
@@ -1116,6 +1162,8 @@ else {
 				'is_fast_mode' => 0,
 				'chuncking' => 1,
 				'import_processing' => 'ajax',
+				'processing_iteration_logic' => 'auto',
+				'records_per_request_detected' => 0,
 				'save_template_as' => 0,
 
 				'title' => '',
@@ -1168,7 +1216,8 @@ else {
 				'taxonomy_type' => '',
 				'taxonomy_parent' => '',
 				'taxonomy_slug' => 'auto',
-				'taxonomy_slug_xpath' => ''
+				'taxonomy_slug_xpath' => '',
+				'import_img_tags' => 1
 			);
 		}
 
@@ -1204,7 +1253,7 @@ else {
 		// setup the updater
 		$updater = new PMXI_Updater( $wp_all_import_options['info_api_url'], __FILE__, array(
 				'version' 	=> PMXI_VERSION,		// current version number
-				'license' 	=> (!empty($wp_all_import_options['licenses']['PMXI_Plugin'])) ? $wp_all_import_options['licenses']['PMXI_Plugin'] : false, // license key (used get_option above to retrieve from DB)
+				'license' 	=> (!empty($wp_all_import_options['licenses']['PMXI_Plugin'])) ? PMXI_Plugin::decode($wp_all_import_options['licenses']['PMXI_Plugin']) : false, // license key (used get_option above to retrieve from DB)
 				'item_name' => PMXI_Plugin::getEddName(), 	// name of this plugin
 				'author' 	=> 'Soflyy'  // author of this plugin
 			)

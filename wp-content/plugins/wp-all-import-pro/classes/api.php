@@ -249,6 +249,19 @@ class PMXI_API
 				<?php
 				break;
 
+			case 'wp_editor':
+				?>
+				<div id="<?php echo ( user_can_richedit() ? 'postdivrich' : 'postdiv' ) . sanitize_title($params['field_name']); ?>" class="postarea">
+					<?php wp_editor( empty($params['field_value']) ? '' : $params['field_value'], sanitize_title($params['field_name']), array(
+						'teeny' => true,
+						'media_buttons' => false,
+						'textarea_name' => $params['field_name'],
+						'editor_height' => 200));
+					?>
+				</div>
+				<?php
+				break;
+
 			case 'image':
 				?>
 				<div class="input">
@@ -293,7 +306,7 @@ class PMXI_API
 
 				$is_full_width = true;
 				if ( ! empty($params['sub_fields']) ){
-					foreach ($params['sub_fields'] as $sub_field) {						
+					foreach ($params['sub_fields'] as $sub_field) {
 						if ($sub_field[0]['params']['is_main_field']){
 							PMXI_API::add_field($sub_field[0]['type'], $sub_field[0]['label'], $sub_field[0]['params']);			
 							$is_full_width = false;
@@ -411,7 +424,7 @@ class PMXI_API
 				}	
 				// validate import images
 				elseif($file_type == 'images'){
-					if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
+					if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
 						$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $image_filepath));					
 						@unlink($image_filepath);
 					} else {
@@ -438,7 +451,7 @@ class PMXI_API
 			} else{
 					
 				if($file_type == 'images'){
-					if( ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
+					if( ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
 						$result = true;		
 						$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'wp_all_import_plugin'), $url));									
 					}
@@ -462,7 +475,7 @@ class PMXI_API
 				} else{
 					
 					if($file_type == 'images'){
-						if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
+						if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
 							$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $url));							
 							@unlink($image_filepath);
 						} else {

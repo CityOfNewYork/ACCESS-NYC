@@ -1,8 +1,8 @@
 <?php
 /**
  * Common logic for all shortcodes plugin implements
- * 
- * @author Max Tsiplyakov <makstsiplyakov@gmail.com>
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 abstract class PMAI_Controller {
 	/**
