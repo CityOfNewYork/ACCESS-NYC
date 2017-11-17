@@ -188,7 +188,9 @@ class ShareForm {
           this._isDisabled = false;
         });
       } else {
-        this._showError(ShareForm.Message.SERVER);
+        let message_id = (response.error === 21211) ?
+          ShareForm.Message.INVALID : ShareForm.Message.SERVER;
+        this._showError(message_id);
         /* eslint-disable no-console, no-debugger */
         if (Utility.debug()) console.error(response);
         /* eslint-enable no-console, no-debugger */
@@ -254,6 +256,7 @@ ShareForm.CssClass = {
  */
 ShareForm.Message = {
   EMAIL: 'ERROR_EMAIL',
+  INVALID: 'ERROR_INVALID',
   PHONE: 'ERROR_PHONE',
   REQUIRED: 'ERROR_REQUIRED',
   SERVER: 'ERROR_SERVER'

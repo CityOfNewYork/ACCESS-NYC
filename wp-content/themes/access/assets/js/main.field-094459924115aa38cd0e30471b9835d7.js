@@ -32943,7 +32943,9 @@ ShareForm = function () {
             _this4._isDisabled = false;
           });
         } else {
-          _this4._showError(ShareForm.Message.SERVER);
+          var message_id = response.error === 21211 ?
+          ShareForm.Message.INVALID : ShareForm.Message.SERVER;
+          _this4._showError(message_id);
           /* eslint-disable no-console, no-debugger */
           if (_utility2.default.debug()) console.error(response);
           /* eslint-enable no-console, no-debugger */
@@ -33009,6 +33011,7 @@ ShareForm.CssClass = {
                             */
 ShareForm.Message = {
   EMAIL: 'ERROR_EMAIL',
+  INVALID: 'ERROR_INVALID',
   PHONE: 'ERROR_PHONE',
   REQUIRED: 'ERROR_REQUIRED',
   SERVER: 'ERROR_SERVER' };exports.default =

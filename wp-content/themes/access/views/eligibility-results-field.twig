@@ -50,7 +50,9 @@
                 <input type="hidden" name="hash" value="{{ hash }}" readonly>
                 <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
                 <div class="share-form-controls">
-                  <input type="tel" name="to" placeholder="{{__('Phone Number', translationID)}}">
+                  <div class="phone-us">
+                    <input type="tel" name="to" placeholder="{{__('Phone Number', translationID)}}">
+                  </div>
                   <div class="share-form-controls__right">
                     <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
                     {% include 'partials/share-form-spinner.twig' %}
