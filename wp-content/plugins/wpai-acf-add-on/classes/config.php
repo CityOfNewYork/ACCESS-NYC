@@ -1,8 +1,8 @@
 <?php
 /**
  * Class to load config files
- * 
- * @author Max Tsiplyakov <makstsiplyakov@gmail.com>
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 class PMAI_Config implements IteratorAggregate {
 	/**

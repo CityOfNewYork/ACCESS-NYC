@@ -1,8 +1,8 @@
 <?php 
 /**
  * Base class for models
- * 
- * @author Max Tsiplyakov <makstsiplyakov@gmail.com>
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 class PMAI_Model_Record extends PMAI_Model {
 	/**

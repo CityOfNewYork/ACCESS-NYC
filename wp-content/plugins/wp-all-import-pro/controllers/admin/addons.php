@@ -1,8 +1,8 @@
 <?php 
 /**
  * Admin Add-ons page
- * 
- * @author Max Tsiplyakov <makstsiplyakov@gmail.com>
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 class PMXI_Admin_Addons extends PMXI_Controller_Admin {		
 

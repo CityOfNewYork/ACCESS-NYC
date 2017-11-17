@@ -524,7 +524,7 @@ if ( ! class_exists('PMXI_Upload')){
 					$filePath = $sql->parse();				
 					wp_all_import_remove_source($localSQLPath, false);
 
-				} elseif (preg_match('%\W(xls|xlsx)$%i', trim($this->file))){
+				} elseif (preg_match('%\W(xls|xlsx)$%i', strtok(trim($this->file), "?")) || preg_match('%\W(xls|xlsx)$%i', trim($this->file))) {
 
 					$source = array(
 						'name' => basename($this->file),

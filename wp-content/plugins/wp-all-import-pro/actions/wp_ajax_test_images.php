@@ -78,7 +78,7 @@ function pmxi_wp_ajax_test_images(){
 
 					foreach ($post['imgs'] as $img) 
 					{
-						$bn      = wp_all_import_sanitize_filename(basename($img));
+						$bn      = wp_all_import_sanitize_filename(wp_all_import_basename($img));
 						$img_ext = pmxi_getExtensionFromStr($img);									
 						$default_extension = pmxi_getExtension($bn);																									
 
@@ -133,7 +133,7 @@ function pmxi_wp_ajax_test_images(){
 
 						if ( (is_wp_error($request) or $request === false) and ! @file_put_contents($image_filepath, @file_get_contents($img, false, $get_ctx))) {
 							$failed_msgs[] = (is_wp_error($request)) ? $request->get_error_message() : sprintf(__('File `%s` cannot be saved locally', 'wp_all_import_plugin'), $img);										
-						} elseif( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
+						} elseif( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
 							$failed_msgs[] = sprintf(__('File `%s` is not a valid image.', 'wp_all_import_plugin'), $img);										
 						} else {
 							$success_images++;											

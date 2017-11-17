@@ -25,7 +25,7 @@
 	<p><i><?php _e('Example:', 'wp_all_import_plugin'); ?></i></p>
 
 	<p>wget -q -O /dev/null "<?php echo home_url() . '/wp-cron.php?import_key=' . $cron_job_key . '&import_id=' . $id . '&action=trigger'; ?>"</p>
-	 
+
 	<p><strong><?php _e('Execution Script', 'wp_all_import_plugin'); ?></strong></p>
 
 	<p><?php _e('The Execution script actually executes the import, once it has been triggered with the Trigger script.', 'wp_all_import_plugin'); ?></p>
@@ -39,7 +39,7 @@
 	<p>wget -q -O /dev/null "<?php echo home_url() . '/wp-cron.php?import_key=' . $cron_job_key . '&import_id=' . $id . '&action=processing'; ?>"</p>
 
 	<p><strong><?php _e('Notes', 'wp_all_import_plugin'); ?></strong></p>
-	 
+
 	<p>
 		<?php _e('Your web host may require you to use a command other than wget, although wget is most common. In this case, you must asking your web hosting provider for help.', 'wp_all_import_plugin'); ?>
 	</p>
@@ -49,9 +49,9 @@
 	</p>
 
 <?php else: ?>
-	
+
 	<p>
-		<?php _e('To schedule this import with a cron job, you must use the "Download from URL" option on the Import Settings screen of WP All Import.', 'wp_all_import_plugin'); ?>
+		<?php _e('To schedule this import with a cron job, you must use the "Download from URL" or "Use existing file" option on the Import Settings screen of WP All Import.', 'wp_all_import_plugin'); ?>
 	</p>
 	<p>
 		<a href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'options'), $this->baseUrl); ?>"><?php _e('Go to Import Settings now...', 'wp_all_import_plugin'); ?></a>

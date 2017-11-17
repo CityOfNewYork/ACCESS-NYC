@@ -1,7 +1,7 @@
 <?php
 /**
  * Incapsulates behavior for list of database records
- * 
+ *
  * @author Pavel Kulbakin <p.kulbakin@gmail.com>
  */
 class PMXI_Model_List extends PMXI_Model {

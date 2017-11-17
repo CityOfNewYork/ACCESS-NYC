@@ -55,7 +55,7 @@
 	<input type="checkbox" id="is_not_keep_former_posts" name="is_keep_former_posts" value="no" <?php echo "yes" != $post['is_keep_former_posts'] ? 'checked="checked"': '' ?> class="switcher" />
 	<label for="is_not_keep_former_posts"><?php printf(__('Update existing %s with changed data in your file', 'wp_all_import_plugin'), $custom_type->labels->name); ?></label>
 	<?php if ( $this->isWizard and "new" == $post['wizard_type'] and empty(PMXI_Plugin::$session->deligate)): ?>
-	<a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('These options will only be used if you run this import again later. All data is imported the first time you run an import.', 'wp_all_import_plugin') ?>">?</a>	
+	<a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('These options will only be used if you run this import again later. All data is imported the first time you run an import.<br/><br/>Note that WP All Import will only update/remove posts created by this import. If you want to match to posts that already exist on this site, use Existing Items in Step 1.', 'wp_all_import_plugin') ?>">?</a>	
 	<?php endif; ?>
 	<div class="switcher-target-is_not_keep_former_posts" style="padding-left:17px;">
 		<input type="radio" id="update_all_data" class="switcher" name="update_all_data" value="yes" <?php echo 'no' != $post['update_all_data'] ? 'checked="checked"': '' ?>/>

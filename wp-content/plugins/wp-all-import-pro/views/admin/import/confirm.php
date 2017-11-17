@@ -71,7 +71,7 @@
 				<?php if ($is_new_import):?>
 				<h3><?php _e('Your file is all set up!', 'wp_all_import_plugin'); ?></h3>
 				<?php else: ?>
-				<h3><?php _e('This import did not finish successfuly last time it was run.', 'wp_all_import_plugin'); ?></h3>
+				<h3><?php _e('This import did not finish successfully last time it was run.', 'wp_all_import_plugin'); ?></h3>
 				<?php endif; ?>				
 
 				<?php if ($is_new_import):?>				
@@ -124,7 +124,7 @@
 			<div class="wpallimport-section">
 				<div class="wpallimport-content-section">
 					<div class="wpallimport-collapsed-header" style="padding-left: 30px;">
-						<h3 style="color: #425e99;"><?php _e('Import Summary', 'wp_all_import_plugin'); ?></h3>
+						<h3 style="color: #425e99;"><?php _e('Import Summary', 'wp_all_import_plugin'); ?> <?php if (!$isWizard):?><span style="color:#000;"><?php printf(__(" - ID: %s - %s"), $import->id, empty($import->friendly_name) ? $import->name : $import->friendly_name);?></span><?php endif;?></h3>
 					</div>
 					<div class="wpallimport-collapsed-content" style="padding: 15px 25px 25px;">
 						
@@ -154,7 +154,7 @@
 							}
 							if ( in_array($import_type, array('upload', 'file'))){ $path = preg_replace('%.*wp-content/%', 'wp-content/', $path); }
 						?>
-						<p><?php printf(__('WP All Import will import the file <span style="color:#40acad;">%s</span>, which is <span style="color:#000; font-weight:bold;">%s</span>', 'wp_all_import_plugin'), $path, (isset($locfilePath)) ? human_filesize(filesize($locfilePath)) : __('undefined', 'wp_all_import_plugin')); ?></p>
+						<p><?php printf(__('WP All Import will import the file <span style="color:#40acad;">%s</span>, which is <span style="color:#000; font-weight:bold;">%s</span>', 'wp_all_import_plugin'), $path, (isset($locfilePath)) ? pmxi_human_filesize(filesize($locfilePath)) : __('undefined', 'wp_all_import_plugin')); ?></p>
 
 						<?php if ( strpos($xpath, '[') !== false){ ?>
 						<p><?php printf(__('WP All Import will process the records matching the XPath expression: <span style="color:#46ba69; font-weight:bold;">%s</span>', 'wp_all_import_plugin'), $xpath); ?></p>
@@ -197,8 +197,26 @@
 							<?php
 							$criteria = '';
 							if ( 'pid' == $post['duplicate_indicator']) $criteria = 'has the same ID';
-							if ( 'title' == $post['duplicate_indicator']) $criteria = 'has the same Title';
-							if ( 'content' == $post['duplicate_indicator']) $criteria = 'has the same Content';
+							if ( 'title' == $post['duplicate_indicator']){
+								switch ($post['custom_type']){
+									case 'import_users':
+										$criteria = 'has the same Login';
+										break;
+									default:
+										$criteria = 'has the same Title';
+										break;
+								}
+							}
+							if ( 'content' == $post['duplicate_indicator']){
+								switch ($post['custom_type']){
+									case 'import_users':
+										$criteria = 'has the same Email';
+										break;
+									default:
+										$criteria = 'has the same Content';
+										break;
+								}
+							}
 							if ( 'custom field' == $post['duplicate_indicator']) $criteria = 'has Custom Field named "'. $post['custom_duplicate_name'] .'" with value = ' . $post['custom_duplicate_value'];
 							?>
 							<p><?php printf(__('WP All Import will merge data into existing %ss, matching the following criteria: %s', 'wp_all_import_plugin'), $custom_type->labels->singular_name, $criteria); ?></p>

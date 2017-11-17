@@ -74,8 +74,8 @@ if ( ! function_exists('pmai_render_field')){
 						<a href="#help" class="wpallimport-help" title="<?php _e('Specify the URL to the image or file.', 'wp_all_import_acf_add_on'); ?>" style="top:0;">?</a>
 						<input type="hidden" name="fields<?php echo $field_name;?>[<?php echo $field['key'];?>][search_in_media]" value="0"/>
 						<input type="checkbox" id="<?php echo $field_name . $field['key'] . '_search_in_media';?>" name="fields<?php echo $field_name;?>[<?php echo $field['key'];?>][search_in_media]" value="1" <?php echo (!empty($current_field['search_in_media'])) ? 'checked="checked"' : '';?>/>
-						<label for="<?php echo $field_name . $field['key'] . '_search_in_media';?>"><?php _e('Search through the Media Library for existing images before importing new images', 'wp_all_import_acf_add_on'); ?></label>
-						<a href="#help" class="wpallimport-help" title="<?php _e('If an image with the same file name is found in the Media Library then that image will be attached to this record instead of importing a new image. Disable this setting if your import has different images with the same file name.', 'wp_all_import_acf_add_on') ?>" style="position: relative; top: -2px;">?</a>
+						<label for="<?php echo $field_name . $field['key'] . '_search_in_media';?>"><?php _e('Search through the Media Library for existing files before importing new files.', 'wp_all_import_acf_add_on'); ?></label>
+						<a href="#help" class="wpallimport-help" title="<?php _e('If an attachment with the same file name is found in the Media Library then that file will be attached to this record instead of importing a new file. Disable this setting if your import has different files with the same file name.', 'wp_all_import_acf_add_on') ?>" style="position: relative; top: -2px;">?</a>
 						<?php
 						break;
 					case 'image':
@@ -118,6 +118,7 @@ if ( ! function_exists('pmai_render_field')){
 					case 'url':
 					case 'oembed':
 					case 'limiter':
+					case 'vimeo':
 						?>
 						<input type="text" placeholder="" value="<?php echo esc_attr( $current_field );?>" name="fields<?php echo $field_name;?>[<?php echo $field['key'];?>]" class="text widefat rad4"/>
 						<?php
@@ -794,15 +795,30 @@ if ( ! function_exists('pmai_render_field')){
 							if (!empty($field['clone'])) {
 								$sub_fields = array();
 								foreach ($field['clone'] as $sub_field_key) {
-									$args = array(
-										'name' => $sub_field_key,
-										'post_type' => 'acf-field',
-										'post_status' => 'publish',
-										'posts_per_page' => 1
-									);
-									$my_posts = get_posts($args);
-									if ($my_posts) {
-										$sub_fields[] = $my_posts[0];
+									if (strpos($sub_field_key, 'group_') === 0){
+										$acf_groups = get_posts(array(
+											'posts_per_page' => 1,
+											'post_type' => 'acf-field-group',
+											'name' => $sub_field_key,
+											'post_status' => 'publish'
+										));
+										if (!empty($acf_groups)){
+											foreach ($acf_groups as $acf_group){
+												$sub_fields = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf-field', 'post_parent' => $acf_group->ID, 'post_status' => 'publish', 'orderby' => 'menu_order', 'order' => 'ASC'));
+											}
+										}
+									}
+									else{
+										$args = array(
+											'name' => $sub_field_key,
+											'post_type' => 'acf-field',
+											'post_status' => 'publish',
+											'posts_per_page' => 1
+										);
+										$my_posts = get_posts($args);
+										if ($my_posts) {
+											$sub_fields[] = $my_posts[0];
+										}
 									}
 								}
 								if (!empty($sub_fields)) {
@@ -853,7 +869,8 @@ if ( ! function_exists('pmai_render_field')){
 									// extract layout
 									$layout = acf_extract_var( $field['layouts'], $i );
 									
-									
+
+
 									// validate layout
 									//$layout = $this->get_valid_layout( $layout );
 									
@@ -1021,7 +1038,7 @@ if ( ! function_exists('pmai_render_field')){
 													<td <?php if( $layout['display'] != 'row' ){ pmai_join_attr( $attributes ); } ?>>
 														<div class="inner">
 														<?php
-														
+
 														// create field
 														echo pmai_render_field($sub_field, $post, $field_name . "[" . $field['key'] . "][layouts][ROWNUMBER]");
 														
@@ -1132,7 +1149,7 @@ if ( ! function_exists('pmai_render_field')){
 											foreach( $current_layout['sub_fields'] as $sub_field ): ?>
 											
 												<?php
-												
+
 												// attributes (can appear on tr or td depending on $field['layout'])
 												$attributes = array(
 													'class'				=> "field sub_field field_type-{$sub_field['type']} field_key-{$sub_field['key']}",

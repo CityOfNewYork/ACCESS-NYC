@@ -262,7 +262,8 @@
 	padding-left: 30px;
 	cursor: pointer;
 }
-	.wpallimport-plugin .wpallimport-collapsed .wpallimport-collapsed-header h3{
+	.wpallimport-plugin .wpallimport-collapsed .wpallimport-collapsed-header h3,
+	.wpallimport-plugin .template_input h3{
 		line-height: 30px;
 		color:#425e99;
 		-webkit-touch-callout: none;
@@ -271,6 +272,17 @@
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+	}
+	.wpallimport-plugin .template_input h3{
+		/*margin-bottom: -15px;*/
+	}
+	.wpallimport-plugin .template_input .post_excerpt_edit_mode{
+		font-size: 14px;
+		border-bottom: 1px dotted #CCCCCC;
+	}
+	.wpallimport-plugin .template_input .collapse_mode_title,
+	.wpallimport-plugin .template_input .post_excerpt_edit_mode_expand{
+		display: none;
 	}
 .wpallimport-plugin .wpallimport-collapsed.closed .wpallimport-collapsed-header{
 	background: url('../img/ui_4.0/collapser.png') no-repeat 98% -30px;
@@ -2758,6 +2770,20 @@
 	background: url('../img/ui_4.0/drag.png') 0 50% no-repeat;
 	padding: 10px 10px 10px 40px;
 	color: #777;
+}
+.wpallimport-plugin .new_element_ico{
+	padding: 10px 10px 10px 40px;
+	color: #777;
+	position: relative;
+}
+.wpallimport-plugin .new_element_ico::before{
+	font-family: "dashicons";
+	content: "\f464";
+	font-size: 33px;
+	position: absolute;
+	top: 25px;
+	left: 0;
+	color: #ccc;
 }
 
 /*--------------------------------------------------------------------------

@@ -35,7 +35,10 @@
 											'ID' => $obj->ID,
 											'title' => $obj->post_title
 										);
-									}									
+									}
+									else{
+										$acfs[$obj->post_name]['ID'] = $obj->ID;
+									}
 								}
 							}							
 

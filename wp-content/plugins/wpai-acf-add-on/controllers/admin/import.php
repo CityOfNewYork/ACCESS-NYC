@@ -1,7 +1,7 @@
 <?php 
 /**
- * 
- * @author Max Tsiplyakov <makstsiplyakov@gmail.com>
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 
 class PMAI_Admin_Import extends PMAI_Controller_Admin 

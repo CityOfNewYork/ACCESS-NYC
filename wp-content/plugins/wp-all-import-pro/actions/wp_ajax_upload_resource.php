@@ -30,10 +30,7 @@ function pmxi_wp_ajax_upload_resource(){
 
 		$filesXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<data><node></node></data>";
 
-		if ( strpos($post['file'], "dropbox") !== false && preg_match('%\W(dl=0)$%i', $post['file']) )
-		{
-			$post['file'] = str_replace("?dl=0", "?dl=1", $post['file']);
-		}
+		$post['file'] = apply_filters('wp_all_import_feed_url', wp_all_import_sanitize_url($post['file']));
 
 		$files = XmlImportParser::factory($filesXML, '/data/node', $post['file'], $file)->parse(); $tmp_files[] = $file;	
 

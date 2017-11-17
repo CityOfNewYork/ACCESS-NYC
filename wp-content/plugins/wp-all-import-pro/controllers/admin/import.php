@@ -952,30 +952,38 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 						$dom->loadXML($xml); // FIX: libxml xpath doesn't handle default namespace properly, so remove it upon XML load							
 						libxml_use_internal_errors($old);
 						$xpath = new DOMXPath($dom);						
-						if (($this->data['elements'] = $elements = @$xpath->query(PMXI_Plugin::$session->xpath)) and $elements->length){ 						
-							
-							if ( $loop == $tagno ){
-								/* Merge nested XML/CSV files */
-								/*$nested_files = json_decode(PMXI_Plugin::$session->options['nested_files'], true);
-								if ( ! empty($nested_files) ){										
-									$merger = new PMXI_Nested($dom, $nested_files, $xml, PMXI_Plugin::$session->xpath);
-									$merger->merge();
-									$xml = $merger->get_xml();
-									unset($merger);													
-								}*/							
-								unset($dom, $xpath, $elements);
-								break(2); 			
-							}
-							unset($dom, $xpath, $elements);																								
-							$loop++;
+						if (($this->data['elements'] = $elements = @$xpath->query(PMXI_Plugin::$session->xpath)) and $elements->length){
+
+						    if ( $loop == $tagno ){
+                                /* Merge nested XML/CSV files */
+                                /*$nested_files = json_decode(PMXI_Plugin::$session->options['nested_files'], true);
+                                if ( ! empty($nested_files) ){
+                                    $merger = new PMXI_Nested($dom, $nested_files, $xml, PMXI_Plugin::$session->xpath);
+                                    $merger->merge();
+                                    $xml = $merger->get_xml();
+                                    unset($merger);
+                                }*/
+                                unset($dom, $xpath, $elements);
+                                break(2);
+                            }
+                            unset($dom, $xpath, $elements);
+                            $loop++;
 						}											  					 
 				    }
 				}
 				unset($file);				
 			}
-			//$this->data['tagno'] = $tagno = 1;						
+
 			$xpath = "(" . PMXI_Plugin::$session->xpath . ")[1]";
-			
+
+            // validate root XPath
+            try{
+                list($this->data['title']) = XmlImportParser::factory($xml, $xpath, $post['title'], $file)->parse(); unlink($file);
+            }
+            catch(XmlImportException $e){
+                $xpath = PMXI_Plugin::$session->xpath;
+            }
+
 			PMXI_Plugin::$session->set('encoding', $post['import_encoding']);
 			PMXI_Plugin::$session->save_data();
 
@@ -992,7 +1000,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 					$this->errors->add('form-validation', __('<strong>Warning</strong>: your title is blank.', 'wp_all_import_plugin'));
 					$this->data['title'] = "";
 				} else {				
-					list($this->data['title']) = XmlImportParser::factory($xml, $xpath, $post['title'], $file)->parse(); unlink($file);				
+					list($this->data['title']) = XmlImportParser::factory($xml, $xpath, $post['title'], $file)->parse(); unlink($file);
 					if ( ! isset($this->data['title']) or '' == strval(trim(strip_tags($this->data['title'], '<img><input><textarea><iframe><object><embed>')))) {
 						$this->errors->add('xml-parsing', __('<strong>Warning</strong>: resulting post title is empty', 'wp_all_import_plugin'));
 					}
@@ -1277,12 +1285,12 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 								if ($post['is_tax_hierarchical_group_delim'][$ctx] and !empty($post['tax_hierarchical_group_delim'][$ctx])){
 
 									// apply mapping rules before splitting via separator symbol
-									if ( ! empty($post['tax_enable_mapping'][$ctx]) and ! empty($post['tax_logic_mapping'][$ctx]) ){		
-										if ( ! empty($post['tax_mapping'][$ctx])){						
-											$mapping_rules = json_decode($post['tax_mapping'][$ctx], true);																			
-											if ( ! empty( $mapping_rules) ){			
+									if ( ! empty($post['tax_enable_mapping'][$ctx]) and ! empty($post['tax_logic_mapping'][$ctx]) ){
+										if ( ! empty($post['tax_mapping'][$ctx])){
+											$mapping_rules = json_decode($post['tax_mapping'][$ctx], true);
+											if ( ! empty( $mapping_rules) ){
 												foreach ($mapping_rules as $rule) {
-													if ( ! empty($rule[trim($d)])){ 
+													if ( ! empty($rule[trim($d)])){
 														$d = trim($rule[trim($d)]);
 														break;
 													}
@@ -1890,7 +1898,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 				}
 			}
 			if ('manual' != $post['duplicate_matching'] and '' == $post['unique_key']) {
-				$this->errors->add('form-validation', __('Expression for `Post Unique Key` must be set, use the same expression as specified for post title if you are not sure what to put there', 'wp_all_import_plugin'));
+				$this->errors->add('form-validation', __('Unique ID is currently empty and must be set. If you are not sure what to use as a Unique ID, click Auto-detect.', 'wp_all_import_plugin'));
 			} elseif ('manual' != $post['duplicate_matching']) {
 				$this->_validate_template($post['unique_key'], __('Post Unique Key', 'wp_all_import_plugin'));
 			}			
@@ -1952,10 +1960,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 							$filesXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<data><node></node></data>";
 
-							if ( strpos($filePath, "dropbox") !== false && preg_match('%\W(dl=0)$%i', $filePath) )
-							{
-								$filePath = str_replace("?dl=0", "?dl=1", $filePath);
-							}
+                            $filePath = apply_filters('wp_all_import_feed_url', wp_all_import_sanitize_url($filePath));
 
 							$filePaths = XmlImportParser::factory($filesXML, '/data/node', $filePath, $file)->parse(); $tmp_files[] = $file;	
 
@@ -2168,10 +2173,9 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 							break;
 						case 'url':
 							$filePath = $this->input->post('url');
-							if ( strpos($filePath, "dropbox") !== false && preg_match('%\W(dl=0)$%i', $filePath) )
-							{
-								$filePath = str_replace("?dl=0", "?dl=1", $filePath);
-							}
+
+                            $filePath = apply_filters('wp_all_import_feed_url', wp_all_import_sanitize_url($filePath));
+
 							$source = array(
 								'name' => basename(parse_url($filePath, PHP_URL_PATH)),
 								'type' => 'url',
@@ -2298,6 +2302,8 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
                     }
                 }
 
+                $this->data['existing_meta_keys'] = apply_filters('wp_all_import_existing_meta_keys', $this->data['existing_meta_keys'], $post['custom_type']);
+
                 // Get existing product attributes
                 $existing_attributes = $wpdb->get_results("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key = '_product_attributes' LIMIT 0 , 50" );
                 $this->data['existing_attributes'] = array();
@@ -2324,8 +2330,8 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 		$default = PMXI_Plugin::get_default_import_options();
 						
-		$this->data['source'] = PMXI_Plugin::$session->source;	
-		$this->data['locfilePath'] = PMXI_Plugin::$session->filePath;	
+		$this->data['source'] = PMXI_Plugin::$session->source;
+        $this->data['locfilePath'] = PMXI_Plugin::$session->filePath;
 		$this->data['count'] = PMXI_Plugin::$session->count;	
 		$this->data['xpath'] = PMXI_Plugin::$session->xpath;
 		$this->data['isWizard'] = true;
@@ -2591,7 +2597,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 		if ($ajax_processing)
 		{			
-			$logger = create_function('$m', 'echo "<div class=\\"progress-msg\\">$m</div>\\n"; flush();');
+			$logger = create_function('$m', 'printf("<div class=\\"progress-msg\\">[%s] $m</div>\\n", date("H:i:s")); flush();');
 		}
 		else
 		{
@@ -2600,7 +2606,11 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 		PMXI_Plugin::$session->set('start_time', (empty(PMXI_Plugin::$session->start_time)) ? time() : PMXI_Plugin::$session->start_time);
 
-		wp_cache_flush();
+        $is_reset_cache = apply_filters('wp_all_import_reset_cache_before_import', true, $import_id);
+
+		if ($is_reset_cache){
+            wp_cache_flush();
+        }
 
 		wp_defer_term_counting(true);
 		wp_defer_comment_counting(true);
@@ -2614,8 +2624,9 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 			$iteration_start_time = time();			
 
-			if ( $log_storage )
-				$log_file = wp_all_import_secure_file( $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::LOGS_DIRECTORY, $history_log->id ) . DIRECTORY_SEPARATOR . $history_log->id . '.html';
+			if ( $log_storage ){
+                $log_file = wp_all_import_secure_file( $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::LOGS_DIRECTORY, $history_log->id ) . DIRECTORY_SEPARATOR . $history_log->id . '.html';
+            }
 
 			if ( $ajax_processing ) {
 				// HTTP headers for no cache etc
@@ -2630,8 +2641,9 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			$pointer = 0;			
 			$records = array();
 
-			if ($import->options['is_import_specified']) {								
-				foreach (preg_split('% *, *%', $import->options['import_specified'], -1, PREG_SPLIT_NO_EMPTY) as $chank) {
+			if ($import->options['is_import_specified']) {
+                $import_specified_option = apply_filters('wp_all_import_specified_records', $import->options['import_specified'], $import->id, false);
+				foreach (preg_split('% *, *%', $import_specified_option, -1, PREG_SPLIT_NO_EMPTY) as $chank) {
 					if (preg_match('%^(\d+)-(\d+)$%', $chank, $mtch)) {
 						$records = array_merge($records, range(intval($mtch[1]), intval($mtch[2])));
 					} else {

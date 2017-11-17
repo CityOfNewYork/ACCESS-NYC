@@ -10,13 +10,17 @@ function pmai_pmxi_reimport($entry, $post){
 		$all_existing_acf = array();
 
 		if ( ! empty($acfs) ){
-
 			foreach ($acfs as $key => $acf_entry) {
-
 				$all_existing_acf[] = '[' . $acf_entry->post_excerpt . '] ' . $acf_entry->post_title;
-
 			}
+		}
 
+		$fields = acf_local()->fields;
+
+		if ( ! empty($fields) ) {
+			foreach ($fields as $key => $field) {
+				$all_existing_acf[] = '[' . $field['name'] . '] ' . $field['label'];
+			}
 		}
 	}
 	else{
@@ -62,7 +66,7 @@ function pmai_pmxi_reimport($entry, $post){
 			</div>
 			<div class="input">
 				<input type="radio" id="update_acf_logic_mapped_<?php echo $entry; ?>" name="update_acf_logic" value="mapped" <?php echo ( "mapped" == $post['update_acf_logic'] ) ? 'checked="checked"': '' ?> class="switcher"/>
-				<label for="update_acf_logic_mapped_<?php echo $entry; ?>"><?php _e('Update only mapped ACF fields', 'wp_all_import_acf_add_on') ?></label>
+				<label for="update_acf_logic_mapped_<?php echo $entry; ?>"><?php _e('Update only mapped ACF groups', 'wp_all_import_acf_add_on') ?></label>
 			</div>
 			<div class="input">
 				<input type="radio" id="update_acf_logic_only_<?php echo $entry; ?>" name="update_acf_logic" value="only" <?php echo ( "only" == $post['update_acf_logic'] ) ? 'checked="checked"': '' ?> class="switcher"/>

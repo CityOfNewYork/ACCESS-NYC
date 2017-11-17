@@ -1,8 +1,8 @@
 <?php
 /**
  * Introduce special type for controllers which render pages inside admin area
- * 
- * @author Max Tsiplyakov <makstsiplyakov@gmail.com>
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 abstract class PMAI_Controller_Admin extends PMAI_Controller {
 	/**
