@@ -73,16 +73,24 @@
 
         <div class="m-bottom-2">
           <label class="{{styles.labels}}" for="staff-screener-location">
-            {{ __('Screener Location', translationID) }}
+            {{ __('Screener Location', translationID) }} <span class="c-red">*</span>
           </label>
-          <select id="staff-screener-location" name="Staff.screenerLocation" value=""
-            data-object="staff"
-            v-bind:value="staff._attrs.screenerLocation"
-            v-on:change="staff._attrs.screenerLocation = $event.target.value; commit($event)">
-            {% for location in screenerLocations %}
-            <option value="{{ location.value }}">{{ __(location.text, translationID) }}</option>
-            {% endfor %}
-          </select>
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Staff.screenerLocation', 'Staff')}">
+            <div class="error-message"
+              v-if="errors.has('Staff.screenerLocation', 'Staff')">v{ errors.first('Staff.screenerLocation', 'Staff') }</div>
+            <select id="staff-screener-location" name="Staff.screenerLocation" value="" required
+              data-object="staff"
+              data-vv-as="screener location"
+              data-vv-scope="Staff"
+              v-validate="{required: true}"
+              v-bind:value="staff._attrs.screenerLocation"
+              v-on:change="staff._attrs.screenerLocation = $event.target.value; commit($event)">
+              {% for location in screenerLocations %}
+              <option value="{{ location.value }}">{{ __(location.text, translationID) }}</option>
+              {% endfor %}
+            </select>
+          </div>
         </div>
 
         <div>
