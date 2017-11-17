@@ -32943,9 +32943,9 @@ ShareForm = function () {
             _this4._isDisabled = false;
           });
         } else {
-          var message_id = response.error === 21211 ?
+          var messageId = response.error === 21211 ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
-          _this4._showError(message_id);
+          _this4._showError(messageId);
           /* eslint-disable no-console, no-debugger */
           if (_utility2.default.debug()) console.error(response);
           /* eslint-enable no-console, no-debugger */

@@ -188,9 +188,9 @@ class ShareForm {
           this._isDisabled = false;
         });
       } else {
-        let message_id = (response.error === 21211) ?
+        let messageId = (response.error === 21211) ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
-        this._showError(message_id);
+        this._showError(messageId);
         /* eslint-disable no-console, no-debugger */
         if (Utility.debug()) console.error(response);
         /* eslint-enable no-console, no-debugger */
