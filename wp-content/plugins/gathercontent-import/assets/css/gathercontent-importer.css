@@ -193,6 +193,9 @@ ul.gc-radio-desc li, ul.gc-reveal-items-list li {
     border: 1px solid #00ABBD;
     color: #fff; }
 
+.gc-auth-required .gc-section-auth table {
+  background-color: #f5bfbf; }
+
 #gc-items-search {
   float: left; }
 
@@ -211,7 +214,9 @@ ul.gc-radio-desc li, ul.gc-reveal-items-list li {
     display: none; }
 
 .gc-sync-progress #progress {
-  padding: 0; }
+  padding: 0;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04); }
 
 .gc-sync-progress table {
   background: none; }
@@ -236,10 +241,21 @@ ul.gc-radio-desc li, ul.gc-reveal-items-list li {
   line-height: 38px;
   font-weight: bold;
   margin-top: -38px;
-  transition: width 200ms ease-in-out; }
+  transition: width 400ms ease-in-out; }
   .gc-progress-bar-partial span {
     display: block;
     min-width: 3.2em; }
+
+.gc-sync-table {
+  border-spacing: 0;
+  width: 100%;
+  clear: both;
+  margin: 0; }
+
+#gc-reload-spinner .gc-loader {
+  padding-left: 32px;
+  width: auto;
+  line-height: 1.5em; }
 
 /*
 	The styles below were ripped from the Media Modal in WordPress 3.5

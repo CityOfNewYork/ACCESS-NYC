@@ -261,6 +261,11 @@ class Mapping_Wizard extends Base {
 		}
 
 		$classes .= ' gathercontent-admin '. $this->slugs[ $this->step ] .' ';
+
+		if ( isset( $_GET['auth-required'] ) ) {
+			$classes .= 'gc-auth-required ';
+		}
+
 		return $classes;
 	}
 

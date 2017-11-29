@@ -22,7 +22,7 @@ use WP_Query;
  *
  * @return void
  */
-function enqueue_style( $handle, $filename, $deps = array(), $ver = GATHERCONTENT_VERSION ) {
+function enqueue_style( $handle, $filename, $deps = array(), $ver = GATHERCONTENT_ENQUEUE_VERSION ) {
 	$suffix = Utils::asset_suffix();
 	wp_enqueue_style( $handle, GATHERCONTENT_URL . "assets/css/{$filename}{$suffix}.css", $deps, $ver );
 }
@@ -41,7 +41,7 @@ function enqueue_style( $handle, $filename, $deps = array(), $ver = GATHERCONTEN
  *
  * @return void
  */
-function enqueue_script( $handle, $filename, $deps = array(), $ver = GATHERCONTENT_VERSION ) {
+function enqueue_script( $handle, $filename, $deps = array(), $ver = GATHERCONTENT_ENQUEUE_VERSION ) {
 	$suffix = Utils::asset_suffix();
 	wp_enqueue_script( $handle, GATHERCONTENT_URL . "assets/js/{$filename}{$suffix}.js", $deps, $ver, 1 );
 }
@@ -57,6 +57,13 @@ function enqueue_script( $handle, $filename, $deps = array(), $ver = GATHERCONTE
  * @return mixed          WP_Post if an associated post is found.
  */
 function get_post_by_item_id( $item_id, $args = array() ) {
+	global $wpml_query_filter;
+	if ( is_object( $wpml_query_filter ) ) {
+		// We do not want wpml messing with our queries here.
+		remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
+		remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+	}
+
 	$query = new WP_Query( wp_parse_args( $args, array(
 		'post_type'      => \GatherContent\Importer\available_mapping_post_types(),
 		'posts_per_page' => 1,
@@ -404,4 +411,29 @@ function view_capability() {
 function available_mapping_post_types() {
 	$post_types = get_post_types( array( 'public' => true ) );
 	return apply_filters( 'gathercontent_mapping_post_types', $post_types );
+}
+
+/**
+ * Detect if HTTP Auth is enabled.
+ *
+ * @since  3.0.7
+ *
+ * @return string|bool The Auth username if enabled, or false.
+ */
+function auth_enabled() {
+	if ( isset( $_SERVER['REMOTE_USER'] ) ) {
+		return $_SERVER['REMOTE_USER'];
+	}
+
+	foreach ( array(
+		'PHP_AUTH_USER',
+		'PHP_AUTH_PW',
+		'HTTP_AUTHORIZATION',
+	) as $var ) {
+		if ( isset( $_SERVER[ $var ] ) ) {
+			return true;
+		}
+	}
+
+	return false;
 }

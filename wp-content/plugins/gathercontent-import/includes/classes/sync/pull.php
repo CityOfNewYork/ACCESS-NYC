@@ -57,6 +57,7 @@ class Pull extends Base {
 	public function init_hooks() {
 		parent::init_hooks();
 		add_action( 'wp_async_gc_pull_items', array( $this, 'sync_items' ) );
+		add_action( 'wp_async_nopriv_gc_pull_items', array( $this, 'sync_items' ) );
 		add_action( 'gc_pull_complete', array( __CLASS__, 'associate_hierarchy' ) );
 	}
 
@@ -98,7 +99,7 @@ class Pull extends Base {
 		$this->set_item( $id );
 
 		$post_data = array();
-		$attachments = false;
+		$attachments = $tax_terms = false;
 
 		if ( $existing = \GatherContent\Importer\get_post_by_item_id( $id ) ) {
 			// Check if item is up-to-date and if pull is necessary.
@@ -129,6 +130,11 @@ class Pull extends Base {
 			unset( $post_data['attachments'] );
 		}
 
+		if ( ! empty( $post_data['tax_input'] ) ) {
+			$tax_terms = $post_data['tax_input'];
+			unset( $post_data['tax_input'] );
+		}
+
 		if ( empty( $post_data['post_title'] ) && ! empty( $this->item->name ) ) {
 			$post_data['post_title'] = sanitize_text_field( $this->item->name );
 		}
@@ -148,6 +154,25 @@ class Pull extends Base {
 			'created_at' => $this->item->created_at->date,
 			'updated_at' => $this->item->updated_at->date,
 		) );
+
+		if ( ! empty( $tax_terms ) ) {
+			foreach ( $tax_terms as $taxonomy => $terms ) {
+				$taxonomy_obj = get_taxonomy( $taxonomy );
+				if ( ! $taxonomy_obj ) {
+					/* translators: %s: taxonomy name */
+					_doing_it_wrong( __FUNCTION__, sprintf( __( 'Invalid taxonomy: %s.' ), $taxonomy ), '4.4.0' );
+					continue;
+				}
+
+				// array = hierarchical, string = non-hierarchical.
+				if ( is_array( $terms ) ) {
+					$terms = array_filter( $terms );
+				}
+
+				// Set post terms without the cap-check.
+				wp_set_post_terms( $post_id, $terms, $taxonomy );
+			}
+		}
 
 		$updated_post_data = array();
 
@@ -222,7 +247,8 @@ class Pull extends Base {
 			$post_data[ $key ] = $this->mapping->data( $key );
 		}
 
-		if ( $status = $this->mapping->get_wp_status_for_item( $this->item ) ) {
+		$status = $this->mapping->get_wp_status_for_item( $this->item );
+		if ( $status && 'nochange' !== $status ) {
 			$post_data['post_status'] = $status;
 		}
 
@@ -601,7 +627,7 @@ class Pull extends Base {
 			}
 
 			foreach ( $attachment['media'] as $media ) {
-				$attach_id = $this->maybe_sideload_image( $media, $post_id );
+				$attach_id = $this->maybe_sideload_file( $media, $post_id );
 
 				if ( ! $attach_id || is_wp_error( $attach_id ) ) {
 					// @todo How to handle failures?
@@ -610,53 +636,89 @@ class Pull extends Base {
 
 				$token = '#_gc_media_id_' . $media->id . '#';
 
-				if ( 'featured_image' === $attachment['destination'] ) {
-					$featured_img_id = $attach_id;
-				} elseif ( in_array( $attachment['destination'], array( 'content_image', 'excerpt_image' ), true ) ) {
-					$field = 'excerpt_image' === $attachment['destination'] ? 'post_excerpt' : 'post_content';
+				if ( self::attachment_is_image( $attach_id ) ) {
+					if ( 'featured_image' === $attachment['destination'] ) {
+						$featured_img_id = $attach_id;
+					} elseif ( in_array( $attachment['destination'], array( 'content_image', 'excerpt_image' ), true ) ) {
+						$field = 'excerpt_image' === $attachment['destination'] ? 'post_excerpt' : 'post_content';
 
-					$image = wp_get_attachment_image( $attach_id, 'full', false, array(
-						'data-gcid' => $media->id,
-						'class'     => 'attachment-full size-full gathercontent-image',
-					) );
+						$atts = array(
+							'data-gcid' => $media->id,
+							'class'     => "gathercontent-image attachment-full size-full wp-image-$attach_id",
+						);
+						$image = wp_get_attachment_image( $attach_id, 'full', false, $atts );
 
-					// If we've found a GC "shortcode"...
-					if ( $media_replace = $this->get_media_shortcode_attributes( $post_data[ $field ], $media->position ) ) {
+						// If we've found a GC "shortcode"...
+						if ( $media_replace = $this->get_media_shortcode_attributes( $post_data[ $field ], $media->position ) ) {
 
-						foreach ( $media_replace as $replace_val => $atts ) {
+							foreach ( $media_replace as $replace_val => $atts ) {
 
-							$maybe_image = ! empty( $atts )
-								// Attempt to get requested image/link.
-								? $this->get_requested_media( $atts, $media->id, $attach_id )
-								: false;
+								$maybe_image = ! empty( $atts )
+									// Attempt to get requested image/link.
+									? $this->get_requested_media( $atts, $media->id, $attach_id )
+									: false;
 
-							$img = $maybe_image ? $maybe_image : $image;
+								$img = $maybe_image ? $maybe_image : $image;
 
-							// Replace the GC "shortcode" with the image/link.
-							$img = apply_filters( 'gc_content_image', $img, $media, $attach_id, $post_data );
-							$replacements[ $field ][ $replace_val ] = $img;
+								// Replace the GC "shortcode" with the image/link.
+								$img = apply_filters( 'gc_content_image', $img, $media, $attach_id, $post_data, $atts );
+								$replacements[ $field ][ $replace_val ] = $img;
+							}
+
+							// The token should be removed from the content.
+							$replacements[ $field ][ $token ] = '';
+
+						} else {
+
+							// Replace the token with the image.
+							$image = apply_filters( 'gc_content_image', $image, $media, $attach_id, $post_data, $atts );
+							$replacements[ $field ][ $token ] = $image;
+
 						}
+					} elseif ( 'gallery' === $attachment['destination'] ) {
+
+						$gallery_ids[] = $attach_id;
+						$gallery_token = $token;
 
 						// The token should be removed from the content.
-						$replacements[ $field ][ $token ] = '';
+						$replacements['post_content'][ $token ] = '';
 
 					} else {
-
-						// Replace the token with the image.
-						$image = apply_filters( 'gc_content_image', $image, $media, $attach_id, $post_data );
-						$replacements[ $field ][ $token ] = $image;
-
+						$replacements['meta_input'][ $attachment['destination'] ][] = $attach_id;
 					}
-				} elseif ( 'gallery' === $attachment['destination'] ) {
+				} else { // NOT is_image
+					if ( in_array( $attachment['destination'], array( 'content_image', 'excerpt_image' ), true ) ) {
+						$field = 'excerpt_image' === $attachment['destination'] ? 'post_excerpt' : 'post_content';
 
-					$gallery_ids[] = $attach_id;
-					$gallery_token = $token;
+						$atts = array(
+							'data-gcid' => $media->id,
+							'class'     => "gathercontent-file wp-file-$attach_id",
+						);
 
-					// The token should be removed from the content.
-					$replacements['post_content'][ $token ] = '';
+						$link = '<a href="' . esc_url( wp_get_attachment_url( $attach_id ) ) . '" data-gcid="' . $atts['data-gcid']. '" class="' . $atts['class'] . '">' . get_the_title( $attach_id  ) . '</a>';
 
-				} else {
-					$replacements['meta_input'][ $attachment['destination'] ][] = $attach_id;
+						// If we've found a GC "shortcode"...
+						if ( $media_replace = $this->get_media_shortcode_attributes( $post_data[ $field ], $media->position ) ) {
+
+							foreach ( $media_replace as $replace_val => $atts ) {
+								// Replace the GC "shortcode" with the file/link.
+								$link = apply_filters( 'gc_content_file', $link, $media, $attach_id, $post_data, $atts );
+								$replacements[ $field ][ $replace_val ] = $link;
+							}
+
+							// The token should be removed from the content.
+							$replacements[ $field ][ $token ] = '';
+
+						} else {
+
+							// Replace the token with the image.
+							$link = apply_filters( 'gc_content_file', $link, $media, $attach_id, $post_data, $atts );
+							$replacements[ $field ][ $token ] = $link;
+
+						}
+					} else {
+						$replacements['meta_input'][ $attachment['destination'] ][] = $attach_id;
+					}
 				}
 
 				// Store media item ID reference to attachment post-meta.
@@ -705,11 +767,11 @@ class Pull extends Base {
 	 *
 	 * @return int             The sideloaded attachment ID.
 	 */
-	protected function maybe_sideload_image( $media, $post_id ) {
+	protected function maybe_sideload_file( $media, $post_id ) {
 		$attachment = \GatherContent\Importer\get_post_by_item_id( $media->id, array( 'post_status' => 'inherit' ) );
 
 		if ( ! $attachment ) {
-			return $this->sideload_image( $media->url, $media->filename, $post_id );
+			return $this->sideload_file( $media->url, $media->filename, $post_id );
 		}
 
 		$attach_id = $attachment->ID;
@@ -741,7 +803,7 @@ class Pull extends Base {
 	 * @param int    $post_id   The post ID the media is to be associated with.
 	 * @return string|WP_Error  Populated HTML img tag on success, WP_Error object otherwise.
 	 */
-	protected function sideload_image( $file_url, $file_name, $post_id ) {
+	protected function sideload_file( $file_url, $file_name, $post_id ) {
 		if ( ! empty( $file_url ) ) {
 			$file_array = $this->tmp_file( $file_url, $file_name );
 
@@ -852,18 +914,11 @@ class Pull extends Base {
 	 * @return array              The temporary file array.
 	 */
 	protected function tmp_file( $file_url, $file_name ) {
-		// Set variables for storage, fix file filename for query strings.
-		preg_match( '/[^\?]+\.(jpe?g|jpe|gif|png)\b/i', $file_name, $matches );
-		if ( ! $matches ) {
-			return new WP_Error( 'image_sideload_failed', __( 'Invalid image URL' ) );
-		}
-
-		$file_array = array();
-		$file_array['name'] = basename( $matches[0] );
-
 		require_once( ABSPATH . '/wp-admin/includes/file.php' );
 		require_once( ABSPATH . '/wp-admin/includes/media.php' );
 		require_once( ABSPATH . '/wp-admin/includes/image.php' );
+
+		$file_array = array();
 
 		// Download file to temp location.
 		$file_array['tmp_name'] = download_url( $file_url );
@@ -873,7 +928,24 @@ class Pull extends Base {
 			return $file_array['tmp_name'];
 		}
 
+		preg_match( '/[^\?]+\.(jpe?g|jpe|gif|png)\b/i', $file_name, $matches );
+
+		$file_array['name'] = $matches ? basename( $matches[0] ) : basename( $file_name );
+
 		return $file_array;
+	}
+
+	/**
+	 * Checks an attachment's mime type to determine if it is an image.
+	 *
+	 * @since  3.1.2
+	 *
+	 * @param  int  $attach_id The attachement ID.
+	 *
+	 * @return bool
+	 */
+	public static function attachment_is_image( $attach_id ) {
+		return preg_match( '~(jpe?g|jpe|gif|png|svg)\b~', get_post_mime_type( $attach_id ) );
 	}
 
 	/**

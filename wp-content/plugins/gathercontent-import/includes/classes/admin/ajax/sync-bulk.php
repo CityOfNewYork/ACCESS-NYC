@@ -73,15 +73,15 @@ class Sync_Bulk extends Sync_Items {
 		$data = $this->_post_val( 'data' );
 		$posts = array();
 		foreach ( $data as $index => $post ) {
+			$mapping_id = absint( $post['mapping'] );
 			try {
-				$mapping_id = absint( $post['mapping'] );
 				$this->mappings[ $mapping_id ] = Mapping_Post::get( $mapping_id, true );
 				$posts[ $mapping_id ][] = $post;
 			} catch( \Exception $e ) {
 				wp_send_json_error( sprintf(
 					__( 'Error %d: Cannot find a mapping by that id: %d', 'gathercontent-import' ),
 					__LINE__,
-					absint( $this->_post_val( 'id' ) )
+					$mapping_id
 				) );
 			}
 		}
