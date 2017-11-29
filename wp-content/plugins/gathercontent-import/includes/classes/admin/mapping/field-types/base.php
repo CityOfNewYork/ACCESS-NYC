@@ -73,8 +73,6 @@ abstract class Base extends Plugin_Base implements Type {
 		echo "\n\t" . $option;
 	}
 
-	abstract function underscore_template( View $view );
-
 	public function underscore_options( $array ) {
 		foreach ( $array as $value => $label ) {
 			$this->underscore_option( $value, $label );
