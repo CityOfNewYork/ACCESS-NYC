@@ -36,9 +36,21 @@
     }
   }
 }
+/*spanish edits*/
+@if $language == 'es' {
+  @include media($screen-desktop) {
+    .program-filter-header {
+      padding: .75*$spacing-base 1.25*$spacing-base .75*$spacing-base $spacing-base;
+    }
+     &::after {
+      margin-top: 0 !important;
+    }
+  }
+}
 
 .program-filter-body {
   visibility: hidden;
+  background: red;
 
   .program-filter.active & {
     visibility: visible;
@@ -48,7 +60,8 @@
 .program-filter-list {
   @include transition(all .3s ease-out);
   list-style: none;
-  margin: 0 0 $spacing-base;
+  /*margin: 0 0 $spacing-base;*/
+  margin: 20 20;
   max-height: 0;
   overflow: hidden;
   padding: 0;
