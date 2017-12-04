@@ -16,6 +16,9 @@
     color: $color-white;
     font-weight: $font-weight-bold;
     text-decoration: none;
+    overflow-wrap: normal;
+    display: inline-block;
+    width: 80%;
     &:link,
     &:visited,
     &:hover,
@@ -38,25 +41,6 @@
     }
   }
 }
-/*spanish edits*/
-@if $language == 'es' {
-  @include media($screen-desktop) {
-    .program-filter-header {
-      &::after {
-        margin-top: 0 !important;
-      }
-    }
-  }
-  @include media($bp-desktop-up) {
-    .program-filter-header {
-      padding-right: 1.25*$spacing-base;
-      &::after {
-        margin-top: .5em;
-      }
-    }
-  }
-}
-/*spanish edits end*/
 
 .program-filter-body {
   visibility: hidden;

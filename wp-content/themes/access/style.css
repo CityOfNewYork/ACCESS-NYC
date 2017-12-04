@@ -2843,7 +2843,10 @@ input:focus + .screener-radio-label::before {
   .program-filter-header a {
     color: #fff;
     font-weight: bold;
-    text-decoration: none; }
+    text-decoration: none;
+    overflow-wrap: normal;
+    display: inline-block;
+    width: 80%; }
     .program-filter-header a:link, .program-filter-header a:visited, .program-filter-header a:hover, .program-filter-header a:active, .program-filter-header a:focus {
       color: #fff; }
   .program-filter.active .program-filter-header {
@@ -2860,8 +2863,6 @@ input:focus + .screener-radio-label::before {
       float: right;
       margin-top: .5em; }
 
-/*spanish edits*/
-/*spanish edits end*/
 .program-filter-body {
   visibility: hidden; }
   .program-filter.active .program-filter-body {
