@@ -25,7 +25,11 @@
         <aside>
           <h4>{{__('Filter Programs', 'accessnyctheme')}}:</h4>
           <div class="program-filter js-program-filter js-program-search-filter">
-            <!-- The copy for this should be whatever the active filter is.--><a class="program-filter-header js-toggle-filter" id="#program-options">{% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{__('All Programs', 'accessnyctheme')}}{% endif %}</a>
+            <!-- The copy for this should be whatever the active filter is.-->
+            <div class="program-filter-header js-toggle-filter">
+              <a id="#program-options">{% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{__('All Programs', 'accessnyctheme')}}{% endif %}</a>
+            </div>
+
             <div class="program-filter-body">
               <ul class="program-filter-list" id="program-options">
                 <!-- The active category is not linked.-->
