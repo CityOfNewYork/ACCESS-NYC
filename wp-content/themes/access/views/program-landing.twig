@@ -12,8 +12,11 @@
       <aside>
         <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
         <div class="program-filter js-program-filter">
+          
           <!-- The copy for this should be whatever the active filter is.-->
-          <a class="program-filter-header js-toggle-filter" href="#program-options">{% if not programCategory | length %}{{__('All Programs', 'accessnyctheme')}}{% else %}{{ programCategory.name }}{% endif %}</a>
+          <div class="program-filter-header js-toggle-filter">
+            <a href="#program-options">{% if not programCategory | length %}{{__('All Programs', 'accessnyctheme')}}{% else %}{{ programCategory.name }}{% endif %}</a>
+          </div>
           <div class="program-filter-body">
             <ul class="program-filter-list" id="program-options">
               <!-- The active category is not linked.-->

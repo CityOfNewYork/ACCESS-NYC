@@ -174,10 +174,11 @@ abstract class Base extends Plugin_Base {
 				break;
 			case 'post_status':
 				$select_options = array(
-					'publish' => __( 'Published', 'gathercontent-import' ),
-					'draft'   => __( 'Draft', 'gathercontent-import' ),
-					'pending' => __( 'Pending', 'gathercontent-import' ),
-					'private' => __( 'Private', 'gathercontent-import' ),
+					'publish'  => __( 'Published', 'gathercontent-import' ),
+					'draft'    => __( 'Draft', 'gathercontent-import' ),
+					'pending'  => __( 'Pending', 'gathercontent-import' ),
+					'private'  => __( 'Private', 'gathercontent-import' ),
+					'nochange' => __( 'Do not change', 'gathercontent-import' ),
 				);
 				break;
 			case 'post_type':
@@ -233,14 +234,12 @@ abstract class Base extends Plugin_Base {
 
 		if ( ! $meta_keys || $this->_get_val( 'delete-trans' ) ) {
 			// Retrieve custom field keys to include in the Custom Fields weight table select.
-			$meta_keys = $wpdb->get_col( $wpdb->prepare( "
+			$meta_keys = $wpdb->get_col( "
 				SELECT meta_key
 				FROM $wpdb->postmeta
-				WHERE meta_key NOT LIKE %s
+				WHERE meta_key NOT LIKE '_oembed_%'
 				GROUP BY meta_key
-			",
-				'_oembed_%'
-			) );
+			" );
 
 			set_transient( 'gathercontent_importer_custom_field_keys', $meta_keys, DAY_IN_SECONDS );
 		}

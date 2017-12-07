@@ -11,7 +11,7 @@
 </div>
 <div id="current_xml">	
 	<?php if ($is_csv): ?>
-		<?php PMXI_Render::render_csv_element($elements->item(0), false, '//'); ?>
+		<?php PMXI_Render::render_csv_element($elements->item($elements->length > 1 ? $show_element : 0), false, '//'); ?>
 	<?php else:?>
 		<?php PMXI_Render::render_xml_element($elements->item($elements->length > 1 ? $show_element : 0), false, '//'); ?>
 	<?php endif;?>

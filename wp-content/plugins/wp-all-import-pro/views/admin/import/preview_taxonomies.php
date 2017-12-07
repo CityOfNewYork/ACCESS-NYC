@@ -42,7 +42,7 @@
 
 						if ( ! empty($terms_a) and is_array($terms_a)){
 							foreach ($terms_a as $lvl => $term) {
-								if ( ! empty($post['tax_mapping'][$ctx])){						
+								if ( ! empty($post['tax_mapping'][$ctx]) and empty($post['tax_logic_mapping'][$ctx])){
 									$mapping_rules = json_decode($post['tax_mapping'][$ctx], true);
 									if ( ! empty($mapping_rules) ){ 
 										foreach ($mapping_rules as $rule_number => $rule) {

@@ -515,6 +515,101 @@ function my_jquery_enqueue() {
    wp_deregister_script('jquery');
 }
 
+// Function to trigger Google Maps render on content import
+global $office_loc;
+$office_loc = array(
+  'post_types' => array('location'),
+  'fields' => array(
+    'google_map' => 'field_588003b6be759',
+    'address_street'   => 'field_58800318be754', 
+    'address_street_2' => 'field_5880032abe755',
+    'city'      => 'field_58acf5f524f67',
+    'zip'       => 'field_58acf60c24f68',
+  ),
+);
+function trigger_gmaps(){
+  global $post;
+  global $office_loc;
+
+  // get the address field for the google map
+  $location = get_field( $office_loc['fields']['google_map'], $post->ID );
+
+  // check to see if the address is empty - if empty, populated it with the correct fields
+  if ( isset($location['address']) && isset($location['lat']) && isset($location['lng'])  ) {
+    $full_address =  $location['address'];
+  }else{
+    // create a location array to be populated
+    $location = array(
+      'address' => '',
+      'lat' => '',
+      'lng' => ''
+    );
+
+    // create a full address
+    $full_address = get_field( $office_loc['fields']['address_street'], $post->ID ) . ', ' .get_field( $office_loc['fields']['city'], $post->ID ) . ' ' . get_field( $office_loc['fields']['zip'], $post->ID );
+
+    $address = urlencode($full_address); // Spaces as + signs
+
+    // will want to replace the key
+    $address_query = wp_remote_get("https://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&key=AIzaSyBEl7iNZDAToQVavHuJW4D_PKPmoVpU7H4");
+    $address_json = wp_remote_retrieve_body( $address_query );
+    $address_data = json_decode($address_json);
+    // echo '<div class="error"><p>http://maps.google.com/maps/api/geocode/json?address=' . $address .'&sensor=false&key=AIzaSyBEl7iNZDAToQVavHuJW4D_PKPmoVpU7H4</p></div>';
+
+    if($address_data){
+      $lat = $address_data->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+      $lng = $address_data->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+    }
+    // set the new address
+    $location['address'] = $full_address;
+    $location['lat'] = $lat;
+    $location['lng'] = $lng;
+
+
+    // update the address, latitude, and longitude field
+    update_post_meta( $post->ID, 'address', $location['address'] );
+    update_post_meta( $post->ID, 'lat', $location['lat'] );
+    update_post_meta( $post->ID, 'lng', $location['lng'] );
+
+    // update the google map fields
+    update_field( $office_loc['fields']['google_map'], $location, $post->ID);
+  }
+}
+add_action('wp', 'trigger_gmaps', 1);
+// end of trigger_gmaps
+
+
+// GatherContent - Mapped WordPress Field meta_keys edit
+add_filter( 'gathercontent_importer_custom_field_keys', function( $meta_keys ) {
+  // empty array that will contain the unique meta keys for the mapped fields
+  $new_meta_keys = array();
+
+  // Creates a new array of meta_keys that are not prefixed with underscore
+  foreach ($meta_keys as $key=>$value) {
+    if (substr($value, 0, 1) != '_') {
+      $new_meta_keys[$key]=$value;
+    }
+  }
+  // return the new array 
+  return $new_meta_keys;
+} );
+// end of GatherContent - Mapped WordPress Field meta_keys edit
+
+
+// add meta description to head
+function access_meta_description($title)
+{
+  // render only on the homepage
+  if( is_home()){
+    echo '<meta name="description" content="' . get_bloginfo('description') . '" />' . "\r\n"; 
+    // remove tagline from title tag
+    $title = get_bloginfo('name');
+  }
+  return $title;
+}
+add_action( 'pre_get_document_title', 'access_meta_description', 10, 1);
+// end add meta description to head
+
 function validate_params($namespace, $subject) {
   $patterns = array(
     'programs'=> '/^[A-Z0-9,]*$/',

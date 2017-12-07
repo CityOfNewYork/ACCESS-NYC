@@ -111,7 +111,7 @@ if ( ! class_exists('PMXI_Render')){
 			else $path = $el->nodeName;		
 					
 			foreach ($el->attributes as $attr) {
-				echo '<option value="'.$path . '/@' . $attr->nodeName.'">'. $path . '@' . $attr->nodeName . '</option>';
+				echo '<option value="'.$path .'['. self::$option_paths[$path] .']'. '/@' . $attr->nodeName.'">'. $path .'['. self::$option_paths[$path] .']'. '@' . $attr->nodeName . '</option>';
 			}
 			if ($el->hasChildNodes()) {
 				foreach ($el->childNodes as $child) {

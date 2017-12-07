@@ -68,6 +68,7 @@ class Push extends Base {
 	public function init_hooks() {
 		parent::init_hooks();
 		add_action( 'wp_async_gc_push_items', array( $this, 'sync_items' ) );
+		add_action( 'wp_async_nopriv_gc_push_items', array( $this, 'sync_items' ) );
 	}
 
 	/**
@@ -316,7 +317,9 @@ class Push extends Base {
 				foreach ( $values as $key => $value ) {
 					$keys = explode( ':', $key );
 
-					unset( $this->item->config[ $keys[0] ]->elements[ $keys[1] ] );
+					if ( isset( $this->item->config[ $keys[0] ]->elements[ $keys[1] ] ) ) {
+						unset( $this->item->config[ $keys[0] ]->elements[ $keys[1] ] );
+					}
 
 					if ( empty( $this->item->config[ $keys[0] ]->elements ) ) {
 						unset( $this->item->config[ $keys[0] ] );
@@ -422,11 +425,18 @@ class Push extends Base {
 	 * @return bool $updated Whether value was updated.
 	 */
 	protected function set_taxonomy_field_value( $taxonomy ) {
-		$updated = false;
-		$terms = get_the_terms( $this->post, $taxonomy );
+		$terms      = get_the_terms( $this->post, $taxonomy );
 		$term_names = ! is_wp_error( $terms ) && ! empty( $terms )
 			? wp_list_pluck( $terms, 'name' )
 			: array();
+
+		$updated = $this->set_taxonomy_field_value_from_names( $term_names );
+
+		return apply_filters( 'gc_config_taxonomy_field_value_updated', $updated, $taxonomy, $terms, $this );
+	}
+
+	public function set_taxonomy_field_value_from_names( $term_names ) {
+		$updated = false;
 
 		switch ( $this->element->type ) {
 
@@ -487,6 +497,11 @@ class Push extends Base {
 		$updated = false;
 		$meta_value = get_post_meta( $this->post->ID, $meta_key, 1 );
 
+		$check = apply_filters( 'gc_config_pre_meta_field_value_updated', null, $meta_value, $meta_key, $this );
+		if ( null !== $check ) {
+			return $check;
+		}
+
 		switch ( $this->element->type ) {
 
 			case 'text':
@@ -506,6 +521,7 @@ class Push extends Base {
 				break;
 
 			case 'choice_checkbox':
+
 				if ( empty( $meta_value ) ) {
 					$meta_value = array();
 				} else {
@@ -519,7 +535,7 @@ class Push extends Base {
 
 		}
 
-		return $updated;
+		return apply_filters( 'gc_config_meta_field_value_updated', $updated, $meta_value, $meta_key, $this );
 	}
 
 	/**

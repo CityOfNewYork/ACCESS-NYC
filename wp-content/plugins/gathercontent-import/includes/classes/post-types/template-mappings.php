@@ -387,6 +387,12 @@ class Template_Mappings extends Base {
 			'template' => null,
 		) );
 
+		if ( ! empty( $mapping_args['content']['mapping'] ) ) {
+			$mapping_args['content']['mapping'] = array_filter( $mapping_args['content']['mapping'], function( $opt ) {
+				return ! empty( $opt['value'] ) ? $opt : false;
+			} );
+		}
+
 		$post_data = wp_parse_args( $post_data, array(
 			'post_content' => wp_json_encode( $mapping_args['content'] ),
 			'post_title'   => $mapping_args['title'],

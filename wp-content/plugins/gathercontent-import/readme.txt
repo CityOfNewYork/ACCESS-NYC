@@ -1,10 +1,10 @@
 === GatherContent Plugin ===
-Contributors:      gathercontent, mathew-chapman, namshee, justinsainton, jtsternberg
+Contributors:      gathercontent, mathew-chapman, namshee, jtsternberg, justinsainton
 Donate link:       http://www.gathercontent.com
 Tags               structured content, gather content, gathercontent, import, migrate, export, mapping, production, writing, collaboration, platform, connect, link, gather, client, word, production
 Requires at least: 3.8
-Tested up to:      4.7
-Stable tag:        3.0.4
+Tested up to:      4.8.3
+Stable tag:        3.1.7
 License:           GPL-2.0+
 License URI:       https://opensource.org/licenses/GPL-2.0
 
@@ -63,6 +63,68 @@ Below the text box is a button that will allow you to simply save all of that in
 6. Or change the item's GatherContent status in quick-edit mode.
 
 == Changelog ==
+
+= 3.1.7 =
+* Add WPML compatibility shim for properly mapping GatherContent taxonomy terms to translated language taxonomy terms where applicable, and vice-versa. **Note:** If the GC item uses the foreign language term name, then this will need to be unhooked. This can be done via:
+```php
+if ( class_exists( 'GatherContent\\Importer\\General' ) ) {
+	$general     = GatherContent\Importer\General::get_instance();
+	$wpml_compat = isset( $general->compatibility_wml ) ? $general->compatibility_wml : null;
+
+	remove_filter( 'gc_new_wp_post_data', array( $wpml_compat, 'maybe_transform_meta_for_wpml' ), 10, 2 );
+	remove_filter( 'gc_update_wp_post_data', array( $wpml_compat, 'maybe_transform_meta_for_wpml' ), 10, 2 );
+	remove_filter( 'gc_config_taxonomy_field_value_updated', array( $wpml_compat, 'maybe_update_taxonomy_item_value_from_wpml' ), 10, 4 );
+}
+```
+
+= 3.1.6 =
+* Update `\GatherContent\Importer\get_post_by_item_id()` to remove any WPML `WP_Query` filters so the mapped post is properly located.
+* Remove `.misc-pub-post-status` class from GC metabod, as it was adding a redundant pin icon.
+* Set user-agent when making GatherContent API calls.
+
+= 3.1.5 =
+* Update to enable the Yoast SEO focus keyword again (a Yoast SEO plugin update changed the field type).
+* Add ACF compatibility shim for transforming ACF checkbox values to/from GatherContent checkbox values.
+* Two new filters, `gc_config_pre_meta_field_value_updated` and `gc_config_meta_field_value_updated`.
+
+= 3.1.4 =
+* Fix issue where syncing multiple items would not work (only syncing the first). Caused by nested wp-async tasks causing the action name name to be modified and the hooked callbacks not to be called.
+* Fixed "Attempt to modify property of non-object" notice.
+
+= 3.1.3 =
+* Fix bug where some taxonomy terms were not being set (caused by changes made for [#27](https://github.com/gathercontent/wordpress-plugin/issues/27)).
+
+= 3.1.2 =
+* Allow side-loading non-image files/media from GatherContent.
+
+= 3.1.1 =
+* Added ability log the async requests in debug mode.
+* Removed duplicated abstract method. Fixes "Can't inherit abstract function" error which may occur on some servers.
+
+= 3.1.0 =
+* Do not require logged-in cookies for wp-async requests (which performa push/pull operations). Fixes [#27](https://github.com/gathercontent/wordpress-plugin/issues/27).
+
+= 3.0.9 =
+* Fix improperly cast object property for php 7 compatibility.
+
+= 3.0.8 =
+* Update the error message to indicate user may not have proper permission in GatherContent to view GatherContent Templates/Projects.
+* Add "class" and "alt" to whitelisted shortcode attributes for the GatherContent `[media]` shortcode.
+* Add the `wp_get_attachment_image()` attributes array to the `gc_content_image` filter.
+* Add `gc_admin_enqueue_style` and `gc_admin_enqueue_script` actions.
+* Fix issue when BadgeOS is installed. BadgeOS is enqueueing its (old) version of select2 in the entire admin. It is incompatible with the new version, so we need to remove it on our pages.
+* Check multiple server variable keys to detect if HTTP authentication is enabled on the site. ([https://wordpress.org/support/topic/import-hangs-at-1/](https://wordpress.org/support/topic/import-hangs-at-1/))
+* Fix occasional bug when "Do not import" being selected could cause issues when pushing content back to GatherContent.
+
+= 3.0.7 =
+* Improved percentage accuracy, and loader animations with the import/sync process.
+* Specific to the "1%" sync error, Now detects if site has HTTP authentication enabled, and provides settings fields for storing authentication credentials. (Plugin sync processes will not work if they are not provided)
+
+= 3.0.6 =
+* Improved stability when importing a very large number of items.
+
+= 3.0.5 =
+* Add ability to set "Do not change" for WP status updates. Props [@achbed](https://github.com/achbed), [#23](https://github.com/gathercontent/wordpress-plugin/pull/23).
 
 = 3.0.4 =
 * Update to complement the 3.0.0.8 release to make sure that the minimum 1.8.3 version of underscore is loaded early so that it works when SCRIPT_DEBUG is disabled.
@@ -170,6 +232,68 @@ Below the text box is a button that will allow you to simply save all of that in
 * Complete rewrite of old plugin
 
 == Upgrade Notice ==
+
+= 3.1.7 =
+* Add WPML compatibility shim for properly mapping GatherContent taxonomy terms to translated language taxonomy terms where applicable, and vice-versa. **Note:** If the GC item uses the foreign language term name, then this will need to be unhooked. This can be done via:
+```php
+if ( class_exists( 'GatherContent\\Importer\\General' ) ) {
+	$general     = GatherContent\Importer\General::get_instance();
+	$wpml_compat = isset( $general->compatibility_wml ) ? $general->compatibility_wml : null;
+
+	remove_filter( 'gc_new_wp_post_data', array( $wpml_compat, 'maybe_transform_meta_for_wpml' ), 10, 2 );
+	remove_filter( 'gc_update_wp_post_data', array( $wpml_compat, 'maybe_transform_meta_for_wpml' ), 10, 2 );
+	remove_filter( 'gc_config_taxonomy_field_value_updated', array( $wpml_compat, 'maybe_update_taxonomy_item_value_from_wpml' ), 10, 4 );
+}
+```
+
+= 3.1.6 =
+* Update `\GatherContent\Importer\get_post_by_item_id()` to remove any WPML `WP_Query` filters so the mapped post is properly located.
+* Remove `.misc-pub-post-status` class from GC metabod, as it was adding a redundant pin icon.
+* Set user-agent when making GatherContent API calls.
+
+= 3.1.5 =
+* Update to enable the Yoast SEO focus keyword again (a Yoast SEO plugin update changed the field type).
+* Add ACF compatibility shim for transforming ACF checkbox values to/from GatherContent checkbox values.
+* Two new filters, `gc_config_pre_meta_field_value_updated` and `gc_config_meta_field_value_updated`.
+
+= 3.1.4 =
+* Fix issue where syncing multiple items would not work (only syncing the first). Caused by nested wp-async tasks causing the action name name to be modified and the hooked callbacks not to be called.
+* Fixed "Attempt to modify property of non-object" notice.
+
+= 3.1.3 =
+* Fix bug where some taxonomy terms were not being set (caused by changes made for [#27](https://github.com/gathercontent/wordpress-plugin/issues/27)).
+
+= 3.1.2 =
+* Allow side-loading non-image files/media from GatherContent.
+
+= 3.1.1 =
+* Added ability log the async requests in debug mode.
+* Removed duplicated abstract method. Fixes "Can't inherit abstract function" error which may occur on some servers.
+
+= 3.1.0 =
+* Do not require logged-in cookies for wp-async requests (which performa push/pull operations). Fixes [#27](https://github.com/gathercontent/wordpress-plugin/issues/27).
+
+= 3.0.9 =
+* Fix improperly cast object property for php 7 compatibility.
+
+= 3.0.8 =
+* Update the error message to indicate user may not have proper permission in GatherContent to view GatherContent Templates/Projects.
+* Add "class" and "alt" to whitelisted shortcode attributes for the GatherContent `[media]` shortcode.
+* Add the `wp_get_attachment_image()` attributes array to the `gc_content_image` filter.
+* Add `gc_admin_enqueue_style` and `gc_admin_enqueue_script` actions.
+* Fix issue when BadgeOS is installed. BadgeOS is enqueueing its (old) version of select2 in the entire admin. It is incompatible with the new version, so we need to remove it on our pages.
+* Check multiple server variable keys to detect if HTTP authentication is enabled on the site. ([https://wordpress.org/support/topic/import-hangs-at-1/](https://wordpress.org/support/topic/import-hangs-at-1/))
+* Fix occasional bug when "Do not import" being selected could cause issues when pushing content back to GatherContent.
+
+= 3.0.7 =
+* Improved percentage accuracy, and loader animations with the import/sync process.
+* Detects if site has HTTP authentication enabled, and provides settings fields for storing authentication credentials. (Plugin sync processes will not work if they are not provided)
+
+= 3.0.6 =
+* Improved stability when importing a very large number of items.
+
+= 3.0.5 =
+* Add ability to set "Do not change" for WP status updates. Props [@achbed](https://github.com/achbed), [#23](https://github.com/gathercontent/wordpress-plugin/pull/23).
 
 = 3.0.4 =
 * Update to complement the 3.0.0.8 release to make sure that the minimum 1.8.3 version of underscore is loaded early so that it works when SCRIPT_DEBUG is disabled.

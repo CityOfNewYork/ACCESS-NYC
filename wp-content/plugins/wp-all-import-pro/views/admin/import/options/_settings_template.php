@@ -1,7 +1,7 @@
 <div class="wpallimport-collapsed closed wpallimport-section">
 	<div class="wpallimport-content-section">
 		<div class="wpallimport-collapsed-header">
-			<h3><?php _e('Configure Advanced Settings','wp_all_import_plugin');?></h3>	
+			<h3><?php _e('Advanced Options','wp_all_import_plugin');?></h3>	
 		</div>
 		<div class="wpallimport-collapsed-content" style="padding: 0;">
 			<div class="wpallimport-collapsed-content-inner">				
@@ -175,8 +175,13 @@
 								<p><?php _e('Editing this can break your entire import. You will have to re-create it from scratch.', 'wp_all_import_plugin');?></p> <br>
 								<div class="input">
 									<input type="text" name="xpath" value="<?php echo esc_attr($import->xpath) ?>" style="width: 50%; font-size: 18px; color: #555; height: 50px; padding: 10px;"/>
-								</div>														
-								
+								</div>
+								<?php if ( ! empty($post['delimiter']) ): ?>
+								<h4><?php _e('CSV Delimiter', 'wp_all_import_plugin'); ?></h4>
+								<div class="input">
+									<input type="text" name="delimiter" value="<?php echo $post['delimiter']; ?>" style="width: 50px !important; font-size: 18px; color: #555; height: 50px; padding: 10px;"/>
+								</div>
+								<?php endif; ?>
 								<h4><?php _e('Downloads', 'wp_all_import_plugin'); ?></h4>
 
 								<div class="input">
@@ -194,7 +199,7 @@
 										<input type="text" name="import_specified" value="<?php echo esc_attr($post['import_specified']) ?>" style="width:320px;"/>
 									</div>
 								</div>
-							</div>						
+							</div>
 							<?php if (isset($source_type) and in_array($source_type, array('ftp', 'file'))): ?>						
 								<div class="input">
 									<input type="hidden" name="is_delete_source" value="0" />
