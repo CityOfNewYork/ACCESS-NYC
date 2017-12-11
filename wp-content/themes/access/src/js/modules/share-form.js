@@ -3,8 +3,6 @@
 
 import $ from 'jquery';
 import Utility from 'modules/utility';
-import Cleave from 'cleave.js/dist/cleave.min';
-import 'cleave.js/dist/addons/cleave-phone.us';
 
 
 /**
