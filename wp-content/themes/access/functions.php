@@ -594,6 +594,19 @@ add_filter( 'gathercontent_importer_custom_field_keys', function( $meta_keys ) {
 } );
 // end of GatherContent - Mapped WordPress Field meta_keys edit
 
+// add meta description to head
+function access_meta_description($title)
+{
+  // render only on the homepage
+  if( is_home()){
+    echo '<meta name="description" content="' . get_bloginfo('description') . '" />' . "\r\n"; 
+    // remove tagline from title tag
+    $title = get_bloginfo('name');
+  }
+  return $title;
+}
+add_action( 'pre_get_document_title', 'access_meta_description', 10, 1);
+// end add meta description to head
 
 /**
  * Validate params through regex
