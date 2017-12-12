@@ -1,19 +1,8 @@
 .program-filter-header {
   background: $color-blue-bright;
   border-radius: $btn-radius;
-  color: $color-white;
   display: block;
-  font-weight: $font-weight-bold;
   padding: .75*$spacing-base $spacing-base;
-  text-decoration: none;
-
-  &:link,
-  &:visited,
-  &:hover,
-  &:active,
-  &:focus {
-    color: $color-white;
-  }
 
   &::after {
     @include triangle(.6em .4em, $color-white, down);
@@ -21,6 +10,19 @@
     display: inline-block;
     float: $text-direction-end;
     margin-top: .5em;
+  }
+
+  a{
+    color: $color-white;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+    &:link,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+      color: $color-white;
+    }
   }
 
   .program-filter.active & {
@@ -40,17 +42,24 @@
 @if $language == 'es' {
   @include media($screen-desktop) {
     .program-filter-header {
-      padding: .75*$spacing-base 1.25*$spacing-base .75*$spacing-base $spacing-base;
+      &::after {
+        margin-top: 0 !important;
+      }
     }
-     &::after {
-      margin-top: 0 !important;
+  }
+  @include media($bp-desktop-up) {
+    .program-filter-header {
+      padding-right: 1.25*$spacing-base;
+      &::after {
+        margin-top: .5em;
+      }
     }
   }
 }
+/*spanish edits end*/
 
 .program-filter-body {
   visibility: hidden;
-  background: red;
 
   .program-filter.active & {
     visibility: visible;
