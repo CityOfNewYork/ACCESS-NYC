@@ -30,6 +30,10 @@ wp-content/plugins/akismet/
 wp-content/plugins/akismet/*
 wp-content/themes/twentysixteen/
 wp-content/themes/twentysixteen/*
+wp-content/themes/twentyfifteen/
+wp-content/themes/twentyfifteen/*
+wp-content/themes/twentyseventeen/
+wp-content/themes/twentyseventeen/*
 wp-content/plugins/hello.php
 docker-compose.yaml
 docker-compose.yml
