@@ -536,7 +536,7 @@ function trigger_gmaps(){
   global $post;
   global $office_loc;
 
-  if ( $post->post_type == 'location' ){    
+  if ( $post && $post->post_type == 'location' ){
     // get the address field for the google map
     $location = get_field( $office_loc['fields']['google_map'], $post->ID );
 
