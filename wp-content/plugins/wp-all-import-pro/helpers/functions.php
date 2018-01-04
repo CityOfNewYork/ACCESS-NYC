@@ -14,8 +14,8 @@
 		}
 	}	
 
-	if (!function_exists('human_filesize')){
-		function human_filesize($bytes, $decimals = 2) {
+	if (!function_exists('pmxi_human_filesize')){
+		function pmxi_human_filesize($bytes, $decimals = 2) {
 		 	$sz = 'BKMGTP';
 		  	$factor = floor((strlen($bytes) - 1) / 3);
 		  	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
@@ -97,10 +97,20 @@
 	if ( ! function_exists('wp_all_import_get_remote_file_name')){
 
 		function wp_all_import_get_remote_file_name($filePath){
-			$type = (preg_match('%\W(csv|txt|dat|psv)$%i', basename($filePath))) ? 'csv' : false;
-			if (!$type) $type = (preg_match('%\W(xml)$%i', basename($filePath))) ? 'xml' : false;
-			if (!$type) $type = (preg_match('%\W(zip)$%i', basename($filePath))) ? 'zip' : false;
-			if (!$type) $type = (preg_match('%\W(gz)$%i', basename($filePath))) ? 'gz' : false;			
+		    $bn = wp_all_import_basename($filePath);
+			$type = (preg_match('%\W(csv|txt|dat|psv)$%i', $bn)) ? 'csv' : false;
+			if (!$type) $type = (preg_match('%\W(xml)$%i', $bn)) ? 'xml' : false;
+			if (!$type) $type = (preg_match('%\W(zip)$%i', $bn)) ? 'zip' : false;
+			if (!$type) $type = (preg_match('%\W(gz)$%i', $bn)) ? 'gz' : false;
+
+            if(!$type){
+                $filePath = strtok($filePath, "?");
+                $bn = wp_all_import_basename($filePath);
+                $type = (preg_match('%\W(csv|txt|dat|psv)$%i', $bn)) ? 'csv' : false;
+                if (!$type) $type = (preg_match('%\W(xml)$%i', $bn)) ? 'xml' : false;
+                if (!$type) $type = (preg_match('%\W(zip)$%i', $bn)) ? 'zip' : false;
+                if (!$type) $type = (preg_match('%\W(gz)$%i', $bn)) ? 'gz' : false;
+            }
 
 			return ($type) ? $type : false;
 		}
@@ -164,7 +174,7 @@
             $r = array();
             // populate $r
             foreach ($taxonomies as $taxonomy) {
-                if (in_array($taxonomy->name, $ignore) || $taxonomy->show_in_nav_menus === false ) {
+                if (in_array($taxonomy->name, $ignore)) {
                     continue;
                 }
                 if ( ! empty($taxonomy->labels->name) && strpos($taxonomy->labels->name, "_") === false){
@@ -192,5 +202,12 @@
         function wp_all_import_cmp_custom_types($a, $b)
         {
             return strcmp($a->labels->name, $b->labels->name);
+        }
+    }
+
+    if ( ! function_exists('wp_all_import_basename')) {
+        function wp_all_import_basename($file) {
+            $a = explode('/', $file);
+            return end($a);
         }
     }

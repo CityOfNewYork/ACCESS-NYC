@@ -1,0 +1,12 @@
+<tr class="{{ class }}">
+    <td>
+        <input type="checkbox">
+    </td>
+    <td>{{ component }}</td>
+    <td>{{ domain }}</td>
+    <td class="wpml-col-center"><span class="wpml-icon-translated" title="{{ completed_title }}">c</span></td>
+    <td class="wpml-col-center"><span class="wpml-icon-needs-update" title="{{ needs_update_title }}">u</span></td>
+    {% if 'plugin' == type %}
+    <td></td>
+    {% endif %}
+</tr>

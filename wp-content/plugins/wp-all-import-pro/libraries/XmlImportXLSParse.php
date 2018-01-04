@@ -34,19 +34,22 @@ class PMXI_XLSParser{
 
 		$objPHPExcel = PHPExcel_IOFactory::load($this->_filename);
 
-    $objPHPExcel = apply_filters('wp_all_import_phpexcel_object', $objPHPExcel, $this->_filename);
+        $objPHPExcel = apply_filters('wp_all_import_phpexcel_object', $objPHPExcel, $this->_filename);
 
-		$objWriter   = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV')->setDelimiter(',')
+        $PHPExcelDelimiter = ",";
+        $PHPExcelDelimiter = apply_filters('wp_all_import_phpexcel_delimiter', $PHPExcelDelimiter, $this->_filename);
+
+		$objWriter   = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV')->setDelimiter($PHPExcelDelimiter)
                                                           ->setEnclosure('"')
                                                           ->setLineEnding("\r\n")
                                                           ->setSheetIndex(0)
                                                           ->save($this->csv_path);	
 
-    include_once(PMXI_Plugin::ROOT_DIR . '/libraries/XmlImportCsvParse.php');
+        include_once(PMXI_Plugin::ROOT_DIR . '/libraries/XmlImportCsvParse.php');
 
-    $this->xml = new PMXI_CsvParser( array( 'filename' => $this->csv_path, 'targetDir' => $this->targetDir ) );
+        $this->xml = new PMXI_CsvParser( array( 'filename' => $this->csv_path, 'targetDir' => $this->targetDir ) );
 
-    @unlink($this->csv_path);
+        @unlink($this->csv_path);
 
 		return $this->xml->xml_path;
 

@@ -10,7 +10,7 @@ function new_duplicated_terms_filter( $post_ids, $duplicates_only = true ) {
 		$text      = __(
 			'<p>Some taxonomy terms are out of sync between languages. This means that content in some languages will not have the correct tags or categories.</p>
 			 <p>In order to synchronize the taxonomies, you need to go over each of them from the following list and click the "Update taxonomy hierarchy" button.</p>',
-			'wpml-translation-management'
+			'sitepress'
 		);
 		$collapsed = 'Taxonomy sync problem';
 

@@ -24,7 +24,7 @@ class WPML_PB_Update_Post {
 		$post              = get_post( $original_post_id );
 		$element_type      = 'post_' . $post->post_type;
 		$trid              = $this->sitepress->get_element_trid( $original_post_id, $element_type );
-		$post_translations = $this->sitepress->get_element_translations( $trid, $element_type );
+		$post_translations = $this->sitepress->get_element_translations( $trid, $element_type, false, true );
 
 		$languages = $this->package_data['languages'];
 

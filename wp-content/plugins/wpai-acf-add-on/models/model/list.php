@@ -1,8 +1,8 @@
 <?php
 /**
  * Incapsulates behavior for list of database records
- * 
- * @author Max Tsiplyakov <makstsiplyakov@gmail.com>
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 class PMAI_Model_List extends PMAI_Model {
 	

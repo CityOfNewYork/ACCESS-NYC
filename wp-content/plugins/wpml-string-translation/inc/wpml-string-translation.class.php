@@ -161,7 +161,7 @@ class WPML_String_Translation
 		if ( $sitepress ) {
 			$theme_localization_type = new WPML_Theme_Localization_Type( $sitepress );
 			if ( $theme_localization_type->is_st_type() ) {
-				add_action( 'icl_custom_localization_type', array( $this, 'localization_type_ui' ) );
+				add_action( 'wpml_custom_localization_type', array( $this, 'localization_type_ui' ) );
 			}
 		}
 
@@ -330,24 +330,33 @@ class WPML_String_Translation
 		return $links;
 	}
 
-	function localization_type_ui()
-	{
-		include WPML_ST_PATH . '/menu/theme-localization-ui.php';
+	public function localization_type_ui() {
+		$plugin_localization_factory = new WPML_ST_Plugin_Localization_UI_Factory();
+		$plugin_localization = $plugin_localization_factory->create();
 
+		$theme_localization_factory = new WPML_ST_Theme_Localization_UI_Factory();
+		$theme_localization = $theme_localization_factory->create();
+
+		$localization = new WPML_Theme_Plugin_Localization_UI();
+
+		echo $localization->render( $theme_localization );
+		echo $localization->render( $plugin_localization );
 	}
 
-	function scan_theme_for_strings( $no_echo = false ) {
+	function scan_theme_for_strings() {
 		require_once WPML_ST_PATH . '/inc/gettext/wpml-theme-string-scanner.class.php';
 
-		$scan_for_strings = new WPML_Theme_String_Scanner( wp_filesystem_init() );
-		$scan_for_strings->scan( $no_echo );
+		$file_hashing = new WPML_ST_File_Hashing();
+		$scan_for_strings = new WPML_Theme_String_Scanner( wp_filesystem_init(), $file_hashing );
+		$scan_for_strings->scan();
 	}
 
-	function scan_plugins_for_strings( $no_echo = false )
+	function scan_plugins_for_strings()
 	{
 		require_once WPML_ST_PATH . '/inc/gettext/wpml-plugin-string-scanner.class.php';
-		$scan_for_strings = new WPML_Plugin_String_Scanner( wp_filesystem_init() );
-		$scan_for_strings->scan( $no_echo );
+		$file_hashing = new WPML_ST_File_Hashing();
+		$scan_for_strings = new WPML_Plugin_String_Scanner( wp_filesystem_init(), $file_hashing );
+		$scan_for_strings->scan();
 	}
 
 	function plugin_po_file_download( $file = false, $recursion = 0 )
@@ -777,8 +786,8 @@ class WPML_String_Translation
 	public function initialize_wp_and_widget_strings( ) {
 		$this->check_db_for_gettext_context( );
 
-		icl_register_string('WP',__('Blog Title','wpml-string-translation'), get_option('blogname'));
-		icl_register_string('WP',__('Tagline', 'wpml-string-translation'), get_option('blogdescription'));
+		icl_register_string( 'WP', 'Blog Title', get_option( 'blogname' ) );
+		icl_register_string( 'WP', 'Tagline', get_option( 'blogdescription' ) );
 
 		wpml_st_init_register_widget_titles();
 
@@ -797,11 +806,11 @@ class WPML_String_Translation
 			}
 		}
 
-		$widget_text = get_option('widget_text');
-		if(is_array($widget_text)){
-			foreach($widget_text as $k=>$w){
-				if(!empty($w) && isset($w['title']) && in_array($k, $active_text_widgets)){
-					icl_register_string('Widgets', 'widget body - ' . md5($w['text']), $w['text']);
+		$widget_text = get_option( 'widget_text' );
+		if ( is_array( $widget_text ) ) {
+			foreach ( $widget_text as $k => $w ) {
+				if ( ! empty( $w ) && isset( $w['title'], $w['text'] ) && in_array( $k, $active_text_widgets ) && $w['text'] ) {
+					icl_register_string( 'Widgets', 'widget body - ' . md5( $w['text'] ), $w['text'] );
 				}
 			}
 		}
@@ -823,9 +832,7 @@ class WPML_String_Translation
 		                    && $this->is_admin_action_from_referer()
 			? $this->sitepress->user_lang_by_authcookie()
 			: $this->sitepress->get_current_language();
-		if ( $wp_api->constant( 'WP_ADMIN' )
-		     && ( $this->is_admin_action_from_referer()
-		          || ! $wp_api->constant( 'DOING_AJAX' ) ) && ! is_translated_admin_string( $name )
+		if ( $this->should_use_admin_language() && ! is_translated_admin_string( $name )
 		) {
 			$admin_display_lang = $this->get_admin_language();
 			$current_language   = $admin_display_lang ? $admin_display_lang : $current_language;
@@ -840,10 +847,20 @@ class WPML_String_Translation
 		return $this->current_string_language_cache[ $name ];
 	}
 
+	public function should_use_admin_language() {
+		$wp_api           = $this->sitepress->get_wp_api();
+
+		return $wp_api->constant( 'WP_ADMIN' ) && ( $this->is_admin_action_from_referer() || ! $wp_api->constant( 'DOING_AJAX' ) );
+	}
+
 	/**
 	 * @return string
 	 */
-	private function get_admin_language() {
+	public function get_admin_language() {
+		if ( $this->sitepress->is_wpml_switch_language_triggered() ) {
+			return $this->sitepress->get_admin_language();
+		}
+
 		if ( ! $this->admin_language ) {
 			$this->admin_language = $this->sitepress->get_admin_language();
 		}

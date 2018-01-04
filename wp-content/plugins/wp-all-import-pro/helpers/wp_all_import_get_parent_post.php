@@ -9,7 +9,7 @@ function wp_all_import_get_parent_post($identity, $post_type, $import_type = 'po
                 }
                 else
                 {
-                    $page = get_page_by_title($identity, OBJECT, $post_type);
+                    $page = get_page_by_title($identity, OBJECT, $post_type) or $page = get_page_by_path($identity, OBJECT, $post_type);
 
                     if ( empty($page) ){
                         $args = array(

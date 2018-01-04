@@ -25,7 +25,7 @@ class View {
 	 * @var array
 	 * @since  3.0.0
 	 */
-	protected static $views = '';
+	protected static $views = array();
 
 	/**
 	 * Render an HTML view with the given arguments and return the view's contents.

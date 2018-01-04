@@ -129,6 +129,11 @@ class WPML_String_Translation_Table {
 									<td style="border:none">
 										<?php echo esc_html( $lang['display_name'] ) ?>
 										<br/>
+										<?php if ( isset( $icl_string['translations'][ $lang['code'] ]['mo_string'] ) && $icl_string['translations'][ $lang['code'] ]['mo_string'] ) { ?>
+                                            <span class="wpml-st-mo-translation" title="<?php esc_attr_e( 'Imported translation', 'wpml-string-translations' ); ?>">
+                                                <?php echo esc_html( $icl_string['translations'][ $lang['code'] ]['mo_string'] ); ?>
+                                            </span>
+										<?php } ?>
 										<img class="icl_ajx_loader"
 											 src="<?php echo WPML_ST_URL ?>/res/img/ajax-loader.gif"
 											 style="float:left;display:none;position:absolute;margin:5px" alt=""/>
@@ -148,31 +153,38 @@ class WPML_String_Translation_Table {
 										_icl_string_translation_rtl_textarea( $lang['code'] ); ?>
 												rows="<?php echo esc_attr( $rows ) ?>" cols="40"
 												name="icl_st_translation"
+ 												data-lang="<?php echo $lang['code']; ?>"
 												<?php if ( isset( $icl_string['translations'][ $lang['code'] ] ) ): ?>id="icl_st_ta_<?php echo esc_attr( $icl_string['translations'][ $lang['code'] ]['id'] ) ?>"<?php endif; ?>
 										><?php echo esc_html( $string_value ) ?></textarea>
 									</td>
 								</tr>
 								<tr>
 									<td align="right" style="border:none">
-										<?php
-
-										?>
 										<?php if ( isset( $icl_string['translations'][ $lang['code'] ]['value'] ) && preg_match( '#<([^>]*)>#im', $icl_string['translations'][ $lang['code'] ]['value'] ) ): ?>
 											<br clear="all"/>
 											<div style="text-align:left;display:none" class="icl_html_preview"></div>
 											<a href="#" class="alignleft icl_htmlpreview_link">HTML preview</a>
 										<?php endif; ?>
 										<label>
-											<input<?php echo $form_disabled ?> type="checkbox"
-																			   name="icl_st_translation_complete"
-																			   value="1"
+											<input<?php echo $form_disabled ?> 
+														type="checkbox"
+														name="icl_st_translation_complete"
+ 														data-lang="<?php echo $lang['code']; ?>"
+														value="1"
 												<?php echo $tr_complete_checked ?>
 																			   <?php if ( isset( $icl_string['translations'][ $lang['code'] ] ) ): ?>id="icl_st_cb_<?php echo esc_attr( $icl_string['translations'][ $lang['code'] ]['id'] ) ?>"<?php endif; ?>
 											/>
-											<?php esc_html_e( 'Translation is complete', 'wpml-string-translation' ) ?>
+											<?php
+												if ( isset( $icl_string['translations'][ $lang['code'] ]['mo_string'] ) && $icl_string['translations'][ $lang['code'] ]['mo_string'] ) {
+													esc_html_e( 'Use my translation', 'wpml-string-translation' );
+												} else {
+													esc_html_e( 'Translation is complete', 'wpml-string-translation' );
+												}
+											?>
 										</label>&nbsp;
 										<input<?php echo $form_disabled ?> type="submit" class="button-secondary action"
-																		   value="<?php esc_attr_e( 'Save', 'wpml-string-translation' ) ?>"/>
+														data-lang="<?php echo $lang['code']; ?>"
+														value="<?php esc_attr_e( 'Save', 'wpml-string-translation' ) ?>"/>
 										<?php if ( $form_disabled_reason ): ?>
 											<br clear="all"/>
 											<p><?php echo esc_html( $form_disabled_reason ) ?></p>

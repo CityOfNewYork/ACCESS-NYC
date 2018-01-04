@@ -68,7 +68,7 @@
 
 									<?php if ( post_type_supports( $post_type, 'excerpt' ) ):?>														
 									<div class="template_input">
-										<input type="text" name="post_excerpt" style="width:100%; line-height: 25px;" value="<?php echo esc_attr($post['post_excerpt']) ?>" placeholder="<?php echo ($post_type == 'product' and class_exists('PMWI_Plugin')) ? __('WooCommerce Short Description', 'wp_all_import_plugin') : __('Excerpt', 'wp_all_import_plugin'); ?>"/>
+										<input type="text" name="post_excerpt" style="width:100%; line-height: 25px;" value="<?php echo esc_attr($post['post_excerpt']) ?>" placeholder="<?php if ($post_type == 'product' and class_exists('PMWI_Plugin')): _e('WooCommerce Short Description', 'wp_all_import_plugin'); else: _e('Excerpt', 'wp_all_import_plugin'); endif; ?>"/>
 									</div>
 									<?php endif; ?>
 

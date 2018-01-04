@@ -1,19 +1,8 @@
 .program-filter-header {
   background: $color-blue-bright;
   border-radius: $btn-radius;
-  color: $color-white;
   display: block;
-  font-weight: $font-weight-bold;
   padding: .75*$spacing-base $spacing-base;
-  text-decoration: none;
-
-  &:link,
-  &:visited,
-  &:hover,
-  &:active,
-  &:focus {
-    color: $color-white;
-  }
 
   &::after {
     @include triangle(.6em .4em, $color-white, down);
@@ -21,6 +10,22 @@
     display: inline-block;
     float: $text-direction-end;
     margin-top: .5em;
+  }
+
+  a{
+    color: $color-white;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+    overflow-wrap: normal;
+    display: inline-block;
+    width: 80%;
+    &:link,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+      color: $color-white;
+    }
   }
 
   .program-filter.active & {
@@ -48,7 +53,8 @@
 .program-filter-list {
   transition: all .3s ease-out;
   list-style: none;
-  margin: 0 0 $spacing-base;
+  /*margin: 0 0 $spacing-base;*/
+  margin: 20 20;
   max-height: 0;
   overflow: hidden;
   padding: 0;

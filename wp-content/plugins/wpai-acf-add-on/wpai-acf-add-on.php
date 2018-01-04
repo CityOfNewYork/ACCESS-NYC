@@ -3,7 +3,7 @@
 Plugin Name: WP All Import - ACF Add-On
 Plugin URI: http://www.wpallimport.com/
 Description: Import to Advanced Custom Fields. Requires WP All Import & Advanced Custom Fields.
-Version: 3.1.3
+Version: 3.1.5
 Author: Soflyy
 */
 /**
@@ -24,7 +24,7 @@ define('PMAI_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
  */
 define('PMAI_PREFIX', 'pmai_');
 
-define('PMAI_VERSION', '3.1.3');
+define('PMAI_VERSION', '3.1.5');
 
 if ( class_exists('PMAI_Plugin') and PMAI_EDITION == "free"){
 
@@ -52,7 +52,7 @@ else {
 	 * Main plugin file, Introduces MVC pattern
 	 *
 	 * @singletone
-	 * @author Max Tsiplyakov <makstsiplyakov@gmail.com>
+	 * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
 	 */
 
 	final class PMAI_Plugin {
@@ -239,7 +239,9 @@ else {
 		}
 
 		public function init(){
-			self::init_available_acf_fields();
+			if ( is_admin() || ! empty($_GET['import_key']) ){
+				self::init_available_acf_fields();
+			}
 			$this->load_plugin_textdomain();
 		}
 
@@ -462,7 +464,14 @@ else {
 						self::$all_acf_fields[] = $acf_entry->post_excerpt;
 
 					}
+				}
 
+				$fields = acf_local()->fields;
+
+				if ( ! empty($fields) ) {
+					foreach ($fields as $key => $field) {
+						self::$all_acf_fields[] = $field['name'];
+					}
 				}
 			}
 			else{

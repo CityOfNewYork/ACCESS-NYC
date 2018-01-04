@@ -1,7 +1,7 @@
 <?php 
 /**
  * Base class for models
- * 
+ *
  * @author Pavel Kulbakin <p.kulbakin@gmail.com>
  */
 class PMXI_Model_Record extends PMXI_Model {

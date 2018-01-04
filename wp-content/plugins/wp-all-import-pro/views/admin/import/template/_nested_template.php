@@ -1,32 +1,7 @@
 <?php $custom_type = get_post_type_object( $post_type ); ?>
-<?php
 
-$l10n = array(
-	'queue_limit_exceeded' => 'You have attempted to queue too many files.',
-	'file_exceeds_size_limit' => 'This file exceeds the maximum upload size for this site.',
-	'zero_byte_file' => 'This file is empty. Please try another.',
-	'invalid_filetype' => 'This file type is not allowed. Please try another.',
-	'default_error' => 'An error occurred in the upload. Please try again later.',
-	'missing_upload_url' => 'There was a configuration error. Please contact the server administrator.',
-	'upload_limit_exceeded' => 'You may only upload 1 file.',
-	'http_error' => 'HTTP Error: Click here for our <a href="http://www.wpallimport.com/documentation/advanced/troubleshooting/" target="_blank">troubleshooting guide</a>, or ask your web host to look in your error_log file for an error that takes place at the same time you are trying to upload a file.',
-	'upload_failed' => 'Upload failed.',
-	'io_error' => 'IO error.',
-	'security_error' => 'Security error.',
-	'file_cancelled' => 'File canceled.',
-	'upload_stopped' => 'Upload stopped.',
-	'dismiss' => 'Dismiss',
-	'crunching' => 'Crunching&hellip;',
-	'deleted' => 'moved to the trash.',
-	'error_uploading' => 'has failed to upload due to an error',
-	'cancel_upload' => 'Cancel upload',
-	'dismiss' => 'Dismiss'
-);
-
-?>
 <script type="text/javascript">
 	var plugin_url = '<?php echo WP_ALL_IMPORT_ROOT_URL; ?>';
-	var swfuploadL10n = <?php echo json_encode($l10n); ?>;
 </script>
 
 <div class="wpallimport-collapsed closed nested_options wpallimport-section">

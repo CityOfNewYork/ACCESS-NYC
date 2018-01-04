@@ -196,9 +196,11 @@ class WPML_Query_Parser {
 	 * @return WP_Query
 	 */
 	private function adjust_taxonomy_query( $q ) {
-		if ( isset( $q->query_vars['tax_query'] ) && is_array( $q->query_vars['tax_query'] )
-		     && isset( $q->tax_query->queries ) && is_array( $q->tax_query->queries )
-		     && isset( $q->query['tax_query'] ) && is_array( $q->query['tax_query'] )
+		if ( isset( $q->query_vars['tax_query'], $q->tax_query->queries, $q->query['tax_query'] ) &&
+		     is_array( $q->query_vars['tax_query'] ) &&
+		     is_array( $q->tax_query->queries ) &&
+		     is_array( $q->query['tax_query'] ) &&
+		     empty( $q->query_vars['suppress_filters'] )
 		) {
 
 			$new_conditions = $this->adjust_tax_query_conditions( $q->query['tax_query'] );

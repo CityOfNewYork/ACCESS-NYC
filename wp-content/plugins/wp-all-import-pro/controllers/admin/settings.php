@@ -1,14 +1,16 @@
 <?php 
 /**
- * Admin Statistics page
- * 
- * @author Pavel Kulbakin <p.kulbakin@gmail.com>
+ * Admin Settings page
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 	public static $path;
 
 	public static $upload_transient;
+
+	public $slug = 'wp-all-import-pro';
 
 	public function __construct(){	
 
@@ -33,9 +35,10 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 				self::$path = wp_all_import_secure_file($uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::UPLOADS_DIRECTORY );
 				set_transient( self::$upload_transient, self::$path);
 			}
-
 		}
 
+		$sleep = apply_filters( 'wp_all_import_shard_delay', 0 );
+		usleep($sleep);
 	}
 	
 	public function index() {
@@ -52,7 +55,41 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		);
 
 		$this->data['addons'] = array_reverse($this->data['addons']);
-		
+
+		$this->data['license_message'] = '';
+
+		if ($this->input->post('is_license_submitted')) { // save license
+
+			check_admin_referer('edit-license', '_wpnonce_edit-license');
+
+			if ( ! $this->errors->get_error_codes()) { // no validation errors detected
+
+				PMXI_Plugin::getInstance()->updateOption($post);
+
+				if (empty($_POST['pmxi_license_activate']) and empty($_POST['pmxi_license_deactivate'])) {
+					foreach ($this->data['addons'] as $class => $addon) {
+						$post['statuses'][$class] = $this->check_license($class);
+						if ($post['statuses'][$class] == 'valid'){
+							$this->data['license_message'] = __('License activated.', 'wp_all_import_plugin');
+						}
+					}
+					PMXI_Plugin::getInstance()->updateOption($post);
+				}
+
+				isset($_POST['pmxi_license_activate']) and $this->activate_licenses();
+			}
+
+			$this->data['post'] = $post = PMXI_Plugin::getInstance()->getOption();
+		}
+
+		$this->data['is_license_active'] = false;
+
+		foreach ($this->data['addons'] as $class => $addon) {
+			if( ! empty($post['statuses'][$class]) && $post['statuses'][$class] == 'valid' ){
+				$this->data['is_license_active'] = true;
+			}
+		}
+
 		if ($this->input->post('is_settings_submitted')) { // save settings form
 			check_admin_referer('edit-settings', '_wpnonce_edit-settings');
 			
@@ -69,28 +106,11 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 				PMXI_Plugin::getInstance()->updateOption($post);
 
-				if (empty($_POST['pmxi_license_activate']) and empty($_POST['pmxi_license_deactivate'])) {
-					foreach ($this->data['addons'] as $class => $addon) {
-						$post['statuses'][$class] = $this->check_license($class);
-					}					
-					PMXI_Plugin::getInstance()->updateOption($post);
-				}				
-
-				isset( $_POST['pmxi_license_activate'] ) and $this->activate_licenses();
-
 				$files = new PMXI_File_List(); $files->sweepHistory(); // adjust file history to new settings specified
 				
 				wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Settings saved', 'wp_all_import_plugin')), $this->baseUrl)); die();
 			}
 		}
-		/*else{			
-
-			foreach ($this->data['addons'] as $class => $addon) {
-				$post['statuses'][$class] = $this->check_license($class);
-			}								
-
-			PMXI_Plugin::getInstance()->updateOption($post);	
-		}*/
 
 		if ($this->input->post('is_templates_submitted')) { // delete templates form
 
@@ -118,13 +138,29 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 							if (!empty($import_data)){
 								$templates_data = json_decode($import_data, true);
 								
-								if (!empty($templates_data)){
-									$template = new PMXI_Template_Record();
-									foreach ($templates_data as $template_data) {
-										unset($template_data['id']);
-										$template->clear()->set($template_data)->insert();
+								if ( ! empty($templates_data) ){
+									if ( ! empty($templates_data[0]['options']) && is_array($templates_data[0]['options'])){
+										$templateOptions = $templates_data[0]['options'];
 									}
-									wp_redirect(add_query_arg('pmxi_nt', urlencode(sprintf(_n('%d template imported', '%d templates imported', count($templates_data), 'wp_all_import_plugin'), count($templates_data))), $this->baseUrl)); die();
+									else{
+										$templateOptions = empty($templates_data[0]['options']) ? false : unserialize($templates_data[0]['options']);
+									}
+									if ( empty($templateOptions) ){
+										$this->errors->add('form-validation', __('The template is invalid. Options are missing.', 'wp_all_import_plugin'));
+									}
+									else{
+										if (isset($templateOptions['is_user_export'])){
+											$this->errors->add('form-validation', __('The template you\'ve uploaded is intended to be used with WP All Export plugin.', 'wp_all_import_plugin'));
+										}
+										else{
+											$template = new PMXI_Template_Record();
+											foreach ($templates_data as $template_data) {
+												unset($template_data['id']);
+												$template->clear()->set($template_data)->insert();
+											}
+											wp_redirect(add_query_arg('pmxi_nt', urlencode(sprintf(_n('%d template imported', '%d templates imported', count($templates_data), 'wp_all_import_plugin'), count($templates_data))), $this->baseUrl)); die();
+										}
+									}
 								}
 								else $this->errors->add('form-validation', __('Wrong imported data format', 'wp_all_import_plugin'));							
 							}
@@ -184,6 +220,15 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 			// retrieve the license from the database
 			$options = PMXI_Plugin::getInstance()->getOption();
+
+			global $wpdb;
+
+			delete_transient(PMXI_Plugin::$cache_key);
+
+			$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . PMXI_Plugin::$cache_key) );
+			$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . PMXI_Plugin::$cache_key) );
+
+			delete_site_transient('update_plugins');
 			
 			foreach ($_POST['pmxi_license_activate'] as $class => $val) {							
 
@@ -195,8 +240,9 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 						// data to send in our API request
 						$api_params = array( 
 							'edd_action'=> 'activate_license', 
-							'license' 	=> $options['licenses'][$class], 
-							'item_name' => urlencode( $product_name ) // the name of our product in EDD
+							'license' 	=> PMXI_Plugin::decode($options['licenses'][$class]),
+							'item_name' => urlencode( $product_name ), // the name of our product in EDD
+							'url' => home_url()
 						);								
 						
 						// Call the custom API.
@@ -227,11 +273,18 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 	* Check plugin's license
 	*
 	*/
-	public static function check_license($class) {
+	public function check_license($class) {
 
-		global $wp_version;
+		global $wp_version, $wpdb;
 
-		$options = PMXI_Plugin::getInstance()->getOption();	
+		delete_transient(PMXI_Plugin::$cache_key);
+
+		$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . PMXI_Plugin::$cache_key) );
+		$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . PMXI_Plugin::$cache_key) );
+
+		delete_site_transient('update_plugins');
+
+		$options = PMXI_Plugin::getInstance()->getOption();
 
 		if (!empty($options['licenses'][$class])){
 
@@ -241,7 +294,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 				$api_params = array( 
 					'edd_action' => 'check_license', 
-					'license' => $options['licenses'][$class], 
+					'license' => PMXI_Plugin::decode($options['licenses'][$class]),
 					'item_name' => urlencode( $product_name ) 
 				);
 
@@ -603,7 +656,6 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 					switch ( $post_type ) {
 
-						case 'product':
 						case 'shop_order':
 							
 							if ( ! class_exists('WooCommerce') ) {

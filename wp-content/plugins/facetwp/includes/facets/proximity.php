@@ -1,6 +1,6 @@
 <?php
 
-class FacetWP_Facet_Proximity_Core
+class FacetWP_Facet_Proximity_Core extends FacetWP_Facet
 {
 
     /**
@@ -36,14 +36,23 @@ class FacetWP_Facet_Proximity_Core
 
         $lat = empty( $value[0] ) ? '' : $value[0];
         $lng = empty( $value[1] ) ? '' : $value[1];
-        $chosen_radius = empty( $value[2] ) ? '' : $value[2];
+        $chosen_radius = empty( $value[2] ) ? '' : (float) $value[2];
         $location_name = empty( $value[3] ) ? '' : urldecode( $value[3] );
 
-        $radius_options = apply_filters( 'facetwp_proximity_radius_options', array( 10, 25, 50, 100, 250 ) );
+        $radius_options = array( 10, 25, 50, 100, 250 );
+
+        // Support dynamic radius
+        if ( ! empty( $chosen_radius ) && 0 < $chosen_radius ) {
+            if ( ! in_array( $chosen_radius, $radius_options ) ) {
+                $radius_options[] = $chosen_radius;
+            }
+        }
+
+        $radius_options = apply_filters( 'facetwp_proximity_radius_options', $radius_options );
 
         ob_start();
 ?>
-        <input type="text" id="facetwp-location" value="<?php echo $location_name; ?>" placeholder="<?php _e( 'Enter location', 'fwp' ); ?>" />
+        <input type="text" id="facetwp-location" value="<?php echo esc_attr( $location_name ); ?>" placeholder="<?php _e( 'Enter location', 'fwp' ); ?>" />
 
         <select id="facetwp-radius">
             <?php foreach ( $radius_options as $radius ) : ?>
@@ -53,8 +62,8 @@ class FacetWP_Facet_Proximity_Core
         </select>
 
         <div style="display:none">
-            <input type="text" class="facetwp-lat" value="<?php echo $lat; ?>" />
-            <input type="text" class="facetwp-lng" value="<?php echo $lng; ?>" />
+            <input type="text" class="facetwp-lat" value="<?php echo esc_attr( $lat ); ?>" />
+            <input type="text" class="facetwp-lng" value="<?php echo esc_attr( $lng ); ?>" />
         </div>
 <?php
         return ob_get_clean();
@@ -78,11 +87,18 @@ class FacetWP_Facet_Proximity_Core
 
         $lat = (float) $selected_values[0];
         $lng = (float) $selected_values[1];
-        $radius = (int) $selected_values[2];
+        $radius = (float) $selected_values[2];
 
         $sql = "
-        SELECT DISTINCT post_id,
-        ( $earth_radius * acos( cos( radians( $lat ) ) * cos( radians( facet_value ) ) * cos( radians( facet_display_value ) - radians( $lng ) ) + sin( radians( $lat ) ) * sin( radians( facet_value ) ) ) ) AS distance
+        SELECT DISTINCT post_id, ( $earth_radius * acos(
+            greatest( -1, least( 1, ( /* acos() must be between -1 and 1 */
+                cos( radians( $lat ) ) *
+                cos( radians( facet_value ) ) *
+                cos( radians( facet_display_value ) - radians( $lng ) ) +
+                sin( radians( $lat ) ) *
+                sin( radians( facet_value ) )
+            ) ) )
+        ) ) AS distance
         FROM {$wpdb->prefix}facetwp_index
         WHERE facet_name = '{$facet['name']}'
         HAVING distance < $radius
@@ -115,13 +131,19 @@ class FacetWP_Facet_Proximity_Core
 (function($) {
     wp.hooks.addAction('facetwp/load/proximity', function($this, obj) {
         $this.find('.facet-source').val(obj.source);
+        $this.find('.facet-source-other').val(obj.source_other);
         $this.find('.facet-unit').val(obj.unit);
     });
 
-    wp.hooks.addFilter('facetwp/save/proximity', function($this, obj) {
+    wp.hooks.addFilter('facetwp/save/proximity', function(obj, $this) {
         obj['source'] = $this.find('.facet-source').val();
+        obj['source_other'] = $this.find('.facet-source-other').val();
         obj['unit'] = $this.find('.facet-unit').val();
         return obj;
+    });
+
+    wp.hooks.addAction('facetwp/change/proximity', function($this) {
+        $this.closest('.facetwp-row').find('.facet-source-other').trigger('change');
     });
 })(jQuery);
 </script>
@@ -134,121 +156,24 @@ class FacetWP_Facet_Proximity_Core
      */
     function front_scripts() {
         if ( apply_filters( 'facetwp_proximity_load_js', true ) ) {
-?>
-<script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
-<?php
+
+            // hard-coded
+            $api_key = defined( 'GMAPS_API_KEY' ) ? GMAPS_API_KEY : '';
+
+            // admin ui
+            $tmp_key = FWP()->helper->get_setting( 'gmaps_api_key' );
+            $api_key = empty( $tmp_key ) ? $api_key : $tmp_key;
+
+            // hook
+            $api_key = apply_filters( 'facetwp_gmaps_api_key', $api_key );
+
+            FWP()->display->assets['gmaps'] = '//maps.googleapis.com/maps/api/js?libraries=places&key=' . $api_key;
         }
 
         // Pass extra options into Places Autocomplete
         $options = apply_filters( 'facetwp_proximity_autocomplete_options', array() );
-?>
-<script>
-
-(function($) {
-    $(document).on('facetwp-loaded', function() {
-        var place;
-        var options = <?php echo json_encode( $options ); ?>;
-        var input = document.getElementById('facetwp-location');
-        var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-        var $input = $('#facetwp-location');
-        $input.wrap('<span class="location-wrap"></span>');
-        $input.before('<i class="locate-me"></i>');
-        $input.trigger('keyup');
-
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            place = autocomplete.getPlace();
-            $('.facetwp-lat').val(place.geometry.location.lat());
-            $('.facetwp-lng').val(place.geometry.location.lng());
-            FWP.refresh();
-        });
-    });
-
-
-    /**
-     * Event handlers
-     */
-    $('.facetwp-type-proximity').on('click', '.locate-me', function(e) {
-        var $this = $(this);
-        var $input = $('#facetwp-location');
-        var $facet = $input.closest('.facetwp-facet');
-        var $lat = $('.facetwp-lat');
-        var $lng = $('.facetwp-lng');
-
-        // Reset
-        if ($this.hasClass('reset')) {
-            $facet.find('.facetwp-lat').val('');
-            $facet.find('.facetwp-lng').val('');
-            FWP.refresh();
-            return;
-        }
-
-        // Loading icon
-        $('.locate-me').addClass('loading');
-
-        // HTML5 geolocation
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
-
-            $lat.val(lat);
-            $lng.val(lng);
-
-            var geocoder = new google.maps.Geocoder();
-            var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
-            geocoder.geocode({'location': latlng}, function(results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    $input.val(results[0].formatted_address);
-                }
-                else {
-                    $input.val('Your location');
-                }
-                $('.locate-me').addClass('reset');
-                FWP.refresh();
-            });
-
-            $('.locate-me').removeClass('loading');
-        },
-        function() {
-            $('.locate-me').removeClass('loading');
-        });
-    });
-
-    $(document).on('keyup', '#facetwp-location', function() {
-        if ('' == $(this).val()) {
-            $('.locate-me').removeClass('reset');
-        }
-        else {
-            $('.locate-me').addClass('reset');
-        }
-    });
-
-    $(document).on('change', '#facetwp-radius', function() {
-        if ('' != $('#facetwp-location').val()) {
-            FWP.refresh();
-        }
-    });
-
-
-    /*
-     * WP-JS-Hooks
-     */
-    wp.hooks.addAction('facetwp/refresh/proximity', function($this, facet_name) {
-        var lat = $this.find('.facetwp-lat').val();
-        var lng = $this.find('.facetwp-lng').val();
-        var radius = $this.find('#facetwp-radius').val();
-        var location = encodeURIComponent($this.find('#facetwp-location').val());
-        FWP.facets[facet_name] = ('' != lat && 'undefined' != typeof lat) ?
-            [lat, lng, radius, location] : [];
-    });
-
-    wp.hooks.addFilter('facetwp/selections/proximity', function(label, params) {
-        return 'Clear location';
-    });
-})(jQuery);
-
-</script>
-<?php
+        FWP()->display->json['proximity']['autocomplete_options'] = $options;
+        FWP()->display->json['proximity']['clearText'] = __( 'Clear location', 'fwp' );
     }
 
 
@@ -256,7 +181,29 @@ class FacetWP_Facet_Proximity_Core
      * Output admin settings HTML
      */
     function settings_html() {
+        $sources = FWP()->helper->get_data_sources();
 ?>
+        <tr>
+            <td>
+                <?php _e('Other data source', 'fwp'); ?>:
+                <div class="facetwp-tooltip">
+                    <span class="icon-question">?</span>
+                    <div class="facetwp-tooltip-content"><?php _e( 'Use a separate value for the longitude?', 'fwp' ); ?></div>
+                </div>
+            </td>
+            <td>
+                <select class="facet-source-other">
+                    <option value=""><?php _e( 'None', 'fwp' ); ?></option>
+                    <?php foreach ( $sources as $group ) : ?>
+                    <optgroup label="<?php echo $group['label']; ?>">
+                        <?php foreach ( $group['choices'] as $val => $label ) : ?>
+                        <option value="<?php echo esc_attr( $val ); ?>"><?php echo esc_html( $label ); ?></option>
+                        <?php endforeach; ?>
+                    </optgroup>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td>
                 <?php _e( 'Unit of measurement', 'fwp' ); ?>:
@@ -285,8 +232,19 @@ class FacetWP_Facet_Proximity_Core
 
             // Only handle "lat, lng" strings
             if ( is_string( $latlng ) ) {
-                $latlng = trim( $latlng, '()' ); // no parentheses
-                $latlng = str_replace( ' ', '', $latlng ); // no spaces
+                $latlng = preg_replace( '/[^0-9.,-]/', '', $latlng );
+
+                if ( ! empty( $facet['source_other'] ) ) {
+                    $other_params = $params;
+                    $other_params['facet_source'] = $facet['source_other'];
+                    $rows = $class->get_row_data( $other_params );
+
+                    if ( false === strpos( $latlng, ',' ) ) {
+                        $lng = $rows[0]['facet_display_value'];
+                        $lng = preg_replace( '/[^0-9.,-]/', '', $lng );
+                        $latlng .= ',' . $lng;
+                    }
+                }
 
                 if ( preg_match( "/^([\d.-]+),([\d.-]+)$/", $latlng ) ) {
                     $latlng = explode( ',', $latlng );
@@ -305,13 +263,16 @@ class FacetWP_Facet_Proximity_Core
      */
     function sort_options( $options, $params ) {
 
-        $options['distance'] = array(
-            'label' => __( 'Distance', 'fwp' ),
-            'query_args' => array(
-                'orderby' => 'post__in',
-                'order' => 'ASC',
-            ),
-        );
+        if ( FWP()->helper->facet_setting_exists( 'type', 'proximity' ) ) {
+            $options['distance'] = array(
+                'label' => __( 'Distance', 'fwp' ),
+                'query_args' => array(
+                    'orderby' => 'post__in',
+                    'order' => 'ASC',
+                ),
+            );
+        }
+
         return $options;
     }
 

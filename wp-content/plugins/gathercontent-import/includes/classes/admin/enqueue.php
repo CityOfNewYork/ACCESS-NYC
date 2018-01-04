@@ -26,6 +26,8 @@ abstract class Enqueue extends Plugin_Base {
 	public function admin_enqueue_style() {
 		\GatherContent\Importer\enqueue_style( 'gc-select2', 'vendor/select2-4.0.3/select2', array(), '4.0.3' );
 		\GatherContent\Importer\enqueue_style( 'gathercontent', 'gathercontent-importer' );
+
+		do_action( 'gc_admin_enqueue_style' );
 	}
 
 	/**
@@ -36,6 +38,16 @@ abstract class Enqueue extends Plugin_Base {
 	 * @return void
 	 */
 	public function admin_enqueue_script() {
+
+		// BadgeOS is a bad citizen as it is enqueueing its (old) version of select2 in the entire admin.
+		// It is incompatible with the new version, so we need to remove it on our pages.
+		if ( wp_script_is( 'badgeos-select2', 'enqueued' ) ) {
+			wp_dequeue_script( 'badgeos-select2' );
+			wp_deregister_script( 'badgeos-select2' );
+			wp_dequeue_style( 'badgeos-select2-css' );
+			wp_deregister_style( 'badgeos-select2-css' );
+		}
+
 		\GatherContent\Importer\enqueue_script( 'gc-select2', 'vendor/select2-4.0.3/select2', array( 'jquery' ), '4.0.3' );
 
 		// If < WP 4.5, we need the newer version of underscore.js
@@ -51,6 +63,8 @@ abstract class Enqueue extends Plugin_Base {
 		}
 
 		\GatherContent\Importer\enqueue_script( 'gathercontent', 'gathercontent', array( 'gc-select2', 'wp-backbone' ) );
+
+		do_action( 'gc_admin_enqueue_script' );
 
 		// Localize in footer so that 'gathercontent_localized_data' filter is more useful.
 		add_action( 'admin_footer', array( $this, 'script_localize' ), 1 );

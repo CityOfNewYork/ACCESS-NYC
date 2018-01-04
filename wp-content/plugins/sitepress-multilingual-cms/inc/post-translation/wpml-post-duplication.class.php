@@ -39,6 +39,11 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		do_action( 'icl_before_make_duplicate', $master_post_id, $lang );
 		do_action( 'wpml_before_make_duplicate', $master_post_id, $lang );
 		$master_post = get_post( $master_post_id );
+
+		if ( ! $master_post || $this->is_external( $master_post_id ) ) {
+			return true;
+		}
+
 		$is_duplicated = false;
 		$translations  = $wpml_post_translations->get_element_translations( $master_post_id, false, false );
 		if ( isset( $translations[ $lang ] ) ) {
@@ -95,6 +100,17 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		}
 
 		return $ret;
+	}
+
+	/**
+	 * @param int $element_id
+	 *
+	 * @return null|string
+	 */
+	private function is_external( $element_id ) {
+		$query = "SELECT element_type FROM {$this->wpdb->prefix}icl_translations WHERE element_id=%d AND element_type LIKE %s LIMIT 1";
+
+		return ! $this->wpdb->get_var( $this->wpdb->prepare( $query, $element_id, 'post_%' ) );
 	}
 
 	private function run_wpml_actions( $master_post, $trid, $lang, $id, $post_array ) {

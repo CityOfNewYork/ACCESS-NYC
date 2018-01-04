@@ -2,34 +2,8 @@
 
 <img src="<?php echo PMXI_Plugin::ROOT_URL . '/static/img/soflyy-logo.png'; ?>" class="wpallimport-preload-image"/>
 
-<?php
-
-$l10n = array(
-	'queue_limit_exceeded' => 'You have attempted to queue too many files.',
-	'file_exceeds_size_limit' => 'This file exceeds the maximum upload size for this site.',
-	'zero_byte_file' => 'This file is empty. Please try another.',
-	'invalid_filetype' => 'This file type is not allowed. Please try another.',
-	'default_error' => 'An error occurred in the upload. Please try again later.',
-	'missing_upload_url' => 'There was a configuration error. Please contact the server administrator.',
-	'upload_limit_exceeded' => 'You may only upload 1 file.',
-	'http_error' => 'HTTP Error: Click here for our <a href="http://www.wpallimport.com/documentation/advanced/troubleshooting/" target="_blank">troubleshooting guide</a>, or ask your web host to look in your error_log file for an error that takes place at the same time you are trying to upload a file.',
-	'upload_failed' => 'Upload failed.',
-	'io_error' => 'IO error.',
-	'security_error' => 'Security error.',
-	'file_cancelled' => 'File canceled.',
-	'upload_stopped' => 'Upload stopped.',
-	'dismiss' => 'Dismiss',
-	'crunching' => 'Crunching&hellip;',
-	'deleted' => 'moved to the trash.',
-	'error_uploading' => 'has failed to upload due to an error',
-	'cancel_upload' => 'Cancel upload',
-	'dismiss' => 'Dismiss'
-);
-
-?>
 <script type="text/javascript">
 	var plugin_url = '<?php echo WP_ALL_IMPORT_ROOT_URL; ?>';
-	var swfuploadL10n = <?php echo json_encode($l10n); ?>;
 </script>
 
 <table class="wpallimport-layout wpallimport-step-1">
@@ -245,7 +219,9 @@ $l10n = array(
 										<div class="wpallimport-existing-records"><?php _e('Import to existing', 'wp_all_import_plugin'); ?></div>
 									</div>
 									<div class="wpallimport-extra-text-right">
-										<div class="wpallimport-new-records"><?php _e('for each record in my data file.', 'wp_all_import_plugin'); ?></div>
+										<div class="wpallimport-new-records"><?php _e('for each record in my data file.', 'wp_all_import_plugin'); ?>
+											<a class="wpallimport-help" href="#help" style="position: relative; top: -2px;" original-title="The New Items option is commonly used to import new posts or products to your site without touching the existing records.<br/><br/>If the import is later run again with modified data, WP All Import will only update/remove posts created by this import.">?</a>
+										</div>
 										<div class="wpallimport-existing-records"><?php _e('and update some or all of their data.', 'wp_all_import_plugin'); ?>
 											<a class="wpallimport-help" href="#help" style="position: relative; top: -2px;" original-title="The Existing Items option is commonly used to update existing products with new stock quantities while leaving all their other data alone, update properties on your site with new pricing, etc. <br/><br/> In Step 4, you will map the records in your file to the existing items on your site and specify which data points will be updated and which will be left alone.">?</a>								
 										</div>

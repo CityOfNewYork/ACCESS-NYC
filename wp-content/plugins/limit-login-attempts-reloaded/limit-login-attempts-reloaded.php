@@ -4,9 +4,9 @@
   Description: Limit the rate of login attempts, including by way of cookies and for each IP address.
   Author: wpchefgadget
   Text Domain: limit-login-attempts-reloaded
-  Version: 2.3.0
+  Version: 2.6.1
 
-  Copyright 2008 - 2012 Johan Eenfeldt
+  Copyright 2008 - 2012 Johan Eenfeldt, 2016 - 2017 WPChef
 
   Thanks to Michael Skerwiderski for reverse proxy handling suggestions.
 */

@@ -603,9 +603,9 @@ echo '</textarea>';
 	  <?php
     $twig_cache_disabled  = (bool) get_option( $otgs_twig_cache_disable_key, false );
 	  $twig_cache_new_value = ! $twig_cache_disabled;
-	  $twig_cache_label     = __( 'Disable cache for language switcher templates' );
+	  $twig_cache_label     = __( 'Disable cache for language switcher templates' , 'sitepress' );
 	  if ( $twig_cache_disabled ) {
-		  $twig_cache_label = __( 'Enable cache for language switcher templates' );
+		  $twig_cache_label = __( 'Enable cache for language switcher templates' , 'sitepress' );
 	  }
 	  ?>
 		<input type="hidden" id="otgs_twig_cache_new_value" class="otgs_twig_cache_new_value" value="<?php echo $twig_cache_new_value; ?>"/>

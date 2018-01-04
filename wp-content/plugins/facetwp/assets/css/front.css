@@ -2,28 +2,6 @@
     margin-bottom: 40px;
 }
 
-.facetwp-type-checkboxes {
-    overflow: auto;
-    max-height: 160px;
-}
-
-.facetwp-checkbox {
-    background: url(../images/checkbox.png) 0 50% no-repeat;
-    background-size: 14px 14px;
-    margin-bottom: 4px;
-    padding-left: 20px;
-    cursor: pointer;
-}
-
-.facetwp-checkbox.checked {
-    background-image: url(../images/checkbox-on.png);
-}
-
-.facetwp-checkbox.disabled {
-    opacity: 0.4;
-    cursor: default;
-}
-
 .facetwp-pager-label {
     display: inline-block;
     margin-right: 12px;
@@ -46,9 +24,76 @@
     height: 20px;
     background: url(../images/loading.png) no-repeat;
     background-size: 20px 20px;
-    -webkit-animation: rotate 700ms infinite linear;
-    -moz-animation: rotate 700ms infinite linear;
-    animation: rotate 700ms infinite linear;
+    -webkit-animation: spin 700ms infinite linear;
+    -moz-animation: spin 700ms infinite linear;
+    animation: spin 700ms infinite linear;
+}
+
+.facetwp-overlay {
+    position: absolute;
+    background-color: #fff;
+    opacity: 0.6;
+}
+
+/* Checkboxes */
+
+.facetwp-type-checkboxes .facetwp-depth {
+    display: none;
+}
+
+.facetwp-type-checkboxes .facetwp-depth.visible {
+    display: inherit;
+}
+
+.facetwp-checkbox {
+    background: url(../images/checkbox.png) 0 50% no-repeat;
+    background-size: 14px 14px;
+    margin-bottom: 4px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.facetwp-checkbox.checked {
+    background-image: url(../images/checkbox-on.png);
+}
+
+.facetwp-checkbox.disabled,
+.facetwp-radio.disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.facetwp-checkbox .facetwp-expand {
+    float: right;
+}
+
+/* Radio */
+
+.facetwp-radio {
+    background: url(../images/radio.png) 0 50% no-repeat;
+    background-size: 14px 14px;
+    margin-bottom: 4px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.facetwp-radio.checked {
+    background-image: url(../images/radio-on.png);
+}
+
+/* Date range */
+
+.flatpickr-clear {
+    text-align: center;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+/* fSelect */
+
+.facetwp-type-fselect .fs-wrap,
+.facetwp-type-fselect .fs-dropdown {
+    width: 220px;
 }
 
 /* Hierarchy */
@@ -93,6 +138,39 @@
     padding: 0 15px;
 }
 
+/* Search */
+
+.facetwp-search-wrap {
+    position: relative;
+}
+
+.facetwp-search {
+    padding-right: 28px;
+}
+
+.facetwp-btn {
+    top: 0;
+    right: 5px;
+    line-height: 1;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.facetwp-btn:before {
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: url(../images/icon-search.png) no-repeat;
+    background-size: 20px 20px;
+}
+
+.facetwp-btn.f-reset:before {
+    background: url(../images/icon-close.png) no-repeat;
+    background-size: 20px 20px;
+}
+
 /* Proximity */
 
 #facetwp-location {
@@ -121,22 +199,22 @@
     background-size: 20px 20px;
 }
 
-.locate-me.loading:before {
+.locate-me.f-loading:before {
     background: url(../images/loading.png) no-repeat;
     background-size: 20px 20px;
-    -webkit-animation: rotate 700ms infinite linear;
-    -moz-animation: rotate 700ms infinite linear;
-    animation: rotate 700ms infinite linear;
+    -webkit-animation: spin 700ms infinite linear;
+    -moz-animation: spin 700ms infinite linear;
+    animation: spin 700ms infinite linear;
 }
 
-.locate-me.reset:before {
+.locate-me.f-reset:before {
     background: url(../images/icon-close.png) no-repeat;
     background-size: 20px 20px;
 }
 
 /* CSS animations */
 
-@-o-keyframes rotate {
+@-o-keyframes spin {
     from {
         -o-transform: rotate(0deg);
     }
@@ -145,7 +223,7 @@
     }
 }
 
-@-moz-keyframes rotate {
+@-moz-keyframes spin {
     from {
         -moz-transform: rotate(0deg);
     }
@@ -154,7 +232,7 @@
     }
 }
 
-@-ms-keyframes rotate {
+@-ms-keyframes spin {
     from {
         -ms-transform: rotate(0deg);
     }
@@ -163,7 +241,7 @@
     }
 }
 
-@-webkit-keyframes rotate {
+@-webkit-keyframes spin {
     from {
         -webkit-transform: rotate(0deg);
     }
@@ -172,7 +250,7 @@
     }
 }
 
-@-keyframes rotate {
+@-keyframes spin {
     from {
         transform: rotate(0deg);
     }
@@ -185,18 +263,17 @@
 
 .facetwp-selections li {
     display: inline-block;
-    font-size: 12px;
     line-height: 1;
-    margin-right: 20px;
-    cursor: pointer;
 }
 
-.facetwp-selections li::after {
+.facetwp-selections .facetwp-selection-value {
     display: inline-block;
-    content: '';
-    width: 12px;
-    height: 12px;
-    margin-left: 5px;
-    background: url(../images/icon-close.png) no-repeat;
+    margin-right: 10px;
+    cursor: pointer;
+
+    padding-right: 16px;
+    background-image: url(../images/icon-close.png);
     background-size: 12px 12px;
+    background-repeat: no-repeat;
+    background-position: right center;
 }

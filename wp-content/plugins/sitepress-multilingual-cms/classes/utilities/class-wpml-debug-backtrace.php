@@ -87,6 +87,8 @@ class WPML_Debug_BackTrace {
 
 		$this->remove_frames_for_this_class();
 
+		return $this->debug_backtrace;
+
 	}
 
 	private function remove_frames_for_this_class() {

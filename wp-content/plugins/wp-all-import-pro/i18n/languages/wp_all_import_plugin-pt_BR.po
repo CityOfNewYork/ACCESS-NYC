@@ -3531,7 +3531,7 @@ msgstr "Adicionar"
 #: views/admin/import/template/_other_template.php:16
 #: views/admin/import/template/_term_other_template.php:13
 msgid "Other %s Options"
-msgstr "Outras %s Opções"
+msgstr "Outras opções de %s"
 
 #: views/admin/import/template/_other_template.php:28
 msgid "Post Status"

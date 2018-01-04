@@ -65,8 +65,7 @@ function pmxi_wp_ajax_get_bundle_post_type(){
 		if ( ! empty($response['post_type'])) 
 		{
 			switch ( $response['post_type'] ) {
-
-				case 'product':
+				
 				case 'shop_order':
 					
 					if ( ! class_exists('WooCommerce') ) {

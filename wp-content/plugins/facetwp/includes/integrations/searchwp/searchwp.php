@@ -7,12 +7,6 @@ class FacetWP_Integration_SearchWP
 
 
     function __construct() {
-
-        // Require SearchWP 2.6+
-        if ( version_compare( SEARCHWP_VERSION, '2.6', '<' ) ) {
-            return;
-        }
-
         add_filter( 'facetwp_query_args', array( $this, 'search_args' ), 10, 2 );
         add_filter( 'facetwp_pre_filtered_post_ids', array( $this, 'search_page' ), 10, 2 );
         add_filter( 'facetwp_facet_filter_posts', array( $this, 'search_facet' ), 10, 2 );
@@ -58,14 +52,17 @@ class FacetWP_Integration_SearchWP
         ) );
 
         $intersected_ids = array();
+
+        // Speed up comparison
+        $post_ids = array_flip( $post_ids );
+
         foreach ( $swp_query->posts as $post_id ) {
-            if ( in_array( $post_id, $post_ids ) ) {
+            if ( isset( $post_ids[ $post_id ] ) ) {
                 $intersected_ids[] = $post_id;
             }
         }
-        $post_ids = $intersected_ids;
 
-        return empty( $post_ids ) ? array( 0 ) : $post_ids;
+        return empty( $intersected_ids ) ? array( 0 ) : $intersected_ids;
     }
 
 
@@ -114,6 +111,6 @@ class FacetWP_Integration_SearchWP
 }
 
 
-if ( is_plugin_active( 'searchwp/searchwp.php' ) ) {
+if ( defined( 'SEARCHWP_VERSION' ) && version_compare( SEARCHWP_VERSION, '2.6', '>=' ) ) {
     new FacetWP_Integration_SearchWP();
 }

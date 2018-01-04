@@ -626,7 +626,7 @@ function wpml_cf_translation_preferences( $id, $custom_field = false, $class = '
 			$output .= '
 <fieldset id="wpml_cf_translation_preferences_fieldset_' . $id . '" class="wpml_cf_translation_preferences_fieldset ' . $class . '-form-fieldset form-fieldset fieldset">' . '<legend>' . __( 'Translation preferences', 'sitepress' ) . '</legend>';
 		}
-		$actions  = array( 'ignore' => 0, 'copy' => 1, 'translate' => 2 );
+		$actions  = array( 'ignore' => 0, 'copy' => 1, 'translate' => 2, 'copy-once' => 3 );
 		$action   = isset( $actions[ @strval( $default_value ) ] ) ? $actions[ @strval( $default_value ) ] : 0;
 		$disabled = false;
 		if ( $custom_field ) {
@@ -674,11 +674,13 @@ function wpml_cf_translation_preferences( $id, $custom_field = false, $class = '
 		);
 
 		$output .= '<ul><li>';
-		$output .= wpml_translation_preference_input_helper( $args, 'wpml_cf_translation_preferences_option_ignore_', '0', __( 'Do nothing', 'sitepress' ) );
+		$output .= wpml_translation_preference_input_helper( $args, 'wpml_cf_translation_preferences_option_ignore_', WPML_IGNORE_CUSTOM_FIELD, __( "Don't translate", 'sitepress' ) );
 		$output .= '</li><li>';
-		$output .= wpml_translation_preference_input_helper( $args, 'wpml_cf_translation_preferences_option_copy_', '1', __( 'Copy from original', 'sitepress' ) );
+		$output .= wpml_translation_preference_input_helper( $args, 'wpml_cf_translation_preferences_option_copy_', WPML_COPY_CUSTOM_FIELD, __( "Copy from original to translation", 'sitepress' ) );
 		$output .= '</li><li>';
-		$output .= wpml_translation_preference_input_helper( $args, 'wpml_cf_translation_preferences_option_translate_', '2', __( 'Translate', 'sitepress' ) );
+		$output .= wpml_translation_preference_input_helper( $args, 'wpml_cf_translation_preferences_option_copy_once_', WPML_COPY_ONCE_CUSTOM_FIELD, __( "Copy once", 'sitepress' ) );
+		$output .= '</li><li>';
+		$output .= wpml_translation_preference_input_helper( $args, 'wpml_cf_translation_preferences_option_translate_', WPML_TRANSLATE_CUSTOM_FIELD, __( "Translate", 'sitepress' ) );
 		$output .= '</li></ul>';
 
 		if ( $custom_field && $ajax ) {

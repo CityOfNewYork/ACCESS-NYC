@@ -212,7 +212,7 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 				TranslationProxy_Basket::add_message( array(
 					                                      'type' => 'update',
 					                                      'text' => __( 'You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!
-					Either submit the current basket and then add the post or delete the posts of differing language in the current basket', 'sitepress' )
+					Either submit the current basket and then add the post or delete the posts of differing language in the current basket', 'wpml-string-translation' )
 				                                      ) );
 				TranslationProxy_Basket::update_basket();
 
@@ -220,7 +220,7 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 			}
 		}
 
-		$select_one_lang_message = __( 'Please select at least one language to translate into.', 'sitepress' );
+		$select_one_lang_message = __( 'Please select at least one language to translate into.', 'wpml-string-translation' );
 
 		if ( ! $translation_action ) {
 			TranslationProxy_Basket::add_message( array(
@@ -236,7 +236,7 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		if ( ! $package_id ) {
 			TranslationProxy_Basket::add_message( array(
 				                                      'type' => 'error',
-				                                      'text' => __( 'Please select at least one document to translate.', 'sitepress' )
+				                                      'text' => __( 'Please select at least one document to translate.', 'wpml-string-translation' )
 			                                      ) );
 
 			$package_is_valid = false;
@@ -325,13 +325,13 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		if ( $job_details->status == ICL_TM_IN_PROGRESS ) {
 			$message_args   = array(
 				'type' => 'update',
-				'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already in progress.', 'sitepress' ), $post_title, $language_name )
+				'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already in progress.', 'wpml-string-translation' ), $post_title, $language_name )
 			);
 			$send_to_basket = false;
 		} elseif ( $job_details->status == ICL_TM_WAITING_FOR_TRANSLATOR ) {
 			$message_args   = array(
 				'type' => 'update',
-				'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already waiting for translator.', 'sitepress' ), $post_title, $language_name )
+				'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already waiting for translator.', 'wpml-string-translation' ), $post_title, $language_name )
 			);
 			$send_to_basket = false;
 		}

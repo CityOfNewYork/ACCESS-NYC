@@ -142,9 +142,19 @@ class WPML_Package {
 		$package_id = $this->ID;
 		$results    = false;
 		if ( $package_id ) {
-			$results_query   = "SELECT id, name, value, type FROM {$wpdb->prefix}icl_strings WHERE string_package_id=%d";
-			$results_prepare = $wpdb->prepare( $results_query, $package_id );
-			$results         = $wpdb->get_results( $results_prepare );
+
+			$cache = new WPML_WP_Cache( 'WPML_Package' );
+			$cache_key = 'strings:' . $package_id;
+			$found = false;
+
+			$results = $cache->get( $cache_key, $found );
+			if ( ! $found ) {
+				$results_query   = "SELECT id, name, value, type FROM {$wpdb->prefix}icl_strings WHERE string_package_id=%d";
+				$results_prepare = $wpdb->prepare( $results_query, $package_id );
+				$results         = $wpdb->get_results( $results_prepare );
+
+				$cache->set( $cache_key, $results );
+			}
 		}
 
 		return $results;
@@ -376,21 +386,29 @@ class WPML_Package {
 	private function get_package_from_name_and_kind() {
 		global $wpdb;
 
-		$package_query    = "SELECT * FROM {$wpdb->prefix}icl_string_packages WHERE kind_slug=%s AND name=%s";
-		$package_prepared = $wpdb->prepare( $package_query, array( $this->kind_slug, $this->name ) );
+		$cache = new WPML_WP_Cache( 'WPML_Package' );
+		$cache_key = 'name-kind:' . $this->kind_slug . $this->name;
+		$found = false;
 
-		return $wpdb->get_row( $package_prepared );
+		$result = $cache->get( $cache_key, $found );
+		if ( ! $found ) {
+
+			$package_query    = "SELECT * FROM {$wpdb->prefix}icl_string_packages WHERE kind_slug=%s AND name=%s";
+			$package_prepared = $wpdb->prepare( $package_query, array( $this->kind_slug, $this->name ) );
+
+			$result = $wpdb->get_row( $package_prepared );
+
+			if ( $result ) {
+				$cache->set( $cache_key, $result );
+			}
+		}
+		return $result;
 	}
 
 	private function package_name_and_kind_exists() {
 		$result = false;
 		if ( $this->has_kind_and_name() ) {
-			global $wpdb;
-
-			$package_query    = "SELECT ID FROM {$wpdb->prefix}icl_string_packages WHERE kind_slug=%s AND name=%s";
-			$package_prepared = $wpdb->prepare( $package_query, array( $this->kind_slug, $this->name ) );
-
-			$result = $wpdb->get_var( $package_prepared );
+			$result = (bool) $this->get_package_from_name_and_kind();
 		}
 
 		return $result;

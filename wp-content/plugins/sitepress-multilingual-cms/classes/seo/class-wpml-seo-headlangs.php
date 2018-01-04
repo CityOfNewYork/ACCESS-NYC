@@ -8,8 +8,8 @@ class WPML_SEO_HeadLangs {
 	 *
 	 * @param SitePress $sitepress
 	 */
-	public function __construct( &$sitepress ) {
-		$this->sitepress = &$sitepress;
+	public function __construct( $sitepress ) {
+		$this->sitepress = $sitepress;
 	}
 
 	private function get_seo_settings() {
@@ -41,10 +41,12 @@ class WPML_SEO_HeadLangs {
 
 		if ( $this->must_render( $languages ) ) {
 			$hreflang_items = array();
-			foreach ( $languages as $code => $lang ) {
-				$alternate_hreflang               = apply_filters( 'wpml_alternate_hreflang', $lang['url'], $code );
-				$hreflang_code                    = $this->sitepress->get_language_tag( $code );
-				if($hreflang_code) {
+			foreach ( $languages as $lang ) {
+				$alternate_hreflang = apply_filters( 'wpml_alternate_hreflang', $lang['url'], $lang['code'] );
+
+				$hreflang_code = $this->get_hreflang_code( $lang );
+
+				if ( $hreflang_code ) {
 					$hreflang_items[ $hreflang_code ] = str_replace( '&amp;', '&', $alternate_hreflang );
 				}
 			}
@@ -127,5 +129,39 @@ class WPML_SEO_HeadLangs {
 		            || ( $this->sitepress->get_wp_api()->is_home()
 		                 || $this->sitepress->get_wp_api()->is_front_page()
 		                 || $this->sitepress->get_wp_api()->is_archive() ) );
+	}
+
+	/**
+	 * @param array $lang
+	 *
+	 * @return string
+	 */
+	private function get_hreflang_code( $lang ) {
+		$tag           = $lang['tag'];
+		$locale        = $lang['default_locale'];
+		$hreflang_code = $this->get_best_code( array( $tag, $locale ) );
+		$hreflang_code = str_replace( '_', '-', $hreflang_code );
+		$hreflang_code = strtolower( $hreflang_code );
+
+		if ( $this->is_valid_hreflang_code( $hreflang_code ) ) {
+			return trim( $hreflang_code );
+		}
+
+		return '';
+	}
+
+	private function is_valid_hreflang_code( $code ) {
+		return strlen( trim( $code ) ) >= 2;
+	}
+
+	private function get_best_code( array $codes ) {
+		$best_code = null;
+		foreach ( $codes as $code ) {
+			if ( strlen( $code ) > strlen( $best_code ) ) {
+				$best_code = $code;
+			}
+		}
+
+		return $best_code;
 	}
 }

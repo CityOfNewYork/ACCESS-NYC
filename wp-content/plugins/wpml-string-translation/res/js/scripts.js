@@ -46,9 +46,6 @@ jQuery(document).ready(function(){
         var set = jQuery(this).offset();
            jQuery("#colorPickerDiv").css({"top":set.top-180,"left":set.left, "z-index":99});
     });
-    
-    jQuery('#st_theme_localization_rescan').click(iclThemeLocalizationRescan);
-    jQuery('#st_plugin_localization_rescan').submit(iclThemeLocalizationRescanP);
 	
 	jQuery('input[name="wpml_st_theme_localization_type_wpml_td"]').on('click', function () {
 		var checked = jQuery(this).prop('checked');
@@ -415,60 +412,6 @@ function icl_st_ow_export_selected(){
 function icl_st_ow_export_close(){
     jQuery('#icl_st_ow_export_out').slideUp(function(){jQuery('#icl_st_ow_export_close').fadeOut()});
     jQuery('#icl_st_ow_export').removeAttr('disabled');
-}
-
-function iclThemeLocalizationRescan(){
-    var thisb = jQuery(this)
-        data = {};
-    thisb.next().fadeIn();
-    data['action'] = 'st_theme_localization_rescan';
-    if(jQuery('#icl_load_mo_themes').attr('checked')){
-        data['icl_load_mo'] = 1;
-    }
-	if (jQuery('input[name="wpml_st_theme_localization_type_wpml_td"]').prop('checked')) {
-        data['auto_text_domain'] = 1;
-	}
-
-	var selected_themes = jQuery('#wpml_themes_form').closest('form').find('input:checkbox:checked');
-    if( selected_themes.length ) {
-        data['theme'] = [];
-        selected_themes.each(function(index, element) {
-            data['theme'].push( jQuery(element).val() );
-        });
-    }
-
-    jQuery.ajax({
-        type: "POST",
-        url: ajaxurl,
-        data: data,
-        success: function(msg){
-            thisb.next().fadeOut();
-            var spl = msg.split('|');
-            jQuery('#icl_tl_scan_stats').html(spl[1]).fadeIn();
-            jQuery("#icl_strings_in_theme_wrap").load(location.href.replace(/#(.*)$/,'') + ' #wpml_strings_in_themes');
-        }
-    });    
-    return false;
-}
-
-function iclThemeLocalizationRescanP(){
-    var thisf = jQuery(this);
-    thisf.contents().find('.icl_ajx_loader_p').fadeIn();
-    thisf.contents().find('input:submit').attr('disabled','disabled');
-
-    jQuery.ajax({
-        type: "POST",
-        url: ajaxurl,
-        data: "action=st_plugin_localization_rescan&"+thisf.serialize(),
-        success: function(msg){
-            thisf.contents().find('.icl_ajx_loader_p').fadeOut();
-            thisf.contents().find('input:submit').removeAttr('disabled');
-            var spl = msg.split('|');
-            jQuery('#icl_tl_scan_stats_p').html(spl[1]).fadeIn();
-            jQuery("#icl_strings_in_plugins_wrap").load(location.href.replace(/#(.*)$/,'') + ' #wpml_strings_in_plugins');
-        }
-    });    
-    return false;
 }
 
 function icl_st_pop_download(){

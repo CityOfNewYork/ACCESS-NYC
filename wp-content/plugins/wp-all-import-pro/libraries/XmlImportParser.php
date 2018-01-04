@@ -51,7 +51,7 @@ class XmlImportParser {
 	
 		libxml_use_internal_errors(true);
 		try{ 			
-			$this->xml = new SimpleXMLElement($xml);			
+			$this->xml = new SimpleXMLElement($xml);
 		} catch (Exception $e){ 			
 			try{ 
 				$this->xml = new SimpleXMLElement(utf8_encode($xml));

@@ -170,11 +170,15 @@ class WPML_Package_Helper {
 	 * @return bool|int|mixed
 	 */
 	final function register_string_with_wpml( $package, $string_name, $string_title, $string_type, $string_value ) {
+		global $wpdb;
+
 		$string_id = $this->get_string_id_from_package( $package, $string_name, $string_value );
 
 		if ( $string_id ) {
-			$package_id = $package->ID;
-			$this->update_string_from_package( $package_id, $string_title, $string_type, $string_value, $string_id );
+			$package_storage = new WPML_ST_Package_Storage( $package->ID, $wpdb );
+			$package_storage->update( $string_title, $string_type, $string_value, $string_id );
+			$this->flush_cache();
+
 		}
 
 		return $string_id;
@@ -466,69 +470,6 @@ class WPML_Package_Helper {
 		$package = new WPML_Package( $package );
 
 		return $package->get_string_id_from_package( $string_name, $string_value );
-	}
-
-	/**
-	 * @param $package_id
-	 * @param $string_title
-	 * @param $string_type
-	 * @param $string_value
-	 * @param $string_id
-	 */
-	final private function update_string_from_package( $package_id, $string_title, $string_type, $string_value, $string_id ) {
-		global $wpdb;
-
-		$update_data  = array(
-			'string_package_id' => $package_id,
-			'type'              => $string_type,
-			'title'             => $this->truncate_long_string( $string_title ),
-		);
-		$update_where = array( 'id' => $string_id );
-		$did_update = $wpdb->update( $wpdb->prefix . 'icl_strings', $update_data, $update_where );
-
-		$update_data  = array(
-			'value'             => $string_value
-		);
-		$did_update_value = $wpdb->update( $wpdb->prefix . 'icl_strings', $update_data, $update_where );
-		if ( $did_update || $did_update_value ) {
-			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}icl_strings
-										   SET status=%d
-										   WHERE id=%d AND status<>%d",
-										   ICL_TM_NEEDS_UPDATE,
-										   $string_id,
-										   ICL_TM_NOT_TRANSLATED
-										)
-						);
-			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}icl_string_translations
-										   SET status=%d
-										   WHERE string_id=%d AND status<>%d",
-										   ICL_TM_NEEDS_UPDATE,
-										   $string_id,
-										   ICL_TM_NOT_TRANSLATED
-										)
-						);
-
-			$translation_ids = $wpdb->get_col( $wpdb->prepare( " SELECT translation_id
-                      FROM {$wpdb->prefix}icl_translations
-                      WHERE trid = ( SELECT trid
-                      FROM {$wpdb->prefix}icl_translations
-                      WHERE element_id = %d
-                        AND element_type LIKE 'package%%'
-                      LIMIT 1 )", $package_id ) );
-			if ( ! empty( $translation_ids ) ) {
-				$wpdb->query( "UPDATE {$wpdb->prefix}icl_translation_status
-                              SET needs_update = 1
-                              WHERE translation_id IN (" . wpml_prepare_in( $translation_ids, '%d' ) . " ) " );
-			}
-		}
-
-		$this->flush_cache();
-	}
-
-	private function truncate_long_string( $string ) {
-		return strlen( $string ) > WPML_STRING_TABLE_NAME_CONTEXT_LENGTH
-			? mb_substr( $string, 0, WPML_STRING_TABLE_NAME_CONTEXT_LENGTH )
-			: $string;
 	}
 
 	final function get_external_id_from_package( $package ) {

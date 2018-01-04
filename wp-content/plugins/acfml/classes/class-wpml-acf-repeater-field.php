@@ -21,10 +21,7 @@ class WPML_ACF_Repeater_Field {
 				foreach ($value['sub_fields'] as $key => $sub_field) {
 					if (isset($sub_field['name']) && strpos($key_parts[3], $sub_field['name']) === 0 && isset($sub_field['type'])) {
 						$processed_data->related_acf_field_value['type'] = $sub_field['type'];
-						if ('repeater' == $sub_field['type']) {
-							$WPML_ACF_Repeater_Field = new WPML_ACF_Repeater_Field($this->duplicated_post_object, $this->wpdb);
-							$field = $WPML_ACF_Repeater_Field->resolve_repeater_subfield($processed_data, $key_parts, $field);
-						} else {
+						if ('repeater' != $sub_field['type']) {
 							$field = $this->duplicated_post_object->get_field_object($processed_data, $field);
 						}
 						break;
@@ -37,10 +34,7 @@ class WPML_ACF_Repeater_Field {
 					$sub_field = $this->get_sub_acf_pro_repeater_field($sub_field_name);
 					if (isset($sub_field['type'])) {
 						$processed_data->related_acf_field_value['type'] = $sub_field['type'];
-						if ('repeater' == $sub_field['type']) {
-							$WPML_ACF_Repeater_Field = new WPML_ACF_Repeater_Field($this->duplicated_post_object, $this->wpdb);
-							$field = $WPML_ACF_Repeater_Field->resolve_repeater_subfield($processed_data, $key_parts, $field);
-						} else {
+						if ('repeater' != $sub_field['type']) {
 							$field = $this->duplicated_post_object->get_field_object($processed_data, $field);
 						}
 					}

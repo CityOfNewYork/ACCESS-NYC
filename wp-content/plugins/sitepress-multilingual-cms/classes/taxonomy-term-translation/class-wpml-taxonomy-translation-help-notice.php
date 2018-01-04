@@ -117,11 +117,18 @@ class WPML_Taxonomy_Translation_Help_Notice {
 	 * @return string
 	 */
 	private function build_tag_to_taxonomy_translation( $taxonomy ) {
-		$url = apply_filters(
-			'wpml_taxonomy_term_translation_url',
-			admin_url( 'admin.php?page=sitepress-multilingual-cms/menu/taxonomy-translation.php&taxonomy=' . $taxonomy->name )
+
+		$url = add_query_arg(
+			array(
+				'page' => WPML_PLUGIN_FOLDER . '/menu/taxonomy-translation.php',
+				'taxonomy' => $taxonomy->name,
+				),
+			admin_url('admin.php')
 		);
-		return '<a href="' . esc_url( $url ) . '">' . $taxonomy->labels->singular_name . ' translation</a>';
+		$url = apply_filters( 'wpml_taxonomy_term_translation_url', $url, $taxonomy->name );
+
+		return '<a href="' . esc_url( $url ) . '">' .
+		       sprintf( esc_html__( ' %s translation', 'sitepress' ), $taxonomy->labels->singular_name ) . '</a>';
 	}
 
 	private function taxonomy_term_screen() {

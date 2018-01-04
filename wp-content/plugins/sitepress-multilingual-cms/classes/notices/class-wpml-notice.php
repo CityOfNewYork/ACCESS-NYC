@@ -9,29 +9,35 @@ class WPML_Notice {
 	private $text;
 	private $collapsed_text;
 	private $group             = 'default';
+	private $restricted_to_user_ids = array();
 
 	private $actions            = array();
 	/**
 	 * @see \WPML_Notice::set_css_class_types
 	 * @var array
 	 */
-	private $css_class_types = array();
-	private $css_classes        = array();
-	private $dismissible        = false;
-	private $exclude_from_pages = array();
-	private $hideable           = false;
-	private $collapsable = false;
-	private $restrict_to_pages  = array();
+	private $css_class_types                = array();
+	private $css_classes                    = array();
+	private $dismissible                    = false;
+	private $exclude_from_pages             = array();
+	private $hideable                       = false;
+	private $collapsable                    = false;
+	private $restrict_to_pages              = array();
+	private $hide_if_notice_exists          = null;
 	private $dismissible_for_different_text = true;
 
 	private $default_group_name = 'default';
 
+	private $capabilities = array();
+
+	private $dismiss_reset = false;
+
 	/**
 	 * WPML_Admin_Notification constructor.
 	 *
-	 * @param int    $id
-	 * @param string $text
-	 * @param string $group
+	 * @param int|string $id
+	 * @param string     $text
+	 * @param string     $group
 	 */
 	public function __construct( $id, $text, $group = 'default' ) {
 		$this->id    = $id;
@@ -61,6 +67,49 @@ class WPML_Notice {
 		$this->restrict_to_pages[] = $page;
 	}
 
+	/** @param int $user_id */
+	public function add_user_restriction( $user_id ) {
+		$user_id = (int) $user_id;
+		$this->restricted_to_user_ids[ $user_id ] = $user_id;
+	}
+
+	/** @param int $user_id */
+	public function remove_user_restriction( $user_id ) {
+		unset( $this->restricted_to_user_ids[ (int) $user_id ] );
+	}
+
+	/** @return array */
+	public function get_restricted_user_ids() {
+		return $this->restricted_to_user_ids;
+	}
+
+	/** @return bool */
+	public function is_user_restricted() {
+		return (bool) $this->restricted_to_user_ids;
+	}
+
+	/** @return bool */
+	public function is_for_current_user() {
+		return ! $this->restricted_to_user_ids
+		       || array_key_exists( get_current_user_id(), $this->restricted_to_user_ids );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function is_user_cap_allowed() {
+		$user_can = true;
+		foreach ( $this->capabilities as $cap ) {
+			$user_can = current_user_can( $cap );
+
+			if ( $user_can ) {
+				break;
+			}
+		}
+
+		return $user_can;
+	}
+
 	public function can_be_dismissed() {
 		return $this->dismissible;
 	}
@@ -80,11 +129,27 @@ class WPML_Notice {
 		return $this->collapsable;
 	}
 
+	/**
+	 * As the notice is supposed to be serialized and stored into the DB,
+	 * the callback should be only a function or a static method.
+	 *
+	 * Before to use a callback, please check the existing options with:
+	 * - add_exclude_from_page
+	 * - add_restrict_to_page
+	 * - add_user_restriction
+	 * - add_capability_check
+	 *
+	 * @param callable $callback
+	 */
 	public function add_display_callback( $callback ) {
 		if ( ! is_callable( $callback ) ) {
 			throw new UnexpectedValueException( '\WPML_Notice::add_display_callback expects a callable', 1 );
 		}
 		$this->display_callbacks[] = $callback;
+	}
+
+	public function add_capability_check( array $cap ) {
+		$this->capabilities = $cap;
 	}
 
 	public function get_display_callbacks() {
@@ -121,7 +186,7 @@ class WPML_Notice {
 	}
 
 	/**
-	 * @return int
+	 * @return int|string
 	 */
 	public function get_id() {
 		return $this->id;
@@ -135,6 +200,8 @@ class WPML_Notice {
 	 * @return string
 	 */
 	public function get_text() {
+		$notice = array( 'id' => $this->get_id(), 'group' => $this->get_group() );
+		$this->text = apply_filters( 'wpml_notice_text', $this->text, $notice );
 		return $this->text;
 	}
 
@@ -180,6 +247,17 @@ class WPML_Notice {
 		$this->exclude_from_pages = $pages;
 	}
 
+	public function set_hide_if_notice_exists( $notice_id, $notice_group = null ) {
+		$this->hide_if_notice_exists = array(
+			'id'    => $notice_id,
+			'group' => $notice_group,
+		);
+	}
+
+	public function get_hide_if_notice_exists( ) {
+		return $this->hide_if_notice_exists;
+	}
+
 	/**
 	 * @param bool $hideable
 	 */
@@ -203,5 +281,17 @@ class WPML_Notice {
 
 	public function set_restrict_to_pages( array $pages ) {
 		$this->restrict_to_pages = $pages;
+	}
+
+	public function reset_dismiss() {
+		$this->dismiss_reset = true;
+	}
+
+	public function must_reset_dismiss() {
+		return $this->dismiss_reset;
+	}
+
+	public function is_different( WPML_Notice $other_notice ) {
+		return serialize( $this ) !== serialize( $other_notice );
 	}
 }

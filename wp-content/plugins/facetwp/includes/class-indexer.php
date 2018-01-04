@@ -17,12 +17,36 @@ class FacetWP_Indexer
 
 
     function __construct() {
+        if ( apply_filters( 'facetwp_indexer_is_enabled', true ) ) {
+            $this->run_hooks();
+            $this->run_cron();
+        }
+    }
+
+
+    /**
+     * Event listeners
+     * @since 2.8.4
+     */
+    function run_hooks() {
         add_action( 'save_post',                array( $this, 'save_post' ) );
         add_action( 'delete_post',              array( $this, 'delete_post' ) );
         add_action( 'edited_term',              array( $this, 'edit_term' ), 10, 3 );
         add_action( 'delete_term',              array( $this, 'delete_term' ), 10, 4 );
         add_action( 'set_object_terms',         array( $this, 'set_object_terms' ) );
+        add_action( 'facetwp_indexer_cron',     array( $this, 'get_progress' ) );
         add_filter( 'wp_insert_post_parent',    array( $this, 'is_wp_insert_post' ) );
+    }
+
+
+    /**
+     * Cron task
+     * @since 2.8.5
+     */
+    function run_cron() {
+        if ( ! wp_next_scheduled( 'facetwp_indexer_cron' ) ) {
+            wp_schedule_single_event( time() + 300, 'facetwp_indexer_cron' );
+        }
     }
 
 
@@ -36,6 +60,10 @@ class FacetWP_Indexer
         }
 
         if ( false !== wp_is_post_revision( $post_id ) ) {
+            return;
+        }
+
+        if ( 'auto-draft' == get_post_status( $post_id ) ) {
             return;
         }
 
@@ -117,7 +145,13 @@ class FacetWP_Indexer
         global $wpdb;
 
         // Index everything
-        if ( empty( $post_id ) ) {
+        if ( false === $post_id ) {
+
+            // Index all flag
+            $this->index_all = true;
+
+            // Bypass the PHP timeout
+            ini_set( 'max_execution_time', 0 );
 
             // Prevent multiple indexing processes
             $touch = (int) $this->get_transient( 'touch' );
@@ -133,22 +167,18 @@ class FacetWP_Indexer
                 $wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}facetwp_index" );
             }
 
-            // Bypass the PHP timeout
-            ini_set( 'max_execution_time', 0 );
-
-            // Index all flag
-            $this->index_all = true;
-
             $args = array(
                 'post_type'         => 'any',
                 'post_status'       => 'publish',
                 'posts_per_page'    => -1,
                 'fields'            => 'ids',
                 'orderby'           => 'ID',
+                'cache_results'     => false,
+                'no_found_rows'     => true,
             );
         }
         // Index a single post
-        else {
+        elseif ( is_int( $post_id ) ) {
             $args = array(
                 'p'                 => $post_id,
                 'post_type'         => 'any',
@@ -160,34 +190,37 @@ class FacetWP_Indexer
             // Clear table values
             $wpdb->query( "DELETE FROM {$wpdb->prefix}facetwp_index WHERE post_id = $post_id" );
         }
+        // Exit
+        else {
+            return;
+        }
 
         // Control which posts to index
         $args = apply_filters( 'facetwp_indexer_query_args', $args );
 
+        // Resume indexing?
+        $offset = isset( $_POST['offset'] ) ? (int) $_POST['offset'] : 0;
+        $attempt = isset( $_POST['retries'] ) ? (int) $_POST['retries'] : 0;
+
+        if ( 0 < $offset ) {
+            $post_ids = json_decode( get_option( 'facetwp_indexing' ), true );
+        }
+        else {
+            // Loop through all posts
+            $query = new WP_Query( $args );
+            $post_ids = (array) $query->posts;
+
+            // Store post IDs
+            if ( $this->index_all ) {
+                update_option( 'facetwp_indexing', json_encode( $post_ids ), false );
+            }
+        }
+
+        // Count total posts
+        $num_total = count( $post_ids );
+
         // Get all facet sources
         $facets = FWP()->helper->get_facets();
-
-        // Loop through all posts
-        $query = new WP_Query( $args );
-        $post_ids = (array) $query->posts;
-
-        // Track where to resume
-        $offset = 0;
-
-        if ( $this->index_all ) {
-
-            // Resume indexing
-            if ( isset( $_POST['offset'] ) ) {
-                $offset = (int) $_POST['offset'];
-            }
-
-            $transients = array(
-                'num_indexed'   => $offset,
-                'num_total'     => $query->found_posts,
-                'touch'         => time(),
-            );
-            update_option( 'facetwp_transients', json_encode( $transients ) );
-        }
 
         foreach ( $post_ids as $counter => $post_id ) {
 
@@ -196,7 +229,27 @@ class FacetWP_Indexer
                 continue;
             }
 
-            // If the indexer stalled, start fresh from the last valid chunk
+            // Update the progress bar
+            if ( $this->index_all ) {
+                if ( 0 == ( $counter % $this->chunk_size ) ) {
+                    $num_retries = (int) $this->get_transient( 'retries' );
+
+                    // Exit if newer retries exist
+                    if ( $attempt < $num_retries ) {
+                        exit;
+                    }
+
+                    $transients = array(
+                        'num_indexed'   => $counter,
+                        'num_total'     => $num_total,
+                        'retries'       => $attempt,
+                        'touch'         => time(),
+                    );
+                    update_option( 'facetwp_transients', json_encode( $transients ) );
+                }
+            }
+
+            // If the indexer stalled, start from the last valid chunk
             if ( 0 < $offset && ( $counter - $offset < $this->chunk_size ) ) {
                 $wpdb->query( "DELETE FROM {$wpdb->prefix}facetwp_index WHERE post_id = $post_id" );
             }
@@ -225,32 +278,37 @@ class FacetWP_Indexer
                     'term_id'               => 0,
                     'parent_id'             => 0,
                     'depth'                 => 0,
+                    'variation_id'          => 0,
                 );
 
+                $defaults = apply_filters( 'facetwp_indexer_post_facet_defaults', $defaults, array(
+                    'facet' => $facet
+                ) );
 
-                // Support custom facet indexing
-                if ( apply_filters( 'facetwp_indexer_post_facet', false,
-                    array( 'defaults' => $defaults, 'facet' => $facet ) ) ) {
+                // Set flag for custom facet indexing
+                $this->is_overridden = true;
+
+                // Bypass default indexing
+                $bypass = apply_filters( 'facetwp_indexer_post_facet', false, array(
+                    'defaults'  => $defaults,
+                    'facet'     => $facet
+                ) );
+
+                if ( $bypass ) {
                     continue;
                 }
 
+                $this->is_overridden = false;
+
                 // Get rows to insert
-                $insert_data = $this->get_row_data( $defaults );
+                $rows = $this->get_row_data( $defaults );
+                $rows = apply_filters( 'facetwp_indexer_row_data', $rows, array(
+                    'defaults'  => $defaults,
+                    'facet'     => $facet
+                ) );
 
-                foreach ( $insert_data as $row ) {
+                foreach ( $rows as $row ) {
                     $this->index_row( $row );
-                }
-            }
-
-            // Update the progress bar
-            if ( $this->index_all ) {
-                if ( 0 == ( ( $counter + 1 ) % $this->chunk_size ) ) {
-                    $transients = array(
-                        'num_indexed'   => $counter + 1,
-                        'num_total'     => $this->get_transient( 'num_total' ),
-                        'touch'         => time(),
-                    );
-                    update_option( 'facetwp_transients', json_encode( $transients ) );
                 }
             }
         }
@@ -258,6 +316,7 @@ class FacetWP_Indexer
         // Indexing complete
         if ( $this->index_all ) {
             update_option( 'facetwp_transients', '' );
+            update_option( 'facetwp_indexing', '' );
         }
     }
 
@@ -274,12 +333,15 @@ class FacetWP_Indexer
         $source = $defaults['facet_source'];
 
         if ( 'tax/' == substr( $source, 0, 4 ) ) {
+            $used_terms = array();
             $taxonomy = substr( $source, 4 );
-            $values = wp_get_object_terms( $post_id, $taxonomy );
+            $term_objects = wp_get_object_terms( $post_id, $taxonomy );
+            if ( is_wp_error( $term_objects ) ) {
+                return $output;
+            }
 
             // Store the term depths
             $hierarchy = FWP()->helper->get_term_depths( $taxonomy );
-            $used_terms = array();
 
             // Only index child terms
             $children = false;
@@ -287,27 +349,35 @@ class FacetWP_Indexer
                 $children = get_term_children( $facet['parent_term'], $taxonomy );
             }
 
-            foreach ( $values as $value ) {
+            foreach ( $term_objects as $term ) {
 
                 // If "parent_term" is set, only index children
-                if ( false !== $children && ! in_array( $value->term_id, $children ) ) {
+                if ( false !== $children && ! in_array( $term->term_id, $children ) ) {
                     continue;
                 }
-
-                // Handle hierarchical taxonomies
-                $term_info = $hierarchy[ $value->term_id ];
-                $depth = $term_info['depth'];
 
                 // Prevent duplicate terms
-                if ( isset( $used_terms[ $value->term_id ] ) ) {
+                if ( isset( $used_terms[ $term->term_id ] ) ) {
                     continue;
                 }
-                $used_terms[ $value->term_id ] = true;
+                $used_terms[ $term->term_id ] = true;
+
+                // Handle hierarchical taxonomies
+                $term_info = $hierarchy[ $term->term_id ];
+                $depth = $term_info['depth'];
+
+                // Adjust depth if parent_term is set
+                if ( ! empty( $facet['parent_term'] ) ) {
+                    if ( isset( $hierarchy[ $facet['parent_term'] ] ) ) {
+                        $anchor = (int) $hierarchy[ $facet['parent_term'] ]['depth'] + 1;
+                        $depth = ( $depth - $anchor );
+                    }
+                }
 
                 $params = $defaults;
-                $params['facet_value'] = $value->slug;
-                $params['facet_display_value'] = $value->name;
-                $params['term_id'] = $value->term_id;
+                $params['facet_value'] = $term->slug;
+                $params['facet_display_value'] = $term->name;
+                $params['term_id'] = $term->term_id;
                 $params['parent_id'] = $term_info['parent_id'];
                 $params['depth'] = $depth;
                 $output[] = $params;
@@ -338,12 +408,10 @@ class FacetWP_Indexer
             $source_noprefix = substr( $source, 3 );
             $values = get_post_meta( $post_id, $source_noprefix, false );
             foreach ( $values as $value ) {
-                if ( '' != $value ) {
-                    $params = $defaults;
-                    $params['facet_value'] = $value;
-                    $params['facet_display_value'] = $value;
-                    $output[] = $params;
-                }
+                $params = $defaults;
+                $params['facet_value'] = $value;
+                $params['facet_display_value'] = $value;
+                $output[] = $params;
             }
         }
         elseif ( 'post' == substr( $source, 0, 4 ) ) {
@@ -402,7 +470,7 @@ class FacetWP_Indexer
         }
 
         $wpdb->query( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}facetwp_index
-            (post_id, facet_name, facet_source, facet_value, facet_display_value, term_id, parent_id, depth) VALUES (%d, %s, %s, %s, %s, %d, %d, %d)",
+            (post_id, facet_name, facet_source, facet_value, facet_display_value, term_id, parent_id, depth, variation_id) VALUES (%d, %s, %s, %s, %s, %d, %d, %d, %d)",
             $params['post_id'],
             $params['facet_name'],
             $params['facet_source'],
@@ -410,7 +478,8 @@ class FacetWP_Indexer
             $params['facet_display_value'],
             $params['term_id'],
             $params['parent_id'],
-            $params['depth']
+            $params['depth'],
+            $params['variation_id']
         ) );
     }
 
@@ -424,6 +493,7 @@ class FacetWP_Indexer
         $return = -1;
         $num_indexed = (int) $this->get_transient( 'num_indexed' );
         $num_total = (int) $this->get_transient( 'num_total' );
+        $retries = (int) $this->get_transient( 'retries' );
         $touch = (int) $this->get_transient( 'touch' );
 
         if ( 0 < $num_total ) {
@@ -436,6 +506,7 @@ class FacetWP_Indexer
                     'body'      => array(
                         'action'    => 'facetwp_resume_index',
                         'offset'    => $num_indexed,
+                        'retries'   => $retries + 1,
                         'touch'     => $touch
                     )
                 );

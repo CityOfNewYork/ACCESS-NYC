@@ -20,11 +20,11 @@ class icl_cache{
                 $this->data = array();
             }
 			
-			add_action( 'shutdown', array( $this, 'save_cache_if_requred' ) );
+			add_action( 'shutdown', array( $this, 'save_cache_if_required' ) );
         }
     }
 	
-	function save_cache_if_requred( ) {
+	function save_cache_if_required( ) {
 		if( $this->cache_needs_saving ) {
 	        icl_cache_set($this->name.'_cache_class', $this->data);
 			$this->cache_needs_saving = false;

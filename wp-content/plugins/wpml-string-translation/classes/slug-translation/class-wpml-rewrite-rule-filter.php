@@ -41,6 +41,8 @@ class WPML_Rewrite_Rule_Filter extends WPML_WPDB_And_SP_User {
 				) );
 
 			}
+			$slug_translation = trim( $slug_translation, '/' );
+
 			$using_tags = false;
 			/* case of slug using %tags% - PART 1 of 2 - START */
 			if ( preg_match( '#%([^/]+)%#', $slug ) ) {

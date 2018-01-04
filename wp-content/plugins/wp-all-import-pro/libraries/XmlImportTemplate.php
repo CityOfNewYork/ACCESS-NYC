@@ -25,6 +25,8 @@ class XmlImportTemplate {
 	 */
 	protected $cachedTemplate;
 
+    protected $trimValues = TRUE;
+
 	/**
 	 * Creates new instance
 	 *
@@ -35,6 +37,7 @@ class XmlImportTemplate {
 	{
 		$this->xml = $xml;
 		$this->cachedTemplate = $cachedTemplate;
+        $this->trimValues = apply_filters('wp_all_import_is_trim_parsed_data', $this->trimValues);
 	}
 
 	/**
@@ -64,10 +67,10 @@ class XmlImportTemplate {
 				
 		if (is_array($xpath) && count($xpath) > 0) {
 			$result = array();
-			foreach ($xpath as $xp) { // cancatenate multiple elements into 1 string				
+			foreach ($xpath as $xp) { // concatenate multiple elements into 1 string
 				ob_start();
 				echo $xp;
-				$result[] = trim(ob_get_clean());
+				$result[] = $this->trimValues ? trim(ob_get_clean()) : ob_get_clean();
 			}			
 			return implode(XmlImportConfig::getInstance()->getMultiGlue(), $result);
 		} else {

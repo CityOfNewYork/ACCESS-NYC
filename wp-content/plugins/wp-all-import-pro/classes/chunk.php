@@ -88,8 +88,11 @@ class PMXI_Chunk {
 
     $this->parser_type = empty($parser_type) ? 'xmlreader' : $parser_type;
 
+    $sleep = apply_filters( 'wp_all_import_shard_delay', 0 );
+    usleep($sleep);
+
     $is_html = false;
-    $f = @fopen($file, "rb");       
+    $f = @fopen($file, "rb");
     while (!@feof($f)) {
       $chunk = @fread($f, 1024);         
       if (strpos($chunk, "<!DOCTYPE") === 0) $is_html = true;
@@ -339,15 +342,19 @@ class PMXI_Chunk {
         $pattern = '/(<\/\w+):([\w+|\.|-]+>)/i';
         $replacement = '$1_$2';
         $feed = preg_replace($pattern, $replacement, $feed);
-        // pull out colons from attributes
-        $pattern = '/(\s+\w+):(\w+[=]{1})/i';
-        $replacement = '$1_$2';
-        $feed = preg_replace($pattern, $replacement, $feed);
+
+        $is_replace_colons = apply_filters('wp_all_import_replace_colons_in_attribute_names', true);
+        if ( $is_replace_colons ) {
+            // pull out colons from attributes
+            $pattern = '/(\s+\w+):(\w+[=]{1})/i';
+            $replacement = '$1_$2';
+            $feed = preg_replace($pattern, $replacement, $feed);
+        }
         // pull colons from single element 
         // (<\w+):(\w+\/>)
         $pattern = '/(<\w+):([\w+|\.|-]+\/>)/i';
         $replacement = '$1_$2';
-        $feed = preg_replace($pattern, $replacement, $feed);              
+        $feed = preg_replace($pattern, $replacement, $feed);
 
         $is_preprocess_enabled = apply_filters('is_xml_preprocess_enabled', true);
         if ($is_preprocess_enabled)
