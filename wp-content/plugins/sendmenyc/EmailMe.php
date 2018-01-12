@@ -21,17 +21,108 @@ class EmailMe extends ContactMe {
 	protected $from_hint = 'noreply@example.com';
 
 
-	protected function content( $url, $page ){
+	protected function content( $url, $page, $orig_url ){
+		// extract the language code - TO EDIT: add these as fields in the CMS so they can be easily modified
+		$exp = explode('/',$orig_url); 
+		$language = $exp[3]; 
+
+		// reads in the email template
 		$html = file_get_contents( __DIR__ .'/emails/index.html' );
 
+		// results page
 		if ( $page == self::RESULTS_PAGE ) {
-			$subject = 'Time to apply for your NYC programs';
-			$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
-			$button="Your Results";
+			if ( $language == "es" ) {
+				$subject = 'Es tiempo de solicitar los programas de NYC';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="Sus resultados";
+			}elseif ( $language == "ru" ) {
+				$subject = 'Сейчас можно оформить заявление на участие в городских программах Нью-Йорка';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="Ваши результаты";
+			}elseif ( $language == "ko" ) {
+				$subject = 'NYC 프로그램에 신청하실 때입니다';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="결과";
+			}elseif ( $language == "ar" ) {
+				$subject = 'حان وقت تقديم الطلب لبرامج مدينة نيويورك';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="نتائجك";
+			}elseif ( $language == "ht" ) {
+				$subject = 'Lè a rive pou ou aplike pou pwogram NYC ou yo';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="Rezilta ou yo";
+			}elseif ( $language == "zh-hant" ) {
+				$subject = '是您申請 NYC 計劃的時候了';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="您的結果";
+			}elseif ( $language == "fr" ) {
+				$subject = 'C’est le moment de faire une demande pour bénéficier des programmes NYC';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="Vos résultats";
+			}elseif ( $language == "pl" ) {
+				$subject = 'Czas złożyć wniosek o programy NYC';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="Twoje wyniki";
+			}elseif ( $language == "ur" ) {
+				$subject = 'اپنے NYC پروگرامز کے لیے درخواست دینے کا وقت';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button=" آپ کے نتائج";
+			}elseif ( $language == "bn" ) {
+				$subject = 'আপনার NYC কার্যক্রমগুলির জন্য আবেদন করার সময় এসে গেছে';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="আপনার ফলাফলসমূহ";
+			}else {
+				$subject = 'Time to apply for your NYC programs';
+				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
+				$button="Your Results";
+			}
+		// programs page
 		} else {
-			$subject='How to apply for your NYC program';
-			$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
-			$button = "How To Apply";
+			if ( $language == "es" ) {
+				$subject='ES How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "Cómo solicitar el beneficio";
+			}elseif ( $language == "ru" ) {
+				$subject='RU How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "Порядок подачи заявления";
+			}elseif ( $language == "ko" ) {
+				$subject='KO How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "신청방법";
+			}elseif ( $language == "ar" ) {
+				$subject='AR How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "طريقة التقديم";
+			}elseif ( $language == "ht" ) {
+				$subject='HT How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "Kouman pou Aplike";
+			}elseif ( $language == "zh-hant" ) {
+				$subject='ZH How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "如何申請";
+			}elseif ( $language == "fr" ) {
+				$subject='FR How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "Comment présenter une demande";
+			}elseif ( $language == "pl" ) {
+				$subject='PL How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "Jak złożyć wniosek";
+			}elseif ( $language == "ur" ) {
+				$subject='UR How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "درخواست کیسے دیں";
+			}elseif ( $language == "bn" ) {
+				$subject='BN How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "কীভাবে আবেদন করতে হয়";
+			}else {
+				$subject='How to apply for your NYC program';
+				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
+				$button = "How To Apply";
+			}
 		}
 
         $html_body = str_replace("\r\n","<br>",$body);
