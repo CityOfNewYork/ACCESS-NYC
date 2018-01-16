@@ -23,6 +23,7 @@ docker-compose.yml
 data/
 wp-content/cache/*
 wp-content/cache/supercache/*
+/info.php
 
 # Docker and Docker Image Adds #
 #####################

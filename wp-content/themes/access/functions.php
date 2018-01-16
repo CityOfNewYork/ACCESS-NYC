@@ -364,7 +364,7 @@ function wpml_switcher_urls($languages) {
           $languages[$lang_code]['url'] = '/programs/?program_cat='.$prog;
         }
         // if not english, then remove the language code and add the correct one
-        elseif($lang_code != 'en' || $lang_code != '' ){   
+        elseif($lang_code != 'en' || $lang_code != '' ){
           $languages[$lang_code]['url'] = '/'.$lang_code.'/programs/?program_cat='.$prog.'-'.$lang_code;
         }
       }
@@ -406,7 +406,9 @@ class BSDStarterSite extends TimberSite {
 
   function add_to_context ( $context ) {
     $context['menu'] = new TimberMenu('header-menu');
+    error_reporting(0);
     $context['language_code'] = ICL_LANGUAGE_CODE;
+    error_reporting(WP_DEBUG);
     $context['site'] = $this;
     $context['search_links'] = Timber::get_posts(array(
       'post_type' => 'program_search_links',
@@ -525,7 +527,7 @@ $office_loc = array(
   'post_types' => array('location'),
   'fields' => array(
     'google_map' => 'field_588003b6be759',
-    'address_street'   => 'field_58800318be754', 
+    'address_street'   => 'field_58800318be754',
     'address_street_2' => 'field_5880032abe755',
     'city'      => 'field_58acf5f524f67',
     'zip'       => 'field_58acf60c24f68',
@@ -582,7 +584,7 @@ function trigger_gmaps(){
       // update the google map fields
       update_field( $office_loc['fields']['google_map'], $location, $post->ID);
     }
-  } 
+  }
 }
 add_action('wp', 'trigger_gmaps', 1);
 // end of trigger_gmaps
@@ -599,7 +601,7 @@ add_filter( 'gathercontent_importer_custom_field_keys', function( $meta_keys ) {
       $new_meta_keys[$key]=$value;
     }
   }
-  // return the new array 
+  // return the new array
   return $new_meta_keys;
 } );
 // end of GatherContent - Mapped WordPress Field meta_keys edit
@@ -609,7 +611,7 @@ function access_meta_description($title)
 {
   // render only on the homepage
   if( is_home()){
-    echo '<meta name="description" content="' . get_bloginfo('description') . '" />' . "\r\n"; 
+    echo '<meta name="description" content="' . get_bloginfo('description') . '" />' . "\r\n";
     // remove tagline from title tag
     $title = get_bloginfo('name');
   }
@@ -680,49 +682,6 @@ function share_data($params) {
 }
 
 /**
- * Template for post password form
- * @return [string] the form markup as a string
- */
-function password_form() {
-  global $post;
-  $label = 'pwbox-'.(empty($post->ID) ? rand() : $post->ID);
-  $form = '<form action="' . esc_url(site_url('wp-login.php?action=postpass', 'login_post')) . '" method="post">
-    <div class="screener-question-container">
-      <label class="type-h3 c-blue-dark ff-sans-serif d-block" for="' . $label . '">' . __("Please enter your password", 'accessnyc-screener') . ' </label>
-      <input name="post_password" id="' . $label . '" type="password" maxlength="20" class="d-block w-100" />
-      <div class="m-top">
-        <input type="submit" name="Submit" class="btn btn-primary w-100 m-0" value="' . esc_attr__( "Submit" ) . '" />
-      </div>
-    </div>
-  </form>';
-  return $form;
-}
-add_filter('the_password_form', 'password_form');
-
-/**
- * Check to see if the user needs to be authenticated to view the page
- * @param  [string] $role - the path of the page to check authentication against
- * @return [boolean]      - truthy if needs authentication
- */
-function authentication_required($role) {
-  return post_password_required(get_page_by_path($role)->ID);
-}
-
-/**
- * Requiring authentication based on "post view"
- * @param  [string] $role - the path of the page to check authentication against
- * @return [boolean]      - truthy if authenticated
- */
-function authentication_redirect($role) {
-  if (authentication_required($role)) {
-    wp_redirect("/$role/login");
-    exit;
-  } else {
-    return true;
-  }
-}
-
-/**
  * Enqueue a hashed script based on it's name.
  * Enqueue the minified version based on debug mode.
  * @param  [string] $name the name of the script source
@@ -746,7 +705,9 @@ function script($name) {
  */
 function style($name = "style") {
   $languages = array('ar', 'ko', 'zh-hant');
+  error_reporting(0);
   $lang = ICL_LANGUAGE_CODE;
+  error_reporting(WP_DEBUG);
   $dir = get_template_directory();
 
   if (in_array($lang, $languages)) {
@@ -763,11 +724,6 @@ function style($name = "style") {
   $uri = get_template_directory_uri();
   wp_enqueue_style($name, "$uri/$name-$hash.css", array(), null, 'all');
 }
-
-/**
- * Add expiry filter to post password tokens for one day
- */
-// apply_filters('post_password_expires', 0);
 
 /**
  * Routes
@@ -797,29 +753,17 @@ Routes::map('eligibility/results', function() {
 });
 
 Routes::map('peu', function() {
-  authentication_redirect('peu');
   style();
   script('main.field');
   Routes::load('screener-field.php', null, null, 200);
 });
 
 Routes::map('peu/results', function() {
-  authentication_redirect('peu');
   style();
   script('main.field');
   $params = array();
   $params['share_path'] = '/eligibility/results/';
   Routes::load('eligibility-results-field.php', $params, null, 200);
-});
-
-Routes::map('peu/login', function() {
-  if (!authentication_required('peu')) {
-    wp_redirect('/peu');
-    exit;
-  }
-  style();
-  script('main.field');
-  Routes::load('screener-login.php', null, null, 200);
 });
 
 /**
@@ -843,9 +787,8 @@ function api_share_url(WP_REST_Request $request) {
  */
 function rest_routes() {
   register_rest_route('api/v1', '/shareurl/', array(
-    'methods'             => 'GET',
-    'callback'            => 'api_share_url',
-    'permission_callback' => function() { return !(authentication_required('peu')); }
+    'methods' => 'GET',
+    'callback' => 'api_share_url'
   ));
 }
 add_action('rest_api_init', 'rest_routes');
