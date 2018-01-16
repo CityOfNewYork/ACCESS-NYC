@@ -17,7 +17,7 @@
 
           <h3 class="{{ styles.labels }}">
             {{ __('Looking for help with', translationID) }}
-            <a class="m-horizontal" data-js="question" href="#question-client-needs">{{ __('Edit', translationID) }}</a>
+            <a class="m-horizontal" data-js="question" href="#question-client-needs" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-client-needs/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <div class="recap-program-categories" v-if="categories.length">
@@ -50,7 +50,7 @@
 
           <h3 class="{{ styles.labels }}">
             {{ __('Currently Enrolled Programs', translationID) }}
-            <a class="m-horizontal" data-js="question" href="#question-client-services">{{ __('Edit', translationID) }}</a>
+            <a class="m-horizontal" data-js="question" href="#question-client-services" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-client-services/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <div class="recap-household-member-detail" v-if="programsFilter.length > 0 || categoriesCurrent.length > 0" >
@@ -75,7 +75,7 @@
 
           <h3 class="{{ styles.labels }}">
             {{ __('Client information', translationID) }}
-            <a class="m-horizontal" data-js="question" href="#question-client-basics">{{ __('Edit', translationID) }}</a>
+            <a class="m-horizontal" data-js="question" href="#question-client-basics" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-client-basics/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <div class="recap-household-member-detail" v-if="Object.keys(getAttrs('client', 'firstName,lastName')).length > 0">
@@ -138,7 +138,7 @@
 
           <h3 class="{{ styles.labels }}">
             {{ __('Client Contact', translationID) }}
-            <a class="m-horizontal" data-js="question" href="#question-client-contact">{{ __('Edit', translationID) }}</a>
+            <a class="m-horizontal" data-js="question" href="#question-client-contact" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-client-contact/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <div class="recap-household-member-detail" v-if="client._attrs.language.length > 0">
@@ -242,9 +242,7 @@
             {{ __('Household:', translationID) }} v{ people.length }
             <span v-if="singleOccupant()">{{ __('person', translationID) }}</span>
             <span v-else>{{ __('people', translationID) }}</span>
-            <a class="m-horizontal" href="#question-household-information" data-js="question">
-              {{ __('Edit', translationID) }}
-            </a>
+            <a class="m-horizontal" href="#question-household-information" data-js="question" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-household-information/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <div class="m-bottom" v-for="(p, personIndex) in people">
@@ -253,12 +251,10 @@
               <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
 
               <span v-if="personIndex === 0">
-                <a class="btn-text btn-link p-horizontal" href="#question-household-information" data-js="question">
-                  {{ __('Edit', translationID) }}
-                </a>
+                <a class="btn-text btn-link p-horizontal" href="#question-household-information" data-js="question" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-household-information/edit'}])">{{ __('Edit', translationID) }}</a>
               </span><span v-else>
-                <a class="btn-text btn-link p-horizontal" href="#question-household-members" data-js="question">{{ __('Edit', translationID) }}</a>
-                <button type="button" class="btn-text btn-link p-horizontal" v-on:click="people.splice(personIndex, 1)">{{ __('Remove', translationID) }}</button>
+                <a class="btn-text btn-link p-horizontal" href="#question-household-members" data-js="question" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-household-members/edit'}])">{{ __('Edit', translationID) }}</a>
+                <button type="button" class="btn-text btn-link p-horizontal" v-on:click="people.splice(personIndex, 1);track('Edit', [{'DCS.dcsuri': '/remove-household-member/remove'}])">{{ __('Remove', translationID) }}</button>
               </span>
             </div>
 
@@ -314,7 +310,7 @@
           <h3 class="{{ styles.labels }}">
             {{ __('Household resources:', translationID) }}
             <span class="force-ltr">v{ '$' + household._attrs.cashOnHand }</span>
-            <a class="m-horizontal" href="#question-household-total-savings" data-js="question">{{ __('Edit', translationID) }}</a>
+            <a class="m-horizontal" href="#question-household-total-savings" data-js="question" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-household-total-savings/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <p>{{ __('This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.', translationID) }}</p>
@@ -328,7 +324,7 @@
 
           <h3 class="{{ styles.labels }}">
             {{ __('Housing', translationID) }}
-            <a class="m-horizontal" href="#question-housing-situation" data-js="question">{{ __('Edit', translationID) }}</a>
+            <a class="m-horizontal" href="#question-housing-situation" data-js="question" v-on:click="track('Edit', [{'DCS.dcsuri': '/question-housing-situation/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
           <ul class="recap-detail-info">

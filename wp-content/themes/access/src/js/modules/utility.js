@@ -217,6 +217,27 @@ Utility.camelToUpper = function(str) {
 };
 
 /**
+ * Tracking function wrapper
+ * @param  {string} key  The key or event of the data
+ * @param  {object} data The data to track
+ */
+Utility.track = function(key, data) {
+  /* eslint-disable no-undef */
+  if (typeof Webtrends === 'undefined') return;
+  let wt = Webtrends;
+  /* eslint-enable no-undef */
+
+  let wtData = _.flatten(_.map(data, (d) => _.pairs(d)));
+
+  wt.multiTrack(wtData);
+
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+    console.dir([`track: ${key}`, wtData]);
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
  * Site constants.
  * @enum {string}
  */

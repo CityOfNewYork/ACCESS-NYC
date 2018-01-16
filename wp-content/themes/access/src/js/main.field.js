@@ -23,10 +23,17 @@ import Utility from 'modules/utility';
   let $body = $('body');
 
   // Simple Toggle
-  $body.on('click', '[data-js="simple-toggle"]', Utility.simpleToggle);
+  $body.on('click', '[data-js*="simple-toggle"]', Utility.simpleToggle);
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
+
+  // A basic click tracking function
+  $body.on('click', '[data-js*="track"]', (event) => {
+    let key = event.currentTarget.dataset.trackKey;
+    let data = JSON.parse(event.currentTarget.dataset.trackData);
+    ScreenerField.track(key, data);
+  });
 
   // Initialize eligibility screener.
   $(ScreenerField.Selectors.DOM).each((i, el) =>

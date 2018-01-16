@@ -10318,7 +10318,7 @@ return jQuery;
 
 },{}],4:[function(require,module,exports){
 /*!
- * JavaScript Cookie v2.1.4
+ * JavaScript Cookie v2.2.0
  * https://github.com/js-cookie/js-cookie
  *
  * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
@@ -10428,7 +10428,7 @@ return jQuery;
 				var parts = cookies[i].split('=');
 				var cookie = parts.slice(1).join('=');
 
-				if (cookie.charAt(0) === '"') {
+				if (!this.json && cookie.charAt(0) === '"') {
 					cookie = cookie.slice(1, -1);
 				}
 
@@ -29215,10 +29215,17 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
   var $body = $('body');
 
   // Simple Toggle
-  $body.on('click', '[data-js="simple-toggle"]', _utility2.default.simpleToggle);
+  $body.on('click', '[data-js*="simple-toggle"]', _utility2.default.simpleToggle);
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', _shareForm2.default.ShowDisclaimer);
+
+  // A basic click tracking function
+  $body.on('click', '[data-js*="track"]', function (event) {
+    var key = event.currentTarget.dataset.trackKey;
+    var data = JSON.parse(event.currentTarget.dataset.trackData);
+    _screener2.default.track(key, data);
+  });
 
   // Initialize eligibility screener.
   $(_screener2.default.Selectors.DOM).each(function (i, el) {return (
@@ -29584,7 +29591,7 @@ ResultsField.Selectors = {
   'ADDITIONAL_PROGRAMS': '[data-js="additional-programs"]',
   'DOM': '[data-js="results"]',
   'HYPERLINKS': 'a[href*=""]',
-  'REMOVE_PROGRAM': '[data-js="remove-program"]',
+  'REMOVE_PROGRAM': '[data-js*="remove-program"]',
   'SHARE_URLS': 'input[name="url"]',
   'SHARE_HASH': 'input[name="hash"]',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
@@ -30434,7 +30441,8 @@ ScreenerField = function () {
         getTypedVal: ScreenerField.getTypedVal,
         commit: ScreenerField.commit,
         filterDollars: ScreenerField.filterDollars,
-        filterPhone: ScreenerField.filterPhone } };
+        filterPhone: ScreenerField.filterPhone,
+        track: ScreenerField.track } };
 
 
   }
@@ -30885,11 +30893,23 @@ ScreenerField = function () {
 
 
 /**
-                                     * Validation functionality, if a scope is attatched, it will only validate
-                                     * against the scope stored in validScopes
-                                     * @param  {event}  event - the click event
-                                     * @param  {string} scope - the scope to validate, if undefined validates all
+                                     * Wrapper for the tracking functionality in utiltiy.
+                                     * @param  {string} key  [description]
+                                     * @param  {object} data [description]
                                      */
+ScreenerField.track = function (key, data) {
+  var prefix = {};
+  prefix['WT.ti'] = 'PEU: ' + key;
+  data.unshift(prefix);
+  _utility2.default.track(prefix['WT.ti'], data);
+};
+
+/**
+    * Validation functionality, if a scope is attatched, it will only validate
+    * against the scope stored in validScopes
+    * @param  {event}  event - the click event
+    * @param  {string} scope - the scope to validate, if undefined validates all
+    */
 ScreenerField.validate = function (event, scope) {
   event.preventDefault();
   scope = typeof scope !== 'undefined' ?
@@ -33428,6 +33448,27 @@ Utility.camelToUpper = function (str) {
   return str.replace(/([A-Z])/g, function ($1) {
     return '_' + $1;
   }).toUpperCase();
+};
+
+/**
+    * Tracking function wrapper
+    * @param  {string} key  The key or event of the data
+    * @param  {object} data The data to track
+    */
+Utility.track = function (key, data) {
+  /* eslint-disable no-undef */
+  if (typeof Webtrends === 'undefined') return;
+  var wt = Webtrends;
+  /* eslint-enable no-undef */
+
+  var wtData = _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);}));
+
+  wt.multiTrack(wtData);
+
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+  console.dir(['track: ' + key, wtData]);
+  /* eslint-enable no-console, no-debugger */
 };
 
 /**

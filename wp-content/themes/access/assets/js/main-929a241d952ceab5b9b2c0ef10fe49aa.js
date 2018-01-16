@@ -10318,7 +10318,7 @@ return jQuery;
 
 },{}],4:[function(require,module,exports){
 /*!
- * JavaScript Cookie v2.1.4
+ * JavaScript Cookie v2.2.0
  * https://github.com/js-cookie/js-cookie
  *
  * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
@@ -10428,7 +10428,7 @@ return jQuery;
 				var parts = cookies[i].split('=');
 				var cookie = parts.slice(1).join('=');
 
-				if (cookie.charAt(0) === '"') {
+				if (!this.json && cookie.charAt(0) === '"') {
 					cookie = cookie.slice(1, -1);
 				}
 
@@ -15740,6 +15740,27 @@ Utility.camelToUpper = function (str) {
   return str.replace(/([A-Z])/g, function ($1) {
     return '_' + $1;
   }).toUpperCase();
+};
+
+/**
+    * Tracking function wrapper
+    * @param  {string} key  The key or event of the data
+    * @param  {object} data The data to track
+    */
+Utility.track = function (key, data) {
+  /* eslint-disable no-undef */
+  if (typeof Webtrends === 'undefined') return;
+  var wt = Webtrends;
+  /* eslint-enable no-undef */
+
+  var wtData = _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);}));
+
+  wt.multiTrack(wtData);
+
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+  console.dir(['track: ' + key, wtData]);
+  /* eslint-enable no-console, no-debugger */
 };
 
 /**

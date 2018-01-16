@@ -98,7 +98,8 @@ class ScreenerField {
         getTypedVal: ScreenerField.getTypedVal,
         commit: ScreenerField.commit,
         filterDollars: ScreenerField.filterDollars,
-        filterPhone: ScreenerField.filterPhone
+        filterPhone: ScreenerField.filterPhone,
+        track: ScreenerField.track
       }
     };
   }
@@ -547,6 +548,18 @@ class ScreenerField {
     /* eslint-enable no-console, no-debugger */
   }
 }
+
+/**
+ * Wrapper for the tracking functionality in utiltiy.
+ * @param  {string} key  [description]
+ * @param  {object} data [description]
+ */
+ScreenerField.track = function(key, data) {
+  let prefix = {};
+  prefix['WT.ti'] = `PEU: ${key}`;
+  data.unshift(prefix);
+  Utility.track(prefix['WT.ti'], data);
+};
 
 /**
  * Validation functionality, if a scope is attatched, it will only validate
