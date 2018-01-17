@@ -712,6 +712,9 @@ $_old_files = array(
 'wp-includes/js/tinymce/skins/lightgray/fonts/tinymce-small.json',
 'wp-includes/js/tinymce/skins/lightgray/fonts/tinymce.json',
 'wp-includes/js/tinymce/skins/lightgray/skin.ie7.min.css',
+// 4.9.2
+'wp-includes/js/mediaelement/flashmediaelement.swf',
+'wp-includes/js/mediaelement/silverlightmediaelement.xap',
 );
 
 /**
@@ -1087,7 +1090,11 @@ function update_core($from, $to) {
 		$old_file = $to . $old_file;
 		if ( !$wp_filesystem->exists($old_file) )
 			continue;
-		$wp_filesystem->delete($old_file, true);
+
+		// If the file isn't deleted, try writing an empty string to the file instead.
+		if ( ! $wp_filesystem->delete( $old_file, true ) && $wp_filesystem->is_file( $old_file ) ) {
+			$wp_filesystem->put_contents( $old_file, '' );
+		}
 	}
 
 	// Remove any Genericons example.html's from the filesystem
