@@ -52,6 +52,13 @@ import Utility from 'modules/utility';
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
 
+  // A basic click tracking function
+  $body.on('click', '[data-js*="track"]', (event) => {
+    let key = event.currentTarget.dataset.trackKey;
+    let data = JSON.parse(event.currentTarget.dataset.trackData);
+    Utility.track(key, data);
+  });
+
   // On the search results page, submits the search form when a category is
   // chosen.
   $('.js-program-search-filter').on('change', 'input', (e) => {

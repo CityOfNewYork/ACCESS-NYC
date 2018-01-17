@@ -555,10 +555,7 @@ class ScreenerField {
  * @param  {object} data [description]
  */
 ScreenerField.track = function(key, data) {
-  let prefix = {};
-  prefix['WT.ti'] = `PEU: ${key}`;
-  data.unshift(prefix);
-  Utility.track(prefix['WT.ti'], data);
+  Utility.track(key, data);
 };
 
 /**

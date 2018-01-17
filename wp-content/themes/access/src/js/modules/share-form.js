@@ -168,29 +168,46 @@ class ShareForm {
    */
   _submit() {
     this._isBusy = true;
+
+    const payload = $(this._el).serialize();
+
     let $tel = this._el.querySelector('input[type="tel"]'); // get phone number
     let $submit = this._el.querySelector('button[type="submit"]');
     let $spinner = this._el.querySelector(`.${ShareForm.CssClass.SPINNER}`);
     let $inputs = $(this._el).find('input');
-    if ($tel) $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
-    const payload = $(this._el).serialize();
+    let type = 'email';
+
+    if ($tel) {
+      $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
+      type = 'sms';
+    }
+
     $inputs.prop('disabled', true); // disable inputs
+
     if ($spinner) {
       $submit.style.cssText = 'display: none'; // hide submit button
       $spinner.style.cssText = ''; // show spinner
     }
+
     return $.post($(this._el).attr('action'), payload).done((response) => {
       if (response.success) {
         this._showSuccess();
         this._isDisabled = true;
+
         $(this._el).one('keyup', 'input', () => {
           $(this._el).removeClass(ShareForm.CssClass.SUCCESS);
           this._isDisabled = false;
         });
+
+        Utility.track('Share', [
+          {'DCS.dcsuri': `/share/${type}`}]
+        );
       } else {
         let messageId = (response.error === 21211) ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
+
         this._showError(messageId);
+
         /* eslint-disable no-console, no-debugger */
         if (Utility.debug()) console.error(response);
         /* eslint-enable no-console, no-debugger */
@@ -199,11 +216,14 @@ class ShareForm {
       this._showError(ShareForm.Message.SERVER);
     }).always(() => {
       $inputs.prop('disabled', false); // enable inputs
+
       if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
+
       if ($spinner) {
         $submit.style.cssText = ''; // show submit button
         $spinner.style.cssText = 'display: none'; // hide spinner;
       }
+
       this._isBusy = false;
     });
   }

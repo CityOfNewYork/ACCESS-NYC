@@ -26,7 +26,7 @@
       <aside>
         <div class="save-your-results">
           <h4>{{__('Save your results.', 'accessnyc-results')}}</h4>
-          <a class="btn btn-primary" href="javascript:window.print()">{{__('Print', 'accessnyc-results')}}</a>
+          <a class="btn btn-primary" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]'>{{__('Print', 'accessnyc-results')}}</a>
 
           <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
           <div id="share-by-sms" class="share-form js-needs-disclaimer hidden">

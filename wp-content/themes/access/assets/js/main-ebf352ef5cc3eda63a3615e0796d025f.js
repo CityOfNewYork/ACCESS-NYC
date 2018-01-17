@@ -12088,6 +12088,13 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', _shareForm2.default.ShowDisclaimer);
 
+  // A basic click tracking function
+  $body.on('click', '[data-js*="track"]', function (event) {
+    var key = event.currentTarget.dataset.trackKey;
+    var data = JSON.parse(event.currentTarget.dataset.trackData);
+    _utility2.default.track(key, data);
+  });
+
   // On the search results page, submits the search form when a category is
   // chosen.
   $('.js-program-search-filter').on('change', 'input', function (e) {
@@ -14913,29 +14920,46 @@ ShareForm = function () {
        */ }, { key: '_submit', value: function _submit()
     {var _this4 = this;
       this._isBusy = true;
+
+      var payload = (0, _jquery2.default)(this._el).serialize();
+
       var $tel = this._el.querySelector('input[type="tel"]'); // get phone number
       var $submit = this._el.querySelector('button[type="submit"]');
       var $spinner = this._el.querySelector('.' + ShareForm.CssClass.SPINNER);
       var $inputs = (0, _jquery2.default)(this._el).find('input');
-      if ($tel) $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
-      var payload = (0, _jquery2.default)(this._el).serialize();
+      var type = 'email';
+
+      if ($tel) {
+        $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
+        type = 'sms';
+      }
+
       $inputs.prop('disabled', true); // disable inputs
+
       if ($spinner) {
         $submit.style.cssText = 'display: none'; // hide submit button
         $spinner.style.cssText = ''; // show spinner
       }
+
       return _jquery2.default.post((0, _jquery2.default)(this._el).attr('action'), payload).done(function (response) {
         if (response.success) {
           _this4._showSuccess();
           _this4._isDisabled = true;
+
           (0, _jquery2.default)(_this4._el).one('keyup', 'input', function () {
             (0, _jquery2.default)(_this4._el).removeClass(ShareForm.CssClass.SUCCESS);
             _this4._isDisabled = false;
           });
+
+          _utility2.default.track('Share', [
+          { 'DCS.dcsuri': '/share/' + type }]);
+
         } else {
           var messageId = response.error === 21211 ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
+
           _this4._showError(messageId);
+
           /* eslint-disable no-console, no-debugger */
           if (_utility2.default.debug()) console.error(response);
           /* eslint-enable no-console, no-debugger */
@@ -14944,11 +14968,14 @@ ShareForm = function () {
         _this4._showError(ShareForm.Message.SERVER);
       }).always(function () {
         $inputs.prop('disabled', false); // enable inputs
+
         if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
+
         if ($spinner) {
           $submit.style.cssText = ''; // show submit button
           $spinner.style.cssText = 'display: none'; // hide spinner;
         }
+
         _this4._isBusy = false;
       });
     } }]);return ShareForm;}();
@@ -15744,16 +15771,21 @@ Utility.camelToUpper = function (str) {
 
 /**
     * Tracking function wrapper
-    * @param  {string} key  The key or event of the data
-    * @param  {object} data The data to track
+    * @param  {string}     key  The key or event of the data
+    * @param  {collection} data The data to track
     */
 Utility.track = function (key, data) {
   /* eslint-disable no-undef */
   if (typeof Webtrends === 'undefined') return;
   var wt = Webtrends;
   /* eslint-enable no-undef */
+  var wtData = data;
+  var prefix = {};
 
-  var wtData = _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);}));
+  prefix['WT.ti'] = key;
+  data.unshift(prefix);
+
+  wtData = _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);}));
 
   wt.multiTrack(wtData);
 
