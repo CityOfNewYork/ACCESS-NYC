@@ -332,38 +332,41 @@ add_action( 'pre_get_posts', 'access_filter_posts' );
 function wpml_switcher_urls($languages) {
   global $sitepress;
 
-  $cur_prog=$_GET['program_cat'];
-  $original_lang = ICL_LANGUAGE_CODE; // Save the current language
+  if(isset($_GET['program_cat'])){
 
-  // switch to english to capture the original taxonomies
-  if($original_lang != 'en'){
-    $sitepress->switch_lang('en');
-  }
+    $cur_prog=$_GET['program_cat'];
+    $original_lang = ICL_LANGUAGE_CODE; // Save the current language
 
-  // retrieve the program taxonomies as array
-  $terms = get_terms( array(
-    'taxonomy' => 'programs',
-    'hide_empty' => false,  ) );
-
-  $sitepress->switch_lang($original_lang); //switch back to the original language
-
-  // find the en taxonomy that matches the current program
-  foreach ($terms as $term) {
-    if (strpos($cur_prog, $term->slug) !== false) {
-      $prog = $term->slug;
+    // switch to english to capture the original taxonomies
+    if($original_lang != 'en'){
+      $sitepress->switch_lang('en');
     }
-  }
 
-  // reconstruct the language url based on the program filter
-  if(strpos(basename($_SERVER['REQUEST_URI']), 'program_cat') !== false){
-    foreach($languages as $lang_code => $language){
-      if($lang_code == 'en'){
-        $newlang_code="";
-        $languages[$lang_code]['url'] = '/programs/?program_cat='.$prog;
+    // retrieve the program taxonomies as array
+    $terms = get_terms( array(
+      'taxonomy' => 'programs',
+      'hide_empty' => false,  ) );
+
+    $sitepress->switch_lang($original_lang); //switch back to the original language
+
+    // find the en taxonomy that matches the current program
+    foreach ($terms as $term) {
+      if (strpos($cur_prog, $term->slug) !== false) {
+        $prog = $term->slug;
       }
-      // if not english, then remove the language code and add the correct one
-      elseif($lang_code != 'en' || $lang_code != '' ){   
-        $languages[$lang_code]['url'] = '/'.$lang_code.'/programs/?program_cat='.$prog.'-'.$lang_code;
+    }
+
+    // reconstruct the language url based on the program filter
+    if(strpos(basename($_SERVER['REQUEST_URI']), 'program_cat') !== false){
+      foreach($languages as $lang_code => $language){
+        if($lang_code == 'en'){
+          $newlang_code="";
+          $languages[$lang_code]['url'] = '/programs/?program_cat='.$prog;
+        }
+        // if not english, then remove the language code and add the correct one
+        elseif($lang_code != 'en' || $lang_code != '' ){   
+          $languages[$lang_code]['url'] = '/'.$lang_code.'/programs/?program_cat='.$prog.'-'.$lang_code;
+        }
       }
     }
   }
@@ -515,6 +518,7 @@ function my_jquery_enqueue() {
    wp_deregister_script('jquery');
 }
 
+// *****
 // Function to trigger Google Maps render on content import
 global $office_loc;
 $office_loc = array(
@@ -527,56 +531,62 @@ $office_loc = array(
     'zip'       => 'field_58acf60c24f68',
   ),
 );
+
 function trigger_gmaps(){
   global $post;
   global $office_loc;
 
-  // get the address field for the google map
-  $location = get_field( $office_loc['fields']['google_map'], $post->ID );
+  if ( $post && $post->post_type == 'location' ){    
+    // get the address field for the google map
+    $location = get_field( $office_loc['fields']['google_map'], $post->ID );
 
-  // check to see if the address is empty - if empty, populated it with the correct fields
-  if ( isset($location['address']) && isset($location['lat']) && isset($location['lng'])  ) {
-    $full_address =  $location['address'];
-  }else{
-    // create a location array to be populated
-    $location = array(
-      'address' => '',
-      'lat' => '',
-      'lng' => ''
-    );
+    // check to see if the address is empty - if empty, populated it with the correct fields
+    if ( isset($location['address']) && isset($location['lat']) && isset($location['lng'])  ) {
+      $full_address =  $location['address'];
+    }else{
+      // create a location array to be populated
+      $location = array(
+        'address' => '',
+        'lat' => '',
+        'lng' => ''
+      );
 
-    // create a full address
-    $full_address = get_field( $office_loc['fields']['address_street'], $post->ID ) . ', ' .get_field( $office_loc['fields']['city'], $post->ID ) . ' ' . get_field( $office_loc['fields']['zip'], $post->ID );
+      // create a full address
+      $full_address = get_field( $office_loc['fields']['address_street'], $post->ID ) . ', ' .get_field( $office_loc['fields']['city'], $post->ID ) . ' ' . get_field( $office_loc['fields']['zip'], $post->ID );
 
-    $address = urlencode($full_address); // Spaces as + signs
+      $address = urlencode($full_address); // Spaces as + signs
 
-    // will want to replace the key
-    $address_query = wp_remote_get("https://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&key=AIzaSyBEl7iNZDAToQVavHuJW4D_PKPmoVpU7H4");
-    $address_json = wp_remote_retrieve_body( $address_query );
-    $address_data = json_decode($address_json);
-    // echo '<div class="error"><p>http://maps.google.com/maps/api/geocode/json?address=' . $address .'&sensor=false&key=AIzaSyBEl7iNZDAToQVavHuJW4D_PKPmoVpU7H4</p></div>';
+      // will want to replace the key
+      $address_query = wp_remote_get("https://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&key=AIzaSyBEl7iNZDAToQVavHuJW4D_PKPmoVpU7H4");
+      $address_json = wp_remote_retrieve_body( $address_query );
+      $address_data = json_decode($address_json);
+      // echo '<div class="error"><p>http://maps.google.com/maps/api/geocode/json?address=' . $address .'&sensor=false&key=AIzaSyBEl7iNZDAToQVavHuJW4D_PKPmoVpU7H4</p></div>';
 
-    if($address_data){
-      $lat = $address_data->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
-      $lng = $address_data->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+      // if the address contains info
+      if(isset($address_data)){
+        echo var_dump($address_data);
+        $lat = $address_data->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+        $lng = $address_data->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+      }
+      // set the new address
+      $location['address'] = $full_address;
+      $location['lat'] = $lat;
+      $location['lng'] = $lng;
+
+
+      // update the address, latitude, and longitude field
+      update_post_meta( $post->ID, 'address', $location['address'] );
+      update_post_meta( $post->ID, 'lat', $location['lat'] );
+      update_post_meta( $post->ID, 'lng', $location['lng'] );
+
+      // update the google map fields
+      update_field( $office_loc['fields']['google_map'], $location, $post->ID);
     }
-    // set the new address
-    $location['address'] = $full_address;
-    $location['lat'] = $lat;
-    $location['lng'] = $lng;
-
-
-    // update the address, latitude, and longitude field
-    update_post_meta( $post->ID, 'address', $location['address'] );
-    update_post_meta( $post->ID, 'lat', $location['lat'] );
-    update_post_meta( $post->ID, 'lng', $location['lng'] );
-
-    // update the google map fields
-    update_field( $office_loc['fields']['google_map'], $location, $post->ID);
-  }
+  } 
 }
 add_action('wp', 'trigger_gmaps', 1);
 // end of trigger_gmaps
+// *****
 
 
 // GatherContent - Mapped WordPress Field meta_keys edit
