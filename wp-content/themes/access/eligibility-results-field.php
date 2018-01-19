@@ -51,6 +51,7 @@ $additionalProgramArgs = array(
   'meta_value'  => $programs
 );
 
+$context['programs'] = implode(',', $programs);
 $context['selectedPrograms'] = Timber::get_posts( $selectedProgramArgs );
 $context['additionalPrograms'] = Timber::get_posts( $additionalProgramArgs );
 

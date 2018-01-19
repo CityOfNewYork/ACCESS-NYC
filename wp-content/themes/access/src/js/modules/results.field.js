@@ -160,6 +160,10 @@ class ResultsField {
     if (guid != '') request['guid'] = guid;
     if (date != '') request['date'] = date;
 
+    $(ResultsField.Selectors.SHARE_PROGRAMS).each((index, element) => {
+      element.value = programs;
+    });
+
     // Get updated share url
     this._getUrl(request, (data) => {
       // Update share url fields
@@ -185,6 +189,7 @@ ResultsField.Selectors = {
   'REMOVE_PROGRAM': '[data-js*="remove-program"]',
   'SHARE_URLS': 'input[name="url"]',
   'SHARE_HASH': 'input[name="hash"]',
+  'SHARE_PROGRAMS': 'input[name="programs"]',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
   'PROGRAMS_LIST': '[data-js="programs-list"]',
