@@ -29569,12 +29569,14 @@ ResultsField = function () {
       if (guid != '') request['guid'] = guid;
       if (date != '') request['date'] = date;
 
-      (0, _jquery2.default)(ResultsField.Selectors.SHARE_PROGRAMS).each(function (index, element) {
-        element.value = programs;
-      });
+
 
       // Get updated share url
       this._getUrl(request, function (data) {
+        // Update programs list
+        (0, _jquery2.default)(ResultsField.Selectors.SHARE_PROGRAMS).each(function (index, element) {
+          element.value = programs;
+        });
         // Update share url fields
         (0, _jquery2.default)(ResultsField.Selectors.SHARE_URLS).each(function (index, element) {
           element.value = data['url'];

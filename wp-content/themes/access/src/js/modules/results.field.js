@@ -160,12 +160,12 @@ class ResultsField {
     if (guid != '') request['guid'] = guid;
     if (date != '') request['date'] = date;
 
-    $(ResultsField.Selectors.SHARE_PROGRAMS).each((index, element) => {
-      element.value = programs;
-    });
-
     // Get updated share url
     this._getUrl(request, (data) => {
+      // Update programs list
+      $(ResultsField.Selectors.SHARE_PROGRAMS).each((index, element) => {
+        element.value = programs;
+      });
       // Update share url fields
       $(ResultsField.Selectors.SHARE_URLS).each((index, element) => {
         element.value = data['url'];
