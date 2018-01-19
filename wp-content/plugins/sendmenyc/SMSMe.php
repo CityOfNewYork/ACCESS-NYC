@@ -51,25 +51,25 @@ class SMSMe extends ContactMe {
 		// programs page
 		} else {
 			if ( $language == "es" ) {
-				return "ES You can apply for NYC programs here: ".$url;
+				return "Puede enviar una solicitud para los programas de NYC aquí: ".$url;
 			}elseif ( $language == "ru" ) {
-				return "RU You can apply for NYC programs here: ".$url;
+				return "Оформить заявление на участие в городских программах Нью-Йорка можно здесь: ".$url;
 			}elseif ( $language == "ko" ) {
-				return "KO You can apply for NYC programs here: ".$url;
+				return "귀하는 다음에서 NYC 프로그램을 신청할 수 있습니다: ".$url;
 			}elseif ( $language == "ar" ) {
-				return "AR You can apply for NYC programs here: ".$url;
+				return "يمكنك التقدم بطلب للحصول على برامج مدينة نيويورك هنا: ".$url;
 			}elseif ( $language == "ht" ) {
-				return "HT You can apply for NYC programs here: ".$url;
+				return "Ou ka aplike pou pwogram Vil New York yo la a: ".$url;
 			}elseif ( $language == "zh-hant" ) {
-				return "ZH You can apply for NYC programs here: ".$url;
+				return "您可以在此處申請 NYC 計劃： ".$url;
 			}elseif ( $language == "fr" ) {
-				return "FR You can apply for NYC programs here: ".$url;
+				return "Vous pouvez déposer votre demande de programmes NYC ici: ".$url;
 			}elseif ( $language == "pl" ) {
-				return "PL You can apply for NYC programs here: ".$url;
+				return "Możesz złożyć wniosek o zapisanie się do programów NYC tutaj: ".$url;
 			}elseif ( $language == "ur" ) {
-				return "UR You can apply for NYC programs here: ".$url;
+				return "آپ NYC کے پروگرامز کے لیے یہاں درخواست دے سکتے/سکتی ہیں: ".$url;
 			}elseif ( $language == "bn" ) {
-				return "BN You can apply for NYC programs here: ".$url;
+				return "আপনি এখানে NYC কর্মসূচিগুলির জন্য আবেদন করতে পারবেন: ".$url;
 			}else {
 				return "You can apply for NYC programs here: ".$url;
 			}
