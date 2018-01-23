@@ -123,9 +123,7 @@ class ContactMe {
 		wp_die();
 	}
 	protected function success() {
-		if ( $this->is_results_url($_POST['url']) ){
-			do_action( 'results_sent', $this->action, $_POST['to'], (isset($_POST['GUID']) ? $_POST['GUID'] : '0') );
-		}
+		do_action( 'results_sent', $this->action, $_POST['to'], (isset($_POST['GUID']) ? $_POST['GUID'] : '0') );
 		$this->respond(['success'=>true, 'error'=>NULL, 'message'=>NULL ]);
 	}
 	protected function failure($code, $message, $retry=false) {
