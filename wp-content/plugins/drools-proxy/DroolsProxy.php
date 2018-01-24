@@ -22,6 +22,7 @@ function incoming() {
 	}
 
 	$uid = uniqid();
+	do_action( 'peu_data', $_POST['staff'], $_POST['client'], $uid );
 	do_action( 'drools_request', $_POST['data'], $uid );
 
 	$response = request(

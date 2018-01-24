@@ -14,8 +14,8 @@ require plugin_dir_path( __FILE__ ) . 'settings.php';
 
 add_action( 'drools_request', '\StatCollector\drools_request', 10, 2 );
 add_action( 'drools_response', '\StatCollector\drools_response', 10, 2 );
-add_action( 'results_sent', '\StatCollector\results_sent', 10, 3 );
-
+add_action( 'results_sent', '\StatCollector\results_sent', 10, 5 );
+add_action( 'peu_data', '\StatCollector\peu_data', 10, 3 );
 
 function drools_request( $data, $uid ) {
 	$db = _get_db();
@@ -33,16 +33,36 @@ function drools_response( $response, $uid ) {
 	]);
 }
 
-function results_sent( $type, $to, $uid ) {
+function results_sent( $type, $to, $uid, $url=NULL, $message=NULL ) {
 	$db = _get_db();
 	$db->insert("messages", [
 		"uid" => $uid,
 		"msg_type"=>strtolower($type),
-		"address"=>$to
+		"address"=>$to,
+		"url"=>$url,
+		"message"=>$message
 	]);
 }
 
+function peu_data( $staff, $client, $uid ) {
+	if ( empty($uid) ) {
+		return;
+	}
+	$db = _get_db();
 
+	if ( ! empty($staff) ) {
+		$db->insert("peu_staff", [
+			"uid" => $uid,
+			"data" => json_encode( $staff )
+		]);
+	}
+	if ( ! empty($client) ) {
+		$db->insert("peu_client", [
+			"uid" => $uid,
+			"data" => json_encode( $client )
+		]);
+	}
+}
 
 
 function _get_db(){
@@ -60,7 +80,7 @@ function _get_db(){
 					get_option('statc_host'));
 	$db->show_errors();
 
-	if ( ! get_option('statc_bootstrapped') ) {
+	if ( get_option('statc_bootstrapped') !== '2' ) {
 		__bootstrap( $db );
 	}
 	return $db;
@@ -95,8 +115,36 @@ function __bootstrap( $db ){
 			PRIMARY KEY(id)
 		) ENGINE=InnoDB"
 	);
+	$db->query(
+		"CREATE TABLE IF NOT EXISTS peu_staff (
+			id INT(11) NOT NULL AUTO_INCREMENT,
+			uid VARCHAR(13) DEFAULT NULL,
+			data MEDIUMBLOB NOT NULL,
+			date DATETIME DEFAULT NOW(),
+			PRIMARY KEY(id)
+		) ENGINE=InnoDB"
+	);
+	$db->query(
+		"CREATE TABLE IF NOT EXISTS peu_client (
+			id INT(11) NOT NULL AUTO_INCREMENT,
+			uid VARCHAR(13) DEFAULT NULL,
+			data MEDIUMBLOB NOT NULL,
+			date DATETIME DEFAULT NOW(),
+			PRIMARY KEY(id)
+		) ENGINE=InnoDB"
+	);
+	
 
-	update_option('statc_bootstrapped',1);
+	if ( (int)get_option('statc_bootstrapped') < 2 ) {
+		$db->query(
+			"ALTER TABLE messages
+				ADD url VARCHAR(512) DEFAULT NULL AFTER date,
+				ADD message TEXT DEFAULT NULL AFTER url"
+		);
+	}
+	
+
+	update_option('statc_bootstrapped', 2);
 }
 
 class MockDb {

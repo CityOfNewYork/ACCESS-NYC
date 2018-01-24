@@ -64,7 +64,7 @@ class ContactMe {
 		}
 
 		$this->send($recipient,$content);
-		$this->success();
+		$this->success($content);
 
 	}
 
@@ -122,10 +122,14 @@ class ContactMe {
 		wp_send_json( $response );
 		wp_die();
 	}
-	protected function success() {
-		if ( $this->is_results_url($_POST['url']) ){
-			do_action( 'results_sent', $this->action, $_POST['to'], (isset($_POST['GUID']) ? $_POST['GUID'] : '0') );
-		}
+	protected function success( $content=NULL ) {
+		do_action( 'results_sent',
+			$this->action,
+			$_POST['to'],
+			(isset($_POST['GUID']) ? $_POST['GUID'] : '0'),
+			$_POST['url'],
+			is_array($content) ? $content['body'] : $content
+		);
 		$this->respond(['success'=>true, 'error'=>NULL, 'message'=>NULL ]);
 	}
 	protected function failure($code, $message, $retry=false) {
