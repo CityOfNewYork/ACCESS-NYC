@@ -15,7 +15,7 @@ require plugin_dir_path( __FILE__ ) . 'settings.php';
 add_action( 'drools_request', '\StatCollector\drools_request', 10, 2 );
 add_action( 'drools_response', '\StatCollector\drools_response', 10, 2 );
 add_action( 'results_sent', '\StatCollector\results_sent', 10, 5 );
-
+add_action( 'peu_data', '\StatCollector\peu_data', 10, 3 );
 
 function drools_request( $data, $uid ) {
 	$db = _get_db();
@@ -44,7 +44,25 @@ function results_sent( $type, $to, $uid, $url=NULL, $message=NULL ) {
 	]);
 }
 
+function peu_data( $staff, $client, $uid ) {
+	if ( empty($uid) ) {
+		return;
+	}
+	$db = _get_db();
 
+	if ( ! empty($staff) ) {
+		$db->insert("peu_staff", [
+			"uid" => $uid,
+			"data" => json_encode( $staff )
+		]);
+	}
+	if ( ! empty($client) ) {
+		$db->insert("peu_client", [
+			"uid" => $uid,
+			"data" => json_encode( $client )
+		]);
+	}
+}
 
 
 function _get_db(){
@@ -97,6 +115,25 @@ function __bootstrap( $db ){
 			PRIMARY KEY(id)
 		) ENGINE=InnoDB"
 	);
+	$db->query(
+		"CREATE TABLE IF NOT EXISTS peu_staff (
+			id INT(11) NOT NULL AUTO_INCREMENT,
+			uid VARCHAR(13) DEFAULT NULL,
+			data MEDIUMBLOB NOT NULL,
+			date DATETIME DEFAULT NOW(),
+			PRIMARY KEY(id)
+		) ENGINE=InnoDB"
+	);
+	$db->query(
+		"CREATE TABLE IF NOT EXISTS peu_client (
+			id INT(11) NOT NULL AUTO_INCREMENT,
+			uid VARCHAR(13) DEFAULT NULL,
+			data MEDIUMBLOB NOT NULL,
+			date DATETIME DEFAULT NOW(),
+			PRIMARY KEY(id)
+		) ENGINE=InnoDB"
+	);
+	
 
 	if ( (int)get_option('statc_bootstrapped') < 2 ) {
 		$db->query(
