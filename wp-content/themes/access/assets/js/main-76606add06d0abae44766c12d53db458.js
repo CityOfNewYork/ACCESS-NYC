@@ -15804,7 +15804,7 @@ Utility.track = function (key, data) {
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {
     // let sData = Object.assign(obj1, obj2);
-    var sData = _underscore2.default.reduce(data, function (memo, num) {return Object.assign(memo, num);}, 0);
+    var sData = _underscore2.default.reduce(data, function (memo, num) {return Object.assign(memo, num);}, {});
     analytics.track(key, sData);
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */

@@ -251,7 +251,7 @@ Utility.track = function(key, data) {
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {
     // let sData = Object.assign(obj1, obj2);
-    let sData = _.reduce(data, (memo, num) => Object.assign(memo, num), 0);
+    let sData = _.reduce(data, (memo, num) => Object.assign(memo, num), {});
     analytics.track(key, sData);
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */
