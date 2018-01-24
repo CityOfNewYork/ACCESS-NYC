@@ -14,7 +14,7 @@ require plugin_dir_path( __FILE__ ) . 'settings.php';
 
 add_action( 'drools_request', '\StatCollector\drools_request', 10, 2 );
 add_action( 'drools_response', '\StatCollector\drools_response', 10, 2 );
-add_action( 'results_sent', '\StatCollector\results_sent', 10, 3 );
+add_action( 'results_sent', '\StatCollector\results_sent', 10, 5 );
 
 
 function drools_request( $data, $uid ) {
@@ -33,12 +33,14 @@ function drools_response( $response, $uid ) {
 	]);
 }
 
-function results_sent( $type, $to, $uid ) {
+function results_sent( $type, $to, $uid, $url=NULL, $message=NULL ) {
 	$db = _get_db();
 	$db->insert("messages", [
 		"uid" => $uid,
 		"msg_type"=>strtolower($type),
-		"address"=>$to
+		"address"=>$to,
+		"url"=>$url,
+		"message"=>$message
 	]);
 }
 
@@ -60,7 +62,7 @@ function _get_db(){
 					get_option('statc_host'));
 	$db->show_errors();
 
-	if ( ! get_option('statc_bootstrapped') ) {
+	if ( get_option('statc_bootstrapped') !== '2' ) {
 		__bootstrap( $db );
 	}
 	return $db;
@@ -96,7 +98,16 @@ function __bootstrap( $db ){
 		) ENGINE=InnoDB"
 	);
 
-	update_option('statc_bootstrapped',1);
+	if ( (int)get_option('statc_bootstrapped') < 2 ) {
+		$db->query(
+			"ALTER TABLE messages
+				ADD url VARCHAR(512) DEFAULT NULL AFTER date,
+				ADD message TEXT DEFAULT NULL AFTER url"
+		);
+	}
+	
+
+	update_option('statc_bootstrapped', 2);
 }
 
 class MockDb {
