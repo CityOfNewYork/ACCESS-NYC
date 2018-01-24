@@ -15775,24 +15775,43 @@ Utility.camelToUpper = function (str) {
     * @param  {collection} data The data to track
     */
 Utility.track = function (key, data) {
+  /**
+                                       * Webtrends
+                                       */
   /* eslint-disable no-undef */
-  if (typeof Webtrends === 'undefined') return;
-  var wt = Webtrends;
-  /* eslint-enable no-undef */
-  var wtData = data;
-  var prefix = {};
+  if (typeof Webtrends !== 'undefined') {
+    var wt = Webtrends;
+    /* eslint-enable no-undef */
+    var wtData = data;
+    var prefix = {};
 
-  prefix['WT.ti'] = key;
-  data.unshift(prefix);
+    prefix['WT.ti'] = key;
+    data.unshift(prefix);
 
-  wtData = _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);}));
+    wtData = _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);}));
 
-  wt.multiTrack(wtData);
+    wt.multiTrack(wtData);
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug())
+    console.dir(['track: ' + key, wtData]);
+    /* eslint-enable no-console, no-debugger */
+  }
 
-  /* eslint-disable no-console, no-debugger */
-  if (Utility.debug())
-  console.dir(['track: ' + key, wtData]);
-  /* eslint-enable no-console, no-debugger */
+  /**
+     * Segment
+     * Never use the identify method without condideration for PII
+     */
+  /* eslint-disable no-undef */
+  if (typeof analytics !== 'undefined') {
+    // let sData = Object.assign(obj1, obj2);
+    var sData = _underscore2.default.reduce(data, function (memo, num) {return Object.assign(memo, num);}, 0);
+    analytics.track(key, sData);
+    /* eslint-enable no-undef */
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug())
+    console.dir(['track: ' + key, sData]);
+    /* eslint-enable no-console, no-debugger */
+  }
 };
 
 /**

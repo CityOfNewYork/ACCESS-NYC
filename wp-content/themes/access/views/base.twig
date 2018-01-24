@@ -14,6 +14,7 @@
       <meta name="theme-color" content="#FFFFFF">
       <link rel="manifest" href="{{theme.path}}/manifest.json">
       {% endblock %}
+      {% block scripts_head %}{% endblock %}
     {% endblock %}
   </head>
   <body data-template="base.twig"{% set _bodyClass = block('body_class') %}{% if _bodyClass %} class="{{ _bodyClass|trim }}"{% endif %}>
@@ -157,7 +158,7 @@
     <script src="https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js"></script>
     {% endblock %}
 
-    {% block scripts %}{% endblock %}
+    {% block scripts_footer %}{% endblock %}
 
     {{ wp_footer }}
 

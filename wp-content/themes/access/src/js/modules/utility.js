@@ -222,24 +222,43 @@ Utility.camelToUpper = function(str) {
  * @param  {collection} data The data to track
  */
 Utility.track = function(key, data) {
+  /**
+   * Webtrends
+   */
   /* eslint-disable no-undef */
-  if (typeof Webtrends === 'undefined') return;
-  let wt = Webtrends;
-  /* eslint-enable no-undef */
-  let wtData = data;
-  let prefix = {};
+  if (typeof Webtrends !== 'undefined') {
+    let wt = Webtrends;
+    /* eslint-enable no-undef */
+    let wtData = data;
+    let prefix = {};
 
-  prefix['WT.ti'] = key;
-  data.unshift(prefix);
+    prefix['WT.ti'] = key;
+    data.unshift(prefix);
 
-  wtData = _.flatten(_.map(data, (d) => _.pairs(d)));
+    wtData = _.flatten(_.map(data, (d) => _.pairs(d)));
 
-  wt.multiTrack(wtData);
+    wt.multiTrack(wtData);
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug())
+      console.dir([`track: ${key}`, wtData]);
+    /* eslint-enable no-console, no-debugger */
+  }
 
-  /* eslint-disable no-console, no-debugger */
-  if (Utility.debug())
-    console.dir([`track: ${key}`, wtData]);
-  /* eslint-enable no-console, no-debugger */
+  /**
+   * Segment
+   * Never use the identify method without condideration for PII
+   */
+  /* eslint-disable no-undef */
+  if (typeof analytics !== 'undefined') {
+    // let sData = Object.assign(obj1, obj2);
+    let sData = _.reduce(data, (memo, num) => Object.assign(memo, num), 0);
+    analytics.track(key, sData);
+    /* eslint-enable no-undef */
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug())
+      console.dir([`track: ${key}`, sData]);
+    /* eslint-enable no-console, no-debugger */
+  }
 };
 
 /**
