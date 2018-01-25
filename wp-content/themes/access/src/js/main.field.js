@@ -32,7 +32,7 @@ import Utility from 'modules/utility';
   $body.on('click', '[data-js*="track"]', (event) => {
     let key = event.currentTarget.dataset.trackKey;
     let data = JSON.parse(event.currentTarget.dataset.trackData);
-    ScreenerField.track(key, data);
+    ScreenerField.track(`PEU: ${key}`, data);
   });
 
   // Initialize eligibility screener.

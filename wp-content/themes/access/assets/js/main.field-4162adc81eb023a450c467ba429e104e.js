@@ -29224,7 +29224,7 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
   $body.on('click', '[data-js*="track"]', function (event) {
     var key = event.currentTarget.dataset.trackKey;
     var data = JSON.parse(event.currentTarget.dataset.trackData);
-    _screener2.default.track(key, data);
+    _screener2.default.track('PEU: ' + key, data);
   });
 
   // Initialize eligibility screener.
@@ -30903,7 +30903,7 @@ ScreenerField = function () {
                                      * @param  {object} data [description]
                                      */
 ScreenerField.track = function (key, data) {
-  _utility2.default.track(key, data);
+  _utility2.default.track('PEU: ' + key, data);
 };
 
 /**
@@ -33491,12 +33491,13 @@ Utility.track = function (key, data) {
     prefix['WT.ti'] = key;
     data.unshift(prefix);
 
-    wtData = _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);}));
+    // format data for Webtrends
+    wtData = { argsa: _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);})) };
 
     wt.multiTrack(wtData);
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
-    console.dir(['track: ' + key, wtData]);
+    console.dir(['track: \'' + key + '\'', wtData]);
     /* eslint-enable no-console, no-debugger */
   }
 
@@ -33506,13 +33507,13 @@ Utility.track = function (key, data) {
      */
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {
-    // let sData = Object.assign(obj1, obj2);
+    // format data for Segment
     var sData = _underscore2.default.reduce(data, function (memo, num) {return Object.assign(memo, num);}, {});
     analytics.track(key, sData);
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
-    console.dir(['track: ' + key, sData]);
+    console.dir(['track: \'' + key + '\'', sData]);
     /* eslint-enable no-console, no-debugger */
   }
 };

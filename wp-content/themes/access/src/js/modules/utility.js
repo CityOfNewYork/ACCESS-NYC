@@ -235,12 +235,13 @@ Utility.track = function(key, data) {
     prefix['WT.ti'] = key;
     data.unshift(prefix);
 
-    wtData = _.flatten(_.map(data, (d) => _.pairs(d)));
+    // format data for Webtrends
+    wtData = {argsa: _.flatten(_.map(data, (d) => _.pairs(d)))};
 
     wt.multiTrack(wtData);
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
-      console.dir([`track: ${key}`, wtData]);
+      console.dir([`track: '${key}'`, wtData]);
     /* eslint-enable no-console, no-debugger */
   }
 
@@ -250,13 +251,13 @@ Utility.track = function(key, data) {
    */
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {
-    // let sData = Object.assign(obj1, obj2);
+    // format data for Segment
     let sData = _.reduce(data, (memo, num) => Object.assign(memo, num), {});
     analytics.track(key, sData);
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
-      console.dir([`track: ${key}`, sData]);
+      console.dir([`track: '${key}'`, sData]);
     /* eslint-enable no-console, no-debugger */
   }
 };

@@ -555,7 +555,7 @@ class ScreenerField {
  * @param  {object} data [description]
  */
 ScreenerField.track = function(key, data) {
-  Utility.track(key, data);
+  Utility.track(`PEU: ${key}`, data);
 };
 
 /**
