@@ -1,4 +1,4 @@
-<?
+<?php
 
 $context = Timber::get_context();
 
