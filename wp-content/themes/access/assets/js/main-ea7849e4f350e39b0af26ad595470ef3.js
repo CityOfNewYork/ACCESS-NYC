@@ -14764,9 +14764,10 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
 ShareForm = function () {
   /**
                           * @param {HTMLElement} el - The html form element for the component.
+                          * @param {object}      config - The configuration for the share form.
                           * @constructor
                           */
-  function ShareForm(el) {_classCallCheck(this, ShareForm);
+  function ShareForm(el, config) {_classCallCheck(this, ShareForm);
     /** @private {HTMLElement} The component element. */
     this._el = el;
 
@@ -14781,6 +14782,9 @@ ShareForm = function () {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    /** @private {object} The prefix for share tracking. */
+    this._config = config ? config : {};
   }
 
   /**
@@ -14931,7 +14935,7 @@ ShareForm = function () {
 
       if ($tel) {
         $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
-        type = 'sms';
+        type = 'text';
       }
 
       $inputs.prop('disabled', true); // disable inputs
@@ -14951,9 +14955,7 @@ ShareForm = function () {
             _this4._isDisabled = false;
           });
 
-          _utility2.default.track('Share', [
-          { 'DCS.dcsuri': '/share/' + type }]);
-
+          _this4._track(type); // track successful message
         } else {
           var messageId = response.error === 21211 ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
@@ -14966,6 +14968,10 @@ ShareForm = function () {
         }
       }).fail(function (response) {
         _this4._showError(ShareForm.Message.SERVER);
+
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug()) console.error(response);
+        /* eslint-enable no-console, no-debugger */
       }).always(function () {
         $inputs.prop('disabled', false); // enable inputs
 
@@ -14978,6 +14984,30 @@ ShareForm = function () {
 
         _this4._isBusy = false;
       });
+    }
+
+    /**
+       * Tracking functionality for the share form. Can use context set in the
+       * configuration of the share form but functions without it.
+       * @param  {string} type - The share type, ex. 'Email' or 'Text'
+       */ }, { key: '_track', value: function _track(
+    type) {
+      var config = this._config;
+      var prefix = '';
+      var key = type.charAt(0).toUpperCase() + type.slice(1);
+      var context = '';
+
+      if (config.hasOwnProperty('analyticsPrefix')) {
+        prefix = config.analyticsPrefix + ':';
+      }
+
+      if (config.hasOwnProperty('context')) {
+        context = ' ' + config.context;
+      }
+
+      _utility2.default.track(prefix + ' ' + key + context + ':', [
+      { 'DCS.dcsuri': 'share/' + type }]);
+
     } }]);return ShareForm;}();
 
 
@@ -15775,21 +15805,34 @@ Utility.camelToUpper = function (str) {
     * @param  {collection} data The data to track
     */
 Utility.track = function (key, data) {
+  // Set the path name based on the location if 'DCS.dcsuri' exists
+  var dcsuri = _underscore2.default.pluck(data, 'DCS.dcsuri')[0];
+
+  var d = dcsuri ? _underscore2.default.map(data, function (value) {
+    if (value.hasOwnProperty('DCS.dcsuri')) {
+      return { 'DCS.dcsuri': '' + window.location.pathname + dcsuri };
+    }return value;
+  }) : data;
+
   /**
-                                       * Webtrends
-                                       */
+              * Webtrends
+              */
   /* eslint-disable no-undef */
   if (typeof Webtrends !== 'undefined') {
     var wt = Webtrends;
     /* eslint-enable no-undef */
-    var wtData = data;
+    var wtData = d;
     var prefix = {};
 
     prefix['WT.ti'] = key;
-    data.unshift(prefix);
+    wtData.unshift(prefix);
 
     // format data for Webtrends
-    wtData = { argsa: _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);})) };
+    wtData = {
+      argsa: _underscore2.default.flatten(_underscore2.default.map(wtData, function (value) {
+        return _underscore2.default.pairs(value);
+      })) };
+
 
     wt.multiTrack(wtData);
     /* eslint-disable no-console, no-debugger */
@@ -15800,7 +15843,7 @@ Utility.track = function (key, data) {
 
   /**
      * Segment
-     * Never use the identify method without condideration for PII
+     * Never use the identify method without consideration for PII
      */
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {

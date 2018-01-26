@@ -12,9 +12,10 @@ import Utility from 'modules/utility';
 class ShareForm {
   /**
    * @param {HTMLElement} el - The html form element for the component.
+   * @param {object}      config - The configuration for the share form.
    * @constructor
    */
-  constructor(el) {
+  constructor(el, config) {
     /** @private {HTMLElement} The component element. */
     this._el = el;
 
@@ -29,6 +30,9 @@ class ShareForm {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    /** @private {object} The prefix for share tracking. */
+    this._config = (config) ? config : {};
   }
 
   /**
@@ -179,7 +183,7 @@ class ShareForm {
 
     if ($tel) {
       $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
-      type = 'sms';
+      type = 'text';
     }
 
     $inputs.prop('disabled', true); // disable inputs
@@ -199,9 +203,7 @@ class ShareForm {
           this._isDisabled = false;
         });
 
-        Utility.track('Share', [
-          {'DCS.dcsuri': `/share/${type}`}]
-        );
+        this._track(type); // track successful message
       } else {
         let messageId = (response.error === 21211) ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
@@ -214,6 +216,10 @@ class ShareForm {
       }
     }).fail((response) => {
       this._showError(ShareForm.Message.SERVER);
+
+      /* eslint-disable no-console, no-debugger */
+      if (Utility.debug()) console.error(response);
+      /* eslint-enable no-console, no-debugger */
     }).always(() => {
       $inputs.prop('disabled', false); // enable inputs
 
@@ -226,6 +232,30 @@ class ShareForm {
 
       this._isBusy = false;
     });
+  }
+
+  /**
+   * Tracking functionality for the share form. Can use context set in the
+   * configuration of the share form but functions without it.
+   * @param  {string} type - The share type, ex. 'Email' or 'Text'
+   */
+  _track(type) {
+    let config = this._config;
+    let prefix = '';
+    let key = type.charAt(0).toUpperCase() + type.slice(1);
+    let context = '';
+
+    if (config.hasOwnProperty('analyticsPrefix')) {
+      prefix = config.analyticsPrefix + ':';
+    }
+
+    if (config.hasOwnProperty('context')) {
+      context = ' ' + config.context;
+    }
+
+    Utility.track(`${prefix} ${key}${context}:`, [
+      {'DCS.dcsuri': `share/${type}`}
+    ]);
   }
 }
 

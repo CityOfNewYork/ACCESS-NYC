@@ -29224,7 +29224,7 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
   $body.on('click', '[data-js*="track"]', function (event) {
     var key = event.currentTarget.dataset.trackKey;
     var data = JSON.parse(event.currentTarget.dataset.trackData);
-    _screener2.default.track('PEU: ' + key, data);
+    _screener2.default.track(key, data);
   });
 
   // Initialize eligibility screener.
@@ -29412,6 +29412,7 @@ CalcInput;
 
 var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
 var _shareForm = require('modules/share-form');var _shareForm2 = _interopRequireDefault(_shareForm);
+var _screener = require('modules/screener.field');var _screener2 = _interopRequireDefault(_screener);
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
 
 /**
@@ -29448,7 +29449,13 @@ ResultsField = function () {
       var $el = (0, _jquery2.default)(this._el);
 
       // Initialize share by email/sms forms.
-      (0, _jquery2.default)('.' + _shareForm2.default.CssClass.FORM).each(function (i, el) {return new _shareForm2.default(el).init();});
+      (0, _jquery2.default)('.' + _shareForm2.default.CssClass.FORM).each(function (i, el) {
+        var config = {
+          'analyticsPrefix': _screener2.default.AnalyticsPrefix,
+          'context': 'Results' };
+
+        new _shareForm2.default(el, config).init();
+      });
 
       // Open links in new window
       $el.on('click', ResultsField.Selectors.HYPERLINKS, this._targetBlank);
@@ -29621,7 +29628,7 @@ ResultsField.SharePath = '/eligibility/results/';exports.default =
 
 ResultsField;
 
-},{"jquery":3,"modules/share-form":18,"modules/utility":20}],12:[function(require,module,exports){
+},{"jquery":3,"modules/screener.field":16,"modules/share-form":18,"modules/utility":20}],12:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -30903,7 +30910,7 @@ ScreenerField = function () {
                                      * @param  {object} data [description]
                                      */
 ScreenerField.track = function (key, data) {
-  _utility2.default.track('PEU: ' + key, data);
+  _utility2.default.track(ScreenerField.AnalyticsPrefix + ' ' + key, data);
 };
 
 /**
@@ -31455,10 +31462,15 @@ ScreenerField.cookies = {
 
 
 /**
-                                               * Valid zip codes in New York City. Source:
-                                               * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
-                                               * @type {array<String>}
+                                               * Analytics Prefix
                                                */
+ScreenerField.AnalyticsPrefix = 'PEU';
+
+/**
+                                        * Valid zip codes in New York City. Source:
+                                        * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
+                                        * @type {array<String>}
+                                        */
 ScreenerField.NYC_ZIPS = _screener2.default.NYC_ZIPS;exports.default =
 
 ScreenerField;
@@ -32789,9 +32801,10 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
 ShareForm = function () {
   /**
                           * @param {HTMLElement} el - The html form element for the component.
+                          * @param {object}      config - The configuration for the share form.
                           * @constructor
                           */
-  function ShareForm(el) {_classCallCheck(this, ShareForm);
+  function ShareForm(el, config) {_classCallCheck(this, ShareForm);
     /** @private {HTMLElement} The component element. */
     this._el = el;
 
@@ -32806,6 +32819,9 @@ ShareForm = function () {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    /** @private {object} The prefix for share tracking. */
+    this._config = config ? config : {};
   }
 
   /**
@@ -32956,7 +32972,7 @@ ShareForm = function () {
 
       if ($tel) {
         $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
-        type = 'sms';
+        type = 'text';
       }
 
       $inputs.prop('disabled', true); // disable inputs
@@ -32976,9 +32992,7 @@ ShareForm = function () {
             _this4._isDisabled = false;
           });
 
-          _utility2.default.track('Share', [
-          { 'DCS.dcsuri': '/share/' + type }]);
-
+          _this4._track(type); // track successful message
         } else {
           var messageId = response.error === 21211 ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
@@ -32991,6 +33005,10 @@ ShareForm = function () {
         }
       }).fail(function (response) {
         _this4._showError(ShareForm.Message.SERVER);
+
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug()) console.error(response);
+        /* eslint-enable no-console, no-debugger */
       }).always(function () {
         $inputs.prop('disabled', false); // enable inputs
 
@@ -33003,6 +33021,30 @@ ShareForm = function () {
 
         _this4._isBusy = false;
       });
+    }
+
+    /**
+       * Tracking functionality for the share form. Can use context set in the
+       * configuration of the share form but functions without it.
+       * @param  {string} type - The share type, ex. 'Email' or 'Text'
+       */ }, { key: '_track', value: function _track(
+    type) {
+      var config = this._config;
+      var prefix = '';
+      var key = type.charAt(0).toUpperCase() + type.slice(1);
+      var context = '';
+
+      if (config.hasOwnProperty('analyticsPrefix')) {
+        prefix = config.analyticsPrefix + ':';
+      }
+
+      if (config.hasOwnProperty('context')) {
+        context = ' ' + config.context;
+      }
+
+      _utility2.default.track(prefix + ' ' + key + context + ':', [
+      { 'DCS.dcsuri': 'share/' + type }]);
+
     } }]);return ShareForm;}();
 
 
@@ -33478,21 +33520,34 @@ Utility.camelToUpper = function (str) {
     * @param  {collection} data The data to track
     */
 Utility.track = function (key, data) {
+  // Set the path name based on the location if 'DCS.dcsuri' exists
+  var dcsuri = _underscore2.default.pluck(data, 'DCS.dcsuri')[0];
+
+  var d = dcsuri ? _underscore2.default.map(data, function (value) {
+    if (value.hasOwnProperty('DCS.dcsuri')) {
+      return { 'DCS.dcsuri': '' + window.location.pathname + dcsuri };
+    }return value;
+  }) : data;
+
   /**
-                                       * Webtrends
-                                       */
+              * Webtrends
+              */
   /* eslint-disable no-undef */
   if (typeof Webtrends !== 'undefined') {
     var wt = Webtrends;
     /* eslint-enable no-undef */
-    var wtData = data;
+    var wtData = d;
     var prefix = {};
 
     prefix['WT.ti'] = key;
-    data.unshift(prefix);
+    wtData.unshift(prefix);
 
     // format data for Webtrends
-    wtData = { argsa: _underscore2.default.flatten(_underscore2.default.map(data, function (d) {return _underscore2.default.pairs(d);})) };
+    wtData = {
+      argsa: _underscore2.default.flatten(_underscore2.default.map(wtData, function (value) {
+        return _underscore2.default.pairs(value);
+      })) };
+
 
     wt.multiTrack(wtData);
     /* eslint-disable no-console, no-debugger */
@@ -33503,7 +33558,7 @@ Utility.track = function (key, data) {
 
   /**
      * Segment
-     * Never use the identify method without condideration for PII
+     * Never use the identify method without consideration for PII
      */
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {

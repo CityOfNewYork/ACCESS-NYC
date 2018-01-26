@@ -1,11 +1,9 @@
 <?php
 
-if ( ! class_exists( 'Timber' ) ) {
-  add_action( 'admin_notices', function() {
-    echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php' ) ) . '</a></p></div>';
-  } );
-  return;
-}
+// Notifications
+require_once(get_template_directory() . '/includes/notifications.php');
+
+Notifications\timber();
 
 // Disable the google-authenticator plugin for local and staging environments.
 // is_wpe is defined in the mu-plugins/wpengine-common plugin. is_wpe()
@@ -726,69 +724,6 @@ function style($name = "style") {
 }
 
 /**
- * Routes
+ * Routing Configuration
  */
-Routes::map('locations', function() {
-  style();
-  script('main');
-  Routes::load('locations.php', null, null, 200);
-});
-
-Routes::map('locations/json', function() {
-  Routes::load('archive-location.php', null, null, 200);
-});
-
-Routes::map('eligibility', function() {
-  style();
-  script('main');
-  Routes::load('screener.php', null, null, 200);
-});
-
-Routes::map('eligibility/results', function() {
-  style();
-  script('main');
-  $params = array();
-  $params['link'] = home_url().'/eligibility/results/';
-  Routes::load('eligibility-results.php', $params, null, 200);
-});
-
-Routes::map('peu', function() {
-  style();
-  script('main.field');
-  Routes::load('screener-field.php', null, null, 200);
-});
-
-Routes::map('peu/results', function() {
-  style();
-  script('main.field');
-  $params = array();
-  $params['share_path'] = '/eligibility/results/';
-  Routes::load('eligibility-results-field.php', $params, null, 200);
-});
-
-/**
- * Returns a shareable url and hash
- * @param  WP_REST_Request $request the request of the api
- * @return object                   the response
- */
-function api_share_url(WP_REST_Request $request) {
-  // Create the url
-  $data = share_data($request->get_params());
-  // Create the response object
-  $response = new WP_REST_Response($data);
-  // Add a custom status code
-  $response->set_status(200);
-
-  return $response;
-}
-
-/**
- * Function hook to initiate routes for the WP JSON Rest API
- */
-function rest_routes() {
-  register_rest_route('api/v1', '/shareurl/', array(
-    'methods' => 'GET',
-    'callback' => 'api_share_url'
-  ));
-}
-add_action('rest_api_init', 'rest_routes');
+require_once(get_template_directory() . '/includes/routing.php');

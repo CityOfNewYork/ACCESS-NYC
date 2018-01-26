@@ -222,6 +222,15 @@ Utility.camelToUpper = function(str) {
  * @param  {collection} data The data to track
  */
 Utility.track = function(key, data) {
+  // Set the path name based on the location if 'DCS.dcsuri' exists
+  let dcsuri = _.pluck(data, 'DCS.dcsuri')[0];
+
+  const d = (dcsuri) ? _.map(data, function(value) {
+    if (value.hasOwnProperty('DCS.dcsuri')) {
+      return {'DCS.dcsuri': `${window.location.pathname}${dcsuri}`};
+    } return value;
+  }) : data;
+
   /**
    * Webtrends
    */
@@ -229,14 +238,18 @@ Utility.track = function(key, data) {
   if (typeof Webtrends !== 'undefined') {
     let wt = Webtrends;
     /* eslint-enable no-undef */
-    let wtData = data;
+    let wtData = d;
     let prefix = {};
 
     prefix['WT.ti'] = key;
-    data.unshift(prefix);
+    wtData.unshift(prefix);
 
     // format data for Webtrends
-    wtData = {argsa: _.flatten(_.map(data, (d) => _.pairs(d)))};
+    wtData = {
+      argsa: _.flatten(_.map(wtData, function(value) {
+        return _.pairs(value);
+      }))
+    };
 
     wt.multiTrack(wtData);
     /* eslint-disable no-console, no-debugger */
@@ -247,7 +260,7 @@ Utility.track = function(key, data) {
 
   /**
    * Segment
-   * Never use the identify method without condideration for PII
+   * Never use the identify method without consideration for PII
    */
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {

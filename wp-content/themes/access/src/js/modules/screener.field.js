@@ -555,7 +555,7 @@ class ScreenerField {
  * @param  {object} data [description]
  */
 ScreenerField.track = function(key, data) {
-  Utility.track(`PEU: ${key}`, data);
+  Utility.track(`${ScreenerField.AnalyticsPrefix} ${key}`, data);
 };
 
 /**
@@ -1105,6 +1105,11 @@ ScreenerField.InputType = {
 ScreenerField.cookies = {
   VIEWS: 'access_nyc_field_screener_views'
 };
+
+/**
+ * Analytics Prefix
+ */
+ScreenerField.AnalyticsPrefix = 'PEU';
 
 /**
  * Valid zip codes in New York City. Source:
