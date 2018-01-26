@@ -3,6 +3,7 @@
 
 import $ from 'jquery';
 import ShareForm from 'modules/share-form';
+import ScreenerField from 'modules/screener.field';
 import Utility from 'modules/utility';
 
 /**
@@ -39,7 +40,13 @@ class ResultsField {
     let $el = $(this._el);
 
     // Initialize share by email/sms forms.
-    $(`.${ShareForm.CssClass.FORM}`).each((i, el) => new ShareForm(el).init());
+    $(`.${ShareForm.CssClass.FORM}`).each(function(i, el) {
+      let config = {
+        'analyticsPrefix': ScreenerField.AnalyticsPrefix,
+        'context': 'Results'
+      };
+      new ShareForm(el, config).init();
+    });
 
     // Open links in new window
     $el.on('click', ResultsField.Selectors.HYPERLINKS, this._targetBlank);

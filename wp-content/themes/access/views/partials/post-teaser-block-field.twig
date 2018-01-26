@@ -50,7 +50,7 @@
             <a class="f-1 btn btn-primary btn-small"
               data-js="remove-program, track"
               data-remove-code="{{ post.program_code }}"
-              data-track-key="Remove Program"
+              data-track-key="Results: Remove Program"
               data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/remove"}]'>{{ __('Remove', translationID) }}</a>
             <a class="f-1 btn btn-secondary btn-small m-left" href="#remove-{{ post.program_code }}"
               data-js="simple-toggle"
@@ -62,7 +62,7 @@
       <div>
         <a class="btn-toggle btn" href="#program-detail-{{ post.program_code }}"
           data-js="simple-toggle, track"
-          data-track-key="Learn More"
+          data-track-key="Results: Learn More"
           data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/learn-more"}]'>
           {{ __('Learn More', translationID) }}
         </a>
