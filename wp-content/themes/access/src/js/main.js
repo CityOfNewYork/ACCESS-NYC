@@ -77,6 +77,13 @@ import Utility from 'modules/utility';
   });
   // END TODO
 
+  // Webtrends - Capture the search query for on-site search
+  if (~window.location.href.indexOf("?s=")){
+    let $query = window.location.href
+    $('head').append('<meta name="WT.oss" content="' + $query.split("?s=")[1] + '">')
+    $('head').append('<meta name="WT.oss_r" content="' + $('.program-card').length +'">')
+  }
+
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
   // unique thing about program details is that they use a ?step=x query
