@@ -105,9 +105,11 @@ gulp.task('scripts', () => {
     return b.transform('babelify', {
       presets: ['es2015']
     }).transform(
-      { global: true }, // Required in order to process node_modules files
+      // Required in order to process node_modules files
+      { global: true },
       envify({ NODE_ENV: 'production' })
-    ).bundle()
+    )
+    .bundle()
     .pipe(sourcestream(`${entry}.js`))
     .pipe(buffer())
     .pipe($.hashFilename())
