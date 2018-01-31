@@ -80,7 +80,7 @@ function _get_db(){
 					get_option('statc_host'));
 	$db->show_errors();
 
-	if ( get_option('statc_bootstrapped') !== '2' ) {
+	if ( get_option('statc_bootstrapped') !== '3' ) {
 		__bootstrap( $db );
 	}
 	return $db;
@@ -94,6 +94,8 @@ function __bootstrap( $db ){
 			msg_type VARCHAR(10) DEFAULT NULL,
 			address VARCHAR(255) NOT NULL,
 			date DATETIME DEFAULT NOW(),
+			url VARCHAR(512) DEFAULT NULL,
+			message TEXT DEFAULT NULL,
 			PRIMARY KEY(id)
 		) ENGINE=InnoDB"
 	);
@@ -134,17 +136,18 @@ function __bootstrap( $db ){
 		) ENGINE=InnoDB"
 	);
 	
-
-	if ( (int)get_option('statc_bootstrapped') < 2 ) {
-		$db->query(
-			"ALTER TABLE messages
-				ADD url VARCHAR(512) DEFAULT NULL AFTER date,
-				ADD message TEXT DEFAULT NULL AFTER url"
-		);
-	}
+	// we will just let this fail if the columns exist
+	// from previous migrations. But silence the error
+	$db->hide_errors();
+	$db->query(
+		"ALTER TABLE messages
+			ADD url VARCHAR(512) DEFAULT NULL AFTER date,
+			ADD message TEXT DEFAULT NULL AFTER url"
+	);
+	$db->show_errors();
 	
 
-	update_option('statc_bootstrapped', 2);
+	update_option('statc_bootstrapped', 3);
 }
 
 class MockDb {
