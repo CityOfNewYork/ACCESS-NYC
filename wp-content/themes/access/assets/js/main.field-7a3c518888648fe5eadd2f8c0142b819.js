@@ -30766,6 +30766,24 @@ ScreenerField = function () {
         commands: [] };
 
 
+      // Insert Staff data.
+      json.commands.push({
+        insert: {
+          object: {
+            'accessnyc.request.Staff': vue.staff.toObject() } } });
+
+
+
+
+      // Insert Client data.
+      json.commands.push({
+        insert: {
+          object: {
+            'accessnyc.request.Staff': vue.client.toObject() } } });
+
+
+
+
       // Insert Household data.
       json.commands.push({
         insert: {
