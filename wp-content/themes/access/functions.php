@@ -620,19 +620,16 @@ add_filter( 'gathercontent_importer_custom_field_keys', function( $meta_keys ) {
 } );
 // end of GatherContent - Mapped WordPress Field meta_keys edit
 
-// META Descriptions - add meta desc tag to head
-// function access_meta_description($title)
-// {
-//   // render only on the homepage
-//   if( is_home()){
-//     echo '<meta name="description" content="' . get_bloginfo('description') . '" />' . "\r\n"; 
-//     // remove tagline from title tag
-//     $title = get_bloginfo('name');
-//   }
-//   return $title;
-// }
-// add_action( 'pre_get_document_title', 'access_meta_description', 10, 1);
-// end add meta description to head
+// TITLE - edit the site title to remove tagline
+function access_title($title)
+{
+  if( is_home()){
+    $title = get_bloginfo('name');
+  }
+  return $title;
+}
+add_action( 'pre_get_document_title', 'access_title', 10, 1);
+// end TITLE
 
 function validate_params($namespace, $subject) {
   $patterns = array(
