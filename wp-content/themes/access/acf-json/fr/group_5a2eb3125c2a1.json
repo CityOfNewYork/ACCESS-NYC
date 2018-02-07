@@ -83,6 +83,26 @@
                     "delay": 0
                 }
             ]
+        },
+        {
+            "key": "field_5a7b571ce00f8",
+            "label": "Page Meta Description",
+            "name": "page_meta_description",
+            "type": "text",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
