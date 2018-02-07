@@ -431,8 +431,23 @@ class BSDStarterSite extends TimberSite {
 
     // Determine if page is in print view.
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
+    
+    // Get the META description
+    $orig_page_id= get_page_by_path(trim( $_SERVER["REQUEST_URI"] , '/'.ICL_LANGUAGE_CODE ))->ID;
+    $page_id = apply_filters( 'wpml_object_id', $orig_page_id, 'page', true, ICL_LANGUAGE_CODE );
+
+    if(is_home()){
+      $context['page_meta_desc'] = get_bloginfo('description');  
+    }elseif ($page_id) {
+      $context['page_meta_desc'] = get_field('page_meta_description', $page_id);      
+    }
+    // end Get the META description
 
     return $context;
+  }
+
+  function add_meta_context(){
+
   }
 
   function add_styles_and_scripts() {
@@ -605,19 +620,18 @@ add_filter( 'gathercontent_importer_custom_field_keys', function( $meta_keys ) {
 } );
 // end of GatherContent - Mapped WordPress Field meta_keys edit
 
-
-// add meta description to head
-function access_meta_description($title)
-{
-  // render only on the homepage
-  if( is_home()){
-    echo '<meta name="description" content="' . get_bloginfo('description') . '" />' . "\r\n"; 
-    // remove tagline from title tag
-    $title = get_bloginfo('name');
-  }
-  return $title;
-}
-add_action( 'pre_get_document_title', 'access_meta_description', 10, 1);
+// META Descriptions - add meta desc tag to head
+// function access_meta_description($title)
+// {
+//   // render only on the homepage
+//   if( is_home()){
+//     echo '<meta name="description" content="' . get_bloginfo('description') . '" />' . "\r\n"; 
+//     // remove tagline from title tag
+//     $title = get_bloginfo('name');
+//   }
+//   return $title;
+// }
+// add_action( 'pre_get_document_title', 'access_meta_description', 10, 1);
 // end add meta description to head
 
 function validate_params($namespace, $subject) {
@@ -631,6 +645,10 @@ function validate_params($namespace, $subject) {
   preg_match($patterns[$namespace], $subject, $matches);
   return (isset($matches[0])) ? $matches[0] : ''; // fail silently
 }
+
+Routes::map('programs/', function() {
+  Routes::load('archive-programs.php', null, null, 200);
+});
 
 Routes::map('locations', function() {
   Routes::load('locations.php', null, null, 200);
