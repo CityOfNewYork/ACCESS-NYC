@@ -30766,24 +30766,6 @@ ScreenerField = function () {
         commands: [] };
 
 
-      // Insert Staff data.
-      json.commands.push({
-        insert: {
-          object: {
-            'accessnyc.request.Staff': vue.staff.toObject() } } });
-
-
-
-
-      // Insert Client data.
-      json.commands.push({
-        insert: {
-          object: {
-            'accessnyc.request.Client': vue.client.toObject() } } });
-
-
-
-
       // Insert Household data.
       json.commands.push({
         insert: {
@@ -30858,13 +30840,15 @@ ScreenerField = function () {
         type: 'post',
         data: {
           action: 'drools',
-          data: json } }).
+          data: json,
+          staff: this._vue.staff.toObject(),
+          client: this._vue.client.toObject() } }).
 
       done(function (data) {
         var result = {
-          'data': data,
-          'url': url,
-          'json': json };
+          data: data,
+          url: url,
+          json: json };
 
 
         if (data.type !== 'SUCCESS') {
