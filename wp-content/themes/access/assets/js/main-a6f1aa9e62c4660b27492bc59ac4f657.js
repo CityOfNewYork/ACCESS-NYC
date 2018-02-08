@@ -15617,16 +15617,29 @@ Utility.svgSprites = function (data) {
 /**
     * Simple toggle that add/removes "active" and "hidden" classes, as well as
     * applying appropriate aria-hidden value to a specified target.
+    *
+    * Usage;
+    *
+    * import Utility from Utility;
+    *
+    * document.querySelector('[data-js*="toggle"]')
+    *   .addEventlistener('click', Utility.simpleToggle);
+    *
+    * <a data-js="toggle" href="#target">Toggle</a>
+    *
+    * Optional params;
+    * data-loc="hash"           Changes the window location hash to #hash.
+    * data-hide="#selector"     Queries the selector and toggles them to hidden
+    *                           state when the target element is toggled.
+    * data-reverse="#selector"  Element to reverse the toggling state.
+    *
     * @param  {event} event the onclick event
     */
 Utility.simpleToggle = function (event) {
-  // Simple toggle that add/removes "active" and "hidden" classes, as well as
-  // applying appropriate aria-hidden value to a specified target.
   var el = event.currentTarget;
   event.preventDefault();
   var $target = (0, _jquery2.default)(el).attr('href') ?
-  (0, _jquery2.default)((0, _jquery2.default)(el).attr('href')) :
-  (0, _jquery2.default)((0, _jquery2.default)(el).data('target'));
+  (0, _jquery2.default)((0, _jquery2.default)(el).attr('href')) : (0, _jquery2.default)((0, _jquery2.default)(el).data('target'));
 
   (0, _jquery2.default)(el).toggleClass('active');
   $target.toggleClass('active hidden').
@@ -15640,8 +15653,20 @@ Utility.simpleToggle = function (event) {
     prop('aria-hidden', true);
   }
 
+  // Change the window hash if param set
   if ((0, _jquery2.default)(el).data('loc')) {
     window.location.hash = (0, _jquery2.default)(el).data('loc');
+  }
+
+  // Add the toggle event to the toggle reversal element
+  if ((0, _jquery2.default)(el).data('reverse')) {
+    (0, _jquery2.default)((0, _jquery2.default)(el).data('reverse')).on('click', function (event) {
+      event.preventDefault();
+      (0, _jquery2.default)(el).toggleClass('active');
+      $target.toggleClass('active hidden').
+      prop('aria-hidden', $target.hasClass('hidden'));
+      (0, _jquery2.default)((0, _jquery2.default)(el).data('reverse')).off('click');
+    });
   }
 };
 
