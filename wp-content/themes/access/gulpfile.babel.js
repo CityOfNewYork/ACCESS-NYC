@@ -76,6 +76,24 @@ gulp.task('styles', () => {
   .pipe(gulp.dest('./'));
 });
 
+// Hashing files
+let hashfiles = [
+  'manifest-screener-field.json',
+  'manifest.json'
+];
+
+gulp.task('hashfiles', (callback) => {
+  let oldhashfiles = [];
+  for (let i = hashfiles.length - 1; i >= 0; i--) {
+    oldhashfiles[i] = hashfiles[i].split('.').join('.*.');
+  }
+  del(oldhashfiles, callback);
+  gulp.src(hashfiles)
+  .pipe($.hashFilename({
+    "format": "{name}.{hash}{size}{ext}"
+  }))
+  .pipe(gulp.dest('./'));
+})
 
 // Script Linter
 gulp.task('lint', () =>
@@ -198,6 +216,8 @@ gulp.task('default', ['build'], function() {
   // Watch image files
   gulp.watch(`${src}/img/**/*`, ['images', reload]);
 
+  gulp.watch(hashfiles, ['hashfiles', reload]);
+
   gulp.watch([
     'access/**/*',
     'views/**/*',
@@ -207,4 +227,4 @@ gulp.task('default', ['build'], function() {
 });
 
 // Build
-gulp.task('build', ['clean', 'styles', 'lint', 'scripts', 'svg-sprites']);
+gulp.task('build', ['clean', 'styles', 'lint', 'scripts', 'svg-sprites', 'hashfiles']);
