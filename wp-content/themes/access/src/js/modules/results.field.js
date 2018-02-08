@@ -48,6 +48,9 @@ class ResultsField {
       new ShareForm(el, config).init();
     });
 
+    // Finalize form
+    $(ResultsField.Selectors.FINAL_RESULTS).on('submit', this._finalResults);
+
     // Open links in new window
     $el.on('click', ResultsField.Selectors.HYPERLINKS, this._targetBlank);
 
@@ -183,6 +186,27 @@ class ResultsField {
       });
     });
   }
+
+  /**
+   * Submit the final url to the database and disable the ability to
+   * modify the url any further.
+   * @param  {object} event The finalize results form submission event.
+   */
+  _finalResults(event) {
+    // const action = $(event.currentTarget).attr('action');
+    // const payload = $(event.currentTarget).serialize();
+    event.preventDefault();
+
+    // $.post(action, payload).done((response) => {
+    $(this).remove();
+    $(ResultsField.Selectors.REMOVE_CONTAINER).remove();
+    $(ResultsField.Selectors.SHARE_RESULTS)
+      .toggleClass('hidden')
+      .prop('aria-hidden', false);
+    // }).fail((response) => {
+    // }).always(() => {
+    // });
+  }
 }
 
 /**
@@ -192,11 +216,14 @@ class ResultsField {
 ResultsField.Selectors = {
   'ADDITIONAL_PROGRAMS': '[data-js="additional-programs"]',
   'DOM': '[data-js="results"]',
+  'FINAL_RESULTS': '[data-js="final-results"]',
   'HYPERLINKS': 'a[href*=""]',
+  'REMOVE_CONTAINER': '[id*="remove-"]',
   'REMOVE_PROGRAM': '[data-js*="remove-program"]',
   'SHARE_URLS': 'input[name="url"]',
   'SHARE_HASH': 'input[name="hash"]',
   'SHARE_PROGRAMS': 'input[name="programs"]',
+  'SHARE_RESULTS': '[data-js="share-results"]',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
   'PROGRAMS_LIST': '[data-js="programs-list"]',
