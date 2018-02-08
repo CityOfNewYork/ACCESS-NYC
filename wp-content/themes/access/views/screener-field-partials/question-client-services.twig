@@ -22,8 +22,10 @@
               <input type="checkbox"
                 {% if category.code %}
                 value="{{ category.code }}" data-object="programsFilter"
+                v-bind:checked="programsFilter.indexOf('{{ category.code }}') > -1"
                 {% else %}
                 value="{{ category.value }}" data-object="categoriesCurrent"
+                v-bind:checked="categoriesCurrent.indexOf('{{ category.value }}') > -1"
                 {% endif %}
                 v-on:change="push">
               <span class="styled-checkbox-label">{{ __(category.text, translationID) }}</span>

@@ -26,6 +26,7 @@ import envify from 'envify/custom';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
+const NODE_ENV = process.env.NODE_ENV;
 
 const $ = gulpLoadPlugins();
 const reload = function() {
@@ -107,7 +108,7 @@ gulp.task('scripts', () => {
     }).transform(
       // Required in order to process node_modules files
       { global: true },
-      envify({ NODE_ENV: 'production' })
+      envify({ NODE_ENV: NODE_ENV })
     )
     .bundle()
     .pipe(sourcestream(`${entry}.js`))
