@@ -28,7 +28,38 @@
   <main class="main-content screener-field layout" id="content" data-js="results">
     <div class="layout__body bg-white">
 
-      <div class="save-your-results p-2">
+      <form method="post" action="action" class="w-100p p-2" novalidate data-js="final-results">
+
+        <h4>{{__('Finalize your results.', translationID)}}</h4>
+
+        <a class="d-block btn btn-primary share-toggle" href="#finalize-your-results"
+           data-js="simple-toggle"
+           data-reverse="#finalize-your-results-close"
+           data-scroll-offset="20">{{ __('Finalize Your Results', translationID) }}</a>
+        <div id="finalize-your-results" class="screener-disclaimer m-0 hidden" aria-hidden="true">
+          <input type="hidden" name="url" value="{{ url }}" readonly>
+          <input type="hidden" name="programs" value="{{ programs }}" readonly>
+          <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
+          <p>{{ __('Once you finalize your results, you won\'t be able to remove any more programs.', translationID) }}</p>
+          <div class="d-flex">
+            <button type="submit" class="f-1 btn btn-primary btn-small m-0"
+                    data-js="track"
+                    data-track-key="Results: Finalize"
+                    data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/finalize"}]'>
+              {{ __('Finalize', translationID) }}
+            </button>
+            <button class="f-1 btn btn-secondary btn-small m-left" id="finalize-your-results-close"
+                    data-js="track"
+                    data-track-key="Results: Keep Working"
+                    data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/keep-working"}]'>
+              {{ __('Keep Working', translationID) }}
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="save-your-results p-2 hidden" aria-hidden="true" data-js="share-results">
         <h4>{{__('Save your results.', translationID)}}</h4>
 
         <div class="d-flex">

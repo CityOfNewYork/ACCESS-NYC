@@ -25,16 +25,29 @@ Utility.svgSprites = function(data) {
 /**
  * Simple toggle that add/removes "active" and "hidden" classes, as well as
  * applying appropriate aria-hidden value to a specified target.
+ *
+ * Usage;
+ *
+ * import Utility from Utility;
+ *
+ * document.querySelector('[data-js*="toggle"]')
+ *   .addEventlistener('click', Utility.simpleToggle);
+ *
+ * <a data-js="toggle" href="#target">Toggle</a>
+ *
+ * Optional params;
+ * data-loc="hash"           Changes the window location hash to #hash.
+ * data-hide="#selector"     Queries the selector and toggles them to hidden
+ *                           state when the target element is toggled.
+ * data-reverse="#selector"  Element to reverse the toggling state.
+ *
  * @param  {event} event the onclick event
  */
 Utility.simpleToggle = function(event) {
-  // Simple toggle that add/removes "active" and "hidden" classes, as well as
-  // applying appropriate aria-hidden value to a specified target.
   let el = event.currentTarget;
   event.preventDefault();
   const $target = $(el).attr('href') ?
-      $($(el).attr('href')) :
-      $($(el).data('target'));
+      $($(el).attr('href')) : $($(el).data('target'));
 
   $(el).toggleClass('active');
   $target.toggleClass('active hidden')
@@ -48,8 +61,20 @@ Utility.simpleToggle = function(event) {
       .prop('aria-hidden', true);
   }
 
+  // Change the window hash if param set
   if ($(el).data('loc')) {
     window.location.hash = $(el).data('loc');
+  }
+
+  // Add the toggle event to the toggle reversal element
+  if ($(el).data('reverse')) {
+    $($(el).data('reverse')).on('click', (event) => {
+      event.preventDefault();
+      $(el).toggleClass('active');
+      $target.toggleClass('active hidden')
+        .prop('aria-hidden', $target.hasClass('hidden'));
+      $($(el).data('reverse')).off('click');
+    });
   }
 };
 
