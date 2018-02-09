@@ -21,6 +21,8 @@
 {% endblock %}
 
 {% block scripts_footer %}
+{{ function('Nyco\\Enqueue\\script', 'assets/js/main', '.min') }}
+
 <script type="template/html" id="screener-income-template">
   {% include 'screener-partials/template-income.twig' %}
 </script>

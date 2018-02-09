@@ -6,8 +6,6 @@
 
 // Locations
 Routes::map('locations', function() {
-  style();
-  script('main');
   Routes::load('locations.php', null, null, 200);
 });
 
@@ -17,14 +15,10 @@ Routes::map('locations/json', function() {
 
 // Screener
 Routes::map('eligibility', function() {
-  style();
-  script('main');
   Routes::load('screener.php', null, null, 200);
 });
 
 Routes::map('eligibility/results', function() {
-  style();
-  script('main');
   $params = array();
   $params['link'] = home_url().'/eligibility/results/';
   Routes::load('eligibility-results.php', $params, null, 200);
@@ -32,14 +26,10 @@ Routes::map('eligibility/results', function() {
 
 // Field Screener
 Routes::map('peu', function() {
-  style();
-  script('main.field');
   Routes::load('screener-field.php', null, null, 200);
 });
 
 Routes::map('peu/results', function() {
-  style();
-  script('main.field');
   $params = array();
   $params['share_path'] = '/eligibility/results/';
   Routes::load('eligibility-results-field.php', $params, null, 200);
