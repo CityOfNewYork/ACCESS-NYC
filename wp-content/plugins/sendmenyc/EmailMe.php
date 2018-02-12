@@ -86,6 +86,7 @@ class EmailMe extends ContactMe {
 				$body = "You recently completed a questionnaire on ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\nThese are the programs that you may be eligible for:";
 				$button="Your Results";
 				$questions="Have questions? Contact us.";
+				$language="";
 			}
 		// programs page
 		} else {
@@ -145,6 +146,7 @@ class EmailMe extends ContactMe {
 				$body = "Here's a link to application details for a program from ACCESS NYC (https://access.nyc.gov), the website for finding help with food, money, housing, work, and more.\r\n\r\n";
 				$button = "How To Apply";
 				$questions="Have questions? Contact us.";
+				$language="";
 			}
 		}
 
@@ -158,7 +160,11 @@ class EmailMe extends ContactMe {
 		  $contactUs = substr($questions, strpos($questions, json_decode('"\u061F"')) + 2);
 		}
       
-        $html_body2 = str_replace($contactUs,"<a href=\"http://on.nyc.gov/accessnyc-contact-us\" style=\"color:#184e9e;\">".$contactUs."</a>",$questions);
+      	if($language !=""){
+	        $html_body2 = str_replace($contactUs,"<a href=\"http://on.nyc.gov/accessnyc-contact-us-".$language."\" style=\"color:#184e9e;\">".$contactUs."</a>",$questions);
+      	}else{
+      		$html_body2 = str_replace($contactUs,"<a href=\"http://on.nyc.gov/accessnyc-contact-us\" style=\"color:#184e9e;\">".$contactUs."</a>",$questions);
+      	}
 
 		$html = str_replace('%(contactUs)', $html_body2, $html);
 		$html = str_replace('%(header)', $subject, $html);
