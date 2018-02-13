@@ -194,10 +194,16 @@ class ResultsField {
    */
   _finalResults(event) {
     const action = $(event.currentTarget).attr('action');
-    const payload = $(event.currentTarget).serialize();
+    const data = $(event.currentTarget).serializeArray();
     event.preventDefault();
 
-    /* eslint-disable no-console, no-debugger */
+    /* eslint-disable */
+    let payload = {};
+    payload['action']="response_update";
+    for (var i = 0; i<data.length; i++) {
+      payload[data[i].name]=data[i].value;
+    }
+
     $.post(action, payload).done((response) => {
       $(this).remove();
       $(ResultsField.Selectors.REMOVE_CONTAINER).remove();
@@ -205,12 +211,12 @@ class ResultsField {
         .toggleClass('hidden')
         .prop('aria-hidden', false);
     }).fail((response) => {
-      console.log('Something went wrong. Please try again later.');
+      alert('Something went wrong. Please try again later.');
       console.log(response);
     }).always(() => {
-      console.log('finished.');
+      console.log('Submission complete.');
     });
-    /* eslint-enable no-console, no-debugger */
+    /* eslint-enable*/
   }
 }
 

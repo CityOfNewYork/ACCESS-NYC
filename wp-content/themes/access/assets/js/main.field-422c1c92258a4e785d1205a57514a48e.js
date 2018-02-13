@@ -29789,10 +29789,16 @@ ResultsField = function () {
        */ }, { key: '_finalResults', value: function _finalResults(
     event) {var _this2 = this;
       var action = (0, _jquery2.default)(event.currentTarget).attr('action');
-      var payload = (0, _jquery2.default)(event.currentTarget).serialize();
+      var data = (0, _jquery2.default)(event.currentTarget).serializeArray();
       event.preventDefault();
 
-      /* eslint-disable no-console, no-debugger */
+      /* eslint-disable */
+      var payload = {};
+      payload['action'] = "response_update";
+      for (var i = 0; i < data.length; i++) {
+        payload[data[i].name] = data[i].value;
+      }
+
       _jquery2.default.post(action, payload).done(function (response) {
         (0, _jquery2.default)(_this2).remove();
         (0, _jquery2.default)(ResultsField.Selectors.REMOVE_CONTAINER).remove();
@@ -29800,12 +29806,12 @@ ResultsField = function () {
         toggleClass('hidden').
         prop('aria-hidden', false);
       }).fail(function (response) {
-        console.log('Something went wrong. Please try again later.');
+        alert('Something went wrong. Please try again later.');
         console.log(response);
       }).always(function () {
-        console.log('finished.');
+        console.log('Submission complete.');
       });
-      /* eslint-enable no-console, no-debugger */
+      /* eslint-enable*/
     } }]);return ResultsField;}();
 
 
