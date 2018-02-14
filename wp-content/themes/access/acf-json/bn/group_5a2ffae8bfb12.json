@@ -1,0 +1,103 @@
+{
+    "key": "group_5a2ffae8bfb12",
+    "title": "Site Alert Fields (Bengali)",
+    "fields": [
+        {
+            "key": "field_5a2ffae8cc9d8",
+            "label": "Content",
+            "name": "alert_content",
+            "type": "wysiwyg",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "default_value": "",
+            "delay": 0
+        },
+        {
+            "key": "field_5a2ffae8cca09",
+            "label": "Alert icon",
+            "name": "alert_icon",
+            "type": "select",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "multiple": 0,
+            "allow_null": 0,
+            "choices": {
+                "info": "Informational (\"i\" icon)",
+                "success": "Success (checkmark icon)",
+                "warning": "Warning (exclamation icon)",
+                "urgent": "Error (\"x\" icon)"
+            },
+            "default_value": [
+                "info"
+            ],
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5a2ffae8cca36",
+            "label": "Alert color",
+            "name": "alert_color",
+            "type": "select",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "multiple": 0,
+            "allow_null": 0,
+            "choices": {
+                "info": "Informational (blue)",
+                "success": "Success (green)",
+                "warning": "Warning (yellow)",
+                "urgent": "Error (red)"
+            },
+            "default_value": [
+                "info"
+            ],
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "alert"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}

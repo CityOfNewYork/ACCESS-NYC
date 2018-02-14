@@ -20,8 +20,12 @@
 <meta name="msapplication-TileImage" content="{{theme.path}}/assets/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 
+{# Adding a meta description for each page if it exists #}
+{% if page_meta_desc != '' %}
+	<meta name="description" content="{{ page_meta_desc }}">
+{% endif %}
+
 <link rel="icon" type="image/x-icon" href="{{theme.path}}/assets/favicon/favicon.ico">
-{# TODO(jjandoc): ?v=timestamp is added here for cache busting during debugging. It'd be great if there could be a cachebusting
-    value that increments with each release.#}
-<link rel="stylesheet" href="{{theme.path}}/style{% if language_code == 'es' or language_code == 'ar' or language_code == 'ko' or language_code == 'zh-hant' %}-{{ language_code }}{% endif %}.css{% if is_debug %}?v={{ date().timestamp }}{% endif %}" type="text/css">
+{# TODO(jjandoc): ?v=timestamp is added here for cache busting during debugging. It'd be great if there could be a cachebusting value that increments with each release.#}
+<link rel="stylesheet" href="{{theme.path}}/style{% if language_code == 'ar' or language_code == 'ur' or language_code == 'ko' or language_code == 'zh-hant' %}-{{ language_code }}{% endif %}.css{% if is_debug %}?v={{ date().timestamp }}{% endif %}" type="text/css">
 {{function('wp_head')}}

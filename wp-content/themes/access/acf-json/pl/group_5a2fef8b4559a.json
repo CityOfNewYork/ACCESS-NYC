@@ -1,0 +1,140 @@
+{
+    "key": "group_5a2fef8b4559a",
+    "title": "Page Fields (Polish)",
+    "fields": [
+        {
+            "key": "field_5a2fef8b52695",
+            "label": "Lead Content",
+            "name": "lead",
+            "type": "wysiwyg",
+            "value": null,
+            "instructions": "Page header content.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "default_value": "",
+            "delay": 0
+        },
+        {
+            "key": "field_5a2fef8b52732",
+            "label": "Sections",
+            "name": "sections",
+            "type": "repeater",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "collapsed": "field_58b481043081e",
+            "sub_fields": [
+                {
+                    "key": "field_5a2fef8b5c261",
+                    "label": "Section Title",
+                    "name": "section_title",
+                    "type": "text",
+                    "value": null,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_5a2fef8b5c29c",
+                    "label": "Section Content",
+                    "name": "section_content",
+                    "type": "wysiwyg",
+                    "value": null,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "default_value": "",
+                    "delay": 0
+                }
+            ]
+        },
+        {
+            "key": "field_5a7b74c8ac368",
+            "label": "Page Meta Description",
+            "name": "page_meta_description",
+            "type": "text",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "permalink",
+        "the_content",
+        "excerpt",
+        "custom_fields",
+        "discussion",
+        "comments",
+        "revisions",
+        "author",
+        "format",
+        "page_attributes",
+        "featured_image",
+        "categories",
+        "tags",
+        "send-trackbacks"
+    ],
+    "active": 1,
+    "description": ""
+}

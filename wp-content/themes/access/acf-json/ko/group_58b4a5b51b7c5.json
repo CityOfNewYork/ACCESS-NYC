@@ -3,15 +3,11 @@
     "title": "Page Fields (Korean)",
     "fields": [
         {
-            "tabs": "all",
-            "toolbar": "basic",
-            "media_upload": 0,
-            "default_value": "",
-            "delay": 0,
             "key": "field_58b4a5b542405",
             "label": "Lead Content",
             "name": "lead",
             "type": "wysiwyg",
+            "value": null,
             "instructions": "Page header content.",
             "required": 0,
             "conditional_logic": 0,
@@ -19,58 +15,19 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            }
+            },
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "default_value": "",
+            "delay": 0
         },
         {
-            "sub_fields": [
-                {
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "key": "field_58b4a5b56f4a6",
-                    "label": "Section Title",
-                    "name": "section_title",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "30",
-                        "class": "",
-                        "id": ""
-                    }
-                },
-                {
-                    "tabs": "all",
-                    "toolbar": "basic",
-                    "media_upload": 0,
-                    "default_value": "",
-                    "delay": 0,
-                    "key": "field_58b4a5b571a53",
-                    "label": "Section Content",
-                    "name": "section_content",
-                    "type": "wysiwyg",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    }
-                }
-            ],
-            "min": 0,
-            "max": 0,
-            "layout": "block",
-            "button_label": "",
-            "collapsed": "field_58b481043081e",
             "key": "field_58b4a5b542483",
             "label": "Sections",
             "name": "sections",
             "type": "repeater",
+            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -78,7 +35,74 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            }
+            },
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "collapsed": "field_58b481043081e",
+            "sub_fields": [
+                {
+                    "key": "field_58b4a5b56f4a6",
+                    "label": "Section Title",
+                    "name": "section_title",
+                    "type": "text",
+                    "value": null,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_58b4a5b571a53",
+                    "label": "Section Content",
+                    "name": "section_content",
+                    "type": "wysiwyg",
+                    "value": null,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "default_value": "",
+                    "delay": 0
+                }
+            ]
+        },
+        {
+            "key": "field_5a7b74e6fcf4c",
+            "label": "Page Meta Description",
+            "name": "page_meta_description",
+            "type": "text",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -112,6 +136,5 @@
         "send-trackbacks"
     ],
     "active": 1,
-    "description": "",
-    "modified": 1488234081
+    "description": ""
 }

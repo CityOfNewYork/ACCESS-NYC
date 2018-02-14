@@ -82,6 +82,15 @@ import Utility from 'modules/utility';
     }
   });
 
+  // Webtrends - Capture the search query for on-site search
+  if (~window.location.href.indexOf('?s=')) {
+    let $query = window.location.href;
+    $('head').append('<meta name="WT.oss" content="'
+      + $query.split('?s=')[1] + '">');
+    $('head').append('<meta name="WT.oss_r" content="'
+      + $('.program-card').length +'">');
+  }
+
   // On the search results page, submits the search form when a category is
   // chosen.
   $('.js-program-search-filter').on('change', 'input', (e) => {

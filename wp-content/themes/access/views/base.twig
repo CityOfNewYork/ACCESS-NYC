@@ -5,7 +5,7 @@
 {% endif %}
 <!DOCTYPE html>
 <html lang="{{ language_code }}"
-    {% if language_code == 'ar' %}dir="rtl"{% endif %}
+    {% if language_code == 'ar' or language_code =='ur' %}dir="rtl"{% endif %}
     {% if is_print %}class="print-view"{% endif %}>
   <head>
     {% block html_head_container %}
@@ -155,6 +155,8 @@
     <script>
       var prod_dcsId_val = "dcs222viqww0txf1nujrjyybv_3i9q";
       var prod_host = "access.nyc.gov";
+      var test_dcsId_val = 'dcs222avuqcetat4mmmc6vea9_1b6h';
+      var test_host = 'accessnyc.staging.wpengine.com';
     </script>
     <script src="https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js"></script>
     {# /Webtrends integration #}
