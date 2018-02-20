@@ -257,7 +257,7 @@ gulp.task('svg-sprites', () => {
 /**
  * Development (watch)
  */
-gulp.task('default', ['build'], function() {
+gulp.task('default', function() {
   // Create a .env file in the theme directory to define this.
   browserSync.init({
     proxy: process.env.WP_DEV_URL,
