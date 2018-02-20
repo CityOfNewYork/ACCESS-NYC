@@ -160,7 +160,7 @@
     {% endblock %}
 
     {% block scripts_footer %}
-    {{ function('Nyco\\Enqueue\\script', 'assets/js/main', '.min') }}
+    {{ function('enqueue_script', 'assets/js/main') }}
     {% endblock %}
 
     {{ wp_footer }}

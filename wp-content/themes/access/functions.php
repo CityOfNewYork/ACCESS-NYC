@@ -685,10 +685,14 @@ function share_data($params) {
  * @param  [string] $name the name of the script source
  * @return null
  */
-require_once(
-  get_template_directory() .
-  '/vendor/nyco/wp-assets/dist/script.php'
-);
+function enqueue_script($name) {
+  require_once(
+    get_template_directory() .
+    '/vendor/nyco/wp-assets/dist/script.php'
+  );
+
+  $script = Nyco\Enqueue\script($name, '.min');
+}
 
 /**
  * Enqueue a hashed style based on it's name and language prefix.
@@ -705,7 +709,7 @@ function enqueue_language_style($name) {
   $lang = (ICL_LANGUAGE_CODE === 'en') ? 'default' : ICL_LANGUAGE_CODE;
   error_reporting(WP_DEBUG);
 
-  Nyco\Enqueue\style("$name-$lang");
+  $style = Nyco\Enqueue\style("$name-$lang");
 }
 
 /**
