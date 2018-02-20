@@ -685,42 +685,27 @@ function share_data($params) {
  * @param  [string] $name the name of the script source
  * @return null
  */
-function script($name) {
-  $dir = get_template_directory();
-  $files = array_filter(scandir("$dir/assets/js/"), function($var) use ($name) {
-    return (strpos($var, "$name-") !== false);
-  });
-  $hash = str_replace(array("$name-", '.js'), '', array_values($files)[0]);
-  $min = isset($_GET['debug']) ? '' : '.min';
-  $uri = get_template_directory_uri();
-  wp_enqueue_script($name, "$uri/assets/js/$name-$hash$min.js", array(), null, true);
-}
+require_once(
+  get_template_directory() .
+  '/vendor/nyco/wp-assets/dist/script.php'
+);
 
 /**
- * Enqueue a hashed style based on it's name.
+ * Enqueue a hashed style based on it's name and language prefix.
  * @param  [string] $name the name of the stylesheet source
  * @return null
  */
-function style($name = "style") {
-  $languages = array('ar', 'ko', 'zh-hant');
+function enqueue_language_style($name) {
+  require_once(
+    get_template_directory() .
+    '/vendor/nyco/wp-assets/dist/style.php'
+  );
+
   error_reporting(0);
-  $lang = ICL_LANGUAGE_CODE;
+  $lang = (ICL_LANGUAGE_CODE === 'en') ? 'default' : ICL_LANGUAGE_CODE;
   error_reporting(WP_DEBUG);
-  $dir = get_template_directory();
 
-  if (in_array($lang, $languages)) {
-    $name = "$name-$lang";
-  } else {
-    $name = "$name-default";
-  }
-
-  $files = array_filter(scandir($dir), function($var) use ($name) {
-    return (strpos($var, "$name-") !== false);
-  });
-
-  $hash = str_replace(array("$name-", '.css'), '', array_values($files)[0]);
-  $uri = get_template_directory_uri();
-  wp_enqueue_style($name, "$uri/$name-$hash.css", array(), null, 'all');
+  Nyco\Enqueue\style("$name-$lang");
 }
 
 /**
