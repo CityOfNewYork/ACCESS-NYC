@@ -12,10 +12,15 @@ if (!defined('WPINC')) {
 }
 require plugin_dir_path( __FILE__ ) . 'settings.php';
 
+// internal actions to call in a plugin/hook sense
 add_action( 'drools_request', '\StatCollector\drools_request', 10, 2 );
 add_action( 'drools_response', '\StatCollector\drools_response', 10, 2 );
 add_action( 'results_sent', '\StatCollector\results_sent', 10, 5 );
 add_action( 'peu_data', '\StatCollector\peu_data', 10, 3 );
+
+// AJAX endpoints to directly write info
+add_action( 'wp_ajax_response_update', '\StatCollector\response_update');
+add_action( 'wp_ajax_nopriv_response_update', '\StatCollector\response_update');
 
 function drools_request( $data, $uid ) {
 	$db = _get_db();
@@ -65,6 +70,25 @@ function peu_data( $staff, $client, $uid ) {
 }
 
 
+function response_update() {
+	$uid = $_POST['GUID'];
+	$url = $_POST['url'];
+	$programs = $_POST['programs'];
+	if (empty($uid) || empty($url) || empty($programs)) {
+		wp_send_json(["status"=>"fail","message"=>"missing values"]);
+		return wp_die();
+	}
+
+	$db = _get_db();
+	$db->insert("response_update", [
+		"uid"=>$uid,
+		"url"=>$url,
+		"program_codes"=>$programs
+	]);
+	wp_send_json(["status"=>"ok"]);
+	wp_die();
+}
+
 function _get_db(){
 	if ( empty(get_option('statc_host')) ||
 		 empty(get_option('statc_database')) ||
@@ -80,7 +104,7 @@ function _get_db(){
 					get_option('statc_host'));
 	$db->show_errors();
 
-	if ( get_option('statc_bootstrapped') !== '3' ) {
+	if ( get_option('statc_bootstrapped') !== '4' ) {
 		__bootstrap( $db );
 	}
 	return $db;
@@ -135,6 +159,15 @@ function __bootstrap( $db ){
 			PRIMARY KEY(id)
 		) ENGINE=InnoDB"
 	);
+	$db->query(
+		"CREATE TABLE IF NOT EXISTS response_update (
+			id INT(11) NOT NULL AUTO_INCREMENT,
+			uid VARCHAR(13) DEFAULT NULL,
+			url MEDIUMBLOB NOT NULL,
+			program_codes VARCHAR(256) DEFAULT NULL,
+			PRIMARY KEY(id)
+		) ENGINE=InnoDB"
+	);
 	
 	// we will just let this fail if the columns exist
 	// from previous migrations. But silence the error
@@ -147,7 +180,7 @@ function __bootstrap( $db ){
 	$db->show_errors();
 	
 
-	update_option('statc_bootstrapped', 3);
+	update_option('statc_bootstrapped', 4);
 }
 
 class MockDb {
