@@ -193,19 +193,30 @@ class ResultsField {
    * @param  {object} event The finalize results form submission event.
    */
   _finalResults(event) {
-    // const action = $(event.currentTarget).attr('action');
-    // const payload = $(event.currentTarget).serialize();
+    const action = $(event.currentTarget).attr('action');
+    const data = $(event.currentTarget).serializeArray();
     event.preventDefault();
 
-    // $.post(action, payload).done((response) => {
-    $(this).remove();
-    $(ResultsField.Selectors.REMOVE_CONTAINER).remove();
-    $(ResultsField.Selectors.SHARE_RESULTS)
-      .toggleClass('hidden')
-      .prop('aria-hidden', false);
-    // }).fail((response) => {
-    // }).always(() => {
-    // });
+    /* eslint-disable */
+    let payload = {};
+    payload['action']="response_update";
+    for (var i = 0; i<data.length; i++) {
+      payload[data[i].name]=data[i].value;
+    }
+
+    $.post(action, payload).done((response) => {
+      $(this).remove();
+      $(ResultsField.Selectors.REMOVE_CONTAINER).remove();
+      $(ResultsField.Selectors.SHARE_RESULTS)
+        .toggleClass('hidden')
+        .prop('aria-hidden', false);
+    }).fail((response) => {
+      alert('Something went wrong. Please try again later.');
+      console.log(response);
+    }).always(() => {
+      console.log('Submission complete.');
+    });
+    /* eslint-enable*/
   }
 }
 
