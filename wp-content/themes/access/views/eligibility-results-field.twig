@@ -125,20 +125,6 @@
 
       </div>
 
-      <div class="p-2">
-
-        <h4>{{__('Save final results.', translationID)}}</h4>
-
-        <form method="post" action="{{ action }}" class="w-100p" novalidate>
-          <input name="action" value="response_update" class="w-100 m-bottom">
-          <input name="url" value="{{ url }}" readonly class="w-100 m-bottom">
-          <input name="programs" value="{{ programs }}" readonly class="w-100 m-bottom">
-          <input name="GUID" value="{{ guid }}" maxlength="13" readonly class="w-100">
-          <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Submit', translationID)}}</button>
-        </form>
-
-      </div>
-
       <div class="content-body">
 
         {% if selectedPrograms | length %}
@@ -185,6 +171,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
+{{ function('enqueue_script', 'assets/js/main-field') }}
 <script>
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

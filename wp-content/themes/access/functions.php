@@ -362,7 +362,7 @@ function wpml_switcher_urls($languages) {
           $languages[$lang_code]['url'] = '/programs/?program_cat='.$prog;
         }
         // if not english, then remove the language code and add the correct one
-        elseif($lang_code != 'en' || $lang_code != '' ){   
+        elseif($lang_code != 'en' || $lang_code != '' ){
           $languages[$lang_code]['url'] = '/'.$lang_code.'/programs/?program_cat='.$prog.'-'.$lang_code;
         }
       }
@@ -431,14 +431,14 @@ class BSDStarterSite extends TimberSite {
 
     // Determine if page is in print view.
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
-    
+
     // Get the META description - return english if empty
     if( ICL_LANGUAGE_CODE != 'en'){
       $orig_page_id= get_page_by_path(trim( $_SERVER["REQUEST_URI"] , '/'.ICL_LANGUAGE_CODE ))->ID;
     }else{
       $orig_page_id= get_page_by_path(trim( $_SERVER["REQUEST_URI"] , '/'))->ID;
     }
-    
+
     $page_id = apply_filters( 'wpml_object_id', $orig_page_id, 'page', true, ICL_LANGUAGE_CODE );
 
     $page_desc = get_field('page_meta_description', $page_id);
@@ -448,9 +448,9 @@ class BSDStarterSite extends TimberSite {
     }
 
     if(is_home()){
-      $context['page_meta_desc'] = get_bloginfo('description');  
+      $context['page_meta_desc'] = get_bloginfo('description');
     }elseif ($page_id || $page_desc ) {
-      $context['page_meta_desc'] = $page_desc;      
+      $context['page_meta_desc'] = $page_desc;
     }
     // end Get the META description
 
@@ -709,42 +709,32 @@ function share_data($params) {
  * @param  [string] $name the name of the script source
  * @return null
  */
-function script($name) {
-  $dir = get_template_directory();
-  $files = array_filter(scandir("$dir/assets/js/"), function($var) use ($name) {
-    return (strpos($var, "$name-") !== false);
-  });
-  $hash = str_replace(array("$name-", '.js'), '', array_values($files)[0]);
-  $min = isset($_GET['debug']) ? '' : '.min';
-  $uri = get_template_directory_uri();
-  wp_enqueue_script($name, "$uri/assets/js/$name-$hash$min.js", array(), null, true);
+function enqueue_script($name) {
+  require_once(
+    get_template_directory() .
+    '/vendor/nyco/wp-assets/dist/script.php'
+  );
+
+  $script = Nyco\Enqueue\script($name, '.min');
 }
 
 /**
- * Enqueue a hashed style based on it's name.
+ * Enqueue a hashed style based on it's name and language prefix.
  * @param  [string] $name the name of the stylesheet source
  * @return null
  */
-function style($name = "style") {
+function enqueue_language_style($name) {
+  require_once(
+    get_template_directory() .
+    '/vendor/nyco/wp-assets/dist/style.php'
+  );
+
   $languages = array('ar', 'ko', 'ur', 'zh-hant');
   error_reporting(0);
-  $lang = ICL_LANGUAGE_CODE;
+  $lang = (ICL_LANGUAGE_CODE === 'en') ? 'default' : ICL_LANGUAGE_CODE;
   error_reporting(WP_DEBUG);
-  $dir = get_template_directory();
 
-  if (in_array($lang, $languages)) {
-    $name = "$name-$lang";
-  } else {
-    $name = "$name-default";
-  }
-
-  $files = array_filter(scandir($dir), function($var) use ($name) {
-    return (strpos($var, "$name-") !== false);
-  });
-
-  $hash = str_replace(array("$name-", '.css'), '', array_values($files)[0]);
-  $uri = get_template_directory_uri();
-  wp_enqueue_style($name, "$uri/$name-$hash.css", array(), null, 'all');
+  $style = Nyco\Enqueue\style("$name-$lang");
 }
 
 /**

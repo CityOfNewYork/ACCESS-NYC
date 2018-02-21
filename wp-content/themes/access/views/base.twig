@@ -9,6 +9,7 @@
     {% if is_print %}class="print-view"{% endif %}>
   <head>
     {% block html_head_container %}
+      {{ function('enqueue_language_style', 'style') }}
       {% include 'partials/html-header.twig' %}
       {% block head %}
       <meta name="theme-color" content="#FFFFFF">
@@ -160,7 +161,9 @@
     <script src="https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js"></script>
     {% endblock %}
 
-    {% block scripts_footer %}{% endblock %}
+    {% block scripts_footer %}
+    {{ function('enqueue_script', 'assets/js/main') }}
+    {% endblock %}
 
     {{ wp_footer }}
 
