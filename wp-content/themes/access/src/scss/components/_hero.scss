@@ -29,7 +29,7 @@
 
 .hero-touts {
   @include media($bp-tablet-up) {
-    @include display(flex);
+    display: flex;
   }
 }
 
@@ -37,8 +37,8 @@
   margin-bottom: 1.5*$spacing-base;
 
   @include media($bp-tablet-up) {
-    @include display(flex);
-    @include flex-direction(column);
+    display: flex;
+    flex-direction: column;
     padding-#{$text-direction-end}: 1.5*$spacing-base;
     width: 50%;
   }
@@ -50,7 +50,7 @@
 
 .hero-tout-body {
   @include media($bp-tablet-up) {
-    @include flex(1 1 auto);
+    flex: 1 1 auto;
   }
 }
 

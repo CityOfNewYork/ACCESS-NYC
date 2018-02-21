@@ -228,13 +228,13 @@
 }
 
 .program-detail-status {
-  @include display(flex);
-  @include flex-direction(column);
+  display: flex;
+  flex-direction: column;
   margin-bottom: $spacing-base;
   padding: $spacing-base;
 
   @include media($bp-tablet-up) {
-    @include flex-direction(row);
+    flex-direction: row;
   }
 }
 
@@ -346,7 +346,7 @@
 }
 
 .program-detail-what-you-need-to-include-body {
-  @include transition(all 1s);
+  transition: all 1s;
   max-height: 0;
   overflow: hidden;
 

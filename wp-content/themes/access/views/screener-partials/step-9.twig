@@ -27,7 +27,7 @@
   </div>
   <hr class="screener-divider">
   <div class="screener-question">
-    <label class="screener-label" for="person-<%= personIndex %>-relation">{{ __('What is this person’s relationship to the head of the household?', 'accessnyc-screener') }}</label>
+    <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-relation">{{ __('What is this person’s relationship to the head of the household?', 'accessnyc-screener') }}</label>
     <div class="screener-question-container">
       <select class="screener-select" id="person<%= personIndex %>-relation" name="Person[<%= personIndex %>].headOfHouseholdRelation" required>
         <option value="">{{ __('Click to select relationship', 'accessnyc-screener') }}</option>
@@ -85,7 +85,7 @@
     </div>
   </div>
   <div class="screener-question hidden" id="screener-is-person-<%= personIndex %>-full-time-student">
-    <label class="screener-label">{{ __('Are they a full-time student?', 'accessnyc-screener') }}</label>
+    <label class="screener-label d-inline-block m-bottom">{{ __('Are they a full-time student?', 'accessnyc-screener') }}</label>
     <div class="screener-radio-buttons js-screener-radio-group">
       <label class="screener-radio screener-label js-screener-radio-label">
         <input class="screener-radio-input sr-only" value="1" type="radio" name="Person[<%= personIndex %>].studentFulltime" data-type="boolean"<% if (person.studentFullTime) { print(' checked') }%>/>
@@ -98,7 +98,7 @@
     </div>
   </div>
   <div class="screener-question hidden" id="screener-did-person-<%= personIndex %>-work-last-18-months">
-    <label class="screener-label">{{ __('Did they work in the last 18 months?', 'accessnyc-screener') }}</label>
+    <label class="screener-label d-inline-block m-bottom">{{ __('Did they work in the last 18 months?', 'accessnyc-screener') }}</label>
     <div class="screener-radio-buttons js-screener-radio-group">
       <label class="screener-radio screener-label js-screener-radio-label">
         <input class="screener-radio-input sr-only" value="1" type="radio" name="Person[<%= personIndex %>].unemployedWorkedLast18Months" data-type="boolean"<% if (person.unemployedWorkedLast18Months) { print(' checked') }%>/>

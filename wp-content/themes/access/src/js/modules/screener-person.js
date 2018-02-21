@@ -190,6 +190,30 @@ class ScreenerPerson {
   }
 
   /**
+   * [addPayment description]
+   * @param {string} key  - expenses or incomes
+   * @param {string} type - type of expenses or income
+   * @return {this} ScreenerPerson
+   */
+  addPayment(key, type) {
+    const obj = {type: type, amount: '', frequency: ''};
+    let valid = false;
+
+    switch (key) {
+      case 'expenses':
+        valid = (ScreenerPerson.EXPENSE.indexOf(obj.type) >= 0) ? true : valid;
+        break;
+      case 'incomes':
+        valid = (ScreenerPerson.INCOME.indexOf(obj.type) >= 0) ? true : valid;
+        break;
+    }
+
+    if (valid) this._attrs[key].push(obj);
+
+    return this;
+  }
+
+  /**
    * Returns the value of this._attrs as an object.
    * @method
    * @return {object} this._attrs
@@ -243,6 +267,30 @@ ScreenerPerson.FREQUENCY = [
   'monthly',
   'semimonthly',
   'yearly'
+];
+
+/**
+ * Attributes for retrieving person's condition
+ * @type {Array}
+ */
+ScreenerPerson.CONDITION_ATTRS = [
+  'student',
+  'studentFulltime',
+  'pregnant',
+  'unemployed',
+  'unemployedWorkedLast18Months',
+  'blind',
+  'disabled',
+  'veteran'
+];
+
+/**
+ * Attributes for retrieving a person's benefits
+ * @type {Array}
+ */
+ScreenerPerson.BENEFIT_ATTRS = [
+  'benefitsMedicaid',
+  'benefitsMedicaidDisability'
 ];
 
 export default ScreenerPerson;

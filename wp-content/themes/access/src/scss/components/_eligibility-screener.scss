@@ -6,8 +6,9 @@
   }
 }
 
-.screener-body-step {
-  @include transition(opacity .2s);
+.screener-body-step,
+.screener-body-page {
+  transition: opacity .2s;
   height: 0;
   opacity: 0;
   overflow: hidden;
@@ -50,10 +51,15 @@
 }
 
 .screener-checkboxes {
-  @include display(flex);
-  @include flex-flow(row wrap);
-  @include justify-content(space-between);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
   margin-top: $spacing-base;
+  margin-bottom: $spacing-base;
+
+  @include media($bp-tablet-up) {
+    margin-bottom: $spacing-base * 1.5;
+  }
 }
 
 .screener-checkbox {
@@ -64,13 +70,17 @@
   }
 }
 
+.screener-checkbox:last-of-type {
+  margin-bottom: 0;
+}
+
 .screener-radio-buttons {
-  height: $spacing-base * 2;
-  margin-top: $spacing-base;
+  // height: $spacing-base * 2;
+  // margin-top: $spacing-base;
 }
 
 .screener-radio {
-  @include transition(all .2s);
+  transition: all .2s;
   background: $color-white;
   border: 1px solid $color-grey-mid;
   border-radius: $checkbox-radius;
@@ -80,21 +90,23 @@
   padding: 8px;
   padding-#{$text-direction-start}: $spacing-base * 2;
   position: relative;
+  display: inline-block;
 }
 
 .screener-radio-label {
   &::before {
-    @include transition(all.2s);
+    transition: all.2s;
     @include size($radio-size);
     @if $text-direction == 'rtl' {
-      @include position(absolute, 8px 8px null null);
+      @include position(absolute, 50% 8px null null);
     } @else {
-      @include position(absolute, 8px null null 8px);
+      @include position(absolute, 50% null null 8px);
     }
     border: 1px solid $color-grey-mid;
     border-radius: 50%;
     box-shadow: 0;
     content: '';
+    margin-top: ($radio-size/2) * -1;
   }
 
   input:checked + & {
@@ -113,7 +125,8 @@
 }
 
 .screener-select {
-  margin-top: $spacing-base;
+  // margin-top: $spacing-base;
+  width: 100%;
 }
 
 .screener-label {
@@ -127,7 +140,7 @@
   width: 100%;
 
   @include media($bp-tablet-up) {
-    @include calc(width, '50% - #{.5 *  $site-margins}');
+    width: calc(50% - #{.5 *  $site-margins});
   }
 }
 
@@ -233,7 +246,7 @@
 
 .currency-usd {
   display: inline-block;
-  margin-top: 10px;
+  // margin-top: 10px;
   position: relative;
 
   input {
@@ -244,7 +257,7 @@
 
   &::before {
     @include position(absolute, 50% null null 10px);
-    @include transform(translateY(-50%))
+    transform: translateY(-50%);
     color: $color-green-mid;
     content: '$';
     font-size: 22px;
@@ -253,6 +266,30 @@
     z-index: 2;
   }
 }
+
+.phone-us {
+  display: inline-block;
+  // margin-top: 10px;
+  position: relative;
+
+  input {
+    margin: 0;
+    padding-left: 42px;
+    z-index: 3;
+  }
+
+  &::before {
+    @include position(absolute, 50% null null 10px);
+    transform: translateY(-50%);
+    color: $color-blue;
+    content: '+1';
+    font-size: 22px;
+    font-weight: $font-weight-bold;
+    text-align: left;
+    z-index: 2;
+  }
+}
+
 
 .recap-container {
   background: $color-grey-lightest;
@@ -277,13 +314,13 @@
 
 .recap-program-categories {
   @include media($bp-mobile-up) {
-    @include display(flex);
-    @include flex-wrap(wrap);
+    display: flex;
+    flex-wrap: wrap;
 
     .program-category {
-      @include align-items(center);
-      @include calc(width, '50% - #{.5 * $spacing-base}');
-      @include display(flex);
+      align-items: center;
+      width: calc(50% - #{.5 * $spacing-base});
+      display: flex;
     }
   }
 
@@ -305,7 +342,7 @@
   font-weight: $font-weight-normal;
 
   @include media($bp-desktop-up) {
-    @include display(flex);
+    display: flex;
 
     .recap-detail-name {
       padding-#{$text-direction-end}: $spacing-base;
@@ -470,8 +507,8 @@
   }
 
   @include media($bp-tablet-up) {
-    @include display(flex);
-    @include flex-wrap(wrap);
+    display: flex;
+    flex-wrap: wrap;
 
     > li {
       width: 50%;
@@ -485,6 +522,55 @@
     &::before {
       top: .3em;
     }
+  }
+}
+
+.screener-members__member-icon {
+
+  // @if $text-direction == 'rtl' {
+  //   @include position(absolute, 0 0 null null);
+  // } @else {
+  //   @include position(absolute, 0 null null 0);
+  // }
+
+  @include size(20px);
+  background-color: $color-blue;
+  border-radius: 10px;
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: 2px;
+
+  &.i-0 {
+    background-color: $color-yellow-access;
+  }
+
+  &.i-1 {
+    background-color: $color-blue;
+  }
+
+  &.i-2 {
+    background-color: $color-blue-bright;
+  }
+
+  &.i-3 {
+    background-color: $color-pink;
+  }
+
+  &.i-4 {
+    background-color: $color-green;
+  }
+
+  &.i-5 {
+    background-color: $color-green-mid;
+  }
+
+  &.i-6 {
+    background-color: $color-grey-mid;
+  }
+
+  &.i-7 {
+    background-color: $color-blue-dark;
   }
 }
 
@@ -510,15 +596,15 @@
 }
 
 .screener-categories {
-  @include align-items(center);
+  align-items: center;
 
   .screener-checkbox {
     padding: 0;
   }
 
   .styled-checkbox-label {
-    @include align-items(center);
-    @include display(flex);
+    align-items: center;
+    display: flex;
 
     &::before {
       margin-#{$text-direction-end}: .5 * $spacing-base;
@@ -527,8 +613,8 @@
   }
 
   .program-category {
-    @include align-items(center);
-    @include display(flex);
+    align-items: center;
+    display: flex;
   }
 
   .program-icon {

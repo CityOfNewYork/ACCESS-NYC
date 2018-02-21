@@ -1,0 +1,137 @@
+<fieldset class="d-block w-100">
+  <div>
+    <div v-if="household._attrs.members > 1">
+
+      <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-members">
+
+        <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
+
+        <div class="p-relative">
+
+          <a class="{{styles.questions}}" href="#question-household-members" data-js="question">
+            {{ __('Household Members', translationID) }}
+            <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+              v-if="errors.all('HouseholdMembers').length > 0 || errors.all('HeadOfHousehold').length > 0">
+              <title>{{ __('Some fields are invalid', translationID) }}</title>
+              <use xlink:href="#icon-warning"></use>
+            </svg>
+          </a>
+
+          <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
+
+            <div v-for="(p, personIndex) in people">
+
+              <div v-if="personIndex != 0">
+
+                <hr v-if="personIndex != 1" class="screener-divider">
+
+                <h4 class="{{styles.labels}}">
+                  {{ __('Tell us about the other people your household.', translationID) }}
+                </h4>
+
+                <div class="m-bottom-2">
+                  <label class="{{styles.labels}}" v-bind:for="'person-' + personIndex + '-relation'">
+                    {{ __('Is this person the head of the household?', translationID) }}
+                  </label>
+
+                  <div class="screener-question-container"
+                    v-bind:class="{'error': errors.has('Person[' + personIndex + '].headOfHousehold', 'HeadOfHousehold')}">
+                    <div class="error-message"
+                      v-if="errors.has('Person[' + personIndex + '].headOfHousehold', 'HeadOfHousehold')">{{ __('At least one head of household is required.', translationID) }}</div>
+                      <div class="screener-radio-buttons m-bottom-2">
+                        <label class="screener-radio screener-label">
+                          <input type="radio" class="screener-radio-input sr-only" value="true"
+                            data-object="people"
+                            data-key="headOfHousehold"
+                            data-type="boolean"
+                            data-vv-delay="1000"
+                            data-vv-scope="HeadOfHousehold"
+                            v-validate="{hoh: true}"
+                            v-bind:data-index="personIndex"
+                            v-bind:name="'Person[' + personIndex + '].headOfHousehold'"
+                            v-bind:checked="p._attrs.headOfHousehold"
+                            v-on:change="setAllAttr($event, false); setAttr($event, true); setAttr($event, '', 'headOfHouseholdRelation'); validate($event)">
+                          <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
+                        </label>
+                        <label class="screener-radio screener-label">
+                          <input type="radio" class="screener-radio-input sr-only" value="false"
+                            data-object="people"
+                            data-key="headOfHousehold"
+                            data-type="boolean"
+                            data-vv-scope="HeadOfHousehold"
+                            v-bind:data-index="personIndex"
+                            v-bind:name="'Person[' + personIndex + '].headOfHousehold'"
+                            v-bind:checked="!p._attrs.headOfHousehold"
+                            v-on:change="setAttr($event, false); validate($event)">
+                          <span class="screener-radio-label">{{ __('No', translationID) }}</span>
+                        </label>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="m-bottom-2">
+                  <div v-if="p._attrs.headOfHousehold === false">
+                    <label class="{{styles.labels}}" v-bind:for="'person-' + personIndex + '-relation'">
+                      <span v-if="people[0]._attrs.headOfHousehold">{{ __('What is this person’s relationship to you?', translationID) }}</span>
+                      <span v-else>{{ __('What is this person’s relationship to the head of the household?', translationID) }}</span>
+                      <span class="c-red">*</span>
+                    </label>
+                    <div class="screener-question-container"
+                      v-bind:class="{'error': errors.has('HouseholdMembers.Person[' + personIndex + '].headOfHouseholdRelation')}">
+                      <div class="error-message" v-if="errors.has('HouseholdMembers.Person[' + personIndex + '].headOfHouseholdRelation')">
+                        v{ errors.first('HouseholdMembers.Person[' + personIndex + '].headOfHouseholdRelation') }
+                      </div>
+                      <select class="screener-select" required
+                        data-vv-as="head of household relation"
+                        data-vv-scope="HouseholdMembers"
+                        v-validate="{required: true}"
+                        v-model="p._attrs.headOfHouseholdRelation"
+                        v-bind:id="'person-' + personIndex + '-relation'"
+                        v-bind:name="'Person[' + personIndex + '].headOfHouseholdRelation'">
+                        {% for option in headOfHouseholdRelationOptions %}
+                        <option value="{{ option.value }}">
+                          {{ __(option.text, translationID) }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="{{styles.labels}}" v-bind:for="'person-' + personIndex + '-age'">
+                    {{ __('How old are they?', translationID) }}
+                    <span class="c-red">*</span>
+                  </label>
+                  <div class="screener-question-container"
+                    v-bind:class="{'error': errors.has('HouseholdMembers.Person[' + personIndex + '].age')}">
+                    <div class="error-message" v-if="errors.has('HouseholdMembers.Person[' + personIndex + '].age')">
+                      v{ errors.first('HouseholdMembers.Person[' + personIndex + '].age') }
+                    </div>
+                    <input type="number" min="0" maxlength="3" pattern="[0-9]" step="1" required
+                      data-object="people"
+                      data-key="age"
+                      data-type="integer"
+                      data-vv-as="age"
+                      data-vv-scope="HouseholdMembers"
+                      v-validate="{required: true, max: 3, min: 0, regex: '[0-9]', numeric: true}"
+                      v-bind:data-index="personIndex"
+                      v-bind:id="'person-' + personIndex + '-age'"
+                      v-bind:name="'Person[' + personIndex + '].age'"
+                      v-on:change="setAttr">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</fieldset>

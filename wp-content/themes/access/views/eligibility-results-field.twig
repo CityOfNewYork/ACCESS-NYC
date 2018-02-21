@@ -1,0 +1,197 @@
+{% set translationID = 'field-screener' %}
+
+{% extends 'base.twig' %}
+
+{% block head %}
+<meta name="theme-color" content="#112E51">
+<link rel="manifest" href="{{theme.path}}/manifest-screener-field.4858bd3264978e3d0c842ace2f8b7f931084.json">
+<meta name="robots" content="noindex,nofollow,noarchive">
+{% endblock %}
+
+{% block header %}
+<header class="site-header">
+  <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark b-bottom b-white b-4">
+      <svg class="icon icon-logo-full" width="163">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
+      </svg>
+    <div class="d-flex ai-center hide-for-print">
+      <a href="/peu/" class="btn btn-primary btn-small" data-js="reload">{{ __('New Client', translationID) }}</a>
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block content %}
+  {% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
+  <main class="main-content screener-field layout" id="content" data-js="results">
+    <div class="layout__body bg-white">
+
+      <form method="post" action="{{ action }}" class="w-100p p-2" novalidate data-js="final-results">
+
+        <h4>{{__('Finalize your results.', translationID)}}</h4>
+
+        <a class="d-block btn btn-primary share-toggle" href="#finalize-your-results"
+           data-js="simple-toggle"
+           data-reverse="#finalize-your-results-close"
+           data-scroll-offset="20">{{ __('Finalize Your Results', translationID) }}</a>
+        <div id="finalize-your-results" class="screener-disclaimer m-0 hidden" aria-hidden="true">
+          <input type="hidden" name="url" value="{{ url }}" readonly>
+          <input type="hidden" name="programs" value="{{ programs }}" readonly>
+          <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
+          <p>{{ __('Once you finalize your results, you won\'t be able to remove any more programs.', translationID) }}</p>
+          <div class="d-flex">
+            <button type="submit" class="f-1 btn btn-primary btn-small m-0"
+                    data-js="track"
+                    data-track-key="Results: Finalize"
+                    data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/finalize"}]'>
+              {{ __('Finalize', translationID) }}
+            </button>
+            <button class="f-1 btn btn-secondary btn-small m-left" id="finalize-your-results-close"
+                    data-js="track"
+                    data-track-key="Results: Keep Working"
+                    data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/keep-working"}]'>
+              {{ __('Keep Working', translationID) }}
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="save-your-results p-2 hidden" aria-hidden="true" data-js="share-results">
+        <h4>{{__('Save your results.', translationID)}}</h4>
+
+        <div class="d-flex">
+
+          <div class="f-1 p-right">
+
+            <a class="d-block btn btn-primary" href="javascript:window.print()" data-js="track" data-track-key="Results: Print" data-track-data='[{"DCS.dcsuri": "print"}]'>{{__('Print', translationID)}}</a>
+
+          </div>
+
+          <div class="f-1 p-right">
+
+            <a class="d-block btn btn-primary share-toggle js-show-disclaimer" href="#share-by-sms"
+              data-js="simple-toggle"
+              data-scroll-offset="20">{{__('Text', translationID)}}</a>
+            <div id="share-by-sms" class="share-form js-needs-disclaimer hidden">
+              <form method="post" action="{{ action }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
+                <input type="hidden" name="url" value="{{ url }}" readonly>
+                <input type="hidden" name="hash" value="{{ hash }}" readonly>
+                <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
+                <div class="share-form-controls">
+                  <div class="phone-us">
+                    <input type="tel" name="to" placeholder="{{__('Phone Number', translationID)}}">
+                  </div>
+                  <div class="share-form-controls__right">
+                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
+                    {% include 'partials/share-form-spinner.twig' %}
+                    <div class="success-message">{{__('Sent!', translationID)}}</div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+          <div class="f-1">
+
+            <a class="d-block btn btn-primary share-toggle js-show-disclaimer" href="#share-by-email"
+              data-js="simple-toggle"
+              data-scroll-offset="20">{{__('Email', translationID)}}</a>
+            <div id="share-by-email" class="share-form js-needs-disclaimer hidden">
+              <form method="post" action="{{ action }}" class="js-share-form" novalidate>
+                <input type="hidden" name="action" value="email_send" readonly>
+                <input type="hidden" name="url" value="{{ url }}"  readonly>
+                <input type="hidden" name="hash" value="{{ hash }}"  readonly>
+                <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
+                <div class="share-form-controls">
+                  <input type="email" name="to" placeholder="{{__('Email address', translationID)}}" required>
+                  <div class="share-form-controls__right">
+                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
+                    {% include 'partials/share-form-spinner.twig' %}
+                    <div class="success-message">{{__('Sent!', translationID)}}</div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+
+        {% include 'partials/share-form-disclaimer.twig' %}
+
+      </div>
+
+      <div class="p-2">
+
+        <h4>{{__('Save final results.', translationID)}}</h4>
+
+        <form method="post" action="{{ action }}" class="w-100p" novalidate>
+          <input name="action" value="response_update" class="w-100 m-bottom">
+          <input name="url" value="{{ url }}" readonly class="w-100 m-bottom">
+          <input name="programs" value="{{ programs }}" readonly class="w-100 m-bottom">
+          <input name="GUID" value="{{ guid }}" maxlength="13" readonly class="w-100">
+          <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Submit', translationID)}}</button>
+        </form>
+
+      </div>
+
+      <div class="content-body">
+
+        {% if selectedPrograms | length %}
+        <div class="screener-qualified-programs selected-programs m-0 p-horizontal-2" data-js="selected-programs">
+          <h3 class="screener-qualified-programs-heading" data-js="programs-title">
+            <span data-js="programs-singular" {% if selectedPrograms | length > 1 %}class="hidden hide-for-print" aria-hidden="true"{% endif %}>{{__('This is the program for you in the categories you selected.', translationID)}}</span>
+            <span data-js="programs-plural" {% if selectedPrograms | length == 1 %}class="hidden hide-for-print" aria-hidden="true"{% endif %}>{{__('These are programs for you in the categories you selected.', translationID)}}</span>
+          </h3>
+          <div class="m-bottom-2" data-js="programs-list">
+            {% for post in selectedPrograms %}
+            {% include 'partials/post-teaser-block-field.twig' with {'show_apply': true } %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if additionalPrograms | length %}
+        <div class="screener-qualified-programs other-programs m-0 p-horizontal-2" data-js="additional-programs">
+          <h3 class="screener-other-qualified-programs-heading" data-js="programs-title">
+            <span data-js="programs-length">{{ additionalPrograms | length }}</span>
+            <span data-js="programs-singular" {% if additionalPrograms | length > 1 %}class="hidden hide-for-print" aria-hidden="true"{% endif %}>{{__('additional program', translationID)}}</span>
+            <span data-js="programs-plural" {% if additionalPrograms | length == 1 %}class="hidden hide-for-print" aria-hidden="true"{% endif %}>{{__('additional programs', translationID)}}</span>
+          </h3>
+          <div class="m-bottom-2" data-js="programs-list">
+            {% for post in additionalPrograms %}
+            {% include 'partials/post-teaser-block-field.twig' %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </main>
+  {% include 'partials/localized-strings-share.twig' %}
+{% endblock %}
+
+{% block webtrends %}
+{% include 'partials/scripts-field-webtrends.twig' %}
+{% endblock %}
+
+{% block scripts_head %}
+{% include 'partials/scripts-field-segment.twig' %}
+{% endblock %}
+
+{% block scripts_footer %}
+<script>
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
+    {
+      'label': {{ __('Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.', translationID)|trim|json_encode() }},
+      'slug': 'MSG_RELOAD'
+    }
+  ]);
+</script>
+{% endblock %}

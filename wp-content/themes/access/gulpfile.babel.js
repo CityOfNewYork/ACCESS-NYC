@@ -1,5 +1,6 @@
 // WordPress Starterkit Gulpfile
 // (c) Blue State Digital
+// Maintained by NYC Opportunity
 
 // TASKS
 // ------
@@ -19,7 +20,13 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import path from 'path';
 import buffer from 'vinyl-buffer';
 import sourcestream from 'vinyl-source-stream';
+import es from 'event-stream';
 import p from './package.json';
+import envify from 'envify/custom';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+
+const NODE_ENV = process.env.NODE_ENV;
 
 const $ = gulpLoadPlugins();
 const reload = function() {
@@ -43,84 +50,114 @@ function handleError() {
 // BUILD SUBTASKS
 // ---------------
 // Styles
-gulp.task('styles_dev', () => {
-  return gulp.src([
-    `${src}/scss/style.scss`,
-    `${src}/scss/style-*.scss`
-  ])
-  .pipe($.sourcemaps.init())
-  .pipe($.sass({
-    includePaths: ['node_modules']
-      .concat(require('bourbon').includePaths)
-      .concat(require('bourbon-neat').includePaths)
-  }).on('error', $.notify.onError()).on('error', $.sass.logError))
-  // .pipe($.autoprefixer('last 2 versions'))
-  .pipe($.sourcemaps.write('./'))
-  .pipe(gulp.dest('./'))
-});
-
 gulp.task('styles', () => {
+  let plugins = [
+    autoprefixer('last 2 versions'),
+    cssnano()
+  ];
   return gulp.src([
-    `${src}/scss/style.scss`,
+    `${src}/scss/style-latin.scss`,
     `${src}/scss/style-*.scss`
   ]).pipe($.jsonToSass({
     jsonPath: `${src}/variables.json`,
-    scssPath: `${src}/_variables.json.scss`
+    scssPath: `${src}/scss/_variables-json.scss`
   }))
   .pipe($.sourcemaps.init())
   .pipe($.sass({
     includePaths: ['node_modules']
       .concat(require('bourbon').includePaths)
       .concat(require('bourbon-neat').includePaths)
-  }).on('error', $.notify.onError()).on('error', $.sass.logError))
-  // .pipe($.autoprefixer())
-  .pipe($.cleanCss())
+  })
+  .on('error', $.notify.onError())
+  .on('error', $.sass.logError))
+  .pipe($.postcss(plugins))
+  .pipe($.hashFilename())
   .pipe($.sourcemaps.write('./'))
   .pipe(gulp.dest('./'));
 });
 
+// Hashing files
+let hashfiles = [
+  'manifest-screener-field.json',
+  'manifest.json'
+];
+
+gulp.task('hashfiles', (callback) => {
+  let oldhashfiles = [];
+  for (let i = hashfiles.length - 1; i >= 0; i--) {
+    oldhashfiles[i] = hashfiles[i].split('.').join('.*.');
+  }
+  del(oldhashfiles, callback);
+  gulp.src(hashfiles)
+  .pipe($.hashFilename({
+    "format": "{name}.{hash}{size}{ext}"
+  }))
+  .pipe(gulp.dest('./'));
+})
 
 // Script Linter
 gulp.task('lint', () =>
-  gulp.src(`${src}/js/**/*.js`)
-    .pipe($.eslint({
-      "parser": "babel-eslint",
-      "rules": {
-        "strict": 0
+    gulp.src(`${src}/js/**/*.js`)
+      .pipe($.eslint({
+        "parser": "babel-eslint",
+        "rules": {
+          "strict": 0
+        }
       }
-    }
-))
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failOnError()))
+  ))
+  .pipe($.eslint.format())
+  .pipe($.if(!browserSync.active, $.eslint.failOnError()))
 );
 
 
 // Scripts
 gulp.task('scripts', () => {
-  const b = browserify({
-    entries: `${src}/js/main.js`,
-    debug: true,
-    paths: ['node_modules',`${src}/js`]
+  const apps = [
+    'main', 'main.field'
+  ];
+  let tasks = apps.map(function(entry) {
+    const b = browserify({
+      entries: [`${src}/js/${entry}.js`],
+      debug: false,
+      paths: ['node_modules',`${src}/js`]
+    });
+    return b.transform('babelify', {
+      presets: ['es2015']
+    }).transform(
+      // Required in order to process node_modules files
+      { global: true },
+      envify({ NODE_ENV: NODE_ENV })
+    )
+    .bundle()
+    .pipe(sourcestream(`${entry}.js`))
+    .pipe(buffer())
+    .pipe($.hashFilename())
+    .pipe(gulp.dest(`${dist}/js`))
+    .pipe($.uglify())
+    .pipe($.rename((path)=>{
+      if (path.basename.indexOf('.js') > -1) {
+        path.basename.split('.js')[0] += '.min.js';
+      } else {
+        path.basename += '.min';
+      }
+    }))
+    .pipe(gulp.dest(`${dist}/js`));
   });
-  return b.transform('babelify', {
-    presets: ['es2015']
-  })
-  .bundle()
-  .pipe(sourcestream('main.js'))
-  .pipe(buffer())
-  .pipe(gulp.dest(`${dist}/js`))
-  .pipe($.sourcemaps.init({loadMaps: true}))
-  .pipe($.uglify())
-  .pipe($.sourcemaps.write('./'))
-  .pipe($.rename('main.min.js'))
-  .pipe(gulp.dest(`${dist}/js`));
+  return es.merge.apply(null, tasks);
 });
 
 
-// Clean
-gulp.task('clean', (callback) => {
+// Clean Scripts
+gulp.task('clean (scripts)', (callback) => {
   del([`${dist}/js/*`], callback);
 });
+
+// Clean Styles
+gulp.task('clean (styles)', (callback) => {
+  del(['style-*.css', 'style-*.css.map'], callback);
+});
+
+gulp.task('clean', ['clean (scripts)', 'clean (styles)']);
 
 
 // Images
@@ -167,17 +204,19 @@ gulp.task('default', ['build'], function() {
     ghostMode: {
       scroll: true
     },
-    open:true
+    open:false
   });
 
   // Watch .scss files
-  gulp.watch(`${src}/scss/**/*.scss`, ['styles_dev', reload]);
+  gulp.watch(`${src}/scss/**/*.scss`, ['clean (styles)', 'styles', reload]);
 
   // Watch .js files
-  gulp.watch(`${src}/js/**/*.js`, ['lint', 'scripts', reload]);
+  gulp.watch(`${src}/js/**/*.js`, ['lint', 'clean (scripts)', 'scripts', reload]);
 
   // Watch image files
   gulp.watch(`${src}/img/**/*`, ['images', reload]);
+
+  gulp.watch(hashfiles, ['hashfiles', reload]);
 
   gulp.watch([
     'access/**/*',
@@ -188,6 +227,4 @@ gulp.task('default', ['build'], function() {
 });
 
 // Build
-gulp.task('build', ['clean'], () => {
-  gulp.start('styles', 'lint', 'scripts', 'svg-sprites');
-});
+gulp.task('build', ['clean', 'styles', 'lint', 'scripts', 'svg-sprites', 'hashfiles']);

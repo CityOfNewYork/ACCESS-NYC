@@ -15,10 +15,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="{{theme.path}}/assets/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="{{theme.path}}/assets/favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="{{theme.path}}/assets/favicon/favicon-16x16.png">
-<link rel="manifest" href="{{theme.path}}/assets/favicon/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
+
+<meta name="msapplication-TileColor" content="#112E51">
 <meta name="msapplication-TileImage" content="{{theme.path}}/assets/favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
 
 {# Adding a meta description for each page if it exists #}
 {% if page_meta_desc != '' %}
@@ -26,6 +25,4 @@
 {% endif %}
 
 <link rel="icon" type="image/x-icon" href="{{theme.path}}/assets/favicon/favicon.ico">
-{# TODO(jjandoc): ?v=timestamp is added here for cache busting during debugging. It'd be great if there could be a cachebusting value that increments with each release.#}
-<link rel="stylesheet" href="{{theme.path}}/style{% if language_code == 'ar' or language_code == 'ur' or language_code == 'ko' or language_code == 'zh-hant' %}-{{ language_code }}{% endif %}.css{% if is_debug %}?v={{ date().timestamp }}{% endif %}" type="text/css">
 {{function('wp_head')}}

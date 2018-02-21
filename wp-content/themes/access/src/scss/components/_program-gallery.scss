@@ -17,17 +17,23 @@
 
 .program-gallery-touts {
   @include media($bp-tablet-up) {
+
     $cards-per-row: 2;
-    @include display(flex);
-    @include flex-wrap(wrap);
+
+    display: flex;
+
+    flex-wrap: wrap;
 
     .program-card {
-      @include calc(width, '#{percentage(1/$cards-per-row)} - #{$spacing-base/$cards-per-row}');
+
+      width: calc(#{percentage(1/$cards-per-row)} - #{$spacing-base/$cards-per-row});
       margin-#{$text-direction-end}: $spacing-base;
 
       &:nth-child(#{$cards-per-row}n) {
         margin-#{$text-direction-end}: 0;
       }
+
     }
+
   }
 }

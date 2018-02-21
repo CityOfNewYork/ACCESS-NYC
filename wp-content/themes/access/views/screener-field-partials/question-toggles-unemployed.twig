@@ -1,0 +1,87 @@
+{% if (question.multipleOccupants.question) %}
+<label class="{{styles.labels}}">
+  {{ question.multipleOccupants.question }}
+</label>
+{% endif %}
+
+<div class="screener-radio-buttons">
+  <label class="screener-radio screener-label">
+    <input class="js-screener-toggle screener-radio-input sr-only" value="true" type="radio" name="toggle-{{question.dataKey}}"
+      data-js="toggle"
+      data-type="boolean"
+      data-shows="#js-toggle-{{question.dataKey}}">
+    <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
+  </label>
+  <label class="screener-radio screener-label">
+    <input class="js-screener-toggle screener-radio-input sr-only" value="false" type="radio" name="toggle-{{question.dataKey}}" checked
+      data-js="toggle"
+      data-type="boolean"
+      data-hides="#js-toggle-{{question.dataKey}}"
+      data-object="people"
+      data-key="{{question.dataKey}},{{question.dataSubKey}}"
+      v-on:change="setAllAttr">
+    <span class="screener-radio-label">{{ __('No', translationID) }}</span>
+  </label>
+</div>
+
+<div id="js-toggle-{{question.dataKey}}" class="hidden">
+
+  <div class="m-top-2">
+
+    <label class="{{styles.labels}}">
+      {{ question.multipleOccupants.who }}
+    </label>
+    <div v-for="(p, personIndex) in people" class="screener-checkbox">
+
+      <label class="styled-checkbox screener-label m-top">
+        <input type="checkbox" value="1"
+          data-type="boolean"
+          data-object="people"
+          data-key="{{question.dataKey}}"
+          v-bind:data-index="personIndex"
+          v-bind:name="'Person[' + personIndex + '].{{question.dataKey}}'"
+          v-bind:checked="p._attrs.{{question.dataKey}}"
+          v-on:change="setAttr">
+        <span class="styled-checkbox-label">
+          <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+        </span>
+      </label>
+      {{ question.multipleOccupants.subProunoun }}
+      <div v-if="p._attrs.{{question.dataKey}}">
+        <label class="screener-label d-block m-bottom m-top">
+          <span v-if="personIndex == 0">
+            {{ question.multipleOccupants.subPronoun }}
+          </span><span v-else>
+            {{ question.singleOccupant.subPronoun }}
+          </span>
+          <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+          {{ question.multipleOccupants.subQuestion }}
+        </label>
+        <div class="screener-radio-buttons m-bottom-2">
+          <label class="screener-radio screener-label">
+            <input type="radio" value="true" class="screener-radio-input sr-only"
+              data-type="boolean"
+              data-object="people"
+              data-key="{{question.dataSubKey}}"
+              v-bind:data-index="personIndex"
+              v-bind:name="'Person[' + personIndex + '].{{question.dataSubKey}}'"
+              v-on:change="setAttr">
+            <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
+          </label>
+          <label class="screener-radio screener-label">
+            <input class="screener-radio-input sr-only" value="false" type="radio" checked
+              data-type="boolean"
+              data-object="people"
+              data-key="{{question.dataSubKey}}"
+              v-bind:data-index="personIndex"
+              v-bind:name="'Person[' + personIndex + '].{{question.dataSubKey}}'"
+              v-on:change="setAttr">
+            <span class="screener-radio-label">{{ __('No', translationID) }}</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

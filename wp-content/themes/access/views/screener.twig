@@ -17,378 +17,381 @@
       {% include 'screener-partials/recap.twig' with {'formAction': formAction} %}
     </form>
   </div>
+</main>
+{% endblock %}
 
-  <script type="template/html" id="screener-income-template">
-    {% include 'screener-partials/template-income.twig' %}
-  </script>
-  <script type="template/html" id="screener-expense-template">
-    {% include 'screener-partials/template-expense.twig' %}
-  </script>
+{% block scripts_footer %}
+<script type="template/html" id="screener-income-template">
+  {% include 'screener-partials/template-income.twig' %}
+</script>
+<script type="template/html" id="screener-expense-template">
+  {% include 'screener-partials/template-expense.twig' %}
+</script>
 
-  <script>
-    window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
-    window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
-    {% for category in categories %}
-    {
-      "label": {{ category.name|json_encode() }},
-      "slug": {{ category.slug|json_encode() }}
-    },
-    {% endfor %}
-    {
-      "label": {{ __('Child', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Child"
-    },
-    {
-      "label": {{ __('Foster Child', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "FosterChild"
-    },
-    {
-      "label": {{ __('Step-child', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "StepChild"
-    },
-    {
-      "label": {{ __('Grandchild', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Grandchild"
-    },
-    {
-      "label": {{ __('Spouse', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Spouse"
-    },
-    {
-      "label": {{ __('Parent', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Parent"
-    },
-    {
-      "label": {{ __('Foster Parent', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "FosterParent"
-    },
-    {
-      "label": {{ __('Step-parent', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "StepParent"
-    },
-    {
-      "label": {{ __('Grandparent', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Grandparent"
-    },
-    {
-      "label": {{ __('Sister/Brother', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "SisterBrother"
-    },
-    {
-      "label": {{ __('Step-sister/Step-brother', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "StepSisterStepBrother"
-    },
-    {
-      "label": {{ __('Boyfriend/Girlfriend', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "BoyfriendGirlfriend"
-    },
-    {
-      "label": {{ __('Domestic Partner', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "DomesticPartner"
-    },
-    {
-      "label": {{ __('Unrelated', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Unrelated"
-    },
-    {
-      "label": {{ __('Other', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Other"
-    },
-    {
-      "label": {{ __('You', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Self"
-    },
-    {
-      "label": {{ __('Head of the household', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "HeadOfHousehold"
-    },
-    {
-      "label": {{ __('Renting', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "livingRenting"
-    },
-    {
-      "label": {{ __('Owns the home or apartment', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "livingOwner"
-    },
-    {
-      "label": {{ __('Staying with a friend', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "livingStayingWithFriend"
-    },
-    {
-      "label": {{ __('In a hotel', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "livingHotel"
-    },
-    {
-      "label": {{ __('In a shelter or homeless', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "livingShelter"
-    },
-    {
-      "label": {{ __('Prefer not to say', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "livingPreferNotToSay"
-    },
-    {
-      "label": {{ __('NYCHA Housing', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "NYCHA"
-    },
-    {
-      "label": {{ __('Non-Regulated or Market Rate apartment', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "MarketRate"
-    },
-    {
-      "label": {{ __('Rent controlled or rent stabilized apartment', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "RentControlled"
-    },
-    {
-      "label": {{ __('Rent Regulated Hotel/Single Room', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "RentRegulatedHotel"
-    },
-    {
-      "label": {{ __('Section 213 apartments', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Section213"
-    },
-    {
-      "label": {{ __('Limited Dividend development apartments', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "LimitedDividendDevelopment"
-    },
-    {
-      "label": {{ __('Mitchell-Lama apartments', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "MitchellLama"
-    },
-    {
-      "label": {{ __('Redevelopment Company apartments', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "RedevelopmentCompany"
-    },
-    {
-      "label": {{ __('Housing Development Fund Company (HDFC) Cooperative', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "HDFC"
-    },
-    {
-      "label": {{ __('Family Home', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "FamilyHome"
-    },
-    {
-      "label": {{ __('Condo', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Condo"
-    },
-    {
-      "label": {{ __('Student', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "student"
-    },
-    {
-      "label": {{ __('Pregnant', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "pregnant"
-    },
-    {
-      "label": {{ __('Unemployed', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "unemployed"
-    },
-    {
-      "label": {{ __('Worked in the last 18 months', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "unemployedWorkedLast18Months"
-    },
-    {
-      "label": {{ __('Full-time student', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "studentFulltime"
-    },
-    {
-      "label": {{ __('Blind or visually impaired', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "blind"
-    },
-    {
-      "label": {{ __('Has disabilities', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "disabled"
-    },
-    {
-      "label": {{ __('Served in the U.S. Armed Forces, National Guard or Reserves', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "veteran"
-    },
-    {
-      "label": {{ __('Medicaid', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "benefitsMedicaid"
-    },
-    {
-      "label": {{ __('Disability-related Medicaid', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "benefitsMedicaidDisability"
-    },
-    {
-      "label": {{ __('wages, salaries, tips', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Wages"
-    },
-    {
-      "label": {{ __('self-employment Income', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "SelfEmployment"
-    },
-    {
-      "label": {{ __('unemployment benefits', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Unemployment"
-    },
-    {
-      "label": {{ __('Cash Assistance grant', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "CashAssistance"
-    },
-    {
-      "label": {{ __('disability-related Medicaid', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "DisabilityMedicaid"
-    },
-    {
-      "label": {{ __('Supplemental Security Income (SSI)', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "SSI"
-    },
-    {
-      "label": {{ __('Social Security Dependent Benefits', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "SSDependent"
-    },
-    {
-      "label": {{ __('Social Security Disability Benefits', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "SSDisability"
-    },
-    {
-      "label": {{ __('Social Security Survivor\'s Benefits', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "SSSurvivor"
-    },
-    {
-      "label": {{ __('Social Security Retirement Benefits', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "SSRetirement"
-    },
-    {
-      "label": {{ __('New York State Disability Benefits', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "NYSDisability"
-    },
-    {
-      "label": {{ __('Veteran\'s Pension or Benefits', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Veteran"
-    },
-    {
-      "label": {{ __('Government or Private Pension', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Pension"
-    },
-    {
-      "label": {{ __('Withdrawals from Deferred Compensation (IRA, Keogh, etc.)', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "DeferredComp"
-    },
-    {
-      "label": {{ __('Worker\'s Compensation', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "WorkersComp"
-    },
-    {
-      "label": {{ __('alimony (received)', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Alimony"
-    },
-    {
-      "label": {{ __('boarder or lodger', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Boarder"
-    },
-    {
-      "label": {{ __('gifts/contributions (received)', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Gifts"
-    },
-    {
-      "label": {{ __('rental income', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Rental"
-    },
-    {
-      "label": {{ __('investment income (interest, dividends, and profit from selling stocks)', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Investment"
-    },
-    {
-      "label": {{ __('Child Care', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "ChildCare"
-    },
-    {
-      "label": {{ __('Child Support', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "ChildSupport"
-    },
-    {
-      "label": {{ __('Dependent Care', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "DependentCare"
-    },
-    {
-      "label": {{ __('Rent', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Rent"
-    },
-    {
-      "label": {{ __('Medical expense', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Medical"
-    },
-    {
-      "label": {{ __('Heating', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Heating"
-    },
-    {
-      "label": {{ __('Cooling', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Cooling"
-    },
-    {
-      "label": {{ __('Mortgage', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Mortgage"
-    },
-    {
-      "label": {{ __('Utilities', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Utilities"
-    },
-    {
-      "label": {{ __('Telephone', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "Telephone"
-    },
-    {
-      "label": {{ __('Third Party Insurance Premiums', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "InsurancePremiums"
-    },
-    {
-      "label": {{ __('Every week', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "weekly"
-    },
-    {
-      "label": {{ __('Every 2 weeks', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "biweekly"
-    },
-    {
-      "label": {{ __('Monthly', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "monthly"
-    },
-    {
-      "label": {{ __('Twice a month', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "semimonthly"
-    },
-    {
-      "label": {{ __('Every year', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "yearly"
-    },
-    {
-      "label": {{ __('This entry must be a number between 1 and 8.', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "ERROR_HOUSEHOLD"
-    },
-    {
-      "label": {{ __('This entry can only contain numbers.', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "ERROR_INTEGER"
-    },
-    {
-      "label": {{ __('This entry can only contain numbers.', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "ERROR_FLOAT"
-    },
-    {
-      "label": {{ __('This entry is required to continue.', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "ERROR_REQUIRED"
-    },
-    {
-      "label": {{ __('A valid New York City zip code is required.', 'accessnyc-screener')|trim|json_encode() }},
-      "slug": "ERROR_ZIP"
-    }]);
-  </script>
-  <script type="text/template" id="screener-member-option-template">
-    <% _.each(people, function(person, i) { %>
-    <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-      <input
-          type="checkbox"
-          name="Person[<%= i %>].<%= attribute %>"
-          value="1"
-          data-type="boolean"
-          <% if ((attribute === 'livingRentalOnLease' && person.leasee) || (attribute === 'livingOwnerOnDeed' && person.owner)) { print('checked') } %>>
-      <span class="styled-checkbox-label">
-        <span class="recap-inline-item"><%= person.relation %></span>
-        <span class="recap-inline-item"><%= person.age %></span>
-      </span>
-    </label>
-    <% }); %>
-  </script>
+<script>
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
+  {% for category in categories %}
+  {
+    "label": {{ category.name|json_encode() }},
+    "slug": {{ category.slug|json_encode() }}
+  },
+  {% endfor %}
+  {
+    "label": {{ __('Child', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Child"
+  },
+  {
+    "label": {{ __('Foster Child', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "FosterChild"
+  },
+  {
+    "label": {{ __('Step-child', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "StepChild"
+  },
+  {
+    "label": {{ __('Grandchild', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Grandchild"
+  },
+  {
+    "label": {{ __('Spouse', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Spouse"
+  },
+  {
+    "label": {{ __('Parent', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Parent"
+  },
+  {
+    "label": {{ __('Foster Parent', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "FosterParent"
+  },
+  {
+    "label": {{ __('Step-parent', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "StepParent"
+  },
+  {
+    "label": {{ __('Grandparent', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Grandparent"
+  },
+  {
+    "label": {{ __('Sister/Brother', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "SisterBrother"
+  },
+  {
+    "label": {{ __('Step-sister/Step-brother', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "StepSisterStepBrother"
+  },
+  {
+    "label": {{ __('Boyfriend/Girlfriend', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "BoyfriendGirlfriend"
+  },
+  {
+    "label": {{ __('Domestic Partner', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "DomesticPartner"
+  },
+  {
+    "label": {{ __('Unrelated', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Unrelated"
+  },
+  {
+    "label": {{ __('Other', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Other"
+  },
+  {
+    "label": {{ __('You', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Self"
+  },
+  {
+    "label": {{ __('Head of the household', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "HeadOfHousehold"
+  },
+  {
+    "label": {{ __('Renting', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "livingRenting"
+  },
+  {
+    "label": {{ __('Owns the home or apartment', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "livingOwner"
+  },
+  {
+    "label": {{ __('Staying with a friend', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "livingStayingWithFriend"
+  },
+  {
+    "label": {{ __('In a hotel', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "livingHotel"
+  },
+  {
+    "label": {{ __('In a shelter or homeless', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "livingShelter"
+  },
+  {
+    "label": {{ __('Prefer not to say', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "livingPreferNotToSay"
+  },
+  {
+    "label": {{ __('NYCHA Housing', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "NYCHA"
+  },
+  {
+    "label": {{ __('Non-Regulated or Market Rate apartment', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "MarketRate"
+  },
+  {
+    "label": {{ __('Rent controlled or rent stabilized apartment', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "RentControlled"
+  },
+  {
+    "label": {{ __('Rent Regulated Hotel/Single Room', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "RentRegulatedHotel"
+  },
+  {
+    "label": {{ __('Section 213 apartments', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Section213"
+  },
+  {
+    "label": {{ __('Limited Dividend development apartments', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "LimitedDividendDevelopment"
+  },
+  {
+    "label": {{ __('Mitchell-Lama apartments', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "MitchellLama"
+  },
+  {
+    "label": {{ __('Redevelopment Company apartments', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "RedevelopmentCompany"
+  },
+  {
+    "label": {{ __('Housing Development Fund Company (HDFC) Cooperative', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "HDFC"
+  },
+  {
+    "label": {{ __('Family Home', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "FamilyHome"
+  },
+  {
+    "label": {{ __('Condo', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Condo"
+  },
+  {
+    "label": {{ __('Student', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "student"
+  },
+  {
+    "label": {{ __('Pregnant', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "pregnant"
+  },
+  {
+    "label": {{ __('Unemployed', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "unemployed"
+  },
+  {
+    "label": {{ __('Worked in the last 18 months', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "unemployedWorkedLast18Months"
+  },
+  {
+    "label": {{ __('Full-time student', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "studentFulltime"
+  },
+  {
+    "label": {{ __('Blind or visually impaired', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "blind"
+  },
+  {
+    "label": {{ __('Has disabilities', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "disabled"
+  },
+  {
+    "label": {{ __('Served in the U.S. Armed Forces, National Guard or Reserves', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "veteran"
+  },
+  {
+    "label": {{ __('Medicaid', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "benefitsMedicaid"
+  },
+  {
+    "label": {{ __('Disability-related Medicaid', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "benefitsMedicaidDisability"
+  },
+  {
+    "label": {{ __('wages, salaries, tips', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Wages"
+  },
+  {
+    "label": {{ __('self-employment Income', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "SelfEmployment"
+  },
+  {
+    "label": {{ __('unemployment benefits', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Unemployment"
+  },
+  {
+    "label": {{ __('Cash Assistance grant', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "CashAssistance"
+  },
+  {
+    "label": {{ __('disability-related Medicaid', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "DisabilityMedicaid"
+  },
+  {
+    "label": {{ __('Supplemental Security Income (SSI)', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "SSI"
+  },
+  {
+    "label": {{ __('Social Security Dependent Benefits', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "SSDependent"
+  },
+  {
+    "label": {{ __('Social Security Disability Benefits', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "SSDisability"
+  },
+  {
+    "label": {{ __('Social Security Survivor\'s Benefits', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "SSSurvivor"
+  },
+  {
+    "label": {{ __('Social Security Retirement Benefits', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "SSRetirement"
+  },
+  {
+    "label": {{ __('New York State Disability Benefits', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "NYSDisability"
+  },
+  {
+    "label": {{ __('Veteran\'s Pension or Benefits', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Veteran"
+  },
+  {
+    "label": {{ __('Government or Private Pension', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Pension"
+  },
+  {
+    "label": {{ __('Withdrawals from Deferred Compensation (IRA, Keogh, etc.)', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "DeferredComp"
+  },
+  {
+    "label": {{ __('Worker\'s Compensation', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "WorkersComp"
+  },
+  {
+    "label": {{ __('alimony (received)', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Alimony"
+  },
+  {
+    "label": {{ __('boarder or lodger', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Boarder"
+  },
+  {
+    "label": {{ __('gifts/contributions (received)', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Gifts"
+  },
+  {
+    "label": {{ __('rental income', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Rental"
+  },
+  {
+    "label": {{ __('investment income (interest, dividends, and profit from selling stocks)', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Investment"
+  },
+  {
+    "label": {{ __('Child Care', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ChildCare"
+  },
+  {
+    "label": {{ __('Child Support', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ChildSupport"
+  },
+  {
+    "label": {{ __('Dependent Care', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "DependentCare"
+  },
+  {
+    "label": {{ __('Rent', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Rent"
+  },
+  {
+    "label": {{ __('Medical expense', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Medical"
+  },
+  {
+    "label": {{ __('Heating', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Heating"
+  },
+  {
+    "label": {{ __('Cooling', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Cooling"
+  },
+  {
+    "label": {{ __('Mortgage', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Mortgage"
+  },
+  {
+    "label": {{ __('Utilities', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Utilities"
+  },
+  {
+    "label": {{ __('Telephone', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "Telephone"
+  },
+  {
+    "label": {{ __('Third Party Insurance Premiums', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "InsurancePremiums"
+  },
+  {
+    "label": {{ __('Every week', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "weekly"
+  },
+  {
+    "label": {{ __('Every 2 weeks', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "biweekly"
+  },
+  {
+    "label": {{ __('Monthly', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "monthly"
+  },
+  {
+    "label": {{ __('Twice a month', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "semimonthly"
+  },
+  {
+    "label": {{ __('Every year', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "yearly"
+  },
+  {
+    "label": {{ __('This entry must be a number between 1 and 8.', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ERROR_HOUSEHOLD"
+  },
+  {
+    "label": {{ __('This entry can only contain numbers.', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ERROR_INTEGER"
+  },
+  {
+    "label": {{ __('This entry can only contain numbers.', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ERROR_FLOAT"
+  },
+  {
+    "label": {{ __('This entry is required to continue.', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ERROR_REQUIRED"
+  },
+  {
+    "label": {{ __('A valid New York City zip code is required.', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ERROR_ZIP"
+  }]);
+</script>
+<script type="text/template" id="screener-member-option-template">
+  <% _.each(people, function(person, i) { %>
+  <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
+    <input
+        type="checkbox"
+        name="Person[<%= i %>].<%= attribute %>"
+        value="1"
+        data-type="boolean"
+        <% if ((attribute === 'livingRentalOnLease' && person.leasee) || (attribute === 'livingOwnerOnDeed' && person.owner)) { print('checked') } %>>
+    <span class="styled-checkbox-label">
+      <span class="recap-inline-item"><%= person.relation %></span>
+      <span class="recap-inline-item"><%= person.age %></span>
+    </span>
+  </label>
+  <% }); %>
+</script>
 {% endblock %}

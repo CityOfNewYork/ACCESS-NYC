@@ -1,0 +1,587 @@
+{% set translationID = 'field-screener' %}
+
+{% set locations = [
+  {value: 'manhattan', text: 'Manhattan'},
+  {value: 'bronx', text: 'Bronx'},
+  {value: 'queens', text: 'Queens'},
+  {value: 'brooklyn', text: 'Brooklyn'},
+  {value: 'statenIsland', text: 'Staten Island'}
+] %}
+
+{% set screenerLocations = [
+  {value: 'community event', text: 'community event'},
+  {value: 'phone call', text: 'phone call'},
+  {value: 'door knock', text: 'door knock'},
+  {value: 'partner referral', text: 'partner referral'}
+] %}
+
+{% set currentCategories = [
+  {value: 'snap', text: 'SNAP', slug: 'supplemental-nutrition-assistance-program-snap', code: 'S2R007'},
+  {value: 'wic', text: 'Women, Infants, and Children (WIC)', slug: 'women-infants-and-children-wic', code: 'S2R022'},
+  {value: 'cash-assistance', text: 'Cash Assistance', slug: 'cash-assistance', code: 'S2R010'},
+  {value: 'dhe', text: 'DHE (Disabled Homeowners’ Exemption)', slug: 'disabled-homeowners-exemption-dhe', code: 'S2R017'},
+  {value: 'drie', text: 'DRIE (Disability Rent Increase Exemption)', slug: 'disability-rent-increase-exemption-drie', code: 'S2R005'},
+  {value: 'scrie', text: 'SCRIE (Senior Citizen Rent Increase Exemption)', slug: 'senior-citizens-rent-increase-exemption-​scrie', code: 'S2R015'},
+  {value: 'section-8', text: 'Section 8', slug: 'section-8', code: 'S2R013'},
+  {value: 'cityfeps', text: 'CITYFEPS (Family Eviction Prevention Supplement)'},
+  {value: 'hasa', text: 'HASA (HIV/AIDS Services)'},
+  {value: 'hud-vash', text: 'HUD-VASH (HUD-Veterans Affairs Supportive Housing)'},
+  {value: 'linc', text: 'LINC (Living in Communities Rental Assistance)'},
+  {value: 'nycha', text: 'NYCHA (NYC Housing Authority Housing)'},
+  {value: 'pension', text: 'Government or Private Pension'},
+  {value: 'sche', text: 'SCHE (Senior Citizen Homeowners’ Exemption)'},
+  {value: 'seps', text: 'SEPS (Special Exit and Prevention Supplement)'},
+  {value: 'social-security', text: 'Social Security'},
+  {value: 'ssd', text: 'SSD (Social Security Disability)'},
+  {value: 'ss', text: 'SS (Supplemental Security)'},
+  {value: 'state-feps', text: 'State FEPS (Family Eviction Prevention Supplement)'},
+  {value: 'tbra', text: 'TBRA (Tenant-Based Rental Assistance)'}
+] %}
+
+{% set languageOptions = [
+  {value: 'en', text: 'English'},
+  {value: 'sp', text: 'Spanish'},
+  {value: 'other', text: 'Other'}
+] %}
+
+{% set phoneTypes = [
+  {value: 'cell', text: 'Cell'},
+  {value: 'home', text: 'Home'},
+  {value: 'work', text: 'Work'}
+] %}
+
+{% set contactTimes = [
+  {value: 'morning', text: 'Morning (10:00 AM - 12:00 PM)'},
+  {value: 'noon', text: 'Noon (12:00PM - 2:00PM)'},
+  {value: 'afternoon', text: 'Afternoon (2:00PM - 4:00PM)'},
+  {value: 'evening', text: 'Evening (4:00PM - 6:00PM)'},
+  {value: 'saturday', text: 'Saturday (10:00am - 6:00pm)'}
+] %}
+
+{% set headOfHouseholdRelationOptions = [
+  {value: '', text: 'Click to select relationship'},
+  {value: 'Child', text: 'Child'},
+  {value: 'FosterChild', text: 'Foster Child'},
+  {value: 'StepChild', text: 'Step-child'},
+  {value: 'Grandchild', text: 'Grandchild'},
+  {value: 'Spouse', text: 'Spouse'},
+  {value: 'Parent', text: 'Parent'},
+  {value: 'FosterParent', text: 'Foster Parent'},
+  {value: 'StepParent', text: 'Step-parent'},
+  {value: 'Grandparent', text: 'Grandparent'},
+  {value: 'SisterBrother', text: 'Sister/Brother'},
+  {value: 'StepSisterStepBrother', text: 'Step-sister/Step-brother'},
+  {value: 'BoyfriendGirlfriend', text: 'Boyfriend/Girlfriend'},
+  {value: 'DomesticPartner', text: 'Domestic Partner'},
+  {value: 'Unrelated', text: 'Unrelated'},
+  {value: 'Other', text: 'Related in some other way'}
+] %}
+
+{% set benefitOptions = [
+  {
+    question: 'Does anyone in your household have <span class="c-blue">disabilities</span>?',
+    who: 'Who currently has <span class="c-blue">disabilities</span>?',
+    label: 'Have disabilities',
+    dataKey: 'disabled',
+    labelSingular: 'Has disabilities'
+  },
+  {
+    question: 'Is anyone in your household currently <span class="c-blue">pregnant</span>?',
+    who: 'Who is currently <span class="c-blue">pregnant</span>?',
+    label: 'Pregnant',
+    dataKey: 'pregnant'
+  },
+  {
+    question: 'Is anyone in your household <span class="c-blue">blind or visually impaired</span>?',
+    who: 'Who is currently <span class="c-blue">blind or visually impaired</span>?',
+    label: 'Blind or visually impaired',
+    dataKey: 'blind'
+  },
+  {
+    question: 'Did anyone in the household serve in the <span class="c-blue">U.S. Armed Forces, National Guard or Reserves</span>?',
+    who: 'Who has <span class="c-blue">served</span>?',
+    label: 'Served in the U.S. Armed Forces, National Guard or Reserves',
+    dataKey: 'veteran'
+  },
+  {
+    question: 'Is anyone in your household currently on <span class="c-blue">Medicaid</span>?',
+    who: 'Who is on <span class="c-blue">Medicaid</span>?',
+    label: 'Medicaid',
+    dataKey: 'benefitsMedicaid'
+  },
+  {
+    question: 'Is anyone currently on <span class="c-blue">disability related Medicaid</span>?',
+    who: 'Who is on <span class="c-blue">disability related Medicaid</span>?',
+    label: 'Disability related Medicaid',
+    dataKey: 'benefitsMedicaidDisability'
+  }
+] %}
+
+{% set studentOptions = {
+  label: 'Student',
+  dataKey: 'student',
+  subLabel: 'Full-time student',
+  dataSubKey: 'studentFulltime',
+  multipleOccupants: {
+    question: 'Is anyone in your household a <span class="c-blue">student</span>?',
+    who: 'Who is a <span class="c-blue">student</span>?',
+    subPronoun: 'Are',
+    subQuestion: 'a full-time student?'
+  },
+  singleOccupant: {
+    subPronoun: 'Is',
+    subQuestion: 'Are you a full-time student?'
+  }
+} %}
+
+{% set employmentOptions = {
+  label: 'Unemployed',
+  dataKey: 'unemployed',
+  subLabel: 'Worked in the last 18 months',
+  dataSubKey: 'unemployedWorkedLast18Months',
+  multipleOccupants: {
+    question: 'Is anyone in your household currently <span class="c-blue">unemployed</span>?',
+    who: 'Who is <span class="c-blue">unemployed</span>?',
+    subPronoun: 'Have',
+    subQuestion: 'worked in the last 18 months?'
+  },
+  singleOccupant: {
+    subPronoun: 'Has',
+    subQuestion: 'Did you work in the last 18 months?'
+  }
+} %}
+
+{% set incomeOptions = [
+  {value: '', text:'Click to add an income type'},
+  {value: 'Wages', text:'Wages, salaries, tips'},
+  {value: 'Alimony', text:'Alimony received'},
+  {value: 'Boarder', text:'Boarder or lodger'},
+  {value: 'CashAssistance', text:'Cash Assistance grant'},
+  {value: 'ChildSupport', text:'Child support'},
+  {value: 'DisabilityMedicaid', text:'Disability-related Medicaid'},
+  {value: 'Gifts', text:'Gifts/contributions received'},
+  {value: 'Pension', text:'Government or Private Pension'},
+  {value: 'Investment', text:'Investment income interest, dividends, and profit from selling stocks'},
+  {value: 'NYSDisability', text:'New York State Disability Benefits'},
+  {value: 'Rental', text:'Rental income'},
+  {value: 'SelfEmployment', text: 'Self-employment Income'},
+  {value: 'SSDependent', text:'Social Security Dependent Benefits'},
+  {value: 'SSDisability', text:'Social Security Disability Benefits'},
+  {value: 'SSSurvivor', text:'Social Security Survivor’s Benefits'},
+  {value: 'SSRetirement', text:'Social Security Retirement Benefits'},
+  {value: 'SSI', text:'Supplemental Security Income SSI'},
+  {value: 'Unemployment',  text: 'Unemployment benefits'},
+  {value: 'Veteran', text:'Veteran’s Pension or Benefits'},
+  {value: 'DeferredComp', text:'Withdrawals from Deferred Compensation IRA, Keogh, etc.'},
+  {value: 'WorkersComp', text:'Worker’s Compensation'}
+] %}
+
+{% set expenseOptions = [
+  {value: 'ChildCare', text: 'Child Care'},
+  {value: 'ChildSupport', text: 'Child Support'},
+  {value: 'Cooling', text: 'Cooling'},
+  {value: 'DependentCare', text: 'Dependent Care'},
+  {value: 'Heating', text: 'Heating'},
+  {value: 'Medical', text: 'Medical expense'},
+  {value: 'Mortgage', text: 'Mortgage'},
+  {value: 'Rent', text: 'Rent'},
+  {value: 'Telephone', text: 'Telephone'},
+  {value: 'InsurancePremiums', text: 'Third Party Insurance Premiums'},
+  {value: 'Utilities', text: 'Utilities'}
+] %}
+
+{% set frequencyOptions = [
+  {value: 'weekly', text: 'Every week'},
+  {value: 'biweekly', text: 'Every 2 weeks'},
+  {value: 'monthly', text: 'Every month'},
+  {value: 'semimonthly', text: 'Twice a month'},
+  {value: 'yearly', text: 'Every year'}
+] %}
+
+{% set rentingOptions = [
+  {value: 'livingRenting', text: 'Renting'},
+  {value: 'livingOwner', text: 'You or a household member owns the home or apartment'},
+  {value: 'livingStayingWithFriend', text: 'Staying with a friend'},
+  {value: 'livingHotel', text: 'In a hotel'},
+  {value: 'livingShelter', text: 'In a shelter or homeless'}
+] %}
+
+{% set housingOptions = [
+  {value: '', text: 'Click to select a rental type'},
+  {value: 'Condo', text: 'Condo'},
+  {value: 'FamilyHome', text: 'Family Home'},
+  {value: 'HDFC', text: 'Housing Development Fund Company (HDFC) Cooperative'},
+  {value: 'LimitedDividendDevelopment', text: 'Limited Dividend development apartments'},
+  {value: 'MitchellLama', text: 'Mitchell-Lama apartments'},
+  {value: 'NYCHA', text: 'NYCHA Housing'},
+  {value: 'MarketRate', text: 'Non-Regulated or Market Rate apartment'},
+  {value: 'RedevelopmentCompany', text: 'Redevelopment Company apartments'},
+  {value: 'RentControlled', text: 'Rent controlled or rent stabilized apartment'},
+  {value: 'RentRegulatedHotel', text: 'Rent Regulated Hotel/Single Room'},
+  {value: 'Section213', text: 'Section 213 apartments'},
+  {value: '', text: 'None of these apply'}
+] %}
+
+{% set styles = {
+  sections: 'type-h1 m-left-2 p-top-2 d-inline-block p-right',
+  questions: 'type-h2 c-black m-0 d-block p-2 td-none',
+  labels: 'type-h3 c-blue-dark ff-sans-serif d-block',
+  explainations: 'type-h4 c-black m-0',
+  warning: 'icon icon-warning bottom-3 f-right animated fadeIn',
+  confirm: 'btn btn-primary btn-next btn-small d-block w-100 animated fadeInUp m-top',
+  alert: 'alert status-urgent animated fadeInUp m-top'
+} %}
+
+{% extends 'base.twig' %}
+
+{% block head %}
+<meta name="theme-color" content="#112E51">
+<link rel="manifest" href="{{theme.path}}/manifest-screener-field.4858bd3264978e3d0c842ace2f8b7f931084.json">
+<meta name="robots" content="noindex,nofollow,noarchive">
+{% endblock %}
+
+{% block header %}
+<header class="site-header">
+  <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark">
+    <svg class="icon icon-logo-full" width="163">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
+    </svg>
+    <div class="d-flex ai-center hide-for-print">
+      <a class="btn btn-primary btn-small" data-js="reload">{{ __('New Client', translationID) }}</a>
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block content %}
+<main class="main-content layout screener-field" id="content">
+
+  <div class="layout__body bg-white" data-js="view">
+
+    <form action="/peu/results/" style="border:none;padding-top:0;padding-bottom:0" data-js="screener-field">
+
+      <div id="vue">
+
+        <div class="animated o-00" id="page-admin" data-js="page">
+
+          <div class="p-horizontal-2">
+
+            <h1 class="{{styles.sections}}" id="first-steps">
+              <a href="#first-steps" class="c-blue-dark td-none">{{ __('First Steps', translationID) }}</a>
+            </h1>
+              {% include 'screener-field-partials/question-staff.twig' with {locations: locations} %}
+              {% include 'screener-field-partials/disclaimer.twig' %}
+
+            <div v-if="disclaimer">
+
+              <a class="{{ styles.confirm }}" href="#page-screener" data-vv-scope="Staff" v-on:click="validate">
+                {{ __('Let\'s Get Started', translationID) }}
+              </a>
+
+            </div>
+
+            <div class="{{ styles.alert }}" v-if="errors.all('Staff').length > 0">
+              <div class="alert-icon">
+                <svg class="icon icon-warning d-block">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-warning"></use>
+                </svg>
+              </div>
+              <div class="alert-body">
+                {{ __('Some required fields are not filled out.', translationID) }}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="animated o-00" id="page-screener" data-js="page" data-vv-scope="page-screener">
+
+          <div class="p-horizontal-2">
+
+            <h1 class="{{styles.sections}}" id="client-information">
+              <a href="#client-information" class="c-blue-dark td-none">{{ __('Client Information', translationID) }}</a>
+            </h1><span class="screener-step">(1 of 4)</span>
+              {% include 'screener-field-partials/question-client-needs.twig' with {
+                categories: categories
+              } %}
+              {% include 'screener-field-partials/question-client-services.twig' with {
+                categories: currentCategories
+              } %}
+              {% include 'screener-field-partials/question-client-basics.twig' %}
+              {% include 'screener-field-partials/question-client-contact.twig' with {
+                languages: languageOptions,
+                phoneTypes: phoneTypes,
+                contactTimes: contactTimes
+              } %}
+
+            <h1 class="{{styles.sections}}" id="household">
+              <a href="#household" class="c-blue-dark td-none">{{ __('Household', translationID) }}</a>
+            </h1><span class="screener-step">(2 of 4)</span>
+              {% include 'screener-field-partials/question-household-information.twig' %}
+              {% include 'screener-field-partials/question-household-members.twig' with {
+                headOfHouseholdRelationOptions: headOfHouseholdRelationOptions
+              } %}
+              {% include 'screener-field-partials/question-household-member-details.twig' with {
+                benefitOptions: benefitOptions,
+                studentOptions: studentOptions,
+                employmentOptions: employmentOptions
+              } %}
+
+            <h1 class="{{styles.sections}}" id="household-income">
+              <a href="#household-income" class="c-blue-dark td-none">{{ __('Household Income', translationID) }}
+            </h1><span class="screener-step">(3 of 4)</span>
+              {% include 'screener-field-partials/question-household-income.twig' with {
+                incomeOptions: incomeOptions,
+                frequencyOptions: frequencyOptions
+              } %}
+              {% include 'screener-field-partials/question-household-total-savings.twig' %}
+              {% include 'screener-field-partials/question-household-expenses.twig' with {
+                expenseOptions: expenseOptions,
+                frequencyOptions: frequencyOptions
+              } %}
+
+            <h1 class="{{styles.sections}}" id="housing">
+              <a href="#housing" class="c-blue-dark td-none">{{ __('Housing', translationID) }}</a>
+            </h1><span class="screener-step">(4 of 4)</span>
+              {% include 'screener-field-partials/question-housing-situation.twig' with {
+                rentingOptions: rentingOptions,
+                housingOptions: housingOptions
+              } %}
+
+            <div>
+
+              <a class="{{ styles.confirm }}" href="#page-recap"
+                v-on:click="validate">
+                {{ __('Confirm', translationID) }}
+              </a>
+
+            </div>
+
+            <div class="{{ styles.alert }}" v-if="errors.all().length > 0">
+              <div class="alert-icon">
+                <svg class="icon icon-warning d-block">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-warning"></use>
+                </svg>
+              </div>
+              <div class="alert-body">
+                {{ __('Some required fields are not filled out.', translationID) }}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="animated o-00" id="page-recap" data-js="page">
+
+          <div class="p-horizontal-2">
+
+            <h1 class="{{styles.sections}}" id="confirmation">
+              <a href="#confirmation" class="c-blue-dark td-none">{{ __('Confirmation', translationID) }}</a>
+            </h1>
+            {% include 'screener-field-partials/recap.twig' with {'formAction': formAction} %}
+
+            <div id="screener-recaptcha-container" class="recap-captcha hidden">
+              <p>{{ __('Check the "I’m not a robot" box below and click Continue to get your results.', translationID) }}</p>
+              <div class="screener-question-container">
+                <div id="screener-recaptcha"></div>
+              </div>
+            </div>
+
+            <div>
+
+              <div class="d-flex jc-center" data-js="recaptcha"></div>
+
+              <button type="button" class="{{ styles.confirm }}" data-js="submit" data-action="{{ formAction }}" v-if="!submitting">
+                {{ __('Yes, continue to my results', translationID) }}
+              </button>
+              <div v-else class="d-flex jc-center">
+                {% include 'partials/spinner.twig' %}
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</main>
+{% endblock %}
+
+{% block webtrends %}
+{% include 'partials/scripts-field-webtrends.twig' %}
+{% endblock %}
+
+{% block scripts_head %}
+{% include 'partials/scripts-field-segment.twig' %}
+{% endblock %}
+
+{% block scripts_footer %}
+<script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise&gated=gated"></script> {# IE Support https://polyfill.io #}
+<script type="text/javascript">
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
+  {% for category in categories %}
+  {
+    "label": {{ category.name|json_encode()|replace({'&amp;': '&'}) }},
+    "slug": {{ category.slug|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in currentCategories %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in currentCategories %}{% if item.code %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.code|json_encode() }}
+  },
+  {% endif %}{% endfor %}
+  {% for item in locations %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in languageOptions %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in phoneTypes %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in contactTimes %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in headOfHouseholdRelationOptions %}{% if item.value != '' %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endif %}{% endfor %}
+  {% for item in incomeOptions %}{% if item.value != '' %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endif %}{% endfor %}
+  {% for item in frequencyOptions %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in expenseOptions %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in rentingOptions %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endfor %}
+  {% for item in housingOptions %}{% if item.value != '' %}
+  {
+    "label": {{ __(item.text, translationID)|trim|json_encode() }},
+    "slug": {{ item.value|json_encode() }}
+  },
+  {% endif %}{% endfor %}
+  {% for item in benefitOptions %}
+  {
+    {% if item.labelSingular %}
+    "label": {{ __(item.labelSingular, translationID)|trim|json_encode() }},
+    {% else %}
+    "label": {{ __(item.label, translationID)|trim|json_encode() }},
+    {% endif %}
+    "slug": {{ item.dataKey|json_encode() }}
+  },
+  {% endfor %}
+  {
+    "label": {{ __(studentOptions.label, translationID)|trim|json_encode() }},
+    "slug": {{ studentOptions.dataKey|json_encode() }}
+  },
+  {
+    "label": {{ __(studentOptions.subLabel, translationID)|trim|json_encode() }},
+    "slug": {{ studentOptions.dataSubKey|json_encode() }}
+  },
+  {
+    "label": {{ __(employmentOptions.label, translationID)|trim|json_encode() }},
+    "slug": {{ employmentOptions.dataKey|json_encode() }}
+  },
+  {
+    "label": {{ __(employmentOptions.subLabel, translationID)|trim|json_encode() }},
+    "slug": {{ employmentOptions.dataSubKey|json_encode() }}
+  },
+  {
+    "label": {{ __('Prefer not to say', translationID)|trim|json_encode() }},
+    "slug": "livingPreferNotToSay"
+  },
+  {
+    "label": {{ __('You', translationID)|trim|json_encode() }},
+    "slug": "you"
+  },
+  {
+    "label": {{ __('Head of the household', translationID)|trim|json_encode() }},
+    "slug": "headOfHousehold"
+  },
+  {
+    "label": {{ __('This entry must be a number between 1 and 8.', translationID)|trim|json_encode() }},
+    "slug": "ERROR_HOUSEHOLD"
+  },
+  {
+    "label": {{ __('This entry can only contain numbers.', translationID)|trim|json_encode() }},
+    "slug": "ERROR_INTEGER"
+  },
+  {
+    "label": {{ __('This entry can only contain numbers.', translationID)|trim|json_encode() }},
+    "slug": "ERROR_FLOAT"
+  },
+  {
+    "label": {{ __('This entry is required to continue.', translationID)|trim|json_encode() }},
+    "slug": "ERROR_REQUIRED"
+  },
+  {
+    "label": {{ __('A valid New York City zip code is required.', translationID)|trim|json_encode() }},
+    "slug": "ERROR_ZIP"
+  },
+  {
+    "label": {{ __('Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.', translationID)|trim|json_encode() }},
+    "slug": "MSG_RELOAD"
+  },
+  {
+    "label": {{ __('First Name', translationID)|trim|json_encode() }},
+    "slug": "firstName"
+  },
+  {
+    "label": {{ __('Last Name', translationID)|trim|json_encode() }},
+    "slug": "lastName"
+  },
+  {
+    "label": {{ __('Email', translationID)|trim|json_encode() }},
+    "slug": "email"
+  }
+  ]);
+</script>
+{% endblock %}

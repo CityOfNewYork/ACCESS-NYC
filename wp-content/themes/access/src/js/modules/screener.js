@@ -105,6 +105,8 @@ class Screener {
       this._validateIntegerField(e.currentTarget);
     }).on('blur', '[data-type="float"]', (e) => {
       this._validateFloatField(e.currentTarget);
+    }).on('blur', '[data-type="zip"]', (e) => {
+      this._validateZipField(e.currentTarget);
     }).on('keyup', '[data-type="float"]', (e) => {
       this._limitFloatFieldLength(e.currentTarget);
     }).on('keydown', 'input[type="number"]', (e) => {
@@ -786,7 +788,8 @@ class Screener {
     // If there is a value for the element, make sure that it is rounded to
     // an integer and not negative.
     if (val && !_.isNaN(parseInt(val, 10)) && _.isNumber(parseInt(val, 10))) {
-      $input.val(Math.abs(parseInt(val, 10)));
+      let parsed = Math.abs(parseInt(val, 10));
+      $input.val(parsed);
     } else if (val) {
       // Otherwise, show an error message as long as a value was entered.
       this._showError(el, Screener.ErrorMessage.INTEGER);
@@ -1107,6 +1110,7 @@ class Screener {
   _submit(postUrl) {
     /* eslint-disable no-console, no-debugger */
     if (Utility.getUrlParameter('debug') === '1') {
+      console.dir(this);
       console.log(this._getDroolsJSON());
       console.log(JSON.stringify(this._getDroolsJSON()));
       debugger;

@@ -38,6 +38,14 @@ small,
   @include typography-supplemental();
 }
 
+.ff-serif {
+  font-family: $font-family-serif
+}
+
+.ff-sans-serif {
+  font-family: $font-family-sans
+}
+
 blockquote {
   @include margin(rem(strip-units(.5*$spacing-base)) null rem(strip-units(1.5*$spacing-base)));
   @include typography-blockquote();
