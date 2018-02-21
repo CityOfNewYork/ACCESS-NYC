@@ -72,37 +72,41 @@ function handleError() {
 /**
  * Build Styles
  */
-gulp.task('styles', () => {
+gulp.task('styles', (callback) => {
   let plugins = [
     autoprefixer('last 2 versions'),
     cssnano()
   ];
-  return gulp.src([
-    `${SRC}/scss/style-latin.scss`,
-    `${SRC}/scss/style-*.scss`
-  ]).pipe($.jsonToSass({
-    jsonPath: `${SRC}/variables.json`,
-    scssPath: `${SRC}/scss/_variables-json.scss`
-  }))
-  .pipe($.sourcemaps.init())
-  .pipe($.sass({
-    includePaths: ['node_modules']
-      .concat(require('bourbon').includePaths)
-      .concat(require('bourbon-neat').includePaths)
-  })
-  .on('error', $.notify.onError())
-  .on('error', $.sass.logError))
-  .pipe($.postcss(plugins))
-  .pipe($.hashFilename({format: HASH_FORMAT}))
-  .pipe($.sourcemaps.write('./'))
-  .pipe(gulp.dest('./'));
+
+  gulp.src([
+      `${SRC}/scss/style-latin.scss`,
+      `${SRC}/scss/style-*.scss`
+    ]).pipe($.jsonToSass({
+      jsonPath: `${SRC}/variables.json`,
+      scssPath: `${SRC}/scss/_variables-json.scss`
+    }))
+    .pipe($.sourcemaps.init())
+    .pipe($.sass({
+      includePaths: ['node_modules']
+        .concat(require('bourbon').includePaths)
+        .concat(require('bourbon-neat').includePaths)
+    })
+    .on('error', $.notify.onError())
+    .on('error', $.sass.logError))
+    .pipe($.postcss(plugins))
+    .pipe($.hashFilename({format: HASH_FORMAT}))
+    .pipe($.sourcemaps.write('./'))
+    .pipe(gulp.dest('./'));
+
+  callback(null); // pass null to the callback for synchronous tasks
 });
 
 /**
  * Clean Styles
  */
 gulp.task('clean (styles)', (callback) => {
-  del(['style-*.css', 'style-*.css.map'], callback);
+  del(['style-*.css', 'style-*.css.map']);
+  callback(null); // pass null to the callback for synchronous tasks
 });
 
 
@@ -129,7 +133,7 @@ gulp.task('scripts', (callback) => {
       sourceMaps: true // must be true for sourcemaps path
     }).transform(
       {global: true},
-      envify({NODE_ENV: 'development'})
+      envify({NODE_ENV: NODE_ENV})
     ).bundle()
     .pipe(sourcestream(`${entry}.js`))
     .pipe(buffer())
@@ -164,23 +168,23 @@ gulp.task('scripts', (callback) => {
   let rundev = es.merge.apply(null, apps.map(dev));
   let runprod = es.merge.apply(null, apps.map(prod));
 
-  return callback;
+  callback(null); // pass null to the callback for synchronous tasks
 });
 
 /**
  * Script Linter
  */
 gulp.task('lint', () =>
-    gulp.src(`${SRC}/js/**/*.js`)
-      .pipe($.eslint({
-        "parser": "babel-eslint",
-        "rules": {
-          "strict": 0
+  gulp.src(`${SRC}/js/**/*.js`)
+        .pipe($.eslint({
+          "parser": "babel-eslint",
+          "rules": {
+            "strict": 0
+          }
         }
-      }
-  ))
-  .pipe($.eslint.format())
-  .pipe($.if(!browserSync.active, $.eslint.failOnError()))
+    ))
+    .pipe($.eslint.format())
+    .pipe($.if(!browserSync.active, $.eslint.failOnError()))
 );
 
 
@@ -192,7 +196,8 @@ gulp.task('lint', () =>
  * Clean Scripts
  */
 gulp.task('clean (scripts)', (callback) => {
-  del([`${DIST}/js/*`], callback);
+  del([`${DIST}/js/*`]);
+  callback(null); // pass null to the callback for synchronous tasks
 });
 
 /**
@@ -200,17 +205,18 @@ gulp.task('clean (scripts)', (callback) => {
  */
 gulp.task('hashfiles', (callback) => {
   let oldhashfiles = [];
-
   for (let i = HASH_FILES.length - 1; i >= 0; i--) {
     oldhashfiles[i] = HASH_FILES[i].split('.').join('.*.');
   }
 
-  del(oldhashfiles, callback);
+  del(oldhashfiles);
 
   gulp.src(HASH_FILES)
-  .pipe($.hashFilename({format: HASH_FORMAT}))
-  .pipe(gulp.dest('./'));
-})
+    .pipe($.hashFilename({format: HASH_FORMAT}))
+    .pipe(gulp.dest('./'));
+
+  callback(null); // pass null to the callback for synchronous tasks
+});
 
 /**
  * Cleaning
@@ -220,34 +226,36 @@ gulp.task('clean', ['clean (scripts)', 'clean (styles)']);
 /**
  * Images
  */
-gulp.task('images', () => {
-  return gulp.src([
-    `${SRC}/img/**/*.jpg`,
-    `${SRC}/img/**/*.png`,
-    `${SRC}/img/**/*.gif`,
-    `${SRC}/img/**/*.svg`,
-    `!${SRC}/img/sprite/**/*`
-  ])
-  .pipe($.cache($.imagemin({
-    optimizationLevel: 5,
-    progressive: true,
-    interlaced: true
-  })))
-  .pipe(gulp.dest(`${DIST}/img`))
-  .pipe($.notify({ message: 'Images task complete' }));
-});
+gulp.task('images', () =>
+  gulp.src([
+      `${SRC}/img/**/*.jpg`,
+      `${SRC}/img/**/*.png`,
+      `${SRC}/img/**/*.gif`,
+      `${SRC}/img/**/*.svg`,
+      `!${SRC}/img/sprite/**/*`
+    ])
+    .pipe($.cache($.imagemin({
+      optimizationLevel: 5,
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest(`${DIST}/img`))
+    .pipe($.notify({ message: 'Images task complete' }))
+);
 
 /**
  * SVG Sprite
  */
-gulp.task('svg-sprites', () => {
-  return gulp.src(`${SRC}/img/sprite/**/*.svg`)
-  .pipe($.svgmin())
-  .pipe($.svgstore())
-  .pipe($.rename('icons.svg'))
-  .pipe(gulp.dest(`${DIST}/img`))
-  .pipe($.notify({ message: 'SVG task complete' }));
-});
+gulp.task('svg-sprites', () =>
+  gulp.src(`${SRC}/img/sprite/**/*.svg`)
+    .pipe($.svgmin())
+    .pipe($.svgstore())
+    .pipe($.rename('icons.svg'))
+    .pipe(gulp.dest(`${DIST}/img`))
+    .pipe($.notify({
+      message: 'SVG task complete'
+    }))
+);
 
 
 /**
@@ -255,9 +263,9 @@ gulp.task('svg-sprites', () => {
  */
 
 /**
- * Development (watch)
+ * Watching Tasks
  */
-gulp.task('default', function() {
+gulp.task('default', ['build'], () => {
   // Create a .env file in the theme directory to define this.
   browserSync.init({
     proxy: process.env.WP_DEV_URL,
@@ -298,7 +306,7 @@ gulp.task('default', function() {
 });
 
 /**
- * Production and Pre-deploy (build)
+ * All tasks needed to build the app
  */
 gulp.task('build', [
   'clean',
