@@ -82,6 +82,10 @@ sitemap.xml.gz
 ########
 .sass-cache
 
+# Composer #
+############
+/vendor
+
 # npm #
 #######
 node_modules
