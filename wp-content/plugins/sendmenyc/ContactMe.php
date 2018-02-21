@@ -58,9 +58,10 @@ class ContactMe {
 
 		//results pages have unique email content
 		if ( $this->is_results_url( $_POST['url'] ) ) {
-			$content = $this->content( $url, self::RESULTS_PAGE );
+			$content = $this->content( $url, self::RESULTS_PAGE, $_POST['url'] );
 		} else {
-			$content = $this->content( $url, self::OTHER_PAGE );
+			// $content = $this->content( $url, self::OTHER_PAGE );
+			$content = $this->content( $url, self::OTHER_PAGE, $_POST['url'] );
 		}
 
 		$this->send($recipient,$content);

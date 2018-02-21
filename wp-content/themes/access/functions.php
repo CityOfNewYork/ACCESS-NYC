@@ -432,6 +432,28 @@ class BSDStarterSite extends TimberSite {
     // Determine if page is in print view.
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
 
+    // Get the META description - return english if empty
+    if( ICL_LANGUAGE_CODE != 'en'){
+      $orig_page_id= get_page_by_path(trim( $_SERVER["REQUEST_URI"] , '/'.ICL_LANGUAGE_CODE ))->ID;
+    }else{
+      $orig_page_id= get_page_by_path(trim( $_SERVER["REQUEST_URI"] , '/'))->ID;
+    }
+
+    $page_id = apply_filters( 'wpml_object_id', $orig_page_id, 'page', true, ICL_LANGUAGE_CODE );
+
+    $page_desc = get_field('page_meta_description', $page_id);
+
+    if ($page_desc == ''){
+      $page_desc = get_field('page_meta_description', $orig_page_id);
+    }
+
+    if(is_home()){
+      $context['page_meta_desc'] = get_bloginfo('description');
+    }elseif ($page_id || $page_desc ) {
+      $context['page_meta_desc'] = $page_desc;
+    }
+    // end Get the META description
+
     return $context;
   }
 
@@ -604,6 +626,7 @@ add_filter( 'gathercontent_importer_custom_field_keys', function( $meta_keys ) {
 } );
 // end of GatherContent - Mapped WordPress Field meta_keys edit
 
+
 // add meta description to head
 function access_meta_description($title)
 {
@@ -615,6 +638,7 @@ function access_meta_description($title)
   }
   return $title;
 }
+
 add_action( 'pre_get_document_title', 'access_meta_description', 10, 1);
 // end add meta description to head
 
@@ -705,6 +729,7 @@ function enqueue_language_style($name) {
     '/vendor/nyco/wp-assets/dist/style.php'
   );
 
+  $languages = array('ar', 'ko', 'ur', 'zh-hant');
   error_reporting(0);
   $lang = (ICL_LANGUAGE_CODE === 'en') ? 'default' : ICL_LANGUAGE_CODE;
   error_reporting(WP_DEBUG);

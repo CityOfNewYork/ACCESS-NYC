@@ -5,7 +5,7 @@
   <main class="main-content map js-map" id="content" data-source="/locations/json">
     <div class="map-mapbox js-map-mapbox"></div>
     <div class="map-controls js-map-controls">
-      <input type="text" class="map-search js-map-searchbox" placeholder="Enter an address or zip code">
+      <input type="text" class="map-search js-map-searchbox" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
       <div class="map-filter-container js-map-filter">
         <a href="#map-filter-settings" class="map-filter-header btn btn-primary btn-block js-toggle-filter js-main-filter-toggle"><span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span></a>
         <div id="map-filter-settings" class="map-filter-body" aria-hidden="true">

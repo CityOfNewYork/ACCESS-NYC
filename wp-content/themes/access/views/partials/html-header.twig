@@ -19,6 +19,11 @@
 <meta name="msapplication-TileColor" content="#112E51">
 <meta name="msapplication-TileImage" content="{{theme.path}}/assets/favicon/ms-icon-144x144.png">
 
+{# Adding a meta description for each page if it exists #}
+{% if page_meta_desc != '' %}
+	<meta name="description" content="{{ page_meta_desc }}">
+{% endif %}
+
 <link rel="icon" type="image/x-icon" href="{{theme.path}}/assets/favicon/favicon.ico">
 
 {{ function('wp_head') }}

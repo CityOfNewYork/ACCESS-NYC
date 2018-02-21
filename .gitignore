@@ -11,22 +11,15 @@ wp-content/backups/
 wp-content/advanced-cache.php
 wp-content/themes/access/.env
 wp-content/wp-cache-config.php
-wp-content/themes/twentyfifteen/*
-wp-content/themes/twentysixteen/*
-wp-content/themes/twentyseventeen/*
-wp-content/plugins/hello.php
-wp-content/plugins/akismet/*
-node_modules
-.idea
-docker-compose.yaml
-docker-compose.yml
-data/
 wp-content/cache/*
 wp-content/cache/supercache/*
+node_modules
+.idea
+data/
 /info.php
 
 # Docker and Docker Image Adds #
-#####################
+################################
 wp-content/plugins/akismet/
 wp-content/plugins/akismet/*
 wp-content/themes/twentysixteen/
@@ -36,8 +29,6 @@ wp-content/themes/twentyfifteen/*
 wp-content/themes/twentyseventeen/
 wp-content/themes/twentyseventeen/*
 wp-content/plugins/hello.php
-docker-compose.yaml
-docker-compose.yml
 
 # WP-Engine Specific #
 ######################

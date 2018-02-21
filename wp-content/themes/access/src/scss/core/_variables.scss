@@ -205,7 +205,7 @@ $text-direction: ltr;
 $text-direction-start: left;
 $text-direction-end: right;
 
-@if $language == 'ar' {
+@if ($language == 'ar') or ($language =='ur') {
   $default-layout-direction: RTL !global;
   // Below variable is used for the USWDS grid which built on an old version
   // of Neat where $layout-direction is used rather than the current name

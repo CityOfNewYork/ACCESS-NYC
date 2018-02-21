@@ -1,9 +1,9 @@
 {
-    "key": "group_58b4a5b63eab0",
-    "title": "Page Fields (Spanish)",
+    "key": "group_5a2eb3125c2a1",
+    "title": "Page Fields (French)",
     "fields": [
         {
-            "key": "field_58b4a5b666cdc",
+            "key": "field_5a2eb31269914",
             "label": "Lead Content",
             "name": "lead",
             "type": "wysiwyg",
@@ -23,7 +23,7 @@
             "delay": 0
         },
         {
-            "key": "field_58b4a5b666d22",
+            "key": "field_5a2eb31269957",
             "label": "Sections",
             "name": "sections",
             "type": "repeater",
@@ -43,7 +43,7 @@
             "collapsed": "field_58b481043081e",
             "sub_fields": [
                 {
-                    "key": "field_58b4a5b67dbd9",
+                    "key": "field_5a2eb31272d64",
                     "label": "Section Title",
                     "name": "section_title",
                     "type": "text",
@@ -63,7 +63,7 @@
                     "append": ""
                 },
                 {
-                    "key": "field_58b4a5b67dce2",
+                    "key": "field_5a2eb31272d9c",
                     "label": "Section Content",
                     "name": "section_content",
                     "type": "wysiwyg",
@@ -85,7 +85,7 @@
             ]
         },
         {
-            "key": "field_5a7b770666791",
+            "key": "field_5a7b571ce00f8",
             "label": "Page Meta Description",
             "name": "page_meta_description",
             "type": "text",
