@@ -731,7 +731,7 @@ function enqueue_language_style($name) {
 
   $languages = array('ar', 'ko', 'ur', 'zh-hant');
   error_reporting(0);
-  $lang = (ICL_LANGUAGE_CODE === 'en') ? 'default' : ICL_LANGUAGE_CODE;
+  $lang = (!in_array(ICL_LANGUAGE_CODE, $languages)) ? 'default' : ICL_LANGUAGE_CODE;
   error_reporting(WP_DEBUG);
 
   $style = Nyco\Enqueue\style("$name-$lang");
