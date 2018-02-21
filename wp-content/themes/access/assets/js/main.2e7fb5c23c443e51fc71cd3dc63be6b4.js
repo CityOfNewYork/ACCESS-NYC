@@ -12096,6 +12096,15 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
     _utility2.default.track(key, data);
   });
 
+  // Webtrends - Capture the search query for on-site search
+  if (~window.location.href.indexOf('?s=')) {
+    var $query = window.location.href;
+    $('head').append('<meta name="WT.oss" content="' +
+    $query.split('?s=')[1] + '">');
+    $('head').append('<meta name="WT.oss_r" content="' +
+    $('.program-card').length + '">');
+  }
+
   // On the search results page, submits the search form when a category is
   // chosen.
   $('.js-program-search-filter').on('change', 'input', function (e) {
@@ -12116,9 +12125,9 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
 
   // Webtrends - Capture the search query for on-site search
   if (~window.location.href.indexOf('?s=')) {
-    var $query = window.location.href;
+    var _$query = window.location.href;
     $('head').append('<meta name="WT.oss" content="' +
-    $query.split('?s=')[1] + '">');
+    _$query.split('?s=')[1] + '">');
     $('head').append('<meta name="WT.oss_r" content="' +
     $('.program-card').length + '">');
   }
@@ -15922,4 +15931,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.5b5633554ac0ac437de39de31b92ab76.js.map
+//# sourceMappingURL=main.2e7fb5c23c443e51fc71cd3dc63be6b4.js.map
