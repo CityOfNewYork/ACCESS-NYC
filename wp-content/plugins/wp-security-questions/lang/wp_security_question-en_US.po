@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp security question\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-08 21:07+0530\n"
+"PO-Revision-Date: 2015-12-08 21:07+0530\n"
+"Last-Translator: Flipper Code <hello@flippercode.com>\n"
+"Language-Team: Flipper Code <hello@flippercode.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-"
+"content/plugins/wp-security-question-lite\n"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/core/class.controller.php:142
+msgid " updated successfully."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/core/class.controller.php:143
+msgid " added successfully. You can manage your "
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/core/class.tabular.php:223
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/core/class.tabular.php:404
+msgid "Selected "
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/core/class.tabular.php:237
+msgid "Manage "
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/core/class.tabular.php:571
+msgid "Filter"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/core/class.tabular.php:631
+msgid "Select Page"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/model.settings.php:28
+msgid "Settings"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/model.settings.php:61
+msgid "Setting(s) saved successfully."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:10
+msgid "Setup Questions"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:21
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:44
+msgid "Question"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:26
+msgid "Remove"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:50
+msgid "Add More..."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:61
+msgid "Login Screen"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:67
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:83
+msgid "Ask Security Question?"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:71
+msgid "Ask security question on login screen."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:77
+msgid "Register Screen"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:87
+msgid "Set security answers on registration screen."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:93
+msgid "Forgot Password Page"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:99
+msgid "Show on Forgot Password Screen"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:103
+msgid "Display security question on forgot password screen."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/modules/settings/views/manage.php:108
+msgid "Save Setting"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:106
+msgid "Security Question"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:112
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:271
+msgid "Your Answer"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:130
+msgid "Your selected questions or answers are wrong."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:153
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:166
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:183
+msgid "ERROR:"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:236
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:241
+msgid "<strong>ERROR:</strong> Security answer is requried."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:257
+msgid "My Security Questions"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:259
+msgid "Choose Question"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:382
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:383
+msgid "Security Questions"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/demolabs/wp-content/plugins/wp-security-question-lite/wp-security-question.php:488
+msgid "Are you sure to delete item?"
+msgstr ""
