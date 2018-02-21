@@ -53,7 +53,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('Nyco\\Enqueue\\script', 'assets/js/main', '.min') }}
+{{ function('enqueue_script', 'assets/js/main', '.min') }}
 <script src="https://www.google.com/jsapi"></script>
 <script>
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
