@@ -1,0 +1,1 @@
+jQuery(document).ready(function(o){var t;for(t=0;t<fcProductPointers.pointers.length;t++)pointer=fcProductPointers.pointers[t],options=o.extend(pointer.options,{close:function(){o.post(fcProductPointers.ajaxurl,{pointer:pointer.pointer_id,action:"dismiss-wp-pointer"})}}),o(pointer.target).pointer(options).pointer("open")});
