@@ -3,7 +3,7 @@
 
 import $ from 'jquery';
 import ShareForm from 'modules/share-form';
-import ScreenerField from 'modules/screener.field';
+import ScreenerField from 'modules/screener-field';
 import Utility from 'modules/utility';
 
 /**
@@ -197,10 +197,9 @@ class ResultsField {
     const data = $(event.currentTarget).serializeArray();
     event.preventDefault();
 
-    /* eslint-disable */
     let payload = {};
-    payload['action']="response_update";
-    for (var i = 0; i<data.length; i++) {
+    payload['action'] = 'response_update';
+    for (let i = 0; i < data.length; i++) {
       payload[data[i].name]=data[i].value;
     }
 
@@ -210,6 +209,7 @@ class ResultsField {
       $(ResultsField.Selectors.SHARE_RESULTS)
         .toggleClass('hidden')
         .prop('aria-hidden', false);
+    /* eslint-disable */
     }).fail((response) => {
       alert('Something went wrong. Please try again later.');
       console.log(response);
