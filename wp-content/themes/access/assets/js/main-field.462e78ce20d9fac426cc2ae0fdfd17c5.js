@@ -29606,7 +29606,15 @@ ResultsField = function () {
     event) {var _this2 = this;
       var action = (0, _jquery2.default)(event.currentTarget).attr('action');
       var data = (0, _jquery2.default)(event.currentTarget).serializeArray();
+      var $submit = (0, _jquery2.default)(event.currentTarget).find('button[type="submit"]');
+      var $buttons = (0, _jquery2.default)(event.currentTarget).find('button');
+      var $spinner = (0, _jquery2.default)(event.currentTarget).find(ResultsField.Selectors.SPINNER);
+
       event.preventDefault();
+
+      $submit.prop('disabled', true);
+      $buttons.prop('style', 'display: none'); // hide buttons
+      $spinner.prop('style', ''); // show spinner
 
       var payload = {};
       payload['action'] = 'response_update';
@@ -29620,14 +29628,19 @@ ResultsField = function () {
         (0, _jquery2.default)(ResultsField.Selectors.SHARE_RESULTS).
         toggleClass('hidden').
         prop('aria-hidden', false);
-        /* eslint-disable */
       }).fail(function (response) {
+        $submit.prop('disabled', false);
+        $buttons.prop('style', ''); // show submit button
+        $spinner.prop('style', 'display: none'); // hide spinner
         alert('Something went wrong. Please try again later.');
-        console.log(response);
+        /* eslint-disable */
+        if (_utility2.default.debug()) console.log(response);
+        /* eslint-enable*/
       }).always(function () {
-        console.log('Submission complete.');
+        /* eslint-disable */
+        if (_utility2.default.debug()) console.log('Submission complete.');
+        /* eslint-enable*/
       });
-      /* eslint-enable*/
     } }]);return ResultsField;}();
 
 
@@ -29646,6 +29659,7 @@ ResultsField.Selectors = {
   'SHARE_HASH': 'input[name="hash"]',
   'SHARE_PROGRAMS': 'input[name="programs"]',
   'SHARE_RESULTS': '[data-js="share-results"]',
+  'SPINNER': '.js-spinner',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
   'PROGRAMS_LIST': '[data-js="programs-list"]',
@@ -33024,43 +33038,35 @@ ShareForm = function () {
         $spinner.setAttribute('style', ''); // show spinner
       }
 
-      return _jquery2.default.post((0, _jquery2.default)(this._el).attr('action'), payload).done(function (response) {
+      return _jquery2.default.post('https://reqres.in/api/users', payload).done(function (response) {
         if (response.success) {
           _this4._showSuccess();
           _this4._isDisabled = true;
-
           (0, _jquery2.default)(_this4._el).one('keyup', 'input', function () {
             (0, _jquery2.default)(_this4._el).removeClass(ShareForm.CssClass.SUCCESS);
             _this4._isDisabled = false;
           });
-
           _this4._track(type); // track successful message
         } else {
           var messageId = response.error === 21211 ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
-
           _this4._showError(messageId);
-
           /* eslint-disable no-console, no-debugger */
-          if (_utility2.default.debug()) console.error(response);
+          if (_utility2.default.debug()) console.dir(response);
           /* eslint-enable no-console, no-debugger */
         }
       }).fail(function (response) {
         _this4._showError(ShareForm.Message.SERVER);
-
         /* eslint-disable no-console, no-debugger */
-        if (_utility2.default.debug()) console.error(response);
+        if (_utility2.default.debug()) console.dir(response);
         /* eslint-enable no-console, no-debugger */
       }).always(function () {
         $inputs.prop('disabled', false); // enable inputs
-
         if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
-
         if ($spinner) {
           $submit.setAttribute('style', ''); // show submit button
-          $spinner.setAttribute('style', 'display: none'); // hide spinner;
+          $spinner.setAttribute('style', 'display: none'); // hide spinner
         }
-
         _this4._isBusy = false;
       });
     }
@@ -33630,7 +33636,7 @@ Utility.track = function (key, data) {
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {
     // format data for Segment
-    var sData = _underscore2.default.reduce(data, function (memo, num) {return Object.assign(memo, num);}, {});
+    var sData = _underscore2.default.reduce(data, function (memo, num) {return _underscore2.default.extend(memo, num);}, {});
     analytics.track(key, sData);
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */
@@ -33669,4 +33675,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.017613d9e2b8a8e1b001dbe854a48583.js.map
+//# sourceMappingURL=main-field.462e78ce20d9fac426cc2ae0fdfd17c5.js.map

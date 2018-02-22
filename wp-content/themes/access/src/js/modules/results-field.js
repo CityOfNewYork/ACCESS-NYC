@@ -195,12 +195,20 @@ class ResultsField {
   _finalResults(event) {
     const action = $(event.currentTarget).attr('action');
     const data = $(event.currentTarget).serializeArray();
+    let $submit = $(event.currentTarget).find('button[type="submit"]');
+    let $buttons = $(event.currentTarget).find('button');
+    let $spinner = $(event.currentTarget).find(ResultsField.Selectors.SPINNER);
+
     event.preventDefault();
+
+    $submit.prop('disabled', true);
+    $buttons.prop('style', 'display: none'); // hide buttons
+    $spinner.prop('style', ''); // show spinner
 
     let payload = {};
     payload['action'] = 'response_update';
     for (let i = 0; i < data.length; i++) {
-      payload[data[i].name]=data[i].value;
+      payload[data[i].name] = data[i].value;
     }
 
     $.post(action, payload).done((response) => {
@@ -209,14 +217,19 @@ class ResultsField {
       $(ResultsField.Selectors.SHARE_RESULTS)
         .toggleClass('hidden')
         .prop('aria-hidden', false);
-    /* eslint-disable */
     }).fail((response) => {
+      $submit.prop('disabled', false);
+      $buttons.prop('style', ''); // show submit button
+      $spinner.prop('style', 'display: none'); // hide spinner
       alert('Something went wrong. Please try again later.');
-      console.log(response);
+      /* eslint-disable */
+      if (Utility.debug()) console.log(response);
+      /* eslint-enable*/
     }).always(() => {
-      console.log('Submission complete.');
+      /* eslint-disable */
+      if (Utility.debug()) console.log('Submission complete.');
+      /* eslint-enable*/
     });
-    /* eslint-enable*/
   }
 }
 
@@ -235,6 +248,7 @@ ResultsField.Selectors = {
   'SHARE_HASH': 'input[name="hash"]',
   'SHARE_PROGRAMS': 'input[name="programs"]',
   'SHARE_RESULTS': '[data-js="share-results"]',
+  'SPINNER': '.js-spinner',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
   'PROGRAMS_LIST': '[data-js="programs-list"]',

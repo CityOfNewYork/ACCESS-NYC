@@ -290,7 +290,7 @@ Utility.track = function(key, data) {
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {
     // format data for Segment
-    let sData = _.reduce(data, (memo, num) => Object.assign(memo, num), {});
+    let sData = _.reduce(data, (memo, num) => _.extend(memo, num), {});
     analytics.track(key, sData);
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */

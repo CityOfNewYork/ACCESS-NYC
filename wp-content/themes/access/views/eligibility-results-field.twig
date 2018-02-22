@@ -41,7 +41,7 @@
           <input type="hidden" name="programs" value="{{ programs }}" readonly>
           <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
           <p>{{ __('Once you finalize your results, you won\'t be able to remove any more programs.', translationID) }}</p>
-          <div class="d-flex">
+          <div class="d-flex jc-center">
             <button type="submit" class="f-1 btn btn-primary btn-small m-0"
                     data-js="track"
                     data-track-key="Results: Finalize"
@@ -54,6 +54,7 @@
                     data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/keep-working"}]'>
               {{ __('Keep Working', translationID) }}
             </button>
+            {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
           </div>
         </div>
 
@@ -86,7 +87,7 @@
                   </div>
                   <div class="share-form-controls__right">
                     <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
-                    {% include 'partials/share-form-spinner.twig' %}
+                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
                     <div class="success-message">{{__('Sent!', translationID)}}</div>
                   </div>
                 </div>
@@ -110,7 +111,7 @@
                   <input type="email" name="to" placeholder="{{__('Email address', translationID)}}" required>
                   <div class="share-form-controls__right">
                     <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
-                    {% include 'partials/share-form-spinner.twig' %}
+                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
                     <div class="success-message">{{__('Sent!', translationID)}}</div>
                   </div>
                 </div>
