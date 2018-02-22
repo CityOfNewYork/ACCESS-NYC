@@ -33038,7 +33038,7 @@ ShareForm = function () {
         $spinner.setAttribute('style', ''); // show spinner
       }
 
-      return _jquery2.default.post('https://reqres.in/api/users', payload).done(function (response) {
+      return _jquery2.default.post((0, _jquery2.default)(this._el).attr('action'), payload).done(function (response) {
         if (response.success) {
           _this4._showSuccess();
           _this4._isDisabled = true;
@@ -33675,4 +33675,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.462e78ce20d9fac426cc2ae0fdfd17c5.js.map
+//# sourceMappingURL=main-field.fb5b7a79cf0c3cefa86fd9be7d878467.js.map

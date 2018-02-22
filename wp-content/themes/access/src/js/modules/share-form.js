@@ -193,7 +193,7 @@ class ShareForm {
       $spinner.setAttribute('style', ''); // show spinner
     }
 
-    return $.post('https://reqres.in/api/users', payload).done((response) => {
+    return $.post($(this._el).attr('action'), payload).done((response) => {
       if (response.success) {
         this._showSuccess();
         this._isDisabled = true;
