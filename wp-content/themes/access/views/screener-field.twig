@@ -9,6 +9,7 @@
 ] %}
 
 {% set screenerLocations = [
+  {value: '', text: 'Click to select location'},
   {value: 'community event', text: 'community event'},
   {value: 'phone call', text: 'phone call'},
   {value: 'door knock', text: 'door knock'},
@@ -331,7 +332,7 @@
               } %}
 
             <h1 class="{{styles.sections}}" id="household-income">
-              <a href="#household-income" class="c-blue-dark td-none">{{ __('Household Income', translationID) }}
+              <a href="#household-income" class="c-blue-dark td-none">{{ __('Household Income', translationID) }}</a>
             </h1><span class="screener-step">(3 of 4)</span>
               {% include 'screener-field-partials/question-household-income.twig' with {
                 incomeOptions: incomeOptions,

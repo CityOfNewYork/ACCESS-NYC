@@ -189,8 +189,8 @@ class ShareForm {
     $inputs.prop('disabled', true); // disable inputs
 
     if ($spinner) {
-      $submit.style.cssText = 'display: none'; // hide submit button
-      $spinner.style.cssText = ''; // show spinner
+      $submit.setAttribute('style', 'display: none'); // hide submit button
+      $spinner.setAttribute('style', ''); // show spinner
     }
 
     return $.post($(this._el).attr('action'), payload).done((response) => {
@@ -226,8 +226,8 @@ class ShareForm {
       if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
 
       if ($spinner) {
-        $submit.style.cssText = ''; // show submit button
-        $spinner.style.cssText = 'display: none'; // hide spinner;
+        $submit.setAttribute('style', ''); // show submit button
+        $spinner.setAttribute('style', 'display: none'); // hide spinner;
       }
 
       this._isBusy = false;
