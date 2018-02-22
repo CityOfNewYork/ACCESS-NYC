@@ -193,43 +193,35 @@ class ShareForm {
       $spinner.setAttribute('style', ''); // show spinner
     }
 
-    return $.post($(this._el).attr('action'), payload).done((response) => {
+    return $.post('https://reqres.in/api/users', payload).done((response) => {
       if (response.success) {
         this._showSuccess();
         this._isDisabled = true;
-
         $(this._el).one('keyup', 'input', () => {
           $(this._el).removeClass(ShareForm.CssClass.SUCCESS);
           this._isDisabled = false;
         });
-
         this._track(type); // track successful message
       } else {
         let messageId = (response.error === 21211) ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
-
         this._showError(messageId);
-
         /* eslint-disable no-console, no-debugger */
-        if (Utility.debug()) console.error(response);
+        if (Utility.debug()) console.dir(response);
         /* eslint-enable no-console, no-debugger */
       }
     }).fail((response) => {
       this._showError(ShareForm.Message.SERVER);
-
       /* eslint-disable no-console, no-debugger */
-      if (Utility.debug()) console.error(response);
+      if (Utility.debug()) console.dir(response);
       /* eslint-enable no-console, no-debugger */
     }).always(() => {
       $inputs.prop('disabled', false); // enable inputs
-
       if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
-
       if ($spinner) {
         $submit.setAttribute('style', ''); // show submit button
-        $spinner.setAttribute('style', 'display: none'); // hide spinner;
+        $spinner.setAttribute('style', 'display: none'); // hide spinner
       }
-
       this._isBusy = false;
     });
   }
