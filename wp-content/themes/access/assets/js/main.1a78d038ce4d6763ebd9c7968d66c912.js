@@ -14968,39 +14968,31 @@ ShareForm = function () {
         if (response.success) {
           _this4._showSuccess();
           _this4._isDisabled = true;
-
           (0, _jquery2.default)(_this4._el).one('keyup', 'input', function () {
             (0, _jquery2.default)(_this4._el).removeClass(ShareForm.CssClass.SUCCESS);
             _this4._isDisabled = false;
           });
-
           _this4._track(type); // track successful message
         } else {
           var messageId = response.error === 21211 ?
           ShareForm.Message.INVALID : ShareForm.Message.SERVER;
-
           _this4._showError(messageId);
-
           /* eslint-disable no-console, no-debugger */
-          if (_utility2.default.debug()) console.error(response);
+          if (_utility2.default.debug()) console.dir(response);
           /* eslint-enable no-console, no-debugger */
         }
       }).fail(function (response) {
         _this4._showError(ShareForm.Message.SERVER);
-
         /* eslint-disable no-console, no-debugger */
-        if (_utility2.default.debug()) console.error(response);
+        if (_utility2.default.debug()) console.dir(response);
         /* eslint-enable no-console, no-debugger */
       }).always(function () {
         $inputs.prop('disabled', false); // enable inputs
-
         if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
-
         if ($spinner) {
           $submit.setAttribute('style', ''); // show submit button
-          $spinner.setAttribute('style', 'display: none'); // hide spinner;
+          $spinner.setAttribute('style', 'display: none'); // hide spinner
         }
-
         _this4._isBusy = false;
       });
     }
@@ -15892,7 +15884,7 @@ Utility.track = function (key, data) {
   /* eslint-disable no-undef */
   if (typeof analytics !== 'undefined') {
     // format data for Segment
-    var sData = _underscore2.default.reduce(data, function (memo, num) {return Object.assign(memo, num);}, {});
+    var sData = _underscore2.default.reduce(data, function (memo, num) {return _underscore2.default.extend(memo, num);}, {});
     analytics.track(key, sData);
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */
@@ -15931,4 +15923,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.9fe1097d282da419989035bdf938cca6.js.map
+//# sourceMappingURL=main.1a78d038ce4d6763ebd9c7968d66c912.js.map
