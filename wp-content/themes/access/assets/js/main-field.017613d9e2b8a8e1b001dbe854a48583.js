@@ -33020,8 +33020,8 @@ ShareForm = function () {
       $inputs.prop('disabled', true); // disable inputs
 
       if ($spinner) {
-        $submit.style.cssText = 'display: none'; // hide submit button
-        $spinner.style.cssText = ''; // show spinner
+        $submit.setAttribute('style', 'display: none'); // hide submit button
+        $spinner.setAttribute('style', ''); // show spinner
       }
 
       return _jquery2.default.post((0, _jquery2.default)(this._el).attr('action'), payload).done(function (response) {
@@ -33057,8 +33057,8 @@ ShareForm = function () {
         if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
 
         if ($spinner) {
-          $submit.style.cssText = ''; // show submit button
-          $spinner.style.cssText = 'display: none'; // hide spinner;
+          $submit.setAttribute('style', ''); // show submit button
+          $spinner.setAttribute('style', 'display: none'); // hide spinner;
         }
 
         _this4._isBusy = false;
@@ -33669,4 +33669,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.089f251eb852dddc408f6e04d446b01e.js.map
+//# sourceMappingURL=main-field.017613d9e2b8a8e1b001dbe854a48583.js.map
