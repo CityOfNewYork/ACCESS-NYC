@@ -1,0 +1,138 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Rollbar\n"
+"POT-Creation-Date: 2016-08-12 09:37+0200\n"
+"PO-Revision-Date: 2016-08-12 09:36+0200\n"
+"Last-Translator: flowdee <coder@flowdee.de>\n"
+"Language-Team: flowdee <coder@flowdee.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: rollbar.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/class.settings.php:58
+msgid "Status"
+msgstr ""
+
+#: includes/class.settings.php:67
+msgid "Access Token"
+msgstr ""
+
+#: includes/class.settings.php:76
+msgid "Environment"
+msgstr ""
+
+#: includes/class.settings.php:85
+msgid "Logging level"
+msgstr ""
+
+#: includes/class.settings.php:128
+msgid "PHP error logging"
+msgstr ""
+
+#: includes/class.settings.php:132
+msgid "Javascript error logging"
+msgstr ""
+
+#: includes/class.settings.php:142
+msgid "Client Side Access Token"
+msgstr ""
+
+#: includes/class.settings.php:146
+msgid "Server Side Access Token"
+msgstr ""
+
+#: includes/class.settings.php:150
+msgid ""
+"You can find your access tokens under your project settings: <strong>Project "
+"Access Tokens</strong>."
+msgstr ""
+
+#: includes/class.settings.php:163
+msgid "Define the current environment: e.g. \"production\" or \"development\"."
+msgstr ""
+
+#: includes/class.settings.php:176
+msgid "Fatal run-time errors (E_ERROR) only"
+msgstr ""
+
+#: includes/class.settings.php:178
+msgid "Run-time warnings (E_WARNING) and above"
+msgstr ""
+
+#: includes/class.settings.php:180
+msgid "Compile-time parse errors (E_PARSE) and above"
+msgstr ""
+
+#: includes/class.settings.php:182
+msgid "Run-time notices (E_NOTICE) and above"
+msgstr ""
+
+#: includes/class.settings.php:184
+msgid "User-generated error messages (E_USER_ERROR) and above"
+msgstr ""
+
+#: includes/class.settings.php:186
+msgid "User-generated warning messages (E_USER_WARNING) and above"
+msgstr ""
+
+#: includes/class.settings.php:188
+msgid "User-generated notice messages (E_USER_NOTICE) and above"
+msgstr ""
+
+#: includes/class.settings.php:190
+msgid ""
+"Suggest code changes to ensure forward compatibility (E_STRICT) and above"
+msgstr ""
+
+#: includes/class.settings.php:192
+msgid ""
+"Warnings about code that will not work in future versions (E_DEPRECATED) and "
+"above"
+msgstr ""
+
+#: includes/class.settings.php:194
+msgid "Absolutely everything (E_ALL)"
+msgstr ""
+
+#: includes/class.settings.php:207
+msgid "Enabled"
+msgstr ""
+
+#: includes/class.settings.php:246
+msgid "No plugins installed."
+msgstr ""
+
+#: includes/class.settings.php:253
+msgid "Coming soon!"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Rollbar"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/rollbar/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Rollbar full-stack error tracking for WordPress"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "flowdee"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://flowdee.de"
+msgstr ""
