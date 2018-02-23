@@ -1,21 +1,12 @@
 <?php
 
+// Environments
+require_once(get_template_directory() . '/config/environments.php');
+
 // Notifications
 require_once(get_template_directory() . '/includes/notifications.php');
 
 Notifications\timber();
-
-// Disable the google-authenticator plugin for local and staging environments.
-// is_wpe is defined in the mu-plugins/wpengine-common plugin. is_wpe()
-// returns true only if the site is running on a production environment.
-// https://wpengine.com/support/determining-wp-engine-environment/
-if ( !function_exists('is_wpe') || !is_wpe() ) {
-  $plugins = array(
-    'google-authenticator/google-authenticator.php'
-  );
-  require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-  deactivate_plugins($plugins);
-}
 
 // Hiding the regular admin post, and comment pages
 // To add pages to the list, add:

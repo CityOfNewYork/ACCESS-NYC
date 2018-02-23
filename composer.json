@@ -8,6 +8,7 @@
   "require": {
     "filp/whoops": "^2.1",
     "whoops/soap": "^1.0",
-    "wpackagist-plugin/wp-security-questions": "1.0.3"
+    "wpackagist-plugin/wp-security-questions": "1.0.3",
+    "wpackagist-plugin/rollbar": "2.2.0"
   }
 }

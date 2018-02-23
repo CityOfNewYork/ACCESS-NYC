@@ -1,0 +1,8 @@
+builds
+.idea
+docs
+phpunit.xml
+tmp/
+*.iml
+composer.lock
+vendor
