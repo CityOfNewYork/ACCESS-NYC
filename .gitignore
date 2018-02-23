@@ -1,46 +1,42 @@
 
 # WordPress #
 ############
-.htaccess
-wp-config.php
-wp-content/uploads/
-wp-content/blogs.dir/
-wp-content/upgrade/*
-wp-content/backup-db/*
-wp-content/backups/
-wp-content/advanced-cache.php
-wp-content/themes/access/.env
-wp-content/wp-cache-config.php
-wp-content/cache/*
-wp-content/cache/supercache/*
-node_modules
-.idea
-data/
-/info.php
+/.htaccess
+/wp-config.php
+/wp-content/uploads/
+/wp-content/blogs.dir/
+/wp-content/upgrade/*
+/wp-content/backup-db/*
+/wp-content/backups/
+/wp-content/advanced-cache.php
+/wp-content/themes/access/.env
+/wp-content/wp-cache-config.php
+/wp-content/cache/*
+/wp-content/cache/supercache/*
 
 # Docker and Docker Image Adds #
 ################################
-wp-content/plugins/akismet/
-wp-content/plugins/akismet/*
-wp-content/themes/twentysixteen/
-wp-content/themes/twentysixteen/*
-wp-content/themes/twentyfifteen/
-wp-content/themes/twentyfifteen/*
-wp-content/themes/twentyseventeen/
-wp-content/themes/twentyseventeen/*
-wp-content/plugins/hello.php
+/wp-content/plugins/akismet/
+/wp-content/plugins/akismet/*
+/wp-content/themes/twentysixteen/
+/wp-content/themes/twentysixteen/*
+/wp-content/themes/twentyfifteen/
+/wp-content/themes/twentyfifteen/*
+/wp-content/themes/twentyseventeen/
+/wp-content/themes/twentyseventeen/*
+/wp-content/plugins/hello.php
 
 # WP-Engine Specific #
 ######################
 .smushit-status
 .gitattributes
-_wpeprivate
-wp-content/object-cache.php
-wp-content/mu-plugins/mu-plugin.php
-wp-content/mu-plugins/slt-force-strong-passwords.php
-wp-content/mu-plugins/limit-login-attempts
-wp-content/mu-plugins/wpengine-common
-wp-content/mysql.sql
+/_wpeprivate
+/wp-content/object-cache.php
+/wp-content/mu-plugins/mu-plugin.php
+/wp-content/mu-plugins/slt-force-strong-passwords.php
+/wp-content/mu-plugins/limit-login-attempts
+/wp-content/mu-plugins/wpengine-common
+/wp-content/mysql.sql
 
 # Packages #
 ############
@@ -73,6 +69,7 @@ Thumbs.db
 .idea
 sitemap.xml
 sitemap.xml.gz
+/info.php
 
 # Vim generated files #
 ######################
