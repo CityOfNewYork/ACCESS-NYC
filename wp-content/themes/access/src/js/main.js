@@ -235,4 +235,7 @@ import Utility from 'modules/utility';
   if ($('html').hasClass('print-view')) {
     window.onload = window.print;
   }
+
+  // Add rel attribute to new window links.
+  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
 })(window, jQuery);

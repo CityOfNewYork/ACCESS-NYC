@@ -53,7 +53,7 @@
         {% if post.website %}
         <li><a href="{{ post.website }}">{{ post.website }}</a></li>
         {% endif %}
-        <li class="hide-for-print"><a href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank">{{__('Get directions', 'accessnyc-locations')}}</a></li>
+        <li class="hide-for-print"><a href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer">{{__('Get directions', 'accessnyc-locations')}}</a></li>
         <li class="hide-for-print"><a href="javascript:window.print()">{{__('Print', 'accessnyc-locations')}}</a></li>
       </ul>
     </div>

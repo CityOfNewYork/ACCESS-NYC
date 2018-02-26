@@ -12272,6 +12272,9 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
   if ($('html').hasClass('print-view')) {
     window.onload = window.print;
   }
+
+  // Add rel attribute to new window links.
+  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
 })(window, _jquery2.default); // import SmoothScroll from 'smoothscroll-polyfill';
 
 },{"jquery":3,"modules/office-map":9,"modules/screener":12,"modules/share-form":13,"modules/static-map":14,"modules/text-sizer":15,"modules/tooltip":16,"modules/utility":17}],7:[function(require,module,exports){
@@ -15923,4 +15926,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.1a78d038ce4d6763ebd9c7968d66c912.js.map
+//# sourceMappingURL=main.539c213b586ad782cad4d051a9d12396.js.map

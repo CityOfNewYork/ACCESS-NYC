@@ -34,7 +34,7 @@
           {% for tout in homepage_touts %}
           <div class="fyi-tout">
             {% if tout.tout_title %}<h3 class="fyi-tout-title type-h4">{{ tout.tout_title }}</h3>{% endif %}
-            {% if tout.link_text %}<div class="fyi-tout-cta"><a href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank"{% endif %}>{{ tout.link_text }}</a></div>{% endif %}
+            {% if tout.link_text %}<div class="fyi-tout-cta"><a href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ tout.link_text }}</a></div>{% endif %}
           </div>
           {% endfor %}
         </div>

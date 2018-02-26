@@ -21,7 +21,7 @@
 
     <div class="w-100 p-horizontal">
 
-      <a href="{{ post.get_permalink }}" target="_blank">
+      <a href="{{ post.get_permalink }}" target="_blank" rel="noopener noreferrer">
         <h3 class="program-card-title type-h4">
           {{ post.plain_language_program_name }}
         </h3>
@@ -97,7 +97,7 @@
         {{ post.get_field('heads_up') }}
         {% for section in shownSections %}{% if section.value == 'what-you-need-to-include' %}
         <p class="hide-for-print">
-          <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank">See a full list of required documents</a>
+          <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank" rel="noopener noreferrer">See a full list of required documents</a>
         </p>
         {% endif %}{% endfor %}
       </div>
@@ -125,7 +125,7 @@
               {{ post.get_field('how_to_apply_or_enroll_online') }}
               {% if post.apply_online_call_to_action != '' %}
               <p class="hide-for-print">
-                <a class="btn btn-secondary btn-next" href="{{ post.url_of_online_application }}" target="_blank">{{ post.apply_online_call_to_action }}</a>
+                <a class="btn btn-secondary btn-next" href="{{ post.url_of_online_application }}" target="_blank" rel="noopener noreferrer">{{ post.apply_online_call_to_action }}</a>
               </p>
               {% endif %}
             </div>
@@ -149,7 +149,7 @@
               {{ post.get_field('how_to_apply_or_enroll_by_mail') }}
               {% if post.apply_by_mail_call_to_action != '' %}
               <p class="hide-for-print">
-                <a class="btn btn-secondary btn-next" href="{% if post.url_of_pdf_application_forms != '' %}{{ post.url_of_pdf_application_forms }}{% else %}{{ post.application_forms_pdfs }}{% endif %}" target="_blank">{{ post.apply_by_mail_call_to_action }}</a>
+                <a class="btn btn-secondary btn-next" href="{% if post.url_of_pdf_application_forms != '' %}{{ post.url_of_pdf_application_forms }}{% else %}{{ post.application_forms_pdfs }}{% endif %}" target="_blank" rel="noopener noreferrer">{{ post.apply_by_mail_call_to_action }}</a>
               </p>
               {% endif %}
             </div>
@@ -194,7 +194,7 @@
               {% if post.office_locations_url != '' %}
               {% if post.apply_in_person_call_to_action != '' %}
               <p class="hide-for-print">
-                <a class="btn btn-secondary btn-next" href="{{ post.office_locations_url }}" target="_blank">{{ post.apply_in_person_call_to_action|striptags }}</a>
+                <a class="btn btn-secondary btn-next" href="{{ post.office_locations_url }}" target="_blank" rel="noopener noreferrer">{{ post.apply_in_person_call_to_action|striptags }}</a>
               </p>
               {% endif %}
               {% endif %}

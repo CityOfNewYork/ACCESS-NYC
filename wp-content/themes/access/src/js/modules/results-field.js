@@ -69,7 +69,9 @@ class ResultsField {
    * @param  {event} event the onclick event
    */
   _targetBlank(event) {
-    $(event.currentTarget).attr('target', '_blank');
+    $(event.currentTarget)
+      .attr('rel', 'noopener noreferrer')
+      .attr('target', '_blank');
   }
 
   /**

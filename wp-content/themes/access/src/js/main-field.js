@@ -65,4 +65,7 @@ import Utility from 'modules/utility';
       return false;
     });
   });
+
+  // Add rel attribute to new window links.
+  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
 })(window, jQuery);
