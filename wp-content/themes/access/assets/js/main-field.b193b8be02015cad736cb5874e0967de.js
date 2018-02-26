@@ -29259,6 +29259,9 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
       return false;
     });
   });
+
+  // Add rel attribute to new window links.
+  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
 })(window, _jquery2.default); /* eslint-enable no-unused-vars */
 
 },{"jquery":3,"modules/results-field":11,"modules/screener-field":13,"modules/share-form":18,"modules/tooltip":19,"modules/utility":20,"smoothscroll-polyfill":5,"underscore":6}],10:[function(require,module,exports){
@@ -29480,7 +29483,9 @@ ResultsField = function () {
        * @param  {event} event the onclick event
        */ }, { key: '_targetBlank', value: function _targetBlank(
     event) {
-      (0, _jquery2.default)(event.currentTarget).attr('target', '_blank');
+      (0, _jquery2.default)(event.currentTarget).
+      attr('rel', 'noopener noreferrer').
+      attr('target', '_blank');
     }
 
     /**
@@ -33675,4 +33680,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.fb5b7a79cf0c3cefa86fd9be7d878467.js.map
+//# sourceMappingURL=main-field.b193b8be02015cad736cb5874e0967de.js.map
