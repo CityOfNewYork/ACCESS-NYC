@@ -104,7 +104,7 @@ function _get_db(){
 					get_option('statc_host'));
 	$db->show_errors();
 
-	if ( get_option('statc_bootstrapped') !== '4' ) {
+	if ( get_option('statc_bootstrapped') !== '5' ) {
 		__bootstrap( $db );
 	}
 	return $db;
@@ -177,10 +177,14 @@ function __bootstrap( $db ){
 			ADD url VARCHAR(512) DEFAULT NULL AFTER date,
 			ADD message TEXT DEFAULT NULL AFTER url"
 	);
+	$db->query(
+		"ALTER TABLE response_update
+			ADD date DATETIME DEFAULT NOW() AFTER program_codes"
+	);
 	$db->show_errors();
 	
 
-	update_option('statc_bootstrapped', 4);
+	update_option('statc_bootstrapped', 5);
 }
 
 class MockDb {
