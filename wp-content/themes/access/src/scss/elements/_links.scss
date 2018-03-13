@@ -1,6 +1,6 @@
 a,
 .btn-link {
-  @include transition(color .2s ease-in);
+  transition: color .2s ease-in;
   color: $color-blue;
   text-decoration: underline;
 

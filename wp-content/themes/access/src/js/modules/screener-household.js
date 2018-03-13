@@ -108,7 +108,7 @@ class ScreenerHousehold {
 }
 
 /**
- * Valid renatl types.
+ * Valid rental types.
  * @type {Array<string>}
  */
 ScreenerHousehold.RENTAL_TYPE = [
@@ -123,6 +123,19 @@ ScreenerHousehold.RENTAL_TYPE = [
   'HDFC',
   'FamilyHome',
   'Condo'
+];
+
+/**
+ * Attributes for a household living condition, used to get living conditions
+ * @type {Array}
+ */
+ScreenerHousehold.LIVING_ATTRS = [
+  'livingRenting',
+  'livingOwner',
+  'livingStayingWithFriend',
+  'livingHotel',
+  'livingShelter',
+  'livingPreferNotToSay'
 ];
 
 export default ScreenerHousehold;

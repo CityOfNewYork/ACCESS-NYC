@@ -26,7 +26,7 @@
       <aside>
         <div class="save-your-results">
           <h4>{{__('Save your results.', 'accessnyc-results')}}</h4>
-          <a class="btn btn-primary" href="javascript:window.print()">{{__('Print', 'accessnyc-results')}}</a>
+          <a class="btn btn-primary" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]'>{{__('Print', 'accessnyc-results')}}</a>
 
           <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
           <div id="share-by-sms" class="share-form js-needs-disclaimer hidden">
@@ -38,7 +38,7 @@
                 <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-results')}}">
                 <div class="share-form-controls__right">
                   <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
-                  {% include 'partials/share-form-spinner.twig' %}
+                  {% include 'partials/share-form-spinner.twig' with { attr: 'style="display: none"' } %}
                   <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                 <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-results')}}" required>
                 <div class="share-form-controls__right">
                   <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
-                  {% include 'partials/share-form-spinner.twig' %}
+                  {% include 'partials/share-form-spinner.twig' with { attr: 'style="display: none"' } %}
                   <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
                 </div>
               </div>

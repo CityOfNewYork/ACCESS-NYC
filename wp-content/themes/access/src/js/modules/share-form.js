@@ -3,9 +3,6 @@
 
 import $ from 'jquery';
 import Utility from 'modules/utility';
-import Cleave from 'cleave.js/dist/cleave.min';
-import 'cleave.js/dist/addons/cleave-phone.us';
-
 
 /**
  * This component handles validation and submission for share by email and
@@ -15,9 +12,10 @@ import 'cleave.js/dist/addons/cleave-phone.us';
 class ShareForm {
   /**
    * @param {HTMLElement} el - The html form element for the component.
+   * @param {object}      config - The configuration for the share form.
    * @constructor
    */
-  constructor(el) {
+  constructor(el, config) {
     /** @private {HTMLElement} The component element. */
     this._el = el;
 
@@ -32,6 +30,9 @@ class ShareForm {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    /** @private {object} The prefix for share tracking. */
+    this._config = (config) ? config : {};
   }
 
   /**
@@ -44,8 +45,10 @@ class ShareForm {
       return this;
     }
 
-    let selected = this._el.querySelector('input[type="tel"]');
-    if (selected) this._maskPhone(selected);
+    // Mask phone numbers
+    $('input[type="tel"]').each((i, el) => {
+      Utility.maskPhone(el);
+    });
 
     $(this._el).on('submit', (e) => {
       e.preventDefault();
@@ -56,7 +59,6 @@ class ShareForm {
     });
 
     this._initialized = true;
-
     return this;
   }
 
@@ -91,21 +93,6 @@ class ShareForm {
   }
 
   /**
-   * Mask each phone number and properly format it
-   * @param  {HTMLElement} input the "tel" input to mask
-   * @return {constructor}       the input mask
-   */
-  _maskPhone(input) {
-    let cleave = new Cleave(input, {
-      phone: true,
-      phoneRegionCode: 'us',
-      delimiter: '-'
-    });
-    input.cleave = cleave;
-    return input;
-  }
-
-  /**
    * For a given input, checks to see if its value is a valid email. If not,
    * displays an error message and sets an error class on the element.
    * @param {HTMLElement} input
@@ -133,22 +120,10 @@ class ShareForm {
    * @return {boolean} - Valid Phone Number.
    */
   _validatePhoneNumber(input) {
-    let num = this._parsePhoneNumber(input.value); // parse the number
-    num = (num) ? num.join('') : 0; // if num is null, there are no numbers
-    if (num.length === 10) {
-      return true; // assume it is phone number
-    }
+    let valid = Utility.validatePhoneNumber(input.value);
+    if (valid) return true;
     this._showError(ShareForm.Message.PHONE);
     return false;
-  }
-
-  /**
-   * Get just the phone number of a given value
-   * @param  {string} value The string to get numbers from
-   * @return {array}       An array with matched blocks
-   */
-  _parsePhoneNumber(value) {
-    return value.match(/\d+/g); // get only digits
   }
 
   /**
@@ -197,17 +172,27 @@ class ShareForm {
    */
   _submit() {
     this._isBusy = true;
+
+    const payload = $(this._el).serialize();
+
     let $tel = this._el.querySelector('input[type="tel"]'); // get phone number
     let $submit = this._el.querySelector('button[type="submit"]');
     let $spinner = this._el.querySelector(`.${ShareForm.CssClass.SPINNER}`);
     let $inputs = $(this._el).find('input');
-    if ($tel) $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
-    const payload = $(this._el).serialize();
-    $inputs.prop('disabled', true); // disable inputs
-    if ($spinner) {
-      $submit.style.cssText = 'display: none'; // hide submit button
-      $spinner.style.cssText = ''; // show spinner
+    let type = 'email';
+
+    if ($tel) {
+      $tel.value = $tel.cleave.getRawValue(); // sanitize phone number
+      type = 'text';
     }
+
+    $inputs.prop('disabled', true); // disable inputs
+
+    if ($spinner) {
+      $submit.setAttribute('style', 'display: none'); // hide submit button
+      $spinner.setAttribute('style', ''); // show spinner
+    }
+
     return $.post($(this._el).attr('action'), payload).done((response) => {
       if (response.success) {
         this._showSuccess();
@@ -216,22 +201,81 @@ class ShareForm {
           $(this._el).removeClass(ShareForm.CssClass.SUCCESS);
           this._isDisabled = false;
         });
+        this._track(type); // track successful message
       } else {
-        this._showError(ShareForm.Message.SERVER);
+        let messageId = (response.error === 21211) ?
+          ShareForm.Message.INVALID : ShareForm.Message.SERVER;
+        this._showError(messageId);
+        /* eslint-disable no-console, no-debugger */
+        if (Utility.debug()) console.dir(response);
+        /* eslint-enable no-console, no-debugger */
       }
     }).fail((response) => {
       this._showError(ShareForm.Message.SERVER);
+      /* eslint-disable no-console, no-debugger */
+      if (Utility.debug()) console.dir(response);
+      /* eslint-enable no-console, no-debugger */
     }).always(() => {
       $inputs.prop('disabled', false); // enable inputs
       if ($tel) $tel.cleave.setRawValue($tel.value); // reformat phone number
       if ($spinner) {
-        $submit.style.cssText = ''; // show submit button
-        $spinner.style.cssText = 'display: none'; // hide spinner;
+        $submit.setAttribute('style', ''); // show submit button
+        $spinner.setAttribute('style', 'display: none'); // hide spinner
       }
       this._isBusy = false;
     });
   }
+
+  /**
+   * Tracking functionality for the share form. Can use context set in the
+   * configuration of the share form but functions without it.
+   * @param  {string} type - The share type, ex. 'Email' or 'Text'
+   */
+  _track(type) {
+    let config = this._config;
+    let prefix = '';
+    let key = type.charAt(0).toUpperCase() + type.slice(1);
+    let context = '';
+
+    if (config.hasOwnProperty('analyticsPrefix')) {
+      prefix = config.analyticsPrefix + ':';
+    }
+
+    if (config.hasOwnProperty('context')) {
+      context = ' ' + config.context;
+    }
+
+    Utility.track(`${prefix} ${key}${context}:`, [
+      {'DCS.dcsuri': `share/${type}`}
+    ]);
+  }
 }
+
+/**
+ * [ShowDisclaimer description]
+ * @param {[type]} event [description]
+ */
+ShareForm.ShowDisclaimer = function(event) {
+  /* eslint no-undef: "off" */
+  const variables = require('../../variables.json');
+  let $cnt = $(`.${ShareForm.CssClass.NEEDS_DISCLAIMER}.active`).length;
+  let $el = $('#js-disclaimer');
+  let $hidden = ($cnt > 0) ? 'removeClass' : 'addClass';
+  let $animate = ($cnt > 0) ? 'addClass' : 'removeClass';
+  event.preventDefault();
+  $el[$hidden]('hidden');
+  $el[$animate]('animated fadeInUp');
+  $el.attr('aria-hidden', ($cnt === 0));
+  // Scroll-to functionality for mobile
+  if (
+    window.scrollTo &&
+    $cnt != 0 &&
+    window.innerWidth < variables['screen-desktop']
+  ) {
+    let $target = $(event.target);
+    window.scrollTo(0, $target.offset().top - $target.data('scrollOffset'));
+  }
+};
 
 /**
  * CSS classes used by this component.
@@ -242,6 +286,7 @@ ShareForm.CssClass = {
   ERROR_MSG: 'error-message',
   FORM: 'js-share-form',
   HIDDEN: 'hidden',
+  NEEDS_DISCLAIMER: 'js-needs-disclaimer',
   SUBMIT_BTN: 'btn-submit',
   SUCCESS: 'success',
   SPINNER: 'js-spinner'
@@ -253,6 +298,7 @@ ShareForm.CssClass = {
  */
 ShareForm.Message = {
   EMAIL: 'ERROR_EMAIL',
+  INVALID: 'ERROR_INVALID',
   PHONE: 'ERROR_PHONE',
   REQUIRED: 'ERROR_REQUIRED',
   SERVER: 'ERROR_SERVER'

@@ -1,5 +1,6 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
+// import SmoothScroll from 'smoothscroll-polyfill';
 import OfficeMap from 'modules/office-map';
 import Screener from 'modules/screener';
 import ShareForm from 'modules/share-form';
@@ -12,32 +13,16 @@ import Utility from 'modules/utility';
   'use strict';
 
   const google = window.google;
-  /* eslint no-undef: "off" */
-  const variables = require('../variables.json');
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
-  $.get('/wp-content/themes/access/assets/img/icons.svg', function(data) {
-    const svgDiv = document.createElement('div');
-    svgDiv.innerHTML =
-        new XMLSerializer().serializeToString(data.documentElement);
-    $(svgDiv).css('display', 'none').prependTo('body');
-  });
+  $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
+
+  let $body = $('body');
 
   // Attach site-wide event listeners.
-  $('body').on('click', '.js-simple-toggle', (e) => {
-    // Simple toggle that add/removes "active" and "hidden" classes, as well as
-    // applying appropriate aria-hidden value to a specified target.
-    // TODO: There are a few siimlar toggles on the site that could be
-    // refactored to use this class.
-    e.preventDefault();
-    const $target = $(e.currentTarget).attr('href') ?
-        $($(e.currentTarget).attr('href')) :
-        $($(e.currentTarget).data('target'));
-    $(e.currentTarget).toggleClass('active');
-    $target.toggleClass('active hidden')
-        .prop('aria-hidden', $target.hasClass('hidden'));
-  }).on('click', '.js-show-nav', (e) => {
+  $body.on('click', '.js-simple-toggle', Utility.simpleToggle
+  ).on('click', '.js-show-nav', (e) => {
     // Shows the mobile nav by applying "nav-active" cass to the body.
     e.preventDefault();
     $(e.delegateTarget).addClass('nav-active');
@@ -62,24 +47,16 @@ import Utility from 'modules/utility';
   }).on('click', '.js-toggle-filter', (e) => {
     e.preventDefault();
     $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
-  }).on('click', '.js-show-disclaimer', (e) => {
-    e.preventDefault();
-    let $cnt = $('.js-needs-disclaimer.active').length;
-    let $el = $('#js-disclaimer');
-    let $hidden = ($cnt > 0) ? 'removeClass' : 'addClass';
-    let $animate = ($cnt > 0) ? 'addClass' : 'removeClass';
-    $el[$hidden]('hidden');
-    $el[$animate]('animated fadeInUp');
-    $el.attr('aria-hidden', ($cnt === 0));
-    // Scroll-to functionality for mobile
-    if (
-      window.scrollTo &&
-      $cnt != 0 &&
-      window.innerWidth < variables['screen-desktop']
-    ) {
-      let $target = $(e.target);
-      window.scrollTo(0, $target.offset().top - $target.data('scrollOffset'));
-    }
+  });
+
+  // Show/hide share form disclaimer
+  $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
+
+  // A basic click tracking function
+  $body.on('click', '[data-js*="track"]', (event) => {
+    let key = event.currentTarget.dataset.trackKey;
+    let data = JSON.parse(event.currentTarget.dataset.trackData);
+    Utility.track(key, data);
   });
 
   // Webtrends - Capture the search query for on-site search
@@ -108,6 +85,15 @@ import Utility from 'modules/utility';
       .toggleClass('open');
   });
   // END TODO
+
+  // Webtrends - Capture the search query for on-site search
+  if (~window.location.href.indexOf('?s=')) {
+    let $query = window.location.href;
+    $('head').append('<meta name="WT.oss" content="'
+      + $query.split('?s=')[1]+'">');
+    $('head').append('<meta name="WT.oss_r" content="'
+      + $('.program-card').length +'">');
+  }
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
@@ -249,4 +235,7 @@ import Utility from 'modules/utility';
   if ($('html').hasClass('print-view')) {
     window.onload = window.print;
   }
+
+  // Add rel attribute to new window links.
+  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
 })(window, jQuery);

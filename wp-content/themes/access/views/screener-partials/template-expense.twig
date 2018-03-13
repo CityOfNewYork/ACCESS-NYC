@@ -12,7 +12,7 @@
       <p class="screener-explanation">{{ __('Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.', 'accessnyc-screener') }}</p>
     </div>
     <div class="non-prime-label">
-      <label class="screener-label" for="person-<%= personIndex %>-expenses-<% print(matrixIndex + 1) %>-type">
+      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-expenses-<% print(matrixIndex + 1) %>-type">
         <% if (personIndex === 0) { %>
         {{ __('If you have another type of expense, select it below.', 'accessnyc-screener') }}
         <% } else { %>
@@ -46,18 +46,18 @@
   </div>
   <div id="screener-person-<%= personIndex %>-expense-<%= matrixIndex %>-details" class="hidden">
     <div class="screener-question">
-      <label class="screener-label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-amount">
+      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-amount">
         {{ __('How much is this type of expense:', 'accessnyc-screener') }}
         <span class="screener-transaction-type"></span>?
       </label>
       <div class="screener-question-container">
         <div class="currency-usd">
-          <input id="person-<%= personIndex %>-expenses-<%= matrixIndex %>-amount" name="Person[<%= personIndex %>].expenses[<%= matrixIndex %>].amount" type="number" data-type="float" required>
+          <input id="person-<%= personIndex %>-expenses-<%= matrixIndex %>-amount" name="Person[<%= personIndex %>].expenses[<%= matrixIndex %>].amount" type="number" data-type="float" step="0.01" required>
         </div>
       </div>
     </div>
     <div class="screener-question">
-      <label class="screener-label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-frequency">
+      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-frequency">
         <% if (personIndex === 0) { %>
         {{ __('How often do you have this expense:', 'accessnyc-screener') }}
         <% } else { %>

@@ -33,7 +33,7 @@
   </div>
   <div class="hidden" id="screener-rental-type">
     <div class="screener-question">
-      <label class="screener-label" for="housing-livingRentalType">{{ __('Which type of rental do you live in?', 'accessnyc-screener') }}</label>
+      <label class="screener-label d-inline-block m-bottom" for="housing-livingRentalType">{{ __('Which type of rental do you live in?', 'accessnyc-screener') }}</label>
       <select class="screener-select js-screener-toggle" id="housing-livingRentalType" name="Household.livingRentalType" data-toggles="#screener-lease-owner">
         <option value="">{{ __('Click to select a rental type', 'accessnyc-screener') }}</option>
         <option value="MarketRate">{{ __('Non-Regulated or Market Rate apartment', 'accessnyc-screener') }}</option>
@@ -70,7 +70,7 @@
     <p class="screener-explanation">{{ __('Answer the best you can. We use this to help show you the programs that will be most helpful right now.', 'accessnyc-screener') }}</p>
     <div class="screener-question-container">
       <div class="currency-usd">
-        <input id="household-assets" type="number" name="Household.cashOnHand" data-type="float" min="0" value="">
+        <input id="household-assets" type="number" name="Household.cashOnHand" data-type="float" min="0" value="" step="0.01">
       </div>
     </div>
   </div>

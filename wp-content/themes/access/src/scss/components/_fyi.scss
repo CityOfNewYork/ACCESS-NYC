@@ -25,7 +25,7 @@
 
 .fyi-touts {
   @include media($bp-tablet-up) {
-    @include display(flex);
+    display: flex;
   }
 }
 

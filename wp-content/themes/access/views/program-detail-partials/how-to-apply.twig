@@ -65,7 +65,7 @@
                   <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-program-detail')}}" required>
                   <div class="share-form-controls__right">
                     <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
-                    {% include 'partials/share-form-spinner.twig' %}
+                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
                     <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
                   </div>
                 </div>
@@ -82,7 +82,7 @@
                   <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-program-detail')}}" required>
                   <div class="share-form-controls__right">
                     <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
-                    {% include 'partials/share-form-spinner.twig' %}
+                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
                     <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
                   </div>
                 </div>

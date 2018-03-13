@@ -1,0 +1,69 @@
+/**
+ * Accordion
+ */
+
+// Dependencies
+@import '../core/variables';
+
+// Markup
+// <article class="c-accordion">
+//   <header class="c-accordion__header">
+//     <p>...title...</p>
+//     <a class="c-accordion__toggle hide-for-print" data-js="simple-toggle"(or .js-simple-toggle) href="#id">
+//       <span data-css-text="...show text..." data-css-active-text="...hide text...">
+//     </a>
+//   </header>
+//   <div class="c-accordion__body hidden-by-overflow animated active-for-print" id="id">
+//     <div class="c-accordion__padding">
+//       ...content...
+//     </div>
+//   </div>
+// </article>
+
+// Declarations
+.c-accordion {
+  background-color: $color-grey-lightest;
+  margin: $spacing-base 0;
+}
+
+.c-accordion__header {
+
+  align-items: center;
+  background-color: $color-blue-dark;
+  color: $color-white;
+  display: flex;
+  overflow: hidden;
+  padding: $spacing-base;
+
+  p {
+    flex: 1;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+  }
+
+}
+
+.c-accordion__toggle {
+  color: $color-white !important;
+  text-decoration: none;
+  font-style: italic;
+}
+
+.c-accordion__body {
+
+  h5 {
+    color: $color-black;
+    font-weight: bold;
+    margin-top: $spacing-base * 2;
+  }
+
+  li {
+    margin: .25rem 0;
+  }
+
+}
+
+.c-accordion__padding {
+  padding: ($spacing-base * 2) $spacing-base ($spacing-base * 1.5);
+}
+

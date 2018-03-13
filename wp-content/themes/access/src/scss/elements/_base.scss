@@ -37,8 +37,8 @@ use {
 }
 
 .page-wrapper {
-  @include display(flex);
-  @include flex-direction(column);
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   max-width: $site-max-width;
   min-height: 100%;
@@ -46,7 +46,7 @@ use {
 }
 
 .main-content {
-  @include flex(1 1 auto);
+  flex: 1 1 auto;
   background: $color-white;
 }
 

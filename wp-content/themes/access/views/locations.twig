@@ -50,37 +50,42 @@
       <div class="js-map-pagination"></div>
     </div>
   </main>
-  <script>
-    window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
-    window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([{% for filter in filters %}{% for program in filter.programs %}
-      {
-        "label": {{ program.post_title|json_encode() }},
-        "slug": {{ program.uid|json_encode() }}
-      },{% endfor %}{% endfor %}
-      {
-        "label": {{__('Government Office', 'accessnyc-locations')|trim|json_encode()}},
-        "slug": "GOVERNMENT_OFFICE"
-      }
-    ]);
-  </script>
-  <script type="text/template" id="map-location-template">
-    <% _.each(locations, function(location) { %>
-    <li class="js-map-location map-location<% if (location.isGovtOffice) { print(' govt-office') } %>" data-marker="<%= location.id %>" tabindex="0">
-      <h3 class="map-location-name"><%= location.name %></h3>
-      <div class="map-location-details"><% print(_.compact([location.type, location.address.street]).join(' | ')) %></div>
-      <div class="map-location-details">
-        <% print(_.map(location.programs, function(program) { return localize(program) }).join(', ')) %>
-      </div>
-      <a href="<%= location.link %>" class="link-more">{{__('more about this location', 'accessnyc-locations')}}</a>
-    </li>
-    <% }); %>
-  </script>
-  <script type="text/template" id="map-pagination-template">
-    <div class="map-pagination-body">
-      {{__('Showing', 'accessnyc-locations')}} <%= displayedCount %> {{__('of', 'accessnyc-locations')}} <%= totalCount %>
-      <% if (displayedCount < totalCount) { %>
-      <button class="btn btn-secondary btn-next btn-small js-map-more">{{__('Show more', 'accessnyc-locations')}}</button>
-      <% } %>
+{% endblock %}
+
+{% block scripts_footer %}
+{{ function('enqueue_script', 'assets/js/main', '.min') }}
+<script src="https://www.google.com/jsapi"></script>
+<script>
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([{% for filter in filters %}{% for program in filter.programs %}
+    {
+      "label": {{ program.post_title|json_encode() }},
+      "slug": {{ program.uid|json_encode() }}
+    },{% endfor %}{% endfor %}
+    {
+      "label": {{__('Government Office', 'accessnyc-locations')|trim|json_encode()}},
+      "slug": "GOVERNMENT_OFFICE"
+    }
+  ]);
+</script>
+<script type="text/template" id="map-location-template">
+  <% _.each(locations, function(location) { %>
+  <li class="js-map-location map-location<% if (location.isGovtOffice) { print(' govt-office') } %>" data-marker="<%= location.id %>" tabindex="0">
+    <h3 class="map-location-name"><%= location.name %></h3>
+    <div class="map-location-details"><% print(_.compact([location.type, location.address.street]).join(' | ')) %></div>
+    <div class="map-location-details">
+      <% print(_.map(location.programs, function(program) { return localize(program) }).join(', ')) %>
     </div>
-  </script>
+    <a href="<%= location.link %>" class="link-more">{{__('more about this location', 'accessnyc-locations')}}</a>
+  </li>
+  <% }); %>
+</script>
+<script type="text/template" id="map-pagination-template">
+  <div class="map-pagination-body">
+    {{__('Showing', 'accessnyc-locations')}} <%= displayedCount %> {{__('of', 'accessnyc-locations')}} <%= totalCount %>
+    <% if (displayedCount < totalCount) { %>
+    <button class="btn btn-secondary btn-next btn-small js-map-more">{{__('Show more', 'accessnyc-locations')}}</button>
+    <% } %>
+  </div>
+</script>
 {% endblock %}

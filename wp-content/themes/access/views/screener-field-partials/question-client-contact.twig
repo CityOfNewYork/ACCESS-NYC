@@ -1,0 +1,213 @@
+<fieldset class="d-block w-100">
+
+  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-contact">
+
+    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
+
+    <div class="p-relative">
+
+      <a class="{{styles.questions}}" data-js="question" href="#question-client-contact">
+        {{ __('Client Contact', translationID) }}
+        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+          v-if="errors.all('ClientContact').length > 0">
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
+      </a>
+
+      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}">
+            {{ __('Language Spoken', translationID) }}
+          </label>
+          <div class="m-bottom-2">
+            {% for language in languages %}
+            <label class="styled-checkbox screener-checkbox screener-label d-block">
+              <input type="checkbox" value="{{ language.value }}"
+                data-object="client"
+                data-key="language"
+                v-on:change="push">
+              <span class="styled-checkbox-label">{{ __(language.text, translationID) }}</span>
+            </label>
+            {% endfor %}
+          </div>
+          <div v-if="client._attrs.language.indexOf('other') > -1">
+            <label class="{{styles.labels}}">
+              Please specify other language spoken
+            </label>
+            <div class="screener-question-container"
+              v-bind:class="{'error': errors.has('Client.languageOther', 'ClientContact')}">
+              <div class="error-message"
+                v-if="errors.has('Client.languageOther', 'ClientContact')">
+                  {{ __('Please specify other language.', translationID) }}
+              </div>
+              <input type="text" name="Client.languageOther" value="" required
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('specify other language', translationID) }}"
+                v-model="client._attrs.languageOther"
+                v-validate="{required: true}">
+            </div>
+          </div>
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="client-phone">
+            {{ __('Phone Number', translationID) }}
+          </label>
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Client.phone', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.phone', 'ClientContact')">
+                v{ errors.first('Client.phone', 'ClientContact') }
+            </div>
+            <div class="phone-us">
+              <input id="client-phone" name="Client.phone" value="" type="tel"
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('phone number', translationID) }}"
+                data-js="calc-input"
+                data-js-regex="^([0-9]{0,3})(\-[0-9]{0,3})?(\-[0-9]{0,4})?$"
+                v-on:keydown="$event.target.value = filterPhone($event)"
+                v-on:blur="client._attrs.phone = filterPhone($event)"
+                v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+            </div>
+          </div>
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}">
+            {{ __('Phone Type', translationID) }}
+          </label>
+          <div>
+            {% for option in phoneTypes %}
+            <label class="styled-radio screener-label d-block m-bottom">
+              <input type="radio" value="{{ option.value }}" name="Client.phoneType"
+                data-object="client"
+                data-key="phoneType"
+                v-model="client._attrs.phoneType">
+              <span class="styled-radio-label">{{ __(option.text, translationID) }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="client-phone">
+            {{ __('Alternate Phone Number', translationID) }}
+          </label>
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Client.phoneAlt', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.phoneAlt', 'ClientContact')">
+                v{ errors.first('Client.phoneAlt', 'ClientContact') }
+            </div>
+            <div class="phone-us">
+              <input id="client-phone" name="Client.phoneAlt" value="" type="tel"
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('alternate phone number', translationID) }}"
+                data-js="calc-input"
+                data-js-regex="^([0-9]{0,3})(\-[0-9]{0,3})?(\-[0-9]{0,4})?$"
+                v-on:keydown="$event.target.value = filterPhone($event)"
+                v-on:blur="client._attrs.phoneAlt = filterPhone($event)"
+                v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+            </div>
+          </div>
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}">
+            {{ __('Alternate Phone Type', translationID) }}
+          </label>
+          <div>
+            {% for option in phoneTypes %}
+            <label class="styled-radio screener-label d-block m-bottom">
+              <input type="radio" value="{{ option.value }}" name="Client.phoneAltType"
+                data-object="client"
+                data-key="phoneAltType"
+                v-model="client._attrs.phoneAltType">
+              <span class="styled-radio-label">{{ __(option.text, translationID) }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}">
+            {{ __('Best time to contact you?', translationID) }}
+          </label>
+          <div>
+            {% for option in contactTimes %}
+            <label class="styled-checkbox screener-checkbox screener-label d-block">
+              <input type="checkbox" value="{{ option.value }}"
+                data-object="client"
+                data-key="contactTimes"
+                v-on:change="push">
+              <span class="styled-checkbox-label">{{ __(option.text, translationID) }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="client-email">
+            {{ __('Email', translationID) }}
+          </label>
+          <div class="screener-question-container"
+            v-bind:class="{'error': errors.has('Client.email', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.email', 'ClientContact')">
+                v{ errors.first('Client.email', 'ClientContact') }
+            </div>
+            <input type="email" class="w-input-double" id="client-email" name="Client.email" value=""
+              data-vv-scope="ClientContact"
+              data-vv-as="{{ __('email', translationID) }}"
+              v-model="client._attrs.email"
+              v-validate="{email: true}">
+          </div>
+        </div>
+
+        <hr class="screener-divider">
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="client-address-1">
+            {{ __('Street #', translationID) }}
+          </label>
+          <input class="w-input-double" id="client-address-1" name="Client.streetNumber" value=""
+            v-model="client._attrs.streetNumber">
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="client-address-2">
+            {{ __('Street Name', translationID) }}
+          </label>
+          <input id="client-address-2" name="Client.streetName" value=""
+            v-model="client._attrs.streetName">
+        </div>
+
+        <div class="m-bottom-2">
+          <label class="{{styles.labels}}" for="client-unit">
+            {{ __('Unit #', translationID) }}
+          </label>
+          <input id="client-unit" name="Client.unit" value=""
+            v-model="client._attrs.unit">
+        </div>
+
+        <div>
+          <label class="{{styles.labels}}" for="client-borough">
+            {{ __('Borough', translationID) }}
+          </label>
+          <select id="client-borough" name="Client.borough" value=""
+            v-model="client._attrs.borough">
+            {% for location in locations %}
+            <option value="{{ location.value }}">{{ __(location.text, translationID) }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</fieldset>{# /#step-3 #}

@@ -4,7 +4,7 @@
 
 input,
 textarea {
-  @include placeholder {
+  &::placeholder {
     color: $color-grey-mid;
   }
 }
@@ -12,7 +12,7 @@ textarea {
 #{$all-text-inputs},
 textarea,
 select {
-  @include appearance(none);
+  appearance: none;
   border: 1px solid $color-grey-mid;
   border-radius: 0;
   display: block;
@@ -26,6 +26,14 @@ select {
 
   .error & {
     border-color: $color-red;
+  }
+}
+
+#{$all-text-inputs} {
+  &.w-input-double {
+    @include media($bp-tablet-up) {
+      min-width: 400px
+    }
   }
 }
 
@@ -59,16 +67,17 @@ textarea {
 }
 
 input[type="number"] {
-  @include appearance(textfield);
+  appearance: textfield;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
-    @include appearance(none);
+    appearance: none;
     margin: 0;
   }
 }
 
-.styled-checkbox {
+.styled-checkbox,
+.styled-radio {
   cursor: pointer;
   display: block;
   padding-#{$text-direction-start}: 40px;
@@ -82,7 +91,7 @@ input[type="number"] {
 .styled-checkbox-label {
   &::before {
     @include size($checkbox-size);
-    @include transition(all .2s);
+    transition: all .2s;
     @if $text-direction == 'rtl' {
       @include position(absolute, 0 0 null null);
     } @else {
@@ -108,6 +117,39 @@ input[type="number"] {
     &::before {
       border: 0;
       box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #0071bc;
+    }
+  }
+}
+
+.styled-radio-label {
+  &::before {
+    @include size($checkbox-size);
+    transition: all .2s;
+    @if $text-direction == 'rtl' {
+      @include position(absolute, 0 0 null null);
+    } @else {
+      @include position(absolute, 0 null null 0);
+    }
+    background: $color-white;
+    border: 1px solid $color-grey-mid;
+    border-radius: 50%;
+    content: '';
+    display: inline-block;
+    min-width: $checkbox-size;
+  }
+
+  input:checked + & {
+    &::before {
+      background-color: $color-blue;
+      box-shadow: 0 0 0 2px #184e9e inset, 0 0 0 4px #fff inset;
+      border: 0;
+    }
+  }
+
+  input:focus + & {
+    &::before {
+      border: 0;
+      box-shadow: 0 0 0 2px #184e9e inset, 0 0 0 4px #fff inset;
     }
   }
 }

@@ -2,32 +2,8 @@
 * Utility classes
 */
 
-.f-left {
-  float: left
-}
-
-.m-0 {
-  margin: 0
-}
-
-.c-black {
-  color: $color-black
-}
-
-.c-grey-dark {
-  color: $color-grey-dark
-}
-
-.f-black {
-  fill: $color-black
-}
-
-.f-grey-mid {
-  fill: $color-grey-mid
-}
-
-.f-grey-dark {
-  fill: $color-grey-dark
+.o-hidden {
+  overflow: hidden
 }
 
 .sr-only {
@@ -39,6 +15,10 @@
 }
 
 .hidden {
+  display: none !important;
+}
+
+.next-hidden + * {
   display: none !important;
 }
 

@@ -1,0 +1,122 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Rollbar\n"
+"POT-Creation-Date: 2015-11-03 11:45+0100\n"
+"PO-Revision-Date: 2015-11-03 11:48+0100\n"
+"Last-Translator: Dots United <info@dotsunited.de>\n"
+"Language-Team: flowdee <coder@flowdee.de>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPathExcluded-0: ../includes/lib\n"
+
+#: ../includes/class.settings.php:58
+msgid "Status"
+msgstr "Status"
+
+#: ../includes/class.settings.php:67
+msgid "Access Token"
+msgstr "Access Token"
+
+#: ../includes/class.settings.php:76
+msgid "Environment"
+msgstr "Entwicklungsumgebung"
+
+#: ../includes/class.settings.php:85
+msgid "Logging level"
+msgstr "Logging level"
+
+#: ../includes/class.settings.php:128
+msgid "PHP error logging"
+msgstr "PHP Fehlermeldungen loggen"
+
+#: ../includes/class.settings.php:132
+msgid "Javascript error logging"
+msgstr "Javascript Fehlermeldungen loggen"
+
+#: ../includes/class.settings.php:142
+msgid "Client Side Access Token"
+msgstr "Client Side Access Token"
+
+#: ../includes/class.settings.php:146
+msgid "Server Side Access Token"
+msgstr "Server Side Access Token"
+
+#: ../includes/class.settings.php:150
+msgid ""
+"You can find your access tokens under your project settings: <strong>Project "
+"Access Tokens</strong>."
+msgstr ""
+"Deine Access Tokens findest du unter den Projekteinstellungen: "
+"<strong>Project Access Tokens</strong>."
+
+#: ../includes/class.settings.php:163
+msgid "Define the current environment: e.g. \"production\" or \"development\"."
+msgstr ""
+"Definiere die aktuelle Entwicklungsumgebung z.B. \"production\" or "
+"\"development\"."
+
+#: ../includes/class.settings.php:176
+msgid "Fatal run-time errors (E_ERROR) only"
+msgstr "Fatal run-time errors (E_ERROR) only"
+
+#: ../includes/class.settings.php:178
+msgid "Run-time warnings (E_WARNING) and above"
+msgstr "Run-time warnings (E_WARNING) and above"
+
+#: ../includes/class.settings.php:180
+msgid "Compile-time parse errors (E_PARSE) and above"
+msgstr "Compile-time parse errors (E_PARSE) and above"
+
+#: ../includes/class.settings.php:182
+msgid "Run-time notices (E_NOTICE) and above"
+msgstr "Run-time notices (E_NOTICE) and above"
+
+#: ../includes/class.settings.php:184
+msgid "User-generated error messages (E_USER_ERROR) and above"
+msgstr "User-generated error messages (E_USER_ERROR) and above"
+
+#: ../includes/class.settings.php:186
+msgid "User-generated warning messages (E_USER_WARNING) and above"
+msgstr "User-generated warning messages (E_USER_WARNING) and above"
+
+#: ../includes/class.settings.php:188
+msgid "User-generated notice messages (E_USER_NOTICE) and above"
+msgstr "User-generated notice messages (E_USER_NOTICE) and above"
+
+#: ../includes/class.settings.php:190
+msgid ""
+"Suggest code changes to ensure forward compatibility (E_STRICT) and above"
+msgstr ""
+"Suggest code changes to ensure forward compatibility (E_STRICT) and above"
+
+#: ../includes/class.settings.php:192
+msgid ""
+"Warnings about code that will not work in future versions (E_DEPRECATED) and "
+"above"
+msgstr ""
+"Warnings about code that will not work in future versions (E_DEPRECATED) and "
+"above"
+
+#: ../includes/class.settings.php:194
+msgid "Absolutely everything (E_ALL)"
+msgstr "Absolutely everything (E_ALL)"
+
+#: ../includes/class.settings.php:207
+msgid "Enabled"
+msgstr "Aktiviert"
+
+#: ../includes/class.settings.php:246
+msgid "No plugins installed."
+msgstr "Keine Plugins installiert."
+
+#: ../includes/class.settings.php:253
+msgid "Coming soon!"
+msgstr "Coming soon!"

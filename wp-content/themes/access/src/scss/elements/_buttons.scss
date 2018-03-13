@@ -1,6 +1,6 @@
 .btn {
-  @include appearance(none);
-  @include transition(background .2s ease-in, color .2s ease-in);
+  appearance: none;
+  transition: background .2s ease-in, color .2s ease-in;
   @include typography-h4();
   background: $color-white;
   border: 0;
@@ -101,4 +101,31 @@
 
 .btn-small {
   font-size: 16px;
+}
+
+.btn-toggle {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0;
+  font-size: $font-size-small;
+  padding: $spacing-base;
+  text-align: $text-direction-start;
+  border-radius: $btn-radius;
+
+  &::after {
+    @include position(relative, -.1em null null null);
+    @include size(0 0);
+    @include triangle(.8em .6em, $color-blue, down);
+    content: '';
+    display: inline-block;
+    margin-#{$text-direction-start}: .5em;
+  }
+
+  &.active {
+    &::after {
+      @include triangle(.8em .6em, $color-blue, up);
+      border-top: 0;
+    }
+  }
 }

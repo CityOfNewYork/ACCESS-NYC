@@ -1,22 +1,18 @@
+/**
+ * Animate
+ */
 
+// Dependencies
+@import 'variables.scss';
 
+// Declarations
 @mixin animate($animation: none, $speed: $animate-scss-speed) {
   @if $animation != none {
-    -webkit-animation-name: $animation;
-       -moz-animation-name: $animation;
-         -o-animation-name: $animation;
-            animation-name: $animation;
+    animation-name: $animation;
   }
-  -webkit-animation-duration: $speed;
-     -moz-animation-duration: $speed;
-       -o-animation-duration: $speed;
-          animation-duration: $speed;
-  -webkit-animation-fill-mode: both;
-     -moz-animation-fill-mode: both;
-       -o-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-timing-function: $animate-timing-function;
-          animation-timing-function: $animate-timing-function;
+  animation-duration: $speed;
+  animation-fill-mode: both;
+  animation-timing-function: $animate-timing-function;
 }
 
 body { /* Addresses a small issue in webkit: http://bit.ly/NEdoDq */

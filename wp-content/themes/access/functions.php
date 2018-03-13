@@ -1,23 +1,12 @@
 <?php
 
-if ( ! class_exists( 'Timber' ) ) {
-  add_action( 'admin_notices', function() {
-    echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php' ) ) . '</a></p></div>';
-  } );
-  return;
-}
+// Environments
+require_once(get_template_directory() . '/config/environments.php');
 
-// Disable the google-authenticator plugin for local and staging environments.
-// is_wpe is defined in the mu-plugins/wpengine-common plugin. is_wpe()
-// returns true only if the site is running on a production environment.
-// https://wpengine.com/support/determining-wp-engine-environment/
-if ( !function_exists('is_wpe') || !is_wpe() ) {
-  $plugins = array(
-    'google-authenticator/google-authenticator.php'
-  );
-  require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-  deactivate_plugins($plugins);
-}
+// Notifications
+require_once(get_template_directory() . '/includes/notifications.php');
+
+Notifications\timber();
 
 // Hiding the regular admin post, and comment pages
 // To add pages to the list, add:
@@ -364,7 +353,7 @@ function wpml_switcher_urls($languages) {
           $languages[$lang_code]['url'] = '/programs/?program_cat='.$prog;
         }
         // if not english, then remove the language code and add the correct one
-        elseif($lang_code != 'en' || $lang_code != '' ){   
+        elseif($lang_code != 'en' || $lang_code != '' ){
           $languages[$lang_code]['url'] = '/'.$lang_code.'/programs/?program_cat='.$prog.'-'.$lang_code;
         }
       }
@@ -406,7 +395,9 @@ class BSDStarterSite extends TimberSite {
 
   function add_to_context ( $context ) {
     $context['menu'] = new TimberMenu('header-menu');
+    error_reporting(0);
     $context['language_code'] = ICL_LANGUAGE_CODE;
+    error_reporting(WP_DEBUG);
     $context['site'] = $this;
     $context['search_links'] = Timber::get_posts(array(
       'post_type' => 'program_search_links',
@@ -431,14 +422,14 @@ class BSDStarterSite extends TimberSite {
 
     // Determine if page is in print view.
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
-    
+
     // Get the META description - return english if empty
     if( ICL_LANGUAGE_CODE != 'en'){
       $orig_page_id= get_page_by_path(trim( $_SERVER["REQUEST_URI"] , '/'.ICL_LANGUAGE_CODE ))->ID;
     }else{
       $orig_page_id= get_page_by_path(trim( $_SERVER["REQUEST_URI"] , '/'))->ID;
     }
-    
+
     $page_id = apply_filters( 'wpml_object_id', $orig_page_id, 'page', true, ICL_LANGUAGE_CODE );
 
     $page_desc = get_field('page_meta_description', $page_id);
@@ -448,9 +439,9 @@ class BSDStarterSite extends TimberSite {
     }
 
     if(is_home()){
-      $context['page_meta_desc'] = get_bloginfo('description');  
+      $context['page_meta_desc'] = get_bloginfo('description');
     }elseif ($page_id || $page_desc ) {
-      $context['page_meta_desc'] = $page_desc;      
+      $context['page_meta_desc'] = $page_desc;
     }
     // end Get the META description
 
@@ -535,7 +526,7 @@ require_once(get_template_directory() . '/includes/bsdstarter_editor_styles.php'
 require_once(get_template_directory() . '/includes/bsdstarter_shortcodes.php');
 
 // Includes jQuery
-if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
+if (!is_admin()) add_action('wp_enqueue_scripts', 'my_jquery_enqueue', 11);
 function my_jquery_enqueue() {
    wp_deregister_script('jquery');
 }
@@ -547,7 +538,7 @@ $office_loc = array(
   'post_types' => array('location'),
   'fields' => array(
     'google_map' => 'field_588003b6be759',
-    'address_street'   => 'field_58800318be754', 
+    'address_street'   => 'field_58800318be754',
     'address_street_2' => 'field_5880032abe755',
     'city'      => 'field_58acf5f524f67',
     'zip'       => 'field_58acf60c24f68',
@@ -558,7 +549,7 @@ function trigger_gmaps(){
   global $post;
   global $office_loc;
 
-  if ( $post && $post->post_type == 'location' ){    
+  if ( $post && $post->post_type == 'location' ){
     // get the address field for the google map
     $location = get_field( $office_loc['fields']['google_map'], $post->ID );
 
@@ -604,12 +595,11 @@ function trigger_gmaps(){
       // update the google map fields
       update_field( $office_loc['fields']['google_map'], $location, $post->ID);
     }
-  } 
+  }
 }
 add_action('wp', 'trigger_gmaps', 1);
 // end of trigger_gmaps
 // *****
-
 
 // GatherContent - Mapped WordPress Field meta_keys edit
 add_filter( 'gathercontent_importer_custom_field_keys', function( $meta_keys ) {
@@ -622,22 +612,33 @@ add_filter( 'gathercontent_importer_custom_field_keys', function( $meta_keys ) {
       $new_meta_keys[$key]=$value;
     }
   }
-  // return the new array 
+  // return the new array
   return $new_meta_keys;
 } );
 // end of GatherContent - Mapped WordPress Field meta_keys edit
 
-// TITLE - edit the site title to remove tagline
-function access_title($title)
+
+// add meta description to head
+function access_meta_description($title)
 {
+  // render only on the homepage
   if( is_home()){
+    echo '<meta name="description" content="' . get_bloginfo('description') . '" />' . "\r\n";
+    // remove tagline from title tag
     $title = get_bloginfo('name');
   }
   return $title;
 }
-add_action( 'pre_get_document_title', 'access_title', 10, 1);
-// end TITLE
 
+add_action( 'pre_get_document_title', 'access_meta_description', 10, 1);
+// end add meta description to head
+
+/**
+ * Validate params through regex
+ * @param  string $namespace - the namespace of the parameter
+ * @param  string $subject   - the string to validate
+ * @return string            - returns blank string if false, parameter if valid
+ */
 function validate_params($namespace, $subject) {
   $patterns = array(
     'programs'=> '/^[A-Z0-9,]*$/',
@@ -650,24 +651,60 @@ function validate_params($namespace, $subject) {
   return (isset($matches[0])) ? $matches[0] : ''; // fail silently
 }
 
-Routes::map('programs/', function() {
-  Routes::load('archive-programs.php', null, null, 200);
-});
+/**
+ * Creates a shareable url along with valid hash
+ * @param  array $params - requires programs, categories, date, guid, share_link
+ * @return array         - 0; the url 1; the hash
+ */
+function share_data($params) {
+  $query = array();
+  $data = array();
 
-Routes::map('locations', function() {
-  Routes::load('locations.php', null, null, 200);
-});
+  // Gets the URL Parameters for the search value,
+  if (isset($params['programs'])) {
+    $query['programs'] = validate_params(
+      'programs', urldecode(htmlspecialchars($params['programs']))
+    );
+  }
 
-Routes::map('locations/json', function() {
-  Routes::load('archive-location.php', null, null, 200);
-});
+  if (isset($params['categories'])) {
+    $query['categories'] = validate_params(
+      'categories', urldecode(htmlspecialchars($params['categories']))
+    );
+  }
 
-Routes::map('eligibility', function() {
-  Routes::load('screener.php', null, null, 200);
-});
+  if (isset($params['date'])) {
+    $query['date'] = validate_params(
+      'date', urldecode(htmlspecialchars($params['date']))
+    );
+  }
 
-Routes::map('eligibility/results', function() {
-  $params = array();
-  $params['link'] = home_url().'/eligibility/results/';
-  Routes::load('eligibility-results.php', $params, null, 200);
-});
+  if (isset($params['guid'])) {
+    $query['guid'] = validate_params(
+      'guid', urldecode(htmlspecialchars($params['guid']))
+    );
+  }
+
+  // Build query
+  $http_query = http_build_query($query);
+  $http_query = (isset($http_query)) ? '?'.$http_query : '';
+  $url = home_url().$params['path'].$http_query;
+  $hash = \SMNYC\hash($url);
+
+  return array('url' => $url, 'hash' => $hash, 'query' => $query);
+}
+
+/**
+ * Scripts Configuration
+ */
+require_once(get_template_directory() . '/includes/scripts.php');
+
+/**
+ * Styles Configuration
+ */
+require_once(get_template_directory() . '/includes/styles.php');
+
+/**
+ * Routing Configuration
+ */
+require_once(get_template_directory() . '/includes/routing.php');

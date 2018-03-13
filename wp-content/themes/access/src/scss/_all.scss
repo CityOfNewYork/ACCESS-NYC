@@ -1,24 +1,19 @@
-/*!
-Theme Name: Access NYC
-Theme URI: http://www.bluestatedigital.com
-Author: Jon Jandoc, Blue State Digital
-Author URI: http://www.bluestatedigital.com
-Description: Custom theme
-*/
-
 /**
  * Vendor
  */
 @import 'bourbon';
 @import 'neat';
+@import 'functions/rem'; // Deprecated function overide
+@import 'functions/strip-units'; // Deprecated function overide
 @import 'normalize.scss/normalize';
 @import 'uswds/src/stylesheets/core/variables';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
+@import 'animate.scss/vendor/assets/stylesheets/animate/fadeIn';
 
 /**
  * General Settings
  */
-@import '../_variables.json.scss';
+@import 'variables-json.scss';
 @import 'core/variables';
 @import 'core/fonts';
 @import 'core/animate';
@@ -63,9 +58,21 @@ Description: Custom theme
 @import 'components/share-form';
 @import 'components/site-footer';
 @import 'components/site-header';
+@import 'components/c-accordion';
 
 /**
  * Utility
  */
 @import 'core/utility';
+@import 'core/dimensions';
+@import 'core/position';
+@import 'core/ui';
+@import 'core/grid';
+@import 'core/layouts';
+@import 'utility/display';
+@import 'utility/position';
+@import 'utility/text';
+@import 'core/borders';
+@import 'core/colors';
+@import 'core/toggles';
 @import 'core/print';

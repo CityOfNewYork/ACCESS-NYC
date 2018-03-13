@@ -12,7 +12,7 @@
       <p class="screener-explanation">{{ __('Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.', 'accessnyc-screener') }}</p>
     </div>
     <div class="non-prime-label">
-      <label class="screener-label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
+      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
         <% if (personIndex === 0) { %>
         {{ __('If you receive another type of income, select it below.', 'accessnyc-screener') }}
         <% } else { %>
@@ -56,7 +56,7 @@
   </div>
   <div id="screener-person-<%= personIndex %>-income-<%= matrixIndex %>-details" class="hidden">
     <div class="screener-question">
-      <label class="screener-label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount">
+      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount">
         <% if (personIndex === 0) { %>
         {{ __('How much do you receive for this type of income:', 'accessnyc-screener') }}
         <% } else { %>
@@ -66,12 +66,12 @@
       </label>
       <div class="screener-question-container">
         <div class="currency-usd">
-          <input id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].amount" type="number" data-type="float" required>
+          <input id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].amount" type="number" data-type="float" step="0.01" required>
         </div>
       </div>
     </div>
     <div class="screener-question">
-      <label class="screener-label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency">
+      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency">
         <% if (personIndex === 0) { %>
         {{ __('How often do you receive this income:', 'accessnyc-screener') }}
         <% } else { %>
