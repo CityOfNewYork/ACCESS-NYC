@@ -1,8 +1,8 @@
 === Enable Media Replace ===
-Contributors: mungobbq
+Contributors: ShortPixel
 Tags: admin, attachment, media, files
 Requires at least: 4.0
-Tested up to: 4.8
+Tested up to: 4.9.4
 Stable tag: trunk
 
 Enables replacing attachment files by simply uploading a new file in the media library edit view.
@@ -37,12 +37,20 @@ If you want more control over the format used to display the time, you can use t
 
 == Changelog ==
 
+= 3.2.1 =
+* Bugfix, typo made metadata changes (thanks GitHub user icecandy!)
+* Removed Shortpixel links and images
+
+= 3.2 =
+* Tested with WP 4.9.4
+* Added Shortpixel link in replace media screen
+
 = 3.1.1 =
 * Fixed bug introduced in an earlier version, preventing the updating of URLs on pages/posts if the link did not contain the domain name
 
 = 3.1 =
 * Got rid of some pesky old code, and added some better filtering options, thanks to GitHub users speerface, aaemnnosttv, and ururk
-* Brand new, shiny code to replace other image sizes in embeded media, thanks to GitHub user ianmjones!
+* Brand new, shiny code to replace other image sizes in embedded media, thanks to GitHub user ianmjones!
 * Tested with WP 4.8
 
 = 3.0.6 =
@@ -77,8 +85,8 @@ If you want more control over the format used to display the time, you can use t
 * Now inheriting permissions of the replaced files,  [Thank you Fiwad](https://github.com/fiwad)
 
 = 2.9.7RC1 =
-* Moved localization files into own directory. [Thank you Michael](https://github.com/michael-cannon)
-* Moved screensots into own directory. [Thank you Michael](https://github.com/michael-cannon)
+* Moved localization files into their own directory. [Thank you Michael](https://github.com/michael-cannon)
+* Moved screenshots into their own directory. [Thank you Michael](https://github.com/michael-cannon)
 
 = 2.9.6 =
 * Added fix by Grant K Norwood to address a possible security problem in SQL statements. Thanks Grant!
@@ -121,7 +129,7 @@ If you want more control over the format used to display the time, you can use t
 = 2.8 =
 * New and safer method for deleting thumbnails when a new image file is uploaded. 
 * New translations for simplified Chinese (thanks Tunghsiao Liu) and Italian (grazie Marco Chiesi)
-* Added method for detecting upload screen to ensure backwards compatibility with versions pre 3.5
+* Added method for detecting upload screen to ensure backward compatibility with versions pre 3.5
 
 = 2.7 =
 * A couple of changes made to ensure compatibility with WordPress 3.5. Thanks to Elizabeth Powell for the fixes!

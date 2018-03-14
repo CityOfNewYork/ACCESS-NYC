@@ -2,8 +2,8 @@
 Contributors: wpchefgadget
 Tags: login, security, authentication, Limit Login Attempts, Limit Login Attempts Reloaded, Limit Login Attempts Revamped, Limit Login Attempts Renovated, Limit Login Attempts Updated, Better Limit Login Attempts, Limit Login Attempts Renewed, Limit Login Attempts Upgraded
 Requires at least: 3.0
-Tested up to: 4.8
-Stable tag: 2.6.1
+Tested up to: 4.9.1
+Stable tag: 2.6.3
 
 Reloaded version of the original Limit Login Attempts plugin for Login Protection by a team of WordPress developers.
 
@@ -21,6 +21,7 @@ Features:
 * Optional logging and optional email notification.
 * Handles server behind the reverse proxy.
 * It is possible to whitelist/blacklist IPs and Usernames.
+* Sucuri Website Firewall compatibility.
 * **XMLRPC** gateway protection.
 * **Woocommerce** login page protection.
 * **Multi-site** compatibility with extra MU settings.
@@ -48,6 +49,12 @@ Based on the original code from Limit Login Attemps plugin by Johan Eenfeldt.
 3. Administration interface in WordPress 4.5.3
 
 == Changelog ==
+
+= 2.6.3 =
+Added support of Sucuri Website Firewall.
+
+= 2.6.2 =
+Fixed the issue with backslashes in usernames.
 
 = 2.6.1 =
 Plugin returns the 403 Forbidden header after the limit of login attempts via XMLRPC is reached.

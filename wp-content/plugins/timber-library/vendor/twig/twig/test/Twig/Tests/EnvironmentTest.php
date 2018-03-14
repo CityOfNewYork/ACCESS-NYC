@@ -311,6 +311,9 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($ext, $twig->getExtension('Twig_Tests_EnvironmentTest_Extension'));
         $this->assertSame($ext, $twig->getExtension('\Twig_Tests_EnvironmentTest_Extension'));
+
+        $this->assertTrue($twig->hasExtension('Twig\Tests\EnvironmentTest\Extension'));
+        $this->assertSame($ext, $twig->getExtension('Twig\Tests\EnvironmentTest\Extension'));
     }
 
     public function testAddExtension()
@@ -363,13 +366,13 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension_WithDeprecatedName());
         $twig->removeExtension('environment_test');
 
-        $this->assertFalse(array_key_exists('test', $twig->getTags()));
-        $this->assertFalse(array_key_exists('foo_filter', $twig->getFilters()));
-        $this->assertFalse(array_key_exists('foo_function', $twig->getFunctions()));
-        $this->assertFalse(array_key_exists('foo_test', $twig->getTests()));
-        $this->assertFalse(array_key_exists('foo_unary', $twig->getUnaryOperators()));
-        $this->assertFalse(array_key_exists('foo_binary', $twig->getBinaryOperators()));
-        $this->assertFalse(array_key_exists('foo_global', $twig->getGlobals()));
+        $this->assertArrayNotHasKey('test', $twig->getTags());
+        $this->assertArrayNotHasKey('foo_filter', $twig->getFilters());
+        $this->assertArrayNotHasKey('foo_function', $twig->getFunctions());
+        $this->assertArrayNotHasKey('foo_test', $twig->getTests());
+        $this->assertArrayNotHasKey('foo_unary', $twig->getUnaryOperators());
+        $this->assertArrayNotHasKey('foo_binary', $twig->getBinaryOperators());
+        $this->assertArrayNotHasKey('foo_global', $twig->getGlobals());
         $this->assertCount(2, $twig->getNodeVisitors());
     }
 
@@ -398,8 +401,11 @@ EOF
     {
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock());
         $twig->addExtension(new Twig_Tests_EnvironmentTest_ExtensionWithoutDeprecationInitRuntime());
-
         $twig->initRuntime();
+
+        // add a dummy assertion here to satisfy PHPUnit, the only thing we want to test is that the code above
+        // can be executed without throwing any deprecations
+        $this->addToAssertionCount(1);
     }
 
     /**
@@ -554,6 +560,7 @@ class Twig_Tests_EnvironmentTest_Extension extends Twig_Extension implements Twi
         );
     }
 }
+class_alias('Twig_Tests_EnvironmentTest_Extension', 'Twig\Tests\EnvironmentTest\Extension', false);
 
 class Twig_Tests_EnvironmentTest_Extension_WithDeprecatedName extends Twig_Extension
 {
