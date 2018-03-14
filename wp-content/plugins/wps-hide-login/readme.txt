@@ -1,10 +1,10 @@
 === WPS Hide Login ===
 
-Contributors: tabrisrp, WPServeur
+Contributors: tabrisrp, WPServeur, nicolaskulka
 Tags: rename, login, wp-login, wp-login.php, custom login url
 Requires at least: 4.1
-Tested up to: 4.5
-Stable tag: 1.1.7
+Tested up to: 4.9
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,52 @@ Change wp-login.php to anything you want.
 
 == Description ==
 
+= Français =
+
+*WPS Hide Login* est un plugin très léger qui vous permet de changer facilement et en toute sécurité l'url de la page de formulaire de connexion. Il ne renomme pas littéralement ou ne modifie pas les fichiers dans le noyau, ni n'ajoute des règles de réécriture. Il intercepte simplement les demandes de pages et fonctionne sur n'importe quel site WordPress. Le répertoire wp-admin et la page wp-login.php deviennent inaccessibles, vous devez donc ajouter un signet ou vous souvenir de l'URL. Désactiver ce plugin ramène votre site exactement à l'état dans lequel il était auparavant.
+
+Ce plugin vous est gentiment proposé par <a href="https://www.wpserveur.net/?refwps=14&campaign=wpshidelogin" target="_blank">WPServeur</a> l'hébergeur spécialisé WordPress.
+
+Découvrez également nos autres extensions gratuites :
+- <a href="https://fr.wordpress.org/plugins/wps-limit-login/" target="_blank">WPS Limit Login</a> pour bloquer les attaques par force brute.
+- <a href="https://fr.wordpress.org/plugins/wps-bidouille/" target="_blank">WPS Bidouille</a> pour optimiser votre WordPress et faire le plein d'infos.
+
+Ce plugin est seulement maintenu, ce qui signifie que nous ne garantissons pas un support gratuit. Envisagez de signaler un problème et soyez patient.
+
+= English =
+
 *WPS Hide Login* is a very light plugin that lets you easily and safely change the url of the login form page to anything you want. It doesn’t literally rename or change files in core, nor does it add rewrite rules. It simply intercepts page requests and works on any WordPress website. The wp-admin directory and wp-login.php page become inaccessible, so you should bookmark or remember the url. Deactivating this plugin brings your site back exactly to the state it was before.
 
+This plugin is kindly proposed by <a href="https://www.wpserveur.net/?refwps=14&campaign=wpshidelogin" target="_blank">WPServeur</a> the specialized WordPress web host.
+
+Discover also our other free extensions:
+- <a href="https://wordpress.org/plugins/wps-limit-login/" target="_blank">WPS Limit Login</a> to block brute force attacks.
+- <a href="https://wordpress.org/plugins/wps-bidouille/" target="_blank">WPS Bidouille</a> to optimize your WordPress and get more info.
+
+This plugin is only maintained, which means we do not guarantee free support. Consider reporting a problem and be patient.
+
 = Compatibility =
+
+= Français =
+
+Nécessite WordPress 4.1 ou supérieur. Toutes les choses liées à la connexion telles que le formulaire d'inscription, le formulaire de mot de passe perdu, le widget de connexion et les sessions expirées continuent de fonctionner.
+
+Il est également compatible avec tout plugin qui se connecte au formulaire de connexion, notamment:
+
+* BuddyPress,
+* bbPress,
+* Limit Login Attempts,
+* and User Switching.
+
+Évidemment, cela ne fonctionne pas avec les plugins ou les thèmes *hardcoded* wp-login.php.
+
+Fonctionne en multisite, mais pas testé avec des sous-domaines. L'activer pour un réseau vous permet de définir une valeur par défaut pour l'ensemble du réseau. Les sites individuels peuvent toujours renommer leur page de connexion pour autre chose.
+
+Si vous utilisez un **plugin de mise en cache de pages** autre que WP Rocket, vous devez ajouter le slug de la nouvelle URL de connexion à la liste des pages à ne pas mettre en cache. WP Rocket est déjà entièrement compatible avec le plugin.
+
+Pour W3 Total Cache et WP Super Cache, ce plugin vous donnera un message avec un lien vers le champ que vous devriez mettre à jour.
+
+= English =
 
 Requires WordPress 4.1 or higher. All login related things such as the registration form, lost password form, login widget and expired sessions just keep working.
 
@@ -39,11 +82,21 @@ https://github.com/tabrisrp/wps-hide-login
 
 == Installation ==
 
+= Français =
+
+1. Aller dans Extensions › Ajouter.
+2. Rechercher *WPS Hide Login*.
+3. Recherchez ce plugin, téléchargez-le et activez-le.
+4. La page vous redirigera vers les paramètres. Changez votre URL de connexion.
+5. Vous pouvez changer cette option quand vous le souhaitez, il vous suffit de retourner dans Paramètres > WPS Hide Login.
+
+= English =
+
 1. Go to Plugins › Add New.
 2. Search for *WPS Hide Login*.
 3. Look for this plugin, download and activate it.
 4. The page will redirect you to the settings. Change your login url there.
-5. You can change this option any time you want, just go back to Settings › General › WPS Hide Login.
+5. You can change this option any time you want, just go back to Settings › WPS Hide Login.
 
 == Screenshots ==
 1. Setting on single site installation
@@ -51,18 +104,66 @@ https://github.com/tabrisrp/wps-hide-login
 
 == Frequently Asked Questions ==
 
+= J'ai oublié mon identifiant de connexion ! =
+
+Allez dans votre base de données MySQL et recherchez la valeur de 'whl_page' dans la table des options, ou supprimez le dossier 'wps-hide-login' de votre dossier 'plugins', connectez-vous via wp-login.php et réinstallez le plugin .
+
+Sur une installation multisite, l'option 'whl_page' sera dans la table de sitemeta, si l'option n'existe pas dans la table des options.
+
+= URL d'inscription et de mot de passe oublié =
+
+Il vous faut donner l'url. exemple : /login?action=register ou /login?action=lostpassword
+Mais il n'y pas de redirection via le plugin, de l'url par défaut de WordPress (/wp-login.php?action=register ou /wp-login.php?action=lostpassword) sinon tout le monde pourrait connaître l'url d'administration de votre site.
+
+= Je suis bloqué ! =
+
+Ce cas peut provenir de plugins modifiant vos fichiers .htaccess pour ajouter ou modifier des règles, ou d'une ancienne configuration de WordPress MU non mise à jour depuis l'ajout de Multisite.
+
+La première étape consiste à vérifier votre fichier .htaccess et à le comparer à un fichier .htaccess normal, pour voir si le problème provient de ce fichier.
+
 = I forgot my login url!  =
 
 Either go to your MySQL database and look for the value of `whl_page` in the options table, or remove the `wps-hide-login` folder from your `plugins` folder, log in through wp-login.php and reinstall the plugin.
 
 On a multisite install the `whl_page` option will be in the sitemeta table, if there is no such option in the options table.
 
+= Registration and lost password URL =
+
+You have to give the url. example: /login?action=register or /login?action=lostpassword
+But there is no redirection via the plugin, the default URL of WordPress (/wp-login.php?action=register or /wp-login.php?action=lostpassword) otherwise everyone could know the url of administration of your site.
+
 = I'm locked out! =
+
 This case can come from plugins modifying your .htaccess files to add or change rules, or from an old WordPress MU configuration not updated since Multisite was added.
 
 First step is to check your .htaccess file and compare it to a regular one, to see if the problem comes from it.
 
 == Changelog ==
+
+= 1.2.5 =
+* Remove : redirect activate
+
+= 1.2.4 =
+* Remove: Third party wpserveur
+
+= 1.2.3.1 =
+* Enhancement: Add translations cs_CZ, da_DK, es_ES, it_IT, ru_RU
+* Fix: Parse error classes/plugin.php l.530
+
+= 1.2.3 =
+* Fix: change 403 to 404 error on wp-admin
+* Fix: activate plugin
+* Enhancement: Third party wpserveur
+
+= 1.2.2 =
+* Enhancement: Compatibility 4.9.x
+
+= 1.2.1 =
+* Enhancement: Prevent access to the login page by using the URL encoded version of wp-login.php
+
+= 1.2 =
+* Enhancement: Prevent redirection to login URL when accessing /wp-admin/customize.php directly
+* Enhancement: Redirect to admin URL when already logged-in and accessing login URL without the action query string
 
 = 1.1.7 =
 * Fix: change fake 404 on wp-admin when not logged-in to a 403 forbidden to prevent fatal errors with various themes & plugins

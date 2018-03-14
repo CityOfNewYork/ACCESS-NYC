@@ -135,10 +135,6 @@ class Pull extends Base {
 			unset( $post_data['tax_input'] );
 		}
 
-		if ( empty( $post_data['post_title'] ) && ! empty( $this->item->name ) ) {
-			$post_data['post_title'] = sanitize_text_field( $this->item->name );
-		}
-
 		$post_id = wp_insert_post( $post_data, 1 );
 
 		if ( is_wp_error( $post_id ) ) {
@@ -280,6 +276,10 @@ class Pull extends Base {
 			}
 		}
 
+		if ( $this->should_update_title_with_item_name( $post_data ) ) {
+			$post_data['post_title'] = sanitize_text_field( $this->item->name );
+		}
+
 		if ( ! empty( $post_data['ID'] ) ) {
 			$post_data = apply_filters( 'gc_update_wp_post_data', $post_data, $this );
 		} else {
@@ -287,6 +287,47 @@ class Pull extends Base {
 		}
 
 		return $post_data;
+	}
+
+	/**
+	 * Check if post title should be updated with item title.
+	 *
+	 * Only if the post title is empty, or there is no post_title field mapped.
+	 *
+	 * @since  3.1.8
+	 *
+	 * @return boolean
+	 */
+	public function should_update_title_with_item_name( $post_data ) {
+		$should = ! empty( $this->item->name );
+		$empty_title = empty( $post_data['post_title'] );
+		if ( ! $empty_title ) {
+			$should = ! $this->has_post_title_mapping();
+		}
+
+		return $should;
+	}
+
+	/**
+	 * Check if mapping has a mapping for the post_title. (To fallback to item title)
+	 *
+	 * @since  3.1.8
+	 *
+	 * @return boolean
+	 */
+	public function has_post_title_mapping() {
+		try {
+			array_filter( $this->mapping->data(), function( $mapped ) {
+				if ( isset( $mapped['type'], $mapped['value'] )
+					&& 'wp-type-post' === $mapped['type']
+					&& 'post_title' === $mapped['value'] ) {
+					throw new \Exception( 'found' );
+				}
+			} );
+		} catch ( \Exception $e ) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -374,7 +415,7 @@ class Pull extends Base {
 			$this->element->value = implode( ', ', $this->element->value );
 		}
 
-		$value = $this->sanitize_post_field( $post_column, $this->element->value, $post_data['ID'] );
+		$value = $this->sanitize_post_field( $post_column, $this->element->value, $post_data );
 
 		return $this->maybe_append( $post_column, $value, $post_data );
 	}
@@ -439,15 +480,18 @@ class Pull extends Base {
 	 * @return array  $post_data   The modified WP Post data array.
 	 */
 	protected function set_media_field_value( $destination, $post_data ) {
+		static $field_number = 0;
 		$media_items = $this->sanitize_element_media();
 
 		if (
 			in_array( $destination, array( 'gallery', 'content_image', 'excerpt_image' ), true )
 			&& is_array( $media_items )
 		) {
+			$field_number++;
 			$position = 0;
 			foreach ( $media_items as $index => $media ) {
 				$media_items[ $index ]->position = ++$position;
+				$media_items[ $index ]->field_number = $field_number;
 
 				$token = '#_gc_media_id_' . $media->id . '#';
 				$field = 'excerpt_image' === $destination ? 'post_excerpt' : 'post_content';
@@ -649,7 +693,7 @@ class Pull extends Base {
 						$image = wp_get_attachment_image( $attach_id, 'full', false, $atts );
 
 						// If we've found a GC "shortcode"...
-						if ( $media_replace = $this->get_media_shortcode_attributes( $post_data[ $field ], $media->position ) ) {
+						if ( $media_replace = $this->get_media_shortcode_attributes( $post_data[ $field ], (array) $media ) ) {
 
 							foreach ( $media_replace as $replace_val => $atts ) {
 
@@ -698,7 +742,7 @@ class Pull extends Base {
 						$link = '<a href="' . esc_url( wp_get_attachment_url( $attach_id ) ) . '" data-gcid="' . $atts['data-gcid']. '" class="' . $atts['class'] . '">' . get_the_title( $attach_id  ) . '</a>';
 
 						// If we've found a GC "shortcode"...
-						if ( $media_replace = $this->get_media_shortcode_attributes( $post_data[ $field ], $media->position ) ) {
+						if ( $media_replace = $this->get_media_shortcode_attributes( $post_data[ $field ], (array) $media ) ) {
 
 							foreach ( $media_replace as $replace_val => $atts ) {
 								// Replace the GC "shortcode" with the file/link.
