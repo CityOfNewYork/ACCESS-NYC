@@ -1,8 +1,8 @@
 /**
- * GatherContent Plugin - v3.1.6 - 2017-11-13
+ * GatherContent Plugin - v3.1.9 - 2018-02-14
  * http://www.gathercontent.com
  *
- * Copyright (c) 2017 GatherContent
+ * Copyright (c) 2018 GatherContent
  * Licensed under the GPLv2 license.
  */
 

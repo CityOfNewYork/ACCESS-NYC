@@ -55,11 +55,6 @@ class Site extends Core implements CoreInterface {
 	public $language;
 	/**
 	 * @api
-	 * @var string of language attributes for usage in the <html> tag
-	 */
-	public $language_attributes;
-	/**
-	 * @api
 	 * @var bool true if multisite, false if plain ole' WordPress
 	 */
 	public $multisite;
@@ -86,6 +81,8 @@ class Site extends Core implements CoreInterface {
 	 */
 	public $title;
 	public $url;
+	public $home_url;
+	public $site_url;
 
 	/**
 	 * @api
@@ -163,7 +160,6 @@ class Site extends Core implements CoreInterface {
 		$this->title = $this->name;
 		$this->description = get_bloginfo('description');
 		$this->theme = new Theme();
-		$this->language_attributes = Helper::function_wrapper('language_attributes');
 		$this->multisite = false;
 	}
 
@@ -173,6 +169,8 @@ class Site extends Core implements CoreInterface {
 	 */
 	protected function init() {
 		$this->url = home_url();
+		$this->home_url = $this->url;
+		$this->site_url = site_url();
 		$this->rdf = get_bloginfo('rdf_url');
 		$this->rss = get_bloginfo('rss_url');
 		$this->rss2 = get_bloginfo('rss2_url');
@@ -180,7 +178,15 @@ class Site extends Core implements CoreInterface {
 		$this->language = get_bloginfo('language');
 		$this->charset = get_bloginfo('charset');
 		$this->pingback = $this->pingback_url = get_bloginfo('pingback_url');
-		$this->language_attributes = Helper::function_wrapper('language_attributes');
+	}
+
+
+	/**
+	 * Returns the language attributes that you're looking for
+	 * @return string
+	 */
+	public function language_attributes() {
+		return get_language_attributes();
 	}
 
 	/**

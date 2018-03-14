@@ -3,7 +3,7 @@
 Plugin Name: Enable Media Replace
 Plugin URI: http://www.mansjonasson.se/enable-media-replace
 Description: Enable replacing media files by uploading a new file in the "Edit Media" section of the WordPress Media Library.
-Version: 3.1.1
+Version: 3.2.1
 Author: Måns Jonasson
 Author URI: http://www.mansjonasson.se
 
@@ -79,7 +79,7 @@ function emr_options() {
 			include("popup.php");
 		}
 	}
-	
+
 	if ( isset( $_GET['action'] ) && $_GET['action'] == 'media_replace_upload' ) {
 		$plugin_url =  str_replace("enable-media-replace.php", "", __FILE__);
     	check_admin_referer( 'media_replace_upload' ); // die if invalid or missing nonce
@@ -136,7 +136,7 @@ function emr_get_modified_date($atts) {
 		// do date conversion
 		return date( $format, $filetime );
 	}
-	
+
 	return false;
 }
 

@@ -3,8 +3,8 @@ Contributors:      gathercontent, mathew-chapman, namshee, jtsternberg, justinsa
 Donate link:       http://www.gathercontent.com
 Tags               structured content, gather content, gathercontent, import, migrate, export, mapping, production, writing, collaboration, platform, connect, link, gather, client, word, production
 Requires at least: 3.8
-Tested up to:      4.8.3
-Stable tag:        3.1.7
+Tested up to:      4.9.4
+Stable tag:        3.1.9
 License:           GPL-2.0+
 License URI:       https://opensource.org/licenses/GPL-2.0
 
@@ -40,7 +40,7 @@ This section describes how to install the plugin and get it working.
 3. Click on the menu item "GatherContent"
 4. Link your accounts. You will need to enter your GatherContent account URL (e.g. http://mywebsite.gathercontent.com) and your personal GatherContent API key. You can find your API key in your [Settings area within GatherContent](https://gathercontent.com/developers/authentication/).
 
-For more detailed installation instructions please visit our [HelpCentre](https://gathercontent.com/support/wordpress-integration-installation/).
+For more detailed installation instructions please visit our [Help Centre](http://help.gathercontent.com/importing-and-exporting-content#wordpress-integration).
 
 == Frequently Asked Questions ==
 
@@ -52,7 +52,7 @@ Below the text box is a button that will allow you to simply save all of that in
 **Note:** This information contains potentially senstive data. Please be careful with where you post it. Do not post it in the WordPress support forums.
 
 = If you need help =
-* Please [visit our support documentation](https://gathercontent.com/support/wordpress-integration).
+* Please [visit our support documentation](http://help.gathercontent.com/importing-and-exporting-content#wordpress-integration).
 
 == Screenshots ==
 1. Create Template Mappings to map your GatherContent Templates to your WordPress content.
@@ -63,6 +63,16 @@ Below the text box is a button that will allow you to simply save all of that in
 6. Or change the item's GatherContent status in quick-edit mode.
 
 == Changelog ==
+
+= 3.1.9 =
+* Fix the 3rd param passed to `Pull::sanitize_post_field()`, which needs to be the entire post data array.
+* Updated the help centre links.
+* Fixed quoted attributes (like alt text) for the pseudo-shortcodes used for media in the GatherContent content, e.g. `[media-1 align=right linkto=file alt="This will go to the image alt tag"]`
+* Allow using new shortcode syntax (like `[media_2-1]`) to include media from multiple media fields in GatherContent mapped to the content or excerpt. The original syntax will continue to work (e.g. `[media-1]`), but will be assumed to be the first media field, and will be the same as using the new syntax, `[media_1-1]`.
+
+= 3.1.8 =
+* If mapping does not map a field to the `post_title`, be sure to update title from the GC item name.
+* Fix bug with item updated dates not being properly formatted in some languages.
 
 = 3.1.7 =
 * Add WPML compatibility shim for properly mapping GatherContent taxonomy terms to translated language taxonomy terms where applicable, and vice-versa. **Note:** If the GC item uses the foreign language term name, then this will need to be unhooked. This can be done via:
@@ -232,6 +242,16 @@ if ( class_exists( 'GatherContent\\Importer\\General' ) ) {
 * Complete rewrite of old plugin
 
 == Upgrade Notice ==
+
+= 3.1.9 =
+* Fix the 3rd param passed to `Pull::sanitize_post_field()`, which needs to be the entire post data array.
+* Updated the help centre links.
+* Fixed quoted attributes (like alt text) for the pseudo-shortcodes used for media in the GatherContent content, e.g. `[media-1 align=right linkto=file alt="This will go to the image alt tag"]`
+* Allow using new shortcode syntax (like `[media_2-1]`) to include media from multiple media fields in GatherContent mapped to the content or excerpt. The original syntax will continue to work (e.g. `[media-1]`), but will be assumed to be the first media field, and will be the same as using the new syntax, `[media_1-1]`.
+
+= 3.1.8 =
+* If mapping does not map a field to the `post_title`, be sure to update title from the GC item name.
+* Fix bug with item updated dates not being properly formatted in some languages.
 
 = 3.1.7 =
 * Add WPML compatibility shim for properly mapping GatherContent taxonomy terms to translated language taxonomy terms where applicable, and vice-versa. **Note:** If the GC item uses the foreign language term name, then this will need to be unhooked. This can be done via:
