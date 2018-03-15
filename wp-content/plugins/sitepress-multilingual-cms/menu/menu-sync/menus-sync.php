@@ -67,7 +67,7 @@ if ( $icl_menus_sync->is_preview ) {
 								   value="<?php echo esc_attr( $name ) ?>"/>
 						</th>
 						<td><?php echo esc_html( $lang_details['display_name'] ) ?></td>
-						<td><?php printf( esc_html__( 'Add menu translation:  %s', 'sitepress' ), '<strong>' . $name . '</strong>' ) ?> </td>
+						<td><?php printf( esc_html__( 'Add menu translation:  %s', 'sitepress' ), '<strong>' . esc_html( $name ) . '</strong>' ) ?> </td>
 					</tr>
 				<?php
 				}
@@ -159,7 +159,7 @@ if ( $icl_menus_sync->is_preview ) {
 									?>
 									<input type="text" class="icl_msync_add"
 										   name="sync[menu_translations][<?php echo esc_attr( $menu_id ) ?>][<?php echo esc_attr( $l['code'] ) ?>]"
-										   value="<?php echo esc_attr( $menu['name'] ) . ' - ' . $l['display_name'] ?>"
+										   value="<?php echo esc_attr( $menu['name'] ) . ' - ' . esc_attr( $l['display_name'] ) ?>"
 									/>
 									<small><?php esc_html_e( 'Auto-generated title. Click to edit.', 'sitepress' ) ?></small>
 									<input type="hidden" value=""

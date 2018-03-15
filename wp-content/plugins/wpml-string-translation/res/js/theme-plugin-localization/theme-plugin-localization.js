@@ -21,6 +21,12 @@ jQuery(function($) {
 			this.scanningSection.section.on( 'click', '.header input:checkbox, .footer input:checkbox', {instance: this}, function (event){
 				event.data.instance.toggleCheckboxes( event.data.instance.scanningSection.section );
 			});
+
+			this.scanningSection.section.on( 'change', 'input:checkbox', {instance: this}, function(event) {
+				var checked = event.data.instance.scanningSection.section.find( '.item input:checkbox:checked' );
+				var disableScanButton = ! Boolean( checked.length );
+				$(event.data.instance.scanningSection.scanButton).prop('disabled', disableScanButton );
+			});
 		},
 
 		toggleItems: function (data, triggerElement) {
@@ -123,6 +129,7 @@ jQuery(function($) {
 			var selectedItems = sectionData.section.find('table').find('input:checkbox:checked');
 			var itemsCount = 0;
 			var that = this;
+			var type = sectionData.type;
 
 			this.elements = sectionData;
 			this.triggerElement.prop('disabled', true);
@@ -140,13 +147,20 @@ jQuery(function($) {
 				closeOnEscape: false
 			});
 
-			if ($('input[name="use_theme_plugin_domain"]').prop('checked')) {
-				this.ajaxScanDirFiles.auto_text_domain = 1;
-			}
-
 			if (selectedItems.length) {
 				selectedItems.toArray().forEach(function(element) {
-					this.ajaxScanDirFiles[sectionData.type] = $(element).val();
+					this.ajaxScanDirFiles = {};
+
+					if ($('input[name="use_theme_plugin_domain"]').prop('checked')) {
+						this.ajaxScanDirFiles.auto_text_domain = 1;
+					}
+
+					type = sectionData.type;
+					if ( -1 !== $( element ).data( 'attribute' ).search( 'mu-::-' ) ) {
+						type = 'mu-plugin';
+					}
+
+					this.ajaxScanDirFiles[ type ] = $(element).val();
 					this.ajaxScanDirFiles.action = $( sectionData.section ).attr('data-scan_folder-action');
 					this.ajaxScanDirFiles.nonce = $( sectionData.section ).attr('data-scan_folder-nonce');
 

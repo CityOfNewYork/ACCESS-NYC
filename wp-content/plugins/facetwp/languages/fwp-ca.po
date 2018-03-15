@@ -1,0 +1,788 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FacetWP\n"
+"POT-Creation-Date: 2018-03-08 04:25-0500\n"
+"PO-Revision-Date: 2018-03-08 04:25-0500\n"
+"Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
+"Language-Team: Matt Gibbs <hello@facetwp.com>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+
+#: includes/class-ajax.php:222
+msgid "FacetWP was unable to auto-detect the post listing"
+msgstr "FacetWP no ha pogut detectar automàticament el llistat d'entrades"
+
+#: includes/class-ajax.php:251
+msgid "Settings saved"
+msgstr "Paràmetres desats"
+
+#: includes/class-ajax.php:258
+msgid "Error: invalid JSON"
+msgstr "Error: JSON no vàlid"
+
+#: includes/class-ajax.php:378
+msgid "Nothing to import"
+msgstr "No hi ha res per importar"
+
+#: includes/class-ajax.php:414
+msgid "Imported"
+msgstr "Importat"
+
+#: includes/class-ajax.php:417
+msgid "Skipped"
+msgstr "Omès"
+
+#: includes/class-ajax.php:448
+msgid "Error"
+msgstr "Error"
+
+#: includes/class-display.php:136
+msgid "No results found"
+msgstr "No s'ha trobat cap resultat"
+
+#: includes/class-helper.php:434
+msgid "Posts"
+msgstr "Entrades"
+
+#: includes/class-helper.php:436
+msgid "Post Type"
+msgstr "Tipus d'entrada"
+
+#: includes/class-helper.php:437
+msgid "Post Date"
+msgstr "Data de publicació"
+
+#: includes/class-helper.php:438
+msgid "Post Modified"
+msgstr "Data de modificació"
+
+#: includes/class-helper.php:439
+msgid "Post Title"
+msgstr "Títol de l'entrada"
+
+#: includes/class-helper.php:440
+msgid "Post Author"
+msgstr "Autor de l'entrada"
+
+#: includes/class-helper.php:445
+msgid "Taxonomies"
+msgstr "Taxonomia"
+
+#: includes/class-helper.php:450
+msgid "Custom Fields"
+msgstr "Camps personalitzats"
+
+#: includes/class-init.php:139 templates/page-settings.php:63
+msgid "Settings"
+msgstr "Paràmetres"
+
+#: includes/class-init.php:171
+msgid "integration add-on"
+msgstr "extensió d'integració"
+
+#: includes/class-init.php:172
+#, php-format
+msgid "To use FacetWP with %s, please install the %s, then re-index."
+msgstr "Per fer servir FacetWP amb %s, instal·la %s, i re-indexa."
+
+#: includes/class-renderer.php:497 includes/class-renderer.php:614
+msgid "of"
+msgstr "de"
+
+#: includes/class-renderer.php:531 includes/facets/checkboxes.php:331
+#: includes/facets/dropdown.php:191 includes/facets/fselect.php:322
+#: includes/facets/hierarchy.php:212 includes/facets/radio.php:210
+msgid "Sort by"
+msgstr "Ordenar per"
+
+#: includes/class-renderer.php:535
+msgid "Title (A-Z)"
+msgstr "Títol (A-Z)"
+
+#: includes/class-renderer.php:542
+msgid "Title (Z-A)"
+msgstr "Títol (Z-A)"
+
+#: includes/class-renderer.php:549
+msgid "Date (Newest)"
+msgstr "Data (Més recent)"
+
+#: includes/class-renderer.php:556
+msgid "Date (Oldest)"
+msgstr "Data (Més antic)"
+
+#: includes/class-renderer.php:613
+msgid "Page"
+msgstr "Pàgina"
+
+#: includes/class-renderer.php:664
+msgid "Per page"
+msgstr "Per pàgina"
+
+#: includes/class-settings-admin.php:14
+msgid "General"
+msgstr "General"
+
+#: includes/class-settings-admin.php:17
+msgid "License Key"
+msgstr "Clau de llicència"
+
+#: includes/class-settings-admin.php:21
+msgid "Google Maps API Key"
+msgstr "Clau de la API Google Maps"
+
+#: includes/class-settings-admin.php:25
+msgid "Separators"
+msgstr "Separators"
+
+#: includes/class-settings-admin.php:29
+msgid "Loading Animation"
+msgstr "Animació de carrega"
+
+#: includes/class-settings-admin.php:31
+msgid "Fade"
+msgstr "Esvaïment"
+
+#: includes/class-settings-admin.php:31
+msgid "Spin"
+msgstr "Girador"
+
+#: includes/class-settings-admin.php:31 includes/facets/date_range.php:181
+#: includes/facets/number_range.php:116 includes/facets/proximity.php:247
+#: includes/facets/proximity.php:277 includes/facets/slider.php:176
+msgid "None"
+msgstr "Cap"
+
+#: includes/class-settings-admin.php:35
+msgid "URL Prefix"
+msgstr "Prefix de les URL"
+
+#: includes/class-settings-admin.php:41
+msgid "Debug Mode"
+msgstr "Mode de depuració"
+
+#: includes/class-settings-admin.php:43
+msgid "Off"
+msgstr "Desactivat"
+
+#: includes/class-settings-admin.php:43
+msgid "On"
+msgstr "Activat"
+
+#: includes/class-settings-admin.php:49
+#: includes/integrations/woocommerce/woocommerce.php:48
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/class-settings-admin.php:52
+msgid "Support product variations?"
+msgstr "Suportar variacions de productes?"
+
+#: includes/class-settings-admin.php:53
+msgid "Enable if your store uses variable products."
+msgstr "Activa si la teva botiga fa servir productes amb variacions."
+
+#: includes/class-settings-admin.php:55 includes/class-settings-admin.php:62
+#: includes/facets/checkboxes.php:366 includes/facets/checkboxes.php:381
+#: includes/facets/checkboxes.php:396 includes/facets/checkboxes.php:411
+#: includes/facets/dropdown.php:211 includes/facets/fselect.php:295
+#: includes/facets/fselect.php:342 includes/facets/fselect.php:372
+#: includes/facets/fselect.php:387 includes/facets/radio.php:230
+#: includes/facets/radio.php:245 includes/facets/search.php:117
+#: includes/integrations/acf/acf.php:247
+msgid "No"
+msgstr "No"
+
+#: includes/class-settings-admin.php:55 includes/class-settings-admin.php:62
+#: includes/facets/checkboxes.php:367 includes/facets/checkboxes.php:382
+#: includes/facets/checkboxes.php:397 includes/facets/checkboxes.php:412
+#: includes/facets/dropdown.php:212 includes/facets/fselect.php:296
+#: includes/facets/fselect.php:343 includes/facets/fselect.php:373
+#: includes/facets/fselect.php:388 includes/facets/radio.php:231
+#: includes/facets/radio.php:246 includes/facets/search.php:118
+#: includes/integrations/acf/acf.php:247
+msgid "Yes"
+msgstr "Sí"
+
+#: includes/class-settings-admin.php:59
+msgid "Include all products?"
+msgstr "Incloure tots els productes?"
+
+#: includes/class-settings-admin.php:60
+msgid "Show facet choices for out-of-stock products?"
+msgstr "Mostrar les opcions de la facet pels productes no disponibles?"
+
+#: includes/class-settings-admin.php:68
+msgid "Backup"
+msgstr "Copia de seguretat"
+
+#: includes/class-settings-admin.php:71 includes/class-settings-admin.php:123
+msgid "Export"
+msgstr "Exportar"
+
+#: includes/class-settings-admin.php:75 includes/class-settings-admin.php:129
+msgid "Import"
+msgstr "Importar"
+
+#: includes/class-settings-admin.php:100
+msgid "Activate"
+msgstr "Activa"
+
+#: includes/class-settings-admin.php:127
+msgid "Paste the import code here"
+msgstr "Copia el codi d'importació aquí"
+
+#: includes/class-settings-admin.php:128
+msgid "Overwrite existing items?"
+msgstr "Sobreescriure els ítems que ja existeixen?"
+
+#: includes/class-settings-admin.php:197
+msgid "Not yet activated"
+msgstr "No s'ha activat encara"
+
+#: includes/class-settings-admin.php:203
+msgid "License active"
+msgstr "Llicència activa"
+
+#: includes/class-settings-admin.php:204
+msgid "expires"
+msgstr "caduca"
+
+#: includes/class-updater.php:105
+msgid "Please activate or renew your license for automatic updates."
+msgstr ""
+"Activa o renova la teva llicència per aconseguir actualitzacions "
+"automàtiques."
+
+#: includes/facets/autocomplete.php:7
+msgid "Autocomplete"
+msgstr "Compleció automàtica"
+
+#: includes/facets/autocomplete.php:40
+msgid "Start typing..."
+msgstr "Comença a teclejar..."
+
+#: includes/facets/autocomplete.php:43
+msgid "Update"
+msgstr "Actualitzar"
+
+#: includes/facets/autocomplete.php:99
+msgid "No results"
+msgstr "Cap resultat"
+
+#: includes/facets/autocomplete.php:159 includes/facets/search.php:104
+msgid "Placeholder text"
+msgstr "Text per defecte"
+
+#: includes/facets/checkboxes.php:7
+msgid "Checkboxes"
+msgstr "Caixa de selecció"
+
+#: includes/facets/checkboxes.php:152
+msgid "See {num} more"
+msgstr "Mostrar {num} més"
+
+#: includes/facets/checkboxes.php:153 includes/facets/hierarchy.php:152
+msgid "See less"
+msgstr "Mostrar menys"
+
+#: includes/facets/checkboxes.php:317 includes/facets/dropdown.php:177
+#: includes/facets/fselect.php:308 includes/facets/radio.php:196
+msgid "Parent term"
+msgstr "Terme pare"
+
+#: includes/facets/checkboxes.php:334 includes/facets/dropdown.php:194
+#: includes/facets/fselect.php:325 includes/facets/hierarchy.php:215
+#: includes/facets/radio.php:213
+msgid "Highest Count"
+msgstr "Recompte més alt"
+
+#: includes/facets/checkboxes.php:335 includes/facets/dropdown.php:195
+#: includes/facets/fselect.php:326 includes/facets/hierarchy.php:216
+#: includes/facets/radio.php:214
+msgid "Display Value"
+msgstr "Valor mostrat"
+
+#: includes/facets/checkboxes.php:336 includes/facets/dropdown.php:196
+#: includes/facets/fselect.php:327 includes/facets/hierarchy.php:217
+#: includes/facets/radio.php:215
+msgid "Raw Value"
+msgstr "Valor brut"
+
+#: includes/facets/checkboxes.php:337 includes/facets/dropdown.php:197
+#: includes/facets/fselect.php:328 includes/facets/hierarchy.php:218
+#: includes/facets/radio.php:216
+msgid "Term Order"
+msgstr "Ordre de terme"
+
+#: includes/facets/checkboxes.php:343 includes/facets/fselect.php:349
+msgid "Behavior"
+msgstr "Comportament"
+
+#: includes/facets/checkboxes.php:346 includes/facets/fselect.php:352
+msgid "How should multiple selections affect the results?"
+msgstr "Com hauria d'afectar el resultat la selecció de diversos ítems?"
+
+#: includes/facets/checkboxes.php:351 includes/facets/fselect.php:357
+msgid "Narrow the result set"
+msgstr "Redueix el conjunt de resultat"
+
+#: includes/facets/checkboxes.php:352 includes/facets/fselect.php:358
+msgid "Widen the result set"
+msgstr "Amplia el conjunt de resultat"
+
+#: includes/facets/checkboxes.php:358 includes/facets/dropdown.php:203
+#: includes/facets/fselect.php:334
+msgid "Hierarchical"
+msgstr "Jeràrquic"
+
+#: includes/facets/checkboxes.php:361 includes/facets/dropdown.php:206
+#: includes/facets/fselect.php:337
+msgid "Is this a hierarchical taxonomy?"
+msgstr "Es tracta d'una taxonomia jeràrquica?"
+
+#: includes/facets/checkboxes.php:373
+msgid "Show expanded"
+msgstr "Mostrar desplegat"
+
+#: includes/facets/checkboxes.php:376
+msgid "Should child terms be visible by default?"
+msgstr "Els termes fills han de ser visible per defecte?"
+
+#: includes/facets/checkboxes.php:388 includes/facets/fselect.php:364
+#: includes/facets/radio.php:222
+msgid "Show ghosts"
+msgstr "Mostrar opcions fantasmes"
+
+#: includes/facets/checkboxes.php:391 includes/facets/fselect.php:367
+#: includes/facets/radio.php:225
+msgid "Show choices that would return zero results?"
+msgstr "Mostrar opcions que no retornarien cap resultat?"
+
+#: includes/facets/checkboxes.php:403 includes/facets/fselect.php:379
+#: includes/facets/radio.php:237
+msgid "Preserve ghost order"
+msgstr "Preservar l'ordre de les opcions fantasmes"
+
+#: includes/facets/checkboxes.php:406 includes/facets/fselect.php:382
+#: includes/facets/radio.php:240
+msgid "Keep ghost choices in the same order?"
+msgstr "Mantenir les opcions fantasmes en el mateix ordre?"
+
+#: includes/facets/checkboxes.php:418 includes/facets/dropdown.php:218
+#: includes/facets/fselect.php:394 includes/facets/hierarchy.php:224
+#: includes/facets/radio.php:252
+msgid "Count"
+msgstr "Recompte"
+
+#: includes/facets/checkboxes.php:421 includes/facets/dropdown.php:221
+#: includes/facets/fselect.php:397 includes/facets/hierarchy.php:227
+#: includes/facets/radio.php:255
+msgid "The maximum number of facet choices to show"
+msgstr "El nombre màxim d'opcions de la facet per mostrar"
+
+#: includes/facets/checkboxes.php:428
+msgid "Soft Limit"
+msgstr "Límit suau"
+
+#: includes/facets/checkboxes.php:431
+msgid "Show a toggle link after this many choices"
+msgstr "Mostrar un enllaç per veure més opcions després de X opcions"
+
+#: includes/facets/date_range.php:7
+msgid "Date Range"
+msgstr "Rang de dates"
+
+#: includes/facets/date_range.php:22
+msgid "Date"
+msgstr "Data"
+
+#: includes/facets/date_range.php:25 includes/facets/date_range.php:208
+msgid "Start Date"
+msgstr "Data d'inici"
+
+#: includes/facets/date_range.php:28 includes/facets/date_range.php:209
+msgid "End Date"
+msgstr "Data de fi"
+
+#: includes/facets/date_range.php:154
+msgid "Clear"
+msgstr "Netejar"
+
+#: includes/facets/date_range.php:173 includes/facets/number_range.php:108
+#: includes/facets/slider.php:168
+msgid "Other data source"
+msgstr "Altra font de dades"
+
+#: includes/facets/date_range.php:176 includes/facets/number_range.php:111
+#: includes/facets/slider.php:171
+msgid "Use a separate value for the upper limit?"
+msgstr "Fer servir un valor distint pel límit superior?"
+
+#: includes/facets/date_range.php:193 includes/facets/number_range.php:128
+#: includes/facets/slider.php:188
+msgid "Compare type"
+msgstr "Comparar tipus"
+
+#: includes/facets/date_range.php:196 includes/facets/number_range.php:131
+#: includes/facets/slider.php:191
+msgid "Basic"
+msgstr "Bàsic"
+
+#: includes/facets/date_range.php:197
+msgid "Enclose"
+msgstr "Delimita"
+
+#: includes/facets/date_range.php:198 includes/facets/number_range.php:132
+#: includes/facets/slider.php:192
+msgid "Intersect"
+msgstr "Intersecciona"
+
+#: includes/facets/date_range.php:203
+msgid "Fields to show"
+msgstr "Camps per mostrar"
+
+#: includes/facets/date_range.php:206
+msgid "Start + End Dates"
+msgstr "Data d'inici + data de fi"
+
+#: includes/facets/date_range.php:207
+msgid "Exact Date"
+msgstr "Data exacta"
+
+#: includes/facets/date_range.php:215
+msgid "Display format"
+msgstr "Format per mostrar"
+
+#: includes/facets/dropdown.php:7 includes/facets/proximity.php:275
+msgid "Dropdown"
+msgstr "Desplegable"
+
+#: includes/facets/dropdown.php:78 includes/facets/dropdown.php:172
+#: includes/facets/fselect.php:140 includes/facets/fselect.php:214
+#: includes/facets/fselect.php:303 includes/facets/hierarchy.php:67
+msgid "Any"
+msgstr "Qualsevol"
+
+#: includes/facets/dropdown.php:163 includes/facets/fselect.php:301
+msgid "Default label"
+msgstr "Etiqueta per defecte"
+
+#: includes/facets/fselect.php:7
+msgid "fSelect"
+msgstr "fSelect"
+
+#: includes/facets/fselect.php:219
+msgid "{n} selected"
+msgstr "{n} seleccionats"
+
+#: includes/facets/fselect.php:220 includes/facets/search.php:7
+msgid "Search"
+msgstr "Cerca"
+
+#: includes/facets/fselect.php:291
+msgid "Multi-select?"
+msgstr "Selecció múltiple?"
+
+#: includes/facets/hierarchy.php:7
+msgid "Hierarchy"
+msgstr "Jeràrquia"
+
+#: includes/facets/hierarchy.php:151
+msgid "See more"
+msgstr "Veure més"
+
+#: includes/facets/number_range.php:7
+msgid "Number Range"
+msgstr "Rang de nombre"
+
+#: includes/facets/number_range.php:19
+msgid "Min"
+msgstr "Min"
+
+#: includes/facets/number_range.php:21
+msgid "Max"
+msgstr "Max"
+
+#: includes/facets/number_range.php:23
+msgid "OK"
+msgstr "OK"
+
+#: includes/facets/proximity.php:14
+msgid "Proximity"
+msgstr "Proximitat"
+
+#: includes/facets/proximity.php:63
+msgid "Enter location"
+msgstr "Introdueix una localització"
+
+#: includes/facets/proximity.php:227
+msgid "Clear location"
+msgstr "Esborra la localització"
+
+#: includes/facets/proximity.php:239
+msgid "Longitude"
+msgstr "Longitud"
+
+#: includes/facets/proximity.php:242
+msgid "(Optional) use a separate longitude field"
+msgstr "(Opcional) fer servir un camp distint per a la longitud"
+
+#: includes/facets/proximity.php:260
+msgid "Unit of measurement"
+msgstr "Unitat de mesura"
+
+#: includes/facets/proximity.php:264
+msgid "Miles"
+msgstr "Milles"
+
+#: includes/facets/proximity.php:265
+msgid "Kilometers"
+msgstr "Quilòmetres"
+
+#: includes/facets/proximity.php:271
+msgid "Radius UI"
+msgstr "Interfície per controlar el radi"
+
+#: includes/facets/proximity.php:276 includes/facets/slider.php:7
+msgid "Slider"
+msgstr "Control lliscant"
+
+#: includes/facets/proximity.php:283
+msgid "Radius options"
+msgstr "Radis disponibles"
+
+#: includes/facets/proximity.php:297
+msgid "Slider range"
+msgstr "Control de rang lliscant"
+
+#: includes/facets/proximity.php:312
+msgid "Default radius"
+msgstr "Radi per defecte"
+
+#: includes/facets/proximity.php:368
+msgid "Distance"
+msgstr "Distància"
+
+#: includes/facets/radio.php:7
+msgid "Radio"
+msgstr "Botó d'opció"
+
+#: includes/facets/search.php:19
+msgid "Enter keywords"
+msgstr "Introdueix paraules claus"
+
+#: includes/facets/search.php:93
+msgid "Search engine"
+msgstr "Motor de cerca"
+
+#: includes/facets/search.php:96
+msgid "WP Default"
+msgstr "Motor de cerca per defecte del WP"
+
+#: includes/facets/search.php:109
+msgid "Auto refresh"
+msgstr "Refresca automàticament"
+
+#: includes/facets/search.php:112
+msgid "Automatically refresh the results while typing?"
+msgstr "Refrescar automàticament els resultats a mesura que es tecleja?"
+
+#: includes/facets/slider.php:20
+msgid "Reset"
+msgstr "Restableix"
+
+#: includes/facets/slider.php:198
+msgid "Prefix"
+msgstr "Prefix"
+
+#: includes/facets/slider.php:201
+msgid "Text that appears before each slider value"
+msgstr "Text que es mostra davant de cada valor del control lliscant"
+
+#: includes/facets/slider.php:208
+msgid "Suffix"
+msgstr "Sufix"
+
+#: includes/facets/slider.php:211
+msgid "Text that appears after each slider value"
+msgstr "Text que es mostra després de cada valor del control lliscant"
+
+#: includes/facets/slider.php:218
+msgid "Format"
+msgstr "Format"
+
+#: includes/facets/slider.php:221
+msgid "The number format"
+msgstr "Format dels nombres"
+
+#: includes/facets/slider.php:242
+msgid "Step"
+msgstr "Increment"
+
+#: includes/facets/slider.php:245
+msgid "The amount of increase between intervals"
+msgstr "El increment entre cada interval"
+
+#: includes/integrations/searchwp/searchwp.php:105
+msgid "Default"
+msgstr "Per defecte"
+
+#: includes/integrations/woocommerce/woocommerce.php:50
+msgid "Price"
+msgstr "Preu"
+
+#: includes/integrations/woocommerce/woocommerce.php:51
+msgid "Sale Price"
+msgstr "Preu de venta"
+
+#: includes/integrations/woocommerce/woocommerce.php:52
+msgid "Regular Price"
+msgstr "Preu regular"
+
+#: includes/integrations/woocommerce/woocommerce.php:53
+msgid "Average Rating"
+msgstr "Valoració mitjana"
+
+#: includes/integrations/woocommerce/woocommerce.php:54
+msgid "Stock Status"
+msgstr "Estat de l'inventari"
+
+#: includes/integrations/woocommerce/woocommerce.php:55
+#: includes/integrations/woocommerce/woocommerce.php:417
+msgid "On Sale"
+msgstr "En venta"
+
+#: includes/integrations/woocommerce/woocommerce.php:56
+msgid "Product Type"
+msgstr "Tipus de producte"
+
+#: includes/integrations/woocommerce/woocommerce.php:409
+msgid "In Stock"
+msgstr "Disponible"
+
+#: includes/integrations/woocommerce/woocommerce.php:409
+msgid "Out of Stock"
+msgstr "No disponible"
+
+#: index.php:72
+#, php-format
+msgid ""
+"FacetWP requires PHP %s or above. Please contact your host and request a PHP "
+"upgrade."
+msgstr ""
+"FacetWP requereix PHP %s o superior. Contacta amb el teu proveïdor i demana "
+"una actualització de PHP."
+
+#: templates/page-settings.php:5
+msgid "All post types"
+msgstr "Tots els tipus d'entrada"
+
+#: templates/page-settings.php:6
+msgid "Indexing complete"
+msgstr "Indexació completada"
+
+#: templates/page-settings.php:7
+msgid "Indexing"
+msgstr "Indexant"
+
+#: templates/page-settings.php:8
+msgid "Saving"
+msgstr "Desant"
+
+#: templates/page-settings.php:9
+msgid "Loading"
+msgstr "Carregant"
+
+#: templates/page-settings.php:10
+msgid "Importing"
+msgstr "Important"
+
+#: templates/page-settings.php:11
+msgid "Activating"
+msgstr "Activant"
+
+#: templates/page-settings.php:12
+msgid "Are you sure?"
+msgstr "Estàs segur?"
+
+#: templates/page-settings.php:13
+msgid "Select some items"
+msgstr "Selecciona alguns ítems"
+
+#: templates/page-settings.php:22
+msgid "This facet type has no additional settings."
+msgstr "Aquest tipus de facet no té paràmetres addicionals."
+
+#: templates/page-settings.php:62
+msgid "Basics"
+msgstr "Bàsics"
+
+#: templates/page-settings.php:64
+msgid "Support"
+msgstr "Suport"
+
+#: templates/page-settings.php:69
+msgid "Re-index"
+msgstr "Re-indexa"
+
+#: templates/page-settings.php:70
+msgid "Save Changes"
+msgstr "Desa els canvis"
+
+#: templates/page-settings.php:86
+msgid "Back"
+msgstr "Torna"
+
+#: templates/page-settings.php:159
+msgid "Label"
+msgstr "Etiqueta"
+
+#: templates/page-settings.php:163 templates/page-settings.php:208
+msgid "Name"
+msgstr "Nom"
+
+#: templates/page-settings.php:167
+msgid "Facet type"
+msgstr "Tipus de facet"
+
+#: templates/page-settings.php:180
+msgid "Data source"
+msgstr "Font de dades"
+
+#: templates/page-settings.php:211
+msgid "Open query builder"
+msgstr "Obre l'auxiliar de consultes"
+
+#: templates/page-settings.php:212
+msgid "Query Arguments"
+msgstr "Paràmetres de la consulta"
+
+#: templates/page-settings.php:216
+msgid "What goes here?"
+msgstr "Què s'ha de posar aquí?"
+
+#: templates/page-settings.php:217
+msgid "Display Code"
+msgstr "Codi per mostrar els resultats"
+
+#: templates/page-settings.php:235
+msgid "Query Builder"
+msgstr "Auxiliar de consultes"
+
+#: templates/page-settings.php:239
+msgid "Which posts would you like to use for the listing?"
+msgstr "Quines entrades voldries fer servir per aquest llistat?"
+
+#: templates/page-settings.php:248
+msgid "Send to editor"
+msgstr "Envia a l'editor"

@@ -9,7 +9,7 @@ class WPML_UI_Help_Tab {
 	private $title;
 	private $content;
 
-	public function __construct( $wp_api, $id, $title, $content ) {
+	public function __construct( WPML_WP_API $wp_api, $id, $title, $content ) {
 		$this->wp_api  = $wp_api;
 		$this->id      = $id;
 		$this->title   = $title;
@@ -22,12 +22,14 @@ class WPML_UI_Help_Tab {
 	
 	public function add_help_tab() {
 		$screen = $this->wp_api->get_current_screen();
-		
-		$screen->add_help_tab( array(
-			'id'	    => $this->id,
-			'title'	    => $this->title,
-			'content'	=> $this->content,
-		) );		
+
+		if ( null !== $screen ) {
+			$screen->add_help_tab( array(
+				                       'id'      => $this->id,
+				                       'title'   => $this->title,
+				                       'content' => $this->content,
+			                       ) );
+		}
 	}
 	
 }

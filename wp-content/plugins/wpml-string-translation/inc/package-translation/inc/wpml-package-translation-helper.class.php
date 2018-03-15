@@ -178,7 +178,7 @@ class WPML_Package_Helper {
 			$package_storage = new WPML_ST_Package_Storage( $package->ID, $wpdb );
 			$package_storage->update( $string_title, $string_type, $string_value, $string_id );
 			$this->flush_cache();
-
+			$package->flush_cache();
 		}
 
 		return $string_id;
@@ -355,6 +355,15 @@ class WPML_Package_Helper {
 		if ( $package && $package->ID && $this->is_a_package( $package ) ) {
 			$this->delete_package( $package->ID );
 			$this->flush_cache();
+		}
+	}
+
+	/** @param int $post_id */
+	final public function remove_post_packages( $post_id ) {
+		$packages = $this->get_post_string_packages( array(), $post_id );
+
+		foreach ( $packages as $package ) {
+			$this->delete_package( $package->ID );
 		}
 	}
 
@@ -626,7 +635,7 @@ class WPML_Package_Helper {
 	 * @param null|array $packages
 	 * @param int        $post_id
 	 *
-	 * @return array
+	 * @return WPML_Package[]
 	 */
 	public function get_post_string_packages( $packages, $post_id ) {
 		global $wpdb;

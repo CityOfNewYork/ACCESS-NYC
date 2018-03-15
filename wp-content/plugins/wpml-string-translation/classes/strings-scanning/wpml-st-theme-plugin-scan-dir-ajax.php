@@ -97,9 +97,15 @@ class WPML_ST_Theme_Plugin_Scan_Dir_Ajax {
 
 	private function is_one_file_plugin() {
 		$is_one_file_plugin = false;
+
 		if ( array_key_exists( 'plugin', $_POST ) ) {
 			$is_one_file_plugin = false === strpos( $_POST['plugin'], 'plugins/' );
 		}
+
+		if ( array_key_exists( 'mu-plugin', $_POST ) ) {
+			$is_one_file_plugin = false === strpos( $_POST['mu-plugin'], 'mu-plugins/' );
+		}
+
 		return $is_one_file_plugin;
 	}
 

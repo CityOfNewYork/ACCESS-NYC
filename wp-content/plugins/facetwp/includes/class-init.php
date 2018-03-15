@@ -34,6 +34,7 @@ class FacetWP_Init
         include( FACETWP_DIR . '/includes/class-helper.php' );
         include( FACETWP_DIR . '/includes/class-ajax.php' );
         include( FACETWP_DIR . '/includes/class-renderer.php' );
+        include( FACETWP_DIR . '/includes/class-diff.php' );
         include( FACETWP_DIR . '/includes/class-indexer.php' );
         include( FACETWP_DIR . '/includes/class-display.php' );
         include( FACETWP_DIR . '/includes/class-overrides.php' );
@@ -47,6 +48,7 @@ class FacetWP_Init
 
         FWP()->helper       = new FacetWP_Helper();
         FWP()->facet        = new FacetWP_Renderer();
+        FWP()->diff         = new FacetWP_Diff();
         FWP()->indexer      = new FacetWP_Indexer();
         FWP()->display      = new FacetWP_Display();
         FWP()->ajax         = new FacetWP_Ajax();
@@ -105,7 +107,7 @@ class FacetWP_Init
         if ( 'settings_page_facetwp' == $hook ) {
             wp_enqueue_style( 'media-views' );
             wp_enqueue_script( 'jquery-ui-sortable' );
-            wp_enqueue_script( 'jquery-powertip', FACETWP_URL . '/assets/js/jquery-powertip/jquery.powertip.min.js', array( 'jquery' ), '1.2.0' );
+            wp_enqueue_script( 'jquery-powertip', FACETWP_URL . '/assets/vendor/jquery-powertip/jquery.powertip.min.js', array( 'jquery' ), '1.2.0' );
         }
     }
 

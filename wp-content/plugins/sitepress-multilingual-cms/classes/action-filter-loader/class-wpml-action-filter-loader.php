@@ -46,8 +46,7 @@ class WPML_Action_Filter_Loader {
 		if ( $factory instanceof IWPML_Deferred_Action_Loader ) {
 			$this->add_deferred_action( $factory );
 		} else {
-			$load_handler = $factory->create();
-			$load_handler->add_hooks();
+			$this->run_factory( $factory );
 		}
 	}
 
@@ -67,11 +66,7 @@ class WPML_Action_Filter_Loader {
 		$action = current_action();
 		foreach ( $this->defered_actions[ $action ] as $factory ) {
 			/** @var IWPML_Deferred_Action_Loader $factory */
-			$load_handler = $factory->create();
-
-			if ( $load_handler ) {
-				$load_handler->add_hooks();
-			}
+			$this->run_factory( $factory );
 		}
 	}
 
@@ -84,5 +79,18 @@ class WPML_Action_Filter_Loader {
 		}
 
 		return $this->ajax_action_validation;
+	}
+
+	private function run_factory( IWPML_Action_Loader_Factory $factory ) {
+		$load_handlers = $factory->create();
+
+		if ( $load_handlers ) {
+			if ( ! is_array( $load_handlers ) ) {
+				$load_handlers = array( $load_handlers );
+			}
+			foreach ( $load_handlers as $load_handler ) {
+				$load_handler->add_hooks();
+			}
+		}
 	}
 }

@@ -89,10 +89,11 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 	 * @param bool   $icl_lso_link_empty
 	 * @param bool   $skip_lang
 	 * @param string $link_empty_to
+	 * @param WPML_LS_Display_As_Translated_Link $display_as_translated_ls_link
 	 *
 	 * @return array
 	 */
-	public function add_tax_url_to_ls_lang( $lang, $translations, $icl_lso_link_empty, $skip_lang, $link_empty_to ) {
+	public function add_tax_url_to_ls_lang( $lang, $translations, $icl_lso_link_empty, $skip_lang, $link_empty_to, WPML_LS_Display_As_Translated_Link $display_as_translated_ls_link ) {
 		if ( isset( $translations[ $lang['code'] ] ) ) {
 			// force  the taxonomy id adjustment to not modify this
 			$queried_object = $this->sitepress->get_wp_api()->get_queried_object();
@@ -111,14 +112,21 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 
 		if ( ! isset( $translations[ $lang['code'] ] ) || ! isset( $taxonomy ) ) {
 
-			$args = array(
-				'skip_lang'        => $skip_lang,
-				'link_empty'       => $icl_lso_link_empty,
-				'override_missing' => false,
-				'link_empty_to'    => $link_empty_to,
-			);
+			$translated_url = $display_as_translated_ls_link->get_url( $translations, $lang['code'] );
+			if ( $translated_url ) {
+				$lang['translated_url'] = $translated_url;
+				$lang['missing']        = 0;
+			} else {
 
-			list( $lang, $skip_lang ) = $this->maybe_mark_lang_missing( $lang, $args );
+				$args = array(
+					'skip_lang'        => $skip_lang,
+					'link_empty'       => $icl_lso_link_empty,
+					'override_missing' => false,
+					'link_empty_to'    => $link_empty_to,
+				);
+
+				list( $lang, $skip_lang ) = $this->maybe_mark_lang_missing( $lang, $args );
+			}
 		}
 
 		return array( $lang, $skip_lang );
@@ -133,9 +141,9 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 	 *
 	 * @return array
 	 */
-	public function add_author_url_to_ls_lang( $lang, $author_data, $icl_lso_link_empty, $skip_lang, $link_empty_to ) {
+	public function add_author_url_to_ls_lang( $lang, $fallback_lang, $author_data, $icl_lso_link_empty, $skip_lang, $link_empty_to ) {
 		$post_type = get_query_var( 'post_type' ) ? get_query_var( 'post_type' ) : 'post';
-		if ( $this->query_utils->author_query_has_posts( $post_type, $author_data, $lang['code'] ) ) {
+		if ( $this->query_utils->author_query_has_posts( $post_type, $author_data, $lang['code'], $fallback_lang ) ) {
 			$lang['translated_url'] = $this->sitepress->convert_url( $this->sitepress->get_wp_api()->get_author_posts_url( $author_data->ID ), $lang['code'] );
 			$lang['missing']        = 0;
 		} else {
@@ -155,6 +163,7 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 
 	/**
 	 * @param array    $lang
+	 * @param string   $fallback_lang
 	 * @param WP_Query $current_query
 	 * @param bool     $icl_lso_link_empty
 	 * @param bool     $skip_lang
@@ -162,7 +171,7 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 	 *
 	 * @return array
 	 */
-	public function add_date_or_cpt_url_to_ls_lang( $lang, $current_query, $icl_lso_link_empty, $skip_lang, $link_empty_to ) {
+	public function add_date_or_cpt_url_to_ls_lang( $lang, $fallback_lang, $current_query, $icl_lso_link_empty, $skip_lang, $link_empty_to ) {
 		list( $year, $month, $day ) = $this->extract_date_data_from_query( $current_query );
 		$query_helper = new WPML_WP_Query_API( $current_query );
 		$post_type    = ( $_type = $query_helper->get_post_type_if_single() ) ? $_type : 'post';
@@ -170,25 +179,27 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 		$mark_missing = false;
 		$override     = false;
 		if ( $current_query->is_year() && $this->query_utils->archive_query_has_posts( $lang_code,
-		                                                                            $year,
-		                                                                            null,
-		                                                                            null,
-		                                                                            $post_type )
+				$fallback_lang,
+				$year,
+				null,
+				null,
+				$post_type )
 		) {
 			$date_archive_url = $this->sitepress->get_wp_api()->get_year_link( $year );
 		} elseif ( $current_query->is_month() && $this->query_utils->archive_query_has_posts( $lang_code,
-		                                                                                   $year,
-		                                                                                   $month,
-		                                                                                   null,
-		                                                                                   $post_type )
+				$fallback_lang,
+				$year,
+				$month,
+				null,
+				$post_type )
 		) {
 			$date_archive_url = $this->sitepress->get_wp_api()->get_month_link( $year, $month );
-		} elseif ( $current_query->is_day() && $this->query_utils->archive_query_has_posts( $lang_code, $year, $month, $day, $post_type ) ) {
+		} elseif ( $current_query->is_day() && $this->query_utils->archive_query_has_posts( $lang_code, $fallback_lang, $year, $month, $day, $post_type ) ) {
 			$date_archive_url = $this->sitepress->get_wp_api()->get_day_link( $year, $month, $day );
 		} else if ( ! empty( $current_query->query_vars['post_type'] ) ) {
 			$override     = ! $this->sitepress->is_translated_post_type( $post_type );
 			$mark_missing = true;
-			if ( ! $override && $this->query_utils->archive_query_has_posts( $lang_code, null, null, null, $post_type ) ) {
+			if ( ! $override && $this->query_utils->archive_query_has_posts( $lang_code, $fallback_lang, null, null, null, $post_type ) ) {
 				$url                    = $this->sitepress->convert_url( $this->sitepress->get_wp_api()->get_post_type_archive_link( $post_type ), $lang_code );
 				$lang['translated_url'] = $this->sitepress->adjust_cpt_in_url( $url, $post_type, $lang_code );
 				$mark_missing           = false;

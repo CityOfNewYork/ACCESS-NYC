@@ -1,7 +1,16 @@
 <?php
 
 class WPML_Admin_Language_Switcher {
-    
+
+	private $flag_kses_tags = array(
+		'img' => array(
+			'src'    => array(),
+			'class'  => array(),
+			'height' => array(),
+			'width'  => array(),
+		)
+	);
+
     function render() {
         /** @var $wp_admin_bar WP_Admin_Bar */
         global $wpdb, $wp_admin_bar, $pagenow, $mode, $sitepress;
@@ -163,7 +172,7 @@ class WPML_Admin_Language_Switcher {
                 'url'     => $link_url . '&admin_bar=1',
                 'current' => $lang[ 'code' ] == $current_language,
                 'anchor'  => $lang[ 'display_name' ],
-                'flag'    => '<img class="icl_als_iclflag" src="' . $flag_url . '" alt="' . $lang[ 'code' ] . '" width="18" height="12" />'
+                'flag'    => '<img class="icl_als_iclflag" src="' . esc_url( $flag_url ) . '" alt="' . esc_attr( $lang[ 'code' ] ) . '" width="18" height="12" />'
             );
     
         }
@@ -199,7 +208,7 @@ class WPML_Admin_Language_Switcher {
         // Current language
         $wp_admin_bar->add_menu( array(
                                       'parent' => false, 'id' => $parent,
-                                      'title'  => $lang[ 'flag' ] . '&nbsp;' . $lang[ 'anchor' ] . '&nbsp;&nbsp;<img title="' . __( 'help', 'sitepress' ) . '" id="wpml_als_help_link" src="' . ICL_PLUGIN_URL . '/res/img/question1.png" alt="' . __( 'help', 'sitepress' ) . '" width="16" height="16"/>',
+                                      'title'  => wp_kses( $lang[ 'flag' ], $this->flag_kses_tags ) . '&nbsp;' . esc_html( $lang[ 'anchor' ] ) . '&nbsp;&nbsp;<i title="' . esc_attr__( 'help', 'sitepress' ) . '" id="wpml_als_help_link" class="otgs-ico-help"></i>',
                                       'href'   => false, 'meta' => array(
                 'title' => __( 'Showing content in:', 'sitepress' ) . ' ' . $lang[ 'anchor' ],
             )
@@ -210,7 +219,7 @@ class WPML_Admin_Language_Switcher {
                 if ( $code == $current_language )
                     continue;
                 $wp_admin_bar->add_menu( array(
-                                              'parent' => $parent, 'id' => $parent . '_' . $code, 'title' => $lang[ 'flag' ] . '&nbsp;' . $lang[ 'anchor' ], 'href' => $lang[ 'url' ], 'meta' => array(
+                                              'parent' => $parent, 'id' => $parent . '_' . $code, 'title' => wp_kses( $lang[ 'flag' ], $this->flag_kses_tags ) . '&nbsp;' . esc_html( $lang[ 'anchor' ] ), 'href' => $lang[ 'url' ], 'meta' => array(
                         'title' => __( 'Show content in:', 'sitepress' ) . ' ' . $lang[ 'anchor' ],
                     )
                                          ) );

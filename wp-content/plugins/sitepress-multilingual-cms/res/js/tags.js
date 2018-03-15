@@ -125,6 +125,7 @@ var iclTagLangSelectBar = {
                 jQuery.ajax({
                     type:'GET',
                     url : location.href.replace(/&trid=([0-9]+)/, ''),
+                    data: '', // wpmlcore-5061
                     success: function(msg){
                         jQuery('#icl_tax_adding_notice').fadeOut();
                         jQuery('#icl_tax_'+taxonomy+'_lang .inside').html(jQuery(msg).find('#icl_tax_'+taxonomy+'_lang .inside').html());

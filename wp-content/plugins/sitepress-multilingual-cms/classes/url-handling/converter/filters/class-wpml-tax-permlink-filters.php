@@ -1,27 +1,29 @@
 <?php
 
-class WPML_Tax_Permalink_Filters {
-	/**
-	 * @var WPML_Term_Translation
-	 */
-	private $wpml_term_translations;
+class WPML_Tax_Permalink_Filters implements IWPML_Action {
 
-	/**
-	 * @var WPML_URL_Converter
-	 */
+	/** @var WPML_Translation_Element_Factory */
+	private $term_element_factory;
+
+	/** @var WPML_URL_Converter */
 	private $url_converter;
 
-	/**
-	 * @param WPML_URL_Converter $url_converter
-	 * @param WPML_Term_Translation $wpml_term_translations
-	 */
-	public function __construct( WPML_URL_Converter $url_converter, WPML_Term_Translation $wpml_term_translations = null ) {
-		if ( ! $wpml_term_translations ) {
-			global $wpml_term_translations;
-		}
-		$this->wpml_term_translations = $wpml_term_translations;
+	/** @var WPML_WP_Cache_Factory $cache_factory */
+	private $cache_factory;
 
-		$this->url_converter          = $url_converter;
+	/** @var WPML_Get_LS_Languages_Status  */
+	private $ls_languages_status;
+
+	public function __construct(
+		WPML_URL_Converter $url_converter,
+		WPML_WP_Cache_Factory $cache_factory,
+		WPML_Translation_Element_Factory $term_element_factory,
+		WPML_Get_LS_Languages_Status $ls_language_status
+	) {
+		$this->term_element_factory = $term_element_factory;
+		$this->url_converter        = $url_converter;
+		$this->cache_factory        = $cache_factory;
+		$this->ls_languages_status  = $ls_language_status;
 	}
 
 	public function add_hooks() {
@@ -29,20 +31,17 @@ class WPML_Tax_Permalink_Filters {
 	}
 
 	public function cached_filter_tax_permalink( $permalink, $tag, $taxonomy ) {
-		$tag                  = is_object( $tag ) ? $tag : get_term( $tag, $taxonomy );
-		$tag_id               = $tag ? $tag->term_taxonomy_id : 0;
-		$cached_permalink_key = $tag_id . '.' . $taxonomy;
-		$cache_group          = 'icl_tax_permalink_filter';
-		$found                = false;
-		$cache                = new WPML_WP_Cache( $cache_group );
-		$cached_permalink     = $cache->get( $cached_permalink_key, $found );
-		if ( $found ) {
-			return $cached_permalink;
+		$tag    = is_object( $tag ) ? $tag : get_term( $tag, $taxonomy );
+		$tag_id = $tag ? $tag->term_id : 0;
+
+		$cache = $this->cache_factory->create_cache_item( 'icl_tax_permalink_filter', array( $tag_id, $taxonomy, $this->is_link_for_language_switcher() ) );
+		if ( $cache->exists() ) {
+			return $cache->get();
 		}
 
 		$permalink = $this->filter_tax_permalink( $permalink, $tag_id );
 
-		$cache->set( $cached_permalink_key, $permalink );
+		$cache->set( $permalink );
 
 		return $permalink;
 	}
@@ -55,13 +54,29 @@ class WPML_Tax_Permalink_Filters {
 	 *
 	 * @return string
 	 */
-	public function filter_tax_permalink( $permalink, $tag_id ) {
-		$term_language = $tag_id ? $this->wpml_term_translations->get_element_lang_code( $tag_id ) : false;
+	private function filter_tax_permalink( $permalink, $tag_id ) {
+		if ( $tag_id ) {
+			$term_element = $this->term_element_factory->create( $tag_id, 'term' );
 
-		if ( (bool) $term_language ) {
-			$permalink = $this->url_converter->convert_url( $permalink, $term_language );
+			if ( ! $this->is_display_as_translated_mode( $term_element ) ) {
+				$term_language = $term_element->get_language_code();
+
+				if ( (bool) $term_language ) {
+					$permalink = $this->url_converter->convert_url( $permalink, $term_language );
+				}
+			}
 		}
 
 		return $permalink;
 	}
+
+	private function is_display_as_translated_mode( WPML_Translation_Element $element ) {
+		return $element->is_display_as_translated() && ! $this->is_link_for_language_switcher();
+	}
+
+	private function is_link_for_language_switcher() {
+		return $this->ls_languages_status->is_getting_ls_languages();
+	}
+
+
 }

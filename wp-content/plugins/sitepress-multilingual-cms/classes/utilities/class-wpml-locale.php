@@ -1,8 +1,17 @@
 <?php
 
-class WPML_Locale extends WPML_WPDB_And_SP_User {
-
-	/** @var  string $locale */
+class WPML_Locale {
+	/**
+	 * @var wpdb
+	 */
+	private $wpdb;
+	/**
+	 * @var SitePress
+	 */
+	private $sitepress;
+	/**
+	 * @var  string $locale
+	 */
 	private $locale;
 	private $locale_cache;
 
@@ -12,13 +21,14 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 	/**
 	 * WPML_Locale constructor.
 	 *
-	 * @param wpdb      $wpdb
+	 * @param wpdb $wpdb
 	 * @param SitePress $sitepress
-	 * @param string    $locale
+	 * @param string $locale
 	 */
-	public function __construct( &$wpdb, &$sitepress, &$locale ) {
-		parent::__construct( $wpdb, $sitepress );
-		$this->locale = &$locale;
+	public function __construct( wpdb &$wpdb, SitePress &$sitepress, &$locale ) {
+		$this->wpdb         =& $wpdb;
+		$this->sitepress    =& $sitepress;
+		$this->locale       =& $locale;
 		$this->locale_cache = null;
 	}
 
@@ -121,10 +131,10 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 		if ( ! $code ) {
 			return false;
 		}
-		$found  = false;
+		$found     = false;
 		$cache_key = 'get_locale' . $code;
-		$cache  = new WPML_WP_Cache( '' );
-		$locale = $cache->get( $cache_key, $found );
+		$cache     = new WPML_WP_Cache( '' );
+		$locale    = $cache->get( $cache_key, $found );
 		if ( $found ) {
 			return $locale;
 		}
@@ -151,14 +161,14 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 		global $l10n;
 		static $original_l10n;
 		if ( ! empty( $lang_code ) ) {
-			$original_l10n = isset( $l10n[ 'sitepress' ] ) ? $l10n[ 'sitepress' ] : null;
+			$original_l10n = isset( $l10n['sitepress'] ) ? $l10n['sitepress'] : null;
 			if ( $original_l10n !== null ) {
-				unset( $l10n[ 'sitepress' ] );
+				unset( $l10n['sitepress'] );
 			}
 			load_textdomain( 'sitepress',
 				WPML_PLUGIN_PATH . '/locale/sitepress-' . $this->get_locale( $lang_code ) . '.mo' );
 		} else { // switch back
-			$l10n[ 'sitepress' ] = $original_l10n;
+			$l10n['sitepress'] = $original_l10n;
 		}
 	}
 
@@ -176,8 +186,8 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 
 	private function language_needs_title_sanitization() {
 		$lang_needs_filter = array( 'de_DE', 'da_DK' );
-		$current_lang = $this->sitepress->get_language_details( $this->sitepress->get_current_language() );
-		$needs_filter = false;
+		$current_lang      = $this->sitepress->get_language_details( $this->sitepress->get_current_language() );
+		$needs_filter      = false;
 
 		if ( in_array( $current_lang['default_locale'], $lang_needs_filter ) ) {
 			$needs_filter = true;
@@ -189,7 +199,7 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 	function _language_attributes( $latr ) {
 
 		return preg_replace(
-			'#lang="(.[a-z])"#i',
+			'#lang="([a-z]+)"#i',
 			'lang="' . str_replace( '_', '-', $this->locale ) . '"',
 			$latr );
 	}

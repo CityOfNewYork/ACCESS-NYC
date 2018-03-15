@@ -9,7 +9,7 @@
 		this.margin_left = '-54px';
 
 		if ( !this.content ) {
-			this.content = this.trigger.data('content');
+			this.content = this.decodeEntities(this.trigger.data('content'));
 		}
 
 		if ( this.trigger.data( 'edge' ) ) {
@@ -63,6 +63,11 @@
 				e.preventDefault();
 				t.element.pointer('close');
 			});
+		},
+		decodeEntities: function(encodedString)	{
+			var textArea = document.createElement('textarea');
+			textArea.innerHTML = encodedString;
+			return textArea.value;
 		}
 	};
 

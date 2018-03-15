@@ -164,8 +164,8 @@ class WPML_TF_Feedback_Edit {
 
 		$feedback->get_tp_responses()->set_feedback_id( $tp_feedback_id );
 		$active_service = $this->get_tp_client()->services()->get_active();
-		$feedback->get_tp_responses()->set_feedback_forward_method( $active_service->feedback_forward_method );
-		$new_status = 'sent_to_ts_' . $active_service->feedback_forward_method;
+		$feedback->get_tp_responses()->set_feedback_forward_method( $active_service->get_feedback_forward_method() );
+		$new_status = 'sent_to_ts_' . $active_service->get_feedback_forward_method();
 		$feedback->set_status( $new_status );
 	}
 

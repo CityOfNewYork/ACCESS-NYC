@@ -28,7 +28,7 @@ class WPML_Custom_Columns extends WPML_WPDB_And_SP_User {
 		if ( count( $active_languages ) > 0 ) {
 			$flags_column = '';
 			foreach ( $active_languages as $language_data ) {
-				$flags_column .= '<img src="' . $this->sitepress->get_flag_url( $language_data['code'] ). '" width="18" height="12" alt="' . $language_data['display_name'] . '" title="' . $language_data['display_name'] . '" style="margin:2px" />';
+				$flags_column .= '<img src="' . esc_url( $this->sitepress->get_flag_url( $language_data['code'] ) ). '" width="18" height="12" alt="' . esc_attr( $language_data['display_name'] ) . '" title="' . esc_attr( $language_data['display_name'] ) . '" style="margin:2px" />';
 			}
 
 			$new_columns = array();

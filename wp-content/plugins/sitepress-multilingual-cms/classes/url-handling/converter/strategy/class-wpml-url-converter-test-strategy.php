@@ -8,4 +8,8 @@ class WPML_URL_Converter_Test_Strategy extends WPML_URL_Converter_Abstract_Strat
 	public function convert_url_string( $source_url, $lang ) {
 		return null;
 	}
+
+	public function get_home_url_relative( $url, $lang ) {
+		return null;
+	}
 }

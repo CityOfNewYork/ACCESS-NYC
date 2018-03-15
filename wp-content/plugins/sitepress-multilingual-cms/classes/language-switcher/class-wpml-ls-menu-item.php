@@ -22,6 +22,7 @@ class WPML_LS_Menu_Item {
     public $url;                          // The URL to which this menu item points.
     public $xfn;                          // The XFN relationship expressed in the link of this menu item.
     public $_invalid = false;             // Whether the menu item represents an object that no longer exists.
+    public $menu_order;
 
     public $post_type = 'nav_menu_item';  // * Extra property => see [wpmlcore-3855]
 
@@ -38,7 +39,7 @@ class WPML_LS_Menu_Item {
      * @param array  $lang
      * @param string $item_content
      */
-    private function decorate_object($lang, $item_content ) {
+    private function decorate_object( $lang, $item_content ) {
         $this->ID               = isset( $lang['db_id'] ) ? $lang['db_id'] : null;
         $this->object_id        = isset( $lang['db_id'] ) ? $lang['db_id'] : null;
         $this->db_id            = isset( $lang['db_id'] ) ? $lang['db_id'] : null;
@@ -46,6 +47,7 @@ class WPML_LS_Menu_Item {
         $this->attr_title       = isset( $lang['display_name'] )
             ? $lang['display_name'] : (  isset( $lang['native_name'] ) ? $lang['native_name'] : '' );
         $this->title            = $item_content;
+        $this->post_title       = $item_content;
         $this->url              = isset( $lang['url'] ) ? $lang['url'] : null;
 
         if ( isset( $lang['css_classes'] ) ) {

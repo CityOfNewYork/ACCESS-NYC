@@ -90,7 +90,7 @@ class WPML_PB_Update_Shortcodes_In_Content {
 				$pattern   = '/(]\s*)' . preg_quote( trim( $original ), '/' ) . '(\s*\[)/';
 				$new_block = preg_replace( $pattern, '${1}' . trim( $translation ) . '${2}', $block );
 			}
-			$this->new_content = str_replace( $block, $new_block, $this->new_content );
+			$this->new_content = preg_replace( '/'. preg_quote( $block, '/' ) . '/', $new_block, $this->new_content, 1 );
 		}
 
 		return $new_block;

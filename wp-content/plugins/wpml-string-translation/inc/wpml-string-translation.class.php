@@ -89,7 +89,6 @@ class WPML_String_Translation
 		$wpml_string_shortcode = new WPML_String_Shortcode( $wpdb );
 		$wpml_string_shortcode->init_hooks();
 
-		include WPML_ST_PATH . '/inc/slug-translation.php';
 		wpml_st_load_admin_texts();
 
 		add_action( 'init', array( $this, 'init' ) );

@@ -22,7 +22,7 @@ class WPML_WPSEO_Redirection {
 	}
 
 	/**
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	private function get_all_redirections() {
 		return get_option( $this->wp_option_redirections );

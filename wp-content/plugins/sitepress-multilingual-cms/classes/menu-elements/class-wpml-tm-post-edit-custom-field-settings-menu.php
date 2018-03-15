@@ -47,7 +47,7 @@ class WPML_TM_Post_Edit_Custom_Field_Settings_Menu {
 						continue;
 					}
 					$this->rendered = true;
-					$radio_disabled = $field_setting->is_read_only() ? 'disabled="disabled"' : '';
+					$radio_disabled = ( $field_setting->is_read_only() && ! $field_setting->is_unlocked() ) ? 'disabled="disabled"' : '';
 					$status         = (int) $field_setting->status();
 					$states         = array(
 						array( 'value' => WPML_IGNORE_CUSTOM_FIELD, 'text' => __( "Don't translate", 'sitepress' ) ),

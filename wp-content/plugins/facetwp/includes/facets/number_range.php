@@ -35,8 +35,8 @@ class FacetWP_Facet_Number_Range extends FacetWP_Facet
         $values = $params['selected_values'];
         $where = '';
 
-        $start = ( '' == $values[0] ) ? false : $values[0];
-        $end = ( '' == $values[1] ) ? false : $values[1];
+        $start = ( '' == $values[0] ) ? false : FWP()->helper->format_number( $values[0] );
+        $end = ( '' == $values[1] ) ? false : FWP()->helper->format_number( $values[1] );
 
         $is_dual = ! empty( $facet['source_other'] );
         $is_intersect = FWP()->helper->facet_is( $facet, 'compare_type', 'intersect' );

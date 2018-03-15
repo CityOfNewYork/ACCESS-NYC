@@ -98,10 +98,11 @@ class WPML_PB_String_Translation {
 	}
 
 	public function remove_string( $string_data ) {
+		icl_unregister_string( $string_data['context'], $string_data['name'] );
+
 		$field_type = 'package-string-' . $string_data['package_id'] . '-' . $string_data['id'];
 		$job_id = $this->get_job_id( $field_type );
 		if ( ! $job_id || ! $this->is_job_in_progress( $job_id ) ) {
-			icl_unregister_string( $string_data['context'], $string_data['name'] );
 			$this->wpdb->delete( $this->wpdb->prefix . 'icl_translate', array( 'field_type' => $field_type ), array( '%s' ) );
 		}
 	}

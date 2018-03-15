@@ -36,7 +36,6 @@ class WPML_ST_Themes_And_Plugins_Updates {
 	public function init_hooks() {
 		add_action( 'upgrader_process_complete', array( $this, 'store_mo_file_update' ), 10, 2 );
 		add_action( 'init', array( $this, 'handle_fastest_settings_notice' ), 10, 2 );
-		add_action( 'theme_plugin_localization_settings_saved', array( $this, 'remove_fastest_settings_notice' ) );
 	}
 
 	public function data_is_valid( $thing ) {

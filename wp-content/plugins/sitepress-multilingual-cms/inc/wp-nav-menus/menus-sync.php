@@ -33,6 +33,8 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 	}
 
 	function init( $previous_menu = false ) {
+		$this->sitepress->switch_lang( $this->sitepress->get_default_language() );
+
 		$action = filter_input( INPUT_POST, 'action' );
 		$nonce  = (string) filter_input( INPUT_POST, '_icl_nonce_menu_sync' );
 
@@ -58,6 +60,7 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 			$_SESSION[ 'wpml_menu_sync_menu' ] = $this->menus;
 		}
 
+		$this->sitepress->switch_lang();
 	}
 
 	function get_menu_names() {
@@ -540,7 +543,7 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 			$menu_names       = $this->get_menu_names();
 
 			foreach ( $menu_names as $k => $menu_name ) {
-				if ( ! in_array( $menu_name . ' menu', $wpml_st_contexts, true ) ) {
+				if ( ! in_array( $menu_name . WPML_Menu_Sync_Functionality::STRING_CONTEXT_SUFFIX, $wpml_st_contexts, true ) ) {
 					unset( $menu_names[ $k ] );
 				}
 			}
@@ -549,7 +552,11 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 				$menu_url_base = add_query_arg( 'page', urlencode($wpml_st_folder . '/menu/string-translation.php'), 'admin.php' );
 
 				foreach ( $menu_names as $menu_name ) {
-					$menu_url                 = add_query_arg( 'context', urlencode($menu_name . ' menu'), $menu_url_base );
+					$menu_url                 = add_query_arg(
+						'context',
+						urlencode( $menu_name . WPML_Menu_Sync_Functionality::STRING_CONTEXT_SUFFIX ),
+						$menu_url_base
+					);
 					$menu_links[ $menu_name ] = $menu_url;
 				}
 			}

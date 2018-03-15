@@ -2,6 +2,10 @@
 
 abstract class WPML_Menu_Sync_Functionality extends WPML_Full_Translation_API {
 
+	const STRING_CONTEXT_SUFFIX    = ' menu';
+	const STRING_NAME_LABEL_PREFIX = 'Menu Item Label ';
+	const STRING_NAME_URL_PREFIX   = 'Menu Item URL ';
+
 	private $menu_items_cache;
 
 	/**
@@ -192,13 +196,8 @@ abstract class WPML_Menu_Sync_Functionality extends WPML_Full_Translation_API {
 			$translation['attr-title']            = $item->attr_title;
 			$translation['label_changed']         = $label_changed;
 			$translation['url_changed']           = $url_changed;
-			if ( $this->string_translation_default_language_ok() ) {
-				$translation['label_missing'] = ! $icl_st_label_exists;
-				$translation['url_missing']   = ! $icl_st_url_exists;
-			} else {
-				$translation['label_missing'] = false;
-				$translation['url_missing']   = false;
-			}
+			$translation['label_missing']         = ! $icl_st_label_exists;
+			$translation['url_missing']           = ! $icl_st_url_exists;
 
 			$translations[ $lang_code ] = $translation;
 		}
@@ -276,16 +275,6 @@ abstract class WPML_Menu_Sync_Functionality extends WPML_Full_Translation_API {
 		return $translations;
 	}
 
-	/**
-	 * @todo Handle this differently once non-English ST languages are possible
-	 *
-	 * @return bool
-	 */
-	protected function string_translation_default_language_ok() {
-
-		return $this->sitepress->get_default_language() === 'en';
-	}
-
 	protected function get_menu_name( $menu_id ) {
 		$menu = wp_get_nav_menu_object( $menu_id );
 
@@ -305,21 +294,61 @@ abstract class WPML_Menu_Sync_Functionality extends WPML_Full_Translation_API {
 		return isset( $menus[ $language_code ] ) ? $menus[ $language_code ] : false;
 	}
 
-	protected function icl_t_menu_item( $menu_name, $item, $lang_code, &$icl_st_label_exists, &$icl_st_url_exists ) {
-		$translated_object_title_t = icl_t( $menu_name . ' menu',
-		                                    'Menu Item Label ' . $item->ID,
-		                                    $item->post_title,
-		                                    $icl_st_label_exists,
-		                                    true,
-		                                    $lang_code );
-		$translated_object_url_t   = icl_t( $menu_name . ' menu',
-		                                    'Menu Item URL ' . $item->ID,
-		                                    $item->url,
-		                                    $icl_st_url_exists,
-		                                    true,
-		                                    $lang_code );
+	/**
+	 * We need to register the string first in the default language
+	 * to avoid it being "auto-registered" in English
+	 *
+	 * @param string  $menu_name
+	 * @param WP_Post|stdClass $item
+	 * @param string  $lang
+	 * @param bool    $has_label_translation
+	 * @param bool    $has_url_translation
+	 *
+	 * @return array
+	 */
+	protected function icl_t_menu_item( $menu_name, $item, $lang, &$has_label_translation, &$has_url_translation ) {
+		$default_lang = $this->sitepress->get_default_language();
+		$label        = $item->post_title;
+		$url          = $item->url;
 
-		return array( $translated_object_title_t, $translated_object_url_t );
+		if ( $lang !== $default_lang ) {
+
+			icl_register_string(
+				$menu_name . self::STRING_CONTEXT_SUFFIX,
+				self::STRING_NAME_LABEL_PREFIX . $item->ID,
+				$label,
+				false,
+				$default_lang
+			);
+
+			$label = icl_t(
+				$menu_name . self::STRING_CONTEXT_SUFFIX,
+				self::STRING_NAME_LABEL_PREFIX . $item->ID,
+				$label,
+				$has_label_translation,
+				true,
+				$lang
+			);
+
+			icl_register_string(
+				$menu_name . self::STRING_CONTEXT_SUFFIX,
+				self::STRING_NAME_URL_PREFIX . $item->ID,
+				$url,
+				false,
+				$default_lang
+			);
+
+			$url = icl_t(
+				$menu_name . self::STRING_CONTEXT_SUFFIX,
+				self::STRING_NAME_URL_PREFIX . $item->ID,
+				$url,
+				$has_url_translation,
+				true,
+				$lang
+			);
+		}
+
+		return array( $label, $url );
 	}
 
 	/**
@@ -427,7 +456,7 @@ abstract class WPML_Menu_Sync_Functionality extends WPML_Full_Translation_API {
 		$translated_object_url_t   = '';
 		$translated_menu_id        = $this->term_translations->term_id_in( $menu_id, $lang_code );
 
-		if ( function_exists( 'icl_t' ) && $this->string_translation_default_language_ok() ) {
+		if ( function_exists( 'icl_t' ) ) {
 			list( $translated_object_title_t, $translated_object_url_t ) = $this->icl_t_menu_item( $menu_name,
 			                                                                                       $item,
 			                                                                                       $lang_code,
@@ -451,18 +480,12 @@ abstract class WPML_Menu_Sync_Functionality extends WPML_Full_Translation_API {
 			$translated_object_title_t = $item->post_title . ' @' . $lang_code;
 			$translated_object_url_t   = $item->url;
 		}
-			
 		$this->sitepress->switch_lang();
 
 		if ( $translated_object_id ) {
 			$translated_object = get_post( $translated_object_id );
-			if ( $this->string_translation_default_language_ok() ) {
-				$label_changed = $translated_object_title_t != $translated_object->post_title;
-				$url_changed   = $translated_object_url_t != get_post_meta( $translated_object_id,
-				                                                            '_menu_item_url',
-				                                                            true );
-			}
-
+			$label_changed = $translated_object_title_t != $translated_object->post_title;
+			$url_changed   = $translated_object_url_t != get_post_meta( $translated_object_id, '_menu_item_url', true );
 			$translated_object_title = $icl_st_label_exists ? $translated_object_title_t : $translated_object_title;
 			$translated_object_url   = $icl_st_url_exists ? $translated_object_url_t : $translated_object_url;
 		}

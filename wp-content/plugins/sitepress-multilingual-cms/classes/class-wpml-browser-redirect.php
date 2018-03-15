@@ -2,16 +2,15 @@
 // adapted from http://wordpress.org/extend/plugins/black-studio-wpml-javascript-redirect/
 // thanks to Blank Studio - http://www.blackstudio.it/
 
-class WPML_Browser_Redirect extends WPML_SP_User {
+class WPML_Browser_Redirect {
 
 	/**
-	 * WPML_Browser_Redirect constructor.
-	 *
-	 * @param $sitepress
-	 * @param $sitepress_settings
+	 * @var SitePress
 	 */
-	public function __construct( &$sitepress ) {
-		parent::__construct( $sitepress );
+	private $sitepress;
+
+	public function __construct( $sitepress ) {
+		$this->sitepress = $sitepress;
 	}
 
 	public function init_hooks() {
@@ -19,14 +18,15 @@ class WPML_Browser_Redirect extends WPML_SP_User {
 	}
 
 	public function init(){
-		$root_page = $this->sitepress->get_root_page_utils();
-        if( !is_admin() && !isset( $_GET['redirect_to'] ) && !preg_match( '#wp-login\.php$#', preg_replace("@\?(.*)$@", '', $_SERVER['REQUEST_URI'] ) )
+        if( ! isset( $_GET['redirect_to'] ) &&
+            ! is_admin() &&
+            ! preg_match( '#wp-login\.php$#', preg_replace("@\?(.*)$@", '', $_SERVER['REQUEST_URI'] ) )
         ) {
-                add_action( 'wp_print_scripts', array( $this, 'scripts' ) );
+	        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
         }
     }
-    
-    public function scripts(){
+
+    public function enqueue_scripts(){
         // Enqueue javascripts
         wp_register_script('jquery.cookie', ICL_PLUGIN_URL . '/res/js/jquery.cookie.js', array('jquery'), ICL_SITEPRESS_VERSION);
         wp_register_script('wpml-browser-redirect', ICL_PLUGIN_URL . '/res/js/browser-redirect.js', array('jquery', 'jquery.cookie'), ICL_SITEPRESS_VERSION);

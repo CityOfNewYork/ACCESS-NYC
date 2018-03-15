@@ -4,7 +4,7 @@
  */
 interface IWPML_Action_Loader_Factory {
 	/**
-	 * @return IWPML_Action|null
+	 * @return IWPML_Action|IWPML_Action[]|null
 	 */
 	public function create();
 }

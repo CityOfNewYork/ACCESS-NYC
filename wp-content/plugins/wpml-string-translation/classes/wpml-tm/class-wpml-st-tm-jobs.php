@@ -78,15 +78,24 @@ class WPML_ST_TM_Jobs extends WPML_WPDB_User {
 		return $sql_statements;
 	}
 
+	/**
+	 * @param array $args
+	 *          string_where
+	 *          translator_id
+	 *          from
+	 *          to
+	 *          status
+	 *          service
+	 *
+	 * @return string
+	 */
 	private function build_string_where( $args ) {
-		$string_where  = '';
-		$translator_id = '';
-		$from          = '';
-		$to            = '';
-		$status        = '';
-		$service       = false;
-
-		extract( $args, EXTR_OVERWRITE );
+		$string_where  = isset( $args['string_where'] ) ? $args['string_where'] : '';
+		$translator_id = isset( $args['translator_id'] ) ? $args['translator_id'] : '';
+		$from          = isset( $args['from'] ) ? $args['from'] : '';
+		$to            = isset( $args['to'] ) ? $args['to'] : '';
+		$status        = isset( $args['status'] ) ? $args['status'] : '';
+		$service       = isset( $args['service'] ) ? $args['service'] : false;
 
 		$wheres     = array();
 		$where_args = array();
@@ -104,7 +113,7 @@ class WPML_ST_TM_Jobs extends WPML_WPDB_User {
 			$where_args[] = ICL_TM_IN_PROGRESS === (int) $status ? ICL_TM_WAITING_FOR_TRANSLATOR : $status;
 		}
 
-		$service = is_numeric( $translator_id ) ? 'local' : $service;
+		$service = ! $service && is_numeric( $translator_id ) ? 'local' : $service;
 		$service = 'local' !== $service && false !== strpos( $translator_id, 'ts-' ) ? substr( $translator_id, 3 ) : $service;
 
 		if ( 'local' === $service ) {

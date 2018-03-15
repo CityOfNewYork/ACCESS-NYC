@@ -1,6 +1,9 @@
 <?php
 
 class WPML_Package {
+
+	const CACHE_GROUP = 'WPML_Package';
+
 	public  $ID;
 	public  $view_link;
 	public  $edit_link;
@@ -143,7 +146,7 @@ class WPML_Package {
 		$results    = false;
 		if ( $package_id ) {
 
-			$cache = new WPML_WP_Cache( 'WPML_Package' );
+			$cache = new WPML_WP_Cache( self::CACHE_GROUP );
 			$cache_key = 'strings:' . $package_id;
 			$found = false;
 
@@ -386,7 +389,7 @@ class WPML_Package {
 	private function get_package_from_name_and_kind() {
 		global $wpdb;
 
-		$cache = new WPML_WP_Cache( 'WPML_Package' );
+		$cache = new WPML_WP_Cache( self::CACHE_GROUP );
 		$cache_key = 'name-kind:' . $this->kind_slug . $this->name;
 		$found = false;
 
@@ -493,8 +496,12 @@ class WPML_Package {
 		global $sitepress;
 
 		if ( $this->post_id ) {
-			$post = get_post( $this->post_id );
-			$details = $sitepress->get_element_language_details( $this->post_id, 'post_' . $post->post_type );
+			$details = null;
+			$post    = get_post( $this->post_id );
+
+			if ( $post ) {
+				$details = $sitepress->get_element_language_details( $this->post_id, 'post_' . $post->post_type );
+			}
 		} else {
 			$element_type = $this->get_package_element_type();
 			$details      = $sitepress->get_element_language_details( $this->ID, $element_type );
@@ -521,5 +528,9 @@ class WPML_Package {
 		
 		return true;
 	}
-	
+
+	public function flush_cache() {
+		$cache = new WPML_WP_Cache( self::CACHE_GROUP );
+		$cache->flush_group_cache();
+	}
 }

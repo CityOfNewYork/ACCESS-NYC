@@ -16,7 +16,7 @@ class WPML_Elementor_Form extends WPML_Elementor_Module_With_Items {
 	 * @return array
 	 */
 	public function get_fields() {
-		return array( 'field_label', 'placeholder' );
+		return array( 'field_label', 'placeholder', 'field_options' );
 	}
 
 	/**
@@ -31,6 +31,9 @@ class WPML_Elementor_Form extends WPML_Elementor_Module_With_Items {
 
 			case 'placeholder':
 				return esc_html__( 'Form: Field placeholder', 'wpml-string-translation' );
+
+			case 'field_options':
+				return esc_html__( 'Form: Field options', 'wpml-string-translation' );
 
 			default:
 				return '';
@@ -47,6 +50,9 @@ class WPML_Elementor_Form extends WPML_Elementor_Module_With_Items {
 			case 'field_label':
 			case 'placeholder':
 				return 'LINE';
+
+			case 'field_options':
+				return 'AREA';
 
 			default:
 				return '';

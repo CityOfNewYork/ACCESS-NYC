@@ -137,31 +137,26 @@ class WPML_SEO_HeadLangs {
 	 * @return string
 	 */
 	private function get_hreflang_code( $lang ) {
-		$tag           = $lang['tag'];
-		$locale        = $lang['default_locale'];
-		$hreflang_code = $this->get_best_code( array( $tag, $locale ) );
-		$hreflang_code = str_replace( '_', '-', $hreflang_code );
-		$hreflang_code = strtolower( $hreflang_code );
+	  $ordered_keys = array( 'tag', 'default_locale' );
+
+	  $hreflang_code = '';
+	  foreach ( $ordered_keys as $key ) {
+		  if ( array_key_exists( $key, $lang ) && trim( $lang[ $key ] ) ) {
+			  $hreflang_code = $lang[ $key ];
+			  break;
+		  }
+	  }
+
+	  $hreflang_code = strtolower( str_replace( '_', '-', $hreflang_code ) );
 
 		if ( $this->is_valid_hreflang_code( $hreflang_code ) ) {
 			return trim( $hreflang_code );
 		}
 
 		return '';
-	}
+  }
 
 	private function is_valid_hreflang_code( $code ) {
 		return strlen( trim( $code ) ) >= 2;
-	}
-
-	private function get_best_code( array $codes ) {
-		$best_code = null;
-		foreach ( $codes as $code ) {
-			if ( strlen( $code ) > strlen( $best_code ) ) {
-				$best_code = $code;
-			}
-		}
-
-		return $best_code;
 	}
 }

@@ -44,9 +44,9 @@ function icl_widget_text_language_selectbox($language = 'multilingual',
     echo '>Multilingual</option>';
     if (!empty($languages)) {
         foreach ($languages as $lang) {
-            echo '<option value="' . $lang['code'] . '"';
+            echo '<option value="' . esc_attr( $lang['code'] ) . '"';
             echo $language == $lang['code'] ? ' selected="selected"' : '';
-            echo '>' . $lang['display_name'] . '</option>';
+            echo '>' . esc_html( $lang['display_name'] ) . '</option>';
         }
     }
     echo '</select>';
@@ -95,6 +95,15 @@ function icl_widget_text_convert_to_multilingual($text_widget, $instance) {
     $icl_widgets_text['_multiwidget'] = 1;
     update_option('widget_text_icl', $icl_widgets_text);
 
+    //unset original instance
+    foreach ( $sidebars[$_POST['sidebar']] as $key => $widget ){
+    	if( $text_widget->id === $widget ){
+		    unset( $sidebars[$_POST['sidebar']][$key] );
+		    $sidebars[$_POST['sidebar']] = array_values( $sidebars[$_POST['sidebar']] );
+		    break;
+	    }
+    }
+
     // Set in sidebar
     $sidebars[$_POST['sidebar']][] = $icl_widget->id;
     wp_set_sidebars_widgets($sidebars);
@@ -106,12 +115,12 @@ function icl_widget_text_convert_to_multilingual($text_widget, $instance) {
     }
 
     // Refresh
-    echo '
+	echo ' 
 <script type="text/javascript">
-<!--
-window.location = "' . admin_url('widgets.php') . '";
-//-->
-</script>
-';
+	jQuery(document).ajaxSuccess(function(e, xhr, settings) {
+	     window.location = "' . admin_url( 'widgets.php' ) . '";  
+	});
+</script> 
+	';
     return TRUE;
 }
