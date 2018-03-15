@@ -9,7 +9,8 @@ class WPML_ST_Theme_Localization_Utils {
 
 		foreach ( $themes as $theme_folder => $theme ) {
 			$theme_data[ $theme_folder ] = array(
-				'name' => $theme->get( 'Name' ),
+				'path'       => $theme->get_theme_root() . '/' . $theme->get_stylesheet(),
+				'name'       => $theme->get( 'Name' ),
 				'TextDomain' => $theme->get( 'TextDomain' ),
 			);
 		}

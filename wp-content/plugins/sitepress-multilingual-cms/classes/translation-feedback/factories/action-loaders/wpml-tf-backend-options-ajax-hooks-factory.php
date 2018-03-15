@@ -13,6 +13,8 @@ class WPML_TF_Backend_Options_AJAX_Hooks_Factory extends WPML_AJAX_Base_Factory 
 	 * @return IWPML_Action|null
 	 */
 	public function create() {
+		global $sitepress;
+
 		$hooks = null;
 
 		if ( $this->is_valid_action( self::AJAX_ACTION ) ) {
@@ -23,7 +25,7 @@ class WPML_TF_Backend_Options_AJAX_Hooks_Factory extends WPML_AJAX_Base_Factory 
 			$hooks = new WPML_TF_Backend_Options_AJAX_Hooks(
 				$tf_settings,
 				new WPML_TF_Settings_Write(),
-				new WPML_TF_Promote_Notices(),
+				new WPML_TF_Promote_Notices( $sitepress ),
 				$_POST
 			);
 		}

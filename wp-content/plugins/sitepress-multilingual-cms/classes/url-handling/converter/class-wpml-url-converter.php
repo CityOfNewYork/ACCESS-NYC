@@ -155,11 +155,40 @@ class WPML_URL_Converter {
 	 * @return string
 	 */
 	public function get_language_from_url( $url ) {
+		$url = $this->get_url_from_referer_if_admin_ajax_req_called_from_frontend( $url );
+
 		if ( ! ( $language = $this->lang_param->lang_by_param( $url ) ) ) {
 			$language = $this->get_strategy()->get_lang_from_url_string( $url );
 		}
 
 		return $this->get_strategy()->validate_language( $language, $url );
+	}
+
+	private function get_url_from_referer_if_admin_ajax_req_called_from_frontend( $url ) {
+		if ( false === strpos( $url, 'admin-ajax.php' ) ) {
+			return $url;
+		}
+
+		if ( ! isset( $_SERVER['HTTP_REFERER'] ) ) {
+			return $url;
+		}
+
+		// is not frontend
+		if ( strpos( $_SERVER['HTTP_REFERER'], 'wp-admin' ) || strpos( $_SERVER['HTTP_REFERER'], 'admin-ajax' ) ) {
+			return $url;
+		}
+
+		return $_SERVER['HTTP_REFERER'];
+	}
+
+	/**
+	 * @param string $url
+	 * @param string $langauge
+	 *
+	 * @return string
+	 */
+	public function get_home_url_relative( $url, $language ) {
+		return $this->get_strategy()->get_home_url_relative( $url, $language );
 	}
 
 	/**

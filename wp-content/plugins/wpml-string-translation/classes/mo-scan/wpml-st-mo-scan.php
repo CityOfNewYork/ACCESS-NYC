@@ -2,6 +2,18 @@
 
 class WPML_ST_MO_Scan {
 	/**
+	 * @var WPML_ST_MO_Unicode_Characters_Filter
+	 */
+	private $unicode_characters_filter;
+
+	/**
+	 * @param WPML_ST_MO_Unicode_Characters_Filter $unicode_characters_filter
+	 */
+	public function __construct( WPML_ST_MO_Unicode_Characters_Filter $unicode_characters_filter = null ) {
+		$this->unicode_characters_filter = $unicode_characters_filter;
+	}
+
+	/**
 	 * @param string $mo_file
 	 *
 	 * @return WPML_ST_MO_Translation[]
@@ -26,6 +38,10 @@ class WPML_ST_MO_Scan {
 				$translation    = ! empty( $v->translations[1] ) ? $v->translations[1] : $v->translations[0];
 				$translations[] = new WPML_ST_MO_Translation( $str, $translation, $v->context );
 			}
+		}
+
+		if ( $this->unicode_characters_filter ) {
+			$translations = $this->unicode_characters_filter->filter( $translations );
 		}
 
 		return $translations;

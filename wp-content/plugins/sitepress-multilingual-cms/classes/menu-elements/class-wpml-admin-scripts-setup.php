@@ -384,7 +384,7 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 				$js[] = "jQuery('#new-tag-" . esc_js( $tax ) . "').val('" . esc_js( join( ', ', $term_names ) ) . "');";
 			}
 		}
-		$this->sitepress->switch_lang($current_lang);
+		$this->sitepress->switch_lang( null );
 
 		if ( $js ) {
 			?>

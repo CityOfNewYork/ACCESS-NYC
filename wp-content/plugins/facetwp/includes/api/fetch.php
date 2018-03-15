@@ -156,6 +156,6 @@ class FacetWP_API_Fetch
             )
         );
 
-        return $output;
+        return apply_filters( 'facetwp_api_output', $output );
     }
 }

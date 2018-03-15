@@ -284,7 +284,7 @@ function icl_get_languages_locales() {
 			'sv'      => 'sv_SE',
 			'ta'      => 'ta_IN',
 			'tg'      => 'tg_TJ',
-			'th'      => 'th_TH',
+			'th'      => 'th',
 			'tr'      => 'tr_TR',
 			'ug'      => 'ug_CN',
 			'uk'      => 'uk_UA',

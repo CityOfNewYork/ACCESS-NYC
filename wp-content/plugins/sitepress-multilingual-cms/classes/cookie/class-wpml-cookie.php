@@ -21,9 +21,8 @@ class WPML_Cookie {
 	public function get_cookie( $name ) {
 		if ( isset( $_COOKIE[ $name ] ) ) {
 			return $_COOKIE[ $name ];
-		} else {
-			return '';
 		}
+		return '';
 	}
 
 	/**
@@ -32,7 +31,6 @@ class WPML_Cookie {
 	 * @return bool
 	 */
 	public function headers_sent() {
-
 		return headers_sent();
 	}
 }

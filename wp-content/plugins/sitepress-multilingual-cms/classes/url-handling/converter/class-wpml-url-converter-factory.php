@@ -73,9 +73,6 @@ class WPML_URL_Converter_Factory {
 		$home_url = new WPML_URL_Converter_Url_Helper();
 		$wpml_url_converter->set_url_helper( $home_url );
 
-		$tax_permalink_filters = new WPML_Tax_Permalink_Filters( $wpml_url_converter );
-		$tax_permalink_filters->add_hooks();
-
 		return $wpml_url_converter;
 	}
 

@@ -41,6 +41,8 @@ class WPML_ST_File_Hashing {
 		if ( $needs_to_save ) {
 			update_option( self::OPTION_NAME, $this->hashes );
 		}
+
+		wp_send_json_success();
 	}
 
 	/**

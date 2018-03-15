@@ -13,13 +13,14 @@ class WPML_ST_MO_Scan_Factory {
 	public function check_core_dependencies() {
 		global $wpdb;
 		$string_index_check = new WPML_ST_Upgrade_String_Index( $wpdb );
-        $mo_scan_ui_block = new WPML_ST_MO_Scan_UI_Block($this->create_localization_type(), wpml_get_admin_notices());
-        if (!$string_index_check->does_unique_index_on_md5_column_exist()) {
+		$mo_scan_ui_block   = new WPML_ST_MO_Scan_UI_Block( $this->create_localization_type(), wpml_get_admin_notices() );
+		if ( ! $string_index_check->is_uc_domain_name_context_index_unique() ) {
 			$mo_scan_ui_block->block_ui();
+
 			return false;
-        } else {
-            $mo_scan_ui_block->unblock_ui();
-        }
+		}
+
+		$mo_scan_ui_block->unblock_ui();
 
 		if ( ! function_exists( 'is_plugin_active' ) || ! function_exists( 'get_plugins' ) ) {
 			$file = ABSPATH . 'wp-admin/includes/plugin.php';
@@ -53,31 +54,20 @@ class WPML_ST_MO_Scan_Factory {
 	}
 
 	/**
-	 * @return WPML_ST_MO_Scan_Notices
-	 */
-	public function create_notices() {
-		if ( ! $this->notices ) {
-			$this->create_localization_type();
-			$this->notices = new WPML_ST_MO_Scan_Notices(
-				$this->localization_type->is_mo_loading_disabled(),
-				$this->create_queue(),
-				wpml_get_admin_notices(),
-				$this->get_wpml_wp_api()
-			);
-		}
-
-		return $this->notices;
-	}
-
-
-	/**
 	 * @return WPML_ST_MO_Queue
 	 */
 	private function create_queue() {
 		if ( ! $this->queue ) {
+			global $wpdb;
+
+			$charset_validator = new WPML_ST_MO_Scan_Cached_Charset_Validation(
+				new WPML_ST_MO_Scan_Db_Charset_Validation( $wpdb, new WPML_ST_MO_Scan_Db_Table_List( $wpdb ) )
+			);
+			$charset_filter = $charset_validator->is_valid() ? null : new WPML_ST_MO_Unicode_Characters_Filter();
+
 			$this->queue = new WPML_ST_MO_Queue(
 				$this->create_dictionary(),
-				new WPML_ST_MO_Scan(),
+				new WPML_ST_MO_Scan( $charset_filter ),
 				$this->create_storage(),
 				$this->get_language_codes_map(),
 				$this->get_scan_limit()

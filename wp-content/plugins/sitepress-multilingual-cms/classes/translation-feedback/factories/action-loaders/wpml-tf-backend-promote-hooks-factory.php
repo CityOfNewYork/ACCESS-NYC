@@ -30,7 +30,7 @@ class WPML_TF_Backend_Promote_Hooks_Factory implements IWPML_Backend_Action_Load
 			);
 
 			$hooks = new WPML_TF_Backend_Promote_Hooks(
-				new WPML_TF_Promote_Notices(),
+				new WPML_TF_Promote_Notices( $sitepress ),
 				$setup_complete,
 				$translation_service
 			);

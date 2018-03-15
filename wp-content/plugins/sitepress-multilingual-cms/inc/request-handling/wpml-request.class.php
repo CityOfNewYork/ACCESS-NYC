@@ -9,8 +9,10 @@
  * @abstract
  */
 
-abstract class WPML_Request extends WPML_URL_Converter_User {
+abstract class WPML_Request {
 
+	/** @var  WPML_URL_Converter */
+	protected $url_converter;
 	protected $active_languages;
 	protected $default_language;
 	protected $qs_lang_cache;
@@ -24,8 +26,8 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 	 * @param WPML_Cookie        $cookie
 	 * @param WPML_WP_API        $wp_api
 	 */
-	public function __construct( &$url_converter, $active_languages, $default_language, $cookie, $wp_api ) {
-		parent::__construct( $url_converter );
+	public function __construct( $url_converter, $active_languages, $default_language, $cookie, $wp_api ) {
+		$this->url_converter    = $url_converter;
 		$this->active_languages = $active_languages;
 		$this->default_language = $default_language;
 		$this->cookie           = $cookie;
@@ -119,9 +121,12 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 					return;
 				}
 
-				$cookie_domain = $this->get_cookie_domain();
-				$cookie_path   = defined( 'COOKIEPATH' ) ? COOKIEPATH : '/';
-				$this->cookie->set_cookie( $cookie_name, $lang_code, time() + DAY_IN_SECONDS, $cookie_path, $cookie_domain );
+				$current_cookie_value = $this->cookie->get_cookie( $cookie_name );
+				if ( ! $current_cookie_value || $current_cookie_value !== $lang_code) {
+					$cookie_domain = $this->get_cookie_domain();
+					$cookie_path   = defined( 'COOKIEPATH' ) ? COOKIEPATH : '/';
+					$this->cookie->set_cookie( $cookie_name, $lang_code, time() + DAY_IN_SECONDS, $cookie_path, $cookie_domain );
+				}
 			}
 		} else if ( $sitepress->get_setting( WPML_Cookie_Setting::COOKIE_SETTING_FIELD ) ) {
 			$wpml_cookie_scripts = new WPML_Cookie_Scripts( $cookie_name, $sitepress->get_current_language() );

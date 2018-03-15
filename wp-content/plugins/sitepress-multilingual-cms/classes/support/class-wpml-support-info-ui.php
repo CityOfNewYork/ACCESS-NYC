@@ -77,6 +77,15 @@ class WPML_Support_Info_UI {
 						'value' => $max_input_vars,
 						'url'   => 'http://php.net/manual/info.configuration.php#ini.max-input-vars',
 					),
+					'utf8mb4_charset' => array(
+						'label'      => __( 'Utf8mb4 charset', 'sitepress' ),
+						'value' => __( $this->support_info->is_utf8mb4_charset_supported() ? 'Yes' : 'No', 'sitepress' ),
+						'url'        => 'https://dev.mysql.com/doc/refman/5.5/en/charset-unicode-utf8mb4.html',
+						'messages'   => array(
+							__( 'Some features related to String Translations may not work correctly without utf8mb4 character.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
+						),
+						'is_error' => ! $this->support_info->is_utf8mb4_charset_supported(),
+					) ,
 				),
 			),
 			'wp'  => array(

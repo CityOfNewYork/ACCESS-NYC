@@ -15,7 +15,7 @@ abstract class WPML_Language_Filter_Bar extends WPML_WPDB_And_SP_User {
 
 	protected function lang_span( $lang_code, $count ) {
 
-		return ' (<span class="' . $lang_code . '">' . $count . '</span>)';
+		return ' (<span class="' . esc_attr( $lang_code ) . '">' . esc_html( $count ) . '</span>)';
 	}
 
 	protected function strong_lang_span_cover($lang_code, $count){

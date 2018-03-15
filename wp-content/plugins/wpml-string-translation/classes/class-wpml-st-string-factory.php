@@ -60,19 +60,34 @@ class WPML_ST_String_Factory {
 	}
 
 	/**
-	 * @param string     $string
-	 * @param string     $context
-	 * @param bool|false $name
+	 * @param string       $string
+	 * @param string|array $context
+	 * @param bool|false   $name
 	 *
 	 * @return mixed
 	 */
 	public function get_string_id( $string, $context, $name = false ) {
-		$sql          = "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE BINARY value=%s AND context=%s";
-		$prepare_args = array( $string, $context );
+		list( $domain, $gettext_context ) = wpml_st_extract_context_parameters( $context );
+
+		$sql          = "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE BINARY value=%s";
+		$prepare_args = array( $string );
+
+		if ( $gettext_context ) {
+			$sql            .= " AND gettext_context=%s";
+			$prepare_args[] = $gettext_context;
+		}
+
+
+		if ( $domain ) {
+			$sql            .= " AND context=%s";
+			$prepare_args[] = $domain;
+		}
+
 		if ( $name !== false ) {
 			$sql .= " AND name = %s ";
 			$prepare_args[] = $name;
 		}
+
 		$sql                                 = $this->wpdb->prepare( $sql . " LIMIT 1", $prepare_args );
 		$cache_key                           = md5( $sql );
 		$this->string_id_cache[ $cache_key ] = isset( $this->string_id_cache[ $cache_key ] )

@@ -82,7 +82,7 @@ class WPML_Notices {
 	 *
 	 * @return null|WPML_Notice
 	 */
-	public function get_notice( $id, $group ) {
+	public function get_notice( $id, $group = 'default' ) {
 		$notice = null;
 
 		if ( isset( $this->notices[ $group ][ $id ] ) ) {
@@ -364,6 +364,14 @@ class WPML_Notices {
 
 		if ( ! is_array( $this->notices_to_remove ) ) {
 			$this->notices_to_remove = array();
+		}
+
+		if ( isset( $this->notices_to_remove[ $notice_group ] ) ) {
+			foreach ( $this->notices_to_remove[ $notice_group ] as $key => $notice ) {
+				if ( $notice === $notice_id ) {
+					unset( $this->notices_to_remove[ $notice_group ][ $key ] );
+				}
+			}
 		}
 	}
 

@@ -77,10 +77,9 @@ class AbsoluteLinks{
 			array_unshift( $this->active_languages, $current_language );
 		}
 
-		$blacklist_requests = apply_filters( 'wpml_sl_blacklist_requests', array(), $sitepress );
-		if ( ! is_array( $blacklist_requests ) ) {
-			$blacklist_requests = array();
-		}
+		$blacklist_requests = new WPML_Absolute_Links_Blacklist(
+			apply_filters( 'wpml_sl_blacklist_requests', array(), $sitepress )
+		);
 
 		foreach ( $this->active_languages as $test_language ) {
 
@@ -158,7 +157,7 @@ class AbsoluteLinks{
 						$request = $req_uri;
 					}
 
-					if ( ! $request || in_array( $request, $blacklist_requests, true ) ) {
+					if ( ! $request || $blacklist_requests->is_blacklisted( $request ) ) {
 						continue;
 					}
 	
@@ -518,7 +517,7 @@ class AbsoluteLinks{
 			$exp    = explode( '/', $dir_path, 2 );
 			$lang   = $exp[ 0 ];
 			if ( $this->does_lang_exist( $lang ) ) {
-				$dir_path = $exp[ 1 ];
+				$dir_path = isset( $exp[ 1 ] ) ? $exp[ 1 ] : '';
 			} else {
 				$lang = false;
 			}

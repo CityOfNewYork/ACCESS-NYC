@@ -54,6 +54,13 @@ class WPML_Term_Custom_Field_Setting extends WPML_Custom_Field_Setting {
 	}
 
 	/**
+	 * @return string
+	 */
+	protected function get_unlocked_setting_index() {
+		return WPML_TERM_META_UNLOCKED_SETTING_INDEX;
+	}
+
+	/**
 	 * @return  string[]
 	 */
 	protected function get_excluded_keys() {

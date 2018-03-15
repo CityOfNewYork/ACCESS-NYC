@@ -97,14 +97,7 @@ class WPML_Term_Translation extends WPML_Element_Translation {
 	 * @since 3.2.3
 	 */
 	public function get_taxonomy_post_types( $taxonomy ) {
-		global $wp_taxonomies;
-
-		$post_types = array();
-		if ( isset( $wp_taxonomies[ $taxonomy ] ) && isset( $wp_taxonomies[ $taxonomy ]->object_type ) ) {
-			$post_types = $wp_taxonomies[ $taxonomy ]->object_type;
-		}
-
-		return $post_types;
+		return WPML_WP_Taxonomy::get_linked_post_types( $taxonomy );
 	}
 
 	protected function get_element_join() {

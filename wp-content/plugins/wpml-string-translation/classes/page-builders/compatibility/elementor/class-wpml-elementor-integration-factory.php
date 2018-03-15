@@ -10,7 +10,8 @@ class WPML_Elementor_Integration_Factory {
 	 */
 	public function create() {
 		$nodes = new WPML_Elementor_Translatable_Nodes();
-		$data_settings = new WPML_Elementor_Data_Settings();
+		$elementor_db_factory = new WPML_Elementor_DB_Factory();
+		$data_settings = new WPML_Elementor_Data_Settings( $elementor_db_factory->create() );
 
 		$string_registration_factory = new WPML_String_Registration_Factory( $data_settings->get_pb_name() );
 		$string_registration = $string_registration_factory->create();

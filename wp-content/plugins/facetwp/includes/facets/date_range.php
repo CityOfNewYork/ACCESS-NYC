@@ -153,11 +153,11 @@ class FacetWP_Facet_Date_Range extends FacetWP_Facet
             'locale'    => $locale,
             'clearText' => __( 'Clear', 'fwp' ),
         );
-        FWP()->display->assets['flatpickr.css'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.css';
-        FWP()->display->assets['flatpickr.js'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.min.js';
+        FWP()->display->assets['flatpickr.css'] = FACETWP_URL . '/assets/vendor/flatpickr/flatpickr.css';
+        FWP()->display->assets['flatpickr.js'] = FACETWP_URL . '/assets/vendor/flatpickr/flatpickr.min.js';
 
         if ( 'en' != $locale ) {
-            FWP()->display->assets['flatpickr-l10n.js'] = FACETWP_URL . "/assets/js/flatpickr/l10n/$locale.js";
+            FWP()->display->assets['flatpickr-l10n.js'] = FACETWP_URL . "/assets/vendor/flatpickr/l10n/$locale.js";
         }
     }
 

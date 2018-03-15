@@ -96,6 +96,11 @@
     width: 220px;
 }
 
+.facetwp-type-fselect .fs-wrap.fs-disabled .fs-option {
+    opacity: 0.4;
+    cursor: default;
+}
+
 /* Hierarchy */
 
 .facetwp-depth {
@@ -173,7 +178,7 @@
 
 /* Proximity */
 
-#facetwp-location {
+.facetwp-location {
     padding-right: 28px;
 }
 

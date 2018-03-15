@@ -13,44 +13,9 @@ final class FacetWP_Helper
     public $data_sources;
 
 
-    /**
-     * Backwards-compatibility
-     */
-    public static function instance() {
-        return FWP()->helper;
-    }
-
-
     function __construct() {
         $this->settings = $this->load_settings();
-
-        // custom facet types
-        include( FACETWP_DIR . '/includes/facets/base.php' );
-        include( FACETWP_DIR . '/includes/facets/autocomplete.php' );
-        include( FACETWP_DIR . '/includes/facets/checkboxes.php' );
-        include( FACETWP_DIR . '/includes/facets/date_range.php' );
-        include( FACETWP_DIR . '/includes/facets/dropdown.php' );
-        include( FACETWP_DIR . '/includes/facets/fselect.php' );
-        include( FACETWP_DIR . '/includes/facets/hierarchy.php' );
-        include( FACETWP_DIR . '/includes/facets/number_range.php' );
-        include( FACETWP_DIR . '/includes/facets/search.php' );
-        include( FACETWP_DIR . '/includes/facets/slider.php' );
-        include( FACETWP_DIR . '/includes/facets/proximity.php' );
-        include( FACETWP_DIR . '/includes/facets/radio.php' );
-
-        $this->facet_types = apply_filters( 'facetwp_facet_types', array(
-            'checkboxes'        => new FacetWP_Facet_Checkboxes(),
-            'dropdown'          => new FacetWP_Facet_Dropdown(),
-            'fselect'           => new FacetWP_Facet_fSelect(),
-            'hierarchy'         => new FacetWP_Facet_Hierarchy(),
-            'search'            => new FacetWP_Facet_Search(),
-            'autocomplete'      => new FacetWP_Facet_Autocomplete(),
-            'slider'            => new FacetWP_Facet_Slider(),
-            'date_range'        => new FacetWP_Facet_Date_Range(),
-            'number_range'      => new FacetWP_Facet_Number_Range(),
-            'proximity'         => new FacetWP_Facet_Proximity_Core(),
-            'radio'             => new FacetWP_Facet_Radio_Core(),
-        ) );
+        $this->facet_types = $this->get_facet_types();
     }
 
 
@@ -75,10 +40,47 @@ final class FacetWP_Helper
 
 
     /**
+     * Get available facet types
+     */
+    function get_facet_types() {
+        if ( ! empty( $this->facet_types ) ) {
+            return $this->facet_types;
+        }
+
+        include( FACETWP_DIR . '/includes/facets/base.php' );
+
+        $types = array(
+            'checkboxes'    => 'Facetwp_Facet_Checkboxes',
+            'dropdown'      => 'Facetwp_Facet_Dropdown',
+            'fselect'       => 'Facetwp_Facet_fSelect',
+            'hierarchy'     => 'Facetwp_Facet_Hierarchy',
+            'search'        => 'Facetwp_Facet_Search',
+            'autocomplete'  => 'Facetwp_Facet_Autocomplete',
+            'slider'        => 'Facetwp_Facet_Slider',
+            'date_range'    => 'Facetwp_Facet_Date_Range',
+            'number_range'  => 'Facetwp_Facet_Number_Range',
+            'proximity'     => 'Facetwp_Facet_Proximity_Core',
+            'radio'         => 'Facetwp_Facet_Radio_Core'
+        );
+
+        $facet_types = array();
+
+        foreach ( $types as $slug => $class_name ) {
+            include( FACETWP_DIR . "/includes/facets/$slug.php" );
+            $facet_types[ $slug ] = new $class_name();
+        }
+
+        return apply_filters( 'facetwp_facet_types', $facet_types );
+    }
+
+
+    /**
      * Get settings and allow for developer hooks
      */
-    function load_settings() {
-        $settings = json_decode( get_option( 'facetwp_settings' ), true );
+    function load_settings( $last_index = false ) {
+        $name = $last_index ? 'facetwp_settings_last_index' : 'facetwp_settings';
+        $option = get_option( $name );
+        $settings = ( false !== $option ) ? json_decode( $option, true ) : array();
 
         if ( empty( $settings['facets'] ) ) {
             $settings['facets'] = array();
@@ -195,6 +197,7 @@ final class FacetWP_Helper
                 return $facet;
             }
         }
+
         return false;
     }
 
@@ -211,6 +214,7 @@ final class FacetWP_Helper
                 return $template;
             }
         }
+
         return false;
     }
 
@@ -294,6 +298,39 @@ final class FacetWP_Helper
 
 
     /**
+     * Sanitize SQL data
+     * @return mixed The sanitized value(s)
+     * @since 3.0.7
+     */
+    function sanitize( $input ) {
+        global $wpdb;
+
+        if ( is_array( $input ) ) {
+            $output = array();
+
+            foreach ( $input as $key => $val ) {
+                $output[ $key ] = $this->sanitize( $val );
+            }
+        }
+        else {
+            if ( $wpdb->dbh ) {
+                if ( $wpdb->use_mysqli ) {
+                    $output = mysqli_real_escape_string( $wpdb->dbh, $input );
+                }
+                else {
+                    $output = mysql_real_escape_string( $input, $wpdb->dbh );
+                }
+            }
+            else {
+                $output = addslashes( $input );
+            }
+        }
+
+        return $output;
+    }
+
+
+    /**
      * Does an active facet with the specified setting exist?
      * @return boolean
      * @since 1.4.0
@@ -304,6 +341,7 @@ final class FacetWP_Helper
                 return true;
             }
         }
+
         return false;
     }
 
@@ -339,8 +377,11 @@ final class FacetWP_Helper
                 $value = md5( $value );
             }
         }
+
         $value = str_replace( ' ', '-', strtolower( $value ) );
-        return preg_replace( '/[-]{2,}/', '-', $value );
+        $value = preg_replace( '/[-]{2,}/', '-', $value );
+        $value = ( 50 < strlen( $value ) ) ? md5( $value ) : $value;
+        return $value;
     }
 
 

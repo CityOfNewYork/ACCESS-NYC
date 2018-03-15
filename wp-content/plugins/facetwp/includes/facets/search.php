@@ -64,11 +64,13 @@ class FacetWP_Facet_Search extends FacetWP_Facet
     wp.hooks.addAction('facetwp/load/search', function($this, obj) {
         $this.find('.facet-search-engine').val(obj.search_engine);
         $this.find('.facet-placeholder').val(obj.placeholder);
+        $this.find('.facet-auto-refresh').val(obj.auto_refresh);
     });
 
     wp.hooks.addFilter('facetwp/save/search', function(obj, $this) {
         obj['search_engine'] = $this.find('.facet-search-engine').val();
         obj['placeholder'] = $this.find('.facet-placeholder').val();
+        obj['auto_refresh'] = $this.find('.facet-auto-refresh').val();
         return obj;
     });
 
@@ -102,6 +104,30 @@ class FacetWP_Facet_Search extends FacetWP_Facet
             <td><?php _e( 'Placeholder text', 'fwp' ); ?>:</td>
             <td><input type="text" class="facet-placeholder" value="" /></td>
         </tr>
+        <tr>
+            <td>
+                <?php _e('Auto refresh', 'fwp'); ?>:
+                <div class="facetwp-tooltip">
+                    <span class="icon-question">?</span>
+                    <div class="facetwp-tooltip-content"><?php _e( 'Automatically refresh the results while typing?', 'fwp' ); ?></div>
+                </div>
+            </td>
+            <td>
+                <select class="facet-auto-refresh">
+                    <option value="no"><?php _e( 'No', 'fwp' ); ?></option>
+                    <option value="yes"><?php _e( 'Yes', 'fwp' ); ?></option>
+                </select>
+            </td>
+        </tr>
 <?php
+    }
+
+
+    /**
+     * (Front-end) Attach settings to the AJAX response
+     */
+    function settings_js( $params ) {
+        $auto_refresh = empty( $params['facet']['auto_refresh'] ) ? 'no' : $params['facet']['auto_refresh'];
+        return array( 'auto_refresh' => $auto_refresh );
     }
 }

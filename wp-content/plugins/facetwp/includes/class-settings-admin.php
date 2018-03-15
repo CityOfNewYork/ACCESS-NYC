@@ -28,7 +28,7 @@ class FacetWP_Settings_Admin
                     'loading_animation' => array(
                         'label' => __( 'Loading Animation', 'fwp' ),
                         'html' => $this->get_field_html( 'loading_animation', 'dropdown', array(
-                            'choices' => array( '' => __( 'Spin', 'fwp' ), 'fade' => __( 'Fade', 'fwp' ), 'none' => __( 'None', 'fwp' ) )
+                            'choices' => array( 'fade' => __( 'Fade', 'fwp' ), '' => __( 'Spin', 'fwp' ), 'none' => __( 'None', 'fwp' ) )
                         ) )
                     ),
                     'prefix' => array(

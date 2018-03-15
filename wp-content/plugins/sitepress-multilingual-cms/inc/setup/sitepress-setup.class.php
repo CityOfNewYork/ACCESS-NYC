@@ -142,7 +142,7 @@ class SitePress_Setup {
 	}
 
 	static function fill_languages() {
-		global $wpdb, $sitepress, $sitepress_settings;
+		global $wpdb, $sitepress;
 
 		$languages_codes = icl_get_languages_codes();
         $lang_locales = icl_get_languages_locales();
@@ -155,8 +155,7 @@ class SitePress_Setup {
 		if ( !self::languages_table_is_complete() ) {
 			//First truncate the table
 			$active_languages = ( $sitepress !== null
-			                      && $sitepress_settings !== null
-			                      && icl_get_setting( 'setup_complete' ) ) ? $sitepress->get_active_languages() : array();
+			                      && $sitepress->is_setup_complete() ) ? $sitepress->get_active_languages() : array();
 
 			$wpdb->hide_errors();
 
@@ -171,9 +170,7 @@ class SitePress_Setup {
 					$language_code     = $languages_codes[ $key ];
 					$default_locale = isset( $lang_locales[ $language_code ] ) ? $lang_locales[ $language_code ] : '';
 
-					$language_tag = $default_locale ? $default_locale : $language_code;
-					$language_tag = str_replace( '_', '-', $language_tag );
-					$language_tag = strtolower( $language_tag );
+					$language_tag = strtolower( str_replace( '_', '-', $language_code ) );
 
 					$args = array(
 						'english_name'   => $key,
@@ -198,7 +195,7 @@ class SitePress_Setup {
 		$sql = "(`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
                 `language_code`  VARCHAR( 7 ) NOT NULL ,
                 `display_language_code` VARCHAR( 7 ) NOT NULL ,
-                `name` VARCHAR( 255 ) CHARACTER SET utf8 NOT NULL,
+                `name` VARCHAR( 255 ) NOT NULL,
                 UNIQUE(`language_code`, `display_language_code`)
 	            )";
 

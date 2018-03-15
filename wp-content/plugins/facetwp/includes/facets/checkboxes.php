@@ -65,7 +65,11 @@ class FacetWP_Facet_Checkboxes extends FacetWP_Facet
         $output = $wpdb->get_results( $sql, ARRAY_A );
 
         // Show "ghost" facet choices
-        if ( FWP()->helper->facet_is( $facet, 'ghosts', 'yes' ) && ! empty( FWP()->unfiltered_post_ids ) ) {
+        // For performance gains, only run if facets are in use
+        $show_ghosts = FWP()->helper->facet_is( $facet, 'ghosts', 'yes' );
+        $is_filtered = FWP()->unfiltered_post_ids !== FWP()->facet->query_args['post__in'];
+
+        if ( $show_ghosts && $is_filtered ) {
             $raw_post_ids = implode( ',', FWP()->unfiltered_post_ids );
 
             $sql = "
@@ -282,8 +286,11 @@ class FacetWP_Facet_Checkboxes extends FacetWP_Facet
 
     $(document).on('change', '.facet-hierarchical', function() {
         var $facet = $(this).closest('.facetwp-row');
-        var display = ('yes' == $(this).val()) ? 'table-row' : 'none';
-        $facet.find('.facet-show-expanded').closest('tr').css({ 'display' : display });
+        var hierarchical = ('yes' == $(this).val());
+        var show_expanded = hierarchical ? 'table-row' : 'none';
+        var soft_limit = hierarchical ? 'none' : 'table-row';
+        $facet.find('.facet-show-expanded').closest('tr').css({ 'display' : show_expanded });
+        $facet.find('.facet-soft-limit').closest('tr').css({ 'display' : soft_limit });
     });
 })(jQuery);
 </script>

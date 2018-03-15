@@ -34,6 +34,10 @@ class WPML_XML_Config_Validate {
 	 * @return bool
 	 */
 	function from_string( $xml ) {
+		if ( '' === preg_replace( '/(\W)+/', '', $xml ) ) {
+			return false;
+		}
+
 		$this->errors = array();
 
 		libxml_use_internal_errors( true );

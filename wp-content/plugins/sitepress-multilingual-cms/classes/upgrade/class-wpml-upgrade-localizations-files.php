@@ -39,10 +39,6 @@ class WPML_Upgrade_Localization_Files implements IWPML_Upgrade_Command {
 		return false;
 	}
 
-	public function get_command_id() {
-		return 'wpml-upgrade-localization-files';
-	}
-
 	public function get_results() {
 		return $this->results;
 	}

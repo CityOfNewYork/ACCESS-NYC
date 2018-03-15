@@ -45,11 +45,12 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		}
 		if ( WPML_WordPress_Actions::is_bulk_trash( $post_id ) ||
 		     WPML_WordPress_Actions::is_bulk_untrash( $post_id ) ||
-		     WPML_WordPress_Actions::is_heartbeat( )
+		     $this->has_invalid_language_details_on_heartbeat()
 		) {
 
 			return;
 		}
+
 		$default_language = $sitepress->get_default_language();
 		$post_vars        = (array) $_POST;
 		foreach ( (array) $post as $k => $v ) {
@@ -103,6 +104,20 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		$save_filter_action_state = new WPML_WP_Filter_State( 'save_post' );
 		$this->after_save_post( $trid, $post_vars, $language_code, $source_language );
 		$save_filter_action_state->restore();
+	}
+
+	private function has_invalid_language_details_on_heartbeat() {
+		if ( ! WPML_WordPress_Actions::is_heartbeat() ) {
+			return false;
+		}
+
+		if ( isset( $_POST['data']['icl_post_language'], $_POST['data']['icl_trid'] ) ) {
+			$_POST['icl_post_language'] = filter_var( $_POST['data']['icl_post_language'], FILTER_SANITIZE_STRING );
+			$_POST['icl_trid'] = filter_var( $_POST['data']['icl_trid'], FILTER_SANITIZE_NUMBER_INT );
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

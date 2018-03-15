@@ -24,8 +24,12 @@ class WPML_Post_Element extends WPML_Translation_Element implements WPML_Duplica
 		return $this->get_wp_object()->post_type;
 	}
 
-	function get_wpml_element_type() {
-		return 'post_' . $this->get_wp_element_type();
+	public function get_wpml_element_type() {
+		$element_type = '';
+		if ( ! is_wp_error( $this->get_wp_element_type() ) ) {
+			$element_type = 'post_' . $this->get_wp_element_type();
+		}
+		return $element_type;
 	}
 
 	function get_element_id() {
@@ -44,5 +48,9 @@ class WPML_Post_Element extends WPML_Translation_Element implements WPML_Duplica
 
 	function is_translatable() {
 		return $this->sitepress->is_translated_post_type( $this->get_wp_element_type() );
+	}
+
+	function is_display_as_translated() {
+		return $this->sitepress->is_display_as_translated_post_type( $this->get_wp_element_type() );
 	}
 }

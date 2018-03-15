@@ -18,11 +18,11 @@ class WPML_Post_Status_Display {
 	 */
 	private function render_status_icon( $link, $text, $img ) {
 
-		$icon_html = '<a href="' . $link . '" title="' . $text . '">';
+		$icon_html = '<a href="' . esc_url( $link ) . '" title="' . esc_attr( $text ) . '">';
 		$icon_html .= '<img style="padding:1px;margin:2px;" border="0" src="'
 		              . ICL_PLUGIN_URL . '/res/img/'
-		              . $img . '" alt="'
-		              . $text . '" width="16" height="16"/>';
+		              . esc_attr( $img ) . '" alt="'
+		              . esc_attr( $text ) . '" width="16" height="16"/>';
 		$icon_html .= '</a>';
 
 		return $icon_html;
@@ -50,7 +50,7 @@ class WPML_Post_Status_Display {
 		return $this->render_status_icon( $link, $text, $icon );
 	}
 
-	private function get_status_data( $post_id, $lang ) {
+	public function get_status_data( $post_id, $lang ) {
 		global $wpml_post_translations;
 
 		$status_helper        = wpml_get_post_status_helper ();

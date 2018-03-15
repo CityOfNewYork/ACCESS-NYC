@@ -17,6 +17,7 @@
         <custom-field action="ignore">_icl_lang_duplicate_of</custom-field>
         <custom-field action="ignore">_thumbnail_id</custom-field>
         <custom-field action="ignore">_wp_attached_file</custom-field>
+        <custom-field action="translate">_wp_attachment_image_alt</custom-field>
     </custom-fields>
     <language-switcher-settings>
         <key name="link_empty">0</key>

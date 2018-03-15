@@ -109,6 +109,23 @@ class WPML_URL_Converter_Subdir_Strategy extends WPML_URL_Converter_Abstract_Str
 	}
 
 	/**
+	 * @param string $url
+	 * @param string $langauge
+	 *
+	 * @return string
+	 */
+	public function get_home_url_relative( $url, $language ) {
+		$language = ! $this->dir_default && $language === $this->default_language ? '' : $language;
+		$language = isset( $this->language_codes_map[ $language ] ) ? $this->language_codes_map[ $language ] : $language;
+
+		if ( $language ) {
+			return '/' . $language . $url;
+		} else {
+			return $url;
+		}
+	}
+
+	/**
 	 * Will return true if root URL or child of root URL
 	 *
 	 * @param string $url

@@ -13,7 +13,7 @@ class WPML_ST_Upgrade_String_Index {
 		$this->wpdb = $wpdb;
 	}
 
-	public function does_unique_index_on_md5_column_exist() {
+	public function is_uc_domain_name_context_index_unique() {
 		$key_exists = get_option( self::OPTION_NAME );
 		if ( ! $key_exists ) {
 			$sql = "SHOW KEYS FROM  {$this->wpdb->prefix}icl_strings WHERE Key_name='uc_domain_name_context_md5' AND Non_unique = 0";

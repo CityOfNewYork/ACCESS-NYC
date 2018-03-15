@@ -44,8 +44,17 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 		$src_language = $this->term_translations->get_source_lang_code( $tt_id );
 		$this->sitepress->set_element_language_details( $tt_id,
 			'tax_' . $taxonomy, $trid, $term_lang, $src_language );
-		$sync_meta_action = new WPML_Sync_Term_Meta_Action( $this->sitepress,
-			$tt_id );
+
+		add_action( 'created_term', array( $this, 'sync_term_meta' ), 10, 2 );
+		add_action( 'edited_term', array( $this, 'sync_term_meta' ), 10, 2 );
+	}
+
+	/**
+	 * @param int $term_id
+	 * @param int $tt_id
+	 */
+	public function sync_term_meta( $term_id, $tt_id ) {
+		$sync_meta_action = new WPML_Sync_Term_Meta_Action( $this->sitepress, $tt_id );
 		$sync_meta_action->run();
 	}
 

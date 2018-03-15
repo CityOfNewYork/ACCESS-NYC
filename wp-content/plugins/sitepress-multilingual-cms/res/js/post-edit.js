@@ -318,6 +318,11 @@ jQuery(document).ready(function ($) {
 			}
 		}
 	});
+
+	$(document).on('heartbeat-send', function (event, data) {
+		data.icl_post_language = $('#icl_post_language').val();
+		data.icl_trid          = $('input[name="icl_trid"]').val();
+	});
 });
 
 function setupCopyButtons() {

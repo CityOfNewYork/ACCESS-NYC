@@ -24,7 +24,7 @@
 				{% for language in languages if not language.is_current %}
 
 					<li class="{{ language.css_classes }}">
-						<a href="{{ language.url }}">
+						<a href="{{ language.url }}" class="{{ css_classes_link }}">
 							{%- if language.flag_url -%}
 								<img class="{{ css_classes_flag }}" src="{{ language.flag_url }}" alt="{{ language.code }}" title="{{ language.flag_title }}">
 							{%- endif -%}

@@ -11,15 +11,20 @@ class WPML_Canonicals_Hooks {
 	/** @var  WPML_URL_Converter $url_converter */
 	private $url_converter;
 
+	/** @var callable $is_current_request_root_callback */
+	private $is_current_request_root_callback;
+
 	/**
 	 * WPML_Canonicals_Hooks constructor.
 	 *
 	 * @param SitePress          $sitepress
 	 * @param WPML_URL_Converter $url_converter
+	 * @param callable           $is_current_request_root_callback
 	 */
-	public function __construct( SitePress $sitepress, WPML_URL_Converter $url_converter ) {
+	public function __construct( SitePress $sitepress, WPML_URL_Converter $url_converter, $is_current_request_root_callback ) {
 		$this->sitepress     = $sitepress;
 		$this->url_converter = $url_converter;
+		$this->is_current_request_root_callback = $is_current_request_root_callback;
 	}
 
 	public function add_hooks() {
@@ -37,7 +42,7 @@ class WPML_Canonicals_Hooks {
 	}
 
 	public function redirect_pages_from_root_to_default_lang_dir() {
-		if ( is_page() && ! WPML_Root_Page::is_current_request_root() ) {
+		if ( is_page() && ! call_user_func( $this->is_current_request_root_callback ) ) {
 			$lang = $this->sitepress->get_current_language();
 			$current_uri = $_SERVER['REQUEST_URI'];
 			$abs_home    = $this->url_converter->get_abs_home();

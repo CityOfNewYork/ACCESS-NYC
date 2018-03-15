@@ -14,7 +14,13 @@ if ( ! function_exists('wp_all_import_get_feed_type')){
 
 		}
 
-		$headers = @get_headers($url, 1);		
+		$headers = @get_headers($url, 1);
+
+        if (empty($headers)){
+            $response = wp_remote_get($url);
+            $headers = wp_remote_retrieve_headers( $response );
+        }
+
 		$extensions = array('gzip', 'gz', 'xml', 'csv', 'json', 'sql');	
 		$type = false;
 

@@ -12,6 +12,7 @@ class WPML_Notice_Action {
 	private $group_to_dismiss;
 	private $js_callback;
 	private $dismiss_different_text;
+	private $link_target;
 
 	/**
 	 * WPML_Admin_Notice_Action constructor.
@@ -70,5 +71,19 @@ class WPML_Notice_Action {
 
 	public function get_js_callback() {
 		return $this->js_callback;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_link_target() {
+		return $this->link_target;
+	}
+
+	/**
+	 * @param mixed $link_target
+	 */
+	public function set_link_target( $link_target ) {
+		$this->link_target = $link_target;
 	}
 }

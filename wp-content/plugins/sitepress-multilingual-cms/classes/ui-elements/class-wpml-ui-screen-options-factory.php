@@ -3,7 +3,14 @@
 /**
  * @package wpml-core
  */
-class WPML_UI_Screen_Options_Factory extends WPML_SP_User {
+class WPML_UI_Screen_Options_Factory {
+
+	/** @var SitePress $sitepress */
+	private $sitepress;
+
+	public function __construct( SitePress $sitepress ) {
+		$this->sitepress = $sitepress;
+	}
 
 	/**
 	 * @param string $option_name
@@ -23,5 +30,9 @@ class WPML_UI_Screen_Options_Factory extends WPML_SP_User {
 		$help_tab->init_hooks();
 		
 		return $help_tab;
+	}
+
+	public function create_admin_table_sort() {
+		return new WPML_Admin_Table_Sort();
 	}
 }

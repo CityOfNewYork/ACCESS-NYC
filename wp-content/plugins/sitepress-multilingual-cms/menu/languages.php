@@ -128,11 +128,11 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 						'#lang-sec-1'   =>  __('Site Languages','sitepress'),
 						'#lang-sec-2'   =>  __('Language URL format','sitepress'),
 						'#lang-sec-4'   =>  __('Admin language','sitepress'),
-						'#lang-sec-6'   =>  __('Blog posts to display','sitepress'),
 						'#lang-sec-7'   =>  __('Hide languages','sitepress'),
 						'#lang-sec-8'   =>  __('Make themes work multilingual','sitepress'),
 						'#lang-sec-9'   =>  __('Browser language redirect','sitepress'),
 						'#lang-sec-9-5' =>  __('SEO Options','sitepress'),
+						'#cookie'       =>  __('Language filtering for AJAX operations', 'sitepress'),
 						'#lang-sec-10'  =>  __('WPML love','sitepress'),
 					);
 
@@ -719,44 +719,6 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 		<?php endif; ?>
 
 		<?php if(!empty( $setup_complete ) && count($active_languages) > 1): ?>
-			<div class="wpml-section wpml-section-blog-posts" id="lang-sec-6">
-				<div class="wpml-section-header">
-					<h3><?php esc_html_e( 'Blog posts to display', 'sitepress' ) ?></h3>
-				</div>
-				<div class="wpml-section-content">
-					<form id="icl_blog_posts" name="icl_blog_posts" action="">
-						<?php wp_nonce_field( 'icl_blog_posts_nonce', '_icl_nonce' ); ?>
-						<p>
-							<?php
-							$icl_only_translated_posts_checked = checked( 0, icl_get_setting( 'show_untranslated_blog_posts', 0 ), false )
-							?>
-							<label>
-								<input type="radio" name="icl_untranslated_blog_posts" <?php echo $icl_only_translated_posts_checked; ?> value="0"/>
-								<?php esc_html_e( 'Only translated posts.', 'sitepress' ) ?>
-							</label>
-						</p>
-
-						<p>
-							<label>
-								<?php
-								$icl_all_posts_checked = checked( 1, icl_get_setting( 'show_untranslated_blog_posts', 0 ), false )
-								?>
-								<input type="radio" name="icl_untranslated_blog_posts" <?php echo $icl_all_posts_checked; ?> value="1"/>
-								<?php esc_html_e( 'All posts (display translation if it exists or posts in default language otherwise).', 'sitepress' ) ?>
-							</label>
-
-						</p>
-
-						<div id="icl_untranslated_blog_posts_help" style="display: none">
-							<?php esc_html_e( "Please note that this setting affects only blog posts queried by the main loop in a theme's index.php template.", 'sitepress' ) ?>
-						</div>
-						<p class="buttons-wrap">
-							<span class="icl_ajx_response" id="icl_ajx_response_bp"></span>
-							<input class="button button-primary" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ) ?>" type="submit"/>
-						</p>
-					</form>
-				</div>
-			</div>
 
 			<div class="wpml-section wpml-section-hide-languages" id="lang-sec-7">
 				<div class="wpml-section-header">

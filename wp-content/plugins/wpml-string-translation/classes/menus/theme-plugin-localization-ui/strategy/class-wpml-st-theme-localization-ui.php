@@ -83,6 +83,7 @@ class WPML_ST_Theme_Localization_UI implements IWPML_Theme_Plugin_Localization_U
 			$domains = array_key_exists( $theme_folder, $theme_localization_status ) ? $theme_localization_status[ $theme_folder ] : false;
 
 			$components[ $theme_folder ] = array(
+				'id'             => md5( $theme_data['path'] ),
 				'component_name' => $theme_data['name'],
 				'active'         => wp_get_theme()->get( 'Name' ) === $theme_data['name'],
 			);

@@ -1,13 +1,25 @@
 <?php
 
-class WPML_Rewrite_Rule_Filter extends WPML_WPDB_And_SP_User {
+class WPML_Rewrite_Rule_Filter {
+
+	/** @var SitePress $sitepress */
+	private $sitepress;
+
+	/** @var WPML_Slug_Translation_Records $slug_records */
+	private $slug_records;
+
+	public function __construct( WPML_Slug_Translation_Records $slug_records, SitePress $sitepress ) {
+		$this->slug_records = $slug_records;
+		$this->sitepress = $sitepress;
+	}
 
 	function rewrite_rules_filter( $value ) {
 		if ( empty( $value ) ) {
 			return $value;
 		}
-		
+
 		$current_language               = $this->sitepress->get_current_language();
+		$default_language               = $this->sitepress->get_default_language();
 		$queryable_post_types           = get_post_types( array( 'publicly_queryable' => true ) );
 		$post_slug_translation_settings = $this->sitepress->get_setting( 'posts_slug_translation', array() );
 
@@ -20,26 +32,15 @@ class WPML_Rewrite_Rule_Filter extends WPML_WPDB_And_SP_User {
 				continue;
 			}
 
-			$slug_translation = $this->wpdb->get_var( $this->wpdb->prepare( "
-						SELECT t.value
-						FROM {$this->wpdb->prefix}icl_string_translations t
-							JOIN {$this->wpdb->prefix}icl_strings s ON t.string_id = s.id
-						WHERE t.language = %s AND s.name = %s AND t.status = %d
-					",
-				$current_language,
-				'URL slug: ' . $type,
-				ICL_TM_COMPLETE ) );
+			$display_as_translated_mode = $this->sitepress->is_display_as_translated_post_type( $type );
+
+			$slug_translation = $this->slug_records->get_translation( $type, $current_language );
 			if ( ! $slug_translation ) {
 				// check original
-				$slug_translation = $this->wpdb->get_var( $this->wpdb->prepare( "
-						SELECT value
-						FROM {$this->wpdb->prefix}icl_strings
-						WHERE language = %s AND name = %s
-					",
-					$current_language,
-					'URL slug: ' . $type
-				) );
-
+				$slug_translation = $this->slug_records->get_original( $type, $current_language );
+			}
+			if ( $display_as_translated_mode && ( ! $slug_translation || $slug_translation === $slug ) && $default_language != 'en' ) {
+				$slug_translation = $this->slug_records->get_translation( $type, $default_language );
 			}
 			$slug_translation = trim( $slug_translation, '/' );
 
@@ -56,12 +57,17 @@ class WPML_Rewrite_Rule_Filter extends WPML_WPDB_And_SP_User {
 			/* case of slug using %tags% - PART 1 of 2 - END */
 
 			$buff_value = array();
-			foreach ( (array) $value as $k => $v ) {
+			foreach ( (array) $value as $match => $query ) {
 
 				if ( $slug && $slug != $slug_translation ) {
-					$k = $this->adjust_key( $k, $slug_translation, $slug );
+					$new_match = $this->adjust_key( $match, $slug_translation, $slug );
+					$buff_value[ $new_match ] = $query;
+					if ( $new_match != $match && $display_as_translated_mode ) {
+						$buff_value[ $match ] = $query;
+					}
+				} else {
+					$buff_value[ $match ] = $query;
 				}
-				$buff_value[ $k ] = $v;
 			}
 
 			$value = $buff_value;
@@ -76,11 +82,11 @@ class WPML_Rewrite_Rule_Filter extends WPML_WPDB_And_SP_User {
 					$slug_translation = preg_replace( '#\.\+\?#', '(.+?)', $slug_translation );
 				}
 				$buff_value = array();
-				foreach ( $value as $k => $v ) {
+				foreach ( $value as $match => $query ) {
 					if ( trim( $slug ) && trim( $slug_translation ) && $slug != $slug_translation ) {
-						$k = $this->adjust_key( $k, $slug_translation, $slug );
+						$match = $this->adjust_key( $match, $slug_translation, $slug );
 					}
-					$buff_value[ $k ] = $v;
+					$buff_value[ $match ] = $query;
 				}
 
 				$value = $buff_value;
@@ -93,14 +99,7 @@ class WPML_Rewrite_Rule_Filter extends WPML_WPDB_And_SP_User {
 	}
 
 	function get_slug_by_type( $type ) {
-		$slug_translation = $this->wpdb->get_var( $this->wpdb->prepare( "
-														SELECT value
-														FROM {$this->wpdb->prefix}icl_strings
-														WHERE name = %s ",
-			'URL slug: ' . $type
-		) );
-
-		return $slug_translation;
+		return $this->slug_records->get_original( $type );
 	}
 
 	private function adjust_key( $k, $slug_translation, $slug ) {

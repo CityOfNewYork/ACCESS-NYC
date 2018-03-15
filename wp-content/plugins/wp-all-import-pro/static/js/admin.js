@@ -2348,31 +2348,7 @@
     	}    	
     	$(this).attr('rel', $(this).html());
     	$(this).html($newtitle);
-    });
-
-	$('.post_excerpt_edit_mode').click(function(){
-		var $current = $(this).attr('rel');
-		if ($current == 'expand'){
-			$(this).find('.collapse_mode_title').show();
-			$(this).find('.expand_mode_title').hide();
-			$('.post_excerpt_edit_mode_collapse').hide();
-			$('.post_excerpt_edit_mode_expand').show();
-			$(this).attr('rel', 'collapse');
-			$('input.post_excerpt_input').attr('name', '');
-			$('textarea.post_excerpt_input').attr('name', 'post_excerpt');
-			$('textarea.post_excerpt_input').val($('input.post_excerpt_input').val());
-		}
-		else{
-			$(this).find('.collapse_mode_title').hide();
-			$(this).find('.expand_mode_title').show();
-			$('.post_excerpt_edit_mode_collapse').show();
-			$('.post_excerpt_edit_mode_expand').hide();
-			$(this).attr('rel', 'expand');
-			$('textarea.post_excerpt_input').attr('name', '');
-			$('input.post_excerpt_input').attr('name', 'post_excerpt');
-			$('input.post_excerpt_input').val($('textarea.post_excerpt_input').val());
-		}
-	});
+    });	
 
 	var fix_tag_position = function(){
 		if ($('.wpallimport-layout').length && $('.tag').length){

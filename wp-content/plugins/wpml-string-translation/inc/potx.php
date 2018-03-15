@@ -480,7 +480,7 @@ function _potx_find_t_calls_with_context(
 									}
 								}
 							} else {
-								$context = trim( $_potx_tokens[ $ti + $context_offset ][ 1 ], "\"' " );
+								$context = trim( $_potx_tokens[ $ti + $context_offset ][ 1 ], "' " );
 							}
 
 						} else {
