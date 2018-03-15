@@ -6,6 +6,7 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 	private $index_ro;
 	private $index_sync;
 	private $index_plural;
+	private $index_unlocked;
 	/** @var  TranslationManagement $tm_instance */
 	private $tm_instance;
 	/** @var WPML_Settings_Helper $settings_helper */
@@ -25,6 +26,11 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 		$this->index_plural    = $index_plural;
 		$this->index_ro        = $index_plural . '_readonly_config';
 		$this->index_sync      = $index_plural . '_sync_option';
+		if ( 'custom-type' == $index_singular ) {
+			$this->index_unlocked = 'custom_posts_unlocked_option';
+		} else {
+			$this->index_unlocked = 'taxonomies_unlocked_option';
+		}
 		$this->settings_helper = $settings_helper;
 	}
 
@@ -41,31 +47,36 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 		$section_plural   = $this->index_plural;
 
 		if ( ! empty( $config[ $section_singular ] ) ) {
-			$sync_option = $this->sitepress->get_setting( $this->index_sync, array() );
+			$sync_option     = $this->sitepress->get_setting( $this->index_sync, array() );
+			$unlocked_option = $this->sitepress->get_setting( $this->index_unlocked, array() );
 			if ( ! is_numeric( key( current( $config ) ) ) ) {
 				$cf[0] = $config[ $section_singular ];
 			} else {
 				$cf = $config[ $section_singular ];
 			}
 			foreach ( $cf as $c ) {
-				$val                                                    = $c['value'];
-				$sync_existing_setting                                  = isset( $sync_option[ $val ] )
-					? $sync_option[ $val ] : false;
-				$translate                                              = intval( $c['attr']['translate'] );
-				$this->tm_instance->settings[ $this->index_ro ][ $val ] = $translate;
-				$sync_option[ $val ]                                    = $translate;
-				if ( $translate && $translate != $sync_existing_setting ) {
-					if ( $section_plural === 'taxonomies' ) {
-						$this->sitepress->verify_taxonomy_translations( $val );
-					} else {
-						$this->sitepress->verify_post_translations( $val );
+				$val = $c['value'];
+
+				if ( ! $this->is_unlocked_type( $val, $unlocked_option ) ) {
+
+					$sync_existing_setting                                  = isset( $sync_option[ $val ] ) ? $sync_option[ $val ] : false;
+					$translate                                              = (int) $c['attr']['translate'];
+					$this->tm_instance->settings[ $this->index_ro ][ $val ] = $translate;
+					$sync_option[ $val ]                                    = $translate;
+
+					if ( $translate && $translate != $sync_existing_setting ) {
+						if ( $section_plural === 'taxonomies' ) {
+							$this->sitepress->verify_taxonomy_translations( $val );
+						} else {
+							$this->sitepress->verify_post_translations( $val );
+						}
+						$this->tm_instance->save_settings();
 					}
-					$this->tm_instance->save_settings();
 				}
 			}
 
-			$this->sitepress->set_setting( $this->index_sync, $sync_option );
-			$this->settings_helper->maybe_add_filter( $section_plural );
+		$this->sitepress->set_setting( $this->index_sync, $sync_option );
+		$this->settings_helper->maybe_add_filter( $section_plural );
 		}
 	}
 
@@ -89,5 +100,9 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 
 			$this->tm_instance->save_settings();
 		}
+	}
+
+	private function is_unlocked_type( $type, $unlocked_options ) {
+		return isset( $unlocked_options[ $type ] ) && $unlocked_options[ $type ];
 	}
 }

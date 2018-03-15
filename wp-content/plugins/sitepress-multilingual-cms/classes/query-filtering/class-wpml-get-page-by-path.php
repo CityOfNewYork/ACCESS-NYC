@@ -2,6 +2,9 @@
 
 class WPML_Get_Page_By_Path {
 
+	/** @link https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-4918 */
+	const BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY = -1;
+
 	/** @var wpdb $wpdb */
 	private $wpdb;
 
@@ -21,11 +24,11 @@ class WPML_Get_Page_By_Path {
 
 	public function get( $page_name, $lang, $output = OBJECT, $post_type = 'page' ) {
 		$this->language = $lang;
-		add_filter( 'query', array( $this, 'get_page_by_path_filter' ) );
+		add_filter( 'query', array( $this, 'get_page_by_path_filter' ), self::BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY );
 		$temp_lang_switch = new WPML_Temporary_Switch_Language( $this->sitepress, $lang );
 		$page = get_page_by_path( $page_name, $output, $post_type );
 		$temp_lang_switch->restore_lang();
-		remove_filter( 'query', array( $this, 'get_page_by_path_filter' ) );
+		remove_filter( 'query', array( $this, 'get_page_by_path_filter' ), self::BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY );
 		return $page;
 	}
 

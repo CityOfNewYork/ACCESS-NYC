@@ -47,7 +47,7 @@ class FacetWP_Integration_SearchWP
         $swp_query = new SWP_Query( array(
             's'                 => $this->search_terms,
             'posts_per_page'    => 200,
-            'load_posts'        => false,
+            'fields'            => 'ids',
             'facetwp'           => true,
         ) );
 
@@ -84,7 +84,7 @@ class FacetWP_Integration_SearchWP
                 's'                 => $selected_values,
                 'engine'            => $facet['search_engine'],
                 'posts_per_page'    => 200,
-                'load_posts'        => false,
+                'fields'            => 'ids',
                 'facetwp'           => true,
             ) );
 

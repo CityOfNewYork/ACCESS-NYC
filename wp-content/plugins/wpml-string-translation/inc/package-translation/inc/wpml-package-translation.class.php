@@ -6,39 +6,29 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 	var $admin_lang_switcher = null;
 
 	function __construct() {
-
-		$this->package_translation_active = false;
-
 		parent::__construct();
-		add_action( 'wpml_loaded', array( $this, 'loaded' ), $this->load_priority );
-		add_action( 'shutdown', array( $this, 'shutdown' ) );
-	}
+	  add_action( 'wpml_loaded', array( $this, 'loaded' ), $this->load_priority, 1 );
+  }
 
-	function loaded() {
+	function loaded( SitePress $sitepress = null ) {
 		parent::loaded();
-		if ( $this->passed_dependencies() ) {
-			if ( icl_get_setting( 'setup_complete' ) ) {
-				$this->add_admin_hooks();
-				$this->add_global_hooks();
 
-				if ( is_admin() ) {
-					$this->run_db_update();
-					if ( get_option( 'wpml-package-translation-refresh-required', true ) ) {
-						add_action( 'init', array( $this, 'refresh_packages' ), 999, 0 );
-						update_option( 'wpml-package-translation-refresh-required', false );
-					}
-				}
-
-				$this->package_translation_active = true;
-			}
+		if ( null === $sitepress ) {
+			global $sitepress;
 		}
-	}
 
-	function shutdown() {
-		if ( is_admin() ) {
-			if ( ! $this->package_translation_active ) {
-				update_option( 'wpml-package-translation-refresh-required', true );
-			}
+	  if ( $this->passed_dependencies() && $sitepress->get_setting( 'setup_complete', false ) ) {
+		  $this->add_admin_hooks();
+		  $this->add_global_hooks();
+
+		  if ( is_admin() ) {
+			  $this->run_db_update();
+
+			  if ( $this->is_refresh_required() ) {
+				  add_action( 'init', array( $this, 'refresh_packages' ), 999, 0 );
+				  $this->set_refresh_not_required();
+			  }
+		  }
 		}
 	}
 
@@ -104,6 +94,8 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			//@deprecated @since 3.2 Use 'wpml_delete_package'
 			add_action( 'wpml_delete_package_action', array( $this, 'delete_package_action' ), 10, 2 );
 			add_action( 'wpml_delete_package', array( $this, 'delete_package_action' ), 10, 2 );
+
+			add_action( 'deleted_post', array( $this, 'remove_post_packages' ) );
 		}
 	}
 
@@ -261,6 +253,11 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			foreach ( $packages_ids as $package_id ) {
 				$package = new WPML_Package( $package_id );
 				if ( $package ) {
+					if ( ! isset( $package->ID ) || ! $package->ID ) {
+						TranslationProxy_Basket::delete_item_from_basket( $package_id, 'package' );
+						continue;
+					}
+
 					$package_source_language  = $packages[ $package_id ][ 'from_lang' ];
 					$package_target_languages = $packages[ $package_id ][ 'to_langs' ];
 					$language_names           = $this->languages_to_csv( $package_target_languages );
@@ -786,17 +783,18 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 	<?php
 	}
 
-	function send_jobs( $item_type_name, $item_type, $package_basket_items, $translators, $basket_name ) {
-		if ( $item_type_name == 'package' ) {
+	function send_jobs( $item_type_name, $item_type, $package_basket_items, $translators, $batch_options ) {
+	  if ( $item_type_name === 'package' ) {
 			// for every post in cart
 			// prepare data for send_jobs() and do it
 			foreach ( $package_basket_items as $basket_item_id => $basket_item ) {
-				$jobs_data                          = array();
-				$jobs_data[ 'iclpost' ][ ]          = $basket_item_id;
-				$jobs_data[ 'tr_action' ]           = $basket_item[ 'to_langs' ];
-				$jobs_data[ 'translators' ]         = $translators;
-				$jobs_data[ 'batch_name' ]          = $basket_name;
-				$jobs_data[ 'element_type_prefix' ] = $item_type_name;
+				$jobs_data                        = array();
+				$jobs_data['iclpost'][]           = $basket_item_id;
+				$jobs_data['tr_action']           = $basket_item[ 'to_langs' ];
+				$jobs_data['translators']         = $translators;
+				$jobs_data['batch_name']          = $batch_options['basket_name'];
+				$jobs_data['batch_options']       = $batch_options;
+				$jobs_data['element_type_prefix'] = $item_type_name;
 				do_action( 'wpml_tm_send_jobs', $jobs_data );
 			}
 		}
@@ -807,5 +805,17 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 
 		$sql .= " AND i.element_id NOT IN ( SELECT ID FROM {$wpdb->prefix}icl_string_packages WHERE post_id IS NOT NULL AND element_type = 'package_layout' )";
 		return $sql;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function is_refresh_required() {
+		$refresh_required = get_option( 'wpml-package-translation-refresh-required', 'yes' );
+		return 'yes' === $refresh_required || '1' === $refresh_required;
+	}
+
+	private function set_refresh_not_required() {
+		update_option( 'wpml-package-translation-refresh-required', 'no', false );
 	}
 }

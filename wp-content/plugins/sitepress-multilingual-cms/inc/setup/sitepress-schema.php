@@ -123,6 +123,9 @@ function icl_sitepress_activate() {
                 `translated` TINYINT UNSIGNED NOT NULL DEFAULT 0,
                 `manager_id` INT UNSIGNED NOT NULL ,
                 `revision` INT UNSIGNED NULL,
+                `title` VARCHAR(160) NULL,
+                `deadline_date` DATETIME NULL,
+                `completed_date` DATETIME NULL,
                 INDEX ( `rid` , `translator_id` )
                 ) {$charset_collate}    
             ";
@@ -193,8 +196,8 @@ function icl_sitepress_activate() {
                  CREATE TABLE IF NOT EXISTS `{$table_name}` (
                   `id` bigint(20) unsigned NOT NULL auto_increment,
                   `language` varchar(7) NOT NULL,
-                  `context` varchar(" . WPML_STRING_TABLE_NAME_CONTEXT_LENGTH . ") CHARACTER SET UTF8 NOT NULL,
-                  `name` varchar(" . WPML_STRING_TABLE_NAME_CONTEXT_LENGTH . ") CHARACTER SET UTF8 NOT NULL,
+                  `context` varchar(" . WPML_STRING_TABLE_NAME_CONTEXT_LENGTH . ") NOT NULL,
+                  `name` varchar(" . WPML_STRING_TABLE_NAME_CONTEXT_LENGTH . ") NOT NULL,
                   `value` longtext NOT NULL,
                   `string_package_id` BIGINT unsigned NULL,
                   `location` BIGINT unsigned NULL,
@@ -202,7 +205,7 @@ function icl_sitepress_activate() {
                   `title` VARCHAR(160) NULL,
                   `status` TINYINT NOT NULL,
                   `gettext_context` TEXT NOT NULL,
-                  `domain_name_context_md5` VARCHAR(32) CHARACTER SET LATIN1 NOT NULL,
+                  `domain_name_context_md5` VARCHAR(32) NOT NULL,
                   PRIMARY KEY  (`id`),
                   UNIQUE KEY `uc_domain_name_context_md5` (`domain_name_context_md5`),
                   KEY `language_context` (`language`, `context`),

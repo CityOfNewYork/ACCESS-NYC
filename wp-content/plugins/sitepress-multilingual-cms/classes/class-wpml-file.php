@@ -61,6 +61,7 @@ class WPML_File {
 			);
 		}
 
+		$base['uri']   = preg_replace( '/(^https?:)/', '', $base['uri'] );
 		$relative_path = substr( $path, strlen( $base['path'] ) );
 		$relative_path = str_replace( array( '/', '\\' ), '/', $relative_path );
 		$relative_path = ltrim( $relative_path, '/' );

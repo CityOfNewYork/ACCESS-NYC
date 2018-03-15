@@ -2,6 +2,8 @@
 
 class WPML_LS_Model_Build extends WPML_SP_User {
 
+	const LINK_CSS_CLASS = 'wpml-ls-link';
+
     /* @var WPML_LS_Settings $settings */
     private $settings;
 
@@ -18,6 +20,7 @@ class WPML_LS_Model_Build extends WPML_SP_User {
         'languages'              => 'array',
         'current_language_code'  => 'string',
         'css_classes'            => 'string',
+        'css_classes_link'       => 'string',
         'backward_compatibility' => 'array',
     );
 
@@ -61,6 +64,7 @@ class WPML_LS_Model_Build extends WPML_SP_User {
         $vars['current_language_code']  = $this->sitepress->get_current_language();
         $vars['languages']              = $this->get_language_items( $slot, $template_data );
         $vars['css_classes']            = $this->get_slot_css_classes( $slot );
+        $vars['css_classes_link']       = self::LINK_CSS_CLASS;
 
         $vars = $this->add_backward_compatibility_to_wrapper( $vars, $slot );
 
@@ -143,10 +147,6 @@ class WPML_LS_Model_Build extends WPML_SP_User {
                         ? $this->get_menu_item_id( $this->sitepress->get_current_language(), $slot ) : 0;
                     $ret[ $code ]['is_parent'] = $slot->get( 'is_hierarchical' ) && $is_current_language
                         ? true : false;
-
-                    if ( $ret[ $code ]['is_parent'] ) {
-                        array_unshift( $css_classes, 'menu-item-has-children' );
-                    }
 
                     array_unshift( $css_classes, 'menu-item' );
                     array_push( $css_classes, $this->css_prefix . 'menu-item' );

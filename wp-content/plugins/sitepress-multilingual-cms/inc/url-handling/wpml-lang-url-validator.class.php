@@ -86,9 +86,9 @@ class WPML_Lang_URL_Validator {
 		$output .= sprintf(
 			'%s - %s, %s - %s',
 			trailingslashit( $this->get_sample_url( $root ? $def_lang_code : '' ) ),
-			$def_lang['display_name'],
+			esc_html( $def_lang['display_name'] ),
 			trailingslashit( $this->get_sample_url( $sample_lang_code ) ),
-			$sample_lang['display_name']
+			esc_html( $sample_lang['display_name'] )
 		);
 		$output .= ')</span>';
 

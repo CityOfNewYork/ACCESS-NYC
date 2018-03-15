@@ -541,7 +541,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
                                         <label for="icl_st_po_translations"><?php echo __('Also create translations according to the .po file', 'wpml-string-translation')?></label>
                                         <select name="icl_st_po_language" id="icl_st_po_language" style="display:none">
                                         <?php foreach($active_languages as $al): if($al['code']==$string_settings['strings_language']) continue; ?>
-                                        <option value="<?php echo $al['code'] ?>"><?php echo $al['display_name'] ?></option>
+                                        <option value="<?php echo esc_attr( $al['code'] ); ?>"><?php echo esc_html( $al['display_name'] ); ?></option>
                                         <?php endforeach; ?>
                                         </select>
                                     </p>
@@ -601,7 +601,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
                                     <label for="icl_st_pe_translations"><?php echo __('Also include translations', 'wpml-string-translation')?></label>
                                     <select name="icl_st_e_language" id="icl_st_e_language">
                                     <?php foreach($active_languages as $al): if($al['code']==$string_settings['strings_language']) continue; ?>
-                                    <option value="<?php echo $al['code'] ?>"><?php echo $al['display_name'] ?></option>
+                                    <option value="<?php echo esc_attr( $al['code'] ); ?>"><?php echo esc_html( $al['display_name'] ); ?></option>
                                     <?php endforeach; ?>
                                     </select>
                                 </p>

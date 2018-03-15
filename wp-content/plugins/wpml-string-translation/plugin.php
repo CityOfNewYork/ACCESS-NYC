@@ -2,10 +2,10 @@
 /*
 Plugin Name: WPML String Translation
 Plugin URI: https://wpml.org/
-Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/string-translation-2-6-2/">WPML String Translation 2.6.2 release notes</a>
+Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/string-translation-2-7-3/">WPML String Translation 2.7.3 release notes</a>
 Author: OnTheGoSystems
 Author URI: http://www.onthegosystems.com/
-Version: 2.6.2
+Version: 2.7.3
 Plugin Slug: wpml-string-translation
 */
 
@@ -13,7 +13,7 @@ if ( defined( 'WPML_ST_VERSION' ) || get_option( '_wpml_inactive' ) ) {
 	return;
 }
 
-define( 'WPML_ST_VERSION', '2.6.2' );
+define( 'WPML_ST_VERSION', '2.7.3' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -56,10 +56,12 @@ function wpml_st_core_loaded() {
 	$theme_localization_type = new WPML_Theme_Localization_Type( $sitepress );
 	$is_admin = $sitepress->get_wp_api()->is_admin();
 
+	$fastest_settings = new WPML_ST_Fastest_Settings_Notice( $sitepress, $wpml_admin_notices ? $wpml_admin_notices : wpml_get_admin_notices() );
+	$fastest_settings->remove();
+
 	if ( isset( $wpml_admin_notices ) && $theme_localization_type->is_st_type() && $is_admin && $setup_complete ) {
 		global $wpml_st_admin_notices;
 		$themes_and_plugins_settings = new WPML_ST_Themes_And_Plugins_Settings();
-		$fastest_settings = new WPML_ST_Fastest_Settings_Notice( $sitepress, $wpml_admin_notices );
 		$wpml_st_admin_notices = new WPML_ST_Themes_And_Plugins_Updates( $wpml_admin_notices, $themes_and_plugins_settings, $fastest_settings );
 		$wpml_st_admin_notices->init_hooks();
 	}
@@ -85,6 +87,7 @@ function wpml_st_core_loaded() {
 		'WPML_ST_Options_All_Strings_English_Factory',
 		'WPML_ST_Theme_Plugin_Hooks_Factory',
 		'WPML_ST_Track_Strings_Notice_Hooks_Factory',
+		'WPML_ST_Taxonomy_Labels_Translation_Factory',
 	);
 
 	$action_filter_loader = new WPML_Action_Filter_Loader();
@@ -109,7 +112,6 @@ function load_wpml_st_basics() {
 
 	require WPML_ST_PATH . '/inc/package-translation/wpml-package-translation.php';
 
-	add_action( 'wpml_loaded', 'wpml_st_setup_label_menu_hooks', 10, 0 );
 	add_action( 'wpml_loaded', 'wpml_st_core_loaded', 10 );
 
 	$troubleshooting = new WPML_ST_DB_Troubleshooting();
@@ -126,9 +128,6 @@ function load_wpml_st_basics() {
 			foreach ( $mo_scan_hooks as $mo_scan_hook ) {
 				$mo_scan_hook->add_hooks();
 			}
-
-			$mo_scan_notices = $mo_scan_factory->create_notices();
-			$mo_scan_notices->init_notices();
 		}
 	}
 }

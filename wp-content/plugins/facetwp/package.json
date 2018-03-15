@@ -1,0 +1,14 @@
+{
+  "name": "FacetWP",
+  "version": "1.0.0",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "rollup": "^0.55.1",
+    "rollup-plugin-multi-entry": "^2.0.2",
+    "rollup-plugin-uglify": "^3.0.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c --watch"
+  }
+}

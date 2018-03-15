@@ -25,6 +25,17 @@ $current_filename = substr($current_filename, (strrpos($current_filename, "/") +
 
 
 ?>
+<style>
+    .emr-plugin-button.emr-updating:before {
+        font: 400 20px/1 dashicons;
+        display: inline-block;
+        content: "\f463";
+        -webkit-animation: rotation 2s infinite linear;
+        animation: rotation 2s infinite linear;
+        margin: 3px 5px 0 -2px;
+        vertical-align: top
+    }
+</style>
 <div class="wrap">
 	<h1><?php echo __("Replace Media Upload", "enable-media-replace"); ?></h1>
 
@@ -40,9 +51,39 @@ $current_filename = substr($current_filename, (strrpos($current_filename, "/") +
 	<form enctype="multipart/form-data" method="post" action="<?php echo $formurl; ?>">
 	<?php
 		#wp_nonce_field('enable-media-replace');
+    $plugins = get_plugins();
+    $spInstalled = isset($plugins['shortpixel-image-optimiser/wp-shortpixel.php']);
+    $spActive = is_plugin_active('shortpixel-image-optimiser/wp-shortpixel.php');
 	?>
 		<input type="hidden" name="ID" value="<?php echo (int) $_GET["attachment_id"]; ?>" />
 		<div id="message" class="updated notice notice-success is-dismissible"><p><?php printf( __('NOTE: You are about to replace the media file "%s". There is no undo. Think about it!', "enable-media-replace"), $current_filename ); ?></p></div>
+
+		<?php if(!$spInstalled) {?>
+		<div style="background: #fff;width: 250px;min-height: 270px;border: 1px solid #ccc;float: right;padding: 15px;position: relative;margin: 0 0 10px 10px;">
+			<h3 class="" style="margin-top: 0;text-align: center;">
+				<a href="https://shortpixel.com/wp/af/VKG6LYN28044" target="_blank">
+					<?php _e("Optimize your images with ShortPixel, get +50% credits!", "enable-media-replace"); ?>
+				</a>
+			</h3>
+			<div class="" style="text-align: center;">
+				<a href="https://shortpixel.com/wp/af/VKG6LYN28044" target="_blank">
+					<img src="https://optimizingmattersblog.files.wordpress.com/2016/10/shortpixel.png">
+				</a>
+			</div>
+			<div class="" style="margin-bottom: 10px;">
+				<?php _e("Get more Google love by compressing your site's images! Check out how much ShortPixel can save your site and get +50% credits when signing up as an Enable Media Replace user! Forever!", "enable-media-replace"); ?>
+			</div>
+			<div class=""><div style="text-align: right;">
+					<a href="#" data-action="install" data-slug="shortpixel-image-optimiser" data-message="Activated" data-add-link="options-general.php?page=wp-shortpixel" data-add-link-name="ShortPixel options" class="button-primary emr-plugin-button ">
+                        <?php _e("Install &amp; Activate", "enable-media-replace"); ?>
+                    </a>
+					<a class="button button-secondary" id="shortpixel-image-optimiser-info" href="https://shortpixel.com/wp/af/VKG6LYN28044" target="_blank">
+						<?php _e("More info", "enable-media-replace"); ?></p>
+					</a>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
 
 		<p><?php echo __("Choose a file to upload from your computer", "enable-media-replace"); ?></p>
 
@@ -64,6 +105,7 @@ $current_filename = substr($current_filename, (strrpos($current_filename, "/") +
 	<?php else : ?>
 		<input type="hidden" name="replace_type" value="replace" />
 	<?php endif; ?>
-		<input type="submit" class="button" value="<?php echo __("Upload", "enable-media-replace"); ?>" /> <a href="#" onclick="history.back();"><?php echo __("Cancel", "enable-media-replace"); ?></a>
+		<input type="submit" class="button button-primary" value="<?php echo __("Upload", "enable-media-replace"); ?>" />
+        <a href="#" class="button" onclick="history.back();"><?php echo __("Cancel", "enable-media-replace"); ?></a>
 	</form>
 </div>

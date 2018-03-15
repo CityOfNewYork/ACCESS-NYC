@@ -4,7 +4,8 @@
  */
 class WPML_Support_Info_UI_Factory {
 	function create() {
-		$support_info     = new WPML_Support_Info();
+		global $wpdb;
+		$support_info = new WPML_Support_Info( $wpdb );
 
 		$template_paths   = array(
 			WPML_PLUGIN_PATH . '/templates/support/info/',

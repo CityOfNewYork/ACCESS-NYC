@@ -86,6 +86,7 @@ class WPML_ST_Plugin_Localization_UI implements IWPML_Theme_Plugin_Localization_
 			$domains = array_key_exists( $plugin_file, $plugin_stats ) ? $plugin_stats[ $plugin_file ] : false;
 
 			$components[ $plugin_file ] = array(
+				'id'             => md5( plugin_dir_path( WP_PLUGIN_URL . '/' . $plugin_file ) ),
 				'file'           => basename( $plugin_file ),
 				'component_name' => $plugin_data['Name'],
 				'active'         => $this->utils->is_plugin_active( $plugin_file ),

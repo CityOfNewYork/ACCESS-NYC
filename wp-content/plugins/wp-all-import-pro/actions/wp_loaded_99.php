@@ -173,7 +173,7 @@ function pmxi_wp_loaded_99() {
 								$log_storage = (int) PMXI_Plugin::getInstance()->getOption('log_storage');
 
 								// unlink previous logs
-								if ( (int) $import->queue_chunk_number < (int) $import->count )
+								if ( (int) $import->imported + (int) $import->skipped <= (int) $import->count )
 								{
 									$by = array();
 									$by[] = array(array('import_id' => $id, 'type NOT LIKE' => 'trigger'), 'AND');

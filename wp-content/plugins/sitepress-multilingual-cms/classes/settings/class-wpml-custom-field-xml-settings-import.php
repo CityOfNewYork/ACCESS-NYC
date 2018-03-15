@@ -60,22 +60,24 @@ class WPML_Custom_Field_XML_Settings_Import extends WPML_WPDB_User {
 	}
 
 	private function import_action( $c, $setting ) {
-		switch( $c['attr']['action'] ) {
-			case 'translate':
-				$setting->set_to_translatable();
-				break;
+		if ( ! $setting->is_unlocked() ) {
+			switch ( $c['attr']['action'] ) {
+				case 'translate':
+					$setting->set_to_translatable();
+					break;
 
-			case 'copy':
-				$setting->set_to_copy();
-				break;
+				case 'copy':
+					$setting->set_to_copy();
+					break;
 
-			case 'copy-once':
-				$setting->set_to_copy_once();
-				break;
+				case 'copy-once':
+					$setting->set_to_copy_once();
+					break;
 
-			default:
-				$setting->set_to_nothing();
-				break;
+				default:
+					$setting->set_to_nothing();
+					break;
+			}
 		}
 	}
 	

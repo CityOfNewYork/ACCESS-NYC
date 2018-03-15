@@ -12,7 +12,7 @@ class WPML_ST_DB_Cache_Factory {
 	private $sitepress;
 
 	/**
-	 * @var WPML_ST_WP_Wrapper
+	 * @var WP
 	 */
 	private $wp;
 
@@ -39,7 +39,7 @@ class WPML_ST_DB_Cache_Factory {
 				$wp = $GLOBALS['wp'] = new WP();
 			}
 		}
-		$this->wp = new WPML_ST_WP_Wrapper( $wp );
+		$this->wp = $wp;
 	}
 
 	/**
@@ -51,9 +51,15 @@ class WPML_ST_DB_Cache_Factory {
 		$persist = $this->create_persist();
 
 		$retriever = new WPML_ST_DB_Translation_Retrieve( $this->wpdb );
-		$url_preprocessor = new WPML_ST_Page_URL_Preprocessor( $this->wp );
+		$url_preprocessor = new WPML_ST_Page_URL_Preprocessor( new WPML_ST_WP_Wrapper( $this->wp ) );
 
-		return new WPML_ST_DB_Cache( $language, $persist, $retriever, $url_preprocessor );
+		return new WPML_ST_DB_Cache(
+			$language,
+			$persist,
+			$retriever,
+			$url_preprocessor,
+			new WPML_ST_DB_Shutdown_Url_Validator( $this->wp )
+		);
 	}
 
 	/**

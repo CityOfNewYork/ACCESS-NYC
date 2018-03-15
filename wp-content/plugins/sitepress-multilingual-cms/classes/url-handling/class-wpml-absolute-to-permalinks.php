@@ -3,12 +3,10 @@
 class WPML_Absolute_To_Permalinks extends WPML_SP_User{
 
 	private $taxonomies_query;
-	private $wp_api;
 	private $lang;
 	
 	public function __construct( &$sitepress ) {
 		parent::__construct( $sitepress );
-		$this->wp_api = $sitepress->get_wp_api();
 	}
 	
 	public function convert_text( $text ) {
@@ -16,10 +14,10 @@ class WPML_Absolute_To_Permalinks extends WPML_SP_User{
 		$this->lang = $this->sitepress->get_current_language();
 
 		if ( ! $this->taxonomies_query ) {
-			$this->taxonomies_query = new WPML_WP_Taxonomy_Query( $this->wp_api );
+			$this->taxonomies_query = new WPML_WP_Taxonomy_Query( $this->sitepress->get_wp_api() );
 		}
 
-		$home    = rtrim( $this->wp_api->get_option( 'home' ), '/' );
+		$home    = rtrim( $this->sitepress->get_wp_api()->get_option( 'home' ), '/' );
 		$parts   = parse_url( $home );
 		$abshome = $parts[ 'scheme' ] . '://' . $parts[ 'host' ];
 		$path    = isset( $parts[ 'path' ] ) ? ltrim( $parts[ 'path' ], '/' ) : '';
@@ -36,13 +34,13 @@ class WPML_Absolute_To_Permalinks extends WPML_SP_User{
 
 		$url   = $this->get_url( $parts );
 
-		if ( $this->wp_api->is_wp_error( $url ) || empty( $url ) ) {
+		if ( $this->sitepress->get_wp_api()->is_wp_error( $url ) || empty( $url ) ) {
 			return $parts->whole;
 		}
 
 		$fragment = $this->get_fragment( $url, $parts );
 
-		if ( 'widget_text' == $this->wp_api->current_filter() ) {
+		if ( 'widget_text' == $this->sitepress->get_wp_api()->current_filter() ) {
 			$url = $this->sitepress->convert_url( $url );
 		}
 
@@ -66,11 +64,11 @@ class WPML_Absolute_To_Permalinks extends WPML_SP_User{
 		$this->sitepress->set_setting( 'auto_adjust_ids', true );
 
 		if ( $parts->content_type == 'cat_ID' ) {
-			$url = $this->wp_api->get_category_link( $parts->id );
+			$url = $this->sitepress->get_wp_api()->get_category_link( $parts->id );
 		} elseif ( $tax ) {
-			$url = $this->wp_api->get_term_link( $parts->id, $tax );
+			$url = $this->sitepress->get_wp_api()->get_term_link( $parts->id, $tax );
 		} else {
-			$url = $this->wp_api->get_permalink( $parts->id );
+			$url = $this->sitepress->get_wp_api()->get_permalink( $parts->id );
 		}
 
 		$this->sitepress->set_setting( 'auto_adjust_ids', $auto_adjust_ids_origin );

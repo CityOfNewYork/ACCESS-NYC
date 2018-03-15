@@ -3,8 +3,12 @@
 /**
  * Class WPML_Meta_Boxes_Post_Edit_HTML
  */
-class WPML_Meta_Boxes_Post_Edit_HTML extends WPML_SP_And_PT_User {
+class WPML_Meta_Boxes_Post_Edit_HTML {
 
+	/** @var SitePress $sitepress */
+	private $sitepress;
+	/** @var WPML_Post_Translation $post_translation */
+	private $post_translation;
 	private $translation_of_options;
 	/** @var  array $allowed_languages */
 	private $allowed_languages;
@@ -29,9 +33,9 @@ class WPML_Meta_Boxes_Post_Edit_HTML extends WPML_SP_And_PT_User {
 	 * @param SitePress             $sitepress
 	 * @param WPML_Post_Translation $post_translation
 	 */
-	function __construct( &$sitepress, &$post_translation ) {
-		parent::__construct( $post_translation, $sitepress );
-		add_action( 'wpml_post_edit_languages', array( $this, 'render_languages' ), 10, 1 );
+	function __construct( SitePress $sitepress, WPML_Post_Translation $post_translation ) {
+		$this->sitepress        = $sitepress;
+		$this->post_translation = $post_translation;
 	}
 
 	/**
@@ -83,6 +87,7 @@ class WPML_Meta_Boxes_Post_Edit_HTML extends WPML_SP_And_PT_User {
 
 			<?php
 			$disabled_language = disabled( false, $this->can_translate_post, false );
+			wp_nonce_field( WPML_Post_Edit_Ajax::AJAX_ACTION_SWITCH_POST_LANGUAGE, 'nonce' );
 			?>
 			<select name="icl_post_language" id="icl_post_language" <?php echo $disabled_language; ?>>
 				<?php
@@ -291,7 +296,9 @@ class WPML_Meta_Boxes_Post_Edit_HTML extends WPML_SP_And_PT_User {
 			<tr>
 				<th>&nbsp;</th>
 				<th align="right"><?php esc_html_e( 'Translate', 'sitepress' ) ?></th>
-				<th align="right" width="10" style="padding-left:8px;"><?php echo esc_html__( 'Duplicate', 'sitepress' ) ?></th>
+				<?php if ( ! $this->is_display_as_translated_mode() ) { ?>
+					<th align="right" width="10" style="padding-left:8px;"><?php echo esc_html__( 'Duplicate', 'sitepress' ) ?></th>
+				<?php } ?>
 			</tr>
 			<?php
 			$active_langs = $this->sitepress->get_active_languages();
@@ -405,26 +412,28 @@ class WPML_Meta_Boxes_Post_Edit_HTML extends WPML_SP_And_PT_User {
 				<td align="right">
 					<?php echo $status_display->get_status_html( $this->post->ID, $lang[ 'code' ] ); ?>
 				</td>
-				<td align="right">
-					<?php
-					$disabled_duplication       = false;
-					$disabled_duplication_title = esc_attr__( 'Create duplicate', 'sitepress' );
-					$element_key                = array( 'trid' => $this->trid, 'language_code' => $lang['code'] );
-					$translation_status         = apply_filters( 'wpml_tm_translation_status', null, $element_key );
-					echo PHP_EOL . '<!-- $translation_status = ' . $translation_status . ' -->' . PHP_EOL;
+				<?php if ( ! $this->is_display_as_translated_mode() ) { ?>
+					<td align="right">
+						<?php
+						$disabled_duplication       = false;
+						$disabled_duplication_title = esc_attr__( 'Create duplicate', 'sitepress' );
+						$element_key                = array( 'trid' => $this->trid, 'language_code' => $lang['code'] );
+						$translation_status         = apply_filters( 'wpml_tm_translation_status', null, $element_key );
+						echo PHP_EOL . '<!-- $translation_status = ' . $translation_status . ' -->' . PHP_EOL;
 
-					if ( $translation_status && $translation_status < ICL_TM_COMPLETE ) {
-						$disabled_duplication       = true;
-						if ( ICL_TM_DUPLICATE === (int) $translation_status ) {
-							$disabled_duplication_title = esc_attr__( 'This post is already duplicated.', 'sitepress' );
-						} else {
-							$disabled_duplication_title = esc_attr__( "Can't create a duplicate. A translation is in progress.", 'sitepress' );
+						if ( $translation_status && $translation_status < ICL_TM_COMPLETE ) {
+							$disabled_duplication       = true;
+							if ( ICL_TM_DUPLICATE === (int) $translation_status ) {
+								$disabled_duplication_title = esc_attr__( 'This post is already duplicated.', 'sitepress' );
+							} else {
+								$disabled_duplication_title = esc_attr__( "Can't create a duplicate. A translation is in progress.", 'sitepress' );
+							}
 						}
-					}
 
-					?>
-					<input<?php disabled( true, $disabled_duplication ); ?> type="checkbox" name="icl_dupes[]" value="<?php echo esc_attr( $lang['code'] ); ?>" title="<?php echo $disabled_duplication_title ?>"/>
-				</td>
+						?>
+						<input<?php disabled( true, $disabled_duplication ); ?> type="checkbox" name="icl_dupes[]" value="<?php echo esc_attr( $lang['code'] ); ?>" title="<?php echo $disabled_duplication_title ?>"/>
+					</td>
+				<?php } ?>
 
 			<?php
 			}
@@ -625,6 +634,13 @@ class WPML_Meta_Boxes_Post_Edit_HTML extends WPML_SP_And_PT_User {
 		}
 
 		return $element_title;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function is_display_as_translated_mode() {
+		return $this->sitepress->is_display_as_translated_post_type( $this->post->post_type );
 	}
 
 	private function init_post_data() {

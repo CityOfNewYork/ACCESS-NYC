@@ -82,6 +82,8 @@ class WPML_Languages_AJAX {
 				$failed = false;
 			}
 
+			icl_cache_clear();
+
 			/** @deprecated Use `wpml_update_active_languages` instead */
 			do_action( 'icl_update_active_languages' );
 			do_action( 'wpml_update_active_languages' );

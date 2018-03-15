@@ -78,10 +78,23 @@ class WPML_Notice_Render {
 				$result .= $this->get_collapse_html();
 			}
 
+			if ( $notice->get_nonce_action() ) {
+				$result .= $this->add_nonce( $notice );
+			}
+
 			$result .= '</div>';
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @param WPML_Notice $notice
+	 *
+	 * @return string
+	 */
+	private function add_nonce( $notice ) {
+		return wp_nonce_field( $notice->get_nonce_action(), $notice->get_nonce_action(), true, false );
 	}
 
 	public function must_display_notice( WPML_Notice $notice ) {
@@ -89,27 +102,7 @@ class WPML_Notice_Render {
 			return false;
 		}
 
-		$current_page = array_key_exists( 'page', $_GET ) ? $_GET['page'] : null;
-
-		$exclude_from_pages = $notice->get_exclude_from_pages();
-		$page_excluded      = $exclude_from_pages && in_array( $current_page, $exclude_from_pages, true );
-
-		$restrict_to_pages = $notice->get_restrict_to_pages();
-		$allow_this_page   = ! $restrict_to_pages || in_array( $current_page, $restrict_to_pages, true );
-
-		$allow_by_callback = true;
-		$display_callbacks = $notice->get_display_callbacks();
-		if ( $display_callbacks ) {
-			$allow_by_callback = false;
-			foreach ( $display_callbacks as $callback ) {
-				if ( is_callable( $callback ) && call_user_func( $callback ) ) {
-					$allow_by_callback = true;
-					break;
-				}
-			}
-		}
-
-		return ! $page_excluded && $allow_this_page && $allow_by_callback;
+		return $this->is_current_page_allowed( $notice ) && $this->is_allowed_by_callback( $notice );
 	}
 
 	/**
@@ -253,7 +246,7 @@ class WPML_Notice_Render {
 			$this->dismiss_html_added = true;
 		} else {
 			if ( $action->get_url() ) {
-				$action_html .= $this->get_action_anchor( $action );;
+				$action_html .= $this->get_action_anchor( $action );
 			} else {
 				$action_html .= $action->get_text();
 			}
@@ -268,7 +261,14 @@ class WPML_Notice_Render {
 	 * @return string
 	 */
 	private function get_action_anchor( WPML_Notice_Action $action ) {
-		$action_url = '<a href="' . esc_url_raw( $action->get_url() ) . '"';
+		$anchor_attributes = array();
+
+		$action_url = '<a';
+
+		$anchor_attributes['href'] = esc_url_raw( $action->get_url() );
+		if ( $action->get_link_target() ) {
+			$anchor_attributes['target'] = $action->get_link_target();
+		}
 
 		$action_url_classes = array( 'notice-action' );
 		if ( $action->must_display_as_button() ) {
@@ -281,13 +281,18 @@ class WPML_Notice_Render {
 		} else {
 			$action_url_classes[] = 'notice-action-link';
 		}
-		$action_url .= ' class="' . implode( ' ', $action_url_classes ) . '"';
+		$anchor_attributes['class'] = implode( ' ', $action_url_classes );
 
 		if ( $action->get_group_to_dismiss() ) {
-			$action_url .= ' data-dismiss-group="' . esc_attr( $action->get_group_to_dismiss() ) . '"';
+			$anchor_attributes['data-dismiss-group'] = esc_attr( $action->get_group_to_dismiss() );
 		}
 		if ( $action->get_js_callback() ) {
-			$action_url .= ' data-js-callback="' . esc_attr( $action->get_js_callback() ) . '"';
+			$anchor_attributes['data-js-callback'] = esc_attr( $action->get_js_callback() )
+			                                         . '"';
+		}
+
+		foreach ( $anchor_attributes as $name => $value ) {
+			$action_url .= ' ' . $name . '="' . $value . '"';
 		}
 
 		$action_url .= $this->get_data_nonce_attribute();
@@ -303,5 +308,97 @@ class WPML_Notice_Render {
 	 */
 	private function get_data_nonce_attribute() {
 		return ' data-nonce="' . wp_create_nonce( WPML_Notices::NONCE_NAME ) . '"';
+	}
+
+	/**
+	 * @param WPML_Notice $notice
+	 *
+	 * @return bool
+	 */
+	private function is_current_screen_allowed( WPML_Notice $notice ) {
+		$allow_current_screen   = true;
+		$restrict_to_screen_ids = $notice->get_restrict_to_screen_ids();
+		if ( $restrict_to_screen_ids && function_exists( 'get_current_screen' ) ) {
+			$screen               = get_current_screen();
+			$allow_current_screen = $screen && in_array( $screen->id, $restrict_to_screen_ids, true );
+		}
+
+		return $allow_current_screen;
+	}
+
+	/**
+	 * @param WPML_Notice $notice
+	 * @param string      $current_page
+	 *
+	 * @return bool
+	 */
+	private function is_current_page_prefix_allowed( WPML_Notice $notice, $current_page ) {
+		$restrict_to_page_prefixes = $notice->get_restrict_to_page_prefixes();
+		if ( $current_page && $restrict_to_page_prefixes ) {
+			$allow_current_page_prefix = false;
+			foreach ( $restrict_to_page_prefixes as $restrict_to_prefix ) {
+				if ( stripos( $current_page, $restrict_to_prefix ) === 0 ) {
+					$allow_current_page_prefix = true;
+					break;
+				}
+			}
+
+			return $allow_current_page_prefix;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param WPML_Notice $notice
+	 *
+	 * @return bool
+	 */
+	private function is_current_page_allowed( WPML_Notice $notice ) {
+		$current_page = array_key_exists( 'page', $_GET ) ? $_GET['page'] : null;
+
+		if ( ! $this->is_current_screen_allowed( $notice ) ) {
+			return false;
+		}
+
+		if ( $current_page ) {
+
+			$exclude_from_pages = $notice->get_exclude_from_pages();
+			if ( $exclude_from_pages && in_array( $current_page, $exclude_from_pages, true ) ) {
+				return false;
+			}
+
+			if ( ! $this->is_current_page_prefix_allowed( $notice, $current_page ) ) {
+				return false;
+			}
+
+			$restrict_to_pages = $notice->get_restrict_to_pages();
+			if ( $restrict_to_pages && ! in_array( $current_page, $restrict_to_pages, true ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param WPML_Notice $notice
+	 *
+	 * @return bool
+	 */
+	private function is_allowed_by_callback( WPML_Notice $notice ) {
+		$allow_by_callback = true;
+		$display_callbacks = $notice->get_display_callbacks();
+		if ( $display_callbacks ) {
+			$allow_by_callback = false;
+			foreach ( $display_callbacks as $callback ) {
+				if ( is_callable( $callback ) && call_user_func( $callback ) ) {
+					$allow_by_callback = true;
+					break;
+				}
+			}
+		}
+
+		return $allow_by_callback;
 	}
 }

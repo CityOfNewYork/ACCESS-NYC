@@ -91,12 +91,13 @@ class FacetWP_Indexer
         global $wpdb;
 
         $term = get_term( $term_id, $taxonomy );
+        $slug = FWP()->helper->safe_value( $term->slug );
 
         $wpdb->query( $wpdb->prepare( "
             UPDATE {$wpdb->prefix}facetwp_index
             SET facet_value = %s, facet_display_value = %s
             WHERE facet_source = %s AND term_id = %d",
-            $term->slug, $term->name, "tax/$taxonomy", $term_id
+            $slug, $term->name, "tax/$taxonomy", $term_id
         ) );
     }
 
@@ -146,6 +147,9 @@ class FacetWP_Indexer
 
         // Index everything
         if ( false === $post_id ) {
+
+            // Store the pre-index settings (see FacetWP_Diff)
+            update_option( 'facetwp_settings_last_index', get_option( 'facetwp_settings' ) );
 
             // Index all flag
             $this->index_all = true;

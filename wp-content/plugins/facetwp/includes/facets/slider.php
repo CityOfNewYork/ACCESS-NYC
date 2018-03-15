@@ -84,11 +84,13 @@ class FacetWP_Facet_Slider extends FacetWP_Facet
         );
         $facet = array_merge( $defaults, $facet );
 
-        $min = $wpdb->get_var( "SELECT facet_value FROM {$wpdb->prefix}facetwp_index WHERE facet_name = '{$facet['name']}' AND facet_value != '' $where_clause ORDER BY (facet_value + 0) ASC LIMIT 1" );
-        $max = $wpdb->get_var( "SELECT facet_display_value FROM {$wpdb->prefix}facetwp_index WHERE facet_name = '{$facet['name']}' AND facet_display_value != '' $where_clause ORDER BY (facet_display_value + 0) DESC LIMIT 1" );
+        $sql = "
+        SELECT MIN(facet_value + 0) AS `min`, MAX(facet_display_value + 0) AS `max` FROM {$wpdb->prefix}facetwp_index
+        WHERE facet_name = '{$facet['name']}' AND facet_display_value != '' $where_clause";
+        $row = $wpdb->get_row( $sql );
 
-        $selected_min = isset( $selected_values[0] ) ? $selected_values[0] : $min;
-        $selected_max = isset( $selected_values[1] ) ? $selected_values[1] : $max;
+        $selected_min = isset( $selected_values[0] ) ? $selected_values[0] : $row->min;
+        $selected_max = isset( $selected_values[1] ) ? $selected_values[1] : $row->max;
 
         return array(
             'range' => array(
@@ -97,7 +99,7 @@ class FacetWP_Facet_Slider extends FacetWP_Facet
             ),
             'decimal_separator' => FWP()->helper->get_setting( 'decimal_separator' ),
             'thousands_separator' => FWP()->helper->get_setting( 'thousands_separator' ),
-            'start' => array( $min, $max ),
+            'start' => array( $row->min, $row->max ),
             'format' => $facet['format'],
             'prefix' => $facet['prefix'],
             'suffix' => $facet['suffix'],
@@ -147,8 +149,8 @@ class FacetWP_Facet_Slider extends FacetWP_Facet
      * Output any front-end scripts
      */
     function front_scripts() {
-        FWP()->display->assets['nouislider.css'] = FACETWP_URL . '/assets/js/noUiSlider/nouislider.min.css';
-        FWP()->display->assets['nouislider.js'] = FACETWP_URL . '/assets/js/noUiSlider/nouislider.min.js';
+        FWP()->display->assets['nouislider.css'] = FACETWP_URL . '/assets/vendor/noUiSlider/nouislider.min.css';
+        FWP()->display->assets['nouislider.js'] = FACETWP_URL . '/assets/vendor/noUiSlider/nouislider.min.js';
         FWP()->display->assets['nummy.js'] = FACETWP_URL . '/assets/js/src/nummy.js';
     }
 

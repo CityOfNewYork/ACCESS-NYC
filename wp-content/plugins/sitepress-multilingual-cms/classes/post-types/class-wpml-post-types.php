@@ -7,7 +7,7 @@ class WPML_Post_Types extends WPML_SP_User {
 		$post_types = $this->sitepress->get_translatable_documents( true );
 
 		foreach ( $post_types as $k => $v ) {
-			if ( ! $exclude_standard || ! in_array( $k, array( 'post', 'page', 'attachment' ), true ) ) {
+			if ( ! $exclude_standard || 'attachment' !== $k ) {
 				$custom_posts[ $k ] = $v;
 			}
 		}

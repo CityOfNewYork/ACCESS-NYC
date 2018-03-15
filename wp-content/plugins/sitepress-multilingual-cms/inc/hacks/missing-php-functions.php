@@ -17,6 +17,26 @@ if(!function_exists('esc_textarea')):
     
 endif;
 
+if ( ! function_exists( 'wp_doing_ajax' ) ) {
+	/**
+	 * Determines whether the current request is a WordPress Ajax request.
+	 *
+	 * @since 4.7.0
+	 *
+	 * @return bool True if it's a WordPress Ajax request, false otherwise.
+	 */
+	function wp_doing_ajax() {
+		/**
+		 * Filters whether the current request is a WordPress Ajax request.
+		 *
+		 * @since 4.7.0
+		 *
+		 * @param bool $wp_doing_ajax Whether the current request is a WordPress Ajax request.
+		 */
+		return apply_filters( 'wp_doing_ajax', defined( 'DOING_AJAX' ) && DOING_AJAX );
+	}
+}
+
 if ( ! function_exists( 'wpml_is_ajax' ) ) {
 	/**
 	 * wpml_is_ajax - Returns true when the page is loaded via ajax.
@@ -33,28 +53,6 @@ if ( ! function_exists( 'wpml_is_ajax' ) ) {
 		return ( isset( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && wpml_mb_strtolower( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) == 'xmlhttprequest' ) ? true : false;
 	}
 }
-
-if ( ! function_exists( 'is_ajax' ) ) {
-	/**
-	 * is_ajax - Returns true when the page is loaded via ajax.
-	 *
-	 * @deprecated Deprecated since 3.1.5
-	 *
-	 * @return bool
-	 */
-	function is_ajax() {
-
-		// Deprecation notice will be added in a next release
-//		_deprecated_function( "WPML " . __FUNCTION__, "3.1.5", "wpml_is_ajax" );
-
-		if ( defined( 'DOING_AJAX' ) ) {
-			return true;
-		}
-
-		return ( isset( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && wpml_mb_strtolower( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) == 'xmlhttprequest' ) ? true : false;
-	}
-}
-
 
 /**
  * This file is part of the array_column library

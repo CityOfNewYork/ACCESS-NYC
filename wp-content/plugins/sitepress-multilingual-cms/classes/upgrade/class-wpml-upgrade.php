@@ -97,8 +97,8 @@ class WPML_Upgrade {
 			$method = $command->get_method();
 		}
 
-		$upgrade = $this->command_factory->create( $command->get_class_name(), $command->get_dependencies() );
-		if ( ! $this->has_been_command_executed( $upgrade ) ) {
+		if ( ! $this->has_been_command_executed( $command ) ) {
+			$upgrade = $this->command_factory->create( $command->get_class_name(), $command->get_dependencies() );
 			return $this->$method( $upgrade );
 		}
 
@@ -148,8 +148,7 @@ class WPML_Upgrade {
 	private function nonce_ok( $class ) {
 		$ok = false;
 
-		$class_name = strtolower( get_class( $class ) );
-		$class_name = str_replace( '_', '-', $class_name );
+		$class_name = $this->get_command_id( get_class( $class ) );
 		if ( isset( $_POST['action'] ) && $_POST['action'] === $class_name ) {
 			$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			if ( $this->sitepress->get_wp_api()->wp_verify_nonce( $nonce, $class_name . '-nonce' ) ) {
@@ -165,16 +164,25 @@ class WPML_Upgrade {
 	 *
 	 * @return bool
 	 */
-	private function has_been_command_executed( IWPML_Upgrade_Command $class ) {
-		return (bool) $this->get_update_option_value( $class->get_command_id() );
+	private function has_been_command_executed( WPML_Upgrade_Command_Definition $command ) {
+		return (bool) $this->get_update_option_value( $this->get_command_id( $command->get_class_name() ) );
 	}
 
 	/**
 	 * @param IWPML_Upgrade_Command $class
 	 */
 	private function mark_command_as_executed( IWPML_Upgrade_Command $class ) {
-		$this->set_update_status( $class->get_command_id(), true );
+		$this->set_update_status( $this->get_command_id( get_class( $class ) ), true );
 		wp_cache_flush();
+	}
+
+	/**
+	 * @param string $class_name
+	 *
+	 * @return string
+	 */
+	private function get_command_id( $class_name ) {
+		return str_replace( '_', '-', strtolower( $class_name ) );
 	}
 
 	private function get_update_option_value( $id ) {

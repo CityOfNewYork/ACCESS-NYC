@@ -72,7 +72,7 @@
             output += '  <div class="qb-row qb-tax-items"></div>';
             output += '  <div class="qb-row qb-cf-items"></div>';
             output += '  <div class="qb-buttons">';
-            output += '    <button class="button qb-tax-btn">Add taxonomy criteria</button>';
+            output += '    <button class="button qb-tax-btn">Add term criteria</button>';
             output += '    <button class="button qb-cf-btn">Add custom field criteria</button>';
             output += '  </div>';
             output += '  <div class="hidden qb-tax-clone">';

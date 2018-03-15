@@ -394,6 +394,11 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 						'type'        => __( 'Flip Box: Button text', 'wpml-string-translation' ),
 						'editor_type' => 'LINE'
 					),
+					'link' => array(
+						'field'       => 'url',
+						'type'        => __( 'Flip Box: Button link', 'wpml-string-translation' ),
+						'editor_type' => 'LINK'
+					),
 				),
 			),
 			'toggle'      => array(

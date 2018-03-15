@@ -59,7 +59,7 @@ class WPML_WPSEO_Filters {
 	/**
 	 * @link https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-3694
 	 *
-	 * @param string $url
+	 * @param string|bool $url
 	 *
 	 * @return string
 	 */
@@ -68,7 +68,7 @@ class WPML_WPSEO_Filters {
 
 		if ( $obj instanceof WP_Post ) {
 			/* @var WP_Post $obj */
-			$url = $this->canonicals->get_canonical_url( $url, $obj );
+			$url = $this->canonicals->get_canonical_url( $url, $obj, '' );
 		}
 
 		return $url;

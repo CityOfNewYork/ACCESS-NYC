@@ -64,7 +64,7 @@ class WPML_Post_Language_Filter extends WPML_Language_Filter_Bar {
 					ON t.element_id=p.ID
 						AND t.element_type = CONCAT('post_', p.post_type)
 				WHERE p.post_type=%s {$extra_conditions}
-				", $type, 'post_' . $type ) );
+				", $type ) );
 	}
 
 	private function language_links( $type ) {
@@ -74,12 +74,12 @@ class WPML_Post_Language_Filter extends WPML_Language_Filter_Bar {
 		$post_status = $this->post_status;
 		foreach ( $this->active_languages as $code => $lang ) {
 			$item = array();
-			$item['type'] = $type;
-			$item['statuses'] = $post_status;
-			$item['code'] = $code;
-			$item['name'] = $lang[ 'display_name' ];
+			$item['type'] = esc_js( $type );
+			$item['statuses'] = array_map( 'esc_js', $post_status );
+			$item['code'] = esc_js( $code );
+			$item['name'] = esc_js( $lang[ 'display_name' ] );
 			$item['current'] = $code === $this->current_language;
-			$item['count'] = isset( $languages[ $code ] ) ? $languages[ $code ] : -1;
+			$item['count'] = isset( $languages[ $code ] ) ? esc_js( $languages[ $code ] ) : -1;
 			$lang_links[ ] = $item;
 		}
 

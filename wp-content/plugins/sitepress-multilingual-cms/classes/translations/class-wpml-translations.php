@@ -242,11 +242,10 @@ class WPML_Translations extends WPML_SP_User {
 		if ( ! $this->all_statuses && 'post_attachment' !== $element_type && ! is_admin() ) {
 			// the current user may not be the admin but may have read private post/page caps!
 			if ( current_user_can( 'read_private_pages' ) || current_user_can( 'read_private_posts' ) ) {
-				$sql_parts['where'][] = " AND (p.post_status = 'publish' OR p.post_status = 'private' OR p.post_status = 'pending')";
-				$sql_parts['where'][] = " AND (p.post_status = 'publish' OR p.post_status = 'private' OR p.post_status = 'pending')";
+				$sql_parts['where'][] = " AND (p.post_status IN ('publish', 'draft', 'private', 'pending' ))";
 			} else {
 				$sql_parts['where'][] = ' AND (';
-				$sql_parts['where'][] = "p.post_status = 'publish' OR p.post_status = 'pending' ";
+				$sql_parts['where'][] = "p.post_status = 'publish' ";
 				if ( $uid = $this->sitepress->get_current_user()->ID ) {
 					$sql_parts['where'][] = $this->sitepress->get_wpdb()->prepare( " OR (post_status in ('draft', 'private', 'pending') AND  post_author = %d)", $uid );
 				}

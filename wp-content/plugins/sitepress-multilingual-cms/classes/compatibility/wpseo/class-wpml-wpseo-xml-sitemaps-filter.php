@@ -5,7 +5,9 @@
  *
  * @version 1.0.2
  */
-class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
+class WPML_WPSEO_XML_Sitemaps_Filter {
+	/** @var  SitePress $sitepress */
+	protected $sitepress;
 
 	/**
 	 * WPML_URL_Converter object.
@@ -23,7 +25,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 	 * WPSEO_XML_Sitemaps_Filter constructor.
 	 *
 	 * @param SitePress            $sitepress
-	 * @param object               $wpml_url_converter
+	 * @param stdClass             $wpml_url_converter
 	 * @param WPML_Debug_BackTrace $back_trace
 	 */
 	public function __construct( $sitepress, $wpml_url_converter, WPML_Debug_BackTrace $back_trace = null ) {
@@ -75,13 +77,18 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 
 	/**
 	 * Update home_url for language per-domain configuration to return correct URL in sitemap.
+	 *
+	 * @param string $home_url
+	 *
+	 * @return bool|mixed|string
 	 */
 	public function get_home_url_filter( $home_url ) {
 		return $this->wpml_url_converter->convert_url( $home_url, $this->sitepress->get_current_language() );
 	}
 
 	public function list_domains() {
-		if ( $this->is_per_domain() ) {
+		$ls_languages = $this->sitepress->get_ls_languages();
+		if ( $ls_languages && $this->is_per_domain() ) {
 
 			echo '<h3>' . esc_html__( 'WPML', 'sitepress' ) . '</h3>';
 			echo esc_html__( 'Sitemaps for each language can be accessed below. You need to submit all these sitemaps to Google.', 'sitepress' );
@@ -97,7 +104,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 			\"
 			";
 
-			foreach ( $this->sitepress->get_ls_languages() as $lang ) {
+			foreach ( $ls_languages as $lang ) {
 				$url = $lang['url'] . 'sitemap_index.xml';
 				echo '<tr>';
 				echo '<td>';
@@ -120,14 +127,14 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 	 * @return bool
 	 */
 	public function is_per_domain() {
-		return WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN === (int) $this->sitepress->get_setting( 'language_negotiation_type', false );
+		return WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN === (int) $this->sitepress->get_setting( 'language_negotiation_type' );
 	}
 
 	/**
 	 * @return bool
 	 */
 	private function is_per_directory() {
-		return WPML_LANGUAGE_NEGOTIATION_TYPE_DIRECTORY === (int) $this->sitepress->get_setting( 'language_negotiation_type', false );
+		return WPML_LANGUAGE_NEGOTIATION_TYPE_DIRECTORY === (int) $this->sitepress->get_setting( 'language_negotiation_type' );
 	}
 
 	public function transient_cache_filter() {
@@ -142,7 +149,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 		$sitepress_settings['auto_adjust_ids'] = 0;
 
 		if ( ! $this->is_per_domain() ) {
-			remove_filter( 'terms_clauses', array( $this->sitepress, 'terms_clauses' ), 10 );
+			remove_filter( 'terms_clauses', array( $this->sitepress, 'terms_clauses' ) );
 		}
 
 		remove_filter( 'category_link', array( $this->sitepress, 'category_link_adjust_id' ), 1 );
@@ -153,8 +160,8 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 	/**
 	 * Exclude posts under hidden language.
 	 *
-	 * @param  string $url   Post URL.
-	 * @param  object $post  Object with some post information.
+	 * @param  string   $url  Post URL.
+	 * @param  stdClass $post Object with some post information.
 	 *
 	 * @return string
 	 */
@@ -176,7 +183,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 		$language_info = $this->sitepress->post_translations()->get_element_lang_code( $post->ID );
 
 		// If language code is one of the hidden languages return empty string to skip the post.
-		if ( in_array( $language_info, $hidden_languages ) ) {
+		if ( in_array( $language_info, $hidden_languages, true ) ) {
 			return '';
 		}
 
@@ -218,7 +225,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter extends WPML_SP_User {
 		if ( $page_on_front ) {
 			$translations = $this->sitepress->post_translations()->get_element_translations( $page_on_front );
 			unset( $translations[ $this->sitepress->get_default_language() ] );
-			if ( in_array( $post_object->ID, $translations ) ) {
+			if ( in_array( $post_object->ID, $translations, true ) ) {
 				$url = false;
 			}
 		}

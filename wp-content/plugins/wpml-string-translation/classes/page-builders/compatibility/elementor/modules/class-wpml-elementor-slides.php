@@ -16,7 +16,7 @@ class WPML_Elementor_Slides extends WPML_Elementor_Module_With_Items {
 	 * @return array
 	 */
 	public function get_fields() {
-		return array( 'heading', 'description', 'button_text' );
+		return array( 'heading', 'description', 'button_text', 'link' => array( 'url' ) );
 	}
 
 	/**
@@ -34,6 +34,9 @@ class WPML_Elementor_Slides extends WPML_Elementor_Module_With_Items {
 
 			case 'button_text':
 				return esc_html__( 'Slides: button text', 'wpml-string-translation' );
+
+			case 'url':
+				return esc_html__( 'Slides: link URL', 'wpml-string-translation' );
 
 			default:
 				return '';
@@ -53,6 +56,9 @@ class WPML_Elementor_Slides extends WPML_Elementor_Module_With_Items {
 
 			case 'description':
 				return 'VISUAL';
+
+			case 'url':
+				return 'LINK';
 
 			default:
 				return '';

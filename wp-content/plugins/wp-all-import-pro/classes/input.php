@@ -21,11 +21,13 @@ class PMXI_Input {
 	public function get($paramName, $default = NULL) {
 		$this->addFilter('strip_tags');
 		$this->addFilter('htmlspecialchars');		
-		$this->addFilter('esc_sql');		
+		$this->addFilter('esc_sql');
+        $this->addFilter('esc_js');
 		$result = $this->read($_GET, $paramName, $default);
 		$this->removeFilter('strip_tags');		
 		$this->removeFilter('htmlspecialchars');		
 		$this->removeFilter('esc_sql');
+        $this->removeFilter('esc_js');
 		return $result;
 	}
 	

@@ -7,10 +7,16 @@ Class WPML_ST_User_Fields {
 	 */
 	private $context = 'Authors';
 
+	/** @var SitePress */
+	private $sitepress;
+
 	/**
 	 * @var mixed|WP_User|null
 	 */
 	private $authordata;
+
+	/** @var bool */
+	private $lock_get_the_author_filter;
 
 	public function __construct( SitePress $sitepress, &$authordata ) {
 		$this->authordata = &$authordata;
@@ -48,8 +54,17 @@ Class WPML_ST_User_Fields {
 		if ( $this->is_user_role_translatable( $user_id ) ) {
 			$fields = $this->get_translatable_meta_fields();
 			foreach( $fields as $field ){
-				$name    = $this->get_string_name( $field, $user_id );
-				$value   = get_the_author_meta( $field, $user_id );
+				$name  = $this->get_string_name( $field, $user_id );
+				$value = get_user_meta( $user_id, $field, true );
+
+				/**
+				 * Some fields like "display_name" are not part of user meta
+				 * so we have a fallback to get its value from `get_the_author_meta`
+				 */
+				if ( '' === $value ) {
+					$value = get_the_author_meta( $field, $user_id );
+				}
+
 				icl_register_string( $this->context, $name, $value, true );
 			}
 		}
@@ -62,8 +77,27 @@ Class WPML_ST_User_Fields {
 	 * @return string
 	 */
 	public function get_the_author_field_filter( $value, $user_id ) {
+		if ( $this->lock_get_the_author_filter ) {
+			return $value;
+		}
+
 		$field = preg_replace( '/get_the_author_/', '', current_filter(), 1);
-		return $this->translate_user_meta_field( $field, $value, $user_id );
+		$value = $this->translate_user_meta_field( $field, $value, $user_id );
+		return $this->apply_filters_for_the_author_field_output( $value, $field, $user_id );
+	}
+
+	/**
+	 * @param string $value
+	 * @param string $field
+	 * @param int $user_id
+	 *
+	 * @return string
+	 */
+	private function apply_filters_for_the_author_field_output( $value, $field, $user_id ) {
+		$this->lock_get_the_author_filter = true;
+		$value = apply_filters( "get_the_author_$field", $value, $user_id );
+		$this->lock_get_the_author_filter = false;
+		return $value;
 	}
 
 	/**
