@@ -29,10 +29,11 @@ $default_lang = $sitepress->get_default_language();
 foreach ($categories as $category) {
   $catPosts = get_posts( array(
     'post_type' => 'programs',
+    'posts_per_page'=>-1,
     'tax_query' => array(
       array(
-          'taxonomy' => 'programs',
-          'terms' => $category->term_id,
+        'taxonomy' => 'programs',
+        'terms' => $category->term_id,
       )
     )
   ));
