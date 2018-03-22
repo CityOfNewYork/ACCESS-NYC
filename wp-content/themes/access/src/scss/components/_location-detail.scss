@@ -22,6 +22,7 @@
   @include media($bp-tablet-up) {
     height: auto;
     width: 50%;
+    max-height: 640px;
   }
 
   img {
