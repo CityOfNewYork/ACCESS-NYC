@@ -21,6 +21,8 @@ class ResultsField {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    this._disabled = false;
   }
 
   /**
@@ -203,9 +205,12 @@ class ResultsField {
 
     event.preventDefault();
 
-    $submit.prop('disabled', true);
-    $buttons.prop('style', 'display: none'); // hide buttons
-    $spinner.prop('style', ''); // show spinner
+    if (this._disabled) return;
+
+    this._disabled = true;
+
+    $buttons.hide();
+    $spinner.show();
 
     let payload = {};
     payload['action'] = 'response_update';
@@ -220,9 +225,9 @@ class ResultsField {
         .toggleClass('hidden')
         .prop('aria-hidden', false);
     }).fail((response) => {
-      $submit.prop('disabled', false);
-      $buttons.prop('style', ''); // show submit button
-      $spinner.prop('style', 'display: none'); // hide spinner
+      this._disabled = false;
+      $buttons.show();
+      $spinner.hide();
       alert('Something went wrong. Please try again later.');
       /* eslint-disable */
       if (Utility.debug()) console.log(response);
