@@ -29613,7 +29613,6 @@ ResultsField = function () {
     event) {var _this2 = this;
       var action = (0, _jquery2.default)(event.currentTarget).attr('action');
       var data = (0, _jquery2.default)(event.currentTarget).serializeArray();
-      var $submit = (0, _jquery2.default)(event.currentTarget).find('button[type="submit"]');
       var $buttons = (0, _jquery2.default)(event.currentTarget).find('button');
       var $spinner = (0, _jquery2.default)(event.currentTarget).find(ResultsField.Selectors.SPINNER);
 
@@ -33685,4 +33684,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.8b724810a8ea0a4b737b5689704050d0.js.map
+//# sourceMappingURL=main-field.50449a607766464c179ad755aaf0c81b.js.map
