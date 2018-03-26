@@ -199,7 +199,6 @@ class ResultsField {
   _finalResults(event) {
     const action = $(event.currentTarget).attr('action');
     const data = $(event.currentTarget).serializeArray();
-    let $submit = $(event.currentTarget).find('button[type="submit"]');
     let $buttons = $(event.currentTarget).find('button');
     let $spinner = $(event.currentTarget).find(ResultsField.Selectors.SPINNER);
 
