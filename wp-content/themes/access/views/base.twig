@@ -15,7 +15,12 @@
       <meta name="theme-color" content="#FFFFFF">
       <link rel="manifest" href="{{theme.path}}/manifest.960190a270c949b9831516989e9ceb321034.json">
       {% endblock %}
-      {% block scripts_head %}{% endblock %}
+      
+      {# segment implementation #}
+      {% block scripts_head %}
+      {% include 'partials/scripts-field-segment.twig' %}
+      {% endblock %}
+
     {% endblock %}
   </head>
   <body data-template="base.twig"{% set _bodyClass = block('body_class') %}{% if _bodyClass %} class="{{ _bodyClass|trim }}"{% endif %}>
