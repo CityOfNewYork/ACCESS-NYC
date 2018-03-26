@@ -5,6 +5,8 @@
  */
 class WPML_Page_Builders_Integration {
 
+	const UPDATE_TRANSLATED_POST_PRIORITY = 10;
+
 	/** @var WPML_Page_Builders_Register_Strings */
 	private $register_strings;
 
@@ -34,7 +36,7 @@ class WPML_Page_Builders_Integration {
 	public function add_hooks() {
 		add_filter( 'wpml_page_builder_support_required', array( $this, 'support_required' ) );
 		add_action( 'wpml_page_builder_register_strings', array( $this, 'register_pb_strings' ), 10, 2 );
-		add_action( 'wpml_page_builder_string_translated', array( $this, 'update_translated_post' ), 10, 5 );
+		add_action( 'wpml_page_builder_string_translated', array( $this, 'update_translated_post' ), self::UPDATE_TRANSLATED_POST_PRIORITY, 5 );
 		add_filter( 'wpml_get_translatable_types', array( $this, 'remove_shortcode_strings_type_filter' ), 12, 1 );
 
 		$this->data_settings->add_hooks();

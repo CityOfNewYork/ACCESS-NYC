@@ -2,6 +2,9 @@
 
 class WPML_Data_Encryptor {
 
+	const SALT_CHARS  = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_ []{}<>~`+=,.;:/?|';
+	const SALT_LENGTH = 64;
+
 	/**
 	 * @var string $method
 	 */
@@ -27,7 +30,11 @@ class WPML_Data_Encryptor {
 	 * @param string $method
 	 *
 	 */
-	public function __construct( $key_salt = NONCE_SALT, $method = 'AES-256-CTR' ) {
+	public function __construct( $key_salt = '', $method = 'AES-256-CTR' ) {
+
+		if ( ! $key_salt ) {
+			$key_salt = $this->get_key_salt();
+		}
 
 		if ( function_exists( 'openssl_encrypt' ) && function_exists( 'openssl_decrypt' )
 		     && version_compare( phpversion(), '5.3.2', '>' ) ) {
@@ -101,4 +108,26 @@ class WPML_Data_Encryptor {
 		return $this->library;
 	}
 
+	/**
+	 * @return string
+	 */
+	private function get_key_salt() {
+		if ( defined( 'NONCE_SALT' ) ){
+			return NONCE_SALT;
+		}
+
+		return $this->generate_salt_key();
+	}
+
+	/**
+	 * @return string
+	 */
+	private function generate_salt_key() {
+		$salt_key = '';
+		for ( $i = 0; $i < self::SALT_LENGTH; $i++ ) {
+			$salt_key .= substr( self::SALT_CHARS, mt_rand( 0, strlen( self::SALT_CHARS ) - 1 ), 1 );
+		}
+
+		return $salt_key;
+	}
 }

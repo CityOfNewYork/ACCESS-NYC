@@ -9,7 +9,6 @@ class FacetWP_Overrides
     function __construct() {
         add_filter( 'facetwp_index_row', array( $this, 'index_row' ), 5, 2 );
         add_filter( 'facetwp_index_row', array( $this, 'format_numbers' ), 15, 2 );
-        add_filter( 'facetwp_store_unfiltered_post_ids', array( $this, 'store_unfiltered_post_ids' ) );
     }
 
 
@@ -64,33 +63,5 @@ class FacetWP_Overrides
         $this->raw = null;
 
         return $params;
-    }
-
-
-    /**
-     * Store unfiltered post IDs if needed
-     */
-    function store_unfiltered_post_ids( $boolean ) {
-        if ( FWP()->helper->facet_setting_exists( 'type', 'dropdown' ) ) {
-            return true;
-        }
-
-        if ( FWP()->helper->facet_setting_exists( 'type', 'fselect' ) ) {
-            return true;
-        }
-
-        if ( FWP()->helper->facet_setting_exists( 'type', 'radio' ) ) {
-            return true;
-        }
-
-        if ( FWP()->helper->facet_setting_exists( 'ghosts', 'yes' ) ) {
-            return true;
-        }
-
-        if ( FWP()->helper->facet_setting_exists( 'operator', 'or' ) ) {
-            return true;
-        }
-
-        return $boolean;
     }
 }

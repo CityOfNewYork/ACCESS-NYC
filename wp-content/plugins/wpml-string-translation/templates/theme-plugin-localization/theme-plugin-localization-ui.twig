@@ -27,12 +27,12 @@
                 <tr class="item{{ component_data.active ? ' active' }}">
                     <td>
                         <ul>
-                            <li><input type="checkbox" name="{{ type }}[]" id="{{ type }}-{{ component_data.file }}" value="{{ dir_and_file }}" data-attribute="{{ component_data.component_name|replace(' ', '-')|lower }}"></li>
+                            <li><input type="checkbox" name="{{ type }}[]" id="{{ type }}-{{ component_data.id }}" value="{{ dir_and_file }}" data-attribute="{{ component_data.component_name|replace(' ', '-')|lower }}"></li>
                         </ul>
                     </td>
                     <td>
                         <ul>
-                            <li>{{ component_data.component_name }}</li>
+	                        <li><label for="{{ type }}-{{ component_data.id }}">{{ component_data.component_name }}</label></li>
                         </ul>
                     </td>
                     <td>
@@ -90,7 +90,7 @@
 
             </table>
             <br />
-            <button id="{{ scan_button_id }}" type="button" class="button-primary btn-scan">{{ scan_button_label }}</button>
+            <button id="{{ scan_button_id }}" type="button" class="button-primary btn-scan" disabled="disabled">{{ scan_button_label }}</button>
         </div>
     </div>
 </div>

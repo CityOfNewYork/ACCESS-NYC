@@ -2,9 +2,27 @@
 
 class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings {
 
+	/**
+	 * @var WPML_Elementor_DB
+	 */
+	private $elementor_db;
+
+	public function __construct( WPML_Elementor_DB $elementor_db = null ) {
+		$this->elementor_db = $elementor_db;
+	}
+
 	public function add_hooks() {
 		add_filter( 'wpml_custom_field_values_for_post_signature', array( $this, 'add_data_custom_field_to_md5' ), 10, 2 );
 		add_filter( 'wpml_pb_copy_meta_field', array( $this, 'mark_css_field_as_empty' ), 10, 4 );
+
+		if ( $this->elementor_db ) {
+			add_action(
+				'wpml_page_builder_string_translated',
+				array( $this, 'save_post_body_as_plain_text' ),
+				WPML_Page_Builders_Integration::UPDATE_TRANSLATED_POST_PRIORITY + 1,
+				5
+			);
+		}
 	}
 
 	/**
@@ -21,6 +39,10 @@ class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings 
 		}
 
 		return $value;
+	}
+
+	public function save_post_body_as_plain_text( $type, $post_id, $original_post, $string_translations, $lang ) {
+		$this->elementor_db->save_plain_text( $post_id );
 	}
 
 	/**

@@ -195,15 +195,7 @@ function icl_upgrade_2_0_0_steps($step, $stepper){
                 $iclsettings['troubleshooting_options']['http_communication'] = intval(get_option('_force_mp_post_http'));
                 delete_option('_force_mp_post_http');
             }
-            
-            // set default translators
-            if (isset($sitepress_settings['icl_lang_status'])) {
-                foreach($sitepress_settings['icl_lang_status'] as $lpair){
-                    if(!empty($lpair['translators'])){
-                        $iclsettings['default_translators'][$lpair['from']][$lpair['to']] = array('id'=>$lpair['translators'][0]['id'], 'type'=>'icanlocalize');
-                    }
-                }
-            }
+
             $sitepress->save_settings($iclsettings);            
             
             $iclsettings['migrated_2_0_0'] = 1;

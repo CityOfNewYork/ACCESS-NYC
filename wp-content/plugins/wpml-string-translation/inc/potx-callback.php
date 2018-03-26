@@ -22,7 +22,7 @@ function wpml_st_pos_scan_store_results( $string, $domain, $context, $file, $lin
 	//$__wpml_st_po_file_content .= 'msgid "'.str_replace('"', '\"', $string).'"' . PHP_EOL;
 	$__wpml_st_po_file_content .= PHP_EOL;
 	if ( $context ) {
-		$__wpml_st_po_file_content .= 'msgctxt "' . $context . '"' . PHP_EOL;
+		$__wpml_st_po_file_content .= 'msgctxt "' . addslashes( $context ) . '"' . PHP_EOL;
 	}
 	$__wpml_st_po_file_content .= 'msgid "' . $string . '"' . PHP_EOL;
 	$__wpml_st_po_file_content .= 'msgstr ""' . PHP_EOL;

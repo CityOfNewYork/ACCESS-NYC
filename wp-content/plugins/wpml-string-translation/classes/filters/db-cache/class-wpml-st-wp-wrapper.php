@@ -6,6 +6,9 @@ class WPML_ST_WP_Wrapper {
 	 */
 	private $wp;
 
+	/** @var array */
+	private $preserved_filters = array( 'sanitize_title', 'home_url' );
+
 	/**
 	 * @param WP $wp
 	 */
@@ -22,12 +25,7 @@ class WPML_ST_WP_Wrapper {
 		global $wp_filter;
 
 		$tmp_wp_filter = $wp_filter;
-
-		$filters = array();
-		if ( isset( $tmp_wp_filter['sanitize_title'] ) ) {
-			$filters['sanitize_title'] = $tmp_wp_filter['sanitize_title'];
-		}
-		$GLOBALS['wp_filter'] = $filters;
+		$GLOBALS['wp_filter'] = array_intersect_key( $wp_filter, array_fill_keys( $this->preserved_filters, 1 ) );
 
 		$result = $path;
 

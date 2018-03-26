@@ -167,6 +167,10 @@ class WPML_ST_String {
 	 * @return bool|int id of the translation
 	 */
 	public function set_translation( $language, $value = null, $status = false, $translator_id = null, $translation_service = null, $batch_id = null ) {
+		if ( ! $this->exists() ) {
+			return false;
+		}
+
 		/** @var $ICL_Pro_Translation WPML_Pro_Translation */
 		global $ICL_Pro_Translation;
 
@@ -191,6 +195,8 @@ class WPML_ST_String {
 		if ( $translator_id ) {
 			$translation_data['translator_id'] = $translator_id;
 		}
+
+		$translation_data = apply_filters( 'wpml_st_string_translation_before_save', $translation_data, $language, $this->string_id );
 
 		if ( $res ) {
 			$st_id = $res->id;
@@ -220,7 +226,11 @@ class WPML_ST_String {
 		}
 
 		icl_update_string_status( $this->string_id );
+		/**
+		 * @deprecated Use wpml_st_add_string_translation instead
+		 */
 		do_action( 'icl_st_add_string_translation', $st_id );
+		do_action( 'wpml_st_add_string_translation', $st_id );
 
 		return $st_id;
 	}
@@ -253,5 +263,11 @@ class WPML_ST_String {
 		}
 
 		return $this->wpdb->prepare( "FROM {$this->wpdb->prefix}{$table} WHERE {$id_column}=%d", $this->string_id );
+	}
+
+	public function exists() {
+		$sql = $this->wpdb->prepare( "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE id = %d", $this->string_id );
+
+		return $this->wpdb->get_var( $sql ) > 0;
 	}
 }

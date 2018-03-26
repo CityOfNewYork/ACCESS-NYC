@@ -37,13 +37,13 @@ $sources = FWP()->helper->get_data_sources();
 
 <script src="<?php echo FACETWP_URL; ?>/assets/js/src/event-manager.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
 <script src="<?php echo FACETWP_URL; ?>/assets/js/src/query-builder.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
-<script src="<?php echo FACETWP_URL; ?>/assets/js/fSelect/fSelect.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
+<script src="<?php echo FACETWP_URL; ?>/assets/vendor/fSelect/fSelect.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
 <?php
 foreach ( $facet_types as $class ) {
     $class->admin_scripts();
 }
 ?>
-<script src="<?php echo FACETWP_URL; ?>/assets/js/admin.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
+<script src="<?php echo FACETWP_URL; ?>/assets/js/src/admin.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
 <script>
 FWP.i18n = <?php echo json_encode( $i18n ); ?>;
 FWP.nonce = '<?php echo wp_create_nonce( 'fwp_admin_nonce' ); ?>';
@@ -52,7 +52,7 @@ FWP.clone = <?php echo json_encode( $facet_clone ); ?>;
 FWP.builder = <?php echo json_encode( $builder ); ?>;
 </script>
 <link href="<?php echo FACETWP_URL; ?>/assets/css/admin.css?ver=<?php echo FACETWP_VERSION; ?>" rel="stylesheet">
-<link href="<?php echo FACETWP_URL; ?>/assets/js/fSelect/fSelect.css?ver=<?php echo FACETWP_VERSION; ?>" rel="stylesheet">
+<link href="<?php echo FACETWP_URL; ?>/assets/vendor/fSelect/fSelect.css?ver=<?php echo FACETWP_VERSION; ?>" rel="stylesheet">
 
 <div class="facetwp-header">
     <span class="facetwp-logo" title="FacetWP">&nbsp;</span>
@@ -91,7 +91,7 @@ FWP.builder = <?php echo json_encode( $builder ); ?>;
             <div class="facetwp-col content-facets">
                 <h3>
                     Facets
-                    <span class="facetwp-add">Add new</span>
+                    <span class="facetwp-btn facetwp-add">Add new</span>
                     <a class="icon-question" href="https://facetwp.com/documentation/facet-configuration/" target="_blank">?</a>
                 </h3>
                 <ul class="facetwp-cards"></ul>
@@ -100,7 +100,7 @@ FWP.builder = <?php echo json_encode( $builder ); ?>;
             <div class="facetwp-col content-templates">
                 <h3>
                     Templates
-                    <span class="facetwp-add">Add new</span>
+                    <span class="facetwp-btn facetwp-add">Add new</span>
                     <a class="icon-question" href="https://facetwp.com/documentation/template-configuration/" target="_blank">?</a>
                 </h3>
                 <ul class="facetwp-cards"></ul>
@@ -171,6 +171,8 @@ FWP.builder = <?php echo json_encode( $builder ); ?>;
                             <option value="<?php echo $name; ?>"><?php echo $class->label; ?></option>
                             <?php endforeach; ?>
                         </select>
+                        &nbsp; &nbsp;
+                        <span class="facetwp-btn copy-shortcode">Copy shortcode</span>
                     </td>
                 </tr>
                 <tr class="facetwp-show name-source">
@@ -217,6 +219,10 @@ FWP.builder = <?php echo json_encode( $builder ); ?>;
             </div>
         </div>
     </div>
+
+    <!-- Copy to clipboard -->
+
+    <input class="hidden facetwp-clipboard" value="" />
 </div>
 
 <!-- Modal window -->
@@ -235,7 +241,7 @@ FWP.builder = <?php echo json_encode( $builder ); ?>;
             </div>
             <div class="media-frame-content">
                 <div class="modal-content-wrap">
-                    <div class="flexbox">
+                    <div class="facetwp-modal-grid">
                         <div class="qb-area"></div>
                         <div class="qb-area-results">
                             <textarea class="qb-results" readonly></textarea>

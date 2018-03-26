@@ -1363,6 +1363,62 @@ msgctxt "MO Loading disabled 2/2"
 msgid "While this process is ongoing, you are not going to feel a speed improvement. Once it's ready, pages will load faster."
 msgstr ""
 
+# private function get_short_notice_message() {
+# $message = _x( 'WPML cannot replace .mo files because of technical problems in the String Translation table.',
+# 'MO Import blocked short 1/3', 'wpml-string-translation' );
+
+msgctxt "MO Import blocked short 1/3"
+msgid "WPML cannot replace .mo files because of technical problems in the String Translation table."
+msgstr ""
+
+#
+# $message .= ' ' . _x( 'WPML support team knows how to fix it.',
+# 'MO Import blocked short 2/3', 'wpml-string-translation' );
+
+msgctxt "MO Import blocked short 2/3"
+msgid "WPML support team knows how to fix it."
+msgstr ""
+
+#
+# $message .= ' ' . sprintf( _x( 'Please add a message in the relevant <a href="%s" target="_blank" >support thread</a> and we\'ll fix it for you.',
+# 'MO Import blocked short 3/3', 'wpml-string-translation' ), $this->link );
+
+msgctxt "MO Import blocked short 3/3"
+msgid "Please add a message in the relevant <a href=\"%s\" target=\"_blank\" >support thread</a> and we'll fix it for you."
+msgstr ""
+
+# private function display_notice() {
+# $message = _x( 'There is a problem with the String Translation table in your site.',
+# 'MO Import blocked 1/4', 'wpml-string-translation' );
+
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr ""
+
+#
+# $message .= ' ' . _x( 'This problem is not causing a problem running the site right now, but can become a critical issue in the future.',
+# 'MO Import blocked 2/4', 'wpml-string-translation' );
+
+msgctxt "MO Import blocked 2/4"
+msgid "This problem is not causing a problem running the site right now, but can become a critical issue in the future."
+msgstr ""
+
+#
+# $message .= ' ' . _x( 'WPML support team knows how to fix it.',
+# 'MO Import blocked 3/4', 'wpml-string-translation' );
+
+msgctxt "MO Import blocked 3/4"
+msgid "WPML support team knows how to fix it."
+msgstr ""
+
+#
+# $message .= ' ' . sprintf( _x( 'Please add a message in the relevant <a href="%s" target="_blank">support thread</a> and we\'ll fix it for you.',
+# 'MO Import blocked 4/4', 'wpml-string-translation' ), $this->link );
+
+msgctxt "MO Import blocked 4/4"
+msgid "Please add a message in the relevant <a href=\"%s\" target=\"_blank\">support thread</a> and we'll fix it for you."
+msgstr ""
+
 # <p>
 # <?php esc_html_e( "The WPML Page Builders plugin that you're using is now part of WPML.", 'wpml-string-translation' ); ?>
 # </p>
@@ -2177,7 +2233,7 @@ msgstr ""
 
 # <?php if ( isset( $icl_string['translations'][ $lang['code'] ]['mo_string'] ) && $icl_string['translations'][ $lang['code'] ]['mo_string'] ) { ?>
 # <span class="wpml-st-mo-translation" title="<?php esc_attr_e( 'Imported translation', 'wpml-string-translations' ); ?>">
-# <?php echo $icl_string['translations'][ $lang['code'] ]['mo_string']; ?>
+# <?php echo esc_html( $icl_string['translations'][ $lang['code'] ]['mo_string'] ); ?>
 
 msgid "Imported translation"
 msgstr ""
@@ -2628,20 +2684,6 @@ msgstr ""
 # }
 
 msgid "Configure"
-msgstr ""
-
-#
-# icl_register_string('WP',__('Blog Title','wpml-string-translation'), get_option('blogname'));
-# icl_register_string('WP',__('Tagline', 'wpml-string-translation'), get_option('blogdescription'));
-
-msgid "Blog Title"
-msgstr ""
-
-# icl_register_string('WP',__('Blog Title','wpml-string-translation'), get_option('blogname'));
-# icl_register_string('WP',__('Tagline', 'wpml-string-translation'), get_option('blogdescription'));
-#
-
-msgid "Tagline"
 msgstr ""
 
 # if ( empty( $this->strings ) ) {

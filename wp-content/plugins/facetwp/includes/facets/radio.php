@@ -15,6 +15,7 @@ class FacetWP_Facet_Radio_Core extends FacetWP_Facet
         global $wpdb;
 
         $facet = $params['facet'];
+        $from_clause = $wpdb->prefix . 'facetwp_index f';
 
         // Apply filtering (ignore the facet's current selection)
         if ( isset( FWP()->or_values ) && ( 1 < count( FWP()->or_values ) || ! isset( FWP()->or_values[ $facet['name'] ] ) ) ) {
@@ -37,7 +38,6 @@ class FacetWP_Facet_Radio_Core extends FacetWP_Facet
 
         $post_ids = empty( $post_ids ) ? array( 0 ) : $post_ids;
         $where_clause = ' AND post_id IN (' . implode( ',', $post_ids ) . ')';
-        $from_clause = $wpdb->prefix . 'facetwp_index f';
 
         // Orderby
         $orderby = $this->get_orderby( $facet );
@@ -60,7 +60,11 @@ class FacetWP_Facet_Radio_Core extends FacetWP_Facet
         $output = $wpdb->get_results( $sql, ARRAY_A );
 
         // Show "ghost" facet choices
-        if ( FWP()->helper->facet_is( $facet, 'ghosts', 'yes' ) && ! empty( FWP()->unfiltered_post_ids ) ) {
+        // For performance gains, only run if facets are in use
+        $show_ghosts = FWP()->helper->facet_is( $facet, 'ghosts', 'yes' );
+        $is_filtered = FWP()->unfiltered_post_ids !== FWP()->facet->query_args['post__in'];
+
+        if ( $show_ghosts && $is_filtered ) {
             $raw_post_ids = implode( ',', FWP()->unfiltered_post_ids );
 
             $sql = "

@@ -8,8 +8,15 @@ jQuery(document).ready(function(){
     jQuery(".icl_st_form").submit(icl_st_submit_translation);
     jQuery('select[name="icl_st_filter_status"]').change(icl_st_filter_status);
     jQuery('select[name="icl_st_filter_context"]').change(icl_st_filter_context);
-    jQuery('#icl_st_filter_search_sb').click(icl_st_filter_search);    
-    jQuery('#icl_st_filter_search_remove').click(icl_st_filter_search_remove);    
+    jQuery('#icl_st_filter_search_sb').click(icl_st_filter_search);
+
+    jQuery("#icl_st_filter_search").keyup(function(event) {
+        if (event.keyCode === 13) {
+            icl_st_filter_search();
+        }
+    });
+
+    jQuery('#icl_st_filter_search_remove').click(icl_st_filter_search_remove);
     jQuery('#icl_st_delete_selected').click(icl_st_delete_selected);
 
     jQuery('#icl_st_po_translations').click(function(){

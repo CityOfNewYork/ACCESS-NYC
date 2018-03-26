@@ -40,7 +40,25 @@ class ToJpg extends ImageOperation {
 	 * @return bool                  true if everything went fine, false otherwise
 	 */
 	public function run( $load_filename, $save_filename ) {
-		$input = self::image_create($load_filename);
+
+		if ( !file_exists($load_filename) ) {
+			return false;
+		}
+
+		$ext = wp_check_filetype($load_filename);
+		if ( isset($ext['ext']) ) {
+			$ext = $ext['ext'];
+		}
+		$ext = strtolower($ext);
+		$ext = str_replace('jpg', 'jpeg', $ext);
+
+		$imagecreate_function = 'imagecreatefrom' . $ext;
+		if ( !function_exists($imagecreate_function) ) {
+			return false;
+		}
+
+		$input = $imagecreate_function($load_filename);
+
 		list($width, $height) = getimagesize($load_filename);
 		$output = imagecreatetruecolor($width, $height);
 		$c = self::hexrgb($this->color);
@@ -49,30 +67,5 @@ class ToJpg extends ImageOperation {
 		imagecopy($output, $input, 0, 0, 0, 0, $width, $height);
 		imagejpeg($output, $save_filename);
 		return true;
-	}
-
-	/**
-	 * @param string $filename
-	 * @return resource an image identifier representing the image obtained from the given filename
-	 *                  will return the same data type regardless of whether the source is gif or png
-	 */
-	public function image_create( $filename, $ext = 'auto' ) {
-		if ( $ext == 'auto' ) {
-			$ext = wp_check_filetype($filename);
-			if ( isset($ext['ext']) ) {
-				$ext = $ext['ext'];
-			}
-		}
-		$ext = strtolower($ext);
-		if ( $ext == 'gif' ) {
-			return imagecreatefromgif($filename);
-		}
-		if ( $ext == 'png' ) {
-			return imagecreatefrompng($filename);
-		}
-		if ( $ext == 'jpg' || $ext == 'jpeg' ) {
-			return imagecreatefromjpeg($filename);
-		}
-		throw new \InvalidArgumentException('image_create only accepts PNG, GIF and JPGs. File extension was: '.$ext);
 	}
 }

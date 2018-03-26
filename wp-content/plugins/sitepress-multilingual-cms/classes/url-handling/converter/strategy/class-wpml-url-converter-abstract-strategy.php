@@ -90,4 +90,9 @@ abstract class WPML_URL_Converter_Abstract_Strategy implements IWPML_URL_Convert
 			return icl_get_setting( 'default_language' );
 		}
 	}
+
+	public function fix_trailingslashit( $source_url ) {
+		return $source_url;
+	}
+
 }

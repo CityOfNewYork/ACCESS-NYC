@@ -153,7 +153,7 @@ class Utils extends Base {
 		if ( $time_diff >= 0 && $time_diff < DAY_IN_SECONDS ) {
 			$date = sprintf( __( '%s ago' ), human_time_diff( $time ) );
 		} else {
-			$date = mysql2date( __( 'Y/m/d' ), $time );
+			$date = date_i18n( __( 'Y/m/d' ), $time );
 		}
 
 		return $date;

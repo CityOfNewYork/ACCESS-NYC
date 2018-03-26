@@ -262,7 +262,10 @@ function icl_translate( $context, $name, $value = false, $allow_empty_value = fa
 			$filter = $st_gettext_hooks->get_filter( $target_lang, $name );
 				
 			if ( $filter ) {
-				$value = $filter->translate_by_name_and_context( $value, $name, $context, $has_translation );
+				$new_value = $filter->translate_by_name_and_context( $value, $name, $context, $has_translation );
+				if ( $has_translation ) {
+					$value = $new_value;
+				}
 			}
 		}
 	}

@@ -31,7 +31,7 @@
             <ul>
             {% for option in bottom_options %}
                 <li>
-                    <input {{ option.checked }} type="checkbox" name="{{ option.name }}" value="{{ option.value }}" > {{ option.label }}
+                    <input {{ option.checked }} {{ option.disabled ? 'disabled="disabled"' : '' }} type="checkbox" name="{{ option.name }}" value="{{ option.value }}" > {{ option.label }}
 
                 {% if option.tooltip %}
                     <a href="#" class="js-wpml-tooltip-open otgs-ico-help">

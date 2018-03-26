@@ -1,8 +1,11 @@
 <?php
 
-class WPML_Sync_Term_Meta_Action extends WPML_SP_User {
+class WPML_Sync_Term_Meta_Action {
 
-	/** @var  int $term_id */
+	/** @var SitePress $sitepress */
+	private $sitepress;
+
+	/** @var  int $term_taxonomy_id */
 	private $term_taxonomy_id;
 
 	/**
@@ -11,8 +14,8 @@ class WPML_Sync_Term_Meta_Action extends WPML_SP_User {
 	 * @param SitePress $sitepress
 	 * @param int       $term_taxonomy_id just saved term's term_taxonomy_id
 	 */
-	public function __construct( &$sitepress, $term_taxonomy_id ) {
-		parent::__construct( $sitepress );
+	public function __construct( $sitepress, $term_taxonomy_id ) {
+		$this->sitepress        = $sitepress;
 		$this->term_taxonomy_id = $term_taxonomy_id;
 	}
 
@@ -20,20 +23,28 @@ class WPML_Sync_Term_Meta_Action extends WPML_SP_User {
 	 * Copies to be synchronized term meta data to the translations of the term.
 	 */
 	public function run() {
+		$term_taxonomy_id_from = $this->sitepress->term_translations()->get_original_element( $this->term_taxonomy_id );
+
+		if ( ! $term_taxonomy_id_from ) {
+			$term_taxonomy_id_from = $this->term_taxonomy_id;
+		}
+
 		$translations = $this->sitepress
 			->term_translations()
-			->get_element_translations( $this->term_taxonomy_id, false, true );
+			->get_element_translations( $term_taxonomy_id_from, false, true );
+
 		if ( ! empty( $translations ) ) {
-			foreach ( $translations as $ttid ) {
-				$this->copy_custom_fields( $ttid );
+			foreach ( $translations as $term_taxonomy_id_to ) {
+				$this->copy_custom_fields( $term_taxonomy_id_to, $term_taxonomy_id_from );
 			}
 		}
 	}
 
 	/**
-	 * @param int $target_ttid
+	 * @param int $term_taxonomy_id_to
+	 * @param int $term_taxonomy_id_from
 	 */
-	private function copy_custom_fields( $target_ttid ) {
+	private function copy_custom_fields( $term_taxonomy_id_to, $term_taxonomy_id_from ) {
 		$cf_copy = array();
 
 		$setting_factory = $this->sitepress->core_tm()->settings_factory();
@@ -45,8 +56,9 @@ class WPML_Sync_Term_Meta_Action extends WPML_SP_User {
 			}
 		}
 
-		$term_id_to   = $this->sitepress->term_translations()->adjust_ttid_for_term_id( $target_ttid );
-		$term_id_from = $this->sitepress->term_translations()->adjust_ttid_for_term_id( $this->term_taxonomy_id );
+		$term_id_to   = $this->sitepress->term_translations()->adjust_ttid_for_term_id( $term_taxonomy_id_to );
+		$term_id_from = $this->sitepress->term_translations()->adjust_ttid_for_term_id( $term_taxonomy_id_from );
+
 		foreach ( $cf_copy as $meta_key ) {
 			$meta_from = $this->sitepress->get_wp_api()->get_term_meta( $term_id_from,
 				$meta_key );

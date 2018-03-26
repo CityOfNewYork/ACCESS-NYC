@@ -12,6 +12,13 @@ class WPML_TF_Promote_Notices {
 	const NOTICE_NEW_SITE = 'notice-new-site';
 	const DOC_URL         = 'https://wpml.org/documentation/getting-started-guide/getting-visitor-feedback-about-your-sites-translations/';
 
+	/** @var SitePress $sitepress */
+	private $sitepress;
+
+	public function __construct( SitePress $sitepress ) {
+		$this->sitepress = $sitepress;
+	}
+
 	public function show_notice_for_old_site() {
 		$notices = wpml_get_admin_notices();
 
@@ -42,9 +49,11 @@ class WPML_TF_Promote_Notices {
 	 * @param int $user_id
 	 */
 	public function show_notice_for_new_site( $user_id ) {
-		$notices = wpml_get_admin_notices();
-
+		$notices      = wpml_get_admin_notices();
 		$settings_url = admin_url( '?page=' . WPML_PLUGIN_FOLDER . '/menu/languages.php#wpml-translation-feedback-options' );
+
+		$user_lang = $this->sitepress->get_user_admin_language( $user_id );
+		$this->sitepress->switch_lang( $user_lang );
 
 		$text = '<h2>' . __( 'Want to know if recent translations you received have problems?', 'sitepress' ) . '</h2>';
 		$text .= '<p>';
@@ -63,6 +72,8 @@ class WPML_TF_Promote_Notices {
 		if ( ! $notices->is_notice_dismissed( $notice ) ) {
 			$notices->add_notice( $notice );
 		}
+
+		$this->sitepress->switch_lang( null );
 	}
 
 	public function remove() {

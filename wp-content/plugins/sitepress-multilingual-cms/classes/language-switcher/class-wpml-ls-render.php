@@ -2,6 +2,8 @@
 
 class WPML_LS_Render extends WPML_SP_User {
 
+	const THE_CONTENT_FILTER_PRIORITY = 100;
+
 	/* @var WPML_LS_Template $current_template */
 	private $current_template;
 
@@ -40,9 +42,14 @@ class WPML_LS_Render extends WPML_SP_User {
 
 	public function init_hooks() {
 		if ( $this->sitepress->get_setting( 'setup_complete' ) ) {
-			add_filter( 'wp_nav_menu_objects',           array( $this, 'wp_nav_menu_objects_filter' ), 10, 2 );
-			add_filter( 'the_content',                   array( $this, 'the_content_filter' ), 100 );
-			add_action( 'wp_footer',                     array( $this, 'wp_footer_action' ), 19 );
+
+			if ( ! is_admin() ) {
+				add_filter( 'wp_get_nav_menu_items', array( $this, 'wp_get_nav_menu_items_filter' ), 10, 2 );
+				add_filter( 'wp_setup_nav_menu_item', array( $this, 'maybe_repair_menu_item' ), PHP_INT_MAX );
+			}
+
+			add_filter( 'the_content', array( $this, 'the_content_filter' ), self::THE_CONTENT_FILTER_PRIORITY );
+			add_action( 'wp_footer', array( $this, 'wp_footer_action' ), 19 );
 
 			$this->assets->init_hooks();
 		}
@@ -117,53 +124,60 @@ class WPML_LS_Render extends WPML_SP_User {
 	}
 
 	/**
-	 * @param string $items
-	 * @param object $args
+	 * @param array   $items
+	 * @param WP_Term $menu
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public function wp_nav_menu_objects_filter( $items, $args ) {
-		$args    = (object) $args;
-		$menu_id = isset( $args->menu ) ? $this->retrieve_menu_id( $args->menu ) : null;
+	public function wp_get_nav_menu_items_filter( $items, $menu ) {
+		if ( $this->is_for_menu_panel_in_customizer() ) {
+			return $items;
+		}
 
-		if ( $menu_id ) {
-			$slot = $this->settings->get_menu_settings_from_id( $menu_id );
+		$slot = $this->settings->get_menu_settings_from_id( $menu->term_id );
 
-			if(  $slot->is_enabled() && ! $this->is_hidden( $slot ) ) {
-				$lang_items = $this->get_menu_items( $slot );
+		if( $slot->is_enabled() && ! $this->is_hidden( $slot ) ) {
+			$is_before  = 'before' === $slot->get( 'position_in_menu' );
+			$lang_items = $this->get_menu_items( $slot );
 
-				if ( $lang_items ) {
-					if ( 'before' === $slot->get( 'position_in_menu' ) ) {
-						$items = array_merge( $lang_items, $items );
-					} else {
-						$items = array_merge( $items, $lang_items );
-					}
-				}
+			if ( $items && $lang_items ) {
+				$items = $this->merge_menu_items( $items, $lang_items, $is_before );
+			} elseif ( ! $items && $lang_items ) {
+				$items = $lang_items;
 			}
 		}
 
 		return $items;
 	}
 
+	private function is_for_menu_panel_in_customizer() {
+		return is_customize_preview() && ! did_action( 'template_redirect' );
+	}
+
 	/**
-	 * @param WP_Term|int|string $menu
+	 * @param WP_Post[]           $items
+	 * @param WPML_LS_Menu_Item[] $lang_items
+	 * @param bool                $is_before
 	 *
-	 * @return int|null
+	 * @return array
 	 */
-	private function retrieve_menu_id( $menu ) {
-		$menu_id = null;
-
-		if ( isset( $menu->term_id ) ) {
-			$menu_id = $menu->term_id;
+	private function merge_menu_items( $items, $lang_items, $is_before ) {
+		if ( $is_before ) {
+			$items_to_prepend = $lang_items;
+			$items_to_append  = $items;
 		} else {
-			$menu = wp_get_nav_menu_object( $menu );
-
-			if ( $menu ) {
-				$menu_id = $menu->term_id;
-			}
+			$items_to_prepend = $items;
+			$items_to_append  = $lang_items;
 		}
 
-		return $menu_id;
+		$menu_orders = wp_list_pluck( $items_to_prepend, 'menu_order' );
+		$offset      = max( $menu_orders );
+
+		foreach ( $items_to_append as $item ) {
+			$item->menu_order = $item->menu_order + $offset;
+		}
+
+		return array_merge( $items_to_prepend, $items_to_append );
 	}
 
 	/**
@@ -178,14 +192,39 @@ class WPML_LS_Render extends WPML_SP_User {
 		if ( isset( $model['languages'] ) ) {
 
 			$this->current_template = $this->templates->get_template( $slot->template() );
+			$menu_order             = 1;
+
 			foreach ( $model['languages'] as $language_model ) {
 				$this->current_template->set_model( $language_model );
 				$item_content = $this->filter_html( $this->current_template->get_html(), $language_model, $slot );
-				$lang_items[] = new WPML_LS_Menu_Item( $language_model, $item_content );
+				$ls_menu_item = new WPML_LS_Menu_Item( $language_model, $item_content );
+				$ls_menu_item->menu_order = $menu_order;
+				$menu_order++;
+
+				$lang_items[] = $ls_menu_item;
 			}
 		}
 
 		return $lang_items;
+	}
+
+	/**
+	 * @link https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-4706#comment=102-231339
+	 *
+	 * @param WP_Post|WPML_LS_Menu_Item|object $item
+	 *
+	 * @return object $item
+	 */
+	public function maybe_repair_menu_item( $item ) {
+		if ( ! $item instanceof WPML_LS_Menu_Item ) {
+			return $item;
+		}
+
+		if ( ! $item->db_id ) {
+			$item->db_id = $item->ID;
+		}
+
+		return $item;
 	}
 
 	/**

@@ -125,8 +125,7 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 		if ( $best_score > 2 ) {
 			$order_by .= $this->wpdb->prepare( 'ORDER BY CASE t.language_code WHEN %s THEN %d ',
 			                                   $current_lang,
-			                                   $best_score,
-			                                   $best_score - 1 );
+			                                   $best_score );
 			$score = $best_score - 2;
 			foreach ( $lang_order as $lang_code ) {
 				$order_by .= $this->wpdb->prepare( ' WHEN %s THEN %d ', $lang_code, $score );

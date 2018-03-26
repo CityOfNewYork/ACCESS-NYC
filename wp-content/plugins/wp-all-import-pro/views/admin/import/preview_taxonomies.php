@@ -53,9 +53,11 @@
 										}	
 									}
 								}
-								?>
-								<p><?php echo str_pad(trim($term), strlen(trim($term)) + $lvl, "-", STR_PAD_LEFT); ?></p>
-								<?php
+								if (!empty($term)) {
+									?>
+									<p><?php echo str_pad(trim($term), strlen(trim($term)) + $lvl, "-", STR_PAD_LEFT); ?></p>
+									<?php
+								}
 							}
 						}
 						else{

@@ -188,8 +188,8 @@ function is_taxonomy_translated( $taxonomy ) {
  */
 function is_post_type_translated( $post_type ) {
 
-	return in_array( $post_type, array( 'post', 'page', 'nav_menu_item' ), true )
-	       || in_array(
+	return 'nav_menu_item' === $post_type ||
+	       in_array(
 		       $post_type,
 		       array_keys( array_filter( icl_get_setting( 'custom_posts_sync_option', array() ) ) )
 	       );
@@ -362,7 +362,6 @@ function wpml_load_settings_helper() {
 	global $wpml_settings_helper, $sitepress, $wpml_post_translations;
 
 	if ( ! isset( $wpml_settings_helper ) ) {
-		require_once WPML_PLUGIN_PATH . '/inc/setup/wpml-settings-helper.class.php';
 		$wpml_settings_helper = new WPML_Settings_Helper( $wpml_post_translations, $sitepress );
 	}
 

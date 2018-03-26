@@ -3,6 +3,16 @@
  * @author OnTheGo Systems
  */
 class WPML_Support_Info {
+	/** @var wpdb */
+	private $wpdb;
+
+	/**
+	 * @param wpdb $wpdb
+	 */
+	public function __construct( wpdb $wpdb ) {
+		$this->wpdb = $wpdb;
+	}
+
 
 	public function is_suhosin_active() {
 		return extension_loaded( 'suhosin' );
@@ -61,6 +71,10 @@ class WPML_Support_Info {
 
 	public function is_version_less_than( $reference, $version ) {
 		return version_compare( $version, $reference, '<' );
+	}
+
+	public function is_utf8mb4_charset_supported() {
+		return $this->wpdb->has_cap( 'utf8mb4' );
 	}
 
 	private function return_bytes( $val ) {

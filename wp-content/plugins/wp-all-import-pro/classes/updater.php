@@ -277,7 +277,7 @@ if( ! class_exists('PMXI_Updater') ) {
                 }
             }
 
-            if ( empty($new_version) ) {
+            if ( empty($new_version) || $this->slug != 'wp-all-import-pro') {
                 return;
             }
 

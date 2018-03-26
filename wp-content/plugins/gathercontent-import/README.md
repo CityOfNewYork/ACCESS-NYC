@@ -1,4 +1,4 @@
-# GatherContent Plugin -- Version 3.1.7 #
+# GatherContent Plugin -- Version 3.1.9 #
 
 This plugin allows you to transfer content from your GatherContent projects into your WordPress site and vice-versa.
 
@@ -32,11 +32,11 @@ This section describes how to install the plugin and get it working.
 1. Click on the menu item "GatherContent"
 2. Link your accounts. You will need to enter your GatherContent account URL (e.g. http://mywebsite.gathercontent.com) and your personal GatherContent API key. You can find your API key in your [Settings area within GatherContent](https://gathercontent.com/developers/authentication/).
 
-For more detailed installation instructions please visit our [HelpCentre](https://gathercontent.com/support/wordpress-integration-installation/).
+For more detailed installation instructions please visit our [Help Centre](http://help.gathercontent.com/importing-and-exporting-content#wordpress-integration).
 
 ## Support ##
 
-If you need help, Please [visit our support documentation](https://gathercontent.com/support/wordpress-integration).
+If you need help, Please [visit our support documentation](http://help.gathercontent.com/importing-and-exporting-content#wordpress-integration).
 
 Also note, in your WordPress dashboard, under the GatherContent menu item, you will see a Support page. On this page, you'll find a large textarea filled with technical information about your server, browser, plugin, etc. This information is very useful when debugging, and the GatherContent support team may ask you for it at some point.
 
@@ -46,6 +46,16 @@ Below the text box is a button that will allow you to simply save all of that in
 
 
 ## Changelog ##
+
+### 3.1.9 ###
+* Fix the 3rd param passed to `Pull::sanitize_post_field()`, which needs to be the entire post data array.
+* Updated the help centre links.
+* Fixed quoted attributes (like alt text) for the pseudo-shortcodes used for media in the GatherContent content, e.g. `[media-1 align=right linkto=file alt="This will go to the image alt tag"]`
+* Allow using new shortcode syntax (like `[media_2-1]`) to include media from multiple media fields in GatherContent mapped to the content or excerpt. The original syntax will continue to work (e.g. `[media-1]`), but will be assumed to be the first media field, and will be the same as using the new syntax, `[media_1-1]`.
+
+### 3.1.8 ###
+* If mapping does not map a field to the `post_title`, be sure to update title from the GC item name.
+* Fix bug with item updated dates not being properly formatted in some languages.
 
 ### 3.1.7 ###
 * Add WPML compatibility shim for properly mapping GatherContent taxonomy terms to translated language taxonomy terms where applicable, and vice-versa. **Note:** If the GC item uses the foreign language term name, then this will need to be unhooked. This can be done via:

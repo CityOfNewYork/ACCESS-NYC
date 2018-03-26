@@ -41,6 +41,7 @@ class WPML_Flags {
 	}
 
 	public function get_flag_url( $lang_code ) {
+
 		$flag = $this->get_flag( $lang_code );
 		if ( $flag->from_template ) {
 			$wp_upload_dir = wp_upload_dir();

@@ -67,8 +67,24 @@ class WPML_Compatibility_Divi {
 	}
 
 	private function register_layouts() {
-		if ( ! et_builder_should_load_framework() ) {
-			et_builder_register_layouts();
+		if ( function_exists( 'et_builder_should_load_framework' ) && ! et_builder_should_load_framework() ) {
+			if ( function_exists( 'et_builder_register_layouts' ) ) {
+				et_builder_register_layouts();
+			} else {
+				$lib_file = ET_BUILDER_DIR . 'feature/Library.php';
+
+				if ( ! class_exists( 'ET_Builder_Library' )
+				     && defined( 'ET_BUILDER_DIR' )
+				     && file_exists( $lib_file )
+				) {
+					require_once $lib_file;
+				}
+
+
+				if ( class_exists( 'ET_Builder_Library' ) ) {
+					ET_Builder_Library::instance();
+				}
+			}
 		}
 	}
 }

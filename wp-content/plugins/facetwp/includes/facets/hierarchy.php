@@ -88,7 +88,7 @@ class FacetWP_Facet_Hierarchy extends FacetWP_Facet
         ORDER BY $orderby";
 
         $results = $wpdb->get_results( $sql, ARRAY_A );
-        $new_depth = $output[ count( $output ) - 1 ]['depth'] + 1;
+        $new_depth = empty( $output ) ? 0 : $output[ count( $output ) - 1 ]['depth'] + 1;
 
         foreach ( $results as $result ) {
             $result['depth'] = $new_depth;

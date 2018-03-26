@@ -29,6 +29,10 @@ class WPML_ST_Fastest_Settings_Notice {
 	public function get_mismatched_settings() {
 		$missing_settings = array();
 
+		if ( 'en' !== $this->sitepress->get_default_language() ) {
+			return $missing_settings;
+		}
+
 		foreach( $this->settings as $key => $setting ) {
 			if ( 'core' === $setting['type'] ) {
 				if ( (int) $setting['value'] !== (int) $this->sitepress->get_setting( $key ) ) {
@@ -51,7 +55,7 @@ class WPML_ST_Fastest_Settings_Notice {
 				'type' => 'core',
 			),
 			WPML_ST_Gettext_Hooks_Factory::ALL_STRINGS_ARE_IN_ENGLISH_OPTION => array(
-				'title' => __( 'Assume that all texts in PHP strings are in English', 'wpml-string-translation' ),
+				'title' => WPML_ST_Theme_Plugin_Localization_Options_UI::get_all_strings_option_text(),
 				'description' => __( "Almost all themes and plugins have texts in English. Reducing the check for the string's language simplifies and shortens the string translation process.", 'wpml-string-translation' ),
 				'value' => 1,
 				'type' => 'option',
@@ -73,6 +77,7 @@ class WPML_ST_Fastest_Settings_Notice {
 			);
 
 			$notice->set_css_class_types( 'info' );
+			$notice->set_nonce_action( 'wpml-localization-options-nonce' );
 			$notice->add_capability_check( array( 'manage_options' ) );
 			$notice->add_display_callback( array( __CLASS__, 'only_display_notice_if_this_class_exists' ) );
 			$notice->add_action( $this->admin_notices->get_new_notice_action( __( 'Apply those changes', 'wpml-string-translation' ), '#', false, false, 'button-primary' ) );
@@ -87,7 +92,6 @@ class WPML_ST_Fastest_Settings_Notice {
 	 * @return string
 	 */
 	private function get_message( $missing_settings ) {
-		$options_nonce = 'wpml-localization-options-nonce';
 		$message  = '<h3>' . __( 'Your site can run faster', 'wpml-string-translation' ) . '</h3>';
 		$message .= __( 'This version of WPML includes new settings that will help your site run faster. We recommend changing the following settings, which are all available in WPML->Theme and plugins localization:', 'wpml-string-translation' );
 
@@ -97,7 +101,6 @@ class WPML_ST_Fastest_Settings_Notice {
 		}
 		$message .= '</ul>';
 
-		$message .= '<input type="hidden" id="' . $options_nonce . '" name="' . $options_nonce . '" value="' . wp_create_nonce( $options_nonce ) . '">';
 		$message .= '<div style="display:none" class="js-done">' . __( 'Settings saved', 'wpml-string-translation' ) . '</div>';
 		$message .= '<div style="display:none" class="js-error">' . __( 'Error', 'wpml-string-translation' ) . '</div>';
 
@@ -105,15 +108,7 @@ class WPML_ST_Fastest_Settings_Notice {
 	}
 
 	public function remove() {
-		$missing_settings = $this->get_mismatched_settings();
-		$removed = false;
-
-		if ( ! count( $missing_settings ) ) {
-			$this->admin_notices->remove_notice( WPML_ST_Themes_And_Plugins_Settings::NOTICES_GROUP, WPML_ST_Themes_And_Plugins_Updates::WPML_ST_FASTER_SETTINGS_NOTICE_ID );
-			$removed = true;
-		}
-
-		return $removed;
+		$this->admin_notices->remove_notice( WPML_ST_Themes_And_Plugins_Settings::NOTICES_GROUP, WPML_ST_Themes_And_Plugins_Updates::WPML_ST_FASTER_SETTINGS_NOTICE_ID );
 	}
 
 	/** @return bool */

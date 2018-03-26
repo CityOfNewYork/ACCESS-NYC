@@ -298,16 +298,12 @@ class WPML_Query_Parser {
 				$post_type = (array) $post_type;
 			}
 			if ( ! empty( $q->query_vars['page_id'] ) ) {
-				$q->query_vars['page_id'] = $this->post_translations->element_id_in( $q->query_vars['page_id'],
-				                                                                     $current_language,
-				                                                                     true );
+				$q->query_vars['page_id'] = $this->get_translated_post( $q->query_vars['page_id'], $current_language );
 			}
 			$q = $this->adjust_query_ids( $q, 'include' );
 			$q = $this->adjust_query_ids( $q, 'exclude' );
 			if ( isset( $q->query_vars['p'] ) && ! empty( $q->query_vars['p'] ) ) {
-				$q->query_vars['p'] = $this->post_translations->element_id_in( $q->query_vars['p'],
-				                                                               $current_language,
-				                                                               true );
+				$q->query_vars['p'] = $this->get_translated_post( $q->query_vars['p'], $current_language );
 			}
 
 			if ( $post_type ) {
@@ -323,7 +319,13 @@ class WPML_Query_Parser {
 							$q->query_vars[ $first_post_type ] = '';
 						}
 					} else {
-						$pid_prepared = $this->wpdb->prepare( "SELECT ID FROM {$this->wpdb->posts} WHERE post_name=%s AND post_type=%s LIMIT 1", array( $q->query_vars['name'], $first_post_type ) );
+						$pid_prepared = $this->wpdb->prepare( "
+							SELECT ID FROM {$this->wpdb->posts} p
+							JOIN {$this->wpdb->prefix}icl_translations t 
+								ON t.element_id = p.ID AND t.element_type='post_{$first_post_type}'   
+							WHERE post_name=%s AND post_type=%s AND t.language_code=%s 
+							LIMIT 1
+						", array( $q->query_vars['name'], $first_post_type, $current_language ) );
 						$pid          = $this->wpdb->get_var( $pid_prepared );
 						if ( ! empty( $pid ) ) {
 							$q->query_vars['p'] = $this->post_translations->element_id_in( $pid, $current_language, true );
@@ -385,10 +387,12 @@ class WPML_Query_Parser {
 		$redirect = false;
 		if ( ( (bool) ( $name_in_q = $q->get( 'name' ) ) === true
 		     || (bool) ( $name_in_q = $q->get( 'pagename' ) ) === true )
-			&& (bool) $q->get( 'page_id' ) === false
+		     && (bool) $q->get( 'page_id' ) === false
+		     && (bool) $q->get( 'category_name' ) === false
 			|| ( (bool) ( $post_type = $q->get('post_type') ) === true
                 && is_scalar($post_type)
-                && (bool) ( $name_in_q = $q->get($post_type)) === true ) ) {
+                && (bool) ( $name_in_q = $q->get($post_type)) === true )
+		) {
 			list( $name_found, $type, $altered ) = $this->query_filter->get_404_util()->guess_cpt_by_name( $name_in_q,
 			                                                                                               $q );
 			if ( $altered === true ) {
@@ -455,8 +459,11 @@ class WPML_Query_Parser {
 		$permalink   = $this->sitepress->get_wp_api()->get_permalink( $post_id );
 		if ( ! $this->is_permalink_part_of_request( $permalink, $request_uri[0] ) ) {
 			if ( isset( $request_uri[1] ) ) {
-				$lang = substr( $request_uri[1], strpos( $request_uri[1], '=' ) + 1 );
-				$permalink = add_query_arg( array( 'lang' => $lang ), $permalink );
+				$args = array();
+				parse_str( $request_uri[1], $args );
+				if ( array_key_exists( 'lang', $args ) ) {
+					$permalink = add_query_arg( array( 'lang' => $args['lang'] ), $permalink );
+				}
 			}
 			$redirect = $permalink;
 		}
@@ -468,5 +475,17 @@ class WPML_Query_Parser {
 		$permalink_path = trailingslashit( urldecode( wpml_parse_url( $permalink, PHP_URL_PATH ) ) );
 		$request_uri    = trailingslashit( urldecode( $request_uri ) );
 		return 0 === strcasecmp( substr( $request_uri, 0, strlen( $permalink_path ) ), $permalink_path );
+	}
+
+	private function get_translated_post( $element_id, $current_language ) {
+		$translated_id = $this->post_translations->element_id_in( $element_id, $current_language, true );
+		$type = $this->post_translations->get_type( $element_id );
+		if ( $this->sitepress->is_display_as_translated_post_type( $type ) ) {
+			$post = get_post( $translated_id );
+			if ( 'publish' != $post->post_status ) {
+				$translated_id = $element_id;
+			}
+		}
+		return $translated_id;
 	}
 }

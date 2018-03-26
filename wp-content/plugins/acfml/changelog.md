@@ -1,3 +1,6 @@
+# 0.7
+* Fields are now sycnhronised also during standard post creation when has "Copy" set (wpmlbridge-101) 
+
 # 0.6
 * Introduced support for clone fields (wpmlbridge-46)
 

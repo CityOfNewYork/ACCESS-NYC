@@ -329,7 +329,7 @@ class WPML_Nav_Menu {
                 }else{
                     $tr_link = '<a style="text-decoration:none" title="'. esc_attr(__('add translation', 'sitepress')).'" href="'.admin_url('nav-menus.php').
                         '?action=edit&menu=0&trid='.$this->current_menu['trid'].'&lang='.$lang['code'].'">'. 
-                        $lang['display_name'] . '&nbsp;<img src="'.ICL_PLUGIN_URL.'/res/img/add_translation.png" alt="'. esc_attr(__('add', 'sitepress')).
+                        esc_html( $lang['display_name'] ) . '&nbsp;<img src="'.ICL_PLUGIN_URL.'/res/img/add_translation.png" alt="'. esc_attr(__('add', 'sitepress')).
                         '" width="12" height="12" /></a>';
                 }
                 $trs[] = $tr_link ;
@@ -380,20 +380,22 @@ class WPML_Nav_Menu {
 		echo $this->render_button_language_switcher_settings();
         ?>
         <script type="text/javascript">
-        addLoadEvent(function(){
-			var update_menu_form = jQuery('#update-nav-menu');
-			update_menu_form.find('.publishing-action:first').before('<?php echo addslashes_gpc($langsel); ?>');
-            jQuery('#side-sortables').before('<?php $this->languages_menu() ?>');
-            <?php if($this->current_lang != $default_language): echo "\n"; ?>
-				jQuery('.nav-tabs .nav-tab').each(function(){
-					jQuery(this).attr('href', jQuery(this).attr('href')+'&lang=<?php echo $this->current_lang ?>');
-				});        
-				var original_action = update_menu_form.attr('ACTION') ? update_menu_form.attr('ACTION') : '';
-				update_menu_form.attr('ACTION', original_action+'?lang=<?php echo $this->current_lang ?>');
-            <?php endif; ?>
-			WPML_core.wp_nav_align_inputs();
+					jQuery(document).ready(function () {
+						addLoadEvent(function () {
+							var update_menu_form = jQuery('#update-nav-menu');
+							update_menu_form.find('.publishing-action:first').before('<?php echo addslashes_gpc( $langsel ); ?>');
+							jQuery('#side-sortables').before('<?php $this->languages_menu() ?>');
+		        <?php if($this->current_lang != $default_language): ?>
+							jQuery('.nav-tabs .nav-tab').each(function () {
+								jQuery(this).attr('href', jQuery(this).attr('href') + '&lang=<?php echo $this->current_lang ?>');
+							});
+							var original_action = update_menu_form.attr('ACTION') ? update_menu_form.attr('ACTION') : '';
+							update_menu_form.attr('ACTION', original_action + '?lang=<?php echo $this->current_lang ?>');
+		        <?php endif; ?>
+							WPML_core.wp_nav_align_inputs();
 
-        });
+						});
+					});
         </script>
         <?php            
     }
@@ -704,17 +706,25 @@ class WPML_Nav_Menu {
         if(!empty($menus_not_translated)){
             ?>
             <script type="text/javascript">
-            addLoadEvent(function(){
-                <?php foreach($menus_not_translated as $menu_id): ?>
-	            var menu_id = '<?php echo $menu_id?>';
-	            var location_menu_id = jQuery('#locations-' + menu_id);
-	            if(location_menu_id.length > 0){
-                    location_menu_id.find('option').first().html('<?php echo esc_js(__('not translated in current language','sitepress')) ?>');
-                    location_menu_id.css('font-style','italic');
-                    location_menu_id.change(function(){if(jQuery(this).val()!=0) jQuery(this).css('font-style','normal');else jQuery(this).css('font-style','italic')});
-                }
-                <?php endforeach; ?>
-            });            
+							jQuery(document).ready(function () {
+								addLoadEvent(function () {
+		            <?php foreach($menus_not_translated as $menu_id): ?>
+									var menu_id = '<?php echo $menu_id?>';
+									var location_menu_id = jQuery('#locations-' + menu_id);
+									if (location_menu_id.length > 0) {
+										location_menu_id.find('option').first().html('<?php echo esc_js( __( 'not translated in current language', 'sitepress' ) ) ?>');
+										location_menu_id.css('font-style', 'italic');
+										location_menu_id.change(function () {
+											if (jQuery(this).val() != 0) {
+												jQuery(this).css('font-style', 'normal');
+											} else {
+												jQuery(this).css('font-style', 'italic')
+											}
+										});
+									}
+		            <?php endforeach; ?>
+								});
+							});
             </script>
             <?php             
         }

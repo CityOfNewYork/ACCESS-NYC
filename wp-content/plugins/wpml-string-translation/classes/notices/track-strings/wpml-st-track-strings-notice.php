@@ -24,7 +24,7 @@ class WPML_ST_Track_Strings_Notice {
 		$options_nonce = 'wpml-localization-options-nonce';
 
 		$message  = __( 'For String Tracking to work, the option', 'wpml-string-translation' );
-		$message .= '<strong> ' . __( 'Assume that all texts in PHP strings are in English', 'wpml-string-translation' ) . ' </strong>';
+		$message .= '<strong> ' . WPML_ST_Theme_Plugin_Localization_Options_UI::get_all_strings_option_text() . ' </strong>';
 		$message .= __( 'was automatically disabled. To enable it back, go to WPML->Theme and Plugins localization.', 'wpml-string-translation' );
 		$message .= '<input type="hidden" id="' . $options_nonce . '" name="' . $options_nonce . '" value="' . wp_create_nonce( $options_nonce ) . '">';
 

@@ -28,13 +28,13 @@ class WPML_Term_Language_Filter extends WPML_Language_Filter_Bar {
 		if ( $code === $this->current_language ) {
 			list($px, $sx) = $this->strong_lang_span_cover($code, $count);
 		} else {
-			$px = '<a href="?taxonomy=' . $taxonomy . '&amp;lang=' . $code;
-			$px .= $post_type !== '' ? '&amp;post_type=' . $post_type : '';
+			$px = '<a href="?taxonomy=' . esc_attr( $taxonomy ) . '&amp;lang=' . esc_attr( $code );
+			$px .= $post_type !== '' ? '&amp;post_type=' . esc_attr( $post_type ) : '';
 			$px .= '">';
 			$sx = '</a>' . $this->lang_span( $code, $count );
 		}
 
-		return $px . $this->active_languages[ $code ][ 'display_name' ] . $sx;
+		return $px . esc_html( $this->active_languages[ $code ][ 'display_name' ] ) . $sx;
 	}
 
 	protected function get_count_data( $taxonomy ) {

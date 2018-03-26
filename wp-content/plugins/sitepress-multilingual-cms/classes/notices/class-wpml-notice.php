@@ -23,6 +23,8 @@ class WPML_Notice {
 	private $hideable                       = false;
 	private $collapsable                    = false;
 	private $restrict_to_pages              = array();
+	private $restrict_to_page_prefixes      = array();
+	private $restrict_to_screen_ids         = array();
 	private $hide_if_notice_exists          = null;
 	private $dismissible_for_different_text = true;
 
@@ -31,6 +33,11 @@ class WPML_Notice {
 	private $capabilities = array();
 
 	private $dismiss_reset = false;
+
+	/**
+	 * @var string
+	 */
+	private $nonce_action;
 
 	/**
 	 * WPML_Admin_Notification constructor.
@@ -192,8 +199,34 @@ class WPML_Notice {
 		return $this->id;
 	}
 
+	public function set_restrict_to_page_prefixes( array $page_prefixes ) {
+		$this->restrict_to_page_prefixes = $page_prefixes;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_restrict_to_page_prefixes() {
+		return $this->restrict_to_page_prefixes;
+	}
+
 	public function get_restrict_to_pages() {
 		return $this->restrict_to_pages;
+	}
+
+	public function set_restrict_to_screen_ids( array $screens ) {
+		$this->restrict_to_screen_ids = $screens;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_restrict_to_screen_ids() {
+		return $this->restrict_to_screen_ids;
+	}
+
+	public function get_nonce_action() {
+		return $this->nonce_action;
 	}
 
 	/**
@@ -270,6 +303,13 @@ class WPML_Notice {
 	 */
 	public function set_collapsable( $collapsable ) {
 		$this->collapsable = $collapsable;
+	}
+
+	/**
+	 * @param string $action
+	 */
+	public function set_nonce_action( $action ) {
+		$this->nonce_action = $action;
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * Plugin Name: GatherContent Plugin
  * Plugin URI:  http://www.gathercontent.com
  * Description: Imports items from GatherContent to your wordpress site
- * Version:     3.1.7
+ * Version:     3.1.9
  * Author:      GatherContent
  * Author URI:  http://www.gathercontent.com
  * Text Domain: gathercontent-import
@@ -30,7 +30,7 @@
  */
 
 // Useful global constants
-define( 'GATHERCONTENT_VERSION', '3.1.7' );
+define( 'GATHERCONTENT_VERSION', '3.1.9' );
 define( 'GATHERCONTENT_ENQUEUE_VERSION', '3.1.5' );
 define( 'GATHERCONTENT_SLUG', 'gathercontent-import' );
 define( 'GATHERCONTENT_PLUGIN', __FILE__ );

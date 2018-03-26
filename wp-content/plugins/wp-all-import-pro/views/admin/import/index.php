@@ -90,7 +90,7 @@
 								<span class="img_preloader" style="top:0; left: 5px; visibility: hidden; display: inline;"></span>
 							</div>
 							<div class="wpallimport-note" style="margin: 20px auto 0; font-size: 13px;">
-								<?php _e('<strong>Hint:</strong> After you create this import, you can schedule it to run automatically, on a pre-defined schedule, with cron jobs. If anything in your file has changed, WP All Import can update your site with the changed data automatically.', 'wp_all_import_plugin'); ?>
+								<?php _e('<strong>Hint:</strong> After you create this import, you can schedule it to run automatically, on a pre-defined schedule, with cron jobs.', 'wp_all_import_plugin'); ?>
 								<span></span>
 							</div>
 							<input type="hidden" name="downloaded" value="<?php echo esc_attr($post['downloaded']); ?>"/>

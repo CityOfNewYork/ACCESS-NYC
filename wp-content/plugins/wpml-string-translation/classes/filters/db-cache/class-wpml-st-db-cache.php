@@ -31,6 +31,9 @@ class WPML_ST_DB_Cache {
 	 */
 	private $page_url;
 
+	/** @var WPML_ST_DB_Shutdown_Url_Validator */
+	private $shutdown_url_validator;
+
 	/**
 	 * @param string $language
 	 * @param IWPML_ST_Page_Translations_Persist $translations_persist
@@ -41,13 +44,15 @@ class WPML_ST_DB_Cache {
 		$language,
 		IWPML_ST_Page_Translations_Persist $translations_persist,
 		WPML_ST_DB_Translation_Retrieve $single_translation_retriever,
-		WPML_ST_Page_URL_Preprocessor $page_url_preprocessor
+		WPML_ST_Page_URL_Preprocessor $page_url_preprocessor,
+		WPML_ST_DB_Shutdown_Url_Validator $shutdown_url_validator
 	) {
 		$this->page_url_preprocessor        = $page_url_preprocessor;
 		$this->page_url                     = $this->get_page_url();
 		$this->language                     = $language;
 		$this->translations_persist         = $translations_persist;
 		$this->single_translation_retriever = $single_translation_retriever;
+		$this->shutdown_url_validator       = $shutdown_url_validator;
 
 		add_action( 'shutdown', array( $this, 'shutdown' ) );
 	}
@@ -59,9 +64,11 @@ class WPML_ST_DB_Cache {
 	}
 
 	public function shutdown() {
-		$is_reseting_wpml_single = ( $_POST && array_key_exists( 'icl-reset-all', $_POST ) && $_POST['icl-reset-all'] === 'on' );
-		$is_reseting_wpml_multi = ( $_GET && array_key_exists( 'action', $_GET ) && $_GET['action'] === 'resetwpml' );
-		if ( $this->is_404() || $is_reseting_wpml_single || $is_reseting_wpml_multi ) {
+		if (
+			$this->shutdown_url_validator->is_404() ||
+			$this->shutdown_url_validator->is_resetting_single_site_action() ||
+			$this->shutdown_url_validator->is_resetting_multi_site_action()
+		) {
 			return;
 		}
 
@@ -72,13 +79,6 @@ class WPML_ST_DB_Cache {
 				$this->translations->get_new_translations()
 			);
 		}
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function is_404() {
-		return is_404() || is_home() && '/' !== $_SERVER['REQUEST_URI'];
 	}
 
 	/**

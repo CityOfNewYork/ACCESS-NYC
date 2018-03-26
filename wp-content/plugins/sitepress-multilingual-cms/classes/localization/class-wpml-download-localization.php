@@ -39,9 +39,6 @@ class WPML_Download_Localization {
 				$this->errors[] = 'wp_can_install_language_pack';
 			} else {
 				foreach ( $this->active_languages as $active_language ) {
-					if ( $active_language['code'] === $this->default_language ) {
-						continue;
-					}
 					$result = $this->download_language_pack( $active_language );
 					if ( $result ) {
 						$results[] = $result;

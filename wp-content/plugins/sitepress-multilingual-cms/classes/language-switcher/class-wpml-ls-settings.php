@@ -57,6 +57,9 @@ class WPML_LS_Settings {
 	 */
 	public function reset_ls_settings_action( array $ls_config ) {
 		$restore_ls_settings = ( isset( $_GET[ 'restore_ls_settings' ] ) && 1 == $_GET[ 'restore_ls_settings' ] );
+		$has_valid_nonce     = isset( $_GET[ 'nonce' ] )
+		                       && wp_create_nonce( WPML_LS_Admin_UI::RESET_NONCE_NAME ) === $_GET[ 'nonce' ];
+		$restore_ls_settings = $restore_ls_settings && $has_valid_nonce;
 
 		if ( ! $this->sitepress->get_setting( 'language_selector_initialized' ) || $restore_ls_settings	) {
 
@@ -315,14 +318,16 @@ class WPML_LS_Settings {
 	 * @return WPML_LS_Slot
 	 */
 	public function get_menu_settings_from_id( $term_id ) {
-		$menu_element = new WPML_Menu_Element( $term_id, $this->sitepress );
-		$default_lang = $this->sitepress->get_default_language();
+		if ( $term_id > 0 ) {
+			$menu_element = new WPML_Menu_Element( $term_id, $this->sitepress );
+			$default_lang = $this->sitepress->get_default_language();
 
-		if ( $menu_element->get_language_code() !== $default_lang ) {
-			$nav_menu = $menu_element->get_translation( $default_lang )
-				? $menu_element->get_translation( $default_lang )->get_wp_object() : null;
+			if ( $menu_element->get_language_code() !== $default_lang ) {
+				$nav_menu = $menu_element->get_translation( $default_lang )
+					? $menu_element->get_translation( $default_lang )->get_wp_object() : null;
 
-			$term_id = $nav_menu && ! is_wp_error( $nav_menu ) ? $nav_menu->term_id : null;
+				$term_id = $nav_menu && ! is_wp_error( $nav_menu ) ? $nav_menu->term_id : null;
+			}
 		}
 
 		return $this->get_slot( 'menus', $term_id );

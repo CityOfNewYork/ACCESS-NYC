@@ -92,7 +92,6 @@ class WPML_Menu_Item_Sync extends WPML_Menu_Sync_Functionality {
 	function sync_added_items( array $added_data, array $menus ) {
 		global $wpdb;
 
-		$current_language = $this->sitepress->get_current_language();
 		foreach ( $added_data as $menu_id => $items ) {
 			foreach ( $items as $language => $translations ) {
 				foreach ( $translations as $item_id => $name ) {
@@ -104,41 +103,16 @@ class WPML_Menu_Item_Sync extends WPML_Menu_Sync_Functionality {
 					$object_url          = $translated_object['url'];
 					$icl_st_label_exists = false;
 					$icl_st_url_exists   = false;
-					if ( $object_type === 'custom' && ( function_exists( 'icl_t' ) || ! $this->string_translation_default_language_ok() ) ) {
-						if ( function_exists( 'icl_t' ) ) {
-							$this->sitepress->switch_lang( $language, false );
-							$item             = new stdClass();
-							$item->url        = $object_url;
-							$item->ID         = $item_id;
-							$item->post_title = $object_title;
-							list( $object_title, $object_url ) = $this->icl_t_menu_item( $menu_name,
-							                                                             $item,
-							                                                             $language,
-							                                                             $icl_st_label_exists,
-							                                                             $icl_st_url_exists );
-							$this->sitepress->switch_lang( $current_language, false );
-
-							if ( ! $icl_st_label_exists ) {
-								if( isset( $current_language ) ) {
-									icl_register_string( $menu_name . ' menu',
-										'Menu Item Label ' . $item_id,
-										$object_title, false, $current_language );
-								} else {
-									icl_register_string( $menu_name . ' menu',
-										'Menu Item Label ' . $item_id,
-										$object_title );
-								}
-							}
-							if ( ! $icl_st_url_exists ) {
-								if( isset( $current_language ) ) {
-									icl_register_string( $menu_name . ' menu', 'Menu Item URL ' . $item_id, $object_url, false, $current_language );
-								} else {
-									icl_register_string( $menu_name . ' menu', 'Menu Item URL ' . $item_id, $object_url );
-								}
-							}
-						} else {
-							$object_title = $name;
-						}
+					if ( $object_type === 'custom' && function_exists( 'icl_t' ) ) {
+						$item             = new stdClass();
+						$item->url        = $object_url;
+						$item->ID         = $item_id;
+						$item->post_title = $object_title;
+						list( $object_title, $object_url ) = $this->icl_t_menu_item( $menu_name,
+						                                                             $item,
+						                                                             $language,
+						                                                             $icl_st_label_exists,
+						                                                             $icl_st_url_exists );
 					}
 
 					$menu_data = array(
@@ -289,8 +263,8 @@ class WPML_Menu_Item_Sync extends WPML_Menu_Sync_Functionality {
 				foreach ( $items as $item_id => $name ) {
 					if ( ! in_array( $menu_id . '-' . $item_id, $this->labels_to_add ) ) {
 						$item = get_post( $item_id );
-						icl_register_string( $this->get_menu_name( $menu_id ) . ' menu',
-						                     'Menu Item Label ' . $item_id,
+						icl_register_string( $this->get_menu_name( $menu_id ) . WPML_Menu_Sync_Functionality::STRING_CONTEXT_SUFFIX,
+						                     WPML_Menu_Sync_Functionality::STRING_NAME_LABEL_PREFIX . $item_id,
 						                     $item->post_title );
 						$this->labels_to_add[] = $menu_id . '-' . $item_id;
 					}
@@ -304,8 +278,8 @@ class WPML_Menu_Item_Sync extends WPML_Menu_Sync_Functionality {
 			foreach ( $languages as $items ) {
 				foreach ( $items as $item_id => $url ) {
 					if ( ! in_array( $menu_id . '-' . $item_id, $this->urls_to_add ) ) {
-						icl_register_string( $this->get_menu_name( $menu_id ) . ' menu',
-						                     'Menu Item URL ' . $item_id,
+						icl_register_string( $this->get_menu_name( $menu_id ) . WPML_Menu_Sync_Functionality::STRING_CONTEXT_SUFFIX,
+						                     WPML_Menu_Sync_Functionality::STRING_NAME_URL_PREFIX . $item_id,
 						                     $url );
 						$this->urls_to_add[] = $menu_id . '-' . $item_id;
 					}

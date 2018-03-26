@@ -13,7 +13,6 @@ class WPML_Translation_Management_Filters_And_Actions extends WPML_SP_User {
 	}
 	
 	private function add_filters_for_translating_link_targets( &$tm_instance ) {
-		require_once WPML_PLUGIN_PATH . '/inc/absolute-links/absolute-links.class.php';
 		$this->absolute_links = new AbsoluteLinks();
 		$wp_api = $this->sitepress->get_wp_api();
 		$this->permalinks_converter = new WPML_Absolute_To_Permalinks( $this->sitepress );

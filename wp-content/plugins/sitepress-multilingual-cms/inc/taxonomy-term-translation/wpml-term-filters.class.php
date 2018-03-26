@@ -83,8 +83,7 @@ class WPML_Term_Filters extends WPML_WPDB_And_SP_User {
 					 WHERE tt.parent > 0
 					  AND tt.taxonomy = %s
 					 ORDER BY term_id",
-					$taxonomy,
-					$lang_code
+					$taxonomy
 				)
 			);
 		}

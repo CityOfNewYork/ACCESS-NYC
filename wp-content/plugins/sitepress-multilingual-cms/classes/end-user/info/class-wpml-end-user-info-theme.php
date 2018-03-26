@@ -7,6 +7,9 @@ class WPML_End_User_Info_Theme implements WPML_End_User_Info {
 	/** @var  string */
 	private $parent_theme_name;
 
+	/** @var string */
+	private $author;
+
 	/**
 	 * @param string $theme_name
 	 * @param string $parent_theme_name
@@ -35,12 +38,27 @@ class WPML_End_User_Info_Theme implements WPML_End_User_Info {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function get_author() {
+		return $this->author;
+	}
+
+	/**
+	 * @param string $author
+	 */
+	public function set_author( $author ) {
+		$this->author = $author;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function to_array() {
 		return array(
-			'theme_name' => $this->get_theme_name(),
+			'theme_name'        => $this->get_theme_name(),
 			'parent_theme_name' => $this->get_parent_theme_name(),
+			'author'            => $this->get_author(),
 		);
 	}
 }

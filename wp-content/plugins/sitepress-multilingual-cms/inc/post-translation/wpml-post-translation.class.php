@@ -315,6 +315,7 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 		$skip_sitepress_actions     = array_key_exists( 'skip_sitepress_actions', $_POST );
 		$is_post_a_revision         = 'revision' === $post->post_type;
 		$is_scheduled_to_be_trashed = get_post_meta( $post->ID, '_wp_trash_meta_status', true );
+		$is_add_meta_action         = isset( $_POST['action'] ) && 'add-meta' === $_POST['action'];
 
 		return $this->is_translated_type( $post->post_type )
 		       && ! ( $is_auto_draft
@@ -324,6 +325,7 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 		              || $is_saving_a_revision
 		              || $is_post_a_revision
 		              || $is_scheduled_to_be_trashed
+		              || $is_add_meta_action
 		              || $is_untrashing );
 	}
 

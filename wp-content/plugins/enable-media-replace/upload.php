@@ -201,7 +201,9 @@ list($current_filename, $current_filetype) = $wpdb->get_row($sql, ARRAY_N);
 $current_guid = $current_filename;
 $current_filename = substr($current_filename, (strrpos($current_filename, "/") + 1));
 
-$current_file = get_attached_file((int) $_POST["ID"], apply_filters( 'emr_unfiltered_get_attached_file', true ));
+$ID = (int) $_POST["ID"];
+
+$current_file = get_attached_file($ID, apply_filters( 'emr_unfiltered_get_attached_file', true ));
 $current_path = substr($current_file, 0, (strrpos($current_file, "/")));
 $current_file = str_replace("//", "/", $current_file);
 $current_filename = basename($current_file);
@@ -214,16 +216,16 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 
 	// New method for validating that the uploaded file is allowed, using WP:s internal wp_check_filetype_and_ext() function.
 	$filedata = wp_check_filetype_and_ext($_FILES["userfile"]["tmp_name"], $_FILES["userfile"]["name"]);
-	
+
 	if ($filedata["ext"] == "") {
 		echo __("File type does not meet security guidelines. Try another.", 'enable-media-replace');
 		exit;
 	}
-	
+
 	$new_filename = $_FILES["userfile"]["name"];
 	$new_filesize = $_FILES["userfile"]["size"];
 	$new_filetype = $filedata["type"];
-	
+
 	// save original file permissions
 	$original_file_perms = fileperms($current_file) & 0777;
 
@@ -231,7 +233,10 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		// Drop-in replace and we don't even care if you uploaded something that is the wrong file-type.
 		// That's your own fault, because we warned you!
 
-		emr_delete_current_files( $current_file, $current_metadata );
+        //call replace action to give a chance to plugins like ShortPixel to delete the metadata, backups and cleanup the cache on server
+        do_action('wp_handle_replace', array('post_id' => $ID));
+
+        emr_delete_current_files( $current_file, $current_metadata );
 
 		// Move new file to old location/name
 		move_uploaded_file($_FILES["userfile"]["tmp_name"], $current_file);
@@ -239,19 +244,25 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		// Chmod new file to original file permissions
 		@chmod($current_file, $original_file_perms);
 
-		// Make thumb and/or update metadata
-		wp_update_attachment_metadata( (int) $_POST["ID"], wp_generate_attachment_metadata( (int) $_POST["ID"], $current_file ) );
+        //call upload action to give a chance to plugins like Resize Image After Upload to handle the new image
+        do_action('wp_handle_upload', array('file' => $current_file, 'url' => wp_get_attachment_url($ID), 'type' => $new_filetype));
+
+        // Make thumb and/or update metadata
+		wp_update_attachment_metadata( $ID, wp_generate_attachment_metadata( $ID, $current_file ) );
 
 		// Trigger possible updates on CDN and other plugins 
-		update_attached_file( (int) $_POST["ID"], $current_file);
+		update_attached_file( $ID, $current_file);
 	} elseif ( 'replace_and_search' == $replace_type && apply_filters( 'emr_enable_replace_and_search', true ) ) {
 		// Replace file, replace file name, update meta data, replace links pointing to old file name
+
+		//call replace action to give a chance to plugins like ShortPixel to delete the metadata, backups and cleanup the cache on server
+		do_action('wp_handle_replace', array('post_id' => $ID));
 
 		emr_delete_current_files( $current_file, $current_metadata );
 
 		// Massage new filename to adhere to WordPress standards
 		$new_filename = wp_unique_filename( $current_path, $new_filename );
-		$new_filename = apply_filters( 'emr_unique_filename', $new_filename, $current_path, (int) $_POST['ID'] );
+		$new_filename = apply_filters( 'emr_unique_filename', $new_filename, $current_path, $ID );
 
 		// Move new file to old location, new name
 		$new_file = $current_path . "/" . $new_filename;
@@ -264,10 +275,13 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		$new_filetitle = apply_filters( 'enable_media_replace_title', $new_filetitle ); // Thanks Jonas Lundman (http://wordpress.org/support/topic/add-filter-hook-suggestion-to)
 		$new_guid = str_replace($current_filename, $new_filename, $current_guid);
 
+		//call upload action to give a chance to plugins like ShortPixel to handle the new image
+		//do_action('wp_handle_upload', array('file' => $new_file, 'url' => $new_guid, 'type' => $new_filetype));
+
 		// Update database file name
 		$sql = $wpdb->prepare(
 			"UPDATE $table_name SET post_title = '$new_filetitle', post_name = '$new_filetitle', guid = '$new_guid', post_mime_type = '$new_filetype' WHERE ID = %d;",
-			(int) $_POST["ID"]
+			$ID
 		);
 		$wpdb->query($sql);
 
@@ -276,7 +290,7 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		// Get old postmeta _wp_attached_file
 		$sql = $wpdb->prepare(
 			"SELECT meta_value FROM $postmeta_table_name WHERE meta_key = '_wp_attached_file' AND post_id = %d;",
-			(int) $_POST["ID"]
+			$ID
 		);
 		
 		$old_meta_name = $wpdb->get_row($sql, ARRAY_A);
@@ -286,13 +300,13 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		$new_meta_name = str_replace($current_filename, $new_filename, $old_meta_name);
 		$sql = $wpdb->prepare(
 			"UPDATE $postmeta_table_name SET meta_value = '$new_meta_name' WHERE meta_key = '_wp_attached_file' AND post_id = %d;",
-			(int) $_POST["ID"]
+			$ID
 		);
 		$wpdb->query($sql);
 
 		// Make thumb and/or update metadata
-		$new_metadata = wp_generate_attachment_metadata( (int) $_POST["ID"], $new_file );
-		wp_update_attachment_metadata( (int) $_POST["ID"], $new_metadata );
+		$new_metadata = wp_generate_attachment_metadata( $ID, $new_file );
+		wp_update_attachment_metadata( $ID, $new_metadata );
 
 		// Search-and-replace filename in post database
 		$current_base_url = emr_get_match_url( $current_guid );
@@ -301,23 +315,23 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 			"SELECT ID, post_content FROM $table_name WHERE post_status = 'publish' AND post_content LIKE %s;",
 			'%' . $current_base_url . '%'
 		);
-		
-		
+
+
 		$rs = $wpdb->get_results( $sql, ARRAY_A );
 
 		$number_of_updates = 0;
-		
-		
+
+
 		if ( ! empty( $rs ) ) {
 			$search_urls  = emr_get_file_urls( $current_guid, $current_metadata );
 			$replace_urls = emr_get_file_urls( $new_guid, $new_metadata );
 			$replace_urls = emr_normalize_file_urls( $search_urls, $replace_urls );
 
-	
+
 			foreach ( $rs AS $rows ) {
-				
+
 				$number_of_updates = $number_of_updates + 1;
-				
+
 				// replace old URLs with new URLs.
 				$post_content = $rows["post_content"];
 				$post_content = addslashes( str_replace( $search_urls, $replace_urls, $post_content ) );
@@ -332,16 +346,16 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		}
 
 		// Trigger possible updates on CDN and other plugins 
-		update_attached_file( (int) $_POST["ID"], $new_file );
+		update_attached_file( $ID, $new_file );
 	}
-	
+
 	#echo "Updated: " . $number_of_updates;
 
 	$returnurl = admin_url("/post.php?post={$_POST["ID"]}&action=edit&message=1");
-	
+
 	// Execute hook actions - thanks rubious for the suggestion!
 	if (isset($new_guid)) { do_action("enable-media-replace-upload-done", $new_guid, $current_guid); }
-	
+
 } else {
 	//TODO Better error handling when no file is selected.
 	//For now just go back to media management

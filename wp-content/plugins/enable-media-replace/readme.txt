@@ -1,15 +1,17 @@
 === Enable Media Replace ===
-Contributors: mungobbq
-Tags: admin, attachment, media, files
+Contributors: ShortPixel
+Donate link: https://www.paypal.me/resizeImage
+Tags: admin, replace, attachment, media, files, replace image, replace jpg, change media, replace media
 Requires at least: 4.0
-Tested up to: 4.8
+Tested up to: 4.9.4
 Stable tag: trunk
 
-Enables replacing attachment files by simply uploading a new file in the media library edit view.
+Easily replace any attached image/file by simply uploading a new file in the Media Library edit view.
 
 == Description ==
 
-This plugin allows you to replace a file in your media library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
+**A free, lightweight and easy to use plugin that allows you to seamlessly replace an image or file in your Media Library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
+Supported by the friendly team that created <a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">ShortPixel</a>  :)**
 
 #### A real timesaver
 
@@ -26,6 +28,9 @@ Now you'll be able to replace any uploaded file from the media "edit" view, wher
 
 This plugin is very powerful and a must-have for any larger sites built with WordPress. 
 
+Enable Media Replace is fully compatible with the <a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">ShortPixel Image Optimizer plugin</a>, which, once enabled, will optimize the images you replace automatically.
+It's also compatible with the <a href="https://wordpress.org/plugins/resize-image-after-upload/" target="_blank">Resize Image After Upload plugin</a> which can do a sanity check on the size in pixels of the images uploaded.
+
 #### Display file modification time
 
 There is a shortcode available which picks up the file modification date and displays it in a post or a page. The code is:
@@ -37,12 +42,27 @@ If you want more control over the format used to display the time, you can use t
 
 == Changelog ==
 
+= 3.2.3 =
+* disable ShortPixel recommendation on secondary sites of a multisite install when it was network activated.
+
+= 3.2.2 =
+* Fixed compatibility with ShortPixel and Resize Image After Upload
+* Added ShortPixel links and images, fixed the problem of ShortPixel recommendation not dismissing.
+
+= 3.2.1 =
+* Bugfix, typo made metadata changes (thanks GitHub user icecandy!)
+* Removed Shortpixel links and images
+
+= 3.2 =
+* Tested with WP 4.9.4
+* Added Shortpixel link in replace media screen
+
 = 3.1.1 =
 * Fixed bug introduced in an earlier version, preventing the updating of URLs on pages/posts if the link did not contain the domain name
 
 = 3.1 =
 * Got rid of some pesky old code, and added some better filtering options, thanks to GitHub users speerface, aaemnnosttv, and ururk
-* Brand new, shiny code to replace other image sizes in embeded media, thanks to GitHub user ianmjones!
+* Brand new, shiny code to replace other image sizes in embedded media, thanks to GitHub user ianmjones!
 * Tested with WP 4.8
 
 = 3.0.6 =
@@ -77,8 +97,8 @@ If you want more control over the format used to display the time, you can use t
 * Now inheriting permissions of the replaced files,  [Thank you Fiwad](https://github.com/fiwad)
 
 = 2.9.7RC1 =
-* Moved localization files into own directory. [Thank you Michael](https://github.com/michael-cannon)
-* Moved screensots into own directory. [Thank you Michael](https://github.com/michael-cannon)
+* Moved localization files into their own directory. [Thank you Michael](https://github.com/michael-cannon)
+* Moved screenshots into their own directory. [Thank you Michael](https://github.com/michael-cannon)
 
 = 2.9.6 =
 * Added fix by Grant K Norwood to address a possible security problem in SQL statements. Thanks Grant!
@@ -121,7 +141,7 @@ If you want more control over the format used to display the time, you can use t
 = 2.8 =
 * New and safer method for deleting thumbnails when a new image file is uploaded. 
 * New translations for simplified Chinese (thanks Tunghsiao Liu) and Italian (grazie Marco Chiesi)
-* Added method for detecting upload screen to ensure backwards compatibility with versions pre 3.5
+* Added method for detecting upload screen to ensure backward compatibility with versions pre 3.5
 
 = 2.7 =
 * A couple of changes made to ensure compatibility with WordPress 3.5. Thanks to Elizabeth Powell for the fixes!
@@ -219,5 +239,4 @@ Second, if the file really looks unchanged, make sure WordPress has write permis
 
 == Wishlist / Coming attractons ==
 
-Do you have suggestions? Feel free to contact me at mans@mansjonasson.se
-
+Do you have suggestions? Feel free to contact contact ShortPixel <a href="https://shortpixel.com/contact" target="_blank">here</a>

@@ -66,11 +66,6 @@ switch($request){
         $this->save_settings($iclsettings);
         echo 1;
         break;
-    case 'icl_blog_posts':
-        $iclsettings['show_untranslated_blog_posts'] = $_POST['icl_untranslated_blog_posts'];
-        $this->save_settings($iclsettings);
-        echo 1;
-        break;
     case 'icl_page_sync_options':
         $iclsettings['sync_page_ordering'] = @intval($_POST['icl_sync_page_ordering']);
         $iclsettings['sync_page_parent'] = @intval($_POST['icl_sync_page_parent']);
@@ -277,6 +272,7 @@ switch($request){
                     $this->verify_taxonomy_translations($k);
                 }
             }
+	        $iclsettings['taxonomies_unlocked_option'] = $_POST['icl_sync_tax_unlocked'];
 			if ( isset( $iclsettings ) ) {
 				$this->save_settings($iclsettings);
 			}
@@ -284,9 +280,11 @@ switch($request){
         echo '1|';
         break;
 	case 'icl_custom_posts_sync_options':
-		$new_options = ! empty( $_POST['icl_sync_custom_posts'] ) ? $_POST['icl_sync_custom_posts'] : array();
+		$new_options      = ! empty( $_POST['icl_sync_custom_posts'] ) ? $_POST['icl_sync_custom_posts'] : array();
+		$unlocked_options = ! empty( $_POST['icl_sync_custom_posts_unlocked'] ) ? $_POST['icl_sync_custom_posts_unlocked'] : array();
 		/** @var WPML_Settings_Helper $settings_helper */
 		$settings_helper = wpml_load_settings_helper();
+		$settings_helper->update_cpt_unlocked_settings( $unlocked_options );
 		$settings_helper->update_cpt_sync_settings( $new_options );
 		echo '1|';
 		break;

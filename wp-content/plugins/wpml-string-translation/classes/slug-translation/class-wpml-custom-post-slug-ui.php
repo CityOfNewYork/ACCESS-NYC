@@ -10,7 +10,7 @@ class WPML_Custom_Post_Slug_UI extends WPML_WPDB_And_SP_User {
 		parent::__construct( $wpdb, $sitepress );
 
 		$this->settings          = new WPML_post_slug_translation_settings( $sitepress );
-		$this->post_sync_setting = new WPML_custom_post_sync_settings( $sitepress );
+		$this->post_sync_setting = new WPML_Custom_Post_Sync_Settings( $sitepress );
 
 		wp_enqueue_script( 'wpml-custom-post-ui', WPML_ST_URL . '/res/js/wpml_custom_post_ui.js', array( 'jquery' ), WPML_ST_VERSION, true );
 	}

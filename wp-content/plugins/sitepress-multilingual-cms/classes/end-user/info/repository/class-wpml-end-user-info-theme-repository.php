@@ -16,7 +16,10 @@ class WPML_End_User_Info_Theme_Repository implements WPML_End_User_Info_Reposito
 			return null;
 		}
 
-		return new WPML_End_User_Info_Theme( $current_theme_name, $parent_theme_name );
+		$theme = new WPML_End_User_Info_Theme( $current_theme_name, $parent_theme_name );
+		$theme->set_author( $author );
+
+		return $theme;
 	}
 
 	/**

@@ -433,19 +433,32 @@ abstract class Base extends Plugin_Base {
 	 * @since  3.0.0
 	 * @uses   get_shortcode_regex
 	 *
-	 * @param  string $content  The GC content.
-	 * @param  int    $position Image positional argument.
+	 * @param  string $content The GC content.
+	 * @param  int    $args    Args for field/image positional argument.
 	 *
-	 * @return false|array      Array of attributes on success.
+	 * @return false|array     Array of attributes on success.
 	 */
-	public function get_media_shortcode_attributes( $content, $position ) {
+	public function get_media_shortcode_attributes( $content, $args ) {
+		$args = wp_parse_args( $args, array(
+			'position'     => 1,
+			'field_number' => '',
+		) );
 		preg_match_all( '@\[([^<>&/\[\]\x00-\x20=]++)@', $content, $matches );
 
-		$to_find = array( "media-{$position}" );
+		$suffix = $args['field_number'] > 1 ? '_' . $args['field_number'] : '';
+		$to_find = array( "media{$suffix}-{$args['position']}" );
 		$tagnames = array_intersect( $to_find, $matches[1] );
 
 		if ( empty( $tagnames ) ) {
-			return false;
+			if ( ! $suffix ) {
+				$to_find = array( "media_1-{$args['position']}" );
+				$tagnames = array_intersect( $to_find, $matches[1] );
+				if ( empty( $tagnames ) ) {
+					return false;
+				}
+			} else {
+				return false;
+			}
 		}
 
 		$pattern = get_shortcode_regex( $tagnames );
@@ -454,6 +467,7 @@ abstract class Base extends Plugin_Base {
 		preg_match_all( "/$pattern/", $content, $matches );
 
 		if ( isset( $matches[3], $matches[0] ) && is_array( $matches[3] ) ) {
+			$matches[3] = wp_unslash( $matches[3] ); // Fixes quoted attributes.
 			$replace = array();
 			foreach ( $matches[0] as $index => $shortcode ) {
 				$replace[ $shortcode ] = shortcode_parse_atts( $matches[3][ $index ] );
