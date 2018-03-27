@@ -29435,6 +29435,8 @@ ResultsField = function () {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    this._disabled = false;
   }
 
   /**
@@ -29611,15 +29613,17 @@ ResultsField = function () {
     event) {var _this2 = this;
       var action = (0, _jquery2.default)(event.currentTarget).attr('action');
       var data = (0, _jquery2.default)(event.currentTarget).serializeArray();
-      var $submit = (0, _jquery2.default)(event.currentTarget).find('button[type="submit"]');
       var $buttons = (0, _jquery2.default)(event.currentTarget).find('button');
       var $spinner = (0, _jquery2.default)(event.currentTarget).find(ResultsField.Selectors.SPINNER);
 
       event.preventDefault();
 
-      $submit.prop('disabled', true);
-      $buttons.prop('style', 'display: none'); // hide buttons
-      $spinner.prop('style', ''); // show spinner
+      if (this._disabled) return;
+
+      this._disabled = true;
+
+      $buttons.hide();
+      $spinner.show();
 
       var payload = {};
       payload['action'] = 'response_update';
@@ -29634,9 +29638,9 @@ ResultsField = function () {
         toggleClass('hidden').
         prop('aria-hidden', false);
       }).fail(function (response) {
-        $submit.prop('disabled', false);
-        $buttons.prop('style', ''); // show submit button
-        $spinner.prop('style', 'display: none'); // hide spinner
+        _this2._disabled = false;
+        $buttons.show();
+        $spinner.hide();
         alert('Something went wrong. Please try again later.');
         /* eslint-disable */
         if (_utility2.default.debug()) console.log(response);
@@ -33680,4 +33684,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.b193b8be02015cad736cb5874e0967de.js.map
+//# sourceMappingURL=main-field.50449a607766464c179ad755aaf0c81b.js.map
