@@ -1,13 +1,14 @@
 <?php
 /**
  * Plugin Name: Autoloader
- * Description: The autoloader for 'must use' plugins. These plugins are created exclusively for ACCESS NYC for application functions. This loader includes "DroolsProxy", "SendMeNYC", and "StatCollector"
- * Author: NYC Opportunity (autoloader), Blue State Digital (plugins)
+ * Description: The autoloader for 'must use' plugins. These plugins are created exclusively for ACCESS NYC for application functions. This loader includes "Config", "DroolsProxy", "SendMeNYC", and "StatCollector"
+ * Author: NYC Opportunity
  */
 
 namespace MustUsePlugins;
 
 const PLUGINS = [
+  '/config/Config.php',
   '/drools-proxy/DroolsProxy.php',
   '/sendmenyc/SendMeNYC.php',
   '/statcollector/StatCollector.php'

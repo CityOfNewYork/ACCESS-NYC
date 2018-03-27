@@ -1,0 +1,11 @@
+{
+    "require": {
+        "nyco/wp-assets": "0.0.5",
+        "mustangostang/spyc": "^0.6.2"
+    },
+    "config": {
+        "preferred-install": {
+          "nyco/*": "dist"
+        }
+    }
+}
