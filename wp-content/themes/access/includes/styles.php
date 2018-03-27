@@ -10,10 +10,8 @@
  * @return null
  */
 function enqueue_language_style($name) {
-  require_once(
-    get_template_directory() .
-    '/vendor/nyco/wp-assets/dist/style.php'
-  );
+  var_dump(WP_CONTENT_DIR . '/vendor/nyco/wp-assets/dist/style.php');
+  require_once(WP_CONTENT_DIR . '/vendor/nyco/wp-assets/dist/style.php');
 
   $languages = array('ar', 'ko', 'ur', 'zh-hant');
   error_reporting(0);
