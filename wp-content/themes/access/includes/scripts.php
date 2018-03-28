@@ -11,10 +11,7 @@
  * @return null
  */
 function enqueue_script($name) {
-  require_once(
-    get_template_directory() .
-    '/vendor/nyco/wp-assets/dist/script.php'
-  );
+  require_once ABSPATH . '/vendor/nyco/wp-assets/dist/script.php';
 
   $script = Nyco\Enqueue\script($name, '.min');
 }
