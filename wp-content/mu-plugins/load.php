@@ -8,7 +8,7 @@
 namespace MustUsePlugins;
 
 const PLUGINS = [
-  '/config/Config.php',
+  '/wp-config/Config.php',
   '/drools-proxy/DroolsProxy.php',
   '/sendmenyc/SendMeNYC.php',
   '/statcollector/StatCollector.php'
