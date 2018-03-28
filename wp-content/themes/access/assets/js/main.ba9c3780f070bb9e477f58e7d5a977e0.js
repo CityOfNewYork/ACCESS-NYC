@@ -12096,13 +12096,12 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
     _utility2.default.track(key, data);
   });
 
-  // Webtrends - Capture the search query for on-site search
+  // Webtrends - Capture the queries on search page
   if (~window.location.href.indexOf('?s=')) {
-    var $query = window.location.href;
-    $('head').append('<meta name="WT.oss" content="' +
-    $query.split('?s=')[1] + '">');
-    $('head').append('<meta name="WT.oss_r" content="' +
-    $('.program-card').length + '">');
+    var key = $('[data-js*="track"]').attr('data-track-key');
+    var data = JSON.parse($('[data-js*="track"]').
+    attr('data-track-data'));
+    _utility2.default.track(key, data);
   }
 
   // On the search results page, submits the search form when a category is
@@ -12122,15 +12121,6 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
     toggleClass('open');
   });
   // END TODO
-
-  // Webtrends - Capture the search query for on-site search
-  if (~window.location.href.indexOf('?s=')) {
-    var _$query = window.location.href;
-    $('head').append('<meta name="WT.oss" content="' +
-    _$query.split('?s=')[1] + '">');
-    $('head').append('<meta name="WT.oss_r" content="' +
-    $('.program-card').length + '">');
-  }
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
@@ -15926,4 +15916,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.539c213b586ad782cad4d051a9d12396.js.map
+//# sourceMappingURL=main.ba9c3780f070bb9e477f58e7d5a977e0.js.map

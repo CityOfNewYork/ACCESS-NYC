@@ -10,7 +10,7 @@
             <div class="search-form program-search-form">
               <label class="type-small" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
               <div class="search-form-field-container">
-                <input class="search-form-field" name="s" type="text" value="{{query}}" id="program-search-field">
+                <input class="search-form-field" name="s" type="text" value="{{query}}" id="program-search-field" data-js="track" data-track-key="Search Results" data-track-data='[{"WT.oss": "{{query}}", "WT.oss_r": "{{posts |length}}"}]'>
                 <button class="btn-text search-form-submit" type="submit">
                   <svg class="icon icon-search">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use>

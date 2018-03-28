@@ -59,13 +59,12 @@ import Utility from 'modules/utility';
     Utility.track(key, data);
   });
 
-  // Webtrends - Capture the search query for on-site search
+  // Capture the queries on Search page
   if (~window.location.href.indexOf('?s=')) {
-    let $query = window.location.href;
-    $('head').append('<meta name="WT.oss" content="'
-      + $query.split('?s=')[1] + '">');
-    $('head').append('<meta name="WT.oss_r" content="'
-      + $('.program-card').length +'">');
+    let key = $('[data-js*="track"]').attr('data-track-key');
+    let data = JSON.parse($('[data-js*="track"]')
+      .attr('data-track-data'));
+    Utility.track(key, data);
   }
 
   // On the search results page, submits the search form when a category is
@@ -85,15 +84,6 @@ import Utility from 'modules/utility';
       .toggleClass('open');
   });
   // END TODO
-
-  // Webtrends - Capture the search query for on-site search
-  if (~window.location.href.indexOf('?s=')) {
-    let $query = window.location.href;
-    $('head').append('<meta name="WT.oss" content="'
-      + $query.split('?s=')[1]+'">');
-    $('head').append('<meta name="WT.oss_r" content="'
-      + $('.program-card').length +'">');
-  }
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
