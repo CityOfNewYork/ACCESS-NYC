@@ -17,22 +17,17 @@
             {{ __('Is anyone in your household currently enrolled in these programs?', translationID) }}
           </label>
           <div class="screener-checkboxes">
-            {% for category in categories %}
-            {% if category.code %}
-            {% set program = category.code %}
-            {% else %}
-            {% set program = category.value %}
-            {% endif %}
+            {% for program in programs %}
             <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
               <input type="checkbox"
-                value="{{ program }}"
+                value="{{ program.code }}"
                 data-object="client"
                 data-key="programsEnrolled"
-                v-bind:checked="client._attrs.programsEnrolled.indexOf('{{ program }}') > -1"
+                v-bind:checked="client._attrs.programsEnrolled.indexOf('{{ program.code }}') > -1"
                 v-on:change="push">
-              <span class="styled-checkbox-label">{{ __(category.text, translationID) }}</span>
+              <span class="styled-checkbox-label">{{ __(program.text, translationID) }}</span>
             </label>
-            {% if category.value == 'section-8' %}<hr class="screener-divider m-top m-bottom-3">{% endif %}
+            {% if program.value == 'section-8' %}<hr class="screener-divider m-top m-bottom-3">{% endif %}
             {% endfor %}
           </div>
         </div>
