@@ -20,9 +20,9 @@
             <a class="m-horizontal" data-js="question" href="#question-client-needs" v-on:click="track('Confirmation: Edit', [{'DCS.dcsuri': 'question-client-needs/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
-          <div class="recap-program-categories" v-if="categories.length">
+          <div class="recap-program-categories" v-if="client._attrs.programCategories.length">
 
-            <div class="program-category" v-for="(c, index) in categories">
+            <div class="program-category" v-for="(c, index) in client._attrs.programCategories">
               <div class="program-icon">
                 <span class="icon">
                   <svg v-bind:class="'icon icon-' + c">
@@ -53,10 +53,11 @@
             <a class="m-horizontal" data-js="question" href="#question-client-services" v-on:click="track('Confirmation: Edit', [{'DCS.dcsuri': 'question-client-services/edit'}])">{{ __('Edit', translationID) }}</a>
           </h3>
 
-          <div class="recap-household-member-detail" v-if="programsFilter.length > 0 || categoriesCurrent.length > 0" >
+          <div class="recap-household-member-detail" v-if="client._attrs.programsEnrolled.length > 0" >
             <ul class="recap-detail-info w-100">
-              <li class="m-bottom" v-for="(program, index) in programsFilter">v{ localString(program) } <button type="button" class="btn-text btn-link p-horizontal" v-on:click="programsFilter.splice(index, 1)">{{ __('Remove', translationID) }}</button></li>
-              <li class="m-bottom" v-for="(program, index) in categoriesCurrent">v{ localString(program) } <button type="button" class="btn-text btn-link p-horizontal" v-on:click="categoriesCurrent.splice(index, 1)">{{ __('Remove', translationID) }}</button></li>
+              <li class="m-bottom" v-for="(program, index) in client._attrs.programsEnrolled">
+                  v{ localString(program) } <button type="button" class="btn-text btn-link p-horizontal" v-on:click="client._attrs.programsEnrolled.splice(index, 1)">{{ __('Remove', translationID) }}</button>
+              </li>
             </ul>
           </div><div v-else>
 
