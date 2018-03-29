@@ -56,15 +56,9 @@ class ScreenerField {
         client: new ScreenerClient(),
         staff: new ScreenerStaff(),
         /* UI Data */
-        /** @type {array} program categories to group results in */
-        categories: [],
-        /** @type {array} */
-        categoriesCurrent: [],
-        /** @type {array} programs to filter out of results */
-        programsFilter: [],
-        /** @type {boolean} */
+        /** @type {boolean} Wether the disclaimer is checked */
         disclaimer: false,
-        /** @type {Boolean} */
+        /** @type {Boolean} Throttle for submitting timeout */
         submitting: false,
         /** @type {array} */
         expenses: [],
@@ -470,6 +464,7 @@ class ScreenerField {
   _submit(event) {
     let url = event.target.dataset.action;
     let json = this._getDroolsJSON(this._vue);
+    let programsFilter = this._vue.client.get('programsEnrolled');
 
     this._vue.submitting = true;
 
@@ -517,7 +512,7 @@ class ScreenerField {
           (item) => _.isString(item)
         // filter out the programs they are already receiving
         ).filter(
-          (item) => (this._vue.programsFilter.indexOf(item) === -1)
+          (item) => (programsFilter.indexOf(item) === -1)
         ).uniq().value();
 
       if (Utility.debug()) {
@@ -527,8 +522,8 @@ class ScreenerField {
 
       const params = {};
 
-      if (this._vue.categories.length) {
-        params.categories = this._vue.categories.join(',');
+      if (this._vue.client._attrs.programCategories.length) {
+        params.categories = this._vue.client._attrs.programCategories.join(',');
       }
 
       if (programs.length) {
