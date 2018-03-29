@@ -46,7 +46,11 @@ class ScreenerClient {
       /** @type {boolean} */
       currentClient: false,
       /** @type {string} */
-      caseNumber: ''
+      caseNumber: '',
+      /** @type {array} program categories to group results in */
+      programCategories: [],
+      /** @type {array} */
+      programsEnrolled: []
     };
     if (obj) {
       this.set(obj);

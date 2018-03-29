@@ -3,8 +3,8 @@
   "version": "2.0.2",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "scripts": {
-    "gulp development": "NODE_ENV='development' gulp",
-    "gulp production": "NODE_ENV='production' gulp",
+    "development": "NODE_ENV='development' gulp",
+    "production": "NODE_ENV='production' gulp",
     "predeploy": "NODE_ENV='production' gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

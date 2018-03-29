@@ -29740,7 +29740,11 @@ ScreenerClient = function () {
       /** @type {boolean} */
       currentClient: false,
       /** @type {string} */
-      caseNumber: '' };
+      caseNumber: '',
+      /** @type {array} program categories to group results in */
+      programCategories: [],
+      /** @type {array} */
+      programsEnrolled: [] };
 
     if (obj) {
       this.set(obj);
@@ -29899,15 +29903,9 @@ ScreenerField = function () {
         client: new _screenerClient2.default(),
         staff: new _screenerStaff2.default(),
         /* UI Data */
-        /** @type {array} program categories to group results in */
-        categories: [],
-        /** @type {array} */
-        categoriesCurrent: [],
-        /** @type {array} programs to filter out of results */
-        programsFilter: [],
-        /** @type {boolean} */
+        /** @type {boolean} Wether the disclaimer is checked */
         disclaimer: false,
-        /** @type {Boolean} */
+        /** @type {Boolean} Throttle for submitting timeout */
         submitting: false,
         /** @type {array} */
         expenses: [],
@@ -30313,6 +30311,7 @@ ScreenerField = function () {
     event) {var _this4 = this;
       var url = event.target.dataset.action;
       var json = this._getDroolsJSON(this._vue);
+      var programsFilter = this._vue.client.get('programsEnrolled');
 
       this._vue.submitting = true;
 
@@ -30360,7 +30359,7 @@ ScreenerField = function () {
         function (item) {return _underscore2.default.isString(item);}
         // filter out the programs they are already receiving
         ).filter(
-        function (item) {return _this4._vue.programsFilter.indexOf(item) === -1;}).
+        function (item) {return programsFilter.indexOf(item) === -1;}).
         uniq().value();
 
         if (_utility2.default.debug()) {
@@ -30370,8 +30369,8 @@ ScreenerField = function () {
 
         var params = {};
 
-        if (_this4._vue.categories.length) {
-          params.categories = _this4._vue.categories.join(',');
+        if (_this4._vue.client._attrs.programCategories.length) {
+          params.categories = _this4._vue.client._attrs.programCategories.join(',');
         }
 
         if (programs.length) {
@@ -33684,4 +33683,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.50449a607766464c179ad755aaf0c81b.js.map
+//# sourceMappingURL=main-field.0b73a41eb7e68fdc159bca4fd5173e18.js.map
