@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6805d36fc8becc614fec19de99920767",
+    "content-hash": "790deec22788613f15275b73f39ce3fd",
     "packages": [
         {
             "name": "composer/installers",
@@ -274,6 +274,49 @@
                 "wordpress"
             ],
             "time": "2018-02-09T21:30:33+00:00"
+        },
+        {
+            "name": "nyco/wp-config",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
+                "reference": "c83efafefb03d56a3b00ee9249eb8a894cb6b4e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/c83efafefb03d56a3b00ee9249eb8a894cb6b4e1",
+                "reference": "c83efafefb03d56a3b00ee9249eb8a894cb6b4e1",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "mustangostang/spyc": "^0.6.2"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.3",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "wordpress-muplugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Devon Hirth",
+                    "email": "dehirth@nycopportunity.nyc.gov",
+                    "homepage": "https://github.com/devowhippit"
+                }
+            ],
+            "description": "A WordPress package for environment configuration.",
+            "homepage": "https://github.com/cityofnewyork/nyco-wp-config",
+            "keywords": [
+                "configuration",
+                "environment",
+                "wordpress"
+            ],
+            "time": "2018-03-29T20:54:47+00:00"
         },
         {
             "name": "psr/log",

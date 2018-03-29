@@ -1,0 +1,6 @@
+
+development:
+  SOME_VAR: someVarHere
+
+production:
+  SOME_VAR: someVarHere
