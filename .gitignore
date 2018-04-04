@@ -1,3 +1,11 @@
+/wp-content/mu-plugins/config/config.yml
+
+# Composer #
+############
+/vendor/*
+# Add packages that need to be shipped with the source here
+!/vendor/nyco/
+!/vendor/mustangostang/
 
 # WordPress #
 ############
@@ -78,10 +86,6 @@ sitemap.xml.gz
 # SASS #
 ########
 .sass-cache
-
-# Composer #
-############
-/vendor
 
 # npm #
 #######

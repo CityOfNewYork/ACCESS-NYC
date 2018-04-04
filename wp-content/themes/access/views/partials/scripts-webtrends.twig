@@ -1,0 +1,9 @@
+{% if function('getenv', 'WEBTRENDS_ID') != '' %}
+<script>
+  var prod_dcsId_val = "{{ function('getenv', 'WEBTRENDS_ID') }}";
+  var prod_host = "{{ function('getenv', 'WEBTRENDS_HOST') }}";
+  var test_dcsId_val = "{{ function('getenv', 'WEBTRENDS_ID_TESTING') }}";
+  var test_host = "{{ function('getenv', 'WEBTRENDS_HOST_TESTING') }}";
+</script>
+<script src="https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js"></script>
+{% endif  %}
