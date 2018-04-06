@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit36779084fdbc737f3255ad44c8114c03
 {
+    public static $files = array (
+        '04c6c5c2f7095ccf6c481d3e53e1776f' => __DIR__ . '/..' . '/mustangostang/spyc/Spyc.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
