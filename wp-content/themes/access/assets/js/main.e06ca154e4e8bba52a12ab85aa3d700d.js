@@ -15862,21 +15862,18 @@ Utility.track = function (key, data) {
     /* eslint-enable no-undef */
     var wtData = d;
     var prefix = {};
-
     prefix['WT.ti'] = key;
     wtData.unshift(prefix);
-
     // format data for Webtrends
     wtData = {
       argsa: _underscore2.default.flatten(_underscore2.default.map(wtData, function (value) {
         return _underscore2.default.pairs(value);
       })) };
 
-
     wt.multiTrack(wtData);
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
-    console.dir(['track: \'' + key + '\'', wtData]);
+    console.dir(['webtrends: multiTrack \'' + key + '\'', wtData]);
     /* eslint-enable no-console, no-debugger */
   }
 
@@ -15892,7 +15889,27 @@ Utility.track = function (key, data) {
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
-    console.dir(['track: \'' + key + '\'', sData]);
+    console.dir(['segment: track \'' + key + '\'', sData]);
+    /* eslint-enable no-console, no-debugger */
+  }
+
+  /**
+     * Google Analytics
+     */
+  /* eslint-disable no-undef */
+  if (typeof ga !== 'undefined') {
+    var gaData = d;
+    gaData = gaData[0]['DCS.dcsuri'].split('/');
+    gaData = {
+      'eventLabel': gaData[1],
+      'eventCategory': gaData[2],
+      'eventAction': gaData[3] };
+
+    ga('send', 'event', gaData);
+    /* eslint-enable no-undef */
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug())
+    console.dir(['ga: send event', gaData]);
     /* eslint-enable no-console, no-debugger */
   }
 };
@@ -15911,7 +15928,10 @@ Utility.CONFIG = {
   URL_PIN_BLUE: '/wp-content/themes/access/assets/img/map-pin-blue.png',
   URL_PIN_BLUE_2X: '/wp-content/themes/access/assets/img/map-pin-blue-2x.png',
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
-  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png' };exports.default =
+  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
+  GOOGLE_DIMENSIONS: {
+    'DCS.dcsuri': 'dimension1' } };exports.default =
+
 
 
 Utility;
@@ -15926,4 +15946,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.539c213b586ad782cad4d051a9d12396.js.map
+//# sourceMappingURL=main.e06ca154e4e8bba52a12ab85aa3d700d.js.map
