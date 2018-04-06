@@ -8,13 +8,11 @@
 
 namespace Config;
 
-
 /**
  * Dependencies
  */
 
 use Spyc;
-
 
 /**
  * Constants
@@ -22,7 +20,6 @@ use Spyc;
 
 // List of protected constants
 const PROTECT = ['WP_ENV'];
-
 
 /**
  * WP Engine
@@ -57,12 +54,14 @@ if (file_exists(WP_CONTENT_DIR . '/mu-plugins/config/config.yml')) {
   $config = Spyc::YAMLLoad(WP_CONTENT_DIR . '/mu-plugins/config/config.yml');
   if (null !== WP_ENV && isset($config[WP_ENV])) {
     $config = $config[WP_ENV];
-    foreach ($config as $key => $value) {
-      $name = strtoupper($key);
-      if (!in_array($name, PROTECT)) {
-        putenv("$name=$value");
-        $_ENV[$name] = getenv($name);
-        define($name, getenv($name));
+    if (is_array($config) || is_object($config)) {
+      foreach ($config as $key => $value) {
+        $name = strtoupper($key);
+        if (!in_array($name, PROTECT)) {
+          putenv("$name=$value");
+          $_ENV[$name] = getenv($name);
+          define($name, getenv($name));
+        }
       }
     }
   }
