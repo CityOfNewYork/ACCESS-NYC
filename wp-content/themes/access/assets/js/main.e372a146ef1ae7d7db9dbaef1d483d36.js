@@ -12091,18 +12091,51 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
 
   // A basic click tracking function
   $body.on('click', '[data-js*="track"]', function (event) {
+    /* eslint-disable no-console, no-debugger */
     var key = event.currentTarget.dataset.trackKey;
     var data = JSON.parse(event.currentTarget.dataset.trackData);
     _utility2.default.track(key, data);
+    /* eslint-enable no-console, no-debugger */
   });
 
-  // Webtrends - Capture the queries on search page
+  // Capture the queries on Search page
   if (~window.location.href.indexOf('?s=')) {
     var key = $('[data-js*="track"]').attr('data-track-key');
     var data = JSON.parse($('[data-js*="track"]').
     attr('data-track-data'));
     _utility2.default.track(key, data);
   }
+
+  // Webtrends Scenario Analysis
+  if (~window.location.href.indexOf('eligibility')) {
+    var url = window.location.href;
+    var _key = '';
+    var _data = [];
+    $(window).on('hashchange', function () {
+      url = window.location.href;
+      _key = $('#' + url.split('#')[1]).attr('data-track-key');
+      if (url.split('#')[1] == 'step-8') {
+        _data = JSON.parse($('#' + url.split('#')[1]).
+        attr('data-track-data'));
+        _utility2.default.track(_key, _data);
+        _data = [];
+      } else {
+        _data = JSON.parse($('#' + url.split('#')[1]).
+        attr('data-track-data'));
+        _utility2.default.track(_key, _data);
+      }
+    });
+    $('#step-8').on('change', 'label', function (event) {
+      _data = JSON.parse(event.currentTarget.dataset.trackData);
+    });
+    $('[href="#step-9"]').on('click', function () {
+      if (_data.length == 0) {
+        _data = JSON.parse($('#step-8-hoh').attr('data-track-data'));
+      }
+      _utility2.default.track(_key, _data);
+    });
+  }
+  // end of Webtrends Scenario Analysis
 
   // On the search results page, submits the search form when a category is
   // chosen.
@@ -15916,4 +15949,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.ba9c3780f070bb9e477f58e7d5a977e0.js.map
+//# sourceMappingURL=main.e372a146ef1ae7d7db9dbaef1d483d36.js.map

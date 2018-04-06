@@ -54,9 +54,11 @@ import Utility from 'modules/utility';
 
   // A basic click tracking function
   $body.on('click', '[data-js*="track"]', (event) => {
+    /* eslint-disable no-console, no-debugger */
     let key = event.currentTarget.dataset.trackKey;
     let data = JSON.parse(event.currentTarget.dataset.trackData);
     Utility.track(key, data);
+    /* eslint-enable no-console, no-debugger */
   });
 
   // Capture the queries on Search page
@@ -66,6 +68,37 @@ import Utility from 'modules/utility';
       .attr('data-track-data'));
     Utility.track(key, data);
   }
+
+  // Webtrends Scenario Analysis
+  if (~window.location.href.indexOf('eligibility')) {
+    let url = window.location.href;
+    let key = '';
+    let data = [];
+    $(window).on('hashchange', function() {
+      url = window.location.href;
+      key = $('#' + url.split('#')[1]).attr('data-track-key');
+      if(url.split('#')[1] == 'step-8') {
+        data = JSON.parse($('#' + url.split('#')[1])
+          .attr('data-track-data'));
+        Utility.track(key, data);
+        data = [];
+      }else{
+        data = JSON.parse($('#' + url.split('#')[1])
+        .attr('data-track-data'));
+        Utility.track(key, data);
+      }
+    });
+    $('#step-8').on('change', 'label', (event) => {
+      data = JSON.parse(event.currentTarget.dataset.trackData);
+    });
+    $('[href="#step-9"]').on('click', function() {
+      if(data.length==0) {
+        data = JSON.parse($('#step-8-hoh').attr('data-track-data'));
+      }
+      Utility.track(key, data);
+    });
+  }
+  // end of Webtrends Scenario Analysis
 
   // On the search results page, submits the search form when a category is
   // chosen.
