@@ -26,7 +26,8 @@
             {% endif %}
             <label class="screener-checkbox styled-checkbox screener-checkboxes-program screener-label">
               <input class="js-screener-validate-step-ui" type="checkbox" name="category" value="{{ category.slug }}"
-                data-object="categories"
+                data-object="client"
+                data-key="programCategories"
                 v-on:change="push">
               <span class="styled-checkbox-label">
                 <div class="program-category">

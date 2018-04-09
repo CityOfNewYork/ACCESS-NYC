@@ -1,4 +1,5 @@
-<fieldset class="screener-body-step js-screener-step" id="step-7">
+<fieldset class="screener-body-step js-screener-step" id="step-7" data-track-key="Screener Step: 7" 
+  data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "7-NumOfHHMembers"}]'>
   <div class="screener-step">{{ __('Step 7 of 10', 'accessnyc-screener') }}</div>
   <h1 class="screener-title">{{ __('Tell us about your household.', 'accessnyc-screener') }}</h1>
   <div class="screener-question">
@@ -9,5 +10,6 @@
       <input id="household-members" type="number" name="Household.members" data-type="integer" min="1" max="8" required value="1">
     </div>
   </div>
-  <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-8">{{ __('Continue', 'accessnyc-screener') }}</a></p>
+  <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-8">
+    {{ __('Continue', 'accessnyc-screener') }}</a></p>
 </fieldset>{# /#step-7 #}

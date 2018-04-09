@@ -12091,19 +12091,51 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
 
   // A basic click tracking function
   $body.on('click', '[data-js*="track"]', function (event) {
+    /* eslint-disable no-console, no-debugger */
     var key = event.currentTarget.dataset.trackKey;
     var data = JSON.parse(event.currentTarget.dataset.trackData);
     _utility2.default.track(key, data);
+    /* eslint-enable no-console, no-debugger */
   });
 
-  // Webtrends - Capture the search query for on-site search
+  // Capture the queries on Search page
   if (~window.location.href.indexOf('?s=')) {
-    var $query = window.location.href;
-    $('head').append('<meta name="WT.oss" content="' +
-    $query.split('?s=')[1] + '">');
-    $('head').append('<meta name="WT.oss_r" content="' +
-    $('.program-card').length + '">');
+    var key = $('[data-js*="track"]').attr('data-track-key');
+    var data = JSON.parse($('[data-js*="track"]').
+    attr('data-track-data'));
+    _utility2.default.track(key, data);
   }
+
+  // Webtrends Scenario Analysis
+  if (~window.location.href.indexOf('eligibility')) {
+    var url = window.location.href;
+    var _key = '';
+    var _data = [];
+    $(window).on('hashchange', function () {
+      url = window.location.href;
+      _key = $('#' + url.split('#')[1]).attr('data-track-key');
+      if (url.split('#')[1] == 'step-8') {
+        _data = JSON.parse($('#' + url.split('#')[1]).
+        attr('data-track-data'));
+        _utility2.default.track(_key, _data);
+        _data = [];
+      } else {
+        _data = JSON.parse($('#' + url.split('#')[1]).
+        attr('data-track-data'));
+        _utility2.default.track(_key, _data);
+      }
+    });
+    $('#step-8').on('change', 'label', function (event) {
+      _data = JSON.parse(event.currentTarget.dataset.trackData);
+    });
+    $('[href="#step-9"]').on('click', function () {
+      if (_data.length == 0) {
+        _data = JSON.parse($('#step-8-hoh').attr('data-track-data'));
+      }
+      _utility2.default.track(_key, _data);
+    });
+  }
+  // end of Webtrends Scenario Analysis
 
   // On the search results page, submits the search form when a category is
   // chosen.
@@ -12122,15 +12154,6 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
     toggleClass('open');
   });
   // END TODO
-
-  // Webtrends - Capture the search query for on-site search
-  if (~window.location.href.indexOf('?s=')) {
-    var _$query = window.location.href;
-    $('head').append('<meta name="WT.oss" content="' +
-    _$query.split('?s=')[1] + '">');
-    $('head').append('<meta name="WT.oss_r" content="' +
-    $('.program-card').length + '">');
-  }
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
@@ -15862,21 +15885,18 @@ Utility.track = function (key, data) {
     /* eslint-enable no-undef */
     var wtData = d;
     var prefix = {};
-
     prefix['WT.ti'] = key;
     wtData.unshift(prefix);
-
     // format data for Webtrends
     wtData = {
       argsa: _underscore2.default.flatten(_underscore2.default.map(wtData, function (value) {
         return _underscore2.default.pairs(value);
       })) };
 
-
     wt.multiTrack(wtData);
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
-    console.dir(['track: \'' + key + '\'', wtData]);
+    console.dir(['webtrends: multiTrack \'' + key + '\'', wtData]);
     /* eslint-enable no-console, no-debugger */
   }
 
@@ -15892,7 +15912,27 @@ Utility.track = function (key, data) {
     /* eslint-enable no-undef */
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
-    console.dir(['track: \'' + key + '\'', sData]);
+    console.dir(['segment: track \'' + key + '\'', sData]);
+    /* eslint-enable no-console, no-debugger */
+  }
+
+  /**
+     * Google Analytics
+     */
+  /* eslint-disable no-undef */
+  if (typeof ga !== 'undefined') {
+    var gaData = d;
+    gaData = gaData[0]['DCS.dcsuri'].split('/');
+    gaData = {
+      'eventLabel': gaData[1],
+      'eventCategory': gaData[2],
+      'eventAction': gaData[3] };
+
+    ga('send', 'event', gaData);
+    /* eslint-enable no-undef */
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug())
+    console.dir(['ga: send event', gaData]);
     /* eslint-enable no-console, no-debugger */
   }
 };
@@ -15911,7 +15951,10 @@ Utility.CONFIG = {
   URL_PIN_BLUE: '/wp-content/themes/access/assets/img/map-pin-blue.png',
   URL_PIN_BLUE_2X: '/wp-content/themes/access/assets/img/map-pin-blue-2x.png',
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
-  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png' };exports.default =
+  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
+  GOOGLE_DIMENSIONS: {
+    'DCS.dcsuri': 'dimension1' } };exports.default =
+
 
 
 Utility;
@@ -15926,4 +15969,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.539c213b586ad782cad4d051a9d12396.js.map
+//# sourceMappingURL=main.be266d056cb6fff83ec04225b6f20587.js.map
