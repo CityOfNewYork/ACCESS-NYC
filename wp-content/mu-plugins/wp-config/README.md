@@ -18,11 +18,7 @@ The plugin comes in a directory, so you will need to create an mu-plugin autoloa
 
 ### Configuration
 
-The package comes with a sample config directory `/config-sample`. Copy the directory, place into the `mu-plugins`, and rename to `config`. In the directory you'll find the following files: 
-
-`wpengine-snapshot.php` - This is where configuration and special scripts will go for your WP Engine ".staging" or "non-live" environments. It becomes required if the `is_wpe_snapshot()` exists and returns true.
-
-`wpengine.php` - This is where configuration and special script will go for your WP Engine production or "live" sites. It becomes required if the `is_wpe()` exists and returns true. [Read more about determining WP Engine environments](https://wpengine.com/support/determining-wp-engine-environment/).
+The package comes with a sample config directory `/config-sample`. Copy the directory, place into the `mu-plugins`, and rename to `config`. In the directory you'll find the following files:
 
 `development.php` - This is a sample file that would be required if you set the `WP_ENV` constant to `development`. You can add as many environments as you would like, but you need to set them (see below).
 

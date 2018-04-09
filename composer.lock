@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "95d69be3806d88146094ef977947a979",
+    "content-hash": "ae01f3050838434349ff464b107d9390",
     "packages": [
         {
             "name": "composer/installers",
@@ -277,16 +277,16 @@
         },
         {
             "name": "nyco/wp-config",
-            "version": "0.0.3",
+            "version": "0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-                "reference": "c17a23f39316d85273083e68a90db506590019ea"
+                "reference": "16aab98466a090495b5a32f541314d72dbaa0ece"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/c17a23f39316d85273083e68a90db506590019ea",
-                "reference": "c17a23f39316d85273083e68a90db506590019ea",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/16aab98466a090495b5a32f541314d72dbaa0ece",
+                "reference": "16aab98466a090495b5a32f541314d72dbaa0ece",
                 "shasum": ""
             },
             "require": {
@@ -316,7 +316,7 @@
                 "environment",
                 "wordpress"
             ],
-            "time": "2018-04-09T13:32:57+00:00"
+            "time": "2018-04-09T15:45:38+00:00"
         },
         {
             "name": "psr/log",

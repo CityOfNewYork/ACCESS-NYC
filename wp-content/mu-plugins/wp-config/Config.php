@@ -44,22 +44,17 @@ if (file_exists(WP_CONTENT_DIR . '/mu-plugins/config/config.yml')) {
 }
 
 /**
- * WP Engine
- * is_wpe is defined in the mu-plugins/wpengine-common plugin. is_wpe()
- * returns true only if the site is running on a production environment.
- * @url https://wpengine.com/support/determining-wp-engine-environment/
+ * Auto update WordPress Admin options
  */
 
-if (function_exists('is_wpe') && is_wpe()) {
-  require_once WP_CONTENT_DIR. '/mu-plugins/config/wpengine.php';
-}
-
-if (function_exists('is_wpe_snapshot') && is_wpe_snapshot()) {
-  require_once WP_CONTENT_DIR. '/mu-plugins/config/wpengine-snapshot.php';
+foreach ($_ENV as $key => $value) {
+  if (substr($key, 0, 10) === 'WP_OPTION_') {
+    update_option(strtolower(str_replace('WP_OPTION_', '', $key)), $value);
+  }
 }
 
 /**
- * Local
+ * Auto load environment file if it exits
  * Define WP_ENV in the root wp-config.php before the wp-settings.php include
  */
 
