@@ -22,6 +22,28 @@ use Spyc;
 const PROTECT = ['WP_ENV'];
 
 /**
+ * Set configuration to environment variables
+ */
+
+if (file_exists(WP_CONTENT_DIR . '/mu-plugins/config/config.yml')) {
+  require_once ABSPATH . '/vendor/mustangostang/spyc/Spyc.php';
+  $config = Spyc::YAMLLoad(WP_CONTENT_DIR . '/mu-plugins/config/config.yml');
+  if (null !== WP_ENV && isset($config[WP_ENV])) {
+    $config = $config[WP_ENV];
+    if (is_array($config) || is_object($config)) {
+      foreach ($config as $key => $value) {
+        $name = strtoupper($key);
+        if (!in_array($name, PROTECT)) {
+          putenv("$name=$value");
+          $_ENV[$name] = getenv($name);
+          define($name, getenv($name));
+        }
+      }
+    }
+  }
+}
+
+/**
  * WP Engine
  * is_wpe is defined in the mu-plugins/wpengine-common plugin. is_wpe()
  * returns true only if the site is running on a production environment.
@@ -43,26 +65,4 @@ if (function_exists('is_wpe_snapshot') && is_wpe_snapshot()) {
 
 if (null !== WP_ENV && file_exists(WP_CONTENT_DIR . '/mu-plugins/config/' . WP_ENV . '.php')) {
   require_once WP_CONTENT_DIR . '/mu-plugins/config/' . WP_ENV . '.php';
-}
-
-/**
- * Set configuration to environment variables
- */
-
-if (file_exists(WP_CONTENT_DIR . '/mu-plugins/config/config.yml')) {
-  require_once ABSPATH . '/vendor/mustangostang/spyc/Spyc.php';
-  $config = Spyc::YAMLLoad(WP_CONTENT_DIR . '/mu-plugins/config/config.yml');
-  if (null !== WP_ENV && isset($config[WP_ENV])) {
-    $config = $config[WP_ENV];
-    if (is_array($config) || is_object($config)) {
-      foreach ($config as $key => $value) {
-        $name = strtoupper($key);
-        if (!in_array($name, PROTECT)) {
-          putenv("$name=$value");
-          $_ENV[$name] = getenv($name);
-          define($name, getenv($name));
-        }
-      }
-    }
-  }
 }

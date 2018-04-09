@@ -20,6 +20,6 @@
     "wpackagist-plugin/wps-hide-login": "1.2.5",
     "wpackagist-plugin/wp-security-questions": "1.0.3",
     "wpackagist-plugin/rollbar": "2.2.0",
-    "nyco/wp-config": "0.0.2"
+    "nyco/wp-config": "0.0.3"
   }
 }
