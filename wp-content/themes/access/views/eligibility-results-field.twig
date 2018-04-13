@@ -45,13 +45,13 @@
             <button type="submit" class="f-1 btn btn-primary btn-small m-0"
                     data-js="track"
                     data-track-key="Results: Finalize"
-                    data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/finalize"}]'>
+                    data-track-data='[{"DCS.dcsuri": "finalize"}]'>
               {{ __('Finalize', translationID) }}
             </button>
             <button class="f-1 btn btn-secondary btn-small m-left" id="finalize-your-results-close"
                     data-js="track"
                     data-track-key="Results: Keep Working"
-                    data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/keep-working"}]'>
+                    data-track-data='[{"DCS.dcsuri": "keep-working"}]'>
               {{ __('Keep Working', translationID) }}
             </button>
             {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}

@@ -251,70 +251,84 @@ Utility.track = function(key, data) {
   let dcsuri = _.pluck(data, 'DCS.dcsuri')[0];
 
   const d = (dcsuri) ? _.map(data, function(value) {
-    if (value.hasOwnProperty('DCS.dcsuri')) {
-      return {'DCS.dcsuri': `${window.location.pathname}${dcsuri}`};
-    } return value;
-  }) : data;
+      if (value.hasOwnProperty('DCS.dcsuri')) {
+        return {'DCS.dcsuri': `${window.location.pathname}${dcsuri}`};
+      } return value;
+    }) : data;
 
-  /**
-   * Webtrends
-   */
   /* eslint-disable no-undef */
-  if (typeof Webtrends !== 'undefined') {
-    let wt = Webtrends;
-    /* eslint-enable no-undef */
-    let wtData = d;
-    let prefix = {};
-    prefix['WT.ti'] = key;
-    wtData.unshift(prefix);
-    // format data for Webtrends
-    wtData = {
-      argsa: _.flatten(_.map(wtData, function(value) {
-        return _.pairs(value);
-      }))
-    };
-    wt.multiTrack(wtData);
-    /* eslint-disable no-console, no-debugger */
-    if (Utility.debug())
-      console.dir([`webtrends: multiTrack '${key}'`, wtData]);
-    /* eslint-enable no-console, no-debugger */
-  }
+  /** Webtrends */
+  if (typeof Webtrends !== 'undefined')
+    Utility.webtrends(key, d);
+  /** Segment - Never use the identify method without consideration for PII */
+  if (typeof analytics !== 'undefined')
+    Utility.segment(key, d);
+  /** Google Analytics */
+  if (typeof ga !== 'undefined')
+    Utility.ga(key, d);
+  /* eslint-enable no-undef */
+};
 
-  /**
-   * Segment
-   * Never use the identify method without consideration for PII
-   */
+/**
+ * Push Events to Webtrends
+ * @param  {string}     key  The key or event of the data
+ * @param  {collection} data The data to track
+ */
+Utility.webtrends = function(key, data) {
+  // let wtData = data;
+  let prefix = {};
+  prefix['WT.ti'] = key;
+  data.unshift(prefix);
+  // format data for Webtrends
+  data = {
+    argsa: _.flatten(_.map(data, function(value) {
+      return _.pairs(value);
+    }))
+  };
   /* eslint-disable no-undef */
-  if (typeof analytics !== 'undefined') {
-    // format data for Segment
-    let sData = _.reduce(data, (memo, num) => _.extend(memo, num), {});
-    analytics.track(key, sData);
-    /* eslint-enable no-undef */
-    /* eslint-disable no-console, no-debugger */
-    if (Utility.debug())
-      console.dir([`segment: track '${key}'`, sData]);
-    /* eslint-enable no-console, no-debugger */
-  }
+  Webtrends.multiTrack(data);
+  /* eslint-enable no-undef */
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+    console.dir([`webtrends: multiTrack`, data]);
+  /* eslint-enable no-console, no-debugger */
+};
 
-  /**
-   * Google Analytics
-   */
+/**
+ * Push Events to Segment
+ * @param  {string}     key  The key or event of the data
+ * @param  {collection} data The data to track
+ */
+Utility.segment = function(key, data) {
+  // format data for Segment
+  data = _.reduce(data, (memo, num) => _.extend(memo, num), {});
   /* eslint-disable no-undef */
-  if (typeof ga !== 'undefined') {
-    let gaData = d;
-    gaData = gaData[0]['DCS.dcsuri'].split('/');
-    gaData = {
-      'eventLabel': gaData[1],
-      'eventCategory': gaData[2],
-      'eventAction': gaData[3]
-    };
-    ga('send', 'event', gaData);
-    /* eslint-enable no-undef */
-    /* eslint-disable no-console, no-debugger */
-    if (Utility.debug())
-      console.dir(['ga: send event', gaData]);
-    /* eslint-enable no-console, no-debugger */
-  }
+  analytics.track(key, data);
+  /* eslint-enable no-undef */
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+    console.dir([`segment: track`, data]);
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
+ * Push Events to Google Analytics
+ * @param  {string}     key  The key or event of the data
+ * @param  {collection} data The data to track
+ */
+Utility.ga = function(key, data) {
+  let uri = _.find(data, (value) => value.hasOwnProperty('DCS.dcsuri'));
+  let event = {
+    'eventCategory': key,
+    'eventAction': uri['DCS.dcsuri']
+  };
+  /* eslint-disable no-undef */
+  ga('send', 'event', event);
+  /* eslint-enable no-undef */
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+    console.dir(['ga: send event', event]);
+  /* eslint-enable no-console, no-debugger */
 };
 
 /**

@@ -15020,6 +15020,8 @@ ShareForm = function () {
           $spinner.setAttribute('style', 'display: none'); // hide spinner
         }
         _this4._isBusy = false;
+        // Just to see if it's working
+        if (_utility2.default.debug()) _this4._track(type);
       });
     }
 
@@ -15035,14 +15037,14 @@ ShareForm = function () {
       var context = '';
 
       if (config.hasOwnProperty('analyticsPrefix')) {
-        prefix = config.analyticsPrefix + ':';
+        prefix = config.analyticsPrefix + ': ';
       }
 
       if (config.hasOwnProperty('context')) {
         context = ' ' + config.context;
       }
 
-      _utility2.default.track(prefix + ' ' + key + context + ':', [
+      _utility2.default.track('' + prefix + key + context, [
       { 'DCS.dcsuri': 'share/' + type }]);
 
     } }]);return ShareForm;}();
@@ -15876,65 +15878,79 @@ Utility.track = function (key, data) {
     }return value;
   }) : data;
 
-  /**
-              * Webtrends
-              */
   /* eslint-disable no-undef */
-  if (typeof Webtrends !== 'undefined') {
-    var wt = Webtrends;
-    /* eslint-enable no-undef */
-    var wtData = d;
-    var prefix = {};
-    prefix['WT.ti'] = key;
-    wtData.unshift(prefix);
-    // format data for Webtrends
-    wtData = {
-      argsa: _underscore2.default.flatten(_underscore2.default.map(wtData, function (value) {
-        return _underscore2.default.pairs(value);
-      })) };
+  /** Webtrends */
+  if (typeof Webtrends !== 'undefined')
+  Utility.webtrends(key, d);
+  /** Segment - Never use the identify method without consideration for PII */
+  if (typeof analytics !== 'undefined')
+  Utility.segment(key, d);
+  /** Google Analytics */
+  if (typeof ga !== 'undefined')
+  Utility.ga(key, d);
+  /* eslint-enable no-undef */
+};
 
-    wt.multiTrack(wtData);
-    /* eslint-disable no-console, no-debugger */
-    if (Utility.debug())
-    console.dir(['webtrends: multiTrack \'' + key + '\'', wtData]);
-    /* eslint-enable no-console, no-debugger */
-  }
+/**
+    * Push Events to Webtrends
+    * @param  {string}     key  The key or event of the data
+    * @param  {collection} data The data to track
+    */
+Utility.webtrends = function (key, data) {
+  // let wtData = data;
+  var prefix = {};
+  prefix['WT.ti'] = key;
+  data.unshift(prefix);
+  // format data for Webtrends
+  data = {
+    argsa: _underscore2.default.flatten(_underscore2.default.map(data, function (value) {
+      return _underscore2.default.pairs(value);
+    })) };
 
-  /**
-     * Segment
-     * Never use the identify method without consideration for PII
-     */
   /* eslint-disable no-undef */
-  if (typeof analytics !== 'undefined') {
-    // format data for Segment
-    var sData = _underscore2.default.reduce(data, function (memo, num) {return _underscore2.default.extend(memo, num);}, {});
-    analytics.track(key, sData);
-    /* eslint-enable no-undef */
-    /* eslint-disable no-console, no-debugger */
-    if (Utility.debug())
-    console.dir(['segment: track \'' + key + '\'', sData]);
-    /* eslint-enable no-console, no-debugger */
-  }
+  Webtrends.multiTrack(data);
+  /* eslint-enable no-undef */
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+  console.dir(['webtrends: multiTrack', data]);
+  /* eslint-enable no-console, no-debugger */
+};
 
-  /**
-     * Google Analytics
-     */
+/**
+    * Push Events to Segment
+    * @param  {string}     key  The key or event of the data
+    * @param  {collection} data The data to track
+    */
+Utility.segment = function (key, data) {
+  // format data for Segment
+  data = _underscore2.default.reduce(data, function (memo, num) {return _underscore2.default.extend(memo, num);}, {});
   /* eslint-disable no-undef */
-  if (typeof ga !== 'undefined') {
-    var gaData = d;
-    gaData = gaData[0]['DCS.dcsuri'].split('/');
-    gaData = {
-      'eventLabel': gaData[1],
-      'eventCategory': gaData[2],
-      'eventAction': gaData[3] };
+  analytics.track(key, data);
+  /* eslint-enable no-undef */
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+  console.dir(['segment: track', data]);
+  /* eslint-enable no-console, no-debugger */
+};
 
-    ga('send', 'event', gaData);
-    /* eslint-enable no-undef */
-    /* eslint-disable no-console, no-debugger */
-    if (Utility.debug())
-    console.dir(['ga: send event', gaData]);
-    /* eslint-enable no-console, no-debugger */
-  }
+/**
+    * Push Events to Google Analytics
+    * @param  {string}     key  The key or event of the data
+    * @param  {collection} data The data to track
+    */
+Utility.ga = function (key, data) {
+  var uri = _underscore2.default.find(data, function (value) {return value.hasOwnProperty('DCS.dcsuri');});
+  var event = {
+    'eventCategory': key,
+    'eventAction': uri['DCS.dcsuri'] };
+
+  /* eslint-disable no-undef */
+  ga('send', 'event', event);
+  /* eslint-enable no-undef */
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+  console.dir(['ga: send event', event]);
+  /* eslint-enable no-console, no-debugger */
 };
 
 /**
@@ -15969,4 +15985,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.be266d056cb6fff83ec04225b6f20587.js.map
+//# sourceMappingURL=main.4d39b68cab42e1b8c34f470c7080aacc.js.map

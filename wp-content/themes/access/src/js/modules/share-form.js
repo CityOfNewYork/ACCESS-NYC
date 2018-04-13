@@ -223,6 +223,8 @@ class ShareForm {
         $spinner.setAttribute('style', 'display: none'); // hide spinner
       }
       this._isBusy = false;
+      // Just to see if it's working
+      if (Utility.debug()) this._track(type);
     });
   }
 
@@ -238,14 +240,14 @@ class ShareForm {
     let context = '';
 
     if (config.hasOwnProperty('analyticsPrefix')) {
-      prefix = config.analyticsPrefix + ':';
+      prefix = config.analyticsPrefix + ': ';
     }
 
     if (config.hasOwnProperty('context')) {
       context = ' ' + config.context;
     }
 
-    Utility.track(`${prefix} ${key}${context}:`, [
+    Utility.track(`${prefix}${key}${context}`, [
       {'DCS.dcsuri': `share/${type}`}
     ]);
   }
