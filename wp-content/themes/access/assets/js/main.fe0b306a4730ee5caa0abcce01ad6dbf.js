@@ -12103,7 +12103,7 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
     var key = $('[data-js*="track"]').attr('data-track-key');
     var data = JSON.parse($('[data-js*="track"]').
     attr('data-track-data'));
-    _utility2.default.track(key, data);
+    _utility2.default.webtrends(key, data);
   }
 
   // Webtrends Scenario Analysis
@@ -12117,12 +12117,12 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
       if (url.split('#')[1] == 'step-8') {
         _data = JSON.parse($('#' + url.split('#')[1]).
         attr('data-track-data'));
-        _utility2.default.track(_key, _data);
+        _utility2.default.trackView('Eligibility', _key, _data);
         _data = [];
       } else {
         _data = JSON.parse($('#' + url.split('#')[1]).
         attr('data-track-data'));
-        _utility2.default.track(_key, _data);
+        _utility2.default.trackView('Eligibility', _key, _data);
       }
     });
     $('#step-8').on('change', 'label', function (event) {
@@ -12132,7 +12132,7 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
       if (_data.length == 0) {
         _data = JSON.parse($('#step-8-hoh').attr('data-track-data'));
       }
-      _utility2.default.track(_key, _data);
+      _utility2.default.trackView('Eligibility', _key, _data);
     });
   }
   // end of Webtrends Scenario Analysis
@@ -14812,7 +14812,7 @@ ShareForm = function () {
                           * @param {object}      config - The configuration for the share form.
                           * @constructor
                           */
-  function ShareForm(el, config) {_classCallCheck(this, ShareForm);
+  function ShareForm(el) {_classCallCheck(this, ShareForm);
     /** @private {HTMLElement} The component element. */
     this._el = el;
 
@@ -14827,9 +14827,6 @@ ShareForm = function () {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
-
-    /** @private {object} The prefix for share tracking. */
-    this._config = config ? config : {};
   }
 
   /**
@@ -15031,20 +15028,9 @@ ShareForm = function () {
        * @param  {string} type - The share type, ex. 'Email' or 'Text'
        */ }, { key: '_track', value: function _track(
     type) {
-      var config = this._config;
-      var prefix = '';
       var key = type.charAt(0).toUpperCase() + type.slice(1);
-      var context = '';
 
-      if (config.hasOwnProperty('analyticsPrefix')) {
-        prefix = config.analyticsPrefix + ': ';
-      }
-
-      if (config.hasOwnProperty('context')) {
-        context = ' ' + config.context;
-      }
-
-      _utility2.default.track('' + prefix + key + context, [
+      _utility2.default.track('' + key, [
       { 'DCS.dcsuri': 'share/' + type }]);
 
     } }]);return ShareForm;}();
@@ -15867,6 +15853,7 @@ Utility.camelToUpper = function (str) {
     * Tracking function wrapper
     * @param  {string}     key  The key or event of the data
     * @param  {collection} data The data to track
+    * @return {object}          The final data object
     */
 Utility.track = function (key, data) {
   // Set the path name based on the location if 'DCS.dcsuri' exists
@@ -15882,12 +15869,28 @@ Utility.track = function (key, data) {
   /** Webtrends */
   if (typeof Webtrends !== 'undefined')
   Utility.webtrends(key, d);
-  /** Segment - Never use the identify method without consideration for PII */
-  if (typeof analytics !== 'undefined')
-  Utility.segment(key, d);
   /** Google Analytics */
-  if (typeof ga !== 'undefined')
-  Utility.ga(key, d);
+  if (typeof gtag !== 'undefined')
+  Utility.gtagClick(key, d);
+  /* eslint-enable no-undef */
+
+  return d;
+};
+
+/**
+    * Data bus for tracking views in Webtrends and Google Analytics
+    * @param  {string}     app  The name of the Single Page Application to track
+    * @param  {string}     key  The key or event of the data
+    * @param  {collection} data The data to track
+    */
+Utility.trackView = function (app, key, data) {
+  /* eslint-disable no-undef */
+  /** Webtrends */
+  if (typeof Webtrends !== 'undefined')
+  Utility.webtrends(key, data);
+  /** Google Analytics */
+  if (typeof gtag !== 'undefined')
+  Utility.gtagView(app, key, data);
   /* eslint-enable no-undef */
 };
 
@@ -15917,39 +15920,42 @@ Utility.webtrends = function (key, data) {
 };
 
 /**
-    * Push Events to Segment
+    * Push Click Events to Google Analytics
     * @param  {string}     key  The key or event of the data
     * @param  {collection} data The data to track
     */
-Utility.segment = function (key, data) {
-  // format data for Segment
-  data = _underscore2.default.reduce(data, function (memo, num) {return _underscore2.default.extend(memo, num);}, {});
+Utility.gtagClick = function (key, data) {
+  var uri = _underscore2.default.find(data, function (value) {return value.hasOwnProperty('DCS.dcsuri');});
+  var event = {
+    'event_category': key };
+
   /* eslint-disable no-undef */
-  analytics.track(key, data);
+  gtag('event', uri['DCS.dcsuri'], event);
   /* eslint-enable no-undef */
   /* eslint-disable no-console, no-debugger */
   if (Utility.debug())
-  console.dir(['segment: track', data]);
+  console.dir(['gtag: event, ' + uri['DCS.dcsuri'], event]);
   /* eslint-enable no-console, no-debugger */
 };
 
 /**
-    * Push Events to Google Analytics
+    * Push Screen View Events to Google Analytics
+    * @param  {string}     app  The name of the application
     * @param  {string}     key  The key or event of the data
     * @param  {collection} data The data to track
     */
-Utility.ga = function (key, data) {
-  var uri = _underscore2.default.find(data, function (value) {return value.hasOwnProperty('DCS.dcsuri');});
-  var event = {
-    'eventCategory': key,
-    'eventAction': uri['DCS.dcsuri'] };
+Utility.gtagView = function (app, key, data) {
+  var d = _underscore2.default.reduceRight(data, function (a, b) {return _underscore2.default.extend(a, b);});
+  var view = {
+    app_name: app,
+    screen_name: d['WT.ti'] };
 
   /* eslint-disable no-undef */
-  ga('send', 'event', event);
+  gtag('event', 'screen_view', view);
   /* eslint-enable no-undef */
   /* eslint-disable no-console, no-debugger */
   if (Utility.debug())
-  console.dir(['ga: send event', event]);
+  console.dir(['gtag: event, screen_view', view]);
   /* eslint-enable no-console, no-debugger */
 };
 
@@ -15985,4 +15991,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.4d39b68cab42e1b8c34f470c7080aacc.js.map
+//# sourceMappingURL=main.fe0b306a4730ee5caa0abcce01ad6dbf.js.map

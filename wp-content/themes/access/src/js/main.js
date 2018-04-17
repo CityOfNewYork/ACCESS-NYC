@@ -66,7 +66,7 @@ import Utility from 'modules/utility';
     let key = $('[data-js*="track"]').attr('data-track-key');
     let data = JSON.parse($('[data-js*="track"]')
       .attr('data-track-data'));
-    Utility.track(key, data);
+    Utility.webtrends(key, data);
   }
 
   // Webtrends Scenario Analysis
@@ -80,12 +80,12 @@ import Utility from 'modules/utility';
       if(url.split('#')[1] == 'step-8') {
         data = JSON.parse($('#' + url.split('#')[1])
           .attr('data-track-data'));
-        Utility.track(key, data);
+        Utility.trackView('Eligibility', key, data);
         data = [];
       }else{
         data = JSON.parse($('#' + url.split('#')[1])
-        .attr('data-track-data'));
-        Utility.track(key, data);
+          .attr('data-track-data'));
+        Utility.trackView('Eligibility', key, data);
       }
     });
     $('#step-8').on('change', 'label', (event) => {
@@ -95,7 +95,7 @@ import Utility from 'modules/utility';
       if(data.length==0) {
         data = JSON.parse($('#step-8-hoh').attr('data-track-data'));
       }
-      Utility.track(key, data);
+      Utility.trackView('Eligibility', key, data);
     });
   }
   // end of Webtrends Scenario Analysis

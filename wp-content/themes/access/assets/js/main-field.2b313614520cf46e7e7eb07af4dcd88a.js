@@ -29417,7 +29417,6 @@ CalcInput;
 
 var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
 var _shareForm = require('modules/share-form');var _shareForm2 = _interopRequireDefault(_shareForm);
-var _screenerField = require('modules/screener-field');var _screenerField2 = _interopRequireDefault(_screenerField);
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
 
 /**
@@ -29457,11 +29456,7 @@ ResultsField = function () {
 
       // Initialize share by email/sms forms.
       (0, _jquery2.default)('.' + _shareForm2.default.CssClass.FORM).each(function (i, el) {
-        var config = {
-          'analyticsPrefix': _screenerField2.default.AnalyticsPrefix,
-          'context': 'Results' };
-
-        new _shareForm2.default(el, config).init();
+        new _shareForm2.default(el).init();
       });
 
       // Finalize form
@@ -29691,7 +29686,7 @@ ResultsField.SharePath = '/eligibility/results/';exports.default =
 
 ResultsField;
 
-},{"jquery":3,"modules/screener-field":13,"modules/share-form":18,"modules/utility":20}],12:[function(require,module,exports){
+},{"jquery":3,"modules/share-form":18,"modules/utility":20}],12:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -32868,7 +32863,7 @@ ShareForm = function () {
                           * @param {object}      config - The configuration for the share form.
                           * @constructor
                           */
-  function ShareForm(el, config) {_classCallCheck(this, ShareForm);
+  function ShareForm(el) {_classCallCheck(this, ShareForm);
     /** @private {HTMLElement} The component element. */
     this._el = el;
 
@@ -32883,9 +32878,6 @@ ShareForm = function () {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
-
-    /** @private {object} The prefix for share tracking. */
-    this._config = config ? config : {};
   }
 
   /**
@@ -33087,20 +33079,9 @@ ShareForm = function () {
        * @param  {string} type - The share type, ex. 'Email' or 'Text'
        */ }, { key: '_track', value: function _track(
     type) {
-      var config = this._config;
-      var prefix = '';
       var key = type.charAt(0).toUpperCase() + type.slice(1);
-      var context = '';
 
-      if (config.hasOwnProperty('analyticsPrefix')) {
-        prefix = config.analyticsPrefix + ': ';
-      }
-
-      if (config.hasOwnProperty('context')) {
-        context = ' ' + config.context;
-      }
-
-      _utility2.default.track('' + prefix + key + context, [
+      _utility2.default.track('' + key, [
       { 'DCS.dcsuri': 'share/' + type }]);
 
     } }]);return ShareForm;}();
@@ -33601,6 +33582,7 @@ Utility.camelToUpper = function (str) {
     * Tracking function wrapper
     * @param  {string}     key  The key or event of the data
     * @param  {collection} data The data to track
+    * @return {object}          The final data object
     */
 Utility.track = function (key, data) {
   // Set the path name based on the location if 'DCS.dcsuri' exists
@@ -33616,12 +33598,28 @@ Utility.track = function (key, data) {
   /** Webtrends */
   if (typeof Webtrends !== 'undefined')
   Utility.webtrends(key, d);
-  /** Segment - Never use the identify method without consideration for PII */
-  if (typeof analytics !== 'undefined')
-  Utility.segment(key, d);
   /** Google Analytics */
-  if (typeof ga !== 'undefined')
-  Utility.ga(key, d);
+  if (typeof gtag !== 'undefined')
+  Utility.gtagClick(key, d);
+  /* eslint-enable no-undef */
+
+  return d;
+};
+
+/**
+    * Data bus for tracking views in Webtrends and Google Analytics
+    * @param  {string}     app  The name of the Single Page Application to track
+    * @param  {string}     key  The key or event of the data
+    * @param  {collection} data The data to track
+    */
+Utility.trackView = function (app, key, data) {
+  /* eslint-disable no-undef */
+  /** Webtrends */
+  if (typeof Webtrends !== 'undefined')
+  Utility.webtrends(key, data);
+  /** Google Analytics */
+  if (typeof gtag !== 'undefined')
+  Utility.gtagView(app, key, data);
   /* eslint-enable no-undef */
 };
 
@@ -33651,39 +33649,42 @@ Utility.webtrends = function (key, data) {
 };
 
 /**
-    * Push Events to Segment
+    * Push Click Events to Google Analytics
     * @param  {string}     key  The key or event of the data
     * @param  {collection} data The data to track
     */
-Utility.segment = function (key, data) {
-  // format data for Segment
-  data = _underscore2.default.reduce(data, function (memo, num) {return _underscore2.default.extend(memo, num);}, {});
+Utility.gtagClick = function (key, data) {
+  var uri = _underscore2.default.find(data, function (value) {return value.hasOwnProperty('DCS.dcsuri');});
+  var event = {
+    'event_category': key };
+
   /* eslint-disable no-undef */
-  analytics.track(key, data);
+  gtag('event', uri['DCS.dcsuri'], event);
   /* eslint-enable no-undef */
   /* eslint-disable no-console, no-debugger */
   if (Utility.debug())
-  console.dir(['segment: track', data]);
+  console.dir(['gtag: event, ' + uri['DCS.dcsuri'], event]);
   /* eslint-enable no-console, no-debugger */
 };
 
 /**
-    * Push Events to Google Analytics
+    * Push Screen View Events to Google Analytics
+    * @param  {string}     app  The name of the application
     * @param  {string}     key  The key or event of the data
     * @param  {collection} data The data to track
     */
-Utility.ga = function (key, data) {
-  var uri = _underscore2.default.find(data, function (value) {return value.hasOwnProperty('DCS.dcsuri');});
-  var event = {
-    'eventCategory': key,
-    'eventAction': uri['DCS.dcsuri'] };
+Utility.gtagView = function (app, key, data) {
+  var d = _underscore2.default.reduceRight(data, function (a, b) {return _underscore2.default.extend(a, b);});
+  var view = {
+    app_name: app,
+    screen_name: d['WT.ti'] };
 
   /* eslint-disable no-undef */
-  ga('send', 'event', event);
+  gtag('event', 'screen_view', view);
   /* eslint-enable no-undef */
   /* eslint-disable no-console, no-debugger */
   if (Utility.debug())
-  console.dir(['ga: send event', event]);
+  console.dir(['gtag: event, screen_view', view]);
   /* eslint-enable no-console, no-debugger */
 };
 
@@ -33719,4 +33720,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.ee3aa8dd44227baf7b1281a4543308d3.js.map
+//# sourceMappingURL=main-field.2b313614520cf46e7e7eb07af4dcd88a.js.map

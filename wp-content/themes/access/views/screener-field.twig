@@ -418,10 +418,6 @@
 </main>
 {% endblock %}
 
-{% block webtrends %}
-{% include 'partials/scripts-field-webtrends.twig' %}
-{% endblock %}
-
 {% block scripts_footer %}
 {{ function('enqueue_script', 'assets/js/main-field', '.min') }}
 <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise&flags=gated"></script> {# IE Support https://polyfill.io #}

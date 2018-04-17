@@ -245,6 +245,7 @@ Utility.camelToUpper = function(str) {
  * Tracking function wrapper
  * @param  {string}     key  The key or event of the data
  * @param  {collection} data The data to track
+ * @return {object}          The final data object
  */
 Utility.track = function(key, data) {
   // Set the path name based on the location if 'DCS.dcsuri' exists
@@ -260,12 +261,28 @@ Utility.track = function(key, data) {
   /** Webtrends */
   if (typeof Webtrends !== 'undefined')
     Utility.webtrends(key, d);
-  /** Segment - Never use the identify method without consideration for PII */
-  if (typeof analytics !== 'undefined')
-    Utility.segment(key, d);
   /** Google Analytics */
-  if (typeof ga !== 'undefined')
-    Utility.ga(key, d);
+  if (typeof gtag !== 'undefined')
+    Utility.gtagClick(key, d);
+  /* eslint-enable no-undef */
+
+  return d;
+};
+
+/**
+ * Data bus for tracking views in Webtrends and Google Analytics
+ * @param  {string}     app  The name of the Single Page Application to track
+ * @param  {string}     key  The key or event of the data
+ * @param  {collection} data The data to track
+ */
+Utility.trackView = function(app, key, data) {
+  /* eslint-disable no-undef */
+  /** Webtrends */
+  if (typeof Webtrends !== 'undefined')
+    Utility.webtrends(key, data);
+  /** Google Analytics */
+  if (typeof gtag !== 'undefined')
+    Utility.gtagView(app, key, data);
   /* eslint-enable no-undef */
 };
 
@@ -295,39 +312,42 @@ Utility.webtrends = function(key, data) {
 };
 
 /**
- * Push Events to Segment
+ * Push Click Events to Google Analytics
  * @param  {string}     key  The key or event of the data
  * @param  {collection} data The data to track
  */
-Utility.segment = function(key, data) {
-  // format data for Segment
-  data = _.reduce(data, (memo, num) => _.extend(memo, num), {});
+Utility.gtagClick = function(key, data) {
+  let uri = _.find(data, (value) => value.hasOwnProperty('DCS.dcsuri'));
+  let event = {
+    'event_category': key
+  };
   /* eslint-disable no-undef */
-  analytics.track(key, data);
+  gtag('event', uri['DCS.dcsuri'], event);
   /* eslint-enable no-undef */
   /* eslint-disable no-console, no-debugger */
   if (Utility.debug())
-    console.dir([`segment: track`, data]);
+    console.dir([`gtag: event, ${uri['DCS.dcsuri']}`, event]);
   /* eslint-enable no-console, no-debugger */
 };
 
 /**
- * Push Events to Google Analytics
+ * Push Screen View Events to Google Analytics
+ * @param  {string}     app  The name of the application
  * @param  {string}     key  The key or event of the data
  * @param  {collection} data The data to track
  */
-Utility.ga = function(key, data) {
-  let uri = _.find(data, (value) => value.hasOwnProperty('DCS.dcsuri'));
-  let event = {
-    'eventCategory': key,
-    'eventAction': uri['DCS.dcsuri']
+Utility.gtagView = function(app, key, data) {
+  let d = _.reduceRight(data, (a, b) => _.extend(a, b));
+  let view = {
+    app_name: app,
+    screen_name: d['WT.ti']
   };
   /* eslint-disable no-undef */
-  ga('send', 'event', event);
+  gtag('event', 'screen_view', view);
   /* eslint-enable no-undef */
   /* eslint-disable no-console, no-debugger */
   if (Utility.debug())
-    console.dir(['ga: send event', event]);
+    console.dir([`gtag: event, screen_view`, view]);
   /* eslint-enable no-console, no-debugger */
 };
 
