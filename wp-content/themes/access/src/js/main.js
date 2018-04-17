@@ -62,12 +62,14 @@ import Utility from 'modules/utility';
   });
 
   // Capture the queries on Search page
-  if (~window.location.href.indexOf('?s=')) {
-    let key = $('[data-js*="track"]').attr('data-track-key');
-    let data = JSON.parse($('[data-js*="track"]')
-      .attr('data-track-data'));
-    Utility.webtrends(key, data);
-  }
+  window.onload = function() {
+    if (~window.location.href.indexOf('?s=')) {
+      let key = $('[data-js*="track"]').attr('data-track-key');
+      let data = JSON.parse($('[data-js*="track"]')
+        .attr('data-track-data'));
+      Utility.webtrends(key, data);
+    }
+  };
 
   // Webtrends Scenario Analysis
   if (~window.location.href.indexOf('eligibility')) {

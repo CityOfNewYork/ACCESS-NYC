@@ -292,7 +292,6 @@ Utility.trackView = function(app, key, data) {
  * @param  {collection} data The data to track
  */
 Utility.webtrends = function(key, data) {
-  // let wtData = data;
   let prefix = {};
   prefix['WT.ti'] = key;
   data.unshift(prefix);

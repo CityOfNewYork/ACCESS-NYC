@@ -33629,7 +33629,6 @@ Utility.trackView = function (app, key, data) {
     * @param  {collection} data The data to track
     */
 Utility.webtrends = function (key, data) {
-  // let wtData = data;
   var prefix = {};
   prefix['WT.ti'] = key;
   data.unshift(prefix);
@@ -33720,4 +33719,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.2b313614520cf46e7e7eb07af4dcd88a.js.map
+//# sourceMappingURL=main-field.667348692b0ce589ad00c53e00b37d7d.js.map

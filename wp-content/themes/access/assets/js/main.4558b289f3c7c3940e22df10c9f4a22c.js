@@ -12099,40 +12099,42 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
   });
 
   // Capture the queries on Search page
-  if (~window.location.href.indexOf('?s=')) {
-    var key = $('[data-js*="track"]').attr('data-track-key');
-    var data = JSON.parse($('[data-js*="track"]').
-    attr('data-track-data'));
-    _utility2.default.webtrends(key, data);
-  }
+  window.onload = function () {
+    if (~window.location.href.indexOf('?s=')) {
+      var key = $('[data-js*="track"]').attr('data-track-key');
+      var data = JSON.parse($('[data-js*="track"]').
+      attr('data-track-data'));
+      _utility2.default.webtrends(key, data);
+    }
+  };
 
   // Webtrends Scenario Analysis
   if (~window.location.href.indexOf('eligibility')) {
     var url = window.location.href;
-    var _key = '';
-    var _data = [];
+    var key = '';
+    var data = [];
     $(window).on('hashchange', function () {
       url = window.location.href;
-      _key = $('#' + url.split('#')[1]).attr('data-track-key');
+      key = $('#' + url.split('#')[1]).attr('data-track-key');
       if (url.split('#')[1] == 'step-8') {
-        _data = JSON.parse($('#' + url.split('#')[1]).
+        data = JSON.parse($('#' + url.split('#')[1]).
         attr('data-track-data'));
-        _utility2.default.trackView('Eligibility', _key, _data);
-        _data = [];
+        _utility2.default.trackView('Eligibility', key, data);
+        data = [];
       } else {
-        _data = JSON.parse($('#' + url.split('#')[1]).
+        data = JSON.parse($('#' + url.split('#')[1]).
         attr('data-track-data'));
-        _utility2.default.trackView('Eligibility', _key, _data);
+        _utility2.default.trackView('Eligibility', key, data);
       }
     });
     $('#step-8').on('change', 'label', function (event) {
-      _data = JSON.parse(event.currentTarget.dataset.trackData);
+      data = JSON.parse(event.currentTarget.dataset.trackData);
     });
     $('[href="#step-9"]').on('click', function () {
-      if (_data.length == 0) {
-        _data = JSON.parse($('#step-8-hoh').attr('data-track-data'));
+      if (data.length == 0) {
+        data = JSON.parse($('#step-8-hoh').attr('data-track-data'));
       }
-      _utility2.default.trackView('Eligibility', _key, _data);
+      _utility2.default.trackView('Eligibility', key, data);
     });
   }
   // end of Webtrends Scenario Analysis
@@ -15900,7 +15902,6 @@ Utility.trackView = function (app, key, data) {
     * @param  {collection} data The data to track
     */
 Utility.webtrends = function (key, data) {
-  // let wtData = data;
   var prefix = {};
   prefix['WT.ti'] = key;
   data.unshift(prefix);
@@ -15991,4 +15992,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.fe0b306a4730ee5caa0abcce01ad6dbf.js.map
+//# sourceMappingURL=main.4558b289f3c7c3940e22df10c9f4a22c.js.map
