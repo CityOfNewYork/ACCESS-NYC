@@ -29262,6 +29262,9 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
 
   // Add rel attribute to new window links.
   $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+
+  // Enable environment warnings
+  $(window).on('load', function () {return _utility2.default.warnings();});
 })(window, _jquery2.default); /* eslint-enable no-unused-vars */
 
 },{"jquery":3,"modules/results-field":11,"modules/screener-field":13,"modules/share-form":18,"modules/tooltip":19,"modules/utility":20,"smoothscroll-polyfill":5,"underscore":6}],10:[function(require,module,exports){
@@ -31689,7 +31692,37 @@ Screener = function () {
         this._goToStep(this._$steps[0]);
       }
 
+      this._scenarioAnalysis();
+
       return this;
+    }
+
+    /**
+       * View Tracking for Webtrends and Google Analytics
+       */ }, { key: '_scenarioAnalysis', value: function _scenarioAnalysis()
+    {
+      var key = '';
+      var data = [];
+
+      (0, _jquery2.default)(window).on('hashchange', function () {
+        var hash = window.location.hash;
+        var step = (0, _jquery2.default)(hash);
+        key = step.data('trackKey');
+        data = step.data('trackData');
+        _utility2.default.trackView('Eligibility', key, data);
+        if (hash === '#step-8') data = [];
+      });
+
+      (0, _jquery2.default)('#step-8').on('change', 'label', function (event) {
+        data = (0, _jquery2.default)(event.currentTarget).data('trackData');
+      });
+
+      (0, _jquery2.default)('[href="#step-9"]').on('click', function () {
+        if (typeof data === 'undefined') {
+          data = (0, _jquery2.default)('#step-8-hoh').data('trackData');
+        }
+        _utility2.default.trackView('Eligibility', key, data);
+      });
     }
 
     /**
@@ -33629,6 +33662,8 @@ Utility.trackView = function (app, key, data) {
     * @param  {collection} data The data to track
     */
 Utility.webtrends = function (key, data) {
+  /* eslint-disable no-undef, no-console, no-debugger */
+  if (typeof Webtrends === 'undefined') return;
   var prefix = {};
   prefix['WT.ti'] = key;
   data.unshift(prefix);
@@ -33638,13 +33673,10 @@ Utility.webtrends = function (key, data) {
       return _underscore2.default.pairs(value);
     })) };
 
-  /* eslint-disable no-undef */
   Webtrends.multiTrack(data);
-  /* eslint-enable no-undef */
-  /* eslint-disable no-console, no-debugger */
   if (Utility.debug())
   console.dir(['webtrends: multiTrack', data]);
-  /* eslint-enable no-console, no-debugger */
+  /* eslint-disable no-undef, no-console, no-debugger */
 };
 
 /**
@@ -33654,6 +33686,17 @@ Utility.webtrends = function (key, data) {
     */
 Utility.gtagClick = function (key, data) {
   var uri = _underscore2.default.find(data, function (value) {return value.hasOwnProperty('DCS.dcsuri');});
+  if (typeof uri === 'undefined') {
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug()) {
+      console.warn([
+      'Click tracking for Webtrends and Google Analytics requires setting',
+      'the DCS.dcsuri parameter: {"DCS.dcsuri": "category/action"}'].
+      join(' '));
+    }
+    /* eslint-enable no-console, no-debugger */
+    return;
+  }
   var event = {
     'event_category': key };
 
@@ -33688,6 +33731,19 @@ Utility.gtagView = function (app, key, data) {
 };
 
 /**
+    * Warnings to show for the environment
+    */
+Utility.warnings = function () {
+  /* eslint-disable no-console, no-debugger */
+  if (typeof Webtrends === 'undefined' && Utility.debug())
+  console.warn(Utility.CONFIG.MSG_WT_NONCONFIG);
+  /** Google Analytics */
+  if (typeof gtag === 'undefined' && Utility.debug())
+  console.warn(Utility.CONFIG.MSG_GA_NONCONFIG);
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
     * Site constants.
     * @enum {string}
     */
@@ -33702,9 +33758,8 @@ Utility.CONFIG = {
   URL_PIN_BLUE_2X: '/wp-content/themes/access/assets/img/map-pin-blue-2x.png',
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
-  GOOGLE_DIMENSIONS: {
-    'DCS.dcsuri': 'dimension1' } };exports.default =
-
+  MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
+  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment' };exports.default =
 
 
 Utility;
@@ -33719,4 +33774,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.667348692b0ce589ad00c53e00b37d7d.js.map
+//# sourceMappingURL=main-field.065373691ad28d4d477c33b02f3be0aa.js.map
