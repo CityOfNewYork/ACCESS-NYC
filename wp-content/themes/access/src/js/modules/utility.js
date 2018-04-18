@@ -292,6 +292,8 @@ Utility.trackView = function(app, key, data) {
  * @param  {collection} data The data to track
  */
 Utility.webtrends = function(key, data) {
+  /* eslint-disable no-undef, no-console, no-debugger */
+  if (typeof Webtrends === 'undefined') return;
   let prefix = {};
   prefix['WT.ti'] = key;
   data.unshift(prefix);
@@ -301,13 +303,10 @@ Utility.webtrends = function(key, data) {
       return _.pairs(value);
     }))
   };
-  /* eslint-disable no-undef */
   Webtrends.multiTrack(data);
-  /* eslint-enable no-undef */
-  /* eslint-disable no-console, no-debugger */
   if (Utility.debug())
     console.dir([`webtrends: multiTrack`, data]);
-  /* eslint-enable no-console, no-debugger */
+  /* eslint-disable no-undef, no-console, no-debugger */
 };
 
 /**
@@ -362,6 +361,19 @@ Utility.gtagView = function(app, key, data) {
 };
 
 /**
+ * Warnings to show for the environment
+ */
+Utility.warnings = function() {
+  /* eslint-disable no-console, no-debugger */
+  if (typeof Webtrends === 'undefined' && Utility.debug())
+    console.warn(Utility.CONFIG.MSG_WT_NONCONFIG);
+  /** Google Analytics */
+  if (typeof gtag === 'undefined' && Utility.debug())
+    console.warn(Utility.CONFIG.MSG_GA_NONCONFIG);
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
  * Site constants.
  * @enum {string}
  */
@@ -375,7 +387,9 @@ Utility.CONFIG = {
   URL_PIN_BLUE: '/wp-content/themes/access/assets/img/map-pin-blue.png',
   URL_PIN_BLUE_2X: '/wp-content/themes/access/assets/img/map-pin-blue-2x.png',
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
-  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png'
+  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
+  MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
+  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment'
 };
 
 export default Utility;

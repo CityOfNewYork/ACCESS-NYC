@@ -62,14 +62,14 @@ import Utility from 'modules/utility';
   });
 
   // Capture the queries on Search page
-  window.onload = function() {
+  $(window).on('load', function() {
     let $wtSearch = $('[data-js="wt-search"]');
     if (~window.location.href.indexOf('?s=') && $wtSearch.length) {
       let key = $wtSearch.data('wtSearchKey');
       let data = $wtSearch.data('wtSearchData');
       Utility.webtrends(key, data);
     }
-  };
+  });
 
   // On the search results page, submits the search form when a category is
   // chosen.
@@ -232,4 +232,7 @@ import Utility from 'modules/utility';
 
   // Add rel attribute to new window links.
   $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+
+  // Enable environment warnings
+  $(window).on('load', () => Utility.warnings());
 })(window, jQuery);
