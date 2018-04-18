@@ -175,16 +175,13 @@ gulp.task('scripts', (callback) => {
  * Script Linter
  */
 gulp.task('lint', () =>
-  gulp.src(`${SRC}/js/**/*.js`)
-        .pipe($.eslint({
-          "parser": "babel-eslint",
-          "rules": {
-            "strict": 0
-          }
-        }
+  gulp.src(`${SRC}/js/**/*.js`).pipe($.eslint({
+        "parser": "babel-eslint",
+        "rules": {"strict": 0}
+      }
     ))
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failOnError()))
+  .pipe($.eslint.format())
+  .pipe($.if(!browserSync.active, $.eslint.failOnError()))
 );
 
 
@@ -265,7 +262,7 @@ gulp.task('svg-sprites', () =>
 /**
  * Watching Tasks
  */
-gulp.task('default', ['build'], () => {
+gulp.task('default', () => {
   // Create a .env file in the theme directory to define this.
   browserSync.init({
     proxy: process.env.WP_DEV_URL,
