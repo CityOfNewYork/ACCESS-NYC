@@ -281,12 +281,20 @@ gulp.task('default', () => {
   ]);
 
   // Watch .js files
-  gulp.watch(`${SRC}/js/**/*.js`, [
-    'lint',
-    'clean (scripts)',
-    'scripts',
-    reload
-  ]);
+  if (NODE_ENV === 'production') {
+    gulp.watch(`${SRC}/js/**/*.js`, [
+      'lint',
+      'clean (scripts)',
+      'scripts',
+      reload
+    ]);
+  } else {
+    gulp.watch(`${SRC}/js/**/*.js`, [
+      'clean (scripts)',
+      'scripts',
+      reload
+    ]);
+  }
 
   // Watch image files
   gulp.watch(`${SRC}/img/**/*`, ['images', reload]);
