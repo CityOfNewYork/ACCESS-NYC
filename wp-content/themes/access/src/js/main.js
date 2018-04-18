@@ -63,10 +63,10 @@ import Utility from 'modules/utility';
 
   // Capture the queries on Search page
   window.onload = function() {
-    if (~window.location.href.indexOf('?s=')) {
-      let key = $('[data-js*="track"]').attr('data-track-key');
-      let data = JSON.parse($('[data-js*="track"]')
-        .attr('data-track-data'));
+    let $wtSearch = $('[data-js="wt-search"]');
+    if (~window.location.href.indexOf('?s=') && $wtSearch.length) {
+      let key = $wtSearch.data('wtSearchKey');
+      let data = $wtSearch.data('wtSearchData');
       Utility.webtrends(key, data);
     }
   };
