@@ -316,7 +316,18 @@ Utility.webtrends = function(key, data) {
  * @param  {collection} data The data to track
  */
 Utility.gtagClick = function(key, data) {
-  let uri = _.find(data, (value) => value.hasOwnProperty('DCS.dcsuri'));
+  let uri = _.find(data, (value) => (value.hasOwnProperty('DCS.dcsuri')));
+  if (typeof uri === 'undefined') {
+    /* eslint-disable no-console, no-debugger */
+    if (Utility.debug()) {
+      console.warn([
+        'Click tracking for Webtrends and Google Analytics requires setting',
+        'the DCS.dcsuri parameter: {"DCS.dcsuri": "category/action"}'
+      ].join(' '));
+    }
+    /* eslint-enable no-console, no-debugger */
+    return;
+  }
   let event = {
     'event_category': key
   };
@@ -364,10 +375,7 @@ Utility.CONFIG = {
   URL_PIN_BLUE: '/wp-content/themes/access/assets/img/map-pin-blue.png',
   URL_PIN_BLUE_2X: '/wp-content/themes/access/assets/img/map-pin-blue-2x.png',
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
-  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
-  GOOGLE_DIMENSIONS: {
-    'DCS.dcsuri': 'dimension1'
-  }
+  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png'
 };
 
 export default Utility;
