@@ -152,7 +152,37 @@ class Screener {
       this._goToStep(this._$steps[0]);
     }
 
+    this._scenarioAnalysis();
+
     return this;
+  }
+
+  /**
+   * View Tracking for Webtrends and Google Analytics
+   */
+  _scenarioAnalysis() {
+    let key = '';
+    let data = [];
+
+    $(window).on('hashchange', function() {
+      let hash = window.location.hash;
+      let step = $(hash);
+      key = step.data('trackKey');
+      data = step.data('trackData');
+      Utility.trackView('Eligibility', key, data);
+      if (hash === '#step-8') data = [];
+    });
+
+    $('#step-8').on('change', 'label', (event) => {
+      data = $(event.currentTarget).data('trackData');
+    });
+
+    $('[href="#step-9"]').on('click', function() {
+      if (typeof data === 'undefined') {
+        data = $('#step-8-hoh').data('trackData');
+      }
+      Utility.trackView('Eligibility', key, data);
+    });
   }
 
   /**
