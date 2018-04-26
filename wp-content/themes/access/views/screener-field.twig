@@ -30,7 +30,7 @@
   {value: 'linc', text: 'LINC (Living in Communities Rental Assistance)', code: 'P104'},
   {value: 'nycha', text: 'NYCHA (NYC Housing Authority Housing)', code: 'P105'},
   {value: 'pension', text: 'Government or Private Pension', code: 'P106'},
-  {value: 'sche', text: 'SCHE (Senior Citizen Homeowners\' Exemption)', code: 'P107'},
+  {value: 'sche', text: 'SCHE (Senior Citizen Homeowners\' Exemption)', code: 'S2R014'},
   {value: 'seps', text: 'SEPS (Special Exit and Prevention Supplement)', code: 'P108'},
   {value: 'social-security', text: 'Social Security', code: 'P109'},
   {value: 'ssd', text: 'SSD (Social Security Disability)', code: 'P110'},
@@ -418,17 +418,9 @@
 </main>
 {% endblock %}
 
-{% block webtrends %}
-{% include 'partials/scripts-field-webtrends.twig' %}
-{% endblock %}
-
-{% block scripts_head %}
-{% include 'partials/scripts-field-segment.twig' %}
-{% endblock %}
-
 {% block scripts_footer %}
 {{ function('enqueue_script', 'assets/js/main-field', '.min') }}
-<script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise&gated=gated"></script> {# IE Support https://polyfill.io #}
+<script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise&flags=gated"></script> {# IE Support https://polyfill.io #}
 <script type="text/javascript">
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

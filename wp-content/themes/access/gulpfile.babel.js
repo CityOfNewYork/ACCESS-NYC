@@ -175,16 +175,13 @@ gulp.task('scripts', (callback) => {
  * Script Linter
  */
 gulp.task('lint', () =>
-  gulp.src(`${SRC}/js/**/*.js`)
-        .pipe($.eslint({
-          "parser": "babel-eslint",
-          "rules": {
-            "strict": 0
-          }
-        }
+  gulp.src(`${SRC}/js/**/*.js`).pipe($.eslint({
+        "parser": "babel-eslint",
+        "rules": {"strict": 0}
+      }
     ))
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failOnError()))
+  .pipe($.eslint.format())
+  .pipe($.if(!browserSync.active, $.eslint.failOnError()))
 );
 
 
@@ -265,7 +262,7 @@ gulp.task('svg-sprites', () =>
 /**
  * Watching Tasks
  */
-gulp.task('default', ['build'], () => {
+gulp.task('default', () => {
   // Create a .env file in the theme directory to define this.
   browserSync.init({
     proxy: process.env.WP_DEV_URL,
@@ -284,12 +281,20 @@ gulp.task('default', ['build'], () => {
   ]);
 
   // Watch .js files
-  gulp.watch(`${SRC}/js/**/*.js`, [
-    'lint',
-    'clean (scripts)',
-    'scripts',
-    reload
-  ]);
+  if (NODE_ENV === 'production') {
+    gulp.watch(`${SRC}/js/**/*.js`, [
+      'lint',
+      'clean (scripts)',
+      'scripts',
+      reload
+    ]);
+  } else {
+    gulp.watch(`${SRC}/js/**/*.js`, [
+      'clean (scripts)',
+      'scripts',
+      reload
+    ]);
+  }
 
   // Watch image files
   gulp.watch(`${SRC}/img/**/*`, ['images', reload]);

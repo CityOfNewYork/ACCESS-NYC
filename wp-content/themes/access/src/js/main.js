@@ -54,19 +54,22 @@ import Utility from 'modules/utility';
 
   // A basic click tracking function
   $body.on('click', '[data-js*="track"]', (event) => {
+    /* eslint-disable no-console, no-debugger */
     let key = event.currentTarget.dataset.trackKey;
     let data = JSON.parse(event.currentTarget.dataset.trackData);
     Utility.track(key, data);
+    /* eslint-enable no-console, no-debugger */
   });
 
-  // Webtrends - Capture the search query for on-site search
-  if (~window.location.href.indexOf('?s=')) {
-    let $query = window.location.href;
-    $('head').append('<meta name="WT.oss" content="'
-      + $query.split('?s=')[1] + '">');
-    $('head').append('<meta name="WT.oss_r" content="'
-      + $('.program-card').length +'">');
-  }
+  // Capture the queries on Search page
+  $(window).on('load', function() {
+    let $wtSearch = $('[data-js="wt-search"]');
+    if (~window.location.href.indexOf('?s=') && $wtSearch.length) {
+      let key = $wtSearch.data('wtSearchKey');
+      let data = $wtSearch.data('wtSearchData');
+      Utility.webtrends(key, data);
+    }
+  });
 
   // On the search results page, submits the search form when a category is
   // chosen.
@@ -85,15 +88,6 @@ import Utility from 'modules/utility';
       .toggleClass('open');
   });
   // END TODO
-
-  // Webtrends - Capture the search query for on-site search
-  if (~window.location.href.indexOf('?s=')) {
-    let $query = window.location.href;
-    $('head').append('<meta name="WT.oss" content="'
-      + $query.split('?s=')[1]+'">');
-    $('head').append('<meta name="WT.oss_r" content="'
-      + $('.program-card').length +'">');
-  }
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
@@ -238,4 +232,7 @@ import Utility from 'modules/utility';
 
   // Add rel attribute to new window links.
   $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+
+  // Enable environment warnings
+  $(window).on('load', () => Utility.warnings());
 })(window, jQuery);

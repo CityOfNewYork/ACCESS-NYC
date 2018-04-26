@@ -68,4 +68,7 @@ import Utility from 'modules/utility';
 
   // Add rel attribute to new window links.
   $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+
+  // Enable environment warnings
+  $(window).on('load', () => Utility.warnings());
 })(window, jQuery);

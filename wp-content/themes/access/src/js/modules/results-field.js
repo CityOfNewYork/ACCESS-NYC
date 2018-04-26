@@ -3,7 +3,6 @@
 
 import $ from 'jquery';
 import ShareForm from 'modules/share-form';
-import ScreenerField from 'modules/screener-field';
 import Utility from 'modules/utility';
 
 /**
@@ -43,11 +42,7 @@ class ResultsField {
 
     // Initialize share by email/sms forms.
     $(`.${ShareForm.CssClass.FORM}`).each(function(i, el) {
-      let config = {
-        'analyticsPrefix': ScreenerField.AnalyticsPrefix,
-        'context': 'Results'
-      };
-      new ShareForm(el, config).init();
+      new ShareForm(el).init();
     });
 
     // Finalize form

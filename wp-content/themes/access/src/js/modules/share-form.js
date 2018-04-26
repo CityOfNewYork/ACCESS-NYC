@@ -15,7 +15,7 @@ class ShareForm {
    * @param {object}      config - The configuration for the share form.
    * @constructor
    */
-  constructor(el, config) {
+  constructor(el) {
     /** @private {HTMLElement} The component element. */
     this._el = el;
 
@@ -30,9 +30,6 @@ class ShareForm {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
-
-    /** @private {object} The prefix for share tracking. */
-    this._config = (config) ? config : {};
   }
 
   /**
@@ -223,6 +220,8 @@ class ShareForm {
         $spinner.setAttribute('style', 'display: none'); // hide spinner
       }
       this._isBusy = false;
+      // Just to see if it's working
+      if (Utility.debug()) this._track(type);
     });
   }
 
@@ -232,20 +231,9 @@ class ShareForm {
    * @param  {string} type - The share type, ex. 'Email' or 'Text'
    */
   _track(type) {
-    let config = this._config;
-    let prefix = '';
     let key = type.charAt(0).toUpperCase() + type.slice(1);
-    let context = '';
 
-    if (config.hasOwnProperty('analyticsPrefix')) {
-      prefix = config.analyticsPrefix + ':';
-    }
-
-    if (config.hasOwnProperty('context')) {
-      context = ' ' + config.context;
-    }
-
-    Utility.track(`${prefix} ${key}${context}:`, [
+    Utility.track(`${key}`, [
       {'DCS.dcsuri': `share/${type}`}
     ]);
   }

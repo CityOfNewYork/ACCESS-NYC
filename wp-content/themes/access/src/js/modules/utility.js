@@ -245,59 +245,132 @@ Utility.camelToUpper = function(str) {
  * Tracking function wrapper
  * @param  {string}     key  The key or event of the data
  * @param  {collection} data The data to track
+ * @return {object}          The final data object
  */
 Utility.track = function(key, data) {
   // Set the path name based on the location if 'DCS.dcsuri' exists
   let dcsuri = _.pluck(data, 'DCS.dcsuri')[0];
 
   const d = (dcsuri) ? _.map(data, function(value) {
-    if (value.hasOwnProperty('DCS.dcsuri')) {
-      return {'DCS.dcsuri': `${window.location.pathname}${dcsuri}`};
-    } return value;
-  }) : data;
+      if (value.hasOwnProperty('DCS.dcsuri')) {
+        return {'DCS.dcsuri': `${window.location.pathname}${dcsuri}`};
+      } return value;
+    }) : data;
 
-  /**
-   * Webtrends
-   */
   /* eslint-disable no-undef */
-  if (typeof Webtrends !== 'undefined') {
-    let wt = Webtrends;
-    /* eslint-enable no-undef */
-    let wtData = d;
-    let prefix = {};
+  /** Webtrends */
+  if (typeof Webtrends !== 'undefined')
+    Utility.webtrends(key, d);
+  /** Google Analytics */
+  if (typeof gtag !== 'undefined')
+    Utility.gtagClick(key, d);
+  /* eslint-enable no-undef */
 
-    prefix['WT.ti'] = key;
-    wtData.unshift(prefix);
+  return d;
+};
 
-    // format data for Webtrends
-    wtData = {
-      argsa: _.flatten(_.map(wtData, function(value) {
-        return _.pairs(value);
-      }))
-    };
-
-    wt.multiTrack(wtData);
-    /* eslint-disable no-console, no-debugger */
-    if (Utility.debug())
-      console.dir([`track: '${key}'`, wtData]);
-    /* eslint-enable no-console, no-debugger */
-  }
-
-  /**
-   * Segment
-   * Never use the identify method without consideration for PII
-   */
+/**
+ * Data bus for tracking views in Webtrends and Google Analytics
+ * @param  {string}     app  The name of the Single Page Application to track
+ * @param  {string}     key  The key or event of the data
+ * @param  {collection} data The data to track
+ */
+Utility.trackView = function(app, key, data) {
   /* eslint-disable no-undef */
-  if (typeof analytics !== 'undefined') {
-    // format data for Segment
-    let sData = _.reduce(data, (memo, num) => _.extend(memo, num), {});
-    analytics.track(key, sData);
-    /* eslint-enable no-undef */
+  /** Webtrends */
+  if (typeof Webtrends !== 'undefined')
+    Utility.webtrends(key, data);
+  /** Google Analytics */
+  if (typeof gtag !== 'undefined')
+    Utility.gtagView(app, key, data);
+  /* eslint-enable no-undef */
+};
+
+/**
+ * Push Events to Webtrends
+ * @param  {string}     key  The key or event of the data
+ * @param  {collection} data The data to track
+ */
+Utility.webtrends = function(key, data) {
+  /* eslint-disable no-undef, no-console, no-debugger */
+  if (typeof Webtrends === 'undefined') return;
+  let prefix = {};
+  prefix['WT.ti'] = key;
+  data.unshift(prefix);
+  // format data for Webtrends
+  data = {
+    argsa: _.flatten(_.map(data, function(value) {
+      return _.pairs(value);
+    }))
+  };
+  Webtrends.multiTrack(data);
+  if (Utility.debug())
+    console.dir([`webtrends: multiTrack`, data]);
+  /* eslint-disable no-undef, no-console, no-debugger */
+};
+
+/**
+ * Push Click Events to Google Analytics
+ * @param  {string}     key  The key or event of the data
+ * @param  {collection} data The data to track
+ */
+Utility.gtagClick = function(key, data) {
+  let uri = _.find(data, (value) => (value.hasOwnProperty('DCS.dcsuri')));
+  if (typeof uri === 'undefined') {
     /* eslint-disable no-console, no-debugger */
-    if (Utility.debug())
-      console.dir([`track: '${key}'`, sData]);
+    if (Utility.debug()) {
+      console.warn([
+        'Click tracking for Webtrends and Google Analytics requires setting',
+        'the DCS.dcsuri parameter: {"DCS.dcsuri": "category/action"}'
+      ].join(' '));
+    }
     /* eslint-enable no-console, no-debugger */
+    return;
   }
+  let event = {
+    'event_category': key
+  };
+  /* eslint-disable no-undef */
+  gtag('event', uri['DCS.dcsuri'], event);
+  /* eslint-enable no-undef */
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+    console.dir([`gtag: event, ${uri['DCS.dcsuri']}`, event]);
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
+ * Push Screen View Events to Google Analytics
+ * @param  {string}     app  The name of the application
+ * @param  {string}     key  The key or event of the data
+ * @param  {collection} data The data to track
+ */
+Utility.gtagView = function(app, key, data) {
+  let d = _.reduceRight(data, (a, b) => _.extend(a, b));
+  let view = {
+    app_name: app,
+    screen_name: d['WT.ti']
+  };
+  /* eslint-disable no-undef */
+  gtag('event', 'screen_view', view);
+  /* eslint-enable no-undef */
+  /* eslint-disable no-console, no-debugger */
+  if (Utility.debug())
+    console.dir([`gtag: event, screen_view`, view]);
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
+ * Warnings to show for the environment
+ */
+Utility.warnings = function() {
+  /* eslint-disable no-console, no-debugger */
+  if (typeof Webtrends === 'undefined' && Utility.debug())
+    console.warn(Utility.CONFIG.MSG_WT_NONCONFIG);
+  /** Google Analytics */
+  if (typeof gtag === 'undefined' && Utility.debug())
+    console.warn(Utility.CONFIG.MSG_GA_NONCONFIG);
+  /* eslint-enable no-console, no-debugger */
 };
 
 /**
@@ -314,7 +387,9 @@ Utility.CONFIG = {
   URL_PIN_BLUE: '/wp-content/themes/access/assets/img/map-pin-blue.png',
   URL_PIN_BLUE_2X: '/wp-content/themes/access/assets/img/map-pin-blue-2x.png',
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
-  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png'
+  URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
+  MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
+  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment'
 };
 
 export default Utility;

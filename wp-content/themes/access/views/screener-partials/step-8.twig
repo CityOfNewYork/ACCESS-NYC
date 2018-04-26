@@ -1,4 +1,5 @@
-<fieldset class="screener-body-step js-screener-step" id="step-8">
+<fieldset class="screener-body-step js-screener-step" id="step-8" data-track-key="Screener Step: 8" 
+  data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "8-AreYouHead"}]'>
   <div class="screener-step">{{ __('Step 8 of 10', 'accessnyc-screener') }}</div>
   <h1 class="screener-title">{{ __('Tell us about the head of the household.', 'accessnyc-screener') }}</h1>
   <div class="screener-question" id="screener-is-submitter-head-of-household">
@@ -14,11 +15,11 @@
       <p>{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', 'accessnyc-screener') }}</p>
     </div>
     <div class="screener-radio-buttons js-screener-radio-group">
-      <label class="screener-radio screener-label js-screener-radio-label">
+      <label class="screener-radio screener-label js-screener-radio-label" id="step-8-hoh" data-track-key="Screener Step: 8 Head" data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "8-IsHead"}]'>
         <input class="screener-radio-input js-screener-toggle sr-only" value="1" type="radio" name="Person[0].headOfHousehold" data-type="boolean" data-hides="#screener-hoh" checked/>
         <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
       </label>
-      <label class="screener-radio screener-label js-screener-radio-label">
+      <label class="screener-radio screener-label js-screener-radio-label" data-track-key="Screener Step 8: Not Head" data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "8-NotHead"}]'>
         <input class="screener-radio-input js-screener-toggle sr-only" value="0" type="radio" name="Person[0].headOfHousehold" data-type="boolean" data-shows="#screener-hoh"/>
         <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
       </label>
