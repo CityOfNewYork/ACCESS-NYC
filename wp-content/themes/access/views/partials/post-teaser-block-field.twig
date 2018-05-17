@@ -32,6 +32,18 @@
 
       {{ post.brief_excerpt }}
 
+      {% if post.heads_up | length %}
+      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }} m-bottom-2">
+        <h3>{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
+        {{ post.get_field('heads_up') }}
+        {% for section in shownSections %}{% if section.value == 'what-you-need-to-include' %}
+        <p class="hide-for-print">
+          <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank" rel="noopener noreferrer">See a full list of required documents</a>
+        </p>
+        {% endif %}{% endfor %}
+      </div>
+      {% endif %}
+
     </div>
 
     <div class="d-flex fd-column jc-space-between hide-for-print">
@@ -90,18 +102,6 @@
       {% endif %}
 
       {% endfor %}
-
-      {% if post.heads_up | length %}
-      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }} m-bottom-2">
-        <h3>{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
-        {{ post.get_field('heads_up') }}
-        {% for section in shownSections %}{% if section.value == 'what-you-need-to-include' %}
-        <p class="hide-for-print">
-          <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank" rel="noopener noreferrer">See a full list of required documents</a>
-        </p>
-        {% endif %}{% endfor %}
-      </div>
-      {% endif %}
 
       {% for section in post.get_field('show_sections') %}
 
