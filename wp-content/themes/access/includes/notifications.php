@@ -19,3 +19,29 @@ function timber() {
     return;
   }
 }
+
+/**
+ * Return a localized reading friendly string of the enviroment.
+ * @param  string $env The environment string to return if uknown. Default 'Unknown.'
+ * @return string      The localized reading friendly string.
+ */
+function environment_string($env = 'Unkown') {
+  switch (WP_ENV) {
+    case 'accessnyc':
+        $env = __('Production');
+        break;
+    case 'accessnycstage':
+        $env = __('Staging');
+        break;
+    case 'accessnycdemo':
+        $env = __('Demo');
+        break;
+    case 'accessnyctest':
+        $env = __('Testing');
+        break;
+    case 'development':
+        $env = __('Development');
+        break;
+  }
+  return $env;
+}

@@ -43,3 +43,7 @@
 .b-none {
   border: none !important
 }
+
+.b-soft {
+  border-radius: $btn-radius;
+}
