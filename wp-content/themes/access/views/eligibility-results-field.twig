@@ -10,7 +10,7 @@
 
 {% block header %}
 <header class="site-header">
-  <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark b-bottom b-white b-4">
+  <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark">
       <svg class="icon icon-logo-full" width="163">
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
       </svg>
@@ -31,6 +31,27 @@
   {% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
   <main class="main-content screener-field layout" id="content" data-js="results">
     <div class="layout__body bg-white">
+
+      <div class="screener-results-header usa-grid m-0">
+        <div class="screener-results-icon hide-for-print">
+          <svg class="icon icon-success">
+            <use xlink:href="#icon-success"></use>
+          </svg>
+        </div>
+        <div class="screener-results-text">
+          {% spaceless %}
+            <h1 class="screener-results-heading">
+              {% if programResultTotal == 0 %}
+                {{__('There are no programs for you to look at.', 'accessnyc-results')}}
+              {% elseif programResultTotal == 1 %}
+                {{ programResultTotal }} {{__('program for you to look at.', 'accessnyc-results')}}
+              {% else %}
+                {{ programResultTotal }} {{__('programs for you to look at.', 'accessnyc-results')}}
+              {% endif %}
+            <p>{{__('Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.', 'accessnyc-results')}}</p>
+          {% endspaceless %}
+        </div>
+      </div>
 
       <form method="post" action="{{ action }}" class="w-100p p-2" novalidate data-js="final-results">
 
