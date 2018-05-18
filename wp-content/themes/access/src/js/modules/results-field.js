@@ -123,7 +123,7 @@ class ResultsField {
       .children().filter(':not(.hidden)').length;
 
     // Update the length if available
-    parent.find(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+    $(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
 
     // Switch to singular text if only one program is left
     if (length === 1) {

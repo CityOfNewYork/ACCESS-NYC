@@ -29540,7 +29540,7 @@ ResultsField = function () {
       children().filter(':not(.hidden)').length;
 
       // Update the length if available
-      parent.find(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+      (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
 
       // Switch to singular text if only one program is left
       if (length === 1) {
@@ -33774,4 +33774,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.065373691ad28d4d477c33b02f3be0aa.js.map
+//# sourceMappingURL=main-field.2caddcd6b16c1fdcbf849c33aad09202.js.map
