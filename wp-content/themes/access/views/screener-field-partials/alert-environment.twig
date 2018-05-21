@@ -1,0 +1,13 @@
+<div class="alert status-info m-0">
+  <div class="alert-icon">
+    <svg class="icon icon-info d-block">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use>
+    </svg>
+  </div>
+  <div class="alert-body">
+    {{ __('You are viewing the ' ~ WP_ENV ~ ' environment.', translationID) }}
+    <a target="_blank" href="https://access.nyc.gov/peu">
+      {{ __('Follow this link to use production.', translationID) }}
+    </a>
+  </div>
+</div>

@@ -249,10 +249,6 @@
       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
     </svg>
     <div class="d-flex ai-center hide-for-print">
-      <label class="label b-white c-white" title="{{ __('You are viewing the ' ~ WP_ENV ~ ' environment', translationID) }}">{{ WP_ENV }}</label>
-      {% if WP_ENV != 'Production' %}
-        <a class="btn btn-primary btn-small m-right m-left" role="button" target="_blank" href="https://access.nyc.gov/peu">{{ __('Production', translationID) }}</a>
-      {% endif %}
       <a class="btn btn-primary btn-small" data-js="reload">{{ __('New Client', translationID) }}</a>
     </div>
   </div>
@@ -271,6 +267,12 @@
       <div id="vue">
 
         <div class="animated o-00" id="page-admin" data-js="page">
+
+          {% if WP_ENV != 'Production' %}
+          <div class="p-horizontal-2 p-top-2">
+            {% include 'screener-field-partials/alert-environment.twig' %}
+          </div>
+          {% endif %}
 
           <div class="p-horizontal-2">
 
