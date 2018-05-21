@@ -189,7 +189,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/main-field', '.min') }}
+{{ function('enqueue_script', 'assets/js/main-field', true) }}
 <script>
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

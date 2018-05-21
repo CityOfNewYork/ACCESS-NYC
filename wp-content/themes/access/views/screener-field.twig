@@ -424,7 +424,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/main-field', '.min') }}
+{{ function('enqueue_script', 'assets/js/main-field', true) }}
 <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise&flags=gated"></script> {# IE Support https://polyfill.io #}
 <script type="text/javascript">
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
