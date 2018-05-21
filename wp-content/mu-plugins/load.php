@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Autoloader
- * Description: The autoloader for 'must use' plugins. These plugins are created exclusively for ACCESS NYC for application functions. This loader includes "Config", "DroolsProxy", "SendMeNYC", and "StatCollector"
+ * Description: The autoloader for 'must use' plugins. These plugins are created exclusively for ACCESS NYC for application functions. This loader includes "Config (NYCO)", "DroolsProxy (BSD)", "SendMeNYC (BSD)", and "StatCollector (BSD)"
  * Author: NYC Opportunity
  */
 
