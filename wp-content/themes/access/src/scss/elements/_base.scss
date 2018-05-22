@@ -48,6 +48,13 @@ use {
 .main-content {
   flex: 1 1 auto;
   background: $color-white;
+  &:before,
+  &:after {
+    content: '.';
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
 }
 
 .usa-grid {

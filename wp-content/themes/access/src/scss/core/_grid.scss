@@ -66,3 +66,19 @@
 .m-0 {
   margin: 0 !important
 }
+
+@media print {
+
+  @include gutters($spacing-base, 'm', 'margin', 3, '\\@print');
+
+  @include gutters($spacing-base, 'p', 'padding', 3, '\\@print');
+
+  .p-0\@print {
+    padding: 0 !important
+  }
+
+  .m-0\@print {
+    margin: 0 !important
+  }
+
+}
