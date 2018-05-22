@@ -172,7 +172,7 @@ function bsd_custom_post_type() {
     'outreach',
     'programs',
     array(
-      'label' => __('Outreach Categories'),
+      'label' => __('PEU Outreach Categories'),
       'hierarchical' => true,
     )
   );
