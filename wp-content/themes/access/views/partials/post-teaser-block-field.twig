@@ -36,9 +36,17 @@
 
       {{ post.brief_excerpt }}
 
+      {% if post.terms('outreach') %}
+      <h3 class="type-h4">
+        {{ post.terms('outreach') | join(', ') }}
+      </h3>
+      {% endif %}
+
       {% if post.heads_up | length %}
-      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }}">
-        <h3>{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
+      
+      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }} m-bottom-2">
+        <h3 class="type-h4">{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
+
         {{ post.get_field('heads_up') }}
         {% for section in shownSections %}{% if section.value == 'what-you-need-to-include' %}
         <p class="d-none@print">
