@@ -21,20 +21,36 @@ $wrap-width: 1024px;
 
 // Declarations
 // Display
-.d-flex {
-  display: flex
+@mixin display($namespace: '') {
+  .d-none#{$namespace} {
+    display: none !important
+  }
+
+  .d-flex#{$namespace} {
+    display: flex !important
+  }
+
+  .d-block#{$namespace} {
+    display: block !important
+  }
+
+  .d-inline#{$namespace} {
+    display: inline !important
+  }
+
+  .d-inline-block#{$namespace} {
+    display: inline-block !important
+  }
+
+  .d-table#{$namespace} {
+    display: table !important
+  }
 }
 
-.d-block {
-  display: block
-}
+@include display;
 
-.d-inline-block {
-  display: inline-block
-}
-
-.d-table {
-  display: table
+@media print {
+  @include display('\\@print');
 }
 
 // Flexbox

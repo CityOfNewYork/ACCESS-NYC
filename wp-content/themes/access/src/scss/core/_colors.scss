@@ -80,25 +80,7 @@
 // Primary Colors
 @include color($primary);
 
-// Transparency
-// @include color($transparent);
-
-// .c-black {
-//   color: $color-black
-// }
-
-// .c-grey-dark {
-//   color: $color-grey-dark
-// }
-
-// .f-black {
-//   fill: $color-black
-// }
-
-// .f-grey-mid {
-//   fill: $color-grey-mid
-// }
-
-// .f-grey-dark {
-//   fill: $color-grey-dark
-// }
+// Print
+@media print {
+  @include background-color($print-colors);
+}
