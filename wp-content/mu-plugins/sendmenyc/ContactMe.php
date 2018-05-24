@@ -106,15 +106,21 @@ class ContactMe {
 
 	// Just makes sure that the user, secret key, and from fields were filled out
 	protected function valid_configuration( $service ) {
-		if ( empty(get_option( 'smnyc_'.$service.'_user' )) || 
-		empty(get_option( 'smnyc_'.$service.'_secret' )) || 
-		empty(get_option( 'smnyc_'.$service.'_from' )) ){
+		$user = get_option('smnyc_' . $service . '_user');
+		$secret = get_option('smnyc_' . $service . '_secret');
+		$from = get_option('smnyc_' . $service . '_from');
+
+		$user = (!empty($user)) ? $user : getenv('SMNYC_' . strtoupper($service) . '_USER');
+		$secret = (!empty($secret)) ? $secret : getenv('SMNYC_' . strtoupper($service) . '_SECRET');
+		$from = (!empty($from)) ? $from : getenv('SMNYC_' . strtoupper($service) . '_FROM');
+
+		if ( empty($user) || empty($secret) || empty($from) ) {
 			$this->failure( -1, 'Invalid Configuration' );
 		}
 	}
 
 	protected function is_results_url( $url ) {
-		$path = parse_url( $_POST["url"], PHP_URL_PATH );
+		$path = parse_url( $_POST['url'], PHP_URL_PATH );
 		return preg_match('/.*\/eligibility\/results\/?$/', $path);
 	}
 

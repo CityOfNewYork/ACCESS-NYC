@@ -89,22 +89,28 @@ function response_update() {
 	wp_die();
 }
 
-function _get_db(){
-	if ( empty(get_option('statc_host')) ||
-		 empty(get_option('statc_database')) ||
-		 empty(get_option('statc_user')) ||
-		 empty(get_option('statc_password')) ) {
-		error_log("StatCollector is missing database connection information. Cannot log");
+function _get_db() {
+	$host = get_option('statc_host');
+	$database = get_option('statc_database');
+	$user = get_option('statc_user');
+	$password = get_option('statc_password');
+	$bootstrapped = get_option('statc_bootstrapped');
+
+	$host = (!empty($host)) ? $host : getenv('STATC_HOST');
+	$database = (!empty($database)) ? $database : getenv('STATC_DATABASE');
+	$user = (!empty($user)) ? $user : getenv('STATC_USER');
+	$password = (!empty($password)) ? $password : getenv('STATC_PASSWORD');
+	$bootstrapped = (!empty($bootstrapped)) ? $bootstrapped : getenv('STATC_BOOTSTRAPPED');
+
+	if (empty($host) || empty($database) || empty($user) || empty($password)) {
+		error_log('StatCollector is missing database connection information. Cannot log');
 		return new MockDb();
 	}
 
-	$db = new \wpdb(get_option('statc_user'),
-					get_option('statc_password'),
-					get_option('statc_database'),
-					get_option('statc_host'));
+	$db = new \wpdb($user, $password, $database, $host);
 	$db->show_errors();
 
-	if ( get_option('statc_bootstrapped') !== '5' ) {
+	if ($bootstrapped !== '5') {
 		__bootstrap( $db );
 	}
 	return $db;
@@ -168,7 +174,7 @@ function __bootstrap( $db ){
 			PRIMARY KEY(id)
 		) ENGINE=InnoDB"
 	);
-	
+
 	// we will just let this fail if the columns exist
 	// from previous migrations. But silence the error
 	$db->hide_errors();
@@ -182,7 +188,7 @@ function __bootstrap( $db ){
 			ADD date DATETIME DEFAULT NOW() AFTER program_codes"
 	);
 	$db->show_errors();
-	
+
 
 	update_option('statc_bootstrapped', 5);
 }
