@@ -374,6 +374,30 @@ Utility.warnings = function() {
 };
 
 /**
+ * Set a timer based on user interaction
+ * @param  {number}   time     The timing of the timeout
+ * @param  {Function} callback The timer callback function
+ */
+Utility.sessionTimeout = function(time, callback) {
+  let timer = {
+    int: 0
+  };
+  timer.reset = function() {
+    if (timer.timeout) clearTimeout(timer.timeout);
+    timer.timeout = setTimeout(() => {
+        callback(timer);
+      }, time);
+    timer.int++;
+  };
+  window.addEventListener('mousemove', timer.reset);
+  window.addEventListener('mousedown', timer.reset);
+  window.addEventListener('touchstart', timer.reset);
+  window.addEventListener('keypress', timer.reset);
+  window.addEventListener('scroll', timer.reset);
+  window.addEventListener('click', timer.reset);
+};
+
+/**
  * Site constants.
  * @enum {string}
  */

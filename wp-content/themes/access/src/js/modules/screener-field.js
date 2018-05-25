@@ -33,6 +33,9 @@ class ScreenerField {
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = true;
 
+    /** @private {boolean} Time it takes for the session to timeout (milli) */
+    this._idleSessionTimeout = 3600000;
+
     /** @private {object} The screener routes and event hooks */
     this._routes = {
       admin: function(vue) {},
@@ -167,7 +170,10 @@ class ScreenerField {
     }
 
     // `2/1440` sets the cookie to expire after two minutes.
-    Cookies.set(ScreenerField.cookies.VIEWS, ++viewCount, {expires: (2/1440)});
+    Cookies.set(ScreenerField.cookies.VIEWS, ++viewCount, {
+      expires: (2/1440),
+      path: ScreenerField.CookiePath
+    });
 
     /**
      * Routing
@@ -183,7 +189,22 @@ class ScreenerField {
     // Set the initial view
     this._routerPage('#page-admin');
 
+    // Set the timeout for the application
+    Utility.sessionTimeout(
+      this._idleSessionTimeout,
+      this._idleSession
+    );
+
     return this;
+  }
+
+  /**
+   * Actions for when the session is idle
+   * @param  {object} timer The timer object
+   */
+  _idleSession(timer) {
+    if (timer.int > 1) // prevents the page refresh until initial interaction
+      location.reload(); // The data will be cleared.
   }
 
   /**
@@ -1107,6 +1128,11 @@ ScreenerField.cookies = {
  * Analytics Prefix
  */
 ScreenerField.AnalyticsPrefix = 'PEU';
+
+/**
+ * Cookie Path
+ */
+ScreenerField.CookiePath = 'peu';
 
 /**
  * Valid zip codes in New York City. Source:
