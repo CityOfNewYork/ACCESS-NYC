@@ -29878,6 +29878,9 @@ ScreenerField = function () {
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = true;
 
+    /** @private {boolean} Time it takes for the session to timeout (milli) */
+    this._idleSessionTimeout = 3600000;
+
     /** @private {object} The screener routes and event hooks */
     this._routes = {
       admin: function admin(vue) {},
@@ -30012,11 +30015,14 @@ ScreenerField = function () {
       }
 
       // `2/1440` sets the cookie to expire after two minutes.
-      _jsCookie2.default.set(ScreenerField.cookies.VIEWS, ++viewCount, { expires: 2 / 1440 });
+      _jsCookie2.default.set(ScreenerField.cookies.VIEWS, ++viewCount, {
+        expires: 2 / 1440,
+        path: ScreenerField.CookiePath });
+
 
       /**
-                                                                                                * Routing
-                                                                                                */
+                                            * Routing
+                                            */
 
       window.addEventListener('hashchange', function (event) {return _this._router(event);});
 
@@ -30028,7 +30034,22 @@ ScreenerField = function () {
       // Set the initial view
       this._routerPage('#page-admin');
 
+      // Set the timeout for the application
+      _utility2.default.sessionTimeout(
+      this._idleSessionTimeout,
+      this._idleSession);
+
+
       return this;
+    }
+
+    /**
+       * Actions for when the session is idle
+       * @param  {object} timer The timer object
+       */ }, { key: '_idleSession', value: function _idleSession(
+    timer) {
+      if (timer.int > 1) // prevents the page refresh until initial interaction
+        location.reload(); // The data will be cleared.
     }
 
     /**
@@ -30954,10 +30975,15 @@ ScreenerField.cookies = {
 ScreenerField.AnalyticsPrefix = 'PEU';
 
 /**
-                                        * Valid zip codes in New York City. Source:
-                                        * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
-                                        * @type {array<String>}
+                                        * Cookie Path
                                         */
+ScreenerField.CookiePath = 'peu';
+
+/**
+                                   * Valid zip codes in New York City. Source:
+                                   * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
+                                   * @type {array<String>}
+                                   */
 ScreenerField.NYC_ZIPS = _screener2.default.NYC_ZIPS;exports.default =
 
 ScreenerField;
@@ -31504,7 +31530,7 @@ ScreenerStaff = function () {
     }
 
     /**
-       * Fetch the object the object from the browser if it exists
+       * Fetch the object from the browser if it exists
        */ }, { key: 'fetch', value: function fetch()
     {
       var storage = window.sessionStorage;
@@ -31514,6 +31540,13 @@ ScreenerStaff = function () {
       if (staff) {
         this.set(staff);
       }
+    }
+
+    /**
+       * Destroy the object from the browser
+       */ }, { key: 'destroy', value: function destroy()
+    {
+      window.sessionStorage.removeItem(ScreenerStaff.Cookies.STAFF);
     } }]);return ScreenerStaff;}();
 
 
@@ -31681,7 +31714,10 @@ Screener = function () {
         viewCount = 0;
       }
       // `2/1440` sets the cookie to expire after two minutes.
-      _jsCookie2.default.set('screenerViews', ++viewCount, { expires: 2 / 1440 });
+      _jsCookie2.default.set('screenerViews', ++viewCount, {
+        expires: 2 / 1440,
+        path: Screener.CookiePath });
+
 
       if (_utility2.default.getUrlParameter('debug') === '1') {
         if (window.location.hash) {
@@ -32874,7 +32910,12 @@ Screener.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
 '12423', '12428', '12435', '12458', '12466', '12473', '12528',
 '12701', '12733', '12734', '12737', '12750', '12751', '12754',
 '12758', '12759', '12763', '12764', '12768', '12779', '12783',
-'12786', '12788', '12789', '13731', '16091', '20459'];exports.default =
+'12786', '12788', '12789', '13731', '16091', '20459'];
+
+/**
+                                                        * The cookie path for the screener cookies
+                                                        */
+Screener.CookiePath = 'eligibility';exports.default =
 
 Screener;
 
@@ -33744,6 +33785,30 @@ Utility.warnings = function () {
 };
 
 /**
+    * Set a timer based on user interaction
+    * @param  {number}   time     The timing of the timeout
+    * @param  {Function} callback The timer callback function
+    */
+Utility.sessionTimeout = function (time, callback) {
+  var timer = {
+    int: 0 };
+
+  timer.reset = function () {
+    if (timer.timeout) clearTimeout(timer.timeout);
+    timer.timeout = setTimeout(function () {
+      callback(timer);
+    }, time);
+    timer.int++;
+  };
+  window.addEventListener('mousemove', timer.reset);
+  window.addEventListener('mousedown', timer.reset);
+  window.addEventListener('touchstart', timer.reset);
+  window.addEventListener('keypress', timer.reset);
+  window.addEventListener('scroll', timer.reset);
+  window.addEventListener('click', timer.reset);
+};
+
+/**
     * Site constants.
     * @enum {string}
     */
@@ -33774,4 +33839,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.2caddcd6b16c1fdcbf849c33aad09202.js.map
+//# sourceMappingURL=main-field.b7d2c0bd62fba88c5e0253139d9390bf.js.map
