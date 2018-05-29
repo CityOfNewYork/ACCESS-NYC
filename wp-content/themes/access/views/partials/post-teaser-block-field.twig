@@ -42,7 +42,7 @@
       {% endfor %}
 
       {% if post.terms('outreach') %}
-      <h3 class="type-h4">
+      <h3 class="type-h4 d-none@print">
         {{ post.terms('outreach') | join(', ') }}
       </h3>
       {% endif %}
