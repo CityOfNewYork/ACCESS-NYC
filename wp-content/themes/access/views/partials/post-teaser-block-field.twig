@@ -30,11 +30,16 @@
           {{ post.plain_language_program_name }}
         </h3>
       </a>
+
       {% if not short_post %}
       <p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
       {% endif %}
 
-      {{ post.brief_excerpt }}
+      {% for section in shownSections %}
+      {% if section.value == 'how-it-works' %}
+      {{ post.get_field('program_description') }}
+      {% endif %}
+      {% endfor %}
 
       {% if post.terms('outreach') %}
       <h3 class="type-h4">
@@ -43,13 +48,12 @@
       {% endif %}
 
       {% if post.heads_up | length %}
-      
-      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }} m-bottom-2">
-        <h3 class="type-h4">{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
 
+      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }} m-bottom@print">
+        <h3 class="type-h4">{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
         {{ post.get_field('heads_up') }}
         {% for section in shownSections %}{% if section.value == 'what-you-need-to-include' %}
-        <p class="d-none@print">
+        <p class="d-none@print m-0">
           <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank" rel="noopener noreferrer">See a full list of required documents</a>
         </p>
         {% endif %}{% endfor %}
@@ -109,20 +113,9 @@
         <div style="width:44px;height:44px;">&nbsp;</div>
       </div>
 
-      <div class="w-100 p-horizontal p-0@print">
+      <div class="w-100 p-left p-0@print">
 
         {% for section in shownSections %}
-
-        {% if section.value == 'how-it-works' %}
-        <div class="m-bottom-2">
-          <h3>{{__('How it Works', 'accessnyc-program-detail')}}</h3>
-          {{ post.get_field('program_description') }}
-        </div>
-        {% endif %}
-
-        {% endfor %}
-
-        {% for section in post.get_field('show_sections') %}
 
         {% if section.value == 'how-to-apply' %}
         <div class="m-bottom-2">
