@@ -32162,14 +32162,24 @@ Screener = function () {
             member.set('age', Screener.getTypedVal($step.
             find('input[name="Person[' + personIndex + '].age"]')[0]));
 
-            // Set member attributes and benefits.
-            $step.find('.' + Screener.CssClass.CHECKBOX_GROUP + ',\n            .' +
-            Screener.CssClass.RADIO_GROUP).find('input:checked').
-            filter('[name^="Person[' + personIndex + ']"]').each(function (i, el) {
-              if ((0, _jquery2.default)(el).val() && (0, _jquery2.default)(el).attr('name')) {
-                var _key = (0, _jquery2.default)(el).attr('name').split('.')[1];
-                member.set(_key, Screener.getTypedVal(el));
-              }
+            // Set member attributes and benefits (checkbox groups)
+            $step.find('.' + Screener.CssClass.CHECKBOX_GROUP).
+            find('input') // get all checkboxes...
+            .filter('[name^="Person[' + personIndex + ']"]').
+            each(function (i, el) {
+              var key = (0, _jquery2.default)(el).attr('name').split('.')[1];
+              // ...and set them to their prop value
+              member.set(key, (0, _jquery2.default)(el).prop('checked'));
+            });
+
+            // Set member attrs for radio button groups
+            $step.find('.' + Screener.CssClass.RADIO_GROUP).
+            find('input:checked') // only get checked radios...
+            .filter('[name^="Person[' + personIndex + ']"]').
+            each(function (i, el) {
+              var key = (0, _jquery2.default)(el).attr('name').split('.')[1];
+              // ...and set them to their typed value
+              member.set(key, Screener.getTypedVal(el));
             });
 
             // Add income and expenses.
@@ -32231,11 +32241,11 @@ Screener = function () {
             // Set the type of the household.
             $step.find('input[name^="Household"]').each(function (i, el) {
               if ((0, _jquery2.default)(el).val()) {
-                var _key2 = (0, _jquery2.default)(el).attr('name').split('.')[1];
+                var _key = (0, _jquery2.default)(el).attr('name').split('.')[1];
                 if ((0, _jquery2.default)(el).prop('checked')) {
-                  _this3._household.set(_key2, Screener.getTypedVal(el));
+                  _this3._household.set(_key, Screener.getTypedVal(el));
                 } else {
-                  _this3._household.set(_key2, false);
+                  _this3._household.set(_key, false);
                 }
               }
             });
@@ -33774,4 +33784,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.2caddcd6b16c1fdcbf849c33aad09202.js.map
+//# sourceMappingURL=main-field.9994cc2b81c3787712c58a802dc3534d.js.map

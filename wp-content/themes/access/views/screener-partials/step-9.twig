@@ -1,4 +1,4 @@
-<fieldset class="screener-body-step js-screener-step" id="step-9" data-track-key="Screener Step: 9" 
+<fieldset class="screener-body-step js-screener-step" id="step-9" data-track-key="Screener Step: 9"
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "9-Nextuser"}]'>
   <div class="screener-step">{{ __('Step 9 of 10', 'accessnyc-screener') }}</div>
   <h4>{{ __('So far you’ve told us about:', 'accessnyc-screener') }}</h4>
@@ -85,20 +85,20 @@
       </label>
     </div>
   </div>
-  <div class="screener-question hidden" id="screener-is-person-<%= personIndex %>-full-time-student">
+  <div class="screener-question <% if (!person.studentFulltime) { print('hidden') }%>" id="screener-is-person-<%= personIndex %>-full-time-student">
     <label class="screener-label d-inline-block m-bottom">{{ __('Are they a full-time student?', 'accessnyc-screener') }}</label>
     <div class="screener-radio-buttons js-screener-radio-group">
       <label class="screener-radio screener-label js-screener-radio-label">
-        <input class="screener-radio-input sr-only" value="1" type="radio" name="Person[<%= personIndex %>].studentFulltime" data-type="boolean"<% if (person.studentFullTime) { print(' checked') }%>/>
+        <input class="screener-radio-input sr-only" value="1" type="radio" name="Person[<%= personIndex %>].studentFulltime" data-type="boolean"<% if (person.studentFulltime) { print(' checked') }%>/>
         <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
       </label>
       <label class="screener-radio screener-label js-screener-radio-label">
-        <input class="screener-radio-input sr-only" value="0" type="radio" name="Person[<%= personIndex %>].studentFulltime" data-type="boolean"<% if (!person.studentFullTime) { print(' checked') }%>/>
+        <input class="screener-radio-input sr-only" value="0" type="radio" name="Person[<%= personIndex %>].studentFulltime" data-type="boolean"<% if (!person.studentFulltime) { print(' checked') }%>/>
         <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
       </label>
     </div>
   </div>
-  <div class="screener-question hidden" id="screener-did-person-<%= personIndex %>-work-last-18-months">
+  <div class="screener-question <% if (!person.unemployedWorkedLast18Months) { print('hidden') }%>" id="screener-did-person-<%= personIndex %>-work-last-18-months">
     <label class="screener-label d-inline-block m-bottom">{{ __('Did they work in the last 18 months?', 'accessnyc-screener') }}</label>
     <div class="screener-radio-buttons js-screener-radio-group">
       <label class="screener-radio screener-label js-screener-radio-label">
@@ -106,7 +106,7 @@
         <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
       </label>
       <label class="screener-radio screener-label js-screener-radio-label">
-        <input class="screener-radio-input sr-only" value="0" type="radio" name="Person[<%= personIndex %>].unemployedWorkedLast18Months" data-type="boolean"<% if (!person.studentFullTime) { print(' checked') }%>/>
+        <input class="screener-radio-input sr-only" value="0" type="radio" name="Person[<%= personIndex %>].unemployedWorkedLast18Months" data-type="boolean"<% if (!person.unemployedWorkedLast18Months) { print(' checked') }%>/>
         <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
       </label>
     </div>
