@@ -29529,6 +29529,7 @@ ResultsField = function () {
       var additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
       var parent = selected.length ? selected : additional;
       var length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).children();
+      var total = (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LIST).children();
 
       // Hide the card
       card.attr('aria-hidden', true).
@@ -29539,8 +29540,14 @@ ResultsField = function () {
       length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).
       children().filter(':not(.hidden)').length;
 
-      // Update the length if available
-      (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+      // Update the length in the parent bucket
+      parent.find(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+
+      // Update the total programs count
+      total = (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LIST).
+      children().filter(':not(.hidden)').length;
+
+      (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_TOTAL).html(total);
 
       // Switch to singular text if only one program is left
       if (length === 1) {
@@ -29668,6 +29675,7 @@ ResultsField.Selectors = {
   'SHARE_RESULTS': '[data-js="share-results"]',
   'SPINNER': '.js-spinner',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
+  'PROGRAMS_TOTAL': '[data-js="programs-total"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
   'PROGRAMS_LIST': '[data-js="programs-list"]',
   'PROGRAMS_TITLE': '[data-js="programs-title"]',
@@ -33784,4 +33792,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.9994cc2b81c3787712c58a802dc3534d.js.map
+//# sourceMappingURL=main-field.580167fac9166e7f0073fb9dad97248d.js.map

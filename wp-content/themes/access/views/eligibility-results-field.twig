@@ -40,9 +40,9 @@
               {% if programResultTotal == 0 %}
                 {{__('There are no programs for you to look at.', 'accessnyc-results')}}
               {% elseif programResultTotal == 1 %}
-                <span data-js="programs-length">{{ programResultTotal }}</span> {{__('program for you to look at.', 'accessnyc-results')}}
+                <span data-js="programs-total">{{ programResultTotal }}</span> {{__('program for you to look at.', 'accessnyc-results')}}
               {% else %}
-                <span data-js="programs-length">{{ programResultTotal }}</span> {{__('programs for you to look at.', 'accessnyc-results')}}
+                <span data-js="programs-total">{{ programResultTotal }}</span> {{__('programs for you to look at.', 'accessnyc-results')}}
               {% endif %}
             <p>{{__('Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.', 'accessnyc-results')}}</p>
           {% endspaceless %}
