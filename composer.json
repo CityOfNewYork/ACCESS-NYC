@@ -1,4 +1,19 @@
 {
+  "name": "ACCESS-NYC",
+  "version": "2.1.0",
+  "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
+  "homepage": "https://access.nyc.gov",
+  "authors": [
+    {
+      "name": "NYC Opportunity",
+      "email": "products@nycopportunity.nyc.gov",
+      "homepage": "http://nyc.gov/opportunity"
+    },
+    {
+      "name": "Blue State Digital",
+      "homepage": "https://www.bluestatedigital.com"
+    }
+  ],
   "repositories": [
     {
       "type": "composer",

@@ -54,5 +54,6 @@ $additionalProgramArgs = array(
 $context['programs'] = implode(',', $programs);
 $context['selectedPrograms'] = Timber::get_posts( $selectedProgramArgs );
 $context['additionalPrograms'] = Timber::get_posts( $additionalProgramArgs );
+$context['WP_ENV'] = Notifications\environment_string();
 
 Timber::render(array('eligibility-results-field.twig'), $context);

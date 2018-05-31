@@ -1,6 +1,6 @@
 {
   "name": "ACCESS-NYC",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "scripts": {
     "development": "NODE_ENV='development' gulp",
@@ -8,7 +8,7 @@
     "predeploy": "NODE_ENV='production' gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Jon Jandoc, Blue State Digital | Maintained by NYC Opportunity",
+  "author": "Blue State Digital | Maintained by NYC Opportunity",
   "license": "ISC",
   "browserify-shim": {},
   "private": true,

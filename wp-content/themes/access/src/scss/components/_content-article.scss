@@ -1,5 +1,6 @@
 .content-header {
-  @include margin(2*$spacing-base null);
+  margin-top: 2 * $spacing-base;
+  margin-bottom: 2 * $spacing-base;
 
   p {
     @include typography-lead();

@@ -622,14 +622,24 @@ class Screener {
         member.set('age', Screener.getTypedVal($step
             .find(`input[name="Person[${personIndex}].age"]`)[0]));
 
-        // Set member attributes and benefits.
-        $step.find(`.${Screener.CssClass.CHECKBOX_GROUP},
-            .${Screener.CssClass.RADIO_GROUP}`).find('input:checked')
-            .filter(`[name^="Person[${personIndex}]"]`).each((i, el) => {
-              if ($(el).val() && $(el).attr('name')) {
-                const key = $(el).attr('name').split('.')[1];
-                member.set(key, Screener.getTypedVal(el));
-              }
+        // Set member attributes and benefits (checkbox groups)
+        $step.find(`.${Screener.CssClass.CHECKBOX_GROUP}`)
+            .find('input') // get all checkboxes...
+            .filter(`[name^="Person[${personIndex}]"]`)
+            .each((i, el) => {
+              const key = $(el).attr('name').split('.')[1];
+               // ...and set them to their prop value
+              member.set(key, $(el).prop('checked'));
+            });
+
+        // Set member attrs for radio button groups
+        $step.find(`.${Screener.CssClass.RADIO_GROUP}`)
+            .find('input:checked') // only get checked radios...
+            .filter(`[name^="Person[${personIndex}]"]`)
+            .each((i, el) => {
+              const key = $(el).attr('name').split('.')[1];
+              // ...and set them to their typed value
+              member.set(key, Screener.getTypedVal(el));
             });
 
         // Add income and expenses.

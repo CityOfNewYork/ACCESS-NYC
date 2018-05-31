@@ -1,45 +1,58 @@
 
+@mixin borders($namespace: '') {
+  .b#{$namespace} {
+    border: 1px solid
+  }
 
-.b {
-  border: 1px solid
+  .b-top#{$namespace} {
+    border-top: 1px solid
+  }
+
+  .b-bottom#{$namespace} {
+    border-bottom: 1px solid
+  }
+
+  .b-left#{$namespace} {
+    border-left: 1px solid
+  }
+
+  .b-right#{$namespace} {
+    border-right: 1px solid
+  }
+
+  .b-2#{$namespace} {
+    border-width: 2px
+  }
+
+  .b-3#{$namespace} {
+    border-width: 3px
+  }
+
+  .b-4#{$namespace} {
+    border-width: 4px
+  }
+
+  .b-5#{$namespace} {
+    border-width: 5px
+  }
+
+  .b-6#{$namespace} {
+    border-width: 6px
+  }
+
+  .b-none#{$namespace} {
+    border: none !important
+  }
+
+  .b-soft#{$namespace} {
+    border-radius: $btn-radius;
+  }
 }
 
-.b-top {
-  border-top: 1px solid
+@include borders;
+
+@media print {
+  @include borders('\\@print');
 }
 
-.b-bottom {
-  border-bottom: 1px solid
-}
 
-.b-left {
-  border-left: 1px solid
-}
-
-.b-right {
-  border-right: 1px solid
-}
-
-.b-2 {
-  border-width: 2px
-}
-
-.b-3 {
-  border-width: 3px
-}
-
-.b-4 {
-  border-width: 4px
-}
-
-.b-5 {
-  border-width: 5px
-}
-
-.b-6 {
-  border-width: 6px
-}
-
-.b-none {
-  border: none !important
-}

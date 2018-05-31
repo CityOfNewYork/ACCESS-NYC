@@ -55,20 +55,34 @@
   }
 
   &.btn-next {
+    position: relative;
+    padding-#{$text-direction-end}: $spacing-base + 16px;
     &::after {
+      position: absolute;
       @include triangle(.6em .4em, $color-white, $text-direction-end);
       content: '';
       display: inline-block;
-      margin-#{$text-direction-start}: .3em;
+
+      top: 50%;
+      margin-top: -.3em;
+      margin-#{$text-direction-end}: $spacing-base;
+      #{$text-direction-end}: -.3em;
     }
   }
 
   &.btn-previous {
+    position: relative;
+    padding-#{$text-direction-start}: $spacing-base + 16px;
     &::before {
+      position: absolute;
       @include triangle(.6em .4em, $color-white, $text-direction-start);
       content: '';
       display: inline-block;
-      margin-#{$text-direction-end}: .3em;
+
+      top: 50%;
+      margin-top: -.3em;
+      margin-#{$text-direction-start}: $spacing-base;
+      #{$text-direction-start}: -.3em;
     }
   }
 }

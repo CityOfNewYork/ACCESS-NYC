@@ -12,6 +12,7 @@ $context['categories'] = get_categories(array(
   'hide_empty' => false
 ));
 
+$context['WP_ENV'] = Notifications\environment_string();
 $context['formAction'] = admin_url( 'admin-ajax.php' );
 
 $templates = array('screener-field.twig');

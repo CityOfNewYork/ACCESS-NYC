@@ -112,6 +112,7 @@ class ResultsField {
     const additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
     const parent = (selected.length) ? selected : additional;
     let length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).children();
+    let total = $(ResultsField.Selectors.PROGRAMS_LIST).children();
 
     // Hide the card
     card.attr('aria-hidden', true)
@@ -122,8 +123,14 @@ class ResultsField {
     length = parent.find(ResultsField.Selectors.PROGRAMS_LIST)
       .children().filter(':not(.hidden)').length;
 
-    // Update the length if available
+    // Update the length in the parent bucket
     parent.find(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+
+    // Update the total programs count
+    total = $(ResultsField.Selectors.PROGRAMS_LIST)
+      .children().filter(':not(.hidden)').length;
+
+    $(ResultsField.Selectors.PROGRAMS_TOTAL).html(total);
 
     // Switch to singular text if only one program is left
     if (length === 1) {
@@ -251,6 +258,7 @@ ResultsField.Selectors = {
   'SHARE_RESULTS': '[data-js="share-results"]',
   'SPINNER': '.js-spinner',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
+  'PROGRAMS_TOTAL': '[data-js="programs-total"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
   'PROGRAMS_LIST': '[data-js="programs-list"]',
   'PROGRAMS_TITLE': '[data-js="programs-title"]',

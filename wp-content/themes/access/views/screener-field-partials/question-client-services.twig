@@ -16,18 +16,42 @@
           <label class="{{styles.labels}}">
             {{ __('Is anyone in your household currently enrolled in these programs?', translationID) }}
           </label>
-          <div class="screener-checkboxes">
+          <div>
+
             {% for program in programs %}
-            <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-              <input type="checkbox"
-                value="{{ program.code }}"
-                data-object="client"
-                data-key="programsEnrolled"
-                v-bind:checked="client._attrs.programsEnrolled.indexOf('{{ program.code }}') > -1"
-                v-on:change="push">
-              <span class="styled-checkbox-label">{{ __(program.text, translationID) }}</span>
-            </label>
-            {% if program.value == 'section-8' %}<hr class="screener-divider m-top m-bottom-3">{% endif %}
+
+            {# start of first column #}
+            {% if (program.value == 'snap' or program.value == 'cityfeps') %}
+            <div class="usa-grid p-0">
+              <div class="usa-width-one-half m-bottom">
+            {% endif %}
+
+            {# start of second column #}
+            {% if (program.value == 'scrie' or program.value == 'seps') %}
+              </div>
+              <div class="usa-width-one-half m-bottom">
+            {% endif %}
+
+                <label class="styled-checkbox screener-checkbox screener-label">
+                  <input type="checkbox"
+                    value="{{ program.code }}"
+                    data-object="client"
+                    data-key="programsEnrolled"
+                    v-bind:checked="client._attrs.programsEnrolled.indexOf('{{ program.code }}') > -1"
+                    v-on:change="push">
+                  <span class="styled-checkbox-label">{{ __(program.text, translationID) }}</span>
+                </label>
+
+            {# end of last column #}
+            {% if (program.value == 'dhe' or program.value == 'tbra') %}
+              </div>
+            </div>
+            {% endif %}
+
+            {% if (program.value == 'dhe') %}
+            <hr class="screener-divider m-top m-bottom-2">
+            {% endif %}
+
             {% endfor %}
           </div>
         </div>

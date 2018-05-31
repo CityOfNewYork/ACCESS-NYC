@@ -68,3 +68,9 @@ ul,
 ol {
   @include margin(0 null rem(strip-units($spacing-base)));
 }
+
+@media print {
+  html {
+    @include typography-print();
+  }
+}
