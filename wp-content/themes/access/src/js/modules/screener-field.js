@@ -158,8 +158,8 @@ class ScreenerField {
      * incrementing cookie.
      */
 
-    let viewCount = Cookies.get(ScreenerField.cookies.VIEWS) ?
-      parseInt(Cookies.get(ScreenerField.cookies.VIEWS), 10) : 1;
+    let viewCount = Cookies.get(ScreenerField.Cookies.VIEWS) ?
+      parseInt(Cookies.get(ScreenerField.Cookies.VIEWS), 10) : 1;
 
     if (viewCount >= 10) {
       this._initRecaptcha();
@@ -167,7 +167,10 @@ class ScreenerField {
     }
 
     // `2/1440` sets the cookie to expire after two minutes.
-    Cookies.set(ScreenerField.cookies.VIEWS, ++viewCount, {expires: (2/1440)});
+    Cookies.set(ScreenerField.Cookies.VIEWS, ++viewCount, {
+      expires: (2/1440),
+      path: ScreenerField.Cookies.PATH
+    });
 
     /**
      * Routing
@@ -183,7 +186,22 @@ class ScreenerField {
     // Set the initial view
     this._routerPage('#page-admin');
 
+    // Set the timeout for the application
+    Utility.sessionTimeout(
+      ScreenerField.IDLE_SESSION_TIMEOUT,
+      this._idleSession
+    );
+
     return this;
+  }
+
+  /**
+   * Actions for when the session is idle
+   * @param  {object} timer The timer object
+   */
+  _idleSession(timer) {
+    if (timer.int > 1) // prevents the page refresh until initial interaction
+      location.reload(); // The data will be cleared.
   }
 
   /**
@@ -552,7 +570,7 @@ class ScreenerField {
  * @param  {object} data [description]
  */
 ScreenerField.track = function(key, data) {
-  Utility.track(`${ScreenerField.AnalyticsPrefix} ${key}`, data);
+  Utility.track(`${ScreenerField.ANALYTICS_PREFIX} ${key}`, data);
 };
 
 /**
@@ -1096,17 +1114,17 @@ ScreenerField.InputType = {
   INTEGER: 'integer'
 };
 
-/**
- * Cookie references
- */
-ScreenerField.cookies = {
-  VIEWS: 'access_nyc_field_screener_views'
+/** Cookie references */
+ScreenerField.Cookies = {
+  VIEWS: 'access_nyc_field_screener_views',
+  PATH: 'peu'
 };
 
-/**
- * Analytics Prefix
- */
-ScreenerField.AnalyticsPrefix = 'PEU';
+/** @type {String} Analytics Prefix */
+ScreenerField.ANALYTICS_PREFIX = 'PEU';
+
+/** @type {Number} [description] */
+ScreenerField.IDLE_SESSION_TIMEOUT = 3600000;
 
 /**
  * Valid zip codes in New York City. Source:

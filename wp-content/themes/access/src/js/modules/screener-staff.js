@@ -98,7 +98,7 @@ class ScreenerStaff {
   }
 
   /**
-   * Fetch the object the object from the browser if it exists
+   * Fetch the object from the browser if it exists
    */
   fetch() {
     const storage = window.sessionStorage;
@@ -108,6 +108,13 @@ class ScreenerStaff {
     if (staff) {
       this.set(staff);
     }
+  }
+
+  /**
+   * Destroy the object from the browser
+   */
+  destroy() {
+    window.sessionStorage.removeItem(ScreenerStaff.Cookies.STAFF);
   }
 }
 
