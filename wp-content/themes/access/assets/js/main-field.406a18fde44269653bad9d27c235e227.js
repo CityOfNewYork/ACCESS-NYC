@@ -29878,9 +29878,6 @@ ScreenerField = function () {
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = true;
 
-    /** @private {boolean} Time it takes for the session to timeout (milli) */
-    this._idleSessionTimeout = 3600000;
-
     /** @private {object} The screener routes and event hooks */
     this._routes = {
       admin: function admin(vue) {},
@@ -30006,8 +30003,8 @@ ScreenerField = function () {
                                           * incrementing cookie.
                                           */
 
-      var viewCount = _jsCookie2.default.get(ScreenerField.cookies.VIEWS) ?
-      parseInt(_jsCookie2.default.get(ScreenerField.cookies.VIEWS), 10) : 1;
+      var viewCount = _jsCookie2.default.get(ScreenerField.Cookies.VIEWS) ?
+      parseInt(_jsCookie2.default.get(ScreenerField.Cookies.VIEWS), 10) : 1;
 
       if (viewCount >= 10) {
         this._initRecaptcha();
@@ -30015,14 +30012,14 @@ ScreenerField = function () {
       }
 
       // `2/1440` sets the cookie to expire after two minutes.
-      _jsCookie2.default.set(ScreenerField.cookies.VIEWS, ++viewCount, {
+      _jsCookie2.default.set(ScreenerField.Cookies.VIEWS, ++viewCount, {
         expires: 2 / 1440,
-        path: ScreenerField.CookiePath });
+        path: ScreenerField.Cookies.PATH });
 
 
       /**
-                                            * Routing
-                                            */
+                                              * Routing
+                                              */
 
       window.addEventListener('hashchange', function (event) {return _this._router(event);});
 
@@ -30036,7 +30033,7 @@ ScreenerField = function () {
 
       // Set the timeout for the application
       _utility2.default.sessionTimeout(
-      this._idleSessionTimeout,
+      ScreenerField.IDLE_SESSION_TIMEOUT,
       this._idleSession);
 
 
@@ -30418,7 +30415,7 @@ ScreenerField = function () {
                                      * @param  {object} data [description]
                                      */
 ScreenerField.track = function (key, data) {
-  _utility2.default.track(ScreenerField.AnalyticsPrefix + ' ' + key, data);
+  _utility2.default.track(ScreenerField.ANALYTICS_PREFIX + ' ' + key, data);
 };
 
 /**
@@ -30962,28 +30959,23 @@ ScreenerField.InputType = {
   INTEGER: 'integer' };
 
 
-/**
-                         * Cookie references
-                         */
-ScreenerField.cookies = {
-  VIEWS: 'access_nyc_field_screener_views' };
+/** Cookie references */
+ScreenerField.Cookies = {
+  VIEWS: 'access_nyc_field_screener_views',
+  PATH: 'peu' };
 
 
+/** @type {String} Analytics Prefix */
+ScreenerField.ANALYTICS_PREFIX = 'PEU';
+
+/** @type {Number} [description] */
+ScreenerField.IDLE_SESSION_TIMEOUT = 3600000;
+
 /**
-                                               * Analytics Prefix
+                                               * Valid zip codes in New York City. Source:
+                                               * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
+                                               * @type {array<String>}
                                                */
-ScreenerField.AnalyticsPrefix = 'PEU';
-
-/**
-                                        * Cookie Path
-                                        */
-ScreenerField.CookiePath = 'peu';
-
-/**
-                                   * Valid zip codes in New York City. Source:
-                                   * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
-                                   * @type {array<String>}
-                                   */
 ScreenerField.NYC_ZIPS = _screener2.default.NYC_ZIPS;exports.default =
 
 ScreenerField;
@@ -33790,22 +33782,34 @@ Utility.warnings = function () {
     * @param  {Function} callback The timer callback function
     */
 Utility.sessionTimeout = function (time, callback) {
-  var timer = {
+  var key = Utility.CONFIG.IDLE_SESSION_TIMEOUT_KEY;
+  if (Utility.getUrlParameter('timeout') && Utility.debug()) {
+    // console.log(parseInt(Utility.getUrlParameter('timeout'));
+    time = parseInt(Utility.getUrlParameter('timeout'));
+  } else if (Utility.debug()) {
+    return;
+  }
+
+  // let timer =
+  window[key] = {
     int: 0 };
 
-  timer.reset = function () {
-    if (timer.timeout) clearTimeout(timer.timeout);
-    timer.timeout = setTimeout(function () {
-      callback(timer);
+
+  window[key].reset = function () {
+    if (window[key].timeout)
+    clearTimeout(window[key].timeout);
+    window[key].timeout = setTimeout(function () {
+      callback(window[key]);
     }, time);
-    timer.int++;
+    window[key].int++;
   };
-  window.addEventListener('mousemove', timer.reset);
-  window.addEventListener('mousedown', timer.reset);
-  window.addEventListener('touchstart', timer.reset);
-  window.addEventListener('keypress', timer.reset);
-  window.addEventListener('scroll', timer.reset);
-  window.addEventListener('click', timer.reset);
+
+  window.addEventListener('mousemove', window[key].reset);
+  window.addEventListener('mousedown', window[key].reset);
+  window.addEventListener('touchstart', window[key].reset);
+  window.addEventListener('keypress', window[key].reset);
+  window.addEventListener('scroll', window[key].reset);
+  window.addEventListener('click', window[key].reset);
 };
 
 /**
@@ -33824,7 +33828,8 @@ Utility.CONFIG = {
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
   MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
-  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment' };exports.default =
+  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
+  IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT' };exports.default =
 
 
 Utility;
@@ -33839,4 +33844,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.b7d2c0bd62fba88c5e0253139d9390bf.js.map
+//# sourceMappingURL=main-field.406a18fde44269653bad9d27c235e227.js.map

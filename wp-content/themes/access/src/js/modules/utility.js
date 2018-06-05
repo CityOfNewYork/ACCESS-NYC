@@ -379,22 +379,33 @@ Utility.warnings = function() {
  * @param  {Function} callback The timer callback function
  */
 Utility.sessionTimeout = function(time, callback) {
-  let timer = {
+  const key = Utility.CONFIG.IDLE_SESSION_TIMEOUT_KEY;
+  if (Utility.getUrlParameter('timeout') && Utility.debug()) {
+    // console.log(parseInt(Utility.getUrlParameter('timeout'));
+    time = parseInt(Utility.getUrlParameter('timeout'));
+  } else if (Utility.debug()) {
+    return;
+  }
+
+  window[key] = {
     int: 0
   };
-  timer.reset = function() {
-    if (timer.timeout) clearTimeout(timer.timeout);
-    timer.timeout = setTimeout(() => {
-        callback(timer);
+
+  window[key].reset = function() {
+    if (window[key].timeout)
+      clearTimeout(window[key].timeout);
+    window[key].timeout = setTimeout(() => {
+        callback(window[key]);
       }, time);
-    timer.int++;
+    window[key].int++;
   };
-  window.addEventListener('mousemove', timer.reset);
-  window.addEventListener('mousedown', timer.reset);
-  window.addEventListener('touchstart', timer.reset);
-  window.addEventListener('keypress', timer.reset);
-  window.addEventListener('scroll', timer.reset);
-  window.addEventListener('click', timer.reset);
+
+  window.addEventListener('mousemove', window[key].reset);
+  window.addEventListener('mousedown', window[key].reset);
+  window.addEventListener('touchstart', window[key].reset);
+  window.addEventListener('keypress', window[key].reset);
+  window.addEventListener('scroll', window[key].reset);
+  window.addEventListener('click', window[key].reset);
 };
 
 /**
@@ -413,7 +424,8 @@ Utility.CONFIG = {
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
   MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
-  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment'
+  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
+  IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT'
 };
 
 export default Utility;
