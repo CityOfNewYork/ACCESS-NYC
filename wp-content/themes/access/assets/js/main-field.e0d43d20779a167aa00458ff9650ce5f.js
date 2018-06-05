@@ -30033,7 +30033,7 @@ ScreenerField = function () {
 
       // Set the timeout for the application
       _utility2.default.sessionTimeout(
-      ScreenerField.IDLE_SESSION_TIMEOUT,
+      ScreenerField.IdleSessionConfig.IDLE_SESSION_TIMEOUT,
       this._idleSession);
 
 
@@ -30045,8 +30045,13 @@ ScreenerField = function () {
        * @param  {object} timer The timer object
        */ }, { key: '_idleSession', value: function _idleSession(
     timer) {
-      if (timer.int > 1) // prevents the page refresh until initial interaction
-        location.reload(); // The data will be cleared.
+      if (timer.int > 1) {
+        // prevents the page refresh until initial interaction
+        // location.reload(); // The data will be cleared.
+        var message = ScreenerField.IdleSessionConfig.IDLE_SESSION_MESSAGE;
+        alert(message);
+        location.reload();
+      }
     }
 
     /**
@@ -30968,14 +30973,20 @@ ScreenerField.Cookies = {
 /** @type {String} Analytics Prefix */
 ScreenerField.ANALYTICS_PREFIX = 'PEU';
 
-/** @type {Number} [description] */
-ScreenerField.IDLE_SESSION_TIMEOUT = 3600000;
+/** @type {Object} The configuration for the idle session */
+ScreenerField.IdleSessionConfig = {
+  IDLE_SESSION_TIMEOUT: 3600000, // must match message below
+  IDLE_SESSION_MESSAGE: [
+  'This session has been inactive for an hour,\n', // must match time above
+  'any info entered will be cleared to prevent unauthorized access.'].
+  join('') };
+
 
 /**
-                                               * Valid zip codes in New York City. Source:
-                                               * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
-                                               * @type {array<String>}
-                                               */
+               * Valid zip codes in New York City. Source:
+               * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
+               * @type {array<String>}
+               */
 ScreenerField.NYC_ZIPS = _screener2.default.NYC_ZIPS;exports.default =
 
 ScreenerField;
@@ -33784,13 +33795,11 @@ Utility.warnings = function () {
 Utility.sessionTimeout = function (time, callback) {
   var key = Utility.CONFIG.IDLE_SESSION_TIMEOUT_KEY;
   if (Utility.getUrlParameter('timeout') && Utility.debug()) {
-    // console.log(parseInt(Utility.getUrlParameter('timeout'));
     time = parseInt(Utility.getUrlParameter('timeout'));
   } else if (Utility.debug()) {
     return;
   }
 
-  // let timer =
   window[key] = {
     int: 0 };
 
@@ -33844,4 +33853,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.406a18fde44269653bad9d27c235e227.js.map
+//# sourceMappingURL=main-field.e0d43d20779a167aa00458ff9650ce5f.js.map
