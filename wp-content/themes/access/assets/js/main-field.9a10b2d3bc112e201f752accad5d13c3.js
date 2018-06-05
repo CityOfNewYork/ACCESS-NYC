@@ -29529,6 +29529,7 @@ ResultsField = function () {
       var additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
       var parent = selected.length ? selected : additional;
       var length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).children();
+      var total = (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LIST).children();
 
       // Hide the card
       card.attr('aria-hidden', true).
@@ -29539,8 +29540,14 @@ ResultsField = function () {
       length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).
       children().filter(':not(.hidden)').length;
 
-      // Update the length if available
-      (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+      // Update the length in the parent bucket
+      parent.find(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+
+      // Update the total programs count
+      total = (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LIST).
+      children().filter(':not(.hidden)').length;
+
+      (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_TOTAL).html(total);
 
       // Switch to singular text if only one program is left
       if (length === 1) {
@@ -29668,6 +29675,7 @@ ResultsField.Selectors = {
   'SHARE_RESULTS': '[data-js="share-results"]',
   'SPINNER': '.js-spinner',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
+  'PROGRAMS_TOTAL': '[data-js="programs-total"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
   'PROGRAMS_LIST': '[data-js="programs-list"]',
   'PROGRAMS_TITLE': '[data-js="programs-title"]',
@@ -32201,14 +32209,24 @@ Screener = function () {
             member.set('age', Screener.getTypedVal($step.
             find('input[name="Person[' + personIndex + '].age"]')[0]));
 
-            // Set member attributes and benefits.
-            $step.find('.' + Screener.CssClass.CHECKBOX_GROUP + ',\n            .' +
-            Screener.CssClass.RADIO_GROUP).find('input:checked').
-            filter('[name^="Person[' + personIndex + ']"]').each(function (i, el) {
-              if ((0, _jquery2.default)(el).val() && (0, _jquery2.default)(el).attr('name')) {
-                var _key = (0, _jquery2.default)(el).attr('name').split('.')[1];
-                member.set(_key, Screener.getTypedVal(el));
-              }
+            // Set member attributes and benefits (checkbox groups)
+            $step.find('.' + Screener.CssClass.CHECKBOX_GROUP).
+            find('input') // get all checkboxes...
+            .filter('[name^="Person[' + personIndex + ']"]').
+            each(function (i, el) {
+              var key = (0, _jquery2.default)(el).attr('name').split('.')[1];
+              // ...and set them to their prop value
+              member.set(key, (0, _jquery2.default)(el).prop('checked'));
+            });
+
+            // Set member attrs for radio button groups
+            $step.find('.' + Screener.CssClass.RADIO_GROUP).
+            find('input:checked') // only get checked radios...
+            .filter('[name^="Person[' + personIndex + ']"]').
+            each(function (i, el) {
+              var key = (0, _jquery2.default)(el).attr('name').split('.')[1];
+              // ...and set them to their typed value
+              member.set(key, Screener.getTypedVal(el));
             });
 
             // Add income and expenses.
@@ -32270,11 +32288,11 @@ Screener = function () {
             // Set the type of the household.
             $step.find('input[name^="Household"]').each(function (i, el) {
               if ((0, _jquery2.default)(el).val()) {
-                var _key2 = (0, _jquery2.default)(el).attr('name').split('.')[1];
+                var _key = (0, _jquery2.default)(el).attr('name').split('.')[1];
                 if ((0, _jquery2.default)(el).prop('checked')) {
-                  _this3._household.set(_key2, Screener.getTypedVal(el));
+                  _this3._household.set(_key, Screener.getTypedVal(el));
                 } else {
-                  _this3._household.set(_key2, false);
+                  _this3._household.set(_key, false);
                 }
               }
             });
@@ -33853,4 +33871,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.e0d43d20779a167aa00458ff9650ce5f.js.map
+//# sourceMappingURL=main-field.9a10b2d3bc112e201f752accad5d13c3.js.map

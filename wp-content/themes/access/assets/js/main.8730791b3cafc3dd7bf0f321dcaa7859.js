@@ -13601,7 +13601,10 @@ Screener = function () {
         viewCount = 0;
       }
       // `2/1440` sets the cookie to expire after two minutes.
-      _jsCookie2.default.set('screenerViews', ++viewCount, { expires: 2 / 1440 });
+      _jsCookie2.default.set('screenerViews', ++viewCount, {
+        expires: 2 / 1440,
+        path: Screener.CookiePath });
+
 
       if (_utility2.default.getUrlParameter('debug') === '1') {
         if (window.location.hash) {
@@ -14804,7 +14807,12 @@ Screener.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
 '12423', '12428', '12435', '12458', '12466', '12473', '12528',
 '12701', '12733', '12734', '12737', '12750', '12751', '12754',
 '12758', '12759', '12763', '12764', '12768', '12779', '12783',
-'12786', '12788', '12789', '13731', '16091', '20459'];exports.default =
+'12786', '12788', '12789', '13731', '16091', '20459'];
+
+/**
+                                                        * The cookie path for the screener cookies
+                                                        */
+Screener.CookiePath = 'eligibility';exports.default =
 
 Screener;
 
@@ -15996,6 +16004,40 @@ Utility.warnings = function () {
 };
 
 /**
+    * Set a timer based on user interaction
+    * @param  {number}   time     The timing of the timeout
+    * @param  {Function} callback The timer callback function
+    */
+Utility.sessionTimeout = function (time, callback) {
+  var key = Utility.CONFIG.IDLE_SESSION_TIMEOUT_KEY;
+  if (Utility.getUrlParameter('timeout') && Utility.debug()) {
+    time = parseInt(Utility.getUrlParameter('timeout'));
+  } else if (Utility.debug()) {
+    return;
+  }
+
+  window[key] = {
+    int: 0 };
+
+
+  window[key].reset = function () {
+    if (window[key].timeout)
+    clearTimeout(window[key].timeout);
+    window[key].timeout = setTimeout(function () {
+      callback(window[key]);
+    }, time);
+    window[key].int++;
+  };
+
+  window.addEventListener('mousemove', window[key].reset);
+  window.addEventListener('mousedown', window[key].reset);
+  window.addEventListener('touchstart', window[key].reset);
+  window.addEventListener('keypress', window[key].reset);
+  window.addEventListener('scroll', window[key].reset);
+  window.addEventListener('click', window[key].reset);
+};
+
+/**
     * Site constants.
     * @enum {string}
     */
@@ -16011,7 +16053,8 @@ Utility.CONFIG = {
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
   MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
-  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment' };exports.default =
+  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
+  IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT' };exports.default =
 
 
 Utility;
@@ -16026,4 +16069,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.0ea190e4e66c7cf888df155443d1dfd4.js.map
+//# sourceMappingURL=main.8730791b3cafc3dd7bf0f321dcaa7859.js.map
