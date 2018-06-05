@@ -381,7 +381,6 @@ Utility.warnings = function() {
 Utility.sessionTimeout = function(time, callback) {
   const key = Utility.CONFIG.IDLE_SESSION_TIMEOUT_KEY;
   if (Utility.getUrlParameter('timeout') && Utility.debug()) {
-    // console.log(parseInt(Utility.getUrlParameter('timeout'));
     time = parseInt(Utility.getUrlParameter('timeout'));
   } else if (Utility.debug()) {
     return;

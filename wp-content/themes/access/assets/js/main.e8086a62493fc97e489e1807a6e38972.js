@@ -16001,13 +16001,11 @@ Utility.warnings = function () {
 Utility.sessionTimeout = function (time, callback) {
   var key = Utility.CONFIG.IDLE_SESSION_TIMEOUT_KEY;
   if (Utility.getUrlParameter('timeout') && Utility.debug()) {
-    // console.log(parseInt(Utility.getUrlParameter('timeout'));
     time = parseInt(Utility.getUrlParameter('timeout'));
   } else if (Utility.debug()) {
     return;
   }
 
-  // let timer =
   window[key] = {
     int: 0 };
 
@@ -16061,4 +16059,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.badb94c6bb052c61ba2948460cf51af2.js.map
+//# sourceMappingURL=main.e8086a62493fc97e489e1807a6e38972.js.map
