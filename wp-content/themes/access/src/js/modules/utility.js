@@ -374,6 +374,40 @@ Utility.warnings = function() {
 };
 
 /**
+ * Set a timer based on user interaction
+ * @param  {number}   time     The timing of the timeout
+ * @param  {Function} callback The timer callback function
+ */
+Utility.sessionTimeout = function(time, callback) {
+  const key = Utility.CONFIG.IDLE_SESSION_TIMEOUT_KEY;
+  if (Utility.getUrlParameter('timeout') && Utility.debug()) {
+    time = parseInt(Utility.getUrlParameter('timeout'));
+  } else if (Utility.debug()) {
+    return;
+  }
+
+  window[key] = {
+    int: 0
+  };
+
+  window[key].reset = function() {
+    if (window[key].timeout)
+      clearTimeout(window[key].timeout);
+    window[key].timeout = setTimeout(() => {
+        callback(window[key]);
+      }, time);
+    window[key].int++;
+  };
+
+  window.addEventListener('mousemove', window[key].reset);
+  window.addEventListener('mousedown', window[key].reset);
+  window.addEventListener('touchstart', window[key].reset);
+  window.addEventListener('keypress', window[key].reset);
+  window.addEventListener('scroll', window[key].reset);
+  window.addEventListener('click', window[key].reset);
+};
+
+/**
  * Site constants.
  * @enum {string}
  */
@@ -389,7 +423,8 @@ Utility.CONFIG = {
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
   MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
-  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment'
+  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
+  IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT'
 };
 
 export default Utility;

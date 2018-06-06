@@ -141,7 +141,10 @@ class Screener {
       viewCount = 0;
     }
     // `2/1440` sets the cookie to expire after two minutes.
-    Cookies.set('screenerViews', ++viewCount, {expires: (2/1440)});
+    Cookies.set('screenerViews', ++viewCount, {
+      expires: (2/1440),
+      path: Screener.CookiePath
+    });
 
     if (Utility.getUrlParameter('debug') === '1') {
       if (window.location.hash) {
@@ -1345,5 +1348,10 @@ Screener.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
     '12701', '12733', '12734', '12737', '12750', '12751', '12754',
     '12758', '12759', '12763', '12764', '12768', '12779', '12783',
     '12786', '12788', '12789', '13731', '16091', '20459'];
+
+/**
+ * The cookie path for the screener cookies
+ */
+Screener.CookiePath = 'eligibility';
 
 export default Screener;

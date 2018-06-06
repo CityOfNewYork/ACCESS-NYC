@@ -30011,8 +30011,8 @@ ScreenerField = function () {
                                           * incrementing cookie.
                                           */
 
-      var viewCount = _jsCookie2.default.get(ScreenerField.cookies.VIEWS) ?
-      parseInt(_jsCookie2.default.get(ScreenerField.cookies.VIEWS), 10) : 1;
+      var viewCount = _jsCookie2.default.get(ScreenerField.Cookies.VIEWS) ?
+      parseInt(_jsCookie2.default.get(ScreenerField.Cookies.VIEWS), 10) : 1;
 
       if (viewCount >= 10) {
         this._initRecaptcha();
@@ -30020,11 +30020,14 @@ ScreenerField = function () {
       }
 
       // `2/1440` sets the cookie to expire after two minutes.
-      _jsCookie2.default.set(ScreenerField.cookies.VIEWS, ++viewCount, { expires: 2 / 1440 });
+      _jsCookie2.default.set(ScreenerField.Cookies.VIEWS, ++viewCount, {
+        expires: 2 / 1440,
+        path: ScreenerField.Cookies.PATH });
+
 
       /**
-                                                                                                * Routing
-                                                                                                */
+                                              * Routing
+                                              */
 
       window.addEventListener('hashchange', function (event) {return _this._router(event);});
 
@@ -30036,7 +30039,27 @@ ScreenerField = function () {
       // Set the initial view
       this._routerPage('#page-admin');
 
+      // Set the timeout for the application
+      _utility2.default.sessionTimeout(
+      ScreenerField.IdleSessionConfig.IDLE_SESSION_TIMEOUT,
+      this._idleSession);
+
+
       return this;
+    }
+
+    /**
+       * Actions for when the session is idle
+       * @param  {object} timer The timer object
+       */ }, { key: '_idleSession', value: function _idleSession(
+    timer) {
+      if (timer.int > 1) {
+        // prevents the page refresh until initial interaction
+        // location.reload(); // The data will be cleared.
+        var message = ScreenerField.IdleSessionConfig.IDLE_SESSION_MESSAGE;
+        alert(message);
+        location.reload();
+      }
     }
 
     /**
@@ -30405,7 +30428,7 @@ ScreenerField = function () {
                                      * @param  {object} data [description]
                                      */
 ScreenerField.track = function (key, data) {
-  _utility2.default.track(ScreenerField.AnalyticsPrefix + ' ' + key, data);
+  _utility2.default.track(ScreenerField.ANALYTICS_PREFIX + ' ' + key, data);
 };
 
 /**
@@ -30949,23 +30972,29 @@ ScreenerField.InputType = {
   INTEGER: 'integer' };
 
 
-/**
-                         * Cookie references
-                         */
-ScreenerField.cookies = {
-  VIEWS: 'access_nyc_field_screener_views' };
+/** Cookie references */
+ScreenerField.Cookies = {
+  VIEWS: 'access_nyc_field_screener_views',
+  PATH: 'peu' };
+
+
+/** @type {String} Analytics Prefix */
+ScreenerField.ANALYTICS_PREFIX = 'PEU';
+
+/** @type {Object} The configuration for the idle session */
+ScreenerField.IdleSessionConfig = {
+  IDLE_SESSION_TIMEOUT: 3600000, // must match message below
+  IDLE_SESSION_MESSAGE: [
+  'This session has been inactive for an hour,\n', // must match time above
+  'any info entered will be cleared to prevent unauthorized access.'].
+  join('') };
 
 
 /**
-                                               * Analytics Prefix
-                                               */
-ScreenerField.AnalyticsPrefix = 'PEU';
-
-/**
-                                        * Valid zip codes in New York City. Source:
-                                        * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
-                                        * @type {array<String>}
-                                        */
+               * Valid zip codes in New York City. Source:
+               * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
+               * @type {array<String>}
+               */
 ScreenerField.NYC_ZIPS = _screener2.default.NYC_ZIPS;exports.default =
 
 ScreenerField;
@@ -31512,7 +31541,7 @@ ScreenerStaff = function () {
     }
 
     /**
-       * Fetch the object the object from the browser if it exists
+       * Fetch the object from the browser if it exists
        */ }, { key: 'fetch', value: function fetch()
     {
       var storage = window.sessionStorage;
@@ -31522,6 +31551,13 @@ ScreenerStaff = function () {
       if (staff) {
         this.set(staff);
       }
+    }
+
+    /**
+       * Destroy the object from the browser
+       */ }, { key: 'destroy', value: function destroy()
+    {
+      window.sessionStorage.removeItem(ScreenerStaff.Cookies.STAFF);
     } }]);return ScreenerStaff;}();
 
 
@@ -31689,7 +31725,10 @@ Screener = function () {
         viewCount = 0;
       }
       // `2/1440` sets the cookie to expire after two minutes.
-      _jsCookie2.default.set('screenerViews', ++viewCount, { expires: 2 / 1440 });
+      _jsCookie2.default.set('screenerViews', ++viewCount, {
+        expires: 2 / 1440,
+        path: Screener.CookiePath });
+
 
       if (_utility2.default.getUrlParameter('debug') === '1') {
         if (window.location.hash) {
@@ -32892,7 +32931,12 @@ Screener.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
 '12423', '12428', '12435', '12458', '12466', '12473', '12528',
 '12701', '12733', '12734', '12737', '12750', '12751', '12754',
 '12758', '12759', '12763', '12764', '12768', '12779', '12783',
-'12786', '12788', '12789', '13731', '16091', '20459'];exports.default =
+'12786', '12788', '12789', '13731', '16091', '20459'];
+
+/**
+                                                        * The cookie path for the screener cookies
+                                                        */
+Screener.CookiePath = 'eligibility';exports.default =
 
 Screener;
 
@@ -33762,6 +33806,40 @@ Utility.warnings = function () {
 };
 
 /**
+    * Set a timer based on user interaction
+    * @param  {number}   time     The timing of the timeout
+    * @param  {Function} callback The timer callback function
+    */
+Utility.sessionTimeout = function (time, callback) {
+  var key = Utility.CONFIG.IDLE_SESSION_TIMEOUT_KEY;
+  if (Utility.getUrlParameter('timeout') && Utility.debug()) {
+    time = parseInt(Utility.getUrlParameter('timeout'));
+  } else if (Utility.debug()) {
+    return;
+  }
+
+  window[key] = {
+    int: 0 };
+
+
+  window[key].reset = function () {
+    if (window[key].timeout)
+    clearTimeout(window[key].timeout);
+    window[key].timeout = setTimeout(function () {
+      callback(window[key]);
+    }, time);
+    window[key].int++;
+  };
+
+  window.addEventListener('mousemove', window[key].reset);
+  window.addEventListener('mousedown', window[key].reset);
+  window.addEventListener('touchstart', window[key].reset);
+  window.addEventListener('keypress', window[key].reset);
+  window.addEventListener('scroll', window[key].reset);
+  window.addEventListener('click', window[key].reset);
+};
+
+/**
     * Site constants.
     * @enum {string}
     */
@@ -33777,7 +33855,8 @@ Utility.CONFIG = {
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
   MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
-  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment' };exports.default =
+  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
+  IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT' };exports.default =
 
 
 Utility;
@@ -33792,4 +33871,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.580167fac9166e7f0073fb9dad97248d.js.map
+//# sourceMappingURL=main-field.9a10b2d3bc112e201f752accad5d13c3.js.map
