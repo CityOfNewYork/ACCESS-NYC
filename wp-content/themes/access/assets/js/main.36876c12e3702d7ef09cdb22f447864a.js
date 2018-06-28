@@ -13567,6 +13567,8 @@ Screener = function () {
         _this._validateFloatField(e.currentTarget);
       }).on('blur', '[data-type="zip"]', function (e) {
         _this._validateZipField(e.currentTarget);
+      }).on('blur', '[data-type="age"]', function (e) {
+        _this._validateAgeField(e.currentTarget);
       }).on('keyup', '[data-type="float"]', function (e) {
         _this._limitFloatFieldLength(e.currentTarget);
       }).on('keydown', 'input[type="number"]', function (e) {
@@ -14269,7 +14271,11 @@ Screener = function () {
       $input.attr('type') === 'radio') && !$input.prop('checked') ||
       ($input.attr('type') !== 'checkbox' ||
       $input.attr('type') !== 'radio') && !$input.val()) {
-        this._showError(el, Screener.ErrorMessage.REQUIRED);
+        if ($input.attr('data-type')) {
+          this._showError(el, Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]);
+        } else {
+          this._showError(el, Screener.ErrorMessage.REQUIRED);
+        }
         $input.one('change keyup', function () {
           _this4._validateRequiredField(el);
         });
@@ -14382,6 +14388,24 @@ Screener = function () {
         }
       } else if ($input.prop('required')) {
         this._validateRequiredField(el);
+      }
+
+      return this;
+    }
+
+    /**
+       * Checks to see if the input's value is a valid age.
+       * @param {HTMLELement} el - Input element to validate.
+       * @return {this} Screener
+       */ }, { key: '_validateAgeField', value: function _validateAgeField(
+    el) {
+      var $input = (0, _jquery2.default)(el);
+      var age = $input.val();
+      this._removeError(el);
+
+      if (age) {
+        console.log("TESTING! Im inside ageField");
+        // this._showError(el, Screener.ErrorMessage.AGE);
       }
 
       return this;
@@ -14734,7 +14758,8 @@ Screener.ErrorMessage = {
   HOUSEHOLD: 'ERROR_HOUSEHOLD',
   INTEGER: 'ERROR_INTEGER',
   REQUIRED: 'ERROR_REQUIRED',
-  ZIP: 'ERROR_ZIP' };
+  ZIP: 'ERROR_ZIP',
+  AGE: 'ERROR_AGE' };
 
 
 /**
@@ -16069,4 +16094,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.8730791b3cafc3dd7bf0f321dcaa7859.js.map
+//# sourceMappingURL=main.36876c12e3702d7ef09cdb22f447864a.js.map

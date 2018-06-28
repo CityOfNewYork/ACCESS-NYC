@@ -811,7 +811,11 @@ class Screener {
         $input.attr('type') === 'radio') && !$input.prop('checked')) ||
         (($input.attr('type') !== 'checkbox' ||
         $input.attr('type') !== 'radio') && !$input.val())) {
-      this._showError(el, Screener.ErrorMessage.REQUIRED);
+      if($input.attr('data-type')){
+        this._showError(el, Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]);
+      }else{
+        this._showError(el, Screener.ErrorMessage.REQUIRED);
+      }
       $input.one('change keyup', () => {
         this._validateRequiredField(el);
       });
@@ -940,8 +944,8 @@ class Screener {
     this._removeError(el);
 
     if (age)  {
-      console.log("TESTING! Im inside ageField")
-      this._showError(el, Screener.ErrorMessage.AGE);
+      console.log("TESTING! Im inside ageField");
+      // this._showError(el, Screener.ErrorMessage.AGE);
     }
 
     return this;
