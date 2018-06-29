@@ -1,0 +1,33 @@
+/*! Bulk Delete - v5.6.1 %>
+ * https://bulkwp.com
+ * Copyright (c) 2018; * Licensed GPLv2+ */
+.visually-hidden {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+table.filter-items {
+	margin-left: 21px;
+}
+
+select[multiple].select2 {
+	width: 60%;
+}
+
+#post-body .select2-search__field {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.bd-help {
+	cursor: help;
+}
+
+/*# sourceMappingURL=bulk-delete.css.map */

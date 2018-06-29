@@ -490,6 +490,11 @@ function share_data($params) {
   return array('url' => $url, 'hash' => $hash, 'query' => $query);
 }
 
+// get the environment variable from config
+function get_env($value){
+  return $_ENV[$value];
+}
+
 /**
  * Scripts Configuration
  */
