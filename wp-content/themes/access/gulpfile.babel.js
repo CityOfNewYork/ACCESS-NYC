@@ -87,16 +87,19 @@ gulp.task('styles', (callback) => {
     }))
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      includePaths: ['node_modules']
-        .concat(require('bourbon').includePaths)
-        .concat(require('bourbon-neat').includePaths)
+      includePaths: [
+        'node_modules',
+        'node_modules/access-nyc-patterns/src'
+      ]
+      .concat(require('bourbon').includePaths)
+      .concat(require('bourbon-neat').includePaths)
     })
     .on('error', $.notify.onError())
     .on('error', $.sass.logError))
     .pipe($.postcss(plugins))
     .pipe($.hashFilename({format: HASH_FORMAT}))
     .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./assets/styles'));
 
   callback(null); // pass null to the callback for synchronous tasks
 });
@@ -105,7 +108,10 @@ gulp.task('styles', (callback) => {
  * Clean Styles
  */
 gulp.task('clean (styles)', (callback) => {
-  del(['style-*.css', 'style-*.css.map']);
+  del([
+    './assets/styles/style-*.css',
+    './assets/styles/style-*.css.map'
+  ]);
   callback(null); // pass null to the callback for synchronous tasks
 });
 
@@ -247,8 +253,8 @@ gulp.task('svg-sprites', () =>
   gulp.src(`${SRC}/img/sprite/**/*.svg`)
     .pipe($.svgmin())
     .pipe($.svgstore())
-    .pipe($.rename('icons.svg'))
-    .pipe(gulp.dest(`${DIST}/img`))
+    .pipe($.rename('icons.twig'))
+    .pipe(gulp.dest('views/partials/'))
     .pipe($.notify({
       message: 'SVG task complete'
     }))
