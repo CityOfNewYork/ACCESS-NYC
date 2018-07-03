@@ -90,15 +90,6 @@ PHP is not currently linted in this repository, however, the NYC Opportunity Pro
 *Editor Config (deprecated)*  
 An `.editorconfig` file is included in the theme to enforce some style settings for code editors that support it. See [editorconfig.com](http://editorconfig.org/) for more information.
 
-## Contributing
-* Issues
-    * Reporting Issues
-    * Contributing to Issues
-* Branching
-* Pull Requests
-
-Want to contribute to this repository? Read more [here]() to get started.
-
 # About NYCO
 
 NYC Opportunity is the [New York City Mayor's Office for Economic Opportunity](http://nyc.gov/opportunity). We are committed to sharing open source software that we use in our products. Feel free to ask questions and share feedback. Follow @nycopportunity on [Github](https://github.com/orgs/CityOfNewYork/teams/nycopportunity), [Twitter](https://twitter.com/nycopportunity), [Facebook](https://www.facebook.com/NYCOpportunity/), and [Instagram](https://www.instagram.com/nycopportunity/).
