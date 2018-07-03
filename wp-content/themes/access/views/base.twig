@@ -21,11 +21,13 @@
       {% endblock %}
     {% endblock %}
   </head>
-  <body data-template="base.twig"{% set _bodyClass = block('body_class') %}{% if _bodyClass %} class="{{ _bodyClass|trim }}"{% endif %}>
+  <body data-template="base.twig"{% set _bodyClass = block('body_class') %}{% if _bodyClass %} class="{{ _bodyClass|trim }} overlay"{% endif %}>
+    {% include 'partials/icons.twig' %}
     <div class="page-wrapper">
       <a class="sr-only sr-only-focusable" href="#content">{{__('Skip to main content', 'accessnyctheme')}}</a>
       {% block header %}
         <header class="site-header">
+
           <div class="site-topline">
             <div class="logo-nyc">
               <svg class="icon icon-logo-nyc">
@@ -63,7 +65,8 @@
               </div>
             </div>
           </div>
-          <nav class="site-nav">
+
+          <nav class="o-navigation">
             <div class="logo-access">
               <a href="{{ urlBase }}/">
                 <svg class="icon icon-logo-full">
@@ -71,68 +74,81 @@
                 </svg><span class="sr-only">{{__('Access NYC', 'accessnyctheme')}}</span>
               </a>
             </div>
-            <div class="site-nav-toggle">
-              <a class="js-show-nav" href="#mobile-nav">{{__('Menu', 'accessnyctheme')}}</a>
-            </div>
-            <ul class="nav-list site-desktop-nav">
-              {% include 'partials/nav.twig' %}
-            </ul>
-            <div class="site-search-toggle">
-              <a class="js-toggle-search" href="#search">
+            <nav class="nav-inline">
+              <a class="screen-desktop:hidden" href="#c-mobile-nav" data-js="toggle-nav">
+                {{__('Menu', 'accessnyctheme')}}
+              </a>
+              <a class="hidden screen-desktop:inline" href="{{ urlBase }}/eligibility">
+                {{__('Am I eligible?', 'accessnyctheme')}}
+              </a>
+              <a class="hidden screen-desktop:inline" href="{{ urlBase }}/programs">
+                {{__('Programs', 'accessnyctheme')}}
+              </a>
+              <a class="hidden screen-desktop:inline" href="{{ urlBase }}/locations">
+                {{__('Find help', 'accessnyctheme')}}
+              </a>
+              <a class="td-inherit js-toggle-search" href="#search">
                 <svg class="icon icon-search">
                   <use xlink:href="#icon-search"></use>
                 </svg>{{__('Search', 'accessnyctheme')}}
               </a>
-            </div>
-            <div class="site-mobile-nav" id="mobile-nav">
-              <a class="site-nav-close js-hide-nav" href="#content">{{__('close &amp; return to site', 'accessnyctheme')}}
+            </nav>
+            {# <div class="site-search-toggle"></div> #}
+            <div class="c-mobile-nav" id="c-mobile-nav">
+              <a class="c-mobile-nav__close" href="#c-mobile-nav" data-js="toggle-nav">
+                {{__('close &amp; return to site', 'accessnyctheme')}}
                 <svg class="icon icon-close">
                   <use xlink:href="#icon-close"></use>
                 </svg>
               </a>
-              <div class="site-mobile-nav-inner">
-                <h4 class="site-mobile-nav-header">{{__('Get help now', 'accessnyctheme')}}</h4>
-                <ul class="nav-list">
+              <div class="c-mobile-nav__inner">
+                <h4 class="c-mobile-nav__header">
+                  {{__('Get help now', 'accessnyctheme')}}
+                </h4>
+                <nav class="nav-block">
                   {% include 'partials/nav.twig' %}
-                </ul>
-                <div class="site-search-toggle">
                   <a href="{{ urlBase }}/?s=">
                     <svg class="icon icon-search">
                       <use xlink:href="#icon-search"></use>
                     </svg>{{__('Search', 'accessnyctheme')}}
                   </a>
-                </div>
+                </nav>
               </div>
             </div>
           </nav>
-          <div class="search-box js-search-box" id="search" aria-hidden="true">
-            <div class="search-box-inner">
+
+          <div class="o-search-box js-search-box" id="search" aria-hidden="true">
+            <div class="o-search-box__inner">
               <div class="usa-grid">
-                <div class="usa-width-one-whole"><a class="search-box-close js-hide-search" href="#content">
+                <div class="usa-width-one-whole">
+                  <a class="o-search-box__close js-hide-search" href="#content">
                     <svg class="icon icon-close">
                       <use xlink:href="#icon-close"></use>
-                    </svg><span class="sr-only">{{__('Close search', 'accessnyctheme')}}</span></a>
-                  <form class="search-form" method="get" action="/">
+                    </svg><span class="sr-only">{{__('Close search', 'accessnyctheme')}}</span>
+                  </a>
+                  <form class="o-search-box__form" method="get" action="/">
                     {{ fn('do_action', 'wpml_add_language_form_field' ) }}
                     <label class="type-small" for="search-field">{{__('Search', 'accessnyctheme')}}</label>
-                    <div class="search-form-field-container">
-                      <input class="search-form-field" name="s" type="text" value="" placeholder="{{__('Search for programs or services', 'accessnyctheme')}}" id="search-field">
-                      <button class="btn-text search-form-submit" type="submit">
+                    <div class="o-search-box__form-field-container">
+                      <input class="o-search-box__form-field" name="s" type="text" value="" placeholder="{{__('Search for programs or services', 'accessnyctheme')}}" id="search-field">
+                      <button class="btn-text o-search-box__form-submit" type="submit">
                         <svg class="icon icon-search">
                           <use xlink:href="#icon-search"></use>
                         </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
                       </button>
                     </div>
                   </form>
-                  <div class="search-suggestions">
-                    <div class="search-suggestions-header">
+                  <div class="o-search-box__suggestions">
+                    <div class="o-search-box__suggestions-header">
                       <h3>{{__('Programs', 'accessnyctheme')}}</h3>
                       <a class="link-more" href="{{ urlBase }}/programs">{{__('see all programs', 'accessnyctheme')}}</a>
                     </div>
                     {% if search_links %}
-                      <div class="search-suggestions-body">
+                      <div class="o-search-box__suggestions-body">
                         {% for link in search_links[0].get_field('program_links') %}
-                          <div class="search-suggestions-item"><a href="{{ link.link }}">{{ link.plain_language_program_name }}</a></div>
+                        <div class="o-search-box__suggestions-item">
+                          <a href="{{ link.link }}">{{ link.plain_language_program_name }}</a>
+                        </div>
                         {% endfor %}
                       </div>
                     {% endif %}
@@ -141,6 +157,7 @@
               </div>
             </div>
           </div>
+
         </header>
       {% endblock %}
 
@@ -148,7 +165,7 @@
       {% endblock %}
 
       {% block footer %}
-        <footer class="site-footer">
+        <footer class="o-footer">
           {% include 'partials/footer.twig' %}
         </footer>
       {% endblock %}

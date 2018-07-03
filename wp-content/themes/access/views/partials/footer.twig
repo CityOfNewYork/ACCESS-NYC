@@ -1,13 +1,13 @@
-<nav class="footer-nav">
-  <ul class="nav-list">
+<nav class="o-footer__nav">
+  <ul class="o-footer__nav-list">
     <li>
-      <div class="type-h3">{{ footer_get_help_now_menu.name }}</div>
+      <div class="type-h3 text-color-blue-dark">{{ footer_get_help_now_menu.name }}</div>
       <ul>
       {% for menu_item in footer_get_help_now_menu.get_items %}
         <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
       {% endfor %}
       </ul>
-      <div class="type-h3">{{ footer_for_caseworkers_menu.name }}</div>
+      <div class="type-h3 text-color-blue-dark">{{ footer_for_caseworkers_menu.name }}</div>
       <ul>
         {% for menu_item in footer_for_caseworkers_menu.get_items %}
           <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
@@ -15,7 +15,7 @@
       </ul>
     </li>
     <li>
-      <div class="type-h3">{{ footer_programs_menu.name }}</div>
+      <div class="type-h3 text-color-blue-dark">{{ footer_programs_menu.name }}</div>
       <ul>
         {% for menu_item in footer_programs_menu.get_items %}
           <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
@@ -23,7 +23,7 @@
       </ul>
     </li>
     <li>
-      <div class="type-h3">{{ footer_about_access_nyc_menu.name }}</div>
+      <div class="type-h3 text-color-blue-dark">{{ footer_about_access_nyc_menu.name }}</div>
       <ul>
         {% for menu_item in footer_about_access_nyc_menu.get_items %}
           <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
@@ -37,7 +37,7 @@
     </li>
   </ul>
 </nav>
-<div class="copyright">
+<div class="o-footer__copyright">
   <svg class="icon icon-logo-nyc">
     <use xlink:href="#icon-logo-nyc"></use>
   </svg>

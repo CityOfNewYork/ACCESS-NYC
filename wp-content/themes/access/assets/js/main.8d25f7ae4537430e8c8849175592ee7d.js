@@ -12053,20 +12053,18 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
-  $.get('/wp-content/themes/access/assets/img/icons.svg', _utility2.default.svgSprites);
+  // $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
 
   var $body = $('body');
 
   // Attach site-wide event listeners.
   $body.on('click', '.js-simple-toggle', _utility2.default.simpleToggle).
-  on('click', '.js-show-nav', function (e) {
-    // Shows the mobile nav by applying "nav-active" cass to the body.
-    e.preventDefault();
-    $(e.delegateTarget).addClass('nav-active');
-  }).on('click', '.js-hide-nav', function (e) {
-    // Hides the mobile nav.
-    e.preventDefault();
-    $(e.delegateTarget).removeClass('nav-active');
+  on('click', '[data-js="toggle-nav"]', function (event) {
+    var element = $(event.currentTarget);
+    // Shows/hides the mobile nav and overlay.
+    event.preventDefault();
+    $('body').toggleClass('overlay@active');
+    $(element.attr('href')).toggleClass('c-mobile-nav@active');
   }).on('click', '.js-toggle-search', function (e) {
     // Shows/hides the search drawer in the main nav.
     e.preventDefault();
@@ -16069,4 +16067,4 @@ module.exports={
 
 },{}]},{},[6])
 
-//# sourceMappingURL=main.8730791b3cafc3dd7bf0f321dcaa7859.js.map
+//# sourceMappingURL=main.8d25f7ae4537430e8c8849175592ee7d.js.map

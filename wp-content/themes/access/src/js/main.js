@@ -16,20 +16,18 @@ import Utility from 'modules/utility';
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
-  $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
+  // $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
 
   let $body = $('body');
 
   // Attach site-wide event listeners.
   $body.on('click', '.js-simple-toggle', Utility.simpleToggle
-  ).on('click', '.js-show-nav', (e) => {
-    // Shows the mobile nav by applying "nav-active" cass to the body.
-    e.preventDefault();
-    $(e.delegateTarget).addClass('nav-active');
-  }).on('click', '.js-hide-nav', (e) => {
-    // Hides the mobile nav.
-    e.preventDefault();
-    $(e.delegateTarget).removeClass('nav-active');
+  ).on('click', '[data-js="toggle-nav"]', (event) => {
+    let element = $(event.currentTarget);
+    // Shows/hides the mobile nav and overlay.
+    event.preventDefault();
+    $('body').toggleClass('overlay@active');
+    $(element.attr('href')).toggleClass('c-mobile-nav@active');
   }).on('click', '.js-toggle-search', (e) => {
     // Shows/hides the search drawer in the main nav.
     e.preventDefault();
