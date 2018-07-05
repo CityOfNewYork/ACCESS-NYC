@@ -16,7 +16,7 @@ import Utility from 'modules/utility';
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
-  // $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
+  // $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites)
 
   let $body = $('body');
 

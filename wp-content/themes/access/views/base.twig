@@ -22,40 +22,50 @@
     {% endblock %}
   </head>
   <body data-template="base.twig"{% set _bodyClass = block('body_class') %}{% if _bodyClass %} class="{{ _bodyClass|trim }} overlay"{% endif %}>
-    {% include 'partials/icons.twig' %}
+    <div class="hidden" aria-hidden="true">
+      {% include 'partials/icons.twig' %}
+    </div>
     <div class="page-wrapper">
       <a class="sr-only sr-only-focusable" href="#content">{{__('Skip to main content', 'accessnyctheme')}}</a>
       {% block header %}
         <header class="site-header">
 
-          <div class="site-topline">
-            <div class="logo-nyc">
+          <div class="flex justify-between py-1 px-2">
+
+            {% spaceless %}
+            <div class="flex-none">
               <svg class="icon icon-logo-nyc">
                 <use xlink:href="#icon-logo-nyc"></use>
               </svg>
-              <span class="logo-nyc-tag">{{__('Official website of the City of New York', 'accessnyctheme')}}</span>
+              <span class="text-font-size-xsmall px-1 text-color-grey-mid hidden screen-desktop:inline-block">{{__('Official website of the City of New York', 'accessnyctheme')}}</span>
             </div>
-            <div class="js-text-controller text-controller">
+            {% endspaceless %}
+
+            <div class="js-text-controller c-text-controller">
               {% spaceless %}
-              <a class="js-text-controller-toggle text-controller-toggle" href="#text-controls">
+              <a class="js-text-controller-toggle c-text-controller__toggle" href="#text-controls">
                 <svg class="icon icon-gear">
                   <use xlink:href="#icon-gear"></use>
                 </svg>
-                <span class="text-controller-title-full">{{__('Translate &amp; Adjust Text', 'accessnyctheme')}}</span>
-                <span class="text-controller-title-short">{{__('Translate Text', 'accessnyctheme')}}</span>
+                <span class="c-text-controller__title-full">{{__('Translate &amp; Adjust Text', 'accessnyctheme')}}</span>
+                <span class="c-text-controller__title-short">{{__('Translate Text', 'accessnyctheme')}}</span>
               </a>
               {% endspaceless %}
-              <div class="js-text-controller-options text-controller-options hidden" id="text-controls">
-                {% do action('icl_language_selector') %}
-                <div class="text-controller-sizer">
-                  <em class="text-small">{{__('Adjust text size', 'accessnyctheme')}}</em>
-                  <button class="btn-text js-text-larger">
+              <div class="js-text-controller-options c-text-controller__options hidden" id="text-controls">
+                <div class='c-text-controller__languages'>
+                  {% do action('icl_language_selector') %}
+                </div>
+                <div class="c-text-controller__sizer">
+                  <em class="c-text-controller__sizer-text">
+                    {{__('Adjust text size', 'accessnyctheme')}}
+                  </em>
+                  <button class="c-text-controller__sizer-btn btn-text js-text-larger">
                     <svg class="icon icon-plus">
                       <use xlink:href="#icon-plus"></use>
                     </svg>
                     <div class="sr-only">{{__('Larger', 'accessnyctheme')}}</div>
                   </button>
-                  <button class="btn-text js-text-smaller">
+                  <button class="c-text-controller__sizer-btn btn-text js-text-smaller">
                     <svg class="icon icon-minus">
                       <use xlink:href="#icon-minus"></use>
                     </svg>
@@ -64,6 +74,7 @@
                 </div>
               </div>
             </div>
+
           </div>
 
           <nav class="o-navigation">
