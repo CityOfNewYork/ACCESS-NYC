@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <main class="main-content" id="content">
+  <main class="bg-color-white" id="content">
 
     <div class="o-banner">
       <div class="o-banner__inner">
@@ -31,7 +31,7 @@
         <h2 class="type-h5 divider m-0 text-color-grey-mid">{{ post.hero_touts_heading }}</h2>
         <div class="layout--columns">
           {% for tout in homepage_touts %}
-          <div class="c-card screen-tablet:p">
+          <div class="c-card px-0 screen-tablet:px-2 screen-tablet:py-3">
             <div class="c-card__body">
               {% if tout.tout_title %}<h3 class="c-card__title mb-3 text-color-blue-dark">{{ tout.tout_title }}</h3>{% endif %}
               {% if tout.link_text %}
