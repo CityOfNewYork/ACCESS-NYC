@@ -1,58 +1,57 @@
 {% extends "base.twig" %}
 
 {% block content %}
-<main class="main-content" id="content">
-  <div class="program-landing">
-    <div class="usa-grid">
-      <header class="content-header usa-width-one-whole">
-        <h1>{% if programCategory | length %}{{__('Programs', 'accessnyctheme')}}: {{ programCategory.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
-      </header>
-    </div>
-    <div class="usa-grid program-landing-body">
-      <aside>
-        <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
-        <div class="program-filter js-program-filter">
-          
-          <!-- The copy for this should be whatever the active filter is.-->
-          <div class="program-filter-header js-toggle-filter">
-            <a href="#program-options">{% if not programCategory | length %}{{__('All Programs', 'accessnyctheme')}}{% else %}{{ programCategory.name }}{% endif %}</a>
-          </div>
-          <div class="program-filter-body">
-            <ul class="program-filter-list" id="program-options">
-              <!-- The active category is not linked.-->
-              {% if not programCategory | length %}
-                <li><span class="program-filter-item">{{__('All Programs', 'accessnyctheme')}}</span></li>
-              {% else %}
-                <li><a class="program-filter-item" href="{{ urlBase }}/programs">{{__('All Programs', 'accessnyctheme')}}</a></li>
-              {% endif %}
-              {% for category in categories %}
-                {% if category.slug == programCategory.slug %}
-                  <li><span class="program-filter-item">{{ category.name }}</span></li>
-                {% else %}
-                  <li><a class="program-filter-item" href="{{ urlBase }}/programs/?program_cat={{ category.slug }}">{{ category.name }}</a></li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </aside>
-      <div class="content-body">
-        <div class="program-cards">
-          {% if page.term_id | length %}
-            {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
-          {% else %}
-            {% include 'partials/post-teaser.twig' %}
-          {% endif %}
-        </div>
+<main class="bg-color-white pb-4" id="content">
 
-        {% include 'modules/pagination.twig' %}
+  <header class="usa-grid py-4 my-1">
+    <h1 class="text-color-blue-dark">{% if programCategory | length %}{{__('Programs', 'accessnyctheme')}}: {{ programCategory.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
+  </header>
+
+  <div class="usa-grid layout--sidebar-small-gutter">
+
+    <aside>
+      <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
+      <div class="c-filter js-program-filter">
+        <div class="c-filter__header js-toggle-filter">
+          <a href="#program-options">{% if not programCategory | length %}{{__('All Programs', 'accessnyctheme')}}{% else %}{{ programCategory.name }}{% endif %}</a>
+        </div>
+        <div class="c-filter__body">
+          <ul class="c-filter__list" id="program-options">
+            {% if not programCategory | length %}
+            <li><span class="c-filter__item">{{__('All Programs', 'accessnyctheme')}}</span></li>
+            {% else %}
+            <li><a class="c-filter__item" href="{{ urlBase }}/programs">{{__('All Programs', 'accessnyctheme')}}</a></li>
+            {% endif %}
+
+            {% for category in categories %}
+            {% if category.slug == programCategory.slug %}
+            <li><span class="c-filter__item">{{ category.name }}</span></li>
+            {% else %}
+            <li><a class="c-filter__item" href="{{ urlBase }}/programs/?program_cat={{ category.slug }}">{{ category.name }}</a></li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
       </div>
-      <div class="usa-grid">
-        <footer class="content-footer usa-width-one-whole">
-          {# {% include 'partials/was-this-page-helpful.twig' %} #}
-        </footer>
+    </aside>
+
+    <div>
+      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3">
+        {% if page.term_id | length %}
+          {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
+        {% else %}
+          {% include 'partials/post-teaser.twig' %}
+        {% endif %}
       </div>
+
+      {% include 'partials/pagination.twig' %}
     </div>
+
   </div>
+
+  {# <footer class="content-footer usa-width-one-whole"> #}
+    {# {% include 'partials/was-this-page-helpful.twig' %} #}
+  {# </footer> #}
+
 </main>
 {% endblock %}
