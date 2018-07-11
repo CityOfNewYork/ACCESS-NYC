@@ -41,7 +41,7 @@
             </div>
             {% endspaceless %}
 
-            <div class="js-text-controller c-text-controller">
+            <div class="js-text-controller c-text-controller print:hidden">
               {% spaceless %}
               <a class="js-text-controller-toggle c-text-controller__toggle" href="#text-controls">
                 <svg class="icon icon-gear">
@@ -85,7 +85,7 @@
                 </svg><span class="sr-only">{{__('Access NYC', 'accessnyctheme')}}</span>
               </a>
             </div>
-            <nav class="nav-inline">
+            <nav class="o-navigation__nav nav-inline print:hidden" data-js="site-desktop-nav">{% spaceless %}
               <a class="screen-desktop:hidden" href="#c-mobile-nav" data-js="toggle-nav">
                 {{__('Menu', 'accessnyctheme')}}
               </a>
@@ -102,10 +102,10 @@
                 <svg class="icon icon-search">
                   <use xlink:href="#icon-search"></use>
                 </svg>{{__('Search', 'accessnyctheme')}}
-              </a>
+              </a>{% endspaceless %}
             </nav>
             {# <div class="site-search-toggle"></div> #}
-            <div class="c-mobile-nav" id="c-mobile-nav">
+            <div class="c-mobile-nav print:hidden" id="c-mobile-nav">
               <a class="c-mobile-nav__close" href="#c-mobile-nav" data-js="toggle-nav">
                 {{__('close &amp; return to site', 'accessnyctheme')}}
                 <svg class="icon icon-close">
@@ -128,7 +128,7 @@
             </div>
           </nav>
 
-          <div class="o-search-box js-search-box" id="search" aria-hidden="true">
+          <div class="o-search-box js-search-box print:hidden" id="search" aria-hidden="true">
             <div class="o-search-box__inner">
               <div class="usa-grid">
                 <div class="usa-width-one-whole">
