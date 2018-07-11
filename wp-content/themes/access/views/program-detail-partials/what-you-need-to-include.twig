@@ -1,33 +1,33 @@
-<div id='what-you-need-to-include' class="program-detail-step{% if step in sectionArray | keys %} active{% endif %}">
-  <div class="program-detail-header">
-    <h3 class="program-detail-title">{{ stepNumber }}.
-      {{__('What you need to include', 'accessnyc-program-detail')}}</h3>
-  </div>
+<section id="what-you-need-to-include" data-js="program-detail-step" class="hidden:overflow{% if step in sectionArray | keys %} active{% endif %} print:active">
+  <header>
+    <h3 class="text-color-blue-dark">
+      {{ stepNumber }}. {{__('What you need to include', 'accessnyc-program-detail')}}
+    </h3>
+  </header>
+
   {{ post.get_field('what_you_need_to_include_intro_text') }}
+
   {% for item in post.get_field('what_you_need_to_include') %}
-    {% if loop.index == 1 %}
-      {% set articleStatus = 'active' %}
-      {% set articleToggle = 'active' %}
-    {% else %}
-      {% set articleStatus = '' %}
-      {% set articleToggle = 'hidden' %}
-    {% endif %}
-    <article class="c-accordion">
-      <header class="c-accordion__header">
-        <p>{{ item.heading }}</p>
-        <a class="c-accordion__toggle hide-for-print {{ articleStatus }} js-simple-toggle" href="#what-you-need-to-include-{{ loop.index }}">
-          <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
-                data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
-        </a>
-      </header>
-      <div class="c-accordion__body {{ articleToggle }} hidden-by-overflow animated active-for-print" id="what-you-need-to-include-{{ loop.index }}">
-        <div class="c-accordion__padding">
-          {{ item.body }}
-        </div>
+  <article id="what-you-need-to-include-{{ loop.index }}" class="c-accordion" data-js="accordion" data-js-active="{% if loop.index == 1 %}active{% endif %}">
+    <header class="c-accordion__header">
+      <p>{{ item.heading }}</p>
+      <a href="what-you-need-to-include-{{ loop.index }}__body" class="c-accordion__toggle print:hidden" v-on:click="toggle">
+        <span v-if="active">- {{__('hide this list', 'accessnyc-program-detail')}}</span>
+        <span v-else>+ {{__('show this list', 'accessnyc-program-detail')}}</span>
+      </a>
+    </header>
+    <div id="what-you-need-to-include-{{ loop.index }}__body"
+         class="c-accordion__body print:active hidden:overflow animated"
+         v-bind:class="{active: active}"
+         v-bind:aria-hidden="ariaHidden(active)">
+      <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
+        {{ item.body }}
       </div>
-    </article>
+    </div>
+  </article>
   {% endfor %}
+
   {% if nextStep != '' %}
-    {% include 'program-detail-partials/next-button.twig' %}
+  {% include 'program-detail-partials/next-button.twig' %}
   {% endif %}
-</div>
+</section>

@@ -1,6 +1,8 @@
-<div class="program-next-section hide-for-print">
-  <h4>{{__('Next section', 'accessnyc-program-detail')}}:</h4>
+<div class="print:hidden">
+  <h4 class="mb-1 text-font-size-small">{{__('Next section', 'accessnyc-program-detail')}}:</h4>
   <p>
-    <a class="js-program-nav-step-link js-jump-to-anchor btn btn-secondary btn-next" href="?step={{ nextStep.value }}">{{ stepNumber + 1 }}. {{__(nextStep.label, 'accessnyc-program-detail')}}</a>
+    <a data-js="program-nav-step-link, jump-to-anchor" class="btn btn-secondary btn-next btn-small" href="?step={{ nextStep.value }}">
+      {{ stepNumber + 1 }}. {{__(nextStep.label, 'accessnyc-program-detail')}}
+    </a>
   </p>
 </div>

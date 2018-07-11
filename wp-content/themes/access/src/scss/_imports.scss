@@ -78,6 +78,7 @@
 @import 'access-nyc-patterns/src/components/side-nav/side-nav';
 @import 'access-nyc-patterns/src/components/share-links/share-links';
 @import 'access-nyc-patterns/src/components/question/question';
+@import 'access-nyc-patterns/src/components/share-form/share-form';
 // components - end
 
 /**********
@@ -103,4 +104,6 @@
 @import 'access-nyc-patterns/src/utilities/inherit';
 @import 'access-nyc-patterns/src/utilities/language';
 @import 'access-nyc-patterns/src/utilities/statuses';
+@import 'access-nyc-patterns/src/utilities/toggles';
+@import 'access-nyc-patterns/src/utilities/print';
 @import 'access-nyc-patterns/dist/styles/_tailwind.scss';
