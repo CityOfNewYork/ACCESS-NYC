@@ -133,7 +133,11 @@ gulp.task('scripts', (callback) => {
     return browserify({
       entries: [`${SRC}/js/${entry}.js`],
       debug: true,  // must be true for sourcemaps path
-      paths: ['node_modules',`${SRC}/js`]
+      paths: [
+        'node_modules',
+        'node_modules/access-nyc-patterns/dist',
+        `${SRC}/js`
+      ]
     }).transform('babelify', {
       presets: ['es2015'],
       sourceMaps: true // must be true for sourcemaps path
@@ -153,7 +157,11 @@ gulp.task('scripts', (callback) => {
     return browserify({
       entries: [`${SRC}/js/${entry}.js`],
       debug: true, // must be true for sourcemaps path
-      paths: ['node_modules',`${SRC}/js`]
+      paths: [
+        'node_modules',
+        'node_modules/access-nyc-patterns/dist',
+        `${SRC}/js`
+      ]
     }).transform('babelify', {
       presets: ['es2015'],
       sourceMaps: true // must be true for sourcemaps path
@@ -182,8 +190,8 @@ gulp.task('scripts', (callback) => {
  */
 gulp.task('lint', () =>
   gulp.src(`${SRC}/js/**/*.js`).pipe($.eslint({
-        "parser": "babel-eslint",
-        "rules": {"strict": 0}
+        'parser': 'babel-eslint',
+        'rules': {'strict': 0}
       }
     ))
   .pipe($.eslint.format())
