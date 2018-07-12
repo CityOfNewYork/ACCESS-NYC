@@ -2,12 +2,11 @@
 
 {% block content %}
   {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
-  <main class="main-content map js-map" id="content" data-source="/locations/json">
-    <div class="map-mapbox js-map-mapbox"></div>
+  <main class="main-content map js-map layout--sidebar" id="content" data-source="/locations/json">
     <div class="map-controls js-map-controls">
       <input type="text" class="map-search js-map-searchbox" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
       <div class="map-filter-container js-map-filter">
-        <a href="#map-filter-settings" class="map-filter-header btn btn-primary btn-block js-toggle-filter js-main-filter-toggle"><span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span></a>
+        <a href="#map-filter-settings" class="map-filter-header btn btn-primary btn-block btn-toggle rounded-none js-toggle-filter js-main-filter-toggle"><span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span></a>
         <div id="map-filter-settings" class="map-filter-body" aria-hidden="true">
           <ul class="map-filter-list">
             {% for filter in filters %}
@@ -49,6 +48,7 @@
       </div>
       <div class="js-map-pagination"></div>
     </div>
+    <div class="map-mapbox js-map-mapbox"></div>
   </main>
 {% endblock %}
 
