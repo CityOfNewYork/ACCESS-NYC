@@ -5,14 +5,14 @@
   {% set isGovtOffice = __('Government Office', 'accessnyc-locations')|trim == post.type %}
   <main id="content" class="main-content bg-color-white">
     <header class="screen-desktop:layout--columns screen-desktop:flex-row-reverse relative pb-4 border-b border-color-grey-light">
-      <div class="js-static-map print:hidden screen-desktop:p-4 screen-desktop:mb-4"
+      <div class="js-static-map print:hidden screen-desktop:px-4 screen-desktop:pt-4"
           data-marker="{{ post.address.lat}},{{ post.address.lng }}"
           data-link="https://www.google.com/maps/dir//{{ post.address.address|url_encode }}"
           {% if isGovtOffice %}data-govt-office="true"{% endif %}
           data-zoom="13"
           style="min-height:300px;"></div>
 
-      <div class="js-static-map hidden print:inline-block screen-desktop:p-4 screen-desktop:mb-4"
+      <div class="js-static-map hidden print:inline-block screen-desktop:px-4 screen-desktop:pt-4"
           data-marker="{{ post.address.lat}},{{ post.address.lng }}"
           data-link="https://www.google.com/maps/dir//{{ post.address.address|url_encode }}"
           data-width="600"
@@ -21,7 +21,7 @@
           data-zoom="13"
           style="min-height:300px;"></div>
 
-      <div class="p-4">
+      <div class="pt-4 px-4">
         <article class="c-card p-0 mb-4">
           <aside class="c-card__icon m-0">
             {% if isGovtOffice %}
