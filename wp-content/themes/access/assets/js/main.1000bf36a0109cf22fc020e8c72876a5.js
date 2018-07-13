@@ -24074,10 +24074,10 @@ OfficeMap = function () {
       });
 
       // Load pin data.
-      (0, _jquery2.default)(this._el).addClass(OfficeMap.CssClass.LOADING);
+      this.loading(true);
 
       this.clearLocations(true).fetchLocations().then(function () {
-        (0, _jquery2.default)(_this._el).removeClass(OfficeMap.CssClass.LOADING);
+        _this.loading(false);
         _this.filterLocations().sortByDistance();
         if (_utility2.default.getUrlParameter('lat') || _utility2.default.getUrlParameter('lng') ||
         _utility2.default.getUrlParameter('programs')) {
@@ -24148,7 +24148,9 @@ OfficeMap = function () {
     {var _this3 = this;
       // If there are no qualified locations, show "no results".
       if (this._filteredLocations.length === 0) {
-        (0, _jquery2.default)(this._el).addClass(OfficeMap.CssClass.NO_RESULTS);
+        (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_NO_RESULTS).
+        removeClass('hidden').
+        attr('aria-hidden', false);
         (0, _jquery2.default)(this._listEl).empty();
         (0, _jquery2.default)(this._paginationEl).empty();
         return this;
@@ -24175,7 +24177,9 @@ OfficeMap = function () {
       });
 
       // Update the list.
-      (0, _jquery2.default)(this._el).removeClass(OfficeMap.CssClass.NO_RESULTS);
+      (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_NO_RESULTS).
+      addClass('hidden').
+      attr('aria-hidden', true);
       (0, _jquery2.default)(this._listEl).append(_underscore2.default.template(locationTemplate)({
         locations: addedLocations,
         localize: _utility2.default.localize }));
@@ -24332,16 +24336,38 @@ OfficeMap = function () {
       });
       this._map.fitBounds(bounds);
       return this;
-    } }]);return OfficeMap;}();
+    }
 
+    /**
+       * Method for the loading state
+       * @param  {boolean} isLoading Wether or not the map is loading
+       * @return {this} OfficeMap
+       */ }, { key: 'loading', value: function loading(
+    isLoading) {
+      if (isLoading) {
+        (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_LOADING).
+        removeClass('hidden').
+        attr('aria-hidden', false);
+      } else {
+        (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_LOADING).
+        addClass('hidden').
+        attr('aria-hidden', true);
+      }
+      return this;
+    }
+
+    // results() {
+
+    // }
+  }]);return OfficeMap;}();
 
 
 /**
-                                 * CSS classes used by this component.
-                                 * @enum {string}
-                                 */
+                             * CSS classes used by this component.
+                             * @enum {string}
+                             */
 OfficeMap.CssClass = {
-  ACTIVE: 'active',
+  ACTIVE: 'active bg-color-yellow-light',
   CONTROLS: 'js-map-controls',
   FILTER: 'js-map-filter',
   LIST_LOCATION: 'js-map-location',
@@ -24352,7 +24378,12 @@ OfficeMap.CssClass = {
   PAGINATION: 'js-map-pagination',
   RESULT_CONTAINER: 'js-map-results-container',
   RESULT_LIST: 'js-map-results',
-  SEARCH_BOX: 'js-map-searchbox' };exports.default =
+  SEARCH_BOX: 'js-map-searchbox' };
+
+
+OfficeMap.Selectors = {
+  MESSAGE_LOADING: '[data-js="message-loading"]',
+  MESSAGE_NO_RESULTS: '[data-js="message-no-results"]' };exports.default =
 
 
 OfficeMap;
@@ -27410,4 +27441,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.47df744003c8526f4af3ad1e0455eace.js.map
+//# sourceMappingURL=main.1000bf36a0109cf22fc020e8c72876a5.js.map
