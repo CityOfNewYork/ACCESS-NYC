@@ -25,58 +25,61 @@
     </div>
 
     <div class="layout--home-body">
+      <div>
 
-      {% if homepage_touts %}
-      <div class="pb-4 mx-3">
-        <h2 class="type-h5 divider m-0 text-color-grey-mid">{{ post.hero_touts_heading }}</h2>
-        <div class="layout--columns">
-          {% for tout in homepage_touts %}
-          <div class="c-card px-0 screen-tablet:px-2 screen-tablet:py-3">
-            <div class="c-card__body">
-              {% if tout.tout_title %}<h3 class="c-card__title mb-3 text-color-blue-dark">{{ tout.tout_title }}</h3>{% endif %}
-              {% if tout.link_text %}
-              <div class="c-card__summary">
-                <a href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ tout.link_text }}</a>
+        {% if homepage_touts %}
+        <div class="pb-4 mx-3">
+          <h2 class="type-h5 divider m-0 text-color-grey-mid">{{ post.hero_touts_heading }}</h2>
+          <div class="screen-tablet:layout--columns">
+            {% for tout in homepage_touts %}
+            <div class="c-card px-0 screen-tablet:px-2 screen-tablet:py-3">
+              <div class="c-card__body">
+                {% if tout.tout_title %}<h3 class="c-card__title mb-3 text-color-blue-dark">{{ tout.tout_title }}</h3>{% endif %}
+                {% if tout.link_text %}
+                <div class="c-card__summary">
+                  <a href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ tout.link_text }}</a>
+                </div>
+                {% endif %}
               </div>
-              {% endif %}
             </div>
+            {% endfor %}
           </div>
-          {% endfor %}
         </div>
-      </div>
-      {% endif %}
-
-      <div class="bg-color-grey-lightest px-3 py-4 mb-3 screen-tablet:mx-3">
-        <h2 class="type-h3 m-0 text-color-blue-dark">{{ post.featured_programs_heading }}</h2>
-        {% if post.featured_programs_subheading | length %}<h3 class="type-supplemental text-color-grey-mid">{{ post.featured_programs_subheading }}</h3>{% endif %}
-        <div class="layout--columns-gutter">
-          {% include 'partials/post-teaser.twig' with {'short_post': true, 'posts': post.get_field('featured_programs')} %}
-        </div>
-      </div>
-
-      {% if homepage_alert %}
-      <div class="c-alert-box bg-status-{{ homepage_alert.alert_color }} screen-tablet:mx-3 mb-2">
-        <div class="c-alert-box__icon">
-          <svg class="c-alert-box__svg icon icon-{{ homepage_alert.alert_icon }}">
-            <use xlink:href="#icon-{{ homepage_alert.alert_icon }}"></use>
-          </svg>
-        </div>
-        <div class="c-alert-box__body">
-          {{ homepage_alert.alert_content }}
-        </div>
-      </div>
-      {% endif %}
-
-      <footer class="py-2 screen-tablet:mx-3">
-        {% if post.contact_us_cta and post.contact_us_link %}
-        <h2 class="type-h4">{{ post.contact_us_heading }}</h2>
-        <a class="btn btn-primary" href="{{ post.contact_us_link }}">
-          <svg class="icon icon-contact">
-            <use xlink:href="#icon-contact"></use>
-          </svg> {{ post.contact_us_cta }}
-        </a>
         {% endif %}
-      </footer>
+
+        <div class="bg-color-grey-lightest px-3 py-4 mb-3 screen-tablet:mx-3">
+          <h2 class="type-h3 m-0 text-color-blue-dark">{{ post.featured_programs_heading }}</h2>
+          {% if post.featured_programs_subheading | length %}<h3 class="type-supplemental text-color-grey-mid">{{ post.featured_programs_subheading }}</h3>{% endif %}
+          <div class="layout--gutter screen-tablet:layout--columns-gutter">
+            {% include 'partials/post-teaser.twig' with {'short_post': true, 'posts': post.get_field('featured_programs')} %}
+          </div>
+        </div>
+
+        {% if homepage_alert %}
+        <div class="c-alert-box bg-status-{{ homepage_alert.alert_color }} screen-tablet:mx-3 mb-2">
+          <div class="c-alert-box__icon">
+            <svg class="c-alert-box__svg icon icon-{{ homepage_alert.alert_icon }}">
+              <use xlink:href="#icon-{{ homepage_alert.alert_icon }}"></use>
+            </svg>
+          </div>
+          <div class="c-alert-box__body">
+            {{ homepage_alert.alert_content }}
+          </div>
+        </div>
+        {% endif %}
+
+        <footer class="py-2 screen-tablet:mx-3">
+          {% if post.contact_us_cta and post.contact_us_link %}
+          <h2 class="type-h4">{{ post.contact_us_heading }}</h2>
+          <a class="btn btn-primary" href="{{ post.contact_us_link }}">
+            <svg class="icon icon-contact">
+              <use xlink:href="#icon-contact"></use>
+            </svg> {{ post.contact_us_cta }}
+          </a>
+          {% endif %}
+        </footer>
+
+      </div>
 
     </div>
   </main>
