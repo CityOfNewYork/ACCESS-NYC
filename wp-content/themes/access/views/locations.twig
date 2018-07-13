@@ -4,7 +4,7 @@
   {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
   <main class="main-content js-map layout--rows flex-col-reverse screen-desktop:flex-row screen-desktop:layout--sidebar bg-color-white h-screen relative h-90vh" id="content" data-source="/locations/json">
     <div class="js-map-controls overflow-hidden overflow-y-auto screen-desktop:h-90vh">
-      <input type="text" class="w-full map-search js-map-searchbox" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
+      <input type="text" class="w-full js-map-searchbox" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
       <div class="map-filter-container js-map-filter">
         <a href="#map-filter-settings" class="map-filter-header btn-toggle btn-primary text-color-white rounded-none w-full js-toggle-filter js-main-filter-toggle">
           <span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span>
@@ -74,9 +74,9 @@
   <li class="js-map-location c-card px-2 py-3 border-b border-color-grey-light" data-marker="<%= location.id %>" tabindex="0">
     <div class="c-card__icon m-0">
       <% if (location.isGovtOffice) { %>
-      <img src='/wp-content/themes/access/assets/img/map-pin-green.png' width="33" height="40" alt="Government office map marker">
+      <img src='/wp-content/themes/access/assets/img/map-pin-blue.png' width="33" height="40" alt="Government office map marker">
       <% } else { %>
-      <img src='/wp-content/themes/access/assets/img/map-pin-blue.png' width="33" height="40" alt="Non-government office map marker">
+      <img src='/wp-content/themes/access/assets/img/map-pin-green.png' width="33" height="40" alt="Non-government office map marker">
       <% } %>
     </div>
     <div class="c-card__body">

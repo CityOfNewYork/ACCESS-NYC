@@ -26605,13 +26605,15 @@ StaticMap = function () {
       img.onload = function () {
         (0, _jquery2.default)(_this2._el).empty;
         var $img = _this2._link ?
-        (0, _jquery2.default)('<a href="' + _this2._link + '" target="_blank"></a>').append(img) :
-        (0, _jquery2.default)(img);
+        (0, _jquery2.default)('<a href="' + _this2._link + '" target="_blank" class="block"></a>').
+        append(img) : (0, _jquery2.default)(img);
         (0, _jquery2.default)(_this2._el).html($img);
       };
 
       img.src = 'https://maps.googleapis.com/maps/api/staticmap?' + ('' +
       _jquery2.default.param(parameters));
+
+      (0, _jquery2.default)(img).addClass('block');
 
       return this;
     } }]);return StaticMap;}();exports.default =
@@ -27441,4 +27443,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.1000bf36a0109cf22fc020e8c72876a5.js.map
+//# sourceMappingURL=main.b90e69d2afa39e2a783dd87f2374fd55.js.map
