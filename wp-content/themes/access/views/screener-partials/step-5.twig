@@ -1,32 +1,40 @@
-<fieldset class="screener-body-step js-screener-step" id="step-5" data-track-key="Screener Step: 5" 
+<fieldset class="{{ styles.fieldset }}" id="step-5" data-track-key="Screener Step: 5"
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "5-Income"}]'>
-  <div class="screener-step">{{ __('Step 5 of 10', 'accessnyc-screener') }}</div>
-  <h1 class="screener-title">{{ __('Tell us about your income.', 'accessnyc-screener') }}</h1>
-  <div class="screener-question">
-    <label class="screener-label">{{ __('Do you have an income?', 'accessnyc-screener') }}</label>
-    <p class="screener-explanation">{{ __('This includes money from jobs, alimony, investments, or gifts.', 'accessnyc-screener') }}</p>
-    <div class="screener-radio-buttons js-screener-radio-group">
-      <label class="screener-radio screener-label js-screener-radio-label">
+  <div class="{{ styles.number }}">{{ __('Step 5 of 10', 'accessnyc-screener') }}</div>
+
+  <h1 class="{{ styles.heading }}">{{ __('Tell us about your income.', 'accessnyc-screener') }}</h1>
+
+  <div class="c-question">
+    <label class="c-question__label">{{ __('Do you have an income?', 'accessnyc-screener') }}</label>
+
+    <p>{{ __('This includes money from jobs, alimony, investments, or gifts.', 'accessnyc-screener') }}</p>
+
+    <div class="c-question__container js-screener-radio-group">
+      <label class="toggle js-screener-radio-label">
         <input class="screener-radio-input js-screener-toggle js-add-section sr-only"
-            value="1"
-            type="radio"
-            name="person-0-has-income"
-            data-type="boolean"
-            data-shows="#screener-income"
-            data-renders="#screener-person-0-income-0"
-            data-render-target="#screener-income"
-            data-matrix="income"
-            data-matrix-index="0"
-            data-person-index="0">
-        <span class="screener-radio-label">{{ __('Yes', 'accessnyc-screener') }}</span>
+          value="1"
+          type="radio"
+          name="person-0-has-income"
+          data-type="boolean"
+          data-shows="#screener-income"
+          data-renders="#screener-person-0-income-0"
+          data-render-target="#screener-income"
+          data-matrix="income"
+          data-matrix-index="0"
+          data-person-index="0">
+        <span class="toggle__label">{{ __('Yes', 'accessnyc-screener') }}</span>
       </label>
-      <label class="screener-radio screener-label js-screener-radio-label">
-        <input class="screener-radio-input js-screener-toggle sr-only" value="0" type="radio" name="person-0-has-income" data-type="boolean" data-hides="#screener-income" checked/>
-        <span class="screener-radio-label">{{ __('No', 'accessnyc-screener') }}</span>
+
+      <label class="toggle js-screener-radio-label">
+        <input class="js-screener-toggle sr-only" value="0" type="radio" name="person-0-has-income" data-type="boolean" data-hides="#screener-income" checked/>
+        <span class="toggle__label">{{ __('No', 'accessnyc-screener') }}</span>
       </label>
     </div>
   </div>
-  <div class="hidden js-screener-matrix screener-matrix" id="screener-income"></div>
-  <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-6">
-    {{ __('Continue', 'accessnyc-screener') }}</a></p>
+
+  <div class="hidden js-screener-matrix" id="screener-income"></div>
+
+  <div class="pt-2">
+    <a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-6" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
+  </div>
 </fieldset>{# /#step-5 #}

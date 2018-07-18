@@ -1,27 +1,28 @@
-<div id="screener-person-<%= personIndex %>-income-<%= matrixIndex %>" class="matrix-item js-matrix-item">
-  <hr class="screener-divider">
-  <div class="screener-question">
-    <div class="prime-label">
-      <label class="screener-label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
-        <% if (personIndex === 0) { %>
-        {{ __('What type of income have you had most recently?', 'accessnyc-screener') }}
-        <% } else { %>
-        {{ __('What type of income have they had most recently?', 'accessnyc-screener') }}
-        <% } %>
-      </label>
-      <p class="screener-explanation">{{ __('Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.', 'accessnyc-screener') }}</p>
-    </div>
-    <div class="non-prime-label">
-      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
-        <% if (personIndex === 0) { %>
-        {{ __('If you receive another type of income, select it below.', 'accessnyc-screener') }}
-        <% } else { %>
-        {{ __('If they receive another type of income, select it below.', 'accessnyc-screener') }}
-        <% } %>
-      </label>
-    </div>
-    <div class="screener-question-container">
-      <select class="screener-select js-matrix-select js-add-section js-screener-toggle"
+<div id="screener-person-<%= personIndex %>-income-<%= matrixIndex %>" class="js-matrix-item">
+  <hr class="divider-light">
+
+  <div class="c-question">
+    <% if (matrixIndex === 0) { %>
+    <label class="c-question__label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
+      <% if (personIndex === 0) { %>
+      {{ __('What type of income have you had most recently?', 'accessnyc-screener') }}
+      <% } else { %>
+      {{ __('What type of income have they had most recently?', 'accessnyc-screener') }}
+      <% } %>
+    </label>
+    <p>{{ __('Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.', 'accessnyc-screener') }}</p>
+    <% } else { %>
+    <label class="c-question__label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
+      <% if (personIndex === 0) { %>
+      {{ __('If you receive another type of income, select it below.', 'accessnyc-screener') }}
+      <% } else { %>
+      {{ __('If they receive another type of income, select it below.', 'accessnyc-screener') }}
+      <% } %>
+    </label>
+    <% } %>
+
+    <div class="c-question__container">
+      <select class="select js-matrix-select js-add-section js-screener-toggle"
           id="person-<%= personIndex %>-incomes-<%= matrixIndex %>"
           name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].type"
           data-toggles="#screener-person-<%= personIndex %>-income-<%= matrixIndex %>-details"
@@ -54,33 +55,35 @@
       </select>
     </div>
   </div>
+
   <div id="screener-person-<%= personIndex %>-income-<%= matrixIndex %>-details" class="hidden">
-    <div class="screener-question">
-      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount">
+    <div class="c-question">
+      <label class="c-question__label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount">
         <% if (personIndex === 0) { %>
         {{ __('How much do you receive for this type of income:', 'accessnyc-screener') }}
         <% } else { %>
         {{ __('How much do they receive for this type of income:', 'accessnyc-screener') }}
         <% } %>
-        <span class="screener-transaction-type"></span>?
+        <span data-js="transaction-label"></span>?
       </label>
-      <div class="screener-question-container">
-        <div class="currency-usd">
+      <div class="c-question__container">
+        <div class="input-currency-usd">
           <input id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].amount" type="number" data-type="float" step="0.01" required>
         </div>
       </div>
     </div>
-    <div class="screener-question">
-      <label class="screener-label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency">
+
+    <div class="c-question">
+      <label class="c-question__label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency">
         <% if (personIndex === 0) { %>
         {{ __('How often do you receive this income:', 'accessnyc-screener') }}
         <% } else { %>
         {{ __('How often do they receive this income:', 'accessnyc-screener') }}
         <% } %>
-        <span class="screener-transaction-type"></span>?
+        <span data-js="transaction-label"></span>?
       </label>
-      <div class="screener-question-container">
-        <select class="screener-select" id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].frequency" required>
+      <div class="c-question__container">
+        <select class="select" id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].frequency" required>
           <option value="">{{ __('Click to add an income frequency', 'accessnyc-screener') }}</option>
           <option value="weekly">{{ __('Every week', 'accessnyc-screener') }}</option>
           <option value="biweekly">{{ __('Every 2 weeks', 'accessnyc-screener') }}</option>

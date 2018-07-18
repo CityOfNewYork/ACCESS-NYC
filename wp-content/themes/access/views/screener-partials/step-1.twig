@@ -1,35 +1,34 @@
-<fieldset class="screener-body-step active js-screener-step" id="step-1" data-track-key="Screener Step: 1" 
+<fieldset class="{{ styles.fieldset }} active" id="step-1" data-track-key="Screener Step: 1"
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "1-HelpLookingFor"}]'>
-  <div class="screener-step">{{ __('Step 1 of 10', 'accessnyc-screener') }}</div>
-  <h1 class="screener-title">{{ __('What kind of help are you looking for?', 'accessnyc-screener') }}</h1>
+  <div class="{{ styles.number }}">{{ __('Step 1 of 10', 'accessnyc-screener') }}</div>
+
+  <h1 class="{{ styles.heading }}">{{ __('What kind of help are you looking for?', 'accessnyc-screener') }}</h1>
+
   <p>{{ __('It’s OK to pick more than one. Don’t worry if you forget one, we’ll still check if you may be eligible for help with all of them.', 'accessnyc-screener') }}</p>
-  <div class="screener-checkboxes screener-categories">
+
+  <div class="screen-tablet:layout--columns mb-4">
     {% for category in categories %}
     {% if language_code != 'en' %}
       {% set langLength = (language_code | length + 1) * -1 %}
-      {% set catSlug = category.slug | slice(0, langLength) %}
+      {% set slug = category.slug | slice(0, langLength) %}
     {% else %}
-      {% set catSlug = category.slug %}
+      {% set slug = category.slug %}
     {% endif %}
-    <label class="screener-checkbox styled-checkbox screener-checkboxes-program screener-label">
+    <label class="checkbox">
       <input type="checkbox" name="category" value="{{ category.slug }}">
-      <span class="styled-checkbox-label">
-        <div class="program-category">
-          <div class="program-icon">
-            <span class="icon">
-              <svg class="icon icon-{{ catSlug }}">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ catSlug }}"></use>
-              </svg>
-            </span>
-          </div>
-          <div class="program-card-body">{{ category.name }}</div>
-        </div>
+      <span class="checkbox__label items-center">
+        <span class="checkbox__icon bg-icon-{{ slug }}"></span>
+        <span>{{ category.name }}</span>
       </span>
     </label>
     {% endfor %}
   </div>
-  <h4 class="screener-label">{{ __('What is this?', 'accessnyc-screener') }}</h4>
+
+  <h4 class="{{ styles.label }}">{{ __('What is this?', 'accessnyc-screener') }}</h4>
+
   <p>{{ __('On the next few pages, we’ll ask you about yourself and your household to find benefits and programs that you may be interested in. It usually takes about 10 minutes to answer all of the questions.', 'accessnyc-screener') }}</p>
-  <p class="screener-next-step"><a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-2">
-    {{ __('Continue', 'accessnyc-screener') }}</a></p>
+
+  <div class="pt-2">
+    <a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-2" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
+  </div>
 </fieldset>{# /#step-1 #}
