@@ -96,11 +96,11 @@ function _get_db() {
 	$password = get_option('statc_password');
 	$bootstrapped = get_option('statc_bootstrapped');
 
-	$host = (!empty($host)) ? $host : getenv('STATC_HOST');
-	$database = (!empty($database)) ? $database : getenv('STATC_DATABASE');
-	$user = (!empty($user)) ? $user : getenv('STATC_USER');
-	$password = (!empty($password)) ? $password : getenv('STATC_PASSWORD');
-	$bootstrapped = (!empty($bootstrapped)) ? $bootstrapped : getenv('STATC_BOOTSTRAPPED');
+	$host = (!empty($host)) ? $host : $_ENV['STATC_HOST'];
+	$database = (!empty($database)) ? $database : $_ENV['STATC_DATABASE'];
+	$user = (!empty($user)) ? $user : $_ENV['STATC_USER'];
+	$password = (!empty($password)) ? $password : $_ENV['STATC_PASSWORD'];
+	$bootstrapped = (!empty($bootstrapped)) ? $bootstrapped : $_ENV['STATC_BOOTSTRAPPED'];
 
 	if (empty($host) || empty($database) || empty($user) || empty($password)) {
 		error_log('StatCollector is missing database connection information. Cannot log');

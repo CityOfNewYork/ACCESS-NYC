@@ -82,9 +82,9 @@ class SMSMe extends ContactMe {
 			$secret = get_option('smnyc_twilio_secret');
 			$from = get_option('smnyc_twilio_from');
 
-			$user = (!empty($user)) ? $user : getenv('SMNYC_TWILIO_USER');
-			$secret = (!empty($secret)) ? $secret : getenv('SMNYC_TWILIO_SECRET');
-			$from = (!empty($from)) ? $from : getenv('SMNYC_TWILIO_FROM');
+			$user = (!empty($user)) ? $user : $_ENV['SMNYC_TWILIO_USER'];
+			$secret = (!empty($secret)) ? $secret : $_ENV['SMNYC_TWILIO_SECRET'];
+			$from = (!empty($from)) ? $from : $_ENV['SMNYC_TWILIO_FROM'];
 
 			$client = new Client( $user, $secret);
 			$sms = $client->messages->create($to, ['from' => $from, 'body'=> $msg]);

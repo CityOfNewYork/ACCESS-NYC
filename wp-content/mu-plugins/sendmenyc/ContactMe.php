@@ -110,9 +110,9 @@ class ContactMe {
 		$secret = get_option('smnyc_' . $service . '_secret');
 		$from = get_option('smnyc_' . $service . '_from');
 
-		$user = (!empty($user)) ? $user : getenv('SMNYC_' . strtoupper($service) . '_USER');
-		$secret = (!empty($secret)) ? $secret : getenv('SMNYC_' . strtoupper($service) . '_SECRET');
-		$from = (!empty($from)) ? $from : getenv('SMNYC_' . strtoupper($service) . '_FROM');
+		$user = (!empty($user)) ? $user : $_ENV['SMNYC_' . strtoupper($service) . '_USER'];
+		$secret = (!empty($secret)) ? $secret : $_ENV['SMNYC_' . strtoupper($service) . '_SECRET'];
+		$from = (!empty($from)) ? $from : $_ENV['SMNYC_' . strtoupper($service) . '_FROM'];
 
 		if ( empty($user) || empty($secret) || empty($from) ) {
 			$this->failure( -1, 'Invalid Configuration' );

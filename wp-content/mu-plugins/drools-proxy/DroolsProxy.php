@@ -20,9 +20,9 @@ function incoming() {
 	$user = get_option('drools_user');
 	$pass = get_option('drools_pass');
 
-	$url = (!empty($url)) ? $url : getenv('DROOLS_URL');
-	$user = (!empty($user)) ? $user : getenv('DROOLS_USER');
-	$pass = (!empty($pass)) ? $pass : getenv('DROOLS_PASS');
+	$url = (!empty($url)) ? $url : $_ENV['DROOLS_URL'];
+	$user = (!empty($user)) ? $user : $_ENV['DROOLS_USER'];
+	$pass = (!empty($pass)) ? $pass : $_ENV['DROOLS_PASS'];
 
 	if (empty($url) || empty($user) || empty($pass)) {
 		wp_send_json([
