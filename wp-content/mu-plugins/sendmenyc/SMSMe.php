@@ -21,8 +21,8 @@ class SMSMe extends ContactMe {
 
 	protected function content( $url, $page , $orig_url) {
 		// extract the language code - TO EDIT: add these as fields in the CMS so they can be easily modified
-		$exp = explode('/',$orig_url); 
-		$language = $exp[3]; 
+		$exp = explode('/',$orig_url);
+		$language = $exp[3];
 		// results page
 		if ( $page == self::RESULTS_PAGE ) {
 			if ( $language == "es" ) {
@@ -78,10 +78,16 @@ class SMSMe extends ContactMe {
 
 	protected function send( $to, $msg ) {
 		try {
-			$client = new Client( get_option('smnyc_twilio_user'), get_option('smnyc_twilio_secret'));
-			$sms = $client->messages->create(
-				$to, ['from' => get_option( 'smnyc_twilio_from' ), 'body'=> $msg ]
-			);
+			$user = get_option('smnyc_twilio_user');
+			$secret = get_option('smnyc_twilio_secret');
+			$from = get_option('smnyc_twilio_from');
+
+			$user = (!empty($user)) ? $user : getenv('SMNYC_TWILIO_USER');
+			$secret = (!empty($secret)) ? $secret : getenv('SMNYC_TWILIO_SECRET');
+			$from = (!empty($from)) ? $from : getenv('SMNYC_TWILIO_FROM');
+
+			$client = new Client( $user, $secret);
+			$sms = $client->messages->create($to, ['from' => $from, 'body'=> $msg]);
 		} catch ( TwilioErr $e ) {
 			return $this->parse_error( $e->getCode() );
 		}
@@ -108,7 +114,7 @@ class SMSMe extends ContactMe {
 			$to = '1' . $to; // US country code left off
 		}
 		//assume longer numbers have country code specified
-		return '+'.$to;		
+		return '+'.$to;
 	}
 
 	protected function parse_error( $code, $message = 'An error occurred while sending' ) {
@@ -129,7 +135,7 @@ class SMSMe extends ContactMe {
 			case 21618: case 21619: case 30007:
 				$message = 'Invalid message body';
 				break;
-			case 30001: 
+			case 30001:
 			case 30009://ephemeral errors that a retry might solve https://www.twilio.com/docs/api/rest/message#error-values
 				$retry = true;
 				break;
