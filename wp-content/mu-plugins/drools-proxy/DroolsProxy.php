@@ -16,8 +16,19 @@ add_action( 'wp_ajax_drools', '\Drools\incoming' );
 add_action( 'wp_ajax_nopriv_drools', '\Drools\incoming' );
 
 function incoming() {
-	if (empty(get_option('drools_url')) || empty(get_option('drools_user')) || empty(get_option('drools_pass'))) {
-		wp_send_json(['status'=>'fail','message'=>'invalid configuration'],412);
+	$url = get_option('drools_url');
+	$user = get_option('drools_user');
+	$pass = get_option('drools_pass');
+
+	$url = (!empty($url)) ? $url : $_ENV['DROOLS_URL'];
+	$user = (!empty($user)) ? $user : $_ENV['DROOLS_USER'];
+	$pass = (!empty($pass)) ? $pass : $_ENV['DROOLS_PASS'];
+
+	if (empty($url) || empty($user) || empty($pass)) {
+		wp_send_json([
+			'status' => 'fail',
+			'message' => 'invalid configuration'
+		], 412);
 		wp_die();
 	}
 
@@ -25,12 +36,7 @@ function incoming() {
 	do_action( 'peu_data', $_POST['staff'], $_POST['client'], $uid );
 	do_action( 'drools_request', $_POST['data'], $uid );
 
-	$response = request(
-					get_option('drools_url'),
-					json_encode($_POST['data']),
-					get_option('drools_user'),
-					get_option('drools_pass')
-				);
+	$response = request($url, json_encode($_POST['data']), $user, $pass);
 
 	if ( $response === false || empty($response) ) {
 		wp_send_json([ 'status'=>'fail'], 500 );
