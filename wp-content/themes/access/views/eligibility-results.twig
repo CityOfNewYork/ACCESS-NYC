@@ -11,15 +11,16 @@
 
       <div>
         {% spaceless %}
-          <h1 class="c-header__descriptor">
-            {% if programResultTotal == 0 %}
-              {{__('There are no programs for you to look at.', 'accessnyc-results')}}
-            {% elseif programResultTotal == 1 %}
-              {{ programResultTotal }} {{__('program for you to look at.', 'accessnyc-results')}}
-            {% else %}
-              {{ programResultTotal }} {{__('programs for you to look at.', 'accessnyc-results')}}
-            {% endif %}
-          <p class="c-header__disclaimer">{{__('Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.', 'accessnyc-results')}}</p>
+        <h1 class="c-header__descriptor">
+          {% if programResultTotal == 0 %}
+            {{__('There are no programs for you to look at.', 'accessnyc-results')}}
+          {% elseif programResultTotal == 1 %}
+            {{ programResultTotal }} {{__('program for you to look at.', 'accessnyc-results')}}
+          {% else %}
+            {{ programResultTotal }} {{__('programs for you to look at.', 'accessnyc-results')}}
+          {% endif %}
+        </h1>
+        <p class="c-header__disclaimer">{{__('Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.', 'accessnyc-results')}}</p>
         {% endspaceless %}
       </div>
     </header>

@@ -1,27 +1,23 @@
-<fieldset class="d-block w-100">
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-staff">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
 
-  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-staff">
-
-    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
-
-    <div class="p-relative">
-
-      <a class="{{styles.questions}}" href="#question-staff" data-js="question">
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" href="#question-staff" data-js="question">
         {{ __('PEU Staff', translationID) }}
-        <svg class="{{styles.warning}}" role="alert" aria-label="{{ __('Some fields are invalid', translationID) }}"
+        <svg class="{{ styles.questions.warning }}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('Staff').length > 0">
           <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
-
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="staff-first">
-            {{ __('PEU Staff First Name', translationID) }} <span class="c-red">*</span>
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="staff-first">
+            {{ __('PEU Staff First Name', translationID) }} <span class="text-color-red">*</span>
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('Staff.firstName', 'Staff')}">
             <div class="error-message"
               v-if="errors.has('Staff.firstName', 'Staff')">v{ errors.first('Staff.firstName', 'Staff') }</div>
@@ -35,11 +31,11 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="staff-last">
-            {{ __('PEU Staff Last Name', translationID) }} <span class="c-red">*</span>
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="staff-last">
+            {{ __('PEU Staff Last Name', translationID) }} <span class="text-color-red">*</span>
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('Staff.lastName', 'Staff')}">
             <div class="error-message"
               v-if="errors.has('Staff.lastName', 'Staff')">v{ errors.first('Staff.lastName', 'Staff') }</div>
@@ -53,11 +49,11 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="staff-email">
-            {{ __('PEU Staff Email', translationID) }} <span class="c-red">*</span>
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="staff-email">
+            {{ __('PEU Staff Email', translationID) }} <span class="text-color-red">*</span>
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('Staff.email', 'Staff')}">
             <div class="error-message"
               v-if="errors.has('Staff.email', 'Staff')">v{ errors.first('Staff.email', 'Staff') }</div>
@@ -71,15 +67,15 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="staff-screener-location">
-            {{ __('Screener Location', translationID) }} <span class="c-red">*</span>
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="staff-screener-location">
+            {{ __('Screener Location', translationID) }} <span class="text-color-red">*</span>
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('Staff.screenerLocation', 'Staff')}">
             <div class="error-message"
               v-if="errors.has('Staff.screenerLocation', 'Staff')">v{ errors.first('Staff.screenerLocation', 'Staff') }</div>
-            <select id="staff-screener-location" name="Staff.screenerLocation" value="" required
+            <select class="select" id="staff-screener-location" name="Staff.screenerLocation" value="" required
               data-object="staff"
               data-vv-as="screener location"
               data-vv-scope="Staff"
@@ -93,42 +89,40 @@
           </div>
         </div>
 
-        <div>
-          <label class="{{styles.labels}}" for="staff-email">
+        <div class="c-question m-0">
+          <label class="c-question__label {{ styles.inputs.label }}" for="staff-email">
             {{ __('Is this person a current client with PEU?', translationID) }}
           </label>
-          <div class="screener-radio-buttons">
-            <label class="screener-radio screener-label">
-              <input class="screener-radio-input sr-only" value="true" type="radio" name="Client.currentClient"
+          <div class="c-question__container">
+            <label class="toggle">
+              <input class="sr-only" value="true" type="radio" name="Client.currentClient"
                 data-type="boolean"
                 data-object="client"
                 data-key="currentClient"
                 v-on:change="setAttr">
-              <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
+              <span class="toggle__label">{{ __('Yes', translationID) }}</span>
             </label>
-            <label class="screener-radio screener-label">
-              <input class="screener-radio-input sr-only" value="false" type="radio" name="Client.currentClient" checked
+            <label class="toggle">
+              <input class="sr-only" value="false" type="radio" name="Client.currentClient" checked
                 data-type="boolean"
                 data-object="client"
                 data-key="currentClient"
                 v-on:change="setAttr">
-              <span class="screener-radio-label">{{ __('No', translationID) }}</span>
+              <span class="toggle__label">{{ __('No', translationID) }}</span>
             </label>
           </div>
         </div>
 
-        <div class="m-top-2" v-if="client._attrs.currentClient">
-          <label class="{{styles.labels}}" for="client-0-number">
+        <div class="c-question m-0 mt-4" v-if="client._attrs.currentClient">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-0-number">
             {{ __('PEU Case #', translationID) }}
           </label>
-          <input id="client-number" name="Client.number" value="" required
-            v-model="client._attrs.caseNumber">
+          <div class="c-question__container">
+            <input id="client-number" name="Client.number" value="" required
+              v-model="client._attrs.caseNumber">
+          </div>
         </div>
-
       </div>
-
     </div>
-
   </div>
-
 </fieldset>

@@ -28705,7 +28705,7 @@ var _utility = require('modules/utility');var _utility2 = _interopRequireDefault
   /* eslint-enable no-undef */
 
   // Get SVG sprite file.
-  $.get('/wp-content/themes/access/assets/img/icons.svg', _utility2.default.svgSprites);
+  // $.get('/wp-content/themes/access/assets/img/icons.svg',Utility.svgSprites);
 
   var $body = $('body');
 
@@ -30402,7 +30402,7 @@ ScreenerField.localString = function (slug) {
     */
 ScreenerField.personLabel = {
   props: ['index', 'person'],
-  template: '<span class="c-black">' +
+  template: '<span class="text-color-black">' +
   '<span v-bind:class="personIndex(index)"></span> ' +
   '<span v-if="index === 0">{{ localString("you") }}, </span>' +
   '<span v-if="person.headOfHousehold"> ' +
@@ -30421,7 +30421,7 @@ ScreenerField.personLabel = {
     personIndex: function personIndex(index) {
       var name = 'i-' + index;
       var classes = {
-        'screener-members__member-icon': true };
+        'c-member-list__icon': true };
 
       classes[name] = true;
       return classes;
@@ -30452,13 +30452,13 @@ ScreenerField.Selectors = {
 ScreenerField.Classes = {
   ACTIVE: 'active',
   HIDDEN: 'hidden',
-  HIDDEN_OPACITY: 'o-00' };
+  HIDDEN_OPACITY: 'opacity-0' };
 
 
 /**
-                             * data-type attributes used by this component.
-                             * @enum {string}
-                             */
+                                  * data-type attributes used by this component.
+                                  * @enum {string}
+                                  */
 ScreenerField.InputType = {
   BOOLEAN: 'boolean',
   FLOAT: 'float',
@@ -33378,4 +33378,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main-field.a50902d5809aee23378bb948878c9afd.js.map
+//# sourceMappingURL=main-field.63105bfb862405d56129e8f6c7d8275e.js.map

@@ -18,7 +18,7 @@ import Utility from 'modules/utility';
   /* eslint-enable no-undef */
 
   // Get SVG sprite file.
-  $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
+  // $.get('/wp-content/themes/access/assets/img/icons.svg',Utility.svgSprites);
 
   let $body = $('body');
 
