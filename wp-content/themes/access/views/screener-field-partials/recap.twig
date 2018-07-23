@@ -272,7 +272,6 @@
 
           <ul class="list-reset">
             <li v-for="(value, key) in getAttrs('household', livingAttrs)" class="mb-2">
-
               <p>v{ localString(key) }<span v-if="key === 'livingRenting'">v{ ' (' + localString(household._attrs.livingRentalType) + ')' }</span></p>
 
               <div class="pb-2" v-if="key === 'livingRenting'">

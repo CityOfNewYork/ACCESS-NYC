@@ -175,7 +175,7 @@ import Accordion from 'components/accordion/accordion.common';
     screener.init();
   });
 
-  //
+  // Initialize accordion components
   document.querySelectorAll(Accordion.selector)
     .forEach((element) => {
       const accordion = new Accordion(element);

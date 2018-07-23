@@ -9,6 +9,7 @@ import ResultsField from 'modules/results-field';
 import ShareForm from 'modules/share-form';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
+import Accordion from 'components/accordion/accordion.common';
 
 (function(window, $) {
   'use strict';
@@ -46,6 +47,13 @@ import Utility from 'modules/utility';
   // Initialize tooltips.
   $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) =>
     new Tooltip(el).init());
+
+  // Initialize accordion components
+  document.querySelectorAll(Accordion.selector)
+    .forEach((element) => {
+      const accordion = new Accordion(element);
+      accordion.init();
+    });
 
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {

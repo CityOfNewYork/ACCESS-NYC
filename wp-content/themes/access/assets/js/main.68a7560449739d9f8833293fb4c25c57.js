@@ -23540,7 +23540,7 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
     screener.init();
   });
 
-  //
+  // Initialize accordion components
   document.querySelectorAll(_accordion2.default.selector).
   forEach(function (element) {
     var accordion = new _accordion2.default(element);
@@ -27457,4 +27457,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.7b52f3f3e460411febbb2048ba38b783.js.map
+//# sourceMappingURL=main.68a7560449739d9f8833293fb4c25c57.js.map

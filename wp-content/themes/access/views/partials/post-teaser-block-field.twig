@@ -11,28 +11,25 @@
 
 {% set shownSections = post.get_field('show_sections') %}
 
-<article class="m-bottom-2 p-bottom-2@print b-bottom@print" data-code="{{ post.program_code }}">
-
-  <div class="p-2 p-0@print bg-grey-lightest bg-transparent@print d-flex">
-
-    <div class="d-none@print">
+<article class="mb-4 print:pb-4 print:border-b" data-code="{{ post.program_code }}">
+  <div class="c-card items-stretch bg-color-grey-lightest p-4 print:flex print:p-0 print:bg-color-transparent">
+    <div class="c-card__icon-large print:hidden">
       {% include 'partials/category-icon.twig' with {width: '80px', height: '80px', target: '_blank'} %}
     </div>
 
-    <div class="p-right d-none d-inline-block@print" aria-hidden="true">
+    <div class="pr-2 hidden print:inline-block" aria-hidden="true">
       {% include 'partials/category-icon.twig' with {width: '44px', height: '44px', target: '_blank'} %}
     </div>
 
-    <div class="w-100 p-horizontal p-0@print">
-
+    <div class="c-card__body w-100 print:p-0">
       <a href="{{ post.get_permalink }}" target="_blank" rel="noopener noreferrer">
-        <h3 class="program-card-title type-h4">
+        <h3 class="c-card__title text-color-blue-dark">
           {{ post.plain_language_program_name }}
         </h3>
       </a>
 
       {% if not short_post %}
-      <p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
+      <p class="c-card__subtitle text-color-grey-mid">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
       {% endif %}
 
       {% for section in shownSections %}
@@ -42,45 +39,45 @@
       {% endfor %}
 
       {% if post.terms('outreach') %}
-      <h3 class="type-h4 d-none@print">
+      <h3 class="type-h4 print:hidden text-color-blue-dark">
         {{ post.terms('outreach') | join(', ') }}
       </h3>
       {% endif %}
 
       {% if post.heads_up | length %}
 
-      <div class="program-detail-heads-up program-detail-heads-up--{{ post.program_code }} m-bottom@print">
-        <h3 class="type-h4">{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
-        {{ post.get_field('heads_up') }}
+      <div class="print:mb-2">
+        <h3 class="type-h4 text-color-blue-dark">{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
+        <div class="c-checklist" id="heads-up-{{ post.program_code }}">
+          {{ post.get_field('heads_up') }}
+        </div>
         {% for section in shownSections %}{% if section.value == 'what-you-need-to-include' %}
-        <p class="d-none@print m-0">
+        <p class="print:hidden m-0">
           <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank" rel="noopener noreferrer">See a full list of required documents</a>
         </p>
         {% endif %}{% endfor %}
       </div>
       {% endif %}
-
     </div>
 
-    <div class="d-flex fd-column jc-space-between d-none@print">
-
-      <div style="width:232px" class="p-bottom">
+    <div class="flex flex-col justify-between print:hidden">
+      <div style="width:232px" class="pb-2">
         <div id="remove-{{ post.program_code }}">
-          <a class="btn btn-primary btn-small d-block" href="#confirm-{{ post.program_code }}"
+          <a class="btn btn-primary btn-small block" href="#confirm-{{ post.program_code }}"
             data-js="simple-toggle"
             data-hide="#remove-{{ post.program_code }}">
             {{ __('Remove Program', translationID) }}
           </a>
         </div>
         <div id="confirm-{{ post.program_code }}" class="hidden" aria-hidden="true">
-          <p class="type-small ta-center bottom-4">{{ __('Are you sure?', translationID) }}</p>
-          <div class="d-flex">
-            <a class="f-1 btn btn-primary btn-small"
+          <p class="type-small text-center text-color-grey-mid">{{ __('Are you sure?', translationID) }}</p>
+          <div class="flex">
+            <a class="flex-1 btn btn-primary btn-small"
               data-js="remove-program, track"
               data-remove-code="{{ post.program_code }}"
               data-track-key="Results: Remove Program"
               data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/remove"}]'>{{ __('Remove', translationID) }}</a>
-            <a class="f-1 btn btn-secondary btn-small m-left" href="#remove-{{ post.program_code }}"
+            <a class="flex-1 btn btn-secondary btn-small ml-2" href="#remove-{{ post.program_code }}"
               data-js="simple-toggle"
               data-hide="#confirm-{{ post.program_code }}">{{ __('Keep', translationID) }}</a>
           </div>
@@ -96,116 +93,98 @@
           {{ __('Learn More', translationID) }}
         </a>
       </div>
-
     </div>
-
   </div>
 
-  <div class="hidden active-for-print" id="program-detail-{{ post.program_code }}">
-
-    <div class="d-flex p-2 p-0@print">
-
-      <div class="d-none@print" aria-hidden="true">
+  <div class="hidden print:active" id="program-detail-{{ post.program_code }}">
+    <div class="flex p-4 print:p-0">
+      <div class="print:hidden" aria-hidden="true">
         <div style="width:80px;height:80px;">&nbsp;</div>
       </div>
 
-      <div class="p-right d-none d-inline-block@print" aria-hidden="true">
+      <div class="pr-2 hidden print:inline-block" aria-hidden="true">
         <div style="width:44px;height:44px;">&nbsp;</div>
       </div>
 
-      <div class="w-100 p-left p-0@print">
-
+      <div class="w-full p-left print:p-0">
         {% for section in shownSections %}
-
         {% if section.value == 'how-to-apply' %}
-        <div class="m-bottom-2">
-
-          <h3>{{__('How to apply', 'accessnyc-program-detail')}}</h3>
+        <div class="mb-4">
+          <h3 class="text-color-blue-dark">{{__('How to apply', 'accessnyc-program-detail')}}</h3>
 
           {% if post.how_to_apply_or_enroll_online != '' %}
-
-          <article class="c-accordion">
+          <article class="c-accordion" data-js="accordion" id="apply-online-{{ post.program_code }}">
             <header class="c-accordion__header">
               <p>{{__('Apply online', 'accessnyc-program-detail')}}</p>
-              <a class="c-accordion__toggle d-none@print" data-js="simple-toggle" href="#apply-online-{{ post.program_code }}">
-                <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
-                      data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+              <a class="c-accordion__toggle print:hidden" v-on:click="toggle" href="#apply-online-{{ post.program_code }}__body">
+                <span v-if="active">- hide this list</span><span v-else="">+ show this list</span>
               </a>
             </header>
-            <div class="c-accordion__body hidden hidden-by-overflow animated active-for-print" id="apply-online-{{ post.program_code }}">
-              <div class="c-accordion__padding">
+            <div class="print:active hidden:overflow animated" v-bind:class="{'active': active}" id="apply-online-{{ post.program_code }}__body">
+              <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
                 {{ post.get_field('how_to_apply_or_enroll_online') }}
                 {% if post.apply_online_call_to_action != '' %}
-                <p class="d-none@print">
+                <p class="print:hidden">
                   <a class="btn btn-secondary btn-next" href="{{ post.url_of_online_application }}" target="_blank" rel="noopener noreferrer">{{ post.apply_online_call_to_action }}</a>
                 </p>
                 {% endif %}
               </div>
             </div>
           </article>
-
           {% endif %}
 
           {% if post.how_to_apply_or_enroll_by_mail != '' %}
-
-          <article class="c-accordion">
+          <article class="c-accordion" data-js="accordion" id="apply-by-mail-{{ post.program_code }}">
             <header class="c-accordion__header">
               <p>{{__('Apply by mail', 'accessnyc-program-detail')}}</p>
-              <a class="c-accordion__toggle d-none@print" data-js="simple-toggle" href="#apply-by-mail-{{ post.program_code }}">
-                <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
-                      data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+              <a class="c-accordion__toggle print:hidden" v-on:click="toggle" href="#apply-by-mail-{{ post.program_code }}__body">
+                <span v-if="active">- hide this list</span><span v-else="">+ show this list</span>
               </a>
             </header>
-            <div class="c-accordion__body hidden hidden-by-overflow animated active-for-print" id="apply-by-mail-{{ post.program_code }}">
-              <div class="c-accordion__padding">
+            <div class="print:active hidden:overflow animated" v-bind:class="{'active': active}" id="apply-by-mail-{{ post.program_code }}__body">
+              <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
                 {{ post.get_field('how_to_apply_or_enroll_by_mail') }}
                 {% if post.apply_by_mail_call_to_action != '' %}
-                <p class="d-none@print">
+                <p class="print:hidden">
                   <a class="btn btn-secondary btn-next" href="{% if post.url_of_pdf_application_forms != '' %}{{ post.url_of_pdf_application_forms }}{% else %}{{ post.application_forms_pdfs }}{% endif %}" target="_blank" rel="noopener noreferrer">{{ post.apply_by_mail_call_to_action }}</a>
                 </p>
                 {% endif %}
               </div>
             </div>
           </article>
-
           {% endif %}
 
           {% if post.how_to_apply_or_enroll_by_phone != '' %}
-
-          <article class="c-accordion">
+          <article class="c-accordion" data-js="accordion" id="apply-by-phone-{{ post.program_code }}">
             <header class="c-accordion__header">
               <p>{{__('Apply by phone', 'accessnyc-program-detail')}}</p>
-              <a class="c-accordion__toggle d-none@print" data-js="simple-toggle" href="#apply-by-phone-{{ post.program_code }}">
-                <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
-                      data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+              <a class="c-accordion__toggle print:hidden" v-on:click="toggle" href="#apply-by-phone-{{ post.program_code }}__body">
+                <span v-if="active">- hide this list</span><span v-else="">+ show this list</span>
               </a>
             </header>
-            <div class="c-accordion__body hidden hidden-by-overflow animated active-for-print" id="apply-by-phone-{{ post.program_code }}">
-              <div class="c-accordion__padding">
+            <div class="print:active hidden:overflow animated" v-bind:class="{'active': active}" id="apply-by-phone-{{ post.program_code }}__body">
+              <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
                 {{ post.get_field('how_to_apply_or_enroll_by_phone') }}
                 {{ post.get_field('phone_numbers') }}
               </div>
             </div>
           </article>
-
           {% endif %}
 
           {% if post.how_to_apply_or_enroll_in_person != '' %}
-
-          <article class="c-accordion">
+          <article class="c-accordion" data-js="accordion" id="apply-in-person-{{ post.program_code }}">
             <header class="c-accordion__header">
               <p>{{__('Apply in person', 'accessnyc-program-detail')}}</p>
-              <a class="c-accordion__toggle d-none@print" data-js="simple-toggle" href="#apply-in-person-{{ post.program_code }}">
-                <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
-                      data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
+              <a class="c-accordion__toggle print:hidden" v-on:click="toggle" href="#apply-in-person-{{ post.program_code }}__body">
+                <span v-if="active">- hide this list</span><span v-else="">+ show this list</span>
               </a>
             </header>
-            <div class="c-accordion__body hidden hidden-by-overflow animated active-for-print" id="apply-in-person-{{ post.program_code }}">
-              <div class="c-accordion__padding">
+            <div class="print:active hidden:overflow animated" v-bind:class="{'active': active}" id="apply-in-person-{{ post.program_code }}__body">
+              <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
                 {{ post.get_field('how_to_apply_or_enroll_in_person') }}
                 {% if post.office_locations_url != '' %}
                 {% if post.apply_in_person_call_to_action != '' %}
-                <p class="d-none@print">
+                <p class="print:hidden">
                   <a class="btn btn-secondary btn-next" href="{{ post.office_locations_url }}" target="_blank" rel="noopener noreferrer">{{ post.apply_in_person_call_to_action|striptags }}</a>
                 </p>
                 {% endif %}
@@ -213,16 +192,13 @@
               </div>
             </div>
           </article>
-
           {% endif %}
-
         </div>
         {% endif %}
-
         {% endfor %}
 
         <div>
-          <h3>{{__('More ways to get help with this program', 'accessnyc-program-detail')}}</h3>
+          <h3 class="text-color-blue-dark">{{__('More ways to get help with this program', 'accessnyc-program-detail')}}</h3>
           {% for method in helpMethods %}
           {% if post.get_field(method) %}
           <div>
@@ -231,21 +207,17 @@
           {% endif %}
           {% endfor %}
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   {% if post.heads_up | length %}
   <style>
     {% for icon in post.get_field('heads_up_icons') %}
-    .program-detail-heads-up--{{ post.program_code }} ul li:nth-child({{ loop.index }}) {
-      background-image: url({{icon.icon.url}});
+    .c-checklist#heads-up-{{ post.program_code }} ul li:nth-child({{ loop.index }}) {
+      background-image: url({{ icon.icon.url }});
     }
     {% endfor %}
   </style>
   {% endif %}
-
 </article>
