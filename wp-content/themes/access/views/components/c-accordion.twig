@@ -1,0 +1,27 @@
+<article id="{{ this.id }}" class="c-accordion" data-js="accordion" data-js-active="{% if this.active %}active{% endif %}">
+  <header class="c-accordion__header">
+    <p>{{ this.header }}</p>
+
+    <a href="#{{ this.id }}__body" class="c-accordion__toggle print:hidden" v-on:click="toggle">
+      <span v-if="active">- {{__('hide this list', 'accessnyc-program-detail')}}</span>
+      <span v-else>+ {{__('show this list', 'accessnyc-program-detail')}}</span>
+    </a>
+  </header>
+
+  <div id="#{{ this.id }}__body"
+       class="c-accordion__body print:active hidden:overflow animated"
+       v-bind:class="{active: active}"
+       v-bind:aria-hidden="ariaHidden(active)">
+    <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
+      {{ this.body }}
+
+      {% if this.cta %}
+      <p class="print:hidden">
+        <a class="btn btn-secondary btn-next" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
+          {{ this.cta.text }}
+        </a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</article>

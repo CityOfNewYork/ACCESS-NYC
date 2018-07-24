@@ -112,86 +112,67 @@
         <div class="mb-4">
           <h3 class="text-color-blue-dark">{{__('How to apply', 'accessnyc-program-detail')}}</h3>
 
+          {# Online #}
           {% if post.how_to_apply_or_enroll_online != '' %}
-          <article class="c-accordion" data-js="accordion" id="apply-online-{{ post.program_code }}">
-            <header class="c-accordion__header">
-              <p>{{__('Apply online', 'accessnyc-program-detail')}}</p>
-              <a class="c-accordion__toggle print:hidden" v-on:click="toggle" href="#apply-online-{{ post.program_code }}__body">
-                <span v-if="active">- hide this list</span><span v-else="">+ show this list</span>
-              </a>
-            </header>
-            <div class="print:active hidden:overflow animated" v-bind:class="{'active': active}" id="apply-online-{{ post.program_code }}__body">
-              <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
-                {{ post.get_field('how_to_apply_or_enroll_online') }}
-                {% if post.apply_online_call_to_action != '' %}
-                <p class="print:hidden">
-                  <a class="btn btn-secondary btn-next" href="{{ post.url_of_online_application }}" target="_blank" rel="noopener noreferrer">{{ post.apply_online_call_to_action }}</a>
-                </p>
-                {% endif %}
-              </div>
-            </div>
-          </article>
+            {% include 'components/c-accordion.twig' with {this: {
+                id: 'apply-online-' ~ post.program_code,
+                active: false,
+                header: __('Apply online', 'accessnyc-program-detail'),
+                body: post.get_field('how_to_apply_or_enroll_online'),
+                cta: post.apply_online_call_to_action ? {
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                  href: post.url_of_online_application,
+                  text: post.apply_online_call_to_action
+                } : false
+              }
+            } only %}
           {% endif %}
 
+          {# By Mail #}
           {% if post.how_to_apply_or_enroll_by_mail != '' %}
-          <article class="c-accordion" data-js="accordion" id="apply-by-mail-{{ post.program_code }}">
-            <header class="c-accordion__header">
-              <p>{{__('Apply by mail', 'accessnyc-program-detail')}}</p>
-              <a class="c-accordion__toggle print:hidden" v-on:click="toggle" href="#apply-by-mail-{{ post.program_code }}__body">
-                <span v-if="active">- hide this list</span><span v-else="">+ show this list</span>
-              </a>
-            </header>
-            <div class="print:active hidden:overflow animated" v-bind:class="{'active': active}" id="apply-by-mail-{{ post.program_code }}__body">
-              <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
-                {{ post.get_field('how_to_apply_or_enroll_by_mail') }}
-                {% if post.apply_by_mail_call_to_action != '' %}
-                <p class="print:hidden">
-                  <a class="btn btn-secondary btn-next" href="{% if post.url_of_pdf_application_forms != '' %}{{ post.url_of_pdf_application_forms }}{% else %}{{ post.application_forms_pdfs }}{% endif %}" target="_blank" rel="noopener noreferrer">{{ post.apply_by_mail_call_to_action }}</a>
-                </p>
-                {% endif %}
-              </div>
-            </div>
-          </article>
+            {% include 'components/c-accordion.twig' with {this: {
+                id: 'apply-mail-' ~ post.program_code,
+                active: false,
+                header: __('Apply by mail', 'accessnyc-program-detail'),
+                body: post.get_field('how_to_apply_or_enroll_online'),
+                cta: post.apply_by_mail_call_to_action ? {
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                  href: post.url_of_pdf_application_forms ?? post.application_forms_pdfs,
+                  text: post.apply_by_mail_call_to_action
+                } : false
+              }
+            } only %}
           {% endif %}
 
+          {# By Phone #}
           {% if post.how_to_apply_or_enroll_by_phone != '' %}
-          <article class="c-accordion" data-js="accordion" id="apply-by-phone-{{ post.program_code }}">
-            <header class="c-accordion__header">
-              <p>{{__('Apply by phone', 'accessnyc-program-detail')}}</p>
-              <a class="c-accordion__toggle print:hidden" v-on:click="toggle" href="#apply-by-phone-{{ post.program_code }}__body">
-                <span v-if="active">- hide this list</span><span v-else="">+ show this list</span>
-              </a>
-            </header>
-            <div class="print:active hidden:overflow animated" v-bind:class="{'active': active}" id="apply-by-phone-{{ post.program_code }}__body">
-              <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
-                {{ post.get_field('how_to_apply_or_enroll_by_phone') }}
-                {{ post.get_field('phone_numbers') }}
-              </div>
-            </div>
-          </article>
+            {% include 'components/c-accordion.twig' with {this: {
+                id: 'apply-by-phone-' ~ post.program_code,
+                active: false,
+                header: __('Apply by phone', 'accessnyc-program-detail'),
+                body: post.get_field('how_to_apply_or_enroll_by_phone') ~
+                      post.get_field('phone_numbers')
+              }
+            } only %}
           {% endif %}
 
+          {# In Person #}
           {% if post.how_to_apply_or_enroll_in_person != '' %}
-          <article class="c-accordion" data-js="accordion" id="apply-in-person-{{ post.program_code }}">
-            <header class="c-accordion__header">
-              <p>{{__('Apply in person', 'accessnyc-program-detail')}}</p>
-              <a class="c-accordion__toggle print:hidden" v-on:click="toggle" href="#apply-in-person-{{ post.program_code }}__body">
-                <span v-if="active">- hide this list</span><span v-else="">+ show this list</span>
-              </a>
-            </header>
-            <div class="print:active hidden:overflow animated" v-bind:class="{'active': active}" id="apply-in-person-{{ post.program_code }}__body">
-              <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
-                {{ post.get_field('how_to_apply_or_enroll_in_person') }}
-                {% if post.office_locations_url != '' %}
-                {% if post.apply_in_person_call_to_action != '' %}
-                <p class="print:hidden">
-                  <a class="btn btn-secondary btn-next" href="{{ post.office_locations_url }}" target="_blank" rel="noopener noreferrer">{{ post.apply_in_person_call_to_action|striptags }}</a>
-                </p>
-                {% endif %}
-                {% endif %}
-              </div>
-            </div>
-          </article>
+            {% include 'components/c-accordion.twig' with {this: {
+                id: 'apply-in-person-' ~ post.program_code,
+                active: false,
+                header: __('Apply in person', 'accessnyc-program-detail'),
+                body: post.get_field('how_to_apply_or_enroll_in_person'),
+                cta: post.office_locations_url and post.apply_in_person_call_to_action ? {
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                  href: post.office_locations_url,
+                  text: post.apply_in_person_call_to_action|striptags
+                } : false
+              }
+            } only %}
           {% endif %}
         </div>
         {% endif %}
