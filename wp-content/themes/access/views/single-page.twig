@@ -1,38 +1,45 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main class="main-content" id="content">
-    <article class="content-article">
-      <div class="usa-grid">
-        <header class="content-header usa-width-one-whole">
-          <h1>{{ post.title }}</h1>
-          {{ post.get_field('lead') }}
-        </header>
+<main class="bg-color-white" id="content">
+  <article>
+    <header class="usa-grid py-4 my-1">
+      <h1 class="text-color-blue-dark">{{ post.title }}</h1>
+      <div class="text-font-size-larger">
+        {{ post.get_field('lead') }}
       </div>
-      <div class="usa-grid">
-        <nav class="content-nav usa-width-one-third">
-          <ul class="nav-list">
+    </header>
+
+    <div class="usa-grid screen-desktop:layout--sidebar-gutter">
+      <aside>
+        <nav class="c-side-nav print:hidden">
+          <ul>
             {% for section in post.get_field('sections') %}
+            {% if section.section_title %}
             <li>
               <a href="#section-{{ loop.index }}">{{ section.section_title }}</a>
             </li>
+            {% endif %}
             {% endfor %}
           </ul>
         </nav>
-        <div class="content-body usa-width-two-thirds">
-          {% for section in post.get_field('sections') %}
-          <section id="section-{{ loop.index }}">
-            <h2>{{ section.section_title }}</h2>
-            {{ section.section_content }}
-          </section>
-          {% endfor %}
-        </div>
-        <div class="usa-grid">
-          <footer class="content-footer usa-width-one-whole">
-            <small>{{ __('Updated', 'accessnyc-page') }} {{ post.post_date_modified|date }}</small>
-          </footer>
-        </div>
+      </aside>
+
+      <div class="content-body usa-width-two-thirds">
+        {% for section in post.get_field('sections') %}
+        <section id="section-{{ loop.index }}">
+          {% if section.section_title %}<h2>{{ section.section_title }}</h2>{% endif %}
+          {{ section.section_content }}
+        </section>
+        {% endfor %}
       </div>
-    </article>
-  </main>
+    </div>
+
+    <footer class="usa-grid py-4">
+      <p class="text-color-grey-mid m-0">
+        {{ __('Updated', 'accessnyc-page') }} {{ post.post_date_modified|date }}
+      </p>
+    </footer>
+  </article>
+</main>
 {% endblock %}
