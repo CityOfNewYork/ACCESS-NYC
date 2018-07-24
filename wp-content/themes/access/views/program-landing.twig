@@ -2,13 +2,11 @@
 
 {% block content %}
 <main class="bg-color-white pb-4" id="content">
-
   <header class="usa-grid py-4 my-1">
     <h1 class="text-color-blue-dark">{% if programCategory | length %}{{__('Programs', 'accessnyctheme')}}: {{ programCategory.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
   </header>
 
   <div class="usa-grid screen-desktop:layout--sidebar-small-gutter">
-
     <aside>
       <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
       <div class="c-filter js-program-filter">
@@ -46,12 +44,10 @@
 
       {% include 'partials/pagination.twig' %}
     </div>
-
   </div>
 
   {# <footer class="content-footer usa-width-one-whole"> #}
     {# {% include 'partials/was-this-page-helpful.twig' %} #}
   {# </footer> #}
-
 </main>
 {% endblock %}

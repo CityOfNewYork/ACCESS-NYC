@@ -1,72 +1,69 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-  <main class="main-content" id="content">
-    <form class="program-landing js-filtered-search" method="get" action="/">
-      {{ fn('do_action', 'wpml_add_language_form_field' ) }}
-      <div class="program-search">
-        <div class="usa-grid">
-          <div class="usa-width-one-whole">
-            <div class="search-form program-search-form">
-              <label class="type-small" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
-              <div class="search-form-field-container">
-                <input class="search-form-field" name="s" type="text" value="{{query}}" id="program-search-field" data-js="wt-search" data-wt-search-key="Search Results" data-wt-search-data='[{"WT.oss": "{{ query }}", "WT.oss_r": "{{ posts|length }}"}]'>
-                <button class="btn-text search-form-submit" type="submit">
-                  <svg class="icon icon-search">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use>
-                  </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="usa-grid program-landing-body">
-        <aside>
-          <h4>{{__('Filter Programs', 'accessnyctheme')}}:</h4>
-          <div class="program-filter js-program-filter js-program-search-filter">
-            <!-- The copy for this should be whatever the active filter is.-->
-            <div class="program-filter-header js-toggle-filter">
-              <a id="#program-options">{% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{__('All Programs', 'accessnyctheme')}}{% endif %}</a>
-            </div>
+<main class="bg-color-white pb-4" id="content">
+  <form class="js-filtered-search" method="get" action="/">
+    {{ fn('do_action', 'wpml_add_language_form_field' ) }}
+    <header class="c-header flex-col bg-color-blue-dark text-color-white mb-3">
+      <label class="type-small w-full" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
 
-            <div class="program-filter-body">
-              <ul class="program-filter-list" id="program-options">
-                <!-- The active category is not linked.-->
-                <li>
-                  <label class="program-filter-item">
-                    <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="">{{__('All Programs', 'accessnyctheme')}}
-                  </label>
-                </li>
-                {% for category in categories %}
-                  <li>
-                    <label class="program-filter-item">
-                      <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" value="{{ category.slug }}">{{ category.name }}
-                    </label>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
+      <div class="o-search-box__form-field-container w-full">
+        <input class="o-search-box__form-field" name="s" type="text" value="{{query}}" id="program-search-field" data-js="wt-search" data-wt-search-key="Search Results" data-wt-search-data='[{"WT.oss": "{{ query }}", "WT.oss_r": "{{ posts|length }}"}]'>
+
+        <button class="btn-text o-search-box__form-submit" type="submit">
+          <svg class="icon icon-search">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use>
+          </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="usa-grid screen-desktop:layout--sidebar-small-gutter">
+      <aside>
+        <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
+
+        <div class="c-filter js-program-filter js-program-search-filter">
+          <div class="c-filter__header js-toggle-filter">
+            <a id="#program-options" href="#">{% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{__('All Programs', 'accessnyctheme')}}{% endif %}</a>
           </div>
-        </aside>
-        <div class="content-body">
-          <div class="program-cards">
-            {% if not posts | length %}
-              <div class="program-no-results">
-                <!-- The js filter reset should point to the search landing page with no search params.-->
-                <p>{{__('Sorry, we couldn’t find anything matching your search.', 'accessnyctheme')}} <a class="js-filter-reset" href="/?s={{query}}">{{__('Clear filters.', 'accessnyctheme')}}</a></p>
-              </div>
-            {% else %}
-              {% include 'partials/post-teaser.twig' %}
-            {% endif %}
+          <div class="c-filter__body">
+            <ul class="c-filter__list" id="program-options">
+              <li>
+                <label class="c-filter__item">
+                  <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="">{{__('All Programs', 'accessnyctheme')}}
+                </label>
+              </li>
+              {% for category in categories %}
+              <li>
+                <label class="c-filter__item" for="filter-{{ category.slug }}">
+                  <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" id="filter-{{ category.slug }}" value="{{ category.slug }}">{{ category.name }}
+                </label>
+              </li>
+              {% endfor %}
+            </ul>
           </div>
         </div>
-        <div class="usa-grid">
-          <footer class="content-footer usa-width-one-whole">
-            {# {% include 'partials/was-this-page-helpful.twig' %} #}
-          </footer>
+      </aside>
+
+      <div>
+        <div class="layout--gutter p-3 bg-color-grey-lightest mb-3">
+          {% if not posts | length %}
+          <h1 class="text-font-size-large">
+            {{__('Sorry, we couldn’t find anything matching your search.', 'accessnyctheme')}} <br class="hidden screen-desktop:inline-block">
+            <a class="js-filter-reset" href="/?s={{query}}">{{__('Clear filters.', 'accessnyctheme')}}</a>
+          </h1>
+          {% else %}
+            {% include 'partials/post-teaser.twig' %}
+          {% endif %}
         </div>
       </div>
-    </form>
-  </main>
+    </div>
+
+    {# <div class="usa-grid">
+      <footer class="content-footer usa-width-one-whole"> #}
+        {# {% include 'partials/was-this-page-helpful.twig' %} #}
+      {# </footer>
+    </div> #}
+  </form>
+</main>
 {% endblock %}
