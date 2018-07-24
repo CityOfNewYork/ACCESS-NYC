@@ -114,7 +114,7 @@
 
           {# Online #}
           {% if post.how_to_apply_or_enroll_online != '' %}
-            {% include 'components/c-accordion.twig' with {this: {
+            {% include 'components/accordion.twig' with {this: {
                 id: 'apply-online-' ~ post.program_code,
                 active: false,
                 header: __('Apply online', 'accessnyc-program-detail'),
@@ -131,7 +131,7 @@
 
           {# By Mail #}
           {% if post.how_to_apply_or_enroll_by_mail != '' %}
-            {% include 'components/c-accordion.twig' with {this: {
+            {% include 'components/accordion.twig' with {this: {
                 id: 'apply-mail-' ~ post.program_code,
                 active: false,
                 header: __('Apply by mail', 'accessnyc-program-detail'),
@@ -148,7 +148,7 @@
 
           {# By Phone #}
           {% if post.how_to_apply_or_enroll_by_phone != '' %}
-            {% include 'components/c-accordion.twig' with {this: {
+            {% include 'components/accordion.twig' with {this: {
                 id: 'apply-by-phone-' ~ post.program_code,
                 active: false,
                 header: __('Apply by phone', 'accessnyc-program-detail'),
@@ -160,7 +160,7 @@
 
           {# In Person #}
           {% if post.how_to_apply_or_enroll_in_person != '' %}
-            {% include 'components/c-accordion.twig' with {this: {
+            {% include 'components/accordion.twig' with {this: {
                 id: 'apply-in-person-' ~ post.program_code,
                 active: false,
                 header: __('Apply in person', 'accessnyc-program-detail'),
