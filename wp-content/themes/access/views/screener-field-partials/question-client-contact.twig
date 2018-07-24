@@ -162,11 +162,13 @@
               v-if="errors.has('Client.email', 'ClientContact')">
                 v{ errors.first('Client.email', 'ClientContact') }
             </div>
-            <input id="client-email" type="email" class="w-full" name="Client.email" value=""
-              data-vv-scope="ClientContact"
-              data-vv-as="{{ __('email', translationID) }}"
-              v-model="client._attrs.email"
-              v-validate="{email: true}">
+            <div class="screen-tablet:input-w-400px">
+              <input id="client-email" type="email" name="Client.email" value=""
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('email', translationID) }}"
+                v-model="client._attrs.email"
+                v-validate="{email: true}">
+            </div>
           </div>
         </div>
 
@@ -177,8 +179,10 @@
             {{ __('Street #', translationID) }}
           </label>
           <div class="c-question__container">
-            <input id="client-address-1" name="Client.streetNumber" class="w-full" value=""
-              v-model="client._attrs.streetNumber">
+            <div class="screen-tablet:input-w-400px">
+              <input id="client-address-1" name="Client.streetNumber" value=""
+                v-model="client._attrs.streetNumber">
+            </div>
           </div>
         </div>
 
