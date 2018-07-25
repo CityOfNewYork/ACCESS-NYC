@@ -322,8 +322,8 @@ class OfficeMap {
     let $scrollTarget = $('html, body');
     let scrollPos = $highlightedItem.offset().top;
     // TODO(jjandoc): Is there a better conditional for this?
-    if ($resultContainer.css('overflow') === 'scroll' ||
-        $resultContainer.css('overflow-y') === 'scroll') {
+    if ($resultContainer.css('overflow') === 'auto' ||
+        $resultContainer.css('overflow-y') === 'auto') {
       $scrollTarget = $resultContainer;
       scrollPos = $scrollTarget.scrollTop() + $highlightedItem.position().top;
     }

@@ -24253,8 +24253,8 @@ OfficeMap = function () {
       var $scrollTarget = (0, _jquery2.default)('html, body');
       var scrollPos = $highlightedItem.offset().top;
       // TODO(jjandoc): Is there a better conditional for this?
-      if ($resultContainer.css('overflow') === 'scroll' ||
-      $resultContainer.css('overflow-y') === 'scroll') {
+      if ($resultContainer.css('overflow') === 'auto' ||
+      $resultContainer.css('overflow-y') === 'auto') {
         $scrollTarget = $resultContainer;
         scrollPos = $scrollTarget.scrollTop() + $highlightedItem.position().top;
       }
@@ -27457,4 +27457,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.68a7560449739d9f8833293fb4c25c57.js.map
+//# sourceMappingURL=main.e61eb5c32c831d1aaea3922e86d0710a.js.map

@@ -5,10 +5,12 @@
   <main class="main-content js-map layout--rows flex-col-reverse screen-desktop:flex-row screen-desktop:layout--sidebar bg-color-white h-screen relative h-90vh" id="content" data-source="/locations/json">
     <div class="js-map-controls overflow-hidden overflow-y-auto screen-desktop:h-90vh">
       <input type="text" class="w-full js-map-searchbox" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
+
       <div class="map-filter-container js-map-filter">
         <a href="#map-filter-settings" class="map-filter-header btn-toggle btn-primary text-color-white rounded-none w-full js-toggle-filter js-main-filter-toggle">
           <span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span>
         </a>
+
         <div id="map-filter-settings" class="c-filter-multi" aria-hidden="true">
           <ul class="c-filter-multi__list">
             {% for filter in filters %}
@@ -23,13 +25,14 @@
                   <span class="sr-only map-filter-collapse">{{__('Collapse category', 'accessnyc-locations')}}</span>
                 </a>
               </div>
+
               <div id="program-{{ filter.category.slug }}" class="c-filter-multi__item-group js-map-filter-program-group" aria-hidden="true">
                 <ul class="c-filter-multi__item-group-list">
                   {% for program in filter.programs %}
                   <li class="c-filter-multi__item-group-subitem">
                     <label class="checkbox">
                       <input type="checkbox" value="{{ program.uid }}" class="js-map-filter-program-input" tabindex="-1">
-                      <span class="checkbox__label">{{ program.post_title }}</span>
+                      <span class="checkbox__label text-font-size-small font-normal">{{ program.post_title }}</span>
                     </label>
                   </li>
                   {% endfor %}
@@ -40,6 +43,7 @@
           </ul>
         </div>
       </div>
+
       <div class="js-map-results-container">
         <div class="border-t border-color-grey-light">
           <ul class="js-map-results p-0"></ul>
