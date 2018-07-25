@@ -14,9 +14,12 @@
 {% block content %}
 {% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
 <div class="layout--topbar">
-  <header class="px-3 flex justify-between items-center bg-color-blue-dark text-color-white">
-    <svg class="icon icon-logo-full" width="163">
-      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
+  <header class="px-2 flex justify-between items-center bg-color-blue-dark text-color-white">
+    <svg class="icon icon-logo-mark screen-sm-mobile:hidden">
+      <use xlink:href="#icon-logo-mark"></use>
+    </svg>
+    <svg class="icon icon-logo-full hidden screen-sm-mobile:inline-block" width="163">
+      <use xlink:href="#icon-logo-full"></use>
     </svg>
     <div class="flex items-center print:hidden">
       <a href="/peu/" class="btn btn-primary btn-small" data-js="reload">{{ __('New Client', translationID) }}</a>
@@ -25,7 +28,7 @@
 
   <main class="main-content" id="content" data-js="results">
     <div class="bg-color-white">
-      <header class="c-header bg-color-blue-dark text-color-white px-3">
+      <header class="c-header bg-color-blue-dark text-color-white px-2">
         <div class="c-header__icon print:hidden">
           <svg class="icon icon-success rounded-full text-color-green bg-color-white">
             <use xlink:href="#icon-success"></use>
@@ -47,12 +50,12 @@
       </header>
 
       {% if WP_ENV != 'Production' %}
-      <div class="px-4 pt-4 print:hidden">
+      <div class="screen-tablet:px-4 px-2 screen-tablet:pt-4 pt-2 print:hidden">
         {% include 'screener-field-partials/alert-environment.twig' %}
       </div>
       {% endif %}
 
-      <form method="post" action="{{ action }}" class="w-full pt-4 px-4 print:hidden" novalidate data-js="final-results">
+      <form method="post" action="{{ action }}" class="w-full screen-tablet:px-4 px-2 screen-tablet:pt-4 pt-2 print:hidden" novalidate data-js="final-results">
         <h4>{{__('Finalize your results.', translationID)}}</h4>
 
         <a class="block btn btn-primary c-share-form__toggle" href="#finalize-your-results"
@@ -87,7 +90,7 @@
         </div>
       </form>
 
-      <div class="pt-4 px-4 hidden print:hidden" aria-hidden="true" data-js="share-results">
+      <div class="pt-4 screen-tablet:px-4 px-2 hidden print:hidden" aria-hidden="true" data-js="share-results">
         <h4>{{__('Save your results.', translationID)}}</h4>
 
         <div class="flex justify-center">
@@ -146,7 +149,7 @@
 
       <div class="content-body pt-4">
         {% if selectedPrograms | length %}
-        <div class="m-0 px-4 print:px-2" data-js="selected-programs">
+        <div class="m-0 screen-tablet:px-4 px-2 print:px-2" data-js="selected-programs">
           <h3 class="text-color-blue-dark" data-js="programs-title">
             <span data-js="programs-singular" {% if selectedPrograms | length > 1 %}class="hidden print:hidden" aria-hidden="true"{% endif %}>{{__('This is the program for you in the categories you selected.', translationID)}}</span>
             <span data-js="programs-plural" {% if selectedPrograms | length == 1 %}class="hidden print:hidden" aria-hidden="true"{% endif %}>{{__('These are programs for you in the categories you selected.', translationID)}}</span>
@@ -160,7 +163,7 @@
         {% endif %}
 
         {% if additionalPrograms | length %}
-        <div class="m-0 px-4 print:px-2" data-js="additional-programs">
+        <div class="m-0 screen-tablet:px-4 px-2 print:px-2" data-js="additional-programs">
           <h3 class="text-color-blue-dark" data-js="programs-title">
             <span data-js="programs-length">{{ additionalPrograms | length }}</span>
             <span data-js="programs-singular" {% if additionalPrograms | length > 1 %}class="hidden print:hidden" aria-hidden="true"{% endif %}>{{__('additional program', translationID)}}</span>

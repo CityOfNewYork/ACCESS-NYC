@@ -263,8 +263,11 @@
 
 {% block content %}
 <div class="layout--topbar">
-  <header class="px-3 flex justify-between items-center bg-color-blue-dark text-color-white">
-    <svg class="icon icon-logo-full" width="163">
+  <header class="px-2 flex justify-between items-center bg-color-blue-dark text-color-white">
+    <svg class="icon icon-logo-mark screen-sm-mobile:hidden">
+      <use xlink:href="#icon-logo-mark"></use>
+    </svg>
+    <svg class="icon icon-logo-full hidden screen-sm-mobile:inline-block" width="163">
       <use xlink:href="#icon-logo-full"></use>
     </svg>
     <div class="flex items-center print:hidden">
@@ -272,18 +275,18 @@
     </div>
   </header>
 
-  <main class="main-content screener-field bg-color-white" id="content">
+  <main class="main-content bg-color-white" id="content">
     <div data-js="view">
       <form action="/peu/results/" class="border-none p-0 m-0" data-js="screener-field">
         <div id="vue">
           <div class="animated opacity-0" id="page-admin" data-js="page">
             {% if WP_ENV != 'Production' %}
-            <div class="px-4 pt-4">
+            <div class="screen-mobile:px-4 px-2 screen-mobile:pt-4 pt-2">
               {% include 'screener-field-partials/alert-environment.twig' %}
             </div>
             {% endif %}
 
-            <div class="px-4">
+            <div class="screen-mobile:px-4 px-2">
               <h1 class="{{ styles.sections.main }}" id="first-steps">
                 <a href="#first-steps" class="{{ styles.sections.title }}">{{ __('First Steps', translationID) }}</a>
               </h1>
@@ -310,7 +313,7 @@
           </div>
 
           <div class="animated opacity-0" id="page-screener" data-js="page" data-vv-scope="page-screener">
-            <div class="px-4">
+            <div class="screen-mobile:px-4 px-2">
               <h1 class="{{ styles.sections.main }}" id="client-information">
                 <a href="#client-information" class="{{ styles.sections.title }}">{{ __('Client Information', translationID) }}</a>
               </h1><span class="{{ styles.sections.step }}">(1 of 4)</span>
@@ -382,7 +385,7 @@
           </div>
 
           <div class="animated opacity-0" id="page-recap" data-js="page">
-            <div class="px-4">
+            <div class="screen-mobile:px-4 px-2">
               <h1 class="{{ styles.sections.main }}" id="confirmation">
                 <a href="#confirmation" class="text-color-blue-dark no-underline">{{ __('Confirmation', translationID) }}</a>
               </h1>
@@ -401,7 +404,7 @@
                 <button type="button" class="{{ styles.confirm }}" data-js="submit" data-action="{{ formAction }}" v-if="!submitting">
                   {{ __('Yes, continue to my results', translationID) }}
                 </button>
-                <div v-else class="flex content-center">
+                <div v-else class="py-2 flex content-center justify-center">
                   {% include 'partials/spinner.twig' %}
                 </div>
               </div>
