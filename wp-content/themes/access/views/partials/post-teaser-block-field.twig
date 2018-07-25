@@ -12,25 +12,27 @@
 {% set shownSections = post.get_field('show_sections') %}
 
 <article class="mb-4 print:pb-4 print:border-b" data-code="{{ post.program_code }}">
-  <div class="c-card items-stretch bg-color-grey-lightest p-4 print:flex print:p-0 print:bg-color-transparent">
-    <div class="c-card__icon-large print:hidden">
-      {% include 'partials/category-icon.twig' with {width: '80px', height: '80px', target: '_blank'} %}
-    </div>
+  <div class="flex items-stretch bg-color-grey-lightest p-3 screen-desktop:p-4 print:flex print:p-0 print:bg-color-transparent">
+    <div class="w-100 pr-1 print:p-0">
+      <header class='c-card p-0 bg-color-transparent mb-2'>
+        <div class="c-card__icon-large print:hidden">
+          {% include 'partials/category-icon.twig' with {width: '80px', height: '80px', target: '_blank'} %}
+        </div>
+        <div class="pr-2 hidden print:inline-block" aria-hidden="true">
+          {% include 'partials/category-icon.twig' with {width: '44px', height: '44px', target: '_blank'} %}
+        </div>
 
-    <div class="pr-2 hidden print:inline-block" aria-hidden="true">
-      {% include 'partials/category-icon.twig' with {width: '44px', height: '44px', target: '_blank'} %}
-    </div>
-
-    <div class="c-card__body w-100 print:p-0">
-      <a href="{{ post.get_permalink }}" target="_blank" rel="noopener noreferrer">
-        <h3 class="c-card__title text-color-blue-dark">
-          {{ post.plain_language_program_name }}
-        </h3>
-      </a>
-
-      {% if not short_post %}
-      <p class="c-card__subtitle text-color-grey-mid">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
-      {% endif %}
+        <div class="c-card__body pt-1">
+          <a href="{{ post.get_permalink }}" target="_blank" rel="noopener noreferrer">
+            <h3 class="c-card__title text-color-blue-dark">
+              {{ post.plain_language_program_name }}
+            </h3>
+          </a>
+          {% if not short_post %}
+          <p class="c-card__subtitle text-color-grey-mid mb-0">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
+          {% endif %}
+        </div>
+      </header>
 
       {% for section in shownSections %}
       {% if section.value == 'how-it-works' %}
@@ -45,7 +47,6 @@
       {% endif %}
 
       {% if post.heads_up | length %}
-
       <div class="print:mb-2">
         <h3 class="type-h4 text-color-blue-dark">{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
         <div class="c-checklist" id="heads-up-{{ post.program_code }}">
@@ -61,7 +62,7 @@
     </div>
 
     <div class="flex flex-col justify-between print:hidden">
-      <div style="width:232px" class="pb-2">
+      <div style="width:212px" class="pb-2">
         <div id="remove-{{ post.program_code }}">
           <a class="btn btn-primary btn-small block" href="#confirm-{{ post.program_code }}"
             data-js="simple-toggle"
@@ -97,16 +98,8 @@
   </div>
 
   <div class="hidden print:active" id="program-detail-{{ post.program_code }}">
-    <div class="flex p-4 print:p-0">
-      <div class="print:hidden" aria-hidden="true">
-        <div style="width:80px;height:80px;">&nbsp;</div>
-      </div>
-
-      <div class="pr-2 hidden print:inline-block" aria-hidden="true">
-        <div style="width:44px;height:44px;">&nbsp;</div>
-      </div>
-
-      <div class="w-full p-left print:p-0">
+    <div class="flex p-3 screen-desktop:p-4 print:p-0">
+      <div class="w-full pr-1 print:p-0">
         {% for section in shownSections %}
         {% if section.value == 'how-to-apply' %}
         <div class="mb-4">
