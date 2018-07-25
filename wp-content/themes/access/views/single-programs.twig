@@ -11,9 +11,11 @@
         <h1 class="c-header__descriptor text-color-blue-dark">
             {{ post.plain_language_program_name }}
         </h1>
+
         <h2 class="c-header__information text-color-grey-mid">
             {{ post.program_name }} {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}{% if post.government_agency | length %} | {{ post.government_agency }}{% endif %}
         </h2>
+
         <p class="hidden print:block" aria-hidden="true">
           <strong>{{__('Get back to this page', 'accessnyc-program-detail')}}:</strong> <a href="{{ post.get_permalink }}">{{ post.get_permalink | replace({'http://': ''})}}</a>
         </p>
@@ -32,16 +34,16 @@
             </li>
             {% endfor %}
           </ol>
-          <div class="c-share hide-for-print">
-            {% spaceless %}
-            <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer">
-              <svg class="icon icon-printer">
-                <use xlink:href="#icon-printer"></use>
-              </svg>{{__('Print the whole guide', 'accessnyc-program-detail')}}
-            </a>
-            {% endspaceless %}
-          </div>
         </nav>
+        <div class="c-share hide-for-print pb-2">
+          {% spaceless %}
+          <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-printer">
+              <use xlink:href="#icon-printer"></use>
+            </svg>{{__('Print the whole guide', 'accessnyc-program-detail')}}
+          </a>
+          {% endspaceless %}
+        </div>
       </aside>
 
       <article class="content-body" data-js="program-detail-content">

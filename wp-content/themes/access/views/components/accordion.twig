@@ -3,13 +3,16 @@
     <p>{{ this.header }}</p>
 
     <a href="#{{ this.id }}__body" class="c-accordion__toggle print:hidden" v-on:click="toggle">
-      <span v-if="active">- {{__('hide this list', 'accessnyc-program-detail')}}</span>
-      <span v-else>+ {{__('show this list', 'accessnyc-program-detail')}}</span>
+      <span v-if="active">
+        <span class="hidden screen-tablet:inline">-</span> {{__('hide this list', 'accessnyc-program-detail')}}
+      </span><span v-else>
+        <span class="hidden screen-tablet:inline">+</span> {{__('show this list', 'accessnyc-program-detail')}}
+      </span>
     </a>
   </header>
 
   <div id="#{{ this.id }}__body"
-       class="c-accordion__body print:active hidden:overflow animated"
+       class="c-accordion__body text-font-size-small screen-tablet:text-font-size-normal print:active hidden:overflow animated"
        v-bind:class="{active: active}"
        v-bind:aria-hidden="ariaHidden(active)">
     <div class="c-accordion__padding" v-bind:class="{'animated fadeInUp': active}">
