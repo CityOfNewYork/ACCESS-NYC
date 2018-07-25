@@ -167,7 +167,7 @@ class Screener {
     let key = '';
     let data = [];
 
-    $(window).on('hashchange', function() {
+    $(window).on('hashchange load', function() {
       let hash = window.location.hash;
       let step = $(hash);
       key = step.data('trackKey');
