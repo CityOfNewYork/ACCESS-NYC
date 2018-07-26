@@ -2,6 +2,10 @@
 
 {% block content %}
   <main id="content" class="bg-color-white">
+    <p class="usa-grid m-0 pt-3 hidden print:block" aria-hidden="true">
+      <strong>{{__('Get back to this page', 'accessnyc-program-detail')}}:</strong> <a href="{{ post.get_permalink }}">{{ post.get_permalink | replace({'http://': ''})}}</a>
+    </p>
+
     <header class="c-header mt-3 print:mt-0">
       <div class="c-header__icon">
         {% include 'partials/category-icon.twig' %}
@@ -15,10 +19,6 @@
         <h2 class="c-header__information text-color-grey-mid">
             {{ post.program_name }} {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}{% if post.government_agency | length %} | {{ post.government_agency }}{% endif %}
         </h2>
-
-        <p class="hidden print:block" aria-hidden="true">
-          <strong>{{__('Get back to this page', 'accessnyc-program-detail')}}:</strong> <a href="{{ post.get_permalink }}">{{ post.get_permalink | replace({'http://': ''})}}</a>
-        </p>
       </div>
     </header>
 
@@ -35,7 +35,7 @@
             {% endfor %}
           </ol>
         </nav>
-        <div class="c-share hide-for-print pb-2">
+        <div class="c-share print:hidden pb-2">
           {% spaceless %}
           <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer">
             <svg class="icon icon-printer">
