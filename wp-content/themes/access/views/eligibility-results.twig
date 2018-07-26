@@ -83,7 +83,7 @@
 
           <div class="layout--gutter p-2 bg-color-grey-lightest">
             {% for post in selectedPrograms %}
-              {% include 'partials/post-teaser-block.twig' with {'show_apply': true } %}
+              {% include 'components/card.twig' with {'show_apply': true } %}
             {% endfor %}
           </div>
         </div>
@@ -101,7 +101,7 @@
 
           <div class="layout--gutter p-2 bg-color-grey-lightest">
             {% for post in additionalPrograms %}
-              {% include 'partials/post-teaser-block.twig' with {'show_apply': true } %}
+              {% include 'components/card.twig' with {'show_apply': true } %}
             {% endfor %}
           </div>
         </div>
