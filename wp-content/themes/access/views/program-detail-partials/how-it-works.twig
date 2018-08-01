@@ -10,12 +10,12 @@
   </div>
 
   {% if post.heads_up | length %}
-  <div class="c-checklist">
+  <div id="how-it-works" class="c-checklist">
     {{ post.get_field('heads_up') }}
   </div>
   <style>
     {% for icon in post.get_field('heads_up_icons') %}
-    .c-checklist ul li:nth-child({{ loop.index }}) {
+    #how-it-works.c-checklist > ul > li:nth-child({{ loop.index }}) {
       background-image: url({{ icon.icon.url }});
     }
     {% endfor %}
