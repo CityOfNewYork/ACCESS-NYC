@@ -23541,8 +23541,7 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
   });
 
   // Initialize accordion components
-  document.querySelectorAll(_accordion2.default.selector).
-  forEach(function (element) {
+  $(_accordion2.default.selector).each(function (i, element) {
     var accordion = new _accordion2.default(element);
     accordion.init();
   });
@@ -27457,4 +27456,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.26bd82c3a9a9471a5a90687b9e15be14.js.map
+//# sourceMappingURL=main.cf34e8620c100b826d4a187f9e2637f3.js.map
