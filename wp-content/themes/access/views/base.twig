@@ -21,7 +21,7 @@
       {% endblock %}
     {% endblock %}
   </head>
-  <body data-template="base.twig"{% set _bodyClass = block('body_class') %}{% if _bodyClass %} class="{{ _bodyClass|trim }} overlay"{% endif %}>
+  <body data-template="base.twig" class="overlay{% set _bodyClass = block('body_class') %}{% if _bodyClass %} {{ _bodyClass|trim }}{% endif %}">
     <div class="hidden" aria-hidden="true">
       {% include 'partials/icons.twig' %}
     </div>
@@ -30,7 +30,7 @@
       {% block header %}
         <header class="relative">
 
-          <div class="flex justify-between py-1 px-2">
+          <div class="flex justify-between py-1 px-3">
 
             {% spaceless %}
             <div class="flex-none">
@@ -86,7 +86,7 @@
               </a>
             </div>
             <nav class="o-navigation__nav nav-inline print:hidden" data-js="site-desktop-nav">{% spaceless %}
-              <a class="screen-desktop:hidden" href="#c-mobile-nav" data-js="toggle-nav">
+              <a class="screen-desktop:hidden" href="#o-mobile-nav" data-js="toggle-nav">
                 {{__('Menu', 'accessnyctheme')}}
               </a>
               <a class="hidden screen-desktop:inline-block" href="{{ urlBase }}/eligibility">
@@ -105,15 +105,15 @@
               </a>{% endspaceless %}
             </nav>
             {# <div class="site-search-toggle"></div> #}
-            <div class="c-mobile-nav print:hidden" id="c-mobile-nav">
-              <a class="c-mobile-nav__close" href="#c-mobile-nav" data-js="toggle-nav">
+            <div class="o-mobile-nav print:hidden" id="o-mobile-nav">
+              <a class="o-mobile-nav__close" href="#o-mobile-nav" data-js="toggle-nav">
                 {{__('close &amp; return to site', 'accessnyctheme')}}
                 <svg class="icon icon-close">
                   <use xlink:href="#icon-close"></use>
                 </svg>
               </a>
-              <div class="c-mobile-nav__inner">
-                <h4 class="c-mobile-nav__header">
+              <div class="o-mobile-nav__inner">
+                <h4 class="o-mobile-nav__header">
                   {{__('Get help now', 'accessnyctheme')}}
                 </h4>
                 <nav class="nav-block">

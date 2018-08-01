@@ -30,8 +30,8 @@ import Accordion from 'components/accordion/accordion.common';
     let element = $(event.currentTarget);
     // Shows/hides the mobile nav and overlay.
     event.preventDefault();
-    $('body').toggleClass('overlay@active');
-    $(element.attr('href')).toggleClass('c-mobile-nav@active');
+    $('body').toggleClass('active:overlay');
+    $(element.attr('href')).toggleClass('active:o-mobile-nav');
   }).on('click', '.js-toggle-search', (e) => {
     // Shows/hides the search drawer in the main nav.
     e.preventDefault();

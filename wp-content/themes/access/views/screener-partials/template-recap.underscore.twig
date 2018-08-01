@@ -64,7 +64,7 @@
         </span>
 
         <% if (member.conditions.length) { %>
-        <div class="flex font-normal leading-normal pb-1">
+        <div class="flex font-normal leading-large pb-1">
           <div class="flex-none" style="width:7rem">{{ __('Conditions:', 'accessnyc-screener') }}</div>
           <ul class="list-inline-semicolon">
             <% _.each(member.conditions, function(condition) { %>
@@ -75,7 +75,7 @@
         <% } %>
 
         <% if (member.benefits.length) { %>
-        <div class="flex font-normal leading-normal pb-1">
+        <div class="flex font-normal leading-large pb-1">
           <div class="flex-none" style="width:7rem">{{ __('Benefits:', 'accessnyc-screener') }}</div>
           <ul class="list-inline-semicolon">
             <% _.each(member.benefits, function(benefit) { %>
@@ -86,7 +86,7 @@
         <% } %>
 
         <% if (member.incomes.length) { %>
-        <div class="flex font-normal leading-normal pb-1">
+        <div class="flex font-normal leading-large pb-1">
           <div class="flex-none" style="width:7rem">{{ __('Income:', 'accessnyc-screener') }}</div>
           <ul class="list-inline-semicolon">
             <% _.each(member.incomes, function(income) { %>
@@ -103,7 +103,7 @@
         <% } %>
 
         <% if (member.expenses.length) { %>
-        <div class="flex font-normal leading-normal">
+        <div class="flex font-normal leading-large">
           <div class="flex-none" style="width:7rem">{{ __('Expenses:', 'accessnyc-screener') }}</div>
           <ul class="list-inline-semicolon">
             <% _.each(member.expenses, function(expense) { %>

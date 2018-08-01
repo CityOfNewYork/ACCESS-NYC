@@ -75,7 +75,6 @@
 @import 'access-nyc-patterns/src/components/filter/filter';
 @import 'access-nyc-patterns/src/components/text-controller/text-controller';
 @import 'access-nyc-patterns/src/components/header/header';
-@import 'access-nyc-patterns/src/components/mobile-nav/mobile-nav';
 @import 'access-nyc-patterns/src/components/side-nav/side-nav';
 @import 'access-nyc-patterns/src/components/share-links/share-links';
 @import 'access-nyc-patterns/src/components/question/question';
@@ -93,6 +92,7 @@
 // will require their own Objects. Object namespaces are prefixed with 'o-'.
 
 @import 'access-nyc-patterns/src/objects/navigation/navigation';
+@import 'access-nyc-patterns/src/objects/mobile-nav/mobile-nav';
 @import 'access-nyc-patterns/src/objects/banner/banner';
 @import 'access-nyc-patterns/src/objects/search-box/search-box';
 @import 'access-nyc-patterns/src/objects/footer/footer';

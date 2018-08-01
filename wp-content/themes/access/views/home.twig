@@ -9,11 +9,11 @@
 
     <div class="o-banner">
       <div class="o-banner__inner">
-        <h2 class="o-banner__title type-h1">{{ post.hero_headline }}</h2>
+        <h1 class="o-banner__title">{{ post.hero_headline }}</h1>
         <div class="o-banner__touts">
           {% for tout in post.get_field('hero_touts') %}
           <div class="o-banner__tout">
-            {% if tout.title %}<h3 class="o-banner__tout-title">{{ tout.title }}</h3>{% endif %}
+            {% if tout.title %}<h2 class="o-banner__tout-title type-h3">{{ tout.title }}</h2>{% endif %}
             {% if tout.body %}<div class="o-banner__tout-body">{{ tout.body }}</div>{% endif %}
             {% if tout.link_text %}<div class="o-banner__tout-cta">
               <a class="btn btn-{{ tout.link_type}}{% if tout.link_arrow %} btn-next{% endif %}" href="{{ tout.link_url}}">{{ tout.link_text}}</a>

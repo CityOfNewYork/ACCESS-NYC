@@ -5,9 +5,9 @@
     </h3>
   </header>
 
-  {% if post.plain_language_eligibility | length %}
+  {% if post.plain_language_eligibility | length %}<div class='c-checklist'>
   {{ post.get_field('plain_language_eligibility') }}
-  {% endif %}
+  {% endif %}</div>
 
   {% if post.display_screen_for_eligibility_box %}
   <div class="c-alert-box bg-status-info mb-4 print:hidden">

@@ -23395,8 +23395,8 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
     var element = $(event.currentTarget);
     // Shows/hides the mobile nav and overlay.
     event.preventDefault();
-    $('body').toggleClass('overlay@active');
-    $(element.attr('href')).toggleClass('c-mobile-nav@active');
+    $('body').toggleClass('active:overlay');
+    $(element.attr('href')).toggleClass('active:o-mobile-nav');
   }).on('click', '.js-toggle-search', function (e) {
     // Shows/hides the search drawer in the main nav.
     e.preventDefault();
@@ -27457,4 +27457,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.e61eb5c32c831d1aaea3922e86d0710a.js.map
+//# sourceMappingURL=main.26bd82c3a9a9471a5a90687b9e15be14.js.map
