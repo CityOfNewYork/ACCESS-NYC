@@ -1,10 +1,10 @@
 <h2 class="recap-confirmation">{{ __('Is all of your information correct?', 'accessnyc-screener') }}</h2>
 
-<div class="text-font-size-normal bg-color-white p-4">
+<div class="text-font-size-normal bg-color-white p-2 screen-tablet:p-4">
   <div>
     <h3 class="type-h4 text-color-blue-dark">
       {{ __('Looking for help with', 'accessnyc-screener') }}
-      <a href="#step-1" class="px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      <a href="#step-1" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
     </h3>
 
     <div class="layout--gutter screen-tablet:layout--columns-gutter mb-4">
@@ -59,8 +59,8 @@
         <span class="c-member-list__item">{{ __('Head of household', 'accessnyc-screener') }}</span>
         <% } %>
 
-        <span class="c-member-list__item px-1">
-          <a role="button" data-person="<%= index %>" class="js-edit-person px-2 font-normal cursor-pointer">{{ __('Edit', 'accessnyc-screener') }}</a><% if (index !== 0 && !member.isHoh) { %><a role="button" data-person="<%= index %>" class="js-remove-person px-2 font-normal">{{ __('Remove', 'accessnyc-screener') }}</a><% } %>
+        <span class="c-member-list__item block screen-tablet:inline">
+          <a role="button" data-person="<%= index %>" class="js-edit-person screen-tablet:px-2 font-normal cursor-pointer">{{ __('Edit', 'accessnyc-screener') }}</a><% if (index !== 0 && !member.isHoh) { %><a role="button" data-person="<%= index %>" class="js-remove-person px-2 font-normal">{{ __('Remove', 'accessnyc-screener') }}</a><% } %>
         </span>
 
         <% if (member.conditions.length) { %>
@@ -128,7 +128,7 @@
   <div>
     <h3 class="type-h4 text-color-blue-dark">
       {{ __('Household resources:', 'accessnyc-screener') }} <span class="force-ltr"><%= household.assets %></span>
-      <a href="#step-10" class="px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      <a href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
     </h3>
 
     <p>{{ __('This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.', 'accessnyc-screener') }}</p>
@@ -139,7 +139,7 @@
   <div>
     <h3 class="type-h4 text-color-blue-dark">
       {{ __('Housing', 'accessnyc-screener') }}
-      <a href="#step-10" class="px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      <a href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
     </h3>
 
     <ul class="list-inline-semicolon">{% spaceless %}
@@ -199,7 +199,7 @@
   <div>
     <h3 class="type-h4 text-color-blue-dark">
       {{ __('Your zip code:', 'accessnyc-screener') }} <%= household.zip %>
-      <a href="#step-3" class="px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      <a href="#step-3" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
     </h3>
   </div>
 </div>

@@ -1,35 +1,37 @@
 <fieldset class="{{ styles.fieldset }}" id="step-3" data-track-key="Screener Step: 3"
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "3-Age-Zip"}]'>
-  <div class="{{ styles.number }}">{{ __('Step 3 of 10', 'accessnyc-screener') }}</div>
+  <div class="{{ styles.padding }}">
+    <div class="{{ styles.number }}">{{ __('Step 3 of 10', 'accessnyc-screener') }}</div>
 
-  <h1 class="{{ styles.heading }}">{{ __('Tell us a little more about yourself.', 'accessnyc-screener') }}</h1>
+    <h1 class="{{ styles.heading }}">{{ __('Tell us a little more about yourself.', 'accessnyc-screener') }}</h1>
 
-  <div class="c-question">
-    <label class="c-question__label" for="person-0-age">{{ __('How old are you?', 'accessnyc-screener') }}</label>
-    <p>
-      <button type="button" class="c-question__info btn btn-text btn-link js-tooltip-trigger" aria-describedby="tooltip-age">
-        {{ __('Here’s why we are asking.', 'accessnyc-screener') }}
-        <svg class="icon icon-info">
-          <use xlink:href="#icon-info"></use>
-        </svg>
-      </button>
-    </p>
-    <div id="tooltip-age" class="tooltip">
-      <p>{{ __('Many benefit programs are meant for people of a specific age group. Sharing your age will help us choose the programs that will be most helpful to you right now. The information you share for the purposes of public benefits screening will be anonymous.', 'accessnyc-screener') }}</p>
+    <div class="c-question">
+      <label class="c-question__label" for="person-0-age">{{ __('How old are you?', 'accessnyc-screener') }}</label>
+      <p>
+        <button type="button" class="c-question__info btn btn-text btn-link js-tooltip-trigger" aria-describedby="tooltip-age">
+          {{ __('Here’s why we are asking.', 'accessnyc-screener') }}
+          <svg class="icon icon-info">
+            <use xlink:href="#icon-info"></use>
+          </svg>
+        </button>
+      </p>
+      <div id="tooltip-age" class="tooltip">
+        <p>{{ __('Many benefit programs are meant for people of a specific age group. Sharing your age will help us choose the programs that will be most helpful to you right now. The information you share for the purposes of public benefits screening will be anonymous.', 'accessnyc-screener') }}</p>
+      </div>
+      <div class="c-question__container">
+        <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>
+      </div>
     </div>
-    <div class="c-question__container">
-      <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>
-    </div>
-  </div>
 
-  <div class="c-question mb-4">
-    <label class="c-question__label" for="household-zip">{{ __('What is your zip code?', 'accessnyc-screener') }}</label>
-    <div class="c-question__container">
-      <input id="household-zip" name="Household.zip" type="number" value="" maxlength="5" pattern="[0-9]" data-type="zip" required>
+    <div class="c-question mb-4">
+      <label class="c-question__label" for="household-zip">{{ __('What is your zip code?', 'accessnyc-screener') }}</label>
+      <div class="c-question__container">
+        <input id="household-zip" name="Household.zip" type="number" value="" maxlength="5" pattern="[0-9]" data-type="zip" required>
+      </div>
     </div>
-  </div>
 
-  <div class="pt-2">
-    <a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-4" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
+    <div class="pt-2">
+      <a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-4" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
+    </div>
   </div>
 </fieldset>{# /#step-3 #}

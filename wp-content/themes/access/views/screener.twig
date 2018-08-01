@@ -1,15 +1,16 @@
 {% extends "base.twig" %}
 
 {% set styles = {
-  fieldset: 'js-screener-step px-1',
+  fieldset: 'js-screener-step',
   number: 'text-color-blue-bright font-bold',
   heading: 'text-font-size-larger text-color-blue-dark border-b border-color-grey-mid pb-4 mb-3',
+  padding: 'p-3 screen-desktop:p-4',
   label: 'font-bold text-font-size-normal'
 } %}
 
 {% block content %}
 <main class="main-content screen-desktop:my-2 screen-desktop:mx-4 screen-desktop:px-2" id="content">
-  <form class="bg-color-white screen-desktop:border border-color-grey-light p-4 screen-desktop:m-4 text-font-size-small js-screener-form" action="/eligibility/results/">
+  <form class="bg-color-white screen-desktop:border border-color-grey-light screen-desktop:m-4 text-font-size-small js-screener-form" action="/eligibility/results/">
     {% include 'screener-partials/step-1.twig' with {'categories': categories} %}
     {% include 'screener-partials/step-2.twig' %}
     {% include 'screener-partials/step-3.twig' %}
