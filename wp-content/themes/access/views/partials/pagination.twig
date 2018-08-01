@@ -1,11 +1,12 @@
 {% if pagination.pages | length %}
+  <h4 class="text-align-end">{{__('See more results:', 'accessnyctheme')}}</h4>
   <nav class="text-align-end">
-    <h4>{{__('See more results:', 'accessnyctheme')}}</h4>
-      {% if pagination.prev %}
-        <a class="btn btn-secondary btn-previous" href="{{pagination.prev.link}}">{{__('Previous', 'accessnyctheme')}}</a>
-      {% endif %}
-      {% if pagination.next %}
-        <a class="btn btn-secondary btn-next" href="{{pagination.next.link}}">{{__('Next', 'accessnyctheme')}}</a>
-      {% endif %}
+    {% if pagination.prev %}
+    <a class="btn btn-secondary btn-small screen-tablet:btn-normal btn-previous" href="{{pagination.prev.link}}">{{__('Previous', 'accessnyctheme')}}</a>
+    {% endif %}
+
+    {% if pagination.next %}
+    <a class="btn btn-secondary btn-small screen-tablet:btn-normal btn-next" href="{{pagination.next.link}}">{{__('Next', 'accessnyctheme')}}</a>
+    {% endif %}
   </nav>
 {% endif %}
