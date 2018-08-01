@@ -22,27 +22,7 @@
       <aside>
         <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
 
-        <div class="c-filter js-program-filter js-program-search-filter">
-          <div class="c-filter__header js-toggle-filter">
-            <a id="#program-options" href="#">{% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{__('All Programs', 'accessnyctheme')}}{% endif %}</a>
-          </div>
-          <div class="c-filter__body">
-            <ul class="c-filter__list" id="program-options">
-              <li>
-                <label class="c-filter__item">
-                  <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="">{{__('All Programs', 'accessnyctheme')}}
-                </label>
-              </li>
-              {% for category in categories %}
-              <li>
-                <label class="c-filter__item" for="filter-{{ category.slug }}">
-                  <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" id="filter-{{ category.slug }}" value="{{ category.slug }}">{{ category.name }}
-                </label>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
+        {% include 'components/filter-search.twig' %}
       </aside>
 
       <div>

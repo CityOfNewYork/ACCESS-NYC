@@ -9,28 +9,8 @@
   <div class="usa-grid screen-desktop:layout--sidebar-small-gutter">
     <aside>
       <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
-      <div class="c-filter js-program-filter">
-        <div class="c-filter__header js-toggle-filter">
-          <a href="#program-options">{% if not programCategory | length %}{{__('All Programs', 'accessnyctheme')}}{% else %}{{ programCategory.name }}{% endif %}</a>
-        </div>
-        <div class="c-filter__body">
-          <ul class="c-filter__list" id="program-options">
-            {% if not programCategory | length %}
-            <li><span class="c-filter__item">{{__('All Programs', 'accessnyctheme')}}</span></li>
-            {% else %}
-            <li><a class="c-filter__item" href="{{ urlBase }}/programs">{{__('All Programs', 'accessnyctheme')}}</a></li>
-            {% endif %}
 
-            {% for category in categories %}
-            {% if category.slug == programCategory.slug %}
-            <li><span class="c-filter__item">{{ category.name }}</span></li>
-            {% else %}
-            <li><a class="c-filter__item" href="{{ urlBase }}/programs/?program_cat={{ category.slug }}">{{ category.name }}</a></li>
-            {% endif %}
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
+      {% include 'components/filter-programs.twig' %}
     </aside>
 
     <div>
