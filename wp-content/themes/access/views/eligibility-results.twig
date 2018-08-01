@@ -26,54 +26,51 @@
     </header>
 
     <div class="usa-grid screen-desktop:layout--sidebar-small-gutter bg-color-white pt-4">
-      <aside class="mb-4">
-        <div class="save-your-results">
-          <h4 class="type-h3 text-color-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>
+      <aside class="mb-4 print:hidden">
+        <h4 class="type-h3 text-color-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>
 
-          <a class="btn btn-primary block mb-2" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]' role="button">{{__('Print', 'accessnyc-results')}}</a>
+        <a class="btn btn-primary block mb-2" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]' role="button">{{__('Print', 'accessnyc-results')}}</a>
 
-          <div class="c-share-form mb-2">
-            <a class="btn btn-primary c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
-            <div id="share-by-sms" class="c-share-form__input hidden js-needs-disclaimer">
-              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
-                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
-                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
-                <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
-                <div class="c-share-form__controls">
-                  <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-results')}}">
-                  <div class="c-share-form__button">
-                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
-                    {% include 'partials/share-form-spinner.twig' with { attr: 'style="display: none"' } %}
-                    <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
-                  </div>
+        <div class="c-share-form mb-2">
+          <a class="btn btn-primary c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
+          <div id="share-by-sms" class="c-share-form__input hidden js-needs-disclaimer">
+            <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
+              <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+              <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
+              <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
+              <div class="c-share-form__controls">
+                <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-results')}}">
+                <div class="c-share-form__button">
+                  <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
+                  {% include 'partials/share-form-spinner.twig' with { attr: 'style="display: none"' } %}
+                  <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
-
-          <div class="c-share-form mb-2">
-            <a class="btn btn-primary c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
-            <div id="share-by-email" class="c-share-form__input js-needs-disclaimer hidden">
-              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-                <input type="hidden" name="action" value="email_send" readonly>
-                <input type="hidden" name="url" value="{{ shareUrl }}"  readonly>
-                <input type="hidden" name="hash" value="{{ shareHash }}"  readonly>
-                <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
-                <div class="c-share-form__controls">
-                  <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-results')}}" required>
-                  <div class="c-share-form__button">
-                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
-                    {% include 'partials/share-form-spinner.twig' with { attr: 'style="display: none"' } %}
-                    <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          {% include 'partials/share-form-disclaimer.twig' %}
-
         </div>
+
+        <div class="c-share-form mb-2">
+          <a class="btn btn-primary c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
+          <div id="share-by-email" class="c-share-form__input js-needs-disclaimer hidden">
+            <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
+              <input type="hidden" name="action" value="email_send" readonly>
+              <input type="hidden" name="url" value="{{ shareUrl }}"  readonly>
+              <input type="hidden" name="hash" value="{{ shareHash }}"  readonly>
+              <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
+              <div class="c-share-form__controls">
+                <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-results')}}" required>
+                <div class="c-share-form__button">
+                  <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
+                  {% include 'partials/share-form-spinner.twig' with { attr: 'style="display: none"' } %}
+                  <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {% include 'partials/share-form-disclaimer.twig' %}
       </aside>
 
       <div class="content-body">
