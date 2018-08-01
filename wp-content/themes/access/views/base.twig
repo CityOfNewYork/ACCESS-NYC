@@ -85,6 +85,7 @@
                 </svg><span class="sr-only">{{__('Access NYC', 'accessnyctheme')}}</span>
               </a>
             </div>
+
             <nav class="o-navigation__nav nav-inline print:hidden" data-js="site-desktop-nav">{% spaceless %}
               <a class="screen-desktop:hidden" href="#o-mobile-nav" data-js="toggle-nav">
                 {{__('Menu', 'accessnyctheme')}}
@@ -104,7 +105,7 @@
                 </svg>{{__('Search', 'accessnyctheme')}}
               </a>{% endspaceless %}
             </nav>
-            {# <div class="site-search-toggle"></div> #}
+
             <div class="o-mobile-nav print:hidden" id="o-mobile-nav">
               <a class="o-mobile-nav__close" href="#o-mobile-nav" data-js="toggle-nav">
                 {{__('close &amp; return to site', 'accessnyctheme')}}
@@ -112,10 +113,12 @@
                   <use xlink:href="#icon-close"></use>
                 </svg>
               </a>
+
               <div class="o-mobile-nav__inner">
                 <h4 class="o-mobile-nav__header">
                   {{__('Get help now', 'accessnyctheme')}}
                 </h4>
+
                 <nav class="nav-block">
                   {% include 'partials/nav.twig' %}
                   <a href="{{ urlBase }}/?s=">
@@ -137,6 +140,7 @@
                       <use xlink:href="#icon-close"></use>
                     </svg><span class="sr-only">{{__('Close search', 'accessnyctheme')}}</span>
                   </a>
+
                   <form class="o-search-box__form" method="get" action="/">
                     {{ fn('do_action', 'wpml_add_language_form_field' ) }}
                     <label class="type-small" for="search-field">{{__('Search', 'accessnyctheme')}}</label>
@@ -149,6 +153,7 @@
                       </button>
                     </div>
                   </form>
+
                   <div class="o-search-box__suggestions">
                     <div class="o-search-box__suggestions-header">
                       <h3>{{__('Programs', 'accessnyctheme')}}</h3>
