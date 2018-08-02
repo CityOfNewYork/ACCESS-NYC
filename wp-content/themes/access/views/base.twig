@@ -89,15 +89,7 @@
               <a class="screen-desktop:hidden" href="#o-mobile-nav" data-js="toggle-nav">
                 {{__('Menu', 'accessnyctheme')}}
               </a>
-              <a class="hidden screen-desktop:inline-block" href="{{ urlBase }}/eligibility">
-                {{__('Am I eligible?', 'accessnyctheme')}}
-              </a>
-              <a class="hidden screen-desktop:inline-block" href="{{ urlBase }}/programs">
-                {{__('Programs', 'accessnyctheme')}}
-              </a>
-              <a class="hidden screen-desktop:inline-block" href="{{ urlBase }}/locations">
-                {{__('Find help', 'accessnyctheme')}}
-              </a>
+              {% include 'partials/nav.twig' with {this: {style: 'hidden screen-desktop:inline-block'}} %}
               <a class="td-inherit js-toggle-search" href="#search">
                 <svg class="icon bg-icon-search">
                   <use xlink:href="#icon-search"></use>

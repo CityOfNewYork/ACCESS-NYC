@@ -1,3 +1,3 @@
-<a href="{{ urlBase }}/eligibility">{{__('Am I eligible?', 'accessnyctheme')}}</a>
-<a href="{{ urlBase }}/programs">{{__('Programs', 'accessnyctheme')}}</a>
-<a href="{{ urlBase }}/locations">{{__('Find help', 'accessnyctheme')}}</a>
+<a href="{{ urlBase }}/eligibility#step-1" {% if this.style %}class="{{ this.style }}"{% endif %}>{{__('Am I eligible?', 'accessnyctheme')}}</a>
+<a href="{{ urlBase }}/programs" {% if this.style %}class="{{ this.style }}"{% endif %}>{{__('Programs', 'accessnyctheme')}}</a>
+<a href="{{ urlBase }}/locations" {% if this.style %}class="{{ this.style }}"{% endif %}>{{__('Find help', 'accessnyctheme')}}</a>
