@@ -2,8 +2,8 @@
 
 {% block content %}
   {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
-  <main class="js-map layout--rows flex-col-reverse screen-desktop:flex-row screen-desktop:layout--sidebar bg-color-white h-screen relative h-90vh" id="content" data-source="/locations/json">
-    <div class="js-map-controls overflow-hidden overflow-y-auto screen-desktop:h-90vh">
+  <main class="js-map layout--map screen-desktop:layout--sidebar bg-color-white" id="content" data-source="/locations/json">
+    <div class="js-map-controls layout--map__sidebar">
       <input type="text" class="w-full js-map-searchbox" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
 
       <div class="map-filter-container js-map-filter">
@@ -53,7 +53,8 @@
       </div>
       <div class="js-map-pagination"> </div>
     </div>
-    <div class="js-map-mapbox screen-desktop:h-90vh"></div>
+
+    <div class="js-map-mapbox  layout--map__map"></div>
   </main>
 {% endblock %}
 
