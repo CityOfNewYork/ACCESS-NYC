@@ -46,9 +46,11 @@ import Accordion from 'components/accordion/accordion.common';
     // Hides the search drawer in the main nav.
     e.preventDefault();
     $('#search').removeClass('active');
-  }).on('click', '.js-toggle-filter', (e) => {
-    e.preventDefault();
-    $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
+  }).on('click', '[data-js="filter"]', (event) => {
+    event.preventDefault();
+    let $element = $(event.currentTarget);
+    $element.toggleClass('active');
+    $target.toggleClass('active');
   });
 
   // Show/hide share form disclaimer

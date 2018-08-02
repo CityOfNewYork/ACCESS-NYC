@@ -1,22 +1,20 @@
-<div class="c-filter js-program-filter">
-  <a href="#program-options" class="c-filter__header js-toggle-filter">
+<div class="c-filter">
+  <a href="#program-options" class="c-filter__header" data-js="filter">
     {% if not programCategory | length %}{{__('All Programs', 'accessnyctheme')}}{% else %}{{ programCategory.name }}{% endif %}
   </a>
-  <div class="c-filter__body">
-    <ul class="c-filter__list" id="program-options">
-      {% if not programCategory | length %}
-      <li><span class="c-filter__item">{{__('All Programs', 'accessnyctheme')}}</span></li>
-      {% else %}
-      <li><a class="c-filter__item" href="{{ urlBase }}/programs">{{__('All Programs', 'accessnyctheme')}}</a></li>
-      {% endif %}
+  <ul id="program-options" class="c-filter__list">
+    {% if not programCategory | length %}
+    <li><span class="c-filter__item">{{__('All Programs', 'accessnyctheme')}}</span></li>
+    {% else %}
+    <li><a class="c-filter__item" href="{{ urlBase }}/programs">{{__('All Programs', 'accessnyctheme')}}</a></li>
+    {% endif %}
 
-      {% for category in categories %}
-      {% if category.slug == programCategory.slug %}
-      <li><span class="c-filter__item">{{ category.name }}</span></li>
-      {% else %}
-      <li><a class="c-filter__item" href="{{ urlBase }}/programs/?program_cat={{ category.slug }}">{{ category.name }}</a></li>
-      {% endif %}
-      {% endfor %}
-    </ul>
-  </div>
+    {% for category in categories %}
+    {% if category.slug == programCategory.slug %}
+    <li><span class="c-filter__item">{{ category.name }}</span></li>
+    {% else %}
+    <li><a class="c-filter__item" href="{{ urlBase }}/programs/?program_cat={{ category.slug }}">{{ category.name }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
 </div>

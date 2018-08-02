@@ -23411,9 +23411,13 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
     // Hides the search drawer in the main nav.
     e.preventDefault();
     $('#search').removeClass('active');
-  }).on('click', '.js-toggle-filter', function (e) {
-    e.preventDefault();
-    $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
+  }).on('click', '[data-js="filter"]', function (event) {
+    event.preventDefault();
+    var $element = $(event.currentTarget);
+    var $target = $($element.attr('href'));
+    $element.toggleClass('active');
+    $target.toggleClass('active').
+    prop('aria-hidden', $target.hasClass('active'));
   });
 
   // Show/hide share form disclaimer
@@ -27456,4 +27460,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.cf34e8620c100b826d4a187f9e2637f3.js.map
+//# sourceMappingURL=main.d42ddb593b5a28c4c62ee9b07e425ba7.js.map

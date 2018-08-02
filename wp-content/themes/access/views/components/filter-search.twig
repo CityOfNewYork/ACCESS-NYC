@@ -1,21 +1,19 @@
-<div class="c-filter js-program-filter js-program-search-filter">
-  <a id="#program-options" href="#" class="c-filter__header js-toggle-filter">
+<div class="c-filter js-program-search-filter">
+  <a href="#program-options" class="c-filter__header" data-js="filter">
     {% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{__('All Programs', 'accessnyctheme')}}{% endif %}
   </a>
-  <div class="c-filter__body">
-    <ul class="c-filter__list" id="program-options">
-      <li>
-        <label class="c-filter__item">
-          <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="">{{__('All Programs', 'accessnyctheme')}}
-        </label>
-      </li>
-      {% for category in categories %}
-      <li>
-        <label class="c-filter__item" for="filter-{{ category.slug }}">
-          <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" id="filter-{{ category.slug }}" value="{{ category.slug }}">{{ category.name }}
-        </label>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+  <ul id="program-options" class="c-filter__list">
+    <li>
+      <label class="c-filter__item">
+        <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="">{{__('All Programs', 'accessnyctheme')}}
+      </label>
+    </li>
+    {% for category in categories %}
+    <li>
+      <label class="c-filter__item" for="filter-{{ category.slug }}">
+        <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" id="filter-{{ category.slug }}" value="{{ category.slug }}">{{ category.name }}
+      </label>
+    </li>
+    {% endfor %}
+  </ul>
 </div>

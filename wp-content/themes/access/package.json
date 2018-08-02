@@ -6,6 +6,7 @@
     "development": "NODE_ENV='development' gulp",
     "production": "NODE_ENV='production' gulp",
     "predeploy": "NODE_ENV='production' gulp build",
+    "scripts": "gulp 'clean (scripts)' && NODE_ENV='production' gulp scripts",
     "styles": "gulp 'clean (styles)' && gulp styles",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
