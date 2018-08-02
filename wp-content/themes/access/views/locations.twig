@@ -2,7 +2,7 @@
 
 {% block content %}
   {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
-  <main class="main-content js-map layout--rows flex-col-reverse screen-desktop:flex-row screen-desktop:layout--sidebar bg-color-white h-screen relative h-90vh" id="content" data-source="/locations/json">
+  <main class="js-map layout--rows flex-col-reverse screen-desktop:flex-row screen-desktop:layout--sidebar bg-color-white h-screen relative h-90vh" id="content" data-source="/locations/json">
     <div class="js-map-controls overflow-hidden overflow-y-auto screen-desktop:h-90vh">
       <input type="text" class="w-full js-map-searchbox" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
 
@@ -74,38 +74,9 @@
   ]);
 </script>
 <script type="text/template" id="map-location-template">
-  <% _.each(locations, function(location) { %>
-  <li class="js-map-location c-card px-2 py-3 border-b border-color-grey-light" data-marker="<%= location.id %>" tabindex="0">
-    <div class="c-card__icon m-0">
-      <% if (location.isGovtOffice) { %>
-      <img src='/wp-content/themes/access/assets/img/map-pin-blue.png' width="33" height="40" alt="Government office map marker">
-      <% } else { %>
-      <img src='/wp-content/themes/access/assets/img/map-pin-green.png' width="33" height="40" alt="Non-government office map marker">
-      <% } %>
-    </div>
-    <div class="c-card__body">
-      <h3 class="type-h4 serif m-0"><%= location.name %></h3>
-      <p class="text-font-size-small text-color-grey-mid m-0">
-        <% print(_.compact([location.type, location.address.street]).join(' | ')) %>
-      </p>
-      <p class="text-font-size-small text-color-grey-mid m-0">
-        <% print(_.map(location.programs, function(program) { return localize(program) }).join(', ')) %>
-      </p>
-      <a href="<%= location.link %>" class="link-more text-font-size-small font-bold">{{__('more about this location', 'accessnyc-locations')}}</a>
-    </div>
-  </li>
-  <% }); %>
+  {% include 'components/card-map-locations.underscore.twig' %}
 </script>
 <script type="text/template" id="map-pagination-template">
-  <div class="p-2 flex items-center justify-end">
-    <div class="text-font-size-small px-2 text-end">
-      {{__('Showing', 'accessnyc-locations')}} <%= displayedCount %> {{__('of', 'accessnyc-locations')}} <%= totalCount %>
-    </div>
-    <% if (displayedCount < totalCount) { %>
-    <div>
-      <button class="btn btn-secondary btn-next btn-small js-map-more">{{__('Show more', 'accessnyc-locations')}}</button>
-    </div>
-    <% } %>
-  </div>
+  {% include 'partials/locations-pagination.underscore.twig' %}
 </script>
 {% endblock %}
