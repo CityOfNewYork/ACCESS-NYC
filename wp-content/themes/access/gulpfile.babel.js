@@ -28,6 +28,7 @@ import p from './package.json';
 import envify from 'envify/custom';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import mqpacker from 'css-mqpacker';
 
 
 /**
@@ -75,6 +76,7 @@ function handleError() {
 gulp.task('styles', (callback) => {
   let plugins = [
     autoprefixer('last 2 versions'),
+    mqpacker(),
     cssnano()
   ];
 
