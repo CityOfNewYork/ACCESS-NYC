@@ -91,6 +91,7 @@
 // sliders, and charts. Not all Objects are required for each application and some
 // will require their own Objects. Object namespaces are prefixed with 'o-'.
 
+@import 'access-nyc-patterns/src/objects/content/content';
 @import 'access-nyc-patterns/src/objects/navigation/navigation';
 @import 'access-nyc-patterns/src/objects/mobile-nav/mobile-nav';
 @import 'access-nyc-patterns/src/objects/banner/banner';

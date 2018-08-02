@@ -46,7 +46,7 @@
         </div>
       </aside>
 
-      <article class="content-body" data-js="program-detail-content">
+      <article data-js="program-detail-content">
         {# Parsing all the sections in the current program to build a display conditional inside of the partials #}
         {% set sectionArray = [] %}
         {% for item in post.get_field('show_sections') %}
