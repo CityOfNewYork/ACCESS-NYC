@@ -28811,7 +28811,7 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
   /* eslint-enable no-undef */
 
   // Get SVG sprite file.
-  // $.get('/wp-content/themes/access/assets/img/icons.svg',Utility.svgSprites);
+  $.get('/wp-content/themes/access/assets/svg/icons.svg', _utility2.default.svgSprites);
 
   var $body = $('body');
 
@@ -33493,4 +33493,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.a29c95398439dcc34c77a00940141b2d.js.map
+//# sourceMappingURL=main-field.91c9340c3fb5e8a584107a06902554b0.js.map
