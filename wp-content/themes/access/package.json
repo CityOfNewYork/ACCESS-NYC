@@ -51,7 +51,6 @@
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^2.3.0",
     "gulp-jshint": "^1.11.2",
-    "gulp-json-to-sass": "0.0.4",
     "gulp-load-plugins": "^1.4.0",
     "gulp-notify": "^2.2.0",
     "gulp-postcss": "^7.0.0",

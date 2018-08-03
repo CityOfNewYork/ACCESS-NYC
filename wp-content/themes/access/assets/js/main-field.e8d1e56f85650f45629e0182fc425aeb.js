@@ -32808,7 +32808,7 @@ ShareForm = function () {
                                  */
 ShareForm.ShowDisclaimer = function (event) {
   /* eslint no-undef: "off" */
-  var variables = require('../../variables.json');
+  var variables = require('../variables.json');
   var $cnt = (0, _jquery2.default)('.' + ShareForm.CssClass.NEEDS_DISCLAIMER + '.active').length;
   var $el = (0, _jquery2.default)('#js-disclaimer');
   var $hidden = $cnt > 0 ? 'removeClass' : 'addClass';
@@ -32857,7 +32857,7 @@ ShareForm.Message = {
 
 ShareForm;
 
-},{"../../variables.json":22,"jquery":4,"modules/utility":21}],20:[function(require,module,exports){
+},{"../variables.json":22,"jquery":4,"modules/utility":21}],20:[function(require,module,exports){
 /* eslint-env browser */
 
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
@@ -33491,4 +33491,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.2ee5153a6ef8f32eae79a63e74913012.js.map
+//# sourceMappingURL=main-field.e8d1e56f85650f45629e0182fc425aeb.js.map

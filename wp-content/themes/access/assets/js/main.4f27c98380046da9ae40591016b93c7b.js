@@ -23365,7 +23365,6 @@ module.exports = Vue;
 },{}],8:[function(require,module,exports){
 'use strict';
 var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
-
 var _officeMap = require('modules/office-map');var _officeMap2 = _interopRequireDefault(_officeMap);
 var _screener = require('modules/screener');var _screener2 = _interopRequireDefault(_screener);
 var _shareForm = require('modules/share-form');var _shareForm2 = _interopRequireDefault(_shareForm);
@@ -23373,7 +23372,7 @@ var _staticMap = require('modules/static-map');var _staticMap2 = _interopRequire
 var _textSizer = require('modules/text-sizer');var _textSizer2 = _interopRequireDefault(_textSizer);
 var _tooltip = require('modules/tooltip');var _tooltip2 = _interopRequireDefault(_tooltip);
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
-var _accordion = require('components/accordion/accordion.common');var _accordion2 = _interopRequireDefault(_accordion);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // import SmoothScroll from 'smoothscroll-polyfill';
+var _accordion = require('components/accordion/accordion.common');var _accordion2 = _interopRequireDefault(_accordion);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 (function (window, $) {
   'use strict';
@@ -23382,7 +23381,7 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
-  // $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites)
+  $.get('/wp-content/themes/access/assets/svg/icons.svg', _utility2.default.svgSprites);
 
   var $body = $('body');
 
@@ -23414,10 +23413,7 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
   }).on('click', '[data-js="filter"]', function (event) {
     event.preventDefault();
     var $element = $(event.currentTarget);
-    var $target = $($element.attr('href'));
     $element.toggleClass('active');
-    $target.toggleClass('active').
-    prop('aria-hidden', $target.hasClass('active'));
   });
 
   // Show/hide share form disclaimer
@@ -26453,7 +26449,7 @@ ShareForm = function () {
                                  */
 ShareForm.ShowDisclaimer = function (event) {
   /* eslint no-undef: "off" */
-  var variables = require('../../variables.json');
+  var variables = require('../variables.json');
   var $cnt = (0, _jquery2.default)('.' + ShareForm.CssClass.NEEDS_DISCLAIMER + '.active').length;
   var $el = (0, _jquery2.default)('#js-disclaimer');
   var $hidden = $cnt > 0 ? 'removeClass' : 'addClass';
@@ -26502,7 +26498,7 @@ ShareForm.Message = {
 
 ShareForm;
 
-},{"../../variables.json":20,"jquery":4,"modules/utility":19}],16:[function(require,module,exports){
+},{"../variables.json":20,"jquery":4,"modules/utility":19}],16:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -27460,4 +27456,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.d42ddb593b5a28c4c62ee9b07e425ba7.js.map
+//# sourceMappingURL=main.4f27c98380046da9ae40591016b93c7b.js.map

@@ -83,10 +83,7 @@ gulp.task('styles', (callback) => {
   gulp.src([
       `${SRC}/scss/style-latin.scss`,
       `${SRC}/scss/style-*.scss`
-    ]).pipe($.jsonToSass({
-      jsonPath: `${SRC}/variables.json`,
-      scssPath: `${SRC}/scss/_variables-json.scss`
-    }))
+    ])
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: [
@@ -244,8 +241,7 @@ gulp.task('images', () =>
       `${SRC}/img/**/*.jpg`,
       `${SRC}/img/**/*.png`,
       `${SRC}/img/**/*.gif`,
-      `${SRC}/img/**/*.svg`,
-      `!${SRC}/img/sprite/**/*`
+      `${SRC}/img/**/*.svg`
     ])
     .pipe($.cache($.imagemin({
       optimizationLevel: 5,
@@ -260,11 +256,13 @@ gulp.task('images', () =>
  * SVG Sprite
  */
 gulp.task('svg-sprites', () =>
-  gulp.src(`${SRC}/img/sprite/**/*.svg`)
+  gulp.src(`${SRC}/svg/*.svg`)
     .pipe($.svgmin())
-    .pipe($.svgstore())
-    .pipe($.rename('icons.twig'))
-    .pipe(gulp.dest('views/partials/'))
+    .pipe($.svgstore({
+      inlineSvg: true
+    }))
+    .pipe($.rename('icons.svg'))
+    .pipe(gulp.dest('assets/svg/'))
     .pipe($.notify({
       message: 'SVG task complete'
     }))

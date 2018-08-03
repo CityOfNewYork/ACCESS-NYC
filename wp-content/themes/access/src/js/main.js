@@ -1,6 +1,5 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
-// import SmoothScroll from 'smoothscroll-polyfill';
 import OfficeMap from 'modules/office-map';
 import Screener from 'modules/screener';
 import ShareForm from 'modules/share-form';
@@ -17,7 +16,7 @@ import Accordion from 'components/accordion/accordion.common';
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
-  // $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites)
+  $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
 
   let $body = $('body');
 
@@ -50,7 +49,6 @@ import Accordion from 'components/accordion/accordion.common';
     event.preventDefault();
     let $element = $(event.currentTarget);
     $element.toggleClass('active');
-    $target.toggleClass('active');
   });
 
   // Show/hide share form disclaimer
