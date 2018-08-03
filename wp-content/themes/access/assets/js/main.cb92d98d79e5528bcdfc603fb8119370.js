@@ -27036,9 +27036,9 @@ Utility.svgSprites = function (data) {
   var svgDiv = document.createElement('div');
   svgDiv.innerHTML = new XMLSerializer().
   serializeToString(data.documentElement);
-  (0, _jquery2.default)(svgDiv).css('display', 'none').
-  prop('aria-hidden', true).
-  prependTo('body');
+  svgDiv.setAttribute('aria-hidden', true);
+  svgDiv.setAttribute('style', 'display:none;');
+  (0, _jquery2.default)(svgDiv).prependTo('body');
 };
 
 /**
@@ -27458,4 +27458,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.fb87db04e0f5ecc52d145eb1c823e48f.js.map
+//# sourceMappingURL=main.cb92d98d79e5528bcdfc603fb8119370.js.map

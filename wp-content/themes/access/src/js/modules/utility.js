@@ -19,9 +19,9 @@ Utility.svgSprites = function(data) {
   const svgDiv = document.createElement('div');
   svgDiv.innerHTML = new XMLSerializer()
     .serializeToString(data.documentElement);
-  $(svgDiv).css('display', 'none')
-    .prop('aria-hidden', true)
-    .prependTo('body');
+  svgDiv.setAttribute('aria-hidden', true);
+  svgDiv.setAttribute('style', 'display:none;');
+  $(svgDiv).prependTo('body');
 };
 
 /**
