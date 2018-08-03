@@ -103,7 +103,7 @@ Accordion.selector = '[data-js="accordion"]';
 module.exports = Accordion;
 
 
-},{"vue/dist/vue.common":7}],2:[function(require,module,exports){
+},{"vue/dist/vue.common":9}],2:[function(require,module,exports){
 (function (global){
 !function(){function t(t,n){var e=t.split("."),r=H;e[0]in r||!r.execScript||r.execScript("var "+e[0]);for(var i;e.length&&(i=e.shift());)e.length||void 0===n?r=r[i]?r[i]:r[i]={}:r[i]=n}function n(t,n){function e(){}e.prototype=n.prototype,t.M=n.prototype,t.prototype=new e,t.prototype.constructor=t,t.N=function(t,e,r){for(var i=Array(arguments.length-2),a=2;a<arguments.length;a++)i[a-2]=arguments[a];return n.prototype[e].apply(t,i)}}function e(t,n){null!=t&&this.a.apply(this,arguments)}function r(t){t.b=""}function i(t,n){t.sort(n||a)}function a(t,n){return t>n?1:n>t?-1:0}function l(t){var n,e=[],r=0;for(n in t)e[r++]=t[n];return e}function o(t,n){this.b=t,this.a={};for(var e=0;e<n.length;e++){var r=n[e];this.a[r.b]=r}}function u(t){return t=l(t.a),i(t,function(t,n){return t.b-n.b}),t}function s(t,n){switch(this.b=t,this.g=!!n.G,this.a=n.c,this.j=n.type,this.h=!1,this.a){case q:case J:case L:case O:case k:case Y:case K:this.h=!0}this.f=n.defaultValue}function f(){this.a={},this.f=this.i().a,this.b=this.g=null}function p(t,n){for(var e=u(t.i()),r=0;r<e.length;r++){var i=e[r],a=i.b;if(null!=n.a[a]){t.b&&delete t.b[i.b];var l=11==i.a||10==i.a;if(i.g)for(var i=c(n,a)||[],o=0;o<i.length;o++){var s=t,f=a,h=l?i[o].clone():i[o];s.a[f]||(s.a[f]=[]),s.a[f].push(h),s.b&&delete s.b[f]}else i=c(n,a),l?(l=c(t,a))?p(l,i):m(t,a,i.clone()):m(t,a,i)}}}function c(t,n){var e=t.a[n];if(null==e)return null;if(t.g){if(!(n in t.b)){var r=t.g,i=t.f[n];if(null!=e)if(i.g){for(var a=[],l=0;l<e.length;l++)a[l]=r.b(i,e[l]);e=a}else e=r.b(i,e);return t.b[n]=e}return t.b[n]}return e}function h(t,n,e){var r=c(t,n);return t.f[n].g?r[e||0]:r}function g(t,n){var e;if(null!=t.a[n])e=h(t,n,void 0);else t:{if(e=t.f[n],void 0===e.f){var r=e.j;if(r===Boolean)e.f=!1;else if(r===Number)e.f=0;else{if(r!==String){e=new r;break t}e.f=e.h?"0":""}}e=e.f}return e}function b(t,n){return t.f[n].g?null!=t.a[n]?t.a[n].length:0:null!=t.a[n]?1:0}function m(t,n,e){t.a[n]=e,t.b&&(t.b[n]=e)}function y(t,n){var e,r=[];for(e in n)0!=e&&r.push(new s(e,n[e]));return new o(t,r)}/*
 
@@ -10701,6 +10701,334 @@ return jQuery;
 }));
 
 },{}],6:[function(require,module,exports){
+/*
+ * smoothscroll polyfill - v0.3.5
+ * https://iamdustan.github.io/smoothscroll
+ * 2016 (c) Dustan Kasten, Jeremias Menichelli - MIT License
+ */
+
+(function(w, d, undefined) {
+  'use strict';
+
+  /*
+   * aliases
+   * w: window global object
+   * d: document
+   * undefined: undefined
+   */
+
+  // polyfill
+  function polyfill() {
+    // return when scrollBehavior interface is supported
+    if ('scrollBehavior' in d.documentElement.style) {
+      return;
+    }
+
+    /*
+     * globals
+     */
+    var Element = w.HTMLElement || w.Element;
+    var SCROLL_TIME = 468;
+
+    /*
+     * object gathering original scroll methods
+     */
+    var original = {
+      scroll: w.scroll || w.scrollTo,
+      scrollBy: w.scrollBy,
+      elScroll: Element.prototype.scroll || scrollElement,
+      scrollIntoView: Element.prototype.scrollIntoView
+    };
+
+    /*
+     * define timing method
+     */
+    var now = w.performance && w.performance.now
+      ? w.performance.now.bind(w.performance) : Date.now;
+
+    /**
+     * changes scroll position inside an element
+     * @method scrollElement
+     * @param {Number} x
+     * @param {Number} y
+     */
+    function scrollElement(x, y) {
+      this.scrollLeft = x;
+      this.scrollTop = y;
+    }
+
+    /**
+     * returns result of applying ease math function to a number
+     * @method ease
+     * @param {Number} k
+     * @returns {Number}
+     */
+    function ease(k) {
+      return 0.5 * (1 - Math.cos(Math.PI * k));
+    }
+
+    /**
+     * indicates if a smooth behavior should be applied
+     * @method shouldBailOut
+     * @param {Number|Object} x
+     * @returns {Boolean}
+     */
+    function shouldBailOut(x) {
+      if (typeof x !== 'object'
+            || x === null
+            || x.behavior === undefined
+            || x.behavior === 'auto'
+            || x.behavior === 'instant') {
+        // first arg not an object/null
+        // or behavior is auto, instant or undefined
+        return true;
+      }
+
+      if (typeof x === 'object'
+            && x.behavior === 'smooth') {
+        // first argument is an object and behavior is smooth
+        return false;
+      }
+
+      // throw error when behavior is not supported
+      throw new TypeError('behavior not valid');
+    }
+
+    /**
+     * finds scrollable parent of an element
+     * @method findScrollableParent
+     * @param {Node} el
+     * @returns {Node} el
+     */
+    function findScrollableParent(el) {
+      var isBody;
+      var hasScrollableSpace;
+      var hasVisibleOverflow;
+
+      do {
+        el = el.parentNode;
+
+        // set condition variables
+        isBody = el === d.body;
+        hasScrollableSpace =
+          el.clientHeight < el.scrollHeight ||
+          el.clientWidth < el.scrollWidth;
+        hasVisibleOverflow =
+          w.getComputedStyle(el, null).overflow === 'visible';
+      } while (!isBody && !(hasScrollableSpace && !hasVisibleOverflow));
+
+      isBody = hasScrollableSpace = hasVisibleOverflow = null;
+
+      return el;
+    }
+
+    /**
+     * self invoked function that, given a context, steps through scrolling
+     * @method step
+     * @param {Object} context
+     */
+    function step(context) {
+      var time = now();
+      var value;
+      var currentX;
+      var currentY;
+      var elapsed = (time - context.startTime) / SCROLL_TIME;
+
+      // avoid elapsed times higher than one
+      elapsed = elapsed > 1 ? 1 : elapsed;
+
+      // apply easing to elapsed time
+      value = ease(elapsed);
+
+      currentX = context.startX + (context.x - context.startX) * value;
+      currentY = context.startY + (context.y - context.startY) * value;
+
+      context.method.call(context.scrollable, currentX, currentY);
+
+      // scroll more if we have not reached our destination
+      if (currentX !== context.x || currentY !== context.y) {
+        w.requestAnimationFrame(step.bind(w, context));
+      }
+    }
+
+    /**
+     * scrolls window with a smooth behavior
+     * @method smoothScroll
+     * @param {Object|Node} el
+     * @param {Number} x
+     * @param {Number} y
+     */
+    function smoothScroll(el, x, y) {
+      var scrollable;
+      var startX;
+      var startY;
+      var method;
+      var startTime = now();
+
+      // define scroll context
+      if (el === d.body) {
+        scrollable = w;
+        startX = w.scrollX || w.pageXOffset;
+        startY = w.scrollY || w.pageYOffset;
+        method = original.scroll;
+      } else {
+        scrollable = el;
+        startX = el.scrollLeft;
+        startY = el.scrollTop;
+        method = scrollElement;
+      }
+
+      // scroll looping over a frame
+      step({
+        scrollable: scrollable,
+        method: method,
+        startTime: startTime,
+        startX: startX,
+        startY: startY,
+        x: x,
+        y: y
+      });
+    }
+
+    /*
+     * ORIGINAL METHODS OVERRIDES
+     */
+
+    // w.scroll and w.scrollTo
+    w.scroll = w.scrollTo = function() {
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0])) {
+        original.scroll.call(
+          w,
+          arguments[0].left || arguments[0],
+          arguments[0].top || arguments[1]
+        );
+        return;
+      }
+
+      // LET THE SMOOTHNESS BEGIN!
+      smoothScroll.call(
+        w,
+        d.body,
+        ~~arguments[0].left,
+        ~~arguments[0].top
+      );
+    };
+
+    // w.scrollBy
+    w.scrollBy = function() {
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0])) {
+        original.scrollBy.call(
+          w,
+          arguments[0].left || arguments[0],
+          arguments[0].top || arguments[1]
+        );
+        return;
+      }
+
+      // LET THE SMOOTHNESS BEGIN!
+      smoothScroll.call(
+        w,
+        d.body,
+        ~~arguments[0].left + (w.scrollX || w.pageXOffset),
+        ~~arguments[0].top + (w.scrollY || w.pageYOffset)
+      );
+    };
+
+    // Element.prototype.scroll and Element.prototype.scrollTo
+    Element.prototype.scroll = Element.prototype.scrollTo = function() {
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0])) {
+        original.elScroll.call(
+            this,
+            arguments[0].left || arguments[0],
+            arguments[0].top || arguments[1]
+        );
+        return;
+      }
+
+      var left = arguments[0].left;
+      var top = arguments[0].top;
+
+      // LET THE SMOOTHNESS BEGIN!
+      smoothScroll.call(
+          this,
+          this,
+          typeof left === 'number' ? left : this.scrollLeft,
+          typeof top === 'number' ? top : this.scrollTop
+      );
+    };
+
+    // Element.prototype.scrollBy
+    Element.prototype.scrollBy = function() {
+      var arg0 = arguments[0];
+
+      if (typeof arg0 === 'object') {
+        this.scroll({
+          left: arg0.left + this.scrollLeft,
+          top: arg0.top + this.scrollTop,
+          behavior: arg0.behavior
+        });
+      } else {
+        this.scroll(
+          this.scrollLeft + arg0,
+          this.scrollTop + arguments[1]
+        );
+      }
+    };
+
+    // Element.prototype.scrollIntoView
+    Element.prototype.scrollIntoView = function() {
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0])) {
+        original.scrollIntoView.call(
+          this,
+          arguments[0] === undefined ? true : arguments[0]
+        );
+        return;
+      }
+
+      // LET THE SMOOTHNESS BEGIN!
+      var scrollableParent = findScrollableParent(this);
+      var parentRects = scrollableParent.getBoundingClientRect();
+      var clientRects = this.getBoundingClientRect();
+
+      if (scrollableParent !== d.body) {
+        // reveal element inside parent
+        smoothScroll.call(
+          this,
+          scrollableParent,
+          scrollableParent.scrollLeft + clientRects.left - parentRects.left,
+          scrollableParent.scrollTop + clientRects.top - parentRects.top
+        );
+        // reveal parent in viewport
+        w.scrollBy({
+          left: parentRects.left,
+          top: parentRects.top,
+          behavior: 'smooth'
+        });
+      } else {
+        // reveal element in viewport
+        w.scrollBy({
+          left: clientRects.left,
+          top: clientRects.top,
+          behavior: 'smooth'
+        });
+      }
+    };
+  }
+
+  if (typeof exports === 'object') {
+    // commonjs
+    module.exports = { polyfill: polyfill };
+  } else {
+    // global
+    polyfill();
+  }
+})(window, document);
+
+},{}],7:[function(require,module,exports){
 (function (global){
 //     Underscore.js 1.9.1
 //     http://underscorejs.org
@@ -12397,7 +12725,5106 @@ return jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+/**
+  * vee-validate v2.0.9
+  * (c) 2018 Abdelrahman Awad
+  * @license MIT
+  */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global.VeeValidate = factory());
+}(this, (function () { 'use strict';
+
+  var MILLISECONDS_IN_HOUR = 3600000;
+  var MILLISECONDS_IN_MINUTE = 60000;
+  var DEFAULT_ADDITIONAL_DIGITS = 2;
+  var patterns = {
+      dateTimeDelimeter: /[T ]/,
+      plainTime: /:/,
+      YY: /^(\d{2})$/,
+      YYY: [/^([+-]\d{2})$/,/^([+-]\d{3})$/,/^([+-]\d{4})$/],
+      YYYY: /^(\d{4})/,
+      YYYYY: [/^([+-]\d{4})/,/^([+-]\d{5})/,/^([+-]\d{6})/],
+      MM: /^-(\d{2})$/,
+      DDD: /^-?(\d{3})$/,
+      MMDD: /^-?(\d{2})-?(\d{2})$/,
+      Www: /^-?W(\d{2})$/,
+      WwwD: /^-?W(\d{2})-?(\d{1})$/,
+      HH: /^(\d{2}([.,]\d*)?)$/,
+      HHMM: /^(\d{2}):?(\d{2}([.,]\d*)?)$/,
+      HHMMSS: /^(\d{2}):?(\d{2}):?(\d{2}([.,]\d*)?)$/,
+      timezone: /([Z+-].*)$/,
+      timezoneZ: /^(Z)$/,
+      timezoneHH: /^([+-])(\d{2})$/,
+      timezoneHHMM: /^([+-])(\d{2}):?(\d{2})$/
+  };
+  function toDate(argument, dirtyOptions) {
+      if (arguments.length < 1) {
+          throw new TypeError('1 argument required, but only ' + arguments.length + ' present');
+      }
+      if (argument === null) {
+          return new Date(NaN);
+      }
+      var options = dirtyOptions || {};
+      var additionalDigits = options.additionalDigits === undefined ? DEFAULT_ADDITIONAL_DIGITS : Number(options.additionalDigits);
+      if (additionalDigits !== 2 && additionalDigits !== 1 && additionalDigits !== 0) {
+          throw new RangeError('additionalDigits must be 0, 1 or 2');
+      }
+      if (argument instanceof Date) {
+          return new Date(argument.getTime());
+      } else if (typeof argument !== 'string') {
+          return new Date(argument);
+      }
+      var dateStrings = splitDateString(argument);
+      var parseYearResult = parseYear(dateStrings.date, additionalDigits);
+      var year = parseYearResult.year;
+      var restDateString = parseYearResult.restDateString;
+      var date = parseDate(restDateString, year);
+      if (date) {
+          var timestamp = date.getTime();
+          var time = 0;
+          var offset;
+          if (dateStrings.time) {
+              time = parseTime(dateStrings.time);
+          }
+          if (dateStrings.timezone) {
+              offset = parseTimezone(dateStrings.timezone);
+          } else {
+              offset = new Date(timestamp + time).getTimezoneOffset();
+              offset = new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE).getTimezoneOffset();
+          }
+          return new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE);
+      } else {
+          return new Date(argument);
+      }
+  }
+
+  function splitDateString(dateString) {
+      var dateStrings = {};
+      var array = dateString.split(patterns.dateTimeDelimeter);
+      var timeString;
+      if (patterns.plainTime.test(array[0])) {
+          dateStrings.date = null;
+          timeString = array[0];
+      } else {
+          dateStrings.date = array[0];
+          timeString = array[1];
+      }
+      if (timeString) {
+          var token = patterns.timezone.exec(timeString);
+          if (token) {
+              dateStrings.time = timeString.replace(token[1], '');
+              dateStrings.timezone = token[1];
+          } else {
+              dateStrings.time = timeString;
+          }
+      }
+      return dateStrings;
+  }
+
+  function parseYear(dateString, additionalDigits) {
+      var patternYYY = patterns.YYY[additionalDigits];
+      var patternYYYYY = patterns.YYYYY[additionalDigits];
+      var token;
+      token = patterns.YYYY.exec(dateString) || patternYYYYY.exec(dateString);
+      if (token) {
+          var yearString = token[1];
+          return {
+              year: parseInt(yearString, 10),
+              restDateString: dateString.slice(yearString.length)
+          };
+      }
+      token = patterns.YY.exec(dateString) || patternYYY.exec(dateString);
+      if (token) {
+          var centuryString = token[1];
+          return {
+              year: parseInt(centuryString, 10) * 100,
+              restDateString: dateString.slice(centuryString.length)
+          };
+      }
+      return {
+          year: null
+      };
+  }
+
+  function parseDate(dateString, year) {
+      if (year === null) {
+          return null;
+      }
+      var token;
+      var date;
+      var month;
+      var week;
+      if (dateString.length === 0) {
+          date = new Date(0);
+          date.setUTCFullYear(year);
+          return date;
+      }
+      token = patterns.MM.exec(dateString);
+      if (token) {
+          date = new Date(0);
+          month = parseInt(token[1], 10) - 1;
+          date.setUTCFullYear(year, month);
+          return date;
+      }
+      token = patterns.DDD.exec(dateString);
+      if (token) {
+          date = new Date(0);
+          var dayOfYear = parseInt(token[1], 10);
+          date.setUTCFullYear(year, 0, dayOfYear);
+          return date;
+      }
+      token = patterns.MMDD.exec(dateString);
+      if (token) {
+          date = new Date(0);
+          month = parseInt(token[1], 10) - 1;
+          var day = parseInt(token[2], 10);
+          date.setUTCFullYear(year, month, day);
+          return date;
+      }
+      token = patterns.Www.exec(dateString);
+      if (token) {
+          week = parseInt(token[1], 10) - 1;
+          return dayOfISOYear(year, week);
+      }
+      token = patterns.WwwD.exec(dateString);
+      if (token) {
+          week = parseInt(token[1], 10) - 1;
+          var dayOfWeek = parseInt(token[2], 10) - 1;
+          return dayOfISOYear(year, week, dayOfWeek);
+      }
+      return null;
+  }
+
+  function parseTime(timeString) {
+      var token;
+      var hours;
+      var minutes;
+      token = patterns.HH.exec(timeString);
+      if (token) {
+          hours = parseFloat(token[1].replace(',', '.'));
+          return hours % 24 * MILLISECONDS_IN_HOUR;
+      }
+      token = patterns.HHMM.exec(timeString);
+      if (token) {
+          hours = parseInt(token[1], 10);
+          minutes = parseFloat(token[2].replace(',', '.'));
+          return hours % 24 * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE;
+      }
+      token = patterns.HHMMSS.exec(timeString);
+      if (token) {
+          hours = parseInt(token[1], 10);
+          minutes = parseInt(token[2], 10);
+          var seconds = parseFloat(token[3].replace(',', '.'));
+          return hours % 24 * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE + seconds * 1000;
+      }
+      return null;
+  }
+
+  function parseTimezone(timezoneString) {
+      var token;
+      var absoluteOffset;
+      token = patterns.timezoneZ.exec(timezoneString);
+      if (token) {
+          return 0;
+      }
+      token = patterns.timezoneHH.exec(timezoneString);
+      if (token) {
+          absoluteOffset = parseInt(token[2], 10) * 60;
+          return token[1] === '+' ? -absoluteOffset : absoluteOffset;
+      }
+      token = patterns.timezoneHHMM.exec(timezoneString);
+      if (token) {
+          absoluteOffset = parseInt(token[2], 10) * 60 + parseInt(token[3], 10);
+          return token[1] === '+' ? -absoluteOffset : absoluteOffset;
+      }
+      return 0;
+  }
+
+  function dayOfISOYear(isoYear, week, day) {
+      week = week || 0;
+      day = day || 0;
+      var date = new Date(0);
+      date.setUTCFullYear(isoYear, 0, 4);
+      var fourthOfJanuaryDay = date.getUTCDay() || 7;
+      var diff = week * 7 + day + 1 - fourthOfJanuaryDay;
+      date.setUTCDate(date.getUTCDate() + diff);
+      return date;
+  }
+
+  function addMilliseconds(dirtyDate, dirtyAmount, dirtyOptions) {
+      if (arguments.length < 2) {
+          throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
+      }
+      var timestamp = toDate(dirtyDate, dirtyOptions).getTime();
+      var amount = Number(dirtyAmount);
+      return new Date(timestamp + amount);
+  }
+
+  function cloneObject(dirtyObject) {
+      dirtyObject = dirtyObject || {};
+      var object = {};
+      for (var property in dirtyObject) {
+          if (dirtyObject.hasOwnProperty(property)) {
+              object[property] = dirtyObject[property];
+          }
+      }
+      return object;
+  }
+
+  var MILLISECONDS_IN_MINUTE$2 = 60000;
+  function addMinutes(dirtyDate, dirtyAmount, dirtyOptions) {
+      if (arguments.length < 2) {
+          throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
+      }
+      var amount = Number(dirtyAmount);
+      return addMilliseconds(dirtyDate, amount * MILLISECONDS_IN_MINUTE$2, dirtyOptions);
+  }
+
+  function isValid(dirtyDate, dirtyOptions) {
+      if (arguments.length < 1) {
+          throw new TypeError('1 argument required, but only ' + arguments.length + ' present');
+      }
+      var date = toDate(dirtyDate, dirtyOptions);
+      return !isNaN(date);
+  }
+
+  var formatDistanceLocale = {
+      lessThanXSeconds: {
+          one: 'less than a second',
+          other: 'less than {{count}} seconds'
+      },
+      xSeconds: {
+          one: '1 second',
+          other: '{{count}} seconds'
+      },
+      halfAMinute: 'half a minute',
+      lessThanXMinutes: {
+          one: 'less than a minute',
+          other: 'less than {{count}} minutes'
+      },
+      xMinutes: {
+          one: '1 minute',
+          other: '{{count}} minutes'
+      },
+      aboutXHours: {
+          one: 'about 1 hour',
+          other: 'about {{count}} hours'
+      },
+      xHours: {
+          one: '1 hour',
+          other: '{{count}} hours'
+      },
+      xDays: {
+          one: '1 day',
+          other: '{{count}} days'
+      },
+      aboutXMonths: {
+          one: 'about 1 month',
+          other: 'about {{count}} months'
+      },
+      xMonths: {
+          one: '1 month',
+          other: '{{count}} months'
+      },
+      aboutXYears: {
+          one: 'about 1 year',
+          other: 'about {{count}} years'
+      },
+      xYears: {
+          one: '1 year',
+          other: '{{count}} years'
+      },
+      overXYears: {
+          one: 'over 1 year',
+          other: 'over {{count}} years'
+      },
+      almostXYears: {
+          one: 'almost 1 year',
+          other: 'almost {{count}} years'
+      }
+  };
+  function formatDistance(token, count, options) {
+      options = options || {};
+      var result;
+      if (typeof formatDistanceLocale[token] === 'string') {
+          result = formatDistanceLocale[token];
+      } else if (count === 1) {
+          result = formatDistanceLocale[token].one;
+      } else {
+          result = formatDistanceLocale[token].other.replace('{{count}}', count);
+      }
+      if (options.addSuffix) {
+          if (options.comparison > 0) {
+              return 'in ' + result;
+          } else {
+              return result + ' ago';
+          }
+      }
+      return result;
+  }
+
+  var tokensToBeShortedPattern = /MMMM|MM|DD|dddd/g;
+  function buildShortLongFormat(format) {
+      return format.replace(tokensToBeShortedPattern, function (token) {
+          return token.slice(1);
+      });
+  }
+
+  function buildFormatLongFn(obj) {
+      var formatLongLocale = {
+          LTS: obj.LTS,
+          LT: obj.LT,
+          L: obj.L,
+          LL: obj.LL,
+          LLL: obj.LLL,
+          LLLL: obj.LLLL,
+          l: obj.l || buildShortLongFormat(obj.L),
+          ll: obj.ll || buildShortLongFormat(obj.LL),
+          lll: obj.lll || buildShortLongFormat(obj.LLL),
+          llll: obj.llll || buildShortLongFormat(obj.LLLL)
+      };
+      return function (token) {
+          return formatLongLocale[token];
+      };
+  }
+
+  var formatLong = buildFormatLongFn({
+      LT: 'h:mm aa',
+      LTS: 'h:mm:ss aa',
+      L: 'MM/DD/YYYY',
+      LL: 'MMMM D YYYY',
+      LLL: 'MMMM D YYYY h:mm aa',
+      LLLL: 'dddd, MMMM D YYYY h:mm aa'
+  });
+
+  var formatRelativeLocale = {
+      lastWeek: '[last] dddd [at] LT',
+      yesterday: '[yesterday at] LT',
+      today: '[today at] LT',
+      tomorrow: '[tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      other: 'L'
+  };
+  function formatRelative(token, date, baseDate, options) {
+      return formatRelativeLocale[token];
+  }
+
+  function buildLocalizeFn(values, defaultType, indexCallback) {
+      return function (dirtyIndex, dirtyOptions) {
+          var options = dirtyOptions || {};
+          var type = options.type ? String(options.type) : defaultType;
+          var valuesArray = values[type] || values[defaultType];
+          var index = indexCallback ? indexCallback(Number(dirtyIndex)) : Number(dirtyIndex);
+          return valuesArray[index];
+      };
+  }
+
+  function buildLocalizeArrayFn(values, defaultType) {
+      return function (dirtyOptions) {
+          var options = dirtyOptions || {};
+          var type = options.type ? String(options.type) : defaultType;
+          return values[type] || values[defaultType];
+      };
+  }
+
+  var weekdayValues = {
+      narrow: ['Su','Mo','Tu','We','Th','Fr','Sa'],
+      short: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+      long: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+  };
+  var monthValues = {
+      short: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      long: ['January','February','March','April','May','June','July','August','September',
+          'October','November','December']
+  };
+  var timeOfDayValues = {
+      uppercase: ['AM','PM'],
+      lowercase: ['am','pm'],
+      long: ['a.m.','p.m.']
+  };
+  function ordinalNumber(dirtyNumber, dirtyOptions) {
+      var number = Number(dirtyNumber);
+      var rem100 = number % 100;
+      if (rem100 > 20 || rem100 < 10) {
+          switch (rem100 % 10) {
+              case 1:
+                  return number + 'st';
+              case 2:
+                  return number + 'nd';
+              case 3:
+                  return number + 'rd';
+          }
+      }
+      return number + 'th';
+  }
+
+  var localize = {
+      ordinalNumber: ordinalNumber,
+      weekday: buildLocalizeFn(weekdayValues, 'long'),
+      weekdays: buildLocalizeArrayFn(weekdayValues, 'long'),
+      month: buildLocalizeFn(monthValues, 'long'),
+      months: buildLocalizeArrayFn(monthValues, 'long'),
+      timeOfDay: buildLocalizeFn(timeOfDayValues, 'long', function (hours) {
+          return hours / 12 >= 1 ? 1 : 0;
+      }),
+      timesOfDay: buildLocalizeArrayFn(timeOfDayValues, 'long')
+  };
+
+  function buildMatchFn(patterns, defaultType) {
+      return function (dirtyString, dirtyOptions) {
+          var options = dirtyOptions || {};
+          var type = options.type ? String(options.type) : defaultType;
+          var pattern = patterns[type] || patterns[defaultType];
+          var string = String(dirtyString);
+          return string.match(pattern);
+      };
+  }
+
+  function buildParseFn(patterns, defaultType) {
+      return function (matchResult, dirtyOptions) {
+          var options = dirtyOptions || {};
+          var type = options.type ? String(options.type) : defaultType;
+          var patternsArray = patterns[type] || patterns[defaultType];
+          var string = matchResult[1];
+          return patternsArray.findIndex(function (pattern) {
+              return pattern.test(string);
+          });
+      };
+  }
+
+  function buildMatchPatternFn(pattern) {
+      return function (dirtyString) {
+          var string = String(dirtyString);
+          return string.match(pattern);
+      };
+  }
+
+  function parseDecimal(matchResult) {
+      return parseInt(matchResult[1], 10);
+  }
+
+  var matchOrdinalNumbersPattern = /^(\d+)(th|st|nd|rd)?/i;
+  var matchWeekdaysPatterns = {
+      narrow: /^(su|mo|tu|we|th|fr|sa)/i,
+      short: /^(sun|mon|tue|wed|thu|fri|sat)/i,
+      long: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
+  };
+  var parseWeekdayPatterns = {
+      any: [/^su/i,/^m/i,/^tu/i,/^w/i,/^th/i,/^f/i,/^sa/i]
+  };
+  var matchMonthsPatterns = {
+      short: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
+      long: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
+  };
+  var parseMonthPatterns = {
+      any: [/^ja/i,/^f/i,/^mar/i,/^ap/i,/^may/i,/^jun/i,/^jul/i,/^au/i,/^s/i,/^o/i,
+          /^n/i,/^d/i]
+  };
+  var matchTimesOfDayPatterns = {
+      short: /^(am|pm)/i,
+      long: /^([ap]\.?\s?m\.?)/i
+  };
+  var parseTimeOfDayPatterns = {
+      any: [/^a/i,/^p/i]
+  };
+  var match = {
+      ordinalNumbers: buildMatchPatternFn(matchOrdinalNumbersPattern),
+      ordinalNumber: parseDecimal,
+      weekdays: buildMatchFn(matchWeekdaysPatterns, 'long'),
+      weekday: buildParseFn(parseWeekdayPatterns, 'any'),
+      months: buildMatchFn(matchMonthsPatterns, 'long'),
+      month: buildParseFn(parseMonthPatterns, 'any'),
+      timesOfDay: buildMatchFn(matchTimesOfDayPatterns, 'long'),
+      timeOfDay: buildParseFn(parseTimeOfDayPatterns, 'any')
+  };
+
+  var locale = {
+      formatDistance: formatDistance,
+      formatLong: formatLong,
+      formatRelative: formatRelative,
+      localize: localize,
+      match: match,
+      options: {
+          weekStartsOn: 0,
+          firstWeekContainsDate: 1
+      }
+  };
+
+  var MILLISECONDS_IN_DAY$1 = 86400000;
+  function getUTCDayOfYear(dirtyDate, dirtyOptions) {
+      var date = toDate(dirtyDate, dirtyOptions);
+      var timestamp = date.getTime();
+      date.setUTCMonth(0, 1);
+      date.setUTCHours(0, 0, 0, 0);
+      var startOfYearTimestamp = date.getTime();
+      var difference = timestamp - startOfYearTimestamp;
+      return Math.floor(difference / MILLISECONDS_IN_DAY$1) + 1;
+  }
+
+  function startOfUTCISOWeek(dirtyDate, dirtyOptions) {
+      var weekStartsOn = 1;
+      var date = toDate(dirtyDate, dirtyOptions);
+      var day = date.getUTCDay();
+      var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+      date.setUTCDate(date.getUTCDate() - diff);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+  }
+
+  function getUTCISOWeekYear(dirtyDate, dirtyOptions) {
+      var date = toDate(dirtyDate, dirtyOptions);
+      var year = date.getUTCFullYear();
+      var fourthOfJanuaryOfNextYear = new Date(0);
+      fourthOfJanuaryOfNextYear.setUTCFullYear(year + 1, 0, 4);
+      fourthOfJanuaryOfNextYear.setUTCHours(0, 0, 0, 0);
+      var startOfNextYear = startOfUTCISOWeek(fourthOfJanuaryOfNextYear, dirtyOptions);
+      var fourthOfJanuaryOfThisYear = new Date(0);
+      fourthOfJanuaryOfThisYear.setUTCFullYear(year, 0, 4);
+      fourthOfJanuaryOfThisYear.setUTCHours(0, 0, 0, 0);
+      var startOfThisYear = startOfUTCISOWeek(fourthOfJanuaryOfThisYear, dirtyOptions);
+      if (date.getTime() >= startOfNextYear.getTime()) {
+          return year + 1;
+      } else if (date.getTime() >= startOfThisYear.getTime()) {
+          return year;
+      } else {
+          return year - 1;
+      }
+  }
+
+  function startOfUTCISOWeekYear(dirtyDate, dirtyOptions) {
+      var year = getUTCISOWeekYear(dirtyDate, dirtyOptions);
+      var fourthOfJanuary = new Date(0);
+      fourthOfJanuary.setUTCFullYear(year, 0, 4);
+      fourthOfJanuary.setUTCHours(0, 0, 0, 0);
+      var date = startOfUTCISOWeek(fourthOfJanuary, dirtyOptions);
+      return date;
+  }
+
+  var MILLISECONDS_IN_WEEK$2 = 604800000;
+  function getUTCISOWeek(dirtyDate, dirtyOptions) {
+      var date = toDate(dirtyDate, dirtyOptions);
+      var diff = startOfUTCISOWeek(date, dirtyOptions).getTime() - startOfUTCISOWeekYear(date, dirtyOptions).getTime();
+      return Math.round(diff / MILLISECONDS_IN_WEEK$2) + 1;
+  }
+
+  var formatters = {
+      'M': function (date) {
+          return date.getUTCMonth() + 1;
+      },
+      'Mo': function (date, options) {
+          var month = date.getUTCMonth() + 1;
+          return options.locale.localize.ordinalNumber(month, {
+              unit: 'month'
+          });
+      },
+      'MM': function (date) {
+          return addLeadingZeros(date.getUTCMonth() + 1, 2);
+      },
+      'MMM': function (date, options) {
+          return options.locale.localize.month(date.getUTCMonth(), {
+              type: 'short'
+          });
+      },
+      'MMMM': function (date, options) {
+          return options.locale.localize.month(date.getUTCMonth(), {
+              type: 'long'
+          });
+      },
+      'Q': function (date) {
+          return Math.ceil((date.getUTCMonth() + 1) / 3);
+      },
+      'Qo': function (date, options) {
+          var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
+          return options.locale.localize.ordinalNumber(quarter, {
+              unit: 'quarter'
+          });
+      },
+      'D': function (date) {
+          return date.getUTCDate();
+      },
+      'Do': function (date, options) {
+          return options.locale.localize.ordinalNumber(date.getUTCDate(), {
+              unit: 'dayOfMonth'
+          });
+      },
+      'DD': function (date) {
+          return addLeadingZeros(date.getUTCDate(), 2);
+      },
+      'DDD': function (date) {
+          return getUTCDayOfYear(date);
+      },
+      'DDDo': function (date, options) {
+          return options.locale.localize.ordinalNumber(getUTCDayOfYear(date), {
+              unit: 'dayOfYear'
+          });
+      },
+      'DDDD': function (date) {
+          return addLeadingZeros(getUTCDayOfYear(date), 3);
+      },
+      'dd': function (date, options) {
+          return options.locale.localize.weekday(date.getUTCDay(), {
+              type: 'narrow'
+          });
+      },
+      'ddd': function (date, options) {
+          return options.locale.localize.weekday(date.getUTCDay(), {
+              type: 'short'
+          });
+      },
+      'dddd': function (date, options) {
+          return options.locale.localize.weekday(date.getUTCDay(), {
+              type: 'long'
+          });
+      },
+      'd': function (date) {
+          return date.getUTCDay();
+      },
+      'do': function (date, options) {
+          return options.locale.localize.ordinalNumber(date.getUTCDay(), {
+              unit: 'dayOfWeek'
+          });
+      },
+      'E': function (date) {
+          return date.getUTCDay() || 7;
+      },
+      'W': function (date) {
+          return getUTCISOWeek(date);
+      },
+      'Wo': function (date, options) {
+          return options.locale.localize.ordinalNumber(getUTCISOWeek(date), {
+              unit: 'isoWeek'
+          });
+      },
+      'WW': function (date) {
+          return addLeadingZeros(getUTCISOWeek(date), 2);
+      },
+      'YY': function (date) {
+          return addLeadingZeros(date.getUTCFullYear(), 4).substr(2);
+      },
+      'YYYY': function (date) {
+          return addLeadingZeros(date.getUTCFullYear(), 4);
+      },
+      'GG': function (date) {
+          return String(getUTCISOWeekYear(date)).substr(2);
+      },
+      'GGGG': function (date) {
+          return getUTCISOWeekYear(date);
+      },
+      'H': function (date) {
+          return date.getUTCHours();
+      },
+      'HH': function (date) {
+          return addLeadingZeros(date.getUTCHours(), 2);
+      },
+      'h': function (date) {
+          var hours = date.getUTCHours();
+          if (hours === 0) {
+              return 12;
+          } else if (hours > 12) {
+              return hours % 12;
+          } else {
+              return hours;
+          }
+      },
+      'hh': function (date) {
+          return addLeadingZeros(formatters['h'](date), 2);
+      },
+      'm': function (date) {
+          return date.getUTCMinutes();
+      },
+      'mm': function (date) {
+          return addLeadingZeros(date.getUTCMinutes(), 2);
+      },
+      's': function (date) {
+          return date.getUTCSeconds();
+      },
+      'ss': function (date) {
+          return addLeadingZeros(date.getUTCSeconds(), 2);
+      },
+      'S': function (date) {
+          return Math.floor(date.getUTCMilliseconds() / 100);
+      },
+      'SS': function (date) {
+          return addLeadingZeros(Math.floor(date.getUTCMilliseconds() / 10), 2);
+      },
+      'SSS': function (date) {
+          return addLeadingZeros(date.getUTCMilliseconds(), 3);
+      },
+      'Z': function (date, options) {
+          var originalDate = options._originalDate || date;
+          return formatTimezone(originalDate.getTimezoneOffset(), ':');
+      },
+      'ZZ': function (date, options) {
+          var originalDate = options._originalDate || date;
+          return formatTimezone(originalDate.getTimezoneOffset());
+      },
+      'X': function (date, options) {
+          var originalDate = options._originalDate || date;
+          return Math.floor(originalDate.getTime() / 1000);
+      },
+      'x': function (date, options) {
+          var originalDate = options._originalDate || date;
+          return originalDate.getTime();
+      },
+      'A': function (date, options) {
+          return options.locale.localize.timeOfDay(date.getUTCHours(), {
+              type: 'uppercase'
+          });
+      },
+      'a': function (date, options) {
+          return options.locale.localize.timeOfDay(date.getUTCHours(), {
+              type: 'lowercase'
+          });
+      },
+      'aa': function (date, options) {
+          return options.locale.localize.timeOfDay(date.getUTCHours(), {
+              type: 'long'
+          });
+      }
+  };
+  function formatTimezone(offset, delimeter) {
+      delimeter = delimeter || '';
+      var sign = offset > 0 ? '-' : '+';
+      var absOffset = Math.abs(offset);
+      var hours = Math.floor(absOffset / 60);
+      var minutes = absOffset % 60;
+      return sign + addLeadingZeros(hours, 2) + delimeter + addLeadingZeros(minutes, 2);
+  }
+
+  function addLeadingZeros(number, targetLength) {
+      var output = Math.abs(number).toString();
+      while (output.length < targetLength) {
+          output = '0' + output;
+      }
+      return output;
+  }
+
+  function addUTCMinutes(dirtyDate, dirtyAmount, dirtyOptions) {
+      var date = toDate(dirtyDate, dirtyOptions);
+      var amount = Number(dirtyAmount);
+      date.setUTCMinutes(date.getUTCMinutes() + amount);
+      return date;
+  }
+
+  var longFormattingTokensRegExp = /(\[[^[]*])|(\\)?(LTS|LT|LLLL|LLL|LL|L|llll|lll|ll|l)/g;
+  var defaultFormattingTokensRegExp = /(\[[^[]*])|(\\)?(x|ss|s|mm|m|hh|h|do|dddd|ddd|dd|d|aa|a|ZZ|Z|YYYY|YY|X|Wo|WW|W|SSS|SS|S|Qo|Q|Mo|MMMM|MMM|MM|M|HH|H|GGGG|GG|E|Do|DDDo|DDDD|DDD|DD|D|A|.)/g;
+  function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
+      if (arguments.length < 2) {
+          throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
+      }
+      var formatStr = String(dirtyFormatStr);
+      var options = dirtyOptions || {};
+      var locale$$1 = options.locale || locale;
+      if (!locale$$1.localize) {
+          throw new RangeError('locale must contain localize property');
+      }
+      if (!locale$$1.formatLong) {
+          throw new RangeError('locale must contain formatLong property');
+      }
+      var localeFormatters = locale$$1.formatters || {};
+      var formattingTokensRegExp = locale$$1.formattingTokensRegExp || defaultFormattingTokensRegExp;
+      var formatLong = locale$$1.formatLong;
+      var originalDate = toDate(dirtyDate, options);
+      if (!isValid(originalDate, options)) {
+          return 'Invalid Date';
+      }
+      var timezoneOffset = originalDate.getTimezoneOffset();
+      var utcDate = addUTCMinutes(originalDate, -timezoneOffset, options);
+      var formatterOptions = cloneObject(options);
+      formatterOptions.locale = locale$$1;
+      formatterOptions.formatters = formatters;
+      formatterOptions._originalDate = originalDate;
+      var result = formatStr.replace(longFormattingTokensRegExp, function (substring) {
+          if (substring[0] === '[') {
+              return substring;
+          }
+          if (substring[0] === '\\') {
+              return cleanEscapedString(substring);
+          }
+          return formatLong(substring);
+      }).replace(formattingTokensRegExp, function (substring) {
+          var formatter = localeFormatters[substring] || formatters[substring];
+          if (formatter) {
+              return formatter(utcDate, formatterOptions);
+          } else {
+              return cleanEscapedString(substring);
+          }
+      });
+      return result;
+  }
+
+  function cleanEscapedString(input) {
+      if (input.match(/\[[\s\S]/)) {
+          return input.replace(/^\[|]$/g, '');
+      }
+      return input.replace(/\\/g, '');
+  }
+
+  function subMinutes(dirtyDate, dirtyAmount, dirtyOptions) {
+      if (arguments.length < 2) {
+          throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
+      }
+      var amount = Number(dirtyAmount);
+      return addMinutes(dirtyDate, -amount, dirtyOptions);
+  }
+
+  function isAfter(dirtyDate, dirtyDateToCompare, dirtyOptions) {
+      if (arguments.length < 2) {
+          throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
+      }
+      var date = toDate(dirtyDate, dirtyOptions);
+      var dateToCompare = toDate(dirtyDateToCompare, dirtyOptions);
+      return date.getTime() > dateToCompare.getTime();
+  }
+
+  function isBefore(dirtyDate, dirtyDateToCompare, dirtyOptions) {
+      if (arguments.length < 2) {
+          throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
+      }
+      var date = toDate(dirtyDate, dirtyOptions);
+      var dateToCompare = toDate(dirtyDateToCompare, dirtyOptions);
+      return date.getTime() < dateToCompare.getTime();
+  }
+
+  function isEqual(dirtyLeftDate, dirtyRightDate, dirtyOptions) {
+      if (arguments.length < 2) {
+          throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
+      }
+      var dateLeft = toDate(dirtyLeftDate, dirtyOptions);
+      var dateRight = toDate(dirtyRightDate, dirtyOptions);
+      return dateLeft.getTime() === dateRight.getTime();
+  }
+
+  var patterns$1 = {
+      'M': /^(1[0-2]|0?\d)/,
+      'D': /^(3[0-1]|[0-2]?\d)/,
+      'DDD': /^(36[0-6]|3[0-5]\d|[0-2]?\d?\d)/,
+      'W': /^(5[0-3]|[0-4]?\d)/,
+      'YYYY': /^(\d{1,4})/,
+      'H': /^(2[0-3]|[0-1]?\d)/,
+      'm': /^([0-5]?\d)/,
+      'Z': /^([+-])(\d{2}):(\d{2})/,
+      'ZZ': /^([+-])(\d{2})(\d{2})/,
+      singleDigit: /^(\d)/,
+      twoDigits: /^(\d{2})/,
+      threeDigits: /^(\d{3})/,
+      fourDigits: /^(\d{4})/,
+      anyDigits: /^(\d+)/
+  };
+  function parseDecimal$1(matchResult) {
+      return parseInt(matchResult[1], 10);
+  }
+
+  var parsers = {
+      'YY': {
+          unit: 'twoDigitYear',
+          match: patterns$1.twoDigits,
+          parse: function (matchResult) {
+              return parseDecimal$1(matchResult);
+          }
+      },
+      'YYYY': {
+          unit: 'year',
+          match: patterns$1.YYYY,
+          parse: parseDecimal$1
+      },
+      'GG': {
+          unit: 'isoYear',
+          match: patterns$1.twoDigits,
+          parse: function (matchResult) {
+              return parseDecimal$1(matchResult) + 1900;
+          }
+      },
+      'GGGG': {
+          unit: 'isoYear',
+          match: patterns$1.YYYY,
+          parse: parseDecimal$1
+      },
+      'Q': {
+          unit: 'quarter',
+          match: patterns$1.singleDigit,
+          parse: parseDecimal$1
+      },
+      'Qo': {
+          unit: 'quarter',
+          match: function (string, options) {
+              return options.locale.match.ordinalNumbers(string, {
+                  unit: 'quarter'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.ordinalNumber(matchResult, {
+                  unit: 'quarter'
+              });
+          }
+      },
+      'M': {
+          unit: 'month',
+          match: patterns$1.M,
+          parse: function (matchResult) {
+              return parseDecimal$1(matchResult) - 1;
+          }
+      },
+      'Mo': {
+          unit: 'month',
+          match: function (string, options) {
+              return options.locale.match.ordinalNumbers(string, {
+                  unit: 'month'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.ordinalNumber(matchResult, {
+                  unit: 'month'
+              }) - 1;
+          }
+      },
+      'MM': {
+          unit: 'month',
+          match: patterns$1.twoDigits,
+          parse: function (matchResult) {
+              return parseDecimal$1(matchResult) - 1;
+          }
+      },
+      'MMM': {
+          unit: 'month',
+          match: function (string, options) {
+              return options.locale.match.months(string, {
+                  type: 'short'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.month(matchResult, {
+                  type: 'short'
+              });
+          }
+      },
+      'MMMM': {
+          unit: 'month',
+          match: function (string, options) {
+              return options.locale.match.months(string, {
+                  type: 'long'
+              }) || options.locale.match.months(string, {
+                  type: 'short'
+              });
+          },
+          parse: function (matchResult, options) {
+              var parseResult = options.locale.match.month(matchResult, {
+                  type: 'long'
+              });
+              if (parseResult == null) {
+                  parseResult = options.locale.match.month(matchResult, {
+                      type: 'short'
+                  });
+              }
+              return parseResult;
+          }
+      },
+      'W': {
+          unit: 'isoWeek',
+          match: patterns$1.W,
+          parse: parseDecimal$1
+      },
+      'Wo': {
+          unit: 'isoWeek',
+          match: function (string, options) {
+              return options.locale.match.ordinalNumbers(string, {
+                  unit: 'isoWeek'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.ordinalNumber(matchResult, {
+                  unit: 'isoWeek'
+              });
+          }
+      },
+      'WW': {
+          unit: 'isoWeek',
+          match: patterns$1.twoDigits,
+          parse: parseDecimal$1
+      },
+      'd': {
+          unit: 'dayOfWeek',
+          match: patterns$1.singleDigit,
+          parse: parseDecimal$1
+      },
+      'do': {
+          unit: 'dayOfWeek',
+          match: function (string, options) {
+              return options.locale.match.ordinalNumbers(string, {
+                  unit: 'dayOfWeek'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.ordinalNumber(matchResult, {
+                  unit: 'dayOfWeek'
+              });
+          }
+      },
+      'dd': {
+          unit: 'dayOfWeek',
+          match: function (string, options) {
+              return options.locale.match.weekdays(string, {
+                  type: 'narrow'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.weekday(matchResult, {
+                  type: 'narrow'
+              });
+          }
+      },
+      'ddd': {
+          unit: 'dayOfWeek',
+          match: function (string, options) {
+              return options.locale.match.weekdays(string, {
+                  type: 'short'
+              }) || options.locale.match.weekdays(string, {
+                  type: 'narrow'
+              });
+          },
+          parse: function (matchResult, options) {
+              var parseResult = options.locale.match.weekday(matchResult, {
+                  type: 'short'
+              });
+              if (parseResult == null) {
+                  parseResult = options.locale.match.weekday(matchResult, {
+                      type: 'narrow'
+                  });
+              }
+              return parseResult;
+          }
+      },
+      'dddd': {
+          unit: 'dayOfWeek',
+          match: function (string, options) {
+              return options.locale.match.weekdays(string, {
+                  type: 'long'
+              }) || options.locale.match.weekdays(string, {
+                  type: 'short'
+              }) || options.locale.match.weekdays(string, {
+                  type: 'narrow'
+              });
+          },
+          parse: function (matchResult, options) {
+              var parseResult = options.locale.match.weekday(matchResult, {
+                  type: 'long'
+              });
+              if (parseResult == null) {
+                  parseResult = options.locale.match.weekday(matchResult, {
+                      type: 'short'
+                  });
+                  if (parseResult == null) {
+                      parseResult = options.locale.match.weekday(matchResult, {
+                          type: 'narrow'
+                      });
+                  }
+              }
+              return parseResult;
+          }
+      },
+      'E': {
+          unit: 'dayOfISOWeek',
+          match: patterns$1.singleDigit,
+          parse: function (matchResult) {
+              return parseDecimal$1(matchResult);
+          }
+      },
+      'D': {
+          unit: 'dayOfMonth',
+          match: patterns$1.D,
+          parse: parseDecimal$1
+      },
+      'Do': {
+          unit: 'dayOfMonth',
+          match: function (string, options) {
+              return options.locale.match.ordinalNumbers(string, {
+                  unit: 'dayOfMonth'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.ordinalNumber(matchResult, {
+                  unit: 'dayOfMonth'
+              });
+          }
+      },
+      'DD': {
+          unit: 'dayOfMonth',
+          match: patterns$1.twoDigits,
+          parse: parseDecimal$1
+      },
+      'DDD': {
+          unit: 'dayOfYear',
+          match: patterns$1.DDD,
+          parse: parseDecimal$1
+      },
+      'DDDo': {
+          unit: 'dayOfYear',
+          match: function (string, options) {
+              return options.locale.match.ordinalNumbers(string, {
+                  unit: 'dayOfYear'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.ordinalNumber(matchResult, {
+                  unit: 'dayOfYear'
+              });
+          }
+      },
+      'DDDD': {
+          unit: 'dayOfYear',
+          match: patterns$1.threeDigits,
+          parse: parseDecimal$1
+      },
+      'A': {
+          unit: 'timeOfDay',
+          match: function (string, options) {
+              return options.locale.match.timesOfDay(string, {
+                  type: 'short'
+              });
+          },
+          parse: function (matchResult, options) {
+              return options.locale.match.timeOfDay(matchResult, {
+                  type: 'short'
+              });
+          }
+      },
+      'aa': {
+          unit: 'timeOfDay',
+          match: function (string, options) {
+              return options.locale.match.timesOfDay(string, {
+                  type: 'long'
+              }) || options.locale.match.timesOfDay(string, {
+                  type: 'short'
+              });
+          },
+          parse: function (matchResult, options) {
+              var parseResult = options.locale.match.timeOfDay(matchResult, {
+                  type: 'long'
+              });
+              if (parseResult == null) {
+                  parseResult = options.locale.match.timeOfDay(matchResult, {
+                      type: 'short'
+                  });
+              }
+              return parseResult;
+          }
+      },
+      'H': {
+          unit: 'hours',
+          match: patterns$1.H,
+          parse: parseDecimal$1
+      },
+      'HH': {
+          unit: 'hours',
+          match: patterns$1.twoDigits,
+          parse: parseDecimal$1
+      },
+      'h': {
+          unit: 'timeOfDayHours',
+          match: patterns$1.M,
+          parse: parseDecimal$1
+      },
+      'hh': {
+          unit: 'timeOfDayHours',
+          match: patterns$1.twoDigits,
+          parse: parseDecimal$1
+      },
+      'm': {
+          unit: 'minutes',
+          match: patterns$1.m,
+          parse: parseDecimal$1
+      },
+      'mm': {
+          unit: 'minutes',
+          match: patterns$1.twoDigits,
+          parse: parseDecimal$1
+      },
+      's': {
+          unit: 'seconds',
+          match: patterns$1.m,
+          parse: parseDecimal$1
+      },
+      'ss': {
+          unit: 'seconds',
+          match: patterns$1.twoDigits,
+          parse: parseDecimal$1
+      },
+      'S': {
+          unit: 'milliseconds',
+          match: patterns$1.singleDigit,
+          parse: function (matchResult) {
+              return parseDecimal$1(matchResult) * 100;
+          }
+      },
+      'SS': {
+          unit: 'milliseconds',
+          match: patterns$1.twoDigits,
+          parse: function (matchResult) {
+              return parseDecimal$1(matchResult) * 10;
+          }
+      },
+      'SSS': {
+          unit: 'milliseconds',
+          match: patterns$1.threeDigits,
+          parse: parseDecimal$1
+      },
+      'Z': {
+          unit: 'timezone',
+          match: patterns$1.Z,
+          parse: function (matchResult) {
+              var sign = matchResult[1];
+              var hours = parseInt(matchResult[2], 10);
+              var minutes = parseInt(matchResult[3], 10);
+              var absoluteOffset = hours * 60 + minutes;
+              return sign === '+' ? absoluteOffset : -absoluteOffset;
+          }
+      },
+      'ZZ': {
+          unit: 'timezone',
+          match: patterns$1.ZZ,
+          parse: function (matchResult) {
+              var sign = matchResult[1];
+              var hours = parseInt(matchResult[2], 10);
+              var minutes = parseInt(matchResult[3], 10);
+              var absoluteOffset = hours * 60 + minutes;
+              return sign === '+' ? absoluteOffset : -absoluteOffset;
+          }
+      },
+      'X': {
+          unit: 'timestamp',
+          match: patterns$1.anyDigits,
+          parse: function (matchResult) {
+              return parseDecimal$1(matchResult) * 1000;
+          }
+      },
+      'x': {
+          unit: 'timestamp',
+          match: patterns$1.anyDigits,
+          parse: parseDecimal$1
+      }
+  };
+  parsers['a'] = parsers['A'];
+
+  function setUTCDay(dirtyDate, dirtyDay, dirtyOptions) {
+      var options = dirtyOptions || {};
+      var locale = options.locale;
+      var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
+      var defaultWeekStartsOn = localeWeekStartsOn === undefined ? 0 : Number(localeWeekStartsOn);
+      var weekStartsOn = options.weekStartsOn === undefined ? defaultWeekStartsOn : Number(options.weekStartsOn);
+      if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+          throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
+      }
+      var date = toDate(dirtyDate, dirtyOptions);
+      var day = Number(dirtyDay);
+      var currentDay = date.getUTCDay();
+      var remainder = day % 7;
+      var dayIndex = (remainder + 7) % 7;
+      var diff = (dayIndex < weekStartsOn ? 7 : 0) + day - currentDay;
+      date.setUTCDate(date.getUTCDate() + diff);
+      return date;
+  }
+
+  function setUTCISODay(dirtyDate, dirtyDay, dirtyOptions) {
+      var day = Number(dirtyDay);
+      if (day % 7 === 0) {
+          day = day - 7;
+      }
+      var weekStartsOn = 1;
+      var date = toDate(dirtyDate, dirtyOptions);
+      var currentDay = date.getUTCDay();
+      var remainder = day % 7;
+      var dayIndex = (remainder + 7) % 7;
+      var diff = (dayIndex < weekStartsOn ? 7 : 0) + day - currentDay;
+      date.setUTCDate(date.getUTCDate() + diff);
+      return date;
+  }
+
+  function setUTCISOWeek(dirtyDate, dirtyISOWeek, dirtyOptions) {
+      var date = toDate(dirtyDate, dirtyOptions);
+      var isoWeek = Number(dirtyISOWeek);
+      var diff = getUTCISOWeek(date, dirtyOptions) - isoWeek;
+      date.setUTCDate(date.getUTCDate() - diff * 7);
+      return date;
+  }
+
+  var MILLISECONDS_IN_DAY$3 = 86400000;
+  function setUTCISOWeekYear(dirtyDate, dirtyISOYear, dirtyOptions) {
+      var date = toDate(dirtyDate, dirtyOptions);
+      var isoYear = Number(dirtyISOYear);
+      var dateStartOfYear = startOfUTCISOWeekYear(date, dirtyOptions);
+      var diff = Math.floor((date.getTime() - dateStartOfYear.getTime()) / MILLISECONDS_IN_DAY$3);
+      var fourthOfJanuary = new Date(0);
+      fourthOfJanuary.setUTCFullYear(isoYear, 0, 4);
+      fourthOfJanuary.setUTCHours(0, 0, 0, 0);
+      date = startOfUTCISOWeekYear(fourthOfJanuary, dirtyOptions);
+      date.setUTCDate(date.getUTCDate() + diff);
+      return date;
+  }
+
+  var MILLISECONDS_IN_MINUTE$6 = 60000;
+  function setTimeOfDay(hours, timeOfDay) {
+      var isAM = timeOfDay === 0;
+      if (isAM) {
+          if (hours === 12) {
+              return 0;
+          }
+      } else {
+          if (hours !== 12) {
+              return 12 + hours;
+          }
+      }
+      return hours;
+  }
+
+  var units = {
+      twoDigitYear: {
+          priority: 10,
+          set: function (dateValues, value) {
+              var century = Math.floor(dateValues.date.getUTCFullYear() / 100);
+              var year = century * 100 + value;
+              dateValues.date.setUTCFullYear(year, 0, 1);
+              dateValues.date.setUTCHours(0, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      year: {
+          priority: 10,
+          set: function (dateValues, value) {
+              dateValues.date.setUTCFullYear(value, 0, 1);
+              dateValues.date.setUTCHours(0, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      isoYear: {
+          priority: 10,
+          set: function (dateValues, value, options) {
+              dateValues.date = startOfUTCISOWeekYear(setUTCISOWeekYear(dateValues.date, value, options), options);
+              return dateValues;
+          }
+      },
+      quarter: {
+          priority: 20,
+          set: function (dateValues, value) {
+              dateValues.date.setUTCMonth((value - 1) * 3, 1);
+              dateValues.date.setUTCHours(0, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      month: {
+          priority: 30,
+          set: function (dateValues, value) {
+              dateValues.date.setUTCMonth(value, 1);
+              dateValues.date.setUTCHours(0, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      isoWeek: {
+          priority: 40,
+          set: function (dateValues, value, options) {
+              dateValues.date = startOfUTCISOWeek(setUTCISOWeek(dateValues.date, value, options), options);
+              return dateValues;
+          }
+      },
+      dayOfWeek: {
+          priority: 50,
+          set: function (dateValues, value, options) {
+              dateValues.date = setUTCDay(dateValues.date, value, options);
+              dateValues.date.setUTCHours(0, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      dayOfISOWeek: {
+          priority: 50,
+          set: function (dateValues, value, options) {
+              dateValues.date = setUTCISODay(dateValues.date, value, options);
+              dateValues.date.setUTCHours(0, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      dayOfMonth: {
+          priority: 50,
+          set: function (dateValues, value) {
+              dateValues.date.setUTCDate(value);
+              dateValues.date.setUTCHours(0, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      dayOfYear: {
+          priority: 50,
+          set: function (dateValues, value) {
+              dateValues.date.setUTCMonth(0, value);
+              dateValues.date.setUTCHours(0, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      timeOfDay: {
+          priority: 60,
+          set: function (dateValues, value, options) {
+              dateValues.timeOfDay = value;
+              return dateValues;
+          }
+      },
+      hours: {
+          priority: 70,
+          set: function (dateValues, value, options) {
+              dateValues.date.setUTCHours(value, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      timeOfDayHours: {
+          priority: 70,
+          set: function (dateValues, value, options) {
+              var timeOfDay = dateValues.timeOfDay;
+              if (timeOfDay != null) {
+                  value = setTimeOfDay(value, timeOfDay);
+              }
+              dateValues.date.setUTCHours(value, 0, 0, 0);
+              return dateValues;
+          }
+      },
+      minutes: {
+          priority: 80,
+          set: function (dateValues, value) {
+              dateValues.date.setUTCMinutes(value, 0, 0);
+              return dateValues;
+          }
+      },
+      seconds: {
+          priority: 90,
+          set: function (dateValues, value) {
+              dateValues.date.setUTCSeconds(value, 0);
+              return dateValues;
+          }
+      },
+      milliseconds: {
+          priority: 100,
+          set: function (dateValues, value) {
+              dateValues.date.setUTCMilliseconds(value);
+              return dateValues;
+          }
+      },
+      timezone: {
+          priority: 110,
+          set: function (dateValues, value) {
+              dateValues.date = new Date(dateValues.date.getTime() - value * MILLISECONDS_IN_MINUTE$6);
+              return dateValues;
+          }
+      },
+      timestamp: {
+          priority: 120,
+          set: function (dateValues, value) {
+              dateValues.date = new Date(value);
+              return dateValues;
+          }
+      }
+  };
+
+  var TIMEZONE_UNIT_PRIORITY = 110;
+  var MILLISECONDS_IN_MINUTE$7 = 60000;
+  var longFormattingTokensRegExp$1 = /(\[[^[]*])|(\\)?(LTS|LT|LLLL|LLL|LL|L|llll|lll|ll|l)/g;
+  var defaultParsingTokensRegExp = /(\[[^[]*])|(\\)?(x|ss|s|mm|m|hh|h|do|dddd|ddd|dd|d|aa|a|ZZ|Z|YYYY|YY|X|Wo|WW|W|SSS|SS|S|Qo|Q|Mo|MMMM|MMM|MM|M|HH|H|GGGG|GG|E|Do|DDDo|DDDD|DDD|DD|D|A|.)/g;
+  function parse(dirtyDateString, dirtyFormatString, dirtyBaseDate, dirtyOptions) {
+      if (arguments.length < 3) {
+          throw new TypeError('3 arguments required, but only ' + arguments.length + ' present');
+      }
+      var dateString = String(dirtyDateString);
+      var options = dirtyOptions || {};
+      var weekStartsOn = options.weekStartsOn === undefined ? 0 : Number(options.weekStartsOn);
+      if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+          throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
+      }
+      var locale$$1 = options.locale || locale;
+      var localeParsers = locale$$1.parsers || {};
+      var localeUnits = locale$$1.units || {};
+      if (!locale$$1.match) {
+          throw new RangeError('locale must contain match property');
+      }
+      if (!locale$$1.formatLong) {
+          throw new RangeError('locale must contain formatLong property');
+      }
+      var formatString = String(dirtyFormatString).replace(longFormattingTokensRegExp$1, function (substring) {
+          if (substring[0] === '[') {
+              return substring;
+          }
+          if (substring[0] === '\\') {
+              return cleanEscapedString$1(substring);
+          }
+          return locale$$1.formatLong(substring);
+      });
+      if (formatString === '') {
+          if (dateString === '') {
+              return toDate(dirtyBaseDate, options);
+          } else {
+              return new Date(NaN);
+          }
+      }
+      var subFnOptions = cloneObject(options);
+      subFnOptions.locale = locale$$1;
+      var tokens = formatString.match(locale$$1.parsingTokensRegExp || defaultParsingTokensRegExp);
+      var tokensLength = tokens.length;
+      var setters = [{
+          priority: TIMEZONE_UNIT_PRIORITY,
+          set: dateToSystemTimezone,
+          index: 0
+      }];
+      var i;
+      for (i = 0; i < tokensLength; i++) {
+          var token = tokens[i];
+          var parser = localeParsers[token] || parsers[token];
+          if (parser) {
+              var matchResult;
+              if (parser.match instanceof RegExp) {
+                  matchResult = parser.match.exec(dateString);
+              } else {
+                  matchResult = parser.match(dateString, subFnOptions);
+              }
+              if (!matchResult) {
+                  return new Date(NaN);
+              }
+              var unitName = parser.unit;
+              var unit = localeUnits[unitName] || units[unitName];
+              setters.push({
+                  priority: unit.priority,
+                  set: unit.set,
+                  value: parser.parse(matchResult, subFnOptions),
+                  index: setters.length
+              });
+              var substring = matchResult[0];
+              dateString = dateString.slice(substring.length);
+          } else {
+              var head = tokens[i].match(/^\[.*]$/) ? tokens[i].replace(/^\[|]$/g, '') : tokens[i];
+              if (dateString.indexOf(head) === 0) {
+                  dateString = dateString.slice(head.length);
+              } else {
+                  return new Date(NaN);
+              }
+          }
+      }
+      var uniquePrioritySetters = setters.map(function (setter) {
+          return setter.priority;
+      }).sort(function (a, b) {
+          return a - b;
+      }).filter(function (priority, index, array) {
+          return array.indexOf(priority) === index;
+      }).map(function (priority) {
+          return setters.filter(function (setter) {
+              return setter.priority === priority;
+          }).reverse();
+      }).map(function (setterArray) {
+          return setterArray[0];
+      });
+      var date = toDate(dirtyBaseDate, options);
+      if (isNaN(date)) {
+          return new Date(NaN);
+      }
+      var utcDate = subMinutes(date, date.getTimezoneOffset());
+      var dateValues = {
+          date: utcDate
+      };
+      var settersLength = uniquePrioritySetters.length;
+      for (i = 0; i < settersLength; i++) {
+          var setter = uniquePrioritySetters[i];
+          dateValues = setter.set(dateValues, setter.value, subFnOptions);
+      }
+      return dateValues.date;
+  }
+
+  function dateToSystemTimezone(dateValues) {
+      var date = dateValues.date;
+      var time = date.getTime();
+      var offset = date.getTimezoneOffset();
+      offset = new Date(time + offset * MILLISECONDS_IN_MINUTE$7).getTimezoneOffset();
+      dateValues.date = new Date(time + offset * MILLISECONDS_IN_MINUTE$7);
+      return dateValues;
+  }
+
+  function cleanEscapedString$1(input) {
+      if (input.match(/\[[\s\S]/)) {
+          return input.replace(/^\[|]$/g, '');
+      }
+      return input.replace(/\\/g, '');
+  }
+
+  function parseDate$1(date, format$$1) {
+      if (typeof date !== 'string') {
+          return isValid(date) ? date : null;
+      }
+      var parsed = parse(date, format$$1, new Date());
+      if (!isValid(parsed) || format(parsed, format$$1) !== date) {
+          return null;
+      }
+      return parsed;
+  }
+
+  function after (value, ref) {
+      var otherValue = ref[0];
+      var inclusion = ref[1];
+      var format$$1 = ref[2];
+
+      if (typeof format$$1 === 'undefined') {
+          format$$1 = inclusion;
+          inclusion = false;
+      }
+      value = parseDate$1(value, format$$1);
+      otherValue = parseDate$1(otherValue, format$$1);
+      if (!value || !otherValue) {
+          return false;
+      }
+      return isAfter(value, otherValue) || inclusion && isEqual(value, otherValue);
+  }
+
+  var alpha = {
+      en: /^[A-Z]*$/i,
+      cs: /^[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]*$/i,
+      da: /^[A-ZÆØÅ]*$/i,
+      de: /^[A-ZÄÖÜß]*$/i,
+      es: /^[A-ZÁÉÍÑÓÚÜ]*$/i,
+      fr: /^[A-ZÀÂÆÇÉÈÊËÏÎÔŒÙÛÜŸ]*$/i,
+      lt: /^[A-ZĄČĘĖĮŠŲŪŽ]*$/i,
+      nl: /^[A-ZÉËÏÓÖÜ]*$/i,
+      hu: /^[A-ZÁÉÍÓÖŐÚÜŰ]*$/i,
+      pl: /^[A-ZĄĆĘŚŁŃÓŻŹ]*$/i,
+      pt: /^[A-ZÃÁÀÂÇÉÊÍÕÓÔÚÜ]*$/i,
+      ru: /^[А-ЯЁ]*$/i,
+      sk: /^[A-ZÁÄČĎÉÍĹĽŇÓŔŠŤÚÝŽ]*$/i,
+      sr: /^[A-ZČĆŽŠĐ]*$/i,
+      tr: /^[A-ZÇĞİıÖŞÜ]*$/i,
+      uk: /^[А-ЩЬЮЯЄІЇҐ]*$/i,
+      ar: /^[ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ]*$/
+  };
+  var alphaSpaces = {
+      en: /^[A-Z\s]*$/i,
+      cs: /^[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ\s]*$/i,
+      da: /^[A-ZÆØÅ\s]*$/i,
+      de: /^[A-ZÄÖÜß\s]*$/i,
+      es: /^[A-ZÁÉÍÑÓÚÜ\s]*$/i,
+      fr: /^[A-ZÀÂÆÇÉÈÊËÏÎÔŒÙÛÜŸ\s]*$/i,
+      lt: /^[A-ZĄČĘĖĮŠŲŪŽ\s]*$/i,
+      nl: /^[A-ZÉËÏÓÖÜ\s]*$/i,
+      hu: /^[A-ZÁÉÍÓÖŐÚÜŰ\s]*$/i,
+      pl: /^[A-ZĄĆĘŚŁŃÓŻŹ\s]*$/i,
+      pt: /^[A-ZÃÁÀÂÇÉÊÍÕÓÔÚÜ\s]*$/i,
+      ru: /^[А-ЯЁ\s]*$/i,
+      sk: /^[A-ZÁÄČĎÉÍĹĽŇÓŔŠŤÚÝŽ\s]*$/i,
+      sr: /^[A-ZČĆŽŠĐ\s]*$/i,
+      tr: /^[A-ZÇĞİıÖŞÜ\s]*$/i,
+      uk: /^[А-ЩЬЮЯЄІЇҐ\s]*$/i,
+      ar: /^[ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ\s]*$/
+  };
+  var alphanumeric = {
+      en: /^[0-9A-Z]*$/i,
+      cs: /^[0-9A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]*$/i,
+      da: /^[0-9A-ZÆØÅ]$/i,
+      de: /^[0-9A-ZÄÖÜß]*$/i,
+      es: /^[0-9A-ZÁÉÍÑÓÚÜ]*$/i,
+      fr: /^[0-9A-ZÀÂÆÇÉÈÊËÏÎÔŒÙÛÜŸ]*$/i,
+      lt: /^[0-9A-ZĄČĘĖĮŠŲŪŽ]*$/i,
+      hu: /^[0-9A-ZÁÉÍÓÖŐÚÜŰ]*$/i,
+      nl: /^[0-9A-ZÉËÏÓÖÜ]*$/i,
+      pl: /^[0-9A-ZĄĆĘŚŁŃÓŻŹ]*$/i,
+      pt: /^[0-9A-ZÃÁÀÂÇÉÊÍÕÓÔÚÜ]*$/i,
+      ru: /^[0-9А-ЯЁ]*$/i,
+      sk: /^[0-9A-ZÁÄČĎÉÍĹĽŇÓŔŠŤÚÝŽ]*$/i,
+      sr: /^[0-9A-ZČĆŽŠĐ]*$/i,
+      tr: /^[0-9A-ZÇĞİıÖŞÜ]*$/i,
+      uk: /^[0-9А-ЩЬЮЯЄІЇҐ]*$/i,
+      ar: /^[٠١٢٣٤٥٦٧٨٩0-9ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ]*$/
+  };
+  var alphaDash = {
+      en: /^[0-9A-Z_-]*$/i,
+      cs: /^[0-9A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ_-]*$/i,
+      da: /^[0-9A-ZÆØÅ_-]*$/i,
+      de: /^[0-9A-ZÄÖÜß_-]*$/i,
+      es: /^[0-9A-ZÁÉÍÑÓÚÜ_-]*$/i,
+      fr: /^[0-9A-ZÀÂÆÇÉÈÊËÏÎÔŒÙÛÜŸ_-]*$/i,
+      lt: /^[0-9A-ZĄČĘĖĮŠŲŪŽ_-]*$/i,
+      nl: /^[0-9A-ZÉËÏÓÖÜ_-]*$/i,
+      hu: /^[0-9A-ZÁÉÍÓÖŐÚÜŰ_-]*$/i,
+      pl: /^[0-9A-ZĄĆĘŚŁŃÓŻŹ_-]*$/i,
+      pt: /^[0-9A-ZÃÁÀÂÇÉÊÍÕÓÔÚÜ_-]*$/i,
+      ru: /^[0-9А-ЯЁ_-]*$/i,
+      sk: /^[0-9A-ZÁÄČĎÉÍĹĽŇÓŔŠŤÚÝŽ_-]*$/i,
+      sr: /^[0-9A-ZČĆŽŠĐ_-]*$/i,
+      tr: /^[0-9A-ZÇĞİıÖŞÜ_-]*$/i,
+      uk: /^[0-9А-ЩЬЮЯЄІЇҐ_-]*$/i,
+      ar: /^[٠١٢٣٤٥٦٧٨٩0-9ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ_-]*$/
+  };
+
+  var validate = function (value, ref) {
+      if ( ref === void 0 ) ref = [];
+      var locale = ref[0]; if ( locale === void 0 ) locale = null;
+
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate(val, [locale]); });
+      }
+      if (!locale) {
+          return Object.keys(alpha).some(function (loc) { return alpha[loc].test(value); });
+      }
+      return (alpha[locale] || alpha.en).test(value);
+  };
+
+  var validate$1 = function (value, ref) {
+      if ( ref === void 0 ) ref = [];
+      var locale = ref[0]; if ( locale === void 0 ) locale = null;
+
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate$1(val, [locale]); });
+      }
+      if (!locale) {
+          return Object.keys(alphaDash).some(function (loc) { return alphaDash[loc].test(value); });
+      }
+      return (alphaDash[locale] || alphaDash.en).test(value);
+  };
+
+  var validate$2 = function (value, ref) {
+      if ( ref === void 0 ) ref = [];
+      var locale = ref[0]; if ( locale === void 0 ) locale = null;
+
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate$2(val, [locale]); });
+      }
+      if (!locale) {
+          return Object.keys(alphanumeric).some(function (loc) { return alphanumeric[loc].test(value); });
+      }
+      return (alphanumeric[locale] || alphanumeric.en).test(value);
+  };
+
+  var validate$3 = function (value, ref) {
+      if ( ref === void 0 ) ref = [];
+      var locale = ref[0]; if ( locale === void 0 ) locale = null;
+
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate$3(val, [locale]); });
+      }
+      if (!locale) {
+          return Object.keys(alphaSpaces).some(function (loc) { return alphaSpaces[loc].test(value); });
+      }
+      return (alphaSpaces[locale] || alphaSpaces.en).test(value);
+  };
+
+  function before (value, ref) {
+      var otherValue = ref[0];
+      var inclusion = ref[1];
+      var format$$1 = ref[2];
+
+      if (typeof format$$1 === 'undefined') {
+          format$$1 = inclusion;
+          inclusion = false;
+      }
+      value = parseDate$1(value, format$$1);
+      otherValue = parseDate$1(otherValue, format$$1);
+      if (!value || !otherValue) {
+          return false;
+      }
+      return isBefore(value, otherValue) || inclusion && isEqual(value, otherValue);
+  }
+
+  var validate$4 = function (value, ref) {
+      var min = ref[0];
+      var max = ref[1];
+
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate$4(val, [min,max]); });
+      }
+      return Number(min) <= value && Number(max) >= value;
+  };
+
+  function confirmed (value, other) { return String(value) === String(other); }
+
+  function unwrapExports (x) {
+  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+  }
+
+  function createCommonjsModule(fn, module) {
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  }
+
+  var assertString_1 = createCommonjsModule(function (module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+          value: true
+      });
+      exports.default = assertString;
+      function assertString(input) {
+          var isString = typeof input === 'string' || input instanceof String;
+          if (!isString) {
+              throw new TypeError('This library (validator.js) validates strings only');
+          }
+      }
+      
+      module.exports = exports['default'];
+  });
+  var assertString = unwrapExports(assertString_1)
+
+  var assertString$1 = /*#__PURE__*/Object.freeze({
+    default: assertString,
+    __moduleExports: assertString_1
+  });
+
+  var _assertString = ( assertString$1 && assertString ) || assertString$1;
+
+  var isCreditCard_1 = createCommonjsModule(function (module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+          value: true
+      });
+      exports.default = isCreditCard;
+      var _assertString2 = _interopRequireDefault(_assertString);
+      function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {
+              default: obj
+          };
+      }
+      
+      var creditCard = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|62[0-9]{14})$/;
+      function isCreditCard(str) {
+          (0, _assertString2.default)(str);
+          var sanitized = str.replace(/[- ]+/g, '');
+          if (!creditCard.test(sanitized)) {
+              return false;
+          }
+          var sum = 0;
+          var digit = void 0;
+          var tmpNum = void 0;
+          var shouldDouble = void 0;
+          for (var i = sanitized.length - 1;i >= 0; i--) {
+              digit = sanitized.substring(i, i + 1);
+              tmpNum = parseInt(digit, 10);
+              if (shouldDouble) {
+                  tmpNum *= 2;
+                  if (tmpNum >= 10) {
+                      sum += tmpNum % 10 + 1;
+                  } else {
+                      sum += tmpNum;
+                  }
+              } else {
+                  sum += tmpNum;
+              }
+              shouldDouble = !shouldDouble;
+          }
+          return !(!(sum % 10 === 0 ? sanitized : false));
+      }
+      
+      module.exports = exports['default'];
+  });
+  var isCreditCard = unwrapExports(isCreditCard_1)
+
+  function credit_card (value) { return isCreditCard(String(value)); }
+
+  var validate$5 = function (value, ref) {
+      if ( ref === void 0 ) ref = [];
+      var decimals = ref[0]; if ( decimals === void 0 ) decimals = '*';
+      var separator = ref[1]; if ( separator === void 0 ) separator = '.';
+
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate$5(val, [decimals,separator]); });
+      }
+      if (value === null || value === undefined || value === '') {
+          return true;
+      }
+      if (Number(decimals) === 0) {
+          return /^-?\d*$/.test(value);
+      }
+      var regexPart = decimals === '*' ? '+' : ("{1," + decimals + "}");
+      var regex = new RegExp(("^-?\\d*(\\" + separator + "\\d" + regexPart + ")?$"));
+      if (!regex.test(value)) {
+          return false;
+      }
+      var parsedValue = parseFloat(value);
+      return parsedValue === parsedValue;
+  };
+
+  function date_between (value, params) {
+      var assign, assign$1;
+
+      var min$$1;
+      var max$$1;
+      var format$$1;
+      var inclusivity = '()';
+      if (params.length > 3) {
+          (assign = params, min$$1 = assign[0], max$$1 = assign[1], inclusivity = assign[2], format$$1 = assign[3]);
+      } else {
+          (assign$1 = params, min$$1 = assign$1[0], max$$1 = assign$1[1], format$$1 = assign$1[2]);
+      }
+      var minDate = parseDate$1(String(min$$1), format$$1);
+      var maxDate = parseDate$1(String(max$$1), format$$1);
+      var dateVal = parseDate$1(String(value), format$$1);
+      if (!minDate || !maxDate || !dateVal) {
+          return false;
+      }
+      if (inclusivity === '()') {
+          return isAfter(dateVal, minDate) && isBefore(dateVal, maxDate);
+      }
+      if (inclusivity === '(]') {
+          return isAfter(dateVal, minDate) && (isEqual(dateVal, maxDate) || isBefore(dateVal, maxDate));
+      }
+      if (inclusivity === '[)') {
+          return isBefore(dateVal, maxDate) && (isEqual(dateVal, minDate) || isAfter(dateVal, minDate));
+      }
+      return isEqual(dateVal, maxDate) || isEqual(dateVal, minDate) || isBefore(dateVal, maxDate) && isAfter(dateVal, minDate);
+  }
+
+  function date_format (value, ref) {
+  	var format = ref[0];
+
+  	return !(!parseDate$1(value, format));
+  }
+
+  var validate$6 = function (value, ref) {
+      var length = ref[0];
+
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate$6(val, [length]); });
+      }
+      var strVal = String(value);
+      return /^[0-9]*$/.test(strVal) && strVal.length === Number(length);
+  };
+
+  var validateImage = function (file, width, height) {
+      var URL = window.URL || window.webkitURL;
+      return new Promise(function (resolve) {
+          var image = new Image();
+          image.onerror = (function () { return resolve({
+              valid: false
+          }); });
+          image.onload = (function () { return resolve({
+              valid: image.width === Number(width) && image.height === Number(height)
+          }); });
+          image.src = URL.createObjectURL(file);
+      });
+  };
+  function dimensions (files, ref) {
+      var width = ref[0];
+      var height = ref[1];
+
+      var list = [];
+      for (var i = 0;i < files.length; i++) {
+          if (!/\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(files[i].name)) {
+              return false;
+          }
+          list.push(files[i]);
+      }
+      return Promise.all(list.map(function (file) { return validateImage(file, width, height); }));
+  }
+
+  var merge_1 = createCommonjsModule(function (module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+          value: true
+      });
+      exports.default = merge;
+      function merge() {
+          var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+          var defaults = arguments[1];
+          for (var key in defaults) {
+              if (typeof obj[key] === 'undefined') {
+                  obj[key] = defaults[key];
+              }
+          }
+          return obj;
+      }
+      
+      module.exports = exports['default'];
+  });
+  var merge = unwrapExports(merge_1)
+
+  var merge$1 = /*#__PURE__*/Object.freeze({
+    default: merge,
+    __moduleExports: merge_1
+  });
+
+  var isByteLength_1 = createCommonjsModule(function (module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+          value: true
+      });
+      var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+          return typeof obj;
+      } : function (obj) {
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+      exports.default = isByteLength;
+      var _assertString2 = _interopRequireDefault(_assertString);
+      function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {
+              default: obj
+          };
+      }
+      
+      function isByteLength(str, options) {
+          (0, _assertString2.default)(str);
+          var min = void 0;
+          var max = void 0;
+          if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+              min = options.min || 0;
+              max = options.max;
+          } else {
+              min = arguments[1];
+              max = arguments[2];
+          }
+          var len = encodeURI(str).split(/%..|./).length - 1;
+          return len >= min && (typeof max === 'undefined' || len <= max);
+      }
+      
+      module.exports = exports['default'];
+  });
+  var isByteLength = unwrapExports(isByteLength_1)
+
+  var isByteLength$1 = /*#__PURE__*/Object.freeze({
+    default: isByteLength,
+    __moduleExports: isByteLength_1
+  });
+
+  var _merge = ( merge$1 && merge ) || merge$1;
+
+  var isFQDN_1 = createCommonjsModule(function (module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+          value: true
+      });
+      exports.default = isFQDN;
+      var _assertString2 = _interopRequireDefault(_assertString);
+      var _merge2 = _interopRequireDefault(_merge);
+      function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {
+              default: obj
+          };
+      }
+      
+      var default_fqdn_options = {
+          require_tld: true,
+          allow_underscores: false,
+          allow_trailing_dot: false
+      };
+      function isFQDN(str, options) {
+          (0, _assertString2.default)(str);
+          options = (0, _merge2.default)(options, default_fqdn_options);
+          if (options.allow_trailing_dot && str[str.length - 1] === '.') {
+              str = str.substring(0, str.length - 1);
+          }
+          var parts = str.split('.');
+          if (options.require_tld) {
+              var tld = parts.pop();
+              if (!parts.length || !/^([a-z\u00a1-\uffff]{2,}|xn[a-z0-9-]{2,})$/i.test(tld)) {
+                  return false;
+              }
+              if (/[\s\u2002-\u200B\u202F\u205F\u3000\uFEFF\uDB40\uDC20]/.test(tld)) {
+                  return false;
+              }
+          }
+          for (var part, i = 0;i < parts.length; i++) {
+              part = parts[i];
+              if (options.allow_underscores) {
+                  part = part.replace(/_/g, '');
+              }
+              if (!/^[a-z\u00a1-\uffff0-9-]+$/i.test(part)) {
+                  return false;
+              }
+              if (/[\uff01-\uff5e]/.test(part)) {
+                  return false;
+              }
+              if (part[0] === '-' || part[part.length - 1] === '-') {
+                  return false;
+              }
+          }
+          return true;
+      }
+      
+      module.exports = exports['default'];
+  });
+  var isFQDN = unwrapExports(isFQDN_1)
+
+  var isFQDN$1 = /*#__PURE__*/Object.freeze({
+    default: isFQDN,
+    __moduleExports: isFQDN_1
+  });
+
+  var _isByteLength = ( isByteLength$1 && isByteLength ) || isByteLength$1;
+
+  var _isFQDN = ( isFQDN$1 && isFQDN ) || isFQDN$1;
+
+  var isEmail_1 = createCommonjsModule(function (module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+          value: true
+      });
+      exports.default = isEmail;
+      var _assertString2 = _interopRequireDefault(_assertString);
+      var _merge2 = _interopRequireDefault(_merge);
+      var _isByteLength2 = _interopRequireDefault(_isByteLength);
+      var _isFQDN2 = _interopRequireDefault(_isFQDN);
+      function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {
+              default: obj
+          };
+      }
+      
+      var default_email_options = {
+          allow_display_name: false,
+          require_display_name: false,
+          allow_utf8_local_part: true,
+          require_tld: true
+      };
+      var displayName = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\,\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s]*<(.+)>$/i;
+      var emailUserPart = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~]+$/i;
+      var quotedEmailUser = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f]))*$/i;
+      var emailUserUtf8Part = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+$/i;
+      var quotedEmailUserUtf8 = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*$/i;
+      function isEmail(str, options) {
+          (0, _assertString2.default)(str);
+          options = (0, _merge2.default)(options, default_email_options);
+          if (options.require_display_name || options.allow_display_name) {
+              var display_email = str.match(displayName);
+              if (display_email) {
+                  str = display_email[1];
+              } else if (options.require_display_name) {
+                  return false;
+              }
+          }
+          var parts = str.split('@');
+          var domain = parts.pop();
+          var user = parts.join('@');
+          var lower_domain = domain.toLowerCase();
+          if (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com') {
+              user = user.replace(/\./g, '').toLowerCase();
+          }
+          if (!(0, _isByteLength2.default)(user, {
+              max: 64
+          }) || !(0, _isByteLength2.default)(domain, {
+              max: 254
+          })) {
+              return false;
+          }
+          if (!(0, _isFQDN2.default)(domain, {
+              require_tld: options.require_tld
+          })) {
+              return false;
+          }
+          if (user[0] === '"') {
+              user = user.slice(1, user.length - 1);
+              return options.allow_utf8_local_part ? quotedEmailUserUtf8.test(user) : quotedEmailUser.test(user);
+          }
+          var pattern = options.allow_utf8_local_part ? emailUserUtf8Part : emailUserPart;
+          var user_parts = user.split('.');
+          for (var i = 0;i < user_parts.length; i++) {
+              if (!pattern.test(user_parts[i])) {
+                  return false;
+              }
+          }
+          return true;
+      }
+      
+      module.exports = exports['default'];
+  });
+  var isEmail = unwrapExports(isEmail_1)
+
+  var validate$7 = function (value) {
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return isEmail(String(val)); });
+      }
+      return isEmail(String(value));
+  };
+
+  function ext (files, extensions) {
+      var regex = new RegExp((".(" + (extensions.join('|')) + ")$"), 'i');
+      return files.every(function (file) { return regex.test(file.name); });
+  }
+
+  function image (files) { return files.every(function (file) { return /\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(file.name); }); }
+
+  var validate$8 = function (value, options) {
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate$8(val, options); });
+      }
+      return !(!options.filter(function (option) { return option == value; }).length);
+  };
+
+  var isIP_1 = createCommonjsModule(function (module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+          value: true
+      });
+      exports.default = isIP;
+      var _assertString2 = _interopRequireDefault(_assertString);
+      function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {
+              default: obj
+          };
+      }
+      
+      var ipv4Maybe = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+      var ipv6Block = /^[0-9A-F]{1,4}$/i;
+      function isIP(str) {
+          var version = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+          (0, _assertString2.default)(str);
+          version = String(version);
+          if (!version) {
+              return isIP(str, 4) || isIP(str, 6);
+          } else if (version === '4') {
+              if (!ipv4Maybe.test(str)) {
+                  return false;
+              }
+              var parts = str.split('.').sort(function (a, b) {
+                  return a - b;
+              });
+              return parts[3] <= 255;
+          } else if (version === '6') {
+              var blocks = str.split(':');
+              var foundOmissionBlock = false;
+              var foundIPv4TransitionBlock = isIP(blocks[blocks.length - 1], 4);
+              var expectedNumberOfBlocks = foundIPv4TransitionBlock ? 7 : 8;
+              if (blocks.length > expectedNumberOfBlocks) {
+                  return false;
+              }
+              if (str === '::') {
+                  return true;
+              } else if (str.substr(0, 2) === '::') {
+                  blocks.shift();
+                  blocks.shift();
+                  foundOmissionBlock = true;
+              } else if (str.substr(str.length - 2) === '::') {
+                  blocks.pop();
+                  blocks.pop();
+                  foundOmissionBlock = true;
+              }
+              for (var i = 0;i < blocks.length; ++i) {
+                  if (blocks[i] === '' && i > 0 && i < blocks.length - 1) {
+                      if (foundOmissionBlock) {
+                          return false;
+                      }
+                      foundOmissionBlock = true;
+                  } else if (foundIPv4TransitionBlock && i === blocks.length - 1) ; else if (!ipv6Block.test(blocks[i])) {
+                      return false;
+                  }
+              }
+              if (foundOmissionBlock) {
+                  return blocks.length >= 1;
+              }
+              return blocks.length === expectedNumberOfBlocks;
+          }
+          return false;
+      }
+      
+      module.exports = exports['default'];
+  });
+  var isIP = unwrapExports(isIP_1)
+
+  var supportsPassive = true;
+  var detectPassiveSupport = function () {
+      try {
+          var opts = Object.defineProperty({}, 'passive', {
+              get: function get() {
+                  supportsPassive = true;
+              }
+          });
+          window.addEventListener('testPassive', null, opts);
+          window.removeEventListener('testPassive', null, opts);
+      } catch (e) {
+          supportsPassive = false;
+      }
+      return supportsPassive;
+  };
+  var addEventListener = function (el, eventName, cb) {
+      el.addEventListener(eventName, cb, supportsPassive ? {
+          passive: true
+      } : false);
+  };
+  var isTextInput = function (el) { return ['text','number','password','search','email','tel',
+      'url','textarea'].indexOf(el.type) !== -1; };
+  var isCheckboxOrRadioInput = function (el) { return ['radio','checkbox'].indexOf(el.type) !== -1; };
+  var getDataAttribute = function (el, name) { return el.getAttribute(("data-vv-" + name)); };
+  var isNullOrUndefined = function (value) { return value === null || value === undefined; };
+  var createFlags = function () { return ({
+      untouched: true,
+      touched: false,
+      dirty: false,
+      pristine: true,
+      valid: null,
+      invalid: null,
+      validated: false,
+      pending: false,
+      required: false,
+      changed: false
+  }); };
+  var isEqual$1 = function (lhs, rhs) {
+      if (lhs instanceof RegExp && rhs instanceof RegExp) {
+          return isEqual$1(lhs.source, rhs.source) && isEqual$1(lhs.flags, rhs.flags);
+      }
+      if (Array.isArray(lhs) && Array.isArray(rhs)) {
+          if (lhs.length !== rhs.length) 
+              { return false; }
+          for (var i = 0;i < lhs.length; i++) {
+              if (!isEqual$1(lhs[i], rhs[i])) {
+                  return false;
+              }
+          }
+          return true;
+      }
+      if (isObject(lhs) && isObject(rhs)) {
+          return Object.keys(lhs).every(function (key) { return isEqual$1(lhs[key], rhs[key]); }) && Object.keys(rhs).every(function (key) { return isEqual$1(lhs[key], rhs[key]); });
+      }
+      return lhs === rhs;
+  };
+  var getScope = function (el) {
+      var scope = getDataAttribute(el, 'scope');
+      if (isNullOrUndefined(scope)) {
+          var form = getForm(el);
+          if (form) {
+              scope = getDataAttribute(form, 'scope');
+          }
+      }
+      return !isNullOrUndefined(scope) ? scope : null;
+  };
+  var getForm = function (el) {
+      if (isNullOrUndefined(el)) 
+          { return null; }
+      if (el.tagName === "FORM") 
+          { return el; }
+      if (!isNullOrUndefined(el.form)) 
+          { return el.form; }
+      return !isNullOrUndefined(el.parentNode) ? getForm(el.parentNode) : null;
+  };
+  var getPath = function (path, target, def) {
+      if ( def === void 0 ) def = undefined;
+
+      if (!path || !target) 
+          { return def; }
+      var value = target;
+      path.split('.').every(function (prop) {
+          if (!Object.prototype.hasOwnProperty.call(value, prop) && value[prop] === undefined) {
+              value = def;
+              return false;
+          }
+          value = value[prop];
+          return true;
+      });
+      return value;
+  };
+  var hasPath = function (path, target) {
+      var obj = target;
+      return path.split('.').every(function (prop) {
+          if (!Object.prototype.hasOwnProperty.call(obj, prop)) {
+              return false;
+          }
+          obj = obj[prop];
+          return true;
+      });
+  };
+  var parseRule = function (rule) {
+      var params = [];
+      var name = rule.split(':')[0];
+      if (~rule.indexOf(':')) {
+          params = rule.split(':').slice(1).join(':').split(',');
+      }
+      return {
+          name: name,
+          params: params
+      };
+  };
+  var debounce = function (fn, wait, immediate, token) {
+      if ( wait === void 0 ) wait = 0;
+      if ( immediate === void 0 ) immediate = false;
+      if ( token === void 0 ) token = {
+      cancelled: false
+  };
+
+      if (wait === 0) {
+          return fn;
+      }
+      var timeout;
+      return function () {
+          var args = [], len = arguments.length;
+          while ( len-- ) args[ len ] = arguments[ len ];
+
+          var later = function () {
+              timeout = null;
+              if (!immediate && !token.cancelled) 
+                  { fn.apply(void 0, args); }
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) 
+              { fn.apply(void 0, args); }
+      };
+  };
+  var normalizeRules = function (rules) {
+      if (!rules) {
+          return {};
+      }
+      if (isObject(rules)) {
+          return Object.keys(rules).reduce(function (prev, curr) {
+              var params = [];
+              if (rules[curr] === true) {
+                  params = [];
+              } else if (Array.isArray(rules[curr])) {
+                  params = rules[curr];
+              } else {
+                  params = [rules[curr]];
+              }
+              if (rules[curr] !== false) {
+                  prev[curr] = params;
+              }
+              return prev;
+          }, {});
+      }
+      if (typeof rules !== 'string') {
+          warn('rules must be either a string or an object.');
+          return {};
+      }
+      return rules.split('|').reduce(function (prev, rule) {
+          var parsedRule = parseRule(rule);
+          if (!parsedRule.name) {
+              return prev;
+          }
+          prev[parsedRule.name] = parsedRule.params;
+          return prev;
+      }, {});
+  };
+  var warn = function (message) {
+      console.warn(("[vee-validate] " + message));
+  };
+  var createError = function (message) { return new Error(("[vee-validate] " + message)); };
+  var isObject = function (obj) { return obj !== null && obj && typeof obj === 'object' && !Array.isArray(obj); };
+  var isCallable = function (func) { return typeof func === 'function'; };
+  var hasClass = function (el, className) {
+      if (el.classList) {
+          return el.classList.contains(className);
+      }
+      return !(!el.className.match(new RegExp(("(\\s|^)" + className + "(\\s|$)"))));
+  };
+  var addClass = function (el, className) {
+      if (el.classList) {
+          el.classList.add(className);
+          return;
+      }
+      if (!hasClass(el, className)) {
+          el.className += " " + className;
+      }
+  };
+  var removeClass = function (el, className) {
+      if (el.classList) {
+          el.classList.remove(className);
+          return;
+      }
+      if (hasClass(el, className)) {
+          var reg = new RegExp(("(\\s|^)" + className + "(\\s|$)"));
+          el.className = el.className.replace(reg, ' ');
+      }
+  };
+  var toggleClass = function (el, className, status) {
+      if (!el || !className) 
+          { return; }
+      if (Array.isArray(className)) {
+          className.forEach(function (item) { return toggleClass(el, item, status); });
+          return;
+      }
+      if (status) {
+          return addClass(el, className);
+      }
+      removeClass(el, className);
+  };
+  var toArray = function (arrayLike) {
+      if (isCallable(Array.from)) {
+          return Array.from(arrayLike);
+      }
+      var array = [];
+      var length = arrayLike.length;
+      for (var i = 0;i < length; i++) {
+          array.push(arrayLike[i]);
+      }
+      return array;
+  };
+  var assign = function (target) {
+      var others = [], len = arguments.length - 1;
+      while ( len-- > 0 ) others[ len ] = arguments[ len + 1 ];
+
+      if (isCallable(Object.assign)) {
+          return Object.assign.apply(Object, [ target ].concat( others ));
+      }
+      if (target == null) {
+          throw new TypeError('Cannot convert undefined or null to object');
+      }
+      var to = Object(target);
+      others.forEach(function (arg) {
+          if (arg != null) {
+              Object.keys(arg).forEach(function (key) {
+                  to[key] = arg[key];
+              });
+          }
+      });
+      return to;
+  };
+  var id = 0;
+  var idTemplate = '{id}';
+  var uniqId = function () {
+      if (id >= 9999) {
+          id = 0;
+          idTemplate = idTemplate.replace('{id}', '_{id}');
+      }
+      id++;
+      var newId = idTemplate.replace('{id}', String(id));
+      return newId;
+  };
+  var find = function (arrayLike, predicate) {
+      var array = Array.isArray(arrayLike) ? arrayLike : toArray(arrayLike);
+      for (var i = 0;i < array.length; i++) {
+          if (predicate(array[i])) {
+              return array[i];
+          }
+      }
+      return undefined;
+  };
+  var isBuiltInComponent = function (vnode) {
+      if (!vnode) {
+          return false;
+      }
+      var tag = vnode.componentOptions.tag;
+      return /keep-alive|transition|transition-group/.test(tag);
+  };
+  var makeEventsArray = function (events) { return typeof events === 'string' && events.length ? events.split('|') : []; };
+  var makeDelayObject = function (events, delay, delayConfig) {
+      if (typeof delay === 'number') {
+          return events.reduce(function (prev, e) {
+              prev[e] = delay;
+              return prev;
+          }, {});
+      }
+      return events.reduce(function (prev, e) {
+          if (typeof delay === 'object' && e in delay) {
+              prev[e] = delay[e];
+              return prev;
+          }
+          if (typeof delayConfig === 'number') {
+              prev[e] = delayConfig;
+              return prev;
+          }
+          prev[e] = delayConfig && delayConfig[e] || 0;
+          return prev;
+      }, {});
+  };
+  var deepParseInt = function (input) {
+      if (typeof input === 'number') 
+          { return input; }
+      if (typeof input === 'string') 
+          { return parseInt(input); }
+      var map = {};
+      for (var element in input) {
+          map[element] = parseInt(input[element]);
+      }
+      return map;
+  };
+  var merge$2 = function (target, source) {
+      if (!(isObject(target) && isObject(source))) {
+          return target;
+      }
+      Object.keys(source).forEach(function (key) {
+          var obj, obj$1;
+
+          if (isObject(source[key])) {
+              if (!target[key]) {
+                  assign(target, ( obj = {}, obj[key] = {}, obj ));
+              }
+              merge$2(target[key], source[key]);
+              return;
+          }
+          assign(target, ( obj$1 = {}, obj$1[key] = source[key], obj$1 ));
+      });
+      return target;
+  };
+
+  function ip (value, ref) {
+      if ( ref === void 0 ) ref = [];
+      var version = ref[0]; if ( version === void 0 ) version = 4;
+
+      if (isNullOrUndefined(value)) {
+          value = '';
+      }
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return isIP(val, version); });
+      }
+      return isIP(value, version);
+  }
+
+  function is (value, ref) {
+  	if ( ref === void 0 ) ref = [];
+  	var other = ref[0];
+
+  	return value === other;
+  }
+
+  function is_not (value, ref) {
+  	if ( ref === void 0 ) ref = [];
+  	var other = ref[0];
+
+  	return value !== other;
+  }
+
+  var compare = function (value, length, max) {
+      if (max === undefined) {
+          return value.length === length;
+      }
+      max = Number(max);
+      return value.length >= length && value.length <= max;
+  };
+  function length (value, ref) {
+      var length = ref[0];
+      var max = ref[1]; if ( max === void 0 ) max = undefined;
+
+      length = Number(length);
+      if (value === undefined || value === null) {
+          return false;
+      }
+      if (typeof value === 'number') {
+          value = String(value);
+      }
+      if (!value.length) {
+          value = toArray(value);
+      }
+      return compare(value, length, max);
+  }
+
+  function integer (value) {
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return /^-?[0-9]+$/.test(String(val)); });
+      }
+      return /^-?[0-9]+$/.test(String(value));
+  }
+
+  function max$1 (value, ref) {
+      var length = ref[0];
+
+      if (value === undefined || value === null) {
+          return length >= 0;
+      }
+      return String(value).length <= length;
+  }
+
+  function max_value (value, ref) {
+      var max = ref[0];
+
+      if (Array.isArray(value) || value === null || value === undefined || value === '') {
+          return false;
+      }
+      return Number(value) <= max;
+  }
+
+  function mimes (files, mimes) {
+      var regex = new RegExp(((mimes.join('|').replace('*', '.+')) + "$"), 'i');
+      return files.every(function (file) { return regex.test(file.type); });
+  }
+
+  function min$1 (value, ref) {
+      var length = ref[0];
+
+      if (value === undefined || value === null) {
+          return false;
+      }
+      return String(value).length >= length;
+  }
+
+  function min_value (value, ref) {
+      var min = ref[0];
+
+      if (Array.isArray(value) || value === null || value === undefined || value === '') {
+          return false;
+      }
+      return Number(value) >= min;
+  }
+
+  var validate$9 = function (value, options) {
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return validate$9(val, options); });
+      }
+      return !options.filter(function (option) { return option == value; }).length;
+  };
+
+  function numeric (value) {
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return /^[0-9]+$/.test(String(val)); });
+      }
+      return /^[0-9]+$/.test(String(value));
+  }
+
+  function regex (value, ref) {
+      var regex = ref[0];
+      var flags = ref.slice(1);
+
+      if (regex instanceof RegExp) {
+          return regex.test(value);
+      }
+      return new RegExp(regex, flags).test(String(value));
+  }
+
+  function required (value, ref) {
+      if ( ref === void 0 ) ref = [];
+      var invalidateFalse = ref[0]; if ( invalidateFalse === void 0 ) invalidateFalse = false;
+
+      if (Array.isArray(value)) {
+          return !(!value.length);
+      }
+      if (value === false && invalidateFalse) {
+          return false;
+      }
+      if (value === undefined || value === null) {
+          return false;
+      }
+      return !(!String(value).trim().length);
+  }
+
+  function size (files, ref) {
+      var size = ref[0];
+
+      if (isNaN(size)) {
+          return false;
+      }
+      var nSize = Number(size) * 1024;
+      for (var i = 0;i < files.length; i++) {
+          if (files[i].size > nSize) {
+              return false;
+          }
+      }
+      return true;
+  }
+
+  var isURL_1 = createCommonjsModule(function (module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+          value: true
+      });
+      exports.default = isURL;
+      var _assertString2 = _interopRequireDefault(_assertString);
+      var _isFQDN2 = _interopRequireDefault(_isFQDN);
+      var _isIP2 = _interopRequireDefault(isIP_1);
+      var _merge2 = _interopRequireDefault(_merge);
+      function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {
+              default: obj
+          };
+      }
+      
+      var default_url_options = {
+          protocols: ['http','https','ftp'],
+          require_tld: true,
+          require_protocol: false,
+          require_host: true,
+          require_valid_protocol: true,
+          allow_underscores: false,
+          allow_trailing_dot: false,
+          allow_protocol_relative_urls: false
+      };
+      var wrapped_ipv6 = /^\[([^\]]+)\](?::([0-9]+))?$/;
+      function isRegExp(obj) {
+          return Object.prototype.toString.call(obj) === '[object RegExp]';
+      }
+      
+      function checkHost(host, matches) {
+          for (var i = 0;i < matches.length; i++) {
+              var match = matches[i];
+              if (host === match || isRegExp(match) && match.test(host)) {
+                  return true;
+              }
+          }
+          return false;
+      }
+      
+      function isURL(url, options) {
+          (0, _assertString2.default)(url);
+          if (!url || url.length >= 2083 || /[\s<>]/.test(url)) {
+              return false;
+          }
+          if (url.indexOf('mailto:') === 0) {
+              return false;
+          }
+          options = (0, _merge2.default)(options, default_url_options);
+          var protocol = void 0, auth = void 0, host = void 0, hostname = void 0, port = void 0, port_str = void 0, split = void 0, ipv6 = void 0;
+          split = url.split('#');
+          url = split.shift();
+          split = url.split('?');
+          url = split.shift();
+          split = url.split('://');
+          if (split.length > 1) {
+              protocol = split.shift();
+              if (options.require_valid_protocol && options.protocols.indexOf(protocol) === -1) {
+                  return false;
+              }
+          } else if (options.require_protocol) {
+              return false;
+          } else if (options.allow_protocol_relative_urls && url.substr(0, 2) === '//') {
+              split[0] = url.substr(2);
+          }
+          url = split.join('://');
+          if (url === '') {
+              return false;
+          }
+          split = url.split('/');
+          url = split.shift();
+          if (url === '' && !options.require_host) {
+              return true;
+          }
+          split = url.split('@');
+          if (split.length > 1) {
+              auth = split.shift();
+              if (auth.indexOf(':') >= 0 && auth.split(':').length > 2) {
+                  return false;
+              }
+          }
+          hostname = split.join('@');
+          port_str = null;
+          ipv6 = null;
+          var ipv6_match = hostname.match(wrapped_ipv6);
+          if (ipv6_match) {
+              host = '';
+              ipv6 = ipv6_match[1];
+              port_str = ipv6_match[2] || null;
+          } else {
+              split = hostname.split(':');
+              host = split.shift();
+              if (split.length) {
+                  port_str = split.join(':');
+              }
+          }
+          if (port_str !== null) {
+              port = parseInt(port_str, 10);
+              if (!/^[0-9]+$/.test(port_str) || port <= 0 || port > 65535) {
+                  return false;
+              }
+          }
+          if (!(0, _isIP2.default)(host) && !(0, _isFQDN2.default)(host, options) && (!ipv6 || !(0, _isIP2.default)(ipv6, 6))) {
+              return false;
+          }
+          host = host || ipv6;
+          if (options.host_whitelist && !checkHost(host, options.host_whitelist)) {
+              return false;
+          }
+          if (options.host_blacklist && checkHost(host, options.host_blacklist)) {
+              return false;
+          }
+          return true;
+      }
+      
+      module.exports = exports['default'];
+  });
+  var isURL = unwrapExports(isURL_1)
+
+  function url (value, ref) {
+      if ( ref === void 0 ) ref = [];
+      var requireProtocol = ref[0]; if ( requireProtocol === void 0 ) requireProtocol = false;
+
+      var options = {
+          require_protocol: !(!requireProtocol),
+          allow_underscores: true
+      };
+      if (isNullOrUndefined(value)) {
+          value = '';
+      }
+      if (Array.isArray(value)) {
+          return value.every(function (val) { return isURL(val, options); });
+      }
+      return isURL(value, options);
+  }
+
+  var Rules = {
+      after: after,
+      alpha_dash: validate$1,
+      alpha_num: validate$2,
+      alpha_spaces: validate$3,
+      alpha: validate,
+      before: before,
+      between: validate$4,
+      confirmed: confirmed,
+      credit_card: credit_card,
+      date_between: date_between,
+      date_format: date_format,
+      decimal: validate$5,
+      digits: validate$6,
+      dimensions: dimensions,
+      email: validate$7,
+      ext: ext,
+      image: image,
+      in: validate$8,
+      integer: integer,
+      length: length,
+      ip: ip,
+      is_not: is_not,
+      is: is,
+      max: max$1,
+      max_value: max_value,
+      mimes: mimes,
+      min: min$1,
+      min_value: min_value,
+      not_in: validate$9,
+      numeric: numeric,
+      regex: regex,
+      required: required,
+      size: size,
+      url: url
+  }
+
+  var formatFileSize = function (size) {
+      var units = ['Byte','KB','MB','GB','TB','PB','EB','ZB','YB'];
+      var threshold = 1024;
+      size = Number(size) * threshold;
+      var i = size === 0 ? 0 : Math.floor(Math.log(size) / Math.log(threshold));
+      return (((size / Math.pow(threshold, i)).toFixed(2) * 1) + " " + (units[i]));
+  };
+  var isDefinedGlobally = function () { return typeof VeeValidate !== 'undefined'; };
+
+  var obj;
+  var messages = {
+      _default: function (field) { return ("The " + field + " value is not valid."); },
+      after: function (field, ref) {
+          var target = ref[0];
+          var inclusion = ref[1];
+
+          return ("The " + field + " must be after " + (inclusion ? 'or equal to ' : '') + target + ".");
+  },
+      alpha_dash: function (field) { return ("The " + field + " field may contain alpha-numeric characters as well as dashes and underscores."); },
+      alpha_num: function (field) { return ("The " + field + " field may only contain alpha-numeric characters."); },
+      alpha_spaces: function (field) { return ("The " + field + " field may only contain alphabetic characters as well as spaces."); },
+      alpha: function (field) { return ("The " + field + " field may only contain alphabetic characters."); },
+      before: function (field, ref) {
+          var target = ref[0];
+          var inclusion = ref[1];
+
+          return ("The " + field + " must be before " + (inclusion ? 'or equal to ' : '') + target + ".");
+  },
+      between: function (field, ref) {
+          var min = ref[0];
+          var max = ref[1];
+
+          return ("The " + field + " field must be between " + min + " and " + max + ".");
+  },
+      confirmed: function (field) { return ("The " + field + " confirmation does not match."); },
+      credit_card: function (field) { return ("The " + field + " field is invalid."); },
+      date_between: function (field, ref) {
+          var min = ref[0];
+          var max = ref[1];
+
+          return ("The " + field + " must be between " + min + " and " + max + ".");
+  },
+      date_format: function (field, ref) {
+          var format = ref[0];
+
+          return ("The " + field + " must be in the format " + format + ".");
+  },
+      decimal: function (field, ref) {
+          if ( ref === void 0 ) ref = [];
+          var decimals = ref[0]; if ( decimals === void 0 ) decimals = '*';
+
+          return ("The " + field + " field must be numeric and may contain " + (!decimals || decimals === '*' ? '' : decimals) + " decimal points.");
+  },
+      digits: function (field, ref) {
+          var length = ref[0];
+
+          return ("The " + field + " field must be numeric and exactly contain " + length + " digits.");
+  },
+      dimensions: function (field, ref) {
+          var width = ref[0];
+          var height = ref[1];
+
+          return ("The " + field + " field must be " + width + " pixels by " + height + " pixels.");
+  },
+      email: function (field) { return ("The " + field + " field must be a valid email."); },
+      ext: function (field) { return ("The " + field + " field must be a valid file."); },
+      image: function (field) { return ("The " + field + " field must be an image."); },
+      in: function (field) { return ("The " + field + " field must be a valid value."); },
+      integer: function (field) { return ("The " + field + " field must be an integer."); },
+      ip: function (field) { return ("The " + field + " field must be a valid ip address."); },
+      length: function (field, ref) {
+          var length = ref[0];
+          var max = ref[1];
+
+          if (max) {
+              return ("The " + field + " length must be between " + length + " and " + max + ".");
+          }
+          return ("The " + field + " length must be " + length + ".");
+      },
+      max: function (field, ref) {
+          var length = ref[0];
+
+          return ("The " + field + " field may not be greater than " + length + " characters.");
+  },
+      max_value: function (field, ref) {
+          var max = ref[0];
+
+          return ("The " + field + " field must be " + max + " or less.");
+  },
+      mimes: function (field) { return ("The " + field + " field must have a valid file type."); },
+      min: function (field, ref) {
+          var length = ref[0];
+
+          return ("The " + field + " field must be at least " + length + " characters.");
+  },
+      min_value: function (field, ref) {
+          var min = ref[0];
+
+          return ("The " + field + " field must be " + min + " or more.");
+  },
+      not_in: function (field) { return ("The " + field + " field must be a valid value."); },
+      numeric: function (field) { return ("The " + field + " field may only contain numeric characters."); },
+      regex: function (field) { return ("The " + field + " field format is invalid."); },
+      required: function (field) { return ("The " + field + " field is required."); },
+      size: function (field, ref) {
+          var size = ref[0];
+
+          return ("The " + field + " size must be less than " + (formatFileSize(size)) + ".");
+  },
+      url: function (field) { return ("The " + field + " field is not a valid URL."); }
+  };
+  var locale$1 = {
+      name: 'en',
+      messages: messages,
+      attributes: {}
+  };
+  if (isDefinedGlobally()) {
+      VeeValidate.Validator.localize(( obj = {}, obj[locale$1.name] = locale$1, obj ));
+  }
+
+  var ErrorBag = function ErrorBag() {
+      this.items = [];
+  };
+  ErrorBag.prototype[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'] = function () {
+          var this$1 = this;
+
+      var index = 0;
+      return {
+          next: function () { return ({
+              value: this$1.items[index++],
+              done: index > this$1.items.length
+          }); }
+      };
+  };
+  ErrorBag.prototype.add = function add (error) {
+          var ref;
+
+      if (arguments.length > 1) {
+          error = {
+              field: arguments[0],
+              msg: arguments[1],
+              rule: arguments[2],
+              scope: !isNullOrUndefined(arguments[3]) ? arguments[3] : null,
+              regenerate: null
+          };
+      }
+      (ref = this.items).push.apply(ref, this._normalizeError(error));
+  };
+  ErrorBag.prototype._normalizeError = function _normalizeError (error) {
+      if (Array.isArray(error)) {
+          return error.map(function (e) {
+              e.scope = !isNullOrUndefined(e.scope) ? e.scope : null;
+              return e;
+          });
+      }
+      error.scope = !isNullOrUndefined(error.scope) ? error.scope : null;
+      return [error];
+  };
+  ErrorBag.prototype.regenerate = function regenerate () {
+      this.items.forEach(function (i) {
+          i.msg = isCallable(i.regenerate) ? i.regenerate() : i.msg;
+      });
+  };
+  ErrorBag.prototype.update = function update (id, error) {
+      var item = find(this.items, function (i) { return i.id === id; });
+      if (!item) {
+          return;
+      }
+      var idx = this.items.indexOf(item);
+      this.items.splice(idx, 1);
+      item.scope = error.scope;
+      this.items.push(item);
+  };
+  ErrorBag.prototype.all = function all (scope) {
+      if (isNullOrUndefined(scope)) {
+          return this.items.map(function (e) { return e.msg; });
+      }
+      return this.items.filter(function (e) { return e.scope === scope; }).map(function (e) { return e.msg; });
+  };
+  ErrorBag.prototype.any = function any (scope) {
+      if (isNullOrUndefined(scope)) {
+          return !(!this.items.length);
+      }
+      return !(!this.items.filter(function (e) { return e.scope === scope; }).length);
+  };
+  ErrorBag.prototype.clear = function clear (scope) {
+          var this$1 = this;
+
+      if (isNullOrUndefined(scope)) {
+          scope = null;
+      }
+      for (var i = 0;i < this.items.length; ++i) {
+          if (this$1.items[i].scope === scope) {
+              this$1.items.splice(i, 1);
+              --i;
+          }
+      }
+  };
+  ErrorBag.prototype.collect = function collect (field, scope, map) {
+          if ( map === void 0 ) map = true;
+
+      if (!field) {
+          var collection = {};
+          this.items.forEach(function (e) {
+              if (!collection[e.field]) {
+                  collection[e.field] = [];
+              }
+              collection[e.field].push(map ? e.msg : e);
+          });
+          return collection;
+      }
+      field = !isNullOrUndefined(field) ? String(field) : field;
+      if (isNullOrUndefined(scope)) {
+          return this.items.filter(function (e) { return e.field === field; }).map(function (e) { return map ? e.msg : e; });
+      }
+      return this.items.filter(function (e) { return e.field === field && e.scope === scope; }).map(function (e) { return map ? e.msg : e; });
+  };
+  ErrorBag.prototype.count = function count () {
+      return this.items.length;
+  };
+  ErrorBag.prototype.firstById = function firstById (id) {
+      var error = find(this.items, function (i) { return i.id === id; });
+      return error ? error.msg : null;
+  };
+  ErrorBag.prototype.first = function first (field, scope) {
+          var this$1 = this;
+          if ( scope === void 0 ) scope = null;
+
+      if (isNullOrUndefined(field)) {
+          return null;
+      }
+      field = String(field);
+      var selector = this._selector(field);
+      var scoped = this._scope(field);
+      if (scoped) {
+          var result = this.first(scoped.name, scoped.scope);
+          if (result) {
+              return result;
+          }
+      }
+      if (selector) {
+          return this.firstByRule(selector.name, selector.rule, scope);
+      }
+      for (var i = 0;i < this.items.length; ++i) {
+          if (this$1.items[i].field === field && this$1.items[i].scope === scope) {
+              return this$1.items[i].msg;
+          }
+      }
+      return null;
+  };
+  ErrorBag.prototype.firstRule = function firstRule (field, scope) {
+      var errors = this.collect(field, scope, false);
+      return errors.length && errors[0].rule || null;
+  };
+  ErrorBag.prototype.has = function has (field, scope) {
+          if ( scope === void 0 ) scope = null;
+
+      return !(!this.first(field, scope));
+  };
+  ErrorBag.prototype.firstByRule = function firstByRule (name, rule, scope) {
+          if ( scope === void 0 ) scope = null;
+
+      var error = this.collect(name, scope, false).filter(function (e) { return e.rule === rule; })[0];
+      return error && error.msg || null;
+  };
+  ErrorBag.prototype.firstNot = function firstNot (name, rule, scope) {
+          if ( rule === void 0 ) rule = 'required';
+          if ( scope === void 0 ) scope = null;
+
+      var error = this.collect(name, scope, false).filter(function (e) { return e.rule !== rule; })[0];
+      return error && error.msg || null;
+  };
+  ErrorBag.prototype.removeById = function removeById (id) {
+          var this$1 = this;
+
+      if (Array.isArray(id)) {
+          this.items = this.items.filter(function (i) { return id.indexOf(i.id) === -1; });
+          return;
+      }
+      for (var i = 0;i < this.items.length; ++i) {
+          if (this$1.items[i].id === id) {
+              this$1.items.splice(i, 1);
+              --i;
+          }
+      }
+  };
+  ErrorBag.prototype.remove = function remove (field, scope) {
+          var this$1 = this;
+
+      field = !isNullOrUndefined(field) ? String(field) : field;
+      var removeCondition = function (e) {
+          if (!isNullOrUndefined(scope)) {
+              return e.field === field && e.scope === scope;
+          }
+          return e.field === field && e.scope === null;
+      };
+      for (var i = 0;i < this.items.length; ++i) {
+          if (removeCondition(this$1.items[i])) {
+              this$1.items.splice(i, 1);
+              --i;
+          }
+      }
+  };
+  ErrorBag.prototype._selector = function _selector (field) {
+      if (field.indexOf(':') > -1) {
+          var ref = field.split(':');
+              var name = ref[0];
+              var rule = ref[1];
+          return {
+              name: name,
+              rule: rule
+          };
+      }
+      return null;
+  };
+  ErrorBag.prototype._scope = function _scope (field) {
+      if (field.indexOf('.') > -1) {
+          var ref = field.split('.');
+              var scope = ref[0];
+              var name = ref.slice(1);
+          return {
+              name: name.join('.'),
+              scope: scope
+          };
+      }
+      return null;
+  };
+
+  var LOCALE = 'en';
+  var Dictionary = function Dictionary(dictionary) {
+      if ( dictionary === void 0 ) dictionary = {};
+
+      this.container = {};
+      this.merge(dictionary);
+  };
+
+  var prototypeAccessors = { locale: { configurable: true } };
+  prototypeAccessors.locale.get = function () {
+      return LOCALE;
+  };
+  prototypeAccessors.locale.set = function (value) {
+      LOCALE = value || 'en';
+  };
+  Dictionary.prototype.hasLocale = function hasLocale (locale) {
+      return !(!this.container[locale]);
+  };
+  Dictionary.prototype.setDateFormat = function setDateFormat (locale, format) {
+      if (!this.container[locale]) {
+          this.container[locale] = {};
+      }
+      this.container[locale].dateFormat = format;
+  };
+  Dictionary.prototype.getDateFormat = function getDateFormat (locale) {
+      if (!this.container[locale] || !this.container[locale].dateFormat) {
+          return null;
+      }
+      return this.container[locale].dateFormat;
+  };
+  Dictionary.prototype.getMessage = function getMessage (locale, key, data) {
+      var message = null;
+      if (!this.hasMessage(locale, key)) {
+          message = this._getDefaultMessage(locale);
+      } else {
+          message = this.container[locale].messages[key];
+      }
+      return isCallable(message) ? message.apply(void 0, data) : message;
+  };
+  Dictionary.prototype.getFieldMessage = function getFieldMessage (locale, field, key, data) {
+      if (!this.hasLocale(locale)) {
+          return this.getMessage(locale, key, data);
+      }
+      var dict = this.container[locale].custom && this.container[locale].custom[field];
+      if (!dict || !dict[key]) {
+          return this.getMessage(locale, key, data);
+      }
+      var message = dict[key];
+      return isCallable(message) ? message.apply(void 0, data) : message;
+  };
+  Dictionary.prototype._getDefaultMessage = function _getDefaultMessage (locale) {
+      if (this.hasMessage(locale, '_default')) {
+          return this.container[locale].messages._default;
+      }
+      return this.container.en.messages._default;
+  };
+  Dictionary.prototype.getAttribute = function getAttribute (locale, key, fallback) {
+          if ( fallback === void 0 ) fallback = '';
+
+      if (!this.hasAttribute(locale, key)) {
+          return fallback;
+      }
+      return this.container[locale].attributes[key];
+  };
+  Dictionary.prototype.hasMessage = function hasMessage (locale, key) {
+      return !(!(this.hasLocale(locale) && this.container[locale].messages && this.container[locale].messages[key]));
+  };
+  Dictionary.prototype.hasAttribute = function hasAttribute (locale, key) {
+      return !(!(this.hasLocale(locale) && this.container[locale].attributes && this.container[locale].attributes[key]));
+  };
+  Dictionary.prototype.merge = function merge$1 (dictionary) {
+      merge$2(this.container, dictionary);
+  };
+  Dictionary.prototype.setMessage = function setMessage (locale, key, message) {
+      if (!this.hasLocale(locale)) {
+          this.container[locale] = {
+              messages: {},
+              attributes: {}
+          };
+      }
+      this.container[locale].messages[key] = message;
+  };
+  Dictionary.prototype.setAttribute = function setAttribute (locale, key, attribute) {
+      if (!this.hasLocale(locale)) {
+          this.container[locale] = {
+              messages: {},
+              attributes: {}
+          };
+      }
+      this.container[locale].attributes[key] = attribute;
+  };
+
+  Object.defineProperties( Dictionary.prototype, prototypeAccessors );
+
+  var normalizeValue = function (value) {
+      if (isObject(value)) {
+          return Object.keys(value).reduce(function (prev, key) {
+              prev[key] = normalizeValue(value[key]);
+              return prev;
+          }, {});
+      }
+      if (isCallable(value)) {
+          return value('{0}', ['{1}','{2}','{3}']);
+      }
+      return value;
+  };
+  var normalizeFormat = function (locale) {
+      var messages = normalizeValue(locale.messages);
+      var custom = normalizeValue(locale.custom);
+      return {
+          messages: messages,
+          custom: custom,
+          attributes: locale.attributes,
+          dateFormat: locale.dateFormat
+      };
+  };
+  var I18nDictionary = function I18nDictionary(i18n, rootKey) {
+      this.i18n = i18n;
+      this.rootKey = rootKey;
+  };
+
+  var prototypeAccessors$1 = { locale: { configurable: true } };
+  prototypeAccessors$1.locale.get = function () {
+      return this.i18n.locale;
+  };
+  prototypeAccessors$1.locale.set = function (value) {
+      warn('Cannot set locale from the validator when using vue-i18n, use i18n.locale setter instead');
+  };
+  I18nDictionary.prototype.getDateFormat = function getDateFormat (locale) {
+      return this.i18n.getDateTimeFormat(locale || this.locale);
+  };
+  I18nDictionary.prototype.setDateFormat = function setDateFormat (locale, value) {
+      this.i18n.setDateTimeFormat(locale || this.locale, value);
+  };
+  I18nDictionary.prototype.getMessage = function getMessage (locale, key, data) {
+      var path = (this.rootKey) + ".messages." + key;
+      if (!this.i18n.te(path)) {
+          return this.i18n.t(((this.rootKey) + ".messages._default"), locale, data);
+      }
+      return this.i18n.t(path, locale, data);
+  };
+  I18nDictionary.prototype.getAttribute = function getAttribute (locale, key, fallback) {
+          if ( fallback === void 0 ) fallback = '';
+
+      var path = (this.rootKey) + ".attributes." + key;
+      if (!this.i18n.te(path)) {
+          return fallback;
+      }
+      return this.i18n.t(path, locale);
+  };
+  I18nDictionary.prototype.getFieldMessage = function getFieldMessage (locale, field, key, data) {
+      var path = (this.rootKey) + ".custom." + field + "." + key;
+      if (this.i18n.te(path)) {
+          return this.i18n.t(path);
+      }
+      return this.getMessage(locale, key, data);
+  };
+  I18nDictionary.prototype.merge = function merge$1 (dictionary) {
+          var this$1 = this;
+
+      Object.keys(dictionary).forEach(function (localeKey) {
+              var obj;
+
+          var clone = merge$2({}, getPath((localeKey + "." + (this$1.rootKey)), this$1.i18n.messages, {}));
+          var locale = merge$2(clone, normalizeFormat(dictionary[localeKey]));
+          this$1.i18n.mergeLocaleMessage(localeKey, ( obj = {}, obj[this$1.rootKey] = locale, obj ));
+          if (locale.dateFormat) {
+              this$1.i18n.setDateTimeFormat(localeKey, locale.dateFormat);
+          }
+      });
+  };
+  I18nDictionary.prototype.setMessage = function setMessage (locale, key, value) {
+          var obj, obj$1;
+
+      this.merge(( obj$1 = {}, obj$1[locale] = {
+              messages: ( obj = {}, obj[key] = value, obj )
+          }, obj$1 ));
+  };
+  I18nDictionary.prototype.setAttribute = function setAttribute (locale, key, value) {
+          var obj, obj$1;
+
+      this.merge(( obj$1 = {}, obj$1[locale] = {
+              attributes: ( obj = {}, obj[key] = value, obj )
+          }, obj$1 ));
+  };
+
+  Object.defineProperties( I18nDictionary.prototype, prototypeAccessors$1 );
+
+  var defaultConfig = {
+      locale: 'en',
+      delay: 0,
+      errorBagName: 'errors',
+      dictionary: null,
+      strict: true,
+      fieldsBagName: 'fields',
+      classes: false,
+      classNames: null,
+      events: 'input|blur',
+      inject: true,
+      fastExit: true,
+      aria: true,
+      validity: false,
+      i18n: null,
+      i18nRootKey: 'validation'
+  };
+  var currentConfig = assign({}, defaultConfig);
+  var dependencies = {
+      dictionary: new Dictionary({
+          en: {
+              messages: {},
+              attributes: {},
+              custom: {}
+          }
+      })
+  };
+  var Config = function Config () {};
+
+  var staticAccessors = { default: { configurable: true },current: { configurable: true } };
+
+  staticAccessors.default.get = function () {
+      return defaultConfig;
+  };
+  staticAccessors.current.get = function () {
+      return currentConfig;
+  };
+  Config.dependency = function dependency (key) {
+      return dependencies[key];
+  };
+  Config.merge = function merge (config) {
+      currentConfig = assign({}, currentConfig, config);
+      if (currentConfig.i18n) {
+          Config.register('dictionary', new I18nDictionary(currentConfig.i18n, currentConfig.i18nRootKey));
+      }
+  };
+  Config.register = function register (key, value) {
+      dependencies[key] = value;
+  };
+  Config.resolve = function resolve (context) {
+      var selfConfig = getPath('$options.$_veeValidate', context, {});
+      return assign({}, Config.current, selfConfig);
+  };
+
+  Object.defineProperties( Config, staticAccessors );
+
+  var Generator = function Generator () {};
+
+  Generator.generate = function generate (el, binding, vnode) {
+      var model = Generator.resolveModel(binding, vnode);
+      var options = Config.resolve(vnode.context);
+      return {
+          name: Generator.resolveName(el, vnode),
+          el: el,
+          listen: !binding.modifiers.disable,
+          scope: Generator.resolveScope(el, binding, vnode),
+          vm: Generator.makeVM(vnode.context),
+          expression: binding.value,
+          component: vnode.componentInstance,
+          classes: options.classes,
+          classNames: options.classNames,
+          getter: Generator.resolveGetter(el, vnode, model),
+          events: Generator.resolveEvents(el, vnode) || options.events,
+          model: model,
+          delay: Generator.resolveDelay(el, vnode, options),
+          rules: Generator.resolveRules(el, binding),
+          initial: !(!binding.modifiers.initial),
+          validity: options.validity,
+          aria: options.aria,
+          initialValue: Generator.resolveInitialValue(vnode)
+      };
+  };
+  Generator.getCtorConfig = function getCtorConfig (vnode) {
+      if (!vnode.componentInstance) 
+          { return null; }
+      var config = getPath('componentInstance.$options.$_veeValidate', vnode);
+      return config;
+  };
+  Generator.resolveRules = function resolveRules (el, binding) {
+      if (!binding.value && (!binding || !binding.expression)) {
+          return getDataAttribute(el, 'rules');
+      }
+      if (binding.value && ~['string','object'].indexOf(typeof binding.value.rules)) {
+          return binding.value.rules;
+      }
+      return binding.value;
+  };
+  Generator.resolveInitialValue = function resolveInitialValue (vnode) {
+      var model = vnode.data.model || find(vnode.data.directives, function (d) { return d.name === 'model'; });
+      return model && model.value;
+  };
+  Generator.makeVM = function makeVM (vm) {
+      return {
+          get $el() {
+              return vm.$el;
+          },
+          get $refs() {
+              return vm.$refs;
+          },
+          $watch: vm.$watch ? vm.$watch.bind(vm) : function () {},
+          $validator: vm.$validator ? {
+              errors: vm.$validator.errors,
+              validate: vm.$validator.validate.bind(vm.$validator),
+              update: vm.$validator.update.bind(vm.$validator)
+          } : null
+      };
+  };
+  Generator.resolveDelay = function resolveDelay (el, vnode, options) {
+      var delay = getDataAttribute(el, 'delay');
+      var globalDelay = options && 'delay' in options ? options.delay : 0;
+      if (!delay && vnode.componentInstance && vnode.componentInstance.$attrs) {
+          delay = vnode.componentInstance.$attrs['data-vv-delay'];
+      }
+      if (!isObject(globalDelay)) {
+          return deepParseInt(delay || globalDelay);
+      }
+      if (!isNullOrUndefined(delay)) {
+          globalDelay.input = delay;
+      }
+      return deepParseInt(globalDelay);
+  };
+  Generator.resolveEvents = function resolveEvents (el, vnode) {
+      var events = getDataAttribute(el, 'validate-on');
+      if (!events && vnode.componentInstance && vnode.componentInstance.$attrs) {
+          events = vnode.componentInstance.$attrs['data-vv-validate-on'];
+      }
+      if (!events && vnode.componentInstance) {
+          var config = Generator.getCtorConfig(vnode);
+          events = config && config.events;
+      }
+      return events;
+  };
+  Generator.resolveScope = function resolveScope (el, binding, vnode) {
+          if ( vnode === void 0 ) vnode = {};
+
+      var scope = null;
+      if (vnode.componentInstance && isNullOrUndefined(scope)) {
+          scope = vnode.componentInstance.$attrs && vnode.componentInstance.$attrs['data-vv-scope'];
+      }
+      return !isNullOrUndefined(scope) ? scope : getScope(el);
+  };
+  Generator.resolveModel = function resolveModel (binding, vnode) {
+      if (binding.arg) {
+          return {
+              expression: binding.arg
+          };
+      }
+      var model = vnode.data.model || find(vnode.data.directives, function (d) { return d.name === 'model'; });
+      if (!model) {
+          return null;
+      }
+      var watchable = !/[^\w.$]/.test(model.expression) && hasPath(model.expression, vnode.context);
+      var lazy = !(!(model.modifiers && model.modifiers.lazy));
+      if (!watchable) {
+          return {
+              expression: null,
+              lazy: lazy
+          };
+      }
+      return {
+          expression: model.expression,
+          lazy: lazy
+      };
+  };
+  Generator.resolveName = function resolveName (el, vnode) {
+      var name = getDataAttribute(el, 'name');
+      if (!name && !vnode.componentInstance) {
+          return el.name;
+      }
+      if (!name && vnode.componentInstance && vnode.componentInstance.$attrs) {
+          name = vnode.componentInstance.$attrs['data-vv-name'] || vnode.componentInstance.$attrs['name'];
+      }
+      if (!name && vnode.componentInstance) {
+          var config = Generator.getCtorConfig(vnode);
+          if (config && isCallable(config.name)) {
+              var boundGetter = config.name.bind(vnode.componentInstance);
+              return boundGetter();
+          }
+          return vnode.componentInstance.name;
+      }
+      return name;
+  };
+  Generator.resolveGetter = function resolveGetter (el, vnode, model) {
+      if (model && model.expression) {
+          return function () { return getPath(model.expression, vnode.context); };
+      }
+      if (vnode.componentInstance) {
+          var path = getDataAttribute(el, 'value-path') || vnode.componentInstance.$attrs && vnode.componentInstance.$attrs['data-vv-value-path'];
+          if (path) {
+              return function () { return getPath(path, vnode.componentInstance); };
+          }
+          var config = Generator.getCtorConfig(vnode);
+          if (config && isCallable(config.value)) {
+              var boundGetter = config.value.bind(vnode.componentInstance);
+              return function () { return boundGetter(); };
+          }
+          return function () { return vnode.componentInstance.value; };
+      }
+      switch (el.type) {
+          case 'checkbox':
+              return function () {
+                  var els = document.querySelectorAll(("input[name=\"" + (el.name) + "\"]"));
+                  els = toArray(els).filter(function (el) { return el.checked; });
+                  if (!els.length) 
+                      { return undefined; }
+                  return els.map(function (checkbox) { return checkbox.value; });
+              };
+          case 'radio':
+              return function () {
+                  var els = document.querySelectorAll(("input[name=\"" + (el.name) + "\"]"));
+                  var elm = find(els, function (el) { return el.checked; });
+                  return elm && elm.value;
+              };
+          case 'file':
+              return function (context) { return toArray(el.files); };
+          case 'select-multiple':
+              return function () { return toArray(el.options).filter(function (opt) { return opt.selected; }).map(function (opt) { return opt.value; }); };
+          default:
+              return function () { return el && el.value; };
+      }
+  };
+
+  var DEFAULT_OPTIONS = {
+      targetOf: null,
+      initial: false,
+      scope: null,
+      listen: true,
+      name: null,
+      rules: {},
+      vm: null,
+      classes: false,
+      validity: true,
+      aria: true,
+      events: 'input|blur',
+      delay: 0,
+      classNames: {
+          touched: 'touched',
+          untouched: 'untouched',
+          valid: 'valid',
+          invalid: 'invalid',
+          pristine: 'pristine',
+          dirty: 'dirty'
+      }
+  };
+  var Field = function Field(options) {
+      if ( options === void 0 ) options = {};
+
+      this.id = uniqId();
+      this.el = options.el;
+      this.updated = false;
+      this.dependencies = [];
+      this.watchers = [];
+      this.events = [];
+      this.delay = 0;
+      this.rules = {};
+      this._cacheId(options);
+      this.classNames = assign({}, DEFAULT_OPTIONS.classNames);
+      options = assign({}, DEFAULT_OPTIONS, options);
+      this._delay = !isNullOrUndefined(options.delay) ? options.delay : 0;
+      this.validity = options.validity;
+      this.aria = options.aria;
+      this.flags = createFlags();
+      this.vm = options.vm;
+      this.component = options.component;
+      this.ctorConfig = this.component ? getPath('$options.$_veeValidate', this.component) : undefined;
+      this.update(options);
+      this.initialValue = this.value;
+      this.updated = false;
+  };
+
+  var prototypeAccessors$2 = { validator: { configurable: true },isRequired: { configurable: true },isDisabled: { configurable: true },alias: { configurable: true },value: { configurable: true },rejectsFalse: { configurable: true } };
+  prototypeAccessors$2.validator.get = function () {
+      if (!this.vm || !this.vm.$validator) {
+          warn('No validator instance detected.');
+          return {
+              validate: function () {}
+          };
+      }
+      return this.vm.$validator;
+  };
+  prototypeAccessors$2.isRequired.get = function () {
+      return !(!this.rules.required);
+  };
+  prototypeAccessors$2.isDisabled.get = function () {
+      return !(!(this.component && this.component.disabled)) || !(!(this.el && this.el.disabled));
+  };
+  prototypeAccessors$2.alias.get = function () {
+      if (this._alias) {
+          return this._alias;
+      }
+      var alias = null;
+      if (this.el) {
+          alias = getDataAttribute(this.el, 'as');
+      }
+      if (!alias && this.component) {
+          return this.component.$attrs && this.component.$attrs['data-vv-as'];
+      }
+      return alias;
+  };
+  prototypeAccessors$2.value.get = function () {
+      if (!isCallable(this.getter)) {
+          return undefined;
+      }
+      return this.getter();
+  };
+  prototypeAccessors$2.rejectsFalse.get = function () {
+      if (this.component && this.ctorConfig) {
+          return !(!this.ctorConfig.rejectsFalse);
+      }
+      if (!this.el) {
+          return false;
+      }
+      return this.el.type === 'checkbox';
+  };
+  Field.prototype.matches = function matches (options) {
+      if (!options) {
+          return true;
+      }
+      if (options.id) {
+          return this.id === options.id;
+      }
+      if (options.name === undefined && options.scope === undefined) {
+          return true;
+      }
+      if (options.scope === undefined) {
+          return this.name === options.name;
+      }
+      if (options.name === undefined) {
+          return this.scope === options.scope;
+      }
+      return options.name === this.name && options.scope === this.scope;
+  };
+  Field.prototype._cacheId = function _cacheId (options) {
+      if (this.el && !options.targetOf) {
+          this.el._veeValidateId = this.id;
+      }
+  };
+  Field.prototype.update = function update (options) {
+      this.targetOf = options.targetOf || null;
+      this.initial = options.initial || this.initial || false;
+      if (!isNullOrUndefined(options.scope) && options.scope !== this.scope && isCallable(this.validator.update)) {
+          this.validator.update(this.id, {
+              scope: options.scope
+          });
+      }
+      this.scope = !isNullOrUndefined(options.scope) ? options.scope : !isNullOrUndefined(this.scope) ? this.scope : null;
+      this.name = (!isNullOrUndefined(options.name) ? String(options.name) : options.name) || this.name || null;
+      this.rules = options.rules !== undefined ? normalizeRules(options.rules) : this.rules;
+      this.model = options.model || this.model;
+      this.listen = options.listen !== undefined ? options.listen : this.listen;
+      this.classes = (options.classes || this.classes || false) && !this.component;
+      this.classNames = isObject(options.classNames) ? merge$2(this.classNames, options.classNames) : this.classNames;
+      this.getter = isCallable(options.getter) ? options.getter : this.getter;
+      this._alias = options.alias || this._alias;
+      this.events = options.events ? makeEventsArray(options.events) : this.events;
+      this.delay = makeDelayObject(this.events, options.delay || this.delay, this._delay);
+      this.updateDependencies();
+      this.addActionListeners();
+      if (!this.name && !this.targetOf) {
+          warn('A field is missing a "name" or "data-vv-name" attribute');
+      }
+      if (options.rules !== undefined) {
+          this.flags.required = this.isRequired;
+      }
+      if (this.flags.validated && options.rules !== undefined && this.updated) {
+          this.validator.validate(("#" + (this.id)));
+      }
+      this.updated = true;
+      this.addValueListeners();
+      if (!this.el) {
+          return;
+      }
+      this.updateClasses();
+      this.updateAriaAttrs();
+  };
+  Field.prototype.reset = function reset () {
+          var this$1 = this;
+
+      if (this._cancellationToken) {
+          this._cancellationToken.cancelled = true;
+          delete this._cancellationToken;
+      }
+      var defaults = createFlags();
+      Object.keys(this.flags).filter(function (flag) { return flag !== 'required'; }).forEach(function (flag) {
+          this$1.flags[flag] = defaults[flag];
+      });
+      this.addActionListeners();
+      this.updateClasses();
+      this.updateAriaAttrs();
+      this.updateCustomValidity();
+  };
+  Field.prototype.setFlags = function setFlags (flags) {
+          var this$1 = this;
+
+      var negated = {
+          pristine: 'dirty',
+          dirty: 'pristine',
+          valid: 'invalid',
+          invalid: 'valid',
+          touched: 'untouched',
+          untouched: 'touched'
+      };
+      Object.keys(flags).forEach(function (flag) {
+          this$1.flags[flag] = flags[flag];
+          if (negated[flag] && flags[negated[flag]] === undefined) {
+              this$1.flags[negated[flag]] = !flags[flag];
+          }
+      });
+      if (flags.untouched !== undefined || flags.touched !== undefined || flags.dirty !== undefined || flags.pristine !== undefined) {
+          this.addActionListeners();
+      }
+      this.updateClasses();
+      this.updateAriaAttrs();
+      this.updateCustomValidity();
+  };
+  Field.prototype.updateDependencies = function updateDependencies () {
+          var this$1 = this;
+
+      this.dependencies.forEach(function (d) { return d.field.destroy(); });
+      this.dependencies = [];
+      var fields = Object.keys(this.rules).reduce(function (prev, r) {
+          if (Validator.isTargetRule(r)) {
+              var selector = this$1.rules[r][0];
+              if (r === 'confirmed' && !selector) {
+                  selector = (this$1.name) + "_confirmation";
+              }
+              prev.push({
+                  selector: selector,
+                  name: r
+              });
+          }
+          return prev;
+      }, []);
+      if (!fields.length || !this.vm || !this.vm.$el) 
+          { return; }
+      fields.forEach(function (ref) {
+              var selector = ref.selector;
+              var name = ref.name;
+
+          var el = null;
+          if (selector[0] === '$') {
+              var ref$1 = this$1.vm.$refs[selector.slice(1)];
+              el = Array.isArray(ref$1) ? ref$1[0] : ref$1;
+          } else {
+              try {
+                  el = this$1.vm.$el.querySelector(selector);
+              } catch (err) {
+                  el = null;
+              }
+          }
+          if (!el) {
+              try {
+                  el = this$1.vm.$el.querySelector(("input[name=\"" + selector + "\"]"));
+              } catch (err) {
+                  el = null;
+              }
+          }
+          if (!el) {
+              return;
+          }
+          var options = {
+              vm: this$1.vm,
+              classes: this$1.classes,
+              classNames: this$1.classNames,
+              delay: this$1.delay,
+              scope: this$1.scope,
+              events: this$1.events.join('|'),
+              initial: this$1.initial,
+              targetOf: this$1.id
+          };
+          if (isCallable(el.$watch)) {
+              options.component = el;
+              options.el = el.$el;
+              options.getter = Generator.resolveGetter(el.$el, {
+                  child: el
+              });
+          } else {
+              options.el = el;
+              options.getter = Generator.resolveGetter(el, {});
+          }
+          this$1.dependencies.push({
+              name: name,
+              field: new Field(options)
+          });
+      });
+  };
+  Field.prototype.unwatch = function unwatch (tag) {
+          if ( tag === void 0 ) tag = null;
+
+      if (!tag) {
+          this.watchers.forEach(function (w) { return w.unwatch(); });
+          this.watchers = [];
+          return;
+      }
+      this.watchers.filter(function (w) { return tag.test(w.tag); }).forEach(function (w) { return w.unwatch(); });
+      this.watchers = this.watchers.filter(function (w) { return !tag.test(w.tag); });
+  };
+  Field.prototype.updateClasses = function updateClasses () {
+          var this$1 = this;
+
+      if (!this.classes || this.isDisabled) 
+          { return; }
+      var applyClasses = function (el) {
+          toggleClass(el, this$1.classNames.dirty, this$1.flags.dirty);
+          toggleClass(el, this$1.classNames.pristine, this$1.flags.pristine);
+          toggleClass(el, this$1.classNames.touched, this$1.flags.touched);
+          toggleClass(el, this$1.classNames.untouched, this$1.flags.untouched);
+          if (!isNullOrUndefined(this$1.flags.valid) && this$1.flags.validated) {
+              toggleClass(el, this$1.classNames.valid, this$1.flags.valid);
+          }
+          if (!isNullOrUndefined(this$1.flags.invalid) && this$1.flags.validated) {
+              toggleClass(el, this$1.classNames.invalid, this$1.flags.invalid);
+          }
+      };
+      if (!isCheckboxOrRadioInput(this.el)) {
+          applyClasses(this.el);
+          return;
+      }
+      var els = document.querySelectorAll(("input[name=\"" + (this.el.name) + "\"]"));
+      toArray(els).forEach(applyClasses);
+  };
+  Field.prototype.addActionListeners = function addActionListeners () {
+          var this$1 = this;
+
+      this.unwatch(/class/);
+      if (!this.el) 
+          { return; }
+      var onBlur = function () {
+          this$1.flags.touched = true;
+          this$1.flags.untouched = false;
+          if (this$1.classes) {
+              toggleClass(this$1.el, this$1.classNames.touched, true);
+              toggleClass(this$1.el, this$1.classNames.untouched, false);
+          }
+          this$1.unwatch(/^class_blur$/);
+      };
+      var inputEvent = isTextInput(this.el) ? 'input' : 'change';
+      var onInput = function () {
+          this$1.flags.dirty = true;
+          this$1.flags.pristine = false;
+          if (this$1.classes) {
+              toggleClass(this$1.el, this$1.classNames.pristine, false);
+              toggleClass(this$1.el, this$1.classNames.dirty, true);
+          }
+          this$1.unwatch(/^class_input$/);
+      };
+      if (this.component && isCallable(this.component.$once)) {
+          this.component.$once('input', onInput);
+          this.component.$once('blur', onBlur);
+          this.watchers.push({
+              tag: 'class_input',
+              unwatch: function () {
+                  this$1.component.$off('input', onInput);
+              }
+          });
+          this.watchers.push({
+              tag: 'class_blur',
+              unwatch: function () {
+                  this$1.component.$off('blur', onBlur);
+              }
+          });
+          return;
+      }
+      if (!this.el) 
+          { return; }
+      addEventListener(this.el, inputEvent, onInput);
+      var blurEvent = isCheckboxOrRadioInput(this.el) ? 'change' : 'blur';
+      addEventListener(this.el, blurEvent, onBlur);
+      this.watchers.push({
+          tag: 'class_input',
+          unwatch: function () {
+              this$1.el.removeEventListener(inputEvent, onInput);
+          }
+      });
+      this.watchers.push({
+          tag: 'class_blur',
+          unwatch: function () {
+              this$1.el.removeEventListener(blurEvent, onBlur);
+          }
+      });
+  };
+  Field.prototype.checkValueChanged = function checkValueChanged () {
+      if (this.initialValue === null && this.value === '' && isTextInput(this.el)) {
+          return false;
+      }
+      return this.value !== this.initialValue;
+  };
+  Field.prototype.addValueListeners = function addValueListeners () {
+          var this$1 = this;
+
+      this.unwatch(/^input_.+/);
+      if (!this.listen || !this.el) 
+          { return; }
+      var token = {
+          cancelled: false
+      };
+      var fn = this.targetOf ? function () {
+          this$1.flags.changed = this$1.checkValueChanged();
+          this$1.validator.validate(("#" + (this$1.targetOf)));
+      } : function () {
+              var args = [], len = arguments.length;
+              while ( len-- ) args[ len ] = arguments[ len ];
+
+          if (args.length === 0 || isCallable(Event) && args[0] instanceof Event || args[0] && args[0].srcElement) {
+              args[0] = this$1.value;
+          }
+          this$1.flags.changed = this$1.checkValueChanged();
+          this$1.validator.validate(("#" + (this$1.id)), args[0]);
+      };
+      var inputEvent = this.component || isTextInput(this.el) ? 'input' : 'change';
+      inputEvent = this.model && this.model.lazy ? 'change' : inputEvent;
+      var events = !this.events.length || this.component || isTextInput(this.el) ? this.events : ['change'];
+      if (this.model && this.model.expression && events.indexOf(inputEvent) !== -1) {
+          var debouncedFn = debounce(fn, this.delay[inputEvent], false, token);
+          var unwatch = this.vm.$watch(this.model.expression, function () {
+                  var args = [], len = arguments.length;
+                  while ( len-- ) args[ len ] = arguments[ len ];
+
+              this$1.flags.pending = true;
+              this$1._cancellationToken = token;
+              debouncedFn.apply(void 0, args);
+          });
+          this.watchers.push({
+              tag: 'input_model',
+              unwatch: unwatch
+          });
+          events = events.filter(function (e) { return e !== inputEvent; });
+      }
+      events.forEach(function (e) {
+          var debouncedFn = debounce(fn, this$1.delay[e], false, token);
+          var validate = function () {
+                  var args = [], len = arguments.length;
+                  while ( len-- ) args[ len ] = arguments[ len ];
+
+              this$1.flags.pending = true;
+              this$1._cancellationToken = token;
+              debouncedFn.apply(void 0, args);
+          };
+          this$1._addComponentEventListener(e, validate);
+          this$1._addHTMLEventListener(e, validate);
+      });
+  };
+  Field.prototype._addComponentEventListener = function _addComponentEventListener (evt, validate) {
+          var this$1 = this;
+
+      if (!this.component) 
+          { return; }
+      this.component.$on(evt, validate);
+      this.watchers.push({
+          tag: 'input_vue',
+          unwatch: function () {
+              this$1.component.$off(evt, validate);
+          }
+      });
+  };
+  Field.prototype._addHTMLEventListener = function _addHTMLEventListener (evt, validate) {
+          var this$1 = this;
+
+      if (!this.el || this.component) 
+          { return; }
+      var addListener = function (el) {
+          addEventListener(el, evt, validate);
+          this$1.watchers.push({
+              tag: 'input_native',
+              unwatch: function () {
+                  el.removeEventListener(evt, validate);
+              }
+          });
+      };
+      addListener(this.el);
+      if (!isCheckboxOrRadioInput(this.el)) {
+          return;
+      }
+      var els = document.querySelectorAll(("input[name=\"" + (this.el.name) + "\"]"));
+      toArray(els).forEach(function (el) {
+          if (el._veeValidateId && el !== this$1.el) {
+              return;
+          }
+          addListener(el);
+      });
+  };
+  Field.prototype.updateAriaAttrs = function updateAriaAttrs () {
+          var this$1 = this;
+
+      if (!this.aria || !this.el || !isCallable(this.el.setAttribute)) 
+          { return; }
+      var applyAriaAttrs = function (el) {
+          el.setAttribute('aria-required', this$1.isRequired ? 'true' : 'false');
+          el.setAttribute('aria-invalid', this$1.flags.invalid ? 'true' : 'false');
+      };
+      if (!isCheckboxOrRadioInput(this.el)) {
+          applyAriaAttrs(this.el);
+          return;
+      }
+      var els = document.querySelectorAll(("input[name=\"" + (this.el.name) + "\"]"));
+      toArray(els).forEach(applyAriaAttrs);
+  };
+  Field.prototype.updateCustomValidity = function updateCustomValidity () {
+      if (!this.validity || !this.el || !isCallable(this.el.setCustomValidity) || !this.validator.errors) 
+          { return; }
+      this.el.setCustomValidity(this.flags.valid ? '' : this.validator.errors.firstById(this.id) || '');
+  };
+  Field.prototype.destroy = function destroy () {
+      this.unwatch();
+      this.dependencies.forEach(function (d) { return d.field.destroy(); });
+      this.dependencies = [];
+  };
+
+  Object.defineProperties( Field.prototype, prototypeAccessors$2 );
+
+  var FieldBag = function FieldBag() {
+      this.items = [];
+  };
+
+  var prototypeAccessors$3 = { length: { configurable: true } };
+  FieldBag.prototype[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'] = function () {
+          var this$1 = this;
+
+      var index = 0;
+      return {
+          next: function () { return ({
+              value: this$1.items[index++],
+              done: index > this$1.items.length
+          }); }
+      };
+  };
+  prototypeAccessors$3.length.get = function () {
+      return this.items.length;
+  };
+  FieldBag.prototype.find = function find$1 (matcher) {
+      return find(this.items, function (item) { return item.matches(matcher); });
+  };
+  FieldBag.prototype.filter = function filter (matcher) {
+      if (Array.isArray(matcher)) {
+          return this.items.filter(function (item) { return matcher.some(function (m) { return item.matches(m); }); });
+      }
+      return this.items.filter(function (item) { return item.matches(matcher); });
+  };
+  FieldBag.prototype.map = function map (mapper) {
+      return this.items.map(mapper);
+  };
+  FieldBag.prototype.remove = function remove (matcher) {
+      var item = null;
+      if (matcher instanceof Field) {
+          item = matcher;
+      } else {
+          item = this.find(matcher);
+      }
+      if (!item) 
+          { return null; }
+      var index = this.items.indexOf(item);
+      this.items.splice(index, 1);
+      return item;
+  };
+  FieldBag.prototype.push = function push (item) {
+      if (!(item instanceof Field)) {
+          throw createError('FieldBag only accepts instances of Field that has an id defined.');
+      }
+      if (!item.id) {
+          throw createError('Field id must be defined.');
+      }
+      if (this.find({
+          id: item.id
+      })) {
+          throw createError(("Field with id " + (item.id) + " is already added."));
+      }
+      this.items.push(item);
+  };
+
+  Object.defineProperties( FieldBag.prototype, prototypeAccessors$3 );
+
+  var RULES = {};
+  var STRICT_MODE = true;
+  var TARGET_RULES = ['confirmed','after','before'];
+  var Validator = function Validator(validations, options) {
+      var this$1 = this;
+      if ( options === void 0 ) options = {
+      fastExit: true
+  };
+
+      this.strict = STRICT_MODE;
+      this.errors = new ErrorBag();
+      this.fields = new FieldBag();
+      this.flags = {};
+      this._createFields(validations);
+      this.paused = false;
+      this.fastExit = options.fastExit || false;
+      this.ownerId = options.vm && options.vm._uid;
+      this._localeListener = (function () {
+          this$1.errors.regenerate();
+      });
+      if (this._vm) {
+          this._vm.$on('localeChanged', this._localeListener);
+      }
+  };
+
+  var prototypeAccessors$4 = { dictionary: { configurable: true },_vm: { configurable: true },locale: { configurable: true },rules: { configurable: true } };
+  var staticAccessors$1 = { dictionary: { configurable: true },locale: { configurable: true },rules: { configurable: true } };
+  prototypeAccessors$4.dictionary.get = function () {
+      return Config.dependency('dictionary');
+  };
+  prototypeAccessors$4._vm.get = function () {
+      return Config.dependency('vm');
+  };
+  staticAccessors$1.dictionary.get = function () {
+      return Config.dependency('dictionary');
+  };
+  prototypeAccessors$4.locale.get = function () {
+      return this.dictionary.locale;
+  };
+  prototypeAccessors$4.locale.set = function (value) {
+      Validator.locale = value;
+  };
+  staticAccessors$1.locale.get = function () {
+      return Validator.dictionary.locale;
+  };
+  staticAccessors$1.locale.set = function (value) {
+      var hasChanged = value !== Validator.dictionary.locale;
+      Validator.dictionary.locale = value;
+      if (hasChanged && Config.dependency('vm')) {
+          Config.dependency('vm').$emit('localeChanged');
+      }
+  };
+  prototypeAccessors$4.rules.get = function () {
+      return RULES;
+  };
+  staticAccessors$1.rules.get = function () {
+      return RULES;
+  };
+  Validator.create = function create (validations, options) {
+      return new Validator(validations, options);
+  };
+  Validator.extend = function extend (name, validator, options) {
+          if ( options === void 0 ) options = {};
+
+      Validator._guardExtend(name, validator);
+      Validator._merge(name, validator);
+      if (options && options.hasTarget) {
+          TARGET_RULES.push(name);
+      }
+  };
+  Validator.remove = function remove (name) {
+      delete RULES[name];
+      var idx = TARGET_RULES.indexOf(name);
+      if (idx === -1) 
+          { return; }
+      TARGET_RULES.splice(idx, 1);
+  };
+  Validator.isTargetRule = function isTargetRule (name) {
+      return TARGET_RULES.indexOf(name) !== -1;
+  };
+  Validator.setStrictMode = function setStrictMode (strictMode) {
+          if ( strictMode === void 0 ) strictMode = true;
+
+      STRICT_MODE = strictMode;
+  };
+  Validator.prototype.localize = function localize (lang, dictionary) {
+      Validator.localize(lang, dictionary);
+  };
+  Validator.localize = function localize (lang, dictionary) {
+          var obj;
+
+      if (isObject(lang)) {
+          Validator.dictionary.merge(lang);
+          return;
+      }
+      if (dictionary) {
+          var locale = lang || dictionary.name;
+          dictionary = assign({}, dictionary);
+          Validator.dictionary.merge(( obj = {}, obj[locale] = dictionary, obj ));
+      }
+      if (lang) {
+          Validator.locale = lang;
+      }
+  };
+  Validator.prototype.attach = function attach (field) {
+      if (arguments.length > 1) {
+          warn('This signature of the attach method has been deprecated, please consult the docs.');
+          field = assign({}, {
+              name: arguments[0],
+              rules: arguments[1]
+          }, arguments[2] || {
+              vm: {
+                  $validator: this
+              }
+          });
+      }
+      var value = field.initialValue;
+      if (!(field instanceof Field)) {
+          field = new Field(field);
+      }
+      this.fields.push(field);
+      if (field.initial) {
+          this.validate(("#" + (field.id)), value || field.value);
+      } else {
+          this._validate(field, value || field.value, true).then(function (result) {
+              field.flags.valid = result.valid;
+              field.flags.invalid = !result.valid;
+          });
+      }
+      this._addFlag(field, field.scope);
+      return field;
+  };
+  Validator.prototype.flag = function flag (name, flags) {
+      var field = this._resolveField(name);
+      if (!field || !flags) {
+          return;
+      }
+      field.setFlags(flags);
+  };
+  Validator.prototype.detach = function detach (name, scope) {
+      var field = name instanceof Field ? name : this._resolveField(name, scope);
+      if (!field) 
+          { return; }
+      field.destroy();
+      this.errors.remove(field.name, field.scope, field.id);
+      this.fields.remove(field);
+      var flags = this.flags;
+      if (!isNullOrUndefined(field.scope) && flags[("$" + (field.scope))]) {
+          delete flags[("$" + (field.scope))][field.name];
+      } else if (isNullOrUndefined(field.scope)) {
+          delete flags[field.name];
+      }
+      this.flags = assign({}, flags);
+  };
+  Validator.prototype.extend = function extend (name, validator, options) {
+          if ( options === void 0 ) options = {};
+
+      Validator.extend(name, validator, options);
+  };
+  Validator.prototype.reset = function reset (matcher) {
+      return new Promise((function ($return, $error) {
+          return this._vm.$nextTick().then((function ($await_1) {
+              try {
+                  return this._vm.$nextTick().then((function ($await_2) {
+                          var this$1 = this;
+
+                      try {
+                          this.fields.filter(matcher).forEach(function (field) {
+                              field.reset();
+                              this$1.errors.remove(field.name, field.scope, field.id);
+                          });
+                          return $return();
+                      } catch ($boundEx) {
+                          return $error($boundEx);
+                      }
+                  }).bind(this), $error);
+              } catch ($boundEx) {
+                  return $error($boundEx);
+              }
+          }).bind(this), $error);
+      }).bind(this));
+  };
+  Validator.prototype.update = function update (id, ref) {
+          var scope = ref.scope;
+
+      var field = this._resolveField(("#" + id));
+      if (!field) 
+          { return; }
+      this.errors.update(id, {
+          scope: scope
+      });
+      if (!isNullOrUndefined(field.scope) && this.flags[("$" + (field.scope))]) {
+          delete this.flags[("$" + (field.scope))][field.name];
+      } else if (isNullOrUndefined(field.scope)) {
+          delete this.flags[field.name];
+      }
+      this._addFlag(field, scope);
+  };
+  Validator.prototype.remove = function remove (name) {
+      Validator.remove(name);
+  };
+  Validator.prototype.validate = function validate (name, value, scope, silent) {
+          if ( scope === void 0 ) scope = null;
+          if ( silent === void 0 ) silent = false;
+
+      var $args = arguments;
+      return new Promise((function ($return, $error) {
+          var matched, field, result;
+          if (this.paused) 
+              { return $return(Promise.resolve(true)); }
+          if ($args.length === 0) {
+              return $return(this.validateScopes());
+          }
+          if ($args.length === 1 && $args[0] === '*') {
+              return $return(this.validateAll());
+          }
+          if ($args.length === 1 && typeof $args[0] === 'string' && /^(.+)\.\*$/.test($args[0])) {
+              matched = $args[0].match(/^(.+)\.\*$/)[1];
+              return $return(this.validateAll(matched));
+          }
+          field = this._resolveField(name, scope);
+          if (!field) {
+              return $return(this._handleFieldNotFound(name, scope));
+          }
+          if (!silent) 
+              { field.flags.pending = true; }
+          if ($args.length === 1) {
+              value = field.value;
+          }
+          return this._validate(field, value).then((function ($await_3) {
+              try {
+                  result = $await_3;
+                  if (!silent) {
+                      this._handleValidationResults([result]);
+                  }
+                  return $return(result.valid);
+              } catch ($boundEx) {
+                  return $error($boundEx);
+              }
+          }).bind(this), $error);
+      }).bind(this));
+  };
+  Validator.prototype.pause = function pause () {
+      this.paused = true;
+      return this;
+  };
+  Validator.prototype.resume = function resume () {
+      this.paused = false;
+      return this;
+  };
+  Validator.prototype.validateAll = function validateAll (values, scope, silent) {
+          if ( scope === void 0 ) scope = null;
+          if ( silent === void 0 ) silent = false;
+
+      return new Promise((function ($return, $error) {
+              var this$1 = this;
+
+          var results;
+          var matcher, providedValues;
+          if (this.paused) 
+              { return $return(true); }
+          matcher = null;
+          providedValues = false;
+          if (typeof values === 'string') {
+              matcher = {
+                  scope: values
+              };
+          } else if (isObject(values)) {
+              matcher = Object.keys(values).map(function (key) { return ({
+                  name: key,
+                  scope: scope
+              }); });
+              providedValues = true;
+          } else if (Array.isArray(values)) {
+              matcher = values.map(function (key) { return ({
+                  name: key,
+                  scope: scope
+              }); });
+          } else {
+              matcher = {
+                  scope: scope
+              };
+          }
+          return Promise.all(this.fields.filter(matcher).map(function (field) { return this$1._validate(field, providedValues ? values[field.name] : field.value); })).then((function ($await_4) {
+              try {
+                  results = $await_4;
+                  if (!silent) {
+                      this._handleValidationResults(results);
+                  }
+                  return $return(results.every(function (t) { return t.valid; }));
+              } catch ($boundEx) {
+                  return $error($boundEx);
+              }
+          }).bind(this), $error);
+      }).bind(this));
+  };
+  Validator.prototype.validateScopes = function validateScopes (silent) {
+          if ( silent === void 0 ) silent = false;
+
+      return new Promise((function ($return, $error) {
+              var this$1 = this;
+
+          var results;
+          if (this.paused) 
+              { return $return(true); }
+          return Promise.all(this.fields.map(function (field) { return this$1._validate(field, field.value); })).then((function ($await_5) {
+              try {
+                  results = $await_5;
+                  if (!silent) {
+                      this._handleValidationResults(results);
+                  }
+                  return $return(results.every(function (t) { return t.valid; }));
+              } catch ($boundEx) {
+                  return $error($boundEx);
+              }
+          }).bind(this), $error);
+      }).bind(this));
+  };
+  Validator.prototype.destroy = function destroy () {
+      this._vm.$off('localeChanged', this._localeListener);
+  };
+  Validator.prototype._createFields = function _createFields (validations) {
+          var this$1 = this;
+
+      if (!validations) 
+          { return; }
+      Object.keys(validations).forEach(function (field) {
+          var options = assign({}, {
+              name: field,
+              rules: validations[field]
+          });
+          this$1.attach(options);
+      });
+  };
+  Validator.prototype._getDateFormat = function _getDateFormat (validations) {
+      var format = null;
+      if (validations.date_format && Array.isArray(validations.date_format)) {
+          format = validations.date_format[0];
+      }
+      return format || this.dictionary.getDateFormat(this.locale);
+  };
+  Validator.prototype._isADateRule = function _isADateRule (rule) {
+      return !(!(~['after','before','date_between','date_format'].indexOf(rule)));
+  };
+  Validator.prototype._formatErrorMessage = function _formatErrorMessage (field, rule, data, targetName) {
+          if ( data === void 0 ) data = {};
+          if ( targetName === void 0 ) targetName = null;
+
+      var name = this._getFieldDisplayName(field);
+      var params = this._getLocalizedParams(rule, targetName);
+      return this.dictionary.getFieldMessage(this.locale, field.name, rule.name, [name,
+          params,data]);
+  };
+  Validator.prototype._getLocalizedParams = function _getLocalizedParams (rule, targetName) {
+          if ( targetName === void 0 ) targetName = null;
+
+      if (~TARGET_RULES.indexOf(rule.name) && rule.params && rule.params[0]) {
+          var localizedName = targetName || this.dictionary.getAttribute(this.locale, rule.params[0], rule.params[0]);
+          return [localizedName].concat(rule.params.slice(1));
+      }
+      return rule.params;
+  };
+  Validator.prototype._getFieldDisplayName = function _getFieldDisplayName (field) {
+      return field.alias || this.dictionary.getAttribute(this.locale, field.name, field.name);
+  };
+  Validator.prototype._addFlag = function _addFlag (field, scope) {
+          var obj, obj$1, obj$2;
+
+          if ( scope === void 0 ) scope = null;
+      if (isNullOrUndefined(scope)) {
+          this.flags = assign({}, this.flags, ( obj = {}, obj[("" + (field.name))] = field.flags, obj ));
+          return;
+      }
+      var scopeObj = assign({}, this.flags[("$" + scope)] || {}, ( obj$1 = {}, obj$1[("" + (field.name))] = field.flags, obj$1 ));
+      this.flags = assign({}, this.flags, ( obj$2 = {}, obj$2[("$" + scope)] = scopeObj, obj$2 ));
+  };
+  Validator.prototype._test = function _test (field, value, rule) {
+          var this$1 = this;
+
+      var validator = RULES[rule.name];
+      var params = Array.isArray(rule.params) ? toArray(rule.params) : [];
+      var targetName = null;
+      if (!validator || typeof validator !== 'function') {
+          throw createError(("No such validator '" + (rule.name) + "' exists."));
+      }
+      if (TARGET_RULES.indexOf(rule.name) !== -1) {
+          var target = find(field.dependencies, function (d) { return d.name === rule.name; });
+          if (target) {
+              targetName = target.field.alias;
+              params = [target.field.value].concat(params.slice(1));
+          }
+      } else if (rule.name === 'required' && field.rejectsFalse) {
+          params = params.length ? params : [true];
+      }
+      if (this._isADateRule(rule.name)) {
+          var dateFormat = this._getDateFormat(field.rules);
+          if (rule.name !== 'date_format') {
+              params.push(dateFormat);
+          }
+      }
+      var result = validator(value, params);
+      if (isCallable(result.then)) {
+          return result.then(function (values) {
+              var allValid = true;
+              var data = {};
+              if (Array.isArray(values)) {
+                  allValid = values.every(function (t) { return isObject(t) ? t.valid : t; });
+              } else {
+                  allValid = isObject(values) ? values.valid : values;
+                  data = values.data;
+              }
+              return {
+                  valid: allValid,
+                  errors: allValid ? [] : [this$1._createFieldError(field, rule, data, targetName)]
+              };
+          });
+      }
+      if (!isObject(result)) {
+          result = {
+              valid: result,
+              data: {}
+          };
+      }
+      return {
+          valid: result.valid,
+          errors: result.valid ? [] : [this._createFieldError(field, rule, result.data, targetName)]
+      };
+  };
+  Validator._merge = function _merge (name, validator) {
+      if (isCallable(validator)) {
+          RULES[name] = validator;
+          return;
+      }
+      RULES[name] = validator.validate;
+      if (validator.getMessage) {
+          Validator.dictionary.setMessage(this.locale, name, validator.getMessage);
+      }
+  };
+  Validator._guardExtend = function _guardExtend (name, validator) {
+      if (isCallable(validator)) {
+          return;
+      }
+      if (!isCallable(validator.validate)) {
+          throw createError(("Extension Error: The validator '" + name + "' must be a function or have a 'validate' method."));
+      }
+  };
+  Validator.prototype._createFieldError = function _createFieldError (field, rule, data, targetName) {
+          var this$1 = this;
+
+      return {
+          id: field.id,
+          field: field.name,
+          msg: this._formatErrorMessage(field, rule, data, targetName),
+          rule: rule.name,
+          scope: field.scope,
+          regenerate: function () { return this$1._formatErrorMessage(field, rule, data, targetName); }
+      };
+  };
+  Validator.prototype._resolveField = function _resolveField (name, scope) {
+      if (!isNullOrUndefined(scope)) {
+          return this.fields.find({
+              name: name,
+              scope: scope
+          });
+      }
+      if (name[0] === '#') {
+          return this.fields.find({
+              id: name.slice(1)
+          });
+      }
+      if (name.indexOf('.') > -1) {
+          var ref = name.split('.');
+              var fieldScope = ref[0];
+              var fieldName = ref.slice(1);
+          var field = this.fields.find({
+              name: fieldName.join('.'),
+              scope: fieldScope
+          });
+          if (field) {
+              return field;
+          }
+      }
+      return this.fields.find({
+          name: name,
+          scope: null
+      });
+  };
+  Validator.prototype._handleFieldNotFound = function _handleFieldNotFound (name, scope) {
+      if (!this.strict) 
+          { return true; }
+      var fullName = isNullOrUndefined(scope) ? name : ("" + (!isNullOrUndefined(scope) ? scope + '.' : '') + name);
+      throw createError(("Validating a non-existent field: \"" + fullName + "\". Use \"attach()\" first."));
+  };
+  Validator.prototype._handleValidationResults = function _handleValidationResults (results) {
+      var matchers = results.map(function (result) { return ({
+          id: result.id
+      }); });
+      this.errors.removeById(matchers.map(function (m) { return m.id; }));
+      var allErrors = results.reduce(function (prev, curr) {
+          prev.push.apply(prev, curr.errors);
+          return prev;
+      }, []);
+      this.errors.add(allErrors);
+      this.fields.filter(matchers).forEach(function (field) {
+          var result = find(results, function (r) { return r.id === field.id; });
+          field.setFlags({
+              pending: false,
+              valid: result.valid,
+              validated: true
+          });
+      });
+  };
+  Validator.prototype._validate = function _validate (field, value) {
+      return new Promise((function ($return, $error) {
+              var this$1 = this;
+
+          var promises, errors;
+          var isExitEarly;
+          if (field.isDisabled || !field.isRequired && (isNullOrUndefined(value) || value === '')) {
+              return $return({
+                  valid: true,
+                  id: field.id,
+                  errors: []
+              });
+          }
+          promises = [];
+          errors = [];
+          isExitEarly = false;
+          Object.keys(field.rules).some(function (rule) {
+              var result = this$1._test(field, value, {
+                  name: rule,
+                  params: field.rules[rule]
+              });
+              if (isCallable(result.then)) {
+                  promises.push(result);
+              } else if (this$1.fastExit && !result.valid) {
+                  errors.push.apply(errors, result.errors);
+                  isExitEarly = true;
+              } else {
+                  promises.push(new Promise(function (resolve) { return resolve(result); }));
+              }
+              return isExitEarly;
+          });
+          if (isExitEarly) {
+              return $return({
+                  valid: false,
+                  errors: errors,
+                  id: field.id
+              });
+          }
+          return Promise.all(promises).then((function ($await_6) {
+              try {
+                  return $return($await_6.reduce(function (prev, v) {
+                          var ref;
+
+                      if (!v.valid) {
+                          (ref = prev.errors).push.apply(ref, v.errors);
+                      }
+                      prev.valid = prev.valid && v.valid;
+                      return prev;
+                  }, {
+                      valid: true,
+                      errors: errors,
+                      id: field.id
+                  }));
+              } catch ($boundEx) {
+                  return $error($boundEx);
+              }
+          }).bind(this), $error);
+      }).bind(this));
+  };
+
+  Object.defineProperties( Validator.prototype, prototypeAccessors$4 );
+  Object.defineProperties( Validator, staticAccessors$1 );
+
+  var requestsValidator = function (injections) {
+      if (isObject(injections) && injections.$validator) {
+          return true;
+      }
+      return false;
+  };
+  var createValidator = function (vm, options) { return new Validator(null, {
+      vm: vm,
+      fastExit: options.fastExit
+  }); };
+  var mixin = {
+      provide: function provide() {
+          if (this.$validator && !isBuiltInComponent(this.$vnode)) {
+              return {
+                  $validator: this.$validator
+              };
+          }
+          return {};
+      },
+      beforeCreate: function beforeCreate() {
+          if (isBuiltInComponent(this.$vnode)) {
+              return;
+          }
+          if (!this.$parent) {
+              Config.merge(this.$options.$_veeValidate || {});
+          }
+          var options = Config.resolve(this);
+          var Vue = this.$options._base;
+          if (this.$options.$validates) {
+              warn('The ctor $validates option has been deprecated please set the $_veeValidate.validator option to "new" instead');
+              this.$validator = createValidator(this, options);
+          }
+          if (!this.$parent || this.$options.$_veeValidate && /new/.test(this.$options.$_veeValidate.validator)) {
+              this.$validator = createValidator(this, options);
+          }
+          var requested = requestsValidator(this.$options.inject);
+          if (!this.$validator && options.inject && !requested) {
+              this.$validator = createValidator(this, options);
+          }
+          if (!requested && !this.$validator) {
+              return;
+          }
+          if (!requested && this.$validator) {
+              Vue.util.defineReactive(this.$validator, 'errors', this.$validator.errors);
+              Vue.util.defineReactive(this.$validator, 'flags', this.$validator.flags);
+          }
+          if (!this.$options.computed) {
+              this.$options.computed = {};
+          }
+          this.$options.computed[options.errorBagName || 'errors'] = function errorBagGetter() {
+              return this.$validator.errors;
+          };
+          this.$options.computed[options.fieldsBagName || 'fields'] = function fieldBagGetter() {
+              return this.$validator.flags;
+          };
+      },
+      beforeDestroy: function beforeDestroy() {
+          if (isBuiltInComponent(this.$vnode)) 
+              { return; }
+          if (this.$validator && this.$validator.ownerId === this._uid) {
+              this.$validator.pause();
+              this.$validator.destroy();
+          }
+      }
+  }
+
+  function findField(el, context) {
+      if (!context || !context.$validator) {
+          return null;
+      }
+      return context.$validator.fields.find({
+          id: el._veeValidateId
+      });
+  }
+  var directive = {
+      bind: function bind(el, binding, vnode) {
+          var validator = vnode.context.$validator;
+          if (!validator) {
+              warn("No validator instance is present on vm, did you forget to inject '$validator'?");
+              return;
+          }
+          var fieldOptions = Generator.generate(el, binding, vnode);
+          validator.attach(fieldOptions);
+      },
+      inserted: function inserted(el, binding, vnode) {
+          var field = findField(el, vnode.context);
+          var scope = Generator.resolveScope(el, binding, vnode);
+          if (!field || scope === field.scope) 
+              { return; }
+          field.update({
+              scope: scope
+          });
+          field.updated = false;
+      },
+      update: function update(el, binding, vnode) {
+          var field = findField(el, vnode.context);
+          if (!field || field.updated && isEqual$1(binding.value, binding.oldValue)) 
+              { return; }
+          var scope = Generator.resolveScope(el, binding, vnode);
+          var rules = Generator.resolveRules(el, binding);
+          field.update({
+              scope: scope,
+              rules: rules
+          });
+      },
+      unbind: function unbind(el, binding, ref) {
+          var context = ref.context;
+
+          var field = findField(el, context);
+          if (!field) 
+              { return; }
+          context.$validator.detach(field);
+      }
+  }
+
+  var Vue;
+  function install(_Vue, options) {
+      if ( options === void 0 ) options = {};
+
+      if (Vue && _Vue === Vue) {
+          if ("production" !== 'production') {
+              warn('already installed, Vue.use(VeeValidate) should only be called once.');
+          }
+          return;
+      }
+      detectPassiveSupport();
+      Vue = _Vue;
+      var localVue = new Vue();
+      Config.register('vm', localVue);
+      Config.merge(options);
+      var ref = Config.current;
+      var dictionary = ref.dictionary;
+      var i18n = ref.i18n;
+      if (dictionary) {
+          Validator.localize(dictionary);
+      }
+      if (i18n && i18n._vm && isCallable(i18n._vm.$watch)) {
+          i18n._vm.$watch('locale', function () {
+              localVue.$emit('localeChanged');
+          });
+      }
+      if (!i18n && options.locale) {
+          Validator.localize(options.locale);
+      }
+      Validator.setStrictMode(Config.current.strict);
+      Vue.mixin(mixin);
+      Vue.directive('validate', directive);
+  }
+
+  function use(plugin, options) {
+      if ( options === void 0 ) options = {};
+
+      if (!isCallable(plugin)) {
+          return warn('The plugin must be a callable function');
+      }
+      plugin({
+          Validator: Validator,
+          ErrorBag: ErrorBag,
+          Rules: Validator.rules
+      }, options);
+  }
+
+  var normalize = function (fields) {
+      if (Array.isArray(fields)) {
+          return fields.reduce(function (prev, curr) {
+              if (~curr.indexOf('.')) {
+                  prev[curr.split('.')[1]] = curr;
+              } else {
+                  prev[curr] = curr;
+              }
+              return prev;
+          }, {});
+      }
+      return fields;
+  };
+  var combine = function (lhs, rhs) {
+      var mapper = {
+          pristine: function (lhs, rhs) { return lhs && rhs; },
+          dirty: function (lhs, rhs) { return lhs || rhs; },
+          touched: function (lhs, rhs) { return lhs || rhs; },
+          untouched: function (lhs, rhs) { return lhs && rhs; },
+          valid: function (lhs, rhs) { return lhs && rhs; },
+          invalid: function (lhs, rhs) { return lhs || rhs; },
+          pending: function (lhs, rhs) { return lhs || rhs; },
+          required: function (lhs, rhs) { return lhs || rhs; },
+          validated: function (lhs, rhs) { return lhs && rhs; }
+      };
+      return Object.keys(mapper).reduce(function (flags, flag) {
+          flags[flag] = mapper[flag](lhs[flag], rhs[flag]);
+          return flags;
+      }, {});
+  };
+  var mapScope = function (scope, deep) {
+      if ( deep === void 0 ) deep = true;
+
+      return Object.keys(scope).reduce(function (flags, field) {
+      if (!flags) {
+          flags = assign({}, scope[field]);
+          return flags;
+      }
+      var isScope = field.indexOf('$') === 0;
+      if (deep && isScope) {
+          return combine(mapScope(scope[field]), flags);
+      } else if (!deep && isScope) {
+          return flags;
+      }
+      flags = combine(flags, scope[field]);
+      return flags;
+  }, null);
+  };
+  var mapFields = function (fields) {
+      if (!fields) {
+          return function () {
+              return mapScope(this.$validator.flags);
+          };
+      }
+      var normalized = normalize(fields);
+      return Object.keys(normalized).reduce(function (prev, curr) {
+          var field = normalized[curr];
+          prev[curr] = function mappedField() {
+              if (this.$validator.flags[field]) {
+                  return this.$validator.flags[field];
+              }
+              if (normalized[curr] === '*') {
+                  return mapScope(this.$validator.flags, false);
+              }
+              var index = field.indexOf('.');
+              if (index <= 0) {
+                  return {};
+              }
+              var ref = field.split('.');
+              var scope = ref[0];
+              var name = ref.slice(1);
+              scope = this.$validator.flags[("$" + scope)];
+              name = name.join('.');
+              if (name === '*' && scope) {
+                  return mapScope(scope);
+              }
+              if (scope && scope[name]) {
+                  return scope[name];
+              }
+              return {};
+          };
+          return prev;
+      }, {});
+  };
+
+  var ErrorComponent = {
+      name: 'vv-error',
+      inject: ['$validator'],
+      functional: true,
+      props: {
+          for: {
+              type: String,
+              required: true
+          },
+          tag: {
+              type: String,
+              default: 'span'
+          }
+      },
+      render: function render(createElement, ref) {
+          var props = ref.props;
+          var injections = ref.injections;
+
+          return createElement(props.tag, injections.$validator.errors.first(props.for));
+      }
+  };
+
+  var minimal = {
+      install: install,
+      use: use,
+      directive: directive,
+      mixin: mixin,
+      mapFields: mapFields,
+      Validator: Validator,
+      ErrorBag: ErrorBag,
+      ErrorComponent: ErrorComponent,
+      version: '2.0.9'
+  }
+
+  var rulesPlugin = function (ref) {
+      var Validator = ref.Validator;
+
+      Object.keys(Rules).forEach(function (rule) {
+          Validator.extend(rule, Rules[rule]);
+      });
+      Validator.localize('en', locale$1);
+  };
+  minimal.use(rulesPlugin);
+  minimal.Rules = Rules;
+
+  return minimal;
+
+})));
+
+},{}],9:[function(require,module,exports){
 (function (global){
 /*!
  * Vue.js v2.5.16
@@ -23362,735 +28789,294 @@ module.exports = Vue;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
-var _officeMap = require('modules/office-map');var _officeMap2 = _interopRequireDefault(_officeMap);
-var _screener = require('modules/screener');var _screener2 = _interopRequireDefault(_screener);
+var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);
+
+var _smoothscrollPolyfill = require('smoothscroll-polyfill');var _smoothscrollPolyfill2 = _interopRequireDefault(_smoothscrollPolyfill);
+
+var _screenerField = require('modules/screener-field');var _screenerField2 = _interopRequireDefault(_screenerField);
+var _resultsField = require('modules/results-field');var _resultsField2 = _interopRequireDefault(_resultsField);
 var _shareForm = require('modules/share-form');var _shareForm2 = _interopRequireDefault(_shareForm);
-var _staticMap = require('modules/static-map');var _staticMap2 = _interopRequireDefault(_staticMap);
-var _textSizer = require('modules/text-sizer');var _textSizer2 = _interopRequireDefault(_textSizer);
 var _tooltip = require('modules/tooltip');var _tooltip2 = _interopRequireDefault(_tooltip);
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
-var _accordion = require('components/accordion/accordion.common');var _accordion2 = _interopRequireDefault(_accordion);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _accordion = require('components/accordion/accordion.common');var _accordion2 = _interopRequireDefault(_accordion);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /* eslint-enable no-unused-vars */
 
 (function (window, $) {
   'use strict';
 
-  var google = window.google;
+  /* eslint-disable no-undef */
+  require('smoothscroll-polyfill').polyfill();
+  /* eslint-enable no-undef */
 
   // Get SVG sprite file.
-  // See: https://css-tricks.com/ajaxing-svg-sprite/
-  $.get('/wp-content/themes/access/assets/svg/icons.svg', _utility2.default.svgSprites);
+  // $.get('/wp-content/themes/access/assets/img/icons.svg',Utility.svgSprites);
 
   var $body = $('body');
 
-  // Attach site-wide event listeners.
-  $body.on(
-  'click',
-  '.js-simple-toggle, [data-js="toggle"]', // use the data attr selector
-  _utility2.default.simpleToggle).
-  on('click', '[data-js="toggle-nav"]', function (event) {
-    var element = $(event.currentTarget);
-    // Shows/hides the mobile nav and overlay.
-    event.preventDefault();
-    $('body').toggleClass('active:overlay');
-    $(element.attr('href')).toggleClass('active:o-mobile-nav');
-  }).on('click', '.js-toggle-search', function (e) {
-    // Shows/hides the search drawer in the main nav.
-    e.preventDefault();
-    var $search = $('#search');
-    $search.toggleClass('active');
-    if ($search.hasClass('active')) {
-      setTimeout(function () {
-        $('#search-field').focus();
-      }, 20);
-    }
-  }).on('click', '.js-hide-search', function (e) {
-    // Hides the search drawer in the main nav.
-    e.preventDefault();
-    $('#search').removeClass('active');
-  }).on('click', '[data-js="filter"]', function (event) {
-    event.preventDefault();
-    var $element = $(event.currentTarget);
-    $element.toggleClass('active');
-  });
+  // Simple Toggle
+  $body.on('click', '[data-js*="simple-toggle"]', _utility2.default.simpleToggle);
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', _shareForm2.default.ShowDisclaimer);
 
   // A basic click tracking function
   $body.on('click', '[data-js*="track"]', function (event) {
-    /* eslint-disable no-console, no-debugger */
     var key = event.currentTarget.dataset.trackKey;
     var data = JSON.parse(event.currentTarget.dataset.trackData);
-    _utility2.default.track(key, data);
-    /* eslint-enable no-console, no-debugger */
-  });
-
-  // Capture the queries on Search page
-  $(window).on('load', function () {
-    var $wtSearch = $('[data-js="wt-search"]');
-    if (~window.location.href.indexOf('?s=') && $wtSearch.length) {
-      var key = $wtSearch.data('wtSearchKey');
-      var data = $wtSearch.data('wtSearchData');
-      _utility2.default.webtrends(key, data);
-    }
-  });
-
-  // On the search results page, submits the search form when a category is
-  // chosen.
-  $('.js-program-search-filter').on('change', 'input', function (e) {
-    $(e.currentTarget).closest('form')[0].submit();
-  });
-
-  // TODO: This should be refactored to just use the .js-simple-toggle class.
-  // Toggles Program "What you need to bring for eligibility" displays
-  $('.js-program-detail-what-you-need-to-include').removeClass('no-js-open');
-  $('.js-hide-or-show-list').removeClass('no-js-hidden');
-
-  $('.js-hide-or-show-list').click(function (e) {
-    $(e.currentTarget).toggleClass('show hide').
-    closest('.program-detail-what-you-need-to-include').
-    toggleClass('open');
-  });
-  // END TODO
-
-  // TODO: This function and the conditional afterwards should be refactored
-  // and pulled out to its own program detail controller module. The main
-  // unique thing about program details is that they use a ?step=x query
-  // parameter in the URL to determine the visible section. It is still all
-  // the same page. A hash would seem more appropriate, but there were
-  // some supposed issues with WPML where the hash was being stripped when
-  // switching between langauges. Because it is a single page, we don't need
-  // to actually reload the browser, which is why history.pushState is used.
-  /**
-   * Advances Program Page Steps
-   * @param {string} step - the kebab case identifier for the section
-   */
-  function showSection(step) {
-    $('[data-js="program-detail-step"]').
-    removeClass('active').filter('#' + step).addClass('active');
-
-    $('[data-js="program-nav"] a').removeClass('active').
-    filter('#nav-link-' + step).addClass('active');
-  }
-
-  if ($('[data-js="program-detail-content"]').length) {
-    var isMobileView = function isMobileView() {return $('[data-js="site-desktop-nav"]').
-      is(':hidden');};
-
-    $('[data-js*="program-nav-step-link"]').on('click', function (e) {
-      if (!history.pushState) {
-        return true;
-      }
-      e.preventDefault();
-
-      var step = _utility2.default.getUrlParameter('step', $(e.target).attr('href'));
-      var linkType = '';
-
-      window.history.pushState(null, null, '?step=' + step);
-
-      if ($(e.target).hasClass('[data-js*="jump-to-anchor"]')) {
-        linkType = 'buttonLink';
-      } else {
-        linkType = 'navLink';
-      }
-      $(window).trigger('popstate', linkType);
-    });
-
-    $(window).on('popstate', function (e, linkType) {
-      var possibleSections = [
-      'how-it-works',
-      'how-to-apply',
-      'determine-your-eligibility',
-      'what-you-need-to-include'];
-
-
-      var sectionId = _utility2.default.getUrlParameter('step');
-
-      if (!sectionId || !$.inArray(sectionId, possibleSections)) {
-        sectionId = 'how-it-works';
-      }
-
-      // If the page is in a mobile view, and the user has clicked a button
-      // (as opposed to one of the table of content links) we want to scroll
-      // the browser to the content body as opposed to the top of the page.
-      if (isMobileView() && linkType === 'buttonLink') {
-        $(document).scrollTop(
-        $('[data-js="program-detail-content"]').offset().top);
-
-      } else {
-        $(document).scrollTop(0);
-      }
-      showSection(sectionId);
-    }).trigger('popstate');
-  }
-  // END TODO
-
-  // Initialize text sizer module.
-  $('.' + _textSizer2.default.CssClass.CONTROLLER).each(function (i, el) {
-    var textSizer = new _textSizer2.default(el);
-    textSizer.init();
+    _screenerField2.default.track(key, data);
   });
 
   // Initialize eligibility screener.
-  $('.' + _screener2.default.CssClass.FORM).each(function (i, el) {
-    var screener = new _screener2.default(el);
-    screener.init();
-  });
+  $(_screenerField2.default.Selectors.DOM).each(function (i, el) {return (
+      new _screenerField2.default(el).init());});
+
+  // Initialize eligibility screener.
+  $(_resultsField2.default.Selectors.DOM).each(function (i, el) {return (
+      new _resultsField2.default(el).init());});
+
+  // Initialize tooltips.
+  $('.' + _tooltip2.default.CssClass.TRIGGER).each(function (i, el) {return (
+      new _tooltip2.default(el).init());});
 
   // Initialize accordion components
-  $(_accordion2.default.selector).each(function (i, element) {
+  document.querySelectorAll(_accordion2.default.selector).
+  forEach(function (element) {
     var accordion = new _accordion2.default(element);
     accordion.init();
   });
 
-  // Initialize maps if present.
-  var $maps = $('.js-map');
-
-  /**
-                             * Callback function for loading the Google maps library.
-                             */
-  function initializeMaps() {
-    $maps.each(function (i, el) {
-      var map = new _officeMap2.default(el);
-      map.init();
+  // Application reloading
+  $('[data-js="reload"]').each(function (i, el) {
+    $(el).on('click', function (event) {
+      event.preventDefault();
+      var message = _underscore2.default.findWhere(window.LOCALIZED_STRINGS,
+      { slug: 'MSG_RELOAD' }).
+      label;
+      var dialogue = confirm(message);
+      if (dialogue) {
+        if (event.currentTarget.href) {
+          window.location = event.currentTarget.href;
+        } else {
+          location.reload();
+        }
+      }
+      return false;
     });
-  }
-
-  if ($maps.length > 0) {
-    var options = {
-      key: _utility2.default.CONFIG.GOOGLE_API,
-      libraries: 'geometry,places' };
-
-
-    google.load('maps', '3', {
-      /* eslint-disable camelcase */
-      other_params: $.param(options),
-      /* eslint-enable camelcase */
-      callback: initializeMaps });
-
-  }
-
-  // Initialize simple maps.
-  $('.js-static-map').each(function (i, el) {
-    var staticMap = new _staticMap2.default(el);
-    staticMap.init();
   });
-
-  // For location detail pages, this overwrites the link to the "back to map"
-  // button if the previous page was the map. We want the user to return to
-  // the previous state of the map (via the same URL) rather than simply going
-  // back to the default map.
-  $('.js-location-back').each(function (i, el) {
-    if (window.document.referrer.indexOf('/locations/?') >= 0) {
-      $(el).attr('href', window.document.referrer);
-    }
-  });
-
-  // Initialize tooltips.
-  $('.' + _tooltip2.default.CssClass.TRIGGER).each(function (i, el) {
-    var tooltip = new _tooltip2.default(el);
-    tooltip.init();
-  });
-
-  // Initialize share by email/sms forms.
-  $('.' + _shareForm2.default.CssClass.FORM).each(function (i, el) {
-    var shareForm = new _shareForm2.default(el);
-    shareForm.init();
-  });
-
-  // For pages with "print-view" class, print the page on load. Currently only
-  // used on program detail pages after the print link is clicked.
-  if ($('html').hasClass('print-view')) {
-    window.onload = window.print;
-  }
 
   // Add rel attribute to new window links.
   $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
 
   // Enable environment warnings
   $(window).on('load', function () {return _utility2.default.warnings();});
-})(window, _jquery2.default); /* eslint-env browser */
+})(window, _jquery2.default); /* eslint-disable no-unused-vars */ /* eslint-env browser */
 
-},{"components/accordion/accordion.common":1,"jquery":4,"modules/office-map":11,"modules/screener":14,"modules/share-form":15,"modules/static-map":16,"modules/text-sizer":17,"modules/tooltip":18,"modules/utility":19}],9:[function(require,module,exports){
+},{"components/accordion/accordion.common":1,"jquery":4,"modules/results-field":12,"modules/screener-field":14,"modules/share-form":19,"modules/tooltip":20,"modules/utility":21,"smoothscroll-polyfill":6,"underscore":7}],11:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
-var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
 
 /**
-                                                                                                                                                                                                                                                                                                                                                   * This component takes an element that serves as a filter controller for a
-                                                                                                                                                                                                                                                                                                                                                   * parent OfficeMap. This handles UI toggle interactions, emits a 'change'
-                                                                                                                                                                                                                                                                                                                                                   * event when its state changes, and can return an array of its active checkbox
-                                                                                                                                                                                                                                                                                                                                                   * values.
-                                                                                                                                                                                                                                                                                                                                                   * @class
-                                                                                                                                                                                                                                                                                                                                                   */var
-OfficeFilter = function () {
+                                                                                                                                                                                                                                                                                                                                               * Calc Input Class
+                                                                                                                                                                                                                                                                                                                                               */var
+CalcInput = function () {
+
   /**
-                             * @param {HTMLElement} el - The HTML element for this component.
+                          * Constructor
+                          * @param  {object} element - the element triggering the event
+                          */
+  function CalcInput(element) {var _this = this;_classCallCheck(this, CalcInput);
+    this.selector = '[data-js*="calc-input"]';
+
+    this.events = 'keypress paste drop';
+
+    (0, _jquery2.default)(element).on(this.events, this.selector, function (event) {
+      _this.bus(event);
+    });
+  }
+
+  /**
+     * The main event processor for drop, past, and key events
+     * @param  {object} event - the triggering event
+     */_createClass(CalcInput, [{ key: 'bus', value: function bus(
+    event) {
+      var key = event.keyCode;
+      var backspace = key === 8 || key === 46;
+      var arrows = key >= 37 && key <= 40;
+      if (backspace || arrows) return;
+      if (event.type === 'drop') {
+        var start = event.currentTarget.selectionStart;
+        var end = event.currentTarget.selectionEnd;
+        if (start === end) {
+          this._calc(event.originalEvent.dataTransfer.getData('text'), event);
+        } else {
+          event.preventDefault();
+          /* eslint-disable no-console, no-debugger */
+          if (_utility2.default.debug())
+          console.warn('CalcInput: Blocked. Dropping not allowed from source.');
+          /* eslint-enable no-console, no-debugger */
+        }
+      } else if (event.type === 'paste') {
+        this._calc(event.originalEvent.clipboardData.getData('text'), event);
+      } else if (!this._isPaste(key) || !this._isCopy(key)) {
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug())
+        console.dir({
+          'charCode': event.charCode,
+          'fromCharCode': String.fromCharCode(event.charCode),
+          'event': event });
+
+        /* eslint-enable no-console, no-debugger */
+        this._calc(String.fromCharCode(event.charCode), event);
+        // this._calc(event.key, event);
+      }
+      // store previous key for keyboard combination (paste) detection.
+      window[CalcInput.PREVIOUS_KEY] = key;
+    }
+
+    /**
+       * Detection for paste event
+       * @param  {number} key the current key code
+       * @return {boolean}    if the paste command is being used
+       */ }, { key: '_isPaste', value: function _isPaste(
+    key) {
+      var ctrl = window[CalcInput.PREVIOUS_KEY] === 91;
+      var cmd = window[CalcInput.PREVIOUS_KEY] === 17;
+      var v = key === 86;
+      return ctrl || cmd || v;
+    }
+
+    /**
+       * Detection for copy event
+       * @param  {number} key the current key code
+       * @return {boolean}    if the copy command is being used
+       */ }, { key: '_isCopy', value: function _isCopy(
+    key) {
+      var ctrl = window[CalcInput.PREVIOUS_KEY] === 91;
+      var cmd = window[CalcInput.PREVIOUS_KEY] === 17;
+      var v = key === 67;
+      return ctrl || cmd || v;
+    }
+
+    /**
+       * For a given dollar float input, product requirements dictate we should
+       * limit values to 6 digits before the decimal point and 2 after.
+       * @param  {string} text - the text to calculate
+       * @param  {object} event - the original event object
+       */ }, { key: '_calc', value: function _calc(
+    text, event) {
+      var el = event.currentTarget;
+      var value = el.value ? el.value : '';
+      var start = el.selectionStart;
+      var end = el.selectionEnd;
+      var calc = [
+      value.substring(0, start), text, value.substring(end, value.length)].
+      join('');
+      /* eslint-disable no-console, no-debugger */
+      if (_utility2.default.debug()) {
+        console.dir(['CalcInput', {
+          'selectionStart': start,
+          'text': text,
+          'selectionEnd': end,
+          'calculatedValue': calc }]);
+
+      }
+      /* eslint-enable no-console, no-debugger */
+      this._testCalc(calc, event);
+    }
+
+    /**
+       * Create the regular expression and test the input
+       * @param  {string} calc  The calculated input
+       * @param  {object} event The original event
+       */ }, { key: '_testCalc', value: function _testCalc(
+    calc, event) {
+      try {
+        var r = new RegExp(event.currentTarget.dataset.jsRegex, 'g');
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug()) console.log('CalcInput: ' + r);
+        var found = calc.match(r);
+        if (found.length && _utility2.default.debug()) {
+          console.log('CalcInput: Passed!');
+        }
+        /* eslint-enable no-console, no-debugger */
+      } catch (error) {
+        event.preventDefault(); // stop input
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug()) {
+          console.warn('CalcInput: Blocked. Input will not match valid format');
+        }
+        /* eslint-enable no-console, no-debugger */
+      }
+    } }]);return CalcInput;}();
+
+
+
+CalcInput.PREVIOUS_KEY = '_prevKey';exports.default =
+
+CalcInput;
+
+},{"jquery":4,"modules/utility":21}],12:[function(require,module,exports){
+/* eslint-env browser */
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
+var _shareForm = require('modules/share-form');var _shareForm2 = _interopRequireDefault(_shareForm);
+var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+/**
+                                                                                                                                                                                                                                                                                                                                               * Requires Documentation
+                                                                                                                                                                                                                                                                                                                                               * @class
+                                                                                                                                                                                                                                                                                                                                               */var
+ResultsField = function () {
+  /**
+                             * @param {HTMLElement} el - The form element for the component.
                              * @constructor
                              */
-  function OfficeFilter(el) {_classCallCheck(this, OfficeFilter);
-    /** @private {HTMLElement} The main component element. */
-    this._el = el;
-
-    /** @private {Array<Number>} An array of active program IDs. */
-    this._programs = [];
-
-    /** @private {jQuery} The program inputs in this controller. */
-    this._$programCheckboxes =
-    (0, _jquery2.default)(el).find('input.' + OfficeFilter.CssClass.PROGRAM_CHECKBOX);
-
-    /** @private {boolean} Whether this control has been initialized. */
-    this._initialized = false;
-  }
-
-  /**
-     * Attach event handlers if this has not been initialized yet.
-     * @return {this} OfficeFilter
-     */_createClass(OfficeFilter, [{ key: 'init', value: function init()
-    {var _this = this;
-      if (this._initialized) {
-        return this;
-      }
-
-      (0, _jquery2.default)(this._el).on('change', '.' + OfficeFilter.CssClass.PROGRAM_CHECKBOX,
-      function (e) {
-        _this.setCategoryParent(e.currentTarget).updateResults();
-      }).on('change', '.' + OfficeFilter.CssClass.PARENT_CHECKBOX, function (e) {
-        var $checkbox = (0, _jquery2.default)(e.currentTarget);
-        _this.toggleCheckGroup($checkbox.data('toggles'),
-        $checkbox.prop('checked')).updateResults();
-      }).on('click', '.' + OfficeFilter.CssClass.TOGGLE, function (e) {
-        var targetSelector = (0, _jquery2.default)(e.currentTarget).data('target') ||
-        (0, _jquery2.default)(e.currentTarget).attr('href');
-        e.preventDefault();
-        _this.togglePanel((0, _jquery2.default)(targetSelector)[0], e.currentTarget);
-      });
-      this._initialized = true;
-
-      return this;
-    }
-
-    /**
-       * Updates this._programs with the value of checked controls.
-       * @method
-       * @return {this} OfficeFilter
-       */ }, { key: 'updateResults', value: function updateResults()
-    {var _this2 = this;
-      this._programs = [];
-      this._$programCheckboxes.each(function (i, el) {
-        var $checkbox = (0, _jquery2.default)(el);
-        if ($checkbox.prop('checked')) {
-          _this2._programs.push(parseInt($checkbox.val(), 10));
-        }
-      });
-      (0, _jquery2.default)(this._el).trigger(OfficeFilter.Event.UPDATE);
-      return this;
-    }
-
-    /**
-       * Returns the value of this._programs.
-       * @method
-       * @return {Array<Number>} array of matched program IDs.
-       */ }, { key: 'getPrograms', value: function getPrograms()
-    {
-      return this._programs;
-    }
-
-    /**
-       * Checks any inputs that match the passed array of program IDs and updates
-       * this._programs.
-       * @method
-       * @param {Array<Number>} programs - array of program IDs
-       * @return {this} OfficeFilter
-       */ }, { key: 'setPrograms', value: function setPrograms(
-    programs) {var _this3 = this;
-      if (!_underscore2.default.isArray(programs)) {
-        return this;
-      }
-      this._$programCheckboxes.each(function (i, el) {
-        var $checkbox = (0, _jquery2.default)(el);
-        var checked = programs.indexOf(parseInt($checkbox.val(), 10)) >= 0;
-        $checkbox.prop('checked', checked);
-        if (checked) {
-          _this3.setCategoryParent(el);
-        }
-      });
-      this._programs = programs;
-      return this;
-    }
-
-    /**
-       * Toggles all inputs in the targeted element.
-       * @method
-       * @param {string} selector - Parent element to target
-       * @param {boolean} toggle - whether to toggle these elements on or off.
-       * @return {this} OfficeFilter
-       */ }, { key: 'toggleCheckGroup', value: function toggleCheckGroup(
-    selector, toggle) {
-      (0, _jquery2.default)(this._el).find(selector).
-      find('.' + OfficeFilter.CssClass.PROGRAM_CHECKBOX).
-      prop('checked', toggle);
-      return this;
-    }
-
-    /**
-       * For a program checkbox, checks its related category checkbox if the
-       * program checkbox is checked, otheriwse if all sibling program checkboxes
-       * are unchecked, unchecks the related category checkbox.
-       * @method
-       * @param {HTMLElement} checkbox - Program checkbox.
-       * @return {this} OfficeFilter
-       */ }, { key: 'setCategoryParent', value: function setCategoryParent(
-    checkbox) {
-      var $categoryGroup = (0, _jquery2.default)(checkbox).
-      closest('.' + OfficeFilter.CssClass.PROGRAM_GROUP);
-      var $categoryCheckbox = (0, _jquery2.default)(this._el).
-      find('input[data-toggles="#' + $categoryGroup.attr('id') + '"]');
-      if ((0, _jquery2.default)(checkbox).prop('checked')) {
-        $categoryCheckbox.prop('checked', true);
-      } else if (!$categoryGroup.
-      find('input.' + OfficeFilter.CssClass.PROGRAM_CHECKBOX).
-      filter(':checked').length) {
-        $categoryCheckbox.prop('checked', false);
-      }
-      return this;
-    }
-
-    /**
-       * Toggles the active class on a target and optionally the triggering element.
-       * @method
-       * @param {HTMLElement} target - the targetted panel element
-       * @param {?HTMLElement} trigger - the element that triggered the toggle
-       * @return {this} OfficeFilter
-       */ }, { key: 'togglePanel', value: function togglePanel(
-    target, trigger) {
-      var els = [];
-      if (target) {
-        els.push(target);
-      }
-      if (trigger) {
-        els.push(trigger);
-      }
-      (0, _jquery2.default)(els).toggleClass(OfficeFilter.CssClass.ACTIVE);
-
-      var targetActive = (0, _jquery2.default)(target).hasClass(OfficeFilter.CssClass.ACTIVE);
-      (0, _jquery2.default)(target).attr('aria-hidden',
-      !targetActive);
-      if (targetActive) {
-        (0, _jquery2.default)(target).find('.' + OfficeFilter.CssClass.PARENT_CHECKBOX + ',\n          .' +
-        OfficeFilter.CssClass.PROGRAM_CHECKBOX + ',\n          .' +
-        OfficeFilter.CssClass.TOGGLE).removeAttr('tabindex');
-      } else {
-        (0, _jquery2.default)(target).find('.' + OfficeFilter.CssClass.PARENT_CHECKBOX + ',\n          .' +
-        OfficeFilter.CssClass.PROGRAM_CHECKBOX + ',\n          .' +
-        OfficeFilter.CssClass.TOGGLE).attr('tabindex', '-1');
-      }
-      return this;
-    } }]);return OfficeFilter;}();
-
-
-/**
-                                    * CSS classes used by this component.
-                                    * @enum {string}
-                                    */
-OfficeFilter.CssClass = {
-  ACTIVE: 'active',
-  MAIN_TOGGLE: 'js-main-filter-toggle',
-  PARENT_CHECKBOX: 'js-map-filter-parent-input',
-  PROGRAM_CHECKBOX: 'js-map-filter-program-input',
-  PROGRAM_GROUP: 'js-map-filter-program-group',
-  TOGGLE: 'js-toggle-filter' };
-
-
-/**
-                                 * Events used by this component.
-                                 * @enum {string}
-                                 */
-OfficeFilter.Event = {
-  UPDATE: 'update' };exports.default =
-
-
-
-OfficeFilter;
-
-},{"jquery":4,"underscore":6}],10:[function(require,module,exports){
-/* eslint-env browser */
-'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
-
-var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
-var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
-
-var google = window.google;
-
-/**
-                             * OfficeLocation objects are used by the OfficeMap and help normalize the
-                             * JSON data that is passed from the WP API.
-                             * @class
-                             */var
-OfficeLocation = function () {
-  /**
-                               * @param {object} obj - a JSON object from the WP api.
-                               * @constructor
-                               */
-  function OfficeLocation(obj) {_classCallCheck(this, OfficeLocation);
-    // If this is the first time an Office Location is instantiated, define
-    // the marker icon element. Blue markers are used by Government Offices.
-    // Green is used for all others.
-    if (!OfficeLocation.Marker) {
-      OfficeLocation.Marker = {
-        BLUE: {
-          url: _utility2.default.CONFIG.URL_PIN_BLUE_2X,
-          size: new google.maps.Size(65, 80),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(16, 40),
-          scaledSize: new google.maps.Size(33, 40) },
-
-        GREEN: {
-          url: _utility2.default.CONFIG.URL_PIN_GREEN_2X,
-          size: new google.maps.Size(65, 80),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(16, 40),
-          scaledSize: new google.maps.Size(33, 40) } };
-
-
-    }
-
-    /** {Number} The WordPress ID */
-    this.id = obj.id || 0;
-
-    /** {string} The WordPress slug. */
-    this.link = obj.link || '';
-
-    /** {string} The name of the office. */
-    this.name = obj.title || '';
-
-    /** {string} The office type. */
-    this.type = obj.type || '';
-
-    /** {Boolean} If this is a government office. */
-    this.isGovtOffice = _utility2.default.localize('GOVERNMENT_OFFICE') === this.type;
-
-    /** {object} The office location. */
-    this.address = {
-      street: obj.address.street || '',
-      location:
-      new google.maps.LatLng(obj.address.lat, obj.address.lng) };
-
-
-    /** {array<Number> A collection of program data. */
-    this.programs = obj.programs || [];
-
-    /** {google.maps.Marker} The google marker associated with this office. */
-    this.marker = new google.maps.Marker({
-      position: this.address.location,
-      icon: this.isGovtOffice ? OfficeLocation.Marker.BLUE :
-      OfficeLocation.Marker.GREEN,
-      title: this.name,
-      id: this.id });
-
-  }
-
-  /**
-     * Returns true if office has any of the passed programs, identified by ID.
-     * Also returns true if an empty array is passed.
-     * @param {Array<Number>|Number} programIds
-     * @return {boolean} Whether a program has been matched.
-     */_createClass(OfficeLocation, [{ key: 'hasProgram', value: function hasProgram(
-    programIds) {
-      var result = false;
-      var programs = [];
-      if (_underscore2.default.isNumber(programIds)) {
-        programs.push(programIds);
-      } else if (_underscore2.default.isArray(programIds)) {
-        programs = programIds;
-      }
-      if (programs.length === 0) {
-        result = true;
-      } else {
-        for (var i = 0; i < this.programs.length; i++) {
-          if (_underscore2.default.contains(programs, this.programs[i])) {
-            result = true;
-            break;
-          }
-        }
-      }
-      return result;
-    } }]);return OfficeLocation;}();
-
-
-OfficeLocation.Marker = null;exports.default =
-
-OfficeLocation;
-
-},{"modules/utility":19,"underscore":6}],11:[function(require,module,exports){
-/* eslint-env browser */
-'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
-
-var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
-var _officeFilter = require('modules/office-filter');var _officeFilter2 = _interopRequireDefault(_officeFilter);
-var _officeLocation = require('modules/office-location');var _officeLocation2 = _interopRequireDefault(_officeLocation);
-var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
-var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
-
-var google = window.google;
-
-/**
-                             * This is the main controller for the map at the /locations page. This handles
-                             * rendering the Google map, fetching location details, placing markers, and
-                             * any map interactions - like filtering and featuring.
-                             * @class
-                             */var
-OfficeMap = function () {
-  /**
-                          * @param {HTMLElement} el - The html element for the component.
-                          * @constructor
-                          */
-  function OfficeMap(el) {_classCallCheck(this, OfficeMap);
+  function ResultsField(el) {_classCallCheck(this, ResultsField);
     /** @private {HTMLElement} The component element. */
     this._el = el;
 
-    /** @private {HTMLElement} The map element. */
-    this._mapEl = (0, _jquery2.default)(el).find('.' + OfficeMap.CssClass.MAP_BOX)[0];
-
-    /** @private {HTMLElement} The map element. */
-    this._listEl = (0, _jquery2.default)(el).find('.' + OfficeMap.CssClass.RESULT_LIST)[0];
-
-    /** @private {HTMLElement} The search box element. */
-    this._searchEl = (0, _jquery2.default)(el).find('.' + OfficeMap.CssClass.SEARCH_BOX)[0];
-
-    /** @private {HTMLElement} The filter control element. */
-    this._filterEl = (0, _jquery2.default)(el).find('.' + OfficeMap.CssClass.FILTER)[0];
-
-    /** @private {HTMLElement} The filter control element. */
-    this._paginationEl = (0, _jquery2.default)(el).find('.' + OfficeMap.CssClass.PAGINATION)[0];
-
-    /** @private {boolean} Whether the map has been initialized. */
+    /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
 
-    /** @private {google.maps.LatLng} Map position. */
-    this._mapPosition = _utility2.default.getUrlParameter('lat') &&
-    _utility2.default.getUrlParameter('lng') ?
-    new google.maps.LatLng(parseFloat(_utility2.default.getUrlParameter('lat')),
-    parseFloat(_utility2.default.getUrlParameter('lng'))) :
-    new google.maps.LatLng(_utility2.default.CONFIG.DEFAULT_LAT,
-    _utility2.default.CONFIG.DEFAULT_LNG);
-
-    /** @private {?google.maps.Map} The google map object. */
-    this._map = new google.maps.Map(this._mapEl, {
-      zoom: 11,
-      center: this._mapPosition });
-
-
-    /** @private {google.maps.places.SearchBox} Search box controller. */
-    this._searchBox = new google.maps.places.SearchBox(this._searchEl);
-
-    /** @private {OfficeFilter} Program filter controller. */
-    this._filter = new _officeFilter2.default(this._filterEl);
-
-    /** @private {Array<OfficeLocation>} The office locations. */
-    this._locations = [];
-
-    /** @private {Array<OfficeLocation>} The office locations. */
-    this._filteredLocations = [];
-
-    /** @private {Array<Number>} The IDs of programs to filter by. */
-    this._programs = _utility2.default.getUrlParameter('programs') ?
-    _underscore2.default.map(decodeURIComponent(_utility2.default.getUrlParameter('programs')).
-    split(','), function (num) {
-      return parseInt(num, 10);
-    }) : [];
+    this._disabled = false;
   }
 
   /**
-     * If this form has not yet been initialized, attaches event listeners.
+     * If this component has not yet been initialized, attaches event listeners.
      * @method
      * @return {this} OfficeMap
-     */_createClass(OfficeMap, [{ key: 'init', value: function init()
+     */_createClass(ResultsField, [{ key: 'init', value: function init()
     {var _this = this;
       if (this._initialized) {
         return this;
       }
 
-      // Set window resize handler for the map.
-      (0, _jquery2.default)(window).on('resize', function () {
-        google.maps.event.trigger(_this._map, 'resize');
+      /**
+         * DOM Event Listeners
+         */
+
+      var $el = (0, _jquery2.default)(this._el);
+
+      // Initialize share by email/sms forms.
+      (0, _jquery2.default)('.' + _shareForm2.default.CssClass.FORM).each(function (i, el) {
+        new _shareForm2.default(el).init();
       });
 
-      // Adds handler for highlighting and bouncing a pin when a list item gets
-      // focus.
-      (0, _jquery2.default)(this._el).on('focus', '.' + OfficeMap.CssClass.LIST_LOCATION,
-      function (e) {
-        var markerId = parseInt((0, _jquery2.default)(e.currentTarget).data('marker'), 10);
-        var location = _underscore2.default.findWhere(_this._locations, {
-          id: markerId });
+      // Finalize form
+      (0, _jquery2.default)(ResultsField.Selectors.FINAL_RESULTS).on('submit', this._finalResults);
 
-        if (location && 'marker' in location) {
-          (0, _jquery2.default)('html, body').animate({
-            scrollTop: (0, _jquery2.default)(_this._mapEl).offset().top + 'px' },
-          'fast').promise().then(function () {
-            _this.centerOnMarker(location.marker);
-            (0, _jquery2.default)(e.delegateTarget).find('.' + OfficeMap.CssClass.LIST_LOCATION).
-            removeClass(OfficeMap.CssClass.ACTIVE);
-            (0, _jquery2.default)(e.currentTarget).addClass(OfficeMap.CssClass.ACTIVE);
-          });
-        }
-      }).on('click', '.' + OfficeMap.CssClass.MORE, function (e) {
-        // Hanlder for the 'Show more' button.
-        e.preventDefault();
-        _this.updateList().updateUrl();
-      });
+      // Open links in new window
+      $el.on('click', ResultsField.Selectors.HYPERLINKS, this._targetBlank);
 
-      // Bias the SearchBox results towards current map's viewport when the map
-      // bounds change.
-      this._map.addListener('bounds_changed', _underscore2.default.debounce(function () {
-        _this._searchBox.setBounds(_this._map.getBounds());
-      }, 100));
-
-      // Attach handler for the autocomplete search box. This updates the map
-      // position and re-sorts locations around that position.
-      this._searchBox.addListener('places_changed', function () {
-        var place = _this._searchBox.getPlaces()[0];
-        if (place) {
-          _this._mapPosition = place.geometry.location;
-          _this._map.panTo(_this._mapPosition);
-          _this.sortByDistance().clearLocations().updateUrl().updateList().
-          updateUrl();
-          (0, _jquery2.default)(_this._searchEl).blur();
-        }
-      });
-
-      // Initialize the filter control and listen for filter updates.
-      this._filter.setPrograms(this._programs).init();
-      (0, _jquery2.default)(this._filterEl).on(_officeFilter2.default.Event.UPDATE, function () {
-        _this._programs = _this._filter.getPrograms();
-        _this.filterLocations().updateUrl().sortByDistance().updateList().
-        updateUrl();
-      });
-
-      // Load pin data.
-      this.loading(true);
-
-      this.clearLocations(true).fetchLocations().then(function () {
-        _this.loading(false);
-        _this.filterLocations().sortByDistance();
-        if (_utility2.default.getUrlParameter('lat') || _utility2.default.getUrlParameter('lng') ||
-        _utility2.default.getUrlParameter('programs')) {
-          // These parameters indicate an initial app state, so update the map
-          // and list to reflect that.
-          _this.updateList().updateUrl();
-        } else {
-          // If there is no initial application state, open the filter drawer.
-          var $filterToggle =
-          (0, _jquery2.default)(_this._el).find('.' + _officeFilter2.default.CssClass.MAIN_TOGGLE);
-          if (!$filterToggle.hasClass('active')) {
-            $filterToggle.trigger('click');
-          }
-        }
+      // Remove programs
+      $el.on('click', ResultsField.Selectors.REMOVE_PROGRAM, function (event) {
+        _this._removeProgram(event);
       });
 
       this._initialized = true;
@@ -24099,295 +29085,1527 @@ OfficeMap = function () {
     }
 
     /**
-       * Clears the map markers, map listing, and, optionally, resets
-       * this._locations and this._filteredLocations.
-       * @method
-       * @param {boolean} reset - True if resetting the entire set.
-       * @return {this} OfficeMap
-       */ }, { key: 'clearLocations', value: function clearLocations(
-    reset) {
-      _underscore2.default.each(this._locations, function (location) {
-        location.marker.setMap(null);
-        location.active = false;
-      });
-
-      (0, _jquery2.default)(this._listEl).empty();
-
-      if (reset) {
-        this._locations = [];
-        this._filteredLocations = [];
-      }
-
-      return this;
+       * Open links in new window by adding target blank to them.
+       * @param  {event} event the onclick event
+       */ }, { key: '_targetBlank', value: function _targetBlank(
+    event) {
+      (0, _jquery2.default)(event.currentTarget).
+      attr('rel', 'noopener noreferrer').
+      attr('target', '_blank');
     }
 
     /**
-       * Updates this._locations based on a given set of parameters. Recursively
-       * makes requests to the API until all results are loaded.
-       * @method
-       * @return {jqXHR} - JSON response.
-       */ }, { key: 'fetchLocations', value: function fetchLocations()
-    {var _this2 = this;
-      return _jquery2.default.getJSON((0, _jquery2.default)(this._el).data('source')).then(function (data) {
-        _underscore2.default.each(data.locations, function (item) {
-          var location = new _officeLocation2.default(item);
-          google.maps.event.addListener(location.marker, 'click', function () {
-            _this2.focusListOnMarker(location.marker);
-          });
-          _this2._locations.push(location);
+       * Wrapper for ajax call
+       * @param {object}   data     - the data to send, should include programs,
+       *                              categories, guid, and date.
+       * @param {function} callback - the callback function to execute when done.
+       */ }, { key: '_getUrl', value: function _getUrl(
+    data, callback) {
+      data['path'] = ResultsField.SharePath;
+
+      var action = {
+        url: ResultsField.ShareUrlEndpoint,
+        type: 'get',
+        data: data };
+
+
+      _jquery2.default.ajax(action).done(function (data) {
+        callback(data);
+      });
+    }
+
+    /**
+       * Bus for removing programs from results
+       * @param  {event} event the onclick event
+       */ }, { key: '_removeProgram', value: function _removeProgram(
+    event) {
+      event.preventDefault();
+      var code = event.currentTarget.dataset.removeCode;
+      this._updateDOM(code);
+      this._updateURL(code);
+    }
+
+    /**
+       * Hide the program in the DOM
+       * @param  {string} code - the program code to update
+       */ }, { key: '_updateDOM', value: function _updateDOM(
+    code) {
+      var card = (0, _jquery2.default)('[data-code="' + code + '"]');
+      var selected = card.closest(ResultsField.Selectors.SELECTED_PROGRAMS);
+      var additional = card.closest(ResultsField.Selectors.ADDITIONAL_PROGRAMS);
+      var parent = selected.length ? selected : additional;
+      var length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).children();
+      var total = (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LIST).children();
+
+      // Hide the card
+      card.attr('aria-hidden', true).
+      addClass('hidden hide-for-print').
+      hide();
+
+      // Get updated length of list
+      length = parent.find(ResultsField.Selectors.PROGRAMS_LIST).
+      children().filter(':not(.hidden)').length;
+
+      // Update the length in the parent bucket
+      parent.find(ResultsField.Selectors.PROGRAMS_LENGTH).html(length);
+
+      // Update the total programs count
+      total = (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_LIST).
+      children().filter(':not(.hidden)').length;
+
+      (0, _jquery2.default)(ResultsField.Selectors.PROGRAMS_TOTAL).html(total);
+
+      // Switch to singular text if only one program is left
+      if (length === 1) {
+        parent.find(ResultsField.Selectors.PROGRAMS_SINGULAR).
+        attr('aria-hidden', false).
+        removeClass('hidden hide-for-print');
+        parent.find(ResultsField.Selectors.PROGRAMS_PLURAL).
+        attr('aria-hidden', true).
+        addClass('hidden hide-for-print');
+        // Hide title if list is empty
+      } else if (length <= 0) {
+        parent.find(ResultsField.Selectors.PROGRAMS_TITLE).
+        attr('aria-hidden', true).
+        addClass('hidden hide-for-print').
+        hide();
+        parent.find(ResultsField.Selectors.PROGRAMS_LIST).
+        attr('aria-hidden', true).
+        addClass('hidden hide-for-print').
+        hide();
+      }
+    }
+
+    /**
+       * Trim the program from the url, and retrieve a new hash for the updated url.
+       * @param  {string} code - the code to remove from the share string
+       */ }, { key: '_updateURL', value: function _updateURL(
+    code) {
+      var shareUrl = (0, _jquery2.default)(ResultsField.Selectors.SHARE_URLS)[0].value;
+      var categories = _utility2.default.getUrlParameter('categories', shareUrl);
+      var guid = _utility2.default.getUrlParameter('guid', shareUrl);
+      var date = _utility2.default.getUrlParameter('date', shareUrl);
+
+      var programs = _utility2.default.getUrlParameter('programs', shareUrl).split(',');
+      var request = {};
+
+      var index = programs.indexOf(code);
+
+      // Remove program from url list
+      if (index > -1) programs.splice(index, 1);
+
+      if (programs[0] != '') request['programs'] = programs.join('%2C');
+      if (categories[0] != '') request['categories'] = categories;
+      if (guid != '') request['guid'] = guid;
+      if (date != '') request['date'] = date;
+
+      // Get updated share url
+      this._getUrl(request, function (data) {
+        // Update programs list
+        (0, _jquery2.default)(ResultsField.Selectors.SHARE_PROGRAMS).each(function (index, element) {
+          element.value = programs;
+        });
+        // Update share url fields
+        (0, _jquery2.default)(ResultsField.Selectors.SHARE_URLS).each(function (index, element) {
+          element.value = data['url'];
+        });
+        // Udate the hash fields
+        (0, _jquery2.default)(ResultsField.Selectors.SHARE_HASH).each(function (index, element) {
+          element.value = data['hash'];
         });
       });
     }
 
     /**
-       * Update the list of locations on the map.
-       * @method
-       * @return {this} OfficeMap
-       */ }, { key: 'updateList', value: function updateList()
-    {var _this3 = this;
-      // If there are no qualified locations, show "no results".
-      if (this._filteredLocations.length === 0) {
-        (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_NO_RESULTS).
-        removeClass('hidden').
-        attr('aria-hidden', false);
-        (0, _jquery2.default)(this._listEl).empty();
-        (0, _jquery2.default)(this._paginationEl).empty();
-        return this;
+       * Submit the final url to the database and disable the ability to
+       * modify the url any further.
+       * @param  {object} event The finalize results form submission event.
+       */ }, { key: '_finalResults', value: function _finalResults(
+    event) {var _this2 = this;
+      var action = (0, _jquery2.default)(event.currentTarget).attr('action');
+      var data = (0, _jquery2.default)(event.currentTarget).serializeArray();
+      var $buttons = (0, _jquery2.default)(event.currentTarget).find('button');
+      var $spinner = (0, _jquery2.default)(event.currentTarget).find(ResultsField.Selectors.SPINNER);
+
+      event.preventDefault();
+
+      if (this._disabled) return;
+
+      this._disabled = true;
+
+      $buttons.hide();
+      $spinner.show();
+
+      var payload = {};
+      payload['action'] = 'response_update';
+      for (var i = 0; i < data.length; i++) {
+        payload[data[i].name] = data[i].value;
       }
 
-      // Underscore templates.
-      var locationTemplate = (0, _jquery2.default)('#map-location-template').html();
-      var paginationTemplate = (0, _jquery2.default)('#map-pagination-template').html();
-
-      // Determine the set of locations to retrieve based on count.
-      var currentCount = (0, _jquery2.default)(this._listEl).find('li').length;
-      var newCount = _utility2.default.getUrlParameter('count') &&
-      parseInt(_utility2.default.getUrlParameter('count'), 10) > currentCount &&
-      !(parseInt(_utility2.default.getUrlParameter('count'), 10) < 25) ?
-      parseInt(_utility2.default.getUrlParameter('count'), 10) : currentCount + 25;
-      var addedLocations = this._filteredLocations.
-      slice(currentCount, newCount);
-
-      // For the locations to be added, attach their marker to the map and
-      // set them to active.
-      _underscore2.default.each(addedLocations, function (location) {
-        location.marker.setMap(_this3._map);
-        location.active = true;
+      _jquery2.default.post(action, payload).done(function (response) {
+        (0, _jquery2.default)(_this2).remove();
+        (0, _jquery2.default)(ResultsField.Selectors.REMOVE_CONTAINER).remove();
+        (0, _jquery2.default)(ResultsField.Selectors.SHARE_RESULTS).
+        toggleClass('hidden').
+        prop('aria-hidden', false);
+      }).fail(function (response) {
+        _this2._disabled = false;
+        $buttons.show();
+        $spinner.hide();
+        alert('Something went wrong. Please try again later.');
+        /* eslint-disable */
+        if (_utility2.default.debug()) console.log(response);
+        /* eslint-enable*/
+      }).always(function () {
+        /* eslint-disable */
+        if (_utility2.default.debug()) console.log('Submission complete.');
+        /* eslint-enable*/
       });
-
-      // Update the list.
-      (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_NO_RESULTS).
-      addClass('hidden').
-      attr('aria-hidden', true);
-      (0, _jquery2.default)(this._listEl).append(_underscore2.default.template(locationTemplate)({
-        locations: addedLocations,
-        localize: _utility2.default.localize }));
-
-
-      // Update the pagination controller.
-      (0, _jquery2.default)(this._paginationEl).html(_underscore2.default.template(paginationTemplate)({
-        displayedCount: (0, _jquery2.default)(this._listEl).find('li').length,
-        totalCount: this._filteredLocations.length }));
-
-
-      // Re-zoom the map.
-      this.fitMapToPins();
-
-      return this;
-    }
-
-    /**
-       * Centers the map on the marker and highlights the marker with a bouncing
-       * animation.
-       * @param {google.maps.Marker} marker
-       * @return {this} OfficeMap
-       */ }, { key: 'centerOnMarker', value: function centerOnMarker(
-    marker) {
-      if (!marker) {
-        return this;
-      }
-
-      this._map.panTo(marker.getPosition());
-
-      // Bounce the marker once the pan has completed.
-      // A single bounce animation is about 700ms, so the animation is set here
-      // to last for three bounces (2100ms).
-      google.maps.event.addListenerOnce(this._map, 'idle', function () {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-        _underscore2.default.delay(function () {
-          marker.setAnimation(null);
-        }, 2100);
-      });
-
-      return this;
-    }
-
-    /**
-       * Centers the map on the clicked marker and highlights the accompanying
-       * result list item, scrolling either the page or the result list container
-       * to the item as appropraite.
-       * @method
-       * @param {google.maps.Marker} marker
-       * @return {this} OfficeMap
-       */ }, { key: 'focusListOnMarker', value: function focusListOnMarker(
-    marker) {
-      if (!marker) {
-        return this;
-      }
-
-      // Center the map.
-      this.centerOnMarker(marker);
-
-      // Highlight the list item related to the marker.
-      var $highlightedItem = (0, _jquery2.default)(this._el).
-      find('.' + OfficeMap.CssClass.LIST_LOCATION).
-      removeClass(OfficeMap.CssClass.ACTIVE).
-      filter('[data-marker="' + marker.id + '"]').
-      addClass(OfficeMap.CssClass.ACTIVE);
-      var $resultContainer = (0, _jquery2.default)(this._el).
-      find('.' + OfficeMap.CssClass.CONTROLS);
-      // The result container will have `overflow: scroll` on large viewports.
-      // In this case we want to only scroll that control. If the result container
-      // does not have `overflow: scroll` then we want to scroll the window.
-      var $scrollTarget = (0, _jquery2.default)('html, body');
-      var scrollPos = $highlightedItem.offset().top;
-      // TODO(jjandoc): Is there a better conditional for this?
-      if ($resultContainer.css('overflow') === 'auto' ||
-      $resultContainer.css('overflow-y') === 'auto') {
-        $scrollTarget = $resultContainer;
-        scrollPos = $scrollTarget.scrollTop() + $highlightedItem.position().top;
-      }
-      $scrollTarget.animate({
-        scrollTop: scrollPos + 'px' },
-      'fast');
-
-      return this;
-    }
-    /**
-       * Updates the list of locations based on programs.
-       * @method
-       * @return {this} OfficeMap
-       */ }, { key: 'filterLocations', value: function filterLocations()
-    {var _this4 = this;
-      this.clearLocations();
-      this._filteredLocations = [];
-      _underscore2.default.each(this._locations, function (location) {
-        if (!_this4._programs.length || location.hasProgram(_this4._programs)) {
-          _this4._filteredLocations.push(location);
-        }
-      });
-      return this;
-    }
-
-    /**
-       * Sort this._filteredLocations by distance of markers to a given point.
-       * @method
-       * @param {google.maps.LatLng} origin
-       * @return {this} OfficeMap
-       */ }, { key: 'sortByDistance', value: function sortByDistance()
-    {var origin = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._mapPosition;
-      _underscore2.default.each(this._filteredLocations, function (location) {
-        location.distance =
-        google.maps.geometry.spherical.computeDistanceBetween(origin,
-        location.marker.position);
-      });
-      this._filteredLocations = _underscore2.default.sortBy(this._filteredLocations, 'distance');
-
-      return this;
-    }
-
-    /**
-       * Updates the query parameters in the URL.
-       * @method
-       * @return {this} OfficeMap
-       */ }, { key: 'updateUrl', value: function updateUrl()
-    {
-      if ('replaceState' in window.history) {
-        var mapState = {
-          lat: this._mapPosition.lat(),
-          lng: this._mapPosition.lng() };
-
-        if (this._programs.length) {
-          mapState.programs = this._programs.join(',');
-        }
-        var locationCount = _underscore2.default.filter(this._filteredLocations, function (location) {return (
-            location.active);}).length;
-        if (locationCount) {
-          mapState.count = locationCount;
-        }
-        window.history.replaceState(null, null, '?' + _jquery2.default.param(mapState));
-      }
-
-      return this;
-    }
-
-    /**
-       * Sets the zoom level of the map to fit all active markers.
-       * @method
-       * @return {this} OfficeMap
-       */ }, { key: 'fitMapToPins', value: function fitMapToPins()
-    {
-      var bounds = new google.maps.LatLngBounds();
-      _underscore2.default.each(this._filteredLocations, function (location) {
-        if (location.active) {
-          bounds.extend(location.marker.getPosition());
-        }
-      });
-      this._map.fitBounds(bounds);
-      return this;
-    }
-
-    /**
-       * Method for the loading state
-       * @param  {boolean} isLoading Wether or not the map is loading
-       * @return {this} OfficeMap
-       */ }, { key: 'loading', value: function loading(
-    isLoading) {
-      if (isLoading) {
-        (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_LOADING).
-        removeClass('hidden').
-        attr('aria-hidden', false);
-      } else {
-        (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_LOADING).
-        addClass('hidden').
-        attr('aria-hidden', true);
-      }
-      return this;
-    }
-
-    // results() {
-
-    // }
-  }]);return OfficeMap;}();
+    } }]);return ResultsField;}();
 
 
 /**
-                             * CSS classes used by this component.
-                             * @enum {string}
-                             */
-OfficeMap.CssClass = {
-  ACTIVE: 'active bg-color-yellow-light',
-  CONTROLS: 'js-map-controls',
-  FILTER: 'js-map-filter',
-  LIST_LOCATION: 'js-map-location',
-  LOADING: 'loading',
-  MAP_BOX: 'js-map-mapbox',
-  MORE: 'js-map-more',
-  NO_RESULTS: 'no-results',
-  PAGINATION: 'js-map-pagination',
-  RESULT_CONTAINER: 'js-map-results-container',
-  RESULT_LIST: 'js-map-results',
-  SEARCH_BOX: 'js-map-searchbox' };
+                                    * Selectors for the results page
+                                    * @type {Object}
+                                    */
+ResultsField.Selectors = {
+  'ADDITIONAL_PROGRAMS': '[data-js="additional-programs"]',
+  'DOM': '[data-js="results"]',
+  'FINAL_RESULTS': '[data-js="final-results"]',
+  'HYPERLINKS': 'a[href*=""]',
+  'REMOVE_CONTAINER': '[id*="remove-"]',
+  'REMOVE_PROGRAM': '[data-js*="remove-program"]',
+  'SHARE_URLS': 'input[name="url"]',
+  'SHARE_HASH': 'input[name="hash"]',
+  'SHARE_PROGRAMS': 'input[name="programs"]',
+  'SHARE_RESULTS': '[data-js="share-results"]',
+  'SPINNER': '.js-spinner',
+  'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
+  'PROGRAMS_TOTAL': '[data-js="programs-total"]',
+  'PROGRAMS_LENGTH': '[data-js="programs-length"]',
+  'PROGRAMS_LIST': '[data-js="programs-list"]',
+  'PROGRAMS_TITLE': '[data-js="programs-title"]',
+  'PROGRAMS_SINGULAR': '[data-js="programs-singular"]',
+  'PROGRAMS_PLURAL': '[data-js="programs-plural"]' };
 
 
-OfficeMap.Selectors = {
-  MESSAGE_LOADING: '[data-js="message-loading"]',
-  MESSAGE_NO_RESULTS: '[data-js="message-no-results"]' };exports.default =
+/**
+                                                       * The endpoint for retrieving a new share URL
+                                                       * @type {String}
+                                                       */
+ResultsField.ShareUrlEndpoint = '/wp-json/api/v1/shareurl/';
+
+/**
+                                                              * The base path for the URL
+                                                              * @type {String}
+                                                              */
+ResultsField.SharePath = '/eligibility/results/';exports.default =
+
+ResultsField;
+
+},{"jquery":4,"modules/share-form":19,"modules/utility":21}],13:[function(require,module,exports){
+/* eslint-env browser */
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                   * This component is the object class for screener individuals.
+                                                                                                                                                                                                                                                                                                                                                   * @class
+                                                                                                                                                                                                                                                                                                                                                   */var
+ScreenerClient = function () {
+  /**
+                               * @param {?object} obj - initial attributes to set.
+                               * @constructor
+                               */
+  function ScreenerClient(obj) {_classCallCheck(this, ScreenerClient);
+    /** @private {object} The attributes that are exposed to Drools. */
+    this._attrs = {
+      /** @type {string} */
+      firstName: '',
+      /** @type {string} */
+      lastName: '',
+      /** @type {array} */
+      language: [],
+      /** @type {string} */
+      languageOther: '',
+      /** @type {string} */
+      phone: '',
+      /** @type {string} */
+      phoneType: '',
+      /** @type {string} */
+      phoneAlt: '',
+      /** @type {string} */
+      phoneAltType: '',
+      /** @type {array} */
+      contactTimes: [],
+      /** @type {string} */
+      email: '',
+      /** @type {string} */
+      streetNumber: '',
+      /** @type {string} */
+      streetName: '',
+      /** @type {string} */
+      unit: '',
+      /** @type {string} */
+      borough: '',
+      /** @type {boolean} */
+      currentClient: false,
+      /** @type {string} */
+      caseNumber: '',
+      /** @type {array} program categories to group results in */
+      programCategories: [],
+      /** @type {array} */
+      programsEnrolled: [] };
+
+    if (obj) {
+      this.set(obj);
+    }
+  }
+
+  /**
+     * If supplied param is an object, sets this._attrs values, matching keys.
+     * If supplied params are a string and a second value, the string matches
+     * the key and applies the second value.
+     * @method
+     * @param {object|string} param - Object of attributes, or a key for an
+     *   individual attribute
+     * @param {?string|number|boolean|array} value - Optional value to set.
+     * @return {this} ScreenerClient
+     */_createClass(ScreenerClient, [{ key: 'set', value: function set(
+    param, value) {
+      if (_underscore2.default.isObject(param)) {
+        for (var key in param) {
+          if (Object.prototype.hasOwnProperty.call(param, key)) {
+            this._setAttr(key, param[key]);
+          }
+        }
+      } else {
+        this._setAttr(param, value);
+      }
+      return this;
+    }
+
+    /**
+       * Sets an individual attribute, matching for type.
+       * @private
+       * @param {string} key
+       * @param {string|number|boolean|array} value
+       */ }, { key: '_setAttr', value: function _setAttr(
+    key, value) {
+      if (key in this._attrs && _typeof(this._attrs[key]) === (typeof value === 'undefined' ? 'undefined' : _typeof(value))) {
+        this._attrs[key] = value;
+      }
+    }
+
+    /**
+       * Returns the value of a given key in this._attrs.
+       * @method
+       * @param {string} key
+       * @return {string|number|boolean|array} value
+       */ }, { key: 'get', value: function get(
+    key) {
+      var value = key in this._attrs ? this._attrs[key] : null;
+      return value;
+    }
+
+    /**
+       * Returns the value of this._attrs as an object.
+       * @method
+       * @return {object} this._attrs
+       */ }, { key: 'toObject', value: function toObject()
+    {
+      return this._attrs;
+    } }]);return ScreenerClient;}();
 
 
-OfficeMap;
+ScreenerClient.LANGUAGE = [
+'en',
+'sp',
+'other'];
 
-},{"jquery":4,"modules/office-filter":9,"modules/office-location":10,"modules/utility":19,"underscore":6}],12:[function(require,module,exports){
+
+ScreenerClient.PHONE_TYPE = [
+'cell',
+'home',
+'work'];
+
+
+ScreenerClient.CONTACT_TIMES = [
+'morning',
+'noon',
+'afternoon',
+'evening',
+'saturday'];
+
+
+ScreenerClient.BOROUGH = [
+'manhattan',
+'bronx',
+'queens',
+'brooklyn',
+'statenIsland'];
+
+
+ScreenerClient.ADDRESS_ATTRS = [
+'streetNumber',
+'streetName',
+'unit',
+'borough'];exports.default =
+
+
+ScreenerClient;
+
+},{"underscore":7}],14:[function(require,module,exports){
+/* eslint-env browser */
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
+var _jsCookie = require('js-cookie');var _jsCookie2 = _interopRequireDefault(_jsCookie);
+var _screenerHousehold = require('modules/screener-household');var _screenerHousehold2 = _interopRequireDefault(_screenerHousehold);
+var _screenerPerson = require('modules/screener-person');var _screenerPerson2 = _interopRequireDefault(_screenerPerson);
+var _screenerClient = require('modules/screener-client');var _screenerClient2 = _interopRequireDefault(_screenerClient);
+var _screenerStaff = require('modules/screener-staff');var _screenerStaff2 = _interopRequireDefault(_screenerStaff);
+var _screener = require('modules/screener');var _screener2 = _interopRequireDefault(_screener);
+var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
+var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);
+var _vue = require('vue/dist/vue.common');var _vue2 = _interopRequireDefault(_vue);
+var _veeValidate = require('vee-validate');var _veeValidate2 = _interopRequireDefault(_veeValidate);
+var _calcInput = require('modules/calc-input');var _calcInput2 = _interopRequireDefault(_calcInput);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                        * Requires Documentation
+                                                                                                                                                                                                                                                                                                                                                        * @class
+                                                                                                                                                                                                                                                                                                                                                        */var
+ScreenerField = function () {
+  /**
+                              * @param {HTMLElement} el - The form element for the component.
+                              * @constructor
+                              */
+  function ScreenerField(el) {_classCallCheck(this, ScreenerField);
+    /** @private {HTMLElement} The component element. */
+    this._el = el;
+
+    /** @private {boolean} Whether this component has been initialized. */
+    this._initialized = false;
+
+    /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
+    this._recaptchaVerified = true;
+
+    /** @private {object} The screener routes and event hooks */
+    this._routes = {
+      admin: function admin(vue) {},
+      screener: function screener(vue) {},
+      recap: function recap(vue) {} };
+
+
+    /** @private {object} The Vue configuration */
+    this._vue = {
+      delimiters: ['v{', '}'],
+      el: '#vue',
+      data: {
+        /* Models */
+        people: [new _screenerPerson2.default({
+          headOfHousehold: true })],
+
+        household: new _screenerHousehold2.default({
+          city: 'NYC',
+          livingPreferNotToSay: true }),
+
+        client: new _screenerClient2.default(),
+        staff: new _screenerStaff2.default(),
+        /* UI Data */
+        /** @type {boolean} Wether the disclaimer is checked */
+        disclaimer: false,
+        /** @type {Boolean} Throttle for submitting timeout */
+        submitting: false,
+        /** @type {array} */
+        expenses: [],
+        /** @type {Number} */
+        income: 0,
+        /** @type {array} grouped attrs for selection by getAttrs(recap page) */
+        conditionAttrs: _screenerPerson2.default.CONDITION_ATTRS,
+        /** @type {Array} grouped attrs for selection by getAttrs(recap page) */
+        benefitAttrs: _screenerPerson2.default.BENEFIT_ATTRS,
+        /** @type {Array} grouped attrs for selection by getAttrs(recap page) */
+        livingAttrs: _screenerHousehold2.default.LIVING_ATTRS,
+        /** @type {Array} grouped attrs for selection by getAttrs(recap page) */
+        addressAttrs: _screenerClient2.default.ADDRESS_ATTRS },
+
+      methods: {
+        resetAttr: ScreenerField.resetAttr,
+        setAttr: ScreenerField.setAttr,
+        setAllAttr: ScreenerField.setAllAttr,
+        setHousing: ScreenerField.setHousing,
+        getAttrs: ScreenerField.getAttrs,
+        populate: ScreenerField.populate,
+        pushPayment: ScreenerField.pushPayment,
+        getPayment: ScreenerField.getPayment,
+        removePayment: ScreenerField.removePayment,
+        removeAllPayments: ScreenerField.removeAllPayments,
+        push: ScreenerField.push,
+        checked: ScreenerField.checked,
+        singleOccupant: ScreenerField.singleOccupant,
+        validate: ScreenerField.validate,
+        localString: ScreenerField.localString,
+        getTypedVal: ScreenerField.getTypedVal,
+        commit: ScreenerField.commit,
+        filterDollars: ScreenerField.filterDollars,
+        filterPhone: ScreenerField.filterPhone,
+        track: ScreenerField.track } };
+
+
+  }
+
+  /**
+     * If this component has not yet been initialized, attaches event listeners.
+     * @method
+     * @return {this} OfficeMap
+     */_createClass(ScreenerField, [{ key: 'init', value: function init()
+    {var _this = this;
+      if (this._initialized) {
+        return this;
+      }
+
+      /**
+         * Hide pages and questions on load. Hiding them with CSS (using display:
+         * none) before causes flickering issues on checkbox interactions on IOS.
+         * The CSS could probably afford to be optimized, but this works as well.
+         */
+
+      (0, _jquery2.default)(ScreenerField.Selectors.PAGE).
+      removeClass(ScreenerField.Classes.HIDDEN_OPACITY).
+      addClass(ScreenerField.Classes.HIDDEN);
+      (0, _jquery2.default)(ScreenerField.Selectors.TOGGLE_QUESTION).
+      addClass(ScreenerField.Classes.HIDDEN);
+
+      /**
+                                               * Reactive Elements
+                                               */
+
+      // Special validations
+      _veeValidate2.default.Validator.extend('zip', this._validateZipField());
+      _veeValidate2.default.Validator.extend('hoh', this._validateHeadOfHousehold());
+      _vue2.default.use(_veeValidate2.default, { events: 'blur', zip: 'zip', hoh: 'hoh' });
+
+      // Components
+      _vue2.default.component('personlabel', ScreenerField.personLabel);
+
+      // Initialize Vue
+      this._vue = new _vue2.default(this._vue);
+
+      /**
+                                                 * DOM Event Listeners
+                                                 */
+
+      var $el = (0, _jquery2.default)(this._el);
+
+      // Submit
+      $el.on('click', ScreenerField.Selectors.SUBMIT, function (event) {
+        if (_this._recaptchaVerified) _this._submit(event);
+      });
+
+      // Basic toggles
+      $el.on('change', ScreenerField.Selectors.TOGGLE, this._toggler);
+
+      // Validate calculated input against regular expressions
+      new _calcInput2.default(this._el);
+
+      /**
+                                          * Determine whether or not to initialize ReCAPTCHA. This should be
+                                          * initialized only on every 10th view which is determined via an
+                                          * incrementing cookie.
+                                          */
+
+      var viewCount = _jsCookie2.default.get(ScreenerField.Cookies.VIEWS) ?
+      parseInt(_jsCookie2.default.get(ScreenerField.Cookies.VIEWS), 10) : 1;
+
+      if (viewCount >= 10) {
+        this._initRecaptcha();
+        viewCount = 0;
+      }
+
+      // `2/1440` sets the cookie to expire after two minutes.
+      _jsCookie2.default.set(ScreenerField.Cookies.VIEWS, ++viewCount, {
+        expires: 2 / 1440,
+        path: ScreenerField.Cookies.PATH });
+
+
+      /**
+                                              * Routing
+                                              */
+
+      window.addEventListener('hashchange', function (event) {return _this._router(event);});
+
+      // Close Questions
+      $el.on('click', ScreenerField.Selectors.QUESTION, function (event) {
+        _this._routerQuestion(event);
+      });
+
+      // Set the initial view
+      this._routerPage('#page-admin');
+
+      // Set the timeout for the application
+      _utility2.default.sessionTimeout(
+      ScreenerField.IdleSessionConfig.IDLE_SESSION_TIMEOUT,
+      this._idleSession);
+
+
+      return this;
+    }
+
+    /**
+       * Actions for when the session is idle
+       * @param  {object} timer The timer object
+       */ }, { key: '_idleSession', value: function _idleSession(
+    timer) {
+      if (timer.int > 1) {
+        // prevents the page refresh until initial interaction
+        // location.reload(); // The data will be cleared.
+        var message = ScreenerField.IdleSessionConfig.IDLE_SESSION_MESSAGE;
+        alert(message);
+        location.reload();
+      }
+    }
+
+    /**
+       * Asynchronously loads the Google recaptcha script and sets callbacks for
+       * load, success, and expiration.
+       */ }, { key: '_initRecaptcha', value: function _initRecaptcha()
+    {var _this2 = this;
+      var script = (0, _jquery2.default)(document.createElement('script'));
+
+      /* eslint-disable no-console, no-debugger */
+      if (_utility2.default.debug()) console.warn('Recaptcah Initialized');
+      /* eslint-enable no-console, no-debugger */
+
+      script.attr('src',
+      'https://www.google.com/recaptcha/api.js' +
+      '?onload=screenerCallback&render=explicit').prop({
+        async: true,
+        defer: true });
+
+
+      window.screenerCallback = function () {
+        window.grecaptcha.render(
+        document.querySelector(ScreenerField.Selectors.RECAPTCHA), {
+          'sitekey': _utility2.default.CONFIG.GRECAPTCHA_SITE_KEY,
+          'callback': 'screenerRecaptcha',
+          'expired-callback': 'screenerRecaptchaReset' });
+
+      };
+
+      window.screenerRecaptcha = function () {
+        _this2._recaptchaVerified = true;
+      };
+
+      window.screenerRecaptchaReset = function () {
+        _this2._recaptchaVerified = false;
+      };
+
+      this._recaptchaVerified = false;
+
+      (0, _jquery2.default)('head').append(script);
+    }
+
+    /**
+       * Checks to see if the input's value is a valid NYC zip code.
+       * @return {object} The validation object for vee validate
+       */ }, { key: '_validateZipField', value: function _validateZipField()
+    {
+      return {
+        getMessage: function getMessage() {return 'Must be a valid NYC zip code';},
+        validate: function validate(value) {
+          if (ScreenerField.NYC_ZIPS.indexOf(value) > -1) return true;
+          return false;
+        } };
+
+    }
+
+    /**
+       * Makes sure there is at least one head of household.
+       * @return {object} The validation object for vee validate
+       */ }, { key: '_validateHeadOfHousehold', value: function _validateHeadOfHousehold()
+    {var _this3 = this;
+      return {
+        getMessage: function getMessage() {return 'At lease one head of household is required';},
+        validate: function validate() {
+          var hoh = false;
+          for (var i = _this3._vue.people.length - 1; i >= 0; i--) {
+            var valid = _this3._vue.people[i]._attrs.headOfHousehold;
+            hoh = valid ? valid : hoh;
+          }
+          return hoh;
+        } };
+
+    }
+
+    /**
+       * The page to go to.
+       * @param  {string} page the page hash
+       */ }, { key: '_routerPage', value: function _routerPage(
+    page) {
+      var view = document.querySelector(ScreenerField.Selectors.VIEW);
+
+      /* eslint-disable no-console, no-debugger */
+      if (_utility2.default.debug()) console.log('routerPage: ' + page);
+      /* eslint-enable no-console, no-debugger */
+
+      window.location.hash = page;
+      view.scrollTop = 0;
+
+      (0, _jquery2.default)(ScreenerField.Selectors.PAGE).
+      removeClass(ScreenerField.Classes.ACTIVE).
+      addClass(ScreenerField.Classes.HIDDEN).
+      removeClass('fadeIn').
+      attr('aria-hidden', 'true').
+      find(':input, a').
+      attr('tabindex', '-1');
+
+      (0, _jquery2.default)(page).
+      removeClass(ScreenerField.Classes.HIDDEN).
+      addClass(ScreenerField.Classes.ACTIVE).
+      addClass('fadeIn').
+      removeAttr('aria-hidden').
+      find(':input, a').
+      removeAttr('tabindex');
+    }
+
+    /**
+       * Jumps to screener question.
+       * @param {object} event - The click event if available.
+       * @param {string} hash  - The question's hash id.
+       */ }, { key: '_routerQuestion', value: function _routerQuestion(
+    event, hash) {
+      hash = typeof hash != 'undefined' ? hash : event.target.hash;
+      var page = (0, _jquery2.default)(hash).closest(ScreenerField.Selectors.PAGE);
+      var target = (0, _jquery2.default)(hash).find(ScreenerField.Selectors.TOGGLE_QUESTION);
+      var show = !target.hasClass(ScreenerField.Classes.ACTIVE);
+
+      if (!page.hasClass(ScreenerField.Classes.ACTIVE)) {
+        this._routerPage('#' + page.attr('id'));
+        show = true;
+      }
+
+      // Show
+      if (show) {
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug()) console.log('routerQuestion: Show ' + hash);
+        /* eslint-enable no-console, no-debugger */
+        (0, _jquery2.default)(ScreenerField.Selectors.TOGGLE_QUESTION).
+        addClass(ScreenerField.Classes.HIDDEN).
+        removeClass(ScreenerField.Classes.ACTIVE).
+        prop('aria-hidden', true);
+
+        target.addClass(ScreenerField.Classes.ACTIVE).
+        removeClass(ScreenerField.Classes.HIDDEN).
+        prop('aria-hidden', false);
+
+        // Scrolling Behavior
+        event.preventDefault();
+        setTimeout(function () {
+          document.querySelector(hash).
+          scrollIntoView(true);
+          document.querySelector(ScreenerField.Selectors.VIEW).
+          scrollBy({ top: -60, left: 0, behavior: 'auto' });
+        }, 1);
+
+        return;
+      }
+
+      // Hide
+      /* eslint-disable no-console, no-debugger */
+      if (_utility2.default.debug()) console.log('routerQuestion: Hide ' + hash);
+      /* eslint-enable no-console, no-debugger */
+      target.addClass(ScreenerField.Classes.HIDDEN).
+      removeClass(ScreenerField.Classes.ACTIVE).
+      prop('aria-hidden', true);
+      // Scrolling Behavior
+      event.preventDefault();
+    }
+
+    /**
+       * The router, listens for hash changes and initializes appropriate hooks
+       * @param  {object} event the window hash change event
+       * @return {null}
+       */ }, { key: '_router', value: function _router(
+    event) {
+      var hash = window.location.hash;
+      var type = hash.split('-')[0];
+      var route = hash.split('-')[1];
+
+      if (type === '#page') {
+        this._routes[route](this._vue);
+        this._routerPage(hash);
+      }
+
+      if (type === '#question') {
+        this._routerQuestion(event, hash);
+      }
+
+      return this;
+    }
+
+    /**
+       * For a given input, if it has the "toggles" data attribute, show or hide
+       * another element selected by the toggles values based on the value of the
+       * input. If the input has a "shows" or "hides" data attribute, show or hide
+       * relevant element accordingly.
+       * @private
+       * @param {object} event - toggle event.
+       */ }, { key: '_toggler', value: function _toggler(
+    event) {
+      var $el = (0, _jquery2.default)(event.currentTarget);
+      if ($el.data('toggles')) {
+        var $target = (0, _jquery2.default)($el.data('toggles'));
+        if (
+        $el.prop('checked') && Boolean(parseInt($el.val(), 10)) ||
+        $el.is('select') && $el.val())
+        {
+          $target.removeClass(ScreenerField.Classes.HIDDEN);
+        } else {
+          $target.addClass(ScreenerField.Classes.HIDDEN);
+        }
+      }
+      if ($el.data('shows')) {
+        (0, _jquery2.default)($el.data('shows')).removeClass(ScreenerField.Classes.HIDDEN);
+      }
+      if ($el.data('hides')) {
+        (0, _jquery2.default)($el.data('hides')).addClass(ScreenerField.Classes.HIDDEN);
+      }
+    }
+
+    /**
+       * Returns the JSON object for Drools submission.
+       * @private
+       * @param  {object} vue the data store
+       * @return {object}     drools JSON
+       */ }, { key: '_getDroolsJSON', value: function _getDroolsJSON(
+    vue) {
+      var json = {
+        lookup: 'KieStatelessSession',
+        commands: [] };
+
+
+      // Insert Household data.
+      json.commands.push({
+        insert: {
+          object: {
+            'accessnyc.request.Household': vue.household.toObject() } } });
+
+
+
+
+      // Insert Person data.
+      _underscore2.default.each(vue.people.slice(0, vue.household.get('members')), function (person) {
+        if (person) {
+          json.commands.push({
+            insert: {
+              object: {
+                'accessnyc.request.Person': person.toObject() } } });
+
+
+
+        }
+      });
+
+      // Additional Drools commands.
+      json.commands.push({
+        'fire-all-rules': {
+          'out-identifier': 'rulesFiredCountOut' } });
+
+
+
+      json.commands.push({
+        query: {
+          'name': 'findEligibility',
+          'arguments': [],
+          'out-identifier': 'eligibility' } });
+
+
+
+      // This Drools command outputs a large number of debugging variables that
+      // are not necessary for production.
+      if (_utility2.default.debug()) {
+        json.commands.push({
+          'get-objects': {
+            'out-identifier': 'getObjects' } });
+
+
+      }
+
+      return json;
+    }
+
+    /**
+       * Submits the JSON payload to Drools.
+       * @private
+       * @param  {object} event - the form submit event
+       * @return {jqXHR}
+       */ }, { key: '_submit', value: function _submit(
+    event) {var _this4 = this;
+      var url = event.target.dataset.action;
+      var json = this._getDroolsJSON(this._vue);
+      var programsFilter = this._vue.client.get('programsEnrolled');
+
+      this._vue.submitting = true;
+
+      /* eslint-disable no-console, no-debugger */
+      if (_utility2.default.debug()) {
+        console.warn(json);
+        console.log(JSON.stringify(json));
+        debugger;
+      }
+
+      return _jquery2.default.ajax({
+        url: url,
+        type: 'post',
+        data: {
+          action: 'drools',
+          data: json,
+          staff: this._vue.staff.toObject(),
+          client: this._vue.client.toObject() } }).
+
+      done(function (data) {
+        var result = {
+          data: data,
+          url: url,
+          json: json };
+
+
+        if (data.type !== 'SUCCESS') {
+          if (_utility2.default.debug()) {
+            console.warn(result);
+            debugger;
+          }
+          alert('There was an error getting results. Please try again later.');
+          _this4._vue.submitting = false;
+          return;
+        }
+
+        if (_utility2.default.debug()) {
+          console.warn(result);
+          debugger;
+        }
+
+        var programs = _underscore2.default.chain(
+        _utility2.default.findValues(data, 'code')).
+        filter(
+        function (item) {return _underscore2.default.isString(item);}
+        // filter out the programs they are already receiving
+        ).filter(
+        function (item) {return programsFilter.indexOf(item) === -1;}).
+        uniq().value();
+
+        if (_utility2.default.debug()) {
+          console.warn(programs);
+          debugger;
+        }
+
+        var params = {};
+
+        if (_this4._vue.client._attrs.programCategories.length) {
+          params.categories = _this4._vue.client._attrs.programCategories.join(',');
+        }
+
+        if (programs.length) {
+          params.programs = programs.join(',');
+        }
+
+        if ('GUID' in data) {
+          params.guid = data.GUID;
+        }
+
+        params.date = Math.floor(Date.now() / 1000);
+
+        // For security, reset the form before redirecting so that results are
+        // not visible when someone hits back on their browser.
+        _this4._el.reset();
+
+        window.location = './results?' + _jquery2.default.param(params);
+      });
+      /* eslint-enable no-console, no-debugger */
+    } }]);return ScreenerField;}();
+
+
+/**
+                                     * Wrapper for the tracking functionality in utiltiy.
+                                     * @param  {string} key  [description]
+                                     * @param  {object} data [description]
+                                     */
+ScreenerField.track = function (key, data) {
+  _utility2.default.track(ScreenerField.ANALYTICS_PREFIX + ' ' + key, data);
+};
+
+/**
+    * Validation functionality, if a scope is attatched, it will only validate
+    * against the scope stored in validScopes
+    * @param  {event}  event - the click event
+    * @param  {string} scope - the scope to validate, if undefined validates all
+    */
+ScreenerField.validate = function (event, scope) {
+  event.preventDefault();
+  scope = typeof scope !== 'undefined' ?
+  scope : event.currentTarget.dataset.vvScope;
+  if (typeof scope !== 'undefined') {
+    this.$validator.validateAll(scope).then(function (valid) {
+      ScreenerField.valid(event.target.hash, valid);
+    });
+  } else {
+    this.$validator.validate().then(function (valid) {
+      ScreenerField.valid(event.target.hash, valid);
+    });
+  }
+};
+
+/**
+    * Validate
+    * @param {string}  hash  - The hash to move to
+    * @param {boolean} valid - Wether the validator passes validation
+    */
+ScreenerField.valid = function (hash, valid) {
+  if (!valid) {
+    /* eslint-disable no-console, no-debugger */
+    if (_utility2.default.debug())
+    console.warn('Some required fields are not filled out.');
+    /* eslint-enable no-console, no-debugger */
+  } else {
+    window.location.hash = hash;
+  }
+  // debug bypasses validation
+  if (_utility2.default.debug())
+  window.location.hash = hash;
+};
+
+/**
+    * Push/Pull items in an array
+    * @param {object} event listener object, requires data;
+    *                       {object} array to push to
+    *                       {key} if object is contained in a model,
+    *                       add the data-key parameter
+    */
+ScreenerField.push = function (event) {
+  var el = event.currentTarget;
+  var obj = el.dataset.object;
+  var key = el.dataset.key;
+  var value = el.value;
+  // if there is a key, it's probably one of the custom modules
+  // with storage in ._attrs, so we'll get the value for processing
+  var current = typeof key === 'undefined' ?
+  this[obj] : this[obj].get(key);
+
+  // get the current index
+  var index = current.indexOf(value);
+
+  // if checked, push, if not remove item
+  if (el.checked) {
+    current.push(value);
+  } else if (index > -1) {
+    current.splice(index, 1);
+  }
+
+  // remove duplicates
+  current = _underscore2.default.uniq(current);
+
+  // if there is a key, it's probably one of the custom modules
+  // with storage in ._attrs
+  if (typeof key != 'undefined') {
+    this[obj].set(key, current);
+  } else {
+    this[obj] = current;
+  }
+};
+
+/**
+    * Checks model to see if it is included in a list or not.
+    * @param  {string} list  the name of the model
+    * @param  {string} value the name of the value to check
+    * @return {boolean}      wether or not the value is in the list or not
+    */
+ScreenerField.checked = function (list, value) {
+  return this[list].indexOf(value) > -1;
+};
+
+/**
+    * Resets a attribute matrix, ex "none of these apply"
+    * @param  {object} event the click event
+    */
+ScreenerField.resetAttr = function (event) {
+  var el = event.currentTarget;
+  var obj = el.dataset.object;
+  var index = el.dataset.index;
+  var keys = el.dataset.key.split(',');
+  var value = el.value === 'true';
+  for (var i = keys.length - 1; i >= 0; i--) {
+    /* eslint-disable no-console, no-debugger */
+    if (typeof index === 'undefined') {
+      this[obj].set(keys[i], value);
+      if (_utility2.default.debug())
+      console.log('resetAttr: ' + obj + ', ' + keys[i] + ', ' + value);
+    } else {
+      this[obj][index].set(keys[i], value);
+      if (_utility2.default.debug())
+      console.log('resetAttr: ' + obj + ', ' + index + ', ' + keys[i] + ', ' + value);
+    }
+    /* eslint-enable no-console, no-debugger */
+    var _el = document.querySelector('[data-key="' + keys[i] + '"]');
+    if (_el) _el.checked = false;
+  }
+};
+
+/**
+    * Inforces strict types for certain data
+    * @param  {event} event - event listener object, requires data;
+    *                       - object {object} 'people' or 'household'
+    *                       - index {number} item index in object (optional)
+    *                       - key {string} attribute to set
+    *                       - type {string} type of attribute
+    * @param  {string/boolean/number/array} value - if passed, will use this value
+    *                                               instead of the data attribute
+    * @param  {string} attr - if passed, will set this attribute instead of the
+    *                         data attribute
+    */
+ScreenerField.setAttr = function (event, value, attr) {
+  var el = event.currentTarget;
+  var obj = el.dataset.object;
+  var index = el.dataset.index;
+  var key = typeof attr != 'undefined' ? attr : el.dataset.key;
+  var reset = el.dataset.reset;
+  // get the typed value;
+  value = typeof value != 'undefined' ? value : ScreenerField.getTypedVal(el);
+  // set the attribute;
+  /* eslint-disable no-console, no-debugger */
+  if (typeof index === 'undefined') {
+    this[obj].set(key, value);
+    if (_utility2.default.debug())
+    console.dir('setAttr: ' + obj + ', ' + key + ', ' + value);
+  } else {
+    this[obj][index].set(key, value);
+    if (_utility2.default.debug())
+    console.dir('setAttr: ' + obj + ', ' + index + ', ' + key + ', ' + value);
+  }
+  /* eslint-enable no-console, no-debugger */
+  // reset an element based on this value;
+  if (typeof reset != 'undefined')
+  document.querySelector(reset).checked = false;
+};
+
+/**
+    * Format number value and make sure it has '.00'
+    * @param  {string} event - the blur event
+    * @return {string}       - the formatted string
+    */
+ScreenerField.filterDollars = function (event) {
+  var value = event.currentTarget.value;
+  var postfix = '';
+  if (('' + value).indexOf('.') > -1) {
+    var split = ('' + value).split('.');
+    postfix = split[1].length == 1 ? '0' : postfix;
+    postfix = split[1].length == 0 ? '00' : postfix;
+    value += postfix;
+  } else if (value != '') {
+    value += '.00';
+  }
+  return value;
+};
+
+/**
+    * Filter a phone number and add dashes as the user types
+    * @param  {object} event - the key down event object
+    * @return {string}       - the formatted string
+    */
+ScreenerField.filterPhone = function (event) {
+  var key = event.keyCode;
+  var backspace = key === 8 || key === 46;
+  var arrows = key >= 37 && key <= 40;
+
+  if (backspace || arrows) return event.target.value;
+
+  var numbers = event.target.value.replace(/[^0-9]/g, '');
+
+  if (numbers.length === 6) {
+    return numbers.replace(/(\d{3})(\d{3})/, '$1-$2-');
+  } else if (numbers.length === 3) {
+    return numbers.replace(/(\d{3})/, '$1-');
+  }
+
+  return event.target.value;
+};
+
+/**
+    * Set attribute for all objects in collection.
+    * @param  {event} event - event listener object, requires data;
+    *                       - object {object} 'people' or 'household'
+    *                       - key {string} attribute to set
+    *                       - type {string} type of attribute
+    * @param  {string/boolean/number/array} value - if passed, will use this value
+    *                                               instead of the data attribute
+    * @param  {string} attr - if passed, will set this attribute instead of the
+    *                         data attribute
+    */
+ScreenerField.setAllAttr = function (event, value, attr) {
+  var el = event.currentTarget;
+  var obj = el.dataset.object;
+  var key = typeof attr != 'undefined' ? attr : el.dataset.key;
+  var keys = el.dataset.key.split(',');
+  value = typeof value != 'undefined' ? value : ScreenerField.getTypedVal(el);
+  for (var i = this[obj].length - 1; i >= 0; i--) {
+    for (var k = keys.length - 1; k >= 0; k--) {
+      this[obj][i].set(keys[k], value);
+    }
+  }
+  /* eslint-disable no-console, no-debugger */
+  if (_utility2.default.debug())
+  console.dir('setAllAttr: ' + obj + ', ' + key + ', ' + value);
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
+    * Get select truthy or non blank string attributes for a model
+    * @param  {string} object     - the model to retrieve from
+    * @param  {string/array} keys - list of attributes to retrieve
+    * @param  {Number} index      - index of model if in a collection
+    * @return {object} key value pair of truthy values
+    */
+ScreenerField.getAttrs = function (object, keys) {var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+  var obj = index > -1 ? this[object][index] : this[object];
+  keys = typeof keys === 'string' ? keys.split(',') : keys;
+  return _underscore2.default.pick(obj._attrs, function (value, key) {
+    return keys.indexOf(key) > -1 && (value != '' || value === true);
+  });
+};
+
+/**
+    * Special processor for the household model housing attributes.
+    * @param {event} event - the change event for housing
+    */
+ScreenerField.setHousing = function (event) {
+  var el = event.target;
+  var key = el.dataset.key;
+  var keys = [];
+  var value = ScreenerField.getTypedVal(el);
+  var reset = false;
+
+  this.household.set(key, value);
+
+  if (key === 'livingPreferNotToSay' && value === true) {
+    keys = el.dataset.keys.split(',');
+    for (var k = keys.length - 1; k >= 0; k--) {
+      this.household.set(keys[k], false);
+    }
+    reset = true;
+  } else {
+    this.household.set('livingPreferNotToSay', false);
+  }
+
+  // rental reset
+  if (key === 'livingRenting' && value === false || reset) {
+    this.household.set('livingRentalType', '');
+    for (var r = this.people.length - 1; r >= 0; r--) {
+      this.people[r].set('livingRentalOnLease', false);
+    }
+  }
+
+  // owner reset
+  if (key === 'livingOwner' && value === false || reset) {
+    for (var o = this.people.length - 1; o >= 0; o--) {
+      this.people[o].set('livingOwnerOnDeed', false);
+    }
+  }
+};
+
+/**
+    * Populate the family, start at one because
+    * the first person exists by default
+    * @param  {event} event to pass to setAttr()
+    */
+ScreenerField.populate = function (event) {
+  var value = event.currentTarget.value;
+  if (value === '' || parseInt(value, 10) === 0) return;
+  var dif = value - this.people.length;
+  // set the data for the model
+  this.setAttr(event);
+  if (dif > 0) {// add members if positive
+    for (var i = 0; i <= dif - 1; i++) {
+      var person = new _screenerPerson2.default();
+      // person._attrs.guid = Utility.guid();
+      this.people.push(person);
+    }
+  } else if (dif < 0) {// remove members if negative
+    this.people = this.people.slice(0, this.people.length + dif);
+  }
+};
+
+/**
+    * Collects DOM income data and updates the model, if there is no income
+    * data based on the DOM, it will create a new income object
+    * @param  {object} event - change event, requires data attributes;
+    *                          person {index}
+    *                          val {model attribute key}
+    *                          key {income key}
+    *                          value {model attribute value}
+    */
+ScreenerField.pushPayment = function (event) {
+  var el = event.currentTarget;
+  var obj = el.dataset.object;
+  var objIndex = parseInt(el.dataset.index);
+  var type = el.value;
+  var key = el.dataset.key;
+  var current = _underscore2.default.findIndex(
+  this[obj][objIndex]._attrs[key], { 'type': type });
+
+
+  // if the payment exists
+  /* eslint-disable no-console, no-debugger */
+  if (type === '' || el.checked === false) {
+    // remove payment
+    if (_utility2.default.debug())
+    console.log('pushPayment: Remove; ' + key + ', ' + type);
+    this[obj][objIndex]._attrs[key].splice(current, 1);
+  } else {
+    // add payment
+    if (_utility2.default.debug())
+    console.log('pushPayment: Add; ' + key + ', ' + type);
+    this[obj][objIndex].addPayment(key, type);
+  }
+  /* eslint-enable no-console, no-debugger */
+};
+
+/**
+    * Remove a payment if the element target value is blank
+    * @param  {event} event - change event object
+    */
+ScreenerField.removePayment = function (event) {
+  if (event.currentTarget.value !== '') return;
+  var el = event.currentTarget;
+  var obj = el.dataset.object;
+  var objIndex = parseInt(el.dataset.index);
+  var key = el.dataset.key;
+  var keyIndex = el.dataset.keyIndex;
+  /* eslint-disable no-console, no-debugger */
+  if (_utility2.default.debug())
+  console.log('removePayment: ' + key);
+  /* eslint-enable no-console, no-debugger */
+  this[obj][objIndex]._attrs[key].splice(keyIndex, 1);
+};
+
+/**
+    * Removes all payments for all persons in household
+    * @param  {object} event - the radio button toggle event
+    * @param  {string} key   - optional way to set the key of the model
+    * @param  {string} type  - an optional type to remove
+    */
+ScreenerField.removeAllPayments = function (event, key, type) {
+  if (event.currentTarget.value === 1) return;
+  key = typeof key != 'undefined' ? key : event.currentTarget.dataset.key;
+  for (var i = this.people.length - 1; i >= 0; i--) {
+    if (typeof type != 'undefined') {
+      var index = _underscore2.default.findIndex(this.people[i]._attrs[key], { 'type': type });
+      this.people[i]._attrs[key].splice(index, 1);
+    } else {
+      this.people[i]._attrs[key] = [];
+    }
+  }
+};
+
+/**
+    * Find a payment by type in a collection
+    * @param  {string} obj       - the vue opject to search
+    * @param  {integer} objIndex - the index of the model within the vue object
+    * @param  {string} key       - the key of the model's attr
+    * @param  {[type]} type      - the type value to search by
+    * @return {object}           - the payment, false if not found
+    */
+ScreenerField.getPayment = function (obj, objIndex, key, type) {
+  var payment = _underscore2.default.findWhere(
+  this[obj][objIndex]._attrs[key], { 'type': type });
+
+  return payment ? payment : false;
+};
+
+/**
+    * Check for single occupant of household
+    * @return {boolean} if household is 1 occupant
+    */
+ScreenerField.singleOccupant = function () {
+  return this.household._attrs.members === 1;
+};
+
+/**
+    * Returns the value of a supplied input in the type defined by a data-type
+    * attribute on that input.
+    * @param {HTMLElement} input
+    * @return {boolean|Number|string} typed value
+    */
+ScreenerField.getTypedVal = function (input) {
+  var val = input.value;
+  var finalVal = input.value;
+  switch (input.dataset.type) {
+    case ScreenerField.InputType.BOOLEAN:{
+        if (input.type === 'checkbox') {
+          finalVal = input.checked;
+        } else {// assume it's a radio button
+          // if the radio button is using true/false;
+          // if the radio button is using 1 or 0;
+          finalVal = val === 'true' ? true : Boolean(parseInt(val, 10));
+        }
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug())
+        console.log('getTypedVal: BOOLEAN, ' +
+        finalVal + ':' + (typeof val === 'undefined' ? 'undefined' : _typeof(val)) + '>' + (typeof finalVal === 'undefined' ? 'undefined' : _typeof(finalVal)));
+        /* eslint-enable no-console, no-debugger */
+        break;
+      }
+    case ScreenerField.InputType.FLOAT:{
+        finalVal =
+        _underscore2.default.isNumber(parseFloat(val)) &&
+        !_underscore2.default.isNaN(parseFloat(val)) ?
+        parseFloat(val) : 0;
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug())
+        console.log('getTypedVal: FLOAT, ' +
+        finalVal + ':' + (typeof val === 'undefined' ? 'undefined' : _typeof(val)) + '>' + (typeof finalVal === 'undefined' ? 'undefined' : _typeof(finalVal)));
+        /* eslint-enable no-console, no-debugger */
+        break;
+      }
+    case ScreenerField.InputType.INTEGER:{
+        finalVal =
+        _underscore2.default.isNumber(parseInt(val, 10)) &&
+        !_underscore2.default.isNaN(parseInt(val, 10)) ?
+        parseInt(input.value, 10) : 0;
+        /* eslint-disable no-console, no-debugger */
+        if (_utility2.default.debug())
+        console.log('getTypedVal: INTEGER, ' +
+        finalVal + ':' + (typeof val === 'undefined' ? 'undefined' : _typeof(val)) + '>' + (typeof finalVal === 'undefined' ? 'undefined' : _typeof(finalVal)));
+        /* eslint-enable no-console, no-debugger */
+        break;
+      }}
+
+  return finalVal;
+};
+
+/**
+    * Use the model's commit method to save itself to local storage.
+    * @param  {object} event - the change event of the input
+    */
+ScreenerField.commit = function (event) {
+  var obj = event.target.dataset.object;
+  this[obj].commit();
+};
+
+/**
+    * Return the local string label for values
+    * @param  {string} slug - the slug value of the string
+    * @return {string}      - the local string label
+    */
+ScreenerField.localString = function (slug) {
+  try {
+    return _underscore2.default.findWhere(
+    window.LOCALIZED_STRINGS,
+    { slug: slug }).
+    label;
+  } catch (error) {
+    return slug;
+  }
+};
+
+/**
+    * Component for the person label
+    * @type {Object} Vue Component
+    */
+ScreenerField.personLabel = {
+  props: ['index', 'person'],
+  template: '<span class="text-color-black">' +
+  '<span v-bind:class="personIndex(index)"></span> ' +
+  '<span v-if="index === 0">{{ localString("you") }}, </span>' +
+  '<span v-if="person.headOfHousehold"> ' +
+  '{{ localString("headOfHousehold") }}, ' +
+  '</span><span v-else>' +
+  '<span v-if="person.headOfHouseholdRelation != \'\'">' +
+  '{{ localString(person.headOfHouseholdRelation) }}, ' +
+  '</span><span v-else>' +
+  '<em>({{ localString("relationship") }})</em>, ' +
+  '</span>' +
+  '</span>' +
+  '<span v-if="person.age != 0">{{ person.age }}</span>' +
+  '<span v-else><em>({{ localString("age") }})</em></span>' +
+  '</span>',
+  methods: {
+    personIndex: function personIndex(index) {
+      var name = 'i-' + index;
+      var classes = {
+        'c-member-list__icon': true };
+
+      classes[name] = true;
+      return classes;
+    },
+    localString: ScreenerField.localString } };
+
+
+
+/**
+                                                 * Selectors used by this component.
+                                                 * @enum {string}
+                                                 */
+ScreenerField.Selectors = {
+  DOM: '[data-js="screener-field"]',
+  PAGE: '[data-js="page"]',
+  RECAPTCHA: '[data-js="recaptcha"]',
+  TOGGLE: '[data-js="toggle"]',
+  TOGGLE_QUESTION: '[data-js="toggle-question"]',
+  SUBMIT: '[data-js="submit"]',
+  VIEW: '[data-js="view"]',
+  QUESTION: '[data-js="question"]' };
+
+
+/**
+                                       * Classes used by this component.
+                                       * @enum {string}
+                                       */
+ScreenerField.Classes = {
+  ACTIVE: 'active',
+  HIDDEN: 'hidden',
+  HIDDEN_OPACITY: 'opacity-0' };
+
+
+/**
+                                  * data-type attributes used by this component.
+                                  * @enum {string}
+                                  */
+ScreenerField.InputType = {
+  BOOLEAN: 'boolean',
+  FLOAT: 'float',
+  INTEGER: 'integer' };
+
+
+/** Cookie references */
+ScreenerField.Cookies = {
+  VIEWS: 'access_nyc_field_screener_views',
+  PATH: 'peu' };
+
+
+/** @type {String} Analytics Prefix */
+ScreenerField.ANALYTICS_PREFIX = 'PEU';
+
+/** @type {Object} The configuration for the idle session */
+ScreenerField.IdleSessionConfig = {
+  IDLE_SESSION_TIMEOUT: 3600000, // must match message below
+  IDLE_SESSION_MESSAGE: [
+  'This session has been inactive for an hour,\n', // must match time above
+  'any info entered will be cleared to prevent unauthorized access.'].
+  join('') };
+
+
+/**
+               * Valid zip codes in New York City. Source:
+               * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
+               * @type {array<String>}
+               */
+ScreenerField.NYC_ZIPS = _screener2.default.NYC_ZIPS;exports.default =
+
+ScreenerField;
+
+},{"jquery":4,"js-cookie":5,"modules/calc-input":11,"modules/screener":18,"modules/screener-client":13,"modules/screener-household":15,"modules/screener-person":16,"modules/screener-staff":17,"modules/utility":21,"underscore":7,"vee-validate":8,"vue/dist/vue.common":9}],15:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -24530,7 +30748,7 @@ ScreenerHousehold.LIVING_ATTRS = [
 
 ScreenerHousehold;
 
-},{"underscore":6}],13:[function(require,module,exports){
+},{"underscore":7}],16:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -24828,7 +31046,148 @@ ScreenerPerson.BENEFIT_ATTRS = [
 
 ScreenerPerson;
 
-},{"underscore":6}],14:[function(require,module,exports){
+},{"underscore":7}],17:[function(require,module,exports){
+/* eslint-env browser */
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                   * This component is the object class for screener individuals.
+                                                                                                                                                                                                                                                                                                                                                   * @class
+                                                                                                                                                                                                                                                                                                                                                   */var
+ScreenerStaff = function () {
+  /**
+                              * @param {?object} obj - initial attributes to set.
+                              * @constructor
+                              */
+  function ScreenerStaff(obj) {_classCallCheck(this, ScreenerStaff);
+    /** @private {object} The attributes that are exposed to Drools. */
+    this._attrs = {
+      /** @type {string} */
+      firstName: '',
+      /** @type {string} */
+      lastName: '',
+      /** @type {string} */
+      email: '',
+      /** @type {string} */
+      screenerLocation: '' };
+
+
+    if (obj) {
+      this.set(obj);
+    }
+
+    this.fetch();
+  }
+
+  /**
+     * If supplied param is an object, sets this._attrs values, matching keys.
+     * If supplied params are a string and a second value, the string matches
+     * the key and applies the second value.
+     * @method
+     * @param {object|string} param - Object of attributes, or a key for an
+     *   individual attribute
+     * @param {?string|number|boolean|array} value - Optional value to set.
+     * @return {this} ScreenerPerson
+     */_createClass(ScreenerStaff, [{ key: 'set', value: function set(
+    param, value) {
+      if (_underscore2.default.isObject(param)) {
+        for (var key in param) {
+          if (Object.prototype.hasOwnProperty.call(param, key)) {
+            this._setAttr(key, param[key]);
+          }
+        }
+      } else {
+        this._setAttr(param, value);
+      }
+      return this;
+    }
+
+    /**
+       * Sets an individual attribute, matching for type.
+       * @private
+       * @param {string} key
+       * @param {string|number|boolean|array} value
+       */ }, { key: '_setAttr', value: function _setAttr(
+    key, value) {
+      if (key in this._attrs && _typeof(this._attrs[key]) === (typeof value === 'undefined' ? 'undefined' : _typeof(value))) {
+        this._attrs[key] = value;
+      }
+    }
+
+    /**
+       * Returns the value of a given key in this._attrs.
+       * @method
+       * @param {string} key
+       * @return {string|number|boolean|array} value
+       */ }, { key: 'get', value: function get(
+    key) {
+      var value = key in this._attrs ? this._attrs[key] : null;
+      return value;
+    }
+
+    /**
+       * Returns the value of this._attrs as an object.
+       * @method
+       * @return {object} this._attrs
+       */ }, { key: 'toObject', value: function toObject()
+    {
+      return this._attrs;
+    }
+
+    /**
+       * Save the object as a cookie in the browser
+       */ }, { key: 'commit', value: function commit()
+    {
+      window.sessionStorage.setItem(
+      ScreenerStaff.Cookies.STAFF,
+      JSON.stringify(this.toObject()));
+
+    }
+
+    /**
+       * Fetch the object from the browser if it exists
+       */ }, { key: 'fetch', value: function fetch()
+    {
+      var storage = window.sessionStorage;
+      var key = ScreenerStaff.Cookies.STAFF;
+      var staff = storage.getItem(key) ?
+      JSON.parse(storage.getItem(key)) : false;
+      if (staff) {
+        this.set(staff);
+      }
+    }
+
+    /**
+       * Destroy the object from the browser
+       */ }, { key: 'destroy', value: function destroy()
+    {
+      window.sessionStorage.removeItem(ScreenerStaff.Cookies.STAFF);
+    } }]);return ScreenerStaff;}();
+
+
+/**
+                                     * Options for locations
+                                     * @type {Array}
+                                     */
+ScreenerStaff.LOCATION = [
+'community event',
+'phone call',
+'door knock',
+'partner referral'];
+
+
+/**
+                      * Cookie references
+                      */
+ScreenerStaff.Cookies = {
+  STAFF: 'access_nyc_staff' };exports.default =
+
+
+ScreenerStaff;
+
+},{"underscore":7}],18:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -26201,7 +32560,7 @@ Screener.CookiePath = 'eligibility';exports.default =
 
 Screener;
 
-},{"jquery":4,"js-cookie":5,"modules/screener-household":12,"modules/screener-person":13,"modules/utility":19,"underscore":6}],15:[function(require,module,exports){
+},{"jquery":4,"js-cookie":5,"modules/screener-household":15,"modules/screener-person":16,"modules/utility":21,"underscore":7}],19:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -26498,331 +32857,7 @@ ShareForm.Message = {
 
 ShareForm;
 
-},{"../variables.json":20,"jquery":4,"modules/utility":19}],16:[function(require,module,exports){
-/* eslint-env browser */
-'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
-
-var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
-var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
-var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
-
-/**
-                                                                                                                                                                                                                                                                                                                                                   * This component takes an html element and creates a static map image using
-                                                                                                                                                                                                                                                                                                                                                   * the Google static map API. Unless width and height data attributes are
-                                                                                                                                                                                                                                                                                                                                                   * present, the image is sized to fit the html element passed, and a window
-                                                                                                                                                                                                                                                                                                                                                   * resize handler is used to replace the image whenever
-                                                                                                                                                                                                                                                                                                                                                   * the element's dimensions change.
-                                                                                                                                                                                                                                                                                                                                                   * @class
-                                                                                                                                                                                                                                                                                                                                                   */var
-StaticMap = function () {
-  /**
-                          * @param {HTMLElement} el - The html element for the component.
-                          * @constructor
-                          */
-  function StaticMap(el) {_classCallCheck(this, StaticMap);
-    /** @private {HTMLElement} The component element. */
-    this._el = el;
-
-    /** @private {string} Marker position. */
-    this._marker = (0, _jquery2.default)(el).data('marker') ||
-    _utility2.default.CONFIG.DEFAULT_LAT + ',' + _utility2.default.CONFIG.DEFAULT_LNG;
-
-    this._markerImg = (0, _jquery2.default)(el).data('govtOffice') ?
-    _utility2.default.CONFIG.URL_PIN_BLUE : _utility2.default.CONFIG.URL_PIN_GREEN;
-
-    /** @private {?number} Fixed element width. */
-    this._fixedWidth = (0, _jquery2.default)(el).data('width') ?
-    parseInt((0, _jquery2.default)(this._el).data('width'), 10) : null;
-
-    /** @private {?number} Fixed element height. */
-    this._fixedHeight = (0, _jquery2.default)(el).data('height') ?
-    parseInt((0, _jquery2.default)(this._el).data('height'), 10) : null;
-
-    /** @private {number} Element width. */
-    this._width = this._fixedWidth || 0;
-
-    /** @private {number} Element height. */
-    this._height = this._fixedHeight || 0;
-
-    /** @private {?string} URL to which image links. */
-    this._link = (0, _jquery2.default)(el).data('link') || null;
-
-    /** @private {boolean} Whether this component has been initialized. */
-    this._initialized = false;
-  }
-
-  /**
-     * If this component has not yet been initialized, attaches event listeners.
-     * @method
-     * @return {this} OfficeMap
-     */_createClass(StaticMap, [{ key: 'init', value: function init()
-    {var _this = this;
-      if (this._initialized) {
-        return this;
-      }
-
-      (0, _jquery2.default)(window).on('resize', _underscore2.default.debounce(function () {
-        var newSize = _this.getContainerSize();
-        if (newSize.height !== _this._height || newSize.width !== _this._width) {
-          _this._height = newSize.height;
-          _this._width = newSize.width;
-          _this.renderImage();
-        }
-      }, 300));
-
-      var size = this.getContainerSize();
-      this._height = size.height;
-      this._width = size.width;
-
-      this.renderImage();
-
-      return this;
-    }
-
-    /**
-       * Returns an object with width/height integer values.
-       * @method
-       * @return {object}
-       */ }, { key: 'getContainerSize', value: function getContainerSize()
-    {
-      var dimensions = {};
-
-      (0, _jquery2.default)(this._el).find('img').hide();
-
-      dimensions.width = this._fixedWidth || parseInt((0, _jquery2.default)(this._el).width(), 10);
-      dimensions.height = this._fixedHeight || parseInt((0, _jquery2.default)(this._el).height(), 10);
-
-      (0, _jquery2.default)(this._el).find('img').show();
-
-      return dimensions;
-    }
-
-    /**
-       * Empties the container element and replaces its contents with a new
-       * Google static map image.
-       * @method
-       * @return {this} StaticMap
-       */ }, { key: 'renderImage', value: function renderImage()
-    {var _this2 = this;
-      var img = new Image();
-      var parameters = {
-        center: this._marker,
-        zoom: 15,
-        size: this._width + 'x' + this._height,
-        scale: 2,
-        markers: 'anchor:16,40|icon:https://access.nyc.gov' + (
-        this._markerImg + '|shadow:false|' + this._marker),
-        key: _utility2.default.CONFIG.GOOGLE_STATIC_API };
-
-
-      img.onload = function () {
-        (0, _jquery2.default)(_this2._el).empty;
-        var $img = _this2._link ?
-        (0, _jquery2.default)('<a href="' + _this2._link + '" target="_blank" class="block"></a>').
-        append(img) : (0, _jquery2.default)(img);
-        (0, _jquery2.default)(_this2._el).html($img);
-      };
-
-      img.src = 'https://maps.googleapis.com/maps/api/staticmap?' + ('' +
-      _jquery2.default.param(parameters));
-
-      (0, _jquery2.default)(img).addClass('block');
-
-      return this;
-    } }]);return StaticMap;}();exports.default =
-
-
-StaticMap;
-
-},{"jquery":4,"modules/utility":19,"underscore":6}],17:[function(require,module,exports){
-/* eslint-env browser */
-'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
-
-var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
-var _jsCookie = require('js-cookie');var _jsCookie2 = _interopRequireDefault(_jsCookie);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
-
-/**
-                                                                                                                                                                                                                                                                                                                                            * This controls the text sizer module at the top of page. A text-size-X class
-                                                                                                                                                                                                                                                                                                                                            * is added to the html root element. X is an integer to indicate the scale of
-                                                                                                                                                                                                                                                                                                                                            * text adjustment with 0 being neutral.
-                                                                                                                                                                                                                                                                                                                                            * @class
-                                                                                                                                                                                                                                                                                                                                            */var
-TextSizer = function () {
-  /**
-                          * @param {HTMLElement} el - The html element for the component.
-                          * @constructor
-                          */
-  function TextSizer(el) {_classCallCheck(this, TextSizer);
-    /** @private {HTMLElement} The component element. */
-    this._el = el;
-
-    /** @private {Number} The relative scale of text adjustment. */
-    this._textSize = 0;
-
-    /** @private {boolean} Whether the textSizer is displayed. */
-    this._active = false;
-
-    /** @private {boolean} Whether the map has been initialized. */
-    this._initialized = false;
-  }
-
-  /**
-     * Attaches event listeners to controller. Checks for textSize cookie and
-     * sets the text size class appropriately.
-     * @return {this} TextSizer
-     */_createClass(TextSizer, [{ key: 'init', value: function init()
-    {var _this = this;
-      if (this._initialized) {
-        return this;
-      }
-
-      (0, _jquery2.default)(this._el).on('click', '.' + TextSizer.CssClass.TOGGLE, function (e) {
-        e.preventDefault();
-        _this.toggle();
-      }).on('click', '.' + TextSizer.CssClass.SMALLER, function (e) {
-        e.preventDefault();
-        var newSize = _this._textSize - 1;
-        if (newSize >= TextSizer.Size.MIN) {
-          _this._adjustSize(newSize);
-        }
-      }).on('click', '.' + TextSizer.CssClass.LARGER, function (e) {
-        e.preventDefault();
-        var newSize = _this._textSize + 1;
-        if (newSize <= TextSizer.Size.MAX) {
-          _this._adjustSize(newSize);
-        }
-      });
-
-      // If there is a text size cookie, set the textSize variable to the setting.
-      // If not, textSize initial setting remains at zero and we toggle on the
-      // text sizer/language controls and add a cookie.
-      if (_jsCookie2.default.get('textSize')) {
-        var size = parseInt(_jsCookie2.default.get('textSize'), 10);
-        this._textSize = size;
-        this._adjustSize(size);
-      } else {
-        (0, _jquery2.default)('html').addClass('text-size-' + this._textSize);
-        this.show();
-        this._setCookie();
-      }
-
-      this._initialized = true;
-
-      return this;
-    }
-
-    /**
-       * Show or hide the component based on this._active value.
-       * @return {this} TextSizer
-       */ }, { key: 'toggle', value: function toggle()
-    {
-      if (this._active) {
-        this.hide();
-      } else {
-        this.show();
-      }
-      return this;
-    }
-
-    /**
-       * Shows the text sizer controls.
-       * @return {this} TextSizer
-       */ }, { key: 'show', value: function show()
-    {
-      this._active = true;
-      (0, _jquery2.default)(this._el).find('.' + TextSizer.CssClass.OPTIONS).
-      removeClass(TextSizer.CssClass.HIDDEN).end().
-      find('.' + TextSizer.CssClass.TOGGLE).
-      addClass(TextSizer.CssClass.HIDDEN);
-      return this;
-    }
-
-    /**
-       * Hides the text sizer controls.
-       * @return {this} TextSizer
-       */ }, { key: 'hide', value: function hide()
-    {
-      this._active = false;
-      (0, _jquery2.default)(this._el).find('.' + TextSizer.CssClass.OPTIONS).
-      addClass(TextSizer.CssClass.HIDDEN).end().
-      find('.' + TextSizer.CssClass.TOGGLE).
-      removeClass(TextSizer.CssClass.HIDDEN);
-      return this;
-    }
-
-    /**
-       * Sets the `textSize` cookie to store the value of this._textSize. Expires
-       * in 1 hour (1/24 of a day).
-       * @return {this} TextSizer
-       */ }, { key: '_setCookie', value: function _setCookie()
-    {
-      _jsCookie2.default.set('textSize', this._textSize, { expires: 1 / 24 });
-      return this;
-    }
-
-    /**
-       * Sets the text-size-X class on the html root element. Updates the cookie
-       * if necessary.
-       * @param {Number} size - new size to set.
-       * @return {this} TextSizer
-       */ }, { key: '_adjustSize', value: function _adjustSize(
-    size) {
-      var originalSize = this._textSize;
-
-      if (size !== originalSize) {
-        this._textSize = size;
-        this._setCookie();
-        (0, _jquery2.default)('html').removeClass('text-size-' + originalSize);
-      }
-
-      (0, _jquery2.default)('html').addClass('text-size-' + size);
-
-      this._checkForMinMax();
-
-      return this;
-    }
-
-    /**
-       * Checks the current text size against the min and max. If the limits are
-       * reached, disable the controls for going smaller/larger as appropriate.
-       * @return {this} TextSizer
-       */ }, { key: '_checkForMinMax', value: function _checkForMinMax()
-    {
-      if (this._textSize <= TextSizer.Size.MIN) {
-        this._textSize = TextSizer.Size.MIN;
-        (0, _jquery2.default)(this._el).find('.' + TextSizer.CssClass.SMALLER).
-        attr('disabled', 'disabled');
-      } else {
-        (0, _jquery2.default)(this._el).find('.' + TextSizer.CssClass.SMALLER).removeAttr('disabled');
-      }
-      if (this._textSize >= TextSizer.Size.MAX) {
-        this._textSize = TextSizer.Size.MAX;
-        (0, _jquery2.default)(this._el).find('.' + TextSizer.CssClass.LARGER).
-        attr('disabled', 'disabled');
-      } else {
-        (0, _jquery2.default)(this._el).find('.' + TextSizer.CssClass.LARGER).removeAttr('disabled');
-      }
-      return this;
-    } }]);return TextSizer;}();
-
-
-TextSizer.Size = {
-  MAX: 3,
-  MIN: -3 };
-
-
-TextSizer.CssClass = {
-  CONTROLLER: 'js-text-controller',
-  HIDDEN: 'hidden',
-  LARGER: 'js-text-larger',
-  OPTIONS: 'js-text-controller-options',
-  SMALLER: 'js-text-smaller',
-  TOGGLE: 'js-text-controller-toggle' };exports.default =
-
-
-TextSizer;
-
-},{"jquery":4,"js-cookie":5}],18:[function(require,module,exports){
+},{"../variables.json":22,"jquery":4,"modules/utility":21}],20:[function(require,module,exports){
 /* eslint-env browser */
 
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
@@ -27014,7 +33049,7 @@ Tooltip.CssClass = {
 
 Tooltip;
 
-},{"jquery":4,"underscore":6}],19:[function(require,module,exports){
+},{"jquery":4,"underscore":7}],21:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};
 
@@ -27034,9 +33069,11 @@ var Utility = {};
                    */
 Utility.svgSprites = function (data) {
   var svgDiv = document.createElement('div');
-  svgDiv.innerHTML =
-  new XMLSerializer().serializeToString(data.documentElement);
-  (0, _jquery2.default)(svgDiv).css('display', 'none').prependTo('body');
+  svgDiv.innerHTML = new XMLSerializer().
+  serializeToString(data.documentElement);
+  (0, _jquery2.default)(svgDiv).css('display', 'none').
+  prop('aria-hidden', true).
+  prependTo('body');
 };
 
 /**
@@ -27446,7 +33483,7 @@ Utility.CONFIG = {
 
 Utility;
 
-},{"cleave.js/dist/addons/cleave-phone.us":2,"cleave.js/dist/cleave.min":3,"jquery":4,"underscore":6}],20:[function(require,module,exports){
+},{"cleave.js/dist/addons/cleave-phone.us":2,"cleave.js/dist/cleave.min":3,"jquery":4,"underscore":7}],22:[function(require,module,exports){
 module.exports={
   "screen-desktop": 960,
   "screen-tablet": 768,
@@ -27454,6 +33491,6 @@ module.exports={
   "screen-sm-mobile": 400
 }
 
-},{}]},{},[8])
+},{}]},{},[10])
 
-//# sourceMappingURL=main.4f27c98380046da9ae40591016b93c7b.js.map
+//# sourceMappingURL=main-field.08bfb43988b4684ec38c74cb3d4b86b5.js.map

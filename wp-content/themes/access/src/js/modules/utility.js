@@ -17,9 +17,11 @@ const Utility = {};
  */
 Utility.svgSprites = function(data) {
   const svgDiv = document.createElement('div');
-  svgDiv.innerHTML =
-      new XMLSerializer().serializeToString(data.documentElement);
-  $(svgDiv).css('display', 'none').prependTo('body');
+  svgDiv.innerHTML = new XMLSerializer()
+    .serializeToString(data.documentElement);
+  $(svgDiv).css('display', 'none')
+    .prop('aria-hidden', true)
+    .prependTo('body');
 };
 
 /**
