@@ -45,6 +45,7 @@ const NODE_ENV = process.env.NODE_ENV;
 
 const DIST = 'assets';
 const SRC = 'src';
+const PATTERNS_SRC = 'node_modules/access-nyc-patterns/src';
 
 const HASH_FILES = [
   'manifest-screener-field.json',
@@ -238,10 +239,10 @@ gulp.task('clean', ['clean (scripts)', 'clean (styles)']);
  */
 gulp.task('images', () =>
   gulp.src([
-      `${SRC}/img/**/*.jpg`,
-      `${SRC}/img/**/*.png`,
-      `${SRC}/img/**/*.gif`,
-      `${SRC}/img/**/*.svg`
+      `${PATTERNS_SRC}/images/**/*.jpg`,
+      `${PATTERNS_SRC}/images/**/*.png`,
+      `${PATTERNS_SRC}/images/**/*.gif`,
+      `${PATTERNS_SRC}/images/**/*.svg`
     ])
     .pipe($.cache($.imagemin({
       optimizationLevel: 5,
@@ -256,7 +257,7 @@ gulp.task('images', () =>
  * SVG Sprite
  */
 gulp.task('svg-sprites', () =>
-  gulp.src(`${SRC}/svg/*.svg`)
+  gulp.src(`${PATTERNS_SRC}/svg/*.svg`)
     .pipe($.svgmin())
     .pipe($.svgstore({
       inlineSvg: true
