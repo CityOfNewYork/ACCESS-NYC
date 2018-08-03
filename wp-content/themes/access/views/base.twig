@@ -27,7 +27,7 @@
       <a class="sr-only sr-only-focusable" href="#content">{{__('Skip to main content', 'accessnyctheme')}}</a>
       {% block header %}
         <header class="relative">
-          <div class="flex justify-between py-1 px-3">
+          <div class="flex justify-between py-1 px-3 print:hidden">
             {% spaceless %}
             <div class="flex-none">
               <svg class="icon icon-logo-nyc">
@@ -37,7 +37,7 @@
             </div>
             {% endspaceless %}
 
-            <div class="js-text-controller c-text-controller print:hidden">
+            <div class="js-text-controller c-text-controller">
               {% spaceless %}
               <a class="js-text-controller-toggle c-text-controller__toggle" href="#text-controls">
                 <svg class="icon icon-gear">
