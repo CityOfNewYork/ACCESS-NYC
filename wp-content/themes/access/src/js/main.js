@@ -176,8 +176,7 @@ import Accordion from 'components/accordion/accordion.common';
   });
 
   // Initialize accordion components
-  const accordion = new Accordion();
-  accordion.init();
+  new Accordion();
 
   // Initialize maps if present.
   const $maps = $('.js-map');

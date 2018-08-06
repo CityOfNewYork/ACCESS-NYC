@@ -12671,8 +12671,7 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
   });
 
   // Initialize accordion components
-  var accordion = new _accordion2.default();
-  accordion.init();
+  new _accordion2.default();
 
   // Initialize maps if present.
   var $maps = $('.js-map');
@@ -16586,4 +16585,4 @@ module.exports={
 
 },{}]},{},[7])
 
-//# sourceMappingURL=main.8307bff8c2e40c071edff0867e295aef.js.map
+//# sourceMappingURL=main.7f0e5427d9d680fc3d85e4528caf6183.js.map

@@ -28936,8 +28936,7 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
       new _tooltip2.default(el).init());});
 
   // Initialize accordion components
-  var accordion = new _accordion2.default();
-  accordion.init();
+  new _accordion2.default();
 
   // Application reloading
   $('[data-js="reload"]').each(function (i, el) {
@@ -33585,4 +33584,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.3711ac4e3f036585d7eee0b47a986e24.js.map
+//# sourceMappingURL=main-field.fbf756bf3ff4fa767d628952ab66abed.js.map
