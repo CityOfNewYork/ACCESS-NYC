@@ -1,10 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var Vue = _interopDefault(require('vue/dist/vue.common'));
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -30,80 +26,179 @@ var createClass = function () {
 }();
 
 /**
- * The Accordion module
+ * The Simple Toggle class
  * @class
  */
 
-var Accordion = function () {
+var Toggle = function () {
   /**
-   * @param {object} element The Accordion DOM element
    * @constructor
+   * @param  {object} s Settings for this Toggle instance
+   * @return {object}   The class
    */
-  function Accordion(element) {
-    classCallCheck(this, Accordion);
+  function Toggle(s) {
+    classCallCheck(this, Toggle);
 
-    /** @type {Object} The vue object */
-    this._vue = {
-      delimiters: ['v{', '}'],
-      el: '#' + element.id,
-      data: {
-        active: Boolean(element.dataset.jsActive)
-      },
-      methods: {
-        toggle: Accordion.toggle,
-        ariaHidden: Accordion.ariaHidden
-      }
+    s = !s ? {} : s;
+
+    this._settings = {
+      selector: s.selector ? s.selector : Toggle.selector,
+      namespace: s.namespace ? s.namespace : Toggle.namespace,
+      inactiveClass: s.inactiveClass ? s.inactiveClass : Toggle.inactiveClass,
+      activeClass: s.activeClass ? s.activeClass : Toggle.activeClass
     };
+
+    return this;
   }
 
   /**
    * Initializes the module
+   * @return {object}   The class
    */
 
 
-  createClass(Accordion, [{
+  createClass(Toggle, [{
     key: 'init',
     value: function init() {
-      this._vue = new Vue(this._vue);
+      var _this = this;
+
+      var body = document.querySelector('body');
+
+      body.addEventListener('click', function (event) {
+        var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
+
+        if (!event.target[method](_this._settings.selector)) return;
+
+        event.preventDefault();
+
+        _this._toggle(event);
+      });
+
+      return this;
+    }
+
+    /**
+     * Logs constants to the debugger
+     * @param  {object} event  The main click event
+     * @return {object}        The class
+     */
+
+  }, {
+    key: '_toggle',
+    value: function _toggle(event) {
+      var _this2 = this;
+
+      var el = event.target;
+      var selector = el.getAttribute('href') ? el.getAttribute('href') : el.dataset[this._settings.namespace + 'Target'];
+      var target = document.querySelector(selector);
+
+      /**
+       * Main
+       */
+      this._elementToggle(el, target);
+
+      /**
+       * Location
+       * Change the window location
+       */
+      if (el.dataset[this._settings.namespace + 'Location']) window.location.hash = el.dataset[this._settings.namespace + 'Location'];
+
+      /**
+       * Undo
+       * Add toggling event to the element that undoes the toggle
+       */
+      if (el.dataset[this._settings.namespace + 'Undo']) {
+        var undo = document.querySelector(el.dataset[this._settings.namespace + 'Undo']);
+        undo.addEventListener('click', function (event) {
+          event.preventDefault();
+          _this2._elementToggle(el, target);
+          undo.removeEventListener('click');
+        });
+      }
+
+      return this;
+    }
+
+    /**
+     * The main toggling method
+     * @param  {object} el     The current element to toggle active
+     * @param  {object} target The target element to toggle active/hidden
+     * @return {object}        The class
+     */
+
+  }, {
+    key: '_elementToggle',
+    value: function _elementToggle(el, target) {
+      el.classList.toggle(this._settings.activeClass);
+      target.classList.toggle(this._settings.activeClass);
+      target.classList.toggle(this._settings.inactiveClass);
+      target.setAttribute('aria-hidden', target.classList.contains(this._settings.inactiveClass));
+      return this;
     }
   }]);
-  return Accordion;
+  return Toggle;
 }();
 
+/** @type {String} The main selector to add the toggling function to */
+
+
+Toggle.selector = '[data-js="toggle"]';
+
+/** @type {String} The namespace for our data attribute settings */
+Toggle.namespace = 'toggle';
+
+/** @type {String} The hide class */
+Toggle.inactiveClass = 'hidden';
+
+/** @type {String} The active class */
+Toggle.activeClass = 'active';
+
 /**
- * The toggle method for the active class
- * @param  {object}  event The on click event object
- * @return {boolean}       The toggled active state
+ * The Accordion module
+ * @class
  */
 
-
-Accordion.toggle = function (event) {
-  event.preventDefault();
-  this.active = this.active ? false : true;
-  return this.active;
-};
-
+var Accordion =
 /**
- * The aria hidden method based on wether the component is active or not
- * @param  {boolean} active Optionally to pass a boolean to the function
- * @return {string}         The aria-hidden attribute string based on active
+ * @constructor
+ * @return {object}   The class
  */
-Accordion.ariaHidden = function () {
-  var active = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.active;
+function Accordion() {
+  classCallCheck(this, Accordion);
 
-  return active ? 'false' : 'true';
+  this._toggle = new Toggle({
+    selector: Accordion.selector,
+    namespace: Accordion.namespace,
+    inactiveClass: Accordion.inactiveClass
+  }).init();
+
+  return this;
 };
 
 /**
  * The dom selector for the module
  * @type {String}
  */
+
+
 Accordion.selector = '[data-js="accordion"]';
+
+/**
+ * The namespace for the components JS options
+ * @type {String}
+ */
+Accordion.namespace = 'accordion';
+
+/**
+ * The incactive class name
+ * @type {String}
+ */
+Accordion.inactiveClass = 'inactive';
 
 module.exports = Accordion;
 
 
-},{"vue/dist/vue.common":9}],2:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 (function (global){
 !function(){function t(t,n){var e=t.split("."),r=H;e[0]in r||!r.execScript||r.execScript("var "+e[0]);for(var i;e.length&&(i=e.shift());)e.length||void 0===n?r=r[i]?r[i]:r[i]={}:r[i]=n}function n(t,n){function e(){}e.prototype=n.prototype,t.M=n.prototype,t.prototype=new e,t.prototype.constructor=t,t.N=function(t,e,r){for(var i=Array(arguments.length-2),a=2;a<arguments.length;a++)i[a-2]=arguments[a];return n.prototype[e].apply(t,i)}}function e(t,n){null!=t&&this.a.apply(this,arguments)}function r(t){t.b=""}function i(t,n){t.sort(n||a)}function a(t,n){return t>n?1:n>t?-1:0}function l(t){var n,e=[],r=0;for(n in t)e[r++]=t[n];return e}function o(t,n){this.b=t,this.a={};for(var e=0;e<n.length;e++){var r=n[e];this.a[r.b]=r}}function u(t){return t=l(t.a),i(t,function(t,n){return t.b-n.b}),t}function s(t,n){switch(this.b=t,this.g=!!n.G,this.a=n.c,this.j=n.type,this.h=!1,this.a){case q:case J:case L:case O:case k:case Y:case K:this.h=!0}this.f=n.defaultValue}function f(){this.a={},this.f=this.i().a,this.b=this.g=null}function p(t,n){for(var e=u(t.i()),r=0;r<e.length;r++){var i=e[r],a=i.b;if(null!=n.a[a]){t.b&&delete t.b[i.b];var l=11==i.a||10==i.a;if(i.g)for(var i=c(n,a)||[],o=0;o<i.length;o++){var s=t,f=a,h=l?i[o].clone():i[o];s.a[f]||(s.a[f]=[]),s.a[f].push(h),s.b&&delete s.b[f]}else i=c(n,a),l?(l=c(t,a))?p(l,i):m(t,a,i.clone()):m(t,a,i)}}}function c(t,n){var e=t.a[n];if(null==e)return null;if(t.g){if(!(n in t.b)){var r=t.g,i=t.f[n];if(null!=e)if(i.g){for(var a=[],l=0;l<e.length;l++)a[l]=r.b(i,e[l]);e=a}else e=r.b(i,e);return t.b[n]=e}return t.b[n]}return e}function h(t,n,e){var r=c(t,n);return t.f[n].g?r[e||0]:r}function g(t,n){var e;if(null!=t.a[n])e=h(t,n,void 0);else t:{if(e=t.f[n],void 0===e.f){var r=e.j;if(r===Boolean)e.f=!1;else if(r===Number)e.f=0;else{if(r!==String){e=new r;break t}e.f=e.h?"0":""}}e=e.f}return e}function b(t,n){return t.f[n].g?null!=t.a[n]?t.a[n].length:0:null!=t.a[n]?1:0}function m(t,n,e){t.a[n]=e,t.b&&(t.b[n]=e)}function y(t,n){var e,r=[];for(e in n)0!=e&&r.push(new s(e,n[e]));return new o(t,r)}/*
 
@@ -28841,11 +28936,8 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
       new _tooltip2.default(el).init());});
 
   // Initialize accordion components
-  document.querySelectorAll(_accordion2.default.selector).
-  forEach(function (element) {
-    var accordion = new _accordion2.default(element);
-    accordion.init();
-  });
+  var accordion = new _accordion2.default();
+  accordion.init();
 
   // Application reloading
   $('[data-js="reload"]').each(function (i, el) {
@@ -33493,4 +33585,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.91c9340c3fb5e8a584107a06902554b0.js.map
+//# sourceMappingURL=main-field.3711ac4e3f036585d7eee0b47a986e24.js.map

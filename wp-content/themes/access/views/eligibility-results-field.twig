@@ -156,7 +156,7 @@
           </h3>
           <div class="mb-4" data-js="programs-list">
             {% for post in selectedPrograms %}
-            {% include 'partials/post-teaser-block-field.twig' with {'show_apply': true } %}
+            {% include 'components/card-removable.twig' with {'show_apply': true } %}
             {% endfor %}
           </div>
         </div>
@@ -171,7 +171,7 @@
           </h3>
           <div class="mb-4" data-js="programs-list">
             {% for post in additionalPrograms %}
-            {% include 'partials/post-teaser-block-field.twig' %}
+            {% include 'components/card-removable.twig' %}
             {% endfor %}
           </div>
         </div>

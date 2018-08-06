@@ -49,11 +49,8 @@ import Accordion from 'components/accordion/accordion.common';
     new Tooltip(el).init());
 
   // Initialize accordion components
-  document.querySelectorAll(Accordion.selector)
-    .forEach((element) => {
-      const accordion = new Accordion(element);
-      accordion.init();
-    });
+  const accordion = new Accordion();
+  accordion.init();
 
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {
