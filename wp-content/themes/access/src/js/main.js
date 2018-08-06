@@ -8,6 +8,7 @@ import TextSizer from 'modules/text-sizer';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
 import Accordion from 'components/accordion/accordion.common';
+import Filter from 'components/filter/filter.common';
 
 (function(window, $) {
   'use strict';
@@ -45,11 +46,11 @@ import Accordion from 'components/accordion/accordion.common';
     // Hides the search drawer in the main nav.
     e.preventDefault();
     $('#search').removeClass('active');
-  }).on('click', '[data-js="filter"]', (event) => {
-    event.preventDefault();
-    let $element = $(event.currentTarget);
-    $element.toggleClass('active');
   });
+
+  // Initialize ACCESS NYC Patterns Toggle lib components
+  new Accordion();
+  new Filter();
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
@@ -174,9 +175,6 @@ import Accordion from 'components/accordion/accordion.common';
     const screener = new Screener(el);
     screener.init();
   });
-
-  // Initialize accordion components
-  new Accordion();
 
   // Initialize maps if present.
   const $maps = $('.js-map');
