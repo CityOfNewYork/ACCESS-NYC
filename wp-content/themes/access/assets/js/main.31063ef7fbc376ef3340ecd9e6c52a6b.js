@@ -26,6 +26,55 @@ var createClass = function () {
 }();
 
 /**
+ * The Utility class
+ * @class
+ */
+var Utility =
+/**
+ * The Utility constructor
+ * @return {object} The Utility class
+ */
+function Utility() {
+  classCallCheck(this, Utility);
+
+  return this;
+};
+
+/**
+ * Boolean for debug mode
+ * @return {boolean} wether or not the front-end is in debug mode.
+ */
+
+
+Utility.debug = function () {
+  return Utility.getUrlParameter(Utility.PARAMS.DEBUG) === '1';
+};
+
+/**
+ * Returns the value of a given key in a URL query string. If no URL query
+ * string is provided, the current URL location is used.
+ * @param {string} name - Key name.
+ * @param {?string} queryString - Optional query string to check.
+ * @return {?string} Query parameter value.
+ */
+Utility.getUrlParameter = function (name, queryString) {
+  var query = queryString || window.location.search;
+  var param = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + param + '=([^&#]*)');
+  var results = regex.exec(query);
+
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+/**
+ * Application parameters
+ * @type {Object}
+ */
+Utility.PARAMS = {
+  DEBUG: 'debug'
+};
+
+/**
  * The Simple Toggle class
  * @class
  */
@@ -62,12 +111,25 @@ var Toggle = function () {
     value: function init() {
       var _this = this;
 
+      // Initialization logging
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir({
+        'init': this._settings.namespace,
+        'settings': this._settings
+      });
+
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
         var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-
         if (!event.target[method](_this._settings.selector)) return;
+
+        // Click event logging
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir({
+          'event': event,
+          'settings': _this._settings
+        });
 
         event.preventDefault();
 
@@ -226,6 +288,55 @@ var createClass = function () {
 }();
 
 /**
+ * The Utility class
+ * @class
+ */
+var Utility =
+/**
+ * The Utility constructor
+ * @return {object} The Utility class
+ */
+function Utility() {
+  classCallCheck(this, Utility);
+
+  return this;
+};
+
+/**
+ * Boolean for debug mode
+ * @return {boolean} wether or not the front-end is in debug mode.
+ */
+
+
+Utility.debug = function () {
+  return Utility.getUrlParameter(Utility.PARAMS.DEBUG) === '1';
+};
+
+/**
+ * Returns the value of a given key in a URL query string. If no URL query
+ * string is provided, the current URL location is used.
+ * @param {string} name - Key name.
+ * @param {?string} queryString - Optional query string to check.
+ * @return {?string} Query parameter value.
+ */
+Utility.getUrlParameter = function (name, queryString) {
+  var query = queryString || window.location.search;
+  var param = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + param + '=([^&#]*)');
+  var results = regex.exec(query);
+
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+/**
+ * Application parameters
+ * @type {Object}
+ */
+Utility.PARAMS = {
+  DEBUG: 'debug'
+};
+
+/**
  * The Simple Toggle class
  * @class
  */
@@ -262,12 +373,25 @@ var Toggle = function () {
     value: function init() {
       var _this = this;
 
+      // Initialization logging
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir({
+        'init': this._settings.namespace,
+        'settings': this._settings
+      });
+
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
         var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-
         if (!event.target[method](_this._settings.selector)) return;
+
+        // Click event logging
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir({
+          'event': event,
+          'settings': _this._settings
+        });
 
         event.preventDefault();
 
@@ -12741,11 +12865,11 @@ var _filter = require('components/filter/filter.common');var _filter2 = _interop
     // Hides the search drawer in the main nav.
     e.preventDefault();
     $('#search').removeClass('active');
-  }); /*.on('click', '[data-js="filter"]', (event) => {
-      event.preventDefault();
-      let $element = $(event.currentTarget);
-      $element.toggleClass('active');
-      });*/
+  });
+
+  // Initialize ACCESS NYC Patterns Toggle lib components
+  new _accordion2.default();
+  new _filter2.default();
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', _shareForm2.default.ShowDisclaimer);
@@ -12870,10 +12994,6 @@ var _filter = require('components/filter/filter.common');var _filter2 = _interop
     var screener = new _screener2.default(el);
     screener.init();
   });
-
-  // Initialize components
-  new _accordion2.default();
-  new _filter2.default();
 
   // Initialize maps if present.
   var $maps = $('.js-map');
@@ -16787,4 +16907,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.4773bbd732bb1971209cc78c60eca842.js.map
+//# sourceMappingURL=main.31063ef7fbc376ef3340ecd9e6c52a6b.js.map

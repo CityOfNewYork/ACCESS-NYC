@@ -26,6 +26,55 @@ var createClass = function () {
 }();
 
 /**
+ * The Utility class
+ * @class
+ */
+var Utility =
+/**
+ * The Utility constructor
+ * @return {object} The Utility class
+ */
+function Utility() {
+  classCallCheck(this, Utility);
+
+  return this;
+};
+
+/**
+ * Boolean for debug mode
+ * @return {boolean} wether or not the front-end is in debug mode.
+ */
+
+
+Utility.debug = function () {
+  return Utility.getUrlParameter(Utility.PARAMS.DEBUG) === '1';
+};
+
+/**
+ * Returns the value of a given key in a URL query string. If no URL query
+ * string is provided, the current URL location is used.
+ * @param {string} name - Key name.
+ * @param {?string} queryString - Optional query string to check.
+ * @return {?string} Query parameter value.
+ */
+Utility.getUrlParameter = function (name, queryString) {
+  var query = queryString || window.location.search;
+  var param = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + param + '=([^&#]*)');
+  var results = regex.exec(query);
+
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+/**
+ * Application parameters
+ * @type {Object}
+ */
+Utility.PARAMS = {
+  DEBUG: 'debug'
+};
+
+/**
  * The Simple Toggle class
  * @class
  */
@@ -62,12 +111,25 @@ var Toggle = function () {
     value: function init() {
       var _this = this;
 
+      // Initialization logging
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir({
+        'init': this._settings.namespace,
+        'settings': this._settings
+      });
+
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
         var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-
         if (!event.target[method](_this._settings.selector)) return;
+
+        // Click event logging
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir({
+          'event': event,
+          'settings': _this._settings
+        });
 
         event.preventDefault();
 
@@ -33584,4 +33646,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.fbf756bf3ff4fa767d628952ab66abed.js.map
+//# sourceMappingURL=main-field.d06f6564f1bc31a2624b1c7aaa873bc1.js.map

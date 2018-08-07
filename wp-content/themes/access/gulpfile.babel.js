@@ -77,7 +77,7 @@ function handleError() {
 gulp.task('styles', (callback) => {
   let plugins = [
     autoprefixer('last 2 versions'),
-    mqpacker(),
+    mqpacker({sort: true}),
     cssnano()
   ];
 
