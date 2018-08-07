@@ -132,6 +132,7 @@
                   <form class="o-search-box__form" method="get" action="/">
                     {{ fn('do_action', 'wpml_add_language_form_field' ) }}
                     <label class="type-small" for="search-field">{{__('Search', 'accessnyctheme')}}</label>
+
                     <div class="input-search">
                       <input name="s" type="text" value="" placeholder="{{__('Search for programs or services', 'accessnyctheme')}}" id="search-field">
                       <button class="btn-text input-search__submit" type="submit">
@@ -145,17 +146,21 @@
                   <div class="o-search-box__suggestions">
                     <div class="o-search-box__suggestions-header">
                       <h3>{{__('Programs', 'accessnyctheme')}}</h3>
-                      <a class="link-more" href="{{ urlBase }}/programs">{{__('see all programs', 'accessnyctheme')}}</a>
+
+                      <a class="link-more hidden screen-tablet:inline-block" href="{{ urlBase }}/programs">{{__('see all programs', 'accessnyctheme')}}</a>
                     </div>
+
                     {% if search_links %}
-                      <div class="o-search-box__suggestions-body">
-                        {% for link in search_links[0].get_field('program_links') %}
-                        <div class="o-search-box__suggestions-item">
-                          <a href="{{ link.link }}">{{ link.plain_language_program_name }}</a>
-                        </div>
-                        {% endfor %}
+                    <div class="o-search-box__suggestions-body">
+                      {% for link in search_links[0].get_field('program_links') %}
+                      <div class="o-search-box__suggestions-item">
+                        <a href="{{ link.link }}">{{ link.plain_language_program_name }}</a>
                       </div>
+                      {% endfor %}
+                    </div>
                     {% endif %}
+
+                    <a class="link-more screen-tablet:hidden" href="#" aria-hidden="true">{{__('see all programs', 'accessnyctheme')}}</a>
                   </div>
                 </div>
               </div>
