@@ -29,7 +29,7 @@ accepts@~1.3.4:
 
 "access-nyc-patterns@https://github.com/CityOfNewYork/ACCESS-NYC-PATTERNS.git":
   version "0.0.10"
-  resolved "https://github.com/CityOfNewYork/ACCESS-NYC-PATTERNS.git#f8f416600534a98564d11ddb449f272371480088"
+  resolved "https://github.com/CityOfNewYork/ACCESS-NYC-PATTERNS.git#62c69c102abb86d7dc774ab97915088c6e7714cb"
   dependencies:
     animate.scss "0.0.6"
     bourbon "^4.2.7"

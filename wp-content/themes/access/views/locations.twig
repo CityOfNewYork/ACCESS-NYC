@@ -4,7 +4,7 @@
   {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
   <main class="js-map layout--map screen-desktop:layout--sidebar bg-color-white" id="content" data-source="/locations/json">
     <div class="js-map-controls layout--map__sidebar">
-      <input type="text" class="w-full js-map-searchbox" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
+      <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
 
       <div class="map-filter-container js-map-filter">
         <a href="#map-filter-settings" class="map-filter-header btn-toggle btn-primary text-color-white rounded-none w-full js-toggle-filter js-main-filter-toggle">
@@ -54,7 +54,7 @@
       <div class="js-map-pagination"> </div>
     </div>
 
-    <div class="js-map-mapbox  layout--map__map"></div>
+    <div class="js-map-mapbox layout--map__map"></div>
   </main>
 {% endblock %}
 
