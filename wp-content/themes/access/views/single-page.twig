@@ -3,10 +3,12 @@
 {% block content %}
 <main class="bg-color-white" id="content">
   <article>
-    <header class="usa-grid py-4 my-1">
-      <h1 class="text-color-blue-dark">{{ post.title }}</h1>
-      <div class="text-font-size-larger font-serif">
-        {{ post.get_field('lead') }}
+    <header class="c-header mt-3 print:mt-0">
+      <div>
+        <h1 class="text-color-blue-dark">{{ post.title }}</h1>
+        <div class="screen-tablet:text-font-size-larger font-serif">
+          {{ post.get_field('lead') }}
+        </div>
       </div>
     </header>
 
