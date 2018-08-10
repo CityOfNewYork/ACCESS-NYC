@@ -1,7 +1,7 @@
 # ACCESS NYC
 [ACCESS NYC](http://nyc.gov/accessnyc) provides a mobile-friendly front door for New Yorkers to screen for City, State, and Federal benefit and program eligibility as well as learn how to apply to programs and find local help.
 
-ACCESS NYC is for benefits-seeking residents in NYC and accomodates residents...
+ACCESS NYC is for benefits-seeking residents in NYC and accommodates residents...
 
 * ... with low digital literacy
 * ... with limited technology access, especially those who are mobile dependent
@@ -59,9 +59,9 @@ To get started with modifying the theme front-end, change directories to the `ac
 
 The NPM package comes with three scripts;
 
-* **development** - This runs the default Gulp task in development mode which watches and compiles files.
-* **production** - This runs the default Gulp task in production mode which also watches and compiles files. The main difference is that production mode uses [ESLint](https://eslint.org/) and will enforce JavaScript writing style.
-* **predeploy** - This will run a one-off build task in production mode. This should be run before all deployments.
+* `development` - This runs the default Gulp task in development mode which watches and compiles files.
+* `production` - This runs the default Gulp task in production mode which also watches and compiles files. The main difference is that production mode uses [ESLint](https://eslint.org/) and will enforce JavaScript writing style.
+* `predeploy` - This will run a one-off build task in production mode. This should be run before all deployments.
 
 Each can be run via `npm run <script>`. Once they run, they will fire up a [BrowserSync](https://www.browsersync.io/) instance to live test your code.
 
@@ -91,7 +91,7 @@ ACCESS NYC Patterns are available as a pre-release while we develop their docume
 
 The JavaScript is written as modules using Babel ES6 syntax. Source files are located in the theme `/src/js` directory. JavaScript is linted by the `gulp lint` task with the ESLint [Google's standards](https://google.github.io/styleguide/javascriptguide.xml). It is transpiled, concatenated, and minified by the `gulp scripts` task, using [Babelify](https://github.com/babel/babelify) (Babel + Browserify).
 
-The main JavaScript libraries used are [jQuery](http://jquery.com/), [Underscore.js](http://underscorejs.org/), and [Vue.js](https://vuejs.org/).
+The main JavaScript libraries used are [jQuery](http://jquery.com/), [Underscore.js](http://underscorejs.org/), and [Vue.js](https://vuejs.org/). 
 
 *PHP (in progress)*
 
