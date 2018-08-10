@@ -1,6 +1,6 @@
 {
   "name": "ACCESS-NYC",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "scripts": {
     "development": "NODE_ENV='development' gulp",
@@ -66,7 +66,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "access-nyc-patterns": "https://github.com/CityOfNewYork/ACCESS-NYC-PATTERNS.git",
+    "access-nyc-patterns": "0.0.11-0",
     "animate.scss": "0.0.6",
     "bourbon": "^4.2.7",
     "bourbon-neat": "^1.8.0",
