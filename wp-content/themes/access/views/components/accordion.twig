@@ -1,0 +1,28 @@
+<article id="{{ this.id }}" class="c-accordion">
+  <header class="c-accordion__header">
+    <p>{{ this.header }}</p>
+
+    <a data-js="accordion" href="#{{ this.id }}__body" class="c-accordion__toggle print:hidden">
+      <span class="c-accordion__toggle-active">
+        <span class="hidden screen-tablet:inline">-</span> {{__('hide this list', 'accessnyc-program-detail')}}
+      </span>
+      <span class="c-accordion__toggle-inactive">
+        <span class="hidden screen-tablet:inline">+</span> {{__('show this list', 'accessnyc-program-detail')}}
+      </span>
+    </a>
+  </header>
+
+  <div id="{{ this.id }}__body" class="c-accordion__body text-font-size-small screen-tablet:text-font-size-normal print:active hidden:overflow animated inactive">
+    <div class="c-accordion__padding">
+      {{ this.body }}
+
+      {% if this.cta %}
+      <p class="print:hidden">
+        <a class="btn btn-secondary btn-next" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
+          {{ this.cta.text }}
+        </a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</article>

@@ -1,19 +1,14 @@
-<fieldset class="d-block w-100 p-bottom">
+<fieldset class="{{ styles.fieldset.main }} p-bottom">
+  <div class="{{ styles.fieldset.inner }}" id="question-disclaimer">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
 
-  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-disclaimer">
-
-    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
-
-    <div class="p-relative">
-
-      <a class="{{styles.questions}}" data-js="question" href="#question-disclaimer">
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" data-js="question" href="#question-disclaimer">
         {{ __('ACCESS NYC Disclaimer for Public Benefit Program Screening', translationID) }}
       </a>
 
       <div data-js="toggle-question">
-
-        <div class="p-horizontal-2 p-bottom-2">
-
+        <div class="{{ styles.questions.toggle }}">
           <p>{{ __('Before we get started, let me explain what we’ll be doing:', translationID) }}</p>
           <ul>
             <li>{{ __('We\'ll be asking you about yourself and your household to find benefits and programs in which you may be interested.', translationID) }}</li>
@@ -29,26 +24,20 @@
             <li>{{ __('The results of this screener do not prohibit you from applying for any benefits or programs on behalf of yourself or your household.', translationID) }}</li>
             <li>{{ __('The information you share for purposes of public benefits screening will be anonymous and can be shared with City agencies to improve access to benefits and programs. To find out more about how the City might use the data you share with ACCESS NYC, visit the <a href="http://www1.nyc.gov/home/terms-of-use.page" target="_blank" rel="noopener noreferrer">Terms of Use for NYC.gov</a>, and <a href="http://www1.nyc.gov/home/privacy-policy.page" target="_blank" rel="noopener noreferrer">Privacy Policy for NYC.gov</a>.', translationID) }}</li>
           </ul>
-
         </div>
 
-        <div class="p-top-2 p-horizontal-2 bg-white">
+        <div class="c-question py-4 px-4 mb-0 bg-color-white">
           <p>{{ __('Check the box below and then click the button to get started.', translationID) }}</p>
-          <div class="screener-disclaimer-acknowledgment screener-question-container m-0">
-            <label class="screener-checkbox styled-checkbox m-0">
+
+          <div class="c-question__container">
+            <label class="checkbox m-0" for="disclaimer-agreement">
               <input id="disclaimer-agreement" type="checkbox" name="disclaimer-agreement" value="true" required
                  v-on:change="disclaimer = $event.target.checked">
-              <span class="styled-checkbox-label">{{ __('I have read, understand, and agree to the terms of: the ACCESS NYC Disclaimer for Public Benefit Program Screening, the NYC.gov Privacy Policy, and the NYC.gov Terms of Use.', translationID) }}</span>
+              <span class="checkbox__label font-normal">{{ __('I have read, understand, and agree to the terms of: the ACCESS NYC Disclaimer for Public Benefit Program Screening, the NYC.gov Privacy Policy, and the NYC.gov Terms of Use.', translationID) }}</span>
             </label>
           </div>
         </div>
-
       </div>
-
-
-
     </div>
-
   </div>
-
 </fieldset>

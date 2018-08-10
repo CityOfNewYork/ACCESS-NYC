@@ -5,72 +5,82 @@
 {% endblock %}
 
 {% block content %}
-  <main class="main-content" id="content">
-    <div class="home-header">
-      <div class="hero">
-        <div class="hero-inner">
-          <h2 class="hero-title type-h1">{{ post.hero_headline }}</h2>
-          <div class="hero-touts">
-            {% for tout in post.get_field('hero_touts') %}
-            <div class="hero-tout">
-              {% if tout.title %}<h3 class="hero-tout-title">{{ tout.title }}</h3>{% endif %}
-              {% if tout.body %}<div class="hero-tout-body">
-                {{ tout.body }}
-              </div>{% endif %}
-              {% if tout.link_text %}<div class="hero-tout-cta">
-                <a class="btn btn-{{ tout.link_type}}{% if tout.link_arrow %} btn-next{% endif %}" href="{{ tout.link_url}}">{{ tout.link_text}}</a>
-              </div>{% endif %}
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="home-body">
-      {% if homepage_touts %}
-      <div class="fyi">
-        <h2 class="fyi-title type-h5">{{ post.hero_touts_heading }}</h2>
-        <div class="fyi-touts">
-          {% for tout in homepage_touts %}
-          <div class="fyi-tout">
-            {% if tout.tout_title %}<h3 class="fyi-tout-title type-h4">{{ tout.tout_title }}</h3>{% endif %}
-            {% if tout.link_text %}<div class="fyi-tout-cta"><a href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ tout.link_text }}</a></div>{% endif %}
+  <main class="bg-color-white" id="content">
+
+    <div class="o-banner">
+      <div class="o-banner__inner">
+        <h1 class="o-banner__title">{{ post.hero_headline }}</h1>
+        <div class="o-banner__touts">
+          {% for tout in post.get_field('hero_touts') %}
+          <div class="o-banner__tout">
+            {% if tout.title %}<h2 class="o-banner__tout-title type-h3">{{ tout.title }}</h2>{% endif %}
+            {% if tout.body %}<div class="o-banner__tout-body">{{ tout.body }}</div>{% endif %}
+            {% if tout.link_text %}<div class="o-banner__tout-cta">
+              <a class="btn btn-{{ tout.link_type}}{% if tout.link_arrow %} btn-next{% endif %}" href="{{ tout.link_url}}">{{ tout.link_text}}</a>
+            </div>{% endif %}
           </div>
           {% endfor %}
         </div>
       </div>
-      {% endif %}
-      <div class="program-gallery program-cards">
-        <h2 class="program-gallery-title type-h3">{{ post.featured_programs_heading }}</h2>
-        {% if post.featured_programs_subheading | length %}<h3 class="program-gallery-subtitle type-h4">{{ post.featured_programs_subheading }}</h3>{% endif %}
-        <div class="program-gallery-touts">
-          {% include 'partials/post-teaser.twig' with {'short_post': true, 'posts': post.get_field('featured_programs')} %}
+    </div>
+
+    <div class="layout--home-body">
+      <div>
+
+        {% if homepage_touts %}
+        <div class="pb-4 mx-3">
+          <h2 class="type-h5 divider m-0 text-color-grey-mid">{{ post.hero_touts_heading }}</h2>
+          <div class="screen-tablet:layout--columns">
+            {% for tout in homepage_touts %}
+            <div class="c-card px-0 screen-tablet:px-2 screen-tablet:py-3">
+              <div class="c-card__body">
+                {% if tout.tout_title %}<h3 class="c-card__title mb-3 text-color-blue-dark">{{ tout.tout_title }}</h3>{% endif %}
+                {% if tout.link_text %}
+                <div class="c-card__summary">
+                  <a href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ tout.link_text }}</a>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
         </div>
-      </div>
-      {% if homepage_alert %}
-      <div class="alert status-{{ homepage_alert.alert_color }}">
-        <div class="alert-icon">
-          <svg class="icon icon-{{ homepage_alert.alert_icon }}">
-            <use xlink:href="#icon-{{ homepage_alert.alert_icon }}"></use>
-          </svg>
+        {% endif %}
+
+        <div class="bg-color-grey-lightest px-3 py-4 mb-3 screen-tablet:mx-3">
+          <h2 class="type-h3 m-0 text-color-blue-dark">{{ post.featured_programs_heading }}</h2>
+          {% if post.featured_programs_subheading | length %}<h3 class="type-supplemental text-color-grey-mid">{{ post.featured_programs_subheading }}</h3>{% endif %}
+          <div class="layout--gutter screen-tablet:layout--columns-gutter">
+            {% include 'partials/post-teaser.twig' with {'short_post': true, 'posts': post.get_field('featured_programs')} %}
+          </div>
         </div>
-        <div class="alert-body">
-          {{ homepage_alert.alert_content }}
+
+        {% if homepage_alert %}
+        <div class="c-alert-box bg-status-{{ homepage_alert.alert_color }} screen-tablet:mx-3 mb-2">
+          <div class="c-alert-box__icon">
+            <svg class="c-alert-box__svg icon icon-{{ homepage_alert.alert_icon }}">
+              <use xlink:href="#icon-{{ homepage_alert.alert_icon }}"></use>
+            </svg>
+          </div>
+          <div class="c-alert-box__body">
+            {{ homepage_alert.alert_content }}
+          </div>
         </div>
-      </div>
-      {% endif %}
-      <footer class="content-footer">
-        {% if post.contact_us_cta and post.contact_us_link %}
-        <div class="contact">
+        {% endif %}
+
+        <footer class="py-2 mx-3">
+          {% if post.contact_us_cta and post.contact_us_link %}
           <h2 class="type-h4">{{ post.contact_us_heading }}</h2>
           <a class="btn btn-primary" href="{{ post.contact_us_link }}">
             <svg class="icon icon-contact">
               <use xlink:href="#icon-contact"></use>
             </svg> {{ post.contact_us_cta }}
           </a>
-        </div>
-        {% endif %}
-      </footer>
+          {% endif %}
+        </footer>
+
+      </div>
+
     </div>
   </main>
 {% endblock %}

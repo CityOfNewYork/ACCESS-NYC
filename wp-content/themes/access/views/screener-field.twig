@@ -81,39 +81,39 @@
 
 {% set benefitOptions = [
   {
-    question: 'Does anyone in your household have <span class="c-blue">disabilities</span>?',
-    who: 'Who currently has <span class="c-blue">disabilities</span>?',
+    question: 'Does anyone in your household have <span class="text-color-blue">disabilities</span>?',
+    who: 'Who currently has <span class="text-color-blue">disabilities</span>?',
     label: 'Have disabilities',
     dataKey: 'disabled',
     labelSingular: 'Has disabilities'
   },
   {
-    question: 'Is anyone in your household currently <span class="c-blue">pregnant</span>?',
-    who: 'Who is currently <span class="c-blue">pregnant</span>?',
+    question: 'Is anyone in your household currently <span class="text-color-blue">pregnant</span>?',
+    who: 'Who is currently <span class="text-color-blue">pregnant</span>?',
     label: 'Pregnant',
     dataKey: 'pregnant'
   },
   {
-    question: 'Is anyone in your household <span class="c-blue">blind or visually impaired</span>?',
-    who: 'Who is currently <span class="c-blue">blind or visually impaired</span>?',
+    question: 'Is anyone in your household <span class="text-color-blue">blind or visually impaired</span>?',
+    who: 'Who is currently <span class="text-color-blue">blind or visually impaired</span>?',
     label: 'Blind or visually impaired',
     dataKey: 'blind'
   },
   {
-    question: 'Did anyone in the household serve in the <span class="c-blue">U.S. Armed Forces, National Guard or Reserves</span>?',
-    who: 'Who has <span class="c-blue">served</span>?',
+    question: 'Did anyone in the household serve in the <span class="text-color-blue">U.S. Armed Forces, National Guard or Reserves</span>?',
+    who: 'Who has <span class="text-color-blue">served</span>?',
     label: 'Served in the U.S. Armed Forces, National Guard or Reserves',
     dataKey: 'veteran'
   },
   {
-    question: 'Is anyone in your household currently on <span class="c-blue">Medicaid</span>?',
-    who: 'Who is on <span class="c-blue">Medicaid</span>?',
+    question: 'Is anyone in your household currently on <span class="text-color-blue">Medicaid</span>?',
+    who: 'Who is on <span class="text-color-blue">Medicaid</span>?',
     label: 'Medicaid',
     dataKey: 'benefitsMedicaid'
   },
   {
-    question: 'Is anyone currently on <span class="c-blue">disability related Medicaid</span>?',
-    who: 'Who is on <span class="c-blue">disability related Medicaid</span>?',
+    question: 'Is anyone currently on <span class="text-color-blue">disability related Medicaid</span>?',
+    who: 'Who is on <span class="text-color-blue">disability related Medicaid</span>?',
     label: 'Disability related Medicaid',
     dataKey: 'benefitsMedicaidDisability'
   }
@@ -125,8 +125,8 @@
   subLabel: 'Full-time student',
   dataSubKey: 'studentFulltime',
   multipleOccupants: {
-    question: 'Is anyone in your household a <span class="c-blue">student</span>?',
-    who: 'Who is a <span class="c-blue">student</span>?',
+    question: 'Is anyone in your household a <span class="text-color-blue">student</span>?',
+    who: 'Who is a <span class="text-color-blue">student</span>?',
     subPronoun: 'Are',
     subQuestion: 'a full-time student?'
   },
@@ -142,8 +142,8 @@
   subLabel: 'Worked in the last 18 months',
   dataSubKey: 'unemployedWorkedLast18Months',
   multipleOccupants: {
-    question: 'Is anyone in your household currently <span class="c-blue">unemployed</span>?',
-    who: 'Who is <span class="c-blue">unemployed</span>?',
+    question: 'Is anyone in your household currently <span class="text-color-blue">unemployed</span>?',
+    who: 'Who is <span class="text-color-blue">unemployed</span>?',
     subPronoun: 'Have',
     subQuestion: 'worked in the last 18 months?'
   },
@@ -225,13 +225,29 @@
 ] %}
 
 {% set styles = {
-  sections: 'type-h1 m-left-2 p-top-2 d-inline-block p-right',
-  questions: 'type-h2 c-black m-0 d-block p-2 td-none',
-  labels: 'type-h3 c-blue-dark ff-sans-serif d-block',
-  explainations: 'type-h4 c-black m-0',
-  warning: 'icon icon-warning bottom-3 f-right animated fadeIn',
-  confirm: 'btn btn-primary btn-next btn-small d-block w-100 animated fadeInUp m-top',
-  alert: 'alert status-urgent animated fadeInUp m-top'
+  sections: {
+    main: 'type-h1 ml-4 pt-4 inline-block pr-2',
+    title: 'text-color-blue-dark no-underline',
+    step: 'text-color-blue-bright font-bold'
+  },
+  fieldset: {
+    main: 'block w-100',
+    inner: 'bg-color-grey-lightest border-bottom border-2 border-color-white relative',
+    highlight: 'bg-color-blue-light w-full h-full absolute',
+    content: 'relative',
+    divider: 'divider-light bg-color-white'
+  },
+  questions: {
+    main: 'type-h2 text-color-black no-underline flex items-center justify-between p-4 m-1',
+    toggle: 'px-4 pb-4 mx-1 mb-1',
+    warning: 'icon icon-warning animated fadeIn'
+  },
+  inputs: {
+    label: 'text-color-blue-dark text-font-size-medium',
+    explanation: 'type-h4 c-black m-0'
+  },
+  confirm: 'btn btn-primary btn-next btn-small block w-full animated fadeInUp mt-2',
+  alert: 'c-alert-box bg-status-urgent animated fadeInUp mt-2'
 } %}
 
 {% extends 'base.twig' %}
@@ -242,187 +258,163 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 {% endblock %}
 
-{% block header %}
-<header class="site-header">
-  <div class="p d-flex bp-justify jc-space-between ai-center bg-blue-dark">
-    <svg class="icon icon-logo-full" width="163">
-      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
-    </svg>
-    <div class="d-flex ai-center hide-for-print">
-      <a class="btn btn-primary btn-small" data-js="reload">{{ __('New Client', translationID) }}</a>
-    </div>
-  </div>
-</header>
-{% endblock %}
-
+{% block header %}{% endblock %}
 {% block footer %}{% endblock %}
 
 {% block content %}
-<main class="main-content layout screener-field" id="content">
+<div class="layout--topbar">
+  <header class="px-2 flex justify-between items-center bg-color-blue-dark text-color-white">
+    <svg class="icon icon-logo-mark screen-sm-mobile:hidden">
+      <use xlink:href="#icon-logo-mark"></use>
+    </svg>
+    <svg class="icon icon-logo-full hidden screen-sm-mobile:inline-block" width="163">
+      <use xlink:href="#icon-logo-full"></use>
+    </svg>
+    <div class="flex items-center print:hidden">
+      <a class="btn btn-primary btn-small" data-js="reload">{{ __('New Client', translationID) }}</a>
+    </div>
+  </header>
 
-  <div class="layout__body bg-white" data-js="view">
-
-    <form action="/peu/results/" style="border:none;padding-top:0;padding-bottom:0" data-js="screener-field">
-
-      <div id="vue">
-
-        <div class="animated o-00" id="page-admin" data-js="page">
-
-          {% if WP_ENV != 'Production' %}
-          <div class="p-horizontal-2 p-top-2">
-            {% include 'screener-field-partials/alert-environment.twig' %}
-          </div>
-          {% endif %}
-
-          <div class="p-horizontal-2">
-
-            <h1 class="{{styles.sections}}" id="first-steps">
-              <a href="#first-steps" class="c-blue-dark td-none">{{ __('First Steps', translationID) }}</a>
-            </h1>
-              {% include 'screener-field-partials/question-staff.twig' with {locations: locations} %}
-              {% include 'screener-field-partials/disclaimer.twig' %}
-
-            <div v-if="disclaimer">
-
-              <a class="{{ styles.confirm }}" href="#page-screener" data-vv-scope="Staff" v-on:click="validate">
-                {{ __('Let\'s Get Started', translationID) }}
-              </a>
-
+  <main class="main-content bg-color-white" id="content">
+    <div data-js="view">
+      <form action="/peu/results/" class="border-none p-0 m-0" data-js="screener-field">
+        <div id="vue">
+          <div class="animated opacity-0" id="page-admin" data-js="page">
+            {% if WP_ENV != 'Production' %}
+            <div class="screen-mobile:px-4 px-2 screen-mobile:pt-4 pt-2">
+              {% include 'screener-field-partials/alert-environment.twig' %}
             </div>
+            {% endif %}
 
-            <div class="{{ styles.alert }}" v-if="errors.all('Staff').length > 0">
-              <div class="alert-icon">
-                <svg class="icon icon-warning d-block">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-warning"></use>
-                </svg>
+            <div class="screen-mobile:px-4 px-2">
+              <h1 class="{{ styles.sections.main }}" id="first-steps">
+                <a href="#first-steps" class="{{ styles.sections.title }}">{{ __('First Steps', translationID) }}</a>
+              </h1>
+                {% include 'screener-field-partials/question-staff.twig' with {locations: locations} %}
+                {% include 'screener-field-partials/disclaimer.twig' %}
+
+              <div v-if="disclaimer">
+                <a class="{{ styles.confirm }}" href="#page-screener" data-vv-scope="Staff" v-on:click="validate">
+                  {{ __('Let\'s Get Started', translationID) }}
+                </a>
               </div>
-              <div class="alert-body">
-                {{ __('Some required fields are not filled out.', translationID) }}
+
+              <div class="{{ styles.alert }}" v-if="errors.all('Staff').length > 0">
+                <div class="c-alert-box__icon">
+                  <svg class="icon icon-warning block">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-warning"></use>
+                  </svg>
+                </div>
+                <div class="c-alert-box__icon">
+                  {{ __('Some required fields are not filled out.', translationID) }}
+                </div>
               </div>
             </div>
-
           </div>
 
+          <div class="animated opacity-0" id="page-screener" data-js="page" data-vv-scope="page-screener">
+            <div class="screen-mobile:px-4 px-2">
+              <h1 class="{{ styles.sections.main }}" id="client-information">
+                <a href="#client-information" class="{{ styles.sections.title }}">{{ __('Client Information', translationID) }}</a>
+              </h1><span class="{{ styles.sections.step }}">(1 of 4)</span>
+                {% include 'screener-field-partials/question-client-needs.twig' with {
+                  categories: categories
+                } %}
+                {% include 'screener-field-partials/question-client-services.twig' with {
+                  programs: programsEnrolled
+                } %}
+                {% include 'screener-field-partials/question-client-basics.twig' %}
+                {% include 'screener-field-partials/question-client-contact.twig' with {
+                  languages: languageOptions,
+                  phoneTypes: phoneTypes,
+                  contactTimes: contactTimes
+                } %}
+
+              <h1 class="{{ styles.sections.main }}" id="household">
+                <a href="#household" class="{{ styles.sections.title }}">{{ __('Household', translationID) }}</a>
+              </h1><span class="{{ styles.sections.step }}">(2 of 4)</span>
+                {% include 'screener-field-partials/question-household-information.twig' %}
+                {% include 'screener-field-partials/question-household-members.twig' with {
+                  headOfHouseholdRelationOptions: headOfHouseholdRelationOptions
+                } %}
+                {% include 'screener-field-partials/question-household-member-details.twig' with {
+                  benefitOptions: benefitOptions,
+                  studentOptions: studentOptions,
+                  employmentOptions: employmentOptions
+                } %}
+
+              <h1 class="{{ styles.sections.main }}" id="household-income">
+                <a href="#household-income" class="{{ styles.sections.title }}">{{ __('Household Income', translationID) }}</a>
+              </h1><span class="{{ styles.sections.step }}">(3 of 4)</span>
+                {% include 'screener-field-partials/question-household-income.twig' with {
+                  incomeOptions: incomeOptions,
+                  frequencyOptions: frequencyOptions
+                } %}
+                {% include 'screener-field-partials/question-household-total-savings.twig' %}
+                {% include 'screener-field-partials/question-household-expenses.twig' with {
+                  expenseOptions: expenseOptions,
+                  frequencyOptions: frequencyOptions
+                } %}
+
+              <h1 class="{{ styles.sections.main }}" id="housing">
+                <a href="#housing" class="{{ styles.sections.title }}">{{ __('Housing', translationID) }}</a>
+              </h1><span class="{{ styles.sections.step }}">(4 of 4)</span>
+                {% include 'screener-field-partials/question-housing-situation.twig' with {
+                  rentingOptions: rentingOptions,
+                  housingOptions: housingOptions
+                } %}
+
+              <div>
+                <a class="{{ styles.confirm }}" href="#page-recap"
+                  v-on:click="validate">
+                  {{ __('Confirm', translationID) }}
+                </a>
+              </div>
+
+              <div class="{{ styles.alert }}" v-if="errors.all().length > 0">
+                <div class="c-alert-box__icon">
+                  <svg class="icon icon-warning block">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-warning"></use>
+                  </svg>
+                </div>
+                <div class="c-alert-box__body">
+                  {{ __('Some required fields are not filled out.', translationID) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="animated opacity-0" id="page-recap" data-js="page">
+            <div class="screen-mobile:px-4 px-2">
+              <h1 class="{{ styles.sections.main }}" id="confirmation">
+                <a href="#confirmation" class="text-color-blue-dark no-underline">{{ __('Confirmation', translationID) }}</a>
+              </h1>
+              {% include 'screener-field-partials/recap.twig' with {'formAction': formAction} %}
+
+              <div id="screener-recaptcha-container" class="recap-captcha hidden">
+                <p>{{ __('Check the "I’m not a robot" box below and click Continue to get your results.', translationID) }}</p>
+                <div class="screener-question-container">
+                  <div id="screener-recaptcha"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex content-center" data-js="recaptcha"></div>
+
+                <button type="button" class="{{ styles.confirm }}" data-js="submit" data-action="{{ formAction }}" v-if="!submitting">
+                  {{ __('Yes, continue to my results', translationID) }}
+                </button>
+                <div v-else class="py-2 flex content-center justify-center">
+                  {% include 'partials/spinner.twig' %}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="animated o-00" id="page-screener" data-js="page" data-vv-scope="page-screener">
-
-          <div class="p-horizontal-2">
-
-            <h1 class="{{styles.sections}}" id="client-information">
-              <a href="#client-information" class="c-blue-dark td-none">{{ __('Client Information', translationID) }}</a>
-            </h1><span class="screener-step">(1 of 4)</span>
-              {% include 'screener-field-partials/question-client-needs.twig' with {
-                categories: categories
-              } %}
-              {% include 'screener-field-partials/question-client-services.twig' with {
-                programs: programsEnrolled
-              } %}
-              {% include 'screener-field-partials/question-client-basics.twig' %}
-              {% include 'screener-field-partials/question-client-contact.twig' with {
-                languages: languageOptions,
-                phoneTypes: phoneTypes,
-                contactTimes: contactTimes
-              } %}
-
-            <h1 class="{{styles.sections}}" id="household">
-              <a href="#household" class="c-blue-dark td-none">{{ __('Household', translationID) }}</a>
-            </h1><span class="screener-step">(2 of 4)</span>
-              {% include 'screener-field-partials/question-household-information.twig' %}
-              {% include 'screener-field-partials/question-household-members.twig' with {
-                headOfHouseholdRelationOptions: headOfHouseholdRelationOptions
-              } %}
-              {% include 'screener-field-partials/question-household-member-details.twig' with {
-                benefitOptions: benefitOptions,
-                studentOptions: studentOptions,
-                employmentOptions: employmentOptions
-              } %}
-
-            <h1 class="{{styles.sections}}" id="household-income">
-              <a href="#household-income" class="c-blue-dark td-none">{{ __('Household Income', translationID) }}</a>
-            </h1><span class="screener-step">(3 of 4)</span>
-              {% include 'screener-field-partials/question-household-income.twig' with {
-                incomeOptions: incomeOptions,
-                frequencyOptions: frequencyOptions
-              } %}
-              {% include 'screener-field-partials/question-household-total-savings.twig' %}
-              {% include 'screener-field-partials/question-household-expenses.twig' with {
-                expenseOptions: expenseOptions,
-                frequencyOptions: frequencyOptions
-              } %}
-
-            <h1 class="{{styles.sections}}" id="housing">
-              <a href="#housing" class="c-blue-dark td-none">{{ __('Housing', translationID) }}</a>
-            </h1><span class="screener-step">(4 of 4)</span>
-              {% include 'screener-field-partials/question-housing-situation.twig' with {
-                rentingOptions: rentingOptions,
-                housingOptions: housingOptions
-              } %}
-
-            <div>
-
-              <a class="{{ styles.confirm }}" href="#page-recap"
-                v-on:click="validate">
-                {{ __('Confirm', translationID) }}
-              </a>
-
-            </div>
-
-            <div class="{{ styles.alert }}" v-if="errors.all().length > 0">
-              <div class="alert-icon">
-                <svg class="icon icon-warning d-block">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-warning"></use>
-                </svg>
-              </div>
-              <div class="alert-body">
-                {{ __('Some required fields are not filled out.', translationID) }}
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="animated o-00" id="page-recap" data-js="page">
-
-          <div class="p-horizontal-2">
-
-            <h1 class="{{styles.sections}}" id="confirmation">
-              <a href="#confirmation" class="c-blue-dark td-none">{{ __('Confirmation', translationID) }}</a>
-            </h1>
-            {% include 'screener-field-partials/recap.twig' with {'formAction': formAction} %}
-
-            <div id="screener-recaptcha-container" class="recap-captcha hidden">
-              <p>{{ __('Check the "I’m not a robot" box below and click Continue to get your results.', translationID) }}</p>
-              <div class="screener-question-container">
-                <div id="screener-recaptcha"></div>
-              </div>
-            </div>
-
-            <div>
-
-              <div class="d-flex jc-center" data-js="recaptcha"></div>
-
-              <button type="button" class="{{ styles.confirm }}" data-js="submit" data-action="{{ formAction }}" v-if="!submitting">
-                {{ __('Yes, continue to my results', translationID) }}
-              </button>
-              <div v-else class="d-flex jc-center">
-                {% include 'partials/spinner.twig' %}
-              </div>
-
-            </div>
-
-
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </form>
-  </div>
-</main>
+      </form>
+    </div>
+  </main>
+</div>
 {% endblock %}
 
 {% block scripts_footer %}

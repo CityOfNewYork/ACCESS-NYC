@@ -1,6 +1,5 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
-// import SmoothScroll from 'smoothscroll-polyfill';
 import OfficeMap from 'modules/office-map';
 import Screener from 'modules/screener';
 import ShareForm from 'modules/share-form';
@@ -8,6 +7,8 @@ import StaticMap from 'modules/static-map';
 import TextSizer from 'modules/text-sizer';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
+import Accordion from 'components/accordion/accordion.common';
+import Filter from 'components/filter/filter.common';
 
 (function(window, $) {
   'use strict';
@@ -16,20 +17,21 @@ import Utility from 'modules/utility';
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
-  $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
+  $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
 
   let $body = $('body');
 
   // Attach site-wide event listeners.
-  $body.on('click', '.js-simple-toggle', Utility.simpleToggle
-  ).on('click', '.js-show-nav', (e) => {
-    // Shows the mobile nav by applying "nav-active" cass to the body.
-    e.preventDefault();
-    $(e.delegateTarget).addClass('nav-active');
-  }).on('click', '.js-hide-nav', (e) => {
-    // Hides the mobile nav.
-    e.preventDefault();
-    $(e.delegateTarget).removeClass('nav-active');
+  $body.on(
+    'click',
+    '.js-simple-toggle, [data-js="toggle"]', // use the data attr selector
+    Utility.simpleToggle
+  ).on('click', '[data-js="toggle-nav"]', (event) => {
+    let element = $(event.currentTarget);
+    // Shows/hides the mobile nav and overlay.
+    event.preventDefault();
+    $('body').toggleClass('active:overlay');
+    $(element.attr('href')).toggleClass('active:o-mobile-nav');
   }).on('click', '.js-toggle-search', (e) => {
     // Shows/hides the search drawer in the main nav.
     e.preventDefault();
@@ -44,10 +46,11 @@ import Utility from 'modules/utility';
     // Hides the search drawer in the main nav.
     e.preventDefault();
     $('#search').removeClass('active');
-  }).on('click', '.js-toggle-filter', (e) => {
-    e.preventDefault();
-    $(e.currentTarget).closest('.js-program-filter').toggleClass('active');
   });
+
+  // Initialize ACCESS NYC Patterns Toggle lib components
+  new Accordion();
+  new Filter();
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
@@ -102,16 +105,18 @@ import Utility from 'modules/utility';
    * @param {string} step - the kebab case identifier for the section
    */
   function showSection(step) {
-    // TODO: This could be refactored to just use the js-simple-toggle class.
-    $('.program-detail-step:not(.program-detail-body-print)')
+    $('[data-js="program-detail-step"]')
        .removeClass('active').filter(`#${step}`).addClass('active');
-    $('.program-nav a').removeClass('active')
+
+    $('[data-js="program-nav"] a').removeClass('active')
        .filter(`#nav-link-${step}`).addClass('active');
   }
-  if ($('.program-detail-content').length) {
-    const isMobileView = () => $('.site-desktop-nav').is(':hidden');
 
-    $('.js-program-nav-step-link').on('click', (e) => {
+  if ($('[data-js="program-detail-content"]').length) {
+    const isMobileView = () => $('[data-js="site-desktop-nav"]')
+      .is(':hidden');
+
+    $('[data-js*="program-nav-step-link"]').on('click', (e) => {
       if (!history.pushState) {
         return true;
       }
@@ -122,7 +127,7 @@ import Utility from 'modules/utility';
 
       window.history.pushState(null, null, '?step=' + step);
 
-      if ($(e.target).hasClass('js-jump-to-anchor')) {
+      if ($(e.target).hasClass('[data-js*="jump-to-anchor"]')) {
         linkType = 'buttonLink';
       } else {
         linkType = 'navLink';
@@ -148,7 +153,9 @@ import Utility from 'modules/utility';
       // (as opposed to one of the table of content links) we want to scroll
       // the browser to the content body as opposed to the top of the page.
       if (isMobileView() && linkType === 'buttonLink') {
-        $(document).scrollTop( $('.content-body').offset().top );
+        $(document).scrollTop(
+          $('[data-js="program-detail-content"]').offset().top
+        );
       } else {
         $(document).scrollTop(0);
       }

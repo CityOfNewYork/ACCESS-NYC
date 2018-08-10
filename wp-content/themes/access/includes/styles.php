@@ -18,7 +18,7 @@ function enqueue_language_style($name) {
     ? 'default' : ICL_LANGUAGE_CODE;
   error_reporting(WP_DEBUG);
 
-  $style = Nyco\Enqueue\style("$name-$lang");
+  $style = Nyco\Enqueue\style("assets/styles/$name-$lang");
 }
 
 /**

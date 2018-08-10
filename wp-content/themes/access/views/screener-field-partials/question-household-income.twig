@@ -1,122 +1,127 @@
-<fieldset class="d-block w-100">
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-household-income">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
 
-  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-income">
-
-    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
-
-    <div class="p-relative">
-
-      <a class="{{styles.questions}}" data-js="question" href="#question-household-income">
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" data-js="question" href="#question-household-income">
         {{ __('Household Income', translationID) }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+        <svg class="{{ styles.questions.warning }}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('HouseholdIncome').length > 0">
           <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
-
-        <div>
-          <label class="{{styles.labels}}">
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class="c-question m-0">
+          <label class="c-question__label {{ styles.inputs.label }}">
             <span v-if="singleOccupant()">{{ __('Do you have an income?', translationID) }}</span>
             <span v-else>{{ __('Do you or does anyone in your household have income?', translationID) }}</span>
           </label>
-          <div class="screener-radio-buttons">
-            <label class="screener-radio screener-label">
-              <input name="toggle-income" type="radio" class="js-screener-toggle screener-radio-input sr-only" value="1"
+          <div class="c-question__container">
+            <label class="toggle">
+              <input name="toggle-income" type="radio" class="sr-only" value="1"
                 data-js="toggle"
                 data-key="incomes"
                 v-model.number="income"
                 v-on:change="removeAllPayments">
-              <span class="screener-radio-label">{{ __('Yes', translationID) }}</span>
+              <span class="toggle__label">{{ __('Yes', translationID) }}</span>
             </label>
-            <label class="screener-radio screener-label">
-              <input name="toggle-income" type="radio" class="js-screener-toggle screener-radio-input sr-only" value="0" checked
+            <label class="toggle">
+              <input name="toggle-income" type="radio" class="sr-only" value="0" checked
                 data-js="toggle"
                 data-key="incomes"
                 v-model.number="income"
                 v-on:change="removeAllPayments">
-              <span class="screener-radio-label">{{ __('No', translationID) }}</span>
+              <span class="toggle__label">{{ __('No', translationID) }}</span>
             </label>
           </div>
         </div>
 
         <div v-if="income">
+          <div v-if="!singleOccupant()" class="c-question">
+            <hr class="{{ styles.fieldset.divider }}">
 
-          <div v-if="!singleOccupant()">
-            <label class="{{styles.labels}} m-top-2">
+            <label class="c-question__label {{ styles.inputs.label }} mb-4">
               {{ __('Who in your household contributes to your total household income?', translationID) }}
             </label>
 
-            <h4 class="{{styles.explainations}}">{{ __('What are sources of income?', translationID) }}</h4>
+            <h4 class="{{ styles.inputs.explanation }}">
+              {{ __('What are sources of income?', translationID) }}
+            </h4>
+
             <p>{{ __('Sources of income can mean anything from disability-related Medicaid to wages, salaries, and tips.', translationID) }}</p>
 
-            <label class="styled-checkbox screener-checkbox screener-label"
-              v-for="(p, personIndex) in people">
-              <input class="js-screener-toggle" type="checkbox" value="1"
-                data-js="toggle"
-                v-bind:name="'Person[' + personIndex + '].has-income'"
-                v-bind:data-toggles="'#js-toggle-people-' + personIndex + '-income'">
-              <span class="styled-checkbox-label">
-                <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-              </span>
-            </label>
+            <div class="c-question__container">
+              <label class="checkbox"
+                v-for="(p, personIndex) in people">
+                <input class="js-screener-toggle" type="checkbox" value="1"
+                  data-js="toggle"
+                  v-bind:name="'Person[' + personIndex + '].has-income'"
+                  v-bind:data-toggles="'#js-toggle-people-' + personIndex + '-income'">
+                <span class="checkbox__label">
+                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+                </span>
+              </label>
+            </div>
           </div>
 
           <div v-for="(p, personIndex) in people">
             <div v-bind:id="'js-toggle-people-' + personIndex + '-income'" v-bind:class="{hidden: !singleOccupant()}">
+              <hr class="{{ styles.fieldset.divider }}">
 
-              <hr class="screener-divider">
-
-              <label class="{{styles.labels}}">
-                <span v-if="singleOccupant()">
-                  {{ __('What is your primary income source?', translationID) }}
-                </span>
-                <span v-else>
-                  {{ __('What is the primary income source for', translationID) }}
-                  <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
-                </span>
-              </label>
-
-              <select class="screener-select"
-                data-object="people"
-                data-key="incomes"
-                v-bind:data-index="personIndex"
-                v-bind:id="'person-' + personIndex + '-incomes-0'"
-                v-bind:name="'Person[' + personIndex + '].incomes[0].type'"
-                v-on:change="pushPayment"
-                v-if="p._attrs.incomes.length === 0">
-                {% for option in incomeOptions %}
-                <option value="{{ option.value }}">
-                  {{ __(option.text, translationID) }}
-                </option>
-                {% endfor %}
-              </select>
+              <div class="c-question mb-0">
+                <label class="c-question__label {{ styles.inputs.label }} mb-2">
+                  <span v-if="singleOccupant()">
+                    {{ __('What is your primary income source?', translationID) }}
+                  </span>
+                  <span v-else>
+                    {{ __('What is the primary income source for', translationID) }}
+                    <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+                  </span>
+                </label>
+                <div class="c-question__container mt-0">
+                  <select class="select"
+                    data-object="people"
+                    data-key="incomes"
+                    v-bind:data-index="personIndex"
+                    v-bind:id="'person-' + personIndex + '-incomes-0'"
+                    v-bind:name="'Person[' + personIndex + '].incomes[0].type'"
+                    v-on:change="pushPayment"
+                    v-if="p._attrs.incomes.length === 0">
+                    {% for option in incomeOptions %}
+                    <option value="{{ option.value }}">
+                      {{ __(option.text, translationID) }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
 
               <div v-for="(income, incomeIndex) in p._attrs.incomes">
+                <div class="c-question__container mt-0 mb-4">
+                  <select class="select"
+                    data-object="people"
+                    data-key="incomes"
+                    v-bind:data-index="personIndex"
+                    v-bind:data-key-index="incomeIndex"
+                    v-bind:id="'person-' + personIndex + '-incomes-0'"
+                    v-bind:name="'Person[' + personIndex + '].incomes[0].type'"
+                    v-model="income.type"
+                    v-on:change="removePayment">
+                    {% for option in incomeOptions %}
+                    <option value="{{ option.value }}">
+                      {{ __(option.text, translationID) }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
 
-                <select class="screener-select"
-                  data-object="people"
-                  data-key="incomes"
-                  v-bind:data-index="personIndex"
-                  v-bind:data-key-index="incomeIndex"
-                  v-bind:id="'person-' + personIndex + '-incomes-0'"
-                  v-bind:name="'Person[' + personIndex + '].incomes[0].type'"
-                  v-model="income.type"
-                  v-on:change="removePayment">
-                  {% for option in incomeOptions %}
-                  <option value="{{ option.value }}">
-                    {{ __(option.text, translationID) }}
-                  </option>
-                  {% endfor %}
-                </select>
-
-                <div>
-                  <label class="{{styles.labels}} m-top-2">
+                <div class="c-question">
+                  <label class="c-question__label {{ styles.inputs.label }}">
                     <span v-if="singleOccupant()">
                       {{ __('How much do you receive for: ') }}
-                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
+                      <span class="text-color-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
                     </span>
                     <span v-else>
                       {{ __('How much', translationID) }}
@@ -124,36 +129,34 @@
                       <span v-else>{{ __('does', translationID) }}</span>
                       <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
                       {{ __('receive for', translationID) }}:
-                      <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
+                      <span class="text-color-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
                     </span>
-                    <span class="c-red">*</span>
+                    <span class="text-color-red">*</span>
                   </label>
-                  <div class="m-bottom-2">
-                    <div class="screener-question-container"
-                      v-bind:class="{'error': errors.has('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')}">
-                      <div class="error-message"
-                        v-if="errors.has('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')">
-                          v{ errors.first('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount') }
-                      </div>
-                      <div class="currency-usd m-0">
-                        <input type="text" pattern="^([0-9]{1,6})(\.[0-9]{0,2})?$" required
-                          data-type="float"
-                          data-vv-scope="HouseholdIncome"
-                          data-vv-as="{{ __('income amount', translationID) }}"
-                          data-js="calc-input"
-                          data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
-                          v-validate="{required: true, regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
-                          v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
-                          v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'"
-                          v-on:change="income.amount = getTypedVal($event.target)"
-                          v-on:blur="$event.target.value = filterDollars($event)">
-                      </div>
+                  <div class="c-question__container"
+                    v-bind:class="{'error': errors.has('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')}">
+                    <div class="error-message"
+                      v-if="errors.has('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount')">
+                        v{ errors.first('HouseholdIncome.Person[' + personIndex + '].incomes[' + incomeIndex + '].amount') }
+                    </div>
+                    <div class="input-currency-usd m-0">
+                      <input type="text" pattern="^([0-9]{1,6})(\.[0-9]{0,2})?$" required
+                        data-type="float"
+                        data-vv-scope="HouseholdIncome"
+                        data-vv-as="{{ __('income amount', translationID) }}"
+                        data-js="calc-input"
+                        data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
+                        v-validate="{required: true, regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
+                        v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-amount'"
+                        v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].amount'"
+                        v-on:change="income.amount = getTypedVal($event.target)"
+                        v-on:blur="$event.target.value = filterDollars($event)">
                     </div>
                   </div>
                 </div>
 
-                <div>
-                  <label class="{{styles.labels}}">
+                <div class="c-question">
+                  <label class="c-question__label {{ styles.inputs.label }}">
                     <span v-if="singleOccupant()">
                       {{ __('How often do you receive: ') }}
                       <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
@@ -166,18 +169,18 @@
                       {{ __('receive', translationID) }}:
                       <span class="c-blue">v{ localString(income.type) }</span>{{ __('?', translationID) }}
                     </span>
-                    <span class="c-red">*</span>
+                    <span class="text-color-red">*</span>
                   </label>
-                  <div class="screener-question-container"
+                  <div class="c-question__container"
                     v-bind:class="{'error': errors.has('Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency', 'HouseholdIncome')}">
                     <div class="error-message"
                       v-if="errors.has('Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency', 'HouseholdIncome')">
                         v{ errors.first('Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency', 'HouseholdIncome') }
                     </div>
-                    <div class="screener-checkboxes">
+                    <div class="screen-tablet:layout--columns-gutter">
                       {% for option in frequencyOptions %}
                       <label
-                        class="styled-radio screener-checkbox screener-checkboxes-program screener-label"
+                        class="radio"
                         v-bind:for="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'">
                         <input type="radio" value="{{ option.value }}"
                           data-vv-scope="HouseholdIncome"
@@ -186,7 +189,7 @@
                           v-model="income.frequency"
                           v-bind:id="'person-' + personIndex + '-incomes-' + incomeIndex + '-frequency-{{ option.value }}'"
                           v-bind:name="'Person[' + personIndex + '].incomes[' + incomeIndex + '].frequency'"/>
-                        <span class="styled-radio-label">
+                        <span class="radio__label">
                           {{ __(option.text, translationID) }}
                         </span>
                       </label>
@@ -195,12 +198,10 @@
                   </div>
                 </div>
 
-                <div class="p-top p-bottom-2">
-                  <hr class="m-0 screener-divider">
-                </div>
+                <hr class="{{ styles.fieldset.divider }}">
 
-                <div>
-                  <label class="{{styles.labels}}">
+                <div class="c-question mb-0">
+                  <label class="c-question__label {{ styles.inputs.label }}">
                     <span v-if="singleOccupant()">
                       {{ __('If you have another source of income, select it below.', translationID) }}
                     </span>
@@ -210,32 +211,28 @@
                       {{ __('have another source of income, select it below', translationID) }}
                     </span>
                   </label>
-                  <select class="screener-select"
-                      data-key="incomes"
-                      data-object="people"
-                      v-bind:data-index="personIndex"
-                      v-bind:id="'person-' + personIndex + '-incomes-' + (incomeIndex + 1) + ''"
-                      v-bind:name="'Person[' + personIndex + '].incomes[' + (incomeIndex + 1) + '].type'"
-                      v-on:change="pushPayment"
-                      v-if="!p._attrs.incomes[incomeIndex + 1]">
-                    {% for option in incomeOptions %}
-                    <option value="{{ option.value }}">
-                      {{ __(option.text, translationID) }}
-                    </option>
-                    {% endfor %}
-                  </select>
+                  <div class="c-question__container">
+                    <select class="select"
+                        data-key="incomes"
+                        data-object="people"
+                        v-bind:data-index="personIndex"
+                        v-bind:id="'person-' + personIndex + '-incomes-' + (incomeIndex + 1) + ''"
+                        v-bind:name="'Person[' + personIndex + '].incomes[' + (incomeIndex + 1) + '].type'"
+                        v-on:change="pushPayment"
+                        v-if="!p._attrs.incomes[incomeIndex + 1]">
+                      {% for option in incomeOptions %}
+                      <option value="{{ option.value }}">
+                        {{ __(option.text, translationID) }}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
-
 </fieldset>

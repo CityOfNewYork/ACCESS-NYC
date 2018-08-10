@@ -1,16 +1,28 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main class="main-content" id="content">
-    <article class="content-article">
-      <div class="usa-grid">
-        <header class="content-header usa-width-one-whole">
-          <h1>404 - Page not found.</h1>
-          <p>
-            <a href="{{ urlBase }}/?s=">Try searching for what you're looking for.</a>
-          </p>
-        </header>
-      </div>
-    </article>
-  </main>
+<main id="content" class="bg-color-white">
+  <article>
+    <div class="usa-grid py-4 my-1">
+      <header class="usa-grid py-4 my-1">
+        <h1 class="text-color-blue-dark">{{__('Page not found.', 'accessnyctheme')}}</h1>
+        <div>
+          <!--<p class="text-font-size-larger font-serif">Try searching for what you're looking for.</p>-->
+          <form method="get" action="/" class="mb-3">
+            {{ fn('do_action', 'wpml_add_language_form_field' ) }}
+            <label class="block type-small text-font-size-larger font-serif mb-2" for="search-field">{{__('Try searching for what you\'re looking for.', 'accessnyctheme')}}</label>
+            <div class="input-search">
+              <input name="s" type="text" value="" placeholder="{{__('Search for programs or services', 'accessnyctheme')}}" id="search-field">
+              <button class="btn-text input-search__submit" type="submit">
+                <svg class="icon icon-search">
+                  <use xlink:href="#icon-search"></use>
+                </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </header>
+    </div>
+  </article>
+</main>
 {% endblock %}
