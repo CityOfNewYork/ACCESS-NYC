@@ -348,10 +348,9 @@ Utility.gtagClick = function(key, data) {
  * @param  {collection} data The data to track
  */
 Utility.gtagView = function(app, key, data) {
-  let d = _.reduceRight(data, (a, b) => _.extend(a, b));
   let view = {
     app_name: app,
-    screen_name: d['WT.ti']
+    screen_name: key
   };
   /* eslint-disable no-undef */
   gtag('event', 'screen_view', view);

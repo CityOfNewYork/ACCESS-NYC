@@ -34060,10 +34060,9 @@ Utility.gtagClick = function (key, data) {
     * @param  {collection} data The data to track
     */
 Utility.gtagView = function (app, key, data) {
-  var d = _underscore2.default.reduceRight(data, function (a, b) {return _underscore2.default.extend(a, b);});
   var view = {
     app_name: app,
-    screen_name: d['WT.ti'] };
+    screen_name: key };
 
   /* eslint-disable no-undef */
   gtag('event', 'screen_view', view);
@@ -34153,4 +34152,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.9c08848735b812f03b4c8f9df2fc46aa.js.map
+//# sourceMappingURL=main-field.17a67283252002a7bc37e3a8ab44d13a.js.map
