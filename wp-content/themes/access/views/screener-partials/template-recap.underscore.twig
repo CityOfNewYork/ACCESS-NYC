@@ -59,13 +59,13 @@
         <span class="c-member-list__item">{{ __('Head of household', 'accessnyc-screener') }}</span>
         <% } %>
 
-        <span class="c-member-list__item block screen-tablet:inline">
+        <span class="c-member-list__item inline">
           <a role="button" data-person="<%= index %>" class="js-edit-person screen-tablet:px-2 font-normal cursor-pointer">{{ __('Edit', 'accessnyc-screener') }}</a><% if (index !== 0 && !member.isHoh) { %><a role="button" data-person="<%= index %>" class="js-remove-person px-2 font-normal">{{ __('Remove', 'accessnyc-screener') }}</a><% } %>
         </span>
 
         <% if (member.conditions.length) { %>
-        <div class="flex font-normal leading-large pb-1">
-          <div class="flex-none" style="width:7rem">{{ __('Conditions:', 'accessnyc-screener') }}</div>
+        <div class="screen-mobile:flex font-normal leading-large pb-1">
+          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __('Conditions:', 'accessnyc-screener') }}</div>
           <ul class="list-inline-semicolon">
             <% _.each(member.conditions, function(condition) { %>
             <li><%= condition %></li>
@@ -75,8 +75,8 @@
         <% } %>
 
         <% if (member.benefits.length) { %>
-        <div class="flex font-normal leading-large pb-1">
-          <div class="flex-none" style="width:7rem">{{ __('Benefits:', 'accessnyc-screener') }}</div>
+        <div class="screen-mobile:flex font-normal leading-large pb-1">
+          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __('Benefits:', 'accessnyc-screener') }}</div>
           <ul class="list-inline-semicolon">
             <% _.each(member.benefits, function(benefit) { %>
             <li><%= benefit %></li>
@@ -86,8 +86,8 @@
         <% } %>
 
         <% if (member.incomes.length) { %>
-        <div class="flex font-normal leading-large pb-1">
-          <div class="flex-none" style="width:7rem">{{ __('Income:', 'accessnyc-screener') }}</div>
+        <div class="screen-mobile:flex font-normal leading-large pb-1">
+          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __('Income:', 'accessnyc-screener') }}</div>
           <ul class="list-inline-semicolon">
             <% _.each(member.incomes, function(income) { %>
             <li>
@@ -103,8 +103,8 @@
         <% } %>
 
         <% if (member.expenses.length) { %>
-        <div class="flex font-normal leading-large">
-          <div class="flex-none" style="width:7rem">{{ __('Expenses:', 'accessnyc-screener') }}</div>
+        <div class="screen-mobile:flex font-normal leading-large">
+          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __('Expenses:', 'accessnyc-screener') }}</div>
           <ul class="list-inline-semicolon">
             <% _.each(member.expenses, function(expense) { %>
             <li>
