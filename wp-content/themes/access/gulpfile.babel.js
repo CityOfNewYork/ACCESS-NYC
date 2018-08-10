@@ -28,6 +28,7 @@ import p from './package.json';
 import envify from 'envify/custom';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import mqpacker from 'css-mqpacker';
 
 
 /**
@@ -44,6 +45,7 @@ const NODE_ENV = process.env.NODE_ENV;
 
 const DIST = 'assets';
 const SRC = 'src';
+const PATTERNS_SRC = 'node_modules/access-nyc-patterns/src';
 
 const HASH_FILES = [
   'manifest-screener-field.json',
@@ -75,28 +77,29 @@ function handleError() {
 gulp.task('styles', (callback) => {
   let plugins = [
     autoprefixer('last 2 versions'),
+    mqpacker({sort: true}),
     cssnano()
   ];
 
   gulp.src([
       `${SRC}/scss/style-latin.scss`,
       `${SRC}/scss/style-*.scss`
-    ]).pipe($.jsonToSass({
-      jsonPath: `${SRC}/variables.json`,
-      scssPath: `${SRC}/scss/_variables-json.scss`
-    }))
+    ])
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      includePaths: ['node_modules']
-        .concat(require('bourbon').includePaths)
-        .concat(require('bourbon-neat').includePaths)
+      includePaths: [
+        'node_modules',
+        'node_modules/access-nyc-patterns/src'
+      ]
+      .concat(require('bourbon').includePaths)
+      .concat(require('bourbon-neat').includePaths)
     })
     .on('error', $.notify.onError())
     .on('error', $.sass.logError))
     .pipe($.postcss(plugins))
     .pipe($.hashFilename({format: HASH_FORMAT}))
     .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./assets/styles'));
 
   callback(null); // pass null to the callback for synchronous tasks
 });
@@ -105,7 +108,10 @@ gulp.task('styles', (callback) => {
  * Clean Styles
  */
 gulp.task('clean (styles)', (callback) => {
-  del(['style-*.css', 'style-*.css.map']);
+  del([
+    './assets/styles/style-*.css',
+    './assets/styles/style-*.css.map'
+  ]);
   callback(null); // pass null to the callback for synchronous tasks
 });
 
@@ -127,7 +133,11 @@ gulp.task('scripts', (callback) => {
     return browserify({
       entries: [`${SRC}/js/${entry}.js`],
       debug: true,  // must be true for sourcemaps path
-      paths: ['node_modules',`${SRC}/js`]
+      paths: [
+        'node_modules',
+        'node_modules/access-nyc-patterns/dist',
+        `${SRC}/js`
+      ]
     }).transform('babelify', {
       presets: ['es2015'],
       sourceMaps: true // must be true for sourcemaps path
@@ -147,7 +157,11 @@ gulp.task('scripts', (callback) => {
     return browserify({
       entries: [`${SRC}/js/${entry}.js`],
       debug: true, // must be true for sourcemaps path
-      paths: ['node_modules',`${SRC}/js`]
+      paths: [
+        'node_modules',
+        'node_modules/access-nyc-patterns/dist',
+        `${SRC}/js`
+      ]
     }).transform('babelify', {
       presets: ['es2015'],
       sourceMaps: true // must be true for sourcemaps path
@@ -176,8 +190,8 @@ gulp.task('scripts', (callback) => {
  */
 gulp.task('lint', () =>
   gulp.src(`${SRC}/js/**/*.js`).pipe($.eslint({
-        "parser": "babel-eslint",
-        "rules": {"strict": 0}
+        'parser': 'babel-eslint',
+        'rules': {'strict': 0}
       }
     ))
   .pipe($.eslint.format())
@@ -225,11 +239,10 @@ gulp.task('clean', ['clean (scripts)', 'clean (styles)']);
  */
 gulp.task('images', () =>
   gulp.src([
-      `${SRC}/img/**/*.jpg`,
-      `${SRC}/img/**/*.png`,
-      `${SRC}/img/**/*.gif`,
-      `${SRC}/img/**/*.svg`,
-      `!${SRC}/img/sprite/**/*`
+      `${PATTERNS_SRC}/images/**/*.jpg`,
+      `${PATTERNS_SRC}/images/**/*.png`,
+      `${PATTERNS_SRC}/images/**/*.gif`,
+      `${PATTERNS_SRC}/images/**/*.svg`
     ])
     .pipe($.cache($.imagemin({
       optimizationLevel: 5,
@@ -244,11 +257,13 @@ gulp.task('images', () =>
  * SVG Sprite
  */
 gulp.task('svg-sprites', () =>
-  gulp.src(`${SRC}/img/sprite/**/*.svg`)
+  gulp.src(`${PATTERNS_SRC}/svg/*.svg`)
     .pipe($.svgmin())
-    .pipe($.svgstore())
+    .pipe($.svgstore({
+      inlineSvg: true
+    }))
     .pipe($.rename('icons.svg'))
-    .pipe(gulp.dest(`${DIST}/img`))
+    .pipe(gulp.dest('assets/svg/'))
     .pipe($.notify({
       message: 'SVG task complete'
     }))

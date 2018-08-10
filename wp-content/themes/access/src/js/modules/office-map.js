@@ -143,10 +143,10 @@ class OfficeMap {
     });
 
     // Load pin data.
-    $(this._el).addClass(OfficeMap.CssClass.LOADING);
+    this.loading(true);
 
     this.clearLocations(true).fetchLocations().then(() => {
-      $(this._el).removeClass(OfficeMap.CssClass.LOADING);
+      this.loading(false);
       this.filterLocations().sortByDistance();
       if (Utility.getUrlParameter('lat') || Utility.getUrlParameter('lng') ||
           Utility.getUrlParameter('programs')) {
@@ -217,7 +217,9 @@ class OfficeMap {
   updateList() {
     // If there are no qualified locations, show "no results".
     if (this._filteredLocations.length === 0) {
-      $(this._el).addClass(OfficeMap.CssClass.NO_RESULTS);
+      $(this._el).find(OfficeMap.Selectors.MESSAGE_NO_RESULTS)
+        .removeClass('hidden')
+        .attr('aria-hidden', false);
       $(this._listEl).empty();
       $(this._paginationEl).empty();
       return this;
@@ -244,7 +246,9 @@ class OfficeMap {
     });
 
     // Update the list.
-    $(this._el).removeClass(OfficeMap.CssClass.NO_RESULTS);
+    $(this._el).find(OfficeMap.Selectors.MESSAGE_NO_RESULTS)
+      .addClass('hidden')
+      .attr('aria-hidden', true);
     $(this._listEl).append(_.template(locationTemplate)({
       locations: addedLocations,
       localize: Utility.localize
@@ -318,8 +322,8 @@ class OfficeMap {
     let $scrollTarget = $('html, body');
     let scrollPos = $highlightedItem.offset().top;
     // TODO(jjandoc): Is there a better conditional for this?
-    if ($resultContainer.css('overflow') === 'scroll' ||
-        $resultContainer.css('overflow-y') === 'scroll') {
+    if ($resultContainer.css('overflow') === 'auto' ||
+        $resultContainer.css('overflow-y') === 'auto') {
       $scrollTarget = $resultContainer;
       scrollPos = $scrollTarget.scrollTop() + $highlightedItem.position().top;
     }
@@ -403,6 +407,28 @@ class OfficeMap {
     return this;
   }
 
+  /**
+   * Method for the loading state
+   * @param  {boolean} isLoading Wether or not the map is loading
+   * @return {this} OfficeMap
+   */
+  loading(isLoading) {
+    if (isLoading) {
+      $(this._el).find(OfficeMap.Selectors.MESSAGE_LOADING)
+        .removeClass('hidden')
+        .attr('aria-hidden', false);
+    } else {
+      $(this._el).find(OfficeMap.Selectors.MESSAGE_LOADING)
+        .addClass('hidden')
+        .attr('aria-hidden', true);
+    }
+    return this;
+  }
+
+  // results() {
+
+  // }
+
 }
 
 /**
@@ -410,7 +436,7 @@ class OfficeMap {
  * @enum {string}
  */
 OfficeMap.CssClass = {
-  ACTIVE: 'active',
+  ACTIVE: 'active bg-color-yellow-light',
   CONTROLS: 'js-map-controls',
   FILTER: 'js-map-filter',
   LIST_LOCATION: 'js-map-location',
@@ -422,6 +448,11 @@ OfficeMap.CssClass = {
   RESULT_CONTAINER: 'js-map-results-container',
   RESULT_LIST: 'js-map-results',
   SEARCH_BOX: 'js-map-searchbox'
+};
+
+OfficeMap.Selectors = {
+  MESSAGE_LOADING: '[data-js="message-loading"]',
+  MESSAGE_NO_RESULTS: '[data-js="message-no-results"]'
 };
 
 export default OfficeMap;

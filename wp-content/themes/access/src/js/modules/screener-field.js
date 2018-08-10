@@ -1056,7 +1056,7 @@ ScreenerField.localString = function(slug) {
  */
 ScreenerField.personLabel = {
   props: ['index', 'person'],
-  template: '<span class="c-black">' +
+  template: '<span class="text-color-black">' +
     '<span v-bind:class="personIndex(index)"></span> ' +
     '<span v-if="index === 0">{{ localString("you") }}, </span>'+
     '<span v-if="person.headOfHousehold"> ' +
@@ -1075,7 +1075,7 @@ ScreenerField.personLabel = {
     personIndex: function(index) {
       let name = 'i-' + index;
       let classes = {
-        'screener-members__member-icon': true
+        'c-member-list__icon': true
       };
       classes[name] = true;
       return classes;
@@ -1106,7 +1106,7 @@ ScreenerField.Selectors = {
 ScreenerField.Classes = {
   ACTIVE: 'active',
   HIDDEN: 'hidden',
-  HIDDEN_OPACITY: 'o-00'
+  HIDDEN_OPACITY: 'opacity-0'
 };
 
 /**

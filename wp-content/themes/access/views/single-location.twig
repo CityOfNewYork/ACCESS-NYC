@@ -3,58 +3,83 @@
 {% block content %}
   {% for post in posts %}
   {% set isGovtOffice = __('Government Office', 'accessnyc-locations')|trim == post.type %}
-  <main class="main-content location-detail{{ isGovtOffice ? ' govt-office' }}" id="content">
-    <header class="location-header">
-      <div class="location-map js-static-map hide-for-print"
+  <main id="content" class="main-content bg-color-white">
+    <header class="screen-desktop:layout--columns screen-desktop:flex-row-reverse relative pb-4 border-b border-color-grey-light">
+      <div class="js-static-map print:hidden screen-desktop:px-4 screen-desktop:pt-4"
           data-marker="{{ post.address.lat}},{{ post.address.lng }}"
           data-link="https://www.google.com/maps/dir//{{ post.address.address|url_encode }}"
           {% if isGovtOffice %}data-govt-office="true"{% endif %}
-          data-zoom="13"></div>
-      <div class="location-map js-static-map show-print-only"
+          data-zoom="13"
+          style="min-height:300px;"></div>
+
+      <div class="js-static-map hidden print:inline-block screen-desktop:px-4 screen-desktop:pt-4"
           data-marker="{{ post.address.lat}},{{ post.address.lng }}"
           data-link="https://www.google.com/maps/dir//{{ post.address.address|url_encode }}"
           data-width="600"
           data-height="340"
           {% if isGovtOffice %}data-govt-office="true"{% endif %}
-          data-zoom="13"></div>
-      <div class="location-header-details">
-        <div class="location-header-summary">
-          <h3 class="map-location-name">{{ post.title }}</h3>
-          {% if post.type or post.division %}
-          <div class="map-location-details">{{ post.type }}{% if post.type and post.division %} | {% endif %}{{ post.division }}</div>
-          {% endif %}
-          <div class="map-location-details">
-            {{ post.address_street }},
-            {% if post.address_street_2 %}{{ post.address_street_2 }},{% endif %}
-            {{ post.city }} {{ post.zip }}
+          data-zoom="13"
+          style="min-height:300px;"></div>
+
+      <div class="pt-4 px-4">
+        <article class="c-card p-0 mb-4">
+          <aside class="c-card__icon m-0">
+            {% if isGovtOffice %}
+            <img src='/wp-content/themes/access/assets/img/map-pin-blue.png' width="33" height="40" alt="Government office map marker">
+            {% else %}
+            <img src='/wp-content/themes/access/assets/img/map-pin-green.png' width="33" height="40" alt="Non-government office map marker">
+            {% endif %}
+          </aside>
+
+          <div class="c-card__body">
+            <header>
+              <h3 class="type-h4 serif m-0">{{ post.title }}</h3>
+              {% if post.type or post.division %}
+              <p class="text-font-size-small text-color-grey-mid m-0">
+                {{ post.type }}{% if post.type and post.division %} | {% endif %}{{ post.division }}
+              </p>
+              {% endif %}
+              <address class="text-font-size-small roman text-color-grey-mid m-0">
+                {{ post.address_street }},
+                {% if post.address_street_2 %}{{ post.address_street_2 }},{% endif %}
+                {{ post.city }} {{ post.zip }}
+              </address>
+            </header>
           </div>
-        </div>
-        <a href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}" class="btn btn-primary link-back location-back js-location-back hide-for-print">{{__('back to map', 'accessnyc-locations')}}</a>
+        </article>
+
+        <a href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}" class="btn btn-primary btn-previous btn-small mb-4 js-location-back print:hidden">
+          {{__('back to map', 'accessnyc-locations')}}
+        </a>
+
         {% if post.get_field('programs')|length > 0 %}
         <h4>{{__('This location can help you with:', 'accessnyc-locations')}}</h4>
-        <ul class="location-program-list">
+
+        <ul class="list-reset layout--gutter">
           {% for program in post.get_field('programs') %}
           <li><a href="{{ urlBase }}/programs/{{ program.slug }}">{{ program.name }}</a></li>
           {% endfor %}
         </ul>
         {% endif %}
+
         {% if post.description %}
-        <div class="map-location-description">
+        <div>
           {{ post.description }}
         </div>
         {% endif %}
       </div>
     </header>
-    <div class="location-body">
-      <ul class="location-action-list">
+
+    <div class="p-4">
+      <ul class="list-reset layout--gutter screen-tablet:layout--columns-gutter">
         {% for phone in post.get_field('phone') %}
         <li><a href="tel:{{ phone.number }}{% if phone.extension %}, {{ phone.extension }}{% endif %}">{{__('Call:', 'accessnyc-locations')}} {{ phone.number }}{% if phone.extension %} {{__('Ext.', 'accessnyc-locations')}} {{ phone.extension }}{% endif %}</a></li>
         {% endfor %}
         {% if post.website %}
         <li><a href="{{ post.website }}">{{ post.website }}</a></li>
         {% endif %}
-        <li class="hide-for-print"><a href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer">{{__('Get directions', 'accessnyc-locations')}}</a></li>
-        <li class="hide-for-print"><a href="javascript:window.print()">{{__('Print', 'accessnyc-locations')}}</a></li>
+        <li class="print:hidden"><a href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer">{{__('Get directions', 'accessnyc-locations')}}</a></li>
+        <li class="print:hidden"><a href="javascript:window.print()">{{__('Print', 'accessnyc-locations')}}</a></li>
       </ul>
     </div>
   </main>

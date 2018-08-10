@@ -1,22 +1,28 @@
 {% extends "base.twig" %}
 
+{% set styles = {
+  fieldset: 'js-screener-step',
+  number: 'text-color-blue-bright font-bold',
+  heading: 'text-font-size-larger text-color-blue-dark border-b border-color-grey-mid pb-4 mb-3',
+  padding: 'p-3 screen-desktop:p-4',
+  label: 'font-bold text-font-size-normal'
+} %}
+
 {% block content %}
-<main class="main-content" id="content">
-  <div class="screener">
-    <form class="screener-body js-screener-form" action="/eligibility/results/">
-      {% include 'screener-partials/step-1.twig' with {'categories': categories} %}
-      {% include 'screener-partials/step-2.twig' %}
-      {% include 'screener-partials/step-3.twig' %}
-      {% include 'screener-partials/step-4.twig' %}
-      {% include 'screener-partials/step-5.twig' %}
-      {% include 'screener-partials/step-6.twig' %}
-      {% include 'screener-partials/step-7.twig' %}
-      {% include 'screener-partials/step-8.twig' %}
-      {% include 'screener-partials/step-9.twig' %}
-      {% include 'screener-partials/step-10.twig' %}
-      {% include 'screener-partials/recap.twig' with {'formAction': formAction} %}
-    </form>
-  </div>
+<main class="main-content screen-desktop:my-2 screen-desktop:mx-4 screen-desktop:px-2" id="content">
+  <form class="bg-color-white screen-desktop:border border-color-grey-light screen-desktop:m-4 text-font-size-small js-screener-form" action="/eligibility/results/">
+    {% include 'screener-partials/step-1.twig' with {'categories': categories} %}
+    {% include 'screener-partials/step-2.twig' %}
+    {% include 'screener-partials/step-3.twig' %}
+    {% include 'screener-partials/step-4.twig' %}
+    {% include 'screener-partials/step-5.twig' %}
+    {% include 'screener-partials/step-6.twig' %}
+    {% include 'screener-partials/step-7.twig' %}
+    {% include 'screener-partials/step-8.twig' %}
+    {% include 'screener-partials/step-9.twig' %}
+    {% include 'screener-partials/step-10.twig' %}
+    {% include 'screener-partials/recap.twig' with {'formAction': formAction} %}
+  </form>
 </main>
 {% endblock %}
 
@@ -24,10 +30,27 @@
 {{ function('enqueue_script', 'assets/js/main', '.min') }}
 
 <script type="template/html" id="screener-income-template">
-  {% include 'screener-partials/template-income.twig' %}
+  {% include 'screener-partials/template-income.underscore.twig' %}
 </script>
+
 <script type="template/html" id="screener-expense-template">
-  {% include 'screener-partials/template-expense.twig' %}
+  {% include 'screener-partials/template-expense.underscore.twig' %}
+</script>
+
+<script type="text/template" id="screener-member-summary-template">
+  {% include 'screener-partials/template-member-summary.underscore.twig' %}
+</script>
+
+<script type="text/template" id="screener-member-template">
+  {% include 'screener-partials/template-member.underscore.twig' %}
+</script>
+
+<script type="text/template" id="screener-member-option-template">
+  {% include 'screener-partials/template-member-option.underscore.twig' %}
+</script>
+
+<script type="text/template" id="screener-recap-template">
+  {% include 'screener-partials/template-recap.underscore.twig' %}
 </script>
 
 <script>
@@ -379,21 +402,5 @@
     "label": {{ __('A valid New York City zip code is required.', 'accessnyc-screener')|trim|json_encode() }},
     "slug": "ERROR_ZIP"
   }]);
-</script>
-<script type="text/template" id="screener-member-option-template">
-  <% _.each(people, function(person, i) { %>
-  <label class="styled-checkbox screener-checkbox screener-checkboxes-program screener-label">
-    <input
-        type="checkbox"
-        name="Person[<%= i %>].<%= attribute %>"
-        value="1"
-        data-type="boolean"
-        <% if ((attribute === 'livingRentalOnLease' && person.leasee) || (attribute === 'livingOwnerOnDeed' && person.owner)) { print('checked') } %>>
-    <span class="styled-checkbox-label">
-      <span class="recap-inline-item"><%= person.relation %></span>
-      <span class="recap-inline-item"><%= person.age %></span>
-    </span>
-  </label>
-  <% }); %>
 </script>
 {% endblock %}

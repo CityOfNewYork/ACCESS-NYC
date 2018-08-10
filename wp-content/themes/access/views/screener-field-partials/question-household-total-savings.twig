@@ -1,58 +1,53 @@
-<fieldset class="d-block w-100">
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-household-total-savings">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
 
-  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-household-total-savings">
-
-    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
-
-    <div class="p-relative">
-
-      <a class="{{styles.questions}}" data-js="question" href="#question-household-total-savings">
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" data-js="question" href="#question-household-total-savings">
         {{ __('Household Total Savings', translationID) }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+        <svg class="{{ styles.questions.warning }}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('HouseholdTotalSavings').length > 0">
           <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class="c-question m-0">
+          <label class="c-question__label {{ styles.inputs.label }}" for="household-cash-on-hand">
+            <span v-if="singleOccupant()">
+              {{ __('How much do you have total in savings?', translationID) }}
+            </span>
+            <span v-else>
+              {{ __('How much does your whole household have in total savings?', translationID) }}
+            </span>
+          </label>
 
-        <label class="{{styles.labels}}">
-          <span v-if="singleOccupant()">
-            {{ __('How much do you have total in savings?', translationID) }}
-          </span>
-          <span v-else>
-            {{ __('How much does your whole household have in total savings?', translationID) }}
-          </span>
-        </label>
+          <h4 class="{{ styles.inputs.explanation }}">{{ __('What are examples of savings?', translationID) }}</h4>
+          <p>{{ __('Savings can mean cash on hand, checking or savings accounts, or stocks, bonds and mutual funds', translationID) }}</p>
 
-        <h4 class="{{styles.explainations}}">{{ __('What are examples of savings?', translationID) }}</h4>
-        <p>{{ __('Savings can mean cash on hand, checking or savings accounts, or stocks, bonds and mutual funds', translationID) }}</p>
-
-        <div class="screener-question-container"
-          v-bind:class="{'error': errors.has('Household.cashOnHand', 'HouseholdTotalSavings')}">
-          <div class="error-message"
-            v-if="errors.has('Household.cashOnHand', 'HouseholdTotalSavings')">
-              v{ errors.first('Household.cashOnHand', 'HouseholdTotalSavings') }
-          </div>
-          <div class="currency-usd">
-            <input name="Household.cashOnHand" type="text" pattern="^([0-9]{1,6})(\.[0-9]{0,2})?$"
-              data-type="float"
-              data-object="household"
-              data-key="cashOnHand"
-              data-js="calc-input"
-              data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
-              data-vv-scope="HouseholdTotalSavings"
-              data-vv-as="{{ __('Total Savings', translationID) }}"
-              v-validate="{regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
-              v-on:change="setAttr"
-              v-on:blur="$event.target.value = filterDollars($event)">
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('Household.cashOnHand', 'HouseholdTotalSavings')}">
+            <div class="error-message"
+              v-if="errors.has('Household.cashOnHand', 'HouseholdTotalSavings')">
+                v{ errors.first('Household.cashOnHand', 'HouseholdTotalSavings') }
+            </div>
+            <div class="input-currency-usd">
+              <input id="household-cash-on-hand" name="Household.cashOnHand" type="text" pattern="^([0-9]{1,6})(\.[0-9]{0,2})?$"
+                data-type="float"
+                data-object="household"
+                data-key="cashOnHand"
+                data-js="calc-input"
+                data-js-regex="^([0-9]{1,6})(\.[0-9]{0,2})?$"
+                data-vv-scope="HouseholdTotalSavings"
+                data-vv-as="{{ __('Total Savings', translationID) }}"
+                v-validate="{regex: '^([0-9]{1,6})(\.[0-9]{0,2})?$', max: 9, decimal: 2}"
+                v-on:change="setAttr"
+                v-on:blur="$event.target.value = filterDollars($event)">
+            </div>
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
-
-</fieldset>{# /#step-10 #}
+</fieldset>
