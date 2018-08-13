@@ -14129,6 +14129,8 @@ Screener = function () {
         _this._validateFloatField(e.currentTarget);
       }).on('blur', '[data-type="zip"]', function (e) {
         _this._validateZipField(e.currentTarget);
+      }).on('blur', '[data-type="age"]', function (e) {
+        _this._validateIntegerField(e.currentTarget);
       }).on('keyup', '[data-type="float"]', function (e) {
         _this._limitFloatFieldLength(e.currentTarget);
       }).on('keydown', 'input[type="number"]', function (e) {
@@ -14835,7 +14837,13 @@ Screener = function () {
       $input.attr('type') === 'radio') && !$input.prop('checked') ||
       ($input.attr('type') !== 'checkbox' ||
       $input.attr('type') !== 'radio') && !$input.val()) {
-        this._showError(el, Screener.ErrorMessage.REQUIRED);
+        if ($input.attr('data-type')) {
+          this._showError(el,
+          Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]);
+
+        } else {
+          this._showError(el, Screener.ErrorMessage.REQUIRED);
+        }
         $input.one('change keyup', function () {
           _this4._validateRequiredField(el);
         });
@@ -15310,7 +15318,8 @@ Screener.ErrorMessage = {
   HOUSEHOLD: 'ERROR_HOUSEHOLD',
   INTEGER: 'ERROR_INTEGER',
   REQUIRED: 'ERROR_REQUIRED',
-  ZIP: 'ERROR_ZIP' };
+  ZIP: 'ERROR_ZIP',
+  AGE: 'ERROR_AGE' };
 
 
 /**
@@ -16648,4 +16657,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.7e1f44ec18caa78267e4587a2703f96f.js.map
+//# sourceMappingURL=main.14d41363a946fc986034c632687206df.js.map
