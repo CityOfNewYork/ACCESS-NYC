@@ -395,8 +395,16 @@
     "slug": "ERROR_FLOAT"
   },
   {
+    "label": {{ __('This entry can only contain numbers.', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ERROR_FLOAT"
+  },
+  {
     "label": {{ __('This entry is required to continue.', 'accessnyc-screener')|trim|json_encode() }},
     "slug": "ERROR_REQUIRED"
+  },
+  {
+    "label": {{ __('Please enter your age in the field below.', 'accessnyc-screener')|trim|json_encode() }},
+    "slug": "ERROR_AGE"
   },
   {
     "label": {{ __('A valid New York City zip code is required.', 'accessnyc-screener')|trim|json_encode() }},

@@ -1,5 +1,4 @@
-<fieldset class="{{ styles.fieldset }}" id="step-3" data-track-key="Screener Step: 3"
-  data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "3-Age-Zip"}]'>
+<fieldset class="{{ styles.fieldset }}" id="step-3" data-track-key="Screener Step: 3" data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "3-Age-Zip"}]'>
   <div class="{{ styles.padding }}">
     <div class="{{ styles.number }}">{{ __('Step 3 of 10', 'accessnyc-screener') }}</div>
 
@@ -19,10 +18,10 @@
         <p>{{ __('Many benefit programs are meant for people of a specific age group. Sharing your age will help us choose the programs that will be most helpful to you right now. The information you share for the purposes of public benefits screening will be anonymous.', 'accessnyc-screener') }}</p>
       </div>
       <div class="c-question__container">
-        <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>
+        <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="age" required>
       </div>
     </div>
-
+    
     <div class="c-question mb-4">
       <label class="c-question__label" for="household-zip">{{ __('What is your zip code?', 'accessnyc-screener') }}</label>
       <div class="c-question__container">
