@@ -2,41 +2,45 @@
 {% block content %}
   {% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
   <main class="main-content" id="content">
-    <div class="screener-results-header usa-grid">
-      <div class="screener-results-icon hide-for-print">
-        <svg class="icon icon-success">
+    <header class="c-header bg-color-blue-dark text-color-white font-smooth">
+      <div class="c-header__icon print:hidden">
+        <svg class="icon icon-success rounded-full text-color-green bg-color-white">
           <use xlink:href="#icon-success"></use>
         </svg>
       </div>
-      <div class="screener-results-text">
+
+      <div>
         {% spaceless %}
-          <h1 class="screener-results-heading">
-            {% if programResultTotal == 0 %}
-              {{__('There are no programs for you to look at.', 'accessnyc-results')}}
-            {% elseif programResultTotal == 1 %}
-              {{ programResultTotal }} {{__('program for you to look at.', 'accessnyc-results')}}
-            {% else %}
-              {{ programResultTotal }} {{__('programs for you to look at.', 'accessnyc-results')}}
-            {% endif %}
-          <p>{{__('Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.', 'accessnyc-results')}}</p>
+        <h1 class="c-header__descriptor">
+          {% if programResultTotal == 0 %}
+            {{__('There are no programs for you to look at.', 'accessnyc-results')}}
+          {% elseif programResultTotal == 1 %}
+            {{ programResultTotal }} {{__('program for you to look at.', 'accessnyc-results')}}
+          {% else %}
+            {{ programResultTotal }} {{__('programs for you to look at.', 'accessnyc-results')}}
+          {% endif %}
+        </h1>
+        <p class="c-header__disclaimer">{{__('Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.', 'accessnyc-results')}}</p>
         {% endspaceless %}
       </div>
-    </div>
-    <div class="usa-grid program-landing-body">
-      <aside>
-        <div class="save-your-results">
-          <h4>{{__('Save your results.', 'accessnyc-results')}}</h4>
-          <a class="btn btn-primary" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]'>{{__('Print', 'accessnyc-results')}}</a>
+    </header>
 
-          <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
-          <div id="share-by-sms" class="share-form js-needs-disclaimer hidden">
+    <div class="usa-grid screen-desktop:layout--sidebar-small-gutter bg-color-white pt-4">
+      <aside class="mb-4 print:hidden">
+        <h4 class="type-h3 text-color-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>
+
+        <a class="btn btn-primary block mb-2" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]' role="button">{{__('Print', 'accessnyc-results')}}</a>
+
+        <div class="c-share-form mb-2">
+          <a class="btn btn-primary c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-sms">{{__('Text', 'accessnyc-results')}}</a>
+          <div id="share-by-sms" class="c-share-form__input hidden js-needs-disclaimer">
             <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
               <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
               <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
               <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
-              <div class="share-form-controls">
+              <div class="c-share-form__controls">
                 <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-results')}}">
-                <div class="share-form-controls__right">
+                <div class="c-share-form__button">
                   <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
                   {% include 'partials/share-form-spinner.twig' with { attr: 'style="display: none"' } %}
                   <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
@@ -44,17 +48,19 @@
               </div>
             </form>
           </div>
+        </div>
 
-          <a class="btn btn-primary share-toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
-          <div id="share-by-email" class="share-form js-needs-disclaimer hidden">
+        <div class="c-share-form mb-2">
+          <a class="btn btn-primary c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-results')}}</a>
+          <div id="share-by-email" class="c-share-form__input js-needs-disclaimer hidden">
             <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
               <input type="hidden" name="action" value="email_send" readonly>
               <input type="hidden" name="url" value="{{ shareUrl }}"  readonly>
               <input type="hidden" name="hash" value="{{ shareHash }}"  readonly>
               <input type="hidden" name="GUID" value="{{ getParams.guid }}" maxlength="13" readonly>
-              <div class="share-form-controls">
+              <div class="c-share-form__controls">
                 <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-results')}}" required>
-                <div class="share-form-controls__right">
+                <div class="c-share-form__button">
                   <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-results')}}</button>
                   {% include 'partials/share-form-spinner.twig' with { attr: 'style="display: none"' } %}
                   <div class="success-message">{{__('Sent!', 'accessnyc-results')}}</div>
@@ -62,40 +68,44 @@
               </div>
             </form>
           </div>
-
-          {% include 'partials/share-form-disclaimer.twig' %}
-
         </div>
+
+        {% include 'partials/share-form-disclaimer.twig' %}
       </aside>
+
       <div class="content-body">
         {% if selectedPrograms | length %}
-          <div class="screener-qualified-programs selected-programs">
-            <h3 class="screener-qualified-programs-heading">{{__('These are programs for you in the categories you selected.', 'accessnyc-results')}}</h3>
-            <div class="program-cards">
-              {% for post in selectedPrograms %}
-                {% include 'partials/post-teaser-block.twig' with {'show_apply': true } %}
-              {% endfor %}
-            </div>
+        <div class="mb-4">
+          <h3 class="text-color-blue-dark">{{__('These are programs for you in the categories you selected.', 'accessnyc-results')}}</h3>
+
+          <div class="layout--gutter p-2 bg-color-grey-lightest">
+            {% for post in selectedPrograms %}
+              {% include 'components/card.twig' with {'show_apply': true } %}
+            {% endfor %}
           </div>
+        </div>
         {% endif %}
+
         {% if additionalPrograms | length %}
-          <div class="screener-qualified-programs other-programs">
-            <h3 class="screener-other-qualified-programs-heading">
-              {% if additionalPrograms | length == 1 %}
-                {{ additionalPrograms | length }} {{__('additional program.', 'accessnyc-results')}}
-              {% else %}
-                {{ additionalPrograms | length }} {{__('additional programs.', 'accessnyc-results')}}
-              {% endif %}
-            </h3>
-            <div class="program-cards">
-              {% for post in additionalPrograms %}
-                {% include 'partials/post-teaser-block.twig' with {'show_apply': true } %}
-              {% endfor %}
-            </div>
+        <div class="mb-4">
+          <h3 class="text-color-blue-dark">
+            {% if additionalPrograms | length == 1 %}
+              {{ additionalPrograms | length }} {{__('additional program.', 'accessnyc-results')}}
+            {% else %}
+              {{ additionalPrograms | length }} {{__('additional programs.', 'accessnyc-results')}}
+            {% endif %}
+          </h3>
+
+          <div class="layout--gutter p-2 bg-color-grey-lightest">
+            {% for post in additionalPrograms %}
+              {% include 'components/card.twig' with {'show_apply': true } %}
+            {% endfor %}
           </div>
+        </div>
         {% endif %}
       </div>
     </div>
   </main>
+
   {% include 'partials/localized-strings-share.twig' %}
 {% endblock %}

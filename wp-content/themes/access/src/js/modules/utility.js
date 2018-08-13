@@ -17,9 +17,11 @@ const Utility = {};
  */
 Utility.svgSprites = function(data) {
   const svgDiv = document.createElement('div');
-  svgDiv.innerHTML =
-      new XMLSerializer().serializeToString(data.documentElement);
-  $(svgDiv).css('display', 'none').prependTo('body');
+  svgDiv.innerHTML = new XMLSerializer()
+    .serializeToString(data.documentElement);
+  svgDiv.setAttribute('aria-hidden', true);
+  svgDiv.setAttribute('style', 'display:none;');
+  $(svgDiv).prependTo('body');
 };
 
 /**
@@ -346,10 +348,9 @@ Utility.gtagClick = function(key, data) {
  * @param  {collection} data The data to track
  */
 Utility.gtagView = function(app, key, data) {
-  let d = _.reduceRight(data, (a, b) => _.extend(a, b));
   let view = {
     app_name: app,
-    screen_name: d['WT.ti']
+    screen_name: key
   };
   /* eslint-disable no-undef */
   gtag('event', 'screen_view', view);

@@ -117,13 +117,15 @@ class StaticMap {
     img.onload = () => {
       $(this._el).empty;
       const $img = this._link ?
-          $(`<a href="${this._link}" target="_blank"></a>`).append(img) :
-          $(img);
+          $(`<a href="${this._link}" target="_blank" class="block"></a>`)
+            .append(img) : $(img);
       $(this._el).html($img);
     };
 
     img.src = `https://maps.googleapis.com/maps/api/staticmap?` +
         `${$.param(parameters)}`;
+
+    $(img).addClass('block');
 
     return this;
   }

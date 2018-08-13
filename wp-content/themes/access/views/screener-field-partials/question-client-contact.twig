@@ -1,48 +1,44 @@
-<fieldset class="d-block w-100">
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-client-contact">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
 
-  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-contact">
-
-    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
-
-    <div class="p-relative">
-
-      <a class="{{styles.questions}}" data-js="question" href="#question-client-contact">
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" data-js="question" href="#question-client-contact">
         {{ __('Client Contact', translationID) }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+        <svg class="{{ styles.questions.warning }}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('ClientContact').length > 0">
           <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
-
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}">
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
             {{ __('Language Spoken', translationID) }}
           </label>
-          <div class="m-bottom-2">
+          <div class="c-question__container">
             {% for language in languages %}
-            <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input type="checkbox" value="{{ language.value }}"
+            <label class="checkbox" for="client-language-{{ language.value }}">
+              <input id="client-language-{{ language.value }}" type="checkbox" value="{{ language.value }}"
                 data-object="client"
                 data-key="language"
                 v-on:change="push">
-              <span class="styled-checkbox-label">{{ __(language.text, translationID) }}</span>
+              <span class="checkbox__label">{{ __(language.text, translationID) }}</span>
             </label>
             {% endfor %}
           </div>
-          <div v-if="client._attrs.language.indexOf('other') > -1">
-            <label class="{{styles.labels}}">
+          <div v-if="client._attrs.language.indexOf('other') > -1" class="c-question mt-4">
+            <label class="c-question__label {{ styles.inputs.label }}" for="client-language-other">
               Please specify other language spoken
             </label>
-            <div class="screener-question-container"
+            <div class="c-question__container"
               v-bind:class="{'error': errors.has('Client.languageOther', 'ClientContact')}">
               <div class="error-message"
                 v-if="errors.has('Client.languageOther', 'ClientContact')">
                   {{ __('Please specify other language.', translationID) }}
               </div>
-              <input type="text" name="Client.languageOther" value="" required
+              <input id="client-language-other" type="text" name="Client.languageOther" value="" required
                 data-vv-scope="ClientContact"
                 data-vv-as="{{ __('specify other language', translationID) }}"
                 v-model="client._attrs.languageOther"
@@ -51,17 +47,19 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="client-phone">
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-phone">
             {{ __('Phone Number', translationID) }}
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('Client.phone', 'ClientContact')}">
             <div class="error-message"
               v-if="errors.has('Client.phone', 'ClientContact')">
                 v{ errors.first('Client.phone', 'ClientContact') }
             </div>
-            <div class="phone-us">
+            <div class="input-phone-us">
               <input id="client-phone" name="Client.phone" value="" type="tel"
                 data-vv-scope="ClientContact"
                 data-vv-as="{{ __('phone number', translationID) }}"
@@ -74,35 +72,37 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
             {{ __('Phone Type', translationID) }}
           </label>
-          <div>
+          <div class="c-question__container">
             {% for option in phoneTypes %}
-            <label class="styled-radio screener-label d-block m-bottom">
-              <input type="radio" value="{{ option.value }}" name="Client.phoneType"
+            <label class="radio" for="client-phone-type-{{ option.value }}">
+              <input id="client-phone-type-{{ option.value }}" type="radio" value="{{ option.value }}" name="Client.phoneType"
                 data-object="client"
                 data-key="phoneType"
                 v-model="client._attrs.phoneType">
-              <span class="styled-radio-label">{{ __(option.text, translationID) }}</span>
+              <span class="radio__label">{{ __(option.text, translationID) }}</span>
             </label>
             {% endfor %}
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="client-phone">
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-phone-alt">
             {{ __('Alternate Phone Number', translationID) }}
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('Client.phoneAlt', 'ClientContact')}">
             <div class="error-message"
               v-if="errors.has('Client.phoneAlt', 'ClientContact')">
                 v{ errors.first('Client.phoneAlt', 'ClientContact') }
             </div>
-            <div class="phone-us">
-              <input id="client-phone" name="Client.phoneAlt" value="" type="tel"
+            <div class="input-phone-us">
+              <input id="client-phone-alt" name="Client.phoneAlt" value="" type="tel"
                 data-vv-scope="ClientContact"
                 data-vv-as="{{ __('alternate phone number', translationID) }}"
                 data-js="calc-input"
@@ -114,100 +114,112 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
             {{ __('Alternate Phone Type', translationID) }}
           </label>
-          <div>
+          <div class="c-question__container">
             {% for option in phoneTypes %}
-            <label class="styled-radio screener-label d-block m-bottom">
-              <input type="radio" value="{{ option.value }}" name="Client.phoneAltType"
+            <label class="radio" for="client-phone-alt-type-{{ option.value }}">
+              <input id="client-phone-alt-type-{{ option.value }}" type="radio" value="{{ option.value }}" name="Client.phoneAltType"
                 data-object="client"
                 data-key="phoneAltType"
                 v-model="client._attrs.phoneAltType">
-              <span class="styled-radio-label">{{ __(option.text, translationID) }}</span>
+              <span class="radio__label">{{ __(option.text, translationID) }}</span>
             </label>
             {% endfor %}
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}">
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
             {{ __('Best time to contact you?', translationID) }}
           </label>
-          <div>
+          <div class="c-question__container">
             {% for option in contactTimes %}
-            <label class="styled-checkbox screener-checkbox screener-label d-block">
-              <input type="checkbox" value="{{ option.value }}"
+            <label class="checkbox" for="client-contact-type-{{ option.value }}">
+              <input id="client-contact-type-{{ option.value }}" type="checkbox" value="{{ option.value }}"
                 data-object="client"
                 data-key="contactTimes"
                 v-on:change="push">
-              <span class="styled-checkbox-label">{{ __(option.text, translationID) }}</span>
+              <span class="checkbox__label">{{ __(option.text, translationID) }}</span>
             </label>
             {% endfor %}
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="client-email">
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-email">
             {{ __('Email', translationID) }}
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('Client.email', 'ClientContact')}">
             <div class="error-message"
               v-if="errors.has('Client.email', 'ClientContact')">
                 v{ errors.first('Client.email', 'ClientContact') }
             </div>
-            <input type="email" class="w-input-double" id="client-email" name="Client.email" value=""
-              data-vv-scope="ClientContact"
-              data-vv-as="{{ __('email', translationID) }}"
-              v-model="client._attrs.email"
-              v-validate="{email: true}">
+            <div class="screen-tablet:input-w-400px">
+              <input id="client-email" type="email" name="Client.email" value=""
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('email', translationID) }}"
+                v-model="client._attrs.email"
+                v-validate="{email: true}">
+            </div>
           </div>
         </div>
 
-        <hr class="screener-divider">
+        <hr class="{{ styles.fieldset.divider }}">
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="client-address-1">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-address-1">
             {{ __('Street #', translationID) }}
           </label>
-          <input class="w-input-double" id="client-address-1" name="Client.streetNumber" value=""
-            v-model="client._attrs.streetNumber">
+          <div class="c-question__container">
+            <div class="screen-tablet:input-w-400px">
+              <input id="client-address-1" name="Client.streetNumber" value=""
+                v-model="client._attrs.streetNumber">
+            </div>
+          </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="client-address-2">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-address-2">
             {{ __('Street Name', translationID) }}
           </label>
-          <input id="client-address-2" name="Client.streetName" value=""
-            v-model="client._attrs.streetName">
+          <div class="c-question__container">
+            <input id="client-address-2" name="Client.streetName" value=""
+              v-model="client._attrs.streetName">
+          </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="client-unit">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-unit">
             {{ __('Unit #', translationID) }}
           </label>
-          <input id="client-unit" name="Client.unit" value=""
-            v-model="client._attrs.unit">
+          <div class="c-question__container">
+            <input id="client-unit" name="Client.unit" value=""
+              v-model="client._attrs.unit">
+          </div>
         </div>
 
-        <div>
-          <label class="{{styles.labels}}" for="client-borough">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-borough">
             {{ __('Borough', translationID) }}
           </label>
-          <select id="client-borough" name="Client.borough" value=""
-            v-model="client._attrs.borough">
-            {% for location in locations %}
-            <option value="{{ location.value }}">{{ __(location.text, translationID) }}</option>
-            {% endfor %}
-          </select>
+          <div class="c-question__container">
+            <select class="select" id="client-borough" name="Client.borough" value=""
+              v-model="client._attrs.borough">
+              {% for location in locations %}
+              <option value="{{ location.value }}">{{ __(location.text, translationID) }}</option>
+              {% endfor %}
+            </select>
+          </div>
         </div>
-
       </div>
-
     </div>
-
   </div>
-
-</fieldset>{# /#step-3 #}
+</fieldset>

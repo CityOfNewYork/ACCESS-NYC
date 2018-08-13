@@ -1,33 +1,24 @@
-<div id='what-you-need-to-include' class="program-detail-step{% if step in sectionArray | keys %} active{% endif %}">
-  <div class="program-detail-header">
-    <h3 class="program-detail-title">{{ stepNumber }}.
-      {{__('What you need to include', 'accessnyc-program-detail')}}</h3>
-  </div>
+<section id="what-you-need-to-include" data-js="program-detail-step" class="hidden:overflow{% if step in sectionArray | keys %} active{% endif %} print:active">
+  <header>
+    <h3 class="text-color-blue-dark">
+      {{ stepNumber }}. {{__('What you need to include', 'accessnyc-program-detail')}}
+    </h3>
+  </header>
+
   {{ post.get_field('what_you_need_to_include_intro_text') }}
+
   {% for item in post.get_field('what_you_need_to_include') %}
-    {% if loop.index == 1 %}
-      {% set articleStatus = 'active' %}
-      {% set articleToggle = 'active' %}
-    {% else %}
-      {% set articleStatus = '' %}
-      {% set articleToggle = 'hidden' %}
-    {% endif %}
-    <article class="c-accordion">
-      <header class="c-accordion__header">
-        <p>{{ item.heading }}</p>
-        <a class="c-accordion__toggle hide-for-print {{ articleStatus }} js-simple-toggle" href="#what-you-need-to-include-{{ loop.index }}">
-          <span data-css-text="+ {{__('show this list', 'accessnyc-program-detail')}}"
-                data-css-active-text="- {{__('hide this list', 'accessnyc-program-detail')}}">
-        </a>
-      </header>
-      <div class="c-accordion__body {{ articleToggle }} hidden-by-overflow animated active-for-print" id="what-you-need-to-include-{{ loop.index }}">
-        <div class="c-accordion__padding">
-          {{ item.body }}
-        </div>
-      </div>
-    </article>
+    {% include 'components/accordion.twig' with {
+      this: {
+        id: 'what-you-need-to-include-' ~ loop.index,
+        active: (loop.index == 1) ? true : false,
+        header: item.heading,
+        body: item.body
+      }
+    } only %}
   {% endfor %}
+
   {% if nextStep != '' %}
-    {% include 'program-detail-partials/next-button.twig' %}
+  {% include 'program-detail-partials/next-button.twig' %}
   {% endif %}
-</div>
+</section>

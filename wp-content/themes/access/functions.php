@@ -491,6 +491,15 @@ function share_data($params) {
 }
 
 /**
+ * Get the environment variable from config
+ * @param  string $value The key for the environment variable
+ * @return string        The environment variable
+ */
+function get_env($value) {
+  return $_ENV[$value];
+}
+
+/**
  * Scripts Configuration
  */
 require_once(get_template_directory() . '/includes/scripts.php');

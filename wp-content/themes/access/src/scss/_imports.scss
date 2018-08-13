@@ -1,0 +1,113 @@
+@charset 'utf-8';
+
+// Global Dependencies
+// Bourbon: These are settings that are needed globaly for the Bourbon integration
+@import 'bourbon/app/assets/stylesheets/bourbon-deprecate';
+@import 'bourbon/app/assets/stylesheets/settings/deprecation-warnings';
+@import 'bourbon/app/assets/stylesheets/settings/asset-pipeline';
+@import 'bourbon/app/assets/stylesheets/helpers/directional-values';
+
+// if @font-face is used it needs to be first imported first.
+@import 'access-nyc-patterns/src/elements/fonts/fonts';
+
+/************************
+ * External Dependencies
+ ************************/
+
+// Any external dependency can be included here. It may also make sense to include
+// it within specific component and object styles if it is a dependency. Be sure
+// to add 'node_modules' to your include paths if you are using npm to manage
+// dependencies (recommended). Dependency examples include Bootstrap or Material
+// Components Web.
+
+@import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
+@import 'animate.scss/vendor/assets/stylesheets/animate/fadeIn';
+// components - end
+
+/**********
+* Elements
+***********/
+
+// Elements include universal styles, atomic patterns, and css systems. Examples
+// include classes that assign color, modify the display of elements, or set up
+// scaffolding like typography or grid systems. Uitilities will have their own
+// namespace prefixes based on their attributes.
+
+@import 'access-nyc-patterns/src/elements/base/base';
+@import 'access-nyc-patterns/src/elements/typography/typography';
+@import 'access-nyc-patterns/src/elements/animate/animate';
+@import 'access-nyc-patterns/src/elements/code/code';
+@import 'access-nyc-patterns/src/elements/layouts/layouts';
+@import 'access-nyc-patterns/src/elements/links/links';
+@import 'access-nyc-patterns/src/elements/nav/nav';
+@import 'access-nyc-patterns/src/elements/overlay/overlay';
+@import 'access-nyc-patterns/src/elements/forms/forms';
+@import 'access-nyc-patterns/src/elements/labels/labels';
+@import 'access-nyc-patterns/src/elements/buttons/btn';
+@import 'access-nyc-patterns/src/elements/checkboxes/checkboxes';
+@import 'access-nyc-patterns/src/elements/radios/radios';
+@import 'access-nyc-patterns/src/elements/toggles/toggles';
+@import 'access-nyc-patterns/src/elements/selects/selects';
+@import 'access-nyc-patterns/src/elements/icons/icons';
+@import 'access-nyc-patterns/src/elements/tables/tables';
+@import 'access-nyc-patterns/src/elements/tooltips/tooltips';
+@import 'access-nyc-patterns/src/elements/divider/divider';
+@import 'access-nyc-patterns/src/elements/program-labels/program-labels';
+@import 'access-nyc-patterns/src/elements/inputs/inputs';
+@import 'access-nyc-patterns/src/elements/lists/lists';
+// elements - end
+
+/*************
+ * Components
+ *************/
+
+// Components are elements that require isolated styling. Examples include buttons,
+// textfields, select boxes, grouped navigation, dropdowns, etc. They may include
+// utilities within them. Not all components are required for each application.
+// Component namespaces are prefixed with 'c-'.
+
+@import 'access-nyc-patterns/src/components/accordion/accordion';
+@import 'access-nyc-patterns/src/components/alert-box/alert-box';
+@import 'access-nyc-patterns/src/components/card/card';
+@import 'access-nyc-patterns/src/components/checklist/checklist';
+@import 'access-nyc-patterns/src/components/disclaimer/disclaimer';
+@import 'access-nyc-patterns/src/components/filter/filter';
+@import 'access-nyc-patterns/src/components/text-controller/text-controller';
+@import 'access-nyc-patterns/src/components/header/header';
+@import 'access-nyc-patterns/src/components/side-nav/side-nav';
+@import 'access-nyc-patterns/src/components/share-links/share-links';
+@import 'access-nyc-patterns/src/components/question/question';
+@import 'access-nyc-patterns/src/components/share-form/share-form';
+@import 'access-nyc-patterns/src/components/member-list/member-list';
+// components - end
+
+/**********
+ * Objects
+ **********/
+
+// Objects are elements with more robust styling requirements. They may include
+// Components and utilities within them. Examples include headers, footers, modals,
+// sliders, and charts. Not all Objects are required for each application and some
+// will require their own Objects. Object namespaces are prefixed with 'o-'.
+
+@import 'access-nyc-patterns/src/objects/content/content';
+@import 'access-nyc-patterns/src/objects/navigation/navigation';
+@import 'access-nyc-patterns/src/objects/mobile-nav/mobile-nav';
+@import 'access-nyc-patterns/src/objects/banner/banner';
+@import 'access-nyc-patterns/src/objects/search-box/search-box';
+@import 'access-nyc-patterns/src/objects/footer/footer';
+// objects - end
+
+/***********
+* Utilities
+************/
+
+
+@import 'access-nyc-patterns/src/utilities/font';
+@import 'access-nyc-patterns/src/utilities/accessibility';
+@import 'access-nyc-patterns/src/utilities/inherit';
+@import 'access-nyc-patterns/src/utilities/language';
+@import 'access-nyc-patterns/src/utilities/statuses';
+@import 'access-nyc-patterns/src/utilities/print';
+@import 'access-nyc-patterns/dist/styles/_tailwind.scss';
+@import 'access-nyc-patterns/src/utilities/toggles';

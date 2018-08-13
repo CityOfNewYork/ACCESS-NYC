@@ -9,6 +9,7 @@ import ResultsField from 'modules/results-field';
 import ShareForm from 'modules/share-form';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
+import Accordion from 'components/accordion/accordion.common';
 
 (function(window, $) {
   'use strict';
@@ -18,7 +19,7 @@ import Utility from 'modules/utility';
   /* eslint-enable no-undef */
 
   // Get SVG sprite file.
-  $.get('/wp-content/themes/access/assets/img/icons.svg', Utility.svgSprites);
+  $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
 
   let $body = $('body');
 
@@ -46,6 +47,9 @@ import Utility from 'modules/utility';
   // Initialize tooltips.
   $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) =>
     new Tooltip(el).init());
+
+  // Initialize accordion components
+  new Accordion();
 
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {

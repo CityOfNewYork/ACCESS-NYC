@@ -169,7 +169,7 @@ class Screener {
     let key = '';
     let data = [];
 
-    $(window).on('hashchange', function() {
+    $(window).on('hashchange load', function() {
       let hash = window.location.hash;
       let step = $(hash);
       key = step.data('trackKey');
@@ -344,7 +344,7 @@ class Screener {
     const $el = $(el);
     const $matrixItem = $el.closest(`.${Screener.CssClass.MATRIX_ITEM}`);
     if ($el.val()) {
-      $matrixItem.find(`.${Screener.CssClass.TRANSACTION_LABEL}`)
+      $matrixItem.find(Screener.Selectors.TRANSACTION_LABEL)
           .text($el.find('option:selected').text());
     } else if (!$matrixItem.is(':last-of-type')) {
       $matrixItem.remove();
@@ -359,9 +359,13 @@ class Screener {
    * @return {this} Screener
    */
   _goToStep(section) {
-    this._$steps.removeClass(Screener.CssClass.ACTIVE)
+    this._$steps
+        .removeClass(Screener.CssClass.SCREENER_STEP_ACTIVE)
+        .addClass(Screener.CssClass.SCREENER_STEP_HIDDEN)
         .attr('aria-hidden', 'true').find(':input, a').attr('tabindex', '-1')
-        .end().filter(section).addClass(Screener.CssClass.ACTIVE)
+        .end().filter(section)
+        .removeClass(Screener.CssClass.SCREENER_STEP_HIDDEN)
+        .addClass(Screener.CssClass.SCREENER_STEP_ACTIVE)
         .removeAttr('aria-hidden').find(':input, a').removeAttr('tabindex');
 
     if ($(section).attr('id') === 'step-9') {
@@ -477,10 +481,10 @@ class Screener {
     const $errors = $step.find(`.${Screener.CssClass.ERROR}:visible`);
     if ($errors.length) {
       const $firstError = $errors.first()
-          .closest(`.${Screener.CssClass.QUESTION_CONTAINER}`);
+        .closest(Screener.Selectors.QUESTION);
 
       $firstError.find(':input').first().focus();
-      $(window).scrollTop(0);
+      $(window).scrollTop($firstError.offset().top);
 
       return false;
     }
@@ -775,7 +779,7 @@ class Screener {
    * @return {this} Screener
    */
   _removeError(el) {
-    $(el).closest(`.${Screener.CssClass.QUESTION_CONTAINER}`)
+    $(el).closest(Screener.Selectors.QUESTION_CONTAINER)
         .removeClass(Screener.CssClass.ERROR)
         .find(`.${Screener.CssClass.ERROR_MSG}`).remove();
     return this;
@@ -792,7 +796,7 @@ class Screener {
   _showError(el, msg) {
     const $error = $(document.createElement('div'));
     $error.addClass(Screener.CssClass.ERROR_MSG).text(Utility.localize(msg));
-    $(el).closest(`.${Screener.CssClass.QUESTION_CONTAINER}`)
+    $(el).closest(Screener.Selectors.QUESTION_CONTAINER)
         .addClass(Screener.CssClass.ERROR).prepend($error);
     return this;
   }
@@ -1281,12 +1285,22 @@ Screener.CssClass = {
   MATRIX_SELECT: 'js-matrix-select',
   RADIO_GROUP: 'js-screener-radio-group',
   REMOVE_PERSON: 'js-remove-person',
-  QUESTION_CONTAINER: 'screener-question-container',
   TOGGLE: 'js-screener-toggle',
+  SCREENER_STEP_ACTIVE: 'active',
+  SCREENER_STEP_HIDDEN: 'hidden:overflow',
   STEP: 'js-screener-step',
   SUBMIT: 'js-screener-submit',
-  TRANSACTION_LABEL: 'screener-transaction-type',
   VALIDATE_STEP: 'js-screener-validate-step'
+};
+
+/**
+ * Selectors for elements
+ * @type {Object}
+ */
+Screener.Selectors = {
+  QUESTION: '.c-question',
+  QUESTION_CONTAINER: '.c-question__container',
+  TRANSACTION_LABEL: '[data-js="transaction-label"]'
 };
 
 /**

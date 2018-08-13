@@ -1,22 +1,18 @@
-<fieldset class="d-block w-100">
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-client-needs">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
 
-  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-needs">
-
-    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
-
-    <div class="p-relative">
-
-      <a class="{{styles.questions}}" data-js="question" href="#question-client-needs">
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" data-js="question" href="#question-client-needs">
         {{ __('Client Needs', translationID) }}
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
-
-        <div>
-          <label class="{{styles.labels}}">
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class='c-question m-0'>
+          <label class="c-question__label {{ styles.inputs.label }}">
             {{ __('What kind of help are you looking for?', translationID) }}
           </label>
-          <div class="screener-checkboxes screener-categories m-top-2">
+          <div class="c-question__container screen-tablet:layout--columns-gutter">
             {% for category in categories %}
             {% if language_code != 'en' %}
               {% set langLength = (language_code | length + 1) * -1 %}
@@ -24,32 +20,24 @@
             {% else %}
               {% set catSlug = category.slug %}
             {% endif %}
-            <label class="screener-checkbox styled-checkbox screener-checkboxes-program screener-label">
-              <input class="js-screener-validate-step-ui" type="checkbox" name="category" value="{{ category.slug }}"
+            <label class="checkbox" for="client-needs-{{ category.slug }}">
+              <input id="client-needs-{{ category.slug }}" type="checkbox" name="category" value="{{ category.slug }}"
                 data-object="client"
                 data-key="programCategories"
                 v-on:change="push">
-              <span class="styled-checkbox-label">
-                <div class="program-category">
-                  <div class="program-icon">
-                    <span class="icon">
-                      <svg class="icon icon-{{ catSlug }}">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ catSlug }}"></use>
-                      </svg>
-                    </span>
-                  </div>
-                  <div class="program-card-body">{{ category.name }}</div>
-                </div>
+              <span class="checkbox__label items-center">
+                <span class="checkbox__icon">
+                    <svg class="icon icon-{{ catSlug }}">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ catSlug }}"></use>
+                    </svg>
+                </span>
+                <span>{{ category.name }}</span>
               </span>
             </label>
             {% endfor %}
           </div>
         </div>
-
       </div>
-
     </div>
-
   </div>
-
-</fieldset>{# /#step-1 #}
+</fieldset>

@@ -1,31 +1,27 @@
-<fieldset class="d-block w-100">
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-client-basics">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
 
-  <div class="bg-grey-lightest b-bottom b-4 b-white p-relative" id="question-client-basics">
-
-    <div class="bg-blue-light ui-overlay" data-js="toggle-question"></div>
-
-    <div class="p-relative">
-
-      <a class="{{styles.questions}}" href="#question-client-basics" data-js="question">
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" href="#question-client-basics" data-js="question">
         {{ __('Client Basics', translationID) }}
-        <svg class="{{styles.warning}}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+        <svg class="{{ styles.questions.warning }}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
           v-if="errors.all('ClientBasics').length > 0">
           <title>{{ __('Some fields are invalid', translationID) }}</title>
           <use xlink:href="#icon-warning"></use>
         </svg>
       </a>
 
-      <div class="p-horizontal-2 p-bottom-2" data-js="toggle-question">
-
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="client-0-first">
-            {{ __('First Name', translationID) }} <span class="c-red">*</span>
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-first-name">
+            {{ __('First Name', translationID) }} <span class="text-color-red">*</span>
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('ClientBasics.Client[0].firstName')}">
             <div class="error-message"
               v-if="errors.has('ClientBasics.Client[0].firstName')">v{ errors.first('ClientBasics.Client[0].firstName') }</div>
-            <input id="client-0-first-name" name="Client[0].firstName" value="" required
+            <input id="client-first-name" name="Client[0].firstName" value="" required
               data-vv-as="client's first name"
               data-vv-scope="ClientBasics"
               v-validate="{required: true}"
@@ -33,15 +29,15 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="client-0-last">
-            {{ __('Last Name', translationID) }} <span class="c-red">*</span>
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-last-name">
+            {{ __('Last Name', translationID) }} <span class="text-color-red">*</span>
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('ClientBasics.Client[0].lastName')}">
             <div class="error-message"
               v-if="errors.has('ClientBasics.Client[0].lastName')">v{ errors.first('ClientBasics.Client[0].lastName') }</div>
-            <input id="client-0-last-name" name="Client[0].lastName" value="" required
+            <input id="client-last-name" name="Client[0].lastName" value="" required
               data-vv-as="client's last name"
               data-vv-scope="ClientBasics"
               v-validate="{required: true}"
@@ -49,11 +45,11 @@
           </div>
         </div>
 
-        <div class="m-bottom-2">
-          <label class="{{styles.labels}}" for="person-0-age">
-            {{ __('How old are you?', translationID) }} <span class="c-red">*</span>
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="person-0-age">
+            {{ __('How old are you?', translationID) }} <span class="text-color-red">*</span>
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('ClientBasics.Person[0].age')}">
             <div class="error-message"
               v-if="errors.has('ClientBasics.Person[0].age')">v{ errors.first('ClientBasics.Person[0].age') }</div>
@@ -69,12 +65,12 @@
           </div>
         </div>
 
-        <div>
-          <label class="{{styles.labels}}" for="household-zip">
+        <div class="c-question m-0">
+          <label class="c-question__label {{ styles.inputs.label }}" for="household-zip">
             {{ __('Zip code?', translationID) }}
-            <span class="c-red">*</span>
+            <span class="text-color-red">*</span>
           </label>
-          <div class="screener-question-container"
+          <div class="c-question__container"
             v-bind:class="{'error': errors.has('ClientBasics.Household.zip')}">
             <div class="error-message"
               v-if="errors.has('ClientBasics.Household.zip')">v{ errors.first('ClientBasics.Household.zip') }</div>
@@ -86,11 +82,7 @@
               v-model="household._attrs.zip">
           </div>
         </div>
-
       </div>
-
     </div>
-
   </div>
-
-</fieldset>{# /#step-3 #}
+</fieldset>

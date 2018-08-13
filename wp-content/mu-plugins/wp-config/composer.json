@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-config",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "A WordPress package for environment configuration.",
@@ -22,7 +22,8 @@
   },
   "require": {
     "composer/installers": "~1.0",
-    "mustangostang/spyc": "^0.6.2"
+    "mustangostang/spyc": "^0.6.2",
+    "illuminate/encryption": "^5.6"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "3.*",

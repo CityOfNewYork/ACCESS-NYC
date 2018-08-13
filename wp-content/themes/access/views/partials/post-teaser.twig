@@ -1,9 +1,9 @@
 {% if cat != '' %}
   {% for post in posts if cat in post.terms('category') %}
-    {% include 'partials/post-teaser-block.twig' %}
+    {% include 'components/card.twig' %}
   {% endfor %}
 {% else %}
   {% for post in posts %}
-    {% include 'partials/post-teaser-block.twig' %}
+    {% include 'components/card.twig' %}
   {% endfor %}
 {% endif %}
