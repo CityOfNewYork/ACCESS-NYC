@@ -11,7 +11,7 @@
     {% if not short_post %}<p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>{% endif %}
     <div class="c-card__summary">
       {% if post.brief_excerpt and not short_post %}<p>{{ post.brief_excerpt }}</p>{% endif %}
-      <p class="hide-for-print"><a href="{{ post.get_permalink }}">{{__('Learn more', 'accessnyctheme')}}</a></p>
+      <p class="hide-for-print"><a href="{{ post.get_permalink }}">{{__('Learn more', 'accessnyctheme')}} <span class="sr-only">{{ post.program_name }}</span></a></p>
       {% if show_apply %}
       <p class="hide-for-print">
         <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=how-to-apply">{{__('Apply', 'accessnyc-results')}}</a>
