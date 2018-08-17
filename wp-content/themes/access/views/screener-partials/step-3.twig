@@ -4,7 +4,7 @@
 
     <h1 class="{{ styles.heading }}">{{ __('Tell us a little more about yourself.', 'accessnyc-screener') }}</h1>
 
-    <div class="c-question">
+    <div class="c-question" aria-live="polite">
       <label class="c-question__label" for="person-0-age">{{ __('How old are you?', 'accessnyc-screener') }}</label>
       <p>
         <button type="button" class="c-question__info btn btn-text btn-link js-tooltip-trigger" aria-describedby="tooltip-age">
@@ -21,8 +21,8 @@
         <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="age" required>
       </div>
     </div>
-    
-    <div class="c-question mb-4">
+
+    <div class="c-question mb-4" aria-live="polite">
       <label class="c-question__label" for="household-zip">{{ __('What is your zip code?', 'accessnyc-screener') }}</label>
       <div class="c-question__container">
         <input id="household-zip" name="Household.zip" type="number" value="" maxlength="5" pattern="[0-9]" data-type="zip" required>
