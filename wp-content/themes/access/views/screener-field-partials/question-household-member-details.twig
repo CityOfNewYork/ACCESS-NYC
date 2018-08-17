@@ -13,7 +13,7 @@
             {{ __('Do any of these apply to you?', translationID) }}
           </label>
 
-          <div class="c-question__container screen-tablet:layout--columns-gutter">
+          <div class="c-question__container screen-tablet:layout--columns-gutter" aria-live="polite">
             {% for option in benefitOptions %}
             <label class="checkbox">
               <input type="checkbox" name="Household.{{ option.dataKey }}" value="1"
@@ -52,7 +52,7 @@
             <label class="c-question__label {{ styles.inputs.label }}">
               {{ __('Are you a full-time student?', translationID) }}
             </label>
-            <div class="c-question__container">
+            <div class="c-question__container" aria-live="polite">
               <label class="toggle">
                 <input name="Person[0].{{ studentOptions.dataSubKey }}" type="radio" value="true" class="sr-only"
                   data-type="boolean"
@@ -74,11 +74,11 @@
             </div>
           </div>
 
-          <div v-if="people[0]._attrs.{{ employmentOptions.dataKey }}" class="c-question mb-0 mt-4">
+          <div v-if="people[0]._attrs.{{ employmentOptions.dataKey }}" class="c-question mb-0 mt-4" aria-live="polite">
             <label class="c-question__label {{ styles.inputs.label }}">
               {{ __('Did you work in the last 18 months?', translationID) }}
             </label>
-            <div class="c-question__container">
+            <div class="c-question__container" aria-live="polite">
               <label class="toggle">
                 <input name="Person[0].{{ employmentOptions.dataSubKey }}" type="radio" value="true" class="sr-only"
                   data-type="boolean"

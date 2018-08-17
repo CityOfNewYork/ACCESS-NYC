@@ -5,7 +5,7 @@
 
     <h1 class="{{ styles.heading }}">{{ __('Tell us about the head of the household.', 'accessnyc-screener') }}</h1>
 
-    <div class="c-question" id="screener-is-submitter-head-of-household">
+    <div class="c-question" id="screener-is-submitter-head-of-household" aria-live="polite">
       <label class="c-question__label">{{ __('Are you the head of the household?', 'accessnyc-screener') }}</label>
 
       <p>
@@ -42,7 +42,7 @@
 
       <hr class="divider-light">
 
-      <div class="c-question">
+      <div class="c-question" aria-live="polite">
         <label class="c-question__label" for="hoh-relation">{{ __('What is your relationship to the head of the household? I am their:', 'accessnyc-screener') }}</label>
         <div class="c-question__container">
           <select class="select" id="hoh-relation" name="Person[0].headOfHouseholdRelation" required>
@@ -68,7 +68,7 @@
 
       <hr class="divider-light">
 
-      <div class="c-question">
+      <div class="c-question" aria-live="polite">
         <label class="c-question__label">{{ __('Do any of these apply to them?', 'accessnyc-screener') }}</label>
         <p>{{ __('It’s OK to pick more than one.', 'accessnyc-screener') }}</p>
         <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
@@ -103,7 +103,7 @@
         </div>
       </div>
 
-      <div class="c-question hidden" id="screener-is-hoh-full-time-student">
+      <div class="c-question hidden" id="screener-is-hoh-full-time-student" aria-live="polite">
         <label class="c-question__label mb-3">{{ __('Are they a full-time student?', 'accessnyc-screener') }}</label>
         <div class="c-question__container js-screener-radio-group">
           <label class="toggle js-screener-radio-label">
@@ -117,7 +117,7 @@
         </div>
       </div>
 
-      <div class="c-question hidden" id="screener-did-hoh-work-last-18-months">
+      <div class="c-question hidden" id="screener-did-hoh-work-last-18-months" aria-live="polite">
         <label class="c-question__label mb-3">{{ __('Did they work in the last 18 months?', 'accessnyc-screener') }}</label>
         <div class="c-question__container js-screener-radio-group">
           <label class="toggle js-screener-radio-label">
@@ -133,7 +133,7 @@
 
       <hr class="divider-light">
 
-      <div class="c-question">
+      <div class="c-question" aria-live="polite">
         <label class="c-question__label mb-3">{{ __('Do they receive any of these benefits?', 'accessnyc-screener') }}</label>
         <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
           <label class="checkbox">
@@ -153,7 +153,7 @@
 
       <hr class="divider-light">
 
-      <div class="c-question">
+      <div class="c-question" aria-live="polite">
         <label class="c-question__label">{{ __('Do they have an income?', 'accessnyc-screener') }}</label>
         <p>{{ __('This includes money from jobs, alimony, investments or gifts.', 'accessnyc-screener') }}</p>
         <div class="c-question__container js-screener-radio-group">
@@ -181,7 +181,7 @@
 
       <hr class="divider-light">
 
-      <div class="c-question" id="screener-have-expenses-head-of-household">
+      <div class="c-question" id="screener-have-expenses-head-of-household" aria-live="polite">
         <label class="c-question__label">{{ __('Do they have any expenses?', 'accessnyc-screener') }}</label>
         <p>{{ __('This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.', 'accessnyc-screener') }}</p>
         <div class="c-question__container js-screener-radio-group">
