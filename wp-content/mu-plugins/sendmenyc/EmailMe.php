@@ -23,8 +23,8 @@ class EmailMe extends ContactMe {
 
 	protected function content( $url, $page, $orig_url ){
 		// extract the language code - TO EDIT: add these as fields in the CMS so they can be easily modified
-		$exp = explode('/',$orig_url); 
-		$language = $exp[3]; 
+		$exp = explode('/',$orig_url);
+		$language = $exp[3];
 
 		// reads in the email template
 		$html = file_get_contents( __DIR__ .'/emails/index.html' );
@@ -159,7 +159,7 @@ class EmailMe extends ContactMe {
 		}else if (strpos($questions, json_decode('"\u061F"')) !== false){
 		  $contactUs = substr($questions, strpos($questions, json_decode('"\u061F"')) + 2);
 		}
-      
+
       	if($language !=""){
 	        $html_body2 = str_replace($contactUs,"<a href=\"http://on.nyc.gov/accessnyc-contact-us-".$language."\" style=\"color:#184e9e;\">".$contactUs."</a>",$questions);
       	}else{
@@ -171,7 +171,7 @@ class EmailMe extends ContactMe {
 		$html = str_replace('%(body)', $html_body, $html);
 		$html = str_replace('%(link)', $url, $html);
 		$html = str_replace('%(button)', $button, $html);
-        
+
 		return [
 			"subject"=>$subject,
 			"body"=>$body."\r\n\r\n".$url."\r\n\r\n".$questions,
@@ -180,36 +180,48 @@ class EmailMe extends ContactMe {
 
 	}
 
-	protected function send( $to, $info ) {
-		try {
-			$client = new SesClient([
-				'version'=>'latest',
-				'region'=>'us-east-1',
-				'credentials' => [
-					'key' => get_option( 'smnyc_aws_user' ),
-					'secret' => get_option( 'smnyc_aws_secret' ),
-				],
-			]);
-			$config = [
-				'Source'=> get_option( 'smnyc_aws_from' ),
-				'Destination'=>[ 'ToAddresses'=>[$to] ],
-				'Message'=>[
-					'Subject'=>[ 'Data'=>$info['subject'] ],
-					'Body'=>[
-						'Text'=>[ 'Data'=>$info['body'] ],
-						'Html'=>[ 'Data'=>$info['html'] ]
-					]
-				]
-			];
-			if ( !empty(get_option('smnyc_aws_reply')) ) {
-				$config['ReplyToAddresses'] = [get_option('smnyc_aws_reply')];
-				$config['ReturnPath'] = get_option('smnyc_aws_reply');
-			}
-			$result = $client->sendEmail($config);
-		} catch ( \Aws\Ses\Exception\SesException $e ) {
-			$this->failure(3, $e->getMessage());
-		}
-	}
+  protected function send($to, $info) {
+    try {
+      $user = get_option('smnyc_aws_user');
+      $secret = get_option('smnyc_aws_secret');
+      $from = get_option('smnyc_aws_from');
+      $reply = get_option('smnyc_aws_reply');
+
+      $user = (!empty($user)) ? $user : $_ENV['SMNYC_AWS_USER'];
+      $secret = (!empty($secret)) ? $secret : $_ENV['SMNYC_AWS_SECRET'];
+      $from = (!empty($from)) ? $from : $_ENV['SMNYC_AWS_FROM'];
+      $reply = (!empty($reply)) ? $reply : $_ENV['SMNYC_AWS_REPLY'];
+
+      $client = new SesClient([
+        'version' => 'latest',
+        'region' => 'us-east-1',
+        'credentials' => [
+          'key' => $user,
+          'secret' => $secret,
+        ]
+      ]);
+
+      $config = [
+        'Source' => $from,
+        'Destination' => ['ToAddresses' => [$to]],
+        'Message' => [
+          'Subject' => ['Data' => $info['subject']],
+          'Body' => [
+            'Text' => ['Data' => $info['body']],
+            'Html' => ['Data' => $info['html']]
+          ]
+        ]
+      ];
+
+    if (!empty($reply)) {
+      $config['ReplyToAddresses'] = [$reply];
+      $config['ReturnPath'] = $reply;
+    }
+
+    $result = $client->sendEmail($config);
+  } catch (\Aws\Ses\Exception\SesException $e) {
+    $this->failure(3, $e->getMessage());
+  }
 
 	protected function valid_recipient( $addr ) {
 		if ( empty($addr) ){
