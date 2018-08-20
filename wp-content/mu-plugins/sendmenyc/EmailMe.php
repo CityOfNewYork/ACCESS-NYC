@@ -197,7 +197,7 @@ class EmailMe extends ContactMe {
         'region' => 'us-east-1',
         'credentials' => [
           'key' => $user,
-          'secret' => $secret,
+          'secret' => $secret
         ]
       ]);
 
@@ -213,14 +213,15 @@ class EmailMe extends ContactMe {
         ]
       ];
 
-    if (!empty($reply)) {
-      $config['ReplyToAddresses'] = [$reply];
-      $config['ReturnPath'] = $reply;
-    }
+      if (!empty($reply)) {
+        $config['ReplyToAddresses'] = [$reply];
+        $config['ReturnPath'] = $reply;
+      }
 
-    $result = $client->sendEmail($config);
-  } catch (\Aws\Ses\Exception\SesException $e) {
-    $this->failure(3, $e->getMessage());
+      $result = $client->sendEmail($config);
+    } catch (\Aws\Ses\Exception\SesException $e) {
+      $this->failure(3, $e->getMessage());
+    }
   }
 
 	protected function valid_recipient( $addr ) {
