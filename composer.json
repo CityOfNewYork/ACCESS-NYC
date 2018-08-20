@@ -37,5 +37,16 @@
     "wpackagist-plugin/rollbar": "2.2.0",
     "nyco/wp-config": "0.0.5",
     "wpackagist-plugin/bulk-delete": "5.6.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.3"
+  },
+  "scripts": {
+    "lint": [
+      "vendor/bin/phpcs --standard=phpcs.xml"
+    ],
+    "fix": [
+      "vendor/bin/phpcbf --standard=phpcs.xml"
+    ]
   }
 }

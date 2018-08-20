@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<ruleset name="nyco">
+  <description>PSR2 with two spaces, braces on same line</description>
+
+  <arg name="tab-width" value="2"/>
+
+  <!-- Scan only PHP files -->
+  <arg name="extensions" value="php"/>
+
+  <!-- Files to scan -->
+  <file>wp-content/mu-plugins/</file>
+
+  <!-- Ignore WordPress, Composer dependencies, and specific libraries -->
+  <exclude-pattern>vendor/</exclude-pattern>
+  <exclude-pattern>wp-admin/</exclude-pattern>
+  <exclude-pattern>wp-includes/</exclude-pattern>
+  <exclude-pattern>wp-content/languages/</exclude-pattern>
+  <exclude-pattern>wp-content/plugins/</exclude-pattern>
+  <exclude-pattern>wp-content/uploads/</exclude-pattern>
+  <exclude-pattern>wp-content/mu-plugins/sendmenyc/third-party/</exclude-pattern>
+  <exclude-pattern>wp-content/mu-plugins/wp-config/</exclude-pattern>
+  <exclude-pattern>wp-content/themes/access/node_modules/</exclude-pattern>
+
+  <!-- Show colors in console -->
+  <arg value="-colors"/>
+
+  <rule ref="PSR2" />
+
+  <rule ref="PSR2">
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine" />
+  </rule>
+
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="2"/>
+    </properties>
+  </rule>
+
+  <rule ref="Squiz.Functions.MultiLineFunctionDeclaration">
+    <properties>
+      <property name="indent" value="2" />
+    </properties>
+  </rule>
+
+  <rule ref="PSR2.Methods.FunctionCallSignature">
+    <properties>
+      <property name="indent" value="2" />
+    </properties>
+  </rule>
+</ruleset>
