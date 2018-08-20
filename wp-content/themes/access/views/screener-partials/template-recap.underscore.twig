@@ -4,7 +4,7 @@
   <div>
     <h3 class="type-h4 text-color-blue-dark">
       {{ __('Looking for help with', 'accessnyc-screener') }}
-      <a href="#step-1" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      <a role="button" href="#step-1" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
     </h3>
 
     <div class="layout--gutter screen-tablet:layout--columns-gutter mb-4">
@@ -128,7 +128,7 @@
   <div>
     <h3 class="type-h4 text-color-blue-dark">
       {{ __('Household resources:', 'accessnyc-screener') }} <span class="force-ltr"><%= household.assets %></span>
-      <a href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
     </h3>
 
     <p>{{ __('This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.', 'accessnyc-screener') }}</p>
@@ -139,7 +139,7 @@
   <div>
     <h3 class="type-h4 text-color-blue-dark">
       {{ __('Housing', 'accessnyc-screener') }}
-      <a href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
     </h3>
 
     <ul class="list-inline-semicolon">{% spaceless %}
@@ -199,7 +199,7 @@
   <div>
     <h3 class="type-h4 text-color-blue-dark">
       {{ __('Your zip code:', 'accessnyc-screener') }} <%= household.zip %>
-      <a href="#step-3" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      <a role="button" href="#step-3" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
     </h3>
   </div>
 </div>
