@@ -454,6 +454,10 @@ class Screener {
       this._renderRecap();
     }
 
+    let stepTitle = $(section).find('[data-js="step-title"]').text();
+    let baseTitle = 'Eligibility Screener – ACCESS NYC - ';
+    $('title').text(baseTitle + stepTitle);
+
     return this;
   }
 

@@ -1,7 +1,7 @@
 <fieldset class="{{ styles.fieldset }}" id="step-2" data-track-key="Screener Step: 2"
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "2-Disclaimer"}]'>
   <div class="{{ styles.padding }}">
-    <div class="{{ styles.number }}">{{ __('Step 2 of 10', 'accessnyc-screener') }}</div>
+    <div data-js="step-title" class="{{ styles.number }}">{{ __('Step 2 of 10', 'accessnyc-screener') }}</div>
 
     <h1 class="{{ styles.heading }}">{{__('What you should know before we begin:', 'accessnyc-screener')}}</h1>
 
@@ -12,7 +12,7 @@
       <p>{{ __('The information you share for purposes of public benefits screening will be anonymous and can be shared with City agencies to improve access to benefits and programs. To find out more about how the City might use the data you share with ACCESS NYC, visit the <a href="http://www1.nyc.gov/home/terms-of-use.page" target="_blank" rel="noopener noreferrer">Terms of Use for NYC.gov</a>, and <a href="http://www1.nyc.gov/home/privacy-policy.page" target="_blank" rel="noopener noreferrer">Privacy Policy for NYC.gov</a>.', 'accessnyc-screener') }}</p>
     </div>
 
-    <div class="c-question" aria-live="polite">
+    <div class="c-question">
       <p class="text-color-grey-mid">{{ __('Check the box below and then click the button to get started.', 'accessnyc-screener') }}</p>
 
       <div class="c-question__container" data-js="question">
