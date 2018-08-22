@@ -1,11 +1,11 @@
-<div class="c-question">
+<div class="c-question"  aria-live="polite">
   {% if (question.multipleOccupants.question) %}
   <label class="c-question__label {{ styles.inputs.label }}">
     {{ question.multipleOccupants.question }}
   </label>
   {% endif %}
 
-  <div class="c-question__container">
+  <div class="c-question__container"  aria-live="polite">
     <label class="toggle">
       <input class="sr-only" value="true" type="radio" name="toggle-{{ question.dataKey }}"
         data-js="toggle"
@@ -33,7 +33,7 @@
     </label>
 
     <div v-for="(p, personIndex) in people" class="c-question__container mb-4">
-      <div class="c-question">
+      <div class="c-question" aria-live="polite">
         <label class="checkbox">
           <input type="checkbox" value="1"
             data-type="boolean"
@@ -61,7 +61,7 @@
           <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
           {{ question.multipleOccupants.subQuestion }}
         </label>
-        <div class="c-question__container">
+        <div class="c-question__container" aria-live="polite">
           <label class="toggle">
             <input type="radio" value="true" class="sr-only"
               data-type="boolean"

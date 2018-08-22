@@ -60,8 +60,8 @@
               </div>
             </div>
 
-            <div v-if="p._attrs.headOfHousehold === false" class="c-question">
-              <label class="c-question__label {{ styles.inputs.label }}" v-bind:for="'person-' + personIndex + '-relation'">
+            <div v-if="p._attrs.headOfHousehold === false" class="c-question" aria-live="polite">
+              <label class="c-question__label {{ styles.inputs.label }}" v-bind:for="'person-' + personIndex + '-relation'" aria-live="polite">
                 <span v-if="people[0]._attrs.headOfHousehold">{{ __('What is this person’s relationship to you?', translationID) }}</span>
                 <span v-else>{{ __('What is this person’s relationship to the head of the household?', translationID) }}</span>
                 <span class="text-color-red">*</span>
@@ -87,7 +87,7 @@
               </div>
             </div>
 
-            <div class="c-question m-0">
+            <div class="c-question m-0" aria-live="polite">
               <label class="c-question__label {{ styles.inputs.label }}" v-bind:for="'person-' + personIndex + '-age'">
                 {{ __('How old are they?', translationID) }}
                 <span class="text-color-red">*</span>
