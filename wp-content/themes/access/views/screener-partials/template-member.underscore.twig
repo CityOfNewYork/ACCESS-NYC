@@ -1,4 +1,4 @@
-<div class="c-question" aria-live="polite">
+<div class="c-question">
   <label class="c-question__label" for="person-<%= personIndex %>-age">{{ __('How old are they?', 'accessnyc-screener') }}</label>
   <div class="c-question__container">
     <input id="person-<%= personIndex %>-age" name="Person[<%= personIndex %>].age" value="<% if(person.age) { print(person.age) } %>" type="number" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>
@@ -7,7 +7,7 @@
 
 <hr class="divider-light">
 
-<div class="c-question" aria-live="polite">
+<div class="c-question">
   <label class="c-question__label" for="person-<%= personIndex %>-relation">{{ __('What is this person’s relationship to the head of the household?', 'accessnyc-screener') }}</label>
   <div class="c-question__container">
     <select class="select" id="person<%= personIndex %>-relation" name="Person[<%= personIndex %>].headOfHouseholdRelation" required>
@@ -33,7 +33,7 @@
 
 <hr class="divider-light">
 
-<div class="c-question" aria-live="polite">
+<div class="c-question">
   <label class="c-question__label">{{ __('Do any of these apply to them?', 'accessnyc-screener') }}</label>
   <p>{{ __('It’s OK to pick more than one.', 'accessnyc-screener') }}</p>
   <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">

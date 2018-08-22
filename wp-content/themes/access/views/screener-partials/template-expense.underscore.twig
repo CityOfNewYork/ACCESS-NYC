@@ -1,7 +1,7 @@
 <div id="screener-person-<%= personIndex %>-expense-<%= matrixIndex %>" class="js-matrix-item">
   <hr class="divider-light">
 
-  <div class="c-question" aria-live="polite">
+  <div class="c-question">
     <% if (matrixIndex === 0) { %>
     <label class="c-question__label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-type">
       <% if (personIndex === 0) { %>
@@ -47,19 +47,19 @@
   </div>
 
   <div id="screener-person-<%= personIndex %>-expense-<%= matrixIndex %>-details" class="hidden">
-    <div class="c-question" aria-live="polite">
+    <div class="c-question">
       <label class="c-question__label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-amount">
         {{ __('How much is this type of expense:', 'accessnyc-screener') }}
         <span data-js="transaction-label"></span>?
       </label>
-      <div class="c-question__container" aria-live="polite">
+      <div class="c-question__container">
         <div class="input-currency-usd">
           <input id="person-<%= personIndex %>-expenses-<%= matrixIndex %>-amount" name="Person[<%= personIndex %>].expenses[<%= matrixIndex %>].amount" type="number" data-type="float" step="0.01" required>
         </div>
       </div>
     </div>
 
-    <div class="c-question" aria-live="polite">
+    <div class="c-question">
       <label class="c-question__label d-inline-block m-bottom" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-frequency">
         <% if (personIndex === 0) { %>
         {{ __('How often do you have this expense:', 'accessnyc-screener') }}
@@ -68,7 +68,7 @@
         <% } %>
         <span data-js="transaction-label"></span>?
       </label>
-      <div class="c-question__container" aria-live="polite">
+      <div class="c-question__container">
         <select class="select" id="person-<%= personIndex %>-expenses-<%= matrixIndex %>-frequency" name="Person[<%= personIndex %>].expenses[<%= matrixIndex %>].frequency" required>
           <option value="">{{ __('Click to add an expense frequency', 'accessnyc-screener') }}</option>
           <option value="weekly">{{ __('Every week', 'accessnyc-screener') }}</option>
