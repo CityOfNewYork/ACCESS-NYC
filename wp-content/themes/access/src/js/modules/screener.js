@@ -799,6 +799,7 @@ class Screener {
    */
   _showError(el, msg) {
     const $error = $(document.createElement('div'));
+    $error.attr('aria-live', 'polite');
     $error.addClass(Screener.CssClass.ERROR_MSG).text(Utility.localize(msg));
     $(el).closest(Screener.Selectors.QUESTION_CONTAINER)
         .addClass(Screener.CssClass.ERROR).prepend($error);
