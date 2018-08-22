@@ -56,6 +56,9 @@ class Screener {
 
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = false;
+
+    /** @private {string} the base string for the screener title. */
+    this._baseTitle = $('title').text();
   }
 
   /**
@@ -455,8 +458,7 @@ class Screener {
     }
 
     let stepTitle = $(section).find('[data-js="step-title"]').text();
-    let baseTitle = 'Eligibility Screener – ACCESS NYC - ';
-    $('title').text(baseTitle + stepTitle);
+    $('title').text(`${stepTitle} - ${this._baseTitle}`);
 
     return this;
   }
