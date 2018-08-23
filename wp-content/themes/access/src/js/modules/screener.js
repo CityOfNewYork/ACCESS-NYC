@@ -107,6 +107,8 @@ class Screener {
       this._validateFloatField(e.currentTarget);
     }).on('blur', '[data-type="zip"]', (e) => {
       this._validateZipField(e.currentTarget);
+    }).on('blur', '[data-type="age"]', (e) => {
+      this._validateIntegerField(e.currentTarget);
     }).on('keyup', '[data-type="float"]', (e) => {
       this._limitFloatFieldLength(e.currentTarget);
     }).on('keydown', 'input[type="number"]', (e) => {
@@ -167,7 +169,7 @@ class Screener {
     let key = '';
     let data = [];
 
-    $(window).on('hashchange', function() {
+    $(window).on('hashchange load', function() {
       let hash = window.location.hash;
       let step = $(hash);
       key = step.data('trackKey');
@@ -813,7 +815,13 @@ class Screener {
         $input.attr('type') === 'radio') && !$input.prop('checked')) ||
         (($input.attr('type') !== 'checkbox' ||
         $input.attr('type') !== 'radio') && !$input.val())) {
-      this._showError(el, Screener.ErrorMessage.REQUIRED);
+      if ($input.attr('data-type')) {
+        this._showError(el,
+          Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]
+        );
+      } else {
+        this._showError(el, Screener.ErrorMessage.REQUIRED);
+      }
       $input.one('change keyup', () => {
         this._validateRequiredField(el);
       });
@@ -1288,7 +1296,8 @@ Screener.ErrorMessage = {
   HOUSEHOLD: 'ERROR_HOUSEHOLD',
   INTEGER: 'ERROR_INTEGER',
   REQUIRED: 'ERROR_REQUIRED',
-  ZIP: 'ERROR_ZIP'
+  ZIP: 'ERROR_ZIP',
+  AGE: 'ERROR_AGE'
 };
 
 /**
