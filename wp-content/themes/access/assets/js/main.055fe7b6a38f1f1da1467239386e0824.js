@@ -120,6 +120,8 @@ Utility.SELECTORS = {
 
 /**
  * The Simple Toggle class
+ * This uses the .matches() method which will require a polyfill for IE
+ * https://polyfill.io/v2/docs/features/#Element_prototype_matches
  * @class
  */
 
@@ -165,8 +167,7 @@ var Toggle = function () {
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
-        var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-        if (!event.target[method](_this._settings.selector)) return;
+        if (!event.target.matches(_this._settings.selector)) return;
 
         // Click event logging
         // eslint-disable-next-line no-console
@@ -426,6 +427,8 @@ Utility.SELECTORS = {
 
 /**
  * The Simple Toggle class
+ * This uses the .matches() method which will require a polyfill for IE
+ * https://polyfill.io/v2/docs/features/#Element_prototype_matches
  * @class
  */
 
@@ -471,8 +474,7 @@ var Toggle = function () {
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
-        var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-        if (!event.target[method](_this._settings.selector)) return;
+        if (!event.target.matches(_this._settings.selector)) return;
 
         // Click event logging
         // eslint-disable-next-line no-console
@@ -17003,4 +17005,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.3fabc1d3e05a0a15bacb1b774056437e.js.map
+//# sourceMappingURL=main.055fe7b6a38f1f1da1467239386e0824.js.map

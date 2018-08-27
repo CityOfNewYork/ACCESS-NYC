@@ -120,6 +120,8 @@ Utility.SELECTORS = {
 
 /**
  * The Simple Toggle class
+ * This uses the .matches() method which will require a polyfill for IE
+ * https://polyfill.io/v2/docs/features/#Element_prototype_matches
  * @class
  */
 
@@ -165,8 +167,7 @@ var Toggle = function () {
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
-        var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-        if (!event.target[method](_this._settings.selector)) return;
+        if (!event.target.matches(_this._settings.selector)) return;
 
         // Click event logging
         // eslint-disable-next-line no-console
@@ -33698,4 +33699,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.b4ec57591c2f881789ef62394e3d6edf.js.map
+//# sourceMappingURL=main-field.69bbad44ed1f468e0cb4a731554748dd.js.map
