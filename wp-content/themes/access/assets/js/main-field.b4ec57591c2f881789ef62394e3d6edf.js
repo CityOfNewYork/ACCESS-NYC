@@ -67,11 +67,55 @@ Utility.getUrlParameter = function (name, queryString) {
 };
 
 /**
+ * A markdown parsing method. It relies on the dist/markdown.min.js script
+ * which is a browser compatible version of markdown-js
+ * @url https://github.com/evilstreak/markdown-js
+ * @return {Object} The iteration over the markdown DOM parents
+ */
+Utility.parseMarkdown = function () {
+  if (typeof markdown === 'undefined') return false;
+
+  var mds = document.querySelectorAll(Utility.SELECTORS.parseMarkdown);
+
+  var _loop = function _loop(i) {
+    var element = mds[i];
+    fetch(element.dataset.jsMarkdown).then(function (response) {
+      if (response.ok) return response.text();else {
+        element.innerHTML = '';
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir(response);
+      }
+    }).catch(function (error) {
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir(error);
+    }).then(function (data) {
+      try {
+        element.classList.toggle('animated');
+        element.classList.toggle('fadeIn');
+        element.innerHTML = markdown.toHTML(data);
+      } catch (error) {}
+    });
+  };
+
+  for (var i = 0; i < mds.length; i++) {
+    _loop(i);
+  }
+};
+
+/**
  * Application parameters
  * @type {Object}
  */
 Utility.PARAMS = {
   DEBUG: 'debug'
+};
+
+/**
+ * Selectors for the Utility module
+ * @type {Object}
+ */
+Utility.SELECTORS = {
+  parseMarkdown: '[data-js="markdown"]'
 };
 
 /**
@@ -223,7 +267,7 @@ Toggle.activeClass = 'active';
 var Accordion =
 /**
  * @constructor
- * @return {object}   The class
+ * @return {object} The class
  */
 function Accordion() {
   classCallCheck(this, Accordion);
@@ -32158,13 +32202,13 @@ Screener = function () {
       $input.attr('type') === 'radio') && !$input.prop('checked') ||
       ($input.attr('type') !== 'checkbox' ||
       $input.attr('type') !== 'radio') && !$input.val()) {
-        if ($input.attr('data-type')) {
-          this._showError(el,
-          Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]);
-
-        } else {
-          this._showError(el, Screener.ErrorMessage.REQUIRED);
-        }
+        // if ($input.attr('data-type')) {
+        //   this._showError(el,
+        //     Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]
+        //   );
+        // } else {
+        this._showError(el, Screener.ErrorMessage.REQUIRED);
+        // }
         $input.one('change keyup', function () {
           _this4._validateRequiredField(el);
         });
@@ -33654,4 +33698,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.6a058db0c696bb3e04bd3a40a0a384dd.js.map
+//# sourceMappingURL=main-field.b4ec57591c2f881789ef62394e3d6edf.js.map

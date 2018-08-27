@@ -815,13 +815,13 @@ class Screener {
         $input.attr('type') === 'radio') && !$input.prop('checked')) ||
         (($input.attr('type') !== 'checkbox' ||
         $input.attr('type') !== 'radio') && !$input.val())) {
-      if ($input.attr('data-type')) {
-        this._showError(el,
-          Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]
-        );
-      } else {
-        this._showError(el, Screener.ErrorMessage.REQUIRED);
-      }
+      // if ($input.attr('data-type')) {
+      //   this._showError(el,
+      //     Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]
+      //   );
+      // } else {
+      this._showError(el, Screener.ErrorMessage.REQUIRED);
+      // }
       $input.one('change keyup', () => {
         this._validateRequiredField(el);
       });
