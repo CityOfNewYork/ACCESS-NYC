@@ -56,6 +56,9 @@ class Screener {
 
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = false;
+
+    /** @private {string} the base string for the screener title. */
+    this._baseTitle = $('title').text();
   }
 
   /**
@@ -454,6 +457,9 @@ class Screener {
       this._renderRecap();
     }
 
+    let stepTitle = $(section).find('[data-js="step-title"]').text();
+    $('title').text(`${stepTitle} - ${this._baseTitle}`);
+
     return this;
   }
 
@@ -795,6 +801,7 @@ class Screener {
    */
   _showError(el, msg) {
     const $error = $(document.createElement('div'));
+    $error.attr('aria-live', 'polite');
     $error.addClass(Screener.CssClass.ERROR_MSG).text(Utility.localize(msg));
     $(el).closest(Screener.Selectors.QUESTION_CONTAINER)
         .addClass(Screener.CssClass.ERROR).prepend($error);

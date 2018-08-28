@@ -1,11 +1,11 @@
 <fieldset class="{{ styles.fieldset }}" id="step-2" data-track-key="Screener Step: 2"
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "2-Disclaimer"}]'>
   <div class="{{ styles.padding }}">
-    <div class="{{ styles.number }}">{{ __('Step 2 of 10', 'accessnyc-screener') }}</div>
+    <div data-js="step-title" class="{{ styles.number }}">{{ __('Step 2 of 10', 'accessnyc-screener') }}</div>
 
     <h1 class="{{ styles.heading }}">{{__('What you should know before we begin:', 'accessnyc-screener')}}</h1>
 
-    <div class="c-disclaimer mb-4">
+    <div class="c-disclaimer mb-4" id="disclaimer-agreement">
       <h4 class="{{ styles.label }}">{{ __('ACCESS NYC Disclaimer for Public Benefit Program Screening', 'accessnyc-screener') }}</h4>
       <p>{{ __('ACCESS NYC offers a screening tool that recommends public benefits programs for you to consider based upon information you provide about your household.', 'accessnyc-screener') }}</p>
       <p>{{ __('To enroll in a benefit, you need to apply through the appropriate administering agency. ACCESS NYC will tell you how to apply for any benefit on this website, but cannot guarantee eligibility. The administering agency will determine final eligibility upon your submission of an application for each program.', 'accessnyc-screener') }}</p>
@@ -17,7 +17,7 @@
 
       <div class="c-question__container" data-js="question">
         <label class="checkbox mb-3">
-          <input id="disclaimer-agreement" type="checkbox" name="disclaimer-agreement" required>
+          <input aria-describedby="disclaimer-content" type="checkbox" name="disclaimer-agreement" required>
 
           <span class="checkbox__label text-font-size-small font-normal leading-larger">{{ __('I have read, understand, and agree to the terms of: the ACCESS NYC Disclaimer for Public Benefit Program Screening, the NYC.gov Privacy Policy, and the NYC.gov Terms of Use.', 'accessnyc-screener') }}</span>
         </label>
