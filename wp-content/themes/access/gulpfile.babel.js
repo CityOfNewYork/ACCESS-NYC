@@ -92,7 +92,6 @@ gulp.task('styles', (callback) => {
         'node_modules/access-nyc-patterns/src'
       ]
       .concat(require('bourbon').includePaths)
-      .concat(require('bourbon-neat').includePaths)
     })
     .on('error', $.notify.onError())
     .on('error', $.sass.logError))
