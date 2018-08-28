@@ -1,4 +1,4 @@
-<fieldset class="{{ styles.fieldset }}" id="step-7" data-track-key="Screener Step: 7"
+<div class="{{ styles.fieldset }}" id="step-7" data-track-key="Screener Step: 7"
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "7-NumOfHHMembers"}]'>
   <div class="{{ styles.padding }}">
     <div data-js="step-title" class="{{ styles.number }}">{{ __('Step 7 of 10', 'accessnyc-screener') }}</div>
@@ -10,7 +10,7 @@
 
       <p>{{ __('This is usually family members who you both live with and share important resources like food and bills. Only count your roommates if you often buy and prepare food together.', 'accessnyc-screener') }}</p>
 
-      <label class="c-question__label" for="household-members">{{ __('Number of People (max. 8)', 'accessnyc-screener') }}</label>
+      <p class="c-question__label">{{ __('Number of People (max. 8)', 'accessnyc-screener') }}</p>
       <div class="c-question__container" data-js="question">
         <input id="household-members" type="number" name="Household.members" data-type="integer" min="1" max="8" required value="1">
       </div>
@@ -20,4 +20,4 @@
       <a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-8" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
     </div>
   </div>
-</fieldset>{# /#step-7 #}
+</div>{# /#step-7 #}

@@ -1,12 +1,12 @@
-<fieldset class="{{ styles.fieldset }}" id="step-10" data-track-key="Screener Step: 10"
+<div class="{{ styles.fieldset }}" id="step-10" data-track-key="Screener Step: 10"
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "10-Housing-Savings"}]'>
   <div class="{{ styles.padding }}">
     <div data-js="step-title" class="{{ styles.number }}">{{ __('Step 10 of 10', 'accessnyc-screener') }}</div>
 
     <h1 class="{{ styles.heading }}">{{ __('Last question! Tell us about where you live.', 'accessnyc-screener') }}</h1>
 
-    <div class="c-question" id="screener-housing-situation">
-      <label class="c-question__label" for="housing-situation">{{ __('Which of these best applies to your housing situation?', 'accessnyc-screener') }}</label>
+    <fieldset class="c-question" id="screener-housing-situation">
+      <legend class="c-question__label" for="housing-situation">{{ __('Which of these best applies to your housing situation?', 'accessnyc-screener') }}</legend>
       <p>{{ __('It’s OK to pick more than one.', 'accessnyc-screener') }}</p>
       <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
         <label class="checkbox">
@@ -34,7 +34,7 @@
           <span class="checkbox__label">{{ __('Prefer not to say', 'accessnyc-screener') }}</span>
         </label>
       </div>
-    </div>
+    </fieldset>
 
     <div class="hidden" id="screener-rental-type">
       <div class="c-question">
@@ -58,16 +58,16 @@
         </div>
       </div>
 
-      <div class="c-question js-screener-checkbox-group" id="screener-lease-owner">
-        <label class="c-question__label">{{ __('Who is on the lease?', 'accessnyc-screener') }}</label>
+      <fieldset class="c-question js-screener-checkbox-group" id="screener-lease-owner">
+        <legend class="c-question__label">{{ __('Who is on the lease?', 'accessnyc-screener') }}</legend>
         <div id="screener-possible-leasees" class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group"></div>
-      </div>
+      </fieldset>
     </div>
 
-    <div class="c-question hidden" id="screener-homeowner">
-      <label class="c-question__label">{{ __('Who is the owner?', 'accessnyc-screener') }}</label>
+    <fieldset class="c-question hidden" id="screener-homeowner">
+      <legend class="c-question__label">{{ __('Who is the owner?', 'accessnyc-screener') }}</legend>
       <div id="screener-possible-owners" class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group"></div>
-    </div>
+    </fieldset>
 
     <hr class="divider-light">
 
@@ -90,4 +90,4 @@
       <a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#recap" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
     </div>
   </div>
-</fieldset>{# /#step-10 #}
+</div>{# /#step-10 #}
