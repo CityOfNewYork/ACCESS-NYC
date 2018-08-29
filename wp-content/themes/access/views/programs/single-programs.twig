@@ -54,7 +54,7 @@
         {% endfor %}
 
         {% for item in post.get_field('show_sections') %}
-        {% include 'program-detail-partials/' ~ item.value ~ '.twig' with {'stepNumber': loop.index, 'nextStep': post.get_field('show_sections')[loop.index] } %}
+        {% include 'programs/' ~ item.value ~ '.twig' with {'stepNumber': loop.index, 'nextStep': post.get_field('show_sections')[loop.index] } %}
         {% endfor %}
       </article>
     </section>
