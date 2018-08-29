@@ -27,9 +27,9 @@ accepts@~1.3.4:
     mime-types "~2.1.18"
     negotiator "0.6.1"
 
-access-nyc-patterns@^0.0.11-4:
-  version "0.0.11-4"
-  resolved "https://registry.yarnpkg.com/access-nyc-patterns/-/access-nyc-patterns-0.0.11-4.tgz#3ec6acdd0a34a252c4f29a7942716d3a27a373d9"
+access-nyc-patterns@^0.0.11-5:
+  version "0.0.11-5"
+  resolved "https://registry.yarnpkg.com/access-nyc-patterns/-/access-nyc-patterns-0.0.11-5.tgz#42ed5f225b083fcbe1c38e6e5979ec3e12d6993f"
   dependencies:
     animate.scss "0.0.6"
     bourbon "^4.2.7"
