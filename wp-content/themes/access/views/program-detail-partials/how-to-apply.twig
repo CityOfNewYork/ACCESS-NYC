@@ -7,59 +7,72 @@
     <h4 class="font-normal">{{__('Here are your options.', 'accessnyc-program-detail')}}</h4>
   </header>
 
-  {% if post.how_to_apply_or_enroll_online != '' %}
-  <div class="program-detail-application-method program-detail-apply-online">
-    <h3 class="text-color-blue-dark">{{__('Apply online', 'accessnyc-program-detail')}}</h3>
-
-    {{ post.get_field('how_to_apply_or_enroll_online') }}
-
-    {% if post.apply_online_call_to_action != '' %}
-    <p class="print:hidden">
-      <a class="btn btn-secondary btn-next btn-small" href="{{ post.url_of_online_application }}">{{ post.apply_online_call_to_action }}</a>
-    </p>
+  {% set sections = ['how_to_apply_or_enroll_online', 'how_to_apply_or_enroll_by_mail', 'how_to_apply_or_enroll_by_phone', 'how_to_apply_or_enroll_in_person'] %}
+  {% set accordions = [] %}
+  {% for section in sections %}
+    {% if post.get_field(section) %}
+      {% set accordions = accordions|merge([section]) %}
     {% endif %}
-  </div>
-  {% endif %}
+  {% endfor %}
 
-  {% if post.how_to_apply_or_enroll_by_mail != '' %}
-  <div class="program-detail-application-method program-detail-apply-by-mail">
-    <h3 class="text-color-blue-dark">{{__('Apply by mail', 'accessnyc-program-detail')}}</h3>
-
-    {{ post.get_field('how_to_apply_or_enroll_by_mail') }}
-
-    {% if post.apply_by_mail_call_to_action != '' %}
-    <p class="print:hidden">
-      <a class="btn btn-secondary btn-next btn-small" href="{% if post.url_of_pdf_application_forms != '' %}{{ post.url_of_pdf_application_forms }}{% else %}{{ post.application_forms_pdfs }}{% endif %}">{{ post.apply_by_mail_call_to_action }}</a>
-    </p>
+  {% for accordion in accordions %}
+    {% if accordion == 'how_to_apply_or_enroll_online' %}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply online', 'accessnyc-program-detail'),
+        body: post.get_field(accordion),
+        cta: post.apply_online_call_to_action ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.url_of_online_application,
+          text: post.apply_online_call_to_action
+        } : false
+      } %}
     {% endif %}
-  </div>
-  {% endif %}
 
-  {% if post.how_to_apply_or_enroll_by_phone != '' %}
-  <div class="program-detail-application-method program-detail-apply-by-phone">
-    <h3 class="text-color-blue-dark">{{__('Apply by phone', 'accessnyc-program-detail')}}</h3>
-
-    {{ post.get_field('how_to_apply_or_enroll_by_phone') }}
-
-    {{ post.get_field('phone_numbers') }}
-  </div>
-  {% endif %}
-
-  {% if post.how_to_apply_or_enroll_in_person != '' %}
-  <div class="program-detail-application-method program-detail-apply-in-person">
-    <h3 class="text-color-blue-dark">{{__('Apply in person', 'accessnyc-program-detail')}}</h3>
-
-    {{ post.get_field('how_to_apply_or_enroll_in_person') }}
-
-    {% if post.office_locations_url != '' %}
-    {% if post.apply_in_person_call_to_action != '' %}
-    <p class="print:hidden">
-      <a class="btn btn-secondary btn-next btn-small" href="{{ post.office_locations_url }}">{{ post.apply_in_person_call_to_action|striptags }}</a>
-    </p>
+    {% if accordion == 'how_to_apply_or_enroll_by_mail' %}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply by mail', 'accessnyc-program-detail'),
+        body: post.get_field(accordion),
+        cta: post.apply_by_mail_call_to_action ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.url_of_pdf_application_forms ? post.url_of_pdf_application_forms : post.application_forms_pdfs,
+          text: post.apply_by_mail_call_to_action
+        } : false
+      } %}
     {% endif %}
+
+    {% if accordion == 'how_to_apply_or_enroll_by_phone' %}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply by phone', 'accessnyc-program-detail'),
+        body: post.get_field(accordion) ~ post.get_field('phone_numbers'),
+        cta: false
+      } %}
     {% endif %}
-  </div>
-  {% endif %}
+
+    {% if accordion == 'how_to_apply_or_enroll_in_person' %}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply in person', 'accessnyc-program-detail'),
+        body: post.get_field(accordion),
+        cta: (post.office_locations_url and post.apply_in_person_call_to_action) ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.office_locations_url,
+          text: post.apply_in_person_call_to_action|striptags
+        } : false
+      } %}
+    {% endif %}
+
+    {% include 'components/accordion.twig' with {this: this} only %}
+  {% endfor %}
 
   <div class="c-alert-box bg-status-info print:hidden">
     <div class="c-alert-box__icon" aria-hidden="true">
