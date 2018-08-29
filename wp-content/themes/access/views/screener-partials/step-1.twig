@@ -1,29 +1,32 @@
-<fieldset class="{{ styles.fieldset }} active" id="step-1" data-track-key="Screener Step: 1"
+<div class="{{ styles.fieldset }} active" id="step-1" data-track-key="Screener Step: 1"
    data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "1-HelpLookingFor"}]'>
   <div class="{{ styles.padding }}">
+
     <div data-js="step-title" class="{{ styles.number }}">{{ __('Step 1 of 10', 'accessnyc-screener') }}</div>
 
-    <h1 class="{{ styles.heading }}">{{ __('What kind of help are you looking for?', 'accessnyc-screener') }}</h1>
+    <fieldset class="c-question">
+      <legend class="type-h1 w-full {{ styles.heading }}">{{ __('What kind of help are you looking for?', 'accessnyc-screener') }}</legend>
 
-    <p>{{ __('It’s OK to pick more than one. Don’t worry if you forget one, we’ll still check if you may be eligible for help with all of them.', 'accessnyc-screener') }}</p>
+      <p>{{ __('It’s OK to pick more than one. Don’t worry if you forget one, we’ll still check if you may be eligible for help with all of them.', 'accessnyc-screener') }}</p>
 
-    <div class="screen-tablet:layout--columns mb-4">
-      {% for category in categories %}
-      {% if language_code != 'en' %}
-        {% set langLength = (language_code | length + 1) * -1 %}
-        {% set slug = category.slug | slice(0, langLength) %}
-      {% else %}
-        {% set slug = category.slug %}
-      {% endif %}
-      <label class="checkbox">
-        <input type="checkbox" name="category" value="{{ category.slug }}">
-        <span class="checkbox__label items-center">
-          <span class="checkbox__icon bg-icon-{{ slug }}"></span>
-          <span>{{ category.name }}</span>
-        </span>
-      </label>
-      {% endfor %}
-    </div>
+      <div class="c-question__container screen-tablet:layout--columns mb-4">
+        {% for category in categories %}
+        {% if language_code != 'en' %}
+          {% set langLength = (language_code | length + 1) * -1 %}
+          {% set slug = category.slug | slice(0, langLength) %}
+        {% else %}
+          {% set slug = category.slug %}
+        {% endif %}
+        <label class="checkbox" for="person-help-{{ slug }}">
+          <input id="person-help-{{ slug }}" name="category" type="checkbox" value="{{ slug }}">
+          <span class="checkbox__label">
+            <span class="checkbox__icon bg-icon-{{ slug }}"></span>
+            {{ category.name }}
+          </span>
+        </label>
+        {% endfor %}
+      </div>
+    </fieldset>
 
     <h4 class="{{ styles.label }}">{{ __('What is this?', 'accessnyc-screener') }}</h4>
 
@@ -33,4 +36,4 @@
       <a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-2" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
     </div>
   </div>
-</fieldset>{# /#step-1 #}
+</div>{# /#step-1 #}
