@@ -9,9 +9,7 @@
   {% else %}
     {% set catSlug = category.slug %}
   {% endif %}
-  <a href="{{ post.get_permalink }}" aria-label={{ catSlug }} {% if target %}target="{{ target }}"{% endif %}>
     <svg class="icon icon-card-{{ catSlug }}"{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %}>
       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-card-{{ catSlug }}"></use>
     </svg>
-  </a>
 {% endfor %}
