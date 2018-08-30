@@ -105,7 +105,7 @@
 
         <hr class="divider-light" aria-hidden="true">
 
-        <section class="mb-3">
+        <section>
           <h3>{{ __('Programs at this location', 'accessnyc-locations')}}</h3>
 
           {% for program in post.get_field('programs') %}
@@ -127,14 +127,23 @@
             } only %}
           {% endfor %}
         </section>
-
-        <section class="mb-3 screen-desktop:hidden">
-          <a class="btn btn-secondary btn-previous w-full print:hidden js-location-back" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
-            {{__('Back to map', 'accessnyc-locations')}}
-          </a>
-        </section>
       </article>
     </section>
+
+    <footer class="usa-grid py-4">
+      <p class="text-color-grey-mid screen-desktop:mb-0">
+        {{__('Updated', 'accessnyc-locations')}}
+        {% if post.post_modified | length %}
+        {{post.post_modified|date}}
+        {% else %}
+        {{ post.post_date|date}}
+        {% endif %}
+      </p>
+
+      <a class="btn btn-secondary btn-previous w-full print:hidden screen-desktop:hidden js-location-back" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
+        {{__('Back to map', 'accessnyc-locations')}}
+      </a>
+    </footer>
   </main>
   {% endfor %}
 {% endblock %}
