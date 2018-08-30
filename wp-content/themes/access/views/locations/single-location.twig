@@ -52,8 +52,6 @@
 
       <article>
         <section itemprop="description">
-          {% if post.description %}<p>{{ post.description }}</p>{% endif %}
-
           {% if post.get_field('programs')|length > 0 %}
           <p class="mb-0">{% spaceless %}
             {{__('This location can help you with:', 'accessnyc-locations')}}
@@ -82,6 +80,14 @@
           </address>
         </section>
 
+        {% if post.description %}
+        <section class="mb-3">
+          <h3>{{ __('Details', 'accessnyc-locations')}}</h3>
+
+          <p>{{ post.description }}</p>
+        </section>
+        {% endif %}
+
         <section {% if post.website %}class="mb-3"{% endif %}>
           <h3>{{ __('Contact by phone', 'accessnyc-locations')}}</h3>
 
@@ -98,7 +104,7 @@
           <h3>{{ __('Visit website', 'accessnyc-locations')}}</h3>
 
           {% for phone in post.get_field('phone') %}
-          <a href="{{ post.website }}"  target="_blank" rel="noopener noreferrer" itemprop="url">{{ post.website }}</a><br>
+          <a href="{{ post.website }}"  target="_blank" rel="noopener noreferrer" itemprop="sameAs">{{ post.website }}</a><br>
           {% endfor %}
         </section>
         {% endif %}
