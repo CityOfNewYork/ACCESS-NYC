@@ -4,15 +4,15 @@
 
     <a data-js="accordion" href="#{{ this.id }}__body" class="c-accordion__toggle print:hidden {% if this.active %}active{% endif %}">
       <span class="c-accordion__toggle-active">
-        <span class="hidden screen-tablet:inline">-</span> {{__('hide this list', 'accessnyc-program-detail')}}
+        <span class="hidden screen-tablet:inline" aria-hidden="true">-</span> {{__('hide this list', 'accessnyc-program-detail')}}
       </span>
       <span class="c-accordion__toggle-inactive">
-        <span class="hidden screen-tablet:inline">+</span> {{__('show this list', 'accessnyc-program-detail')}}
+        <span class="hidden screen-tablet:inline" aria-hidden="true">+</span> {{__('show this list', 'accessnyc-program-detail')}}
       </span>
     </a>
   </header>
 
-  <div id="{{ this.id }}__body" class="c-accordion__body text-font-size-small screen-tablet:text-font-size-normal print:active hidden:overflow animated {% if this.active %}active{% else %}inactive{% endif %}">
+  <div id="{{ this.id }}__body" class="c-accordion__body text-font-size-small screen-tablet:text-font-size-normal print:active hidden:overflow animated {% if this.active %}active{% else %}inactive{% endif %}" aria-hidden="{% if this.active %}false{% else %}true{% endif %}">
     <div class="c-accordion__padding">
       {{ this.body }}
 

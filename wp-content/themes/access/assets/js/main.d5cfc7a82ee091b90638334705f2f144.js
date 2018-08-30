@@ -16005,6 +16005,9 @@ StaticMap = function () {
     /** @private {?string} URL to which image links. */
     this._link = (0, _jquery2.default)(el).data('link') || null;
 
+    /** @type {string} The alt description for the map image */
+    this._alt = (0, _jquery2.default)(el).data('alt') || null;
+
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
   }
@@ -16076,15 +16079,19 @@ StaticMap = function () {
       img.onload = function () {
         (0, _jquery2.default)(_this2._el).empty;
         var $img = _this2._link ?
-        (0, _jquery2.default)('<a href="' + _this2._link + '" target="_blank" class="block"></a>').
+        (0, _jquery2.default)('<a href="' + _this2._link + '"></a>').
         append(img) : (0, _jquery2.default)(img);
+        $img.attr('target', '_blank');
+        $img.attr('itemprop', 'hasMap');
+        $img.addClass('block');
         (0, _jquery2.default)(_this2._el).html($img);
       };
 
       img.src = 'https://maps.googleapis.com/maps/api/staticmap?' + ('' +
       _jquery2.default.param(parameters));
 
-      (0, _jquery2.default)(img).addClass('block');
+      (0, _jquery2.default)(img).addClass('block animated fadeIn');
+      (0, _jquery2.default)(img).attr('alt', this._alt);
 
       return this;
     } }]);return StaticMap;}();exports.default =
@@ -16915,4 +16922,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.7575b26bab4b93a3eafa9c8553742d3b.js.map
+//# sourceMappingURL=main.d5cfc7a82ee091b90638334705f2f144.js.map
