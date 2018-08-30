@@ -76,6 +76,6 @@ foreach ($categories as $category) {
   }
 }
 
-$templates = array( 'locations.twig' );
+$templates = array('locations/locations.twig');
 
 Timber::render( $templates, $context );
