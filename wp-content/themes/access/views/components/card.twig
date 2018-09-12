@@ -1,3 +1,4 @@
+
 <article class="c-card">
   <div class="c-card__icon">
     {% include 'partials/category-icon.twig' %}
@@ -14,7 +15,7 @@
       <p class="hide-for-print"><a href="{{ post.get_permalink }}">{{__('Learn more', 'accessnyctheme')}} <span class="sr-only">: {{ post.program_name }}</span></a></p>
       {% if show_apply %}
       <p class="hide-for-print">
-        <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=how-to-apply">{{__('Apply', 'accessnyc-results')}}</a>
+        <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}{% if "how-to-apply" in post.show_sections %}?step=how-to-apply{% endif %}">{{__('Apply', 'accessnyc-results')}}</a>
       </p>
       {% endif %}
     </div>
