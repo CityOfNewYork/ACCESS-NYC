@@ -13322,7 +13322,9 @@ OfficeLocation = function () {
     this.type = obj.type || '';
 
     /** {Boolean} If this is a government office. */
-    this.isGovtOffice = _utility2.default.localize('GOVERNMENT_OFFICE') === this.type;
+    // We won't need to localize this until we translate locations - DH
+    // this.isGovtOffice = Utility.localize('GOVERNMENT_OFFICE') === this.type;
+    this.isGovtOffice = 'Government Office' === this.type;
 
     /** {object} The office location. */
     this.address = {
@@ -16922,4 +16924,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.d5cfc7a82ee091b90638334705f2f144.js.map
+//# sourceMappingURL=main.2205f78ef828f886670c5bf0c8e3479f.js.map
