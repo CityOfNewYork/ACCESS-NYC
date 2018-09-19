@@ -42,12 +42,11 @@
         <section class="mb-3 hidden screen-desktop:block">
           <a class="btn btn-primary btn-next w-full rounded-t-none print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap">{{__('Get directions', 'accessnyc-locations')}}</a>
         </section>
-
-        <section class="hidden screen-desktop:block">
-          <a class="btn btn-secondary btn-previous w-full print:hidden js-location-back" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
+        {# <section class="hidden screen-desktop:block">
+          <a class="btn btn-secondary btn-previous w-full print:hidden" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
             {{__('Back to map', 'accessnyc-locations')}}
           </a>
-        </section>
+        </section> #}
       </aside>
 
       <article>
@@ -55,8 +54,9 @@
           {% if post.get_field('programs')|length > 0 %}
           <p class="mb-0">{% spaceless %}
             {{__('This location can help you with:', 'accessnyc-locations')}}
+
             {% for program in post.get_field('programs') %}
-              {{ program.plain_language_program_name }}{% if loop.last %}.{% else %},{% endif %}
+              {{ program.name }}{% if loop.last %}.{% else %},{% endif %}
             {% endfor %}
           {% endspaceless %}</p>
           {% endif %}
@@ -115,15 +115,22 @@
           <h3>{{ __('Programs at this location', 'accessnyc-locations')}}</h3>
 
           {% for program in post.get_field('programs') %}
-            {% set body = '<p class="text-color-blue">' ~ program.name ~ ' | ' ~ program.government_agency ~ '</p>' ~ '<p>' ~ program.program_description ~ '</p>' %}
+            {% set header = program.plain_language_program_name ~ '<em class="block font-normal">' ~ program.name ~ '</em>' %}
+            {% set body = '<p class="text-color-blue">' ~ program.government_agency ~ '</p>' ~ '<p>' ~ program.program_description ~ '</p>' %}
+
             {% if program.how_to_apply_or_enroll_in_person %}
               {% set body = body ~ '<h4>' ~ __('Apply in person', 'accessnyc-locations') ~ '</h4>' ~ '<p>' ~ program.how_to_apply_or_enroll_in_person ~ '</p>' %}
             {% endif %}
+
+            {% if program.program_acronym %}
+              {% set acronym = ' (' ~ program.program_acronym ~ ')' %}
+            {% endif %}
+
             {% include 'components/accordion.twig' with {
               this: {
                 id: program.slug,
                 active: (loop.index == 1) ? true : false,
-                header: program.plain_language_program_name,
+                header: header,
                 body: body,
                 cta: {
                   href: program.get_permalink ~ '?step=how-to-apply',
@@ -146,9 +153,9 @@
         {% endif %}
       </p>
 
-      <a class="btn btn-secondary btn-previous w-full print:hidden screen-desktop:hidden js-location-back" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
+      {# <a class="btn btn-secondary btn-previous w-full print:hidden screen-desktop:hidden js-location-back" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
         {{__('Back to map', 'accessnyc-locations')}}
-      </a>
+      </a> #}
     </footer>
   </main>
   {% endfor %}

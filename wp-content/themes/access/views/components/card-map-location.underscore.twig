@@ -18,7 +18,7 @@
     <p class="text-font-size-small text-color-grey-mid m-0" itemprop="description">
       <% print(_.map(location.programs, function(program) { return localize(program) }).join(', ')) %>
     </p>
-    <a href="<%= location.link %>" class="link-more text-font-size-small font-bold" itemprop="url">{{__('more about this location', 'accessnyc-locations')}}</a>
+    <a href="<%= location.link %>" class="link-more text-font-size-small font-bold" itemprop="url" target="_blank">{{__('more about this location', 'accessnyc-locations')}}</a>
   </div>
 </li>
 <% }); %>

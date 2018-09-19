@@ -67,6 +67,42 @@ Utility.getUrlParameter = function (name, queryString) {
 };
 
 /**
+ * A markdown parsing method. It relies on the dist/markdown.min.js script
+ * which is a browser compatible version of markdown-js
+ * @url https://github.com/evilstreak/markdown-js
+ * @return {Object} The iteration over the markdown DOM parents
+ */
+Utility.parseMarkdown = function () {
+  if (typeof markdown === 'undefined') return false;
+
+  var mds = document.querySelectorAll(Utility.SELECTORS.parseMarkdown);
+
+  var _loop = function _loop(i) {
+    var element = mds[i];
+    fetch(element.dataset.jsMarkdown).then(function (response) {
+      if (response.ok) return response.text();else {
+        element.innerHTML = '';
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir(response);
+      }
+    }).catch(function (error) {
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir(error);
+    }).then(function (data) {
+      try {
+        element.classList.toggle('animated');
+        element.classList.toggle('fadeIn');
+        element.innerHTML = markdown.toHTML(data);
+      } catch (error) {}
+    });
+  };
+
+  for (var i = 0; i < mds.length; i++) {
+    _loop(i);
+  }
+};
+
+/**
  * Application parameters
  * @type {Object}
  */
@@ -75,7 +111,17 @@ Utility.PARAMS = {
 };
 
 /**
+ * Selectors for the Utility module
+ * @type {Object}
+ */
+Utility.SELECTORS = {
+  parseMarkdown: '[data-js="markdown"]'
+};
+
+/**
  * The Simple Toggle class
+ * This uses the .matches() method which will require a polyfill for IE
+ * https://polyfill.io/v2/docs/features/#Element_prototype_matches
  * @class
  */
 
@@ -121,8 +167,7 @@ var Toggle = function () {
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
-        var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-        if (!event.target[method](_this._settings.selector)) return;
+        if (!event.target.matches(_this._settings.selector)) return;
 
         // Click event logging
         // eslint-disable-next-line no-console
@@ -223,7 +268,7 @@ Toggle.activeClass = 'active';
 var Accordion =
 /**
  * @constructor
- * @return {object}   The class
+ * @return {object} The class
  */
 function Accordion() {
   classCallCheck(this, Accordion);
@@ -33654,4 +33699,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.6a058db0c696bb3e04bd3a40a0a384dd.js.map
+//# sourceMappingURL=main-field.b1032b50e52cf9568e4ce3c592a5c269.js.map
