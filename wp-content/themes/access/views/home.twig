@@ -6,18 +6,22 @@
 
 {% block content %}
   <main class="bg-color-white" id="content">
-
     <div class="o-banner">
       <div class="o-banner__inner">
         <h1 class="o-banner__title">{{ post.hero_headline }}</h1>
+
         <div class="o-banner__touts">
           {% for tout in post.get_field('hero_touts') %}
           <div class="o-banner__tout">
             {% if tout.title %}<h2 class="o-banner__tout-title type-h3">{{ tout.title }}</h2>{% endif %}
+
             {% if tout.body %}<div class="o-banner__tout-body">{{ tout.body }}</div>{% endif %}
-            {% if tout.link_text %}<div class="o-banner__tout-cta">
-              <a class="btn btn-{{ tout.link_type}}{% if tout.link_arrow %} btn-next{% endif %}" href="{{ tout.link_url}}">{{ tout.link_text}}</a>
-            </div>{% endif %}
+
+            {% if tout.link_text %}
+            <div class="o-banner__tout-cta">
+              <a class="btn btn-{{ tout.link_type }}{% if tout.link_arrow %} btn-next{% endif %}" href="{{ tout.link_url }}" {% if tout.link_new_window %}target="_blank"{% endif %} {% if tout.link_relationship %}rel="{{ tout.link_relationship }}"{% endif %}>{{ tout.link_text }}</a>
+            </div>
+            {% endif %}
           </div>
           {% endfor %}
         </div>
@@ -26,15 +30,16 @@
 
     <div class="layout--home-body">
       <div>
-
         {% if homepage_touts %}
         <div class="pb-4 mx-3">
           <h2 class="type-h5 divider m-0 text-color-grey-mid">{{ post.hero_touts_heading }}</h2>
+
           <div class="screen-tablet:layout--columns">
             {% for tout in homepage_touts %}
             <div class="c-card px-0 screen-tablet:px-2 screen-tablet:py-3">
               <div class="c-card__body">
                 {% if tout.tout_title %}<h3 class="c-card__title mb-3 text-color-blue-dark">{{ tout.tout_title }}</h3>{% endif %}
+
                 {% if tout.link_text %}
                 <div class="c-card__summary">
                   <a href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ tout.link_text }}</a>
@@ -49,7 +54,9 @@
 
         <div class="bg-color-grey-lightest px-3 py-4 mb-3 screen-tablet:mx-3">
           <h2 class="type-h3 m-0 text-color-blue-dark">{{ post.featured_programs_heading }}</h2>
+
           {% if post.featured_programs_subheading | length %}<h3 class="type-supplemental text-color-grey-mid">{{ post.featured_programs_subheading }}</h3>{% endif %}
+
           <div class="layout--gutter screen-tablet:layout--columns-gutter">
             {% include 'partials/post-teaser.twig' with {'short_post': true, 'posts': post.get_field('featured_programs')} %}
           </div>
@@ -62,6 +69,7 @@
               <use xlink:href="#icon-{{ homepage_alert.alert_icon }}"></use>
             </svg>
           </div>
+
           <div class="c-alert-box__body">
             {{ homepage_alert.alert_content }}
           </div>
@@ -71,7 +79,8 @@
         <footer class="py-2 mx-3">
           {% if post.contact_us_cta and post.contact_us_link %}
           <h2 class="type-h4">{{ post.contact_us_heading }}</h2>
-          <a class="btn btn-primary" href="{{ post.contact_us_link }}">
+
+          <a class="btn btn-primary" href="{{ post.contact_us_link }}" {% if post.contact_us_new_window %}target="_blank"{% endif %} {% if post.contact_us_relationship %}rel="{{ post.contact_us_relationship }}"{% endif %}>
             <svg class="icon icon-contact">
               <use xlink:href="#icon-contact"></use>
             </svg> {{ post.contact_us_cta }}
@@ -80,7 +89,6 @@
         </footer>
 
       </div>
-
     </div>
   </main>
 {% endblock %}
