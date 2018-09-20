@@ -13146,8 +13146,13 @@ var _filter = require('components/filter/filter.common');var _filter2 = _interop
     window.onload = window.print;
   }
 
-  // Add rel attribute to new window links.
-  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+  // Add noopener attribute to new window links if it isn't there.
+  $('a[target="_blank"]').each(function (i, el) {
+    var rel = $(el).attr('rel');
+    if (rel.indexOf('noopener') == -1) {
+      $(el).attr('rel', rel + ' noopener');
+    }
+  });
 
   // Enable environment warnings
   $(window).on('load', function () {return _utility2.default.warnings();});
@@ -17014,4 +17019,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.5bad413fd1798c35e014299121772b4b.js.map
+//# sourceMappingURL=main.f2fc7da5668eaa8aacca5558962269b7.js.map

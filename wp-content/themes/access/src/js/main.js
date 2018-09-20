@@ -237,8 +237,13 @@ import Filter from 'components/filter/filter.common';
     window.onload = window.print;
   }
 
-  // Add rel attribute to new window links.
-  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+  // Add noopener attribute to new window links if it isn't there.
+  $('a[target="_blank"]').each((i, el) => {
+    let rel = $(el).attr('rel');
+    if (rel.indexOf('noopener') == -1) {
+      $(el).attr('rel', `${rel} noopener`);
+    }
+  });
 
   // Enable environment warnings
   $(window).on('load', () => Utility.warnings());
