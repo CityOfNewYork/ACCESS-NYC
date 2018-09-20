@@ -1,9 +1,9 @@
 {% if cat != '' %}
   {% for post in posts if cat in post.terms('category') %}
-    {% include 'components/card.twig' %}
+    {% include 'components/card.twig' with {'post': post, 'language_code': language_code, 'short_post': short_post} only %}
   {% endfor %}
 {% else %}
   {% for post in posts %}
-    {% include 'components/card.twig' %}
+    {% include 'components/card.twig' with {'post': post, 'language_code': language_code, 'short_post': short_post} only %}
   {% endfor %}
 {% endif %}

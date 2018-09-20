@@ -80,7 +80,7 @@
 
           <div class="layout--gutter p-2 bg-color-grey-lightest">
             {% for post in selectedPrograms %}
-              {% include 'components/card.twig' with {'show_apply': true } %}
+              {% include 'components/card.twig' with {'post': post, 'language_code': language_code, 'show_apply': true, 'target_blank': true} only %}
             {% endfor %}
           </div>
         </div>
@@ -98,7 +98,7 @@
 
           <div class="layout--gutter p-2 bg-color-grey-lightest">
             {% for post in additionalPrograms %}
-              {% include 'components/card.twig' with {'show_apply': true } %}
+              {% include 'components/card.twig' with {'post': post, 'language_code': language_code, 'show_apply': true, 'target_blank': true} only %}
             {% endfor %}
           </div>
         </div>
