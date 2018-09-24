@@ -1,17 +1,13 @@
 {
-    "key": "group_58912d06a15df",
-    "title": "Homepage Tout Fields (Spanish)",
+    "key": "group_5ba91cc8c406e",
+    "title": "Homepage Tout Fields (Chinese - Traditional)",
     "fields": [
         {
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "key": "field_58912d06dc779",
+            "key": "field_5ba91cc8e14cb",
             "label": "Tout Title",
             "name": "tout_title",
             "type": "text",
+            "value": null,
             "instructions": "This is the title visible to the user.",
             "required": 0,
             "conditional_logic": 0,
@@ -19,18 +15,19 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            }
-        },
-        {
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": "",
-            "key": "field_58912d06dc799",
+            "append": ""
+        },
+        {
+            "key": "field_5ba91cc8e15a2",
             "label": "Link Text",
             "name": "link_text",
             "type": "text",
+            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -38,15 +35,19 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            }
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
-            "default_value": "",
-            "placeholder": "",
-            "key": "field_58912d06dc7b3",
+            "key": "field_5ba91cc8e167d",
             "label": "Link URL",
             "name": "link_url",
             "type": "url",
+            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -54,26 +55,49 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            }
+            },
+            "default_value": "",
+            "placeholder": ""
         },
         {
-            "default_value": 0,
-            "message": "Open link in new window?",
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "key": "field_58912d06dc7cd",
+            "key": "field_5ba91cc8e176b",
             "label": "New Window",
             "name": "link_new_window",
             "type": "true_false",
-            "instructions": "",
+            "value": null,
+            "instructions": "Wether to open the link in a new window or not.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
-            }
+            },
+            "message": "True \/ False",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5ba91cc8e1840",
+            "label": "Relationship",
+            "name": "link_relationship",
+            "type": "text",
+            "value": null,
+            "instructions": "Usually set to \"noreferrer noopener\" when \"New Window\" is true.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -109,5 +133,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1487190150
+    "modified": 1537809664
 }

@@ -1,9 +1,9 @@
 {
-    "key": "group_5a2eb26c07a1e",
-    "title": "Homepage Fields (French)",
+    "key": "group_5ba90d1c61d21",
+    "title": "Homepage Fields (Russian)",
     "fields": [
         {
-            "key": "field_5a2eb26c16517",
+            "key": "field_5ba90d1c8fd37",
             "label": "Hero Headline",
             "name": "hero_headline",
             "type": "text",
@@ -23,7 +23,7 @@
             "append": ""
         },
         {
-            "key": "field_5a2eb26c1654a",
+            "key": "field_5ba90d1c8fe03",
             "label": "Hero Touts Heading",
             "name": "hero_touts_heading",
             "type": "text",
@@ -43,7 +43,7 @@
             "append": ""
         },
         {
-            "key": "field_5a2eb26c16578",
+            "key": "field_5ba90d1c8fecb",
             "label": "Hero Touts",
             "name": "hero_touts",
             "type": "repeater",
@@ -63,7 +63,7 @@
             "collapsed": "",
             "sub_fields": [
                 {
-                    "key": "field_5a2eb26c23750",
+                    "key": "field_5ba90d1c9a968",
                     "label": "Title",
                     "name": "title",
                     "type": "textarea",
@@ -83,7 +83,7 @@
                     "rows": ""
                 },
                 {
-                    "key": "field_5a2eb26c23783",
+                    "key": "field_5ba90d1c9aa48",
                     "label": "Body",
                     "name": "body",
                     "type": "wysiwyg",
@@ -92,18 +92,18 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     },
                     "tabs": "all",
-                    "toolbar": "full",
+                    "toolbar": "basic",
                     "media_upload": 0,
                     "default_value": "",
                     "delay": 0
                 },
                 {
-                    "key": "field_5a2eb26c237b3",
+                    "key": "field_5ba90d1c9ab50",
                     "label": "Link Text",
                     "name": "link_text",
                     "type": "textarea",
@@ -123,7 +123,7 @@
                     "rows": ""
                 },
                 {
-                    "key": "field_5a2eb26c2383d",
+                    "key": "field_5ba90d1c9ac38",
                     "label": "Link URL",
                     "name": "link_url",
                     "type": "url",
@@ -140,7 +140,7 @@
                     "placeholder": ""
                 },
                 {
-                    "key": "field_5a2eb26c238a1",
+                    "key": "field_5ba90d1c9ad18",
                     "label": "Link Type",
                     "name": "link_type",
                     "type": "select",
@@ -153,20 +153,20 @@
                         "class": "",
                         "id": ""
                     },
-                    "multiple": 0,
-                    "allow_null": 0,
                     "choices": {
                         "secondary": "Navigational",
                         "primary": "Functional"
                     },
                     "default_value": [],
+                    "allow_null": 0,
+                    "multiple": 0,
                     "ui": 0,
                     "ajax": 0,
-                    "placeholder": "",
-                    "return_format": "value"
+                    "return_format": "value",
+                    "placeholder": ""
                 },
                 {
-                    "key": "field_5a2eb26c2393e",
+                    "key": "field_5ba90d1c9ae0e",
                     "label": "Display link arrow?",
                     "name": "link_arrow",
                     "type": "true_false",
@@ -184,11 +184,51 @@
                     "ui": 0,
                     "ui_on_text": "",
                     "ui_off_text": ""
+                },
+                {
+                    "key": "field_5ba90d1c9af20",
+                    "label": "New Window",
+                    "name": "link_new_window",
+                    "type": "true_false",
+                    "value": null,
+                    "instructions": "Wether to open the link in a new window or not.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "True \/ False",
+                    "default_value": 0,
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_5ba90d1c9b06d",
+                    "label": "Relationship",
+                    "name": "link_relationship",
+                    "type": "text",
+                    "value": null,
+                    "instructions": "Usually set to \"noreferrer noopener\" when opening in new window",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
                 }
             ]
         },
         {
-            "key": "field_5a2eb26c165a5",
+            "key": "field_5ba90d1c8ffad",
             "label": "Featured Programs Heading",
             "name": "featured_programs_heading",
             "type": "text",
@@ -208,7 +248,7 @@
             "append": ""
         },
         {
-            "key": "field_5a2eb26c165d3",
+            "key": "field_5ba90d1c90074",
             "label": "Featured Programs Subheading",
             "name": "featured_programs_subheading",
             "type": "text",
@@ -228,7 +268,7 @@
             "append": ""
         },
         {
-            "key": "field_5a2eb26c16600",
+            "key": "field_5ba90d1c9013c",
             "label": "Featured Programs",
             "name": "featured_programs",
             "type": "relationship",
@@ -256,7 +296,7 @@
             "return_format": "object"
         },
         {
-            "key": "field_5a2eb26c1662d",
+            "key": "field_5ba90d1c9021e",
             "label": "Contact Us Heading",
             "name": "contact_us_heading",
             "type": "text",
@@ -276,7 +316,7 @@
             "append": ""
         },
         {
-            "key": "field_5a2eb26c1665d",
+            "key": "field_5ba90d1c902e5",
             "label": "Contact Us CTA",
             "name": "contact_us_cta",
             "type": "text",
@@ -296,7 +336,7 @@
             "append": ""
         },
         {
-            "key": "field_5a2eb26c16718",
+            "key": "field_5ba90d1c903ad",
             "label": "Contact Us Link",
             "name": "contact_us_link",
             "type": "url",
@@ -311,6 +351,46 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_5ba90d1c9049e",
+            "label": "Contact Us New Window",
+            "name": "contact_us_new_window",
+            "type": "true_false",
+            "value": null,
+            "instructions": "Wether to open the link in a new window or not.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "True \/ False",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5ba90d1c9056b",
+            "label": "Contact Us Relationship",
+            "name": "contact_us_relationship",
+            "type": "text",
+            "value": null,
+            "instructions": "Usually set to \"noreferrer noopener\" when opening in new window",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -345,5 +425,6 @@
         "send-trackbacks"
     ],
     "active": 1,
-    "description": ""
+    "description": "",
+    "modified": 1537806510
 }

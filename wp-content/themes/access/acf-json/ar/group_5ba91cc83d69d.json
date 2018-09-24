@@ -1,9 +1,9 @@
 {
-    "key": "group_5a2ffaa5553cc",
-    "title": "Homepage Tout Fields (Bengali)",
+    "key": "group_5ba91cc83d69d",
+    "title": "Homepage Tout Fields (Arabic)",
     "fields": [
         {
-            "key": "field_5a2ffaa564b42",
+            "key": "field_5ba91cc85c3f8",
             "label": "Tout Title",
             "name": "tout_title",
             "type": "text",
@@ -23,7 +23,7 @@
             "append": ""
         },
         {
-            "key": "field_5a2ffaa564b81",
+            "key": "field_5ba91cc85c4c1",
             "label": "Link Text",
             "name": "link_text",
             "type": "text",
@@ -43,7 +43,7 @@
             "append": ""
         },
         {
-            "key": "field_5a2ffaa564bb1",
+            "key": "field_5ba91cc85c588",
             "label": "Link URL",
             "name": "link_url",
             "type": "url",
@@ -60,12 +60,12 @@
             "placeholder": ""
         },
         {
-            "key": "field_5a2ffaa564be0",
+            "key": "field_5ba91cc85c669",
             "label": "New Window",
             "name": "link_new_window",
             "type": "true_false",
             "value": null,
-            "instructions": "",
+            "instructions": "Wether to open the link in a new window or not.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -73,11 +73,31 @@
                 "class": "",
                 "id": ""
             },
+            "message": "True \/ False",
             "default_value": 0,
-            "message": "Open link in new window?",
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5ba91cc85c730",
+            "label": "Relationship",
+            "name": "link_relationship",
+            "type": "text",
+            "value": null,
+            "instructions": "Usually set to \"noreferrer noopener\" when \"New Window\" is true.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -112,5 +132,6 @@
         "send-trackbacks"
     ],
     "active": 1,
-    "description": ""
+    "description": "",
+    "modified": 1537809626
 }
