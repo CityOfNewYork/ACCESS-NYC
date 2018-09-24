@@ -57,9 +57,11 @@
 
           {% if post.featured_programs_subheading | length %}<h3 class="type-supplemental text-color-grey-mid">{{ post.featured_programs_subheading }}</h3>{% endif %}
 
-          <div class="layout--gutter screen-tablet:layout--columns-gutter">
+          <div class="layout--gutter screen-tablet:layout--columns-gutter mb-4">
             {% include 'partials/post-teaser.twig' with {'short_post': true, 'posts': post.get_field('featured_programs')} %}
           </div>
+
+          <a class="btn btn-secondary btn-next" href="{{ urlBase }}/programs">{{__('See all programs', 'accessnyctheme')}}</a>
         </div>
 
         {% if homepage_alert %}
