@@ -40,7 +40,7 @@
           style="height:496px;">
         </div>
         <section class="mb-3 hidden screen-desktop:block">
-          <a class="btn btn-primary btn-next w-full rounded-t-none print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap">{{__('Get directions', 'accessnyc-locations')}}</a>
+          <a class="btn btn-primary btn-next w-full rounded-t-none print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap" data-js="track" data-track-key="Get Directions" data-track-data='[{"DCS.dcsuri": "get-directions"}]'>{{__('Get directions', 'accessnyc-locations')}}</a>
         </section>
         {# <section class="hidden screen-desktop:block">
           <a class="btn btn-secondary btn-previous w-full print:hidden" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
@@ -65,7 +65,7 @@
         <hr class="divider-light" aria-hidden="true">
 
         <section class="mb-3 screen-desktop:hidden">
-          <a class="btn btn-primary btn-next w-full print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap">{{__('Get directions', 'accessnyc-locations')}}</a>
+          <a class="btn btn-primary btn-next w-full print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap" data-js="track" data-track-key="Get Directions" data-track-data='[{"DCS.dcsuri": "get-directions"}]'>{{__('Get directions', 'accessnyc-locations')}}</a>
         </section>
 
         <section class="mb-3">

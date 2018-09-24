@@ -51,6 +51,12 @@ class StaticMap {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    /** @type {String} The name of the click event to track on element */
+    this._trackKey = 'Get Directions';
+
+    /** @type {Collections} The data to track */
+    this._trackData = [{'DCS.dcsuri': 'get-directions'}];
   }
 
   /**
@@ -125,6 +131,11 @@ class StaticMap {
       $img.attr('target', '_blank');
       $img.attr('itemprop', 'hasMap');
       $img.addClass('block');
+
+      $img.on('click', (event) => {
+        Utility.track(this._trackKey, this._trackData);
+      });
+
       $(this._el).html($img);
     };
 

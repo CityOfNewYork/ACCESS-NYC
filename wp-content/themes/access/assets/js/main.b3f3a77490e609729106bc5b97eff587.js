@@ -16107,6 +16107,12 @@ StaticMap = function () {
 
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    /** @type {String} The name of the click event to track on element */
+    this._trackKey = 'Get Directions';
+
+    /** @type {Collections} The data to track */
+    this._trackData = [{ 'DCS.dcsuri': 'get-directions' }];
   }
 
   /**
@@ -16181,6 +16187,11 @@ StaticMap = function () {
         $img.attr('target', '_blank');
         $img.attr('itemprop', 'hasMap');
         $img.addClass('block');
+
+        $img.on('click', function (event) {
+          _utility2.default.track(_this2._trackKey, _this2._trackData);
+        });
+
         (0, _jquery2.default)(_this2._el).html($img);
       };
 
@@ -17019,4 +17030,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.f2fc7da5668eaa8aacca5558962269b7.js.map
+//# sourceMappingURL=main.b3f3a77490e609729106bc5b97eff587.js.map
