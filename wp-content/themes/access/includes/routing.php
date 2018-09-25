@@ -1,5 +1,7 @@
 <?php
 
+use nyco\WpOpenDataTransients\Transients as Transients;
+
 /**
  * Routing
  */
@@ -10,6 +12,10 @@ Routes::map('locations', function() {
 });
 
 Routes::map('locations/json', function() {
+  Routes::load('archive-location.php', null, null, 200);
+});
+
+Routes::map('stops/json', function() {
   Routes::load('archive-location.php', null, null, 200);
 });
 
@@ -52,12 +58,29 @@ function api_share_url(WP_REST_Request $request) {
 }
 
 /**
+ * [api_stops description]
+ * @param  WP_REST_Request $request the request of the api
+ * @return object                   the response
+ */
+function api_stops(WP_REST_Request $request) {
+  $response = new WP_REST_Response(Transients\get('subway_stops'));
+  $response->set_status(200);
+
+  return $response;
+}
+
+/**
  * Function hook to initiate routes for the WP JSON Rest API
  */
 function rest_routes() {
   register_rest_route('api/v1', '/shareurl/', array(
     'methods' => 'GET',
     'callback' => 'api_share_url'
+  ));
+
+  register_rest_route('api/v1', '/stops/', array(
+    'methods' => 'GET',
+    'callback' => 'api_stops'
   ));
 }
 

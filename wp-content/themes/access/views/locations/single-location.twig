@@ -42,11 +42,6 @@
         <section class="mb-3 hidden screen-desktop:block">
           <a class="btn btn-primary btn-next w-full rounded-t-none print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap" data-js="track" data-track-key="Get Directions" data-track-data='[{"DCS.dcsuri": "get-directions"}]'>{{__('Get directions', 'accessnyc-locations')}}</a>
         </section>
-        {# <section class="hidden screen-desktop:block">
-          <a class="btn btn-secondary btn-previous w-full print:hidden" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
-            {{__('Back to map', 'accessnyc-locations')}}
-          </a>
-        </section> #}
       </aside>
 
       <article>
@@ -78,6 +73,16 @@
             </span>
             <span itemprop="addressLocality">{{ post.city }}</span> <span itemprop="postalCode">{{ post.zip }}</span>
           </address>
+        </section>
+
+        <section class="mb-3">
+          <h3>{{ __('Nearby Stops', 'accessnyc-locations')}}</h3>
+
+          <div class='c-nearby-stops'
+            data-js='nearby-stops'
+            data-nearby-stops-location='[{{ post.address.lng}}, {{ post.address.lat }}]'
+            data-nearby-stops-amount='3'
+            data-nearby-stops-endpoint='{{ site.url }}/wp-json/api/v1/stops/'></div>
         </section>
 
         {% if post.description %}

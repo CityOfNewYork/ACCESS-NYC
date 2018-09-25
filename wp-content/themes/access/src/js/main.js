@@ -9,6 +9,7 @@ import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
 import Accordion from 'components/accordion/accordion.common';
 import Filter from 'components/filter/filter.common';
+import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 
 (function(window, $) {
   'use strict';
@@ -48,9 +49,10 @@ import Filter from 'components/filter/filter.common';
     $('#search').removeClass('active');
   });
 
-  // Initialize ACCESS NYC Patterns Toggle lib components
+  // Initialize ACCESS NYC Patterns lib components
   new Accordion();
   new Filter();
+  new NearbyStops();
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
