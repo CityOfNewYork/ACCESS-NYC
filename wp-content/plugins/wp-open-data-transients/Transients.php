@@ -24,7 +24,7 @@ class Transients
     $transient = get_transient($name);
 
     if (empty($transient)) {
-      $transient = set($name);
+      $transient = self::set($name);
     }
 
     return $transient;

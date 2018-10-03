@@ -37,7 +37,7 @@
     "nyco/wp-assets": "0.0.5",
     "nyco/wp-config": "0.0.5",
     "mustangostang/spyc": "^0.6.2",
-    "nyco/wp-open-data-transients": "^0.0.2"
+    "nyco/wp-open-data-transients": "^0.0.3"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.3"
