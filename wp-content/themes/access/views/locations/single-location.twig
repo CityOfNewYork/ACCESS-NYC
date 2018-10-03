@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  {% for post in posts %}
+  {# {% for post in posts %} #}
   {% set isGovtOffice = __('Government Office', 'accessnyc-locations')|trim == post.type %}
   <main id="content" class="main-content color-light-background" itemscope itemtype="https://schema.org/{% if isGovtOffice %}GovernmentOffice{% else %}Organization{% endif %}">
     <section>
@@ -32,7 +32,7 @@
     <section class="usa-grid screen-desktop:layout--sidebar-gutter">
       <aside class="hidden screen-desktop:block">
         <div class="bg-color-blue-light border border-color-grey-light overflow-hidden flex items-center print:hidden js-static-map"
-          data-marker="{{ post.address.lat}},{{ post.address.lng }}"
+          data-marker="{{ post.address.lat }},{{ post.address.lng }}"
           data-link="https://www.google.com/maps/dir//{{ post.address.address|url_encode }}"
           {% if isGovtOffice %}data-govt-office="true"{% endif %}
           data-zoom="13"
@@ -78,11 +78,7 @@
         <section class="mb-3">
           <h3>{{ __('Nearby Stops', 'accessnyc-locations')}}</h3>
 
-          <div class='c-nearby-stops'
-            data-js='nearby-stops'
-            data-nearby-stops-location='[{{ post.address.lng}}, {{ post.address.lat }}]'
-            data-nearby-stops-amount='3'
-            data-nearby-stops-endpoint='{{ site.url }}/wp-json/api/v1/stops/'></div>
+          {% include 'components/nearby-stops.twig' with {stops: post.nearby_stops} only %}
         </section>
 
         {% if post.description %}
@@ -163,5 +159,5 @@
       </a> #}
     </footer>
   </main>
-  {% endfor %}
+  {# {% endfor %} #}
 {% endblock %}

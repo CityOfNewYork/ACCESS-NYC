@@ -5,20 +5,6 @@
   <!-- Scan only PHP files -->
   <arg name="extensions" value="php"/>
 
-  <!-- Files to scan -->
-  <file>wp-content/themes/access/includes/</file>
-
-  <!-- Ignore WordPress, Composer dependencies, and specific libraries -->
-  <exclude-pattern>vendor/</exclude-pattern>
-  <exclude-pattern>wp-admin/</exclude-pattern>
-  <exclude-pattern>wp-includes/</exclude-pattern>
-  <exclude-pattern>wp-content/languages/</exclude-pattern>
-  <exclude-pattern>wp-content/plugins/</exclude-pattern>
-  <exclude-pattern>wp-content/uploads/</exclude-pattern>
-  <exclude-pattern>wp-content/mu-plugins/sendmenyc/third-party/</exclude-pattern>
-  <exclude-pattern>wp-content/mu-plugins/wp-config/</exclude-pattern>
-  <exclude-pattern>wp-content/themes/access/node_modules/</exclude-pattern>
-
   <!-- Show colors in console -->
   <arg value="-colors"/>
 

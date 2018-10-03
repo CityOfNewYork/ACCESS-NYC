@@ -1,7 +1,7 @@
 <input type="text" name="<?= $args['id'] ?>" id="<?= $args['id'] ?>" value="<?= get_option($args['id'], '') ?>" placeholder="<?= $args['placeholder'] ?>"/>
 
 <p class="description">
-  Your Application's Token ID is created/managed on the Open Data portal.
+  Your Application's Token ID should be created and managed on the Open Data portal.
 
   <? if ($_ENV[strtoupper($args['id'])]) : ?>
     Environment currently set to <code><?= $_ENV[strtoupper($args['id'])] ?></code>.

@@ -14,7 +14,9 @@
 function enqueue_script($name, $cors = false) {
   require_once ABSPATH . '/vendor/nyco/wp-assets/dist/script.php';
   $script = Nyco\Enqueue\script($name, '.min');
-  if ($cors) add_crossorigin_attr($name);
+  if ($cors) {
+    add_crossorigin_attr($name);
+  }
 }
 
 /**
@@ -23,9 +25,10 @@ function enqueue_script($name, $cors = false) {
  */
 function add_crossorigin_attr($name) {
   $name = end(explode('/', $name));
-  add_filter('script_loader_tag', function($tag, $handle) use ($name) {
-    if ($name === $handle)
+  add_filter('script_loader_tag', function ($tag, $handle) use ($name) {
+    if ($name === $handle) {
       return str_replace(' src', ' crossorigin="anonymous" src', $tag);
+    }
   }, 10, 2);
 }
 
@@ -33,15 +36,14 @@ function add_crossorigin_attr($name) {
  * Disable the oEmbed script
  * @return null
  */
-function deregister_wp_embed() {
+add_action('wp_print_scripts', function () {
   wp_deregister_script('wp-embed');
-} add_action('wp_print_scripts', 'deregister_wp_embed', 100);
+}, 100);
 
 /**
  * Disable the WP Security Questions script
  * @return null
  */
-function deregister_wp_security_questions() {
+add_action('wp_print_scripts', function () {
   wp_deregister_script('wsq-frontend.js');
-} add_action('wp_print_scripts', 'deregister_wp_security_questions', 100);
-
+}, 100);

@@ -2773,7 +2773,7 @@ function forEach(collection, iteratee) {
 }
 
 /**
- * The Accordion module
+ * The NearbyStops Module
  * @class
  */
 
@@ -2833,24 +2833,25 @@ var NearbyStops = function () {
       var geo = [];
       var distances = [];
 
-      // 2. Compare lat and lon of current location with list of stops
+      // 1. Compare lat and lon of current location with list of stops
       for (var i = 0; i < stops.length; i++) {
         geo = stops[i][this._key('ODATA_GEO')][this._key('ODATA_COOR')];
+        geo = geo.reverse();
         distances.push({
-          'distance': this._calcDistance(loc[0], loc[1], geo[0], geo[1]),
+          'distance': this._equirectangular(loc[0], loc[1], geo[0], geo[1]),
           'stop': i // index of stop in the data
         });
       }
 
-      // Sort the distances shortest to longest
+      // 2. Sort the distances shortest to longest
       distances.sort(function (a, b) {
-        return a.distance - b.distance;
+        return a.distance < b.distance ? -1 : 1;
       });
       distances = distances.slice(0, amount);
 
       // 3. Return the list of closest stops (number based on Amount option)
+      // and replace the stop index with the actual stop data
       for (var x = 0; x < distances.length; x++) {
-        // Replace the stop index with the actual stop data
         distances[x].stop = stops[distances[x].stop];
       }return distances;
     }
@@ -2887,26 +2888,26 @@ var NearbyStops = function () {
     /**
      * Returns distance in miles comparing the latitude and longitude of two
      * points using decimal degrees.
-     * @url https://www.geodatasource.com/developers/javascript
-     * @param  {[type]} lat1 Latitude of point 1 (in decimal degrees)
-     * @param  {[type]} lon1 Longitude of point 1 (in decimal degrees)
-     * @param  {[type]} lat2 Latitude of point 2 (in decimal degrees)
-     * @param  {[type]} lon2 Longitude of point 2 (in decimal degrees)
-     * @return {[type]}      [description]
+     * @param  {float} lat1 Latitude of point 1 (in decimal degrees)
+     * @param  {float} lon1 Longitude of point 1 (in decimal degrees)
+     * @param  {float} lat2 Latitude of point 2 (in decimal degrees)
+     * @param  {float} lon2 Longitude of point 2 (in decimal degrees)
+     * @return {float}      [description]
      */
 
   }, {
-    key: '_calcDistance',
-    value: function _calcDistance(lat1, lon1, lat2, lon2) {
-      var radlat1 = Math.PI * lat1 / 180;
-      var radlat2 = Math.PI * lat2 / 180;
-      var theta = lon1 - lon2;
-      var radtheta = Math.PI * theta / 180;
-      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      dist = Math.acos(dist);
-      dist = dist * 180 / Math.PI;
-      dist = dist * 60 * 1.1515;
-      return dist;
+    key: '_equirectangular',
+    value: function _equirectangular(lat1, lon1, lat2, lon2) {
+      Math.deg2rad = function (deg) {
+        return deg * (Math.PI / 180);
+      };
+      var alpha = Math.abs(lon2) - Math.abs(lon1);
+      var x = Math.deg2rad(alpha) * Math.cos(Math.deg2rad(lat1 + lat2) / 2);
+      var y = Math.deg2rad(lat1 - lat2);
+      var R = 3959; // earth radius in miles;
+      var distance = Math.sqrt(x * x + y * y) * R;
+
+      return distance;
     }
 
     /**
@@ -2920,10 +2921,12 @@ var NearbyStops = function () {
     value: function _assignColors(locations) {
       var line = [];
       var trunk = 'shuttles';
-      // loop through each location that we are going to display
+
+      // Loop through each location that we are going to display
       for (var i = 0; i < locations.length; i++) {
         // assign the line to a variable to lookup in our color dictionary
         line = locations[i].stop[this._key('ODATA_LINE')].split('-');
+
         for (var x = 0; x < NearbyStops.trunks.length; x++) {
           // Look through each color in the color dictionary
           for (var y = 0; y < NearbyStops.trunks[x].LINES.length; y++) {
@@ -2933,6 +2936,7 @@ var NearbyStops = function () {
         } // Add the trunk to the location
         locations[i].trunk = trunk;
       }
+
       return locations;
     }
 
@@ -3044,7 +3048,7 @@ NearbyStops.keys = {
  * @type {Object}
  */
 NearbyStops.templates = {
-  SUBWAY: ['<% _each(stops, function(stop) { %>', '<a class="c-nearby-stops__stop" href="#">', '<% var lines = stop.stop.line.split("-") %>', '<% _each(lines, function(line) { %>', '<% var exp = (line.indexOf("Express") > -1) ? true : false %>', '<% if (exp) line = line.split(" ")[0] %>', '<span class="', 'c-nearby-stops__subway ', 'icon-subway<% if (exp) { %>-express<% } %> ', '<% if (exp) { %>border-<% } else { %>bg-<% } %><%-stop.trunk %>', '">', '<%-line %>', '<% if (exp) { %> <span class="sr-only">Express</span><% } %>', '</span>', '<% }); %>', '<span class="c-nearby-stops__description">', '<%- stop.distance.toString().slice(0, 4) %> Miles, ', '<%- stop.stop.name %>', '</span>', '</a>', '<% }); %>'].join('')
+  SUBWAY: ['<% _each(stops, function(stop) { %>', '<div class="c-nearby-stops__stop">', '<% var lines = stop.stop.line.split("-") %>', '<% _each(lines, function(line) { %>', '<% var exp = (line.indexOf("Express") > -1) ? true : false %>', '<% if (exp) line = line.split(" ")[0] %>', '<span class="', 'c-nearby-stops__subway ', 'icon-subway<% if (exp) { %>-express<% } %> ', '<% if (exp) { %>border-<% } else { %>bg-<% } %><%-stop.trunk %>', '">', '<%-line %>', '<% if (exp) { %> <span class="sr-only">Express</span><% } %>', '</span>', '<% }); %>', '<span class="c-nearby-stops__description">', '<%- stop.distance.toString().slice(0, 3) %> Miles, ', '<%- stop.stop.name %>', '</span>', '</div>', '<% }); %>'].join('')
 };
 
 /**
@@ -15437,7 +15441,7 @@ var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _n
     $('#search').removeClass('active');
   });
 
-  // Initialize ACCESS NYC Patterns Toggle lib components
+  // Initialize ACCESS NYC Patterns lib components
   new _accordion2.default();
   new _filter2.default();
   new _nearbyStops2.default();
@@ -19511,4 +19515,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main.7b3bca58a37902e96a03b25929927b1d.js.map
+//# sourceMappingURL=main.fcb1718a4619f7576ec302259dd1056f.js.map

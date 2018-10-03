@@ -17,7 +17,5 @@ function sanitize($args) {
  * @return [type]       [description]
  */
 function sanitize_transients($args) {
-  // var_dump($args);
   return $args;
 }
-

@@ -1,0 +1,30 @@
+<div class='c-nearby-stops'>
+  {% for stop in stops %}
+    <div class='c-nearby-stops__stop'>
+      {% spaceless %}
+      {% for line in stop.lines %}
+        {% set letter = line %}
+        {% set express = '' %}
+
+        {% if 'Express' in line %}
+          {% set letter = line|split(' ')[0] %}
+          {% set express = '-' ~ line|split(' ')[1]|lower %}
+        {% endif %}
+
+        <span class="c-nearby-stops__subway icon-subway{{ express }} {% if express %}border-{% else %}bg-{% endif %}{{ stop.trunk }}">
+          {{ letter }}
+
+          {% if express %}
+          <span class="sr-only">{{ __('Express', 'accessnyc-locations') }}</span>
+          {% endif %}
+        </span>
+      {% endfor %}
+      <span class="c-nearby-stops__description">
+        {{ stop.distance|slice(0, 3) }} {{ __('Miles', 'accessnyc-locations') }},
+
+        {{ __(stop.stop.name, 'accessnyc-locations') }}
+      </span>
+      {% endspaceless %}
+    </div>
+  {% endfor %}
+</div>
