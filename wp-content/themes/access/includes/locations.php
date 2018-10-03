@@ -108,7 +108,6 @@ class SingleLocation extends TimberPost
    * @return {object}           Same object with colors assigned to each loc
    */
   private function nearby_stops_colors($locations) {
-    $line = [];
     $trunk = 'shuttles';
 
     // Loop through each location that we are going to display
@@ -116,19 +115,20 @@ class SingleLocation extends TimberPost
       // Assign the line to a variable to lookup in our color dictionary
       $location_lines = explode('-', $location['stop'][self::KEYS['ODATA_LINE']]);
 
-      foreach (self::TRUNKS as $trunk) {
-        // Look through each color in the color dictionary
-        foreach ($trunk['LINES'] as $trunk_line) {
-          // Check to see which trunk is associated with our location line
-          if (in_array($trunk_line, $location_lines)) {
-            $location_trunk = $trunk['TRUNK'];
+      foreach ($location_lines as $x => $line) {
+        foreach (self::TRUNKS as $trunk) {
+          // Look through each color in the color dictionary
+          if (in_array($line, $trunk['LINES'])) {
+            $location_lines[$x] = [
+              'line' => $line,
+              'trunk' => $trunk['TRUNK']
+            ];
           }
         }
       }
 
       // Add the trunk to the location
-      $locations[$i]['lines'] = $location_lines;
-      $locations[$i]['trunk'] = $location_trunk;
+      $locations[$i]['trunks'] = $location_lines;
     }
 
     return $locations;

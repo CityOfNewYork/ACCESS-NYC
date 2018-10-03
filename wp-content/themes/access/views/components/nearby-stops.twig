@@ -2,16 +2,16 @@
   {% for stop in stops %}
     <div class='c-nearby-stops__stop'>
       {% spaceless %}
-      {% for line in stop.lines %}
-        {% set letter = line %}
+      {% for trunk in stop.trunks %}
+        {% set letter = trunk.line %}
         {% set express = '' %}
 
-        {% if 'Express' in line %}
-          {% set letter = line|split(' ')[0] %}
-          {% set express = '-' ~ line|split(' ')[1]|lower %}
+        {% if 'Express' in trunk.line %}
+          {% set letter = trunk.line|split(' ')[0] %}
+          {% set express = '-' ~ trunk.line|split(' ')[1]|lower %}
         {% endif %}
 
-        <span class="c-nearby-stops__subway icon-subway{{ express }} {% if express %}border-{% else %}bg-{% endif %}{{ stop.trunk }}">
+        <span class="c-nearby-stops__subway icon-subway{{ express }} {% if express %}border-{% else %}bg-{% endif %}{{ trunk.trunk }}">
           {{ letter }}
 
           {% if express %}
