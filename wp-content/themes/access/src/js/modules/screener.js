@@ -56,6 +56,9 @@ class Screener {
 
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = false;
+
+    /** @private {string} the base string for the screener title. */
+    this._baseTitle = $('title').text();
   }
 
   /**
@@ -454,6 +457,9 @@ class Screener {
       this._renderRecap();
     }
 
+    let stepTitle = $(section).find('[data-js="step-title"]').text();
+    $('title').text(`${stepTitle} - ${this._baseTitle}`);
+
     return this;
   }
 
@@ -795,6 +801,7 @@ class Screener {
    */
   _showError(el, msg) {
     const $error = $(document.createElement('div'));
+    $error.attr('aria-live', 'polite');
     $error.addClass(Screener.CssClass.ERROR_MSG).text(Utility.localize(msg));
     $(el).closest(Screener.Selectors.QUESTION_CONTAINER)
         .addClass(Screener.CssClass.ERROR).prepend($error);
@@ -815,13 +822,13 @@ class Screener {
         $input.attr('type') === 'radio') && !$input.prop('checked')) ||
         (($input.attr('type') !== 'checkbox' ||
         $input.attr('type') !== 'radio') && !$input.val())) {
-      if ($input.attr('data-type')) {
-        this._showError(el,
-          Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]
-        );
-      } else {
-        this._showError(el, Screener.ErrorMessage.REQUIRED);
-      }
+      // if ($input.attr('data-type')) {
+      //   this._showError(el,
+      //     Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]
+      //   );
+      // } else {
+      this._showError(el, Screener.ErrorMessage.REQUIRED);
+      // }
       $input.one('change keyup', () => {
         this._validateRequiredField(el);
       });
@@ -1270,7 +1277,7 @@ Screener.CssClass = {
   RADIO_GROUP: 'js-screener-radio-group',
   REMOVE_PERSON: 'js-remove-person',
   TOGGLE: 'js-screener-toggle',
-  SCREENER_STEP_ACTIVE: 'active',
+  SCREENER_STEP_ACTIVE: 'active animated fadeIn',
   SCREENER_STEP_HIDDEN: 'hidden:overflow',
   STEP: 'js-screener-step',
   SUBMIT: 'js-screener-submit',

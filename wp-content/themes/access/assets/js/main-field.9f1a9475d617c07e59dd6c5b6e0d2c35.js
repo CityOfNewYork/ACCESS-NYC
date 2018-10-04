@@ -31399,6 +31399,9 @@ Screener = function () {
 
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = false;
+
+    /** @private {string} the base string for the screener title. */
+    this._baseTitle = (0, _jquery2.default)('title').text();
   }
 
   /**
@@ -31797,6 +31800,9 @@ Screener = function () {
         this._renderRecap();
       }
 
+      var stepTitle = (0, _jquery2.default)(section).find('[data-js="step-title"]').text();
+      (0, _jquery2.default)('title').text(stepTitle + ' - ' + this._baseTitle);
+
       return this;
     }
 
@@ -32138,6 +32144,7 @@ Screener = function () {
        */ }, { key: '_showError', value: function _showError(
     el, msg) {
       var $error = (0, _jquery2.default)(document.createElement('div'));
+      $error.attr('aria-live', 'polite');
       $error.addClass(Screener.CssClass.ERROR_MSG).text(_utility2.default.localize(msg));
       (0, _jquery2.default)(el).closest(Screener.Selectors.QUESTION_CONTAINER).
       addClass(Screener.CssClass.ERROR).prepend($error);
@@ -32158,13 +32165,13 @@ Screener = function () {
       $input.attr('type') === 'radio') && !$input.prop('checked') ||
       ($input.attr('type') !== 'checkbox' ||
       $input.attr('type') !== 'radio') && !$input.val()) {
-        if ($input.attr('data-type')) {
-          this._showError(el,
-          Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]);
-
-        } else {
-          this._showError(el, Screener.ErrorMessage.REQUIRED);
-        }
+        // if ($input.attr('data-type')) {
+        //   this._showError(el,
+        //     Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]
+        //   );
+        // } else {
+        this._showError(el, Screener.ErrorMessage.REQUIRED);
+        // }
         $input.one('change keyup', function () {
           _this4._validateRequiredField(el);
         });
@@ -32613,7 +32620,7 @@ Screener.CssClass = {
   RADIO_GROUP: 'js-screener-radio-group',
   REMOVE_PERSON: 'js-remove-person',
   TOGGLE: 'js-screener-toggle',
-  SCREENER_STEP_ACTIVE: 'active',
+  SCREENER_STEP_ACTIVE: 'active animated fadeIn',
   SCREENER_STEP_HIDDEN: 'hidden:overflow',
   STEP: 'js-screener-step',
   SUBMIT: 'js-screener-submit',
@@ -33654,4 +33661,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.6a058db0c696bb3e04bd3a40a0a384dd.js.map
+//# sourceMappingURL=main-field.9f1a9475d617c07e59dd6c5b6e0d2c35.js.map

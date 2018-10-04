@@ -33,8 +33,8 @@
 
 <hr class="divider-light">
 
-<div class="c-question">
-  <label class="c-question__label">{{ __('Do any of these apply to them?', 'accessnyc-screener') }}</label>
+<fieldset class="c-question">
+  <legend class="c-question__label">{{ __('Do any of these apply to them?', 'accessnyc-screener') }}</legend>
   <p>{{ __('It’s OK to pick more than one.', 'accessnyc-screener') }}</p>
   <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
     <label class="checkbox">
@@ -66,10 +66,10 @@
       <span class="checkbox__label">{{ __('None of these apply', 'accessnyc-screener') }}</span>
     </label>
   </div>
-</div>
+</fieldset>
 
-<div class="c-question <% if (!person.studentFulltime) { print('hidden') }%>" id="screener-is-person-<%= personIndex %>-full-time-student">
-  <label class="c-question__label">{{ __('Are they a full-time student?', 'accessnyc-screener') }}</label>
+<fieldset class="c-question <% if (!person.studentFulltime) { print('hidden') }%>" id="screener-is-person-<%= personIndex %>-full-time-student">
+  <legend class="c-question__label">{{ __('Are they a full-time student?', 'accessnyc-screener') }}</legend>
   <div class="c-question__container js-screener-radio-group">
     <label class="toggle js-screener-radio-label">
       <input class="sr-only" value="1" type="radio" name="Person[<%= personIndex %>].studentFulltime" data-type="boolean"<% if (person.studentFulltime) { print(' checked') }%>/>
@@ -80,10 +80,10 @@
       <span class="toggle__label">{{ __('No', 'accessnyc-screener') }}</span>
     </label>
   </div>
-</div>
+</fieldset>
 
-<div class="c-question <% if (!person.unemployedWorkedLast18Months) { print('hidden') }%>" id="screener-did-person-<%= personIndex %>-work-last-18-months">
-  <label class="c-question__label">{{ __('Did they work in the last 18 months?', 'accessnyc-screener') }}</label>
+<fieldset class="c-question <% if (!person.unemployedWorkedLast18Months) { print('hidden') }%>" id="screener-did-person-<%= personIndex %>-work-last-18-months">
+  <legend class="c-question__label">{{ __('Did they work in the last 18 months?', 'accessnyc-screener') }}</legend>
   <div class="c-question__container js-screener-radio-group">
     <label class="toggle js-screener-radio-label">
       <input class="sr-only" value="1" type="radio" name="Person[<%= personIndex %>].unemployedWorkedLast18Months" data-type="boolean"<% if (person.unemployedWorkedLast18Months) { print(' checked') }%>/>
@@ -94,12 +94,12 @@
       <span class="toggle__label">{{ __('No', 'accessnyc-screener') }}</span>
     </label>
   </div>
-</div>
+</fieldset>
 
 <hr class="divider-light">
 
-<div class="c-question">
-  <label class="c-question__label">{{ __('Do they receive any of these benefits?', 'accessnyc-screener') }}</label>
+<fieldset class="c-question">
+  <legend class="c-question__label">{{ __('Do they receive any of these benefits?', 'accessnyc-screener') }}</legend>
   <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
     <label class="checkbox">
       <input type="checkbox" name="Person[<%= personIndex %>].benefitsMedicaid" value="1" data-type="boolean"<% if (person.benefitsMedicaid) { print(' checked') }%>>
@@ -114,12 +114,12 @@
       <span class="checkbox__label">{{ __('None of these apply', 'accessnyc-screener') }}</span>
     </label>
   </div>
-</div>
+</fieldset>
 
 <hr class="divider-light">
 
-<div class="c-question">
-  <label class="c-question__label">{{ __('Do they have an income?', 'accessnyc-screener') }}</label>
+<fieldset class="c-question">
+  <legend class="c-question__label">{{ __('Do they have an income?', 'accessnyc-screener') }}</legend>
   <p>{{ __('This includes money from jobs, alimony, investments or gifts.', 'accessnyc-screener') }}</p>
   <div class="c-question__container js-screener-radio-group">
     <label class="toggle js-screener-radio-label">
@@ -142,7 +142,7 @@
       <span class="toggle__label">{{ __('No', 'accessnyc-screener') }}</span>
     </label>
   </div>
-</div>
+</fieldset>
 
 <div class="js-screener-matrix screener-matrix<% if (!person.incomes.length) { print(' hidden') }%>" id="person-<%= personIndex %>-income">
   <% if (person.incomes.length) { _.each(person.incomes, function(item, matrixIndex, list) { %>
@@ -324,12 +324,12 @@
 
 <hr class="divider-light">
 
-<div class="c-question">
-  <label class="c-question__label">{{ __('Do they have any expenses?', 'accessnyc-screener') }}</label>
+<fieldset class="c-question">
+  <legend class="c-question__label">{{ __('Do they have any expenses?', 'accessnyc-screener') }}</legend>
 
   <p>{{ __('This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.', 'accessnyc-screener') }}</p>
 
-  <div class="js-screener-radio-group">
+  <div class="c-question__container js-screener-radio-group">
     <label class="toggle js-screener-radio-label">
       <input class="js-screener-toggle js-add-section sr-only"
         value="1"
@@ -350,7 +350,7 @@
       <span class="toggle__label">{{ __('No', 'accessnyc-screener') }}</span>
     </label>
   </div>
-</div>
+</fieldset>
 
 <div class="js-screener-matrix screener-matrix<% if (!person.expenses.length) { print(' hidden') }%>" id="person-<%= personIndex %>-expense">
   <% if (person.expenses.length) { _.each(person.expenses, function(item, matrixIndex, list) { %>
