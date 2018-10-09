@@ -67,6 +67,42 @@ Utility.getUrlParameter = function (name, queryString) {
 };
 
 /**
+ * A markdown parsing method. It relies on the dist/markdown.min.js script
+ * which is a browser compatible version of markdown-js
+ * @url https://github.com/evilstreak/markdown-js
+ * @return {Object} The iteration over the markdown DOM parents
+ */
+Utility.parseMarkdown = function () {
+  if (typeof markdown === 'undefined') return false;
+
+  var mds = document.querySelectorAll(Utility.SELECTORS.parseMarkdown);
+
+  var _loop = function _loop(i) {
+    var element = mds[i];
+    fetch(element.dataset.jsMarkdown).then(function (response) {
+      if (response.ok) return response.text();else {
+        element.innerHTML = '';
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir(response);
+      }
+    }).catch(function (error) {
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir(error);
+    }).then(function (data) {
+      try {
+        element.classList.toggle('animated');
+        element.classList.toggle('fadeIn');
+        element.innerHTML = markdown.toHTML(data);
+      } catch (error) {}
+    });
+  };
+
+  for (var i = 0; i < mds.length; i++) {
+    _loop(i);
+  }
+};
+
+/**
  * Application parameters
  * @type {Object}
  */
@@ -75,7 +111,17 @@ Utility.PARAMS = {
 };
 
 /**
+ * Selectors for the Utility module
+ * @type {Object}
+ */
+Utility.SELECTORS = {
+  parseMarkdown: '[data-js="markdown"]'
+};
+
+/**
  * The Simple Toggle class
+ * This uses the .matches() method which will require a polyfill for IE
+ * https://polyfill.io/v2/docs/features/#Element_prototype_matches
  * @class
  */
 
@@ -121,8 +167,7 @@ var Toggle = function () {
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
-        var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-        if (!event.target[method](_this._settings.selector)) return;
+        if (!event.target.matches(_this._settings.selector)) return;
 
         // Click event logging
         // eslint-disable-next-line no-console
@@ -223,7 +268,7 @@ Toggle.activeClass = 'active';
 var Accordion =
 /**
  * @constructor
- * @return {object}   The class
+ * @return {object} The class
  */
 function Accordion() {
   classCallCheck(this, Accordion);
@@ -329,6 +374,42 @@ Utility.getUrlParameter = function (name, queryString) {
 };
 
 /**
+ * A markdown parsing method. It relies on the dist/markdown.min.js script
+ * which is a browser compatible version of markdown-js
+ * @url https://github.com/evilstreak/markdown-js
+ * @return {Object} The iteration over the markdown DOM parents
+ */
+Utility.parseMarkdown = function () {
+  if (typeof markdown === 'undefined') return false;
+
+  var mds = document.querySelectorAll(Utility.SELECTORS.parseMarkdown);
+
+  var _loop = function _loop(i) {
+    var element = mds[i];
+    fetch(element.dataset.jsMarkdown).then(function (response) {
+      if (response.ok) return response.text();else {
+        element.innerHTML = '';
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir(response);
+      }
+    }).catch(function (error) {
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir(error);
+    }).then(function (data) {
+      try {
+        element.classList.toggle('animated');
+        element.classList.toggle('fadeIn');
+        element.innerHTML = markdown.toHTML(data);
+      } catch (error) {}
+    });
+  };
+
+  for (var i = 0; i < mds.length; i++) {
+    _loop(i);
+  }
+};
+
+/**
  * Application parameters
  * @type {Object}
  */
@@ -337,7 +418,17 @@ Utility.PARAMS = {
 };
 
 /**
+ * Selectors for the Utility module
+ * @type {Object}
+ */
+Utility.SELECTORS = {
+  parseMarkdown: '[data-js="markdown"]'
+};
+
+/**
  * The Simple Toggle class
+ * This uses the .matches() method which will require a polyfill for IE
+ * https://polyfill.io/v2/docs/features/#Element_prototype_matches
  * @class
  */
 
@@ -383,8 +474,7 @@ var Toggle = function () {
       var body = document.querySelector('body');
 
       body.addEventListener('click', function (event) {
-        var method = !event.target.matches ? 'msMatchesSelector' : 'matches';
-        if (!event.target[method](_this._settings.selector)) return;
+        if (!event.target.matches(_this._settings.selector)) return;
 
         // Click event logging
         // eslint-disable-next-line no-console
@@ -12834,6 +12924,8 @@ var _filter = require('components/filter/filter.common');var _filter2 = _interop
 
   var google = window.google;
 
+  _utility2.default.configErrorTracking();
+
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
   $.get('/wp-content/themes/access/assets/svg/icons.svg', _utility2.default.svgSprites);
@@ -12898,18 +12990,6 @@ var _filter = require('components/filter/filter.common');var _filter2 = _interop
   $('.js-program-search-filter').on('change', 'input', function (e) {
     $(e.currentTarget).closest('form')[0].submit();
   });
-
-  // TODO: This should be refactored to just use the .js-simple-toggle class.
-  // Toggles Program "What you need to bring for eligibility" displays
-  $('.js-program-detail-what-you-need-to-include').removeClass('no-js-open');
-  $('.js-hide-or-show-list').removeClass('no-js-hidden');
-
-  $('.js-hide-or-show-list').click(function (e) {
-    $(e.currentTarget).toggleClass('show hide').
-    closest('.program-detail-what-you-need-to-include').
-    toggleClass('open');
-  });
-  // END TODO
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
@@ -16850,9 +16930,14 @@ Utility.warnings = function () {
   /* eslint-disable no-console, no-debugger */
   if (typeof Webtrends === 'undefined' && Utility.debug())
   console.warn(Utility.CONFIG.MSG_WT_NONCONFIG);
+
   /** Google Analytics */
   if (typeof gtag === 'undefined' && Utility.debug())
   console.warn(Utility.CONFIG.MSG_GA_NONCONFIG);
+
+  /** Rollbar */
+  if (typeof Rollbar === 'undefined' && Utility.debug())
+  console.warn(Utility.CONFIG.MSG_ROLLBAR_NONCONFIG);
   /* eslint-enable no-console, no-debugger */
 };
 
@@ -16891,6 +16976,39 @@ Utility.sessionTimeout = function (time, callback) {
 };
 
 /**
+    * Sends the configuration object to Rollbar, the most important config is
+    * the code_version which maps to the source maps version.
+    * @return {object} The configured Rollbar method
+    */
+Utility.configErrorTracking = function () {
+  if (typeof Rollbar === 'undefined') return false;
+
+  var config = {
+    client: {
+      javascript: {
+        // This is will be true by default if you have enabled this in settings.
+        source_map_enabled: true,
+        // This is transformed via envify in the scripts task.
+        code_version: "3.1.2",
+        // Optionally guess which frames the error was thrown from when the
+        // browser does not provide line and column numbers.
+        guess_uncaught_frames: true } } };
+
+
+
+
+  var rollbarConfigure = Rollbar.configure(config);
+  var msg = 'Configured Rollbar with ' + config.client.javascript.code_version;
+
+  if (Utility.debug()) {
+    console.dir(msg); // eslint-disable-line no-console
+    Rollbar.debug(msg); // eslint-disable-line no-undef
+  }
+
+  return rollbarConfigure;
+};
+
+/**
     * Site constants.
     * @enum {string}
     */
@@ -16907,6 +17025,7 @@ Utility.CONFIG = {
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
   MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
   MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
+  MSG_ROLLBAR_NONCONFIG: 'Rollbar is not configured for this environment',
   IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT' };exports.default =
 
 
@@ -16922,4 +17041,4 @@ module.exports={
 
 },{}]},{},[8])
 
-//# sourceMappingURL=main.d55aed7260e931dc2ccb5d532a9de1f9.js.map
+//# sourceMappingURL=main.dea7be9db70df4d88b7ecacd76e369bb.js.map

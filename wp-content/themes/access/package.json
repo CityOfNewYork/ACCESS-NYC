@@ -1,6 +1,6 @@
 {
   "name": "ACCESS-NYC",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "scripts": {
     "development": "NODE_ENV='development' gulp",
