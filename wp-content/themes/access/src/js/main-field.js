@@ -14,9 +14,9 @@ import Accordion from 'components/accordion/accordion.common';
 (function(window, $) {
   'use strict';
 
-  /* eslint-disable no-undef */
-  require('smoothscroll-polyfill').polyfill();
-  /* eslint-enable no-undef */
+  Utility.configErrorTracking();
+
+  require('smoothscroll-polyfill').polyfill(); // eslint-disable-line no-undef
 
   // Get SVG sprite file.
   $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
