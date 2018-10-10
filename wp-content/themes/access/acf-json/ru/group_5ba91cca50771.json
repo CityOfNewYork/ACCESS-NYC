@@ -85,7 +85,7 @@
             "name": "link_relationship",
             "type": "text",
             "value": null,
-            "instructions": "Usually set to \"noreferrer noopener\" when \"New Window\" is true.",
+            "instructions": "Usually set to \"nofollow noopener\" when \"New Window\" is true and pointed to an external page. If it is an internal page, set to \"noopener\".",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -133,5 +133,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1537811769
+    "modified": 1537811770
 }
