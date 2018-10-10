@@ -15408,6 +15408,8 @@ var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _n
 
   var google = window.google;
 
+  _utility2.default.configErrorTracking();
+
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
   $.get('/wp-content/themes/access/assets/svg/icons.svg', _utility2.default.svgSprites);
@@ -15473,18 +15475,6 @@ var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _n
   $('.js-program-search-filter').on('change', 'input', function (e) {
     $(e.currentTarget).closest('form')[0].submit();
   });
-
-  // TODO: This should be refactored to just use the .js-simple-toggle class.
-  // Toggles Program "What you need to bring for eligibility" displays
-  $('.js-program-detail-what-you-need-to-include').removeClass('no-js-open');
-  $('.js-hide-or-show-list').removeClass('no-js-hidden');
-
-  $('.js-hide-or-show-list').click(function (e) {
-    $(e.currentTarget).toggleClass('show hide').
-    closest('.program-detail-what-you-need-to-include').
-    toggleClass('open');
-  });
-  // END TODO
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
@@ -16918,6 +16908,9 @@ Screener = function () {
 
     /** @private {boolean} Whether the google reCAPTCHA widget has passed. */
     this._recaptchaVerified = false;
+
+    /** @private {string} the base string for the screener title. */
+    this._baseTitle = (0, _jquery2.default)('title').text();
   }
 
   /**
@@ -17316,6 +17309,9 @@ Screener = function () {
         this._renderRecap();
       }
 
+      var stepTitle = (0, _jquery2.default)(section).find('[data-js="step-title"]').text();
+      (0, _jquery2.default)('title').text(stepTitle + ' - ' + this._baseTitle);
+
       return this;
     }
 
@@ -17657,6 +17653,7 @@ Screener = function () {
        */ }, { key: '_showError', value: function _showError(
     el, msg) {
       var $error = (0, _jquery2.default)(document.createElement('div'));
+      $error.attr('aria-live', 'polite');
       $error.addClass(Screener.CssClass.ERROR_MSG).text(_utility2.default.localize(msg));
       (0, _jquery2.default)(el).closest(Screener.Selectors.QUESTION_CONTAINER).
       addClass(Screener.CssClass.ERROR).prepend($error);
@@ -17677,13 +17674,13 @@ Screener = function () {
       $input.attr('type') === 'radio') && !$input.prop('checked') ||
       ($input.attr('type') !== 'checkbox' ||
       $input.attr('type') !== 'radio') && !$input.val()) {
-        if ($input.attr('data-type')) {
-          this._showError(el,
-          Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]);
-
-        } else {
-          this._showError(el, Screener.ErrorMessage.REQUIRED);
-        }
+        // if ($input.attr('data-type')) {
+        //   this._showError(el,
+        //     Screener.ErrorMessage[$input.attr('data-type').toUpperCase()]
+        //   );
+        // } else {
+        this._showError(el, Screener.ErrorMessage.REQUIRED);
+        // }
         $input.one('change keyup', function () {
           _this4._validateRequiredField(el);
         });
@@ -18132,7 +18129,7 @@ Screener.CssClass = {
   RADIO_GROUP: 'js-screener-radio-group',
   REMOVE_PERSON: 'js-remove-person',
   TOGGLE: 'js-screener-toggle',
-  SCREENER_STEP_ACTIVE: 'active',
+  SCREENER_STEP_ACTIVE: 'active animated fadeIn',
   SCREENER_STEP_HIDDEN: 'hidden:overflow',
   STEP: 'js-screener-step',
   SUBMIT: 'js-screener-submit',
@@ -19443,9 +19440,14 @@ Utility.warnings = function () {
   /* eslint-disable no-console, no-debugger */
   if (typeof Webtrends === 'undefined' && Utility.debug())
   console.warn(Utility.CONFIG.MSG_WT_NONCONFIG);
+
   /** Google Analytics */
   if (typeof gtag === 'undefined' && Utility.debug())
   console.warn(Utility.CONFIG.MSG_GA_NONCONFIG);
+
+  /** Rollbar */
+  if (typeof Rollbar === 'undefined' && Utility.debug())
+  console.warn(Utility.CONFIG.MSG_ROLLBAR_NONCONFIG);
   /* eslint-enable no-console, no-debugger */
 };
 
@@ -19484,6 +19486,39 @@ Utility.sessionTimeout = function (time, callback) {
 };
 
 /**
+    * Sends the configuration object to Rollbar, the most important config is
+    * the code_version which maps to the source maps version.
+    * @return {object} The configured Rollbar method
+    */
+Utility.configErrorTracking = function () {
+  if (typeof Rollbar === 'undefined') return false;
+
+  var config = {
+    client: {
+      javascript: {
+        // This is will be true by default if you have enabled this in settings.
+        source_map_enabled: true,
+        // This is transformed via envify in the scripts task.
+        code_version: "3.1.2",
+        // Optionally guess which frames the error was thrown from when the
+        // browser does not provide line and column numbers.
+        guess_uncaught_frames: true } } };
+
+
+
+
+  var rollbarConfigure = Rollbar.configure(config);
+  var msg = 'Configured Rollbar with ' + config.client.javascript.code_version;
+
+  if (Utility.debug()) {
+    console.dir(msg); // eslint-disable-line no-console
+    Rollbar.debug(msg); // eslint-disable-line no-undef
+  }
+
+  return rollbarConfigure;
+};
+
+/**
     * Site constants.
     * @enum {string}
     */
@@ -19500,6 +19535,7 @@ Utility.CONFIG = {
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
   MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
   MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
+  MSG_ROLLBAR_NONCONFIG: 'Rollbar is not configured for this environment',
   IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT' };exports.default =
 
 
@@ -19515,4 +19551,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main.fcb1718a4619f7576ec302259dd1056f.js.map
+//# sourceMappingURL=main.485af636c4bfedaf8ebe1b38e556b27d.js.map
