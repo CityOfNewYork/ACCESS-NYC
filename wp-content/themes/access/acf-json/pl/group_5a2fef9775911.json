@@ -1,63 +1,61 @@
-[
-    {
-        "key": "group_5a2fef9775911",
-        "title": "Program Search Links (Polish)",
-        "fields": [
+{
+    "key": "group_5a2fef9775911",
+    "title": "Program Search Links (Polish)",
+    "fields": [
+        {
+            "key": "field_5a2fef97822f1",
+            "label": "Program Links",
+            "name": "program_links",
+            "type": "post_object",
+            "value": null,
+            "instructions": "Select up to 3 programs you would like to be highlighted in the search modal window.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "programs"
+            ],
+            "taxonomy": [],
+            "allow_null": 0,
+            "multiple": 1,
+            "return_format": "object",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
             {
-                "key": "field_5a2fef97822f1",
-                "label": "Program Links",
-                "name": "program_links",
-                "type": "post_object",
-                "value": null,
-                "instructions": "Select up to 3 programs you would like to be highlighted in the search modal window.",
-                "required": 1,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "post_type": [
-                    "programs"
-                ],
-                "taxonomy": [],
-                "allow_null": 0,
-                "multiple": 1,
-                "return_format": "object",
-                "ui": 1
+                "param": "post_type",
+                "operator": "==",
+                "value": "program_search_links"
             }
-        ],
-        "location": [
-            [
-                {
-                    "param": "post_type",
-                    "operator": "==",
-                    "value": "program_search_links"
-                }
-            ]
-        ],
-        "menu_order": 0,
-        "position": "normal",
-        "style": "default",
-        "label_placement": "top",
-        "instruction_placement": "label",
-        "hide_on_screen": [
-            "permalink",
-            "the_content",
-            "excerpt",
-            "discussion",
-            "comments",
-            "revisions",
-            "slug",
-            "author",
-            "format",
-            "page_attributes",
-            "featured_image",
-            "categories",
-            "tags",
-            "send-trackbacks"
-        ],
-        "active": 1,
-        "description": ""
-    }
-]
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "permalink",
+        "the_content",
+        "excerpt",
+        "discussion",
+        "comments",
+        "revisions",
+        "slug",
+        "author",
+        "format",
+        "page_attributes",
+        "featured_image",
+        "categories",
+        "tags",
+        "send-trackbacks"
+    ],
+    "active": 1,
+    "description": ""
+}

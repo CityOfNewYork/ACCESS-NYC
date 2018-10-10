@@ -1,10 +1,26 @@
 <?php
 
-// Environments
-// require_once(get_template_directory() . '/config/environments.php');
+/**
+ * Dependencies
+ */
 
-// Notifications
-require_once(get_template_directory() . '/includes/notifications.php');
+use Config\Paths as Path;
+
+/** Configuration */
+require_once get_template_directory() . '/includes/_paths.php';
+require_once Path\config('scripts');
+require_once Path\config('styles');
+require_once Path\config('routing');
+
+/** Libraries */
+require_once Path\lib('notifications');
+
+/** Controllers */
+require_once Path\controller('locations');
+
+/**
+ * Initialization
+ */
 
 Notifications\timber();
 
@@ -498,18 +514,3 @@ function share_data($params) {
 function get_env($value) {
   return $_ENV[$value];
 }
-
-/**
- * Scripts Configuration
- */
-require_once(get_template_directory() . '/includes/scripts.php');
-
-/**
- * Styles Configuration
- */
-require_once(get_template_directory() . '/includes/styles.php');
-
-/**
- * Routing Configuration
- */
-require_once(get_template_directory() . '/includes/routing.php');

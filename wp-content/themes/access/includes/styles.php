@@ -15,7 +15,7 @@ function enqueue_language_style($name) {
   $languages = array('ar', 'ko', 'ur', 'zh-hant');
   error_reporting(0);
   $lang = (!in_array(ICL_LANGUAGE_CODE, $languages))
-    ? 'default' : ICL_LANGUAGE_CODE;
+  ? 'default' : ICL_LANGUAGE_CODE;
   error_reporting(WP_DEBUG);
 
   $style = Nyco\Enqueue\style("assets/styles/$name-$lang");
@@ -25,6 +25,6 @@ function enqueue_language_style($name) {
  * Disable the WP Security Questions stylesheet
  * @return null
  */
-function unstyle_wp_security_questions() {
+add_action('wp_print_styles', function () {
   wp_deregister_style('wsq-frontend.css');
-} add_action('wp_print_styles', 'unstyle_wp_security_questions', 100);
+}, 100);

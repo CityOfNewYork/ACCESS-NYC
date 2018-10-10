@@ -1,0 +1,18 @@
+{
+  "count": {{posts|length|json_encode()}},
+  "locations":[
+    {% for location in posts %}
+    {
+      "id": {{ location.ID|json_encode() }},
+      "title": {{ location.post_title|trim|json_encode() }},
+      "programs": [{{ location.program_uids|join(',') }}],
+      "address": {
+        "street": {{ location.address.address|json_encode() }},
+        "lat": {{ location.address.lat|json_encode() }},
+        "lng": {{ location.address.lng|json_encode() }}},
+        "type": {{ location.type|json_encode() }},
+        "link": {{ location.link|json_encode() }}
+      }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}

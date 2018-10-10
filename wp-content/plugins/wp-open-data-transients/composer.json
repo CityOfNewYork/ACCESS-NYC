@@ -1,0 +1,39 @@
+{
+  "name": "nyco/wp-open-data-transients",
+  "version": "0.0.3",
+  "type": "wordpress-plugin",
+  "license": "GPL-3.0+",
+  "description": "Interface for saving Open Data endpoints as WordPress Transients.",
+  "homepage": "https://github.com/cityofnewyork/nyco-wp-open-data-transients",
+  "authors": [
+    {
+      "name": "Devon Hirth",
+      "email": "dehirth@nycopportunity.nyc.gov",
+      "homepage": "https://github.com/devowhippit"
+    }
+  ],
+  "keywords": [
+    "wordpress",
+    "transients",
+    "data",
+    "open data"
+  ],
+  "support": {
+    "issues": "https://github.com/cityofnewyork/nyco-wp-open-data-transients/issues"
+  },
+  "require": {
+    "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.*",
+    "codeception/codeception": "^2.3"
+  },
+  "scripts": {
+    "lint": [
+      "vendor/bin/phpcs --standard=phpcs.xml --ignore=vendor/ ."
+    ],
+    "fix": [
+      "vendor/bin/phpcbf --standard=phpcs.xml --ignore=vendor/ ."
+    ]
+  }
+}

@@ -1,0 +1,136 @@
+<section id="how-to-apply" data-js="program-detail-step" class="hidden:overflow{% if step in sectionArray | keys %} active{% endif %} print:active">
+  <header>
+    <h3 class="text-color-blue-dark">
+      {{ stepNumber }}. {{__('How to apply', 'accessnyc-program-detail')}}
+    </h3>
+
+    <h4 class="font-normal">{{__('Here are your options.', 'accessnyc-program-detail')}}</h4>
+  </header>
+
+  {% set sections = ['how_to_apply_or_enroll_online', 'how_to_apply_or_enroll_by_mail', 'how_to_apply_or_enroll_by_phone', 'how_to_apply_or_enroll_in_person'] %}
+  {% set accordions = [] %}
+  {% for section in sections %}
+    {% if post.get_field(section) %}
+      {% set accordions = accordions|merge([section]) %}
+    {% endif %}
+  {% endfor %}
+
+  {% for accordion in accordions %}
+    {% if accordion == 'how_to_apply_or_enroll_online' %}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply online', 'accessnyc-program-detail'),
+        body: post.get_field(accordion),
+        cta: post.apply_online_call_to_action ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.url_of_online_application,
+          text: post.apply_online_call_to_action
+        } : false
+      } %}
+    {% endif %}
+
+    {% if accordion == 'how_to_apply_or_enroll_by_mail' %}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply by mail', 'accessnyc-program-detail'),
+        body: post.get_field(accordion),
+        cta: post.apply_by_mail_call_to_action ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.url_of_pdf_application_forms ? post.url_of_pdf_application_forms : post.application_forms_pdfs,
+          text: post.apply_by_mail_call_to_action
+        } : false
+      } %}
+    {% endif %}
+
+    {% if accordion == 'how_to_apply_or_enroll_by_phone' %}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply by phone', 'accessnyc-program-detail'),
+        body: post.get_field(accordion) ~ post.get_field('phone_numbers'),
+        cta: false
+      } %}
+    {% endif %}
+
+    {% if accordion == 'how_to_apply_or_enroll_in_person' %}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply in person', 'accessnyc-program-detail'),
+        body: post.get_field(accordion),
+        cta: (post.office_locations_url and post.apply_in_person_call_to_action) ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.office_locations_url,
+          text: post.apply_in_person_call_to_action|striptags
+        } : false
+      } %}
+    {% endif %}
+
+    {% include 'components/accordion.twig' with {this: this} only %}
+  {% endfor %}
+
+  <div class="c-alert-box bg-status-info print:hidden">
+    <div class="c-alert-box__icon" aria-hidden="true">
+      <div class="c-alert-box__svg bg-icon-info"></div>
+    </div>
+
+    <div class="c-alert-box__body">
+      <p>
+        <b>{{__('Come back to it later.', 'accessnyc-program-detail')}}</b>
+        <br/>
+        {{__('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail')}}</p>
+
+        <div class="layout--gutter screen-tablet:layout--columns-gutter">
+          <div class="c-share-form">
+            <a class="btn btn-primary btn-small c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-text">{{__('Text', 'accessnyc-program-detail')}}</a>
+            <div id="share-by-text" class="c-share-form__input hidden js-needs-disclaimer">
+              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
+                <input type="hidden" name="action" value="sms_send" readonly>
+                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
+                <div class="c-share-form__controls">
+                  <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-program-detail')}}" required>
+                  <div class="c-share-form__button">
+                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
+                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
+                    <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="c-share-form">
+            <a class="btn btn-primary btn-small c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-program-detail')}}</a>
+            <div id="share-by-email" class="c-share-form__input hidden js-needs-disclaimer">
+              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
+                <input type="hidden" name="action" value="email_send" readonly>
+                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
+                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
+                <div class="c-share-form__controls">
+                  <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-program-detail')}}" required>
+                  <div class="c-share-form__button">
+                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
+                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
+                    <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 screen-tablet:m-0">
+          {% include 'partials/share-form-disclaimer.twig' %}
+        </div>
+      </p>
+    </div>
+  </div>
+</section>
+
+{% include 'partials/localized-strings-share.twig' %}
