@@ -29,6 +29,7 @@ import envify from 'envify/custom';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import mqpacker from 'css-mqpacker';
+import fs from 'fs';
 
 
 /**
@@ -41,7 +42,10 @@ const reload = function() {
   $.notify({ message: 'Reload' });
 };
 
+const PACKAGE = JSON.parse(fs.readFileSync('./package.json'));
+
 const NODE_ENV = process.env.NODE_ENV;
+const PACKAGE_VERSION = PACKAGE.version;
 
 const DIST = 'assets';
 const SRC = 'src';
@@ -92,7 +96,6 @@ gulp.task('styles', (callback) => {
         'node_modules/access-nyc-patterns/src'
       ]
       .concat(require('bourbon').includePaths)
-      .concat(require('bourbon-neat').includePaths)
     })
     .on('error', $.notify.onError())
     .on('error', $.sass.logError))
@@ -143,7 +146,10 @@ gulp.task('scripts', (callback) => {
       sourceMaps: true // must be true for sourcemaps path
     }).transform(
       {global: true},
-      envify({NODE_ENV: NODE_ENV})
+      envify({
+        NODE_ENV: NODE_ENV,
+        PACKAGE_VERSION: PACKAGE_VERSION
+      })
     ).bundle()
     .pipe(sourcestream(`${entry}.js`))
     .pipe(buffer())
@@ -167,7 +173,10 @@ gulp.task('scripts', (callback) => {
       sourceMaps: true // must be true for sourcemaps path
     }).transform(
       {global: true},
-      envify({NODE_ENV: NODE_ENV})
+      envify({
+        NODE_ENV: NODE_ENV,
+        PACKAGE_VERSION: PACKAGE_VERSION
+      })
     ).bundle()
     .pipe(sourcestream(`${entry}.js`))
     .pipe(buffer())

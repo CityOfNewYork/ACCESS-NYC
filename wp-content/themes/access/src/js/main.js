@@ -16,6 +16,8 @@ import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 
   const google = window.google;
 
+  Utility.configErrorTracking();
+
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
   $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
@@ -81,18 +83,6 @@ import NearbyStops from 'components/nearby-stops/nearby-stops.common';
   $('.js-program-search-filter').on('change', 'input', (e) => {
     $(e.currentTarget).closest('form')[0].submit();
   });
-
-  // TODO: This should be refactored to just use the .js-simple-toggle class.
-  // Toggles Program "What you need to bring for eligibility" displays
-  $('.js-program-detail-what-you-need-to-include').removeClass('no-js-open');
-  $('.js-hide-or-show-list').removeClass('no-js-hidden');
-
-  $('.js-hide-or-show-list').click(function(e) {
-    $(e.currentTarget).toggleClass('show hide')
-      .closest('.program-detail-what-you-need-to-include')
-      .toggleClass('open');
-  });
-  // END TODO
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
