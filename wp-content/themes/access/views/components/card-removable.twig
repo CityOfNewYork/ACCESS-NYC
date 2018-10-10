@@ -128,7 +128,7 @@
                 id: 'apply-mail-' ~ post.program_code,
                 active: false,
                 header: __('Apply by mail', 'accessnyc-program-detail'),
-                body: post.get_field('how_to_apply_or_enroll_online'),
+                body: post.get_field('how_to_apply_or_enroll_by_mail'),
                 cta: post.apply_by_mail_call_to_action ? {
                   target: '_blank',
                   rel: 'noopener noreferrer',
