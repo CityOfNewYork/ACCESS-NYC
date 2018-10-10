@@ -5,12 +5,6 @@
  */
 
 /**
- * Dependencies
- */
-
-use Controller;
-
-/**
  * Variables
  */
 
