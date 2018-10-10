@@ -11,7 +11,6 @@ namespace Controller;
  */
 
 use TimberPost;
-use Treffynnon\Navigator as N;
 use nyco\WpOpenDataTransients\Transients\Transients as Transients;
 
 /**
@@ -33,13 +32,21 @@ class SingleLocation extends TimberPost
    * via the NYCO transients plugin.
    * @return [array] Collection of nearby stops.
    */
-  public function nearby_stops() {
-    $locations = self::nearby_stops_locate(
+  public function nearbyStops() {
+    if (!class_exists('nyco\WpOpenDataTransients\Transients\Transients')) {
+      return false;
+    }
+
+    $locations = self::nearbyStopsLocate(
       $this->address['lat'], // the lat and lng of the location post
       $this->address['lng'] // the lat and lng of the location post
     );
 
-    $locations = self::nearby_stops_colors($locations);
+    if (false === $locations) {
+      return $locations;
+    }
+
+    $locations = self::nearbyStopsColors($locations);
 
     return $locations;
   }
@@ -52,11 +59,16 @@ class SingleLocation extends TimberPost
    * @param  {object} stops All of the stops data to compare to
    * @return {object}       A collection of the closest stops with distances
    */
-  private function nearby_stops_locate($lat, $lon) {
+  private function nearbyStopsLocate($lat, $lon) {
     $geo = [];
     $distances = [];
     $stops = Transients::get(self::TRANSIENT);
     $skey = 'distance';
+
+    // The WP Transients API will return false if empty
+    if (false === $stops) {
+      return $stops;
+    }
 
     // 1. Compare lat and lon of current location with list of stops
     foreach ($stops as $i => $stop) {
@@ -72,10 +84,11 @@ class SingleLocation extends TimberPost
     usort($distances, function ($a, $b) {
       return ($a['distance'] < $b['distance']) ? -1 : 1;
     });
+
     $distances = array_slice($distances, 0, self::NEARBY_STOPS_AMOUNT);
 
     // 3. Return the list of closest stops (number based on Amount option)
-    // and replace the stop index with the actual stop data
+    //    and replace the stop index with the actual stop data
     foreach ($distances as $i => $dist) {
       $distances[$i]['stop'] = $stops[$dist['stop']];
     }
@@ -107,7 +120,7 @@ class SingleLocation extends TimberPost
    * @param  {object} locations Object of closest locations
    * @return {object}           Same object with colors assigned to each loc
    */
-  private function nearby_stops_colors($locations) {
+  private function nearbyStopsColors($locations) {
     $trunk = 'shuttles';
 
     // Loop through each location that we are going to display
@@ -119,10 +132,10 @@ class SingleLocation extends TimberPost
         foreach (self::TRUNKS as $trunk) {
           // Look through each color in the color dictionary
           if (in_array($line, $trunk['LINES'])) {
-            $location_lines[$x] = [
+            $location_lines[$x] = array(
               'line' => $line,
               'trunk' => $trunk['TRUNK']
-            ];
+            );
           }
         }
       }
@@ -197,4 +210,4 @@ class SingleLocation extends TimberPost
       'LINES' => ['S']
     ]
   );
-};
+}

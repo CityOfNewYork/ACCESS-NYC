@@ -13,7 +13,8 @@ namespace Notifications;
 function timber() {
   if (!class_exists('Timber')) {
     add_action('admin_notices', function () {
-      echo 'Timber not activated. Make sure you activate the plugin in <a href="/wp-admin/plugins.php#timber">/wp-admin/plugins.php</a>';
+      echo 'Timber not activated. Make sure you activate the plugin in ' .
+        '<a href="/wp-admin/plugins.php#timber">/wp-admin/plugins.php</a>';
     });
     return;
   }

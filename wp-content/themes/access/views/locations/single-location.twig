@@ -75,11 +75,13 @@
           </address>
         </section>
 
+        {% if post.nearbyStops %}
         <section class="mb-3">
           <h3>{{ __('Nearby Stops', 'accessnyc-locations')}}</h3>
 
           {% include 'components/nearby-stops.twig' with {stops: post.nearby_stops} only %}
         </section>
+        {% endif %}
 
         {% if post.description %}
         <section class="mb-3">
