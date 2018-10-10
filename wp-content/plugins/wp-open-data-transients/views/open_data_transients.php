@@ -7,7 +7,7 @@
 
   <table class="form-table">
     <tbody>
-      <? if (null !== $option || $option !== '') : ?>
+      <? if (null !== $option && $option !== '') : ?>
         <? $transients = json_decode($option, true) ?>
         <? foreach ($transients as $transient) : ?>
           <tr>

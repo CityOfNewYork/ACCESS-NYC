@@ -36,7 +36,7 @@
     "wpackagist-plugin/bulk-delete": "5.6.1",
     "nyco/wp-assets": "0.0.5",
     "nyco/wp-config": "0.0.5",
-    "nyco/wp-open-data-transients": "^0.0.3",
+    "nyco/wp-open-data-transients": "^0.0.4",
     "mustangostang/spyc": "^0.6.2"
   },
   "require-dev": {

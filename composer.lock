@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "481f0dacfd5c61fb4d309275a0183d53",
+    "content-hash": "cf6e4423a4f952c22f3e447b8c76e19d",
     "packages": [
         {
             "name": "composer/installers",
@@ -592,16 +592,16 @@
         },
         {
             "name": "nyco/wp-open-data-transients",
-            "version": "0.0.3",
+            "version": "0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-open-data-transients.git",
-                "reference": "12b6614fa0d284b20e036af231a75ff4581092e7"
+                "reference": "3e448e9b00ef8203f197eaba0c19727a5b41bb20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-open-data-transients/zipball/12b6614fa0d284b20e036af231a75ff4581092e7",
-                "reference": "12b6614fa0d284b20e036af231a75ff4581092e7",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-open-data-transients/zipball/3e448e9b00ef8203f197eaba0c19727a5b41bb20",
+                "reference": "3e448e9b00ef8203f197eaba0c19727a5b41bb20",
                 "shasum": ""
             },
             "require": {
@@ -631,7 +631,7 @@
                 "transients",
                 "wordpress"
             ],
-            "time": "2018-10-03T17:55:15+00:00"
+            "time": "2018-10-10T19:56:02+00:00"
         },
         {
             "name": "psr/container",
