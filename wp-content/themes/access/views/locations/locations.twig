@@ -59,6 +59,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
+<script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Element.prototype.matches&flags=gated"></script> {# IE Support https://polyfill.io #}
 {{ function('enqueue_script', 'assets/js/main', '.min') }}
 <script src="https://www.google.com/jsapi"></script>
 <script>
