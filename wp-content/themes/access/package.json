@@ -8,7 +8,7 @@
     "predeploy": "NODE_ENV='production' gulp build",
     "scripts": "gulp 'clean (scripts)' && gulp lint && NODE_ENV='production' gulp scripts",
     "styles": "gulp 'clean (styles)' && gulp styles",
-    "version": "npm run scripts",
+    "version": "echo \"No version task required\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Blue State Digital | Maintained by NYC Opportunity",

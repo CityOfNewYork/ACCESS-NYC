@@ -18029,7 +18029,7 @@ return jQuery;
 },{}],9:[function(require,module,exports){
 (function (global){
 /*!
- * Vue.js v2.5.16
+ * Vue.js v2.5.17
  * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
@@ -23120,7 +23120,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.16';
+Vue.version = '2.5.17';
 
 /*  */
 
@@ -33687,13 +33687,19 @@ Utility.sessionTimeout = function (time, callback) {
 Utility.configErrorTracking = function () {
   if (typeof Rollbar === 'undefined') return false;
 
+  var scripts = document.getElementsByTagName('script');
+  var source = scripts[scripts.length - 1].src;
+  var path = source.split('/');
+  var basename = path[path.length - 1];
+  var hash = basename.split('.')[1];
+
   var config = {
     client: {
       javascript: {
         // This is will be true by default if you have enabled this in settings.
         source_map_enabled: true,
         // This is transformed via envify in the scripts task.
-        code_version: "3.1.2",
+        code_version: hash,
         // Optionally guess which frames the error was thrown from when the
         // browser does not provide line and column numbers.
         guess_uncaught_frames: true } } };
@@ -33745,4 +33751,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.d37dda34789486232c3c3a267cc2fc01.js.map
+//# sourceMappingURL=main-field.bb3645d9585afe102d4d1148c77e2a6d.js.map

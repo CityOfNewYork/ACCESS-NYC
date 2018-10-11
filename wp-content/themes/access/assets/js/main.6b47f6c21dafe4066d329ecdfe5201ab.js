@@ -2919,22 +2919,30 @@ var NearbyStops = function () {
   }, {
     key: '_assignColors',
     value: function _assignColors(locations) {
-      var line = [];
-      var trunk = 'shuttles';
+      var locationLines = [];
+      var line = 'S';
+      var lines = ['S'];
 
       // Loop through each location that we are going to display
       for (var i = 0; i < locations.length; i++) {
         // assign the line to a variable to lookup in our color dictionary
-        line = locations[i].stop[this._key('ODATA_LINE')].split('-');
+        locationLines = locations[i].stop[this._key('ODATA_LINE')].split('-');
 
-        for (var x = 0; x < NearbyStops.trunks.length; x++) {
-          // Look through each color in the color dictionary
-          for (var y = 0; y < NearbyStops.trunks[x].LINES.length; y++) {
-            // Check to see which trunk is associated with our location line
-            if (line.indexOf(NearbyStops.trunks[x].LINES[y]) > -1) trunk = NearbyStops.trunks[x].TRUNK;
+        for (var x = 0; x < locationLines.length; x++) {
+          line = locationLines[x];
+
+          for (var y = 0; y < NearbyStops.trunks.length; y++) {
+            lines = NearbyStops.trunks[y]['LINES'];
+
+            if (lines.indexOf(line) > -1) locationLines[x] = {
+              'line': line,
+              'trunk': NearbyStops.trunks[y]['TRUNK']
+            };
           }
-        } // Add the trunk to the location
-        locations[i].trunk = trunk;
+        }
+
+        // Add the trunk to the location
+        locations[i].trunks = locationLines;
       }
 
       return locations;
@@ -3048,7 +3056,7 @@ NearbyStops.keys = {
  * @type {Object}
  */
 NearbyStops.templates = {
-  SUBWAY: ['<% _each(stops, function(stop) { %>', '<div class="c-nearby-stops__stop">', '<% var lines = stop.stop.line.split("-") %>', '<% _each(lines, function(line) { %>', '<% var exp = (line.indexOf("Express") > -1) ? true : false %>', '<% if (exp) line = line.split(" ")[0] %>', '<span class="', 'c-nearby-stops__subway ', 'icon-subway<% if (exp) { %>-express<% } %> ', '<% if (exp) { %>border-<% } else { %>bg-<% } %><%-stop.trunk %>', '">', '<%-line %>', '<% if (exp) { %> <span class="sr-only">Express</span><% } %>', '</span>', '<% }); %>', '<span class="c-nearby-stops__description">', '<%- stop.distance.toString().slice(0, 3) %> Miles, ', '<%- stop.stop.name %>', '</span>', '</div>', '<% }); %>'].join('')
+  SUBWAY: ['<% _each(stops, function(stop) { %>', '<div class="c-nearby-stops__stop">', '<% var lines = stop.stop.line.split("-") %>', '<% _each(stop.trunks, function(trunk) { %>', '<% var exp = (trunk.line.indexOf("Express") > -1) ? true : false %>', '<% if (exp) trunk.line = trunk.line.split(" ")[0] %>', '<span class="', 'c-nearby-stops__subway ', 'icon-subway<% if (exp) { %>-express<% } %> ', '<% if (exp) { %>border-<% } else { %>bg-<% } %><%- trunk.trunk %>', '">', '<%- trunk.line %>', '<% if (exp) { %> <span class="sr-only">Express</span><% } %>', '</span>', '<% }); %>', '<span class="c-nearby-stops__description">', '<%- stop.distance.toString().slice(0, 3) %> Miles, ', '<%- stop.stop.name %>', '</span>', '</div>', '<% }); %>'].join('')
 };
 
 /**
@@ -19493,13 +19501,19 @@ Utility.sessionTimeout = function (time, callback) {
 Utility.configErrorTracking = function () {
   if (typeof Rollbar === 'undefined') return false;
 
+  var scripts = document.getElementsByTagName('script');
+  var source = scripts[scripts.length - 1].src;
+  var path = source.split('/');
+  var basename = path[path.length - 1];
+  var hash = basename.split('.')[1];
+
   var config = {
     client: {
       javascript: {
         // This is will be true by default if you have enabled this in settings.
         source_map_enabled: true,
         // This is transformed via envify in the scripts task.
-        code_version: "3.1.2",
+        code_version: hash,
         // Optionally guess which frames the error was thrown from when the
         // browser does not provide line and column numbers.
         guess_uncaught_frames: true } } };
@@ -19551,4 +19565,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main.485af636c4bfedaf8ebe1b38e556b27d.js.map
+//# sourceMappingURL=main.6b47f6c21dafe4066d329ecdfe5201ab.js.map

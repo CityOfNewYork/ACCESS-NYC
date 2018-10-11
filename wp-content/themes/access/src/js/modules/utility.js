@@ -421,13 +421,19 @@ Utility.sessionTimeout = function(time, callback) {
 Utility.configErrorTracking = function() {
   if (typeof Rollbar === 'undefined') return false;
 
+  let scripts = document.getElementsByTagName('script');
+  let source = scripts[scripts.length - 1].src;
+  let path = source.split('/');
+  let basename = path[path.length - 1];
+  let hash = basename.split('.')[1];
+
   let config = {
     client: {
       javascript: {
         // This is will be true by default if you have enabled this in settings.
         source_map_enabled: true,
         // This is transformed via envify in the scripts task.
-        code_version: process.env.PACKAGE_VERSION,
+        code_version: hash,
         // Optionally guess which frames the error was thrown from when the
         // browser does not provide line and column numbers.
         guess_uncaught_frames: true
