@@ -70,8 +70,8 @@ import Accordion from 'components/accordion/accordion.common';
     });
   });
 
-  // Add rel attribute to new window links.
-  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+  // Add noopener attribute to new window links if it isn't there.
+  $('a[target="_blank"]').each(Utility.noopener);
 
   // Enable environment warnings
   $(window).on('load', () => Utility.warnings());

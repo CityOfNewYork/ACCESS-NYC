@@ -453,6 +453,19 @@ Utility.configErrorTracking = function() {
 };
 
 /**
+ * Add "noopener" to relationship if it doesn't exist
+ * @param  {number} i  Index of element
+ * @param  {object} el DOM element
+ */
+Utility.noopener = function(i, el) {
+  let rel = $(el).attr('rel');
+  rel = (typeof rel === 'undefined') ? '' : `${rel} `;
+  if (rel.indexOf('noopener') === -1) {
+    $(el).attr('rel', `${rel}noopener`);
+  }
+};
+
+/**
  * Site constants.
  * @enum {string}
  */

@@ -230,12 +230,7 @@ import NearbyStops from 'components/nearby-stops/nearby-stops.common';
   }
 
   // Add noopener attribute to new window links if it isn't there.
-  $('a[target="_blank"]').each((i, el) => {
-    let rel = $(el).attr('rel');
-    if (rel.indexOf('noopener') == -1) {
-      $(el).attr('rel', `${rel} noopener`);
-    }
-  });
+  $('a[target="_blank"]').each(Utility.noopener);
 
   // Enable environment warnings
   $(window).on('load', () => Utility.warnings());

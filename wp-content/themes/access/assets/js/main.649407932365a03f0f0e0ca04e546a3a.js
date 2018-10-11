@@ -15630,12 +15630,7 @@ var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _n
   }
 
   // Add noopener attribute to new window links if it isn't there.
-  $('a[target="_blank"]').each(function (i, el) {
-    var rel = $(el).attr('rel');
-    if (rel.indexOf('noopener') == -1) {
-      $(el).attr('rel', rel + ' noopener');
-    }
-  });
+  $('a[target="_blank"]').each(_utility2.default.noopener);
 
   // Enable environment warnings
   $(window).on('load', function () {return _utility2.default.warnings();});
@@ -19533,6 +19528,19 @@ Utility.configErrorTracking = function () {
 };
 
 /**
+    * Add "noopener" to relationship if it doesn't exist
+    * @param  {number} i  Index of element
+    * @param  {object} el DOM element
+    */
+Utility.noopener = function (i, el) {
+  var rel = (0, _jquery2.default)(el).attr('rel');
+  rel = typeof rel === 'undefined' ? '' : rel + ' ';
+  if (rel.indexOf('noopener') === -1) {
+    (0, _jquery2.default)(el).attr('rel', rel + 'noopener');
+  }
+};
+
+/**
     * Site constants.
     * @enum {string}
     */
@@ -19565,4 +19573,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main.6b47f6c21dafe4066d329ecdfe5201ab.js.map
+//# sourceMappingURL=main.649407932365a03f0f0e0ca04e546a3a.js.map
