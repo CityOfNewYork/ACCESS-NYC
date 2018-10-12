@@ -368,9 +368,14 @@ Utility.warnings = function() {
   /* eslint-disable no-console, no-debugger */
   if (typeof Webtrends === 'undefined' && Utility.debug())
     console.warn(Utility.CONFIG.MSG_WT_NONCONFIG);
+
   /** Google Analytics */
   if (typeof gtag === 'undefined' && Utility.debug())
     console.warn(Utility.CONFIG.MSG_GA_NONCONFIG);
+
+  /** Rollbar */
+  if (typeof Rollbar === 'undefined' && Utility.debug())
+    console.warn(Utility.CONFIG.MSG_ROLLBAR_NONCONFIG);
   /* eslint-enable no-console, no-debugger */
 };
 
@@ -409,6 +414,58 @@ Utility.sessionTimeout = function(time, callback) {
 };
 
 /**
+ * Sends the configuration object to Rollbar, the most important config is
+ * the code_version which maps to the source maps version.
+ * @return {object} The configured Rollbar method
+ */
+Utility.configErrorTracking = function() {
+  if (typeof Rollbar === 'undefined') return false;
+
+  let scripts = document.getElementsByTagName('script');
+  let source = scripts[scripts.length - 1].src;
+  let path = source.split('/');
+  let basename = path[path.length - 1];
+  let hash = basename.split('.')[1];
+
+  let config = {
+    client: {
+      javascript: {
+        // This is will be true by default if you have enabled this in settings.
+        source_map_enabled: true,
+        // This is transformed via envify in the scripts task.
+        code_version: hash,
+        // Optionally guess which frames the error was thrown from when the
+        // browser does not provide line and column numbers.
+        guess_uncaught_frames: true
+      }
+    }
+  };
+
+  let rollbarConfigure = Rollbar.configure(config);
+  let msg = `Configured Rollbar with ${config.client.javascript.code_version}`;
+
+  if (Utility.debug()) {
+    console.dir(msg); // eslint-disable-line no-console
+    Rollbar.debug(msg); // eslint-disable-line no-undef
+  }
+
+  return rollbarConfigure;
+};
+
+/**
+ * Add "noopener" to relationship if it doesn't exist
+ * @param  {number} i  Index of element
+ * @param  {object} el DOM element
+ */
+Utility.noopener = function(i, el) {
+  let rel = $(el).attr('rel');
+  rel = (typeof rel === 'undefined') ? '' : `${rel} `;
+  if (rel.indexOf('noopener') === -1) {
+    $(el).attr('rel', `${rel}noopener`);
+  }
+};
+
+/**
  * Site constants.
  * @enum {string}
  */
@@ -425,6 +482,7 @@ Utility.CONFIG = {
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
   MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
   MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
+  MSG_ROLLBAR_NONCONFIG: 'Rollbar is not configured for this environment',
   IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT'
 };
 

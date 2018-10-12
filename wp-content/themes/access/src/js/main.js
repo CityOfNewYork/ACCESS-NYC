@@ -9,11 +9,14 @@ import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
 import Accordion from 'components/accordion/accordion.common';
 import Filter from 'components/filter/filter.common';
+import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 
 (function(window, $) {
   'use strict';
 
   const google = window.google;
+
+  Utility.configErrorTracking();
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
@@ -48,9 +51,10 @@ import Filter from 'components/filter/filter.common';
     $('#search').removeClass('active');
   });
 
-  // Initialize ACCESS NYC Patterns Toggle lib components
+  // Initialize ACCESS NYC Patterns lib components
   new Accordion();
   new Filter();
+  new NearbyStops();
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
@@ -79,18 +83,6 @@ import Filter from 'components/filter/filter.common';
   $('.js-program-search-filter').on('change', 'input', (e) => {
     $(e.currentTarget).closest('form')[0].submit();
   });
-
-  // TODO: This should be refactored to just use the .js-simple-toggle class.
-  // Toggles Program "What you need to bring for eligibility" displays
-  $('.js-program-detail-what-you-need-to-include').removeClass('no-js-open');
-  $('.js-hide-or-show-list').removeClass('no-js-hidden');
-
-  $('.js-hide-or-show-list').click(function(e) {
-    $(e.currentTarget).toggleClass('show hide')
-      .closest('.program-detail-what-you-need-to-include')
-      .toggleClass('open');
-  });
-  // END TODO
 
   // TODO: This function and the conditional afterwards should be refactored
   // and pulled out to its own program detail controller module. The main
@@ -237,8 +229,8 @@ import Filter from 'components/filter/filter.common';
     window.onload = window.print;
   }
 
-  // Add rel attribute to new window links.
-  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+  // Add noopener attribute to new window links if it isn't there.
+  $('a[target="_blank"]').each(Utility.noopener);
 
   // Enable environment warnings
   $(window).on('load', () => Utility.warnings());

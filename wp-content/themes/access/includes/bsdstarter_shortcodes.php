@@ -11,29 +11,30 @@
  * @param string  $content Shortcode content
  * @return string HTML markup to display a callout box with the quote
  */
-function bsdstarter_quote( $attr, $content = null ) {
+function bsdstarter_quote($attr, $content = null) {
   // If there's no quote to display, let's get out of here
   if (!$content) {
     return;
   }
 
-  $atts = shortcode_atts( array(
+  $atts = shortcode_atts(array(
     'author' => null
-  ), $attr );
+  ), $attr);
 
   $output = '';
 
   $class = 'pullquote';
 
   $output .= '<blockquote class="' . $class . '">' . $content;
-  if ( $atts['author'] ) {
+  if ($atts['author']) {
     $output .= '<cite class="pullquote__source">' . $atts['author'] . '</cite>';
   }
   $output .= '</blockquote>';
 
   return $output;
 }
-add_shortcode( 'quote', 'bsdstarter_quote' );
+
+add_shortcode('quote', 'bsdstarter_quote');
 
 /**
  * Statistics embedded in the WYSIWYG of a detail page
@@ -49,15 +50,15 @@ add_shortcode( 'quote', 'bsdstarter_quote' );
  * }
  * @return string HTML markup to display a callout box with the stat
  */
-function bsdstarter_stat( $attr ) {
-  $atts = shortcode_atts( array(
+function bsdstarter_stat($attr) {
+  $atts = shortcode_atts(array(
     'value' => null,
     'label' => null,
-  ), $attr );
+  ), $attr);
 
   // Both value and label are required
   // If either is missing, don't display anything
-  if ( !( $atts['value'] && $atts['label'] ) ) {
+  if (!( $atts['value'] && $atts['label'] )) {
     return;
   }
 
@@ -67,7 +68,8 @@ function bsdstarter_stat( $attr ) {
   $output .= '</div>';
   return $output;
 }
-add_shortcode( 'stat', 'bsdstarter_stat' );
+
+add_shortcode('stat', 'bsdstarter_stat');
 
 /**
  * Iframed external videos embedded in the WYSIWYG of a detail page
@@ -81,13 +83,13 @@ add_shortcode( 'stat', 'bsdstarter_stat' );
  * }
  * @return string HTML markup to display embedded video
  */
-function bsdstarter_video( $attr ) {
+function bsdstarter_video($attr) {
 
-  $atts = shortcode_atts( array(
+  $atts = shortcode_atts(array(
     'type' => null,
     'id' => null,
     'src' => null
-  ), $attr );
+  ), $attr);
 
   // If there's no video to display, let's get out of here
   if (empty($atts['id']) && empty($atts['src'])) {
@@ -98,11 +100,11 @@ function bsdstarter_video( $attr ) {
   $output = '';
   $extra_class = '';
 
-  if ( $atts['type'] == 'youtube' ) {
+  if ($atts['type'] == 'youtube') {
     $atts['src'] = '//www.youtube.com/embed/' . $atts['id'];
   }
 
-  if ( $atts['type'] == 'vimeo' ) {
+  if ($atts['type'] == 'vimeo') {
     $atts['src'] = '//player.vimeo.com/video/' . $atts['id'];
     $extra_class = ' vimeo';
   }
@@ -115,4 +117,5 @@ function bsdstarter_video( $attr ) {
 
   return $output;
 }
-add_shortcode( 'iframe', 'bsdstarter_video' );
+
+add_shortcode('iframe', 'bsdstarter_video');

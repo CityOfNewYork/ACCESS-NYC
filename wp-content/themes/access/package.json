@@ -1,6 +1,6 @@
 {
   "name": "ACCESS-NYC",
-  "version": "3.1.1",
+  "version": "3.2.1",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "scripts": {
     "development": "NODE_ENV='development' gulp",
@@ -8,6 +8,7 @@
     "predeploy": "NODE_ENV='production' gulp build",
     "scripts": "gulp 'clean (scripts)' && gulp lint && NODE_ENV='production' gulp scripts",
     "styles": "gulp 'clean (styles)' && gulp styles",
+    "version": "echo \"No version task required\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Blue State Digital | Maintained by NYC Opportunity",
@@ -32,7 +33,7 @@
     "babel-eslint": "^7.1.1",
     "babel-preset-es2015": "^6.6.0",
     "babelify": "^8.0.0",
-    "browser-sync": "^2.8.0",
+    "browser-sync": "^2.24.7",
     "browserify": "^11.0.0",
     "browserify-data": "^0.2.0",
     "browserify-shim": "^3.8.10",
@@ -67,7 +68,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "access-nyc-patterns": "^0.0.11-5",
+    "access-nyc-patterns": "^0.0.11-10",
     "cleave.js": "^0.7.23",
     "jquery": "^3.1.1",
     "js-cookie": "^2.1.3",

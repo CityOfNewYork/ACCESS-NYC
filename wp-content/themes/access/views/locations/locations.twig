@@ -1,0 +1,84 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
+  <main class="js-map layout--map screen-desktop:layout--sidebar bg-color-white" id="content" data-source="/locations/json">
+    <div class="js-map-controls layout--map__sidebar">
+      <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
+
+      <div class="map-filter-container js-map-filter">
+        <a href="#map-filter-settings" class="map-filter-header btn-toggle btn-primary text-color-white rounded-none w-full js-toggle-filter js-main-filter-toggle">
+          <span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span>
+        </a>
+
+        <div id="map-filter-settings" class="c-filter-multi" aria-hidden="true">
+          <ul class="c-filter-multi__list">
+            {% for filter in filters %}
+            <li class="c-filter-multi__item">
+              <div class="c-filter-multi__item-header">
+                <label class="checkbox">
+                  <input type="checkbox" data-toggles="#program-{{ filter.category.slug }}" class="js-map-filter-parent-input" tabindex="-1">
+                  <span class="checkbox__label">{{ filter.category.name }}</span>
+                </label>
+                <a href="#program-{{ filter.category.slug }}" class="c-filter-multi__item-header-toggle js-toggle-filter"  tabindex="-1">
+                  <span class="sr-only map-filter-expand">{{__('Expand category', 'accessnyc-locations')}}</span>
+                  <span class="sr-only map-filter-collapse">{{__('Collapse category', 'accessnyc-locations')}}</span>
+                </a>
+              </div>
+
+              <div id="program-{{ filter.category.slug }}" class="c-filter-multi__item-group js-map-filter-program-group" aria-hidden="true">
+                <ul class="c-filter-multi__item-group-list">
+                  {% for program in filter.programs %}
+                  <li class="c-filter-multi__item-group-subitem">
+                    <label class="checkbox">
+                      <input type="checkbox" value="{{ program.uid }}" class="js-map-filter-program-input" tabindex="-1">
+                      <span class="checkbox__label text-font-size-small font-normal">{{ program.post_title }}</span>
+                    </label>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="js-map-results-container">
+        <div class="border-t border-color-grey-light">
+          <ul class="js-map-results p-0"></ul>
+          <p class="p-4 m-0 text-center text-color-grey-mid hidden" data-js="message-loading" aria-hidden="true">{{__('Loading&hellip;', 'accessnyc-locations')}}</p>
+          <p class="p-4 m-0 text-center text-color-grey-mid hidden" data-js="message-no-results" aria-hidden="true">{{__('No results.', 'accessnyc-locations')}}</p>
+        </div>
+      </div>
+      <div class="js-map-pagination"> </div>
+    </div>
+
+    <div class="js-map-mapbox layout--map__map"></div>
+  </main>
+{% endblock %}
+
+{% block scripts_footer %}
+<script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Element.prototype.matches&flags=gated"></script> {# IE Support https://polyfill.io #}
+{{ function('enqueue_script', 'assets/js/main', '.min') }}
+<script src="https://www.google.com/jsapi"></script>
+<script>
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([{% for filter in filters %}{% for program in filter.programs %}
+    {
+      "label": {{ program.post_title|json_encode() }},
+      "slug": {{ program.uid|json_encode() }}
+    },{% endfor %}{% endfor %}
+    {
+      "label": {{__('Government Office', 'accessnyc-locations')|trim|json_encode()}},
+      "slug": "GOVERNMENT_OFFICE"
+    }
+  ]);
+</script>
+<script type="text/template" id="map-location-template">
+  {% include 'components/card-map-location.underscore.twig' %}
+</script>
+<script type="text/template" id="map-pagination-template">
+  {% include 'partials/locations-pagination.underscore.twig' %}
+</script>
+{% endblock %}

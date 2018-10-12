@@ -1,12 +1,22 @@
 <?php
+
 /**
  * Template name: Location detail page.
-*/
+ */
+
+/**
+ * Variables
+ */
 
 global $params;
 
+/**
+ * Context
+ */
+
+$location = new Controller\SingleLocation();
 $context = Timber::get_context();
+$context['post'] = $location;
+$templates = $location->templates();
 
-$templates = array( 'single-location.twig' );
-
-Timber::render( $templates, $context );
+Timber::render($templates, $context);

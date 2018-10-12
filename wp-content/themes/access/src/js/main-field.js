@@ -14,9 +14,9 @@ import Accordion from 'components/accordion/accordion.common';
 (function(window, $) {
   'use strict';
 
-  /* eslint-disable no-undef */
-  require('smoothscroll-polyfill').polyfill();
-  /* eslint-enable no-undef */
+  Utility.configErrorTracking();
+
+  require('smoothscroll-polyfill').polyfill(); // eslint-disable-line no-undef
 
   // Get SVG sprite file.
   $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
@@ -70,8 +70,8 @@ import Accordion from 'components/accordion/accordion.common';
     });
   });
 
-  // Add rel attribute to new window links.
-  $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+  // Add noopener attribute to new window links if it isn't there.
+  $('a[target="_blank"]').each(Utility.noopener);
 
   // Enable environment warnings
   $(window).on('load', () => Utility.warnings());

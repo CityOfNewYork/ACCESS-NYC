@@ -3,30 +3,58 @@
     <li>
       <div class="type-h3 text-color-blue-dark">{{ footer_get_help_now_menu.name }}</div>
       <ul>
-      {% for menu_item in footer_get_help_now_menu.get_items %}
-        <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
+      {% for m in footer_get_help_now_menu.get_items %}
+        <li>
+          <a href="{{ m.link }}"
+            {% if m.attr_title %}title="{{ m.attr_title }}"{% else %}title="{{ m.title }}"{% endif %}
+            {% if m.target %}target="{{ m.target }}"{% endif %}
+            {% if m.xfn %}rel="{{ m.xfn }}"{% endif %}>
+            {{ m.title }}
+          </a>
+        </li>
       {% endfor %}
       </ul>
       <div class="type-h3 text-color-blue-dark">{{ footer_for_caseworkers_menu.name }}</div>
       <ul>
-        {% for menu_item in footer_for_caseworkers_menu.get_items %}
-          <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
+        {% for m in footer_for_caseworkers_menu.get_items %}
+          <li>
+            <a href="{{ m.link }}"
+              {% if m.attr_title %}title="{{ m.attr_title }}"{% else %}title="{{ m.title }}"{% endif %}
+              {% if m.target %}target="{{ m.target }}"{% endif %}
+              {% if m.xfn %}rel="{{ m.xfn }}"{% endif %}>
+              {{ m.title }}
+            </a>
+          </li>
         {% endfor %}
       </ul>
     </li>
     <li>
       <div class="type-h3 text-color-blue-dark">{{ footer_programs_menu.name }}</div>
       <ul>
-        {% for menu_item in footer_programs_menu.get_items %}
-          <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
+        {% for m in footer_programs_menu.get_items %}
+          <li>
+            <a href="{{ m.link }}"
+              {% if m.attr_title %}title="{{ m.attr_title }}"{% else %}title="{{ m.title }}"{% endif %}
+              {% if m.target %}target="{{ m.target }}"{% endif %}
+              {% if m.xfn %}rel="{{ m.xfn }}"{% endif %}>
+              {{ m.title }}
+            </a>
+          </li>
         {% endfor %}
       </ul>
     </li>
     <li>
       <div class="type-h3 text-color-blue-dark">{{ footer_about_access_nyc_menu.name }}</div>
       <ul>
-        {% for menu_item in footer_about_access_nyc_menu.get_items %}
-          <li><a href="{{menu_item.link}}">{{menu_item.title}}</a></li>
+        {% for m in footer_about_access_nyc_menu.get_items %}
+          <li>
+            <a href="{{ m.link }}"
+              {% if m.attr_title %}title="{{ m.attr_title }}"{% else %}title="{{ m.title }}"{% endif %}
+              {% if m.target %}target="{{ m.target }}"{% endif %}
+              {% if m.xfn %}rel="{{ m.xfn }}"{% endif %}>
+              {{ m.title }}
+            </a>
+          </li>
         {% endfor %}
       </ul>
     </li>

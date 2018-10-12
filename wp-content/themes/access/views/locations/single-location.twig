@@ -1,0 +1,166 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {# {% for post in posts %} #}
+  {% set isGovtOffice = __('Government Office', 'accessnyc-locations')|trim == post.type %}
+  <main id="content" class="main-content color-light-background" itemscope itemtype="https://schema.org/{% if isGovtOffice %}GovernmentOffice{% else %}Organization{% endif %}">
+    <section>
+      <div class="bg-color-blue-light overflow-hidden flex items-center print:hidden screen-desktop:hidden js-static-map"
+        data-marker="{{ post.address.lat}},{{ post.address.lng }}"
+        data-link="https://www.google.com/maps/dir//{{ post.address.address|url_encode }}"
+        {% if isGovtOffice %}data-govt-office="true"{% endif %}
+        data-zoom="13"
+        data-alt="{{__('Map with marker for', 'accessnyc-locations')}} {{ post.title }}. {{__('Get directions', 'accessnyc-locations')}}"
+        style="height:300px;">
+      </div>
+    </section>
+
+    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
+      <div>
+        <h1 class="c-header__descriptor" itemprop="name">
+          {{ post.title }}
+        </h1>
+
+        {% if post.type or post.division %}
+        <h2 class="c-header__information mb-0 color-light-background__alt">
+          {{ post.type }}{% if post.type and post.division %} | {% endif %}{{ post.division }}
+        </h2>
+        {% endif %}
+      </div>
+    </header>
+
+    <section class="usa-grid screen-desktop:layout--sidebar-gutter">
+      <aside class="hidden screen-desktop:block">
+        <div class="bg-color-blue-light border border-color-grey-light overflow-hidden flex items-center print:hidden js-static-map"
+          data-marker="{{ post.address.lat }},{{ post.address.lng }}"
+          data-link="https://www.google.com/maps/dir//{{ post.address.address|url_encode }}"
+          {% if isGovtOffice %}data-govt-office="true"{% endif %}
+          data-zoom="13"
+          data-alt="{{__('Map with marker for', 'accessnyc-locations')}} {{ post.title }}. {{__('Get directions', 'accessnyc-locations')}}"
+          style="height:496px;">
+        </div>
+        <section class="mb-3 hidden screen-desktop:block">
+          <a class="btn btn-primary btn-next w-full rounded-t-none print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap" data-js="track" data-track-key="Get Directions" data-track-data='[{"DCS.dcsuri": "get-directions"}]'>{{__('Get directions', 'accessnyc-locations')}}</a>
+        </section>
+      </aside>
+
+      <article>
+        <section itemprop="description">
+          {% if post.get_field('programs')|length > 0 %}
+          <p class="mb-0">{% spaceless %}
+            {{__('This location can help you with:', 'accessnyc-locations')}}
+
+            {% for program in post.get_field('programs') %}
+              {{ program.name }}{% if loop.last %}.{% else %},{% endif %}
+            {% endfor %}
+          {% endspaceless %}</p>
+          {% endif %}
+        </section>
+
+        <hr class="divider-light" aria-hidden="true">
+
+        <section class="mb-3 screen-desktop:hidden">
+          <a class="btn btn-primary btn-next w-full print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap" data-js="track" data-track-key="Get Directions" data-track-data='[{"DCS.dcsuri": "get-directions"}]'>{{__('Get directions', 'accessnyc-locations')}}</a>
+        </section>
+
+        <section class="mb-3">
+          <h3>{{ __('Address', 'accessnyc-locations')}}</h3>
+
+          <address class="roman" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <span itemprop="streetAddress">
+              {{ post.address_street }},
+              {% if post.address_street_2 %}{{ post.address_street_2 }},{% endif %}
+            </span>
+            <span itemprop="addressLocality">{{ post.city }}</span> <span itemprop="postalCode">{{ post.zip }}</span>
+          </address>
+        </section>
+
+        {% set nearby_stops = post.nearbyStops %}
+        {% if nearby_stops %}
+        <section class="mb-3">
+          <h3>{{ __('Nearby Stops', 'accessnyc-locations')}}</h3>
+
+          {% include 'components/nearby-stops.twig' with {stops: nearby_stops} only %}
+        </section>
+        {% endif %}
+
+        {% if post.description %}
+        <section class="mb-3">
+          <h3>{{ __('Details', 'accessnyc-locations')}}</h3>
+
+          <p>{{ post.description }}</p>
+        </section>
+        {% endif %}
+
+        <section {% if post.website %}class="mb-3"{% endif %}>
+          <h3>{{ __('Contact by phone', 'accessnyc-locations')}}</h3>
+
+          {% for phone in post.get_field('phone') %}
+          <a href="tel:{{ phone.number }}{% if phone.extension %}, {{ phone.extension }}{% endif %}">
+            {{__('Call:', 'accessnyc-locations')}}
+            <span itemprop="telephone">{{ phone.number }}{% if phone.extension %} {{__('Ext.', 'accessnyc-locations')}} {{ phone.extension }}{% endif %}</span>
+          </a><br>
+          {% endfor %}
+        </section>
+
+        {% if post.website %}
+        <section class="mb-3">
+          <h3>{{ __('Visit website', 'accessnyc-locations')}}</h3>
+
+          {% for phone in post.get_field('phone') %}
+          <a href="{{ post.website }}"  target="_blank" rel="noopener noreferrer" itemprop="sameAs">{{ post.website }}</a><br>
+          {% endfor %}
+        </section>
+        {% endif %}
+
+        <hr class="divider-light" aria-hidden="true">
+
+        <section>
+          <h3>{{ __('Programs at this location', 'accessnyc-locations')}}</h3>
+
+          {% for program in post.get_field('programs') %}
+            {% set header = program.plain_language_program_name ~ '<em class="block font-normal">' ~ program.name ~ '</em>' %}
+            {% set body = '<p class="text-color-blue">' ~ program.government_agency ~ '</p>' ~ '<p>' ~ program.program_description ~ '</p>' %}
+
+            {% if program.how_to_apply_or_enroll_in_person %}
+              {% set body = body ~ '<h4>' ~ __('Apply in person', 'accessnyc-locations') ~ '</h4>' ~ '<p>' ~ program.how_to_apply_or_enroll_in_person ~ '</p>' %}
+            {% endif %}
+
+            {% if program.program_acronym %}
+              {% set acronym = ' (' ~ program.program_acronym ~ ')' %}
+            {% endif %}
+
+            {% include 'components/accordion.twig' with {
+              this: {
+                id: program.slug,
+                active: (loop.index == 1) ? true : false,
+                header: header,
+                body: body,
+                cta: {
+                  href: program.get_permalink,
+                  text: __('Learn More', 'accessnyc-locations')
+                }
+              }
+            } only %}
+          {% endfor %}
+        </section>
+      </article>
+    </section>
+
+    <footer class="usa-grid py-4">
+      <p class="text-color-grey-mid screen-desktop:mb-0">
+        {{__('Updated', 'accessnyc-locations')}}
+        {% if post.post_modified | length %}
+        {{post.post_modified|date}}
+        {% else %}
+        {{ post.post_date|date}}
+        {% endif %}
+      </p>
+
+      {# <a class="btn btn-secondary btn-previous w-full print:hidden screen-desktop:hidden js-location-back" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
+        {{__('Back to map', 'accessnyc-locations')}}
+      </a> #}
+    </footer>
+  </main>
+  {# {% endfor %} #}
+{% endblock %}

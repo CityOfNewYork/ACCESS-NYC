@@ -46,8 +46,17 @@ class StaticMap {
     /** @private {?string} URL to which image links. */
     this._link = $(el).data('link') || null;
 
+    /** @type {string} The alt description for the map image */
+    this._alt = $(el).data('alt') || null;
+
     /** @private {boolean} Whether this component has been initialized. */
     this._initialized = false;
+
+    /** @type {String} The name of the click event to track on element */
+    this._trackKey = 'Get Directions';
+
+    /** @type {Collections} The data to track */
+    this._trackData = [{'DCS.dcsuri': 'get-directions'}];
   }
 
   /**
@@ -110,22 +119,31 @@ class StaticMap {
       size: `${this._width}x${this._height}`,
       scale: 2,
       markers: `anchor:16,40|icon:https://access.nyc.gov` +
-          `${this._markerImg}|shadow:false|${this._marker}`,
+        `${this._markerImg}|shadow:false|${this._marker}`,
       key: Utility.CONFIG.GOOGLE_STATIC_API
     };
 
     img.onload = () => {
       $(this._el).empty;
       const $img = this._link ?
-          $(`<a href="${this._link}" target="_blank" class="block"></a>`)
-            .append(img) : $(img);
+        $(`<a href="${this._link}"></a>`)
+          .append(img) : $(img);
+      $img.attr('target', '_blank');
+      $img.attr('itemprop', 'hasMap');
+      $img.addClass('block');
+
+      $img.on('click', (event) => {
+        Utility.track(this._trackKey, this._trackData);
+      });
+
       $(this._el).html($img);
     };
 
     img.src = `https://maps.googleapis.com/maps/api/staticmap?` +
-        `${$.param(parameters)}`;
+      `${$.param(parameters)}`;
 
-    $(img).addClass('block');
+    $(img).addClass('block animated fadeIn');
+    $(img).attr('alt', this._alt);
 
     return this;
   }

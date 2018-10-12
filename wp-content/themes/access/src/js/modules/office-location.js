@@ -52,7 +52,9 @@ class OfficeLocation {
     this.type = obj.type || '';
 
     /** {Boolean} If this is a government office. */
-    this.isGovtOffice = Utility.localize('GOVERNMENT_OFFICE') === this.type;
+    // We won't need to localize this until we translate locations - DH
+    // this.isGovtOffice = Utility.localize('GOVERNMENT_OFFICE') === this.type;
+    this.isGovtOffice = 'Government Office' === this.type;
 
     /** {object} The office location. */
     this.address = {

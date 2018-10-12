@@ -6,7 +6,7 @@
   <arg name="extensions" value="php"/>
 
   <!-- Files to scan -->
-  <!--<file>wp-content/mu-plugins/</file>-->
+  <file>wp-content/themes/access/includes/</file>
 
   <!-- Ignore WordPress, Composer dependencies, and specific libraries -->
   <exclude-pattern>vendor/</exclude-pattern>

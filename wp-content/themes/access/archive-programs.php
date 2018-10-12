@@ -14,4 +14,4 @@ if (isset($_GET['program_cat'])) {
 
 $context['posts'] = Timber::get_posts();
 $context['pagination'] = Timber::get_pagination();
-Timber::render('program-landing.twig', $context);
+Timber::render('programs/program-landing.twig', $context);

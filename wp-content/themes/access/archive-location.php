@@ -45,4 +45,4 @@ $context['posts'] = $posts;
 header('Content-type: text/json');
 header('Cache-Control: max-age=600');
 
-Timber::render('locations-json.twig', $context, array(600, false));
+Timber::render('locations/locations-json.twig', $context, array(600, false));
