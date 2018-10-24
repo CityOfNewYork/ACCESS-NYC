@@ -28998,19 +28998,22 @@ var _underscore = require('underscore');var _underscore2 = _interopRequireDefaul
 
 var _smoothscrollPolyfill = require('smoothscroll-polyfill');var _smoothscrollPolyfill2 = _interopRequireDefault(_smoothscrollPolyfill);
 
+var _matchesPolyfill = require('modules/matches-polyfill');var _matchesPolyfill2 = _interopRequireDefault(_matchesPolyfill);
 var _screenerField = require('modules/screener-field');var _screenerField2 = _interopRequireDefault(_screenerField);
 var _resultsField = require('modules/results-field');var _resultsField2 = _interopRequireDefault(_resultsField);
 var _shareForm = require('modules/share-form');var _shareForm2 = _interopRequireDefault(_shareForm);
 var _tooltip = require('modules/tooltip');var _tooltip2 = _interopRequireDefault(_tooltip);
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
-var _accordion = require('components/accordion/accordion.common');var _accordion2 = _interopRequireDefault(_accordion);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /* eslint-enable no-unused-vars */
+var _accordion = require('components/accordion/accordion.common');var _accordion2 = _interopRequireDefault(_accordion);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /* eslint-disable no-unused-vars */ /* eslint-env browser */
 
 (function (window, $) {
   'use strict';
 
-  _utility2.default.configErrorTracking();
+  _utility2.default.configErrorTracking(window);
 
   require('smoothscroll-polyfill').polyfill(); // eslint-disable-line no-undef
+
+  new _matchesPolyfill2.default(); // Elements.matches polyfill
 
   // Get SVG sprite file.
   $.get('/wp-content/themes/access/assets/svg/icons.svg', _utility2.default.svgSprites);
@@ -29069,9 +29072,9 @@ var _accordion = require('components/accordion/accordion.common');var _accordion
 
   // Enable environment warnings
   $(window).on('load', function () {return _utility2.default.warnings();});
-})(window, _jquery2.default); /* eslint-disable no-unused-vars */ /* eslint-env browser */
+})(window, _jquery2.default); /* eslint-enable no-unused-vars */
 
-},{"components/accordion/accordion.common":1,"jquery":4,"modules/results-field":12,"modules/screener-field":14,"modules/share-form":19,"modules/tooltip":20,"modules/utility":21,"smoothscroll-polyfill":6,"underscore":7}],11:[function(require,module,exports){
+},{"components/accordion/accordion.common":1,"jquery":4,"modules/matches-polyfill":12,"modules/results-field":13,"modules/screener-field":15,"modules/share-form":20,"modules/tooltip":21,"modules/utility":22,"smoothscroll-polyfill":6,"underscore":7}],11:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -29218,7 +29221,29 @@ CalcInput.PREVIOUS_KEY = '_prevKey';exports.default =
 
 CalcInput;
 
-},{"jquery":4,"modules/utility":21}],12:[function(require,module,exports){
+},{"jquery":4,"modules/utility":22}],12:[function(require,module,exports){
+'use strict';
+
+/**
+               * Polyfill for the Element.matches
+               * https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+               */Object.defineProperty(exports, "__esModule", { value: true });function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+Matches =
+/**
+           * Class contructor
+           */
+function Matches() {_classCallCheck(this, Matches);
+  /* eslint-disable no-undef */
+  if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector;
+  }
+  /* eslint-enable no-undef */
+};exports.default =
+
+
+Matches;
+
+},{}],13:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -29501,7 +29526,7 @@ ResultsField.SharePath = '/eligibility/results/';exports.default =
 
 ResultsField;
 
-},{"jquery":4,"modules/share-form":19,"modules/utility":21}],13:[function(require,module,exports){
+},{"jquery":4,"modules/share-form":20,"modules/utility":22}],14:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -29654,7 +29679,7 @@ ScreenerClient.ADDRESS_ATTRS = [
 
 ScreenerClient;
 
-},{"underscore":7}],14:[function(require,module,exports){
+},{"underscore":7}],15:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -30803,7 +30828,7 @@ ScreenerField.NYC_ZIPS = _screener2.default.NYC_ZIPS;exports.default =
 
 ScreenerField;
 
-},{"jquery":4,"js-cookie":5,"modules/calc-input":11,"modules/screener":18,"modules/screener-client":13,"modules/screener-household":15,"modules/screener-person":16,"modules/screener-staff":17,"modules/utility":21,"underscore":7,"vee-validate":8,"vue/dist/vue.common":9}],15:[function(require,module,exports){
+},{"jquery":4,"js-cookie":5,"modules/calc-input":11,"modules/screener":19,"modules/screener-client":14,"modules/screener-household":16,"modules/screener-person":17,"modules/screener-staff":18,"modules/utility":22,"underscore":7,"vee-validate":8,"vue/dist/vue.common":9}],16:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -30946,7 +30971,7 @@ ScreenerHousehold.LIVING_ATTRS = [
 
 ScreenerHousehold;
 
-},{"underscore":7}],16:[function(require,module,exports){
+},{"underscore":7}],17:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -31244,7 +31269,7 @@ ScreenerPerson.BENEFIT_ATTRS = [
 
 ScreenerPerson;
 
-},{"underscore":7}],17:[function(require,module,exports){
+},{"underscore":7}],18:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -31385,7 +31410,7 @@ ScreenerStaff.Cookies = {
 
 ScreenerStaff;
 
-},{"underscore":7}],18:[function(require,module,exports){
+},{"underscore":7}],19:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -32774,7 +32799,7 @@ Screener.CookiePath = 'eligibility';exports.default =
 
 Screener;
 
-},{"jquery":4,"js-cookie":5,"modules/screener-household":15,"modules/screener-person":16,"modules/utility":21,"underscore":7}],19:[function(require,module,exports){
+},{"jquery":4,"js-cookie":5,"modules/screener-household":16,"modules/screener-person":17,"modules/utility":22,"underscore":7}],20:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -33071,7 +33096,7 @@ ShareForm.Message = {
 
 ShareForm;
 
-},{"../variables.json":22,"jquery":4,"modules/utility":21}],20:[function(require,module,exports){
+},{"../variables.json":23,"jquery":4,"modules/utility":22}],21:[function(require,module,exports){
 /* eslint-env browser */
 
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
@@ -33263,7 +33288,7 @@ Tooltip.CssClass = {
 
 Tooltip;
 
-},{"jquery":4,"underscore":7}],21:[function(require,module,exports){
+},{"jquery":4,"underscore":7}],22:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};
 
@@ -33682,9 +33707,10 @@ Utility.sessionTimeout = function (time, callback) {
 /**
     * Sends the configuration object to Rollbar, the most important config is
     * the code_version which maps to the source maps version.
-    * @return {object} The configured Rollbar method
+    * @param  {object} window The initial window object.
+    * @return {object}        The configured Rollbar method.
     */
-Utility.configErrorTracking = function () {
+Utility.configErrorTracking = function (window) {
   if (typeof Rollbar === 'undefined') return false;
 
   var scripts = document.getElementsByTagName('script');
@@ -33694,28 +33720,34 @@ Utility.configErrorTracking = function () {
   var hash = basename.split('.')[1];
 
   var config = {
-    client: {
-      javascript: {
-        // This is will be true by default if you have enabled this in settings.
-        source_map_enabled: true,
-        // This is transformed via envify in the scripts task.
-        code_version: hash,
-        // Optionally guess which frames the error was thrown from when the
-        // browser does not provide line and column numbers.
-        guess_uncaught_frames: true } } };
+    payload: {
+      client: {
+        javascript: {
+          // This is will be true by default if you have enabled
+          // this in settings.
+          source_map_enabled: true,
+          // This is transformed via envify in the scripts task.
+          code_version: hash,
+          // Optionally guess which frames the error was thrown from
+          // when the browser does not provide line and column numbers.
+          guess_uncaught_frames: true } } } };
 
 
 
 
-  var rollbarConfigure = Rollbar.configure(config);
-  var msg = 'Configured Rollbar with ' + config.client.javascript.code_version;
 
-  if (Utility.debug()) {
-    console.dir(msg); // eslint-disable-line no-console
-    Rollbar.debug(msg); // eslint-disable-line no-undef
-  }
+  (0, _jquery2.default)(window).on('load', function () {
+    var rollbarConfigure = Rollbar.configure(config);
+    var msg = 'Configured Rollbar with ' + hash;
 
-  return rollbarConfigure;
+    if (Utility.debug()) {
+      console.dir({
+        init: msg,
+        settings: rollbarConfigure });
+      // eslint-disable-line no-console
+      Rollbar.debug(msg); // eslint-disable-line no-undef
+    }
+  });
 };
 
 /**
@@ -33754,7 +33786,7 @@ Utility.CONFIG = {
 
 Utility;
 
-},{"cleave.js/dist/addons/cleave-phone.us":2,"cleave.js/dist/cleave.min":3,"jquery":4,"underscore":7}],22:[function(require,module,exports){
+},{"cleave.js/dist/addons/cleave-phone.us":2,"cleave.js/dist/cleave.min":3,"jquery":4,"underscore":7}],23:[function(require,module,exports){
 module.exports={
   "screen-desktop": 960,
   "screen-tablet": 768,
@@ -33764,4 +33796,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.bf3185691d58fcaf0e0d830ee127bfac.js.map
+//# sourceMappingURL=main-field.8aed9c8944c056e77f1a3e0aa859456a.js.map

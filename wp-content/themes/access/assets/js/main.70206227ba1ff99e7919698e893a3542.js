@@ -15400,6 +15400,7 @@ return jQuery;
 },{}],9:[function(require,module,exports){
 'use strict';
 var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
+var _matchesPolyfill = require('modules/matches-polyfill');var _matchesPolyfill2 = _interopRequireDefault(_matchesPolyfill);
 var _officeMap = require('modules/office-map');var _officeMap2 = _interopRequireDefault(_officeMap);
 var _screener = require('modules/screener');var _screener2 = _interopRequireDefault(_screener);
 var _shareForm = require('modules/share-form');var _shareForm2 = _interopRequireDefault(_shareForm);
@@ -15409,14 +15410,16 @@ var _tooltip = require('modules/tooltip');var _tooltip2 = _interopRequireDefault
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
 var _accordion = require('components/accordion/accordion.common');var _accordion2 = _interopRequireDefault(_accordion);
 var _filter = require('components/filter/filter.common');var _filter2 = _interopRequireDefault(_filter);
-var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _nearbyStops2 = _interopRequireDefault(_nearbyStops);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _nearbyStops2 = _interopRequireDefault(_nearbyStops);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /* eslint-env browser */
 
 (function (window, $) {
   'use strict';
 
   var google = window.google;
 
-  _utility2.default.configErrorTracking();
+  _utility2.default.configErrorTracking(window);
+
+  new _matchesPolyfill2.default(); // Elements.matches polyfill
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
@@ -15634,9 +15637,31 @@ var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _n
 
   // Enable environment warnings
   $(window).on('load', function () {return _utility2.default.warnings();});
-})(window, _jquery2.default); /* eslint-env browser */
+})(window, _jquery2.default);
 
-},{"components/accordion/accordion.common":1,"components/filter/filter.common":2,"components/nearby-stops/nearby-stops.common":3,"jquery":6,"modules/office-map":12,"modules/screener":15,"modules/share-form":16,"modules/static-map":17,"modules/text-sizer":18,"modules/tooltip":19,"modules/utility":20}],10:[function(require,module,exports){
+},{"components/accordion/accordion.common":1,"components/filter/filter.common":2,"components/nearby-stops/nearby-stops.common":3,"jquery":6,"modules/matches-polyfill":10,"modules/office-map":13,"modules/screener":16,"modules/share-form":17,"modules/static-map":18,"modules/text-sizer":19,"modules/tooltip":20,"modules/utility":21}],10:[function(require,module,exports){
+'use strict';
+
+/**
+               * Polyfill for the Element.matches
+               * https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+               */Object.defineProperty(exports, "__esModule", { value: true });function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+Matches =
+/**
+           * Class contructor
+           */
+function Matches() {_classCallCheck(this, Matches);
+  /* eslint-disable no-undef */
+  if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector;
+  }
+  /* eslint-enable no-undef */
+};exports.default =
+
+
+Matches;
+
+},{}],11:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -15840,7 +15865,7 @@ OfficeFilter.Event = {
 
 OfficeFilter;
 
-},{"jquery":6,"underscore":8}],11:[function(require,module,exports){
+},{"jquery":6,"underscore":8}],12:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -15951,7 +15976,7 @@ OfficeLocation.Marker = null;exports.default =
 
 OfficeLocation;
 
-},{"modules/utility":20,"underscore":8}],12:[function(require,module,exports){
+},{"modules/utility":21,"underscore":8}],13:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -16411,7 +16436,7 @@ OfficeMap.Selectors = {
 
 OfficeMap;
 
-},{"jquery":6,"modules/office-filter":10,"modules/office-location":11,"modules/utility":20,"underscore":8}],13:[function(require,module,exports){
+},{"jquery":6,"modules/office-filter":11,"modules/office-location":12,"modules/utility":21,"underscore":8}],14:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -16554,7 +16579,7 @@ ScreenerHousehold.LIVING_ATTRS = [
 
 ScreenerHousehold;
 
-},{"underscore":8}],14:[function(require,module,exports){
+},{"underscore":8}],15:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -16852,7 +16877,7 @@ ScreenerPerson.BENEFIT_ATTRS = [
 
 ScreenerPerson;
 
-},{"underscore":8}],15:[function(require,module,exports){
+},{"underscore":8}],16:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -18241,7 +18266,7 @@ Screener.CookiePath = 'eligibility';exports.default =
 
 Screener;
 
-},{"jquery":6,"js-cookie":7,"modules/screener-household":13,"modules/screener-person":14,"modules/utility":20,"underscore":8}],16:[function(require,module,exports){
+},{"jquery":6,"js-cookie":7,"modules/screener-household":14,"modules/screener-person":15,"modules/utility":21,"underscore":8}],17:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -18538,7 +18563,7 @@ ShareForm.Message = {
 
 ShareForm;
 
-},{"../variables.json":21,"jquery":6,"modules/utility":20}],17:[function(require,module,exports){
+},{"../variables.json":22,"jquery":6,"modules/utility":21}],18:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -18692,7 +18717,7 @@ StaticMap = function () {
 
 StaticMap;
 
-},{"jquery":6,"modules/utility":20,"underscore":8}],18:[function(require,module,exports){
+},{"jquery":6,"modules/utility":21,"underscore":8}],19:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -18880,7 +18905,7 @@ TextSizer.CssClass = {
 
 TextSizer;
 
-},{"jquery":6,"js-cookie":7}],19:[function(require,module,exports){
+},{"jquery":6,"js-cookie":7}],20:[function(require,module,exports){
 /* eslint-env browser */
 
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
@@ -19072,7 +19097,7 @@ Tooltip.CssClass = {
 
 Tooltip;
 
-},{"jquery":6,"underscore":8}],20:[function(require,module,exports){
+},{"jquery":6,"underscore":8}],21:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};
 
@@ -19491,9 +19516,10 @@ Utility.sessionTimeout = function (time, callback) {
 /**
     * Sends the configuration object to Rollbar, the most important config is
     * the code_version which maps to the source maps version.
-    * @return {object} The configured Rollbar method
+    * @param  {object} window The initial window object.
+    * @return {object}        The configured Rollbar method.
     */
-Utility.configErrorTracking = function () {
+Utility.configErrorTracking = function (window) {
   if (typeof Rollbar === 'undefined') return false;
 
   var scripts = document.getElementsByTagName('script');
@@ -19503,28 +19529,34 @@ Utility.configErrorTracking = function () {
   var hash = basename.split('.')[1];
 
   var config = {
-    client: {
-      javascript: {
-        // This is will be true by default if you have enabled this in settings.
-        source_map_enabled: true,
-        // This is transformed via envify in the scripts task.
-        code_version: hash,
-        // Optionally guess which frames the error was thrown from when the
-        // browser does not provide line and column numbers.
-        guess_uncaught_frames: true } } };
+    payload: {
+      client: {
+        javascript: {
+          // This is will be true by default if you have enabled
+          // this in settings.
+          source_map_enabled: true,
+          // This is transformed via envify in the scripts task.
+          code_version: hash,
+          // Optionally guess which frames the error was thrown from
+          // when the browser does not provide line and column numbers.
+          guess_uncaught_frames: true } } } };
 
 
 
 
-  var rollbarConfigure = Rollbar.configure(config);
-  var msg = 'Configured Rollbar with ' + config.client.javascript.code_version;
 
-  if (Utility.debug()) {
-    console.dir(msg); // eslint-disable-line no-console
-    Rollbar.debug(msg); // eslint-disable-line no-undef
-  }
+  (0, _jquery2.default)(window).on('load', function () {
+    var rollbarConfigure = Rollbar.configure(config);
+    var msg = 'Configured Rollbar with ' + hash;
 
-  return rollbarConfigure;
+    if (Utility.debug()) {
+      console.dir({
+        init: msg,
+        settings: rollbarConfigure });
+      // eslint-disable-line no-console
+      Rollbar.debug(msg); // eslint-disable-line no-undef
+    }
+  });
 };
 
 /**
@@ -19563,7 +19595,7 @@ Utility.CONFIG = {
 
 Utility;
 
-},{"cleave.js/dist/addons/cleave-phone.us":4,"cleave.js/dist/cleave.min":5,"jquery":6,"underscore":8}],21:[function(require,module,exports){
+},{"cleave.js/dist/addons/cleave-phone.us":4,"cleave.js/dist/cleave.min":5,"jquery":6,"underscore":8}],22:[function(require,module,exports){
 module.exports={
   "screen-desktop": 960,
   "screen-tablet": 768,
@@ -19573,4 +19605,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main.649407932365a03f0f0e0ca04e546a3a.js.map
+//# sourceMappingURL=main.70206227ba1ff99e7919698e893a3542.js.map

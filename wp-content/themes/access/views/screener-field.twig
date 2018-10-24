@@ -425,7 +425,7 @@
 
 {% block scripts_footer %}
 {{ function('enqueue_script', 'assets/js/main-field', true) }}
-<script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Element.prototype.matches,Promise&flags=gated"></script> {# IE Support https://polyfill.io #}
+<script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js/?features=Promise&flags=gated"></script> {# IE Support https://polyfill.io #}
 <script type="text/javascript">
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

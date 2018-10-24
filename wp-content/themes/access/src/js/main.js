@@ -1,5 +1,6 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
+import Matches from 'modules/matches-polyfill';
 import OfficeMap from 'modules/office-map';
 import Screener from 'modules/screener';
 import ShareForm from 'modules/share-form';
@@ -16,7 +17,9 @@ import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 
   const google = window.google;
 
-  Utility.configErrorTracking();
+  Utility.configErrorTracking(window);
+
+  new Matches; // Elements.matches polyfill
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
