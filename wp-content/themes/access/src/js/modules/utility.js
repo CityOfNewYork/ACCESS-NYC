@@ -416,9 +416,10 @@ Utility.sessionTimeout = function(time, callback) {
 /**
  * Sends the configuration object to Rollbar, the most important config is
  * the code_version which maps to the source maps version.
- * @return {object} The configured Rollbar method
+ * @param  {object} window The initial window object.
+ * @return {object}        The configured Rollbar method.
  */
-Utility.configErrorTracking = function() {
+Utility.configErrorTracking = function(window) {
   if (typeof Rollbar === 'undefined') return false;
 
   let scripts = document.getElementsByTagName('script');
@@ -428,28 +429,34 @@ Utility.configErrorTracking = function() {
   let hash = basename.split('.')[1];
 
   let config = {
-    client: {
-      javascript: {
-        // This is will be true by default if you have enabled this in settings.
-        source_map_enabled: true,
-        // This is transformed via envify in the scripts task.
-        code_version: hash,
-        // Optionally guess which frames the error was thrown from when the
-        // browser does not provide line and column numbers.
-        guess_uncaught_frames: true
+    payload: {
+      client: {
+        javascript: {
+          // This is will be true by default if you have enabled
+          // this in settings.
+          source_map_enabled: true,
+          // This is transformed via envify in the scripts task.
+          code_version: hash,
+          // Optionally guess which frames the error was thrown from
+          // when the browser does not provide line and column numbers.
+          guess_uncaught_frames: true
+        }
       }
     }
   };
 
-  let rollbarConfigure = Rollbar.configure(config);
-  let msg = `Configured Rollbar with ${config.client.javascript.code_version}`;
+  $(window).on('load', () => {
+    let rollbarConfigure = Rollbar.configure(config);
+    let msg = `Configured Rollbar with ${hash}`;
 
-  if (Utility.debug()) {
-    console.dir(msg); // eslint-disable-line no-console
-    Rollbar.debug(msg); // eslint-disable-line no-undef
-  }
-
-  return rollbarConfigure;
+    if (Utility.debug()) {
+      console.dir({
+        init: msg,
+        settings: rollbarConfigure
+      }); // eslint-disable-line no-console
+      Rollbar.debug(msg); // eslint-disable-line no-undef
+    }
+  });
 };
 
 /**

@@ -4,6 +4,7 @@ import _ from 'underscore';
 /* eslint-disable no-unused-vars */
 import SmoothScroll from 'smoothscroll-polyfill';
 /* eslint-enable no-unused-vars */
+import Matches from 'modules/matches-polyfill';
 import ScreenerField from 'modules/screener-field';
 import ResultsField from 'modules/results-field';
 import ShareForm from 'modules/share-form';
@@ -14,9 +15,11 @@ import Accordion from 'components/accordion/accordion.common';
 (function(window, $) {
   'use strict';
 
-  Utility.configErrorTracking();
+  Utility.configErrorTracking(window);
 
   require('smoothscroll-polyfill').polyfill(); // eslint-disable-line no-undef
+
+  new Matches; // Elements.matches polyfill
 
   // Get SVG sprite file.
   $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
