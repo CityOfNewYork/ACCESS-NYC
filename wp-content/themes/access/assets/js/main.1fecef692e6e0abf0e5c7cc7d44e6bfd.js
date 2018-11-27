@@ -15653,7 +15653,20 @@ Matches =
 function Matches() {_classCallCheck(this, Matches);
   /* eslint-disable no-undef */
   if (!Element.prototype.matches) {
-    Element.prototype.matches = Element.prototype.msMatchesSelector;
+    Element.prototype.matches =
+    Element.prototype.matchesSelector ||
+    Element.prototype.mozMatchesSelector ||
+    Element.prototype.msMatchesSelector ||
+    Element.prototype.oMatchesSelector ||
+    Element.prototype.webkitMatchesSelector ||
+    function (s) {
+      var matches = (this.document || this.ownerDocument).
+      querySelectorAll(s);
+      var i = matches.length;
+      // eslint-disable-next-line no-empty
+      while (--i >= 0 && matches.item(i) !== this) {}
+      return i > -1;
+    };
   }
   /* eslint-enable no-undef */
 };exports.default =
@@ -19605,4 +19618,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main.70206227ba1ff99e7919698e893a3542.js.map
+//# sourceMappingURL=main.1fecef692e6e0abf0e5c7cc7d44e6bfd.js.map

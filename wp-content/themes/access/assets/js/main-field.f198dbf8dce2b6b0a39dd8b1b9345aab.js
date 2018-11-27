@@ -29235,7 +29235,20 @@ Matches =
 function Matches() {_classCallCheck(this, Matches);
   /* eslint-disable no-undef */
   if (!Element.prototype.matches) {
-    Element.prototype.matches = Element.prototype.msMatchesSelector;
+    Element.prototype.matches =
+    Element.prototype.matchesSelector ||
+    Element.prototype.mozMatchesSelector ||
+    Element.prototype.msMatchesSelector ||
+    Element.prototype.oMatchesSelector ||
+    Element.prototype.webkitMatchesSelector ||
+    function (s) {
+      var matches = (this.document || this.ownerDocument).
+      querySelectorAll(s);
+      var i = matches.length;
+      // eslint-disable-next-line no-empty
+      while (--i >= 0 && matches.item(i) !== this) {}
+      return i > -1;
+    };
   }
   /* eslint-enable no-undef */
 };exports.default =
@@ -33796,4 +33809,4 @@ module.exports={
 
 },{}]},{},[10])
 
-//# sourceMappingURL=main-field.8aed9c8944c056e77f1a3e0aa859456a.js.map
+//# sourceMappingURL=main-field.f198dbf8dce2b6b0a39dd8b1b9345aab.js.map
