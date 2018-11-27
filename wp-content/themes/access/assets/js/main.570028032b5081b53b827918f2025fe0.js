@@ -1701,6 +1701,14 @@ var freeProcess = moduleExports$1 && freeGlobal.process;
 /** Used to access faster Node.js helpers. */
 var nodeUtil = (function() {
   try {
+    // Use `util.types` for Node.js 10+.
+    var types = freeModule$1 && freeModule$1.require && freeModule$1.require('util').types;
+
+    if (types) {
+      return types;
+    }
+
+    // Legacy `process.binding('util')` for Node.js < 10.
     return freeProcess && freeProcess.binding && freeProcess.binding('util');
   } catch (e) {}
 }());
@@ -19618,4 +19626,4 @@ module.exports={
 
 },{}]},{},[9])
 
-//# sourceMappingURL=main.1fecef692e6e0abf0e5c7cc7d44e6bfd.js.map
+//# sourceMappingURL=main.570028032b5081b53b827918f2025fe0.js.map
