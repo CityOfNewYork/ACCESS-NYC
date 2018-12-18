@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Plugin Name: Configure TinyMCE Settings
+ * Description: Configuration for the classic WordPress text editor. Adds p, h2, h3, h4, and h5 block options to the TinyMCE editor. Removes the blockquote block. Removes underline, alignjustify, and forecolor from advanced toolbar. Removes the TinyMCE Emoji Plugin.
+ * Author: Blue State Digital
+ */
+
+/**
  * Configure TinyMCE settings
  * @param  array $init [<description>]
  * @return array       [<description>]
