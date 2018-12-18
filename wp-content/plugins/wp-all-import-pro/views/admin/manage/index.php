@@ -1,3 +1,17 @@
+<script type="text/javascript">
+    (function ($, ajaxurl, wp_all_import_security) {
+
+        $(document).ready(function () {
+            $('.open_cron_scheduling').click(function () {
+
+                var itemId = $(this).data('itemid');
+                openSchedulingDialog(itemId, $(this), '<?php echo WP_ALL_IMPORT_ROOT_URL; ?>/static/img/preloader.gif');
+            });
+        });
+    })(jQuery, ajaxurl, wp_all_import_security);
+
+    window.pmxiHasSchedulingSubscription = <?php echo PMXI_Plugin::hasActiveSchedulingLicense() ? 'true' : 'false';  ?>;
+</script>
 <div class="wpallimport-header" style="overflow:hidden; height: 65px; padding-top: 10px; margin-bottom: -20px;">
 	<div class="wpallimport-logo"></div>
 	<div class="wpallimport-title">
@@ -312,9 +326,18 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 							case 'info':
 								?>
 								<td>
-									
-									<a href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'scheduling'), $this->baseUrl)?>"><?php _e('Cron Scheduling', 'wp_all_import_plugin'); ?></a> <br>
-									
+
+                                    <?php if(!in_array($item['type'], array('url', 'ftp', 'file'))) {?>
+                                        <a href="#" class="scheduling-disabled"><?php _e('Scheduling Options', 'wp_all_import_plugin'); ?></a>
+                                        <a href="#help" class="wpallimport-help" style="position: relative; top: -2px; margin-left: 0;"  title="<?php _e("To run this import on a schedule you must use the 'Download from URL' or 'Use existing file' option on the Import Settings page.", PMXI_Plugin::LANGUAGE_DOMAIN);?>">?</a>
+                                        <br/>
+                                    <?php } else { ?>
+                                        <a href="#"
+                                           class="open_cron_scheduling"
+                                           data-itemid="<?php echo $item['id'];?>"><?php _e('Scheduling Options', 'wp_all_import_plugin'); ?></a><br/>
+
+                                    <?php } ?>
+
 									<a href="<?php echo add_query_arg(array('page' => 'pmxi-admin-history', 'id' => $item['id']), remove_query_arg('pagenum', $this->baseUrl))?>"><?php _e('History Logs', 'wp_all_import_plugin'); ?></a>
 
 								</td>
@@ -324,7 +347,6 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 								?>
 								<td style="width: 130px;">
 									<?php if ( ! $item['processing'] and ! $item['executing'] ): ?>
-									<!--h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'edit'), $this->baseUrl); ?>"><?php _e('Edit', 'wp_all_import_plugin'); ?></a></h2-->
 									<h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'update'), $this->baseUrl); ?>"><?php _e('Run Import', 'wp_all_import_plugin'); ?></a></h2>
 									<?php elseif ($item['processing']) : ?>
 									<h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'cancel', '_wpnonce' => wp_create_nonce( '_wpnonce-cancel_import' )), $this->baseUrl); ?>"><?php _e('Cancel Cron', 'wp_all_import_plugin'); ?></a></h2>
@@ -372,3 +394,20 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 	<a href="http://soflyy.com/" target="_blank" class="wpallimport-created-by"><?php _e('Created by', 'wp_all_import_plugin'); ?> <span></span></a>
 
 </form>
+<div class="wpallimport-overlay"></div>
+<div class="wpallimport-super-overlay"></div>
+
+<div class="wpallimport-loader" style="border-radius: 5px; z-index: 999999; display:none; position: fixed;top: 200px;    left: 50%; width: 100px;height: 100px;background-color: #fff; text-align: center;">
+    <img style="margin-top: 45%;" src="<?php echo WP_ALL_IMPORT_ROOT_URL; ?>/static/img/preloader.gif" />
+</div>
+
+<fieldset class="optionsset column rad4 wp-all-import-scheduling-help">
+
+    <div class="title">
+        <span style="font-size:1.5em;" class="wpallimport-add-row-title"><?php _e('Automatic Scheduling', 'wp_all_export_plugin'); ?></span>
+    </div>
+
+    <?php
+    include_once __DIR__.'/../import/options/scheduling/_scheduling_help.php';
+    ?>
+</fieldset>

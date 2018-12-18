@@ -1,3 +1,23 @@
+#2.0.8
+
+* Fixed fatal error while importing images (wpmlai-81)
+
+#2.0.7
+
+* Added fix to correctly calculate WC taxonomies after the import (wpmlai-78, wpmlai-71) 
+
+#2.0.6
+
+* Added support for importing tags and other taxonomies (WPMLAI-67)
+* Fixed PHP notices
+
+#2.0.5
+
+##Fixes
+
+* Fixed not setting setting _wcml_duplicate_of_variation metakey for variations (WPMLAI-68)
+
+
 #2.0.4
 
 ##Fixes

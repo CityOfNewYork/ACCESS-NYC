@@ -45,9 +45,21 @@
 							<div class="search_through_the_media_library">
 								<div class="input" style="margin:3px;">
 									<input type="hidden" name="<?php echo $section_slug; ?>search_existing_images" value="0" />
-									<input type="checkbox" id="<?php echo $section_slug; ?>search_existing_images" name="<?php echo $section_slug; ?>search_existing_images" value="1" <?php echo $post[$section_slug . 'search_existing_images'] ? 'checked="checked"' : '' ?> class="fix_checkbox"/>
+									<input type="checkbox" id="<?php echo $section_slug; ?>search_existing_images" name="<?php echo $section_slug; ?>search_existing_images" value="1" <?php echo $post[$section_slug . 'search_existing_images'] ? 'checked="checked"' : '' ?> class="switcher fix_checkbox"/>
 									<label for="<?php echo $section_slug; ?>search_existing_images"><?php _e('Search through the Media Library for existing images before importing new images','wp_all_import_plugin');?> </label>						
-									<a href="#help" class="wpallimport-help" title="<?php _e('If an image with the same file name is found in the Media Library then that image will be attached to this record instead of importing a new image. Disable this setting if your import has different images with the same file name.', 'wp_all_import_plugin') ?>" style="position: relative; top: -2px;">?</a>
+									<a href="#help" class="wpallimport-help" title="<?php _e('If an image with the same file name or remote URL is found in the Media Library then that image will be attached to this record instead of importing a new image. Disable this setting if you always want to download a new image.', 'wp_all_import_plugin') ?>" style="position: relative; top: -2px;">?</a>
+									<div class="switcher-target-<?php echo $section_slug; ?>search_existing_images" style="padding-left:23px;">
+                                        <div class="search_through_the_media_library_logic">
+                                            <div class="input">
+                                                <input type="radio" id="<?php echo $section_slug; ?>search_existing_images_logic_url" name="<?php echo $section_slug; ?>search_existing_images_logic" value="by_url" <?php echo ( "by_url" == $post['search_existing_images_logic'] ) ? 'checked="checked"': '' ?>/>
+                                                <label for="<?php echo $section_slug; ?>search_existing_images_logic_url"><?php _e('Match image by URL', 'wp_all_import_plugin') ?></label>
+                                            </div>
+                                            <div class="input">
+                                                <input type="radio" id="<?php echo $section_slug; ?>search_existing_images_logic_filename" name="<?php echo $section_slug; ?>search_existing_images_logic" value="by_filename" <?php echo ( "by_filename" == $post['search_existing_images_logic'] ) ? 'checked="checked"': '' ?>/>
+                                                <label for="<?php echo $section_slug; ?>search_existing_images_logic_filename"><?php _e('Match image by filename', 'wp_all_import_plugin') ?></label>
+                                            </div>
+                                        </div>
+									</div>
 								</div>							
 								<div class="input" style="margin: 3px;">
 									<input type="hidden" name="<?php echo $section_slug; ?>do_not_remove_images" value="0" />
@@ -55,6 +67,14 @@
 									<label for="<?php echo $section_slug; ?>do_not_remove_images"><?php _e('Keep images currently in Media Library', 'wp_all_import_plugin') ?></label>
 									<a href="#help" class="wpallimport-help" title="<?php _e('If disabled, images attached to imported posts will be deleted and then all images will be imported.', 'wp_all_import_plugin') ?>" style="position:relative; top: -2px;">?</a>
 								</div>
+								<?php if ($section_type == 'images'): ?>
+								<div class="input" style="margin: 3px;">
+									<input type="hidden" name="<?php echo $section_slug; ?>import_img_tags" value="0" />
+									<input type="checkbox" id="<?php echo $section_slug; ?>import_img_tags" name="<?php echo $section_slug; ?>import_img_tags" value="1" <?php echo (isset($post[$section_slug . 'import_img_tags']) && $post[$section_slug . 'import_img_tags']) ? 'checked="checked"': '' ?> />
+									<label for="<?php echo $section_slug; ?>import_img_tags"><?php _e('Scan through post content and import images wrapped in &lt;img&gt; tags', 'wp_all_import_plugin') ?></label>
+									<a href="#help" class="wpallimport-help" title="<?php _e('Only images hosted on other sites will be imported. Images will be imported to WordPress and the <img> tag updated with the new image URL.', 'wp_all_import_plugin') ?>" style="position:relative; top: -2px;">?</a>
+								</div>
+								<?php endif; ?>
 							</div>
 							<?php if ($section_type == 'images'): ?>
 							<div class="input">

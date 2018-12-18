@@ -4,6 +4,7 @@ namespace Timber;
 
 use Timber\Image;
 use Timber\Image\Operation\ToJpg;
+use Timber\Image\Operation\ToWebp;
 use Timber\Image\Operation\Resize;
 use Timber\Image\Operation\Retina;
 use Timber\Image\Operation\Letterbox;
@@ -142,6 +143,35 @@ class ImageHelper {
 	}
 
 	/**
+	 * Checks if file is an SVG.
+	 *
+	 * @param string $file_path File path to check.
+	 * @return bool True if SVG, false if not SVG or file doesn't exist.
+	 */
+	public static function is_svg( $file_path ) {
+		if ( ! isset( $file_path ) || '' === $file_path || ! file_exists( $file_path ) ) {
+			return false;
+		}
+
+		/**
+		 * Try reading mime type.
+		 *
+		 * SVG images are not allowed by default in WordPress, so we have to pass a default mime
+		 * type for SVG images.
+		 */
+		$mime = wp_check_filetype_and_ext( $file_path, basename( $file_path ), array(
+			'svg' => 'image/svg+xml',
+		) );
+
+		return in_array( $mime['type'], array(
+			'image/svg+xml',
+			'text/html',
+			'text/plain',
+			'image/svg',
+		) );
+	}
+
+	/**
 	 * Generate a new image with the specified dimensions.
 	 * New dimensions are achieved by adding colored bands to maintain ratio.
 	 *
@@ -168,6 +198,19 @@ class ImageHelper {
 		$op = new Image\Operation\ToJpg($bghex);
 		return self::_operate($src, $op, $force);
 	}
+
+    /**
+     * Generates a new image by converting the source into WEBP
+     *
+     * @param string  $src      a url or path to the image (http://example.org/wp-content/uploads/2014/image.jpg)
+     *                          or (/wp-content/uploads/2014/image.jpg)
+	 * @param int     $quality  ranges from 0 (worst quality, smaller file) to 100 (best quality, biggest file)
+     * @param bool    $force
+     */
+    public static function img_to_webp( $src, $quality = 80, $force = false ) {
+        $op = new Image\Operation\ToWebp($quality);
+        return self::_operate($src, $op, $force);
+    }
 
 	//-- end of public methods --//
 

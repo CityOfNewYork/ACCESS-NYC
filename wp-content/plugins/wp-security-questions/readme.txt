@@ -7,7 +7,7 @@ Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Donate link:       (a link for donating)
 Requires at least: 2.0.0 
-Tested up to:      4.8.2
+Tested up to:      5.0.0
 Stable tag:        Ask Security Questions on registration, login and forgot password screen.
 
 == Description ==
@@ -65,6 +65,10 @@ This section describes how to install the plugin and get it working.
 5. Enable Security questions on login, registration, and lost password page.
 
 == Changelog ==
+
+
+= Version 1.0.2 =
+* Improvement: Possible vulnerablity for admin when logged is resolved.
 
 = Version 1.0.1 =
 * Improvement Fix - Proper instructions added to use this plugin.

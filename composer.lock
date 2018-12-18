@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6f569550f545650f5e94f25a18dc89d",
+    "content-hash": "d711da5dfb31e05fa2ded2f671f793ee",
     "packages": [
         {
             "name": "composer/installers",
@@ -1044,15 +1044,15 @@
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.6.3",
+            "version": "2.7.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.6.3"
+                "reference": "tags/2.7.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.6.3.zip",
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.7.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1064,15 +1064,15 @@
         },
         {
             "name": "wpackagist-plugin/rollbar",
-            "version": "2.2.0",
+            "version": "2.4.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/rollbar/",
-                "reference": "tags/2.2.0"
+                "reference": "tags/2.4.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/rollbar.2.2.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/rollbar.2.4.7.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1104,15 +1104,15 @@
         },
         {
             "name": "wpackagist-plugin/timber-library",
-            "version": "1.7.0",
+            "version": "1.8.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/timber-library/",
-                "reference": "tags/1.7.0"
+                "reference": "tags/1.8.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/timber-library.1.7.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/timber-library.1.8.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1144,15 +1144,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.2.5",
+            "version": "1.5.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.2.5"
+                "reference": "tags/1.5.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.2.5.zip",
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.1.zip",
                 "reference": null,
                 "shasum": null
             },

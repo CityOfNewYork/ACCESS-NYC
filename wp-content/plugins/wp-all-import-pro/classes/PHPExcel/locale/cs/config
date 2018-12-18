@@ -1,6 +1,7 @@
 ##
 ## PHPExcel
-##
+##
+
 ## Copyright (c) 2006 - 2013 PHPExcel
 ##
 ## This library is free software; you can redistribute it and/or
@@ -33,7 +34,6 @@ ArgumentSeparator	= ;
 ##	(For future use)
 ##
 currencySymbol	= Kč
-
 
 ##
 ##	Excel Error Codes	(For future use)

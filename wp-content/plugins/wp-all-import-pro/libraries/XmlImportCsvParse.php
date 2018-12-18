@@ -989,7 +989,7 @@ class PMXI_CsvParser
             }
             $empty_columns = 0;
             foreach ($keys as $key) {
-                if ($key == '') $empty_columns++;
+                if (preg_replace("%\s%", "", $key) == '') $empty_columns++;
             }
             // skip empty lines
             if ($empty_columns == count($keys)) continue;

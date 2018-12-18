@@ -45,7 +45,7 @@ function pmxi_wp_ajax_get_bundle_post_type(){
 				{
 					if ( strpos(basename($unzipped_file['stored_filename']), 'WP All Import Template') === 0 || strpos(basename($unzipped_file['stored_filename']), 'templates_') === 0 )
 					{
-						$templates = file_get_contents($unzipped_file['filename']);											
+						$templates = file_get_contents($unzipped_file['filename']);
 
 						$decodedTemplates = json_decode($templates, true);		
 
@@ -54,8 +54,8 @@ function pmxi_wp_ajax_get_bundle_post_type(){
 						$options = (empty($templateOptions[0]['options'])) ? false : maybe_unserialize($templateOptions[0]['options']);			
 
 						$response['post_type'] = ( ! empty($options) ) ? $options['custom_type'] : false;
-                        $response['taxonomy_type'] = ( ! empty($options) ) ? $options['taxonomy_type'] : false;
-					}					
+                        $response['taxonomy_type'] = ( ! empty($options) && isset($options['taxonomy_type'])) ? $options['taxonomy_type'] : false;
+					}
 				}
 			}
 		}	    

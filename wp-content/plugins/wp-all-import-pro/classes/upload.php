@@ -337,10 +337,10 @@ if ( ! class_exists('PMXI_Upload')){
 			if ( empty($this->errors->errors) ){
 
 				if( '' == $feed_type and ! preg_match('%\W(xml|csv|zip|gz|xls|xlsx)$%i', trim($this->file))) $feed_type = wp_all_import_get_remote_file_name(trim($this->file));
-				
+
 				if ('zip' == $feed_type or empty($feed_type) and preg_match('%\W(zip)$%i', trim($this->file))) {							
 					
-					$tmpname = $this->uploadsPath . '/' . wp_unique_filename($this->uploadsPath, basename($this->file));
+					$tmpname = $this->uploadsPath . '/' . wp_unique_filename($this->uploadsPath, md5(basename($this->file)) . '.zip');
 					
 					@copy($this->file, $tmpname);				
 					

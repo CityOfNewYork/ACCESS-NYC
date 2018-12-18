@@ -121,7 +121,7 @@
 
 			<?php $max_execution_time = ini_get('max_execution_time');?>			
 
-			<div class="wpallimport-section">
+			<div class="wpallimport-section" style="margin-top: -20px;">
 				<div class="wpallimport-content-section">
 					<div class="wpallimport-collapsed-header" style="padding-left: 30px;">
 						<h3 style="color: #425e99;"><?php _e('Import Summary', 'wp_all_import_plugin'); ?> <?php if (!$isWizard):?><span style="color:#000;"><?php printf(__(" - ID: %s - %s"), $import->id, empty($import->friendly_name) ? $import->name : $import->friendly_name);?></span><?php endif;?></h3>
@@ -359,11 +359,18 @@
 			</td>			
 		</tr>
 	</table>
-	<?php if ($is_new_import):?>
-	<form class="confirm <?php echo ! $isWizard ? 'edit' : '' ?>" method="post">
+
+    <div style="color: #425F9A; font-size: 14px; font-weight: bold; margin: 0 0 15px; line-height: 25px; text-align: center;">
+        <div id="no-subscription" style="display: none;">
+            <?php echo _e("Looks like you're trying out Automatic Scheduling!");?><br/>
+            <?php echo _e("Your Automatic Scheduling settings won't be saved without a subscription.");?>
+        </div>
+    </div>
+    <?php if ($is_new_import):?>
+	<form id="wpai-submit-confirm-form" class="confirm <?php echo ! $isWizard ? 'edit' : '' ?>" method="post">
 		<?php wp_nonce_field('confirm', '_wpnonce_confirm') ?>
 		<input type="hidden" name="is_confirmed" value="1" />
-		<input type="submit" class="rad10" value="<?php _e('Confirm & Run Import', 'wp_all_import_plugin') ?>" />						
+        <input type="submit" class="rad10" value="<?php _e('Confirm & Run Import', 'wp_all_import_plugin') ?>" />
 		<p>
 		<?php if ($isWizard): ?>
 			<a href="<?php echo apply_filters('pmxi_options_back_link', add_query_arg('action', 'options', $this->baseUrl), $isWizard); ?>"><?php _e('or go back to Step 4', 'wp_all_import_plugin') ?></a>

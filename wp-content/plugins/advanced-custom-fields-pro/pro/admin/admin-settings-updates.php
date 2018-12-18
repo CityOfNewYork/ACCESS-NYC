@@ -185,16 +185,12 @@ class acf_admin_settings_updates {
 		
 		// activate
 		if( acf_verify_nonce('activate_pro_licence') ) {
-		
 			$this->activate_pro_licence();
 		
 		// deactivate	
 		} elseif( acf_verify_nonce('deactivate_pro_licence') ) {
-		
 			$this->deactivate_pro_licence();
-			
 		}
-		
 		
 		// vars
 		$license = acf_pro_get_license_key();
@@ -208,26 +204,20 @@ class acf_admin_settings_updates {
 			'upgrade_notice'	=> ''
 		);
 		
-		
-		// vars
-		$info = acf_updates()->get_plugin_info('pro');
-		
+		// get plugin updates
+		$force_check = !empty( $_GET['force-check'] );
+		$info = acf_updates()->get_plugin_info('pro', $force_check);
 		
 		// error
 		if( is_wp_error($info) ) {
-			
 			return $this->show_error( $info );
-			
 		}
-        
-        
+		
         // add info to view
         $this->view['remote_version'] = $info['version'];
         
-        
         // add changelog if the remote version is '>' than the current version
         $version = acf_get_setting('version');
-	 
 		
 	    // check if remote version is higher than current version
 		if( version_compare($info['version'], $version, '>') ) {
@@ -237,20 +227,27 @@ class acf_admin_settings_updates {
         	$this->view['changelog'] = $this->get_changelog_section($info['changelog'], $info['version']);
         	$this->view['upgrade_notice'] = $this->get_changelog_section($info['upgrade_notice'], $info['version']);
         	
-        	
-        	// refresh transient
-        	// - avoids new version not available in plugin update list
-        	// - only request if license is active
+        	// perform update checks if license is active
+        	$basename = acf_get_setting('basename');
+        	$update = acf_updates()->get_plugin_update( $basename );
         	if( $license ) {
 	        	
-	        	acf_updates()->refresh_plugins_transient();	
+	        	// display error if no package url
+	        	// - possible if license key has been modified
+	        	if( $update && !$update['package'] ) {
+		        	$this->show_error( __('<b>Error</b>. Could not authenticate update package. Please check again or deactivate and reactivate your ACF PRO license.', 'acf') );
+		        	$this->view['update_available'] = false;
+	        	}
 	        	
+	        	// refresh transient
+	        	// - if no update exists in the transient
+	        	// - or if the transient 'new_version' is stale
+	        	if( !$update || $update['new_version'] !== $info['version'] ) {
+		        	acf_updates()->refresh_plugins_transient();
+	        	}
         	}
-
         }
-		
 	}
-	
 	
 	/*
 	*  activate_pro_licence
@@ -303,6 +300,8 @@ class acf_admin_settings_updates {
 			// update license
 			acf_pro_update_license( $response['license'] );
 			
+			// refresh transient
+			acf_updates()->refresh_plugins_transient();
 			
 			// show message
 			$this->show_notice( $response['message'] );
@@ -368,12 +367,15 @@ class acf_admin_settings_updates {
 		// clear DB
 		acf_pro_update_license('');
 		
-		
+		// refresh transient
+		acf_updates()->refresh_plugins_transient();
+			
 		// success
 		if( $response['status'] == 1 ) {
 			
 			// show message
 			$this->show_notice( $response['message'] );
+			
 			
 		} else {
 			

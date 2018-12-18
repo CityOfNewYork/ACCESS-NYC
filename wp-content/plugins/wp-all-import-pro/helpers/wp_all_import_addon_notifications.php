@@ -11,7 +11,7 @@ if ( ! function_exists('wp_all_import_addon_notifications') ){
 			$parent_theme_name = ($parent_theme) ? $parent_theme->get('Name') : '';							
 
 			$current_themes = array($theme_name, $parent_theme_name);
-			
+
 			$recommended_addons = array();
 			
 			// Reales WP Add-On
@@ -38,7 +38,8 @@ if ( ! function_exists('wp_all_import_addon_notifications') ){
 				and is_wp_error(validate_plugin('wp-job-manager-xml-csv-listings-import/wp-job-manager-add-on.php'))
 					and ! in_array('Listify', $current_themes)
 						and ! in_array('Jobify', $current_themes)
-							and ! in_array('Listable', $current_themes))
+							and ! in_array('Listable', $current_themes)
+								and ! in_array('My Listing', $current_themes) )
 			{
 				$recommended_addons[] = array(
 					'title' => 'WP Job Manager',

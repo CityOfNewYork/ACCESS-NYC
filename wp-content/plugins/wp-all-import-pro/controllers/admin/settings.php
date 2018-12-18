@@ -12,6 +12,14 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 	public $slug = 'wp-all-import-pro';
 
+	/** @var  \Wpai\App\Service\License\LicenseActivator */
+	private $licenseActivator;
+
+	protected function init()
+	{
+		$this->licenseActivator = new \Wpai\App\Service\License\LicenseActivator();
+	}
+
 	public function __construct(){	
 
 		parent::__construct();
@@ -82,6 +90,50 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 			$this->data['post'] = $post = PMXI_Plugin::getInstance()->getOption();
 		}
 
+		if ($this->input->post('is_scheduling_license_submitted')) {
+
+			check_admin_referer('edit-license', '_wpnonce_edit-scheduling-license');
+
+			if (!$this->errors->get_error_codes()) { // no validation errors detected
+
+				PMXI_Plugin::getInstance()->updateOption($post);
+				if (empty($_POST['pmxi_scheduling_license_activate']) and empty($_POST['pmxi_scheduling_license_deactivate'])) {
+					$post['scheduling_license_status'] = $this->check_scheduling_license();
+					if ($post['scheduling_license_status'] == 'valid') {
+
+						$this->data['scheduling_license_message'] = __('License activated.', 'wp_all_import_plugin');
+					}
+					PMXI_Plugin::getInstance()->updateOption($post);
+					$this->activate_scheduling_licenses();
+
+				}
+			}
+
+            if(class_exists('PMXE_Plugin')) {
+			    if(method_exists('PMXE_Plugin', 'getSchedulingName')) {
+			        if(!empty($post['scheduling_license_status'])) {
+                        $schedulingLicenseData = array();
+                        $schedulingLicenseData['scheduling_license_status'] = $post['scheduling_license_status'];
+                        $schedulingLicenseData['scheduling_license'] = $post['scheduling_license'];
+
+                        PMXE_Plugin::getInstance()->updateOption($schedulingLicenseData);
+                    }
+                }
+            }
+			$this->data['post'] = $post = PMXI_Plugin::getInstance()->getOption();
+		}
+
+		$post['scheduling_license_status'] = $this->check_scheduling_license();
+		$this->data['is_license_active'] = false;
+		if (!empty($post['license_status']) && $post['license_status'] == 'valid') {
+			$this->data['is_license_active'] = true;
+		}
+
+		$this->data['is_scheduling_license_active'] = false;
+		if (!empty($post['scheduling_license_status']) && $post['scheduling_license_status'] == 'valid') {
+			$this->data['is_scheduling_license_active'] = true;
+		}
+
 		$this->data['is_license_active'] = false;
 
 		foreach ($this->data['addons'] as $class => $addon) {
@@ -136,6 +188,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 						else {
 							$import_data = @file_get_contents($tmp_name);
 							if (!empty($import_data)){
+								$import_data = str_replace("\xEF\xBB\xBF", '', $import_data);
 								$templates_data = json_decode($import_data, true);
 								
 								if ( ! empty($templates_data) ){
@@ -266,7 +319,30 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 			}				
 
 		}
-	}	
+	}
+
+	/*
+    *
+    * Activate licenses for main plugin and all premium addons
+    *
+    */
+	protected function activate_scheduling_licenses()
+	{
+		// listen for our activate button to be clicked
+
+		global $wpdb;
+
+		delete_transient(PMXI_Plugin::$cache_key);
+
+		$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . PMXI_Plugin::$cache_key) );
+		$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . PMXI_Plugin::$cache_key) );
+
+		delete_site_transient('update_plugins');
+
+		// retrieve the license from the database
+		return $this->licenseActivator->activateLicense(PMXI_Plugin::getSchedulingName(),\Wpai\App\Service\License\LicenseActivator::CONTEXT_SCHEDULING);
+
+	}
 
 	/*
 	*
@@ -313,6 +389,20 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 		return false;
 
+	}
+
+	public function check_scheduling_license()
+	{
+		$options = PMXI_Plugin::getInstance()->getOption();
+
+		global $wpdb;
+
+		delete_transient(PMXI_Plugin::$cache_key);
+
+		$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . PMXI_Plugin::$cache_key) );
+		$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . PMXI_Plugin::$cache_key) );
+
+		return $this->licenseActivator->checkLicense(PMXI_Plugin::getSchedulingName(), $options, \Wpai\App\Service\License\LicenseActivator::CONTEXT_SCHEDULING);
 	}
 	
 	public function cleanup( $is_cron = false ){

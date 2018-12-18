@@ -261,6 +261,15 @@ class acf_admin_options_page {
 	
 	function postbox_submitdiv( $post, $args ) {
 		
+		/**
+		*   Fires before the major-publishing-actions div.
+		*
+		*  @date	24/9/18
+		*  @since	5.7.7
+		*
+		*  @param array $page The current options page.
+		*/
+		do_action( 'acf/options_page/submitbox_before_major_actions', $this->page );
 		?>
 		<div id="major-publishing-actions">
 
@@ -269,11 +278,21 @@ class acf_admin_options_page {
 				<input type="submit" accesskey="p" value="<?php echo $this->page['update_button']; ?>" class="button button-primary button-large" id="publish" name="publish">
 			</div>
 			
+			<?php
+			/**
+			*   Fires before the major-publishing-actions div.
+			*
+			*  @date	24/9/18
+			*  @since	5.7.7
+			*
+			*  @param array $page The current options page.
+			*/
+			do_action( 'acf/options_page/submitbox_major_actions', $this->page );
+			?>
 			<div class="clear"></div>
 		
 		</div>
 		<?php
-		
 	}
 	
 	
@@ -304,8 +323,8 @@ class acf_admin_options_page {
 			'key'			=> $field_group['key'],
 			'style'			=> $field_group['style'],
 			'label'			=> $field_group['label_placement'],
-			'edit_url'		=> '',
-			'edit_title'	=> __('Edit field group', 'acf'),
+			'editLink'		=> '',
+			'editTitle'		=> __('Edit field group', 'acf'),
 			'visibility'	=> true
 		);
 		
@@ -313,7 +332,7 @@ class acf_admin_options_page {
 		// edit_url
 		if( $field_group['ID'] && acf_current_user_can_admin() ) {
 			
-			$o['edit_url'] = admin_url('post.php?post=' . $field_group['ID'] . '&action=edit');
+			$o['editLink'] = admin_url('post.php?post=' . $field_group['ID'] . '&action=edit');
 				
 		}
 		
@@ -323,7 +342,7 @@ class acf_admin_options_page {
 		
 		
 		// render
-		acf_render_fields( $this->page['post_id'], $fields, 'div', $field_group['instruction_placement'] );
+		acf_render_fields( $fields, $this->page['post_id'], 'div', $field_group['instruction_placement'] );
 		
 		
 		
@@ -331,7 +350,7 @@ class acf_admin_options_page {
 <script type="text/javascript">
 if( typeof acf !== 'undefined' ) {
 		
-	acf.postbox.render(<?php echo json_encode($o); ?>);	
+	acf.newPostbox(<?php echo json_encode($o); ?>);	
 
 }
 </script>

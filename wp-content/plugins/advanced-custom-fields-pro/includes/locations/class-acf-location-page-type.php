@@ -49,13 +49,14 @@ class acf_location_page_type extends acf_location {
 		// vars
 		$post_id = acf_maybe_get( $screen, 'post_id' );
 		
-		
 		// bail early if no post id
 		if( !$post_id ) return false;
 		
-		
 		// get post
 		$post = get_post( $post_id );
+		
+		// bail early if no post
+		if( !$post ) return false;
 		
 		
 		// compare   
@@ -66,7 +67,7 @@ class acf_location_page_type extends acf_location {
 	        
 	        
 	        // compare
-	        $match = ( $front_page === $post->ID );
+	        $result = ( $front_page === $post->ID );
 	        
         } elseif( $rule['value'] == 'posts_page') {
         	
@@ -75,7 +76,7 @@ class acf_location_page_type extends acf_location {
 	        
 	        
 	        // compare
-	        $match = ( $posts_page === $post->ID );
+	        $result = ( $posts_page === $post->ID );
 	        
         } elseif( $rule['value'] == 'top_level') {
         	
@@ -84,7 +85,7 @@ class acf_location_page_type extends acf_location {
         	
         	
         	// compare
-			$match = ( $page_parent == 0 );
+			$result = ( $page_parent == 0 );
 	            
         } elseif( $rule['value'] == 'parent' ) {
         	
@@ -98,7 +99,7 @@ class acf_location_page_type extends acf_location {
         	
 	        
 	        // compare
-	        $match = !empty( $children );
+	        $result = !empty( $children );
 	        
         } elseif( $rule['value'] == 'child') {
         	
@@ -107,21 +108,21 @@ class acf_location_page_type extends acf_location {
         	
 	        
 	        // compare
-			$match = ( $page_parent > 0 );
+			$result = ( $page_parent > 0 );
 	        
         }
         
         
         // reverse if 'not equal to'
-        if( $rule['operator'] === '!=' ) {
+        if( $rule['operator'] == '!=' ) {
 	        	
-        	$match = !$match;
+        	$result = !$result;
         
         }
         
         
         // return
-        return $match;
+        return $result;
         
 	}
 	

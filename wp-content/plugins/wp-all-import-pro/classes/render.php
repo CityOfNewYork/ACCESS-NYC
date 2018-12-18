@@ -56,7 +56,7 @@ if ( ! class_exists('PMXI_Render')){
 					if (!empty($child->wholeText)){
 						self::render_csv_text(trim($child->wholeText), $shorten, $is_render_collapsed);
 					}
-					elseif (is_callable(array($child, 'nodeValue'), true) && !empty($child->nodeValue)){
+					elseif (is_callable(array($child, 'nodeValue'), true) && isset($child->nodeValue)){
 						self::render_csv_text(trim($child->nodeValue), $shorten, $is_render_collapsed);
 					}
 				} else {

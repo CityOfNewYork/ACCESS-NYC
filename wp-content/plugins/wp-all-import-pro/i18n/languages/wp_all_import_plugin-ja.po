@@ -210,11 +210,11 @@ msgid "Image `%s` not found in media library."
 msgstr "イメージ '%s' がメディア ・ ライブラリ内に見つかりません。"
 
 #: actions/wp_ajax_test_images.php:102
-msgid "%d image was successfully founded in media gallery"
+msgid "%d image was successfully found in media gallery"
 msgstr "%d のイメージはメディア ギャラリーに設立され正常に"
 
 #: actions/wp_ajax_test_images.php:106
-msgid "%d images were successfully founded in media gallery"
+msgid "%d images were successfully found in media gallery"
 msgstr "メディア ギャラリーに正常に設立された %d 画像"
 
 #: actions/wp_ajax_test_images.php:120
