@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: NYCO WP Config
+ * Plugin Name: NYCO WordPress Config
  * Description: Composer Managed. This "Must Use" WordPress Plugin sets environment variables for a WordPress installation through a YAML configuration file and autoloads environment specific scripts.
  * Author: NYC Opportunity
  */
