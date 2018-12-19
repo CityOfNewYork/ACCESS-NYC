@@ -72,7 +72,7 @@
             </div>
           </div>
 
-          <nav class="o-navigation">
+          <nav class="o-navigation color-dark-background">
             <div class="logo-access">
               <a href="{{ urlBase }}/">
                 <svg class="icon icon-logo-full">
@@ -93,31 +93,31 @@
                 {{__('Search', 'accessnyctheme')}}
               </a>
             {% endspaceless %}</nav>
-
-            <div class="o-mobile-nav print:hidden" id="o-mobile-nav">
-              <a class="o-mobile-nav__close" href="#o-mobile-nav" data-js="toggle-nav">
-                {{__('close &amp; return to site', 'accessnyctheme')}}
-                <svg class="icon icon-close">
-                  <use xlink:href="#icon-close"></use>
-                </svg>
-              </a>
-
-              <div class="o-mobile-nav__inner">
-                <h4 class="o-mobile-nav__header">
-                  {{__('Get help now', 'accessnyctheme')}}
-                </h4>
-
-                <nav class="nav-block">
-                  {% include 'partials/nav.twig' %}
-                  <a href="{{ urlBase }}/?s=">
-                    <svg class="icon icon-search">
-                      <use xlink:href="#icon-search"></use>
-                    </svg>{{__('Search', 'accessnyctheme')}}
-                  </a>
-                </nav>
-              </div>
-            </div>
           </nav>
+
+          <div class="o-mobile-nav color-mid-background print:hidden" id="o-mobile-nav">
+            <a class="o-mobile-nav__close" href="#o-mobile-nav" data-js="toggle-nav">
+              {{__('close &amp; return to site', 'accessnyctheme')}}
+              <svg class="icon icon-close">
+                <use xlink:href="#icon-close"></use>
+              </svg>
+            </a>
+
+            <div class="o-mobile-nav__inner">
+              <h4 class="o-mobile-nav__header">
+                {{__('Get help now', 'accessnyctheme')}}
+              </h4>
+
+              <nav class="nav-block">
+                {% include 'partials/nav.twig' %}
+                <a href="{{ urlBase }}/?s=">
+                  <svg class="icon icon-search">
+                    <use xlink:href="#icon-search"></use>
+                  </svg>{{__('Search', 'accessnyctheme')}}
+                </a>
+              </nav>
+            </div>
+          </div>
 
           <div class="o-search-box js-search-box print:hidden" id="search" aria-hidden="true">
             <div class="o-search-box__inner">
