@@ -62,10 +62,11 @@ function request($url, $data, $user, $pass) {
     CURLOPT_POST => true,
     CURLOPT_POSTFIELDS => $data,
     CURLOPT_USERPWD => $user.":".$pass,
+    CURLOPT_FRESH_CONNECT => true,
     CURLOPT_HTTPHEADER => [
       "Content-Type: application/json",
       "X-KIE-ContentType: json",
-      "Content-Length: " . strlen($data),
+      "Content-Length: " . strlen($data)
     ]
   ]);
 
