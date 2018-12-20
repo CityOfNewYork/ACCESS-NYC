@@ -31,7 +31,7 @@
 
     <section class="usa-grid screen-desktop:layout--sidebar-gutter">
       <aside class="hidden screen-desktop:block">
-        <div class="bg-color-blue-light border border-color-grey-light overflow-hidden flex items-center print:hidden js-static-map"
+        <div class="bg-color-blue-light border border-color-grey-light overflow-hidden print:hidden js-static-map"
           data-marker="{{ post.address.lat }},{{ post.address.lng }}"
           data-link="https://www.google.com/maps/dir//{{ post.address.address|url_encode }}"
           {% if isGovtOffice %}data-govt-office="true"{% endif %}
