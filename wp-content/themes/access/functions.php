@@ -183,6 +183,7 @@ class BSDStarterSite extends TimberSite {
     $context['footer_for_caseworkers_menu'] = new TimberMenu('for-caseworkers');
     $context['footer_programs_menu'] = new TimberMenu('programs');
     $context['footer_about_access_nyc_menu'] = new TimberMenu('about-access-nyc');
+    $context['peu_header_menu'] = new TimberMenu('peu');
 
     // Gets object containing all program categories
     $context['categories'] = get_terms( 'programs' );

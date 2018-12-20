@@ -264,7 +264,7 @@
 
 {% block content %}
 <div class="layout--topbar">
-  <header class="px-2 flex justify-between items-center bg-color-blue-dark text-color-white">
+  <header class="px-2 flex justify-between items-center color-dark-background text-color-white">
     <svg class="icon icon-logo-mark screen-sm-mobile:hidden">
       <use xlink:href="#icon-logo-mark"></use>
     </svg>
@@ -272,9 +272,14 @@
       <use xlink:href="#icon-logo-full"></use>
     </svg>
     <nav class="nav-inline print:hidden px-3">
-      <a href="/programs" target="_blank">Programs</a>
-      <a href="/locations" target="_blank">Find Help</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfPU9twXxdVUKJx-OAJ6juLvQa12ouMzEkEw6fF113Djifcmw/viewform" target="_blank">Feedback</a>
+      {% for m in peu_header_menu.get_items %}
+      <a href="{{ m.link }}"
+        {% if m.attr_title %}title="{{ m.attr_title }}"{% else %}title="{{ m.title }}"{% endif %}
+        {% if m.target %}target="{{ m.target }}"{% endif %}
+        {% if m.xfn %}rel="{{ m.xfn }}"{% endif %}>
+        {{ m.title }}
+      </a>
+      {% endfor %}
     </nav>
     <div class="flex items-center print:hidden">
       <a class="btn btn-primary btn-small" data-js="reload">{{ __('New Client', translationID) }}</a>
