@@ -42,6 +42,7 @@
     "del": "^1.2.0",
     "dotenv": "^2.0.0",
     "envify": "^4.1.0",
+    "eslint": "3.8.1",
     "eslint-config-google": "^0.7.1",
     "event-stream": "3.3.4",
     "gulp": "^3.9.1",
@@ -68,7 +69,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "access-nyc-patterns": "^0.1.0",
+    "access-nyc-patterns": "^0.1.2",
     "cleave.js": "^0.7.23",
     "jquery": "^3.1.1",
     "js-cookie": "^2.1.3",
