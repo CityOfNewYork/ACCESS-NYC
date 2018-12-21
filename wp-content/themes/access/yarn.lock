@@ -27,10 +27,10 @@ accepts@~1.3.4:
     mime-types "~2.1.18"
     negotiator "0.6.1"
 
-access-nyc-patterns@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/access-nyc-patterns/-/access-nyc-patterns-0.1.2.tgz#6de02089b5195f8baefe0257582dc0509f21c85d"
-  integrity sha512-7CePNF+6t1HPZU6E0xJv7a53m/jJZSnBI7x+or4Cy3sOtF5bwAd2yNSEojK+vinBzz/J0W22rrofvYu1V+glKQ==
+access-nyc-patterns@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/access-nyc-patterns/-/access-nyc-patterns-0.1.3.tgz#0385b21207ddca151386e0789961df31e69c83d1"
+  integrity sha512-ktPf6pXnXsQRajBiSGtotyJue1BPMwiNNXhGpOWB8jWRMmirx3OUka6q2wyaljKEc7OcHNlhNb66hLugSXkwyA==
   dependencies:
     animate.scss "0.0.6"
     bourbon "^4.2.7"

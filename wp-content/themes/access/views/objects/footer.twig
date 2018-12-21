@@ -1,6 +1,6 @@
 <nav class="o-footer__nav print:hidden">
-  <ul class="o-footer__nav-list">
-    <li>
+  <ul class="o-footer__nav-list px-3">
+    <li class="o-footer__column-first">
       <div class="type-h3 text-color-blue-dark">{{ footer_get_help_now_menu.name }}</div>
       <ul>
       {% for m in footer_get_help_now_menu.get_items %}
@@ -28,9 +28,9 @@
         {% endfor %}
       </ul>
     </li>
-    <li>
+    <li class="o-footer__column-middle">
       <div class="type-h3 text-color-blue-dark">{{ footer_programs_menu.name }}</div>
-      <ul>
+      <ul class="screen-tablet:layout--columns-gutter screen-desktop:layout--rows">
         {% for m in footer_programs_menu.get_items %}
           <li>
             <a href="{{ m.link }}"
@@ -43,8 +43,15 @@
         {% endfor %}
       </ul>
     </li>
-    <li>
-      <div class="type-h3 text-color-blue-dark">{{ footer_about_access_nyc_menu.name }}</div>
+    <li class="o-footer__column-last">
+      <div class="type-h3 text-color-blue-dark">
+        <span class="sr-only">{{ footer_about_access_nyc_menu.name }}</span>
+
+        <svg class="icon icon-logo-full">
+          <use xlink:href="#icon-logo-full"></use>
+        </svg>
+      </div>
+
       <ul>
         {% for m in footer_about_access_nyc_menu.get_items %}
           <li>
@@ -57,11 +64,6 @@
           </li>
         {% endfor %}
       </ul>
-    </li>
-    <li>
-      <svg class="icon icon-logo-full">
-        <use xlink:href="#icon-logo-full"></use>
-      </svg>
     </li>
   </ul>
 </nav>
