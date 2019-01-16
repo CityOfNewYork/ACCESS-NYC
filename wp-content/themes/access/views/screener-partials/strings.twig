@@ -1,0 +1,354 @@
+{% set strings = [
+  {
+    'label': 'Child',
+    'slug': 'Child'
+  },
+  {
+    'label': 'Foster Child',
+    'slug': 'FosterChild'
+  },
+  {
+    'label': 'Step-child',
+    'slug': 'StepChild'
+  },
+  {
+    'label': 'Grandchild',
+    'slug': 'Grandchild'
+  },
+  {
+    'label': 'Spouse',
+    'slug': 'Spouse'
+  },
+  {
+    'label': 'Parent',
+    'slug': 'Parent'
+  },
+  {
+    'label': 'Foster Parent',
+    'slug': 'FosterParent'
+  },
+  {
+    'label': 'Step-parent',
+    'slug': 'StepParent'
+  },
+  {
+    'label': 'Grandparent',
+    'slug': 'Grandparent'
+  },
+  {
+    'label': 'Sister/Brother',
+    'slug': 'SisterBrother'
+  },
+  {
+    'label': 'Step-sister/Step-brother',
+    'slug': 'StepSisterStepBrother'
+  },
+  {
+    'label': 'Boyfriend/Girlfriend',
+    'slug': 'BoyfriendGirlfriend'
+  },
+  {
+    'label': 'Domestic Partner',
+    'slug': 'DomesticPartner'
+  },
+  {
+    'label': 'Unrelated',
+    'slug': 'Unrelated'
+  },
+  {
+    'label': 'Other',
+    'slug': 'Other'
+  },
+  {
+    'label': 'You',
+    'slug': 'Self'
+  },
+  {
+    'label': 'Head of the household',
+    'slug': 'HeadOfHousehold'
+  },
+  {
+    'label': 'Renting',
+    'slug': 'livingRenting'
+  },
+  {
+    'label': 'Owns the home or apartment',
+    'slug': 'livingOwner'
+  },
+  {
+    'label': 'Staying with a friend',
+    'slug': 'livingStayingWithFriend'
+  },
+  {
+    'label': 'In a hotel',
+    'slug': 'livingHotel'
+  },
+  {
+    'label': 'In a shelter or homeless',
+    'slug': 'livingShelter'
+  },
+  {
+    'label': 'Prefer not to say',
+    'slug': 'livingPreferNotToSay'
+  },
+  {
+    'label': 'NYCHA Housing',
+    'slug': 'NYCHA'
+  },
+  {
+    'label': 'Non-Regulated or Market Rate apartment',
+    'slug': 'MarketRate'
+  },
+  {
+    'label': 'Rent controlled or rent stabilized apartment',
+    'slug': 'RentControlled'
+  },
+  {
+    'label': 'Rent Regulated Hotel/Single Room',
+    'slug': 'RentRegulatedHotel'
+  },
+  {
+    'label': 'Section 213 apartments',
+    'slug': 'Section213'
+  },
+  {
+    'label': 'Limited Dividend development apartments',
+    'slug': 'LimitedDividendDevelopment'
+  },
+  {
+    'label': 'Mitchell-Lama apartments',
+    'slug': 'MitchellLama'
+  },
+  {
+    'label': 'Redevelopment Company apartments',
+    'slug': 'RedevelopmentCompany'
+  },
+  {
+    'label': 'Housing Development Fund Company (HDFC) Cooperative',
+    'slug': 'HDFC'
+  },
+  {
+    'label': 'Family Home',
+    'slug': 'FamilyHome'
+  },
+  {
+    'label': 'Condo',
+    'slug': 'Condo'
+  },
+  {
+    'label': 'Student',
+    'slug': 'student'
+  },
+  {
+    'label': 'Pregnant',
+    'slug': 'pregnant'
+  },
+  {
+    'label': 'Unemployed',
+    'slug': 'unemployed'
+  },
+  {
+    'label': 'Worked in the last 18 months',
+    'slug': 'unemployedWorkedLast18Months'
+  },
+  {
+    'label': 'Full-time student',
+    'slug': 'studentFulltime'
+  },
+  {
+    'label': 'Blind or visually impaired',
+    'slug': 'blind'
+  },
+  {
+    'label': 'Has disabilities',
+    'slug': 'disabled'
+  },
+  {
+    'label': 'Served in the U.S. Armed Forces, National Guard or Reserves',
+    'slug': 'veteran'
+  },
+  {
+    'label': 'Medicaid',
+    'slug': 'benefitsMedicaid'
+  },
+  {
+    'label': 'Disability-related Medicaid',
+    'slug': 'benefitsMedicaidDisability'
+  },
+  {
+    'label': 'wages, salaries, tips',
+    'slug': 'Wages'
+  },
+  {
+    'label': 'self-employment Income',
+    'slug': 'SelfEmployment'
+  },
+  {
+    'label': 'unemployment benefits',
+    'slug': 'Unemployment'
+  },
+  {
+    'label': 'Cash Assistance grant',
+    'slug': 'CashAssistance'
+  },
+  {
+    'label': 'disability-related Medicaid',
+    'slug': 'DisabilityMedicaid'
+  },
+  {
+    'label': 'Supplemental Security Income (SSI)',
+    'slug': 'SSI'
+  },
+  {
+    'label': 'Social Security Dependent Benefits',
+    'slug': 'SSDependent'
+  },
+  {
+    'label': 'Social Security Disability Benefits',
+    'slug': 'SSDisability'
+  },
+  {
+    'label': 'Social Security Survivor\'s Benefits',
+    'slug': 'SSSurvivor'
+  },
+  {
+    'label': 'Social Security Retirement Benefits',
+    'slug': 'SSRetirement'
+  },
+  {
+    'label': 'New York State Disability Benefits',
+    'slug': 'NYSDisability'
+  },
+  {
+    'label': 'Veteran\'s Pension or Benefits',
+    'slug': 'Veteran'
+  },
+  {
+    'label': 'Government or Private Pension',
+    'slug': 'Pension'
+  },
+  {
+    'label': 'Withdrawals from Deferred Compensation (IRA, Keogh, etc.)',
+    'slug': 'DeferredComp'
+  },
+  {
+    'label': 'Worker\'s Compensation',
+    'slug': 'WorkersComp'
+  },
+  {
+    'label': 'alimony (received)',
+    'slug': 'Alimony'
+  },
+  {
+    'label': 'boarder or lodger',
+    'slug': 'Boarder'
+  },
+  {
+    'label': 'gifts/contributions (received)',
+    'slug': 'Gifts'
+  },
+  {
+    'label': 'rental income',
+    'slug': 'Rental'
+  },
+  {
+    'label': 'investment income (interest, dividends, and profit from selling stocks)',
+    'slug': 'Investment'
+  },
+  {
+    'label': 'Child Care',
+    'slug': 'ChildCare'
+  },
+  {
+    'label': 'Child Support',
+    'slug': 'ChildSupport'
+  },
+  {
+    'label': 'Dependent Care',
+    'slug': 'DependentCare'
+  },
+  {
+    'label': 'Rent',
+    'slug': 'Rent'
+  },
+  {
+    'label': 'Medical expense',
+    'slug': 'Medical'
+  },
+  {
+    'label': 'Heating',
+    'slug': 'Heating'
+  },
+  {
+    'label': 'Cooling',
+    'slug': 'Cooling'
+  },
+  {
+    'label': 'Mortgage',
+    'slug': 'Mortgage'
+  },
+  {
+    'label': 'Utilities',
+    'slug': 'Utilities'
+  },
+  {
+    'label': 'Telephone',
+    'slug': 'Telephone'
+  },
+  {
+    'label': 'Third Party Insurance Premiums',
+    'slug': 'InsurancePremiums'
+  },
+  {
+    'label': 'Every week',
+    'slug': 'weekly'
+  },
+  {
+    'label': 'Every 2 weeks',
+    'slug': 'biweekly'
+  },
+  {
+    'label': 'Monthly',
+    'slug': 'monthly'
+  },
+  {
+    'label': 'Twice a month',
+    'slug': 'semimonthly'
+  },
+  {
+    'label': 'Every year',
+    'slug': 'yearly'
+  },
+  {
+    'label': 'This entry must be a number between 1 and 8.',
+    'slug': 'ERROR_HOUSEHOLD'
+  },
+  {
+    'label': 'This entry can only contain numbers.',
+    'slug': 'ERROR_INTEGER'
+  },
+  {
+    'label': 'This entry can only contain numbers.',
+    'slug': 'ERROR_FLOAT'
+  },
+  {
+    'label': 'This entry is required to continue.',
+    'slug': 'ERROR_REQUIRED'
+  },
+  {
+    'label': 'Please enter your age in the field below.',
+    'slug': 'ERROR_AGE'
+  },
+  {
+    'label': 'A valid New York City zip code is required.',
+    'slug': 'ERROR_ZIP'
+  }
+] %}
+
+<script type="text/javascript">
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
+    {% for s in categories %}{"label":{{ s.name | trim | json_encode() }},"slug":{{ s.slug | trim | json_encode() }}},{% endfor %}
+    {% for s in strings %}{"label":{{ __(s.label, 'accessnyc-screener') | trim | json_encode() }},"slug":{{ s.slug | trim | json_encode() }}}{% if not loop.last %},{% endif %}{% endfor %}
+  ]);
+</script>

@@ -4,7 +4,7 @@ import _ from 'underscore';
 /* eslint-disable no-unused-vars */
 import SmoothScroll from 'smoothscroll-polyfill';
 /* eslint-enable no-unused-vars */
-import Matches from 'modules/matches-polyfill';
+import Matches from 'modules/polyfill-matches';
 import ScreenerField from 'modules/screener-field';
 import ResultsField from 'modules/results-field';
 import ShareForm from 'modules/share-form';

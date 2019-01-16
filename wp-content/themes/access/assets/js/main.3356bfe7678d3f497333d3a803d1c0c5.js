@@ -53,8 +53,8 @@ Utility.debug = function () {
 /**
  * Returns the value of a given key in a URL query string. If no URL query
  * string is provided, the current URL location is used.
- * @param {string} name - Key name.
- * @param {?string} queryString - Optional query string to check.
+ * @param  {string}  name        - Key name.
+ * @param  {?string} queryString - Optional query string to check.
  * @return {?string} Query parameter value.
  */
 Utility.getUrlParameter = function (name, queryString) {
@@ -64,6 +64,116 @@ Utility.getUrlParameter = function (name, queryString) {
   var results = regex.exec(query);
 
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+/**
+ * For translating strings, there is a global LOCALIZED_STRINGS array that
+ * is defined on the HTML template level so that those strings are exposed to
+ * WPML translation. The LOCALIZED_STRINGS array is composed of objects with a
+ * `slug` key whose value is some constant, and a `label` value which is the
+ * translated equivalent. This function takes a slug name and returns the
+ * label.
+ * @param  {string} slug
+ * @return {string} localized value
+ */
+Utility.localize = function (slug) {
+  var text = slug || '';
+  var strings = window.LOCALIZED_STRINGS || [];
+  var match = strings.filter(function (s) {
+    return s.hasOwnProperty('slug') && s['slug'] === slug ? s : false;
+  });
+  return match[0] && match[0].hasOwnProperty('label') ? match[0].label : text;
+};
+
+/**
+ * Takes a a string and returns whether or not the string is a valid email
+ * by using native browser validation if available. Otherwise, does a simple
+ * Regex test.
+ * @param {string} email
+ * @return {boolean}
+ */
+Utility.validateEmail = function (email) {
+  var input = document.createElement('input');
+  input.type = 'email';
+  input.value = email;
+
+  return typeof input.checkValidity === 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(email);
+};
+
+/**
+ * Map toggled checkbox values to an input.
+ * @param  {Object} event The parent click event.
+ * @return {Element}      The target element.
+ */
+Utility.joinValues = function (event) {
+  if (!event.target.matches('input[type="checkbox"]')) return;
+
+  if (!event.target.closest('[data-js-join-values]')) return;
+
+  var el = event.target.closest('[data-js-join-values]');
+  var target = document.querySelector(el.dataset.jsJoinValues);
+
+  target.value = Array.from(el.querySelectorAll('input[type="checkbox"]')).filter(function (e) {
+    return e.value && e.checked;
+  }).map(function (e) {
+    return e.value;
+  }).join(', ');
+
+  return target;
+};
+
+/**
+ * A simple form validation class that uses native form validation. It will
+ * add appropriate form feedback for each input that is invalid and native
+ * localized browser messaging.
+ *
+ * See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
+ * See https://caniuse.com/#feat=form-validation for support
+ *
+ * @param  {Event}         event The form submission event.
+ * @return {Event/Boolean}       The original event or false if invalid.
+ */
+Utility.valid = function (event) {
+  event.preventDefault();
+
+  if (Utility.debug())
+    // eslint-disable-next-line no-console
+    console.dir({ init: 'Validation', event: event });
+
+  var validity = event.target.checkValidity();
+  var elements = event.target.querySelectorAll('input[required="true"]');
+
+  for (var i = 0; i < elements.length; i++) {
+    // Remove old messaging if it exists
+    var el = elements[i];
+    var container = el.parentNode;
+    var message = container.querySelector('.error-message');
+
+    container.classList.remove('error');
+    if (message) message.remove();
+
+    // If this input valid, skip messaging
+    if (el.validity.valid) continue;
+
+    // Create the new error message.
+    message = document.createElement('div');
+
+    // Get the error message from localized strings.
+    if (el.validity.valueMissing) message.innerHTML = Utility.localize('VALID_REQUIRED');else if (!el.validity.valid) message.innerHTML = Utility.localize('VALID_' + el.type.toUpperCase() + '_INVALID');else message.innerHTML = el.validationMessage;
+
+    message.setAttribute('aria-live', 'polite');
+    message.classList.add('error-message');
+
+    // Add the error class and error message.
+    container.classList.add('error');
+    container.insertBefore(message, container.childNodes[0]);
+  }
+
+  if (Utility.debug())
+    // eslint-disable-next-line no-console
+    console.dir({ complete: 'Validation', valid: validity, event: event });
+
+  return validity ? event : validity;
 };
 
 /**
@@ -202,7 +312,7 @@ var Toggle = function () {
       /**
        * Main
        */
-      this._elementToggle(el, target);
+      this.elementToggle(el, target);
 
       /**
        * Location
@@ -218,7 +328,7 @@ var Toggle = function () {
         var undo = document.querySelector(el.dataset[this._settings.namespace + 'Undo']);
         undo.addEventListener('click', function (event) {
           event.preventDefault();
-          _this2._elementToggle(el, target);
+          _this2.elementToggle(el, target);
           undo.removeEventListener('click');
         });
       }
@@ -234,8 +344,8 @@ var Toggle = function () {
      */
 
   }, {
-    key: '_elementToggle',
-    value: function _elementToggle(el, target) {
+    key: 'elementToggle',
+    value: function elementToggle(el, target) {
       el.classList.toggle(this._settings.activeClass);
       target.classList.toggle(this._settings.activeClass);
       target.classList.toggle(this._settings.inactiveClass);
@@ -360,8 +470,8 @@ Utility.debug = function () {
 /**
  * Returns the value of a given key in a URL query string. If no URL query
  * string is provided, the current URL location is used.
- * @param {string} name - Key name.
- * @param {?string} queryString - Optional query string to check.
+ * @param  {string}  name        - Key name.
+ * @param  {?string} queryString - Optional query string to check.
  * @return {?string} Query parameter value.
  */
 Utility.getUrlParameter = function (name, queryString) {
@@ -371,6 +481,116 @@ Utility.getUrlParameter = function (name, queryString) {
   var results = regex.exec(query);
 
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+/**
+ * For translating strings, there is a global LOCALIZED_STRINGS array that
+ * is defined on the HTML template level so that those strings are exposed to
+ * WPML translation. The LOCALIZED_STRINGS array is composed of objects with a
+ * `slug` key whose value is some constant, and a `label` value which is the
+ * translated equivalent. This function takes a slug name and returns the
+ * label.
+ * @param  {string} slug
+ * @return {string} localized value
+ */
+Utility.localize = function (slug) {
+  var text = slug || '';
+  var strings = window.LOCALIZED_STRINGS || [];
+  var match = strings.filter(function (s) {
+    return s.hasOwnProperty('slug') && s['slug'] === slug ? s : false;
+  });
+  return match[0] && match[0].hasOwnProperty('label') ? match[0].label : text;
+};
+
+/**
+ * Takes a a string and returns whether or not the string is a valid email
+ * by using native browser validation if available. Otherwise, does a simple
+ * Regex test.
+ * @param {string} email
+ * @return {boolean}
+ */
+Utility.validateEmail = function (email) {
+  var input = document.createElement('input');
+  input.type = 'email';
+  input.value = email;
+
+  return typeof input.checkValidity === 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(email);
+};
+
+/**
+ * Map toggled checkbox values to an input.
+ * @param  {Object} event The parent click event.
+ * @return {Element}      The target element.
+ */
+Utility.joinValues = function (event) {
+  if (!event.target.matches('input[type="checkbox"]')) return;
+
+  if (!event.target.closest('[data-js-join-values]')) return;
+
+  var el = event.target.closest('[data-js-join-values]');
+  var target = document.querySelector(el.dataset.jsJoinValues);
+
+  target.value = Array.from(el.querySelectorAll('input[type="checkbox"]')).filter(function (e) {
+    return e.value && e.checked;
+  }).map(function (e) {
+    return e.value;
+  }).join(', ');
+
+  return target;
+};
+
+/**
+ * A simple form validation class that uses native form validation. It will
+ * add appropriate form feedback for each input that is invalid and native
+ * localized browser messaging.
+ *
+ * See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
+ * See https://caniuse.com/#feat=form-validation for support
+ *
+ * @param  {Event}         event The form submission event.
+ * @return {Event/Boolean}       The original event or false if invalid.
+ */
+Utility.valid = function (event) {
+  event.preventDefault();
+
+  if (Utility.debug())
+    // eslint-disable-next-line no-console
+    console.dir({ init: 'Validation', event: event });
+
+  var validity = event.target.checkValidity();
+  var elements = event.target.querySelectorAll('input[required="true"]');
+
+  for (var i = 0; i < elements.length; i++) {
+    // Remove old messaging if it exists
+    var el = elements[i];
+    var container = el.parentNode;
+    var message = container.querySelector('.error-message');
+
+    container.classList.remove('error');
+    if (message) message.remove();
+
+    // If this input valid, skip messaging
+    if (el.validity.valid) continue;
+
+    // Create the new error message.
+    message = document.createElement('div');
+
+    // Get the error message from localized strings.
+    if (el.validity.valueMissing) message.innerHTML = Utility.localize('VALID_REQUIRED');else if (!el.validity.valid) message.innerHTML = Utility.localize('VALID_' + el.type.toUpperCase() + '_INVALID');else message.innerHTML = el.validationMessage;
+
+    message.setAttribute('aria-live', 'polite');
+    message.classList.add('error-message');
+
+    // Add the error class and error message.
+    container.classList.add('error');
+    container.insertBefore(message, container.childNodes[0]);
+  }
+
+  if (Utility.debug())
+    // eslint-disable-next-line no-console
+    console.dir({ complete: 'Validation', valid: validity, event: event });
+
+  return validity ? event : validity;
 };
 
 /**
@@ -509,7 +729,7 @@ var Toggle = function () {
       /**
        * Main
        */
-      this._elementToggle(el, target);
+      this.elementToggle(el, target);
 
       /**
        * Location
@@ -525,7 +745,7 @@ var Toggle = function () {
         var undo = document.querySelector(el.dataset[this._settings.namespace + 'Undo']);
         undo.addEventListener('click', function (event) {
           event.preventDefault();
-          _this2._elementToggle(el, target);
+          _this2.elementToggle(el, target);
           undo.removeEventListener('click');
         });
       }
@@ -541,8 +761,8 @@ var Toggle = function () {
      */
 
   }, {
-    key: '_elementToggle',
-    value: function _elementToggle(el, target) {
+    key: 'elementToggle',
+    value: function elementToggle(el, target) {
       el.classList.toggle(this._settings.activeClass);
       target.classList.toggle(this._settings.activeClass);
       target.classList.toggle(this._settings.inactiveClass);
@@ -668,8 +888,8 @@ Utility.debug = function () {
 /**
  * Returns the value of a given key in a URL query string. If no URL query
  * string is provided, the current URL location is used.
- * @param {string} name - Key name.
- * @param {?string} queryString - Optional query string to check.
+ * @param  {string}  name        - Key name.
+ * @param  {?string} queryString - Optional query string to check.
  * @return {?string} Query parameter value.
  */
 Utility.getUrlParameter = function (name, queryString) {
@@ -679,6 +899,116 @@ Utility.getUrlParameter = function (name, queryString) {
   var results = regex.exec(query);
 
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+/**
+ * For translating strings, there is a global LOCALIZED_STRINGS array that
+ * is defined on the HTML template level so that those strings are exposed to
+ * WPML translation. The LOCALIZED_STRINGS array is composed of objects with a
+ * `slug` key whose value is some constant, and a `label` value which is the
+ * translated equivalent. This function takes a slug name and returns the
+ * label.
+ * @param  {string} slug
+ * @return {string} localized value
+ */
+Utility.localize = function (slug) {
+  var text = slug || '';
+  var strings = window.LOCALIZED_STRINGS || [];
+  var match = strings.filter(function (s) {
+    return s.hasOwnProperty('slug') && s['slug'] === slug ? s : false;
+  });
+  return match[0] && match[0].hasOwnProperty('label') ? match[0].label : text;
+};
+
+/**
+ * Takes a a string and returns whether or not the string is a valid email
+ * by using native browser validation if available. Otherwise, does a simple
+ * Regex test.
+ * @param {string} email
+ * @return {boolean}
+ */
+Utility.validateEmail = function (email) {
+  var input = document.createElement('input');
+  input.type = 'email';
+  input.value = email;
+
+  return typeof input.checkValidity === 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(email);
+};
+
+/**
+ * Map toggled checkbox values to an input.
+ * @param  {Object} event The parent click event.
+ * @return {Element}      The target element.
+ */
+Utility.joinValues = function (event) {
+  if (!event.target.matches('input[type="checkbox"]')) return;
+
+  if (!event.target.closest('[data-js-join-values]')) return;
+
+  var el = event.target.closest('[data-js-join-values]');
+  var target = document.querySelector(el.dataset.jsJoinValues);
+
+  target.value = Array.from(el.querySelectorAll('input[type="checkbox"]')).filter(function (e) {
+    return e.value && e.checked;
+  }).map(function (e) {
+    return e.value;
+  }).join(', ');
+
+  return target;
+};
+
+/**
+ * A simple form validation class that uses native form validation. It will
+ * add appropriate form feedback for each input that is invalid and native
+ * localized browser messaging.
+ *
+ * See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
+ * See https://caniuse.com/#feat=form-validation for support
+ *
+ * @param  {Event}         event The form submission event.
+ * @return {Event/Boolean}       The original event or false if invalid.
+ */
+Utility.valid = function (event) {
+  event.preventDefault();
+
+  if (Utility.debug())
+    // eslint-disable-next-line no-console
+    console.dir({ init: 'Validation', event: event });
+
+  var validity = event.target.checkValidity();
+  var elements = event.target.querySelectorAll('input[required="true"]');
+
+  for (var i = 0; i < elements.length; i++) {
+    // Remove old messaging if it exists
+    var el = elements[i];
+    var container = el.parentNode;
+    var message = container.querySelector('.error-message');
+
+    container.classList.remove('error');
+    if (message) message.remove();
+
+    // If this input valid, skip messaging
+    if (el.validity.valid) continue;
+
+    // Create the new error message.
+    message = document.createElement('div');
+
+    // Get the error message from localized strings.
+    if (el.validity.valueMissing) message.innerHTML = Utility.localize('VALID_REQUIRED');else if (!el.validity.valid) message.innerHTML = Utility.localize('VALID_' + el.type.toUpperCase() + '_INVALID');else message.innerHTML = el.validationMessage;
+
+    message.setAttribute('aria-live', 'polite');
+    message.classList.add('error-message');
+
+    // Add the error class and error message.
+    container.classList.add('error');
+    container.insertBefore(message, container.childNodes[0]);
+  }
+
+  if (Utility.debug())
+    // eslint-disable-next-line no-console
+    console.dir({ complete: 'Validation', valid: validity, event: event });
+
+  return validity ? event : validity;
 };
 
 /**
@@ -3112,6 +3442,853 @@ module.exports = NearbyStops;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{}],4:[function(require,module,exports){
+'use strict';
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+/**
+ * The Utility class
+ * @class
+ */
+var Utility =
+/**
+ * The Utility constructor
+ * @return {object} The Utility class
+ */
+function Utility() {
+  classCallCheck(this, Utility);
+
+  return this;
+};
+
+/**
+ * Boolean for debug mode
+ * @return {boolean} wether or not the front-end is in debug mode.
+ */
+
+
+Utility.debug = function () {
+  return Utility.getUrlParameter(Utility.PARAMS.DEBUG) === '1';
+};
+
+/**
+ * Returns the value of a given key in a URL query string. If no URL query
+ * string is provided, the current URL location is used.
+ * @param  {string}  name        - Key name.
+ * @param  {?string} queryString - Optional query string to check.
+ * @return {?string} Query parameter value.
+ */
+Utility.getUrlParameter = function (name, queryString) {
+  var query = queryString || window.location.search;
+  var param = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + param + '=([^&#]*)');
+  var results = regex.exec(query);
+
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+/**
+ * For translating strings, there is a global LOCALIZED_STRINGS array that
+ * is defined on the HTML template level so that those strings are exposed to
+ * WPML translation. The LOCALIZED_STRINGS array is composed of objects with a
+ * `slug` key whose value is some constant, and a `label` value which is the
+ * translated equivalent. This function takes a slug name and returns the
+ * label.
+ * @param  {string} slug
+ * @return {string} localized value
+ */
+Utility.localize = function (slug) {
+  var text = slug || '';
+  var strings = window.LOCALIZED_STRINGS || [];
+  var match = strings.filter(function (s) {
+    return s.hasOwnProperty('slug') && s['slug'] === slug ? s : false;
+  });
+  return match[0] && match[0].hasOwnProperty('label') ? match[0].label : text;
+};
+
+/**
+ * Takes a a string and returns whether or not the string is a valid email
+ * by using native browser validation if available. Otherwise, does a simple
+ * Regex test.
+ * @param {string} email
+ * @return {boolean}
+ */
+Utility.validateEmail = function (email) {
+  var input = document.createElement('input');
+  input.type = 'email';
+  input.value = email;
+
+  return typeof input.checkValidity === 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(email);
+};
+
+/**
+ * Map toggled checkbox values to an input.
+ * @param  {Object} event The parent click event.
+ * @return {Element}      The target element.
+ */
+Utility.joinValues = function (event) {
+  if (!event.target.matches('input[type="checkbox"]')) return;
+
+  if (!event.target.closest('[data-js-join-values]')) return;
+
+  var el = event.target.closest('[data-js-join-values]');
+  var target = document.querySelector(el.dataset.jsJoinValues);
+
+  target.value = Array.from(el.querySelectorAll('input[type="checkbox"]')).filter(function (e) {
+    return e.value && e.checked;
+  }).map(function (e) {
+    return e.value;
+  }).join(', ');
+
+  return target;
+};
+
+/**
+ * A simple form validation class that uses native form validation. It will
+ * add appropriate form feedback for each input that is invalid and native
+ * localized browser messaging.
+ *
+ * See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
+ * See https://caniuse.com/#feat=form-validation for support
+ *
+ * @param  {Event}         event The form submission event.
+ * @return {Event/Boolean}       The original event or false if invalid.
+ */
+Utility.valid = function (event) {
+  event.preventDefault();
+
+  if (Utility.debug())
+    // eslint-disable-next-line no-console
+    console.dir({ init: 'Validation', event: event });
+
+  var validity = event.target.checkValidity();
+  var elements = event.target.querySelectorAll('input[required="true"]');
+
+  for (var i = 0; i < elements.length; i++) {
+    // Remove old messaging if it exists
+    var el = elements[i];
+    var container = el.parentNode;
+    var message = container.querySelector('.error-message');
+
+    container.classList.remove('error');
+    if (message) message.remove();
+
+    // If this input valid, skip messaging
+    if (el.validity.valid) continue;
+
+    // Create the new error message.
+    message = document.createElement('div');
+
+    // Get the error message from localized strings.
+    if (el.validity.valueMissing) message.innerHTML = Utility.localize('VALID_REQUIRED');else if (!el.validity.valid) message.innerHTML = Utility.localize('VALID_' + el.type.toUpperCase() + '_INVALID');else message.innerHTML = el.validationMessage;
+
+    message.setAttribute('aria-live', 'polite');
+    message.classList.add('error-message');
+
+    // Add the error class and error message.
+    container.classList.add('error');
+    container.insertBefore(message, container.childNodes[0]);
+  }
+
+  if (Utility.debug())
+    // eslint-disable-next-line no-console
+    console.dir({ complete: 'Validation', valid: validity, event: event });
+
+  return validity ? event : validity;
+};
+
+/**
+ * A markdown parsing method. It relies on the dist/markdown.min.js script
+ * which is a browser compatible version of markdown-js
+ * @url https://github.com/evilstreak/markdown-js
+ * @return {Object} The iteration over the markdown DOM parents
+ */
+Utility.parseMarkdown = function () {
+  if (typeof markdown === 'undefined') return false;
+
+  var mds = document.querySelectorAll(Utility.SELECTORS.parseMarkdown);
+
+  var _loop = function _loop(i) {
+    var element = mds[i];
+    fetch(element.dataset.jsMarkdown).then(function (response) {
+      if (response.ok) return response.text();else {
+        element.innerHTML = '';
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir(response);
+      }
+    }).catch(function (error) {
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir(error);
+    }).then(function (data) {
+      try {
+        element.classList.toggle('animated');
+        element.classList.toggle('fadeIn');
+        element.innerHTML = markdown.toHTML(data);
+      } catch (error) {}
+    });
+  };
+
+  for (var i = 0; i < mds.length; i++) {
+    _loop(i);
+  }
+};
+
+/**
+ * Application parameters
+ * @type {Object}
+ */
+Utility.PARAMS = {
+  DEBUG: 'debug'
+};
+
+/**
+ * Selectors for the Utility module
+ * @type {Object}
+ */
+Utility.SELECTORS = {
+  parseMarkdown: '[data-js="markdown"]'
+};
+
+function isStringJsonObject(arg) {
+    try {
+        JSON.parse(arg);
+        return true;
+    }
+    catch (e) { }
+    return false;
+}
+function isArray(arg) {
+    return Array.isArray(arg);
+}
+function isStringNumber(arg) {
+    return typeof arg == 'number' || /^[-+]?\d+([Ee][+-]?\d+)?(\.\d+)?$/.test(arg);
+}
+function isStringInteger(arg) {
+    return /^[-+]?\d+([Ee][+-]?\d+)?$/.test(arg);
+}
+function isStringNullOrEmpty(arg) {
+    return arg == null || arg.trim() === "";
+}
+var nodeListToArray = function (nodeList) {
+    return Array.prototype.slice.call(nodeList);
+};
+
+var parserList = [
+    {
+        name: "auto",
+        parse: function (val, forceNull) {
+            if (isStringNullOrEmpty(val)) {
+                return forceNull ? null : val;
+            }
+            var result = val.toString().trim();
+            if (result.toLowerCase() === "null")
+                return null;
+            try {
+                result = JSON.parse(result);
+                return result;
+            }
+            catch (e) {
+            }
+            var array = result.split(",");
+            if (array.length > 1) {
+                result = array.map(function (x) {
+                    if (isStringNumber(x)) {
+                        return parseFloat(x);
+                    }
+                    else if (isStringJsonObject(x)) {
+                        return JSON.parse(x);
+                    }
+                    return x.trim();
+                });
+            }
+            return result;
+        }
+    },
+    {
+        name: "number",
+        parse: function (val, forceNull) {
+            if (isStringNullOrEmpty(val)) {
+                return forceNull ? null : 0;
+            }
+            if (isStringNumber(val)) {
+                return parseFloat(val);
+            }
+            return 0;
+        }
+    },
+    {
+        name: "boolean",
+        parse: function (val, forceNull) {
+            if (isStringNullOrEmpty(val)) {
+                return forceNull ? null : false;
+            }
+            val = val.toString().toLowerCase();
+            if (val === "true" || val === "1") {
+                return true;
+            }
+            return false;
+        }
+    },
+    {
+        name: "string",
+        parse: function (val, forceNull) {
+            if (isStringNullOrEmpty(val)) {
+                return null;
+            }
+            var result = val.toString().trim();
+            if (result.toLowerCase() === "null" || (result === "" && forceNull))
+                return null;
+            return result;
+        }
+    },
+    {
+        name: "array[auto]",
+        parse: function (val, forceNull) {
+            if (isStringNullOrEmpty(val)) {
+                if (forceNull)
+                    return null;
+                return [];
+            }
+            return val.split(",").map(function (x) {
+                var parser = parserList.filter(function (x) { return x.name === "auto"; })[0];
+                return parser.parse(x.trim(), forceNull);
+            });
+        }
+    },
+    {
+        name: "array[string]",
+        parse: function (val, forceNull) {
+            if (isStringNullOrEmpty(val)) {
+                if (forceNull)
+                    return null;
+                return [];
+            }
+            return val.split(",").map(function (x) { return x.trim().toString(); });
+        }
+    },
+    {
+        name: "array[number]",
+        parse: function (val, forceNull) {
+            if (isStringNullOrEmpty(val)) {
+                if (forceNull)
+                    return null;
+                return [];
+            }
+            return val.split(",").map(function (x) { return parseFloat(x.trim()); });
+        }
+    },
+    {
+        name: "json",
+        parse: function (val, forceNull) {
+            if (isStringNullOrEmpty(val)) {
+                if (forceNull)
+                    return null;
+                return {};
+            }
+            return JSON.parse(val);
+        }
+    }
+];
+
+var pluginName = "NSerializeJson";
+
+var NSerializeJson = (function () {
+    function NSerializeJson() {
+    }
+    NSerializeJson.parseValue = function (value, type) {
+        if (isStringNullOrEmpty(type)) {
+            var autoParser = this.parsers.filter(function (x) { return x.name === "auto"; })[0];
+            return autoParser.parse(value, this.options.forceNullOnEmpty);
+        }
+        var parser = this.parsers.filter(function (x) { return x.name === type; })[0];
+        if (parser == null) {
+            throw pluginName + ": couldn't find ther parser for type '" + type + "'.";
+        }
+        return parser.parse(value, this.options.forceNullOnEmpty);
+    };
+    NSerializeJson.serializeForm = function (htmlFormElement) {
+        var _this = this;
+        var nodeList = htmlFormElement.querySelectorAll("input, select, textarea");
+        var htmlInputElements = nodeListToArray(nodeList);
+        var checkedElements = htmlInputElements.filter(function (x) {
+            if (x.disabled ||
+                ((x.getAttribute("type") === "radio" && !x.checked) ||
+                    (x.getAttribute("type") === "checkbox" && !x.checked))) {
+                return false;
+            }
+            return true;
+        });
+        var resultObject = {};
+        checkedElements.forEach(function (x) { return _this.serializeIntoObject(resultObject, x); });
+        return resultObject;
+    };
+    NSerializeJson.serializeIntoObject = function (obj, htmlElement) {
+        var value = null;
+        if (htmlElement.tagName.toLowerCase() === "select") {
+            var firstSelectOpt = Array.from(htmlElement.options).filter(function (x) { return x.selected; })[0];
+            if (firstSelectOpt) {
+                value = firstSelectOpt.getAttribute("value");
+            }
+        }
+        else {
+            value = htmlElement.value;
+        }
+        var pathStr = htmlElement.getAttribute("name");
+        if (isStringNullOrEmpty(pathStr))
+            return obj;
+        var path = [];
+        var type = null;
+        var typeIndex = pathStr.indexOf(":");
+        if (typeIndex > -1) {
+            type = pathStr.substring(typeIndex + 1, pathStr.length);
+            if (type === "skip") {
+                return obj;
+            }
+            pathStr = pathStr.substring(0, typeIndex);
+        }
+        else {
+            type = htmlElement.getAttribute("data-value-type");
+        }
+        if (this.options.onBeforeParseValue != null) {
+            value = this.options.onBeforeParseValue(value, type);
+        }
+        var parsedValue = this.parseValue(value, type);
+        var pathLength = 0;
+        if (this.options.useDotSeparatorInPath) {
+            var addArrayToPath = false;
+            path = pathStr.split(".");
+            pathLength = path.length;
+            path.forEach(function (step, index) {
+                var indexOfBrackets = step.indexOf("[]");
+                if (index !== pathLength - 1) {
+                    if (indexOfBrackets > -1) {
+                        throw pluginName + ": error in path '" + pathStr + "' empty values in the path mean array and should be at the end.";
+                    }
+                }
+                else {
+                    if (indexOfBrackets > -1) {
+                        path[index] = step.replace("[]", "");
+                        addArrayToPath = true;
+                    }
+                }
+            });
+            if (addArrayToPath) {
+                path.push("");
+            }
+        }
+        else {
+            path = pathStr.split("[").map(function (x, i) { return x.replace("]", ""); });
+            pathLength = path.length;
+            path.forEach(function (step, index) {
+                if (index !== pathLength - 1 && isStringNullOrEmpty(step))
+                    throw pluginName + ": error in path '" + pathStr + "' empty values in the path mean array and should be at the end.";
+            });
+        }
+        this.searchAndSet(obj, path, 0, parsedValue);
+        return obj;
+    };
+    NSerializeJson.searchAndSet = function (currentObj, path, pathIndex, parsedValue, arrayInternalIndex) {
+        if (arrayInternalIndex === void 0) { arrayInternalIndex = 0; }
+        var step = path[pathIndex];
+        var isFinalStep = pathIndex === path.length - 1;
+        var nextStep = path[pathIndex + 1];
+        if (currentObj == null || typeof currentObj == "string") {
+            path = path.map(function (x) { return isStringNullOrEmpty(x) ? "[]" : x; });
+            console.log(pluginName + ": there was an error in path '" + path + "' in step '" + step + "'.");
+            throw pluginName + ": error.";
+        }
+        var isArrayStep = isStringNullOrEmpty(step);
+        var isIntegerStep = isStringInteger(step);
+        var isNextStepAnArray = isStringInteger(nextStep) || isStringNullOrEmpty(nextStep);
+        if (isArrayStep) {
+            if (isFinalStep) {
+                currentObj.push(parsedValue);
+                return;
+            }
+            else {
+                if (currentObj[arrayInternalIndex] == null) {
+                    currentObj[arrayInternalIndex] = {};
+                }
+                step = arrayInternalIndex;
+                arrayInternalIndex++;
+            }
+        }
+        else if (isIntegerStep && this.options.useNumKeysAsArrayIndex) {
+            step = parseInt(step);
+            if (!isArray(currentObj)) {
+                currentObj = [];
+            }
+            if (isFinalStep) {
+                currentObj[step] = parsedValue;
+                return;
+            }
+            else {
+                if (currentObj[step] == null)
+                    currentObj[step] = {};
+            }
+        }
+        else {
+            if (isFinalStep) {
+                currentObj[step] = parsedValue;
+                return;
+            }
+            else {
+                if (this.options.useNumKeysAsArrayIndex) {
+                    if (isNextStepAnArray) {
+                        if (!isArray(currentObj[step]))
+                            currentObj[step] = [];
+                    }
+                    else {
+                        if (currentObj[step] == null)
+                            currentObj[step] = {};
+                    }
+                }
+                else {
+                    if (currentObj[step] == null)
+                        currentObj[step] = {};
+                }
+            }
+        }
+        pathIndex++;
+        this.searchAndSet(currentObj[step], path, pathIndex, parsedValue, arrayInternalIndex);
+    };
+    NSerializeJson.options = {
+        useNumKeysAsArrayIndex: true,
+        useDotSeparatorInPath: false,
+        forceNullOnEmpty: false
+    };
+    NSerializeJson.parsers = parserList.slice();
+    return NSerializeJson;
+}());
+
+/**
+ * The Newsletter module
+ * @class
+ */
+
+var Newsletter = function () {
+  /**
+   * [constructor description]
+   */
+  /**
+   * The class constructor
+   * @param  {Object} element The Newsletter DOM Object
+   * @return {Class}          The instanciated Newsletter object
+   */
+  function Newsletter(element) {
+    var _this = this;
+
+    classCallCheck(this, Newsletter);
+
+    this._el = element;
+
+    // Map toggled checkbox values to an input.
+    this._el.addEventListener('click', Utility.joinValues);
+
+    // This sets the script callback function to a global function that
+    // can be accessed by the the requested script.
+    window[Newsletter.callback] = function (data) {
+      _this._callback(data);
+    };
+
+    this._el.querySelector('form').addEventListener('submit', function (event) {
+      return Utility.valid(event) ? _this._submit(event).then(_this._onload).catch(_this._onerror) : false;
+    });
+
+    return this;
+  }
+
+  /**
+   * The form submission method. Requests a script with a callback function
+   * to be executed on our page. The callback function will be passed the
+   * response as a JSON object (function parameter).
+   * @param  {Event}   event The form submission event
+   * @return {Promise}       A promise containing the new script call
+   */
+
+
+  createClass(Newsletter, [{
+    key: '_submit',
+    value: function _submit(event) {
+      event.preventDefault();
+
+      // Store the data.
+      this._data = NSerializeJson.serializeForm(event.target);
+
+      // Switch the action to post-json. This creates an endpoint for mailchimp
+      // that acts as a script that can be loaded onto our page.
+      var action = event.target.action.replace(Newsletter.endpoints.MAIN + '?', Newsletter.endpoints.MAIN_JSON + '?');
+
+      var keys = Object.keys(this._data);
+      for (var i = 0; i < keys.length; i++) {
+        action = action + ('&' + keys[i] + '=' + this._data[keys[i]]);
+      } // Append the callback reference. Mailchimp will wrap the JSON response in
+      // our callback method. Once we load the script the callback will execute.
+      action = action + '&c=window.' + Newsletter.callback;
+
+      // Create a promise that appends the script response of the post-json method
+      return new Promise(function (resolve, reject) {
+        var script = document.createElement('script');
+        document.body.appendChild(script);
+        script.onload = resolve;
+        script.onerror = reject;
+        script.async = true;
+        script.src = encodeURI(action);
+      });
+    }
+
+    /**
+     * The script onload resolution
+     * @param  {Event} event The script on load event
+     * @return {Class}       The Newsletter class
+     */
+
+  }, {
+    key: '_onload',
+    value: function _onload(event) {
+      event.path[0].remove();
+      return this;
+    }
+
+    /**
+     * The script on error resolution
+     * @param  {Object} error The script on error load event
+     * @return {Class}        The Newsletter class
+     */
+
+  }, {
+    key: '_onerror',
+    value: function _onerror(error) {
+      // eslint-disable-next-line no-console
+      if (Utility.debug()) console.dir(error);
+      return this;
+    }
+
+    /**
+     * The callback function for the MailChimp Script call
+     * @param  {Object} data The success/error message from MailChimp
+     * @return {Class}       The Newsletter class
+     */
+
+  }, {
+    key: '_callback',
+    value: function _callback(data) {
+      if (this['_' + data[this._key('MC_RESULT')]]) this['_' + data[this._key('MC_RESULT')]](data.msg);else
+        // eslint-disable-next-line no-console
+        if (Utility.debug()) console.dir(data);
+      return this;
+    }
+
+    /**
+     * Submission error handler
+     * @param  {string} msg The error message
+     * @return {Class}      The Newsletter class
+     */
+
+  }, {
+    key: '_error',
+    value: function _error(msg) {
+      this._elementsReset();
+      this._messaging('WARNING', msg);
+      return this;
+    }
+
+    /**
+     * Submission success handler
+     * @param  {string} msg The success message
+     * @return {Class}      The Newsletter class
+     */
+
+  }, {
+    key: '_success',
+    value: function _success(msg) {
+      this._elementsReset();
+      this._messaging('SUCCESS', msg);
+      return this;
+    }
+
+    /**
+     * Present the response message to the user
+     * @param  {String} type The message type
+     * @param  {String} msg  The message
+     * @return {Class}       Newsletter
+     */
+
+  }, {
+    key: '_messaging',
+    value: function _messaging(type) {
+      var msg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'no message';
+
+      var strings = Object.keys(Newsletter.strings);
+      var handled = false;
+      var alertBox = this._el.querySelector(Newsletter.selectors[type + '_BOX']);
+
+      var alertBoxMsg = alertBox.querySelector(Newsletter.selectors.ALERT_BOX_TEXT);
+
+      // Get the localized string, these should be written to the DOM already.
+      // The utility contains a global method for retrieving them.
+      for (var i = 0; i < strings.length; i++) {
+        if (msg.indexOf(Newsletter.strings[strings[i]]) > -1) {
+          msg = Utility.localize(strings[i]);
+          handled = true;
+        }
+      } // Replace string templates with values from either our form data or
+      // the Newsletter strings object.
+      for (var x = 0; x < Newsletter.templates.length; x++) {
+        var template = Newsletter.templates[x];
+        var key = template.replace('{{ ', '').replace(' }}', '');
+        var value = this._data[key] || Newsletter.strings[key];
+        var reg = new RegExp(template, 'gi');
+        msg = msg.replace(reg, value ? value : '');
+      }
+
+      if (handled) alertBoxMsg.innerHTML = msg;else if (type === 'ERROR') alertBoxMsg.innerHTML = Utility.localize(Newsletter.strings.ERR_PLEASE_TRY_LATER);
+
+      if (alertBox) this._elementShow(alertBox, alertBoxMsg);
+
+      return this;
+    }
+
+    /**
+     * The main toggling method
+     * @return {Class}         Newsletter
+     */
+
+  }, {
+    key: '_elementsReset',
+    value: function _elementsReset() {
+      var targets = this._el.querySelectorAll(Newsletter.selectors.ALERT_BOXES);
+
+      var _loop = function _loop(i) {
+        if (!targets[i].classList.contains(Newsletter.classes.HIDDEN)) {
+          targets[i].classList.add(Newsletter.classes.HIDDEN);
+
+          Newsletter.classes.ANIMATE.split(' ').forEach(function (item) {
+            return targets[i].classList.remove(item);
+          });
+
+          // Screen Readers
+          targets[i].setAttribute('aria-hidden', 'true');
+          targets[i].querySelector(Newsletter.selectors.ALERT_BOX_TEXT).setAttribute('aria-live', 'off');
+        }
+      };
+
+      for (var i = 0; i < targets.length; i++) {
+        _loop(i);
+      }return this;
+    }
+
+    /**
+     * The main toggling method
+     * @param  {object} target  Message container
+     * @param  {object} content Content that changes dynamically that should
+     *                          be announced to screen readers.
+     * @return {Class}          Newsletter
+     */
+
+  }, {
+    key: '_elementShow',
+    value: function _elementShow(target, content) {
+      target.classList.toggle(Newsletter.classes.HIDDEN);
+      Newsletter.classes.ANIMATE.split(' ').forEach(function (item) {
+        return target.classList.toggle(item);
+      });
+      // Screen Readers
+      target.setAttribute('aria-hidden', 'true');
+      if (content) content.setAttribute('aria-live', 'polite');
+
+      return this;
+    }
+
+    /**
+     * A proxy function for retrieving the proper key
+     * @param  {string} key The reference for the stored keys.
+     * @return {string}     The desired key.
+     */
+
+  }, {
+    key: '_key',
+    value: function _key(key) {
+      return Newsletter.keys[key];
+    }
+  }]);
+  return Newsletter;
+}();
+
+/** @type {Object} API data keys */
+
+
+Newsletter.keys = {
+  MC_RESULT: 'result',
+  MC_MSG: 'msg'
+};
+
+/** @type {Object} API endpoints */
+Newsletter.endpoints = {
+  MAIN: '/post',
+  MAIN_JSON: '/post-json'
+};
+
+/** @type {String} The Mailchimp callback reference. */
+Newsletter.callback = 'AccessNycNewsletterCallback';
+
+/** @type {Object} DOM selectors for the instance's concerns */
+Newsletter.selectors = {
+  ELEMENT: '[data-js="newsletter"]',
+  ALERT_BOXES: '[data-js-newsletter*="alert-box-"]',
+  WARNING_BOX: '[data-js-newsletter="alert-box-warning"]',
+  SUCCESS_BOX: '[data-js-newsletter="alert-box-success"]',
+  ALERT_BOX_TEXT: '[data-js-newsletter="alert-box__text"]'
+};
+
+/** @type {String} The main DOM selector for the instance */
+Newsletter.selector = Newsletter.selectors.ELEMENT;
+
+/** @type {Object} String references for the instance */
+Newsletter.strings = {
+  ERR_PLEASE_TRY_LATER: 'ERR_PLEASE_TRY_LATER',
+  SUCCESS_CONFIRM_EMAIL: 'Almost finished...',
+  ERR_PLEASE_ENTER_VALUE: 'Please enter a value',
+  ERR_TOO_MANY_RECENT: 'too many recent signup requests',
+  ERR_ALREADY_SUBSCRIBED: 'is already subscribed',
+  ERR_INVALID_EMAIL: 'looks fake or invalid',
+  LIST_NAME: 'ACCESS NYC - Newsletter'
+};
+
+/** @type {Array} Placeholders that will be replaced in message strings */
+Newsletter.templates = ['{{ EMAIL }}', '{{ LIST_NAME }}'];
+
+Newsletter.classes = {
+  ANIMATE: 'animated fadeInUp',
+  HIDDEN: 'hidden'
+};
+
+module.exports = Newsletter;
+
+
+},{}],5:[function(require,module,exports){
 (function (global){
 !function(){function t(t,n){var e=t.split("."),r=H;e[0]in r||!r.execScript||r.execScript("var "+e[0]);for(var i;e.length&&(i=e.shift());)e.length||void 0===n?r=r[i]?r[i]:r[i]={}:r[i]=n}function n(t,n){function e(){}e.prototype=n.prototype,t.M=n.prototype,t.prototype=new e,t.prototype.constructor=t,t.N=function(t,e,r){for(var i=Array(arguments.length-2),a=2;a<arguments.length;a++)i[a-2]=arguments[a];return n.prototype[e].apply(t,i)}}function e(t,n){null!=t&&this.a.apply(this,arguments)}function r(t){t.b=""}function i(t,n){t.sort(n||a)}function a(t,n){return t>n?1:n>t?-1:0}function l(t){var n,e=[],r=0;for(n in t)e[r++]=t[n];return e}function o(t,n){this.b=t,this.a={};for(var e=0;e<n.length;e++){var r=n[e];this.a[r.b]=r}}function u(t){return t=l(t.a),i(t,function(t,n){return t.b-n.b}),t}function s(t,n){switch(this.b=t,this.g=!!n.G,this.a=n.c,this.j=n.type,this.h=!1,this.a){case q:case J:case L:case O:case k:case Y:case K:this.h=!0}this.f=n.defaultValue}function f(){this.a={},this.f=this.i().a,this.b=this.g=null}function p(t,n){for(var e=u(t.i()),r=0;r<e.length;r++){var i=e[r],a=i.b;if(null!=n.a[a]){t.b&&delete t.b[i.b];var l=11==i.a||10==i.a;if(i.g)for(var i=c(n,a)||[],o=0;o<i.length;o++){var s=t,f=a,h=l?i[o].clone():i[o];s.a[f]||(s.a[f]=[]),s.a[f].push(h),s.b&&delete s.b[f]}else i=c(n,a),l?(l=c(t,a))?p(l,i):m(t,a,i.clone()):m(t,a,i)}}}function c(t,n){var e=t.a[n];if(null==e)return null;if(t.g){if(!(n in t.b)){var r=t.g,i=t.f[n];if(null!=e)if(i.g){for(var a=[],l=0;l<e.length;l++)a[l]=r.b(i,e[l]);e=a}else e=r.b(i,e);return t.b[n]=e}return t.b[n]}return e}function h(t,n,e){var r=c(t,n);return t.f[n].g?r[e||0]:r}function g(t,n){var e;if(null!=t.a[n])e=h(t,n,void 0);else t:{if(e=t.f[n],void 0===e.f){var r=e.j;if(r===Boolean)e.f=!1;else if(r===Number)e.f=0;else{if(r!==String){e=new r;break t}e.f=e.h?"0":""}}e=e.f}return e}function b(t,n){return t.f[n].g?null!=t.a[n]?t.a[n].length:0:null!=t.a[n]?1:0}function m(t,n,e){t.a[n]=e,t.b&&(t.b[n]=e)}function y(t,n){var e,r=[];for(e in n)0!=e&&r.push(new s(e,n[e]));return new o(t,r)}/*
 
@@ -3166,7 +4343,7 @@ function x(){this.a={}}function N(t,n){if(null==n)return null;n=n.toUpperCase();
 var W={1:"US AG AI AS BB BM BS CA DM DO GD GU JM KN KY LC MP MS PR SX TC TT VC VG VI".split(" ")},tt={US:[null,[null,null,"[2-9]\\d{9}","\\d{7}(?:\\d{3})?"],[null,null,"(?:2(?:0[1-35-9]|1[02-9]|2[04589]|3[149]|4[08]|5[1-46]|6[0279]|7[026]|8[13])|3(?:0[1-57-9]|1[02-9]|2[0135]|3[014679]|4[67]|5[12]|6[014]|8[056])|4(?:0[124-9]|1[02-579]|2[3-5]|3[0245]|4[0235]|58|69|7[0589]|8[04])|5(?:0[1-57-9]|1[0235-8]|20|3[0149]|4[01]|5[19]|6[1-37]|7[013-5]|8[056])|6(?:0[1-35-9]|1[024-9]|2[03689]|3[016]|4[16]|5[017]|6[0-279]|78|8[12])|7(?:0[1-46-8]|1[02-9]|2[0457]|3[1247]|4[037]|5[47]|6[02359]|7[02-59]|8[156])|8(?:0[1-68]|1[02-8]|28|3[0-25]|4[3578]|5[046-9]|6[02-5]|7[028])|9(?:0[1346-9]|1[02-9]|2[0589]|3[01678]|4[0179]|5[12469]|7[0-3589]|8[0459]))[2-9]\\d{6}","\\d{7}(?:\\d{3})?",null,null,"2015555555"],[null,null,"(?:2(?:0[1-35-9]|1[02-9]|2[04589]|3[149]|4[08]|5[1-46]|6[0279]|7[026]|8[13])|3(?:0[1-57-9]|1[02-9]|2[0135]|3[014679]|4[67]|5[12]|6[014]|8[056])|4(?:0[124-9]|1[02-579]|2[3-5]|3[0245]|4[0235]|58|69|7[0589]|8[04])|5(?:0[1-57-9]|1[0235-8]|20|3[0149]|4[01]|5[19]|6[1-37]|7[013-5]|8[056])|6(?:0[1-35-9]|1[024-9]|2[03689]|3[016]|4[16]|5[017]|6[0-279]|78|8[12])|7(?:0[1-46-8]|1[02-9]|2[0457]|3[1247]|4[037]|5[47]|6[02359]|7[02-59]|8[156])|8(?:0[1-68]|1[02-8]|28|3[0-25]|4[3578]|5[046-9]|6[02-5]|7[028])|9(?:0[1346-9]|1[02-9]|2[0589]|3[01678]|4[0179]|5[12469]|7[0-3589]|8[0459]))[2-9]\\d{6}","\\d{7}(?:\\d{3})?",null,null,"2015555555"],[null,null,"8(?:00|44|55|66|77|88)[2-9]\\d{6}","\\d{10}",null,null,"8002345678"],[null,null,"900[2-9]\\d{6}","\\d{10}",null,null,"9002345678"],[null,null,"NA","NA"],[null,null,"5(?:00|33|44|66|77|88)[2-9]\\d{6}","\\d{10}",null,null,"5002345678"],[null,null,"NA","NA"],"US",1,"011","1",null,null,"1",null,null,1,[[null,"(\\d{3})(\\d{4})","$1-$2",null,null,null,1],[null,"(\\d{3})(\\d{3})(\\d{4})","($1) $2-$3",null,null,null,1]],[[null,"(\\d{3})(\\d{3})(\\d{4})","$1-$2-$3"]],[null,null,"NA","NA"],1,null,[null,null,"NA","NA"],[null,null,"NA","NA"],null,null,[null,null,"NA","NA"]]};x.b=function(){return x.a?x.a:x.a=new x};var nt={0:"0",1:"1",2:"2",3:"3",4:"4",5:"5",6:"6",7:"7",8:"8",9:"9","０":"0","１":"1","２":"2","３":"3","４":"4","５":"5","６":"6","７":"7","８":"8","９":"9","٠":"0","١":"1","٢":"2","٣":"3","٤":"4","٥":"5","٦":"6","٧":"7","٨":"8","٩":"9","۰":"0","۱":"1","۲":"2","۳":"3","۴":"4","۵":"5","۶":"6","۷":"7","۸":"8","۹":"9"},et=RegExp("[+＋]+"),rt=RegExp("([0-9０-９٠-٩۰-۹])"),it=/^\(?\$1\)?$/,at=new _;m(at,11,"NA");var lt=/\[([^\[\]])*\]/g,ot=/\d(?=[^,}][^,}])/g,ut=RegExp("^[-x‐-―−ー－-／  ­​⁠　()（）［］.\\[\\]/~⁓∼～]*(\\$\\d[-x‐-―−ー－-／  ­​⁠　()（）［］.\\[\\]/~⁓∼～]*)+$"),st=/[- ]/;$.prototype.K=function(){this.B="",r(this.h),r(this.u),r(this.m),this.s=0,this.v="",r(this.b),this.l="",r(this.a),this.j=!0,this.w=this.o=this.D=!1,this.f=[],this.A=!1,this.g!=this.J&&(this.g=C(this,this.C))},$.prototype.L=function(t){return this.B=R(this,t)},t("Cleave.AsYouTypeFormatter",$),t("Cleave.AsYouTypeFormatter.prototype.inputDigit",$.prototype.L),t("Cleave.AsYouTypeFormatter.prototype.clear",$.prototype.K)}.call("object"==typeof global&&global?global:window);
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * cleave.js - 0.7.23
  * https://github.com/nosir/cleave.js
@@ -3175,7 +4352,7 @@ var W={1:"US AG AI AS BB BM BS CA DM DO GD GU JM KN KY LC MP MS PR SX TC TT VC V
  * Copyright (C) 2012-2017 Max Huang https://github.com/nosir/
  */
 !function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.Cleave=t():e.Cleave=t()}(this,function(){return function(e){function t(n){if(r[n])return r[n].exports;var i=r[n]={exports:{},id:n,loaded:!1};return e[n].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var r={};return t.m=e,t.c=r,t.p="",t(0)}([function(e,t,r){(function(t){"use strict";var n=function(e,t){var r=this;if("string"==typeof e?r.element=document.querySelector(e):r.element="undefined"!=typeof e.length&&e.length>0?e[0]:e,!r.element)throw new Error("[cleave.js] Please check the element");t.initValue=r.element.value,r.properties=n.DefaultProperties.assign({},t),r.init()};n.prototype={init:function(){var e=this,t=e.properties;(t.numeral||t.phone||t.creditCard||t.date||0!==t.blocksLength||t.prefix)&&(t.maxLength=n.Util.getMaxLength(t.blocks),e.isAndroid=n.Util.isAndroid(),e.lastInputValue="",e.onChangeListener=e.onChange.bind(e),e.onKeyDownListener=e.onKeyDown.bind(e),e.onCutListener=e.onCut.bind(e),e.onCopyListener=e.onCopy.bind(e),e.element.addEventListener("input",e.onChangeListener),e.element.addEventListener("keydown",e.onKeyDownListener),e.element.addEventListener("cut",e.onCutListener),e.element.addEventListener("copy",e.onCopyListener),e.initPhoneFormatter(),e.initDateFormatter(),e.initNumeralFormatter(),e.onInput(t.initValue))},initNumeralFormatter:function(){var e=this,t=e.properties;t.numeral&&(t.numeralFormatter=new n.NumeralFormatter(t.numeralDecimalMark,t.numeralIntegerScale,t.numeralDecimalScale,t.numeralThousandsGroupStyle,t.numeralPositiveOnly,t.delimiter))},initDateFormatter:function(){var e=this,t=e.properties;t.date&&(t.dateFormatter=new n.DateFormatter(t.datePattern),t.blocks=t.dateFormatter.getBlocks(),t.blocksLength=t.blocks.length,t.maxLength=n.Util.getMaxLength(t.blocks))},initPhoneFormatter:function(){var e=this,t=e.properties;if(t.phone)try{t.phoneFormatter=new n.PhoneFormatter(new t.root.Cleave.AsYouTypeFormatter(t.phoneRegionCode),t.delimiter)}catch(r){throw new Error("[cleave.js] Please include phone-type-formatter.{country}.js lib")}},onKeyDown:function(e){var t=this,r=t.properties,i=e.which||e.keyCode,a=n.Util,o=t.element.value;return a.isAndroidBackspaceKeydown(t.lastInputValue,o)&&(i=8),t.lastInputValue=o,8===i&&a.isDelimiter(o.slice(-r.delimiterLength),r.delimiter,r.delimiters)?void(r.backspace=!0):void(r.backspace=!1)},onChange:function(){this.onInput(this.element.value)},onCut:function(e){this.copyClipboardData(e),this.onInput("")},onCopy:function(e){this.copyClipboardData(e)},copyClipboardData:function(e){var t=this,r=t.properties,i=n.Util,a=t.element.value,o="";o=r.copyDelimiter?a:i.stripDelimiters(a,r.delimiter,r.delimiters);try{e.clipboardData?e.clipboardData.setData("Text",o):window.clipboardData.setData("Text",o),e.preventDefault()}catch(l){}},onInput:function(e){var t=this,r=t.properties,i=e,a=n.Util;return r.numeral||!r.backspace||a.isDelimiter(e.slice(-r.delimiterLength),r.delimiter,r.delimiters)||(e=a.headStr(e,e.length-r.delimiterLength)),r.phone?(r.result=r.phoneFormatter.format(e),void t.updateValueState()):r.numeral?(r.result=r.prefix+r.numeralFormatter.format(e),void t.updateValueState()):(r.date&&(e=r.dateFormatter.getValidatedDate(e)),e=a.stripDelimiters(e,r.delimiter,r.delimiters),e=a.getPrefixStrippedValue(e,r.prefix,r.prefixLength),e=r.numericOnly?a.strip(e,/[^\d]/g):e,e=r.uppercase?e.toUpperCase():e,e=r.lowercase?e.toLowerCase():e,r.prefix&&(e=r.prefix+e,0===r.blocksLength)?(r.result=e,void t.updateValueState()):(r.creditCard&&t.updateCreditCardPropsByValue(e),e=a.headStr(e,r.maxLength),r.result=a.getFormattedValue(e,r.blocks,r.blocksLength,r.delimiter,r.delimiters),void(i===r.result&&i!==r.prefix||t.updateValueState())))},updateCreditCardPropsByValue:function(e){var t,r=this,i=r.properties,a=n.Util;a.headStr(i.result,4)!==a.headStr(e,4)&&(t=n.CreditCardDetector.getInfo(e,i.creditCardStrictMode),i.blocks=t.blocks,i.blocksLength=i.blocks.length,i.maxLength=a.getMaxLength(i.blocks),i.creditCardType!==t.type&&(i.creditCardType=t.type,i.onCreditCardTypeChanged.call(r,i.creditCardType)))},updateValueState:function(){var e=this;return e.isAndroid?void window.setTimeout(function(){e.element.value=e.properties.result},1):void(e.element.value=e.properties.result)},setPhoneRegionCode:function(e){var t=this,r=t.properties;r.phoneRegionCode=e,t.initPhoneFormatter(),t.onChange()},setRawValue:function(e){var t=this,r=t.properties;e=void 0!==e&&null!==e?e.toString():"",r.numeral&&(e=e.replace(".",r.numeralDecimalMark)),t.element.value=e,t.onInput(e)},getRawValue:function(){var e=this,t=e.properties,r=n.Util,i=e.element.value;return t.rawValueTrimPrefix&&(i=r.getPrefixStrippedValue(i,t.prefix,t.prefixLength)),i=t.numeral?t.numeralFormatter.getRawValue(i):r.stripDelimiters(i,t.delimiter,t.delimiters)},getFormattedValue:function(){return this.element.value},destroy:function(){var e=this;e.element.removeEventListener("input",e.onChangeListener),e.element.removeEventListener("keydown",e.onKeyDownListener),e.element.removeEventListener("cut",e.onCutListener),e.element.removeEventListener("copy",e.onCopyListener)},toString:function(){return"[Cleave Object]"}},n.NumeralFormatter=r(1),n.DateFormatter=r(2),n.PhoneFormatter=r(3),n.CreditCardDetector=r(4),n.Util=r(5),n.DefaultProperties=r(6),("object"==typeof t&&t?t:window).Cleave=n,e.exports=n}).call(t,function(){return this}())},function(e,t){"use strict";var r=function(e,t,n,i,a,o){var l=this;l.numeralDecimalMark=e||".",l.numeralIntegerScale=t>=0?t:10,l.numeralDecimalScale=n>=0?n:2,l.numeralThousandsGroupStyle=i||r.groupStyle.thousand,l.numeralPositiveOnly=!!a,l.delimiter=o||""===o?o:",",l.delimiterRE=o?new RegExp("\\"+o,"g"):""};r.groupStyle={thousand:"thousand",lakh:"lakh",wan:"wan"},r.prototype={getRawValue:function(e){return e.replace(this.delimiterRE,"").replace(this.numeralDecimalMark,".")},format:function(e){var t,n,i=this,a="";switch(e=e.replace(/[A-Za-z]/g,"").replace(i.numeralDecimalMark,"M").replace(/[^\dM-]/g,"").replace(/^\-/,"N").replace(/\-/g,"").replace("N",i.numeralPositiveOnly?"":"-").replace("M",i.numeralDecimalMark).replace(/^(-)?0+(?=\d)/,"$1"),n=e,e.indexOf(i.numeralDecimalMark)>=0&&(t=e.split(i.numeralDecimalMark),n=t[0],a=i.numeralDecimalMark+t[1].slice(0,i.numeralDecimalScale)),i.numeralIntegerScale>0&&(n=n.slice(0,i.numeralIntegerScale+("-"===e.slice(0,1)?1:0))),i.numeralThousandsGroupStyle){case r.groupStyle.lakh:n=n.replace(/(\d)(?=(\d\d)+\d$)/g,"$1"+i.delimiter);break;case r.groupStyle.wan:n=n.replace(/(\d)(?=(\d{4})+$)/g,"$1"+i.delimiter);break;default:n=n.replace(/(\d)(?=(\d{3})+$)/g,"$1"+i.delimiter)}return n.toString()+(i.numeralDecimalScale>0?a.toString():"")}},e.exports=r},function(e,t){"use strict";var r=function(e){var t=this;t.blocks=[],t.datePattern=e,t.initBlocks()};r.prototype={initBlocks:function(){var e=this;e.datePattern.forEach(function(t){"Y"===t?e.blocks.push(4):e.blocks.push(2)})},getBlocks:function(){return this.blocks},getValidatedDate:function(e){var t=this,r="";return e=e.replace(/[^\d]/g,""),t.blocks.forEach(function(n,i){if(e.length>0){var a=e.slice(0,n),o=a.slice(0,1),l=e.slice(n);switch(t.datePattern[i]){case"d":"00"===a?a="01":parseInt(o,10)>3?a="0"+o:parseInt(a,10)>31&&(a="31");break;case"m":"00"===a?a="01":parseInt(o,10)>1?a="0"+o:parseInt(a,10)>12&&(a="12")}r+=a,e=l}}),r}},e.exports=r},function(e,t){"use strict";var r=function(e,t){var r=this;r.delimiter=t||""===t?t:" ",r.delimiterRE=t?new RegExp("\\"+t,"g"):"",r.formatter=e};r.prototype={setFormatter:function(e){this.formatter=e},format:function(e){var t=this;t.formatter.clear(),e=e.replace(/[^\d+]/g,""),e=e.replace(t.delimiterRE,"");for(var r,n="",i=!1,a=0,o=e.length;o>a;a++)r=t.formatter.inputDigit(e.charAt(a)),/[\s()-]/g.test(r)?(n=r,i=!0):i||(n=r);return n=n.replace(/[()]/g,""),n=n.replace(/[\s-]/g,t.delimiter)}},e.exports=r},function(e,t){"use strict";var r={blocks:{uatp:[4,5,6],amex:[4,6,5],diners:[4,6,4],discover:[4,4,4,4],mastercard:[4,4,4,4],dankort:[4,4,4,4],instapayment:[4,4,4,4],jcb:[4,4,4,4],maestro:[4,4,4,4],visa:[4,4,4,4],general:[4,4,4,4],generalStrict:[4,4,4,7]},re:{uatp:/^(?!1800)1\d{0,14}/,amex:/^3[47]\d{0,13}/,discover:/^(?:6011|65\d{0,2}|64[4-9]\d?)\d{0,12}/,diners:/^3(?:0([0-5]|9)|[689]\d?)\d{0,11}/,mastercard:/^(5[1-5]|2[2-7])\d{0,14}/,dankort:/^(5019|4175|4571)\d{0,12}/,instapayment:/^63[7-9]\d{0,13}/,jcb:/^(?:2131|1800|35\d{0,2})\d{0,12}/,maestro:/^(?:5[0678]\d{0,2}|6304|67\d{0,2})\d{0,12}/,visa:/^4\d{0,15}/},getInfo:function(e,t){var n=r.blocks,i=r.re;return t=!!t,i.amex.test(e)?{type:"amex",blocks:n.amex}:i.uatp.test(e)?{type:"uatp",blocks:n.uatp}:i.diners.test(e)?{type:"diners",blocks:n.diners}:i.discover.test(e)?{type:"discover",blocks:t?n.generalStrict:n.discover}:i.mastercard.test(e)?{type:"mastercard",blocks:n.mastercard}:i.dankort.test(e)?{type:"dankort",blocks:n.dankort}:i.instapayment.test(e)?{type:"instapayment",blocks:n.instapayment}:i.jcb.test(e)?{type:"jcb",blocks:n.jcb}:i.maestro.test(e)?{type:"maestro",blocks:t?n.generalStrict:n.maestro}:i.visa.test(e)?{type:"visa",blocks:t?n.generalStrict:n.visa}:{type:"unknown",blocks:t?n.generalStrict:n.general}}};e.exports=r},function(e,t){"use strict";var r={noop:function(){},strip:function(e,t){return e.replace(t,"")},isDelimiter:function(e,t,r){return 0===r.length?e===t:r.some(function(t){return e===t?!0:void 0})},getDelimiterREByDelimiter:function(e){return new RegExp(e.replace(/([.?*+^$[\]\\(){}|-])/g,"\\$1"),"g")},stripDelimiters:function(e,t,r){var n=this;if(0===r.length){var i=t?n.getDelimiterREByDelimiter(t):"";return e.replace(i,"")}return r.forEach(function(t){e=e.replace(n.getDelimiterREByDelimiter(t),"")}),e},headStr:function(e,t){return e.slice(0,t)},getMaxLength:function(e){return e.reduce(function(e,t){return e+t},0)},getPrefixStrippedValue:function(e,t,r){if(e.slice(0,r)!==t){var n=this.getFirstDiffIndex(t,e.slice(0,r));e=t+e.slice(n,n+1)+e.slice(r+1)}return e.slice(r)},getFirstDiffIndex:function(e,t){for(var r=0;e.charAt(r)===t.charAt(r);)if(""===e.charAt(r++))return-1;return r},getFormattedValue:function(e,t,r,n,i){var a,o="",l=i.length>0;return 0===r?e:(t.forEach(function(t,s){if(e.length>0){var c=e.slice(0,t),u=e.slice(t);o+=c,a=l?i[s]||a:n,c.length===t&&r-1>s&&(o+=a),e=u}}),o)},isAndroid:function(){return!(!navigator||!/android/i.test(navigator.userAgent))},isAndroidBackspaceKeydown:function(e,t){return this.isAndroid()?t===e.slice(0,-1):!1}};e.exports=r},function(e,t){(function(t){"use strict";var r={assign:function(e,r){return e=e||{},r=r||{},e.creditCard=!!r.creditCard,e.creditCardStrictMode=!!r.creditCardStrictMode,e.creditCardType="",e.onCreditCardTypeChanged=r.onCreditCardTypeChanged||function(){},e.phone=!!r.phone,e.phoneRegionCode=r.phoneRegionCode||"AU",e.phoneFormatter={},e.date=!!r.date,e.datePattern=r.datePattern||["d","m","Y"],e.dateFormatter={},e.numeral=!!r.numeral,e.numeralIntegerScale=r.numeralIntegerScale>=0?r.numeralIntegerScale:10,e.numeralDecimalScale=r.numeralDecimalScale>=0?r.numeralDecimalScale:2,e.numeralDecimalMark=r.numeralDecimalMark||".",e.numeralThousandsGroupStyle=r.numeralThousandsGroupStyle||"thousand",e.numeralPositiveOnly=!!r.numeralPositiveOnly,e.numericOnly=e.creditCard||e.date||!!r.numericOnly,e.uppercase=!!r.uppercase,e.lowercase=!!r.lowercase,e.prefix=e.creditCard||e.phone||e.date?"":r.prefix||"",e.prefixLength=e.prefix.length,e.rawValueTrimPrefix=!!r.rawValueTrimPrefix,e.copyDelimiter=!!r.copyDelimiter,e.initValue=void 0===r.initValue?"":r.initValue.toString(),e.delimiter=r.delimiter||""===r.delimiter?r.delimiter:r.date?"/":r.numeral?",":(r.phone," "),e.delimiterLength=e.delimiter.length,e.delimiters=r.delimiters||[],e.blocks=r.blocks||[],e.blocksLength=e.blocks.length,e.root="object"==typeof t&&t?t:window,e.maxLength=0,e.backspace=!1,e.result="",e}};e.exports=r}).call(t,function(){return this}())}])});
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -13541,7 +14718,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /*!
  * JavaScript Cookie v2.2.0
  * https://github.com/js-cookie/js-cookie
@@ -13708,7 +14885,7 @@ return jQuery;
 	return init(function () {});
 }));
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){
 //     Underscore.js 1.9.1
 //     http://underscorejs.org
@@ -15405,10 +16582,12 @@ return jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);
-var _matchesPolyfill = require('modules/matches-polyfill');var _matchesPolyfill2 = _interopRequireDefault(_matchesPolyfill);
+var _polyfillMatches = require('modules/polyfill-matches');var _polyfillMatches2 = _interopRequireDefault(_polyfillMatches);
+var _polyfillRemove = require('modules/polyfill-remove');var _polyfillRemove2 = _interopRequireDefault(_polyfillRemove);
+var _polyfillForeach = require('modules/polyfill-foreach');var _polyfillForeach2 = _interopRequireDefault(_polyfillForeach);
 var _officeMap = require('modules/office-map');var _officeMap2 = _interopRequireDefault(_officeMap);
 var _screener = require('modules/screener');var _screener2 = _interopRequireDefault(_screener);
 var _shareForm = require('modules/share-form');var _shareForm2 = _interopRequireDefault(_shareForm);
@@ -15418,7 +16597,8 @@ var _tooltip = require('modules/tooltip');var _tooltip2 = _interopRequireDefault
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
 var _accordion = require('components/accordion/accordion.common');var _accordion2 = _interopRequireDefault(_accordion);
 var _filter = require('components/filter/filter.common');var _filter2 = _interopRequireDefault(_filter);
-var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _nearbyStops2 = _interopRequireDefault(_nearbyStops);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /* eslint-env browser */
+var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _nearbyStops2 = _interopRequireDefault(_nearbyStops);
+var _newsletter = require('objects/newsletter/newsletter.common');var _newsletter2 = _interopRequireDefault(_newsletter);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 (function (window, $) {
   'use strict';
@@ -15427,7 +16607,10 @@ var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _n
 
   _utility2.default.configErrorTracking(window);
 
-  new _matchesPolyfill2.default(); // Elements.matches polyfill
+  // Polyfills
+  new _polyfillMatches2.default(); // Element.prototype.matches()
+  new _polyfillRemove2.default(); // Element.prototype.removes()
+  new _polyfillForeach2.default(); // Array.prototype.forEach()
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
@@ -15466,6 +16649,10 @@ var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _n
   new _accordion2.default();
   new _filter2.default();
   new _nearbyStops2.default();
+
+  // Instantiate Newsletter Class
+  var newsletter = document.querySelector(_newsletter2.default.selector);
+  if (newsletter) new _newsletter2.default(newsletter);
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', _shareForm2.default.ShowDisclaimer);
@@ -15645,44 +16832,9 @@ var _nearbyStops = require('components/nearby-stops/nearby-stops.common');var _n
 
   // Enable environment warnings
   $(window).on('load', function () {return _utility2.default.warnings();});
-})(window, _jquery2.default);
+})(window, _jquery2.default); /* eslint-env browser */
 
-},{"components/accordion/accordion.common":1,"components/filter/filter.common":2,"components/nearby-stops/nearby-stops.common":3,"jquery":6,"modules/matches-polyfill":10,"modules/office-map":13,"modules/screener":16,"modules/share-form":17,"modules/static-map":18,"modules/text-sizer":19,"modules/tooltip":20,"modules/utility":21}],10:[function(require,module,exports){
-'use strict';
-
-/**
-               * Polyfill for the Element.matches
-               * https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
-               */Object.defineProperty(exports, "__esModule", { value: true });function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
-Matches =
-/**
-           * Class contructor
-           */
-function Matches() {_classCallCheck(this, Matches);
-  /* eslint-disable no-undef */
-  if (!Element.prototype.matches) {
-    Element.prototype.matches =
-    Element.prototype.matchesSelector ||
-    Element.prototype.mozMatchesSelector ||
-    Element.prototype.msMatchesSelector ||
-    Element.prototype.oMatchesSelector ||
-    Element.prototype.webkitMatchesSelector ||
-    function (s) {
-      var matches = (this.document || this.ownerDocument).
-      querySelectorAll(s);
-      var i = matches.length;
-      // eslint-disable-next-line no-empty
-      while (--i >= 0 && matches.item(i) !== this) {}
-      return i > -1;
-    };
-  }
-  /* eslint-enable no-undef */
-};exports.default =
-
-
-Matches;
-
-},{}],11:[function(require,module,exports){
+},{"components/accordion/accordion.common":1,"components/filter/filter.common":2,"components/nearby-stops/nearby-stops.common":3,"jquery":7,"modules/office-map":13,"modules/polyfill-foreach":14,"modules/polyfill-matches":15,"modules/polyfill-remove":16,"modules/screener":19,"modules/share-form":20,"modules/static-map":21,"modules/text-sizer":22,"modules/tooltip":23,"modules/utility":24,"objects/newsletter/newsletter.common":4}],11:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -15886,7 +17038,7 @@ OfficeFilter.Event = {
 
 OfficeFilter;
 
-},{"jquery":6,"underscore":8}],12:[function(require,module,exports){
+},{"jquery":7,"underscore":9}],12:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -15997,7 +17149,7 @@ OfficeLocation.Marker = null;exports.default =
 
 OfficeLocation;
 
-},{"modules/utility":21,"underscore":8}],13:[function(require,module,exports){
+},{"modules/utility":24,"underscore":9}],13:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -16457,7 +17609,131 @@ OfficeMap.Selectors = {
 
 OfficeMap;
 
-},{"jquery":6,"modules/office-filter":11,"modules/office-location":12,"modules/utility":21,"underscore":8}],14:[function(require,module,exports){
+},{"jquery":7,"modules/office-filter":11,"modules/office-location":12,"modules/utility":24,"underscore":9}],14:[function(require,module,exports){
+'use strict';
+
+/**
+               * Polyfill for Array.prototype.forEach()
+               * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Polyfill
+               */Object.defineProperty(exports, "__esModule", { value: true });function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+ForEach =
+/**
+           * Class contructor
+           */
+function ForEach() {_classCallCheck(this, ForEach);
+  /* eslint-disable no-undef */
+  if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function (callback) {
+      var T = void 0,k = void 0;
+
+      if (this == null) {
+        throw new TypeError('this is null or not defined');
+      }
+
+      var O = Object(this);
+      var len = O.length >>> 0;
+      if (typeof callback !== 'function') {
+        throw new TypeError(callback + ' is not a function');
+      }
+
+      if (arguments.length > 1) {
+        T = arguments[1];
+      }
+
+      k = 0;
+
+      while (k < len) {
+        var kValue = void 0;
+        if (k in O) {
+          kValue = O[k];
+          callback.call(T, kValue, k, O);
+        }
+        k++;
+      }
+
+    };
+  }
+  /* eslint-enable no-undef */
+};exports.default =
+
+
+ForEach;
+
+},{}],15:[function(require,module,exports){
+'use strict';
+
+/**
+               * Polyfill for Element.prototype.matches()
+               * https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+               */Object.defineProperty(exports, "__esModule", { value: true });function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+Matches =
+/**
+           * Class contructor
+           */
+function Matches() {_classCallCheck(this, Matches);
+  /* eslint-disable no-undef */
+  if (!Element.prototype.matches) {
+    Element.prototype.matches =
+    Element.prototype.matchesSelector ||
+    Element.prototype.mozMatchesSelector ||
+    Element.prototype.msMatchesSelector ||
+    Element.prototype.oMatchesSelector ||
+    Element.prototype.webkitMatchesSelector ||
+    function (s) {
+      var matches = (this.document || this.ownerDocument).
+      querySelectorAll(s);
+      var i = matches.length;
+      // eslint-disable-next-line no-empty
+      while (--i >= 0 && matches.item(i) !== this) {}
+      return i > -1;
+    };
+  }
+  /* eslint-enable no-undef */
+};exports.default =
+
+
+Matches;
+
+},{}],16:[function(require,module,exports){
+'use strict';
+
+/**
+               * Polyfill for Element.prototype.remove()
+               * https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove#Polyfill
+               */Object.defineProperty(exports, "__esModule", { value: true });function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+Remove =
+/**
+          * Class contructor
+          */
+function Remove() {_classCallCheck(this, Remove);
+  /* eslint-disable no-undef */
+  (function (arr) {
+    arr.forEach(function (item) {
+      if (item.hasOwnProperty('remove')) {
+        return;
+      }
+      Object.defineProperty(item, 'remove', {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: function remove() {
+          if (this.parentNode !== null)
+          this.parentNode.removeChild(this);
+        } });
+
+    });
+  })([
+  Element.prototype,
+  CharacterData.prototype,
+  DocumentType.prototype]);
+
+  /* eslint-enable no-undef */
+};exports.default =
+
+
+Remove;
+
+},{}],17:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -16600,7 +17876,7 @@ ScreenerHousehold.LIVING_ATTRS = [
 
 ScreenerHousehold;
 
-},{"underscore":8}],15:[function(require,module,exports){
+},{"underscore":9}],18:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -16898,7 +18174,7 @@ ScreenerPerson.BENEFIT_ATTRS = [
 
 ScreenerPerson;
 
-},{"underscore":8}],16:[function(require,module,exports){
+},{"underscore":9}],19:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -18287,7 +19563,7 @@ Screener.CookiePath = 'eligibility';exports.default =
 
 Screener;
 
-},{"jquery":6,"js-cookie":7,"modules/screener-household":14,"modules/screener-person":15,"modules/utility":21,"underscore":8}],17:[function(require,module,exports){
+},{"jquery":7,"js-cookie":8,"modules/screener-household":17,"modules/screener-person":18,"modules/utility":24,"underscore":9}],20:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -18584,7 +19860,7 @@ ShareForm.Message = {
 
 ShareForm;
 
-},{"../variables.json":22,"jquery":6,"modules/utility":21}],18:[function(require,module,exports){
+},{"../variables.json":25,"jquery":7,"modules/utility":24}],21:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -18738,7 +20014,7 @@ StaticMap = function () {
 
 StaticMap;
 
-},{"jquery":6,"modules/utility":21,"underscore":8}],19:[function(require,module,exports){
+},{"jquery":7,"modules/utility":24,"underscore":9}],22:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
@@ -18926,7 +20202,7 @@ TextSizer.CssClass = {
 
 TextSizer;
 
-},{"jquery":6,"js-cookie":7}],20:[function(require,module,exports){
+},{"jquery":7,"js-cookie":8}],23:[function(require,module,exports){
 /* eslint-env browser */
 
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
@@ -19118,7 +20394,7 @@ Tooltip.CssClass = {
 
 Tooltip;
 
-},{"jquery":6,"underscore":8}],21:[function(require,module,exports){
+},{"jquery":7,"underscore":9}],24:[function(require,module,exports){
 /* eslint-env browser */
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};
 
@@ -19264,7 +20540,7 @@ Utility.toDollarAmount = function (val) {return (
 /**
                                                                       * For translating strings, there is a global LOCALIZED_STRINGS array that
                                                                       * is defined on the HTML template level so that those strings are exposed to
-                                                                      * WPML translation. The LOCALIZED_STRINGS array is comosed of objects with a
+                                                                      * WPML translation. The LOCALIZED_STRINGS array is composed of objects with a
                                                                       * `slug` key whose value is some constant, and a `label` value which is the
                                                                       * translated equivalent. This function takes a slug name and returns the
                                                                       * label.
@@ -19616,7 +20892,7 @@ Utility.CONFIG = {
 
 Utility;
 
-},{"cleave.js/dist/addons/cleave-phone.us":4,"cleave.js/dist/cleave.min":5,"jquery":6,"underscore":8}],22:[function(require,module,exports){
+},{"cleave.js/dist/addons/cleave-phone.us":5,"cleave.js/dist/cleave.min":6,"jquery":7,"underscore":9}],25:[function(require,module,exports){
 module.exports={
   "screen-desktop": 960,
   "screen-tablet": 768,
@@ -19624,6 +20900,6 @@ module.exports={
   "screen-sm-mobile": 400
 }
 
-},{}]},{},[9])
+},{}]},{},[10])
 
-//# sourceMappingURL=main.570028032b5081b53b827918f2025fe0.js.map
+//# sourceMappingURL=main.3356bfe7678d3f497333d3a803d1c0c5.js.map
