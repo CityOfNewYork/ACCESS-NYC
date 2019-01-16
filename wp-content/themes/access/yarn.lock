@@ -27,14 +27,15 @@ accepts@~1.3.4:
     mime-types "~2.1.18"
     negotiator "0.6.1"
 
-access-nyc-patterns@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/access-nyc-patterns/-/access-nyc-patterns-0.1.3.tgz#0385b21207ddca151386e0789961df31e69c83d1"
-  integrity sha512-ktPf6pXnXsQRajBiSGtotyJue1BPMwiNNXhGpOWB8jWRMmirx3OUka6q2wyaljKEc7OcHNlhNb66hLugSXkwyA==
+access-nyc-patterns@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/access-nyc-patterns/-/access-nyc-patterns-0.1.6.tgz#d6d01fa874cbff4642b749fe02364ab46d74ea08"
+  integrity sha512-KuOodoRQR1MvELKxwcRuHs2H/Z6dKztb90a5DZoxBEBumn0ZXJoE2LRrlYEVuQ3oVG4Q/XUw2EE9HvG2Ogq5LA==
   dependencies:
     animate.scss "0.0.6"
     bourbon "^4.2.7"
     lodash "^4.17.5"
+    nserializejson "^1.0.2"
     tailwindcss "^0.7.2"
     vue "^2.5.16"
 
@@ -5473,6 +5474,11 @@ npm-packlist@^1.1.6:
     console-control-strings "~1.1.0"
     gauge "~2.7.3"
     set-blocking "~2.0.0"
+
+nserializejson@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/nserializejson/-/nserializejson-1.0.2.tgz#89692bc754d0890ec9b98910e7b2f35f8789ead6"
+  integrity sha512-4PwScU5OIp5pbqZA/UUgQ4dkzpdiQhBmwSTg3wYiIAemO+UxZycyHuPkBzwY222CVyEQpvstHu8KVh1VybQFUQ==
 
 nth-check@~1.0.1:
   version "1.0.1"
