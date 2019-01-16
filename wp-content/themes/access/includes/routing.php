@@ -1,7 +1,5 @@
 <?php
 
-use nyco\WpOpenDataTransients\Transients\Transients as Transients;
-
 /**
  * Routing
  */
@@ -42,29 +40,24 @@ Routes::map('peu/results', function () {
 });
 
 /**
- * Returns a shareable url and hash
- * @param  WP_REST_Request $request the request of the api
- * @return object                   the response
+ * REST API
  */
-function api_share_url(WP_REST_Request $request) {
-  // Create the url
-  $data = share_data($request->get_params());
-  // Create the response object
-  $response = new WP_REST_Response($data);
-  // Add a custom status code
-  $response->set_status(200);
+add_action('rest_api_init', function () {
+  $v = 'api/v1';
 
-  return $response;
-}
-
-/**
- * Function hook to initiate routes for the WP JSON Rest API
- */
-function rest_routes() {
-  register_rest_route('api/v1', '/shareurl/', array(
+  register_rest_route($v, '/shareurl/', array(
     'methods' => 'GET',
-    'callback' => 'api_share_url'
-  ));
-}
+    /**
+     * Returns a shareable url and hash
+     * @param  WP_REST_Request $request the request of the api
+     * @return object                   the response
+     */
+    'callback' => function (WP_REST_Request $request) {
+      $data = share_data($request->get_params()); // Create the url, share_data -> functions.php
+      $response = new WP_REST_Response($data); // Create the response object
+      $response->set_status(200); // Add a custom status code
 
-add_action('rest_api_init', 'rest_routes');
+      return $response;
+    }
+  ));
+});
