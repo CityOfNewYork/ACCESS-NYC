@@ -9,10 +9,11 @@ class ForEach {
    * Class contructor
    */
   constructor() {
-    /* eslint-disable no-undef */
+    /* eslint-disable no-undef, no-extend-native, prefer-rest-params */
     if (!Array.prototype.forEach) {
       Array.prototype.forEach = function(callback) {
-        let T, k;
+        let T;
+        let k;
 
         if (this == null) {
           throw new TypeError('this is null or not defined');
@@ -38,7 +39,6 @@ class ForEach {
           }
           k++;
         }
-
       };
     }
     /* eslint-enable no-undef */

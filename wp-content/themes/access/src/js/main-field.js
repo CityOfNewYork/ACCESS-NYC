@@ -1,9 +1,9 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
 import _ from 'underscore';
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 import SmoothScroll from 'smoothscroll-polyfill';
-/* eslint-enable no-unused-vars */
+import 'es6-promise/dist/es6-promise.auto';
 import Matches from 'modules/polyfill-matches';
 import ScreenerField from 'modules/screener-field';
 import ResultsField from 'modules/results-field';
@@ -19,7 +19,7 @@ import Accordion from 'components/accordion/accordion.common';
 
   require('smoothscroll-polyfill').polyfill(); // eslint-disable-line no-undef
 
-  new Matches; // Elements.matches polyfill
+  new Matches; // Element.prototype.matches()
 
   // Get SVG sprite file.
   $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);

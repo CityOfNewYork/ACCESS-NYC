@@ -10,8 +10,8 @@ class Remove {
    */
   constructor() {
     /* eslint-disable no-undef */
-    (function (arr) {
-      arr.forEach(function (item) {
+    (function(arr) {
+      arr.forEach(function(item) {
         if (item.hasOwnProperty('remove')) {
           return;
         }

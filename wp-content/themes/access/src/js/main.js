@@ -1,5 +1,6 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
+import 'es6-promise/dist/es6-promise.auto';
 import Matches from 'modules/polyfill-matches';
 import Remove from 'modules/polyfill-remove';
 import ForEach from 'modules/polyfill-foreach';
@@ -23,6 +24,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
   Utility.configErrorTracking(window);
 
   // Polyfills
+  // new Promise; // Promise
   new Matches; // Element.prototype.matches()
   new Remove; // Element.prototype.removes()
   new ForEach; // Array.prototype.forEach()
