@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Polyfill for the Element.matches
+ * Polyfill for Element.prototype.matches()
  * https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
  */
 class Matches {
