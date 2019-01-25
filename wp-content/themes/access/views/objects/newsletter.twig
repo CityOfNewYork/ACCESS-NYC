@@ -1,15 +1,15 @@
 <div class="mb-4 p-3 screen-desktop:p-4 bg-color-white" data-js="newsletter">
-  <div class="type-h3">Get Updates</div>
+  <div class="type-h3">{{ __('Get Updates', 'accessnyctheme') }}</div>
   <form action="https://nyc.us18.list-manage.com/subscribe/post?u=d04b7b607bddbd338b416fa89&amp;id=98ff3f3900" id="mc-embedded-subscribe-form" method="post" novalidate="true" target="_blank">
     <div class="c-question">
-      <label class="c-question__label">Receive benefits news and reminders about upcoming open enrollment periods.</label>
+      <label class="c-question__label">{{ __('Receive benefits news and reminders about upcoming open enrollment periods.', 'accessnyctheme') }}</label>
       <div class="c-question__container">
-        <input class="w-full" name="EMAIL" placeholder="Email address" required="true" type="email" />
+        <input class="w-full" name="EMAIL" placeholder="{{ __('Email address', 'accessnyctheme') }}" required="true" type="email" />
       </div>
     </div>
     <div class="c-question mt-3">
       <fieldset class="c-question">
-        <legend class="c-question__label">Which borough(s) would you like to recieve updates for?</legend>
+        <legend class="c-question__label">{{ __('Which borough(s) would you like to recieve updates for?', 'accessnyctheme') }}</legend>
         <div class="c-question__container screen-tablet:layout--columns" data-js-join-values="input[name='BOROUGH']">
           {% set values = [
             {
@@ -54,7 +54,7 @@
     <div aria-hidden="true" style="position: absolute; left: -5000px;">
       <input name="b_d04b7b607bddbd338b416fa89_98ff3f3900" tabindex="-1" type="text" value="" />
     </div>
-    <button class="btn-primary btn-small" type="submit">Sign Up</button>
+    <button class="btn-primary btn-small" type="submit">{{ __('Sign Up', 'accessnyctheme') }}</button>
     <article aria-hidden="true" class="c-alert-box bg-status-warning mt-3 text-font-size-small hidden" data-js-newsletter="alert-box-warning">
       <div class="c-alert-box__icon">
         <div class="c-alert-box__svg bg-icon-warning"></div>
