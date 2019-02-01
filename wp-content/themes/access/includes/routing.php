@@ -60,4 +60,40 @@ add_action('rest_api_init', function () {
       return $response;
     }
   ));
+
+  register_rest_route($v, '/terms/', array(
+    'methods' => 'GET',
+    /**
+     * Returns a list of public taxonomies and their terms
+     * @param  WP_REST_Request $request the request of the api
+     * @return object                   the response
+     */
+    'callback' => function (WP_REST_Request $request) {
+      // Get public taxonomies and build our initial assoc. array
+      foreach (get_taxonomies(array(
+        'public' => true,
+        '_builtin' => false
+      ), 'objects') as $taxonomy) {
+        $data[] = array(
+          'name' => $taxonomy->name,
+          'labels' => $taxonomy->labels,
+          'taxonomy' => $taxonomy,
+          'terms' => array()
+        );
+      }
+
+      // Get the terms for each taxonomy
+      $data = array_map(function ($tax) {
+        $tax['terms'] = get_terms(array(
+          'taxonomy' => $tax['name'],
+          'hide_empty' => false,
+        ));
+        return $tax;
+      }, $data);
+
+      $response = new WP_REST_Response($data); // Create the response object
+      $response->set_status(200); // Add a custom status code
+      return $response;
+    }
+  ));
 });

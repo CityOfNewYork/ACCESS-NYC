@@ -6,12 +6,10 @@
 
 $context = Timber::get_context();
 
-if (isset($_GET['program_cat'])) {
-  $context['programCategory'] = get_term_by('slug', $_GET['program_cat'], 'programs');
-} else {
-  $context['programCategory'] = '';
-}
+$category = (isset($_GET['program_cat']))
+  ? get_term_by('slug', $_GET['program_cat'], 'programs') : false;
 
+$context['category'] = $category;
 $context['posts'] = Timber::get_posts();
 $context['pagination'] = Timber::get_pagination();
-Timber::render('programs/program-landing.twig', $context);
+Timber::render('programs/archive.twig', $context);

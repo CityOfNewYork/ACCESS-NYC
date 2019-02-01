@@ -1,0 +1,497 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<main class="bg-color-white pb-4" id="content">
+  <header class="usa-grid py-4 my-1">
+    <h1 class="text-color-blue-dark">{% if category | length %}{{__('Programs', 'accessnyctheme')}}: {{ category.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
+  </header>
+
+  <div class="usa-grid screen-desktop:layout--sidebar-small-gutter" data-js="programs" data-js-page="{{ pagination.current }}">
+    <aside>
+      <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
+      <c-filter-multi v-bind:terms="terms" v-bind:busy="busy" v-on:fetch="filter($event)" v-on:reset="reset($event)"></c-filter-multi>
+      <c-filter v-for="t in terms" :key="t.term_id" v-bind="t" v-on:fetch="filter($event)" v-on:reset="reset($event)"></c-filter>
+    </aside>
+
+    <div>
+      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="!posts.length">
+        {% if page.term_id | length %}
+          {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
+        {% else %}
+          {% include 'partials/post-teaser.twig' %}
+        {% endif %}
+      </div>
+
+      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="posts.length">
+        <c-card v-for="post in page" :key="post.id" v-bind="post" taxonomy="programs"></c-card>
+      </div>
+
+      {% include 'partials/pagination.vue.twig' %}
+    </div>
+  </div>
+
+  {# <footer class="content-footer usa-width-one-whole"> #}
+    {# {% include 'partials/was-this-page-helpful.twig' %} #}
+  {# </footer> #}
+</main>
+{% endblock %}
+
+{% block scripts_footer %}
+{{ function('enqueue_script', 'assets/js/main', true) }}
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+<script>
+  Object.isEqual = _.isEqual;
+
+  Vue.component('c-filter', {
+    delimiters: ['v{', '}'],
+    props: {
+      'name': {type: String},
+      'slug': {type: String},
+      'filters': {type: Array},
+      'busy': {type: Boolean},
+      'STRINGS': {
+        type: Object,
+        default: () => ({
+          'ALL': 'All'
+        })
+      }
+    },
+    data: function() {
+      return {
+        active: this.name
+      };
+    },
+    methods: {
+      fetch: function(event) {
+        Vue.set(this, 'active', event.data.name);
+        this.$emit('fetch', event);
+        return this;
+      },
+      reset: function(event) {
+        this.$emit('reset', {
+          event: event,
+          data: this
+        });
+        return this;
+      }
+    },
+    template:
+      `<div class="c-filter" data-js="filter">
+        <a v-bind:href="'#' + slug" class="c-filter__header" data-js="filter" v-html="active">
+          v{ active }
+        </a>
+        <ul v-bind:id="slug" class="c-filter__list">
+          <li>
+            <a class="c-filter__item" v-html="[STRINGS.ALL, name].join(' ')" v-on:click="reset">
+              v{ [STRINGS.ALL, name].join(' ') }
+            </a>
+          </li>
+          <li v-for="f in filters" v-bind:key="f.id" v-once>
+            <a class="c-filter__item" v-bind:href="'#' + f.slug" v-on:click="fetch({'event': $event, 'data': f})" v-html="f.name">
+              v{ f.name }
+            </a>
+          </li>
+        </ul>
+      </div>`
+  });
+
+  Vue.component('c-filter-multi', {
+    delimiters: ['v{', '}'],
+    props: {
+      'terms': {type: Array},
+      'busy': {type: Boolean},
+      'STRINGS': {
+        type: Object,
+        default: () => ({
+          'ALL': 'All'
+        })
+      }
+    },
+    methods: {
+      fetch: function(event) {
+        Vue.set(event.data, 'checked', !event.data.checked);
+        this.$emit('fetch', event);
+        return this;
+      },
+      reset: function(event) {
+        this.$emit('reset', {
+          event: event,
+          data: this
+        });
+        return this;
+      }
+    },
+    template:
+      `<div class="c-filter-multi active">
+        <ul class="c-filter-multi__list">
+          <li class="c-filter-multi__item" v-for="t in terms" :key="t.term_id">
+            <div class="c-filter-multi__item-header">
+              <label class="checkbox">
+                <input data-toggles="#" type="checkbox" />
+                <span class="checkbox__label">v{ t.name }</span>
+              </label>
+              <a class="c-filter-multi__item-header-toggle active" data-js="filter" v-bind:href="'#' + t.slug">
+                <span class="c-filter-multi__item-header-expand">Expand category</span>
+                <span class="c-filter-multi__item-header-collapse">Collapse category</span>
+              </a>
+            </div>
+            <div aria-hidden="false" class="c-filter-multi__item-group active" v-bind:id="t.slug">
+              <ul class="c-filter-multi__item-group-list">
+                <li class="c-filter-multi__item-group-subitem" v-for="f in t.filters">
+                  <label class="checkbox">
+                    <input type="checkbox" :value="f.slug" :checked="f.checked" v-on:change="fetch({'event': $event, 'data': f})" />
+                    <span class="checkbox__label text-font-size-small font-normal">v{ f.name }</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>`
+  });
+
+  Vue.component('c-card', {
+    delimiters: ['v{', '}'],
+    props: {
+      'link': {type: String},
+      'plain_language_name': {type: String},
+      'name': {type: String},
+      'acronym': {type: String},
+      'brief_excerpt': {type: String},
+      'category': {type: Object},
+      'short': {type: Boolean},
+      'apply': {type: Boolean},
+      'blank': {type: Boolean},
+      'busy': {type: Boolean},
+      'STRINGS': {
+        type: Object,
+        default: () => ({
+          'LEARN_MORE': 'Learn More',
+          'APPLY': 'Apply'
+        })
+      }
+    },
+    template:
+      `<article class="c-card">
+        <div class="c-card__icon">
+          <svg v-bind:class="'icon icon-' + category.slug" role="img">
+            <title v-bind:id="'#icon-card-' + category.slug + '_title'" v-html="category.name"></title>
+            <use v-bind:xlink:href="'#icon-card-' + category.slug" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+          </svg>
+        </div>
+        <div class="c-card__body">
+          <a class="text-color-blue-dark" v-bind:href="link" v-bind:target="blank ? '_blank' : false">
+            <h3 class="c-card__title text-color-blue-dark">v{ plain_language_name }</h3>
+          </a>
+          <p class="program-card-subtitle type-small">
+            v{ name } <span v-if="acronym != ''">(v{ acronym })</span>
+          </p>
+          <div class="c-card__summary">
+            <p v-if="brief_excerpt && !short" v-html="brief_excerpt"></p>
+            <p class="hide-for-print">
+              <a v-bind:href="link">v{ STRINGS.LEARN_MORE } <span class="sr-only">: v{ name }</span></a>
+            </p>
+            <p class="hide-for-print" v-if='apply'>
+              <a class="btn btn-secondary btn-next" href="#">v{ STRINGS.APPLY }</a>
+            </p>
+          </div>
+        </div>
+      </article>`
+  });
+
+  var app = new Vue({
+    el: '[data-js="programs"]',
+    delimiters: ['v{', '}'],
+    data: {
+      terms: [],
+      posts: [],
+      query: {
+        page: parseInt(
+          document.querySelector('[data-js="programs"]').dataset.jsPage
+        ),
+        per_page: 5
+      },
+      headers: {
+        pages: 8,
+        total: 40,
+        link: 'rel="next";'
+      },
+      endpoints: {
+        terms: '/wp-json/api/v1/terms',
+        programs: '/wp-json/wp/v2/programs'
+      },
+      busy: true,
+      abort: new AbortController,
+      maps: function() {
+        return {
+          filters: (filter) => ({
+            'name': filter.labels.archives,
+            'slug': filter.name,
+            'filters': filter.terms.map(f => ({
+              'id': f.term_id,
+              'name': f.name,
+              'slug': f.slug,
+              'parent': filter.name
+            }))
+          }),
+          programs: (post) => ({
+            'link': post.link,
+            'name': post.acf.program_name,
+            'plain_language_name': post.acf.plain_language_program_name,
+            'acronym': post.acf.program_acronym,
+            'brief_excerpt': post.acf.brief_excerpt,
+            'category': {
+              'slug': post.terms.find(t => t.taxonomy === 'programs').slug
+                .replace(new RegExp(`\\-${this.lang.code}$`), ''),
+              'name': post.terms.find(t => t.taxonomy === 'programs').name
+            }
+          })
+        }
+      }
+    },
+    computed: {
+      // It's important to use the computed property with the following
+      // conditional, otherwise, whenever we change the page number, Vue
+      // will react and try to fetch posts and they won't exist until our
+      // query returns posts.
+      page: function() {
+        if (this.posts[this.query.page])
+          return this.posts[this.query.page].posts;
+      },
+      next: function() {
+        return (this.query.page < this.headers.pages);
+      },
+      previous: function() {
+        return (this.query.page > 1);
+      },
+      lang: () => {
+        let lang = document.querySelector('html').lang;
+        return (lang !== 'en') ? {
+          code: lang,
+          path: `/${lang}`
+        } : {
+          code: '',
+          path: ''
+        };
+      }
+    },
+    methods: {
+      fetch: function(data = false) {
+        if (!data) return data;
+
+        return (this[data].length) ? this[data] :
+          fetch(this.lang.path + this.endpoints[data])
+            .then(response => response.json())
+            .then(d => {
+              Vue.set(this, 'busy', false);
+              Vue.set(this, data, d.map(this.maps().filters))
+            });
+      },
+      filter: function(event) {
+        return new Promise((resolve, reject) => {
+          // if (!event.data.checked) reject('Unchecked');
+
+          let taxonomy = event.data.parent;
+          let term = event.data.id;
+          let tax_query = (this.query.hasOwnProperty(taxonomy)) ?
+            this.query[taxonomy] : [term]; // get other query or initialize.
+
+          // Toggle, if the taxonomy exists, filter it out, otherwise add it.
+          if (this.query.hasOwnProperty(taxonomy))
+            tax_query = (tax_query.includes(term)) ?
+              tax_query.filter(el => el !== term) : tax_query.concat([term]);
+
+          Vue.set(this.query, taxonomy, tax_query);
+          Vue.set(this.query, 'page', 1);
+          resolve();
+        })
+        .then(this.wp)
+        .catch((message) => {
+          // console.dir(message);
+        });
+      },
+      reset: function(event) {
+        return new Promise(resolve => {
+          let taxonomy = event.data.slug;
+          if (this.query.hasOwnProperty(taxonomy)) {
+            Vue.set(this.query, taxonomy, []);
+            resolve();
+          }
+        });
+      },
+      paginate: function(event) {
+        event.preventDefault();
+
+        // The change is the next page as well as an indication of what
+        // direction we are moving in for the queue.
+        let change = parseInt(event.target.dataset.amount);
+        let page = this.query.page + change;
+
+        // Set a benchmark query to compare the upcomming query to.
+        let Obj1 = Object.assign({}, this.query); // create copy of object.
+        delete Obj1.page; // delete the page attribute because this will always be different.
+        Object.freeze(Obj1); // prevent changes to our comparison.
+
+        return new Promise((resolve) => {
+          Vue.set(this.query, 'page', page);
+
+          // Check to see if we have the page that we are going to queued
+          // and the query structure of that page matches the current query
+          // structure (other than the page, which will obviously be different).
+          // This will help us determine if we need to make a new request.
+          let havePage = (this.posts[this.query.page]);
+          let pageQueryMatches = false;
+
+          if (havePage) {
+            let Obj2 = Object.assign({}, this.posts[this.query.page].query);
+            delete Obj2.page;
+            pageQueryMatches = Object.isEqual(Obj1, Obj2);
+          }
+
+          // If we have the new page (which is now the current page) and the
+          // query matches, just queue up the page before/after it. Else,
+          // queue up the current page and the page before/after it.
+          if (havePage && pageQueryMatches) {
+            this.queue([change]);
+          } else {
+            this.queue([0, change]);
+          }
+
+          resolve();
+        });
+      },
+      wp: function() {
+        return this.queue();
+      },
+      queue: function(queries = [0, -1, 1]) {
+        // The function is async because we want to wait until each promise
+        // is query is finished before we run the next. This is because we
+        // don't want to bother sending a request if there are no previous or
+        // next pages. The way we find out if there are previous or next pages
+        // relative to the current page query is through the headers of the
+        // response provided by the WP REST API.
+        (async () => {
+          for (let i = 0; i < queries.length; i++) {
+            let query = Object.assign({}, this.query);
+            let promise = new Promise(resolve => resolve());
+            let link = this.headers.link;
+            let pages = this.headers.pages;
+            let page = this.query.page;
+            let current = false;
+            let next = false;
+            let previous = false;
+
+            // Build the query and set its page number.
+            Object.defineProperty(query, 'page', {
+              value: page + queries[i],
+              enumerable: true
+            });
+
+            // There will never be a page 0 or below, so skip this query.
+            if (query.page <= 0) continue;
+
+            // If this is the current page we want the query to go through.
+            current = (query.page === page);
+
+            // If there is a next or previous page, we'll prefetch them.
+            // We'll know there's a next or previous page based on the
+            // headers sent by the current page query.
+            next = (page < pages && query.page > page);
+            previous = (page > 1 && query.page < page);
+
+            if (current || next || previous)
+              await promise.then(() => {
+                return this.wpQuery(query);
+              })
+              .then(this.response)
+              .then((data) => {
+                let headers = Object.assign({}, this.headers);
+                this.process(data, query, headers);
+              }).catch(this.error);
+          }
+        })();
+      },
+      wpQuery: function(query) {
+        Vue.set(this, 'abort', (new AbortController));
+        let signal = this.abort.signal;
+        let url = `${this.lang.path}${this.endpoints.programs}`;
+
+        // Build the url query.
+        url = `${url}?` + Object.keys(query)
+          .map(k => {
+            if (Array.isArray(query[k]))
+              return query[k].map(a => `${k}[]=${a}`).join('&');
+            return `${k}=${query[k]}`;
+          }).join('&');
+
+        // if (this.busy) {
+        //   this.abort.abort(); // stop request if we have started one
+        //   Vue.set(this, 'busy', false);
+        // }
+
+        // Vue.set(this, 'busy', true);
+
+        return fetch(url, {signal: signal});
+      },
+      response: function(response) {
+        let headers = {
+          total: 'X-WP-Total',
+          pages: 'X-WP-TotalPages',
+          link: 'Link'
+        };
+
+        if (response.ok) {
+          let keys = Object.keys(headers);
+
+          for (let i = 0; i < keys.length; i++) {
+            let header = response.headers.get(headers[keys[i]]);
+            let value = (isNaN(header)) ? header : (parseInt(header) || 0);
+            headers[keys[i]] = value;
+          }
+
+          Vue.set(this, 'headers', headers);
+        }
+
+        return response.json();
+      },
+      process: function(data, query, headers) {
+        // Vue.set(this, 'busy', false);
+        // If there are posts for this query, map them to the template.
+        let posts = (Array.isArray(data)) ?
+          data.map(this.maps().programs) : false;
+
+        // Set posts and store a copy of the query for reference.
+        Vue.set(this.posts, query.page, {
+          posts: posts,
+          query: Object.freeze(query),
+          headers: Object.freeze(headers)
+        });
+
+        // If there are no posts, pass along to the error handler.
+        if (!Array.isArray(data))
+          this.error({error: data, query: query});
+      },
+      error: function(response) {
+        Vue.set(this, 'busy', false);
+
+        // If there are no posts for the current page, requeue from the first page.
+        let noPosts = (response.error.code === 'rest_post_invalid_page_number');
+        let forCurrentPage = (response.query.page === this.query.page);
+
+        if (noPosts && forCurrentPage) {
+          Vue.set(this.query, 'page', 1);
+          this.wp();
+        }
+      }
+    },
+    created: function() {
+      this.fetch('terms').then(() => {
+        this.queue();
+      }).catch((error) => {
+        console.dir(error);
+      });
+    }
+  });
+</script>
+{% endblock %}

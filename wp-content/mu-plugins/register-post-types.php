@@ -1,12 +1,11 @@
 <?php
 
 /**
- * Plugin Name: Configure Custom Post Types
- * Description: Adds custom post types and manages their configuration. Includes Homepage, Homepage Touts, Programs, Locations, Program Search Links, Alerts.
+ * Plugin Name: Register Post Types
+ * Description: Adds custom post types. Includes Homepage, Homepage Touts, Programs, Locations, Program Search Links, Alerts.
  * Author: Blue State Digital
  */
 
-// Define custom post types.
 add_action('init', function() {
   register_post_type(
     'homepage',
@@ -71,11 +70,12 @@ add_action('init', function() {
         'edit_item' => __('Edit Program'),
         'new_item' => __('New Program'),
         'view_item' => __('View Program'),
-        'search_items' => __('Search Programs'),
+        'search_items' => __('Search Programs')
       ),
       'rewrite' => array( 'slug' => 'programs', 'with_front' => false ),
       'description' => __('A program featured on the site.'),
       'public' => true,
+      'show_in_rest' => true,
       'exclude_from_search' => false,
       'show_ui' => true,
       'taxonomies' => array('populations-served', 'programs', 'page-type'),
@@ -160,44 +160,6 @@ add_action('init', function() {
       'hierarchical' => false,
       'supports' => array( 'title', 'thumbnail' ),
       'menu_icon' => 'dashicons-format-quote'
-    )
-  );
-
-  // Creates the custom taxonomy taxonomy types we use for
-  // sorting/organizing programs
-  register_taxonomy(
-    'programs',
-    'programs',
-    array(
-      'label' => __('Program Categories'),
-      'hierarchical' => true,
-    )
-  );
-
-  register_taxonomy(
-    'outreach',
-    'programs',
-    array(
-      'label' => __('PEU Outreach Categories'),
-      'hierarchical' => true,
-    )
-  );
-
-  register_taxonomy(
-    'page-type',
-    'programs',
-    array(
-      'label' => __('Page Type'),
-      'hierarchical' => true,
-    )
-  );
-
-  register_taxonomy(
-    'populations-served',
-    'programs',
-    array(
-      'label' => __('Populations Served'),
-      'hierarchical' => true,
     )
   );
 });
