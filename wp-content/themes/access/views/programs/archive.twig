@@ -10,7 +10,7 @@
     <aside>
       <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
       <c-filter-multi v-bind:terms="terms" v-bind:busy="busy" v-on:fetch="filter($event)" v-on:reset="reset($event)"></c-filter-multi>
-      <c-filter v-for="t in terms" :key="t.term_id" v-bind="t" v-on:fetch="filter($event)" v-on:reset="reset($event)"></c-filter>
+      {# <c-filter v-for="t in terms" :key="t.term_id" v-bind="t" v-on:fetch="filter($event)" v-on:reset="reset($event)"></c-filter> #}
     </aside>
 
     <div>
