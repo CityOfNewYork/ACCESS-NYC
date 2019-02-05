@@ -25,11 +25,23 @@ class RestPreparePosts
 
   /**
    * Class Constuctor
-   * Add the "Show in Rest" toggle to the ACF settings UI
-   * @url https://github.com/airesvsg/acf-to-rest-api#field-settings
    */
-  function __construct() {
-    add_filter('acf/rest_api/field_settings/show_in_rest', '__return_true');
+  public function __construct() {
+    /**
+     * Add the "Show in Rest" toggle to the ACF settings UI
+     * @url https://github.com/airesvsg/acf-to-rest-api#field-settings
+     */
+    add_action('acf/render_field_settings', function ($field) {
+      acf_render_field_setting($field, array(
+        'label'         => __('Show in REST API?'),
+        'instructions'  => '',
+        'type'          => 'true_false',
+        'name'          => 'show_in_rest',
+        'ui'            => 1,
+        'class'         => 'field-show_in_rest',
+        'default_value' => 0,
+      ), true);
+    });
   }
 
   /**
@@ -51,7 +63,7 @@ class RestPreparePosts
 
     foreach ($post_type_groups as $group)
       foreach (acf_get_fields($group['key']) as $field)
-        if ($field[$this->acf_rest_option]) $fields[] = $field;
+        if (isset($field[$this->acf_rest_option])) $fields[] = $field;
 
     return $fields;
   }

@@ -15,12 +15,11 @@
                 "class": "",
                 "id": ""
             },
-            "show_in_rest": 0,
             "default_value": "",
+            "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "append": ""
         },
         {
             "key": "field_589e43563c471",
@@ -35,23 +34,44 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "vertical",
+            "show_in_rest": 1,
             "choices": {
                 "how-it-works": "How It Works",
                 "determine-your-eligibility": "Determine Your Eligibility",
                 "what-you-need-to-include": "What You Need to Include",
                 "how-to-apply": "How to Apply"
             },
+            "allow_custom": 0,
             "default_value": [
                 "how-it-works",
                 "determine-your-eligibility",
                 "what-you-need-to-include",
                 "how-to-apply"
             ],
-            "allow_custom": 0,
-            "save_custom": 0,
+            "layout": "vertical",
             "toggle": 1,
-            "return_format": "array"
+            "return_format": "array",
+            "save_custom": 0
+        },
+        {
+            "key": "field_5c59c07d0f78f",
+            "label": "Program Name",
+            "name": "program_name",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_58912c1a8a7bb",
@@ -93,26 +113,6 @@
             "append": ""
         },
         {
-            "key": "field_5c4b760fc40e2",
-            "label": "Program Name",
-            "name": "program_name",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 1,
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_58912c1a8a7e6",
             "label": "Plain Language Program Name",
             "name": "plain_language_program_name",
@@ -145,11 +145,10 @@
                 "class": "",
                 "id": ""
             },
-            "show_in_rest": 1,
-            "default_value": "",
             "tabs": "all",
             "toolbar": "full",
             "media_upload": 0,
+            "default_value": "",
             "delay": 0
         },
         {
@@ -798,5 +797,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1548450001
+    "modified": 1549385890
 }

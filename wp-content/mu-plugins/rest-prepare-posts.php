@@ -26,7 +26,7 @@ if (file_exists(WPMU_PLUGIN_DIR . '/wp-rest-prepare-posts/index.php')) {
           $post->data['acf'][$field['name']] = get_field($field['name']);
 
         // 2. Add public taxonomy details to the post.
-        $post->data['terms'] = $RestPreparePosts->getTerms($post->data->id);
+        $post->data['terms'] = $RestPreparePosts->getTerms($post->data['id']);
 
         return $post;
       });

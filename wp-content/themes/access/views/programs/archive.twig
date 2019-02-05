@@ -10,11 +10,10 @@
     <aside>
       <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
       <c-filter-multi v-bind:terms="terms" v-bind:busy="busy" v-on:fetch="filter($event)" v-on:reset="reset($event)"></c-filter-multi>
-      {# <c-filter v-for="t in terms" :key="t.term_id" v-bind="t" v-on:fetch="filter($event)" v-on:reset="reset($event)"></c-filter> #}
     </aside>
 
     <div>
-      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="!posts.length">
+      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="!init">
         {% if page.term_id | length %}
           {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
         {% else %}
@@ -22,11 +21,17 @@
         {% endif %}
       </div>
 
-      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="posts.length">
-        <c-card v-for="post in page" :key="post.id" v-bind="post" taxonomy="programs"></c-card>
-      </div>
+      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="page" v-for="page in posts" v-if="page.show">
+        <c-card v-for="post in page.posts" :key="post.id" v-bind="post" taxonomy="programs" v-if="page.show"></c-card>
 
-      {% include 'partials/pagination.vue.twig' %}
+        <div v-if="!page.posts.length && page.show">
+          Loading...
+          {% include 'partials/spinner.twig' %}
+        </div>
+        <div v-else="page.show">
+          <a class="btn btn-secondary btn-small screen-tablet:btn-normal btn-next mb-1 screen-mobile:mb-0" href="{{ pagination.next.link }}" v-on:click="paginate" data-amount="1" v-if="next">{{__('Next', 'accessnyctheme')}}</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -37,7 +42,24 @@
 {% endblock %}
 
 {% block scripts_footer %}
+
+{% include 'partials/strings.twig' with {'strings': [
+    {
+      'label': 'Learn more', 
+      'slug': 'LEARN_MORE'
+    },
+    {
+      'label': 'Apply',
+      'slug': 'APPLY'
+    },
+    {
+      'label': 'All',
+      'slug': 'ALL'
+    }
+  ], 'translation_id': 'accessnyctheme'} only %}
+
 {{ function('enqueue_script', 'assets/js/main', true) }}
+
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 <script>
@@ -141,7 +163,7 @@
                 <li class="c-filter-multi__item-group-subitem" v-for="f in t.filters">
                   <label class="checkbox">
                     <input type="checkbox" :value="f.slug" :checked="f.checked" v-on:change="fetch({'event': $event, 'data': f})" />
-                    <span class="checkbox__label text-font-size-small font-normal">v{ f.name }</span>
+                    <span class="checkbox__label text-font-size-small font-normal" v-html="f.name">v{ f.name }</span>
                   </label>
                 </li>
               </ul>
@@ -155,6 +177,7 @@
     delimiters: ['v{', '}'],
     props: {
       'link': {type: String},
+      'param_apply': {type: String},
       'plain_language_name': {type: String},
       'name': {type: String},
       'acronym': {type: String},
@@ -167,7 +190,7 @@
       'STRINGS': {
         type: Object,
         default: () => ({
-          'LEARN_MORE': 'Learn More',
+          'LEARN_MORE': 'Learn more',
           'APPLY': 'Apply'
         })
       }
@@ -193,7 +216,7 @@
               <a v-bind:href="link">v{ STRINGS.LEARN_MORE } <span class="sr-only">: v{ name }</span></a>
             </p>
             <p class="hide-for-print" v-if='apply'>
-              <a class="btn btn-secondary btn-next" href="#">v{ STRINGS.APPLY }</a>
+              <a class="btn btn-secondary btn-next" v-bind:href="link + param_apply">v{ STRINGS.APPLY }</a>
             </p>
           </div>
         </div>
@@ -222,6 +245,7 @@
         programs: '/wp-json/wp/v2/programs'
       },
       busy: true,
+      init: false,
       abort: new AbortController,
       maps: function() {
         return {
@@ -233,18 +257,28 @@
               'name': f.name,
               'slug': f.slug,
               'parent': filter.name
-            }))
+            })),
+            'STRINGS': {
+              'ALL': window.LOCALIZED_STRINGS.find(e => e.slug === 'ALL').label || 'ALL'
+            }
           }),
-          programs: (post) => ({
-            'link': post.link,
-            'name': post.acf.program_name,
-            'plain_language_name': post.acf.plain_language_program_name,
-            'acronym': post.acf.program_acronym,
-            'brief_excerpt': post.acf.brief_excerpt,
+          programs: (p) => ({
+            'link': p.link,
+            'param_apply': (p.acf.show_sections.find(s => s.value === 'how-to-apply') !== undefined) 
+              ? '?step=how-to-apply' : '',
+            'name': p.acf.program_name,
+            'plain_language_name': p.acf.plain_language_program_name,
+            'acronym': p.acf.program_acronym,
+            'brief_excerpt': p.acf.brief_excerpt,
+            'show_sections': p.acf.show_sections,
             'category': {
-              'slug': post.terms.find(t => t.taxonomy === 'programs').slug
-                .replace(new RegExp(`\\-${this.lang.code}$`), ''),
-              'name': post.terms.find(t => t.taxonomy === 'programs').name
+              'slug': (p.terms && p.terms.find(t => t.taxonomy === 'programs').slug
+                .replace(new RegExp(`\\-${this.lang.code}$`), '')) || 'PROGRAMS',
+              'name': (p.terms && p.terms.find(t => t.taxonomy === 'programs').name) || 'NAME'
+            },
+            'STRINGS': {
+              'LEARN_MORE': window.LOCALIZED_STRINGS.find(e => e.slug === 'LEARN_MORE').label || 'LEARN_MORE',
+              'APPLY': window.LOCALIZED_STRINGS.find(e => e.slug === 'APPLY').label || 'APPLY'
             }
           })
         }
@@ -255,10 +289,10 @@
       // conditional, otherwise, whenever we change the page number, Vue
       // will react and try to fetch posts and they won't exist until our
       // query returns posts.
-      page: function() {
-        if (this.posts[this.query.page])
-          return this.posts[this.query.page].posts;
-      },
+      // page: function() {
+      //   return (this.posts[this.query.page] && this.posts[this.query.page].posts.length) 
+      //     ? this.posts[this.query.page].posts : false;
+      // },
       next: function() {
         return (this.query.page < this.headers.pages);
       },
@@ -271,7 +305,7 @@
           code: lang,
           path: `/${lang}`
         } : {
-          code: '',
+          code: 'en',
           path: ''
         };
       }
@@ -290,8 +324,6 @@
       },
       filter: function(event) {
         return new Promise((resolve, reject) => {
-          // if (!event.data.checked) reject('Unchecked');
-
           let taxonomy = event.data.parent;
           let term = event.data.id;
           let tax_query = (this.query.hasOwnProperty(taxonomy)) ?
@@ -304,6 +336,11 @@
 
           Vue.set(this.query, taxonomy, tax_query);
           Vue.set(this.query, 'page', 1);
+          this.posts.map((value, index) => {
+            if (value) Vue.set(this.posts[index], 'show', false);
+            return value;
+          });
+
           resolve();
         })
         .then(this.wp)
@@ -328,43 +365,23 @@
         let change = parseInt(event.target.dataset.amount);
         let page = this.query.page + change;
 
-        // Set a benchmark query to compare the upcomming query to.
-        let Obj1 = Object.assign({}, this.query); // create copy of object.
-        delete Obj1.page; // delete the page attribute because this will always be different.
-        Object.freeze(Obj1); // prevent changes to our comparison.
-
         return new Promise((resolve) => {
           Vue.set(this.query, 'page', page);
+          Vue.set(this.posts[this.query.page], 'show', true);
 
-          // Check to see if we have the page that we are going to queued
-          // and the query structure of that page matches the current query
-          // structure (other than the page, which will obviously be different).
-          // This will help us determine if we need to make a new request.
-          let havePage = (this.posts[this.query.page]);
-          let pageQueryMatches = false;
-
-          if (havePage) {
-            let Obj2 = Object.assign({}, this.posts[this.query.page].query);
-            delete Obj2.page;
-            pageQueryMatches = Object.isEqual(Obj1, Obj2);
-          }
-
-          // If we have the new page (which is now the current page) and the
-          // query matches, just queue up the page before/after it. Else,
-          // queue up the current page and the page before/after it.
-          if (havePage && pageQueryMatches) {
-            this.queue([change]);
-          } else {
-            this.queue([0, change]);
-          }
-
+          this.queue([0, change]);
           resolve();
         });
       },
       wp: function() {
         return this.queue();
       },
-      queue: function(queries = [0, -1, 1]) {
+      queue: function(queries = [0, 1]) {
+        // Set a benchmark query to compare the upcomming query to.
+        let Obj1 = Object.assign({}, this.query); // create copy of object.
+        delete Obj1.page; // delete the page attribute because this will always be different.
+        Object.freeze(Obj1); // prevent changes to our comparison.
+
         // The function is async because we want to wait until each promise
         // is query is finished before we run the next. This is because we
         // don't want to bother sending a request if there are no previous or
@@ -391,6 +408,21 @@
             // There will never be a page 0 or below, so skip this query.
             if (query.page <= 0) continue;
 
+            // Check to see if we have the page that we are going to queued
+            // and the query structure of that page matches the current query
+            // structure (other than the page, which will obviously be different).
+            // This will help us determine if we need to make a new request.
+            let havePage = (this.posts[query.page]) ? true : false;
+            let pageQueryMatches = false;
+
+            if (havePage) {
+              let Obj2 = Object.assign({}, this.posts[query.page].query);
+              delete Obj2.page;
+              pageQueryMatches = Object.isEqual(Obj1, Obj2);
+            }
+
+            if (havePage && pageQueryMatches) continue;
+
             // If this is the current page we want the query to go through.
             current = (query.page === page);
 
@@ -413,6 +445,8 @@
         })();
       },
       wpQuery: function(query) {
+        Vue.set(this, 'busy', true);
+
         Vue.set(this, 'abort', (new AbortController));
         let signal = this.abort.signal;
         let url = `${this.lang.path}${this.endpoints.programs}`;
@@ -425,12 +459,12 @@
             return `${k}=${query[k]}`;
           }).join('&');
 
-        // if (this.busy) {
-        //   this.abort.abort(); // stop request if we have started one
-        //   Vue.set(this, 'busy', false);
-        // }
-
-        // Vue.set(this, 'busy', true);
+        // Set posts and store a copy of the query for reference. 
+        Vue.set(this.posts, query.page, {
+          posts: [],
+          query: Object.freeze(query),
+          show: (this.query.page >= query.page)
+        });
 
         return fetch(url, {signal: signal});
       },
@@ -456,41 +490,39 @@
         return response.json();
       },
       process: function(data, query, headers) {
-        // Vue.set(this, 'busy', false);
         // If there are posts for this query, map them to the template.
         let posts = (Array.isArray(data)) ?
           data.map(this.maps().programs) : false;
 
         // Set posts and store a copy of the query for reference.
-        Vue.set(this.posts, query.page, {
-          posts: posts,
-          query: Object.freeze(query),
-          headers: Object.freeze(headers)
-        });
+        Vue.set(this.posts[query.page], 'posts', posts);
+        Vue.set(this.posts[query.page], 'headers', Object.freeze(headers));
 
         // If there are no posts, pass along to the error handler.
         if (!Array.isArray(data))
           this.error({error: data, query: query});
+
+        Vue.set(this, 'busy', false);
+        Vue.set(this, 'init', true);
       },
       error: function(response) {
-        Vue.set(this, 'busy', false);
-
         // If there are no posts for the current page, requeue from the first page.
-        let noPosts = (response.error.code === 'rest_post_invalid_page_number');
-        let forCurrentPage = (response.query.page === this.query.page);
+        // let noPosts = (response.error.code === 'rest_post_invalid_page_number');
+        // let forCurrentPage = (response.query.page === this.query.page);
 
-        if (noPosts && forCurrentPage) {
-          Vue.set(this.query, 'page', 1);
-          this.wp();
-        }
+        // if (noPosts && forCurrentPage) {
+        //   Vue.set(this.query, 'page', 1);
+        //   this.wp();
+        // }
+        console.dir(response);
+        Vue.set(this, 'busy', false);
       }
     },
     created: function() {
-      this.fetch('terms').then(() => {
-        this.queue();
-      }).catch((error) => {
-        console.dir(error);
-      });
+      this.queue();
+
+      this.fetch('terms')
+        .catch(this.error);
     }
   });
 </script>
