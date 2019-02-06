@@ -331,7 +331,7 @@
           terms = (terms.includes(term)) ?
             terms.filter(el => el !== term) : terms.concat([term]);
 
-        this.filter(taxonomy, terms);
+        this.updateQuery(taxonomy, terms);
       },
       filterAll: function(taxonomy) {
         let tax = this.terms.find(t => t.slug === taxonomy);
@@ -344,9 +344,9 @@
             return term.id;
           });
 
-        this.filterSet(taxonomy, (checked) ? terms : []);
+        this.updateQuery(taxonomy, (checked) ? terms : []);
       },
-      filterSet: function(taxonomy, terms) {
+      updateQuery: function(taxonomy, terms) {
         return new Promise((resolve, reject) => {
           Vue.set(this.query, taxonomy, terms);
           Vue.set(this.query, 'page', 1);
