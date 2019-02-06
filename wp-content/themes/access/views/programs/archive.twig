@@ -9,7 +9,7 @@
   <div class="usa-grid screen-desktop:layout--sidebar-small-gutter" data-js="programs" data-js-page="{{ pagination.current }}">
     <aside>
       <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
-      <c-filter-multi v-bind:terms="terms" v-bind:busy="busy" v-on:fetch="filter($event)" v-on:reset="reset($event)"></c-filter-multi>
+      <c-filter-multi v-bind:terms="terms" v-on:fetch="click($event)" v-on:reset="click($event)"></c-filter-multi>
     </aside>
 
     <div>
@@ -45,7 +45,7 @@
 
 {% include 'partials/strings.twig' with {'strings': [
     {
-      'label': 'Learn more', 
+      'label': 'Learn more',
       'slug': 'LEARN_MORE'
     },
     {
@@ -150,7 +150,7 @@
           <li class="c-filter-multi__item" v-for="t in terms" :key="t.term_id">
             <div class="c-filter-multi__item-header">
               <label class="checkbox">
-                <input data-toggles="#" type="checkbox" />
+                <input data-toggles="#" type="checkbox" :checked="t.checked" v-on:change="fetch({'event': $event, 'data': {'parent': t.slug}})" />
                 <span class="checkbox__label">v{ t.name }</span>
               </label>
               <a class="c-filter-multi__item-header-toggle active" data-js="filter" v-bind:href="'#' + t.slug">
@@ -176,22 +176,18 @@
   Vue.component('c-card', {
     delimiters: ['v{', '}'],
     props: {
+      'cta': {type: String},
+      'title': {type: String},
       'link': {type: String},
-      'param_apply': {type: String},
-      'plain_language_name': {type: String},
-      'name': {type: String},
-      'acronym': {type: String},
-      'brief_excerpt': {type: String},
+      'subtitle': {type: String},
+      'summary': {type: String},
       'category': {type: Object},
-      'short': {type: Boolean},
-      'apply': {type: Boolean},
       'blank': {type: Boolean},
-      'busy': {type: Boolean},
       'STRINGS': {
         type: Object,
         default: () => ({
           'LEARN_MORE': 'Learn more',
-          'APPLY': 'Apply'
+          'CTA': 'Apply'
         })
       }
     },
@@ -205,18 +201,18 @@
         </div>
         <div class="c-card__body">
           <a class="text-color-blue-dark" v-bind:href="link" v-bind:target="blank ? '_blank' : false">
-            <h3 class="c-card__title text-color-blue-dark">v{ plain_language_name }</h3>
+            <h3 class="c-card__title text-color-blue-dark">v{ title }</h3>
           </a>
-          <p class="program-card-subtitle type-small">
-            v{ name } <span v-if="acronym != ''">(v{ acronym })</span>
+          <p class="c-card__subtitle type-small" v-if="subtitle" v-html="subtitle">
+            v{ subtitle }
           </p>
           <div class="c-card__summary">
-            <p v-if="brief_excerpt && !short" v-html="brief_excerpt"></p>
+            <p v-if="summary" v-html="summary">v{ summary }</p>
             <p class="hide-for-print">
-              <a v-bind:href="link">v{ STRINGS.LEARN_MORE } <span class="sr-only">: v{ name }</span></a>
+              <a v-bind:href="link">v{ STRINGS.LEARN_MORE } <span class="sr-only">: v{ subtitle }</span></a>
             </p>
-            <p class="hide-for-print" v-if='apply'>
-              <a class="btn btn-secondary btn-next" v-bind:href="link + param_apply">v{ STRINGS.APPLY }</a>
+            <p class="hide-for-print" v-if="cta">
+              <a class="btn btn-secondary btn-next" v-bind:href="cta">v{ STRINGS.CTA }</a>
             </p>
           </div>
         </div>
@@ -263,14 +259,16 @@
             }
           }),
           programs: (p) => ({
+            'title': p.acf.plain_language_program_name,
             'link': p.link,
-            'param_apply': (p.acf.show_sections.find(s => s.value === 'how-to-apply') !== undefined) 
-              ? '?step=how-to-apply' : '',
-            'name': p.acf.program_name,
-            'plain_language_name': p.acf.plain_language_program_name,
-            'acronym': p.acf.program_acronym,
-            'brief_excerpt': p.acf.brief_excerpt,
-            'show_sections': p.acf.show_sections,
+            'subtitle': p.acf.program_name + ((p.acf.program_acronym) ?
+              ' (' + p.acf.program_acronym + ')' : ''),
+            'summary': p.acf.brief_excerpt,
+            // Demonstration on how to add the cta link
+            // 'cta': p.link + ((
+            //     p.acf.show_sections &&
+            //     p.acf.show_sections.find(s => s.value === 'how-to-apply').value
+            //   ) ? '?step=how-to-apply' : ''),
             'category': {
               'slug': (p.terms && p.terms.find(t => t.taxonomy === 'programs').slug
                 .replace(new RegExp(`\\-${this.lang.code}$`), '')) || 'PROGRAMS',
@@ -278,21 +276,13 @@
             },
             'STRINGS': {
               'LEARN_MORE': window.LOCALIZED_STRINGS.find(e => e.slug === 'LEARN_MORE').label || 'LEARN_MORE',
-              'APPLY': window.LOCALIZED_STRINGS.find(e => e.slug === 'APPLY').label || 'APPLY'
+              'CTA': window.LOCALIZED_STRINGS.find(e => e.slug === 'APPLY').label || 'APPLY'
             }
           })
         }
       }
     },
     computed: {
-      // It's important to use the computed property with the following
-      // conditional, otherwise, whenever we change the page number, Vue
-      // will react and try to fetch posts and they won't exist until our
-      // query returns posts.
-      // page: function() {
-      //   return (this.posts[this.query.page] && this.posts[this.query.page].posts.length) 
-      //     ? this.posts[this.query.page].posts : false;
-      // },
       next: function() {
         return (this.query.page < this.headers.pages);
       },
@@ -322,25 +312,49 @@
               Vue.set(this, data, d.map(this.maps().filters))
             });
       },
-      filter: function(event) {
+      click: function(event) {
+        let taxonomy = event.data.parent;
+        let term = event.data.id || false;
+
+        if (term) {
+          this.filter(taxonomy, term);
+        } else {
+          this.filterAll(taxonomy);
+        }
+      },
+      filter: function(taxonomy, term) {
+        let terms = (this.query.hasOwnProperty(taxonomy)) ?
+          this.query[taxonomy] : [term]; // get other query or initialize.
+
+        // Toggle, if the taxonomy exists, filter it out, otherwise add it.
+        if (this.query.hasOwnProperty(taxonomy))
+          terms = (terms.includes(term)) ?
+            terms.filter(el => el !== term) : terms.concat([term]);
+
+        this.filter(taxonomy, terms);
+      },
+      filterAll: function(taxonomy) {
+        let tax = this.terms.find(t => t.slug === taxonomy);
+        let checked = !(tax.checked);
+
+        Vue.set(tax, 'checked', checked);
+
+        let terms = tax.filters.map((term) => {
+            Vue.set(term, 'checked', checked);
+            return term.id;
+          });
+
+        this.filterSet(taxonomy, (checked) ? terms : []);
+      },
+      filterSet: function(taxonomy, terms) {
         return new Promise((resolve, reject) => {
-          let taxonomy = event.data.parent;
-          let term = event.data.id;
-          let tax_query = (this.query.hasOwnProperty(taxonomy)) ?
-            this.query[taxonomy] : [term]; // get other query or initialize.
-
-          // Toggle, if the taxonomy exists, filter it out, otherwise add it.
-          if (this.query.hasOwnProperty(taxonomy))
-            tax_query = (tax_query.includes(term)) ?
-              tax_query.filter(el => el !== term) : tax_query.concat([term]);
-
-          Vue.set(this.query, taxonomy, tax_query);
+          Vue.set(this.query, taxonomy, terms);
           Vue.set(this.query, 'page', 1);
+
           this.posts.map((value, index) => {
             if (value) Vue.set(this.posts[index], 'show', false);
             return value;
           });
-
           resolve();
         })
         .then(this.wp)
@@ -459,7 +473,7 @@
             return `${k}=${query[k]}`;
           }).join('&');
 
-        // Set posts and store a copy of the query for reference. 
+        // Set posts and store a copy of the query for reference.
         Vue.set(this.posts, query.page, {
           posts: [],
           query: Object.freeze(query),
