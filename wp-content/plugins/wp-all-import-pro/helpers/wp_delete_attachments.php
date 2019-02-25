@@ -11,33 +11,23 @@ function wp_delete_attachments($parent_id, $unlink = true, $type = 'images') {
 
 	$attachments = get_posts(array('post_parent' => $parent_id, 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' => null));
 
-	foreach ($attachments as $attach) {
+    foreach ($attachments as $attach) {
+        if ( ($type == 'files' && ! wp_attachment_is_image( $attach->ID )) || ($type == 'images' && wp_attachment_is_image( $attach->ID ))) {
+            if ($unlink) {
+                if (!empty($attach->ID)) {
+                    $file = get_attached_file($attach->ID);
+                    if (@file_exists($file)) {
+                        wp_delete_attachment($attach->ID, TRUE);
+                    }
+                }
+            }
+            else {
+                $ids[] = $attach->ID;
+            }
+        }
+    }
 
-		if ($type == 'files' and ! wp_attachment_is_image( $attach->ID ) ){
-			
-			if ($unlink)
-			{
-				wp_delete_attachment($attach->ID, true);							
-			}
-			else
-			{
-				$ids[] = $attach->ID;
-			}
-		}	
-		elseif ($type == 'images' and wp_attachment_is_image( $attach->ID )) {
-
-			if ($unlink)
-			{ 
-				wp_delete_attachment($attach->ID, true);
-			}
-			else
-			{																		
-				$ids[] = $attach->ID;				
-			}
-		}		
-	}
-
-	global $wpdb;
+    global $wpdb;
 				
 	if ( ! empty( $ids ) ) {
 

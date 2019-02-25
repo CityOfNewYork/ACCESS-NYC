@@ -34,7 +34,6 @@
 // namespace prefixes based on their attributes.
 
 @import 'access-nyc-patterns/src/elements/base/base';
-@import 'access-nyc-patterns/src/elements/typography/typography';
 @import 'access-nyc-patterns/src/elements/animate/animate';
 @import 'access-nyc-patterns/src/elements/code/code';
 @import 'access-nyc-patterns/src/elements/layouts/layouts';
@@ -48,7 +47,6 @@
 @import 'access-nyc-patterns/src/elements/radios/radios';
 @import 'access-nyc-patterns/src/elements/toggles/toggles';
 @import 'access-nyc-patterns/src/elements/selects/selects';
-@import 'access-nyc-patterns/src/elements/icons/icons';
 @import 'access-nyc-patterns/src/elements/tables/tables';
 @import 'access-nyc-patterns/src/elements/tooltips/tooltips';
 @import 'access-nyc-patterns/src/elements/divider/divider';
@@ -105,6 +103,8 @@
 
 @import 'access-nyc-patterns/src/utilities/color';
 @import 'access-nyc-patterns/src/utilities/font';
+@import 'access-nyc-patterns/src/utilities/icons/icons';
+@import 'access-nyc-patterns/src/utilities/typography/typography';
 @import 'access-nyc-patterns/src/utilities/accessibility';
 @import 'access-nyc-patterns/src/utilities/inherit';
 @import 'access-nyc-patterns/src/utilities/language';

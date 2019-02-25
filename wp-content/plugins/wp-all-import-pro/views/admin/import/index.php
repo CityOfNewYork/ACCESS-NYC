@@ -168,11 +168,28 @@
 								</div>
 
 								<?php
+
+                                    $hiddenPosts = array(
+                                        'attachment',
+                                        'revision',
+                                        'nav_menu_item',
+                                        'shop_webhook',
+                                        'import_users',
+                                        'wp-types-group',
+                                        'wp-types-user-group',
+                                        'wp-types-term-group',
+                                        'acf-field',
+                                        'acf-field-group',
+                                        'custom_css',
+                                        'customize_changeset',
+                                        'oembed_cache'
+                                    );
 									
 									$custom_types = get_post_types(array('_builtin' => true), 'objects') + get_post_types(array('_builtin' => false, 'show_ui' => true), 'objects'); 
 									foreach ($custom_types as $key => $ct) {
-										if (in_array($key, array('attachment', 'revision', 'nav_menu_item', 'shop_webhook', 'import_users'))) unset($custom_types[$key]);
+										if (in_array($key, $hiddenPosts)) unset($custom_types[$key]);
 									}
+
 									$custom_types = apply_filters( 'pmxi_custom_types', $custom_types );
 
 									$sorted_cpt = array();
@@ -208,7 +225,7 @@
 
 									$hidden_post_types = get_post_types(array('_builtin' => false, 'show_ui' => false), 'objects');
 									foreach ($hidden_post_types as $key => $ct) {
-										if (in_array($key, array('attachment', 'revision', 'nav_menu_item'))) unset($hidden_post_types[$key]);
+										if (in_array($key, $hiddenPosts)) unset($hidden_post_types[$key]);
 									}
 									$hidden_post_types = apply_filters( 'pmxi_custom_types', $hidden_post_types );
 

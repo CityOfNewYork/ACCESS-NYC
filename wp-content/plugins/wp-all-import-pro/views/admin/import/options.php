@@ -58,7 +58,7 @@
 				<div class="rad4 first-step-errors error-no-root-element" <?php if ($is_valid_root_element === false):?>style="display:block;"<?php endif; ?>>
 					<div class="wpallimport-notify-wrapper">
 						<div class="error-headers exclamation">
-							<?php if ($is_404 and $import->type == 'url'): ?>
+							<?php if (isset($is_404) && $is_404 && $update_previous->type == 'url'): ?>
 							<h3><?php _e('This URL no longer returns an import file', 'wp_all_import_plugin');?></h3>
 							<h4 style="font-size:18px;"><?php _e("You must provide a URL that returns a valid import file.", "wp_all_import_plugin"); ?></h4>	
 							<?php else: ?>
@@ -70,7 +70,7 @@
 					<a class="button button-primary button-hero wpallimport-large-button wpallimport-notify-read-more" href="http://www.wpallimport.com/documentation/troubleshooting/problems-with-import-files/#invalid" target="_blank"><?php _e('Read More', 'wp_all_import_plugin');?></a>		
 				</div>
 
-				<form class="<?php echo ! $isWizard ? 'edit' : 'options' ?>" method="post" enctype="multipart/form-data" autocomplete="off" <?php echo ! $isWizard ? 'style="overflow:visible;"' : '' ?>>
+				<form class="<?php echo ! $isWizard ? 'edit' : 'options' ?>" method="post" enctype="multipart/form-data" autocomplete="off" <?php echo ! $isWizard ? 'style="overflow:visible;"' : '' ?> id="wpai-submit-confirm-form">
 
 					<?php $post_type = $post['custom_type']; ?>				
 
@@ -91,11 +91,26 @@
 									include( 'options/_reimport_template.php' );
 								}
 							}
-							do_action('pmxi_options_tab', $isWizard, $post);
-							if ( in_array('settings', $visible_sections)) include( 'options/_settings_template.php' );
-							
-							include( 'options/_buttons_template.php' );
 
+							do_action('pmxi_options_tab', $isWizard, $post);
+
+                            if(!isset($import)) {
+                                $import = $update_previous;
+                            }
+                            include( 'options/scheduling/_scheduling_ui.php' );
+
+							if ( in_array('settings', $visible_sections)) include( 'options/_settings_template.php' );
+
+							?>
+                        <div style="color: #425F9A; font-size: 14px; font-weight: bold; margin: 0 0 15px; line-height: 25px; text-align: center;">
+                            <div id="no-subscription" style="display: none;">
+                                <?php echo _e("Looks like you're trying out Automatic Scheduling!");?><br/>
+                                <?php echo _e("Your Automatic Scheduling settings won't be saved without a subscription.");?>
+                            </div>
+                        </div>
+                        <input type="hidden" id="scheduling_import_id" value="<?php echo $import->id; ?>" />
+                        <?php
+							include( 'options/_buttons_template.php' );
 						?>
 					</div>
 

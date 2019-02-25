@@ -145,8 +145,8 @@ class acf_form_comment {
 		
 			// render post data
 			acf_form_data(array( 
-				'post_id'	=> $post_id, 
-				'nonce'		=> 'comment' 
+				'screen'	=> 'comment',
+				'post_id'	=> $post_id
 			));
 			
 			
@@ -179,11 +179,11 @@ class acf_form_comment {
 				<div id="acf-<?php echo $field_group['ID']; ?>" class="stuffbox">
 					<h3 class="hndle"><?php echo $field_group['title']; ?></h3>
 					<div class="inside">
-						<?php acf_render_fields( $post_id, $fields, 'div', $field_group['instruction_placement'] ); ?>
+						<?php acf_render_fields( $fields, $post_id, 'div', $field_group['instruction_placement'] ); ?>
 						<script type="text/javascript">
 						if( typeof acf !== 'undefined' ) {
 								
-							acf.postbox.render(<?php echo json_encode($o); ?>);
+							acf.newPostbox(<?php echo json_encode($o); ?>);	
 						
 						}
 						</script>
@@ -231,23 +231,30 @@ class acf_form_comment {
 		if( !$field_groups ) return $html;
 		
 		
+		// enqueue scripts
+		acf_enqueue_scripts();
+		
+		
 		// ob
 		ob_start();
 			
 			// render post data
 			acf_form_data(array( 
-				'post_id'	=> $post_id, 
-				'nonce'		=> 'comment' 
+				'screen'	=> 'comment',
+				'post_id'	=> $post_id
 			));
 			
+			echo '<div class="acf-comment-fields acf-fields -clear">';
 			
 			foreach( $field_groups as $field_group ) {
 				
 				$fields = acf_get_fields( $field_group );
 				
-				acf_render_fields( $post_id, $fields, 'p', $field_group['instruction_placement'] );
+				acf_render_fields( $fields, $post_id, 'p', $field_group['instruction_placement'] );
 				
 			}
+			
+			echo '</div>';
 		
 		
 		// append
@@ -277,20 +284,22 @@ class acf_form_comment {
 	function save_comment( $comment_id ) {
 		
 		// bail early if not valid nonce
-		if( ! acf_verify_nonce('comment') ) {
-		
+		if( !acf_verify_nonce('comment') ) {
 			return $comment_id;
-			
 		}
+		
+		
+		// kses
+    	if( isset($_POST['acf']) ) {
+	    	$_POST['acf'] = wp_kses_post_deep( $_POST['acf'] );
+    	}
 		
 	    
 	    // validate and save
 	    if( acf_validate_save_post(true) ) {
-	    
-			acf_save_post( "comment_{$comment_id}" );	
-			
+			acf_save_post( "comment_{$comment_id}" );
 		}
-				
+		
 	}
 	
 	

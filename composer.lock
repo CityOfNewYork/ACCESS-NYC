@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9db3a77cbef2ed955f82f6d0f3ffc345",
+    "content-hash": "b4f17c83077e0206e78b7d6268027354",
     "packages": [
         {
             "name": "composer/installers",
@@ -195,16 +195,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.2.1",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "e79cd403fb77fc8963a99ecc30e80ddd885b3311"
+                "reference": "bc0fd11bc455cc20ee4b5edabc63ebbf859324c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/e79cd403fb77fc8963a99ecc30e80ddd885b3311",
-                "reference": "e79cd403fb77fc8963a99ecc30e80ddd885b3311",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/bc0fd11bc455cc20ee4b5edabc63ebbf859324c7",
+                "reference": "bc0fd11bc455cc20ee4b5edabc63ebbf859324c7",
                 "shasum": ""
             },
             "require": {
@@ -252,7 +252,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2018-06-30T13:14:06+00:00"
+            "time": "2018-10-23T09:00:00+00:00"
         },
         {
             "name": "illuminate/contracts",
@@ -634,6 +634,56 @@
             "time": "2018-10-10T19:56:02+00:00"
         },
         {
+            "name": "pimple/pimple",
+            "version": "v3.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silexphp/Pimple.git",
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/container": "^1.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pimple": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Pimple, a simple Dependency Injection Container",
+            "homepage": "http://pimple.sensiolabs.org",
+            "keywords": [
+                "container",
+                "dependency injection"
+            ],
+            "time": "2018-01-21T07:42:36+00:00"
+        },
+        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -776,6 +826,52 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "rarst/wps",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Rarst/wps.git",
+                "reference": "8df5400ea9c7c9694e9d5af755311f25c9d8e374"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Rarst/wps/zipball/8df5400ea9c7c9694e9d5af755311f25c9d8e374",
+                "reference": "8df5400ea9c7c9694e9d5af755311f25c9d8e374",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.6",
+                "filp/whoops": "^2.3.1",
+                "php": ">=5.5.9",
+                "pimple/pimple": "^3.2.3"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "classmap": [
+                    "php/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Savchenko",
+                    "email": "contact@rarst.net",
+                    "homepage": "http://www.Rarst.net/"
+                }
+            ],
+            "description": "WordPress plugin for whoops error handler.",
+            "homepage": "https://github.com/Rarst/wps",
+            "keywords": [
+                "error",
+                "whoops",
+                "wordpress"
+            ],
+            "time": "2018-12-18T15:43:53+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1044,15 +1140,15 @@
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.6.3",
+            "version": "2.7.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.6.3"
+                "reference": "tags/2.7.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.6.3.zip",
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.7.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1064,15 +1160,15 @@
         },
         {
             "name": "wpackagist-plugin/rollbar",
-            "version": "2.2.0",
+            "version": "2.4.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/rollbar/",
-                "reference": "tags/2.2.0"
+                "reference": "tags/2.4.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/rollbar.2.2.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/rollbar.2.4.7.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1104,15 +1200,15 @@
         },
         {
             "name": "wpackagist-plugin/timber-library",
-            "version": "1.7.0",
+            "version": "1.8.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/timber-library/",
-                "reference": "tags/1.7.0"
+                "reference": "tags/1.8.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/timber-library.1.7.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/timber-library.1.8.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1144,15 +1240,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.2.5",
+            "version": "1.5.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.2.5"
+                "reference": "tags/1.5.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.2.5.zip",
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.1.zip",
                 "reference": null,
                 "shasum": null
             },

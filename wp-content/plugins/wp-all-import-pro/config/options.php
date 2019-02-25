@@ -3,8 +3,8 @@
  * List of plugin optins, contains only default values, actual values are stored in database
  * and can be changed by corresponding wordpress function calls
  */
-$config = array(	
-	"info_api_url" => "http://www.wpallimport.com",	
+$config = array(
+    "info_api_url" => "http://www.wpallimport.com",
 	"history_file_count" => 10000,
 	"history_file_age" => 365,
 	"highlight_limit" => 10000,
@@ -33,5 +33,7 @@ $config = array(
 	"google_signature" => "",
 	"licenses" => array(),
 	"statuses" => array(),
-	"force_stream_reader" => 0
-);if (!defined('WPALLIMPORT_SIGNATURE')) define('WPALLIMPORT_SIGNATURE', 'Y2ZjZDIwODQ5NWQ1NjVlZjY2ZTdkZmY5Zjk4NzY0ZGE=');
+	"force_stream_reader" => 0,
+    "scheduling_license" => "",
+    "scheduling_license_status" => "",
+);

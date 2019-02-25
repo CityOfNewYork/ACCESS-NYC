@@ -261,7 +261,7 @@ class PHPExcel_Worksheet_AutoFilter_Column
      */
     public function setAttribute($pName, $pValue)
     {
-        $this->attributes[$pName] = $pValue;
+        $this->{attributes[$pName]} = $pValue;
 
         return $this;
     }
@@ -284,8 +284,8 @@ class PHPExcel_Worksheet_AutoFilter_Column
      */
     public function getAttribute($pName)
     {
-        if (isset($this->attributes[$pName])) {
-            return $this->attributes[$pName];
+        if (isset($this->{attributes[$pName]})) {
+            return $this->{attributes[$pName]};
         }
         return null;
     }
@@ -310,9 +310,9 @@ class PHPExcel_Worksheet_AutoFilter_Column
     public function getRule($pIndex)
     {
         if (!isset($this->ruleset[$pIndex])) {
-            $this->ruleset[$pIndex] = new PHPExcel_Worksheet_AutoFilter_Column_Rule($this);
+            $this->{ruleset[$pIndex]} = new PHPExcel_Worksheet_AutoFilter_Column_Rule($this);
         }
-        return $this->ruleset[$pIndex];
+        return $this->{ruleset[$pIndex]};
     }
 
     /**
@@ -351,8 +351,8 @@ class PHPExcel_Worksheet_AutoFilter_Column
      */
     public function deleteRule($pIndex)
     {
-        if (isset($this->ruleset[$pIndex])) {
-            unset($this->ruleset[$pIndex]);
+        if (isset($this->{ruleset[$pIndex]})) {
+            unset($this->{ruleset[$pIndex]});
             //    If we've just deleted down to a single rule, then reset And/Or joining to Or
             if (count($this->ruleset) <= 1) {
                 $this->setJoin(self::AUTOFILTER_COLUMN_JOIN_OR);
@@ -393,9 +393,9 @@ class PHPExcel_Worksheet_AutoFilter_Column
                 //    The columns array of PHPExcel_Worksheet_AutoFilter objects
                 $this->$key = array();
                 foreach ($value as $k => $v) {
-                    $this->$key[$k] = clone $v;
+                    $this->{$key[$k]} = clone $v;
                     // attach the new cloned Rule to this new cloned Autofilter Cloned object
-                    $this->$key[$k]->setParent($this);
+                    $this->{$key[$k]}->setParent($this);
                 }
             } else {
                 $this->$key = $value;

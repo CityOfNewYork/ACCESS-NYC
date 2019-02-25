@@ -132,13 +132,18 @@
             return tipsy;
         }
         
-        function enter() {
+        function enter(event) {
+
             var tipsy = get(this);
             tipsy.hoverState = 'in';
             if (options.delayIn == 0) {
                 tipsy.show();
             } else {
                 setTimeout(function() { if (tipsy.hoverState == 'in') tipsy.show(); }, options.delayIn);
+            }
+            if(event.type== 'click') {
+                event.preventDefault();
+                return false;
             }
         };
         
@@ -156,8 +161,8 @@
         
         if (options.trigger != 'manual') {
             var binder   = options.live ? 'live' : 'bind',
-                eventIn  = options.trigger == 'hover' ? 'mouseenter' : 'focus',
-                eventOut = options.trigger == 'hover' ? 'mouseleave' : 'blur';
+                eventIn  = options.trigger == 'hover' ? 'mouseenter' : 'click',
+                eventOut = options.trigger == 'hover' ? 'mouseleave' : 'mouseleave';
             this[binder](eventIn, enter)[binder](eventOut, leave);
         }
         

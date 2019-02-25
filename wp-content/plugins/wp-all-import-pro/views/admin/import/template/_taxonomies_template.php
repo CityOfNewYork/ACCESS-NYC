@@ -206,7 +206,7 @@ if ( ! empty($post_taxonomies)):
 																		    </li>
 
 																		</ol>																		
-																		<input type="hidden" class="hierarhy-output" name="post_taxonomies[<?php echo $ctx->name; ?>]" value="<?php echo esc_attr($post['post_taxonomies'][$ctx->name]) ?>"/>									
+																		<input type="hidden" class="hierarhy-output" name="post_taxonomies[<?php echo $ctx->name; ?>]" value="<?php echo empty($post['post_taxonomies'][$ctx->name]) ? '' : esc_attr($post['post_taxonomies'][$ctx->name]) ?>"/>
 																		<?php do_action('pmxi_category_options_view', ((!empty($post['post_taxonomies'][$ctx->name])) ? $post['post_taxonomies'][$ctx->name] : false), $ctx->name, $post_type, $ctx->labels->name); ?>														
 																		<div class="input" style="margin-left:17px;">
 																			<label><?php _e('Separated by', 'wp_all_import_plugin'); ?></label>										

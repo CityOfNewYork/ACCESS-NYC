@@ -2,9 +2,9 @@
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('acf_taxonomy_field_walker') ) :
+if( ! class_exists('ACF_Taxonomy_Field_Walker') ) :
 
-class acf_taxonomy_field_walker extends Walker {
+class ACF_Taxonomy_Field_Walker extends Walker {
 	
 	var $field = null,
 		$tree_type = 'category',
@@ -23,7 +23,7 @@ class acf_taxonomy_field_walker extends Walker {
 		
 		
 		// append
-		$output .= '<li data-id="' . $term->term_id . '"><label><input type="' . $this->field['field_type'] . '" name="' . $this->field['name'] . '" value="' . $term->term_id . '" ' . ($selected ? 'checked="checked"' : '') . ' /> <span>' . $term->name . '</span></label>';
+		$output .= '<li data-id="' . $term->term_id . '"><label' . ($selected ? ' class="selected"' : '') . '><input type="' . $this->field['field_type'] . '" name="' . $this->field['name'] . '" value="' . $term->term_id . '" ' . ($selected ? 'checked="checked"' : '') . ' /> <span>' . $term->name . '</span></label>';
 				
 	}
 	

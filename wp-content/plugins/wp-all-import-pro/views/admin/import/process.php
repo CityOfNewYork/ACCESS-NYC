@@ -209,8 +209,6 @@
 		
 		$('#processbar').css({'visibility':'visible'});		
 
-	
-	
 	<?php if ( $ajax_processing ): ?>
 
 		var import_id = '<?php echo $update_previous->id; ?>';		
@@ -219,7 +217,7 @@
 			
 			$.get('admin.php?page=pmxi-admin-import&action=process&id=' + import_id + '&failures=' + failures + '&_wpnonce=' + wp_all_import_security, {}, function (data) {								
 
-				// responce with error
+				// response with error
 				if (data != null && typeof data.created != "undefined"){
 
 					$('.wpallimport-modal-message').hide();
@@ -232,7 +230,7 @@
 					$('#percents_count').html(data.percentage);
 					$('#processbar div').css({'width': data.percentage + '%'});
 
-				  records_per_request = data.records_per_request;
+				  	records_per_request = data.records_per_request;
 
 					if ( data.done ){
 						clearInterval(update);		
@@ -270,7 +268,7 @@
 						}, 1000);						
 					} 
 					else
-					{ 
+					{
 						$('#loglist').append(data.log);
 						parse_element(0);
 					}
@@ -282,16 +280,24 @@
 					count_failures++;
 					$('.count_failures').val(count_failures);
 
+					if (data != null && typeof data != 'undefined' && typeof data.log != 'undefined'){
+						$('#loglist').append(data.log);
+						write_log();
+					}
+
+					if (data != null && typeof data != 'undefined' && parseInt(data.records_per_request)){
+						records_per_request = data.records_per_request;
+					}
+
 					if (count_failures > 4 || records_per_request < 2){
 						$('#process_notice').hide();
 						$('.wpallimport-modal-message').html($('#wpallimport-error-terminated').html()).show();
+						var errorMessage = "Import failed, please check logs";
+						if (data != null && typeof data != 'undefined' && typeof data.responseText != 'undefined'){
+						    errorMessage = data.responseText;
+						}
+						$('#status').html('Error ' + '<span class="pmxi_error_msg">' + errorMessage + '</span>');
 
-						if (data != null && typeof data != 'undefined'){
-							$('#status').html('Error ' + '<span class="pmxi_error_msg">' + data.responseText + '</span>');
-						}
-						else{
-							$('#status').html('Error');
-						}
 						clearInterval(update);					
 						window.onbeforeunload = false;
 
@@ -321,9 +327,9 @@
 						records_per_request = Math.ceil(parseInt(records_per_request)/2);
 						$('.wpallimport-modal-message').show();
 						//parse_element(1);
-					}				
+					}
 					return;
-				}								
+				}
 
 			}, 'json').fail(function(data) { 													
 
@@ -370,7 +376,6 @@
 					$('.wpallimport-modal-message').show();
 					//parse_element(1);
 				}
-												
 			});			
 		}		
 		

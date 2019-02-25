@@ -166,8 +166,8 @@ switch ($post_type){
 										foreach ($post_formats[0] as $post_format) {
 											?>
 											<div class="input">
-												<input type="radio" id="post_format_<?php echo $post_format . "_" . $entry; ?>" name="post_format" value="<?php echo $post_format; ?>" <?php echo $post_format == $post['post_format'] ? 'checked="checked"' : '' ?> />
-												<label for="post_format_<?php echo $post_format . "_" . $entry; ?>"><?php _e( ucfirst($post_format), 'wp_all_import_plugin') ?></label>
+												<input type="radio" id="post_format_<?php echo $post_format; ?>" name="post_format" value="<?php echo $post_format; ?>" <?php echo $post_format == $post['post_format'] ? 'checked="checked"' : '' ?> />
+												<label for="post_format_<?php echo $post_format; ?>"><?php _e( ucfirst($post_format), 'wp_all_import_plugin') ?></label>
 											</div>
 											<?php
 										}

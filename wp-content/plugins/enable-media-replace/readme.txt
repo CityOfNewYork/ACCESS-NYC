@@ -1,17 +1,15 @@
 === Enable Media Replace ===
 Contributors: ShortPixel
-Donate link: https://www.paypal.me/resizeImage
-Tags: admin, replace, attachment, media, files, replace image, replace jpg, change media, replace media
+Tags: admin, attachment, media, files
 Requires at least: 4.0
 Tested up to: 4.9.4
 Stable tag: trunk
 
-Easily replace any attached image/file by simply uploading a new file in the Media Library edit view.
+Enables replacing attachment files by simply uploading a new file in the media library edit view.
 
 == Description ==
 
-**A free, lightweight and easy to use plugin that allows you to seamlessly replace an image or file in your Media Library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
-Supported by the friendly team that created <a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">ShortPixel</a>  :)**
+This plugin allows you to replace a file in your media library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
 
 #### A real timesaver
 
@@ -28,9 +26,6 @@ Now you'll be able to replace any uploaded file from the media "edit" view, wher
 
 This plugin is very powerful and a must-have for any larger sites built with WordPress. 
 
-Enable Media Replace is fully compatible with the <a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">ShortPixel Image Optimizer plugin</a>, which, once enabled, will optimize the images you replace automatically.
-It's also compatible with the <a href="https://wordpress.org/plugins/resize-image-after-upload/" target="_blank">Resize Image After Upload plugin</a> which can do a sanity check on the size in pixels of the images uploaded.
-
 #### Display file modification time
 
 There is a shortcode available which picks up the file modification date and displays it in a post or a page. The code is:
@@ -41,13 +36,6 @@ So `[file_modified id=870]` would display the last time the file with ID 870 was
 If you want more control over the format used to display the time, you can use the format option, so `[file_modified id=870 format=Y-m-d]` would display the file modification date but not the time. The format string uses [standard PHP date() formatting tags](http://php.net/manual/en/function.date.php). 
 
 == Changelog ==
-
-= 3.2.3 =
-* disable ShortPixel recommendation on secondary sites of a multisite install when it was network activated.
-
-= 3.2.2 =
-* Fixed compatibility with ShortPixel and Resize Image After Upload
-* Added ShortPixel links and images, fixed the problem of ShortPixel recommendation not dismissing.
 
 = 3.2.1 =
 * Bugfix, typo made metadata changes (thanks GitHub user icecandy!)
@@ -239,4 +227,5 @@ Second, if the file really looks unchanged, make sure WordPress has write permis
 
 == Wishlist / Coming attractons ==
 
-Do you have suggestions? Feel free to contact contact ShortPixel <a href="https://shortpixel.com/contact" target="_blank">here</a>
+Do you have suggestions? Feel free to contact me at mans@mansjonasson.se
+

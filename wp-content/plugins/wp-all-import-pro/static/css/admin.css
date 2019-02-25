@@ -25,7 +25,9 @@
 	vertical-align: middle;
 	margin-left: 5px;
 	position: relative;
-	top: 4px;
+	top: -4px;
+	background-size: cover;
+
 }
 .wpallimport-plugin input.datepicker {
 	width: 8em;
@@ -490,7 +492,7 @@
 .wpallimport-plugin #footer-upgrade{
 	/*float: left !important;*/
 }
-.wpallimport-plugin .wpallimport-overlay {
+.wpallimport-plugin .wpallimport-overlay, .wpallimport-plugin .wpallimport-super-overlay {
 	display:none; 
 	position:fixed; 
 	z-index:99999; 
@@ -1465,8 +1467,9 @@
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon-cpt:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon-cpt:before{
 	font-family: "dashicons";
-	content: "\f333";
+	content: "\f111";
 	color: #555;
+	margin-top: 0;
 }
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon-import_users:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon-import_users:before{
@@ -2485,7 +2488,9 @@
 .wpallimport-plugin .options .wpallimport-submit-buttons{	
 	position: relative;
 	text-align: center;
-	top: 10px;	
+	top: 10px;
+	height: 60px;
+
 }
 .wpallimport-plugin form.options{
 	position: relative;
@@ -3084,7 +3089,7 @@
 	width: 220px;
 }
 .wpallimport-plugin .pmxi-admin-imports .column-info{
-	width: 110px;
+	width: 150px;
 }
 /*--------------------------------------------------------------------------
 *

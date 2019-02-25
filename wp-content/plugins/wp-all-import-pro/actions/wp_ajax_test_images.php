@@ -99,11 +99,11 @@ function pmxi_wp_ajax_test_images(){
 
 				if ((int)$success_images === 1)
 				{
-					$success_msg = sprintf(__('%d image was successfully founded in media gallery', 'wp_all_import_plugin'), $success_images);		
+					$success_msg = sprintf(__('%d image was successfully found in media gallery', 'wp_all_import_plugin'), $success_images);		
 				}					
 				elseif ((int)$success_images > 1)
 				{
-					$success_msg = sprintf(__('%d images were successfully founded in media gallery', 'wp_all_import_plugin'), $success_images);		
+					$success_msg = sprintf(__('%d images were successfully found in media gallery', 'wp_all_import_plugin'), $success_images);		
 				}				
 
 				break;		

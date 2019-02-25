@@ -51,6 +51,13 @@ abstract class Base extends Plugin_Base {
 	protected $template;
 
 	/**
+	 * The Structure UUID.
+	 *
+	 * @var string
+	 */
+	protected $structure_uuid;
+
+	/**
 	 * Constructor
 	 *
 	 * @since 3.0.0
@@ -58,11 +65,12 @@ abstract class Base extends Plugin_Base {
 	 * @param array $args Arguments.
 	 */
 	public function __construct( array $args ) {
-		$this->mapping_id   = $args['mapping_id'];
-		$this->account_id   = $args['account_id'];
-		$this->account_slug = $args['account_slug'];
-		$this->project      = $args['project'];
-		$this->template     = $args['template'];
+		$this->mapping_id     = $args['mapping_id'];
+		$this->account_id     = $args['account_id'];
+		$this->account_slug   = $args['account_slug'];
+		$this->project        = $args['project'];
+		$this->template       = $args['template'];
+		$this->structure_uuid = $args['structure_uuid'];
 	}
 
 	/**

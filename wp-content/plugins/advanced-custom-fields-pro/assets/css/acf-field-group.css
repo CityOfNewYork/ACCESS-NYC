@@ -58,7 +58,6 @@
   box-shadow: none;
   /* metabox */
   /* links */
-  /* no fields */
   /* table header */
   /* show keys */
   /* fields */
@@ -74,10 +73,6 @@
 #acf-field-group-fields a:focus {
   outline: none;
   box-shadow: none;
-}
-#acf-field-group-fields .no-fields-message {
-  padding: 15px 15px;
-  background: #fff;
 }
 #acf-field-group-fields .li-field-order {
   width: 20%;
@@ -109,6 +104,16 @@
 #acf-field-group-fields .acf-field-list {
   background: #F9F9F9;
   margin-top: -1px;
+  /* no fields */
+  /* empty */
+}
+#acf-field-group-fields .acf-field-list .no-fields-message {
+  padding: 15px 15px;
+  background: #fff;
+  display: none;
+}
+#acf-field-group-fields .acf-field-list.-empty .no-fields-message {
+  display: block;
 }
 /* field object */
 .acf-field-object {
@@ -118,6 +123,20 @@
   /* meta */
   /* handle */
   /* open */
+  /*
+	// debug
+	&[data-save="meta"] {
+		> .handle {
+			border-left: #ffb700 solid 5px !important;
+		}
+	}
+	
+	&[data-save="settings"] {
+		> .handle {
+			border-left: #0ec563 solid 5px !important;
+		}
+	}
+*/
   /* hover */
   /* settings */
   /* conditional logic */
@@ -131,6 +150,11 @@
   visibility: visible !important;
   background: #F9F9F9;
   border-top-color: transparent;
+  min-height: 54px;
+}
+.acf-field-object.ui-sortable-placeholder:after,
+.acf-field-object.ui-sortable-placeholder:before {
+  visibility: hidden;
 }
 .acf-field-object > .meta {
   display: none;
@@ -202,7 +226,8 @@
 .acf-field-object.open > .handle .acf-required {
   color: #fff;
 }
-.acf-field-object:hover > .handle .row-options {
+.acf-field-object:hover > .handle .row-options,
+.acf-field-object.-hover > .handle .row-options {
   visibility: visible;
 }
 .acf-field-object > .settings {
@@ -225,6 +250,7 @@
 }
 .rule-groups .rule-group {
   margin: 0 0 5px;
+  /* Don't allow user to delete the first field group */
 }
 .rule-groups .rule-group h4 {
   margin: 0 0 3px;
@@ -241,14 +267,18 @@
 .rule-groups .rule-group td.remove {
   width: 28px;
   vertical-align: middle;
+}
+.rule-groups .rule-group td.remove a {
   visibility: hidden;
 }
-.rule-groups .rule-group tr:hover td.remove {
+.rule-groups .rule-group tr:hover td.remove a {
   visibility: visible;
 }
-/* Don't allow user to delete the first field group */
-.rule-groups .rule-group:first-child tr:first-child td.remove {
+.rule-groups .rule-group:first-child tr:first-child td.remove a {
   visibility: hidden !important;
+}
+.rule-groups .rule-group select:empty {
+  background: #f8f8f8;
 }
 /*---------------------------------------------------------------------------------------------
 *
@@ -284,41 +314,42 @@ table.conditional-logic-rules tbody td {
 *	Field: Tab
 *	
 *---------------------------------------------------------------------------------------------*/
-.acf-field-object-tab tr[data-name="name"],
-.acf-field-object-tab tr[data-name="instructions"],
-.acf-field-object-tab tr[data-name="required"],
-.acf-field-object-tab tr[data-name="warning"],
-.acf-field-object-tab tr[data-name="wrapper"] {
-  display: none !important;
+.acf-field-object-tab .acf-field-setting-name,
+.acf-field-object-tab .acf-field-setting-instructions,
+.acf-field-object-tab .acf-field-setting-required,
+.acf-field-object-tab .acf-field-setting-warning,
+.acf-field-object-tab .acf-field-setting-wrapper,
+.acf-field-object-accordion .acf-field-setting-name,
+.acf-field-object-accordion .acf-field-setting-instructions,
+.acf-field-object-accordion .acf-field-setting-required,
+.acf-field-object-accordion .acf-field-setting-warning,
+.acf-field-object-accordion .acf-field-setting-wrapper {
+  display: none;
 }
-.acf-field-object-tab .li-field-name {
+.acf-field-object-tab .li-field-name,
+.acf-field-object-accordion .li-field-name {
   visibility: hidden;
 }
-.acf-field-object-tab .acf-error-message {
-  display: none;
-}
-.acf-field-list[data-layout="table"] .acf-field-object-tab .acf-error-message {
-  display: block;
-}
-.acf-field-object + .acf-field-object-tab {
-  margin-top: 6px;
-}
-.acf-field-object + .acf-field-object-tab:before {
+.acf-field-object + .acf-field-object-tab:before,
+.acf-field-object + .acf-field-object-accordion:before {
   display: block;
   content: "";
-  height: 1px;
-  background: #F0F0F0;
-  margin-top: -7px;
+  height: 5px;
   width: 100%;
-  position: absolute;
+  background: #f9f9f9;
+  border-bottom: #f0f0f0 solid 1px;
 }
-.acf-field-object + .acf-field-object-tab.ui-sortable-placeholder {
-  margin-top: 0;
-  padding-top: 6px;
+.acf-field-object-tab p:first-child,
+.acf-field-object-accordion p:first-child {
+  margin: 0.5em 0;
 }
-.acf-field-object-tab.ui-sortable-helper:before,
-.ui-sortable-placeholder + .acf-field-object-tab:before {
-  display: none;
+/*---------------------------------------------------------------------------------------------
+*
+*	Field: Accordion
+*	
+*---------------------------------------------------------------------------------------------*/
+.acf-field-object-accordion .acf-field-setting-instructions {
+  display: table-row;
 }
 /*---------------------------------------------------------------------------------------------
 *
@@ -372,6 +403,20 @@ table.conditional-logic-rules tbody td {
 }
 .acf-field-object-date-time-picker .acf-radio-list input[type="text"] {
   width: 200px;
+}
+/*--------------------------------------------------------------------------------------------
+*
+*	Slug
+*
+*--------------------------------------------------------------------------------------------*/
+#slugdiv .inside {
+  padding: 12px;
+  margin: 0;
+}
+#slugdiv input[type="text"] {
+  width: 100%;
+  height: 28px;
+  font-size: 14px;
 }
 /*--------------------------------------------------------------------------------------------
 *

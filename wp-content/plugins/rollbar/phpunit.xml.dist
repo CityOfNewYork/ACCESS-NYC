@@ -1,0 +1,22 @@
+<phpunit
+	bootstrap="tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	>
+    <testsuites>
+        <testsuite name="Test Suite">
+            <directory suffix=".php">./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+	<php>
+	  <env name="ROLLBAR_TEST_TOKEN" value="ad865e76e7fb496fab096ac07b1dbabb" />
+	</php>
+</phpunit>

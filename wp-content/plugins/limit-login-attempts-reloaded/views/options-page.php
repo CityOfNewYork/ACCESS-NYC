@@ -7,6 +7,8 @@ if( !defined( 'ABSPATH' ) )
  * @var $this Limit_Login_Attempts
  */
 
+$gdpr = $this->get_option( 'gdpr', 0 );
+
 $lockouts_total = $this->get_option( 'lockouts_total', 0 );
 $lockouts = $this->get_option( 'login_lockouts' );
 $lockouts_now = is_array( $lockouts ) ? count( $lockouts ) : 0;
@@ -87,6 +89,14 @@ $black_list_usernames = ( is_array( $black_list_usernames ) && !empty( $black_li
         <?php endif ?>
         <table class="form-table">
             <tr>
+                <th scope="row"
+                    valign="top"><?php echo __( 'GDPR compliance', 'limit-login-attempts-reloaded' ); ?></th>
+                <td>
+                    <input type="checkbox" name="gdpr" value="1" <?php if($gdpr): ?> checked <?php endif; ?>/>
+                    <?php echo __( 'this makes the plugin <a href="https://gdpr-info.eu/" target="_blank" >GDPR</a> compliant', 'limit-login-attempts-reloaded' ); ?> <br/>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row" valign="top"><?php echo __( 'Lockout', 'limit-login-attempts-reloaded' ); ?></th>
                 <td>
 
@@ -128,11 +138,11 @@ $black_list_usernames = ( is_array( $black_list_usernames ) && !empty( $black_li
                 <td>
                     <div class="field-col">
                         <p class="description"><?php _e( 'One IP or IP range (1.2.3.4-5.6.7.8) per line', 'limit-login-attempts-reloaded' ); ?></p>
-                        <textarea name="lla_whitelist_ips" rows="10" cols="50"><?php echo $white_list_ips; ?></textarea>
+                        <textarea name="lla_whitelist_ips" rows="10" cols="50"><?php echo esc_textarea( $white_list_ips ); ?></textarea>
                     </div>
                     <div class="field-col">
                         <p class="description"><?php _e( 'One Username per line', 'limit-login-attempts-reloaded' ); ?></p>
-                        <textarea name="lla_whitelist_usernames" rows="10" cols="50"><?php echo $white_list_usernames; ?></textarea>
+                        <textarea name="lla_whitelist_usernames" rows="10" cols="50"><?php echo esc_textarea( $white_list_usernames ); ?></textarea>
                     </div>
                 </td>
             </tr>
@@ -142,11 +152,11 @@ $black_list_usernames = ( is_array( $black_list_usernames ) && !empty( $black_li
                 <td>
                     <div class="field-col">
                         <p class="description"><?php _e( 'One IP or IP range (1.2.3.4-5.6.7.8) per line', 'limit-login-attempts-reloaded' ); ?></p>
-                        <textarea name="lla_blacklist_ips" rows="10" cols="50"><?php echo $black_list_ips; ?></textarea>
+                        <textarea name="lla_blacklist_ips" rows="10" cols="50"><?php echo esc_textarea( $black_list_ips ); ?></textarea>
                     </div>
                     <div class="field-col">
                         <p class="description"><?php _e( 'One Username per line', 'limit-login-attempts-reloaded' ); ?></p>
-                        <textarea name="lla_blacklist_usernames" rows="10" cols="50"><?php echo $black_list_usernames; ?></textarea>
+                        <textarea name="lla_blacklist_usernames" rows="10" cols="50"><?php echo esc_textarea( $black_list_usernames ); ?></textarea>
                     </div>
                 </td>
             </tr>
@@ -186,9 +196,11 @@ $black_list_usernames = ( is_array( $black_list_usernames ) && !empty( $black_li
                 <?php foreach ( $log as $date => $user_info ) : ?>
                     <tr>
                         <td class="limit-login-date"><?php echo date_i18n( 'F d, Y H:i', $date ); ?></td>
-                        <td class="limit-login-ip"><?php echo $user_info['ip']; ?></td>
-                        <td class="limit-login-max"><?php echo $user_info['username'] . ' (' . $user_info['counter'] .' lockouts)'; ?></td>
-                        <td class="limit-login-gateway"><?php echo $user_info['gateway']; ?></td>
+                        <td class="limit-login-ip">
+                                <?php echo esc_html( $user_info['ip'] ); ?>
+                        </td>
+                        <td class="limit-login-max"><?php echo esc_html( $user_info['username'] ) . ' (' . esc_html( $user_info['counter'] ) .' lockouts)'; ?></td>
+                        <td class="limit-login-gateway"><?php echo esc_html( $user_info['gateway'] ); ?></td>
                         <td>
                             <?php if ( !empty( $lockouts[ $user_info['ip'] ] ) && $lockouts[ $user_info['ip'] ] > time() ) : ?>
                             <a href="#" class="button limit-login-unlock" data-ip="<?=esc_attr($user_info['ip'])?>" data-username="<?=esc_attr($user_info['username'])?>">Unlock</a>

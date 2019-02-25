@@ -3,7 +3,7 @@ Contributors: arturmoczulski
 Tags: rollbar, full stack, error, tracking, error tracking, error reporting, reporting, debug
 Requires at least: 3.5.1
 Tested up to: 4.8.2
-Stable tag: 2.2.0
+Stable tag: 2.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,6 @@ See [real companies improving their development workflow thanks to Rollbar](http
 
 * Browse [issue tracker](https://github.com/rollbar/rollbar-php-wordpress/issues) on GitHub and report new issues
 * If you run into any issues, please email us at [support@rollbar.com](mailto:support@rollbar.com)
-* You can also find us on IRC: [#rollbar on chat.freenode.net](irc://chat.freenode.net/rollbar)
 * For bug reports, please [open an issue on GitHub](https://github.com/rollbar/rollbar-php-wordpress/issues/new).
 
 = You like it? =
@@ -106,6 +105,42 @@ Yes. It's actually the recommended method of installation.
 
 == Changelog ==
 
+= Version 2.4.7 (August 14th 2018) =
+* Update rollbar-php to v1.6.2
+
+= Version 2.4.6 (August 13th 2018) =
+* Configuration option custom_data_method doesn’t exist in Rollbar (https://github.com/rollbar/rollbar-php-wordpress/issues/66)
+
+= Version 2.4.5 (August 7th 2018) =
+* Update rollbar-php to v1.6.1
+* Remove mentions of IRC channel from README.md and readme.txt
+
+= Version 2.4.4 (June 18th 2018) =
+* Update rollbar-php to v1.5.3
+
+= Version 2.4.3 (June 11th 2018) =
+* Update rollbar-php to v1.5.2
+* Use rollbar-php:v1.5.2 new defaults methods to handle restoring default settings.
+
+= Version 2.4.2 (25th May 2018) =
+* Fixed the plugin not always respecting the boolean true settings (https://github.com/rollbar/rollbar-php-wordpress/issues/58)
+
+= Version 2.4.1 (19th May 2018) =
+* Updated rollbar-php dependency to v1.5.1
+
+= Version 2.4.0 (17th May 2018) =
+* Added capture_ip, capture_email and capture_username to the config options.
+* Fixed populating config options from the database to the plugin for boolean values.
+* Updated rollbar-php dependency to v1.5.0
+
+= Version 2.3.1 (10th April 2018) =
+* Fixed a bug in strict PHP setups (https://github.com/rollbar/rollbar-php-wordpress/issues/44)
+
+= Version 2.3.0 (5th April 2018) =
+* Added `rollbar_plugin_settings` filter
+* Added majority of Rollbar PHP config options to the User Interface.
+* Moved the settings from Tools -> Rollbar to Settings -> Rollbar
+
 = Version 2.2.0 (4th December 2017) =
 * Fixed the logging level to correctly inlude errors from specified level and up.
 * Changed the default logging level setting.
@@ -150,6 +185,42 @@ Yes. It's actually the recommended method of installation.
 * Initial release!
 
 == Upgrade Notice ==
+
+= Version 2.4.7 (August 14th 2018) =
+* Update rollbar-php to v1.6.2
+
+= Version 2.4.6 (August 13th 2018) =
+* Configuration option custom_data_method doesn’t exist in Rollbar (https://github.com/rollbar/rollbar-php-wordpress/issues/66)
+
+= Version 2.4.5 (August 7th 2018) =
+* Update rollbar-php to v1.6.1
+* Remove mentions of IRC channel from README.md and readme.txt
+
+= Version 2.4.4 (June 18th 2018) =
+* Update rollbar-php to v1.5.3
+
+= Version 2.4.3 (June 11th 2018) =
+* Update rollbar-php to v1.5.2
+* Use rollbar-php:v1.5.2 new defaults methods to handle restoring default settings.
+
+= Version 2.4.2 (25th May 2018) =
+* Fixed the plugin not always respecting the boolean true settings (https://github.com/rollbar/rollbar-php-wordpress/issues/58)
+
+= Version 2.4.1 (19th May 2018) =
+* Updated rollbar-php dependency to v1.5.1
+
+= Version 2.4.0 (5th April 2018) =
+* Added capture_ip, capture_email and capture_username to the config options.
+* Fixed populating config options from the database to the plugin for boolean values.
+* Updated rollbar-php dependency to v1.5.0
+
+= Version 2.3.1 (10th April 2018) =
+* Fixed a bug in strict PHP setups (https://github.com/rollbar/rollbar-php-wordpress/issues/44)
+
+= Version 2.3.0 (5th April 2018) =
+* Added `rollbar_plugin_settings` filter
+* Added majority of Rollbar PHP config options to the User Interface.
+* Moved the settings from Tools -> Rollbar to Settings -> Rollbar
 
 = Version 2.2.0 (4th December 2017) =
 * Fixed the logging level to correctly inlude errors from specified level and up.

@@ -407,8 +407,8 @@ class acf_field__group extends acf_field {
 				
 			?>
 			<th <?php acf_esc_attr_e( $atts ); ?>>
-				<?php acf_the_field_wrap_label( $sub_field ); ?>
-				<?php acf_the_field_wrap_instructions( $sub_field ); ?>
+				<?php acf_render_field_label( $sub_field ); ?>
+				<?php acf_render_field_instructions( $sub_field ); ?>
 			</th>
 		<?php endforeach; ?>
 		</tr>
@@ -539,6 +539,40 @@ class acf_field__group extends acf_field {
 	
 	
 	/*
+	*  duplicate_field()
+	*
+	*  This filter is appied to the $field before it is duplicated and saved to the database
+	*
+	*  @type	filter
+	*  @since	3.6
+	*  @date	23/01/13
+	*
+	*  @param	$field - the field array holding all the field options
+	*
+	*  @return	$field - the modified field
+	*/
+
+	function duplicate_field( $field ) {
+		
+		// get sub fields
+		$sub_fields = acf_extract_var( $field, 'sub_fields' );
+		
+		
+		// save field to get ID
+		$field = acf_update_field( $field );
+		
+		
+		// duplicate sub fields
+		acf_duplicate_fields( $sub_fields, $field['ID'] );
+		
+						
+		// return		
+		return $field;
+		
+	}
+	
+	
+	/*
 	*  prepare_field_for_export
 	*
 	*  description
@@ -610,7 +644,57 @@ class acf_field__group extends acf_field {
 		return $sub_fields;
 		
 	}
+	
+	
+	/*
+	*  delete_value
+	*
+	*  Called when deleting this field's value.
+	*
+	*  @date	1/07/2015
+	*  @since	5.2.3
+	*
+	*  @param	mixed $post_id The post ID being saved
+	*  @param	string $meta_key The field name as seen by the DB
+	*  @param	array $field The field settings
+	*  @return	void
+	*/
+	
+	function delete_value( $post_id, $meta_key, $field ) {
 		
+		// bail ealry if no sub fields
+		if( empty($field['sub_fields']) ) return null;
+		
+		// modify names
+		$field = $this->prepare_field_for_db( $field );
+		
+		// loop
+		foreach( $field['sub_fields'] as $sub_field ) {
+			acf_delete_value( $post_id, $sub_field );
+		}
+	}
+	
+	/**
+	*  delete_field
+	*
+	*  Called when deleting a field of this type.
+	*
+	*  @date	8/11/18
+	*  @since	5.8.0
+	*
+	*  @param	arra $field The field settings.
+	*  @return	void
+	*/
+	function delete_field( $field ) {
+		
+		// loop over sub fields and delete them
+		if( $field['sub_fields'] ) {
+			foreach( $field['sub_fields'] as $sub_field ) {
+				acf_delete_field( $sub_field['ID'] );
+			}
+		}
+	}
+	
 }
 
 

@@ -1,15 +1,13 @@
 <?php 
 
 function pmxi_admin_notices() {
-	// notify user if history folder is not writable
-	$uploads = wp_upload_dir();	
 
 	// compare woocommerce add-on version	
 	if ( class_exists( 'PMWI_Plugin' ) and ( defined('PMWI_VERSION') and version_compare(PMWI_VERSION, '2.1.3 RC5') < 0 and PMWI_EDITION == 'paid' or defined('PMWI_FREE_VERSION') and version_compare(PMWI_FREE_VERSION, '1.2.1') <= 0 and PMWI_EDITION == 'free') ) {
 		?>
 		<div class="error"><p>
 			<?php printf(
-					__('<b>%s Plugin</b>: Please update your WP All Import WooCommerce add-on to the latest version', 'pmwi_plugin'),
+					__('<b>%s Plugin</b>: Please update your WP All Import WooCommerce add-on to the latest version', 'wp_all_import_plugin'),
 					PMWI_Plugin::getInstance()->getName()
 			) ?>
 		</p></div>

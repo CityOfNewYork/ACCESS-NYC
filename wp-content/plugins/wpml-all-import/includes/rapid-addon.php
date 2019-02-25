@@ -326,7 +326,7 @@ if (!class_exists('RapidAddon')) {
 					}					
 
 					// apply mapping rules if they exist
-					if ($import_options['mapping'][$field_slug]) {
+					if (isset($import_options['mapping'][$field_slug]) && $import_options['mapping'][$field_slug]) {
 						$mapping_rules = json_decode($import_options['mapping'][$field_slug], true);
 
 						if (!empty($mapping_rules) and is_array($mapping_rules)) {

@@ -24,63 +24,6 @@ require_once Path\controller('locations');
 
 Notifications\timber();
 
-// Hiding the regular admin post, and comment pages
-// To add pages to the list, add:
-// remove_menu_page('edit.php?post_type=page');
-
-add_action('admin_menu','remove_default_post_type');
-
-function remove_default_post_type() {
-  remove_menu_page('edit.php');
-  remove_menu_page('edit-comments.php');
-}
-
-// Adds SVGs to media upload functionality
-function cc_mime_types($mimes) {
-  $mimes['svg'] = 'image/svg+xml';
-  return $mimes;
-}
-add_filter('upload_mimes', 'cc_mime_types');
-
-/**
- * For certain post types, we don't want to include preview/view links in the admin
- * panel because they do not have single pages that represent themselves. See:
- * http://wpsnipp.com/index.php/functions-php/hide-post-view-and-post-preview-admin-buttons/
- */
-if ( is_admin() ) {
-  // Defines the post types we're hiding "preview" links from:
-  $removed_post_types = array(
-    /* set post types */
-    'homepage_tout',
-    'homepage',
-    'alert',
-    'program_search_links'
-  );
-
-  // Remove the preview/view links in wp-admin for any post types that do not
-  // have actual page URLs to visit.
-  function remove_row_actions( $actions ) {
-    global $removed_post_types;
-    if( in_array(get_post_type(), $removed_post_types) )
-      unset( $actions['view'] );
-      unset( $actions['preview'] );
-    return $actions;
-  }
-
-  // Hides various links in the admin list views
-  add_filter( 'post_row_actions', 'remove_row_actions', 10, 1 );
-
-  // Hides the preview button in the admin edit page
-  function posttype_admin_css() {
-    global $post_type;
-    global $removed_post_types;
-    if(in_array($post_type, $removed_post_types))
-    echo '<style type="text/css">#post-preview, #view-post-btn{display: none;}</style>';
-  }
-  add_action( 'admin_head-post-new.php', 'posttype_admin_css' );
-  add_action( 'admin_head-post.php', 'posttype_admin_css' );
-}
-
 /**
 * Add additional query variables
 */
@@ -240,6 +183,7 @@ class BSDStarterSite extends TimberSite {
     $context['footer_for_caseworkers_menu'] = new TimberMenu('for-caseworkers');
     $context['footer_programs_menu'] = new TimberMenu('programs');
     $context['footer_about_access_nyc_menu'] = new TimberMenu('about-access-nyc');
+    $context['peu_header_menu'] = new TimberMenu('peu');
 
     // Gets object containing all program categories
     $context['categories'] = get_terms( 'programs' );
@@ -304,44 +248,6 @@ class BSDStarterSite extends TimberSite {
 }
 
 new BSDStarterSite();
-
-/**
-* Returns the sidebar id for the page, based on page section
-*/
-function bsdstarter_get_sidebar_slug( $post ) {
-  if ( $post->post_type == 'page' ) {
-    $parents = array_reverse( get_post_ancestors( $post->ID ) );
-    $slug = '_';
-    // If there are no parents, the page itself is a top-level page
-    if (empty($parents)) {
-      $slug .= $post->post_name;
-    } else {
-      $ancestor = get_post($parents[0] );
-      $slug .= $ancestor->post_name;
-    }
-
-    return $slug;
-  }
-
-  // For blog posts, get the blog sidebar
-  if ( $post->post_type == 'post' ) {
-    return 'blog';
-  }
-
-  return '';
-}
-
-// Customize TinyMCE settings
-require_once(get_template_directory() . '/includes/bsdstarter_editor_styles.php');
-
-// Custom Shortcodes
-require_once(get_template_directory() . '/includes/bsdstarter_shortcodes.php');
-
-// Includes jQuery
-if (!is_admin()) add_action('wp_enqueue_scripts', 'my_jquery_enqueue', 11);
-function my_jquery_enqueue() {
-   wp_deregister_script('jquery');
-}
 
 // *****
 // Function to trigger Google Maps render on content import

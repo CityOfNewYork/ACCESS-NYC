@@ -89,7 +89,7 @@ class PMXI_Admin_History extends PMXI_Controller_Admin {
 			else
 			{			
 
-				wp_redirect(add_query_arg(array('id' => $import_id, 'pmxi_nt' => urlencode(__('Log file does not exists.', 'wp_all_import_plugin'))), $this->baseUrl)); die();
+				wp_redirect(add_query_arg(array('id' => $import_id, 'pmxi_nt' => urlencode(__('Log file does not exist.', 'wp_all_import_plugin'))), $this->baseUrl)); die();
 			}
 		}
 	}

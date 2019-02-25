@@ -24,6 +24,11 @@
 			$custom_type = get_post_type_object( PMXI_Plugin::$session->custom_type );
 			break;
 	}
+    if (empty($custom_type) && PMXI_Plugin::$session->custom_type) {
+        $custom_type = new stdClass();
+        $custom_type->labels = new stdClass();
+        $custom_type->labels->singular_name = ucwords(preg_replace("%[_-]%", " ", PMXI_Plugin::$session->custom_type));
+    }
 	?>
 	<div class="wpallimport-content-section wpallimport-console">
 		<div class="ajax-console">

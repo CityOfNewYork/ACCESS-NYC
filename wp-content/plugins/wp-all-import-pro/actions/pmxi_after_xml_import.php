@@ -31,6 +31,28 @@ function pmxi_pmxi_after_xml_import( $import_id, $import )
                 }
             }
             delete_option('wp_all_import_posts_hierarchy_' . $import_id);
+
+	        // Update term count after import process is complete.
+	        foreach ( (array) get_object_taxonomies( $import->options['custom_type'] ) as $taxonomy ) {
+		        $term_ids = get_terms(
+			        array(
+				        'taxonomy'   => $taxonomy,
+				        'hide_empty' => false,
+				        'fields' => 'ids',
+			        )
+                );
+                if ( ! empty( $term_ids ) ) {
+                    wp_update_term_count_now( $term_ids, $taxonomy );
+                }
+	        }
         }
+
+		// Update post count only once after import process is completed.
+        wp_all_import_update_post_count();
     }
+
+    // Add removed action during import.
+    add_action( 'transition_post_status', '_update_term_count_on_transition_post_status', 10, 3 );
+    add_action( 'transition_post_status', '_update_posts_count_on_transition_post_status', 10, 3 );
+    add_action( 'post_updated', 'wp_save_post_revision', 10, 1 );
 }

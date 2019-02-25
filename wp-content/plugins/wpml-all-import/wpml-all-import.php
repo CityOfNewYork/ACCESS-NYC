@@ -4,7 +4,7 @@
 	Plugin Name: WPML All Import
 	Plugin URI: http://wpml.org
 	Description: Import multilingual content to WordPress. Requires WP All Import & WPML.
-	Version: 2.0.4
+	Version: 2.0.8
 	Author: OnTheGoSystems
 	Author URI: http://www.onthegosystems.com/
 */
@@ -105,7 +105,15 @@ if ( ! class_exists('WPAI_WPML') )
 				add_action( 'pmxi_saved_post',         array( &$this, 'saved_post' ), 10, 1 );
 				add_action( 'pmxi_delete_post',        array( &$this, 'delete_post' ), 10, 1 );
 				add_filter( 'pmxi_import_name', 	   array( &$this, 'import_name'), 10, 2 );
-                                add_filter( 'wp_all_import_term_exists', array( &$this, 'wp_all_import_term_exists' ), 10, 4);
+                add_filter( 'wp_all_import_term_exists', array( &$this, 'wp_all_import_term_exists' ), 10, 4);
+
+				add_filter( 'wp_all_import_get_existing_image', array( $this, 'get_existing_image_filter' ) );
+
+				add_filter( 'wp_all_import_get_image_from_gallery', array( $this, 'get_image_from_gallery_filter' ) );
+
+				//add_action( 'pmxi_attachment_uploaded', array( $this, 'pmxi_attachment_uploaded_action' ), 10, 3 );
+
+				add_action( 'wp_all_import_add_attachment', array( $this, 'add_attachment_action' ) );
 			}
 
 		}
@@ -277,7 +285,35 @@ if ( ! class_exists('WPAI_WPML') )
 			*/
 			public function saved_post( $post_id )
 			{
-				// TODO: for future needs
+				/*
+				set postmeta '_wcml_duplicate_of_variation' for translated product variations
+				 */
+				$post_type = get_post_type($post_id);
+				$wpml_post_type = "post_".$post_type;
+				if ('product_variation' == $post_type) {
+					$post_language = apply_filters( 'wpml_element_language_code', null,
+						array('element_id' => $post_id,
+							  'element_type' => $post_type));
+					if ($this->default_language != $post_language) {
+						$post_meta_key = '_wcml_duplicate_of_variation';
+						$current_post_meta = get_post_meta($post_id, $post_meta_key, true);
+						if (!is_numeric($current_post_meta)) {
+							$trid = apply_filters( 'wpml_element_trid', null, $post_id, $wpml_post_type);
+							if (is_numeric($trid)) {
+								$translations = apply_filters( 'wpml_get_element_translations', null, $trid, $wpml_post_type);
+								if (is_array($translations) && isset($translations[$this->default_language])) {
+									$original_post_object = $translations[$this->default_language];
+									if (isset($original_post_object->element_id)) {
+										$original_post_id = $original_post_object->element_id;
+										add_post_meta( $post_id, $post_meta_key, $original_post_id );
+									}
+								}
+							} else {
+								throw new Exception("No trid for product variation in secondary language, imposssible to set _wcml_duplicate_of_variation");
+							}
+						}
+					}
+				}
 			}
 
 			/**
@@ -329,9 +365,21 @@ if ( ! class_exists('WPAI_WPML') )
 
 				if ($parent_post_id)
 				{
-					$post_type = 'post_' . get_post_type($post_id);
 
-					$trid = $this->wpml->get_element_trid($parent_post_id, $post_type);
+                    if (isset($articleData['post_type']) && "taxonomies" == $articleData['post_type'] && isset($articleData['taxonomy'])) {
+                        $post_type = 'tax_' . $articleData['taxonomy'];
+
+	                    // update untranslated taxonomy count
+	                    global $woocommerce_wpml;
+	                    if ( isset ( $woocommerce_wpml ) ) {
+		                    $woocommerce_wpml->terms->update_terms_translated_status( $articleData['taxonomy'] );
+	                    }
+                    } else {
+                        $post_type = 'post_' . get_post_type($post_id);
+                    }
+
+
+                    $trid = $this->wpml->get_element_trid($parent_post_id, $post_type);
 
 					if ( $trid )
 					{
@@ -383,6 +431,58 @@ if ( ! class_exists('WPAI_WPML') )
                     }
                     return $term_a;
                 }
+
+		public function get_existing_image_filter( $attachment_id ) {
+
+			if ( $this->language_code ) {
+				$attachment_id = apply_filters( 'wpml_object_id', $attachment_id, 'attachment', true, $this->language_code );
+			}
+
+			return $attachment_id;
+		}
+
+		public function get_image_from_gallery_filter( $attachment ) {
+
+			if ( $this->language_code && $attachment ) {
+
+				global $wpdb;
+
+				$localized_attachment_id = apply_filters( 'wpml_object_id', $attachment->ID, 'attachment', false, $this->language_code );
+
+				if ( $localized_attachment_id ) {
+
+					$localized_attachment = $wpdb->get_row(
+						$wpdb->prepare( "SELECT * FROM {$wpdb->posts} WHERE ID = %d AND post_type = %s AND post_mime_type LIKE %s;", $localized_attachment_id, 'attachment', 'image%' )
+					);
+
+					if ( $localized_attachment ) {
+						$attachment = $localized_attachment;
+					}
+				}
+			}
+
+			return $attachment;
+		}
+
+		public function add_attachment_action( $attachment_id ) {
+
+			$translation_id = apply_filters( 'wpml_element_trid', false, $attachment_id, 'post_attachment' );
+
+			if ( $this->language_code && ! $translation_id ) {
+
+				do_action( 'wpml_set_element_language_details', array(
+					'element_id'    => $attachment_id,
+					'element_type'  => 'post_attachment',
+					'trid'          => false,
+					'language_code' => $this->language_code,
+				) );
+
+				$factory         = new WPML_Media_Attachments_Duplication_Factory();
+				$media_duplicate = $factory->create();
+				$media_duplicate->save_attachment_actions( $attachment_id );
+			}
+
+		}
             
 	}
 

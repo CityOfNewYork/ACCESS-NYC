@@ -143,7 +143,7 @@ Utility.toDollarAmount = (val) =>
 /**
  * For translating strings, there is a global LOCALIZED_STRINGS array that
  * is defined on the HTML template level so that those strings are exposed to
- * WPML translation. The LOCALIZED_STRINGS array is comosed of objects with a
+ * WPML translation. The LOCALIZED_STRINGS array is composed of objects with a
  * `slug` key whose value is some constant, and a `label` value which is the
  * translated equivalent. This function takes a slug name and returns the
  * label.

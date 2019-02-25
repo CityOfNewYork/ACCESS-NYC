@@ -61,7 +61,7 @@
 											<?php wp_editor($post['content'], 'content', array(
 													//'teeny' => true,	
 													'editor_class' => 'wpallimport-plugin-editor',
-													'media_buttons' => false,							
+													'media_buttons' => false,
 													'editor_height' => 200)); 
 											?>
 											
@@ -191,8 +191,8 @@
 					</div>
 				
 				<hr>
-				
-				<div class="input wpallimport-section" style="padding-bottom: 8px; padding-left: 8px;">
+
+                <div class="input wpallimport-section" style="padding-bottom: 8px; padding-left: 8px;">
 
 					<?php 
 						wp_all_import_template_notifications( $post, 'notice' );							

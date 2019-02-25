@@ -70,13 +70,13 @@ class PMXI_Error{
     }
 
     public function import_data_handler($errno, $errstr, $errfile, $errline) {
-        error_log('Founded import exception: ' . $errstr . ' ' . $errno . ' ' . $errfile . ' ' . $errline . ' for record #' . $this->recordNumber);
+        error_log('Found import exception: ' . $errstr . ' ' . $errno . ' ' . $errfile . ' ' . $errline . ' for record #' . $this->recordNumber);
 //        trigger_error('TEST');
 //        throw new XmlImportException($errstr, $errno, 0, $errfile, $errline);
     }
 
     public function parse_data_handler($errno, $errstr, $errfile, $errline) {
-        error_log('Founded parse exception: ' . $errstr . ' ' . $errno . ' ' . $errfile . ' ' . $errline);
+        error_log('Found parse exception: ' . $errstr . ' ' . $errno . ' ' . $errfile . ' ' . $errline);
         throw new XmlImportException($errstr, $errno);
     }
 }

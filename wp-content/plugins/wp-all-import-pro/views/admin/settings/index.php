@@ -1,58 +1,100 @@
 <?php if ( ! $is_license_active ): ?>
-<form name="settings" method="post" action="" class="settings">
+	<form name="settings" method="post" action="" class="settings">
 
-	<div class="wpallimport-header">
-		<div class="wpallimport-logo"></div>
-		<div class="wpallimport-title">
-			<p style="font-size:18px !important;"><?php _e('WP All Import', 'wp_all_import_plugin'); ?></p>
-			<h3><?php _e('Settings', 'wp_all_import_plugin'); ?></h3>
+		<div class="wpallimport-header">
+			<div class="wpallimport-logo"></div>
+			<div class="wpallimport-title">
+				<p style="font-size:18px !important;"><?php _e('WP All Import', 'wp_all_import_plugin'); ?></p>
+				<h3><?php _e('Settings', 'wp_all_import_plugin'); ?></h3>
+			</div>
 		</div>
-	</div>
 
-	<h2 style="padding:0px;"></h2>
+		<h2 style="padding:0px;"></h2>
 
-	<div class="wpallimport-setting-wrapper">
-		<?php if ($this->errors->get_error_codes()): ?>
-			<?php $this->error() ?>
-		<?php endif ?>
+		<div class="wpallimport-setting-wrapper">
+			<?php if ($this->errors->get_error_codes()): ?>
+				<?php $this->error() ?>
+			<?php endif ?>
 
-		<h3><?php _e('Licenses', 'wp_all_import_plugin') ?></h3>
+			<h3><?php _e('Licenses', 'wp_all_import_plugin') ?></h3>
+
+			<table class="form-table">
+				<tbody>
+
+				<?php foreach ($addons as $class => $addon) : if ( ! $addon['active'] ) continue; ?>
+					<tr>
+						<th scope="row"><label><?php _e('License Key', 'wp_all_import_plugin'); ?></label></th>
+						<td>
+							<input type="password" class="regular-text" name="licenses[<?php echo $class; ?>]" value="<?php if (!empty($post['licenses'][$class])) esc_attr_e( PMXI_Plugin::decode($post['licenses'][$class]) ); ?>"/>
+							<?php if( ! empty($post['licenses'][$class]) ) { ?>
+
+								<?php if( ! empty($post['statuses'][$class]) && $post['statuses'][$class] == 'valid' ) { ?>
+									<p style="color:green; display: inline-block;"><?php _e('Active', 'wp_all_import_plugin'); ?></p>
+								<?php } else { ?>
+									<input type="submit" class="button-secondary" name="pmxi_license_activate[<?php echo $class; ?>]" value="<?php _e('Activate License', 'wp_all_import_plugin'); ?>"/>
+									<span style="line-height: 28px;"><?php echo $post['statuses'][$class]; ?></span>
+								<?php } ?>
+
+							<?php } ?>
+							<p class="description"><?php _e('A license key is required to access plugin updates. You can use your license key on an unlimited number of websites. Do not distribute your license key to 3rd parties. You can get your license key in the <a target="_blank" href="http://www.wpallimport.com/portal">customer portal</a>.', 'wp_all_import_plugin'); ?></p>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
+
+			<div class="clear"></div>
+
+			<p class="submit-buttons">
+				<?php wp_nonce_field('edit-license', '_wpnonce_edit-license') ?>
+				<input type="hidden" name="is_license_submitted" value="1" />
+				<input type="submit" class="button-primary" value="Save License" />
+			</p>
+
+		</div>
+	</form>
+	<form name="settings" method="post" action="" class="settings">
 
 		<table class="form-table">
 			<tbody>
 
-			<?php foreach ($addons as $class => $addon) : if ( ! $addon['active'] ) continue; ?>
-				<tr>
-					<th scope="row"><label><?php _e('License Key', 'wp_all_import_plugin'); ?></label></th>
-					<td>
-						<input type="password" class="regular-text" name="licenses[<?php echo $class; ?>]" value="<?php if (!empty($post['licenses'][$class])) esc_attr_e( PMXI_Plugin::decode($post['licenses'][$class]) ); ?>"/>
-						<?php if( ! empty($post['licenses'][$class]) ) { ?>
+			<tr>
+				<th scope="row"><label><?php _e('Automatic Scheduling License Key', 'wp_all_import_plugin'); ?></label></th>
+				<td>
+					<input type="password" class="regular-text" name="scheduling_license"
+						   value="<?php if (!empty($post['scheduling_license'])) esc_attr_e(PMXI_Plugin::decode($post['scheduling_license'])); ?>"/>
+					<?php if (!empty($post['scheduling_license'])) { ?>
 
-							<?php if( ! empty($post['statuses'][$class]) && $post['statuses'][$class] == 'valid' ) { ?>
-								<p style="color:green; display: inline-block;"><?php _e('Active', 'wp_all_import_plugin'); ?></p>
-							<?php } else { ?>
-								<input type="submit" class="button-secondary" name="pmxi_license_activate[<?php echo $class; ?>]" value="<?php _e('Activate License', 'wp_all_import_plugin'); ?>"/>
-								<span style="line-height: 28px;"><?php echo $post['statuses'][$class]; ?></span>
-							<?php } ?>
-
+						<?php if (!empty($post['scheduling_license_status']) && $post['scheduling_license_status'] == 'valid') { ?>
+							<p style="color:green; display: inline-block;"><?php _e('Active', 'wp_all_import_plugin'); ?></p>
+						<?php } else { ?>
+							<input type="submit" class="button-secondary" name="pmxi_scheduling_license_activate"
+								   value="<?php _e('Activate License', 'wp_all_import_plugin'); ?>"/>
+							<span style="line-height: 28px;"><?php echo $post['scheduling_license_status']; ?></span>
 						<?php } ?>
-						<p class="description"><?php _e('A license key is required to access plugin updates. You can use your license key on an unlimited number of websites. Do not distribute your license key to 3rd parties. You can get your license key in the <a target="_blank" href="http://www.wpallimport.com/portal">customer portal</a>.', 'wp_all_import_plugin'); ?></p>
-					</td>
-				</tr>
-			<?php endforeach; ?>
+
+					<?php } ?>
+					<?php
+					$scheduling = \Wpai\Scheduling\Scheduling::create();
+					if(!($scheduling->checkLicense())){
+						?>
+						<p class="description"><?php _e('A license key is required to use Automatic Scheduling. If you have already subscribed, <a href="https://www.wpallimport.com/portal/automatic-scheduling/" target="_blank">click here to access your license key</a>. If you dont have a license, <a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=515704" target="_blank">click here to subscribe</a>.', 'wp_all_export_plugin'); ?></p>
+						<?php
+					}
+					?>
+				</td>
+			</tr>
 			</tbody>
 		</table>
 
 		<div class="clear"></div>
 
 		<p class="submit-buttons">
-			<?php wp_nonce_field('edit-license', '_wpnonce_edit-license') ?>
-			<input type="hidden" name="is_license_submitted" value="1" />
-			<input type="submit" class="button-primary" value="Save License" />
+			<?php wp_nonce_field('edit-license', '_wpnonce_edit-scheduling-license') ?>
+			<input type="hidden" name="is_scheduling_license_submitted" value="1"/>
+			<input type="submit" class="button-primary" value="Save Scheduling License"/>
 		</p>
-
-	</div>
-</form>
+	</form>
 <?php endif; ?>
 
 <form class="settings" method="post" action="" enctype="multipart/form-data">
@@ -278,6 +320,47 @@
 			<input type="submit" class="button-primary" value="Save License" />
 		</p>
 
+	</form>
+
+	<form name="settings" method="post" action="" class="settings">
+
+		<table class="form-table">
+			<tbody>
+
+			<tr>
+				<th scope="row"><label><?php _e('Scheduling License Key', 'wp_all_export_plugin'); ?></label></th>
+				<td>
+					<input type="password" class="regular-text" name="scheduling_license"
+						   value="<?php if (!empty($post['scheduling_license'])) esc_attr_e(PMXI_Plugin::decode($post['scheduling_license'])); ?>"/>
+					<?php if (!empty($post['scheduling_license'])) { ?>
+
+						<?php if (!empty($post['scheduling_license_status']) && $post['scheduling_license_status'] == 'valid') { ?>
+							<p style="color:green; display: inline-block;"><?php _e('Active', 'wp_all_export_plugin'); ?></p>
+						<?php } else { ?>
+							<span style="line-height: 28px;"><?php echo $post['scheduling_license_status']; ?></span>
+						<?php } ?>
+
+					<?php } ?>
+					<?php
+					$scheduling = \Wpai\Scheduling\Scheduling::create();
+					if(!($scheduling->checkLicense())){
+						?>
+						<p class="description"><?php _e('A license key is required to use Automatic Scheduling. If you have already subscribed, <a href="https://www.wpallimport.com/portal/automatic-scheduling/" target="_blank">click here to access your license key</a>. If you dont have a license, <a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=515704" target="_blank">click here to subscribe</a>.', 'wp_all_import_plugin'); ?></p>
+						<?php
+					}
+					?>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<div class="clear"></div>
+
+		<p class="submit-buttons">
+			<?php wp_nonce_field('edit-license', '_wpnonce_edit-scheduling-license') ?>
+			<input type="hidden" name="is_scheduling_license_submitted" value="1"/>
+			<input type="submit" class="button-primary" value="Save Scheduling License"/>
+		</p>
 	</form>
 <?php endif; ?>
 

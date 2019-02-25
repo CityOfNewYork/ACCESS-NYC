@@ -3,7 +3,7 @@
 Plugin Name: WP All Import Pro
 Plugin URI: http://www.wpallimport.com/
 Description: The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more.
-Version: 4.5.1
+Version: 4.5.5
 Author: Soflyy
 */
 
@@ -31,7 +31,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 }
 else {
 
-	define('PMXI_VERSION', '4.5.1');
+	define('PMXI_VERSION', '4.5.5');
 
 	define('PMXI_EDITION', 'paid');
 
@@ -166,6 +166,10 @@ else {
 		 */
 		const HISTORY_DIRECTORY =  WP_ALL_IMPORT_HISTORY_DIRECTORY;
 
+		const LANGUAGE_DOMAIN = 'wp_all_import_plugin';
+
+		private static $hasActiveSchedulingLicense = null;
+
 		/**
 		 * Return singletone instance
 		 * @return PMXI_Plugin
@@ -179,6 +183,21 @@ else {
 
 		static public function getEddName(){
 			return 'WP All Import';
+		}
+
+		static public function getSchedulingName(){
+            return 'Automatic Scheduling';
+		}
+
+		static public function hasActiveSchedulingLicense() {
+
+			if(is_null(self::$hasActiveSchedulingLicense)) {
+				$scheduling = \Wpai\Scheduling\Scheduling::create();
+				$hasActiveSchedulingLicense = $scheduling->checkLicense();
+				self::$hasActiveSchedulingLicense = $hasActiveSchedulingLicense;
+			}
+
+			return self::$hasActiveSchedulingLicense;
 		}
 
 		/**
@@ -284,7 +303,7 @@ else {
 			register_activation_hook(self::FILE, array($this, 'activation'));
 
 			// register action handlers
-			if (is_dir(self::ROOT_DIR . '/actions')) if (is_dir(self::ROOT_DIR . '/actions')) foreach (PMXI_Helper::safe_glob(self::ROOT_DIR . '/actions/*.php', PMXI_Helper::GLOB_RECURSE | PMXI_Helper::GLOB_PATH) as $filePath) {
+			if (is_dir(self::ROOT_DIR . '/actions')) foreach (PMXI_Helper::safe_glob(self::ROOT_DIR . '/actions/*.php', PMXI_Helper::GLOB_RECURSE | PMXI_Helper::GLOB_PATH) as $filePath) {
 				require_once $filePath;
 				$function = $actionName = basename($filePath, '.php');
 				if (preg_match('%^(.+?)[_-](\d+)$%', $actionName, $m)) {
@@ -312,17 +331,37 @@ else {
 				add_filter($actionName, self::PREFIX . str_replace('-', '_', $function), $priority, 99); // since we don't know at this point how many parameters each plugin expects, we make sure they will be provided with all of them (it's unlikely any developer will specify more than 99 parameters in a function)
 			}
 
-			// register shortcodes handlers
-			if (is_dir(self::ROOT_DIR . '/shortcodes')) foreach (PMXI_Helper::safe_glob(self::ROOT_DIR . '/shortcodes/*.php', PMXI_Helper::GLOB_RECURSE | PMXI_Helper::GLOB_PATH) as $filePath) {
-				$tag = strtolower(str_replace('/', '_', preg_replace('%^' . preg_quote(self::ROOT_DIR . '/shortcodes/', '%') . '|\.php$%', '', $filePath)));
-				add_shortcode($tag, array($this, 'shortcodeDispatcher'));
-			}
-
 			// register admin page pre-dispatcher
 			add_action('admin_init', array($this, 'adminInit'));
 			add_action('admin_init', array($this, 'fix_options'));
 			add_action('init', array($this, 'init'));
 
+			add_action( 'plugins_loaded', array( $this, 'setup_allimport_dir' ) );
+		}
+
+		/**
+		 * Setup required directory.
+		 */
+		public function setup_allimport_dir() {
+			// create history folder
+			$uploads = wp_upload_dir();
+
+			$wpallimportDirs = array( WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY, self::LOGS_DIRECTORY, self::FILES_DIRECTORY, self::TEMP_DIRECTORY, self::UPLOADS_DIRECTORY, self::HISTORY_DIRECTORY);
+
+			foreach ($wpallimportDirs as $destination) {
+
+				$dir = $uploads['basedir'] . DIRECTORY_SEPARATOR . $destination;
+
+				if ( !is_dir($dir)) wp_mkdir_p($dir);
+
+				if ( ! @file_exists($dir . DIRECTORY_SEPARATOR . 'index.php') ) @touch( $dir . DIRECTORY_SEPARATOR . 'index.php' );
+
+			}
+
+			$functions = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+			$functions = apply_filters( 'import_functions_file_path', $functions );
+
+			if ( ! @file_exists($functions) ) @touch( $functions );
 		}
 
 		public function init(){
@@ -556,33 +595,18 @@ else {
 					unset($options['tax_hierarchical_logic']);
 				}
 			}
-
+			if ( version_compare($version, '4.5.2') < 0  ){
+				// for existing imports with 'Search' enabled, set it to match by filename.
+				if (!empty($options['search_existing_images'])){
+					$options['search_existing_images_logic'] = 'by_filename';
+				}
+			}
 		}
 
 		/**
 		 * pre-dispatching logic for admin page controllers
 		 */
 		public function adminInit() {
-
-			// create history folder
-			$uploads = wp_upload_dir();
-
-			$wpallimportDirs = array( WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY, self::LOGS_DIRECTORY, self::FILES_DIRECTORY, self::TEMP_DIRECTORY, self::UPLOADS_DIRECTORY, self::HISTORY_DIRECTORY);
-
-			foreach ($wpallimportDirs as $destination) {
-
-				$dir = $uploads['basedir'] . DIRECTORY_SEPARATOR . $destination;
-
-				if ( !is_dir($dir)) wp_mkdir_p($dir);
-
-				if ( ! @file_exists($dir . DIRECTORY_SEPARATOR . 'index.php') ) @touch( $dir . DIRECTORY_SEPARATOR . 'index.php' );
-
-			}
-
-			$functions = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
-			$functions = apply_filters( 'import_functions_file_path', $functions );
-
-			if ( ! @file_exists($functions) ) @touch( $functions );
 
 			self::$session = new PMXI_Handler();
 
@@ -612,12 +636,12 @@ else {
 							'id' => $controllerName,
 							'base' => $controllerName,
 							'action' => $actionName,
-							'is_ajax' => strpos($_SERVER["HTTP_ACCEPT"], 'json') !== false,
+							'is_ajax' => (isset($_SERVER["HTTP_ACCEPT"]) && strpos($_SERVER["HTTP_ACCEPT"], 'json')) !== false,
 							'is_network' => is_network_admin(),
 							'is_user' => is_user_admin(),
 						);
 						add_filter('current_screen', array($this, 'getAdminCurrentScreen'));
-						add_filter('admin_body_class', create_function('', 'return "' . 'wpallimport-plugin";'));
+						add_filter('admin_body_class', array($this, 'getAdminBodyClass'), 10, 1);
 
 						$controller = new $controllerName();
 						if ( ! $controller instanceof PMXI_Controller_Admin) {
@@ -641,9 +665,11 @@ else {
 				} else { // redirect to dashboard if requested page and/or action don't exist
 					wp_redirect(admin_url()); die();
 				}
-
 			}
+		}
 
+		function getAdminBodyClass($class){
+			return $class . ' wpallimport-plugin';
 		}
 
 		/**
@@ -734,6 +760,35 @@ else {
 				}
 			}
 
+			if(strpos($className, '\\') !== false){
+
+				// project-specific namespace prefix
+				$prefix = 'Wpai\\';
+
+				// base directory for the namespace prefix
+				$base_dir = self::ROOT_DIR . '/src/';
+
+				// does the class use the namespace prefix?
+				$len = strlen($prefix);
+				if (strncmp($prefix, $className, $len) !== 0) {
+					// no, move to the next registered autoloader
+					return;
+				}
+
+				// get the relative class name
+				$relative_class = substr($className, $len);
+
+				// replace the namespace prefix with the base directory, replace namespace
+				// separators with directory separators in the relative class name, append
+				// with .php
+				$file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+
+				// if the file exists, require it
+				if (file_exists($file)) {
+					require_once $file;
+				}
+			}
+
 			return FALSE;
 		}
 
@@ -791,8 +846,18 @@ else {
 			$installer = new PMXI_Installer();
 			$installer->checkActivationConditions();
 
-			// uncaught exception doesn't prevent plugin from being activated, therefore replace it with fatal error so it does
-			set_exception_handler(create_function('$e', 'trigger_error($e->getMessage(), E_USER_ERROR);'));
+            if(class_exists('PMXE_Plugin')) {
+                if(method_exists('PMXE_Plugin', 'getSchedulingName')) {
+                    $schedulingLicenseData = array();
+                    $schedulingLicenseData['scheduling_license'] = PMXE_Plugin::getInstance()->getOption('scheduling_license');
+                    $schedulingLicenseData['scheduling_license_status'] = PMXE_Plugin::getInstance()->getOption('scheduling_license_status');
+
+                    PMXI_Plugin::getInstance()->updateOption($schedulingLicenseData);
+                }
+            }
+
+			// uncaught exception doesn't prevent plugin from being activated, therefore replace it with fatal error so it does      
+			set_exception_handler(function($e){trigger_error($e->getMessage(), E_USER_ERROR);});
 
 			// create plugin options
 			$option_name = get_class($this) . '_Options';
@@ -826,7 +891,7 @@ else {
 						// sync data between plugin tables and wordpress (mostly for the case when plugin is reactivated)
 
 						$post = new PMXI_Post_Record();
-						$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts . ')');
+						$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts .') AND post_id NOT IN ( SELECT ID FROM ' . $wpdb->users . ') AND post_id NOT IN ( SELECT term_taxonomy_id FROM ' . $wpdb->term_taxonomy . ')');
 		            }
 		            switch_to_blog($old_blog);
 		            return;
@@ -838,7 +903,7 @@ else {
 			// sync data between plugin tables and wordpress (mostly for the case when plugin is reactivated)
 
 			$post = new PMXI_Post_Record();
-			$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts . ')');
+			$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts .') AND post_id NOT IN ( SELECT ID FROM ' . $wpdb->users . ') AND post_id NOT IN ( SELECT term_taxonomy_id FROM ' . $wpdb->term_taxonomy . ')');
 
 		}
 
@@ -887,7 +952,7 @@ else {
 						// sync data between plugin tables and wordpress (mostly for the case when plugin is reactivated)
 
 						$post = new PMXI_Post_Record();
-						$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts . ')');
+						$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts .') AND post_id NOT IN ( SELECT ID FROM ' . $wpdb->users . ') AND post_id NOT IN ( SELECT term_taxonomy_id FROM ' . $wpdb->term_taxonomy . ')');
 		            }
 		            switch_to_blog($old_blog);
 		            return;
@@ -918,8 +983,41 @@ else {
 				}
 			}
 
-			$table = $this->getTablePrefix() . 'imports';
+			// alter images table
+			$table = $this->getTablePrefix() . 'images';
+			$tablefields = $wpdb->get_results("DESCRIBE {$table};");
+			$fields_to_alter = array(
+				'image_url',
+				'image_filename'
+			);
 
+			// Check if field exists
+			foreach ($tablefields as $tablefield) {
+				if (in_array($tablefield->Field, $fields_to_alter)){
+					$fields_to_alter = array_diff($fields_to_alter, array($tablefield->Field));
+				}
+			}
+
+			if ( ! empty($fields_to_alter) ){
+
+				if (empty($grands)) return false;
+
+				foreach ($fields_to_alter as $field) {
+					switch ($field) {
+						case 'image_url':
+							$wpdb->query("ALTER TABLE {$table} ADD `image_url` VARCHAR(600) NOT NULL DEFAULT '';");
+							break;
+						case 'image_filename':
+							$wpdb->query("ALTER TABLE {$table} ADD `image_filename` VARCHAR(600) NOT NULL DEFAULT '';");
+							break;
+						default:
+							# code...
+							break;
+					}
+				}
+			}
+
+			$table = $this->getTablePrefix() . 'imports';
 			$tablefields = $wpdb->get_results("DESCRIBE {$table};");
 			$fields_to_alter = array(
 				'parent_import_id',
@@ -1002,7 +1100,7 @@ else {
 					?>
 					<div class="error"><p>
 						<?php printf(
-								__('<b>%s Plugin</b>: Current sql user %s doesn\'t have ALTER privileges', 'pmwi_plugin'),
+								__('<b>%s Plugin</b>: Current sql user %s doesn\'t have ALTER privileges', 'wp_all_import_plugin'),
 								self::getInstance()->getName(), DB_USER
 						) ?>
 					</p></div>
@@ -1012,6 +1110,9 @@ else {
 
 				$wpdb->query("ALTER TABLE {$table} ADD `iteration` BIGINT(20) NOT NULL DEFAULT 0;");
 
+				// Add indexing to pmxi_posts.post_id and pmxi_posts.import_id fields.
+				$wpdb->query("ALTER TABLE {$table} ADD INDEX `post_id`(`post_id`);");
+				$wpdb->query("ALTER TABLE {$table} ADD INDEX `import_id`(`import_id`)");
 			}
 
 			if (!$specified and !empty($grands))
@@ -1138,7 +1239,6 @@ else {
 				'scheduled_period' => '',
 				'friendly_name' => '',
 				'records_per_request' => 20,
-				'auto_records_per_request' => 1,
 				'auto_rename_images' => 0,
 				'auto_rename_images_suffix' => '',
 				'images_name' => 'filename',
@@ -1163,7 +1263,6 @@ else {
 				'chuncking' => 1,
 				'import_processing' => 'ajax',
 				'processing_iteration_logic' => 'auto',
-				'records_per_request_detected' => 0,
 				'save_template_as' => 0,
 
 				'title' => '',
@@ -1182,6 +1281,7 @@ else {
 				'gallery_featured_image' => '',
 				'gallery_featured_delim' => ',',
 				'is_featured' => 1,
+				'is_featured_xpath' => '',
 				'set_image_meta_title' => 0,
 				'set_image_meta_caption' => 0,
 				'set_image_meta_alt' => 0,
@@ -1217,7 +1317,15 @@ else {
 				'taxonomy_parent' => '',
 				'taxonomy_slug' => 'auto',
 				'taxonomy_slug_xpath' => '',
-				'import_img_tags' => 1
+				'import_img_tags' => 0,
+				'search_existing_images_logic' => 'by_url',
+				'enable_import_scheduling' => 'false',
+				'scheduling_enable' => false,
+				'scheduling_weekly_days' => '',
+				'scheduling_run_on' => 'weekly',
+				'scheduling_monthly_day' => '',
+				'scheduling_times' => array(),
+				'scheduling_timezone' => 'UTC'
 			);
 		}
 
@@ -1239,7 +1347,7 @@ else {
 		}
 
 		public static function is_ajax(){
-			return strpos($_SERVER["HTTP_ACCEPT"], 'json') !== false;
+			return (isset($_SERVER["HTTP_ACCEPT"]) && strpos($_SERVER["HTTP_ACCEPT"], 'json')) !== false;
 		}
 
 	}

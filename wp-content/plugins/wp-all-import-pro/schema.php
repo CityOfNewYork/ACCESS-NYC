@@ -80,7 +80,9 @@ CREATE TABLE {$table_prefix}posts (
 	product_key TEXT,
 	iteration BIGINT(20) NOT NULL DEFAULT 0,
 	specified BOOL NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)	
+	PRIMARY KEY  (id),
+  	KEY import_id (import_id),
+  	KEY post_id (post_id)	
 ) $charset_collate;
 CREATE TABLE {$table_prefix}files (
 	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -88,6 +90,13 @@ CREATE TABLE {$table_prefix}files (
 	name TEXT,
 	path TEXT,
 	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+	PRIMARY KEY  (id)
+) $charset_collate;
+CREATE TABLE {$table_prefix}images (
+	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,	
+	attachment_id BIGINT(20) UNSIGNED NOT NULL,
+	image_url VARCHAR(600) NOT NULL DEFAULT '',
+	image_filename VARCHAR(600) NOT NULL DEFAULT '',	
 	PRIMARY KEY  (id)
 ) $charset_collate;
 CREATE TABLE {$table_prefix}history (

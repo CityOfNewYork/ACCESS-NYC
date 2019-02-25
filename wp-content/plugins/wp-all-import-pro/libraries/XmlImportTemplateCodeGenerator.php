@@ -98,17 +98,22 @@ class XmlImportTemplateCodeGenerator
     if (count($this->sequence->getVariables()))
     {      
       array_pop($this->xmlStack);
-    }	
-    if (is_null($filename))
-    {
-       $filename = @tempnam(XmlImportConfig::getInstance()->getCacheDirectory(), 'xim');
+    }
+    // grab import ID for manual and cron import runs
+    $input = new PMXI_Input();
+    $import_id = $input->get('id');
+    if (empty($import_id)){
+        $import_id = $input->get('import_id');
+    }
+    if ( ! $filename or ! @is_writable($filename)) {
+      $filename = @tempnam(XmlImportConfig::getInstance()->getCacheDirectory(), 'xim_id_'. $import_id);
     }
 	if ( ! $filename or ! @is_writable($filename) ){
       $uploads  = wp_upload_dir();
       $targetDir = $uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::TEMP_DIRECTORY;
-      $filename = $targetDir . DIRECTORY_SEPARATOR . wp_unique_filename($targetDir, 'tmpfile');
+      $filename = $targetDir . DIRECTORY_SEPARATOR . wp_unique_filename($targetDir, 'tmpfile_id_'. $import_id);
     }
-    
+
     file_put_contents($filename, $result);
     $sleep = apply_filters( 'wp_all_import_shard_delay', 0 );
     usleep($sleep);

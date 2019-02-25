@@ -3,6 +3,8 @@
 
 Rollbar full-stack error tracking for WordPress
 
+The full documentation is available [here](https://docs.rollbar.com/v1.0.0/docs/wordpress).
+
 ## Description
 Rollbar collects errors that happen in your application, notifies you, and analyzes them so you can debug and fix them.
 
@@ -61,46 +63,9 @@ This is a recommended way to install Rollbar plugin for advanced projects. This 
 12. Pick a minimum logging level. Only errors at that or higher level will be reported. For reference: [PHP Manual: Predefined Error Constants](http://php.net/manual/en/errorfunc.constants.php).
 13. Click `Save Changes`.
 
-## Configuration
-
-### `rollbar_js_config` filter
-
-Allows a plugin to modify the JS config passed to Rollbar.
-
-You can use this e.g. to add the currently logged in user to the `person` field
-of the payload. With this change, you could have this plugin:
-
-```php
-class RollbarWPUser {
-
-  public function __construct(){
-    add_filter( 'rollbar_js_config', array($this, 'rollbar_js_config') );
-  }
-
-  function rollbar_js_config($config) {
-    if(is_user_logged_in()) {
-      $user = wp_get_current_user();  
-      
-      if(empty($config['payload']['person'])) {
-        $config['payload']['person'] = array(
-          'id' => $user->ID,
-          'username' => $user->user_login,
-          'email' => $user->user_email
-        );
-      }
-    }
-
-    return $config;
-  }
-  
-}
-```
-
 ## Help / Support
 
 If you run into any issues, please email us at [support@rollbar.com](mailto:support@rollbar.com)
-
-You can also find us on IRC: [#rollbar on chat.freenode.net](irc://chat.freenode.net/rollbar)
 
 For bug reports, please [open an issue on GitHub](https://github.com/rollbar/rollbar-php-wordpress/issues/new).
 
@@ -133,16 +98,21 @@ This is only for contributors with committer access:
     2. Add record in the `Changelog` section of the `readme.txt`.
     3. Add record in the `Upgrade Notice` section of the `readme.txt`.
     4. Bump the plugin version in `rollbar-php-wordpress.php` in the `Version:` comment.
-    5. Add and commit the changes you made to bump the plugin version: `git add readme.txt rollbar-php-wordpress.php && git commit -m"Bump version to v[version number]"`
+    5. Bump the plugin version in `src/Plugin.php` in the `\Rollbar\Wordpress\Plugin::VERSION` constant.
+    5. Add and commit the changes you made to bump the plugin version: `git add readme.txt rollbar-php-wordpress.php src/Plugin.php && git commit -m"Bump version to v[version number]"`
+    6. Bump versions of the JS and CSS files versions in Settings.php class to force refresh of those assets on users' installations.
+    7. `git push origin master`
 2. Tag the new version from the `master` branch and push upstream with `git tag v[version number] && git push --tags`.
-3. Update the WordPress Plugin Directory Subversion Repository.
+3. Publish a new release on [GitHub](https://github.com/rollbar/rollbar-php-wordpress/releases).
+4. Update the WordPress Plugin Directory Subversion Repository.
     1. Fetch the latest contents of Subversion repo with `svn update`.
     2. Remove the contents of `trunk/` with `rm -Rf trunk`.
     3. Update the contents of `trunk/` with a clone of the tag you created in step 2.
         2. `git clone https://github.com/rollbar/rollbar-php-wordpress.git trunk`
         3. `cd trunk && git checkout tags/v[version number] && cd ..`
         4. `rm -Rf trunk/.git`
-        5. `svn commit -m"Sync with GitHub repo"`
+        5. `svn add trunk --force`
+        6. `svn commit -m"Sync with GitHub repo"`
     4. Create the Subversion tag: `svn copy https://plugins.svn.wordpress.org/rollbar/trunk https://plugins.svn.wordpress.org/rollbar/tags/[version number] -m"Tag [version number]"`. Notice the version number in Subversion doesn't include the "v" prefix.
 
 ## Disclaimer

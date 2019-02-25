@@ -259,11 +259,11 @@ if( ! class_exists('PMXI_Updater') ) {
                 if ( empty( $version_info->download_link ) ) {
                     if ($shiny_updates) $update_msg_classes .= ' post-shiny-updates';
                     $new_version = "<span class=\"wp-all-import-pro-new-version-notice\">" . sprintf(
-                        __( 'A new version of WP All Import Pro available. <strong>A valid license is required to enable updates - enter your license key on the <a href="%1$s">Licenses</a> page.</strong>', 'wp_all_import_plugin' ),
+                        __( 'A new version of WP All Import Pro is available. <strong>A valid license is required to enable updates - enter your license key on the <a href="%1$s">Licenses</a> page.</strong>', 'wp_all_import_plugin' ),
                         esc_url(admin_url('admin.php?page=pmxi-admin-settings'))
                     ) . "</span>";
                     $new_version .= "<span class=\"wp-all-import-pro-licence-error-notice\">" . sprintf(
-                        __( 'If you don\'t have a licence key, please see <a href="%1$s" target="_blank">details & pricing</a>. If you do have a licence key, you can access it at the <a href="%2$s" target="_blank">customer portal</a>.', 'wp_all_import_plugin'),
+                        __( 'If you don\'t have a license, please see <a href="%1$s" target="_blank">details & pricing</a>. If you do have a license, you can access it at the <a href="%2$s" target="_blank">customer portal</a>.', 'wp_all_import_plugin'),
                         esc_url( 'http://www.wpallimport.com/order-now/' ),
                         esc_url( 'http://www.wpallimport.com/portal/' )
                     ) . "</span>";

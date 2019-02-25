@@ -177,7 +177,7 @@ class PMXI_Chunk {
             // $simpleXmlNode = simplexml_load_string($node);
             // echo (string)$simpleXmlNode->firstName;            
         }
-
+        
         $this->cloud = $parser->cloud;
 
       }

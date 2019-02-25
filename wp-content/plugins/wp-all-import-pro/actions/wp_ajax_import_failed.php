@@ -21,6 +21,8 @@ function pmxi_wp_ajax_import_failed(){
 			'failed_on' => date('Y-m-d H:i:s')
 		))->save();
 		$result = true;
+        do_action('pmxi_import_failed', $id);
 	}
+
 	exit( json_encode( array('result' => $result)));
 }

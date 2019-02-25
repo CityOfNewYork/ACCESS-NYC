@@ -97,11 +97,18 @@ function acf_get_valid_field( $field = false ) {
 	$field['_valid'] = 1;
 	
 	
-	// field specific defaults
-	$field = apply_filters( "acf/validate_field", $field );
+	/**
+	*  Filters the $field array to validate settings.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
 	$field = apply_filters( "acf/validate_field/type={$field['type']}", $field );
+	$field = apply_filters( "acf/validate_field", $field );
 	
-	
+		
 	// translate
 	$field = acf_translate_field( $field );
 	
@@ -140,10 +147,17 @@ function acf_translate_field( $field ) {
 		$field['instructions'] = acf_translate( $field['instructions'] );
 		
 		
-		// filters
-		$field = apply_filters( "acf/translate_field", $field );
+		/**
+		*  Filters the $field array to translate strings.
+		*
+		*  @date	12/02/2014
+		*  @since	5.0.0
+		*
+		*  @param	array $field The field array.
+		*/
 		$field = apply_filters( "acf/translate_field/type={$field['type']}", $field );
-		
+		$field = apply_filters( "acf/translate_field", $field );
+				
 	}
 	
 	
@@ -173,9 +187,17 @@ function acf_clone_field( $field, $clone_field ) {
 	$field['_clone'] = $clone_field['key'];
 	
 	
-	// filters
-	$field = apply_filters( "acf/clone_field", $field, $clone_field );
+	/**
+	*  Filters the $field array when it is being cloned.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*  @param	array $clone_field The clone field array.
+	*/
 	$field = apply_filters( "acf/clone_field/type={$field['type']}", $field, $clone_field );
+	$field = apply_filters( "acf/clone_field", $field, $clone_field );
 	
 	
 	// return
@@ -215,11 +237,20 @@ function acf_prepare_field( $field ) {
 	$field['_prepare'] = 1;
 	
 	
-	// filter to 3rd party customization
-	$field = apply_filters( "acf/prepare_field", $field );
-	$field = apply_filters( "acf/prepare_field/type={$field['type']}", $field );
-	$field = apply_filters( "acf/prepare_field/name={$field['_name']}", $field );
-	$field = apply_filters( "acf/prepare_field/key={$field['key']}", $field );
+	/**
+	*  Filters the $field array.
+	*
+	*  Allows developers to modify field settings or return false to remove field.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
+	$field = apply_filters( "acf/prepare_field/type={$field['type']}",	$field );
+	$field = apply_filters( "acf/prepare_field/name={$field['_name']}",	$field );
+	$field = apply_filters( "acf/prepare_field/key={$field['key']}",	$field );
+	$field = apply_filters( "acf/prepare_field",						$field );
 	
 	
 	// bail ealry if no field
@@ -227,7 +258,7 @@ function acf_prepare_field( $field ) {
 	
 	
 	// id attr is generated from name
-	$field['id'] = str_replace(array('][', '[', ']'), array('-', '-', ''), $field['name']);
+	$field['id'] = acf_idify( $field['name'] );
 	
 	
 	// return
@@ -278,10 +309,16 @@ function acf_is_sub_field( $field ) {
 *  @return	$label (string)
 */
 
-function acf_get_field_label( $field ) {
+function acf_get_field_label( $field, $context = '' ) {
 	
 	// vars
 	$label = $field['label'];
+	
+	
+	// show (no label) when editing field
+	if( $context == 'admin' && $label === '' ) {
+		$label = __('(no label)', 'acf');
+	}
 	
 	
 	// required
@@ -323,32 +360,38 @@ function acf_the_field_label( $field ) {
 *  @return	n/a
 */
 
-function acf_render_fields( $post_id = 0, $fields, $el = 'div', $instruction = 'label' ) {
+function acf_render_fields( $fields, $post_id = 0, $el = 'div', $instruction = 'label' ) {
+	
+	// parameter order changed in ACF 5.6.9
+	if( is_array($post_id) ) {
+		$args = func_get_args();
+		$fields = $args[1];
+		$post_id = $args[0];
+	}
+	
+	// filter
+	$fields = apply_filters('acf/pre_render_fields', $fields, $post_id);
 	
 	// bail early if no fields
-	if( empty($fields) ) return false;
+	if( empty($fields) ) return;
 	
-		
-	// remove corrupt fields
-	$fields = array_filter($fields);
-	
-	
-	// loop through fields
+	// loop
 	foreach( $fields as $field ) {
 		
+		// bail ealry if no field
+		if( !$field ) continue;
+	
 		// load value
 		if( $field['value'] === null ) {
-			
 			$field['value'] = acf_get_value( $post_id, $field );
-			
 		} 
-		
 		
 		// render
 		acf_render_field_wrap( $field, $el, $instruction );
-		
 	}
 	
+	// action
+	do_action( 'acf/render_fields', $fields, $post_id );
 }
 
 
@@ -379,10 +422,18 @@ function acf_render_field( $field = false ) {
 	if( !$field ) return;
 		
 	
-	// create field specific html
-	do_action( "acf/render_field", $field );
-	do_action( "acf/render_field/type={$field['type']}", $field );
-	
+	/**
+	*  Fires when rendering a field.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
+	do_action( "acf/render_field/type={$field['type']}", 	$field );
+	do_action( "acf/render_field/name={$field['_name']}", 	$field );
+	do_action( "acf/render_field/key={$field['key']}", 		$field );
+	do_action( "acf/render_field",							$field );
 }
 
 
@@ -506,25 +557,32 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 	$wrapper = array_filter($wrapper);
 	
 	
+	// conditional logic
+	if( !empty($field['conditional_logic']) ) {
+		$field['conditions'] = $field['conditional_logic'];
+	}
+	
+	// conditions
+	if( !empty($field['conditions']) ) {
+		$wrapper['data-conditions'] = $field['conditions'];
+	}
+	
+	
 	// html
 	?>
 <<?php echo $el; ?> <?php acf_esc_attr_e($wrapper); ?>>
 	<?php if( $show_label ): ?>
-	<<?php echo $el2; ?> class="acf-label">
-		<?php acf_the_field_wrap_label( $field ); ?>
-		<?php if( $instruction == 'label' ) acf_the_field_wrap_instructions( $field ); ?>
-	</<?php echo $el2; ?>>
+	<<?php echo $el2; ?> class="acf-label"><?php
+		
+		acf_render_field_label( $field );
+		
+		if( $instruction == 'label' ) acf_render_field_instructions( $field );
+	
+	?></<?php echo $el2; ?>>
 	<?php endif; ?>
 	<<?php echo $el2; ?> class="acf-input">
 		<?php acf_render_field( $field ); ?>
-		<?php if( $instruction == 'field' ) acf_the_field_wrap_instructions( $field ); ?>
-		<?php if( !empty($field['conditional_logic']) ): ?>
-		<script type="text/javascript">
-			if( typeof acf !== 'undefined' ) { 
-				acf.conditional_logic.add( '<?php echo esc_js($field['key']); ?>', <?php echo wp_json_encode( $field['conditional_logic'] ); ?> ); 
-			}
-		</script>
-		<?php endif; ?>
+		<?php if( $instruction == 'field' ) acf_render_field_instructions( $field ); ?>
 	</<?php echo $el2; ?>>
 </<?php echo $el; ?>>
 <?php
@@ -533,7 +591,7 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 
 
 /**
-*  acf_render_field_wrap_label
+*  acf_render_field_label
 *
 *  This function will maybe output the field's label
 *
@@ -544,7 +602,7 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 *  @return	n/a
 */
 
-function acf_the_field_wrap_label( $field ) {
+function acf_render_field_label( $field ) {
 	
 	// vars
 	$label = acf_get_field_label( $field );
@@ -552,16 +610,20 @@ function acf_the_field_wrap_label( $field ) {
 	
 	// check
 	if( $label ) {
-		
 		echo '<label' . ($field['id'] ? ' for="' . esc_attr($field['id']) . '"' : '' ) . '>' . acf_esc_html($label) . '</label>';
-		
 	}
 	
 }
 
 
+/* depreciated since 5.6.5 */
+function acf_render_field_wrap_label( $field ) {
+	acf_render_field_label( $field );
+}
+
+
 /**
-*  acf_render_field_wrap_description
+*  acf_render_field_instructions
 *
 *  This function will maybe output the field's instructions
 *
@@ -572,7 +634,7 @@ function acf_the_field_wrap_label( $field ) {
 *  @return	n/a
 */
 
-function acf_the_field_wrap_instructions( $field ) {
+function acf_render_field_instructions( $field ) {
 	
 	// vars
 	$instructions = $field['instructions'];
@@ -580,11 +642,15 @@ function acf_the_field_wrap_instructions( $field ) {
 	
 	// check
 	if( $instructions ) {
-		
 		echo '<p class="description">' . acf_esc_html($instructions) . '</p>';
-		
 	}
 	
+}
+
+
+/* depreciated since 5.6.5 */
+function acf_render_field_wrap_description( $field ) {
+	acf_render_field_instructions( $field );
 }
 
 
@@ -607,52 +673,38 @@ function acf_render_field_setting( $field, $setting, $global = false ) {
 	// validate
 	$setting = acf_get_valid_field( $setting );
 	
-	
-	// specific
-	if( !$global ) {
-		
-		$setting['wrapper']['data-setting'] = $field['type'];
-		
-	}
-	
-	
-	// class
+	// custom key and class
+	$setting['wrapper']['data-key'] = $setting['name'];
 	$setting['wrapper']['class'] .= ' acf-field-setting-' . $setting['name'];
 	
+	// context
+	if( !$global ) {
+		$setting['wrapper']['data-setting'] = $field['type'];
+	}
 	
 	// copy across prefix
 	$setting['prefix'] = $field['prefix'];
 		
-	
 	// attempt find value
 	if( $setting['value'] === null ) {
 		
 		// name
 		if( isset($field[ $setting['name'] ]) ) {
-			
 			$setting['value'] = $field[ $setting['name'] ];
 		
 		// default
 		} elseif( isset($setting['default_value']) ) {
-			
 			$setting['value'] = $setting['default_value'];
-			
 		}
-		
 	}
-	
 	
 	// append (used by JS to join settings)
 	if( isset($setting['_append']) ) {
-		
 		$setting['wrapper']['data-append'] = $setting['_append'];
-		
 	}
-	
 	
 	// render
 	acf_render_field_wrap( $setting, 'tr', 'label' );
-	
 }
 
 
@@ -700,6 +752,7 @@ function acf_get_fields( $parent = false ) {
 	
 	
 	// filter
+	$fields = apply_filters('acf/load_fields', $fields, $parent);
 	$fields = apply_filters('acf/get_fields', $fields, $parent);
 	
 	
@@ -751,7 +804,8 @@ function acf_get_fields_by_id( $parent_id = 0 ) {
 			'suppress_filters'			=> true, // DO NOT allow WPML to modify the query
 			'post_parent'				=> $parent_id,
 			'post_status'				=> 'publish, trash', // 'any' won't get trashed fields
-			'update_post_meta_cache'	=> false
+			'update_post_meta_cache'	=> false,
+			'update_post_term_cache'	=> false
 		));
 		
 		
@@ -879,11 +933,18 @@ function acf_get_field( $selector = null, $db_only = false ) {
 	if( $db_only ) return $field;
 	
 	
-	// filter for 3rd party customization
-	$field = apply_filters( "acf/load_field", $field);
-	$field = apply_filters( "acf/load_field/type={$field['type']}", $field );
-	$field = apply_filters( "acf/load_field/name={$field['name']}", $field );
-	$field = apply_filters( "acf/load_field/key={$field['key']}", $field );
+	/**
+	*  Filters the $field array after it has been loaded.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
+	$field = apply_filters( "acf/load_field/type={$field['type']}",		$field );
+	$field = apply_filters( "acf/load_field/name={$field['_name']}", 	$field );
+	$field = apply_filters( "acf/load_field/key={$field['key']}", 		$field );
+	$field = apply_filters( "acf/load_field", 							$field );
 	
 	
 	// update cache
@@ -1029,7 +1090,9 @@ function _acf_get_field_by_name( $name = '', $db_only = false ) {
 		'orderby' 			=> 'menu_order title',
 		'order'				=> 'ASC',
 		'suppress_filters'	=> false,
-		'acf_field_name'	=> $name
+		'acf_field_name'	=> $name,
+		'update_post_meta_cache'	=> false,
+		'update_post_term_cache'	=> false
 	);
 	
 	
@@ -1086,7 +1149,7 @@ function acf_maybe_get_field( $selector, $post_id = false, $strict = true ) {
 	
 	
 	// get reference
-	$field_key = acf_get_field_reference( $selector, $post_id );
+	$field_key = acf_get_reference( $selector, $post_id );
 	
 	
 	// update selector
@@ -1139,7 +1202,9 @@ function acf_get_field_id( $key = '' ) {
 		'orderby' 			=> 'menu_order title',
 		'order'				=> 'ASC',
 		'suppress_filters'	=> false,
-		'acf_field_key'		=> $key
+		'acf_field_key'		=> $key,
+		'update_post_meta_cache'	=> false,
+		'update_post_term_cache'	=> false
 	);
 	
 	
@@ -1225,11 +1290,18 @@ function acf_update_field( $field = false, $specific = false ) {
 	}
 	
 	
-	// filter for 3rd party customization
-	$field = apply_filters( "acf/update_field", $field);
-	$field = apply_filters( "acf/update_field/type={$field['type']}", $field );
-	$field = apply_filters( "acf/update_field/name={$field['name']}", $field );
-	$field = apply_filters( "acf/update_field/key={$field['key']}", $field );
+	/**
+	*  Filters the $field array before it is updated.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
+	$field = apply_filters( "acf/update_field/type={$field['type']}", 	$field );
+	$field = apply_filters( "acf/update_field/name={$field['_name']}", 	$field );
+	$field = apply_filters( "acf/update_field/key={$field['key']}", 	$field );
+	$field = apply_filters( "acf/update_field", 						$field );
 	
 	
 	// store origional field for return
@@ -1487,9 +1559,16 @@ function acf_duplicate_field( $selector = 0, $new_parent = 0 ){
 	}
 	
 	
-	// filter for 3rd party customization
-	$field = apply_filters( "acf/duplicate_field", $field);
+	/**
+	*  Filters the $field array after it has been duplicated.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
 	$field = apply_filters( "acf/duplicate_field/type={$field['type']}", $field );
+	$field = apply_filters( "acf/duplicate_field", $field);
 	
 	
 	// save
@@ -1529,9 +1608,18 @@ function acf_delete_field( $selector = 0 ) {
 	wp_delete_post( $field['ID'], true );
 	
 	
-	// action for 3rd party customisation
-	do_action( "acf/delete_field", $field);
-	do_action( "acf/delete_field/type={$field['type']}", $field );
+	/**
+	*  Fires immediately after a field has been deleted.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
+	do_action( "acf/delete_field/type={$field['type']}", 	$field );
+	do_action( "acf/delete_field/name={$field['_name']}", 	$field );
+	do_action( "acf/delete_field/key={$field['key']}", 		$field );
+	do_action( "acf/delete_field",							$field );
 	
 	
 	// clear cache
@@ -1689,9 +1777,16 @@ function acf_prepare_field_for_export( $field ) {
 	));
 	
 	
-	// filter for 3rd party customization
-	$field = apply_filters( "acf/prepare_field_for_export", $field );
+	/**
+	*  Filters the $field array before being returned to the export tool.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
 	$field = apply_filters( "acf/prepare_field_for_export/type={$field['type']}", $field );
+	$field = apply_filters( "acf/prepare_field_for_export", $field );
 	
 	
 	// return
@@ -1784,9 +1879,16 @@ function acf_prepare_field_for_import( $field ) {
 	));
 	
 	
-	// filter for 3rd party customization
-	$field = apply_filters( "acf/prepare_field_for_import", $field );
+	/**
+	*  Filters the $field array before being returned to the import tool.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $field The field array.
+	*/
 	$field = apply_filters( "acf/prepare_field_for_import/type={$field['type']}", $field );
+	$field = apply_filters( "acf/prepare_field_for_import", $field );
 	
 	
 	// return
@@ -1833,9 +1935,18 @@ function acf_get_sub_field( $selector, $field ) {
 	}
 	
 	
-	// filter for 3rd party customization
-	$sub_field = apply_filters( "acf/get_sub_field", $sub_field, $selector, $field );
+	/**
+	*  Filters the $sub_field found.
+	*
+	*  @date	12/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	array $sub_field The found sub field array.
+	*  @param	string $selector The selector used to search.
+	*  @param	array $field The parent field array.
+	*/
 	$sub_field = apply_filters( "acf/get_sub_field/type={$field['type']}", $sub_field, $selector, $field );
+	$sub_field = apply_filters( "acf/get_sub_field", $sub_field, $selector, $field );
 	
 	
 	// return
@@ -2010,6 +2121,57 @@ function acf_prefix_fields( &$fields, $prefix = 'acf' ) {
 	
 }
 
-
+/**
+*  acf_apply_field_filters
+*
+*  description
+*
+*  @date	11/9/18
+*  @since	5.7.6
+*
+*  @param	type $var Description. Default.
+*  @return	type Description.
+*/
+/*
+function acf_apply_field_filters( $value ) {
+	
+	// get function args
+	$args = func_get_args();
+	
+	// find field in $args
+	$field = false;
+	foreach( $args as $arg ) {
+		if( is_array($arg) && isset($arg['key'], $arg['type'], $arg['_name']) ) {
+			$field = $arg;
+			break;
+		}
+	}
+	
+	// vars
+	$filter = current_filter();
+	
+	// unshift tag to args
+	array_unshift($args, $filter);
+	
+	// apply field filters
+	if( $field ) {
+		
+		// $filter/type=$type
+		$args[0] = "{$filter}/type={$field['type']}";
+		$value = call_user_func_array('apply_filters', $args);
+		
+		// $filter/name=$name
+		$args[0] = "{$filter}/name={$field['_name']}";
+		$value = call_user_func_array('apply_filters', $args);
+		
+		// $filter/key=$key
+		$args[0] = "{$filter}/key={$field['key']}";
+		$value = call_user_func_array('apply_filters', $args);
+	}
+	
+	// return
+	return $value;
+}
+*/
 
 ?>

@@ -1,6 +1,9 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
-import Matches from 'modules/matches-polyfill';
+import 'es6-promise/dist/es6-promise.auto';
+import Matches from 'modules/polyfill-matches';
+import Remove from 'modules/polyfill-remove';
+import ForEach from 'modules/polyfill-foreach';
 import OfficeMap from 'modules/office-map';
 import Screener from 'modules/screener';
 import ShareForm from 'modules/share-form';
@@ -11,6 +14,7 @@ import Utility from 'modules/utility';
 import Accordion from 'components/accordion/accordion.common';
 import Filter from 'components/filter/filter.common';
 import NearbyStops from 'components/nearby-stops/nearby-stops.common';
+import Newsletter from 'objects/newsletter/newsletter.common';
 
 (function(window, $) {
   'use strict';
@@ -19,7 +23,11 @@ import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 
   Utility.configErrorTracking(window);
 
-  new Matches; // Elements.matches polyfill
+  // Polyfills
+  // new Promise; // Promise
+  new Matches; // Element.prototype.matches()
+  new Remove; // Element.prototype.removes()
+  new ForEach; // Array.prototype.forEach()
 
   // Get SVG sprite file.
   // See: https://css-tricks.com/ajaxing-svg-sprite/
@@ -58,6 +66,10 @@ import NearbyStops from 'components/nearby-stops/nearby-stops.common';
   new Accordion();
   new Filter();
   new NearbyStops();
+
+  // Instantiate Newsletter Class
+  let newsletter = document.querySelector(Newsletter.selector);
+  if (newsletter) new Newsletter(newsletter);
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
