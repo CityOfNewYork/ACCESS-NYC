@@ -69,7 +69,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "access-nyc-patterns": "^0.1.8",
+    "access-nyc-patterns": "^0.2.2",
     "cleave.js": "^0.7.23",
     "es6-promise": "^4.2.5",
     "jquery": "^3.1.1",

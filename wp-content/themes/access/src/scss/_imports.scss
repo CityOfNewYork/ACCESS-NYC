@@ -1,37 +1,24 @@
 @charset 'utf-8';
 
-// Global Dependencies
-// Bourbon: These are settings that are needed globaly for the Bourbon integration
-@import 'bourbon/app/assets/stylesheets/bourbon-deprecate';
-@import 'bourbon/app/assets/stylesheets/settings/deprecation-warnings';
-@import 'bourbon/app/assets/stylesheets/settings/asset-pipeline';
-@import 'bourbon/app/assets/stylesheets/helpers/directional-values';
+$cdn: '../../assets/';
+$path-to-images: 'img/';
 
-// if @font-face is used it needs to be first imported first.
 @import 'access-nyc-patterns/src/elements/fonts/fonts';
 
 /************************
  * External Dependencies
  ************************/
 
-// Any external dependency can be included here. It may also make sense to include
-// it within specific component and object styles if it is a dependency. Be sure
-// to add 'node_modules' to your include paths if you are using npm to manage
-// dependencies (recommended). Dependency examples include Bootstrap or Material
-// Components Web.
-
+@import 'bourbon/app/assets/stylesheets/bourbon-deprecate';
+@import 'bourbon/app/assets/stylesheets/settings/deprecation-warnings';
+@import 'bourbon/app/assets/stylesheets/settings/asset-pipeline';
+@import 'bourbon/app/assets/stylesheets/helpers/directional-values';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeIn';
-// components - end
 
 /**********
 * Elements
 ***********/
-
-// Elements include universal styles, atomic patterns, and css systems. Examples
-// include classes that assign color, modify the display of elements, or set up
-// scaffolding like typography or grid systems. Uitilities will have their own
-// namespace prefixes based on their attributes.
 
 @import 'access-nyc-patterns/src/elements/base/base';
 @import 'access-nyc-patterns/src/elements/animate/animate';
@@ -42,7 +29,8 @@
 @import 'access-nyc-patterns/src/elements/overlay/overlay';
 @import 'access-nyc-patterns/src/elements/forms/forms';
 @import 'access-nyc-patterns/src/elements/labels/labels';
-@import 'access-nyc-patterns/src/elements/buttons/btn';
+@import 'access-nyc-patterns/src/elements/buttons/buttons';
+@import 'access-nyc-patterns/src/elements/icons/icons';
 @import 'access-nyc-patterns/src/elements/checkboxes/checkboxes';
 @import 'access-nyc-patterns/src/elements/radios/radios';
 @import 'access-nyc-patterns/src/elements/toggles/toggles';
@@ -53,16 +41,10 @@
 @import 'access-nyc-patterns/src/elements/program-labels/program-labels';
 @import 'access-nyc-patterns/src/elements/inputs/inputs';
 @import 'access-nyc-patterns/src/elements/lists/lists';
-// elements - end
 
 /*************
  * Components
  *************/
-
-// Components are elements that require isolated styling. Examples include buttons,
-// textfields, select boxes, grouped navigation, dropdowns, etc. They may include
-// utilities within them. Not all components are required for each application.
-// Component namespaces are prefixed with 'c-'.
 
 @import 'access-nyc-patterns/src/components/accordion/accordion';
 @import 'access-nyc-patterns/src/components/alert-box/alert-box';
@@ -78,16 +60,10 @@
 @import 'access-nyc-patterns/src/components/share-form/share-form';
 @import 'access-nyc-patterns/src/components/member-list/member-list';
 @import 'access-nyc-patterns/src/components/nearby-stops/nearby-stops';
-// components - end
 
 /**********
  * Objects
  **********/
-
-// Objects are elements with more robust styling requirements. They may include
-// Components and utilities within them. Examples include headers, footers, modals,
-// sliders, and charts. Not all Objects are required for each application and some
-// will require their own Objects. Object namespaces are prefixed with 'o-'.
 
 @import 'access-nyc-patterns/src/objects/content/content';
 @import 'access-nyc-patterns/src/objects/navigation/navigation';
@@ -95,7 +71,6 @@
 @import 'access-nyc-patterns/src/objects/banner/banner';
 @import 'access-nyc-patterns/src/objects/search-box/search-box';
 @import 'access-nyc-patterns/src/objects/footer/footer';
-// objects - end
 
 /***********
 * Utilities
@@ -103,7 +78,6 @@
 
 @import 'access-nyc-patterns/src/utilities/color';
 @import 'access-nyc-patterns/src/utilities/font';
-@import 'access-nyc-patterns/src/utilities/icons/icons';
 @import 'access-nyc-patterns/src/utilities/typography/typography';
 @import 'access-nyc-patterns/src/utilities/accessibility';
 @import 'access-nyc-patterns/src/utilities/inherit';

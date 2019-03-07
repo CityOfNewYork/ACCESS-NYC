@@ -44,7 +44,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     let element = $(event.currentTarget);
     // Shows/hides the mobile nav and overlay.
     event.preventDefault();
-    $('body').toggleClass('active:overlay');
+    $('body').toggleClass('overlay active:overlay');
     $(element.attr('href')).toggleClass('active:o-mobile-nav');
   }).on('click', '.js-toggle-search', (e) => {
     // Shows/hides the search drawer in the main nav.

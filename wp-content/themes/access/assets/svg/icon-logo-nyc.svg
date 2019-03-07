@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 350 117" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+  <g fill="currentColor" fill-rule="nonzero">
+    <path d="M327.9,0l-72.9,0l-21.8,21.9l0,72.8l21.8,21.9l72.9,0l21.8,-21.9l0,-21.8l-7.2,-7.3l-36.5,0l0,7.3l-29.1,0l0,-29.2l29.1,0l0,7.2l36.5,0l7.2,-7.2l0,-21.8l-21.8,-21.9Z"/>
+    <path d="M109.3,0l-29.2,0l-7.2,7.3l0,29.1l-36.5,-36.4l-29.1,0l-7.3,7.3l0,102l7.3,7.3l29.1,0l7.3,-7.3l0,-29.2l36.4,36.5l29.2,0l7.3,-7.3l0,-102l-7.3,-7.3Z"/>
+    <path d="M160.3,116.6l29.1,0l7.3,-7.3l0,-21.9l36.5,-36.4l0,-43.7l-7.3,-7.3l-29.2,0l-7.3,7.3l0,14.6l-14.5,14.5l-14.6,-14.5l0,-14.6l-7.3,-7.3l-29.1,0l-7.3,7.3l0,43.7l36.4,36.4l0,21.9l7.3,7.3Z"/>
+  </g>
+</svg>

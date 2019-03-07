@@ -21,17 +21,19 @@
         {% endif %}
       </div>
 
-      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="page" v-for="page in posts" v-if="page.show">
-        <c-card v-for="post in page.posts" :key="post.id" v-bind="post" taxonomy="programs" v-if="page.show"></c-card>
+      <div class="px-3 pt-3 bg-color-grey-lightest">
+        <div class="bg-color-grey-lightest layout--gutter pb-3" v-for="page in posts" v-if="page &&page.show">
+          <c-card v-for="post in page.posts" :key="post.id" v-bind="post" taxonomy="programs" v-if="page.show"></c-card>
 
-        <div v-if="!page.posts.length && page.show">
-          Loading...
-          {% include 'partials/spinner.twig' %}
-        </div>
-        <div v-else="page.show">
-          <a class="btn btn-secondary btn-small screen-tablet:btn-normal btn-next mb-1 screen-mobile:mb-0" href="{{ pagination.next.link }}" v-on:click="paginate" data-amount="1" v-if="next">{{__('Next', 'accessnyctheme')}}</a>
+          <div class="flex items-center" v-if="!page.posts.length && page.show">
+            {% include 'partials/spinner.twig' %}
+            Loading...
+          </div>
         </div>
       </div>
+
+      <a class="btn btn-secondary btn-small screen-tablet:btn-normal btn-next mt-3 mb-1 screen-mobile:mb-0" href="{{ pagination.next.link }}" v-on:click="paginate" data-amount="1" v-if="next">{{__('More Programs', 'accessnyctheme')}}</a>
+
     </div>
   </div>
 

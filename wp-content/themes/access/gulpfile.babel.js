@@ -246,12 +246,12 @@ gulp.task('clean', ['clean (scripts)', 'clean (styles)']);
 /**
  * Images
  */
-gulp.task('images', () =>
+gulp.task('images', () => {
   gulp.src([
       `${PATTERNS_SRC}/images/**/*.jpg`,
       `${PATTERNS_SRC}/images/**/*.png`,
-      `${PATTERNS_SRC}/images/**/*.gif`,
-      `${PATTERNS_SRC}/images/**/*.svg`
+      `${PATTERNS_SRC}/images/**/*.ico`,
+      `${PATTERNS_SRC}/images/**/*.gif`
     ])
     .pipe($.cache($.imagemin({
       optimizationLevel: 5,
@@ -260,7 +260,13 @@ gulp.task('images', () =>
     })))
     .pipe(gulp.dest(`${DIST}/img`))
     .pipe($.notify({ message: 'Images task complete' }))
-);
+
+  gulp.src([
+      `${PATTERNS_SRC}/svg/**/*.svg`
+    ])
+    .pipe(gulp.dest(`${DIST}/svg`))
+    .pipe($.notify({ message: 'Images task complete' }))
+});
 
 /**
  * SVG Sprite
