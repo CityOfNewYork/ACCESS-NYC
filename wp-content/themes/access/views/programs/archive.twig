@@ -1,18 +1,25 @@
 {% extends "base.twig" %}
 
 {% block content %}
-<main class="bg-color-white pb-4" id="content">
+<main class="bg-color-white pb-3" id="content">
   <header class="usa-grid py-4 my-1">
     <h1 class="text-color-blue-dark">{% if category | length %}{{__('Programs', 'accessnyctheme')}}: {{ category.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
   </header>
 
   <div class="usa-grid screen-desktop:layout--sidebar-small-gutter" data-js="programs" data-js-page="{{ pagination.current }}">
-    <aside>
+    <aside id="filter-programs">
       <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
       <c-filter-multi v-bind:terms="terms" v-on:fetch="click($event)" v-on:reset="click($event)"></c-filter-multi>
+
+      <div class="sticky pin-b pb-2 text-center screen-desktop:hidden">
+        <a v-if="!loading" class="btn btn-small btn-primary" href="#see-programs">
+          <span v-html="'See ' + headers.total + ' Programs'">See Programs</span>
+        </a>
+        <a v-else class="btn btn-small w-full">Loading</a>
+      </div>
     </aside>
 
-    <div>
+    <div id="see-programs" class="pt-3 screen-desktop:pt-0">
       <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="!init">
         {% if page.term_id | length %}
           {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
@@ -21,25 +28,33 @@
         {% endif %}
       </div>
 
-      <div class="px-3 pt-3 bg-color-grey-lightest">
-        <div class="bg-color-grey-lightest layout--gutter pb-3" v-for="page in posts" v-if="page &&page.show">
+      <div class="px-3 pt-3 mb-2 bg-color-grey-lightest items-center" v-if="!loading">
+        <div class="layout--gutter pb-3" v-for="page in posts" v-if="page && page.show">
           <c-card v-for="post in page.posts" :key="post.id" v-bind="post" taxonomy="programs" v-if="page.show"></c-card>
-
-          <div class="flex items-center" v-if="!page.posts.length && page.show">
-            {% include 'partials/spinner.twig' %}
-            Loading...
-          </div>
         </div>
       </div>
 
-      <a class="btn btn-secondary btn-small screen-tablet:btn-normal btn-next mt-3 mb-1 screen-mobile:mb-0" href="{{ pagination.next.link }}" v-on:click="paginate" data-amount="1" v-if="next">{{__('More Programs', 'accessnyctheme')}}</a>
+      <div class="min-h-full flex items-center justify-center" v-if="loading">
+        <div class="sticky pin-t pin-b flex items-center justify-center py-4">
+          {% include 'partials/spinner.twig' %}
 
+          {{ __('Loading', 'accessnyctheme') }}
+        </div>
+      </div>
+
+      <div class="pb-2 text-center screen-desktop:text-left">
+        <a class="btn btn-secondary btn-small screen-tablet:btn-normal" href="{{ pagination.next.link }}" v-on:click="paginate" v-if="next" data-amount="1">
+          {{__('See More Results', 'accessnyctheme')}}
+        </a>
+      </div>
+
+      <div class="sticky pin-b pb-2 text-center screen-desktop:hidden">
+        <a class="btn btn-small btn-primary" href="#filter-programs">
+          Filter Programs
+        </a>
+      </div>
     </div>
   </div>
-
-  {# <footer class="content-footer usa-width-one-whole"> #}
-    {# {% include 'partials/was-this-page-helpful.twig' %} #}
-  {# </footer> #}
 </main>
 {% endblock %}
 
@@ -73,7 +88,7 @@
       'name': {type: String},
       'slug': {type: String},
       'filters': {type: Array},
-      'busy': {type: Boolean},
+      'active': {type: Boolean},
       'STRINGS': {
         type: Object,
         default: () => ({
@@ -83,7 +98,7 @@
     },
     data: function() {
       return {
-        active: this.name
+        current: this.name
       };
     },
     methods: {
@@ -102,8 +117,8 @@
     },
     template:
       `<div class="c-filter" data-js="filter">
-        <a v-bind:href="'#' + slug" class="c-filter__header" data-js="filter" v-html="active">
-          v{ active }
+        <a v-bind:href="'#' + slug" class="c-filter__header" data-js="filter" v-html="current">
+          v{ current }
         </a>
         <ul v-bind:id="slug" class="c-filter__list">
           <li>
@@ -124,7 +139,7 @@
     delimiters: ['v{', '}'],
     props: {
       'terms': {type: Array},
-      'busy': {type: Boolean},
+      'active': {type: Boolean},
       'STRINGS': {
         type: Object,
         default: () => ({
@@ -155,12 +170,12 @@
                 <input data-toggles="#" type="checkbox" :checked="t.checked" v-on:change="fetch({'event': $event, 'data': {'parent': t.slug}})" />
                 <span class="checkbox__label">v{ t.name }</span>
               </label>
-              <a class="c-filter-multi__item-header-toggle active" data-js="filter" v-bind:href="'#' + t.slug">
+              <a v-bind:class="{'c-filter-multi__item-header-toggle': true, 'active': active, 'inactive': !(active)}" class="c-filter-multi__item-header-toggle active" data-js="filter" v-bind:href="'#' + t.slug">
                 <span class="c-filter-multi__item-header-expand">Expand category</span>
                 <span class="c-filter-multi__item-header-collapse">Collapse category</span>
               </a>
             </div>
-            <div aria-hidden="false" class="c-filter-multi__item-group active" v-bind:id="t.slug">
+            <div v-bind:aria-hidden="!(active)" v-bind:class="{'c-filter-multi__item-group': true, 'active': active, 'inactive': !(active)}" v-bind:id="t.slug">
               <ul class="c-filter-multi__item-group-list">
                 <li class="c-filter-multi__item-group-subitem" v-for="f in t.filters">
                   <label class="checkbox">
@@ -242,7 +257,6 @@
         terms: '/wp-json/api/v1/terms',
         programs: '/wp-json/wp/v2/programs'
       },
-      busy: true,
       init: false,
       abort: new AbortController,
       maps: function() {
@@ -285,8 +299,18 @@
       }
     },
     computed: {
+      loading: function() {
+        let number = this.query.page;
+        if (!this.posts.length) return false;
+        let page = this.posts[number];
+        return !page.posts.length && page.show;
+      },
       next: function() {
-        return (this.query.page < this.headers.pages);
+        let number = this.query.page;
+        let total = this.headers.pages;
+        if (!this.posts.length) return false;
+        let page = this.posts[number];
+        return (number < total) && (page.posts.length && page.show);
       },
       previous: function() {
         return (this.query.page > 1);
@@ -310,7 +334,6 @@
           fetch(this.lang.path + this.endpoints[data])
             .then(response => response.json())
             .then(d => {
-              Vue.set(this, 'busy', false);
               Vue.set(this, data, d.map(this.maps().filters))
             });
       },
@@ -461,8 +484,6 @@
         })();
       },
       wpQuery: function(query) {
-        Vue.set(this, 'busy', true);
-
         Vue.set(this, 'abort', (new AbortController));
         let signal = this.abort.signal;
         let url = `${this.lang.path}${this.endpoints.programs}`;
@@ -518,25 +539,14 @@
         if (!Array.isArray(data))
           this.error({error: data, query: query});
 
-        Vue.set(this, 'busy', false);
         Vue.set(this, 'init', true);
       },
       error: function(response) {
-        // If there are no posts for the current page, requeue from the first page.
-        // let noPosts = (response.error.code === 'rest_post_invalid_page_number');
-        // let forCurrentPage = (response.query.page === this.query.page);
-
-        // if (noPosts && forCurrentPage) {
-        //   Vue.set(this.query, 'page', 1);
-        //   this.wp();
-        // }
         console.dir(response);
-        Vue.set(this, 'busy', false);
       }
     },
     created: function() {
       this.queue();
-
       this.fetch('terms')
         .catch(this.error);
     }
