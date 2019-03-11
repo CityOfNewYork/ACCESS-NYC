@@ -3,23 +3,26 @@
 {% block content %}
 <main class="bg-color-white pb-3" id="content">
   <header class="usa-grid py-4 my-1">
-    <h1 class="text-color-blue-dark">{% if category | length %}{{__('Programs', 'accessnyctheme')}}: {{ category.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
+    <h1 class="text-color-blue-dark mb-0">{% if category | length %}{{__('Programs', 'accessnyctheme')}}: {{ category.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
   </header>
 
   <div class="usa-grid screen-desktop:layout--sidebar-small-gutter" data-js="programs" data-js-page="{{ pagination.current }}">
     <aside id="filter-programs">
-      <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
-      <c-filter-multi v-bind:terms="terms" v-on:fetch="click($event)" v-on:reset="click($event)"></c-filter-multi>
+      <h2 class="type-h4 mb-0 hidden screen-desktop:inline-block">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
+      <span class="text-font-size-small screen-desktop:hidden">{{__('Filter Programs', 'accessnyctheme')}}</span>
 
-      <div class="sticky pin-b pb-2 text-center screen-desktop:hidden">
+      <c-filter-multi v-bind:terms="terms" v-on:fetch="click" v-on:reset="click"></c-filter-multi>
+
+      <div class="sticky pin-b pb-2 text-center screen-desktop:hidden" v-if="filtering">
         <a v-if="!loading" class="btn btn-small btn-primary" href="#see-programs">
-          <span v-html="'See ' + headers.total + ' Programs'">See Programs</span>
+          <span v-html="'See ' + headers.total + ' Programs'">{{ __('See Programs', 'accessnyctheme') }}</span>
         </a>
-        <a v-else class="btn btn-small w-full">Loading</a>
+
+        <a v-else class="btn btn-small btn-primary">{{ __('Loading', 'accessnyctheme') }}</a>
       </div>
     </aside>
 
-    <div id="see-programs" class="pt-3 screen-desktop:pt-0">
+    <div id="see-programs" class="pt-2 screen-desktop:pt-0">
       <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="!init">
         {% if page.term_id | length %}
           {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
@@ -44,13 +47,13 @@
 
       <div class="pb-2 text-center screen-desktop:text-left">
         <a class="btn btn-secondary btn-small screen-tablet:btn-normal" href="{{ pagination.next.link }}" v-on:click="paginate" v-if="next" data-amount="1">
-          {{__('See More Results', 'accessnyctheme')}}
+          {{ __('See More Results', 'accessnyctheme') }}
         </a>
       </div>
 
       <div class="sticky pin-b pb-2 text-center screen-desktop:hidden">
         <a class="btn btn-small btn-primary" href="#filter-programs">
-          Filter Programs
+          {{__('Filter Programs', 'accessnyctheme')}}
         </a>
       </div>
     </div>
@@ -103,7 +106,6 @@
     },
     methods: {
       fetch: function(event) {
-        Vue.set(this, 'active', event.data.name);
         this.$emit('fetch', event);
         return this;
       },
@@ -117,7 +119,7 @@
     },
     template:
       `<div class="c-filter" data-js="filter">
-        <a v-bind:href="'#' + slug" class="c-filter__header" data-js="filter" v-html="current">
+        <a v-bind:href="'#' + slug" class="c-filter__header" v-html="current" data-js="filter">
           v{ current }
         </a>
         <ul v-bind:id="slug" class="c-filter__list">
@@ -159,6 +161,11 @@
           data: this
         });
         return this;
+      },
+      toggle: function(event, terms) {
+        event.preventDefault();
+        Vue.set(terms, 'active', !terms.active);
+        return this;
       }
     },
     template:
@@ -170,12 +177,12 @@
                 <input data-toggles="#" type="checkbox" :checked="t.checked" v-on:change="fetch({'event': $event, 'data': {'parent': t.slug}})" />
                 <span class="checkbox__label">v{ t.name }</span>
               </label>
-              <a v-bind:class="{'c-filter-multi__item-header-toggle': true, 'active': active, 'inactive': !(active)}" class="c-filter-multi__item-header-toggle active" data-js="filter" v-bind:href="'#' + t.slug">
+              <a v-bind:class="{'active': t.active, 'inactive': !(t.active)}" class="c-filter-multi__item-header-toggle" v-bind:href="'#' + t.slug" v-on:click="toggle($event, t)">
                 <span class="c-filter-multi__item-header-expand">Expand category</span>
                 <span class="c-filter-multi__item-header-collapse">Collapse category</span>
               </a>
             </div>
-            <div v-bind:aria-hidden="!(active)" v-bind:class="{'c-filter-multi__item-group': true, 'active': active, 'inactive': !(active)}" v-bind:id="t.slug">
+            <div v-bind:aria-hidden="!(t.active)" v-bind:class="{'active': t.active, 'inactive': !(t.active)}" class="c-filter-multi__item-group" v-bind:id="t.slug">
               <ul class="c-filter-multi__item-group-list">
                 <li class="c-filter-multi__item-group-subitem" v-for="f in t.filters">
                   <label class="checkbox">
@@ -262,6 +269,7 @@
       maps: function() {
         return {
           filters: (filter) => ({
+            'active': false,
             'name': filter.labels.archives,
             'slug': filter.name,
             'filters': filter.terms.map(f => ({
@@ -314,6 +322,9 @@
       },
       previous: function() {
         return (this.query.page > 1);
+      },
+      filtering: function() {
+        return (this.terms.find(t => t.active)) ? true : false;
       },
       lang: () => {
         let lang = document.querySelector('html').lang;
