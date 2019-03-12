@@ -95,7 +95,9 @@
             </div>
           </div>
           <div class="flex justify-center">
-            {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
+            <div data-js="spinner" style="display: none;">
+              {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
+            </div>
           </div>
         </div>
       </form>
@@ -123,7 +125,9 @@
                   </div>
                   <div class="c-share-form__button">
                     <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
-                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
+                    <div class="c-share-form__spinner" data-js="spinner" style="display: none;">
+                      {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
+                    </div>
                     <div class="success-message">{{__('Sent!', translationID)}}</div>
                   </div>
                 </div>
@@ -145,7 +149,9 @@
                   <input type="email" name="to" placeholder="{{__('Email address', translationID)}}" required>
                   <div class="c-share-form__button">
                     <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
-                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
+                    <div class="c-share-form__spinner" data-js="spinner" style="display: none;">
+                      {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
+                    </div>
                     <div class="success-message">{{__('Sent!', translationID)}}</div>
                   </div>
                 </div>

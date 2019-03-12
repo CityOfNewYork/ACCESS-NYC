@@ -256,7 +256,7 @@ ResultsField.Selectors = {
   'SHARE_HASH': 'input[name="hash"]',
   'SHARE_PROGRAMS': 'input[name="programs"]',
   'SHARE_RESULTS': '[data-js="share-results"]',
-  'SPINNER': '.js-spinner',
+  'SPINNER': '[data-js="spinner"]',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
   'PROGRAMS_TOTAL': '[data-js="programs-total"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',

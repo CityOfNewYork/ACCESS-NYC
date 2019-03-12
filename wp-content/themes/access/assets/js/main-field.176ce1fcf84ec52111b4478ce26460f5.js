@@ -34602,7 +34602,7 @@ ResultsField.Selectors = {
   'SHARE_HASH': 'input[name="hash"]',
   'SHARE_PROGRAMS': 'input[name="programs"]',
   'SHARE_RESULTS': '[data-js="share-results"]',
-  'SPINNER': '.js-spinner',
+  'SPINNER': '[data-js="spinner"]',
   'SELECTED_PROGRAMS': '[data-js="selected-programs"]',
   'PROGRAMS_TOTAL': '[data-js="programs-total"]',
   'PROGRAMS_LENGTH': '[data-js="programs-length"]',
@@ -38076,7 +38076,7 @@ ShareForm = function () {
 
       var $tel = this._el.querySelector('input[type="tel"]'); // get phone number
       var $submit = this._el.querySelector('button[type="submit"]');
-      var $spinner = this._el.querySelector('.' + ShareForm.CssClass.SPINNER);
+      var $spinner = this._el.querySelector(ShareForm.CssClass.SPINNER);
       var $inputs = (0, _jquery2.default)(this._el).find('input');
       var type = 'email';
 
@@ -38179,13 +38179,13 @@ ShareForm.CssClass = {
   NEEDS_DISCLAIMER: 'js-needs-disclaimer',
   SUBMIT_BTN: 'btn-submit',
   SUCCESS: 'success',
-  SPINNER: 'js-spinner' };
+  SPINNER: '[data-js="spinner"]' };
 
 
 /**
-                            * Localization labels of form messages.
-                            * @enum {string}
-                            */
+                                     * Localization labels of form messages.
+                                     * @enum {string}
+                                     */
 ShareForm.Message = {
   EMAIL: 'ERROR_EMAIL',
   INVALID: 'ERROR_INVALID',
@@ -38896,4 +38896,4 @@ module.exports={
 
 },{}]},{},[12])
 
-//# sourceMappingURL=main-field.81a08a81b781c59e7765e4bcee23dfbf.js.map
+//# sourceMappingURL=main-field.176ce1fcf84ec52111b4478ce26460f5.js.map

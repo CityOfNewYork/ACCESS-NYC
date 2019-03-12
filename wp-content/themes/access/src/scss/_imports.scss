@@ -14,7 +14,7 @@ $path-to-images: 'img/';
 @import 'bourbon/app/assets/stylesheets/settings/asset-pipeline';
 @import 'bourbon/app/assets/stylesheets/helpers/directional-values';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
-@import 'animate.scss/vendor/assets/stylesheets/animate/fadeIn';
+@import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUpBig';
 
 /**********
 * Elements
@@ -31,6 +31,7 @@ $path-to-images: 'img/';
 @import 'access-nyc-patterns/src/elements/labels/labels';
 @import 'access-nyc-patterns/src/elements/buttons/buttons';
 @import 'access-nyc-patterns/src/elements/icons/icons';
+@import 'access-nyc-patterns/src/elements/spinner/spinner';
 @import 'access-nyc-patterns/src/elements/checkboxes/checkboxes';
 @import 'access-nyc-patterns/src/elements/radios/radios';
 @import 'access-nyc-patterns/src/elements/toggles/toggles';

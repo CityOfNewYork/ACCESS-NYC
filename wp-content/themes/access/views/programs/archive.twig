@@ -9,16 +9,25 @@
   <div class="usa-grid screen-desktop:layout--sidebar-small-gutter" data-js="programs" data-js-page="{{ pagination.current }}">
     <aside id="filter-programs">
       <h2 class="type-h4 mb-0 hidden screen-desktop:inline-block">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
+
       <span class="text-font-size-small screen-desktop:hidden">{{__('Filter Programs', 'accessnyctheme')}}</span>
 
-      <c-filter-multi v-bind:terms="terms" v-on:fetch="click" v-on:reset="click"></c-filter-multi>
+      <div class="flex items-center justify-center py-4" v-if="!init">
+        {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
+        &nbsp;&nbsp;
+        {{ __('Getting Filters', 'accessnyctheme') }}
+      </div>
 
-      <div class="sticky pin-b pb-2 text-center screen-desktop:hidden" v-if="filtering">
-        <a v-if="!loading" class="btn btn-small btn-primary" href="#see-programs">
-          <span v-html="'See ' + headers.total + ' Programs'">{{ __('See Programs', 'accessnyctheme') }}</span>
-        </a>
+      <div class="hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
+        <c-filter-multi v-bind:terms="terms" v-on:fetch="click" v-on:reset="click"></c-filter-multi>
 
-        <a v-else class="btn btn-small btn-primary">{{ __('Loading', 'accessnyctheme') }}</a>
+        <div class="sticky pin-b pb-2 text-center screen-desktop:hidden animated fadeInUpBig" v-if="filtering">
+          <a class="btn btn-small btn-primary" href="#see-programs">
+            <span v-if="none">{{ __('No Results', 'accessnyctheme') }}</span>
+            <span v-else-if="!loading" v-html="'See ' + headers.total + ' Programs'">{{ __('See Programs', 'accessnyctheme') }}</span>
+            <span v-else>{{ __('Loading', 'accessnyctheme') }}</span>
+          </a>
+        </div>
       </div>
     </aside>
 
@@ -31,30 +40,38 @@
         {% endif %}
       </div>
 
-      <div class="px-3 pt-3 mb-2 bg-color-grey-lightest items-center" v-if="!loading">
-        <div class="layout--gutter pb-3" v-for="page in posts" v-if="page && page.show">
-          <c-card v-for="post in page.posts" :key="post.id" v-bind="post" taxonomy="programs" v-if="page.show"></c-card>
+      <div class="h-full hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
+        <div class="px-3 pt-3 mb-2 bg-color-grey-lightest items-center" v-if="!loading">
+          <div class="layout--gutter pb-3" v-for="page in posts" v-if="page && page.show">
+            <c-card v-for="post in page.posts" :key="post.id" v-bind="post" taxonomy="programs" v-if="page.show"></c-card>
+          </div>
         </div>
-      </div>
-
-      <div class="min-h-full flex items-center justify-center" v-if="loading">
-        <div class="sticky pin-t pin-b flex items-center justify-center py-4">
-          {% include 'partials/spinner.twig' %}
-
-          {{ __('Loading', 'accessnyctheme') }}
+        <div class="min-h-full flex items-center justify-center" v-if="none">
+          <div class="sticky pin-t pin-b flex items-center justify-center py-4">
+            <p>
+              {{ __('There are no results for the selected filters.', 'accessnyctheme') }}
+              <a href="#filter-programs">{{ __('Try deselecting some filters', 'accessnyctheme') }}</a>.
+            </p>
+          </div>
         </div>
-      </div>
+        <div class="min-h-full flex items-center justify-center" v-else-if="loading">
+          <div class="sticky pin-t pin-b flex items-center justify-center py-4">
+            {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
+            &nbsp;&nbsp;
+            {{ __('Loading', 'accessnyctheme') }}
+          </div>
+        </div>
 
-      <div class="pb-2 text-center screen-desktop:text-left">
-        <a class="btn btn-secondary btn-small screen-tablet:btn-normal" href="{{ pagination.next.link }}" v-on:click="paginate" v-if="next" data-amount="1">
-          {{ __('See More Results', 'accessnyctheme') }}
-        </a>
-      </div>
-
-      <div class="sticky pin-b pb-2 text-center screen-desktop:hidden">
-        <a class="btn btn-small btn-primary" href="#filter-programs">
-          {{__('Filter Programs', 'accessnyctheme')}}
-        </a>
+        <div class="text-center screen-desktop:text-left" v-if="!loading">
+          <a class="btn btn-secondary btn-small screen-tablet:btn-normal" href="{{ pagination.next.link }}" v-on:click="paginate" v-if="next" data-amount="1">
+            {{ __('See More Results', 'accessnyctheme') }}
+          </a>
+        </div>
+        <div class="sticky pin-b py-2 text-center screen-desktop:hidden" v-if="!loading">
+          <a class="btn btn-small btn-primary" href="#filter-programs">
+            {{__('Filter Programs', 'accessnyctheme')}}
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -308,10 +325,12 @@
     },
     computed: {
       loading: function() {
-        let number = this.query.page;
         if (!this.posts.length) return false;
-        let page = this.posts[number];
-        return !page.posts.length && page.show;
+        let page = this.posts[this.query.page];
+        return this.init && !page.posts.length && page.show;
+      },
+      none: function() {
+        return !this.headers.pages && !this.headers.total;
       },
       next: function() {
         let number = this.query.page;
@@ -324,6 +343,7 @@
         return (this.query.page > 1);
       },
       filtering: function() {
+        if (!this.init) return false;
         return (this.terms.find(t => t.active)) ? true : false;
       },
       lang: () => {

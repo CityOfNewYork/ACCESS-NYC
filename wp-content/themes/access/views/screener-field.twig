@@ -416,7 +416,7 @@
                   {{ __('Yes, continue to my results', translationID) }}
                 </button>
                 <div v-else class="py-2 flex content-center justify-center">
-                  {% include 'partials/spinner.twig' %}
+                  {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
                 </div>
               </div>
             </div>

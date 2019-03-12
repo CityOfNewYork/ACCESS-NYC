@@ -174,7 +174,7 @@ class ShareForm {
 
     let $tel = this._el.querySelector('input[type="tel"]'); // get phone number
     let $submit = this._el.querySelector('button[type="submit"]');
-    let $spinner = this._el.querySelector(`.${ShareForm.CssClass.SPINNER}`);
+    let $spinner = this._el.querySelector(ShareForm.CssClass.SPINNER);
     let $inputs = $(this._el).find('input');
     let type = 'email';
 
@@ -277,7 +277,7 @@ ShareForm.CssClass = {
   NEEDS_DISCLAIMER: 'js-needs-disclaimer',
   SUBMIT_BTN: 'btn-submit',
   SUCCESS: 'success',
-  SPINNER: 'js-spinner'
+  SPINNER: '[data-js="spinner"]'
 };
 
 /**
