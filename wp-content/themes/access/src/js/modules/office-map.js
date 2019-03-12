@@ -57,7 +57,8 @@ class OfficeMap {
     });
 
     /** @private {google.maps.places.SearchBox} Search box controller. */
-    this._searchBox = new google.maps.places.SearchBox(this._searchEl);
+    this._searchBox = new google.maps.places
+        .SearchBox(this._searchEl, {offset: 3});
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
