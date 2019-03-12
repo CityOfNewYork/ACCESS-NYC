@@ -196,20 +196,6 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     });
   }
 
-  if ($maps.length > 0) {
-    const options = {
-      key: Utility.CONFIG.GOOGLE_API,
-      libraries: 'geometry,places'
-    };
-
-    google.load('maps', '3', {
-      /* eslint-disable camelcase */
-      other_params: $.param(options),
-      /* eslint-enable camelcase */
-      callback: initializeMaps
-    });
-  }
-
   // Initialize simple maps.
   $('.js-static-map').each((i, el) => {
     const staticMap = new StaticMap(el);

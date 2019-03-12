@@ -60,7 +60,8 @@
 
 {% block scripts_footer %}
 {{ function('enqueue_script', 'assets/js/main', '.min') }}
-<script src="https://www.google.com/jsapi"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=${Utility.CONFIG.GOOLE_API}&callback=initializeMaps&libraries=geometry,places"
+    async defer></script>
 <script>
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([{% for filter in filters %}{% for program in filter.programs %}
