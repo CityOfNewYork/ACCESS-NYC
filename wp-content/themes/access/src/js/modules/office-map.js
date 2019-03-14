@@ -7,8 +7,6 @@ import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
 import _ from 'underscore';
 
-const google = window.google;
-
 /**
  * This is the main controller for the map at the /locations page. This handles
  * rendering the Google map, fetching location details, placing markers, and
@@ -23,6 +21,9 @@ class OfficeMap {
   constructor(el) {
     /** @private {HTMLElement} The component element. */
     this._el = el;
+
+    /**  {?this._google} The google map object. */
+    this._google = window.google;
 
     /** @private {HTMLElement} The map element. */
     this._mapEl = $(el).find(`.${OfficeMap.CssClass.MAP_BOX}`)[0];
@@ -42,22 +43,22 @@ class OfficeMap {
     /** @private {boolean} Whether the map has been initialized. */
     this._initialized = false;
 
-    /** @private {google.maps.LatLng} Map position. */
+    /** @private {this._google.maps.LatLng} Map position. */
     this._mapPosition = Utility.getUrlParameter('lat') &&
         Utility.getUrlParameter('lng') ?
-        new google.maps.LatLng(parseFloat(Utility.getUrlParameter('lat')),
+        new this._google.maps.LatLng(parseFloat(Utility.getUrlParameter('lat')),
             parseFloat(Utility.getUrlParameter('lng'))) :
-        new google.maps.LatLng(Utility.CONFIG.DEFAULT_LAT,
+        new this._google.maps.LatLng(Utility.CONFIG.DEFAULT_LAT,
             Utility.CONFIG.DEFAULT_LNG);
 
-    /** @private {?google.maps.Map} The google map object. */
-    this._map = new google.maps.Map(this._mapEl, {
+    /** @private {?this._google.maps.Map} The google map object. */
+    this._map = new this._google.maps.Map(this._mapEl, {
       zoom: 11,
       center: this._mapPosition
     });
 
-    /** @private {google.maps.places.SearchBox} Search box controller. */
-    this._searchBox = new google.maps.places.SearchBox(this._searchEl);
+    /** @private {this._google.maps.places.SearchBox} Search box controller. */
+    this._searchBox = new this._google.maps.places.SearchBox(this._searchEl);
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
@@ -88,7 +89,7 @@ class OfficeMap {
 
     // Set window resize handler for the map.
     $(window).on('resize', () => {
-      google.maps.event.trigger(this._map, 'resize');
+      this._google.maps.event.trigger(this._map, 'resize');
     });
 
     // Adds handler for highlighting and bouncing a pin when a list item gets
@@ -201,7 +202,7 @@ class OfficeMap {
     return $.getJSON($(this._el).data('source')).then((data) => {
       _.each(data.locations, (item) => {
         const location = new OfficeLocation(item);
-        google.maps.event.addListener(location.marker, 'click', () => {
+        this._google.maps.event.addListener(location.marker, 'click', () => {
           this.focusListOnMarker(location.marker);
         });
         this._locations.push(location);
@@ -269,7 +270,7 @@ class OfficeMap {
   /**
    * Centers the map on the marker and highlights the marker with a bouncing
    * animation.
-   * @param {google.maps.Marker} marker
+   * @param {this._google.maps.Marker} marker
    * @return {this} OfficeMap
    */
   centerOnMarker(marker) {
@@ -282,8 +283,8 @@ class OfficeMap {
     // Bounce the marker once the pan has completed.
     // A single bounce animation is about 700ms, so the animation is set here
     // to last for three bounces (2100ms).
-    google.maps.event.addListenerOnce(this._map, 'idle', () => {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
+    this._google.maps.event.addListenerOnce(this._map, 'idle', () => {
+      marker.setAnimation(this._google.maps.Animation.BOUNCE);
       _.delay(() => {
         marker.setAnimation(null);
       }, 2100);
@@ -297,7 +298,7 @@ class OfficeMap {
    * result list item, scrolling either the page or the result list container
    * to the item as appropraite.
    * @method
-   * @param {google.maps.Marker} marker
+   * @param {this._google.maps.Marker} marker
    * @return {this} OfficeMap
    */
   focusListOnMarker(marker) {
@@ -352,13 +353,13 @@ class OfficeMap {
   /**
    * Sort this._filteredLocations by distance of markers to a given point.
    * @method
-   * @param {google.maps.LatLng} origin
+   * @param {this._google.maps.LatLng} origin
    * @return {this} OfficeMap
    */
   sortByDistance(origin = this._mapPosition) {
     _.each(this._filteredLocations, (location) => {
       location.distance =
-          google.maps.geometry.spherical.computeDistanceBetween(origin,
+          this._google.maps.geometry.spherical.computeDistanceBetween(origin,
               location.marker.position);
     });
     this._filteredLocations = _.sortBy(this._filteredLocations, 'distance');
@@ -397,7 +398,7 @@ class OfficeMap {
    * @return {this} OfficeMap
    */
   fitMapToPins() {
-    const bounds = new google.maps.LatLngBounds();
+    const bounds = new this._google.maps.LatLngBounds();
     _.each(this._filteredLocations, (location) => {
       if (location.active) {
         bounds.extend(location.marker.getPosition());

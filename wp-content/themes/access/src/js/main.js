@@ -19,7 +19,6 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 (function(window, $) {
   'use strict';
 
-  const google = window.google;
 
   Utility.configErrorTracking(window);
 
@@ -189,12 +188,13 @@ import Newsletter from 'objects/newsletter/newsletter.common';
   /**
    * Callback function for loading the Google maps library.
    */
-  function initializeMaps() {
+
+  window.initializeMaps = () => {
     $maps.each((i, el) => {
       const map = new OfficeMap(el);
       map.init();
     });
-  }
+  };
 
   // Initialize simple maps.
   $('.js-static-map').each((i, el) => {

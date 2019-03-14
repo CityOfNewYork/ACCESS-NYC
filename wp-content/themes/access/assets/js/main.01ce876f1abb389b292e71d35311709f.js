@@ -17980,7 +17980,6 @@ var _newsletter = require('objects/newsletter/newsletter.common');var _newslette
 (function (window, $) {
   'use strict';
 
-  var google = window.google;
 
   _utility2.default.configErrorTracking(window);
 
@@ -18150,26 +18149,13 @@ var _newsletter = require('objects/newsletter/newsletter.common');var _newslette
   /**
                              * Callback function for loading the Google maps library.
                              */
-  function initializeMaps() {
+
+  window.initializeMaps = function () {
     $maps.each(function (i, el) {
       var map = new _officeMap2.default(el);
       map.init();
     });
-  }
-
-  if ($maps.length > 0) {
-    var options = {
-      key: _utility2.default.CONFIG.GOOGLE_API,
-      libraries: 'geometry,places' };
-
-
-    google.load('maps', '3', {
-      /* eslint-disable camelcase */
-      other_params: $.param(options),
-      /* eslint-enable camelcase */
-      callback: initializeMaps });
-
-  }
+  };
 
   // Initialize simple maps.
   $('.js-static-map').each(function (i, el) {
@@ -18423,19 +18409,19 @@ OfficeFilter;
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
 var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
 
-var google = window.google;
-
 /**
-                             * OfficeLocation objects are used by the OfficeMap and help normalize the
-                             * JSON data that is passed from the WP API.
-                             * @class
-                             */var
+                                                                                                                                                                                                                                                                                                                                                   * OfficeLocation objects are used by the OfficeMap and help normalize the
+                                                                                                                                                                                                                                                                                                                                                   * JSON data that is passed from the WP API.
+                                                                                                                                                                                                                                                                                                                                                   * @class
+                                                                                                                                                                                                                                                                                                                                                   */var
 OfficeLocation = function () {
   /**
                                * @param {object} obj - a JSON object from the WP api.
                                * @constructor
                                */
   function OfficeLocation(obj) {_classCallCheck(this, OfficeLocation);
+    /**  {?this._google} The google map object. */
+    this._google = window.google;
     // If this is the first time an Office Location is instantiated, define
     // the marker icon element. Blue markers are used by Government Offices.
     // Green is used for all others.
@@ -18443,17 +18429,17 @@ OfficeLocation = function () {
       OfficeLocation.Marker = {
         BLUE: {
           url: _utility2.default.CONFIG.URL_PIN_BLUE_2X,
-          size: new google.maps.Size(65, 80),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(16, 40),
-          scaledSize: new google.maps.Size(33, 40) },
+          size: new this._google.maps.Size(65, 80),
+          origin: new this._google.maps.Point(0, 0),
+          anchor: new this._google.maps.Point(16, 40),
+          scaledSize: new this._google.maps.Size(33, 40) },
 
         GREEN: {
           url: _utility2.default.CONFIG.URL_PIN_GREEN_2X,
-          size: new google.maps.Size(65, 80),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(16, 40),
-          scaledSize: new google.maps.Size(33, 40) } };
+          size: new this._google.maps.Size(65, 80),
+          origin: new this._google.maps.Point(0, 0),
+          anchor: new this._google.maps.Point(16, 40),
+          scaledSize: new this._google.maps.Size(33, 40) } };
 
 
     }
@@ -18479,14 +18465,14 @@ OfficeLocation = function () {
     this.address = {
       street: obj.address.street || '',
       location:
-      new google.maps.LatLng(obj.address.lat, obj.address.lng) };
+      new this._google.maps.LatLng(obj.address.lat, obj.address.lng) };
 
 
     /** {array<Number> A collection of program data. */
     this.programs = obj.programs || [];
 
-    /** {google.maps.Marker} The google marker associated with this office. */
-    this.marker = new google.maps.Marker({
+    /** {this._google.maps.Marker} google marker associated with this office. */
+    this.marker = new this._google.maps.Marker({
       position: this.address.location,
       icon: this.isGovtOffice ? OfficeLocation.Marker.BLUE :
       OfficeLocation.Marker.GREEN,
@@ -18537,14 +18523,12 @@ var _officeLocation = require('modules/office-location');var _officeLocation2 = 
 var _utility = require('modules/utility');var _utility2 = _interopRequireDefault(_utility);
 var _underscore = require('underscore');var _underscore2 = _interopRequireDefault(_underscore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
 
-var google = window.google;
-
 /**
-                             * This is the main controller for the map at the /locations page. This handles
-                             * rendering the Google map, fetching location details, placing markers, and
-                             * any map interactions - like filtering and featuring.
-                             * @class
-                             */var
+                                                                                                                                                                                                                                                                                                                                                   * This is the main controller for the map at the /locations page. This handles
+                                                                                                                                                                                                                                                                                                                                                   * rendering the Google map, fetching location details, placing markers, and
+                                                                                                                                                                                                                                                                                                                                                   * any map interactions - like filtering and featuring.
+                                                                                                                                                                                                                                                                                                                                                   * @class
+                                                                                                                                                                                                                                                                                                                                                   */var
 OfficeMap = function () {
   /**
                           * @param {HTMLElement} el - The html element for the component.
@@ -18553,6 +18537,9 @@ OfficeMap = function () {
   function OfficeMap(el) {_classCallCheck(this, OfficeMap);
     /** @private {HTMLElement} The component element. */
     this._el = el;
+
+    /**  {?this._google} The google map object. */
+    this._google = window.google;
 
     /** @private {HTMLElement} The map element. */
     this._mapEl = (0, _jquery2.default)(el).find('.' + OfficeMap.CssClass.MAP_BOX)[0];
@@ -18572,22 +18559,22 @@ OfficeMap = function () {
     /** @private {boolean} Whether the map has been initialized. */
     this._initialized = false;
 
-    /** @private {google.maps.LatLng} Map position. */
+    /** @private {this._google.maps.LatLng} Map position. */
     this._mapPosition = _utility2.default.getUrlParameter('lat') &&
     _utility2.default.getUrlParameter('lng') ?
-    new google.maps.LatLng(parseFloat(_utility2.default.getUrlParameter('lat')),
+    new this._google.maps.LatLng(parseFloat(_utility2.default.getUrlParameter('lat')),
     parseFloat(_utility2.default.getUrlParameter('lng'))) :
-    new google.maps.LatLng(_utility2.default.CONFIG.DEFAULT_LAT,
+    new this._google.maps.LatLng(_utility2.default.CONFIG.DEFAULT_LAT,
     _utility2.default.CONFIG.DEFAULT_LNG);
 
-    /** @private {?google.maps.Map} The google map object. */
-    this._map = new google.maps.Map(this._mapEl, {
+    /** @private {?this._google.maps.Map} The google map object. */
+    this._map = new this._google.maps.Map(this._mapEl, {
       zoom: 11,
       center: this._mapPosition });
 
 
-    /** @private {google.maps.places.SearchBox} Search box controller. */
-    this._searchBox = new google.maps.places.SearchBox(this._searchEl);
+    /** @private {this._google.maps.places.SearchBox} Search box controller. */
+    this._searchBox = new this._google.maps.places.SearchBox(this._searchEl);
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new _officeFilter2.default(this._filterEl);
@@ -18618,7 +18605,7 @@ OfficeMap = function () {
 
       // Set window resize handler for the map.
       (0, _jquery2.default)(window).on('resize', function () {
-        google.maps.event.trigger(_this._map, 'resize');
+        _this._google.maps.event.trigger(_this._map, 'resize');
       });
 
       // Adds handler for highlighting and bouncing a pin when a list item gets
@@ -18731,7 +18718,7 @@ OfficeMap = function () {
       return _jquery2.default.getJSON((0, _jquery2.default)(this._el).data('source')).then(function (data) {
         _underscore2.default.each(data.locations, function (item) {
           var location = new _officeLocation2.default(item);
-          google.maps.event.addListener(location.marker, 'click', function () {
+          _this2._google.maps.event.addListener(location.marker, 'click', function () {
             _this2.focusListOnMarker(location.marker);
           });
           _this2._locations.push(location);
@@ -18799,10 +18786,10 @@ OfficeMap = function () {
     /**
        * Centers the map on the marker and highlights the marker with a bouncing
        * animation.
-       * @param {google.maps.Marker} marker
+       * @param {this._google.maps.Marker} marker
        * @return {this} OfficeMap
        */ }, { key: 'centerOnMarker', value: function centerOnMarker(
-    marker) {
+    marker) {var _this4 = this;
       if (!marker) {
         return this;
       }
@@ -18812,8 +18799,8 @@ OfficeMap = function () {
       // Bounce the marker once the pan has completed.
       // A single bounce animation is about 700ms, so the animation is set here
       // to last for three bounces (2100ms).
-      google.maps.event.addListenerOnce(this._map, 'idle', function () {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
+      this._google.maps.event.addListenerOnce(this._map, 'idle', function () {
+        marker.setAnimation(_this4._google.maps.Animation.BOUNCE);
         _underscore2.default.delay(function () {
           marker.setAnimation(null);
         }, 2100);
@@ -18827,7 +18814,7 @@ OfficeMap = function () {
        * result list item, scrolling either the page or the result list container
        * to the item as appropraite.
        * @method
-       * @param {google.maps.Marker} marker
+       * @param {this._google.maps.Marker} marker
        * @return {this} OfficeMap
        */ }, { key: 'focusListOnMarker', value: function focusListOnMarker(
     marker) {
@@ -18868,12 +18855,12 @@ OfficeMap = function () {
        * @method
        * @return {this} OfficeMap
        */ }, { key: 'filterLocations', value: function filterLocations()
-    {var _this4 = this;
+    {var _this5 = this;
       this.clearLocations();
       this._filteredLocations = [];
       _underscore2.default.each(this._locations, function (location) {
-        if (!_this4._programs.length || location.hasProgram(_this4._programs)) {
-          _this4._filteredLocations.push(location);
+        if (!_this5._programs.length || location.hasProgram(_this5._programs)) {
+          _this5._filteredLocations.push(location);
         }
       });
       return this;
@@ -18882,13 +18869,13 @@ OfficeMap = function () {
     /**
        * Sort this._filteredLocations by distance of markers to a given point.
        * @method
-       * @param {google.maps.LatLng} origin
+       * @param {this._google.maps.LatLng} origin
        * @return {this} OfficeMap
        */ }, { key: 'sortByDistance', value: function sortByDistance()
-    {var origin = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._mapPosition;
+    {var _this6 = this;var origin = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._mapPosition;
       _underscore2.default.each(this._filteredLocations, function (location) {
         location.distance =
-        google.maps.geometry.spherical.computeDistanceBetween(origin,
+        _this6._google.maps.geometry.spherical.computeDistanceBetween(origin,
         location.marker.position);
       });
       this._filteredLocations = _underscore2.default.sortBy(this._filteredLocations, 'distance');
@@ -18927,7 +18914,7 @@ OfficeMap = function () {
        * @return {this} OfficeMap
        */ }, { key: 'fitMapToPins', value: function fitMapToPins()
     {
-      var bounds = new google.maps.LatLngBounds();
+      var bounds = new this._google.maps.LatLngBounds();
       _underscore2.default.each(this._filteredLocations, function (location) {
         if (location.active) {
           bounds.extend(location.marker.getPosition());
@@ -22280,4 +22267,4 @@ module.exports={
 
 },{}]},{},[12])
 
-//# sourceMappingURL=main.69486acd9b7a583bc16ea4b0c39de7f4.js.map
+//# sourceMappingURL=main.01ce876f1abb389b292e71d35311709f.js.map
