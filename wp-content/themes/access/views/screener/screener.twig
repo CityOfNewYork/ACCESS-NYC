@@ -11,17 +11,17 @@
 {% block content %}
 <main class="main-content screen-desktop:my-2 screen-desktop:mx-4 screen-desktop:px-2" id="content">
   <form class="bg-color-white screen-desktop:border border-color-grey-light screen-desktop:m-4 text-font-size-small js-screener-form" action="/eligibility/results/">
-    {% include 'screener-partials/step-1.twig' with {'categories': categories} %}
-    {% include 'screener-partials/step-2.twig' %}
-    {% include 'screener-partials/step-3.twig' %}
-    {% include 'screener-partials/step-4.twig' %}
-    {% include 'screener-partials/step-5.twig' %}
-    {% include 'screener-partials/step-6.twig' %}
-    {% include 'screener-partials/step-7.twig' %}
-    {% include 'screener-partials/step-8.twig' %}
-    {% include 'screener-partials/step-9.twig' %}
-    {% include 'screener-partials/step-10.twig' %}
-    {% include 'screener-partials/recap.twig' with {'formAction': formAction} %}
+    {% include 'screener/step-1.twig' with {'categories': categories} %}
+    {% include 'screener/step-2.twig' %}
+    {% include 'screener/step-3.twig' %}
+    {% include 'screener/step-4.twig' %}
+    {% include 'screener/step-5.twig' %}
+    {% include 'screener/step-6.twig' %}
+    {% include 'screener/step-7.twig' %}
+    {% include 'screener/step-8.twig' %}
+    {% include 'screener/step-9.twig' %}
+    {% include 'screener/step-10.twig' %}
+    {% include 'screener/recap.twig' with {'formAction': formAction} %}
   </form>
 </main>
 {% endblock %}
@@ -30,28 +30,28 @@
 {{ function('enqueue_script', 'assets/js/main', '.min') }}
 
 <script type="template/html" id="screener-income-template">
-  {% include 'screener-partials/template-income.underscore.twig' %}
+  {% include 'screener/template-income.underscore.twig' %}
 </script>
 
 <script type="template/html" id="screener-expense-template">
-  {% include 'screener-partials/template-expense.underscore.twig' %}
+  {% include 'screener/template-expense.underscore.twig' %}
 </script>
 
 <script type="text/template" id="screener-member-summary-template">
-  {% include 'screener-partials/template-member-summary.underscore.twig' %}
+  {% include 'screener/template-member-summary.underscore.twig' %}
 </script>
 
 <script type="text/template" id="screener-member-template">
-  {% include 'screener-partials/template-member.underscore.twig' %}
+  {% include 'screener/template-member.underscore.twig' %}
 </script>
 
 <script type="text/template" id="screener-member-option-template">
-  {% include 'screener-partials/template-member-option.underscore.twig' %}
+  {% include 'screener/template-member-option.underscore.twig' %}
 </script>
 
 <script type="text/template" id="screener-recap-template">
-  {% include 'screener-partials/template-recap.underscore.twig' %}
+  {% include 'screener/template-recap.underscore.twig' %}
 </script>
 
-{% include 'screener-partials/strings.twig' %}
+{% include 'screener/strings.twig' %}
 {% endblock %}

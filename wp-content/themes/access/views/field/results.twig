@@ -61,7 +61,7 @@
 
       {% if WP_ENV != 'Production' %}
       <div class="screen-tablet:px-4 px-2 screen-tablet:pt-4 pt-2 print:hidden">
-        {% include 'screener-field-partials/alert-environment.twig' %}
+        {% include 'field/alert-environment.twig' %}
       </div>
       {% endif %}
 
@@ -201,7 +201,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/main-field', true) }}
+{{ function('enqueue_script', 'assets/js/field', true) }}
 <script>
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

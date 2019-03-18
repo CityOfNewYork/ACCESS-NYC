@@ -116,15 +116,15 @@
           </label>
 
           {% for question in benefitOptions %}
-          {% include 'screener-field-partials/question-toggles-household-member-details.twig' with {question: question} %}
+          {% include 'field/question-toggles-household-member-details.twig' with {question: question} %}
           {% endfor %}
 
           <div class="mb-4">
-            {% include 'screener-field-partials/question-toggles-unemployed.twig' with {question: studentOptions} %}
+            {% include 'field/question-toggles-unemployed.twig' with {question: studentOptions} %}
           </div>
 
           <div>
-            {% include 'screener-field-partials/question-toggles-unemployed.twig' with {question: employmentOptions} %}
+            {% include 'field/question-toggles-unemployed.twig' with {question: employmentOptions} %}
           </div>
         </div>
       </div>

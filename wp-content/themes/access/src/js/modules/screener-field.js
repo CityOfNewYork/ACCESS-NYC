@@ -142,7 +142,7 @@ class ScreenerField {
     const $el = $(this._el);
 
     // Submit
-    $el.on('click', ScreenerField.Selectors.SUBMIT, (event) => {
+    $el.on('click', ScreenerField.Selectors.SUBMIT, event => {
       if (this._recaptchaVerified) this._submit(event);
     });
 
@@ -176,10 +176,10 @@ class ScreenerField {
      * Routing
      */
 
-    window.addEventListener('hashchange', (event) => this._router(event));
+    window.addEventListener('hashchange', event => this._router(event));
 
     // Close Questions
-    $el.on('click', ScreenerField.Selectors.QUESTION, (event) => {
+    $el.on('click', ScreenerField.Selectors.QUESTION, event => {
       this._routerQuestion(event);
     });
 
@@ -438,7 +438,7 @@ class ScreenerField {
     });
 
     // Insert Person data.
-    _.each(vue.people.slice(0, vue.household.get('members')), (person) => {
+    _.each(vue.people.slice(0, vue.household.get('members')), person => {
       if (person) {
         json.commands.push({
           insert: {
@@ -507,7 +507,7 @@ class ScreenerField {
         staff: this._vue.staff.toObject(),
         client: this._vue.client.toObject()
       }
-    }).done((data) => {
+    }).done(data => {
       let result = {
         data: data,
         url: url,
@@ -532,10 +532,10 @@ class ScreenerField {
       const programs = _.chain(
           Utility.findValues(data, 'code')
         ).filter(
-          (item) => _.isString(item)
+          item => _.isString(item)
         // filter out the programs they are already receiving
         ).filter(
-          (item) => (programsFilter.indexOf(item) === -1)
+          item => (programsFilter.indexOf(item) === -1)
         ).uniq().value();
 
       if (Utility.debug()) {
@@ -589,11 +589,11 @@ ScreenerField.validate = function(event, scope) {
   scope = (typeof scope !== 'undefined')
     ? scope : event.currentTarget.dataset.vvScope;
   if (typeof scope !== 'undefined') {
-    this.$validator.validateAll(scope).then((valid) => {
+    this.$validator.validateAll(scope).then(valid => {
       ScreenerField.valid(event.target.hash, valid);
     });
   } else {
-    this.$validator.validate().then((valid) => {
+    this.$validator.validate().then(valid => {
       ScreenerField.valid(event.target.hash, valid);
     });
   }

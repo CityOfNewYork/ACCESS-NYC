@@ -293,7 +293,7 @@
           <div class="animated opacity-0" id="page-admin" data-js="page">
             {% if WP_ENV != 'Production' %}
             <div class="screen-mobile:px-4 px-2 screen-mobile:pt-4 pt-2">
-              {% include 'screener-field-partials/alert-environment.twig' %}
+              {% include 'field/alert-environment.twig' %}
             </div>
             {% endif %}
 
@@ -301,8 +301,8 @@
               <h1 class="{{ styles.sections.main }}" id="first-steps">
                 <a href="#first-steps" class="{{ styles.sections.title }}">{{ __('First Steps', translationID) }}</a>
               </h1>
-                {% include 'screener-field-partials/question-staff.twig' with {locations: locations} %}
-                {% include 'screener-field-partials/disclaimer.twig' %}
+                {% include 'field/question-staff.twig' with {locations: locations} %}
+                {% include 'field/disclaimer.twig' %}
 
               <div v-if="disclaimer">
                 <a class="{{ styles.confirm }}" href="#page-screener" data-vv-scope="Staff" v-on:click="validate">
@@ -328,14 +328,14 @@
               <h1 class="{{ styles.sections.main }}" id="client-information">
                 <a href="#client-information" class="{{ styles.sections.title }}">{{ __('Client Information', translationID) }}</a>
               </h1><span class="{{ styles.sections.step }}">(1 of 4)</span>
-                {% include 'screener-field-partials/question-client-needs.twig' with {
+                {% include 'field/question-client-needs.twig' with {
                   categories: categories
                 } %}
-                {% include 'screener-field-partials/question-client-services.twig' with {
+                {% include 'field/question-client-services.twig' with {
                   programs: programsEnrolled
                 } %}
-                {% include 'screener-field-partials/question-client-basics.twig' %}
-                {% include 'screener-field-partials/question-client-contact.twig' with {
+                {% include 'field/question-client-basics.twig' %}
+                {% include 'field/question-client-contact.twig' with {
                   languages: languageOptions,
                   phoneTypes: phoneTypes,
                   contactTimes: contactTimes
@@ -344,11 +344,11 @@
               <h1 class="{{ styles.sections.main }}" id="household">
                 <a href="#household" class="{{ styles.sections.title }}">{{ __('Household', translationID) }}</a>
               </h1><span class="{{ styles.sections.step }}">(2 of 4)</span>
-                {% include 'screener-field-partials/question-household-information.twig' %}
-                {% include 'screener-field-partials/question-household-members.twig' with {
+                {% include 'field/question-household-information.twig' %}
+                {% include 'field/question-household-members.twig' with {
                   headOfHouseholdRelationOptions: headOfHouseholdRelationOptions
                 } %}
-                {% include 'screener-field-partials/question-household-member-details.twig' with {
+                {% include 'field/question-household-member-details.twig' with {
                   benefitOptions: benefitOptions,
                   studentOptions: studentOptions,
                   employmentOptions: employmentOptions
@@ -357,12 +357,12 @@
               <h1 class="{{ styles.sections.main }}" id="household-income">
                 <a href="#household-income" class="{{ styles.sections.title }}">{{ __('Household Income', translationID) }}</a>
               </h1><span class="{{ styles.sections.step }}">(3 of 4)</span>
-                {% include 'screener-field-partials/question-household-income.twig' with {
+                {% include 'field/question-household-income.twig' with {
                   incomeOptions: incomeOptions,
                   frequencyOptions: frequencyOptions
                 } %}
-                {% include 'screener-field-partials/question-household-total-savings.twig' %}
-                {% include 'screener-field-partials/question-household-expenses.twig' with {
+                {% include 'field/question-household-total-savings.twig' %}
+                {% include 'field/question-household-expenses.twig' with {
                   expenseOptions: expenseOptions,
                   frequencyOptions: frequencyOptions
                 } %}
@@ -370,7 +370,7 @@
               <h1 class="{{ styles.sections.main }}" id="housing">
                 <a href="#housing" class="{{ styles.sections.title }}">{{ __('Housing', translationID) }}</a>
               </h1><span class="{{ styles.sections.step }}">(4 of 4)</span>
-                {% include 'screener-field-partials/question-housing-situation.twig' with {
+                {% include 'field/question-housing-situation.twig' with {
                   rentingOptions: rentingOptions,
                   housingOptions: housingOptions
                 } %}
@@ -400,7 +400,7 @@
               <h1 class="{{ styles.sections.main }}" id="confirmation">
                 <a href="#confirmation" class="text-color-blue-dark no-underline">{{ __('Confirmation', translationID) }}</a>
               </h1>
-              {% include 'screener-field-partials/recap.twig' with {'formAction': formAction} %}
+              {% include 'field/recap.twig' with {'formAction': formAction} %}
 
               <div id="screener-recaptcha-container" class="recap-captcha hidden">
                 <p>{{ __('Check the "I’m not a robot" box below and click Continue to get your results.', translationID) }}</p>
@@ -429,7 +429,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/main-field', true) }}
+{{ function('enqueue_script', 'assets/js/field', true) }}
 <script type="text/javascript">
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

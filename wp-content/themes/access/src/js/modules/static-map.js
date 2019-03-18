@@ -132,7 +132,7 @@ class StaticMap {
       $img.attr('itemprop', 'hasMap');
       $img.addClass('block');
 
-      $img.on('click', (event) => {
+      $img.on('click', event => {
         Utility.track(this._trackKey, this._trackData);
       });
 

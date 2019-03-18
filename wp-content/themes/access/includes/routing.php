@@ -25,18 +25,18 @@ Routes::map('eligibility', function () {
 Routes::map('eligibility/results', function () {
   $params = array();
   $params['link'] = home_url().'/eligibility/results/';
-  Routes::load('eligibility-results.php', $params, null, 200);
+  Routes::load('screener-results.php', $params, null, 200);
 });
 
 // Field Screener
 Routes::map('peu', function () {
-  Routes::load('screener-field.php', null, null, 200);
+  Routes::load('field.php', null, null, 200);
 });
 
 Routes::map('peu/results', function () {
   $params = array();
   $params['share_path'] = '/eligibility/results/';
-  Routes::load('eligibility-results-field.php', $params, null, 200);
+  Routes::load('field-results.php', $params, null, 200);
 });
 
 /**

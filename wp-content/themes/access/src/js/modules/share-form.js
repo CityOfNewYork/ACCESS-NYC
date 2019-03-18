@@ -47,7 +47,7 @@ class ShareForm {
       Utility.maskPhone(el);
     });
 
-    $(this._el).on('submit', (e) => {
+    $(this._el).on('submit', e => {
       e.preventDefault();
       this._validate();
       if (this._isValid && !this._isBusy && !this._isDisabled) {
@@ -101,7 +101,7 @@ class ShareForm {
     }
     if (!Utility.isValidEmail($(input).val())) {
       this._showError(ShareForm.Message.EMAIL);
-      $(input).one('keyup', (e) => {
+      $(input).one('keyup', e => {
         this._validate();
       });
       return false;
@@ -135,7 +135,7 @@ class ShareForm {
       return true;
     } else {
       this._showError(ShareForm.Message.REQUIRED);
-      $(input).one('keyup', (e) => {
+      $(input).one('keyup', e => {
         this._validate();
       });
       return false;
@@ -190,7 +190,7 @@ class ShareForm {
       $spinner.setAttribute('style', ''); // show spinner
     }
 
-    return $.post($(this._el).attr('action'), payload).done((response) => {
+    return $.post($(this._el).attr('action'), payload).done(response => {
       if (response.success) {
         this._showSuccess();
         this._isDisabled = true;
@@ -207,7 +207,7 @@ class ShareForm {
         if (Utility.debug()) console.dir(response);
         /* eslint-enable no-console, no-debugger */
       }
-    }).fail((response) => {
+    }).fail(response => {
       this._showError(ShareForm.Message.SERVER);
       /* eslint-disable no-console, no-debugger */
       if (Utility.debug()) console.dir(response);

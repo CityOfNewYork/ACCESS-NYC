@@ -40,13 +40,13 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     'click',
     '.js-simple-toggle, [data-js="toggle"]', // use the data attr selector
     Utility.simpleToggle
-  ).on('click', '[data-js="toggle-nav"]', (event) => {
+  ).on('click', '[data-js="toggle-nav"]', event => {
     let element = $(event.currentTarget);
     // Shows/hides the mobile nav and overlay.
     event.preventDefault();
     $('body').toggleClass('overlay active:overlay');
     $(element.attr('href')).toggleClass('active:o-mobile-nav');
-  }).on('click', '.js-toggle-search', (e) => {
+  }).on('click', '.js-toggle-search', e => {
     // Shows/hides the search drawer in the main nav.
     e.preventDefault();
     const $search = $('#search');
@@ -56,7 +56,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
         $('#search-field').focus();
       }, 20);
     }
-  }).on('click', '.js-hide-search', (e) => {
+  }).on('click', '.js-hide-search', e => {
     // Hides the search drawer in the main nav.
     e.preventDefault();
     $('#search').removeClass('active');
@@ -75,7 +75,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
 
   // A basic click tracking function
-  $body.on('click', '[data-js*="track"]', (event) => {
+  $body.on('click', '[data-js*="track"]', event => {
     /* eslint-disable no-console, no-debugger */
     let key = event.currentTarget.dataset.trackKey;
     let data = JSON.parse(event.currentTarget.dataset.trackData);
@@ -95,7 +95,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 
   // On the search results page, submits the search form when a category is
   // chosen.
-  $('.js-program-search-filter').on('change', 'input', (e) => {
+  $('.js-program-search-filter').on('change', 'input', e => {
     $(e.currentTarget).closest('form')[0].submit();
   });
 
@@ -123,7 +123,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     const isMobileView = () => $('[data-js="site-desktop-nav"]')
       .is(':hidden');
 
-    $('[data-js*="program-nav-step-link"]').on('click', (e) => {
+    $('[data-js*="program-nav-step-link"]').on('click', e => {
       if (!history.pushState) {
         return true;
       }

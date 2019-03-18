@@ -71,7 +71,7 @@ class Screener {
       return this;
     }
 
-    window.addEventListener('hashchange', (e) => {
+    window.addEventListener('hashchange', e => {
       const hash = window.location.hash;
       const $section = $(hash);
       if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
@@ -80,18 +80,18 @@ class Screener {
       }
     });
 
-    $(this._el).on('change', 'input[type="checkbox"]', (e) => {
+    $(this._el).on('change', 'input[type="checkbox"]', e => {
       this._toggleCheckbox(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.TOGGLE}`, (e) => {
+    }).on('change', `.${Screener.CssClass.TOGGLE}`, e => {
       this._handleToggler(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.ADD_SECTION}`, (e) => {
+    }).on('change', `.${Screener.CssClass.ADD_SECTION}`, e => {
       this._addMatrixSection(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.MATRIX_SELECT}`, (e) => {
+    }).on('change', `.${Screener.CssClass.MATRIX_SELECT}`, e => {
       this._toggleMatrix(e.currentTarget);
-    }).on('click', `.${Screener.CssClass.VALIDATE_STEP}`, (e) => {
+    }).on('click', `.${Screener.CssClass.VALIDATE_STEP}`, e => {
       const $step = $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`);
       return this._validateStep($step);
-    }).on('click', `.${Screener.CssClass.SUBMIT}`, (e) => {
+    }).on('click', `.${Screener.CssClass.SUBMIT}`, e => {
       if (!this._recaptchaRequired) {
         this._submit($(e.currentTarget).data('action'));
       } else {
@@ -104,17 +104,17 @@ class Screener {
               Screener.ErrorMessage.REQUIRED);
         }
       }
-    }).on('blur', '[data-type="integer"]', (e) => {
+    }).on('blur', '[data-type="integer"]', e => {
       this._validateIntegerField(e.currentTarget);
-    }).on('blur', '[data-type="float"]', (e) => {
+    }).on('blur', '[data-type="float"]', e => {
       this._validateFloatField(e.currentTarget);
-    }).on('blur', '[data-type="zip"]', (e) => {
+    }).on('blur', '[data-type="zip"]', e => {
       this._validateZipField(e.currentTarget);
-    }).on('blur', '[data-type="age"]', (e) => {
+    }).on('blur', '[data-type="age"]', e => {
       this._validateIntegerField(e.currentTarget);
-    }).on('keyup', '[data-type="float"]', (e) => {
+    }).on('keyup', '[data-type="float"]', e => {
       this._limitFloatFieldLength(e.currentTarget);
-    }).on('keydown', 'input[type="number"]', (e) => {
+    }).on('keydown', 'input[type="number"]', e => {
       // Number inputs still allow certain characters outside of 0-9.
       if (e.keyCode === 69 || // 'e' key, used for scientific notation
           e.keyCode === 187 || // '=' key (for the '+' sign)
@@ -122,14 +122,14 @@ class Screener {
           e.keyCode === 189) { // '-' key
         e.preventDefault();
       }
-    }).on('click', `.${Screener.CssClass.REMOVE_PERSON}`, (e) => {
+    }).on('click', `.${Screener.CssClass.REMOVE_PERSON}`, e => {
       this._removePerson(parseInt($(e.currentTarget).data('person'), 10))
           ._renderRecap();
-    }).on('click', `.${Screener.CssClass.EDIT_PERSON}`, (e) => {
+    }).on('click', `.${Screener.CssClass.EDIT_PERSON}`, e => {
       this._editPerson(parseInt($(e.currentTarget).data('person'), 10));
-    }).on('keyup', 'input[maxlength]', (e) => {
+    }).on('keyup', 'input[maxlength]', e => {
       this._enforceMaxLength(e.currentTarget);
-    }).on('submit', (e) => {
+    }).on('submit', e => {
       e.preventDefault();
       this._$steps.filter(`.${Screener.CssClass.ACTIVE}`)
         .find(`.${Screener.CssClass.VALIDATE_STEP},` +
@@ -181,7 +181,7 @@ class Screener {
       if (hash === '#step-8') data = [];
     });
 
-    $('#step-8').on('change', 'label', (event) => {
+    $('#step-8').on('change', 'label', event => {
       data = $(event.currentTarget).data('trackData');
     });
 
@@ -662,7 +662,7 @@ class Screener {
           incomes: [],
           expenses: []
         });
-        _.each(['incomes', 'expenses'], (key) => {
+        _.each(['incomes', 'expenses'], key => {
           $step.find('[name$="amount"]').filter(':visible')
               .filter(`[name*="${key}"]`).each((i, el) => {
             const itemIndex = $(el).attr('name').split('[').pop().split(']')[0];
@@ -726,7 +726,7 @@ class Screener {
         });
 
         // Set or unset the household members who are on the lease or deed.
-        _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
+        _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], type => {
           const $inputs = $step.find(`input[name$="${type}"]:visible`);
           if ($inputs.length) {
             if ($inputs.filter(':checked').length) {
@@ -749,7 +749,7 @@ class Screener {
               stepValid = false;
             }
           } else {
-            _.each(this._people, (person) => {
+            _.each(this._people, person => {
               person.set(type, false);
             });
           }
@@ -966,7 +966,7 @@ class Screener {
     };
 
     // Add programs.
-    _.each(this._categories, (category) => {
+    _.each(this._categories, category => {
       const obj = {
         slug: category,
         label: Utility.localize(category)
@@ -984,7 +984,7 @@ class Screener {
     ];
 
     // Add housing type.
-    _.each(housingTypes, (type) => {
+    _.each(housingTypes, type => {
       if (this._household.get(`living${type}`)) {
         const obj = {
           slug: type,
@@ -1033,8 +1033,8 @@ class Screener {
         }
       });
 
-      _.each(['incomes', 'expenses'], (type) => {
-        _.each(person.get(type), (item) => {
+      _.each(['incomes', 'expenses'], type => {
+        _.each(person.get(type), item => {
           const obj = {
             amount: `$${item.amount}`,
             type: Utility.localize(item.type),
@@ -1044,7 +1044,7 @@ class Screener {
         });
       });
 
-      _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
+      _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], type => {
         if (person.get(type)) {
           const obj = {};
           if (person.get('headOfHousehold')) {
@@ -1124,8 +1124,7 @@ class Screener {
       }
     });
     // Insert Person data.
-    _.each(this._people.slice(0, this._household.get('members')),
-        (person) => {
+    _.each(this._people.slice(0, this._household.get('members')), person => {
       if (person) {
         droolsJSON.commands.push({
           insert: {
@@ -1186,7 +1185,7 @@ class Screener {
         action: 'drools',
         data: this._getDroolsJSON()
       }
-    }).done((data) => {
+    }).done(data => {
       /* eslint-disable no-console, no-debugger */
       if (Utility.getUrlParameter('debug') === '1') {
         console.log(data);
@@ -1205,7 +1204,7 @@ class Screener {
         /* eslint-enable no-console, no-debugger */
       }
       const programs = _.chain(Utility.findValues(data, 'code'))
-          .filter((item) => _.isString(item)).uniq().value();
+          .filter(item => _.isString(item)).uniq().value();
       const params = {};
       if (this._categories.length) {
         params.categories = this._categories.join(',');

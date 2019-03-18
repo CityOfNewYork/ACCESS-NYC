@@ -101,6 +101,6 @@ $context['getParams'] = $get; // pass safe parameters
 $context['selectedPrograms'] = Timber::get_posts( $selectedProgramArgs );
 $context['additionalPrograms'] = Timber::get_posts( $additionalProgramArgs );
 
-$templates = array( 'eligibility-results.twig' );
+$templates = array( 'screener/results.twig' );
 
 Timber::render( $templates, $context );

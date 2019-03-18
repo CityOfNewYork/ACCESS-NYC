@@ -70,7 +70,7 @@ Utility.simpleToggle = function(event) {
 
   // Add the toggle event to the toggle reversal element
   if ($(el).data('reverse')) {
-    $($(el).data('reverse')).on('click', (event) => {
+    $($(el).data('reverse')).on('click', event => {
       event.preventDefault();
       $(el).toggleClass('active');
       $target.toggleClass('active hidden')
@@ -137,7 +137,7 @@ Utility.findValues = (object, targetProp) => {
  * @param {string|number} val - value to convert.
  * @return {string} stringified number to two decimal places.
  */
-Utility.toDollarAmount = (val) =>
+Utility.toDollarAmount = val =>
     (Math.abs(Math.round(parseFloat(val) * 100) / 100)).toFixed(2);
 
 /**
@@ -317,7 +317,7 @@ Utility.webtrends = function(key, data) {
  * @param  {collection} data The data to track
  */
 Utility.gtagClick = function(key, data) {
-  let uri = _.find(data, (value) => (value.hasOwnProperty('DCS.dcsuri')));
+  let uri = _.find(data, value => (value.hasOwnProperty('DCS.dcsuri')));
   if (typeof uri === 'undefined') {
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) {

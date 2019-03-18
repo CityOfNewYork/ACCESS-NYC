@@ -33,7 +33,7 @@ import Accordion from 'components/accordion/accordion.common';
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
 
   // A basic click tracking function
-  $body.on('click', '[data-js*="track"]', (event) => {
+  $body.on('click', '[data-js*="track"]', event => {
     let key = event.currentTarget.dataset.trackKey;
     let data = JSON.parse(event.currentTarget.dataset.trackData);
     ScreenerField.track(key, data);
@@ -56,7 +56,7 @@ import Accordion from 'components/accordion/accordion.common';
 
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {
-    $(el).on('click', (event) => {
+    $(el).on('click', event => {
       event.preventDefault();
       let message = _.findWhere(window.LOCALIZED_STRINGS,
           {slug: 'MSG_RELOAD'}

@@ -52,7 +52,7 @@ class ResultsField {
     $el.on('click', ResultsField.Selectors.HYPERLINKS, this._targetBlank);
 
     // Remove programs
-    $el.on('click', ResultsField.Selectors.REMOVE_PROGRAM, (event) => {
+    $el.on('click', ResultsField.Selectors.REMOVE_PROGRAM, event => {
       this._removeProgram(event);
     });
 
@@ -86,7 +86,7 @@ class ResultsField {
       data: data
     };
 
-    $.ajax(action).done((data) => {
+    $.ajax(action).done(data => {
       callback(data);
     });
   }
@@ -177,7 +177,7 @@ class ResultsField {
     if (date != '') request['date'] = date;
 
     // Get updated share url
-    this._getUrl(request, (data) => {
+    this._getUrl(request, data => {
       // Update programs list
       $(ResultsField.Selectors.SHARE_PROGRAMS).each((index, element) => {
         element.value = programs;
@@ -219,13 +219,13 @@ class ResultsField {
       payload[data[i].name] = data[i].value;
     }
 
-    $.post(action, payload).done((response) => {
+    $.post(action, payload).done(response => {
       $(this).remove();
       $(ResultsField.Selectors.REMOVE_CONTAINER).remove();
       $(ResultsField.Selectors.SHARE_RESULTS)
         .toggleClass('hidden')
         .prop('aria-hidden', false);
-    }).fail((response) => {
+    }).fail(response => {
       this._disabled = false;
       $buttons.show();
       $spinner.hide();

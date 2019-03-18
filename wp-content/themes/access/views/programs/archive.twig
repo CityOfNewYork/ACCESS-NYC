@@ -97,12 +97,12 @@
 
 {{ function('enqueue_script', 'assets/js/main', true) }}
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+{# <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script> #}
+{# <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script> #}
 <script>
-  Object.isEqual = _.isEqual;
+  {# Object.isEqual = _.isEqual; #}
 
-  Vue.component('c-filter', {
+  {# Vue.component('c-filter', {
     delimiters: ['v{', '}'],
     props: {
       'name': {type: String},
@@ -258,9 +258,9 @@
           </div>
         </div>
       </article>`
-  });
+  }); #}
 
-  var app = new Vue({
+  {# var app = new Vue({
     el: '[data-js="programs"]',
     delimiters: ['v{', '}'],
     data: {
@@ -581,6 +581,6 @@
       this.fetch('terms')
         .catch(this.error);
     }
-  });
+  }); #}
 </script>
 {% endblock %}
