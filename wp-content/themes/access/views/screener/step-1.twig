@@ -1,4 +1,4 @@
-<div class="{{ styles.fieldset }} active" id="step-1" data-track-key="Screener Step: 1"
+<div class="{{ styles.fieldset }} animated active fadeIn" id="step-1" data-track-key="Screener Step: 1"
    data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "1-HelpLookingFor"}]'>
   <div class="{{ styles.padding }}">
 
@@ -19,7 +19,7 @@
         {% endif %}
         <label class="checkbox" for="person-help-{{ slug }}">
           <input id="person-help-{{ slug }}" name="category" type="checkbox" value="{{ category.slug }}">
-          <span class="checkbox__label">
+          <span class="checkbox__label items-center">
             <span class="checkbox__icon bg-icon-{{ slug }}"></span>
             {{ category.name }}
           </span>

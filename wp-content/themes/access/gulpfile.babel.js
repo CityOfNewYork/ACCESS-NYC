@@ -144,20 +144,41 @@ gulp.task('webpack', () =>
     module: {
       rules: [
         {
-          // JavaScript (ES6)
-          test: /\.(js)$/,
-          exclude: /(node_modules)/,
-          loader: 'babel-loader',
-          query: {
-            presets: [
-              ['@babel/preset-env', { targets: { ie: '11' } }]
-            ]
-          }
+          // Vue Components
+          loader: 'vue-loader',
+          test: /\.vue$/
         },
         {
-          // Vue Components
-          test: /\.vue$/,
-          loader: 'vue-loader'
+          // JavaScript (ES6)
+          loader: 'babel-loader',
+          test: /\.js$/,
+          exclude: {
+            test: /.\/node_modules/,
+            exclude: /.\/node_modules\/access-nyc-patterns\/src/
+          },
+          // include: [
+          //   /.\/src/,
+          //   /.\/node_modules\/access-nyc-patterns\/src/
+          // ],
+          query: {
+            // .babelrc
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets: { ie: '11' }
+                }
+              ]
+            ],
+            plugins: [
+              [
+                '@babel/plugin-transform-runtime',
+                {
+                  'regenerator': true
+                }
+              ]
+            ]
+          }
         }
       ]
     },

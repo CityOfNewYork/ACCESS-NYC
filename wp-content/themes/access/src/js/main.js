@@ -1,13 +1,11 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
-import 'es6-promise/dist/es6-promise.auto';
-import Matches from 'modules/polyfill-matches';
-import Remove from 'modules/polyfill-remove';
-import ForEach from 'modules/polyfill-foreach';
-import OfficeMap from 'modules/office-map';
-import Screener from 'modules/screener';
+
+// Element.prototype.polyfills
+import 'modules/polyfill-element-matches';
+import 'modules/polyfill-element-remove';
+
 import ShareForm from 'modules/share-form';
-import StaticMap from 'modules/static-map';
 import TextSizer from 'modules/text-sizer';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
@@ -19,18 +17,9 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 (function(window, $) {
   'use strict';
 
-  const google = window.google;
-
   Utility.configErrorTracking(window);
 
-  // Polyfills
-  // new Promise; // Promise
-  new Matches; // Element.prototype.matches()
-  new Remove; // Element.prototype.removes()
-  new ForEach; // Array.prototype.forEach()
-
-  // Get SVG sprite file.
-  // See: https://css-tricks.com/ajaxing-svg-sprite/
+  // Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
   $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
 
   let $body = $('body');
@@ -99,131 +88,10 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     $(e.currentTarget).closest('form')[0].submit();
   });
 
-  // TODO: This function and the conditional afterwards should be refactored
-  // and pulled out to its own program detail controller module. The main
-  // unique thing about program details is that they use a ?step=x query
-  // parameter in the URL to determine the visible section. It is still all
-  // the same page. A hash would seem more appropriate, but there were
-  // some supposed issues with WPML where the hash was being stripped when
-  // switching between langauges. Because it is a single page, we don't need
-  // to actually reload the browser, which is why history.pushState is used.
-  /**
-   * Advances Program Page Steps
-   * @param {string} step - the kebab case identifier for the section
-   */
-  function showSection(step) {
-    $('[data-js="program-detail-step"]')
-       .removeClass('active').filter(`#${step}`).addClass('active');
-
-    $('[data-js="program-nav"] a').removeClass('active')
-       .filter(`#nav-link-${step}`).addClass('active');
-  }
-
-  if ($('[data-js="program-detail-content"]').length) {
-    const isMobileView = () => $('[data-js="site-desktop-nav"]')
-      .is(':hidden');
-
-    $('[data-js*="program-nav-step-link"]').on('click', e => {
-      if (!history.pushState) {
-        return true;
-      }
-      e.preventDefault();
-
-      const step = Utility.getUrlParameter('step', $(e.target).attr('href'));
-      let linkType = '';
-
-      window.history.pushState(null, null, '?step=' + step);
-
-      if ($(e.target).hasClass('[data-js*="jump-to-anchor"]')) {
-        linkType = 'buttonLink';
-      } else {
-        linkType = 'navLink';
-      }
-      $(window).trigger('popstate', linkType);
-    });
-
-    $(window).on('popstate', (e, linkType) => {
-      const possibleSections = [
-        'how-it-works',
-        'how-to-apply',
-        'determine-your-eligibility',
-        'what-you-need-to-include'
-      ];
-
-      let sectionId = Utility.getUrlParameter('step');
-
-      if (!sectionId || !$.inArray(sectionId, possibleSections)) {
-        sectionId = 'how-it-works';
-      }
-
-      // If the page is in a mobile view, and the user has clicked a button
-      // (as opposed to one of the table of content links) we want to scroll
-      // the browser to the content body as opposed to the top of the page.
-      if (isMobileView() && linkType === 'buttonLink') {
-        $(document).scrollTop(
-          $('[data-js="program-detail-content"]').offset().top
-        );
-      } else {
-        $(document).scrollTop(0);
-      }
-      showSection(sectionId);
-    }).trigger('popstate');
-  }
-  // END TODO
-
   // Initialize text sizer module.
   $(`.${TextSizer.CssClass.CONTROLLER}`).each((i, el) => {
     const textSizer = new TextSizer(el);
     textSizer.init();
-  });
-
-  // Initialize eligibility screener.
-  $(`.${Screener.CssClass.FORM}`).each((i, el) => {
-    const screener = new Screener(el);
-    screener.init();
-  });
-
-  // Initialize maps if present.
-  const $maps = $('.js-map');
-
-  /**
-   * Callback function for loading the Google maps library.
-   */
-  function initializeMaps() {
-    $maps.each((i, el) => {
-      const map = new OfficeMap(el);
-      map.init();
-    });
-  }
-
-  if ($maps.length > 0) {
-    const options = {
-      key: Utility.CONFIG.GOOGLE_API,
-      libraries: 'geometry,places'
-    };
-
-    google.load('maps', '3', {
-      /* eslint-disable camelcase */
-      other_params: $.param(options),
-      /* eslint-enable camelcase */
-      callback: initializeMaps
-    });
-  }
-
-  // Initialize simple maps.
-  $('.js-static-map').each((i, el) => {
-    const staticMap = new StaticMap(el);
-    staticMap.init();
-  });
-
-  // For location detail pages, this overwrites the link to the "back to map"
-  // button if the previous page was the map. We want the user to return to
-  // the previous state of the map (via the same URL) rather than simply going
-  // back to the default map.
-  $('.js-location-back').each((i, el) => {
-    if (window.document.referrer.indexOf('/locations/?') >= 0) {
-      $(el).attr('href', window.document.referrer);
-    }
   });
 
   // Initialize tooltips.

@@ -1,92 +1,37 @@
 /* eslint-env browser */
 'use strict';
 
-import Vue from 'vue/dist/vue.common';
-import _ from 'underscore';
-import CardVue from 'components/card/card.vue';
-import FilterMultiVue from 'components/filter/filter-multi.vue';
-
-// const CardVue = {};
-// const FilterMultiVue = {};
-
 /**
- * [WpArchiveVue description]
+ * WordPress Archive Vue. Creates a filterable reactive interface using Vue.js
+ * for a WordPress Archive. Uses the WordPress REST API for retrieving filters
+ * and posts. Fully configurable for any post type (default or custom). Works
+ * with multiple languages using the lang attribute set in on the htmt tag
+ * and the multilingual url endpoint provided by WPML.
  */
 class WpArchiveVue {
   /**
-   * @return  {object}  A new Vue App Instance.
+   * The constructor will merge user settings with default settings and
+   * instantiate the Vue instance.
+   * @param   {object}  Vue       Pre instantiated Vue object.
+   * @param   {object}  settings  Configuration for the Vue application.
+   * @return  {object}            The instantiated Vue application.
    */
-  constructor() {
-    Object.isEqual = _.isEqual;
-
-    Vue.component('c-card', CardVue);
-
-    Vue.component('c-filter-multi', FilterMultiVue);
-
-    return new Vue({
-      el: '[data-js="programs"]',
-      delimiters: ['v{', '}'],
+  constructor(Vue, settings) {
+    this._default = {
+      el: WpArchiveVue.el,
       data: {
         terms: [],
         posts: [],
         query: {
-          page: parseInt(
-            document.querySelector('[data-js="programs"]').dataset.jsPage
-          ),
+          page: 1,
           per_page: 5
         },
         headers: {
-          pages: 8,
-          total: 40,
+          pages: 0,
+          total: 0,
           link: 'rel="next";'
         },
-        endpoints: {
-          terms: '/wp-json/api/v1/terms',
-          programs: '/wp-json/wp/v2/programs'
-        },
-        init: false,
-        abort: new AbortController, // eslint-disable-line no-undef
-        maps: function() {
-          return {
-            filters: filter => ({
-              'active': false,
-              'name': filter.labels.archives,
-              'slug': filter.name,
-              'filters': filter.terms.map(f => ({
-                'id': f.term_id,
-                'name': f.name,
-                'slug': f.slug,
-                'parent': filter.name
-              })),
-              'STRINGS': {
-                'ALL': window.LOCALIZED_STRINGS
-                  .find(e => e.slug === 'ALL').label || 'ALL'
-              }
-            }),
-            programs: p => ({
-              'title': p.acf.plain_language_program_name,
-              'link': p.link,
-              'subtitle': p.acf.program_name + ((p.acf.program_acronym) ?
-                ' (' + p.acf.program_acronym + ')' : ''),
-              'summary': p.acf.brief_excerpt,
-              'category': {
-                'slug':
-                  (p.terms && p.terms.find(t => t.taxonomy === 'programs')
-                  .slug.replace(new RegExp(`\\-${this.lang.code}$`), ''))
-                    || 'PROGRAMS',
-                'name':
-                  (p.terms && p.terms.find(t => t.taxonomy === 'programs').name)
-                    || 'NAME'
-              },
-              'STRINGS': {
-                'LEARN_MORE': window.LOCALIZED_STRINGS
-                  .find(e => e.slug === 'LEARN_MORE').label || 'LEARN_MORE',
-                'CTA': window.LOCALIZED_STRINGS
-                  .find(e => e.slug === 'APPLY').label || 'APPLY'
-              }
-            })
-          };
-        }
+        init: false
       },
       computed: {
         loading: function() {
@@ -136,16 +81,40 @@ class WpArchiveVue {
         response: WpArchiveVue.response,
         process: WpArchiveVue.process,
         error: WpArchiveVue.error
-      },
-      created: function() {
-        this.queue();
-        this.fetch('terms')
-          .catch(this.error);
+      }
+    };
+
+    // Assign missing top level props to settings.
+    this._settings = Object.assign({}, this._default, settings);
+
+    // Apply next level properties to settings.
+    Object.keys(settings).forEach(prop => {
+      if (!this._default.hasOwnProperty(prop)) {
+        this._settings[prop] = settings[prop];
+      } else if (
+        this._default.hasOwnProperty(prop) &&
+        Object.isExtensible(this._default[prop])
+      ) {
+        this._settings[prop] = Object
+          .assign({}, this._default[prop], settings[prop]);
       }
     });
+
+    // Start the app.
+    return new Vue(this._settings);
   }
 }
 
+/** The default selector for the Vue application */
+WpArchiveVue.el = '[data-js="archive"]';
+
+/**
+ * Basic fetch for retrieving data from an endpoint configured in the
+ * data.endpoints property.
+ * @param   {object}  data  A key representing an endpoint configured in the
+ *                          data.endpoints property.
+ * @return  {promise}       The fetch request for that endpoint.
+ */
 WpArchiveVue.fetch = function(data = false) {
   if (!data) return data;
 
@@ -153,10 +122,15 @@ WpArchiveVue.fetch = function(data = false) {
     fetch(this.lang.path + this.endpoints[data])
       .then(response => response.json())
       .then(d => {
-        Vue.set(this, data, d.map(this.maps().filters));
+        this.$set(this, data, d.map(this.maps()[data]));
       });
 };
 
+/**
+ * The click event to begin filtering.
+ * @param   {object}  event  The click event on the element that triggers
+ *                           the filter.
+ */
 WpArchiveVue.click = function(event) {
   let taxonomy = event.data.parent;
   let term = event.data.id || false;
@@ -168,6 +142,12 @@ WpArchiveVue.click = function(event) {
   }
 };
 
+/**
+ * Single filter function. If the filter is already present in the query
+ * it will add the filter to the query.
+ * @param   {string}  taxonomy  The taxonomy slug of the filter
+ * @param   {number}  term      The id of the term to filter on
+ */
 WpArchiveVue.filter = function(taxonomy, term) {
   let terms = (this.query.hasOwnProperty(taxonomy)) ?
     this.query[taxonomy] : [term]; // get other query or initialize.
@@ -180,27 +160,37 @@ WpArchiveVue.filter = function(taxonomy, term) {
   this.updateQuery(taxonomy, terms);
 };
 
+/**
+ * A control for filtering all of the terms in a particular taxonomy on or off.
+ * @param   {string}  taxonomy  The taxonomy slug of the filter
+ */
 WpArchiveVue.filterAll = function(taxonomy) {
   let tax = this.terms.find(t => t.slug === taxonomy);
   let checked = !(tax.checked);
 
-  Vue.set(tax, 'checked', checked);
+  this.$set(tax, 'checked', checked);
 
   let terms = tax.filters.map(term => {
-      Vue.set(term, 'checked', checked);
+      this.$set(term, 'checked', checked);
       return term.id;
     });
 
   this.updateQuery(taxonomy, (checked) ? terms : []);
 };
 
+/**
+ * This updates the query property with the new filters.
+ * @param   {string}  taxonomy  The taxonomy slug of the filter
+ * @param   {array}   terms     Array of term ids
+ * @return  {promise}           Resolves when the terms are updated
+ */
 WpArchiveVue.updateQuery = function(taxonomy, terms) {
   return new Promise((resolve, reject) => { // eslint-disable-line no-undef
-    Vue.set(this.query, taxonomy, terms);
-    Vue.set(this.query, 'page', 1);
-
+    this.$set(this.query, taxonomy, terms);
+    this.$set(this.query, 'page', 1);
+    // hide all of the posts
     this.posts.map((value, index) => {
-      if (value) Vue.set(this.posts[index], 'show', false);
+      if (value) this.$set(this.posts[index], 'show', false);
       return value;
     });
     resolve();
@@ -211,16 +201,27 @@ WpArchiveVue.updateQuery = function(taxonomy, terms) {
   });
 };
 
+/**
+ * A function to reset the filters to "All Posts."
+ * @param   {object}  event  The taxonomy slug of the filter
+ * @return  {promise}        Resolves after resetting the filter
+ */
 WpArchiveVue.reset = function(event) {
   return new Promise(resolve => { // eslint-disable-line no-undef
     let taxonomy = event.data.slug;
     if (this.query.hasOwnProperty(taxonomy)) {
-      Vue.set(this.query, taxonomy, []);
+      this.$set(this.query, taxonomy, []);
       resolve();
     }
   });
 };
 
+/**
+ * A function to paginate up or down a post's list based on the change amount
+ * assigned to the clicked element.
+ * @param   {object}  event  The click event of the pagination element
+ * @return  {promise}        Resolves after updating the pagination in the query
+ */
 WpArchiveVue.paginate = function(event) {
   event.preventDefault();
 
@@ -230,18 +231,31 @@ WpArchiveVue.paginate = function(event) {
   let page = this.query.page + change;
 
   return new Promise(resolve => { // eslint-disable-line no-undef
-    Vue.set(this.query, 'page', page);
-    Vue.set(this.posts[this.query.page], 'show', true);
+    this.$set(this.query, 'page', page);
+    this.$set(this.posts[this.query.page], 'show', true);
 
     this.queue([0, change]);
     resolve();
   });
 };
 
+/**
+ * Wrapper for the queue promise
+ * @return  {promise} Returns the queue function.
+ */
 WpArchiveVue.wp = function() {
   return this.queue();
 };
 
+/**
+ * This queues the current post request and the next request based on the
+ * direction of pagination. It uses an Async method to retrieve the requests
+ * in order so that we can determine if there are more posts to show after the
+ * request for the current view.
+ * @param   {array}  queries  The amount of queries to make and which direction
+ *                            to make them in. 0 means the current page, 1 means
+ *                            the next page. -1 would mean the previous page.
+ */
 WpArchiveVue.queue = function(queries = [0, 1]) {
   // Set a benchmark query to compare the upcomming query to.
   let Obj1 = Object.assign({}, this.query); // create copy of object.
@@ -284,7 +298,7 @@ WpArchiveVue.queue = function(queries = [0, 1]) {
       if (havePage) {
         let Obj2 = Object.assign({}, this.posts[query.page].query);
         delete Obj2.page;
-        pageQueryMatches = Object.isEqual(Obj1, Obj2);
+        pageQueryMatches = (JSON.stringify(Obj1) === JSON.stringify(Obj2));
       }
 
       if (havePage && pageQueryMatches) continue;
@@ -311,10 +325,16 @@ WpArchiveVue.queue = function(queries = [0, 1]) {
   })();
 };
 
+/**
+ * Builds the URL query from the provided query property.
+ * @param   {object}  query  A WordPress query written in JSON format
+ * @return  {promise}        The fetch request for the query
+ */
 WpArchiveVue.wpQuery = function(query) {
-  Vue.set(this, 'abort', (new AbortController)); // eslint-disable-line no-undef
-  let signal = this.abort.signal;
-  let url = `${this.lang.path}${this.endpoints.programs}`;
+  // eslint-disable-next-line no-undef
+  // this.$set(this, 'abort', (new AbortController));
+  // let signal = this.abort.signal;
+  let url = `${this.lang.path}${this.endpoints[this.type]}`;
 
   // Build the url query.
   url = `${url}?` + Object.keys(query)
@@ -325,13 +345,14 @@ WpArchiveVue.wpQuery = function(query) {
     }).join('&');
 
   // Set posts and store a copy of the query for reference.
-  Vue.set(this.posts, query.page, {
+  this.$set(this.posts, query.page, {
     posts: [],
     query: Object.freeze(query),
     show: (this.query.page >= query.page)
   });
 
-  return fetch(url, {signal: signal});
+  // return fetch(url, {signal: signal});
+  return fetch(url);
 };
 
 WpArchiveVue.response = function(response) {
@@ -350,28 +371,39 @@ WpArchiveVue.response = function(response) {
       headers[keys[i]] = value;
     }
 
-    Vue.set(this, 'headers', headers);
+    this.$set(this, 'headers', headers);
   }
 
   return response.json();
 };
 
+/**
+ * Processes the posts and maps the data to data maps provided by the
+ * data.maps property.
+ * @param   {object}  data     The post data retrieved from the WP REST API
+ * @param   {object}  query    The the query used to get the data
+ * @param   {object}  headers  The the headers of the request
+ */
 WpArchiveVue.process = function(data, query, headers) {
   // If there are posts for this query, map them to the template.
   let posts = (Array.isArray(data)) ?
-    data.map(this.maps().programs) : false;
+    data.map(this.maps()[this.type]) : false;
 
   // Set posts and store a copy of the query for reference.
-  Vue.set(this.posts[query.page], 'posts', posts);
-  Vue.set(this.posts[query.page], 'headers', Object.freeze(headers));
+  this.$set(this.posts[query.page], 'posts', posts);
+  this.$set(this.posts[query.page], 'headers', Object.freeze(headers));
 
   // If there are no posts, pass along to the error handler.
   if (!Array.isArray(data))
     this.error({error: data, query: query});
 
-  Vue.set(this, 'init', true);
+  this.$set(this, 'init', true);
 };
 
+/**
+ * Error response thrown when there is an error in the WP REST AP request.
+ * @param   {object}  response  The error response
+ */
 WpArchiveVue.error = function(response) {
   // console.dir(response);
 };

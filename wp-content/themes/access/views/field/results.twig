@@ -4,7 +4,7 @@
 
 {% block head %}
 <meta name="theme-color" content="#112E51">
-<link rel="manifest" href="{{theme.path}}/manifest-screener-field.4858bd3264978e3d0c842ace2f8b7f931084.json">
+<link rel="manifest" href="{{theme.path}}/manifest-screener-field.4858bd32.json">
 <meta name="robots" content="noindex,nofollow,noarchive">
 {% endblock %}
 
@@ -201,7 +201,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/field', true) }}
+{{ function('enqueue_script', 'assets/js/field') }}
 <script>
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

@@ -1,11 +1,13 @@
 /* eslint-env browser */
 import jQuery from 'jquery';
 import _ from 'underscore';
+
 // eslint-disable-next-line no-unused-vars
-import SmoothScroll from 'smoothscroll-polyfill';
-import 'es6-promise/dist/es6-promise.auto';
-import Matches from 'modules/polyfill-matches';
-import ScreenerField from 'modules/screener-field';
+import 'modules/polyfill-window-scroll';
+import 'modules/polyfill-element-matches';
+import 'core-js/fn/promise';
+
+import Field from 'modules/field';
 import ResultsField from 'modules/results-field';
 import ShareForm from 'modules/share-form';
 import Tooltip from 'modules/tooltip';
@@ -16,10 +18,6 @@ import Accordion from 'components/accordion/accordion.common';
   'use strict';
 
   Utility.configErrorTracking(window);
-
-  require('smoothscroll-polyfill').polyfill(); // eslint-disable-line no-undef
-
-  new Matches; // Element.prototype.matches()
 
   // Get SVG sprite file.
   $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
@@ -36,12 +34,12 @@ import Accordion from 'components/accordion/accordion.common';
   $body.on('click', '[data-js*="track"]', event => {
     let key = event.currentTarget.dataset.trackKey;
     let data = JSON.parse(event.currentTarget.dataset.trackData);
-    ScreenerField.track(key, data);
+    Field.track(key, data);
   });
 
   // Initialize eligibility screener.
-  $(ScreenerField.Selectors.DOM).each((i, el) =>
-    new ScreenerField(el).init());
+  $(Field.Selectors.DOM).each((i, el) =>
+    new Field(el).init());
 
   // Initialize eligibility screener.
   $(ResultsField.Selectors.DOM).each((i, el) =>

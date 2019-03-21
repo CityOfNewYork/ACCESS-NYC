@@ -255,7 +255,7 @@
 
 {% block head %}
 <meta name="theme-color" content="#112E51">
-<link rel="manifest" href="{{theme.path}}/manifest-screener-field.4858bd3264978e3d0c842ace2f8b7f931084.json">
+<link rel="manifest" href="{{theme.path}}/manifest-screener-field.4858bd32.json">
 <meta name="robots" content="noindex,nofollow,noarchive">
 {% endblock %}
 
@@ -286,7 +286,7 @@
     </div>
   </header>
 
-  <main class="main-content bg-color-white" id="content">
+  <main class="block bg-color-white" id="content">
     <div data-js="view">
       <form action="/peu/results/" class="border-none p-0 m-0" data-js="screener-field">
         <div id="vue">
@@ -429,7 +429,7 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/field', true) }}
+{{ function('enqueue_script', 'assets/js/field') }}
 <script type="text/javascript">
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([

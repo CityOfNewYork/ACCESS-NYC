@@ -2,23 +2,22 @@
 'use strict';
 
 import $ from 'jquery';
+import Utility from 'modules/utility';
+import _ from 'underscore';
+import Vue from 'vue/dist/vue.common';
+import Validator from 'vee-validate';
 import Cookies from 'js-cookie';
 import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
 import ScreenerClient from 'modules/screener-client';
 import ScreenerStaff from 'modules/screener-staff';
-import Shared from 'modules/screener';
-import Utility from 'modules/utility';
-import _ from 'underscore';
-import Vue from 'vue/dist/vue.common';
-import Validator from 'vee-validate';
 import CalcInput from 'modules/calc-input';
 
 /**
  * Requires Documentation
  * @class
  */
-class ScreenerField {
+class Field {
   /**
    * @param {HTMLElement} el - The form element for the component.
    * @constructor
@@ -74,26 +73,26 @@ class ScreenerField {
         addressAttrs: ScreenerClient.ADDRESS_ATTRS
       },
       methods: {
-        resetAttr: ScreenerField.resetAttr,
-        setAttr: ScreenerField.setAttr,
-        setAllAttr: ScreenerField.setAllAttr,
-        setHousing: ScreenerField.setHousing,
-        getAttrs: ScreenerField.getAttrs,
-        populate: ScreenerField.populate,
-        pushPayment: ScreenerField.pushPayment,
-        getPayment: ScreenerField.getPayment,
-        removePayment: ScreenerField.removePayment,
-        removeAllPayments: ScreenerField.removeAllPayments,
-        push: ScreenerField.push,
-        checked: ScreenerField.checked,
-        singleOccupant: ScreenerField.singleOccupant,
-        validate: ScreenerField.validate,
-        localString: ScreenerField.localString,
-        getTypedVal: ScreenerField.getTypedVal,
-        commit: ScreenerField.commit,
-        filterDollars: ScreenerField.filterDollars,
-        filterPhone: ScreenerField.filterPhone,
-        track: ScreenerField.track
+        resetAttr: Field.resetAttr,
+        setAttr: Field.setAttr,
+        setAllAttr: Field.setAllAttr,
+        setHousing: Field.setHousing,
+        getAttrs: Field.getAttrs,
+        populate: Field.populate,
+        pushPayment: Field.pushPayment,
+        getPayment: Field.getPayment,
+        removePayment: Field.removePayment,
+        removeAllPayments: Field.removeAllPayments,
+        push: Field.push,
+        checked: Field.checked,
+        singleOccupant: Field.singleOccupant,
+        validate: Field.validate,
+        localString: Field.localString,
+        getTypedVal: Field.getTypedVal,
+        commit: Field.commit,
+        filterDollars: Field.filterDollars,
+        filterPhone: Field.filterPhone,
+        track: Field.track
       }
     };
   }
@@ -114,11 +113,11 @@ class ScreenerField {
      * The CSS could probably afford to be optimized, but this works as well.
      */
 
-    $(ScreenerField.Selectors.PAGE)
-      .removeClass(ScreenerField.Classes.HIDDEN_OPACITY)
-      .addClass(ScreenerField.Classes.HIDDEN);
-    $(ScreenerField.Selectors.TOGGLE_QUESTION)
-      .addClass(ScreenerField.Classes.HIDDEN);
+    $(Field.Selectors.PAGE)
+      .removeClass(Field.Classes.HIDDEN_OPACITY)
+      .addClass(Field.Classes.HIDDEN);
+    $(Field.Selectors.TOGGLE_QUESTION)
+      .addClass(Field.Classes.HIDDEN);
 
     /**
      * Reactive Elements
@@ -130,7 +129,7 @@ class ScreenerField {
     Vue.use(Validator, {events: 'blur', zip: 'zip', hoh: 'hoh'});
 
     // Components
-    Vue.component('personlabel', ScreenerField.personLabel);
+    Vue.component('personlabel', Field.personLabel);
 
     // Initialize Vue
     this._vue = new Vue(this._vue);
@@ -142,12 +141,12 @@ class ScreenerField {
     const $el = $(this._el);
 
     // Submit
-    $el.on('click', ScreenerField.Selectors.SUBMIT, event => {
+    $el.on('click', Field.Selectors.SUBMIT, event => {
       if (this._recaptchaVerified) this._submit(event);
     });
 
     // Basic toggles
-    $el.on('change', ScreenerField.Selectors.TOGGLE, this._toggler);
+    $el.on('change', Field.Selectors.TOGGLE, this._toggler);
 
     // Validate calculated input against regular expressions
     new CalcInput(this._el);
@@ -158,8 +157,8 @@ class ScreenerField {
      * incrementing cookie.
      */
 
-    let viewCount = Cookies.get(ScreenerField.Cookies.VIEWS) ?
-      parseInt(Cookies.get(ScreenerField.Cookies.VIEWS), 10) : 1;
+    let viewCount = Cookies.get(Field.Cookies.VIEWS) ?
+      parseInt(Cookies.get(Field.Cookies.VIEWS), 10) : 1;
 
     if (viewCount >= 10) {
       this._initRecaptcha();
@@ -167,9 +166,9 @@ class ScreenerField {
     }
 
     // `2/1440` sets the cookie to expire after two minutes.
-    Cookies.set(ScreenerField.Cookies.VIEWS, ++viewCount, {
+    Cookies.set(Field.Cookies.VIEWS, ++viewCount, {
       expires: (2/1440),
-      path: ScreenerField.Cookies.PATH
+      path: Field.Cookies.PATH
     });
 
     /**
@@ -179,7 +178,7 @@ class ScreenerField {
     window.addEventListener('hashchange', event => this._router(event));
 
     // Close Questions
-    $el.on('click', ScreenerField.Selectors.QUESTION, event => {
+    $el.on('click', Field.Selectors.QUESTION, event => {
       this._routerQuestion(event);
     });
 
@@ -188,7 +187,7 @@ class ScreenerField {
 
     // Set the timeout for the application
     Utility.sessionTimeout(
-      ScreenerField.IdleSessionConfig.IDLE_SESSION_TIMEOUT,
+      Field.IdleSessionConfig.IDLE_SESSION_TIMEOUT,
       this._idleSession
     );
 
@@ -203,7 +202,7 @@ class ScreenerField {
     if (timer.int > 1) {
       // prevents the page refresh until initial interaction
       // location.reload(); // The data will be cleared.
-      let message = ScreenerField.IdleSessionConfig.IDLE_SESSION_MESSAGE;
+      let message = Field.IdleSessionConfig.IDLE_SESSION_MESSAGE;
       alert(message);
       location.reload();
     }
@@ -229,7 +228,7 @@ class ScreenerField {
 
     window.screenerCallback = () => {
       window.grecaptcha.render(
-        document.querySelector(ScreenerField.Selectors.RECAPTCHA), {
+        document.querySelector(Field.Selectors.RECAPTCHA), {
           'sitekey': Utility.CONFIG.GRECAPTCHA_SITE_KEY,
           'callback': 'screenerRecaptcha',
           'expired-callback': 'screenerRecaptchaReset'
@@ -257,7 +256,7 @@ class ScreenerField {
     return {
       getMessage: () => 'Must be a valid NYC zip code',
       validate: function(value) {
-        if (ScreenerField.NYC_ZIPS.indexOf(value) > -1) return true;
+        if (Field.NYC_ZIPS.indexOf(value) > -1) return true;
         return false;
       }
     };
@@ -286,7 +285,7 @@ class ScreenerField {
    * @param  {string} page the page hash
    */
   _routerPage(page) {
-    let view = document.querySelector(ScreenerField.Selectors.VIEW);
+    let view = document.querySelector(Field.Selectors.VIEW);
 
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) console.log(`routerPage: ${page}`);
@@ -295,17 +294,17 @@ class ScreenerField {
     window.location.hash = page;
     view.scrollTop = 0;
 
-    $(ScreenerField.Selectors.PAGE)
-      .removeClass(ScreenerField.Classes.ACTIVE)
-      .addClass(ScreenerField.Classes.HIDDEN)
+    $(Field.Selectors.PAGE)
+      .removeClass(Field.Classes.ACTIVE)
+      .addClass(Field.Classes.HIDDEN)
       .removeClass('fadeIn')
       .attr('aria-hidden', 'true')
       .find(':input, a')
       .attr('tabindex', '-1');
 
     $(page)
-      .removeClass(ScreenerField.Classes.HIDDEN)
-      .addClass(ScreenerField.Classes.ACTIVE)
+      .removeClass(Field.Classes.HIDDEN)
+      .addClass(Field.Classes.ACTIVE)
       .addClass('fadeIn')
       .removeAttr('aria-hidden')
       .find(':input, a')
@@ -319,11 +318,11 @@ class ScreenerField {
    */
   _routerQuestion(event, hash) {
     hash = (typeof hash != 'undefined') ? hash : event.target.hash;
-    let page = $(hash).closest(ScreenerField.Selectors.PAGE);
-    let target = $(hash).find(ScreenerField.Selectors.TOGGLE_QUESTION);
-    let show = !target.hasClass(ScreenerField.Classes.ACTIVE);
+    let page = $(hash).closest(Field.Selectors.PAGE);
+    let target = $(hash).find(Field.Selectors.TOGGLE_QUESTION);
+    let show = !target.hasClass(Field.Classes.ACTIVE);
 
-    if (!page.hasClass(ScreenerField.Classes.ACTIVE)) {
+    if (!page.hasClass(Field.Classes.ACTIVE)) {
       this._routerPage(`#${page.attr('id')}`);
       show = true;
     }
@@ -333,13 +332,13 @@ class ScreenerField {
       /* eslint-disable no-console, no-debugger */
       if (Utility.debug()) console.log(`routerQuestion: Show ${hash}`);
       /* eslint-enable no-console, no-debugger */
-      $(ScreenerField.Selectors.TOGGLE_QUESTION)
-        .addClass(ScreenerField.Classes.HIDDEN)
-        .removeClass(ScreenerField.Classes.ACTIVE)
+      $(Field.Selectors.TOGGLE_QUESTION)
+        .addClass(Field.Classes.HIDDEN)
+        .removeClass(Field.Classes.ACTIVE)
         .prop('aria-hidden', true);
 
-      target.addClass(ScreenerField.Classes.ACTIVE)
-        .removeClass(ScreenerField.Classes.HIDDEN)
+      target.addClass(Field.Classes.ACTIVE)
+        .removeClass(Field.Classes.HIDDEN)
         .prop('aria-hidden', false);
 
       // Scrolling Behavior
@@ -347,7 +346,7 @@ class ScreenerField {
       setTimeout(() => {
         document.querySelector(hash)
           .scrollIntoView(true);
-        document.querySelector(ScreenerField.Selectors.VIEW)
+        document.querySelector(Field.Selectors.VIEW)
           .scrollBy({top: -60, left: 0, behavior: 'auto'});
       }, 1);
 
@@ -358,8 +357,8 @@ class ScreenerField {
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug()) console.log(`routerQuestion: Hide ${hash}`);
     /* eslint-enable no-console, no-debugger */
-    target.addClass(ScreenerField.Classes.HIDDEN)
-      .removeClass(ScreenerField.Classes.ACTIVE)
+    target.addClass(Field.Classes.HIDDEN)
+      .removeClass(Field.Classes.ACTIVE)
       .prop('aria-hidden', true);
     // Scrolling Behavior
     event.preventDefault();
@@ -403,16 +402,16 @@ class ScreenerField {
           ($el.prop('checked') && Boolean(parseInt($el.val(), 10))) ||
           ($el.is('select') && $el.val())
       ) {
-        $target.removeClass(ScreenerField.Classes.HIDDEN);
+        $target.removeClass(Field.Classes.HIDDEN);
       } else {
-        $target.addClass(ScreenerField.Classes.HIDDEN);
+        $target.addClass(Field.Classes.HIDDEN);
       }
     }
     if ($el.data('shows')) {
-      $($el.data('shows')).removeClass(ScreenerField.Classes.HIDDEN);
+      $($el.data('shows')).removeClass(Field.Classes.HIDDEN);
     }
     if ($el.data('hides')) {
-      $($el.data('hides')).addClass(ScreenerField.Classes.HIDDEN);
+      $($el.data('hides')).addClass(Field.Classes.HIDDEN);
     }
   }
 
@@ -574,8 +573,8 @@ class ScreenerField {
  * @param  {string} key  [description]
  * @param  {object} data [description]
  */
-ScreenerField.track = function(key, data) {
-  Utility.track(`${ScreenerField.ANALYTICS_PREFIX} ${key}`, data);
+Field.track = function(key, data) {
+  Utility.track(`${Field.ANALYTICS_PREFIX} ${key}`, data);
 };
 
 /**
@@ -584,17 +583,17 @@ ScreenerField.track = function(key, data) {
  * @param  {event}  event - the click event
  * @param  {string} scope - the scope to validate, if undefined validates all
  */
-ScreenerField.validate = function(event, scope) {
+Field.validate = function(event, scope) {
   event.preventDefault();
   scope = (typeof scope !== 'undefined')
     ? scope : event.currentTarget.dataset.vvScope;
   if (typeof scope !== 'undefined') {
     this.$validator.validateAll(scope).then(valid => {
-      ScreenerField.valid(event.target.hash, valid);
+      Field.valid(event.target.hash, valid);
     });
   } else {
     this.$validator.validate().then(valid => {
-      ScreenerField.valid(event.target.hash, valid);
+      Field.valid(event.target.hash, valid);
     });
   }
 };
@@ -604,7 +603,7 @@ ScreenerField.validate = function(event, scope) {
  * @param {string}  hash  - The hash to move to
  * @param {boolean} valid - Wether the validator passes validation
  */
-ScreenerField.valid = function(hash, valid) {
+Field.valid = function(hash, valid) {
   if (!valid) {
     /* eslint-disable no-console, no-debugger */
     if (Utility.debug())
@@ -625,7 +624,7 @@ ScreenerField.valid = function(hash, valid) {
  *                       {key} if object is contained in a model,
  *                       add the data-key parameter
  */
-ScreenerField.push = function(event) {
+Field.push = function(event) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let key = el.dataset.key;
@@ -663,7 +662,7 @@ ScreenerField.push = function(event) {
  * @param  {string} value the name of the value to check
  * @return {boolean}      wether or not the value is in the list or not
  */
-ScreenerField.checked = function(list, value) {
+Field.checked = function(list, value) {
   return (this[list].indexOf(value) > -1);
 };
 
@@ -671,7 +670,7 @@ ScreenerField.checked = function(list, value) {
  * Resets a attribute matrix, ex "none of these apply"
  * @param  {object} event the click event
  */
-ScreenerField.resetAttr = function(event) {
+Field.resetAttr = function(event) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let index = el.dataset.index;
@@ -706,14 +705,14 @@ ScreenerField.resetAttr = function(event) {
  * @param  {string} attr - if passed, will set this attribute instead of the
  *                         data attribute
  */
-ScreenerField.setAttr = function(event, value, attr) {
+Field.setAttr = function(event, value, attr) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let index = el.dataset.index;
   let key = (typeof attr != 'undefined') ? attr : el.dataset.key;
   let reset = el.dataset.reset;
   // get the typed value;
-  value = (typeof value != 'undefined') ? value : ScreenerField.getTypedVal(el);
+  value = (typeof value != 'undefined') ? value : Field.getTypedVal(el);
   // set the attribute;
   /* eslint-disable no-console, no-debugger */
   if (typeof index === 'undefined') {
@@ -736,7 +735,7 @@ ScreenerField.setAttr = function(event, value, attr) {
  * @param  {string} event - the blur event
  * @return {string}       - the formatted string
  */
-ScreenerField.filterDollars = function(event) {
+Field.filterDollars = function(event) {
   let value = event.currentTarget.value;
   let postfix = '';
   if (`${value}`.indexOf('.') > -1) {
@@ -755,7 +754,7 @@ ScreenerField.filterDollars = function(event) {
  * @param  {object} event - the key down event object
  * @return {string}       - the formatted string
  */
-ScreenerField.filterPhone = function(event) {
+Field.filterPhone = function(event) {
   const key = event.keyCode;
   const backspace = (key === 8 || key === 46);
   const arrows = (key >= 37 && key <= 40);
@@ -784,12 +783,12 @@ ScreenerField.filterPhone = function(event) {
  * @param  {string} attr - if passed, will set this attribute instead of the
  *                         data attribute
  */
-ScreenerField.setAllAttr = function(event, value, attr) {
+Field.setAllAttr = function(event, value, attr) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let key = (typeof attr != 'undefined') ? attr : el.dataset.key;
   let keys = el.dataset.key.split(',');
-  value = (typeof value != 'undefined') ? value : ScreenerField.getTypedVal(el);
+  value = (typeof value != 'undefined') ? value : Field.getTypedVal(el);
   for (let i = this[obj].length - 1; i >= 0; i--) {
     for (let k = keys.length - 1; k >= 0; k--) {
       this[obj][i].set(keys[k], value);
@@ -808,7 +807,7 @@ ScreenerField.setAllAttr = function(event, value, attr) {
  * @param  {Number} index      - index of model if in a collection
  * @return {object} key value pair of truthy values
  */
-ScreenerField.getAttrs = function(object, keys, index = -1) {
+Field.getAttrs = function(object, keys, index = -1) {
   let obj = (index > -1) ? this[object][index] : this[object];
   keys = (typeof keys === 'string') ? keys.split(',') : keys;
   return _.pick(obj._attrs, (value, key) => {
@@ -820,11 +819,11 @@ ScreenerField.getAttrs = function(object, keys, index = -1) {
  * Special processor for the household model housing attributes.
  * @param {event} event - the change event for housing
  */
-ScreenerField.setHousing = function(event) {
+Field.setHousing = function(event) {
   let el = event.target;
   let key = el.dataset.key;
   let keys = [];
-  let value = ScreenerField.getTypedVal(el);
+  let value = Field.getTypedVal(el);
   let reset = false;
 
   this.household.set(key, value);
@@ -860,7 +859,7 @@ ScreenerField.setHousing = function(event) {
  * the first person exists by default
  * @param  {event} event to pass to setAttr()
  */
-ScreenerField.populate = function(event) {
+Field.populate = function(event) {
   let value = event.currentTarget.value;
   if (value === '' || parseInt(value, 10) === 0) return;
   let dif = value - this.people.length;
@@ -886,7 +885,7 @@ ScreenerField.populate = function(event) {
  *                          key {income key}
  *                          value {model attribute value}
  */
-ScreenerField.pushPayment = function(event) {
+Field.pushPayment = function(event) {
   let el = event.currentTarget;
   let obj = el.dataset.object;
   let objIndex = parseInt(el.dataset.index);
@@ -916,7 +915,7 @@ ScreenerField.pushPayment = function(event) {
  * Remove a payment if the element target value is blank
  * @param  {event} event - change event object
  */
-ScreenerField.removePayment = function(event) {
+Field.removePayment = function(event) {
   if (event.currentTarget.value !== '') return;
   let el = event.currentTarget;
   let obj = el.dataset.object;
@@ -936,7 +935,7 @@ ScreenerField.removePayment = function(event) {
  * @param  {string} key   - optional way to set the key of the model
  * @param  {string} type  - an optional type to remove
  */
-ScreenerField.removeAllPayments = function(event, key, type) {
+Field.removeAllPayments = function(event, key, type) {
   if (event.currentTarget.value === 1) return;
   key = (typeof key != 'undefined') ? key : event.currentTarget.dataset.key;
   for (let i = this.people.length - 1; i >= 0; i--) {
@@ -957,7 +956,7 @@ ScreenerField.removeAllPayments = function(event, key, type) {
  * @param  {[type]} type      - the type value to search by
  * @return {object}           - the payment, false if not found
  */
-ScreenerField.getPayment = function(obj, objIndex, key, type) {
+Field.getPayment = function(obj, objIndex, key, type) {
   let payment = _.findWhere(
     this[obj][objIndex]._attrs[key], {'type': type}
   );
@@ -968,7 +967,7 @@ ScreenerField.getPayment = function(obj, objIndex, key, type) {
  * Check for single occupant of household
  * @return {boolean} if household is 1 occupant
  */
-ScreenerField.singleOccupant = function() {
+Field.singleOccupant = function() {
   return (this.household._attrs.members === 1);
 };
 
@@ -978,11 +977,11 @@ ScreenerField.singleOccupant = function() {
  * @param {HTMLElement} input
  * @return {boolean|Number|string} typed value
  */
-ScreenerField.getTypedVal = function(input) {
+Field.getTypedVal = function(input) {
   const val = input.value;
   let finalVal = input.value;
   switch (input.dataset.type) {
-    case ScreenerField.InputType.BOOLEAN: {
+    case Field.InputType.BOOLEAN: {
       if (input.type === 'checkbox') {
         finalVal = input.checked;
       } else { // assume it's a radio button
@@ -997,7 +996,7 @@ ScreenerField.getTypedVal = function(input) {
       /* eslint-enable no-console, no-debugger */
       break;
     }
-    case ScreenerField.InputType.FLOAT: {
+    case Field.InputType.FLOAT: {
       finalVal = (
           _.isNumber(parseFloat(val)) &&
           !_.isNaN(parseFloat(val))
@@ -1009,7 +1008,7 @@ ScreenerField.getTypedVal = function(input) {
       /* eslint-enable no-console, no-debugger */
       break;
     }
-    case ScreenerField.InputType.INTEGER: {
+    case Field.InputType.INTEGER: {
       finalVal = (
           _.isNumber(parseInt(val, 10)) &&
           !_.isNaN(parseInt(val, 10))
@@ -1029,7 +1028,7 @@ ScreenerField.getTypedVal = function(input) {
  * Use the model's commit method to save itself to local storage.
  * @param  {object} event - the change event of the input
  */
-ScreenerField.commit = function(event) {
+Field.commit = function(event) {
   let obj = event.target.dataset.object;
   this[obj].commit();
 };
@@ -1039,7 +1038,7 @@ ScreenerField.commit = function(event) {
  * @param  {string} slug - the slug value of the string
  * @return {string}      - the local string label
  */
-ScreenerField.localString = function(slug) {
+Field.localString = function(slug) {
   try {
     return _.findWhere(
       window.LOCALIZED_STRINGS,
@@ -1054,7 +1053,7 @@ ScreenerField.localString = function(slug) {
  * Component for the person label
  * @type {Object} Vue Component
  */
-ScreenerField.personLabel = {
+Field.personLabel = {
   props: ['index', 'person'],
   template: '<span class="text-color-black">' +
     '<span v-bind:class="personIndex(index)"></span> ' +
@@ -1080,7 +1079,7 @@ ScreenerField.personLabel = {
       classes[name] = true;
       return classes;
     },
-    localString: ScreenerField.localString
+    localString: Field.localString
   }
 };
 
@@ -1088,7 +1087,7 @@ ScreenerField.personLabel = {
  * Selectors used by this component.
  * @enum {string}
  */
-ScreenerField.Selectors = {
+Field.Selectors = {
   DOM: '[data-js="screener-field"]',
   PAGE: '[data-js="page"]',
   RECAPTCHA: '[data-js="recaptcha"]',
@@ -1103,7 +1102,7 @@ ScreenerField.Selectors = {
  * Classes used by this component.
  * @enum {string}
  */
-ScreenerField.Classes = {
+Field.Classes = {
   ACTIVE: 'active',
   HIDDEN: 'hidden',
   HIDDEN_OPACITY: 'opacity-0'
@@ -1113,23 +1112,23 @@ ScreenerField.Classes = {
  * data-type attributes used by this component.
  * @enum {string}
  */
-ScreenerField.InputType = {
+Field.InputType = {
   BOOLEAN: 'boolean',
   FLOAT: 'float',
   INTEGER: 'integer'
 };
 
 /** Cookie references */
-ScreenerField.Cookies = {
+Field.Cookies = {
   VIEWS: 'access_nyc_field_screener_views',
   PATH: 'peu'
 };
 
 /** @type {String} Analytics Prefix */
-ScreenerField.ANALYTICS_PREFIX = 'PEU';
+Field.ANALYTICS_PREFIX = 'PEU';
 
 /** @type {Object} The configuration for the idle session */
-ScreenerField.IdleSessionConfig = {
+Field.IdleSessionConfig = {
   IDLE_SESSION_TIMEOUT: 3600000, // must match message below
   IDLE_SESSION_MESSAGE: [
       'This session has been inactive for an hour,\n', // must match time above
@@ -1142,6 +1141,6 @@ ScreenerField.IdleSessionConfig = {
  * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
  * @type {array<String>}
  */
-ScreenerField.NYC_ZIPS = Shared.NYC_ZIPS;
+Field.NYC_ZIPS = Utility.NYC_ZIPS;
 
-export default ScreenerField;
+export default Field;

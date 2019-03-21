@@ -17,5 +17,11 @@
     <button type="button" class="js-screener-submit btn btn-primary btn-next btn-small" data-action="{{ formAction }}">
       {{ __('Yes, continue to my results', 'accessnyc-screener') }}
     </button>
+
+    <div data-js="spinner" style="display:none;">
+      <div class="flex justify-center">
+        {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
+      </div>
+    </div>
   </div>
 </div>

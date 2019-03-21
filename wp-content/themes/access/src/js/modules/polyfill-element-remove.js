@@ -34,4 +34,4 @@ class Remove {
   }
 }
 
-export default Remove;
+new Remove();

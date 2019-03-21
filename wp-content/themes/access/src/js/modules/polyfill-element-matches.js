@@ -30,4 +30,4 @@ class Matches {
   }
 }
 
-export default Matches;
+new Matches();

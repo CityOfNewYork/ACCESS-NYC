@@ -13,6 +13,7 @@ $path-to-images: 'img/';
 @import 'bourbon/app/assets/stylesheets/settings/deprecation-warnings';
 @import 'bourbon/app/assets/stylesheets/settings/asset-pipeline';
 @import 'bourbon/app/assets/stylesheets/helpers/directional-values';
+@import 'animate.scss/vendor/assets/stylesheets/animate/fadeIn';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUpBig';
 
@@ -53,6 +54,7 @@ $path-to-images: 'img/';
 @import 'access-nyc-patterns/src/components/checklist/checklist';
 @import 'access-nyc-patterns/src/components/disclaimer/disclaimer';
 @import 'access-nyc-patterns/src/components/filter/filter';
+@import 'access-nyc-patterns/src/components/filter/filter-multi';
 @import 'access-nyc-patterns/src/components/text-controller/text-controller';
 @import 'access-nyc-patterns/src/components/header/header';
 @import 'access-nyc-patterns/src/components/side-nav/side-nav';

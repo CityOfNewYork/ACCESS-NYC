@@ -103,3 +103,8 @@
     </footer>
   </main>
 {% endblock %}
+
+{% block scripts_footer %}
+{{ function('enqueue_script', 'assets/js/main') }}
+{{ function('enqueue_script', 'assets/js/programs') }}
+{% endblock %}
