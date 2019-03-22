@@ -69,16 +69,8 @@ class StaticMap {
       return this;
     }
 
-    $(window).on('resize', _.debounce(() => {
-      const newSize = this.getContainerSize();
-      if (newSize.height !== this._height || newSize.width !== this._width) {
-        this._height = newSize.height;
-        this._width = newSize.width;
-        this.renderImage();
-      }
-    }, 300));
-
     const size = this.getContainerSize();
+
     this._height = size.height;
     this._width = size.width;
 
