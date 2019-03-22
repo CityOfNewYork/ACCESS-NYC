@@ -136,6 +136,7 @@ gulp.task('webpack', () =>
     devtool: 'source-map',
     target: 'web',
     performance: { hints: false },
+    watch: (NODE_ENV === 'development') ? true : false,
     resolve: {
       modules: [
         'node_modules', PATTERNS_SRC, PATTERNS_DIST, `${ SRC }/js`
@@ -302,7 +303,7 @@ gulp.task('default', () => {
       reload
     ));
 
-  // Watch .js files
+  // Watch .js files. Watching is handled by Webpack
   if (NODE_ENV === 'production') {
     gulp.watch(`${ SRC }/js/**/*.js`,
       gulp.series(
