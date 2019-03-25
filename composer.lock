@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecc294ed67dde205cae6b6ce20a510c4",
+    "content-hash": "a499432ff302ab95a567bf350dabc99e",
     "packages": [
         {
             "name": "composer/installers",
@@ -548,16 +548,16 @@
         },
         {
             "name": "nyco/wp-config",
-            "version": "0.0.5",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-                "reference": "ce35c5788ee7239efea0bf80852e8e403dcac387"
+                "reference": "2274599c31a52172151b0298e7b04c73516f6c33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/ce35c5788ee7239efea0bf80852e8e403dcac387",
-                "reference": "ce35c5788ee7239efea0bf80852e8e403dcac387",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/2274599c31a52172151b0298e7b04c73516f6c33",
+                "reference": "2274599c31a52172151b0298e7b04c73516f6c33",
                 "shasum": ""
             },
             "require": {
@@ -588,7 +588,7 @@
                 "environment",
                 "wordpress"
             ],
-            "time": "2018-06-08T16:01:58+00:00"
+            "time": "2019-03-25T13:58:36+00:00"
         },
         {
             "name": "nyco/wp-open-data-transients",

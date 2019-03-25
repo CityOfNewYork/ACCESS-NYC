@@ -6,5 +6,9 @@
  * Author: NYC Opportunity
  */
 
-if (file_exists(WPMU_PLUGIN_DIR . '/wp-config/Config.php'))
-  require WPMU_PLUGIN_DIR . '/wp-config/Config.php';
+if (file_exists(WPMU_PLUGIN_DIR . '/wp-config/Config.php')) {
+  require_once ABSPATH . '/vendor/mustangostang/spyc/Spyc.php';
+  require_once WPMU_PLUGIN_DIR . '/wp-config/Config.php';
+
+  new Nyco\WpConfig\Config\Config(file_exists(__DIR__ . '/env.php'));
+}

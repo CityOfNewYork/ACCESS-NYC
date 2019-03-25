@@ -35,7 +35,7 @@
     "wpackagist-plugin/rollbar": "^2.4",
     "wpackagist-plugin/bulk-delete": "5.6.1",
     "nyco/wp-assets": "0.0.5",
-    "nyco/wp-config": "0.0.5",
+    "nyco/wp-config": "^0.1.0",
     "nyco/wp-open-data-transients": "^0.0.4",
     "mustangostang/spyc": "^0.6.2",
     "rarst/wps": "^1.2"
