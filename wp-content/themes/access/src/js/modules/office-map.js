@@ -5,6 +5,7 @@ import $ from 'jquery';
 import OfficeFilter from 'modules/office-filter';
 import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
+import MissPlete from 'modules/MissPlete';
 import _ from 'underscore';
 
 /**
@@ -57,8 +58,17 @@ class OfficeMap {
       center: this._mapPosition
     });
 
+    /** @private {this._google.maps.places.Autocomplete}Autocomplete instance */
+    this._service = new this._google.maps.places.AutocompleteService();
+
+    /** @private {this.missPlete} missPlete class for dropdown */
+    this._missPlete = new MissPlete({
+      input: document.querySelector('.js-search-box'), // the input element
+      className: 'c-autocomplete' // this classname will get assigned to the autocomplete dropdown element
+    });
+
     /** @private {this._google.maps.places.SearchBox} Search box controller. */
-    this._searchBox = new this._google.maps.places.SearchBox(this._searchEl);
+    // this._searchBox = new this._google.maps.places.SearchBox(this._searchEl);
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
@@ -118,22 +128,60 @@ class OfficeMap {
 
     // Bias the SearchBox results towards current map's viewport when the map
     // bounds change.
-    this._map.addListener('bounds_changed', _.debounce(() => {
-      this._searchBox.setBounds(this._map.getBounds());
-    }, 100));
+    // this._map.addListener('bounds_changed', _.debounce(() => {
+    //   this._searchBox.setBounds(this._map.getBounds());
+    // }, 100));
+    const displayOnMap = (mapItems) => {
+      mapItems.forEach(place => {
+        console.log(place);
+      })
+    };
 
     // Attach handler for the autocomplete search box. This updates the map
     // position and re-sorts locations around that position.
-    this._searchBox.addListener('places_changed', () => {
-      const place = this._searchBox.getPlaces()[0];
-      if (place) {
-        this._mapPosition = place.geometry.location;
-        this._map.panTo(this._mapPosition);
-        this.sortByDistance().clearLocations().updateUrl().updateList()
-            .updateUrl();
-        $(this._searchEl).blur();
+    this._searchEl.addEventListener('keyup', (event) => {
+      if(event.target.value) {
+        this._service.getPlacePredictions({
+           input: event.target.value, // this is where the value will be stored
+           offset: 3,
+           types: ['geocode'],
+           bounds: this._map.getBounds()
+        }, (predictions) => {
+          // Assuming this is the callback once the predictions are received.
+          // create the dropdown here and display predictions to the user
+          if(predictions) {
+            let results = predictions.map(e => [e['description']]);
+
+            event.target.missplete = new MissPlete({
+              input: event.target,
+              options: results, // the input element
+              className: 'c-autocomplete' // this classname will get assigned to the autocomplete dropdown element
+            });
+          }
+          predictions.forEach(place => {
+            console.log(place);
+          })
+        });
       }
     });
+
+
+
+    // this._searchBox.addListener('places_changed', () => {
+    //   const place = this._service.getPlacePredictions({
+    //         input: "jackson heights",
+    //         offset: 3,
+    //         types: ['establishment', 'geocode']
+    //     }, callback);;
+    //   debugger;
+    //   if (place) {
+    //     this._mapPosition = place.geometry.location;
+    //     this._map.panTo(this._mapPosition);
+    //     this.sortByDistance().clearLocations().updateUrl().updateList()
+    //         .updateUrl();
+    //     $(this._searchEl).blur();
+    //   }
+    // });
 
     // Initialize the filter control and listen for filter updates.
     this._filter.setPrograms(this._programs).init();
