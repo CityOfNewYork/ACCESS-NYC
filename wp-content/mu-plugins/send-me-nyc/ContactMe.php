@@ -7,7 +7,6 @@ namespace SMNYC;
  * Creates AJAX hooks for you, and automatically includes CSRF protection
  */
 class ContactMe {
-
 	/**
 	 * For child classes to override. Used in nonce hash and AJAX hook
 	 */
@@ -29,7 +28,6 @@ class ContactMe {
 	protected $account_hint;
 	protected $secret_hint;
 	protected $from_hint;
-
 
 	const RESULTS_PAGE = 1;
 	const OTHER_PAGE = 2;
@@ -129,6 +127,7 @@ class ContactMe {
 		wp_send_json( $response );
 		wp_die();
 	}
+
 	protected function success( $content=NULL ) {
 		do_action( 'results_sent',
 			$this->action,
@@ -139,6 +138,7 @@ class ContactMe {
 		);
 		$this->respond(['success'=>true, 'error'=>NULL, 'message'=>NULL ]);
 	}
+
 	protected function failure($code, $message, $retry=false) {
 		$this->respond([
 			'success'=>false,
@@ -183,10 +183,16 @@ class ContactMe {
 		register_setting( $fieldgroup, $field_prefix.'_secret' );
 		register_setting( $fieldgroup, $field_prefix.'_from' );
 	}
+
 	public function settings_heading_text(){
 		echo "<p>Enter your ".$this->service." credentials here.</p>";
 	}
+
 	public function settings_field_html( $args ){
-		echo "<input type='text' name='".$args[0]."' size=40 id='".$args[0]."' value='".get_option( $args[0], '' )."' placeholder='".$args[1]."' />";
+		echo "<input type='text' name='".$args[0]."' size=40 id='".$args[0]."' value='".get_option( $args[0], '' )."' />";
+
+		if ($_ENV[strtoupper($args[0])]) {
+			echo '<p class="description">Environment currently set to "' . $_ENV[strtoupper($args[0])] . '"<p>';
+		}
 	}
 }

@@ -21,7 +21,7 @@ function settings_link($links) {
 function add_settings_page() {
   add_options_page(
     'Drools Proxy Settings',
-    'DroolsProxy',
+    'Drools Proxy',
     'manage_options',
     'drools_config',
     '\Drools\settings_content'

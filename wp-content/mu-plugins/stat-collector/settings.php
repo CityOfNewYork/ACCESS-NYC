@@ -16,8 +16,8 @@ function settings_link($links) {
 
 function add_settings_page() {
   add_options_page(
-    'StatCollector Connection Page',
-    'StatCollector',
+    'Stat Collector Connection Page',
+    'Stat Collector',
     'manage_options',
     'collector_config',
     '\StatCollector\settings_content'

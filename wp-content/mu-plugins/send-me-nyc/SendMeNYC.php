@@ -1,6 +1,6 @@
 <?php
 /*
-	Plugin Name: SendMeNYC
+	Plugin Name: Send Me NYC
 	Description: Email/SMS gateway for saving links for onesself
 	Author:      Blue State Digital
 */
@@ -36,7 +36,7 @@ add_action( 'admin_menu', '\SMNYC\add_settings_page' );
 function add_settings_page() {
 	add_options_page(
 		'SendMeNYC Settings',
-		'SendMeNYC',
+		'Send Me NYC',
 		'manage_options',
 		'smnyc_config',
 		'\SMNYC\settings_content'
