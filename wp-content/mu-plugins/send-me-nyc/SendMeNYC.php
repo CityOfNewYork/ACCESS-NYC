@@ -35,7 +35,7 @@ add_filter( 'plugin_action_links_'.plugin_basename( __FILE__ ), '\SMNYC\settings
 add_action( 'admin_menu', '\SMNYC\add_settings_page' );
 function add_settings_page() {
 	add_options_page(
-		'SendMeNYC Settings',
+		'Send Me NYC Settings',
 		'Send Me NYC',
 		'manage_options',
 		'smnyc_config',
@@ -44,7 +44,7 @@ function add_settings_page() {
 }
 function settings_content(){ ?>
 <div class="wrap">
-	<h1>SendMeNYC Settings</h1>
+	<h1>Send Me NYC Settings</h1>
 
 	<form method="post" action="options.php">
 		<?php

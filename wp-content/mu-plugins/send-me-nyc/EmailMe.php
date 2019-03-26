@@ -184,13 +184,19 @@ class EmailMe extends ContactMe {
     try {
       $user = get_option('smnyc_aws_user');
       $secret = get_option('smnyc_aws_secret');
-      $from = get_option('smnyc_aws_from');
+			$from = get_option('smnyc_aws_from');
+			$display = get_option('smnyc_aws_display_name');
       $reply = get_option('smnyc_aws_reply');
 
       $user = (!empty($user)) ? $user : $_ENV['SMNYC_AWS_USER'];
       $secret = (!empty($secret)) ? $secret : $_ENV['SMNYC_AWS_SECRET'];
       $from = (!empty($from)) ? $from : $_ENV['SMNYC_AWS_FROM'];
-      $reply = (!empty($reply)) ? $reply : $_ENV['SMNYC_AWS_REPLY'];
+			$display = (!empty($display))
+				? $display : $_ENV['SMNYC_AWS_DISPLAY_NAME'];
+			$reply = (!empty($reply)) ? $reply : $_ENV['SMNYC_AWS_REPLY'];
+
+			// Build display name
+			$from = (!empty($display)) ? "$display<$from>" : $from;
 
       $client = new SesClient([
         'version' => 'latest',
@@ -199,7 +205,7 @@ class EmailMe extends ContactMe {
           'key' => $user,
           'secret' => $secret
         ]
-      ]);
+			]);
 
       $config = [
         'Source' => $from,
@@ -235,16 +241,29 @@ class EmailMe extends ContactMe {
 
 	public function create_settings_section() {
 		parent::create_settings_section();
-		$field = 'smnyc_'.strtolower($this->service).'_reply';
-		add_settings_field(
-			$field,
-			"Reply-To <em>(optional)</em>",
-			[$this,'settings_field_html'],
-			'smnyc_config',
-			'smnyc_'.strtolower($this->action).'_section',
-			[ $field, "no-reply@domain.org" ]
-		);
-		register_setting( 'smnyc_settings', $field);
-	}
 
+		$field_display = 'smnyc_' . strtolower($this->service) . '_display_name';
+		$field_reply = 'smnyc_' . strtolower($this->service) . '_reply';
+
+		add_settings_field(
+			$field_display,
+			'Email Display Name <em>(optional)</em>',
+			[$this, 'settings_field_html'],
+			'smnyc_config',
+			'smnyc_' . strtolower($this->action) . '_section',
+			[$field_display, '']
+		);
+
+		add_settings_field(
+			$field_reply,
+			'Reply-To <em>(optional)</em>',
+			[$this, 'settings_field_html'],
+			'smnyc_config',
+			'smnyc_' . strtolower($this->action) . '_section',
+			[$field_reply, 'no-reply@domain.org']
+		);
+
+		register_setting('smnyc_settings', $field_display);
+		register_setting('smnyc_settings', $field_reply);
+	}
 }

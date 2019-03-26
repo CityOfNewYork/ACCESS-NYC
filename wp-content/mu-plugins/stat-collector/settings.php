@@ -16,7 +16,7 @@ function settings_link($links) {
 
 function add_settings_page() {
   add_options_page(
-    'Stat Collector Connection Page',
+    'Stat Collector Settings',
     'Stat Collector',
     'manage_options',
     'collector_config',
@@ -26,7 +26,7 @@ function add_settings_page() {
 
 function settings_content() {
   echo '<div class="wrap">';
-  echo '  <h1>StatCollector Settings</h1>';
+  echo '  <h1>Stat Collector Settings</h1>';
   echo '  <form method="post" action="options.php">';
 
   do_settings_sections('collector_config');
@@ -89,6 +89,6 @@ function settings_heading_text(){
 function settings_field_html($args){
   echo "<input type='text' name='".$args[0]."' size=40 id='".$args[0]."' value='".get_option($args[0], '')."' placeholder='".$args[1]."' />";
   if ($_ENV[strtoupper($args[0])]) {
-    echo '<p class="description">Environment currently set to "'.$_ENV[strtoupper($args[0])].'"<p>';
+    echo '<p class="description">Environment currently set to <code>'.$_ENV[strtoupper($args[0])].'</code><p>';
   }
 }

@@ -83,6 +83,6 @@ function settings_heading_text(){
 function settings_field_html($args){
   echo "<input type='text' name='".$args[0]."' size=40 id='".$args[0]."' value='".get_option($args[0], '')."' placeholder='".$args[1]."' />";
   if ($_ENV[strtoupper($args[0])]) {
-    echo '<p class="description">Environment currently set to "'.$_ENV[strtoupper($args[0])].'"<p>';
+    echo '<p class="description">Environment currently set to <code>'.$_ENV[strtoupper($args[0])].'</code><p>';
   }
 }

@@ -192,7 +192,7 @@ class ContactMe {
 		echo "<input type='text' name='".$args[0]."' size=40 id='".$args[0]."' value='".get_option( $args[0], '' )."' />";
 
 		if ($_ENV[strtoupper($args[0])]) {
-			echo '<p class="description">Environment currently set to "' . $_ENV[strtoupper($args[0])] . '"<p>';
+			echo '<p class="description">Environment currently set to <code>' . $_ENV[strtoupper($args[0])] . '</code><p>';
 		}
 	}
 }
