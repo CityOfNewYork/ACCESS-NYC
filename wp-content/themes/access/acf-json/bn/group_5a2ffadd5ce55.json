@@ -65,11 +65,13 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 1,
+            "wpml_cf_preferences": 0,
             "default_value": "",
-            "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5a2ffadd6c6bb",
@@ -91,6 +93,27 @@
             "append": ""
         },
         {
+            "key": "field_5c9d1782f3f29",
+            "label": "Program Name",
+            "name": "program_name",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 1,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5a2ffadd6c6e9",
             "label": "Plain Language Program Name",
             "name": "plain_language_program_name",
@@ -103,11 +126,13 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 1,
+            "wpml_cf_preferences": 0,
             "default_value": "",
-            "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5a2ffadd6c761",
@@ -122,10 +147,12 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 1,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
             "tabs": "all",
             "toolbar": "full",
             "media_upload": 0,
-            "default_value": "",
             "delay": 0
         },
         {
@@ -774,5 +801,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1548445540
+    "modified": 1553799074
 }
