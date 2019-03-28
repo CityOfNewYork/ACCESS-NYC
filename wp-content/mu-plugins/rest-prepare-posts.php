@@ -18,7 +18,7 @@ if (file_exists(WPMU_PLUGIN_DIR . '/wp-rest-prepare-posts/index.php')) {
   add_action('rest_api_init', function () use ($types, $RestPreparePosts) {
     foreach ($types as $type) {
       $RestPreparePosts->type = $type;
-      $fields = $RestPreparePosts->getAcf();
+      $fields = $RestPreparePosts->getAcfShownInRest();
 
       add_filter("rest_prepare_$type", function ($post) use ($fields, $RestPreparePosts) {
         // 1. Get the custom field values.

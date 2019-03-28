@@ -52,7 +52,7 @@ class RestPreparePosts
    *
    * @return  Array The collection of AC Fields set to "Show In Rest"
    */
-  public function getAcf() {
+  public function getAcfShownInRest() {
     $groups = acf_get_field_groups();
 
     foreach ($groups as $group)
