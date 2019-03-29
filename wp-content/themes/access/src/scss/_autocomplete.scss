@@ -1,0 +1,41 @@
+/**
+ * Dropdowns
+ */
+
+.c-autocomplete {
+  position: relative;
+}
+
+.c-autocomplete > ul {
+  background: $color-white;
+  color: $color-black;
+
+  position: absolute;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+  text-align: left;
+  border: 1.5rem solid background-color;
+  margin-top: 1px;
+  z-index: 1;
+}
+
+.c-autocomplete > ul > li {
+  padding: .2em .5em;
+}
+
+.c-autocomplete > ul > li.highlight {
+  cursor: pointer;
+  color: $color-white;
+  background-color: $color-blue-light;
+}
+
+.c-autocomplete > ul > li span {
+  color: $color-white;
+}

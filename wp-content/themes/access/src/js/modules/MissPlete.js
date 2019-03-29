@@ -1,8 +1,17 @@
+/* eslint-env browser */
+'use strict';
+
 import jaroWinkler from './jaroWinkler.js';
 import memoize from './memoize.js';
 
+/**
+ * MissPlete for autocomplete.
+ * https://github.com/devowhippit/miss-plete-js
+ */
 class MissPlete {
-
+ /**
+ * class Constructor MissPlete.
+ */
   constructor({
     input,
     options,
@@ -11,7 +20,6 @@ class MissPlete {
     listItemFn = MissPlete.listItemFn
   }) {
     Object.assign(this, { input, options, className, scoreFn, listItemFn });
-
     this.scoredOptions = null;
     this.container = null;
     this.ul = null;
@@ -84,7 +92,7 @@ class MissPlete {
   }
 
   static get MAX_ITEMS() {
-    return 8;
+    return 5;
   }
 
   static listItemFn(scoredOption, itemIndex) {
@@ -92,6 +100,7 @@ class MissPlete {
       ? null
       : document.createElement("li");
     li && li.appendChild(document.createTextNode(scoredOption.displayValue));
+    console.log(li);
     return li;
   }
 

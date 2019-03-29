@@ -18199,11 +18199,20 @@ var _newsletter = require('objects/newsletter/newsletter.common');var _newslette
 })(window, _jquery2.default);
 
 },{"components/accordion/accordion.common":1,"components/filter/filter.common":2,"components/nearby-stops/nearby-stops.common":3,"es6-promise/dist/es6-promise.auto":7,"jquery":8,"modules/office-map":18,"modules/polyfill-foreach":19,"modules/polyfill-matches":20,"modules/polyfill-remove":21,"modules/screener":24,"modules/share-form":25,"modules/static-map":26,"modules/text-sizer":27,"modules/tooltip":28,"modules/utility":29,"objects/newsletter/newsletter.common":4}],13:[function(require,module,exports){
-'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _jaroWinkler = require('./jaroWinkler.js');var _jaroWinkler2 = _interopRequireDefault(_jaroWinkler);
-var _memoize = require('./memoize.js');var _memoize2 = _interopRequireDefault(_memoize);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+/* eslint-env browser */
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
+var _jaroWinkler = require('./jaroWinkler.js');var _jaroWinkler2 = _interopRequireDefault(_jaroWinkler);
+var _memoize = require('./memoize.js');var _memoize2 = _interopRequireDefault(_memoize);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+/**
+                                                                                                                                                                                                                                                                                                                                            * MissPlete for autocomplete.
+                                                                                                                                                                                                                                                                                                                                            * https://github.com/devowhippit/miss-plete-js
+                                                                                                                                                                                                                                                                                                                                            */var
 MissPlete = function () {
-
+  /**
+                         * class Constructor MissPlete.
+                         */
   function MissPlete(_ref)
 
 
@@ -18212,7 +18221,6 @@ MissPlete = function () {
 
   {var _this = this;var input = _ref.input,options = _ref.options,className = _ref.className,_ref$scoreFn = _ref.scoreFn,scoreFn = _ref$scoreFn === undefined ? (0, _memoize2.default)(MissPlete.scoreFn) : _ref$scoreFn,_ref$listItemFn = _ref.listItemFn,listItemFn = _ref$listItemFn === undefined ? MissPlete.listItemFn : _ref$listItemFn;_classCallCheck(this, MissPlete);
     Object.assign(this, { input: input, options: options, className: className, scoreFn: scoreFn, listItemFn: listItemFn });
-
     this.scoredOptions = null;
     this.container = null;
     this.ul = null;
@@ -18266,6 +18274,7 @@ MissPlete = function () {
     });
   } // end constructor
   _createClass(MissPlete, [{ key: 'getSiblingIndex', value: function getSiblingIndex(
+
 
 
 
@@ -18380,7 +18389,7 @@ MissPlete = function () {
       this.container && this.container.remove();
       this.container = null;
       this.ul = null;
-    } }], [{ key: 'scoreFn', value: function scoreFn(inputValue, optionSynonyms) {var closestSynonym = null;var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {for (var _iterator = optionSynonyms[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var synonym = _step.value;var similarity = (0, _jaroWinkler2.default)(synonym.trim().toLowerCase(), inputValue.trim().toLowerCase());if (closestSynonym === null || similarity > closestSynonym.similarity) {closestSynonym = { similarity: similarity, value: synonym };if (similarity === 1) {break;}}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}return { score: closestSynonym.similarity, displayValue: optionSynonyms[0] };} }, { key: 'listItemFn', value: function listItemFn(scoredOption, itemIndex) {var li = itemIndex > MissPlete.MAX_ITEMS ? null : document.createElement("li");li && li.appendChild(document.createTextNode(scoredOption.displayValue));return li;} }, { key: 'MAX_ITEMS', get: function get() {return 8;} }]);return MissPlete;}();exports.default =
+    } }], [{ key: 'scoreFn', value: function scoreFn(inputValue, optionSynonyms) {var closestSynonym = null;var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {for (var _iterator = optionSynonyms[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var synonym = _step.value;var similarity = (0, _jaroWinkler2.default)(synonym.trim().toLowerCase(), inputValue.trim().toLowerCase());if (closestSynonym === null || similarity > closestSynonym.similarity) {closestSynonym = { similarity: similarity, value: synonym };if (similarity === 1) {break;}}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}return { score: closestSynonym.similarity, displayValue: optionSynonyms[0] };} }, { key: 'listItemFn', value: function listItemFn(scoredOption, itemIndex) {var li = itemIndex > MissPlete.MAX_ITEMS ? null : document.createElement("li");li && li.appendChild(document.createTextNode(scoredOption.displayValue));console.log(li);return li;} }, { key: 'MAX_ITEMS', get: function get() {return 5;} }]);return MissPlete;}();exports.default =
 
 
 
@@ -18837,11 +18846,14 @@ OfficeMap = function () {
     /** @private {this._google.maps.places.Autocomplete}Autocomplete instance */
     this._service = new this._google.maps.places.AutocompleteService();
 
-    /** @private {this.missPlete} missPlete class for dropdown */
+    /** @private {this._google.maps.places.PlaceService}PlaceService instance */
+    this._placeService = new this._google.maps.places.PlacesService(this._map);
+
     this._missPlete = new _MissPlete2.default({
-      input: document.querySelector('.js-search-box'), // the input element
-      className: 'c-autocomplete' // this classname will get assigned to the autocomplete dropdown element
-    });
+      input: this._searchEl,
+      options: [],
+      className: 'c-autocomplete' });
+
 
     /** @private {this._google.maps.places.SearchBox} Search box controller. */
     // this._searchBox = new this._google.maps.places.SearchBox(this._searchEl);
@@ -18902,62 +18914,38 @@ OfficeMap = function () {
         _this.updateList().updateUrl();
       });
 
-      // Bias the SearchBox results towards current map's viewport when the map
-      // bounds change.
-      // this._map.addListener('bounds_changed', _.debounce(() => {
-      //   this._searchBox.setBounds(this._map.getBounds());
-      // }, 100));
-      var displayOnMap = function displayOnMap(mapItems) {
-        mapItems.forEach(function (place) {
-          console.log(place);
-        });
-      };
-
       // Attach handler for the autocomplete search box. This updates the map
       // position and re-sorts locations around that position.
       this._searchEl.addEventListener('keyup', function (event) {
         if (event.target.value) {
           _this._service.getPlacePredictions({
-            input: event.target.value, // this is where the value will be stored
+            input: event.target.value,
             offset: 3,
             types: ['geocode'],
+            componentRestrictions: { country: 'us' },
             bounds: _this._map.getBounds() },
           function (predictions) {
-            // Assuming this is the callback once the predictions are received.
-            // create the dropdown here and display predictions to the user
+
             if (predictions) {
               var results = predictions.map(function (e) {return [e['description']];});
 
-              event.target.missplete = new _MissPlete2.default({
-                input: event.target,
-                options: results, // the input element
-                className: 'c-autocomplete' // this classname will get assigned to the autocomplete dropdown element
-              });
+              _this._missPlete.options = results;
+              var otherMissPlete = _this._missPlete;
+
+              _this._missPlete.select = function () {
+                if (otherMissPlete.highlightedIndex !== -1) {
+                  otherMissPlete.input.value = otherMissPlete.
+                  scoredOptions[otherMissPlete.highlightedIndex].displayValue;
+                  otherMissPlete.removeDropdown();
+
+                  _this.displayPlacesOnMap(predictions);
+                  console.dir('we did it');
+                }
+              };
             }
-            predictions.forEach(function (place) {
-              console.log(place);
-            });
           });
         }
       });
-
-
-
-      // this._searchBox.addListener('places_changed', () => {
-      //   const place = this._service.getPlacePredictions({
-      //         input: "jackson heights",
-      //         offset: 3,
-      //         types: ['establishment', 'geocode']
-      //     }, callback);;
-      //   debugger;
-      //   if (place) {
-      //     this._mapPosition = place.geometry.location;
-      //     this._map.panTo(this._mapPosition);
-      //     this.sortByDistance().clearLocations().updateUrl().updateList()
-      //         .updateUrl();
-      //     $(this._searchEl).blur();
-      //   }
-      // });
 
       // Initialize the filter control and listen for filter updates.
       this._filter.setPrograms(this._programs).init();
@@ -19015,21 +19003,48 @@ OfficeMap = function () {
 
       return this;
     }
+    /**
+       * Iterates over a list of place objects from Google and
+       * display them on the map using PlacesService.
+       * @method
+       */ }, { key: 'displayPlacesOnMap', value: function displayPlacesOnMap(
+    mapItems) {var _this2 = this;
+      if (mapItems) {
+        mapItems.forEach(function (place) {
+          var request = {
+            placeId: place.place_id,
+            fields: ['name', 'formatted_address', 'place_id', 'geometry'] };
+
+
+          var officeMap = _this2;
+
+          _this2._placeService.getDetails(request, function (place, status) {
+            if (status === 'OK') {
+              officeMap._mapPosition = place.geometry.location;
+              officeMap._map.panTo(officeMap._mapPosition);
+              officeMap.sortByDistance().clearLocations().updateUrl().updateList().
+              updateUrl();
+              (0, _jquery2.default)(officeMap._searchEl).blur();
+            }
+          });
+        });
+      }
+    } }, { key: 'fetchLocations',
 
     /**
-       * Updates this._locations based on a given set of parameters. Recursively
-       * makes requests to the API until all results are loaded.
-       * @method
-       * @return {jqXHR} - JSON response.
-       */ }, { key: 'fetchLocations', value: function fetchLocations()
-    {var _this2 = this;
+                                   * Updates this._locations based on a given set of parameters. Recursively
+                                   * makes requests to the API until all results are loaded.
+                                   * @method
+                                   * @return {jqXHR} - JSON response.
+                                   */value: function fetchLocations()
+    {var _this3 = this;
       return _jquery2.default.getJSON((0, _jquery2.default)(this._el).data('source')).then(function (data) {
         _underscore2.default.each(data.locations, function (item) {
           var location = new _officeLocation2.default(item);
-          _this2._google.maps.event.addListener(location.marker, 'click', function () {
-            _this2.focusListOnMarker(location.marker);
+          _this3._google.maps.event.addListener(location.marker, 'click', function () {
+            _this3.focusListOnMarker(location.marker);
           });
-          _this2._locations.push(location);
+          _this3._locations.push(location);
         });
       });
     }
@@ -19039,7 +19054,7 @@ OfficeMap = function () {
        * @method
        * @return {this} OfficeMap
        */ }, { key: 'updateList', value: function updateList()
-    {var _this3 = this;
+    {var _this4 = this;
       // If there are no qualified locations, show "no results".
       if (this._filteredLocations.length === 0) {
         (0, _jquery2.default)(this._el).find(OfficeMap.Selectors.MESSAGE_NO_RESULTS).
@@ -19066,7 +19081,7 @@ OfficeMap = function () {
       // For the locations to be added, attach their marker to the map and
       // set them to active.
       _underscore2.default.each(addedLocations, function (location) {
-        location.marker.setMap(_this3._map);
+        location.marker.setMap(_this4._map);
         location.active = true;
       });
 
@@ -19097,7 +19112,7 @@ OfficeMap = function () {
        * @param {this._google.maps.Marker} marker
        * @return {this} OfficeMap
        */ }, { key: 'centerOnMarker', value: function centerOnMarker(
-    marker) {var _this4 = this;
+    marker) {var _this5 = this;
       if (!marker) {
         return this;
       }
@@ -19108,7 +19123,7 @@ OfficeMap = function () {
       // A single bounce animation is about 700ms, so the animation is set here
       // to last for three bounces (2100ms).
       this._google.maps.event.addListenerOnce(this._map, 'idle', function () {
-        marker.setAnimation(_this4._google.maps.Animation.BOUNCE);
+        marker.setAnimation(_this5._google.maps.Animation.BOUNCE);
         _underscore2.default.delay(function () {
           marker.setAnimation(null);
         }, 2100);
@@ -19163,12 +19178,12 @@ OfficeMap = function () {
        * @method
        * @return {this} OfficeMap
        */ }, { key: 'filterLocations', value: function filterLocations()
-    {var _this5 = this;
+    {var _this6 = this;
       this.clearLocations();
       this._filteredLocations = [];
       _underscore2.default.each(this._locations, function (location) {
-        if (!_this5._programs.length || location.hasProgram(_this5._programs)) {
-          _this5._filteredLocations.push(location);
+        if (!_this6._programs.length || location.hasProgram(_this6._programs)) {
+          _this6._filteredLocations.push(location);
         }
       });
       return this;
@@ -19180,10 +19195,10 @@ OfficeMap = function () {
        * @param {this._google.maps.LatLng} origin
        * @return {this} OfficeMap
        */ }, { key: 'sortByDistance', value: function sortByDistance()
-    {var _this6 = this;var origin = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._mapPosition;
+    {var _this7 = this;var origin = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._mapPosition;
       _underscore2.default.each(this._filteredLocations, function (location) {
         location.distance =
-        _this6._google.maps.geometry.spherical.computeDistanceBetween(origin,
+        _this7._google.maps.geometry.spherical.computeDistanceBetween(origin,
         location.marker.position);
       });
       this._filteredLocations = _underscore2.default.sortBy(this._filteredLocations, 'distance');
@@ -22575,4 +22590,4 @@ module.exports={
 
 },{}]},{},[12])
 
-//# sourceMappingURL=main.bfb38cbdcbb9640acf999e52bb65ee66.js.map
+//# sourceMappingURL=main.f622d5898c31e5919cb0a2830fe0edf4.js.map

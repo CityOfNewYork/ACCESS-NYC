@@ -61,10 +61,13 @@ class OfficeMap {
     /** @private {this._google.maps.places.Autocomplete}Autocomplete instance */
     this._service = new this._google.maps.places.AutocompleteService();
 
-    /** @private {this.missPlete} missPlete class for dropdown */
+    /** @private {this._google.maps.places.PlaceService}PlaceService instance */
+    this._placeService = new this._google.maps.places.PlacesService(this._map);
+
     this._missPlete = new MissPlete({
-      input: document.querySelector('.js-search-box'), // the input element
-      className: 'c-autocomplete' // this classname will get assigned to the autocomplete dropdown element
+      input: this._searchEl,
+      options: [],
+      className: 'c-autocomplete'
     });
 
     /** @private {this._google.maps.places.SearchBox} Search box controller. */
@@ -126,62 +129,38 @@ class OfficeMap {
       this.updateList().updateUrl();
     });
 
-    // Bias the SearchBox results towards current map's viewport when the map
-    // bounds change.
-    // this._map.addListener('bounds_changed', _.debounce(() => {
-    //   this._searchBox.setBounds(this._map.getBounds());
-    // }, 100));
-    const displayOnMap = (mapItems) => {
-      mapItems.forEach(place => {
-        console.log(place);
-      })
-    };
-
     // Attach handler for the autocomplete search box. This updates the map
     // position and re-sorts locations around that position.
     this._searchEl.addEventListener('keyup', (event) => {
       if(event.target.value) {
         this._service.getPlacePredictions({
-           input: event.target.value, // this is where the value will be stored
+           input: event.target.value,
            offset: 3,
            types: ['geocode'],
+           componentRestrictions: { country: 'us' },
            bounds: this._map.getBounds()
         }, (predictions) => {
-          // Assuming this is the callback once the predictions are received.
-          // create the dropdown here and display predictions to the user
-          if(predictions) {
-            let results = predictions.map(e => [e['description']]);
 
-            event.target.missplete = new MissPlete({
-              input: event.target,
-              options: results, // the input element
-              className: 'c-autocomplete' // this classname will get assigned to the autocomplete dropdown element
-            });
-          }
-          predictions.forEach(place => {
-            console.log(place);
-          })
-        });
+            if(predictions) {
+              let results = predictions.map(e => [e['description']]);
+
+              this._missPlete.options = results;
+              let otherMissPlete = this._missPlete;
+
+              this._missPlete.select = () => {
+                  if (otherMissPlete.highlightedIndex !== -1) {
+                    otherMissPlete.input.value = otherMissPlete
+                      .scoredOptions[otherMissPlete.highlightedIndex].displayValue;
+                    otherMissPlete.removeDropdown();
+
+                    this.displayPlacesOnMap(predictions);
+                    console.dir('we did it');
+                  }
+              }
+            }
+        })
       }
     });
-
-
-
-    // this._searchBox.addListener('places_changed', () => {
-    //   const place = this._service.getPlacePredictions({
-    //         input: "jackson heights",
-    //         offset: 3,
-    //         types: ['establishment', 'geocode']
-    //     }, callback);;
-    //   debugger;
-    //   if (place) {
-    //     this._mapPosition = place.geometry.location;
-    //     this._map.panTo(this._mapPosition);
-    //     this.sortByDistance().clearLocations().updateUrl().updateList()
-    //         .updateUrl();
-    //     $(this._searchEl).blur();
-    //   }
-    // });
 
     // Initialize the filter control and listen for filter updates.
     this._filter.setPrograms(this._programs).init();
@@ -239,6 +218,33 @@ class OfficeMap {
 
     return this;
   }
+  /**
+   * Iterates over a list of place objects from Google and
+   * display them on the map using PlacesService.
+   * @method
+   */
+   displayPlacesOnMap(mapItems) {
+     if(mapItems) {
+       mapItems.forEach(place => {
+         let request = {
+            placeId: place.place_id,
+            fields: ['name', 'formatted_address', 'place_id', 'geometry']
+         }
+
+         const officeMap = this;
+
+         this._placeService.getDetails(request, function(place, status) {
+            if (status === 'OK') {
+              officeMap._mapPosition = place.geometry.location;
+              officeMap._map.panTo(officeMap._mapPosition);
+              officeMap.sortByDistance().clearLocations().updateUrl().updateList()
+                  .updateUrl();
+              $(officeMap._searchEl).blur();
+            }
+         })
+       })
+     }
+   };
 
   /**
    * Updates this._locations based on a given set of parameters. Recursively
