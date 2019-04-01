@@ -77,7 +77,7 @@ class Screener {
       const $section = $(hash);
 
       if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
-        this._goToStep($section[0]);
+        this._goToStep($section[0])._reFocus();
         $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
       }
     });
@@ -358,6 +358,15 @@ class Screener {
   }
 
   /**
+   * Refocus the window on the questionaire
+   * @return {this} Screener
+   */
+  _reFocus() {
+    $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
+    return this;
+  }
+
+  /**
    * Adds the active class to the provided section. Removes it from all other
    * sections.
    * @param {HTMLElement} section - section to activate.
@@ -627,8 +636,7 @@ class Screener {
             this._people[0].set({
               headOfHousehold: false,
               headOfHouseholdRelation: $step
-                  .find('select[name="Person[0].headOfHouseholdRelation"]')
-                  .val()
+                .find('select[name="Person[0].headOfHouseholdRelation"]').val()
             });
           }
         } else {
@@ -702,9 +710,7 @@ class Screener {
           // If we need to add more non-HoH household members, repeat this step.
           if (this._people.length < this._household.get('members')) {
             $step.data('personIndex', personIndex + 1);
-            // this._goToStep($step[0]);
-            window.location.hash = '#step-7';
-            // $(window).scrollTop(0);
+            this._goToStep($step[0])._reFocus();
             return false;
           }
         }
