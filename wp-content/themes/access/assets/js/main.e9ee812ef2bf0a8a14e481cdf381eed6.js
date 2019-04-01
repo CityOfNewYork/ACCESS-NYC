@@ -18273,7 +18273,15 @@ MissPlete = function () {
       _this.highlightedIndex = -1;
     });
   } // end constructor
-  _createClass(MissPlete, [{ key: 'getSiblingIndex', value: function getSiblingIndex(
+
+  /**
+  * It must return an object with at least the properties `score` and
+  * `displayValue`
+  * @param {array} inputValue
+  * @param {array} optionSynonyms
+  * Default is a Jaro–Winkler similarity function.
+  * @return {int} score or displayValue
+  */_createClass(MissPlete, [{ key: 'getSiblingIndex',
 
 
 
@@ -18305,6 +18313,21 @@ MissPlete = function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+    /**
+                                                       * Get index of previous element.
+                                                       * @param {array} node
+                                                       * @return {number} index of previous element.
+                                                       */value: function getSiblingIndex(
     node) {
       var index = -1;
       var n = node;
@@ -18313,8 +18336,11 @@ MissPlete = function () {
         n = n.previousElementSibling;
       } while (n);
       return index;
-    } }, { key: 'renderOptions', value: function renderOptions()
+    }
 
+    /**
+      * Display options as a list.
+      */ }, { key: 'renderOptions', value: function renderOptions()
     {var _this2 = this;
       var documentFragment = document.createDocumentFragment();
 
@@ -18328,7 +18354,7 @@ MissPlete = function () {
       this.highlightedIndex = -1;
 
       if (documentFragment.hasChildNodes()) {
-        var newUl = document.createElement("ul");
+        var newUl = document.createElement('ul');
         newUl.addEventListener('mouseover', function (event) {
           if (event.target.tagName === 'LI') {
             _this2.changeHighlightedOption(_this2.getSiblingIndex(event.target));
@@ -18350,7 +18376,7 @@ MissPlete = function () {
         newUl.appendChild(documentFragment);
 
         // See CSS to understand why the <ul> has to be wrapped in a <div>
-        var newContainer = document.createElement("div");
+        var newContainer = document.createElement('div');
         newContainer.className = this.className;
         newContainer.appendChild(newUl);
 
@@ -18359,42 +18385,53 @@ MissPlete = function () {
         this.container = newContainer;
         this.ul = newUl;
       }
-    } }, { key: 'changeHighlightedOption', value: function changeHighlightedOption(
+    }
 
+    /**
+      * Highlight new option selected.
+      * @param {Number} newHighlightedIndex
+      */ }, { key: 'changeHighlightedOption', value: function changeHighlightedOption(
     newHighlightedIndex) {
       if (newHighlightedIndex >= -1 &&
-      newHighlightedIndex < this.ul.children.length)
-      {
+      newHighlightedIndex < this.ul.children.length) {
         // If any option already selected, then unselect it
         if (this.highlightedIndex !== -1) {
-          this.ul.children[this.highlightedIndex].classList.remove("highlight");
+          this.ul.children[this.highlightedIndex].classList.remove('highlight');
         }
 
         this.highlightedIndex = newHighlightedIndex;
 
         if (this.highlightedIndex !== -1) {
-          this.ul.children[this.highlightedIndex].classList.add("highlight");
+          this.ul.children[this.highlightedIndex].classList.add('highlight');
         }
       }
-    } }, { key: 'select', value: function select()
+    }
 
+    /**
+      * Selects an option from a list of items.
+      */ }, { key: 'select', value: function select()
     {
       if (this.highlightedIndex !== -1) {
         this.input.value = this.scoredOptions[this.highlightedIndex].displayValue;
         this.removeDropdown();
       }
-    } }, { key: 'removeDropdown', value: function removeDropdown()
+    }
 
+    /**
+      * Remove dropdown list once a list item is selected.
+      */ }, { key: 'removeDropdown', value: function removeDropdown()
     {
       this.container && this.container.remove();
       this.container = null;
       this.ul = null;
-    } }], [{ key: 'scoreFn', value: function scoreFn(inputValue, optionSynonyms) {var closestSynonym = null;var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {for (var _iterator = optionSynonyms[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var synonym = _step.value;var similarity = (0, _jaroWinkler2.default)(synonym.trim().toLowerCase(), inputValue.trim().toLowerCase());if (closestSynonym === null || similarity > closestSynonym.similarity) {closestSynonym = { similarity: similarity, value: synonym };if (similarity === 1) {break;}}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}return { score: closestSynonym.similarity, displayValue: optionSynonyms[0] };} }, { key: 'listItemFn', value: function listItemFn(scoredOption, itemIndex) {var li = itemIndex > MissPlete.MAX_ITEMS ? null : document.createElement("li");li && li.appendChild(document.createTextNode(scoredOption.displayValue));console.log(li);return li;} }, { key: 'MAX_ITEMS', get: function get() {return 5;} }]);return MissPlete;}();exports.default =
-
-
-
-
-MissPlete;
+    } }], [{ key: 'scoreFn', value: function scoreFn(inputValue, optionSynonyms) {var closestSynonym = null;var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {for (var _iterator = optionSynonyms[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var synonym = _step.value;var similarity = (0, _jaroWinkler2.default)(synonym.trim().toLowerCase(), inputValue.trim().toLowerCase());if (closestSynonym === null || similarity > closestSynonym.similarity) {closestSynonym = { similarity: similarity, value: synonym };if (similarity === 1) {break;}}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}return { score: closestSynonym.similarity, displayValue: optionSynonyms[0] };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Maximum amount of results to be returned.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */ }, { key: 'listItemFn', /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * List item for dropdown list.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @param {Number} scoredOption
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @param {Number} itemIndex
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @return {string} The a list item <li>.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */value: function listItemFn(scoredOption, itemIndex) {var li = itemIndex > MissPlete.MAX_ITEMS ? null : document.createElement('li');li && li.appendChild(document.createTextNode(scoredOption.displayValue));return li;} }, { key: 'MAX_ITEMS', get: function get() {return 5;} }]);return MissPlete;}();exports.default = MissPlete;
 
 },{"./jaroWinkler.js":14,"./memoize.js":15}],14:[function(require,module,exports){
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();exports.default =
@@ -22590,4 +22627,4 @@ module.exports={
 
 },{}]},{},[12])
 
-//# sourceMappingURL=main.f622d5898c31e5919cb0a2830fe0edf4.js.map
+//# sourceMappingURL=main.e9ee812ef2bf0a8a14e481cdf381eed6.js.map
