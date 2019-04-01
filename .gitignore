@@ -48,6 +48,7 @@
 
 # ACCESS Theme #
 ################
+/wp-content/themes/access/assets/js/*.development.js
 /wp-content/themes/access/assets/**/*.map
 
 # Packages #

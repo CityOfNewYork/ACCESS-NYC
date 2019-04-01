@@ -34,6 +34,7 @@ import eslint from 'gulp-eslint';
 import webpack from 'webpack-stream';
 import named from 'vinyl-named';
 import VueLoaderPlugin from 'vue-loader/lib/plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 // import TerserPlugin from 'terser-webpack-plugin';
 
 /**
@@ -129,74 +130,82 @@ gulp.task('lint', () =>
 
 gulp.task('webpack', () =>
   gulp.src(`${ SRC }/js/*.js`)
-  .pipe(named())
-  .pipe(webpack({
-    output: { filename: HASH_FORMAT_WEBPACK },
-    mode: NODE_ENV,
-    devtool: 'source-map',
-    target: 'web',
-    performance: { hints: false },
-    watch: (NODE_ENV === 'development') ? true : false,
-    resolve: {
-      modules: [
-        'node_modules', PATTERNS_SRC, PATTERNS_DIST, `${ SRC }/js`
-      ]
-    },
-    module: {
-      rules: [
-        {
-          // Vue Components
-          loader: 'vue-loader',
-          test: /\.vue$/
-        },
-        {
-          // JavaScript (ES6)
-          loader: 'babel-loader',
-          test: /\.js$/,
-          exclude: {
-            test: /.\/node_modules/,
-            exclude: /.\/node_modules\/access-nyc-patterns\/src/
+    .pipe(named())
+    .pipe(webpack({
+      output: {
+        filename: (NODE_ENV === 'development')
+          ? `[name].${NODE_ENV}.js` : HASH_FORMAT_WEBPACK
+      },
+      mode: NODE_ENV,
+      devtool: 'source-map',
+      target: 'web',
+      performance: { hints: false },
+      watch: (NODE_ENV === 'development') ? true : false,
+      resolve: {
+        modules: [
+          'node_modules', PATTERNS_SRC, PATTERNS_DIST, `${ SRC }/js`
+        ]
+      },
+      module: {
+        rules: [
+          {
+            // Vue Components
+            loader: 'vue-loader',
+            test: /\.vue$/
           },
-          // include: [
-          //   /.\/src/,
-          //   /.\/node_modules\/access-nyc-patterns\/src/
-          // ],
-          query: {
-            // .babelrc
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  targets: { ie: '11' }
-                }
+          {
+            // JavaScript (ES6)
+            loader: 'babel-loader',
+            test: /\.js$/,
+            exclude: {
+              test: /.\/node_modules/,
+              exclude: /.\/node_modules\/access-nyc-patterns\/src/
+            },
+            // include: [
+            //   /.\/src/,
+            //   /.\/node_modules\/access-nyc-patterns\/src/
+            // ],
+            query: {
+              // .babelrc
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    targets: { ie: '11' }
+                  }
+                ]
+              ],
+              plugins: [
+                [
+                  '@babel/plugin-transform-runtime',
+                  {
+                    'regenerator': true
+                  }
+                ]
               ]
-            ],
-            plugins: [
-              [
-                '@babel/plugin-transform-runtime',
-                {
-                  'regenerator': true
-                }
-              ]
-            ]
+            }
           }
-        }
+        ]
+      },
+      plugins: [
+        new VueLoaderPlugin(),
+        new CleanWebpackPlugin({
+          // if the next line is deleted the plugin will delete everything
+          // within the current working directory. yay.
+          cleanOnceBeforeBuildPatterns: [`${ DIST }/js/*`],
+        }),
       ]
-    },
-    plugins: [
-      new VueLoaderPlugin()
-    ]//,
-    // optimization: (NODE_ENV === 'development') ? {} : {
-    //   minimizer: [
-    //     new TerserPlugin({
-    //       terserOptions: {
-    //         extractComments: /^\**!|@preserve|@license|@cc_on/i
-    //       }
-    //     })
-    //   ]
-    // }
-  }))
-  .pipe(gulp.dest(`${ DIST }/js`))
+      // optimization: (NODE_ENV === 'development') ? {} : {
+      //   minimizer: [
+      //     new TerserPlugin({
+      //       terserOptions: {
+      //         extractComments: /^\**!|@preserve|@license|@cc_on/i
+      //       }
+      //     })
+      //   ]
+      // }
+    }))
+    .pipe(gulp.dest(`${ DIST }/js`))
 );
 
 gulp.task('scripts', gulp.series(
@@ -306,20 +315,11 @@ gulp.task('default', () => {
   // Watch .js files. Watching is handled by Webpack
   if (NODE_ENV === 'production') {
     gulp.watch(`${ SRC }/js/**/*.js`,
-      gulp.series(
-        'clean:scripts',
-        'lint',
-        'webpack',
-        reload
-      ));
-  } else {
-    gulp.watch(`${ SRC }/js/**/*.js`,
-      gulp.series(
-        'clean:scripts',
-        'webpack',
-        reload
-      ));
+      gulp.series('lint')
+    );
   }
+
+  gulp.watch(`${ SRC }/js/**/*.js`, gulp.series('webpack'));
 
   // Watch image files
   gulp.watch(`${ SRC }/img/**/*`, gulp.series('images', reload));

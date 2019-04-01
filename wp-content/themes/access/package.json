@@ -46,6 +46,7 @@
     "babel-eslint": "^7.1.1",
     "babel-loader": "^8.0.5",
     "browser-sync": "^2.24.7",
+    "clean-webpack-plugin": "^2.0.1",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^3.10.0",
     "del": "^1.2.0",
