@@ -3,7 +3,6 @@
 
 import $ from 'jquery';
 import Utility from 'modules/utility';
-import _ from 'underscore';
 
 /**
  * This component takes an html element and creates a static map image using
