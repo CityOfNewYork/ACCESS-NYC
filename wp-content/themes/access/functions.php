@@ -26,16 +26,6 @@ require_once Path\controller('locations');
 Notifications\timber();
 
 /**
-* Add additional query variables
-*/
-add_filter('query_vars', function ($vars) {
-  $vars[] = 'program_cat';
-  $vars[] = 'pop_served';
-  $vars[] = 'page_type';
-  return $vars;
-});
-
-/**
 * Filter search to only show program page results
 */
 if (!is_admin()) {
