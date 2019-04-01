@@ -1,7 +1,13 @@
-// https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance
-
+/**
+ * JaroWinkler function.
+ * https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance
+ * @param {string} s1 string one.
+ * @param {string} s2 second string.
+ * @return {number} amount of matches.
+ */
 function jaro(s1, s2) {
-  let shorter, longer;
+  let shorter;
+  let longer;
 
   [longer, shorter] = s1.length > s2.length ? [s1, s2] : [s2, s1];
 
@@ -21,8 +27,8 @@ function jaro(s1, s2) {
     }
   }
 
-  const shorterMatchesString = shorterMatches.join("");
-  const longerMatchesString = longerMatches.join("");
+  const shorterMatchesString = shorterMatches.join('');
+  const longerMatchesString = longerMatches.join('');
   const numMatches = shorterMatchesString.length;
 
   let transpositions = 0;
@@ -41,12 +47,22 @@ function jaro(s1, s2) {
     : 0;
 }
 
+/**
+ * @param {string} s1 string one.
+ * @param {string} s2 second string.
+ * @param {number} prefixScalingFactor
+ * @return {number} jaroSimilarity
+ */
 export default function(s1, s2, prefixScalingFactor = 0.2) {
   const jaroSimilarity = jaro(s1, s2);
 
   let commonPrefixLength = 0;
   for (let i = 0; i < s1.length; i++) {
-    if (s1[i] === s2[i]) { commonPrefixLength++; } else { break; }
+    if (s1[i] === s2[i]) {
+      commonPrefixLength++;
+    } else {
+        break;
+      }
   }
 
   return jaroSimilarity +

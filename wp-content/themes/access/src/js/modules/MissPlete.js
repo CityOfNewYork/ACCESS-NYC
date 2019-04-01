@@ -136,7 +136,6 @@ class MissPlete {
     } while (n);
     return index;
   }
-
   /**
   * Display options as a list.
   */

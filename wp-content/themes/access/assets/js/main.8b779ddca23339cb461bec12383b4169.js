@@ -18337,7 +18337,6 @@ MissPlete = function () {
       } while (n);
       return index;
     }
-
     /**
       * Display options as a list.
       */ }, { key: 'renderOptions', value: function renderOptions()
@@ -18434,7 +18433,19 @@ MissPlete = function () {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */value: function listItemFn(scoredOption, itemIndex) {var li = itemIndex > MissPlete.MAX_ITEMS ? null : document.createElement('li');li && li.appendChild(document.createTextNode(scoredOption.displayValue));return li;} }, { key: 'MAX_ITEMS', get: function get() {return 5;} }]);return MissPlete;}();exports.default = MissPlete;
 
 },{"./jaroWinkler.js":14,"./memoize.js":15}],14:[function(require,module,exports){
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();exports.default =
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();exports.default =
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -18482,15 +18493,29 @@ function (s1, s2) {var prefixScalingFactor = arguments.length > 2 && arguments[2
 
   var commonPrefixLength = 0;
   for (var i = 0; i < s1.length; i++) {
-    if (s1[i] === s2[i]) {commonPrefixLength++;} else {break;}
+    if (s1[i] === s2[i]) {
+      commonPrefixLength++;
+    } else {
+      break;
+    }
   }
 
   return jaroSimilarity +
   Math.min(commonPrefixLength, 4) *
   prefixScalingFactor * (
   1 - jaroSimilarity);
-}; // https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance
-function jaro(s1, s2) {var shorter = void 0,longer = void 0;var _ref = s1.length > s2.length ? [s1, s2] : [s2, s1];var _ref2 = _slicedToArray(_ref, 2);longer = _ref2[0];shorter = _ref2[1];var matchingWindow = Math.floor(longer.length / 2) - 1;var shorterMatches = [];var longerMatches = [];for (var i = 0; i < shorter.length; i++) {var ch = shorter[i];var windowStart = Math.max(0, i - matchingWindow);var windowEnd = Math.min(i + matchingWindow + 1, longer.length);for (var j = windowStart; j < windowEnd; j++) {if (longerMatches[j] === undefined && ch === longer[j]) {shorterMatches[i] = longerMatches[j] = ch;break;}}}var shorterMatchesString = shorterMatches.join("");var longerMatchesString = longerMatches.join("");var numMatches = shorterMatchesString.length;var transpositions = 0;for (var _i = 0; _i < shorterMatchesString.length; _i++) {if (shorterMatchesString[_i] !== longerMatchesString[_i]) {transpositions++;}}return numMatches > 0 ? (numMatches / shorter.length + numMatches / longer.length + (numMatches - Math.floor(transpositions / 2)) / numMatches) / 3.0 : 0;}
+}; /**
+    * JaroWinkler function.
+    * https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance
+    * @param {string} s1 string one.
+    * @param {string} s2 second string.
+    * @return {number} amount of matches.
+    */function jaro(s1, s2) {var shorter = void 0;var longer = void 0;var _ref = s1.length > s2.length ? [s1, s2] : [s2, s1];var _ref2 = _slicedToArray(_ref, 2);longer = _ref2[0];shorter = _ref2[1];var matchingWindow = Math.floor(longer.length / 2) - 1;var shorterMatches = [];var longerMatches = [];for (var i = 0; i < shorter.length; i++) {var ch = shorter[i];var windowStart = Math.max(0, i - matchingWindow);var windowEnd = Math.min(i + matchingWindow + 1, longer.length);for (var j = windowStart; j < windowEnd; j++) {if (longerMatches[j] === undefined && ch === longer[j]) {shorterMatches[i] = longerMatches[j] = ch;break;}}}var shorterMatchesString = shorterMatches.join('');var longerMatchesString = longerMatches.join('');var numMatches = shorterMatchesString.length;var transpositions = 0;for (var _i = 0; _i < shorterMatchesString.length; _i++) {if (shorterMatchesString[_i] !== longerMatchesString[_i]) {transpositions++;}}return numMatches > 0 ? (numMatches / shorter.length + numMatches / longer.length + (numMatches - Math.floor(transpositions / 2)) / numMatches) / 3.0 : 0;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @param {string} s1 string one.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @param {string} s2 second string.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @param {number} prefixScalingFactor
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @return {number} jaroSimilarity
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    */
 
 },{}],15:[function(require,module,exports){
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = function (fn) {
@@ -18499,7 +18524,7 @@ function jaro(s1, s2) {var shorter = void 0,longer = void 0;var _ref = s1.length
   return function () {for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}
     var key = JSON.stringify(args);
     return cache[key] || (
-    cache[key] = fn.apply(null, args));
+    cache[key] = fn.apply(undefined, args));
 
   };
 };
@@ -18962,7 +18987,6 @@ OfficeMap = function () {
             componentRestrictions: { country: 'us' },
             bounds: _this._map.getBounds() },
           function (predictions) {
-
             if (predictions) {
               var results = predictions.map(function (e) {return [e['description']];});
 
@@ -18972,11 +18996,11 @@ OfficeMap = function () {
               _this._missPlete.select = function () {
                 if (otherMissPlete.highlightedIndex !== -1) {
                   otherMissPlete.input.value = otherMissPlete.
-                  scoredOptions[otherMissPlete.highlightedIndex].displayValue;
+                  scoredOptions[otherMissPlete.highlightedIndex].
+                  displayValue;
                   otherMissPlete.removeDropdown();
 
                   _this.displayPlacesOnMap(predictions);
-                  console.dir('we did it');
                 }
               };
             }
@@ -19043,7 +19067,7 @@ OfficeMap = function () {
     /**
        * Iterates over a list of place objects from Google and
        * display them on the map using PlacesService.
-       * @method
+       * @param {array} mapItems an array of Google Map Objects to be displayed.
        */ }, { key: 'displayPlacesOnMap', value: function displayPlacesOnMap(
     mapItems) {var _this2 = this;
       if (mapItems) {
@@ -19059,21 +19083,21 @@ OfficeMap = function () {
             if (status === 'OK') {
               officeMap._mapPosition = place.geometry.location;
               officeMap._map.panTo(officeMap._mapPosition);
-              officeMap.sortByDistance().clearLocations().updateUrl().updateList().
-              updateUrl();
+              officeMap.sortByDistance().clearLocations().updateUrl().
+              updateList().updateUrl();
               (0, _jquery2.default)(officeMap._searchEl).blur();
             }
           });
         });
       }
-    } }, { key: 'fetchLocations',
+    }
 
     /**
-                                   * Updates this._locations based on a given set of parameters. Recursively
-                                   * makes requests to the API until all results are loaded.
-                                   * @method
-                                   * @return {jqXHR} - JSON response.
-                                   */value: function fetchLocations()
+       * Updates this._locations based on a given set of parameters. Recursively
+       * makes requests to the API until all results are loaded.
+       * @method
+       * @return {jqXHR} - JSON response.
+       */ }, { key: 'fetchLocations', value: function fetchLocations()
     {var _this3 = this;
       return _jquery2.default.getJSON((0, _jquery2.default)(this._el).data('source')).then(function (data) {
         _underscore2.default.each(data.locations, function (item) {
@@ -22627,4 +22651,4 @@ module.exports={
 
 },{}]},{},[12])
 
-//# sourceMappingURL=main.e9ee812ef2bf0a8a14e481cdf381eed6.js.map
+//# sourceMappingURL=main.8b779ddca23339cb461bec12383b4169.js.map

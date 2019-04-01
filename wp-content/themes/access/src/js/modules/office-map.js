@@ -64,14 +64,12 @@ class OfficeMap {
     /** @private {this._google.maps.places.PlaceService}PlaceService instance */
     this._placeService = new this._google.maps.places.PlacesService(this._map);
 
+    /** @private {this._missPlete} autocomplete dropdown list */
     this._missPlete = new MissPlete({
       input: this._searchEl,
       options: [],
       className: 'c-autocomplete'
     });
-
-    /** @private {this._google.maps.places.SearchBox} Search box controller. */
-    // this._searchBox = new this._google.maps.places.SearchBox(this._searchEl);
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
@@ -137,12 +135,11 @@ class OfficeMap {
            input: event.target.value,
            offset: 3,
            types: ['geocode'],
-           componentRestrictions: { country: 'us' },
+           componentRestrictions: {country: 'us'},
            bounds: this._map.getBounds()
         }, (predictions) => {
-
             if(predictions) {
-              let results = predictions.map(e => [e['description']]);
+              let results = predictions.map((e) => [e['description']]);
 
               this._missPlete.options = results;
               let otherMissPlete = this._missPlete;
@@ -150,15 +147,15 @@ class OfficeMap {
               this._missPlete.select = () => {
                   if (otherMissPlete.highlightedIndex !== -1) {
                     otherMissPlete.input.value = otherMissPlete
-                      .scoredOptions[otherMissPlete.highlightedIndex].displayValue;
+                      .scoredOptions[otherMissPlete.highlightedIndex]
+                        .displayValue;
                     otherMissPlete.removeDropdown();
 
                     this.displayPlacesOnMap(predictions);
-                    console.dir('we did it');
                   }
-              }
+              };
             }
-        })
+        });
       }
     });
 
@@ -221,15 +218,15 @@ class OfficeMap {
   /**
    * Iterates over a list of place objects from Google and
    * display them on the map using PlacesService.
-   * @method
+   * @param {array} mapItems an array of Google Map Objects to be displayed.
    */
    displayPlacesOnMap(mapItems) {
      if(mapItems) {
-       mapItems.forEach(place => {
+       mapItems.forEach((place) => {
          let request = {
             placeId: place.place_id,
             fields: ['name', 'formatted_address', 'place_id', 'geometry']
-         }
+         };
 
          const officeMap = this;
 
@@ -237,14 +234,14 @@ class OfficeMap {
             if (status === 'OK') {
               officeMap._mapPosition = place.geometry.location;
               officeMap._map.panTo(officeMap._mapPosition);
-              officeMap.sortByDistance().clearLocations().updateUrl().updateList()
-                  .updateUrl();
+              officeMap.sortByDistance().clearLocations().updateUrl()
+                .updateList().updateUrl();
               $(officeMap._searchEl).blur();
             }
-         })
-       })
+         });
+       });
      }
-   };
+   }
 
   /**
    * Updates this._locations based on a given set of parameters. Recursively

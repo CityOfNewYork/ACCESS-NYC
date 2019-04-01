@@ -4,7 +4,7 @@ export default (fn) => {
   return (...args) => {
     const key = JSON.stringify(args);
     return cache[key] || (
-      cache[key] = fn.apply(null, args)
+      cache[key] = fn(...args)
     );
   };
-}
+};
