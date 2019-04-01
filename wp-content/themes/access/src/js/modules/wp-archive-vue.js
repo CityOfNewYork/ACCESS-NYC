@@ -80,7 +80,8 @@ class WpArchiveVue {
         wpQuery: WpArchiveVue.wpQuery,
         response: WpArchiveVue.response,
         process: WpArchiveVue.process,
-        error: WpArchiveVue.error
+        error: WpArchiveVue.error,
+        replaceState: WpArchiveVue.replaceState
       }
     };
 
@@ -107,6 +108,27 @@ class WpArchiveVue {
 
 /** The default selector for the Vue application */
 WpArchiveVue.el = '[data-js="archive"]';
+
+WpArchiveVue.buildUrlQuery = (query) => {
+  return '?' + Object.keys(query)
+    .map(k => {
+      if (Array.isArray(query[k]))
+        return query[k].map(a => `${k}[]=${a}`).join('&');
+      return `${k}=${query[k]}`;
+    }).join('&');
+};
+
+/**
+ * Set the URL Query
+ */
+WpArchiveVue.replaceState = function(query) {
+  if ('replaceState' in window.history) {
+    let state = WpArchiveVue.buildUrlQuery(query);
+    window.history.replaceState(null, null, window.location.pathname + state);
+  }
+
+  return this;
+};
 
 /**
  * Basic fetch for retrieving data from an endpoint configured in the
@@ -344,6 +366,10 @@ WpArchiveVue.wpQuery = function(query) {
       return `${k}=${query[k]}`;
     }).join('&');
 
+  console.dir('replacing state');
+
+  this.replaceState(query);
+
   // Set posts and store a copy of the query for reference.
   this.$set(this.posts, query.page, {
     posts: [],
@@ -351,7 +377,6 @@ WpArchiveVue.wpQuery = function(query) {
     show: (this.query.page >= query.page)
   });
 
-  // return fetch(url, {signal: signal});
   return fetch(url);
 };
 
