@@ -12,7 +12,6 @@ import 'dotenv/config';
 import del from 'del';
 import gulp from 'gulp';
 import notify from 'gulp-notify';
-import gulpif from 'gulp-if';
 import rename from 'gulp-rename';
 import hashFilename from 'gulp-hash-filename';
 import browserSync from 'browser-sync';
@@ -227,7 +226,7 @@ gulp.task('hashfiles', callback => {
 
   gulp.src(HASH_FILES)
     .pipe(hashFilename({format: HASH_FORMAT}))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest(f => f.base));
 
   callback();
 });
@@ -269,6 +268,8 @@ gulp.task('svgs', () =>
       inlineSvg: true
     }))
     .pipe(rename('icons.svg'))
+    .pipe(gulp.dest('assets/svg/'))
+    .pipe(hashFilename({format: HASH_FORMAT}))
     .pipe(gulp.dest('assets/svg/'))
     .pipe(notify({
       message: 'SVG task complete'

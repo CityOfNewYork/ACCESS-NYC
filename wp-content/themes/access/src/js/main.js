@@ -20,7 +20,9 @@ import Newsletter from 'objects/newsletter/newsletter.common';
   Utility.configErrorTracking(window);
 
   // Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
-  $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
+  $.get('/wp-content/themes/access/assets/svg/icons.18dca930.svg',
+    Utility.svgSprites
+  );
 
   let $body = $('body');
 
