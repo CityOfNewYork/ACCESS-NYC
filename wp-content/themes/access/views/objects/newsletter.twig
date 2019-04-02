@@ -1,6 +1,6 @@
-<div class="mb-4 p-3 screen-desktop:p-4 bg-color-white" data-js="newsletter">
+<div class="mb-4 p-3 screen-desktop:p-4 bg-color-white relative overflow-hidden" data-js="newsletter">
   <div class="type-h3">{{ __('Get Updates', 'accessnyctheme') }}</div>
-  <form action="https://nyc.us18.list-manage.com/subscribe/post?u=d04b7b607bddbd338b416fa89&amp;id=98ff3f3900" id="mc-embedded-subscribe-form" method="post" novalidate="true" target="_blank" class="relative overflow-hidden">
+  <form action="https://nyc.us18.list-manage.com/subscribe/post?u=d04b7b607bddbd338b416fa89&id=aa67394696" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" novalidate target="_blank">
     <div class="c-question">
       <label class="c-question__label">{{ __('Receive benefits news and reminders about upcoming open enrollment periods.', 'accessnyctheme') }}</label>
       <div class="c-question__container">
@@ -10,45 +10,51 @@
     <div class="c-question mt-3">
       <fieldset class="c-question">
         <legend class="c-question__label">{{ __('Which borough(s) would you like to recieve updates for?', 'accessnyctheme') }}</legend>
-        <div class="c-question__container screen-tablet:layout--columns" data-js-join-values="input[name='BOROUGH']">
+        <div class="c-question__container screen-tablet:layout--columns">
           {% set values = [
             {
-              'id': 'BOROUGH.Bronx',
-              'name': 'BOROUGH.Bronx',
-              'value': 'Bronx',
+              'id': 'mce-group[4369]-4369-0',
+              'name': 'group[4369][1]',
+              'value': '1',
               'label': 'Bronx'
             },
             {
-              'id': 'BOROUGH.Staten Island',
-              'name': 'BOROUGH.Staten Island',
-              'value': 'Staten Island',
+              'id': 'mce-group[4369]-4369-4',
+              'name': 'group[4369][16]',
+              'value': '16',
               'label': 'Staten Island'
             },
             {
-              'id': 'BOROUGH.Queens',
-              'name': 'BOROUGH.Queens',
-              'value': 'Queens',
+              'id': 'mce-group[4369]-4369-3',
+              'name': 'group[4369][8]',
+              'value': '8',
               'label': 'Queens'
             },
             {
-              'id': 'BOROUGH.Brooklyn',
-              'name': 'BOROUGH.Brooklyn',
-              'value': 'Brooklyn',
+              'id': 'mce-group[4369]-4369-1',
+              'name': 'group[4369][2]',
+              'value': '2',
               'label': 'Brooklyn'
             },
             {
-              'id': 'BOROUGH.Manhattan',
-              'name': 'BOROUGH.Manhattan',
-              'value': 'Manhattan',
+              'id': 'mce-group[4369]-4369-2',
+              'name': 'group[4369][4]',
+              'value': '4',
               'label': 'Manhattan'
             }
           ] %}
+
+{# <form action="https://nyc.us18.list-manage.com/subscribe/post?u=d04b7b607bddbd338b416fa89&amp;id=aa67394696" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<li><input type="checkbox" value="1" name="group[4369][1]" id="mce-group[4369]-4369-0"><label for="mce-group[4369]-4369-0">Bronx</label></li>
+<li><input type="checkbox" value="2" name="group[4369][2]" id="mce-group[4369]-4369-1"><label for="mce-group[4369]-4369-1">Brooklyn</label></li>
+<li><input type="checkbox" value="4" name="group[4369][4]" id="mce-group[4369]-4369-2"><label for="mce-group[4369]-4369-2">Manhattan</label></li>
+<li><input type="checkbox" value="8" name="group[4369][8]" id="mce-group[4369]-4369-3"><label for="mce-group[4369]-4369-3">Queens</label></li>
+<li><input type="checkbox" value="16" name="group[4369][16]" id="mce-group[4369]-4369-4"><label for="mce-group[4369]-4369-4">Staten Island</label></li> #}
 
           {% for value in values %}
           {% include 'views/elements/checkbox.twig' with value only %}
           {% endfor %}
         </div>
-        <input aria-hidden="true" name="BOROUGH" readonly="true" tabindex="-1" type="hidden" />
       </fieldset>
     </div>
     <div aria-hidden="true" style="position: absolute; left: -5000px;">
