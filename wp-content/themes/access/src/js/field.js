@@ -5,7 +5,7 @@ import _ from 'underscore';
 // eslint-disable-next-line no-unused-vars
 import 'modules/polyfill-window-scroll';
 import 'modules/polyfill-element-matches';
-import 'core-js/fn/promise';
+import 'core-js/features/promise';
 
 import Field from 'modules/field';
 import ResultsField from 'modules/results-field';

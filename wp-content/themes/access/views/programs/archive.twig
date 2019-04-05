@@ -1,12 +1,24 @@
 {% extends "base.twig" %}
 
 {% block content %}
-<main class="bg-color-white pb-3" id="content">
-  <header class="usa-grid py-4 my-1">
-    <h1 class="text-color-blue-dark mb-0">{% if category | length %}{{__('Programs', 'accessnyctheme')}}: {{ category.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
+<main class="bg-color-white pb-3" id="content" data-js="programs"
+  data-page="{{ pagination.current }}"
+  data-per-page="{{ per_page }}"
+  data-category="{{ category.term_id }}"
+  data-pages="{{ pagination.total }}"
+  data-count="{{ count }}">
+  <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
+    <div>
+      <h1 class="c-header__descriptor text-color-blue-dark">{{__('Programs', 'accessnyctheme')}}</h1>
+      <h2 class="c-header__information text-color-grey-mid mb-0 list-inline-comma">
+        {% if category %}<span v-if="!init">{{ category.name }}</span>{% endif %}
+        <span v-if="init" v-for="c in categories" v-html="c"></span>
+        &nbsp;
+      </h2>
+    </div>
   </header>
 
-  <div class="usa-grid screen-desktop:layout--sidebar-small-gutter" data-js="programs" data-js-page="{{ pagination.current }}">
+  <div class="usa-grid screen-desktop:layout--sidebar-small-gutter">
     <aside id="filter-programs">
       <h2 class="type-h4 mb-0 hidden screen-desktop:inline-block">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
 

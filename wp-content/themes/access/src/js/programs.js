@@ -1,13 +1,17 @@
 /* eslint-env browser */
 // Core-js polyfills.
 // Core-js is made available as a dependency of @babel/preset-env
-import 'core-js/fn/promise';
-import 'core-js/fn/array/for-each';
-import 'core-js/fn/array/find';
-import 'core-js/fn/array/includes';
-import 'core-js/fn/object/assign';
-import 'core-js/fn/object/values';
-import 'core-js/fn/object/is-extensible';
+import 'core-js/features/promise';
+import 'core-js/features/array/for-each';
+import 'core-js/features/array/find';
+import 'core-js/features/array/includes';
+import 'core-js/features/array/flat';
+import 'core-js/features/object/keys';
+import 'core-js/features/object/assign';
+import 'core-js/features/object/values';
+import 'core-js/features/object/is-extensible';
+import 'core-js/features/url-search-params';
+
 
 // Fetch
 import 'whatwg-fetch';
@@ -26,29 +30,47 @@ import WpArchiveVue from 'modules/wp-archive-vue';
   /**
    * Archive
    */
-  if (document.querySelector('[data-js="programs"]')) {
+
+  let programs = document.querySelector('[data-js="programs"]');
+
+  if (programs) {
+    /** Redirect old filtering method to WP Archive Vue filtering */
+    if (programs.dataset.category !== '') {
+      window.history.replaceState(null, null, [
+          window.location.pathname,
+          '?categories[]=' + programs.dataset.category
+        ].join(''));
+    }
+
+    /** Add Vue components to the vue instance */
     Vue.component('c-card', CardVue);
     Vue.component('c-filter-multi', FilterMultiVue);
 
+    /** Pass our configuration options to the Archive method (including Vue) */
     new WpArchiveVue(Vue, {
-      el: '[data-js="programs"]',
+      el: programs,
       delimiters: ['v{', '}'],
       data: {
         type: 'programs',
         query: {
-          per_page: 5,
-          page: parseInt(
-            document.querySelector('[data-js="programs"]').dataset.jsPage
-          )
+          per_page: parseInt(programs.dataset.perPage),
+          page: parseInt(programs.dataset.page)
         },
         headers: {
-          pages: 8,
-          total: 40,
+          pages: parseInt(programs.dataset.pages),
+          total: parseInt(programs.dataset.total),
           link: 'rel="next";'
         },
         endpoints: {
           terms: '/wp-json/api/v1/terms',
           programs: '/wp-json/wp/v2/programs'
+        },
+        history: {
+          omit: ['page', 'per_page'],
+          params: {
+            'programs': 'categories',
+            'populations-served': 'served'
+          }
         },
         maps: function() {
           return {
@@ -60,7 +82,15 @@ import WpArchiveVue from 'modules/wp-archive-vue';
                 'id': filters.term_id,
                 'name': filters.name,
                 'slug': filters.slug,
-                'parent': terms.name
+                'parent': terms.name,
+                'active': (
+                    this.query.hasOwnProperty(terms.name) &&
+                    this.query[terms.name].includes(filters.term_id)
+                  ),
+                'checked': (
+                    this.query.hasOwnProperty(terms.name) &&
+                    this.query[terms.name].includes(filters.term_id)
+                  )
               })),
               'STRINGS': {
                 'ALL': window.LOCALIZED_STRINGS
@@ -92,11 +122,19 @@ import WpArchiveVue from 'modules/wp-archive-vue';
           };
         }
       },
+      computed: {
+        categories: function() {
+          return [this.terms.map(
+            t => t.filters
+              .filter(f => f.checked)
+              .map(f => f.name)
+          )].flat(2);
+        }
+      },
       created: function() {
-        // Initialize the first page request
-        this.queue();
-        // Get the terms
-        this.fetch('terms')
+        this.getState() // Get window.location.search (filter history)
+          .queue() // Initialize the first page request
+          .fetch('terms') // Get the terms from the 'terms' endpoint
           .catch(this.error);
       }
     });

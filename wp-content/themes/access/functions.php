@@ -45,12 +45,15 @@ add_action('pre_get_posts', function ($query) {
     $query->set('posts_per_page', 5);
   }
 
-  if (($query->is_home() || $query->is_search() || $query->is_archive())
-      && $query->is_main_query()
-      && !is_admin()
+  if (
+    ($query->is_home() || $query->is_search() || $query->is_archive()) &&
+    $query->is_main_query() &&
+    !is_admin()
   ) {
     $category_query = array();
+
     // Get the selected category, page type, or populations served, if any
+    // Used in Programs Archive
     if (!empty($query->get('program_cat'))) {
       $category_query[] = array(
         'taxonomy' => 'programs',
@@ -58,6 +61,8 @@ add_action('pre_get_posts', function ($query) {
         'terms' => $query->get('program_cat'),
       );
     }
+
+    // Used in Programs Single
     if (!empty($query->get('pop_served'))) {
       $category_query[] = array(
         'taxonomy' => 'populations-served',
@@ -65,6 +70,8 @@ add_action('pre_get_posts', function ($query) {
         'terms' => $query->get('pop_served'),
       );
     }
+
+    // Used in Programs Single
     if (!empty($query->get('page_type'))) {
       $category_query[] = array(
         'taxonomy' => 'page-type',
@@ -72,6 +79,7 @@ add_action('pre_get_posts', function ($query) {
         'terms' => $query->get('page_type'),
       );
     }
+
     if (!empty($category_query)) {
       $category_query['relation'] = 'AND';
       $query->set('tax_query', $category_query);
@@ -81,7 +89,7 @@ add_action('pre_get_posts', function ($query) {
 
 // *****
 // modifying program url in the language switcher
-function wpml_switcher_urls($languages) {
+add_filter('icl_ls_languages', function($languages) {
   global $sitepress;
 
   if (isset($_GET['program_cat'])) {
@@ -99,7 +107,8 @@ function wpml_switcher_urls($languages) {
       'hide_empty' => false,
     ));
 
-    $sitepress->switch_lang($original_lang); //switch back to the original language
+    // switch back to the original language
+    $sitepress->switch_lang($original_lang);
 
     // find the en taxonomy that matches the current program
     foreach ($terms as $term) {
@@ -122,10 +131,9 @@ function wpml_switcher_urls($languages) {
       }
     }
   }
-  return $languages;
-}
 
-add_filter('icl_ls_languages', 'wpml_switcher_urls');
+  return $languages;
+});
 // end modifying url
 // *****
 
@@ -146,7 +154,7 @@ $office_loc = array(
   ),
 );
 
-function trigger_gmaps(){
+function trigger_gmaps() {
   global $post;
   global $office_loc;
 

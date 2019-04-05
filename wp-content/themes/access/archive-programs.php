@@ -12,4 +12,7 @@ $category = (isset($_GET['program_cat']))
 $context['category'] = $category;
 $context['posts'] = Timber::get_posts();
 $context['pagination'] = Timber::get_pagination();
+$context['per_page'] = $wp_query->post_count;
+$context['count'] = $wp_query->found_posts;
+
 Timber::render('programs/archive.twig', $context);

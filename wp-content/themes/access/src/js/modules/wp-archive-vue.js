@@ -31,6 +31,9 @@ class WpArchiveVue {
           total: 0,
           link: 'rel="next";'
         },
+        history: {
+          omit: ['page', 'per_page']
+        },
         init: false
       },
       computed: {
@@ -81,8 +84,12 @@ class WpArchiveVue {
         response: WpArchiveVue.response,
         process: WpArchiveVue.process,
         error: WpArchiveVue.error,
-        replaceState: WpArchiveVue.replaceState
-      }
+        buildUrlQuery: WpArchiveVue.buildUrlQuery,
+        buildJsonQuery: WpArchiveVue.buildJsonQuery,
+        replaceState: WpArchiveVue.replaceState,
+        getState: WpArchiveVue.getState
+      },
+      created: WpArchiveVue.created
     };
 
     // Assign missing top level props to settings.
@@ -109,23 +116,56 @@ class WpArchiveVue {
 /** The default selector for the Vue application */
 WpArchiveVue.el = '[data-js="archive"]';
 
-WpArchiveVue.buildUrlQuery = (query) => {
-  return '?' + Object.keys(query)
+WpArchiveVue.buildUrlQuery = function(query, omit = [], reverseMap = false) {
+  let q = Object.keys(query)
     .map(k => {
+      if (omit.includes(k)) return false;
+
+      let map = (reverseMap && this.history.params.hasOwnProperty(k))
+        ? this.history.params[k] : k;
+
       if (Array.isArray(query[k]))
-        return query[k].map(a => `${k}[]=${a}`).join('&');
-      return `${k}=${query[k]}`;
-    }).join('&');
+        return query[k].map(a => `${map}[]=${a}`).join('&');
+      return `${map}=${query[k]}`;
+    }).filter(k => (k)).join('&');
+
+  return (q !== '') ? '?' + q : '';
+};
+
+WpArchiveVue.buildJsonQuery = function(query) {
+  if (query === '') return false;
+
+  let params = new URLSearchParams(query);
+  let q = {};
+
+  // Set keys in object and get values, convert to number (!NaN)
+  for (let key of params.keys()) {
+    let k = key.replace('[]', '');
+    if (!q.hasOwnProperty(k))
+      q[k] = params.getAll(key).map(value => {
+        return (isNaN(value)) ? value : +value;
+      });
+  }
+
+  // Reverse map the parameters to the actual query vars
+  Object.keys(this.history.params).map(key => {
+    if (q.hasOwnProperty(this.history.params[key])) {
+      q[key] = q[this.history.params[key]];
+      delete q[this.history.params[key]];
+    }
+  });
+
+  return q;
 };
 
 /**
  * Set the URL Query
+ * @param   {object}  query  URL Query structured as JSON Object.
+ * @return  {object}         Vue instance
  */
 WpArchiveVue.replaceState = function(query) {
-  if ('replaceState' in window.history) {
-    let state = WpArchiveVue.buildUrlQuery(query);
-    window.history.replaceState(null, null, window.location.pathname + state);
-  }
+  let state = this.buildUrlQuery(query, this.history.omit, true);
+  window.history.replaceState(null, null, window.location.pathname + state);
 
   return this;
 };
@@ -137,7 +177,7 @@ WpArchiveVue.replaceState = function(query) {
  *                          data.endpoints property.
  * @return  {promise}       The fetch request for that endpoint.
  */
-WpArchiveVue.fetch = function(data = false) {
+WpArchiveVue.fetch = function(data = false, post = false) {
   if (!data) return data;
 
   return (this[data].length) ? this[data] :
@@ -162,6 +202,8 @@ WpArchiveVue.click = function(event) {
   } else {
     this.filterAll(taxonomy);
   }
+
+  return this;
 };
 
 /**
@@ -180,6 +222,8 @@ WpArchiveVue.filter = function(taxonomy, term) {
       terms.filter(el => el !== term) : terms.concat([term]);
 
   this.updateQuery(taxonomy, terms);
+
+  return this;
 };
 
 /**
@@ -198,6 +242,8 @@ WpArchiveVue.filterAll = function(taxonomy) {
     });
 
   this.updateQuery(taxonomy, (checked) ? terms : []);
+
+  return this;
 };
 
 /**
@@ -341,10 +387,16 @@ WpArchiveVue.queue = function(queries = [0, 1]) {
         .then(this.response)
         .then(data => {
           let headers = Object.assign({}, this.headers);
+
+          // If this is the current page, replace the browser history state.
+          if (current) this.replaceState(query);
+
           this.process(data, query, headers);
         }).catch(this.error);
     }
   })();
+
+  return this;
 };
 
 /**
@@ -353,22 +405,12 @@ WpArchiveVue.queue = function(queries = [0, 1]) {
  * @return  {promise}        The fetch request for the query
  */
 WpArchiveVue.wpQuery = function(query) {
-  // eslint-disable-next-line no-undef
-  // this.$set(this, 'abort', (new AbortController));
-  // let signal = this.abort.signal;
-  let url = `${this.lang.path}${this.endpoints[this.type]}`;
-
   // Build the url query.
-  url = `${url}?` + Object.keys(query)
-    .map(k => {
-      if (Array.isArray(query[k]))
-        return query[k].map(a => `${k}[]=${a}`).join('&');
-      return `${k}=${query[k]}`;
-    }).join('&');
-
-  console.dir('replacing state');
-
-  this.replaceState(query);
+  let url = [
+    this.lang.path,
+    this.endpoints[this.type],
+    this.buildUrlQuery(query)
+  ].join('');
 
   // Set posts and store a copy of the query for reference.
   this.$set(this.posts, query.page, {
@@ -431,6 +473,16 @@ WpArchiveVue.process = function(data, query, headers) {
  */
 WpArchiveVue.error = function(response) {
   // console.dir(response);
+};
+
+WpArchiveVue.getState = function(query = false) {
+  query = (query) ? query : this.buildJsonQuery(window.location.search);
+
+  Object.keys(query).map(key => {
+    this.$set(this.query, key, query[key]);
+  });
+
+  return this;
 };
 
 export default WpArchiveVue;
