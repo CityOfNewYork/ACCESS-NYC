@@ -101,8 +101,8 @@ class Config
         if (!in_array($name, Config::PROTECT)) {
           $decrypted = ($this->secret) ? $encrypter->decrypt($value) : $value;
           putenv("$name=$decrypted");
-          $_ENV[$name] = $decrypted;
-          define($name, $decrypted);
+          $_ENV[$name] = getenv($name);
+          define($name, getenv($name));
         }
       }
     }

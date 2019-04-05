@@ -6,6 +6,7 @@ import OfficeFilter from 'modules/office-filter';
 import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
 import MissPlete from 'modules/MissPlete';
+import InputAutocomplete from 'acess-nyc-patterns/src/elements/inputs/input-autocomplete';
 import _ from 'underscore';
 
 /**
@@ -65,11 +66,7 @@ class OfficeMap {
     this._placeService = new this._google.maps.places.PlacesService(this._map);
 
     /** @private {this._missPlete} autocomplete dropdown list */
-    this._missPlete = new MissPlete({
-      input: this._searchEl,
-      options: [],
-      className: 'c-autocomplete'
-    });
+    this._missPlete = new InputAutocomplete();
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);

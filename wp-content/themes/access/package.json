@@ -77,16 +77,12 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "access-nyc-patterns": "^0.3.4",
+    "access-nyc-patterns": "^0.3.7",
     "cleave.js": "^0.7.23",
     "es6-promise": "^4.2.5",
     "jquery": "^3.1.1",
     "js-cookie": "^2.1.3",
-<<<<<<< HEAD
-    "materialize-css": "^1.0.0-rc.2",
-=======
     "smoothscroll-polyfill": "^0.4.3",
->>>>>>> 1ebae6c3aa840a11e9cadb8d5006af9fb78f78ef
     "underscore": "^1.8.3",
     "vee-validate": "^2.0.0-rc.18",
     "whatwg-fetch": "^3.0.0"

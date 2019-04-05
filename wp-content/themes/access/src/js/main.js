@@ -19,6 +19,7 @@ import Filter from 'components/filter/filter.common';
 import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 import Newsletter from 'objects/newsletter/newsletter.common';
 
+
 (function(window, $) {
   'use strict';
 
