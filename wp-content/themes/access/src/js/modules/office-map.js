@@ -83,7 +83,7 @@ class OfficeMap {
     /** @private {Array<Number>} The IDs of programs to filter by. */
     this._programs = Utility.getUrlParameter('programs') ?
         _.map(decodeURIComponent(Utility.getUrlParameter('programs'))
-        .split(','), (num) => {
+        .split(','), num => {
             return parseInt(num, 10);
         }) : [];
   }
@@ -105,8 +105,7 @@ class OfficeMap {
 
     // Adds handler for highlighting and bouncing a pin when a list item gets
     // focus.
-    $(this._el).on('focus', `.${OfficeMap.CssClass.LIST_LOCATION}`,
-        (e) => {
+    $(this._el).on('focus', `.${OfficeMap.CssClass.LIST_LOCATION}`, e => {
       const markerId = parseInt($(e.currentTarget).data('marker'), 10);
       const location = _.findWhere(this._locations, {
         id: markerId
@@ -121,7 +120,7 @@ class OfficeMap {
           $(e.currentTarget).addClass(OfficeMap.CssClass.ACTIVE);
         });
       }
-    }).on('click', `.${OfficeMap.CssClass.MORE}`, (e) => {
+    }).on('click', `.${OfficeMap.CssClass.MORE}`, e => {
       // Hanlder for the 'Show more' button.
       e.preventDefault();
       this.updateList().updateUrl();
@@ -201,7 +200,7 @@ class OfficeMap {
    * @return {this} OfficeMap
    */
   clearLocations(reset) {
-    _.each(this._locations, (location) => {
+    _.each(this._locations, location => {
       location.marker.setMap(null);
       location.active = false;
     });
@@ -250,8 +249,8 @@ class OfficeMap {
    * @return {jqXHR} - JSON response.
    */
   fetchLocations() {
-    return $.getJSON($(this._el).data('source')).then((data) => {
-      _.each(data.locations, (item) => {
+    return $.getJSON($(this._el).data('source')).then(data => {
+      _.each(data.locations, item => {
         const location = new OfficeLocation(item);
         this._google.maps.event.addListener(location.marker, 'click', () => {
           this.focusListOnMarker(location.marker);
@@ -292,7 +291,7 @@ class OfficeMap {
 
     // For the locations to be added, attach their marker to the map and
     // set them to active.
-    _.each(addedLocations, (location) => {
+    _.each(addedLocations, location => {
       location.marker.setMap(this._map);
       location.active = true;
     });
@@ -393,7 +392,7 @@ class OfficeMap {
   filterLocations() {
     this.clearLocations();
     this._filteredLocations = [];
-    _.each(this._locations, (location) => {
+    _.each(this._locations, location => {
       if (!this._programs.length || location.hasProgram(this._programs)) {
         this._filteredLocations.push(location);
       }
@@ -408,7 +407,7 @@ class OfficeMap {
    * @return {this} OfficeMap
    */
   sortByDistance(origin = this._mapPosition) {
-    _.each(this._filteredLocations, (location) => {
+    _.each(this._filteredLocations, location => {
       location.distance =
           this._google.maps.geometry.spherical.computeDistanceBetween(origin,
               location.marker.position);
@@ -432,7 +431,7 @@ class OfficeMap {
       if (this._programs.length) {
         mapState.programs = this._programs.join(',');
       }
-      const locationCount = _.filter(this._filteredLocations, (location) =>
+      const locationCount = _.filter(this._filteredLocations, location =>
           location.active).length;
       if (locationCount) {
         mapState.count = locationCount;
@@ -449,8 +448,13 @@ class OfficeMap {
    * @return {this} OfficeMap
    */
   fitMapToPins() {
+<<<<<<< HEAD
     const bounds = new this._google.maps.LatLngBounds();
     _.each(this._filteredLocations, (location) => {
+=======
+    const bounds = new google.maps.LatLngBounds();
+    _.each(this._filteredLocations, location => {
+>>>>>>> 1ebae6c3aa840a11e9cadb8d5006af9fb78f78ef
       if (location.active) {
         bounds.extend(location.marker.getPosition());
       }

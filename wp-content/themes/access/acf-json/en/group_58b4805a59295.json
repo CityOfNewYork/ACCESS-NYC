@@ -7,7 +7,6 @@
             "label": "Lead Content",
             "name": "lead",
             "type": "wysiwyg",
-            "value": null,
             "instructions": "Page header content.",
             "required": 0,
             "conditional_logic": 0,
@@ -27,7 +26,6 @@
             "label": "Sections",
             "name": "sections",
             "type": "repeater",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -47,7 +45,6 @@
                     "label": "Section Title",
                     "name": "section_title",
                     "type": "text",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -67,7 +64,6 @@
                     "label": "Section Content",
                     "name": "section_content",
                     "type": "wysiwyg",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -85,12 +81,11 @@
             ]
         },
         {
-            "key": "field_5a79f4a6694cf",
+            "key": "field_5c9ceb64e440d",
             "label": "Page Meta Description",
             "name": "page_meta_description",
             "type": "text",
-            "value": null,
-            "instructions": "Enter a meta description for this page.",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -98,6 +93,7 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 0,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -119,22 +115,8 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": [
-        "permalink",
-        "the_content",
-        "excerpt",
-        "custom_fields",
-        "discussion",
-        "comments",
-        "revisions",
-        "author",
-        "format",
-        "page_attributes",
-        "featured_image",
-        "categories",
-        "tags",
-        "send-trackbacks"
-    ],
+    "hide_on_screen": "",
     "active": 1,
-    "description": ""
+    "description": "",
+    "modified": 1553787825
 }

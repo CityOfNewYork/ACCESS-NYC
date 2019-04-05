@@ -16,6 +16,6 @@ $context['categories'] = get_categories(array(
 
 $context['formAction'] = admin_url( 'admin-ajax.php' );
 
-$templates = array( 'screener.twig' );
+$templates = array( 'screener/screener.twig' );
 
 Timber::render( $templates, $context );

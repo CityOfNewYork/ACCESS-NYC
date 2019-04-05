@@ -1,13 +1,16 @@
 /* eslint-env browser */
+// Core-js polyfills.
+// Core-js is made available as a dependency of @babel/preset-env
+import 'core-js/fn/promise';
+import 'core-js/fn/array/for-each';
+
 import jQuery from 'jquery';
-import 'es6-promise/dist/es6-promise.auto';
-import Matches from 'modules/polyfill-matches';
-import Remove from 'modules/polyfill-remove';
-import ForEach from 'modules/polyfill-foreach';
-import OfficeMap from 'modules/office-map';
-import Screener from 'modules/screener';
+
+// Element.prototype.polyfills
+import 'modules/polyfill-element-matches';
+import 'modules/polyfill-element-remove';
+
 import ShareForm from 'modules/share-form';
-import StaticMap from 'modules/static-map';
 import TextSizer from 'modules/text-sizer';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
@@ -22,15 +25,10 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 
   Utility.configErrorTracking(window);
 
-  // Polyfills
-  // new Promise; // Promise
-  new Matches; // Element.prototype.matches()
-  new Remove; // Element.prototype.removes()
-  new ForEach; // Array.prototype.forEach()
-
-  // Get SVG sprite file.
-  // See: https://css-tricks.com/ajaxing-svg-sprite/
-  $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
+  // Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
+  $.get('/wp-content/themes/access/assets/svg/icons.18dca930.svg',
+    Utility.svgSprites
+  );
 
   let $body = $('body');
 
@@ -39,13 +37,13 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     'click',
     '.js-simple-toggle, [data-js="toggle"]', // use the data attr selector
     Utility.simpleToggle
-  ).on('click', '[data-js="toggle-nav"]', (event) => {
+  ).on('click', '[data-js="toggle-nav"]', event => {
     let element = $(event.currentTarget);
     // Shows/hides the mobile nav and overlay.
     event.preventDefault();
-    $('body').toggleClass('active:overlay');
+    $('body').toggleClass('overlay active:overlay');
     $(element.attr('href')).toggleClass('active:o-mobile-nav');
-  }).on('click', '.js-toggle-search', (e) => {
+  }).on('click', '.js-toggle-search', e => {
     // Shows/hides the search drawer in the main nav.
     e.preventDefault();
     const $search = $('#search');
@@ -55,7 +53,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
         $('#search-field').focus();
       }, 20);
     }
-  }).on('click', '.js-hide-search', (e) => {
+  }).on('click', '.js-hide-search', e => {
     // Hides the search drawer in the main nav.
     e.preventDefault();
     $('#search').removeClass('active');
@@ -74,7 +72,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
 
   // A basic click tracking function
-  $body.on('click', '[data-js*="track"]', (event) => {
+  $body.on('click', '[data-js*="track"]', event => {
     /* eslint-disable no-console, no-debugger */
     let key = event.currentTarget.dataset.trackKey;
     let data = JSON.parse(event.currentTarget.dataset.trackData);
@@ -94,81 +92,9 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 
   // On the search results page, submits the search form when a category is
   // chosen.
-  $('.js-program-search-filter').on('change', 'input', (e) => {
+  $('.js-program-search-filter').on('change', 'input', e => {
     $(e.currentTarget).closest('form')[0].submit();
   });
-
-  // TODO: This function and the conditional afterwards should be refactored
-  // and pulled out to its own program detail controller module. The main
-  // unique thing about program details is that they use a ?step=x query
-  // parameter in the URL to determine the visible section. It is still all
-  // the same page. A hash would seem more appropriate, but there were
-  // some supposed issues with WPML where the hash was being stripped when
-  // switching between langauges. Because it is a single page, we don't need
-  // to actually reload the browser, which is why history.pushState is used.
-  /**
-   * Advances Program Page Steps
-   * @param {string} step - the kebab case identifier for the section
-   */
-  function showSection(step) {
-    $('[data-js="program-detail-step"]')
-       .removeClass('active').filter(`#${step}`).addClass('active');
-
-    $('[data-js="program-nav"] a').removeClass('active')
-       .filter(`#nav-link-${step}`).addClass('active');
-  }
-
-  if ($('[data-js="program-detail-content"]').length) {
-    const isMobileView = () => $('[data-js="site-desktop-nav"]')
-      .is(':hidden');
-
-    $('[data-js*="program-nav-step-link"]').on('click', (e) => {
-      if (!history.pushState) {
-        return true;
-      }
-      e.preventDefault();
-
-      const step = Utility.getUrlParameter('step', $(e.target).attr('href'));
-      let linkType = '';
-
-      window.history.pushState(null, null, '?step=' + step);
-
-      if ($(e.target).hasClass('[data-js*="jump-to-anchor"]')) {
-        linkType = 'buttonLink';
-      } else {
-        linkType = 'navLink';
-      }
-      $(window).trigger('popstate', linkType);
-    });
-
-    $(window).on('popstate', (e, linkType) => {
-      const possibleSections = [
-        'how-it-works',
-        'how-to-apply',
-        'determine-your-eligibility',
-        'what-you-need-to-include'
-      ];
-
-      let sectionId = Utility.getUrlParameter('step');
-
-      if (!sectionId || !$.inArray(sectionId, possibleSections)) {
-        sectionId = 'how-it-works';
-      }
-
-      // If the page is in a mobile view, and the user has clicked a button
-      // (as opposed to one of the table of content links) we want to scroll
-      // the browser to the content body as opposed to the top of the page.
-      if (isMobileView() && linkType === 'buttonLink') {
-        $(document).scrollTop(
-          $('[data-js="program-detail-content"]').offset().top
-        );
-      } else {
-        $(document).scrollTop(0);
-      }
-      showSection(sectionId);
-    }).trigger('popstate');
-  }
-  // END TODO
 
   // Initialize text sizer module.
   $(`.${TextSizer.CssClass.CONTROLLER}`).each((i, el) => {
@@ -176,6 +102,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     textSizer.init();
   });
 
+<<<<<<< HEAD
   // Initialize eligibility screener.
   $(`.${Screener.CssClass.FORM}`).each((i, el) => {
     const screener = new Screener(el);
@@ -212,6 +139,8 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     }
   });
 
+=======
+>>>>>>> 1ebae6c3aa840a11e9cadb8d5006af9fb78f78ef
   // Initialize tooltips.
   $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) => {
     const tooltip = new Tooltip(el);

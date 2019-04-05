@@ -1,0 +1,99 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<main class="bg-color-white pb-3" id="content">
+  <header class="usa-grid py-4 my-1">
+    <h1 class="text-color-blue-dark mb-0">{% if category | length %}{{__('Programs', 'accessnyctheme')}}: {{ category.name }}{% else %}{{__('Programs', 'accessnyctheme')}}{% endif %}</h1>
+  </header>
+
+  <div class="usa-grid screen-desktop:layout--sidebar-small-gutter" data-js="programs" data-js-page="{{ pagination.current }}">
+    <aside id="filter-programs">
+      <h2 class="type-h4 mb-0 hidden screen-desktop:inline-block">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
+
+      <span class="text-font-size-small screen-desktop:hidden">{{__('Filter Programs', 'accessnyctheme')}}</span>
+
+      <div class="flex items-center justify-center py-4" v-if="!init">
+        {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
+        &nbsp;&nbsp;
+        {{ __('Getting Filters', 'accessnyctheme') }}
+      </div>
+
+      <div class="hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
+        <c-filter-multi v-bind:terms="terms" v-on:fetch="click" v-on:reset="click"></c-filter-multi>
+
+        <div class="sticky pin-b pb-2 text-center screen-desktop:hidden animated fadeInUpBig" v-if="filtering">
+          <a class="btn btn-small btn-primary" href="#see-programs">
+            <span v-if="none">{{ __('No Results', 'accessnyctheme') }}</span>
+            <span v-else-if="!loading" v-html="'See ' + headers.total + ' Programs'">{{ __('See Programs', 'accessnyctheme') }}</span>
+            <span v-else>{{ __('Loading', 'accessnyctheme') }}</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <div id="see-programs" class="pt-2 screen-desktop:pt-0">
+      <div class="layout--gutter p-3 bg-color-grey-lightest mb-3" v-if="!init">
+        {% if page.term_id | length %}
+          {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
+        {% else %}
+          {% include 'partials/post-teaser.twig' %}
+        {% endif %}
+      </div>
+
+      <div class="h-full hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
+        <div class="px-3 pt-3 mb-2 bg-color-grey-lightest items-center" v-if="!loading">
+          <div class="layout--gutter pb-3" v-for="page in posts" v-if="page && page.show">
+            <c-card v-for="post in page.posts" :key="post.id" v-bind="post" taxonomy="programs" v-if="page.show"></c-card>
+          </div>
+        </div>
+        <div class="min-h-full flex items-center justify-center" v-if="none">
+          <div class="sticky pin-t pin-b flex items-center justify-center py-4">
+            <p>
+              {{ __('There are no results for the selected filters.', 'accessnyctheme') }}
+              <a href="#filter-programs">{{ __('Try deselecting some filters', 'accessnyctheme') }}</a>.
+            </p>
+          </div>
+        </div>
+        <div class="min-h-full flex items-center justify-center" v-else-if="loading">
+          <div class="sticky pin-t pin-b flex items-center justify-center py-4">
+            {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
+            &nbsp;&nbsp;
+            {{ __('Loading', 'accessnyctheme') }}
+          </div>
+        </div>
+
+        <div class="text-center screen-desktop:text-left" v-if="!loading">
+          <a class="btn btn-secondary btn-small screen-tablet:btn-normal" href="{{ pagination.next.link }}" v-on:click="paginate" v-if="next" data-amount="1">
+            {{ __('See More Results', 'accessnyctheme') }}
+          </a>
+        </div>
+        <div class="sticky pin-b py-2 text-center screen-desktop:hidden" v-if="!loading">
+          <a class="btn btn-small btn-primary" href="#filter-programs">
+            {{__('Filter Programs', 'accessnyctheme')}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block scripts_footer %}
+{% include 'partials/strings.twig' with {'strings': [
+  {
+    'label': 'Learn more',
+    'slug': 'LEARN_MORE'
+  },
+  {
+    'label': 'Apply',
+    'slug': 'APPLY'
+  },
+  {
+    'label': 'All',
+    'slug': 'ALL'
+  }
+], 'translation_id': 'accessnyctheme'} only %}
+
+{{ function('enqueue_script', 'assets/js/main') }}
+{{ function('enqueue_script', 'assets/js/programs') }}
+{% endblock %}

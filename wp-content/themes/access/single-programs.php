@@ -1,6 +1,6 @@
 <?php
 /**
- * Template anem: Program detail page.
+ * Template name: Program detail page.
  */
 
 $context = Timber::get_context();
@@ -17,7 +17,7 @@ if (isset($_GET['step'])) {
 $query = ($context['step'] !== '') ? '?step='.$context['step'] : '';
 
 $post = Timber::get_post();
-$templates = array('programs/single-programs.twig');
+$templates = array('programs/single.twig');
 $context['post'] = $post;
 
 // Share by email/sms fields.
