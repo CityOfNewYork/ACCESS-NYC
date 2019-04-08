@@ -6,7 +6,7 @@ import OfficeFilter from 'modules/office-filter';
 import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
 import MissPlete from 'modules/MissPlete';
-import InputAutocomplete from 'acess-nyc-patterns/src/elements/inputs/input-autocomplete';
+// import InputAutocomplete from 'access-nyc-patterns/src/elements/inputs/input-autocomplete';
 import _ from 'underscore';
 
 /**
@@ -66,7 +66,11 @@ class OfficeMap {
     this._placeService = new this._google.maps.places.PlacesService(this._map);
 
     /** @private {this._missPlete} autocomplete dropdown list */
-    this._missPlete = new InputAutocomplete();
+    this._missPlete = new MissPlete({
+      input: this._searchEl,
+      options: [],
+      className: 'c-autocomplete'
+    });
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
@@ -136,7 +140,7 @@ class OfficeMap {
         }, (predictions) => {
             if(predictions) {
               let results = predictions.map((e) => [e['description']]);
-
+              
               this._missPlete.options = results;
               let otherMissPlete = this._missPlete;
 
@@ -445,13 +449,8 @@ class OfficeMap {
    * @return {this} OfficeMap
    */
   fitMapToPins() {
-<<<<<<< HEAD
     const bounds = new this._google.maps.LatLngBounds();
     _.each(this._filteredLocations, (location) => {
-=======
-    const bounds = new google.maps.LatLngBounds();
-    _.each(this._filteredLocations, location => {
->>>>>>> 1ebae6c3aa840a11e9cadb8d5006af9fb78f78ef
       if (location.active) {
         bounds.extend(location.marker.getPosition());
       }

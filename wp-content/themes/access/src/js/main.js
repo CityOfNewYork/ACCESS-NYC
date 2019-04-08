@@ -18,6 +18,7 @@ import Accordion from 'components/accordion/accordion.common';
 import Filter from 'components/filter/filter.common';
 import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 import Newsletter from 'objects/newsletter/newsletter.common';
+import OfficeMap from 'modules/office-map';
 
 
 (function(window, $) {
@@ -97,26 +98,12 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     $(e.currentTarget).closest('form')[0].submit();
   });
 
-  // Initialize text sizer module.
-  $(`.${TextSizer.CssClass.CONTROLLER}`).each((i, el) => {
-    const textSizer = new TextSizer(el);
-    textSizer.init();
-  });
-
-<<<<<<< HEAD
-  // Initialize eligibility screener.
-  $(`.${Screener.CssClass.FORM}`).each((i, el) => {
-    const screener = new Screener(el);
-    screener.init();
-  });
-
   // Initialize maps if present.
   const $maps = $('.js-map');
 
   /**
    * Callback function for loading the Google maps library.
    */
-
   window.initializeMaps = () => {
     $maps.each((i, el) => {
       const map = new OfficeMap(el);
@@ -140,8 +127,13 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     }
   });
 
-=======
->>>>>>> 1ebae6c3aa840a11e9cadb8d5006af9fb78f78ef
+
+  // Initialize text sizer module.
+  $(`.${TextSizer.CssClass.CONTROLLER}`).each((i, el) => {
+    const textSizer = new TextSizer(el);
+    textSizer.init();
+  });
+
   // Initialize tooltips.
   $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) => {
     const tooltip = new Tooltip(el);
