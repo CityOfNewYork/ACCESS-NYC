@@ -207,11 +207,7 @@ gulp.task('webpack', () =>
     .pipe(gulp.dest(`${ DIST }/js`))
 );
 
-gulp.task('scripts', gulp.series(
-  'clean:scripts',
-  'lint',
-  'webpack'
-));
+gulp.task('scripts', gulp.series('lint', 'webpack'));
 
 /**
  * Hashing

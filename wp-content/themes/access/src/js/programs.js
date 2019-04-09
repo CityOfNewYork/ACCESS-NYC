@@ -87,6 +87,8 @@ import WpArchiveVue from 'modules/wp-archive-vue';
               'active': false,
               'name': terms.labels.archives,
               'slug': terms.name,
+              'checkbox': false,
+              'toggle': true,
               'filters': terms.terms.map(filters => ({
                 'id': filters.term_id,
                 'name': filters.name,

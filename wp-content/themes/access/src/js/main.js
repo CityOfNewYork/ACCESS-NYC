@@ -1,8 +1,8 @@
 /* eslint-env browser */
 // Core-js polyfills.
 // Core-js is made available as a dependency of @babel/preset-env
-import 'core-js/fn/promise';
-import 'core-js/fn/array/for-each';
+import 'core-js/features/promise';
+import 'core-js/features/array/for-each';
 
 import jQuery from 'jquery';
 
