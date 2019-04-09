@@ -12,7 +12,6 @@ import 'core-js/features/object/values';
 import 'core-js/features/object/is-extensible';
 import 'core-js/features/url-search-params';
 
-
 // Fetch
 import 'whatwg-fetch';
 
@@ -35,12 +34,22 @@ import WpArchiveVue from 'modules/wp-archive-vue';
 
   if (programs) {
     /** Redirect old filtering method to WP Archive Vue filtering */
-    if (programs.dataset.category !== '') {
-      window.history.replaceState(null, null, [
-          window.location.pathname,
-          '?categories[]=' + programs.dataset.category
-        ].join(''));
-    }
+    let query = [];
+    let params = {
+      'categories': 'categories[]',
+      'served': 'served[]'
+    };
+
+    Object.keys(params).forEach(key => {
+      let datum = programs.dataset;
+      if (datum.hasOwnProperty(key) && datum[key] != '') {
+        query.push(params[key] + '=' + datum[key]);
+      }
+    });
+
+    if (query.length) window.history.replaceState(null, null, [
+        window.location.pathname, '?', query.join('')
+      ].join(''));
 
     /** Add Vue components to the vue instance */
     Vue.component('c-card', CardVue);

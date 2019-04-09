@@ -2,9 +2,10 @@
 
 {% block content %}
 <main class="bg-color-white pb-3" id="content" data-js="programs"
+  data-categories="{{ categories.term_id }}"
+  data-served="{{ served.term_id }}"
   data-page="{{ pagination.current }}"
   data-per-page="{{ per_page }}"
-  data-category="{{ category.term_id }}"
   data-pages="{{ pagination.total }}"
   data-count="{{ count }}">
   <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
