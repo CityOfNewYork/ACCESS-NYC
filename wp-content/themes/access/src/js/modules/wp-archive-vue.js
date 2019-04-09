@@ -31,6 +31,9 @@ class WpArchiveVue {
           total: 0,
           link: 'rel="next";'
         },
+        history: {
+          omit: ['page', 'per_page']
+        },
         init: false
       },
       computed: {
@@ -80,8 +83,13 @@ class WpArchiveVue {
         wpQuery: WpArchiveVue.wpQuery,
         response: WpArchiveVue.response,
         process: WpArchiveVue.process,
-        error: WpArchiveVue.error
-      }
+        error: WpArchiveVue.error,
+        buildUrlQuery: WpArchiveVue.buildUrlQuery,
+        buildJsonQuery: WpArchiveVue.buildJsonQuery,
+        replaceState: WpArchiveVue.replaceState,
+        getState: WpArchiveVue.getState
+      },
+      created: WpArchiveVue.created
     };
 
     // Assign missing top level props to settings.
@@ -105,8 +113,75 @@ class WpArchiveVue {
   }
 }
 
-/** The default selector for the Vue application */
+/** @type {string} The default selector for the Vue application */
 WpArchiveVue.el = '[data-js="archive"]';
+
+/**
+ * Converts a JSON object to URL Query. Opposite of buildJsonQuery.
+ * @param   {object}  query  URL Query structured as JSON Object.
+ * @param   {array}   omit   Set of params as flags to not include them in the
+ *                           returned query string.
+ * @param   {object}  rev    Set of parameter maps to replace provided param
+ *                           names in the query.
+ * @return  {string}         The query string.
+ */
+WpArchiveVue.buildUrlQuery = function(query, omit = false, rev = false) {
+  let q = Object.keys(query)
+    .map(k => {
+      if (omit && omit.includes(k)) return false;
+
+      let map = (rev && rev.hasOwnProperty(k)) ? rev[k] : k;
+
+      if (Array.isArray(query[k]))
+        return query[k].map(a => `${map}[]=${a}`).join('&');
+      return `${map}=${query[k]}`;
+    }).filter(k => (k)).join('&');
+
+  return (q !== '') ? '?' + q : '';
+};
+
+/**
+ * Converts a URL Query String to a JSON Object. Opposite of buildUrlQuery.
+ * @param   {string}  query  URL Query String.
+ * @return  {object}         URL Query structured as JSON Object.
+ */
+WpArchiveVue.buildJsonQuery = function(query) {
+  if (query === '') return false;
+
+  let params = new URLSearchParams(query);
+  let q = {};
+
+  // Set keys in object and get values, convert to number (!NaN)
+  params.forEach(function(value, key) {
+    let k = key.replace('[]', '');
+    if (!q.hasOwnProperty(k))
+      q[k] = params.getAll(key).map(value => {
+        return (isNaN(value)) ? value : +value;
+      });
+  });
+
+  // Reverse map the parameters to the actual query vars
+  Object.keys(this.history.params).map(key => {
+    if (q.hasOwnProperty(this.history.params[key])) {
+      q[key] = q[this.history.params[key]];
+      delete q[this.history.params[key]];
+    }
+  });
+
+  return q;
+};
+
+/**
+ * Set the URL Query
+ * @param   {object}  query  URL Query structured as JSON Object.
+ * @return  {object}         Vue instance
+ */
+WpArchiveVue.replaceState = function(query) {
+  let state = this.buildUrlQuery(query, this.history.omit, this.history.params);
+  window.history.replaceState(null, null, window.location.pathname + state);
+
+  return this;
+};
 
 /**
  * Basic fetch for retrieving data from an endpoint configured in the
@@ -130,6 +205,7 @@ WpArchiveVue.fetch = function(data = false) {
  * The click event to begin filtering.
  * @param   {object}  event  The click event on the element that triggers
  *                           the filter.
+ * @return  {object}         Vue instance
  */
 WpArchiveVue.click = function(event) {
   let taxonomy = event.data.parent;
@@ -140,6 +216,8 @@ WpArchiveVue.click = function(event) {
   } else {
     this.filterAll(taxonomy);
   }
+
+  return this;
 };
 
 /**
@@ -147,6 +225,7 @@ WpArchiveVue.click = function(event) {
  * it will add the filter to the query.
  * @param   {string}  taxonomy  The taxonomy slug of the filter
  * @param   {number}  term      The id of the term to filter on
+ * @return  {object}            Vue instance
  */
 WpArchiveVue.filter = function(taxonomy, term) {
   let terms = (this.query.hasOwnProperty(taxonomy)) ?
@@ -158,11 +237,14 @@ WpArchiveVue.filter = function(taxonomy, term) {
       terms.filter(el => el !== term) : terms.concat([term]);
 
   this.updateQuery(taxonomy, terms);
+
+  return this;
 };
 
 /**
  * A control for filtering all of the terms in a particular taxonomy on or off.
  * @param   {string}  taxonomy  The taxonomy slug of the filter
+ * @return  {object}            Vue instance
  */
 WpArchiveVue.filterAll = function(taxonomy) {
   let tax = this.terms.find(t => t.slug === taxonomy);
@@ -176,6 +258,8 @@ WpArchiveVue.filterAll = function(taxonomy) {
     });
 
   this.updateQuery(taxonomy, (checked) ? terms : []);
+
+  return this;
 };
 
 /**
@@ -255,6 +339,7 @@ WpArchiveVue.wp = function() {
  * @param   {array}  queries  The amount of queries to make and which direction
  *                            to make them in. 0 means the current page, 1 means
  *                            the next page. -1 would mean the previous page.
+ * @return  {object}          Vue instance.
  */
 WpArchiveVue.queue = function(queries = [0, 1]) {
   // Set a benchmark query to compare the upcomming query to.
@@ -319,10 +404,16 @@ WpArchiveVue.queue = function(queries = [0, 1]) {
         .then(this.response)
         .then(data => {
           let headers = Object.assign({}, this.headers);
+
+          // If this is the current page, replace the browser history state.
+          if (current) this.replaceState(query);
+
           this.process(data, query, headers);
         }).catch(this.error);
     }
   })();
+
+  return this;
 };
 
 /**
@@ -331,18 +422,12 @@ WpArchiveVue.queue = function(queries = [0, 1]) {
  * @return  {promise}        The fetch request for the query
  */
 WpArchiveVue.wpQuery = function(query) {
-  // eslint-disable-next-line no-undef
-  // this.$set(this, 'abort', (new AbortController));
-  // let signal = this.abort.signal;
-  let url = `${this.lang.path}${this.endpoints[this.type]}`;
-
   // Build the url query.
-  url = `${url}?` + Object.keys(query)
-    .map(k => {
-      if (Array.isArray(query[k]))
-        return query[k].map(a => `${k}[]=${a}`).join('&');
-      return `${k}=${query[k]}`;
-    }).join('&');
+  let url = [
+    this.lang.path,
+    this.endpoints[this.type],
+    this.buildUrlQuery(query)
+  ].join('');
 
   // Set posts and store a copy of the query for reference.
   this.$set(this.posts, query.page, {
@@ -351,7 +436,6 @@ WpArchiveVue.wpQuery = function(query) {
     show: (this.query.page >= query.page)
   });
 
-  // return fetch(url, {signal: signal});
   return fetch(url);
 };
 
@@ -406,6 +490,16 @@ WpArchiveVue.process = function(data, query, headers) {
  */
 WpArchiveVue.error = function(response) {
   // console.dir(response);
+};
+
+WpArchiveVue.getState = function(query = false) {
+  query = (query) ? query : this.buildJsonQuery(window.location.search);
+
+  Object.keys(query).map(key => {
+    this.$set(this.query, key, query[key]);
+  });
+
+  return this;
 };
 
 export default WpArchiveVue;
