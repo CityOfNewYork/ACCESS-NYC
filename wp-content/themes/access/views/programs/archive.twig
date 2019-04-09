@@ -32,7 +32,7 @@
       </div>
 
       <div class="hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
-        <c-filter-multi v-bind:terms="terms" v-on:fetch="click" v-on:reset="click"></c-filter-multi>
+        <c-filter-multi v-bind:terms="terms" v-on:fetch="click" v-on:reset="toggle"></c-filter-multi>
 
         <div class="sticky pin-b pb-2 text-center screen-desktop:hidden animated fadeInUpBig" v-if="filtering">
           <a class="btn btn-small btn-primary" href="#see-programs">

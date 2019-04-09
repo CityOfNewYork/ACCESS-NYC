@@ -73,6 +73,7 @@ class WpArchiveVue {
       methods: {
         fetch: WpArchiveVue.fetch,
         click: WpArchiveVue.click,
+        toggle: WpArchiveVue.toggle,
         filter: WpArchiveVue.filter,
         filterAll: WpArchiveVue.filterAll,
         updateQuery: WpArchiveVue.updateQuery,
@@ -216,6 +217,19 @@ WpArchiveVue.click = function(event) {
   } else {
     this.filterAll(taxonomy);
   }
+
+  return this;
+};
+
+/**
+ * The reset event to toggle all filters.
+ * @param   {object}  event  The click event on the element that triggers
+ *                           the filter.
+ * @return  {object}         Vue instance
+ */
+WpArchiveVue.toggle = function(event) {
+  let taxonomy = event.event.data.parent;
+  this.filterAll(taxonomy);
 
   return this;
 };
