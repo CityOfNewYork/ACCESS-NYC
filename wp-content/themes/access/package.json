@@ -4,6 +4,7 @@
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "scripts": {
     "gulp": "gulp",
+    "start": "npm run development",
     "development": "NODE_ENV='development' gulp",
     "production": "NODE_ENV='production' gulp",
     "predeploy": "NODE_ENV='production' gulp build",
@@ -32,21 +33,28 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry",
+          "corejs": 3
+        }
+      ]
     ],
     "retainLines": true
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/plugin-transform-runtime": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/register": "^7.0.0",
-    "@babel/runtime": "^7.3.4",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
+    "@babel/runtime": "^7.4.3",
     "autoprefixer": "^7.1.6",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^8.0.5",
     "browser-sync": "^2.24.7",
     "clean-webpack-plugin": "^2.0.1",
+    "core-js": "^3.0.0",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^3.10.0",
     "del": "^1.2.0",

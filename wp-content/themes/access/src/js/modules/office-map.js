@@ -5,8 +5,7 @@ import $ from 'jquery';
 import OfficeFilter from 'modules/office-filter';
 import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
-import MissPlete from 'modules/MissPlete';
-// import InputAutocomplete from 'access-nyc-patterns/src/elements/inputs/input-autocomplete';
+import InputAutocomplete from 'access-nyc-patterns/dist/elements/inputs/input-autocomplete.common';
 import _ from 'underscore';
 
 /**
@@ -65,12 +64,8 @@ class OfficeMap {
     /** @private {this._google.maps.places.PlaceService}PlaceService instance */
     this._placeService = new this._google.maps.places.PlacesService(this._map);
 
-    /** @private {this._missPlete} autocomplete dropdown list */
-    this._missPlete = new MissPlete({
-      input: this._searchEl,
-      options: [],
-      className: 'c-autocomplete'
-    });
+    /** @private {this._autocomplete} InputAutocomplete Access Design Pattern */
+    this._autocomplete = new InputAutocomplete({});
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
@@ -140,16 +135,15 @@ class OfficeMap {
         }, (predictions) => {
             if(predictions) {
               let results = predictions.map((e) => [e['description']]);
-              
-              this._missPlete.options = results;
-              let otherMissPlete = this._missPlete;
+              console.log(this);
+              this._autocomplete.options = results;
 
-              this._missPlete.select = () => {
+              this._autocomplete.select = () => {
                   if (otherMissPlete.highlightedIndex !== -1) {
                     otherMissPlete.input.value = otherMissPlete
                       .scoredOptions[otherMissPlete.highlightedIndex]
                         .displayValue;
-                    otherMissPlete.removeDropdown();
+                    this._autocomplete.removeDropdown();
 
                     this.displayPlacesOnMap(predictions);
                   }
