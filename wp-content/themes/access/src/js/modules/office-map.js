@@ -6,6 +6,7 @@ import OfficeFilter from 'modules/office-filter';
 import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
 import InputAutocomplete from 'access-nyc-patterns/dist/elements/inputs/input-autocomplete.common';
+
 import _ from 'underscore';
 
 /**
@@ -135,8 +136,9 @@ class OfficeMap {
         }, (predictions) => {
             if(predictions) {
               let results = predictions.map((e) => [e['description']]);
-              console.log(this);
+
               this._autocomplete.options = results;
+              let otherMissPlete = this._missPlete;
 
               this._autocomplete.select = () => {
                   if (otherMissPlete.highlightedIndex !== -1) {

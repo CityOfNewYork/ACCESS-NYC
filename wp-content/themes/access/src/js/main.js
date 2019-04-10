@@ -19,7 +19,7 @@ import Filter from 'components/filter/filter.common';
 import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 import Newsletter from 'objects/newsletter/newsletter.common';
 import OfficeMap from 'modules/office-map';
-
+import StaticMap from 'modules/static-map';
 
 (function(window, $) {
   'use strict';
