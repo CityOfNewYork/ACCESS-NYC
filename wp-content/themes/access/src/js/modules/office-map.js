@@ -5,8 +5,8 @@ import $ from 'jquery';
 import OfficeFilter from 'modules/office-filter';
 import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
-import InputAutocomplete from 'access-nyc-patterns/dist/elements/inputs/input-autocomplete.common';
-
+import InputAutocomplete from
+  'access-nyc-patterns/dist/elements/inputs/input-autocomplete.common';
 import _ from 'underscore';
 
 /**
@@ -65,8 +65,8 @@ class OfficeMap {
     /** @private {this._google.maps.places.PlaceService}PlaceService instance */
     this._placeService = new this._google.maps.places.PlacesService(this._map);
 
-    /** @private {this._autocomplete} InputAutocomplete Access Design Pattern */
-    this._autocomplete = new InputAutocomplete({});
+    /** @private {this._inputAutocomplete} Access Design Pattern */
+    this._inputAutocomplete = new InputAutocomplete({options: []});
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
@@ -125,30 +125,39 @@ class OfficeMap {
 
     // Attach handler for the autocomplete search box. This updates the map
     // position and re-sorts locations around that position.
-    this._searchEl.addEventListener('keyup', (event) => {
+    this._searchEl.addEventListener('keyup', event => {
+      const NYCbounds = {
+        'south': 40.4773991,
+        'west': -74.25908989999999,
+        'north': 40.9175771,
+        'east': -73.7002721
+      };
       if(event.target.value) {
         this._service.getPlacePredictions({
            input: event.target.value,
            offset: 3,
            types: ['geocode'],
            componentRestrictions: {country: 'us'},
-           bounds: this._map.getBounds()
-        }, (predictions) => {
-            if(predictions) {
-              let results = predictions.map((e) => [e['description']]);
+           bounds: NYCbounds
+        }, predictions => {
+          if(predictions) {
+            let results = predictions.map(e => [e['description']]);
+            this._inputAutocomplete._autocomplete.options = results;
+            const autocompleteSelf = this._inputAutocomplete._autocomplete;
 
-              this._autocomplete.options = results;
-              let otherMissPlete = this._missPlete;
+            this._inputAutocomplete._autocomplete.select = () => {
+                if (autocompleteSelf.highlightedIndex !== -1) {
+                  autocompleteSelf.input.value = autocompleteSelf
+                    .scoredOptions[autocompleteSelf.highlightedIndex]
+                    .displayValue;
+                  autocompleteSelf.removeDropdown();
 
-              this._autocomplete.select = () => {
-                  if (otherMissPlete.highlightedIndex !== -1) {
-                    otherMissPlete.input.value = otherMissPlete
-                      .scoredOptions[otherMissPlete.highlightedIndex]
-                        .displayValue;
-                    this._autocomplete.removeDropdown();
+                  let nameOfLocation = autocompleteSelf.input.value;
+                  let googlePlaceObj = this.getGooglePlaceByName(nameOfLocation,
+                                                                 predictions);
 
-                    this.displayPlacesOnMap(predictions);
-                  }
+                  this.displayPlacesOnMap(googlePlaceObj);
+                }
               };
             }
         });
@@ -214,11 +223,10 @@ class OfficeMap {
   /**
    * Iterates over a list of place objects from Google and
    * display them on the map using PlacesService.
-   * @param {array} mapItems an array of Google Map Objects to be displayed.
+   * @param {object} place
    */
-   displayPlacesOnMap(mapItems) {
-     if(mapItems) {
-       mapItems.forEach((place) => {
+   displayPlacesOnMap(place) {
+     if(place) {
          let request = {
             placeId: place.place_id,
             fields: ['name', 'formatted_address', 'place_id', 'geometry']
@@ -235,9 +243,22 @@ class OfficeMap {
               $(officeMap._searchEl).blur();
             }
          });
-       });
      }
    }
+   /**
+    * Iterates over an array of Google Maps Objects and it the description
+    * of the object matches the name of the location it returns the object.
+    * @param {string} nameOfLocation
+    * @param {array} listOfGooglePlaces
+    * @return {object} Google Map Object
+    */
+    getGooglePlaceByName(nameOfLocation, listOfGooglePlaces) {
+      if (nameOfLocation && listOfGooglePlaces) {
+         return listOfGooglePlaces.find(googlePlace =>
+          googlePlace.description.match(nameOfLocation)
+        );
+      }
+    }
 
   /**
    * Updates this._locations based on a given set of parameters. Recursively
@@ -446,7 +467,7 @@ class OfficeMap {
    */
   fitMapToPins() {
     const bounds = new this._google.maps.LatLngBounds();
-    _.each(this._filteredLocations, (location) => {
+    _.each(this._filteredLocations, location => {
       if (location.active) {
         bounds.extend(location.marker.getPosition());
       }
