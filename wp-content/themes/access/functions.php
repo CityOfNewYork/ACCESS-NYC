@@ -154,7 +154,10 @@ $office_loc = array(
   ),
 );
 
-function trigger_gmaps() {
+/**
+ * Trigger Google map locations to properly update in /locations posts
+ */
+add_action('wp', function() {
   global $post;
   global $office_loc;
 
@@ -174,15 +177,19 @@ function trigger_gmaps() {
       );
 
       // create a full address
-      $full_address = get_field($office_loc['fields']['address_street'], $post->ID) . ', ' .get_field($office_loc['fields']['city'], $post->ID) . ' ' . get_field($office_loc['fields']['zip'], $post->ID);
+      $full_address = get_field(
+        $office_loc['fields']['address_street'], $post->ID) . ', ' .
+        get_field($office_loc['fields']['city'], $post->ID) . ' ' .
+        get_field($office_loc['fields']['zip'], $post->ID
+      );
 
       $address = urlencode($full_address); // Spaces as + signs
 
       // will want to replace the key
-      $address_query = wp_remote_get("https://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&key=AIzaSyBEl7iNZDAToQVavHuJW4D_PKPmoVpU7H4");
+      $key = get_env('GOOGLE_MAPS_EMBED');
+      $address_query = wp_remote_get("https://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&key=$key");
       $address_json = wp_remote_retrieve_body($address_query);
       $address_data = json_decode($address_json);
-      // echo '<div class="error"><p>http://maps.google.com/maps/api/geocode/json?address=' . $address .'&sensor=false&key=AIzaSyBEl7iNZDAToQVavHuJW4D_PKPmoVpU7H4</p></div>';
 
       // if the address contains info
       if (isset($address_data)) {
@@ -195,7 +202,6 @@ function trigger_gmaps() {
       $location['lat'] = $lat;
       $location['lng'] = $lng;
 
-
       // update the address, latitude, and longitude field
       update_post_meta($post->ID, 'address', $location['address']);
       update_post_meta($post->ID, 'lat', $location['lat']);
@@ -205,11 +211,7 @@ function trigger_gmaps() {
       update_field($office_loc['fields']['google_map'], $location, $post->ID);
     }
   }
-}
-
-add_action('wp', 'trigger_gmaps', 1);
-// end of trigger_gmaps
-// *****
+}, 1);
 
 // GatherContent - Mapped WordPress Field meta_keys edit
 add_filter('gathercontent_importer_custom_field_keys', function ($meta_keys) {
