@@ -246,8 +246,8 @@ class OfficeMap {
      }
    }
    /**
-    * Iterates over an array of Google Maps Objects and it the description
-    * of the object matches the name of the location it returns the object.
+    * Iterates over an array of Google Maps Objects, if the object's description
+    * matches the name of the location the Google Map's object is returned.
     * @param {string} nameOfLocation
     * @param {array} listOfGooglePlaces
     * @return {object} Google Map Object
