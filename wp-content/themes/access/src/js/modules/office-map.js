@@ -126,19 +126,13 @@ class OfficeMap {
     // Attach handler for the autocomplete search box. This updates the map
     // position and re-sorts locations around that position.
     this._searchEl.addEventListener('keyup', event => {
-      const NYCbounds = {
-        'south': 40.4773991,
-        'west': -74.25908989999999,
-        'north': 40.9175771,
-        'east': -73.7002721
-      };
       if(event.target.value) {
         this._service.getPlacePredictions({
            input: event.target.value,
            offset: 3,
            types: ['geocode'],
            componentRestrictions: {country: 'us'},
-           bounds: NYCbounds
+           bounds: OfficeMap.NYC_BOUNDS
         }, predictions => {
           if(predictions) {
             let results = predictions.map(e => [e['description']]);
@@ -523,5 +517,15 @@ OfficeMap.Selectors = {
   MESSAGE_LOADING: '[data-js="message-loading"]',
   MESSAGE_NO_RESULTS: '[data-js="message-no-results"]'
 };
+/**
+ * NYC Bound Parameters for Google Maps API
+ * @enum {object}
+ */
+ OfficeMap.NYC_BOUNDS = {
+   'south': 40.4773991,
+   'west': -74.25908989999999,
+   'north': 40.9175771,
+   'east': -73.7002721
+ };
 
 export default OfficeMap;
