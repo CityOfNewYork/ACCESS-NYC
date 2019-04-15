@@ -7,8 +7,22 @@
     <h4 class="font-normal">{{__('Here are your options.', 'accessnyc-program-detail')}}</h4>
   </header>
 
-  {% set sections = ['how_to_apply_or_enroll_online', 'how_to_apply_or_enroll_by_mail', 'how_to_apply_or_enroll_by_phone', 'how_to_apply_or_enroll_in_person'] %}
+  {# {% set sections = [
+      'how_to_apply_or_enroll_online',
+      'how_to_apply_or_enroll_by_mail',
+      'how_to_apply_or_enroll_by_phone',
+      'how_to_apply_or_enroll_in_person'
+    ] %} #}
+
+  {% set sections = [
+      'field_58912c1a8a850',
+      'field_58912c1a8a885',
+      'field_58912c1a8a900',
+      'field_58912c1a8a8cb'
+    ] %}
+
   {% set accordions = [] %}
+
   {% for section in sections %}
     {% if post.get_field(section) %}
       {% set accordions = accordions|merge([section]) %}
@@ -16,7 +30,7 @@
   {% endfor %}
 
   {% for accordion in accordions %}
-    {% if accordion == 'how_to_apply_or_enroll_online' %}
+    {% if accordion == 'field_58912c1a8a850' %}
       {% set this = {
         id: accordion|replace({'_': '-'}),
         active: loop.index == 1 ? true : false,
@@ -31,7 +45,7 @@
       } %}
     {% endif %}
 
-    {% if accordion == 'how_to_apply_or_enroll_by_mail' %}
+    {% if accordion == 'field_58912c1a8a885' %}
       {% set this = {
         id: accordion|replace({'_': '-'}),
         active: loop.index == 1 ? true : false,
@@ -46,7 +60,7 @@
       } %}
     {% endif %}
 
-    {% if accordion == 'how_to_apply_or_enroll_by_phone' %}
+    {% if accordion == 'field_58912c1a8a900' %}
       {% set this = {
         id: accordion|replace({'_': '-'}),
         active: loop.index == 1 ? true : false,
@@ -56,7 +70,7 @@
       } %}
     {% endif %}
 
-    {% if accordion == 'how_to_apply_or_enroll_in_person' %}
+    {% if accordion == 'field_58912c1a8a8cb' %}
       {% set this = {
         id: accordion|replace({'_': '-'}),
         active: loop.index == 1 ? true : false,

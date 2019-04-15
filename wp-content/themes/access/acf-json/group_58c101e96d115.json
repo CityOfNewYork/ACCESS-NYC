@@ -1,13 +1,12 @@
 {
-    "key": "group_5a2eb31e4379b",
-    "title": "Program Search Links (French)",
+    "key": "group_58c101e96d115",
+    "title": "Program Search Links",
     "fields": [
         {
-            "key": "field_5a2eb31e4fbd7",
+            "key": "field_58c1020ec4450",
             "label": "Program Links",
             "name": "program_links",
             "type": "post_object",
-            "value": null,
             "instructions": "Select up to 3 programs you would like to be highlighted in the search modal window.",
             "required": 1,
             "conditional_logic": 0,
@@ -57,5 +56,6 @@
         "send-trackbacks"
     ],
     "active": 1,
-    "description": ""
+    "description": "",
+    "modified": 1555360136
 }

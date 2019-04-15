@@ -44,13 +44,6 @@
             }
           ] %}
 
-{# <form action="https://nyc.us18.list-manage.com/subscribe/post?u=d04b7b607bddbd338b416fa89&amp;id=aa67394696" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-<li><input type="checkbox" value="1" name="group[4369][1]" id="mce-group[4369]-4369-0"><label for="mce-group[4369]-4369-0">Bronx</label></li>
-<li><input type="checkbox" value="2" name="group[4369][2]" id="mce-group[4369]-4369-1"><label for="mce-group[4369]-4369-1">Brooklyn</label></li>
-<li><input type="checkbox" value="4" name="group[4369][4]" id="mce-group[4369]-4369-2"><label for="mce-group[4369]-4369-2">Manhattan</label></li>
-<li><input type="checkbox" value="8" name="group[4369][8]" id="mce-group[4369]-4369-3"><label for="mce-group[4369]-4369-3">Queens</label></li>
-<li><input type="checkbox" value="16" name="group[4369][16]" id="mce-group[4369]-4369-4"><label for="mce-group[4369]-4369-4">Staten Island</label></li> #}
-
           {% for value in values %}
           {% include 'views/elements/checkbox.twig' with value only %}
           {% endfor %}

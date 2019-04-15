@@ -1,13 +1,12 @@
 {
-    "key": "group_5ba90d1a39bb7",
-    "title": "Homepage Fields (French)",
+    "key": "group_58912c8cbc468",
+    "title": "Homepage Fields",
     "fields": [
         {
-            "key": "field_5ba90d1a5a293",
+            "key": "field_58912c8ce0bda",
             "label": "Hero Headline",
             "name": "hero_headline",
             "type": "text",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -23,11 +22,10 @@
             "append": ""
         },
         {
-            "key": "field_5ba90d1a5a37e",
+            "key": "field_58a4d36cf9f9b",
             "label": "Hero Touts Heading",
             "name": "hero_touts_heading",
             "type": "text",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -43,11 +41,10 @@
             "append": ""
         },
         {
-            "key": "field_5ba90d1a5a449",
+            "key": "field_58912c8ce0c05",
             "label": "Hero Touts",
             "name": "hero_touts",
             "type": "repeater",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -63,11 +60,10 @@
             "collapsed": "",
             "sub_fields": [
                 {
-                    "key": "field_5ba90d1a64bc3",
+                    "key": "field_58912c8d18ddd",
                     "label": "Title",
                     "name": "title",
                     "type": "textarea",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -83,11 +79,10 @@
                     "rows": ""
                 },
                 {
-                    "key": "field_5ba90d1a64cba",
+                    "key": "field_58912c8d18e01",
                     "label": "Body",
                     "name": "body",
                     "type": "wysiwyg",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -103,11 +98,10 @@
                     "delay": 0
                 },
                 {
-                    "key": "field_5ba90d1a64dc1",
+                    "key": "field_58912c8d18e1c",
                     "label": "Link Text",
                     "name": "link_text",
                     "type": "textarea",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -123,11 +117,10 @@
                     "rows": ""
                 },
                 {
-                    "key": "field_5ba90d1a64f00",
+                    "key": "field_58912c8d18e35",
                     "label": "Link URL",
                     "name": "link_url",
                     "type": "url",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -140,11 +133,10 @@
                     "placeholder": ""
                 },
                 {
-                    "key": "field_5ba90d1a65011",
+                    "key": "field_58912c8d18e4e",
                     "label": "Link Type",
                     "name": "link_type",
                     "type": "select",
-                    "value": null,
                     "instructions": "Navigational links show as green buttons. Functional buttons show as blue buttons.",
                     "required": 0,
                     "conditional_logic": 0,
@@ -166,11 +158,10 @@
                     "placeholder": ""
                 },
                 {
-                    "key": "field_5ba90d1a65114",
+                    "key": "field_58912c8d18e67",
                     "label": "Display link arrow?",
                     "name": "link_arrow",
                     "type": "true_false",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -186,11 +177,10 @@
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_5ba90d1a6522d",
+                    "key": "field_5ba3c8cdfd2cd",
                     "label": "New Window",
                     "name": "link_new_window",
                     "type": "true_false",
-                    "value": null,
                     "instructions": "Wether to open the link in a new window or not.",
                     "required": 0,
                     "conditional_logic": 0,
@@ -206,12 +196,11 @@
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_5ba90d1a652f9",
+                    "key": "field_5ba3c907fd2ce",
                     "label": "Relationship",
                     "name": "link_relationship",
                     "type": "text",
-                    "value": null,
-                    "instructions": "Usually set to \"nofollow noopener\" when \"New Window\" is true and pointed to an external page. If it is an internal page, set to \"noopener\".",
+                    "instructions": "Usually set to \"noreferrer noopener\" when opening in new window",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -228,11 +217,10 @@
             ]
         },
         {
-            "key": "field_5ba90d1a5a514",
+            "key": "field_58a60d57bd0bd",
             "label": "Featured Programs Heading",
             "name": "featured_programs_heading",
             "type": "text",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -248,11 +236,10 @@
             "append": ""
         },
         {
-            "key": "field_5ba90d1a5a5fa",
+            "key": "field_58a60d6ebd0be",
             "label": "Featured Programs Subheading",
             "name": "featured_programs_subheading",
             "type": "text",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -268,11 +255,10 @@
             "append": ""
         },
         {
-            "key": "field_5ba90d1a5a6c5",
+            "key": "field_58912c8ce0c21",
             "label": "Featured Programs",
             "name": "featured_programs",
             "type": "relationship",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -296,11 +282,10 @@
             "return_format": "object"
         },
         {
-            "key": "field_5ba90d1a5a78f",
+            "key": "field_58acb0fee0eb4",
             "label": "Contact Us Heading",
             "name": "contact_us_heading",
             "type": "text",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -316,11 +301,10 @@
             "append": ""
         },
         {
-            "key": "field_5ba90d1a5a875",
+            "key": "field_58acb11629be8",
             "label": "Contact Us CTA",
             "name": "contact_us_cta",
             "type": "text",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -336,11 +320,10 @@
             "append": ""
         },
         {
-            "key": "field_5ba90d1a5a93f",
+            "key": "field_58b4b3b9f2c3b",
             "label": "Contact Us Link",
             "name": "contact_us_link",
             "type": "url",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -353,11 +336,10 @@
             "placeholder": ""
         },
         {
-            "key": "field_5ba90d1a5aa09",
+            "key": "field_5ba2ac7f790e0",
             "label": "Contact Us New Window",
             "name": "contact_us_new_window",
             "type": "true_false",
-            "value": null,
             "instructions": "Wether to open the link in a new window or not.",
             "required": 0,
             "conditional_logic": 0,
@@ -373,12 +355,11 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_5ba90d1a5ab00",
+            "key": "field_5ba2b1a338858",
             "label": "Contact Us Relationship",
             "name": "contact_us_relationship",
             "type": "text",
-            "value": null,
-            "instructions": "Usually set to \"nofollow noopener\" when \"New Window\" is true and pointed to an external page. If it is an internal page, set to \"noopener\".",
+            "instructions": "Usually set to \"nofollow noopener\" when opening in new window.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -411,7 +392,6 @@
         "permalink",
         "the_content",
         "excerpt",
-        "custom_fields",
         "discussion",
         "comments",
         "revisions",
@@ -426,5 +406,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1539196862
+    "modified": 1555360019
 }
