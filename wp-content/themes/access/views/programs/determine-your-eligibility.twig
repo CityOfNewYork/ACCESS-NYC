@@ -7,7 +7,7 @@
 
   {% if post.plain_language_eligibility | length %}
   <div class="o-content">
-    {{ post.get_field('plain_language_eligibility') }}
+    {{ post.get_field('field_58912c1a8a82d') }} {# plain_language_eligibility #}
   </div>
   {% endif %}
 
@@ -16,8 +16,10 @@
     <div class="icon c-alert-box__icon" aria-hidden="true">
       <div class="c-alert-box__svg bg-icon-info"></div>
     </div>
+
     <div class="c-alert-box__body">
       <p>{{__('Take a short survey to see if you might be eligible for this or 30 other programs.', 'accessnyc-program-detail')}}</p>
+
       <a class="btn btn-primary btn-small align-text-bottom" href="{{ urlBase }}/eligibility">
         <svg class="icon icon-screening" aria-hidden="true" style="width:20px;height:20px;">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-screening"></use>

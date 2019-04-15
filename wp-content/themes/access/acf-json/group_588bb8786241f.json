@@ -1,14 +1,9 @@
 {
-    "key": "group_58912d20454df",
-    "title": "Site Alert Fields (Arabic)",
+    "key": "group_588bb8786241f",
+    "title": "Site Alert Fields",
     "fields": [
         {
-            "tabs": "all",
-            "toolbar": "basic",
-            "media_upload": 0,
-            "default_value": "",
-            "delay": 0,
-            "key": "field_588bb879074cd",
+            "key": "field_58a4af5d01e8f",
             "label": "Content",
             "name": "alert_content",
             "type": "wysiwyg",
@@ -19,9 +14,26 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            }
+            },
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "default_value": "",
+            "delay": 0
         },
         {
+            "key": "field_58a4af7901e90",
+            "label": "Alert Icon",
+            "name": "alert_icon",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "multiple": 0,
             "allow_null": 0,
             "choices": {
@@ -36,10 +48,12 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": "",
-            "return_format": "value",
-            "key": "field_588bb87907548",
-            "label": "Alert icon",
-            "name": "alert_icon",
+            "return_format": "value"
+        },
+        {
+            "key": "field_58a4afa001e91",
+            "label": "Alert Color",
+            "name": "alert_color",
             "type": "select",
             "instructions": "",
             "required": 0,
@@ -48,9 +62,7 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            }
-        },
-        {
+            },
             "multiple": 0,
             "allow_null": 0,
             "choices": {
@@ -65,19 +77,7 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": "",
-            "return_format": "value",
-            "key": "field_588bb879075ea",
-            "label": "Alert color",
-            "name": "alert_color",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            }
+            "return_format": "value"
         }
     ],
     "location": [
@@ -97,5 +97,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1487189812
+    "modified": 1555360190
 }

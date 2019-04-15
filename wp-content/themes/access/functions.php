@@ -126,7 +126,7 @@ add_filter('icl_ls_languages', function($languages) {
         } elseif ($lang_code != 'en' || $lang_code != '') {
           // if not english, then remove the language code and add the correct one
           $languages[$lang_code]['url'] = '/' . $lang_code .
-          '/programs/?program_cat=' . $prog . '-' . $lang_code;
+            '/programs/?program_cat=' . $prog . '-' . $lang_code;
         }
       }
     }

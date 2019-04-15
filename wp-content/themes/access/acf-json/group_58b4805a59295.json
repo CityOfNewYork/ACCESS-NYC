@@ -1,13 +1,12 @@
 {
-    "key": "group_5a2ffd8880cdc",
-    "title": "Page Fields (Urdu)",
+    "key": "group_58b4805a59295",
+    "title": "Page Fields",
     "fields": [
         {
-            "key": "field_5a2ffd888fe19",
+            "key": "field_58b480ca3081c",
             "label": "Lead Content",
             "name": "lead",
             "type": "wysiwyg",
-            "value": null,
             "instructions": "Page header content.",
             "required": 0,
             "conditional_logic": 0,
@@ -23,11 +22,10 @@
             "delay": 0
         },
         {
-            "key": "field_5a2ffd888fe4a",
+            "key": "field_58b480f33081d",
             "label": "Sections",
             "name": "sections",
             "type": "repeater",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -43,11 +41,10 @@
             "collapsed": "field_58b481043081e",
             "sub_fields": [
                 {
-                    "key": "field_5a2ffd8899e49",
+                    "key": "field_58b481043081e",
                     "label": "Section Title",
                     "name": "section_title",
                     "type": "text",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -63,11 +60,10 @@
                     "append": ""
                 },
                 {
-                    "key": "field_5a2ffd8899e8a",
+                    "key": "field_58b481143081f",
                     "label": "Section Content",
                     "name": "section_content",
                     "type": "wysiwyg",
-                    "value": null,
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -85,11 +81,10 @@
             ]
         },
         {
-            "key": "field_5a7b74b9437ce",
+            "key": "field_5c9ceb64e440d",
             "label": "Page Meta Description",
             "name": "page_meta_description",
             "type": "text",
-            "value": null,
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -98,6 +93,7 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 0,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -119,22 +115,8 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": [
-        "permalink",
-        "the_content",
-        "excerpt",
-        "custom_fields",
-        "discussion",
-        "comments",
-        "revisions",
-        "author",
-        "format",
-        "page_attributes",
-        "featured_image",
-        "categories",
-        "tags",
-        "send-trackbacks"
-    ],
+    "hide_on_screen": "",
     "active": 1,
-    "description": ""
+    "description": "",
+    "modified": 1555360090
 }

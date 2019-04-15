@@ -152,7 +152,7 @@
 
                     {% if search_links %}
                     <div class="o-search-box__suggestions-body">
-                      {% for link in search_links[0].get_field('program_links') %}
+                      {% for link in search_links[0].get_field('field_58c1020ec4450') %} {# program_links #}
                       <div class="o-search-box__suggestions-item">
                         <a href="{{ link.link }}">{{ link.plain_language_program_name }}</a>
                       </div>

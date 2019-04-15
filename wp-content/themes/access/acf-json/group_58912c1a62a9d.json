@@ -1,9 +1,9 @@
 {
-    "key": "group_58a4c00d65802",
-    "title": "Program Fields (Chinese - Traditional)",
+    "key": "group_58912c1a62a9d",
+    "title": "Program Fields",
     "fields": [
         {
-            "key": "field_58a4c00da1fa5",
+            "key": "field_58912c1a8a9f0",
             "label": "Program Code",
             "name": "program_code",
             "type": "text",
@@ -22,7 +22,7 @@
             "append": ""
         },
         {
-            "key": "field_58a4c00da201d",
+            "key": "field_589e43563c471",
             "label": "Show Sections",
             "name": "show_sections",
             "type": "checkbox",
@@ -34,26 +34,47 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "vertical",
+            "show_in_rest": 1,
             "choices": {
                 "how-it-works": "How It Works",
                 "determine-your-eligibility": "Determine Your Eligibility",
                 "what-you-need-to-include": "What You Need to Include",
                 "how-to-apply": "How to Apply"
             },
+            "allow_custom": 0,
             "default_value": [
                 "how-it-works",
                 "determine-your-eligibility",
                 "what-you-need-to-include",
                 "how-to-apply"
             ],
-            "allow_custom": 0,
-            "save_custom": 0,
+            "layout": "vertical",
             "toggle": 1,
-            "return_format": "array"
+            "return_format": "array",
+            "save_custom": 0
         },
         {
-            "key": "field_58a4c00da2094",
+            "key": "field_5c59c07d0f78f",
+            "label": "Program Name",
+            "name": "program_name",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_58912c1a8a7bb",
             "label": "Program Acronym",
             "name": "program_acronym",
             "type": "text",
@@ -66,7 +87,6 @@
                 "id": ""
             },
             "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -74,7 +94,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_58a4c00da210a",
+            "key": "field_58912c1a8a7d3",
             "label": "Government Agency",
             "name": "government_agency",
             "type": "text",
@@ -93,28 +113,7 @@
             "append": ""
         },
         {
-            "key": "field_5c9d18c11d445",
-            "label": "Program Name",
-            "name": "program_name",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_58a4c00da217f",
+            "key": "field_58912c1a8a7e6",
             "label": "Plain Language Program Name",
             "name": "plain_language_program_name",
             "type": "text",
@@ -127,7 +126,6 @@
                 "id": ""
             },
             "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -135,7 +133,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_58a4c00da21f3",
+            "key": "field_58912c1a8a7f8",
             "label": "Program Description",
             "name": "program_description",
             "type": "wysiwyg",
@@ -147,16 +145,14 @@
                 "class": "",
                 "id": ""
             },
-            "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
-            "default_value": "",
             "tabs": "all",
             "toolbar": "full",
             "media_upload": 0,
+            "default_value": "",
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2268",
+            "key": "field_58912c1a8a80a",
             "label": "Brief Excerpt",
             "name": "brief_excerpt",
             "type": "text",
@@ -169,7 +165,6 @@
                 "id": ""
             },
             "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -177,7 +172,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_58a4c00da22dc",
+            "key": "field_58912c1a8a81b",
             "label": "Heads Up",
             "name": "heads_up",
             "type": "wysiwyg",
@@ -196,7 +191,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2351",
+            "key": "field_589d4b65ced1f",
             "label": "Heads Up Icons",
             "name": "heads_up_icons",
             "type": "repeater",
@@ -215,7 +210,7 @@
             "collapsed": "field_589e4a2d43b19",
             "sub_fields": [
                 {
-                    "key": "field_58a4c00e649bb",
+                    "key": "field_589e4a2d43b19",
                     "label": "Icon",
                     "name": "icon",
                     "type": "file",
@@ -236,7 +231,7 @@
             ]
         },
         {
-            "key": "field_58a4c00da23c5",
+            "key": "field_589d49b8ced1e",
             "label": "Display Screen for Eligibility Box",
             "name": "display_screen_for_eligibility_box",
             "type": "true_false",
@@ -255,7 +250,7 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_58a4c00da2439",
+            "key": "field_58912c1a8a82d",
             "label": "Plain Language Eligibility",
             "name": "plain_language_eligibility",
             "type": "wysiwyg",
@@ -274,7 +269,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da24ad",
+            "key": "field_589de18fca4e0",
             "label": "What You Need to Include Intro Text",
             "name": "what_you_need_to_include_intro_text",
             "type": "wysiwyg",
@@ -293,7 +288,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2525",
+            "key": "field_58912c1a8a9de",
             "label": "What You Need To Include",
             "name": "what_you_need_to_include",
             "type": "repeater",
@@ -312,7 +307,7 @@
             "collapsed": "field_587fb599d99b0",
             "sub_fields": [
                 {
-                    "key": "field_58a4c00edbec6",
+                    "key": "field_58912c1d0b6e9",
                     "label": "Heading",
                     "name": "heading",
                     "type": "text",
@@ -331,7 +326,7 @@
                     "append": ""
                 },
                 {
-                    "key": "field_58a4c00edbf57",
+                    "key": "field_58912c1d0b72d",
                     "label": "Body",
                     "name": "body",
                     "type": "wysiwyg",
@@ -352,7 +347,7 @@
             ]
         },
         {
-            "key": "field_58a4c00da2599",
+            "key": "field_58912c1a8a83e",
             "label": "How to Apply Summary",
             "name": "how_to_apply_summary",
             "type": "wysiwyg",
@@ -371,7 +366,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da260d",
+            "key": "field_58912c1a8a850",
             "label": "How to Apply or Enroll Online?",
             "name": "how_to_apply_or_enroll_online",
             "type": "wysiwyg",
@@ -390,7 +385,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2682",
+            "key": "field_58912c1a8a862",
             "label": "Apply online call to action",
             "name": "apply_online_call_to_action",
             "type": "text",
@@ -409,7 +404,7 @@
             "append": ""
         },
         {
-            "key": "field_58a4c00da2704",
+            "key": "field_58912c1a8a874",
             "label": "URL of Online Application, if Applicable",
             "name": "url_of_online_application",
             "type": "url",
@@ -425,7 +420,7 @@
             "placeholder": ""
         },
         {
-            "key": "field_58a4c00da277e",
+            "key": "field_58912c1a8a885",
             "label": "How to Apply or Enroll by Mail?",
             "name": "how_to_apply_or_enroll_by_mail",
             "type": "wysiwyg",
@@ -444,7 +439,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da27f3",
+            "key": "field_58912c1a8a897",
             "label": "Apply by Mail Call to Action",
             "name": "apply_by_mail_call_to_action",
             "type": "text",
@@ -463,7 +458,7 @@
             "append": ""
         },
         {
-            "key": "field_58a4c00da2867",
+            "key": "field_58912c1a8a8a8",
             "label": "Application Forms (PDFs) for This Program",
             "name": "application_forms_pdfs",
             "type": "repeater",
@@ -482,7 +477,7 @@
             "collapsed": "field_589e44ba3c472",
             "sub_fields": [
                 {
-                    "key": "field_58a4c00fa7ec4",
+                    "key": "field_589e44ba3c472",
                     "label": "PDF",
                     "name": "pdf",
                     "type": "file",
@@ -501,7 +496,7 @@
                     "mime_types": "pdf"
                 },
                 {
-                    "key": "field_58a4c00fa7f55",
+                    "key": "field_589e44db3c473",
                     "label": "File Title",
                     "name": "file_title",
                     "type": "text",
@@ -522,7 +517,7 @@
             ]
         },
         {
-            "key": "field_58a4c00da28dd",
+            "key": "field_58912c1a8a8ba",
             "label": "URL of PDF Application Forms (if applicable)",
             "name": "url_of_pdf_application_forms",
             "type": "url",
@@ -538,7 +533,7 @@
             "placeholder": ""
         },
         {
-            "key": "field_58a4c00da2951",
+            "key": "field_58912c1a8a8cb",
             "label": "How to Apply or Enroll in Person?",
             "name": "how_to_apply_or_enroll_in_person",
             "type": "wysiwyg",
@@ -557,7 +552,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da29c6",
+            "key": "field_58912c1a8a8dd",
             "label": "Apply in Person Call to Action",
             "name": "apply_in_person_call_to_action",
             "type": "text",
@@ -576,7 +571,7 @@
             "append": ""
         },
         {
-            "key": "field_58a4c00da2a3b",
+            "key": "field_58912c1a8a8ee",
             "label": "Office Locations URL",
             "name": "office_locations_url",
             "type": "url",
@@ -592,7 +587,7 @@
             "placeholder": ""
         },
         {
-            "key": "field_58a4c00da2ab0",
+            "key": "field_58912c1a8a900",
             "label": "How to Apply or Enroll by Phone?",
             "name": "how_to_apply_or_enroll_by_phone",
             "type": "wysiwyg",
@@ -611,7 +606,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2b25",
+            "key": "field_58912c1a8a912",
             "label": "Apply by Phone Call to Action",
             "name": "apply_by_phone_call_to_action",
             "type": "text",
@@ -630,7 +625,7 @@
             "append": ""
         },
         {
-            "key": "field_58a4c00da2b99",
+            "key": "field_58912c1a8a934",
             "label": "Phone Number(s)",
             "name": "phone_numbers",
             "type": "wysiwyg",
@@ -649,7 +644,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2c0f",
+            "key": "field_58912c1a8a94e",
             "label": "Required Documents Summary",
             "name": "required_documents_summary",
             "type": "wysiwyg",
@@ -668,7 +663,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2c86",
+            "key": "field_58912c1a8a971",
             "label": "Get Help Summary",
             "name": "get_help_summary",
             "type": "wysiwyg",
@@ -687,7 +682,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2cfa",
+            "key": "field_58912c1a8a984",
             "label": "Get Help in Person",
             "name": "get_help_in_person",
             "type": "wysiwyg",
@@ -706,7 +701,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2d6e",
+            "key": "field_58912c1a8a996",
             "label": "Get Help Online",
             "name": "get_help_online",
             "type": "wysiwyg",
@@ -725,7 +720,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2de2",
+            "key": "field_58912c1a8a9a8",
             "label": "Get Help by Email",
             "name": "get_help_by_email",
             "type": "wysiwyg",
@@ -744,7 +739,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2e57",
+            "key": "field_58912c1a8a9ba",
             "label": "Get Help by Calling, Other Than 311",
             "name": "get_help_by_calling_other_than_311",
             "type": "wysiwyg",
@@ -763,7 +758,7 @@
             "delay": 0
         },
         {
-            "key": "field_58a4c00da2ecb",
+            "key": "field_58912c1a8a9cb",
             "label": "Get Help by Calling 311.",
             "name": "get_help_by_calling_311",
             "type": "wysiwyg",
@@ -802,5 +797,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1553799393
+    "modified": 1555360114
 }
