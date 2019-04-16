@@ -13,7 +13,8 @@
  */
 function enqueue_script($name, $cors = false) {
   require_once ABSPATH . '/vendor/nyco/wp-assets/dist/script.php';
-  $script = Nyco\Enqueue\script($name, '.min');
+  $script = Nyco\Enqueue\script($name);
+
   if ($cors) {
     add_crossorigin_attr($name);
   }

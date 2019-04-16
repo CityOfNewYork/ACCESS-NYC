@@ -120,7 +120,7 @@ class ScreenerPerson {
       'veteran'
     ];
     const obj = {};
-    _.each(conditionKeys, (key) => {
+    _.each(conditionKeys, key => {
       obj[key] = this.get(key);
     });
     return obj;
@@ -137,7 +137,7 @@ class ScreenerPerson {
       'benefitsMedicaidDisability'
     ];
     const obj = {};
-    _.each(benefitKeys, (key) => {
+    _.each(benefitKeys, key => {
       obj[key] = this.get(key);
     });
     return obj;

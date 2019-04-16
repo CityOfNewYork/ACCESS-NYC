@@ -71,27 +71,29 @@ class Screener {
       return this;
     }
 
-    window.addEventListener('hashchange', (e) => {
+    window.addEventListener('hashchange', e => {
+      e.preventDefault();
       const hash = window.location.hash;
       const $section = $(hash);
+
       if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
-        this._goToStep($section[0]);
-        $(window).scrollTop(0);
+        this._goToStep($section[0])._reFocus();
+        $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
       }
     });
 
-    $(this._el).on('change', 'input[type="checkbox"]', (e) => {
+    $(this._el).on('change', 'input[type="checkbox"]', e => {
       this._toggleCheckbox(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.TOGGLE}`, (e) => {
+    }).on('change', `.${Screener.CssClass.TOGGLE}`, e => {
       this._handleToggler(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.ADD_SECTION}`, (e) => {
+    }).on('change', `.${Screener.CssClass.ADD_SECTION}`, e => {
       this._addMatrixSection(e.currentTarget);
-    }).on('change', `.${Screener.CssClass.MATRIX_SELECT}`, (e) => {
+    }).on('change', `.${Screener.CssClass.MATRIX_SELECT}`, e => {
       this._toggleMatrix(e.currentTarget);
-    }).on('click', `.${Screener.CssClass.VALIDATE_STEP}`, (e) => {
+    }).on('click', `.${Screener.CssClass.VALIDATE_STEP}`, e => {
       const $step = $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`);
       return this._validateStep($step);
-    }).on('click', `.${Screener.CssClass.SUBMIT}`, (e) => {
+    }).on('click', `.${Screener.CssClass.SUBMIT}`, e => {
       if (!this._recaptchaRequired) {
         this._submit($(e.currentTarget).data('action'));
       } else {
@@ -104,17 +106,17 @@ class Screener {
               Screener.ErrorMessage.REQUIRED);
         }
       }
-    }).on('blur', '[data-type="integer"]', (e) => {
+    }).on('blur', '[data-type="integer"]', e => {
       this._validateIntegerField(e.currentTarget);
-    }).on('blur', '[data-type="float"]', (e) => {
+    }).on('blur', '[data-type="float"]', e => {
       this._validateFloatField(e.currentTarget);
-    }).on('blur', '[data-type="zip"]', (e) => {
+    }).on('blur', '[data-type="zip"]', e => {
       this._validateZipField(e.currentTarget);
-    }).on('blur', '[data-type="age"]', (e) => {
+    }).on('blur', '[data-type="age"]', e => {
       this._validateIntegerField(e.currentTarget);
-    }).on('keyup', '[data-type="float"]', (e) => {
+    }).on('keyup', '[data-type="float"]', e => {
       this._limitFloatFieldLength(e.currentTarget);
-    }).on('keydown', 'input[type="number"]', (e) => {
+    }).on('keydown', 'input[type="number"]', e => {
       // Number inputs still allow certain characters outside of 0-9.
       if (e.keyCode === 69 || // 'e' key, used for scientific notation
           e.keyCode === 187 || // '=' key (for the '+' sign)
@@ -122,14 +124,14 @@ class Screener {
           e.keyCode === 189) { // '-' key
         e.preventDefault();
       }
-    }).on('click', `.${Screener.CssClass.REMOVE_PERSON}`, (e) => {
+    }).on('click', `.${Screener.CssClass.REMOVE_PERSON}`, e => {
       this._removePerson(parseInt($(e.currentTarget).data('person'), 10))
           ._renderRecap();
-    }).on('click', `.${Screener.CssClass.EDIT_PERSON}`, (e) => {
+    }).on('click', `.${Screener.CssClass.EDIT_PERSON}`, e => {
       this._editPerson(parseInt($(e.currentTarget).data('person'), 10));
-    }).on('keyup', 'input[maxlength]', (e) => {
+    }).on('keyup', 'input[maxlength]', e => {
       this._enforceMaxLength(e.currentTarget);
-    }).on('submit', (e) => {
+    }).on('submit', e => {
       e.preventDefault();
       this._$steps.filter(`.${Screener.CssClass.ACTIVE}`)
         .find(`.${Screener.CssClass.VALIDATE_STEP},` +
@@ -181,7 +183,7 @@ class Screener {
       if (hash === '#step-8') data = [];
     });
 
-    $('#step-8').on('change', 'label', (event) => {
+    $('#step-8').on('change', 'label', event => {
       data = $(event.currentTarget).data('trackData');
     });
 
@@ -356,6 +358,15 @@ class Screener {
   }
 
   /**
+   * Refocus the window on the questionaire
+   * @return {this} Screener
+   */
+  _reFocus() {
+    $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
+    return this;
+  }
+
+  /**
    * Adds the active class to the provided section. Removes it from all other
    * sections.
    * @param {HTMLElement} section - section to activate.
@@ -363,13 +374,18 @@ class Screener {
    */
   _goToStep(section) {
     this._$steps
-        .removeClass(Screener.CssClass.SCREENER_STEP_ACTIVE)
-        .addClass(Screener.CssClass.SCREENER_STEP_HIDDEN)
-        .attr('aria-hidden', 'true').find(':input, a').attr('tabindex', '-1')
-        .end().filter(section)
-        .removeClass(Screener.CssClass.SCREENER_STEP_HIDDEN)
-        .addClass(Screener.CssClass.SCREENER_STEP_ACTIVE)
-        .removeAttr('aria-hidden').find(':input, a').removeAttr('tabindex');
+      .removeClass(Screener.CssClass.SCREENER_STEP_ACTIVE)
+      .addClass(Screener.CssClass.SCREENER_STEP_HIDDEN)
+      .attr('aria-hidden', 'true')
+      .find(':input, a')
+      .attr('tabindex', '-1');
+
+    $(section)
+      .removeClass(Screener.CssClass.SCREENER_STEP_HIDDEN)
+      .addClass(Screener.CssClass.SCREENER_STEP_ACTIVE)
+      .removeAttr('aria-hidden')
+      .find(':input, a')
+      .removeAttr('tabindex');
 
     if ($(section).attr('id') === 'step-9') {
       // add in family members here
@@ -620,8 +636,7 @@ class Screener {
             this._people[0].set({
               headOfHousehold: false,
               headOfHouseholdRelation: $step
-                  .find('select[name="Person[0].headOfHouseholdRelation"]')
-                  .val()
+                .find('select[name="Person[0].headOfHouseholdRelation"]').val()
             });
           }
         } else {
@@ -662,7 +677,7 @@ class Screener {
           incomes: [],
           expenses: []
         });
-        _.each(['incomes', 'expenses'], (key) => {
+        _.each(['incomes', 'expenses'], key => {
           $step.find('[name$="amount"]').filter(':visible')
               .filter(`[name*="${key}"]`).each((i, el) => {
             const itemIndex = $(el).attr('name').split('[').pop().split(']')[0];
@@ -695,8 +710,7 @@ class Screener {
           // If we need to add more non-HoH household members, repeat this step.
           if (this._people.length < this._household.get('members')) {
             $step.data('personIndex', personIndex + 1);
-            this._goToStep($step[0]);
-            $(window).scrollTop(0);
+            this._goToStep($step[0])._reFocus();
             return false;
           }
         }
@@ -726,7 +740,7 @@ class Screener {
         });
 
         // Set or unset the household members who are on the lease or deed.
-        _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
+        _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], type => {
           const $inputs = $step.find(`input[name$="${type}"]:visible`);
           if ($inputs.length) {
             if ($inputs.filter(':checked').length) {
@@ -749,7 +763,7 @@ class Screener {
               stepValid = false;
             }
           } else {
-            _.each(this._people, (person) => {
+            _.each(this._people, person => {
               person.set(type, false);
             });
           }
@@ -931,7 +945,7 @@ class Screener {
 
     if (val) {
       const formattedVal = val.substring(0, 5);
-      if (Screener.NYC_ZIPS.indexOf(formattedVal) >= 0) {
+      if (Utility.NYC_ZIPS.indexOf(formattedVal) >= 0) {
         $input.val(formattedVal);
       } else {
         this._showError(el, Screener.ErrorMessage.ZIP);
@@ -966,7 +980,7 @@ class Screener {
     };
 
     // Add programs.
-    _.each(this._categories, (category) => {
+    _.each(this._categories, category => {
       const obj = {
         slug: category,
         label: Utility.localize(category)
@@ -984,7 +998,7 @@ class Screener {
     ];
 
     // Add housing type.
-    _.each(housingTypes, (type) => {
+    _.each(housingTypes, type => {
       if (this._household.get(`living${type}`)) {
         const obj = {
           slug: type,
@@ -1033,8 +1047,8 @@ class Screener {
         }
       });
 
-      _.each(['incomes', 'expenses'], (type) => {
-        _.each(person.get(type), (item) => {
+      _.each(['incomes', 'expenses'], type => {
+        _.each(person.get(type), item => {
           const obj = {
             amount: `$${item.amount}`,
             type: Utility.localize(item.type),
@@ -1044,7 +1058,7 @@ class Screener {
         });
       });
 
-      _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], (type) => {
+      _.each(['livingOwnerOnDeed', 'livingRentalOnLease'], type => {
         if (person.get(type)) {
           const obj = {};
           if (person.get('headOfHousehold')) {
@@ -1124,8 +1138,7 @@ class Screener {
       }
     });
     // Insert Person data.
-    _.each(this._people.slice(0, this._household.get('members')),
-        (person) => {
+    _.each(this._people.slice(0, this._household.get('members')), person => {
       if (person) {
         droolsJSON.commands.push({
           insert: {
@@ -1170,6 +1183,9 @@ class Screener {
    * @return {jqXHR}
    */
   _submit(postUrl) {
+    $(`.${Screener.CssClass.SUBMIT}`).hide();
+    $(Screener.Selectors.SPINNER).show();
+
     /* eslint-disable no-console, no-debugger */
     if (Utility.getUrlParameter('debug') === '1') {
       console.dir(this);
@@ -1186,7 +1202,7 @@ class Screener {
         action: 'drools',
         data: this._getDroolsJSON()
       }
-    }).done((data) => {
+    }).done(data => {
       /* eslint-disable no-console, no-debugger */
       if (Utility.getUrlParameter('debug') === '1') {
         console.log(data);
@@ -1202,10 +1218,13 @@ class Screener {
           console.error(data);
           debugger;
         }
+
+        $(`.${Screener.CssClass.SUBMIT}`).show();
+        $(Screener.Selectors.SPINNER).hide();
         /* eslint-enable no-console, no-debugger */
       }
       const programs = _.chain(Utility.findValues(data, 'code'))
-          .filter((item) => _.isString(item)).uniq().value();
+          .filter(item => _.isString(item)).uniq().value();
       const params = {};
       if (this._categories.length) {
         params.categories = this._categories.join(',');
@@ -1277,8 +1296,8 @@ Screener.CssClass = {
   RADIO_GROUP: 'js-screener-radio-group',
   REMOVE_PERSON: 'js-remove-person',
   TOGGLE: 'js-screener-toggle',
-  SCREENER_STEP_ACTIVE: 'active animated fadeIn',
-  SCREENER_STEP_HIDDEN: 'hidden:overflow',
+  SCREENER_STEP_ACTIVE: 'animated active fadeIn',
+  SCREENER_STEP_HIDDEN: 'animated hidden',
   STEP: 'js-screener-step',
   SUBMIT: 'js-screener-submit',
   VALIDATE_STEP: 'js-screener-validate-step'
@@ -1291,7 +1310,9 @@ Screener.CssClass = {
 Screener.Selectors = {
   QUESTION: '.c-question',
   QUESTION_CONTAINER: '.c-question__container',
-  TRANSACTION_LABEL: '[data-js="transaction-label"]'
+  TRANSACTION_LABEL: '[data-js="transaction-label"]',
+  SPINNER: '[data-js="spinner"]',
+  VIEW: '[data-js="view"]'
 };
 
 /**
@@ -1316,68 +1337,6 @@ Screener.InputType = {
   FLOAT: 'float',
   INTEGER: 'integer'
 };
-
-/**
- * Valid zip codes in New York City. Source:
- * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
- * @type {array<String>}
- */
-Screener.NYC_ZIPS = ['10451', '10452', '10453', '10454', '10455', '10456',
-    '10457', '10458', '10459', '10460', '10461', '10462', '10463',
-    '10464', '10465', '10466', '10467', '10468', '10469', '10470',
-    '10471', '10472', '10473', '10474', '10475', '10499', '11201',
-    '11202', '11203', '11204', '11205', '11206', '11207', '11208',
-    '11209', '11210', '11211', '11212', '11213', '11214', '11215',
-    '11216', '11217', '11218', '11219', '11220', '11221', '11222',
-    '11223', '11224', '11225', '11226', '11228', '11229', '11230',
-    '11231', '11232', '11233', '11234', '11235', '11236', '11237',
-    '11238', '11239', '11240', '11241', '11242', '11243', '11244',
-    '11245', '11247', '11248', '11249', '11251', '11252', '11254',
-    '11255', '11256', '10001', '10002', '10003', '10004', '10005',
-    '10006', '10007', '10008', '10009', '10010', '10011', '10012',
-    '10013', '10014', '10015', '10016', '10017', '10018', '10019',
-    '10020', '10021', '10022', '10023', '10024', '10025', '10026',
-    '10027', '10028', '10029', '10030', '10031', '10032', '10033',
-    '10034', '10035', '10036', '10037', '10038', '10039', '10040',
-    '10041', '10043', '10044', '10045', '10046', '10047', '10048',
-    '10055', '10060', '10065', '10069', '10072', '10075', '10079',
-    '10080', '10081', '10082', '10087', '10090', '10094', '10095',
-    '10096', '10098', '10099', '10101', '10102', '10103', '10104',
-    '10105', '10106', '10107', '10108', '10109', '10110', '10111',
-    '10112', '10113', '10114', '10115', '10116', '10117', '10118',
-    '10119', '10120', '10121', '10122', '10123', '10124', '10125',
-    '10126', '10128', '10129', '10130', '10131', '10132', '10133',
-    '10138', '10149', '10150', '10151', '10152', '10153', '10154',
-    '10155', '10156', '10157', '10158', '10159', '10160', '10161',
-    '10162', '10163', '10164', '10165', '10166', '10167', '10168',
-    '10169', '10170', '10171', '10172', '10173', '10174', '10175',
-    '10176', '10177', '10178', '10179', '10184', '10185', '10196',
-    '10197', '10199', '10203', '10211', '10212', '10213', '10242',
-    '10249', '10256', '10257', '10258', '10259', '10260', '10261',
-    '10265', '10268', '10269', '10270', '10271', '10272', '10273',
-    '10274', '10275', '10276', '10277', '10278', '10279', '10280',
-    '10281', '10282', '10285', '10286', '11001', '11004', '11005',
-    '11040', '11096', '11101', '11102', '11103', '11104', '11105',
-    '11106', '11109', '11120', '11351', '11352', '11354', '11355',
-    '11356', '11357', '11358', '11359', '11360', '11361', '11362',
-    '11363', '11364', '11365', '11366', '11367', '11368', '11369',
-    '11370', '11371', '11372', '11373', '11374', '11375', '11377',
-    '11378', '11379', '11380', '11381', '11385', '11386', '11390',
-    '11405', '11411', '11412', '11413', '11414', '11415', '11416',
-    '11417', '11418', '11419', '11420', '11421', '11422', '11423',
-    '11424', '11425', '11426', '11427', '11428', '11429', '11430',
-    '11431', '11432', '11433', '11434', '11435', '11436', '11439',
-    '11451', '11499', '11690', '11691', '11692', '11693', '11694',
-    '11695', '11697', '10292', '10301', '10302', '10303', '10304',
-    '10305', '10306', '10307', '10308', '10309', '10310', '10311',
-    '10312', '10313', '10314', '10097', '10514', '10543', '10553',
-    '10573', '10701', '10705', '10911', '10965', '10977', '11021',
-    '11050', '11111', '11112', '11471', '11510', '11548', '11566',
-    '11577', '11580', '11598', '11629', '11731', '11798', '11968',
-    '12423', '12428', '12435', '12458', '12466', '12473', '12528',
-    '12701', '12733', '12734', '12737', '12750', '12751', '12754',
-    '12758', '12759', '12763', '12764', '12768', '12779', '12783',
-    '12786', '12788', '12789', '13731', '16091', '20459'];
 
 /**
  * The cookie path for the screener cookies

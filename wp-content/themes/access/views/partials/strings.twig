@@ -1,0 +1,6 @@
+<script type="text/javascript">
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
+  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
+    {% for s in strings %}{"label":{{ __(s.label, translation_id) | trim | json_encode() }},"slug":{{ s.slug | trim | json_encode() }}}{% if not loop.last %},{% endif %}{% endfor %}
+  ]);
+</script>

@@ -82,7 +82,7 @@ this["wp"] = this["wp"] || {}; this["wp"]["viewport"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 316);
+/******/ 	return __webpack_require__(__webpack_require__.s = 317);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -94,7 +94,7 @@ this["wp"] = this["wp"] || {}; this["wp"]["viewport"] =
 
 /***/ }),
 
-/***/ 316:
+/***/ 317:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -344,6 +344,7 @@ var build_module_queries = Object(external_lodash_["reduce"])(BREAKPOINTS, funct
 window.addEventListener('orientationchange', build_module_setIsMatching); // Set initial values
 
 build_module_setIsMatching();
+build_module_setIsMatching.flush();
 
 
 /***/ }),

@@ -82,7 +82,7 @@ this["wp"] = this["wp"] || {}; this["wp"]["dom"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 323);
+/******/ 	return __webpack_require__(__webpack_require__.s = 324);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -127,7 +127,7 @@ function _toConsumableArray(arr) {
 
 /***/ }),
 
-/***/ 323:
+/***/ 324:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -697,7 +697,6 @@ function placeCaretAtVerticalEdge(container, isReverse, rect) {
   var editableRect = container.getBoundingClientRect();
   var x = rect.left;
   var y = isReverse ? editableRect.bottom - buffer : editableRect.top + buffer;
-  var selection = window.getSelection();
   var range = hiddenCaretRangeFromPoint(document, x, y, container);
 
   if (!range || !container.contains(range.startContainer)) {
@@ -727,6 +726,7 @@ function placeCaretAtVerticalEdge(container, isReverse, rect) {
     }
   }
 
+  var selection = window.getSelection();
   selection.removeAllRanges();
   selection.addRange(range);
   container.focus(); // Editable was already focussed, it goes back to old range...

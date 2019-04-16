@@ -82,7 +82,7 @@ this["wp"] = this["wp"] || {}; this["wp"]["blockLibrary"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 305);
+/******/ 	return __webpack_require__(__webpack_require__.s = 306);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -117,7 +117,7 @@ function _classCallCheck(instance, Constructor) {
 /***/ 100:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.3.2 by @mathias */
+/* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
 ;(function(root) {
 
 	/** Detect free variables */
@@ -183,7 +183,7 @@ function _classCallCheck(instance, Constructor) {
 	 * @returns {Error} Throws a `RangeError` with the applicable error message.
 	 */
 	function error(type) {
-		throw RangeError(errors[type]);
+		throw new RangeError(errors[type]);
 	}
 
 	/**
@@ -330,7 +330,7 @@ function _classCallCheck(instance, Constructor) {
 
 	/**
 	 * Bias adaptation function as per section 3.4 of RFC 3492.
-	 * http://tools.ietf.org/html/rfc3492#section-3.4
+	 * https://tools.ietf.org/html/rfc3492#section-3.4
 	 * @private
 	 */
 	function adapt(delta, numPoints, firstTime) {
@@ -605,7 +605,7 @@ function _classCallCheck(instance, Constructor) {
 		 * @memberOf punycode
 		 * @type String
 		 */
-		'version': '1.3.2',
+		'version': '1.4.1',
 		/**
 		 * An object of methods to convert from JavaScript's internal character
 		 * representation (UCS-2) to Unicode code points, and back.
@@ -988,6 +988,13 @@ function _defineProperty(obj, key, value) {
 /***/ }),
 
 /***/ 16:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["keycodes"]; }());
+
+/***/ }),
+
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -1042,13 +1049,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	} else {}
 }());
 
-
-/***/ }),
-
-/***/ 17:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["keycodes"]; }());
 
 /***/ }),
 
@@ -1268,7 +1268,7 @@ function _assertThisInitialized(self) {
 
 /***/ }),
 
-/***/ 305:
+/***/ 306:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1440,7 +1440,7 @@ var objectSpread = __webpack_require__(8);
 var external_this_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./node_modules/classnames/index.js
-var classnames = __webpack_require__(16);
+var classnames = __webpack_require__(17);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: external "lodash"
@@ -2236,6 +2236,24 @@ var others = [{
   },
   patterns: [/^https?:\/\/(www\.)?collegehumor\.com\/.+/i]
 }, {
+  name: 'core-embed/crowdsignal',
+  settings: {
+    title: 'Crowdsignal',
+    icon: embedContentIcon,
+    keywords: ['polldaddy'],
+    transform: [{
+      type: 'block',
+      blocks: ['core-embed/polldaddy'],
+      transform: function transform(content) {
+        return Object(external_this_wp_blocks_["createBlock"])('core-embed/crowdsignal', {
+          content: content
+        });
+      }
+    }],
+    description: Object(external_this_wp_i18n_["__"])('Embed Crowdsignal (formerly Polldaddy) content.')
+  },
+  patterns: [/^https?:\/\/((.+\.)?polldaddy\.com|poll\.fm|.+\.survey\.fm)\/.+/i]
+}, {
   name: 'core-embed/dailymotion',
   settings: {
     title: 'Dailymotion',
@@ -2309,13 +2327,17 @@ var others = [{
   },
   patterns: [/^http:\/\/g?i*\.photobucket\.com\/.+/i]
 }, {
+  // Deprecated in favour of the core-embed/crowdsignal block
   name: 'core-embed/polldaddy',
   settings: {
     title: 'Polldaddy',
     icon: embedContentIcon,
-    description: Object(external_this_wp_i18n_["__"])('Embed Polldaddy content.')
+    description: Object(external_this_wp_i18n_["__"])('Embed Polldaddy content.'),
+    supports: {
+      inserter: false
+    }
   },
-  patterns: [/^https?:\/\/(www\.)?polldaddy\.com\/.+/i]
+  patterns: []
 }, {
   name: 'core-embed/reddit',
   settings: {
@@ -2882,9 +2904,12 @@ function (_Component) {
   Object(createClass["a" /* default */])(ImageEdit, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
       var _this$props = this.props,
           attributes = _this$props.attributes,
-          setAttributes = _this$props.setAttributes;
+          setAttributes = _this$props.setAttributes,
+          noticeOperations = _this$props.noticeOperations;
       var id = attributes.id,
           _attributes$url = attributes.url,
           url = _attributes$url === void 0 ? '' : _attributes$url;
@@ -2901,7 +2926,14 @@ function (_Component) {
 
               setAttributes(edit_pickRelevantMediaFiles(image));
             },
-            allowedTypes: ALLOWED_MEDIA_TYPES
+            allowedTypes: ALLOWED_MEDIA_TYPES,
+            onError: function onError(message) {
+              noticeOperations.createErrorNotice(message);
+
+              _this2.setState({
+                isEditing: true
+              });
+            }
           });
         }
       }
@@ -3109,12 +3141,12 @@ function (_Component) {
   }, {
     key: "updateDimensions",
     value: function updateDimensions() {
-      var _this2 = this;
+      var _this3 = this;
 
       var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
       var height = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
       return function () {
-        _this2.props.setAttributes({
+        _this3.props.setAttributes({
           width: width,
           height: height
         });
@@ -3177,7 +3209,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var isEditing = this.state.isEditing;
       var _this$props3 = this.props,
@@ -3203,7 +3235,6 @@ function (_Component) {
           height = attributes.height,
           linkTarget = attributes.linkTarget;
       var isExternal = edit_isExternalImage(id, url);
-      var imageSizeOptions = this.getImageSizeOptions();
       var toolbarEditButton;
 
       if (url) {
@@ -3262,6 +3293,7 @@ function (_Component) {
       });
       var isResizable = ['wide', 'full'].indexOf(align) === -1 && isLargeViewport;
       var isLinkURLInputReadOnly = linkDestination !== LINK_DESTINATION_CUSTOM;
+      var imageSizeOptions = this.getImageSizeOptions();
 
       var getInspectorControls = function getInspectorControls(imageWidth, imageHeight) {
         return Object(external_this_wp_element_["createElement"])(external_this_wp_editor_["InspectorControls"], null, Object(external_this_wp_element_["createElement"])(external_this_wp_components_["PanelBody"], {
@@ -3269,13 +3301,13 @@ function (_Component) {
         }, Object(external_this_wp_element_["createElement"])(external_this_wp_components_["TextareaControl"], {
           label: Object(external_this_wp_i18n_["__"])('Alt Text (Alternative Text)'),
           value: alt,
-          onChange: _this3.updateAlt,
+          onChange: _this4.updateAlt,
           help: Object(external_this_wp_i18n_["__"])('Alternative text describes your image to people who can’t see it. Add a short description with its key details.')
         }), !Object(external_lodash_["isEmpty"])(imageSizeOptions) && Object(external_this_wp_element_["createElement"])(external_this_wp_components_["SelectControl"], {
           label: Object(external_this_wp_i18n_["__"])('Image Size'),
           value: url,
           options: imageSizeOptions,
-          onChange: _this3.updateImageURL
+          onChange: _this4.updateImageURL
         }), isResizable && Object(external_this_wp_element_["createElement"])("div", {
           className: "block-library-image__dimensions"
         }, Object(external_this_wp_element_["createElement"])("p", {
@@ -3289,7 +3321,7 @@ function (_Component) {
           value: width !== undefined ? width : '',
           placeholder: imageWidth,
           min: 1,
-          onChange: _this3.updateWidth
+          onChange: _this4.updateWidth
         }), Object(external_this_wp_element_["createElement"])(external_this_wp_components_["TextControl"], {
           type: "number",
           className: "block-library-image__dimensions__height",
@@ -3297,7 +3329,7 @@ function (_Component) {
           value: height !== undefined ? height : '',
           placeholder: imageHeight,
           min: 1,
-          onChange: _this3.updateHeight
+          onChange: _this4.updateHeight
         })), Object(external_this_wp_element_["createElement"])("div", {
           className: "block-library-image__dimensions__row"
         }, Object(external_this_wp_element_["createElement"])(external_this_wp_components_["ButtonGroup"], {
@@ -3311,36 +3343,36 @@ function (_Component) {
             isSmall: true,
             isPrimary: isCurrent,
             "aria-pressed": isCurrent,
-            onClick: _this3.updateDimensions(scaledWidth, scaledHeight)
+            onClick: _this4.updateDimensions(scaledWidth, scaledHeight)
           }, scale, "%");
         })), Object(external_this_wp_element_["createElement"])(external_this_wp_components_["Button"], {
           isSmall: true,
-          onClick: _this3.updateDimensions()
+          onClick: _this4.updateDimensions()
         }, Object(external_this_wp_i18n_["__"])('Reset'))))), Object(external_this_wp_element_["createElement"])(external_this_wp_components_["PanelBody"], {
           title: Object(external_this_wp_i18n_["__"])('Link Settings')
         }, Object(external_this_wp_element_["createElement"])(external_this_wp_components_["SelectControl"], {
           label: Object(external_this_wp_i18n_["__"])('Link To'),
           value: linkDestination,
-          options: _this3.getLinkDestinationOptions(),
-          onChange: _this3.onSetLinkDestination
+          options: _this4.getLinkDestinationOptions(),
+          onChange: _this4.onSetLinkDestination
         }), linkDestination !== LINK_DESTINATION_NONE && Object(external_this_wp_element_["createElement"])(external_this_wp_element_["Fragment"], null, Object(external_this_wp_element_["createElement"])(external_this_wp_components_["TextControl"], {
           label: Object(external_this_wp_i18n_["__"])('Link URL'),
           value: href || '',
-          onChange: _this3.onSetCustomHref,
+          onChange: _this4.onSetCustomHref,
           placeholder: !isLinkURLInputReadOnly ? 'https://' : undefined,
           readOnly: isLinkURLInputReadOnly
         }), Object(external_this_wp_element_["createElement"])(external_this_wp_components_["ToggleControl"], {
           label: Object(external_this_wp_i18n_["__"])('Open in New Tab'),
-          onChange: _this3.onSetNewTab,
+          onChange: _this4.onSetNewTab,
           checked: linkTarget === '_blank'
         }), Object(external_this_wp_element_["createElement"])(external_this_wp_components_["TextControl"], {
           label: Object(external_this_wp_i18n_["__"])('Link CSS Class'),
           value: linkClass || '',
-          onChange: _this3.onSetLinkClass
+          onChange: _this4.onSetLinkClass
         }), Object(external_this_wp_element_["createElement"])(external_this_wp_components_["TextControl"], {
           label: Object(external_this_wp_i18n_["__"])('Link Rel'),
           value: rel || '',
-          onChange: _this3.onSetLinkRel
+          onChange: _this4.onSetLinkRel
         }))));
       }; // Disable reason: Each block can be selected by clicking on it
 
@@ -3358,7 +3390,7 @@ function (_Component) {
             imageWidth = sizes.imageWidth,
             imageHeight = sizes.imageHeight;
 
-        var filename = _this3.getFilename(url);
+        var filename = _this4.getFilename(url);
 
         var defaultedAlt;
 
@@ -3377,9 +3409,9 @@ function (_Component) {
         Object(external_this_wp_element_["createElement"])(external_this_wp_element_["Fragment"], null, Object(external_this_wp_element_["createElement"])("img", {
           src: url,
           alt: defaultedAlt,
-          onClick: _this3.onImageClick,
+          onClick: _this4.onImageClick,
           onError: function onError() {
-            return _this3.onImageError(url);
+            return _this4.onImageError(url);
           }
         }), Object(external_this_wp_blob_["isBlobURL"])(url) && Object(external_this_wp_element_["createElement"])(external_this_wp_components_["Spinner"], null))
         /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
@@ -3612,6 +3644,19 @@ var image_schema = {
     })
   }
 };
+
+function getFirstAnchorAttributeFormHTML(html, attributeName) {
+  var _document$implementat = document.implementation.createHTMLDocument(''),
+      body = _document$implementat.body;
+
+  body.innerHTML = html;
+  var firstElementChild = body.firstElementChild;
+
+  if (firstElementChild && firstElementChild.nodeName === 'A') {
+    return firstElementChild.getAttribute(attributeName) || undefined;
+  }
+}
+
 var image_settings = {
   title: Object(external_this_wp_i18n_["__"])('Image'),
   description: Object(external_this_wp_i18n_["__"])('Insert an image to make a visual statement.'),
@@ -3694,32 +3739,37 @@ var image_settings = {
         caption: {
           shortcode: function shortcode(attributes, _ref) {
             var _shortcode = _ref.shortcode;
-            var content = _shortcode.content;
-            return content.replace(/\s*<img[^>]*>\s/, '');
+
+            var _document$implementat2 = document.implementation.createHTMLDocument(''),
+                body = _document$implementat2.body;
+
+            body.innerHTML = _shortcode.content;
+            body.removeChild(body.firstElementChild);
+            return body.innerHTML.trim();
           }
         },
         href: {
-          type: 'string',
-          source: 'attribute',
-          attribute: 'href',
-          selector: 'a'
+          shortcode: function shortcode(attributes, _ref2) {
+            var _shortcode2 = _ref2.shortcode;
+            return getFirstAnchorAttributeFormHTML(_shortcode2.content, 'href');
+          }
         },
         rel: {
-          type: 'string',
-          source: 'attribute',
-          attribute: 'rel',
-          selector: 'a'
+          shortcode: function shortcode(attributes, _ref3) {
+            var _shortcode3 = _ref3.shortcode;
+            return getFirstAnchorAttributeFormHTML(_shortcode3.content, 'rel');
+          }
         },
         linkClass: {
-          type: 'string',
-          source: 'attribute',
-          attribute: 'class',
-          selector: 'a'
+          shortcode: function shortcode(attributes, _ref4) {
+            var _shortcode4 = _ref4.shortcode;
+            return getFirstAnchorAttributeFormHTML(_shortcode4.content, 'class');
+          }
         },
         id: {
           type: 'number',
-          shortcode: function shortcode(_ref2) {
-            var id = _ref2.named.id;
+          shortcode: function shortcode(_ref5) {
+            var id = _ref5.named.id;
 
             if (!id) {
               return;
@@ -3730,9 +3780,9 @@ var image_settings = {
         },
         align: {
           type: 'string',
-          shortcode: function shortcode(_ref3) {
-            var _ref3$named$align = _ref3.named.align,
-                align = _ref3$named$align === void 0 ? 'alignnone' : _ref3$named$align;
+          shortcode: function shortcode(_ref6) {
+            var _ref6$named$align = _ref6.named.align,
+                align = _ref6$named$align === void 0 ? 'alignnone' : _ref6$named$align;
             return align.replace('align', '');
           }
         }
@@ -3751,10 +3801,10 @@ var image_settings = {
     }
   },
   edit: image_edit,
-  save: function save(_ref4) {
+  save: function save(_ref7) {
     var _classnames;
 
-    var attributes = _ref4.attributes;
+    var attributes = _ref7.attributes;
     var url = attributes.url,
         alt = attributes.alt,
         caption = attributes.caption,
@@ -3796,10 +3846,10 @@ var image_settings = {
   },
   deprecated: [{
     attributes: image_blockAttributes,
-    save: function save(_ref5) {
+    save: function save(_ref8) {
       var _classnames2;
 
-      var attributes = _ref5.attributes;
+      var attributes = _ref8.attributes;
       var url = attributes.url,
           alt = attributes.alt,
           caption = attributes.caption,
@@ -3827,8 +3877,8 @@ var image_settings = {
     }
   }, {
     attributes: image_blockAttributes,
-    save: function save(_ref6) {
-      var attributes = _ref6.attributes;
+    save: function save(_ref9) {
+      var attributes = _ref9.attributes;
       var url = attributes.url,
           alt = attributes.alt,
           caption = attributes.caption,
@@ -3855,8 +3905,8 @@ var image_settings = {
     }
   }, {
     attributes: image_blockAttributes,
-    save: function save(_ref7) {
-      var attributes = _ref7.attributes;
+    save: function save(_ref10) {
+      var attributes = _ref10.attributes;
       var url = attributes.url,
           alt = attributes.alt,
           caption = attributes.caption,
@@ -4618,7 +4668,7 @@ var quote_settings = {
 };
 
 // EXTERNAL MODULE: external {"this":["wp","keycodes"]}
-var external_this_wp_keycodes_ = __webpack_require__(17);
+var external_this_wp_keycodes_ = __webpack_require__(16);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/block-library/build-module/gallery/gallery-image.js
 
@@ -5258,34 +5308,34 @@ var gallery_settings = {
       isMultiBlock: true,
       blocks: ['core/image'],
       transform: function transform(attributes) {
+        // Init the align attribute from the first item which may be either the placeholder or an image.
+        var align = attributes[0].align; // Loop through all the images and check if they have the same align.
+
+        align = Object(external_lodash_["every"])(attributes, ['align', align]) ? align : undefined;
         var validImages = Object(external_lodash_["filter"])(attributes, function (_ref) {
           var id = _ref.id,
               url = _ref.url;
           return id && url;
         });
-
-        if (validImages.length > 0) {
-          return Object(external_this_wp_blocks_["createBlock"])('core/gallery', {
-            images: validImages.map(function (_ref2) {
-              var id = _ref2.id,
-                  url = _ref2.url,
-                  alt = _ref2.alt,
-                  caption = _ref2.caption;
-              return {
-                id: id,
-                url: url,
-                alt: alt,
-                caption: caption
-              };
-            }),
-            ids: validImages.map(function (_ref3) {
-              var id = _ref3.id;
-              return id;
-            })
-          });
-        }
-
-        return Object(external_this_wp_blocks_["createBlock"])('core/gallery');
+        return Object(external_this_wp_blocks_["createBlock"])('core/gallery', {
+          images: validImages.map(function (_ref2) {
+            var id = _ref2.id,
+                url = _ref2.url,
+                alt = _ref2.alt,
+                caption = _ref2.caption;
+            return {
+              id: id,
+              url: url,
+              alt: alt,
+              caption: caption
+            };
+          }),
+          ids: validImages.map(function (_ref3) {
+            var id = _ref3.id;
+            return id;
+          }),
+          align: align
+        });
       }
     }, {
       type: 'shortcode',
@@ -5360,7 +5410,8 @@ var gallery_settings = {
       type: 'block',
       blocks: ['core/image'],
       transform: function transform(_ref8) {
-        var images = _ref8.images;
+        var images = _ref8.images,
+            align = _ref8.align;
 
         if (images.length > 0) {
           return images.map(function (_ref9) {
@@ -5372,12 +5423,15 @@ var gallery_settings = {
               id: id,
               url: url,
               alt: alt,
-              caption: caption
+              caption: caption,
+              align: align
             });
           });
         }
 
-        return Object(external_this_wp_blocks_["createBlock"])('core/image');
+        return Object(external_this_wp_blocks_["createBlock"])('core/image', {
+          align: align
+        });
       }
     }]
   },
@@ -7313,10 +7367,6 @@ var cover_settings = {
       backgroundColor: overlayColor.color
     });
 
-    var classes = classnames_default()(className, contentAlign !== 'center' && "has-".concat(contentAlign, "-content"), dimRatioToClass(dimRatio), {
-      'has-background-dim': dimRatio !== 0,
-      'has-parallax': hasParallax
-    });
     var controls = Object(external_this_wp_element_["createElement"])(external_this_wp_element_["Fragment"], null, Object(external_this_wp_element_["createElement"])(external_this_wp_editor_["BlockControls"], null, Object(external_this_wp_element_["createElement"])(external_this_wp_editor_["BlockAlignmentToolbar"], {
       value: align,
       onChange: updateAlignment
@@ -7387,6 +7437,10 @@ var cover_settings = {
       }));
     }
 
+    var classes = classnames_default()(className, contentAlign !== 'center' && "has-".concat(contentAlign, "-content"), dimRatioToClass(dimRatio), {
+      'has-background-dim': dimRatio !== 0,
+      'has-parallax': hasParallax
+    });
     return Object(external_this_wp_element_["createElement"])(external_this_wp_element_["Fragment"], null, controls, Object(external_this_wp_element_["createElement"])("div", {
       "data-url": url,
       style: style,
@@ -7776,7 +7830,7 @@ var embed_preview_EmbedPreview = function EmbedPreview(props) {
     href: url
   }, url)), Object(external_this_wp_element_["createElement"])("p", {
     className: "components-placeholder__error"
-  }, Object(external_this_wp_i18n_["__"])('Previews for this are unavailable in the editor, sorry!'))) : embedWrapper, (!external_this_wp_editor_["RichText"].isEmpty(caption) || isSelected) && Object(external_this_wp_element_["createElement"])(external_this_wp_editor_["RichText"], {
+  }, Object(external_this_wp_i18n_["__"])('Sorry, we cannot preview this embedded content in the editor.'))) : embedWrapper, (!external_this_wp_editor_["RichText"].isEmpty(caption) || isSelected) && Object(external_this_wp_element_["createElement"])(external_this_wp_editor_["RichText"], {
     tagName: "figcaption",
     placeholder: Object(external_this_wp_i18n_["__"])('Write caption…'),
     value: caption,
@@ -8562,7 +8616,8 @@ function (_Component) {
         text: href,
         className: "".concat(className, "__copy-url-button"),
         onCopy: this.confirmCopyURL,
-        onFinishCopy: this.resetCopyConfirmation
+        onFinishCopy: this.resetCopyConfirmation,
+        disabled: Object(external_this_wp_blob_["isBlobURL"])(href)
       }, showCopyConfirmation ? Object(external_this_wp_i18n_["__"])('Copied!') : Object(external_this_wp_i18n_["__"])('Copy URL'))));
     }
   }]);
@@ -9826,8 +9881,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
       var _this$props = this.props,
           attributes = _this$props.attributes,
           setAttributes = _this$props.setAttributes,
@@ -9941,7 +9994,7 @@ function (_Component) {
           target: "_blank"
         }, Object(external_this_wp_htmlEntities_["decodeEntities"])(post.title.rendered.trim()) || Object(external_this_wp_i18n_["__"])('(Untitled)')), displayPostDate && post.date_gmt && Object(external_this_wp_element_["createElement"])("time", {
           dateTime: Object(external_this_wp_date_["format"])('c', post.date_gmt),
-          className: "".concat(_this3.props.className, "__post-date")
+          className: "wp-block-latest-posts__post-date"
         }, Object(external_this_wp_date_["dateI18n"])(dateFormat, post.date_gmt)));
       })));
     }
@@ -10037,7 +10090,7 @@ var latest_posts_settings = {
   getEditWrapperProps: function getEditWrapperProps(attributes) {
     var align = attributes.align;
 
-    if ('left' === align || 'right' === align || 'wide' === align || 'full' === align) {
+    if (['left', 'center', 'right', 'wide', 'full'].includes(align)) {
       return {
         'data-align': align
       };
@@ -14022,7 +14075,7 @@ g = (function() {
 
 try {
 	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
+	g = g || new Function("return this")();
 } catch (e) {
 	// This works if the window reference is available
 	if (typeof window === "object") g = window;

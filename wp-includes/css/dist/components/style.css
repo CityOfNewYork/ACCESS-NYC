@@ -536,8 +536,7 @@
 
 .components-color-palette__custom-color .components-color-palette__custom-color-gradient::before {
   content: "";
-  -webkit-filter: blur(6px) saturate(0.7) brightness(1.1);
-          filter: blur(6px) saturate(0.7) brightness(1.1);
+  filter: blur(6px) saturate(0.7) brightness(1.1);
   display: block;
   width: 200%;
   height: 200%;
@@ -732,6 +731,7 @@ svg.dashicon {
   fill: currentColor;
   outline: none; }
 
+/*rtl:begin:ignore*/
 .PresetDateRangePicker_panel {
   padding: 0 22px 11px; }
 
@@ -1553,6 +1553,7 @@ svg.dashicon {
   width: 15px;
   fill: #cacccd; }
 
+/*rtl:end:ignore*/
 .components-datetime .components-datetime__calendar-help {
   padding: 8px; }
   .components-datetime .components-datetime__calendar-help h4 {
@@ -1751,8 +1752,6 @@ body.is-dragging-components-draggable {
     transition: 0.3s opacity, 0.3s background-color; }
   .components-drop-zone.is-dragging-over-element {
     background-color: rgba(0, 113, 161, 0.8); }
-    .components-drop-zone.is-dragging-over-element .components-drop-zone__content {
-      display: block; }
 
 .components-drop-zone__content {
   position: absolute;
@@ -1764,8 +1763,7 @@ body.is-dragging-components-draggable {
   width: 100%;
   text-align: center;
   color: #fff;
-  transition: transform 0.2s ease-in-out;
-  display: none; }
+  transition: transform 0.2s ease-in-out; }
 
 .components-drop-zone.is-dragging-over-element .components-drop-zone__content {
   transform: translateY(-50%) scale(1.05); }
@@ -2051,13 +2049,11 @@ body.is-dragging-components-draggable {
   outline: 1px solid transparent;
   outline-offset: -1px;
   border: 1px solid #000;
-  -webkit-filter: invert(100%) contrast(500%);
-          filter: invert(100%) contrast(500%); }
+  filter: invert(100%) contrast(500%); }
 
 @supports (-ms-high-contrast-adjust: auto) {
   .components-form-toggle .components-form-toggle__on {
-    -webkit-filter: none;
-            filter: none;
+    filter: none;
     border: 1px solid #fff; } }
 
 .components-form-token-field__input-container {
@@ -2535,8 +2531,7 @@ body.is-dragging-components-draggable {
   body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right {
     transform: scaleX(-1);
     -ms-filter: fliph;
-    -webkit-filter: FlipH;
-            filter: FlipH;
+    filter: FlipH;
     margin-top: -10px; }
 
 .components-panel__icon {
