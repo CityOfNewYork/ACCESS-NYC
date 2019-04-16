@@ -74,7 +74,7 @@ import StaticMap from 'modules/static-map';
         'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED', 'VALID_EMAIL_INVALID',
         'VALID_CHECKBOX_BOROUGH', 'SUCCESS_CONFIRM_EMAIL',
         'ERR_PLEASE_TRY_LATER', 'ERR_PLEASE_ENTER_VALUE',
-        'ERR_TOO_MANY_RECENT', 'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL',
+        'ERR_TOO_MANY_RECENT', 'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL'
       ].map(i => [i, Utility.localize(i)])));
 
   // Show/hide share form disclaimer
