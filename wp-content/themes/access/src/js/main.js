@@ -3,6 +3,7 @@
 // Core-js is made available as a dependency of @babel/preset-env
 import 'core-js/features/promise';
 import 'core-js/features/array/for-each';
+import 'core-js/features/object/from-entries';
 
 import jQuery from 'jquery';
 
@@ -68,7 +69,13 @@ import StaticMap from 'modules/static-map';
 
   // Instantiate Newsletter Class
   let newsletter = document.querySelector(Newsletter.selector);
-  if (newsletter) new Newsletter(newsletter);
+  if (newsletter)
+    new Newsletter(newsletter).strings(Object.fromEntries([
+        'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED', 'VALID_EMAIL_INVALID',
+        'VALID_CHECKBOX_BOROUGH', 'SUCCESS_CONFIRM_EMAIL',
+        'ERR_PLEASE_TRY_LATER', 'ERR_PLEASE_ENTER_VALUE',
+        'ERR_TOO_MANY_RECENT', 'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL',
+      ].map(i => [i, Utility.localize(i)])));
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
