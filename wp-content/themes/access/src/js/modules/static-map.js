@@ -3,7 +3,6 @@
 
 import $ from 'jquery';
 import Utility from 'modules/utility';
-import _ from 'underscore';
 
 /**
  * This component takes an html element and creates a static map image using
@@ -69,16 +68,8 @@ class StaticMap {
       return this;
     }
 
-    $(window).on('resize', _.debounce(() => {
-      const newSize = this.getContainerSize();
-      if (newSize.height !== this._height || newSize.width !== this._width) {
-        this._height = newSize.height;
-        this._width = newSize.width;
-        this.renderImage();
-      }
-    }, 300));
-
     const size = this.getContainerSize();
+
     this._height = size.height;
     this._width = size.width;
 
@@ -132,7 +123,7 @@ class StaticMap {
       $img.attr('itemprop', 'hasMap');
       $img.addClass('block');
 
-      $img.on('click', (event) => {
+      $img.on('click', event => {
         Utility.track(this._trackKey, this._trackData);
       });
 

@@ -39,16 +39,16 @@ class TextSizer {
       return this;
     }
 
-    $(this._el).on('click', `.${TextSizer.CssClass.TOGGLE}`, (e) => {
+    $(this._el).on('click', `.${TextSizer.CssClass.TOGGLE}`, e => {
       e.preventDefault();
       this.toggle();
-    }).on('click', `.${TextSizer.CssClass.SMALLER}`, (e) => {
+    }).on('click', `.${TextSizer.CssClass.SMALLER}`, e => {
       e.preventDefault();
       const newSize = this._textSize - 1;
       if (newSize >= TextSizer.Size.MIN) {
         this._adjustSize(newSize);
       }
-    }).on('click', `.${TextSizer.CssClass.LARGER}`, (e) => {
+    }).on('click', `.${TextSizer.CssClass.LARGER}`, e => {
       e.preventDefault();
       const newSize = this._textSize + 1;
       if (newSize <= TextSizer.Size.MAX) {

@@ -46,6 +46,11 @@
 /wp-content/mu-plugins/wpengine-common
 /wp-content/mysql.sql
 
+# ACCESS Theme #
+################
+/wp-content/themes/access/assets/js/*.development.js
+/wp-content/themes/access/assets/**/*.map
+
 # Packages #
 ############
 *.7z
@@ -70,7 +75,6 @@
 ehthumbs.db
 Thumbs.db
 ._*
-
 
 # Other #
 #########

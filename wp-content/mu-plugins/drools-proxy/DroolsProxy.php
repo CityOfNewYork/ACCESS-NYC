@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: DroolsProxy
+  Plugin Name: Drools Proxy
   Description: Backend Proxy for Drools web requests
   Author:      Blue State Digital
 */

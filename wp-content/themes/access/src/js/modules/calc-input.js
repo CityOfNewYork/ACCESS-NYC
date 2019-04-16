@@ -18,7 +18,7 @@ class CalcInput {
 
     this.events = 'keypress paste drop';
 
-    $(element).on(this.events, this.selector, (event) => {
+    $(element).on(this.events, this.selector, event => {
       this.bus(event);
     });
   }

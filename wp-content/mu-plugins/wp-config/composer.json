@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-config",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "A WordPress package for environment configuration.",

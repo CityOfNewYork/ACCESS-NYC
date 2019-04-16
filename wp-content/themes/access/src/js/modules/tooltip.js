@@ -38,12 +38,12 @@ class Tooltip {
         ${Tooltip.CssClass.HIDDEN}`).attr({
           'aria-hidden': true,
           'role': 'tooltip'
-        }).on('click', (e) => {
+        }).on('click', e => {
           // Stop click propagation so clicking on the tip doesn't trigger a
           // click on body, which would close the tooltip.
           e.stopPropagation();
         }).detach().appendTo('body');
-    $(this._trigger).on('click', (e) => {
+    $(this._trigger).on('click', e => {
       e.preventDefault();
       e.stopPropagation();
       this.toggle();
@@ -172,7 +172,7 @@ Tooltip.AllTips = [];
  * @public
  */
 Tooltip.hideAll = function() {
-  _.each(Tooltip.AllTips, (tip) => {
+  _.each(Tooltip.AllTips, tip => {
     tip.hide();
   });
 };

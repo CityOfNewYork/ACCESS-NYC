@@ -41,13 +41,13 @@ class OfficeFilter {
     }
 
     $(this._el).on('change', `.${OfficeFilter.CssClass.PROGRAM_CHECKBOX}`,
-        (e) => {
+        e => {
           this.setCategoryParent(e.currentTarget).updateResults();
-        }).on('change', `.${OfficeFilter.CssClass.PARENT_CHECKBOX}`, (e) => {
+        }).on('change', `.${OfficeFilter.CssClass.PARENT_CHECKBOX}`, e => {
           const $checkbox = $(e.currentTarget);
           this.toggleCheckGroup($checkbox.data('toggles'),
               $checkbox.prop('checked')).updateResults();
-        }).on('click', `.${OfficeFilter.CssClass.TOGGLE}`, (e) => {
+        }).on('click', `.${OfficeFilter.CssClass.TOGGLE}`, e => {
           const targetSelector = $(e.currentTarget).data('target') ||
               $(e.currentTarget).attr('href');
           e.preventDefault();
