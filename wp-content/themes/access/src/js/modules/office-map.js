@@ -5,9 +5,9 @@ import $ from 'jquery';
 import OfficeFilter from 'modules/office-filter';
 import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
+import InputAutocomplete from
+  'access-nyc-patterns/dist/elements/inputs/input-autocomplete.common';
 import _ from 'underscore';
-
-const google = window.google;
 
 /**
  * This is the main controller for the map at the /locations page. This handles
@@ -23,6 +23,9 @@ class OfficeMap {
   constructor(el) {
     /** @private {HTMLElement} The component element. */
     this._el = el;
+
+    /**  {?this._google} The google map object. */
+    this._google = window.google;
 
     /** @private {HTMLElement} The map element. */
     this._mapEl = $(el).find(`.${OfficeMap.CssClass.MAP_BOX}`)[0];
@@ -42,22 +45,28 @@ class OfficeMap {
     /** @private {boolean} Whether the map has been initialized. */
     this._initialized = false;
 
-    /** @private {google.maps.LatLng} Map position. */
+    /** @private {this._google.maps.LatLng} Map position. */
     this._mapPosition = Utility.getUrlParameter('lat') &&
         Utility.getUrlParameter('lng') ?
-        new google.maps.LatLng(parseFloat(Utility.getUrlParameter('lat')),
+        new this._google.maps.LatLng(parseFloat(Utility.getUrlParameter('lat')),
             parseFloat(Utility.getUrlParameter('lng'))) :
-        new google.maps.LatLng(Utility.CONFIG.DEFAULT_LAT,
+        new this._google.maps.LatLng(Utility.CONFIG.DEFAULT_LAT,
             Utility.CONFIG.DEFAULT_LNG);
 
-    /** @private {?google.maps.Map} The google map object. */
-    this._map = new google.maps.Map(this._mapEl, {
+    /** @private {?this._google.maps.Map} The google map object. */
+    this._map = new this._google.maps.Map(this._mapEl, {
       zoom: 11,
       center: this._mapPosition
     });
 
-    /** @private {google.maps.places.SearchBox} Search box controller. */
-    this._searchBox = new google.maps.places.SearchBox(this._searchEl);
+    /** @private {this._google.maps.places.Autocomplete}Autocomplete instance */
+    this._service = new this._google.maps.places.AutocompleteService();
+
+    /** @private {this._google.maps.places.PlaceService}PlaceService instance */
+    this._placeService = new this._google.maps.places.PlacesService(this._map);
+
+    /** @private {this._inputAutocomplete} Access Design Pattern */
+    this._inputAutocomplete = new InputAutocomplete({options: []});
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
@@ -88,7 +97,7 @@ class OfficeMap {
 
     // Set window resize handler for the map.
     $(window).on('resize', () => {
-      google.maps.event.trigger(this._map, 'resize');
+      this._google.maps.event.trigger(this._map, 'resize');
     });
 
     // Adds handler for highlighting and bouncing a pin when a list item gets
@@ -114,22 +123,27 @@ class OfficeMap {
       this.updateList().updateUrl();
     });
 
-    // Bias the SearchBox results towards current map's viewport when the map
-    // bounds change.
-    this._map.addListener('bounds_changed', _.debounce(() => {
-      this._searchBox.setBounds(this._map.getBounds());
-    }, 100));
-
     // Attach handler for the autocomplete search box. This updates the map
     // position and re-sorts locations around that position.
-    this._searchBox.addListener('places_changed', () => {
-      const place = this._searchBox.getPlaces()[0];
-      if (place) {
-        this._mapPosition = place.geometry.location;
-        this._map.panTo(this._mapPosition);
-        this.sortByDistance().clearLocations().updateUrl().updateList()
-            .updateUrl();
-        $(this._searchEl).blur();
+    this._searchEl.addEventListener('keyup', event => {
+      if(event.target.value) {
+        this._service.getPlacePredictions({
+           input: event.target.value,
+           offset: 3,
+           types: ['geocode'],
+           componentRestrictions: {country: 'us'},
+           bounds: OfficeMap.NYC_BOUNDS
+        }, predictions => {
+          if(predictions) {
+            let results = predictions.map(e => [e['description']]);
+            this._inputAutocomplete.options(results);
+            this._inputAutocomplete.library.settings.selected = placeName => {
+               let googlePlaceObj = this.getGooglePlaceByName(placeName,
+                                                              predictions);
+               this.displayPlacesOnMap(googlePlaceObj);
+             };
+            }
+        });
       }
     });
 
@@ -168,6 +182,46 @@ class OfficeMap {
   }
 
   /**
+   * Iterates over a list of place objects from Google and
+   * display them on the map using PlacesService.
+   * @param {object} place
+   */
+   displayPlacesOnMap(place) {
+     if(place) {
+         let request = {
+            placeId: place.place_id,
+            fields: ['name', 'formatted_address', 'place_id', 'geometry']
+         };
+
+         const officeMap = this;
+         this._placeService.getDetails(request, function(place, status) {
+            if (status === 'OK') {
+              officeMap._mapPosition = place.geometry.location;
+              officeMap._map.panTo(officeMap._mapPosition);
+              officeMap.sortByDistance().clearLocations().updateUrl()
+                .updateList().updateUrl();
+              $(officeMap._searchEl).blur();
+            }
+         });
+     }
+   }
+
+   /**
+    * Iterates over an array of Google Maps Objects, if the object's description
+    * matches the name of the location the Google Map's object is returned.
+    * @param {string} nameOfLocation
+    * @param {array} listOfGooglePlaces
+    * @return {object} Google Map Object
+    */
+    getGooglePlaceByName(nameOfLocation, listOfGooglePlaces) {
+      if (nameOfLocation && listOfGooglePlaces) {
+         return listOfGooglePlaces.find(googlePlace =>
+          googlePlace.description.match(nameOfLocation)
+        );
+      }
+    }
+
+  /**
    * Clears the map markers, map listing, and, optionally, resets
    * this._locations and this._filteredLocations.
    * @method
@@ -200,7 +254,7 @@ class OfficeMap {
     return $.getJSON($(this._el).data('source')).then(data => {
       _.each(data.locations, item => {
         const location = new OfficeLocation(item);
-        google.maps.event.addListener(location.marker, 'click', () => {
+        this._google.maps.event.addListener(location.marker, 'click', () => {
           this.focusListOnMarker(location.marker);
         });
         this._locations.push(location);
@@ -268,7 +322,7 @@ class OfficeMap {
   /**
    * Centers the map on the marker and highlights the marker with a bouncing
    * animation.
-   * @param {google.maps.Marker} marker
+   * @param {this._google.maps.Marker} marker
    * @return {this} OfficeMap
    */
   centerOnMarker(marker) {
@@ -281,8 +335,8 @@ class OfficeMap {
     // Bounce the marker once the pan has completed.
     // A single bounce animation is about 700ms, so the animation is set here
     // to last for three bounces (2100ms).
-    google.maps.event.addListenerOnce(this._map, 'idle', () => {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
+    this._google.maps.event.addListenerOnce(this._map, 'idle', () => {
+      marker.setAnimation(this._google.maps.Animation.BOUNCE);
       _.delay(() => {
         marker.setAnimation(null);
       }, 2100);
@@ -296,7 +350,7 @@ class OfficeMap {
    * result list item, scrolling either the page or the result list container
    * to the item as appropraite.
    * @method
-   * @param {google.maps.Marker} marker
+   * @param {this._google.maps.Marker} marker
    * @return {this} OfficeMap
    */
   focusListOnMarker(marker) {
@@ -351,13 +405,13 @@ class OfficeMap {
   /**
    * Sort this._filteredLocations by distance of markers to a given point.
    * @method
-   * @param {google.maps.LatLng} origin
+   * @param {this._google.maps.LatLng} origin
    * @return {this} OfficeMap
    */
   sortByDistance(origin = this._mapPosition) {
     _.each(this._filteredLocations, location => {
       location.distance =
-          google.maps.geometry.spherical.computeDistanceBetween(origin,
+          this._google.maps.geometry.spherical.computeDistanceBetween(origin,
               location.marker.position);
     });
     this._filteredLocations = _.sortBy(this._filteredLocations, 'distance');
@@ -396,7 +450,7 @@ class OfficeMap {
    * @return {this} OfficeMap
    */
   fitMapToPins() {
-    const bounds = new google.maps.LatLngBounds();
+    const bounds = new this._google.maps.LatLngBounds();
     _.each(this._filteredLocations, location => {
       if (location.active) {
         bounds.extend(location.marker.getPosition());
@@ -453,5 +507,15 @@ OfficeMap.Selectors = {
   MESSAGE_LOADING: '[data-js="message-loading"]',
   MESSAGE_NO_RESULTS: '[data-js="message-no-results"]'
 };
+/**
+ * NYC Bound Parameters for Google Maps API
+ * @enum {object}
+ */
+ OfficeMap.NYC_BOUNDS = {
+   'south': 40.4773991,
+   'west': -74.25908989999999,
+   'north': 40.9175771,
+   'east': -73.7002721
+ };
 
 export default OfficeMap;

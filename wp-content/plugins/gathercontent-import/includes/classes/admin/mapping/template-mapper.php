@@ -81,13 +81,6 @@ class Template_Mapper extends Base {
 
 		$this->view( 'input', array(
 			'type'    => 'hidden',
-			'id'      => 'gc-structure-uuid',
-			'name'    => $this->option_name .'[structure_uuid]',
-			'value'   => esc_attr( $this->structure_uuid ),
-		) );
-
-		$this->view( 'input', array(
-			'type'    => 'hidden',
 			'id'      => 'gc-account-id',
 			'name'    => $this->option_name .'[account_id]',
 			'value'   => $this->account_id,

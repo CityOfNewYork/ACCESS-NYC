@@ -3,6 +3,7 @@
 // Core-js is made available as a dependency of @babel/preset-env
 import 'core-js/features/promise';
 import 'core-js/features/array/for-each';
+import 'core-js/features/object/from-entries';
 
 import jQuery from 'jquery';
 
@@ -18,9 +19,12 @@ import Accordion from 'components/accordion/accordion.common';
 import Filter from 'components/filter/filter.common';
 import NearbyStops from 'components/nearby-stops/nearby-stops.common';
 import Newsletter from 'objects/newsletter/newsletter.common';
+import OfficeMap from 'modules/office-map';
+import StaticMap from 'modules/static-map';
 
-(function(window, $) {
+(function($) {
   'use strict';
+
 
   Utility.configErrorTracking(window);
 
@@ -65,7 +69,13 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 
   // Instantiate Newsletter Class
   let newsletter = document.querySelector(Newsletter.selector);
-  if (newsletter) new Newsletter(newsletter);
+  if (newsletter)
+    new Newsletter(newsletter).strings(Object.fromEntries([
+        'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED', 'VALID_EMAIL_INVALID',
+        'VALID_CHECKBOX_BOROUGH', 'SUCCESS_CONFIRM_EMAIL',
+        'ERR_PLEASE_TRY_LATER', 'ERR_PLEASE_ENTER_VALUE',
+        'ERR_TOO_MANY_RECENT', 'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL'
+      ].map(i => [i, Utility.localize(i)])));
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
@@ -94,6 +104,56 @@ import Newsletter from 'objects/newsletter/newsletter.common';
   $('.js-program-search-filter').on('change', 'input', e => {
     $(e.currentTarget).closest('form')[0].submit();
   });
+
+  /**
+   * Callback function for loading the Google maps library.
+   */
+
+  // Initialize maps if present.
+  let $maps = $('.js-map');
+  let envGoogleMapsEmbed = document
+    .querySelector('[data-js="env-google-maps-embed"]');
+
+  if ($maps && envGoogleMapsEmbed) {
+    let callbackGoogleMapsEmbed = 'initializeMaps';
+
+    window[callbackGoogleMapsEmbed] = () => {
+      $maps.each((i, el) => {
+        const map = new OfficeMap(el);
+        map.init();
+      });
+    };
+
+    let scriptGoogleMapsEmbed = document.createElement('script');
+    let keyGoogleMapsEmbed = envGoogleMapsEmbed.dataset.env;
+
+    scriptGoogleMapsEmbed.type = 'text/javascript';
+    scriptGoogleMapsEmbed.src = [
+        'https://maps.googleapis.com/maps/api/js',
+        '?key=' + keyGoogleMapsEmbed,
+        '&callback=window.' + callbackGoogleMapsEmbed,
+        '&libraries=geometry,places'
+      ].join('');
+
+    document.body.appendChild(scriptGoogleMapsEmbed);
+  }
+
+  // Initialize simple maps.
+  $('.js-static-map').each((i, el) => {
+    const staticMap = new StaticMap(el);
+    staticMap.init();
+  });
+
+  // For location detail pages, this overwrites the link to the "back to map"
+  // button if the previous page was the map. We want the user to return to
+  // the previous state of the map (via the same URL) rather than simply going
+  // back to the default map.
+  $('.js-location-back').each((i, el) => {
+    if (window.document.referrer.indexOf('/locations/?') >= 0) {
+      $(el).attr('href', window.document.referrer);
+    }
+  });
+
 
   // Initialize text sizer module.
   $(`.${TextSizer.CssClass.CONTROLLER}`).each((i, el) => {
@@ -124,4 +184,4 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 
   // Enable environment warnings
   $(window).on('load', () => Utility.warnings());
-})(window, jQuery);
+})(jQuery);
