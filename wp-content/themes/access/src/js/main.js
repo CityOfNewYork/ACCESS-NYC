@@ -22,7 +22,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 import OfficeMap from 'modules/office-map';
 import StaticMap from 'modules/static-map';
 
-(function(window, $) {
+(function($) {
   'use strict';
 
 
@@ -105,18 +105,38 @@ import StaticMap from 'modules/static-map';
     $(e.currentTarget).closest('form')[0].submit();
   });
 
-  // Initialize maps if present.
-  const $maps = $('.js-map');
-
   /**
    * Callback function for loading the Google maps library.
    */
-  window.initializeMaps = () => {
-    $maps.each((i, el) => {
-      const map = new OfficeMap(el);
-      map.init();
-    });
-  };
+
+  // Initialize maps if present.
+  let $maps = $('.js-map');
+  let envGoogleMapsEmbed = document
+    .querySelector('[data-js="env-google-maps-embed"]');
+
+  if ($maps && envGoogleMapsEmbed) {
+    let callbackGoogleMapsEmbed = 'initializeMaps';
+
+    window[callbackGoogleMapsEmbed] = () => {
+      $maps.each((i, el) => {
+        const map = new OfficeMap(el);
+        map.init();
+      });
+    };
+
+    let scriptGoogleMapsEmbed = document.createElement('script');
+    let keyGoogleMapsEmbed = envGoogleMapsEmbed.dataset.env;
+
+    scriptGoogleMapsEmbed.type = 'text/javascript';
+    scriptGoogleMapsEmbed.src = [
+        'https://maps.googleapis.com/maps/api/js',
+        '?key=' + keyGoogleMapsEmbed,
+        '&callback=window.' + callbackGoogleMapsEmbed,
+        '&libraries=geometry,places'
+      ].join('');
+
+    document.body.appendChild(scriptGoogleMapsEmbed);
+  }
 
   // Initialize simple maps.
   $('.js-static-map').each((i, el) => {
@@ -164,4 +184,4 @@ import StaticMap from 'modules/static-map';
 
   // Enable environment warnings
   $(window).on('load', () => Utility.warnings());
-})(window, jQuery);
+})(jQuery);

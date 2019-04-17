@@ -136,23 +136,12 @@ class OfficeMap {
         }, predictions => {
           if(predictions) {
             let results = predictions.map(e => [e['description']]);
-            this._inputAutocomplete._autocomplete.options = results;
-            const autocompleteSelf = this._inputAutocomplete._autocomplete;
-
-            this._inputAutocomplete._autocomplete.select = () => {
-                if (autocompleteSelf.highlightedIndex !== -1) {
-                  autocompleteSelf.input.value = autocompleteSelf
-                    .scoredOptions[autocompleteSelf.highlightedIndex]
-                    .displayValue;
-                  autocompleteSelf.removeDropdown();
-
-                  let nameOfLocation = autocompleteSelf.input.value;
-                  let googlePlaceObj = this.getGooglePlaceByName(nameOfLocation,
-                                                                 predictions);
-
-                  this.displayPlacesOnMap(googlePlaceObj);
-                }
-              };
+            this._inputAutocomplete.options(results);
+            this._inputAutocomplete.library.settings.selected = placeName => {
+               let googlePlaceObj = this.getGooglePlaceByName(placeName,
+                                                              predictions);
+               this.displayPlacesOnMap(googlePlaceObj);
+             };
             }
         });
       }
@@ -193,6 +182,46 @@ class OfficeMap {
   }
 
   /**
+   * Iterates over a list of place objects from Google and
+   * display them on the map using PlacesService.
+   * @param {object} place
+   */
+   displayPlacesOnMap(place) {
+     if(place) {
+         let request = {
+            placeId: place.place_id,
+            fields: ['name', 'formatted_address', 'place_id', 'geometry']
+         };
+
+         const officeMap = this;
+         this._placeService.getDetails(request, function(place, status) {
+            if (status === 'OK') {
+              officeMap._mapPosition = place.geometry.location;
+              officeMap._map.panTo(officeMap._mapPosition);
+              officeMap.sortByDistance().clearLocations().updateUrl()
+                .updateList().updateUrl();
+              $(officeMap._searchEl).blur();
+            }
+         });
+     }
+   }
+
+   /**
+    * Iterates over an array of Google Maps Objects, if the object's description
+    * matches the name of the location the Google Map's object is returned.
+    * @param {string} nameOfLocation
+    * @param {array} listOfGooglePlaces
+    * @return {object} Google Map Object
+    */
+    getGooglePlaceByName(nameOfLocation, listOfGooglePlaces) {
+      if (nameOfLocation && listOfGooglePlaces) {
+         return listOfGooglePlaces.find(googlePlace =>
+          googlePlace.description.match(nameOfLocation)
+        );
+      }
+    }
+
+  /**
    * Clears the map markers, map listing, and, optionally, resets
    * this._locations and this._filteredLocations.
    * @method
@@ -214,45 +243,6 @@ class OfficeMap {
 
     return this;
   }
-  /**
-   * Iterates over a list of place objects from Google and
-   * display them on the map using PlacesService.
-   * @param {object} place
-   */
-   displayPlacesOnMap(place) {
-     if(place) {
-         let request = {
-            placeId: place.place_id,
-            fields: ['name', 'formatted_address', 'place_id', 'geometry']
-         };
-
-         const officeMap = this;
-
-         this._placeService.getDetails(request, function(place, status) {
-            if (status === 'OK') {
-              officeMap._mapPosition = place.geometry.location;
-              officeMap._map.panTo(officeMap._mapPosition);
-              officeMap.sortByDistance().clearLocations().updateUrl()
-                .updateList().updateUrl();
-              $(officeMap._searchEl).blur();
-            }
-         });
-     }
-   }
-   /**
-    * Iterates over an array of Google Maps Objects, if the object's description
-    * matches the name of the location the Google Map's object is returned.
-    * @param {string} nameOfLocation
-    * @param {array} listOfGooglePlaces
-    * @return {object} Google Map Object
-    */
-    getGooglePlaceByName(nameOfLocation, listOfGooglePlaces) {
-      if (nameOfLocation && listOfGooglePlaces) {
-         return listOfGooglePlaces.find(googlePlace =>
-          googlePlace.description.match(nameOfLocation)
-        );
-      }
-    }
 
   /**
    * Updates this._locations based on a given set of parameters. Recursively

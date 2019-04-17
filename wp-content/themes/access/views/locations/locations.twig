@@ -60,7 +60,9 @@
 {% block scripts_footer %}
 {{ function('enqueue_script', 'assets/js/main', '.min') }}
 {{ function('enqueue_script', 'assets/js/locations') }}
-<script src="https://www.google.com/jsapi"></script>
+
+<div data-js="env-google-maps-embed" data-env="{{ function('get_env', 'GOOGLE_MAPS_EMBED') }}"></div>
+
 <script>
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([{% for filter in filters %}{% for program in filter.programs %}
