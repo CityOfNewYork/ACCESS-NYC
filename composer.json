@@ -2,7 +2,7 @@
   "name": "ACCESS-NYC",
   "version": "3.4.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
-  "homepage": "https://localhost:8080",
+  "homepage": "https://access.nyc.gov",
   "authors": [
     {
       "name": "NYC Opportunity",

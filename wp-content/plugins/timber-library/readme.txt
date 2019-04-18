@@ -4,7 +4,7 @@ Tags: template engine, templates, twig
 Requires at least: 4.7.9
 Tested up to: 4.9.8
 Stable tag: 1.8.3
-Requires PHP: 5.3
+PHP version: 5.3.0 or greater
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -702,23 +702,23 @@ Misc fixes to documentation
 == Installation ==
 
 1. Activate the plugin through the 'Plugins' menu in WordPress
-2. For an example, try modifying your `home.php` or `index.php` with something like this:
+2. For an example, try modifying your home.php or index.php with something like this:
 
-`
+```
 $context = array();
 $context['message'] = 'Hello Timber!';
 Timber::render( 'welcome.twig', $context );
-`
+```
 
 Then create a subdirectory called `views` in your theme folder. Then create a file `views/welcome.twig` with these contents:
 
-`
+```
 <div class="welcome">
     <h3>{{ message }}</h3>
 </div>
-`
+```
 
-When you visit this page, you'll see both the data from PHP come through as you've marked it up. For more, continue with the official [Getting Started Guide](https://timber.github.io/docs/getting-started/)
+That’s Timber!
 
 == Support ==
 

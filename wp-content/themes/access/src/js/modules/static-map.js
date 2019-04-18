@@ -109,7 +109,7 @@ class StaticMap {
       zoom: 15,
       size: `${this._width}x${this._height}`,
       scale: 2,
-      markers: `anchor:16,40|icon:https://localhost:8080` +
+      markers: `anchor:16,40|icon:https://access.nyc.gov` +
         `${this._markerImg}|shadow:false|${this._marker}`,
       key: Utility.CONFIG.GOOGLE_STATIC_API
     };

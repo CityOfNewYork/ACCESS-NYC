@@ -4,6 +4,8 @@
 import Utility from 'modules/utility';
 import _ from 'underscore';
 
+const google = window.google;
+
 /**
  * OfficeLocation objects are used by the OfficeMap and help normalize the
  * JSON data that is passed from the WP API.
@@ -15,8 +17,6 @@ class OfficeLocation {
    * @constructor
    */
   constructor(obj) {
-    /**  {?this._google} The google map object. */
-    this._google = window.google;
     // If this is the first time an Office Location is instantiated, define
     // the marker icon element. Blue markers are used by Government Offices.
     // Green is used for all others.
@@ -24,17 +24,17 @@ class OfficeLocation {
       OfficeLocation.Marker = {
         BLUE: {
           url: Utility.CONFIG.URL_PIN_BLUE_2X,
-          size: new this._google.maps.Size(65, 80),
-          origin: new this._google.maps.Point(0, 0),
-          anchor: new this._google.maps.Point(16, 40),
-          scaledSize: new this._google.maps.Size(33, 40)
+          size: new google.maps.Size(65, 80),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(16, 40),
+          scaledSize: new google.maps.Size(33, 40)
         },
         GREEN: {
           url: Utility.CONFIG.URL_PIN_GREEN_2X,
-          size: new this._google.maps.Size(65, 80),
-          origin: new this._google.maps.Point(0, 0),
-          anchor: new this._google.maps.Point(16, 40),
-          scaledSize: new this._google.maps.Size(33, 40)
+          size: new google.maps.Size(65, 80),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(16, 40),
+          scaledSize: new google.maps.Size(33, 40)
         }
       };
     }
@@ -60,14 +60,14 @@ class OfficeLocation {
     this.address = {
       street: obj.address.street || '',
       location:
-          new this._google.maps.LatLng(obj.address.lat, obj.address.lng)
+          new google.maps.LatLng(obj.address.lat, obj.address.lng)
     };
 
     /** {array<Number> A collection of program data. */
     this.programs = obj.programs || [];
 
-    /** {this._google.maps.Marker} google marker associated with this office. */
-    this.marker = new this._google.maps.Marker({
+    /** {google.maps.Marker} The google marker associated with this office. */
+    this.marker = new google.maps.Marker({
       position: this.address.location,
       icon: this.isGovtOffice ? OfficeLocation.Marker.BLUE :
           OfficeLocation.Marker.GREEN,
