@@ -2,7 +2,7 @@
 
 {% block content %}
   {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
-  <main class="js-map layout--map screen-desktop:layout--sidebar bg-color-white" id="content" data-source="/locations/json">
+  <main class="js-map layout--map screen-desktop:layout--sidebar bg-color-white" id="content" data-js="google-maps-embed" data-source="/locations/json" data-key="{{ function('get_env', 'GOOGLE_MAPS_EMBED') }}">
     <div class="js-map-controls layout--map__sidebar">
       <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
 
@@ -11,7 +11,7 @@
           <span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span>
         </a>
 
-        <div id="map-filter-settings" class="c-filter-multi" aria-hidden="true">
+        <div id="map-filter-settings" class="c-filter-multi hidden:overflow animated" aria-hidden="true">
           <ul class="c-filter-multi__list px-3">
             {% for filter in filters %}
             <li class="c-filter-multi__item">
