@@ -3,6 +3,10 @@
 // Core-js is made available as a dependency of @babel/preset-env
 import 'core-js/features/promise';
 import 'core-js/features/array/for-each';
+import 'core-js/features/object/from-entries';
+
+// Fetch
+import 'whatwg-fetch';
 
 import jQuery from 'jquery';
 
@@ -14,6 +18,7 @@ import ShareForm from 'modules/share-form';
 import TextSizer from 'modules/text-sizer';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
+import Icons from 'elements/icons/icons.common';
 import Accordion from 'components/accordion/accordion.common';
 import Filter from 'components/filter/filter.common';
 import NearbyStops from 'components/nearby-stops/nearby-stops.common';
@@ -25,9 +30,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
   Utility.configErrorTracking(window);
 
   // Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
-  $.get('/wp-content/themes/access/assets/svg/icons.18dca930.svg',
-    Utility.svgSprites
-  );
+  new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
 
   let $body = $('body');
 
@@ -65,7 +68,20 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 
   // Instantiate Newsletter Class
   let newsletter = document.querySelector(Newsletter.selector);
-  if (newsletter) new Newsletter(newsletter);
+  // let strings = Object.fromEntries([
+  //     'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED', 'VALID_EMAIL_INVALID',
+  //     'VALID_CHECKBOX_BOROUGH', 'SUCCESS_CONFIRM_EMAIL',
+  //     'ERR_PLEASE_TRY_LATER', 'ERR_PLEASE_ENTER_VALUE',
+  //     'ERR_TOO_MANY_RECENT', 'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL'
+  //   ].map(i => [i, Utility.localize(i)]));
+  // console.dir(strings);
+  if (newsletter)
+    new Newsletter(newsletter).strings(Object.fromEntries([
+        'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED', 'VALID_EMAIL_INVALID',
+        'VALID_CHECKBOX_BOROUGH', 'SUCCESS_CONFIRM_EMAIL',
+        'ERR_PLEASE_TRY_LATER', 'ERR_PLEASE_ENTER_VALUE',
+        'ERR_TOO_MANY_RECENT', 'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL'
+      ].map(i => [i, Utility.localize(i)])));
 
   // Show/hide share form disclaimer
   $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
