@@ -3,6 +3,7 @@
 // Core-js is made available as a dependency of @babel/preset-env
 import 'core-js/features/promise';
 import 'core-js/features/array/for-each';
+import 'core-js/features/object/assign';
 import 'core-js/features/object/from-entries';
 
 // Fetch
