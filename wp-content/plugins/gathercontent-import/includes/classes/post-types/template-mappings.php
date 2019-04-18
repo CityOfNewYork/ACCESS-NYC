@@ -380,11 +380,12 @@ class Template_Mappings extends Base {
 
 	public static function create_mapping( $mapping_args, $post_data = array(), $wp_error = false ) {
 		$mapping_args = wp_parse_args( $mapping_args, array(
-			'title'    => '',
-			'content'  => '',
-			'account'  => null,
-			'project'  => null,
-			'template' => null,
+			'title'          => '',
+			'content'        => '',
+			'account'        => null,
+			'project'        => null,
+			'template'       => null,
+			'structure_uuid' => null,
 		) );
 
 		if ( ! empty( $mapping_args['content']['mapping'] ) ) {
@@ -399,9 +400,10 @@ class Template_Mappings extends Base {
 			'post_status'  => 'publish',
 			'post_type'    => self::SLUG,
 			'meta_input'   => array(
-				'_gc_account'  => $mapping_args['account'],
-				'_gc_project'  => $mapping_args['project'],
-				'_gc_template' => $mapping_args['template'],
+				'_gc_account'        => $mapping_args['account'],
+				'_gc_project'        => $mapping_args['project'],
+				'_gc_template'       => $mapping_args['template'],
+				'_gc_structure_uuid' => $mapping_args['structure_uuid'],
 			),
 		) );
 

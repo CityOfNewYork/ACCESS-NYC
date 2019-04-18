@@ -4,7 +4,7 @@ Donate link:       http://www.gathercontent.com
 Tags               structured content, gather content, gathercontent, import, migrate, export, mapping, production, writing, collaboration, platform, connect, link, gather, client, word, production
 Requires at least: 3.8
 Tested up to:      4.9.4
-Stable tag:        3.1.9
+Stable tag:        3.1.10.2
 License:           GPL-2.0+
 License URI:       https://opensource.org/licenses/GPL-2.0
 
@@ -63,6 +63,9 @@ Below the text box is a button that will allow you to simply save all of that in
 6. Or change the item's GatherContent status in quick-edit mode.
 
 == Changelog ==
+
+= 3.1.10 =
+* Fix push to GatherContent for new and old editor
 
 = 3.1.9 =
 * Fix the 3rd param passed to `Pull::sanitize_post_field()`, which needs to be the entire post data array.
@@ -242,6 +245,9 @@ if ( class_exists( 'GatherContent\\Importer\\General' ) ) {
 * Complete rewrite of old plugin
 
 == Upgrade Notice ==
+
+= 3.1.10 =
+* Fix push to GatherContent for new and old editor
 
 = 3.1.9 =
 * Fix the 3rd param passed to `Pull::sanitize_post_field()`, which needs to be the entire post data array.

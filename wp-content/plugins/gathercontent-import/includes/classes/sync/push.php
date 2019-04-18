@@ -46,6 +46,9 @@ class Push extends Base {
 	 * @var string
 	 */
 	protected $config = array();
+	protected $item_config = array();
+
+	private $item_id = null;
 
 	/**
 	 * Creates an instance of this class.
@@ -130,6 +133,51 @@ class Push extends Base {
 		return $this->maybe_do_item_update( $config_update );
 	}
 
+	private function get_structured_array( $config ) {
+		$structured_content = [];
+
+		foreach ( $config as $tab ) {
+			foreach ( $tab->elements as $element ) {
+				switch ( $element->type ) {
+					case 'text':
+						$structured_content[ $element->name ] = $element->value;
+						break;
+					case 'choice_radio':
+						$selected_radios = array();
+						foreach ( $element->options as $option ) {
+							if ( $option->selected ) {
+								$radio = array(
+									'id' => $option->name,
+								);
+
+								if ( $option->value ) {
+									$radio['value'] = $option->value;
+								}
+								$selected_radios[] = $radio;
+							}
+						}
+
+						$structured_content[ $element->name ] = $selected_radios;
+						break;
+					case 'choice_checkbox':
+						$selected_checkboxes = array();
+						foreach ( $element->options as $option ) {
+							if ( $option->selected ) {
+								$selected_checkboxes[] = array(
+									'id' => $option->name,
+								);;
+							}
+						}
+
+						$structured_content[ $element->name ] = $selected_checkboxes;
+						break;
+				}
+			}
+		}
+
+		return $structured_content;
+	}
+
 	/**
 	 * Pushes WP post to GC.
 	 *
@@ -142,7 +190,6 @@ class Push extends Base {
 	 * @return mixed Result of push.
 	 */
 	public function maybe_do_item_update( $update ) {
-
 		// Get our initial config reference.
 		$config = json_decode( $this->config );
 
@@ -153,13 +200,42 @@ class Push extends Base {
 			}
 		}
 
-		// And finally, update the item in GC.
-		$result = $this->api->save_item( $this->item->id, $config );
+
+		if ( ! $this->mapping->data( 'structure_uuid' ) ) {
+
+			if ( $this->item_id ) {
+				$result = $this->api->save_item( $this->item_id, $config );
+			} else {
+				$result = $this->api->create_item(
+					$this->mapping->get_project(),
+					$this->mapping->get_template(),
+					$this->post->post_title,
+					$config
+				);
+			}
+		} else {
+			$content = $this->get_structured_array( $config );
+
+			if ( $this->item_id ) {
+				$result = $this->api->update_item( $this->item_id, $content );
+			} else {
+				$result = $this->api->create_structured_item(
+					$this->mapping->get_project(),
+					$this->mapping->get_template(),
+					$this->post->post_title,
+					$content
+				);
+			}
+		}
 
 		if ( $result && ! is_wp_error( $result ) ) {
+			if ( ! $this->item_id ) {
+				\GatherContent\Importer\update_post_item_id( $this->post->ID, $result );
+				$this->item_id = $result;
+			}
 
 			// If item update was successful, re-fetch it from the API...
-			$this->item = $this->api->uncached()->get_item( $this->item->id );
+			$this->item = $this->api->uncached()->get_item( $this->item_id );
 
 			// and update the meta.
 			\GatherContent\Importer\update_post_item_meta( $this->post->ID, array(
@@ -183,41 +259,18 @@ class Push extends Base {
 	 * @return $item
 	 */
 	protected function set_item( $item_id ) {
-		// Let's create an item, if it doesn't exist yet.
-		// It will have the correct template applied to it, and the config object will exist.
-		if ( ! $item_id ) {
-			$item_id = $this->api->create_item(
-				$this->mapping->get_project(),
-				$this->mapping->get_template(),
-				$this->post->post_title
-			);
-
-			if ( $item_id ) {
-				// Let's map the new item back to the post.
-				\GatherContent\Importer\update_post_item_id( $this->post->ID, $item_id );
-			}
-		}
+		$this->item_id = $item_id;
 
 		if ( ! $item_id ) {
-			// @todo maybe check if error was temporary and try again?
-			throw new Exception( sprintf( __( 'No item found or created for that post ID: %d', 'gathercontent-import' ), $this->post->ID ), __LINE__, array(
-				'post_id'    => $this->post->ID,
-				'mapping_id' => $this->mapping->ID,
-			) );
+			$item = $this->api->get_template( $this->mapping->get_template() );
+		} else {
+			$item = parent::set_item( $item_id );
 		}
 
-		$item = parent::set_item( $item_id );
+		$this->item_config = $item->config;
 
-		\GatherContent\Importer\update_post_item_meta( $item_id, array(
-			'created_at' => $item->created_at->date,
-			'updated_at' => $item->updated_at->date,
-		) );
-
-		// Clone the config, to be used as a reference later.
-		// Needs to happen before map_wp_data_to_gc_data is called.
 		$this->config = wp_json_encode( $item->config );
 
-		return $item;
 	}
 
 	/**
@@ -240,11 +293,11 @@ class Push extends Base {
 	 * @return array Modified item config array on success.
 	 */
 	public function loop_item_elements_and_map() {
-		if ( empty( $this->item->config ) ) {
+		if ( empty( $this->item_config ) ) {
 			return false;
 		}
 
-		foreach ( $this->item->config as $index => $tab ) {
+		foreach ( $this->item_config as $index => $tab ) {
 			if ( ! isset( $tab->elements ) || ! $tab->elements ) {
 				continue;
 			}
@@ -275,18 +328,18 @@ class Push extends Base {
 					|| ! isset( $source['type'], $source['value'] )
 					|| ! $this->set_values_from_wp( $source_type, $source_key )
 				) {
-					unset( $this->item->config[ $index ]->elements[ $element_index ] );
+					unset( $this->item_config[ $index ]->elements[ $element_index ] );
 				}
 			}
 
-			if ( empty( $this->item->config[ $index ]->elements ) ) {
-				unset( $this->item->config[ $index ] );
+			if ( empty( $this->item_config[ $index ]->elements ) ) {
+				unset( $this->item_config[ $index ] );
 			}
 		}
 
 		$this->remove_unknowns();
 
-		return $this->item->config;
+		return $this->item_config;
 	}
 
 	/**
@@ -317,12 +370,12 @@ class Push extends Base {
 				foreach ( $values as $key => $value ) {
 					$keys = explode( ':', $key );
 
-					if ( isset( $this->item->config[ $keys[0] ]->elements[ $keys[1] ] ) ) {
-						unset( $this->item->config[ $keys[0] ]->elements[ $keys[1] ] );
+					if ( isset( $this->item_config[ $keys[0] ]->elements[ $keys[1] ] ) ) {
+						unset( $this->item_config[ $keys[0] ]->elements[ $keys[1] ] );
 					}
 
-					if ( empty( $this->item->config[ $keys[0] ]->elements ) ) {
-						unset( $this->item->config[ $keys[0] ] );
+					if ( empty( $this->item_config[ $keys[0] ]->elements ) ) {
+						unset( $this->item_config[ $keys[0] ] );
 					}
 				}
 			}

@@ -1,4 +1,4 @@
-# GatherContent Plugin -- Version 3.1.9 #
+# GatherContent Plugin -- Version 3.1.10.2 #
 
 This plugin allows you to transfer content from your GatherContent projects into your WordPress site and vice-versa.
 
@@ -46,6 +46,9 @@ Below the text box is a button that will allow you to simply save all of that in
 
 
 ## Changelog ##
+
+### 3.1.10 ###
+* Fix push to GatherContent for new and old editor
 
 ### 3.1.9 ###
 * Fix the 3rd param passed to `Pull::sanitize_post_field()`, which needs to be the entire post data array.
