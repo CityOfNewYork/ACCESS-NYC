@@ -5,12 +5,12 @@
     </h3>
   </header>
 
-  <div class="type-exposition">
+  <div class="type-exposition" itemprop="description">
     {{ post.get_field('program_description') }}
   </div>
 
   {% if post.heads_up | length %}
-  <div id="how-it-works" class="c-checklist">
+  <div id="how-it-works" class="c-checklist" itemprop="disambiguatingDescription">
     {{ post.get_field('field_58912c1a8a81b') }} {# heads_up #}
   </div>
 
