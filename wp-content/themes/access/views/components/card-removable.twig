@@ -22,7 +22,7 @@
           {% include 'partials/category-icon.twig' with {width: '44px', height: '44px', target: '_blank'} %}
         </div>
 
-        <div class="c-card__body pt-1">
+        <div class="c-card__body pt-1" style="flex-basis: 100%">
           <a href="{{ post.get_permalink }}" target="_blank" rel="noopener noreferrer">
             <h3 class="c-card__title text-color-blue-dark">
               {{ post.plain_language_program_name }}
