@@ -22,7 +22,6 @@ $path-to-images: 'img/';
 ***********/
 
 @import 'access-nyc-patterns/src/elements/base/base';
-@import 'access-nyc-patterns/src/elements/animate/animate';
 @import 'access-nyc-patterns/src/elements/code/code';
 @import 'access-nyc-patterns/src/elements/layouts/layouts';
 @import 'access-nyc-patterns/src/elements/links/links';
@@ -79,13 +78,15 @@ $path-to-images: 'img/';
 * Utilities
 ************/
 
-@import 'access-nyc-patterns/src/utilities/color';
-@import 'access-nyc-patterns/src/utilities/font';
-@import 'access-nyc-patterns/src/utilities/typography/typography';
-@import 'access-nyc-patterns/src/utilities/accessibility';
-@import 'access-nyc-patterns/src/utilities/inherit';
-@import 'access-nyc-patterns/src/utilities/language';
-@import 'access-nyc-patterns/src/utilities/statuses';
-@import 'access-nyc-patterns/src/utilities/print';
+@import 'access-nyc-patterns/src/utilities/animate/animate';
+@import 'access-nyc-patterns/src/utilities/accessibility/accessibility';
+@import 'access-nyc-patterns/src/utilities/color/color';
+@import 'access-nyc-patterns/src/utilities/font/font';
+@import 'access-nyc-patterns/src/utilities/inherit/inherit';
+@import 'access-nyc-patterns/src/utilities/language/language';
+@import 'access-nyc-patterns/src/utilities/media/media-print';
+@import 'access-nyc-patterns/src/utilities/statuses/statuses';
 @import 'access-nyc-patterns/dist/styles/_tailwind.scss';
-@import 'access-nyc-patterns/src/utilities/toggles';
+@import 'access-nyc-patterns/src/utilities/text/text';
+@import 'access-nyc-patterns/src/utilities/toggles/toggles';
+@import 'access-nyc-patterns/src/utilities/typography/typography';

@@ -30,12 +30,14 @@
   {% endfor %}
 
   {% for accordion in accordions %}
-    {% if accordion == 'field_58912c1a8a850' %}
+    {% if accordion == 'field_58912c1a8a850' %} {# online #}
       {% set this = {
         id: accordion|replace({'_': '-'}),
+        itemprop: 'availableChannel',
+        itemtype: 'http://schema.org/ServiceChannel',
         active: loop.index == 1 ? true : false,
         header: __('Apply online', 'accessnyc-program-detail'),
-        body: post.get_field(accordion),
+        body: '<span itemprop="description">' ~ post.get_field(accordion) ~ '</span>',
         cta: post.apply_online_call_to_action ? {
           target: '_blank',
           rel: 'noopener noreferrer',
@@ -45,12 +47,14 @@
       } %}
     {% endif %}
 
-    {% if accordion == 'field_58912c1a8a885' %}
+    {% if accordion == 'field_58912c1a8a885' %} {# mail #}
       {% set this = {
         id: accordion|replace({'_': '-'}),
+        itemprop: 'availableChannel',
+        itemtype: 'http://schema.org/ServiceChannel',
         active: loop.index == 1 ? true : false,
         header: __('Apply by mail', 'accessnyc-program-detail'),
-        body: post.get_field(accordion),
+        body: '<span itemprop="description">' ~ post.get_field(accordion) ~ '</span>',
         cta: post.apply_by_mail_call_to_action ? {
           target: '_blank',
           rel: 'noopener noreferrer',
@@ -60,22 +64,28 @@
       } %}
     {% endif %}
 
-    {% if accordion == 'field_58912c1a8a900' %}
+    {% if accordion == 'field_58912c1a8a900' %} {# phone #}
       {% set this = {
         id: accordion|replace({'_': '-'}),
+        itemprop: 'availableChannel',
+        itemtype: 'http://schema.org/ServiceChannel',
         active: loop.index == 1 ? true : false,
         header: __('Apply by phone', 'accessnyc-program-detail'),
-        body: post.get_field(accordion) ~ post.get_field('phone_numbers'),
+        body: (post.get_field(accordion) and post.get_field('phone_numbers')) ?
+          '<span itemprop="description">' ~ post.get_field(accordion) ~ '</span>' ~ '<span itemprop="servicePhone">' ~ post.get_field('phone_numbers') ~ '</span>' :
+          '<span itemprop="description">' ~ post.get_field(accordion) ~ '</span>',
         cta: false
       } %}
     {% endif %}
 
-    {% if accordion == 'field_58912c1a8a8cb' %}
+    {% if accordion == 'field_58912c1a8a8cb' %} {# in_person #}
       {% set this = {
         id: accordion|replace({'_': '-'}),
+        itemprop: 'availableChannel',
+        itemtype: 'http://schema.org/ServiceChannel',
         active: loop.index == 1 ? true : false,
         header: __('Apply in person', 'accessnyc-program-detail'),
-        body: post.get_field(accordion),
+        body: '<span itemprop="description">' ~ post.get_field(accordion) ~ '</span>',
         cta: (post.office_locations_url and post.apply_in_person_call_to_action) ? {
           target: '_blank',
           rel: 'noopener noreferrer',

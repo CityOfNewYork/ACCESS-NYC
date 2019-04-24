@@ -21,8 +21,11 @@ class OfficeMap {
    * @constructor
    */
   constructor(el) {
+    /** URL Parameters */
+    this._params = new URLSearchParams(window.location.search);
+
     /** @private {HTMLElement} The component element. */
-    this._el = el;
+    this._el = $(el);
 
     /** @private {HTMLElement} The map element. */
     this._mapEl = $(el).find(`.${OfficeMap.CssClass.MAP_BOX}`)[0];
@@ -43,12 +46,11 @@ class OfficeMap {
     this._initialized = false;
 
     /** @private {google.maps.LatLng} Map position. */
-    this._mapPosition = Utility.getUrlParameter('lat') &&
-        Utility.getUrlParameter('lng') ?
-        new google.maps.LatLng(parseFloat(Utility.getUrlParameter('lat')),
-            parseFloat(Utility.getUrlParameter('lng'))) :
-        new google.maps.LatLng(Utility.CONFIG.DEFAULT_LAT,
-            Utility.CONFIG.DEFAULT_LNG);
+    this._mapPosition = (this._params.get('lat') && this._params.get('lng')) ?
+      new google.maps.LatLng(parseFloat(this._params.get('lat')),
+          parseFloat(this._params.get('lng'))) :
+      new google.maps.LatLng(Utility.CONFIG.DEFAULT_LAT,
+          Utility.CONFIG.DEFAULT_LNG);
 
     /** @private {?google.maps.Map} The google map object. */
     this._map = new google.maps.Map(this._mapEl, {
@@ -56,8 +58,8 @@ class OfficeMap {
       center: this._mapPosition
     });
 
-    /** @private {google.maps.places.SearchBox} Search box controller. */
-    this._searchBox = new google.maps.places.SearchBox(this._searchEl);
+    /** @private {google.maps.places.Autocomplete} Search box controller. */
+    this._Autocomplete = new google.maps.places.Autocomplete(this._searchEl);
 
     /** @private {OfficeFilter} Program filter controller. */
     this._filter = new OfficeFilter(this._filterEl);
@@ -114,21 +116,30 @@ class OfficeMap {
       this.updateList().updateUrl();
     });
 
-    // Bias the SearchBox results towards current map's viewport when the map
-    // bounds change.
+    // Bias the Autocomplete's results towards current map's viewport when
+    // the map bounds change.
     this._map.addListener('bounds_changed', _.debounce(() => {
-      this._searchBox.setBounds(this._map.getBounds());
+      this._Autocomplete.setBounds(this._map.getBounds());
     }, 100));
+
+    // Avoid paying for data that you don't need by restricting the set of
+    // place fields that are returned to just the geometry components.
+    this._Autocomplete.setFields(['geometry']);
 
     // Attach handler for the autocomplete search box. This updates the map
     // position and re-sorts locations around that position.
-    this._searchBox.addListener('places_changed', () => {
-      const place = this._searchBox.getPlaces()[0];
+    this._Autocomplete.addListener('place_changed', () => {
+      const place = this._Autocomplete.getPlace();
+
       if (place) {
         this._mapPosition = place.geometry.location;
         this._map.panTo(this._mapPosition);
-        this.sortByDistance().clearLocations().updateUrl().updateList()
-            .updateUrl();
+        this.sortByDistance()
+          .clearLocations()
+          .updateUrl()
+          .updateList()
+          .updateUrl();
+
         $(this._searchEl).blur();
       }
     });
@@ -450,6 +461,7 @@ OfficeMap.CssClass = {
 };
 
 OfficeMap.Selectors = {
+  MAIN: '[data-js="google-maps-embed"]',
   MESSAGE_LOADING: '[data-js="message-loading"]',
   MESSAGE_NO_RESULTS: '[data-js="message-no-results"]'
 };

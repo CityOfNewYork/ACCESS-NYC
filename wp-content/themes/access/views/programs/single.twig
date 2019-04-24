@@ -1,24 +1,37 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main id="content" class="bg-color-white">
+  <main id="content" class="bg-color-white" itemscope itemtype="http://schema.org/GovernmentService">
     <p class="usa-grid m-0 pt-3 hidden print:block" aria-hidden="true">
       <strong>{{__('Get back to this page', 'accessnyc-program-detail')}}:</strong>
-      <a href="{{ post.get_permalink }}">{{ post.get_permalink | replace({'http://': ''})}}</a>
+      <a href="{{ post.get_permalink }}" itemprop="url">{{ post.get_permalink | replace({'http://': ''})}}</a>
     </p>
 
     <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
       <div class="c-header__icon">
+        <span class="hidden" aria-hidden="true" itemprop="serviceType">{{ category.name }}</span>
         {% include 'partials/category-icon.twig' %}
       </div>
 
       <div>
-        <h1 class="c-header__descriptor text-color-blue-dark">
-            {{ post.plain_language_program_name }}
+        <h1 class="c-header__descriptor text-color-blue-dark" itemprop="alternateName">
+          {{ post.plain_language_program_name }}
         </h1>
 
         <h2 class="c-header__information text-color-grey-mid mb-0">
-            {{ post.program_name }} {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}{% if post.government_agency | length %} | {{ post.government_agency }}{% endif %}
+          <span itemprop="name">
+            {{ post.program_name }}
+          </span>
+
+          {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}
+
+          {% if post.government_agency | length %} |
+          <span itemprop="serviceOperator" itemscope itemtype="http://schema.org/GovernmentOrganization">
+            <span itemprop="name">
+              {{ post.government_agency }}
+            </span>
+          </span>
+          {% endif %}
         </h2>
       </div>
     </header>
