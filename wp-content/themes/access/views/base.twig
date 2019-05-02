@@ -82,10 +82,12 @@
             </div>
 
             <nav class="o-navigation__nav nav-inline print:hidden" data-js="site-desktop-nav">{% spaceless %}
-              <a class="screen-desktop:hidden" href="#o-mobile-nav" data-js="toggle-nav">
+              <a class="screen-desktop:hidden overflow-hidden" href="#o-mobile-nav" data-js="toggle-nav">
                 {{__('Menu', 'accessnyctheme')}}
               </a>
-              {% include 'partials/nav.twig' with {this: {style: 'hidden screen-desktop:inline-block'}} %}
+
+              {% include 'partials/nav.twig' with {this: {style: 'hidden screen-desktop:inline-block overflow-hidden'}} %}
+
               <a class="td-inherit js-toggle-search overflow-hidden" href="#search">
                 <svg class="icon icon-ui-search">
                   <use xlink:href="#icon-ui-search"></use>
