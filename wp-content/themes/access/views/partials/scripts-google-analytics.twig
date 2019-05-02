@@ -4,6 +4,8 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', "{{ function('get_env', 'GOOGLE_ANALYTICS') }}");
+    gtag('config', "{{ function('get_env', 'GOOGLE_ANALYTICS_ID') }}"
+      {% if function('get_env', 'GOOGLE_OPTIMIZE_ID') != '' %}, {'optimize_id': "{{ function('get_env', 'GOOGLE_OPTIMIZE_ID') }}"}{% endif %}
+     );
   </script>
 {% endif  %}
