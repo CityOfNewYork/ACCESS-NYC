@@ -37,8 +37,11 @@ class ScreenerHousehold {
       /** @type {boolean} */
       livingShelter: false,
       /** @type {boolean} */
-      livingPreferNotToSay: false
+      livingPreferNotToSay: false,
+      /** @type {array} */
+      programCategories: []
     };
+
     if (obj) {
       this.set(obj);
     }
@@ -80,6 +83,9 @@ class ScreenerHousehold {
       } else if (key == 'livingRentalType' &&
           ScreenerHousehold.RENTAL_TYPE.indexOf(value) <= -1) {
         this._attrs[key] = '';
+      } else if (key === 'programCategories') {
+        this._attrs[key] = value
+          .filter(el => ScreenerHousehold.PROGRAM_CATEGORIES.includes(el));
       } else {
         this._attrs[key] = value;
       }
@@ -136,6 +142,24 @@ ScreenerHousehold.LIVING_ATTRS = [
   'livingHotel',
   'livingShelter',
   'livingPreferNotToSay'
+];
+
+/**
+ * Program Categories for the get help section.
+ * @type {Array}
+ */
+ScreenerHousehold.PROGRAM_CATEGORIES = [
+  'cash-expenses',
+  'child-care',
+  'city-id-card',
+  'education',
+  'enrichment',
+  'family-services',
+  'food',
+  'health',
+  'housing',
+  'people-with-disabilities',
+  'work'
 ];
 
 export default ScreenerHousehold;
