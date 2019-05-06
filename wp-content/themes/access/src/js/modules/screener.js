@@ -1313,7 +1313,8 @@ Screener.Selectors = {
   QUESTION_CONTAINER: '.c-question__container',
   TRANSACTION_LABEL: '[data-js="transaction-label"]',
   SPINNER: '[data-js="spinner"]',
-  VIEW: '[data-js="view"]'
+  VIEW: '[data-js="view"]',
+  FORM: '[data-js="screener"]'
 };
 
 /**
