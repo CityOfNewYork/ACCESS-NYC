@@ -188,7 +188,7 @@
     {{ function('enqueue_script', 'assets/js/main') }}
     {% endblock %}
 
-    {% set strings = [
+    {% include 'partials/strings.twig' with {'translation_id': 'accessnyctheme', 'strings': [
       {
         'label': 'This field is required.',
         'slug': 'VALID_REQUIRED'
@@ -229,14 +229,7 @@
         'label': 'This email address looks fake or invalid. Please enter a real email address.',
         'slug': 'ERR_INVALID_EMAIL'
       }
-    ] %}
-
-    <script type="text/javascript">
-      window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
-      window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
-        {% for s in strings %}{"label":{{ __(s.label, 'accessnyctheme') | trim | json_encode() }},"slug":{{ s.slug | trim | json_encode() }}}{% if not loop.last %},{% endif %}{% endfor %}
-      ]);
-    </script>
+    ]} only %}
 
     {{ wp_footer }}
   </body>

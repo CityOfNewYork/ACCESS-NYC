@@ -2,7 +2,10 @@
 // Core-js polyfills.
 // Core-js is made available as a dependency of @babel/preset-env
 import 'core-js/features/url-search-params';
+
 import OfficeMap from 'modules/office-map';
+
+import 'main';
 
 (function() {
   'use strict';

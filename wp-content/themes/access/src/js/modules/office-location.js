@@ -4,7 +4,7 @@
 import Utility from 'modules/utility';
 import _ from 'underscore';
 
-const google = window.google;
+/* eslint-disable no-undef */
 
 /**
  * OfficeLocation objects are used by the OfficeMap and help normalize the
@@ -103,6 +103,8 @@ class OfficeLocation {
     return result;
   }
 }
+
+/* eslint-enable no-undef */
 
 OfficeLocation.Marker = null;
 

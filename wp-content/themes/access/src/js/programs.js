@@ -23,6 +23,8 @@ import CardVue from 'components/card/card.vue';
 import FilterMultiVue from 'components/filter/filter-multi.vue';
 import WpArchiveVue from 'modules/wp-archive-vue';
 
+import 'main';
+
 ((window, Vue, $) => {
   'use strict';
 
