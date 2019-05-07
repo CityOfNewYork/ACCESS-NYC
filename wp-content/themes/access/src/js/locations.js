@@ -1,54 +1,48 @@
 /* eslint-env browser */
-import jQuery from 'jquery';
-import Utility from 'modules/utility';
+// Core-js polyfills.
+// Core-js is made available as a dependency of @babel/preset-env
+import 'core-js/features/url-search-params';
 import OfficeMap from 'modules/office-map';
-import StaticMap from 'modules/static-map';
 
-(function(window, $) {
+(function() {
   'use strict';
 
-  const google = window.google;
+  /**
+   * Main Locations Map
+   */
 
   // Initialize maps if present.
-  const $maps = $('.js-map');
+  let googleMapsEmbed = document
+    .querySelector(OfficeMap.Selectors.MAIN);
 
-  /**
-   * Callback function for loading the Google maps library.
-   */
-  function initializeMaps() {
-    $maps.each((i, el) => {
-      const map = new OfficeMap(el);
-      map.init();
-    });
-  }
+  // Initialize maps if present.
+  if (googleMapsEmbed && googleMapsEmbed.dataset.key) {
+    let callback = 'initializeMaps';
+    let script = document.createElement('script');
 
-  if ($maps.length > 0) {
-    const options = {
-      key: Utility.CONFIG.GOOGLE_API,
-      libraries: 'geometry,places'
+    // Loading the Google maps library.
+    window[callback] = () => {
+      new OfficeMap(googleMapsEmbed).init();
     };
 
-    google.load('maps', '3', {
-      /* eslint-disable camelcase */
-      other_params: $.param(options),
-      /* eslint-enable camelcase */
-      callback: initializeMaps
-    });
-  }
+    script.type = 'text/javascript';
+    script.src = [
+        'https://maps.googleapis.com/maps/api/js',
+        '?key=' + googleMapsEmbed.dataset.key,
+        '&callback=window.' + callback,
+        '&libraries=geometry,places'
+      ].join('');
 
-  // Initialize simple maps.
-  $('.js-static-map').each((i, el) => {
-    const staticMap = new StaticMap(el);
-    staticMap.init();
-  });
+    document.body.appendChild(script);
+  }
 
   // For location detail pages, this overwrites the link to the "back to map"
   // button if the previous page was the map. We want the user to return to
   // the previous state of the map (via the same URL) rather than simply going
   // back to the default map.
-  $('.js-location-back').each((i, el) => {
-    if (window.document.referrer.indexOf('/locations/?') >= 0) {
-      $(el).attr('href', window.document.referrer);
-    }
-  });
-})(window, jQuery);
+  // $('.js-location-back').each((i, el) => {
+  //   if (window.document.referrer.indexOf('/locations/?') >= 0) {
+  //     $(el).attr('href', window.document.referrer);
+  //   }
+  // });
+})();

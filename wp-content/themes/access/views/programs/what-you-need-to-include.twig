@@ -5,9 +5,9 @@
     </h3>
   </header>
 
-  {{ post.get_field('what_you_need_to_include_intro_text') }}
+  {{ post.get_field('field_589de18fca4e0') }} {# what_you_need_to_include_intro_text #}
 
-  {% for item in post.get_field('what_you_need_to_include') %}
+  {% for item in post.get_field('field_58912c1a8a9de') %} {# what_you_need_to_include #}
     {% include 'components/accordion.twig' with {
       this: {
         id: 'what-you-need-to-include-' ~ loop.index,

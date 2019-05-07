@@ -5,16 +5,17 @@
     </h3>
   </header>
 
-  <div class="type-exposition">
+  <div class="type-exposition" itemprop="description">
     {{ post.get_field('program_description') }}
   </div>
 
   {% if post.heads_up | length %}
-  <div id="how-it-works" class="c-checklist">
-    {{ post.get_field('heads_up') }}
+  <div id="how-it-works" class="c-checklist" itemprop="disambiguatingDescription">
+    {{ post.get_field('field_58912c1a8a81b') }} {# heads_up #}
   </div>
+
   <style>
-    {% for icon in post.get_field('heads_up_icons') %}
+    {% for icon in post.get_field('field_589d4b65ced1f') %} {# heads_up_icons #}
     #how-it-works.c-checklist > ul > li:nth-child({{ loop.index }}) {
       background-image: url({{ icon.icon.url }});
     }
@@ -42,19 +43,25 @@
 
   <div class="hidden print:block" aria-hidden="true">
     <h3>{{__('More ways to get help with this program', 'accessnyc-program-detail')}}</h3>
+
     <div>
       {# Gets all the current help method fields and creates an array to be iterated below #}
-      {% set helpMethods = [
+      {# {% for method in [
         'get_help_online',
         'get_help_by_email',
         'get_help_by_calling_311',
         'get_help_by_calling_other_than_311',
         'get_help_in_person'
+      ] %} #}
+      {% for method in [
+        'field_58912c1a8a996',
+        'field_58912c1a8a9a8',
+        'field_58912c1a8a9cb',
+        'field_58912c1a8a9ba',
+        'field_58912c1a8a984'
       ] %}
-
-      {% for method in helpMethods %}
       {% if post.get_field(method) %}
-      <div {# class="help-method-{{method}}" #}>
+      <div>
         {{ post.get_field(method) }}
       </div>
       {% endif %}
