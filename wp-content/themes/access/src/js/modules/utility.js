@@ -147,19 +147,17 @@ Utility.toDollarAmount = val =>
  * `slug` key whose value is some constant, and a `label` value which is the
  * translated equivalent. This function takes a slug name and returns the
  * label.
- * @param {string} slugName
+ * @param  {string} slug
  * @return {string} localized value
  */
-Utility.localize = function(slugName) {
-  let text = slugName || '';
-  const localizedStrings = window.LOCALIZED_STRINGS || [];
-  const match = _.findWhere(localizedStrings, {
-    slug: slugName
-  });
-  if (match) {
-    text = match.label;
-  }
-  return text;
+Utility.localize = function(slug) {
+  let text = slug || '';
+  let strings = window.LOCALIZED_STRINGS || [];
+  let match = strings.filter(
+    s => (s.hasOwnProperty('slug') && s['slug'] === slug) ? s : false);
+
+  return (match[0] && match[0].hasOwnProperty('label'))
+    ? match[0].label : text;
 };
 
 /**

@@ -5,6 +5,8 @@ import 'core-js/features/array/includes';
 
 import Screener from 'modules/screener';
 
+import 'main';
+
 (function() {
   'use strict';
 

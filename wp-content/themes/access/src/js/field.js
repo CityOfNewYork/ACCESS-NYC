@@ -14,6 +14,8 @@ import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
 import Accordion from 'components/accordion/accordion.common';
 
+import 'main';
+
 (function(window, $) {
   'use strict';
 
