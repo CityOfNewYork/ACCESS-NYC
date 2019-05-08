@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9563ec0cefaa95c6793f1af6d5bb68f6",
+    "content-hash": "b320661fb1df16c2cb772c846d0d409e",
     "packages": [
         {
             "name": "composer/installers",
@@ -1057,6 +1057,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/acf-to-rest-api/"
+        },
+        {
+            "name": "wpackagist-plugin/aryo-activity-log",
+            "version": "2.5.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/aryo-activity-log/",
+                "reference": "tags/2.5.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.2.5.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/aryo-activity-log/"
         },
         {
             "name": "wpackagist-plugin/better-search-replace",
