@@ -5,19 +5,21 @@
 {% endif %}
 <!DOCTYPE html>
 <html lang="{{ language_code }}"
-    {% if language_code == 'ar' or language_code =='ur' %}dir="rtl"{% endif %}
-    {% if is_print %}class="print-view"{% endif %}>
+  {% if language_code == 'ar' or language_code =='ur' %}dir="rtl"{% endif %}
+  {% if is_print %}class="print-view"{% endif %}>
+
   <head>
     {% block html_head_container %}
       {{ function('enqueue_language_style', 'style') }}
       {% include 'partials/html-header.twig' %}
+
       {% block head %}
       <meta name="theme-color" content="#FFFFFF">
       <link rel="manifest" href="{{theme.path}}/manifest.960190a2.json">
       {% endblock %}
+
       {% block scripts_head %}
-      {% include 'partials/scripts-field-segment.twig' %}
-      {% include 'partials/scripts-google-analytics.twig' %}
+      {% include 'partials/scripts-google-tags.twig' %}
       {% endblock %}
     {% endblock %}
   </head>

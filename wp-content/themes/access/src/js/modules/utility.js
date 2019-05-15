@@ -2,7 +2,6 @@
 'use strict';
 
 import $ from 'jquery';
-import _ from 'underscore';
 import Cleave from 'cleave.js/dist/cleave.min';
 import 'cleave.js/dist/addons/cleave-phone.us';
 
@@ -243,27 +242,28 @@ Utility.camelToUpper = function(str) {
 
 /**
  * Tracking function wrapper
- * @param  {string}     key  The key or event of the data
- * @param  {collection} data The data to track
- * @return {object}          The final data object
+ * @param  {string}     key   The key or event of the data
+ * @param  {collection} data  The data to track
+ * @param  {object}     event The original click event
+ * @return {object}           The final data object
  */
 Utility.track = function(key, data) {
   // Set the path name based on the location if 'DCS.dcsuri' exists
-  let dcsuri = _.pluck(data, 'DCS.dcsuri')[0];
+  let webtrends = data.find(e => e.hasOwnProperty('DCS.dcsuri'));
 
-  const d = (dcsuri) ? _.map(data, function(value) {
-      if (value.hasOwnProperty('DCS.dcsuri')) {
-        return {'DCS.dcsuri': `${window.location.pathname}${dcsuri}`};
-      } return value;
+  const d = (typeof webtrends != 'undefined') ? data.map(value => {
+      if (value.hasOwnProperty('DCS.dcsuri')) return {
+          'DCS.dcsuri': `${window.location.pathname}${webtrends['DCS.dcsuri']}`
+        };
+      return value;
     }) : data;
 
   /* eslint-disable no-undef */
   /** Webtrends */
-  if (typeof Webtrends !== 'undefined')
-    Utility.webtrends(key, d);
+  if (typeof Webtrends !== 'undefined') Utility.webtrends(key, d, event);
+
   /** Google Analytics */
-  if (typeof gtag !== 'undefined')
-    Utility.gtagClick(key, d);
+  if (typeof gtag !== 'undefined') Utility.gtagClick(key, d, event);
   /* eslint-enable no-undef */
 
   return d;
@@ -280,6 +280,7 @@ Utility.trackView = function(app, key, data) {
   /** Webtrends */
   if (typeof Webtrends !== 'undefined')
     Utility.webtrends(key, data);
+
   /** Google Analytics */
   if (typeof gtag !== 'undefined')
     Utility.gtagView(app, key, data);
@@ -288,25 +289,28 @@ Utility.trackView = function(app, key, data) {
 
 /**
  * Push Events to Webtrends
- * @param  {string}     key  The key or event of the data
- * @param  {collection} data The data to track
+ * @param  {string}     key   The key or event of the data
+ * @param  {collection} data  The data to track
  */
 Utility.webtrends = function(key, data) {
-  /* eslint-disable no-undef, no-console, no-debugger */
+  // eslint-disable-next-line no-undef
   if (typeof Webtrends === 'undefined') return;
+
   let prefix = {};
   prefix['WT.ti'] = key;
   data.unshift(prefix);
+
   // format data for Webtrends
   data = {
-    argsa: _.flatten(_.map(data, function(value) {
-      return _.pairs(value);
-    }))
+    argsa: data.flatMap(value => {
+      return Object.entries(value);
+    }).flat()
   };
-  Webtrends.multiTrack(data);
-  if (Utility.debug())
-    console.dir([`webtrends: multiTrack`, data]);
-  /* eslint-disable no-undef, no-console, no-debugger */
+
+  Webtrends.multiTrack(data); // eslint-disable-line no-undef
+
+  // eslint-disable-next-line no-console, no-debugger
+  if (Utility.debug()) console.dir(data);
 };
 
 /**
@@ -315,28 +319,26 @@ Utility.webtrends = function(key, data) {
  * @param  {collection} data The data to track
  */
 Utility.gtagClick = function(key, data) {
-  let uri = _.find(data, value => (value.hasOwnProperty('DCS.dcsuri')));
-  if (typeof uri === 'undefined') {
-    /* eslint-disable no-console, no-debugger */
-    if (Utility.debug()) {
-      console.warn([
-        'Click tracking for Webtrends and Google Analytics requires setting',
-        'the DCS.dcsuri parameter: {"DCS.dcsuri": "category/action"}'
-      ].join(' '));
-    }
-    /* eslint-enable no-console, no-debugger */
-    return;
-  }
-  let event = {
+  let params = {
     'event_category': key
   };
-  /* eslint-disable no-undef */
-  gtag('event', uri['DCS.dcsuri'], event);
-  /* eslint-enable no-undef */
-  /* eslint-disable no-console, no-debugger */
-  if (Utility.debug())
-    console.dir([`gtag: event, ${uri['DCS.dcsuri']}`, event]);
-  /* eslint-enable no-console, no-debugger */
+
+  let google = data.find(value => value.hasOwnProperty('action'));
+  let webtrends = data.find(value => value.hasOwnProperty('DCS.dcsuri'));
+  let action = false;
+
+  if (typeof webtrends != 'undefined')
+    action = webtrends['DCS.dcsuri'];
+
+  if (typeof google != 'undefined')
+    action = google['action'];
+
+  if (!action) return;
+
+  gtag('event', action, params); // eslint-disable-line no-undef
+
+  // eslint-disable-next-line no-console, no-debugger
+  if (Utility.debug()) console.dir(['event', action, params]);
 };
 
 /**
@@ -350,20 +352,18 @@ Utility.gtagView = function(app, key, data) {
     app_name: app,
     screen_name: key
   };
-  /* eslint-disable no-undef */
-  gtag('event', 'screen_view', view);
-  /* eslint-enable no-undef */
-  /* eslint-disable no-console, no-debugger */
-  if (Utility.debug())
-    console.dir([`gtag: event, screen_view`, view]);
-  /* eslint-enable no-console, no-debugger */
+
+  gtag('event', 'screen_view', view); // eslint-disable-line no-undef
+
+  // eslint-disable-next-line no-console, no-debugger
+  if (Utility.debug()) console.dir([`gtag: event, screen_view`, view]);
 };
 
 /**
  * Warnings to show for the environment
  */
 Utility.warnings = function() {
-  /* eslint-disable no-console, no-debugger */
+  /* eslint-disable no-undef, no-console, no-debugger */
   if (typeof Webtrends === 'undefined' && Utility.debug())
     console.warn(Utility.CONFIG.MSG_WT_NONCONFIG);
 
@@ -374,7 +374,7 @@ Utility.warnings = function() {
   /** Rollbar */
   if (typeof Rollbar === 'undefined' && Utility.debug())
     console.warn(Utility.CONFIG.MSG_ROLLBAR_NONCONFIG);
-  /* eslint-enable no-console, no-debugger */
+  /* eslint-enable no-undef, no-console, no-debugger */
 };
 
 /**
@@ -418,6 +418,7 @@ Utility.sessionTimeout = function(time, callback) {
  * @return {object}        The configured Rollbar method.
  */
 Utility.configErrorTracking = function(window) {
+  // eslint-disable-next-line no-undef
   if (typeof Rollbar === 'undefined') return false;
 
   let scripts = document.getElementsByTagName('script');
@@ -444,14 +445,17 @@ Utility.configErrorTracking = function(window) {
   };
 
   $(window).on('load', () => {
+    // eslint-disable-next-line no-undef
     let rollbarConfigure = Rollbar.configure(config);
     let msg = `Configured Rollbar with ${hash}`;
 
     if (Utility.debug()) {
+      // eslint-disable-next-line no-console
       console.dir({
         init: msg,
         settings: rollbarConfigure
-      }); // eslint-disable-line no-console
+      });
+
       Rollbar.debug(msg); // eslint-disable-line no-undef
     }
   });

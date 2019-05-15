@@ -3,8 +3,13 @@
 // Core-js is made available as a dependency of @babel/preset-env
 import 'core-js/features/promise';
 import 'core-js/features/array/for-each';
+import 'core-js/features/array/find';
+import 'core-js/features/array/flat';
+import 'core-js/features/array/flat-map';
+import 'core-js/features/array/map';
 import 'core-js/features/object/assign';
 import 'core-js/features/object/from-entries';
+import 'core-js/features/object/entries';
 
 // Fetch
 import 'whatwg-fetch';
@@ -69,13 +74,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 
   // Instantiate Newsletter Class
   let newsletter = document.querySelector(Newsletter.selector);
-  // let strings = Object.fromEntries([
-  //     'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED', 'VALID_EMAIL_INVALID',
-  //     'VALID_CHECKBOX_BOROUGH', 'SUCCESS_CONFIRM_EMAIL',
-  //     'ERR_PLEASE_TRY_LATER', 'ERR_PLEASE_ENTER_VALUE',
-  //     'ERR_TOO_MANY_RECENT', 'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL'
-  //   ].map(i => [i, Utility.localize(i)]));
-  // console.dir(strings);
+
   if (newsletter)
     new Newsletter(newsletter).strings(Object.fromEntries([
         'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED', 'VALID_EMAIL_INVALID',
@@ -89,11 +88,10 @@ import Newsletter from 'objects/newsletter/newsletter.common';
 
   // A basic click tracking function
   $body.on('click', '[data-js*="track"]', event => {
-    /* eslint-disable no-console, no-debugger */
     let key = event.currentTarget.dataset.trackKey;
     let data = JSON.parse(event.currentTarget.dataset.trackData);
-    Utility.track(key, data);
-    /* eslint-enable no-console, no-debugger */
+
+    Utility.track(key, data, event);
   });
 
   // Capture the queries on Search page
