@@ -248,25 +248,13 @@ Utility.camelToUpper = function(str) {
  * @return {object}           The final data object
  */
 Utility.track = function(key, data) {
-  // Set the path name based on the location if 'DCS.dcsuri' exists
-  let webtrends = data.find(e => e.hasOwnProperty('DCS.dcsuri'));
+  // eslint-disable-next-line no-undef
+  if (typeof Webtrends !== 'undefined') Utility.webtrends(key, data);
 
-  const d = (typeof webtrends != 'undefined') ? data.map(value => {
-      if (value.hasOwnProperty('DCS.dcsuri')) return {
-          'DCS.dcsuri': `${window.location.pathname}${webtrends['DCS.dcsuri']}`
-        };
-      return value;
-    }) : data;
+  // eslint-disable-next-line no-undef
+  if (typeof gtag !== 'undefined') Utility.gtagClick(key, data);
 
-  /* eslint-disable no-undef */
-  /** Webtrends */
-  if (typeof Webtrends !== 'undefined') Utility.webtrends(key, d, event);
-
-  /** Google Analytics */
-  if (typeof gtag !== 'undefined') Utility.gtagClick(key, d, event);
-  /* eslint-enable no-undef */
-
-  return d;
+  return data;
 };
 
 /**
@@ -276,15 +264,11 @@ Utility.track = function(key, data) {
  * @param  {collection} data The data to track
  */
 Utility.trackView = function(app, key, data) {
-  /* eslint-disable no-undef */
-  /** Webtrends */
-  if (typeof Webtrends !== 'undefined')
-    Utility.webtrends(key, data);
+  // eslint-disable-next-line no-undef
+  if (typeof Webtrends !== 'undefined') Utility.webtrends(key, data);
 
-  /** Google Analytics */
-  if (typeof gtag !== 'undefined')
-    Utility.gtagView(app, key, data);
-  /* eslint-enable no-undef */
+  // eslint-disable-next-line no-undef
+  if (typeof gtag !== 'undefined') Utility.gtagView(app, key, data);
 };
 
 /**
@@ -300,12 +284,21 @@ Utility.webtrends = function(key, data) {
   prefix['WT.ti'] = key;
   data.unshift(prefix);
 
-  // format data for Webtrends
+  // Format data for Webtrends
   data = {
     argsa: data.flatMap(value => {
       return Object.entries(value);
     }).flat()
   };
+
+  // If 'action' is used as the key (for gtag.js), switch it to Webtrends
+  let action = data.argsa.indexOf('action');
+  if (action) data.argsa[action] = 'DCS.dcsuri';
+
+  // Webtrends doesn't send the page view for MultiTrack, add path to url
+  let dcsuri = data.argsa.indexOf('DCS.dcsuri');
+  if (dcsuri)
+    data.argsa[dcsuri + 1] = window.location.pathname + data.argsa[dcsuri + 1];
 
   Webtrends.multiTrack(data); // eslint-disable-line no-undef
 

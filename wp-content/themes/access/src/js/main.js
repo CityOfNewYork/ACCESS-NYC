@@ -45,7 +45,7 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     'click',
     '.js-simple-toggle, [data-js="toggle"]', // use the data attr selector
     Utility.simpleToggle
-  ).on('click', '[data-js="toggle-nav"]', event => {
+  ).on('click', '[data-js*="toggle-nav"]', event => {
     let element = $(event.currentTarget);
     // Shows/hides the mobile nav and overlay.
     event.preventDefault();
