@@ -4,8 +4,6 @@
  * Dependencies
  ***************/
 
-import 'dotenv/config';
-
 /**
  * Utility Deps
  */
@@ -53,6 +51,7 @@ import svgstore from 'gulp-svgstore';
  ************/
 
 const NODE_ENV = process.env.NODE_ENV;
+const PROXY = process.env.PROXY;
 const DIST = 'assets';
 const SRC = 'src';
 const PATTERNS_SRC = 'node_modules/access-nyc-patterns/src';
@@ -293,7 +292,7 @@ gulp.task('default', () => {
 
   // Create a .env file in the theme directory to define this.
   browserSync.init({
-    proxy: process.env.WP_DEV_URL,
+    proxy: PROXY,
     port: 3001,
     ghostMode: {
       scroll: true
