@@ -12,17 +12,16 @@ import ResultsField from 'modules/results-field';
 import ShareForm from 'modules/share-form';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
+import Icons from 'elements/icons/icons.common';
 import Accordion from 'components/accordion/accordion.common';
-
-import 'main';
 
 (function(window, $) {
   'use strict';
 
   Utility.configErrorTracking(window);
 
-  // Get SVG sprite file.
-  $.get('/wp-content/themes/access/assets/svg/icons.svg', Utility.svgSprites);
+  // Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
+  new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
 
   let $body = $('body');
 

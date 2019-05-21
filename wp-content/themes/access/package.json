@@ -86,7 +86,6 @@
     "gulp-util": "^3.0.6",
     "terser-webpack-plugin": "^1.2.3",
     "vinyl-named": "^1.1.0",
-    "vue": "^2.6.9",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.9",
     "webpack-stream": "^5.2.1"
@@ -100,6 +99,7 @@
     "smoothscroll-polyfill": "^0.4.3",
     "underscore": "^1.8.3",
     "vee-validate": "^2.0.0-rc.18",
+    "vue": "^2.6.9",
     "whatwg-fetch": "^3.0.0"
   }
 }
