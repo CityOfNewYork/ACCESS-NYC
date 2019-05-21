@@ -80,12 +80,9 @@ class ScreenerHousehold {
     if (key in this._attrs && typeof this._attrs[key] === typeof value) {
       if (key === 'city' && value !== 'NYC') {
         this._attrs[key] = '';
-      } else if (key == 'livingRentalType' &&
+      } else if (key === 'livingRentalType' &&
           ScreenerHousehold.RENTAL_TYPE.indexOf(value) <= -1) {
         this._attrs[key] = '';
-      } else if (key === 'programCategories') {
-        this._attrs[key] = value
-          .filter(el => ScreenerHousehold.PROGRAM_CATEGORIES.includes(el));
       } else {
         this._attrs[key] = value;
       }
@@ -142,24 +139,6 @@ ScreenerHousehold.LIVING_ATTRS = [
   'livingHotel',
   'livingShelter',
   'livingPreferNotToSay'
-];
-
-/**
- * Program Categories for the get help section.
- * @type {Array}
- */
-ScreenerHousehold.PROGRAM_CATEGORIES = [
-  'cash-expenses',
-  'child-care',
-  'city-id-card',
-  'education',
-  'enrichment',
-  'family-services',
-  'food',
-  'health',
-  'housing',
-  'people-with-disabilities',
-  'work'
 ];
 
 export default ScreenerHousehold;
