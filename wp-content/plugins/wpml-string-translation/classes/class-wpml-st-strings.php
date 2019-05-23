@@ -13,15 +13,14 @@ class WPML_ST_Strings {
 	 */
 	private $wp_query;
 	/**
-	 * @var WPDB
+	 * @var wpdb
 	 */
 	private $wpdb;
 
-	public function __construct( &$sitepress, &$wpdb, &$wp_query ) {
-		$this->wpdb               = &$wpdb;
-		$this->sitepress          = &$sitepress;
-		$this->wp_query           = &$wp_query;
-		$this->sitepress_settings = $this->sitepress->get_settings();
+	public function __construct( $sitepress, $wpdb, $wp_query ) {
+		$this->wpdb      = $wpdb;
+		$this->sitepress = $sitepress;
+		$this->wp_query  = $wp_query;
 	}
 
 	public function get_string_translations() {
@@ -31,12 +30,13 @@ class WPML_ST_Strings {
 		$current_user_can_translate_strings = $this->sitepress->get_wp_helper()->current_user_can_translate_strings();
 		$user_lang_pairs                    = $this->sitepress->get_wp_helper()->get_user_language_pairs( $current_user );
 
-		$extra_cond = "";
+		$extra_cond = '';
 
-		$active_languages = null;
 		$language_code_aliases = null;
+		$active_languages      = $this->sitepress->get_active_languages();
+		$source_lang_code      = null;
+
 		if ( $current_user_can_translate_strings ) {
-			$active_languages = $this->sitepress->get_active_languages();
 			foreach ( $active_languages as $l ) {
 				$language_code_aliases[ $l['code'] ] = esc_sql( str_replace( '-', '', $l['code'] ) );
 			}
@@ -70,21 +70,21 @@ class WPML_ST_Strings {
 			$status_filter = isset( $_GET['status'] ) ? (int) $_GET['status']  : false;
 		}
 
-		$search_filter = isset( $_GET[ 'search' ] ) ? $_GET[ 'search' ] : false;
-		$exact_match   = isset( $_GET[ 'em' ] ) ? $_GET[ 'em' ] == 1 : false;
+		$translation_priority  = isset( $_GET[ 'translation-priority' ] ) ? $_GET[ 'translation-priority' ] : false;
 
 		if ( $status_filter !== false ) {
 			if ( $status_filter == ICL_TM_COMPLETE ) {
 				$extra_cond .= " AND s.status = " . ICL_TM_COMPLETE;
 			} elseif ( $status_filter != ICL_TM_WAITING_FOR_TRANSLATOR ) {
-				$extra_cond .= " AND status IN (" . ICL_STRING_TRANSLATION_PARTIAL . "," . ICL_TM_NEEDS_UPDATE . "," . ICL_TM_NOT_TRANSLATED . "," . ICL_TM_WAITING_FOR_TRANSLATOR . ")";
+				$extra_cond .= " AND s.status IN (" . ICL_STRING_TRANSLATION_PARTIAL . "," . ICL_TM_NEEDS_UPDATE . "," . ICL_TM_NOT_TRANSLATED . "," . ICL_TM_WAITING_FOR_TRANSLATOR . ")";
 			}
 		}
-		if ( $search_filter != false ) {
-			if ( $exact_match ) {
-				$extra_cond .= " AND s.value = '" . esc_sql( $search_filter ) . "' ";
-			} else {
-				$extra_cond .= " AND s.value LIKE '%" . esc_sql( $search_filter ) . "%' ";
+
+		if ( $translation_priority != false ) {
+			if( $translation_priority === __( 'Optional', 'sitepress' ) ){
+				$extra_cond .= " AND s.translation_priority IN ( '" . esc_sql( $translation_priority ) . "', '' ) ";
+			}else{
+				$extra_cond .= " AND s.translation_priority = '" . esc_sql( $translation_priority ) . "' ";
 			}
 		}
 
@@ -102,7 +102,7 @@ class WPML_ST_Strings {
 			$extra_cond .= " AND s.context = '" . esc_sql( $context ) . "'";
 		}
 
-		if ( isset( $_GET['show_results'] ) && $_GET['show_results'] == 'all' ) {
+		if ( $this->must_show_all_results() ) {
 			$limit  = 9999;
 			$offset = 0;
 		} else {
@@ -111,8 +111,13 @@ class WPML_ST_Strings {
 			$offset        = ( $_GET['paged'] - 1 ) * $limit;
 		}
 
+		$search_filter = $this->get_search_filter();
+
 		/* TRANSLATOR - START */
 		if ( $current_user_can_translate_strings ) {
+			if ( $search_filter ) {
+				$extra_cond .= ' AND ' . $this->get_original_value_filter_sql();
+			}
 
 			$_joins = $_sels = $_where = array();
 
@@ -135,14 +140,15 @@ class WPML_ST_Strings {
 							$_lwhere  = ' AND (';
 							foreach ( $active_languages as $l2 ) {
 								$l2code_alias = esc_sql( str_replace( '-', '', $l2['code'] ) );
-								$_lwheres[]   = $this->wpdb->prepare( " str_{$l2code_alias}.status = %d
-	                                                          OR str_{$l2code_alias}.translator_id = %d ", ICL_TM_WAITING_FOR_TRANSLATOR, $current_user->ID );
+								$_lwheres[]   = $this->wpdb->prepare( " ( str_{$l2code_alias}.status = %d
+	                                                          AND ( str_{$l2code_alias}.translator_id = %d OR str_{$l2code_alias}.translator_id IS NULL ) ) ", ICL_TM_WAITING_FOR_TRANSLATOR, $current_user->ID );
 							}
 							$_lwhere .= join( ' OR ', $_lwheres ) . ')';
 							$_where[] = $_lwhere;
 						}
 					}
 				}
+
 			}
 
 			$sql_query = empty( $status_filter_lang )
@@ -151,6 +157,7 @@ class WPML_ST_Strings {
 											AND (str_{$language_code_aliases[$status_filter_lang]}.translator_id IS NULL
 													OR str_{$language_code_aliases[$status_filter_lang]}.translator_id = %d)",
 					array( ICL_TM_WAITING_FOR_TRANSLATOR, $current_user->ID ) );
+
 			$res       = $this->get_results( $sql_query, $extra_cond, $offset, $limit, $_joins, $_sels );
 			if ( $res ) {
 				$string_translations = empty( $status_filter_lang )
@@ -159,11 +166,11 @@ class WPML_ST_Strings {
 			}
 			/* TRANSLATOR - END */
 		} else {
-			if ( $status_filter != ICL_TM_WAITING_FOR_TRANSLATOR ) {
-				$sql_query = " WHERE 1 ";
-			} else {
-				$sql_query = " JOIN {$this->wpdb->prefix}icl_string_translations str ON str.string_id = s.id
-	                           WHERE str.status = " . ICL_TM_WAITING_FOR_TRANSLATOR;
+			$sql_query = ' WHERE 1 ';
+			if ( $status_filter === ICL_TM_WAITING_FOR_TRANSLATOR ) {
+				$sql_query .= ' AND s.status = ' . ICL_TM_WAITING_FOR_TRANSLATOR;
+			} elseif ( $active_languages && $search_filter && ! $this->must_show_all_results() ) {
+				$sql_query = $this->get_value_search_query();
 			}
 			$res = $this->get_results( $sql_query, $extra_cond, $offset, $limit );
 
@@ -174,15 +181,17 @@ class WPML_ST_Strings {
 				}
 
 				foreach ( $res as $row ) {
-					$string_translations[ $row[ 'string_id' ] ] = $row;
-					$tr                                         = $this->wpdb->get_results( $this->wpdb->prepare( "
+					$string_translations[ $row['string_id'] ] = $row;
+
+					$tr = $this->wpdb->get_results( $this->wpdb->prepare( "
 	                    SELECT id, language, status, value, mo_string, translator_id, translation_date  
 	                    FROM {$this->wpdb->prefix}icl_string_translations 
 	                    WHERE string_id=%d {$extra_cond}
-	                ", $row[ 'string_id' ] ), ARRAY_A );
+	                ", $row['string_id'] ), ARRAY_A );
+
 					if ( $tr ) {
 						foreach ( $tr as $t ) {
-							$string_translations[ $row[ 'string_id' ] ][ 'translations' ][ $t[ 'language' ] ] = $t;
+							$string_translations[ $row['string_id'] ]['translations'][ $t['language'] ] = $t;
 						}
 					}
 				}
@@ -190,6 +199,71 @@ class WPML_ST_Strings {
 		}
 
 		return $string_translations;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function get_value_search_query() {
+		$language_where = array();
+
+		$search_context = $this->get_search_context_filter();
+		$sql_query      = " LEFT JOIN {$this->wpdb->prefix}icl_string_translations str ON str.string_id = s.id WHERE ";
+
+		$language_where[] = $this->get_original_value_filter_sql() . ' ';
+
+		if ( $search_context['translation'] ) {
+			$language_where[] = $this->get_translation_value_filter_sql() . ' ';
+		}
+		if ( $search_context['mo_string'] ) {
+			$language_where[] = $this->get_mo_file_value_filter_sql() . ' ';
+		}
+		$sql_query .= '(' . implode( ') OR (', $language_where ) . ')';
+
+		return $sql_query;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function get_original_value_filter_sql() {
+		return $this->get_column_filter_sql( 's.value', $this->get_search_filter(), $this->is_exact_match() );
+	}
+
+	/**
+	 * @return string
+	 */
+	private function get_translation_value_filter_sql() {
+		return $this->get_column_filter_sql( 'str.value', $this->get_search_filter(), $this->is_exact_match() );
+	}
+
+	/**
+	 * @return string
+	 */
+	private function get_mo_file_value_filter_sql() {
+		return $this->get_column_filter_sql( 'str.mo_string', $this->get_search_filter(), $this->is_exact_match() );
+	}
+
+	/**
+	 * @param string      $column
+	 * @param string|null $search_filter
+	 * @param bool|null   $exact_match
+	 *
+	 * @return string
+	 */
+	private function get_column_filter_sql( $column, $search_filter, $exact_match ) {
+		$pattern = '{column} LIKE \'%{value}%\'';
+		if ( $exact_match ) {
+			$pattern = '{column} = \'{value}\'';
+		}
+
+		return str_replace(
+			array( '{column}', '{value}' ),
+			array(
+				esc_sql( $column ),
+				esc_sql( $search_filter )
+			),
+			$pattern );
 	}
 
 	public function get_per_domain_counts( $status ) {
@@ -221,8 +295,8 @@ class WPML_ST_Strings {
 			}
 			$sql     = "
                 SELECT s.context, COUNT(s.context) AS c FROM {$this->wpdb->prefix}icl_strings s
-                " . join( "\n", $joins ) . "
-                WHERE 1 {$extra_cond}  AND TRIM(s.value) != ''
+                " . join( PHP_EOL, $joins ) . "
+                WHERE 1 {$extra_cond}  AND TRIM(s.value) <> ''
                 GROUP BY context
                 ORDER BY context ASC
             ";
@@ -231,7 +305,7 @@ class WPML_ST_Strings {
 			$results = $this->wpdb->get_results( "
             SELECT context, COUNT(context) AS c
             FROM {$this->wpdb->prefix}icl_strings s
-            WHERE 1 {$extra_cond} AND TRIM(s.value) != ''
+            WHERE 1 {$extra_cond} AND TRIM(s.value) <> ''
             GROUP BY context
             ORDER BY context ASC" );
 		}
@@ -270,6 +344,7 @@ class WPML_ST_Strings {
             ",
 				ICL_TM_WAITING_FOR_TRANSLATOR, $current_user->ID
 			) );
+			$_stats  = null;
 			foreach ( $results as $r ) {
 				$_stats[ $r->language ] = $r->c;
 			}
@@ -288,7 +363,12 @@ class WPML_ST_Strings {
 	}
 
 	private function get_results( $where_snippet, $extra_cond, $offset, $limit, $joins = array(), $selects = array() ) {
-		$res = $this->wpdb->get_results( $this->build_sql_start( $selects, $joins ) . $where_snippet . " {$extra_cond} " . $this->filter_empty_order_snippet( $offset, $limit ), ARRAY_A );
+		$query = $this->build_sql_start( $selects, $joins );
+		$query .= $where_snippet;
+		$query .= " {$extra_cond} ";
+		$query .= $this->filter_empty_order_snippet( $offset, $limit );
+
+		$res   = $this->wpdb->get_results( $query, ARRAY_A );
 		$this->set_pagination_counts( $limit );
 
 		return $res;
@@ -296,7 +376,7 @@ class WPML_ST_Strings {
 
 	private function filter_empty_order_snippet( $offset, $limit ) {
 
-		return " AND TRIM(s.value) != '' ORDER BY string_id DESC LIMIT {$offset},{$limit}";
+		return " AND TRIM(s.value) <> '' ORDER BY string_id DESC LIMIT {$offset},{$limit}";
 	}
 
 	private function set_pagination_counts( $limit ) {
@@ -384,8 +464,55 @@ class WPML_ST_Strings {
 	}
 
 	private function build_sql_start( $selects = array(), $joins = array() ) {
-		array_unshift( $selects, "SQL_CALC_FOUND_ROWS DISTINCT(s.id) AS string_id, s.language AS string_language, s.string_package_id, s.context, s.gettext_context, s.name, s.value, s.status AS status" );
+		array_unshift( $selects, "SQL_CALC_FOUND_ROWS DISTINCT(s.id) AS string_id, s.language AS string_language, s.string_package_id, s.context, s.gettext_context, s.name, s.value, s.status AS status, s.translation_priority" );
 
-		return "SELECT " . join( ', ', $selects ) . " FROM {$this->wpdb->prefix}icl_strings s " . join( "\n", $joins ) . " ";
+		return 'SELECT ' . implode( ', ', $selects ) . " FROM {$this->wpdb->prefix}icl_strings s " . implode( PHP_EOL, $joins ) . ' ';
 	}
+
+	/**
+	 * @return string|bool
+	 */
+	private function get_search_filter() {
+		if ( array_key_exists( 'search', $_GET ) ) {
+			return $_GET['search'];
+		}
+
+		return false;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function is_exact_match() {
+		if ( array_key_exists( 'em', $_GET ) ) {
+			return (int) $_GET['em'] === 1;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function get_search_context_filter() {
+		$result = array(
+			'original'    => true,
+			'translation' => false,
+			'mo_string'   => false,
+		);
+		if ( array_key_exists( 'search_translation', $_GET ) && ! $this->must_show_all_results() ) {
+			$result['translation'] = (bool) $_GET['search_translation'];
+			$result['mo_string']   = (bool) $_GET['search_translation'];
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function must_show_all_results() {
+		return isset( $_GET['show_results'] ) && $_GET['show_results'] === 'all';
+	}
+
 }

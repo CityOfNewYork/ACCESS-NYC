@@ -38,7 +38,7 @@ class WPML_ST_Upgrade_MO_Scanning implements IWPML_St_Upgrade_Command {
 		$sql = str_replace( 'PREFIX', $this->wpdb->prefix, self::$sql );
 		$sql = $this->wpdb->prepare(
 			$sql,
-			array( WPML_ST_MO_File::NOT_IMPORTED )
+			array( WPML_ST_Translations_File_Entry::NOT_IMPORTED )
 		);
 
 		$sql .= $this->get_charset_collate();

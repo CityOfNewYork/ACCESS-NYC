@@ -23,17 +23,17 @@ class WPML_End_User_Info_Site_Repository implements WPML_End_User_Info_Repositor
 	 * @return string
 	 */
 	private function get_site_base_url() {
-		return ( is_ssl() ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'];
+		return get_site_url();
 	}
 
 	/**
 	 * @return int
 	 */
 	private function get_client_id() {
-		return WP_Installer_API::get_ts_client_id( 'wpml' );
+		return WPML_Installer_Gateway::get_instance()->get_ts_client_id();
 	}
 
 	private function get_site_key() {
-		return WP_Installer_API::get_site_key( 'wpml' );
+		return WPML_Installer_Gateway::get_instance()->get_site_key();
 	}
 }

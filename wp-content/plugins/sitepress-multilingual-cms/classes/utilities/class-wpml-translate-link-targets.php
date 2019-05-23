@@ -40,4 +40,15 @@ class WPML_Translate_Link_Targets {
 		return $url != $absolute_url || $this->absolute_links->is_home( $url );
 	}
 
+	/**
+	 * @param string $url
+	 *
+	 * @return string
+	 */
+	public function convert_url( $url ) {
+		$link = '<a href="' . $url . '">removeit</a>';
+		$link = $this->convert_text( $link );
+		return str_replace( array( '<a href="', '">removeit</a>' ), array( '', '' ), $link );
+	}
+
 }

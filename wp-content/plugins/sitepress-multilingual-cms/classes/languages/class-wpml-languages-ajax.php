@@ -39,9 +39,10 @@ class WPML_Languages_AJAX {
 	public function set_active_languages_action() {
 		$failed = true;
 
-		$response                   = array();
+		$response = array();
 		if ( $this->validate_ajax_action() ) {
-			$old_active_languages_count = count( $this->sitepress->get_active_languages() );
+			$old_active_languages       = $this->sitepress->get_active_languages();
+			$old_active_languages_count = count( (array) $old_active_languages );
 			$lang_codes                 = filter_var( $_POST['languages'], FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
 			$setup_instance             = wpml_get_setup_instance();
 			if ( $lang_codes && $setup_instance->set_active_languages( $lang_codes ) ) {
@@ -49,7 +50,7 @@ class WPML_Languages_AJAX {
 				$html_response    = '';
 
 				foreach ( (array) $active_languages as $lang ) {
-					$is_default = ( $this->default_language === $lang['code'] );
+					$is_default    = ( $this->default_language === $lang['code'] );
 					$html_response .= '<li ';
 					if ( $is_default ) {
 						$html_response .= 'class="default_language"';
@@ -62,7 +63,7 @@ class WPML_Languages_AJAX {
 					if ( $is_default ) {
 						$html_response .= ' (' . __( 'default', 'sitepress' ) . ')';
 					}
-					$html_response .= '</label></li>';
+					$html_response                .= '</label></li>';
 					$response['enabledLanguages'] = $html_response;
 				}
 
@@ -78,6 +79,10 @@ class WPML_Languages_AJAX {
 					$wpml_languages_notices = new WPML_Languages_Notices( wpml_get_admin_notices() );
 					$wpml_languages_notices->maybe_create_notice_missing_menu_items( count( $lang_codes ) );
 					$wpml_languages_notices->missing_languages( $wpml_localization->get_not_founds() );
+
+					if ( class_exists( 'WPML_TM_Translation_Priorities' ) && $this->sitepress->is_setup_complete() ) {
+						WPML_TM_Translation_Priorities::insert_missing_default_terms();
+					}
 				}
 				$failed = false;
 			}
@@ -97,7 +102,7 @@ class WPML_Languages_AJAX {
 	}
 
 	public function set_default_language_action() {
-		$failed = true;
+		$failed   = true;
 		$response = array();
 
 		if ( $this->validate_ajax_action() ) {

@@ -95,4 +95,18 @@ abstract class WPML_URL_Converter_Abstract_Strategy implements IWPML_URL_Convert
 		return $source_url;
 	}
 
+	public function skip_convert_url_string( $source_url, $lang_code ) {
+		/**
+		 * Allows plugins to skip url conversion.
+		 *
+		 * @since 4.3
+		 *
+		 * @param bool
+		 * @param string $source_url
+		 * @param string $lang_code
+		 * @return bool
+		 */
+		return apply_filters( 'wpml_skip_convert_url_string', false, $source_url, $lang_code );
+	}
+
 }

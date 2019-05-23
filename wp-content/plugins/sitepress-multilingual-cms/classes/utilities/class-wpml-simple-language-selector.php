@@ -22,7 +22,7 @@ class WPML_Simple_Language_Selector extends WPML_SP_User {
 															'show_flags'         => true,
 															'languages'          => null,
 															'disabled'           => false,
-															'style'              => 'width:80%',
+															'style'              => '',
 														), $options );
 
 		if ( $options['languages'] ) {

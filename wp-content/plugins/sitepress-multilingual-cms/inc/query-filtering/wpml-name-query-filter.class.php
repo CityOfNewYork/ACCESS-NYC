@@ -61,7 +61,7 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 		$this->al_regexp        = $this->generate_al_regexp( $this->active_languages );
 		foreach ( $this->indexes as $index ) {
 			list( $pages_with_name, $page_name_for_query ) = $this->query_needs_adjustment( $page_query, $index );
-			if ( (bool) $pages_with_name === true ) {
+			if ( ! empty( $pages_with_name['matching_ids'] ) || ! empty( $pages_with_name['related_ids'] ) ) {
 				$pid = $this->select_best_match( $pages_with_name );
 				if ( isset( $pid ) ) {
 					if ( ! isset( $page_query->queried_object_id ) || $pid != $page_query->queried_object_id ) {
@@ -223,7 +223,7 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 			$cache->set( $cache_key, $pages_with_name );
 		}
 
-		return $pages_with_name;
+		return array( 'matching_ids' => $pages_with_name );
 	}
 
 	/**
@@ -266,11 +266,11 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 		$parent_slugs    = array_slice( $slugs, 0, - 1 );
 		$pages_with_name = $this->wpdb->get_results(
 			"   SELECT p.ID, p.post_name, p.post_parent, par.post_name as parent_name
-				" . $this->get_from_join_snippet() . "
-				LEFT JOIN {$this->wpdb->posts} par
-					ON par.ID = p.post_parent
-				" . $this->get_where_snippet() . " p.post_name IN (" . wpml_prepare_in( $slugs ) . ")
-				ORDER BY par.post_name IN (" . wpml_prepare_in( $parent_slugs ) . ") DESC"
+			" . $this->get_from_join_snippet() . "
+			LEFT JOIN {$this->wpdb->posts} par
+				ON par.ID = p.post_parent
+			" . $this->get_where_snippet() . " p.post_name IN (" . wpml_prepare_in( $slugs ) . ")
+			ORDER BY par.post_name IN (" . wpml_prepare_in( $parent_slugs ) . ") DESC"
 		);
 		$query_scorer = new WPML_Score_Hierarchy( $pages_with_name, $slugs );
 

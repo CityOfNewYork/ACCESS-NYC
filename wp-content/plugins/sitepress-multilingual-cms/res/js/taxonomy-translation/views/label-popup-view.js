@@ -53,6 +53,8 @@
 			var taxonomy = self.model.get("taxonomy");
 			var labels = TaxonomyTranslation.data.translatedTaxonomyLabels[self.lang];
 			var originalLabels = TaxonomyTranslation.data.translatedTaxonomyLabels[self.model.get('stDefaultLang')];
+			var slugTranslationEnabled = originalLabels['globalSlugTranslationEnabled']
+				&& self.model.get('showSlugTranslationField');
 
 			if (!labels) {
 				labels = {
@@ -68,8 +70,8 @@
 					source_lang: self.model.get('stDefaultLang'),
 					originalLabels: originalLabels,
 					translatedLabels: labels,
-					taxonomy: taxonomy
-
+					taxonomy: taxonomy,
+					slugTranslationEnabled: slugTranslationEnabled
 				})
 			);
 
@@ -90,7 +92,7 @@
 			var self = this,
 				translationsEntered = true;
 				
-			self.$el.find( '.js-translation' ).each( function () {
+			self.$el.find( '.js-required-translation' ).each( function () {
 				if ( jQuery( this ).val() === '' ) {
 					translationsEntered = false;
 				}
@@ -100,7 +102,7 @@
 		},
 
 		saveLabel: function (e) {
-			var singularValueField, pluralValueField, singularValue, pluralValue, self, inputPrefix;
+			var singularValueField, pluralValueField, slugValueField, singularValue, pluralValue, slugValue, self, inputPrefix;
 			self = this;
 
 			e.preventDefault();
@@ -108,10 +110,15 @@
 			inputPrefix = '#' + self.model.get("taxonomy") + '-';
 			singularValueField = self.$el.find(inputPrefix + 'singular');
 			pluralValueField = self.$el.find(inputPrefix + 'plural');
+			slugValueField = self.$el.find(inputPrefix + 'slug');
 
 			if (singularValueField.length > 0 && pluralValueField.length > 0) {
 				singularValue = singularValueField.val();
 				pluralValue = pluralValueField.val();
+			}
+
+			if (slugValueField.length > 0) {
+				slugValue = slugValueField.val();
 			}
 
 			if (singularValue && pluralValue) {
@@ -121,7 +128,7 @@
 				self.$el.find(".js-label-save").prop( 'disabled', true );
 				self.$el.find(".cancel").prop( 'disabled', true );
 
-				self.model.saveLabel(singularValue, pluralValue, self.lang);
+				self.model.saveLabel(singularValue, pluralValue, slugValue, self.lang);
 
 			}
 
@@ -137,6 +144,5 @@
 			
 			self.updateUI();
 		}
-		
 	});
 })(TaxonomyTranslation);

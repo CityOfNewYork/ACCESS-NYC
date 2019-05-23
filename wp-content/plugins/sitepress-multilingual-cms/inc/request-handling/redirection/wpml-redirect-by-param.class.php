@@ -74,20 +74,29 @@ class WPML_Redirect_By_Param extends WPML_Redirection {
 	 * @return bool|string
 	 */
 	private function needs_redirect( $query_params_string, $lang_code ) {
-		parse_str ( $query_params_string, $query_params );
-		if ( isset( $query_params[ 'lang' ] ) ) {
-			global $sitepress;
-			if ( $sitepress->get_default_language () === $query_params[ 'lang' ] ) {
-				unset( $query_params[ 'lang' ] );
+		global $sitepress;
+
+		$element_lang = false;
+		parse_str( $query_params_string, $query_params );
+		if ( isset( $query_params['lang'] ) ) {
+			if ( $sitepress->get_default_language() === $query_params['lang'] ) {
+				unset( $query_params['lang'] );
 				$changed = true;
+			}
+		} else {
+			$element_lang = $this->get_element_language( $query_params_string );
+			if ( $element_lang && $element_lang !== $sitepress->get_default_language() ) {
+				$query_params['lang'] = $element_lang;
+				$changed              = true;
 			}
 		}
 
-		if ( ( $potential_translation = $this->find_potential_translation ( $query_params, $lang_code ) ) !== false
-		     && (int) $query_params[ $potential_translation[ 0 ] ] !== (int) $potential_translation[ 1 ]
+		if ( ( $potential_translation = $this->find_potential_translation( $query_params, $lang_code ) ) !== false
+		     && (int) $query_params[ $potential_translation[0] ] !== (int) $potential_translation[1]
+		     && ! $element_lang
 		) {
-			$query_params[ $potential_translation[ 0 ] ] = $potential_translation[ 1 ];
-			$changed                                     = true;
+			$query_params[ $potential_translation[0] ] = $potential_translation[1];
+			$changed                                   = true;
 		}
 
 		return isset( $changed ) ? $query_params : false;
@@ -97,11 +106,50 @@ class WPML_Redirect_By_Param extends WPML_Redirection {
 		$raw_query_string = $this->request_handler->get_request_uri();
 		$qs_parts         = explode( '?', $raw_query_string );
 		$query_string     = array_pop( $qs_parts );
+
 		$query_params_new = $this->needs_redirect( $query_string,
 		                                           $this->url_converter->get_language_from_url( $raw_query_string )
 		);
 
 		return $query_params_new !== false ? rawurldecode( http_build_query( $query_params_new ) ) : false;
+	}
+
+	/**
+	 * @param string $query_params_string
+	 *
+	 * @return null|string
+	 */
+	private function get_element_language( $query_params_string ) {
+		$language = '';
+		list( $element_id, $element_type ) = $this->get_element_details( $query_params_string );
+
+		if ( $element_id && $element_type ) {
+			$language = $this->sitepress->get_language_for_element( $element_id, $element_type );
+		}
+
+		return $language;
+	}
+
+	/**
+	 * @param string $url
+	 *
+	 * @return array
+	 */
+	private function get_element_details( $url ) {
+		$element_id   = '';
+		$element_type = '';
+		parse_str( $url, $query_args );
+
+		if ( isset( $query_args['p'] ) ) {
+			$element_id   = $query_args['p'];
+			$element_type = 'post_' . get_post_type( $element_id );
+		} elseif ( isset( $query_args['cat'] ) ) {
+			$element_id   = $query_args['cat'];
+			$term         = get_term( $element_id );
+			$element_type = 'tax_' . $term->taxonomy;
+		}
+
+		return array( $element_id, $element_type );
 	}
 
 	/**

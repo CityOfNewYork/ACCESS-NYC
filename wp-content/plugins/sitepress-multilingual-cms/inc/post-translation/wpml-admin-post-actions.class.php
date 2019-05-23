@@ -8,6 +8,13 @@
  */
 class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 
+	const DUPLICATE_MEDIA_META_KEY = '_wpml_media_duplicate';
+	const DUPLICATE_FEATURED_META_KEY = '_wpml_media_featured';
+	const DUPLICATE_MEDIA_GLOBAL_KEY = 'duplicate_media';
+	const DUPLICATE_FEATURED_GLOBAL_KEY = 'duplicate_media';
+
+	private $http_referer;
+
 	public function init() {
 		parent::init ();
 		if ( $this->is_setup_complete() ) {
@@ -18,27 +25,37 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 	}
 
 	/**
-	 * @param Integer $post_id
-	 * @param String $post_status
+	 * @param int    $post_id
+	 * @param string $post_status
+	 *
 	 * @return null|int
 	 */
 	function get_save_post_trid( $post_id, $post_status ) {
 		$trid = $this->get_element_trid( $post_id );
-		$trid = $trid ? $trid : filter_var( isset( $_POST['icl_trid'] ) ? $_POST['icl_trid'] : '', FILTER_SANITIZE_NUMBER_INT );
-		$trid = $trid ? $trid : filter_var( isset( $_GET['trid'] ) ? $_GET['trid'] : '', FILTER_SANITIZE_NUMBER_INT );
-		$trid = $trid ? $trid : $this->get_trid_from_referer();
+
+		if ( ! $this->is_inner_post_insertion() ) {
+			$trid = $trid ? $trid : filter_var( isset( $_POST['icl_trid'] ) ? $_POST['icl_trid'] : '', FILTER_SANITIZE_NUMBER_INT );
+			$trid = $trid ? $trid : filter_var( isset( $_GET['trid'] ) ? $_GET['trid'] : '', FILTER_SANITIZE_NUMBER_INT );
+			$trid = $trid ? $trid : $this->get_trid_from_referer();
+		}
+
 		$trid = apply_filters( 'wpml_save_post_trid_value', $trid, $post_status );
 
 		return $trid;
 	}
 
+	/**
+	 * @param int     $post_id
+	 * @param WP_Post $post
+	 */
 	public function save_post_actions( $post_id, $post ) {
 		global $sitepress;
 
 		wp_defer_term_counting( true );
 		$post = isset( $post ) ? $post : get_post( $post_id );
 		// exceptions
-		if ( ! $this->has_save_post_action( $post ) ) {
+		$http_referer = $this->get_http_referer();
+		if ( ! $this->has_save_post_action( $post ) && ! $http_referer->is_rest_request_called_from_post_edit_page() ) {
 			wp_defer_term_counting( false );
 
 			return;
@@ -52,12 +69,7 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		}
 
 		$default_language = $sitepress->get_default_language();
-		$post_vars        = (array) $_POST;
-		foreach ( (array) $post as $k => $v ) {
-			$post_vars[ $k ] = $v;
-		}
-
-		$post_vars['post_type'] = isset( $post_vars['post_type'] ) ? $post_vars['post_type'] : $post->post_type;
+		$post_vars        = $this->get_post_vars( $post );
 
 		if ( isset( $post_vars['action'] ) && $post_vars['action'] === 'post-quickpress-publish' ) {
 			$language_code = $default_language;
@@ -103,7 +115,72 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		}
 		$save_filter_action_state = new WPML_WP_Filter_State( 'save_post' );
 		$this->after_save_post( $trid, $post_vars, $language_code, $source_language );
+		$this->save_media_options( $post_id, $source_language );
 		$save_filter_action_state->restore();
+	}
+
+	/**
+	 * @param int         $post_id
+	 * @param string|null $source_language
+	 */
+	private function save_media_options( $post_id, $source_language  ) {
+
+		if ( $this->has_post_media_options_metabox() ) {
+			$original_post_id = isset( $_POST['icl_translation_of'] )
+				? filter_var( $_POST['icl_translation_of'], FILTER_SANITIZE_NUMBER_INT ) : $post_id;
+			$duplicate_media = isset( $_POST['wpml_duplicate_media'] )
+				? filter_var( $_POST['wpml_duplicate_media'], FILTER_SANITIZE_NUMBER_INT ) : false;
+			$duplicate_featured = isset( $_POST['wpml_duplicate_featured'] )
+				? filter_var( $_POST['wpml_duplicate_featured'], FILTER_SANITIZE_NUMBER_INT ) : false;
+
+			update_post_meta( $original_post_id, self::DUPLICATE_MEDIA_META_KEY, (int) $duplicate_media );
+			update_post_meta( $original_post_id, self::DUPLICATE_FEATURED_META_KEY, (int) $duplicate_featured );
+		} else {
+			$this->sync_media_options_with_original_or_global_settings( $post_id, $source_language );
+		}
+	}
+
+	private function has_post_media_options_metabox() {
+		return array_key_exists( WPML_Meta_Boxes_Post_Edit_HTML::FLAG_HAS_MEDIA_OPTIONS, $_POST );
+	}
+
+	/**
+	 * @param int         $post_id
+	 * @param string|null $source_language
+	 */
+	private function sync_media_options_with_original_or_global_settings( $post_id, $source_language ) {
+		global $sitepress;
+
+		$source_post_id = $sitepress->get_object_id( $post_id, get_post_type( $post_id ), false, $source_language );
+		$is_translation = $source_post_id && $source_post_id !== $post_id;
+
+		foreach (
+			array(
+				self::DUPLICATE_FEATURED_META_KEY => self::DUPLICATE_FEATURED_GLOBAL_KEY,
+				self::DUPLICATE_MEDIA_META_KEY    => self::DUPLICATE_MEDIA_GLOBAL_KEY,
+			) as $meta_key => $global_key
+		) {
+
+			$source_value = get_post_meta( $source_post_id, $meta_key, true );
+
+			if ( '' === $source_value ) {
+				// fallback to global setting
+				$media_options = get_option( '_wpml_media', array() );
+
+				if ( isset( $media_options['new_content_settings'][ $global_key ] ) ) {
+					$source_value = (int) $media_options['new_content_settings'][ $global_key ];
+
+					if ( $source_post_id ) {
+						update_post_meta( $source_post_id, $meta_key, $source_value );
+					}
+				}
+			}
+
+			if ( '' !== $source_value && $is_translation ) {
+				update_post_meta( $post_id, $meta_key, $source_value );
+			}
+		}
+
 	}
 
 	private function has_invalid_language_details_on_heartbeat() {
@@ -127,9 +204,12 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 	 * @return null|string
 	 */
 	public function get_save_post_lang( $post_id, $sitepress ) {
-		$language_code = filter_var(
-			( isset( $_POST['icl_post_language'] ) ? $_POST['icl_post_language'] : '' ),
-			FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		$language_code = null;
+		if ( isset( $_POST['post_ID'] ) && (int) $_POST['post_ID'] === (int) $post_id ) {
+			$language_code = filter_var(
+				( isset( $_POST['icl_post_language'] ) ? $_POST['icl_post_language'] : '' ),
+				FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		}
 		$language_code = $language_code
 			? $language_code
 			: filter_input(
@@ -178,20 +258,16 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 	}
 
 	public function get_trid_from_referer() {
-		if ( isset( $_SERVER[ 'HTTP_REFERER' ] ) ) {
-			$query = wpml_parse_url ( $_SERVER[ 'HTTP_REFERER' ], PHP_URL_QUERY );
-			parse_str ( $query, $vars );
+		$http_referer = $this->get_http_referer();
+		return $http_referer->get_trid();
+	}
+
+	private function get_http_referer() {
+		if ( ! $this->http_referer ) {
+			$factory = new WPML_URL_HTTP_Referer_Factory();
+			$this->http_referer = $factory->create();
 		}
 
-		if ( isset( $_SERVER[ 'REQUEST_URI' ] ) ) {
-			$request_uri = wpml_parse_url( $_SERVER[ 'REQUEST_URI' ], PHP_URL_QUERY );
-			parse_str( $request_uri, $request_uri_vars );
-		}
-
-		/**
-		 * trid from `HTTP_REFERER` should be return only if `REQUEST_URI` also has trid set.
-		 * @link https://onthegosystems.myjetbrains.com/youtrack/issue/wpmltm-1351
-		 */
-		return isset( $vars[ 'trid' ] ) && isset( $request_uri_vars['trid'] ) ? filter_var ( $vars[ 'trid' ], FILTER_SANITIZE_NUMBER_INT ) : false;
+		return $this->http_referer;
 	}
 }

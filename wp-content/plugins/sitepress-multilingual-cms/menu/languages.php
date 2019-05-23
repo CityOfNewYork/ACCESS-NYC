@@ -25,9 +25,10 @@
 		$icl_edit_languages = new SitePress_EditLanguages( $flags_factory->create() );
 		$icl_edit_languages->render();
 		return;
-	}
+		}
 
 	$sitepress_settings                 = get_option( 'icl_sitepress_settings' );
+	$setup_wizard_step                  = (int) $sitepress->get_setting( 'setup_wizard_step' );
 	$setup_complete                     = $sitepress->get_setting( 'setup_complete' );
 	$active_languages                   = $sitepress->get_active_languages();
 	$hidden_languages                   = $sitepress->get_setting( 'hidden_languages' );
@@ -35,16 +36,16 @@
 	$automatic_redirect                 = $sitepress->get_setting( 'automatic_redirect' );
 	$setting_urls                       = $sitepress->get_setting( 'urls' );
 	$existing_content_language_verified = $sitepress->get_setting( 'existing_content_language_verified' );
-	$setup_wizard_step                  = $sitepress->get_setting( 'setup_wizard_step' );
 	$language_negotiation_type          = $sitepress->get_setting( 'language_negotiation_type' );
-	$seo                        = $sitepress->get_setting( 'seo' );
-	$default_language           = $sitepress->get_default_language();
-	$all_languages              = $sitepress->get_languages( $sitepress->get_admin_language() );
-	$sample_lang                = false;
-	$default_language_details   = false;
-	$wp_api                     = $sitepress->get_wp_api();
-	$should_hide_admin_language = $wp_api->version_compare_naked( get_bloginfo( 'version' ), '4.7', '>=' );
-    $encryptor                  = new WPML_Data_Encryptor();
+	$seo                                = $sitepress->get_setting( 'seo' );
+	$default_language                   = $sitepress->get_default_language();
+	$all_languages                      = $sitepress->get_languages( $sitepress->get_admin_language() );
+	$sample_lang                        = false;
+	$default_language_details           = false;
+	$wp_api                             = $sitepress->get_wp_api();
+	$should_hide_admin_language         = $wp_api->version_compare_naked( get_bloginfo( 'version' ), '4.7', '>=' );
+	$encryptor                          = new WPML_Data_Encryptor();
+	$inactive_content                   = null;
 
 	if(!$existing_content_language_verified ){
 		// try to determine the blog language
@@ -78,7 +79,7 @@
 			}
 		}
 		$default_language_details = $sitepress->get_language_details( $default_language );
-		$inactive_content = $sitepress->get_inactive_content();
+		$inactive_content         = new WPML_Inactive_Content( $wpdb, $sitepress->get_current_language() );
 	}
 global $language_switcher_defaults, $language_switcher_defaults_alt;
 
@@ -93,22 +94,25 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 	<h2><?php esc_html_e( 'Setup WPML', 'sitepress' ) ?></h2>
 
 	<?php
+  $compatibility_reports_args = array(
+	  'plugin_name'        => 'WPML',
+	  'plugin_uri'         => 'http://wpml.org',
+	  'plugin_site'        => 'wpml.org',
+	  'use_styles'         => true,
+	  'privacy_policy_url' => 'https://wpml.org/documentation/privacy-policy-and-gdpr-compliance/?utm_source=wpmlplugin&utm_campaign=compatibility-reporting&utm_medium=wpml-setup&utm_term=privacy-policy-and-gdpr-compliance',
+	  'plugin_repository'  => 'wpml',
+  );
 
-	if( empty( $setup_complete ) ){ /* setup wizard */
-
-			if(!$existing_content_language_verified ){
-				$sw_width = 25;
-			}elseif(count($sitepress->get_active_languages()) < 2 || $setup_wizard_step == 2){
-				$sw_width = 50;
-			}elseif($setup_wizard_step == 3){
-				$sw_width = 75;
-			}else{
-				$sw_width = 90;
-			}
-
-			include WPML_PLUGIN_PATH . '/menu/setup/setup_001.php';
-
-	} /* setup wizard */
+  if ( ! $sitepress->is_setup_complete() ) {
+	  $wizard_progress = new WPML_Setup_Wizard_Progress( $setup_wizard_step, array(
+		  1 => __( '1. Content language', 'sitepress' ),
+		  2 => __( '2. Translation languages', 'sitepress' ),
+		  3 => __( '3. Language switcher', 'sitepress' ),
+		  4 => __( '4. Compatibility', 'sitepress' ),
+		  5 => __( '5. Registration', 'sitepress' ),
+	  ) );
+	  $wizard_progress->render();
+  }
 
 	if ( ! $existing_content_language_verified || $setup_wizard_step <= 1 ): ?>
 		<?php
@@ -118,22 +122,23 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 	<?php else: ?>
 		<?php
 		if(!empty( $setup_complete ) || $setup_wizard_step == 2): ?>
-			<?php if(!empty( $setup_complete ) && (count($active_languages) > 1)): ?>
+		<?php if ( count( $active_languages ) > 1 ): ?>
 				<p>
 					<strong><?php esc_html_e( 'This screen contains the language settings for your site.', 'sitepress' ) ?></strong>
 				</p>
 				<ul class="wpml-navigation-links js-wpml-navigation-links">
 					<?php
 					$navigation_items = array(
-						'#lang-sec-1'   =>  __('Site Languages','sitepress'),
-						'#lang-sec-2'   =>  __('Language URL format','sitepress'),
-						'#lang-sec-4'   =>  __('Admin language','sitepress'),
-						'#lang-sec-7'   =>  __('Hide languages','sitepress'),
-						'#lang-sec-8'   =>  __('Make themes work multilingual','sitepress'),
-						'#lang-sec-9'   =>  __('Browser language redirect','sitepress'),
-						'#lang-sec-9-5' =>  __('SEO Options','sitepress'),
-						'#cookie'       =>  __('Language filtering for AJAX operations', 'sitepress'),
-						'#lang-sec-10'  =>  __('WPML love','sitepress'),
+						'#lang-sec-11'  => __( 'Theme and plugins reporting', 'sitepress' ),
+						'#lang-sec-1'   => __( 'Site Languages', 'sitepress' ),
+						'#lang-sec-2'   => __( 'Language URL format', 'sitepress' ),
+						'#lang-sec-4'   => __( 'Admin language', 'sitepress' ),
+						'#lang-sec-7'   => __( 'Hide languages', 'sitepress' ),
+						'#lang-sec-8'   => __( 'Make themes work multilingual', 'sitepress' ),
+						'#lang-sec-9'   => __( 'Browser language redirect', 'sitepress' ),
+						'#lang-sec-9-5' => __( 'SEO Options', 'sitepress' ),
+						'#cookie'       => __( 'Language filtering for AJAX operations', 'sitepress' ),
+						'#lang-sec-10'  => __( 'WPML love', 'sitepress' ),
 					);
 
 					if( $should_hide_admin_language && array_key_exists( '#lang-sec-4', $navigation_items ) ) {
@@ -152,6 +157,27 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 				</ul>
 			<?php endif; ?>
 
+		<?php
+		if ( $setup_complete ) {
+			?>
+					<div class="wpml-section wpml-section-wpml-theme-and-plugins-reporting" id="lang-sec-11">
+						<div class="wpml-section-header">
+							<h3><?php esc_html_e( 'Reporting to wpml.org', 'sitepress' ) ?></h3>
+						</div>
+						<div class="wpml-section-content">
+				<?php
+				$compatibility_reports_after_setup_args                   = $compatibility_reports_args;
+				$compatibility_reports_after_setup_args['custom_heading'] = '';
+				$compatibility_reports_after_setup_args['use_radio']      = false;
+
+				do_action( 'otgs_installer_render_local_components_setting', $compatibility_reports_after_setup_args );
+				?>
+						</div>
+					</div>
+			<?php
+		}
+		?>
+
 			<div id="lang-sec-1" class="wpml-section wpml-section-languages">
 				<div class="wpml-section-header">
 					<h3><?php _e('Site Languages', 'sitepress') ?></h3>
@@ -161,6 +187,9 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 					<div class="wpml-section-content-inner">
 						<?php if(!empty( $setup_complete )): ?>
 							<h4><?php _e('These languages are enabled for this site:','sitepress'); ?></h4>
+
+							<?php do_action( 'wpml_before_active_languages_display' ); ?>
+
 							<ul id="icl_enabled_languages" class="enabled-languages">
 									<?php foreach($active_languages as $lang): $is_default = ( $default_language ==$lang['code']); ?>
 									<?php
@@ -182,6 +211,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 								</li>
 								<?php endforeach ?>
 							</ul>
+						<?php do_action( 'wpml_after_active_languages_display' ); ?>
 						<?php else: ?>
 							<p class="wpml-wizard-instruction">
                                 <?php esc_html_e( 'Select the languages to enable for your site (you can also add and remove languages later).', 'sitepress' ) ?>
@@ -219,7 +249,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 										<label for="wpml-language-<?php echo $lang['code'] ?>">
 											<input type="checkbox" id="wpml-language-<?php echo esc_attr( $lang['code'] ) ?>"
                                                    value="<?php echo esc_attr( $lang['code'] ) ?>" <?php echo $checked . ' ' . $disabled; ?>/>
-											<img src="<?php echo $sitepress->get_flag_url( $lang['code'] ) ?>" width=18" height="12">
+											<img src="<?php echo $sitepress->get_flag_url( $lang['code'] ) ?>" width="18" height="12">
 											<?php echo esc_html( $lang['display_name'] ) ?>
 										</label>
 									</li>
@@ -247,83 +277,16 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 						<?php endif; ?>
 					</div> <!-- wpml-section-content-inner -->
 
-
-					<?php if( !empty($inactive_content) ): ?>
+					<?php if ( $setup_complete && $inactive_content && $inactive_content->has_entries() ) : ?>
 						<div class="wpml-section-content-inner">
 							<?php
-							$inactive_content_data   = array();
-							$inactive_content_totals = array(
-								'post'     => 0,
-								'page'     => 0,
-								'category' => 0,
-								'post_tag' => 0,
+							$render_inactive_content = new WPML_Inactive_Content_Render(
+								$inactive_content,
+								array( WPML_PLUGIN_PATH . '/templates/languages/' )
 							);
-							$t_posts                 = $t_pages = $t_cats = $t_tags = 0;
-							foreach ( $inactive_content as $language => $ic ) {
-								$inactive_content_data[ $language ] = array(
-									'post'     => 0,
-									'page'     => 0,
-									'category' => 0,
-									'post_tag' => 0,
-								);
 
-								if ( array_key_exists( 'post', $ic ) ) {
-									$inactive_content_data[ $language ]['post'] += (int) $ic['post'];
-									$inactive_content_totals['post'] += (int) $ic['post'];
-								}
-								if ( array_key_exists( 'page', $ic ) ) {
-									$inactive_content_data[ $language ]['page'] += (int) $ic['page'];
-									$inactive_content_totals['page'] += (int) $ic['page'];
-								}
-								if ( array_key_exists( 'category', $ic ) ) {
-									$inactive_content_data[ $language ]['category'] += (int) $ic['category'];
-									$inactive_content_totals['category'] += (int) $ic['category'];
-								}
-								if ( array_key_exists( 'post_tag', $ic ) ) {
-									$inactive_content_data[ $language ]['post_tag'] += (int) $ic['post_tag'];
-									$inactive_content_totals['post_tag'] += (int) $ic['post_tag'];
-								}
-							}
+							echo $render_inactive_content->render();
 							?>
-							<h4><?php esc_html_e( 'Inactive content', 'sitepress' ) ?></h4>
-							<p class="explanation-text"><?php esc_html_e( 'In order to edit or delete these you need to activate the corresponding language first', 'sitepress' ) ?></p>
-							<table class="widefat inactive-content-table">
-								<thead>
-									<tr>
-										<th><?php esc_html_e( 'Language', 'sitepress' ) ?></th>
-										<th><?php esc_html_e( 'Posts', 'sitepress' ) ?></th>
-										<th><?php esc_html_e( 'Pages', 'sitepress' ) ?></th>
-										<th><?php esc_html_e( 'Categories', 'sitepress' ) ?></th>
-										<th><?php esc_html_e( 'Tags', 'sitepress' ) ?></th>
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th><?php esc_html_e( 'Total', 'sitepress' ) ?></th>
-										<?php
-										foreach ( $inactive_content_totals as $count ) {
-											?>
-											<th><?php echo $count ?></th>
-											<?php
-										}
-										?>
-									</tr>
-								</tfoot>
-								<tbody>
-								<?php foreach ( $inactive_content_data as $language => $inactive_content_counts ): ?>
-										<tr>
-											<th><?php echo $language ?></th>
-											<?php
-											foreach ( $inactive_content_counts as $count ) {
-												?>
-												<th><?php echo $count ?></th>
-												<?php
-											}
-											?>
-										</tr>
-									<?php endforeach; ?>
-								</tbody>
-							</table>
 						</div> <!-- wpml-section-content-inner -->
 					<?php endif; ?>
 
@@ -340,8 +303,42 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 				</div> <!-- .wcml-section-content -->
 			</div> <!-- .wpml-section-languages -->
 
-		<?php
-		elseif($setup_wizard_step == 4): ?>
+	<?php elseif ( $setup_wizard_step === 4 ): ?>
+
+			<div class="wpml-section wpml-section-wpml-theme-and-plugins-reporting" id="lang-sec-compatibility">
+				<div class="wpml-section-header">
+					<h3>
+			  <?php esc_html_e( 'Compatibility reporting', 'sitepress' ); ?>
+					</h3>
+				</div>
+				<div class="wpml-section-content">
+					<p class="wpml-wizard-instruction">
+			  <?php esc_html_e( 'The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.',
+			                    'sitepress' ); ?>
+					</p>
+			<?php
+			$compatibility_reports_before_setup_args              = $compatibility_reports_args;
+			$compatibility_reports_before_setup_args['use_radio'] = true;
+			do_action( 'otgs_installer_render_local_components_setting', $compatibility_reports_before_setup_args );
+			?>
+				</div>
+
+				<footer class="clearfix text-right">
+					<input id="icl_setup_back_3"
+					       class="button-secondary alignleft"
+					       name="save"
+					       value="<?php esc_attr_e( 'Back', 'sitepress' ) ?>"
+					       type="button"/>
+			<?php wp_nonce_field( 'setup_got_to_step3_nonce', '_icl_nonce_gts3' ); ?>
+					<input id="icl_setup_next_5" class="button-primary alignright" name="save"
+					       value="<?php esc_attr_e( 'Next', 'sitepress' ) ?>" type="button"
+					/>
+			<?php wp_nonce_field( 'setup_got_to_step5_nonce', '_icl_nonce_gts5' ); ?>
+				</footer>
+			</div>
+
+	<?php
+		elseif ( $setup_wizard_step === 5 ): ?>
 		<?php $site_key = WP_Installer()->get_site_key('wpml'); ?>
 		<div class="wpml-section" id="lang-sec-0">
 			<div class="wpml-section-header">
@@ -374,7 +371,6 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 						<?php esc_html_e( 'Site key:', 'sitepress' ) ?>
 						<input type="text" name="installer_site_key" value="<?php echo esc_attr( $site_key ) ?>" <?php disabled( ! empty( $site_key ) ) ?> />
 					</label>
-
 
 					<div class="status_msg<?php if ( ! empty( $site_key ) ): ?> icl_valid_text<?php endif; ?>">
 						<?php
@@ -480,7 +476,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 												<li>
 													<label for="wpml_show_on_root_html_file">
 														<input id="wpml_show_on_root_html_file" type="radio" name="show_on_root"
-                                                               value="html_file" <?php checked( 'html_file' == $setting_urls['show_on_root'] ) ?> />
+                                                               value="html_file" <?php checked( 'html_file' === $setting_urls['show_on_root'] ) ?> />
 														<?php esc_html_e( 'HTML file', 'sitepress' ) ?> &ndash;
                                                         <span class="explanation-text">
                                                             <?php esc_html_e( 'please enter path: absolute or relative to the WordPress installation folder', 'sitepress' ) ?>
@@ -497,20 +493,20 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 												<li>
 													<label>
 														<input id="wpml_show_on_root_page" type="radio" name="show_on_root" value="page"
-                                                           <?php checked( 'page' == $setting_urls['show_on_root'] ) ?>
-                                                           <?php if($setting_urls['show_on_root'] == 'page'):?>class="active"<?php endif; ?>
+                                                           <?php checked( 'page' === $setting_urls['show_on_root'] ) ?>
+                                                           <?php if($setting_urls['show_on_root'] === 'page'):?>class="active"<?php endif; ?>
                                                         />
 														<?php esc_html_e( 'A page', 'sitepress' ) ?>
 
-														<span style="display: none;" id="wpml_show_page_on_root_x"><?php esc_html_e( "Please save the settings first by clicking Save.", 'sitepress' ) ?></span>
+														<span style="display: none;" id="wpml_show_page_on_root_x"><?php esc_html_e( 'Please save the settings first by clicking Save.', 'sitepress' ) ?></span>
 
-														<span id="wpml_show_page_on_root_details" <?php if($setting_urls['show_on_root'] != 'page'):
+														<span id="wpml_show_page_on_root_details" <?php if($setting_urls['show_on_root'] !== 'page'):
 														?>style="display:none"<?php endif; ?>>
 														<?php
 														$rp_exists = false;
 														if(!empty( $setting_urls['root_page'])){
 															$rp = get_post( $setting_urls['root_page']);
-															if($rp && $rp->post_status != 'trash'){
+															if($rp && $rp->post_status !== 'trash'){
 																$rp_exists = true;
 															}
 														}
@@ -525,7 +521,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                                                             </a>
 														<?php endif; ?>
 														</span>
-														<p id="icl_hide_language_switchers" class="sub-section" <?php if($setting_urls['show_on_root'] != 'page'): ?>style="display:none"<?php endif; ?>>
+														<p id="icl_hide_language_switchers" class="sub-section" <?php if($setting_urls['show_on_root'] !== 'page'): ?>style="display:none"<?php endif; ?>>
 														  <label>
 															  <input type="checkbox" name="hide_language_switchers" id="icl_hide_language_switchers"
                                                                      value="1" <?php checked( $setting_urls['hide_language_switchers']) ?> />
@@ -754,7 +750,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                                                 $_hlngs[ ] = $active_languages[ $l ][ 'display_name' ];
                                             }
                                         }
-                                        $hlangs = join( ', ', $_hlngs );
+                                        $hlangs = implode( ', ', $_hlngs );
 	                                    printf( esc_html__( '%s are currently hidden to visitors.', 'sitepress' ), esc_html( $hlangs ) );
                                     }
 
@@ -863,7 +859,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
         $request_get_page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE);
         do_action('icl_extra_options_' . $request_get_page);
 
-		$seo_ui = new WPML_SEO_HeadLangs($sitepress);
+		$seo_ui = new WPML_SEO_HeadLangs( $sitepress, new WPML_Queried_Object_Factory() );
 		$seo_ui->render_menu();
 		?>
 		<div class="wpml-section wpml-section-wpml-love" id="lang-sec-10">

@@ -7,7 +7,18 @@
 jQuery(document).ready(function(){
     var icl_hide_languages;
 
-    jQuery('.toggle:checkbox').click(iclHandleToggle);
+    var compatibilityNextButton = jQuery('#icl_setup_next_5');
+    var installerComponentSetting = jQuery('.otgs-installer-component-setting');
+    var hasCheckedValue = installerComponentSetting.find('input[type="radio"]:checked').length === 1;
+
+    compatibilityNextButton.prop('disabled', !hasCheckedValue);
+    installerComponentSetting
+        .find('input[type="radio"]')
+        .click(function () {
+            compatibilityNextButton.prop('disabled', false);
+        });
+
+	jQuery('.toggle:checkbox').click(iclHandleToggle);
     jQuery('#icl_change_default_button').click(editingDefaultLanguage);
     jQuery('#icl_save_default_button').click(saveDefaultLanguage);
     jQuery('#icl_cancel_default_button').click(doneEditingDefaultLanguage);
@@ -43,10 +54,12 @@ jQuery(document).ready(function(){
         }
     });
 
-    jQuery('#icl_seo_options').submit(iclSaveForm);
+	jQuery('#icl_seo_options').submit(iclSaveForm);
 	jQuery('#icl_seo_head_langs').on('click', update_seo_head_langs_priority);
-    jQuery('#icl_setup_back_1').click({step: "1"}, iclSetupStep);
-    jQuery('#icl_setup_back_2').click({step: "2"}, iclSetupStep);
+	jQuery('#icl_setup_back_1').click({step: '1'}, iclSetupStep);
+	jQuery('#icl_setup_back_2').click({step: '2'}, iclSetupStep);
+	jQuery('#icl_setup_back_3').click({step: "3"}, iclSetupStep);
+	compatibilityNextButton.click({step: "5"}, iclSetupStep);
 
     function iclSetupStep(event) {
         var step = event.data.step;
@@ -96,29 +109,7 @@ jQuery(document).ready(function(){
 			height: 'auto'
 		});
 	});
-	if ( jQuery('#icl_setup_wizard_wrap').length) {
-		manageWizardHeader();
-	}
 });
-
-function manageWizardHeader() {
-	var wizardHeader = jQuery('#icl_setup_wizard_wrap');
-	var wizardHeaderInner = jQuery('.wpml-section-wizard-steps-inner');
-	var wizardHeaderInnerTop = wizardHeader.offset().top;
-	var adminbarHeight = jQuery('#wpadminbar').height();
-
-	jQuery(wizardHeader).css('height', wizardHeaderInner.outerHeight() );
-
-	jQuery(window).scroll(function() {
-
-		if (jQuery(window).scrollTop() >= wizardHeaderInnerTop - adminbarHeight) {
-			//Numeber is .wrap top margin
-			wizardHeaderInner.addClass('fixed').css('top', jQuery(window).scrollTop() - 10 );
-		} else {
-			wizardHeaderInner.removeClass('fixed').css('top', 0);
-		}
-	});
-}
 
 function manageWizardButtonStatesSpinner(){
     var buttons = jQuery( '#icl_setup_back_1, #icl_setup_next_1, #icl_setup_back_2' );
@@ -576,7 +567,8 @@ function installer_registration_form_submit(){
     /* jshint validthis:true */
     var thisf = jQuery(this);
     var action = jQuery('#installer_registration_form').find('input[name=button_action]').val();
-    thisf.find('.status_msg').html('');
+
+		thisf.find('.status_msg').html('');
     thisf.find(':submit').attr('disabled', 'disabled');
 
     if(action === 'later'){
@@ -601,6 +593,7 @@ function installer_registration_form_submit(){
                     thisf.find('.status_msg').html(msg.success).addClass('icl_valid_text');
                     thisf.find(':submit:visible').hide();
                     thisf.find(':submit[name=finish]').show();
+										thisf.find('.installer__reporting__switcher').removeClass('hidden');
                 }
                 thisf.find(':submit').removeAttr('disabled', 'disabled');
             }else{ // action = finish

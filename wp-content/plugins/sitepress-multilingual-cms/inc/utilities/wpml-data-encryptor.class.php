@@ -1,4 +1,15 @@
 <?php
+// phpcs:disable PHPCompatibility.Constants.NewConstants.openssl_raw_dataFound -- This and the following exceptions are made as function and version checks are also made
+// phpcs:disable PHPCompatibility.Constants.RemovedConstants.mcrypt_mode_ecbDeprecatedRemoved
+// phpcs:disable PHPCompatibility.Constants.RemovedConstants.mcrypt_randDeprecatedRemoved
+// phpcs:disable PHPCompatibility.Constants.RemovedConstants.mcrypt_rijndael_256DeprecatedRemoved
+// phpcs:disable PHPCompatibility.Extensions.RemovedExtensions.mcryptDeprecatedRemoved
+// phpcs:disable PHPCompatibility.FunctionUse.NewFunctionParameters.openssl_decrypt_ivFound
+// phpcs:disable PHPCompatibility.FunctionUse.NewFunctionParameters.openssl_encrypt_ivFound
+// phpcs:disable PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_create_ivDeprecatedRemoved
+// phpcs:disable PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_decryptDeprecatedRemoved
+// phpcs:disable PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_encryptDeprecatedRemoved
+// phpcs:disable PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_get_iv_sizeDeprecatedRemoved
 
 class WPML_Data_Encryptor {
 
@@ -131,3 +142,14 @@ class WPML_Data_Encryptor {
 		return $salt_key;
 	}
 }
+// phpcs:enable PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_get_iv_sizeDeprecatedRemoved
+// phpcs:enable PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_encryptDeprecatedRemoved
+// phpcs:enable PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_decryptDeprecatedRemoved
+// phpcs:enable PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_create_ivDeprecatedRemoved
+// phpcs:enable PHPCompatibility.FunctionUse.NewFunctionParameters.openssl_encrypt_ivFound
+// phpcs:enable PHPCompatibility.FunctionUse.NewFunctionParameters.openssl_decrypt_ivFound
+// phpcs:enable PHPCompatibility.Extensions.RemovedExtensions.mcryptDeprecatedRemoved
+// phpcs:enable PHPCompatibility.Constants.RemovedConstants.mcrypt_rijndael_256DeprecatedRemoved
+// phpcs:enable PHPCompatibility.Constants.RemovedConstants.mcrypt_randDeprecatedRemoved
+// phpcs:enable PHPCompatibility.Constants.RemovedConstants.mcrypt_mode_ecbDeprecatedRemoved
+// phpcs:enable PHPCompatibility.Constants.NewConstants.openssl_raw_dataFound

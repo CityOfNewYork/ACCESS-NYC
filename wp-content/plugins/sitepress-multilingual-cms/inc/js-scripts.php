@@ -2,6 +2,7 @@
 
 /**
  * Registers scripts so that they can be reused throughout WPML plugins
+ * Hooked to `admin_enqueue_scripts`
  */
 function wpml_register_js_scripts() {
 	wp_register_script( 'wpml-underscore-template-compiler',
@@ -10,10 +11,11 @@ function wpml_register_js_scripts() {
 	wp_register_script( 'wpml-domain-validation',
 		ICL_PLUGIN_URL . '/res/js/settings/wpml-domain-validation.js',
 		array( "jquery" ) );
+
 }
 
 if ( is_admin() ) {
-	add_action( 'admin_enqueue_scripts', 'wpml_register_js_scripts' );
+	add_action( 'admin_enqueue_scripts', 'wpml_register_js_scripts', -PHP_INT_MAX );
 } else {
-	add_action( 'wp_enqueue_scripts', 'wpml_register_js_scripts' );
+	add_action( 'wp_enqueue_scripts', 'wpml_register_js_scripts', -PHP_INT_MAX );
 }

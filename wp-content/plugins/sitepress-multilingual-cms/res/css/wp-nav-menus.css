@@ -1,14 +1,1 @@
-.icl_nav_menu_text {
-  font-size: 11px;
-  font-style: normal; }
-
-.icl_lang_menu a {
-  text-decoration: none; }
-.icl_lang_menu a:hover {
-  text-decoration: underline; }
-.icl_lang_menu a.current {
-  font-weight: bold; }
-
-html[dir="rtl"] #nav-menu-header div.icl_nav_menu_text {
-  float: left !important;
-  text-align: left; }
+.icl_nav_menu_text{font-size:11px;font-style:normal;line-height:1}.icl_nav_menu_text [class*="otgs-ico"]::before{font-size:14px;vertical-align:-3px;margin-right:1px}.rtl .icl_nav_menu_text [class*="otgs-ico"]::before{margin-left:1px;margin-right:0}.rtl .icl_nav_menu_text{float:left !important;text-align:left}.icl_lang_menu{margin-bottom:7px}.icl_lang_menu a{text-decoration:none}.icl_lang_menu a:hover{text-decoration:underline}.icl_lang_menu a.current{font-weight:bold}

@@ -58,7 +58,9 @@ class WPML_Tax_Permalink_Filters implements IWPML_Action {
 		if ( $tag_id ) {
 			$term_element = $this->term_element_factory->create( $tag_id, 'term' );
 
-			if ( ! $this->is_display_as_translated_mode( $term_element ) ) {
+			if ( ! $this->is_display_as_translated_and_in_default_lang( $term_element )
+				|| $this->is_link_for_language_switcher()
+			) {
 				$term_language = $term_element->get_language_code();
 
 				if ( (bool) $term_language ) {
@@ -70,8 +72,9 @@ class WPML_Tax_Permalink_Filters implements IWPML_Action {
 		return $permalink;
 	}
 
-	private function is_display_as_translated_mode( WPML_Translation_Element $element ) {
-		return $element->is_display_as_translated() && ! $this->is_link_for_language_switcher();
+	private function is_display_as_translated_and_in_default_lang( WPML_Translation_Element $element ) {
+		return $element->is_display_as_translated()
+		       && $element->is_in_default_language();
 	}
 
 	private function is_link_for_language_switcher() {

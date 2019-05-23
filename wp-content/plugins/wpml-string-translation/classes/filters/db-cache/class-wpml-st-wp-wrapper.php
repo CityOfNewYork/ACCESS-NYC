@@ -27,6 +27,9 @@ class WPML_ST_WP_Wrapper {
 		$tmp_wp_filter = $wp_filter;
 		$GLOBALS['wp_filter'] = array_intersect_key( $wp_filter, array_fill_keys( $this->preserved_filters, 1 ) );
 
+		$post_copy = $_POST;
+		$_POST = array();
+
 		$result = $path;
 
 		$this->wp->parse_request();
@@ -36,6 +39,7 @@ class WPML_ST_WP_Wrapper {
 		}
 
 		$GLOBALS['wp_filter'] = $tmp_wp_filter;
+		$_POST = $post_copy;
 
 		return $result;
 	}

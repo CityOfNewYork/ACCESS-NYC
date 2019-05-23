@@ -58,7 +58,7 @@ class WPML_Translations extends WPML_SP_User {
 			} elseif ( $this->wpml_element_type_is_taxonomy( $wpml_element_type ) ) {
 				$sql_parts = $this->get_sql_parts_for_taxonomy( $sql_parts );
 			}
-			$sql_parts['where'][] = $this->sitepress->get_wpdb()->prepare( ' AND t.trid=%d ', $trid );
+			$sql_parts['where'][] = $this->sitepress->get_wpdb()->prepare( ' AND wpml_translations.trid=%d ', $trid );
 
 			$select   = implode( ' ', $sql_parts['select'] );
 			$join     = implode( ' ', $sql_parts['join'] );
@@ -66,9 +66,9 @@ class WPML_Translations extends WPML_SP_User {
 			$group_by = implode( ' ', $sql_parts['group_by'] );
 
 			$query = "
-				SELECT t.translation_id, t.language_code, t.element_id, t.source_language_code, t.element_type, NULLIF(t.source_language_code, '') IS NULL AS original 
+				SELECT wpml_translations.translation_id, wpml_translations.language_code, wpml_translations.element_id, wpml_translations.source_language_code, wpml_translations.element_type, NULLIF(wpml_translations.source_language_code, '') IS NULL AS original 
 				{$select}
-				FROM {$this->sitepress->get_wpdb()->prefix}icl_translations t
+				FROM {$this->sitepress->get_wpdb()->prefix}icl_translations wpml_translations
 					 {$join}
 				WHERE 1 {$where}
 				{$group_by}
@@ -238,7 +238,7 @@ class WPML_Translations extends WPML_SP_User {
 	 */
 	private function get_sql_parts_for_post( $element_type, $sql_parts ) {
 		$sql_parts['select'][] = ', p.post_title, p.post_status';
-		$sql_parts['join'][]   = " LEFT JOIN {$this->sitepress->get_wpdb()->posts} p ON t.element_id=p.ID";
+		$sql_parts['join'][]   = " LEFT JOIN {$this->sitepress->get_wpdb()->posts} p ON wpml_translations.element_id=p.ID";
 		if ( ! $this->all_statuses && 'post_attachment' !== $element_type && ! is_admin() ) {
 			// the current user may not be the admin but may have read private post/page caps!
 			if ( current_user_can( 'read_private_pages' ) || current_user_can( 'read_private_posts' ) ) {
@@ -263,7 +263,7 @@ class WPML_Translations extends WPML_SP_User {
 	 */
 	private function get_sql_parts_for_taxonomy( $sql_parts ) {
 		$sql_parts['select'][]   = ', tm.name, tm.term_id, COUNT(tr.object_id) AS instances';
-		$sql_parts['join'][]     = " LEFT JOIN {$this->sitepress->get_wpdb()->term_taxonomy} tt ON t.element_id=tt.term_taxonomy_id
+		$sql_parts['join'][]     = " LEFT JOIN {$this->sitepress->get_wpdb()->term_taxonomy} tt ON wpml_translations.element_id=tt.term_taxonomy_id
 							  LEFT JOIN {$this->sitepress->get_wpdb()->terms} tm ON tt.term_id = tm.term_id
 							  LEFT JOIN {$this->sitepress->get_wpdb()->term_relationships} tr ON tr.term_taxonomy_id=tt.term_taxonomy_id
 							  ";

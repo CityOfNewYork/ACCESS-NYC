@@ -3,17 +3,13 @@
 /**
  * @author OnTheGo Systems
  */
-class WPML_Custom_XML implements WPML_WP_Option {
-	const OPTION_KEY = 'wpml-tm-custom-xml';
+class WPML_Custom_XML extends WPML_WP_Option {
 
-	/**
-	 * @return string
-	 */
-	function get() {
-		return get_option( self::OPTION_KEY, '' );
+	public function get_key() {
+		return 'wpml-tm-custom-xml';
 	}
 
-	function set( $value ) {
-		update_option( self::OPTION_KEY, $value );
+	public function get_default() {
+		return '';
 	}
 }

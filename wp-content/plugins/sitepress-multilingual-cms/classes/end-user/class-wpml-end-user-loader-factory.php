@@ -35,7 +35,8 @@ class WPML_End_User_Loader_Factory implements IWPML_Deferred_Action_Loader, IWPM
 
 		$js_loader = new WPML_End_User_JS_Loader(
 			$notice_validator,
-			new WPML_End_User_Page_Identify( new WPML_WP_API(), $pagenow )
+			new WPML_End_User_Page_Identify( new WPML_WP_API(), $pagenow ),
+			new OTGS_Installer_WP_Share_Local_Components_Setting()
 		);
 
 		return new WPML_End_User_Loader( array( $info_loader, $notice_loader, $js_loader, $disabling_loader ) );
@@ -69,8 +70,8 @@ class WPML_End_User_Loader_Factory implements IWPML_Deferred_Action_Loader, IWPM
 	 * @return bool
 	 */
 	private function is_site_registered() {
-		if ( class_exists( 'WP_Installer_API' ) ) {
-			return false !== WP_Installer_API::get_site_key( 'wpml' );
+		if ( WPML_Installer_Gateway::get_instance()->class_exists() ) {
+			return false !== WPML_Installer_Gateway::get_instance()->get_site_key();
 		} else {
 			/** @link https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-4855 */
 			return false;

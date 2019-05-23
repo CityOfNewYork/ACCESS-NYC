@@ -7,7 +7,7 @@
     </repository>
     <repository>
         <id>toolset</id>
-        <apiurl>https://api.wp-types.com/</apiurl>
+        <apiurl>https://api.toolset.com/</apiurl>
         <products>http://d7j863fr5jhrr.cloudfront.net/toolset33-products.json</products>
     </repository>
 </repositories>

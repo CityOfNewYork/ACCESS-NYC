@@ -74,9 +74,7 @@ function wpml_validate_language_domain_action() {
 		global $sitepress;
 		$http                    = new WP_Http();
 		$wp_api                  = $sitepress->get_wp_api();
-		$language_domains_helper = new WPML_Language_Domain_Validation( $wp_api,
-			$http, filter_input( INPUT_POST,
-				'url' ), '' );
+		$language_domains_helper = new WPML_Language_Domain_Validation( $wp_api, $http, filter_input( INPUT_POST, 'url' ) );
 		$res                     = $language_domains_helper->is_valid();
 	}
 	if ( ! empty( $res ) ) {

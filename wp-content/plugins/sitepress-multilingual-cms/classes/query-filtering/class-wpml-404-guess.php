@@ -75,9 +75,9 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 		$res   = $this->wpdb->get_row( "
 										 SELECT post_type, post_name
 										 FROM {$this->wpdb->posts} p
-										 LEFT JOIN {$this->wpdb->prefix}icl_translations t
-											ON t.element_id = p.ID
-											    AND CONCAT('post_', p.post_type) = t.element_type
+										 LEFT JOIN {$this->wpdb->prefix}icl_translations wpml_translations
+											ON wpml_translations.element_id = p.ID
+											    AND CONCAT('post_', p.post_type) = wpml_translations.element_type
 										        AND " . $this->query_filter->in_translated_types_snippet( false, 'p' ) . "
 										 WHERE $where
 										    AND ( post_status = 'publish'
@@ -123,7 +123,7 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 		$best_score   = count( $lang_order ) + 2;
 		$order_by     = '';
 		if ( $best_score > 2 ) {
-			$order_by .= $this->wpdb->prepare( 'ORDER BY CASE t.language_code WHEN %s THEN %d ',
+			$order_by .= $this->wpdb->prepare( 'ORDER BY CASE wpml_translations.language_code WHEN %s THEN %d ',
 			                                   $current_lang,
 			                                   $best_score );
 			$score = $best_score - 2;

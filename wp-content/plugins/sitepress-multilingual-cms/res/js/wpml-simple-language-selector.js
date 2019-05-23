@@ -25,11 +25,17 @@ WPML_Core.SimpleLanguageSelector = function () {
             formatResult:       add_flags,
             formatSelection:    add_flags,
             escapeMarkup:       function(m) { return m; },
-            width:              'resolve',
+            width:              'auto',
             dropdownCss:        {'z-index': parseInt(jQuery('.ui-dialog').css('z-index'), 10) + 100},
             dropdownAutoWidth:  true
         });
-    };
+
+        var lang_selector_flags = jQuery('.js-simple-lang-selector-flags');
+
+        if (lang_selector_flags.is(':disabled')) {
+            lang_selector_flags.find('.select2-choice').addClass('button button-secondary').attr('disabled', 'true');
+        }
+	};
     
 	init();
 	

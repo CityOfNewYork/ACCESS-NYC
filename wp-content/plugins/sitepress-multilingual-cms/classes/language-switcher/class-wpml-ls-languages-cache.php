@@ -22,6 +22,7 @@ class WPML_LS_Languages_Cache {
 		$this->cache_key = md5( wp_json_encode( $cache_key_args ) );
 		$cache_group     = 'ls_languages';
 		$this->cache     = new WPML_WP_Cache( $cache_group );
+		wp_cache_add_non_persistent_groups( $cache_group );
 	}
 
 	public function get() {

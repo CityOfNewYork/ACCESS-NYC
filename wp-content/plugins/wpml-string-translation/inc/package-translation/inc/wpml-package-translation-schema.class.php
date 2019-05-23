@@ -140,7 +140,7 @@ class WPML_Package_Translation_Schema {
 	private static function build_icl_string_packages_table() {
 		global $wpdb;
 
-		$charset_collate = self::build_charset_collate();
+		$charset_collate = SitePress_Setup::get_charset_collate();
 
 		self::$table_name = $wpdb->prefix . 'icl_string_packages';
 		$sql              = "
@@ -153,47 +153,12 @@ class WPML_Package_Translation_Schema {
                   `edit_link` TEXT NOT NULL,
                   `view_link` TEXT NOT NULL,
                   `post_id` INTEGER DEFAULT NULL,
+                  `word_count` VARCHAR(2000) DEFAULT NULL,
                   PRIMARY KEY  (`ID`)
                 ) " . $charset_collate . "";
 		if ( $wpdb->query( $sql ) === false ) {
 			throw new Exception( $wpdb->last_error );
 		}
-	}
-
-	private static function build_charset_collate() {
-		$charset_collate = '';
-		if ( self::wpdb_has_cap_collation() ) {
-			$charset_collate .= self::build_default_char_set();
-			$charset_collate .= self::build_collate();
-		}
-
-		return $charset_collate;
-	}
-
-	private static function wpdb_has_cap_collation() {
-		global $wpdb;
-
-		return method_exists( $wpdb, 'has_cap' ) && $wpdb->has_cap( 'collation' );
-	}
-
-	private static function build_default_char_set() {
-		global $wpdb;
-		$charset_collate = '';
-		if ( ! empty( $wpdb->charset ) ) {
-			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
-		}
-
-		return $charset_collate;
-	}
-
-	private static function build_collate() {
-		global $wpdb;
-		$charset_collate = '';
-		if ( ! empty( $wpdb->collate ) ) {
-			$charset_collate .= " COLLATE $wpdb->collate";
-		}
-
-		return $charset_collate;
 	}
 
 	private static function update_kind_slug() {

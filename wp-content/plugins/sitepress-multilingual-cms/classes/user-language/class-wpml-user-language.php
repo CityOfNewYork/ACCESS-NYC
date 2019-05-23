@@ -129,7 +129,7 @@ class WPML_User_Language {
 		$wp_language = get_user_meta( $user_id, 'locale', true );
 
 		if ( $wp_language ) {
-			$user_language = $this->sitepress->get_language_code_from_locale( $wp_language );
+			$user_language = $this->select_language_code_from_locale( $wp_language );
 		} else {
 			$user_language = $this->sitepress->get_default_language();
 		}
@@ -138,6 +138,26 @@ class WPML_User_Language {
 		if( $this->user_admin_language_for_edit( $user_id ) && $this->is_editing_current_profile() ) {
 			$this->set_language_cookie( $user_language );
 		}
+	}
+
+	/**
+	 * @param string $wp_locale
+	 *
+	 * @return null|string
+	 */
+	private function select_language_code_from_locale( $wp_locale ) {
+		$code = $this->sitepress->get_language_code_from_locale( $wp_locale );
+
+		if ( ! $code ) {
+			$guess_code = strtolower( substr( $wp_locale, 0, 2 ) );
+			$guess_locale = $this->sitepress->get_locale_from_language_code( $guess_code );
+
+			if ( $guess_locale ) {
+				$code = $guess_code;
+			}
+		}
+
+		return $code;
 	}
 
 	private function user_needs_sync_admin_lang() {
@@ -196,16 +216,18 @@ class WPML_User_Language {
 	}
 
 	public function update_user_lang_on_site_setup() {
-		$current_user_id = get_current_user_id();
-		$site_locale = get_locale();
-		$wpml_lang = $this->sitepress->get_language_code_from_locale( $site_locale );
+		$current_user_id       = get_current_user_id();
+		$wp_user_lang          = get_user_meta( $current_user_id, 'locale', true );
 
-		$wp_user_lang = get_user_meta( $current_user_id, 'locale', true );
-		$wpml_user_lang = get_user_meta( $current_user_id, 'icl_admin_language', true );
+		if ( ! $wp_user_lang ) {
+			return;
+		}
 
-		if ( $site_locale && $current_user_id && ! $wp_user_lang && ! $wpml_user_lang ) {
-			update_user_meta( $current_user_id, 'locale', $site_locale );
-			update_user_meta( $current_user_id, 'icl_admin_language', $wpml_lang );
+		$lang_code_from_locale = $this->select_language_code_from_locale( $wp_user_lang );
+		$wpml_user_lang        = get_user_meta( $current_user_id, 'icl_admin_language', true );
+
+		if ( $current_user_id && $lang_code_from_locale && ! $wpml_user_lang ) {
+			update_user_meta( $current_user_id, 'icl_admin_language', $lang_code_from_locale );
 		}
 	}
 }

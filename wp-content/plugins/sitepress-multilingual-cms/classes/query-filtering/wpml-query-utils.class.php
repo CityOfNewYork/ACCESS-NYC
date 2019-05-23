@@ -48,8 +48,8 @@ class WPML_Query_Utils {
 
 		return (bool) $this->wpdb->get_var( $this->wpdb->prepare(
 			"	SELECT COUNT(p.ID) FROM {$this->wpdb->posts} p
-				JOIN {$this->wpdb->prefix}icl_translations t
-					ON p.ID=t.element_id AND t.element_type = CONCAT('post_', p.post_type)
+				JOIN {$this->wpdb->prefix}icl_translations wpml_translations
+					ON p.ID=wpml_translations.element_id AND wpml_translations.element_type = CONCAT('post_', p.post_type)
 				WHERE p.post_author=%d
 				  " . $post_type_snippet . "
 				  AND post_status='publish'
@@ -103,8 +103,8 @@ class WPML_Query_Utils {
 
 			$result = $this->wpdb->get_var( "
                         SELECT p.ID FROM {$this->wpdb->posts} p
-						JOIN {$this->wpdb->prefix}icl_translations t
-							ON p.ID = t.element_id AND t.element_type = CONCAT('post_', p.post_type)
+						JOIN {$this->wpdb->prefix}icl_translations wpml_translations
+							ON p.ID = wpml_translations.element_id AND wpml_translations.element_type = CONCAT('post_', p.post_type)
 						WHERE " . $post_status_snippet .
 			                $year_snippet . $month_snippet . $day_snippet . $post_type_snippet . $lang_snippet . "
 						LIMIT 1" );
@@ -123,7 +123,7 @@ class WPML_Query_Utils {
 			$display_as_translated_snippet = '0';
 		}
 
-		return $this->wpdb->prepare( " AND (t.language_code = %s OR {$display_as_translated_snippet}) ", $lang );
+		return $this->wpdb->prepare( " AND (wpml_translations.language_code = %s OR {$display_as_translated_snippet}) ", $lang );
 	}
 
 }

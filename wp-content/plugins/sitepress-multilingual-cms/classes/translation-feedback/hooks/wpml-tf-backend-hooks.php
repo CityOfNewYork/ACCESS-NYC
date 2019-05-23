@@ -50,7 +50,7 @@ class WPML_TF_Backend_Hooks implements IWPML_Action {
 	 * method add_hooks
 	 */
 	public function add_hooks() {
-		add_action( 'admin_menu', array( $this, 'add_translation_feedback_list_menu' ) );
+		add_action( 'wpml_admin_menu_configure', array( $this, 'add_translation_feedback_list_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts_action' ) );
 		add_action( 'current_screen', array( $this, 'bulk_actions_callback' ) );
 		add_filter( 'posts_where', array( $this, 'maybe_exclude_rating_only_status' ), 10, 2 );
@@ -58,17 +58,25 @@ class WPML_TF_Backend_Hooks implements IWPML_Action {
 
 	/**
 	 * Define translation feedback list menu and callback
+	 *
+	 * @param string $menu_id
 	 */
-	public function add_translation_feedback_list_menu() {
+	public function add_translation_feedback_list_menu( $menu_id ) {
+		if ( 'WPML' !== $menu_id ) {
+			return;
+		}
+
 		if ( current_user_can( 'manage_options' ) ) {
-			add_submenu_page(
-				apply_filters( 'icl_menu_main_page', WPML_PLUGIN_FOLDER . '/menu/languages.php' ),
-				__( 'Translation Feedback', 'sitepress' ),
-				__( 'Translation Feedback', 'sitepress' ),
-				'manage_options',
-				self::PAGE_HOOK,
-				array( $this, 'translation_feedback_list_display' )
-			);
+			$menu               = array();
+			$menu['order']      = 1200;
+			$menu['page_title'] = __( 'Translation Feedback', 'sitepress' );
+			$menu['menu_title'] = __( 'Translation Feedback', 'sitepress' );
+			$menu['capability'] = 'manage_options';
+			$menu['menu_slug']  = self::PAGE_HOOK;
+			$menu['function']   = array( $this, 'translation_feedback_list_display' );
+
+			do_action( 'wpml_admin_menu_register_item', $menu );
+
 		} else {
 			add_menu_page(
 				__( 'Translation Feedback', 'sitepress' ),

@@ -22,7 +22,12 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		$post_ids_prepare = $this->wpdb->prepare( $post_ids_query, array( $master_post_id, $master_post_id ) );
 		$post_ids         = $this->wpdb->get_col( $post_ids_prepare );
 		foreach ( $post_ids as $post_id ) {
-			$language_code                = $wpml_post_translations->get_element_lang_code( $post_id );
+			$language_code = $wpml_post_translations->get_element_lang_code( $post_id );
+
+			if ( ! $language_code ) {
+				continue;
+			}
+
 			$duplicates[ $language_code ] = $post_id;
 		}
 
@@ -123,7 +128,7 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		// make sure post name is copied
 		$this->wpdb->update( $this->wpdb->posts, array( 'post_name' => $master_post->post_name ), array( 'ID' => $id ) );
 
-		if ( $this->sitepress->get_option( 'sync_post_taxonomies' ) ) {
+		if ( $this->sitepress->get_setting( 'sync_post_taxonomies', false ) ) {
 			$this->duplicate_taxonomies( $master_post_id, $lang );
 		}
 		$this->duplicate_custom_fields( $master_post_id, $lang );

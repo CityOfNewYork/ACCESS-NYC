@@ -6,66 +6,74 @@ new WPML_Taxonomy_Translation_Sync_Display();
 class WPML_Taxonomy_Translation_Table_Display {
 
 	private static function get_strings_translation_array() {
+		$st_plugin = '<a href="' . get_admin_url( null, 'plugins.php' ) . '" target="_blank" class="wpml-external-link">WPML String Translation</a>';
+
+		$term_results_cap = defined( 'WPML_TAXONOMY_TRANSLATION_MAX_TERMS_RESULTS_SET' ) ?
+			WPML_TAXONOMY_TRANSLATION_MAX_TERMS_RESULTS_SET :
+			WPML_Taxonomy_Translation_Screen_Data::WPML_TAXONOMY_TRANSLATION_MAX_TERMS_RESULTS_SET;
 
 		$labels = array(
-			'Show'                                  => __( 'Show', 'sitepress' ),
-			'untranslated'                          => __( 'untranslated', 'sitepress' ),
-			'all'                                   => __( 'all', 'sitepress' ),
-			'in'                                    => __( 'in', 'sitepress' ),
-			'to'                                    => __( 'to', 'sitepress' ),
-			'of'                                    => __( 'of', 'sitepress' ),
-			'taxonomy'                              => __( 'Taxonomy', 'sitepress' ),
-			'anyLang'                               => __( 'any language', 'sitepress' ),
-			'apply'                                 => __( 'Refresh', 'sitepress' ),
-			'synchronizeBtn'                        => __( 'Update Taxonomy Hierarchy', 'sitepress' ),
-			'searchPlaceHolder'                     => __( 'Search', 'sitepress' ),
-			'selectParent'                          => __( 'select parent', 'sitepress' ),
-			'taxToTranslate'                        => __( 'Select the taxonomy to translate: ', 'sitepress' ),
-			'translate'                             => sprintf( __( '%1$s Translation', 'sitepress' ), '%taxonomy%' ),
-			'Synchronize'                           => __( 'Hierarchy Synchronization', 'sitepress' ),
-			'lowercaseTranslate'                    => __( 'translate', 'sitepress' ),
-			'copyToAllLanguages'                    => __( 'Copy to all languages', 'sitepress' ),
-			'copyToAllMessage'                      => sprintf( __( 'Copy this term from original: %1$s to all other languages?' ), '%language%' ),
-			'copyAllOverwrite'                      => __( 'Overwrite existing translations', 'sitepress' ),
-			'willBeRemoved'                         => __( 'Will be removed', 'sitepress' ),
-			'willBeAdded'                           => __( 'Will be added', 'sitepress' ),
-			'legend'                                => __( 'Legend:', 'sitepress' ),
-			'refLang'                               => sprintf( __( 'Synchronize taxonomy hierarchy according to: %1$s language.', 'sitepress' ), '%language%' ),
-			'targetLang'                            => __( 'Target Language', 'sitepress' ),
-			'termPopupDialogTitle'                  => __( 'Term translation', 'sitepress' ),
-			'originalTermPopupDialogTitle'          => __( 'Original term', 'sitepress' ),
-			'labelPopupDialogTitle'                 => __( 'Label translation', 'sitepress' ),
-			'copyFromOriginal'                      => __( 'Copy from original', 'sitepress' ),
-			'original'                              => __( 'Original:', 'sitepress' ),
-			'translationTo'                         => __( 'Translation to:', 'sitepress' ),
-			'Name'                                  => __( 'Name', 'sitepress' ),
-			'Slug'                                  => __( 'Slug', 'sitepress' ),
-			'Description'                           => __( 'Description', 'sitepress' ),
-			'Ok'                                    => __( 'OK', 'sitepress' ),
-			'save'                                  => __( 'Save', 'sitepress' ),
-			'Singular'                              => __( 'Singular', 'sitepress' ),
-			'Plural'                                => __( 'Plural', 'sitepress' ),
-			'cancel'                                => __( 'Cancel', 'sitepress' ),
-			'loading'                               => __( 'loading', 'sitepress' ),
-			'Save'                                  => __( 'Save', 'sitepress' ),
-			'currentPage'                           => __( 'Current page', 'sitepress' ),
-			'goToPreviousPage'                      => __( 'Go to previous page', 'sitepress' ),
-			'goToNextPage'                          => __( 'Go to the next page', 'sitepress' ),
-			'goToFirstPage'                         => __( 'Go to the first page', 'sitepress' ),
-			'goToLastPage'                          => __( 'Go to the last page', 'sitepress' ),
-			'hieraSynced'                           => __( 'The taxonomy hierarchy is now synchronized.', 'sitepress' ),
-			'hieraAlreadySynced'                    => __( 'The taxonomy hierarchy is already synchronized.', 'sitepress' ),
-			'noTermsFound'                          => sprintf( __( 'No %1$s found.', 'sitepress' ), '%taxonomy%' ),
-			'items'                                 => __( 'items', 'sitepress' ),
-			'item'                                  => __( 'item', 'sitepress' ),
-			'summaryTerms'                          => sprintf( __( 'Translation of %1$s', 'sitepress' ), '%taxonomy%' ),
-			'summaryLabels'                         => sprintf( __( 'Translations of taxonomy %1$s labels - appearing in WordPress admin menu', 'sitepress' ), '%taxonomy%' ),
-			'preparingTermsData'                    => __( 'Loading ...', 'sitepress' ),
-			'firstColumnHeading'                    => sprintf( __( '%1$s terms (in original language)', 'sitepress' ), '%taxonomy%' ),
-			'wpml_save_term_nonce'                  => wp_create_nonce( 'wpml_save_term_nonce' ),
-			'wpml_tt_save_labels_translation_nonce' => wp_create_nonce( 'wpml_tt_save_labels_translation_nonce' ),
-			'wpml_tt_sync_hierarchy_nonce'          => wp_create_nonce( 'wpml_tt_sync_hierarchy_nonce' ),
-			'wpml_generate_unique_slug_nonce'       => wp_create_nonce( 'wpml_generate_unique_slug_nonce' ),
+			'Show'                            => __( 'Show', 'sitepress' ),
+			'untranslated'                    => __( 'untranslated', 'sitepress' ),
+			'all'                             => __( 'all', 'sitepress' ),
+			'in'                              => __( 'in', 'sitepress' ),
+			'to'                              => __( 'to', 'sitepress' ),
+			'of'                              => __( 'of', 'sitepress' ),
+			'taxonomy'                        => __( 'Taxonomy', 'sitepress' ),
+			'anyLang'                         => __( 'any language', 'sitepress' ),
+			'apply'                           => __( 'Refresh', 'sitepress' ),
+			'synchronizeBtn'                  => __( 'Update Taxonomy Hierarchy', 'sitepress' ),
+			'searchPlaceHolder'               => __( 'Search', 'sitepress' ),
+			'selectParent'                    => __( 'select parent', 'sitepress' ),
+			'taxToTranslate'                  => __( 'Select the taxonomy to translate: ', 'sitepress' ),
+			'translate'                       => sprintf( __( '%1$s Translation', 'sitepress' ), '%taxonomy%' ),
+			'Synchronize'                     => __( 'Hierarchy Synchronization', 'sitepress' ),
+			'lowercaseTranslate'              => __( 'translate', 'sitepress' ),
+			'copyToAllLanguages'              => __( 'Copy to all languages', 'sitepress' ),
+			'copyToAllMessage'                => sprintf( __( 'Copy this term from original: %1$s to all other languages?' ), '%language%' ),
+			'copyAllOverwrite'                => __( 'Overwrite existing translations', 'sitepress' ),
+			'willBeRemoved'                   => __( 'Will be removed', 'sitepress' ),
+			'willBeAdded'                     => __( 'Will be added', 'sitepress' ),
+			'legend'                          => __( 'Legend:', 'sitepress' ),
+			'refLang'                         => sprintf( __( 'Synchronize taxonomy hierarchy according to: %1$s language.', 'sitepress' ), '%language%' ),
+			'targetLang'                      => __( 'Target Language', 'sitepress' ),
+			'termPopupDialogTitle'            => __( 'Term translation', 'sitepress' ),
+			'originalTermPopupDialogTitle'    => __( 'Original term', 'sitepress' ),
+			'labelPopupDialogTitle'           => __( 'Label translation', 'sitepress' ),
+			'copyFromOriginal'                => __( 'Copy from original', 'sitepress' ),
+			'original'                        => __( 'Original:', 'sitepress' ),
+			'translationTo'                   => __( 'Translation to:', 'sitepress' ),
+			'Name'                            => __( 'Name', 'sitepress' ),
+			'Slug'                            => __( 'Slug', 'sitepress' ),
+			'Description'                     => __( 'Description', 'sitepress' ),
+			'Ok'                              => __( 'OK', 'sitepress' ),
+			'save'                            => __( 'Save', 'sitepress' ),
+			'Singular'                        => __( 'Singular', 'sitepress' ),
+			'Plural'                          => __( 'Plural', 'sitepress' ),
+			'changeLanguage'                  => __( 'Change language', 'sitepress' ),
+			'cancel'                          => __( 'Cancel', 'sitepress' ),
+			'loading'                         => __( 'loading', 'sitepress' ),
+			'Save'                            => __( 'Save', 'sitepress' ),
+			'currentPage'                     => __( 'Current page', 'sitepress' ),
+			'goToPreviousPage'                => __( 'Go to previous page', 'sitepress' ),
+			'goToNextPage'                    => __( 'Go to the next page', 'sitepress' ),
+			'goToFirstPage'                   => __( 'Go to the first page', 'sitepress' ),
+			'goToLastPage'                    => __( 'Go to the last page', 'sitepress' ),
+			'hieraSynced'                     => __( 'The taxonomy hierarchy is now synchronized.', 'sitepress' ),
+			'hieraAlreadySynced'              => __( 'The taxonomy hierarchy is already synchronized.', 'sitepress' ),
+			'noTermsFound'                    => sprintf( __( 'No %1$s found.', 'sitepress' ), '%taxonomy%' ),
+			'items'                           => __( 'items', 'sitepress' ),
+			'item'                            => __( 'item', 'sitepress' ),
+			'summaryTerms'                    => sprintf( __( 'Translation of %1$s', 'sitepress' ), '%taxonomy%' ),
+			'summaryLabels'                   => sprintf( __( 'Translations of taxonomy %1$s labels and slug', 'sitepress' ), '%taxonomy%' ),
+			'activateStringTranslation'       => sprintf( __( 'To translate taxonomy labels and slug you need %s plugin.', 'sitepress' ), $st_plugin ),
+			'preparingTermsData'              => __( 'Loading ...', 'sitepress' ),
+			'firstColumnHeading'              => sprintf( __( '%1$s terms (in original language)', 'sitepress' ), '%taxonomy%' ),
+			'resultsTruncated'                => sprintf( __( 'Because too many %1$s were found, only the first %2$s results are listed. You can refine the results using the Search field below.', 'sitepress' ), '%taxonomy%', '<strong>' . $term_results_cap . '</strong>' ),
+			'wpml_save_term_nonce'            => wp_create_nonce( 'wpml_save_term_nonce' ),
+			'wpml_tt_sync_hierarchy_nonce'    => wp_create_nonce( 'wpml_tt_sync_hierarchy_nonce' ),
+			'wpml_generate_unique_slug_nonce' => wp_create_nonce( 'wpml_generate_unique_slug_nonce' ),
+			'wpml_taxonomy_translation_nonce' => wp_create_nonce( 'wpml_taxonomy_translation_nonce' ),
 
 			'addTranslation'   => __( 'Add translation', 'sitepress' ),
 			'editTranslation'  => __( 'Edit translation', 'sitepress' ),
@@ -76,7 +84,11 @@ class WPML_Taxonomy_Translation_Table_Display {
 		return $labels;
 	}
 
-	public static function enqueue_taxonomy_table_js( $sitepress ) {
+	public static function enqueue_taxonomy_table_resources( $sitepress ) {
+
+		WPML_Simple_Language_Selector::enqueue_scripts();
+
+		wp_enqueue_style( 'translate-taxonomy', ICL_PLUGIN_URL . '/res/css/taxonomy-translation.css', array(), ICL_SITEPRESS_VERSION );
 
 		$core_dependencies = array( 'jquery', 'jquery-ui-dialog', 'backbone', 'wpml-underscore-template-compiler' );
 		wp_register_script(
@@ -199,29 +211,57 @@ class WPML_Taxonomy_Translation_Table_Display {
 
 	public static function wpml_get_terms_and_labels_for_taxonomy_table() {
 		global $sitepress;
+
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wpml_taxonomy_translation_nonce' ) ) {
+			wp_send_json_error( __( 'Wrong nonce', 'sitepress' ) );
+			return;
+		}
+
 		$taxonomy = false;
 
 		$request_post_taxonomy = filter_input( INPUT_POST,
-											   'taxonomy',
-											   FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-											   FILTER_NULL_ON_FAILURE );
+			'taxonomy',
+			FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+			FILTER_NULL_ON_FAILURE );
 		if ( $request_post_taxonomy ) {
 			$taxonomy = html_entity_decode( $request_post_taxonomy );
 		}
 
 		if ( $taxonomy ) {
 			$terms_data     = new WPML_Taxonomy_Translation_Screen_Data( $sitepress, $taxonomy );
+			$term_results   = $terms_data->terms();
 			$labels         = apply_filters( 'wpml_label_translation_data', false, $taxonomy );
 			$def_lang       = $sitepress->get_default_language();
 			$bottom_content = apply_filters( 'wpml_taxonomy_translation_bottom', $html = '', $taxonomy, get_taxonomy( $taxonomy ) );
 			wp_send_json( array(
-				              'terms'                => $terms_data->terms(),
-				              'taxLabelTranslations' => $labels,
-				              'defaultLanguage'      => $def_lang,
-				              'bottomContent'        => $bottom_content
-						  ) );
+				'terms'                => $term_results['terms'],
+				'resultsTruncated'     => $term_results['truncated'],
+				'taxLabelTranslations' => $labels,
+				'defaultLanguage'      => $def_lang,
+				'bottomContent'        => $bottom_content,
+				'taxLangSelector'      => self::render_tax_language_selector( $labels, $taxonomy ),
+			) );
 		} else {
 			wp_send_json_error();
 		}
+	}
+
+	private static function render_tax_language_selector( $labels, $taxonomy ) {
+		global $sitepress;
+
+		if ( ! isset( $labels['st_default_lang'] ) ) {
+			return null;
+		}
+
+		$args = array(
+			'selected'           => $labels['st_default_lang'],
+			'name'               => 'string_lang[' . $taxonomy . ']',
+			'show_please_select' => false,
+			'echo'               => false,
+			'class'              => 'js-tax-lang-selector',
+		);
+
+		$lang_selector = new WPML_Simple_Language_Selector( $sitepress );
+		return $lang_selector->render( $args );
 	}
 }

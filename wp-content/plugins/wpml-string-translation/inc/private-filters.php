@@ -44,8 +44,9 @@ function wpml_st_filter_job_assignment( $assigned_correctly, $string_translation
 function filter_tm_cpt_dashboard_notice( $notice, $custom_posts ) {
 	global $sitepress, $wpml_st_string_factory;
 
-	$tm_filter      = new WPML_TM_Widget_Filter( $sitepress, $wpml_st_string_factory );
-	$admin_notifier = new WPML_Admin_Notifier();
+	$post_slug_settings = new WPML_ST_Post_Slug_Translation_Settings( $sitepress );
+	$tm_filter          = new WPML_TM_Widget_Filter( $post_slug_settings, $wpml_st_string_factory );
+	$admin_notifier     = new WPML_Admin_Notifier();
 
 	return $tm_filter->filter_cpt_dashboard_notice( $notice, $custom_posts, $admin_notifier );
 }

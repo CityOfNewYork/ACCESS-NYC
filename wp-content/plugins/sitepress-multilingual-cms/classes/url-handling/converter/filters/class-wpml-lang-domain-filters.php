@@ -5,6 +5,7 @@ class WPML_Lang_Domain_Filters {
 	private $wpml_url_converter;
 	private $wpml_wp_api;
 	private $debug_backtrace;
+	private $domains = array();
 
 	/**
 	 * WPML_Lang_Domain_Filters constructor.
@@ -68,11 +69,59 @@ class WPML_Lang_Domain_Filters {
 			$parsed_url = wpml_parse_url( $url );
 			$host       = is_array( $parsed_url ) && isset( $parsed_url['host'] );
 			if ( $host && isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] ) {
-				$url = str_replace( $parsed_url['host'], $_SERVER['HTTP_HOST'], $url );
+				$domain_from_global = $this->get_host_from_HTTP_HOST();
+				if ( $domain_from_global ) {
+					$url = str_replace( $parsed_url['host'], $domain_from_global, $url );
+				}
 			}
 		}
 
 		return $url;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function get_host_from_HTTP_HOST() {
+		$host = $_SERVER['HTTP_HOST'];
+
+		if ( false !==  strpos( $_SERVER['HTTP_HOST'], ':' ) ) {
+			$host = explode( ':', $_SERVER['HTTP_HOST'] );
+			$host = $host[0];
+		}
+
+		return $this->is_host_valid( $host ) ? $host : null;
+	}
+
+	/**
+	 * @param string $host
+	 *
+	 * @return bool
+	 */
+	private function is_host_valid( $host ) {
+		$valid = false;
+
+		foreach ( $this->get_domains() as $domain ) {
+			if ( $domain === $host ) {
+				$valid = true;
+				break;
+			}
+		}
+
+		return $valid;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function get_domains() {
+		if ( ! $this->domains ) {
+			$this->domains   = wpml_get_setting( 'language_domains' );
+			$home_parsed     = wp_parse_url( $this->wpml_url_converter->get_abs_home() );
+			$this->domains[] = $home_parsed['host'];
+		}
+
+		return $this->domains;
 	}
 
 	/**

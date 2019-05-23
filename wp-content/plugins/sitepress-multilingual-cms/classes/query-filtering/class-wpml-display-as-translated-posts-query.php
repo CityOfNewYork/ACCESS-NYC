@@ -38,7 +38,10 @@ class WPML_Display_As_Translated_Posts_Query extends WPML_Display_As_Translated_
 				JOIN {$this->wpdb->posts} p ON p.id = t2.element_id
 				WHERE t2.trid = {$this->icl_translation_table_alias}.trid
 				AND t2.language_code = %s
-				AND p.post_status IN ( 'publish' )
+				AND (
+					p.post_status = 'publish' OR 
+					p.post_type='attachment' AND p.post_status = 'inherit'
+				)
 			) = 0",
 			$language );
 	}

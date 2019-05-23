@@ -704,6 +704,18 @@ class SitePress_EditLanguages {
 				}
 				continue;
 			}
+
+			if ( 'code' === $name ) {
+				if ( ! $this->is_language_code_valid( $data[ $name ] ) ) {
+					$this->set_errors( __( 'Invalid character in language code.', 'sitepress' ) );
+					$this->set_validation_failed( $id );
+
+					return false;
+				}
+
+				continue;
+			}
+
 			if (!isset($_POST['icl_edit_languages'][$id][$name]) || empty($_POST['icl_edit_languages'][$id][$name ] ) ) {
 				if ( 'true' === $_POST['icl_edit_languages_ignore_add'] ) {
 					return false;
@@ -722,6 +734,19 @@ class SitePress_EditLanguages {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Checks that language code is valid.
+	 *
+	 * @param string $language_code Unvalidated language code from input.
+	 *
+	 * @return bool
+	 */
+	private function is_language_code_valid( $language_code ) {
+		$pattern = '/^[a-zA-Z0-9\-\_]+$/';
+
+		return (bool) preg_match( $pattern, $language_code );
 	}
 
 	/**

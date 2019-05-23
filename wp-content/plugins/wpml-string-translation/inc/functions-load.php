@@ -18,22 +18,6 @@ function wpml_st_load_admin_texts() {
 }
 
 /**
- * @return WPML_Slug_Translation
- */
-function wpml_st_load_slug_translation( ) {
-	global $wpml_slug_translation, $sitepress, $wpdb;
-
-	if ( ! isset( $wpml_slug_translation ) ) {
-
-		$wpml_slug_translation = new WPML_Slug_Translation( $sitepress, $wpdb, WPML_Get_LS_Languages_Status::get_instance() );
-
-		add_action( 'init', array( $wpml_slug_translation, 'init' ), - 1000 );
-	}
-
-	return $wpml_slug_translation;
-}
-
-/**
  * @return WPML_ST_String_Factory
  */
 function wpml_st_load_string_factory() {

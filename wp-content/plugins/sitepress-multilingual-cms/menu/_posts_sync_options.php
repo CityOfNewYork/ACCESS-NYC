@@ -80,6 +80,14 @@ global $sitepress, $sitepress_settings;
 					<?php esc_html_e( 'Synchronize comments on duplicate content', 'sitepress' ) ?></label>
 				</p>
 			</div>
+
+			<div class="wpml-section-content-inner">
+				<h4><?php esc_html_e( 'Page builders options', 'sitepress' ) ?></h4>
+				<?php $wpml_page_builder_options = new WPML_Page_Builder_Settings(); ?>
+					<label><input type="checkbox" name="wpml_pb_translate_raw_html" <?php checked( $wpml_page_builder_options->is_raw_html_translatable() ); ?> value="1" />
+					<?php esc_html_e( 'Send to translation the content of raw HTML cells', 'sitepress' ) ?></label>
+				</p>
+			</div>
 			<?php endif; ?>
 
 			<div class="wpml-section-content-inner">

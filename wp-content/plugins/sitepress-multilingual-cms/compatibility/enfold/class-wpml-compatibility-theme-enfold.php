@@ -33,7 +33,7 @@ class WPML_Compatibility_Theme_Enfold {
 	 * @param WP_Post $post
 	 */
 	public function wp_insert_post_action( $post_id, $post ) {
-		if ( ! $this->is_tm_editor_used() ) {
+		if ( $this->is_using_standard_wp_editor() ) {
 			return;
 		}
 
@@ -80,17 +80,18 @@ class WPML_Compatibility_Theme_Enfold {
 		$page_builder_active         = get_post_meta( $post_id, '_aviaLayoutBuilder_active', true );
 		$page_builder_shortcode_tree = get_post_meta( $post_id, '_avia_builder_shortcode_tree', true );
 
-		return $page_builder_active && $page_builder_shortcode_tree;
+		return $page_builder_active && $page_builder_shortcode_tree !== '';
 	}
+
 	/**
 	 * @return bool
 	 */
-	private function is_tm_editor_used() {
+	private function is_using_standard_wp_editor() {
 		$doc_translation_method = isset( $this->translation_management->settings['doc_translation_method'] ) ?
-			(int) $this->translation_management->settings['doc_translation_method'] :
+			$this->translation_management->settings['doc_translation_method'] :
 			ICL_TM_TMETHOD_MANUAL;
 
-		return ICL_TM_TMETHOD_EDITOR === $doc_translation_method;
+		return (string) ICL_TM_TMETHOD_MANUAL === (string) $doc_translation_method;
 	}
 
 	/**

@@ -1,5 +1,4 @@
 <?php
-require_once dirname( __FILE__ ) . '/wpml-admin-text-functionality.class.php';
 
 class WPML_Admin_Texts extends WPML_Admin_Text_Functionality{
 
@@ -54,7 +53,10 @@ class WPML_Admin_Texts extends WPML_Admin_Text_Functionality{
 
 	function icl_st_render_option_writes( $option_name, $option_value, $option_key = '' ) {
 		$sub_key = $option_key . '[' . $option_name . ']';
-		if ( is_array( $option_value ) || is_object( $option_value ) ) {
+		if (
+			is_array( $option_value ) ||
+			( is_object( $option_value ) && '__PHP_Incomplete_Class' !== get_class( $option_value ) )
+		) {
 			$output = '<h4><a class="icl_stow_toggler" href="#">+ ' . $option_name
 			          . '</a></h4><ul class="icl_st_option_writes" style="display: none">';
 			foreach ( $option_value as $key => $value ) {
@@ -142,9 +144,10 @@ class WPML_Admin_Texts extends WPML_Admin_Text_Functionality{
 		$lang        = $this->st_instance->get_current_string_language( $name );
 		$option_name = substr( current_filter(), 7 );
 		$name        = $name === '' ? $option_name : $name;
-		if ( isset( $this->icl_st_cache[ $lang ][ $name ] ) ) {
+		$blog_id     = get_current_blog_id();
 
-			return $this->icl_st_cache[ $lang ][ $name ];
+		if ( isset( $this->icl_st_cache[ $blog_id ][ $lang ][ $name ] ) ) {
+			return $this->icl_st_cache[ $blog_id ][ $lang ][ $name ];
 		}
 
 		$serialized   = is_serialized( $option_value );
@@ -157,7 +160,7 @@ class WPML_Admin_Texts extends WPML_Admin_Text_Functionality{
 				                                               $rec_level + 1 );
 			}
 		} else {
-			
+
 			if ( $this->is_admin_text( $key , $name ) ) {
 				$tr           = icl_t( 'admin_texts_' . $option_name, $key . $name, $option_value, $hast, true );
 				$option_value = $hast ? $tr : $option_value;
@@ -166,7 +169,7 @@ class WPML_Admin_Texts extends WPML_Admin_Text_Functionality{
 		$option_value = $serialized ? serialize( $option_value ) : $option_value;
 
 		if ( $rec_level === 0 ) {
-			$this->icl_st_cache[ $lang ][ $name ] = $option_value;
+			$this->icl_st_cache[ $blog_id ][ $lang ][ $name ] = $option_value;
 		}
 
 		return $option_value;
@@ -179,11 +182,11 @@ class WPML_Admin_Texts extends WPML_Admin_Text_Functionality{
 		if ( $key ) {
 			$key = ltrim( $key, '[' );
 			$key = rtrim( $key, ']' );
-			
+
 			$keys = explode( '][', $key );
-			
+
 			$test_option_names = $option_names;
-			
+
 			foreach ( $keys as $key ) {
 				if ( isset( $test_option_names[ $key ] ) ) {
 					$test_option_names = $test_option_names[ $key ];
@@ -191,18 +194,19 @@ class WPML_Admin_Texts extends WPML_Admin_Text_Functionality{
 					return false;
 				}
 			}
-			
+
 			return isset( $test_option_names[ $name ] );
 		} else {
 			return isset( $option_names[ $name ] );
 		}
 	}
-	
+
 	function clear_cache_for_option() {
 		$option_name = substr( current_filter(), 14 );
-		foreach ( array_keys( $this->icl_st_cache ) as $lang_code ) {
-			if ( isset( $this->icl_st_cache[ $lang_code ][ $option_name ] ) ) {
-				unset ( $this->icl_st_cache[ $lang_code ][ $option_name ] );
+		$blog_id = get_current_blog_id();
+		foreach ( $this->icl_st_cache[ $blog_id ] as $lang_code => &$cache_data ) {
+			if ( array_key_exists( $option_name, $cache_data ) ) {
+				unset( $cache_data[ $option_name ] );
 			}
 		}
 	}

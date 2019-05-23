@@ -82,7 +82,7 @@ class WPML_String_Scanner {
 			'scan_successful_message' => esc_html__( 'Scan successful! WPML found %s strings.', 'wpml-string-translation' ),
 			'files_processed_message' => esc_html__( 'The following files were processed:', 'wpml-string-translation' ),
 			'files_processed' => $this->get_scanned_files(),
-			'strings_found' => count( $__icl_registered_strings ),
+			'strings_found' => is_array( $__icl_registered_strings ) ? count( $__icl_registered_strings ) : 0,
 		);
 
 		if ( $result['strings_found'] ) {

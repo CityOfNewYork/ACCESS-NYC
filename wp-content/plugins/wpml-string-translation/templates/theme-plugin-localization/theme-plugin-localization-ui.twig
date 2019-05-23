@@ -15,70 +15,74 @@
                 <li>|</li>
                 <li data-status="inactive">{{ inactive_text }} ({{ status_count.inactive }})</li>
             </ul>
-            <table class="wp-list-table widefat">
+            <table class="widefat striped">
 
             <input type="hidden" name="{{ scan_folder_nonce_field }}" value="{{ scan_folder_nonce_val }}">
             <input type="hidden" name="{{ scan_files_nonce_field }}" value="{{ scan_files_nonce_val }}">
 
-            {% include 'theme-plugin-localization-ui-header.twig' with {'class': 'header'} %}
+            {% include 'theme-plugin-localization-ui-header.twig' with {'position': 'header'} %}
 
                 {% for dir_and_file, component_data in components %}
 
                 <tr class="item{{ component_data.active ? ' active' }}">
                     <td>
-                        <ul>
-                            <li><input type="checkbox" name="{{ type }}[]" id="{{ type }}-{{ component_data.id }}" value="{{ dir_and_file }}" data-attribute="{{ component_data.component_name|replace(' ', '-')|lower }}"></li>
-                        </ul>
+                        <input type="checkbox" name="{{ type }}[]" id="{{ type }}-{{ component_data.id }}" value="{{ dir_and_file }}" data-component-name="{{ component_data.component_name|replace(' ', '-')|lower }}">
                     </td>
                     <td>
-                        <ul>
-	                        <li><label for="{{ type }}-{{ component_data.id }}">{{ component_data.component_name }}</label></li>
-                        </ul>
+                        <label for="{{ type }}-{{ component_data.id }}">{{ component_data.component_name }}</label>
                     </td>
                     <td>
-                        <ul>
-                    {% for domain, domains_statistics in component_data.domains %}
-                        <li><a title="{{ domains_statistics.title_all_strings }}" href="{{ domains_statistics.domain_link }}">{{ domain }}</a></li>
-                    {% endfor %}
-                        </ul>
+                        {% if component_data.domains %}
+                            <ul>
+                                {% for domain, domains_statistics in component_data.domains %}
+                                    <li><a title="{{ domains_statistics.title_all_strings }}" href="{{ domains_statistics.domain_link }}">{{ domain }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </td>
 
                     <td class="wpml-translated">
-                        <ul>
-                        {% for domain, domains_statistics in component_data.domains %}
-                            <li>
-                            {{ domains_statistics.translated }}
-                            </li>
-                        {% endfor %}
-                        </ul>
+                        {% if component_data.domains %}
+                            <ul>
+                                {% for domain, domains_statistics in component_data.domains %}
+                                    <li>
+                                        {{ domains_statistics.translated }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </td>
 
                     <td class="wpml-needs-update">
+                        {% if component_data.domains %}
                         <ul>
-                        {% for domain, domains_statistics in component_data.domains %}
-                            <li>
-                            {% if domains_statistics.needs_update %}
-                                <a title="{{ domains_statistics.title_needs_translation }}" href="{{ domains_statistics.needs_update_link }}">
-                            {% endif %}
-                            {{ domains_statistics.needs_update }}
-                            {% if domains_statistics.needs_update %}
-                                </a>
-                            {% endif %}
-                            </li>
-                        {% endfor %}
+                            {% for domain, domains_statistics in component_data.domains %}
+                                <li>
+                                    {% if domains_statistics.needs_update %}
+                                    <a title="{{ domains_statistics.title_needs_translation }}" href="{{ domains_statistics.needs_update_link }}">
+                                        {% endif %}
+                                        {{ domains_statistics.needs_update }}
+                                        {% if domains_statistics.needs_update %}
+                                    </a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
                         </ul>
+                        {% endif %}
                     </td>
                     {% if 'plugin' == type %}
                     <td class="wpml-create-po-file">
-                        <ul>
-                        {% for domain, domains_statistics in component_data.domains %}
-                            <li>
-                            {% if domains_statistics.translated or domains_statistics.needs_update %}
-                                <a class="wpml_st_pop_download button-secondary" href="#{{ dir_and_file|e }}">create PO file</a>
-                            {% endif %}
-                            </li>
-                        {% endfor %}
-                        </ul>
+                        {% if component_data.domains %}
+                            <ul>
+                                {% for domain, domains_statistics in component_data.domains %}
+                                    <li>
+                                        {% if domains_statistics.translated or domains_statistics.needs_update %}
+                                            <a class="wpml_st_pop_download button-secondary" href="#{{ dir_and_file|e }}">create PO file</a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </td>
                     {% endif %}
                     {% set current = current - 1 %}
@@ -86,7 +90,7 @@
 
                 {% endfor %}
 
-                {% include 'theme-plugin-localization-ui-header.twig' with {'class': 'footer'} %}
+                {% include 'theme-plugin-localization-ui-header.twig' with {'position': 'footer'} %}
 
             </table>
             <br />

@@ -2,6 +2,9 @@
 
 class WPML_Settings_Helper {
 
+	const KEY_CPT_UNLOCK_OPTION      = 'custom_posts_unlocked_option';
+	const KEY_TAXONOMY_UNLOCK_OPTION = 'taxonomies_unlocked_option';
+
 	/** @var SitePress */
 	protected $sitepress;
 
@@ -104,17 +107,30 @@ class WPML_Settings_Helper {
 		$this->sitepress->set_setting( 'taxonomies_unlocked_option', $unlocked_settings, true );
 	}
 
+	/**
+	 * @deprecated use the action `wpml_activate_slug_translation` instead
+	 *             or `WPML_ST_Post_Slug_Translation_Settings` instead (on ST side)
+	 *
+	 * @param string $post_type
+	 */
 	function activate_slug_translation( $post_type ) {
 		$slug_settings                          = $this->sitepress->get_setting( 'posts_slug_translation', array() );
 		$slug_settings[ 'types' ]               = isset( $slug_settings[ 'types' ] )
 			? $slug_settings[ 'types' ] : array();
 		$slug_settings[ 'types' ][ $post_type ] = 1;
+		/** @deprected key `on`, use option `wpml_base_slug_translation` instead */
 		$slug_settings[ 'on' ]                  = 1;
 
 		$this->clear_ls_languages_cache();
 		$this->sitepress->set_setting( 'posts_slug_translation', $slug_settings, true );
+		update_option( 'wpml_base_slug_translation', 1 );
 	}
 
+	/**
+	 * @deprecated use `WPML_ST_Post_Slug_Translation_Settings` instead (on ST side)
+	 *
+	 * @param string $post_type
+	 */
 	function deactivate_slug_translation( $post_type ) {
 		$slug_settings = $this->sitepress->get_setting( 'posts_slug_translation', array() );
 		if ( isset( $slug_settings[ 'types' ][ $post_type ] ) ) {
@@ -166,7 +182,8 @@ class WPML_Settings_Helper {
 	 * @return array
 	 */
 	function _override_get_translatable_documents( $types ) {
-		$tm_settings = $this->sitepress->get_setting('translation-management', array());
+		$tm_settings          = $this->sitepress->get_setting( 'translation-management', array() );
+		$cpt_unlocked_options = $this->sitepress->get_setting( 'custom_posts_unlocked_option', array() );
 		foreach ( $types as $k => $type ) {
 			if ( isset( $tm_settings[ 'custom-types_readonly_config' ][ $k ] )
 				 && ! $tm_settings[ 'custom-types_readonly_config' ][ $k ]
@@ -174,7 +191,7 @@ class WPML_Settings_Helper {
 				unset( $types[ $k ] );
 			}
 		}
-		$types = $this->get_filters()->get_translatable_documents( $types, $tm_settings['custom-types_readonly_config'] );
+		$types = $this->get_filters()->get_translatable_documents( $types, $tm_settings['custom-types_readonly_config'], $cpt_unlocked_options );
 
 		return $types;
 	}
@@ -190,7 +207,7 @@ class WPML_Settings_Helper {
 	 * @return array new custom post type settings after the update
 	 */
 	function update_cpt_sync_settings( array $new_options ) {
-		$cpt_sync_options = $this->sitepress->get_setting( 'custom_posts_sync_option', array() );
+		$cpt_sync_options = $this->sitepress->get_setting( WPML_Element_Sync_Settings_Factory::KEY_POST_SYNC_OPTION, array() );
 		$cpt_sync_options = array_merge( $cpt_sync_options, $new_options );
 		$new_options      = array_filter( $new_options );
 
@@ -198,9 +215,35 @@ class WPML_Settings_Helper {
 
 		do_action( 'wpml_verify_post_translations', $new_options );
 		do_action( 'wpml_save_cpt_sync_settings' );
-		$this->sitepress->set_setting( 'custom_posts_sync_option', $cpt_sync_options, true );
+		$this->sitepress->set_setting( WPML_Element_Sync_Settings_Factory::KEY_POST_SYNC_OPTION, $cpt_sync_options, true );
 
 		return $cpt_sync_options;
+	}
+
+	/**
+	 * Updates the taxonomy type translation settings with new settings.
+	 *
+	 * @param array $new_options
+	 *
+	 * @uses \SitePress::get_setting
+	 * @uses \SitePress::save_settings
+	 *
+	 * @return array new taxonomy type settings after the update
+	 */
+	function update_taxonomy_sync_settings( array $new_options ) {
+		$taxonomy_sync_options = $this->sitepress->get_setting( WPML_Element_Sync_Settings_Factory::KEY_TAX_SYNC_OPTION, array() );
+		$taxonomy_sync_options = array_merge( $taxonomy_sync_options, $new_options );
+
+		foreach ( $taxonomy_sync_options as $taxonomy_name => $taxonomy_sync_option ) {
+			$this->sitepress->verify_taxonomy_translations( $taxonomy_name );
+		}
+
+		$this->clear_ls_languages_cache();
+
+		do_action( 'wpml_save_taxonomy_sync_settings' );
+		$this->sitepress->set_setting( WPML_Element_Sync_Settings_Factory::KEY_TAX_SYNC_OPTION, $taxonomy_sync_options, true );
+
+		return $taxonomy_sync_options;
 	}
 
 	/**
@@ -214,9 +257,33 @@ class WPML_Settings_Helper {
 	 * @return array new custom post type unlocked settings after the update
 	 */
 	function update_cpt_unlocked_settings( array $unlock_options ) {
-		$cpt_unlock_options = $this->sitepress->get_setting( 'custom_posts_unlocked_option', array() );
+		return $this->update_unlocked_settings( $unlock_options, self::KEY_CPT_UNLOCK_OPTION );
+	}
+
+	/**
+	 * Updates the taxonomy type unlocked settings with new settings.
+	 *
+	 * @param array $unlock_options
+	 *
+	 * @uses \SitePress::get_setting
+	 * @uses \SitePress::save_settings
+	 *
+	 * @return array new taxonomy type unlocked settings after the update
+	 */
+	function update_taxonomy_unlocked_settings( array $unlock_options ) {
+		return $this->update_unlocked_settings( $unlock_options, self::KEY_TAXONOMY_UNLOCK_OPTION );
+	}
+
+	/**
+	 * @param array  $unlock_options
+	 * @param string $setting_key
+	 *
+	 * @return array
+	 */
+	private function update_unlocked_settings( array $unlock_options, $setting_key ) {
+		$cpt_unlock_options = $this->sitepress->get_setting( $setting_key, array() );
 		$cpt_unlock_options = array_merge( $cpt_unlock_options, $unlock_options );
-		$this->sitepress->set_setting( 'custom_posts_unlocked_option', $cpt_unlock_options, true );
+		$this->sitepress->set_setting( $setting_key, $cpt_unlock_options, true );
 		return $cpt_unlock_options ;
 	}
 

@@ -198,7 +198,13 @@ if ( $icl_menus_sync->is_preview ) {
 				<span id="icl_msync_max_input_vars"
 					  style="display:none"
 					  class="icl-admin-message-warning"
-					  data-max_input_vars="<?php echo ini_get( 'max_input_vars' ); ?>">
+					  data-max_input_vars="<?php
+
+					  //phpcs:disable PHPCompatibility.IniDirectives.NewIniDirectives.max_input_varsFound -- It never caused issues, but we should probably fix that
+					  echo ini_get( 'max_input_vars' );
+					  //phpcs:enable PHPCompatibility.IniDirectives.NewIniDirectives.max_input_varsFound
+
+					  ?>">
 					<?php
 					printf(
 						esc_html__( 'The menus on this page may not sync because it requires more input variables. Please modify the %s setting in your php.ini or .htaccess files to %s or more.', 'sitepress' ),

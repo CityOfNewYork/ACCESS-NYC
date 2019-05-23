@@ -32,7 +32,7 @@ class WPML_End_User_Notice_Validate {
 	 * @return bool
 	 */
 	private function is_user_a_person_who_registered_wpml( $user_id ) {
-		$registering_user_id = (int) WP_Installer_API::get_registering_user_id( 'wpml' );
+		$registering_user_id = (int) WPML_Installer_Gateway::get_instance()->get_registering_user_id();
 		return $registering_user_id === $user_id;
 	}
 }

@@ -4,11 +4,17 @@ jQuery(function($){
 
 	'use strict';
 
-	var auto_load_theme_mo_file = $( '.automatically_load_mo_file' );
+	var auto_load_theme_mo_file = $( '.automatically_load_mo_file' ),
+		do_not_use_st = "2",
+		theme_localization_type = $( 'input[name*="theme_localization_type"]:checked' ).val();
 
 	auto_load_theme_mo_file.hide();
 
 	$(document).ready(function () {
+		if ( theme_localization_type === do_not_use_st ) {
+			hide_theme_plugin_sections();
+		}
+
 		var ajax_success_action = function( response, response_text ) {
 
 			if( response.success ) {
@@ -26,8 +32,7 @@ jQuery(function($){
 
 		$( '#wpml-js-theme-plugin-save-option' ).click(function(){
 
-			var theme_localization_type = $( 'input[name*="theme_localization_type"]:checked' ).val(),
-				alert_scan_new_strings = $( 'input[name*="wpml_st_display_strings_scan_notices"]' ),
+			var alert_scan_new_strings = $( 'input[name*="wpml_st_display_strings_scan_notices"]' ),
 				use_theme_plugin_domain = $( 'input[name*="use_theme_plugin_domain"]' ),
 				theme_localization_load_textdomain = $( 'input[name*="theme_localization_load_textdomain"]' ),
 				all_strings_are_in_english = $( 'input[name*="wpml-st-all-strings-are-in-english"]' ),
@@ -35,6 +40,7 @@ jQuery(function($){
 				response_text = $( '#wpml-js-theme-plugin-options-response' ),
 				spinner = $( '#wpml-js-theme-plugin-options-spinner' );
 
+			theme_localization_type = $( 'input[name*="theme_localization_type"]:checked' ).val();
 			spinner.addClass( 'is-active' );
 
 			$.ajax({
@@ -54,9 +60,21 @@ jQuery(function($){
 				success: function ( response ) {
 					spinner.removeClass( 'is-active' );
 					ajax_success_action( response, response_text );
+
+					if (do_not_use_st === theme_localization_type) {
+						hide_theme_plugin_sections();
+					} else {
+						$('.wpml_theme_localization').show();
+						$('.wpml_plugin_localization').show();
+					}
 				}
 			});
 		});
+
+		function hide_theme_plugin_sections() {
+			$('.wpml_theme_localization').hide();
+			$('.wpml_plugin_localization').hide();
+		}
 		
 		$( 'input[name*="theme_localization_type"]' ).click(function(){
 			auto_load_theme_mo_file.hide();

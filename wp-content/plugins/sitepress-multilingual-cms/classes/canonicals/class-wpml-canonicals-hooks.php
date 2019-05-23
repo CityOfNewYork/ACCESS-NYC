@@ -28,12 +28,15 @@ class WPML_Canonicals_Hooks {
 	}
 
 	public function add_hooks() {
-		$urls = $this->sitepress->get_setting( 'urls' );
+		$urls             = $this->sitepress->get_setting( 'urls' );
+		$lang_negotiation = (int) $this->sitepress->get_setting( 'language_negotiation_type' );
 
-		if ( WPML_LANGUAGE_NEGOTIATION_TYPE_DIRECTORY === (int) $this->sitepress->get_setting( 'language_negotiation_type' )
+		if ( WPML_LANGUAGE_NEGOTIATION_TYPE_DIRECTORY === $lang_negotiation
 		     && ! empty( $urls['directory_for_default_language'] )
 		) {
 			add_action( 'template_redirect', array( $this, 'redirect_pages_from_root_to_default_lang_dir' ) );
+		} elseif ( WPML_LANGUAGE_NEGOTIATION_TYPE_PARAMETER === $lang_negotiation ) {
+			add_action( 'redirect_canonical', array( $this, 'prevent_redirection_with_translated_paged_content' ) );
 		}
 
 		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) && strpos( strtolower( $_SERVER['SERVER_SOFTWARE'] ), 'nginx' ) !== false ) {
@@ -69,5 +72,24 @@ class WPML_Canonicals_Hooks {
 		}
 
 		return $redirect;
+	}
+
+	/**
+	 * @param string $redirect_url
+	 *
+	 * @return string|false
+	 */
+	public function prevent_redirection_with_translated_paged_content( $redirect_url ) {
+		if ( ! is_singular() || ! isset( $_GET['lang'] ) ) {
+			return $redirect_url;
+		}
+
+		$page = (int) get_query_var( 'page' );
+
+		if ( $page < 2 ) {
+			return $redirect_url;
+		}
+
+		return false;
 	}
 }

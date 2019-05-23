@@ -20,7 +20,7 @@ class WPML_Nav_Menu {
     /** @var  WPML_Nav_Menu_Actions $nav_menu_actions */
     public $nav_menu_actions;
 
-	function __construct( $sitepress, $wpdb, $post_translations, $term_translations ) {
+	function __construct( SitePress $sitepress, WPDB $wpdb, WPML_Post_Translation $post_translations, WPML_Term_Translation $term_translations ) {
 		$this->sitepress         = $sitepress;
 		$this->wpdb              = $wpdb;
 		$this->post_translations = $post_translations;
@@ -66,8 +66,8 @@ class WPML_Nav_Menu {
         // add language controls for menus no option but javascript
         if($pagenow === 'nav-menus.php'){
             add_action('admin_footer', array($this, 'nav_menu_language_controls'), 10);
-            
-            wp_enqueue_script('wp_nav_menus', ICL_PLUGIN_URL . '/res/js/wp-nav-menus.js', ICL_SITEPRESS_VERSION, true);    
+
+	        wp_enqueue_script( 'wp_nav_menus', ICL_PLUGIN_URL . '/res/js/wp-nav-menus.js', array( 'jquery' ), ICL_SITEPRESS_VERSION, true );
             wp_enqueue_style('wp_nav_menus_css', ICL_PLUGIN_URL . '/res/css/wp-nav-menus.css', array(), ICL_SITEPRESS_VERSION,'all');    
             
             // filter posts by language
@@ -143,7 +143,6 @@ class WPML_Nav_Menu {
 			$icl_menus_sync->init( isset( $_SESSION[ 'wpml_menu_sync_menu' ] ) ? $_SESSION[ 'wpml_menu_sync_menu' ] : null );
 			$results = $icl_menus_sync->do_sync( $_POST['sync']);
 			$_SESSION[ 'wpml_menu_sync_menu' ] = $results;
-			$_SESSION[ 'wpml_menu_sync_menu' ] = $results;
 			wp_send_json_success( true );
 		} else {
 			wp_send_json_error( false );
@@ -157,16 +156,23 @@ class WPML_Nav_Menu {
 		wp_send_json_success( $icl_menus_sync->get_links_for_menu_strings_translation() );
 	}
 
-	// Menus sync submenu
-    function admin_menu_setup(){
-		global $sitepress;
-		if(!isset($sitepress) || !$sitepress->get_setting( 'setup_complete' )) return;
+	/**
+	 * @param string $menu_id
+	 */
+	function admin_menu_setup( $menu_id ) {
+		if ( 'WPML' !== $menu_id ) {
+			return;
+		}
 
-		$top_page = apply_filters('icl_menu_main_page', WPML_PLUGIN_FOLDER.'/menu/languages.php');
-        add_submenu_page( $top_page, 
-            __( 'WP Menus Sync', 'sitepress' ), __( 'WP Menus Sync', 'sitepress' ), 
-            'wpml_manage_wp_menus_sync', WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php' );
-    }
+	  $menu             = array();
+	  $menu['order']      = 700;
+	  $menu['page_title'] = __( 'WP Menus Sync', 'sitepress' );
+	  $menu['menu_title'] = __( 'WP Menus Sync', 'sitepress' );
+	  $menu['capability'] = 'wpml_manage_wp_menus_sync';
+	  $menu['menu_slug']  = WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php' ;
+
+	  do_action('wpml_admin_menu_register_item', $menu);
+	}
 
 	/**
 	 *
@@ -303,43 +309,52 @@ class WPML_Nav_Menu {
 		return $this->current_menu;
 	}
 
+	private function get_action_icon( $css_class, $label ) {
+		return '<span class="' . $css_class . '" title="' . esc_attr( $label ) . '"></span>';
+	}
+
 	function nav_menu_language_controls() {
 		global $sitepress, $wpdb;
 		$this->_load_menu();
 		$default_language = $sitepress->get_default_language();
 		$current_lang     = isset( $this->current_menu['language'] ) ? $this->current_menu['language'] : $sitepress->get_current_language();
-        $langsel = '<br class="clear" />';    
+		$langsel = '<br class="clear" />';
         
         // show translations links if this is not a new element              
         if(isset($this->current_menu['id']) && $this->current_menu['id']){
-            $langsel .= '<div class="howto icl_nav_menu_text" style="float:right;">';    
+            $langsel .= '<div class="icl_nav_menu_text" style="float:right;">';
             $langsel .= __('Translations:', 'sitepress');                
             foreach($sitepress->get_active_languages() as $lang){            
                 if ( ! isset( $this->current_menu[ 'language' ] )
                      || $lang[ 'code' ] == $this->current_menu[ 'language' ] ) {
                     continue;
                 }
-                if(isset($this->current_menu['translations'][$lang['code']])){
-                    $lang_suff = '&lang=' . $lang['code'];
-                    $menu_id = $wpdb->get_var($wpdb->prepare("SELECT term_id FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id=%d",$this->current_menu['translations'][$lang['code']]->element_id));
-                    $tr_link = '<a style="text-decoration:none" title="'. esc_attr(__('edit translation', 'sitepress')).'" href="'.admin_url('nav-menus.php').
-                        '?menu='.$menu_id. $lang_suff .'">'.
-                        $lang['display_name'] . '&nbsp;<img src="'.ICL_PLUGIN_URL.'/res/img/edit_translation.png" alt="'. esc_attr(__('edit', 'sitepress')).
-                        '" width="12" height="12" /></a>';
-                }else{
-                    $tr_link = '<a style="text-decoration:none" title="'. esc_attr(__('add translation', 'sitepress')).'" href="'.admin_url('nav-menus.php').
-                        '?action=edit&menu=0&trid='.$this->current_menu['trid'].'&lang='.$lang['code'].'">'. 
-                        esc_html( $lang['display_name'] ) . '&nbsp;<img src="'.ICL_PLUGIN_URL.'/res/img/add_translation.png" alt="'. esc_attr(__('add', 'sitepress')).
-                        '" width="12" height="12" /></a>';
-                }
+	            if ( isset( $this->current_menu['translations'][ $lang['code'] ] ) ) {
+		            $menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id=%d", $this->current_menu['translations'][ $lang['code'] ]->element_id ) );
+		            $label   = __( 'edit translation', 'sitepress' );
+		            $tr_link = '<a style="text-decoration:none" title="' . esc_attr( $label ) . '" href="' . admin_url( 'nav-menus.php' ) .
+		                       '?menu=' . $menu_id
+		                       . '&lang=' . $lang['code'] . '">'
+		                       . $this->get_action_icon( WPML_Post_Status_Display::ICON_TRANSLATION_EDIT, $label )
+		                       . $lang['display_name']
+		                       . '</a>';
+	            } else {
+		            $label   = __( 'add translation', 'sitepress' );
+		            $tr_link = '<a style="text-decoration:none" title="' . esc_attr( $label ) . '" href="' . admin_url( 'nav-menus.php' ) .
+		                       '?action=edit&menu=0&trid=' . $this->current_menu['trid']
+		                       . '&lang=' . $lang['code'] . '">'
+		                       . $this->get_action_icon( WPML_Post_Status_Display::ICON_TRANSLATION_ADD, $label )
+		                       . esc_html( $lang['display_name'] )
+		                       . '</a>';
+	            }
                 $trs[] = $tr_link ;
             }
             $langsel .= '&nbsp;';
 						if (isset($trs)) {
 							$langsel .= join (', ', $trs);
 						}
-            $langsel .= '</div><br />';    
-            $langsel .= '<div class="howto icl_nav_menu_text" style="float:right;">';    
+            $langsel .= '</div><br />';
+            $langsel .= '<div class="icl_nav_menu_text" style="float:right; clear:right">';
             $langsel .= '<div><a href="'.admin_url('admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php').'">' . __('Synchronize menus between languages.', 'sitepress') . '</a></div>';
             $langsel .= '</div>';    
             
@@ -366,6 +381,7 @@ class WPML_Nav_Menu {
 			$langsel .= '<span id="icl_translation_of_wrap">';
 			$trid_current = ! empty( $this->current_menu['trid'] ) ? $this->current_menu['trid'] : ( isset( $_GET['trid'] ) ? $_GET['trid'] : 0 );
 			$langsel .= $this->render_translation_of( $current_lang, (int)$trid_current );
+
 			$langsel .= '</span>';
 		}
 		$langsel .= '</span>';
@@ -748,7 +764,7 @@ class WPML_Nav_Menu {
 	}
 
 	private function setup_menu_item() {
-		add_action( 'admin_menu', array( $this, 'admin_menu_setup' ) );
+		add_action( 'wpml_admin_menu_configure', array( $this, 'admin_menu_setup' ) );
 	}
 
 	private function setup_menu_synchronization() {

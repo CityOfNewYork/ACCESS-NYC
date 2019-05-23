@@ -50,16 +50,39 @@ class WPML_Custom_Types_Translation_UI {
 			?>
 			(<i><?php echo esc_html( $content_slug ); ?></i>)
 		</div>
-		<?php foreach ( $this->translation_modes->get_options() as $value => $label ) { ?>
+		<?php foreach ( $this->translation_modes->get_options() as $value => $label ) {
+			$disabled_state_for_mode = self::get_disabled_state_for_mode( $unlocked, $disabled, $value, $content_slug )
+			?>
 			<div
 				class="wpml-flex-table-cell text-center <?php echo $this->translation_option_class_names[ $value ]; ?>"
-				data-header="<?php esc_attr( $label ) ?>">
+				data-header="<?php echo esc_attr( $label ) ?>">
 				<input type="radio" name="<?php echo $radio_name; ?>"
-				       value="<?php echo esc_attr( $value ); ?>" <?php echo $unlocked ? '' : $disabled; ?>
+				       value="<?php echo esc_attr( $value ); ?>" <?php echo $disabled_state_for_mode['html_attribute'] ?>
 					<?php checked( $value, $current_translation_mode ) ?> />
+				<?php if ( $disabled_state_for_mode['reason_message'] ) { ?>
+					<p class="otgs-notice warning js-disabled-externally"><?php echo wp_kses_post( $disabled_state_for_mode['reason_message'] ); ?></p>
+				<?php } ?>
 			</div>
 			<?php
 		}
+	}
+
+	/**
+	 * @param bool $unlocked
+	 * @param bool $disabled
+	 * @param int $mode
+	 * @param string $content_slug
+	 *
+	 * @return array
+	 */
+	public static function get_disabled_state_for_mode( $unlocked, $disabled, $mode, $content_slug ) {
+		$disabled_state_for_mode = array(
+			'state' => ! $unlocked && $disabled,
+			'reason_message' => ''
+		);
+		$disabled_state_for_mode = apply_filters( 'wpml_disable_translation_mode_radio', $disabled_state_for_mode, $mode, $content_slug );
+		$disabled_state_for_mode['html_attribute'] = $disabled_state_for_mode['state'] ? 'disabled="disabled"' : '';
+		return $disabled_state_for_mode;
 	}
 
 }

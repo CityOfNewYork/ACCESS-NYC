@@ -36,7 +36,10 @@ class WPML_Taxonomy_Element_Language_Dropdown {
 					value="<?php echo esc_attr( $lang[ 'code' ] ); ?>"<?php if ( $selected_language === $lang[ 'code' ] ): ?> selected="selected"<?php endif; ?>><?php echo esc_html( $lang[ 'display_name' ] ); ?></option>
 			<?php endforeach; ?>
 		</select>
-		<?php
+		<?php if ( $disabled ) { ?>
+			<input type="hidden" name="icl_<?php echo esc_attr( $type ) ?>_language"
+			       value="<?php echo esc_attr( $selected_language ); ?>"/>
+		<?php }
 	}
 
 	private function filter_allowed_languages( $active_languages, $selected_language ) {

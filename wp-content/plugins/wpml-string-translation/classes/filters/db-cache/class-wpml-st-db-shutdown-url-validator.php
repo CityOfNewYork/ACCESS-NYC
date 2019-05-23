@@ -15,12 +15,15 @@ class WPML_ST_DB_Shutdown_Url_Validator {
 	}
 
 	public function is_404() {
-		if ( is_404() ) {
-			return true;
-		}
+		global $wp_query;
 
-		if ( ! is_home() ) {
-			return false;
+		if ( isset( $wp_query ) ) {
+			if ( is_404() ) {
+				return true;
+			}
+			if ( ! is_home() ) {
+				return false;
+			}
 		}
 
 		return $this->get_home_url() !== $this->get_current_url();
@@ -51,7 +54,7 @@ class WPML_ST_DB_Shutdown_Url_Validator {
 	 * @return string
 	 */
 	private function get_home_url() {
-		$siteurl = rtrim( get_option( 'siteurl' ), '/' );
+		$siteurl  = rtrim( get_option( 'siteurl' ), '/' );
 		$home_url = rtrim( home_url(), '/' );
 		$home_url = str_replace( $siteurl . '?', $siteurl . '/?', $home_url );
 

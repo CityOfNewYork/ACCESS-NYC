@@ -19,16 +19,18 @@ class WPML_Widgets_Support_Frontend implements IWPML_Action {
 	}
 
 	public function add_hooks() {
-		add_filter( 'widget_display_callback', array( $this, 'display' ), -PHP_INT_MAX, 1 );
+		add_filter( 'widget_display_callback', array( $this, 'display' ), - PHP_INT_MAX, 1 );
 	}
 
 	/**
+	 * Get display status of the widget.
+	 *
 	 * @param array|bool $instance
 	 *
 	 * @return array|bool
 	 */
 	public function display( $instance ) {
-		if ( (bool) $instance && $this->it_must_display( $instance ) ) {
+		if ( ! $instance || $this->it_must_display( $instance ) ) {
 			return $instance;
 		}
 
@@ -36,6 +38,8 @@ class WPML_Widgets_Support_Frontend implements IWPML_Action {
 	}
 
 	/**
+	 * Returns display status of the widget as boolean.
+	 *
 	 * @param array $instance
 	 *
 	 * @return bool

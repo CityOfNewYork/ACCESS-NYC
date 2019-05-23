@@ -8,25 +8,32 @@ class WPML_Admin_Language_Switcher {
 			'class'  => array(),
 			'height' => array(),
 			'width'  => array(),
+		),
+		'i' => array (
+			'class' => array(),
 		)
 	);
 
     function render() {
+
+	    wp_enqueue_script( OTGS_Assets_Handles::POPOVER_TOOLTIP );
+	    wp_enqueue_style( OTGS_Assets_Handles::POPOVER_TOOLTIP );
+
         /** @var $wp_admin_bar WP_Admin_Bar */
         global $wpdb, $wp_admin_bar, $pagenow, $mode, $sitepress;
-    
+
         $all_languages_enabled = true;
         $current_page      = basename( $_SERVER[ 'SCRIPT_NAME' ] );
         $post_type         = false;
         $trid              = false;
         $translations      = false;
         $languages_links   = array();
-    
+
         // individual translations
         $is_post = false;
         $is_tax  = false;
         $is_menu = false;
-    
+
         $current_language = $sitepress->get_current_language();
         $current_language = $current_language ? $current_language : $sitepress->get_default_language();
 
@@ -35,7 +42,7 @@ class WPML_Admin_Language_Switcher {
                 $is_post           = true;
                 $post_id           = @intval( $_GET[ 'post' ] );
                 $post              = get_post( $post_id );
-    
+
                 $post_language = $sitepress->get_language_for_element( $post_id, 'post_' . get_post_type( $post_id ) );
                 if ( $post_language && $post_language != $current_language ) {
                     $sitepress->switch_lang( $post_language );
@@ -43,7 +50,7 @@ class WPML_Admin_Language_Switcher {
                 }
                 $trid         = $sitepress->get_element_trid( $post_id, 'post_' . $post->post_type );
                 $translations = $sitepress->get_element_translations( $trid, 'post_' . $post->post_type, true );
-    
+
                 break;
             case 'post-new.php':
                 $all_languages_enabled = false;
@@ -60,10 +67,10 @@ class WPML_Admin_Language_Switcher {
                 if ( $sitepress->get_wp_api()->is_term_edit_page() ) {
                     $all_languages_enabled = false;
                 }
-    
+
                 $taxonomy = $_GET['taxonomy'];
                 $term_tax_id = 0;
-    
+
                 if ( isset( $_GET[ 'tag_ID' ] ) ) {
                     $term_id     = @intval( $_GET[ 'tag_ID' ] );
                     $term_tax_id = $wpdb->get_var( $wpdb->prepare( "SELECT term_taxonomy_id FROM {$wpdb->term_taxonomy} WHERE taxonomy=%s AND term_id=%d", $taxonomy, $term_id ) );
@@ -74,7 +81,7 @@ class WPML_Admin_Language_Switcher {
                 if ( $trid ) {
                     $translations = $sitepress->get_element_translations( $trid, 'tax_' . $taxonomy, true );
                 }
-    
+
                 break;
             case 'nav-menus.php':
                 $is_menu = true;
@@ -90,12 +97,12 @@ class WPML_Admin_Language_Switcher {
                     $all_languages_enabled = false;
                 }
                 break;
-    
+
         }
 
 			$active_languages = $sitepress->get_active_languages();
 			if ( 'all' !== $current_language ) {
-				$current_active_language = $active_languages[ $current_language ];
+				$current_active_language = isset( $active_languages[ $current_language ] ) ? $active_languages[ $current_language ] : null;
 			}
 			$active_languages = apply_filters( 'wpml_admin_language_switcher_active_languages', $active_languages );
 			if ( 'all' !== $current_language && ! isset( $active_languages[ $current_language ] ) ) {
@@ -104,7 +111,7 @@ class WPML_Admin_Language_Switcher {
 
         foreach ( $active_languages as $lang ) {
             $current_page_lang = $current_page;
-    
+
             if ( isset( $_SERVER[ 'QUERY_STRING' ] ) ) {
                 parse_str( $_SERVER[ 'QUERY_STRING' ], $query_vars );
                 unset( $query_vars[ 'lang' ], $query_vars[ 'admin_bar' ] );
@@ -130,8 +137,8 @@ class WPML_Admin_Language_Switcher {
                     unset( $query_vars[ 'post' ], $query_vars[ 'action' ] );
                 }
             } elseif ( $is_tax ) {
-                if ( isset( $translations[ $lang[ 'code' ] ] ) && isset( $translations[ $lang[ 'code' ] ]->element_id ) ) {
-                    $query_vars[ 'tag_ID' ] = $translations[ $lang[ 'code' ] ]->element_id;
+                if ( isset( $translations[ $lang[ 'code' ] ] ) && isset( $translations[ $lang[ 'code' ] ]->term_id ) ) {
+                    $query_vars[ 'tag_ID' ] = $translations[ $lang[ 'code' ] ]->term_id;
                 } else {
                     $query_vars[ 'trid' ]        = $trid;
                     $query_vars[ 'source_lang' ] = $current_language;
@@ -148,35 +155,39 @@ class WPML_Admin_Language_Switcher {
                     }
                 }
             }
-    
+
             $query_string = http_build_query( $query_vars );
-    
+
             $query = '?';
             if ( !empty( $query_string ) ) {
                 $query .= $query_string . '&';
             }
             $query .= 'lang=' . $lang[ 'code' ]; // the default language need to specified explicitly yoo in order to set the lang cookie
-    
+
             $link_url = admin_url( $current_page_lang . $query );
-    
+
             $flag = $sitepress->get_flag( $lang[ 'code' ] );
-    
-            if ( $flag->from_template ) {
-                $wp_upload_dir = wp_upload_dir();
-                $flag_url      = $wp_upload_dir[ 'baseurl' ] . '/flags/' . $flag->flag;
-            } else {
-                $flag_url = ICL_PLUGIN_URL . '/res/flags/' . $flag->flag;
-            }
-    
+
+	        if ( $flag ) {
+		        if ( $flag->from_template ) {
+			        $wp_upload_dir = wp_upload_dir();
+			        $flag_url      = $wp_upload_dir[ 'baseurl' ] . '/flags/' . $flag->flag;
+		        } else {
+			        $flag_url = ICL_PLUGIN_URL . '/res/flags/' . $flag->flag;
+		        }
+	        } else {
+		        $flag_url = ICL_PLUGIN_URL . '/res/flags/';
+	        }
+
             $languages_links[ $lang[ 'code' ] ] = array(
                 'url'     => $link_url . '&admin_bar=1',
                 'current' => $lang[ 'code' ] == $current_language,
                 'anchor'  => $lang[ 'display_name' ],
                 'flag'    => '<img class="icl_als_iclflag" src="' . esc_url( $flag_url ) . '" alt="' . esc_attr( $lang[ 'code' ] ) . '" width="18" height="12" />'
             );
-    
+
         }
-    
+
         if ( $all_languages_enabled ) {
             $query = '?';
             if ( !empty( $query_string ) ) {
@@ -184,10 +195,10 @@ class WPML_Admin_Language_Switcher {
             }
             $query .= 'lang=all';
             $link_url = admin_url( basename( $_SERVER[ 'SCRIPT_NAME' ] ) . $query );
-    
+
             $languages_links[ 'all' ] = array(
                 'url'  => $link_url, 'current' => 'all' == $current_language, 'anchor' => __( 'All languages', 'sitepress' ),
-                'flag' => '<img class="icl_als_iclflag" src="' . ICL_PLUGIN_URL . '/res/img/icon16.png" alt="all" width="16" height="16" />'
+                'flag' => '<i class="otgs-ico-wpml"></i>'
             );
         } else {
             // set the default language as current
@@ -197,7 +208,7 @@ class WPML_Admin_Language_Switcher {
             }
         }
 
-			$current_language_item = $languages_links[ $current_language ];
+	    	$current_language_item = isset( $languages_links[ $current_language ] ) ? $languages_links[ $current_language ] : null;
 			$languages_links       = apply_filters( 'wpml_admin_language_switcher_items', $languages_links );
 			if ( ! isset( $languages_links[ $current_language ] ) ) {
 				$languages_links = array_merge( array( $current_language => $current_language_item ), $languages_links );
@@ -205,13 +216,17 @@ class WPML_Admin_Language_Switcher {
 
         $parent = 'WPML_ALS';
         $lang   = $languages_links[ $current_language ];
+        $help_tip_text = __( 'This language selector determines which content to display. You can choose items in a specific language or in all languages. To change the language of the WordPress Admin interface, go to your profile.', 'sitepress' );
+
         // Current language
         $wp_admin_bar->add_menu( array(
-                                      'parent' => false, 'id' => $parent,
-                                      'title'  => wp_kses( $lang[ 'flag' ], $this->flag_kses_tags ) . '&nbsp;' . esc_html( $lang[ 'anchor' ] ) . '&nbsp;&nbsp;<i title="' . esc_attr__( 'help', 'sitepress' ) . '" id="wpml_als_help_link" class="otgs-ico-help"></i>',
-                                      'href'   => false, 'meta' => array(
-                'title' => __( 'Showing content in:', 'sitepress' ) . ' ' . $lang[ 'anchor' ],
-            )
+                                      'parent' => false,
+                                      'id' => $parent,
+                                      'title'  => '<span title="' . __( 'Showing content in:', 'sitepress' ) . ' ' . $lang[ 'anchor' ] .'">'
+                                                  . wp_kses( $lang[ 'flag' ], $this->flag_kses_tags ) . '&nbsp;' . esc_html( $lang[ 'anchor' ] )
+                                                  . '</span>'
+                                                  . '&nbsp;<i  class="otgs-ico-help js-otgs-popover-tooltip" data-tippy-zIndex="999999" title="' . $help_tip_text . '" ></i>',
+                                      'href'   => false
                                  ) );
     
         if ( $languages_links ) {
@@ -225,18 +240,6 @@ class WPML_Admin_Language_Switcher {
                                          ) );
             }
         }
-    
-        add_action( 'all_admin_notices', array($this, 'help_popup' ) );
-    }
-    
-    function help_popup()
-    {
-        ?>
-            <div id="icl_als_help_popup" class="icl_cyan_box icl_pop_info">
-                <img class="icl_pop_info_but_close" align="right" src="<?php echo ICL_PLUGIN_URL . '/res/img/ico-close.png'?>" width="12" height="12" alt="x" />
-                <?php echo sprintf( __( 'This language selector determines which content to display. You can choose items in a specific language or in all languages. To change the language of the WordPress Admin interface, go to <a%s>your profile</a>.', 'sitepress' ), ' href="' . admin_url( 'profile.php' ) . '"' );?>
-            </div>
-        <?php
     }
     
 }

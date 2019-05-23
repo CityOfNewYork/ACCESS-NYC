@@ -84,7 +84,7 @@ class WPML_ST_String {
 	}
 
 	/**
-	 * @return object[]
+	 * @return stdClass[]
 	 */
 	public function get_translation_statuses() {
 
@@ -105,10 +105,16 @@ class WPML_ST_String {
 	}
 
 	/**
+	 * For a bulk update of all strings:
+	 * @see WPML_ST_Bulk_Update_Strings_Status::run
 	 */
 	public function update_status() {
 		global $sitepress;
 
+		/**
+		 * If the translation has a `mo_string`, the status of this
+		 * translation will be set to `WPML_TM_COMPLETE`
+		 */
 		$st = $this->get_translation_statuses();
 
 		if ( $st ) {
@@ -122,24 +128,21 @@ class WPML_ST_String {
 
 			$active_languages = $sitepress->get_active_languages();
 
+			// If has no translation or all translations are not translated
 			if ( empty( $translations ) || max( $translations ) == ICL_TM_NOT_TRANSLATED ) {
 				$status = ICL_TM_NOT_TRANSLATED;
 			} elseif ( in_array( ICL_TM_WAITING_FOR_TRANSLATOR, $translations ) ) {
 				$status = ICL_TM_WAITING_FOR_TRANSLATOR;
-			} elseif ( count( $translations ) < count( $active_languages ) - intval( in_array( $string_language, array_keys( $active_languages ) ) ) ) {
-				if ( in_array( ICL_TM_NEEDS_UPDATE, $translations ) ) {
-					$status = ICL_TM_NEEDS_UPDATE;
-				} elseif ( in_array( ICL_TM_COMPLETE, $translations ) ) {
+			} elseif ( in_array( ICL_TM_NEEDS_UPDATE, $translations ) ) {
+				$status = ICL_TM_NEEDS_UPDATE;
+			} elseif ( $this->has_less_translations_than_secondary_languages( $translations, $active_languages, $string_language ) ) {
+				if ( in_array( ICL_TM_COMPLETE, $translations ) ) {
 					$status = ICL_STRING_TRANSLATION_PARTIAL;
 				} else {
 					$status = ICL_TM_NOT_TRANSLATED;
 				}
-			} elseif ( ICL_TM_NEEDS_UPDATE == array_unique( $translations ) ) {
-				$status = ICL_TM_NEEDS_UPDATE;
 			} else {
-				if ( in_array( ICL_TM_NEEDS_UPDATE, $translations ) ) {
-					$status = ICL_TM_NEEDS_UPDATE;
-				} elseif ( in_array( ICL_TM_NOT_TRANSLATED, $translations ) ) {
+				if ( in_array( ICL_TM_NOT_TRANSLATED, $translations ) ) {
 					$status = ICL_STRING_TRANSLATION_PARTIAL;
 				} else {
 					$status = ICL_TM_COMPLETE;
@@ -154,6 +157,19 @@ class WPML_ST_String {
 		}
 
 		return $status;
+	}
+
+	/**
+	 * @param array  $translations
+	 * @param array  $active_languages
+	 * @param string $string_language
+	 *
+	 * @return bool
+	 */
+	private function has_less_translations_than_secondary_languages( array $translations, array $active_languages, $string_language ) {
+		$active_lang_codes            = array_keys( $active_languages );
+		$translations_in_active_langs = array_intersect( $active_lang_codes, array_keys( $translations ) );
+		return count( $translations_in_active_langs ) < count( $active_languages ) - intval( in_array( $string_language, $active_lang_codes, true ) );
 	}
 
 	/**
@@ -240,6 +256,16 @@ class WPML_ST_String {
 	}
 
 	/**
+	 * Set string wrap tag.
+	 * Used for SEO significance, can contain values as h1 ... h6, etc.
+	 *
+	 * @param string $wrap Wrap tag.
+	 */
+	public function set_wrap_tag( $wrap_tag ) {
+		$this->set_property( 'wrap_tag', $wrap_tag );
+	}
+
+	/**
 	 * @param string $property
 	 * @param mixed  $value
 	 */
@@ -269,5 +295,10 @@ class WPML_ST_String {
 		$sql = $this->wpdb->prepare( "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE id = %d", $this->string_id );
 
 		return $this->wpdb->get_var( $sql ) > 0;
+	}
+
+	/** @return string|null */
+	public function get_context() {
+		return $this->wpdb->get_var( "SELECT context " . $this->from_where_snippet() . " LIMIT 1" );
 	}
 }

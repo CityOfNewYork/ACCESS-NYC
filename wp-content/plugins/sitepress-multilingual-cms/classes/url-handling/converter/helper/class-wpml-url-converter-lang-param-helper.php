@@ -78,7 +78,7 @@ class WPML_URL_Converter_Lang_Param_Helper {
 			return false;
 		}
 
-		if ( 0 !== strpos( $url_query_parts['path'], '/wp-admin' ) ) {
+		if ( false === strpos( $url_query_parts['path'], '/wp-admin' ) ) {
 			return false;
 		}
 

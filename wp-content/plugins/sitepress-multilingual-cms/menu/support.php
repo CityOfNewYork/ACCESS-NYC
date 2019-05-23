@@ -28,7 +28,7 @@
 		$dir         = dirname( $file );
 
 		echo '<tr>';
-		echo '<td><i class="icon18 ' . esc_attr( $plugin_data['slug'] ) . '"></i>' . esc_html( $plugin_name ) . '</td>';
+		echo '<td><i class="otgs-ico-' . esc_attr( $plugin_data['slug'] ) . '"></i> ' . esc_html( $plugin_name ) . '</td>';
 		echo '<td align="right">';
 		if ( empty( $plugin_data['plugin'] ) ) {
 			echo esc_html__( 'Not installed', 'sitepress' );
@@ -71,6 +71,8 @@
 	echo $xml_config_log_ui->show();
 
 	do_action( 'wpml_support_page_after' );
+
+	do_action( 'otgs_render_installer_support_link' );
 	?>
 
 </div>

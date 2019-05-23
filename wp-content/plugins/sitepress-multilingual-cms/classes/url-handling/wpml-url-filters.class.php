@@ -97,8 +97,7 @@ class WPML_URL_Filters {
 			if ( ! did_action( 'wpml_pre_status_icon_display' ) ) {
 				do_action( 'wpml_pre_status_icon_display' );
 			}
-			$link = apply_filters( 'wpml_link_to_translation', $link, $id,
-				$lang, $this->post_translation->get_element_trid( $id ) );
+			$link = apply_filters( 'wpml_link_to_translation', $link, $id, $lang, $this->post_translation->get_element_trid( $id ) );
 		}
 
 		return $link;
@@ -219,10 +218,24 @@ class WPML_URL_Filters {
 		return $this->canonicals->get_canonical_url( $canonical_url, $post, $this->get_request_language() );
 	}
 
+	/**
+	 * @param string $url
+	 * @param string $path
+	 * @param string $orig_scheme
+	 * @param int $blog_id
+	 *
+	 * @return string
+	 */
 	public function home_url_filter( $url, $path, $orig_scheme, $blog_id ) {
 		$language_negotiation_type = (int) $this->sitepress->get_setting( 'language_negotiation_type' );
 
-		if ( WPML_LANGUAGE_NEGOTIATION_TYPE_PARAMETER === $language_negotiation_type && $this->debug_backtrace->is_function_in_call_stack( 'get_pagenum_link' ) ) {
+		$context = new WPML_Home_Url_Filter_Context(
+			$language_negotiation_type,
+			$orig_scheme,
+			$this->debug_backtrace
+		);
+
+		if ( $context->should_not_filter() ) {
 			return $url;
 		}
 
@@ -320,6 +333,7 @@ class WPML_URL_Filters {
 		$post_id          = $post_element->get_element_id();
 		$current_language = $this->sitepress->get_current_language();
 		if ( ( ! is_admin() || wp_doing_ajax() )
+		     && ! $this->sitepress->get_wp_api()->is_a_REST_request()
 		     && $this->sitepress->get_setting( 'auto_adjust_ids' )
 		     && $post_element->get_language_code() !== $this->sitepress->get_current_language()
 		     && ( $post_id = $this->post_translation->element_id_in( $post_id, $current_language ) )

@@ -322,18 +322,22 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		$send_to_basket = true;
 		$message_args   = array();
 
-		if ( $job_details->status == ICL_TM_IN_PROGRESS ) {
-			$message_args   = array(
-				'type' => 'update',
-				'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already in progress.', 'wpml-string-translation' ), $post_title, $language_name )
-			);
-			$send_to_basket = false;
-		} elseif ( $job_details->status == ICL_TM_WAITING_FOR_TRANSLATOR ) {
-			$message_args   = array(
-				'type' => 'update',
-				'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already waiting for translator.', 'wpml-string-translation' ), $post_title, $language_name )
-			);
-			$send_to_basket = false;
+		if ( ! $job_details->needs_update ) {
+			if ( $job_details->status == ICL_TM_IN_PROGRESS ) {
+				$message_args   = array(
+					'type' => 'update',
+					'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already in progress.',
+						'wpml-string-translation' ), $post_title, $language_name )
+				);
+				$send_to_basket = false;
+			} elseif ( $job_details->status == ICL_TM_WAITING_FOR_TRANSLATOR ) {
+				$message_args   = array(
+					'type' => 'update',
+					'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already waiting for translator.',
+						'wpml-string-translation' ), $post_title, $language_name )
+				);
+				$send_to_basket = false;
+			}
 		}
 		if ( ! $send_to_basket ) {
 			TranslationProxy_Basket::add_message( $message_args );

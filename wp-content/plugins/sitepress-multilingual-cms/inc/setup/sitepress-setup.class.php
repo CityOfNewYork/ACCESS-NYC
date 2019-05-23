@@ -57,11 +57,16 @@ class SitePress_Setup {
 			$charset_collate = '';
 			global $wpdb;
 			if ( method_exists( $wpdb, 'has_cap' ) && $wpdb->has_cap( 'collation' ) ) {
-				if ( !empty( $wpdb->charset ) ) {
-					$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+				$schema  = wpml_get_upgrade_schema();
+				$charset = $schema->get_default_charset();
+				$collate = $schema->get_default_collate();
+
+				if ( $charset ) {
+					$charset_collate = "DEFAULT CHARACTER SET $charset";
 				}
-				if ( !empty( $wpdb->collate ) ) {
-					$charset_collate .= " COLLATE $wpdb->collate";
+
+				if ( $collate ) {
+					$charset_collate .= " COLLATE $collate";
 				}
 			}
 		}
@@ -308,11 +313,16 @@ class SitePress_Setup {
             ) {
                 continue;
             }
-            if ( !file_exists ( WPML_PLUGIN_PATH . '/res/flags/' . $code . '.png' ) ) {
-                $file = 'nil.png';
-            } else {
-                $file = $code . '.png';
-            }
+			$code_parts = explode( '-', $code );
+
+			$file = 'nil.png';
+
+			if ( file_exists( WPML_PLUGIN_PATH . '/res/flags/' . $code . '.png' ) ) {
+				$file = $code . '.png';
+			} elseif ( file_exists( WPML_PLUGIN_PATH . '/res/flags/' . $code_parts[0] . '.png' ) ) {
+				$file = $code_parts[0] . '.png';
+			}
+
             $wpdb->insert (
                 $wpdb->prefix . 'icl_flags',
                 array( 'lang_code' => $code, 'flag' => $file, 'from_template' => 0 )

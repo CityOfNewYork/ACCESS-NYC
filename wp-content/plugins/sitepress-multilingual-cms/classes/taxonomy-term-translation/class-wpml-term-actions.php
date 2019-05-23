@@ -20,9 +20,10 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 			$term = array_key_exists( 'term', $_POST ) ? sanitize_text_field( $_POST['term'] ) : '';
 			$taxonomy = array_key_exists( 'taxonomy', $_POST ) ? sanitize_text_field( $_POST['taxonomy'] ) : '';
 			$language_code = array_key_exists( 'language_code', $_POST ) ? sanitize_text_field( $_POST['language_code'] ) : '';
+
 			wp_send_json_success(
 				array(
-					'slug' => $this->term_translations->generate_unique_term_slug( $term, '', $taxonomy, $language_code ),
+					'slug' => urldecode( $this->term_translations->generate_unique_term_slug( $term, '', $taxonomy, $language_code ) ),
 				)
 			);
 		} else {
@@ -54,7 +55,8 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 	 * @param int $tt_id
 	 */
 	public function sync_term_meta( $term_id, $tt_id ) {
-		$sync_meta_action = new WPML_Sync_Term_Meta_Action( $this->sitepress, $tt_id );
+		$is_new_term      = 'created_term' === current_filter();
+		$sync_meta_action = new WPML_Sync_Term_Meta_Action( $this->sitepress, $tt_id, $is_new_term );
 		$sync_meta_action->run();
 	}
 

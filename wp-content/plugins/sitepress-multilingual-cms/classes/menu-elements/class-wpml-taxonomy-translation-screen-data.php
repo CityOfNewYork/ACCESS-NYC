@@ -2,6 +2,8 @@
 
 class WPML_Taxonomy_Translation_Screen_Data extends WPML_WPDB_And_SP_User {
 
+	const WPML_TAXONOMY_TRANSLATION_MAX_TERMS_RESULTS_SET = 1000;
+
 	/** @var  string $taxonomy */
 	private $taxonomy;
 
@@ -35,8 +37,10 @@ class WPML_Taxonomy_Translation_Screen_Data extends WPML_WPDB_And_SP_User {
 	 * @return array
 	 */
 	public function terms() {
-		$attributes_to_select                                 = array();
-		$icl_translations_table_name                          = $this->wpdb->prefix . 'icl_translations';
+		$terms_data                  = array( 'truncated' => 0, 'terms' => array() );
+		$attributes_to_select        = array();
+		$icl_translations_table_name = $this->wpdb->prefix . 'icl_translations';
+
 		$attributes_to_select[ $this->wpdb->terms ]           = array(
 			'alias' => 't',
 			'vars'  => array( 'name', 'slug', 'term_id' )
@@ -65,19 +69,28 @@ class WPML_Taxonomy_Translation_Screen_Data extends WPML_WPDB_And_SP_User {
 		$from_clause       = join( ' JOIN ', $join_statements );
 		$select_clause     = $this->build_select_vars( $attributes_to_select );
 		$where_clause      = $this->build_where_clause( $attributes_to_select );
-		$full_statement    = "SELECT {$select_clause} FROM {$from_clause} WHERE {$where_clause}";
-		$all_terms         = $this->wpdb->get_results( $full_statement );
-//		We are not going to add term meta support in 3.6.3.
-//		if ( function_exists( 'get_term_meta' ) ) {
-//			$all_terms         = $this->add_metadata( $all_terms );
-//		}
-		if ( $all_terms ) {
-			$all_terms = $this->order_terms_list( $this->index_terms_array( $all_terms ) );
+		$full_statement    = "SELECT SQL_CALC_FOUND_ROWS {$select_clause} FROM {$from_clause} WHERE {$where_clause}";
+
+		$query_limit_cap = defined( 'WPML_TAXONOMY_TRANSLATION_MAX_TERMS_RESULTS_SET' ) ?
+			WPML_TAXONOMY_TRANSLATION_MAX_TERMS_RESULTS_SET : self::WPML_TAXONOMY_TRANSLATION_MAX_TERMS_RESULTS_SET;
+		$full_statement  .= sprintf( ' LIMIT %d', $query_limit_cap );
+
+		$all_terms = $this->wpdb->get_results( $full_statement );
+
+		$real_terms_count = (int) $this->wpdb->get_var("SELECT FOUND_ROWS()");
+		if( $real_terms_count > $query_limit_cap ){
+			$terms_data['truncated'] = 1;
 		}
 
-		return $all_terms;
-	}
+		if ( function_exists( 'get_term_meta' ) ) {
+			$all_terms = $this->add_metadata( $all_terms );
+		}
+		if ( $all_terms ) {
+			$terms_data['terms'] = $this->order_terms_list( $this->index_terms_array( $all_terms ) );
+		}
 
+		return $terms_data;
+	}
 
 	/**
 	 * @param $terms array
@@ -199,13 +212,24 @@ class WPML_Taxonomy_Translation_Screen_Data extends WPML_WPDB_And_SP_User {
 		return $where_clause;
 	}
 
+	/**
+	 * @param array $all_terms
+	 *
+	 * @return array
+	 */
 	private function add_metadata( $all_terms ) {
+
+		$setting_factory = $this->sitepress->core_tm()->settings_factory();
+
 		foreach ( $all_terms as $term ) {
 			$meta_data = get_term_meta( $term->term_id );
 			foreach ( $meta_data as $meta_key => $meta_data ) {
-				$term->meta_data[ $meta_key ] = $meta_data;
+				if ( in_array( $setting_factory->term_meta_setting( $meta_key )->status(), array( WPML_TRANSLATE_CUSTOM_FIELD, WPML_COPY_ONCE_CUSTOM_FIELD ), true ) ) {
+					$term->meta_data[ $meta_key ] = $meta_data;
+				}
 			}
 		}
+
 		return $all_terms;
 	}
 }

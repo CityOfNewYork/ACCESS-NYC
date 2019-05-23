@@ -2,30 +2,38 @@
 
 class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 
-	const GENERAL_CONTEXT   = 'taxonomy general name';
-	const SINGULAR_CONTEXT  = 'taxonomy singular name';
+	const NONCE_TAXONOMY_TRANSLATION = 'wpml_taxonomy_translation_nonce';
+	const PRIORITY_GET_LABEL = 10;
 
-	const LEGACY_GENERAL_NAME_PREFIX  = 'taxonomy general name: ';
-	const LEGACY_SINGULAR_NAME_PREFIX = 'taxonomy singular name: ';
-	const LEGACY_STRING_DOMAIN        = 'WordPress';
+	/** @var WPML_ST_Taxonomy_Strings $taxonomy_strings */
+	private $taxonomy_strings;
 
-	/** @var WPML_ST_String_Factory $string_factory */
-	private $string_factory;
+	/** @var WPML_ST_Tax_Slug_Translation_Settings $slug_translation_settings */
+	private $slug_translation_settings;
+
+	/** @var WPML_Super_Globals_Validation $super_globals */
+	private $super_globals;
 
 	/** @var array $active_languages */
 	private $active_languages;
 
-	private $strings_translated_with_gettext_context = array();
-
-	public function __construct( WPML_ST_String_Factory $string_factory, array $active_languages ) {
-		$this->string_factory   = $string_factory;
-		$this->active_languages = $active_languages;
+	public function __construct(
+		WPML_ST_Taxonomy_Strings $taxonomy_strings,
+		WPML_ST_Tax_Slug_Translation_Settings $slug_translation_settings,
+		WPML_Super_Globals_Validation $super_globals,
+		array $active_languages
+	) {
+		$this->taxonomy_strings          = $taxonomy_strings;
+		$this->slug_translation_settings = $slug_translation_settings;
+		$this->super_globals             = $super_globals;
+		$this->active_languages          = $active_languages;
 	}
 
 	public function add_hooks() {
 		add_filter( 'gettext_with_context', array( $this, 'block_translation_and_init_strings' ), PHP_INT_MAX, 4 );
-		add_filter( 'wpml_label_translation_data', array( $this, 'get_label_translations' ), 10, 2 );
+		add_filter( 'wpml_label_translation_data', array( $this, 'get_label_translations' ), self::PRIORITY_GET_LABEL, 2 );
 		add_action( 'wp_ajax_wpml_tt_save_labels_translation', array( $this, 'save_label_translations' ) );
+		add_action( 'wp_ajax_wpml_tt_change_tax_strings_language', array( $this, 'change_taxonomy_strings_language' ) );
 	}
 
 	/**
@@ -37,9 +45,11 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 	 * @return mixed
 	 */
 	public function block_translation_and_init_strings( $translation, $text, $gettext_context, $domain ) {
-		if ( self::GENERAL_CONTEXT === $gettext_context || self::SINGULAR_CONTEXT === $gettext_context ) {
-			$this->find_or_create_string( $text, $gettext_context, $domain );
-			$this->add_to_strings_translated_with_gettext_context( $text, $domain );
+		if ( WPML_ST_Taxonomy_Strings::CONTEXT_GENERAL === $gettext_context
+		     || WPML_ST_Taxonomy_Strings::CONTEXT_SINGULAR === $gettext_context
+		) {
+			$this->taxonomy_strings->create_string_if_not_exist( $text, $gettext_context, $domain );
+			$this->taxonomy_strings->add_to_translated_with_gettext_context( $text, $domain );
 
 			// We need to return the original string here so the rest of
 			// the label translation UI works.
@@ -50,85 +60,23 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 	}
 
 	/**
-	 * @param string $text
-	 * @param string $domain
-	 */
-	private function add_to_strings_translated_with_gettext_context( $text, $domain ) {
-		if ( ! in_array( $text, $this->strings_translated_with_gettext_context ) ) {
-			$this->strings_translated_with_gettext_context[ $text ] = $domain;
-		}
-	}
-
-	/**
-	 * @param string       $text
-	 * @param string       $gettext_context
-	 * @param string       $domain
-	 * @param false|string $name
-	 *
-	 * @return int
-	 */
-	private function find_or_create_string( $text, $gettext_context = '', $domain = '', $name = false ) {
-		$context = array(
-			'domain'  => $domain,
-			'context' => $gettext_context,
-		);
-
-		$string_id = $this->string_factory->get_string_id( $text, $context, $name );
-
-		if ( ! $string_id ) {
-			$string_id = icl_register_string( $context, $name, $text );
-		}
-
-		return $string_id;
-	}
-
-	/**
 	 * @param        $false
 	 * @param string $taxonomy
 	 *
-	 * @return array|bool
+	 * @return array|null
 	 */
 	public function get_label_translations( $false, $taxonomy ) {
-		list( $general_string, $singular_string ) = $this->get_taxonomy_strings( $taxonomy );
+		list( $general, $singular, $slug ) = $this->taxonomy_strings->get_taxonomy_strings( $taxonomy );
 
-		$data = null;
-
-		if ( $general_string && $singular_string ) {
-			$data = $this->build_label_array( $general_string, $singular_string );
+		if ( ! $general || ! $singular || ! $slug ) {
+			return null;
 		}
 
-		return $data;
-	}
-
-	/**
-	 * @param string $taxonomy_name
-	 *
-	 * @return WPML_ST_String[]
-	 */
-	private function get_taxonomy_strings( $taxonomy_name ) {
-		$taxonomy = get_taxonomy( $taxonomy_name );
-
-		if ( $taxonomy && isset( $taxonomy->label ) && isset( $taxonomy->labels->singular_name ) ) {
-			$general_string  = $this->get_string( $taxonomy->label, 'general' );
-			$singular_string = $this->get_string( $taxonomy->labels->singular_name, 'singular' );
-
-			return array( $general_string, $singular_string );
-		}
-
-		return array( null, null );
-	}
-
-	/**
-	 * @param WPML_ST_String $general
-	 * @param WPML_ST_String $singular
-	 *
-	 * @return array
-	 */
-	private function build_label_array( WPML_ST_String $general, WPML_ST_String $singular ) {
 		$source_lang = $general->get_language();
 
 		$general_translations  = $this->get_translations( $general );
 		$singular_translations = $this->get_translations( $singular );
+		$slug_translations     = $this->get_translations( $slug );
 
 		$data = array(
 			'st_default_lang' => $source_lang,
@@ -141,85 +89,21 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 
 			$data[ $lang ]['general']  = $this->get_translation_value( $lang, $general_translations );
 			$data[ $lang ]['singular'] = $this->get_translation_value( $lang, $singular_translations );
+			$data[ $lang ]['slug']     = $this->get_translation_value( $lang, $slug_translations );
 
 			$data[ $lang ] = array_filter( $data[ $lang ] );
 		}
 
 		$data[ $source_lang ] = array(
-			'general'  => $general->get_value(),
-			'singular' => $singular->get_value(),
-			'original' => true
+			'general'                      => $general->get_value(),
+			'singular'                     => $singular->get_value(),
+			'slug'                         => $slug->get_value(),
+			'original'                     => true,
+			'globalSlugTranslationEnabled' => $this->slug_translation_settings->is_enabled(),
+			'showSlugTranslationField'     => true,
 		);
 
 		return $data;
-	}
-
-	/**
-	 * @param string $value
-	 * @param string $general_or_singular
-	 *
-	 * @return WPML_ST_String|null
-	 */
-	private function get_string( $value, $general_or_singular ) {
-		$string    = $this->get_string_details( $value, $general_or_singular );
-		$string_id = $this->find_or_create_string( $value, $string['context'], $string['domain'], $string['name'] );
-
-		if ( $string_id ) {
-			return $this->string_factory->find_by_id( $string_id );
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param string $value
-	 * @param string $general_or_singular
-	 *
-	 * @return array
-	 */
-	private function get_string_details( $value, $general_or_singular ) {
-		$string_meta = array(
-			'context' => '',
-			'domain'  => '',
-			'name'    => false,
-		);
-
-		if ( $this->is_string_translated_with_gettext_context( $value ) ) {
-			$string_meta['domain'] = $this->get_domain_for_taxonomy( $value );
-			if ( 'general' === $general_or_singular ) {
-				$string_meta['context'] = self::GENERAL_CONTEXT;
-			} else {
-				$string_meta['context'] = self::SINGULAR_CONTEXT;
-			}
-		} else {
-			$string_meta['domain'] = self::LEGACY_STRING_DOMAIN;
-
-			if ( 'general' === $general_or_singular ) {
-				$string_meta['name'] = self::LEGACY_GENERAL_NAME_PREFIX . $value;
-			} else {
-				$string_meta['name'] = self::LEGACY_SINGULAR_NAME_PREFIX . $value;
-			}
-		}
-
-		return $string_meta;
-	}
-
-	/**
-	 * @param string $value
-	 *
-	 * @return bool
-	 */
-	private function is_string_translated_with_gettext_context( $value ) {
-		return array_key_exists( $value, $this->strings_translated_with_gettext_context );
-	}
-
-	/**
-	 * @param string $value
-	 *
-	 * @return string
-	 */
-	private function get_domain_for_taxonomy( $value ) {
-		return $this->strings_translated_with_gettext_context[ $value ];
 	}
 
 	/**
@@ -258,27 +142,32 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 	}
 
 	public function save_label_translations() {
-		if ( ! wpml_is_action_authenticated( 'wpml_tt_save_labels_translation' ) ) {
-			wp_send_json_error( 'Wrong Nonce' );
+		if ( ! $this->check_nonce() ) {
 			return;
 		}
 
-		$general_translation  = isset( $_POST[ 'plural' ] ) ? sanitize_text_field( $_POST[ 'plural' ] ) : false;
-		$singular_translation = isset( $_POST[ 'singular' ] ) ? sanitize_text_field( $_POST[ 'singular' ] ) : false;
-		$taxonomy_name        = isset( $_POST[ 'taxonomy' ] ) ? sanitize_text_field( $_POST[ 'taxonomy' ] ) : false;
-		$language             = isset( $_POST[ 'taxonomy_language_code' ] )
-			? sanitize_text_field( $_POST[ 'taxonomy_language_code' ] ): false;
+		$general_translation  = $this->get_string_var_from_post( 'plural' );
+		$singular_translation = $this->get_string_var_from_post( 'singular' );
+		$slug_translation     = $this->get_string_var_from_post( 'slug' );
+		$taxonomy_name        = $this->get_string_var_from_post( 'taxonomy' );
+		$language             = $this->get_string_var_from_post( 'taxonomy_language_code' );
 
 		if ( $general_translation && $singular_translation && $taxonomy_name && $language ) {
-			list( $general, $singular ) = $this->get_taxonomy_strings( $taxonomy_name );
+			list( $general, $singular, $slug ) = $this->taxonomy_strings->get_taxonomy_strings( $taxonomy_name );
 
-			if ( $general && $singular ) {
+			if ( $general && $singular && $slug ) {
 				$general->set_translation( $language, $general_translation, ICL_STRING_TRANSLATION_COMPLETE );
 				$singular->set_translation( $language, $singular_translation, ICL_STRING_TRANSLATION_COMPLETE );
+				$slug->set_translation( $language, $slug_translation, ICL_STRING_TRANSLATION_COMPLETE );
+
+				$slug_translation_enabled = $this->has_slug_translation( $slug );
+				$this->slug_translation_settings->set_type( $taxonomy_name, $slug_translation_enabled );
+				$this->slug_translation_settings->save();
 
 				$result = array(
 					'general'  => $general_translation,
 					'singular' => $singular_translation,
+					'slug'     => $slug_translation,
 					'lang'     => $language
 				);
 
@@ -288,5 +177,60 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 		}
 
 		wp_send_json_error();
+	}
+
+	private function has_slug_translation( WPML_ST_String $slug ) {
+		$translations = $slug->get_translations();
+
+		if ( $translations ) {
+			foreach ( $translations as $translation ) {
+				if ( trim( $translation->value ) && ICL_STRING_TRANSLATION_COMPLETE === (int) $translation->status ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public function change_taxonomy_strings_language() {
+		if ( ! $this->check_nonce() ) {
+			return;
+		}
+
+		$taxonomy    = $this->get_string_var_from_post( 'taxonomy' );
+		$source_lang = $this->get_string_var_from_post( 'source_lang' );
+
+		if ( ! $taxonomy || ! $source_lang ) {
+			wp_send_json_error( __( 'Missing parameters', 'wpml-string-translation' ) );
+			return;
+		}
+
+		list( $general_string, $singular_string, $slug ) = $this->taxonomy_strings->get_taxonomy_strings( $taxonomy );
+
+		$general_string->set_language( $source_lang );
+		$singular_string->set_language( $source_lang );
+		$slug->set_language( $source_lang );
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return false|string
+	 */
+	private function get_string_var_from_post( $key ) {
+		$value = $this->super_globals->post( $key );
+		return null !== $value ? sanitize_text_field( $value ) : false;
+	}
+
+	private function check_nonce() {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], self::NONCE_TAXONOMY_TRANSLATION ) ) {
+			wp_send_json_error( __( 'Invalid nonce', 'wpml-string-translation' ) );
+			return false;
+		}
+
+		return true;
 	}
 }

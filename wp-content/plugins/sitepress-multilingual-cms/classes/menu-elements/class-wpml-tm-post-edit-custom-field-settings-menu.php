@@ -57,7 +57,24 @@ class WPML_TM_Post_Edit_Custom_Field_Settings_Menu {
 					);
 					?>
 					<tr>
-						<td id="icl_mcs_cf_<?php echo esc_attr( base64_encode( $cfield ) ); ?>"><?php echo esc_html( $cfield ); ?></td>
+						<td id="icl_mcs_cf_<?php echo esc_attr( base64_encode( $cfield ) ); ?>">
+							<div class="icl_mcs_cf_name">
+								<?php echo esc_html( $cfield ); ?>
+							</div>
+							<?php
+							/**
+							 * Filter for custom field description in multilingual content setup metabox on post edit screen
+							 *
+							 * @param string $custom_field_description  custom field description
+							 * @param string $custom_field_name         custom field name
+							 * @param int    $post_id                   current post ID
+							 */
+							$cfield_description = apply_filters( 'wpml_post_edit_settings_custom_field_description', "", $cfield, $this->post->ID );
+							if ( !empty( $cfield_description ) ) {
+								printf( '<div class="icl_mcs_cf_description">%s</div>', esc_html( $cfield_description ) );
+							}
+							?>
+						</td>
 						<td align="right">
 							<?php
 							foreach ( $states as $state ) {

@@ -174,7 +174,7 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 	public function add_date_or_cpt_url_to_ls_lang( $lang, $fallback_lang, $current_query, $icl_lso_link_empty, $skip_lang, $link_empty_to ) {
 		list( $year, $month, $day ) = $this->extract_date_data_from_query( $current_query );
 		$query_helper = new WPML_WP_Query_API( $current_query );
-		$post_type    = ( $_type = $query_helper->get_post_type_if_single() ) ? $_type : 'post';
+		$post_type    = ( $_type = $query_helper->get_first_post_type() ) ? $_type : 'post';
 		$lang_code    = $lang['code'];
 		$mark_missing = false;
 		$override     = false;
@@ -246,16 +246,8 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 			$ls_language['url'] = $this->sitepress->language_url( $lang_code );
 		}
 
-		$flag_url = '';
-		$flag = $this->sitepress->get_flag( $lang_code );
-		if ( is_object( $flag ) ) {
-			if ( $flag->from_template ) {
-				$wp_upload_dir = wp_upload_dir();
-				$flag_url      = $wp_upload_dir['baseurl'] . '/flags/' . $flag->flag;
-			} else {
-				$flag_url = ICL_PLUGIN_URL . '/res/flags/' . $flag->flag;
-			}
-		}
+		$flag_url = $this->sitepress->get_flag_url( $lang_code );
+
 		$ls_language['country_flag_url'] = $flag_url;
 		$ls_language['active']           = $current_language === $lang_code ? '1' : 0;
 		$ls_language['language_code']    = $lang_code;

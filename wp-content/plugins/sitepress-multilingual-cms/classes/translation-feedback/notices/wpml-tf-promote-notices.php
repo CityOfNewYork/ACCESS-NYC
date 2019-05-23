@@ -8,7 +8,6 @@
 class WPML_TF_Promote_Notices {
 
 	const NOTICE_GROUP    = 'wpml-tf-promote';
-	const NOTICE_OLD_SITE = 'notice-old-site';
 	const NOTICE_NEW_SITE = 'notice-new-site';
 	const DOC_URL         = 'https://wpml.org/documentation/getting-started-guide/getting-visitor-feedback-about-your-sites-translations/';
 
@@ -17,32 +16,6 @@ class WPML_TF_Promote_Notices {
 
 	public function __construct( SitePress $sitepress ) {
 		$this->sitepress = $sitepress;
-	}
-
-	public function show_notice_for_old_site() {
-		$notices = wpml_get_admin_notices();
-
-		$settings_url = admin_url( '?page=' . WPML_PLUGIN_FOLDER . '/menu/languages.php#wpml-translation-feedback-options' );
-
-		$main_text = sprintf(
-			__( 'With WPML 3.8.0, you can now get visitor feedback for your translations (%slearn more%s).', 'sitepress' ),
-			'<a href="' . self::DOC_URL . '" target="_blank">',
-			'</a>'
-		);
-
-		$text = '<p>' . $main_text . '</p>';
-		$text .= '<p><a href="' . $settings_url . '">';
-		$text .= __( 'Enable and configure the "Translation Feedback" feature', 'sitepress' );
-		$text .= '</a></p>';
-
-		$notice  = $notices->get_new_notice( self::NOTICE_OLD_SITE, $text, self::NOTICE_GROUP );
-		$notice->set_dismissible( true );
-		$notice->set_css_class_types( 'notice-info' );
-		$notice->add_display_callback( array( 'WPML_TF_Promote_Notices', 'show_only_for_admin_users' ) );
-
-		if ( ! $notices->is_notice_dismissed( $notice ) ) {
-			$notices->add_notice( $notice );
-		}
 	}
 
 	/**
@@ -78,12 +51,6 @@ class WPML_TF_Promote_Notices {
 
 	public function remove() {
 		$notices = wpml_get_admin_notices();
-		$notices->remove_notice( self::NOTICE_GROUP, self::NOTICE_OLD_SITE );
 		$notices->remove_notice( self::NOTICE_GROUP, self::NOTICE_NEW_SITE );
-	}
-
-	/** @return bool */
-	public static function show_only_for_admin_users() {
-		return current_user_can( 'manage_options' );
 	}
 }

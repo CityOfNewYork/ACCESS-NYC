@@ -23,13 +23,19 @@ class WPML_Download_Localization {
 	public function download_language_packs() {
 		$results = array();
 		if ( $this->active_languages ) {
-			if ( ! function_exists( 'wp_can_install_language_pack' ) ) {
-				/** WordPress Translation Install API */
-				require_once ABSPATH . 'wp-admin/includes/translation-install.php';
-			}
 			if ( ! function_exists( 'request_filesystem_credentials' ) ) {
 				/** WordPress Administration File API */
 				require_once ABSPATH . 'wp-admin/includes/file.php';
+			}
+			
+			$translation_install_file = get_home_path() . 'wp-admin/includes/translation-install.php';
+
+			if ( ! file_exists( $translation_install_file ) ) {
+				return array();
+			}
+			if ( ! function_exists( 'wp_can_install_language_pack' ) ) {
+				/** WordPress Translation Install API */
+				require_once $translation_install_file;
 			}
 			if ( ! function_exists( 'submit_button' ) ) {
 				/** WordPress Administration File API */

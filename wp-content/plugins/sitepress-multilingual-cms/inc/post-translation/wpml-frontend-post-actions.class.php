@@ -3,13 +3,14 @@
 class WPML_Frontend_Post_Actions extends WPML_Post_Translation {
 
 	/**
-	 * @param Integer $post_id
-	 * @param String  $post_status
+	 * @param int    $post_id
+	 * @param string $post_status
+	 *
 	 * @return null|int
 	 */
 	function get_save_post_trid( $post_id, $post_status ) {
 
-		return $this->get_element_trid ( $post_id );
+		return $this->get_element_trid( $post_id );
 	}
 
 	/**
@@ -23,20 +24,17 @@ class WPML_Frontend_Post_Actions extends WPML_Post_Translation {
 
 		wp_defer_term_counting( true );
 		$post = isset( $post ) ? $post : get_post( $pidd );
+
+		$http_referer = new WPML_URL_HTTP_Referer( new WPML_Rest( new WP_Http() ) );
 		// exceptions
-		if ( ! $this->has_save_post_action( $post ) ) {
+		if ( ! $this->has_save_post_action( $post ) || $http_referer->is_rest_request_called_from_post_edit_page() ) {
 			wp_defer_term_counting( false );
 
 			return;
 		}
 		$default_language = $sitepress->get_default_language();
-		// allow post arguments to be passed via wp_insert_post directly and not be expected on $_POST exclusively
-		$post_vars = (array) $_POST;
-		foreach ( (array) $post as $k => $v ) {
-			$post_vars[ $k ] = $v;
-		}
-		$post_vars['post_type'] = isset( $post_vars['post_type'] ) ? $post_vars['post_type'] : $post->post_type;
-		$post_id                = isset( $post_vars['post_ID'] ) ? $post_vars['post_ID']
+		$post_vars        = $this->get_post_vars( $post );
+		$post_id          = isset( $post_vars['post_ID'] ) ? $post_vars['post_ID']
 			: $pidd; //latter case for XML-RPC publishing
 		$language_code          = $this->get_save_post_lang( $post_id, $sitepress );
 		$trid                   = $this->get_save_post_trid( $post_id, $post->post_status );

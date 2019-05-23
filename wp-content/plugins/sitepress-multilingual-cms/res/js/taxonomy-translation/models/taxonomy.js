@@ -11,7 +11,8 @@
 				taxonomy: false,
 				terms: {},
 				parents: {},
-				termNames: {}
+				termNames: {},
+				showSlugTranslationField: true
 			};
 		},
 
@@ -37,7 +38,11 @@
 			jQuery.ajax({
 				url: ajaxurl,
 				type: "POST",
-				data: {action: 'wpml_get_terms_and_labels_for_taxonomy_table', taxonomy: taxonomy},
+				data: {
+					action: 'wpml_get_terms_and_labels_for_taxonomy_table',
+					nonce: labels.wpml_taxonomy_translation_nonce,
+					taxonomy: taxonomy
+				},
 				success: function (response) {
 					var termsData = response.terms;
 					var labelsData = response.taxLabelTranslations;
@@ -48,8 +53,10 @@
 
 					if (labelsData) {
 						TaxonomyTranslation.data.translatedTaxonomyLabels = labelsData;
+						TaxonomyTranslation.data.langSelector             = response.taxLangSelector;
 						if (labelsData.st_default_lang) {
 							self.set('stDefaultLang', labelsData.st_default_lang);
+							self.set('showSlugTranslationField', labelsData[ labelsData.st_default_lang ]['showSlugTranslationField']);
 						}
 					} else {
 						TaxonomyTranslation.data.translatedTaxonomyLabels = false;
@@ -59,11 +66,14 @@
 						self.set('bottomContent', response.bottomContent);
 					}
 
+					TaxonomyTranslation.data.resultsTruncated = response.resultsTruncated;
+
 					if (termsData) {
 						self.processData(termsData);
 					} else {
 						self.trigger('newTaxonomySet');
 					}
+
 				}
 			});
 		},
@@ -145,7 +155,7 @@
 
 			return res;
 		},
-		saveLabel: function (singular, plural, lang) {
+		saveLabel: function (singular, plural, slug, lang) {
 			var self = this;
 
 			jQuery.ajax({
@@ -153,9 +163,10 @@
 				type: "POST",
 				data: {
 					action: 'wpml_tt_save_labels_translation',
-					_icl_nonce: labels.wpml_tt_save_labels_translation_nonce,
+					nonce: labels.wpml_taxonomy_translation_nonce,
 					singular: singular,
 					plural: plural,
+					slug: slug,
 					taxonomy_language_code: lang,
 					taxonomy: self.get('taxonomy')
 				},
@@ -165,7 +176,8 @@
 						if (newLabelData.singular && newLabelData.general && newLabelData.lang) {
 							TaxonomyTranslation.data.translatedTaxonomyLabels[newLabelData.lang] = {
 								singular: newLabelData.singular,
-								general: newLabelData.general
+								general: newLabelData.general,
+								slug: newLabelData.slug
 							};
 							WPML_Translate_taxonomy.callbacks.fire('wpml_tt_save_term_translation', self.get('taxonomy'));
 							self.trigger("labelTranslationSaved");
@@ -219,6 +231,24 @@
 				},
 				success: function (response) {
 					TaxonomyTranslation.data.syncData = response.data;
+					self.setTaxonomy(tax);
+				}
+			});
+		},
+
+		changeTaxStringsLanguage: function(sourceLang) {
+			var self = this;
+			var tax = self.get('taxonomy');
+			jQuery.ajax({
+				url: ajaxurl,
+				type: "POST",
+				data: {
+					action: 'wpml_tt_change_tax_strings_language',
+					nonce: labels.wpml_taxonomy_translation_nonce,
+					taxonomy: tax,
+					source_lang: sourceLang
+				},
+				success: function () {
 					self.setTaxonomy(tax);
 				}
 			});

@@ -11,7 +11,7 @@ class WPML_Cookie_Admin_Scripts {
 
 	public function enqueue_scripts() {
 		wp_enqueue_style( 'wp-pointer' );
-		wp_enqueue_script( 'wpml-cookie-ajax-setting', ICL_PLUGIN_URL . '/res/js/cookies/cookie-ajax-setting.js', array( 'jquery', 'wp-pointer' ) );
+		wp_enqueue_script( 'wpml-cookie-ajax-setting', ICL_PLUGIN_URL . '/res/js/cookies/cookie-ajax-setting.js', array( 'jquery', 'wp-pointer' ), ICL_SITEPRESS_VERSION );
 
 		wp_localize_script( 'wpml-cookie-ajax-setting', 'wpml_cookie_setting', array(
 			'nonce'            => WPML_Cookie_Setting_Ajax::NONCE_COOKIE_SETTING,

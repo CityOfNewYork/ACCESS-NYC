@@ -1,6 +1,8 @@
 <?php
 
-class WPML_WP_Post extends WPML_WPDB_User {
+class WPML_WP_Post {
+	/** @var WPDB $wpdb */
+	public $wpdb;
 
 	/** @var int */
 	private $post_id;
@@ -10,7 +12,7 @@ class WPML_WP_Post extends WPML_WPDB_User {
 	 * @param int $post_id
 	 */
 	public function __construct( WPDB $wpdb, $post_id ) {
-		parent::__construct( $wpdb );
+		$this->wpdb = $wpdb;
 		$this->post_id = $post_id;
 	}
 

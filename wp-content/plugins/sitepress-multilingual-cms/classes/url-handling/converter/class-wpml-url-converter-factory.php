@@ -116,7 +116,7 @@ class WPML_URL_Converter_Factory {
 		$wpml_fix_url_domain = new WPML_Lang_Domain_Filters(
 			$wpml_url_converter,
 			$wpml_wp_api,
-			new WPML_Debug_BackTrace( $wpml_wp_api->phpversion(), 7 )
+			new WPML_Debug_BackTrace( $wpml_wp_api->phpversion(), 10 )
 		);
 		$wpml_fix_url_domain->add_hooks();
 

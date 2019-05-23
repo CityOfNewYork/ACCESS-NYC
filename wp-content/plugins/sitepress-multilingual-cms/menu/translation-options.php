@@ -1,6 +1,7 @@
 <div class="wrap">
-    <h2><?php echo __('Translation options', 'sitepress') ?></h2>
+    <h2><?php echo __( 'Settings', 'sitepress' ) ?></h2>
     <br />
+
     <?php include dirname(__FILE__) . '/_posts_sync_options.php'; ?>
 
     <?php if(defined('WPML_ST_VERSION')): ?>

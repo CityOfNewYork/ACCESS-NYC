@@ -29,6 +29,8 @@ class WPML_ST_Package_Storage {
 	 * @param string $string_type
 	 * @param string $string_value
 	 * @param int $string_id
+	 *
+	 * @return bool
 	 */
 	public function update( $string_title, $string_type, $string_value, $string_id ) {
 
@@ -38,20 +40,22 @@ class WPML_ST_Package_Storage {
 			'type'  => $string_type,
 			'title' => $this->truncate_long_string( $string_title ),
 		);
-		$this->wpdb->update( $this->wpdb->prefix . 'icl_strings', $update_data, $update_where );
+		$type_or_title_updated = $this->wpdb->update( $this->wpdb->prefix . 'icl_strings', $update_data, $update_where );
 
 		$update_data  = array(
 			'string_package_id' => $this->package_id,
 			'value' => $string_value
 		);
-		$did_update   = $this->wpdb->update( $this->wpdb->prefix . 'icl_strings', $update_data, $update_where );
+		$package_id_or_value_updated = $this->wpdb->update( $this->wpdb->prefix . 'icl_strings', $update_data, $update_where );
 
-		if ( $did_update ) {
+		if ( $package_id_or_value_updated ) {
 			$this->set_string_status_to_needs_update_if_translated( $string_id );
 
 			$this->set_translations_to_needs_update();
 
 		}
+
+		return $type_or_title_updated || $package_id_or_value_updated;
 	}
 
 	private function set_string_status_to_needs_update_if_translated( $string_id ) {

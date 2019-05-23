@@ -20,6 +20,21 @@ class WPML_Term_Element extends WPML_Translation_Element {
 	}
 
 	/**
+	 * @return array|null|WP_Error|WP_Term
+	 */
+	function get_wp_object() {
+		$has_filter = remove_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1 );
+
+		$term = get_term( $this->id, $this->taxonomy );
+
+		if ( $has_filter ) {
+			add_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1, 1 );
+		}
+
+		return $term;
+	}
+
+	/**
 	 * @param WP_Term $term
 	 *
 	 * @return string
@@ -50,20 +65,6 @@ class WPML_Term_Element extends WPML_Translation_Element {
 		}
 
 		return $element_id;
-	}
-
-	/**
-	 * @return array|null|WP_Error|WP_Term
-	 */
-	function get_wp_object() {
-		$has_filter = remove_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1 );
-		$term = get_term( $this->id, $this->taxonomy, OBJECT );
-
-		if ( $has_filter ) {
-			add_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1, 1 );
-		}
-
-		return $term;
 	}
 
 	/**

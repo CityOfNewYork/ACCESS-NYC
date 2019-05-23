@@ -15,7 +15,9 @@ class WPML_XML_Config_Log_Notice {
 	}
 
 	public function add_hooks() {
-		add_action( 'wpml_loaded', array( $this, 'refresh_notices' ) );
+		if ( is_admin() ) {
+			add_action( 'wpml_loaded', array( $this, 'refresh_notices' ) );
+		}
 	}
 
 	public function refresh_notices() {
@@ -32,13 +34,14 @@ class WPML_XML_Config_Log_Notice {
 		$notice = $notices->create_notice( self::NOTICE_ERROR_ID, $text, self::NOTICE_ERROR_GROUP );
 		$notice->set_css_class_types( array( 'error' ) );
 
-		$log_url = add_query_arg( array( 'page' => WPML_Config_Update_Log::SUPPORT_PAGE_LOG_SECTION ), get_admin_url( null, 'admin.php#xml-config-log' ) );
+		$log_url = add_query_arg( array( 'page' => WPML_Config_Update_Log::get_support_page_log_section() ), get_admin_url( null, 'admin.php#xml-config-log' ) );
 
 		$show_logs = $notices->get_new_notice_action( __( 'Detailed error log', 'sitepress' ), $log_url );
 
 		$return_url = null;
 		if ( $this->is_admin_user_action() ) {
-			$return_url = home_url( $_SERVER['SCRIPT_NAME'] );
+			$admin_uri  = preg_replace( '#^/wp-admin/#', '', $_SERVER['SCRIPT_NAME'] );
+			$return_url = get_admin_url( null, $admin_uri );
 
 			$return_url_qs = $_GET;
 			unset( $return_url_qs[ self::NOTICE_ERROR_GROUP . '-action' ], $return_url_qs[ self::NOTICE_ERROR_GROUP . '-nonce' ] );
@@ -59,7 +62,7 @@ class WPML_XML_Config_Log_Notice {
 		                                        ) );
 
 		$notice->set_restrict_to_screen_ids( array( 'dashboard', 'plugins', 'themes' ) );
-		$notice->add_exclude_from_page( WPML_Config_Update_Log::SUPPORT_PAGE_LOG_SECTION );
+		$notice->add_exclude_from_page( WPML_Config_Update_Log::get_support_page_log_section() );
 		$notices->add_notice( $notice );
 	}
 
