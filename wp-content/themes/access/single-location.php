@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template name: Location detail page.
+ * Location detail page.
  */
 
 /**

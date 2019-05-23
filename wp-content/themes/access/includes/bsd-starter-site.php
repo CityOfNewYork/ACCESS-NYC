@@ -62,7 +62,7 @@ class BsdStarterSite extends TimberSite
 
     // Get the META description - return english if empty
     if (ICL_LANGUAGE_CODE != 'en') {
-      $orig_page_id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/'.ICL_LANGUAGE_CODE))->ID;
+      $orig_page_id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/' . ICL_LANGUAGE_CODE))->ID;
     } else {
       $orig_page_id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/'))->ID;
     }

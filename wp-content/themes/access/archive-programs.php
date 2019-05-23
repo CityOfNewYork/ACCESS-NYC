@@ -1,6 +1,7 @@
 <?php
 /**
- * Template Name: Programs Landing Page
+ * Programs Landing Page
+ *
  * Controller for the archive view at /programs
  */
 

@@ -10,7 +10,6 @@ use Config\Paths as Path;
 require_once get_template_directory() . '/includes/_paths.php';
 require_once Path\config('scripts');
 require_once Path\config('styles');
-require_once Path\config('routing');
 
 /** Libraries */
 require_once Path\lib('notifications');

@@ -1,6 +1,7 @@
 <?php
 /**
- * Tempalte Name: Eligibility Screener Results
+ * Template Name: Eligibility Screener Results
+ *
  * This controls the view at /elgibility/screener. It expects a few URL parameters.
  *   programs: a comma separated list of program codes
  *   categories: a comma separated list of category slugs
@@ -94,7 +95,7 @@ $query = (isset($query)) ? '?'.$query : '';
 
 // Share by email/sms fields.
 $context['shareAction'] = admin_url( 'admin-ajax.php' );
-$context['shareUrl'] = $params['link'].$query;
+$context['shareUrl'] = home_url() . '/eligibility/results/' . $query;
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 $context['getParams'] = $get; // pass safe parameters
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Field Screener
+ * Template name: Field Screener
  */
 
 $context = Timber::get_context();
