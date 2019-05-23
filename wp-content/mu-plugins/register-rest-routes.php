@@ -56,11 +56,13 @@ add_action('rest_api_init', function() use ($transients) {
    */
   register_rest_route($v, '/terms/', array(
     'methods' => 'GET',
-    'callback' => function(WP_REST_Request $request) use ($expiration) {
-      $transient = 'terms_json';
-      $data = get_transient( $transient );
+    'callback' => function(WP_REST_Request $request) use ($expiration, $transients) {
+      $transient = $transients['programs'];
+      $data = get_transient($transient);
 
       if (false === $data) {
+        $data = [];
+
         // Get public taxonomies and build our initial assoc. array
         foreach (get_taxonomies(array(
             'public' => true,
@@ -83,7 +85,7 @@ add_action('rest_api_init', function() use ($transients) {
           return $tax;
         }, $data);
 
-        set_transient( $transient, $data, $expiration );
+        set_transient($transient, $data, $expiration);
       }
 
       $response = new WP_REST_Response($data); // Create the response object
@@ -152,7 +154,7 @@ add_action('rest_api_init', function() use ($transients) {
           );
         }
 
-        set_transient( $transient, $data, $expiration );
+        set_transient($transient, $data, $expiration);
       }
 
       $response = new WP_REST_Response($data);
