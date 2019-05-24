@@ -1,11 +1,11 @@
 <?php
+
 /**
- * Register custom query vars
- *
- * @param array $vars The array of available query variables
- *
- * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/query_vars
+ * Plugin Name: Query Vars
+ * Description: Adds 'program_cat', 'pop_served', and 'page_type' as acceptable query vars to the site for WordPress Database queries.
+ * Author: NYC Opportunity
  */
+
 add_filter('query_vars', function($vars) {
   $vars[] = 'program_cat'; // Used in Programs Archive
   $vars[] = 'pop_served'; // Used in Programs Single

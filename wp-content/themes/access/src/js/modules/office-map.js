@@ -209,7 +209,7 @@ class OfficeMap {
    */
   fetchLocations() {
     return $.getJSON($(this._el).data('source')).then(data => {
-      _.each(data.locations, item => {
+      _.each(data, item => {
         const location = new OfficeLocation(item);
         google.maps.event.addListener(location.marker, 'click', () => {
           this.focusListOnMarker(location.marker);

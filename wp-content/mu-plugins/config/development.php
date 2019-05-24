@@ -13,3 +13,4 @@ deactivate_plugins([
 ]);
 
 activate_plugin(WP_PLUGIN_DIR . 'wps/wps.php');
+activate_plugin(WP_PLUGIN_DIR . 'query-monitor/query-monitor.php');
