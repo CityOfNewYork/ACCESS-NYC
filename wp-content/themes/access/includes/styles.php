@@ -20,11 +20,3 @@ function enqueue_language_style($name) {
 
   $style = Nyco\Enqueue\style("assets/styles/$name-$lang");
 }
-
-/**
- * Disable the WP Security Questions stylesheet
- * @return null
- */
-add_action('wp_print_styles', function () {
-  wp_deregister_style('wsq-frontend.css');
-}, 100);

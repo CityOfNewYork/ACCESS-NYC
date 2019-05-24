@@ -1,24 +1,30 @@
 <?php
 
 /**
- * Register Rest Routes
+ * Plugin Name: Register REST Routes
+ * Description: Adds custom routes to the WP REST API. Some rest routes use WordPress Transients to cache requests. To delete caches, use the Transients Manager Plugin to delete them. If the plugin is already installed it will be in Tools > Transients.
+ * Author: NYC Opportunity
  */
 
-/**
- * Post types and terms that have corresponding transient caches
- * @var array
- */
-$transients = array(
-  'location' => 'locations_json',
-  'programs' => 'terms_json',
-  'outreach' => 'terms_json',
-  'page-type' => 'terms_json',
-  'populations-served' => 'terms_json'
-);
+add_action('rest_api_init', function() {
+  include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-add_action('rest_api_init', function() use ($transients) {
   $v = 'api/v1'; // namespace for the current version of the API
-  $expiration = WEEK_IN_SECONDS; // expiration of the transient caches
+  $exp = WEEK_IN_SECONDS; // expiration of the transient caches
+  $lang = (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) ?
+    '_' . ICL_LANGUAGE_CODE : '';
+
+  /**
+   * Post types and terms that have corresponding transient caches
+   * @var array
+   */
+  $transients = array(
+    'location' => 'rest_locations_json' . $lang,
+    'programs' => 'rest_terms_json' . $lang,
+    'outreach' => 'rest_terms_json' . $lang,
+    'page-type' => 'rest_terms_json' . $lang,
+    'populations-served' => 'rest_terms_json' . $lang
+  );
 
   /**
    * Some rest endpoints use the WP Transient Cache to speed up the delivery
@@ -56,7 +62,7 @@ add_action('rest_api_init', function() use ($transients) {
    */
   register_rest_route($v, '/terms/', array(
     'methods' => 'GET',
-    'callback' => function(WP_REST_Request $request) use ($expiration, $transients) {
+    'callback' => function(WP_REST_Request $request) use ($exp, $transients) {
       $transient = $transients['programs'];
       $data = get_transient($transient);
 
@@ -85,7 +91,7 @@ add_action('rest_api_init', function() use ($transients) {
           return $tax;
         }, $data);
 
-        set_transient($transient, $data, $expiration);
+        set_transient($transient, $data, $exp);
       }
 
       $response = new WP_REST_Response($data); // Create the response object
@@ -111,8 +117,7 @@ add_action('rest_api_init', function() use ($transients) {
    */
   register_rest_route($v, '/locations/', array(
     'methods' => 'GET',
-    'callback' => function( WP_REST_Request $request )
-      use ($transients, $expiration) {
+    'callback' => function( WP_REST_Request $request ) use ($transients, $exp) {
       $transient = $transients['location'];
       $data = get_transient( $transient );
 
@@ -154,7 +159,7 @@ add_action('rest_api_init', function() use ($transients) {
           );
         }
 
-        set_transient($transient, $data, $expiration);
+        set_transient($transient, $data, $exp);
       }
 
       $response = new WP_REST_Response($data);
@@ -165,18 +170,18 @@ add_action('rest_api_init', function() use ($transients) {
   ));
 });
 
-/**
- * Clear transient caches for post types when they are updated
- */
-add_action('save_post', function($post_id) use ($transients) {
-  $type = get_post_type($post_id);
-  delete_transient($transients[$type]);
-});
+// /**
+//  * Clear transient caches for post types when they are updated
+//  */
+// add_action('save_post', function($post_id) use ($transients) {
+//   $type = get_post_type($post_id);
+//   delete_transient($transients[$type]);
+// });
 
-/**
- * Clear transient caches for taxonomies when they are updated
- */
-add_action('edited_terms', function($term_id) use ($transients) {
-  $taxonomy = get_term($term_id)->taxonomy;
-  delete_transient($transients[$taxonomy]);
-}, 10, 2);
+// /**
+//  * Clear transient caches for taxonomies when they are updated
+//  */
+// add_action('edited_terms', function($term_id) use ($transients) {
+//   $taxonomy = get_term($term_id)->taxonomy;
+//   delete_transient($transients[$taxonomy]);
+// }, 10, 2);

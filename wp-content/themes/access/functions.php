@@ -15,8 +15,8 @@ require_once Path\config('styles');
 require_once Path\lib('notifications');
 
 /** Controllers */
-require_once Path\controller('bsd-starter-site');
-require_once Path\controller('locations');
+require_once Path\controller('site');
+require_once Path\controller('single-location');
 
 /**
  * Initialization
@@ -27,14 +27,14 @@ Notifications\timber();
 /**
 * Filter search to only show program page results
 */
-if (!is_admin()) {
-  add_filter('pre_get_posts', function ($query) {
-    if ($query->is_search) {
-      $query->set('post_type', 'programs');
-    }
-    return $query;
-  });
-}
+// if (!is_admin()) {
+//   add_filter('pre_get_posts', function ($query) {
+//     if ($query->is_search) {
+//       $query->set('post_type', 'programs');
+//     }
+//     return $query;
+//   });
+// }
 
 /**
 * Filter posts by multiple categories
@@ -137,7 +137,7 @@ add_filter('icl_ls_languages', function($languages) {
 // *****
 
 // Define site.
-new BsdStarterSite();
+new Site();
 
 // GatherContent - Mapped WordPress Field meta_keys edit
 add_filter('gathercontent_importer_custom_field_keys', function ($meta_keys) {

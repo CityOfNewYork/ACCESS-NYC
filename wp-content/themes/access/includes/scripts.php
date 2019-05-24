@@ -32,16 +32,3 @@ function add_crossorigin_attr($name) {
     }
   }, 10, 2);
 }
-
-/**
- * Disable Scripts
- * @return null
- */
-add_action('wp_print_scripts', function () {
-  /** Disable the oEmbed script */
-  wp_deregister_script('wp-embed');
-  /** Disable the WP Security Questions script */
-  wp_deregister_script('wsq-frontend.js');
-  /** Disable jQuery */
-  wp_deregister_script('jquery');
-}, 100);

@@ -1,21 +1,22 @@
 <?php
 
-class BsdStarterSite extends TimberSite
-{
+class Site extends TimberSite {
 
   function __construct() {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     add_theme_support('menus');
-    add_action('init', array( $this, 'cleanup_header' ));
-    add_action('init', array( $this, 'add_menus' ));
-    add_filter('timber_context', array( $this, 'add_to_context' ));
-    add_action('wp_enqueue_scripts', array( $this, 'add_styles_and_scripts' ), 999);
-    add_action('widgets_init', array( $this, 'add_sidebars' ));
+
+    add_action('init', array($this, 'cleanUpHeader'));
+    add_action('init', array($this, 'addMenus'));
+
+    add_filter('timber_context', array($this, 'addToContext'));
+    add_action('wp_enqueue_scripts', array($this, 'addStylesAndScripts'), 999);
+    // add_action('widgets_init', array( $this, 'add_sidebars' ));
     parent::__construct();
   }
 
-  function cleanup_header() {
+  function cleanUpHeader() {
     remove_action('wp_head', 'rsd_link');
     remove_action('wp_head', 'wlwmanifest_link');
     remove_action('wp_head', 'index_rel_link');
@@ -29,11 +30,13 @@ class BsdStarterSite extends TimberSite
     remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
   }
 
-  function add_to_context($context) {
+  function addToContext($context) {
     $context['menu'] = new TimberMenu('header-menu');
+
     error_reporting(0);
     $context['language_code'] = ICL_LANGUAGE_CODE;
     error_reporting(WP_DEBUG);
+
     $context['site'] = $this;
     $context['search_links'] = Timber::get_posts(array(
       'post_type' => 'program_search_links',
@@ -85,21 +88,21 @@ class BsdStarterSite extends TimberSite
     return $context;
   }
 
-  function add_styles_and_scripts() {
+  function addStylesAndScripts() {
     global $wp_styles;
   }
 
-  function add_sidebars() {
-    register_sidebar(array(
-      'id' => 'footer_widgets',
-      'name' => __('Footer'),
-      'description' => __('Widgets in the site global footer'),
-      'before_widget' => '',
-      'after_widget' => ''
-    ));
-  }
+  // function add_sidebars() {
+  //   register_sidebar(array(
+  //     'id' => 'footer_widgets',
+  //     'name' => __('Footer'),
+  //     'description' => __('Widgets in the site global footer'),
+  //     'before_widget' => '',
+  //     'after_widget' => ''
+  //   ));
+  // }
 
-  function add_menus() {
+  function addMenus() {
     register_nav_menus(
       array(
         'header-menu' => __('Header Menu')

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Location Controller
+ * Single Location Controller
  */
 
 namespace Controller;
@@ -16,12 +16,11 @@ use nyco\WpOpenDataTransients\Transients\Transients as Transients;
 /**
  * Locations Controller
  */
-class SingleLocation extends TimberPost
-{
+class SingleLocation extends TimberPost {
 
   /**
    * Return the template for the location controller
-   * @return [array] [description]
+   * @return [array] Array including the template string
    */
   public function templates() {
     return array(self::TEMPLATE);

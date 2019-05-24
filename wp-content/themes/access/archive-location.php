@@ -79,4 +79,4 @@ foreach ($categories as $category) {
 
 $templates = array('locations/locations.twig');
 
-Timber::render( $templates, $context );
+Timber::render($templates, $context);
