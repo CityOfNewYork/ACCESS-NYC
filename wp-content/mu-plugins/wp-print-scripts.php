@@ -14,5 +14,6 @@ add_action('wp_print_scripts', function () {
   wp_deregister_script('wsq-frontend.js');
 
   /** Disable jQuery */
-  wp_deregister_script('jquery');
+  if (false === is_admin() && false === is_user_logged_in())
+    wp_deregister_script('jquery');
 }, 100);

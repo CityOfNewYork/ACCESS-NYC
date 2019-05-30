@@ -117,16 +117,16 @@ add_action('rest_api_init', function() {
    */
   register_rest_route($v, '/locations/', array(
     'methods' => 'GET',
-    'callback' => function( WP_REST_Request $request ) use ($transients, $exp) {
+    'callback' => function(WP_REST_Request $request) use ($transients, $exp) {
       $transient = $transients['location'];
-      $data = get_transient( $transient );
+      $data = get_transient($transient);
 
       if (false === $data) {
         global $sitepress;
         $default_lang = $sitepress->get_default_language();
         $data = [];
 
-        $posts = get_posts( array(
+        $posts = get_posts(array(
           'post_type' => 'location',
           'numberposts' => -1,
           'suppress_filters' => 0
@@ -159,7 +159,10 @@ add_action('rest_api_init', function() {
           );
         }
 
-        set_transient($transient, $data, $exp);
+        $bool = set_transient($transient, $data, $exp);
+        // var_dump($bool);
+        // var_dump($exp);
+        // var_dump($data);
       }
 
       $response = new WP_REST_Response($data);
@@ -169,19 +172,3 @@ add_action('rest_api_init', function() {
     }
   ));
 });
-
-// /**
-//  * Clear transient caches for post types when they are updated
-//  */
-// add_action('save_post', function($post_id) use ($transients) {
-//   $type = get_post_type($post_id);
-//   delete_transient($transients[$type]);
-// });
-
-// /**
-//  * Clear transient caches for taxonomies when they are updated
-//  */
-// add_action('edited_terms', function($term_id) use ($transients) {
-//   $taxonomy = get_term($term_id)->taxonomy;
-//   delete_transient($transients[$taxonomy]);
-// }, 10, 2);
