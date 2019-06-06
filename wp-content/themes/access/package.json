@@ -1,19 +1,23 @@
 {
   "name": "access-nyc",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "repository": {
     "type": "git",
     "url": "https://github.com/CityOfNewYork/ACCESS-NYC"
   },
+  "config": {
+    "proxy": "http://localhost:8080"
+  },
   "scripts": {
     "gulp": "gulp",
     "start": "npm run development",
-    "development": "NODE_ENV='development' gulp",
-    "production": "NODE_ENV='production' gulp",
+    "development": "NODE_ENV='development' PROXY=$npm_package_config_proxy gulp",
+    "production": "NODE_ENV='production' PROXY=$npm_package_config_proxy gulp",
     "predeploy": "NODE_ENV='production' gulp build",
     "scripts": "NODE_ENV='production' gulp scripts",
     "styles": "NODE_ENV='production' gulp styles",
+    "regen": "npm install --package-lock-only",
     "version": "echo \"No version task required\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -62,7 +66,6 @@
     "css-mqpacker": "^7.0.0",
     "cssnano": "^3.10.0",
     "del": "^1.2.0",
-    "dotenv": "^2.0.0",
     "eslint": "3.8.1",
     "eslint-config-google": "^0.7.1",
     "gulp": "^4.0.0",
@@ -83,13 +86,12 @@
     "gulp-util": "^3.0.6",
     "terser-webpack-plugin": "^1.2.3",
     "vinyl-named": "^1.1.0",
-    "vue": "^2.6.9",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.9",
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "access-nyc-patterns": "^0.5.0",
+    "access-nyc-patterns": "^0.5.1",
     "cleave.js": "^0.7.23",
     "es6-promise": "^4.2.5",
     "jquery": "^3.1.1",
@@ -97,6 +99,7 @@
     "smoothscroll-polyfill": "^0.4.3",
     "underscore": "^1.8.3",
     "vee-validate": "^2.0.0-rc.18",
+    "vue": "^2.6.9",
     "whatwg-fetch": "^3.0.0"
   }
 }

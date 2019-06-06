@@ -7,7 +7,7 @@ import OfficeLocation from 'modules/office-location';
 import Utility from 'modules/utility';
 import _ from 'underscore';
 
-const google = window.google;
+/* eslint-disable no-undef */
 
 /**
  * This is the main controller for the map at the /locations page. This handles
@@ -434,12 +434,9 @@ class OfficeMap {
     }
     return this;
   }
-
-  // results() {
-
-  // }
-
 }
+
+/* eslint-enable no-undef */
 
 /**
  * CSS classes used by this component.

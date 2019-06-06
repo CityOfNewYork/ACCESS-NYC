@@ -10,7 +10,7 @@
 
 {% block content %}
 <main class="main-content screen-desktop:my-2 screen-desktop:mx-4 screen-desktop:px-2" id="content" data-js="view">
-  <form class="bg-color-white screen-desktop:border border-color-grey-light screen-desktop:m-4 text-font-size-small js-screener-form" action="/eligibility/results/">
+  <form data-js="screener" class="bg-color-white screen-desktop:border border-color-grey-light screen-desktop:m-4 text-font-size-small" action="/eligibility/results/">
     {% include 'screener/step-1.twig' with {'categories': categories} %}
     {% include 'screener/step-2.twig' %}
     {% include 'screener/step-3.twig' %}
@@ -27,7 +27,6 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/main') }}
 {{ function('enqueue_script', 'assets/js/screener') }}
 
 <script type="template/html" id="screener-income-template">

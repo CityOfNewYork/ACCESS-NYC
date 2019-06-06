@@ -37,8 +37,11 @@ class ScreenerHousehold {
       /** @type {boolean} */
       livingShelter: false,
       /** @type {boolean} */
-      livingPreferNotToSay: false
+      livingPreferNotToSay: false,
+      /** @type {array} */
+      programCategories: []
     };
+
     if (obj) {
       this.set(obj);
     }
@@ -77,7 +80,7 @@ class ScreenerHousehold {
     if (key in this._attrs && typeof this._attrs[key] === typeof value) {
       if (key === 'city' && value !== 'NYC') {
         this._attrs[key] = '';
-      } else if (key == 'livingRentalType' &&
+      } else if (key === 'livingRentalType' &&
           ScreenerHousehold.RENTAL_TYPE.indexOf(value) <= -1) {
         this._attrs[key] = '';
       } else {

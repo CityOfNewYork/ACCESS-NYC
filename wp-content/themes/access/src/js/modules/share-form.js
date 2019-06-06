@@ -233,7 +233,7 @@ class ShareForm {
   _track(type) {
     let key = type.charAt(0).toUpperCase() + type.slice(1);
 
-    Utility.track(`${key}`, [
+    Utility.track(key, [
       {'DCS.dcsuri': `share/${type}`}
     ]);
   }

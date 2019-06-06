@@ -520,7 +520,8 @@ class Screener {
         $step.find('input[name="category"]:checked').each((i, el) => {
           categories.push($(el).val());
         });
-        this._categories = categories;
+
+        this._household.set('programCategories', categories);
         break;
       }
       case 'step-2': {
@@ -980,7 +981,7 @@ class Screener {
     };
 
     // Add programs.
-    _.each(this._categories, category => {
+    _.each(this._household.get('programCategories'), category => {
       const obj = {
         slug: category,
         label: Utility.localize(category)
@@ -1226,8 +1227,8 @@ class Screener {
       const programs = _.chain(Utility.findValues(data, 'code'))
           .filter(item => _.isString(item)).uniq().value();
       const params = {};
-      if (this._categories.length) {
-        params.categories = this._categories.join(',');
+      if (this._household.get('programCategories').length) {
+        params.categories = this._household.get('programCategories').join(',');
       }
       if (programs.length) {
         params.programs = programs.join(',');
@@ -1312,7 +1313,8 @@ Screener.Selectors = {
   QUESTION_CONTAINER: '.c-question__container',
   TRANSACTION_LABEL: '[data-js="transaction-label"]',
   SPINNER: '[data-js="spinner"]',
-  VIEW: '[data-js="view"]'
+  VIEW: '[data-js="view"]',
+  FORM: '[data-js="screener"]'
 };
 
 /**

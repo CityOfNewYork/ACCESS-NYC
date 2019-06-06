@@ -59,25 +59,30 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/main') }}
+{% set strings = [] %}
+{% for filter in filters %}
+  {% for program in filter.programs %}
+    {% set strings = strings|merge([{
+      'label': program.post_title,
+      'slug': program.uid
+    }]) %}
+  {% endfor %}
+{% endfor %}
+
+{% include 'partials/strings.twig' with {'strings': strings} only %}
+{% include 'partials/strings.twig' with {'strings': [
+  {
+    'label': 'Government Office',
+    'slug': 'GOVERNMENT_OFFICE'
+  }
+], 'translation_id': 'accessnyc-locations'} only %}
+
 {{ function('enqueue_script', 'assets/js/locations') }}
-<script src="https://www.google.com/jsapi"></script>
-<script>
-  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
-  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([{% for filter in filters %}{% for program in filter.programs %}
-    {
-      "label": {{ program.post_title|json_encode() }},
-      "slug": {{ program.uid|json_encode() }}
-    },{% endfor %}{% endfor %}
-    {
-      "label": {{__('Government Office', 'accessnyc-locations')|trim|json_encode()}},
-      "slug": "GOVERNMENT_OFFICE"
-    }
-  ]);
-</script>
+
 <script type="text/template" id="map-location-template">
   {% include 'components/card-map-location.underscore.twig' %}
 </script>
+
 <script type="text/template" id="map-pagination-template">
   {% include 'partials/locations-pagination.underscore.twig' %}
 </script>
