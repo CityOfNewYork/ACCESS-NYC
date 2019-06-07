@@ -1,9 +1,9 @@
 === Limit Login Attempts Reloaded ===
 Contributors: wpchefgadget
-Tags: login, security, authentication, Limit Login Attempts, GDPR, brute-force attack, brute force, login abuse, ddos protection
+Tags: brute force, login, security, GDPR, protection
 Requires at least: 3.0
-Tested up to: 4.9.7
-Stable tag: 2.7.1
+Tested up to: 5.1.1
+Stable tag: 2.8.1
 
 Reloaded version of the original Limit Login Attempts plugin for Login Protection by a team of WordPress developers. GDPR compliant.
 
@@ -19,7 +19,6 @@ Features:
 * Limit the number of attempts to log in using authorization cookies in the same way.
 * Informs the user about the remaining retries or lockout time on the login page.
 * Optional logging and optional email notification.
-* Handles server behind the reverse proxy.
 * It is possible to whitelist/blacklist IPs and Usernames.
 * Sucuri Website Firewall compatibility.
 * **XMLRPC** gateway protection.
@@ -50,6 +49,22 @@ Based on the original code from Limit Login Attemps plugin by Johan Eenfeldt.
 3. Administration interface in WordPress 4.5.3
 
 == Changelog ==
+
+= 2.8.1 =
+* Extra lockout options are back.
+
+= 2.8.0 =
+* The plugin doesn't trust any IP addresses other than _SERVER["REMOTE_ADDR"] anymore. Trusting other IP origins make protection useless b/c they can be easily faked. This new version provides a way of secure IP unlocking for those sites that use a reverse proxy coupled with misconfigurated servers that populate _SERVER["REMOTE_ADDR"] with wrong IPs which leads to mass blocking of users.
+
+= 2.7.4 =
+* The lockout alerts can be sent to a configurable email address now.
+
+= 2.7.3 =
+* Settings page is moved back to "Settings".
+
+= 2.7.2 =
+* Settings are moved to a separate page.
+* Fixed: login error message. https://wordpress.org/support/topic/how-to-change-login-error-message/
 
 = 2.7.1 =
 * A security issue inherited from the ancestor plugin Limit Login Attempts has been fixed.

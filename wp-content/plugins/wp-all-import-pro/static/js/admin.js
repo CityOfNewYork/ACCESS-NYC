@@ -3,7 +3,69 @@
  */
 (function($){$(function () {
 
-	if ( ! $('body.wpallimport-plugin').length) return; // do not execute any code if we are not on plugin page	
+    if ( ! $('body.wpallimport-plugin').length) return; // do not execute any code if we are not on plugin page
+
+    function wpai_set_custom_select_image() {
+        // The class name to add to the element.
+        var class_name = jQuery('[class^="dd-selected-text dashicon"]').text().toLowerCase();
+        class_name = class_name.replace( /\s+/g, '' );
+
+        // This gets the image URL out of the class.
+        var class_check = jQuery('[class^="dd-selected-text dashicon"]').attr( 'class' );
+        class_check = class_check.replace( "dd-selected-text dashicon ", "" );
+
+        // String of allowed images.
+        var imgs = ['jpg','jpeg','jpe','gif','png','bmp'], length = imgs.length;
+        while( length-- ) {
+            if ( class_check.indexOf( imgs[ length ] ) != -1 ) {
+
+                // They have defined an image URL, which means it's a custom image and we need to add the class.
+                jQuery('[class^="dd-selected-text dashicon"]').addClass("wpaiimgfor" + class_name);
+                jQuery('[class^="dd-selected-text dashicon"]').removeClass( class_check );
+
+            }
+        }           
+    }
+
+    // Rapid Add-On API Images
+    $(document).ready(function($){    
+        var class_check;
+        var original_class;
+        var new_class_name;
+        var allstyles = "<style type='text/css'>";
+
+        $.each($('[class^="dd-option-text"]'), function(key, value) {
+            class_check = $(this).attr('class');
+            if ( class_check.includes( 'dashicon' ) ) {
+
+                // Grab the URL to the image by removing the other classes out of the string.
+                class_check = class_check.replace( "dd-option-text dashicon ", "" );
+
+                // Build the class name that we need to append to head.
+                new_class_name = $(this).text().toLowerCase();
+                new_class_name = new_class_name.replace( /\s+/g, '' );
+
+                var imgs = ['jpg','jpeg','jpe','gif','png','bmp'],
+                length = imgs.length;
+                while( length-- ) {
+                    if ( class_check.indexOf( imgs[ length ] ) != -1 ) {
+
+                        // They've defined a custom image URL, so we need to append the class to the head and add it to the list item.
+                        allstyles = allstyles + ".wpaiimgfor" + new_class_name + ":before { font-family: 'dashicons'; font-size: 24px; float: left; margin: 2px 5px 2px 2px;background-image: url(" + class_check + "); background-repeat: no-repeat; background-position: center center; content:'';height: 25px;width:24px; }";
+                        allstyles = allstyles + "label.dd-option-text.dashicon.wpaiimgfor" + new_class_name + " { top: 2px !important; }";
+                        $(this).addClass("wpaiimgfor" + new_class_name);
+                        $(this).removeClass( class_check );
+
+                    }
+                }                
+            }
+        });
+
+        // Append all of the classes to head.
+        allstyles = allstyles + "</style>";
+        $( allstyles ).appendTo("head");
+
+    });
 	
 	// fix wpallimport-layout position
 	setTimeout(function () {
@@ -233,7 +295,10 @@
 				}
 				else{
 					$('.wpallimport-submit-buttons').slideDown();
-				}
+                }
+                
+                // Rapid Add-On API Images
+                wpai_set_custom_select_image();
 
 
 		    } 
@@ -497,7 +562,10 @@
 				}
 				else{
 					$('.taxonomy_to_import_wrapper').slideUp();
-				}
+                }
+
+                // Rapid Add-On API Images
+                wpai_set_custom_select_image();
 		    } 
 		});		
 
@@ -2402,6 +2470,6 @@
 
 	$(document).scroll(function() {    	    				
     	fix_tag_position();
-	});   
+    });
 
 });})(jQuery);

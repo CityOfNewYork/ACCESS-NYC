@@ -14,7 +14,6 @@ return array(
     'Rollbar\\Wordpress\\' => array($baseDir . '/src'),
     'Rollbar\\' => array($vendorDir . '/rollbar/rollbar/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
-    'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Michelf\\' => array($vendorDir . '/michelf/php-markdown/Michelf'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
 );

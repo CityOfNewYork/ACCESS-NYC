@@ -68,7 +68,7 @@ function acf_idify( $str = '' ) {
 */
 
 function acf_slugify( $str = '' ) {
-	return str_replace('_', '-', strtolower($str));
+	return str_replace(array('_', '/', ' '), '-', strtolower($str));
 }
 
 /**
@@ -242,41 +242,6 @@ function acf_get_data( $name ) {
 function acf_set_data( $name, $value ) {
 	return acf()->set_data( $name, $value );
 }
-
-
-/**
-*  acf_new_instance
-*
-*  description
-*
-*  @date	13/2/18
-*  @since	5.6.5
-*
-*  @param	type $var Description. Default.
-*  @return	type Description.
-*/
-
-function acf_new_instance( $class ) {
-	return acf()->new_instance( $class );
-}
-
-
-/**
-*  acf_get_instance
-*
-*  description
-*
-*  @date	13/2/18
-*  @since	5.6.5
-*
-*  @param	type $var Description. Default.
-*  @return	type Description.
-*/
-
-function acf_get_instance( $class ) {
-	return acf()->get_instance( $class );
-}
-
 
 /*
 *  acf_init
@@ -581,10 +546,7 @@ function acf_parse_args( $args, $defaults = array() ) {
 */
 
 function acf_parse_types( $array ) {
-	
-	// return
 	return array_map( 'acf_parse_type', $array );
-	
 }
 
 
@@ -602,26 +564,21 @@ function acf_parse_types( $array ) {
 */
 
 function acf_parse_type( $v ) {
+	
+	// Check if is string.
+	if( is_string($v) ) {
 		
-	// bail early if not string
-	if( !is_string($v) ) return $v;
-	
-	
-	// trim
-	$v = trim($v);
-	
-	
-	// convert int (string) to int
-	if( is_numeric($v) && strval((int)$v) === $v ) {
+		// Trim ("Word " = "Word").
+		$v = trim( $v );
 		
-		$v = intval( $v );
-		
+		// Convert int strings to int ("123" = 123).
+		if( is_numeric($v) && strval(intval($v)) === $v ) {
+			$v = intval( $v );
+		}
 	}
 	
-	
-	// return
+	// return.
 	return $v;
-	
 }
 
 
@@ -1128,39 +1085,29 @@ function acf_get_image_size( $s = '' ) {
 		
 }
 
-
-/*
-*  acf_version_compare
-*
-*  This function will compare version left v right
-*
-*  @type	function
-*  @date	21/11/16
-*  @since	5.5.0
-*
-*  @param	$compare (string)
-*  @param	$version (string)
-*  @return	(boolean)
-*/
-
-function acf_version_compare( $left = 'wp', $compare = '>', $right = '1' ) {
+/**
+ * acf_version_compare
+ *
+ * Similar to the version_compare() function but with extra functionality.
+ *
+ * @date	21/11/16
+ * @since	5.5.0
+ *
+ * @param	string $left The left version number.
+ * @param	string $compare The compare operator.
+ * @param	string $right The right version number.
+ * @return	bool
+ */
+function acf_version_compare( $left = '', $compare = '>', $right = '' ) {
 	
-	// global
-	global $wp_version;
+	// Detect 'wp' placeholder.
+	if( $left === 'wp' ) {
+		global $wp_version;
+		$left = $wp_version;
+	}
 	
-	
-	// wp
-	if( $left === 'wp' ) $left = $wp_version;
-	
-	
-	// remove '-beta1' or '-RC1'
-	$left = acf_get_full_version($left);
-	$right = acf_get_full_version($right);
-	
-	
-	// return
+	// Return result.
 	return version_compare( $left, $right, $compare );
-	
 }
 
 
@@ -1189,26 +1136,6 @@ function acf_get_full_version( $version = '1' ) {
 	
 	// return
 	return $version;
-	
-}
-
-
-/*
-*  acf_get_locale
-*
-*  This function is a wrapper for the get_locale() function
-*
-*  @type	function
-*  @date	16/12/16
-*  @since	5.5.0
-*
-*  @param	n/a
-*  @return	(string)
-*/
-
-function acf_get_locale() {
-	
-	return is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
 	
 }
 
@@ -1450,6 +1377,20 @@ function acf_decode_taxonomy_term( $value ) {
 	
 }
 
+/**
+ * acf_array
+ *
+ * Casts the value into an array.
+ *
+ * @date	9/1/19
+ * @since	5.7.10
+ *
+ * @param	mixed $val The value to cast.
+ * @return	array
+ */
+function acf_array( $val = array() ) {
+	return (array) $val;
+}
 
 /*
 *  acf_get_array
@@ -1532,28 +1473,24 @@ function acf_get_numeric( $value = '' ) {
 }
 
 
-/*
-*  acf_get_posts
-*
-*  This function will return an array of posts making sure the order is correct
-*
-*  @type	function
-*  @date	3/03/2015
-*  @since	5.1.5
-*
-*  @param	$args (array)
-*  @return	(array)
-*/
-
+/**
+ * acf_get_posts
+ *
+ * Similar to the get_posts() function but with extra functionality.
+ *
+ * @date	3/03/15
+ * @since	5.1.5
+ *
+ * @param	array $args The query args.
+ * @return	array
+ */
 function acf_get_posts( $args = array() ) {
 	
-	// vars
+	// Vars.
 	$posts = array();
 	
-	
-	// defaults
-	// leave suppress_filters as true becuase we don't want any plugins to modify the query as we know exactly what 
-	$args = wp_parse_args( $args, array(
+	// Apply default args.
+	$args = wp_parse_args($args, array(
 		'posts_per_page'			=> -1,
 		'post_type'					=> '',
 		'post_status'				=> 'any',
@@ -1561,69 +1498,35 @@ function acf_get_posts( $args = array() ) {
 		'update_post_term_cache' 	=> false
 	));
 	
-
-	// post type
-	if( empty($args['post_type']) ) {
-		
+	// Avoid default 'post' post_type by providing all public types.
+	if( !$args['post_type'] ) {
 		$args['post_type'] = acf_get_post_types();
-		
 	}
 	
-	
-	// validate post__in
+	// Check if specifc post ID's have been provided.
 	if( $args['post__in'] ) {
 		
-		// force value to array
-		$args['post__in'] = acf_get_array( $args['post__in'] );
-		
-		
-		// convert to int
-		$args['post__in'] = array_map('intval', $args['post__in']);
-		
-		
-		// add filter to remove post_type
-		// use 'query' filter so that 'suppress_filters' can remain true
-		//add_filter('query', '_acf_query_remove_post_type');
-		
-		
-		// order by post__in
-		$args['orderby'] = 'post__in';
-		
+		// Clean value into an array of IDs.
+		$args['post__in'] = array_map('intval', acf_array($args['post__in']));
 	}
 	
+	// Query posts.
+	$posts = get_posts( $args );
 	
-	// load posts in 1 query to save multiple DB calls from following code
-	$posts = get_posts($args);
+	// Remove any potential empty results.
+	$posts = array_filter( $posts );
 	
-	
-	// remove this filter (only once)
-	//remove_filter('query', '_acf_query_remove_post_type');
-	
-	
-	// validate order
+	// Manually order results.
 	if( $posts && $args['post__in'] ) {
-		
-		// vars
 		$order = array();
-		
-		
-		// generate sort order
 		foreach( $posts as $i => $post ) {
-			
-			$order[ $i ] = array_search($post->ID, $args['post__in']);
-			
+			$order[ $i ] = array_search( $post->ID, $args['post__in'] );
 		}
-		
-		
-		// sort
 		array_multisort($order, $posts);
-			
 	}
 	
-	
-	// return
+	// Return posts.
 	return $posts;
-	
 }
 
 
@@ -2185,91 +2088,19 @@ function acf_get_grouped_users( $args = array() ) {
 	
 }
 
-
-/*
-*  acf_json_encode
-*
-*  This function will return pretty JSON for all PHP versions
-*
-*  @type	function
-*  @date	6/03/2014
-*  @since	5.0.0
-*
-*  @param	$json (array)
-*  @return	(string)
-*/
-
+/**
+ * acf_json_encode
+ *
+ * Returns json_encode() ready for file / database use.
+ *
+ * @date	29/4/19
+ * @since	5.0.0
+ *
+ * @param	array $json The array of data to encode.
+ * @return	string
+ */
 function acf_json_encode( $json ) {
-	
-	// PHP at least 5.4
-	if( version_compare(PHP_VERSION, '5.4.0', '>=') ) {
-		
-		return json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-		
-	}
-
-	
-	
-	// PHP less than 5.4
-	$json = json_encode($json);
-	
-	
-	// http://snipplr.com/view.php?codeview&id=60559
-    $result      = '';
-    $pos         = 0;
-    $strLen      = strlen($json);
-    $indentStr   = "    ";
-    $newLine     = "\n";
-    $prevChar    = '';
-    $outOfQuotes = true;
-
-    for ($i=0; $i<=$strLen; $i++) {
-
-        // Grab the next character in the string.
-        $char = substr($json, $i, 1);
-
-        // Are we inside a quoted string?
-        if ($char == '"' && $prevChar != '\\') {
-            $outOfQuotes = !$outOfQuotes;
-        
-        // If this character is the end of an element, 
-        // output a new line and indent the next line.
-        } else if(($char == '}' || $char == ']') && $outOfQuotes) {
-            $result .= $newLine;
-            $pos --;
-            for ($j=0; $j<$pos; $j++) {
-                $result .= $indentStr;
-            }
-        }
-        
-        // Add the character to the result string.
-        $result .= $char;
-		
-		// If this character is ':' adda space after it
-        if($char == ':' && $outOfQuotes) {
-            $result .= ' ';
-        }
-        
-        // If the last character was the beginning of an element, 
-        // output a new line and indent the next line.
-        if (($char == ',' || $char == '{' || $char == '[') && $outOfQuotes) {
-            $result .= $newLine;
-            if ($char == '{' || $char == '[') {
-                $pos ++;
-            }
-            
-            for ($j = 0; $j < $pos; $j++) {
-                $result .= $indentStr;
-            }
-        }
-        
-        $prevChar = $char;
-    }
-	
-	
-	// return
-    return $result;
-	
+	return json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 }
 
 
@@ -2896,6 +2727,12 @@ function acf_in_array( $value = '', $array = false ) {
 
 function acf_get_valid_post_id( $post_id = 0 ) {
 	
+	// allow filter to short-circuit load_value logic
+	$preload = apply_filters( "acf/pre_load_post_id", null, $post_id );
+    if( $preload !== null ) {
+	    return $preload;
+    }
+    
 	// vars
 	$_post_id = $post_id;
 	
@@ -3592,29 +3429,17 @@ function acf_get_truncated( $text, $length = 64 ) {
 /*
 *  acf_get_current_url
 *
-*  This function will return the current URL
+*  This function will return the current URL.
 *
-*  @type	function
 *  @date	23/01/2015
 *  @since	5.1.5
 *
-*  @param	n/a
-*  @return	(string)
+*  @param	void
+*  @return	string
 */
 
 function acf_get_current_url() {
-	
-	// Get url to current request.
-	$url = home_url($_SERVER['REQUEST_URI']);
-	
-	// Fix bug where multisite sub-directory path segment is repeated.
-	// Eg. http://multisite.local/sub1/sub1/sample-page/
-	if( is_multisite() ) {
-		$url = acf_str_join( home_url(), $_SERVER['REQUEST_URI'] );
-	}
-	
-	// Return url.
-	return $url;
+	return ( is_ssl() ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }
 
 /**
@@ -3653,14 +3478,6 @@ function acf_str_join( $s1 = '', $s2 = '' ) {
 	// Return joined string.
 	return $s1 . $s2;
 }
-
-// Tests.
-//acf_test( acf_str_join('http://multisite.local/sub1/', '/sample-page/'), 'http://multisite.local/sub1/sample-page/' );
-//acf_test( acf_str_join('http://multisite.local/sub1/', 'sample-page/'), 'http://multisite.local/sub1/sample-page/' );
-//acf_test( acf_str_join('http://multisite.local/sub1/', '/sub1'), 'http://multisite.local/sub1/sub1' );
-//acf_test( acf_str_join('http://multisite.local/sub1/', '/sub1/sample-page/'), 'http://multisite.local/sub1/sample-page/' );
-//acf_test( acf_str_join('http://multisite.local/', '/sub1/sample-page/'), 'http://multisite.local/sub1/sample-page/' );
-
 
 /*
 *  acf_current_user_can_admin
@@ -4393,48 +4210,41 @@ function acf_get_post_thumbnail( $post = null, $size = 'thumbnail' ) {
 	
 }
 
-
-/*
-*  acf_get_browser
-*
-*  This functino will return the browser string for major browsers
-*
-*  @type	function
-*  @date	17/01/2014
-*  @since	5.0.0
-*
-*  @param	n/a
-*  @return	(string)
-*/
-
+/**
+ * acf_get_browser
+ *
+ * Returns the name of the current browser.
+ *
+ * @date	17/01/2014
+ * @since	5.0.0
+ *
+ * @param	void
+ * @return	string
+ */
 function acf_get_browser() {
 	
-	// vars
-	$agent = $_SERVER['HTTP_USER_AGENT'];
-	
-	
-	// browsers
-	$browsers = array(
-		'Firefox'	=> 'firefox',
-		'Trident'	=> 'msie',
-		'MSIE'		=> 'msie',
-		'Edge'		=> 'edge',
-		'Chrome'	=> 'chrome',
-		'Safari'	=> 'safari',
-	);
-	
-	
-	// loop
-	foreach( $browsers as $k => $v ) {
+	// Check server var.
+	if( isset($_SERVER['HTTP_USER_AGENT']) ) {
+		$agent = $_SERVER['HTTP_USER_AGENT'];
 		
-		if( strpos($agent, $k) !== false ) return $v;
-		
+		// Loop over search terms.
+		$browsers = array(
+			'Firefox'	=> 'firefox',
+			'Trident'	=> 'msie',
+			'MSIE'		=> 'msie',
+			'Edge'		=> 'edge',
+			'Chrome'	=> 'chrome',
+			'Safari'	=> 'safari',
+		);
+		foreach( $browsers as $k => $v ) {
+			if( strpos($agent, $k) !== false ) {
+				return $v;
+			}
+		}
 	}
 	
-	
-	// return
+	// Return default.
 	return '';
-	
 }
 
 
@@ -4521,6 +4331,20 @@ function acf_format_date( $value, $format ) {
 	
 }
 
+/**
+ * acf_clear_log
+ *
+ * Deletes the debug.log file.
+ *
+ * @date	21/1/19
+ * @since	5.7.10
+ *
+ * @param	type $var Description. Default.
+ * @return	type Description.
+ */
+function acf_clear_log() {
+	unlink( WP_CONTENT_DIR . '/debug.log' );
+}
 
 /*
 *  acf_log
@@ -4576,7 +4400,6 @@ function acf_dev_log() {
 		call_user_func_array('acf_log', func_get_args());
 	}
 }
-
 
 /*
 *  acf_doing
@@ -4675,183 +4498,6 @@ function acf_is_plugin_active() {
 	return is_plugin_active($basename);
 	
 }
-
-
-/**
-*  acf_get_filters
-*
-*  Returns the registered filters
-*
-*  @date	2/2/18
-*  @since	5.6.5
-*
-*  @param	type $var Description. Default.
-*  @return	type Description.
-*/
-
-function acf_get_filters() {
-	
-	// get
-	$filters = acf_raw_setting('filters');
-	
-	// array
-	$filters = is_array($filters) ? $filters : array();
-	
-	// return
-	return $filters;
-}
-
-
-/**
-*  acf_update_filters
-*
-*  Updates the registered filters
-*
-*  @date	2/2/18
-*  @since	5.6.5
-*
-*  @param	type $var Description. Default.
-*  @return	type Description.
-*/
-
-function acf_update_filters( $filters ) {
-	return acf_update_setting('filters', $filters);
-}
-
-
-/*
-*  acf_enable_filter
-*
-*  This function will enable a filter
-*
-*  @type	function
-*  @date	15/07/2016
-*  @since	5.4.0
-*
-*  @param	$post_id (int)
-*  @return	$post_id (int)
-*/
-
-function acf_enable_filter( $filter = '' ) {
-	
-	// get 
-	$filters = acf_get_filters();
-	
-	// append
-	$filters[ $filter ] = true;
-	
-	// update
-	acf_update_filters( $filters );
-}
-
-
-/*
-*  acf_disable_filter
-*
-*  This function will disable a filter
-*
-*  @type	function
-*  @date	15/07/2016
-*  @since	5.4.0
-*
-*  @param	$post_id (int)
-*  @return	$post_id (int)
-*/
-
-function acf_disable_filter( $filter = '' ) {
-	
-	// get 
-	$filters = acf_get_filters();
-	
-	// append
-	$filters[ $filter ] = false;
-	
-	// update
-	acf_update_filters( $filters );
-}
-
-
-/*
-*  acf_enable_filters
-*
-*  ACF uses filters to modify field group and field data
-*  This function will enable them allowing ACF to interact with all data
-*
-*  @type	function
-*  @date	14/07/2016
-*  @since	5.4.0
-*
-*  @param	$post_id (int)
-*  @return	$post_id (int)
-*/
-
-function acf_enable_filters() {
-	
-	// get 
-	$filters = acf_get_filters();
-	
-	// loop
-	foreach( array_keys($filters) as $k ) {
-		$filters[ $k ] = true;
-	}
-	
-	// update
-	acf_update_filters( $filters );	
-}
-
-
-/*
-*  acf_disable_filters
-*
-*  ACF uses filters to modify field group and field data
-*  This function will disable them allowing ACF to interact only with raw DB data
-*
-*  @type	function
-*  @date	14/07/2016
-*  @since	5.4.0
-*
-*  @param	$post_id (int)
-*  @return	$post_id (int)
-*/
-
-function acf_disable_filters() {
-	
-	// get 
-	$filters = acf_get_filters();
-	
-	// loop
-	foreach( array_keys($filters) as $k ) {
-		$filters[ $k ] = false;
-	}
-	
-	// update
-	acf_update_filters( $filters );	
-}
-
-
-/*
-*  acf_is_filter_enabled
-*
-*  ACF uses filters to modify field group and field data
-*  This function will return true if they are enabled
-*
-*  @type	function
-*  @date	14/07/2016
-*  @since	5.4.0
-*
-*  @param	$post_id (int)
-*  @return	$post_id (int)
-*/
-
-function acf_is_filter_enabled( $filter = '' ) {
-	
-	// get 
-	$filters = acf_get_filters();
-	
-	// return
-	return !empty($filters[ $filter ]);
-}
-
 
 /*
 *  acf_send_ajax_results
@@ -5211,42 +4857,6 @@ function acf_decrypt( $data = '' ) {
 	
 }
 
-
-/*
-*  acf_get_post_templates
-*
-*  This function will return an array of all post templates (including parent theme templates)
-*
-*  @type	function
-*  @date	29/8/17
-*  @since	5.6.2
-*
-*  @param	n/a
-*  @return	(array)
-*/
-
-function acf_get_post_templates() {
-	
-	// vars
-	$post_types = acf_get_post_types();
-	$post_templates = array();
-	
-	
-	// loop
-	foreach( $post_types as $post_type ) {
-		$post_templates[ $post_type ] = wp_get_theme()->get_page_templates(null, $post_type);
-	}
-	
-	
-	// remove empty templates
-	$post_templates = array_filter( $post_templates );
-	
-	
-	// return
-	return $post_templates;
-	
-}
-
 /**
 *  acf_parse_markdown
 *
@@ -5301,31 +4911,13 @@ function acf_parse_markdown( $text = '' ) {
 *  @return	array
 */
 function acf_get_sites() {
-	
-	// vars
 	$results = array();
-	
-	// function get_sites() was added in WP 4.6
-	if( function_exists('get_sites') ) {
-		
-		$_sites = get_sites(array(
-			'number' => 0
-		));
-		
-		if( $_sites ) {
-		foreach( $_sites as $_site ) {
-			$_site = get_site( $_site );
-	        $results[] = $_site->to_array();
-	    }}
-		
-	// function wp_get_sites() returns in the desired output
-	} else {
-		$results = wp_get_sites(array(
-			'limit' => 0
-		));
+	$sites = get_sites( array( 'number' => 0 ) );
+	if( $sites ) {
+		foreach( $sites as $site ) {
+	        $results[] = get_site( $site )->to_array();
+	    }
 	}
-	
-	// return
 	return $results;
 }
 
@@ -5381,6 +4973,89 @@ function acf_convert_rules_to_groups( $rules, $anyorall = 'any' ) {
 	
 	// return
 	return $groups;
+}
+
+/**
+*  acf_register_ajax
+*
+*  Regsiters an ajax callback.
+*
+*  @date	5/10/18
+*  @since	5.7.7
+*
+*  @param	string $name The ajax action name.
+*  @param	array $callback The callback function or array.
+*  @param	bool $public Whether to allow access to non logged in users.
+*  @return	void
+*/
+function acf_register_ajax( $name = '', $callback = false, $public = false ) {
+	
+	// vars
+	$action = "acf/ajax/$name";
+	
+	// add action for logged-in users
+	add_action( "wp_ajax_$action", $callback );
+	
+	// add action for non logged-in users
+	if( $public ) {
+		add_action( "wp_ajax_nopriv_$action", $callback );
+	}
+}
+
+/**
+*  acf_str_camel_case
+*
+*  Converts a string into camelCase.
+*  Thanks to https://stackoverflow.com/questions/31274782/convert-array-keys-from-underscore-case-to-camelcase-recursively
+*
+*  @date	24/10/18
+*  @since	5.8.0
+*
+*  @param	string $string The string ot convert.
+*  @return	string
+*/
+function acf_str_camel_case( $string = '' ) {
+	return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $string))));
+}
+
+/**
+*  acf_array_camel_case
+*
+*  Converts all aray keys to camelCase.
+*
+*  @date	24/10/18
+*  @since	5.8.0
+*
+*  @param	array $array The array to convert.
+*  @return	array
+*/
+function acf_array_camel_case( $array = array() ) {
+	$array2 = array();
+	foreach( $array as $k => $v ) {
+		$array2[ acf_str_camel_case($k) ] = $v;
+	}
+	return $array2;
+}
+
+/**
+ * acf_is_block_editor
+ *
+ * Returns true if the current screen uses the block editor.
+ *
+ * @date	13/12/18
+ * @since	5.8.0
+ *
+ * @param	void
+ * @return	bool
+ */
+function acf_is_block_editor() {
+	if( function_exists('get_current_screen') ) {
+		$screen = get_current_screen();
+		if( method_exists($screen, 'is_block_editor') ) {
+			return $screen->is_block_editor();
+		}
+	}
+	return false;
 }
 
 ?>

@@ -20,8 +20,15 @@ if ( ! function_exists('wp_all_import_template_notifications') )
 
 			if ( $post['custom_type'] == 'import_users' && ! class_exists('PMUI_Plugin') )
 			{
-				$notifications[] = __('The import template you are using requires the User Import Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href="http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin" target="_blank">Purchase the User Import Add-On</a>.', 'wp_all_import_plugin');						
+				$notifications[] = __('The import template you are using requires the User Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href="http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin" target="_blank">Purchase the User Add-On</a>.', 'wp_all_import_plugin');						
 			}
+
+			if ( $post['custom_type'] == 'shop_customer' && ! class_exists('PMUI_Plugin') )
+			{
+				$notifications[] = __('The import template you are using requires the User Add-On. If you continue without having this add-on active, your data may import incorrectly.<br/><br/><a href="http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin" target="_blank">Purchase the User Add-On</a>.', 'wp_all_import_plugin');
+			}
+
+
 			elseif ( $post['custom_type'] == 'product' && ! class_exists('PMWI_Plugin') && class_exists( 'Woocommerce' ))
 			{
 				$notifications[] = __('The import template you are using requires the WooCommerce Import Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href="http://www.wpallimport.com/woocommerce-product-import/" target="_blank">Purchase the WooCommerce Import Add-On</a>.', 'wp_all_import_plugin');				

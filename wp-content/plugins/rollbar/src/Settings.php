@@ -180,10 +180,10 @@ class Settings
             'rollbar_wp'
         );
         
-        $options = \Rollbar\Config::listOptions();
+        $options = \Rollbar\Wordpress\Plugin::listOptions();
         $skip = array(
             'access_token', 'environment', 'enabled', 'included_errno',
-            'base_api_url'
+            'base_api_url', 'enable_must_use_plugin'
         );
         
         foreach ($options as $option) {
@@ -198,6 +198,20 @@ class Settings
             
             $this->addSetting($option, 'rollbar_wp_advanced');
         }
+        
+        $this->addSetting(
+            'enable_must_use_plugin', 
+            'rollbar_wp_advanced',
+            array(
+                'type' => UI::getSettingType('enable_must_use_plugin'),
+                'default' => \Rollbar\Wordpress\Defaults::instance()->enableMustUsePlugin(),
+                'description' => __('Allows Rollbar plugin to be loaded as early ' .
+                                    'as possible as a Must-Use plugin. Activating / ' .
+                                    'deactivating the plugin in the plugins admin panel ' .
+                                    'won\'t have an effect as long as this option in enabled.', 'rollbar'),
+                'display_name' => __('Enable as a Must-Use plugin', 'rollbar')
+            )
+        );
     }
     
     private function addSetting($setting, $section, array $overrides = array())
@@ -227,7 +241,7 @@ class Settings
         $default = isset($overrides['default']) ? 
             $overrides['default'] : 
             $this->settingDefault($setting);
-        
+            
         $value = $this->setting($setting);
         
         \add_settings_field(
@@ -292,7 +306,10 @@ class Settings
         ?>
         <form action='options.php' method='post'>
 
-            <h2>Rollbar for WordPress</h2>
+            <h2 class="rollbar-header">
+                <img class="logo" alt="Rollbar" src="//cdn.rollbar.com/static/img/rollbar-icon-white.svg?ts=1548370449v8" width="auto" height="24">
+                Rollbar for WordPress
+            </h2>
 
             <?php
             \settings_fields('rollbar_wp');
@@ -348,18 +365,24 @@ class Settings
     
     public static function flashRedirect($type, $message)
     {
-        $_SESSION['rollbar_wp_flash_message'] = array(
-            "type" => $type,
-            "message" => $message
-        );
+        self::flashMessage($type, $message);
         
         wp_redirect(admin_url('/options-general.php?page=rollbar_wp'));
     }
     
+    public static function flashMessage($type, $message)
+    {
+        $_SESSION['rollbar_wp_flash_message'] = array(
+            "type" => $type,
+            "message" => $message
+        );
+    }
+    
     public static function preUpdate($settings)
     {
+        
         // Empty checkboxes don't get propagated into the $_POST at all. Fill out
-        // missing boolean settings as false.
+        // missing boolean settings with default values.
         foreach (UI::settingsOfType(UI::SETTING_INPUT_TYPE_BOOLEAN) as $setting) {
             
             if (!isset($settings[$setting])) {
@@ -369,6 +392,22 @@ class Settings
         }
         
         $settings['enabled'] = isset($settings['php_logging_enabled']) && $settings['php_logging_enabled'];
+    
+        if (isset($settings['enable_must_use_plugin']) && $settings['enable_must_use_plugin']) {
+            try {
+                Plugin::instance()->enableMustUsePlugin();
+            } catch (\Exception $exception) {
+                self::flashMessage('error', 'Failed enabling the Must-Use plugin.');
+                $settings['enable_must_use_plugin'] = false;
+            }
+        } else {
+            try {
+                Plugin::instance()->disableMustUsePlugin();
+            } catch (\Exception $exception) {
+                self::flashMessage('error', 'Failed disabling the Must-Use plugin.');
+                $settings['enable_must_use_plugin'] = true;
+            }
+        }
         
         // Don't store default values in the database. This is so that future updates
         // to default values in PHP SDK don't get stored in users databases.

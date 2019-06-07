@@ -9,6 +9,8 @@
  *
  * @since 5.5
  */
+use BulkWP\BulkDelete\Core\Base\BaseModule;
+
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 /**
@@ -16,11 +18,16 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
  *
  * @since 5.5
  *
- * @param array $options Old options.
+ * @param array                                   $options Old options.
+ * @param \BulkWP\BulkDelete\Core\Base\BaseModule $module  Modules.
  *
  * @return array New options.
  */
-function bd_delete_options_compatibility( $options ) {
+function bd_delete_options_compatibility( $options, $module = null ) {
+	if ( $module instanceof BaseModule && 'delete_pages_by_status' === $module->get_action() ) {
+		return $options;
+	}
+
 	// Convert bool keys to boolean
 	$bool_keys = array( 'restrict', 'force_delete', 'private' );
 	foreach ( $bool_keys as $key ) {
@@ -40,7 +47,104 @@ function bd_delete_options_compatibility( $options ) {
 
 	return $options;
 }
-add_filter( 'bd_delete_options', 'bd_delete_options_compatibility' );
+add_filter( 'bd_delete_options', 'bd_delete_options_compatibility', 10, 2 );
+
+/**
+ * Handle backward compatibility for Delete Pages by status delete options.
+ *
+ * Backward compatibility code. Will eventually be removed.
+ *
+ * @since 6.0.0
+ *
+ * @param array                                   $options Delete Options.
+ * @param \BulkWP\BulkDelete\Core\Base\BaseModule $module  Modules.
+ *
+ * @return array Processed delete options.
+ */
+function bd_convert_old_options_for_delete_pages( $options, $module = null ) {
+	if ( $module instanceof BaseModule && 'delete_pages_by_status' !== $module->get_action() ) {
+		return $options;
+	}
+
+	if ( array_key_exists( 'page_op', $options ) ) {
+		$options['date_op'] = $options['page_op'];
+		$options['days']    = $options['page_days'];
+	}
+
+	if ( ! array_key_exists( 'post_status', $options ) ) {
+		$options['post_status'] = array();
+	}
+
+	if ( array_key_exists( 'publish', $options ) && 'published_pages' === $options['publish'] ) {
+		$options['post_status'][] = 'publish';
+	}
+
+	if ( array_key_exists( 'drafts', $options ) && 'draft_pages' === $options['drafts'] ) {
+		$options['post_status'][] = 'draft';
+	}
+
+	if ( array_key_exists( 'pending', $options ) && 'pending_pages' === $options['pending'] ) {
+		$options['post_status'][] = 'pending';
+	}
+
+	if ( array_key_exists( 'future', $options ) && 'future_pages' === $options['future'] ) {
+		$options['post_status'][] = 'future';
+	}
+
+	if ( array_key_exists( 'private', $options ) && 'private_pages' === $options['private'] ) {
+		$options['post_status'][] = 'private';
+	}
+
+	return $options;
+}
+add_filter( 'bd_delete_options', 'bd_convert_old_options_for_delete_pages', 10, 2 );
+
+/**
+ * Handle backward compatibility for Delete Posts by category delete options.
+ *
+ * Backward compatibility code. Will be removed in future Bulk Delete releases.
+ *
+ * @since 6.0.0
+ *
+ * @param array $options Delete Options.
+ *
+ * @return array Processed delete options.
+ */
+function bd_convert_old_options_for_delete_posts_by_category( $options ) {
+	if ( array_key_exists( 'cats_op', $options ) ) {
+		$options['date_op'] = $options['cats_op'];
+		$options['days']    = $options['cats_days'];
+	}
+
+	return $options;
+}
+add_filter( 'bd_delete_options', 'bd_convert_old_options_for_delete_posts_by_category' );
+
+/**
+ * Handle backward compatibility for Delete Posts by tag delete options.
+ *
+ * Backward compatibility code. Will be removed in future Bulk Delete releases.
+ *
+ * @since 6.0.0
+ *
+ * @param array                                   $options Delete Options.
+ * @param \BulkWP\BulkDelete\Core\Base\BaseModule $module  Modules.
+ *
+ * @return array Processed delete options.
+ */
+function bd_convert_old_options_for_delete_posts_by_tag( $options, $module = null ) {
+	if ( $module instanceof BaseModule && 'delete_posts_by_tag' !== $module->get_action() ) {
+		return $options;
+	}
+
+	if ( array_key_exists( 'tags_op', $options ) ) {
+		$options['date_op'] = $options['tags_op'];
+		$options['days']    = $options['tags_days'];
+	}
+
+	return $options;
+}
+add_filter( 'bd_delete_options', 'bd_convert_old_options_for_delete_posts_by_tag', 10, 2 );
 
 /**
  * Handle backward compatibility for Delete Posts by status delete options.
@@ -48,12 +152,18 @@ add_filter( 'bd_delete_options', 'bd_delete_options_compatibility' );
  * Backward compatibility code. Will be removed in Bulk Delete v6.0.
  *
  * @since 5.6.0
+ * @since 6.0.0 Added Modules parameter.
  *
- * @param array $delete_options Delete Options.
+ * @param array                                   $delete_options Delete Options.
+ * @param \BulkWP\BulkDelete\Core\Base\BaseModule $module         Modules.
  *
  * @return array Processed delete options.
  */
-function bd_convert_old_options_for_delete_post_by_status( $delete_options ) {
+function bd_convert_old_options_for_delete_post_by_status( $delete_options, $module = null ) {
+	if ( $module instanceof BaseModule && 'delete_posts_by_status' !== $module->get_action() ) {
+		return $delete_options;
+	}
+
 	// Format changed in 5.5.0.
 	if ( array_key_exists( 'post_status_op', $delete_options ) ) {
 		$delete_options['date_op'] = $delete_options['post_status_op'];
@@ -87,6 +197,59 @@ function bd_convert_old_options_for_delete_post_by_status( $delete_options ) {
 
 	return $delete_options;
 }
+add_filter( 'bd_delete_options', 'bd_convert_old_options_for_delete_post_by_status', 10, 2 );
+
+/**
+ * Handle backward compatibility for Delete Posts by Taxonomy delete options.
+ *
+ * Backward compatibility code. Will be removed in Bulk Delete v6.0.
+ *
+ * @since 6.0.0
+ *
+ * @param array                                   $delete_options Delete Options.
+ * @param \BulkWP\BulkDelete\Core\Base\BaseModule $module         Modules.
+ *
+ * @return array Processed delete options.
+ */
+function bd_convert_old_options_for_delete_post_by_taxonomy( $delete_options, $module = null ) {
+	if ( $module instanceof BaseModule && 'bd_delete_posts_by_taxonomy' !== $module->get_action() ) {
+		return $delete_options;
+	}
+
+	if ( array_key_exists( 'taxs_op', $delete_options ) ) {
+		$delete_options['date_op'] = $delete_options['taxs_op'];
+		$delete_options['days']    = $delete_options['taxs_days'];
+	}
+
+	return $delete_options;
+}
+add_filter( 'bd_delete_options', 'bd_convert_old_options_for_delete_post_by_taxonomy', 10, 2 );
+
+/**
+ * Handle backward compatibility for Delete Posts by Post type delete options.
+ *
+ * Backward compatibility code. Will be removed in Bulk Delete v6.0.
+ *
+ * @since 6.0.0
+ *
+ * @param array                                   $delete_options Delete Options.
+ * @param \BulkWP\BulkDelete\Core\Base\BaseModule $module         Modules.
+ *
+ * @return array Processed delete options.
+ */
+function bd_convert_old_options_for_delete_post_by_post_type( $delete_options, $module = null ) {
+	if ( $module instanceof BaseModule && 'delete_posts_by_post_type' !== $module->get_action() ) {
+		return $delete_options;
+	}
+
+	if ( array_key_exists( 'types_op', $delete_options ) ) {
+		$delete_options['date_op'] = $delete_options['types_op'];
+		$delete_options['days']    = $delete_options['types_days'];
+	}
+
+	return $delete_options;
+}
+add_filter( 'bd_delete_options', 'bd_convert_old_options_for_delete_post_by_post_type', 10, 2 );
 
 /**
  * Enable cron for old pro addons that required separate JavaScript.

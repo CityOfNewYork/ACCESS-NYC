@@ -16,6 +16,8 @@ class StringsStrategy extends AbstractStrategy
         $modified = false;
         
         foreach (static::getThresholds() as $threshold) {
+            $maxPayloadSize = \Rollbar\Truncation\Truncation::MAX_PAYLOAD_SIZE;
+            
             if (!$this->truncation->needsTruncating($payload, $this)) {
                 break;
             }
@@ -38,9 +40,11 @@ class StringsStrategy extends AbstractStrategy
         
         foreach ($data as $key => &$value) {
             if (is_array($value)) {
-                return $this->traverse($value, $threshold, $payload);
+                if ($this->traverse($value, $threshold, $payload)) {
+                    $modified = true;
+                }
             } else {
-                if (is_string($value) && $strlen = strlen($value) > $threshold) {
+                if (is_string($value) && (($strlen = strlen($value)) > $threshold)) {
                     $value = substr($value, 0, $threshold);
                     $modified = true;
                     $payload->decreaseSize($strlen - $threshold);

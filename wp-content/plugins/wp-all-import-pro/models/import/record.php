@@ -210,7 +210,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
                     $functions  = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
                     $functions = apply_filters( 'import_functions_file_path', $functions );
-                    if ( @file_exists($functions) )
+                    if ( @file_exists($functions) && PMXI_Plugin::$is_php_allowed)
                         require_once $functions;
 
 					if ( $this->queue_chunk_number === 1 and $this->processing == 0 ){ // import first cron request
@@ -326,34 +326,26 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
                         $records_to_import = (int) ((empty($records)) ? $this->count : $records[count($records) -1]);
 
-						$this->set(array('processing' => 1))->update(); // lock cron requests						
+                        // Lock cron requests.
+						$this->set(array(
+						    'processing' => 1,
+                            'registered_on' => date('Y-m-d H:i:s')
+                        ))->update();
 
 						@set_time_limit(0);
 
-                        $processing_time_limit = (PMXI_Plugin::getInstance()->getOption('cron_processing_time_limit')) ? PMXI_Plugin::getInstance()->getOption('cron_processing_time_limit') : 120;
+                        $processing_time_limit = (PMXI_Plugin::getInstance()->getOption('cron_processing_time_limit')) ? PMXI_Plugin::getInstance()->getOption('cron_processing_time_limit') : 59;
                         $start_rocessing_time = time();
 
-						if ( (int) $this->imported + (int) $this->skipped <= (int) $records_to_import )
-						{					
-
-							$file = new PMXI_Chunk($filePath, array('element' => $this->root_element, 'encoding' => $this->options['encoding'], 'pointer' => $this->queue_chunk_number));					
-						    
+						if ( (int) $this->imported + (int) $this->skipped <= (int) $records_to_import ) {
+							$file = new PMXI_Chunk($filePath, array('element' => $this->root_element, 'encoding' => $this->options['encoding'], 'pointer' => $this->queue_chunk_number));
 							$feed = "<?xml version=\"1.0\" encoding=\"". $this->options['encoding'] ."\"?>" . "\n" . "<pmxi_records>";
-
 						    $loop = 0;
-						    $xml = '';
-
 						    $chunk_number = $this->queue_chunk_number;
-
 						    while ($xml = $file->read() and $this->processing == 1 and (time() - $start_rocessing_time) <= $processing_time_limit ) {
-
-						    	if ( ! empty($xml) ) {
-
+						    	if (!empty($xml)) {
 						    		$chunk_number++;
-
-						       		//PMXI_Import_Record::preprocessXml($xml);
-						    		$xml_chunk = "<?xml version=\"1.0\" encoding=\"". $this->options['encoding'] ."\"?>" . "\n" . $xml;     						      		    
-
+						    		$xml_chunk = "<?xml version=\"1.0\" encoding=\"". $this->options['encoding'] ."\"?>" . "\n" . $xml;
 							      	$dom = new DOMDocument('1.0', ( ! empty($this->options['encoding']) ) ? $this->options['encoding'] : 'UTF-8');															
 									$old = libxml_use_internal_errors(true);
 									$dom->loadXML($xml_chunk);								
@@ -364,16 +356,12 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 										$feed .= $xml;																		
 										$loop += $elements->length;
 									}
-
-									unset($dom, $xpath, $elements);							
-
+									unset($dom, $xpath, $elements);
 							    }		
 
 							    if ( $loop > 0 and ( $loop == (int) $this->options['records_per_request'] or $records_to_import == (int) $this->imported + (int) $this->skipped or $records_to_import == $loop + (int) $this->imported + (int) $this->skipped or $records_to_import == $chunk_number) ) { // skipping scheduled imports if any for the next hit
 							    	$feed .= "</pmxi_records>";
-
                                     $this->process($feed, $logger, $chunk_number, $cron, '/pmxi_records', $loop);
-
 							    	// set last update
 							    	$this->set(array(
 										'registered_on' => date('Y-m-d H:i:s'),
@@ -406,38 +394,31 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 								$missing_ids = array();								
 								$missingPosts = $postList->getBy($args);
 
-								if ( ! $missingPosts->isEmpty() ):
-								
-									foreach ($missingPosts as $missingPost) {
-										
-										$missing_ids[] = $missingPost;																				
-																		
-									}	
+								if (!$missingPosts->isEmpty()) {
+                                    foreach ($missingPosts as $missingPost) {
+                                        $missing_ids[] = $missingPost;
+                                    }
+                                }
 
-								endif;							
-
-								// Delete posts from database
-								if ( ! empty($missing_ids) && is_array($missing_ids) ){																											
-									
+								// Delete posts from database.
+								if (!empty($missing_ids) && is_array($missing_ids)) {
 									$missing_ids_arr = array_chunk($missing_ids, $this->options['records_per_request']);
-
                                     $count_deleted_missing_records = 0;
-
 									foreach ($missing_ids_arr as $key => $missingPostRecords) {
-
-										if ( ! empty($missingPostRecords) ){ 
-
+										if (!empty($missingPostRecords)){
 											foreach ( $missingPostRecords as $k => $missingPostRecord ) {
-
 												$to_delete = true;
-
-												// Instead of deletion, set Custom Field
+												// Instead of deletion, set Custom Field.
 												if ($this->options['is_update_missing_cf']){
                                                     switch ($this->options['custom_type']){
                                                         case 'import_users':
                                                             update_user_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
                                                             $logger and call_user_func($logger, sprintf(__('Instead of deletion user with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
                                                             break;
+														case 'shop_customer':
+                                                            update_user_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
+															$logger and call_user_func($logger, sprintf(__('Instead of deletion customer with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
+															break;
                                                         case 'taxonomies':
                                                             update_term_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
                                                             $logger and call_user_func($logger, sprintf(__('Instead of deletion taxonomy term with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
@@ -463,9 +444,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												$to_delete = apply_filters('wp_all_import_is_post_to_delete', $to_delete, $missingPostRecord['post_id'], $this);
 												
 												// Delete posts that are no longer present in your file
-												if ( $to_delete ){
-
-                                                    if ( ! in_array($this->options['custom_type'], array("import_users", "taxonomies")) ){
+												if ($to_delete) {
+                                                    if (!in_array($this->options['custom_type'], array("import_users", "taxonomies", "shop_customer"))) {
                                                         // Remove attachments
                                                         empty($this->options['is_keep_attachments']) and wp_delete_attachments($missingPostRecord['post_id'], true, 'files');
                                                         // Remove images
@@ -473,18 +453,15 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                         // Clear post's relationships
                                                         wp_delete_object_term_relationships($missingPostRecord['post_id'], get_object_taxonomies('' != $this->options['custom_type'] ? $this->options['custom_type'] : 'post'));
                                                     }
-												
 												}
-												else
-												{
+												else {
                                                     $postRecord = new PMXI_Post_Record();
                                                     $postRecord->getBy(array(
                                                         'post_id' => $missingPostRecord['post_id'],
                                                         'import_id' => $this->id,
                                                     ));
 
-                                                    if ( ! $postRecord->isEmpty() )
-                                                    {
+                                                    if (!$postRecord->isEmpty()) {
                                                         $is_unlink_missing_posts = apply_filters('wp_all_import_is_unlink_missing_posts', false, $this->id, $missingPostRecord['post_id']);
                                                         if ( $is_unlink_missing_posts ){
                                                             $postRecord->delete();
@@ -495,23 +472,21 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                             ))->save();
                                                         }
                                                     }
-
 													do_action('pmxi_missing_post', $missingPostRecord['post_id']);
-														
 													unset($missingPostRecords[$k]);
 												}
 											}
 
 											$ids = array();
 
-											if ( ! empty( $missingPostRecords ) ){
-												
+											if (!empty( $missingPostRecords)) {
 												foreach ($missingPostRecords as $k => $missingPostRecord) {
 													$ids[] = $missingPostRecord['post_id'];
 												}
 
-                                                switch ($this->options['custom_type']){
-                                                    case 'import_users':
+                                                switch ($this->options['custom_type']) {
+													case 'import_users':
+													case 'shop_customer':
                                                         do_action('pmxi_delete_post', $ids, $this);
 														// delete_user action
 														foreach( $ids as $id) {
@@ -525,7 +500,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 														foreach( $ids as $id) {
 															do_action( 'deleted_user', $id, $reassign = null );
 														}
-														
+                                                        $this->wpdb->query( $sql );
 														break;
                                                     case 'taxonomies':
                                                         do_action('pmxi_delete_taxonomies', $ids);
@@ -536,17 +511,10 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                     default:
                                                         do_action('pmxi_delete_post', $ids, $this);
                                                         foreach ($ids as $id) {
-                                                            do_action( 'delete_post', $id );
+                                                            wp_delete_post($id, TRUE);
                                                         }
-                                                        $sql = "delete a,b,c
-                                                        FROM ".$this->wpdb->posts." a
-                                                        LEFT JOIN ".$this->wpdb->term_relationships." b ON ( a.ID = b.object_id )
-                                                        LEFT JOIN ".$this->wpdb->postmeta." c ON ( a.ID = c.post_id )				
-                                                        WHERE a.ID IN (" . implode(',', $ids) . ");";
                                                         break;
                                                 }
-
-												$this->wpdb->query( $sql );														
 
 												// Delete record form pmxi_posts
 												$sql = "DELETE FROM " . PMXI_Plugin::getInstance()->getTablePrefix() . "posts WHERE post_id IN (".implode(',', $ids).") AND import_id = %d";
@@ -561,7 +529,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
                                             $count_deleted_missing_records += count($ids);
 
-                                            if ( (time() - $start_rocessing_time) > $processing_time_limit ){
+                                            if ( (time() - $start_rocessing_time) > $processing_time_limit ) {
                                                 $this->set(array(
                                                     'processing' => 0
                                                 ))->update();
@@ -585,30 +553,19 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 								$missing_ids = array();								
 								$missingPosts = $postList->getBy($args);
 
-								if ( ! $missingPosts->isEmpty() ):
-								
-									foreach ($missingPosts as $missingPost) {
-										
-										$missing_ids[] = $missingPost;																				
-																		
-									}	
-
-								endif;									
-
-								// Delete posts from database
-								if ( ! empty($missing_ids) && is_array($missing_ids) ){																											
-									
+								if (!$missingPosts->isEmpty()) {
+                                    foreach ($missingPosts as $missingPost) {
+                                        $missing_ids[] = $missingPost;
+                                    }
+                                }
+								// Delete posts from database.
+								if (!empty($missing_ids) && is_array($missing_ids)) {
 									$missing_ids_arr = array_chunk($missing_ids, 50);
-
-									foreach ($missing_ids_arr as $key => $missingPostRecords) {										
-
-										if ( ! empty($missingPostRecords) ){ 
-
-											foreach ( $missingPostRecords as $k => $missingPostRecord ) {												
-
+									foreach ($missing_ids_arr as $key => $missingPostRecords) {
+										if (!empty($missingPostRecords)) {
+											foreach ( $missingPostRecords as $k => $missingPostRecord ) {
 												$this->update_meta( $missingPostRecord['post_id'], '_stock_status', 'outofstock' );
 												$this->update_meta( $missingPostRecord['post_id'], '_stock', 0 );
-
                                                 $term_ids = wp_get_object_terms($missingPostRecord['post_id'], 'product_visibility', array('fields' => 'ids'));
                                                 $outofstock_term = get_term_by( 'name', 'outofstock', 'product_visibility' );
                                                 if (!empty($outofstock_term) && !is_wp_error($outofstock_term) && !in_array($outofstock_term->term_taxonomy_id, $term_ids)){
@@ -621,8 +578,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 													'post_id' => $missingPostRecord['post_id'],
 													'import_id' => $this->id,
 												));
-												if ( ! $postRecord->isEmpty() )
-												{
+												if (!$postRecord->isEmpty()) {
 													$postRecord->set(array(
 														'iteration' => $this->iteration
 													))->save();									
@@ -663,37 +619,31 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 									$custom_type = get_post_type_object( $this->options['custom_type'] );		
 									$history_log->set(array(
 										'time_run' => time() - strtotime($history_log->date),
-										'summary' => sprintf(__("import finished & cron un-triggered<br>%s %s created %s updated %s deleted %s skipped", "pmxi_plugin"), $this->created, $custom_type->labels->name, $this->updated, $this->deleted, $this->skipped)
+										'summary' => sprintf(__("import finished & cron un-triggered<br>%s %s created %s updated %s deleted %s skipped", "pmxi_plugin"), $this->created, ( ($this->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $this->updated, $this->deleted, $this->skipped)
 									))->save();																	
 								}
 							}
-
 							do_action( 'pmxi_after_xml_import', $this->id, $this );
-
 							return array(
 								'status'     => 200,
 								'message'    => sprintf(__('Import #%s complete', 'wp_all_import_plugin'), $this->id)
-							);							
-
+							);
 						}
-						else{	
-
+						else {
 							$this->set(array(
 								'processing' => 0								
-							))->update();			
-
-							if ( $history_log_id ){
+							))->update();
+							if ( $history_log_id ) {
 								$history_log = new PMXI_History_Record();						
 								$history_log->getById( $history_log_id );
 								if ( ! $history_log->isEmpty() ){
 									$custom_type = get_post_type_object( $this->options['custom_type'] );		
 									$history_log->set(array(
 										'time_run' => time() - strtotime($history_log->date),
-										'summary' => sprintf(__("%d %s created %d updated %d deleted %d skipped", "pmxi_plugin"), $this->created, $custom_type->labels->name, $this->updated, $this->deleted, $this->skipped)
+										'summary' => sprintf(__("%d %s created %d updated %d deleted %d skipped", "pmxi_plugin"), $this->created, ( ($this->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $this->updated, $this->deleted, $this->skipped)
 									))->save();																	
 								}
 							}
-							
 							return array(
 								'status'     => 200,
                                 'message'    => sprintf(__('Records Processed %s. Records imported %s of %s.', 'wp_all_import_plugin'), (int) $this->queue_chunk_number, (int) $this->imported, (int) $this->count)
@@ -720,7 +670,6 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                             $history_log->delete();
                         }
                     }
-
 					return array(
 						'status'     => 500,
 						'message'    => sprintf(__('#%s source file not found', 'wp_all_import_plugin'), $this->id)
@@ -1057,7 +1006,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 			$taxonomies = array();						
 			$exclude_taxonomies = apply_filters('pmxi_exclude_taxonomies', (class_exists('PMWI_Plugin')) ? array('post_format', 'product_type', 'product_shipping_class', 'product_visibility') : array('post_format'));
 			$post_taxonomies = array_diff_key(get_taxonomies_by_object_type(array($this->options['custom_type']), 'object'), array_flip($exclude_taxonomies));
-            if ( $this->is_parsing_required('is_update_categories') && ! empty($post_taxonomies) && ! in_array($this->options['custom_type'], array('import_users', 'taxonomies')) ):
+            if ( $this->is_parsing_required('is_update_categories') && ! empty($post_taxonomies) && ! in_array($this->options['custom_type'], array('import_users', 'taxonomies', 'shop_customer')) ):
 				foreach ($post_taxonomies as $ctx): if ("" == $ctx->labels->name or (class_exists('PMWI_Plugin') and strpos($ctx->name, "pa_") === 0 and $this->options['custom_type'] == "product")) continue;
 					$chunk == 1 and $logger and call_user_func($logger, sprintf(__('Composing terms for `%s` taxonomy...', 'wp_all_import_plugin'), $ctx->labels->name));
 					$tx_name = $ctx->name;
@@ -1643,7 +1592,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                     do_action( "pmxi_before_post_import_{$addon}", $data, $i, $this->id );
                 }
 
-				if ( empty($titles[$i]) && $this->options['custom_type'] != 'shop_order') {
+				if ( empty($titles[$i]) && !in_array($this->options['custom_type'], array('shop_order', 'import_users', 'shop_customer')) ) {
 					if ( ! empty($addons_data['PMWI_Plugin']) and !empty($addons_data['PMWI_Plugin']['single_product_parent_ID'][$i]) ){
 						$titles[$i] = $addons_data['PMWI_Plugin']['single_product_parent_ID'][$i] . ' Product Variation';
 					}					
@@ -1670,7 +1619,62 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                             'role' => ('' == $addons_data['PMUI_Plugin']['pmui_role'][$i]) ? 'subscriber' : $addons_data['PMUI_Plugin']['pmui_role'][$i],
                         ), $this->options['custom_type'], $this->id, $i);
                         $logger and call_user_func($logger, sprintf(__('Combine all data for user %s...', 'wp_all_import_plugin'), $articleData['user_login']));
-                        break;
+
+						break;
+						
+					case 'shop_customer':
+						
+                        $articleData = apply_filters('wp_all_import_combine_article_data', array(
+                            'user_pass' => $addons_data['PMUI_Plugin']['pmsci_customer_pass'][$i],
+                            'user_login' => $addons_data['PMUI_Plugin']['pmsci_customer_logins'][$i],
+                            'user_nicename' => $addons_data['PMUI_Plugin']['pmsci_customer_nicename'][$i],
+                            'user_url' =>  $addons_data['PMUI_Plugin']['pmsci_customer_url'][$i],
+                            'user_email' =>  $addons_data['PMUI_Plugin']['pmsci_customer_email'][$i],
+                            'display_name' =>  $addons_data['PMUI_Plugin']['pmsci_customer_display_name'][$i],
+                            'user_registered' =>  $addons_data['PMUI_Plugin']['pmsci_customer_registered'][$i],
+                            'first_name' =>  $addons_data['PMUI_Plugin']['pmsci_customer_first_name'][$i],
+                            'last_name' =>  $addons_data['PMUI_Plugin']['pmsci_customer_last_name'][$i],
+                            'description' =>  $addons_data['PMUI_Plugin']['pmsci_customer_description'][$i],
+                            'nickname' => $addons_data['PMUI_Plugin']['pmsci_customer_nickname'][$i],
+                            'role' => $addons_data['PMUI_Plugin']['pmsci_customer_role'][$i],
+
+                        ), $this->options['custom_type'], $this->id, $i);
+                        $logger and call_user_func($logger, sprintf(__('Combine account data for customer %s...', 'wp_all_import_plugin'), $articleData['user_login']));
+						
+						$billing_data = array(
+
+							'billing_first_name' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_first_name'][$i],
+							'billing_last_name' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_last_name'][$i],
+							'billing_company' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_company'][$i],
+							'billing_address_1' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_address_1'][$i],
+							'billing_address_2' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_address_2'][$i],
+							'billing_city' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_city'][$i],
+							'billing_postcode' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_postcode'][$i],
+							'billing_country' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_country'][$i],
+							'billing_state' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_state'][$i],
+							'billing_phone' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_phone'][$i],
+							'billing_email' => $addons_data['PMUI_Plugin']['pmsci_customer_billing_email'][$i],
+
+                        );
+						$logger and call_user_func($logger, sprintf(__('Combine billing data for customer %s...', 'wp_all_import_plugin'), $articleData['user_login']));
+						
+						$shipping_data = array(
+
+							'shipping_first_name' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_first_name'][$i],
+							'shipping_last_name' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_last_name'][$i],
+							'shipping_company' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_company'][$i],
+							'shipping_address_1' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_address_1'][$i],
+							'shipping_address_2' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_address_2'][$i],
+							'shipping_city' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_city'][$i],
+							'shipping_postcode' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_postcode'][$i],
+							'shipping_country' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_country'][$i],
+							'shipping_state' => $addons_data['PMUI_Plugin']['pmsci_customer_shipping_state'][$i],
+
+                        );
+						$logger and call_user_func($logger, sprintf(__('Combine shipping data for customer %s...', 'wp_all_import_plugin'), $articleData['user_login']));
+						
+						break;
+
                     case 'taxonomies':
                         $taxonomy_type = get_taxonomy( $this->options['taxonomy_type'] );
                         $parent_term_id = 0;
@@ -1750,7 +1754,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                         foreach($postList->getBy($args)->convertRecords() as $postRecord) {
                             if ( ! $postRecord->isEmpty() ) {
                                 switch ($this->options['custom_type']){
-                                    case 'import_users':
+									case 'import_users':
+									case 'shop_customer':
                                         $post_to_update = get_user_by('id', $post_to_update_id = $postRecord->post_id);
                                         break;
                                     case 'taxonomies':
@@ -1790,6 +1795,15 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                         $duplicates = array();
 						if ('pid' == $this->options['duplicate_indicator']) {
 							$duplicate_id = $duplicate_indicator_values[$i];
+							if ($duplicate_id && !in_array($articleData['post_type'], array('import_users', 'shop_customer', 'taxonomies'))) {
+                                $duplicate_post_type = get_post_type($duplicate_id);
+                                if ($articleData['post_type'] == 'product' && $duplicate_post_type == 'product_variation') {
+                                    $duplicate_post_type = 'product';
+                                }
+                                if ($duplicate_post_type !== $articleData['post_type']) {
+                                    $duplicate_id = false;
+                                }
+                            }
 						}
 						// handle duplicates according to import settings
 						else 
@@ -1800,19 +1814,24 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
 						if ( ! empty($duplicate_id)) {
                             $duplicate_id = apply_filters('wp_all_import_manual_matching_duplicate_id', $duplicate_id, $duplicates, $articleData, $this->id);
-						    if (class_exists('WPAI_WPML') && ! empty($this->options['wpml_addon']['lng'])){
-						        // trying to find needed translation for update
-                                $duplicate_id = apply_filters('wpml_object_id', $duplicate_id, get_post_type($duplicate_id), true, $this->options['wpml_addon']['lng']);
-                            }
 							$logger and call_user_func($logger, sprintf(__('Duplicate post was found for post `%s`...', 'wp_all_import_plugin'), $this->getRecordTitle($articleData)));
                             switch ($this->options['custom_type']){
-                                case 'import_users':
+								case 'import_users':
+								case 'shop_customer':
                                     $post_to_update = get_user_by('id', $post_to_update_id = $duplicate_id);
                                     break;
                                 case 'taxonomies':
+                                    if (class_exists('WPAI_WPML') && ! empty($this->options['wpml_addon']['lng'])){
+                                        // trying to find needed translation for update
+                                        $duplicate_id = apply_filters('wpml_object_id', $duplicate_id, $this->options['taxonomy_type'], true, $this->options['wpml_addon']['lng']);
+                                    }
                                     $post_to_update = get_term_by('id', $post_to_update_id = $duplicate_id, $this->options['taxonomy_type']);
                                     break;
                                 default:
+                                    if (class_exists('WPAI_WPML') && ! empty($this->options['wpml_addon']['lng'])){
+                                        // trying to find needed translation for update
+                                        $duplicate_id = apply_filters('wpml_object_id', $duplicate_id, get_post_type($duplicate_id), true, $this->options['wpml_addon']['lng']);
+                                    }
                                     $post_to_update = get_post($post_to_update_id = $duplicate_id);
                                     break;
                             }
@@ -1826,6 +1845,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 				$is_post_to_skip = apply_filters('wp_all_import_is_post_to_skip', false, $this->id, $current_xml_node, $i, $post_to_update_id, $simpleXml);
 
 				if ( $is_post_to_skip ) {
+                    if ( ! $postRecord->isEmpty() ) {
+                        $postRecord->set(array('iteration' => $this->iteration))->update();
+                    }
 					$skipped++;																
 					$logger and !$is_cron and PMXI_Plugin::$session->warnings++;					
 					$logger and !$is_cron and PMXI_Plugin::$session->chunk_number++;
@@ -1834,11 +1856,10 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 				}			
 
 				if ( ! empty($specified_records) ) {
-
-					if ( ! in_array($created + $updated + $skipped + 1, $specified_records) ){
-
-						if ( ! $postRecord->isEmpty() ) $postRecord->set(array('iteration' => $this->iteration))->update();
-
+					if ( ! in_array($created + $updated + $skipped + 1, $specified_records) ) {
+						if ( ! $postRecord->isEmpty() ) {
+                            $postRecord->set(array('iteration' => $this->iteration))->update();
+                        }
 						$skipped++;											
 						$logger and call_user_func($logger, __('<b>SKIPPED</b>: by specified records option', 'wp_all_import_plugin'));
 						$logger and !$is_cron and PMXI_Plugin::$session->warnings++;					
@@ -1898,14 +1919,59 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                 if ( ! $this->options['is_update_role'] ) unset($articleData['role']);
                                 if ( ! $this->options['is_update_nickname'] ) $articleData['nickname'] = get_user_meta($post_to_update->ID, 'nickname', true);
                                 if ( ! $this->options['is_update_description'] ) $articleData['description'] = get_user_meta($post_to_update->ID, 'description', true);
-                                if ( ! $this->options['is_update_login'] ) $articleData['user_login'] = $post_to_update->user_login;
-                                if ( ! $this->options['is_update_password'] ) unset($articleData['user_pass']);
+								
+								if ( ! $this->options['is_update_login'] ) {
+									$articleData['user_login'] = $post_to_update->user_login;
+								} elseif( empty($articleData['user_login']) ) {
+									$articleData['user_login'] = $post_to_update->user_login;
+									$logger and call_user_func($logger, sprintf(__('No username provided for user ID `%s`, preserve existing username for user.', 'wp_all_import_plugin'), $articleData['ID']));
+								}
+								
+								if ( ! $this->options['is_update_password'] ) unset($articleData['user_pass']);
                                 if ( ! $this->options['is_update_nicename'] ) $articleData['user_nicename'] = $post_to_update->user_nicename;
-                                if ( ! $this->options['is_update_email'] ) $articleData['user_email'] = $post_to_update->user_email;
-                                if ( ! $this->options['is_update_registered'] ) $articleData['user_registered'] = $post_to_update->user_registered;
+								
+								if ( ! $this->options['is_update_email'] ) {
+									$articleData['user_email'] = $post_to_update->user_email;
+								} elseif( empty($articleData['user_email']) ) {
+									$articleData['user_email'] = $post_to_update->user_email;
+									$logger and call_user_func($logger, sprintf(__('No email provided for user ID `%s`, preserve existing email for user.', 'wp_all_import_plugin'), $articleData['ID']));
+								}
+								
+								if ( ! $this->options['is_update_registered'] ) $articleData['user_registered'] = $post_to_update->user_registered;
                                 if ( ! $this->options['is_update_display_name'] ) $articleData['display_name'] = $post_to_update->display_name;
                                 if ( ! $this->options['is_update_url'] ) $articleData['user_url'] = $post_to_update->user_url;
-                                break;
+
+								break;
+							case 'shop_customer':
+                                if ( ! $this->options['is_update_first_name'] ) $articleData['first_name'] = $post_to_update->first_name;
+                                if ( ! $this->options['is_update_last_name'] ) $articleData['last_name'] = $post_to_update->last_name;
+                                if ( ! $this->options['is_update_role'] ) unset($articleData['role']);
+                                if ( ! $this->options['is_update_nickname'] ) $articleData['nickname'] = get_user_meta($post_to_update->ID, 'nickname', true);
+                                if ( ! $this->options['is_update_description'] ) $articleData['description'] = get_user_meta($post_to_update->ID, 'description', true);
+								
+								if ( ! $this->options['is_update_login'] ) {
+									$articleData['user_login'] = $post_to_update->user_login;
+								} elseif( empty($articleData['user_login']) ) {
+									$articleData['user_login'] = $post_to_update->user_login;
+									$logger and call_user_func($logger, sprintf(__('No username provided for customer ID `%s`, preserve existing username for customer.', 'wp_all_import_plugin'), $articleData['ID']));
+								}
+								
+								if ( ! $this->options['is_update_password'] ) unset($articleData['user_pass']);
+                                if ( ! $this->options['is_update_nicename'] ) $articleData['user_nicename'] = $post_to_update->user_nicename;
+								
+								if ( ! $this->options['is_update_email'] ) {
+									$articleData['user_email'] = $post_to_update->user_email;
+								} elseif( empty($articleData['user_email']) ) {
+									$articleData['user_email'] = $post_to_update->user_email;
+									$logger and call_user_func($logger, sprintf(__('No email provided for customer ID `%s`, preserve existing email for customer.', 'wp_all_import_plugin'), $articleData['ID']));
+								}
+								
+								if ( ! $this->options['is_update_registered'] ) $articleData['user_registered'] = $post_to_update->user_registered;
+                                if ( ! $this->options['is_update_display_name'] ) $articleData['display_name'] = $post_to_update->display_name;
+                                if ( ! $this->options['is_update_url'] ) $articleData['user_url'] = $post_to_update->user_url;
+
+								break;
+
                             case 'taxonomies':
                                 if ( ! $this->options['is_update_content']){
                                     $articleData['post_content'] = $post_to_update->description;
@@ -2016,12 +2082,40 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                 }
                                 break;
                         }
+					} else {
+						// When "Update all data" is chosen, and the import doesn't contain username or email address data for User & WooCommerce Customer imports
+                        switch ($this->options['custom_type']){
+                            case 'import_users':
+                                if ( empty($articleData['user_login']) ) {
+									$articleData['user_login'] = $post_to_update->user_login;
+									$logger and call_user_func($logger, sprintf(__('No username provided for user ID `%s`, preserve existing username for user.', 'wp_all_import_plugin'), $articleData['ID']));
+								} 
+                                if ( empty($articleData['user_email']) ) {
+									$articleData['user_email'] = $post_to_update->user_email;
+									$logger and call_user_func($logger, sprintf(__('No email provided for user ID `%s`, preserve existing email for user.', 'wp_all_import_plugin'), $articleData['ID']));
+								}
+								break;
+							case 'shop_customer':
+								if ( empty($articleData['user_login']) ) {
+									$articleData['user_login'] = $post_to_update->user_login;
+									$logger and call_user_func($logger, sprintf(__('No username provided for customer ID `%s`, preserve existing username for customer.', 'wp_all_import_plugin'), $articleData['ID']));
+								} 
+								if ( empty($articleData['user_email']) ) {
+									$articleData['user_email'] = $post_to_update->user_email;
+									$logger and call_user_func($logger, sprintf(__('No email provided for customer ID `%s`, preserve existing email for customer.', 'wp_all_import_plugin'), $articleData['ID']));
+								}
+                                break;
+                            default:
+                                break;
+						}
+						
 					}
 
                     $is_images_to_delete = apply_filters('pmxi_delete_images', true, $articleData, $current_xml_node);
                     if ( $is_images_to_delete ) {
                         switch ($this->options['custom_type']) {
-                            case 'import_users':
+							case 'import_users':
+							case 'shop_customer':
 
                                 break;
                             case 'taxonomies':
@@ -2071,7 +2165,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 				}				
 
 				$logger and call_user_func($logger, sprintf(__('Applying filter `pmxi_article_data` for `%s`', 'wp_all_import_plugin'), $this->getRecordTitle($articleData)));
-				$articleData = apply_filters('pmxi_article_data', $articleData, $this, $post_to_update);					
+				$articleData = apply_filters('pmxi_article_data', $articleData, $this, $post_to_update, $current_xml_node);
 				
 				// no new records are created. it will only update posts it finds matching duplicates for
 				if (  ! $this->options['create_new_records'] and empty($articleData['ID']) ){ 
@@ -2203,6 +2297,98 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                             $this->wpdb->update($this->wpdb->users, array('user_login' => $articleData['user_login']), array('ID' => $articleData['ID']));
                         }
                         $articleData['post_title'] = $articleData['user_login'];
+
+						break;
+
+					case 'shop_customer':
+                        if (empty($articleData['ID']) && email_exists( $articleData['user_email'] )){
+                            $logger and call_user_func($logger, sprintf(__('<b>WARNING</b> Sorry, that email address `%s` is already used!', 'wp_all_import_plugin'), $articleData['user_email']));
+                            $logger and !$is_cron and PMXI_Plugin::$session->warnings++;
+                            $logger and !$is_cron and PMXI_Plugin::$session->chunk_number++;
+                            $logger and !$is_cron and PMXI_Plugin::$session->save_data();
+                            $skipped++;
+                            continue 2;
+                        }
+                        $pid = (empty($articleData['ID'])) ? wp_insert_user( $articleData ) : wp_update_user( $articleData );
+                        // update user login using direct sql query
+                        if (!empty($articleData['ID'])){
+                            $this->wpdb->update($this->wpdb->users, array('user_login' => $articleData['user_login']), array('ID' => $articleData['ID']));
+						}
+						
+						// Update billing details for customer
+						if ( empty($articleData['ID']) or $this->options['update_all_data'] == 'yes' or $this->options['pmsci_is_update_billing_fields'] ) {
+							$logger and call_user_func($logger, sprintf(__('- Importing billing data...', 'wp_all_import_plugin')));
+							if (!empty($billing_data)) {
+								foreach($billing_data as $key => $value) {
+									if (
+										// Update all Billing Fields
+										( $this->options['pmsci_update_billing_fields_logic'] == 'full_update' )
+										or
+										// Update only these Billing Fields, leave the rest alone
+										( $this->options['pmsci_update_billing_fields_logic'] == 'only' and in_array( $key, $this->options['pmsci_billing_fields_list'] ) )
+										or
+										// Leave these fields alone, update all other Billing Fields
+										( $this->options['pmsci_update_billing_fields_logic'] == 'all_except' and !in_array( $key, $this->options['pmsci_billing_fields_list'] ) )
+									){
+										update_user_meta($pid, $key, $value);
+										$logger and call_user_func($logger, sprintf(__('- Billing field `%s` has been updated with value `%s` for customer `%s` ...', 'wp_all_import_plugin'), $key, $value, $articleData['user_login']));
+									}
+								}
+							}
+						}
+						
+						// Update shipping details for customer.
+						if ( empty($articleData['ID']) or $this->options['update_all_data'] == 'yes' or $this->options['pmsci_is_update_shipping_fields'] ) {
+							switch ($this->options['pmsci_customer']['shipping_source']) {
+								// Copy from billing.
+								case 'copy':
+									$logger and call_user_func($logger, sprintf(__('- Copying billing information to shipping fields...', 'wp_all_import_plugin')));
+									if ( ! empty( $billing_data )) {
+										foreach ($billing_data as $key => $value) {
+											$shipping_field = str_replace('billing', 'shipping', $key);
+											if ( in_array($shipping_field, array('shipping_phone','shipping_email') ) ) {
+                                                continue;
+                                            }
+											if ( 
+												// Update all Shipping Fields
+												( $this->options['pmsci_update_shipping_fields_logic'] == 'full_update' )
+												or
+												// Update only these Shipping Fields, leave the rest alone
+												( $this->options['pmsci_update_shipping_fields_logic'] == 'only' and in_array( $shipping_field, $this->options['pmsci_shipping_fields_list'] ) )
+												or
+												// Leave these fields alone, update all other Shipping Fields
+
+												( $this->options['pmsci_update_shipping_fields_logic'] == 'all_except' and !in_array( $shipping_field, $this->options['pmsci_shipping_fields_list'] ) )
+											){
+												update_user_meta( $pid, $shipping_field, $value );
+												$logger and call_user_func($logger, sprintf(__('- Shipping field `%s` has been updated with value `%s` for customer `%s` ...', 'wp_all_import_plugin'), $shipping_field, $value, $articleData['user_login']));
+											}
+										}
+									}
+									break;
+								// Import shipping address.
+								default:
+									$logger and call_user_func($logger, sprintf(__('- Importing shipping data separately...', 'wp_all_import_plugin')));
+									foreach ($shipping_data as $key => $value) {
+										$shipping_field = $key;
+										if ( 
+											// Update all Shipping Fields
+											( $this->options['pmsci_update_shipping_fields_logic'] == 'full_update' )
+											or
+											// Update only these Shipping Fields, leave the rest alone
+											( $this->options['pmsci_update_shipping_fields_logic'] == 'only' and in_array( $shipping_field, $this->options['pmsci_shipping_fields_list'] ) )
+											or
+											// Leave these fields alone, update all other Shipping Fields
+											( $this->options['pmsci_update_shipping_fields_logic'] == 'all_except' and !in_array( $shipping_field, $this->options['pmsci_shipping_fields_list'] ) )
+										){
+											update_user_meta( $pid, $key, $value);
+											$logger and call_user_func($logger, sprintf(__('- Shipping field `%s` has been updated with value `%s` for customer `%s` ...', 'wp_all_import_plugin'), $key, $value, $articleData['user_login']));
+										}
+									}
+									break;
+							}
+						}
+						$articleData['post_title'] = $articleData['user_login'];
                         break;
                     case 'taxonomies':
                         if (empty($articleData['ID'])){
@@ -2245,8 +2431,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                         break;
                 }
 				
-				if (empty($pid))
-				{
+				if (empty($pid)) {
 					$logger and call_user_func($logger, __('<b>ERROR</b>', 'wp_all_import_plugin') . ': something wrong, ID = 0 was generated.');
 					$logger and !$is_cron and PMXI_Plugin::$session->errors++;
 					$skipped++;
@@ -2312,7 +2497,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 						if ( ! empty($articleData['ID']) ) {
 
                             switch ($this->options['custom_type']){
-                                case 'import_users':
+								case 'import_users':
+								case 'shop_customer':
 	                                $existing_meta_keys = get_user_meta($pid, '');
                                 break;
                                 case 'taxonomies':
@@ -2329,9 +2515,37 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 							foreach ($existing_meta_keys as $cur_meta_key => $cur_meta_val) { 
 								
 								// Do not delete post meta for features image 
-								if ( in_array($cur_meta_key, array('_thumbnail_id', '_product_image_gallery', '_wp_old_slug')) ) continue;																
-
-								if ( in_array($cur_meta_key, array('first_name', PMXI_Plugin::getInstance()->getWPPrefix() . 'capabilities', 'nickname', 'last_name', 'description')) and $this->options['custom_type'] == 'import_users') continue;
+								if ( in_array($cur_meta_key, array('_thumbnail_id', '_product_image_gallery', '_wp_old_slug')) ) continue;
+								
+								$user_fields = array(
+									'first_name',
+									PMXI_Plugin::getInstance()->getWPPrefix() . 'capabilities',
+									'nickname',
+									'last_name',
+									'description',
+									'billing_first_name',
+									'billing_last_name',
+									'billing_company',
+									'billing_address_1',
+									'billing_address_2',
+									'billing_city',
+									'billing_postcode',
+									'billing_country',
+									'billing_state',
+									'billing_phone',
+									'billing_email',
+									'shipping_first_name',
+									'shipping_last_name',
+									'shipping_company',
+									'shipping_address_1',
+									'shipping_address_2',
+									'shipping_city',
+									'shipping_postcode',
+									'shipping_country',
+									'shipping_state',
+									);
+								
+								if ( in_array($cur_meta_key, $user_fields) and in_array($this->options['custom_type'], array('import_users', 'shop_customer')) ) continue;
 
 								$field_to_delete = true;								
 
@@ -2342,7 +2556,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 								if ($this->options['update_all_data'] == 'yes' or ($this->options['update_all_data'] == 'no' and $this->options['is_update_custom_fields'] and $this->options['update_custom_fields_logic'] == "full_update")) {
 
                                     switch ($this->options['custom_type']){
-                                        case 'import_users':
+										case 'import_users':
+										case 'shop_customer':
                                             delete_user_meta($pid, $cur_meta_key);
                                             break;
                                         case 'taxonomies':
@@ -2360,7 +2575,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 									if ( empty($this->options['custom_fields_list']) or ! in_array($cur_meta_key, $this->options['custom_fields_list'])){ 
 
                                         switch ($this->options['custom_type']){
-                                            case 'import_users':
+											case 'import_users':
+											case 'shop_customer':
                                                 delete_user_meta($pid, $cur_meta_key);
                                                 break;
                                             case 'taxonomies':
@@ -2394,17 +2610,14 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
 					$import_functions = apply_filters('wp_all_import_addon_import', array());
 
-					// deligate operation to addons
-					foreach (PMXI_Admin_Addons::get_active_addons() as $class){ 						
-						if (class_exists($class)){
+					// Deligate import operation to addons.
+					foreach (PMXI_Admin_Addons::get_active_addons() as $class) {
+						if (class_exists($class)) {
 							if ( method_exists($addons[$class], 'import') ) $addons[$class]->import($importData);	
 						}
-						else
-						{							
-							if ( ! empty($import_functions[$class]) ){ 
-
-								if ( is_array($import_functions[$class]) and is_callable($import_functions[$class]) or ! is_array($import_functions[$class]) and function_exists($import_functions[$class])  ){
-
+						else {
+							if (!empty($import_functions[$class])) {
+								if (is_array($import_functions[$class]) and is_callable($import_functions[$class]) or ! is_array($import_functions[$class]) and function_exists($import_functions[$class]) ) {
 									call_user_func($import_functions[$class], $importData, $addons_data[$class]);			
 								}							
 							}
@@ -2432,9 +2645,12 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 								)
 							);
 
+							$meta_fields = array();
+
                             // get existing keys after add-ons import completed
                             switch ($this->options['custom_type']){
-                                case 'import_users':
+								case 'import_users':
+								case 'shop_customer':
                                     $meta_type = 'user';
                                     $existing_meta_keys = get_user_meta($pid, '');
                                     break;
@@ -2478,7 +2694,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                 }
 
                                 $logger and call_user_func($logger, __('- <b>ACTION</b>: pmxi_custom_field', 'wp_all_import_plugin'));
-                                $cf_value = apply_filters('pmxi_custom_field', (is_serialized($values[$i])) ? unserialize($values[$i]) : $values[$i], $pid, $m_key, $existing_meta_keys, $this->id);
+                                $cf_value = apply_filters('pmxi_custom_field', (is_serialized($values[$i])) ? unserialize($values[$i]) : $values[$i], $pid, $m_key, $values[$i], $existing_meta_keys, $this->id);
 
                                 $m_key = wp_unslash( $m_key );
                                 $cf_value = wp_unslash( $cf_value );
@@ -2493,13 +2709,16 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                     $meta_data['add'][ $meta_type ][] = $this->wpdb->prepare( "(%d, %s, %s)", $pid, $m_key, maybe_serialize( $cf_value ) );
                                 }
 
+                                $meta_fields[ $m_key ] = maybe_serialize( $cf_value );
+
                                 $logger and call_user_func($logger, sprintf(__('- Custom field `%s` will be updated with value `%s` for post `%s` ...', 'wp_all_import_plugin'), $m_key, esc_attr(maybe_serialize($cf_value)), $articleData['post_title']));
                                 $logger and call_user_func($logger, __('- <b>ACTION</b>: pmxi_update_post_meta', 'wp_all_import_plugin'));
 							}
 
 							// Skip post if all custom files are unchanged and there is no other data to be updated.
 							if ( "no" == $this->options['is_keep_former_posts'] ) {
-								$data_to_update = array(
+                                $is_update_attributes = empty($this->options['is_update_attributes']) ? false : true;
+ 								$data_to_update = array(
 									intval( $this->options['is_update_status'] ),
 									intval( $this->options['is_update_title'] ),
 									intval( $this->options['is_update_author'] ),
@@ -2514,7 +2733,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 									intval( $this->options['is_update_attachments'] ),
 									intval( $this->options['is_update_images'] ),
 									intval( $this->options['is_update_categories'] ),
-                                    intval( $this->options['is_update_attributes'] )
+                                    intval( $is_update_attributes )
 								);
 								$data_to_update = array_filter( $data_to_update );
 
@@ -2558,8 +2777,13 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 							// Update meta data.
 							foreach ( $update_meta_data as $meta_key => $meta_value ) {
 								$this->wpdb->query( $this->wpdb->prepare("UPDATE {$table} SET meta_value = %s WHERE meta_key = '{$meta_key}' and {$meta_id} = {$pid}", $meta_value) );
-                                do_action( 'pmxi_update_post_meta', $pid, $m_key, maybe_unserialize($meta_value)); // hook that was triggered after post meta data updated
 							}
+
+							// Trigger actions for updated meta fields.
+							foreach ($meta_fields as $meta_key => $meta_value) {
+                                do_action( 'pmxi_update_post_meta', $pid, $meta_key, maybe_unserialize($meta_value)); // hook that was triggered after post meta data updated
+                            }
+
                             wp_cache_delete($pid, $meta_type . '_meta');
 							//$this->executeSQL();
 						}							
@@ -2568,7 +2792,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
 					// Page Template
                     global $wp_version;
-					if ( ! empty($articleData['post_type']) and ('page' == $articleData['post_type'] || version_compare($wp_version, '4.7.0', '>=')) and wp_all_import_is_update_cf('_wp_page_template', $this->options) and ( !empty($this->options['page_template']) or "no" == $this->options['is_multiple_page_template']) ){
+					if ( ! empty($articleData['post_type']) && $articleData['post_type'] != 'taxonomies' && ('page' == $articleData['post_type'] || version_compare($wp_version, '4.7.0', '>=')) && wp_all_import_is_update_cf('_wp_page_template', $this->options) && ( !empty($this->options['page_template']) || "no" == $this->options['is_multiple_page_template']) ){
 						update_post_meta($pid, '_wp_page_template', ("no" == $this->options['is_multiple_page_template']) ? $page_template[$i] : $this->options['page_template']);
 					}
 					
@@ -2578,7 +2802,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
                     $images_uploads = apply_filters('wp_all_import_images_uploads_dir', $uploads, $articleData, $current_xml_node, $this->id);
 
-					if (!empty($articleData['post_content']) && $this->options['is_update_content'] && $this->options['import_img_tags'] ){
+                    if (!empty($articleData['post_content']) && $this->options['is_keep_former_posts'] == "no" && ($this->options['update_all_data'] == "yes" || $this->options['is_update_content']) && $this->options['import_img_tags'] ){
 
                         require_once(ABSPATH . 'wp-admin/includes/image.php');
 
@@ -2764,7 +2988,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
 					$is_images_to_update = apply_filters('pmxi_is_images_to_update', true, $articleData, $current_xml_node);
 
-                    $logger and call_user_func($logger, __('<b>IMAGES:</b>', 'wp_all_import_plugin'));
+					if ( ! in_array($this->options['custom_type'], array('shop_order', 'import_users', 'shop_customer')) ) {
+						$logger and call_user_func($logger, __('<b>IMAGES:</b>', 'wp_all_import_plugin'));
+					}
 
 					if ( $is_images_to_update and ! empty($images_uploads) and false === $images_uploads['error'] and (empty($articleData['ID']) or $this->options['update_all_data'] == "yes" or ( $this->options['update_all_data'] == "no" and $this->options['is_update_images']))) {
 
@@ -2855,7 +3081,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												$line_img_titles = explode("\n", $image_meta_titles_bundle[$slug][$i]);
 												if ( ! empty($line_img_titles) )
 													foreach ($line_img_titles as $line_img_title)
-														$img_titles = array_merge($img_titles, ( ! empty($this->options[$option_slug . 'image_meta_title_delim']) ) ? str_getcsv($line_img_title, $this->options[$option_slug . 'image_meta_title_delim']) : array($line_img_title) );
+														$img_titles = array_merge($img_titles, ( ! empty($this->options[$option_slug . 'image_meta_title_delim']) ) ? explode($this->options[$option_slug . 'image_meta_title_delim'], $line_img_title) : array($line_img_title) );
 					
 											}
 											if ( $this->options[$option_slug . 'set_image_meta_caption'] and !empty($image_meta_captions_bundle[$slug])){								
@@ -2863,7 +3089,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												$line_img_captions = explode("\n", $image_meta_captions_bundle[$slug][$i]);
 												if ( ! empty($line_img_captions) )
 													foreach ($line_img_captions as $line_img_caption)
-														$img_captions = array_merge($img_captions, ( ! empty($this->options[$option_slug . 'image_meta_caption_delim']) ) ? str_getcsv($line_img_caption, $this->options[$option_slug . 'image_meta_caption_delim']) : array($line_img_caption) );
+														$img_captions = array_merge($img_captions, ( ! empty($this->options[$option_slug . 'image_meta_caption_delim']) ) ? explode($this->options[$option_slug . 'image_meta_caption_delim'], $line_img_caption) : array($line_img_caption) );
 
 											}
 											if ( $this->options[$option_slug . 'set_image_meta_alt'] and !empty($image_meta_alts_bundle[$slug])){								
@@ -2871,7 +3097,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												$line_img_alts = explode("\n", $image_meta_alts_bundle[$slug][$i]);
 												if ( ! empty($line_img_alts) )
 													foreach ($line_img_alts as $line_img_alt)
-														$img_alts = array_merge($img_alts, ( ! empty($this->options[$option_slug . 'image_meta_alt_delim']) ) ? str_getcsv($line_img_alt, $this->options[$option_slug . 'image_meta_alt_delim']) : array($line_img_alt) );
+														$img_alts = array_merge($img_alts, ( ! empty($this->options[$option_slug . 'image_meta_alt_delim']) ) ? explode($this->options[$option_slug . 'image_meta_alt_delim'], $line_img_alt) : array($line_img_alt) );
 
 											}
 											if ( $this->options[$option_slug . 'set_image_meta_description'] and !empty($image_meta_descriptions_bundle[$slug])){								
@@ -2879,7 +3105,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												$line_img_descriptions = ($this->options[$option_slug . 'image_meta_description_delim_logic'] == 'line' or empty($this->options[$option_slug . 'image_meta_description_delim'])) ? explode("\n", $image_meta_descriptions_bundle[$slug][$i]) : array($image_meta_descriptions_bundle[$slug][$i]);
 												if ( ! empty($line_img_descriptions) )
 													foreach ($line_img_descriptions as $line_img_description)
-														$img_descriptions = array_merge($img_descriptions, ($this->options[$option_slug . 'image_meta_description_delim_logic'] == 'separate' and ! empty($this->options[$option_slug . 'image_meta_description_delim']) ) ? str_getcsv($line_img_description, $this->options[$option_slug . 'image_meta_description_delim']) : array($line_img_description) );
+														$img_descriptions = array_merge($img_descriptions, ($this->options[$option_slug . 'image_meta_description_delim_logic'] == 'separate' and ! empty($this->options[$option_slug . 'image_meta_description_delim']) ) ? explode($this->options[$option_slug . 'image_meta_description_delim'], $line_img_description) : array($line_img_description) );
 
 											}					
 
@@ -2897,13 +3123,14 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												if (empty($url)) continue;										
 
 												$bn  = wp_all_import_sanitize_filename(urldecode(wp_all_import_basename($url)));
+                                                $default_extension = pmxi_getExtension($bn);
 												
 												if ( "yes" == $this->options[$option_slug . 'download_images'] and ! empty($auto_extensions_bundle[$slug][$i]) and preg_match('%^(jpg|jpeg|png|gif)$%i', $auto_extensions_bundle[$slug][$i])){
 													$img_ext = $auto_extensions_bundle[$slug][$i];
 												}
 												else {
-													$img_ext = pmxi_getExtensionFromStr($url);									
-													$default_extension = pmxi_getExtension($bn);																									
+													$img_ext = pmxi_getExtensionFromStr($url);
+
 													if ($img_ext == "") $img_ext = pmxi_get_remote_image_ext($url);		
 												}
 
@@ -2982,7 +3209,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                         // trying to find existing image in images table
                                                         if ($this->options[$option_slug . 'download_images'] === "yes"){
                                                             $imageList = new PMXI_Image_List();
-                                                            switch ($this->options['search_existing_images_logic']){
+                                                            switch ($this->options[$option_slug . 'search_existing_images_logic']){
                                                                 case 'by_url':
                                                                     $attch = $imageList->getExistingImageByUrl($url);
                                                                     $logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` by URL...', 'wp_all_import_plugin'), rawurldecode($url)));
@@ -2997,7 +3224,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                         if ("gallery" == $this->options[$option_slug . 'download_images']) $download_image = false;
 
                                                         // Search for existing images for new imports only using old logic.
-                                                        if ( empty($attch) && (empty($this->iteration) || $this->options[$option_slug . 'download_images'] != "yes")) {
+                                                        if (empty($attch)) {
 
                                                             $logger and call_user_func($logger, sprintf(__('- Search for existing image `%s` by `_wp_attached_file` ...', 'wp_all_import_plugin'), rawurldecode($image_name)));
 
@@ -3026,7 +3253,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                                     ))->insert();
                                                                 }
                                                                 else{
-                                                                    switch ($this->options['search_existing_images_logic']){
+                                                                    switch ($this->options[$option_slug . 'search_existing_images_logic']){
                                                                         case 'by_url':
                                                                             // update image URL if it was not set
                                                                             if (empty($imageRecord->image_url)){
@@ -3147,7 +3374,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                         }
                                                         else{
                                                             // image already in image table, but was not founded, so updating it with new data
-                                                            switch ($this->options['search_existing_images_logic']){
+                                                            switch ($this->options[$option_slug . 'search_existing_images_logic']){
                                                                 case 'by_url':
                                                                     // update image URL if it was not set
                                                                     if (empty($imageRecord->image_url)){
@@ -3284,7 +3511,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                     if (!empty($featuredImage)) {
                         $post_thumbnail_id = get_post_thumbnail_id( $pid );
                         if (empty($post_thumbnail_id) and ($this->options['is_featured'] or !empty($is_image_featured[$i])) ) {
-                            set_post_thumbnail($pid, $attid);
+                            set_post_thumbnail($pid, $featuredImage);
                         }
                     }
 
@@ -3437,11 +3664,11 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
                                             if ($attch != null and empty($attch->post_parent))
                                             {
-                                                $logger and call_user_func($logger, sprintf(__('- Attachment has been successfully updated for file `%s`', 'wp_all_import_plugin'), ($handle_attachment) ? $handle_attachment['url'] : $targetUrl . '/' . $attachment_filename));
+                                                $logger and call_user_func($logger, sprintf(__('- Attachment has been successfully updated for file `%s`', 'wp_all_import_plugin'), (isset($handle_attachment)) ? $handle_attachment['url'] : $targetUrl . '/' . wp_all_import_basename($attachment_filepath)));
                                             }
                                             elseif(empty($attch))
                                             {
-                                                $logger and call_user_func($logger, sprintf(__('- Attachment has been successfully created for file `%s`', 'wp_all_import_plugin'), ($handle_attachment) ? $handle_attachment['url'] : $targetUrl . '/' . $attachment_filename));
+                                                $logger and call_user_func($logger, sprintf(__('- Attachment has been successfully created for file `%s`', 'wp_all_import_plugin'), (isset($handle_attachment)) ? $handle_attachment['url'] : $targetUrl . '/' . wp_all_import_basename($attachment_filepath)));
                                             }
                                             $logger and call_user_func($logger, __('- <b>ACTION</b>: pmxi_attachment_uploaded', 'wp_all_import_plugin'));
                                             do_action( 'pmxi_attachment_uploaded', $pid, $attach_id, $attachment_filepath);
@@ -3503,12 +3730,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 								if ( ! empty($txes[$i]) ):
 									foreach ($txes[$i] as $key => $single_tax) {
 										$is_created_term = false;
-										if (is_array($single_tax) and ! empty($single_tax['name'])){																														
-
+										if (is_array($single_tax) and ! empty($single_tax['name'])){
 											$parent_id = ( ! empty($single_tax['parent'])) ? pmxi_recursion_taxes($single_tax['parent'], $tx_name, $txes[$i], $key) : '';
-											
-											$term = (empty($this->options['tax_is_full_search_' . $this->options['tax_logic'][$tx_name]][$tx_name])) ? is_exists_term($single_tax['name'], $tx_name, (int)$parent_id) : is_exists_term($single_tax['name'], $tx_name);																																			
-
+											$term = (empty($this->options['tax_is_full_search_' . $this->options['tax_logic'][$tx_name]][$tx_name])) ? is_exists_term($single_tax['name'], $tx_name, (int)$parent_id) : is_exists_term($single_tax['name'], $tx_name);
 											if ( empty($term) and !is_wp_error($term) ){
 												$term = (empty($this->options['tax_is_full_search_' . $this->options['tax_logic'][$tx_name]][$tx_name])) ? is_exists_term(htmlspecialchars($single_tax['name']), $tx_name, (int)$parent_id) : is_exists_term(htmlspecialchars($single_tax['name']), $tx_name);
 												if ( empty($term) and !is_wp_error($term) ){
@@ -3545,12 +3769,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: `%s`', 'wp_all_import_plugin'), $term->get_error_message()));
 												$logger and !$is_cron and PMXI_Plugin::$session->warnings++;
 											}
-											elseif ( ! empty($term)) {													
-
-												$cat_id = $term['term_id'];																								
-
-												if ($cat_id and $single_tax['assign']) 
-												{
+											elseif ( ! empty($term)) {
+												$cat_id = $term['term_id'];
+												if ($cat_id and $single_tax['assign']) {
 													$term = get_term_by('id', $cat_id, $tx_name);
 													if ( $term->parent != '0' and ! empty($this->options['tax_is_full_search_' . $this->options['tax_logic'][$tx_name]][$tx_name]) and empty($this->options['tax_assign_to_one_term_' . $this->options['tax_logic'][$tx_name]][$tx_name])){
 														$parent_ids = wp_all_import_get_parent_terms($cat_id, $tx_name);
@@ -3574,15 +3795,11 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 										}
 									}				
 								endif;
-
                                 $assign_taxes = apply_filters('wp_all_import_set_post_terms', $assign_taxes, $tx_name, $pid, $this->id);
-								
 								// associate taxes with post								
 								$this->associate_terms($pid, ( empty($assign_taxes) ? false : $assign_taxes ), $tx_name, $logger, $is_cron, $articleData['post_status']);
-								
 							}
-							else
-							{
+							else {
 								$logger and call_user_func($logger, sprintf(__('- %s %s has been skipped attempted to `Do not update Taxonomies (incl. Categories and Tags)`...', 'wp_all_import_plugin'), $custom_type_details->labels->singular_name, $tx_name));
 							}
 						}
@@ -3610,7 +3827,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 					$is_update = ! empty($articleData['ID']);
 
 					// fire important hooks after custom fields are added
-					if ( ! $this->options['is_fast_mode'] and ! in_array($this->options['custom_type'], array('import_users', 'taxonomies'))){
+					if ( ! $this->options['is_fast_mode'] and ! in_array($this->options['custom_type'], array('import_users', 'shop_customer', 'taxonomies'))){
                         $_post = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->posts} WHERE ID = %d LIMIT 1", $pid ) );
                         $_post = sanitize_post( $_post, 'raw' );
                         $post_object = new WP_Post( $_post );
@@ -3733,7 +3950,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
     private function getRecordTitle($articleData){
         switch ($this->options['custom_type']){
-            case 'import_users':
+			case 'import_users':
+			case 'shop_customer':
                 $title = $articleData['user_login'];
                 break;
             default:
@@ -3756,6 +3974,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
         $get_ctx = stream_context_create(array('http' => array('timeout' => 5)));
 
         if ( (is_wp_error($request) or $request === false) and ! @file_put_contents($image_filepath, @file_get_contents($url, false, $get_ctx))) {
+            $logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s can not be downloaded, response %s', 'wp_all_import_plugin'), $url, maybe_serialize($request)));
             @unlink($image_filepath); // delete file since failed upload may result in empty file created
         } else{
 
@@ -3911,6 +4130,10 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                         update_user_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
                                         $logger and call_user_func($logger, sprintf(__('Instead of deletion user with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
                                         break;
+									case 'shop_customer':
+                                        update_user_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
+                                        $logger and call_user_func($logger, sprintf(__('Instead of deletion customer with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
+                                        break;
                                     case 'taxonomies':
                                         update_term_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
                                         $logger and call_user_func($logger, sprintf(__('Instead of deletion taxonomy term with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
@@ -3937,8 +4160,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 							
 							$to_delete = apply_filters('wp_all_import_is_post_to_delete', $to_delete, $missingPostRecord['post_id'], $this);
 
-							if ($to_delete){
-                                if ( ! in_array($this->options['custom_type'], array("import_users", "taxonomies")) ){
+							if ($to_delete) {
+                                if ( ! in_array($this->options['custom_type'], array("import_users", "taxonomies", "shop_customer")) ){
+                                    do_action('pmxi_before_delete_post', $missingPostRecord['post_id'], $this);
                                     // Remove attachments
                                     empty($this->options['is_keep_attachments']) and wp_delete_attachments($missingPostRecord['post_id'], true, 'files');
                                     // Remove images
@@ -3947,8 +4171,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                     wp_delete_object_term_relationships($missingPostRecord['post_id'], get_object_taxonomies('' != $this->options['custom_type'] ? $this->options['custom_type'] : 'post'));
                                 }
 							}	
-							else
-							{
+							else {
                                 $skipp_from_deletion[] = $missingPostRecord['post_id'];
 								$postRecord = new PMXI_Post_Record();
 								$postRecord->getBy(array(
@@ -3983,7 +4206,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 							}
 
                             switch ($this->options['custom_type']){
-                                case 'import_users':
+								case 'import_users':
+								case 'shop_customer':
                                     do_action('pmxi_delete_post', $ids, $this);
 									// delete_user action
 									foreach( $ids as $id) {
@@ -3997,29 +4221,21 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 									foreach( $ids as $id) {
                                         do_action( 'deleted_user', $id, $reassign = null );
                                     }
-									
+                                    $this->wpdb->query( $sql );
                                     break;
                                 case 'taxonomies':
                                     do_action('pmxi_delete_taxonomy_term', $ids, $this);
                                     foreach ($ids as $term_id){
                                         wp_delete_term( $term_id, $this->options['taxonomy_type'] );
                                     }
-
                                     break;
                                 default:
                                     do_action('pmxi_delete_post', $ids, $this);
-                                    foreach ($ids as $id) {
-                                        do_action( 'delete_post', $id );
+                                    foreach ($ids as $post_id){
+                                        wp_delete_post( $post_id, TRUE );
                                     }
-                                    $sql = "delete a,b,c
-                                      FROM ".$this->wpdb->posts." a
-                                      LEFT JOIN ".$this->wpdb->term_relationships." b ON ( a.ID = b.object_id )
-                                      LEFT JOIN ".$this->wpdb->postmeta." c ON ( a.ID = c.post_id )				
-                                      WHERE a.ID IN (" . implode(',', $ids) . ");";
                                     break;
                             }
-							
-							$this->wpdb->query( $sql );
 								
 							// Delete record form pmxi_posts
 							$sql = "DELETE FROM " . PMXI_Plugin::getInstance()->getTablePrefix() . "posts WHERE post_id IN (".implode(',', $ids).") AND import_id = %d";
@@ -4059,7 +4275,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
 	protected function executeSQL(){
 		
-		$import_entry = ( $this->options['custom_type'] == 'import_users') ? 'user' : 'post';
+		$import_entry = ( in_array( $this->options['custom_type'], array('import_users', 'shop_customer') ) ) ? 'user' : 'post';
 
 		// prepare bulk SQL query
 		$meta_table = _get_meta_table( $import_entry );
@@ -4104,6 +4320,20 @@ class PMXI_Import_Record extends PMXI_Model_Record {
     }
 
 	protected function associate_terms( $pid, $assign_taxes, $tx_name, $logger, $is_cron = false, $post_status = 'publish' ) {
+        $use_wp_set_object_terms = apply_filters('wp_all_import_use_wp_set_object_terms', false, $tx_name);
+        if ($use_wp_set_object_terms) {
+            $term_ids = [];
+            if (!empty($assign_taxes)) {
+                foreach ($assign_taxes as $ttid) {
+                    $term = get_term_by('term_taxonomy_id', $ttid, $tx_name);
+                    if ($term) {
+                        $term_ids[] = $term->term_id;
+                    }
+                }
+            }
+            return wp_set_object_terms($pid, $term_ids, $tx_name);
+        }
+
 	    $term_ids = wp_get_object_terms( $pid, $tx_name, array( 'fields' => 'ids' ) );
 
 		$assign_taxes = ( is_array( $assign_taxes ) ) ? array_filter( $assign_taxes ) : false;
@@ -4147,54 +4377,35 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 	 * @chainable
 	 */
 	public function deletePostsAjax($keepPosts = TRUE, $is_deleted_images = 'auto', $is_delete_attachments = 'auto') {
-		
-		$postList = new PMXI_Post_List();	
-
-		if ( ! $keepPosts) {				
-
+		if ( ! $keepPosts) {
 			$missing_ids = array();
-			
 			$sql = "SELECT post_id FROM " . PMXI_Plugin::getInstance()->getTablePrefix() . "posts WHERE import_id = %d";
 			$missingPosts = $this->wpdb->get_results( 
 				$this->wpdb->prepare($sql, $this->id)
-			);	
-			
-			if ( ! empty($missingPosts) ): 
-					
+			);
+			if ( ! empty($missingPosts) ):
 				foreach ($missingPosts as $missingPost) {
-				
 					$missing_ids[] = $missingPost->post_id;
-													
 				}
-
-			endif;	
-
+			endif;
 			// Delete posts from database
-			if ( ! empty($missing_ids) && is_array($missing_ids) ){																								
-
-				$missing_ids_arr = array_chunk($missing_ids, $this->options['records_per_request']);				
-				
+			if ( ! empty($missing_ids) && is_array($missing_ids) ){
+				$missing_ids_arr = array_chunk($missing_ids, $this->options['records_per_request']);
 				foreach ($missing_ids_arr as $key => $ids) {
-
-					if ( ! empty($ids) ) { 
-
-						$this->deleteRecords($is_delete_attachments, $is_deleted_images, $ids);							
-
+					if ( ! empty($ids) ) {
+						$this->deleteRecords($is_delete_attachments, $is_deleted_images, $ids);
 						// Delete record form pmxi_posts
 						$sql = "DELETE FROM " . PMXI_Plugin::getInstance()->getTablePrefix() . "posts WHERE post_id IN (".implode(',', $ids).") AND import_id = %d";
 						$this->wpdb->query( 
 							$this->wpdb->prepare($sql, $this->id)
-						);	
-
+						);
 						$this->set(array('deleted' => $this->deleted + count($ids)))->update();						
 					}
 					break;
 				}
-
 				return (count($missing_ids_arr) > 1) ? false : true;
 			}								
-		}			
-
+		}
 		return true;
 	}
 
@@ -4211,49 +4422,39 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 			foreach ($post->getBy('import_id', $this->id)->convertRecords() as $p) {								
 				$ids[] = $p->post_id;
 			}
-
 			if ( ! empty($ids) ){
-
-				$this->deleteRecords($is_delete_attachments, $is_deleted_images, $ids);								
-				
+				$this->deleteRecords($is_delete_attachments, $is_deleted_images, $ids);
 			}			
 		}
-		
 		$this->wpdb->query($this->wpdb->prepare('DELETE FROM ' . $post->getTable() . ' WHERE import_id = %s', $this->id));
-
 		return $this;
 	}
 
-	protected function deleteRecords( $is_delete_attachments, $is_deleted_images, $ids = array() )
-	{
+	protected function deleteRecords( $is_delete_attachments, $is_deleted_images, $ids = array() ) {
 		foreach ( $ids as $k => $id ) {
-
-            if ( ! in_array($this->options['custom_type'], array('import_users', 'taxonomies')) ){
-                // Remove attachments
-                if ($is_delete_attachments == 'yes' or $is_delete_attachments == 'auto' and empty($this->options['is_keep_attachments']))
-                {
+            if ( ! in_array($this->options['custom_type'], array('import_users', 'taxonomies', 'shop_customer')) ){
+                do_action('pmxi_before_delete_post', $id, $this);
+                // Remove attachments.
+                if ($is_delete_attachments == 'yes' or $is_delete_attachments == 'auto' and empty($this->options['is_keep_attachments'])) {
                     wp_delete_attachments($id, true, 'files');
                 }
-                else
-                {
+                else {
                     wp_delete_attachments($id, false, 'files');
                 }
-                // Remove images
-                if ($is_deleted_images == 'yes' or $is_deleted_images == 'auto' and empty($this->options['is_keep_imgs']))
-                {
+                // Remove images.
+                if ($is_deleted_images == 'yes' or $is_deleted_images == 'auto' and empty($this->options['is_keep_imgs'])) {
                     wp_delete_attachments($id, true, 'images');
                 }
-                else
-                {
+                else {
                     wp_delete_attachments($id, false, 'images');
                 }
+                wp_delete_object_term_relationships($id, get_object_taxonomies('' != $this->options['custom_type'] ? $this->options['custom_type'] : 'post'));
             }
-			
-			if ( ! in_array($this->options['custom_type'], array('import_users', 'taxonomies')) ) wp_delete_object_term_relationships($id, get_object_taxonomies('' != $this->options['custom_type'] ? $this->options['custom_type'] : 'post'));
 		}
 
         switch ($this->options['custom_type']){
-            case 'import_users':
+			case 'import_users':
+			case 'shop_customer':
                 do_action('pmxi_delete_post', $ids, $this);
                 // delete_user action
                 foreach( $ids as $id) {
@@ -4267,6 +4468,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                 foreach( $ids as $id) {
                     do_action( 'deleted_user', $id, $reassign = null );
                 }
+                $this->wpdb->query($sql);
                 break;
             case 'taxonomies':
                 do_action('pmxi_delete_taxonomies', $ids);
@@ -4277,20 +4479,10 @@ class PMXI_Import_Record extends PMXI_Model_Record {
             default:
                 do_action('pmxi_delete_post', $ids, $this);
                 foreach ($ids as $id) {
-                    do_action( 'delete_post', $id );
+                    wp_delete_post($id, TRUE);
                 }
-                $sql = "delete a,b,c
-                FROM ".$this->wpdb->posts." a
-                LEFT JOIN ".$this->wpdb->term_relationships." b ON ( a.ID = b.object_id )
-                LEFT JOIN ".$this->wpdb->postmeta." c ON ( a.ID = c.post_id )
-                LEFT JOIN ".$this->wpdb->posts." d ON ( a.ID = d.post_parent )
-                WHERE a.ID IN (".implode(',', $ids).");";
                 break;
         }
-
-		$this->wpdb->query( 
-			$sql
-		);
 	}
 
 	/**

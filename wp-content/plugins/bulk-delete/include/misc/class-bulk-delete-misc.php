@@ -34,7 +34,7 @@ class Bulk_Delete_Misc {
 			Bulk_Delete::POSTS_PAGE_SLUG,
 			__( 'Bulk Delete Miscellaneous Items', 'bulk-delete' ),
 			__( 'Bulk Delete Misc', 'bulk-delete' ),
-			'delete_posts',
+			'manage_options',
 			self::MISC_PAGE_SLUG,
 			array( __CLASS__, 'display_misc_page' )
 		);
@@ -45,6 +45,19 @@ class Bulk_Delete_Misc {
 		// delete menus page
 		add_action( "load-{$bd->misc_page}", array( __CLASS__, 'add_delete_misc_settings_panel' ) );
 		add_action( "add_meta_boxes_{$bd->misc_page}", array( __CLASS__, 'add_delete_misc_meta_boxes' ) );
+
+		// hooks
+		add_action( 'bd_add_meta_box_for_misc'  , array( 'Bulk_Delete_Jetpack_Contact_Form_Message', 'add_delete_jetpack_messages_meta_box' ) );
+		add_action( 'bd_delete_jetpack_messages', array( 'Bulk_Delete_Jetpack_Contact_Form_Message', 'do_delete_jetpack_messages' ) );
+
+		add_filter( 'bd_javascript_array', array( 'Bulk_Delete_Jetpack_Contact_Form_Message', 'filter_js_array' ) );
+		add_action( 'bd_delete_jetpack_messages_form', array( 'Bulk_Delete_Jetpack_Contact_Form_Message', 'add_filtering_options' ) );
+
+		add_filter( 'bd_delete_jetpack_messages_delete_options', array( 'Bulk_Delete_Jetpack_Contact_Form_Message', 'process_filtering_options' ), 10, 2 );
+		add_filter( 'bd_delete_jetpack_messages_can_delete', array( 'Bulk_Delete_Jetpack_Contact_Form_Message', 'can_delete' ), 10, 2 );
+
+		// cron hooks
+		add_action( Bulk_Delete_Jetpack_Contact_Form_Message::CRON_HOOK, array( 'Bulk_Delete_Jetpack_Contact_Form_Message', 'do_delete_jetpack_messages_cron' ), 10, 1 );
 	}
 
 	/**
@@ -171,10 +184,3 @@ class Bulk_Delete_Misc {
 		return get_user_meta( $current_user->ID, self::VISIBLE_MISC_BOXES, true );
 	}
 }
-
-// Add menu
-add_action( 'bd_after_primary_menus', array( 'Bulk_Delete_Misc', 'add_menu' ) );
-
-// Modify admin footer
-add_action( 'bd_admin_footer_misc_page', 'bd_modify_admin_footer' );
-?>

@@ -80,9 +80,7 @@ CREATE TABLE {$table_prefix}posts (
 	product_key TEXT,
 	iteration BIGINT(20) NOT NULL DEFAULT 0,
 	specified BOOL NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id),
-  	KEY import_id (import_id),
-  	KEY post_id (post_id)	
+	PRIMARY KEY  (id)  		
 ) $charset_collate;
 CREATE TABLE {$table_prefix}files (
 	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,

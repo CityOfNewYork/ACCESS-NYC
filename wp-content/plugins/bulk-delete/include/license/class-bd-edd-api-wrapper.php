@@ -16,7 +16,7 @@ class BD_EDD_API_Wrapper {
 	 *
 	 * @since 5.0
 	 */
-	const STORE_URL = 'http://bulkwp.com';
+	const STORE_URL = 'https://bulkwp.com';
 
 	/**
 	 * Check license.

@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields PRO
 Plugin URI: https://www.advancedcustomfields.com/
 Description: Customize WordPress with powerful, professional and intuitive fields.
-Version: 5.7.9
+Version: 5.8.1
 Author: Elliot Condon
 Author URI: http://www.elliotcondon.com/
 Copyright: Elliot Condon
@@ -18,7 +18,7 @@ if( ! class_exists('ACF') ) :
 class ACF {
 	
 	/** @var string The plugin version number */
-	var $version = '5.7.9';
+	var $version = '5.8.1';
 	
 	/** @var array The plugin settings array */
 	var $settings = array();
@@ -118,17 +118,31 @@ class ACF {
 		$this->define( 'ACF', 			true );
 		$this->define( 'ACF_VERSION', 	$version );
 		$this->define( 'ACF_PATH', 		$path );
-		//$this->define( 'ACF_DEV', 		true );
 		
 		
 		// api
 		include_once( ACF_PATH . 'includes/api/api-helpers.php');
 		acf_include('includes/api/api-input.php');
-		acf_include('includes/api/api-value.php');
-		acf_include('includes/api/api-field.php');
-		acf_include('includes/api/api-field-group.php');
 		acf_include('includes/api/api-template.php');
 		acf_include('includes/api/api-term.php');
+		
+		// Include models.
+		acf_include('includes/class-acf-data.php');
+		
+		// Include core functions.
+		acf_include('includes/acf-data-functions.php');
+		acf_include('includes/acf-helper-functions.php');
+		acf_include('includes/acf-hook-functions.php');
+		
+		// Include functions.
+		acf_include('includes/acf-deprecated-functions.php');
+		acf_include('includes/acf-field-functions.php');
+		acf_include('includes/acf-field-group-functions.php');
+		acf_include('includes/acf-form-functions.php');
+		acf_include('includes/acf-meta-functions.php');
+		acf_include('includes/acf-post-functions.php');
+		acf_include('includes/acf-user-functions.php');
+		acf_include('includes/acf-value-functions.php');
 		
 		// fields
 		acf_include('includes/fields.php');
@@ -142,12 +156,12 @@ class ACF {
 		
 		// core
 		acf_include('includes/assets.php');
-		acf_include('includes/cache.php');
 		acf_include('includes/compatibility.php');
 		acf_include('includes/deprecated.php');
-		acf_include('includes/form.php');
 		acf_include('includes/json.php');
-		acf_include('includes/local.php');
+		acf_include('includes/l10n.php');
+		acf_include('includes/local-fields.php');
+		acf_include('includes/local-meta.php');
 		acf_include('includes/loop.php');
 		acf_include('includes/media.php');
 		acf_include('includes/revisions.php');
@@ -160,8 +174,6 @@ class ACF {
 		acf_include('includes/ajax/class-acf-ajax-check-screen.php');
 		acf_include('includes/ajax/class-acf-ajax-user-setting.php');
 		acf_include('includes/ajax/class-acf-ajax-upgrade.php');
-		acf_include('includes/ajax/class-acf-ajax-query.php');
-		acf_include('includes/ajax/class-acf-ajax-query-terms.php');
 		
 		// forms
 		acf_include('includes/forms/form-attachment.php');
@@ -181,6 +193,7 @@ class ACF {
 			acf_include('includes/admin/admin.php');
 			acf_include('includes/admin/admin-field-group.php');
 			acf_include('includes/admin/admin-field-groups.php');
+			acf_include('includes/admin/admin-notices.php');
 			acf_include('includes/admin/admin-tools.php');
 			acf_include('includes/admin/admin-upgrade.php');
 			acf_include('includes/admin/settings-info.php');
@@ -190,6 +203,8 @@ class ACF {
 		// pro
 		acf_include('pro/acf-pro.php');
 		
+		// Include tests.
+		//acf_include('tests/tests.php');
 		
 		// actions
 		add_action('init',	array($this, 'init'), 5);
@@ -237,7 +252,7 @@ class ACF {
 		
 		
 		// textdomain
-		$this->load_plugin_textdomain();
+		acf_load_textdomain();
 		
 		// include 3rd party support
 		acf_include('includes/third-party.php');
@@ -245,11 +260,6 @@ class ACF {
 		// include wpml support
 		if( defined('ICL_SITEPRESS_VERSION') ) {
 			acf_include('includes/wpml.php');
-		}
-		
-		// include gutenberg
-		if( defined('GUTENBERG_VERSION') ) {
-			acf_include('includes/forms/form-gutenberg.php');
 		}
 		
 		// fields
@@ -323,42 +333,6 @@ class ACF {
 		
 		// action for 3rd party
 		do_action('acf/init');
-			
-	}
-	
-	
-	/*
-	*  load_plugin_textdomain
-	*
-	*  This function will load the textdomain file
-	*
-	*  @type	function
-	*  @date	3/5/17
-	*  @since	5.5.13
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-	
-	function load_plugin_textdomain() {
-		
-		// vars
-		$domain = 'acf';
-		$locale = apply_filters( 'plugin_locale', acf_get_locale(), $domain );
-		$mofile = $domain . '-' . $locale . '.mo';
-		
-		
-		// load from the languages directory first
-		load_textdomain( $domain, WP_LANG_DIR . '/plugins/' . $mofile );
-		
-		
-		// redirect missing translations
-		$mofile = str_replace('fr_CA', 'fr_FR', $mofile);
-		
-		
-		// load from plugin lang folder
-		load_textdomain( $domain, acf_get_path( 'lang/' . $mofile ) );
-		
 	}
 	
 	

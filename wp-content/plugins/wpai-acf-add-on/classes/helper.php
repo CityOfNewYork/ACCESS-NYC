@@ -45,10 +45,6 @@ class PMAI_Helper {
 		if (($dir = @opendir($path . '/')) !== false or ($dir = @opendir($path)) !== false) {
 			$glob = array();
 			while(($file = readdir($dir)) !== false) {
-				// Recurse subdirectories (self::GLOB_RECURSE)
-				if (($flags & self::GLOB_RECURSE) && is_dir($path . '/' . $file) && ( ! in_array($file, array('.', '..')))) {
-					$glob = array_merge($glob, self::array_prepend(self::safe_glob($path . '/' . $file . '/' . $mask, $flags), ($flags & self::GLOB_PATH ? '' : $file . '/')));
-				}
 				// Match file mask				
 				if (self::fnmatch($mask, $file, self::FNM_CASEFOLD)) {					
 					if ((( ! ($flags & self::GLOB_ONLYDIR)) || is_dir("$path/$file"))
@@ -59,8 +55,17 @@ class PMAI_Helper {
 					}
 				}				
 			}
+            closedir($dir);
+            if (($dir = @opendir($path . '/')) !== false or ($dir = @opendir($path)) !== false) {
+                while(($file = readdir($dir)) !== false) {
+                    // Recurse subdirectories (self::GLOB_RECURSE)
+                    if (($flags & self::GLOB_RECURSE) && is_dir($path . '/' . $file) && ( ! in_array($file, array('.', '..')))) {
+                        $glob = array_merge($glob, self::array_prepend(self::safe_glob($path . '/' . $file . '/' . $mask, $flags), ($flags & self::GLOB_PATH ? '' : $file . '/')));
+                    }
+                }
+            }
 			closedir($dir);
-			if ( ! ($flags & self::GLOB_NOSORT)) sort($glob);			
+			if ( ! ($flags & self::GLOB_NOSORT)) sort($glob);
 			return $glob;
 		} else {
 			return (strpos($pattern, "*") === false) ? array($pattern) : false;

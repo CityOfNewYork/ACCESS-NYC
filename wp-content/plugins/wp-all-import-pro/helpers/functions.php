@@ -103,7 +103,7 @@
 		    $bn = wp_all_import_basename($filePath);
 			$type = (preg_match('%\W(csv|txt|dat|psv)$%i', $bn)) ? 'csv' : false;
 			if (!$type) $type = (preg_match('%\W(xml)$%i', $bn)) ? 'xml' : false;
-			if (!$type) $type = (preg_match('%\W(zip)$%i', $bn)) ? 'zip' : false;
+            if (!$type) $type = (preg_match('%\W(zip)$%i', $bn)) || (preg_match('%\W(get_bundle)$%i', $bn) && strpos($bn, 'export_id') !== false && strpos($bn, 'security_token') !== false) ? 'zip' : false;
 			if (!$type) $type = (preg_match('%\W(gz)$%i', $bn)) ? 'gz' : false;
 
             if(!$type){

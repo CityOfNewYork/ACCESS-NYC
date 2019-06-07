@@ -50,7 +50,7 @@ function bd_get_addon_class_name( $addon_name ) {
  * @return string Computed url for the addon.
  */
 function bd_get_addon_url( $addon_name, $campaign_args = array() ) {
-	$base       = 'http://bulkwp.com/addons/';
+	$base       = 'https://bulkwp.com/addons/';
 	$addon_slug = str_replace( ' ', '-', strtolower( $addon_name ) );
 
 	if ( false !== strpos( $addon_name, 'scheduler' ) ) {

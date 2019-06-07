@@ -5,7 +5,7 @@
 
 **Requires at least:** 3.0.1
 
-**Tested up to:** 4.9.1
+**Tested up to:** 5.1
 
 **Stable tag:** trunk
 
@@ -56,6 +56,11 @@ Upload Method:
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 ## Changelog ##
+
+### 1.3.3 - February 26, 2019 ###
+* Fix: Some special characters interfering with search/replace
+* Security: Pass template filenames through `sanitize_file_name()`
+* Security: Verify nonce when downloading diagnostic info
 
 ### 1.3.2 - January 3, 2018 ###
 * Fix: Only one table searched on some environments (props @Ov3rfly)

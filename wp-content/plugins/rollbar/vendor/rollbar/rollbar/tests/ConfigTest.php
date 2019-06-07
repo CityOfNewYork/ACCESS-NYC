@@ -8,6 +8,7 @@ use Rollbar\Payload\Level;
 use Rollbar\Payload\Message;
 use Rollbar\Payload\Payload;
 use Rollbar\RollbarLogger;
+use Rollbar\Defaults;
 
 use Rollbar\TestHelpers\Exceptions\SilentExceptionSampleRate;
 use Rollbar\TestHelpers\Exceptions\FiftyFiftyExceptionSampleRate;
@@ -248,19 +249,6 @@ class ConfigTest extends BaseRollbarTest
             $config->getSender()->getEndpoint()
         );
     }
-    
-    public function testVerbosity()
-    {
-        $expected = 3;
-        
-        $config = new Config(array(
-            "access_token" => $this->getTestAccessToken(),
-            "environment" => $this->env,
-            "verbosity" => $expected
-        ));
-        
-        $this->assertEquals($expected, $config->getVerbosity());
-    }
 
     public function testCustom()
     {
@@ -285,6 +273,22 @@ class ConfigTest extends BaseRollbarTest
         
         $this->assertEquals("bar", $custom["foo"]);
         $this->assertEquals("buzz", $custom["fuzz"]);
+    }
+    
+    public function testMaxItems()
+    {
+        $config = new Config(array(
+            "access_token" => $this->getTestAccessToken()
+        ));
+        
+        $this->assertEquals(Defaults::get()->maxItems(), $config->getMaxItems());
+        
+        $config = new Config(array(
+            "access_token" => $this->getTestAccessToken(),
+            "max_items" => Defaults::get()->maxItems()+1
+        ));
+        
+        $this->assertEquals(Defaults::get()->maxItems()+1, $config->getMaxItems());
     }
     
     public function testCustomDataMethod()

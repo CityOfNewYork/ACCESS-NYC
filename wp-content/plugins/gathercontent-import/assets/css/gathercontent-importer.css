@@ -193,6 +193,16 @@ ul.gc-radio-desc li, ul.gc-reveal-items-list li {
     border: 1px solid #00ABBD;
     color: #fff; }
 
+.gc-button-danger, .wp-core-ui .button.gc-button-danger {
+  background-color: #fff;
+  border: 1px solid #fc5c54;
+  color: #fc5c54;
+  font-weight: bold; }
+  .gc-button-danger:hover, .wp-core-ui .button.gc-button-danger:hover {
+    background-color: #fc5c54;
+    border: 1px solid #fc5c54;
+    color: #fff; }
+
 .gc-auth-required .gc-section-auth table {
   background-color: #f5bfbf; }
 

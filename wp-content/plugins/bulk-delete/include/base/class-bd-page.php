@@ -1,6 +1,6 @@
 <?php
 /**
- * Base class for all Metabox Pages.
+ * Base class for all Modules Pages.
  *
  * @since   5.5
  *
@@ -11,7 +11,7 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 /**
- * Base class for Metabox Pages.
+ * Base class for Modules Pages.
  *
  * @abstract
  *

@@ -28,14 +28,14 @@ use Timber\Loader;
  *  $posts = Timber::get_posts(array('post_type' => 'article', 'category_name' => 'sports')); // uses wp_query format.
  *  $posts = Timber::get_posts(array(23,24,35,67), 'InkwellArticle');
  *
- *  $context = Timber::get_context(); // returns wp favorites!
+ *  $context = Timber::context(); // returns wp favorites!
  *  $context['posts'] = $posts;
  *  Timber::render('index.twig', $context);
  * ```
  */
 class Timber {
 
-	public static $version = '1.8.3';
+	public static $version = '1.9.4';
 	public static $locations;
 	public static $dirname = 'views';
 	public static $twig_cache = false;
@@ -72,7 +72,7 @@ class Timber {
 		if ( version_compare(phpversion(), '5.3.0', '<') && !is_admin() ) {
 			trigger_error('Timber requires PHP 5.3.0 or greater. You have '.phpversion(), E_USER_ERROR);
 		}
-		if ( !class_exists('Twig_Token') ) {
+		if ( !class_exists('Twig\Token') ) {
 			trigger_error('You have not run "composer install" to download required dependencies for Timber, you can read more on https://github.com/timber/timber#installation', E_USER_ERROR);
 		}
 	}
@@ -226,6 +226,21 @@ class Timber {
 	================================ */
 
 	/**
+	 * Alias for Timber::get_context() which is deprecated in 2.0.
+	 *
+	 * This will allow us to update the starter theme to use the ::context() method and better
+	 * prepare users for the upgrade (even if the details of what the method returns differs
+	 * slightly).
+	 *
+	 * @see \Timber\Timber::get_context()
+	 * @api
+	 * @return array
+	 */
+	public static function context() {
+		return self::get_context();
+	}
+
+	/**
 	 * Get context.
 	 * @api
 	 * @return array
@@ -372,7 +387,7 @@ class Timber {
 	 * @api
 	 * @example
 	 * ```php
-	 * $context = Timber::get_context();
+	 * $context = Timber::context();
 	 *
 	 * Timber::render( 'index.twig', $context );
 	 * ```

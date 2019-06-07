@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "859b74ed9fca0f3060bde6d388a63bc0",
+    "content-hash": "2397fdcb29555af666861a70dd98b5d7",
     "packages": [
         {
             "name": "composer/installers",
@@ -1100,15 +1100,15 @@
         },
         {
             "name": "wpackagist-plugin/bulk-delete",
-            "version": "5.6.1",
+            "version": "6.0.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/bulk-delete/",
-                "reference": "tags/5.6.1"
+                "reference": "tags/6.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/bulk-delete.5.6.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/bulk-delete.6.0.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1120,15 +1120,15 @@
         },
         {
             "name": "wpackagist-plugin/enable-media-replace",
-            "version": "3.2.9",
+            "version": "3.3.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/enable-media-replace/",
-                "reference": "tags/3.2.9"
+                "reference": "tags/3.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.2.9.zip",
+                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.3.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1140,15 +1140,15 @@
         },
         {
             "name": "wpackagist-plugin/gathercontent-import",
-            "version": "3.1.9",
+            "version": "3.1.14",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gathercontent-import/",
-                "reference": "trunk"
+                "reference": "tags/3.1.14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.zip?timestamp=1518626029",
+                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.1.14.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1159,16 +1159,36 @@
             "homepage": "https://wordpress.org/plugins/gathercontent-import/"
         },
         {
-            "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.7.1",
+            "name": "wpackagist-plugin/google-authenticator",
+            "version": "0.52",
             "source": {
                 "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.7.1"
+                "url": "https://plugins.svn.wordpress.org/google-authenticator/",
+                "reference": "tags/0.52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.7.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.52.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/google-authenticator/"
+        },
+        {
+            "name": "wpackagist-plugin/limit-login-attempts-reloaded",
+            "version": "2.8.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
+                "reference": "tags/2.8.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.8.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1220,15 +1240,15 @@
         },
         {
             "name": "wpackagist-plugin/rollbar",
-            "version": "2.4.7",
+            "version": "2.6.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/rollbar/",
-                "reference": "tags/2.4.7"
+                "reference": "tags/2.6.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/rollbar.2.4.7.zip",
+                "url": "https://downloads.wordpress.org/plugin/rollbar.2.6.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1260,15 +1280,15 @@
         },
         {
             "name": "wpackagist-plugin/timber-library",
-            "version": "1.8.3",
+            "version": "1.9.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/timber-library/",
-                "reference": "tags/1.8.3"
+                "reference": "tags/1.9.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/timber-library.1.8.3.zip",
+                "url": "https://downloads.wordpress.org/plugin/timber-library.1.9.5.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1279,8 +1299,28 @@
             "homepage": "https://wordpress.org/plugins/timber-library/"
         },
         {
+            "name": "wpackagist-plugin/wp-crontrol",
+            "version": "1.7.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-crontrol/",
+                "reference": "tags/1.7.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.7.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-crontrol/"
+        },
+        {
             "name": "wpackagist-plugin/wp-security-questions",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-security-questions/",
@@ -1288,7 +1328,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-security-questions.zip?timestamp=1509452078",
+                "url": "https://downloads.wordpress.org/plugin/wp-security-questions.zip?timestamp=1559124291",
                 "reference": null,
                 "shasum": null
             },
@@ -1300,15 +1340,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.5.1",
+            "version": "1.5.2.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.5.1"
+                "reference": "tags/1.5.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.2.1.zip",
                 "reference": null,
                 "shasum": null
             },

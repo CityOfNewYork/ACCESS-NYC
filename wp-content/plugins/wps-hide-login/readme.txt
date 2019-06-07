@@ -2,11 +2,11 @@
 
 Contributors: tabrisrp, WPServeur, nicolaskulka
 Donate link : https://www.paypal.me/donateWPServeur
-Tags: rename, login, wp-login, wp-login.php, custom login url, jetpack
+Tags: rename, login, wp-login, wp-login.php, custom login url, jetpack, wpserveur
 Requires at least: 4.1
-Tested up to: 5.0
+Tested up to: 5.1
 Requires PHP: 7.0
-Stable tag: 1.5.1
+Stable tag: 1.5.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -145,6 +145,12 @@ This case can come from plugins modifying your .htaccess files to add or change 
 First step is to check your .htaccess file and compare it to a regular one, to see if the problem comes from it.
 
 == Changelog ==
+
+= 1.5.2.1 =
+* Fix : Notice: Undefined index: query
+
+= 1.5.2 =
+* Fix : Action URL wp_send_user_request()
 
 = 1.5.1 =
 * Fix : Action URL get_the_password_form()

@@ -29,13 +29,14 @@ class acf_pro {
 		
 
 		// includes
+		acf_include('pro/blocks.php');
 		acf_include('pro/options-page.php');
 		acf_include('pro/updates.php');
 		
 		if( is_admin() ) {
 			
 			acf_include('pro/admin/admin-options-page.php');
-			acf_include('pro/admin/admin-settings-updates.php');
+			acf_include('pro/admin/admin-updates.php');
 			
 		}
 		
@@ -88,6 +89,7 @@ class acf_pro {
 	
 	function include_location_rules() {
 		
+		acf_include('pro/locations/class-acf-location-block.php');
 		acf_include('pro/locations/class-acf-location-options-page.php');
 		
 	}

@@ -3,7 +3,7 @@
 class Notifier implements \Serializable
 {
     const NAME = "rollbar-php";
-    const VERSION = "1.6.2";
+    const VERSION = "1.7.5";
 
     public static function defaultNotifier()
     {
@@ -49,7 +49,10 @@ class Notifier implements \Serializable
             "name" => $this->name,
             "version" => $this->version,
         );
-        return $this->utilities->serializeForRollbar($result);
+        
+        $objectHashes = \Rollbar\Utilities::getObjectHashes();
+        
+        return $this->utilities->serializeForRollbar($result, null, $objectHashes);
     }
     
     public function unserialize($serialized)

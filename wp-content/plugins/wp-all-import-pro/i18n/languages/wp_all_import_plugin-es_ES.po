@@ -154,7 +154,7 @@ msgstr ""
 
 #: actions/wp_ajax_get_bundle_post_type.php:94
 #: actions/wp_ajax_upload_resource.php:162 controllers/admin/settings.php:631
-msgid "<p class=\"wpallimport-bundle-notice\">The import bundle you are using requires the User Import Add-On.</p><a href=\"http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1\" target=\"_blank\" class=\"upgrade_link\">Purchase the User Import Add-On</a>."
+msgid "<p class=\"wpallimport-bundle-notice\">The import bundle you are using requires the User Add-On.</p><a href=\"http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1\" target=\"_blank\" class=\"upgrade_link\">Purchase the User Add-On</a>."
 msgstr ""
 
 #: actions/wp_ajax_nested_xpath.php:51
@@ -680,8 +680,8 @@ msgid "Certain columns are required to be present in your file to enable it to b
 msgstr "Ciertas columnas requieren de estar presentes en su archivo para habilitar la re-importación con WP All Import.  Estas columnas están faltantes. Re-exporte su archivo utilizando WP All Export y no elimine ninguna de las columnas mientras lo esta editando. Entonces el re-importe funcionara correctamente."
 
 #: controllers/admin/import.php:309
-msgid "The import template you are using requires User Import Add-On.<br/><a href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Purchase the User Import Add-On</a>"
-msgstr "La plantilla de importación que esta utilizando requiere el User Import Add-On.<br/><a href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Compre el User Import Add-On</a>"
+msgid "The import template you are using requires the User Add-On.<br/><a href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Purchase the User Add-On</a>"
+msgstr "La plantilla de importación que esta utilizando requiere el User Add-On.<br/><a href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Compre el User Add-On</a>"
 
 #: controllers/admin/import.php:384
 msgid "Unable to download feed resource."
@@ -1106,8 +1106,8 @@ msgid "The import template you are using requires the %s. If you continue withou
 msgstr ""
 
 #: helpers/wp_all_import_template_notifications.php:23
-msgid "The import template you are using requires the User Import Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Purchase the User Import Add-On</a>."
-msgstr "La plantilla de importación que esta utilizando requiere el User Import Add-On. Si continua sin el, su información puede importarse incorrectamente.<br/><br/><a href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Comprar el User Import Add-On</a>."
+msgid "The import template you are using requires the User Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Purchase the User Add-On</a>."
+msgstr "La plantilla de importación que esta utilizando requiere el User Add-On. Si continua sin el, su información puede importarse incorrectamente.<br/><br/><a href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Comprar el User Add-On</a>."
 
 #: helpers/wp_all_import_template_notifications.php:27
 msgid "The import template you are using requires the WooCommerce Import Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href=\"http://www.wpallimport.com/woocommerce-product-import/\" target=\"_blank\">Purchase the WooCommerce Import Add-On</a>."
@@ -2414,12 +2414,12 @@ msgstr ""
 
 #: views/admin/import/index.php:309
 #: views/admin/import/options/_settings_template.php:151
-msgid "The User Import Add-On is Required to Import Users"
+msgid "The User Add-On is Required to Import Users"
 msgstr ""
 
 #: views/admin/import/index.php:310
 #: views/admin/import/options/_settings_template.php:152
-msgid "Purchase the User Import Add-On"
+msgid "Purchase the User Add-On"
 msgstr ""
 
 #: views/admin/import/index.php:315

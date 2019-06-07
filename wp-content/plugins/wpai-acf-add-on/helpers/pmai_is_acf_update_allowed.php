@@ -1,10 +1,21 @@
 <?php
 
-function pmai_is_acf_update_allowed( $cur_meta_key, $options ){
+/**
+ * @param $cur_meta_key
+ * @param $options
+ * @return mixed|void
+ */
+function pmai_is_acf_update_allowed($cur_meta_key, $options ){
 
-	if ($options['update_acf_logic'] == 'full_update') return apply_filters('pmai_is_acf_update_allowed', true, $cur_meta_key, $options);	
+    if ($options['is_keep_former_posts'] == 'yes') return apply_filters('pmai_is_acf_update_allowed', false, $cur_meta_key, $options);
 
-	global $acf;
+    if ($options['update_all_data'] == 'yes') return apply_filters('pmai_is_acf_update_allowed', true, $cur_meta_key, $options);
+
+    if ( ! $options['is_update_acf'] ) return apply_filters('pmai_is_acf_update_allowed', false, $cur_meta_key, $options);
+
+    if ($options['is_update_acf'] && $options['update_acf_logic'] == 'full_update') return apply_filters('pmai_is_acf_update_allowed', true, $cur_meta_key, $options);
+
+    global $acf;
 
 	if ($acf and version_compare($acf->settings['version'], '5.0.0') >= 0){
 
@@ -32,7 +43,8 @@ function pmai_is_acf_update_allowed( $cur_meta_key, $options ){
 			
 			if (! empty($options['acf_list']) and is_array($options['acf_list'])){
 				foreach ($options['acf_list'] as $key => $acf_field) {
-					$field_name = trim(array_shift(explode(" ", $acf_field)), "[]");
+                    $acf_field_parts = explode(" ", $acf_field);
+					$field_name = trim(array_shift($acf_field_parts), "[]");
 					if ( $cur_meta_key == $field_name or $cur_meta_key == "_" . $field_name or preg_match('%'.$field_name.'_[0-9]{1,}_%', $cur_meta_key) or strpos($cur_meta_key, '_' . $field_name . '_') === 0 or preg_match('%.*_[0-9]{1,}_'.$field_name.'$%', $cur_meta_key)){
 						return apply_filters('pmai_is_acf_update_allowed', false, $cur_meta_key, $options);
 						break;
@@ -84,10 +96,10 @@ function pmai_is_acf_update_allowed( $cur_meta_key, $options ){
 							break;
 						}
 					}
-					elseif ( preg_match('%^_{0,1}'.$field_name.'$%', $cur_meta_key) ){
+					elseif ( preg_match('%^_{0,1}'.$field_name.'$%', $cur_meta_key) || $cur_meta_key == $field_name || $cur_meta_key == "_" . $field_name){
 						return apply_filters('pmai_is_acf_update_allowed', true, $cur_meta_key, $options);
 						break;
-					}				
+					}
 				}
 				return apply_filters('pmai_is_acf_update_allowed', false, $cur_meta_key, $options);
 			}					
@@ -176,11 +188,6 @@ function pmai_is_acf_update_allowed( $cur_meta_key, $options ){
 				}			
 			}
 		}
-
-		return apply_filters('pmai_is_acf_update_allowed', true, $cur_meta_key, $options);		
-
+		return apply_filters('pmai_is_acf_update_allowed', true, $cur_meta_key, $options);
 	}
-	
 }
-
-?>

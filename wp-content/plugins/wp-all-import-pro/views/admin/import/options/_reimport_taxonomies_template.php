@@ -113,7 +113,7 @@ if (empty($custom_type)){
 												<label for="duplicate_indicator_slug"><?php _e('Slug', 'wp_all_import_plugin' )?></label>
 											</div>
 											<div class="switcher-target-duplicate_indicator_slug" style="padding-left:17px;">
-												<input type="text" name="slug_xpath" value="<?php echo empty($post['slug_xpath']) ? esc_attr($post['slug']) : esc_attr($post['slug_xpath']); ?>" />
+												<input type="text" name="slug_xpath" value="<?php echo empty($post['slug_xpath']) ? esc_attr($post['post_slug']) : esc_attr($post['slug_xpath']); ?>" />
 											</div>
 											<div class="input">
 												<input type="radio" id="duplicate_indicator_custom_field" class="switcher" name="duplicate_indicator" value="custom field" <?php echo 'custom field' == $post['duplicate_indicator'] ? 'checked="checked"': '' ?>/>

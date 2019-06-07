@@ -6,7 +6,6 @@
  */
 
 namespace GatherContent\Importer\Sync;
-use GatherContent\Importer\Post_Types\Template_Mappings;
 use GatherContent\Importer\Mapping_Post;
 use GatherContent\Importer\API;
 use WP_Error;
@@ -196,7 +195,7 @@ class Pull extends Base {
 			}
 		}
 
-		// Check if we need to set hierarchies.
+		/*// Check if we need to set hierarchies.
 		if ( $this->should_map_hierarchy( $post_data['post_type'] ) && isset( $this->item->parent_id ) && $this->item->parent_id ) {
 
 			// Check if an associated WordPress item exists for the parent item id.
@@ -212,7 +211,7 @@ class Pull extends Base {
 			else {
 				$this->schedule_hierarchy_update( $post_id );
 			}
-		}
+		}*/
 
 		if ( ! empty( $updated_post_data ) ) {
 			// And update post (but don't create a revision for it).
@@ -344,6 +343,8 @@ class Pull extends Base {
 			return $post_data;
 		}
 
+		$columns = [];
+
 		foreach ( $this->item->config as $tab ) {
 			if ( ! isset( $tab->elements ) || ! $tab->elements ) {
 				continue;
@@ -352,9 +353,18 @@ class Pull extends Base {
 			foreach ( $tab->elements as $this->element ) {
 				$destination = $this->mapping->data( $this->element->name );
 				if ( $destination && isset( $destination['type'], $destination['value'] ) ) {
+					$columns[ $destination['value'] ] = true;
 					$post_data = $this->set_post_values( $destination, $post_data );
 				}
 			}
+		}
+
+		if ( isset( $columns['post_date'] ) && ! isset( $columns['post_date_gmt'] ) ) {
+			$post_data['post_date_gmt'] = get_gmt_from_date( $post_data['post_date'] );
+		}
+
+		if ( isset( $columns['post_modified'] ) && ! isset( $columns['post_modified_gmt'] ) ) {
+			$post_data['post_modified_gmt'] = get_gmt_from_date( $post_data['post_modified'] );
 		}
 
 		return $post_data;
@@ -815,7 +825,7 @@ class Pull extends Base {
 		$attachment = \GatherContent\Importer\get_post_by_item_id( $media->id, array( 'post_status' => 'inherit' ) );
 
 		if ( ! $attachment ) {
-			return $this->sideload_file( $media->url, $media->filename, $post_id );
+			return $this->sideload_file( $media->id, $media->filename, $post_id );
 		}
 
 		$attach_id = $attachment->ID;
@@ -832,7 +842,7 @@ class Pull extends Base {
 				$replace_data = apply_filters( 'gc_replace_attachment_data_on_update', false, $attachment );
 
 				// @todo How to handle failures?
-				$attach_id = $this->sideload_and_update_attachment( $media->url, $media->filename, $attachment, $replace_data );
+				$attach_id = $this->sideload_and_update_attachment( $media->id, $media->filename, $attachment, $replace_data );
 			}
 		}
 
@@ -952,12 +962,12 @@ class Pull extends Base {
 	 *
 	 * @since  3.0.0
 	 *
-	 * @param  string $file_url  The file to dowload.
+	 * @param  string $file_id  The file to download.
 	 * @param  string $file_name The name of the file being downloaded.
 	 *
 	 * @return array              The temporary file array.
 	 */
-	protected function tmp_file( $file_url, $file_name ) {
+	protected function tmp_file( $file_id, $file_name ) {
 		require_once( ABSPATH . '/wp-admin/includes/file.php' );
 		require_once( ABSPATH . '/wp-admin/includes/media.php' );
 		require_once( ABSPATH . '/wp-admin/includes/image.php' );
@@ -965,7 +975,7 @@ class Pull extends Base {
 		$file_array = array();
 
 		// Download file to temp location.
-		$file_array['tmp_name'] = download_url( $file_url );
+		$file_array['tmp_name'] = $this->api->get_file( $file_id );
 
 		// If error storing temporarily, return the error.
 		if ( is_wp_error( $file_array['tmp_name'] ) ) {

@@ -69,6 +69,7 @@ class Handlers extends Plugin_Base {
 		add_action( 'wp_ajax_gc_get_posts', array( $this, 'gc_get_posts_cb' ) );
 		add_action( 'wp_ajax_gc_get_post_statuses', array( $this, 'gc_get_post_statuses_cb' ) );
 		add_action( 'wp_ajax_set_gc_status', array( $this, 'set_gc_status_cb' ) );
+		add_action( 'wp_ajax_gc_disconnect_post', array( $this, 'gc_disconnect_post_cb' ) );
 		add_action( 'wp_ajax_gc_fetch_js_post', array( $this, 'gc_fetch_js_post_cb' ) );
 		add_action( 'wp_ajax_gc_wp_filter_mappings', array( $this, 'gc_wp_filter_mappings_cb' ) );
 		add_action( 'wp_ajax_gc_save_mapping_id', array( $this, 'gc_save_mapping_id_cb' ) );
@@ -230,6 +231,25 @@ class Handlers extends Plugin_Base {
 				'force' === $this->_get_val( 'flush_cache' )
 			) );
 		}
+	}
+
+	public function gc_disconnect_post_cb() {
+		$post_data = $this->_post_val( 'post' );
+		$nonce = $this->_post_val( 'nonce' );
+
+		$opt_group = General::get_instance()->admin->mapping_wizard->option_group;
+
+		if ( empty( $post_data ) || ! wp_verify_nonce( $nonce, $opt_group . '-options' ) ) {
+			wp_send_json_error();
+		}
+
+		$post_id = $post_data['id'];
+
+		delete_post_meta( $post_id, '_gc_mapped_item_id' );
+		delete_post_meta( $post_id, '_gc_mapping_id' );
+		delete_post_meta( $post_id, '_gc_mapped_meta' );
+
+		wp_send_json_success();
 	}
 
 	/**

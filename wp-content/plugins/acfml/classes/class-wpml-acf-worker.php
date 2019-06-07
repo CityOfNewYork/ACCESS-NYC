@@ -33,22 +33,20 @@ class WPML_ACF_Worker {
 
 		$meta_value_converted = $this->duplicate_post_meta($meta_value, $target_lang, $meta_data);
 
-		if ($meta_value_converted !== $meta_value) {
-			update_post_meta($post_id_to, $meta_key, $meta_value_converted, $meta_value);
-		}
-
-
+		if ( $meta_value !== $meta_value_converted ) {
+    	update_post_meta($post_id_to, $meta_key, $meta_value_converted, $meta_value);
+    }
 
 	}
-	
+
 	public function duplicate_post_meta($meta_value, $target_lang, $meta_data) {
 
 		$processed_data = new WPML_ACF_Processed_Data($meta_value, $target_lang, $meta_data);
 
 		$field = $this->duplicated_post->resolve_field($processed_data);
-		
+
 		$meta_value_converted = $field->convert_ids();
-		
+
 		return $meta_value_converted;
 	}
 
@@ -59,5 +57,5 @@ class WPML_ACF_Worker {
 
 		return $sync;
 	}
-	
+
 }

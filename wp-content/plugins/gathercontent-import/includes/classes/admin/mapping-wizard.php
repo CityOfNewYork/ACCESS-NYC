@@ -423,7 +423,6 @@ class Mapping_Wizard extends Base {
 
 				$options[ $template_id ] = array(
 					'label' => '<span>'. esc_attr( $template->name ) .'</span>',
-					'desc' => esc_attr( $template->description ),
 				);
 
 				$exists = $this->mappings->get_by_project_template( $project_id, $template_id );
@@ -440,9 +439,10 @@ class Mapping_Wizard extends Base {
 
 					$options[ $template_id ]['disabled'] = 'disabled';
 
-				} elseif ( $items = $this->get_project_items_list( $project_id, $template_id ) ) {
-					$options[ $template_id ]['desc'] .= '</p>' . $items . '<p>';
 				}
+				/*elseif ( $items = $this->get_project_items_list( $project_id, $template_id ) ) {
+					$options[ $template_id ]['desc'] = $items;
+				}*/
 
 				if ( ! $value ) {
 					$value = $template_id;

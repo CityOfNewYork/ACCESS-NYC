@@ -1,8 +1,8 @@
 /**
- * GatherContent Plugin - v3.1.10 - 2018-11-08
+ * GatherContent Plugin - v3.1.13 - 2019-05-22
  * http://www.gathercontent.com
  *
- * Copyright (c) 2018 GatherContent
+ * Copyright (c) 2019 GatherContent
  * Licensed under the GPLv2 license.
  */
 
@@ -540,7 +540,8 @@ module.exports = function (app, $, gc) {
 			'click .cancel-gc-status': 'cancelEditStatus',
 			'click .save-gc-status': 'saveStatus',
 			'click #gc-pull': 'pull',
-			'click #gc-push': 'push'
+			'click #gc-push': 'push',
+			'click #gc-disconnect': 'disconnect'
 		},
 
 		initialize: function initialize() {
@@ -620,6 +621,17 @@ module.exports = function (app, $, gc) {
 			});
 		},
 
+		disconnect: function disconnect() {
+			if (window.confirm(gc._sure.disconnect)) {
+				thisView.model.set('mappingStatus', 'starting');
+				this.ajax({
+					action: 'gc_disconnect_post',
+					data: thisView.model.toJSON(),
+					nonce: gc._edit_nonce
+				}, this.disconnectResponse, this.syncFail);
+			}
+		},
+
 		pull: function pull() {
 			if (window.confirm(gc._sure.pull)) {
 				thisView.model.set('mappingStatus', 'starting');
@@ -640,6 +652,11 @@ module.exports = function (app, $, gc) {
 			window.alert(msg);
 			this.model.set('mappingStatus', 'failed');
 			this.clearTimeout();
+		},
+
+		disconnectResponse: function disconnectResponse(data) {
+			this.clearTimeout();
+			this.$el.html(wp.template('gc-mapping-metabox'));
 		},
 
 		syncResponse: function syncResponse(data) {

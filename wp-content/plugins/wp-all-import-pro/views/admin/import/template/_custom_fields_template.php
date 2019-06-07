@@ -6,6 +6,18 @@ switch ($post_type){
 		$custom_type->labels->name = __('Taxonomy Terms', 'wp_all_import_plugin');
 		$custom_type->labels->singular_name = __('Taxonomy Term', 'wp_all_import_plugin');
 		break;
+    case 'import_users':
+        $custom_type = new stdClass();
+        $custom_type->labels = new stdClass();
+        $custom_type->labels->name = __('Users', 'wp_all_import_plugin');
+        $custom_type->labels->singular_name = __('User', 'wp_all_import_plugin');
+        break;
+    case 'shop_customer':
+        $custom_type = new stdClass();
+        $custom_type->labels = new stdClass();
+        $custom_type->labels->name = __('WooCommerce Customers', 'wp_all_import_plugin');
+        $custom_type->labels->singular_name = __('WooCommerce Customer', 'wp_all_import_plugin');
+        break;
 	default:
 		$custom_type = get_post_type_object( $post_type );
 		break;

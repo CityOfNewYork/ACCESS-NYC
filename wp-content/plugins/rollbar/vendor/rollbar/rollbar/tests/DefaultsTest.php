@@ -80,21 +80,10 @@ class DefaultsTest extends BaseRollbarTest
         $this->assertEquals($expected, $this->defaults->psrLevels());
     }
 
-    public function testGitBranch()
-    {
-        $val = rtrim(shell_exec('git rev-parse --abbrev-ref HEAD'));
-        $this->assertEquals($val, $this->defaults->gitBranch());
-    }
-
-    public function testGitBranchExplicit()
+    public function testBranch()
     {
         $val = 'some-branch';
-        $this->assertEquals($val, $this->defaults->gitBranch($val));
-    }
-
-    public function testGitBranchNoExec()
-    {
-        $this->assertEquals(null, $this->defaults->gitBranch(null, false));
+        $this->assertEquals($val, $this->defaults->branch($val));
     }
 
     public function testServerRoot()
@@ -258,6 +247,11 @@ class DefaultsTest extends BaseRollbarTest
         $this->assertFalse($this->defaults->captureUsername());
     }
     
+    public function testMaxItems()
+    {
+        $this->assertEquals(10, $this->defaults->maxItems());
+    }
+    
     public function testDefaultsForConfigOptions()
     {
         foreach (\Rollbar\Config::listOptions() as $option) {
@@ -271,8 +265,6 @@ class DefaultsTest extends BaseRollbarTest
                 continue;
             } elseif ($option == 'base_api_url') {
                 $option = 'endpoint';
-            } elseif ($option == 'branch') {
-                $option = 'git_branch';
             } elseif ($option == 'capture_ip') {
                 $option = 'captureIP';
             } elseif ($option == 'root') {

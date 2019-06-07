@@ -2,9 +2,24 @@
 
 class AltoRouter {
 
+	/**
+	 * @var array Array of all routes (incl. named routes).
+	 */
 	protected $routes = array();
+
+	/**
+	 * @var array Array of all named routes.
+	 */
 	protected $namedRoutes = array();
+
+	/**
+	 * @var string Can be used to ignore leading part of the Request URL (if main file lives in subdirectory of host)
+	 */
 	protected $basePath = '';
+
+	/**
+	 * @var array Array of default match types (regex helpers)
+	 */
 	protected $matchTypes = array(
 		'i'  => '[0-9]++',
 		'a'  => '[0-9A-Za-z]++',
@@ -26,6 +41,15 @@ class AltoRouter {
 		$this->setBasePath($basePath);
 		$this->addMatchTypes($matchTypes);
 	}
+	
+	/**
+	 * Retrieves all routes.
+	 * Useful if you want to process or display routes.
+	 * @return array All routes.
+	 */
+	public function getRoutes() {
+		return $this->routes;
+	}
 
 	/**
 	 * Add multiple routes at once from array in the following format:
@@ -37,6 +61,7 @@ class AltoRouter {
 	 * @param array $routes
 	 * @return void
 	 * @author Koen Punt
+	 * @throws Exception
 	 */
 	public function addRoutes($routes){
 		if(!is_array($routes) && !$routes instanceof Traversable) {
@@ -67,10 +92,11 @@ class AltoRouter {
 	/**
 	 * Map a route to a target
 	 *
-	 * @param string $method One of 4 HTTP Methods, or a pipe-separated list of multiple HTTP Methods (GET|POST|PUT|DELETE)
+	 * @param string $method One of 5 HTTP Methods, or a pipe-separated list of multiple HTTP Methods (GET|POST|PATCH|PUT|DELETE)
 	 * @param string $route The route regex, custom regex must start with an @. You can use multiple pre-set regex filters, like [i:id]
 	 * @param mixed $target The target where this route should point to. Can be anything.
 	 * @param string $name Optional name of this route. Supply if you want to reverse route this url in your application.
+	 * @throws Exception
 	 */
 	public function map($method, $route, $target, $name = null) {
 
@@ -96,6 +122,7 @@ class AltoRouter {
 	 * @param string $routeName The name of the route.
 	 * @param array @params Associative array of parameters to replace placeholders with.
 	 * @return string The URL of the route with named parameters in place.
+	 * @throws Exception
 	 */
 	public function generate($routeName, array $params = array()) {
 
@@ -161,10 +188,6 @@ class AltoRouter {
 			$requestMethod = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
 		}
 
-		// Force request_order to be GP
-		// http://www.mail-archive.com/internals@lists.php.net/msg33119.html
-		$_REQUEST = array_merge($_GET, $_POST);
-
 		foreach($this->routes as $handler) {
 			list($method, $_route, $target, $name) = $handler;
 
@@ -186,7 +209,8 @@ class AltoRouter {
 			if ($_route === '*') {
 				$match = true;
 			} elseif (isset($_route[0]) && $_route[0] === '@') {
-				$match = preg_match('`' . substr($_route, 1) . '`u', $requestUrl, $params);
+				$pattern = '`' . substr($_route, 1) . '`u';
+				$match = preg_match($pattern, $requestUrl, $params);
 			} else {
 				$route = null;
 				$regex = false;

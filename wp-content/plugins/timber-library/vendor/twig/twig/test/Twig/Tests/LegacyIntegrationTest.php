@@ -9,37 +9,40 @@
  * file that was distributed with this source code.
  */
 
-class Twig_Tests_LegacyIntegrationTest extends Twig_Test_IntegrationTestCase
+use Twig\Extension\AbstractExtension;
+use Twig\Test\IntegrationTestCase;
+
+class Twig_Tests_LegacyIntegrationTest extends IntegrationTestCase
 {
     public function getExtensions()
     {
-        return array(
+        return [
             new LegacyTwigTestExtension(),
-        );
+        ];
     }
 
     public function getFixturesDir()
     {
-        return dirname(__FILE__).'/LegacyFixtures/';
+        return __DIR__.'/LegacyFixtures/';
     }
 
     public function getTests($name, $legacyTests = false)
     {
         if (!$legacyTests) {
-            return array(array('', '', '', array(), '', array()));
+            return [['', '', '', [], '', []]];
         }
 
         return parent::getTests($name, true);
     }
 }
 
-class LegacyTwigTestExtension extends Twig_Extension
+class LegacyTwigTestExtension extends AbstractExtension
 {
     public function getTests()
     {
-        return array(
+        return [
             'multi word' => new Twig_Test_Method($this, 'is_multi_word'),
-        );
+        ];
     }
 
     public function is_multi_word($value)

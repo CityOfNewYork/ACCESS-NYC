@@ -1,15 +1,18 @@
 === Enable Media Replace ===
 Contributors: ShortPixel
-Tags: admin, attachment, media, files
+Donate link: https://www.paypal.me/resizeImage
+Tags: replace, attachment, media, files, replace image, replace jpg, change media, replace media, image, file
 Requires at least: 4.0
-Tested up to: 4.9.4
+Tested up to: 5.2
+Requires PHP: 5.4
 Stable tag: trunk
 
-Enables replacing attachment files by simply uploading a new file in the media library edit view.
+Easily replace any attached image/file by simply uploading a new file in the Media Library edit view - a real time saver!
 
 == Description ==
 
-This plugin allows you to replace a file in your media library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
+**A free, lightweight and easy to use plugin that allows you to seamlessly replace an image or file in your Media Library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
+Supported by the friendly team that created <a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">ShortPixel</a>  :)**
 
 #### A real timesaver
 
@@ -24,7 +27,7 @@ Now you'll be able to replace any uploaded file from the media "edit" view, wher
 1. Just replace the file. This option requires you to upload a file of the same type as the one you are replacing. The name of the attachment will stay the same no matter what the file you upload is called.
 1. Replace the file, use new file name and update all links. If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file will be updated to point to the new file name.
 
-This plugin is very powerful and a must-have for any larger sites built with WordPress. 
+This plugin is very powerful and a must-have for any larger sites built with WordPress. It now also comes with preview of the replaced image! 
 
 #### Display file modification time
 
@@ -35,7 +38,64 @@ So `[file_modified id=870]` would display the last time the file with ID 870 was
 
 If you want more control over the format used to display the time, you can use the format option, so `[file_modified id=870 format=Y-m-d]` would display the file modification date but not the time. The format string uses [standard PHP date() formatting tags](http://php.net/manual/en/function.date.php). 
 
+
+#### Compatible and recommended Plugins =
+
+* [ShortPixel Image Optimization](https://wordpress.org/plugins/shortpixel-image-optimiser/) - Enable Media Replace is fully compatible with this plugin. Once enabled, ShortPixel will automatically optimize the images you replace using Enable Media Replace.
+* [Resize Image After Upload plugin](https://wordpress.org/plugins/resize-image-after-upload/) - automatically resize images upon upload to save traffic & disk space. Good for SEO and compatible with EMR.
+* [Regenerate Thumbnails Advanced](https://wordpress.org/plugins/regenerate-thumbnails-advanced/) - Fast, free and simple to use plugin to regenerate the thumbnails for your site after changing a theme (for example). Supported & maintained by [ShortPixel](https://ShortPixel.com)
+
 == Changelog ==
+
+= 3.3.0 =
+* When replacing an image and changing the name, Search / Replace is now also done on the meta_value of postmeta.
+* Replace PDF thumbnails too
+* Copy title from EXIF
+* RTL View incorporated into the CSS
+* ‘wp_handle_upload’ filter should be treated as such (and not as action)
+* Use wp_attached_file instead of the GUID
+* Fix: replace missing file
+* Fix: aphostrophe breaking the upload
+* Fix: broken "before" image
+* Fix: update properly the date
+* Fix: errors for non-image items in Media Library
+* Fix: empty admin menu item created
+* Refactored all the code
+
+= 3.2.9 =
+* properly replace thumbnails names in the content when the replaced image has a different aspect ratio, thus the new thumbnails have a different height in the name.
+
+= 3.2.8 =
+* fix for failures in link updating when replacing file because of addslashes - use prepared query instead
+* replace basename with wp_basename because basename doesn't work well with UTF8
+
+= 3.2.7 =
+* Add minimum required php version to run the plugin.
+* Security: Prevent direct access to php files.
+* Security: Prevent direct access to directories.
+* Security: Escape translation strings using `esc_attr__()` and `esc_html__()` functions.
+* Fix RTL issues.
+
+= 3.2.6 =
+* no more 404 error if no image was selected when trying to replace it
+* added preview so you can check the image being replaced and also the image that's being replaced with
+* .dat files can be replaced (functionality accidentally removed in the previous version)
+* added compatibility with S3 upload plugin
+* when an image is replaced the date is also updated
+
+= 3.2.5 =
+* remove the leftover setcookie and the plugins recommendations.
+
+= 3.2.4 =
+* Fix PDF thumbnails not replaced when replacing a PDF
+* Fix not replacing text files with .dat extension
+
+= 3.2.3 =
+* disable ShortPixel recommendation on secondary sites of a multisite install when it was network activated.
+
+= 3.2.2 =
+* Fixed compatibility with ShortPixel and Resize Image After Upload
+* Added ShortPixel links and images, fixed the problem of ShortPixel recommendation not dismissing.
 
 = 3.2.1 =
 * Bugfix, typo made metadata changes (thanks GitHub user icecandy!)
@@ -225,7 +285,6 @@ Second, if the file really looks unchanged, make sure WordPress has write permis
 3. The upload options.
 4. Get the file ID in the edit file URL
 
-== Wishlist / Coming attractons ==
+== Wishlist / Coming attractions ==
 
-Do you have suggestions? Feel free to contact me at mans@mansjonasson.se
-
+Do you have suggestions? Feel free to contact ShortPixel <a href="https://shortpixel.com/contact" target="_blank">here</a>

@@ -2,6 +2,13 @@
 
 final class Utilities
 {
+    private static $ObjectHashes;
+    
+    public static function getObjectHashes()
+    {
+        return self::$ObjectHashes;
+    }
+    
     public static function isWindows()
     {
         return php_uname('s') == 'Windows NT';
@@ -72,19 +79,42 @@ final class Utilities
 
     public static function serializeForRollbar(
         $obj,
-        array $customKeys = null
+        array $customKeys = null,
+        &$objectHashes = array(),
+        $maxDepth = -1,
+        $depth = 0
     ) {
+        
         $returnVal = array();
+        
+        if (is_object($obj)) {
+            if (self::serializedAlready($obj, $objectHashes)) {
+                return self::circularReferenceLabel($obj);
+            } else {
+                self::markSerialized($obj, $objectHashes);
+            }
+        }
+        
+        if ($maxDepth > 0 && $depth > $maxDepth) {
+            return null;
+        }
 
         foreach ($obj as $key => $val) {
-            if ($val instanceof \Serializable) {
-                $val = $val->serialize();
+            if (is_object($val)) {
+                $val = self::serializeObject(
+                    $val,
+                    $customKeys,
+                    $objectHashes,
+                    $maxDepth,
+                    $depth
+                );
             } elseif (is_array($val)) {
-                $val = self::serializeForRollbar($val);
-            } elseif (is_object($val)) {
-                $val = array(
-                    'class' => get_class($val),
-                    'value' => $val
+                $val = self::serializeForRollbar(
+                    $val,
+                    $customKeys,
+                    $objectHashes,
+                    $maxDepth,
+                    $depth+1
                 );
             }
             
@@ -97,7 +127,64 @@ final class Utilities
 
         return $returnVal;
     }
-
+    
+    private static function serializeObject(
+        $obj,
+        array $customKeys = null,
+        &$objectHashes = array(),
+        $maxDepth = -1,
+        $depth = 0
+    ) {
+        $serialized = null;
+        
+        if (self::serializedAlready($obj, $objectHashes)) {
+            $serialized = self::circularReferenceLabel($obj);
+        } else {
+            if ($obj instanceof \Serializable) {
+                self::markSerialized($obj, $objectHashes);
+                $serialized = $obj->serialize();
+            } else {
+                $serialized = array(
+                    'class' => get_class($obj)
+                );
+                
+                if ($obj instanceof \Iterator) {
+                    $serialized['value'] = 'non-serializable';
+                } else {
+                    $serialized['value'] = self::serializeForRollbar(
+                        $obj,
+                        $customKeys,
+                        $objectHashes,
+                        $maxDepth,
+                        $depth+1
+                    );
+                }
+            }
+        }
+        
+        return $serialized;
+    }
+    
+    private static function serializedAlready($obj, &$objectHashes)
+    {
+        if (!isset($objectHashes[spl_object_hash($obj)])) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private static function markSerialized($obj, &$objectHashes)
+    {
+        $objectHashes[spl_object_hash($obj)] = true;
+        self::$ObjectHashes = $objectHashes;
+    }
+    
+    private static function circularReferenceLabel($obj)
+    {
+        return '<CircularReference type:('.get_class($obj).') ref:('.spl_object_hash($obj).')>';
+    }
+    
     // from http://www.php.net/manual/en/function.uniqid.php#94959
     public static function uuid4()
     {

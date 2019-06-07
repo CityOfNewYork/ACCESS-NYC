@@ -51,11 +51,11 @@
 									<div class="switcher-target-<?php echo $section_slug; ?>search_existing_images" style="padding-left:23px;">
                                         <div class="search_through_the_media_library_logic">
                                             <div class="input">
-                                                <input type="radio" id="<?php echo $section_slug; ?>search_existing_images_logic_url" name="<?php echo $section_slug; ?>search_existing_images_logic" value="by_url" <?php echo ( "by_url" == $post['search_existing_images_logic'] ) ? 'checked="checked"': '' ?>/>
+                                                <input type="radio" id="<?php echo $section_slug; ?>search_existing_images_logic_url" name="<?php echo $section_slug; ?>search_existing_images_logic" value="by_url" <?php echo ( "by_url" == $post[$section_slug . 'search_existing_images_logic'] ) ? 'checked="checked"': '' ?>/>
                                                 <label for="<?php echo $section_slug; ?>search_existing_images_logic_url"><?php _e('Match image by URL', 'wp_all_import_plugin') ?></label>
                                             </div>
                                             <div class="input">
-                                                <input type="radio" id="<?php echo $section_slug; ?>search_existing_images_logic_filename" name="<?php echo $section_slug; ?>search_existing_images_logic" value="by_filename" <?php echo ( "by_filename" == $post['search_existing_images_logic'] ) ? 'checked="checked"': '' ?>/>
+                                                <input type="radio" id="<?php echo $section_slug; ?>search_existing_images_logic_filename" name="<?php echo $section_slug; ?>search_existing_images_logic" value="by_filename" <?php echo ( "by_filename" == $post[$section_slug . 'search_existing_images_logic'] ) ? 'checked="checked"': '' ?>/>
                                                 <label for="<?php echo $section_slug; ?>search_existing_images_logic_filename"><?php _e('Match image by filename', 'wp_all_import_plugin') ?></label>
                                             </div>
                                         </div>

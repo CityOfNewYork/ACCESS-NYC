@@ -1,0 +1,123 @@
+# Copyright (C) 2010 Google Authenticator
+# This file is distributed under the same license as the Google Authenticator package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Authenticator 0.37\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/google-authenticator\n"
+"POT-Creation-Date: 2011-08-21 14:25:45+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-01-11 10:07+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.6.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+
+#: google-authenticator.php:131
+msgid ""
+"If you don't have Google Authenticator enabled for your WordPress account, "
+"leave this field empty."
+msgstr "Se você não tiver o Google Authenticator ativado para sua conta do WordPress, deixe este campo vazio."
+
+#: google-authenticator.php:131
+msgid "Google Authenticator code"
+msgstr "Código do Google Authenticator"
+
+#: google-authenticator.php:176
+msgid "<strong>ERROR</strong>: The Google Authenticator password is incorrect."
+msgstr "<strong>ERRO</strong>: a senha do Google Authenticator está incorreta."
+
+#: google-authenticator.php:179
+msgid ""
+"<strong>ERROR</strong>: The Google Authenticator code is incorrect or has "
+"expired."
+msgstr "<strong>ERRO</strong>: o código do Google Authenticator está incorreto ou expirou."
+
+#: google-authenticator.php:215
+msgid "WordPress Blog"
+msgstr "Blog WordPress"
+
+#: google-authenticator.php:218 google-authenticator.php:392
+msgid "Google Authenticator Settings"
+msgstr "Configurações do Google Authenticator"
+
+#: google-authenticator.php:223 google-authenticator.php:396
+msgid "Active"
+msgstr "Ativar"
+
+#: google-authenticator.php:235
+msgid "Relaxed mode"
+msgstr "Modo relaxado"
+
+#: google-authenticator.php:237
+msgid ""
+" Relaxed mode allows for more time drifting on your phone clock (&#177;4 "
+"min)."
+msgstr "O modo relaxado permite mais tempo à deriva no relógio do seu telefone (&#177;4 min)."
+
+#: google-authenticator.php:242
+msgid "Description"
+msgstr "Descrição"
+
+#: google-authenticator.php:243
+msgid ""
+" Description that you'll see in the Google Authenticator app on your phone."
+msgstr "Descrição que você verá no aplicativo Google Authenticator em seu telefone."
+
+#: google-authenticator.php:247
+msgid "Secret"
+msgstr "Secreto"
+
+#: google-authenticator.php:250
+msgid "Create new secret"
+msgstr "Crie um novo segredo"
+
+#: google-authenticator.php:251
+msgid "Show/Hide QR code"
+msgstr "Mostar/Esconder QR Code"
+
+#: google-authenticator.php:259
+msgid "Scan this with the Google Authenticator app."
+msgstr "Escaneie isso com o aplicativo Google Authenticator."
+
+#: google-authenticator.php:264
+msgid "Enable App password"
+msgstr "Ativar senha do aplicativo"
+
+#: google-authenticator.php:266
+msgid " Enabling an App password will decrease your overall login security."
+msgstr "Ativar uma senha de aplicativo diminuirá sua segurança geral de login."
+
+#: google-authenticator.php:274
+msgid "Create new password"
+msgstr "Crie uma nova senha"
+
+#: google-authenticator.php:275
+msgid ""
+" Password is not stored in cleartext, this is your only chance to see it."
+msgstr "A senha não é armazenada em texto puro, essa é sua única chance de vê-la."
+
+#. Plugin Name of the plugin/theme
+msgid "Google Authenticator"
+msgstr "Google Authenticator"
+
+#. Plugin URI of the plugin/theme
+msgid "http://henrik.schack.dk/google-authenticator-for-wordpress"
+msgstr "http://henrik.schack.dk/google-authenticator-for-wordpress"
+
+#. Description of the plugin/theme
+msgid ""
+"Two-Factor Authentication for WordPress using the Android/iPhone/Blackberry "
+"app as One Time Password generator."
+msgstr "Autenticação de dois fatores para WordPress usando o aplicativo Android / iPhone / Blackberry como gerador de senha única."
+
+#. Author of the plugin/theme
+msgid "Henrik Schack"
+msgstr "Henrik Schack"
+
+#. Author URI of the plugin/theme
+msgid "http://henrik.schack.dk/"
+msgstr "http://henrik.schack.dk/"
+

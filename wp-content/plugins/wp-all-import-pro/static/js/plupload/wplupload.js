@@ -163,13 +163,6 @@ $.fn.wplupload  = function($options) {
 							$('.wpallimport-choose-file').find('.wpallimport-submit-buttons').show();		
 						}
 
-						if (wp_all_import_is_php_compatible == "no" && r.name.search(/.*\.xlsx?$/) > -1){
-							$('.wpallimport-upgrade-notice[rel=php_excel]').slideDown();
-						}
-						else{
-							$('.wpallimport-upgrade-notice[rel=php_excel]').hide();
-						}
-
 						if (r.OK) {
 
 						} else if (r.error != undefined && '' != r.error.message) {

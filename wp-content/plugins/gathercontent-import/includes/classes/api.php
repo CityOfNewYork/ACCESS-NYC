@@ -177,6 +177,30 @@ class API extends Base {
 	}
 
 	/**
+	 * GC API request to get download a file from "/files/<FILE_ID>/download" endpoint.
+	 *
+	 * @since  3.0.0
+	 *
+	 * @link https://docs.gathercontent.com/reference#get-filesfile_iddownload
+	 *
+	 * @param  int   $file_id File ID.
+	 * @return mixed          Results of request.
+	 */
+	public function get_file( $file_id ) {
+		$tmpfname = wp_tempnam();
+		if ( ! $tmpfname )
+			return new WP_Error('http_no_file', __('Could not create Temporary file.'));
+
+		$response = $this->get( 'files/'. $file_id .'/download',
+			[
+				'stream' => true,
+				'filename' => $tmpfname
+			]
+		);
+		return $tmpfname;
+	}
+
+	/**
 	 * GC API request to get the results from the "/templates?project_id=<PROJECT_ID>" endpoint.
 	 *
 	 * @since  3.0.0
@@ -418,7 +442,7 @@ class API extends Base {
 	 * @param  array  $args       Optional. Request arguments. Default empty array.
 	 * @return array              The response.
 	 */
-	public function cache_get( $endpoint, $expiration = HOUR_IN_SECONDS, $args = array() ) {
+	public function cache_get( $endpoint, $expiration = HOUR_IN_SECONDS, $args = array(), $method = 'get' ) {
 		$trans_key = 'gctr-' . md5( serialize( compact( 'endpoint', 'args', 'method' ) ) );
 		$response = get_transient( $trans_key );
 
@@ -506,7 +530,9 @@ class API extends Base {
 				$message = $error ? $error : __( 'Unknown Error', 'gathercontent-import' );
 				$response = new WP_Error( 'gc_api_error', $message, array( 'error' => $error, 'code' => 401 ) );
 
-			} elseif ( 'GET' === $method ) {
+			} elseif( isset( $args['filename'] ) ) {
+				$response = (object) [ 'data' => true ];
+			} elseif( 'GET' === $method ) {
 				$response = $success ? json_decode( wp_remote_retrieve_body( $response ) ) : $response;
 			}
 
