@@ -2,7 +2,6 @@
 namespace SMNYC;
 
 require_once plugin_dir_path( __FILE__ ) . 'ContactMe.php';
-require plugin_dir_path( __FILE__ ) . '/third-party/twilio-php/Twilio/autoload.php';
 
 use Twilio\Rest\Client;
 use Twilio\Exceptions\RestException as TwilioErr;

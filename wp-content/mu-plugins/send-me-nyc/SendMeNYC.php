@@ -1,8 +1,13 @@
 <?php
+
 /*
-	Plugin Name: Send Me NYC
-	Description: Email/SMS gateway for saving links for onesself
-	Author:      Blue State Digital
+ * Plugin Name:  Send Me NYC
+ * Description:  Email/SMS gateway for saving links for onesself
+ * Author:       Blue State Digital
+ * Requirements: The plugin doesn't include dependencies. These should be added
+ *               to the root Composer file for the site (composer require ...)
+ *               twilio/sdk: ^5.32,
+ *               aws/aws-sdk-php: ^3.99
 */
 
 namespace SMNYC;

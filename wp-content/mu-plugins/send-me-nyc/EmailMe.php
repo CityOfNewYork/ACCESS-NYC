@@ -2,9 +2,7 @@
 
 namespace SMNYC;
 
-
 require_once plugin_dir_path( __FILE__ ) . 'ContactMe.php';
-require plugin_dir_path( __FILE__ ) . 'third-party/AWS/aws-autoloader.php';
 
 use Aws\Ses\SesClient;
 

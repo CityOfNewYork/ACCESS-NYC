@@ -7,6 +7,8 @@
 /vendor/*
 
 # Add packages that need to be shipped with the source here with !
+!/vendor/aws/
+!/vendor/twilio/
 !/vendor/nyco/
 !/vendor/mustangostang/
 
