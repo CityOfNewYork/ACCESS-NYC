@@ -6,5 +6,6 @@
  * Author: Blue State Digital
  */
 
-if (file_exists(WPMU_PLUGIN_DIR . '/stat-collector/StatCollector.php'))
+if (file_exists(WPMU_PLUGIN_DIR . '/stat-collector/StatCollector.php')) {
   require WPMU_PLUGIN_DIR . '/stat-collector/StatCollector.php';
+}

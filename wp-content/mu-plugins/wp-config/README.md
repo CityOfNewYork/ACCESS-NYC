@@ -14,11 +14,18 @@ This "Must Use" Wordpress Plugin sets environment variables for a WordPress inst
 
 It uses composer/installers to install it to the mu-plugin directly using Composer. Just run:
 
-```
-composer require nyco/wp-config
-```
 
-You can also download the package and add it manually to your mu-plugin directory.
+    composer require nyco/wp-config
+
+
+You can also download the package and add it manually to your mu-plugin directory. Create a must-use plugin loader in the root of the `mu-plugins` directory. and include the following;
+
+    if (file_exists(WPMU_PLUGIN_DIR . '/wp-config/Config.php')) {
+      require_once ABSPATH . '/vendor/mustangostang/spyc/Spyc.php'; // loads the mustangostang/spyc dependency
+      require_once WPMU_PLUGIN_DIR . '/wp-config/Config.php'; // loads the Config class
+
+      new Nyco\WpConfig\Config\Config(); // instantiates the class and sets environment variables
+    }
 
 ### Requirements
 
@@ -38,10 +45,8 @@ The package comes with a sample config directory `/config-sample`. Copy the dire
 
 `config.yml` - This file will be automatically loaded and read for your different environments. For example:
 
-```
-development:
-    SOME_VAR: someVarHere
-```
+    development:
+        SOME_VAR: someVarHere
 
 `SOME_VAR` would be set for your development environment based on the `WP_ENV` constant. It would be available to your WordPress plugins and themes through `getenv('some_var')` (note the lowercase). If the variable is not set, it will be returned as a blank string. You can add as many environments as you would like, but you need to set them (see below). *It is recommended to add the `config.yml` file to your `.gitignore` if you are storing private keys so they aren't committed to source control*.
 
@@ -49,18 +54,16 @@ development:
 
 Simply add the following to your `wp-config.php` to set your environment variable:
 
-```
-putenv('WP_ENV=development'); // The environment will be set to
-$_ENV['WP_ENV'] = getenv('WP_ENV');
-define('WP_ENV', getenv('WP_ENV'));
-```
+    putenv('WP_ENV=development'); // The environment will be set to
+    $_ENV['WP_ENV'] = getenv('WP_ENV');
+    define('WP_ENV', getenv('WP_ENV'));
 
 ### Setting WordPress Options
 To set database options in the WordPress Installation, prefix the the variables in the `config.yml` file with `WP_OPTION_`. For example:
-```
-development:
-    WP_OPTION_SOME_VAR: someVarHere
-```
+
+    development:
+        WP_OPTION_SOME_VAR: someVarHere
+
 The variable will be set to the environment w/o the `WP_OPTION_` prefix so `WP_OPTION_SOME_VAR` would be available as `getenv('some_var')`.
 
 ### Encryption

@@ -5,12 +5,23 @@
 # Composer #
 ############
 /vendor/*
+!/vendor/autoload.php
 
 # Add packages that need to be shipped with the source here with !
-!/vendor/aws/
-!/vendor/twilio/
-!/vendor/nyco/
-!/vendor/mustangostang/
+!/vendor/aws
+!/vendor/composer
+!/vendor/doctrine
+!/vendor/filp
+!/vendor/guzzlehttp
+!/vendor/illuminate
+!/vendor/mtdowling
+!/vendor/mustangostang
+!/vendor/nyco
+!/vendor/psr
+!/vendor/pimple
+!/vendor/ralouphie
+!/vendor/symfony
+!/vendor/twilio
 
 # WordPress #
 ############

@@ -1,16 +1,25 @@
 <?php
+
 namespace StatCollector;
 
 if (!defined('WPINC')) {
-  die; //no direct access
+  die; // no direct access
 }
+
 add_action('admin_init', '\StatCollector\create_settings_section');
 add_action('admin_menu', '\StatCollector\add_settings_page');
-add_filter('plugin_action_links_'.plugin_basename(dirname(__FILE__).'/StatCollector.php'), '\StatCollector\settings_link');
+
+$path = plugin_basename(dirname(__FILE__) . '/StatCollector.php');
+add_filter('plugin_action_links_' . $path, '\StatCollector\settings_link');
 
 function settings_link($links) {
-  $settings_link = '<a href="'.esc_url(add_query_arg('page', 'collector_config', admin_url('options-general.php'))).'">Settings</a>';
+  $admin = admin_url('options-general.php');
+  $page = add_query_arg('page', 'collector_config', $admin);
+
+  $settings_link = '<a href="' . esc_url($page) . '">Settings</a>';
+
   array_unshift($links, $settings_link);
+
   return $links;
 }
 
@@ -38,11 +47,16 @@ function settings_content() {
 }
 
 function create_settings_section() {
-  add_settings_section('statcollect_aws', 'StatCollector Settings', '\StatCollector\settings_heading_text', 'collector_config');
+  $id = 'statcollect_aws';
+  $title = 'Stat Collector Settings';
+  $callback = '\StatCollector\settings_heading_text';
+  $page = 'collector_config';
+
+  add_settings_section($id, $title, $callback, $page);
 
   add_settings_field(
-    'statc_host', //field name
-    'MySQL host/endpoint', //label
+    'statc_host', // field name
+    'MySQL host/endpoint', // label
     '\StatCollector\settings_field_html', // HTML content
     'collector_config', // page
     'statcollect_aws', // section
@@ -82,13 +96,28 @@ function create_settings_section() {
   register_setting('statcollect_settings', 'statc_password');
 }
 
-function settings_heading_text(){
+function settings_heading_text() {
   echo "<p>Enter your MySQL credentials here.</p>";
 }
 
-function settings_field_html($args){
-  echo "<input type='text' name='".$args[0]."' size=40 id='".$args[0]."' value='".get_option($args[0], '')."' placeholder='".$args[1]."' />";
+function settings_field_html($args) {
+  echo implode([
+    '<input ',
+    'type="text" ',
+    'size="40" ',
+    'name="' . $args[0] . '" ',
+    'id="' . $args[0] . '" ',
+    'value="' . get_option($args[0], '') . '" ',
+    'placeholder="' . $args[1] . '" ',
+    '/>'
+  ], '');
+
   if ($_ENV[strtoupper($args[0])]) {
-    echo '<p class="description">Environment currently set to <code>'.$_ENV[strtoupper($args[0])].'</code><p>';
+    echo implode([
+      '<p class="description">',
+      'Environment currently set to ',
+      '<code>' . $_ENV[strtoupper($args[0])] . '</code>',
+      '<p>'
+    ], '');
   }
 }
