@@ -4,14 +4,51 @@
  * Development environment config
  */
 
-// Disable plugins
+// Include the plugins module
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+/**
+ * Disable plugins required for security but slow down logging into the
+ * site for development purposes.
+ */
 
 deactivate_plugins([
   'google-authenticator/google-authenticator.php',
-  'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php',
-  'rollbar/rollbar-php-wordpress.php'
+  'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php'
 ]);
 
-activate_plugin(WP_PLUGIN_DIR . 'wps/wps.php');
+/**
+ * Disable Rollbar because it is only required for remote error monitoring.
+ */
+
+deactivate_plugins('rollbar/rollbar-php-wordpress.php');
+
+/**
+ * A WordPress plugin for the Whoops Error Framework.
+ * This plugin will only work if the development Composer autoloader is
+ * being included. A standard composer install will generate an autoloader
+ * that will include all dependencies, including dev dependencies. See the
+ * README for details on Composer autoloaders.
+ */
+
+if (class_exists('\Rarst\wps')) {
+  activate_plugin(WP_PLUGIN_DIR . 'wps/wps.php');
+} else {
+  deactivate_plugins('wps/wps.php');
+}
+
+/**
+ * Enable the Redis Caching Plugin if we have WP_REDIS_HOST defined in
+ * the wp-config.php. Caching will optimize the speed of the site, especially
+ * transient caches.
+ */
+
+if (null !== WP_REDIS_HOST) {
+  activate_plugin(WP_PLUGIN_DIR . 'redis-cache/redis-cache.php');
+}
+
+/**
+ * Enable Query Monitor for advanced Wordpress Query debug and other tooling.
+ */
+
 activate_plugin(WP_PLUGIN_DIR . 'query-monitor/query-monitor.php');
