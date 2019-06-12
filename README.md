@@ -26,29 +26,27 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 ## Local Installation
 
 ### Requirements
-* **Virtualization** (Docker, Virtualbox, or other). This WordPress repository can be run many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WP Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally. **This requirement includes having a WordPress MySQL database handy**.
+* **Virtualization** (Docker, Virtualbox, or other). This WordPress repository can be run many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WP Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally.
 
 * **Composer**. PHP and WordPress plugin dependencies for WordPress core and the ACCESS NYC Theme are managed via Composer. [Learn more about Composer on it's website](https://getcomposer.org/).
 
 * **Node and NPM**. The ACCESS NYC Theme uses Node with NPM to manage packages such as Gulp to compile assets for the front-end. Learn more about [Node](https://nodejs.org), [NPM](https://www.npmjs.com/), and [Gulp](https://gulpjs.com/) at their respective websites.
 
 ### Installation
-This won't cover all of the options for standing up a WordPress site given all of the options available but it can be done with [Docker for Mac](https://www.docker.com/docker-mac) and following the instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. The following instructions assume your environment meets the requirements above.
+This won't cover all of the options for standing up a WordPress site given all of the options available but it can be done with [Docker for Mac](https://www.docker.com/docker-mac) and following the instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. *The following instructions assume you have a working environment ready to drop a WordPress site into, including a server and MySQL database*.
 
-1. Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys and Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/master/wp/wp-config.php) but you should still update the salts.
+**$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys and Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/master/wp/wp-config.php) but you should still update the salts.
 
-2. To get untracked composer packages when you install the site you will need to run the following in the root of the WordPress site where the [**composer.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/composer.json) file lives:
+**$2** To get untracked composer packages when you install the site you will need to run the following in the root of the WordPress site where the [**composer.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/composer.json) file lives:
 
-```
-composer install
-```
+    composer install
 
-3. Rename the **mu-plugins/config/config-sample.yml** to **mu-plugins/config/config.yml**.
+**$3** This will install plugins included in the Composer package, including **NYCO WordPress Config** (details below). This plugin includes a sample config which needs to be renamed from **mu-plugins/config/config-sample.yml** to **mu-plugins/config/config.yml**.
 
 ## WordPress Site Structure
 
 ### Configuration
-ACCESS NYC integrates the [NYCO WordPress Config plugin](https://packagist.org/packages/nyco/wp-config) for determining configurations based on environment. This plugin will pull from an array of variables set in the **mu-plugins/config/config.yml** file and set the appropriate group to environment variables that can be accessed site functions, templates, and plugins.
+ACCESS NYC integrates the [NYCO WordPress Config plugin](https://packagist.org/packages/nyco/wp-config) for determining configurations based on environment. This plugin will pull from an array of variables set in the **mu-plugins/config/config.yml** file and set the appropriate group to environment variables that can be accessed by site functions, templates, and plugins.
 
 ### ACCESS NYC Theme
 The theme for the site contains all of the php functions, templates, styling, and scripts for the site front-end and can be found in the [**themes**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access) directory. This is the only WordPress theme that is compatible with the WordPress site.
