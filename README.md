@@ -51,15 +51,15 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 * **Node and NPM**. The ACCESS NYC Theme uses Node with NPM to manage packages such as Gulp to compile assets for the front-end. Learn more about [Node](https://nodejs.org), [NPM](https://www.npmjs.com/), and [Gulp](https://gulpjs.com/) at their respective websites.
 
 ### Installation
-This won't cover all of the options for standing up a WordPress site given all of the options available but it can be done with [Docker for Mac](https://www.docker.com/docker-mac) and following the instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. *The following instructions assume you have a working environment ready to drop a WordPress site into, including a server and MySQL database*.
+This won't cover everything for standing up a WordPress site given all of the options available but it can be done with [Docker for Mac](https://www.docker.com/docker-mac) but it can be done following the instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. *The following instructions assume you have a working environment ready to drop a WordPress site into, including a server and MySQL database*.
 
-**$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys and Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/master/wp/wp-config.php) but you should still update the salts.
+**$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/master/wp/wp-config.php) but you should still update the salts.
 
 **$2** To get untracked composer packages when you install the site you will need to run the following in the root of the WordPress site where the [**composer.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/composer.json) file lives:
 
     composer install
 
-**$3** This will install plugins included in the Composer package, including **NYCO WordPress Config** (details below). This plugin includes a sample config which needs to be renamed from **mu-plugins/config/config-sample.yml** to **mu-plugins/config/config.yml**.
+**$3** This will install plugins included in the Composer package, including **NYCO WordPress Config** (see details in [Configuration](#configuration) below). This plugin includes a sample config which needs to be renamed from **mu-plugins/config/config-sample.yml** to **mu-plugins/config/config.yml**.
 
 ## WordPress Site Structure
 

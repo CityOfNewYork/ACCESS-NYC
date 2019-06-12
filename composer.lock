@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2bbbe204e6bd25055eb094c25e6779bb",
+    "content-hash": "79d90e31830cf5bab673933e90acc571",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1408,15 +1408,15 @@
         },
         {
             "name": "wpackagist-plugin/enable-media-replace",
-            "version": "3.3.0",
+            "version": "3.2.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/enable-media-replace/",
-                "reference": "tags/3.3.0"
+                "reference": "tags/3.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.3.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.2.1.zip",
                 "reference": null,
                 "shasum": null
             },
