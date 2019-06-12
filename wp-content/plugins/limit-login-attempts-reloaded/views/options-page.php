@@ -31,6 +31,10 @@ $black_list_usernames = ( is_array( $black_list_usernames ) && !empty( $black_li
 
 $admin_notify_email = $this->get_option( 'admin_notify_email' );
 $admin_email_placeholder = (!is_multisite()) ? get_option( 'admin_email' ) : get_site_option( 'admin_email' );
+
+$trusted_ip_origins = $this->get_option( 'trusted_ip_origins' );
+$trusted_ip_origins = ( is_array( $trusted_ip_origins ) && !empty( $trusted_ip_origins ) ) ? implode( ", ", $trusted_ip_origins ) : 'REMOTE_ADDR';
+
 ?>
 <div class="wrap limit-login-page-settings">
     <h2><?php echo __( 'Limit Login Attempts Settings', 'limit-login-attempts-reloaded' ); ?></h2>
@@ -163,6 +167,16 @@ $admin_email_placeholder = (!is_multisite()) ? get_option( 'admin_email' ) : get
                     <div class="field-col">
                         <p class="description"><?php _e( 'One Username per line', 'limit-login-attempts-reloaded' ); ?></p>
                         <textarea name="lla_blacklist_usernames" rows="10" cols="50"><?php echo esc_textarea( $black_list_usernames ); ?></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"
+                    valign="top"><?php echo __( 'Trusted IP Origins', 'limit-login-attempts-reloaded' ); ?></th>
+                <td>
+                    <div class="field-col">
+                        <input type="text" class="regular-text" style="width: 100%;max-width: 431px;" name="lla_trusted_ip_origins" value="<?php echo esc_attr( $trusted_ip_origins ); ?>">
+                        <p class="description"><?php _e( 'Specify the origins you trust in order of priority, separated by commas. We strongly recommend that you <b>do not</b> use anything other than REMOTE_ADDR since other origins can be easily faked. Examples: HTTP_X_FORWARDED_FOR, HTTP_CF_CONNECTING_IP, HTTP_X_SUCURI_CLIENTIP', 'limit-login-attempts-reloaded' ); ?></p>
                     </div>
                 </td>
             </tr>

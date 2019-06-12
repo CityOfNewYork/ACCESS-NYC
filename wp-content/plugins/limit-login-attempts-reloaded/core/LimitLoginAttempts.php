@@ -1175,7 +1175,27 @@ class Limit_Login_Attempts
 	 */
 	public function get_address() {
 
-		$ip = ( isset( $_SERVER['REMOTE_ADDR'] ) && !empty( $_SERVER['REMOTE_ADDR'] ) ) ? $_SERVER['REMOTE_ADDR'] : '';
+		$trusted_ip_origins = $this->get_option( 'trusted_ip_origins' );
+
+		if( empty( $trusted_ip_origins ) || !is_array( $trusted_ip_origins ) ) {
+
+			$trusted_ip_origins = array();
+		}
+
+		if( !in_array( 'REMOTE_ADDR', $trusted_ip_origins ) ) {
+
+			$trusted_ip_origins[] = 'REMOTE_ADDR';
+		}
+
+		$ip = '';
+		foreach ( $trusted_ip_origins as $origin ) {
+
+			if( isset( $_SERVER[$origin] ) && !empty( $_SERVER[$origin] ) ) {
+
+				$ip = $_SERVER[$origin];
+				break;
+			}
+		}
 
 		$ip = preg_replace('/^(\d+\.\d+\.\d+\.\d+):\d+$/', '\1', $ip);
 
@@ -1345,6 +1365,19 @@ class Limit_Login_Attempts
 					}
 				}
 				$this->update_option('blacklist_usernames', $black_list_usernames );
+
+
+				$trusted_ip_origins = ( !empty( $_POST['lla_trusted_ip_origins'] ) )
+										? array_map( 'trim', explode( ',', sanitize_text_field( $_POST['lla_trusted_ip_origins'] ) ) )
+										: array();
+
+				if( !in_array( 'REMOTE_ADDR', $trusted_ip_origins ) ) {
+
+					$trusted_ip_origins[] = 'REMOTE_ADDR';
+				}
+
+				$this->update_option('trusted_ip_origins', $trusted_ip_origins );
+
 
 				$notify_methods = array();
 				if( isset( $_POST[ 'lockout_notify_log' ] ) ) {

@@ -2,8 +2,8 @@
 Contributors: wpchefgadget
 Tags: brute force, login, security, GDPR, protection
 Requires at least: 3.0
-Tested up to: 5.1.1
-Stable tag: 2.8.1
+Tested up to: 5.2.1
+Stable tag: 2.9.0
 
 Reloaded version of the original Limit Login Attempts plugin for Login Protection by a team of WordPress developers. GDPR compliant.
 
@@ -25,6 +25,7 @@ Features:
 * **Woocommerce** login page protection.
 * **Multi-site** compatibility with extra MU settings.
 * **GDPR** compliant. With this feature turned on, all logged IPs get obfuscated (md5-hashed).
+* **Custom IP origins** support (Cloudflare, Sucuri, etc.)
 
 = Upgrading from the old Limit Login Attempts plugin =
 1. Go to the Plugins section in your site's backend.
@@ -46,9 +47,12 @@ Based on the original code from Limit Login Attemps plugin by Johan Eenfeldt.
 
 1. Loginscreen after a failed login with remaining retries
 2. Lockout loginscreen
-3. Administration interface in WordPress 4.5.3
+3. Administration interface in WordPress 5.2.1
 
 == Changelog ==
+
+= 2.9.0 =
+* Trusted IP origins option has been added.
 
 = 2.8.1 =
 * Extra lockout options are back.

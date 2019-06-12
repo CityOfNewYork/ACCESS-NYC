@@ -14,7 +14,25 @@ Learn more about ACCESS NYC at [nyc.gov/opportunity](http://www1.nyc.gov/site/op
 
 * [Tech](#tech)
 * [Local Installation](#local-installation)
-* [About the ACCESS NYC WordPress Site](#about-the-access-nyc-wordpress-site)
+    * [Requirements](#requirements)
+    * [Installation](#installation)
+* [WordPress Site Structure](#wordpress-site-structure)
+    * [ACCESS NYC Theme](#access-nyc-theme)
+        * [Twig Templates](#twig-templates)
+        * [PHP Functions](#php-functions)
+        * [Assets](#assets)
+    * [Plugins](#plugins)
+        * [WordPress Admin Plugins](#wordPress-admin-plugins)
+        * [Must Use Plugins](#must-use-plugins)
+        * [Composer Plugins](#composer-plugins)
+* [Using Composer](#using-composer)
+* [Using NPM](#using-npm)
+* [Debug Browsing](#debug-browsing)
+* [Coding Style](#coding-style)
+    * [PHP](#php)
+    * [Javascript](#javascript)
+    * [SCSS](#scss)
+* [About NYCO](#about-nyco)
 
 ## Tech
 ACCESS NYC is a publicly available [WordPress](https://wordpress.org/) site hosted on [WP Engine](https://wpengine.com/). Source code is available as in this repository. All benefit program information on ACCESS NYC is publicly available through the [Benefits and Programs API](https://data.cityofnewyork.us/Social-Services/Benefits-and-Programs-API/2j8u-wtju) on the City of New York’s Open Data portal.
@@ -57,6 +75,9 @@ The theme is built on [Timber](https://www.upstatement.com/timber/) which uses t
 #### PHP Functions
 Some functions are included in the theme's [**functions.php**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/functions.php), however, new modules are stored in the [**/includes**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/includes) directory and are included in **functions.php** at the bottom of the file.
 
+#### Assets
+The source for image, style, and script files live in the [**src**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/src) and are compiled to the [**/assets**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/assets) directory. This is done with NPM Scripts in [**package.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/package.json) and tasks in the [GulpFile](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/gulpfile.babel.js). The theme relies heaviliy on the [ACCESS NYC Patterns](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets and JavaScript modules. Refer to the [documentation](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage.
+
 ### Plugins
 WordPress Plugins are managed via Composer and the WordPress Admin. They are tracked by the repository to be easily shipped to different environments. Plugins utilized by the WordPress site can be found in the [**plugins**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/plugins) directory. Key plugins include [Advanced Custom Fields](https://www.advancedcustomfields.com/), [WordPress Multilingual](https://wpml.org/), [Timber](https://www.upstatement.com/timber/), and the [Gather Content WordPress Integration](https://wordpress.org/plugins/gathercontent-import/). There are a few ways of managing plugins.
 
@@ -87,7 +108,7 @@ For example:
 
     composer run predeploy
 
-### Composer Packages
+## Using Composer
 
 In addition to WordPress Plugins, Composer is used to manage third party dependencies that some plugins rely on as well as provide developer tools for working with PHP applications. The Composer package comes with scripts that can be run via the command:
 
@@ -97,18 +118,17 @@ Script        | Description
 --------------|-
 `development` | Rebuilds the autoloader including development dependencies.
 `production`  | Rebuilds the autoloader omitting development dependencies.
-`predeploy`   | Rebuilds the autoloader for production and runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) in lint mode (described below).
+`predeploy`   | Rebuilds the autoloader using the `production` script then runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) using the `lint` script (described below).
 `lint`        | Runs PHP Code Sniffer which will display violations of the standard defined in the [phpcs.xml](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/phpcs.xml) file.
 `fix`         | Runs PHP Code Sniffer in fix mode which will attempt to fix violations automatically. It is not necessarily recommended to run this on large scripts because if it fails it will leave a script partially formatted and malformed.
-`version`     | Regenerates the composer.lock file and rebuilds the autoloader for production.
+`version`     | Regenerates the **composer.lock** file and rebuilds the autoloader for production.
 `deps`        | This is a shorthand for `composer show --tree` for illustrating package dependencies.
 
 By default **/vendor** packages are not tracked by the repository. If a composer package is required by production it needs to be included in the repository so it can be deployed to WP Engine. The [**.gitignore**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/.gitignore) manually includes tracked repositories using the `!` prefix. This does not apply to WordPress plugins.
 
-### Assets
-The source for image, style, and script files live in the [**src**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/src) and are compiled to the [**/assets**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/assets) directory. This is done with NPM Scripts in [**package.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/package.json) and tasks in the [GulpFile](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/gulpfile.babel.js). The theme relies heaviliy on the [ACCESS NYC Patterns](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets and JavaScript modules. Refer to the [documentation](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage.
+## Using NPM
 
-To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access) theme in your terminal and and run:
+NPM is used to manage the assets in the ACCESS NYC Theme. To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access) theme in your terminal and and run:
 
     npm install
 
@@ -120,11 +140,7 @@ Then run:
 
     npm run start
 
-To start the development server for asset managment.
-
-#### NPM Scripts
-
-The NPM package comes scripts which can be run via the command:
+To start the development server for asset managment. The NPM package comes scripts which can be run via the command:
 
     npm run {{ script }}
 
@@ -138,25 +154,25 @@ Script        | Description
 `scripts`     | This runs a one-off compilation of JavaScript assets in production mode.
 `styles`      | This runs a one-off compilation of stylesheet assets in production mode.
 
-### Debug Mode
+## Debug Browsing
 
 The query parameter `?debug=1` to the site URL in any environment to help in debugging front-end issues. This will do a number of things. It will serve a non-minified version of the JavaScript with some logging enabled. It will also allow you to jump around to different steps in the eligibility screener, e.g. `/eligiblity?debug=1#step-8`, and if the web inspector is open will pause the app before and after the screener form is submitted while outputting the data payload and response object respectively.
 
-### Coding Style
+## Coding Style
 
-#### PHP
+### PHP
 PHP is linted using [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) with the [PSR-2 standard](https://www.php-fig.org/psr/psr-2/). The configuration can be found in the [phpcs.xml](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/phpcs.xml). Linting must be done manually using the command:
 
     composer run lint
 
 PHP Code Sniffer can attempt to fix violations using `composer run fix` but it is not recommended for multiple files or large scripts as it can fail and leave malformed php files.
 
-#### Javascript
+### Javascript
 The JavaScript is written in ES6 syntax. Source files are located in the theme **/src/js** directory. JavaScript is linted by the `gulp lint` task with the ESLint [Google's standards](https://google.github.io/styleguide/javascriptguide.xml). It is transpiled, concatenated, and minified by the `gulp scripts` task, using [Webpack Stream](https://www.npmjs.com/package/webpack-stream).
 
 The main JavaScript libraries used are [jQuery](http://jquery.com/), [Underscore.js](http://underscorejs.org/), and [Vue.js](https://vuejs.org/).
 
-#### SCSS
+### SCSS
 The theme relies heaviliy on the [ACCESS NYC Patterns](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets. Refer to the [documentation](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage. The Pattern SCSS files are processed, concatenated, and minfied by the gulp styles task.
 
 # About NYCO

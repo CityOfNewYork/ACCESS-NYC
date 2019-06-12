@@ -28,7 +28,7 @@
     "wpackagist-plugin/enable-media-replace": "^3.3",
     "wpackagist-plugin/gathercontent-import": "^3.1",
     "wpackagist-plugin/google-authenticator": "^0.52.0",
-    "wpackagist-plugin/limit-login-attempts-reloaded": "^2.8",
+    "wpackagist-plugin/limit-login-attempts-reloaded": "^2.9",
     "wpackagist-plugin/rollbar": "^2.6",
     "wpackagist-plugin/search-everything": "8.1.9",
     "wpackagist-plugin/timber-library": "^1.9",
