@@ -2,16 +2,6 @@
 
 namespace StatCollector;
 
-if (!defined('WPINC')) {
-  die; // no direct access
-}
-
-add_action('admin_init', '\StatCollector\create_settings_section');
-add_action('admin_menu', '\StatCollector\add_settings_page');
-
-$path = plugin_basename(dirname(__FILE__) . '/StatCollector.php');
-add_filter('plugin_action_links_' . $path, '\StatCollector\settings_link');
-
 function settings_link($links) {
   $admin = admin_url('options-general.php');
   $page = add_query_arg('page', 'collector_config', $admin);
