@@ -5,9 +5,7 @@ namespace nyco\WpRestPreparePosts\RestPreparePosts;
 /**
  * Functions for preparing posts for the WP Rest API
  */
-class RestPreparePosts
-{
-
+class RestPreparePosts {
   /** Required. The post type of the rest client */
   public $type = '';
 
@@ -93,5 +91,4 @@ class RestPreparePosts
 
     return $terms;
   }
-
 }
