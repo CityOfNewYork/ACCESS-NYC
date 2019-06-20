@@ -19,7 +19,9 @@
 !/vendor/nyco
 !/vendor/psr
 !/vendor/ralouphie
-!/vendor/symfony
+!/vendor/symfony/polyfill-mbstring
+!/vendor/symfony/translation
+!/vendor/symfony/translation-contracts
 !/vendor/twilio
 
 # WordPress #
@@ -97,6 +99,7 @@ Thumbs.db
 sitemap.xml
 sitemap.xml.gz
 /info.php
+/wpscan.yml
 
 # Vim generated files #
 ######################

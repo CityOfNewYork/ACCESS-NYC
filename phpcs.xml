@@ -2,8 +2,21 @@
 <ruleset name="nyco">
   <description>PSR2 with two spaces, braces on same line</description>
 
+  <!-- Set width of output -->
+  <arg name="report-width" value="100" />
+
+  <!-- Show colors in console -->
+  <arg value="-colors" />
+
+  <!-- Set tab width to 1, the width of 1 tab is two spaces -->
+  <arg name="tab-width" value="1" />
+
   <!-- Scan only PHP files -->
-  <arg name="extensions" value="php"/>
+  <arg name="extensions" value="php" />
+
+  <!-- Allow the report to be generated but do not error out -->
+  <config name="ignore_errors_on_exit" value="1" />
+  <config name="ignore_warnings_on_exit" value="1" />
 
   <!-- Files to scan -->
   <file>wp-content/themes/access/</file>
@@ -19,16 +32,12 @@
   <exclude-pattern>wp-content/mu-plugins/wp-config/</exclude-pattern>
   <exclude-pattern>wp-content/themes/access/node_modules/</exclude-pattern>
 
-  <!-- Show colors in console -->
-  <arg value="-colors"/>
-
-  <arg name="tab-width" value="1"/>
-
   <rule ref="PSR2" />
 
   <rule ref="PSR2">
     <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine" />
     <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine" />
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.SpaceAfterFunction" />
   </rule>
 
   <rule ref="Generic.Arrays.ArrayIndent">

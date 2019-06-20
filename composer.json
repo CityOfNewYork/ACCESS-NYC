@@ -43,23 +43,25 @@
   "require-dev": {
     "filp/whoops": "^2.3",
     "whoops/soap": "^1.0",
-    "squizlabs/php_codesniffer": "^3.3",
     "rarst/wps": "^1.2",
     "wpackagist-plugin/wp-crontrol": "^1.7",
     "wpackagist-plugin/redis-cache": "^1.4",
-    "wpackagist-plugin/query-monitor": "^3.3"
+    "wpackagist-plugin/query-monitor": "^3.3",
+    "umutphp/wp-vulnerability-check": "^0.1.1",
+    "squizlabs/php_codesniffer": "^3.4"
   },
   "scripts": {
     "development": [
       "composer dump-autoload"
     ],
     "production": [
-      "composer dump-autoload --no-dev --optimize",
-      "vendor/bin/phpcs --standard=phpcs.xml"
+      "composer dump-autoload --no-dev --optimize"
     ],
     "predeploy": [
-      "composer dump-autoload --no-dev --optimize",
-      "vendor/bin/phpcs --standard=phpcs.xml"
+      "composer run development",
+      "composer run lint",
+      "composer run wpscan",
+      "composer run production"
     ],
     "lint": [
       "vendor/bin/phpcs --standard=phpcs.xml"
@@ -67,9 +69,12 @@
     "fix": [
       "vendor/bin/phpcbf --standard=phpcs.xml"
     ],
+    "wpscan": [
+      "vendor/bin/wp-vulnerability-check --config wpscan.yml"
+    ],
     "version": [
       "composer update nothing",
-      "composer dump-autoload --no-dev --optimize"
+      "composer run production"
     ],
     "deps": [
       "composer show --tree"
