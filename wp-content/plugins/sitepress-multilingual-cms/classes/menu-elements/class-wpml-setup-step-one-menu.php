@@ -29,7 +29,7 @@ class WPML_Setup_Step_One_Menu extends WPML_SP_User {
 					<p>
 						<select id="icl_initial_language_code"
 						        name="icl_initial_language_code">
-							<?php $languages = $this->sitepress->get_languages( $def_lang ); ?>
+							<?php $languages = $this->sitepress->get_languages( $this->get_user_lang( $def_lang ) ); ?>
 							<?php foreach ( $languages as $lang ): ?>
 								<option <?php if ( $def_lang === $lang['code'] ): ?>selected="selected"<?php endif; ?>
 								        value="<?php echo esc_attr( $lang['code'] ) ?>"><?php echo esc_html( $lang['display_name'] ) ?></option>
@@ -47,6 +47,22 @@ class WPML_Setup_Step_One_Menu extends WPML_SP_User {
 		<?php
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * @param string $def_lang
+	 *
+	 * @return string
+	 */
+	private function get_user_lang( $def_lang ) {
+		$lang_code    = null;
+		$current_user = wp_get_current_user();
+
+		if ( isset( $current_user->locale ) ) {
+			$lang_code = $this->locale_to_lang_code( $current_user->locale );
+		}
+
+		return $lang_code ? $lang_code : $def_lang;
 	}
 
 	/**
@@ -83,7 +99,7 @@ class WPML_Setup_Step_One_Menu extends WPML_SP_User {
 	/**
 	 * @param string $locale
 	 *
-	 * @return bool|string
+	 * @return false|string
 	 */
 	private function locale_to_lang_code( $locale ) {
 		$exp = explode( '_', $locale );

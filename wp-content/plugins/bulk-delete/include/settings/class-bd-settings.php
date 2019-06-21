@@ -60,6 +60,3 @@ class BD_Settings {
 		return apply_filters( 'bd_license_input', $input );
 	}
 }
-
-// hooks
-add_action( 'admin_init', array( 'BD_Settings', 'create_settings' ), 100 );

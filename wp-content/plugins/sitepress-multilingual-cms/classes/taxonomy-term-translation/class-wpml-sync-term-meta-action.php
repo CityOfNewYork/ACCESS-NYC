@@ -5,18 +5,23 @@ class WPML_Sync_Term_Meta_Action {
 	/** @var SitePress $sitepress */
 	private $sitepress;
 
-	/** @var  int $term_taxonomy_id */
+	/** @var int $term_taxonomy_id */
 	private $term_taxonomy_id;
+
+	/** @var bool $is_new_term */
+	private $is_new_term;
 
 	/**
 	 * WPML_Sync_Term_Meta_Action constructor.
 	 *
 	 * @param SitePress $sitepress
 	 * @param int       $term_taxonomy_id just saved term's term_taxonomy_id
+	 * @param bool      $is_new_term
 	 */
-	public function __construct( $sitepress, $term_taxonomy_id ) {
+	public function __construct( $sitepress, $term_taxonomy_id, $is_new_term = false ) {
 		$this->sitepress        = $sitepress;
 		$this->term_taxonomy_id = $term_taxonomy_id;
+		$this->is_new_term      = $is_new_term;
 	}
 
 	/**
@@ -35,7 +40,7 @@ class WPML_Sync_Term_Meta_Action {
 
 		if ( ! empty( $translations ) ) {
 			foreach ( $translations as $term_taxonomy_id_to ) {
-				$this->copy_custom_fields( $term_taxonomy_id_to, $term_taxonomy_id_from );
+				$this->copy_custom_fields( (int) $term_taxonomy_id_to, $term_taxonomy_id_from );
 			}
 		}
 	}
@@ -51,7 +56,11 @@ class WPML_Sync_Term_Meta_Action {
 		$meta_keys       = $setting_factory->get_term_meta_keys();
 
 		foreach ( $meta_keys as $meta_key ) {
-			if ( $setting_factory->term_meta_setting( $meta_key )->status() === WPML_COPY_CUSTOM_FIELD ) {
+			$meta_key_status = $setting_factory->term_meta_setting( $meta_key )->status();
+
+			if ( WPML_COPY_CUSTOM_FIELD === $meta_key_status
+			     || $this->should_copy_once( $meta_key_status, $term_taxonomy_id_to )
+			) {
 				$cf_copy[] = $meta_key;
 			}
 		}
@@ -101,5 +110,17 @@ class WPML_Sync_Term_Meta_Action {
 			$wpdb->query( $insert_prepared );
 		}
 		wp_cache_init();
+	}
+
+	/**
+	 * @param int $meta_key_status
+	 * @param int $term_taxonomy_id_to
+	 *
+	 * @return bool
+	 */
+	private function should_copy_once( $meta_key_status, $term_taxonomy_id_to ) {
+		return $this->is_new_term
+		       && WPML_COPY_ONCE_CUSTOM_FIELD === $meta_key_status
+		       && $term_taxonomy_id_to === $this->term_taxonomy_id;
 	}
 }

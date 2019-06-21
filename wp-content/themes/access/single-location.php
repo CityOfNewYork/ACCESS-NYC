@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template name: Location detail page.
+ * Location detail page.
  */
 
 /**
@@ -15,6 +15,7 @@ global $params;
  */
 
 $location = new Controller\SingleLocation();
+
 $context = Timber::get_context();
 $context['post'] = $location;
 $templates = $location->templates();

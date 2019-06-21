@@ -37,6 +37,8 @@ function icl_import_xml() {
 
 add_action('import_start', 'icl_import_xml_start', 0);
 function icl_import_xml_start() {
-	set_time_limit(0);
-	$_POST['icl_tax_post_tag_language'] = $_POST['icl_tax_category_language'] = $_POST['icl_tax_language'] = $_POST['icl_post_language'];
+	set_time_limit( 0 );
+	$post_languages = isset( $_POST['icl_post_language'] ) ? $_POST['icl_post_language'] : array();
+
+	$_POST['icl_tax_post_tag_language'] = $_POST['icl_tax_category_language'] = $_POST['icl_tax_language'] = $post_languages;
 }

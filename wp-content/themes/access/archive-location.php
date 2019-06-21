@@ -1,48 +1,82 @@
 <?php
 /**
- * Template Name: Location JSON
- * This controller generates the JSON at {{?language_code}}/locations/json. This
- * JSON file has data for all the locations. Currently the generated file is about
- * 380kb and with proper caching is served up reasonably quickly. Copmare this to
- * the native  WP JSON API that can only serve 100 results at a time with an
- * average payload size of 200kb. Still, down the road, this might need to be
- * fleshed out to a more robust JSON endpoint that can accept pagination,
- * latitude, longitude, and program parameters.
+ * Template name: Locations
+ *
+ * This is the controller for the map at /locations. Most of the code here is used
+ * to build the category/program filter list. First we get a list of program
+ * categories. Then we loop over those categories to find the related programs.
+ * We only want to list Programs that are reverse-related to a location so we
+ * need to do a reverse-relationship query and weed out any programs that are
+ * not related.
  */
 
 $context = Timber::get_context();
 
-$posts = get_posts( array(
-  'post_type' => 'location',
-  'numberposts' => -1,
-  'suppress_filters' => 0
+// Get the program categories.
+$categories = get_categories(array(
+  'post_type' => 'programs',
+  'taxonomy' => 'programs',
+  'hide_empty' => true
 ));
+
+$context['filters'] = [];
 
 // Set default language.
 global $sitepress;
 $default_lang = $sitepress->get_default_language();
 
-// 'program_uids' Are the IDs of the related programs in the default (English)
-// language, used here to solve for possible translation issues.
-foreach ($posts as $post) {
-  $programs = [];
-  $related_programs = get_field('programs', $post->ID);
+// For each program category, get each associated program post and add those
+// posts to the page context.
+foreach ($categories as $category) {
+  $catPosts = get_posts( array(
+    'post_type' => 'programs',
+    'posts_per_page'=>-1,
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'programs',
+        'terms' => $category->term_id,
+      )
+    )
+  ));
 
-  if ($related_programs) {
-    foreach ($related_programs as $program) {
-      array_push($programs, icl_object_id($program->ID, 'post', true, $default_lang));
+  $filteredPosts = [];
+
+  foreach ($catPosts as $catPost) {
+    // 'uid' Is used here to get the ID of the English version of the programs
+    // so translations work more smoothly.
+    $catPost->uid = icl_object_id($catPost->ID, 'post', true, $default_lang);
+
+    // Do a reverse relationship query to see if there is an associated location
+    // to this program. If so, add this program to the $filteredPosts array.
+    $relatedLocations = get_posts( array(
+      'post_type' => 'location',
+      'posts_per_page' => 1,
+      'meta_query' => array(
+        array(
+          'key' => 'programs',
+          'value' => $catPost->uid,
+          'compare' => 'LIKE'
+        )
+      )
+    ));
+
+    if ($relatedLocations) {
+      array_push($filteredPosts, $catPost);
     }
   }
-  $post->link = (ICL_LANGUAGE_CODE == $default_lang) ?
-      get_site_url() . '/location/' . $post->post_name :
-      get_site_url() . '/' . ICL_LANGUAGE_CODE . '/location/' . $post->post_name;
 
-  $post->program_uids = $programs;
+  // If this category has filtered posts, add it to the filter array.
+  if (count($filteredPosts) > 0) {
+    $context['filters'][] = array(
+      'category' => array(
+        'name' => $category->name,
+        'slug' => $category->slug
+      ),
+      'programs' => $filteredPosts
+    );
+  }
 }
 
-$context['posts'] = $posts;
+$templates = array('locations/locations.twig');
 
-header('Content-type: text/json');
-header('Cache-Control: max-age=600');
-
-Timber::render('locations/locations-json.twig', $context, array(600, false));
+Timber::render($templates, $context);

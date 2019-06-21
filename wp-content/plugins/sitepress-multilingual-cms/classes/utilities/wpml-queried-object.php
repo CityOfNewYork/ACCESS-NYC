@@ -26,6 +26,10 @@ class WPML_Queried_Object {
 		$this->queried_object = get_queried_object();
 	}
 
+	public function has_object() {
+		return (bool) $this->queried_object;
+	}
+
 	/**
 	 * @return null|string
 	 */
@@ -92,8 +96,14 @@ class WPML_Queried_Object {
 	public function get_element_type() {
 		$type = null;
 
-		if ( isset( $this->queried_object->post_type ) ) {
-			$type = 'post_' . $this->queried_object->post_type;
+		if ( $this->is_instance_of_post_type() ) {
+			$type = 'post_' . $this->get_post_type_name();
+		}
+		if ( $this->is_instance_of_post() ) {
+			$type = 'post_' . $this->get_post_type();
+		}
+		if ( $this->is_instance_of_taxonomy() ) {
+			$type = 'tax_' . $this->get_taxonomy();
 		}
 
 		return $type;
@@ -111,5 +121,37 @@ class WPML_Queried_Object {
 		}
 
 		return $url;
+	}
+
+	public function get_post_type() {
+		if ( $this->is_instance_of_post() ) {
+			return $this->queried_object->post_type;
+		}
+
+		return null;
+	}
+
+	public function get_taxonomy() {
+		if ( $this->is_instance_of_taxonomy() ) {
+			return $this->queried_object->taxonomy;
+		}
+	}
+
+	public function get_post_type_name() {
+		if ( $this->is_instance_of_post_type() ) {
+			return $this->queried_object->name;
+		}
+	}
+
+	public function is_instance_of_post() {
+		return $this->queried_object instanceof WP_Post;
+	}
+
+	public function is_instance_of_taxonomy() {
+		return $this->queried_object instanceof WP_Term;
+	}
+
+	public function is_instance_of_post_type() {
+		return $this->queried_object instanceof WP_Post_Type;
 	}
 }

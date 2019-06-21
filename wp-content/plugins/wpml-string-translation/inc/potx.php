@@ -212,6 +212,16 @@ function _potx_format_quoted_string($str) {
 }
 
 /**
+ * @param string $string
+ * 
+ * @return string
+ */
+function wpml_potx_unquote_context_or_domain( $string ) {
+	$quote_type = mb_substr( $string, 0, 1 );
+	return trim( $string, $quote_type );
+}
+
+/**
  * Output a marker error with an extract of where the error was found.
  *
  * @param $file
@@ -460,7 +470,7 @@ function _potx_find_t_calls_with_context(
 								continue;
 							}
 						} else {
-							$domain = trim( $_potx_tokens[ $ti + $domain_offset ][ 1 ], "\"' " );
+							$domain = wpml_potx_unquote_context_or_domain( $_potx_tokens[ $ti + $domain_offset ][ 1 ] );
 						}
 
 						// exception for gettext calls with contexts
@@ -480,7 +490,7 @@ function _potx_find_t_calls_with_context(
 									}
 								}
 							} else {
-								$context = trim( $_potx_tokens[ $ti + $context_offset ][ 1 ], "' " );
+								$context = wpml_potx_unquote_context_or_domain( $_potx_tokens[ $ti + $context_offset ][ 1 ] );
 							}
 
 						} else {

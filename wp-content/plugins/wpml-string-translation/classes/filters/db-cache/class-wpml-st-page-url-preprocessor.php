@@ -56,7 +56,7 @@ class WPML_ST_Page_URL_Preprocessor {
 	 * @return string
 	 */
 	public function process_url( $url ) {
-		if ( empty( $url ) ) {
+		if ( empty( $url ) || is_admin() ) {
 			return $url;
 		}
 
@@ -69,10 +69,10 @@ class WPML_ST_Page_URL_Preprocessor {
 
 		$new_path = $this->wp->parse_request( $path );
 		$url = str_replace( $path, $new_path, $url );
-		
+
 		return $url;
 	}
-	
+
 	/**
 	 * @param string $url
 	 *

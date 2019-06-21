@@ -25,16 +25,16 @@ The easiest way to install the plugin is from the WordPress Plugin directory. If
 1. In your WordPress administration panel go to `Plugins` → `Add New`.
 2. Search for "Rollbar" and find `Rollbar` by Rollbar in the search results.
 3. Click `Install Now` next to the `Rollbar` plugin.
-4. In `Plugins` → `Installed plugins` find `Rollbar` and click `activate` underneath.
-5. Log into your [Rollbar account dashboard](https://rollbar.com/login/).
-6. Go to `Settings` → `Project Access Tokens`.
-7. Copy the token value under `post_client_item` and `post_server_item`.
-8. Navigate to `Tools` → `Rollbar`.
-9. Enable `PHP error logging` and/or `Javascript error logging` depending on your needs.
-10. Paste the tokens you copied in step 7 in `Access Token` section.
-11. Provide the name of your environment in `Environment`. By default, the environment will be taken from `WP_ENV` environment variable if it's set otherwise it's blank. We recommend to fill this out either with `development` or `production`.
-12. Pick a minimum logging level. Only errors at that or higher level will be reported. For reference: [PHP Manual: Predefined Error Constants](http://php.net/manual/en/errorfunc.constants.php).
-13. Click `Save Changes`.
+4. In `Plugins` → `Installed plugins` find `Rollbar` and click `Activate` underneath.
+5. Log into your [Rollbar account dashboard](https://rollbar.com/login/):
+   1. Go to `Settings` → `Project Access Tokens`.
+   2. Copy the token value under `post_client_item` and `post_server_item`.
+6. In WordPress, navigate to `Settings` → `Rollbar`:
+   1. Enable `PHP error logging` and/or `Javascript error logging` depending on your needs.
+   2. Paste the tokens you copied in step 7 in `Access Token` section.
+   3. Provide the name of your environment in `Environment`. By default, the environment will be taken from `WP_ENV` environment variable if it's set otherwise it's blank. We recommend to fill this out either with `development` or `production`.
+   4. Pick a minimum logging level. Only errors at that or higher level will be reported. For reference: [PHP Manual: Predefined Error Constants](http://php.net/manual/en/errorfunc.constants.php).
+   5. Click `Save Changes`.
 
 **Warning**: This installation method might not be suitable for complex WordPress projects. The plugin installed this way will be self-contained and include all of the required dependencies for itself and `rollbar/rollbar-php` library. In complex projects, this might lead to version conflicts between dependencies and other plugins/packages. If this is an issue in your project, we recommend the "Advanced" installation method. For more information why this might be important for you, read [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/).
 
@@ -44,7 +44,7 @@ This is a recommended way to install Rollbar plugin for advanced projects. This 
 
 1. If your WordPress project is not managed with Composer yet, we suggest looking into upgrading your WordPress: [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/).
 2. In your `composer.json` add `wpackagist-plugin/rollbar` to your `require` section, i.e.:
-```
+```json
   "require": {
     "php": ">=5.5",
     ...,
@@ -52,16 +52,7 @@ This is a recommended way to install Rollbar plugin for advanced projects. This 
   }
 ```
 3. Issue command `composer install` in the root directory of your WordPress project.
-4. In `Plugins` → `Installed plugins` find `Rollbar` and click `Activate` underneath.
-5. Log into your [Rollbar account dashboard](https://rollbar.com/login/).
-6. Go to `Settings` → `Project Access Tokens`.
-7. Copy the token value under `post_client_item` and `post_server_item`.
-8. Navigate to `Tools` → `Rollbar`.
-9. Enable `PHP error logging` and/or `Javascript error logging` depending on your needs.
-10. Paste the tokens you copied in step 7 in `Access Token` section.
-11. Provide the name of your environment in `Environment`. By default, the environment will be taken from `WP_ENV` environment variable if it's set otherwise it's blank.
-12. Pick a minimum logging level. Only errors at that or higher level will be reported. For reference: [PHP Manual: Predefined Error Constants](http://php.net/manual/en/errorfunc.constants.php).
-13. Click `Save Changes`.
+4. Go to step #4 above.
 
 ## Help / Support
 
@@ -79,15 +70,16 @@ The original author of this package is [@flowdee](https://twitter.com/flowdee/).
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
+5. Verify your commit passes the code standards enforced by [Codacy](https://www.codacy.com).
 5. Create new Pull Request
 
 ## Testing
 
-*Note:* Before you run tests, provide test database credentials in `phpunit.env` and start your mysqld service.
+The following is Mac/Linux only - Windows is not supported.
 
-Tests are in `tests`.
-To run the tests: `composer test`
-To fix code style issues: `composer fix`
+Before you run tests, provide test database credentials in `phpunit.env` (you can copy `phpunit.env.dist`, removing the comment in the first line).  Then start your `mysqld` service.
+
+Tests are in `tests`; to run them, do `composer test`. To fix code style issues, do `composer fix`.
 
 ## Tagging
 

@@ -102,10 +102,10 @@ class WPML_Term_Translation extends WPML_Element_Translation {
 
 	protected function get_element_join() {
 
-		return "FROM {$this->wpdb->prefix}icl_translations t
+		return "FROM {$this->wpdb->prefix}icl_translations wpml_translations
 				JOIN {$this->wpdb->term_taxonomy} tax
-					ON t.element_id = tax.term_taxonomy_id
-						AND t.element_type = CONCAT('tax_', tax.taxonomy)";
+					ON wpml_translations.element_id = tax.term_taxonomy_id
+						AND wpml_translations.element_type = CONCAT('tax_', tax.taxonomy)";
 	}
 
 	protected function get_type_prefix() {
@@ -115,7 +115,7 @@ class WPML_Term_Translation extends WPML_Element_Translation {
 	private function maybe_warm_term_id_cache() {
 
 		if ( ! isset( $this->ttids ) || ! isset( $this->term_ids ) ) {
-			$data           = $this->wpdb->get_results( "	SELECT t.element_id, tax.term_id, tax.taxonomy
+			$data           = $this->wpdb->get_results( "	SELECT wpml_translations.element_id, tax.term_id, tax.taxonomy
 													 " . $this->get_element_join() . "
 													 JOIN {$this->wpdb->terms} terms
 													  ON terms.term_id = tax.term_id

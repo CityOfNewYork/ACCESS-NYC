@@ -26,6 +26,7 @@ class WPML_Get_Page_By_Path {
 		$this->language = $lang;
 		add_filter( 'query', array( $this, 'get_page_by_path_filter' ), self::BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY );
 		$temp_lang_switch = new WPML_Temporary_Switch_Language( $this->sitepress, $lang );
+		$this->clear_cache( $page_name, $post_type );
 		$page = get_page_by_path( $page_name, $output, $post_type );
 		$temp_lang_switch->restore_lang();
 		remove_filter( 'query', array( $this, 'get_page_by_path_filter' ), self::BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY );
@@ -41,5 +42,18 @@ class WPML_Get_Page_By_Path {
 		}
 
 		return $query;
+	}
+
+	/**
+	 * @param string $page_name
+	 * @param string $post_type
+	 *
+	 * @see get_page_by_path where the cache key is built
+	 */
+	private function clear_cache( $page_name, $post_type ) {
+		$last_changed = wp_cache_get_last_changed( 'posts' );
+		$hash = md5( $page_name . serialize( $post_type ) );
+		$cache_key = "get_page_by_path:$hash:$last_changed";
+		wp_cache_delete( $cache_key, 'posts' );
 	}
 }

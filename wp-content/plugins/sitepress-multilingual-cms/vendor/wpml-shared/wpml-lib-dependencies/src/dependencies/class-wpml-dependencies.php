@@ -4,7 +4,7 @@ Module Name: WPML Dependency Check Module
 Description: This is not a plugin! This module must be included in other plugins (WPML and add-ons) to handle compatibility checks
 Author: OnTheGoSystems
 Author URI: http://www.onthegosystems.com/
-Version: 2.0
+Version: 2.1
 */
 
 /** @noinspection PhpUndefinedClassInspection */
@@ -51,6 +51,12 @@ class WPML_Dependencies {
 		add_action( 'admin_notices', array( $this, 'admin_notices_action' ) );
 		add_action( 'activated_plugin', array( $this, 'activated_plugin_action' ) );
 		add_action( 'deactivated_plugin', array( $this, 'deactivated_plugin_action' ) );
+		add_action( 'upgrader_process_complete',  array( $this, 'upgrader_process_complete_action' ), 10, 2 );
+		add_action( 'load-plugins.php', array( $this, 'run_validation_on_plugins_page' ) );
+	}
+
+	public function run_validation_on_plugins_page() {
+		$this->reset_validation();
 	}
 
 	public function activated_plugin_action() {
@@ -59,6 +65,12 @@ class WPML_Dependencies {
 
 	public function deactivated_plugin_action() {
 		$this->reset_validation();
+	}
+
+	public function upgrader_process_complete_action( $upgrader_object, $options ) {
+		if ( 'update' === $options['action'] && 'plugin' === $options['type'] ) {
+			$this->reset_validation();
+		}
 	}
 
 	private function reset_validation() {

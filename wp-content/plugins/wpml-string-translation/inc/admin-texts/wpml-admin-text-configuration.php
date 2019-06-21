@@ -135,7 +135,7 @@ class WPML_Admin_Text_Configuration extends WPML_Admin_Text_Functionality {
 			$comparator                = $like ? ' LIKE ' : '=';
 			$top_level_filters[ $key ] = $wpdb->prepare( ' option_name ' . $comparator . ' %s ',
 			                                             $like
-				                                             ? $wpdb->esc_like( str_replace( '*', '%', $filter ) )
+				                                             ? str_replace( '*', '%', $wpdb->esc_like( $filter ) )
 				                                             : $filter );
 		}
 

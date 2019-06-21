@@ -163,8 +163,8 @@ msgid "Add Row"
 msgstr "行追加"
 
 #: helpers/pmai_render_field.php:832 helpers/pmai_render_field.php:1253
-msgid "This field type is not supported. E-mail support@soflyy.com with the details of the custom ACF field you are trying to import to, as well as a link to download the plugin to install to add this field type to ACF, and we will investigate the possiblity ot including support for it in the ACF add-on."
-msgstr "このフィールドの種類はサポートされていません。ACF のユーザー設定フィールドの詳細を電子メール support@soflyy.com を同様に、ACF にこの種類のフィールドを追加するをインストールするプラグインをダウンロードするリンク、インポートしようとしているし、我々 は可能性を調査 ot ACF アドオンでそれのためのサポートを含みます。"
+msgid "This field type is not supported. E-mail support@wpallimport.com with the details of the custom ACF field you are trying to import to, as well as a link to download the plugin to install to add this field type to ACF, and we will investigate the possiblity ot including support for it in the ACF add-on."
+msgstr "このフィールドの種類はサポートされていません。ACF のユーザー設定フィールドの詳細を電子メール support@wpallimport.com を同様に、ACF にこの種類のフィールドを追加するをインストールするプラグインをダウンロードするリンク、インポートしようとしているし、我々 は可能性を調査 ot ACF アドオンでそれのためのサポートを含みます。"
 
 #: helpers/pmai_render_field.php:1239
 msgid "Delete Layout"

@@ -3,7 +3,7 @@
  * Plugin Name:     Rollbar
  * Plugin URI:      https://wordpress.org/plugins/rollbar
  * Description:     Rollbar full-stack error tracking for WordPress
- * Version:         2.4.7
+ * Version:         2.6.0
  * Author:          Rollbar
  * Author URI:      https://rollbar.com
  * Text Domain:     rollbar
@@ -28,4 +28,4 @@ if( !class_exists('Rollbar\Rollbar') || !class_exists('Rollbar\Wordpress\Plugin'
     require_once \plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 }
 
-\add_action( 'plugins_loaded', '\Rollbar\Wordpress\Plugin::load' );
+\Rollbar\Wordpress\Plugin::load();

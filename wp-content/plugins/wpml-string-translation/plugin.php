@@ -2,10 +2,10 @@
 /*
 Plugin Name: WPML String Translation
 Plugin URI: https://wpml.org/
-Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/string-translation-2-7-3/">WPML String Translation 2.7.3 release notes</a>
+Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/string-translation-2-10-4/">WPML String Translation 2.10.4 release notes</a>
 Author: OnTheGoSystems
 Author URI: http://www.onthegosystems.com/
-Version: 2.7.3
+Version: 2.10.4
 Plugin Slug: wpml-string-translation
 */
 
@@ -13,7 +13,7 @@ if ( defined( 'WPML_ST_VERSION' ) || get_option( '_wpml_inactive' ) ) {
 	return;
 }
 
-define( 'WPML_ST_VERSION', '2.7.3' );
+define( 'WPML_ST_VERSION', '2.10.4' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -35,19 +35,6 @@ function wpml_st_verify_wpml() {
 	$verifier->verify_wpml( $wpml_version );
 }
 
-/** @var array $bundle */
-$bundle = json_decode( file_get_contents( dirname( __FILE__ ) . '/wpml-dependencies.json' ), true );
-if ( defined( 'ICL_SITEPRESS_VERSION' ) && is_array( $bundle ) ) {
-	$sp_version_stripped = ICL_SITEPRESS_VERSION;
-	$dev_or_beta_pos = strpos( ICL_SITEPRESS_VERSION, '-' );
-	if ( $dev_or_beta_pos > 0 ) {
-		$sp_version_stripped = substr( ICL_SITEPRESS_VERSION, 0, $dev_or_beta_pos );
-	}
-	if ( version_compare( $sp_version_stripped, $bundle[ 'sitepress-multilingual-cms' ], '<' ) ) {
-		return;
-	}
-}
-
 function wpml_st_core_loaded() {
 	global $WPML_String_Translation, $st_gettext_hooks, $sitepress, $wpdb, $wpml_admin_notices;
 	new WPML_ST_TM_Jobs( $wpdb );
@@ -56,12 +43,11 @@ function wpml_st_core_loaded() {
 	$theme_localization_type = new WPML_Theme_Localization_Type( $sitepress );
 	$is_admin = $sitepress->get_wp_api()->is_admin();
 
-	$fastest_settings = new WPML_ST_Fastest_Settings_Notice( $sitepress, $wpml_admin_notices ? $wpml_admin_notices : wpml_get_admin_notices() );
-	$fastest_settings->remove();
-
 	if ( isset( $wpml_admin_notices ) && $theme_localization_type->is_st_type() && $is_admin && $setup_complete ) {
 		global $wpml_st_admin_notices;
 		$themes_and_plugins_settings = new WPML_ST_Themes_And_Plugins_Settings();
+		$fastest_settings = new WPML_ST_Fastest_Settings_Notice( $sitepress, $wpml_admin_notices ? $wpml_admin_notices : wpml_get_admin_notices() );
+		$fastest_settings->remove();
 		$wpml_st_admin_notices = new WPML_ST_Themes_And_Plugins_Updates( $wpml_admin_notices, $themes_and_plugins_settings, $fastest_settings );
 		$wpml_st_admin_notices->init_hooks();
 	}
@@ -88,6 +74,13 @@ function wpml_st_core_loaded() {
 		'WPML_ST_Theme_Plugin_Hooks_Factory',
 		'WPML_ST_Track_Strings_Notice_Hooks_Factory',
 		'WPML_ST_Taxonomy_Labels_Translation_Factory',
+		'WPML_ST_String_Translation_AJAX_Hooks_Factory',
+		'WPML_ST_Remote_String_Translation_Factory',
+		'WPML_ST_Privacy_Content_Factory',
+		'WPML_ST_Multisite_Filters_Cleaner_Factory',
+		'WPML_ST_String_Tracking_AJAX_Factory',
+		'WPML_ST_Translation_Memory_Factory',
+		'WPML_ST_Script_Translations_Hooks_Factory',
 	);
 
 	$action_filter_loader = new WPML_Action_Filter_Loader();
@@ -100,7 +93,12 @@ function wpml_st_core_loaded() {
 }
 
 function load_wpml_st_basics() {
+	if ( ! WPML_Core_Version_Check::is_ok( dirname( __FILE__ ) . '/wpml-dependencies.json' ) ) {
+		return;
+	}
+
 	global $WPML_String_Translation, $wpdb, $wpml_st_string_factory, $sitepress;
+
 	$wpml_st_string_factory = new WPML_ST_String_Factory( $wpdb );
 
 	require WPML_ST_PATH . '/inc/functions-load.php';
@@ -121,7 +119,7 @@ function load_wpml_st_basics() {
 	$st_theme_localization_type->add_hooks();
 
 	if ( $sitepress->is_setup_complete() ) {
-		$mo_scan_factory = new WPML_ST_MO_Scan_Factory();
+		$mo_scan_factory = new WPML_ST_Translations_File_Scan_Factory();
 
 		if ( $mo_scan_factory->check_core_dependencies() ) {
 			$mo_scan_hooks = $mo_scan_factory->create_hooks();

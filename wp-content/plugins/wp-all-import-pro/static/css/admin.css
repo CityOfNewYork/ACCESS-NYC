@@ -1023,6 +1023,10 @@
 	font-size: 1.3em !important;
 	text-decoration: underline;
 }
+.wpallimport-plugin .wpallimport-upgrade-notice .wpallimport-upgrade-links-container .upgrade_link,
+.wpallimport-plugin .wpallimport-free-edition-notice .wpallimport-upgrade-links-container .upgrade_link {
+    font-size: 1em !important;
+}
 /*--------------------------------------------------------------------------
 *
 *	Step 1 - choose file
@@ -1432,6 +1436,7 @@
 	}
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon:before {
+    font-family: "dashicons";
 	font-size: 24px;
 	float: left;
 	margin: 2px 5px 2px 2px;
@@ -1458,7 +1463,9 @@
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon-shop_coupon:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon-shop_coupon:before,
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon-shop_order:before,
-.wpallimport-plugin #custom_type_selector .dd-selected .dashicon-shop_order:before{
+.wpallimport-plugin #custom_type_selector .dd-selected .dashicon-shop_order:before,
+.wpallimport-plugin #custom_type_selector .dd-option .dashicon-shop_customer:before,
+.wpallimport-plugin #custom_type_selector .dd-selected .dashicon-shop_customer:before{
 	font-family: "WooCommerce";
 	content: "\e03d";
 	color: #555;
@@ -2715,6 +2722,9 @@
 		display: inline-block;
 		height: 25px;
 	}
+		.wpallimport-plugin #import_finished a.wpallimport-help {
+   			width: 25px;
+		}
 .wpallimport-plugin #process{ display:none; }
 .wpallimport-plugin .ui-widget-header{
 	-moz-border-radius: 4px;

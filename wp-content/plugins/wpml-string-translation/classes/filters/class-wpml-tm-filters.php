@@ -24,13 +24,13 @@ class WPML_TM_Filters {
 	/**
 	 * Filters the active languages to include all languages in which strings exist.
 	 *
-	 * @param array[] $source_langs
+	 * @param WPML_Language_Collection $source_langs
 	 *
 	 * @return array[]
 	 */
-	public function filter_tm_source_langs( $source_langs ) {
-		foreach ( $this->get_string_lang_codes() as $lang_code => $language ) {
-			$source_langs[ $lang_code ] = $language;
+	public function filter_tm_source_langs( WPML_Language_Collection $source_langs ) {
+		foreach ( $this->get_string_lang_codes() as $lang_code ) {
+			$source_langs->add( $lang_code );
 		}
 
 		return $source_langs;
@@ -38,16 +38,7 @@ class WPML_TM_Filters {
 
 	private function get_string_lang_codes() {
 		if ( null === $this->string_lang_codes ) {
-			$this->string_lang_codes = array();
-
-			$string_lang_codes = $this->wpdb->get_col( "SELECT DISTINCT(s.language) FROM {$this->wpdb->prefix}icl_strings s" );
-
-			foreach ( $string_lang_codes as $lang_code ) {
-				$language = $this->sitepress->get_language_details( $lang_code );
-				if ( (bool) $language === true ) {
-					$this->string_lang_codes[ $lang_code ] = $language;
-				}
-			}
+			$this->string_lang_codes = $this->wpdb->get_col( "SELECT DISTINCT(s.language) FROM {$this->wpdb->prefix}icl_strings s" );
 		}
 
 		return $this->string_lang_codes;

@@ -605,7 +605,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		// Clean the fileName for security reasons
 		$fileName = preg_replace('/[^\w\._]+/', '_', $fileName);
 
-		if ( ! preg_match('%\W(xml|gzip|zip|csv|gz|json|txt|dat|psv|sql|xls|xlsx)$%i', trim(basename($fileName)))) {	
+		if ( ! preg_match('%\W(xml|gzip|zip|csv|tsv|gz|json|txt|dat|psv|sql|xls|xlsx)$%i', trim(basename($fileName)))) {
 			exit(json_encode(array("jsonrpc" => "2.0", "error" => array("code" => 100, "message" => __("Uploaded file must be XML, CSV, ZIP, GZIP, GZ, JSON, SQL, TXT, DAT or PSV", "wp_all_import_plugin")), "id" => "id")));
 		}
 
@@ -775,11 +775,23 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 						case 'import_users':
 
 							if ( ! class_exists('PMUI_Plugin') ) {
-								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Import Add-On.</p><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Import Add-On</a>.', 'wp_all_import_plugin');
+								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Add-On.</p><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Add-On</a>.', 'wp_all_import_plugin');
 							}
 
 							break;
 						
+
+						case 'shop_customer':
+
+							if ( ! class_exists('WooCommerce') ) {
+								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires WooCommerce.</p><a class="upgrade_link" href="https://wordpress.org/plugins/woocommerce/" target="_blank">Get WooCommerce</a>.', 'wp_all_import_plugin');							
+							}
+							elseif ( ! class_exists('PMUI_Plugin') ) {
+								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Add-On.</p><p class="wpallimport-upgrade-links-container"><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Add-On</a></p>', 'wp_all_import_plugin');
+							}
+		
+							break;
+
 						default:
 							# code...
 							break;
@@ -862,17 +874,18 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 						exit(json_encode(array("jsonrpc" => "2.0", "error" => array("code" => 102, "message" => $error_message), "is_valid" => false, "id" => "id")));
 					
 					}
-					else
-					{
-						$wp_uploads = wp_upload_dir();
-						$uploads    = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::FILES_DIRECTORY . DIRECTORY_SEPARATOR;
-
-						if ( ! file_exists($uploads . basename($filePath))) @copy($filePath, $uploads . basename($filePath));
+					else {
+					    $copyFileAllowed = apply_filters('wp_all_import_copy_uploaded_file_into_files_folder', true);
+					    if ($copyFileAllowed) {
+                            $wp_uploads = wp_upload_dir();
+                            $uploads = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::FILES_DIRECTORY . DIRECTORY_SEPARATOR;
+                            if ( ! file_exists($uploads . basename($filePath))) {
+                                @copy($filePath, $uploads . basename($filePath));
+                            }
+                        }
 					}
-				}				
-								
-			}		
-
+				}
+			}
 		}			
 
 		// Return JSON-RPC response

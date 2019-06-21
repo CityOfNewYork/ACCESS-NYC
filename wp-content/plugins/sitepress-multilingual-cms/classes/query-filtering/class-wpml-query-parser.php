@@ -77,11 +77,11 @@ class WPML_Query_Parser {
 		$glue   = false;
 		$values = array();
 
-		if( is_scalar( $q->query_vars[ $key ] ) ) {
+		if ( is_scalar( $q->query_vars[ $key ] ) ) {
 			$glue = strpos( $q->query_vars[ $key ], ',' ) !== false ? ',' : $glue;
 			$glue = strpos( $q->query_vars[ $key ], '+' ) !== false ? '+' : $glue;
 
-			if( $glue ) {
+			if ( $glue ) {
 				$values = explode( $glue, $q->query_vars[ $key ] );
 			} else {
 				$values = array( $q->query_vars[ $key ] );
@@ -89,7 +89,7 @@ class WPML_Query_Parser {
 
 			$values = array_map( 'trim', $values );
 			$values = $type === 'ids' ? array_map( 'intval', $values ) : $values;
-		} else if ( is_array( $q->query_vars[ $key ] ) ) {
+		} elseif ( is_array( $q->query_vars[ $key ] ) ) {
 			$values = $q->query_vars[ $key ];
 		}
 
@@ -141,7 +141,7 @@ class WPML_Query_Parser {
 	 * @return null|string
 	 */
 	private function translate_term_slug( $slug, $taxonomy, $lang ) {
-		$id = $this->wpdb->get_var(
+		$id = (int) $this->wpdb->get_var(
 			$this->wpdb->prepare(
 				"SELECT t.term_id FROM {$this->wpdb->terms} t
 								 JOIN {$this->wpdb->term_taxonomy} tt ON t.term_id = tt.term_id
@@ -265,6 +265,56 @@ class WPML_Query_Parser {
 
 	/**
 	 * @param WP_Query $q
+	 * @param string $current_lang
+	 *
+	 * @return mixed
+	 */
+	private function maybe_redirect_to_translated_taxonomy( $q, $current_lang ) {
+		if ( ! $q->is_main_query() ) {
+			return $q;
+		}
+
+		foreach ( $this->get_query_taxonomy_term_slugs( $q ) as $slug => $taxonomy ) {
+			$translated_slugs = $this->translate_term_values( array( $slug ), 'slugs', $taxonomy, $current_lang );
+
+			if ( $translated_slugs && $slug !== $translated_slugs[0] ) {
+				$translated_term = get_term_by(
+					'slug',
+					$translated_slugs[0],
+					$taxonomy
+				);
+
+				$new_url = get_term_link( $translated_term, $taxonomy );
+
+				/** @var WPML_WP_API */
+				global $wpml_wp_api;
+				$wpml_wp_api->wp_safe_redirect( $new_url );
+
+				return null;
+			}
+		}
+
+		return $q;
+	}
+
+	private function get_query_taxonomy_term_slugs( WP_Query $q ) {
+		$result = array();
+
+		if ( isset( $q->tax_query->queries ) && count( $q->tax_query->queries ) ) {
+			foreach ( $q->tax_query->queries as $taxonomy_data ) {
+				if ( isset( $taxonomy_data['terms'] ) && isset( $taxonomy_data['field'] ) && $taxonomy_data['field'] === 'slug' ) {
+					foreach ( $taxonomy_data['terms'] as $slug ) {
+						$result[ $slug ] = $taxonomy_data['taxonomy'];
+					}
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @param WP_Query $q
 	 *
 	 * @return WP_Query
 	 */
@@ -278,6 +328,7 @@ class WPML_Query_Parser {
 		$q = apply_filters( 'wpml_pre_parse_query', $q );
 
 		list( $q, $redir_pid ) = $this->maybe_adjust_name_var( $q );
+
 		/** @var WP_Query $q */
 		if ( $q->is_main_query() && (bool) $redir_pid === true ) {
 			if ( (bool) ( $redir_target = $this->is_redirected( $redir_pid, $q ) ) ) {
@@ -291,6 +342,10 @@ class WPML_Query_Parser {
 		}
 
 		$current_language = $this->sitepress->get_current_language();
+		$q = $this->maybe_redirect_to_translated_taxonomy( $q, $current_language );
+		if ( ! $q ) { // it means that `maybe_redirect_to_translated_taxonomy` has made redirection, it just facilitates the test
+			return $q;
+		}
 		if ( 'attachment' === $post_type || $current_language !== $this->sitepress->get_default_language() ) {
 			$q = $this->adjust_default_taxonomies_query_vars( $q, $current_language );
 
@@ -312,7 +367,7 @@ class WPML_Query_Parser {
 				if ( $this->sitepress->is_translated_post_type( $first_post_type ) && ! empty( $q->query_vars['name'] ) ) {
 					if ( is_post_type_hierarchical( $first_post_type ) ) {
 						$requested_page = get_page_by_path( $q->query_vars['name'], OBJECT, $first_post_type );
-						if ( $requested_page ) {
+						if ( $requested_page && 'attachment' !== $requested_page->post_type ) {
 							$q->query_vars['p'] = $this->post_translations->element_id_in( $requested_page->ID, $current_language, true );
 							unset( $q->query_vars['name'] );
 							// We need to set this to an empty string otherwise WP will derive the pagename from this.

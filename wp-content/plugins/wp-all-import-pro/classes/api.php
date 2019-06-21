@@ -360,7 +360,7 @@ class PMXI_API
 
 	}
 
-	public static function upload_image($pid, $img_url, $download_images, $logger, $create_image = false, $image_name = "", $file_type = 'images', $check_existing = true){
+	public static function upload_image($pid, $img_url, $download_images, $logger, $create_image = false, $image_name = "", $file_type = 'images', $check_existing = true, $articleData = false){
 
 		if (empty($img_url)) return false;
 		
@@ -378,7 +378,7 @@ class PMXI_API
 
 		$uploads = wp_upload_dir();
 
-		$uploads = apply_filters('wp_all_import_images_uploads_dir', $uploads, false, false, false);
+		$uploads = apply_filters('wp_all_import_images_uploads_dir', $uploads, $articleData, false, false);
 
 		$targetDir = $uploads['path'];
 		$targetUrl = $uploads['url'];
@@ -423,7 +423,7 @@ class PMXI_API
 		$image_filename = wp_unique_filename($targetDir, $image_name);
 		$image_filepath = $targetDir . '/' . $image_filename;
 
-		$url = str_replace(" ", "%20", trim(pmxi_convert_encoding($img_url)));
+		$url = str_replace(" ", "%20", trim($img_url));
 
 		$is_base64_images_allowed = apply_filters("wp_all_import_is_base64_images_allowed", true, $url, false);
 
@@ -434,12 +434,10 @@ class PMXI_API
 			// search existing attachment
 			$attch = wp_all_import_get_image_from_gallery($image_name, $targetDir, $file_type);
 
-			if (empty($attch))
-			{
+			if (empty($attch)) {
 				$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: Image %s not found in media gallery.', 'wp_all_import_plugin'), trim($image_name)));
 			}
-			else
-			{
+			else {
 				$logger and call_user_func($logger, sprintf(__('- Using existing image `%s`...', 'wp_all_import_plugin'), trim($image_name)));
 				return $attch->ID;
 			}
@@ -465,7 +463,7 @@ class PMXI_API
 		// do not download images
 		if ( "yes" != $download_images ){					
 
-			$image_filename = $image_name;
+			$image_filename = wp_unique_filename($targetDir, basename($image_name));
 			$image_filepath = $targetDir . '/' . basename($image_filename);
 																																																																
 			$wpai_uploads = $uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::FILES_DIRECTORY . DIRECTORY_SEPARATOR;
@@ -507,6 +505,11 @@ class PMXI_API
 			elseif ($file_type == 'files') {
 				$logger and call_user_func($logger, sprintf(__('- Downloading file from `%s`', 'wp_all_import_plugin'), $url));
 			}
+
+            if ( ! preg_match('%^(http|ftp)s?://%i', $url) ) {
+                $logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s cannot be saved locally as %s', 'wp_all_import_plugin'), $url, $image_filepath));
+                return false;
+            }
 
 			$request = get_file_curl($url, $image_filepath);
 

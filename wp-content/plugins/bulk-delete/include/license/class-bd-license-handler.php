@@ -170,8 +170,15 @@ class BD_License_Handler {
 	 * @since 5.5
 	 */
 	public function show_admin_notices() {
-		if ( '' != $this->notice_msg ) {
-			printf( '<div class="error"><p><strong>%s</strong></p></div>', $this->notice_msg );
+		/**
+		 * Check if user have admin rights.
+		 *
+		 * @since 6.0
+		 */
+		if ( current_user_can( 'manage_options' ) ) {
+			if ( '' != $this->notice_msg ) {
+				printf( '<div class="error"><p><strong>%s</strong></p></div>', $this->notice_msg );
+			}
 		}
 	}
 

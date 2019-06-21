@@ -330,6 +330,8 @@ class BD_License {
 	public static function validate_license( $addon_code, $addon_name ) {
 		$key = Bulk_Delete::LICENSE_CACHE_KEY_PREFIX . $addon_code;
 
+		$license_data = false;
+
 		$licenses = get_option( Bulk_Delete::SETTING_OPTION_NAME );
 		if ( is_array( $licenses ) && key_exists( $addon_code, $licenses ) ) {
 			$license_data = BD_EDD_API_Wrapper::check_license( $addon_name, $licenses[ $addon_code ] );
@@ -352,10 +354,3 @@ class BD_License {
 		}
 	}
 }
-
-// hooks
-add_action( 'bd_license_form'      , array( 'BD_License', 'display_activate_license_form' ), 100 );
-add_action( 'bd_deactivate_license', array( 'BD_License', 'deactivate_license' ) );
-add_action( 'bd_delete_license'    , array( 'BD_License', 'delete_license' ) );
-add_action( 'bd_validate_license'  , array( 'BD_License', 'validate_license' ), 10, 2 );
-?>

@@ -81,7 +81,7 @@
 									foreach ($custom_types as $key => $ct) {
 										if (in_array($key, $hiddenPosts)) unset($custom_types[$key]);
 									}
-									$custom_types = apply_filters( 'pmxi_custom_types', $custom_types );
+									$custom_types = apply_filters( 'pmxi_custom_types', $custom_types, 'custom_types' );
 
 									$sorted_cpt = array();
 									foreach ($custom_types as $key => $cpt){
@@ -93,6 +93,13 @@
 											$sorted_cpt['import_users'] = new stdClass();
 											$sorted_cpt['import_users']->labels = new stdClass();
 											$sorted_cpt['import_users']->labels->name = __('Users','wp_all_export_plugin');
+
+											if ( class_exists('WooCommerce') ) {
+												$sorted_cpt['shop_customer'] = new stdClass();
+												$sorted_cpt['shop_customer']->labels = new stdClass();
+												$sorted_cpt['shop_customer']->labels->name = __('WooCommerce Customers','wp_all_export_plugin');
+											}
+
 											break;
 										}
 									}
@@ -113,59 +120,95 @@
 									foreach ($hidden_post_types as $key => $ct) {
 										if (in_array($key, $hiddenPosts)) unset($hidden_post_types[$key]);
 									}
-									$hidden_post_types = apply_filters( 'pmxi_custom_types', $hidden_post_types );
+									$hidden_post_types = apply_filters( 'pmxi_custom_types', $hidden_post_types, 'hidden_post_types' );
 
 								?>	
 								<div class="wpallimport-change-custom-type">
-									<select name="custom_type_selector" id="custom_type_selector" class="wpallimport-post-types">									
-										<?php if ( ! empty($sorted_cpt)): $unknown_cpt = array(); ?>
-											<?php foreach ($sorted_cpt as $key => $ct) :?>
-												<?php 
-													$image_src = 'dashicon-cpt';
+								<select name="custom_type_selector" id="custom_type_selector" class="wpallimport-post-types">
 
-													$cpt = $key;
-													$cpt_label = $ct->labels->name;
 
-													if (  in_array($cpt, array('post', 'page', 'product', 'import_users', 'shop_order', 'shop_coupon', 'shop_customer', 'users', 'comments', 'taxonomies') ) )
-													{
-														$image_src = 'dashicon-' . $cpt;										
-													}
-													else
-													{
-														$unknown_cpt[$key] = $ct;
-														continue;
-													}														
-												?>
-											<option value="<?php echo $cpt; ?>" data-imagesrc="dashicon <?php echo $image_src; ?>" <?php if ( $cpt == $post['custom_type'] ) echo 'selected="selected"';?>><?php echo $cpt_label; ?></option>
-											<?php endforeach; ?>
-											<?php if ( ! empty($unknown_cpt)):  ?>
-												<?php foreach ($unknown_cpt as $key => $ct):?>
-													<?php
-													$image_src = 'dashicon-cpt';																								
-													$cpt_label = $ct->labels->name;												
-													?>
-													<option value="<?php echo $key;?>" data-imagesrc="dashicon <?php echo $image_src; ?>" <?php if ($key == $post['custom_type']) echo 'selected="selected"'; ?>><?php echo $cpt_label; ?></option>
-												<?php endforeach ?>
-											<?php endif;?>
-										<?php endif; ?>
-										<?php if ( ! empty($hidden_post_types)): ?>							
-											<?php foreach ($hidden_post_types as $key => $cpt) :?>	
-												<?php 
-													$image_src = 'dashicon-cpt';
-													if (  in_array($key, array('post', 'page', 'product') ) )
-														$image_src = 'dashicon-' . $key;
-												?>
-											<option value="<?php echo $key; ?>" data-imagesrc="dashicon <?php echo $image_src; ?>" <?php if ( $key == $post['custom_type'] ) echo 'selected="selected"';?>><?php echo $cpt->labels->name; ?></option>								
-											<?php endforeach; ?>
-										<?php endif; ?>			
-									</select>
+                                <?php
+                                // *****************************************************
+                                // **************** START CPT LOOP *********************
+                                // *****************************************************
+                                ?>
+
+                                    <?php
+                                    $known_imgs     = array( 'post', 'page', 'product', 'import_users', 'shop_order', 'shop_coupon', 'shop_customer', 'users', 'comments', 'taxonomies' );
+                                    $all_posts      = array_merge( $sorted_cpt, $hidden_post_types );
+                                    $all_posts      = apply_filters( 'pmxi_custom_types', $all_posts, 'all_types' );
+                                    $ordered_posts  = array( 0 => 'post', 1 => 'page', 2 => 'taxonomies', 3 => 'import_users', 4 => 'shop_order', 5 => 'shop_coupon', 6 => 'product', 7 => 'shop_customer' );
+
+                                    foreach ( $all_posts as $key => $post_obj ) {
+                                        if ( ! in_array( $key, $ordered_posts ) ) {
+                                            array_push( $ordered_posts, $key );
+                                        }
+                                    }                                    
+                                    
+                                    $order_arr          = apply_filters( 'pmxi_post_list_order', $ordered_posts );                                    
+                                    $image_data         = apply_filters( 'wp_all_import_post_type_image', array() );
+
+                                    foreach ( $order_arr as $key => $post_name ) {
+                                        if ( array_key_exists( $post_name, $all_posts ) ) {
+                                            $post_obj = $all_posts[ $post_name ];
+                                            
+                                            if ( in_array( $post_name, $known_imgs ) ) {
+                                                $image_src = 'dashicon-' . $post_name;
+                                            } else {
+                                                $image_src = 'dashicon-cpt';
+                                            }
+                                            if ( ! empty( $image_data ) && array_key_exists( $post_name, $image_data ) ) {
+                                                $custom_img_defined = true;
+                                            } else {
+                                                $custom_img_defined = false;
+                                            }
+                                            
+                                            $original_image_src = $image_src;                                                                                                 
+                                            $cpt = $post_name;
+                                            $cpt_label = $post_obj->labels->name;
+                                            
+                                            // Allows the MyListing add-on to select the listing type that was imported.
+                                            $custom_selected_post = apply_filters( 'wpai_custom_selected_post', false, $post, $cpt, 'settings' );
+
+                                            $img_to_echo = 'dashicon ';
+
+                                            if ( $custom_img_defined === true ) { 
+                                                $img_to_echo .= $image_data[ $cpt ]['image']; 
+                                            } else {
+                                                $img_to_echo .= $image_src;
+                                            }
+                                            
+                                            ?>
+                                            <option value="<?php echo $cpt; ?>" data-imagesrc="<?php echo $img_to_echo; ?>" <?php if ( $custom_selected_post === true ):?>selected="selected"<?php else: if ( $cpt == $post['custom_type'] ):?>selected="selected"<?php endif; endif; ?>><?php echo $cpt_label; ?></option>
+                                            <?php
+                                        }
+
+                                    }                                    
+                                    ?>
+                                    </select>
+
+                                    <?php
+                                    // *****************************************************
+                                    // **************** FINISH CPT LOOP ********************
+                                    // *****************************************************
+                                    ?>
 
 									<?php if ( ! class_exists('PMUI_Plugin') ): ?>
 										<div class="wpallimport-upgrade-notice" rel="import_users">
-											<p><?php _e('The User Import Add-On is Required to Import Users', 'wp_all_import_plugin'); ?></p>
-											<a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the User Import Add-On', 'wp_all_import_plugin');?></a>
+											<p><?php _e('The User Add-On is Required to Import Users', 'wp_all_import_plugin'); ?></p>
+											<a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the User Add-On', 'wp_all_import_plugin');?></a>
 										</div>
 									<?php endif; ?>
+
+
+									<?php if ( class_exists('WooCommerce') && ! class_exists('PMUI_Plugin') ): ?>
+										<div class="wpallimport-upgrade-notice" rel="shop_customer">
+											<p><?php _e('The User Add-On is Required to Import Customers', 'wp_all_import_plugin'); ?></p>
+											<a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the User Add-On', 'wp_all_import_plugin');?></a>
+										</div>
+									<?php endif; ?>
+
+
 									<?php if ( class_exists('WooCommerce') && ! class_exists('PMWI_Plugin') ): ?>
 										<div class="wpallimport-upgrade-notice" rel="product">
 											<p><?php _e('The WooCommerce Add-On is Required to Import Products', 'wp_all_import_plugin'); ?></p>

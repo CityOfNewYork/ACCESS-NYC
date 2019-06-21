@@ -259,11 +259,22 @@ class DataBuilder implements DataBuilderInterface
         if (!isset($fromConfig)) {
             $fromConfig = isset($config['branch']) ? $config['branch'] : null;
         }
-        $allowExec = isset($config['allow_exec']) ? $config['allow_exec'] : null;
-        if (!isset($allowExec)) {
-            $allowExec = true;
+            
+        $this->serverBranch = self::$defaults->branch($fromConfig);
+        
+        if ($this->serverBranch === null) {
+            $autodetectBranch = isset($config['autodetect_branch']) ?
+                $config['autodetect_branch'] :
+                self::$defaults->autodetectBranch();
+            
+            if ($autodetectBranch) {
+                $allowExec = isset($config['allow_exec']) ?
+                    $config['allow_exec'] :
+                    self::$defaults->allowExec();
+                    
+                $this->serverBranch = $this->detectGitBranch($allowExec);
+            }
         }
-        $this->serverBranch = self::$defaults->gitBranch($fromConfig, $allowExec);
     }
 
     protected function setServerCodeVersion($config)
@@ -390,9 +401,9 @@ class DataBuilder implements DataBuilderInterface
         } elseif ($toLog instanceof $baseException) {
             $content = $this->getExceptionTrace($toLog);
         } else {
-            $content = $this->getMessage($toLog, $context);
+            $content = $this->getMessage($toLog);
         }
-        return new Body($content);
+        return new Body($content, $context);
     }
 
     public function getErrorTrace(ErrorWrapper $error)
@@ -520,11 +531,10 @@ class DataBuilder implements DataBuilderInterface
         }
     }
 
-    protected function getMessage($toLog, $context)
+    protected function getMessage($toLog)
     {
         return new Message(
             (string)$toLog,
-            $context,
             $this->sendMessageTrace ?
             debug_backtrace($this->localVarsDump ? 0 : DEBUG_BACKTRACE_IGNORE_ARGS) :
             null
@@ -968,7 +978,7 @@ class DataBuilder implements DataBuilderInterface
         
         unset($context['custom_data_method_context']);
 
-        return array_replace_recursive(array(), $context, $custom);
+        return $custom;
     }
     
     public function addCustom($key, $data)
@@ -1131,5 +1141,35 @@ class DataBuilder implements DataBuilderInterface
         }
         
         return $backTrace;
+    }
+    
+    public function detectGitBranch($allowExec = true)
+    {
+        if ($allowExec) {
+            static $cachedValue;
+            static $hasExecuted = false;
+            if (!$hasExecuted) {
+                $cachedValue = self::getGitBranch();
+                $hasExecuted = true;
+            }
+            return $cachedValue;
+        }
+        return null;
+    }
+    
+    private static function getGitBranch()
+    {
+        try {
+            if (function_exists('shell_exec')) {
+                $stdRedirCmd = Utilities::isWindows() ? " > NUL" : " 2> /dev/null";
+                $output = rtrim(shell_exec('git rev-parse --abbrev-ref HEAD' . $stdRedirCmd));
+                if ($output) {
+                    return $output;
+                }
+            }
+            return null;
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }

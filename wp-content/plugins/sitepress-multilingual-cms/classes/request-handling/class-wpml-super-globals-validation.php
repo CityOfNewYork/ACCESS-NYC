@@ -44,7 +44,11 @@ class WPML_Super_Globals_Validation {
 		$value = null;
 
 		if ( array_key_exists( $key, $var ) ) {
-			$value = filter_var( $var[ $key ], $filter, $options );
+			if ( is_array( $var[ $key ] ) ) {
+				$value = filter_var_array( $var[ $key ], $filter );
+			} else {
+				$value = filter_var( $var[ $key ], $filter, $options );
+			}
 		}
 
 		return $value;

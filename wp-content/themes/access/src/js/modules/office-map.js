@@ -131,7 +131,7 @@ class OfficeMap {
     this._Autocomplete.addListener('place_changed', () => {
       const place = this._Autocomplete.getPlace();
 
-      if (place) {
+      if (place && place.geometry) {
         this._mapPosition = place.geometry.location;
         this._map.panTo(this._mapPosition);
         this.sortByDistance()
@@ -209,7 +209,7 @@ class OfficeMap {
    */
   fetchLocations() {
     return $.getJSON($(this._el).data('source')).then(data => {
-      _.each(data.locations, item => {
+      _.each(data, item => {
         const location = new OfficeLocation(item);
         google.maps.event.addListener(location.marker, 'click', () => {
           this.focusListOnMarker(location.marker);

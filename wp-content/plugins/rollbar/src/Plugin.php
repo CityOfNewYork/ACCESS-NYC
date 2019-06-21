@@ -9,10 +9,16 @@ if( !defined( 'ABSPATH' ) ) exit;
 
 class Plugin {
     
-    const VERSION = "2.4.7";
+    const VERSION = "2.6.0";
     
     private $config;
+    
     private static $instance;
+    
+    private static $pluginOptions = array(
+        'enable_must_use_plugin'
+    );
+    
     private $settings = null;
     
     private function __construct() {
@@ -25,6 +31,7 @@ class Plugin {
             self::$instance->loadTextdomain();
             self::$instance->hooks();
             self::$instance->initSettings();
+            self::$instance->initPhpLogging();
         }
 
         return self::$instance;
@@ -53,7 +60,11 @@ class Plugin {
      */
     private function fetchSettings() {
         
-        $options = get_option( 'rollbar_wp' ) ?: array();
+        $options = $this->settings ?: array();
+        
+        if ($saved_options = get_option( 'rollbar_wp' )) {
+            $options = array_merge($options, $saved_options);
+        }
         
         if (!isset($options['environment']) || empty($options['environment'])) {
             
@@ -61,6 +72,27 @@ class Plugin {
                 $options['environment'] = $wpEnv;
             }
             
+        }
+
+        if (!isset($options['proxy']) || empty($options['proxy'])) {
+
+            if (defined('WP_PROXY_HOST') && defined('WP_PROXY_PORT')) {
+              $options['proxy'] = WP_PROXY_HOST.":". WP_PROXY_PORT;
+            }
+
+        }
+        
+        if (!isset($options['server_side_access_token']) || empty($options['server_side_access_token'])) {
+            
+            if (defined('ROLLBAR_ACCESS_TOKEN')) {
+                
+                $options['server_side_access_token'] = ROLLBAR_ACCESS_TOKEN;
+                
+            } else if ($token = getenv('ROLLBAR_ACCESS_TOKEN')) {
+                
+                $options['server_side_access_token'] = $token;
+                
+            }
         }
         
         $settings = array(
@@ -82,7 +114,13 @@ class Plugin {
                 Settings::DEFAULT_LOGGING_LEVEL
         );
         
-        foreach (\Rollbar\Config::listOptions() as $option) {
+        foreach (self::listOptions() as $option) {
+            
+            // 'access_token' and 'enabled' are different in Wordpress plugin
+            // look for 'server_side_access_token' and 'php_logging_enabled' above
+            if (in_array($option, array('access_token', 'enabled'))) {
+                continue;
+            }
             
             if (!isset($options[$option])) {
                 $value = $this->getDefaultOption($option);
@@ -113,7 +151,6 @@ class Plugin {
     }
 
     private function hooks() {
-        \add_action('init', array(&$this, 'initPhpLogging'));
         \add_action('wp_head', array(&$this, 'initJsLogging'));
         \add_action('admin_head', array(&$this, 'initJsLogging'));
         $this->registerTestEndpoint();
@@ -147,9 +184,11 @@ class Plugin {
         
         $plugin = self::instance();
         
-        foreach(\Rollbar\Config::listOptions() as $option) {
+        foreach(self::listOptions() as $option) {
             $plugin->settings[$option] = $request->get_param($option);
         }
+        
+        $plugin->settings['server_side_access_token'] = $request->get_param('server_side_access_token');
         
         $response = null;
         
@@ -357,7 +396,7 @@ class Plugin {
     {
         $settings = array();
         
-        foreach (\Rollbar\Config::listOptions() as $option) {
+        foreach (self::listOptions() as $option) {
             $settings[$option] = $this->getDefaultOption($option);
         }
         
@@ -374,6 +413,9 @@ class Plugin {
             case "branch":
                 $method = "gitBranch";
                 break;
+            case "captureIp":
+                $method = "captureIP";
+                break;
         }
         
         $rollbarDefaults = \Rollbar\Defaults::get();
@@ -382,17 +424,56 @@ class Plugin {
         $value = null;
         
         if (method_exists($wordpressDefaults, $method) && $value === null) {
-            $value = $wordpressDefaults->$method();
+            try {
+                $value = $wordpressDefaults->$method();
+            } catch (\Throwable $e) {
+                $value = null;
+            } catch (\Exception $e) {
+                $value = null;
+            }
         }
         
-        if ($value === null) {
+        if (method_exists($rollbarDefaults, $method) && $value === null) {
             try {
                 $value = $rollbarDefaults->$method();
+            } catch (\Throwable $e) {
+                $value = null;
             } catch (\Exception $e) {
                 $value = null;
             }
         }
         
         return $value;
+    }
+    
+    public static function listOptions()
+    {
+        return array_merge(
+            \Rollbar\Config::listOptions(),
+            self::$pluginOptions
+        );
+    }
+    
+    public function enableMustUsePlugin()
+    {
+        $muPluginsDir = plugin_dir_path(__DIR__) . '../../mu-plugins/';
+        
+        $muPluginFilepath = plugin_dir_path(__DIR__) . 'mu-plugin/rollbar-mu-plugin.php';
+        
+        if (!file_exists($muPluginsDir) && !mkdir($muPluginsDir, 0700)) {
+            throw new \Exception("Can't create the mu-plugins directory: $muPluginsDir");
+        }
+        
+        if (!copy($muPluginFilepath, $muPluginsDir . 'rollbar-mu-plugin.php')) {
+            throw new \Exception("Can't copy mu-plugin from $muPluginFilepath to $muPluginsDir");
+        }
+    }
+    
+    public function disableMustUsePlugin()
+    {
+        $file = plugin_dir_path(__DIR__) . '../../mu-plugins/rollbar-mu-plugin.php';
+        if (file_exists($file) && !unlink($file)) {
+            throw new \Exception("Can't delete the mu-plugin");
+        }
     }
 }

@@ -299,9 +299,10 @@ if ( isset( $action ) && wp_verify_nonce( $nonce, $action ) ) {
 		case 'icl_fix_terms_count':
 			global $sitepress;
 
-			remove_filter('get_terms_args', array($sitepress, 'get_terms_args_filter'));
-			$has_get_term_filter = remove_filter('get_term', array($sitepress,'get_term_adjust_id'), 1);
-			remove_filter('terms_clauses', array($sitepress,'terms_clauses'));
+			$has_get_terms_args_filter = remove_filter( 'get_terms_args', array( $sitepress, 'get_terms_args_filter' ) );
+			$has_get_term_filter       = remove_filter( 'get_term', array( $sitepress, 'get_term_adjust_id' ), 1 );
+			$has_terms_clauses_filter  = remove_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ) );
+
 			foreach ( get_taxonomies( array(), 'names' ) as $taxonomy ) {
 
 				$terms_objects = get_terms( $taxonomy, 'hide_empty=0'  );
@@ -311,11 +312,17 @@ if ( isset( $action ) && wp_verify_nonce( $nonce, $action ) ) {
 				}
 
 			}
-			add_filter('terms_clauses', array($sitepress,'terms_clauses'));
+
+			if ( $has_terms_clauses_filter) {
+				add_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ), 10, 3 );
+			}
 			if ( $has_get_term_filter ) {
 				add_filter( 'get_term', array( $sitepress, 'get_term_adjust_id' ), 1, 1 );
 			}
-			add_filter('get_terms_args', array($sitepress, 'get_terms_args_filter'), 10, 2);
+			if ( $has_get_terms_args_filter ) {
+				add_filter( 'get_terms_args', array( $sitepress, 'get_terms_args_filter' ), 10, 2 );
+			}
+
 			exit;
 		case 'icl_remove_st_db_cache_logs' :
 			delete_option( 'wpml-st-persist-errors' );
@@ -655,6 +662,8 @@ echo '</textarea>';
 		<small style="margin-left:10px;"><?php _e( 'Fixes the collation of the element_type column in icl_translations in case this setting changed for your posts.post_type column.', 'sitepress' ) ?></small>
 	</p>
 
+    <?php do_action( 'wpml_troubleshooting_after_fix_element_type_collation' ); ?>
+
 	<?php if(class_exists('TranslationManagement')){ ?>
 	<p>
 		<input id="assign_translation_status_to_duplicates" type="button" class="button-secondary" value="<?php _e( 'Assign translation status to duplicated content', 'sitepress' ) ?>"/><span id="assign_translation_status_to_duplicates_resp"></span><br/>
@@ -828,6 +837,9 @@ echo WPML_Troubleshooting_Terms_Menu::display_terms_with_suffix();
 			echo '</p>';
 			echo '<p class="error" style="padding:6px;">';
 			_e(	"Please note that all translations you have sent to remote translation services will be lost if you reset WPML's data. They cannot be recovered later.", 'sitepress' );
+			echo '</p>';
+			echo '<p class="error" style="padding:6px;">';
+			_e( "If you are using the Advanced Translation Editor, you will lose the translations that are in progress, as well as the existing translation memory and glossary. You will also lose access to purchases, invoices, and history related to your work with the Advanced Translation Editor.", 'sitepress' );
 			echo '</p>';
 			echo '<label><input type="checkbox" name="icl-reset-all" ';
 			if ( !function_exists( 'is_super_admin' ) || is_super_admin() ) {

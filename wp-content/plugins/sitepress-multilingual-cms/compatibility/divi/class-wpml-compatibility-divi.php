@@ -1,6 +1,10 @@
 <?php
 
 class WPML_Compatibility_Divi {
+
+	const REGEX_REMOVE_OPENING_PARAGRAPH = '/(<p>[\n\r]*)([\n\r]{1}\[\/et_)/m';
+	const REGEX_REMOVE_CLOSING_PARAGRAPH = '/(\[et_.*\][\n\r]{1})([\n\r]*<\/p>)/m';
+
 	/** @var SitePress */
 	private $sitepress;
 
@@ -16,7 +20,10 @@ class WPML_Compatibility_Divi {
 
 		if ( $this->sitepress->is_setup_complete() ) {
 			add_action( 'admin_init', array( $this, 'display_warning_notice' ), 10, 0 );
+			add_filter( 'wpml_pb_should_handle_content', array( $this, 'should_handle_shortcode_content' ), 10, 2 );
 		}
+
+		add_filter( 'wpml_pb_shortcode_content_for_translation', array( $this, 'cleanup_global_layout_content' ), 10, 2 );
 	}
 
 	/**
@@ -86,5 +93,45 @@ class WPML_Compatibility_Divi {
 				}
 			}
 		}
+	}
+
+	/**
+	 * The global layout is not properly extracted from the page
+	 * because it adds <p> tags either not opened or not closed.
+	 *
+	 * See the global content below as an example:
+	 *
+	 * [et_pb_section prev_background_color="#000000" next_background_color="#000000"][et_pb_text]
+	 *
+	 * </p>
+	 * <p>Global text 1 EN5</p>
+	 * <p>
+     *
+	 * [/et_pb_text][/et_pb_section]
+	 *
+	 * We also need to remove `prev_background` and `next_background` attributes which are added from the page.
+	 *
+	 * @param string $content
+	 * @param int    $post_id
+	 */
+	public function cleanup_global_layout_content( $content, $post_id ) {
+		if ( 'et_pb_layout' === get_post_type( $post_id ) ) {
+			$content = preg_replace( self::REGEX_REMOVE_OPENING_PARAGRAPH, "$2", $content );
+			$content = preg_replace( self::REGEX_REMOVE_CLOSING_PARAGRAPH, "$1", $content );
+			$content = preg_replace( '/( prev_background_color="#[0-9a-f]*")/', '', $content );
+			$content = preg_replace( '/( next_background_color="#[0-9a-f]*")/', '', $content );
+		}
+
+		return $content;
+	}
+
+	public function should_handle_shortcode_content( $handle_content, $shortcode ) {
+		if (
+			strpos( $shortcode['tag'], 'et_' ) === 0 &&
+			strpos( $shortcode['attributes'], 'global_module=' ) !== false
+		) {
+			$handle_content = false;
+		}
+		return $handle_content;
 	}
 }

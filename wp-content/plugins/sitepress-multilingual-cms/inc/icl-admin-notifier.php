@@ -329,7 +329,15 @@ if(!class_exists('ICL_AdminNotifier')) {
 					if ( ! $group || ( isset( $msg['group'] ) && $msg['group'] == $group ) ) {
 						if ( isset( $msg['admin_notice'] ) && ! $msg['admin_notice'] ) {
 							if ( ! isset( $msg['capability'] ) || ( $msg['capability'] == '' ) || current_user_can( $msg['capability'] ) ) {
-								self::display_message( $id, $msg['text'], $msg['type'], $msg['classes'], $msg['hide'] || $msg['hide_per_user'], $msg['dismiss'] || $msg['dismiss_per_user'], true );
+								if ( array_key_exists( 'limit_to_page', $msg ) ) {
+									foreach( $msg['limit_to_page'] as $page ) {
+										if ( array_key_exists( 'page', $_GET ) && $_GET['page'] === $page ) {
+											self::display_message( $id, $msg['text'], $msg['type'], $msg['classes'], $msg['hide'] || $msg['hide_per_user'], $msg['dismiss'] || $msg['dismiss_per_user'], true );
+										}
+									}
+								} else {
+									self::display_message( $id, $msg['text'], $msg['type'], $msg['classes'], $msg['hide'] || $msg['hide_per_user'], $msg['dismiss'] || $msg['dismiss_per_user'], true );
+								}
 							}
 						}
 					}

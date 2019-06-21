@@ -845,7 +845,7 @@ function wpml_wpcf_meta_box_order_defaults( $boxes ) {
  * @return string
  */
 function wpml_custom_post_translation_options() {
-	global $sitepress, $sitepress_settings;
+	global $sitepress;
 	$type_id = isset( $_GET['wpcf-post-type'] ) ? $_GET['wpcf-post-type'] : '';
 
 	$out = '';
@@ -853,22 +853,20 @@ function wpml_custom_post_translation_options() {
 	$type = get_post_type_object( $type_id );
 
 	$translated = $sitepress->is_translated_post_type( $type_id );
-	if ( defined( 'WPML_TM_VERSION' ) ) {
-		$link  = admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=mcsetup#icl_custom_posts_sync_options' );
-		$link2 = admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=mcsetup#icl_slug_translation' );
-	} else {
-		$link  = admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/translation-options.php#icl_custom_posts_sync_options' );
-		$link2 = admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/translation-options.php#icl_slug_translation' );
-	}
+
+	$link  = WPML_Admin_URL::multilingual_setup( 7 );
+	$link2 = WPML_Admin_URL::multilingual_setup( 4 );
 
 	if ( $translated ) {
 
 		$out .= sprintf( __( '%s is translated via WPML. %sClick here to change translation options.%s', 'sitepress' ), '<strong>' . $type->labels->singular_name . '</strong>', '<a href="' . $link . '">', '</a>' );
 
-		if ( $type->rewrite['enabled'] ) {
+		if ( $type->rewrite['enabled'] && class_exists( 'WPML_ST_Post_Slug_Translation_Settings' ) ) {
 
-			if ( $sitepress_settings['posts_slug_translation']['on'] ) {
-				if ( empty( $sitepress_settings['posts_slug_translation']['types'][ $type_id ] ) ) {
+			$settings = new WPML_ST_Post_Slug_Translation_Settings( $sitepress );
+
+			if ( $settings->is_enabled() ) {
+				if ( ! $settings->is_translated( $type_id ) ) {
 					$out .= '<ul><li>' . __( 'Slugs are currently not translated.', 'sitepress' ) . '<li></ul>';
 				} else {
 					$out .= '<ul><li>' . __( 'Slugs are currently translated. Click the link above to edit the translations.', 'sitepress' ) . '<li></ul>';
@@ -945,7 +943,7 @@ function wpml_footer_language_selector_action() {
  * @global SitePress $sitepress
  * @return string|null HTML input field or null
  * @since      3.2
- * @deprecated 3.2 use 'wpml_add_language_form_field' filter instead
+ * @deprecated 3.2 use 'wpml_add_language_form_field' action instead
  */
 function wpml_get_language_input_field() {
 	global $sitepress;
@@ -1333,20 +1331,20 @@ function wpml_elements_without_translations_filter($element_ids = array(), $args
 }
 
 /**
+ * @deprecated Use the filter hook `wpml_permalink` instead
+ *
  * Filters a WordPress permalink and converts it to a language specific permalink based on plugin settings
- * @since            3.2.2
- * @type string      $url The WordPress generated url to filter
- * @type null|string $language_code
- *                   (if null, it falls back to default language for root page, or current language in all other cases)
+ *
+ * @since 3.2.2
+ *
+ * @param string      $url           The WordPress generated url to filter
+ * @param null|string $language_code if null, it falls back to default language for root page,
+ *                                   or current language in all other cases.
+ *
  * @return string
- * @use \SitePress::api_hooks
  */
-function wpml_permalink_filter($permalink, $language_code = null) {
-	global $sitepress;
-	if(isset($sitepress)) {
-		$permalink = $sitepress->convert_url( $permalink, $language_code );
-	}
-	return $permalink;
+function wpml_permalink_filter( $url, $language_code = null ) {
+	return apply_filters( 'wpml_permalink', $url, $language_code );
 }
 
 /**

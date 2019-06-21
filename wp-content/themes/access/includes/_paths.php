@@ -15,7 +15,7 @@ function lib($name) {
 }
 
 function controller($name) {
-  return get_template_directory() . "/includes/$name.php";
+  return get_template_directory() . "/controllers/$name.php";
 }
 
 function config($name) {

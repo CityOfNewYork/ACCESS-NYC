@@ -50,15 +50,7 @@ function icl_reset_language_data(){
 function icl_sitepress_activate() {
 	global $wpdb;
 
-	$charset_collate = '';
-	if ( method_exists( $wpdb, 'has_cap' ) && $wpdb->has_cap( 'collation' ) ) {
-		if ( ! empty( $wpdb->charset ) ) {
-			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
-		}
-		if ( ! empty( $wpdb->collate ) ) {
-			$charset_collate .= " COLLATE $wpdb->collate";
-		}
-	}
+	$charset_collate = SitePress_Setup::get_charset_collate();
 
 	try {
 		SitePress_Setup::fill_languages();
@@ -71,7 +63,7 @@ function icl_sitepress_activate() {
 			$sql = "
              CREATE TABLE IF NOT EXISTS `{$table_name}` (
                 `translation_id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-                `element_type` VARCHAR( 36 ) NOT NULL DEFAULT 'post_post',
+                `element_type` VARCHAR( 60 ) NOT NULL DEFAULT 'post_post',
                 `element_id` BIGINT NULL DEFAULT NULL ,
                 `trid` BIGINT NOT NULL ,
                 `language_code` VARCHAR( 7 ) NOT NULL,
@@ -103,6 +95,10 @@ function icl_sitepress_activate() {
                  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                  `links_fixed` tinyint(4) NOT NULL DEFAULT 0,
                  `_prevstate` longtext,
+                 `uuid` varchar(36) NULL,
+                 `tp_id` INT NULL DEFAULT NULL,
+                 `tp_revision` INT NOT NULL DEFAULT 1,
+                 `ts_status` TEXT NULL DEFAULT NULL,
                  PRIMARY KEY (`rid`),
                  UNIQUE KEY `translation_id` (`translation_id`)
                 ) {$charset_collate}    
@@ -126,6 +122,7 @@ function icl_sitepress_activate() {
                 `title` VARCHAR(160) NULL,
                 `deadline_date` DATETIME NULL,
                 `completed_date` DATETIME NULL,
+                `editor` VARCHAR(16) NULL,
                 INDEX ( `rid` , `translator_id` )
                 ) {$charset_collate}    
             ";
@@ -144,6 +141,7 @@ function icl_sitepress_activate() {
                 `content_id` BIGINT UNSIGNED NOT NULL ,
                 `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
                 `field_type` VARCHAR( 160 ) NOT NULL ,
+                `field_wrap_tag` VARCHAR( 16 ) NOT NULL ,
                 `field_format` VARCHAR( 16 ) NOT NULL ,
                 `field_translate` TINYINT NOT NULL ,
                 `field_data` longtext NOT NULL ,
@@ -190,6 +188,7 @@ function icl_sitepress_activate() {
 		}
 
 		/* general string translation */
+		$translation_priority_default = __( 'Optional', 'sitepress' );
 		$table_name = $wpdb->prefix . 'icl_strings';
 		if ( 0 !== strcasecmp( $wpdb->get_var( "SHOW TABLES LIKE '{$table_name}'" ), $table_name ) ) {
 			$sql = "
@@ -201,15 +200,19 @@ function icl_sitepress_activate() {
                   `value` longtext NOT NULL,
                   `string_package_id` BIGINT unsigned NULL,
                   `location` BIGINT unsigned NULL,
+                  `wrap_tag` VARCHAR( 16 ) NOT NULL,
                   `type` VARCHAR(40) NOT NULL DEFAULT 'LINE',
                   `title` VARCHAR(160) NULL,
                   `status` TINYINT NOT NULL,
                   `gettext_context` TEXT NOT NULL,
                   `domain_name_context_md5` VARCHAR(32) NOT NULL,
+                  `translation_priority` varchar(160) NOT NULL,
+                  `word_count` int unsigned NULL,
                   PRIMARY KEY  (`id`),
                   UNIQUE KEY `uc_domain_name_context_md5` (`domain_name_context_md5`),
                   KEY `language_context` (`language`, `context`),
-                  KEY `icl_strings_name` (`name` ASC)
+                  KEY `icl_strings_name` (`name` ASC),
+                  KEY `icl_strings_translation_priority` ( `translation_priority` ASC )
                   ) {$charset_collate}
                   ";
 			if ( $wpdb->query( $sql ) === false ) {
@@ -302,6 +305,8 @@ function icl_sitepress_activate() {
             `origin` VARCHAR( 64 ) NOT NULL ,
             `target` VARCHAR( 64 ) NOT NULL ,
             `status` SMALLINT NOT NULL,
+            `tp_revision` INT NOT NULL DEFAULT 1,
+            `ts_status` TEXT NULL DEFAULT NULL,
             PRIMARY KEY ( `id` ) ,
             INDEX ( `rid` )
             ) {$charset_collate}
@@ -377,8 +382,11 @@ function icl_sitepress_activate() {
 	}
 
 	//Set new caps for all administrator role
-	icl_enable_capabilities();
+	wpml_enable_capabilities();
+
 	repair_el_type_collate();
+
+	WPML_Media_Duplication_Setup::initialize_settings();
 
 	do_action('wpml_activated');
 }
@@ -442,4 +450,29 @@ function icl_enable_capabilities() {
 
 	$iclsettings[ 'icl_capabilities_verified' ] = true;
 	update_option( 'icl_sitepress_settings', $iclsettings );
+}
+
+/**
+ * Fires at plugins_loaded action, to call icl_enable_capabilities().
+ * https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-5695
+ */
+function wpml_enable_capabilities() {
+	global $sitepress_settings;
+
+	/**
+	 * In case of multisite, in network activation,
+	 * including of pluggable.php before muplugins_loaded event trigger errors -
+	 * we postpone executing of icl_enable_capabilities to after plugins_loaded event.
+	 *
+	 * In other cases we include pluggable.php earlier than in wp-settings.php
+	 */
+	if ( ! did_action( 'muplugins_loaded' ) ) {
+		add_action( 'plugins_loaded', 'wpml_enable_capabilities' );
+	} else {
+		if ( ! function_exists( 'get_user_by' ) ) {
+			require( ABSPATH . WPINC . '/pluggable.php' );
+		}
+		icl_enable_capabilities();
+		$sitepress_settings = get_option( 'icl_sitepress_settings' );
+	}
 }

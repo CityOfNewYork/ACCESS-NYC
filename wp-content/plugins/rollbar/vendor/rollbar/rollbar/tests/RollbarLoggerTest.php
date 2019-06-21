@@ -13,6 +13,11 @@ class RollbarLoggerTest extends BaseRollbarTest
         $_SESSION = array();
     }
     
+    public function tearDown()
+    {
+        Rollbar::destroy();
+    }
+    
     public function testAddCustom()
     {
         $logger = new RollbarLogger(array(
@@ -142,8 +147,7 @@ class RollbarLoggerTest extends BaseRollbarTest
         $logger = new RollbarLogger(array(
             "access_token" => $this->getTestAccessToken(),
             "environment" => "testing-php",
-            "transformer" => '\Rollbar\TestHelpers\MalformedPayloadDataTransformer',
-            "verbosity" => \Psr\Log\LogLevel::DEBUG
+            "transformer" => '\Rollbar\TestHelpers\MalformedPayloadDataTransformer'
         ));
         
         $response = $logger->log(
@@ -153,102 +157,6 @@ class RollbarLoggerTest extends BaseRollbarTest
         );
         
         $this->assertEquals(400, $response->getStatus());
-    }
-    
-    /**
-     * @dataProvider debugLoggerProvider
-     */
-    public function testDebugLogger($expected, $verbosity)
-    {
-        $logger = new RollbarLogger(array(
-            "access_token" => $this->getTestAccessToken(),
-            "environment" => "testing-php",
-            "verbosity" => $verbosity
-        ));
-        
-        @\unlink($logger->getDebugLogFile());
-        
-        $response = $logger->log(Level::WARNING, "Testing PHP Notifier", array());
-        
-        $result = @\file_get_contents($logger->getDebugLogFile()) ?: "";
-        
-        if (isset($expected['regexp'])) {
-            foreach ($expected['regexp'] as $regexp) {
-                $this->assertRegExp($regexp, $result);
-            }
-        }
-        
-        if (isset($expected['notRegExp'])) {
-            foreach ($expected['notRegExp'] as $regexp) {
-                $this->assertNotRegExp($regexp, $result);
-            }
-        }
-        
-        @\unlink($logger->getDebugLogFile());
-    }
-    
-    public function debugLoggerProvider()
-    {
-        return array(
-            array(
-                array(
-                    'notRegExp' => array(
-                        
-                        '/'.
-                        '\[[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*\] '.
-                        'RollbarDebugLogger.DEBUG:'.
-                        '/',
-                        
-                        '/'.
-                        '\[[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*\] '.
-                        'RollbarDebugLogger.INFO:'.
-                        '/'
-                        
-                    )
-                ),
-                PsrLogLevel::ERROR // verbosity
-            ),
-            array(
-                array(
-                    'regexp' => array(
-                        '/'.
-                        '\[[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*\] '.
-                        'RollbarDebugLogger.INFO: '.
-                        '.*'.
-                        '\[\] \[\]'.
-                        '/'
-                    ),
-                    'notRegExp' => array(
-                        '/'.
-                        '\[[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*\] '.
-                        'RollbarDebugLogger.DEBUG:'.
-                        '/'
-                    )
-                ),
-                PsrLogLevel::INFO // verbosity
-            ),
-            array(
-                array(
-                    'regexp' => array(
-                        
-                        '/'.
-                        '\[[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*\] '.
-                        'RollbarDebugLogger.INFO: '.
-                        '.*'.
-                        '\[\] \[\]'.
-                        '/',
-                        
-                        '/'.
-                        '\[[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*\] '.
-                        'RollbarDebugLogger.DEBUG: '.
-                        '.*'.
-                        '\[\] \[\]'.
-                        '/'
-                    )
-                ),
-                PsrLogLevel::DEBUG // verbosity
-            )
-        );
     }
     
     public function testContext()
@@ -550,7 +458,7 @@ class RollbarLoggerTest extends BaseRollbarTest
 
         $this->scrubTestAssert(
             "Request body context",
-            $result['data']['body']['message']['context1']
+            $result['data']['body']['extra']['context1']
         );
     }
     
@@ -692,5 +600,44 @@ class RollbarLoggerTest extends BaseRollbarTest
 
         // Test that no \Psr\Log\InvalidArgumentException is thrown
         $l->debug("Testing PHP Notifier");
+    }
+    
+    /**
+     * @dataProvider maxItemsProvider
+     */
+    public function testMaxItems($maxItemsConfig)
+    {
+        $config = array('access_token' => $this->getTestAccessToken());
+        if ($maxItemsConfig !== null) {
+            $config['max_items'] = $maxItemsConfig;
+        }
+        
+        Rollbar::init($config);
+        $logger = Rollbar::logger();
+        
+        $maxItems = $maxItemsConfig === null ? Defaults::get()->maxItems() : $maxItemsConfig;
+        
+        for ($i = 0; $i < $maxItems; $i++) {
+            $response = $logger->log(Level::INFO, 'testing info level');
+            $this->assertEquals(200, $response->getStatus());
+        }
+      
+        $response = $logger->log(Level::INFO, 'testing info level');
+        
+        $this->assertEquals(0, $response->getStatus());
+        $this->assertEquals(
+            "Maximum number of items per request has been reached. If you " .
+            "want to report more items, please use `max_items` " .
+            "configuration option.",
+            $response->getInfo()
+        );
+    }
+    
+    public function maxItemsProvider()
+    {
+        return array(
+            'use default max_items' => array(null),
+            'use provided max_items' => array(3)
+        );
     }
 }

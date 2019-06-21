@@ -1,114 +1,61 @@
 <?php
 
-class WPML_Rewrite_Rule_Filter {
+class WPML_Rewrite_Rule_Filter implements IWPML_ST_Rewrite_Rule_Filter {
+	/** @var WPML_ST_Slug_Translation_Custom_Types_Repository[] */
+	private $custom_types_repositories;
 
-	/** @var SitePress $sitepress */
-	private $sitepress;
+	/** @var WPML_ST_Slug_New_Match_Finder */
+	private $new_match_finder;
 
-	/** @var WPML_Slug_Translation_Records $slug_records */
-	private $slug_records;
-
-	public function __construct( WPML_Slug_Translation_Records $slug_records, SitePress $sitepress ) {
-		$this->slug_records = $slug_records;
-		$this->sitepress = $sitepress;
+	/**
+	 * @param WPML_ST_Slug_Translation_Custom_Types_Repository[] $custom_types_repositories
+	 * @param WPML_ST_Slug_New_Match_Finder                      $new_match_finder
+	 */
+	public function __construct( array $custom_types_repositories, WPML_ST_Slug_New_Match_Finder $new_match_finder ) {
+		$this->custom_types_repositories = $custom_types_repositories;
+		$this->new_match_finder          = $new_match_finder;
 	}
 
-	function rewrite_rules_filter( $value ) {
-		if ( empty( $value ) ) {
-			return $value;
+
+	/**
+	 * @param array|false|null $rules
+	 *
+	 * @return array
+	 */
+	function rewrite_rules_filter( $rules ) {
+		if ( ! is_array( $rules ) && empty( $rules ) ) {
+			return $rules;
 		}
 
-		$current_language               = $this->sitepress->get_current_language();
-		$default_language               = $this->sitepress->get_default_language();
-		$queryable_post_types           = get_post_types( array( 'publicly_queryable' => true ) );
-		$post_slug_translation_settings = $this->sitepress->get_setting( 'posts_slug_translation', array() );
-
-		foreach ( $queryable_post_types as $type ) {
-			if ( ! isset( $post_slug_translation_settings['types'][ $type ] ) || ! $post_slug_translation_settings['types'][ $type ] || ! $this->sitepress->is_translated_post_type( $type ) ) {
-				continue;
-			}
-			$slug = $this->get_slug_by_type( $type );
-			if ( $slug === false ) {
-				continue;
-			}
-
-			$display_as_translated_mode = $this->sitepress->is_display_as_translated_post_type( $type );
-
-			$slug_translation = $this->slug_records->get_translation( $type, $current_language );
-			if ( ! $slug_translation ) {
-				// check original
-				$slug_translation = $this->slug_records->get_original( $type, $current_language );
-			}
-			if ( $display_as_translated_mode && ( ! $slug_translation || $slug_translation === $slug ) && $default_language != 'en' ) {
-				$slug_translation = $this->slug_records->get_translation( $type, $default_language );
-			}
-			$slug_translation = trim( $slug_translation, '/' );
-
-			$using_tags = false;
-			/* case of slug using %tags% - PART 1 of 2 - START */
-			if ( preg_match( '#%([^/]+)%#', $slug ) ) {
-				$slug       = preg_replace( '#%[^/]+%#', '.+?', $slug );
-				$using_tags = true;
-			}
-			if ( preg_match( '#%([^/]+)%#', $slug_translation ) ) {
-				$slug_translation = preg_replace( '#%[^/]+%#', '.+?', $slug_translation );
-				$using_tags       = true;
-			}
-			/* case of slug using %tags% - PART 1 of 2 - END */
-
-			$buff_value = array();
-			foreach ( (array) $value as $match => $query ) {
-
-				if ( $slug && $slug != $slug_translation ) {
-					$new_match = $this->adjust_key( $match, $slug_translation, $slug );
-					$buff_value[ $new_match ] = $query;
-					if ( $new_match != $match && $display_as_translated_mode ) {
-						$buff_value[ $match ] = $query;
-					}
-				} else {
-					$buff_value[ $match ] = $query;
-				}
-			}
-
-			$value = $buff_value;
-			unset( $buff_value );
-
-			/* case of slug using %tags% - PART 2 of 2 - START */
-			if ( $using_tags ) {
-				if ( preg_match( '#\.\+\?#', $slug ) ) {
-					$slug = preg_replace( '#\.\+\?#', '(.+?)', $slug );
-				}
-				if ( preg_match( '#\.\+\?#', $slug_translation ) ) {
-					$slug_translation = preg_replace( '#\.\+\?#', '(.+?)', $slug_translation );
-				}
-				$buff_value = array();
-				foreach ( $value as $match => $query ) {
-					if ( trim( $slug ) && trim( $slug_translation ) && $slug != $slug_translation ) {
-						$match = $this->adjust_key( $match, $slug_translation, $slug );
-					}
-					$buff_value[ $match ] = $query;
-				}
-
-				$value = $buff_value;
-				unset( $buff_value );
-			}
-			/* case of slug using %tags% - PART 2 of 2 - END */
+		$custom_types = $this->get_custom_types();
+		if ( ! $custom_types ) {
+			return $rules;
 		}
 
-		return $value;
+		$result = array();
+		foreach ( $rules as $match => $query ) {
+			$new_match                         = $this->new_match_finder->get( $match, $custom_types );
+			$result[ $new_match->get_value() ] = $query;
+
+			if ( $new_match->should_preserve_original() ) {
+				$result[ $match ] = $query;
+			}
+		}
+
+		return $result;
 	}
 
-	function get_slug_by_type( $type ) {
-		return $this->slug_records->get_original( $type );
-	}
-
-	private function adjust_key( $k, $slug_translation, $slug ) {
-		if ( (bool) $slug_translation === true && preg_match( '#^[^/]*/?' . preg_quote( $slug ) . '/#',
-				$k ) && $slug != $slug_translation
-		) {
-			$k = preg_replace( '#^' . addslashes($slug) . '/#', $slug_translation . '/', $k );
+	private function get_custom_types() {
+		if ( empty( $this->custom_types_repositories ) ) {
+			return array();
 		}
 
-		return $k;
+		$types = array();
+		foreach ( $this->custom_types_repositories as $repository ) {
+			$types[] = $repository->get();
+		}
+
+
+		return call_user_func_array( "array_merge", $types );
 	}
 }

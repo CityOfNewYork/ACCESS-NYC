@@ -2,14 +2,20 @@
 
 class WPML_SEO_HeadLangs {
 	private $sitepress;
+	/**
+	 * @var WPML_Queried_Object_Factory
+	 */
+	private $queried_object_factory;
 
 	/**
 	 * WPML_SEO_HeadLangs constructor.
 	 *
-	 * @param SitePress $sitepress
+	 * @param SitePress                   $sitepress
+	 * @param WPML_Queried_Object_Factory $queried_object_factory
 	 */
-	public function __construct( $sitepress ) {
-		$this->sitepress = $sitepress;
+	public function __construct( SitePress $sitepress, WPML_Queried_Object_Factory $queried_object_factory ) {
+		$this->sitepress              = $sitepress;
+		$this->queried_object_factory = $queried_object_factory;
 	}
 
 	private function get_seo_settings() {
@@ -30,7 +36,7 @@ class WPML_SEO_HeadLangs {
 			$head_langs = $seo_settings['head_langs'];
 			if ( $head_langs ) {
 				$priority = $seo_settings['head_langs_priority'];
-				add_action( 'wp_head', array( $this, 'head_langs' ), $priority );
+				add_action( 'wp_head', array( $this, 'head_langs' ), (int) $priority );
 			}
 		}
 	}
@@ -102,7 +108,7 @@ class WPML_SEO_HeadLangs {
 						</select>
 					</p>
 					<p class="buttons-wrap">
-						<span class="icl_ajx_response" id="icl_ajx_response_seo"></span>
+						<span class="icl_ajx_response" id="icl_ajx_response_seo"> </span>
 						<input class="button button-primary" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ) ?>" type="submit"/>
 					</p>
 				</form>
@@ -112,23 +118,49 @@ class WPML_SEO_HeadLangs {
 	}
 
 	private function must_render( $languages ) {
-		$has_languages = false;
-		$is_published  = false;
-		$post          = $this->sitepress->get_wp_api()->get_post();
-		if ( $post ) {
-			$post_id = $post ? $post->ID : false;
+		$must_render         = false;
+		$wpml_queried_object = $this->queried_object_factory->create();
 
-			$has_languages     = is_array( $languages ) && count( $languages ) > 0 && $this->sitepress->is_translated_post_type( $post->post_type );
-			$is_single_or_page = $this->sitepress->get_wp_api()->is_single() || $this->sitepress->get_wp_api()->is_page();
-			$is_published      = $is_single_or_page
-			                     && $post_id
-			                     && $this->sitepress->get_wp_api()->get_post_status( $post_id ) === 'publish';
+		$has_languages = is_array( $languages ) && count( $languages ) > 0;
+		if (
+			$wpml_queried_object->has_object()
+			&& $has_languages
+			&& ! $this->sitepress->get_wp_api()->is_paged()
+		) {
+
+			if ( $wpml_queried_object->is_instance_of_post() ) {
+				/** @var WP_Post $queried_object */
+				$post_id = $wpml_queried_object->get_id();
+
+				$is_single_or_page = $this->sitepress->get_wp_api()->is_single() || $this->sitepress->get_wp_api()->is_page();
+				$is_published      = $is_single_or_page
+				                     && $post_id
+				                     && $this->sitepress->get_wp_api()->get_post_status( $post_id ) === 'publish';
+
+				$must_render = $this->sitepress->is_translated_post_type( $wpml_queried_object->get_post_type() )
+				               && ( $is_published || $this->is_home_front_or_archive_page() );
+			}
+
+			if ( $wpml_queried_object->is_instance_of_taxonomy() ) {
+				/** @var WP_Term $queried_object */
+				$must_render = $this->sitepress->is_translated_taxonomy( $wpml_queried_object->get_taxonomy() );
+			}
+			if ( $wpml_queried_object->is_instance_of_post_type() ) {
+				/** @var WP_Post_Type $queried_object */
+				$must_render = $this->sitepress->is_translated_post_type( $wpml_queried_object->get_post_type_name() );
+			}
 		}
-		return $has_languages && ! $this->sitepress->get_wp_api()->is_paged()
-		       && ( $is_published
-		            || ( $this->sitepress->get_wp_api()->is_home()
-		                 || $this->sitepress->get_wp_api()->is_front_page()
-		                 || $this->sitepress->get_wp_api()->is_archive() ) );
+
+		return $must_render;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function is_home_front_or_archive_page() {
+		return $this->sitepress->get_wp_api()->is_home()
+		       || $this->sitepress->get_wp_api()->is_front_page()
+		       || $this->sitepress->get_wp_api()->is_archive();
 	}
 
 	/**

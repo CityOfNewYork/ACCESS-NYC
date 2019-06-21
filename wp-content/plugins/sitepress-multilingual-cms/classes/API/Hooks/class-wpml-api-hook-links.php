@@ -37,8 +37,13 @@ class WPML_API_Hook_Links implements IWPML_Action {
 
 	public function get_link_to_edit_translation( $link, $post_id, $lang ) {
 		$status_display = $this->post_status_display_factory->create();
-		list( $icon, $text, $link, $trid ) = $status_display->get_status_data( $post_id, $lang );
-		return apply_filters( 'wpml_link_to_translation', $link, $post_id, $lang, $trid );
+		$status_data    = $status_display->get_status_data( $post_id, $lang );
+
+		$status_link = $status_data[2];
+		$trid        = $status_data[3];
+		$css_class   = $status_data[4];
+
+		return apply_filters( 'wpml_link_to_translation', $status_link, $post_id, $lang, $trid, $css_class );
 	}
 
 }

@@ -61,8 +61,9 @@ class WPML_Config_Update {
 	public function run() {
 		if ( ! $this->is_config_update_disabled() ) {
 			$this->has_errors = false;
+			$request_args = array( 'timeout' => 45 );
 
-			$index_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . 'wpml-config/config-index.json' );
+			$index_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . 'wpml-config/config-index.json', $request_args );
 
 			if ( ! $this->is_a_valid_remote_response( $index_response ) ) {
 				$this->log_response( $index_response, 'index', 'wpml-config/config-index.json' );
@@ -115,7 +116,7 @@ class WPML_Config_Update {
 							unset( $deleted_configs_for_themes[ $theme->name ] );
 
 							if ( ! isset( $config_files_for_themes[ $theme->name ] ) || md5( $config_files_for_themes[ $theme->name ] ) !== $theme->hash ) {
-								$theme_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . $theme->path );
+								$theme_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . $theme->path, $request_args );
 								if ( ! $this->is_a_valid_remote_response( $theme_response ) ) {
 									$this->log_response( $theme_response, 'index', $theme->name );
 								} else {
@@ -139,7 +140,7 @@ class WPML_Config_Update {
 							unset( $deleted_configs_for_plugins[ $plugin->name ] );
 
 							if ( ! isset( $config_files_for_plugins[ $plugin->name ] ) || md5( $config_files_for_plugins[ $plugin->name ] ) !== $plugin->hash ) {
-								$plugin_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . $plugin->path );
+								$plugin_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . $plugin->path, $request_args );
 
 								if ( ! $this->is_a_valid_remote_response( $plugin_response ) ) {
 									$this->log_response( $plugin_response, 'index', $plugin->name );

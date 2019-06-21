@@ -145,7 +145,7 @@ class WPML_URL_Converter {
 			}
 		}
 
-		return $this->slash_helper->match_trailing_slash_to_reference( $new_url, $url );
+		return $new_url;
 	}
 
 	/**
@@ -155,7 +155,9 @@ class WPML_URL_Converter {
 	 * @return string
 	 */
 	public function get_language_from_url( $url ) {
-		$url = $this->get_url_from_referer_if_admin_ajax_req_called_from_frontend( $url );
+		$http_referer_factory = new WPML_URL_HTTP_Referer_Factory();
+		$http_referer = $http_referer_factory->create();
+		$url = $http_referer->get_url( $url );
 
 		if ( ! ( $language = $this->lang_param->lang_by_param( $url ) ) ) {
 			$language = $this->get_strategy()->get_lang_from_url_string( $url );
@@ -164,26 +166,9 @@ class WPML_URL_Converter {
 		return $this->get_strategy()->validate_language( $language, $url );
 	}
 
-	private function get_url_from_referer_if_admin_ajax_req_called_from_frontend( $url ) {
-		if ( false === strpos( $url, 'admin-ajax.php' ) ) {
-			return $url;
-		}
-
-		if ( ! isset( $_SERVER['HTTP_REFERER'] ) ) {
-			return $url;
-		}
-
-		// is not frontend
-		if ( strpos( $_SERVER['HTTP_REFERER'], 'wp-admin' ) || strpos( $_SERVER['HTTP_REFERER'], 'admin-ajax' ) ) {
-			return $url;
-		}
-
-		return $_SERVER['HTTP_REFERER'];
-	}
-
 	/**
 	 * @param string $url
-	 * @param string $langauge
+	 * @param string $language
 	 *
 	 * @return string
 	 */

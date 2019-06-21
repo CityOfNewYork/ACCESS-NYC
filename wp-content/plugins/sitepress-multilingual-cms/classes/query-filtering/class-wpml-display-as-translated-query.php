@@ -13,7 +13,7 @@ abstract class WPML_Display_As_Translated_Query {
 	 *
 	 * @param wpdb $wpdb
 	 */
-	public function __construct( wpdb $wpdb, $icl_translation_table_alias = 't' ) {
+	public function __construct( wpdb $wpdb, $icl_translation_table_alias = 'wpml_translations' ) {
 		$this->wpdb                        = $wpdb;
 		$this->icl_translation_table_alias = $icl_translation_table_alias;
 	}

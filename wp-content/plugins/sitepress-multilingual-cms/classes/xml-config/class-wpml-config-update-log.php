@@ -4,8 +4,7 @@
  * @author OnTheGo Systems
  */
 class WPML_Config_Update_Log implements WPML_Log {
-	const SUPPORT_PAGE_LOG_SECTION = 'sitepress-multilingual-cms/menu/support.php';
-	const OPTION_NAME              = 'wpml-xml-config-update-log';
+	const OPTION_NAME = 'wpml-xml-config-update-log';
 
 	public function get( $page_size = 0, $page = 0 ) {
 		$data = get_option( self::OPTION_NAME );
@@ -78,6 +77,11 @@ class WPML_Config_Update_Log implements WPML_Log {
 	 * @return string
 	 */
 	public function get_log_url() {
-		return add_query_arg( array( 'page' => self::SUPPORT_PAGE_LOG_SECTION ), get_admin_url( null, 'admin.php#xml-config-log' ) );
+		return add_query_arg( array( 'page' => self::get_support_page_log_section() ), get_admin_url( null, 'admin.php#xml-config-log' ) );
+	}
+
+	/** @return string */
+	public static function get_support_page_log_section() {
+		return WPML_PLUGIN_FOLDER . '/menu/support.php';
 	}
 }

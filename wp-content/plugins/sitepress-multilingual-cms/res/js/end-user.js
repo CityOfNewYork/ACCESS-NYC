@@ -215,7 +215,9 @@ var WPML_End_User_How_To_Button = function ($, send_request) {
 
         build_how_to_button(data, container_builder.get_container());
 
-        $(".js-wpml-end-user-send-request").on("click", button_handler);
+		if ( wpml_end_user_data.is_site_allowed_to_send_data ) {
+			$(".js-wpml-end-user-send-request").on("click", button_handler);
+		}
     };
 
     var build_how_to_button = function (data, container) {

@@ -69,6 +69,7 @@ class WPML_ST_TM_Jobs extends WPML_WPDB_User {
 		$sql_statements[] = "SELECT  st.translator_id,
 					st.id AS job_id,
 					'string' AS element_type_prefix,
+					NULL AS post_type,
 					st.batch_id
 			FROM {$this->wpdb->prefix}icl_string_translations st
 				JOIN {$this->wpdb->prefix}icl_strings s

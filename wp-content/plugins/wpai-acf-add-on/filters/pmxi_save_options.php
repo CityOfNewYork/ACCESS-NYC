@@ -1,4 +1,8 @@
 <?php
+/**
+ * @param $post
+ * @return mixed
+ */
 function pmai_pmxi_save_options($post)
 {
 	if (PMXI_Plugin::getInstance()->getAdminCurrentScreen()->action == 'options')

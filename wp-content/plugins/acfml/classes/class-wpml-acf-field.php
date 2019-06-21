@@ -21,4 +21,24 @@ abstract class WPML_ACF_Field {
 	public function convert_ids() {
 		return $this->ids_object->convert($this);
 	}
+
+	public function has_element_with_display_translated($has_element_with_display_translated, $field) {
+		global $sitepress_settings;
+
+		if (isset($field['post_type']) && is_array($field['post_type'])) {
+			foreach ($field['post_type'] as $type) {
+				if (isset( $sitepress_settings['custom_posts_sync_option'][$type] ) && $sitepress_settings['custom_posts_sync_option'][$type] == 2) {
+					$has_element_with_display_translated = true;
+					break;
+				}
+			}
+		}
+
+		return $has_element_with_display_translated;
+	}
+
+	abstract function field_type();
 }
+
+
+

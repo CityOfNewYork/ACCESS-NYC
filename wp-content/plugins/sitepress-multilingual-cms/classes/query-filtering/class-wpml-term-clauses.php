@@ -81,7 +81,7 @@ class WPML_Term_Clauses {
 
 	private function get_display_as_translated_snippet( $current_language, $fallback_language ) {
 		$taxonomies = $this->sitepress->get_display_as_translated_taxonomies();
-		if ( $taxonomies && ! is_admin() ) {
+		if ( $taxonomies && ( ! is_admin() || WPML_Ajax::is_frontend_ajax_request() ) ) {
 			return $this->display_as_translated_query->get_language_snippet( $current_language, $fallback_language, $taxonomies );
 		} else {
 			return '0';

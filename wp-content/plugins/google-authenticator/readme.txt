@@ -1,10 +1,11 @@
 === Google Authenticator ===
-Contributors: Henrik.Schack
-Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=henrik%40schack%2edk&lc=US&item_name=Google%20Authenticator&item_number=Google%20Authenticator&no_shipping=0&no_note=1&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8
+Contributors: ivankk
 Tags: authentication,otp,password,security,login,android,iphone,blackberry
 Requires at least: 4.5
-Tested up to: 4.7
-Stable tag: 0.48
+Tested up to: 5.2
+Stable tag: 0.52
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Google Authenticator for your WordPress blog.
 
@@ -55,8 +56,8 @@ just delete the wp-content/plugins/google-authenticator directory, and you'll be
 
 = I don't own a Smartphone, isn't there another way to generate these secret codes ? =
 
-Yes, there is a webbased version here : http://gauth.apps.gbraad.nl/  
-Github project here : https://github.com/gbraad/html5-google-authenticator
+Yes, there is a webbased version here : https://gauth.apps.gbraad.nl/
+Github project here : https://github.com/gbraad/gauth
 
 = Can I create backupcodes ? =
 
@@ -79,6 +80,24 @@ please remember to remove the "Check credentials on all login attempts" checkmar
 4. Google Authenticator app on Android
 
 == Changelog ==
+= 0.52 =
+* Add a Dutch translation
+* Add a Portuguese translation
+
+= 0.51 =
+* Fix a regression that broke app passwords
+
+= 0.50 =
+* New maintainer ivankk
+* Conditionally include base32 class
+
+= 0.49 =
+* More streamlined sign-up flow for users, configuration screen for admins.
+* Multisite support to either enable 2fa by role on a site, and/or on a network.
+* Added filter google_authenticator_needs_setup to determine if user needs to enable 2fa.
+* Added two part login process that can ask for 2fa code on a second login screen.
+* Fixed a security bug that continued check_otp even if authenticate had already returned an error.
+
 = 0.48 =
 * Security fix / compatability with WordPress 4.5
 
@@ -100,7 +119,6 @@ please remember to remove the "Check credentials on all login attempts" checkmar
 * Sanitize description field input.
 * App password hash function switched to one that doesn't have rainbow tables available.
 * PHP notices occurring during app password login removed.
-
 
 = 0.44 =  
 * Installation/FAQ section updated.
@@ -150,6 +168,12 @@ please remember to remove the "Check credentials on all login attempts" checkmar
 == Credits ==
 
 Thanks to:
+
+[Fabio Zumbi](https://github.com/FabioZumbi12) for the Portuguese translation
+
+[Guido Schalkx](https://www.guidoschalkx.com/) for the Dutch translation.
+
+[Henrik.Schack](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=henrik%40schack%2edk&lc=US&item_name=Google%20Authenticator&item_number=Google%20Authenticator&no_shipping=0&no_note=1&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8) for writing/maintaining versions 0.20 through 0.48
 
 [Tobias Bäthge](http://tobias.baethge.com/) for his code rewrite and German translation.
 

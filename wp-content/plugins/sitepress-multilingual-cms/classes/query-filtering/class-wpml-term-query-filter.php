@@ -141,10 +141,12 @@ class WPML_Term_Query_Filter {
 	 * @param string|array $terms_slugs
 	 * @param array        $taxonomies
 	 *
-	 * @return array
+	 * @return array|string
 	 */
 	private function adjust_taxonomies_terms_slugs( $terms_slugs, array $taxonomies ) {
-		$terms_slugs = array_filter( array_unique( $this->explode_and_trim( $terms_slugs ) ) );
+		if ( is_string( $terms_slugs ) ) {
+			$terms_slugs = array( $terms_slugs );
+		}
 
 		$translated_slugs = array();
 		foreach ( $terms_slugs as $terms_slug ) {
@@ -205,4 +207,5 @@ class WPML_Term_Query_Filter {
 
 		return $source;
 	}
+
 }

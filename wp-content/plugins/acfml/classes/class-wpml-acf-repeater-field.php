@@ -32,8 +32,9 @@ class WPML_ACF_Repeater_Field {
 				if (isset($value['type']) && 'repeater' == $value['type']) {
 					$sub_field_name = get_post_meta($processed_data->meta_data['master_post_id'], "_" . $processed_data->meta_data['key'], true);
 					$sub_field = $this->get_sub_acf_pro_repeater_field($sub_field_name);
-					if (isset($sub_field['type'])) {
+					if ( isset( $sub_field['type'] ) && isset( $sub_field['taxonomy'] ) ) {
 						$processed_data->related_acf_field_value['type'] = $sub_field['type'];
+						$processed_data->related_acf_field_value['taxonomy'] = $sub_field['taxonomy'];
 						if ('repeater' != $sub_field['type']) {
 							$field = $this->duplicated_post_object->get_field_object($processed_data, $field);
 						}

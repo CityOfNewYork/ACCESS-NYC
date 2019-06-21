@@ -4,7 +4,7 @@ if ( ! function_exists('get_file_curl') ):
 
 	function get_file_curl($url, $fullpath, $to_variable = false, $iteration = false) {				
 		
-		if ( ! preg_match('%^(http|ftp)s?://%i', $url) ) return;
+		if ( ! preg_match('%^(http|ftp)s?://%i', $url) ) return false;
 
 		$response = wp_remote_get($url);
 

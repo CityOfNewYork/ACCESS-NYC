@@ -1,9 +1,12 @@
 <?php
+/**
+ * Template name: Field Screener Results
+ */
 
 $context = Timber::get_context();
 
 $get = $_GET;
-$get['path'] = $params['share_path'];
+$get['path'] = '/eligibility/results/';
 $shareData = share_data($get);
 
 // Share by email/sms fields.

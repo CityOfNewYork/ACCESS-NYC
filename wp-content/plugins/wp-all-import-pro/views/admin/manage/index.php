@@ -296,12 +296,27 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 													$tx = get_taxonomy($item['options']['taxonomy_type']);
 													$custom_type = new stdClass();
 													$custom_type->label = empty($tx->labels->name) ? __('Taxonomy Terms', 'wp_all_import_plugin') : $tx->labels->name;
+													$custom_type->singular_label = empty($tx->labels->singular_name) ? __('Taxonomy Term', 'wp_all_import_plugin') : $tx->labels->singular_name;
 													break;
+                                                case 'import_users':
+                                                    $custom_type = new stdClass();
+                                                    $custom_type->label = __('Users', 'wp_all_import_plugin');
+                                                    $custom_type->singular_label = __('User', 'wp_all_import_plugin');
+                                                    break;
+                                                case 'shop_customer':
+                                                    $custom_type = new stdClass();
+                                                    $custom_type->label = __('WooCommerce Customers', 'wp_all_import_plugin');
+                                                    $custom_type->singular_label = __('WooCommerce Customer', 'wp_all_import_plugin');
+                                                    break;
 												default:
 													$custom_type = get_post_type_object( $item['options']['custom_type'] );
+													if ( ! empty($custom_type) ) {
+														$custom_type->label = $custom_type->labels->name;
+														$custom_type->singular_label = $custom_type->labels->singular_name;
+													}
 													break;
 											}
-											$cpt_name = ( ! empty($custom_type)) ? $custom_type->label : '';
+											$cpt_name = ( ! empty($custom_type)) ? ( ($item['created'] == 1) ? $custom_type->singular_label : $custom_type->label ) : '';
 										}
 										else{
 											$cpt_name = '';

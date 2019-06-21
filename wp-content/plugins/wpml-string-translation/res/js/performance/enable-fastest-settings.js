@@ -2,7 +2,7 @@
 jQuery(function($) {
 	"use strict";
 
-	$('document').ready(function () {
+	function bindEvents() {
 		$('[data-id="wpml_st_faster_settings"] .button-primary').click(function (event) {
 
 			var enable_button = $(this);
@@ -28,19 +28,34 @@ jQuery(function($) {
 					notice.removeClass('notice-error error notice-info info');
 					enable_button.attr( 'disabled', false );
 
+					var has_block_editor = wpml_get_block_editor();
+					var components_notice = notice.closest( '.components-notice' );
 					if (response.success) {
-						notice.addClass('notice-success');
-						notice.addClass('success');
+						if ( has_block_editor ) {
+							components_notice.removeClass('is-info is-error is-success');
+							components_notice.addClass('is-success');
+						} else {
+							notice.addClass('notice-success success');
+						}
 
 						enable_button.hide();
 						success.show();
 
 						setTimeout(function () {
-							notice.fadeOut('slow');
+							if (has_block_editor) {
+								components_notice.fadeOut('slow');
+							} else {
+								notice.fadeOut('slow');
+							}
 						}, 2500);
 					} else {
-						notice.addClass('notice-error');
-						notice.addClass('error');
+						if ( has_block_editor ) {
+							components_notice.removeClass('is-info is-error is-success');
+							components_notice.addClass('is-error');
+						} else {
+							notice.addClass( 'notice-error' );
+							notice.addClass( 'error' );
+						}
 						error.show();
 
 						if (null !== response.data) {
@@ -50,5 +65,13 @@ jQuery(function($) {
 				}
 			});
 		});
+	}
+
+	$('document').ready(function () {
+		bindEvents();
+	});
+
+	$(document).on('otgs-notices-added', function (event) {
+		bindEvents();
 	});
 });

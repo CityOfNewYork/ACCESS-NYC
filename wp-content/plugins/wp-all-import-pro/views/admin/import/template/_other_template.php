@@ -137,9 +137,8 @@ switch ($post_type){
 					<tr>
 						<td>
 							<h4 style="float:left;"><?php _e('Download & Import Attachments', 'wp_all_import_plugin') ?></h4>
-							<span class="separated_by" style="position:relative; top:15px; margin-right:0px;"><?php _e('Separated by','wp_all_import_plugin');?></span>
-							<div>
-								<input type="text" name="attachments" style="width:93%;" value="<?php echo esc_attr($post['attachments']) ?>" />
+							<div style="clear:both;">
+								<input type="text" name="attachments" style="width:87%;" value="<?php echo esc_attr($post['attachments']) ?>" />
 								<input type="text" class="small" name="atch_delim" value="<?php echo esc_attr($post['atch_delim']) ?>" style="width:5%; text-align:center; float:right;"/>
 							</div>			
 							<div class="input" style="margin:3px;">

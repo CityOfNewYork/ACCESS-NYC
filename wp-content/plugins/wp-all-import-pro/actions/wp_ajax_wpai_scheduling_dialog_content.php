@@ -525,8 +525,21 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                     ?>
                     var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-                    $('#timezone').val(timeZone);
-                    $('#timezone').trigger("chosen:updated");
+                    if($('#timezone').find("option:contains('"+ timeZone +"')").length != 0){
+
+                        $('#timezone').val(timeZone);
+                        $('#timezone').trigger("chosen:updated");
+
+                    }else{
+
+                        var parts = timeZone.split('/');
+                        var lastPart = parts[parts.length-1];
+
+                        var opt = $('#timezone').find("option:contains('"+ lastPart +"')");
+                        $('#timezone').val(opt.val());
+                        $('#timezone').trigger("chosen:updated");
+
+                    }
 
                     <?php
                     }

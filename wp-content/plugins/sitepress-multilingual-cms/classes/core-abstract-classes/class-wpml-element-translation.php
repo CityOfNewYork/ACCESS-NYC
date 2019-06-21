@@ -229,11 +229,11 @@ abstract class WPML_Element_Translation extends WPML_WPDB_User {
 	 */
 	private function build_sql( $trid_snippet ) {
 
-		return "SELECT t.translation_id, t.element_id, t.language_code, t.source_language_code, t.trid, t.element_type
+		return "SELECT wpml_translations.translation_id, wpml_translations.element_id, wpml_translations.language_code, wpml_translations.source_language_code, wpml_translations.trid, wpml_translations.element_type
 				    " . $this->get_element_join() . "
 				    JOIN {$this->wpdb->prefix}icl_translations tridt
-				      ON tridt.element_type = t.element_type
-				      AND tridt.trid = t.trid
+				      ON tridt.element_type = wpml_translations.element_type
+				      AND tridt.trid = wpml_translations.trid
 				    WHERE {$trid_snippet}";
 	}
 

@@ -279,7 +279,7 @@ abstract class BD_Meta_Box_Module {
 	 * @param mixed $delete_options
 	 */
 	protected function process_delete( $delete_options ) {
-		if ( array_get_bool( $_POST, 'smbd_' . $this->field_slug . '_cron', false ) ) {
+		if ( bd_array_get_bool( $_POST, 'smbd_' . $this->field_slug . '_cron', false ) ) {
 			$freq = $_POST[ 'smbd_' . $this->field_slug . '_cron_freq' ];
 			$time = strtotime( $_POST[ 'smbd_' . $this->field_slug . '_cron_start' ] ) - ( get_option( 'gmt_offset' ) * 60 * 60 );
 

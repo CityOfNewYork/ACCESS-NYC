@@ -285,7 +285,7 @@ class PMXI_Chunk {
 
                     if ($this->loop < $this->options['pointer']){
                       $this->loop++;                              
-                      continue;
+                      continue(2);
                     }                
                     
                     $xml = @$this->reader->readOuterXML();                  

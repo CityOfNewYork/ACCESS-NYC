@@ -17,9 +17,9 @@ class WPML_TF_Module {
 	 * WPML_TF_Module constructor.
 	 *
 	 * @param WPML_Action_Filter_Loader $action_filter_loader
-	 * @param WPML_TF_Settings          $settings
+	 * @param IWPML_TF_Settings         $settings
 	 */
-	public function __construct( WPML_Action_Filter_Loader $action_filter_loader, WPML_TF_Settings $settings ) {
+	public function __construct( WPML_Action_Filter_Loader $action_filter_loader, IWPML_TF_Settings $settings ) {
 		$this->action_filter_loader = $action_filter_loader;
 		$this->settings             = $settings;
 	}

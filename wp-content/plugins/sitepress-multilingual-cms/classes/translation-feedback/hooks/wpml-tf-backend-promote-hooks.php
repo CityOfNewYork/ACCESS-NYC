@@ -39,8 +39,6 @@ class WPML_TF_Backend_Promote_Hooks implements IWPML_Action {
 		if ( $this->translation_service->allows_translation_feedback() ) {
 			if ( $this->is_setup_complete && get_option( self::WPML_START_VERSION_KEY )	) {
 				add_action( 'wpml_pro_translation_completed', array( $this, 'add_notice_for_manager_on_job_completed' ), 10, 3 );
-			} elseif ( $this->is_setup_complete ) {
-				add_action( 'init', array( $this, 'show_notice_for_old_site' ) );
 			}
 		}
 
@@ -56,9 +54,5 @@ class WPML_TF_Backend_Promote_Hooks implements IWPML_Action {
 	 */
 	public function add_notice_for_manager_on_job_completed( $new_post_id, $fields, $job ){
 		$this->promote_notices->show_notice_for_new_site( (int) $job->manager_id );
-	}
-
-	public function show_notice_for_old_site() {
-		$this->promote_notices->show_notice_for_old_site();
 	}
 }

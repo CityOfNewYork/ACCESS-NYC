@@ -147,6 +147,106 @@ function get_field_object( $selector, $post_id = false, $format_value = true, $l
 	
 }
 
+/*
+*  acf_get_object_field
+*
+*  This function will return a field for the given selector.
+*  It will also review the field_reference to ensure the correct field is returned which makes it useful for the template API
+*
+*  @type	function
+*  @date	4/08/2015
+*  @since	5.2.3
+*
+*  @param	$selector (mixed) identifyer of field. Can be an ID, key, name or post object
+*  @param	$post_id (mixed) the post_id of which the value is saved against
+*  @param	$strict (boolean) if true, return a field only when a field key is found.
+*  @return	$field (array)
+*/
+function acf_maybe_get_field( $selector, $post_id = false, $strict = true ) {
+	
+	// init
+	acf_init();
+	
+	// Check if field key was given.
+	if( acf_is_field_key($selector) ) {
+		return acf_get_field( $selector );
+	}
+	
+	// Lookup field via reference.
+	$post_id = acf_get_valid_post_id( $post_id );
+	$field = acf_get_meta_field( $selector, $post_id );
+	if( $field ) {
+		return $field;
+	}
+	
+	// Lookup field loosely via name.
+	if( !$strict ) {
+		return acf_get_field( $selector );	
+	}
+	
+	// Return no result.
+	return false;
+}
+
+/*
+*  acf_maybe_get_sub_field
+*
+*  This function will attempt to find a sub field
+*
+*  @type	function
+*  @date	3/10/2016
+*  @since	5.4.0
+*
+*  @param	$post_id (int)
+*  @return	$post_id (int)
+*/
+
+function acf_maybe_get_sub_field( $selectors, $post_id = false, $strict = true ) {
+	
+	// bail ealry if not enough selectors
+	if( !is_array($selectors) || count($selectors) < 3 ) return false;
+	
+	
+	// vars
+	$offset = acf_get_setting('row_index_offset');
+	$selector = acf_extract_var( $selectors, 0 );
+	$selectors = array_values( $selectors ); // reset keys
+	
+	
+	// attempt get field
+	$field = acf_maybe_get_field( $selector, $post_id, $strict );
+	
+	
+	// bail early if no field
+	if( !$field ) return false;
+	
+	
+	// loop
+	for( $j = 0; $j < count($selectors); $j+=2 ) {
+		
+		// vars
+		$sub_i = $selectors[ $j ];
+		$sub_s = $selectors[ $j+1 ];
+		$field_name = $field['name'];
+		
+		
+		// find sub field
+		$field = acf_get_sub_field( $sub_s, $field );
+		
+		
+		// bail early if no sub field
+		if( !$field ) return false;
+					
+		
+		// add to name
+		$field['name'] = $field_name . '_' . ($sub_i-$offset) . '_' . $field['name'];
+		
+	}
+	
+	
+	// return
+	return $field;
+}
 
 /*
 *  get_fields()
@@ -206,122 +306,48 @@ function get_fields( $post_id = false, $format_value = true ) {
 
 function get_field_objects( $post_id = false, $format_value = true, $load_value = true ) {
 	
-	// global
-	global $wpdb;
+	// init
+	acf_init();
 	
-	
-	// filter post_id
+	// validate post_id
 	$post_id = acf_get_valid_post_id( $post_id );
-	$info = acf_get_post_id_info( $post_id );
 	
-	
-	// vars
-	$meta = array();
-	$fields = array();
-	
-				
-	// get field_names
-	if( $info['type'] == 'post' ) {
-		
-		$meta = get_post_meta( $info['id'] );
-	
-	} elseif( $info['type'] == 'user' ) {
-		
-		$meta = get_user_meta( $info['id'] );
-		
-	} elseif( $info['type'] == 'comment' ) {
-		
-		$meta = get_comment_meta( $info['id'] );
-		
-	} elseif( $info['type'] == 'term' ) {
-		
-		$meta = get_term_meta( $info['id'] );
-		
-	} else {
-		
-		$rows = $wpdb->get_results($wpdb->prepare(
-			"SELECT option_name, option_value FROM $wpdb->options WHERE option_name LIKE %s OR option_name LIKE %s",
-			$post_id . '_%' ,
-			'_' . $post_id . '_%' 
-		), ARRAY_A);
-		
-		if( !empty($rows) ) {
-			
-			foreach( $rows as $row ) {
-				
-				// vars
-				$name = $row['option_name'];
-				$prefix = $post_id . '_';
-				$_prefix = '_' . $prefix;
-				
-				
-				// remove prefix from name
-				if( strpos($name, $prefix) === 0 ) {
-					
-					$name = substr($name, strlen($prefix));
-					
-				} elseif( strpos($name, $_prefix) === 0 ) {
-					
-					$name = '_' . substr($name, strlen($_prefix));
-					
-				}
-				
-				$meta[ $name ][] = $row['option_value'];
-				
-			}
-			
-		}
-		
-	}
-	
+	// get meta
+	$meta = acf_get_meta( $post_id );
 	
 	// bail early if no meta
 	if( empty($meta) ) return false;
 	
-	
 	// populate vars
-	foreach( $meta as $k => $v ) {
+	$fields = array();
+	foreach( $meta as $key => $value ) {
 		
-		// does a field key exist for this value?
-		if( !isset($meta["_{$k}"]) ) continue;
-		
+		// bail if reference key does not exist
+		if( !isset($meta["_$key"]) ) continue;
 		
 		// get field
-		$field_key = $meta["_{$k}"][0];
-		$field = acf_maybe_get_field( $field_key );
+		$field = acf_get_field($meta["_$key"]);
 		
-		
-		// bail early if no field, or if the field's name is different to $k
+		// bail early if no field, or if the field's name is different to $key
 		// - solves problem where sub fields (and clone fields) are incorrectly allowed
-		if( !$field || $field['name'] !== $k ) continue;
-		
+		if( !$field || $field['name'] !== $key ) continue;
 		
 		// load value
 		if( $load_value ) {
-		
 			$field['value'] = acf_get_value( $post_id, $field );
-			
 		}
-		
 		
 		// format value
 		if( $format_value ) {
-			
-			// get value for field
 			$field['value'] = acf_format_value( $field['value'], $post_id, $field );
-			
 		}
 		
-					
 		// append to $value
-		$fields[ $field['name'] ] = $field;
-		
+		$fields[ $key ] = $field;
 	}
  	
- 	 	
 	// no value
 	if( empty($fields) ) return false;
-	
 	
 	// return
 	return $fields;

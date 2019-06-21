@@ -59,8 +59,8 @@ class WPML_Remove_Pages_Not_In_Current_Language extends WPML_WPDB_And_SP_User {
 		} else {
 			$excl_pages_query = "
 								SELECT p.ID FROM {$this->wpdb->posts} p
-								JOIN {$this->wpdb->prefix}icl_translations t ON p.ID = t.element_id
-								WHERE t.element_type=%s AND p.post_type=%s AND t.language_code <> %s
+								JOIN {$this->wpdb->prefix}icl_translations wpml_translations ON p.ID = wpml_translations.element_id
+								WHERE wpml_translations.element_type=%s AND p.post_type=%s AND wpml_translations.language_code <> %s
 								";
 
 			$excl_pages_args                                                   = array(

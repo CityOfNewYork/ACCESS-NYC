@@ -42,6 +42,19 @@ class WPML_Debug_BackTrace {
 		return $found;
 	}
 
+	public function count_function_in_call_stack( $function_name, $refresh = true ) {
+		if ( empty( $this->debug_backtrace ) || $refresh ) {
+			$this->get_backtrace();
+		}
+		$count = 0;
+		foreach ( $this->debug_backtrace as $debug_backtrace ) {
+			if ( $debug_backtrace['function'] == $function_name && ! isset( $debug_backtrace['class'] ) ) {
+				$count++;
+			}
+		}
+		return $count;
+	}
+
 	public function is_class_function_in_call_stack( $class_name, $function_name, $refresh = true ) {
 		if ( empty( $this->debug_backtrace ) || $refresh ) {
 			$this->get_backtrace();

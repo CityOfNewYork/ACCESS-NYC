@@ -10,7 +10,7 @@ class WPML_ST_DB_Translation_Retrieve {
 	/**
 	 * @var array
 	 */
-	private $loaded = array();
+	protected $loaded = array();
 
 	/**
 	 * @var array

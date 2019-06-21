@@ -36,7 +36,7 @@ class WPML_Archives_Query implements IWPML_Action {
 		$this->post_type = array_key_exists( 'post_type', $args ) ? $args['post_type'] : 'post';
 		$this->post_type = esc_sql( $this->post_type );
 
-		return $join . " JOIN {$this->wpdb->prefix}icl_translations t ON t.element_id = {$this->wpdb->posts}.ID AND t.element_type='post_" . $this->post_type . "'";
+		return $join . " JOIN {$this->wpdb->prefix}icl_translations wpml_translations ON wpml_translations.element_id = {$this->wpdb->posts}.ID AND wpml_translations.element_type='post_" . $this->post_type . "'";
 	}
 
 	/**

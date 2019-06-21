@@ -365,28 +365,23 @@
 <?php endif; ?>
 
 <?php
-	$uploads = wp_upload_dir();
-	$functions = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
-    $functions = apply_filters( 'import_functions_file_path', $functions );
-	$functions_content = file_get_contents($functions);
-?>
-<hr />
-<br>
-<h3><?php _e('Function Editor', 'wp_all_import_plugin') ?></h3>
-
-<textarea id="wp_all_import_code" name="wp_all_import_code"><?php echo (empty($functions_content)) ? "<?php\n\n?>": esc_textarea($functions_content);?></textarea>						
-
-<div class="input" style="margin-top: 10px;">
-
-	<div class="input" style="display:inline-block; margin-right: 20px;">
-		<input type="button" class="button-primary wp_all_import_save_functions" value="<?php _e("Save Functions", 'wp_all_import_plugin'); ?>"/>
-		<a href="#help" class="wpallimport-help" title="<?php printf(__("Add functions here for use during your import. You can access this file at %s", "wp_all_import_plugin"), preg_replace("%.*wp-content%", "wp-content", $functions));?>" style="top: 0;">?</a>							
-		<div class="wp_all_import_functions_preloader"></div>
-	</div>						
-	<div class="input wp_all_import_saving_status" style="display:inline-block;">
-
-	</div>
-
-</div>
+$uploads = wp_upload_dir();
+$functions = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+$functions = apply_filters( 'import_functions_file_path', $functions );
+if (file_exists($functions) && PMXI_Plugin::$is_php_allowed):
+    $functions_content = file_get_contents($functions); ?>
+    <hr />
+    <br>
+    <h3><?php _e('Function Editor', 'wp_all_import_plugin') ?></h3>
+    <textarea id="wp_all_import_code" name="wp_all_import_code"><?php echo (empty($functions_content)) ? "<?php\n\n?>": esc_textarea($functions_content);?></textarea>
+    <div class="input" style="margin-top: 10px;">
+        <div class="input" style="display:inline-block; margin-right: 20px;">
+            <input type="button" class="button-primary wp_all_import_save_functions" value="<?php _e("Save Functions", 'wp_all_import_plugin'); ?>"/>
+            <a href="#help" class="wpallimport-help" title="<?php printf(__("Add functions here for use during your import. You can access this file at %s", "wp_all_import_plugin"), preg_replace("%.*wp-content%", "wp-content", $functions));?>" style="top: 0;">?</a>
+            <div class="wp_all_import_functions_preloader"></div>
+        </div>
+        <div class="input wp_all_import_saving_status" style="display:inline-block;"></div>
+    </div>
+<?php endif; ?>
 
 <a href="http://soflyy.com/" target="_blank" class="wpallimport-created-by"><?php _e('Created by', 'wp_all_import_plugin'); ?> <span></span></a>

@@ -1,5 +1,8 @@
-<?php 
+<?php
 
+/**
+ * Render admin notices if ACF or WP All Import plugins are activated
+ */
 function pmai_admin_notices() {
 	
 	// notify user if history folder is not writable		
@@ -43,7 +46,6 @@ function pmai_admin_notices() {
 		deactivate_plugins( PMAI_ROOT_DIR . '/wpai-acf-add-on.php');
 		
 	}
-
 	$input = new PMAI_Input();
 	$messages = $input->get('pmai_nt', array());
 	if ($messages) {

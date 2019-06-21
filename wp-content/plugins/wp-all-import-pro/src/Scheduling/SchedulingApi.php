@@ -10,6 +10,8 @@ use Wpai\Scheduling\Exception\SchedulingHttpException;
  */
 class SchedulingApi
 {
+    const TIMEOUT = 30;
+
     /**
      * @var
      */
@@ -34,7 +36,8 @@ class SchedulingApi
         $response = wp_remote_request(
             $pingBackUrl,
             array(
-                'method' => 'GET'
+                'method' => 'GET',
+                'timeout' => self::TIMEOUT
             )
         );
 
@@ -63,7 +66,8 @@ class SchedulingApi
                 '&endpoint='.urlencode(get_site_url())),
             array(
                 'method' => 'GET',
-                'headers' => $this->getHeaders()
+                'headers' => $this->getHeaders(),
+                'timeout' => self::TIMEOUT
             )
         );
 
@@ -84,7 +88,8 @@ class SchedulingApi
             $this->getApiUrl('schedules/' . $scheduleId),
             array(
                 'method' => 'GET',
-                'headers' => $this->getHeaders()
+                'headers' => $this->getHeaders(),
+                'timeout' => self::TIMEOUT
             )
         );
     }
@@ -102,7 +107,8 @@ class SchedulingApi
             array(
                 'method' => 'PUT',
                 'headers' => $this->getHeaders(),
-                'body' => json_encode($scheduleData)
+                'body' => json_encode($scheduleData),
+                'timeout' => self::TIMEOUT
             )
         );
 
@@ -122,7 +128,8 @@ class SchedulingApi
             $this->getApiUrl('schedules/' . $scheduleId),
             array(
                 'method' => 'DELETE',
-                'headers' => $this->getHeaders()
+                'headers' => $this->getHeaders(),
+                'timeout' => self::TIMEOUT
             )
         );
     }
@@ -141,7 +148,8 @@ class SchedulingApi
             array(
                 'method' => 'POST',
                 'headers' => $this->getHeaders(),
-                'body' => json_encode($scheduleTime)
+                'body' => json_encode($scheduleTime),
+                'timeout' => self::TIMEOUT
             ));
 
         if($response instanceof \WP_Error) {

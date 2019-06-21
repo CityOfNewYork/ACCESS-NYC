@@ -32,7 +32,6 @@
             "Japanese": "\u82f1\u8a9e",
             "Korean": "\uc601\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -64,7 +63,9 @@
             "Chinese (Simplified)": "\u82f1\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u82f1\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Spanish": {
@@ -100,7 +101,6 @@
             "Japanese": "\u30b9\u30da\u30a4\u30f3\u8a9e",
             "Korean": "\uc2a4\ud398\uc778\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -132,7 +132,9 @@
             "Chinese (Simplified)": "\u897f\u73ed\u7259\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u897f\u73ed\u7259\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "German": {
@@ -168,7 +170,6 @@
             "Japanese": "\u30c9\u30a4\u30c4\u8a9e",
             "Korean": "\ub3c5\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -200,7 +201,9 @@
             "Chinese (Simplified)": "\u5fb7\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5fb7\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "French": {
@@ -236,7 +239,6 @@
             "Japanese": "\u30d5\u30e9\u30f3\u30b9\u8a9e",
             "Korean": "\ubd88\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -268,7 +270,9 @@
             "Chinese (Simplified)": "\u6cd5\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u6cd5\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Arabic": {
@@ -304,7 +308,6 @@
             "Japanese": "\u30a2\u30e9\u30d3\u30a2\u8a9e",
             "Korean": "\uc544\ub78d\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -336,7 +339,9 @@
             "Chinese (Simplified)": "\u963f\u62c9\u4f2f\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u963f\u62c9\u4f2f\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Bosnian": {
@@ -372,7 +377,6 @@
             "Japanese": "\u30dc\u30b9\u30cb\u30a2\u8a9e",
             "Korean": "\ubcf4\uc988\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -404,7 +408,9 @@
             "Chinese (Simplified)": "\u6ce2\u65af\u5c3c\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u6ce2\u58eb\u5c3c\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Bulgarian": {
@@ -440,7 +446,6 @@
             "Japanese": "\u30d6\u30eb\u30ac\u30ea\u30a2\u8a9e",
             "Korean": "\ubd88\uac00\ub9ac\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -472,7 +477,9 @@
             "Chinese (Simplified)": "\u4fdd\u52a0\u5229\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u4fdd\u52a0\u5229\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Catalan": {
@@ -508,7 +515,6 @@
             "Japanese": "\u30ab\u30bf\u30eb\u30fc\u30cb\u30e3\u8a9e",
             "Korean": "\uce74\ud0c8\ub85c\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -540,7 +546,9 @@
             "Chinese (Simplified)": "\u52a0\u6cf0\u7f57\u5c3c\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u52a0\u6cf0\u7f85\u5c3c\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Czech": {
@@ -576,7 +584,6 @@
             "Japanese": "\u30c1\u30a7\u30b3\u8a9e",
             "Korean": "\uccb4\ucf54\uc2ac\ub85c\ubc14\ud0a4\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -608,7 +615,9 @@
             "Chinese (Simplified)": "\u6377\u514b\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u6377\u514b\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Slovak": {
@@ -644,7 +653,6 @@
             "Japanese": "\u30b9\u30e9\u30f4\u8a9e\u6d3e",
             "Korean": "\uc2ac\ub77c\ube0c\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -676,7 +684,9 @@
             "Chinese (Simplified)": "\u65af\u62c9\u592b\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u65af\u62c9\u592b\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Welsh": {
@@ -712,7 +722,6 @@
             "Japanese": "\u30a6\u30a7\u30fc\u30eb\u30ba\u8a9e",
             "Korean": "\uc6e8\uc77c\uc988\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -744,7 +753,9 @@
             "Chinese (Simplified)": "\u5a01\u5c14\u58eb\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5a01\u723e\u58eb\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Danish": {
@@ -780,7 +791,6 @@
             "Japanese": "\u30c7\u30f3\u30de\u30fc\u30af\u8a9e",
             "Korean": "\ub374\ub9c8\ud06c\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -812,7 +822,9 @@
             "Chinese (Simplified)": "\u4e39\u9ea6\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u4e39\u9ea5\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Greek": {
@@ -848,7 +860,6 @@
             "Japanese": "\u30ae\u30ea\u30b7\u30a2\u8a9e",
             "Korean": "\uadf8\ub9ac\uc2a4\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -880,7 +891,9 @@
             "Chinese (Simplified)": "\u5e0c\u814a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5e0c\u81d8\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Esperanto": {
@@ -916,7 +929,6 @@
             "Japanese": "\u30a8\u30b9\u30da\u30e9\u30f3\u30c8\u8a9e",
             "Korean": "\uc5d0\uc2a4\ud398\ub780\ud1a0\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -948,7 +960,9 @@
             "Chinese (Simplified)": "\u4e16\u754c\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u4e16\u754c\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Estonian": {
@@ -984,7 +998,6 @@
             "Japanese": "\u30a8\u30b9\u30c8\u30cb\u30a2\u8a9e",
             "Korean": "\uc5d0\uc2a4\ud1a0\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1016,7 +1029,9 @@
             "Chinese (Simplified)": "\u7231\u6c99\u5c3c\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u611b\u6c99\u5c3c\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Basque": {
@@ -1052,7 +1067,6 @@
             "Japanese": "\u30d0\u30b9\u30af\u8a9e",
             "Korean": "\ubc14\uc2a4\ud06c\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1084,7 +1098,9 @@
             "Chinese (Simplified)": "\u5df4\u65af\u514b\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5df4\u65af\u514b\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Persian": {
@@ -1120,7 +1136,6 @@
             "Japanese": "\u30da\u30eb\u30b7\u30a2\u8a9e",
             "Korean": "\ud398\ub974\uc2dc\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1152,7 +1167,9 @@
             "Chinese (Simplified)": "\u6ce2\u65af\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u6ce2\u65af\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Finnish": {
@@ -1188,7 +1205,6 @@
             "Japanese": "\u30d5\u30a3\u30f3\u30e9\u30f3\u30c9\u8a9e",
             "Korean": "\ud540\ub780\ub4dc\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1220,7 +1236,9 @@
             "Chinese (Simplified)": "\u82ac\u5170\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u82ac\u862d\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Irish": {
@@ -1256,7 +1274,6 @@
             "Japanese": "\u30a2\u30a4\u30eb\u30e9\u30f3\u30c9\u8a9e",
             "Korean": "\uc544\uc77c\ub79c\ub4dc\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1288,7 +1305,9 @@
             "Chinese (Simplified)": "\u7231\u5c14\u5170\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u611b\u723e\u862d\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Hebrew": {
@@ -1324,7 +1343,6 @@
             "Japanese": "\u30d8\u30d6\u30e9\u30a4\u8a9e",
             "Korean": "\ud788\ube0c\ub9ac\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1356,7 +1374,9 @@
             "Chinese (Simplified)": "\u5e0c\u4f2f\u6765\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5e0c\u4f2f\u4f86\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Hindi": {
@@ -1392,7 +1412,6 @@
             "Japanese": "\u30d2\u30f3\u30c7\u30a3\u30fc\u8a9e",
             "Korean": "\ud78c\ub450\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1424,7 +1443,9 @@
             "Chinese (Simplified)": "\u5370\u5730\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5370\u5730\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Croatian": {
@@ -1460,7 +1481,6 @@
             "Japanese": "\u30af\u30ed\u30a2\u30c1\u30a2\u8a9e",
             "Korean": "\ud06c\ub85c\uc544\uc2dc\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1492,7 +1512,9 @@
             "Chinese (Simplified)": "\u514b\u7f57\u5730\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u514b\u7f85\u5730\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Hungarian": {
@@ -1528,7 +1550,6 @@
             "Japanese": "\u30cf\u30f3\u30ac\u30ea\u30fc\u8a9e",
             "Korean": "\ud5dd\uac00\ub9ac\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1560,7 +1581,9 @@
             "Chinese (Simplified)": "\u5308\u7259\u5229\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5308\u7259\u5229\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Armenian": {
@@ -1596,7 +1619,6 @@
             "Japanese": "\u30a2\u30eb\u30e1\u30cb\u30a2\u8a9e",
             "Korean": "\uc544\ub974\uba54\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1628,7 +1650,9 @@
             "Chinese (Simplified)": "\u4e9a\u7f8e\u5c3c\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u4e9e\u7f8e\u5c3c\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Indonesian": {
@@ -1664,7 +1688,6 @@
             "Japanese": "\u30a4\u30f3\u30c9\u30cd\u30b7\u30a2\u8a9e",
             "Korean": "\uc778\ub3c4\ub124\uc2dc\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1696,7 +1719,9 @@
             "Chinese (Simplified)": "\u5370\u5ea6\u5c3c\u897f\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5370\u5c3c\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Icelandic": {
@@ -1732,7 +1757,6 @@
             "Japanese": "\u30a2\u30a4\u30b9\u30e9\u30f3\u30c9\u8a9e",
             "Korean": "\uc544\uc774\uc2ac\ub79c\ub4dc\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1764,7 +1788,9 @@
             "Chinese (Simplified)": "\u51b0\u5c9b\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u51b0\u5cf6\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Italian": {
@@ -1800,7 +1826,6 @@
             "Japanese": "\u30a4\u30bf\u30ea\u30a2\u8a9e",
             "Korean": "\uc774\ud0dc\ub9ac\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1832,7 +1857,9 @@
             "Chinese (Simplified)": "\u610f\u5927\u5229\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u7fa9\u5927\u5229\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Japanese": {
@@ -1868,7 +1895,6 @@
             "Japanese": "\u65e5\u672c\u8a9e",
             "Korean": "\uc77c\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1900,7 +1926,9 @@
             "Chinese (Simplified)": "\u65e5\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u65e5\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Korean": {
@@ -1936,7 +1964,6 @@
             "Japanese": "\u97d3\u56fd\u8a9e",
             "Korean": "\ud55c\uad6d\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -1968,7 +1995,9 @@
             "Chinese (Simplified)": "\u97e9\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u97d3\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Kurdish": {
@@ -2004,7 +2033,6 @@
             "Japanese": "\u30af\u30eb\u30c9\u8a9e",
             "Korean": "\ucfe0\ub974\ub4dc\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2036,75 +2064,9 @@
             "Chinese (Simplified)": "\u5e93\u5c14\u5fb7\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5eab\u723e\u5fb7\u8a9e",
-            "Malay": ""
-        }
-    },
-    "Latin": {
-        "major": 0,
-        "tr": {
-            "English": "Latin",
-            "Spanish": "Lat\u00edn",
-            "German": "Latein",
-            "French": "Latin",
-            "Arabic": "\u0627\u0644\u0644\u0627\u062a\u064a\u0646\u064a\u0629",
-            "Bosnian": "",
-            "Bulgarian": "\u041b\u0430\u0442\u0438\u043d\u0441\u043a\u0438",
-            "Catalan": "",
-            "Czech": "Latina",
-            "Slovak": "Latin\u010dina",
-            "Welsh": "",
-            "Danish": "",
-            "Greek": "\u039b\u03b1\u03c4\u03b9\u03bd\u03b9\u03ba\u03b7",
-            "Esperanto": "",
-            "Estonian": "",
-            "Basque": "",
-            "Persian": "",
-            "Finnish": "latina",
-            "Irish": "",
-            "Hebrew": "\u05dc\u05d8\u05d9\u05e0\u05d9\u05ea",
-            "Hindi": "",
-            "Croatian": "Latin",
-            "Hungarian": "latin",
-            "Armenian": "",
-            "Indonesian": "",
-            "Icelandic": "",
-            "Italian": "Latino",
-            "Japanese": "\u30e9\u30c6\u30f3\u8a9e",
-            "Korean": "\ub77c\ud2f4\uc5b4",
-            "Kurdish": "",
-            "Latin": "",
-            "Latvian": "",
-            "Lithuanian": "",
-            "Macedonian": "",
-            "Maltese": "",
-            "Mongolian": "",
-            "Nepali": "",
-            "Dutch": "Latijn",
-            "Norwegian Bokm\u00e5l": "Latin",
-            "Punjabi": "",
-            "Polish": "\u0142aci\u0144ski",
-            "Portuguese, Portugal": "Latim",
-            "Portuguese, Brazil": "Latim",
-            "Quechua": "",
-            "Romanian": "Latin\u0103",
-            "Russian": "\u041b\u0430\u0442\u0438\u043d\u0441\u043a\u0438\u0439",
-            "Slovenian": "Latin\u0161\u010dina",
-            "Somali": "",
-            "Albanian": "",
-            "Serbian": "\u043b\u0430\u0442\u0438\u043d\u0441\u043a\u0438",
-            "Swedish": "Latin",
-            "Tamil": "",
-            "Thai": "\u0e25\u0e30\u0e15\u0e34\u0e19",
-            "Turkish": "Latince",
-            "Ukrainian": "",
-            "Urdu": "",
-            "Uzbek": "",
-            "Vietnamese": "",
-            "Yiddish": "",
-            "Chinese (Simplified)": "\u62c9\u4e01\u8bed",
-            "Zulu": "",
-            "Chinese (Traditional)": "\u62c9\u4e01\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Latvian": {
@@ -2140,7 +2102,6 @@
             "Japanese": "\u30e9\u30c8\u30d3\u30a2\u8a9e",
             "Korean": "\ub77c\ud2b8\ube44\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "Latvie\u0161u",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2172,7 +2133,9 @@
             "Chinese (Simplified)": "\u62c9\u8131\u7ef4\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u62c9\u812b\u7dad\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Lithuanian": {
@@ -2208,7 +2171,6 @@
             "Japanese": "\u30ea\u30c8\u30a2\u30cb\u30a2\u8a9e",
             "Korean": "\ub9ac\ud22c\uc544\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "Lietuvos",
             "Macedonian": "",
@@ -2240,7 +2202,9 @@
             "Chinese (Simplified)": "\u7acb\u9676\u5b9b\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u7acb\u9676\u5b9b\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Macedonian": {
@@ -2276,7 +2240,6 @@
             "Japanese": "\u30de\u30b1\u30c9\u30cb\u30a2\u8a9e",
             "Korean": "\ub9c8\ucf00\ub3c4\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "\u043c\u0430\u043a\u0435\u0434\u043e\u043d\u0441\u043a\u0438",
@@ -2308,7 +2271,9 @@
             "Chinese (Simplified)": "\u9a6c\u5176\u987f\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u99ac\u5176\u9813\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Maltese": {
@@ -2344,7 +2309,6 @@
             "Japanese": "\u30de\u30eb\u30bf\u8a9e",
             "Korean": "\ubab0\ud0c0\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2376,7 +2340,9 @@
             "Chinese (Simplified)": "\u9a6c\u8033\u4ed6\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u99ac\u723e\u4ed6\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Mongolian": {
@@ -2412,7 +2378,6 @@
             "Japanese": "\u30e2\u30f3\u30b4\u30eb\u8a9e",
             "Korean": "\ubabd\uace8\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2444,7 +2409,9 @@
             "Chinese (Simplified)": "\u8499\u53e4\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u8499\u53e4\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Nepali": {
@@ -2480,7 +2447,6 @@
             "Japanese": "\u30cd\u30d1\u30fc\u30eb\u8a9e",
             "Korean": "\ub124\ud314\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2512,7 +2478,9 @@
             "Chinese (Simplified)": "\u5c3c\u6cca\u5c14\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u5c3c\u6cca\u723e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Dutch": {
@@ -2548,7 +2516,6 @@
             "Japanese": "\u30aa\u30e9\u30f3\u30c0\u8a9e",
             "Korean": "\ud654\ub780\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2580,7 +2547,9 @@
             "Chinese (Simplified)": "\u8377\u5170\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u8377\u862d\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Norwegian Bokm\u00e5l": {
@@ -2616,7 +2585,6 @@
             "Japanese": "\u30ce\u30eb\u30a6\u30a7\u30fc\u30fb\u30d6\u30fc\u30af\u30e2\u30fc\u30eb",
             "Korean": "\ub178\ub974\uc6e8\uc774 \ubcf4\ud06c\ub9d0\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2648,7 +2616,9 @@
             "Chinese (Simplified)": "\u632a\u5a01\u5e03\u514b\u83ab\u5c14\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u632a\u5a01\u5e03\u514b\u83ab\u723e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Punjabi": {
@@ -2684,7 +2654,6 @@
             "Japanese": "\u30d1\u30f3\u30b8\u30e3\u30fc\u30d6\u8a9e",
             "Korean": "\ud380\uc790\ube0c\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2716,7 +2685,9 @@
             "Chinese (Simplified)": "\u65c1\u906e\u666e\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u65c1\u906e\u666e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Polish": {
@@ -2752,7 +2723,6 @@
             "Japanese": "\u30dd\u30fc\u30e9\u30f3\u30c9\u8a9e",
             "Korean": "\ud3f4\ub780\ub4dc\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2784,7 +2754,9 @@
             "Chinese (Simplified)": "\u6ce2\u5170\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u6ce2\u862d\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Portuguese, Portugal": {
@@ -2820,7 +2792,6 @@
             "Japanese": "\u30dd\u30eb\u30c8\u30ac\u30eb\u8a9e",
             "Korean": "\ud3ec\ub974\ud22c\uac08 \ud3ec\ub974\ud22c\uac08\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2852,7 +2823,9 @@
             "Chinese (Simplified)": "\u8461\u8404\u7259\u8bed\uff08\u8461\u8404\u7259\uff09",
             "Zulu": "",
             "Chinese (Traditional)": "\u8461\u8404\u7259\u8a9e\uff08\u8461\u8404\u7259\uff09",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Portuguese, Brazil": {
@@ -2888,7 +2861,6 @@
             "Japanese": "\u30dd\u30eb\u30c8\u30ac\u30eb\u8a9e\uff08\u30d6\u30e9\u30b8\u30eb\uff09",
             "Korean": "\ube0c\ub77c\uc9c8 \ud3ec\ub974\ud22c\uac08\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2920,7 +2892,9 @@
             "Chinese (Simplified)": "\u8461\u8404\u7259\u8bed\uff08\u5df4\u897f\uff09",
             "Zulu": "",
             "Chinese (Traditional)": "\u8461\u8404\u7259\u8a9e\uff08\u5df4\u897f\uff09",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Quechua": {
@@ -2956,7 +2930,6 @@
             "Japanese": "\u30b1\u30c1\u30e5\u30a2\u8a9e",
             "Korean": "\ucf00\ucd94\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -2988,7 +2961,9 @@
             "Chinese (Simplified)": "\u76d6\u4e18\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u84cb\u4e18\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Romanian": {
@@ -3024,7 +2999,6 @@
             "Japanese": "\u30eb\u30fc\u30de\u30cb\u30a2\u8a9e",
             "Korean": "\ub85c\ub9c8\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3056,7 +3030,9 @@
             "Chinese (Simplified)": "\u7f57\u9a6c\u5c3c\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u7f85\u99ac\u5c3c\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Russian": {
@@ -3092,7 +3068,6 @@
             "Japanese": "\u30ed\u30b7\u30a2\u8a9e",
             "Korean": "\ub7ec\uc2dc\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3124,7 +3099,9 @@
             "Chinese (Simplified)": "\u4fc4\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u4fc4\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Slovenian": {
@@ -3160,7 +3137,6 @@
             "Japanese": "\u30b9\u30ed\u30d9\u30cb\u30a2\u8a9e",
             "Korean": "\uc2ac\ub85c\ubca0\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3192,7 +3168,9 @@
             "Chinese (Simplified)": "\u65af\u6d1b\u6587\u5c3c\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u65af\u6d1b\u6587\u5c3c\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Somali": {
@@ -3228,7 +3206,6 @@
             "Japanese": "\u30bd\u30de\u30ea\u8a9e",
             "Korean": "\uc18c\ub9d0\ub9ac\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3260,7 +3237,9 @@
             "Chinese (Simplified)": "\u7d22\u9a6c\u91cc\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u7d22\u99ac\u91cc\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Albanian": {
@@ -3296,7 +3275,6 @@
             "Japanese": "\u30a2\u30eb\u30d0\u30cb\u30a2\u8a9e",
             "Korean": "\uc54c\ubc14\ub2c8\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3328,7 +3306,9 @@
             "Chinese (Simplified)": "\u963f\u5c14\u5df4\u5c3c\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u963f\u723e\u5df4\u5c3c\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Serbian": {
@@ -3364,7 +3344,6 @@
             "Japanese": "\u30bb\u30eb\u30d3\u30a2\u8a9e",
             "Korean": "\uc138\ub974\ube44\uc544\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3396,7 +3375,9 @@
             "Chinese (Simplified)": "\u8d5b\u5c14\u7ef4\u4e9a\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u8cfd\u723e\u7dad\u4e9e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Swedish": {
@@ -3432,7 +3413,6 @@
             "Japanese": "\u30b9\u30a6\u30a7\u30fc\u30c7\u30f3\u8a9e",
             "Korean": "\uc2a4\uc6e8\ub374\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3464,7 +3444,9 @@
             "Chinese (Simplified)": "\u745e\u5178\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u745e\u5178\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Tamil": {
@@ -3500,7 +3482,6 @@
             "Japanese": "\u30bf\u30df\u30eb\u8a9e",
             "Korean": "\ud0c0\ubc00\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3532,7 +3513,9 @@
             "Chinese (Simplified)": "\u6cf0\u7c73\u5c14\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u6cf0\u7c73\u723e\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Thai": {
@@ -3568,7 +3551,6 @@
             "Japanese": "\u30bf\u30a4\u8a9e",
             "Korean": "\ud0dc\uad6d\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3600,7 +3582,9 @@
             "Chinese (Simplified)": "\u6cf0\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u6cf0\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Turkish": {
@@ -3636,7 +3620,6 @@
             "Japanese": "\u30c8\u30eb\u30b3\u8a9e",
             "Korean": "\ud130\uc5b4\ud0a4\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3668,7 +3651,9 @@
             "Chinese (Simplified)": "\u571f\u8033\u5176\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u571f\u8033\u5176\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Ukrainian": {
@@ -3704,7 +3689,6 @@
             "Japanese": "\u30a6\u30af\u30e9\u30a4\u30ca\u8a9e",
             "Korean": "\uc6b0\ud06c\ub77c\uc774\ub098\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3736,7 +3720,9 @@
             "Chinese (Simplified)": "\u4e4c\u514b\u5170\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u70cf\u514b\u862d\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Urdu": {
@@ -3772,7 +3758,6 @@
             "Japanese": "\u30a6\u30eb\u30c9\u30a5\u30fc\u8a9e",
             "Korean": "\uc6b0\ub974\ub450\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3804,7 +3789,9 @@
             "Chinese (Simplified)": "\u4e4c\u5c14\u90fd\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u70cf\u723e\u90fd\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Uzbek": {
@@ -3840,7 +3827,6 @@
             "Japanese": "\u30a6\u30ba\u30d9\u30af\u8a9e",
             "Korean": "\uc6b0\uc988\ubca0\ud06c\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3872,7 +3858,9 @@
             "Chinese (Simplified)": "\u4e4c\u5179\u522b\u514b\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u70cf\u8332\u5225\u514b\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Vietnamese": {
@@ -3908,7 +3896,6 @@
             "Japanese": "\u30d9\u30c8\u30ca\u30e0\u8a9e",
             "Korean": "\ubca0\ud2b8\ub0a8\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -3940,7 +3927,9 @@
             "Chinese (Simplified)": "\u8d8a\u5357\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u8d8a\u5357\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Yiddish": {
@@ -3976,7 +3965,6 @@
             "Japanese": "\u30a4\u30c7\u30a3\u30c3\u30b7\u30e5\u8a9e",
             "Korean": "\uc774\ub514\uc2dc\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -4008,7 +3996,9 @@
             "Chinese (Simplified)": "\u4f9d\u5730\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u4f9d\u5730\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Chinese (Simplified)": {
@@ -4044,7 +4034,6 @@
             "Japanese": "\u7c21\u4f53\u4e2d\u56fd\u8a9e",
             "Korean": "\uc911\uad6d\uc5b4 \uac04\uccb4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -4076,7 +4065,9 @@
             "Chinese (Simplified)": "\u7b80\u4f53\u4e2d\u6587",
             "Zulu": "",
             "Chinese (Traditional)": "\u7c21\u9ad4\u4e2d\u6587",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Zulu": {
@@ -4112,7 +4103,6 @@
             "Japanese": "\u30ba\u30fc\u30eb\u30fc\u8a9e",
             "Korean": "\uc904\ub8e8\uc5b4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -4144,7 +4134,9 @@
             "Chinese (Simplified)": "\u7956\u9c81\u8bed",
             "Zulu": "",
             "Chinese (Traditional)": "\u7956\u9b6f\u8a9e",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Chinese (Traditional)": {
@@ -4180,7 +4172,6 @@
             "Japanese": "\u7e41\u4f53\u4e2d\u56fd\u8a9e",
             "Korean": "\uc911\uad6d\uc5b4 \ubc88\uccb4",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -4212,7 +4203,9 @@
             "Chinese (Simplified)": "\u7e41\u4f53\u4e2d\u6587",
             "Zulu": "",
             "Chinese (Traditional)": "\u7e41\u9ad4\u4e2d\u6587",
-            "Malay": ""
+            "Malay": "",
+            "Galician": "",
+            "Bengali": ""
         }
     },
     "Malay": {
@@ -4248,7 +4241,6 @@
             "Japanese": "",
             "Korean": "",
             "Kurdish": "",
-            "Latin": "",
             "Latvian": "",
             "Lithuanian": "",
             "Macedonian": "",
@@ -4263,7 +4255,7 @@
             "Portuguese, Brazil": "Malaio",
             "Quechua": "",
             "Romanian": "",
-            "Russian": "",
+            "Russian": "\u041C\u0430\u043B\u0430\u0439\u0441\u043A\u0438\u0439",
             "Slovenian": "Malaj\u0161\u010dina",
             "Somali": "",
             "Albanian": "",
@@ -4280,7 +4272,147 @@
             "Chinese (Simplified)": "",
             "Zulu": "",
             "Chinese (Traditional)": "",
-            "Malay": "Melayu"
+            "Malay": "Melayu",
+            "Galician": "",
+            "Bengali": ""
+        }
+    },
+    "Galician": {
+        "major": 0,
+        "tr": {
+            "English": "Galician",
+            "Spanish": "Gallego",
+            "German": "Galicisch",
+            "French": "Galicien",
+            "Arabic": "",
+            "Bosnian": "",
+            "Bulgarian": "",
+            "Catalan": "",
+            "Czech": "",
+            "Slovak": "",
+            "Welsh": "",
+            "Danish": "",
+            "Greek": "",
+            "Esperanto": "",
+            "Estonian": "",
+            "Basque": "",
+            "Persian": "",
+            "Finnish": "",
+            "Irish": "",
+            "Hebrew": "",
+            "Hindi": "",
+            "Croatian": "",
+            "Hungarian": "",
+            "Armenian": "",
+            "Indonesian": "",
+            "Icelandic": "",
+            "Italian": "Gallego",
+            "Japanese": "",
+            "Korean": "",
+            "Kurdish": "",
+            "Latvian": "",
+            "Lithuanian": "",
+            "Macedonian": "",
+            "Maltese": "",
+            "Mongolian": "",
+            "Nepali": "",
+            "Dutch": "",
+            "Norwegian Bokm\u00e5l": "",
+            "Punjabi": "",
+            "Polish": "",
+            "Portuguese, Portugal": "Galego",
+            "Portuguese, Brazil": "Galego",
+            "Quechua": "",
+            "Romanian": "",
+            "Russian": "\u0413\u0430\u043B\u0438\u0441\u0438\u0439\u0441\u043A\u0438\u0439",
+            "Slovenian": "",
+            "Somali": "",
+            "Albanian": "",
+            "Serbian": "",
+            "Swedish": "",
+            "Tamil": "",
+            "Thai": "",
+            "Turkish": "",
+            "Ukrainian": "",
+            "Urdu": "",
+            "Uzbek": "",
+            "Vietnamese": "",
+            "Yiddish": "",
+            "Chinese (Simplified)": "",
+            "Zulu": "",
+            "Chinese (Traditional)": "",
+            "Malay": "",
+            "Galician": "Galego",
+            "Bengali": ""
+        }
+    },
+    "Bengali": {
+        "major": 0,
+        "tr": {
+            "English": "Bengali",
+            "Spanish": "Bengalí",
+            "German": "Bengalisch",
+            "French": "Bengali",
+            "Arabic": "",
+            "Bosnian": "",
+            "Bulgarian": "",
+            "Catalan": "",
+            "Czech": "",
+            "Slovak": "",
+            "Welsh": "",
+            "Danish": "",
+            "Greek": "",
+            "Esperanto": "",
+            "Estonian": "",
+            "Basque": "",
+            "Persian": "",
+            "Finnish": "",
+            "Irish": "",
+            "Hebrew": "",
+            "Hindi": "",
+            "Croatian": "",
+            "Hungarian": "",
+            "Armenian": "",
+            "Indonesian": "",
+            "Icelandic": "",
+            "Italian": "Bengalese",
+            "Japanese": "",
+            "Korean": "",
+            "Kurdish": "",
+            "Latvian": "",
+            "Lithuanian": "",
+            "Macedonian": "",
+            "Maltese": "",
+            "Mongolian": "",
+            "Nepali": "",
+            "Dutch": "",
+            "Norwegian Bokm\u00e5l": "",
+            "Punjabi": "",
+            "Polish": "",
+            "Portuguese, Portugal": "Bengalês",
+            "Portuguese, Brazil": "Bengalês",
+            "Quechua": "",
+            "Romanian": "",
+            "Russian": "\u0411\u0435\u043D\u0433\u0430\u043B\u044C\u0441\u043A\u0438\u0439",
+            "Slovenian": "",
+            "Somali": "",
+            "Albanian": "",
+            "Serbian": "",
+            "Swedish": "",
+            "Tamil": "",
+            "Thai": "",
+            "Turkish": "",
+            "Ukrainian": "",
+            "Urdu": "",
+            "Uzbek": "",
+            "Vietnamese": "",
+            "Yiddish": "",
+            "Chinese (Simplified)": "",
+            "Zulu": "",
+            "Chinese (Traditional)": "",
+            "Malay": "",
+            "Galician": "",
+            "Bengali": "\u0939\u093f\u0928\u094d\u0926\u0940"
         }
     }
 }

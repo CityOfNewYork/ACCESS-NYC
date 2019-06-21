@@ -12,12 +12,10 @@ use Rollbar\Payload\Level;
 class RollbarTest extends BaseRollbarTest
 {
     
-    public function __construct()
+    public function setUp()
     {
         self::$simpleConfig['access_token'] = $this->getTestAccessToken();
         self::$simpleConfig['environment'] = 'test';
-        
-        parent::__construct();
     }
 
     private static $simpleConfig = array();
@@ -107,9 +105,11 @@ class RollbarTest extends BaseRollbarTest
             )
         );
         
+        $extra = $payload->getData()->getBody()->getExtra();
+        
         $this->assertEquals(
             "some value",
-            $payload->getData()->getBody()->getValue()->some_key
+            $extra['some_key']
         );
     }
     

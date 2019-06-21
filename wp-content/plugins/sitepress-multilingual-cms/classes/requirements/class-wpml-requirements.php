@@ -4,6 +4,7 @@
  */
 class WPML_Requirements {
 	private $active_plugins       = array();
+	private $disabled_plugins     = array();
 	private $missing_requirements = array();
 
 	private $plugins = array(
@@ -32,11 +33,19 @@ class WPML_Requirements {
 			'name' => 'BuddyPress Multilingual',
 			'url'  => '#',
 		),
+		'wp-seo-multilingual'     => array(
+			'name' => 'Yoast SEO Multilingual',
+			'url'  => '#',
+		),
 	);
 
 	private $modules = array(
+		WPML_Integrations::SCOPE_WP_CORE => array(
+			'url'                => 'https://wpml.org/?page_id=2909360&utm_source=wpmlplugin&utm_campaign=gutenberg&utm_medium=translation-editor&utm_term=translating-content-created-using-gutenberg-editor',
+			'requirements_class' => 'WPML_Integration_Requirements_Block_Editor',
+		),
 		'page-builders' => array(
-			'url'          => 'https://wpml.org/documentation/translating-your-contents/page-builders/',
+			'url'          => 'https://wpml.org/?page_id=1129854',
 			'requirements' => array(
 				'wpml-string-translation',
 				'wpml-translation-management',
@@ -48,7 +57,6 @@ class WPML_Requirements {
 				'woocommerce-multilingual',
 				'wpml-translation-management',
 				'wpml-string-translation',
-				'wpml-media-translation',
 			),
 		),
 		'gravityforms'  => array(
@@ -77,6 +85,12 @@ class WPML_Requirements {
 				'wpml-string-translation',
 			),
 		),
+		'wordpress-seo'	=> array(
+			'url'          => '#',
+			'requirements' => array(
+				'wp-seo-multilingual',
+			)
+		),
 	);
 
 	/**
@@ -86,12 +100,18 @@ class WPML_Requirements {
 		if ( function_exists( 'get_plugins' ) ) {
 			$installed_plugins = get_plugins();
 			foreach ( $installed_plugins as $plugin_file => $plugin_data ) {
+				$plugin_slug = $this->get_plugin_slug( $plugin_data );
 				if ( is_plugin_active( $plugin_file ) ) {
-					$plugin_slug                          = $this->get_plugin_slug( $plugin_data );
 					$this->active_plugins[ $plugin_slug ] = $plugin_data;
+				} else {
+					$this->disabled_plugins[ $plugin_slug ] = $plugin_file;
 				}
 			}
 		}
+	}
+
+	public function is_plugin_active( $plugin_slug ) {
+		return array_key_exists( $plugin_slug, $this->active_plugins );
 	}
 
 	/**
@@ -135,7 +155,14 @@ class WPML_Requirements {
 				$requirement            = $this->get_plugin_data( $plugin_slug );
 				$requirement['missing'] = false;
 				if ( in_array( $plugin_slug, $missing_plugins, true ) ) {
-					$requirement['missing']       = true;
+					$requirement['missing'] = true;
+
+					if ( array_key_exists( $plugin_slug, $this->disabled_plugins ) ) {
+						$requirement['disabled']         = true;
+						$requirement['plugin_file']      = $this->disabled_plugins[ $plugin_slug ];
+						$requirement['activation_nonce'] = wp_create_nonce( 'activate_' . $this->disabled_plugins[ $plugin_slug ] );
+					}
+
 					$this->missing_requirements[] = $requirement;
 				}
 				$requirements[] = $requirement;
@@ -204,10 +231,19 @@ class WPML_Requirements {
 	 */
 	private function get_components_requirements_by_type( $type, $slug ) {
 		$components_requirements = $this->get_components_by_type( $type, $slug );
+		$requirements = array();
+
 		if ( array_key_exists( 'requirements', $components_requirements ) ) {
-			return $components_requirements['requirements'];
+			$requirements = $components_requirements['requirements'];
+		} elseif ( array_key_exists( 'requirements_class', $components_requirements ) ) {
+			try {
+				$class = $components_requirements['requirements_class'];
+				/** @var IWPML_Integration_Requirements_Module $requirement_module */
+				$requirement_module = new $class( $this );
+				$requirements = $requirement_module->get_requirements();
+			} catch ( Exception $e ) {}
 		}
 
-		return array();
+		return $requirements;
 	}
 }

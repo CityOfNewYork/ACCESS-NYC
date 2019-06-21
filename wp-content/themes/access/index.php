@@ -3,7 +3,6 @@
  * Index template
  *
  * A fallback list template used if a more specific template is not available
- *
  */
 
 $context = Timber::get_context();

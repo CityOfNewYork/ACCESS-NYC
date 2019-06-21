@@ -19,6 +19,23 @@ class WPML_Admin_Pagination {
 	/** @var  string $current_url */
 	private $current_url;
 
+	/** @var string  */
+	private $page_param_name = 'paged';
+
+	/**
+	 * @param string $page_param_name
+	 */
+	public function set_page_param_name( $page_param_name ) {
+		$this->page_param_name = $page_param_name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_page_param_name() {
+		return $this->page_param_name;
+	}
+
 	/**
 	 * @param int $items_per_page
 	 */
@@ -75,7 +92,7 @@ class WPML_Admin_Pagination {
 		$url = null;
 
 		if ( 2 < $this->get_current_page() ) {
-			$url = remove_query_arg( 'paged', $this->get_current_url() );
+			$url = remove_query_arg( $this->page_param_name, $this->get_current_url() );
 		}
 
 		return $url;
@@ -88,7 +105,7 @@ class WPML_Admin_Pagination {
 		$url = null;
 
 		if ( 1 < $this->get_current_page() ) {
-			$url = add_query_arg( 'paged', $this->get_current_page() - 1, $this->get_current_url() );
+			$url = add_query_arg( $this->page_param_name, $this->get_current_page() - 1, $this->get_current_url() );
 		}
 
 		return $url;
@@ -101,7 +118,7 @@ class WPML_Admin_Pagination {
 		$url = null;
 
 		if ( $this->get_current_page() < $this->get_total_pages() ) {
-			$url = add_query_arg( 'paged', $this->get_current_page() + 1, $this->get_current_url() );
+			$url = add_query_arg( $this->page_param_name, $this->get_current_page() + 1, $this->get_current_url() );
 		}
 
 		return $url;
@@ -114,7 +131,7 @@ class WPML_Admin_Pagination {
 		$url = null;
 
 		if ( $this->get_current_page() < $this->get_total_pages() - 1 ) {
-			$url = add_query_arg( 'paged', $this->get_total_pages(), $this->get_current_url() );
+			$url = add_query_arg( $this->page_param_name, $this->get_total_pages(), $this->get_current_url() );
 		}
 
 		return $url;

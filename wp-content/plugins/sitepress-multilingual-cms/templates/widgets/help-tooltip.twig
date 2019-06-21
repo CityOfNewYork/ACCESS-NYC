@@ -1,0 +1,15 @@
+{% if help is iterable and help['link'] is defined %}
+
+	{% set tooltip = help.text ~ '<br/>' %}
+	{% set anchor = '<a href="' ~ help.link.url ~ '" class="wpml-external-link" target="_blank" rel="noopener">' ~ help.link.text ~ '</a>' %}
+	{% if help.link['pattern'] is defined %}
+		{% set tooltip = tooltip ~ help.link.pattern|format(anchor) %}
+	{% else %}
+		{% set tooltip = tooltip ~ anchor %}
+	{% endif %}
+
+{% else %}
+	{% set tooltip = help %}
+{% endif %}
+
+<i class="otgs-ico-help js-otgs-popover-tooltip" data-tippy-zIndex="999999" title="{{ tooltip }}" ></i>

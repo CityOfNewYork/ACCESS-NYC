@@ -19,6 +19,7 @@ class Config
         'allow_exec',
         'endpoint',
         'base_api_url',
+        'autodetect_branch',
         'branch',
         'capture_error_stacktraces',
         'check_ignore',
@@ -54,7 +55,8 @@ class Config
         'send_message_trace',
         'include_raw_request_body',
         'local_vars_dump',
-        'verbosity'
+        'max_nesting_depth',
+        'max_items'
     );
     
     private $accessToken;
@@ -104,6 +106,8 @@ class Config
     private $batched = false;
     private $batchSize = 50;
 
+    private $maxNestingDepth = 10;
+
     private $custom = array();
     
     /**
@@ -130,23 +134,20 @@ class Config
     private $sendMessageTrace = false;
     
     /**
-     * @var string (One of the \Psr\Log\LogLevel constants) How much debugging
-     * info should be recorded in the Rollbar debug log file.
-     * ($rollbarLogger->getDebugLogFile() => commonly /tmp/rollbar.debug.log.
-     * Default: Psr\Log\LogLevel::ERROR
-     */
-    private $verbosity;
-    
-    /**
      * @var string (fully qualified class name) The name of the your custom
      * truncation strategy class. The class should inherit from
      * Rollbar\Truncation\AbstractStrategy.
      */
     private $customTruncation;
+    
+    /**
+     * @var int The maximum number of items reported to Rollbar within one
+     * request.
+     */
+    private $maxItems;
 
     public function __construct(array $configArray)
     {
-        $this->verbosity = \Rollbar\Defaults::get()->verbosity();
         $this->includedErrno = \Rollbar\Defaults::get()->includedErrno();
         
         $this->levelFactory = new LevelFactory();
@@ -215,11 +216,11 @@ class Config
         $this->setScrubber($config);
         $this->setBatched($config);
         $this->setBatchSize($config);
+        $this->setMaxNestingDepth($config);
         $this->setCustom($config);
         $this->setResponseHandler($config);
         $this->setCheckIgnoreFunction($config);
         $this->setSendMessageTrace($config);
-        $this->setVerbosity($config);
 
         if (isset($config['included_errno'])) {
             $this->includedErrno = $config['included_errno'];
@@ -228,6 +229,11 @@ class Config
         $this->useErrorReporting = \Rollbar\Defaults::get()->useErrorReporting();
         if (isset($config['use_error_reporting'])) {
             $this->useErrorReporting = $config['use_error_reporting'];
+        }
+        
+        $this->maxItems = \Rollbar\Defaults::get()->maxItems();
+        if (isset($config['max_items'])) {
+            $this->maxItems = $config['max_items'];
         }
         
         if (isset($config['custom_truncation'])) {
@@ -361,6 +367,13 @@ class Config
         }
     }
 
+    private function setMaxNestingDepth($config)
+    {
+        if (array_key_exists('max_nesting_depth', $config)) {
+            $this->maxNestingDepth = $config['max_nesting_depth'];
+        }
+    }
+
     public function setCustom($config)
     {
         $this->dataBuilder->setCustom($config);
@@ -379,6 +392,11 @@ class Config
     public function getCustom()
     {
         return $this->dataBuilder->getCustom();
+    }
+    
+    public function getAllowedCircularReferenceTypes()
+    {
+        return $this->allowedCircularReferenceTypes;
     }
     
     public function setCustomTruncation($type)
@@ -475,20 +493,6 @@ class Config
 
         $this->sendMessageTrace = $config['send_message_trace'];
     }
-    
-    private function setVerbosity($config)
-    {
-        if (!isset($config['verbosity'])) {
-            return;
-        }
-
-        $this->verbosity = $config['verbosity'];
-    }
-    
-    public function getVerbosity()
-    {
-        return $this->verbosity;
-    }
 
     /**
      * Allows setting up configuration options that might be specified by class
@@ -522,16 +526,16 @@ class Config
         $passWholeConfig = false
     ) {
 
-        $$keyName = isset($config[$keyName]) ? $config[$keyName] : null;
+        $class = isset($config[$keyName]) ? $config[$keyName] : null;
 
-        if (is_null($defaultClass) && is_null($$keyName)) {
+        if (is_null($defaultClass) && is_null($class)) {
             return;
         }
 
-        if (is_null($$keyName)) {
-            $$keyName = $defaultClass;
+        if (is_null($class)) {
+            $class = $defaultClass;
         }
-        if (is_string($$keyName)) {
+        if (is_string($class)) {
             if ($passWholeConfig) {
                 $options = $config;
             } else {
@@ -539,9 +543,9 @@ class Config
                             $config[$keyName . "Options"] :
                             array();
             }
-            $this->$keyName = new $$keyName($options);
+            $this->$keyName = new $class($options);
         } else {
-            $this->$keyName = $$keyName;
+            $this->$keyName = $class;
         }
 
         if (!$this->$keyName instanceof $expectedType) {
@@ -584,6 +588,16 @@ class Config
     public function getBatchSize()
     {
         return $this->batchSize;
+    }
+
+    public function getMaxNestingDepth()
+    {
+        return $this->maxNestingDepth;
+    }
+    
+    public function getMaxItems()
+    {
+        return $this->maxItems;
     }
 
     /**

@@ -7,77 +7,89 @@ class WPML_Admin_Text_Import extends WPML_Admin_Text_Functionality {
 	/** @var WPML_ST_Records $st_records */
 	private $st_records;
 
-	function __construct( &$st_records ) {
-		$this->st_records = &$st_records;
+	/** @var WPML_WP_API $wp_api */
+	private $wp_api;
+
+	function __construct( WPML_ST_Records $st_records, WPML_WP_API $wp_api ) {
+		$this->st_records = $st_records;
+		$this->wp_api     = $wp_api;
 	}
 
-	function parse_config( $admin_texts ) {
-		
+	/**
+	 * @param array  $admin_texts
+	 * @param string $config_handler_hash
+	 */
+	function parse_config( array $admin_texts, $config_handler_hash ) {
+
 		$admin_texts_hash = md5( serialize( $admin_texts ) );
-		
-		global $iclTranslationManagement, $sitepress;
-		foreach ( $admin_texts as $a ) {
-			$type               = isset( $a['type'] ) ? $a['type'] : 'plugin';
-			$admin_text_context = isset( $a['context'] ) ? $a['context'] : '';
-			$admin_string_name  = $a['attr']['name'];
-			if ( $this->is_blacklisted( $admin_string_name ) ) {
-				continue;
-			}
-			if ( ! empty( $a['key'] ) ) {
-				foreach ( $a['key'] as $key ) {
-					$arr[ $admin_string_name ][ $key['attr']['name'] ] = isset( $key['key'] )
-						? $this->read_admin_texts_recursive( $key['key'],
-						                                     $admin_text_context,
-						                                     $type,
-						                                     $arr_context,
-						                                     $arr_type )
-						: 1;
-					$arr_context[ $admin_string_name ]                 = $admin_text_context;
-					$arr_type[ $admin_string_name ]                    = $type;
+		$transient_name   = 'wpml_admin_text_import:parse_config:' . $config_handler_hash;
+
+		if ( $this->wp_api->is_string_translation_page() || get_transient( $transient_name ) !== $admin_texts_hash ) {
+			global $iclTranslationManagement, $sitepress;
+			foreach ( $admin_texts as $a ) {
+				$type               = isset( $a['type'] ) ? $a['type'] : 'plugin';
+				$admin_text_context = isset( $a['context'] ) ? $a['context'] : '';
+				$admin_string_name  = $a['attr']['name'];
+				if ( $this->is_blacklisted( $admin_string_name ) ) {
+					continue;
 				}
-			} else {
-				$arr[ $admin_string_name ]         = 1;
-				$arr_context[ $admin_string_name ] = $admin_text_context;
-				$arr_type[ $admin_string_name ]    = $type;
-			}
-		}
-
-		if ( isset( $arr ) ) {
-			$iclTranslationManagement->admin_texts_to_translate = array_merge( $iclTranslationManagement->admin_texts_to_translate,
-			                                                                   $arr );
-		}
-
-		$_icl_admin_option_names = get_option( '_icl_admin_option_names' );
-
-		$arr_options = array();
-		if ( isset( $arr ) && is_array( $arr ) ) {
-			foreach ( $arr as $key => $v ) {
-				$value = maybe_unserialize( $this->get_option_without_filtering( $key ) );
-				$value = is_array( $value ) && is_array( $v ) ? array_intersect_key( $value, $v ) : $value;
-				$admin_text_context = isset( $arr_context[ $key ] ) ? $arr_context[ $key ] : '';
-				$type               = isset( $arr_type[ $key ] ) ? $arr_type[ $key ] : '';
-
-				$req_upgrade = ! $sitepress->get_setting( 'admin_text_3_2_migration_complete_' . $admin_texts_hash, false );
-				if ( (bool) $value === true ) {
-					$this->register_string_recursive( $key,
-					                                  $value,
-					                                  $arr[ $key ],
-					                                  '',
-					                                  $key,
-					                                  $req_upgrade,
-					                                  $type,
-					                                  $admin_text_context );
+				if ( ! empty( $a['key'] ) ) {
+					foreach ( $a['key'] as $key ) {
+						$arr[ $admin_string_name ][ $key['attr']['name'] ] = isset( $key['key'] )
+							? $this->read_admin_texts_recursive( $key['key'],
+							                                     $admin_text_context,
+							                                     $type,
+							                                     $arr_context,
+							                                     $arr_type )
+							: 1;
+						$arr_context[ $admin_string_name ]                 = $admin_text_context;
+						$arr_type[ $admin_string_name ]                    = $type;
+					}
+				} else {
+					$arr[ $admin_string_name ]         = 1;
+					$arr_context[ $admin_string_name ] = $admin_text_context;
+					$arr_type[ $admin_string_name ]    = $type;
 				}
-				$arr_options[ $key ] = $v;
 			}
 
-			$_icl_admin_option_names = is_array( $_icl_admin_option_names )
-				? array_replace_recursive( $arr_options, $_icl_admin_option_names ) : $arr_options;
+			if ( isset( $arr ) ) {
+				$iclTranslationManagement->admin_texts_to_translate = array_merge( $iclTranslationManagement->admin_texts_to_translate,
+				                                                                   $arr );
+			}
+
+			$_icl_admin_option_names = get_option( '_icl_admin_option_names' );
+
+			$arr_options = array();
+			if ( isset( $arr ) && is_array( $arr ) ) {
+				foreach ( $arr as $key => $v ) {
+					$value = maybe_unserialize( $this->get_option_without_filtering( $key ) );
+					$value = is_array( $value ) && is_array( $v ) ? array_intersect_key( $value, $v ) : $value;
+					$admin_text_context = isset( $arr_context[ $key ] ) ? $arr_context[ $key ] : '';
+					$type               = isset( $arr_type[ $key ] ) ? $arr_type[ $key ] : '';
+
+					$req_upgrade = ! $sitepress->get_setting( 'admin_text_3_2_migration_complete_' . $admin_texts_hash, false );
+					if ( (bool) $value === true ) {
+						$this->register_string_recursive( $key,
+						                                  $value,
+						                                  $arr[ $key ],
+						                                  '',
+						                                  $key,
+						                                  $req_upgrade,
+						                                  $type,
+						                                  $admin_text_context );
+					}
+					$arr_options[ $key ] = $v;
+				}
+
+				$_icl_admin_option_names = is_array( $_icl_admin_option_names )
+					? array_replace_recursive( $arr_options, $_icl_admin_option_names ) : $arr_options;
+			}
+
+			update_option( '_icl_admin_option_names', $_icl_admin_option_names );
+
+			set_transient( $transient_name, $admin_texts_hash );
+			$sitepress->set_setting( 'admin_text_3_2_migration_complete_' . $admin_texts_hash, true, true );
 		}
-
-		update_option( '_icl_admin_option_names', $_icl_admin_option_names );
-
-		$sitepress->set_setting( 'admin_text_3_2_migration_complete_' . $admin_texts_hash, true, true );
 	}
 
 

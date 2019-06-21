@@ -394,7 +394,7 @@ class WPML_LS_Settings {
 		if ( $this->sitepress->is_setup_complete() ) {
 			$this->strings->register_all( $new_settings, $this->settings );
 		}
-		
+
 		$this->synchronize_widget_instances( $new_settings['sidebars'] );
 		$this->persist_settings( $new_settings );
 		$this->settings = $new_settings;
@@ -431,7 +431,7 @@ class WPML_LS_Settings {
 	private function synchronize_widget_instances( $sidebar_slots ) {
 		require_once( ABSPATH . '/wp-admin/includes/widgets.php' );
 		$wpml_ls_widget   = new WPML_LS_Widget();
-		$sidebars_widgets = wp_get_sidebars_widgets();
+		$sidebars_widgets = $this->get_refreshed_sidebars_widgets();
 
 		if ( is_array( $sidebars_widgets ) ) {
 
@@ -484,6 +484,16 @@ class WPML_LS_Settings {
 		if ( $is_hooked ) {
 			add_action( 'update_option_sidebars_widgets', array( $this, 'update_option_sidebars_widgets_action' ), 10, 2 );
 		}
+	}
+
+	/** @return array */
+	private function get_refreshed_sidebars_widgets() {
+		global $_wp_sidebars_widgets;
+
+		// Clear cached value used in wp_get_sidebars_widgets().
+		$_wp_sidebars_widgets = null;
+
+		return wp_get_sidebars_widgets();
 	}
 
 	/**

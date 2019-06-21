@@ -1,6 +1,21 @@
 <?php
 
-class WPML_ST_Records extends WPML_WPDB_User {
+class WPML_ST_Records {
+
+	/** @var wpdb $wpdb */
+	public $wpdb;
+
+	/**
+	 * @param wpdb $wpdb
+	 */
+	public function __construct( wpdb $wpdb ) {
+		$this->wpdb = $wpdb;
+	}
+
+	/** @retur wpdb */
+	public function get_wpdb() {
+		return $this->wpdb;
+	}
 
 	/**
 	 * @param int $string_id

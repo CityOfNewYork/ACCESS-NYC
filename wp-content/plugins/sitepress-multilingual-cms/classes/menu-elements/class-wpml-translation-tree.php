@@ -75,13 +75,22 @@ class WPML_Translation_Tree extends WPML_SP_User {
 				'term_id' => $term->term_id,
 			);
 			if ( isset( $term->name ) ) {
-				$trids [ $term->trid ] [ $term->language_code ][ 'name' ] = $term->name;
+				$trids [ $term->trid ] [ $term->language_code ][ 'name' ] = $this->get_unique_term_name( $term->name );
 			}
 
 			$this->term_ids[ ] = $term->term_id;
 		}
 
 		return $trids;
+	}
+
+	/**
+	 * @param string $name
+	 *
+	 * @return string
+	 */
+	private function get_unique_term_name( $name ) {
+		return uniqid( $name. '-' );
 	}
 
 	/**

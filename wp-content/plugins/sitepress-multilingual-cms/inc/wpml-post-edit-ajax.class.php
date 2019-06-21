@@ -54,6 +54,7 @@ class WPML_Post_Edit_Ajax {
 			}
 
 			$switch_lang = new WPML_Temporary_Switch_Language( $sitepress, $lang );
+			$is_new_term = ! term_exists( $name, $taxonomy );
 			$res = WPML_Terms_Translations::create_new_term( $args );
 			$switch_lang->restore_lang();
 
@@ -65,7 +66,7 @@ class WPML_Post_Edit_Ajax {
 				$lang_details                   = $sitepress->get_element_language_details( $new_term_object->term_taxonomy_id, 'tax_' . $new_term_object->taxonomy );
 				$new_term_object->trid          = $lang_details->trid;
 				$new_term_object->language_code = $lang_details->language_code;
-				if ( self::add_term_metadata( $res, $meta_data ) ) {
+				if ( self::add_term_metadata( $res, $meta_data, $is_new_term ) ) {
 					$new_term_object->meta_data = get_term_meta( $res['term_id'] );
 				}
 
@@ -249,7 +250,14 @@ class WPML_Post_Edit_Ajax {
 		wp_send_json_success( $sitepress->get_default_language() );
 	}
 
-	private static function add_term_metadata( $term, $meta_data ) {
+	/**
+	 * @param array $term
+	 * @param array $meta_data
+	 * @param bool  $is_new_term
+	 *
+	 * @return bool
+	 */
+	private static function add_term_metadata( $term, $meta_data, $is_new_term ) {
 		global $sitepress;
 
 		foreach ( $meta_data as $meta_key => $meta_value ) {
@@ -260,7 +268,7 @@ class WPML_Post_Edit_Ajax {
 			}
 		}
 
-		$sync_meta_action = new WPML_Sync_Term_Meta_Action( $sitepress, $term[ 'term_taxonomy_id' ] );
+		$sync_meta_action = new WPML_Sync_Term_Meta_Action( $sitepress, $term[ 'term_taxonomy_id' ], $is_new_term );
 		$sync_meta_action->run();
 
 		return true;

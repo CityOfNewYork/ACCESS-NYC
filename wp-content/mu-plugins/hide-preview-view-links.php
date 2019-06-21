@@ -41,5 +41,6 @@ function posttype_admin_css() {
     echo '</style>';
   }
 }
+
 add_action('admin_head-post-new.php', 'posttype_admin_css');
 add_action('admin_head-post.php', 'posttype_admin_css');

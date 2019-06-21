@@ -1,6 +1,6 @@
 {
-  "name": "ACCESS-NYC",
-  "version": "3.6.0",
+  "name": "access-nyc",
+  "version": "3.7.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "homepage": "https://access.nyc.gov",
   "authors": [
@@ -21,35 +21,63 @@
     }
   ],
   "require": {
-    "filp/whoops": "^2.3",
-    "whoops/soap": "^1.0",
     "wpackagist-plugin/acf-to-rest-api": "3.1.0",
+    "wpackagist-plugin/aryo-activity-log": "^2.5",
     "wpackagist-plugin/better-search-replace": "1.3.2",
+    "wpackagist-plugin/bulk-delete": "^6.0",
     "wpackagist-plugin/enable-media-replace": "3.2.1",
-    "wpackagist-plugin/gathercontent-import": "3.1.9",
-    "wpackagist-plugin/limit-login-attempts-reloaded": "^2.7",
-    "wpackagist-plugin/timber-library": "^1.8",
+    "wpackagist-plugin/gathercontent-import": "^3.1",
+    "wpackagist-plugin/google-authenticator": "^0.52.0",
+    "wpackagist-plugin/limit-login-attempts-reloaded": "^2.9",
+    "wpackagist-plugin/rollbar": "^2.6",
     "wpackagist-plugin/search-everything": "8.1.9",
-    "wpackagist-plugin/wps-hide-login": "^1.5",
-    "wpackagist-plugin/wp-security-questions": "1.0.3",
-    "wpackagist-plugin/rollbar": "^2.4",
-    "wpackagist-plugin/bulk-delete": "5.6.1",
+    "wpackagist-plugin/timber-library": "^1.9",
+    "wpackagist-plugin/wp-security-questions": "^1.0",
+    "wpackagist-plugin/wps-hide-login": "1.5.2.1",
     "nyco/wp-assets": "0.0.5",
     "nyco/wp-config": "^0.1.0",
     "nyco/wp-open-data-transients": "^0.0.4",
-    "mustangostang/spyc": "^0.6.2",
-    "rarst/wps": "^1.2",
-    "wpackagist-plugin/aryo-activity-log": "^2.5"
+    "twilio/sdk": "^5.32",
+    "aws/aws-sdk-php": "^3.100"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.3"
+    "filp/whoops": "^2.3",
+    "whoops/soap": "^1.0",
+    "rarst/wps": "^1.2",
+    "wpackagist-plugin/wp-crontrol": "^1.7",
+    "wpackagist-plugin/redis-cache": "^1.4",
+    "wpackagist-plugin/query-monitor": "^3.3",
+    "umutphp/wp-vulnerability-check": "^0.1.1",
+    "squizlabs/php_codesniffer": "^3.4"
   },
   "scripts": {
+    "development": [
+      "composer dump-autoload"
+    ],
+    "production": [
+      "composer dump-autoload --no-dev --optimize"
+    ],
+    "predeploy": [
+      "composer run development",
+      "composer run lint",
+      "composer run wpscan",
+      "composer run production"
+    ],
     "lint": [
       "vendor/bin/phpcs --standard=phpcs.xml"
     ],
     "fix": [
       "vendor/bin/phpcbf --standard=phpcs.xml"
+    ],
+    "wpscan": [
+      "vendor/bin/wp-vulnerability-check --config wpscan.yml"
+    ],
+    "version": [
+      "composer update nothing",
+      "composer run production"
+    ],
+    "deps": [
+      "composer show --tree"
     ]
   }
 }

@@ -115,7 +115,7 @@ if ( ! function_exists( 'icl_cache_set' ) ) {
 
 if ( ! function_exists( 'icl_cache_clear' ) ) {
 	function icl_cache_clear( $key = false, $key_as_prefix = false ) {
-		if ( empty( $switched ) && ! icl_disable_cache() ) {
+		if ( ! icl_disable_cache() ) {
 			/**
 			 * @var WPML_Term_Translation $wpml_term_translations
 			 * @var WPML_Post_Translation $wpml_post_translations

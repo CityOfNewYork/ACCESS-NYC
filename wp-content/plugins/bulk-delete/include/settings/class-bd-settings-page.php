@@ -130,10 +130,3 @@ class BD_Settings_Page {
 		do_action( 'bd_admin_footer_settings_page' );
 	}
 }
-
-// Add menu
-add_action( 'bd_before_secondary_menus', array( 'BD_Settings_Page', 'add_menu' ) );
-
-// Modify admin footer
-add_action( 'bd_admin_footer_settings_page', 'bd_modify_admin_footer' );
-?>

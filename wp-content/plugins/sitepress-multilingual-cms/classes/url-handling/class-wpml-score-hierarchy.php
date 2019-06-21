@@ -46,16 +46,43 @@ class WPML_Score_Hierarchy {
 				}
 			}
 		}
-		$possible_ids = array();
+		$related_ids  = array();
+		$matching_ids = array();
 		foreach ( $pages_with_name as $key => $page ) {
 			$correct_slug = end( $slugs );
 			if ( $page->post_name === $correct_slug ) {
-				$possible_ids[ $page->ID ] = $this->calculate_score( $parent_slugs, $pages_with_name, $page );
+				if ( $this->is_exactly_matching_all_slugs_in_order( $page ) ) {
+					$matching_ids[] = (int) $page->ID;
+				} else {
+					$related_ids[ $page->ID ] = $this->calculate_score( $parent_slugs, $pages_with_name, $page );
+				}
 			}
 		}
-		arsort( $possible_ids );
 
-		return array_keys( $possible_ids );
+		arsort( $related_ids );
+		$related_ids = array_keys( $related_ids );
+
+		return array(
+			'matching_ids' => $matching_ids,
+			'related_ids'  => $related_ids,
+		);
+	}
+
+	/**
+	 * Get page object by its id.
+	 *
+	 * @param int $id
+	 *
+	 * @return false|object
+	 */
+	private function get_page_by_id( $id ) {
+		foreach ( $this->data as $page ) {
+			if ( (int) $page->ID === (int) $id ) {
+				return $page;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -78,5 +105,35 @@ class WPML_Score_Hierarchy {
 		}
 
 		return $new_score;
+	}
+
+	/**
+	 * @param stdClass $page
+	 *
+	 * @return bool
+	 */
+	private function is_exactly_matching_all_slugs_in_order( $page ) {
+		return $this->slugs === $this->get_slugs_for_page( $page );
+	}
+
+	/**
+	 * @param stdClass $current_page
+	 *
+	 * @return array
+	 */
+	private function get_slugs_for_page( $current_page ) {
+		$slugs = array();
+
+		while( $current_page && $current_page->post_name ) {
+			$slugs[]      = $current_page->post_name;
+			$parent_name  = $current_page->parent_name;
+			$current_page = $this->get_page_by_id( $current_page->post_parent );
+
+			if ( ! $current_page && $parent_name ) {
+				$slugs[] = $parent_name;
+			}
+		}
+
+		return array_reverse( $slugs );
 	}
 }

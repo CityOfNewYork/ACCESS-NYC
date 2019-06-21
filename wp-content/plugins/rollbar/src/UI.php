@@ -9,9 +9,9 @@ class UI
     {
         extract($args);
         
-        if (!empty($description)) {
-            self::description($description);
-        }
+        ?>
+        <div class="setting-inputs">
+        <?php
         
         switch ($type) {
             case self::SETTING_INPUT_TYPE_TEXT:
@@ -29,12 +29,19 @@ class UI
         }
         
         self::restoreDefault($name, $type, $default);
+        
+        ?>
+        </div>
+        <?php
+        
+        if (!empty($description)) {
+            self::description($description);
+        }
     }
     
     public static function restoreDefault($setting, $type, $default)
     {
         ?>
-        <br />
         <button
             type="button" 
             class="button button-secondary rollbar_wp_restore_default"
@@ -50,7 +57,7 @@ class UI
     public static function description($description)
     {
         ?>
-        <p>
+        <p class="description">
             <?php _e($description, 'rollbar-wp'); ?>
         </p>
         <?php
@@ -103,16 +110,19 @@ class UI
         <?php
     }
     
-    public static function boolean($name, $value, $display_name = '')
+    public static function boolean($name, $value, $display_name = '', $show_display_name = false)
     {
-        $display_name = $display_name ? $display_name : ucfirst(str_replace("_", " ", $name));
         ?>
         <input type='checkbox' name='rollbar_wp[<?php echo $name; ?>]'
                id="rollbar_wp_<?php echo $name; ?>" <?php \checked($value, true, 1); ?> value='1'/>
-        <label for="rollbar_wp_<?php echo $name; ?>">
-            <?php \_e($display_name, 'rollbar-wp'); ?>
-        </label>
         <?php
+        if ($show_display_name) {
+        ?>
+            <label for="rollbar_wp_<?php echo $name; ?>">
+                <?php \_e($display_name, 'rollbar-wp'); ?>
+            </label>
+        <?php
+        }
     }
     
     public static function flashMessage()
@@ -152,6 +162,7 @@ class UI
                 value="Restore all defaults"
             />
         </form>
+        <br />
         <?php
     }
     
@@ -172,18 +183,27 @@ class UI
     {
         extract($settings);
 
-        self::boolean('php_logging_enabled', $php_logging_enabled, 'Turn on logging with PHP');
+        self::boolean('php_logging_enabled', $php_logging_enabled, 'Turn on logging with PHP', true);
         ?>
         <div id="rollbar_wp_server_side_access_token_container" class="hidden">
         <h4 style="margin: 15px 0 5px 0;"><?php \_e('Server Side Access Token', 'rollbar-wp'); ?> <small>(post_server_item)</small></h4>
         <?php
         self::textInput('server_side_access_token', $server_side_access_token);
         ?>
+            <p>
+                <small>
+                    <?php \_e('If no access token is provided here, the following will be used:', 'rollbar-wp'); ?>
+                    <ol>
+                        <li><?php \_e('the <code>ROLLBAR_ACCESS_TOKEN</code> constant usually defined in your <code>wp-config.php</code>'); ?></li>
+                        <li><?php \_e('the <code>ROLLBAR_ACCESS_TOKEN</code> server environment variable'); ?></li>
+                    </ol>
+                </small>
+            </p>
         </div>
         <br />
         <?php
         
-        self::boolean('js_logging_enabled', $js_logging_enabled, 'Turn on logging with JavaScript (with rollbar.js)');
+        self::boolean('js_logging_enabled', $js_logging_enabled, 'Turn on logging with JavaScript (with rollbar.js)', true);
         ?>
         <div id="rollbar_wp_client_side_access_token_container" class="hidden">
         <h4 style="margin: 5px 0;"><?php \_e('Client Side Access Token', 'rollbar-wp'); ?> <small>(post_client_item)</small></h4>
@@ -371,5 +391,6 @@ class UI
                 \Psr\Log\LogLevel::DEBUG => '\Psr\Log\LogLevel::DEBUG'
             )
         ),
+        'enable_must_use_plugin' => self::SETTING_INPUT_TYPE_BOOLEAN,
     );
 }

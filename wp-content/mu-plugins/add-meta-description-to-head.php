@@ -13,5 +13,6 @@ add_action('pre_get_document_title', function ($title) {
     // remove tagline from title tag
     $title = get_bloginfo('name');
   }
+
   return $title;
 }, 10, 1);

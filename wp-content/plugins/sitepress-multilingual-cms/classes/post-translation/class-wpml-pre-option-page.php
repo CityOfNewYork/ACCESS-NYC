@@ -64,6 +64,10 @@ class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
 	}
 
 	function fix_trashed_front_or_posts_page_settings( $post_id ) {
+		if ( 'page' !== get_post_type( $post_id ) ) {
+			return;
+		}
+		
 		$post_id = (int) $post_id;
 		$page_on_front_current  = (int) $this->get( 'page_on_front' );
 		$page_for_posts_current = (int) $this->get( 'page_for_posts' );

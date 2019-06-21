@@ -41,13 +41,15 @@ class Payload implements \Serializable
         return $this;
     }
 
-    public function serialize()
+    public function serialize($maxDepth = -1)
     {
+        $objectHashes = array();
         $result = array(
             "data" => $this->data,
             "access_token" => $this->accessToken,
         );
-        return $this->utilities->serializeForRollbar($result);
+
+        return $this->utilities->serializeForRollbar($result, null, $objectHashes, $maxDepth);
     }
     
     public function unserialize($serialized)

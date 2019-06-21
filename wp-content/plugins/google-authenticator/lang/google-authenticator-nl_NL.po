@@ -1,0 +1,317 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Authenticator\n"
+"POT-Creation-Date: 2019-04-12 17:20+0200\n"
+"PO-Revision-Date: 2019-04-12 17:38+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: google-authenticator.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#. Plugin Name of the plugin/theme
+#: google-authenticator.php:196 google-authenticator.php:199
+#: google-authenticator.php:202
+msgid "Google Authenticator"
+msgstr ""
+
+#: google-authenticator.php:280
+msgid ""
+"OTP code doesn't match supplied secret, please check you've configured "
+"Authenticator correctly."
+msgstr ""
+"OTP-code komt niet overeen met de opgegeven geheime code, controleer of je "
+"de Authenticator goed hebt ingesteld."
+
+#: google-authenticator.php:289
+msgid ""
+"Congratulations, you have successfully enabled Google Authenticator for your "
+"account"
+msgstr ""
+"Gefeliciteerd, je hebt Google Authenticator met succes ingeschakeld voor je "
+"account"
+
+#: google-authenticator.php:310
+msgid "iOS: Authy"
+msgstr ""
+
+#: google-authenticator.php:314
+msgid "iOS: Google Authenticator"
+msgstr ""
+
+#: google-authenticator.php:318
+msgid "Android: Authy"
+msgstr ""
+
+#: google-authenticator.php:322
+msgid "Android: Google Authenticator"
+msgstr ""
+
+#: google-authenticator.php:326
+msgid "Windows Phone"
+msgstr ""
+
+#: google-authenticator.php:330
+msgid "Chrome Browser"
+msgstr ""
+
+#: google-authenticator.php:334
+msgid "Desktop"
+msgstr ""
+
+#: google-authenticator.php:342 google-authenticator.php:433
+#: google-authenticator.php:715 google-authenticator.php:936
+msgid "Google Authenticator Settings"
+msgstr "Google Authenticator instellingen"
+
+#: google-authenticator.php:346
+msgid ""
+"If you haven't already done so, please install the Authy or Google "
+"Authenticator app on your mobile device from the App Store:"
+msgstr ""
+"Mocht je dit nog niet gedaan hebben, installeer dan de Authy of Google "
+"Authenticator app vanuit de App Store op je mobiele apparaat:"
+
+#: google-authenticator.php:352
+msgid ""
+"The easiest way to enable your account is to add an account by scanning the "
+"QR code using the app."
+msgstr ""
+"De makkelijkste manier om je account in te schakelen is een account toe te "
+"voegen door het scannen van de QR-code met de app."
+
+#: google-authenticator.php:354
+msgid ""
+"An account can also be added by typing in the secret. After you've added "
+"your account to the App, please type the code you see on the screen into the "
+"Authenticator Code field and press the Verify Authenticator Code button."
+msgstr ""
+"Een account kan ook worden toegevoegd door de geheim code in te typen. Nadat "
+"je je account hebt toegevoegd in de app, type je de code die je op het "
+"scherm ziet in het veld Authenticatiecode en druk je op de knop Verifieer "
+"authenticatiecode."
+
+#: google-authenticator.php:357
+msgid ""
+"If the account setup was successful, you will be logged out, and will need "
+"to login again using your Username, Password and Authenticator code "
+"generated using the App on your mobile device."
+msgstr ""
+"Als het instellen van het account is gelukt, wordt je uitgelogd en moet je "
+"opnieuw inloggen met je gebruikersnaam, wachtwoord en authenticatiecode die "
+"in de app op je mobiele apparaat wordt gegenereerd."
+
+#: google-authenticator.php:436
+msgid "Successfullly saved your settings for the network"
+msgstr "Instellingen succesvol opgeslagen voor het netwerk"
+
+#: google-authenticator.php:438
+msgid "Successfullly saved your settings for the site"
+msgstr "Instellingen succesvol opgeslagen voor de site"
+
+#: google-authenticator.php:443
+msgid "Network Settings"
+msgstr "Netwerk instellingen"
+
+#: google-authenticator.php:447
+msgid "Only use network-wide settings, ignoring site settings."
+msgstr ""
+"Gebruik alleen instellingen voor het hele netwerk en negeer de instellingen "
+"van de site."
+
+#: google-authenticator.php:453
+msgid "Two Screen Signin"
+msgstr "Aanmelden op twee schermen"
+
+#: google-authenticator.php:457
+msgid "Ask for authenticator code on secondary login screen"
+msgstr "Vraag naar de authenticatiecode op een secundair inlogscherm"
+
+#: google-authenticator.php:461
+msgid "Roles requiring Google Authenticator Enabled"
+msgstr "Rollen waarbij gebruik Google Authenticator is vereist"
+
+#: google-authenticator.php:469
+msgid "Network-wide settings in effect, only a super admin can modify them."
+msgstr ""
+"Netwerk brede instellingen zijn van kracht, alleen een super-beheerder kan "
+"deze wijzigen."
+
+#: google-authenticator.php:471
+msgid "Change network wide Google Authenticator settings"
+msgstr "Verander netwerk brede Google Authenticator instellingen"
+
+#: google-authenticator.php:511
+msgid ""
+"Sorry, you can't disable checks for this role as it's enabled at the network "
+"level."
+msgstr ""
+"Sorry, je kunt de controles voor deze rol niet uitschakelen omdat deze op "
+"het netwerkniveau is ingeschakeld."
+
+#: google-authenticator.php:513
+#, php-format
+msgid ""
+"Sorry, this role is enabled at the network level and can only be disabled "
+"via the <a href=\"%s\">network settings</a>"
+msgstr ""
+"Sorry, deze rol is ingeschakeld op netwerkniveau en kan alleen worden "
+"uitgeschakeld via de <a href=“%s”>netwerkinstellingen</a>"
+
+#: google-authenticator.php:542
+msgid ""
+"If you don't have Google Authenticator enabled for your WordPress account, "
+"leave this field empty."
+msgstr ""
+"Als Google Authenticator niet is ingeschakeld voor je WordPress-account, "
+"laat dit veld dan leeg."
+
+#: google-authenticator.php:542
+msgid "Google Authenticator code"
+msgstr "Google Authenticator-code"
+
+#: google-authenticator.php:615
+msgid "<strong>ERROR</strong>: The Google Authenticator password is incorrect."
+msgstr "<strong>ERROR</strong>: De Google Authenticator-wachtwoord is onjuist."
+
+#: google-authenticator.php:619 google-authenticator.php:640
+msgid ""
+"<strong>ERROR</strong>: The Google Authenticator code is incorrect or has "
+"expired."
+msgstr ""
+"<strong>ERROR</strong>: De Google Authenticator-code is onjuist of verlopen."
+
+#: google-authenticator.php:635
+msgid "Secondary Login Screen"
+msgstr "Secundair inlogscherm"
+
+#: google-authenticator.php:638
+msgid "<strong>ERROR</strong>: The Google Authenticator code is missing."
+msgstr "<strong>ERROR</strong>: De Google Authenticator-code ontbreekt."
+
+#: google-authenticator.php:652
+msgid ""
+"Please enter the Google Authenticator code using the app on your device."
+msgstr ""
+"Voer de Google Authenticator-code in met behulp van de app op je mobiele "
+"apparaat."
+
+#: google-authenticator.php:654
+msgid "Log In"
+msgstr "Inloggen"
+
+#: google-authenticator.php:722 google-authenticator.php:948
+msgid "Active"
+msgstr "Actief"
+
+#: google-authenticator.php:731
+msgid "Relaxed mode"
+msgstr "Ontspannen modus"
+
+#: google-authenticator.php:733
+msgid ""
+" Relaxed mode allows for more time drifting on your phone clock (&#177;4 "
+"min)."
+msgstr ""
+" Ontspannen modus geeft meer ruimte voor een afwijkende klok op je mobiele "
+"apparaat (&#177;4 min)."
+
+#: google-authenticator.php:740
+msgid "Description"
+msgstr "Omschrijving"
+
+#: google-authenticator.php:741
+msgid ""
+" Description that you'll see in the Google Authenticator app on your phone."
+msgstr ""
+" Omschrijving die je ziet in de Google Authenticator app op je mobiele "
+"apparaat."
+
+#: google-authenticator.php:745
+msgid "Secret"
+msgstr "Geheime code"
+
+#: google-authenticator.php:749
+msgid "Create new secret"
+msgstr "Nieuw geheime code maken"
+
+#: google-authenticator.php:750
+msgid "Show/Hide QR code"
+msgstr "Toon/verberg QR-code"
+
+#: google-authenticator.php:762
+msgid "Scan this with the Google Authenticator app."
+msgstr "Scan dit met de Google Authenticator-app."
+
+#: google-authenticator.php:774
+msgid "Enable App password"
+msgstr "Schakel in App-wachtwoord"
+
+#: google-authenticator.php:776
+msgid " Enabling an App password will decrease your overall login security."
+msgstr ""
+" Als je een App-wachtwoord inschakelt, wordt je totale inlog beveiliging "
+"minder."
+
+#: google-authenticator.php:784
+msgid "Create new password"
+msgstr "Nieuw wachtwoord maken"
+
+#: google-authenticator.php:785
+msgid ""
+" Password is not stored in cleartext, this is your only chance to see it."
+msgstr ""
+" Wachtwoord wordt niet als platte tekst opgeslagen, dit is je enige kans om "
+"het te zien."
+
+#: google-authenticator.php:793
+msgid "Authenticator Code"
+msgstr "Authenticatiecode"
+
+#: google-authenticator.php:794
+msgid ""
+"After adding the site to your google authy account, add your authenticator "
+"code here."
+msgstr ""
+"Na het toevoegen van de site aan je Google Authy-account, voeg je hier je "
+"authenticatiecode toe."
+
+#: google-authenticator.php:800
+msgid "Verify Authenticator Code"
+msgstr "Verifieer authenticatiecode"
+
+#: google-authenticator.php:941
+msgid "Hide settings from user"
+msgstr "Verberg gebruikers instellingen"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/ivankruchkoff/google-authenticator"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Two-Factor Authentication for WordPress using the Android/iPhone/Blackberry "
+"app as One Time Password generator."
+msgstr ""
+"Twee-staps-authenticatie voor WordPress met behulp van de Android/iPhone/"
+"Blackberry app als eenmalig wachtwoord generator."
+
+#. Author of the plugin/theme
+msgid "Ivan Kruchkoff"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/ivankruchkoff"
+msgstr ""

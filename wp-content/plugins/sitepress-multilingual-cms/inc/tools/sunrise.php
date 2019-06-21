@@ -51,7 +51,7 @@ class WPML_Sunrise_Lang_In_Domains {
 
 			$this->no_recursion = true;
 
-			$domains = $this->extract_domains_from_query( $q );
+			$domains = $this->extract_variables_from_query( $q, 'domain' );
 
 			if ( $domains && $this->query_has_no_result( $q ) ) {
 				$q = $this->transpose_query_if_one_domain_is_matching( $q, $domains );
@@ -80,25 +80,27 @@ class WPML_Sunrise_Lang_In_Domains {
 	 *
 	 * @return array
 	 */
-	public function extract_domains_from_query( $query ) {
-		$domains  = array();
+	private function extract_variables_from_query( $query, $field ) {
+		$variables  = array();
 		$patterns = array(
-			'IN' => '#WHERE\s+domain\s+IN\s*\(([^\)]+)\)#',
-			'='  => '#WHERE\s+domain\s*=\s*([^\s]+)#',
+			'#WHERE\s+' . $field . '\s+IN\s*\(([^\)]+)\)#',
+			'#WHERE\s+' . $field . '\s*=\s*([^\s]+)#',
+			'#AND\s+' . $field . '\s+IN\s*\(([^\)]+)\)#',
+			'#AND\s+' . $field . '\s*=\s*([^\s]+)#',
 		);
 
-		foreach ( $patterns as $type => $pattern ) {
+		foreach ( $patterns as $pattern ) {
 			$found = preg_match( $pattern, $query, $matches );
 			if ( $found && array_key_exists( 1, $matches ) ) {
-				$domains_string = $matches[1];
-				$domains_string = preg_replace( '/\s+/', '', $domains_string );
-				$domains_string = preg_replace( '/[\'"]/', '', $domains_string );
-				$domains        = explode( ',', $domains_string );
+				$variables = $matches[1];
+				$variables = preg_replace( '/\s+/', '', $variables );
+				$variables = preg_replace( '/[\'"]/', '', $variables );
+				$variables = explode( ',', $variables );
 				break;
 			}
 		}
 
-		return $domains;
+		return $variables;
 	}
 
 	/**
@@ -117,9 +119,22 @@ class WPML_Sunrise_Lang_In_Domains {
 	 * @return string
 	 */
 	private function transpose_query_if_one_domain_is_matching( $q, $domains ) {
-		$found_blog_id = null;
-		$blogs         = $this->wpdb->get_col( "SELECT blog_id FROM {$this->wpdb->blogs}" );
+		$paths        = $this->extract_variables_from_query( $q, 'path' );
 
+		// Create as many placeholders as $paths we have.
+		$placeholders = implode( ',', array_fill( 0, sizeof( $paths ), '%s' ) );
+
+		// Array with all the parameters for preparing the SQL.
+		$parameters   = $paths;
+		$parameters[] = BLOG_ID_CURRENT_SITE;
+
+		// The ORDER is there to get the default site at the end of the results.
+		$blogs        = $this->wpdb->get_col( $this->wpdb->prepare(
+			"SELECT blog_id FROM {$this->wpdb->blogs} WHERE path IN ($placeholders) ORDER BY blog_id = %d",
+			$parameters
+		) );
+
+		$found_blog_id = null;
 		foreach ( (array) $blogs as $blog_id ) {
 			$prefix = $this->table_prefix;
 
@@ -134,9 +149,8 @@ class WPML_Sunrise_Lang_In_Domains {
 
 				if ( $icl_settings && 2 === (int) $icl_settings['language_negotiation_type'] ) {
 					$found_blog_id = $this->get_blog_id_from_domain( $domains, $icl_settings, $blog_id );
-
 					if ( $found_blog_id ) {
-						$q = $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->blogs} WHERE blog_id = %d", $found_blog_id );
+						$q = $this->wpdb->prepare( "SELECT blog_id FROM {$this->wpdb->blogs} WHERE blog_id = %d", $found_blog_id );
 						break;
 					}
 				}

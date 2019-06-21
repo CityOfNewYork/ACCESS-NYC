@@ -110,7 +110,7 @@ class WPML_ST_Gettext_Hooks {
 	 * @param string $lang
 	 * @param string $name
 	 *
-	 * @return WPML_Displayed_String_Filter
+	 * @return WPML_Displayed_String_Filter|null
 	 */
 	public function get_filter( $lang = null, $name ) {
 		if ( ! $lang ) {
@@ -118,6 +118,10 @@ class WPML_ST_Gettext_Hooks {
 			if ( ! $this->all_strings_are_in_english ) {
 				$lang = $this->string_translation->get_current_string_language( $name );
 			}
+		}
+
+		if ( ! $lang ) {
+			return null;
 		}
 
 		if ( ! ( array_key_exists( $lang, $this->filters ) && $this->filters[ $lang ] ) ) {

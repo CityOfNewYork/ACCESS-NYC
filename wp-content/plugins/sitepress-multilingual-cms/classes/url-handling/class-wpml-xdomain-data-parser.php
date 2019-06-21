@@ -97,9 +97,9 @@ class WPML_XDomain_Data_Parser {
 			}
 
 			if ( $xdomain_data_request ) {
-				$data = base64_decode( $xdomain_data_request );
-				$data = $this->encryptor->decrypt( $data );
-				$xdomain_data = (array) json_decode( $data, JSON_OBJECT_AS_ARRAY );
+				$data         = base64_decode( $xdomain_data_request );
+				$data         = $this->encryptor->decrypt( $data );
+				$xdomain_data = (array) json_decode( $data, true );
 			}
 		}
 		return $xdomain_data;

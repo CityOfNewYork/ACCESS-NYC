@@ -72,7 +72,6 @@ add_action('init', function() {
         'view_item' => __('View Program'),
         'search_items' => __('Search Programs')
       ),
-      'rewrite' => array( 'slug' => 'programs', 'with_front' => false ),
       'description' => __('A program featured on the site.'),
       'public' => true,
       'show_in_rest' => true,
@@ -82,6 +81,12 @@ add_action('init', function() {
       'hierarchical' => false,
       'supports' => array( 'title' ),
       'menu_icon' => 'dashicons-format-aside',
+      // Programs routing
+      // Template: archive-programs.php
+      'rewrite' => array(
+        'slug' => 'programs',
+        'with_front' => false
+      ),
       'has_archive' => true
     )
   );
@@ -110,6 +115,15 @@ add_action('init', function() {
       'supports' => array( 'title', 'thumbnail', 'slug' ),
       'capability_type' => 'post',
       'menu_icon' => 'dashicons-location'
+      // Locations are not translated, if they were, the next few lines
+      // would be uncommented to facilitate routing to the archive-location.php
+      // template. Currently, routing for the locations archive is done through
+      // Pages that are translated.
+      // 'rewrite' => array(
+      //   'slug' => 'locations',
+      //   'with_front' => false
+      // ),
+      // 'has_archive' => true
     )
   );
 

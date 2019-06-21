@@ -19,9 +19,13 @@ class WPML_ACF_Post_Ids implements WPML_ACF_Convertable {
 		
 		if (count($result) == 1 && !$came_serialized) {
 			return $result[0];
-		} 
+		}
+
+		if ( $came_serialized ) {
+			$result = maybe_serialize( $result );
+		}
 		
-		return maybe_serialize($result);
+		return $result;
 		
 	}
 }

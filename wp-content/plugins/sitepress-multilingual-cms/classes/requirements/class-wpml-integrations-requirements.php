@@ -5,14 +5,18 @@
  */
 class WPML_Integrations_Requirements {
 	const NOTICE_GROUP = 'requirements';
+	const CORE_REQ_NOTICE_ID = 'core-requirements';
 	const MISSING_REQ_NOTICE_ID = 'missing-requirements';
 	const EDITOR_NOTICE_ID = 'enable-translation-editor';
 	const DOCUMENTATION_LINK = 'https://wpml.org/documentation/plugins-compatibility/page-builders/';
+	const DOCUMENTATION_LINK_BLOCK_EDITOR = 'https://wpml.org/?page_id=2909360&utm_source=wpmlplugin&utm_campaign=gutenberg&utm_medium=translation-editor&utm_term=translating-content-created-using-gutenberg-editor';
 
+	private $core_issues = array();
 	private $issues = array();
 	private $tm_settings;
 	private $should_create_editor_notice = false;
 	private $integrations;
+	private $requirements_scripts;
 
 	/** @var SitePress $sitepress */
 	private $sitepress;
@@ -60,24 +64,35 @@ class WPML_Integrations_Requirements {
 		if ( $this->sitepress->get_wp_api()->is_back_end() ) {
 			$this->update_issues();
 			$this->update_notices();
+
+			if ( $this->core_issues || $this->issues ) {
+				$requirements_scripts = $this->get_requirements_scripts();
+				$requirements_scripts->add_plugins_activation_hook();
+			}
 		}
 	}
 
 	private function update_notices() {
 		$wpml_admin_notices = wpml_get_admin_notices();
 
+		if ( ! $this->core_issues ) {
+			$wpml_admin_notices->remove_notice( self::NOTICE_GROUP, self::CORE_REQ_NOTICE_ID );
+		}
+
 		if ( ! $this->issues ) {
 			$wpml_admin_notices->remove_notice( self::NOTICE_GROUP, self::MISSING_REQ_NOTICE_ID );
 		}
+
 		if ( ! $this->should_create_editor_notice ) {
 			$wpml_admin_notices->remove_notice( self::NOTICE_GROUP, self::EDITOR_NOTICE_ID );
 		}
 
-		if ( $this->issues || $this->should_create_editor_notice ) {
+		if ( $this->core_issues || $this->issues || $this->should_create_editor_notice ) {
 
 			$notice_model = $this->get_notice_model();
 			$wp_api       = $this->sitepress->get_wp_api();
 
+			$this->add_core_requirements_notice( $notice_model, $wpml_admin_notices, $wp_api );
 			$this->add_requirements_notice( $notice_model, $wpml_admin_notices, $wp_api );
 			$this->add_tm_editor_notice( $notice_model, $wpml_admin_notices, $wp_api );
 		}
@@ -85,12 +100,18 @@ class WPML_Integrations_Requirements {
 	}
 
 	private function update_issues() {
-		$this->issues = $this->get_third_party_dependencies()->get_issues();
+		$this->core_issues = $this->get_third_party_dependencies()->get_issues( WPML_Integrations::SCOPE_WP_CORE );
+		$this->issues      = $this->get_third_party_dependencies()->get_issues();
 		$this->update_should_create_editor_notice();
 	}
 
 	private function update_should_create_editor_notice() {
-		$editor_translation_set = ( 1 === (int) $this->tm_settings['doc_translation_method'] );
+		$editor_translation_set =
+			isset( $this->tm_settings['doc_translation_method'] ) &&
+			in_array( (string) $this->tm_settings['doc_translation_method'], array(
+				(string) ICL_TM_TMETHOD_EDITOR,
+				(string) ICL_TM_TMETHOD_ATE
+			), true );
 		$requires_tm_editor     = false;
 
 		foreach ( $this->integrations as $integration_item ) {
@@ -189,16 +210,35 @@ class WPML_Integrations_Requirements {
 		$dismiss_action = new WPML_Notice_Action( __( 'Dismiss', 'sitepress' ), '#', true, false, true, false );
 		$notice->add_action( $dismiss_action );
 
-		if ( $this->has_page_builders_issues() ) {
+		if ( $this->has_issues( 'page-builders' ) ) {
 			$document_action = new WPML_Notice_Action( __( 'Translating content created with page builders', 'sitepress' ), self::DOCUMENTATION_LINK );
 			$notice->add_action( $document_action );
 		}
 	}
 
-	private function has_page_builders_issues() {
-		if ( array_key_exists( 'causes', $this->issues ) ) {
-			foreach ( (array) $this->issues['causes'] as $cause ) {
-				if ( 'page-builders' === $cause['type'] ) {
+	private function add_actions_to_core_notice( WPML_Notice $notice ) {
+		$dismiss_action = new WPML_Notice_Action( __( 'Dismiss', 'sitepress' ), '#', true, false, true, false );
+		$notice->add_action( $dismiss_action );
+
+		if ( $this->has_issues( WPML_Integrations::SCOPE_WP_CORE ) ) {
+			$document_action = new WPML_Notice_Action( __( 'How to translate Gutenberg content', 'sitepress' ), self::DOCUMENTATION_LINK_BLOCK_EDITOR );
+			$document_action->set_link_target( '_blank' );
+			$notice->add_action( $document_action );
+		}
+	}
+
+	/**
+	 * @param string $type
+	 *
+	 * @return bool
+	 */
+	private function has_issues( $type ) {
+		$issues = WPML_Integrations::SCOPE_WP_CORE === $type
+			? $this->core_issues : $this->issues;
+
+		if ( array_key_exists( 'causes', $issues ) ) {
+			foreach ( (array) $issues['causes'] as $cause ) {
+				if ( $type === $cause['type'] ) {
 					return true;
 				}
 			}
@@ -216,6 +256,23 @@ class WPML_Integrations_Requirements {
 			$notice->add_display_callback( array( $wp_api, 'is_core_page' ) );
 			$notice->add_display_callback( array( $wp_api, 'is_plugins_page' ) );
 			$notice->add_display_callback( array( $wp_api, 'is_themes_page' ) );
+		}
+	}
+
+	/**
+	 * @param WPML_Requirements_Notification $notice_model
+	 * @param WPML_Notices $wpml_admin_notices
+	 * @param WPML_WP_API $wp_api
+	 */
+	private function add_core_requirements_notice( WPML_Requirements_Notification $notice_model, WPML_Notices $wpml_admin_notices, WPML_WP_API $wp_api ) {
+		if ( $this->core_issues ) {
+			$message = $notice_model->get_core_message( $this->core_issues );
+
+			$requirements_notice = new WPML_Notice( self::CORE_REQ_NOTICE_ID, $message, self::NOTICE_GROUP );
+
+			$this->add_actions_to_core_notice( $requirements_notice );
+			$requirements_notice->set_css_class_types( 'warning' );
+			$wpml_admin_notices->add_notice( $requirements_notice, true );
 		}
 	}
 
@@ -243,8 +300,8 @@ class WPML_Integrations_Requirements {
 	 */
 	private function add_tm_editor_notice( WPML_Requirements_Notification $notice_model, WPML_Notices $wpml_admin_notices, WPML_WP_API $wp_api ) {
 		if ( $this->should_create_editor_notice ) {
-			$requirements_scripts = new WPML_Integrations_Requirements_Scripts();
-			$requirements_scripts->init();
+			$requirements_scripts = $this->get_requirements_scripts();
+			$requirements_scripts->add_translation_editor_notice_hook();
 
 			$integrations_names = $this->get_integrations_names( 'wpml-translation-editor' );
 			$text   = $notice_model->get_settings( $integrations_names );
@@ -259,6 +316,17 @@ class WPML_Integrations_Requirements {
 			$this->add_actions_to_notice( $notice );
 			$wpml_admin_notices->add_notice( $notice );
 		}
+	}
+
+	/**
+	 * @return WPML_Integrations_Requirements_Scripts
+	 */
+	private function get_requirements_scripts() {
+		if ( ! $this->requirements_scripts ) {
+			return new WPML_Integrations_Requirements_Scripts();
+		}
+
+		return $this->requirements_scripts;
 	}
 
 	/**

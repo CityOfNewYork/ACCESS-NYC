@@ -16,6 +16,7 @@ class WPML_Post_Edit_Screen {
 			add_filter( 'preview_page_link ', array( $this, 'preview_post_link_filter' ), 10, 1 );
 		}
 		add_action( 'wpml_scripts_setup', array( $this, 'scripts_setup' ), 10, 1 );
+		add_filter( 'get_sample_permalink', array( $this, 'get_sample_permalink_filter' ) );
 	}
 
 	/**
@@ -53,5 +54,15 @@ class WPML_Post_Edit_Screen {
 		}
 
 		return $link;
+	}
+
+	/**
+	 * @param array $permalink Array containing the sample permalink with placeholder for the post name, and the post name.
+	 *
+	 * @return array
+	 */
+	public function get_sample_permalink_filter( array $permalink ) {
+		$permalink[0] = $this->sitepress->convert_url( $permalink[0] );
+		return $permalink;
 	}
 }

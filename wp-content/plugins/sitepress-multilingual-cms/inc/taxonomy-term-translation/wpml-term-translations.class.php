@@ -249,9 +249,9 @@ class WPML_Terms_Translations {
 			
 			if ( ! empty( $taxonomies ) ) {
 				$res = $wpdb->get_results( "	SELECT language_code, taxonomy, term_id FROM {$wpdb->term_taxonomy} tt
- 										JOIN {$wpdb->prefix}icl_translations t
- 											ON t.element_id = tt.term_taxonomy_id
- 												AND t.element_type = CONCAT('tax_', tt.taxonomy)
+ 										JOIN {$wpdb->prefix}icl_translations wpml_translations
+ 											ON wpml_translations.element_id = tt.term_taxonomy_id
+ 												AND wpml_translations.element_type = CONCAT('tax_', tt.taxonomy)
                                         WHERE tt.taxonomy IN (" . wpml_prepare_in( $taxonomies ) . " )" );
 			} else {
 				$res = array();
@@ -533,10 +533,26 @@ class WPML_Terms_Translations {
 				$tt_ids = array_merge( $tt_ids, $old_tt_ids );
 				self::quick_edited_post_terms( $post_id, $taxonomy, $tt_ids, $bulk );
 			}
+			self::set_tags_in_proper_language( $post_id, $tt_ids, $taxonomy, $old_tt_ids  );
 			if ( $sitepress->get_setting( 'sync_post_taxonomies' ) ) {
 				$term_actions_helper = $sitepress->get_term_actions_helper();
 				$term_actions_helper->added_term_relationships( $post_id );
 			}
+		}
+	}
+
+	/**
+	 * @param int $post_id Object ID.
+	 * @param array $tt_ids An array of term taxonomy IDs.
+	 * @param string $taxonomy Taxonomy slug.
+	 * @param array $old_tt_ids Old array of term taxonomy IDs.
+	 */
+	private static function set_tags_in_proper_language( $post_id, $tt_ids, $taxonomy, $old_tt_ids ) {
+		if ( isset( $_POST['action'] ) && ( 'editpost' === $_POST['action'] || 'inline-save' === $_POST['action'] ) &&
+		     ! is_taxonomy_hierarchical( $taxonomy ) ) {
+			$tt_ids = array_map( 'intval', $tt_ids );
+			$tt_ids = array_diff( $tt_ids, $old_tt_ids );
+			self::quick_edited_post_terms( $post_id, $taxonomy, $tt_ids, false );
 		}
 	}
 
@@ -549,7 +565,7 @@ class WPML_Terms_Translations {
 	 * This case can result in situations in which the WP Core functionality adds a term to a post, before the language assignment
 	 * operations of WPML are triggered. This leads to states in which terms can be assigned to a post even though their language
 	 * differs from that of the post.
-	 * This function behaves between hierarchical and flag taxonomies. Hierarchical terms from the wrong taxonomy are simply removed
+	 * This function behaves between hierarchical and flat taxonomies. Hierarchical terms from the wrong taxonomy are simply removed
 	 * from the post. Flat terms are added with the same name but in the correct language.
 	 * For flat terms this implies either the use of the existing term or the creation of a new one.
 	 * This function uses wpdb queries instead of the WordPress API, it is therefore save to be run out of
@@ -558,9 +574,12 @@ class WPML_Terms_Translations {
 	public static function quick_edited_post_terms( $post_id, $taxonomy, $changed_ttids = array(), $bulk = false ) {
 		global $wpdb, $sitepress, $wpml_post_translations;
 
-		if ( !$sitepress->is_translated_taxonomy ( $taxonomy )
-		     || !( $post_lang = $wpml_post_translations->get_element_lang_code ( $post_id ) )
-		) {
+		$post_lang = $wpml_post_translations->get_element_lang_code( $post_id );
+		if ( ! $post_lang ) {
+			$post_lang = isset( $_POST['icl_post_language'] ) ? $_POST['icl_post_language'] : $post_lang;
+		}
+
+		if ( ! $sitepress->is_translated_taxonomy( $taxonomy ) || ! ( $post_lang ) ) {
 			return;
 		}
 

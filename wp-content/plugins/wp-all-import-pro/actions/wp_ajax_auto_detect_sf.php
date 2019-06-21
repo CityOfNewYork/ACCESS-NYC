@@ -19,7 +19,8 @@ function pmxi_wp_ajax_auto_detect_sf(){
 	if ($fieldName) {
 
 	    switch ($post_type){
-            case 'import_users':
+			case 'import_users':
+			case 'shop_customer':
                 $values = $wpdb->get_results("
                     SELECT DISTINCT usermeta.meta_value
                     FROM ".$wpdb->usermeta." as usermeta

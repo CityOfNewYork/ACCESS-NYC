@@ -7,3 +7,5 @@
     padding: 10px; }
   .limit-login-page-settings .limit-login-log table tr:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.09); }
+.limit-login-page-settings input[name="admin_notify_email"] {
+  min-width: 243px; }

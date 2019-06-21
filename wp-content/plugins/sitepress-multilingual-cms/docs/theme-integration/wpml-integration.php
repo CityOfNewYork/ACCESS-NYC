@@ -24,19 +24,32 @@ function wpml_get_home_url(){
 // function wpml_content_languages($args)
 // args: skip_missing, before, after
 // defaults: skip_missing = 1, before =  __('This post is also available in: '), after = ''
-function wpml_content_languages($args=''){
-    parse_str($args);
-    if(function_exists('icl_get_languages')){
-        $languages = icl_get_languages($args);
-        if(1 < count($languages)){
-            echo isset($before) ? esc_html( $before ) : esc_html__('This post is also available in: ', 'sitepress');
-            foreach($languages as $l){
-                if(!$l['active']) $langs[] = '<a href="'.$l['url'].'">'.$l['translated_name'].'</a>';
-            }
-            echo join(', ', $langs);
-            echo isset($after) ? esc_html( $after ) : '';
-        }    
-    }
+function wpml_content_languages( $args = '' ) {
+	$before = null;
+	$after = null;
+	$languages_items = array();
+
+	parse_str( $args, $params );
+	if(array_key_exists( 'before', $params)) {
+		$before = $params['before'];
+	}
+	if(array_key_exists( 'after', $params)) {
+		$after = $params['after'];
+	}
+
+	if ( function_exists( 'icl_get_languages' ) ) {
+		$languages = icl_get_languages( $args );
+		if ( 1 < count( $languages ) ) {
+			echo isset( $before ) ? esc_html( $before ) : esc_html__( 'This post is also available in: ', 'sitepress' );
+			foreach ( $languages as $l ) {
+				if ( ! $l['active'] ) {
+					$languages_items[] = '<a href="' . $l['url'] . '">' . $l['translated_name'] . '</a>';
+				}
+			}
+			echo join( ', ', $languages_items );
+			echo isset( $after ) ? esc_html( $after ) : '';
+		}
+	}
 } 
 
 

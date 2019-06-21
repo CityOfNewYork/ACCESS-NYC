@@ -1,3 +1,11 @@
+#2.1.1
+
+* Updated rapid add-on framework to version 1.1.1, fixing missing break statement between cases 'file' and 'image' (wpmlai-92)
+
+#2.1
+
+* Updated rapid add-on framework to version 1.1.0 (wpmlai-85)
+
 #2.0.8
 
 * Fixed fatal error while importing images (wpmlai-81)

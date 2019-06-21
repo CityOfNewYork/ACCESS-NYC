@@ -152,6 +152,7 @@ class Single extends Post_Base {
 			'push_no_item' => sprintf( __( 'Push this %s to GatherContent?', 'gathercontent-importer' ), $this->post_type_label ),
 			'push' => sprintf( __( 'Are you sure you want to push this %s to GatherContent? Any unsaved changes in GatherContent will be overwritten.', 'gathercontent-importer' ), $this->post_type_label ),
 			'pull'  => sprintf( __( 'Are you sure you want to pull this %s from GatherContent? Any local changes will be overwritten.', 'gathercontent-importer' ), $this->post_type_label ),
+			'disconnect' => sprintf( __('Are you sure you want to disconnect this %s from GatherContent?', 'gathercontent-importer' ), $this->post_type_label ),
 		);
 
 		return $data;

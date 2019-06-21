@@ -15,7 +15,7 @@ function pmxi_pmxi_after_xml_import( $import_id, $import )
         }
         delete_option('wp_all_import_taxonomies_hierarchy_' . $import_id);
     }
-    if ( ! in_array($import->options['custom_type'], array('taxonomies', 'import_users')) ) {
+    if ( ! in_array($import->options['custom_type'], array('taxonomies', 'import_users', 'shop_customer')) ) {
         $custom_type = get_post_type_object( $import->options['custom_type'] );
         if ( ! empty($custom_type) && $custom_type->hierarchical ){
             $parent_posts = get_option('wp_all_import_posts_hierarchy_' . $import_id);
@@ -31,20 +31,23 @@ function pmxi_pmxi_after_xml_import( $import_id, $import )
                 }
             }
             delete_option('wp_all_import_posts_hierarchy_' . $import_id);
+        }
 
-	        // Update term count after import process is complete.
-	        foreach ( (array) get_object_taxonomies( $import->options['custom_type'] ) as $taxonomy ) {
-		        $term_ids = get_terms(
-			        array(
-				        'taxonomy'   => $taxonomy,
-				        'hide_empty' => false,
-				        'fields' => 'ids',
-			        )
+        // Update term count after import process is complete.
+        $taxonomies = get_object_taxonomies( $import->options['custom_type'] );
+        if (!empty($taxonomies)) {
+            foreach ( (array) $taxonomies as $taxonomy ) {
+                $term_ids = get_terms(
+                    array(
+                        'taxonomy'   => $taxonomy,
+                        'hide_empty' => false,
+                        'fields' => 'ids',
+                    )
                 );
                 if ( ! empty( $term_ids ) ) {
                     wp_update_term_count_now( $term_ids, $taxonomy );
                 }
-	        }
+            }
         }
 
 		// Update post count only once after import process is completed.

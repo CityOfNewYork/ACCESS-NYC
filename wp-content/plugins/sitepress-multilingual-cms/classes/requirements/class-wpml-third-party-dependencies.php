@@ -18,13 +18,13 @@ class WPML_Third_Party_Dependencies {
 		$this->requirements = $requirements;
 	}
 
-	public function get_issues() {
+	public function get_issues( $scope = null ) {
 		$issues = array(
 			'causes'       => array(),
 			'requirements' => array(),
 		);
 
-		$components = $this->integrations->get_results();
+		$components = $this->get_components( $scope );
 		foreach ( (array) $components as $slug => $component_data ) {
 			$issue = $this->get_issue( $component_data, $slug );
 			if ( $issue ) {
@@ -47,6 +47,21 @@ class WPML_Third_Party_Dependencies {
 		}
 
 		return $issues;
+	}
+
+	private function get_components( $scope ) {
+		$components = $this->integrations->get_results();
+
+		foreach ( $components as $index => $component ) {
+			if (
+				WPML_Integrations::SCOPE_WP_CORE === $component['type'] && WPML_Integrations::SCOPE_WP_CORE !== $scope ||
+				WPML_Integrations::SCOPE_WP_CORE !== $component['type'] && WPML_Integrations::SCOPE_WP_CORE === $scope
+			) {
+				unset( $components[ $index ] );
+			}
+		}
+
+		return $components;
 	}
 
 	private function get_issue( $component_data, $slug ) {

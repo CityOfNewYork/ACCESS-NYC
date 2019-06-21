@@ -2,7 +2,8 @@
 
 This library detects errors and exceptions in your application and reports them to [Rollbar](https://rollbar.com) for alerts, reporting, and analysis.
 
-Supported PHP versions: 5.3, 5.4, 5.5, 5.6, 7, 7.1, 7.2 and HHVM (currently tested on 3.6.6).
+Supported PHP versions: 5.3, 5.4, 5.5, 5.6, 7, 7.1, 7.2
+Supported HHVM versions: 3.6, 3.18, 3.21, 3.24, 3.27
 
 # Setup Instructions
 
@@ -39,8 +40,6 @@ Yii2 package: [baibaratsky/yii2-rollbar](https://github.com/baibaratsky/yii2-rol
 If you run into any issues, please email us at [support@rollbar.com](mailto:support@rollbar.com)
 
 For bug reports, please [open an issue on GitHub](https://github.com/rollbar/rollbar-php/issues/new).
-The best, configure your Rollbar with `verbosity` at level `\Psr\Log\LogLevel::DEBUG` and attach
-the contents of your `sys_get_temp_dir() . '/rollbar.debug.log'` (usually `/tmp/rollbar.debug.log`).
 
 # Contributing
 

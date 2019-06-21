@@ -16,6 +16,7 @@
 	<div class="gc-publishing-action">
 		<?php // $this->output( 'refresh_link' ); ?>
 		<span class="spinner <# if ( data.mappingStatusId && data.mappingStatusId in { syncing : 1, starting: 1 } ) { #>is-active<# } #>"></span>
+		<button id="gc-disconnect" type="button" class="button gc-button-danger alignright" <# if ( ! data.mapping ) { #>disabled="disabled"<# } #>><?php esc_html_e( 'Disconnect', 'gathercontent-importer' ); ?></button>
 		<button id="gc-push" type="button" class="button gc-button-primary alignright" <# if ( ! data.mapping ) { #>disabled="disabled"<# } #>><?php esc_html_e( 'Push', 'gathercontent-importer' ); ?></button>
 		<button id="gc-pull" type="button" class="button gc-button-primary alignright" <# if ( ! data.mapping || ! data.item ) { #>disabled="disabled"<# } #>><?php esc_html_e( 'Pull', 'gathercontent-importer' ); ?></button>
 	</div>

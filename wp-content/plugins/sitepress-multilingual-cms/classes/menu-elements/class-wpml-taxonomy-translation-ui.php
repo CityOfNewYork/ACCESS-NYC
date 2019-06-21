@@ -47,7 +47,7 @@ class WPML_Taxonomy_Translation_UI {
 	 * screen and enqueues necessary js.
 	 */
 	public function render() {
-		WPML_Taxonomy_Translation_Table_Display::enqueue_taxonomy_table_js( $this->sitepress );
+		WPML_Taxonomy_Translation_Table_Display::enqueue_taxonomy_table_resources( $this->sitepress );
 		$output = '<div class="wrap">';
 		if ( $this->taxonomy ) {
 			$output .= '<input type="hidden" id="tax-preselected" value="' . $this->taxonomy . '">';

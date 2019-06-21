@@ -17,6 +17,7 @@ function pmxi_wp_ajax_auto_detect_cf(){
     $fields = array();
     switch ($post_type) {
         case 'import_users':
+        case 'shop_customer':
         case 'taxonomies':
             $fields = $input->post('fields', array());
             break;
@@ -43,6 +44,7 @@ function pmxi_wp_ajax_auto_detect_cf(){
         foreach ($fields as $field) {
             switch ($post_type){
                 case 'import_users':
+                case 'shop_customer':
                     $values = $wpdb->get_results("
                         SELECT DISTINCT usermeta.meta_value
                         FROM ".$wpdb->usermeta." as usermeta

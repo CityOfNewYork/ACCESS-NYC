@@ -12,7 +12,7 @@ class Form_Section extends Base {
 	protected $fields = array();
 	protected static $sections;
 
-	public function __construct( $id, $title, $callback, $page ) {
+	public function __construct( $id, $title, $callback, $page, $is_current = false ) {
 		$this->page = $page;
 
 		$section = compact( 'id', 'title', 'callback', 'is_current' );

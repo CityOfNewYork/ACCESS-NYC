@@ -46,30 +46,14 @@ function wp_all_import_get_image_from_gallery($image_name, $targetDir = FALSE, $
     }
 
     if (empty($attch)) {
-        $wp_filetype = wp_check_filetype(basename($image_name), NULL);
-
-        // search attachment by file name with extension
-        $attch = $wpdb->get_row($wpdb->prepare("SELECT * FROM " . $wpdb->posts . " WHERE (post_title = %s OR post_title = %s OR post_name = %s) AND post_type = %s", $image_name, preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_name), sanitize_title($image_name), "attachment") . " AND post_mime_type LIKE 'image%';");
-
-        if (!empty($attch)){
-            $logger and call_user_func($logger, sprintf(__('- Found existing image with ID `%s` by post_title or post_name equals to `%s`...', 'wp_all_import_plugin'), $attch->ID, preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_name)));
-        }
-
-        // search attachment by file name without extension
-        if (empty($attch) and !empty($wp_filetype['type'])) {
-            $attachment_title = explode(".", $image_name);
-            if (is_array($attachment_title) and count($attachment_title) > 1) {
-                array_pop($attachment_title);
-            }
-            $image_name = implode(".", $attachment_title);
-            $attch = $wpdb->get_row($wpdb->prepare("SELECT * FROM " . $wpdb->posts . " WHERE (post_title = %s OR post_title = %s OR post_name = %s) AND post_type = %s", $image_name, preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_name), sanitize_title($image_name), "attachment") . " AND post_mime_type LIKE 'image%';");
-            if (!empty($attch)){
-                $logger and call_user_func($logger, sprintf(__('- Found existing image with ID `%s` by post_title or post_name equals to `%s`...', 'wp_all_import_plugin'), $attch->ID, preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_name)));
-            }
+        // Search attachment by file name with extension.
+        $attch = $wpdb->get_row($wpdb->prepare("SELECT * FROM " . $wpdb->posts . " WHERE (post_title = %s OR post_name = %s) AND post_type = %s", $image_name, sanitize_title($image_name), "attachment") . " AND post_mime_type LIKE 'image%';");
+        if (!empty($attch)) {
+            $logger and call_user_func($logger, sprintf(__('- Found existing image with ID `%s` by post_title or post_name equals to `%s`...', 'wp_all_import_plugin'), $attch->ID, $image_name));
         }
     }
 
-    // search attachment by file headers
+    // Search attachment by file headers.
     if (empty($attch) and @file_exists($targetDir . DIRECTORY_SEPARATOR . $original_image_name)) {
         if ($bundle_type == 'images' and ($img_meta = wp_read_image_metadata($targetDir . DIRECTORY_SEPARATOR . $original_image_name))) {
             if (trim($img_meta['title']) && !is_numeric(sanitize_title($img_meta['title']))) {
@@ -80,7 +64,7 @@ function wp_all_import_get_image_from_gallery($image_name, $targetDir = FALSE, $
                 }
             }
         }
-        if (empty($attch)){
+        if (empty($attch)) {
             @unlink($targetDir . DIRECTORY_SEPARATOR . $original_image_name);
         }
     }

@@ -421,7 +421,7 @@ function available_mapping_post_types() {
  * @return string|bool The Auth username if enabled, or false.
  */
 function auth_enabled() {
-	if ( isset( $_SERVER['REMOTE_USER'] ) ) {
+	if ( !empty( $_SERVER['REMOTE_USER'] ) ) {
 		return $_SERVER['REMOTE_USER'];
 	}
 
@@ -430,7 +430,7 @@ function auth_enabled() {
 		'PHP_AUTH_PW',
 		'HTTP_AUTHORIZATION',
 	) as $var ) {
-		if ( isset( $_SERVER[ $var ] ) ) {
+		if ( !empty( $_SERVER[ $var ] ) ) {
 			return true;
 		}
 	}

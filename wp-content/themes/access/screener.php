@@ -1,8 +1,9 @@
 <?php
 /**
- * Template name: Eligiblity Screener.
- * Most of the magic here happens in JavaScript. The only thing we want is a list
- * of program categories.
+ * Template name: Eligibility Screener
+ *
+ * Most of the magic here happens in JavaScript. The
+ * only thing we want is a list of program categories.
  */
 
 $context = Timber::get_context();

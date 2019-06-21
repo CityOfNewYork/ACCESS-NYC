@@ -19,12 +19,14 @@
       {% endblock %}
 
       {% block scripts_head %}
-      {% include 'partials/scripts-google-tags.twig' %}
+      {% include 'partials/scripts-google-tags.twig' with {head: true} only %}
       {% endblock %}
     {% endblock %}
   </head>
 
   <body data-template="base.twig" class="{% set _bodyClass = block('body_class') %}{% if _bodyClass %} {{ _bodyClass|trim }}{% endif %}">
+    {% include 'partials/scripts-google-tags.twig' with {body: true} only %}
+
     <div class="page-wrapper">
       <a class="sr-only sr-only-focusable" href="#content">{{__('Skip to main content', 'accessnyctheme')}}</a>
       {% block header %}

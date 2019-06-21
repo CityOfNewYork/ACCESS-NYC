@@ -36,6 +36,11 @@ class Defaults {
     {
         return false;
     }
+    
+    public function enableMustUsePlugin()
+    {
+        return false;
+    }
 }
 
 ?>

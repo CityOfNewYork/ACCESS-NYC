@@ -3,7 +3,7 @@
 Plugin Name: WP All Import - ACF Add-On
 Plugin URI: http://www.wpallimport.com/
 Description: Import to Advanced Custom Fields. Requires WP All Import & Advanced Custom Fields.
-Version: 3.1.5
+Version: 3.2.0
 Author: Soflyy
 */
 /**
@@ -24,7 +24,7 @@ define('PMAI_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
  */
 define('PMAI_PREFIX', 'pmai_');
 
-define('PMAI_VERSION', '3.1.5');
+define('PMAI_VERSION', '3.2.0');
 
 if ( class_exists('PMAI_Plugin') and PMAI_EDITION == "free"){
 
@@ -189,6 +189,11 @@ else {
 				require_once $filePath;
 			}
 
+			if (is_dir(self::ROOT_DIR . '/libraries')) foreach (PMAI_Helper::safe_glob(self::ROOT_DIR . '/libraries/*.php', PMAI_Helper::GLOB_RECURSE | PMAI_Helper::GLOB_PATH | PMAI_Helper::GLOB_NOSORT) as $filePath) {
+				$subPath = substr($filePath, strlen( self::ROOT_DIR ));
+				if (strpos($subPath, 'view') === false && strpos($subPath, 'template') === false) require_once $filePath;
+			}
+
 			// init plugin options
 			$option_name = get_class($this) . '_Options';
 			$options_default = PMAI_Config::createFromFile(self::ROOT_DIR . '/config/options.php')->toArray();
@@ -331,7 +336,6 @@ else {
 							'is_user' => is_user_admin(),
 						);
 						add_filter('current_screen', array($this, 'getAdminCurrentScreen'));
-						add_filter('admin_body_class', create_function('', 'return "' . PMAI_Plugin::PREFIX . 'plugin";'));
 
 						$controller = new $controllerName();
 						if ( ! $controller instanceof PMAI_Controller_Admin) {
@@ -438,7 +442,7 @@ else {
 		public function activation() {
 
 			// uncaught exception doesn't prevent plugin from being activated, therefore replace it with fatal error so it does
-			set_exception_handler(create_function('$e', 'trigger_error($e->getMessage(), E_USER_ERROR);'));
+			set_exception_handler(function($e){trigger_error($e->getMessage(), E_USER_ERROR);});
 
 			// create plugin options
 			$option_name = get_class($this) . '_Options';
@@ -447,53 +451,43 @@ else {
 
 		}
 
-		public static function init_available_acf_fields(){
-
+        /**
+         *  Init all available ACF fields.
+         */
+        public static function init_available_acf_fields() {
 			global $acf;
-
-			if ($acf and version_compare($acf->settings['version'], '5.0.0') >= 0){
-
+			if ($acf and version_compare($acf->settings['version'], '5.0.0') >= 0) {
 				$acfs = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf-field'));
-
 				self::$all_acf_fields = array();
-
-				if ( ! empty($acfs) ){
-
+				if (!empty($acfs)) {
 					foreach ($acfs as $key => $acf_entry) {
-
 						self::$all_acf_fields[] = $acf_entry->post_excerpt;
-
 					}
 				}
-
-				$fields = acf_local()->fields;
-
+				if (function_exists('acf_local')) {
+                    $fields = acf_local()->fields;
+                }
+                if (empty($fields) && function_exists('acf_get_local_fields')) {
+                    $fields = acf_get_local_fields();
+                }
 				if ( ! empty($fields) ) {
 					foreach ($fields as $key => $field) {
 						self::$all_acf_fields[] = $field['name'];
 					}
 				}
 			}
-			else{
-
+			else {
 				$acfs = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf'));
-
 				self::$all_acf_fields = array();
-
-				if ( ! empty($acfs) ){
-
+				if (!empty($acfs)) {
 					foreach ($acfs as $key => $acf_entry) {
-
-						foreach (get_post_meta($acf_entry->ID, '') as $cur_meta_key => $cur_meta_val)
-						{	
-							if (strpos($cur_meta_key, 'field_') !== 0) continue;
-
+						foreach (get_post_meta($acf_entry->ID, '') as $cur_meta_key => $cur_meta_val) {
+							if (strpos($cur_meta_key, 'field_') !== 0) {
+                                continue;
+                            }
 							$field = (!empty($cur_meta_val[0])) ? unserialize($cur_meta_val[0]) : array();
-
 							$field_name = $field['name'];
-
 							if ( ! in_array($field_name, self::$all_acf_fields) ) self::$all_acf_fields[] = $field_name;
-
 							if ( ! empty($field['sub_fields']) ){
 								foreach ($field['sub_fields'] as $key => $sub_field) {
 									$sub_field_name = $sub_field['name'];
@@ -504,7 +498,6 @@ else {
 					}
 				}
 			}
-
 		}
 
 		/**

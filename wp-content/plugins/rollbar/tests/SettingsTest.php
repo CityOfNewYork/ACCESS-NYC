@@ -44,7 +44,8 @@ class SettingsTest extends BaseTestCase {
                 array(
                     'allow_exec' => true,
                     'capture_error_stacktraces' => true,
-                    'local_vars_dump' => true
+                    'local_vars_dump' => true,
+                    'capture_ip' => true
                 )
             ),
             
@@ -57,7 +58,8 @@ class SettingsTest extends BaseTestCase {
                     'php_logging_enabled' => true,
                     'allow_exec' => true,
                     'capture_error_stacktraces' => true,
-                    'local_vars_dump' => true
+                    'local_vars_dump' => true,
+                    'capture_ip' => true
                 )
             ),
             
@@ -68,7 +70,8 @@ class SettingsTest extends BaseTestCase {
                 array(
                     'allow_exec' => false,
                     'capture_error_stacktraces' => true,
-                    'local_vars_dump' => true
+                    'local_vars_dump' => true,
+                    'capture_ip' => true
                 )
             ),
             
@@ -80,7 +83,8 @@ class SettingsTest extends BaseTestCase {
                     'use_error_reporting' => true,
                     'allow_exec' => true,
                     'capture_error_stacktraces' => true,
-                    'local_vars_dump' => true
+                    'local_vars_dump' => true,
+                    'capture_ip' => true
                 )
             ),
             

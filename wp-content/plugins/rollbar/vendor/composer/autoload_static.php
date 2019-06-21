@@ -36,7 +36,6 @@ class ComposerStaticInited105be67bb9151573b323ff5c8bb30a
         ),
         'M' => 
         array (
-            'Monolog\\' => 8,
             'Michelf\\' => 8,
         ),
         'D' => 
@@ -79,10 +78,6 @@ class ComposerStaticInited105be67bb9151573b323ff5c8bb30a
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
-        'Monolog\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'Michelf\\' => 
         array (

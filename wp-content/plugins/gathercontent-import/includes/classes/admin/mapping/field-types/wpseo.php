@@ -61,6 +61,12 @@ class WPSEO extends Base implements Type {
 
 		$options = array();
 
+		global $post;
+
+		if ( !$post ) {
+			$post = (object)array('post_type' => 'post');
+		}
+
 		$advanced_fields = \WPSEO_Meta::get_meta_field_defs( 'advanced' );
 		$filtered_fields = apply_filters( 'wpseo_save_metaboxes', array() );
 		$universal_fields = array_merge( $advanced_fields, $filtered_fields );
@@ -109,9 +115,11 @@ class WPSEO extends Base implements Type {
 	}
 
 	protected function initialize_wpseo() {
-		wpseo_init();
-		wpseo_admin_init();
-		wpseo_load_textdomain();
+		if ( !isset($GLOBALS['wpseo_admin']) ) {
+			wpseo_init();
+			wpseo_admin_init();
+			wpseo_load_textdomain();
+		}
 
 		$options = \WPSEO_Options::get_all();
 

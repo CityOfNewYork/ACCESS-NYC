@@ -3,7 +3,7 @@
 class WPML_Set_Language extends WPML_Full_Translation_API {
 
 	/**
-	 * @param int           $el_id
+	 * @param int           $el_id the element's ID (for terms we use the `term_taxonomy_id`)
 	 * @param string        $el_type
 	 * @param int|bool|null $trid Trid the element is to be assigned to. Input that is == false will cause the term to
 	 *                            be assigned a new trid and potential translation relations to/from it to disappear.
@@ -21,6 +21,10 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 		$src_language_code = null,
 		$check_duplicates = true
 	) {
+		if ( strlen( $el_type ) > 60 ) {
+			throw new InvalidArgumentException( 'The element type "' . $el_type . '"  is too long' );
+		}
+
 		$this->clear_cache();
 		if ( $check_duplicates && $el_id && (bool) ( $el_type_db = $this->check_duplicate( $el_type,
 				$el_id ) ) === true
