@@ -52,3 +52,19 @@ if (null !== WP_REDIS_HOST) {
  */
 
 activate_plugin(WP_PLUGIN_DIR . 'query-monitor/query-monitor.php');
+
+/**
+ * Remove Stat Collector Actions
+ */
+
+add_action('init_stat_collector', function() {
+  global $stat_collector;
+
+  remove_action('drools_request', [$stat_collector, 'droolsRequest'], 10, 2);
+  remove_action('drools_response', [$stat_collector, 'droolsResponse'], 10, 2);
+  remove_action('results_sent', [$stat_collector, 'resultsSent'], 10, 5);
+  remove_action('peu_data', [$stat_collector, 'peuData'], 10, 3);
+
+  remove_action('wp_ajax_response_update', [$stat_collector, 'responseUpdate']);
+  remove_action('wp_ajax_nopriv_response_update', [$stat_collector, 'responseUpdate']);
+});

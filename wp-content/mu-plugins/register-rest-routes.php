@@ -1,10 +1,12 @@
 <?php
 
+// phpcs:disable
 /**
  * Plugin Name: Register REST Routes
  * Description: Adds custom routes to the WP REST API. Some rest routes use WordPress Transients to cache requests. To delete caches, use the Transients Manager Plugin to delete them. If the plugin is already installed it will be in Tools > Transients.
  * Author: NYC Opportunity
  */
+// phpcs:enable
 
 add_action('rest_api_init', function() {
   include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -71,16 +73,16 @@ add_action('rest_api_init', function() {
 
         // Get public taxonomies and build our initial assoc. array
         foreach (get_taxonomies(array(
-            'public' => true,
-            '_builtin' => false
-          ), 'objects') as $taxonomy) {
+          'public' => true,
+          '_builtin' => false
+        ), 'objects') as $taxonomy) {
             $data[] = array(
               'name' => $taxonomy->name,
               'labels' => $taxonomy->labels,
               'taxonomy' => $taxonomy,
               'terms' => array()
             );
-          }
+        }
 
         // Get the terms for each taxonomy
         $data = array_map(function ($tax) {
