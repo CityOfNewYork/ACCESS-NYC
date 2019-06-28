@@ -1,115 +1,127 @@
 <?php
 
+namespace Controller;
+
+/**
+ * Dependencies
+ */
+
+use Timber;
+use TimberSite;
+use TimberMenu;
+
+/**
+ * Site Controller
+ */
 class Site extends TimberSite {
-
-  function __construct() {
-    add_theme_support('title-tag');
-    add_theme_support('post-thumbnails');
-    add_theme_support('menus');
-
-    add_action('init', array($this, 'cleanUpHeader'));
-    add_action('init', array($this, 'addMenus'));
-
+  /**
+   * Constructor
+   */
+  public function __construct() {
     add_filter('timber_context', array($this, 'addToContext'));
-    add_action('wp_enqueue_scripts', array($this, 'addStylesAndScripts'), 999);
-    // add_action('widgets_init', array( $this, 'add_sidebars' ));
+
     parent::__construct();
   }
 
-  function cleanUpHeader() {
-    remove_action('wp_head', 'rsd_link');
-    remove_action('wp_head', 'wlwmanifest_link');
-    remove_action('wp_head', 'index_rel_link');
-    remove_action('wp_head', 'wp_generator');
-    remove_action('wp_head', 'print_emoji_detection_script', 7);
-    remove_action('admin_print_scripts', 'print_emoji_detection_script');
-    remove_action('wp_print_styles', 'print_emoji_styles');
-    remove_action('admin_print_styles', 'print_emoji_styles');
-    remove_filter('the_content_feed', 'wp_staticize_emoji');
-    remove_filter('comment_text_rss', 'wp_staticize_emoji');
-    remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
-  }
+  /**
+   * Make variables available globally to twig templates
+   * @param   object  $context  The timber site context variable
+   * @return  object            The modified timber site context variable
+   */
+  public function addToContext($context) {
+    include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-  function addToContext($context) {
-    $context['menu'] = new TimberMenu('header-menu');
+    /**
+     * The current language code using the WPML constant.
+     * This will only change if WPML is activated.
+     */
 
-    error_reporting(0);
-    $context['language_code'] = ICL_LANGUAGE_CODE;
-    error_reporting(WP_DEBUG);
+    $wpml = 'sitepress-multilingual-cms/sitepress.php';
+    $context['language_code'] = is_plugin_active($wpml) ? ICL_LANGUAGE_CODE : 'en';
 
-    $context['site'] = $this;
+    /** Get the links that need to appear in the search dropdown */
     $context['search_links'] = Timber::get_posts(array(
       'post_type' => 'program_search_links',
       'numberposts' => 1
     ));
-    $context['footer_widgets'] = Timber::get_widgets('footer_widgets');
+
+    /**
+     * Add Menus
+     */
+
+    $context['menu'] = new TimberMenu('header-menu');
     $context['footer_get_help_now_menu'] = new TimberMenu('get-help-now');
     $context['footer_for_caseworkers_menu'] = new TimberMenu('for-caseworkers');
     $context['footer_programs_menu'] = new TimberMenu('programs');
     $context['footer_about_access_nyc_menu'] = new TimberMenu('about-access-nyc');
     $context['peu_header_menu'] = new TimberMenu('peu');
 
-    // Gets object containing all program categories
+    /** Gets object containing all program categories */
     $context['categories'] = get_terms('programs');
-    // Display alert
-    $context['site_alert'] = Timber::get_post(array(
-      'post_type' => 'alert'
-    ));
-    // Gets the page ID for top level nav items
-    $context['programsLink'] = get_page_by_path('programs');
-    $context['eligibilityLink'] = get_page_by_path('eligibility');
-    $context['locationsLink'] = get_page_by_path('locations');
 
-    // Determines if page is in debug mode.
-    $context['is_debug'] = isset($_GET['debug']) ? $_GET['debug'] : false;
-
-    // Determine if page is in print view.
+    /** Determine if page is in print view */
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
 
-    // Get the META description - return english if empty
-    if (ICL_LANGUAGE_CODE != 'en') {
-      $orig_page_id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/' . ICL_LANGUAGE_CODE))->ID;
-    } else {
-      $orig_page_id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/'))->ID;
-    }
+    /** Get the meta description for the page */
+    $context['page_meta_desc'] = $this->getMetaDescription($context['language_code']);
 
-    $page_id = apply_filters('wpml_object_id', $orig_page_id, 'page', true, ICL_LANGUAGE_CODE);
-
-    $page_desc = get_field('page_meta_description', $page_id);
-
-    if ($page_desc == '') {
-      $page_desc = get_field('page_meta_description', $orig_page_id);
-    }
-
-    if (is_home()) {
-      $context['page_meta_desc'] = get_bloginfo('description');
-    } elseif ($page_id || $page_desc) {
-      $context['page_meta_desc'] = $page_desc;
-    }
-    // end Get the META description
+    /** Create nonce for allowed resources */
+    // $context['script_nonce'] = $this->setXssHeaders();
 
     return $context;
   }
 
-  function addStylesAndScripts() {
-    global $wp_styles;
+  /**
+   * Get the meta description for the page if it exists
+   * @param   string  $lang  The language of the description needed
+   * @return  string         The view description
+   */
+  public function getMetaDescription($lang) {
+    if (is_home()) {
+      return get_bloginfo('description');
+    }
+
+    if ($lang != 'en') {
+      $id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/' . $lang))->ID;
+    } else {
+      $id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/'))->ID;
+    }
+
+    $translated = apply_filters('wpml_object_id', $id, 'page', true, $lang);
+    $description = get_field('page_meta_description', $translated);
+
+    if ($description == '') {
+      $description = get_field('page_meta_description', $id);
+    }
+
+    return $description;
   }
 
-  // function add_sidebars() {
-  //   register_sidebar(array(
-  //     'id' => 'footer_widgets',
-  //     'name' => __('Footer'),
-  //     'description' => __('Widgets in the site global footer'),
-  //     'before_widget' => '',
-  //     'after_widget' => ''
-  //   ));
-  // }
+  /**
+   * Creates a new WordPress nonce, sends the content security policy for
+   * script source, and adds filter to include in script tags.
+   * @return  string  The newly created nonce
+   */
+  public function setXssHeaders() {
+    if (true === is_admin()) {
+      return false;
+    }
 
-  function addMenus() {
-    register_nav_menus(
-      array(
-        'header-menu' => __('Header Menu')
-      )
-    );
+    $nonce = wp_create_nonce();
+
+    // Add nonce CSP header
+    header("Content-Security-Policy: script-src 'nonce-$nonce' 'strict-dynamic'");
+    header("Content-Security-Policy: default-src 'self'");
+    header("Content-Security-Policy: frame-src 'none'"); // iframes
+    header("Content-Security-Policy: object-src 'none'"); // flash
+
+    header('X-Frame-Options: SAMEORIGIN');
+
+    // Add nonce to scripts loaded through the enqueue
+    add_filter('script_loader_tag', function($tag, $handle) use ($nonce) {
+      return str_replace(' src', ' nonce="' . $nonce . '" src', $tag);
+    }, 10, 2);
+
+    return $nonce;
   }
 }

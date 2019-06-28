@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Register Post Types
- * Description: Adds custom post types. Includes Homepage, Homepage Touts, Programs, Locations, Program Search Links, Alerts.
+ * Description: Adds custom post types: Homepage, Homepage Touts, Programs, Locations, Program Search Links, Alerts.
  * Author: Blue State Digital
  */
 
@@ -27,7 +27,7 @@ add_action('init', function() {
       'exclude_from_search' => true,
       'show_ui' => true,
       'hierarchical' => false,
-      'supports' => array( 'title' ),
+      'supports' => array('title'),
       'menu_icon' => 'dashicons-admin-home'
     )
   );

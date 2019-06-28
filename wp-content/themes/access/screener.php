@@ -15,8 +15,8 @@ $context['categories'] = get_categories(array(
   'hide_empty' => false
 ));
 
-$context['formAction'] = admin_url( 'admin-ajax.php' );
+$context['formAction'] = admin_url('admin-ajax.php');
 
 $templates = array( 'screener/screener.twig' );
 
-Timber::render( $templates, $context );
+Timber::render($templates, $context);

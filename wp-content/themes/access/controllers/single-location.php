@@ -1,23 +1,18 @@
 <?php
 
-/**
- * Single Location Controller
- */
-
 namespace Controller;
 
 /**
  * Dependencies
  */
 
-use TimberPost;
+use Timber;
 use nyco\WpOpenDataTransients\Transients\Transients as Transients;
 
 /**
- * Locations Controller
+ * Single Location Controller
  */
-class SingleLocation extends TimberPost {
-
+class SingleLocation extends Timber\Post {
   /**
    * Return the template for the location controller
    * @return [array] Array including the template string
