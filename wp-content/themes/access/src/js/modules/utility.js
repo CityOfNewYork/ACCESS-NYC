@@ -251,9 +251,6 @@ Utility.track = function(key, data) {
   // eslint-disable-next-line no-undef
   if (typeof Webtrends !== 'undefined') Utility.webtrends(key, data);
 
-  // eslint-disable-next-line no-undef
-  if (typeof gtag !== 'undefined') Utility.gtagClick(key, data);
-
   return data;
 };
 
