@@ -5,6 +5,7 @@ namespace SMNYC;
 use Timber;
 use Controller;
 use Aws\Ses\SesClient;
+use Soundasleep\Html2Text;
 
 class EmailMe extends ContactMe {
   protected $action = 'Email';
@@ -49,14 +50,12 @@ class EmailMe extends ContactMe {
     // Render Timber template
     $context = Timber::get_context();
     $context['post'] = new Controller\SingleSmnycEmail($id);
-    $html = Timber::render($context['post']->templates(), $context);
+    $html = Timber::compile($context['post']->templates(), $context);
 
     $subject = $context['post']->title;
-    $text_body = $context['post']->text_body;
+    $text_body = Html2Text::convert($context['post']->post_content);
 
-    error_log($text_body);
-
-    // Replace url
+    // Replace URL
     $text_body = str_replace('{{ URL }}', $url, $text_body);
     $html = str_replace('{{ URL }}', $url, $html);
 
@@ -139,14 +138,10 @@ class EmailMe extends ContactMe {
   }
 
   /**
-   * Add additional options for the AWS Service settings
+   * Extend basic setting section in ContactMe Class to add display name and reply email.
    */
   public function createSettingsSection() {
     parent::createSettingsSection();
-
-    /**
-     * Extend basic setting section in ContactMe Class to add display name and reply email.
-     */
 
     $section = $this->prefix . '_section';
 

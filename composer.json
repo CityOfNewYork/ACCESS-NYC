@@ -38,7 +38,8 @@
     "nyco/wp-config": "^0.1.0",
     "nyco/wp-open-data-transients": "^0.0.4",
     "twilio/sdk": "^5.32",
-    "aws/aws-sdk-php": "^3.100"
+    "aws/aws-sdk-php": "^3.100",
+    "soundasleep/html2text": "^1.1"
   },
   "require-dev": {
     "filp/whoops": "^2.3",

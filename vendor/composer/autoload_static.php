@@ -28,6 +28,7 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Component\\Translation\\' => 30,
+            'Soundasleep\\' => 12,
         ),
         'P' => 
         array (
@@ -82,6 +83,10 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Soundasleep\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/soundasleep/html2text/src',
         ),
         'Psr\\SimpleCache\\' => 
         array (
@@ -1067,6 +1072,8 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
         'Psr\\SimpleCache\\CacheException' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheException.php',
         'Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheInterface.php',
         'Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/simple-cache/src/InvalidArgumentException.php',
+        'Soundasleep\\Html2Text' => __DIR__ . '/..' . '/soundasleep/html2text/src/Html2Text.php',
+        'Soundasleep\\Html2TextException' => __DIR__ . '/..' . '/soundasleep/html2text/src/Html2TextException.php',
         'Symfony\\Component\\Translation\\Catalogue\\AbstractOperation' => __DIR__ . '/..' . '/symfony/translation/Catalogue/AbstractOperation.php',
         'Symfony\\Component\\Translation\\Catalogue\\MergeOperation' => __DIR__ . '/..' . '/symfony/translation/Catalogue/MergeOperation.php',
         'Symfony\\Component\\Translation\\Catalogue\\OperationInterface' => __DIR__ . '/..' . '/symfony/translation/Catalogue/OperationInterface.php',

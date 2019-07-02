@@ -5,22 +5,24 @@ namespace StatCollector;
 use MockDatabase;
 
 class StatCollector {
+  public $priority = 10;
+
   /**
-   * [__construct description]
+   * Constructor
    */
   public function __construct() {
     // Internal actions to call in a plugin/hook sense
-    add_action('drools_request', [$this, 'droolsRequest'], 10, 2);
-    add_action('drools_response', [$this, 'droolsResponse'], 10, 2);
-    add_action('results_sent', [$this, 'resultsSent'], 10, 5);
-    add_action('peu_data', [$this, 'peuData'], 10, 3);
+    add_action('drools_request', [$this, 'droolsRequest'], $this->priority, 2);
+    add_action('drools_response', [$this, 'droolsResponse'], $this->priority, 2);
+    add_action('results_sent', [$this, 'resultsSent'], $this->priority, 5);
+    add_action('peu_data', [$this, 'peuData'], $this->priority, 3);
 
     // AJAX endpoints to directly write info
-    add_action('wp_ajax_response_update', [$this, 'responseUpdate']);
-    add_action('wp_ajax_nopriv_response_update', [$this, 'responseUpdate']);
+    add_action('wp_ajax_response_update', [$this, 'responseUpdate'], $this->priority);
+    add_action('wp_ajax_nopriv_response_update', [$this, 'responseUpdate'], $this->priority);
 
-    // Create action for hooking into stat collector
-    do_action('init_stat_collector');
+    // Hook for plugin instantiation
+    do_action('init_stat_collector', $this);
   }
 
   public function droolsRequest($data, $uid) {
@@ -39,8 +41,17 @@ class StatCollector {
     ]);
   }
 
+  /**
+   * Hook for the Stat Collector action for saving the email content to the DB
+   * @param   [type]  $type  email/sms/whatever the class type is
+   * @param   [type]  $to    The number/email sent to
+   * @param   [type]  $uid   The GUID of the results
+   * @param   [type]  $url   The main url shared
+   * @param   [type]  $msg   The body of the message
+   */
   public function resultsSent($type, $to, $uid, $url = null, $message = null) {
     $db = $this->getDb();
+
     $db->insert("messages", [
       "uid" => $uid,
       "msg_type" => strtolower($type),
@@ -275,5 +286,19 @@ class StatCollector {
         '<p>'
       ], '');
     }
+  }
+
+  /**
+   * Singleton class instance.
+   * @return AdManager
+   */
+  public static function getInstance() {
+    static $instance = null;
+
+    if ($instance == null) {
+      $instance = new self();
+    }
+
+    return $instance;
   }
 }

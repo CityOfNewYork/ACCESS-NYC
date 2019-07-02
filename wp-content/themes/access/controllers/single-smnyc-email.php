@@ -5,14 +5,12 @@ namespace Controller;
 use Timber;
 
 class SingleSmnycEmail extends Timber\Post {
-  /**
-   * [ description]
-   */
+  /** The twig template for emails */
   const TEMPLATE = 'emails/single.twig';
 
   /**
-   * [__construct description]
-   * @return  [type]  [return description]
+   * Constructor
+   * @param  number  $pid  This is the post ID Timber accepts for displaying a specific post
    */
   public function __construct($pid = false) {
     if ($pid) {
@@ -39,8 +37,11 @@ class SingleSmnycEmail extends Timber\Post {
    * @return  [type]            [return description]
    */
   public function addToPost() {
-    // Create the body for the text only email.
-    $this->text_body = strip_tags($this->post_content, '<a>');
+    /**
+     * Any additional post content manipulation should be added here
+     */
+
+    // $this->variable = 'something';
 
     return $this;
   }
