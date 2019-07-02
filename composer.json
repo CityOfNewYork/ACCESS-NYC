@@ -39,7 +39,8 @@
     "nyco/wp-open-data-transients": "^0.0.4",
     "twilio/sdk": "^5.32",
     "aws/aws-sdk-php": "^3.100",
-    "humanmade/s3-uploads": "2.1.0"
+    "humanmade/s3-uploads": "2.1.0",
+    "soundasleep/html2text": "^1.1"
   },
   "require-dev": {
     "filp/whoops": "^2.3",

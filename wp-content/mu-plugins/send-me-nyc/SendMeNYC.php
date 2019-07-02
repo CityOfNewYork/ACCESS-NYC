@@ -9,6 +9,7 @@
  *               to the root Composer file for the site (composer require ...)
  *               twilio/sdk: ^5.32,
  *               aws/aws-sdk-php: ^3.99
+ *               soundasleep/html2text: ^1.1
 */
 
 namespace SMNYC;
@@ -48,7 +49,9 @@ add_action('admin_menu', function() {
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), function() {
   $href = esc_url(add_query_arg('page', 'smnyc_config', admin_url('options-general.php')));
   $settings_link = '<a href="' . $href . '">Settings</a>';
+
   array_unshift($links, $settings_link);
+
   return $links;
 });
 

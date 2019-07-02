@@ -19,6 +19,7 @@
 !/vendor/nyco
 !/vendor/psr
 !/vendor/ralouphie
+!/vendor/soundasleep/html2text
 !/vendor/symfony/polyfill-mbstring
 !/vendor/symfony/translation
 !/vendor/symfony/translation-contracts

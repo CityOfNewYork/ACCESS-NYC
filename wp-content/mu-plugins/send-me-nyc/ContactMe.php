@@ -39,7 +39,7 @@ class ContactMe {
   const OTHER_PAGE = 2;
 
   /**
-   * [__construct description]
+   * Constructor
    */
   public function __construct() {
     $this->createEndpoints();
@@ -78,12 +78,12 @@ class ContactMe {
    * [submission description]
    */
   public function submission() {
-    if (!isset($_POST["url"]) || empty($_POST["url"])) {
-      $this->failure(400, "url required");
+    if (!isset($_POST['url']) || empty($_POST['url'])) {
+      $this->failure(400, 'url required');
     }
 
-    $this->validateNonce($_POST['hash'], $_POST['url']);// use nonce for CSRF protection
-    $this->validConfiguration(strtolower($this->service)); //make sure credentials are specified
+    $this->validateNonce($_POST['hash'], $_POST['url']); // use nonce for CSRF protection
+    $this->validConfiguration(strtolower($this->service)); // make sure credentials are specified
     $recipient = $this->validRecipient($_POST['to']); // also filters addressee
 
     $url = $this->shorten($_POST['url']); // SMS 160 char limit, should shorten URL
@@ -92,7 +92,6 @@ class ContactMe {
     if ($this->isResultsUrl($_POST['url'])) {
       $content = $this->content($url, self::RESULTS_PAGE, $_POST['url']);
     } else {
-      // $content = $this->content( $url, self::OTHER_PAGE );
       $content = $this->content($url, self::OTHER_PAGE, $_POST['url']);
     }
 
@@ -101,7 +100,7 @@ class ContactMe {
   }
 
   /**
-   * creates a bit.ly shortened link to provided url. Fails silently
+   * Creates a bit.ly shortened link to provided url. Fails silently
    * @param  $url    string     The URL to shorten
    * @return string  shortened  URL on success, original URL on failure
    */
@@ -139,7 +138,7 @@ class ContactMe {
    * @param   [type]  $content  [$content description]
    */
   protected function validateNonce($nonce, $content) {
-    if (wp_verify_nonce($nonce, 'bsd_smnyc_token_'.$content) === false) {
+    if (wp_verify_nonce($nonce, 'bsd_smnyc_token_' . $content) === false) {
       $this->failure(9, 'Invalid request');
     }
   }
@@ -169,6 +168,7 @@ class ContactMe {
    */
   protected function isResultsUrl($url) {
     $path = parse_url($_POST['url'], PHP_URL_PATH);
+
     return preg_match('/.*\/eligibility\/results\/?$/', $path);
   }
 
@@ -178,6 +178,7 @@ class ContactMe {
    */
   protected function respond($response) {
     wp_send_json($response);
+
     wp_die();
   }
 
@@ -186,16 +187,30 @@ class ContactMe {
    * @param   [type]  $content  [$content description]
    */
   protected function success($content = null) {
-    do_action(
-      'results_sent',
-      $this->action,
-      $_POST['to'],
-      (isset($_POST['GUID']) ? $_POST['GUID'] : '0'),
-      $_POST['url'],
-      is_array($content) ? $content['body'] : $content
-    );
+    /**
+     * Action hook for Stat Collector to save message details to the DB
+     * @param   [type]  $type  email/sms/whatever the class type is
+     * @param   [type]  $to    The number/email sent to
+     * @param   [type]  $uid   The GUID of the results
+     * @param   [type]  $url   The main url shared
+     * @param   [type]  $msg   The body of the message
+     */
+    $type = $this->action;
+    $to = $_POST['to'];
+    $uid = isset($_POST['GUID']) ? $_POST['GUID'] : '0';
+    $url = $_POST['url'];
+    $msg = is_array($content) ? $content['body'] : $content;
 
-    $this->respond(['success' => true, 'error' => null, 'message' => null ]);
+    do_action('results_sent', $type, $to, $uid, $url, $msg);
+
+    /**
+     * Send the success message
+     */
+    $this->respond(array(
+      'success' => true,
+      'error' => null,
+      'message' => null
+    ));
   }
 
   /**
@@ -209,7 +224,7 @@ class ContactMe {
       'success' => false,
       'error' => $code,
       'message' => $message,
-      'retry' => $retry,
+      'retry' => $retry
     ]);
   }
 

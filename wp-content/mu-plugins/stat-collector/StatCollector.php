@@ -42,7 +42,9 @@ add_filter('plugin_action_links_' . plugin_basename(dirname(__FILE__) . '/StatCo
   $admin = admin_url('options-general.php');
   $page = add_query_arg('page', 'collector_config', $admin);
   $settings_link = '<a href="' . esc_url($page) . '">Settings</a>';
+
   array_unshift($links, $settings_link);
+
   return $links;
 });
 
@@ -51,6 +53,7 @@ add_filter('plugin_action_links_' . plugin_basename(dirname(__FILE__) . '/StatCo
  */
 
 $stat_collector = new StatCollector();
+
 add_action('admin_init', function() use ($stat_collector) {
   $stat_collector->createSettingsSection();
-});
+}, $stat_collector->priority);
