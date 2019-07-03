@@ -77,13 +77,14 @@ class ResultsField {
    *                              categories, guid, and date.
    * @param {function} callback - the callback function to execute when done.
    */
-  _getUrl(data, callback) {
+  _getUrl(data, headers, callback) {
     data['path'] = ResultsField.SharePath;
 
     const action = {
       url: ResultsField.ShareUrlEndpoint,
       type: 'get',
-      data: data
+      data: data,
+      headers: headers
     };
 
     $.ajax(action).done(data => {
@@ -159,17 +160,27 @@ class ResultsField {
    */
   _updateURL(code) {
     const shareUrl = $(ResultsField.Selectors.SHARE_URLS)[0].value;
+    const hash = $(ResultsField.Selectors.SHARE_HASH)[0].value;
+
+    if (shareUrl === '' && hash === '') return false;
+
     const categories = Utility.getUrlParameter('categories', shareUrl);
     const guid = Utility.getUrlParameter('guid', shareUrl);
     const date = Utility.getUrlParameter('date', shareUrl);
 
     let programs = Utility.getUrlParameter('programs', shareUrl).split(',');
     let request = {};
+    let headers = {};
 
     const index = programs.indexOf(code);
 
     // Remove program from url list
     if (index > -1) programs.splice(index, 1);
+
+    headers['x-bsd-smnyc-token'] = hash;
+    request['url'] = shareUrl;
+
+    // console.dir(request['hash']);
 
     if (programs[0] != '') request['programs'] = programs.join('%2C');
     if (categories[0] != '') request['categories'] = categories;
@@ -177,15 +188,17 @@ class ResultsField {
     if (date != '') request['date'] = date;
 
     // Get updated share url
-    this._getUrl(request, data => {
+    this._getUrl(request, headers, data => {
       // Update programs list
       $(ResultsField.Selectors.SHARE_PROGRAMS).each((index, element) => {
         element.value = programs;
       });
+
       // Update share url fields
       $(ResultsField.Selectors.SHARE_URLS).each((index, element) => {
         element.value = data['url'];
       });
+
       // Udate the hash fields
       $(ResultsField.Selectors.SHARE_HASH).each((index, element) => {
         element.value = data['hash'];

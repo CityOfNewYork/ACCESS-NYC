@@ -45,12 +45,46 @@ add_action('rest_api_init', function() {
   register_rest_route($v, '/shareurl/', array(
     'methods' => 'GET',
     'callback' => function (WP_REST_Request $request) {
-      // Create the url, share_data -> functions.php
-      $data = share_data($request->get_params());
+      $params = $request->get_params();
 
-      // Create the response object and status code
-      $response = new WP_REST_Response($data);
-      $response->set_status(200);
+      /**
+       * Verify same origin
+       */
+
+      $referer = $request->get_header('referer');
+      $substr = substr($referer, 0, strlen(get_site_url()));
+      $sameorigin = (get_site_url() === $substr);
+
+      /**
+       * Verify the previous nonce before providing another
+       */
+
+      $nonce = $request->get_header('x-bsd-smnyc-token');
+
+      $url = $params['url'];
+      unset($params['url']);
+
+      $verify = wp_verify_nonce($nonce, 'bsd_smnyc_token_' . $url);
+
+      /**
+       * Validate the data and provide a refreshed nonce else return forbidden
+       */
+
+      if (($sameorigin && $verify) || is_user_logged_in()) {
+        // Create the url, share_data -> functions.php
+        $data = share_data($request->get_params());
+
+        // Create the response object and status code
+        $response = new WP_REST_Response($data);
+        $response->set_status(200);
+      } else {
+        $response = new WP_Error(
+          'forbidden',
+          'Forbidden',
+          array(
+            'status' => 403
+          ));
+      }
 
       return $response;
     }
