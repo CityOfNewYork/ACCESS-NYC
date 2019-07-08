@@ -9,6 +9,10 @@
 add_action('rest_api_init', function() {
   include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
+  /**
+   * Configuration
+   */
+
   $v = 'api/v1'; // namespace for the current version of the API
   $exp = WEEK_IN_SECONDS; // expiration of the transient caches
   $lang = (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) ?
@@ -25,6 +29,75 @@ add_action('rest_api_init', function() {
     'page-type' => 'rest_terms_json' . $lang,
     'populations-served' => 'rest_terms_json' . $lang
   );
+
+  /**
+   * Authentication
+   */
+
+  /**
+   * Verify same origin - this should be enough to protect the endpoint from
+   * outside access.
+   * @param   WP_REST_Request  $request  All arguments passed in from the
+   *                                     request
+   * @return  boolean                    Wether authentication passes
+   */
+  function auth_sameorigin(WP_REST_Request $request) {
+    $referer = $request->get_header('referer');
+    $substr = substr($referer, 0, strlen(get_site_url()));
+    $sameorigin = (get_site_url() === $substr);
+
+    return $sameorigin;
+  };
+
+  /**
+   * Verify the previous nonce before providing another
+   * @param   WP_REST_Request  $request  All arguments passed in from the
+   *                                     request
+   * @return  boolean                    Wether authentication passes
+   */
+  function auth_bsd_smnyc_token(WP_REST_Request $request) {
+    $params = $request->get_params();
+    $nonce = $request->get_header('x-bsd-smnyc-token');
+    // The namespace and content for the bsd token is defined in the
+    // Send Me NYC plugin
+    $verify = wp_verify_nonce($nonce, 'bsd_smnyc_token_' . $params['url']);
+
+    return $verify;
+  }
+
+  /**
+   * Verifies same origin, valid nonce, or logged in permissions.
+   * @param   WP_REST_Request  $request  All arguments passed in from the
+   *                                     request
+   * @return  mixed                      Boolean if auth fails or error
+   *                                     describing inauth
+   */
+  function auth_smnyc_token(WP_REST_Request $request) {
+    $auth_sameorigin = auth_sameorigin($request);
+    $auth_token = auth_bsd_smnyc_token($request);
+
+    if (($auth_sameorigin && $auth_token) || is_user_logged_in()) {
+      return true;
+    }
+
+    if ('development' === WP_ENV) {
+      return new WP_Error(
+        'forbidden',
+        'Forbidden',
+        array(
+          'status' => 403,
+          'sameorigin' => $auth_sameorigin,
+          'token' => $auth_token,
+          'loggedin' => is_user_logged_in()
+        ));
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Register REST Routes
+   */
 
   /**
    * Some rest endpoints use the WP Transient Cache to speed up the delivery
@@ -44,47 +117,17 @@ add_action('rest_api_init', function() {
    */
   register_rest_route($v, '/shareurl/', array(
     'methods' => 'GET',
+    'permission_callback' => auth_smnyc_token,
     'callback' => function (WP_REST_Request $request) {
       $params = $request->get_params();
-
-      /**
-       * Verify same origin
-       */
-
-      $referer = $request->get_header('referer');
-      $substr = substr($referer, 0, strlen(get_site_url()));
-      $sameorigin = (get_site_url() === $substr);
-
-      /**
-       * Verify the previous nonce before providing another
-       */
-
-      $nonce = $request->get_header('x-bsd-smnyc-token');
-
-      $url = $params['url'];
       unset($params['url']);
 
-      $verify = wp_verify_nonce($nonce, 'bsd_smnyc_token_' . $url);
+      // Create the url, share_data -> functions.php
+      $data = share_data($request->get_params());
 
-      /**
-       * Validate the data and provide a refreshed nonce else return forbidden
-       */
-
-      if (($sameorigin && $verify) || is_user_logged_in()) {
-        // Create the url, share_data -> functions.php
-        $data = share_data($request->get_params());
-
-        // Create the response object and status code
-        $response = new WP_REST_Response($data);
-        $response->set_status(200);
-      } else {
-        $response = new WP_Error(
-          'forbidden',
-          'Forbidden',
-          array(
-            'status' => 403
-          ));
-      }
+      // Create the response object and status code
+      $response = new WP_REST_Response($data);
+      $response->set_status(200);
 
       return $response;
     }
@@ -194,9 +237,6 @@ add_action('rest_api_init', function() {
         }
 
         $bool = set_transient($transient, $data, $exp);
-        // var_dump($bool);
-        // var_dump($exp);
-        // var_dump($data);
       }
 
       $response = new WP_REST_Response($data);
