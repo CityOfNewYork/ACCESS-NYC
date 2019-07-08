@@ -46,7 +46,7 @@ class SmsMe extends ContactMe {
    * @param   [type]  $orig_url  [$orig_url description]
    * @return  [type]             [return description]
    */
-  protected function content($url, $page, $orig_url) {
+  protected function content($bitly_url, $page, $url) {
     if ($page == self::RESULTS_PAGE) {
       $slug = 'screener-results';
     } else {
@@ -59,7 +59,8 @@ class SmsMe extends ContactMe {
 
     // Get content and replace template tag with bitly url
     $text = trim(strip_tags(get_post($id)->post_content));
-    $text = str_replace('{{ BITLY_URL }}', $url, $text);
+    $text = str_replace('{{ BITLY_URL }}', $bitly_url, $text);
+    $text = str_replace('{{ URL }}', $url, $text);
 
     return $text;
   }

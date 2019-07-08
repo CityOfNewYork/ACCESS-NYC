@@ -200,7 +200,8 @@ registerBlockType('access/smnyc-email-button', {
             type: 'url',
             label: __('Enter the destination URL for the button. Use the \
               template tag "{{ URL }}" to represent the default url that is \
-              created by the screener results page.', 'access-blocks'),
+              created by the screener results page. Use "{{ BITLY_URL }}" for \
+              the shortened version of the url.', 'access-blocks'),
             value: props.attributes.url,
             onChange: (newUrl) => {
               props.setAttributes({

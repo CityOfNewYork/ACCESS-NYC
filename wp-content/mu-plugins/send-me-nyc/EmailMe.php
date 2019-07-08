@@ -28,7 +28,7 @@ class EmailMe extends ContactMe {
    * @param   [type]  $orig_url  [$orig_url description]
    * @return  array              Key > value object containing subject, body, and email
    */
-  protected function content($url, $page, $orig_url) {
+  protected function content($bitly_url, $page, $url) {
     if (file_exists(get_template_directory() . '/controllers/single-smnyc-email.php')) {
       require get_template_directory() . '/controllers/single-smnyc-email.php';
     } else {
@@ -55,7 +55,11 @@ class EmailMe extends ContactMe {
     $subject = $context['post']->title;
     $text_body = Html2Text::convert($context['post']->post_content);
 
-    // Replace URL
+    // Replace Bitly URL
+    $text_body = str_replace('{{ BITLY_URL }}', $bitly_url, $text_body);
+    $html = str_replace('{{ BITLY_URL }}', $bitly_url, $html);
+
+    // Replace Standard URL
     $text_body = str_replace('{{ URL }}', $url, $text_body);
     $html = str_replace('{{ URL }}', $url, $html);
 
