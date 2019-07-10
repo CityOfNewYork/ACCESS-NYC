@@ -23,6 +23,8 @@ class ScreenerHousehold {
       members: 1,
       /** @type {Number} */
       cashOnHand: 0,
+      /** @type {String} */
+      lang: '',
       /** @type {string} must be one of ScreenerHousehold.RENTAL_TYPE or
         empty string */
       livingRentalType: '',
