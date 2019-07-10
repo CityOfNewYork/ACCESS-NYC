@@ -42,7 +42,7 @@ class Auth {
     $auth_sameorigin = self::sameOrigin($request);
     $auth_token = self::bsdSmnycToken($request);
 
-    if (($auth_sameorigin && $auth_token) || is_user_logged_in()) {
+    if ($auth_token || $auth_sameorigin) {
       return true;
     }
 
@@ -53,8 +53,7 @@ class Auth {
         array(
           'status' => 403,
           'sameorigin' => $auth_sameorigin,
-          'token' => $auth_token,
-          'loggedin' => is_user_logged_in()
+          'token' => $auth_token
         ));
     } else {
       return false;
