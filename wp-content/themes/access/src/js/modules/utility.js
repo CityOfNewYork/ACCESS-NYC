@@ -249,7 +249,7 @@ Utility.camelToUpper = function(str) {
  */
 Utility.track = function(key, data) {
   // eslint-disable-next-line no-undef
-  if (typeof Webtrends !== 'undefined' || typeof data !== 'undefined')
+  if (typeof Webtrends !== 'undefined' && typeof data !== 'undefined')
     Utility.webtrends(key, data);
 
   return data;
