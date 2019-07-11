@@ -279,8 +279,10 @@ Utility.webtrends = function(key, data) {
 
   let prefix = {};
   prefix['WT.ti'] = key;
-  data.unshift(prefix);
 
+  if (data !== 'undefined') {
+    data.unshift(prefix);
+  }
   // Format data for Webtrends
   data = {
     argsa: data.flatMap(value => {
