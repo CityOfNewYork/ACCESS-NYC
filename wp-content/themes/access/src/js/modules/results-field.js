@@ -75,6 +75,7 @@ class ResultsField {
    * Wrapper for ajax call
    * @param {object}   data     - the data to send, should include programs,
    *                              categories, guid, and date.
+   * @param {object}   headers  - headers to pass to the requests.
    * @param {function} callback - the callback function to execute when done.
    */
   _getUrl(data, headers, callback) {
@@ -157,6 +158,7 @@ class ResultsField {
   /**
    * Trim the program from the url, and retrieve a new hash for the updated url.
    * @param  {string} code - the code to remove from the share string
+   * @return {null}
    */
   _updateURL(code) {
     const shareUrl = $(ResultsField.Selectors.SHARE_URLS)[0].value;
@@ -179,8 +181,6 @@ class ResultsField {
 
     headers['x-bsd-smnyc-token'] = hash;
     request['url'] = shareUrl;
-
-    // console.dir(request['hash']);
 
     if (programs[0] != '') request['programs'] = programs.join('%2C');
     if (categories[0] != '') request['categories'] = categories;
