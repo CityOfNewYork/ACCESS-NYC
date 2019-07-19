@@ -1,0 +1,1 @@
+{"name":"EnableMediaReplace\/shortpixelmodules","description":"ShortPixel submodules","type":"function","autoload":{"psr-4":{"EnableMediaReplace\\ShortPixelLogger\\":"log\/src\/","EnableMediaReplace\\Notices\\":"notices\/src\/"}}}

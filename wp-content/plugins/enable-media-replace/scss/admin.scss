@@ -1,0 +1,232 @@
+@import 'datepicker';
+
+.emr_upload_form
+{
+  .wrapper
+  {
+    margin: 15px 0;
+    padding: 18px;
+    border: 1px solid #ccc;
+
+    .section-header
+    {
+      font-size: 18px;
+      //text-align: center;
+      border-bottom: 1px solid #ccc;
+      padding: 6px 0;
+      margin: 0 0 15px 0;
+    }
+  }
+
+  .image_chooser.wrapper
+  {
+    min-height: 350px;
+    .image_previews
+    {
+      margin: 15px 0;
+      .image_placeholder
+      {
+        position: relative;
+        display: inline-block;
+        margin-right: 25px;
+        border: 1px solid #ddd;
+        vertical-align: top;
+        max-height: 500px;
+        .textlayer
+        {
+          font-size: 25px;
+          line-height: 25px;
+          opacity: 0.7;
+          position: absolute;
+          color: #ccc;
+          left: 48%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          border: 1px dashed #eee;
+          background-color: #333;
+          padding: 8px;
+          //max-width: 100%;
+        }
+        .dashicons
+        {
+          font-size: 60px;
+          position: absolute;
+          top: 50%;
+          margin-top: -30px;
+          left: 50%;
+          margin-left: -30px;
+          opacity: 0.5;
+
+        }
+        &.is_image
+        {
+          .dashicons::before, .dashicons { display: none }
+
+
+        }
+        &.not_image
+        {
+          img { display: none; }
+          .textlayer { display: none; }
+          &.is_document{
+            .textlayer {
+              font-size: 18px;
+              line-height: 20px;
+              display: block;
+
+            }
+          }
+        } // not_image
+      } // image_placeholder
+    } // image_previews
+  } // wrapper
+
+  .form-error, .form-warning
+  {
+    background: #fff;
+    padding: 8px;
+    border-left: 4px solid #ff0000;
+  //  display: inline-block;
+    margin: 10px 0;
+    display: none;
+    p { margin: 0; }
+
+  }
+  .form-warning
+  {
+    border-left: 4px solid #ffb900;
+  }
+
+  .option-flex-wrapper
+  {
+    display: flex;
+  }
+
+  .replace_type.wrapper
+  {
+    flex: 1;
+    border: 1px solid #ccc;
+    margin: 15px 0;
+    .option
+    {
+      position: relative;
+      z-index: 1;
+      &.disabled
+      {
+      //  color: #eee;
+      }
+      label
+      {
+        font-size: 1.2em;
+      }
+      .nofeature-notice
+      {
+        border: 1px solid #ccc;
+        padding: 8px;
+        margin: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 0.8;
+        z-index: 9;
+        background: #444;
+        p {
+          text-align: center;
+          color: #fff;
+          margin: 15px 0;
+        }
+      }
+    }
+
+  }
+
+  .options.wrapper
+  {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px 0 15px 35px;
+    .custom_date
+    {
+      .emr_datepicker {
+        width: 150px;
+      }
+      .emr_hour, .emr_minute
+      {
+        width: 45px;
+      }
+    }
+    ul
+    {
+      li
+      {
+        input
+        {
+          margin-right: 8px;
+        }
+      }
+    }
+    .option
+    {
+      label { vertical-align: top; }
+    }
+    .small
+    {
+      font-size: 10px;
+      vertical-align: top;
+      margin-left: 8px;
+    }
+    .custom_date
+    {
+      margin: 8px 0 0 25px;
+      visibility: hidden;
+      opacity: 0;
+      span.field-title {
+        display: inline-block;
+        margin-bottom: 4px;
+        color: #444;
+        //margin-left: 8px;
+        font-size: 12px;
+        width: 100%;
+        text-align: left;
+        vertical-align: middle;
+        line-height: 26px;
+        &::before
+        {
+          font-size: 20px;
+          vertical-align: top;
+          margin-right: 4px;
+        }
+      }
+    } // custom_date
+  }
+
+  .form_controls.wrapper
+  {
+    clear: both;
+    margin: 8px 0 15px 0;
+    border: 0;
+    padding: 0;
+    .button
+    {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  .shortpixel-notice
+  {
+    background: #fff;
+    width: 250px;
+    min-height: 270px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 0 0 10px;
+    float: right;
+    h3 {
+      line-height: 1.3em; // match size
+    }
+  }
+} // emr_upload_form
