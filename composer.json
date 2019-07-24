@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "homepage": "https://access.nyc.gov",
   "authors": [
@@ -33,7 +33,7 @@
     "wpackagist-plugin/search-everything": "8.1.9",
     "wpackagist-plugin/timber-library": "^1.9",
     "wpackagist-plugin/wp-security-questions": "^1.0",
-    "wpackagist-plugin/wps-hide-login": "1.5.2.1",
+    "wpackagist-plugin/wps-hide-login": "1.5.2.2",
     "nyco/wp-assets": "0.0.5",
     "nyco/wp-config": "^0.1.0",
     "nyco/wp-open-data-transients": "^0.0.4",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1eea73f409363f0c49a1561fc0c0734",
+    "content-hash": "27bce49628fd9dbbb83164e5d121e6f6",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1568,15 +1568,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.5.2.1",
+            "version": "1.5.2.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.5.2.1"
+                "reference": "tags/1.5.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.2.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.2.2.zip",
                 "reference": null,
                 "shasum": null
             },

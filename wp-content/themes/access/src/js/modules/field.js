@@ -488,6 +488,9 @@ class Field {
     let json = this._getDroolsJSON(this._vue);
     let programsFilter = this._vue.client.get('programsEnrolled');
 
+    // Set the language of the household
+    this._vue.household.set('lang', $('html').attr('lang'));
+
     this._vue.submitting = true;
 
     /* eslint-disable no-console, no-debugger */

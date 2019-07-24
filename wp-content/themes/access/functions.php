@@ -170,6 +170,7 @@ function validate_params($namespace, $subject) {
     'step' => '/^[a-z,-]*$/'
   );
   preg_match($patterns[$namespace], $subject, $matches);
+
   return (isset($matches[0])) ? $matches[0] : ''; // fail silently
 }
 
@@ -211,6 +212,7 @@ function share_data($params) {
   $http_query = http_build_query($query);
   $http_query = (isset($http_query)) ? '?'.$http_query : '';
   $url = home_url().$params['path'].$http_query;
+
   $hash = \SMNYC\hash($url);
 
   return array('url' => $url, 'hash' => $hash, 'query' => $query);

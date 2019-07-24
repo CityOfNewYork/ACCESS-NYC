@@ -1184,6 +1184,9 @@ class Screener {
    * @return {jqXHR}
    */
   _submit(postUrl) {
+    // Set the language of the household
+    this._household.set('lang', $('html').attr('lang'));
+
     $(`.${Screener.CssClass.SUBMIT}`).hide();
     $(Screener.Selectors.SPINNER).show();
 

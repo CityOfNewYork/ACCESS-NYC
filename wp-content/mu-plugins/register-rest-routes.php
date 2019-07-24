@@ -8,6 +8,11 @@
 
 add_action('rest_api_init', function() {
   include_once ABSPATH . 'wp-admin/includes/plugin.php';
+  include_once WPMU_PLUGIN_DIR . '/rest/Auth.php';
+
+  /**
+   * Configuration
+   */
 
   $v = 'api/v1'; // namespace for the current version of the API
   $exp = WEEK_IN_SECONDS; // expiration of the transient caches
@@ -27,6 +32,10 @@ add_action('rest_api_init', function() {
   );
 
   /**
+   * Register REST Routes
+   */
+
+  /**
    * Some rest endpoints use the WP Transient Cache to speed up the delivery
    * of results. Not all endpoints require the us of the cache, however. Check
    * the speed of the request to determine if it would benefit from the usage
@@ -44,7 +53,11 @@ add_action('rest_api_init', function() {
    */
   register_rest_route($v, '/shareurl/', array(
     'methods' => 'GET',
+    'permission_callback' => [REST\Auth::class, 'smnycToken'],
     'callback' => function (WP_REST_Request $request) {
+      $params = $request->get_params();
+      unset($params['url']);
+
       // Create the url, share_data -> functions.php
       $data = share_data($request->get_params());
 
@@ -160,9 +173,6 @@ add_action('rest_api_init', function() {
         }
 
         $bool = set_transient($transient, $data, $exp);
-        // var_dump($bool);
-        // var_dump($exp);
-        // var_dump($data);
       }
 
       $response = new WP_REST_Response($data);

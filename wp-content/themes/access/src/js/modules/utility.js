@@ -249,10 +249,8 @@ Utility.camelToUpper = function(str) {
  */
 Utility.track = function(key, data) {
   // eslint-disable-next-line no-undef
-  if (typeof Webtrends !== 'undefined') Utility.webtrends(key, data);
-
-  // eslint-disable-next-line no-undef
-  if (typeof gtag !== 'undefined') Utility.gtagClick(key, data);
+  if (typeof Webtrends !== 'undefined')
+    Utility.webtrends(key, data);
 
   return data;
 };
@@ -278,7 +276,7 @@ Utility.trackView = function(app, key, data) {
  */
 Utility.webtrends = function(key, data) {
   // eslint-disable-next-line no-undef
-  if (typeof Webtrends === 'undefined') return;
+  if (typeof Webtrends === 'undefined' || typeof data === 'undefined') return;
 
   let prefix = {};
   prefix['WT.ti'] = key;
