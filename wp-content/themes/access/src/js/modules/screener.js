@@ -104,7 +104,7 @@ class Screener {
         });
       });
 
-      window.history.pushState(stateObj, '', '');
+      window.history.replaceState(stateObj, title, hash);
 
       if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
         this._goToStep($section[0])._reFocus();
