@@ -104,7 +104,11 @@ class Screener {
         });
       });
 
-      window.history.replaceState(stateObj, title, hash);
+      window.history.replaceState(stateObj, $('title').html(), [
+          window.location.pathname,
+          window.location.search,
+          window.location.hash
+        ].join(''));
 
       if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
         this._goToStep($section[0])._reFocus();
