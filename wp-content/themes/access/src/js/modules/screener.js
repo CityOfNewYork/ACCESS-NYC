@@ -89,7 +89,7 @@ class Screener {
 
       let stateObj = {
         prevStep: prevStep,
-        step: `${hash}`,
+        step: hash,
         persons: this._household._attrs.members,
         title: title[0].innerText,
         person: []

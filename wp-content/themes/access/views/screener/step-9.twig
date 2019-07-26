@@ -3,11 +3,11 @@
   <div class="{{ styles.padding }}">
     <div data-js="step-title" class="{{ styles.number }}">{{ __('Step 9 of 10', 'accessnyc-screener') }}</div>
 
-    <h4 data-js="question">{{ __('So far you’ve told us about:', 'accessnyc-screener') }}</h4>
+    <h4>{{ __('So far you’ve told us about:', 'accessnyc-screener') }}</h4>
 
     <ul id="screener-household-summary" class="c-member-list screen-tablet:layout--columns"></ul>
 
-    <h1 class="{{ styles.heading }}">{{ __('Tell us about the next person in your household.', 'accessnyc-screener') }}</h1>
+    <h1 class="{{ styles.heading }}" data-js="question">{{ __('Tell us about the next person in your household.', 'accessnyc-screener') }}</h1>
 
     <div id="screener-household-member"></div>
 
