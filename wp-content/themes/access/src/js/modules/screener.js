@@ -59,6 +59,9 @@ class Screener {
 
     /** @private {string} the base string for the screener title. */
     this._baseTitle = $('title').text();
+
+    /** @private {Array} Keeping track of current step in the screener. */
+    this._history = [];
   }
 
   /**
@@ -75,6 +78,37 @@ class Screener {
       e.preventDefault();
       const hash = window.location.hash;
       const $section = $(hash);
+      let title = $section.find('[data-js="question"]');
+      let prevStep;
+
+      this._history.push(hash);
+
+      if (this._history.length > 1) {
+         prevStep = this._history[this._history.length - 2];
+      }
+
+      let stateObj = {
+        prevStep: prevStep,
+        step: hash,
+        persons: this._household._attrs.members,
+        title: title[0].innerText,
+        person: []
+      };
+
+      this._people.forEach(function(person, index) {
+        stateObj.person.push({
+          index: index,
+          headOfHousehold: person._attrs.headOfHousehold,
+          income: (!person._attrs.incomes.length) ? false : true,
+          expenses: (!person._attrs.expenses.length) ? false : true
+        });
+      });
+
+      window.history.replaceState(stateObj, $('title').html(), [
+          window.location.pathname,
+          window.location.search,
+          window.location.hash
+        ].join(''));
 
       if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
         this._goToStep($section[0])._reFocus();
