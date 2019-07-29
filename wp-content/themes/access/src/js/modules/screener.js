@@ -74,46 +74,29 @@ class Screener {
       return this;
     }
 
-    window.addEventListener('hashchange', e => {
-      e.preventDefault();
-      const hash = window.location.hash;
-      const $section = $(hash);
-      let title = $section.find('[data-js="question"]');
-      let prevStep;
+    /**  */
+    $('a[href*="#"]').on('click', event => {
+      event.preventDefault();
 
-      this._history.push(hash);
+      let hash = event.currentTarget.hash;
 
-      if (this._history.length > 1) {
-         prevStep = this._history[this._history.length - 2];
+      if (hash === '#step-8' && this._people.length === 1) {
+        this._newState('#step-10', 'pushState')
+          ._newSection('#step-10');
+      } else {
+        this._newState(hash, 'pushState')
+          ._newSection(hash);
       }
+    });
 
-      let stateObj = {
-        prevStep: prevStep,
-        step: hash,
-        persons: this._household._attrs.members,
-        title: title[0].innerText,
-        person: []
-      };
+    /** Back/Forward navigation */
+    window.addEventListener('hashchange', event => {
+      event.preventDefault();
 
-      this._people.forEach(function(person, index) {
-        stateObj.person.push({
-          index: index,
-          headOfHousehold: person._attrs.headOfHousehold,
-          income: (!person._attrs.incomes.length) ? false : true,
-          expenses: (!person._attrs.expenses.length) ? false : true
-        });
-      });
+      let hash = window.location.hash;
 
-      window.history.replaceState(stateObj, $('title').html(), [
-          window.location.pathname,
-          window.location.search,
-          window.location.hash
-        ].join(''));
-
-      if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
-        this._goToStep($section[0])._reFocus();
-        $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
-      }
+      this._newState(hash, 'replaceState')
+        ._newSection(hash);
     });
 
     $(this._el).on('change', 'input[type="checkbox"]', e => {
@@ -193,6 +176,7 @@ class Screener {
       }
     } else {
       window.location.hash = this._$steps.eq(0).attr('id');
+
       this._goToStep(this._$steps[0]);
     }
 
@@ -228,6 +212,46 @@ class Screener {
       Utility.trackView('Eligibility', key, data);
     });
   }
+
+  _newSection(hash) {
+    let $section = $(hash);
+
+    if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
+      this._goToStep($section[0])._reFocus();
+
+      $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
+    }
+
+    return this;
+  };
+
+  _newState(hash, method) {
+    event.preventDefault();
+
+    let $section = $(hash);
+    let question = $section.find('[data-js="question"]');
+    let stateObj = {
+      step: hash,
+      persons: this._household._attrs.members,
+      questopm: question[0].innerText,
+      person: []
+    };
+
+    this._people.forEach(function(person, index) {
+      stateObj.person.push({
+        index: index,
+        headOfHousehold: person._attrs.headOfHousehold,
+        income: (!person._attrs.incomes.length) ? false : true,
+        expenses: (!person._attrs.expenses.length) ? false : true
+      });
+    });
+
+    window.history[method](stateObj, $('title').html(), [
+        window.location.pathname, window.location.search, hash
+      ].join(''));
+
+    return this;
+  };
 
   /**
    * Asynchronously loads the Google recaptcha script and sets callbacks for
@@ -637,6 +661,7 @@ class Screener {
         } else {
           this._household.set('members', memberCount);
         }
+
         // If there is only one member, ensure that they are the head of the
         // household and proceed to the final step, returning `false` to
         // prevent the default hash change.
@@ -645,7 +670,11 @@ class Screener {
             headOfHousehold: true,
             headOfHouseholdRelation: ''
           });
-          window.location.hash = '#step-10';
+
+          // window.location.hash = '#step-10';
+          // this._newState('#step-10', 'replaceState')
+            // ._newSection('#step-10');
+
           return false;
         }
         break;
@@ -738,7 +767,10 @@ class Screener {
         if (stepId === 'step-8') {
           // If adding a HoH meets the household size, skip ahead to step 10.
           if (this._people.length >= this._household.get('members')) {
-            window.location.hash = '#step-10';
+            // window.location.hash = '#step-10';
+            this._newState('#step-10', 'replaceState')
+              ._newSection('#step-10');
+
             return false;
           }
         } else {
@@ -1143,14 +1175,20 @@ class Screener {
    * @return {this} Screener
    */
   _editPerson(i) {
+    let hash = '#';
+
     if (i === 0) {
-      window.location.hash = '#step-3';
+      hash = '#step-3';
     } else if (i === 1 && this._people[i].get('headOfHousehold')) {
-      window.location.hash = '#step-8';
+      hash = '#step-8';
     } else {
       $('#step-9').data('personIndex', i);
-      window.location.hash = '#step-9';
+      hash = '#step-9';
     }
+
+    this._newState(hash, 'pushState')
+      ._newSection(hash);
+
     return this;
   }
 
