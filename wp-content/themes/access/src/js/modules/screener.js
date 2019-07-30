@@ -10,19 +10,23 @@ import _ from 'underscore';
 
 /**
  * This component is the controller for the program screener. There's a lot
- * here but essentially how it works is that a hashchange listener is used to
- * progress the user through the screener steps. As they submit each step,
- * a number of validations occur and if everything checks out for that step,
- * the ScreenerPerson and ScreenerHousehold objects are update or created.
+ * here but essentially how it works is that a click event listener attached
+ * to anchor links will push a new state to the history API. As they submit
+ * each step, a number of validations occur and if everything checks out for
+ * that step, the ScreenerPerson and ScreenerHousehold objects are updated or
+ * created.
+ *
  * When the screener is submitted, these objects are compiled into the proper
  * formatting for the Drools rules engine and sent off to the Drools Proxy.
  * Assuming a successful response is received, we then redirect the user to
  * the screener results page, building a redirect URL based on the program
  * codes in the Droosl results, the categories they selected in step 1, the
- * current time, and a `guid` parameter provided by the Drools proxy. The
- * screener relies on Underscore templates to render any dynamic views, and
- * relies on the Utility.localize function to translate any strings within
- * those views to the current language.
+ * current time, and a [guid] parameter provided by the Drools proxy.
+ *
+ * The screener relies on Underscore templates to render any dynamic views and
+ * the Utility.localize function to translate any strings within those views to
+ * the current language.
+ *
  * @class
  */
 class Screener {
@@ -73,19 +77,10 @@ class Screener {
     if (this._initialized)
       return this;
 
-    /** Back/Forward navigation */
-    window.addEventListener('hashchange', event => {
-      event.preventDefault();
-
-      let hash = window.location.hash;
-
-      this._newState(hash, 'replaceState')
-        ._goToStep(hash)
-        ._reFocus();
-    });
-
     /**
-     * Step Changer and Validator
+     * Step Changer and Validator. It captures the click event for anchor links
+     * an pushes them through to the history API. It will also validate steps
+     * that have the validation class attached to them.
      */
     $(this._el).on('click', 'a[href*="#"]', event => {
       event.preventDefault();
@@ -106,8 +101,26 @@ class Screener {
           ._goToStep(hash)
           ._reFocus();
       }
-    })
+    });
 
+    /**
+     * Back/Forward button navigation. Listens for the hashchange event then
+     * replaces the current state with the new state. This will not ultimately
+     * replace the original hashchange history event.
+     */
+    window.addEventListener('hashchange', event => {
+      event.preventDefault();
+
+      let hash = window.location.hash;
+
+      this._newState(hash, 'replaceState')
+        ._goToStep(hash)
+        ._reFocus();
+    });
+
+    /**
+     * Large chained event handler for everything else.
+     */
     $(this._el).on('change', 'input[type="checkbox"]', e => {
       this._toggleCheckbox(e.currentTarget);
     }).on('change', `.${Screener.CssClass.TOGGLE}`, e => {
@@ -116,15 +129,13 @@ class Screener {
       this._addMatrixSection(e.currentTarget);
     }).on('change', `.${Screener.CssClass.MATRIX_SELECT}`, e => {
       this._toggleMatrix(e.currentTarget);
-    })/*.on('click', `.${Screener.CssClass.VALIDATE_STEP}`, e => {
-      const $step = $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`);
-      return this._validateStep($step);
-    })*/.on('click', `.${Screener.CssClass.SUBMIT}`, e => {
+    }).on('click', `.${Screener.CssClass.SUBMIT}`, e => {
       if (!this._recaptchaRequired) {
         this._submit($(e.currentTarget).data('action'));
       } else {
         $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`)
           .find(`.${Screener.CssClass.ERROR_MSG}`).remove();
+
         if (this._recaptchaVerified) {
           this._submit($(e.currentTarget).data('action'));
         } else {
@@ -164,11 +175,14 @@ class Screener {
         `.${Screener.CssClass.SUBMIT}`).trigger('click');
     });
 
-    // Determine whether or not to initialize ReCAPTCHA. This should be
-    // initialized only on every 10th view which is determined via an
-    // incrementing cookie.
+    /**
+     * Determine whether or not to initialize ReCAPTCHA. This should be
+     * initialized only on every 10th view which is determined via an
+     * incrementing cookie.
+     */
     let viewCount = Cookies.get('screenerViews') ?
         parseInt(Cookies.get('screenerViews'), 10) : 1;
+
     if (viewCount >= 10) {
       this._initRecaptcha();
       viewCount = 0;
@@ -180,18 +194,23 @@ class Screener {
       path: Screener.CookiePath
     });
 
+    /**
+     * Initial state handler. If in debug mode go to the step requested, else,
+     * go to step 1.
+     */
     if (Utility.getUrlParameter('debug') === '1') {
-      if (window.location.hash) {
-        this._goToStep(window.location.hash);
-      }
+      if (window.location.hash)
+        this._goToStep(window.location.hash)
+          ._reFocus();
     } else {
-      // window.location.hash = this._$steps.eq(0).attr('id');
-      // this._goToStep(this._$steps[0]);
       this._newState('#step-1', 'replaceState')
         ._goToStep('#step-1')
         ._reFocus();
     }
 
+    /**
+     * Initialize Webtrends Scenario analysis
+     */
     this._scenarioAnalysis();
 
     return this;
@@ -225,12 +244,20 @@ class Screener {
     });
   }
 
+  /**
+   * Collects data about the current state and writes it to the history api
+   * either using the 'pushState' or 'replaceState' method provided in the args
+   * @param   {string}  hash    Hash of the step to go to including the '#'
+   * @param   {string}  method  'pushState' or 'replaceState' history method
+   * @return  {object}          The screener class
+   */
   _newState(hash, method) {
     let question = $(hash).find('[data-js="question"]');
+
     let stateObj = {
       step: hash.replace('#', ''),
       persons: this._household._attrs.members,
-      questopm: question[0].innerText,
+      question: question[0].innerText,
       person: []
     };
 
@@ -248,7 +275,7 @@ class Screener {
       ].join(''));
 
     return this;
-  };
+  }
 
   /**
    * Asynchronously loads the Google recaptcha script and sets callbacks for
@@ -425,8 +452,8 @@ class Screener {
   /**
    * Adds the active class to the provided section. Removes it from all other
    * sections.
-   * @param {HTMLElement} section - section to activate.
-   * @return {this} Screener
+   * @param  {string}  hash  '#' and id of the step to go to
+   * @return {this}          The screener class
    */
   _goToStep(hash) {
     let section = $(hash);
@@ -685,7 +712,6 @@ class Screener {
             headOfHouseholdRelation: ''
           });
 
-          // window.location.hash = '#step-10';
           this._newState('#step-10', 'pushState')
             ._goToStep('#step-10')
             ._reFocus();
@@ -782,7 +808,6 @@ class Screener {
         if (stepId === 'step-8') {
           // If adding a HoH meets the household size, skip ahead to step 10.
           if (this._people.length >= this._household.get('members')) {
-            // window.location.hash = '#step-10';
             this._newState('#step-10', 'pushState')
               ._goToStep('#step-10')
               ._reFocus();
