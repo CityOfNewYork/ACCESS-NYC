@@ -264,19 +264,12 @@ class Screener {
       person: {
         index: personIndex,
         headOfHousehold: this._people[personIndex].get('headOfHousehold'),
-        income: (!person._attrs.incomes.length) ? false : true,
-        expenses: (!person._attrs.expenses.length) ? false : true
+        income:
+            (!this._people[personIndex].get('incomes').length) ? false : true,
+        expenses:
+            (!this._people[personIndex].get('expenses').length) ? false : true
       }
     };
-
-    // this._people.forEach(function(person, index) {
-    //   stateObj.person.push({
-    //     index: index,
-    //     headOfHousehold: person._attrs.headOfHousehold,
-    //     income: (!person._attrs.incomes.length) ? false : true,
-    //     expenses: (!person._attrs.expenses.length) ? false : true
-    //   });
-    // });
 
     window.history[method](stateObj, $('title').html(), [
         window.location.pathname, window.location.search, hash
