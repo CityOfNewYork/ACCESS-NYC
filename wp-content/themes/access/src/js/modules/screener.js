@@ -97,8 +97,8 @@ class Screener {
       }
 
       if (valid) {
-        this._newState(hash, 'pushState')
-          ._goToStep(hash)
+        this._goToStep(hash)
+          ._newState(hash, 'pushState')
           ._reFocus();
       }
     });
@@ -252,23 +252,31 @@ class Screener {
    * @return  {object}          The screener class
    */
   _newState(hash, method) {
-    let question = $(hash).find('[data-js="question"]');
+    let section = $(hash);
+    let question = section.find('[data-js="question"]');
+    let personIndex = (section.data('personIndex'))
+      ? section.data('personIndex') : 0;
 
     let stateObj = {
       step: hash.replace('#', ''),
       persons: this._household._attrs.members,
       question: question[0].innerText,
-      person: []
-    };
-
-    this._people.forEach(function(person, index) {
-      stateObj.person.push({
-        index: index,
-        headOfHousehold: person._attrs.headOfHousehold,
+      person: {
+        index: personIndex,
+        headOfHousehold: this._people[personIndex].get('headOfHousehold'),
         income: (!person._attrs.incomes.length) ? false : true,
         expenses: (!person._attrs.expenses.length) ? false : true
-      });
-    });
+      }
+    };
+
+    // this._people.forEach(function(person, index) {
+    //   stateObj.person.push({
+    //     index: index,
+    //     headOfHousehold: person._attrs.headOfHousehold,
+    //     income: (!person._attrs.incomes.length) ? false : true,
+    //     expenses: (!person._attrs.expenses.length) ? false : true
+    //   });
+    // });
 
     window.history[method](stateObj, $('title').html(), [
         window.location.pathname, window.location.search, hash
@@ -494,6 +502,7 @@ class Screener {
             member.relation = Utility.localize('HeadOfHousehold');
           }
         }
+
         members.push(member);
       });
 
