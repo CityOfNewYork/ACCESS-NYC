@@ -113,8 +113,8 @@ class Screener {
 
       let hash = window.location.hash;
 
-      this._newState(hash, 'replaceState')
-        ._goToStep(hash)
+      this._goToStep(hash)
+        ._newState(hash, 'replaceState')
         ._reFocus();
     });
 
@@ -198,15 +198,17 @@ class Screener {
      * Initial state handler. If in debug mode go to the step requested, else,
      * go to step 1.
      */
-    if (Utility.getUrlParameter('debug') === '1') {
-      if (window.location.hash)
-        this._goToStep(window.location.hash)
+    $(document).ready(() => {
+      if (Utility.getUrlParameter('debug') === '1') {
+        if (window.location.hash)
+          this._goToStep(window.location.hash)
+            ._reFocus();
+      } else {
+        this._goToStep('#step-1')
+          ._newState('#step-1', 'replaceState')
           ._reFocus();
-    } else {
-      this._newState('#step-1', 'replaceState')
-        ._goToStep('#step-1')
-        ._reFocus();
-    }
+      }
+    });
 
     /**
      * Initialize Webtrends Scenario analysis
@@ -264,10 +266,10 @@ class Screener {
       person: {
         index: personIndex,
         headOfHousehold: this._people[personIndex].get('headOfHousehold'),
-        income:
-          (!this._people[personIndex].get('incomes').length) ? false : true,
-        expenses:
-          (!this._people[personIndex].get('expenses').length) ? false : true
+        income: (!this._people[personIndex].get('incomes').length)
+          ? false : true,
+        expenses: (!this._people[personIndex].get('expenses').length)
+          ? false : true
       }
     };
 
@@ -714,8 +716,8 @@ class Screener {
             headOfHouseholdRelation: ''
           });
 
-          this._newState('#step-10', 'pushState')
-            ._goToStep('#step-10')
+          this._goToStep('#step-10')
+            ._newState('#step-10', 'pushState')
             ._reFocus();
 
           return false;
@@ -810,8 +812,8 @@ class Screener {
         if (stepId === 'step-8') {
           // If adding a HoH meets the household size, skip ahead to step 10.
           if (this._people.length >= this._household.get('members')) {
-            this._newState('#step-10', 'pushState')
-              ._goToStep('#step-10')
+            this._goToStep('#step-10')
+              ._newState('#step-10', 'pushState')
               ._reFocus();
 
             return false;
@@ -821,8 +823,8 @@ class Screener {
           if (this._people.length < this._household.get('members')) {
             $step.data('personIndex', personIndex + 1);
 
-            this._newState(`#${$step[0].id}`, 'pushState')
-              ._goToStep(`#${$step[0].id}`)
+            this._goToStep(`#${$step[0].id}`)
+              ._newState(`#${$step[0].id}`, 'pushState')
               ._reFocus();
 
             return false;
@@ -1233,8 +1235,8 @@ class Screener {
       hash = '#step-9';
     }
 
-    this._newState(hash, 'pushState')
-      ._goToStep(hash)
+    this._goToStep(hash)
+      ._newState(hash, 'pushState')
       ._reFocus();
 
     return this;
