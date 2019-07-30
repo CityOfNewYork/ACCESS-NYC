@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Add SVG Upload Support
- * Description: Adds SVGs mime type to Media uploader to enable support.
+ * Description: Adds SVGs mime type to Media uploader to enable support for SVG files.
  * Author: Blue State Digital
  */
 

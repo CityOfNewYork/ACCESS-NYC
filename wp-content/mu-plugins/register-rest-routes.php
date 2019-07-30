@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Register REST Routes
- * Description: Adds custom routes to the WP REST API. Some rest routes use WordPress Transients to cache requests. To delete caches, use the Transients Manager Plugin to delete them. If the plugin is already installed it will be in Tools > Transients.
+ * Description: Adds custom routes to the WP REST API. Some rest routes use WordPress Transients to cache requests to speed up requests (this applies to the terms in the Program Filters and Locations in the find help view). This means the caches need to be deleted for content to refresh. If the site is using the WordPress Object Cache on WP Engine use the cache clearing button in the WP Engine Admin page. If not using the WP Object cache, install the Transients Manager plugin to delete them. Developers can also delete the cache using the WP CLI.
  * Author: NYC Opportunity
  */
 
