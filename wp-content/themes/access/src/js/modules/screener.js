@@ -10,19 +10,23 @@ import _ from 'underscore';
 
 /**
  * This component is the controller for the program screener. There's a lot
- * here but essentially how it works is that a hashchange listener is used to
- * progress the user through the screener steps. As they submit each step,
- * a number of validations occur and if everything checks out for that step,
- * the ScreenerPerson and ScreenerHousehold objects are update or created.
+ * here but essentially how it works is that a click event listener attached
+ * to anchor links will push a new state to the history API. As they submit
+ * each step, a number of validations occur and if everything checks out for
+ * that step, the ScreenerPerson and ScreenerHousehold objects are updated or
+ * created.
+ *
  * When the screener is submitted, these objects are compiled into the proper
  * formatting for the Drools rules engine and sent off to the Drools Proxy.
  * Assuming a successful response is received, we then redirect the user to
  * the screener results page, building a redirect URL based on the program
  * codes in the Droosl results, the categories they selected in step 1, the
- * current time, and a `guid` parameter provided by the Drools proxy. The
- * screener relies on Underscore templates to render any dynamic views, and
- * relies on the Utility.localize function to translate any strings within
- * those views to the current language.
+ * current time, and a [guid] parameter provided by the Drools proxy.
+ *
+ * The screener relies on Underscore templates to render any dynamic views and
+ * the Utility.localize function to translate any strings within those views to
+ * the current language.
+ *
  * @class
  */
 class Screener {
@@ -70,52 +74,53 @@ class Screener {
    * @return {this} OfficeMap
    */
   init() {
-    if (this._initialized) {
+    if (this._initialized)
       return this;
-    }
 
-    window.addEventListener('hashchange', e => {
-      e.preventDefault();
-      const hash = window.location.hash;
-      const $section = $(hash);
-      let title = $section.find('[data-js="question"]');
-      let prevStep;
+    /**
+     * Step Changer and Validator. It captures the click event for anchor links
+     * an pushes them through to the history API. It will also validate steps
+     * that have the validation class attached to them.
+     */
+    $(this._el).on('click', 'a[href*="#"]', event => {
+      event.preventDefault();
 
-      this._history.push(hash);
+      let $step = $(event.currentTarget)
+        .closest('.' + Screener.CssClass.STEP);
 
-      if (this._history.length > 1) {
-         prevStep = this._history[this._history.length - 2];
+      let target = event.currentTarget;
+      let hash = event.currentTarget.hash;
+      let valid = true;
+
+      if (target.classList.contains(Screener.CssClass.VALIDATE_STEP)) {
+        valid = this._validateStep($step);
       }
 
-      let stateObj = {
-        prevStep: prevStep,
-        step: hash,
-        persons: this._household._attrs.members,
-        title: title[0].innerText,
-        person: []
-      };
-
-      this._people.forEach(function(person, index) {
-        stateObj.person.push({
-          index: index,
-          headOfHousehold: person._attrs.headOfHousehold,
-          income: (!person._attrs.incomes.length) ? false : true,
-          expenses: (!person._attrs.expenses.length) ? false : true
-        });
-      });
-
-      window.history.replaceState(stateObj, $('title').html(), [
-          window.location.pathname,
-          window.location.search,
-          window.location.hash
-        ].join(''));
-
-      if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
-        this._goToStep($section[0])._reFocus();
-        $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
+      if (valid) {
+        this._goToStep(hash)
+          ._newState(hash, 'pushState')
+          ._reFocus();
       }
     });
 
+    /**
+     * Back/Forward button navigation. Listens for the hashchange event then
+     * replaces the current state with the new state. This will not ultimately
+     * replace the original hashchange history event.
+     */
+    window.addEventListener('hashchange', event => {
+      event.preventDefault();
+
+      let hash = window.location.hash;
+
+      this._goToStep(hash)
+        ._newState(hash, 'replaceState')
+        ._reFocus();
+    });
+
+    /**
+     * Large chained event handler for everything else.
+     */
     $(this._el).on('change', 'input[type="checkbox"]', e => {
       this._toggleCheckbox(e.currentTarget);
     }).on('change', `.${Screener.CssClass.TOGGLE}`, e => {
@@ -124,15 +129,13 @@ class Screener {
       this._addMatrixSection(e.currentTarget);
     }).on('change', `.${Screener.CssClass.MATRIX_SELECT}`, e => {
       this._toggleMatrix(e.currentTarget);
-    }).on('click', `.${Screener.CssClass.VALIDATE_STEP}`, e => {
-      const $step = $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`);
-      return this._validateStep($step);
     }).on('click', `.${Screener.CssClass.SUBMIT}`, e => {
       if (!this._recaptchaRequired) {
         this._submit($(e.currentTarget).data('action'));
       } else {
         $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`)
           .find(`.${Screener.CssClass.ERROR_MSG}`).remove();
+
         if (this._recaptchaVerified) {
           this._submit($(e.currentTarget).data('action'));
         } else {
@@ -172,30 +175,44 @@ class Screener {
         `.${Screener.CssClass.SUBMIT}`).trigger('click');
     });
 
-    // Determine whether or not to initialize ReCAPTCHA. This should be
-    // initialized only on every 10th view which is determined via an
-    // incrementing cookie.
+    /**
+     * Determine whether or not to initialize ReCAPTCHA. This should be
+     * initialized only on every 10th view which is determined via an
+     * incrementing cookie.
+     */
     let viewCount = Cookies.get('screenerViews') ?
         parseInt(Cookies.get('screenerViews'), 10) : 1;
+
     if (viewCount >= 10) {
       this._initRecaptcha();
       viewCount = 0;
     }
+
     // `2/1440` sets the cookie to expire after two minutes.
     Cookies.set('screenerViews', ++viewCount, {
       expires: (2/1440),
       path: Screener.CookiePath
     });
 
-    if (Utility.getUrlParameter('debug') === '1') {
-      if (window.location.hash) {
-        this._goToStep($(window.location.hash)[0]);
+    /**
+     * Initial state handler. If in debug mode go to the step requested, else,
+     * go to step 1.
+     */
+    $(document).ready(() => {
+      if (Utility.getUrlParameter('debug') === '1') {
+        if (window.location.hash)
+          this._goToStep(window.location.hash)
+            ._reFocus();
+      } else {
+        this._goToStep('#step-1')
+          ._newState('#step-1', 'replaceState')
+          ._reFocus();
       }
-    } else {
-      window.location.hash = this._$steps.eq(0).attr('id');
-      this._goToStep(this._$steps[0]);
-    }
+    });
 
+    /**
+     * Initialize Webtrends Scenario analysis
+     */
     this._scenarioAnalysis();
 
     return this;
@@ -227,6 +244,40 @@ class Screener {
       }
       Utility.trackView('Eligibility', key, data);
     });
+  }
+
+  /**
+   * Collects data about the current state and writes it to the history api
+   * either using the 'pushState' or 'replaceState' method provided in the args
+   * @param   {string}  hash    Hash of the step to go to including the '#'
+   * @param   {string}  method  'pushState' or 'replaceState' history method
+   * @return  {object}          The screener class
+   */
+  _newState(hash, method) {
+    let section = $(hash);
+    let question = section.find('[data-js="question"]');
+    let personIndex = (section.data('personIndex'))
+      ? section.data('personIndex') : 0;
+
+    let stateObj = {
+      step: hash.replace('#', ''),
+      persons: this._household._attrs.members,
+      question: question[0].innerText,
+      person: {
+        index: personIndex,
+        headOfHousehold: this._people[personIndex].get('headOfHousehold'),
+        income: (!this._people[personIndex].get('incomes').length)
+          ? false : true,
+        expenses: (!this._people[personIndex].get('expenses').length)
+          ? false : true
+      }
+    };
+
+    window.history[method](stateObj, $('title').html(), [
+        window.location.pathname, window.location.search, hash
+      ].join(''));
+
+    return this;
   }
 
   /**
@@ -397,16 +448,22 @@ class Screener {
    */
   _reFocus() {
     $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
+
     return this;
   }
 
   /**
    * Adds the active class to the provided section. Removes it from all other
    * sections.
-   * @param {HTMLElement} section - section to activate.
-   * @return {this} Screener
+   * @param  {string}  hash  '#' and id of the step to go to
+   * @return {this}          The screener class
    */
-  _goToStep(section) {
+  _goToStep(hash) {
+    let section = $(hash);
+
+    if (!section.length || !section.hasClass(Screener.CssClass.STEP))
+     return this;
+
     this._$steps
       .removeClass(Screener.CssClass.SCREENER_STEP_ACTIVE)
       .addClass(Screener.CssClass.SCREENER_STEP_HIDDEN)
@@ -424,6 +481,7 @@ class Screener {
     if ($(section).attr('id') === 'step-9') {
       // add in family members here
       const members = [];
+
       _.each(this._people.slice(0,
           this._household.get('members')), (person, i) => {
         const member = {
@@ -431,6 +489,7 @@ class Screener {
           isHoh: person.get('headOfHousehold'),
           relation: Utility.localize(person.get('headOfHouseholdRelation'))
         };
+
         if (person.get('headOfHousehold')) {
           if (i === 0) {
             member.relation = Utility.localize('Self');
@@ -438,22 +497,27 @@ class Screener {
             member.relation = Utility.localize('HeadOfHousehold');
           }
         }
+
         members.push(member);
       });
+
       const summaryTemplate = $('#screener-member-summary-template').html();
       const renderedSummaryTemplate = _.template(summaryTemplate)({
         members: members
       });
+
       $('#screener-household-summary').html(renderedSummaryTemplate);
 
       // Render member form.
       let personIndex = null;
+
       if ($(section).data('personIndex')) {
         personIndex = parseInt($(section).data('personIndex'), 10);
       } else {
         personIndex = this._people.length;
         $(section).data('personIndex', personIndex);
       }
+
       const formTemplate = $('#screener-member-template').html();
       const templateData = {
         personIndex: personIndex,
@@ -466,7 +530,10 @@ class Screener {
       }
 
       const renderedFormTemplate = _.template(formTemplate)(templateData);
+
       $('#screener-household-member').html(renderedFormTemplate);
+
+      return this;
     }
 
     if ($(section).attr('id') === 'step-10') {
@@ -520,6 +587,7 @@ class Screener {
    */
   _validateStep($step) {
     const stepId = $step.attr('id');
+
     $step.find(`.${Screener.CssClass.ERROR}`)
         .removeClass(Screener.CssClass.ERROR).end()
         .find(`.${Screener.CssClass.ERROR_MSG}`).remove();
@@ -535,6 +603,7 @@ class Screener {
     });
 
     const $errors = $step.find(`.${Screener.CssClass.ERROR}:visible`);
+
     if ($errors.length) {
       const $firstError = $errors.first()
         .closest(Screener.Selectors.QUESTION);
@@ -637,6 +706,7 @@ class Screener {
         } else {
           this._household.set('members', memberCount);
         }
+
         // If there is only one member, ensure that they are the head of the
         // household and proceed to the final step, returning `false` to
         // prevent the default hash change.
@@ -645,7 +715,11 @@ class Screener {
             headOfHousehold: true,
             headOfHouseholdRelation: ''
           });
-          window.location.hash = '#step-10';
+
+          this._goToStep('#step-10')
+            ._newState('#step-10', 'pushState')
+            ._reFocus();
+
           return false;
         }
         break;
@@ -738,14 +812,21 @@ class Screener {
         if (stepId === 'step-8') {
           // If adding a HoH meets the household size, skip ahead to step 10.
           if (this._people.length >= this._household.get('members')) {
-            window.location.hash = '#step-10';
+            this._goToStep('#step-10')
+              ._newState('#step-10', 'pushState')
+              ._reFocus();
+
             return false;
           }
         } else {
           // If we need to add more non-HoH household members, repeat this step.
           if (this._people.length < this._household.get('members')) {
             $step.data('personIndex', personIndex + 1);
-            this._goToStep($step[0])._reFocus();
+
+            this._goToStep(`#${$step[0].id}`)
+              ._newState(`#${$step[0].id}`, 'pushState')
+              ._reFocus();
+
             return false;
           }
         }
@@ -1143,14 +1224,21 @@ class Screener {
    * @return {this} Screener
    */
   _editPerson(i) {
+    let hash = '#';
+
     if (i === 0) {
-      window.location.hash = '#step-3';
+      hash = '#step-3';
     } else if (i === 1 && this._people[i].get('headOfHousehold')) {
-      window.location.hash = '#step-8';
+      hash = '#step-8';
     } else {
       $('#step-9').data('personIndex', i);
-      window.location.hash = '#step-9';
+      hash = '#step-9';
     }
+
+    this._goToStep(hash)
+      ._newState(hash, 'pushState')
+      ._reFocus();
+
     return this;
   }
 
