@@ -70,24 +70,8 @@ class Screener {
    * @return {this} OfficeMap
    */
   init() {
-    if (this._initialized) {
+    if (this._initialized)
       return this;
-    }
-
-    /**  */
-    $('a[href*="#"]').on('click', event => {
-      event.preventDefault();
-
-      let hash = event.currentTarget.hash;
-
-      if (hash === '#step-8' && this._people.length === 1) {
-        this._newState('#step-10', 'pushState')
-          ._newSection('#step-10');
-      } else {
-        this._newState(hash, 'pushState')
-          ._newSection(hash);
-      }
-    });
 
     /** Back/Forward navigation */
     window.addEventListener('hashchange', event => {
@@ -96,8 +80,33 @@ class Screener {
       let hash = window.location.hash;
 
       this._newState(hash, 'replaceState')
-        ._newSection(hash);
+        ._goToStep(hash)
+        ._reFocus();
     });
+
+    /**
+     * Step Changer and Validator
+     */
+    $(this._el).on('click', 'a[href*="#"]', event => {
+      event.preventDefault();
+
+      let $step = $(event.currentTarget)
+        .closest('.' + Screener.CssClass.STEP);
+
+      let target = event.currentTarget;
+      let hash = event.currentTarget.hash;
+      let valid = true;
+
+      if (target.classList.contains(Screener.CssClass.VALIDATE_STEP)) {
+        valid = this._validateStep($step);
+      }
+
+      if (valid) {
+        this._newState(hash, 'pushState')
+          ._goToStep(hash)
+          ._reFocus();
+      }
+    })
 
     $(this._el).on('change', 'input[type="checkbox"]', e => {
       this._toggleCheckbox(e.currentTarget);
@@ -107,10 +116,10 @@ class Screener {
       this._addMatrixSection(e.currentTarget);
     }).on('change', `.${Screener.CssClass.MATRIX_SELECT}`, e => {
       this._toggleMatrix(e.currentTarget);
-    }).on('click', `.${Screener.CssClass.VALIDATE_STEP}`, e => {
+    })/*.on('click', `.${Screener.CssClass.VALIDATE_STEP}`, e => {
       const $step = $(e.currentTarget).closest(`.${Screener.CssClass.STEP}`);
       return this._validateStep($step);
-    }).on('click', `.${Screener.CssClass.SUBMIT}`, e => {
+    })*/.on('click', `.${Screener.CssClass.SUBMIT}`, e => {
       if (!this._recaptchaRequired) {
         this._submit($(e.currentTarget).data('action'));
       } else {
@@ -164,6 +173,7 @@ class Screener {
       this._initRecaptcha();
       viewCount = 0;
     }
+
     // `2/1440` sets the cookie to expire after two minutes.
     Cookies.set('screenerViews', ++viewCount, {
       expires: (2/1440),
@@ -172,12 +182,14 @@ class Screener {
 
     if (Utility.getUrlParameter('debug') === '1') {
       if (window.location.hash) {
-        this._goToStep($(window.location.hash)[0]);
+        this._goToStep(window.location.hash);
       }
     } else {
-      window.location.hash = this._$steps.eq(0).attr('id');
-
-      this._goToStep(this._$steps[0]);
+      // window.location.hash = this._$steps.eq(0).attr('id');
+      // this._goToStep(this._$steps[0]);
+      this._newState('#step-1', 'replaceState')
+        ._goToStep('#step-1')
+        ._reFocus();
     }
 
     this._scenarioAnalysis();
@@ -213,25 +225,10 @@ class Screener {
     });
   }
 
-  _newSection(hash) {
-    let $section = $(hash);
-
-    if ($section.length && $section.hasClass(Screener.CssClass.STEP)) {
-      this._goToStep($section[0])._reFocus();
-
-      $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
-    }
-
-    return this;
-  };
-
   _newState(hash, method) {
-    event.preventDefault();
-
-    let $section = $(hash);
-    let question = $section.find('[data-js="question"]');
+    let question = $(hash).find('[data-js="question"]');
     let stateObj = {
-      step: hash,
+      step: hash.replace('#', ''),
       persons: this._household._attrs.members,
       questopm: question[0].innerText,
       person: []
@@ -421,6 +418,7 @@ class Screener {
    */
   _reFocus() {
     $(window).scrollTop($(Screener.Selectors.VIEW).offset().top);
+
     return this;
   }
 
@@ -430,7 +428,12 @@ class Screener {
    * @param {HTMLElement} section - section to activate.
    * @return {this} Screener
    */
-  _goToStep(section) {
+  _goToStep(hash) {
+    let section = $(hash);
+
+    if (!section.length || !section.hasClass(Screener.CssClass.STEP))
+     return this;
+
     this._$steps
       .removeClass(Screener.CssClass.SCREENER_STEP_ACTIVE)
       .addClass(Screener.CssClass.SCREENER_STEP_HIDDEN)
@@ -448,6 +451,7 @@ class Screener {
     if ($(section).attr('id') === 'step-9') {
       // add in family members here
       const members = [];
+
       _.each(this._people.slice(0,
           this._household.get('members')), (person, i) => {
         const member = {
@@ -455,6 +459,7 @@ class Screener {
           isHoh: person.get('headOfHousehold'),
           relation: Utility.localize(person.get('headOfHouseholdRelation'))
         };
+
         if (person.get('headOfHousehold')) {
           if (i === 0) {
             member.relation = Utility.localize('Self');
@@ -464,20 +469,24 @@ class Screener {
         }
         members.push(member);
       });
+
       const summaryTemplate = $('#screener-member-summary-template').html();
       const renderedSummaryTemplate = _.template(summaryTemplate)({
         members: members
       });
+
       $('#screener-household-summary').html(renderedSummaryTemplate);
 
       // Render member form.
       let personIndex = null;
+
       if ($(section).data('personIndex')) {
         personIndex = parseInt($(section).data('personIndex'), 10);
       } else {
         personIndex = this._people.length;
         $(section).data('personIndex', personIndex);
       }
+
       const formTemplate = $('#screener-member-template').html();
       const templateData = {
         personIndex: personIndex,
@@ -490,7 +499,10 @@ class Screener {
       }
 
       const renderedFormTemplate = _.template(formTemplate)(templateData);
+
       $('#screener-household-member').html(renderedFormTemplate);
+
+      return this;
     }
 
     if ($(section).attr('id') === 'step-10') {
@@ -544,6 +556,7 @@ class Screener {
    */
   _validateStep($step) {
     const stepId = $step.attr('id');
+
     $step.find(`.${Screener.CssClass.ERROR}`)
         .removeClass(Screener.CssClass.ERROR).end()
         .find(`.${Screener.CssClass.ERROR_MSG}`).remove();
@@ -559,6 +572,7 @@ class Screener {
     });
 
     const $errors = $step.find(`.${Screener.CssClass.ERROR}:visible`);
+
     if ($errors.length) {
       const $firstError = $errors.first()
         .closest(Screener.Selectors.QUESTION);
@@ -672,8 +686,9 @@ class Screener {
           });
 
           // window.location.hash = '#step-10';
-          // this._newState('#step-10', 'replaceState')
-            // ._newSection('#step-10');
+          this._newState('#step-10', 'pushState')
+            ._goToStep('#step-10')
+            ._reFocus();
 
           return false;
         }
@@ -768,8 +783,9 @@ class Screener {
           // If adding a HoH meets the household size, skip ahead to step 10.
           if (this._people.length >= this._household.get('members')) {
             // window.location.hash = '#step-10';
-            this._newState('#step-10', 'replaceState')
-              ._newSection('#step-10');
+            this._newState('#step-10', 'pushState')
+              ._goToStep('#step-10')
+              ._reFocus();
 
             return false;
           }
@@ -777,7 +793,11 @@ class Screener {
           // If we need to add more non-HoH household members, repeat this step.
           if (this._people.length < this._household.get('members')) {
             $step.data('personIndex', personIndex + 1);
-            this._goToStep($step[0])._reFocus();
+
+            this._newState(`#${$step[0].id}`, 'pushState')
+              ._goToStep(`#${$step[0].id}`)
+              ._reFocus();
+
             return false;
           }
         }
@@ -1187,7 +1207,8 @@ class Screener {
     }
 
     this._newState(hash, 'pushState')
-      ._newSection(hash);
+      ._goToStep(hash)
+      ._reFocus();
 
     return this;
   }
