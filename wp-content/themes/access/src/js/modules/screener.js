@@ -96,8 +96,6 @@ class Screener {
         valid = this._validateStep($step);
       }
 
-      console.dir(hash);
-      console.dir(valid);
       if (valid) {
         this._goToStep(hash)
           ._newState(hash, 'pushState')
@@ -105,8 +103,19 @@ class Screener {
       }
     });
 
+    /**
+     * Step 8 or Head of Household Question. This is a special handler that
+     * will set Person 0's Head of Household attribute when the radio button
+     * is clicked then push a sate object to the history API.
+     */
     $(this._el).on('change', '[name="Person[0].headOfHousehold"]', event => {
-      console.dir(event);
+      let step = $(event.currentTarget).closest(`.${Screener.CssClass.STEP}`);
+      let input = step.find('input[name="Person[0].headOfHousehold"]:checked');
+
+      this._people[0].set({
+        headOfHousehold: Screener.getTypedVal(input)
+      });
+
       this._newState(window.location.hash, 'replaceState');
     });
 
@@ -266,8 +275,6 @@ class Screener {
     let question = section.find('[data-js="question"]');
     let personIndex = (section.data('personIndex'))
       ? section.data('personIndex') : 0;
-
-    console.dir(section.data('personIndex'));
 
     let person = (this._people[personIndex])
       ? this._people[personIndex] : false;
@@ -831,7 +838,7 @@ class Screener {
           // If we need to add more non-HoH household members, repeat this step.
           if (this._people.length < this._household.get('members')) {
             $step.data('personIndex', personIndex + 1);
-            console.dir(`#${$step[0].id}`);
+
             this._goToStep(`#${$step[0].id}`)
               ._newState(`#${$step[0].id}`, 'pushState')
               ._reFocus();
