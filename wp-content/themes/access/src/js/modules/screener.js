@@ -104,6 +104,22 @@ class Screener {
     });
 
     /**
+     * Step 8 or Head of Household Question. This is a special handler that
+     * will set Person 0's Head of Household attribute when the radio button
+     * is clicked then push a sate object to the history API.
+     */
+    $(this._el).on('change', '[name="Person[0].headOfHousehold"]', event => {
+      let step = $(event.currentTarget).closest(`.${Screener.CssClass.STEP}`);
+      let input = step.find('input[name="Person[0].headOfHousehold"]:checked');
+
+      this._people[0].set({
+        headOfHousehold: Screener.getTypedVal(input)
+      });
+
+      this._newState(window.location.hash, 'replaceState');
+    });
+
+    /**
      * Back/Forward button navigation. Listens for the hashchange event then
      * replaces the current state with the new state. This will not ultimately
      * replace the original hashchange history event.
@@ -170,6 +186,7 @@ class Screener {
       this._enforceMaxLength(e.currentTarget);
     }).on('submit', e => {
       e.preventDefault();
+
       this._$steps.filter(`.${Screener.CssClass.ACTIVE}`)
         .find(`.${Screener.CssClass.VALIDATE_STEP},` +
         `.${Screener.CssClass.SUBMIT}`).trigger('click');
@@ -259,17 +276,18 @@ class Screener {
     let personIndex = (section.data('personIndex'))
       ? section.data('personIndex') : 0;
 
+    let person = (this._people[personIndex])
+      ? this._people[personIndex] : false;
+
     let stateObj = {
       step: hash.replace('#', ''),
       persons: this._household._attrs.members,
       question: question[0].innerText,
       person: {
         index: personIndex,
-        headOfHousehold: this._people[personIndex].get('headOfHousehold'),
-        income: (!this._people[personIndex].get('incomes').length)
-          ? false : true,
-        expenses: (!this._people[personIndex].get('expenses').length)
-          ? false : true
+        headOfHousehold: (person) ? person.get('headOfHousehold') : false,
+        income: (person && person.get('incomes').length) ? true : false,
+        expenses: (person && person.get('expenses').length) ? true : false
       }
     };
 
