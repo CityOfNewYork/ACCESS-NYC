@@ -10,8 +10,8 @@ const __ = wp.i18n.__;
 const tableAttrs = {
   align: 'left',
   border: '0',
-  cellpadding: '0',
-  cellspacing: '0',
+  cellPadding: '0',
+  cellSpacing: '0',
   role: 'presentation'
 };
 
@@ -142,8 +142,7 @@ registerBlockType('access/smnyc-email-button', {
   edit: (props) => {
     let linkElement = wp.element.createElement('a',
       {style: linkStyles},
-      (!props.attributes.content) ? 'Add text in the block inspector...' : props.attributes.content,
-      arrowElement
+      (!props.attributes.content) ? 'Add text in the block inspector...' : props.attributes.content
     );
 
     let urlEditor = wp.element.createElement(wp.editor.URLInputButton, {
