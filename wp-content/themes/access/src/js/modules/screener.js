@@ -550,6 +550,8 @@ class Screener {
       const renderedFormTemplate = _.template(formTemplate)(templateData);
 
       $('#screener-household-member').html(renderedFormTemplate);
+
+      return this;
     }
 
     if ($(section).attr('id') === 'step-10') {
