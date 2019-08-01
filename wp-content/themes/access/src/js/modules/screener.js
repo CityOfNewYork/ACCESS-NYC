@@ -278,12 +278,12 @@ class Screener {
 
     let person = (this._people[personIndex])
       ? this._people[personIndex] : false;
-    let personFillingScreener = this._people[0];
+    let applicant = this._people[0];
 
     let stateObj = {
       step: hash.replace('#', ''),
       persons: this._household._attrs.members,
-      applicantIsHeadOfHousehold: personFillingScreener.get('headOfHousehold'),
+      applicantHeadOfHousehold: applicant.get('headOfHousehold'),
       question: question[0].innerText,
       person: {
         index: personIndex,
