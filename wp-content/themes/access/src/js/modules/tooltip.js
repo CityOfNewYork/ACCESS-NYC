@@ -48,6 +48,9 @@ class Tooltip {
       e.stopPropagation();
       this.toggle();
     });
+    $(window).on('hashchange', e => {
+      this.hide();
+    });
     Tooltip.AllTips.push(this);
     return this;
   }

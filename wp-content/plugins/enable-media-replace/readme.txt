@@ -1,15 +1,18 @@
 === Enable Media Replace ===
 Contributors: ShortPixel
-Tags: admin, attachment, media, files
-Requires at least: 4.0
-Tested up to: 4.9.4
+Donate link: https://www.paypal.me/resizeImage
+Tags: replace, attachment, media, files, replace image, replace jpg, change media, replace media, image, file
+Requires at least: 4.2
+Tested up to: 5.2
+Requires PHP: 5.4
 Stable tag: trunk
 
-Enables replacing attachment files by simply uploading a new file in the media library edit view.
+Easily replace any attached image/file by simply uploading a new file in the Media Library edit view - a real time saver!
 
 == Description ==
 
-This plugin allows you to replace a file in your media library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
+**A free, lightweight and easy to use plugin that allows you to seamlessly replace an image or file in your Media Library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
+Supported by the friendly team that created <a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">ShortPixel</a>  :)**
 
 #### A real timesaver
 
@@ -24,18 +27,93 @@ Now you'll be able to replace any uploaded file from the media "edit" view, wher
 1. Just replace the file. This option requires you to upload a file of the same type as the one you are replacing. The name of the attachment will stay the same no matter what the file you upload is called.
 1. Replace the file, use new file name and update all links. If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file will be updated to point to the new file name.
 
-This plugin is very powerful and a must-have for any larger sites built with WordPress. 
+This plugin is very powerful and a must-have for any larger sites built with WordPress. It now also comes with preview of the replaced image!
 
 #### Display file modification time
 
 There is a shortcode available which picks up the file modification date and displays it in a post or a page. The code is:
-`[file_modified id=XX format=XXXX]` where the "id" is required and the "format" is optional and defaults to your current WordPress settings for date and time format. 
+`[file_modified id=XX format=XXXX]` where the "id" is required and the "format" is optional and defaults to your current WordPress settings for date and time format.
 
 So `[file_modified id=870]` would display the last time the file with ID 870 was updated on your site. To get the ID for a file, check the URL when editing a file in the media library (see screenshot #4)
 
-If you want more control over the format used to display the time, you can use the format option, so `[file_modified id=870 format=Y-m-d]` would display the file modification date but not the time. The format string uses [standard PHP date() formatting tags](http://php.net/manual/en/function.date.php). 
+If you want more control over the format used to display the time, you can use the format option, so `[file_modified id=870 format=Y-m-d]` would display the file modification date but not the time. The format string uses [standard PHP date() formatting tags](http://php.net/manual/en/function.date.php).
+
+
+#### Compatible and recommended Plugins =
+
+* [ShortPixel Image Optimization](https://wordpress.org/plugins/shortpixel-image-optimiser/) - Enable Media Replace is fully compatible with this plugin. Once enabled, ShortPixel will automatically optimize the images you replace using Enable Media Replace.
+* [Resize Image After Upload plugin](https://wordpress.org/plugins/resize-image-after-upload/) - automatically resize images upon upload to save traffic & disk space. Good for SEO and compatible with EMR.
+* [Regenerate Thumbnails Advanced](https://wordpress.org/plugins/regenerate-thumbnails-advanced/) - Fast, free and simple to use plugin to regenerate the thumbnails for your site after changing a theme (for example). Supported & maintained by [ShortPixel](https://ShortPixel.com)
 
 == Changelog ==
+
+= 3.3.2 =
+
+Release date: 17th July 2019
+* Check if medium size !> 400px, display that one, otherwise smallest.
+* Fixed: Links not updated when using Advanced Custom Fields
+* Fixed: Fails silently when file is too big for upload
+* When source file does not exist, show placeholder instead of failed image load
+* Fixed: Fatal error when replacing images
+* Fixed: Not the right time zone on replace
+* Fixed Beaver Builder incompatibility by not allowing replace with rename.
+* Fixed: Cannot replace non default Wordpress file types, even those allowed to upload [ Media Library Assistant compat ]
+* Fixed: error when trying to remove a file that doesn't exist - because the files are actually on another server
+
+= 3.3.1 =
+
+Release date: 18th June 2019
+* Fix error class not found on WPEngine
+
+= 3.3.0 =
+* When replacing an image and changing the name, Search / Replace is now also done on the meta_value of postmeta.
+* Replace PDF thumbnails too
+* Copy title from EXIF
+* RTL View incorporated into the CSS
+* ‘wp_handle_upload’ filter should be treated as such (and not as action)
+* Use wp_attached_file instead of the GUID
+* Fix: replace missing file
+* Fix: aphostrophe breaking the upload
+* Fix: broken "before" image
+* Fix: update properly the date
+* Fix: errors for non-image items in Media Library
+* Fix: empty admin menu item created
+* Refactored all the code
+
+= 3.2.9 =
+* properly replace thumbnails names in the content when the replaced image has a different aspect ratio, thus the new thumbnails have a different height in the name.
+
+= 3.2.8 =
+* fix for failures in link updating when replacing file because of addslashes - use prepared query instead
+* replace basename with wp_basename because basename doesn't work well with UTF8
+
+= 3.2.7 =
+* Add minimum required php version to run the plugin.
+* Security: Prevent direct access to php files.
+* Security: Prevent direct access to directories.
+* Security: Escape translation strings using `esc_attr__()` and `esc_html__()` functions.
+* Fix RTL issues.
+
+= 3.2.6 =
+* no more 404 error if no image was selected when trying to replace it
+* added preview so you can check the image being replaced and also the image that's being replaced with
+* .dat files can be replaced (functionality accidentally removed in the previous version)
+* added compatibility with S3 upload plugin
+* when an image is replaced the date is also updated
+
+= 3.2.5 =
+* remove the leftover setcookie and the plugins recommendations.
+
+= 3.2.4 =
+* Fix PDF thumbnails not replaced when replacing a PDF
+* Fix not replacing text files with .dat extension
+
+= 3.2.3 =
+* disable ShortPixel recommendation on secondary sites of a multisite install when it was network activated.
+
+= 3.2.2 =
+* Fixed compatibility with ShortPixel and Resize Image After Upload
+* Added ShortPixel links and images, fixed the problem of ShortPixel recommendation not dismissing.
 
 = 3.2.1 =
 * Bugfix, typo made metadata changes (thanks GitHub user icecandy!)
@@ -68,7 +146,7 @@ If you want more control over the format used to display the time, you can use t
 = 3.0.3 =
 * Scrapped old method of detecting media screen, button to replace media will now show up in more places, yay!
 * Made sure the call to get_attached_file() no longer skips filters, in response to several users wishes.
-* Suppressed error messages on chmod() 
+* Suppressed error messages on chmod()
 * Added Japanese translation (Thank you, chacomv!)
 
 = 3.0.2 =
@@ -104,7 +182,7 @@ If you want more control over the format used to display the time, you can use t
 * Added call to update_attached_file() which should purge changed files for various CDN and cache plugs. Thanks Dylan Barlett for the suggestion! (http://wordpress.org/support/topic/compatibility-with-w3-total-cache)
 * Suppressed possible error in new hook added in 2.9.2
 
-= 2.9.2 = 
+= 2.9.2 =
 * Small bug fix
 * Added hook for developers to enable purging possible CDN when updating files - thanks rubious for the suggestion!
 
@@ -120,14 +198,14 @@ If you want more control over the format used to display the time, you can use t
 * After uploading, the plugin now takes you back to edit screen instead of library
 
 = 2.8.2 =
-* Made another change to the discovery of media context which will hopefully fix a bug in certain cases. Thanks to "Joolee" at the WordPress.org forums! 
-* Added a new, supposedly better Russian translation from "Vlad". 
+* Made another change to the discovery of media context which will hopefully fix a bug in certain cases. Thanks to "Joolee" at the WordPress.org forums!
+* Added a new, supposedly better Russian translation from "Vlad".
 
 = 2.8.1 =
-* Fixed a small bug which could create error messages on some systems when deleting old image files. 
+* Fixed a small bug which could create error messages on some systems when deleting old image files.
 
 = 2.8 =
-* New and safer method for deleting thumbnails when a new image file is uploaded. 
+* New and safer method for deleting thumbnails when a new image file is uploaded.
 * New translations for simplified Chinese (thanks Tunghsiao Liu) and Italian (grazie Marco Chiesi)
 * Added method for detecting upload screen to ensure backward compatibility with versions pre 3.5
 
@@ -141,13 +219,13 @@ If you want more control over the format used to display the time, you can use t
 * The "more reliable way" of determining MIME types turned out to be less reliable. Go figure. There seems to be no perfect way of performing a reliable check for MIME-types on an uploaded file that is also truly portable. I have now made checks for the availability of mime_content_type() before using it, using the old method as a fall-back. It is far from beautiful, so if anybody has a better way of doing it, please contact me!
 
 = 2.5.1 =
-* Bug fix - there is now a more reliable way of determining file type on your upload so you can upload PDF files without seeing that pesky "File type does not meet security guidelines" message. 
+* Bug fix - there is now a more reliable way of determining file type on your upload so you can upload PDF files without seeing that pesky "File type does not meet security guidelines" message.
 * New translation to Danish - thanks to Michael Bering Petersen!
 
 = 2.5 =
 * Tested with WordPress 3.2.1
 * New translation to German - thanks to Martin Lettner!
-* New translation to French - thanks to François Collette!	
+* New translation to French - thanks to François Collette!
 
 = 2.4.1 =
 * Bug fix for WordPress 3.1 RC. Now properly tested and should be working with 3.1 whenever it finally comes out. :)
@@ -174,7 +252,7 @@ If you want more control over the format used to display the time, you can use t
 * Replaced popup with inline navigation when replacing media
 * Added instructions in admin link under Media
 
-= 1.4.1 = 
+= 1.4.1 =
 * Tested with WordPress 3.0 beta 2
 
 = 1.4 =
@@ -204,28 +282,27 @@ Quick and easy installation:
 
 = What does this plugin actually do? =
 
-This plugin makes it easy to update/replace files that have been uploaded to the WordPress Media Library. 
+This plugin makes it easy to update/replace files that have been uploaded to the WordPress Media Library.
 
 = How does it work? =
 
-A new option will be available in the Edit Media view, called "Replace Media". This is where you can upload a new file to replace the old one. 
+A new option will be available in the Edit Media view, called "Replace Media". This is where you can upload a new file to replace the old one.
 
 = I replaced a file, but it didn't change! =
 
 There are two main reasons this would happen.
 
-First, make sure you are not viewing a cached version of the file, especially if you replaced an image. Press "Refresh" in your browser to make sure. 
+First, make sure you are not viewing a cached version of the file, especially if you replaced an image. Press "Refresh" in your browser to make sure.
 
-Second, if the file really looks unchanged, make sure WordPress has write permissions to the files in your uploads folder. If you have ever moved your WP installation (maybe when you moved it to a new server), the permissions on your uploaded files are commonly reset so that WordPress no longer has permissions to change the files. If you don't know how to do this, contact your web server operator. 
+Second, if the file really looks unchanged, make sure WordPress has write permissions to the files in your uploads folder. If you have ever moved your WP installation (maybe when you moved it to a new server), the permissions on your uploaded files are commonly reset so that WordPress no longer has permissions to change the files. If you don't know how to do this, contact your web server operator.
 
 == Screenshots ==
 
-1. The new link in the media library. 
+1. The new link in the media library.
 2. The replace media-button as seen in the "Edit media" view.
 3. The upload options.
 4. Get the file ID in the edit file URL
 
-== Wishlist / Coming attractons ==
+== Wishlist / Coming attractions ==
 
-Do you have suggestions? Feel free to contact me at mans@mansjonasson.se
-
+Do you have suggestions? Feel free to contact ShortPixel <a href="https://shortpixel.com/contact" target="_blank">here</a>
