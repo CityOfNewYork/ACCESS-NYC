@@ -18,11 +18,7 @@ if ( is_home() ) {
     'post_type' => 'homepage_tout',
     'numberposts' => 2
   ));
-
-  $context['homepage_alert'] = Timber::get_post(array(
-    'post_type' => 'alert'
-  ));
-
+  
   array_unshift( $templates, 'home.twig' );
 }
 

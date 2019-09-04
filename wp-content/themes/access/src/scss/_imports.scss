@@ -88,5 +88,11 @@ $path-to-images: 'img/';
 @import 'access-nyc-patterns/src/utilities/statuses/statuses';
 @import 'access-nyc-patterns/dist/styles/_tailwind.scss';
 @import 'access-nyc-patterns/src/utilities/text/text';
-@import 'access-nyc-patterns/src/utilities/toggles/toggles';
+@import 'access-nyc-patterns/src/utilities/toggle/toggle';
 @import 'access-nyc-patterns/src/utilities/typography/typography';
+
+/***************************************
+* Alerts
+* TODO: Upload styles to Access patterns
+****************************************/
+@import './alert';
