@@ -185,6 +185,29 @@
           {% include 'objects/footer.twig' %}
         </footer>
       {% endblock %}
+
+      {% if homepage_alert %}
+        <div class="c-alert-banner c-alert hidden bg-status-{{ homepage_alert.alert_color }} fixed bottom-0 w-screen left-0 px-8 js-alert" data-js="alert" data-cookie="{{homepage_alert.slug}}" role="dialog" aria-labelledby="dialog-title-{{homepage_alert.slug}}" aria-describedby="dialog-desc-{{homepage_alert.slug}}">
+          <div class="c-alert-banner__icon">
+            <svg class="c-alert-banner__svg icon icon-{{ homepage_alert.alert_icon }}">
+              <use xlink:href="#icon-{{ homepage_alert.alert_icon }}"></use>
+            </svg>
+          </div>
+
+          <div class="c-alert-banner__body">
+            {{ homepage_alert.alert_content }}
+          </div>
+
+          <div class="c-alert-banner__closing">
+            <button type="button" id="alert-button">
+              <svg class="icon-ui-x" role="img">
+                <title>close</title>
+                <use xlink:href="#icon-ui-x"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      {% endif %}
     </div>
     {% block webtrends %}
     {% include 'partials/scripts-webtrends.twig' %}

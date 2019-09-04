@@ -1,0 +1,64 @@
+.c-alert.hidden {
+  display: none;
+}
+
+.c-alert.is-open {
+  padding-right: 6rem;
+  padding-left: 6rem;
+}
+
+.c-alert-banner {
+  @extend .c-alert-box;
+}
+
+.c-alert-banner__icon {
+  @extend .c-alert-box__icon;
+}
+
+.c-alert-banner__svg {
+  @extend .c-alert-box__svg;
+}
+
+.c-alert-banner__body {
+  @extend .c-alert-box__body;
+}
+
+.c-alert-banner__closing {
+  width: 100px;
+}
+
+#alert-button {
+  padding-left: 20px;
+}
+
+ /* Styles for Ipad screen devices */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)  {
+  .c-alert.is-open {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+/* Styles for phone screen devices */
+@media only screen and (max-width: 600px) {
+  .c-alert.is-open {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    display: flex;
+  }
+
+  .c-alert-banner__body {
+    padding: 1rem;
+  }
+
+  .c-alert-banner__closing {
+    width: 100px;
+    padding-left: 0;
+  }
+
+  #alert-button {
+    padding-left: 0;
+  }
+}
