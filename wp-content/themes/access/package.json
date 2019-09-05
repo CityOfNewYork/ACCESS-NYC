@@ -37,6 +37,9 @@
         "error",
         "as-needed"
       ]
+    },
+    "env": {
+      "browser": true
     }
   },
   "babel": {
