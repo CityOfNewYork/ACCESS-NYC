@@ -64,16 +64,16 @@
           <a class="btn btn-secondary btn-next" href="{{ urlBase }}/programs">{{__('See all programs', 'accessnyctheme')}}</a>
         </div>
 
-        {% if homepage_alert %}
-        <div class="c-alert-box bg-status-{{ homepage_alert.alert_color }} screen-tablet:mx-3 mb-2">
+        {% if site_alert %}
+        <div class="c-alert-box bg-status-{{ site_alert.alert_color }} screen-tablet:mx-3 mb-2">
           <div class="c-alert-box__icon">
-            <svg class="c-alert-box__svg icon icon-{{ homepage_alert.alert_icon }}">
-              <use xlink:href="#icon-{{ homepage_alert.alert_icon }}"></use>
+            <svg class="c-alert-box__svg icon icon-{{ site_alert.alert_icon }}">
+              <use xlink:href="#icon-{{ site_alert.alert_icon }}"></use>
             </svg>
           </div>
 
           <div class="c-alert-box__body">
-            {{ homepage_alert.alert_content }}
+            {{ site_alert.alert_content }}
           </div>
         </div>
         {% endif %}
