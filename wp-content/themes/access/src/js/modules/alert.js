@@ -61,18 +61,19 @@ export default function(openClass) {
   const alerts = document.querySelectorAll('.js-alert');
 
   if (alerts.length) {
-    alerts.forEach(alert => {
-      if (!checkAlertCookie(alert)) {
-        const alertSibling = alert.previousElementSibling;
+    for (let i=0; i <= alert.length; i++) {
+      if (!checkAlertCookie(alerts[i])) {
+        const alertSibling = alerts[i].previousElementSibling;
         const alertButton = document.getElementById('alert-button');
-        displayAlert(alert, alertSibling);
+        displayAlert(alerts[i], alertSibling);
         alertButton.addEventListener('click', e => {
-          alert.classList.add('hidden');
-          addAlertCookie(alert);
-        });
+            alerts[i].classList.add('hidden');
+            addAlertCookie(alerts[i]);
+          });
       } else {
-        alert.classList.add('hidden');
+        alerts[i].classList.add('hidden');
       }
-    });
+    }
   }
 }
+
