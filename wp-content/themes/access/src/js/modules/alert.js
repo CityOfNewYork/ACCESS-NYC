@@ -61,17 +61,18 @@ export default function(openClass) {
   const alerts = document.querySelectorAll('.js-alert');
 
   if (alerts.length) {
-        alerts.forEach(alert => {
-          if (checkAlertCookie(alert)) {
-            const alertSibling = alert.previousElementSibling;
-            const alertButton = document.getElementById('alert-button');
-            displayAlert(alert, alertSibling);
-
-            alertButton.addEventListener('click', e => {
-              alert.classList.add('hidden');
-              addAlertCookie(alert);
-            });
-          }
+    alerts.forEach(alert => {
+      if (!checkAlertCookie(alert)) {
+        const alertSibling = alert.previousElementSibling;
+        const alertButton = document.getElementById('alert-button');
+        displayAlert(alert, alertSibling);
+        alertButton.addEventListener('click', e => {
+          alert.classList.add('hidden');
+          addAlertCookie(alert);
         });
-    }
+      } else {
+        alert.classList.add('hidden');
+      }
+    });
+  }
 }

@@ -187,7 +187,7 @@
       {% endblock %}
 
       {% if site_alert %}
-        <div class="c-alert-banner c-alert bg-status-{{ site_alert.alert_color }} fixed bottom-0 w-screen left-0 px-8 js-alert" data-js="alert" data-cookie="{{page_alert.slug}}" role="dialog" aria-labelledby="dialog-title-{{page_alert.slug}}" aria-describedby="dialog-desc-{{page_alert.slug}}">
+        <div class="c-alert-banner bg-status-{{ site_alert.alert_color }} fixed bottom-0 w-screen left-0 px-8 js-alert" data-js="alert" data-cookie="{{site_alert.slug}}" role="dialog" aria-labelledby="dialog-title-{{site_alert.slug}}" aria-describedby="dialog-desc-{{site_alert.slug}}">
           <div class="c-alert-banner-wrapper">
             <div class="c-alert-banner__icon">
               <svg class="c-alert-banner__svg icon icon-{{ site_alert.alert_icon }}">
