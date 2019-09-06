@@ -31,75 +31,22 @@
 }
 
 .c-alert-banner__closing button {
-  width: 2rem;
+  width: 24px;
+  height: 24px;
   background: transparent;
   border: none;
+  text-align: right;
+  padding: 0;
 }
 
 /* Styles for small screen sizes */
-@media only screen
-and (min-width: 800px)
-and (max-width: 1400px) {
-  .c-alert.is-open {
-    padding-right: 6rem;
-    padding-left: 6rem;
-    display: flex;
+@media screen and (max-width: $screen-mobile) {
+  .c-alert-banner {
+    max-height: 250px;
     overflow: scroll;
   }
 
-  .c-alert-banner__body {
-    padding: 0.5rem;
-  }
-
-  .c-alert-banner__closing {
-    width: 10rem;
-  }
-}
-
-@media only screen
-and (min-width: 200px)
-and (max-width: 800px) {
-  .c-alert.is-open {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-    display: flex;
-    overflow: scroll;
-  }
-
-  .c-alert-banner__body {
-    padding: 0.5rem;
-  }
-
-  .c-alert-banner__closing {
-    width: 10rem;
-  }
-}
-
-/* Styles for Ipad screen devices */
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)  {
- .c-alert.is-open {
-   padding-right: 6rem;
-   padding-left: 6rem;
- }
-
- .c-alert-banner__closing {
-   width: 10rem;
- }
-}
-
-/*  iPhone 6, 7, & 8 in landscape  */
-@media only screen
-and (min-device-width : 375px)
-and (max-device-width : 667px)
-and (orientation : landscape) {
-  .c-alert.is-open {
-    padding-right: 1rem;
-    padding-left: 1rem;
-  }
-
-  .c-alert-banner__closing {
-    width: 10rem;
+  .c-alert-banner__icon {
+    padding-right: 10px;
   }
 }
