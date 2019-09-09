@@ -41,3 +41,9 @@
     padding-right: 10px;
   }
 }
+
+@media screen and (min-width: $screen-desktop) {
+  .c-alert-banner__body {
+    margin-right: 5px;
+  }
+}
