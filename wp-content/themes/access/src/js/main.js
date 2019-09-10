@@ -19,7 +19,6 @@ import jQuery from 'jquery';
 // Element.prototype.polyfills
 import 'modules/polyfill-element-matches';
 import 'modules/polyfill-element-remove';
-import Alerts from 'modules/alert';
 
 import ShareForm from 'modules/share-form';
 import TextSizer from 'modules/text-sizer';
@@ -72,8 +71,6 @@ import Newsletter from 'objects/newsletter/newsletter.common';
   new Accordion();
   new Filter();
   new NearbyStops();
-
-  new Alerts();
 
   // Instantiate Newsletter Class
   let newsletter = document.querySelector(Newsletter.selector);
