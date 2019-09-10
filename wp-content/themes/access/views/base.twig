@@ -186,16 +186,16 @@
         </footer>
       {% endblock %}
 
-      {% if page_alert %}
-        <div class="c-alert-banner c-alert hidden bg-status-{{ page_alert.alert_color }} fixed bottom-0 w-screen left-0 px-8 js-alert" data-js="alert" data-cookie="{{page_alert.slug}}" role="dialog" aria-labelledby="dialog-title-{{page_alert.slug}}" aria-describedby="dialog-desc-{{page_alert.slug}}">
+      {% if homepage_alert %}
+        <div class="c-alert-banner c-alert hidden bg-status-{{ homepage_alert.alert_color }} fixed bottom-0 w-screen left-0 px-8 js-alert" data-js="alert" data-cookie="{{homepage_alert.slug}}" role="dialog" aria-labelledby="dialog-title-{{homepage_alert.slug}}" aria-describedby="dialog-desc-{{homepage_alert.slug}}">
           <div class="c-alert-banner__icon">
-            <svg class="c-alert-banner__svg icon icon-{{ page_alert.alert_icon }}">
-              <use xlink:href="#icon-{{ page_alert.alert_icon }}"></use>
+            <svg class="c-alert-banner__svg icon icon-{{ homepage_alert.alert_icon }}">
+              <use xlink:href="#icon-{{ homepage_alert.alert_icon }}"></use>
             </svg>
           </div>
 
           <div class="c-alert-banner__body">
-            {{ page_alert.alert_content }}
+            {{ homepage_alert.alert_content }}
           </div>
 
           <div class="c-alert-banner__closing">
