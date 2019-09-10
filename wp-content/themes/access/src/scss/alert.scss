@@ -41,15 +41,12 @@ and (max-device-width : 1024px)  {
   }
 }
 
-/* Styles for small screen sizes */
-@media only screen
-and (min-width: 200px)
-and (max-width: 900px) {
+/* Styles for phone screen devices */
+@media only screen and (max-width: 600px) {
   .c-alert.is-open {
     padding-right: 1rem;
     padding-left: 1rem;
     display: flex;
-    overflow: scroll;
   }
 
   .c-alert-banner__body {
@@ -63,16 +60,5 @@ and (max-width: 900px) {
 
   #alert-button {
     padding-left: 0;
-  }
-}
-
-/*  iPhone 6, 7, & 8 in landscape  */
-@media only screen
-and (min-device-width : 375px)
-and (max-device-width : 667px)
-and (orientation : landscape) {
-  .c-alert.is-open {
-    padding-right: 1rem;
-    padding-left: 1rem;
   }
 }

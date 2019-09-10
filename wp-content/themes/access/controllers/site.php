@@ -51,8 +51,8 @@ class Site extends TimberSite {
 
     // Gets object containing all program categories
     $context['categories'] = get_terms('programs');
-    // Display alert
-    $context['page_alert'] = Timber::get_post(array(
+    // Display alert 
+    $context['homepage_alert'] = Timber::get_post(array(
       'post_type' => 'alert'
     ));
     // Gets the page ID for top level nav items
