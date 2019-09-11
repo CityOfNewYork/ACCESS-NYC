@@ -1,0 +1,49 @@
+.c-alert-banner-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+}
+.c-alert-banner {
+  @extend .c-alert-box;
+  left: 0;
+  bottom: 0;
+}
+
+.c-alert-banner__icon {
+  @extend .c-alert-box__icon;
+}
+
+.c-alert-banner__svg {
+  @extend .c-alert-box__svg;
+}
+
+.c-alert-banner__body {
+  @extend .c-alert-box__body;
+}
+
+.c-alert-banner__closing button {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  text-align: right;
+  padding: 0;
+}
+
+/* Styles for small screen sizes */
+@media screen and (max-width: $screen-mobile) {
+  .c-alert-banner {
+    max-height: 250px;
+    overflow: scroll;
+  }
+
+  .c-alert-banner__icon {
+    padding-right: 10px;
+  }
+}
+
+@media screen and (min-width: $screen-desktop) {
+  .c-alert-banner__body {
+    margin-right: 5px;
+  }
+}
