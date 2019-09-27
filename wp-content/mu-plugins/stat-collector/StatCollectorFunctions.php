@@ -4,10 +4,19 @@ namespace StatCollector;
 
 function drools_request($data, $uid) {
   $db = _get_db();
-  $db->insert("requests", [
-    "uid" => $uid,
-    "data" => json_encode($data),
-  ]);
+  $db->suppress_errors();
+  $db->show_errors();
+
+  $result = $db->query($db->prepare("
+    INSERT into requests (uid, data) VALUES (%s, %s)",
+    $uid,
+    json_encode($data)
+  ));
+
+  if($result === false){
+    // print the error
+    error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+  }
 }
 
 function drools_response($response, $uid) {
@@ -86,6 +95,7 @@ function _get_db() {
     return new MockDatabase();
   }
 
+  // establish a new database connection
   $db = new \wpdb($user, $password, $database, $host);
   $db->show_errors();
 
