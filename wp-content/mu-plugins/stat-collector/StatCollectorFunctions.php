@@ -21,21 +21,39 @@ function drools_request($data, $uid) {
 
 function drools_response($response, $uid) {
   $db = _get_db();
-  $db->insert("responses", [
-    "uid" => $uid,
-    "data" => json_encode($response),
-  ]);
+  $db->suppress_errors();
+  $db->show_errors();
+
+  $result = $db->query($db->prepare("
+    INSERT into responses (uid, data) VALUES (%s, %s)",
+    $uid,
+    json_encode($data)
+  ));
+
+  if($result === false){
+    // print the error
+    error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+  }
 }
 
 function results_sent($type, $to, $uid, $url = null, $message = null) {
   $db = _get_db();
-  $db->insert("messages", [
-    "uid" => $uid,
-    "msg_type" => strtolower($type),
-    "address" => $to,
-    "url" => $url,
-    "message" => $message
-  ]);
+  $db->suppress_errors();
+  $db->show_errors();
+
+  $result = $db->query($db->prepare("
+   INSERT into messages (uid, msg_type, address, url, message) VALUES (%s, %s)",
+    $uid,
+    strtolower($type),
+    $to,
+    $url,
+    $message
+  ));
+
+  if($result === false){
+    // print the error
+    error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+  }
 }
 
 function peu_data($staff, $client, $uid) {
@@ -43,18 +61,31 @@ function peu_data($staff, $client, $uid) {
     return;
   }
   $db = _get_db();
+  $db->suppress_errors();
+  $db->show_errors();
 
   if (! empty($staff)) {
-    $db->insert("peu_staff", [
-      "uid" => $uid,
-      "data" => json_encode($staff)
-    ]);
+    $result = $db->query($db->prepare("
+      INSERT into peu_staff (uid, data) VALUES (%s, %s)",
+      $uid,
+      json_encode($data)
+    ));
+
+    if($result === false){
+      // print the error
+      error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+    }
   }
   if (! empty($client)) {
-    $db->insert("peu_client", [
-      "uid" => $uid,
-      "data" => json_encode($client)
-    ]);
+    $result = $db->query($db->prepare("
+      INSERT into peu_client (uid, data) VALUES (%s, %s)",
+      $uid,
+      json_encode($data)
+    ));
+    if($result === false){
+      // print the error
+      error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+    }
   }
 }
 
@@ -68,11 +99,21 @@ function response_update() {
   }
 
   $db = _get_db();
-  $db->insert("response_update", [
-    "uid" => $uid,
-    "url" => $url,
-    "program_codes" => $programs
-  ]);
+  $db->suppress_errors();
+  $db->show_errors();
+
+  $result = $db->query($db->prepare("
+    INSERT into response_update (uid, url, program_codes) VALUES (%s, %s)",
+    $uid,
+    $url,
+    $programs
+  ));
+
+  if($result === false){
+    // print the error
+    error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+  }
+
   wp_send_json(["status" => "ok"]);
   wp_die();
 }

@@ -33,7 +33,7 @@ function incoming() {
   }
 
   $uid = uniqid();
-  // do_action('peu_data', $_POST['staff'], $_POST['client'], $uid);
+  do_action('peu_data', $_POST['staff'], $_POST['client'], $uid);
   do_action('drools_request', $_POST['data'], $uid);
 
   $response = request($url, json_encode($_POST['data']), $user, $pass);
@@ -45,7 +45,7 @@ function incoming() {
 
   $ret = json_decode($response);
 
-  // do_action('drools_response', $ret, $uid);
+  do_action('drools_response', $ret, $uid);
 
   $ret->GUID = $uid;
   wp_send_json($ret, 200);
