@@ -4,9 +4,6 @@ namespace StatCollector;
 
 function drools_request($data, $uid) {
   $db = _get_db();
-  $db->suppress_errors();
-  $db->show_errors();
-
   $result = $db->query($db->prepare("
     INSERT into requests (uid, data) VALUES (%s, %s)",
     $uid,
@@ -21,9 +18,6 @@ function drools_request($data, $uid) {
 
 function drools_response($response, $uid) {
   $db = _get_db();
-  $db->suppress_errors();
-  $db->show_errors();
-
   $result = $db->query($db->prepare("
     INSERT into responses (uid, data) VALUES (%s, %s)",
     $uid,
@@ -38,9 +32,6 @@ function drools_response($response, $uid) {
 
 function results_sent($type, $to, $uid, $url = null, $message = null) {
   $db = _get_db();
-  $db->suppress_errors();
-  $db->show_errors();
-
   $result = $db->query($db->prepare("
    INSERT into messages (uid, msg_type, address, url, message) VALUES (%s, %s)",
     $uid,
@@ -61,8 +52,6 @@ function peu_data($staff, $client, $uid) {
     return;
   }
   $db = _get_db();
-  $db->suppress_errors();
-  $db->show_errors();
 
   if (! empty($staff)) {
     $result = $db->query($db->prepare("
@@ -99,9 +88,6 @@ function response_update() {
   }
 
   $db = _get_db();
-  $db->suppress_errors();
-  $db->show_errors();
-
   $result = $db->query($db->prepare("
     INSERT into response_update (uid, url, program_codes) VALUES (%s, %s)",
     $uid,
@@ -138,6 +124,7 @@ function _get_db() {
 
   // establish a new database connection
   $db = new \wpdb($user, $password, $database, $host);
+  $db->suppress_errors();
   $db->show_errors();
 
   if ($bootstrapped !== '5') {
