@@ -21,12 +21,12 @@ function drools_response($response, $uid) {
   $result = $db->query($db->prepare("
     INSERT into responses (uid, data) VALUES (%s, %s)",
     $uid,
-    json_encode($data)
+    json_encode($response)
   ));
 
   if($result === false){
     // print the error
-    error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+    error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($response));
   }
 }
 
@@ -43,7 +43,9 @@ function results_sent($type, $to, $uid, $url = null, $message = null) {
 
   if($result === false){
     // print the error
-    error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+    $request_parameters =  array($type, $to, $uid, $url, $message);
+    error_log('STAT COLLECTOR ERROR '
+              . $db->last_error.json_encode($request_parameters));
   }
 }
 
@@ -57,23 +59,27 @@ function peu_data($staff, $client, $uid) {
     $result = $db->query($db->prepare("
       INSERT into peu_staff (uid, data) VALUES (%s, %s)",
       $uid,
-      json_encode($data)
+      json_encode($staff)
     ));
 
     if($result === false){
       // print the error
-      error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+      $request_parameters =  array($staff, $client, $uid);
+      error_log('STAT COLLECTOR ERROR '
+                . $db->last_error.json_encode($request_parameters));
     }
   }
   if (! empty($client)) {
     $result = $db->query($db->prepare("
       INSERT into peu_client (uid, data) VALUES (%s, %s)",
       $uid,
-      json_encode($data)
+      json_encode($client)
     ));
     if($result === false){
       // print the error
-      error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+      $request_parameters =  array($staff, $client, $uid);
+      error_log('STAT COLLECTOR ERROR '
+                . $db->last_error.json_encode($request_parameters));
     }
   }
 }
@@ -97,7 +103,9 @@ function response_update() {
 
   if($result === false){
     // print the error
-    error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+    $request_parameters =  array($uid, $url, $programs);
+    error_log('STAT COLLECTOR ERROR '
+              . $db->last_error.json_encode($request_parameters));
   }
 
   wp_send_json(["status" => "ok"]);
