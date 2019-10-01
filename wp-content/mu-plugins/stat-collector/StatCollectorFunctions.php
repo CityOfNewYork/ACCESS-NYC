@@ -33,7 +33,8 @@ function drools_response($response, $uid) {
 function results_sent($type, $to, $uid, $url = null, $message = null) {
   $db = _get_db();
   $result = $db->query($db->prepare("
-   INSERT into messages (uid, msg_type, address, url, message) VALUES (%s, %s)",
+    INSERT into messages (uid, msg_type, address, url, message)
+      VALUES (%s, %s, %s, %s, %s)",
     $uid,
     strtolower($type),
     $to,
@@ -95,7 +96,7 @@ function response_update() {
 
   $db = _get_db();
   $result = $db->query($db->prepare("
-    INSERT into response_update (uid, url, program_codes) VALUES (%s, %s)",
+    INSERT into response_update (uid, url, program_codes) VALUES (%s, %s, %s)",
     $uid,
     $url,
     $programs
