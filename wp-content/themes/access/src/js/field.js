@@ -12,6 +12,7 @@ import ResultsField from 'modules/results-field';
 import ShareForm from 'modules/share-form';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
+import AlertBanner from 'modules/alert';
 import Icons from 'elements/icons/icons.common';
 import Accordion from 'components/accordion/accordion.common';
 
@@ -52,6 +53,9 @@ import Accordion from 'components/accordion/accordion.common';
 
   // Initialize accordion components
   new Accordion();
+
+  // Initialize alert banner component
+  new AlertBanner();
 
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {
