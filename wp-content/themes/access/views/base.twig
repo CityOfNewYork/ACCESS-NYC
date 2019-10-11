@@ -31,7 +31,7 @@
       <a class="sr-only sr-only-focusable" href="#content">{{__('Skip to main content', 'accessnyctheme')}}</a>
       {% block header %}
         <header class="relative">
-          <div class="flex justify-between py-1 px-3 print:block">
+          <div class="color-mid-background flex justify-between py-1 px-3 print:block">
             {% spaceless %}
             <div class="flex-none">
               <svg class="icon icon-logo-nyc">
@@ -41,139 +41,12 @@
             </div>
             {% endspaceless %}
 
-            <div class="js-text-controller c-text-controller print:hidden">
-              {% spaceless %}
-              <a class="js-text-controller-toggle c-text-controller__toggle" href="#text-controls" data-js="track" data-track-key="Text Controls" data-track-data='[{"action": "text-controls"}]'>
-                <svg class="icon icon-ui-settings">
-                  <use xlink:href="#icon-ui-settings"></use>
-                </svg>
-                <span class="c-text-controller__title-full">{{__('Translate &amp; Adjust Text', 'accessnyctheme')}}</span>
-                <span class="c-text-controller__title-short">{{__('Translate Text', 'accessnyctheme')}}</span>
-              </a>
-              {% endspaceless %}
-              <div class="js-text-controller-options c-text-controller__options hidden" id="text-controls">
-                <div class='c-text-controller__languages'>
-                  {% do action('icl_language_selector') %}
-                </div>
-                <div class="c-text-controller__sizer">
-                  <em class="c-text-controller__sizer-text">
-                    {{__('Adjust text size', 'accessnyctheme')}}
-                  </em>
-
-                  <button class="c-text-controller__sizer-btn btn-text js-text-larger" data-js="track" data-track-key="Text Sizer" data-track-data='[{"action": "text-size/larger"}]'>
-                    <svg class="icon icon-ui-plus-circle">
-                      <use xlink:href="#icon-ui-plus-circle"></use>
-                    </svg>
-                    <div class="sr-only">{{__('Larger', 'accessnyctheme')}}</div>
-                  </button>
-
-                  <button class="c-text-controller__sizer-btn btn-text js-text-smaller" data-js="track" data-track-key="Text Sizer" data-track-data='[{"action": "text-size/smaller"}]'>
-                    <svg class="icon icon-ui-minus-circle">
-                      <use xlink:href="#icon-ui-minus-circle"></use>
-                    </svg>
-                    <div class="sr-only">{{__('Smaller', 'accessnyctheme')}}</div>
-                  </button>
-                </div>
-              </div>
-            </div>
+            {% include 'objects/text-controller.twig' %}
           </div>
 
-          <nav class="o-navigation color-dark-background">
-            <div class="logo-access">
-              <a href="{{ urlBase }}/" data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "home"}]'>
-                <svg class="icon icon-logo-full">
-                  <use xlink:href="#icon-logo-full"></use>
-                </svg><span class="sr-only">{{__('Access NYC', 'accessnyctheme')}}</span>
-              </a>
-            </div>
-
-            <nav class="o-navigation__nav nav-inline print:hidden" data-js="site-desktop-nav">{% spaceless %}
-              <a class="screen-desktop:hidden overflow-hidden" href="#o-mobile-nav" data-js="toggle-nav,track" data-track-key="Main Nav" data-track-data='[{"action": "menu"}]'>
-                {{__('Menu', 'accessnyctheme')}}
-              </a>
-
-              {% include 'partials/nav.twig' with {this: {style: 'hidden screen-desktop:inline-block overflow-hidden'}} %}
-
-              <a class="td-inherit js-toggle-search overflow-hidden" href="#search" data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "search"}]'>
-                <svg class="icon icon-ui-search">
-                  <use xlink:href="#icon-ui-search"></use>
-                </svg>
-                {{__('Search', 'accessnyctheme')}}
-              </a>
-            {% endspaceless %}</nav>
-          </nav>
-
-          <div class="o-mobile-nav color-mid-background print:hidden" id="o-mobile-nav">
-            <a class="o-mobile-nav__close" href="#o-mobile-nav" data-js="toggle-nav,track" data-track-key="Main Nav" data-track-data='[{"action": "menu/close"}]'>
-              {{__('close &amp; return to site', 'accessnyctheme')}}
-              <svg class="icon icon-ui-x">
-                <use xlink:href="#icon-ui-x"></use>
-              </svg>
-            </a>
-
-            <div class="o-mobile-nav__inner">
-              <h4 class="o-mobile-nav__header">
-                {{__('Get help now', 'accessnyctheme')}}
-              </h4>
-
-              <nav class="nav-block">
-                {% include 'partials/nav.twig' %}
-                <a href="{{ urlBase }}/?s=" data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "search"}]'>
-                  <svg class="icon icon-ui-search">
-                    <use xlink:href="#icon-ui-search"></use>
-                  </svg>{{__('Search', 'accessnyctheme')}}
-                </a>
-              </nav>
-            </div>
-          </div>
-
-          <div class="o-search-box js-search-box print:hidden" id="search" aria-hidden="true">
-            <div class="o-search-box__inner">
-              <div class="usa-grid">
-                <div class="usa-width-one-whole">
-                  <a class="o-search-box__close js-hide-search" href="#content" data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "search/close"}]'>
-                    <svg class="icon icon-ui-x">
-                      <use xlink:href="#icon-ui-x"></use>
-                    </svg><span class="sr-only">{{__('Close search', 'accessnyctheme')}}</span>
-                  </a>
-
-                  <form class="o-search-box__form" method="get" action="/">
-                    {{ fn('do_action', 'wpml_add_language_form_field' ) }}
-                    <label class="type-small" for="search-field">{{__('Search for programs or services', 'accessnyctheme')}}</label>
-
-                    <div class="input-search">
-                      <input name="s" type="text" value="" placeholder="{{__('Search', 'accessnyctheme')}}" id="search-field">
-                      <button class="btn-text input-search__submit" type="submit">
-                        <svg class="icon icon-ui-search">
-                          <use xlink:href="#icon-ui-search"></use>
-                        </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
-                      </button>
-                    </div>
-                  </form>
-
-                  <div class="o-search-box__suggestions">
-                    <div class="o-search-box__suggestions-header">
-                      <h3>{{__('Programs', 'accessnyctheme')}}</h3>
-
-                      <a class="link-more hidden screen-tablet:inline-block" href="{{ urlBase }}/programs">{{__('See all programs', 'accessnyctheme')}}</a>
-                    </div>
-
-                    {% if search_links %}
-                    <div class="o-search-box__suggestions-body">
-                      {% for link in search_links[0].get_field('field_58c1020ec4450') %} {# program_links #}
-                      <div class="o-search-box__suggestions-item">
-                        <a href="{{ link.link }}">{{ link.plain_language_program_name }}</a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                    {% endif %}
-
-                    <a class="link-more screen-tablet:hidden" href="#" aria-hidden="true">{{__('see all programs', 'accessnyctheme')}}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {% include 'objects/navigation.twig' %}
+          {% include 'objects/mobile-nav.twig' %}
+          {% include 'objects/search-box.twig' %}
         </header>
       {% endblock %}
 
@@ -181,7 +54,7 @@
       {% endblock %}
 
       {% block footer %}
-        <footer class="o-footer">
+        <footer class="o-footer color-mid-background">
           {% include 'objects/footer.twig' %}
         </footer>
       {% endblock %}
@@ -207,14 +80,11 @@
                 </svg>
               </button>
             </div>
-          
           </div>
-
-
         </div>
       {% endif %}
     </div>
-    
+
     {% block webtrends %}
     {% include 'partials/scripts-webtrends.twig' %}
     {% endblock %}

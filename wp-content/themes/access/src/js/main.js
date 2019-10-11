@@ -19,80 +19,115 @@ import jQuery from 'jquery';
 // Element.prototype.polyfills
 import 'modules/polyfill-element-matches';
 import 'modules/polyfill-element-remove';
-import Alerts from 'modules/alert';
 
-import ShareForm from 'modules/share-form';
-import TextSizer from 'modules/text-sizer';
+import Alerts from 'modules/alert';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
-import Icons from 'elements/icons/icons.common';
-import Accordion from 'components/accordion/accordion.common';
-import Filter from 'components/filter/filter.common';
-import NearbyStops from 'components/nearby-stops/nearby-stops.common';
-import Newsletter from 'objects/newsletter/newsletter.common';
+
+// ACCESS Patterns
+import Icons from 'elements/icons/icons';
+import Accordion from 'components/accordion/accordion';
+import Filter from 'components/filter/filter';
+import ShareForm from 'components/share-form/share-form';
+import Disclaimer from 'components/disclaimer/disclaimer';
+import Newsletter from 'objects/newsletter/newsletter';
+import TextController from 'objects/text-controller/text-controller';
+
+// Patterns Framework
+import Toggle from 'utilities/toggle/toggle';
 
 (function(window, $) {
   'use strict';
 
   Utility.configErrorTracking(window);
 
-  // Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
+  /** Initialize ACCESS NYC Patterns library components */
   new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
-
-  let $body = $('body');
-
-  // Attach site-wide event listeners.
-  $body.on(
-    'click',
-    '.js-simple-toggle, [data-js="toggle"]', // use the data attr selector
-    Utility.simpleToggle
-  ).on('click', '[data-js*="toggle-nav"]', event => {
-    let element = $(event.currentTarget);
-    // Shows/hides the mobile nav and overlay.
-    event.preventDefault();
-    $('body').toggleClass('overlay active:overlay');
-    $(element.attr('href')).toggleClass('active:o-mobile-nav');
-  }).on('click', '.js-toggle-search', e => {
-    // Shows/hides the search drawer in the main nav.
-    e.preventDefault();
-    const $search = $('#search');
-    $search.toggleClass('active');
-    if ($search.hasClass('active')) {
-      setTimeout(function() {
-        $('#search-field').focus();
-      }, 20);
-    }
-  }).on('click', '.js-hide-search', e => {
-    // Hides the search drawer in the main nav.
-    e.preventDefault();
-    $('#search').removeClass('active');
-  });
-
-  // Initialize ACCESS NYC Patterns lib components
+  new Toggle();
   new Accordion();
   new Filter();
-  new NearbyStops();
-
   new Alerts();
 
-  // Instantiate Newsletter Class
-  let newsletter = document.querySelector(Newsletter.selector);
+  /** Instantiate Text Controller */
+  (element => {
+    if (element) new TextController(element);
+  })(document.querySelector(TextController.selector));
 
-  if (newsletter)
-    new Newsletter(newsletter).strings(Object.fromEntries([
-        'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED', 'VALID_EMAIL_INVALID',
-        'VALID_CHECKBOX_BOROUGH', 'SUCCESS_CONFIRM_EMAIL',
-        'ERR_PLEASE_TRY_LATER', 'ERR_PLEASE_ENTER_VALUE',
-        'ERR_TOO_MANY_RECENT', 'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL'
-      ].map(i => [i, Utility.localize(i)])));
+  /** Instantiate Newsletter and pass it translated strings */
+  (element => {
+    if (element) {
+      let newsletter = new Newsletter(element);
+      let strings = Object.fromEntries([
+        'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED',
+        'VALID_EMAIL_INVALID', 'VALID_CHECKBOX_BOROUGH',
+        'SUCCESS_CONFIRM_EMAIL', 'ERR_PLEASE_TRY_LATER',
+        'ERR_PLEASE_ENTER_VALUE', 'ERR_TOO_MANY_RECENT',
+        'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL'
+      ].map(i => [i, Utility.localize(i)]));
 
-  // Show/hide share form disclaimer
-  $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
+      newsletter.strings = strings;
+      newsletter.form.strings = strings;
+    }
+  })(document.querySelector(Newsletter.selector));
 
-  // A basic click tracking function
-  $body.on('click', '[data-js*="track"]', event => {
-    let key = event.currentTarget.dataset.trackKey;
-    let data = JSON.parse(event.currentTarget.dataset.trackData);
+  /** Initialize the Share Form and Disclaimer */
+  (elements => {
+    elements.forEach(element => {
+      let shareForm = new ShareForm(element);
+
+      shareForm.sent = instance => {
+        let key = instance.type.charAt(0).toUpperCase() +
+          instance.type.slice(1);
+
+        Utility.track(key, [
+          {'DCS.dcsuri': `share/${instance.type}`}
+        ]);
+      };
+    });
+
+    new Disclaimer();
+  })(document.querySelectorAll(ShareForm.selector));
+
+  let body = document.querySelector('body');
+
+  /** Initialize Mobile Nav Toggle */
+  body.addEventListener('click', event => {
+    if (!event.target.matches('[data-js*="o-mobile-nav"]'))
+      return;
+
+    event.preventDefault();
+
+    body.classList.toggle('overlay');
+    body.classList.toggle('active:overlay');
+
+    let mobileNav = document.querySelector('#o-mobile-nav');
+    mobileNav.classList.toggle('active');
+  });
+
+  /** Search Box Control */
+  body.addEventListener('click', event => {
+    if (!event.target.matches('[data-js*="o-search-box"]'))
+      return;
+
+    event.preventDefault();
+
+    let searchBox = document.querySelector('#search');
+    searchBox.classList.toggle('active');
+
+    if (searchBox.classList.contains('active')) {
+      setTimeout(() => {
+        searchBox.querySelector('#search-field').focus();
+      }, 20);
+    }
+  });
+
+  /** Basic click tracking */
+  body.addEventListener('click', event => {
+    if (!event.target.matches('[data-js*="track"]'))
+      return;
+
+    let key = event.target.dataset.trackKey;
+    let data = JSON.parse(event.target.dataset.trackData);
 
     Utility.track(key, data, event);
   });
@@ -113,27 +148,15 @@ import Newsletter from 'objects/newsletter/newsletter.common';
     $(e.currentTarget).closest('form')[0].submit();
   });
 
-  // Initialize text sizer module.
-  $(`.${TextSizer.CssClass.CONTROLLER}`).each((i, el) => {
-    const textSizer = new TextSizer(el);
-    textSizer.init();
-  });
-
   // Initialize tooltips.
   $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) => {
     const tooltip = new Tooltip(el);
     tooltip.init();
   });
 
-  // Initialize share by email/sms forms.
-  $(`.${ShareForm.CssClass.FORM}`).each((i, el) => {
-    const shareForm = new ShareForm(el);
-    shareForm.init();
-  });
-
   // For pages with "print-view" class, print the page on load. Currently only
   // used on program detail pages after the print link is clicked.
-  if ($('html').hasClass('print-view')) {
+  if (document.querySelector('html').classList.contains('print-view')) {
     window.onload = window.print;
   }
 

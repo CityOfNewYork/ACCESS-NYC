@@ -11,8 +11,8 @@
 
 {% set shownSections = post.get_field('show_sections') %}
 
-<article class="mb-4 print:pb-4 print:border-b" data-code="{{ post.program_code }}">
-  <div class="flex items-stretch bg-color-grey-lightest p-3 screen-desktop:p-4 print:block print:p-0 print:bg-color-transparent">
+<article class="mb-4 print:pb-4 print:border-b" data-code="{{ post.id }}">
+  <div class="flex items-stretch color-mid-background p-3 screen-desktop:p-4 print:block print:p-0 print:bg-color-transparent">
     <div class="w-100 pr-1 print:p-0">
       <header class='c-card p-0 bg-color-transparent mb-2'>
         <div class="c-card__icon-large print:hidden">
@@ -24,12 +24,12 @@
 
         <div class="c-card__body pt-1" style="flex-basis: 100%">
           <a href="{{ post.get_permalink }}" target="_blank" rel="noopener noreferrer">
-            <h3 class="c-card__title text-color-blue-dark">
+            <h3 class="c-card__title">
               {{ post.plain_language_program_name }}
             </h3>
           </a>
           {% if not short_post %}
-          <p class="c-card__subtitle text-color-grey-mid mb-0">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
+          <p class="c-card__subtitle color-mid-background__alt mb-0">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>
           {% endif %}
         </div>
       </header>
@@ -48,13 +48,15 @@
 
       {% if post.heads_up | length %}
       <div class="print:mb-2">
-        <h3 class="type-h4 text-color-blue-dark">{{__('Heads Up', 'accessnyc-program-detail')}}</h3>
-        <div class="c-checklist" id="heads-up-{{ post.program_code }}">
+        <h3 class="type-h4 text-color-blue-dark">{{ __('Heads Up', 'accessnyc-program-detail') }}</h3>
+
+        <div class="c-checklist" id="heads-up-{{ post.id }}">
           {{ post.get_field('heads_up') }}
         </div>
+
         {% for section in shownSections %}{% if section.value == 'what-you-need-to-include' %}
         <p class="print:hidden m-0">
-          <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank" rel="noopener noreferrer">See a full list of required documents</a>
+          <a class="btn btn-secondary btn-next btn-small" href="{{ post.get_permalink }}?step=what-you-need-to-include" target="_blank" rel="noopener noreferrer">See a full list of required documents</a>
         </p>
         {% endif %}{% endfor %}
       </div>
@@ -63,41 +65,40 @@
 
     <div class="flex flex-col justify-between print:hidden">
       <div style="width:240px" class="pb-2">
-        <div id="remove-{{ post.program_code }}">
-          <a class="btn btn-primary btn-small block" href="#confirm-{{ post.program_code }}"
-            data-js="simple-toggle"
-            data-hide="#remove-{{ post.program_code }}">
+        <div id="remove-{{ post.id }}">
+          <button class="btn btn-primary btn-small w-full block" aria-controls="confirm-{{ post.id }}" data-js="toggle" aria-expanded="false">
             {{ __('Remove Program', translationID) }}
-          </a>
+          </button>
         </div>
-        <div id="confirm-{{ post.program_code }}" class="hidden" aria-hidden="true">
+
+        <div id="confirm-{{ post.id }}" class="hidden" aria-hidden="true">
           <p class="type-small text-center text-color-grey-mid">{{ __('Are you sure?', translationID) }}</p>
+
           <div class="flex">
-            <a class="flex-1 btn btn-primary btn-small"
-              data-js="remove-program, track"
-              data-remove-code="{{ post.program_code }}"
-              data-track-key="Results: Remove Program"
-              data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/remove"}]'>{{ __('Remove', translationID) }}</a>
-            <a class="flex-1 btn btn-secondary btn-small ml-2" href="#remove-{{ post.program_code }}"
-              data-js="simple-toggle"
-              data-hide="#confirm-{{ post.program_code }}">{{ __('Keep', translationID) }}</a>
+            <button class="flex-1 btn btn-primary btn-small" data-js="remove-program track" data-remove-id="{{ post.id }}" data-remove-code="{{ post.program_code }}" data-track-key="Results: Remove Program" data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/remove"}]'>
+              {{ __('Remove', translationID) }}
+            </button>
+
+            <button class="flex-1 btn btn-secondary btn-small ml-2" data-js="toggle" aria-controls="confirm-{{ post.id }}">
+              {{ __('Keep', translationID) }}
+            </button>
           </div>
         </div>
       </div>
 
       <div>
-        <a class="btn-toggle btn" href="#program-detail-{{ post.program_code }}"
-          data-js="simple-toggle, track"
+        <button class="btn btn-toggle btn-small w-full text-color-blue" aria-controls="program-detail-{{ post.id }}" aria-expanded="false"
+          data-js="toggle track"
 
           data-track-key="Results: Learn More"
           data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/learn-more"}]'>
           {{ __('Learn More', translationID) }}
-        </a>
+        </button>
       </div>
     </div>
   </div>
 
-  <div class="hidden print:active" id="program-detail-{{ post.program_code }}">
+  <div class="hidden print:active" id="program-detail-{{ post.id }}" aria-hidden="true">
     <div class="flex p-3 screen-desktop:p-4 print:p-0">
       <div class="w-full pr-1 print:p-0">
         {% for section in shownSections %}
@@ -108,7 +109,7 @@
           {# Online #}
           {% if post.how_to_apply_or_enroll_online != '' %}
             {% include 'components/accordion.twig' with {this: {
-                id: 'apply-online-' ~ post.program_code,
+                id: 'apply-online-' ~ post.id,
                 active: false,
                 header: __('Apply online', 'accessnyc-program-detail'),
                 body: post.get_field('how_to_apply_or_enroll_online'),
@@ -125,7 +126,7 @@
           {# By Mail #}
           {% if post.how_to_apply_or_enroll_by_mail != '' %}
             {% include 'components/accordion.twig' with {this: {
-                id: 'apply-mail-' ~ post.program_code,
+                id: 'apply-mail-' ~ post.id,
                 active: false,
                 header: __('Apply by mail', 'accessnyc-program-detail'),
                 body: post.get_field('how_to_apply_or_enroll_by_mail'),
@@ -142,7 +143,7 @@
           {# By Phone #}
           {% if post.how_to_apply_or_enroll_by_phone != '' %}
             {% include 'components/accordion.twig' with {this: {
-                id: 'apply-by-phone-' ~ post.program_code,
+                id: 'apply-by-phone-' ~ post.id,
                 active: false,
                 header: __('Apply by phone', 'accessnyc-program-detail'),
                 body: post.get_field('how_to_apply_or_enroll_by_phone') ~
@@ -154,7 +155,7 @@
           {# In Person #}
           {% if post.how_to_apply_or_enroll_in_person != '' %}
             {% include 'components/accordion.twig' with {this: {
-                id: 'apply-in-person-' ~ post.program_code,
+                id: 'apply-in-person-' ~ post.id,
                 active: false,
                 header: __('Apply in person', 'accessnyc-program-detail'),
                 body: post.get_field('how_to_apply_or_enroll_in_person'),
@@ -188,7 +189,7 @@
   {% if post.heads_up | length %}
   <style>
     {% for icon in post.get_field('heads_up_icons') %}
-    .c-checklist#heads-up-{{ post.program_code }} ul li:nth-child({{ loop.index }}) {
+    .c-checklist#heads-up-{{ post.id }} ul li:nth-child({{ loop.index }}) {
       background-image: url({{ icon.icon.url }});
     }
     {% endfor %}

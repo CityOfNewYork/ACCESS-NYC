@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
  * text adjustment with 0 being neutral.
  * @class
  */
-class TextSizer {
+class TextController {
   /**
    * @param {HTMLElement} el - The html element for the component.
    * @constructor
@@ -39,19 +39,19 @@ class TextSizer {
       return this;
     }
 
-    $(this._el).on('click', `.${TextSizer.CssClass.TOGGLE}`, e => {
+    $(this._el).on('click', TextController.CssClass.TOGGLE, e => {
       e.preventDefault();
       this.toggle();
-    }).on('click', `.${TextSizer.CssClass.SMALLER}`, e => {
+    }).on('click', TextController.CssClass.SMALLER, e => {
       e.preventDefault();
       const newSize = this._textSize - 1;
-      if (newSize >= TextSizer.Size.MIN) {
+      if (newSize >= TextController.Size.MIN) {
         this._adjustSize(newSize);
       }
-    }).on('click', `.${TextSizer.CssClass.LARGER}`, e => {
+    }).on('click', TextController.CssClass.LARGER, e => {
       e.preventDefault();
       const newSize = this._textSize + 1;
-      if (newSize <= TextSizer.Size.MAX) {
+      if (newSize <= TextController.Size.MAX) {
         this._adjustSize(newSize);
       }
     });
@@ -93,10 +93,10 @@ class TextSizer {
    */
   show() {
     this._active = true;
-    $(this._el).find(`.${TextSizer.CssClass.OPTIONS}`)
-        .removeClass(TextSizer.CssClass.HIDDEN).end()
-        .find(`.${TextSizer.CssClass.TOGGLE}`)
-        .addClass(TextSizer.CssClass.HIDDEN);
+    $(this._el).find(TextController.CssClass.OPTIONS)
+        .removeClass(TextController.CssClass.HIDDEN).end()
+        .find(TextController.CssClass.TOGGLE)
+        .addClass(TextController.CssClass.HIDDEN);
     return this;
   }
 
@@ -106,10 +106,10 @@ class TextSizer {
    */
   hide() {
     this._active = false;
-    $(this._el).find(`.${TextSizer.CssClass.OPTIONS}`)
-        .addClass(TextSizer.CssClass.HIDDEN).end()
-        .find(`.${TextSizer.CssClass.TOGGLE}`)
-        .removeClass(TextSizer.CssClass.HIDDEN);
+    $(this._el).find(TextController.CssClass.OPTIONS)
+        .addClass(TextController.CssClass.HIDDEN).end()
+        .find(TextController.CssClass.TOGGLE)
+        .removeClass(TextController.CssClass.HIDDEN);
     return this;
   }
 
@@ -151,36 +151,36 @@ class TextSizer {
    * @return {this} TextSizer
    */
   _checkForMinMax() {
-    if (this._textSize <= TextSizer.Size.MIN) {
-      this._textSize = TextSizer.Size.MIN;
-      $(this._el).find(`.${TextSizer.CssClass.SMALLER}`)
+    if (this._textSize <= TextController.Size.MIN) {
+      this._textSize = TextController.Size.MIN;
+      $(this._el).find(TextController.CssClass.SMALLER)
           .attr('disabled', 'disabled');
     } else {
-      $(this._el).find(`.${TextSizer.CssClass.SMALLER}`).removeAttr('disabled');
+      $(this._el).find(TextController.CssClass.SMALLER).removeAttr('disabled');
     }
-    if (this._textSize >= TextSizer.Size.MAX) {
-      this._textSize = TextSizer.Size.MAX;
-      $(this._el).find(`.${TextSizer.CssClass.LARGER}`)
+    if (this._textSize >= TextController.Size.MAX) {
+      this._textSize = TextController.Size.MAX;
+      $(this._el).find(TextController.CssClass.LARGER)
           .attr('disabled', 'disabled');
     } else {
-      $(this._el).find(`.${TextSizer.CssClass.LARGER}`).removeAttr('disabled');
+      $(this._el).find(TextController.CssClass.LARGER).removeAttr('disabled');
     }
     return this;
   }
 }
 
-TextSizer.Size = {
+TextController.Size = {
   MAX: 3,
   MIN: -3
 };
 
-TextSizer.CssClass = {
-  CONTROLLER: 'js-text-controller',
+TextController.CssClass = {
+  CONTROLLER: '[data-js*="text-controller"]',
   HIDDEN: 'hidden',
-  LARGER: 'js-text-larger',
-  OPTIONS: 'js-text-controller-options',
-  SMALLER: 'js-text-smaller',
-  TOGGLE: 'js-text-controller-toggle'
+  LARGER: '[data-js*="text-larger"]',
+  OPTIONS: '[data-js*="text-controller-options"]',
+  SMALLER: '[data-js*="text-smaller"]',
+  TOGGLE: '[data-js*="toggle"]'
 };
 
-export default TextSizer;
+export default TextController;

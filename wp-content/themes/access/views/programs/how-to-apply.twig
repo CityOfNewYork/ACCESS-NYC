@@ -1,4 +1,4 @@
-<section id="how-to-apply" data-js="program-detail-step" class="hidden:overflow{% if step in sectionArray | keys %} active{% endif %} print:active">
+<section id="how-to-apply" data-js="program-detail-step" class="hidden:overflow{% if step in sectionArray | keys %} active{% endif %} print:active w-full">
   <header>
     <h3 class="text-color-blue-dark">
       {{ stepNumber }}. {{__('How to apply', 'accessnyc-program-detail')}}
@@ -110,47 +110,29 @@
         {{__('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail')}}</p>
 
         <div class="layout--gutter screen-tablet:layout--columns-gutter">
-          <div class="c-share-form">
-            <a class="btn btn-primary btn-small c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-text">{{__('Text', 'accessnyc-program-detail')}}</a>
-            <div id="share-by-text" class="c-share-form__input hidden js-needs-disclaimer">
-              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-                <input type="hidden" name="action" value="sms_send" readonly>
-                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
-                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
-                <div class="c-share-form__controls">
-                  <input type="tel" name="to" placeholder="{{__('Phone Number', 'accessnyc-program-detail')}}" required>
-                  <div class="c-share-form__button">
-                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
-                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
-                    <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+          {% include 'components/share-form.twig' with {this: {
+            type: 'tel',
+            button: __('Text', 'accessnyc-program-detail'),
+            placeholder: __('Phone Number', 'accessnyc-program-detail'),
+            post: shareAction,
+            action: 'sms_send',
+            url: shareUrl,
+            hash: shareHash
+          }} only %}
 
-          <div class="c-share-form">
-            <a class="btn btn-primary btn-small c-share-form__toggle js-simple-toggle js-show-disclaimer" data-scroll-offset="20" href="#share-by-email">{{__('Email', 'accessnyc-program-detail')}}</a>
-            <div id="share-by-email" class="c-share-form__input hidden js-needs-disclaimer">
-              <form method="post" action="{{ shareAction }}" class="js-share-form" novalidate>
-                <input type="hidden" name="action" value="email_send" readonly>
-                <input type="hidden" name="url" value="{{ shareUrl }}" readonly>
-                <input type="hidden" name="hash" value="{{ shareHash }}" readonly>
-                <div class="c-share-form__controls">
-                  <input type="email" name="to" placeholder="{{__('Email address', 'accessnyc-program-detail')}}" required>
-                  <div class="c-share-form__button">
-                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', 'accessnyc-program-detail')}}</button>
-                    {% include 'partials/share-form-spinner.twig' with {attr: 'style="display: none"'} %}
-                    <div class="success-message">{{__('Sent!', 'accessnyc-program-detail')}}</div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+          {% include 'components/share-form.twig' with {this: {
+            type: 'email',
+            button: __('Email', 'accessnyc-program-detail'),
+            placeholder: __('Email Address', 'accessnyc-program-detail'),
+            post: shareAction,
+            action: 'email_send',
+            url: shareUrl,
+            hash: shareHash
+          }} only %}
         </div>
 
-        <div class="mt-3 screen-tablet:m-0">
-          {% include 'partials/share-form-disclaimer.twig' %}
+        <div class="mt-3 screen-tablet:m-0 hidden" aria-hidden="true" id="aria-db-share-disclaimer">
+          {% include 'components/disclaimer-small.twig' %}
         </div>
       </p>
     </div>

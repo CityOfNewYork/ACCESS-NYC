@@ -2,7 +2,6 @@
 'use strict';
 
 import $ from 'jquery';
-import ShareForm from 'modules/share-form';
 import Utility from 'modules/utility';
 
 /**
@@ -39,11 +38,6 @@ class ResultsField {
      */
 
     let $el = $(this._el);
-
-    // Initialize share by email/sms forms.
-    $(`.${ShareForm.CssClass.FORM}`).each(function(i, el) {
-      new ShareForm(el).init();
-    });
 
     // Finalize form
     $(ResultsField.Selectors.FINAL_RESULTS).on('submit', this._finalResults);
@@ -100,7 +94,8 @@ class ResultsField {
   _removeProgram(event) {
     event.preventDefault();
     const code = event.currentTarget.dataset.removeCode;
-    this._updateDOM(code);
+    const id = event.currentTarget.dataset.removeId;
+    this._updateDOM(id);
     this._updateURL(code);
   }
 

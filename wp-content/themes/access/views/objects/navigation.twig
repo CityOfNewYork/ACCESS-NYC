@@ -1,0 +1,25 @@
+<nav class="o-navigation color-dark-background">
+  <div class="logo-access">
+    <a href="{{ urlBase }}/" data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "home"}]'>
+      <svg class="icon icon-logo-full">
+        <use xlink:href="#icon-logo-full"></use>
+      </svg><span class="sr-only">{{__('Access NYC', 'accessnyctheme')}}</span>
+    </a>
+  </div>
+
+  <nav class="o-navigation__nav nav-inline print:hidden" data-js="site-desktop-nav">{% spaceless %}
+    <a class="screen-desktop:hidden overflow-hidden" href="#o-mobile-nav" data-js="o-mobile-nav track" aria-expanded="false" data-track-key="Main Nav" data-track-data='[{"action": "menu"}]'>
+      {{__('Menu', 'accessnyctheme')}}
+    </a>
+
+    {% include 'partials/nav.twig' with {this: {style: 'hidden screen-desktop:inline-block overflow-hidden'}} %}
+
+    <a class="td-inherit overflow-hidden" href="#search" data-js="o-search-box track" data-track-key="Main Nav" data-track-data='[{"action": "search"}]'>
+      <svg class="icon icon-ui-search">
+        <use xlink:href="#icon-ui-search"></use>
+      </svg>
+
+      {{__('Search', 'accessnyctheme')}}
+    </a>
+  {% endspaceless %}</nav>
+</nav>

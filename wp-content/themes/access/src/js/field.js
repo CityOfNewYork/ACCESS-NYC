@@ -9,27 +9,23 @@ import 'core-js/features/promise';
 
 import Field from 'modules/field';
 import ResultsField from 'modules/results-field';
-import ShareForm from 'modules/share-form';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
-import Icons from 'elements/icons/icons.common';
-import Accordion from 'components/accordion/accordion.common';
+
+import Icons from 'elements/icons/icons';
+import Accordion from 'components/accordion/accordion';
+import ShareForm from 'components/share-form/share-form';
+import Disclaimer from 'components/disclaimer/disclaimer';
+
+// Patterns Framework
+import Toggle from 'utilities/toggle/toggle';
 
 (function(window, $) {
   'use strict';
 
   Utility.configErrorTracking(window);
 
-  // Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
-  new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
-
   let $body = $('body');
-
-  // Simple Toggle
-  $body.on('click', '[data-js*="simple-toggle"]', Utility.simpleToggle);
-
-  // Show/hide share form disclaimer
-  $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
 
   // A basic click tracking function
   $body.on('click', '[data-js*="track"]', event => {
@@ -50,8 +46,28 @@ import Accordion from 'components/accordion/accordion.common';
   $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) =>
     new Tooltip(el).init());
 
-  // Initialize accordion components
+  /** Initialize ACCESS NYC Patterns library components */
+  new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
   new Accordion();
+  new Toggle();
+
+  /** Initialize the Share Form and Disclaimer */
+  (elements => {
+    elements.forEach(element => {
+      let shareForm = new ShareForm(element);
+
+      shareForm.sent = instance => {
+        let key = instance.type.charAt(0).toUpperCase() +
+          instance.type.slice(1);
+
+        Utility.track(key, [
+          {'DCS.dcsuri': `share/${instance.type}`}
+        ]);
+      };
+    });
+
+    new Disclaimer();
+  })(document.querySelectorAll(ShareForm.selector));
 
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {
