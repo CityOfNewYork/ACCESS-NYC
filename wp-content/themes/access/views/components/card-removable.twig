@@ -65,7 +65,7 @@
 
     <div class="flex flex-col justify-between print:hidden">
       <div style="width:240px" class="pb-2">
-        <div id="remove-{{ post.id }}">
+        <div id="remove-{{ post.id }}" class="mb-2">
           <button class="btn btn-primary btn-small w-full block" aria-controls="confirm-{{ post.id }}" data-js="toggle" aria-expanded="false">
             {{ __('Remove Program', translationID) }}
           </button>
@@ -89,7 +89,6 @@
       <div>
         <button class="btn btn-toggle btn-small w-full text-color-blue" aria-controls="program-detail-{{ post.id }}" aria-expanded="false"
           data-js="toggle track"
-
           data-track-key="Results: Learn More"
           data-track-data='[{"DCS.dcsuri": "{{ post.slug }}/learn-more"}]'>
           {{ __('Learn More', translationID) }}

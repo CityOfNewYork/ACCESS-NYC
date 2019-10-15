@@ -58,12 +58,20 @@ import Toggle from 'utilities/toggle/toggle';
     if (element) {
       let newsletter = new Newsletter(element);
       let strings = Object.fromEntries([
-        'VALID_REQUIRED', 'VALID_EMAIL_REQUIRED',
-        'VALID_EMAIL_INVALID', 'VALID_CHECKBOX_BOROUGH',
-        'SUCCESS_CONFIRM_EMAIL', 'ERR_PLEASE_TRY_LATER',
-        'ERR_PLEASE_ENTER_VALUE', 'ERR_TOO_MANY_RECENT',
-        'ERR_ALREADY_SUBSCRIBED', 'ERR_INVALID_EMAIL'
-      ].map(i => [i, Utility.localize(i)]));
+        'NEWSLETTER_VALID_REQUIRED',
+        'NEWSLETTER_VALID_EMAIL_REQUIRED',
+        'NEWSLETTER_VALID_EMAIL_INVALID',
+        'NEWSLETTER_VALID_CHECKBOX_BOROUGH',
+        'NEWSLETTER_SUCCESS_CONFIRM_EMAIL',
+        'NEWSLETTER_ERR_PLEASE_TRY_LATER',
+        'NEWSLETTER_ERR_PLEASE_ENTER_VALUE',
+        'NEWSLETTER_ERR_TOO_MANY_RECENT',
+        'NEWSLETTER_ERR_ALREADY_SUBSCRIBED',
+        'NEWSLETTER_ERR_INVALID_EMAIL'
+      ].map(i => [
+        i.replace('NEWSLETTER_', ''),
+        Utility.localize(i)
+      ]));
 
       newsletter.strings = strings;
       newsletter.form.strings = strings;
@@ -74,6 +82,19 @@ import Toggle from 'utilities/toggle/toggle';
   (elements => {
     elements.forEach(element => {
       let shareForm = new ShareForm(element);
+      let strings = Object.fromEntries([
+        'SHARE_FORM_SERVER',
+        'SHARE_FORM_SERVER_TEL_INVALID',
+        'SHARE_FORM_VALID_REQUIRED',
+        'SHARE_FORM_VALID_EMAIL_INVALID',
+        'SHARE_FORM_VALID_TEL_INVALID'
+      ].map(i => [
+        i.replace('SHARE_FORM_', ''),
+        Utility.localize(i)
+      ]));
+
+      shareForm.strings = strings;
+      shareForm.form.strings = strings;
 
       shareForm.sent = instance => {
         let key = instance.type.charAt(0).toUpperCase() +
@@ -98,7 +119,7 @@ import Toggle from 'utilities/toggle/toggle';
     event.preventDefault();
 
     body.classList.toggle('overlay');
-    body.classList.toggle('active:overlay');
+    body.classList.toggle('active');
 
     let mobileNav = document.querySelector('#o-mobile-nav');
     mobileNav.classList.toggle('active');

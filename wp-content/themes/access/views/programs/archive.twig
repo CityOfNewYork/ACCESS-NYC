@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="min-h-full flex items-center justify-center" v-else-if="loading">
-          <div class="sticky pin-t pin-b flex items-center justify-center py-4">
+          <div class="sticky top-0 bottom-0 flex items-center justify-center py-4">
             {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
             &nbsp;&nbsp;
             {{ __('Loading', 'accessnyctheme') }}

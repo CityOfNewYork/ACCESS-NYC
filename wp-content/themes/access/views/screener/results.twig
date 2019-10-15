@@ -1,4 +1,5 @@
 {% extends 'base.twig' %}
+
 {% block content %}
   {% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
   <main class="color-light-background" id="content">
@@ -95,10 +96,10 @@
       </div>
     </div>
   </main>
-
-  {% include 'partials/localized-strings-share.twig' %}
 {% endblock %}
 
 {% block scripts_footer %}
 {{ function('enqueue_script', 'assets/js/screener') }}
+
+{% include 'partials/strings-share.twig' %}
 {% endblock %}

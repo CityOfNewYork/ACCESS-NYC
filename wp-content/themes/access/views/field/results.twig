@@ -223,18 +223,17 @@
     </div>
   </main>
 </div>
-  {% include 'partials/localized-strings-share.twig' %}
 {% endblock %}
 
 {% block scripts_footer %}
 {{ function('enqueue_script', 'assets/js/field') }}
-<script>
-  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
-  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
-    {
-      'label': {{ __('Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.', translationID)|trim|json_encode() }},
-      'slug': 'MSG_RELOAD'
-    }
-  ]);
-</script>
+
+{% include 'partials/strings-share.twig' %}
+
+{% include 'partials/strings.twig' with {'translation_id': translationID, 'strings': [
+  {
+    'label': 'Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.',
+    'slug': 'MSG_RELOAD'
+  }
+]} only %}
 {% endblock %}
