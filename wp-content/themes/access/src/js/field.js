@@ -90,6 +90,9 @@ import Toggle from 'utilities/toggle/toggle';
     new Disclaimer();
   })(document.querySelectorAll(ShareForm.selector));
 
+  // Initialize alert banner component
+  new AlertBanner();
+
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {
     $(el).on('click', event => {
