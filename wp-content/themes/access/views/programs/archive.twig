@@ -34,7 +34,7 @@
       <div class="hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
         <c-filter-multi v-bind:terms="terms" v-on:fetch="click" v-on:reset="toggle"></c-filter-multi>
 
-        <div class="sticky pin-b pb-2 text-center screen-desktop:hidden animated fadeInUpBig" v-if="filtering">
+        <div class="sticky bottom-0 pb-2 text-center screen-desktop:hidden animated fadeInUpBig" v-if="filtering">
           <a class="btn btn-small btn-primary" href="#see-programs">
             <span v-if="none">{{ __('No Results', 'accessnyctheme') }}</span>
             <span v-else-if="!loading" v-html="'See ' + headers.total + ' Programs'">{{ __('See Programs', 'accessnyctheme') }}</span>
@@ -60,7 +60,7 @@
           </div>
         </div>
         <div class="min-h-full flex items-center justify-center" v-if="none">
-          <div class="sticky pin-t pin-b flex items-center justify-center py-4">
+          <div class="sticky top-0 bottom-0 flex items-center justify-center py-4">
             <p>
               {{ __('There are no results for the selected filters.', 'accessnyctheme') }}
               <a href="#filter-programs">{{ __('Try deselecting some filters', 'accessnyctheme') }}</a>.
@@ -80,7 +80,7 @@
             {{ __('See More Results', 'accessnyctheme') }}
           </a>
         </div>
-        <div class="sticky pin-b py-2 text-center screen-desktop:hidden" v-if="!loading">
+        <div class="sticky bottom-0 py-2 text-center screen-desktop:hidden" v-if="!loading">
           <a class="btn btn-small btn-primary" href="#filter-programs">
             {{__('Filter Programs', 'accessnyctheme')}}
           </a>
