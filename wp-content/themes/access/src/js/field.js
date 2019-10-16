@@ -2,35 +2,33 @@
 import jQuery from 'jquery';
 import _ from 'underscore';
 
+import 'core-js/features/promise';
+
 // eslint-disable-next-line no-unused-vars
 import 'modules/polyfill-window-scroll';
-import 'modules/polyfill-element-matches';
-import 'core-js/features/promise';
+import 'utilities/element/matches';
 
 import Field from 'modules/field';
 import ResultsField from 'modules/results-field';
-import ShareForm from 'modules/share-form';
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
-import AlertBanner from 'modules/alert';
-import Icons from 'elements/icons/icons.common';
-import Accordion from 'components/accordion/accordion.common';
+
+import Accordion from 'components/accordion/accordion';
+import ShareForm from 'components/share-form/share-form';
+import Disclaimer from 'components/disclaimer/disclaimer';
+import AlertBanner from 'objects/alert-banner/alert-banner';
+
+// Patterns Framework
+// import Track from 'utilities/track/track'; TODO: modify src for compatibility
+import Icons from 'utilities/icons/icons';
+import Toggle from 'utilities/toggle/toggle';
 
 (function(window, $) {
   'use strict';
 
   Utility.configErrorTracking(window);
 
-  // Get SVG sprite file. See: https://css-tricks.com/ajaxing-svg-sprite/
-  new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
-
   let $body = $('body');
-
-  // Simple Toggle
-  $body.on('click', '[data-js*="simple-toggle"]', Utility.simpleToggle);
-
-  // Show/hide share form disclaimer
-  $body.on('click', '.js-show-disclaimer', ShareForm.ShowDisclaimer);
 
   // A basic click tracking function
   $body.on('click', '[data-js*="track"]', event => {
@@ -51,8 +49,46 @@ import Accordion from 'components/accordion/accordion.common';
   $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) =>
     new Tooltip(el).init());
 
-  // Initialize accordion components
+  /** Initialize ACCESS NYC Patterns library components */
+  new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
   new Accordion();
+  new Toggle();
+
+  /** Instantiate Alert Banner */
+  (element => {
+    if (element) new AlertBanner(element);
+  })(document.querySelector(AlertBanner.selector));
+
+  /** Initialize the Share Form and Disclaimer */
+  (elements => {
+    elements.forEach(element => {
+      let shareForm = new ShareForm(element);
+      let strings = Object.fromEntries([
+        'SHARE_FORM_SERVER',
+        'SHARE_FORM_SERVER_TEL_INVALID',
+        'SHARE_FORM_VALID_REQUIRED',
+        'SHARE_FORM_VALID_EMAIL_INVALID',
+        'SHARE_FORM_VALID_TEL_INVALID'
+      ].map(i => [
+        i.replace('SHARE_FORM_', ''),
+        Utility.localize(i)
+      ]));
+
+      shareForm.strings = strings;
+      shareForm.form.strings = strings;
+
+      shareForm.sent = instance => {
+        let key = instance.type.charAt(0).toUpperCase() +
+          instance.type.slice(1);
+
+        Utility.track(key, [
+          {'DCS.dcsuri': `share/${instance.type}`}
+        ]);
+      };
+    });
+
+    new Disclaimer();
+  })(document.querySelectorAll(ShareForm.selector));
 
   // Initialize alert banner component
   new AlertBanner();

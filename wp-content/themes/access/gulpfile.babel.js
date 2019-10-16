@@ -54,8 +54,9 @@ const NODE_ENV = process.env.NODE_ENV;
 const PROXY = process.env.PROXY;
 const DIST = 'assets';
 const SRC = 'src';
-const PATTERNS_SRC = 'node_modules/access-nyc-patterns/src';
-const PATTERNS_DIST = 'node_modules/access-nyc-patterns/dist';
+const NYCOPPORTUNITY = 'node_modules/@nycopportunity';
+const PATTERNS_ACCESS = `${NYCOPPORTUNITY}/access-patterns`;
+const PATTERNS_FRAMEWORK = `${NYCOPPORTUNITY}/patterns-framework`;
 const HASH_FORMAT = '{name}.{hash:8}{ext}';
 const HASH_FORMAT_WEBPACK = '[name].[chunkhash:8].js';
 const HASH_FILES = [
@@ -81,7 +82,7 @@ gulp.task('clean:styles', callback => {
 gulp.task('sass', () => gulp.src(`${ SRC }/scss/style-*.scss`)
   .pipe(sourcemaps.init())
   .pipe(sass({
-    includePaths: ['node_modules', PATTERNS_SRC]
+    includePaths: ['node_modules', `${PATTERNS_ACCESS}/src/`]
     .concat(require('bourbon').includePaths)
   })
   .on('error', notify.onError())
@@ -138,10 +139,15 @@ gulp.task('webpack', () =>
       devtool: 'source-map',
       target: 'web',
       performance: { hints: false },
-      watch: (NODE_ENV === 'development') ? true : false,
+      watch: false,
       resolve: {
         modules: [
-          'node_modules', PATTERNS_SRC, PATTERNS_DIST, `${ SRC }/js`
+          'node_modules',
+          `${PATTERNS_ACCESS}/src`,
+          `${PATTERNS_ACCESS}/dist`,
+          `${PATTERNS_FRAMEWORK}/src`,
+          `${PATTERNS_FRAMEWORK}/dist`,
+          `${ SRC }/js`
         ]
       },
       module: {
@@ -157,11 +163,11 @@ gulp.task('webpack', () =>
             test: /\.js$/,
             exclude: {
               test: /.\/node_modules/,
-              exclude: /.\/node_modules\/access-nyc-patterns\/src/
+              exclude: /.\/node_modules\/@nycopportunity/
             },
             // include: [
             //   /.\/src/,
-            //   /.\/node_modules\/access-nyc-patterns\/src/
+            //   /.\/node_modules\/@nycopportunity\/access-patterns\/src/
             // ],
             query: {
               // .babelrc
@@ -180,6 +186,18 @@ gulp.task('webpack', () =>
                     'regenerator': true
                   }
                 ]
+              ]
+            }
+          },
+          {
+            test: /\.js$/,
+            loader: 'string-replace-loader',
+            options: {
+              multiple: [
+                 { search: 'SCREEN_DESKTOP', replace: '960' },
+                 { search: 'SCREEN_TABLET', replace: '768' },
+                 { search: 'SCREEN_MOBILE', replace: '480' },
+                 { search: 'SCREEN_SM_MOBILE', replace: '400' }
               ]
             }
           }
@@ -231,10 +249,10 @@ gulp.task('hashfiles', callback => {
  */
 gulp.task('images', callback => {
   gulp.src([
-      `${ PATTERNS_SRC }/images/**/*.jpg`,
-      `${ PATTERNS_SRC }/images/**/*.png`,
-      `${ PATTERNS_SRC }/images/**/*.ico`,
-      `${ PATTERNS_SRC }/images/**/*.gif`
+      `${ PATTERNS_ACCESS }/src/images/**/*.jpg`,
+      `${ PATTERNS_ACCESS }/src/images/**/*.png`,
+      `${ PATTERNS_ACCESS }/src/images/**/*.ico`,
+      `${ PATTERNS_ACCESS }/src/images/**/*.gif`
     ])
     .pipe(cache(imagemin({
       optimizationLevel: 5,
@@ -245,7 +263,7 @@ gulp.task('images', callback => {
     .pipe(notify({ message: 'Images task complete' }))
 
   gulp.src([
-      `${ PATTERNS_SRC }/svg/**/*.svg`
+      `${ PATTERNS_ACCESS }/src/svg/**/*.svg`
     ])
     .pipe(gulp.dest(`${ DIST }/svg`))
     .pipe(notify({ message: 'Images task complete' }));
@@ -257,7 +275,7 @@ gulp.task('images', callback => {
  * SVGs
  */
 gulp.task('svgs', () =>
-  gulp.src(`${ PATTERNS_SRC }/svg/*.svg`)
+  gulp.src(`${ PATTERNS_ACCESS }/src/svg/*.svg`)
     .pipe(svgmin())
     .pipe(svgstore({
       inlineSvg: true
