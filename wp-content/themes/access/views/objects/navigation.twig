@@ -7,14 +7,14 @@
     </a>
   </div>
 
-  <nav class="o-navigation__nav nav-inline print:hidden" data-js="site-desktop-nav">{% spaceless %}
-    <a class="screen-desktop:hidden overflow-hidden" href="#o-mobile-nav" data-js="o-mobile-nav track" aria-expanded="false" data-track-key="Main Nav" data-track-data='[{"action": "menu"}]'>
+  <nav class="o-navigation__nav nav-inline text-align-end print:hidden" data-js="site-desktop-nav">{% spaceless %}
+    <a class="screen-desktop:hidden" href="#o-mobile-nav" data-js="o-mobile-nav track" aria-expanded="false" data-track-key="Main Nav" data-track-data='[{"action": "menu"}]'>
       {{__('Menu', 'accessnyctheme')}}
     </a>
 
-    {% include 'partials/nav.twig' with {this: {style: 'hidden screen-desktop:inline-block overflow-hidden'}} %}
+    {% include 'partials/nav.twig' with {this: {style: 'hidden screen-desktop:inline-block'}} %}
 
-    <a class="td-inherit overflow-hidden" href="#search" data-js="o-search-box track" data-track-key="Main Nav" data-track-data='[{"action": "search"}]'>
+    <a class="o-navigation__search td-inherit" href="#search" data-js="o-search-box track" data-track-key="Main Nav" data-track-data='[{"action": "search"}]'>
       <svg class="icon icon-ui-search">
         <use xlink:href="#icon-ui-search"></use>
       </svg>

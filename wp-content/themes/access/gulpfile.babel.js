@@ -139,7 +139,7 @@ gulp.task('webpack', () =>
       devtool: 'source-map',
       target: 'web',
       performance: { hints: false },
-      watch: (NODE_ENV === 'development') ? true : false,
+      watch: false,
       resolve: {
         modules: [
           'node_modules',

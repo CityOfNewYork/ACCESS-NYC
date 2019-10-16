@@ -66,6 +66,7 @@ $path-to-images: 'img/';
  * Objects
  **********/
 
+@import '@nycopportunity/access-patterns/src/objects/alert-banner/alert-banner';
 @import '@nycopportunity/access-patterns/src/objects/banner/banner';
 @import '@nycopportunity/access-patterns/src/objects/content/content';
 @import '@nycopportunity/access-patterns/src/objects/footer/footer';
@@ -90,9 +91,3 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/utilities/text/text';
 @import '@nycopportunity/access-patterns/src/utilities/toggle/toggle';
 @import '@nycopportunity/access-patterns/src/utilities/typography/typography';
-
-/***************************************
-* Alerts
-* TODO: Upload styles to ACCESS Patterns
-****************************************/
-@import './alert';

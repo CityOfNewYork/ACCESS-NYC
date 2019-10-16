@@ -16,24 +16,28 @@ import 'whatwg-fetch';
 
 import jQuery from 'jquery';
 
-// Element.prototype.polyfills
-import 'modules/polyfill-element-matches';
-import 'modules/polyfill-element-remove';
+// ACCESS Patterns Polyfills
+import 'utilities/element/matches';
+import 'utilities/element/closest';
+import 'utilities/element/remove';
+import 'utilities/nodelist/foreach';
 
-import Alerts from 'modules/alert';
+// Core Modules
 import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
 
 // ACCESS Patterns
-import Icons from 'elements/icons/icons';
 import Accordion from 'components/accordion/accordion';
 import Filter from 'components/filter/filter';
 import ShareForm from 'components/share-form/share-form';
 import Disclaimer from 'components/disclaimer/disclaimer';
+import AlertBanner from 'objects/alert-banner/alert-banner';
 import Newsletter from 'objects/newsletter/newsletter';
 import TextController from 'objects/text-controller/text-controller';
 
 // Patterns Framework
+// import Track from 'utilities/track/track'; TODO: modify src for compatibility
+import Icons from 'utilities/icons/icons';
 import Toggle from 'utilities/toggle/toggle';
 
 (function(window, $) {
@@ -46,7 +50,11 @@ import Toggle from 'utilities/toggle/toggle';
   new Toggle();
   new Accordion();
   new Filter();
-  new Alerts();
+
+  /** Instantiate Alert Banner */
+  (element => {
+    if (element) new AlertBanner(element);
+  })(document.querySelector(AlertBanner.selector));
 
   /** Instantiate Text Controller */
   (element => {
@@ -121,8 +129,8 @@ import Toggle from 'utilities/toggle/toggle';
     body.classList.toggle('overlay');
     body.classList.toggle('active');
 
-    let mobileNav = document.querySelector('#o-mobile-nav');
-    mobileNav.classList.toggle('active');
+    document.querySelector('#o-mobile-nav')
+      .classList.toggle('active');
   });
 
   /** Search Box Control */
