@@ -12,7 +12,7 @@
 
     <div class="c-alert-banner__closing">
       <button aria-controls="aria-c-{{ this.slug }}" aria-expanded="{{ active }}" class="text-color-blue" data-js="alert-controller">
-        <span class="sr-only">close & return to site</span>
+        <span class="sr-only">{{ __('close &amp; return to site', 'accessnyctheme') }}</span>
 
         <svg aria-hidden="true" class="icon-ui-x">
             <use xlink:href="#icon-ui-x"></use>
@@ -21,26 +21,3 @@
     </div>
   </div>
 </article>
-
-        {# <div class="c-alert-banner color-light-background bg-status-{{ this.alert_color }} fixed bottom-0 w-screen left-0 px-8 js-alert" data-js="alert" data-cookie="{{this.slug}}" role="dialog" aria-labelledby="dialog-title-{{this.slug}}" aria-describedby="dialog-desc-{{this.slug}}">
-          <div class="c-alert-banner-wrapper">
-            <div class="c-alert-banner__icon">
-              <svg class="c-alert-banner__svg icon icon-{{ this.alert_icon }}">
-                <use xlink:href="#icon-{{ this.alert_icon }}"></use>
-              </svg>
-            </div>
-
-            <div class="c-alert-banner__body">
-              {{ this.alert_content }}
-            </div>
-
-            <div class="c-alert-banner__closing">
-              <button type="button" id="alert-button">
-                <svg class="icon-ui-x" role="img">
-                  <title>Close</title>
-                  <use xlink:href="#icon-ui-x"></use>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div> #}
