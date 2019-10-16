@@ -228,7 +228,7 @@ WpArchiveVue.click = function(event) {
  * @return  {object}         Vue instance
  */
 WpArchiveVue.toggle = function(event) {
-  let taxonomy = event.event.data.parent;
+  let taxonomy = event.data.parent;
   this.filterAll(taxonomy);
 
   return this;

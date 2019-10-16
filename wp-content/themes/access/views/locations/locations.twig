@@ -2,16 +2,16 @@
 
 {% block content %}
   {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
-  <main class="js-map layout--map screen-desktop:layout--sidebar bg-color-white" id="content" data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('get_env', 'GOOGLE_MAPS_EMBED') }}">
+  <main class="js-map layout--map screen-desktop:layout--sidebar color-light-background" id="content" data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('get_env', 'GOOGLE_MAPS_EMBED') }}">
     <div class="js-map-controls layout--map__sidebar">
       <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
 
       <div class="map-filter-container js-map-filter">
-        <a href="#map-filter-settings" class="map-filter-header btn-toggle btn-primary text-color-white rounded-none w-full js-toggle-filter js-main-filter-toggle">
+        <a href="#map-filter-settings" class="map-filter-header btn btn-toggle btn-primary btn-small rounded-none w-full js-toggle-filter js-main-filter-toggle">
           <span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span>
         </a>
 
-        <div id="map-filter-settings" class="c-filter-multi hidden:overflow animated" aria-hidden="true">
+        <div id="map-filter-settings" class="c-filter-multi hidden:overflow animated hidden" aria-hidden="true">
           <ul class="c-filter-multi__list px-3">
             {% for filter in filters %}
             <li class="c-filter-multi__item">
@@ -47,8 +47,15 @@
       <div class="js-map-results-container">
         <div class="border-t border-color-grey-light">
           <ul class="js-map-results p-0 m-0"></ul>
-          <p class="p-4 m-0 text-center text-color-grey-mid hidden" data-js="message-loading" aria-hidden="true">{{__('Loading&hellip;', 'accessnyc-locations')}}</p>
-          <p class="p-4 m-0 text-center text-color-grey-mid hidden" data-js="message-no-results" aria-hidden="true">{{__('No results.', 'accessnyc-locations')}}</p>
+          <p class="p-4 m-0 flex items-center justify-center hidden" data-js="message-loading" aria-hidden="true">
+            {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
+            &nbsp;&nbsp;
+            {{ __('Loading&hellip;', 'accessnyc-locations') }}
+          </p>
+
+          <p class="p-4 m-0 text-center hidden" data-js="message-no-results" aria-hidden="true">
+            {{ __('No results.', 'accessnyc-locations') }}
+          </p>
         </div>
       </div>
       <div class="js-map-pagination"> </div>

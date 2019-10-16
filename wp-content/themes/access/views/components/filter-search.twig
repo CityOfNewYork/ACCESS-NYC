@@ -1,8 +1,9 @@
 <div class="c-filter js-program-search-filter">
-  <a href="#program-options" class="c-filter__header" data-js="filter">
-    {% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{__('All Programs', 'accessnyctheme')}}{% endif %}
-  </a>
-  <ul id="program-options" class="c-filter__list">
+  <button aria-controls="aria-c-program-options" class="c-filter__header" data-js="filter">
+    {% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{ __('All Programs', 'accessnyctheme') }}{% endif %}
+  </button>
+
+  <ul id="aria-c-program-options" class="c-filter__list">
     <li>
       <label class="c-filter__item">
         <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="">{{__('All Programs', 'accessnyctheme')}}

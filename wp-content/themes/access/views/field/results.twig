@@ -21,7 +21,7 @@
     <svg class="icon icon-logo-full hidden screen-sm-mobile:inline-block" width="163">
       <use xlink:href="#icon-logo-full"></use>
     </svg>
-    <nav class="nav-inline print:hidden px-3">
+    <nav class="nav-inline print:hidden px-3 flex-1 text-align-end">
       {% for m in peu_header_menu.get_items %}
       <a href="{{ m.link }}"
         {% if m.attr_title %}title="{{ m.attr_title }}"{% else %}title="{{ m.title }}"{% endif %}
@@ -36,9 +36,9 @@
     </div>
   </header>
 
-  <main class="block bg-color-white" id="content" data-js="results">
-    <div class="bg-color-white">
-      <header class="c-header bg-color-blue-dark text-color-white font-smooth px-2">
+  <main class="block" id="content" data-js="results">
+    <div class="color-light-background">
+      <header class="c-header color-dark-background text-color-white font-smooth px-2">
         <div class="c-header__icon print:hidden">
           <svg class="icon icon-success rounded-full text-color-green bg-color-white">
             <use xlink:href="#icon-success"></use>
@@ -68,16 +68,18 @@
       <form method="post" action="{{ action }}" class="w-full screen-tablet:px-4 px-2 screen-tablet:pt-4 pt-2 print:hidden" novalidate data-js="final-results">
         <h4>{{__('Finalize your results.', translationID)}}</h4>
 
-        <a class="block btn btn-primary c-share-form__toggle" href="#finalize-your-results"
-           data-js="simple-toggle"
-           data-reverse="#finalize-your-results-close"
-           data-scroll-offset="20">{{ __('Finalize Your Results', translationID) }}</a>
+        <button class="block btn btn-primary c-share-form__toggle" aria-controls="finalize-your-results" data-js="toggle" data-scroll-offset="20" aria-expanded="false">
+          {{ __('Finalize Your Results', translationID) }}
+        </button>
+
         <div id="finalize-your-results" class="c-disclaimer m-0 hidden" aria-hidden="true">
           <input type="hidden" name="url" value="{{ url }}" readonly>
           <input type="hidden" name="programs" value="{{ programs }}" readonly>
           <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
           <input type="hidden" name="hash" value="{{ hash }}" readonly>
+
           <p>{{ __('Once you finalize your results, you won\'t be able to remove any more programs.', translationID) }}</p>
+
           <div class="layout--columns-gutter">
             <div>
               <button type="submit" class="w-full btn btn-primary btn-small m-0"
@@ -87,8 +89,8 @@
                 {{ __('Finalize', translationID) }}
               </button>
             </div><div>
-              <button class="w-full btn btn-secondary btn-small m-left" id="finalize-your-results-close"
-                      data-js="track"
+              <button class="w-full btn btn-secondary btn-small m-left" aria-controls="finalize-your-results" aria-expanded="false"
+                      data-js="track toggle"
                       data-track-key="Keep Working"
                       data-track-data='[{"DCS.dcsuri": "keep-working"}]'>
                 {{ __('Keep Working', translationID) }}
@@ -111,9 +113,9 @@
             <a class="block btn btn-primary" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "print"}]'>{{__('Print', translationID)}}</a>
           </div>
 
-          <div class="flex-1 pr-2 c-share-form">
+          {# <div class="flex-1 pr-2 c-share-form">
             <a class="block btn btn-primary c-share-form__toggle js-show-disclaimer" href="#share-by-sms"
-              data-js="simple-toggle"
+              data-js="toggle"
               data-scroll-offset="20">{{__('Text', translationID)}}</a>
             <div id="share-by-sms" class="c-share-form__input js-needs-disclaimer hidden">
               <form method="post" action="{{ action }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
@@ -134,11 +136,21 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div> #}
+          {% include 'components/share-form.twig' with {this: {
+            class: 'flex-1 pr-2',
+            type: 'tel',
+            button: __('Text', translationID),
+            placeholder: __('Phone Number', translationID),
+            post: action,
+            action: 'sms_send',
+            url: url,
+            hash: hash
+          }} only %}
 
-          <div class="flex-1">
+          {# <div class="flex-1">
             <a class="block btn btn-primary c-share-form__toggle js-show-disclaimer" href="#share-by-email"
-              data-js="simple-toggle"
+              data-js="toggle"
               data-scroll-offset="20">{{__('Email', translationID)}}</a>
             <div id="share-by-email" class="c-share-form__input js-needs-disclaimer hidden">
               <form method="post" action="{{ action }}" class="js-share-form" novalidate>
@@ -158,10 +170,23 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div> #}
+          {% include 'components/share-form.twig' with {this: {
+            class: 'flex-1',
+            type: 'email',
+            button: __('Email', translationID),
+            placeholder: __('Email Address', translationID),
+            post: action,
+            action: 'email_send',
+            url: url,
+            hash: hash
+          }} only %}
+
         </div>
 
-        {% include 'partials/share-form-disclaimer.twig' %}
+        <div class="hidden" aria-hidden="true" id="aria-db-share-disclaimer">
+          {% include 'components/disclaimer-small.twig' %}
+        </div>
       </div>
 
       <div class="content-body pt-4">
@@ -198,18 +223,17 @@
     </div>
   </main>
 </div>
-  {% include 'partials/localized-strings-share.twig' %}
 {% endblock %}
 
 {% block scripts_footer %}
 {{ function('enqueue_script', 'assets/js/field') }}
-<script>
-  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
-  window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
-    {
-      'label': {{ __('Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.', translationID)|trim|json_encode() }},
-      'slug': 'MSG_RELOAD'
-    }
-  ]);
-</script>
+
+{% include 'partials/strings-share.twig' %}
+
+{% include 'partials/strings.twig' with {'translation_id': translationID, 'strings': [
+  {
+    'label': 'Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.',
+    'slug': 'MSG_RELOAD'
+  }
+]} only %}
 {% endblock %}

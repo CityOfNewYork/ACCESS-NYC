@@ -31,3 +31,5 @@ add_action('admin_menu', '\StatCollector\add_settings_page');
 
 $path = plugin_basename(dirname(__FILE__) . '/StatCollector.php');
 add_filter('plugin_action_links_' . $path, '\StatCollector\settings_link');
+
+do_action('init_stat_collector');
