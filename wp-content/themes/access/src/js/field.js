@@ -10,7 +10,10 @@ import 'utilities/element/matches';
 
 import Field from 'modules/field';
 import ResultsField from 'modules/results-field';
+<<<<<<< HEAD
 import Tooltip from 'modules/tooltip';
+=======
+>>>>>>> 67ac506e9ebeba90f34f3cdd28dd93e776063d10
 import Utility from 'modules/utility';
 
 import Accordion from 'components/accordion/accordion';
@@ -45,10 +48,13 @@ import Toggle from 'utilities/toggle/toggle';
   $(ResultsField.Selectors.DOM).each((i, el) =>
     new ResultsField(el).init());
 
+<<<<<<< HEAD
   // Initialize tooltips.
   $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) =>
     new Tooltip(el).init());
 
+=======
+>>>>>>> 67ac506e9ebeba90f34f3cdd28dd93e776063d10
   /** Initialize ACCESS NYC Patterns library components */
   new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
   new Accordion();
@@ -90,8 +96,17 @@ import Toggle from 'utilities/toggle/toggle';
     new Disclaimer();
   })(document.querySelectorAll(ShareForm.selector));
 
+<<<<<<< HEAD
   // Initialize alert banner component
   new AlertBanner();
+=======
+  /**
+   * Instantiate Alert Banner
+   */
+  (element => {
+    if (element) new AlertBanner(element);
+  })(document.querySelector(AlertBanner.selector));
+>>>>>>> 67ac506e9ebeba90f34f3cdd28dd93e776063d10
 
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {
