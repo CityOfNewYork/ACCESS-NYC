@@ -150,6 +150,9 @@ Utility.toDollarAmount = val =>
  * @return {string} localized value
  */
 Utility.localize = function(slug) {
+  if (typeof slug !== 'string' || !(slug instanceof String))
+    slug = slug.toString();
+
   let text = slug || '';
   let strings = window.LOCALIZED_STRINGS || [];
   let match = strings.filter(

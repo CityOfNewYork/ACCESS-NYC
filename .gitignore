@@ -38,6 +38,7 @@
 /wp-content/wp-cache-config.php
 /wp-content/cache/*
 /wp-content/cache/supercache/*
+/wp-content/wpallimport/*
 
 # Docker and Docker Image Adds #
 ################################

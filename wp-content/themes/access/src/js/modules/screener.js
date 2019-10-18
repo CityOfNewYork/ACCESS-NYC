@@ -1386,6 +1386,7 @@ class Screener {
       window.location = `./results?${$.param(params)}`;
     }).fail(function(error) {
       // TODO(jjandoc): Display error messaging here.
+      window.location = `./results`;
     });
   }
 }
