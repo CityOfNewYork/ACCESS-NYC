@@ -86,17 +86,17 @@
     },
     {
         "name": "composer/installers",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
+            "reference": "141b272484481432cda342727a427dc1e206bfa0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+            "url": "https://api.github.com/repos/composer/installers/zipball/141b272484481432cda342727a427dc1e206bfa0",
+            "reference": "141b272484481432cda342727a427dc1e206bfa0",
             "shasum": ""
         },
         "require": {
@@ -110,7 +110,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "^4.8.36"
         },
-        "time": "2018-08-27T06:10:37+00:00",
+        "time": "2019-08-12T15:00:31+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -154,6 +154,7 @@
             "RadPHP",
             "SMF",
             "Thelia",
+            "Whmcs",
             "WolfCMS",
             "agl",
             "aimeos",
@@ -176,6 +177,7 @@
             "installer",
             "itop",
             "joomla",
+            "known",
             "kohana",
             "laravel",
             "lavalite",
@@ -1826,7 +1828,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/acf-to-rest-api.3.1.0.zip"
+            "url": "https://downloads.wordpress.org/plugin/acf-to-rest-api.3.1.0.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -1846,7 +1850,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.2.5.2.zip"
+            "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.2.5.2.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -1866,7 +1872,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/better-search-replace.zip?timestamp=1515009188"
+            "url": "https://downloads.wordpress.org/plugin/better-search-replace.zip?timestamp=1515009188",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -1886,7 +1894,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/bulk-delete.6.0.2.zip"
+            "url": "https://downloads.wordpress.org/plugin/bulk-delete.6.0.2.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -1906,7 +1916,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.2.1.zip"
+            "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.2.1.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -1926,7 +1938,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.1.14.zip"
+            "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.1.14.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -1946,7 +1960,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.52.zip"
+            "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.52.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -1966,7 +1982,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.9.0.zip"
+            "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.9.0.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -1974,6 +1992,28 @@
         "type": "wordpress-plugin",
         "installation-source": "dist",
         "homepage": "https://wordpress.org/plugins/limit-login-attempts-reloaded/"
+    },
+    {
+        "name": "wpackagist-plugin/loggedin",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "svn",
+            "url": "https://plugins.svn.wordpress.org/loggedin/",
+            "reference": "tags/1.2.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://downloads.wordpress.org/plugin/loggedin.1.2.0.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "homepage": "https://wordpress.org/plugins/loggedin/"
     },
     {
         "name": "wpackagist-plugin/query-monitor",
@@ -1986,7 +2026,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/query-monitor.3.3.6.zip"
+            "url": "https://downloads.wordpress.org/plugin/query-monitor.3.3.6.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2006,7 +2048,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/redis-cache.1.4.3.zip"
+            "url": "https://downloads.wordpress.org/plugin/redis-cache.1.4.3.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2026,7 +2070,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/rollbar.2.6.0.zip"
+            "url": "https://downloads.wordpress.org/plugin/rollbar.2.6.0.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2046,7 +2092,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/search-everything.8.1.9.zip"
+            "url": "https://downloads.wordpress.org/plugin/search-everything.8.1.9.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2066,7 +2114,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/timber-library.zip?timestamp=1560192550"
+            "url": "https://downloads.wordpress.org/plugin/timber-library.zip?timestamp=1560192550",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2086,7 +2136,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.7.1.zip"
+            "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.7.1.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2106,7 +2158,9 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wp-security-questions.zip?timestamp=1559124291"
+            "url": "https://downloads.wordpress.org/plugin/wp-security-questions.zip?timestamp=1559124291",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2117,16 +2171,18 @@
     },
     {
         "name": "wpackagist-plugin/wps-hide-login",
-        "version": "1.5.2.2",
-        "version_normalized": "1.5.2.2",
+        "version": "1.5.4.2",
+        "version_normalized": "1.5.4.2",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-            "reference": "tags/1.5.2.2"
+            "reference": "tags/1.5.4.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.2.2.zip"
+            "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.4.2.zip",
+            "reference": null,
+            "shasum": null
         },
         "require": {
             "composer/installers": "~1.0"
