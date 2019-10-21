@@ -10,7 +10,6 @@ import 'utilities/element/matches';
 
 import Field from 'modules/field';
 import ResultsField from 'modules/results-field';
-import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
 
 import Accordion from 'components/accordion/accordion';
@@ -44,11 +43,6 @@ import Toggle from 'utilities/toggle/toggle';
   // Initialize eligibility screener.
   $(ResultsField.Selectors.DOM).each((i, el) =>
     new ResultsField(el).init());
-
-  // Initialize tooltips.
-  $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) =>
-    new Tooltip(el).init());
-
 
   /** Initialize ACCESS NYC Patterns library components */
   new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
