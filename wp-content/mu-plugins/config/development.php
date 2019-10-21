@@ -67,3 +67,12 @@ add_action('init_stat_collector', function($instance) {
   remove_action('wp_ajax_response_update', [$instance, 'responseUpdate'], $instance->priority);
   remove_action('wp_ajax_nopriv_response_update', [$instance, 'responseUpdate'], $instance->priority);
 });
+
+/**
+ * Allow local development requests
+ */
+header('Access-Control-Allow-Origin: *');
+add_filter('allowed_http_origins', function($origins) {
+  $origins[] = 'http://localhost:7000'; // Patterns
+  return $origins;
+}
