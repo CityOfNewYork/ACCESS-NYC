@@ -21,7 +21,7 @@ $templates = array('programs/single.twig');
 $context['post'] = $post;
 
 // Share by email/sms fields.
-$context['shareAction'] = admin_url( 'admin-ajax.php' );
+$context['shareAction'] = admin_url('admin-ajax.php');
 $context['shareUrl'] = $post->link.$query;
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 

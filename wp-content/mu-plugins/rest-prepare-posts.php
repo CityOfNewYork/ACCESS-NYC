@@ -6,10 +6,16 @@
  * Author: NYC Opportunity
  */
 
-use nyco\WpRestPreparePosts\RestPreparePosts\RestPreparePosts as RestPreparePosts;
+use RestPreparePosts\RestPreparePosts as RestPreparePosts;
 
-if (file_exists(WPMU_PLUGIN_DIR . '/wp-rest-prepare-posts/index.php')) {
-  require_once WPMU_PLUGIN_DIR . '/wp-rest-prepare-posts/index.php';
+if (file_exists(plugin_dir_path(__FILE__) . '/rest-prepare-posts/RestPreparePosts.php')) {
+  require_once plugin_dir_path(__FILE__) . '/rest-prepare-posts/RestPreparePosts.php';
+  require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+  /** Only fire if ACF is active */
+  if (false === is_plugin_active('advanced-custom-fields-pro/acf.php')) {
+    return;
+  }
 
   $RestPreparePosts = new RestPreparePosts();
   $types = ['programs'];

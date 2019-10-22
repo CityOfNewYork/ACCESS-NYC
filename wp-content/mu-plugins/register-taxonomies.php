@@ -1,9 +1,12 @@
 <?php
+
+// phpcs:disable
 /**
  * Plugin Name: Register Taxonomies
  * Description: Adds custom taxonomies. Includes Programs, Outreach, Page-type, and Population Served.
  * Author: Blue State Digital
  */
+// phpcs:enable
 
 add_action('init', function() {
   // Creates the custom taxonomy taxonomy types we use for sorting/organizing programs
@@ -13,7 +16,7 @@ add_action('init', function() {
     array(
       'label' => __('Program Categories'),
       'labels' => array(
-          'archives' => __('Programs', 'accessnyctheme')
+        'archives' => __('Programs', 'accessnyctheme')
       ),
       'hierarchical' => true,
       'public' => true, // will affect the terms rest route
