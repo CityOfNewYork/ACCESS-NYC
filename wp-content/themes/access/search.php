@@ -38,7 +38,7 @@ if (isset($_GET['lang'])) {
     } else {
       $urlBase = '';
     }
-    wp_redirect( $urlBase . '/?' . $newQuery);
+    wp_redirect($urlBase . '/?' . $newQuery);
   }
 }
 
@@ -53,4 +53,4 @@ $context['title'] = 'Search results for '. get_search_query();
 $context['posts'] = Timber::get_posts();
 $context['pagination'] = Timber::get_pagination();
 
-Timber::render( $templates, $context );
+Timber::render($templates, $context);

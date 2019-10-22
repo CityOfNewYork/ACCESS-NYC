@@ -6,5 +6,6 @@
  * Author: Blue State Digital
  */
 
-if (file_exists(WPMU_PLUGIN_DIR . '/drools-proxy/DroolsProxy.php'))
-  require WPMU_PLUGIN_DIR . '/drools-proxy/DroolsProxy.php';
+if (file_exists(plugin_dir_path(__FILE__) . '/drools-proxy/DroolsProxy.php')) {
+  require plugin_dir_path(__FILE__) . '/drools-proxy/DroolsProxy.php';
+}
