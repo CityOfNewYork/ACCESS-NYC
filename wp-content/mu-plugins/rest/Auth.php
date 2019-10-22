@@ -54,7 +54,8 @@ class Auth {
           'status' => 403,
           'sameorigin' => $auth_sameorigin,
           'token' => $auth_token
-        ));
+        )
+      );
     } else {
       return false;
     }

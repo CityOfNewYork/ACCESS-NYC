@@ -27,27 +27,25 @@ class StatCollector {
 
   public function droolsRequest($data, $uid) {
     $db = $this->getDb();
-    $result = $db->insert("requests", [
-      "uid" => $uid,
-      "data" => json_encode($data),
+    $result = $db->insert('requests', [
+      'uid' => $uid,
+      'data' => json_encode($data),
     ]);
 
-    if($result === false){
-      // print the error
+    if ($result === false) {
       error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
     }
   }
 
   public function droolsResponse($response, $uid) {
     $db = $this->getDb();
-    $result = $db->insert("responses", [
-      "uid" => $uid,
-      "data" => json_encode($response),
+    $result = $db->insert('responses', [
+      'uid' => $uid,
+      'data' => json_encode($response),
     ]);
 
-    if($result === false){
-     // print the error
-     error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($response));
+    if ($result === false) {
+      error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($response));
     }
   }
 
@@ -61,52 +59,54 @@ class StatCollector {
    */
   public function resultsSent($type, $to, $uid, $url = null, $message = null) {
     $db = $this->getDb();
-    $result = $db->insert("messages", [
-      "uid" => $uid,
-      "msg_type" => strtolower($type),
-      "address" => $to,
-      "url" => $url,
-      "message" => $message
+    $result = $db->insert('messages', [
+      'uid' => $uid,
+      'msg_type' => strtolower($type),
+      'address' => $to,
+      'url' => $url,
+      'message' => $message
     ]);
 
-    if($result === false){
-      $request_parameters =  array(strtolower($type), $to, $uid, $url, $message);
-      error_log('STAT COLLECTOR ERROR '
-                . $db->last_error.json_encode($request_parameters));
-    }
+    // Log Data
+    // if ($result === false) {
+    //   $request_parameters = array(strtolower($type), $to, $uid, $url, $message);
+    //   error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($request_parameters));
+    // }
   }
 
   public function peuData($staff, $client, $uid) {
     if (empty($uid)) {
       return;
     }
+
     $db = $this->getDb();
 
     if (!empty($staff)) {
-      $result = $db->query($db->prepare("
-        INSERT into peu_staff (uid, data) VALUES (%s, %s)",
+      $result = $db->query($db->prepare(
+        'INSERT into peu_staff (uid, data) VALUES (%s, %s)',
         $uid,
         json_encode($staff)
       ));
 
-      if($result === false){
-        // print the error
-        $request_parameters =  array($staff, $client, $uid);
-        error_log('STAT COLLECTOR ERROR '
-                  . $db->last_error.json_encode($request_parameters));
-      }
+      // Log Data
+      // if ($result === false) {
+      //   $request_parameters = array($staff, $client, $uid);
+      //   error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($request_parameters));
+      // }
     }
-    if (! empty($client)) {
-      $result = $db->query($db->prepare("
-        INSERT into peu_client (uid, data) VALUES (%s, %s)",
+
+    if (!empty($client)) {
+      $result = $db->query($db->prepare(
+        'INSERT into peu_client (uid, data) VALUES (%s, %s)',
         $uid,
         json_encode($client)
       ));
-      if($result === false){
-        // print the error
-        $request_parameters =  array($staff, $client, $uid);
-        error_log('STAT COLLECTOR ERROR '
-                  . $db->last_error.json_encode($request_parameters));
+
+      // Log Data
+      // if ($result === false) {
+      //   $request_parameters = array($staff, $client, $uid);
+      //   error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($request_parameters));
+      // }
     }
   }
 
@@ -114,27 +114,30 @@ class StatCollector {
     $uid = $_POST['GUID'];
     $url = $_POST['url'];
     $programs = $_POST['programs'];
+
     if (empty($uid) || empty($url) || empty($programs)) {
-      wp_send_json(["status" => "fail","message" => "missing values"]);
+      wp_send_json(array(
+        'status' => 'fail',
+        'message' => 'missing values'
+      ));
+
       return wp_die();
     }
 
     $db = $this->getDb();
-    $result = $db->query($db->prepare("
-      INSERT into response_update (uid, url, program_codes) VALUES (%s, %s, %s)",
+    $result = $db->query($db->prepare(
+      'INSERT into response_update (uid, url, program_codes) VALUES (%s, %s, %s)',
       $uid,
       $url,
       $programs
     ));
 
-    if($result === false){
-      // print the error
-      $request_parameters =  array($uid, $url, $programs);
-      error_log('STAT COLLECTOR ERROR '
-                . $db->last_error.json_encode($request_parameters));
+    if ($result === false) {
+      $request_parameters = array($uid, $url, $programs);
+      error_log('STAT COLLECTOR ERROR ' . $db->last_error . json_encode($request_parameters));
     }
 
-    wp_send_json(["status" => "ok"]);
+    wp_send_json(array('status' => 'ok'));
     wp_die();
   }
 
@@ -163,12 +166,13 @@ class StatCollector {
     if ($bootstrapped !== '5') {
       $this->__bootstrap($db);
     }
+
     return $db;
   }
 
   private function __bootstrap($db) {
     $db->query(
-      "CREATE TABLE IF NOT EXISTS messages (
+      'CREATE TABLE IF NOT EXISTS messages (
         id INT(11) NOT NULL AUTO_INCREMENT,
         uid VARCHAR(13) DEFAULT NULL,
         msg_type VARCHAR(10) DEFAULT NULL,
@@ -177,57 +181,57 @@ class StatCollector {
         url VARCHAR(512) DEFAULT NULL,
         message TEXT DEFAULT NULL,
         PRIMARY KEY(id)
-      ) ENGINE=InnoDB"
+      ) ENGINE=InnoDB'
     );
 
     $db->query(
-      "CREATE TABLE IF NOT EXISTS requests (
+      'CREATE TABLE IF NOT EXISTS requests (
         id INT(11) NOT NULL AUTO_INCREMENT,
         uid VARCHAR(13) DEFAULT NULL,
         data MEDIUMBLOB NOT NULL,
         date DATETIME DEFAULT NOW(),
         PRIMARY KEY(id)
-      ) ENGINE=InnoDB"
+      ) ENGINE=InnoDB'
     );
 
     $db->query(
-      "CREATE TABLE IF NOT EXISTS responses (
+      'CREATE TABLE IF NOT EXISTS responses (
         id INT(11) NOT NULL AUTO_INCREMENT,
         uid VARCHAR(13) DEFAULT NULL,
         data MEDIUMBLOB NOT NULL,
         date DATETIME DEFAULT NOW(),
         PRIMARY KEY(id)
-      ) ENGINE=InnoDB"
+      ) ENGINE=InnoDB'
     );
 
     $db->query(
-      "CREATE TABLE IF NOT EXISTS peu_staff (
+      'CREATE TABLE IF NOT EXISTS peu_staff (
         id INT(11) NOT NULL AUTO_INCREMENT,
         uid VARCHAR(13) DEFAULT NULL,
         data MEDIUMBLOB NOT NULL,
         date DATETIME DEFAULT NOW(),
         PRIMARY KEY(id)
-      ) ENGINE=InnoDB"
+      ) ENGINE=InnoDB'
     );
 
     $db->query(
-      "CREATE TABLE IF NOT EXISTS peu_client (
+      'CREATE TABLE IF NOT EXISTS peu_client (
         id INT(11) NOT NULL AUTO_INCREMENT,
         uid VARCHAR(13) DEFAULT NULL,
         data MEDIUMBLOB NOT NULL,
         date DATETIME DEFAULT NOW(),
         PRIMARY KEY(id)
-      ) ENGINE=InnoDB"
+      ) ENGINE=InnoDB'
     );
 
     $db->query(
-      "CREATE TABLE IF NOT EXISTS response_update (
+      'CREATE TABLE IF NOT EXISTS response_update (
         id INT(11) NOT NULL AUTO_INCREMENT,
         uid VARCHAR(13) DEFAULT NULL,
         url MEDIUMBLOB NOT NULL,
         program_codes VARCHAR(256) DEFAULT NULL,
         PRIMARY KEY(id)
-      ) ENGINE=InnoDB"
+      ) ENGINE=InnoDB'
     );
 
     // we will just let this fail if the columns exist
@@ -235,14 +239,14 @@ class StatCollector {
     $db->hide_errors();
 
     $db->query(
-      "ALTER TABLE messages
+      'ALTER TABLE messages
       ADD url VARCHAR(512) DEFAULT NULL AFTER date,
-      ADD message TEXT DEFAULT NULL AFTER url"
+      ADD message TEXT DEFAULT NULL AFTER url'
     );
 
     $db->query(
-      "ALTER TABLE response_update
-      ADD date DATETIME DEFAULT NOW() AFTER program_codes"
+      'ALTER TABLE response_update
+      ADD date DATETIME DEFAULT NOW() AFTER program_codes'
     );
 
     $db->show_errors();

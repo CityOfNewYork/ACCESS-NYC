@@ -12,7 +12,7 @@ if (!defined('WPINC')) {
   die; //no direct access
 }
 
-require_once plugin_dir_path(__FILE__) . 'DroolsProxyClass.php';
+require_once plugin_dir_path(__FILE__) . 'Class.php';
 
 /**
  * Create Settings Page

@@ -71,8 +71,10 @@ add_action('init_stat_collector', function($instance) {
 /**
  * Allow local development requests
  */
+
 header('Access-Control-Allow-Origin: *');
+
 add_filter('allowed_http_origins', function($origins) {
   $origins[] = 'http://localhost:7000'; // Patterns
   return $origins;
-}
+});

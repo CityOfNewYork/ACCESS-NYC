@@ -12,7 +12,7 @@ if (!defined('WPINC')) {
   die; //no direct access
 }
 
-require_once plugin_dir_path(__FILE__) . 'StatCollectorClass.php';
+require_once plugin_dir_path(__FILE__) . 'Class.php';
 require_once plugin_dir_path(__FILE__) . 'MockDatabase.php';
 
 /**
