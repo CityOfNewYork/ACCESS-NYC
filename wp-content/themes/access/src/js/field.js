@@ -3,10 +3,16 @@ import jQuery from 'jquery';
 import _ from 'underscore';
 
 import 'core-js/features/promise';
+import 'core-js/features/array/for-each';
+
+import 'whatwg-fetch';
 
 // eslint-disable-next-line no-unused-vars
 import 'modules/polyfill-window-scroll';
 import 'utilities/element/matches';
+import 'utilities/element/closest';
+import 'utilities/element/remove';
+import 'utilities/nodelist/foreach';
 
 import Field from 'modules/field';
 import ResultsField from 'modules/results-field';
@@ -89,9 +95,6 @@ import Toggle from 'utilities/toggle/toggle';
 
     new Disclaimer();
   })(document.querySelectorAll(ShareForm.selector));
-
-  // Initialize alert banner component
-  new AlertBanner();
 
   // Application reloading
   $('[data-js="reload"]').each((i, el) => {
