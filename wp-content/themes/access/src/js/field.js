@@ -3,10 +3,16 @@ import jQuery from 'jquery';
 import _ from 'underscore';
 
 import 'core-js/features/promise';
+import 'core-js/features/array/for-each';
+
+import 'whatwg-fetch';
 
 // eslint-disable-next-line no-unused-vars
 import 'modules/polyfill-window-scroll';
 import 'utilities/element/matches';
+import 'utilities/element/closest';
+import 'utilities/element/remove';
+import 'utilities/nodelist/foreach';
 
 import Field from 'modules/field';
 import ResultsField from 'modules/results-field';
@@ -48,11 +54,6 @@ import Toggle from 'utilities/toggle/toggle';
   new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
   new Accordion();
   new Toggle();
-
-  /** Instantiate Alert Banner */
-  (element => {
-    if (element) new AlertBanner(element);
-  })(document.querySelector(AlertBanner.selector));
 
   /** Initialize the Share Form and Disclaimer */
   (elements => {
