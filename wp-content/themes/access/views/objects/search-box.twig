@@ -1,0 +1,47 @@
+<div class="o-search-box color-mid-background print:hidden" id="search" aria-hidden="true">
+  <div class="o-search-box__inner">
+    <div class="usa-grid">
+      <div class="usa-width-one-whole">
+        <a class="o-search-box__close" href="#content" data-js="o-search-box track" data-track-key="Main Nav" data-track-data='[{"action": "search/close"}]'>
+          <svg class="icon icon-ui-x">
+            <use xlink:href="#icon-ui-x"></use>
+          </svg><span class="sr-only">{{__('Close search', 'accessnyctheme')}}</span>
+        </a>
+
+        <form class="o-search-box__form" method="get" action="/">
+          {{ fn('do_action', 'wpml_add_language_form_field' ) }}
+          <label class="type-small" for="search-field">{{__('Search for programs or services', 'accessnyctheme')}}</label>
+
+          <div class="input-search">
+            <input name="s" type="text" value="" placeholder="{{__('Search', 'accessnyctheme')}}" id="search-field">
+            <button class="btn-text input-search__submit" type="submit">
+              <svg class="icon icon-ui-search">
+                <use xlink:href="#icon-ui-search"></use>
+              </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="o-search-box__suggestions">
+          <div class="o-search-box__suggestions-header">
+            <h3>{{__('Programs', 'accessnyctheme')}}</h3>
+
+            <a class="link-more hidden screen-tablet:inline-block" href="{{ urlBase }}/programs">{{__('See all programs', 'accessnyctheme')}}</a>
+          </div>
+
+          {% if search_links %}
+          <div class="o-search-box__suggestions-body">
+            {% for link in search_links[0].get_field('field_58c1020ec4450') %} {# program_links #}
+            <div class="o-search-box__suggestions-item">
+              <a href="{{ link.link }}">{{ link.plain_language_program_name }}</a>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <a class="link-more screen-tablet:hidden" href="{{ urlBase }}/programs" aria-hidden="true">{{__('see all programs', 'accessnyctheme')}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

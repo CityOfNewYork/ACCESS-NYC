@@ -52,3 +52,30 @@ if (null !== WP_REDIS_HOST) {
  */
 
 activate_plugin(WP_PLUGIN_DIR . 'query-monitor/query-monitor.php');
+
+/**
+ * Remove Stat Collector Actions
+ */
+
+add_action('init_stat_collector', function() {
+  remove_action('drools_request', '\StatCollector\drools_request', 10);
+  remove_action('drools_response', '\StatCollector\drools_response', 10);
+  remove_action('results_sent', '\StatCollector\results_sent', 10);
+  remove_action('peu_data', '\StatCollector\peu_data', 10);
+
+  remove_action('wp_ajax_response_update', '\StatCollector\response_update');
+  remove_action('wp_ajax_nopriv_response_update', '\StatCollector\response_update');
+});
+
+
+/**
+ * Allow local development requests
+ */
+
+header('Access-Control-Allow-Origin: *');
+
+add_filter('allowed_http_origins', function($origins) {
+  $origins[] = 'http://localhost:7000'; // Patterns
+
+  return $origins;
+});

@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main id="content" class="bg-color-white" itemscope itemtype="http://schema.org/GovernmentService">
+  <main id="content" class="color-light-background" itemscope itemtype="http://schema.org/GovernmentService">
     <p class="usa-grid m-0 pt-3 hidden print:block" aria-hidden="true">
       <strong>{{__('Get back to this page', 'accessnyc-program-detail')}}:</strong>
       <a href="{{ post.get_permalink }}" itemprop="url">{{ post.get_permalink | replace({'http://': ''})}}</a>
@@ -121,7 +121,7 @@
       {# {% include 'partials/was-this-page-helpful.twig' %} #}
 
       <div class="text-align-end">
-        <a href="#content" class="btn btn-small bg-color-blue-light">{{ __('Back to top', 'accessnyctheme') }}</a>
+        <a href="#content" class="btn btn-small bg-color-blue-light text-color-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
       </div>
     </footer>
   </main>
