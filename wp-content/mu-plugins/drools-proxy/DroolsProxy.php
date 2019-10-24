@@ -1,77 +1,57 @@
 <?php
-/*
-  Plugin Name: Drools Proxy
-  Description: Backend Proxy for Drools web requests
-  Author:      Blue State Digital
-*/
 
-namespace Drools;
+/**
+ * Plugin Name: Drools Proxy
+ * Description: Backend Proxy for Drools web requests
+ * Author:      Blue State Digital
+ */
+
+namespace DroolsProxy;
 
 if (!defined('WPINC')) {
   die; //no direct access
 }
-require plugin_dir_path(__FILE__) . 'settings.php';
 
-add_action('wp_ajax_drools', '\Drools\incoming');
-add_action('wp_ajax_nopriv_drools', '\Drools\incoming');
+require_once plugin_dir_path(__FILE__) . 'Class.php';
 
-function incoming() {
-  $url = get_option('drools_url');
-  $user = get_option('drools_user');
-  $pass = get_option('drools_pass');
+/**
+ * Create Settings Page
+ */
 
-  $url = (!empty($url)) ? $url : $_ENV['DROOLS_URL'];
-  $user = (!empty($user)) ? $user : $_ENV['DROOLS_USER'];
-  $pass = (!empty($pass)) ? $pass : $_ENV['DROOLS_PASS'];
+add_action('admin_menu', function() {
+  add_options_page(
+    'Drools Proxy Settings',
+    'Drools Proxy',
+    'manage_options',
+    'drools_config',
+    function() {
+      echo '<div class="wrap">';
+      echo '  <h1>Drools Proxy Settings</h1>';
+      echo '  <form method="post" action="options.php">';
+      do_settings_sections('drools_config');
+      settings_fields('drools_settings');
+      submit_button();
+      echo '  </form>';
+      echo '</div>';
+    }
+  );
+});
 
-  if (empty($url) || empty($user) || empty($pass)) {
-    wp_send_json([
-      'status' => 'fail',
-      'message' => 'invalid configuration'
-    ], 412);
-    wp_die();
-  }
+add_filter('plugin_action_links_' . plugin_basename(dirname(__FILE__) . '/DroolsProxy.php'), function() {
+  $settings_link = '<a href="'.esc_url(
+    add_query_arg('page', 'drools_config', admin_url('options-general.php'))
+  ).'">Settings</a>';
 
-  $uid = uniqid();
-  do_action('peu_data', $_POST['staff'], $_POST['client'], $uid);
-  do_action('drools_request', $_POST['data'], $uid);
+  array_unshift($links, $settings_link);
 
-  $response = request($url, json_encode($_POST['data']), $user, $pass);
+  return $links;
+});
 
-  if ($response === false || empty($response)) {
-    wp_send_json([ 'status' => 'fail'], 500);
-    wp_die();
-  }
+/**
+ * Initialize plugin
+ */
 
-  $ret = json_decode($response);
-
-  do_action('drools_response', $ret, $uid);
-
-  $ret->GUID = $uid;
-  wp_send_json($ret, 200);
-  wp_die();
-}
-
-function request($url, $data, $user, $pass) {
-  $ch = curl_init();
-  curl_setopt_array($ch, [
-    CURLOPT_URL => $url,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_CONNECTTIMEOUT => 3,
-    CURLOPT_TIMEOUT => 5,
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $data,
-    CURLOPT_USERPWD => $user.":".$pass,
-    CURLOPT_FRESH_CONNECT => true,
-    CURLOPT_HTTPHEADER => [
-      "Content-Type: application/json",
-      "X-KIE-ContentType: json",
-      "Content-Length: " . strlen($data)
-    ]
-  ]);
-
-  $response = curl_exec($ch);
-  curl_close($ch);
-
-  return $response;
-}
+add_action('admin_init', function() {
+  $droolsProxy = new DroolsProxy();
+  $droolsProxy = $droolsProxy->createSettingsSection();
+});

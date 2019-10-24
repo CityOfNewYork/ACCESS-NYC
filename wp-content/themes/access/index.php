@@ -9,7 +9,7 @@ $context = Timber::get_context();
 
 $templates = array( 'index.twig' );
 
-if ( is_home() ) {
+if (is_home()) {
   $context['post'] = Timber::get_post(array(
     'post_type' => 'homepage'
   ));
@@ -23,7 +23,7 @@ if ( is_home() ) {
     'post_type' => 'alert'
   ));
 
-  array_unshift( $templates, 'home.twig' );
+  array_unshift($templates, 'home.twig');
 }
 
-Timber::render( $templates, $context );
+Timber::render($templates, $context);

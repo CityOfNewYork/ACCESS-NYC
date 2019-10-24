@@ -1,10 +1,12 @@
 <?php
 
+// phpcs:disable
 /**
  * Plugin Name: Add Meta Description to Head
  * Description: Adds the description defined in the WordPress Admin settings to the description meta tag in the head for the homepage only.
  * Author: Blue State Digital
  */
+// phpcs:enable
 
 add_action('pre_get_document_title', function ($title) {
   // render only on the homepage

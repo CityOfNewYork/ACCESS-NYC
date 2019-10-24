@@ -49,7 +49,6 @@
   <rule ref="Generic.WhiteSpace.ScopeIndent">
     <properties>
       <property name="indent" value="2"/>
-      <property name="exact" value="true"/>
       <property name="tabIndent" value="false" />
     </properties>
   </rule>

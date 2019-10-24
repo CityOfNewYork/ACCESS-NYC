@@ -6,6 +6,8 @@
  * Author: NYC Opportunity
  */
 
-add_action('wp_print_styles', function () {
-  wp_deregister_style('wsq-frontend.css');
+add_action('wp_print_styles', function() {
+  if (false === is_admin() && false === is_user_logged_in()) {
+    wp_deregister_style('wsq-frontend.css');
+  }
 }, 100);

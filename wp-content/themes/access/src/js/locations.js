@@ -5,8 +5,6 @@ import 'core-js/features/url-search-params';
 
 import OfficeMap from 'modules/office-map';
 
-import NearbyStops from 'components/nearby-stops/nearby-stops';
-
 import 'main';
 
 (function() {
@@ -50,6 +48,4 @@ import 'main';
   //     $(el).attr('href', window.document.referrer);
   //   }
   // });
-
-  new NearbyStops();
 })();

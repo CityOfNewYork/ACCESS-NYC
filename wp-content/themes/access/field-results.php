@@ -14,13 +14,13 @@ $context['action'] = admin_url('admin-ajax.php');
 $context['url'] = $shareData['url'];
 $context['hash'] = $shareData['hash'];
 $context['guid'] = (isset($shareData['query']['guid'])) ?
-  $shareData['query']['guid'] : '';
+$shareData['query']['guid'] : '';
 
 $categories = (isset($shareData['query']['categories'])) ?
-  explode(',', $shareData['query']['categories']) : '';
+explode(',', $shareData['query']['categories']) : '';
 
 $programs = (isset($shareData['query']['programs'])) ?
-  explode(',', $shareData['query']['programs']) : '';
+explode(',', $shareData['query']['programs']) : '';
 
 $selectedProgramArgs = array(
   'post_type' => 'programs',
@@ -37,7 +37,6 @@ $selectedProgramArgs = array(
 );
 
 $additionalProgramArgs = array(
-  // Get post type project
   'post_type' => 'programs',
   'tax_query' => array(
     array(
@@ -47,16 +46,14 @@ $additionalProgramArgs = array(
       'operator'  => 'NOT IN'
     )
   ),
-  // Get all posts
   'posts_per_page' => -1,
-  // Filter posts based on the program code in the URL
   'meta_key'    => 'program_code',
   'meta_value'  => $programs
 );
 
 $context['programs'] = implode(',', $programs);
-$context['selectedPrograms'] = Timber::get_posts( $selectedProgramArgs );
-$context['additionalPrograms'] = Timber::get_posts( $additionalProgramArgs );
-$context['WP_ENV'] = Notifications\environment_string();
+$context['selectedPrograms'] = Timber::get_posts($selectedProgramArgs);
+$context['additionalPrograms'] = Timber::get_posts($additionalProgramArgs);
+$context['WP_ENV'] = environment_string();
 
 Timber::render(array('field/results.twig'), $context);

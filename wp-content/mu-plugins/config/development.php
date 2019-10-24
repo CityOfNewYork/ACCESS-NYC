@@ -54,19 +54,19 @@ if (null !== WP_REDIS_HOST) {
 activate_plugin(WP_PLUGIN_DIR . 'query-monitor/query-monitor.php');
 
 /**
- * Remove Stat Collector Actions
+ * Remove Stat Collector data logging actions
+ * @param   [class]  $instance  The instantiated StatCollector class
  */
 
-add_action('init_stat_collector', function() {
-  remove_action('drools_request', '\StatCollector\drools_request', 10);
-  remove_action('drools_response', '\StatCollector\drools_response', 10);
-  remove_action('results_sent', '\StatCollector\results_sent', 10);
-  remove_action('peu_data', '\StatCollector\peu_data', 10);
+add_action('init_stat_collector', function($instance) {
+  remove_action('drools_request', [$instance, 'droolsRequest'], $instance->priority);
+  remove_action('drools_response', [$instance, 'droolsResponse'], $instance->priority);
+  remove_action('results_sent', [$instance, 'resultsSent'], $instance->priority);
+  remove_action('peu_data', [$instance, 'peuData'], $instance->priority);
 
-  remove_action('wp_ajax_response_update', '\StatCollector\response_update');
-  remove_action('wp_ajax_nopriv_response_update', '\StatCollector\response_update');
+  remove_action('wp_ajax_response_update', [$instance, 'responseUpdate'], $instance->priority);
+  remove_action('wp_ajax_nopriv_response_update', [$instance, 'responseUpdate'], $instance->priority);
 });
-
 
 /**
  * Allow local development requests
@@ -76,6 +76,5 @@ header('Access-Control-Allow-Origin: *');
 
 add_filter('allowed_http_origins', function($origins) {
   $origins[] = 'http://localhost:7000'; // Patterns
-
   return $origins;
 });

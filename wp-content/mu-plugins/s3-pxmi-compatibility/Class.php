@@ -29,8 +29,7 @@ class S3PmxiCompatibility {
    * @return  [WP_Error|null]  WP_Error on invalid file or 'NULL' on success.
    */
   public function activateS3() {
-    if (
-      is_admin() &&
+    if (is_admin() &&
       file_exists(WP_PLUGIN_DIR . '/' . $this->s3) &&
       defined('S3_UPLOADS_BUCKET') &&
       defined('S3_UPLOADS_KEY') &&
