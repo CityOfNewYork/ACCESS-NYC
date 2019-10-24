@@ -8,7 +8,7 @@ const __ = wp.i18n.__;
 
 // Common attributes for HTML email tables
 const tableAttrs = {
-  align: 'left',
+  align: 'center',
   border: '0',
   cellPadding: '0',
   cellSpacing: '0',
@@ -89,7 +89,7 @@ const createButton = (linkElement, urlEditor = null) => {
         'tbody', null, wp.element.createElement(
           'tr', null, wp.element.createElement(
             'td', {
-              align: 'left',
+              align: 'center',
               style: {
                 wordBreak: 'break-word',
                 fontSize: '0px'

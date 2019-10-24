@@ -1,13 +1,17 @@
 <!doctype html>
-<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="{{ language_code }}" dir="{{ direction }}" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title></title>
+    <title>{{ post.title }}</title>
 
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <!--[if !mso]><!-- --><meta content="IE=edge" http-equiv="X-UA-Compatible"><!--<![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
+      html {
+        direction: {{ direction }};
+      }
+
       #outlook a {
         padding: 0;
       }
@@ -105,12 +109,12 @@
             <tr>
               <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:24px;">
                 <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:{{ styles.maxWidth }}px;"><![endif]-->
-                <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:{{ start }};width:100%;">
                   <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
                     <tbody>
                       <tr>
-                        <td align="left" style="word-break:break-word;font-size:0px;padding:0px;">
-                          <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                        <td align="{{ start }}" style="word-break:break-word;font-size:0px;padding:0px;">
+                          <table align="{{ start }}" border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
                             <tbody>
                               <tr>
                                 <td style="width:250px;">
@@ -123,12 +127,14 @@
                       </tr>
 
                       <tr>
-                        <td align="left" style="word-break: break-word; font-size: 0px; padding: 32px 0px 0px 0px;">
+                        <td align="{{ start }}" style="word-break: break-word; font-size: 0px; padding: 32px 0px 0px 0px;">
                           <table bgcolor="#122f50" border="0" cellpadding="0" cellspacing="0" style="cellspacing:0px;color:#000;font-family:Georgia, serif;font-size:0;line-height:0;table-layout:auto;" style="height:5px" width="100%">
                             <tr style="height:5px">
+                              {% if direction == 'ltr' %}
                               <td bgcolor="#fbb720" height="5" style="background: #fbb720; padding: 0; font-size: 0; line-height: 0" style="height:5px" width="130">
                                 <img height="5" src="https://access.nyc.gov/wp-content/themes/access/assets/img/email/spacer-trans.png" style="display: block;" alt="ACCESS NYC logo">
                               </td>
+                              {% endif %}
 
                               <td bgcolor="#122f50" height="5" style="height:5px;" valign="middle">
                                 <table bgcolor="#122f50" border="0" cellpadding="0" cellspacing="0" style="height:1px;" width="100%">
@@ -139,14 +145,20 @@
                                   </tr>
                                 </table>
                               </td>
+
+                              {% if direction == 'rtl' %}
+                              <td bgcolor="#fbb720" height="5" style="background: #fbb720; padding: 0; font-size: 0; line-height: 0" style="height:5px" width="130">
+                                <img height="5" src="https://access.nyc.gov/wp-content/themes/access/assets/img/email/spacer-trans.png" style="display: block;" alt="ACCESS NYC logo">
+                              </td>
+                              {% endif %}
                             </tr>
                           </table>
                         </td>
                       </tr>
 
                       <tr>
-                        <td align="left" style="word-break: break-word; font-size: 0px; padding: 24px 0px 0px 0px;">
-                          <div class="" style="cursor:auto;color:#ffffff;font-family:Georgia, serif;font-size:19px;font-weight:bold;line-height:1.5;text-align:left;">
+                        <td align="{{ start }}" style="word-break: break-word; font-size: 0px; padding: 24px 0px 0px 0px;">
+                          <div class="" style="cursor:auto;color:#ffffff;font-family:Georgia, serif;font-size:19px;font-weight:bold;line-height:1.5;text-align:{{ start }};">
                             <h1 class="hero-text" style="font-size: 32px; font-weight: normal; margin: 0;">{{ post.title }}</h1>
                           </div>
                         </td>
@@ -169,12 +181,12 @@
             <tr>
               <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px;">
                 <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:{{ styles.maxWidth }}px;"><![endif]-->
-                <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:{{ start }};width:100%;">
                   <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
                     <tbody>
                       <tr>
-                        <td align="left" style="word-break: break-word; font-size: 0px; padding: {{ styles.padding }}px;">
-                          <div class="" style="cursor: auto; color:#000000; font-family: Georgia, serif; font-size: 19px; font-weight: bold; line-height: 1.5; text-align: left;">
+                        <td align="{{ start }}" style="word-break: break-word; font-size: 0px; padding: {{ styles.padding }}px;">
+                          <div class="" style="cursor: auto; color:#000000; font-family: Georgia, serif; font-size: 19px; font-weight: bold; line-height: 1.5; text-align: {{ start }};">
                             {{ post.post_content }}
                           </div>
                         </td>
@@ -197,24 +209,32 @@
             <tr>
               <td style="text-align:center;vertical-align:top;border-top:7px solid #122f50;direction:ltr;font-size:0px;padding:0px;">
                 <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:{{ styles.maxWidth }}px;"><![endif]-->
-                <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:{{ start }};width:100%;">
                   <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
                     <tbody>
                       <tr>
-                        <td align="left" style="word-break:break-word;font-size:0px;padding: {{ styles.padding }}px;">
+                        <td align="{{ start }}" style="word-break:break-word;font-size:0px;padding: {{ styles.padding }}px;">
                           <table border="0" cellpadding="0" cellspacing="0" style="cellspacing:0px;color:#000;font-family:Georgia, serif;font-size:19px;line-height:1.5;table-layout:auto;" width="100%">
                             <tr>
                               <td>
                                 <table border="0" cellpadding="0" cellspacing="0"  width="100%">
                                   <tr>
+                                    {% if direction == 'ltr' %}
                                     <td style="padding-right: 15px;" valign="top">
                                       <img height="27" src="https://access.nyc.gov/wp-content/themes/access/assets/img/email/nyc-logo.png" style="display: block;" width="80">
                                     </td>
+                                    {% endif %}
 
-                                    <td style="color: #333333; font-size: 12px; font-family: 'Trebuchet MS', 'sans-serif'; width: 100%;">
-                                      City of New York, 2017 All Rights Reserved.<br>
-                                      NYC is a trademark and service mark of the City of New York.
+                                    <td style="color: #333333; font-size: 12px; font-family: 'Trebuchet MS', 'sans-serif'; width: 100%; text-align: {{ start }}">
+                                      {{ __('City of New York,', 'accessnyctheme') }} {{ 'now' | date('Y') }} {{ __('All Rights Reserved.', 'accessnyctheme') }}<br>
+                                      {{ __('NYC is a trademark and service mark of the City of New York.', 'accessnyctheme') }}
                                     </td>
+
+                                    {% if direction == 'rtl' %}
+                                    <td style="padding-left: 15px;" valign="top">
+                                      <img height="27" src="https://access.nyc.gov/wp-content/themes/access/assets/img/email/nyc-logo.png" style="display: block;" width="80">
+                                    </td>
+                                    {% endif %}
                                   </tr>
                                 </table>
                               </td>
