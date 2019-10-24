@@ -225,7 +225,7 @@ registerBlockType('access/smnyc-email-button', {
     return createButton(wp.element.createElement('a', {
       href: props.attributes.url,
       style: linkStyles
-    }, props.attributes.content, arrowElement
+    }, props.attributes.content
     ));
   }
 });
