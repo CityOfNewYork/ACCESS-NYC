@@ -7,16 +7,20 @@
 /**
  * Utility Deps
  */
+
 import del from 'del';
 import gulp from 'gulp';
 import notify from 'gulp-notify';
 import rename from 'gulp-rename';
 import hashFilename from 'gulp-hash-filename';
 import browserSync from 'browser-sync';
+import through from 'through2';
+import _ from 'underscore';
 
 /**
  * Style Deps
  */
+
 import sass from 'gulp-sass';
 import postcss from 'gulp-postcss';
 import sourcemaps from 'gulp-sourcemaps';
@@ -27,22 +31,26 @@ import mqpacker from 'css-mqpacker';
 /**
  * Script Deps
  */
+
 import eslint from 'gulp-eslint';
 import webpack from 'webpack-stream';
 import named from 'vinyl-named';
 import VueLoaderPlugin from 'vue-loader/lib/plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
+// import UnderscoreTemplateLoader f
 // import TerserPlugin from 'terser-webpack-plugin';
 
 /**
  * Image Deps
  */
+
 import cache from 'gulp-cache';
 import imagemin from 'gulp-imagemin';
 
 /**
  * SVG Deps
  */
+
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
 
@@ -54,6 +62,7 @@ const NODE_ENV = process.env.NODE_ENV;
 const PROXY = process.env.PROXY;
 const DIST = 'assets';
 const SRC = 'src';
+const VIEWS = 'views';
 const NYCOPPORTUNITY = 'node_modules/@nycopportunity';
 const PATTERNS_ACCESS = `${NYCOPPORTUNITY}/access-patterns`;
 const PATTERNS_FRAMEWORK = `${NYCOPPORTUNITY}/patterns-framework`;
@@ -71,6 +80,7 @@ const HASH_FILES = [
 /**
  * Styles
  */
+
 gulp.task('clean:styles', callback => {
   del([
     './assets/styles/style-*.css',
@@ -82,7 +92,7 @@ gulp.task('clean:styles', callback => {
 gulp.task('sass', () => gulp.src(`${ SRC }/scss/style-*.scss`)
   .pipe(sourcemaps.init())
   .pipe(sass({
-    includePaths: ['node_modules', `${PATTERNS_ACCESS}/src/`]
+    includePaths: ['node_modules', `${ PATTERNS_ACCESS }/src/`]
     .concat(require('bourbon').includePaths)
   })
   .on('error', notify.onError())
@@ -102,6 +112,7 @@ gulp.task('styles', gulp.series('clean:styles', 'sass'));
 /**
  * Scripts
  */
+
 gulp.task('clean:scripts', callback => {
   del([
     `${ DIST }/js/*`
@@ -227,8 +238,35 @@ gulp.task('webpack', () =>
 gulp.task('scripts', gulp.series('lint', 'webpack'));
 
 /**
+ * JST
+ * This task precompiles underscore templates to avoid using unsafe eval
+ * functions on the client side. They remain .twig templates because they
+ * include string tags for content.
+ */
+
+gulp.task('jst', () => gulp.src(`${ VIEWS }/**/*.jst.twig`)
+  .pipe((() => through.obj(function (file, encoding, callback) {
+    file.basename = file.basename.replace('jst.twig', 'js');
+
+    let template = file.contents.toString('utf8');
+    let compiled = [
+        '// Compiled template. Do not edit.\n',
+        'window.JST = window.JST || {};\n',
+        'window.JST["' + file.relative.replace('.js', '') + '"] = ',
+        _.template(template).source]
+      .join('');
+
+    file.contents = Buffer.from(compiled);
+
+    callback(null, file);
+  }))())
+  .pipe(gulp.dest(`${ VIEWS }/jst`))
+);
+
+/**
  * Hashing
  */
+
 gulp.task('hashfiles', callback => {
   let oldhashfiles = [];
   for (let i = HASH_FILES.length - 1; i >= 0; i--) {
@@ -247,6 +285,7 @@ gulp.task('hashfiles', callback => {
 /**
  * Images
  */
+
 gulp.task('images', callback => {
   gulp.src([
       `${ PATTERNS_ACCESS }/src/images/**/*.jpg`,
@@ -274,6 +313,7 @@ gulp.task('images', callback => {
 /**
  * SVGs
  */
+
 gulp.task('svgs', () =>
   gulp.src(`${ PATTERNS_ACCESS }/src/svg/*.svg`)
     .pipe(svgmin())
@@ -292,9 +332,11 @@ gulp.task('svgs', () =>
 /**
  * All tasks needed to build the app
  */
+
 gulp.task('build', gulp.parallel(
   'styles',
   'scripts',
+  'jst',
   'svgs',
   'hashfiles'
 ));
@@ -302,6 +344,7 @@ gulp.task('build', gulp.parallel(
 /**
  * Watching Tasks
  */
+
 gulp.task('default', () => {
   let reload = () => {
     browserSync.reload();
@@ -334,6 +377,9 @@ gulp.task('default', () => {
   }
 
   gulp.watch(`${ SRC }/js/**/*.js`, gulp.series('webpack'));
+
+  // Watch changes to underscore templates to compile them
+  gulp.watch(`${ VIEWS }/**/*.underscore.twig`, gulp.series('jst'));
 
   // Watch image files
   gulp.watch(`${ SRC }/img/**/*`, gulp.series('images', reload));

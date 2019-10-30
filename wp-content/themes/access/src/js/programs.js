@@ -16,12 +16,13 @@ import 'core-js/features/url-search-params';
 import 'whatwg-fetch';
 
 import jQuery from 'jquery';
-import Vue from 'vue/dist/vue.common';
+import Vue from 'vue/dist/vue.runtime';
 
-import Utility from 'modules/utility';
 import CardVue from 'components/card/card.vue';
 import FilterMultiVue from 'components/filter/filter-multi.vue';
-import WpArchiveVue from 'modules/wp-archive-vue';
+
+import Utility from 'modules/utility';
+import Archive from '../../views/programs/archive.vue';
 
 import 'main';
 
@@ -32,126 +33,68 @@ import 'main';
    * Archive
    */
 
-  let programs = document.querySelector('[data-js="programs"]');
+  (element => {
+    if (element) {
+      /**
+       * Redirect old filtering method to WP Archive Vue filtering
+       */
 
-  if (programs) {
-    /** Redirect old filtering method to WP Archive Vue filtering */
-    let query = [];
-    let params = {
-      'categories': 'categories[]',
-      'served': 'served[]'
-    };
+      let query = [];
+      let params = {
+        'categories': 'categories[]',
+        'served': 'served[]'
+      };
 
-    Object.keys(params).forEach(key => {
-      let datum = programs.dataset;
-      if (datum.hasOwnProperty(key) && datum[key] != '') {
-        query.push(params[key] + '=' + datum[key]);
-      }
-    });
+      Object.keys(params).forEach(key => {
+        let datum = element.dataset;
+        if (datum.hasOwnProperty(key) && datum[key] != '') {
+          query.push(params[key] + '=' + datum[key]);
+        }
+      });
 
-    if (query.length) window.history.replaceState(null, null, [
-        window.location.pathname, '?', query.join('')
-      ].join(''));
+      if (query.length) window.history.replaceState(null, null, [
+          window.location.pathname, '?', query.join('')
+        ].join(''));
 
-    /** Add Vue components to the vue instance */
-    Vue.component('c-card', CardVue);
-    Vue.component('c-filter-multi', FilterMultiVue);
+      /**
+       * Get localized strings from template
+       */
 
-    /** Pass our configuration options to the Archive method (including Vue) */
-    new WpArchiveVue(Vue, {
-      el: programs,
-      delimiters: ['v{', '}'],
-      data: {
-        type: 'programs',
-        query: {
-          per_page: parseInt(programs.dataset.perPage),
-          page: parseInt(programs.dataset.page)
-        },
-        headers: {
-          pages: parseInt(programs.dataset.pages),
-          total: parseInt(programs.dataset.total),
-          link: 'rel="next";'
-        },
-        endpoints: {
-          terms: '/wp-json/api/v1/terms',
-          programs: '/wp-json/wp/v2/programs'
-        },
-        history: {
-          omit: ['page', 'per_page'],
-          params: {
-            'programs': 'categories',
-            'populations-served': 'served'
+      let strings = Object.fromEntries([
+        'ARCHIVE_TOGGLE_ALL', 'ARCHIVE_LEARN_MORE', 'ARCHIVE_APPLY',
+        'ARCHIVE_ALL', 'ARCHIVE_PROGRAMS', 'ARCHIVE_FILTER_PROGRAMS',
+        'ARCHIVE_NO_RESULTS', 'ARCHIVE_SEE_PROGRAMS', 'ARCHIVE_LOADING',
+        'ARCHIVE_NO_RESULTS_INSTRUCTIONS', 'ARCHIVE_MORE_RESULTS'
+      ].map(i => [
+        i.replace('ARCHIVE_', ''),
+        Utility.localize(i)
+      ]));
+
+      /**
+       * Add Vue components to the vue instance
+       */
+
+      Vue.component('c-card', CardVue);
+      Vue.component('c-filter-multi', FilterMultiVue);
+
+      /**
+       * Pass our configuration options to the Archive method (including Vue)
+       */
+
+      new Vue({
+        render: createElement => createElement(Archive, {
+          props: {
+            perPage: parseInt(element.dataset.perPage),
+            page: parseInt(element.dataset.page),
+            pages: parseInt(element.dataset.pages),
+            total: parseInt(element.dataset.count),
+            paginationNextLink: element.dataset.paginationNextLink,
+            strings: strings
           }
-        },
-        maps: function() {
-          return {
-            terms: terms => ({
-              'active': false,
-              'name': terms.labels.archives,
-              'slug': terms.name,
-              'checkbox': false,
-              'toggle': true,
-              'filters': terms.terms.map(filters => ({
-                'id': filters.term_id,
-                'name': filters.name,
-                'slug': filters.slug,
-                'parent': terms.name,
-                'active': (
-                    this.query.hasOwnProperty(terms.name) &&
-                    this.query[terms.name].includes(filters.term_id)
-                  ),
-                'checked': (
-                    this.query.hasOwnProperty(terms.name) &&
-                    this.query[terms.name].includes(filters.term_id)
-                  )
-              })),
-              'STRINGS': {
-                'ALL': window.LOCALIZED_STRINGS
-                  .find(e => e.slug === 'ALL').label || 'ALL'
-              }
-            }),
-            programs: p => ({
-              'title': p.acf.plain_language_program_name,
-              'link': p.link,
-              'subtitle': p.acf.program_name + ((p.acf.program_acronym) ?
-                ' (' + p.acf.program_acronym + ')' : ''),
-              'summary': p.acf.brief_excerpt,
-              'category': {
-                'slug':
-                  (p.terms && p.terms.find(t => t.taxonomy === 'programs')
-                  .slug.replace(new RegExp(`\\-${this.lang.code}$`), ''))
-                    || 'PROGRAMS',
-                'name':
-                  (p.terms && p.terms.find(t => t.taxonomy === 'programs').name)
-                    || 'NAME'
-              },
-              'STRINGS': {
-                'LEARN_MORE': window.LOCALIZED_STRINGS
-                  .find(e => e.slug === 'LEARN_MORE').label || 'LEARN_MORE',
-                'CTA': window.LOCALIZED_STRINGS
-                  .find(e => e.slug === 'APPLY').label || 'APPLY'
-              }
-            })
-          };
-        }
-      },
-      computed: {
-        categories: function() {
-          return [this.terms.map(
-            t => t.filters
-              .filter(f => f.checked)
-              .map(f => f.name)
-          )].flat(2);
-        }
-      },
-      created: function() {
-        this.getState() // Get window.location.search (filter history)
-          .queue() // Initialize the first page request
-          .fetch('terms') // Get the terms from the 'terms' endpoint
-          .catch(this.error);
-      }
-    });
-  }
+        })
+      }).$mount(`[data-js="${element.dataset.js}"]`);
+    }
+  })(document.querySelector('[data-js="programs"]'));
 
   /**
    * Single
@@ -165,6 +108,7 @@ import 'main';
   // some supposed issues with WPML where the hash was being stripped when
   // switching between langauges. Because it is a single page, we don't need
   // to actually reload the browser, which is why history.pushState is used.
+
   /**
    * Advances Program Page Steps
    * @param {string} step - the kebab case identifier for the section

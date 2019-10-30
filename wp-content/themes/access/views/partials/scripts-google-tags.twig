@@ -1,51 +1,53 @@
 {% if head %}
-  <script type="text/javascript" id="data-layer">
+
+  <script type="text/javascript" id="data-layer" nonce="{{ csp_script_nonce }}">
     window.dataLayer = window.dataLayer || [];
   </script>
 
   {% if function('get_env', 'GOOGLE_OPTIMIZE_ID') != '' %}
-  <style>.async-hide {opacity: 0 !important}</style>
-  <script type="text/javascript" id="google-async-hide">
-    (function(a, s, y, n, c, h, i, d, e) {
-      s.className += ' ' + y; h.start = 1 * new Date;
-      h.end = i = function() {s.className = s.className.replace(RegExp(' ?' + y), '');};
-      (a[n] = a[n] || []).hide = h; setTimeout(function() {i(); h.end = null}, c); h.timeout = c;
-    })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {"{{ function('get_env', 'GOOGLE_OPTIMIZE_ID') }}": true});
-  </script>
+    <style>.async-hide {opacity: 0 !important}</style>
+    <script type="text/javascript" id="google-async-hide" nonce="{{ csp_script_nonce }}">
+      (function(a, s, y, n, c, h, i, d, e) {
+        s.className += ' ' + y; h.start = 1 * new Date;
+        h.end = i = function() {s.className = s.className.replace(RegExp(' ?' + y), '');};
+        (a[n] = a[n] || []).hide = h; setTimeout(function() {i(); h.end = null}, c); h.timeout = c;
+      })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {"{{ function('get_env', 'GOOGLE_OPTIMIZE_ID') }}": true});
+    </script>
   {% endif %}
 
   {% if function('get_env', 'GOOGLE_ANALYTICS') != '' %}
-  <script async type="text/javascript" src='https://www.googletagmanager.com/gtag/js?id={{ function('get_env', 'GOOGLE_ANALYTICS') }}'></script>
-  <script type="text/javascript" id="google-gtag">
-    function gtag() {dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', "{{ function('get_env', 'GOOGLE_ANALYTICS') }}"{% if function('get_env', 'GOOGLE_OPTIMIZE_ID') != '' %}, {'optimize_id': "{{ function('get_env', 'GOOGLE_OPTIMIZE_ID') }}"}{% endif %});
-  </script>
+    <script async type="text/javascript" src='https://www.googletagmanager.com/gtag/js?id={{ function('get_env', 'GOOGLE_ANALYTICS') }}' nonce="{{ csp_script_nonce }}"></script>
+    <script type="text/javascript" id="google-gtag" nonce="{{ csp_script_nonce }}">
+      function gtag() {dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', "{{ function('get_env', 'GOOGLE_ANALYTICS') }}"{% if function('get_env', 'GOOGLE_OPTIMIZE_ID') != '' %}, {'optimize_id': "{{ function('get_env', 'GOOGLE_OPTIMIZE_ID') }}"}{% endif %});
+    </script>
   {% endif  %}
 
   {% if function('get_env', 'GOOGLE_TAG_MANAGER') != '' %}
-  <script type="text/javascript" id="google-tag-manager">
-    (function(w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({
-        'gtm.start': new Date().getTime(),
-        event: 'gtm.js'
-      });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l !='dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', "{{ function('get_env', 'GOOGLE_TAG_MANAGER') }}");
-  </script>
+    <script type="text/javascript" id="google-tag-manager" nonce="{{ csp_script_nonce }}">
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l !='dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', "{{ function('get_env', 'GOOGLE_TAG_MANAGER') }}");
+    </script>
   {% endif %}
+
 {% endif %}
 
 {% if body %}
 
   {% if function('get_env', 'GOOGLE_TAG_MANAGER') != '' %}
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ function('get_env', 'GOOGLE_TAG_MANAGER') }}" height="0" width="0" style="display:none; visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ function('get_env', 'GOOGLE_TAG_MANAGER') }}" height="0" width="0" style="display:none; visibility:hidden"></iframe></noscript>
   {% endif %}
 
 {% endif %}

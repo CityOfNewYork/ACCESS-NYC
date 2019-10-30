@@ -4,11 +4,9 @@
  * Transient Class
  */
 
-namespace nyco\WpOpenDataTransients\Transients;
+namespace NYCO;
 
-class Transients
-{
-
+class Transients {
   const TRANSIENTS_OPTION = 'open_data_transients_saved';
   const TOKEN_OPTION = 'open_data_app_token';
   const EXPIRATION = WEEK_IN_SECONDS; // WordPress Time Constant
@@ -110,11 +108,4 @@ class Transients
 
     return $transient_new;
   }
-
-  /**
-   * [delete description]
-   * @return [type] [description]
-   */
-  // function delete() {
-  // }
 }

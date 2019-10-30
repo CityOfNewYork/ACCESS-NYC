@@ -1,22 +1,22 @@
-<h2 class="recap-confirmation">{{ __('Is all of your information correct?', 'accessnyc-screener') }}</h2>
+<h2 class="recap-confirmation">{{ __("Is all of your information correct?", "accessnyc-screener") }}</h2>
 
 <div class="text-font-size-normal bg-color-white p-2 screen-tablet:p-4">
   <div>
     <h3 class="type-h4 text-color-blue-dark">
-      {{ __('Looking for help with', 'accessnyc-screener') }}
-      <a role="button" href="#step-1" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      {{ __("Looking for help with", "accessnyc-screener") }}
+      <a role="button" href="#step-1" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener") }}</a>
     </h3>
 
     <div class="layout--gutter screen-tablet:layout--columns-gutter mb-4">
       <% if (categories.length === 0) { %>
-      <p>{{ __('No categories selected.', 'accessnyc-screener') }}</p>
+      <p>{{ __("No categories selected.", "accessnyc-screener") }}</p>
       <% } %>
 
-      <% _.each(categories, function(category) { %>
-      {% if language_code == 'en' %}
+      <% categories.forEach(function(category) { %>
+      {% if language_code == "en" %}
       <% var slug = category.slug %>
       {% else %}
-      <% var slug = category.slug.substring(0, category.slug.lastIndexOf('-{{ language_code }}')); %>
+      <% var slug = category.slug.substring(0, category.slug.lastIndexOf("-{{ language_code }}")); %>
       {% endif %}
 
       <article class="c-card p-0 items-center">
@@ -38,36 +38,36 @@
 
   <div>
     <h3 class="type-h4 text-color-blue-dark">
-      {{ __('Your household:', 'accessnyc-screener') }}
+      {{ __("Your household:", "accessnyc-screener") }}
       <%= members.length %>
       <% if (members.length === 1) { %>
-      {{ __('person', 'accessnyc-screener') }}
+      {{ __("person", "accessnyc-screener") }}
       <% } else { %>
-      {{ __('people', 'accessnyc-screener') }}
+      {{ __("people", "accessnyc-screener") }}
       <% } %>
     </h3>
 
     <ul class="c-member-list ">{% spaceless %}
-      <% _.each(members, function(member, index) { %>
+      <% members.forEach(function(member, index) { %>
       <li class="pb-4">
         <% if (index === 0 && !member.isHoh) { %>
-        <span class="c-member-list__item">{{ __('You', 'accessnyc-screener') }}</span>
+        <span class="c-member-list__item">{{ __("You", "accessnyc-screener") }}</span>
         <% } %>
         <span class="c-member-list__item"><%= member.relation %></span>
         <span class="c-member-list__item"><%= member.age %></span>
         <% if (index === 0 && member.isHoh) { %>
-        <span class="c-member-list__item">{{ __('Head of household', 'accessnyc-screener') }}</span>
+        <span class="c-member-list__item">{{ __("Head of household", "accessnyc-screener") }}</span>
         <% } %>
 
         <span class="c-member-list__item inline">
-          <a role="button" data-person="<%= index %>" class="js-edit-person screen-tablet:px-2 font-normal cursor-pointer">{{ __('Edit', 'accessnyc-screener') }}</a><% if (index !== 0 && !member.isHoh) { %><a role="button" data-person="<%= index %>" class="js-remove-person px-2 font-normal">{{ __('Remove', 'accessnyc-screener') }}</a><% } %>
+          <a role="button" data-person="<%= index %>" class="js-edit-person screen-tablet:px-2 font-normal cursor-pointer">{{ __("Edit", "accessnyc-screener") }}</a><% if (index !== 0 && !member.isHoh) { %><a role="button" data-person="<%= index %>" class="js-remove-person px-2 font-normal">{{ __("Remove", "accessnyc-screener") }}</a><% } %>
         </span>
 
         <% if (member.conditions.length) { %>
         <div class="screen-mobile:flex font-normal leading-large pb-1">
-          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __('Conditions:', 'accessnyc-screener') }}</div>
+          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __("Conditions:", "accessnyc-screener") }}</div>
           <ul class="list-inline-semicolon">
-            <% _.each(member.conditions, function(condition) { %>
+            <% member.conditions.forEach(function(condition) { %>
             <li><%= condition %></li>
             <% }); %>
           </ul>
@@ -76,9 +76,9 @@
 
         <% if (member.benefits.length) { %>
         <div class="screen-mobile:flex font-normal leading-large pb-1">
-          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __('Benefits:', 'accessnyc-screener') }}</div>
+          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __("Benefits:", "accessnyc-screener") }}</div>
           <ul class="list-inline-semicolon">
-            <% _.each(member.benefits, function(benefit) { %>
+            <% member.benefits.forEach(function(benefit) { %>
             <li><%= benefit %></li>
             <% }); %>
           </ul>
@@ -87,9 +87,9 @@
 
         <% if (member.incomes.length) { %>
         <div class="screen-mobile:flex font-normal leading-large pb-1">
-          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __('Income:', 'accessnyc-screener') }}</div>
+          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __("Income:", "accessnyc-screener") }}</div>
           <ul class="list-inline-semicolon">
-            <% _.each(member.incomes, function(income) { %>
+            <% member.incomes.forEach(function(income) { %>
             <li>
               <span class="list-inline-comma">
                 <span><%= income.amount %></span>
@@ -104,9 +104,9 @@
 
         <% if (member.expenses.length) { %>
         <div class="screen-mobile:flex font-normal leading-large">
-          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __('Expenses:', 'accessnyc-screener') }}</div>
+          <div class="flex-none py-1 screen-mobile:p-0" style="width:7rem">{{ __("Expenses:", "accessnyc-screener") }}</div>
           <ul class="list-inline-semicolon">
-            <% _.each(member.expenses, function(expense) { %>
+            <% member.expenses.forEach(function(expense) { %>
             <li>
               <span class="list-inline-comma">
                 <span><%= expense.amount %></span>
@@ -127,27 +127,27 @@
 
   <div>
     <h3 class="type-h4 text-color-blue-dark">
-      {{ __('Household resources:', 'accessnyc-screener') }} <span class="force-ltr"><%= household.assets %></span>
-      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      {{ __("Household resources:", "accessnyc-screener") }} <span class="force-ltr"><%= household.assets %></span>
+      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener") }}</a>
     </h3>
 
-    <p>{{ __('This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.', 'accessnyc-screener') }}</p>
+    <p>{{ __("This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.", "accessnyc-screener") }}</p>
   </div>
 
   <hr class="divider-light">
 
   <div>
     <h3 class="type-h4 text-color-blue-dark">
-      {{ __('Housing', 'accessnyc-screener') }}
-      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      {{ __("Housing", "accessnyc-screener") }}
+      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener") }}</a>
     </h3>
 
     <ul class="list-inline-semicolon">{% spaceless %}
-      <% _.each(household.types, function(type) { %>
+      <% household.types.forEach(function(type) { %>
       <li>
         <div class="list-inline-comma">
           <span><%= type.label %></span>
-          <% if (type.slug === 'Renting') { %>
+          <% if (type.slug === "Renting") { %>
             <% if (household.rentalType) { %>
             <span class="recap-detail-info-item">
               <%= household.rentalType %>
@@ -156,35 +156,35 @@
 
             <span class="recap-detail-info-item">
               <% if (household.renters.length === 1) { %>
-                <% if (household.renters[0].slug === 'Self') { %>
-                {{ __('You are on the lease', 'accessnyc-screener') }}
+                <% if (household.renters[0].slug === "Self") { %>
+                {{ __("You are on the lease", "accessnyc-screener") }}
                 <% } else { %>
-                <%= household.renters[0].label %> {{ __('is on the lease', 'accessnyc-screener') }}
+                <%= household.renters[0].label %> {{ __("is on the lease", "accessnyc-screener") }}
                 <% } %>
               <% } else { %>
                 <span class="list-inline-comma">
-                  <% _.each(household.renters, function(renter) { %>
+                  <% household.renters.forEach(function(renter) { %>
                   <span><%= renter.label %></span>
                   <% }); %>
                 </span>
-                {{ __('are on the lease', 'accessnyc-screener') }}
+                {{ __("are on the lease", "accessnyc-screener") }}
               <% } %>
             </span>
-          <% } else if (type.slug === 'Owner') { %>
+          <% } else if (type.slug === "Owner") { %>
             <span>
               <% if (household.owners.length === 1) { %>
-                <% if (household.owners[0].slug === 'Self') { %>
-                {{ __('You are the owner', 'accessnyc-screener') }}
+                <% if (household.owners[0].slug === "Self") { %>
+                {{ __("You are the owner", "accessnyc-screener") }}
                 <% } else { %>
-                <%= household.owners[0].label %> {{ __('is the owner', 'accessnyc-screener') }}
+                <%= household.owners[0].label %> {{ __("is the owner", "accessnyc-screener") }}
                 <% } %>
               <% } else { %>
                 <span class="list-inline-comma">
-                  <% _.each(household.owners, function(owner) { %>
+                  <% household.owners.forEach(function(owner) { %>
                   <span><%= owner.label %></span>
                   <% }); %>
                 </span>
-                {{ __('are the owners', 'accessnyc-screener') }}
+                {{ __("are the owners", "accessnyc-screener") }}
               <% } %>
             </span>
           <% } %>
@@ -198,8 +198,8 @@
 
   <div>
     <h3 class="type-h4 text-color-blue-dark">
-      {{ __('Your zip code:', 'accessnyc-screener') }} <%= household.zip %>
-      <a role="button" href="#step-3" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __('Edit', 'accessnyc-screener') }}</a>
+      {{ __("Your zip code:", "accessnyc-screener") }} <%= household.zip %>
+      <a role="button" href="#step-3" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener") }}</a>
     </h3>
   </div>
 </div>

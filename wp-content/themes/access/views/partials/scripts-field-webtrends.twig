@@ -1,7 +1,7 @@
 {% if function('get_env', 'WEBTRENDS_PEU_ID') != '' %}
-<script>
+<script type="text/javascript" id="webtrends-config" nonce="{{ csp_script_nonce }}">
   var prod_dcsId_val = "{{ function('get_env', 'WEBTRENDS_PEU_ID') }}";
   var prod_host = "{{ function('get_env', 'WEBTRENDS_PEU_HOST') }}";
 </script>
-<script src="https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js"></script>
+<script src="https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js" type="text/javascript" id="webtrends" nonce="{{ csp_script_nonce }}"></script>
 {% endif %}

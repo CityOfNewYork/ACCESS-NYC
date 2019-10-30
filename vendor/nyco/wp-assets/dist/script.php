@@ -1,6 +1,6 @@
 <?php
 
-namespace Nyco\Enqueue;
+namespace NYCO\Enqueue;
 
 /**
  * Enqueue a hashed script based on it's name.

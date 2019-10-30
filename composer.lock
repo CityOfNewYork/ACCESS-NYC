@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "339e49a8aea77ca980067558c2bf9ca7",
+    "content-hash": "1abdd379fcc6f9409398d2471723ef96",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -817,16 +817,16 @@
         },
         {
             "name": "nyco/wp-assets",
-            "version": "0.0.5",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-                "reference": "3fef28a4da51b697a0e39a2b9883b2865a9ebf35"
+                "reference": "a24daf5144b71c761e3e0d78f14f06a547559517"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/3fef28a4da51b697a0e39a2b9883b2865a9ebf35",
-                "reference": "3fef28a4da51b697a0e39a2b9883b2865a9ebf35",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/a24daf5144b71c761e3e0d78f14f06a547559517",
+                "reference": "a24daf5144b71c761e3e0d78f14f06a547559517",
                 "shasum": ""
             },
             "require-dev": {
@@ -851,20 +851,20 @@
                 "assets",
                 "wordpress"
             ],
-            "time": "2018-02-09T21:30:33+00:00"
+            "time": "2019-10-25T15:41:15+00:00"
         },
         {
             "name": "nyco/wp-config",
-            "version": "0.1.1",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-                "reference": "e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1"
+                "reference": "3961845513a3513e21202521c85b68695e3d5f23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1",
-                "reference": "e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/3961845513a3513e21202521c85b68695e3d5f23",
+                "reference": "3961845513a3513e21202521c85b68695e3d5f23",
                 "shasum": ""
             },
             "require": {
@@ -895,20 +895,20 @@
                 "environment",
                 "wordpress"
             ],
-            "time": "2019-03-25T14:32:38+00:00"
+            "time": "2019-10-25T15:19:59+00:00"
         },
         {
             "name": "nyco/wp-open-data-transients",
-            "version": "0.0.4",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-open-data-transients.git",
-                "reference": "3e448e9b00ef8203f197eaba0c19727a5b41bb20"
+                "reference": "15e7f37609aedff4a809887d6a9d07635c0854f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-open-data-transients/zipball/3e448e9b00ef8203f197eaba0c19727a5b41bb20",
-                "reference": "3e448e9b00ef8203f197eaba0c19727a5b41bb20",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-open-data-transients/zipball/15e7f37609aedff4a809887d6a9d07635c0854f6",
+                "reference": "15e7f37609aedff4a809887d6a9d07635c0854f6",
                 "shasum": ""
             },
             "require": {
@@ -925,6 +925,11 @@
             ],
             "authors": [
                 {
+                    "name": "NYC Opportunity",
+                    "email": "products@nycopportunity.nyc.gov",
+                    "homepage": "https://nyc.gov/opportunity"
+                },
+                {
                     "name": "Devon Hirth",
                     "email": "dehirth@nycopportunity.nyc.gov",
                     "homepage": "https://github.com/devowhippit"
@@ -938,7 +943,7 @@
                 "transients",
                 "wordpress"
             ],
-            "time": "2018-10-10T19:56:02+00:00"
+            "time": "2019-10-25T15:45:24+00:00"
         },
         {
             "name": "psr/container",

@@ -423,8 +423,8 @@ class Screener {
   _addMatrixSection(el) {
     const $el = $(el);
     const $target = $($el.data('renders'));
-    const template = $(`#screener-${$el.data('matrix')}-template`).html();
-    const renderedTemplate = _.template(template)({
+    const template = window.JST[`screener/template-${$el.data('matrix')}`];
+    const renderedTemplate = template({
       personIndex: parseInt($el.data('personIndex'), 10) || 0,
       matrixIndex: parseInt($el.data('matrixIndex'), 10) || 0
     });
@@ -519,8 +519,8 @@ class Screener {
         members.push(member);
       });
 
-      const summaryTemplate = $('#screener-member-summary-template').html();
-      const renderedSummaryTemplate = _.template(summaryTemplate)({
+      const summary = window.JST['screener/template-member-summary'];
+      const renderedSummaryTemplate = summary({
         members: members
       });
 
@@ -536,7 +536,6 @@ class Screener {
         $(section).data('personIndex', personIndex);
       }
 
-      const formTemplate = $('#screener-member-template').html();
       const templateData = {
         personIndex: personIndex,
         person: new ScreenerPerson().toObject(),
@@ -547,7 +546,8 @@ class Screener {
         templateData.person = this._people[personIndex].toObject();
       }
 
-      const renderedFormTemplate = _.template(formTemplate)(templateData);
+      const member = window.JST['screener/template-member'];
+      const renderedFormTemplate = member(templateData);
 
       $('#screener-household-member').html(renderedFormTemplate);
 
@@ -556,7 +556,6 @@ class Screener {
 
     if ($(section).attr('id') === 'step-10') {
       // add in family members here
-      const template = $('#screener-member-option-template').html();
       const people = [];
       _.each(this._people, (person, i) => {
         const obj = {
@@ -575,13 +574,14 @@ class Screener {
         people.push(obj);
       });
 
-      const ownerTemplate = _.template(template)({
+      const option = window.JST['screener/template-member-option'];
+      const ownerTemplate = option({
         attribute: 'livingOwnerOnDeed',
         people: people
       });
       $('#screener-possible-owners').html(ownerTemplate);
 
-      const leaseeTemplate = _.template(template)({
+      const leaseeTemplate = option({
         attribute: 'livingRentalOnLease',
         people: people
       });
@@ -1212,8 +1212,8 @@ class Screener {
       templateData.members.push(member);
     });
 
-    const template = $('#screener-recap-template').html();
-    const renderedTemplate = _.template(template)(templateData);
+    const template = window.JST['screener/template-recap'];
+    const renderedTemplate = template(templateData);
     $('#recap-body').html(renderedTemplate);
     return this;
   }

@@ -7,7 +7,7 @@ namespace Controller;
  */
 
 use Timber;
-use nyco\WpOpenDataTransients\Transients\Transients as Transients;
+use NYCO\Transients as Transients;
 
 /**
  * Single Location Controller

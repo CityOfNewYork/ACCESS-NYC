@@ -20,6 +20,7 @@ $categories = get_categories(array(
 ));
 
 $context['filters'] = [];
+$context['strings'] = [];
 
 // Set default language.
 global $sitepress;

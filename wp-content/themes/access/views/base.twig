@@ -1,13 +1,5 @@
-{% if language_code == 'en' %}
-    {% set urlBase = '' %}
-{% else %}
-    {% set urlBase = '/' ~ language_code %}
-{% endif %}
 <!DOCTYPE html>
-<html lang="{{ language_code }}"
-  {% if language_code == 'ar' or language_code =='ur' %}dir="rtl"{% endif %}
-  {% if is_print %}class="print-view"{% endif %}>
-
+<html lang="{{ language_code }}" dir="{{ direction }}" {% if is_print %}class="print-view"{% endif %}>
   <head>
     {% block html_head_container %}
       {{ function('enqueue_language_style', 'style') }}
@@ -15,11 +7,11 @@
 
       {% block head %}
       <meta name="theme-color" content="#FFFFFF">
-      <link rel="manifest" href="{{theme.path}}/manifest.960190a2.json">
+      <link rel="manifest" href="{{ theme.path }}/manifest.960190a2.json">
       {% endblock %}
 
       {% block scripts_head %}
-      {% include 'partials/scripts-google-tags.twig' with {head: true} only %}
+      {% include 'partials/scripts-google-tags.twig' with {head: true, csp_script_nonce: csp_script_nonce} only %}
       {% endblock %}
     {% endblock %}
   </head>
