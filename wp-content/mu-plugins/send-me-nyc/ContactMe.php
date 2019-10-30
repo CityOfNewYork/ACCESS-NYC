@@ -282,7 +282,7 @@ class ContactMe {
 
     $this->registerSetting(array(
       'id' => $this->prefix . '_from',
-      'title' => $this->secret_label,
+      'title' => $this->from_label,
       'section' => $section,
     ));
   }

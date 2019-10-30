@@ -44,6 +44,8 @@ class Site extends TimberSite {
     $context['end'] = ($direction === 'ltr') ? 'right' : 'left';
     $context['start'] = ($direction === 'ltr') ? 'left' : 'right';
 
+    $context['url_base'] = ($lang === 'en') ? '' : '/' . $lang;
+
     /** Get the links that need to appear in the search dropdown */
     $context['search_links'] = Timber::get_posts(array(
       'post_type' => 'program_search_links',
@@ -71,7 +73,7 @@ class Site extends TimberSite {
     $context['page_meta_desc'] = $this->getMetaDescription($context['language_code']);
 
     /** Create nonce for allowed resources */
-    // $context['script_nonce'] = $this->setXssHeaders();
+    $context['csp_script_nonce'] = (defined('CSP_SCRIPT_NONCE')) ? CSP_SCRIPT_NONCE : false;
 
     return $context;
   }
@@ -100,33 +102,5 @@ class Site extends TimberSite {
     }
 
     return $description;
-  }
-
-  /**
-   * Creates a new WordPress nonce, sends the content security policy for
-   * script source, and adds filter to include in script tags.
-   * @return  string  The newly created nonce
-   */
-  public function setXssHeaders() {
-    if (true === is_admin()) {
-      return false;
-    }
-
-    $nonce = wp_create_nonce();
-
-    // Add nonce CSP header
-    header("Content-Security-Policy: script-src 'nonce-$nonce' 'strict-dynamic'");
-    header("Content-Security-Policy: default-src 'self'");
-    header("Content-Security-Policy: frame-src 'none'"); // iframes
-    header("Content-Security-Policy: object-src 'none'"); // flash
-
-    header('X-Frame-Options: SAMEORIGIN');
-
-    // Add nonce to scripts loaded through the enqueue
-    add_filter('script_loader_tag', function($tag, $handle) use ($nonce) {
-      return str_replace(' src', ' nonce="' . $nonce . '" src', $tag);
-    }, 10, 2);
-
-    return $nonce;
   }
 }

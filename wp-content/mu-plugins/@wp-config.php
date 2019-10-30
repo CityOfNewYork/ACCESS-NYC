@@ -10,5 +10,5 @@
 
 if (file_exists(WPMU_PLUGIN_DIR . '/wp-config/Config.php')) {
   require_once WPMU_PLUGIN_DIR . '/wp-config/Config.php';
-  new Nyco\WpConfig\Config\Config(file_exists(__DIR__ . '/env.php'));
+  new NYCO\Config(file_exists(__DIR__ . '/env.php'));
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nyco\Enqueue;
+namespace NYCO\Enqueue;
 
 /**
  * Enqueue a hashed style based on it's name.

@@ -6,14 +6,14 @@
     {% if not programCategory | length %}
     <li><span class="c-filter__item">{{__('All Programs', 'accessnyctheme')}}</span></li>
     {% else %}
-    <li><a class="c-filter__item" href="{{ urlBase }}/programs">{{__('All Programs', 'accessnyctheme')}}</a></li>
+    <li><a class="c-filter__item" href="{{ url_base }}/programs">{{__('All Programs', 'accessnyctheme')}}</a></li>
     {% endif %}
 
     {% for category in categories %}
     {% if category.slug == programCategory.slug %}
     <li><span class="c-filter__item">{{ category.name }}</span></li>
     {% else %}
-    <li><a class="c-filter__item" href="{{ urlBase }}/programs/?program_cat={{ category.slug }}">{{ category.name }}</a></li>
+    <li><a class="c-filter__item" href="{{ url_base }}/programs/?program_cat={{ category.slug }}">{{ category.name }}</a></li>
     {% endif %}
     {% endfor %}
   </ul>

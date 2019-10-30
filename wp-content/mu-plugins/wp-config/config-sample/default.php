@@ -1,0 +1,5 @@
+<?php
+
+/**
+ * All environments config
+ */

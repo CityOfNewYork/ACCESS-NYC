@@ -15,6 +15,12 @@ $context['categories'] = get_categories(array(
   'hide_empty' => false
 ));
 
+// Add label key for string translation
+array_map(function($category) {
+  $category->label = $category->name;
+  return $category;
+}, $context['categories']);
+
 $context['formAction'] = admin_url('admin-ajax.php');
 
 $templates = array( 'screener/screener.twig' );

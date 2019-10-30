@@ -899,24 +899,24 @@
     },
     {
         "name": "nyco/wp-assets",
-        "version": "0.0.5",
-        "version_normalized": "0.0.5.0",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-            "reference": "3fef28a4da51b697a0e39a2b9883b2865a9ebf35"
+            "reference": "a24daf5144b71c761e3e0d78f14f06a547559517"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/3fef28a4da51b697a0e39a2b9883b2865a9ebf35",
-            "reference": "3fef28a4da51b697a0e39a2b9883b2865a9ebf35",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/a24daf5144b71c761e3e0d78f14f06a547559517",
+            "reference": "a24daf5144b71c761e3e0d78f14f06a547559517",
             "shasum": ""
         },
         "require-dev": {
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2018-02-09T21:30:33+00:00",
+        "time": "2019-10-25T15:41:15+00:00",
         "type": "package",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -939,17 +939,17 @@
     },
     {
         "name": "nyco/wp-config",
-        "version": "0.1.1",
-        "version_normalized": "0.1.1.0",
+        "version": "0.2.0",
+        "version_normalized": "0.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-            "reference": "e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1"
+            "reference": "3961845513a3513e21202521c85b68695e3d5f23"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1",
-            "reference": "e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/3961845513a3513e21202521c85b68695e3d5f23",
+            "reference": "3961845513a3513e21202521c85b68695e3d5f23",
             "shasum": ""
         },
         "require": {
@@ -961,7 +961,7 @@
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2019-03-25T14:32:38+00:00",
+        "time": "2019-10-25T15:19:59+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -985,17 +985,17 @@
     },
     {
         "name": "nyco/wp-open-data-transients",
-        "version": "0.0.4",
-        "version_normalized": "0.0.4.0",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-open-data-transients.git",
-            "reference": "3e448e9b00ef8203f197eaba0c19727a5b41bb20"
+            "reference": "15e7f37609aedff4a809887d6a9d07635c0854f6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-open-data-transients/zipball/3e448e9b00ef8203f197eaba0c19727a5b41bb20",
-            "reference": "3e448e9b00ef8203f197eaba0c19727a5b41bb20",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-open-data-transients/zipball/15e7f37609aedff4a809887d6a9d07635c0854f6",
+            "reference": "15e7f37609aedff4a809887d6a9d07635c0854f6",
             "shasum": ""
         },
         "require": {
@@ -1005,7 +1005,7 @@
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2018-10-10T19:56:02+00:00",
+        "time": "2019-10-25T15:45:24+00:00",
         "type": "wordpress-plugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -1013,6 +1013,11 @@
             "GPL-3.0+"
         ],
         "authors": [
+            {
+                "name": "NYC Opportunity",
+                "email": "products@nycopportunity.nyc.gov",
+                "homepage": "https://nyc.gov/opportunity"
+            },
             {
                 "name": "Devon Hirth",
                 "email": "dehirth@nycopportunity.nyc.gov",

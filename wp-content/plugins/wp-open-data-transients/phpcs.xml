@@ -2,18 +2,42 @@
 <ruleset name="nyco">
   <description>PSR2 with two spaces, braces on same line</description>
 
-  <!-- Scan only PHP files -->
-  <arg name="extensions" value="php"/>
+  <!-- Set width of output -->
+  <arg name="report-width" value="100" />
 
   <!-- Show colors in console -->
-  <arg value="-colors"/>
+  <arg value="-colors" />
 
-  <arg name="tab-width" value="1"/>
+  <!-- Set tab width to 1, the width of 1 tab is two spaces -->
+  <arg name="tab-width" value="1" />
+
+  <!-- Scan only PHP files -->
+  <arg name="extensions" value="php" />
+
+  <!-- Allow the report to be generated but do not error out -->
+  <config name="ignore_errors_on_exit" value="1" />
+  <config name="ignore_warnings_on_exit" value="1" />
+
+  <!-- Files to scan -->
+  <file>wp-content/themes/access/</file>
+  <file>wp-content/mu-plugins/</file>
+
+  <!-- Ignore WordPress, Composer dependencies, and specific libraries -->
+  <exclude-pattern>vendor/</exclude-pattern>
+  <exclude-pattern>wp-admin/</exclude-pattern>
+  <exclude-pattern>wp-includes/</exclude-pattern>
+  <exclude-pattern>wp-content/languages/</exclude-pattern>
+  <exclude-pattern>wp-content/plugins/</exclude-pattern>
+  <exclude-pattern>wp-content/uploads/</exclude-pattern>
+  <exclude-pattern>wp-content/mu-plugins/wp-config/</exclude-pattern>
+  <exclude-pattern>wp-content/themes/access/node_modules/</exclude-pattern>
 
   <rule ref="PSR2" />
 
   <rule ref="PSR2">
+    <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine" />
     <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine" />
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.SpaceAfterFunction" />
   </rule>
 
   <rule ref="Generic.Arrays.ArrayIndent">
@@ -25,7 +49,6 @@
   <rule ref="Generic.WhiteSpace.ScopeIndent">
     <properties>
       <property name="indent" value="2"/>
-      <property name="exact" value="true"/>
       <property name="tabIndent" value="false" />
     </properties>
   </rule>
@@ -51,8 +74,8 @@
   <rule ref="Squiz.WhiteSpace.FunctionSpacing">
     <properties>
       <property name="spacing" value="1" />
-      <property name="spacingBeforeFirst" value="1" />
-      <property name="spacingAfterLast" value="1" />
+      <property name="spacingBeforeFirst" value="0" />
+      <property name="spacingAfterLast" value="0" />
     </properties>
   </rule>
 

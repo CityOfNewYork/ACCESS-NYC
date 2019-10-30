@@ -36,7 +36,7 @@ function environment_string($env = 'Unkown') {
  */
 function enqueue_script($name, $cors = false) {
   require_once ABSPATH . '/vendor/nyco/wp-assets/dist/script.php';
-  $script = Nyco\Enqueue\script($name);
+  $script = NYCO\Enqueue\script($name);
 
   if ($cors) {
     add_crossorigin_attr($name);
@@ -68,7 +68,7 @@ function enqueue_language_style($name) {
   $lang = (!in_array(ICL_LANGUAGE_CODE, $languages))
   ? 'default' : ICL_LANGUAGE_CODE;
 
-  $style = Nyco\Enqueue\style("assets/styles/$name-$lang");
+  $style = NYCO\Enqueue\style("assets/styles/$name-$lang");
 }
 
 /**

@@ -10,6 +10,8 @@
         src="https://www.google.com/maps/embed/v1/place?&center={{ post.address.lat}},{{ post.address.lng }}&q={{ post.address.address|url_encode }}&key={{ function('get_env', 'GOOGLE_MAPS_EMBED') }}&zoom=15"></iframe>
     </section>
 
+    {{ cspr_iframes_nonce }}
+
     <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
       <div>
         <h1 class="c-header__descriptor" itemprop="name">
@@ -148,7 +150,7 @@
         {% endif %}
       </p>
 
-      {# <a class="btn btn-secondary btn-previous w-full print:hidden screen-desktop:hidden js-location-back" href="{{ urlBase }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
+      {# <a class="btn btn-secondary btn-previous w-full print:hidden screen-desktop:hidden js-location-back" href="{{ url_base }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">
         {{__('Back to map', 'accessnyc-locations')}}
       </a> #}
     </footer>

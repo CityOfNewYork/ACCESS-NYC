@@ -9,14 +9,16 @@
       <legend class="c-question__label">{{ __('Are you the head of the household?', 'accessnyc-screener') }}</legend>
 
       <p>
-        <button type="button" class="c-question__info btn btn-text btn-link js-tooltip-trigger" aria-describedby="tooltip-hoh">
+        <button type="button" class="c-question__info btn btn-text btn-link" data-js="tooltip-control" aria-describedby="tooltip-hoh">
           {{ __('This is what the head of household means.', 'accessnyc-screener') }}
+
           <svg class="icon icon-info">
             <use xlink:href="#icon-info"></use>
           </svg>
         </button>
       </p>
-      <div id="tooltip-hoh" class="tooltip">
+
+      <div id="tooltip-hoh" class="tooltip animated fadeInUp">
         <p>{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', 'accessnyc-screener') }}</p>
       </div>
 

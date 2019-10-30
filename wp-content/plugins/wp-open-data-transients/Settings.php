@@ -1,6 +1,6 @@
 <?php
 
-namespace nyco\WpOpenDataTransients\Settings;
+namespace NYCO\Transients\Settings;
 
 if (!is_admin()) {
   return;
@@ -10,7 +10,7 @@ if (!is_admin()) {
  * Dependencies
  */
 
-use nyco\WpOpenDataTransients\Validations as Validations;
+use NYCO\Transients\Validations as Validations;
 
 /**
  * Constants

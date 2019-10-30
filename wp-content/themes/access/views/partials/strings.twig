@@ -1,5 +1,5 @@
 {% spaceless %}
-<script type="text/javascript">
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
     {% for s in strings %}{

@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ urlBase }}/locations/json #}
+  {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ url_base }}/locations/json #}
   <main class="js-map layout--map screen-desktop:layout--sidebar color-light-background" id="content" data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('get_env', 'GOOGLE_MAPS_EMBED') }}">
     <div class="js-map-controls layout--map__sidebar">
       <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
@@ -76,21 +76,29 @@
   {% endfor %}
 {% endfor %}
 
-{% include 'partials/strings.twig' with {'strings': strings} only %}
-{% include 'partials/strings.twig' with {'strings': [
-  {
-    'label': 'Government Office',
-    'slug': 'GOVERNMENT_OFFICE'
-  }
-], 'translation_id': 'accessnyc-locations'} only %}
+{% include 'partials/strings.twig' with {
+  'csp_script_nonce': csp_script_nonce,
+  'strings': strings
+} only %}
+
+{% include 'partials/strings.twig' with {
+  'translation_id': 'accessnyc-locations',
+  'csp_script_nonce': csp_script_nonce,
+  'strings': [
+    {
+      'label': 'Government Office',
+      'slug': 'GOVERNMENT_OFFICE'
+    }
+  ]
+} only %}
 
 {{ function('enqueue_script', 'assets/js/locations') }}
 
-<script type="text/template" id="map-location-template">
-  {% include 'components/card-map-location.underscore.twig' %}
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
+  {% include 'jst/locations/template-card-map.js' %}
 </script>
 
-<script type="text/template" id="map-pagination-template">
-  {% include 'partials/locations-pagination.underscore.twig' %}
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
+  {% include 'jst/locations/template-pagination.js' %}
 </script>
 {% endblock %}

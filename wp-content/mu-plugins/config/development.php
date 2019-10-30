@@ -4,7 +4,10 @@
  * Development environment config
  */
 
-// Include the plugins module
+/**
+ * Include the plugins module
+ */
+
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 /**

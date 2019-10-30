@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-assets",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "type": "package",
   "license": "GPL-3.0+",
   "description": "WordPress package for asset helpers.",

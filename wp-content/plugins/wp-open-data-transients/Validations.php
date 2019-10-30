@@ -1,6 +1,6 @@
 <?php
 
-namespace nyco\WpOpenDataTransients\Validations;
+namespace NYCO\Transients\Validations;
 
 /**
  * Sanitize function for WP callback
