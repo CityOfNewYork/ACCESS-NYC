@@ -14,6 +14,23 @@ use NYCO\Transients as Transients;
  */
 class SingleLocation extends Timber\Post {
   /**
+   * Constructor
+   * @return  $this
+   */
+  public function __construct() {
+    enqueue_language_style('style');
+    enqueue_inline('rollbar');
+    enqueue_inline('webtrends');
+    enqueue_inline('data-layer');
+    enqueue_inline('google-optimize');
+    enqueue_inline('google-analytics');
+    enqueue_inline('google-tag-manager');
+    enqueue_script('assets/js/main');
+
+    return $this;
+  }
+
+  /**
    * Return the template for the location controller
    * @return [array] Array including the template string
    */

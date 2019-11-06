@@ -8,8 +8,4 @@
  */
 // phpcs:enable
 
-$S3PxmiCompatibility = '/s3-pxmi-compatibility/S3PxmiCompatibility.php';
-
-if (file_exists(plugin_dir_path(__FILE__) . $S3PxmiCompatibility)) {
-  require_once plugin_dir_path(__FILE__) . $S3PxmiCompatibility;
-}
+require_once plugin_dir_path(__FILE__) . '/s3-pxmi-compatibility/S3PxmiCompatibility.php';

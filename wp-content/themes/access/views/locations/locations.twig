@@ -92,8 +92,6 @@
   ]
 } only %}
 
-{{ function('enqueue_script', 'assets/js/locations') }}
-
 <script type="text/javascript" nonce="{{ csp_script_nonce }}">
   {% include 'jst/locations/template-card-map.js' %}
 </script>

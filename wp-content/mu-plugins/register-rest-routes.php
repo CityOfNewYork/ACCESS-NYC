@@ -8,6 +8,8 @@
  */
 // phpcs:enable
 
+use NYCO\WpAssets as WpAssets;
+
 add_action('rest_api_init', function() {
   include_once ABSPATH . 'wp-admin/includes/plugin.php';
   include_once WPMU_PLUGIN_DIR . '/rest/Auth.php';
@@ -183,4 +185,13 @@ add_action('rest_api_init', function() {
       return $response;
     }
   ));
+
+  /**
+   * Use NYCO WP Assets to build rest routes for inline scripts.
+   */
+  // $WpAssets = new WpAssets();
+  // $path = WPMU_PLUGIN_DIR . '/integrations/integrations.json';
+  // $integrations = json_decode(file_get_contents($path), true);
+
+  // $WpAssets->registerRestRoutes($integrations);
 });

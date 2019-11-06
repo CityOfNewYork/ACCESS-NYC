@@ -27,8 +27,6 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/screener') }}
-
 <script type="text/javascript" nonce="{{ csp_script_nonce }}">
   {% include 'jst/screener/template-income.js' %}
 </script>

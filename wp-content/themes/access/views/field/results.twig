@@ -226,8 +226,6 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/field') }}
-
 {% include 'partials/strings-share.twig' %}
 
 {% include 'partials/strings.twig' with {'translation_id': translationID, 'strings': [

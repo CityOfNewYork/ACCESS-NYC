@@ -9,9 +9,7 @@
  */
 // phpcs:enable
 
-if (file_exists(plugin_dir_path(__FILE__) . '/hide-preview-links/HidePreviewLinks.php')) {
-  require plugin_dir_path(__FILE__) . '/hide-preview-links/HidePreviewLinks.php';
-}
+require plugin_dir_path(__FILE__) . '/hide-preview-links/HidePreviewLinks.php';
 
 $removed_post_types = array(
   'homepage_tout',

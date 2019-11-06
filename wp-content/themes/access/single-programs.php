@@ -3,6 +3,15 @@
  * Program detail page
  */
 
+enqueue_language_style('style');
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
+enqueue_script('assets/js/programs');
+
 $context = Timber::get_context();
 
 // Gets the url parameter on the page for navigating each section.

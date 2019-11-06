@@ -1,0 +1,61 @@
+- handle: rollbar
+  path: https://cdn.jsdelivr.net/gh/rollbar/rollbar.js@2.13.0/dist/rollbar.snippet.js
+  dep: ROLLBAR_CLIENT_SIDE_ACCESS_TOKEN
+  localize:
+    - ROLLBAR_CLIENT_SIDE_ACCESS_TOKEN
+    - WP_ENV
+  in_footer: false
+  inline:
+    path: config/integrations/scripts/rollbar.js
+    position: before
+
+- handle: webtrends
+  path: https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js
+  dep: WEBTRENDS_ID
+  localize:
+    - WEBTRENDS_ID
+    - WEBTRENDS_HOST
+  in_footer: true
+  inline:
+    path: config/integrations/scripts/webtrends.js
+    position: before
+
+- handle: data-layer
+  dep: GOOGLE_OPTIMIZE_ID
+  in_footer: false
+  inline:
+    path: config/integrations/scripts/data-layer.js
+    position: before
+
+- handle: google-optimize
+  dep: GOOGLE_OPTIMIZE_ID
+  localize:
+    - GOOGLE_OPTIMIZE_ID
+  in_footer: false
+  inline:
+    path: config/integrations/scripts/google-optimize.js
+    position: before
+  style:
+    path: config/integrations/styles/google-optimize.css
+
+- handle: google-analytics
+  path: https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}
+  dep: GOOGLE_ANALYTICS
+  localize:
+    - GOOGLE_OPTIMIZE_ID
+    - GOOGLE_ANALYTICS
+  in_footer: false
+  inline:
+    path: config/integrations/scripts/google-analytics.js
+    position: after
+
+- handle: google-tag-manager
+  dep: GOOGLE_TAG_MANAGER
+  localize:
+    - GOOGLE_TAG_MANAGER
+  in_footer: false
+  inline:
+    path: config/integrations/scripts/google-tag-manager.js
+    position: before
+  body_open:
+    path: config/integrations/body/google-tag-manager.html

@@ -12,7 +12,6 @@ require_once ABSPATH . '/vendor/autoload.php';
 
 /**
  * Whoops PHP Error Handler
- *
  * @link https://github.com/filp/whoops
  */
 

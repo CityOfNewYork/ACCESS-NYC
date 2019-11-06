@@ -10,6 +10,15 @@
  * not related.
  */
 
+enqueue_language_style('style');
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
+enqueue_script('assets/js/locations');
+
 $context = Timber::get_context();
 
 // Get the program categories.

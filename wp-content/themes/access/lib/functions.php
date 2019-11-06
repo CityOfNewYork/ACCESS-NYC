@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Dependencies
+ */
+
+use NYCO\WpAssets as WpAssets;
+
+/**
  * Return a localized reading friendly string of the enviroment.
  * @param  string $env The environment string to return if uknown.
  * @return string      The localized reading friendly string.
@@ -35,25 +41,12 @@ function environment_string($env = 'Unkown') {
  * @return null
  */
 function enqueue_script($name, $cors = false) {
-  require_once ABSPATH . '/vendor/nyco/wp-assets/dist/script.php';
-  $script = NYCO\Enqueue\script($name);
+  $WpAssets = new WpAssets();
+  $script = $WpAssets::enqueueScript($name);
 
   if ($cors) {
-    add_crossorigin_attr($name);
+    $WpAssets::addCrossoriginAttr($name);
   }
-}
-
-/**
- * Helper to add cross origin anonymous attribute to scripts.
- * @param [string] $name The name of the script.
- */
-function add_crossorigin_attr($name) {
-  $name = end(explode('/', $name));
-  add_filter('script_loader_tag', function ($tag, $handle) use ($name) {
-    if ($name === $handle) {
-      return str_replace(' src', ' crossorigin="anonymous" src', $tag);
-    }
-  }, 10, 2);
 }
 
 /**
@@ -62,13 +55,28 @@ function add_crossorigin_attr($name) {
  * @return null
  */
 function enqueue_language_style($name) {
-  require_once ABSPATH . '/vendor/nyco/wp-assets/dist/style.php';
+  $WpAssets = new WpAssets();
 
   $languages = array('ar', 'ko', 'ur', 'zh-hant');
   $lang = (!in_array(ICL_LANGUAGE_CODE, $languages))
-  ? 'default' : ICL_LANGUAGE_CODE;
+    ? 'default' : ICL_LANGUAGE_CODE;
 
-  $style = NYCO\Enqueue\style("assets/styles/$name-$lang");
+  $style = $WpAssets::enqueueStyle("assets/styles/$name-$lang");
+}
+
+/**
+ * Enqueue a client-side integration.
+ * @param  [string] $name Key of the integration in the mu-plugins/integrations.json
+ * @return null
+ */
+function enqueue_inline($name) {
+  $WpAssets = new WpAssets();
+  $integrations = $WpAssets->loadIntegrations();
+
+  if ($integrations) {
+    $index = array_search($name, array_column($integrations, 'handle'));
+    $WpAssets->enqueueInline($integrations[$index]);
+  }
 }
 
 /**
@@ -85,6 +93,7 @@ function validate_params($namespace, $subject) {
     'guid' => '/^[a-zA-Z0-9]{13,13}$/',
     'step' => '/^[a-z,-]*$/'
   );
+
   preg_match($patterns[$namespace], $subject, $matches);
 
   return (isset($matches[0])) ? $matches[0] : ''; // fail silently

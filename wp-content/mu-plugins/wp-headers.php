@@ -28,7 +28,7 @@ add_action('wp_headers', function() {
 
   // Add nonce CSP header
   // Set default content security policy to only allow content from self
-  header('Content-Security-Policy: ' . implode('; ', [
+  $csp = 'Content-Security-Policy: ' . implode('; ', [
     // Set default to only allow content from self
     "default-src 'self'",
     // CSS, allow all and inline CSS
@@ -38,17 +38,20 @@ add_action('wp_headers', function() {
     // JS, allow specific scripts with nonce and their scripts
     "script-src 'self' 'nonce-$scripts' 'strict-dynamic'",
     // iFrames, google only
-    "frame-src https://www.google.com https://www.googletagmanager.com",
+    "frame-src https://www.google.com https://www.googletagmanager.com https://www.google-analytics.com",
     // Fonts, allow from self and gstatic.com (for Google Maps)
     "font-src 'self' https://fonts.gstatic.com",
     // No Flash
     "object-src 'none'"
-  ]));
+  ]);
 
-  // Add nonce to scripts loaded through the enqueue
-  add_filter('script_loader_tag', function($tag, $handle) use ($scripts) {
-    return str_replace(' src', ' nonce="' . $scripts . '" src', $tag);
-  }, 10, 2);
+  // Send the header
+  header($csp);
+
+  // Add nonce to scripts loaded through the wp_enqueue_script or wp_add_inline_script
+  add_filter('script_loader_tag', function($tag) use ($scripts) {
+    return preg_replace('/<script( )*/', '<script nonce="' . $scripts . '"$1', $tag);
+  });
 
   // Define global var for use elsewhere (to set to template content)
   // phpcs:disable
