@@ -16,7 +16,7 @@ import 'core-js/features/url-search-params';
 import 'whatwg-fetch';
 
 import jQuery from 'jquery';
-import Vue from 'vue/dist/vue.runtime';
+import Vue from 'vue/dist/vue.runtime.min';
 
 import CardVue from 'components/card/card.vue';
 import FilterMultiVue from 'components/filter/filter-multi.vue';
