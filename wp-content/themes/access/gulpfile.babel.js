@@ -10,7 +10,6 @@
 
 import del from 'del';
 import gulp from 'gulp';
-import notify from 'gulp-notify';
 import rename from 'gulp-rename';
 import hashFilename from 'gulp-hash-filename';
 import browserSync from 'browser-sync';
@@ -95,7 +94,6 @@ gulp.task('sass', () => gulp.src(`${ SRC }/scss/style-*.scss`)
     includePaths: ['node_modules', `${ PATTERNS_ACCESS }/src/`]
     .concat(require('bourbon').includePaths)
   })
-  .on('error', notify.onError())
   .on('error', sass.logError))
   .pipe(postcss([
     autoprefixer('last 2 versions'),
@@ -298,14 +296,12 @@ gulp.task('images', callback => {
       progressive: true,
       interlaced: true
     })))
-    .pipe(gulp.dest(`${ DIST }/img`))
-    .pipe(notify({ message: 'Images task complete' }))
+    .pipe(gulp.dest(`${ DIST }/img`));
 
   gulp.src([
       `${ PATTERNS_ACCESS }/src/svg/**/*.svg`
     ])
-    .pipe(gulp.dest(`${ DIST }/svg`))
-    .pipe(notify({ message: 'Images task complete' }));
+    .pipe(gulp.dest(`${ DIST }/svg`));
 
   callback();
 });
@@ -323,10 +319,7 @@ gulp.task('svgs', () =>
     .pipe(rename('icons.svg'))
     .pipe(gulp.dest('assets/svg/'))
     .pipe(hashFilename({format: HASH_FORMAT}))
-    .pipe(gulp.dest('assets/svg/'))
-    .pipe(notify({
-      message: 'SVG task complete'
-    }))
+    .pipe(gulp.dest('assets/svg/'));
 );
 
 /**
@@ -348,7 +341,6 @@ gulp.task('build', gulp.parallel(
 gulp.task('default', () => {
   let reload = () => {
     browserSync.reload();
-    notify({ message: 'Reload' });
   };
 
   // Create a .env file in the theme directory to define this.
