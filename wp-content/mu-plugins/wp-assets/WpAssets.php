@@ -5,13 +5,13 @@ namespace NYCO;
 use Spyc;
 
 class WpAssets {
-  var $namespace = 'assets';
+  public $namespace = 'assets';
 
-  var $config = 'config/integrations.yml';
+  public $config = 'config/integrations.yml';
 
-  var $placeholder = 'donotprintthis.js';
+  public $placeholder = 'donotprintthis.js';
 
-  var $version;
+  public $version;
 
   public function __construct() {
     $this->version = wp_get_theme()->version;
@@ -28,15 +28,15 @@ class WpAssets {
    * @param [array]   $deps      Optional, maps to wp_enqueue_script $deps. Default: array()
    * @param [array]   $in_footer Optional, maps to wp_enqueue_script $in_footer. Default: true
    * @param [string]  $ext       Optional, the extension of the file. Default: '.css'
-   * @return array               Collecition containing the directory, uri, filename, source, hash, and uglified boolean.
+   * @return array               Collecition containing directory, uri, filename, source, hash, and uglified boolean.
    */
   public function enqueueScript(
-    $name = 'main',
-    $ugl = '',
-    $sep = '.',
-    $deps = array(),
-    $in_footer = true,
-    $ext = '.js'
+      $name = 'main',
+      $ugl = '',
+      $sep = '.',
+      $deps = array(),
+      $in_footer = true,
+      $ext = '.js'
   ) {
     $dir = get_template_directory();
     $uri = get_template_directory_uri();
@@ -85,7 +85,8 @@ class WpAssets {
   /**
    * Enqueue a hashed style based on it's name.
    * @param [string]  $name  Optional, The base name of the stylesheet source. Default: 'style'
-   * @param [boolean] $min   Optional, The post fix for minified files if you have two files. One that is minified and one that is not. Default: ''
+   * @param [boolean] $min   Optional, The post fix for minified files if you have two files. One that is minified and
+   *                         one that is not. Default: ''
    * @param [string]  $sep   Optional, The separator between the base name and the hash. Default: '.'
    * @param [array]   $deps  Optional, maps to wp_enqueue_style $deps. Default: array()
    * @param [string]  $media Optional, maps to wp_enqueue_style $media. Default: 'all'
@@ -93,12 +94,12 @@ class WpAssets {
    * @return array           Collecition containing the directory, uri, filename, source, hash, and minified boolean.
    */
   public function enqueueStyle(
-    $name = 'style',
-    $min = '',
-    $sep = '.',
-    $deps = [],
-    $media = 'all',
-    $ext = '.css'
+      $name = 'style',
+      $min = '',
+      $sep = '.',
+      $deps = [],
+      $media = 'all',
+      $ext = '.css'
   ) {
     $dir = get_template_directory();
     $uri = get_template_directory_uri();
@@ -289,7 +290,6 @@ class WpAssets {
   }
 
   private function bodyOpen() {
-
   }
 
   /**
