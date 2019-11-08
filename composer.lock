@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a8f45b51e42a8affd93649153b3e51a",
+    "content-hash": "afa5a05d702c36c45043d54c754942a5",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1904,7 +1904,10 @@
                 "composer/installers": "^1.0",
                 "enelogic/wpml-installer": "^0.1"
             },
-            "type": "wordpress-plugin"
+            "type": "wordpress-plugin",
+            "extra": {
+                "installer-name": "sitepress-multilingual-cms"
+            }
         },
         {
             "name": "wpml/wpml-string-translation",

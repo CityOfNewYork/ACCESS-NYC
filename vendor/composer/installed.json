@@ -2464,6 +2464,9 @@
             "enelogic/wpml-installer": "^0.1"
         },
         "type": "wordpress-plugin",
+        "extra": {
+            "installer-name": "sitepress-multilingual-cms"
+        },
         "installation-source": "dist"
     },
     {

@@ -32,6 +32,9 @@
           "require": {
             "enelogic/wpml-installer": "^0.1",
             "composer/installers": "^1.0"
+          },
+          "extra": {
+            "installer-name": "sitepress-multilingual-cms"
           }
       }
     },
@@ -150,6 +153,9 @@
     ],
     "deps": [
       "composer show --tree"
+    ],
+    "post-install-cmd": [
+      "mv wp-content/plugins/wpml-multilingual-cms wp-content/plugins/sitepress-multilingual-cms"
     ]
   }
 }
