@@ -90,7 +90,12 @@ Not all plugins can be managed by Composer. Specifically [Advanced Custom Fields
 Additional configuration and functions can be found in the ACCESS NYC Theme.
 
 #### Composer Plugins
-The [**composer.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/composer.json) file illustrates which plugins can be managed by Composer. WordPress Plugins can be installed either from [WordPress Packagist](https://wpackagist.org/) or from Packagist via the [Composer Libray Installer](https://github.com/composer/installers). Other php packages that are not plugins and stored in the `/vendor` directory are tracked by git so they can be deployed with the code. See the [**.gitignore**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/.gitignore) file under the "Composer" section to see which ones.
+The [**composer.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/composer.json) file illustrates which plugins can be managed by Composer. WordPress Plugins can be installed either from [WordPress Packagist](https://wpackagist.org/) or from Packagist via the [Composer Libray Installer](https://github.com/composer/installers). Also, included is a [special installer that will download WPML plugins](https://packagist.org/packages/enelogic/wpml-installer) that are not available on WordPress Packagist or Packagist. Other php packages that are not plugins and stored in the `/vendor` directory are tracked by git so they can be deployed with the code. See the [**.gitignore**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/.gitignore) file under the "Composer" section to see which ones.
+
+The [WPML Installer](https://packagist.org/packages/enelogic/wpml-installer) requires setting environment variables containing your WPML account information so they aren't committed to the repository. This can either be done with a **.env** file or by exporting them in your bash profile;
+
+    export WPML_KEY=$YOUR_WPML_KEY
+    export WPML_USER_ID=$YOUR_WPML_USER_ID
 
 Before installing dependencies the development autoloader should be generated. This will include development dependencies in the autoloader:
 
@@ -107,6 +112,8 @@ For example:
 ... will update the *ACF to Rest API* plugin to version 3.1.0. Updating plugins individually is recommended when testing for compatibility. **Once you are done developing generate the production autoloader which will remove development dependencies in the autoloader:**
 
     composer run predeploy
+
+##### WPML Installer
 
 ## Using Composer
 

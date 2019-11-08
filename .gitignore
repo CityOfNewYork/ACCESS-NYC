@@ -35,7 +35,6 @@
 /wp-content/backup-db/*
 /wp-content/backups/
 /wp-content/advanced-cache.php
-/wp-content/themes/access/.env
 /wp-content/wp-cache-config.php
 /wp-content/cache/*
 /wp-content/cache/supercache/*
@@ -69,6 +68,10 @@
 ################
 /wp-content/themes/access/assets/js/*.development.js
 /wp-content/themes/access/assets/**/*.map
+
+# ENV Files #
+#############
+.env
 
 # Packages #
 ############
