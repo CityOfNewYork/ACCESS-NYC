@@ -18,6 +18,8 @@ class SingleLocation extends Timber\Post {
    * @return  $this
    */
   public function __construct() {
+    parent::__construct();
+
     enqueue_language_style('style');
     enqueue_inline('rollbar');
     enqueue_inline('webtrends');
