@@ -1,10 +1,10 @@
 <div class="p-2 flex items-center justify-end">
   <div class="text-font-size-small px-2 text-end">
-    {{ __("Showing", "accessnyc-locations") }} <%= displayedCount %> {{ __("of", "accessnyc-locations") }} <%= totalCount %>
+    {{ __("Showing", "accessnyc-locations")|trim|json_encode() }} <%= displayedCount %> {{ __("of", "accessnyc-locations")|trim }} <%= totalCount %>
   </div>
   <% if (displayedCount < totalCount) { %>
   <div>
-    <button class="btn btn-secondary btn-next btn-small js-map-more">{{ __("Show more", "accessnyc-locations") }}</button>
+    <button class="btn btn-secondary btn-next btn-small js-map-more">{{ __("Show more", "accessnyc-locations")|trim }}</button>
   </div>
   <% } %>
 </div>

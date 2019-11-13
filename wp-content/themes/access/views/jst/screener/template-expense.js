@@ -15,11 +15,11 @@ __p+='\n    <label class="c-question__label" for="person-'+
 ((__t=( matrixIndex ))==null?'':__t)+
 '-type">\n      ';
  if (personIndex === 0) { 
-__p+='\n      {{ __("What type of expense have you had most recently?", "accessnyc-screener") }}\n      ';
+__p+='\n      {{ __("What type of expense have you had most recently?", "accessnyc-screener")|trim }}\n      ';
  } else { 
-__p+='\n      {{ __("What type of expense have they had most recently?", "accessnyc-screener") }}\n      ';
+__p+='\n      {{ __("What type of expense have they had most recently?", "accessnyc-screener")|trim }}\n      ';
  } 
-__p+='\n    </label>\n    <p>{{ __("Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.", "accessnyc-screener") }}</p>\n    ';
+__p+='\n    </label>\n    <p>{{ __("Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim }}</p>\n    ';
  } else { 
 __p+='\n    <label class="c-question__label d-inline-block m-bottom" for="person-'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -27,9 +27,9 @@ __p+='\n    <label class="c-question__label d-inline-block m-bottom" for="person
  print(matrixIndex + 1) 
 __p+='-type">\n      ';
  if (personIndex === 0) { 
-__p+='\n      {{ __("If you have another type of expense, select it below.", "accessnyc-screener") }}\n      ';
+__p+='\n      {{ __("If you have another type of expense, select it below.", "accessnyc-screener")|trim }}\n      ';
  } else { 
-__p+='\n      {{ __("If they have another type of expense, select it below.", "accessnyc-screener") }}\n      ';
+__p+='\n      {{ __("If they have another type of expense, select it below.", "accessnyc-screener")|trim }}\n      ';
  } 
 __p+='\n    </label>\n    ';
  } 
@@ -53,7 +53,7 @@ __p+='"\n          data-matrix="expense"\n          data-matrix-index="';
  print(matrixIndex + 1) 
 __p+='"\n          data-person-index="'+
 ((__t=( personIndex ))==null?'':__t)+
-'">\n        <option value="">{{ __("Click to add an expense type", "accessnyc-screener") }}</option>\n        <option value="ChildCare">{{ __("Child Care", "accessnyc-screener") }}</option>\n        <option value="ChildSupport">{{ __("Child Support (Paid)", "accessnyc-screener") }}</option>\n        <option value="DependentCare">{{ __("Dependent Care", "accessnyc-screener") }}</option>\n        <option value="Rent">{{ __("Rent", "accessnyc-screener") }}</option>\n        <option value="Medical">{{ __("Medical expense", "accessnyc-screener") }}</option>\n        <option value="Heating">{{ __("Heating", "accessnyc-screener") }}</option>\n        <option value="Cooling">{{ __("Cooling", "accessnyc-screener") }}</option>\n        <option value="Mortgage">{{ __("Mortgage", "accessnyc-screener") }}</option>\n        <option value="Utilities">{{ __("Utilities", "accessnyc-screener") }}</option>\n        <option value="Telephone">{{ __("Telephone", "accessnyc-screener") }}</option>\n        <option value="InsurancePremiums">{{ __("Third Party Insurance Premiums", "accessnyc-screener") }}</option>\n      </select>\n    </div>\n  </div>\n\n  <div id="screener-person-'+
+'">\n        <option value="">{{ __("Click to add an expense type", "accessnyc-screener")|trim }}</option>\n        <option value="ChildCare">{{ __("Child Care", "accessnyc-screener")|trim }}</option>\n        <option value="ChildSupport">{{ __("Child Support (Paid)", "accessnyc-screener")|trim }}</option>\n        <option value="DependentCare">{{ __("Dependent Care", "accessnyc-screener")|trim }}</option>\n        <option value="Rent">{{ __("Rent", "accessnyc-screener")|trim }}</option>\n        <option value="Medical">{{ __("Medical expense", "accessnyc-screener")|trim }}</option>\n        <option value="Heating">{{ __("Heating", "accessnyc-screener")|trim }}</option>\n        <option value="Cooling">{{ __("Cooling", "accessnyc-screener")|trim }}</option>\n        <option value="Mortgage">{{ __("Mortgage", "accessnyc-screener")|trim }}</option>\n        <option value="Utilities">{{ __("Utilities", "accessnyc-screener")|trim }}</option>\n        <option value="Telephone">{{ __("Telephone", "accessnyc-screener")|trim }}</option>\n        <option value="InsurancePremiums">{{ __("Third Party Insurance Premiums", "accessnyc-screener")|trim }}</option>\n      </select>\n    </div>\n  </div>\n\n  <div id="screener-person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-expense-'+
 ((__t=( matrixIndex ))==null?'':__t)+
@@ -61,7 +61,7 @@ __p+='"\n          data-person-index="'+
 ((__t=( personIndex ))==null?'':__t)+
 '-expenses-'+
 ((__t=( matrixIndex ))==null?'':__t)+
-'-amount">\n        {{ __("How much is this type of expense:", "accessnyc-screener") }}\n        <span data-js="transaction-label"></span>?\n      </label>\n      <div class="c-question__container">\n        <div class="input-currency-usd">\n          <input id="person-'+
+'-amount">\n        {{ __("How much is this type of expense:", "accessnyc-screener")|trim }}\n        <span data-js="transaction-label"></span>?\n      </label>\n      <div class="c-question__container">\n        <div class="input-currency-usd">\n          <input id="person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-expenses-'+
 ((__t=( matrixIndex ))==null?'':__t)+
@@ -75,9 +75,9 @@ __p+='"\n          data-person-index="'+
 ((__t=( matrixIndex ))==null?'':__t)+
 '-frequency">\n        ';
  if (personIndex === 0) { 
-__p+='\n        {{ __("How often do you have this expense:", "accessnyc-screener") }}\n        ';
+__p+='\n        {{ __("How often do you have this expense:", "accessnyc-screener")|trim }}\n        ';
  } else { 
-__p+='\n        {{ __("How often do they have this expense:", "accessnyc-screener") }}\n        ';
+__p+='\n        {{ __("How often do they have this expense:", "accessnyc-screener")|trim }}\n        ';
  } 
 __p+='\n        <span data-js="transaction-label"></span>?\n      </label>\n      <div class="c-question__container">\n        <select class="select" id="person-'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -87,7 +87,7 @@ __p+='\n        <span data-js="transaction-label"></span>?\n      </label>\n    
 ((__t=( personIndex ))==null?'':__t)+
 '].expenses['+
 ((__t=( matrixIndex ))==null?'':__t)+
-'].frequency" required>\n          <option value="">{{ __("Click to add an expense frequency", "accessnyc-screener") }}</option>\n          <option value="weekly">{{ __("Every week", "accessnyc-screener") }}</option>\n          <option value="biweekly">{{ __("Every 2 weeks", "accessnyc-screener") }}</option>\n          <option value="monthly">{{ __("Monthly", "accessnyc-screener") }}</option>\n          <option value="semimonthly">{{ __("Twice a month", "accessnyc-screener") }}</option>\n          <option value="yearly">{{ __("Every year", "accessnyc-screener") }}</option>\n        </select>\n      </div>\n    </div>\n\n  </div>\n</div>\n';
+'].frequency" required>\n          <option value="">{{ __("Click to add an expense frequency", "accessnyc-screener")|trim }}</option>\n          <option value="weekly">{{ __("Every week", "accessnyc-screener")|trim }}</option>\n          <option value="biweekly">{{ __("Every 2 weeks", "accessnyc-screener")|trim }}</option>\n          <option value="monthly">{{ __("Monthly", "accessnyc-screener")|trim }}</option>\n          <option value="semimonthly">{{ __("Twice a month", "accessnyc-screener")|trim }}</option>\n          <option value="yearly">{{ __("Every year", "accessnyc-screener")|trim }}</option>\n        </select>\n      </div>\n    </div>\n\n  </div>\n</div>\n';
 }
 return __p;
 }

@@ -7,7 +7,7 @@ __p+='';
  members.forEach(function(member, index) { 
 __p+='\n<li>\n  ';
  if (index === 0 && !member.isHoh) { 
-__p+='\n  <span class="c-member-list__item">{{ __("You", "accessnyc-screener") }}</span>\n  ';
+__p+='\n  <span class="c-member-list__item">{{ __("You", "accessnyc-screener")|trim }}</span>\n  ';
  } 
 __p+='\n  <span class="c-member-list__item">'+
 ((__t=( member.relation ))==null?'':__t)+
@@ -15,7 +15,7 @@ __p+='\n  <span class="c-member-list__item">'+
 ((__t=( member.age ))==null?'':__t)+
 '</span>\n  ';
  if (index === 0 && member.isHoh) { 
-__p+='\n  <span class="c-member-list__item">{{ __("Head of household", "accessnyc-screener") }}</span>\n  ';
+__p+='\n  <span class="c-member-list__item">{{ __("Head of household", "accessnyc-screener")|trim }}</span>\n  ';
  } 
 __p+='\n</li>\n';
  }); 
