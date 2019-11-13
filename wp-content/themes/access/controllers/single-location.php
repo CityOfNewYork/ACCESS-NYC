@@ -27,7 +27,7 @@ class SingleLocation extends Timber\Post {
     enqueue_inline('google-optimize');
     enqueue_inline('google-analytics');
     enqueue_inline('google-tag-manager');
-    enqueue_script('assets/js/main');
+    enqueue_script('main');
 
     return $this;
   }
@@ -46,7 +46,7 @@ class SingleLocation extends Timber\Post {
    * @return [array] Collection of nearby stops.
    */
   public function nearbyStops() {
-    if (!class_exists('nyco\WpOpenDataTransients\Transients\Transients')) {
+    if (!class_exists('NYCO\Transients')) {
       return false;
     }
 

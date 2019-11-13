@@ -42,10 +42,12 @@ function environment_string($env = 'Unkown') {
  */
 function enqueue_script($name, $cors = false) {
   $WpAssets = new WpAssets();
-  $script = $WpAssets::enqueueScript($name);
+  $WpAssets->scripts = 'js/';
+
+  $script = $WpAssets->addScript($name);
 
   if ($cors) {
-    $WpAssets::addCrossoriginAttr($name);
+    $WpAssets->addCrossoriginAttr($name);
   }
 }
 
@@ -61,7 +63,7 @@ function enqueue_language_style($name) {
   $lang = (!in_array(ICL_LANGUAGE_CODE, $languages))
     ? 'default' : ICL_LANGUAGE_CODE;
 
-  $style = $WpAssets::enqueueStyle("assets/styles/$name-$lang");
+  $style = $WpAssets->addStyle("$name-$lang");
 }
 
 /**

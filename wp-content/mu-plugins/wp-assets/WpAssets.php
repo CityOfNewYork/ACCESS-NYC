@@ -5,149 +5,190 @@ namespace NYCO;
 use Spyc;
 
 class WpAssets {
-  public $namespace = 'assets';
+  /** @var String Will be set to the template driectory in the constructor */
+  public $templates;
 
+  /** @var String Will be set to the template driectory uri in the constructor */
+  public $uri;
+
+  /** @var String The directory within $templates for precompiled static assets */
+  public $assets = 'assets/';
+
+  /** @var String The directory within $assets for stripts */
+  public $scripts = 'scripts/';
+
+  /** @var String The directory within $assets for stripts */
+  public $styles = 'styles/';
+
+  /** @var String The directory within mu for stripts */
   public $config = 'config/integrations.yml';
 
+  /** @var String Script placeholder that is deregistered for adding inline scripts */
   public $placeholder = 'donotprintthis.js';
 
+  /** @var String Namespace for registering REST routes */
+  public $namespace = 'assets';
+
+  /** @var String Will be set to the theme version in the constructor for REST routes namespace */
   public $version;
 
+  /** @var Number Will be set to the WordPress constant for REST routes transient cache expiration */
+  public $exp;
+
+  /**
+   * Constructor
+   *
+   * @return  This
+   */
   public function __construct() {
+    $this->templates = get_template_directory();
+
+    $this->uri = get_template_directory_uri();
+
     $this->version = wp_get_theme()->version;
+
     $this->exp = WEEK_IN_SECONDS;
 
     return $this;
   }
 
   /**
-   * Enqueue a hashed script based on it's name. Enqueue the minified version based on debug mode.
-   * @param [string]  $name      The name of the script source
-   * @param [boolean] $ugl       Optional, The post fix for minified files. Default: ''
-   * @param [string]  $sep       Optional, The separator between the base name and the hash. Default: '.'
-   * @param [array]   $deps      Optional, maps to wp_enqueue_script $deps. Default: array()
-   * @param [array]   $in_footer Optional, maps to wp_enqueue_script $in_footer. Default: true
-   * @param [string]  $ext       Optional, the extension of the file. Default: '.css'
-   * @return array               Collecition containing directory, uri, filename, source, hash, and uglified boolean.
+   * Register and/or enqueue a hashed script based on it's name.  File name should
+   * match the pattern "scripts.{{ hash }}.js" by default. The separator '.' can be configured.
+   *
+   * @param   String   $handle     The name of the file without a hashname. Default: 'scripts'
+   * @param   Boolean  $enqueue    Wether to enqueue the file or not. Default: true
+   * @param   Array    $deps       Maps to wp_register/enqueue_script $deps. Default: array()
+   * @param   String   $ver        Maps to wp_register/enqueue_script $ver. Default: null
+   * @param   Boolean  $in_footer  Maps to wp_register/enqueue_script $in_footer. Default: true
+   * @param   String   $sep        The separator between the base name and the hash. Default: '.'
+   *
+   * @return  Array                Key/value pair including registered Boolean, enqueued Boolean,
+   *                               and found source String of file.
    */
-  public function enqueueScript(
-      $name = 'main',
-      $ugl = '',
-      $sep = '.',
+  public function addScript(
+      $handle = 'scripts',
+      $enqueue = true,
       $deps = array(),
+      $ver = null,
       $in_footer = true,
-      $ext = '.js'
+      $sep = '.'
   ) {
-    $dir = get_template_directory();
-    $uri = get_template_directory_uri();
-
-    // If the name includes a path, separate them.
-    if (strpos($name, '/') !== false) {
-      $path = explode('/', $name);
-      $name = $path[sizeof($path) - 1];
-      unset($path[sizeof($path) - 1]);
-      $path = implode('/', $path);
-      $dir = "$dir/$path";
-      $uri = "$uri/$path";
-    }
-
-    // Scan the directory for the file with the name.
-    $files = array_filter(
-      scandir($dir),
-      function ($var) use ($name, $sep) {
-        return (strpos($var, "$name$sep") !== false);
-      }
-    );
-
-    // Get the hash from the first matched file.
-    $hash = str_replace(["$name$sep", $ext], '', array_values($files)[0]);
-    // Set the $ugl variable if debug is on
-    $ugl = (isset($_GET['debug'])) ? '' : $ugl;
-    // Build the file name
-    $filename = "$name$sep$hash$ugl$ext";
     // Build the source
-    $src = "$uri/$filename";
+    $src = self::findSrc($handle, '.js', $sep);
 
-    // Enqueue the script
-    wp_enqueue_script($name, $src, $deps, null, $in_footer);
+    /**
+     * Add the script
+     */
+
+    wp_register_script($handle, $src, $deps, $ver, $in_footer);
+
+    if ($enqueue) {
+      wp_enqueue_script($handle, $src, $deps, $ver, $in_footer);
+    } else {
+      $enqueue = false;
+    }
 
     // Return what we've found
     return array(
-      'directory' => $dir,
-      'uri' => $uri,
-      'filename' => $filename,
       'source' => $src,
-      'hash' => $hash,
-      'uglified' => ($ugl !== '') ? true : false
+      'registered' => $registered,
+      'enqueued' => $enqueued
     );
   }
 
   /**
-   * Enqueue a hashed style based on it's name.
-   * @param [string]  $name  Optional, The base name of the stylesheet source. Default: 'style'
-   * @param [boolean] $min   Optional, The post fix for minified files if you have two files. One that is minified and
-   *                         one that is not. Default: ''
-   * @param [string]  $sep   Optional, The separator between the base name and the hash. Default: '.'
-   * @param [array]   $deps  Optional, maps to wp_enqueue_style $deps. Default: array()
-   * @param [string]  $media Optional, maps to wp_enqueue_style $media. Default: 'all'
-   * @param [string]  $ext   Optional, the extension of the file. Default: '.css'
-   * @return array           Collecition containing the directory, uri, filename, source, hash, and minified boolean.
+   * Register and/or enqueue a hashed style based on it's name. File name should
+   * match the pattern "styles.{{ hash }}.css". The separator '.' can be configured.
+   *
+   * @param   String   $handle   The name of the file without a hashname. Default: 'styles'
+   * @param   Boolean  $enqueue  Wether to enqueue the file or not. Default: true
+   * @param   Array    $deps     Maps to wp_register/enqueue_style $deps. Default: array()
+   * @param   String   $ver      Maps to wp_register/enqueue_style $ver. Default: null
+   * @param   String   $media    Maps to wp_register/enqueue_style $media. Default: 'all'
+   * @param   String   $sep      The separator between the base name and the hash. Default: '.'
+   *
+   * @return  Array              Key/value pair including registered Boolean, enqueued Boolean,
+   *                             and found source String of file.
    */
-  public function enqueueStyle(
-      $name = 'style',
-      $min = '',
-      $sep = '.',
+  public function addStyle(
+      $handle = 'styles',
+      $enqueue = true,
       $deps = [],
+      $ver = null,
       $media = 'all',
-      $ext = '.css'
+      $sep = '.'
   ) {
-    $dir = get_template_directory();
-    $uri = get_template_directory_uri();
-
-    // If the name includes a path, separate them.
-    if (strpos($name, '/') !== false) {
-      $path = explode('/', $name);
-      $name = $path[sizeof($path) - 1];
-      unset($path[sizeof($path) - 1]);
-      $path = implode('/', $path);
-      $dir = "$dir/$path";
-      $uri = "$uri/$path";
-    }
-
-    // Scan the directory for the file with the name.
-    $files = array_filter(
-      scandir($dir),
-      function ($var) use ($name, $sep) {
-        return (strpos($var, "$name$sep") !== false);
-      }
-    );
-
-    // Get the hash from the first matched file.
-    $hash = str_replace(["$name$sep", $ext], '', array_values($files)[0]);
-    // Set the $min variable if debug is on
-    $min = (isset($_GET['debug'])) ? '' : $min;
-    // Build the file name
-    $filename = "$name$sep$hash$min$ext";
     // Build the source
-    $src = "$uri/$filename";
+    $src = self::findSrc($handle, '.css', $sep);
 
-    // Enqueue the style
-    wp_enqueue_style($name, $src, $deps, null, $media);
+    /**
+     * Add the style
+     */
+
+    $registered = wp_register_style($handle, $src, $deps, $ver, $media);
+
+    if ($enqueue) {
+      $enqueued = wp_enqueue_style($handle, $src, $deps, $ver, $media);
+    } else {
+      $enqueued = false;
+    }
 
     // Return what we've found
     return array(
-      'directory' => $dir,
-      'uri' => $uri,
-      'filename' => $filename,
       'source' => $src,
-      'hash' => $hash,
-      'minified' => ($min !== '') ? true : false
+      'registered' => $registered,
+      'enqueued' => $enqueued
+    );
+  }
+
+  /**
+   * Builds the source based on the contents of the assets directory
+   *
+   * @param   String  $handle  The main prefix of the filename
+   * @param   String  $ext     The extension of the filename. Default '.js'
+   * @param   String  $sep     The seperator between the hash and the filename. Default '.'
+   *
+   * @return  String           The URI source of the script.
+   */
+  private function findSrc($handle, $ext = '.js', $sep = '.') {
+    // Scan the proper directory of the file.
+    $sub = ($ext === '.js') ? $this->scripts : $this->styles;
+    $files = self::find($sub, $handle, $sep);
+
+    // Get the hash from the first matched file.
+    $hash = str_replace(["$handle$sep", $ext], '', array_values($files)[0]);
+
+    // Build the file name
+    $filename = "$handle$sep$hash$ext";
+
+    // Build the source
+    return $this->uri . '/' . $this->assets . $sub . $filename;
+  }
+
+  /**
+   * Scans the specified asset directory of the current theme
+   *
+   * @param   String  $sub     The sub directory within $assets to look for the file in.
+   * @param   String  $handle  The main prefix of the filename.
+   * @param   String  $sep     The seperator between the hash and the filename. Default '.'
+   *
+   * @return  Array            An array of all matched files.
+   */
+  private function find($sub, $handle, $sep = '.') {
+    $dir = $this->templates . '/' . $this->assets . $sub;
+    return array_filter(
+      scandir($dir),
+      function ($var) use ($handle, $sep) {
+        return (strpos($var, "$handle$sep") !== false);
+      }
     );
   }
 
   /**
    * Helper to add cross origin anonymous attribute to a specific script.
-   * @param [string] $name The name of the script.
+   *
+   * @param  String  $name  The name of the script.
    */
   public function addCrossoriginAttr($name) {
     $name = end(explode('/', $name));
@@ -159,6 +200,13 @@ class WpAssets {
     }, 10, 2);
   }
 
+  /**
+   * Gets integrations from the MU Plugins directory
+   *
+   * @param   String  $path  Accepts a custom to the integrations file within the Must Use Plugins directory
+   *
+   * @return  Array          Key/value array of all integrations
+   */
   public function loadIntegrations($path = false) {
     $path = ($path) ? $path : $this->config;
 
@@ -289,13 +337,12 @@ class WpAssets {
     return $s;
   }
 
-  private function bodyOpen() {
-  }
-
   /**
-   * Removes the placeholder script created for including an inline script
-   * @param   string  $tag  The script code block passed to the script_loader_tag WP hook
-   * @return  string        The tag with the placeholder script removed
+   * Removes the placeholder script created for including an inline script.
+   *
+   * @param   String  $tag  The script code block passed to the script_loader_tag WP hook.
+   *
+   * @return  String        The tag with the placeholder script removed.
    */
   private function removePlaceholder($tag) {
     if (strpos($tag, $this->placeholder)) {
@@ -309,9 +356,11 @@ class WpAssets {
   /**
    * Shorthand function for creating register and enqueue scripts arguments.
    * Returns the full set of args for @link https://developer.wordpress.org/reference/functions/wp_enqueue_script/
+   *
    * @param   String   $handle     Name for the script
    * @param   String   $src        Path or url for the script
    * @param   Boolean  $in_footer  Wether to have the script in the footer or head
+   *
    * @return  Array                Full array of arguments
    */
   private function scriptArgs($handle, $src, $in_footer) {
@@ -321,8 +370,10 @@ class WpAssets {
   /**
    * Takes a configuration object of scripts and registers WP Rest Routes for
    * the configured inline scripts.
-   * @param   Object  $scripts  [$scripts description]
-   * @return  Object            [return description]
+   *
+   * @param   Object  $scripts  The integrations configuration.
+   *
+   * @return  Object            Returns the integrations configuration with all rest route details.
    */
   public function registerRestRoutes($scripts) {
     return array_map(function($script) use ($namespace) {
@@ -336,8 +387,10 @@ class WpAssets {
 
   /**
    * Register a WP REST route for a particular script to load from
+   *
    * @param   Object    $script  A configured script with an inline object
    * @param   Function  $auth    The authentication method to use
+   *
    * @return  Object             The same script with the REST route and URL
    */
   private function registerRestRoute($script, $auth) {
@@ -367,16 +420,19 @@ class WpAssets {
   }
 
   /**
-   * Get a WordPress REST API url for a particular script
-   * @param   String  $handle  Name of the registered script
-   * @return  String           Full URL of the script
+   * Get a WordPress REST API url for a particular script.
+   *
+   * @param   String  $handle  Name of the registered script.
+   *
+   * @return  String           Full URL of the script.
    */
   private function restUrl($handle) {
     return rest_url('/' . self::restNamespace() . self::restRoute($handle));
   }
 
   /**
-   * Create a consistent namespace for the registered WP REST API endpoints
+   * Create a consistent namespace for the registered WP REST API endpoints.
+   *
    * @return  String  The namespace, default will be "assets/v{{ theme version }}"
    */
   private function restNamespace() {
@@ -384,9 +440,11 @@ class WpAssets {
   }
 
   /**
-   * Create a consistent route for each script
-   * @param   String  $handle  Name of the registered script
-   * @return  String           The route, default will be "/{{ handle }}.js/"
+   * Create a consistent route for each script.
+   *
+   * @param   String  $handle  Name of the registered script.
+   *
+   * @return  String           The route, default will be "/{{ handle }}.js/".
    */
   private function restRoute($handle) {
     return "/$handle.js/";
@@ -395,9 +453,11 @@ class WpAssets {
   /**
    * Takes file contents from the path argument in the WPMU_PLUGIN_DIR and
    * replaces template tag contents of the script with real ENV variables.
-   * @param   String  $path      Path to a script file
-   * @param   [type]  $localize  [$localize description]
-   * @return  String             The contents of the script file
+   *
+   * @param   String  $path      Path to a script file.
+   * @param   Array   $localize  An array of constants to pass to the string.
+   *
+   * @return  String             The contents of the script file.
    */
   private function getFileContents($path, $localize) {
     $inline_path = WPMU_PLUGIN_DIR . '/' . $path;
@@ -407,10 +467,12 @@ class WpAssets {
   }
 
   /**
-   * Replaces all instances of a set of constants with constant values in string
-   * @param   String  $string   The string to localize
-   * @param   Array  $localize  An array of constants to pass to the string
-   * @return  String            The localized string
+   * Replaces all instances of a set of constants with constant values in string.
+   *
+   * @param   String  $string   The string to localize.
+   * @param   Array  $localize  An array of constants to pass to the string.
+   *
+   * @return  String            The localized string.
    */
   private function localize($string, $localize) {
     foreach ($localize as $value) {

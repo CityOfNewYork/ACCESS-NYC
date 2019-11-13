@@ -1,11 +1,16 @@
 {
   "name": "nyco/wp-assets",
-  "version": "0.1.0",
-  "type": "package",
+  "version": "1.0.0",
+  "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "WordPress package for asset helpers.",
   "homepage": "https://github.com/cityofnewyork/nyco-wp-assets",
   "authors": [
+    {
+      "name": "NYC Opportunity",
+      "email": "products@nycopportunity.nyc.gov",
+      "homepage": "https://nyc.gov/opportunity"
+    },
     {
       "name": "Devon Hirth",
       "email": "dehirth@nycopportunity.nyc.gov",
@@ -14,10 +19,16 @@
   ],
   "keywords": [
     "wordpress",
-    "assets"
+    "assets",
+    "configuration",
+    "integrations"
   ],
   "support": {
     "issues": "https://github.com/cityofnewyork/nyco-wp-assets/issues"
+  },
+  "require": {
+    "composer/installers": "^1.7",
+    "mustangostang/spyc": "0.6.2"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "3.*",
@@ -25,10 +36,10 @@
   },
   "scripts": {
     "lint": [
-      "vendor/bin/phpcs --standard=standard.xml --extensions=php --ignore=vendor/ ./dist"
+      "vendor/bin/phpcs --standard=standard.xml --extensions=php"
     ],
-    "format": [
-      "vendor/bin/phpcbf --standard=standard.xml --extensions=php --ignore=vendor/ ./dist"
+    "fix": [
+      "vendor/bin/phpcbf --standard=standard.xml --extensions=php"
     ]
   }
 }

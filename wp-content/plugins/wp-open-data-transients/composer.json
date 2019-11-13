@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-open-data-transients",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "wordpress-plugin",
   "license": "GPL-3.0+",
   "description": "Interface for saving Open Data endpoints as WordPress Transients.",
@@ -35,7 +35,7 @@
   },
   "scripts": {
     "lint": [
-      "vendor/bin/phpcs --standard=phpcs.xml --ignore=vendor/ ."
+      "vendor/bin/phpcs --standard=phpcs.xml --ignore=vendor/,views/ ."
     ],
     "fix": [
       "vendor/bin/phpcbf --standard=phpcs.xml --ignore=vendor/ ."

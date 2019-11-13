@@ -19,18 +19,10 @@
   <config name="ignore_warnings_on_exit" value="1" />
 
   <!-- Files to scan -->
-  <file>wp-content/themes/access/</file>
-  <file>wp-content/mu-plugins/</file>
+  <file>./</file>
 
   <!-- Ignore WordPress, Composer dependencies, and specific libraries -->
-  <exclude-pattern>vendor/</exclude-pattern>
-  <exclude-pattern>wp-admin/</exclude-pattern>
-  <exclude-pattern>wp-includes/</exclude-pattern>
-  <exclude-pattern>wp-content/languages/</exclude-pattern>
-  <exclude-pattern>wp-content/plugins/</exclude-pattern>
-  <exclude-pattern>wp-content/uploads/</exclude-pattern>
-  <exclude-pattern>wp-content/mu-plugins/wp-config/</exclude-pattern>
-  <exclude-pattern>wp-content/themes/access/node_modules/</exclude-pattern>
+  <exclude-pattern>./vendor</exclude-pattern>
 
   <rule ref="PSR2" />
 

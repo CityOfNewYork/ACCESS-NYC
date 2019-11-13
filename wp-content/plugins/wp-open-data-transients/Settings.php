@@ -56,7 +56,7 @@ $settings = array(
   [
     'id' => 'open_data_app_token',
     'title' => 'App Token',
-    'callback' => 'nyco\WpOpenDataTransients\Settings\settings_template',
+    'callback' => 'NYCO\Transients\Settings\settings_template',
     'page' => ID,
     'section' => $sections[0]['id'],
     'args' => [
@@ -65,14 +65,14 @@ $settings = array(
     ],
     'type' => 'string',
     'description' => '',
-    'sanitize_callback' => 'nyco\WpOpenDataTransients\Validations\sanitize',
+    'sanitize_callback' => 'NYCO\Transients\Validations\sanitize',
     'show_in_rest' => false,
     'default' => ''
   ],
   [
     'id' => 'open_data_transients_saved',
     'title' => 'Transients',
-    'callback' => 'nyco\WpOpenDataTransients\Settings\settings_template',
+    'callback' => 'NYCO\Transients\Settings\settings_template',
     'page' => ID,
     'section' => '',
     'args' => [
@@ -81,7 +81,7 @@ $settings = array(
     ],
     'type' => 'string',
     'description' => '',
-    'sanitize_callback' => 'nyco\WpOpenDataTransients\Validations\sanitize_transients',
+    'sanitize_callback' => 'NYCO\Transients\Validations\sanitize_transients',
     'show_in_rest' => false,
     'default' => null
   ],

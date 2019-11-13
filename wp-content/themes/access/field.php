@@ -10,7 +10,7 @@ enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
-enqueue_script('assets/js/field');
+enqueue_script('field');
 
 $context = Timber::get_context();
 
