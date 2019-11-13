@@ -37,8 +37,10 @@ add_action('wp_headers', function() {
     "img-src * data: 'unsafe-inline'",
     // JS, allow specific scripts with nonce and their scripts
     "script-src 'self' 'nonce-$scripts' 'strict-dynamic'",
-    // iFrames, google only
-    "frame-src https://www.google.com https://www.googletagmanager.com https://www.google-analytics.com",
+    // Allow XMLHttpRequests (AJAX) to the same origin and Rollbar
+    "connect-src 'self' https://api.rollbar.com/",
+    // iFrames, Google only
+    "frame-src https://www.google.com https://www.googletagmanager.com https://www.google-analytics.com https://optimize.google.com",
     // Fonts, allow from self and gstatic.com (for Google Maps)
     "font-src 'self' https://fonts.gstatic.com",
     // No Flash
