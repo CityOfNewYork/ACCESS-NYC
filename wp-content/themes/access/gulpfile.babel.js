@@ -319,7 +319,7 @@ gulp.task('svgs', () =>
     .pipe(rename('icons.svg'))
     .pipe(gulp.dest('assets/svg/'))
     .pipe(hashFilename({format: HASH_FORMAT}))
-    .pipe(gulp.dest('assets/svg/'));
+    .pipe(gulp.dest('assets/svg/'))
 );
 
 /**
