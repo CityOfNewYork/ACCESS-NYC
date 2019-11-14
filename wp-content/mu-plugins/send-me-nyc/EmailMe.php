@@ -52,6 +52,8 @@ class EmailMe extends ContactMe {
     $context['post'] = new Controller\SingleSmnycEmail($id);
     $html = Timber::compile($context['post']->templates(), $context);
 
+    // error_log(print_r($context['post']->title, true));
+
     $subject = $context['post']->title;
     $text_body = Html2Text::convert($context['post']->post_content);
 

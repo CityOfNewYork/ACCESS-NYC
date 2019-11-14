@@ -68,6 +68,7 @@
 ################
 /wp-content/themes/access/assets/js/*.development.js
 /wp-content/themes/access/assets/**/*.map
+/wp-content/themes/access/testing.php
 
 # ENV Files #
 #############
