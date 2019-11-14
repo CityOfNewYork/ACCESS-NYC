@@ -5,8 +5,8 @@
       <use xlink:href="#icon-ui-settings"></use>
     </svg>
 
-    <span class="o-text-controller__title-full">Translate &amp; Adjust Text</span>
-    <span class="o-text-controller__title-short">Translate Text</span>
+    <span class="o-text-controller__title-full">{{ __('Translate &amp; Adjust Text', 'accessnyctheme') }}</span>
+    <span class="o-text-controller__title-short">{{ __('Translate Text', 'accessnyctheme') }}</span>
   </button>
 
   {% endspaceless %}
@@ -17,7 +17,7 @@
 
     <div class="o-text-controller__sizer">
       <em class="o-text-controller__sizer-text">
-        {{__('Adjust text size', 'accessnyctheme')}}
+        {{ __('Adjust text size', 'accessnyctheme') }}
       </em>
 
       <button class="o-text-controller__sizer-btn btn-text" data-js="track,text-larger" data-track-key="Text Sizer" data-track-data='[{"action": "text-size/larger"}]'>
@@ -25,7 +25,7 @@
           <use xlink:href="#icon-ui-plus-circle"></use>
         </svg>
 
-        <div class="sr-only">{{__('Larger', 'accessnyctheme')}}</div>
+        <div class="sr-only">{{ __('Larger', 'accessnyctheme') }}</div>
       </button>
 
       <button class="o-text-controller__sizer-btn btn-text" data-js="track,text-smaller" data-track-key="Text Sizer" data-track-data='[{"action": "text-size/smaller"}]'>
@@ -33,7 +33,7 @@
           <use xlink:href="#icon-ui-minus-circle"></use>
         </svg>
 
-        <div class="sr-only">{{__('Smaller', 'accessnyctheme')}}</div>
+        <div class="sr-only">{{ __('Smaller', 'accessnyctheme') }}</div>
       </button>
     </div>
   </div>
