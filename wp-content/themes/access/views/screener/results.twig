@@ -30,9 +30,9 @@
       <aside class="mb-4 print:hidden">
         <h4 class="type-h3 text-color-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>
 
-        <a class="btn btn-primary block mb-2" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]' role="button">
-          {{__('Print', 'accessnyc-results')}}
-        </a>
+        <button class="btn btn-primary w-full mb-2" data-js="window-print, track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]'>
+          {{ __('Print', 'accessnyc-results') }}
+        </button>
 
         {% include 'components/share-form.twig' with {this: {
           class: 'mb-2',

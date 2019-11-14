@@ -215,6 +215,19 @@ import Toggle from 'utilities/toggle/toggle';
   }
 
   /**
+   *
+   */
+  (elements => {
+    elements.forEach(element => {
+      element.addEventListener('click', event => {
+        event.preventDefault();
+
+        window.print();
+      });
+    });
+  })(document.querySelectorAll('[data-js*="window-print"]'));
+
+  /**
    * Add noopener attribute to new window links if it isn't there.
    */
   (elements => {
