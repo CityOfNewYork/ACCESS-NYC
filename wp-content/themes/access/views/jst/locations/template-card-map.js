@@ -29,7 +29,7 @@ __p+='</span>\n      </span>\n    </p>\n    <p class="text-font-size-small text-
  print(location.programs.map(function(program) { return localize(program) }).join(", ")) 
 __p+='\n    </p>\n    <a href="'+
 ((__t=( location.link ))==null?'':__t)+
-'" class="link-more text-font-size-small font-bold" itemprop="url" target="_blank">{{ __("more about this location", "accessnyc-locations")|trim }}</a>\n  </div>\n</li>\n';
+'" class="link-more text-font-size-small font-bold" itemprop="url" target="_blank">{{ __("more about this location", "accessnyc-locations")|trim|escape("js") }}</a>\n  </div>\n</li>\n';
  }); 
 __p+='';
 }

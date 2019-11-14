@@ -5,18 +5,18 @@
     <% if (matrixIndex === 0) { %>
     <label class="c-question__label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
       <% if (personIndex === 0) { %>
-      {{ __("What type of income have you had most recently?", "accessnyc-screener")|trim }}
+      {{ __("What type of income have you had most recently?", "accessnyc-screener")|trim|escape("js") }}
       <% } else { %>
-      {{ __("What type of income have they had most recently?", "accessnyc-screener")|trim }}
+      {{ __("What type of income have they had most recently?", "accessnyc-screener")|trim|escape("js") }}
       <% } %>
     </label>
-    <p>{{ __("Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim }}</p>
+    <p>{{ __("Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim|escape("js") }}</p>
     <% } else { %>
     <label class="c-question__label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
       <% if (personIndex === 0) { %>
-      {{ __("If you receive another type of income, select it below.", "accessnyc-screener")|trim }}
+      {{ __("If you receive another type of income, select it below.", "accessnyc-screener")|trim|escape("js") }}
       <% } else { %>
-      {{ __("If they receive another type of income, select it below.", "accessnyc-screener")|trim }}
+      {{ __("If they receive another type of income, select it below.", "accessnyc-screener")|trim|escape("js") }}
       <% } %>
     </label>
     <% } %>
@@ -30,28 +30,28 @@
           data-matrix="income"
           data-matrix-index="<% print(matrixIndex + 1) %>"
           data-person-index="<%= personIndex %>">
-        <option value="" selected>{{ __("Click to add an income type", "accessnyc-screener")|trim }}</option>
-        <option value="Wages">{{ __("wages, salaries, tips", "accessnyc-screener")|trim }}</option>
-        <option value="SelfEmployment">{{ __("self-employment income", "accessnyc-screener")|trim }}</option>
-        <option value="Unemployment">{{ __("unemployment benefits", "accessnyc-screener")|trim }}</option>
-        <option value="CashAssistance">{{ __("Cash Assistance grant", "accessnyc-screener")|trim }}</option>
-        <option value="ChildSupport">{{ __("child support (received)", "accessnyc-screener")|trim }}</option>
-        <option value="DisabilityMedicaid">{{ __("disability-related Medicaid", "accessnyc-screener")|trim }}</option>
-        <option value="SSI">{{ __("Supplemental Security Income (SSI)", "accessnyc-screener")|trim }}</option>
-        <option value="SSDependent">{{ __("Social Security Dependent Benefits", "accessnyc-screener")|trim }}</option>
-        <option value="SSDisability">{{ __("Social Security Disability Benefits", "accessnyc-screener")|trim }}</option>
-        <option value="SSSurvivor">{{ __("Social Security Survivor’s Benefits", "accessnyc-screener")|trim }}</option>
-        <option value="SSRetirement">{{ __("Social Security Retirement Benefits", "accessnyc-screener")|trim }}</option>
-        <option value="NYSDisability">{{ __("New York State Disability Benefits", "accessnyc-screener")|trim }}</option>
-        <option value="Veteran">{{ __("Veteran’s Pension or Benefits", "accessnyc-screener")|trim }}</option>
-        <option value="Pension">{{ __("Government or Private Pension", "accessnyc-screener")|trim }}</option>
-        <option value="DeferredComp">{{ __("Withdrawals from Deferred Compensation (IRA, Keogh, etc.)", "accessnyc-screener")|trim }}</option>
-        <option value="WorkersComp">{{ __("Worker’s Compensation", "accessnyc-screener")|trim }}</option>
-        <option value="Alimony">{{ __("alimony (received)", "accessnyc-screener")|trim }}</option>
-        <option value="Boarder">{{ __("boarder or lodger", "accessnyc-screener")|trim }}</option>
-        <option value="Gifts">{{ __("gifts/contributions (received)", "accessnyc-screener")|trim }}</option>
-        <option value="Rental">{{ __("rental income", "accessnyc-screener")|trim }}</option>
-        <option value="Investment">{{ __("investment income (interest, dividends, and profit from selling stocks)", "accessnyc-screener")|trim }}</option>
+        <option value="" selected>{{ __("Click to add an income type", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Wages">{{ __("wages, salaries, tips", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="SelfEmployment">{{ __("self-employment income", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Unemployment">{{ __("unemployment benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="CashAssistance">{{ __("Cash Assistance grant", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="ChildSupport">{{ __("child support (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="DisabilityMedicaid">{{ __("disability-related Medicaid", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="SSI">{{ __("Supplemental Security Income (SSI)", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="SSDependent">{{ __("Social Security Dependent Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="SSDisability">{{ __("Social Security Disability Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="SSSurvivor">{{ __("Social Security Survivor’s Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="SSRetirement">{{ __("Social Security Retirement Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="NYSDisability">{{ __("New York State Disability Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Veteran">{{ __("Veteran’s Pension or Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Pension">{{ __("Government or Private Pension", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="DeferredComp">{{ __("Withdrawals from Deferred Compensation (IRA, Keogh, etc.)", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="WorkersComp">{{ __("Worker’s Compensation", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Alimony">{{ __("alimony (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Boarder">{{ __("boarder or lodger", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Gifts">{{ __("gifts/contributions (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Rental">{{ __("rental income", "accessnyc-screener")|trim|escape("js") }}</option>
+        <option value="Investment">{{ __("investment income (interest, dividends, and profit from selling stocks)", "accessnyc-screener")|trim|escape("js") }}</option>
       </select>
     </div>
   </div>
@@ -60,9 +60,9 @@
     <div class="c-question">
       <label class="c-question__label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount">
         <% if (personIndex === 0) { %>
-        {{ __("How much do you receive for this type of income:", "accessnyc-screener")|trim }}
+        {{ __("How much do you receive for this type of income:", "accessnyc-screener")|trim|escape("js") }}
         <% } else { %>
-        {{ __("How much do they receive for this type of income:", "accessnyc-screener")|trim }}
+        {{ __("How much do they receive for this type of income:", "accessnyc-screener")|trim|escape("js") }}
         <% } %>
         <span data-js="transaction-label"></span>?
       </label>
@@ -76,20 +76,20 @@
     <div class="c-question">
       <label class="c-question__label d-inline-block m-bottom" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency">
         <% if (personIndex === 0) { %>
-        {{ __("How often do you receive this income:", "accessnyc-screener")|trim }}
+        {{ __("How often do you receive this income:", "accessnyc-screener")|trim|escape("js") }}
         <% } else { %>
-        {{ __("How often do they receive this income:", "accessnyc-screener")|trim }}
+        {{ __("How often do they receive this income:", "accessnyc-screener")|trim|escape("js") }}
         <% } %>
         <span data-js="transaction-label"></span>?
       </label>
       <div class="c-question__container">
         <select class="select" id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].frequency" required>
-          <option value="">{{ __("Click to add an income frequency", "accessnyc-screener")|trim }}</option>
-          <option value="weekly">{{ __("Every week", "accessnyc-screener")|trim }}</option>
-          <option value="biweekly">{{ __("Every 2 weeks", "accessnyc-screener")|trim }}</option>
-          <option value="monthly">{{ __("Monthly", "accessnyc-screener")|trim }}</option>
-          <option value="semimonthly">{{ __("Twice a month", "accessnyc-screener")|trim }}</option>
-          <option value="yearly">{{ __("Every year", "accessnyc-screener")|trim }}</option>
+          <option value="">{{ __("Click to add an income frequency", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="weekly">{{ __("Every week", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="biweekly">{{ __("Every 2 weeks", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="monthly">{{ __("Monthly", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="semimonthly">{{ __("Twice a month", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="yearly">{{ __("Every year", "accessnyc-screener")|trim|escape("js") }}</option>
         </select>
       </div>
     </div>

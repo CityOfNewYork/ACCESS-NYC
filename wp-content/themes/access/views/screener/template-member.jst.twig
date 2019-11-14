@@ -1,5 +1,5 @@
 <div class="c-question">
-  <label class="c-question__label" for="person-<%= personIndex %>-age">{{ __("How old are they?", "accessnyc-screener")|trim }}</label>
+  <label class="c-question__label" for="person-<%= personIndex %>-age">{{ __("How old are they?", "accessnyc-screener")|trim|escape("js") }}</label>
   <div class="c-question__container">
     <input id="person-<%= personIndex %>-age" name="Person[<%= personIndex %>].age" value="<% if(person.age) { print(person.age) } %>" type="number" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>
   </div>
@@ -8,25 +8,25 @@
 <hr class="divider-light">
 
 <div class="c-question">
-  <label class="c-question__label" for="person-<%= personIndex %>-relation">{{ __("What is this person’s relationship to the head of the household?", "accessnyc-screener")|trim }}</label>
+  <label class="c-question__label" for="person-<%= personIndex %>-relation">{{ __("What is this person’s relationship to the head of the household?", "accessnyc-screener")|trim|escape("js") }}</label>
   <div class="c-question__container">
     <select class="select" id="person<%= personIndex %>-relation" name="Person[<%= personIndex %>].headOfHouseholdRelation" required>
-      <option value="">{{ __("Click to select relationship", "accessnyc-screener")|trim }}</option>
-      <option value="Child"<% if (person.headOfHouseholdRelation === "Child") { print(" selected") }%>>{{ __("Child", "accessnyc-screener")|trim }}</option>
-      <option value="FosterChild"<% if (person.headOfHouseholdRelation === "FosterChild") { print(" selected") }%>>{{ __("Foster Child", "accessnyc-screener")|trim }}</option>
-      <option value="StepChild"<% if (person.headOfHouseholdRelation === "StepChild") { print(" selected") }%>>{{ __("Step-child", "accessnyc-screener")|trim }}</option>
-      <option value="Grandchild"<% if (person.headOfHouseholdRelation === "Grandchild") { print(" selected") }%>>{{ __("Grandchild", "accessnyc-screener")|trim }}</option>
-      <option value="Spouse"<% if (person.headOfHouseholdRelation === "Spouse") { print(" selected") }%>>{{ __("Spouse", "accessnyc-screener")|trim }}</option>
-      <option value="Parent"<% if (person.headOfHouseholdRelation === "Parent") { print(" selected") }%>>{{ __("Parent", "accessnyc-screener")|trim }}</option>
-      <option value="FosterParent"<% if (person.headOfHouseholdRelation === "FosterParent") { print(" selected") }%>>{{ __("Foster Parent", "accessnyc-screener")|trim }}</option>
-      <option value="StepParent"<% if (person.headOfHouseholdRelation === "StepParent") { print(" selected") }%>>{{ __("Step-parent", "accessnyc-screener")|trim }}</option>
-      <option value="Grandparent"<% if (person.headOfHouseholdRelation === "Grandparent") { print(" selected") }%>>{{ __("Grandparent", "accessnyc-screener")|trim }}</option>
-      <option value="SisterBrother"<% if (person.headOfHouseholdRelation === "SisterBrother") { print(" selected") }%>>{{ __("Sister/Brother", "accessnyc-screener")|trim }}</option>
-      <option value="StepSisterStepBrother"<% if (person.headOfHouseholdRelation === "StepSisterStepBrother") { print(" selected") }%>>{{ __("Step-sister/Step-brother", "accessnyc-screener")|trim }}</option>
-      <option value="BoyfriendGirlfriend"<% if (person.headOfHouseholdRelation === "BoyfriendGirlfriend") { print(" selected") }%>>{{ __("Boyfriend/Girlfriend", "accessnyc-screener")|trim }}</option>
-      <option value="DomesticPartner"<% if (person.headOfHouseholdRelation === "DomesticPartner") { print(" selected") }%>>{{ __("Domestic Partner", "accessnyc-screener")|trim }}</option>
-      <option value="Unrelated"<% if (person.headOfHouseholdRelation === "Unrelated") { print(" selected") }%>>{{ __("Unrelated", "accessnyc-screener")|trim }}</option>
-      <option value="Other"<% if (person.headOfHouseholdRelation === "Other") { print(" selected") }%>>{{ __("Related in some other way", "accessnyc-screener")|trim }}</option>
+      <option value="">{{ __("Click to select relationship", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="Child"<% if (person.headOfHouseholdRelation === "Child") { print(" selected") }%>>{{ __("Child", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="FosterChild"<% if (person.headOfHouseholdRelation === "FosterChild") { print(" selected") }%>>{{ __("Foster Child", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="StepChild"<% if (person.headOfHouseholdRelation === "StepChild") { print(" selected") }%>>{{ __("Step-child", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="Grandchild"<% if (person.headOfHouseholdRelation === "Grandchild") { print(" selected") }%>>{{ __("Grandchild", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="Spouse"<% if (person.headOfHouseholdRelation === "Spouse") { print(" selected") }%>>{{ __("Spouse", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="Parent"<% if (person.headOfHouseholdRelation === "Parent") { print(" selected") }%>>{{ __("Parent", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="FosterParent"<% if (person.headOfHouseholdRelation === "FosterParent") { print(" selected") }%>>{{ __("Foster Parent", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="StepParent"<% if (person.headOfHouseholdRelation === "StepParent") { print(" selected") }%>>{{ __("Step-parent", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="Grandparent"<% if (person.headOfHouseholdRelation === "Grandparent") { print(" selected") }%>>{{ __("Grandparent", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="SisterBrother"<% if (person.headOfHouseholdRelation === "SisterBrother") { print(" selected") }%>>{{ __("Sister/Brother", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="StepSisterStepBrother"<% if (person.headOfHouseholdRelation === "StepSisterStepBrother") { print(" selected") }%>>{{ __("Step-sister/Step-brother", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="BoyfriendGirlfriend"<% if (person.headOfHouseholdRelation === "BoyfriendGirlfriend") { print(" selected") }%>>{{ __("Boyfriend/Girlfriend", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="DomesticPartner"<% if (person.headOfHouseholdRelation === "DomesticPartner") { print(" selected") }%>>{{ __("Domestic Partner", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="Unrelated"<% if (person.headOfHouseholdRelation === "Unrelated") { print(" selected") }%>>{{ __("Unrelated", "accessnyc-screener")|trim|escape("js") }}</option>
+      <option value="Other"<% if (person.headOfHouseholdRelation === "Other") { print(" selected") }%>>{{ __("Related in some other way", "accessnyc-screener")|trim|escape("js") }}</option>
     </select>
   </div>
 </div>
@@ -34,64 +34,64 @@
 <hr class="divider-light">
 
 <fieldset class="c-question">
-  <legend class="c-question__label">{{ __("Do any of these apply to them?", "accessnyc-screener")|trim }}</legend>
-  <p>{{ __("It’s OK to pick more than one.", "accessnyc-screener")|trim }}</p>
+  <legend class="c-question__label">{{ __("Do any of these apply to them?", "accessnyc-screener")|trim|escape("js") }}</legend>
+  <p>{{ __("It’s OK to pick more than one.", "accessnyc-screener")|trim|escape("js") }}</p>
   <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
     <label class="checkbox">
       <input class="js-screener-toggle" type="checkbox" name="Person[<%= personIndex %>].student" value="1" data-toggles="#screener-is-person-<%= personIndex %>-full-time-student" data-type="boolean"<% if (person.student) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("Student", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("Student", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="checkbox">
       <input type="checkbox" name="Person[<%= personIndex %>].pregnant" value="1" data-type="boolean"<% if (person.pregnant) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("Pregnant", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("Pregnant", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="checkbox">
       <input class="js-screener-toggle" type="checkbox" name="Person[<%= personIndex %>].unemployed" value="1" data-toggles="#screener-did-person-<%= personIndex %>-work-last-18-months" data-type="boolean"<% if (person.unemployed) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("Unemployed", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("Unemployed", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="checkbox">
       <input type="checkbox" name="Person[<%= personIndex %>].blind" value="1" data-type="boolean"<% if (person.blind) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("Blind or visually impaired", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("Blind or visually impaired", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="checkbox">
       <input type="checkbox" name="Person[<%= personIndex %>].disabled" value="1" data-type="boolean"<% if (person.disabled) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("Have any disabilities", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("Have any disabilities", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="checkbox">
       <input type="checkbox" name="Person[<%= personIndex %>].veteran" value="1" data-type="boolean"<% if (person.veteran) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("Served in the U.S. Armed Forces, National Guard or Reserves", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("Served in the U.S. Armed Forces, National Guard or Reserves", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="checkbox">
       <input class="screener-checkboxes-input sr-only js-clear-group" type="checkbox"<% if (!person.unemployed && !person.pregnant && !person.unemployed && !person.blind && !person.disabled && !person.veteran) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("None of these apply", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("None of these apply", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
   </div>
 </fieldset>
 
 <fieldset class="c-question <% if (!person.studentFulltime) { print("hidden") }%>" id="screener-is-person-<%= personIndex %>-full-time-student">
-  <legend class="c-question__label">{{ __("Are they a full-time student?", "accessnyc-screener")|trim }}</legend>
+  <legend class="c-question__label">{{ __("Are they a full-time student?", "accessnyc-screener")|trim|escape("js") }}</legend>
   <div class="c-question__container js-screener-radio-group">
     <label class="toggle js-screener-radio-label">
       <input class="sr-only" value="1" type="radio" name="Person[<%= personIndex %>].studentFulltime" data-type="boolean"<% if (person.studentFulltime) { print(" checked") }%>/>
-      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|trim }}</span>
+      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="toggle js-screener-radio-label">
       <input class="sr-only" value="0" type="radio" name="Person[<%= personIndex %>].studentFulltime" data-type="boolean"<% if (!person.studentFulltime) { print(" checked") }%>/>
-      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim }}</span>
+      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
   </div>
 </fieldset>
 
 <fieldset class="c-question <% if (!person.unemployedWorkedLast18Months) { print("hidden") }%>" id="screener-did-person-<%= personIndex %>-work-last-18-months">
-  <legend class="c-question__label">{{ __("Did they work in the last 18 months?", "accessnyc-screener")|trim }}</legend>
+  <legend class="c-question__label">{{ __("Did they work in the last 18 months?", "accessnyc-screener")|trim|escape("js") }}</legend>
   <div class="c-question__container js-screener-radio-group">
     <label class="toggle js-screener-radio-label">
       <input class="sr-only" value="1" type="radio" name="Person[<%= personIndex %>].unemployedWorkedLast18Months" data-type="boolean"<% if (person.unemployedWorkedLast18Months) { print(" checked") }%>/>
-      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|trim }}</span>
+      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="toggle js-screener-radio-label">
       <input class="sr-only" value="0" type="radio" name="Person[<%= personIndex %>].unemployedWorkedLast18Months" data-type="boolean"<% if (!person.unemployedWorkedLast18Months) { print(" checked") }%>/>
-      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim }}</span>
+      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
   </div>
 </fieldset>
@@ -99,19 +99,19 @@
 <hr class="divider-light">
 
 <fieldset class="c-question">
-  <legend class="c-question__label">{{ __("Do they receive any of these benefits?", "accessnyc-screener")|trim }}</legend>
+  <legend class="c-question__label">{{ __("Do they receive any of these benefits?", "accessnyc-screener")|trim|escape("js") }}</legend>
   <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
     <label class="checkbox">
       <input type="checkbox" name="Person[<%= personIndex %>].benefitsMedicaid" value="1" data-type="boolean"<% if (person.benefitsMedicaid) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("Medicaid", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("Medicaid", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="checkbox">
       <input type="checkbox" name="Person[<%= personIndex %>].benefitsMedicaidDisability" value="1" data-type="boolean"<% if (person.benefitsMedicaidDisability) { print(" checked") }%>>
-      <span class="checkbox__label">{{ __("Disability-related Medicaid", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("Disability-related Medicaid", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="checkbox">
       <input class="screener-checkboxes-input sr-only js-clear-group" type="checkbox" checked>
-      <span class="checkbox__label">{{ __("None of these apply", "accessnyc-screener")|trim }}</span>
+      <span class="checkbox__label">{{ __("None of these apply", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
   </div>
 </fieldset>
@@ -119,8 +119,8 @@
 <hr class="divider-light">
 
 <fieldset class="c-question">
-  <legend class="c-question__label">{{ __("Do they have an income?", "accessnyc-screener")|trim }}</legend>
-  <p>{{ __("This includes money from jobs, alimony, investments or gifts.", "accessnyc-screener")|trim }}</p>
+  <legend class="c-question__label">{{ __("Do they have an income?", "accessnyc-screener")|trim|escape("js") }}</legend>
+  <p>{{ __("This includes money from jobs, alimony, investments or gifts.", "accessnyc-screener")|trim|escape("js") }}</p>
   <div class="c-question__container js-screener-radio-group">
     <label class="toggle js-screener-radio-label">
       <input class="js-screener-toggle js-add-section sr-only"
@@ -135,11 +135,11 @@
         data-matrix-index="0"
         data-person-index="<%= personIndex %>"
         <% if (person.incomes.length) { print("checked") }%>>
-      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|trim }}</span>
+      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="toggle js-screener-radio-label">
       <input class="js-screener-toggle sr-only" value="0" type="radio" name="person-<%= personIndex %>-has-income" data-type="boolean" data-toggles="#person-<%= personIndex %>-income"<% if (!person.incomes.length) { print(" checked") }%>>
-      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim }}</span>
+      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
   </div>
 </fieldset>
@@ -152,13 +152,13 @@
     <div class="c-question">
       <div class="prime-label">
         <label class="c-question__label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
-          {{ __("What type of income have they had most recently?", "accessnyc-screener")|trim }}
+          {{ __("What type of income have they had most recently?", "accessnyc-screener")|trim|escape("js") }}
         </label>
-        <p>{{ __("Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim }}</p>
+        <p>{{ __("Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim|escape("js") }}</p>
       </div>
       <div class="non-prime-label">
         <label class="c-question__label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-type">
-          {{ __("If they have another type of income, select it below.", "accessnyc-screener")|trim }}
+          {{ __("If they have another type of income, select it below.", "accessnyc-screener")|trim|escape("js") }}
         </label>
       </div>
       <div class="c-question__container">
@@ -170,28 +170,28 @@
           data-matrix="income"
           data-matrix-index="<% print(matrixIndex + 1) %>"
           data-person-index="<%= personIndex %>">
-          <option value="">{{ __("Click to add an income type", "accessnyc-screener")|trim }}</option>
-          <option value="Wages"<% if (item.type === "Wages") { print(" selected") }%>>{{ __("wages, salaries, tips", "accessnyc-screener")|trim }}</option>
-          <option value="SelfEmployment"<% if (item.type === "SelfEmployment") { print(" selected") }%>>{{ __("self-employment income", "accessnyc-screener")|trim }}</option>
-          <option value="Unemployment"<% if (item.type === "Unemployment") { print(" selected") }%>>{{ __("unemployment benefits", "accessnyc-screener")|trim }}</option>
-          <option value="CashAssistance"<% if (item.type === "CashAssistance") { print(" selected") }%>>{{ __("Cash Assistance grant", "accessnyc-screener")|trim }}</option>
-          <option value="ChildSupport"<% if (item.type === "ChildSupport") { print(" selected") }%>>{{ __("child support (received)", "accessnyc-screener")|trim }}</option>
-          <option value="DisabilityMedicaid"<% if (item.type === "DisabilityMedicaid") { print(" selected") }%>>{{ __("disability-related Medicaid", "accessnyc-screener")|trim }}</option>
-          <option value="SSI"<% if (item.type === "SSI") { print(" selected") }%>>{{ __("Supplemental Security Income (SSI)", "accessnyc-screener")|trim }}</option>
-          <option value="SSDependent"<% if (item.type === "SSDependent") { print(" selected") }%>>{{ __("Social Security Dependent Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="SSDisability"<% if (item.type === "SSDisability") { print(" selected") }%>>{{ __("Social Security Disability Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="SSSurvivor"<% if (item.type === "SSSurvivor") { print(" selected") }%>>{{ __("Social Security Survivor’s Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="SSRetirement"<% if (item.type === "SSRetirement") { print(" selected") }%>>{{ __("Social Security Retirement Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="NYSDisability"<% if (item.type === "NYSDisability") { print(" selected") }%>>{{ __("New York State Disability Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="Veteran"<% if (item.type === "Veteran") { print(" selected") }%>>{{ __("Veteran’s Pension or Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="Pension"<% if (item.type === "Pension") { print(" selected") }%>>{{ __("Government or Private Pension", "accessnyc-screener")|trim }}</option>
-          <option value="DeferredComp"<% if (item.type === "DeferredComp") { print(" selected") }%>>{{ __("Withdrawals from Deferred Compensation (IRA, Keogh, etc.)", "accessnyc-screener")|trim }}</option>
-          <option value="WorkersComp"<% if (item.type === "WorkersComp") { print(" selected") }%>>{{ __("Worker’s Compensation", "accessnyc-screener")|trim }}</option>
-          <option value="Alimony"<% if (item.type === "Alimony") { print(" selected") }%>>{{ __("alimony (received)", "accessnyc-screener")|trim }}</option>
-          <option value="Boarder"<% if (item.type === "Boarder") { print(" selected") }%>>{{ __("boarder or lodger", "accessnyc-screener")|trim }}</option>
-          <option value="Gifts"<% if (item.type === "Gifts") { print(" selected") }%>>{{ __("gifts/contributions (received)", "accessnyc-screener")|trim }}</option>
-          <option value="Rental"<% if (item.type === "Rental") { print(" selected") }%>>{{ __("rental income", "accessnyc-screener")|trim }}</option>
-          <option value="Investment"<% if (item.type === "Investment") { print(" selected") }%>>{{ __("investment income (interest, dividends, and profit from selling stocks)", "accessnyc-screener")|trim }}</option>
+          <option value="">{{ __("Click to add an income type", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Wages"<% if (item.type === "Wages") { print(" selected") }%>>{{ __("wages, salaries, tips", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SelfEmployment"<% if (item.type === "SelfEmployment") { print(" selected") }%>>{{ __("self-employment income", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Unemployment"<% if (item.type === "Unemployment") { print(" selected") }%>>{{ __("unemployment benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="CashAssistance"<% if (item.type === "CashAssistance") { print(" selected") }%>>{{ __("Cash Assistance grant", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="ChildSupport"<% if (item.type === "ChildSupport") { print(" selected") }%>>{{ __("child support (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="DisabilityMedicaid"<% if (item.type === "DisabilityMedicaid") { print(" selected") }%>>{{ __("disability-related Medicaid", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSI"<% if (item.type === "SSI") { print(" selected") }%>>{{ __("Supplemental Security Income (SSI)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSDependent"<% if (item.type === "SSDependent") { print(" selected") }%>>{{ __("Social Security Dependent Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSDisability"<% if (item.type === "SSDisability") { print(" selected") }%>>{{ __("Social Security Disability Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSSurvivor"<% if (item.type === "SSSurvivor") { print(" selected") }%>>{{ __("Social Security Survivor’s Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSRetirement"<% if (item.type === "SSRetirement") { print(" selected") }%>>{{ __("Social Security Retirement Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="NYSDisability"<% if (item.type === "NYSDisability") { print(" selected") }%>>{{ __("New York State Disability Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Veteran"<% if (item.type === "Veteran") { print(" selected") }%>>{{ __("Veteran’s Pension or Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Pension"<% if (item.type === "Pension") { print(" selected") }%>>{{ __("Government or Private Pension", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="DeferredComp"<% if (item.type === "DeferredComp") { print(" selected") }%>>{{ __("Withdrawals from Deferred Compensation (IRA, Keogh, etc.)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="WorkersComp"<% if (item.type === "WorkersComp") { print(" selected") }%>>{{ __("Worker’s Compensation", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Alimony"<% if (item.type === "Alimony") { print(" selected") }%>>{{ __("alimony (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Boarder"<% if (item.type === "Boarder") { print(" selected") }%>>{{ __("boarder or lodger", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Gifts"<% if (item.type === "Gifts") { print(" selected") }%>>{{ __("gifts/contributions (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Rental"<% if (item.type === "Rental") { print(" selected") }%>>{{ __("rental income", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Investment"<% if (item.type === "Investment") { print(" selected") }%>>{{ __("investment income (interest, dividends, and profit from selling stocks)", "accessnyc-screener")|trim|escape("js") }}</option>
         </select>
       </div>
     </div>
@@ -199,7 +199,7 @@
     <div id="screener-person-<%= personIndex %>-income-<%= matrixIndex %>-details">
       <div class="c-question">
         <label class="c-question__label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-amount">
-          {{ __("How much do they receive for this type of income:", "accessnyc-screener")|trim }} <% print(localize(item.type)) %>?
+          {{ __("How much do they receive for this type of income:", "accessnyc-screener")|trim|escape("js") }} <% print(localize(item.type)) %>?
         </label>
         <div class="c-question__container">
           <div class="currency-usd">
@@ -210,16 +210,16 @@
 
       <div class="c-question">
         <label class="c-question__label" for="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency">
-          {{ __("How often do they receive this income:", "accessnyc-screener")|trim }} <% print(localize(item.type)) %>?
+          {{ __("How often do they receive this income:", "accessnyc-screener")|trim|escape("js") }} <% print(localize(item.type)) %>?
         </label>
         <div class="c-question__container">
           <select class="select" id="person-<%= personIndex %>-incomes-<%= matrixIndex %>-frequency" name="Person[<%= personIndex %>].incomes[<%= matrixIndex %>].frequency" required>
-            <option value="">{{ __("Click to add an expense frequency", "accessnyc-screener")|trim }}</option>
-            <option value="weekly"<% if (item.frequency === "weekly") { print(" selected") }%>>{{ __("Every week", "accessnyc-screener")|trim }}</option>
-            <option value="biweekly"<% if (item.frequency === "biweekly") { print(" selected") }%>>{{ __("Every 2 weeks", "accessnyc-screener")|trim }}</option>
-            <option value="monthly"<% if (item.frequency === "monthly") { print(" selected") }%>>{{ __("Monthly", "accessnyc-screener")|trim }}</option>
-            <option value="semimonthly"<% if (item.frequency === "semimonthly") { print(" selected") }%>>{{ __("Twice a month", "accessnyc-screener")|trim }}</option>
-            <option value="yearly"<% if (item.frequency === "yearly") { print(" selected") }%>>{{ __("Every year", "accessnyc-screener")|trim }}</option>
+            <option value="">{{ __("Click to add an expense frequency", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="weekly"<% if (item.frequency === "weekly") { print(" selected") }%>>{{ __("Every week", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="biweekly"<% if (item.frequency === "biweekly") { print(" selected") }%>>{{ __("Every 2 weeks", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="monthly"<% if (item.frequency === "monthly") { print(" selected") }%>>{{ __("Monthly", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="semimonthly"<% if (item.frequency === "semimonthly") { print(" selected") }%>>{{ __("Twice a month", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="yearly"<% if (item.frequency === "yearly") { print(" selected") }%>>{{ __("Every year", "accessnyc-screener")|trim|escape("js") }}</option>
           </select>
         </div>
       </div>
@@ -235,19 +235,19 @@
       <% if (matrixIndex === 0) { %>
       <label class="c-question__label" for="person-<%= personIndex %>-incomes-<% print(matrixIndex + 1) %>-type">
         <% if (personIndex === 0) { %>
-        {{ __("What type of income have you had most recently?", "accessnyc-screener")|trim }}
+        {{ __("What type of income have you had most recently?", "accessnyc-screener")|trim|escape("js") }}
         <% } else { %>
-        {{ __("What type of income have they had most recently?", "accessnyc-screener")|trim }}
+        {{ __("What type of income have they had most recently?", "accessnyc-screener")|trim|escape("js") }}
         <% } %>
       </label>
 
-      <p>{{ __("Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim }}</p>
+      <p>{{ __("Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim|escape("js") }}</p>
       <% } else { %>
       <label class="c-question__label" for="person-<%= personIndex %>-incomes-<% print(matrixIndex + 1) %>-type">
         <% if (personIndex === 0) { %>
-        {{ __("If you receive another type of income, select it below.", "accessnyc-screener")|trim }}
+        {{ __("If you receive another type of income, select it below.", "accessnyc-screener")|trim|escape("js") }}
         <% } else { %>
-        {{ __("If they receive another type of income, select it below.", "accessnyc-screener")|trim }}
+        {{ __("If they receive another type of income, select it below.", "accessnyc-screener")|trim|escape("js") }}
         <% } %>
       </label>
       <% } %>
@@ -261,28 +261,28 @@
           data-matrix="income"
           data-matrix-index="<% print(matrixIndex + 2) %>"
           data-person-index="<%= personIndex %>">
-          <option value="" selected>{{ __("Click to add an income type", "accessnyc-screener")|trim }}</option>
-          <option value="Wages">{{ __("wages, salaries, tips", "accessnyc-screener")|trim }}</option>
-          <option value="SelfEmployment">{{ __("self-employment income", "accessnyc-screener")|trim }}</option>
-          <option value="Unemployment">{{ __("unemployment benefits", "accessnyc-screener")|trim }}</option>
-          <option value="CashAssistance">{{ __("Cash Assistance grant", "accessnyc-screener")|trim }}</option>
-          <option value="ChildSupport">{{ __("child support (received)", "accessnyc-screener")|trim }}</option>
-          <option value="DisabilityMedicaid">{{ __("disability-related Medicaid", "accessnyc-screener")|trim }}</option>
-          <option value="SSI">{{ __("Supplemental Security Income (SSI)", "accessnyc-screener")|trim }}</option>
-          <option value="SSDependent">{{ __("Social Security Dependent Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="SSDisability">{{ __("Social Security Disability Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="SSSurvivor">{{ __("Social Security Survivor’s Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="SSRetirement">{{ __("Social Security Retirement Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="NYSDisability">{{ __("New York State Disability Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="Veteran">{{ __("Veteran’s Pension or Benefits", "accessnyc-screener")|trim }}</option>
-          <option value="Pension">{{ __("Government or Private Pension", "accessnyc-screener")|trim }}</option>
-          <option value="DeferredComp">{{ __("Withdrawals from Deferred Compensation (IRA, Keogh, etc.)", "accessnyc-screener")|trim }}</option>
-          <option value="WorkersComp">{{ __("Worker’s Compensation", "accessnyc-screener")|trim }}</option>
-          <option value="Alimony">{{ __("alimony (received)", "accessnyc-screener")|trim }}</option>
-          <option value="Boarder">{{ __("boarder or lodger", "accessnyc-screener")|trim }}</option>
-          <option value="Gifts">{{ __("gifts/contributions (received)", "accessnyc-screener")|trim }}</option>
-          <option value="Rental">{{ __("rental income", "accessnyc-screener")|trim }}</option>
-          <option value="Investment">{{ __("investment income (interest, dividends, and profit from selling stocks)", "accessnyc-screener")|trim }}</option>
+          <option value="" selected>{{ __("Click to add an income type", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Wages">{{ __("wages, salaries, tips", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SelfEmployment">{{ __("self-employment income", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Unemployment">{{ __("unemployment benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="CashAssistance">{{ __("Cash Assistance grant", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="ChildSupport">{{ __("child support (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="DisabilityMedicaid">{{ __("disability-related Medicaid", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSI">{{ __("Supplemental Security Income (SSI)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSDependent">{{ __("Social Security Dependent Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSDisability">{{ __("Social Security Disability Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSSurvivor">{{ __("Social Security Survivor’s Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="SSRetirement">{{ __("Social Security Retirement Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="NYSDisability">{{ __("New York State Disability Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Veteran">{{ __("Veteran’s Pension or Benefits", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Pension">{{ __("Government or Private Pension", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="DeferredComp">{{ __("Withdrawals from Deferred Compensation (IRA, Keogh, etc.)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="WorkersComp">{{ __("Worker’s Compensation", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Alimony">{{ __("alimony (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Boarder">{{ __("boarder or lodger", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Gifts">{{ __("gifts/contributions (received)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Rental">{{ __("rental income", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Investment">{{ __("investment income (interest, dividends, and profit from selling stocks)", "accessnyc-screener")|trim|escape("js") }}</option>
         </select>
       </div>
     </div>
@@ -290,7 +290,7 @@
     <div id="screener-person-<%= personIndex %>-income-<% print(matrixIndex + 1) %>-details" class="hidden">
       <div class="c-question">
         <label class="c-question__label" for="person-<%= personIndex %>-incomes-<% print(matrixIndex + 1) %>-amount">
-          {{ __("How much do they receive for this type of income:", "accessnyc-screener")|trim }}
+          {{ __("How much do they receive for this type of income:", "accessnyc-screener")|trim|escape("js") }}
           <span data-js="transaction-label"></span>?
         </label>
         <div class="c-question__container">
@@ -302,17 +302,17 @@
 
       <div class="c-question">
         <label class="c-question__label" for="person-<%= personIndex %>-incomes-<% print(matrixIndex + 1) %>-frequency">
-          {{ __("How often do they receive this income:", "accessnyc-screener")|trim }}
+          {{ __("How often do they receive this income:", "accessnyc-screener")|trim|escape("js") }}
           <span data-js="transaction-label"></span>?
         </label>
         <div class="c-question__container">
           <select class="select" id="person-<%= personIndex %>-incomes-<% print(matrixIndex + 1) %>-frequency" name="Person[<%= personIndex %>].incomes[<% print(matrixIndex + 1) %>].frequency" required>
-            <option value="">{{ __("Click to add an income frequency", "accessnyc-screener")|trim }}</option>
-            <option value="weekly">{{ __("Every week", "accessnyc-screener")|trim }}</option>
-            <option value="biweekly">{{ __("Every 2 weeks", "accessnyc-screener")|trim }}</option>
-            <option value="monthly">{{ __("Monthly", "accessnyc-screener")|trim }}</option>
-            <option value="semimonthly">{{ __("Twice a month", "accessnyc-screener")|trim }}</option>
-            <option value="yearly">{{ __("Every year", "accessnyc-screener")|trim }}</option>
+            <option value="">{{ __("Click to add an income frequency", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="weekly">{{ __("Every week", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="biweekly">{{ __("Every 2 weeks", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="monthly">{{ __("Monthly", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="semimonthly">{{ __("Twice a month", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="yearly">{{ __("Every year", "accessnyc-screener")|trim|escape("js") }}</option>
           </select>
         </div>
       </div>
@@ -325,9 +325,9 @@
 <hr class="divider-light">
 
 <fieldset class="c-question">
-  <legend class="c-question__label">{{ __("Do they have any expenses?", "accessnyc-screener")|trim }}</legend>
+  <legend class="c-question__label">{{ __("Do they have any expenses?", "accessnyc-screener")|trim|escape("js") }}</legend>
 
-  <p>{{ __("This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.", "accessnyc-screener")|trim }}</p>
+  <p>{{ __("This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.", "accessnyc-screener")|trim|escape("js") }}</p>
 
   <div class="c-question__container js-screener-radio-group">
     <label class="toggle js-screener-radio-label">
@@ -343,11 +343,11 @@
         data-matrix-index="0"
         data-person-index="<%= personIndex %>"
         <% if (person.expenses.length) { print(" checked") }%>>
-      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|trim }}</span>
+      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
     <label class="toggle js-screener-radio-label">
       <input class="js-screener-toggle sr-only" value="0" type="radio" name="person-<%= personIndex %>-has-expenses" data-type="boolean" data-toggles="#person-<%= personIndex %>-expense"<% if (!person.expenses.length) { print(" checked") }%> />
-      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim }}</span>
+      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim|escape("js") }}</span>
     </label>
   </div>
 </fieldset>
@@ -359,12 +359,12 @@
 
     <div class="c-question">
       <% if (matrixIndex === 0) { %>
-      <label class="c-question__label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-type">{{ __("What type of expense have they had most recently?", "accessnyc-screener")|trim }}</label>
+      <label class="c-question__label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-type">{{ __("What type of expense have they had most recently?", "accessnyc-screener")|trim|escape("js") }}</label>
 
-      <p>{{ __("Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim }}</p>
+      <p>{{ __("Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim|escape("js") }}</p>
       <% } else { %>
       <label class="c-question__label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-type">
-        {{ __("If they have another type of income, select it below.", "accessnyc-screener")|trim }}
+        {{ __("If they have another type of income, select it below.", "accessnyc-screener")|trim|escape("js") }}
       </label>
       <% } %>
 
@@ -377,18 +377,18 @@
           data-matrix="expense"
           data-matrix-index="<% print(matrixIndex + 1) %>"
           data-person-index="<%= personIndex %>">
-          <option value="">{{ __("Click to add an expense type", "accessnyc-screener")|trim }}</option>
-          <option value="ChildCare"<% if (item.type === "ChildCare") { print(" selected") }%>>{{ __("Child Care", "accessnyc-screener")|trim }}</option>
-          <option value="ChildSupport"<% if (item.type === "ChildSupport") { print(" selected") }%>>{{ __("Child Support (Paid)", "accessnyc-screener")|trim }}</option>
-          <option value="DependentCare"<% if (item.type === "DependentCare") { print(" selected") }%>>{{ __("Dependent Care", "accessnyc-screener")|trim }}</option>
-          <option value="Rent"<% if (item.type === "Rent") { print(" selected") }%>>{{ __("Rent", "accessnyc-screener")|trim }}</option>
-          <option value="Medical"<% if (item.type === "Medical") { print(" selected") }%>>{{ __("Medical expense", "accessnyc-screener")|trim }}</option>
-          <option value="Heating"<% if (item.type === "Heating") { print(" selected") }%>>{{ __("Heating", "accessnyc-screener")|trim }}</option>
-          <option value="Cooling"<% if (item.type === "Cooling") { print(" selected") }%>>{{ __("Cooling", "accessnyc-screener")|trim }}</option>
-          <option value="Mortgage"<% if (item.type === "Mortgage") { print(" selected") }%>>{{ __("Mortgage", "accessnyc-screener")|trim }}</option>
-          <option value="Utilities"<% if (item.type === "Utilities") { print(" selected") }%>>{{ __("Utilities", "accessnyc-screener")|trim }}</option>
-          <option value="Telephone"<% if (item.type === "Telephone") { print(" selected") }%>>{{ __("Telephone", "accessnyc-screener")|trim }}</option>
-          <option value="InsurancePremiums"<% if (item.type === "InsurancePremiums") { print(" selected") }%>>{{ __("Third Party Insurance Premiums", "accessnyc-screener")|trim }}</option>
+          <option value="">{{ __("Click to add an expense type", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="ChildCare"<% if (item.type === "ChildCare") { print(" selected") }%>>{{ __("Child Care", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="ChildSupport"<% if (item.type === "ChildSupport") { print(" selected") }%>>{{ __("Child Support (Paid)", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="DependentCare"<% if (item.type === "DependentCare") { print(" selected") }%>>{{ __("Dependent Care", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Rent"<% if (item.type === "Rent") { print(" selected") }%>>{{ __("Rent", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Medical"<% if (item.type === "Medical") { print(" selected") }%>>{{ __("Medical expense", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Heating"<% if (item.type === "Heating") { print(" selected") }%>>{{ __("Heating", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Cooling"<% if (item.type === "Cooling") { print(" selected") }%>>{{ __("Cooling", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Mortgage"<% if (item.type === "Mortgage") { print(" selected") }%>>{{ __("Mortgage", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Utilities"<% if (item.type === "Utilities") { print(" selected") }%>>{{ __("Utilities", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="Telephone"<% if (item.type === "Telephone") { print(" selected") }%>>{{ __("Telephone", "accessnyc-screener")|trim|escape("js") }}</option>
+          <option value="InsurancePremiums"<% if (item.type === "InsurancePremiums") { print(" selected") }%>>{{ __("Third Party Insurance Premiums", "accessnyc-screener")|trim|escape("js") }}</option>
         </select>
       </div>
     </div>
@@ -396,7 +396,7 @@
     <div id="screener-person-<%= personIndex %>-expense-<%= matrixIndex %>-details">
       <div class="c-question">
         <label class="c-question__label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-amount">
-          {{ __("How much is this type of expense:", "accessnyc-screener")|trim }} <% print(localize(item.type)) %>?
+          {{ __("How much is this type of expense:", "accessnyc-screener")|trim|escape("js") }} <% print(localize(item.type)) %>?
         </label>
         <div class="c-question__container">
           <div class="currency-usd">
@@ -407,16 +407,16 @@
 
       <div class="c-question">
         <label class="c-question__label" for="person-<%= personIndex %>-expenses-<%= matrixIndex %>-frequency">
-          {{ __("How often do they have this expense:", "accessnyc-screener")|trim }} <% print(localize(item.type)) %>?
+          {{ __("How often do they have this expense:", "accessnyc-screener")|trim|escape("js") }} <% print(localize(item.type)) %>?
         </label>
         <div class="c-question__container">
           <select class="select" id="person-<%= personIndex %>-expenses-<%= matrixIndex %>-frequency" name="Person[<%= personIndex %>].expenses[<%= matrixIndex %>].frequency" required>
-            <option value="">{{ __("Click to add an expense frequency", "accessnyc-screener")|trim }}</option>
-            <option value="weekly"<% if (item.frequency === "weekly") { print(" selected") }%>>{{ __("Every week", "accessnyc-screener")|trim }}</option>
-            <option value="biweekly"<% if (item.frequency === "biweekly") { print(" selected") }%>>{{ __("Every 2 weeks", "accessnyc-screener")|trim }}</option>
-            <option value="monthly"<% if (item.frequency === "monthly") { print(" selected") }%>>{{ __("Monthly", "accessnyc-screener")|trim }}</option>
-            <option value="semimonthly"<% if (item.frequency === "semimonthly") { print(" selected") }%>>{{ __("Twice a month", "accessnyc-screener")|trim }}</option>
-            <option value="yearly"<% if (item.frequency === "yearly") { print(" selected") }%>>{{ __("Every year", "accessnyc-screener")|trim }}</option>
+            <option value="">{{ __("Click to add an expense frequency", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="weekly"<% if (item.frequency === "weekly") { print(" selected") }%>>{{ __("Every week", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="biweekly"<% if (item.frequency === "biweekly") { print(" selected") }%>>{{ __("Every 2 weeks", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="monthly"<% if (item.frequency === "monthly") { print(" selected") }%>>{{ __("Monthly", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="semimonthly"<% if (item.frequency === "semimonthly") { print(" selected") }%>>{{ __("Twice a month", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="yearly"<% if (item.frequency === "yearly") { print(" selected") }%>>{{ __("Every year", "accessnyc-screener")|trim|escape("js") }}</option>
           </select>
         </div>
       </div>
@@ -430,19 +430,19 @@
         <% if (matrixIndex === 0) { %>
         <label class="c-question__label" for="person-<%= personIndex %>-expenses-<% print(matrixIndex + 1) %>-type">
           <% if (personIndex === 0) { %>
-          {{ __("What type of expense have you had most recently?", "accessnyc-screener")|trim }}
+          {{ __("What type of expense have you had most recently?", "accessnyc-screener")|trim|escape("js") }}
           <% } else { %>
-          {{ __("What type of expense have they had most recently?", "accessnyc-screener")|trim }}
+          {{ __("What type of expense have they had most recently?", "accessnyc-screener")|trim|escape("js") }}
           <% } %>
         </label>
 
-        <p>{{ __("Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim }}</p>
+        <p>{{ __("Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.", "accessnyc-screener")|trim|escape("js") }}</p>
         <% } else { %>
         <label class="c-question__label" for="person-<%= personIndex %>-expenses-<% print(matrixIndex + 2) %>-type">
           <% if (personIndex === 0) { %>
-          {{ __("If you have another type of expense, select it below.", "accessnyc-screener")|trim }}
+          {{ __("If you have another type of expense, select it below.", "accessnyc-screener")|trim|escape("js") }}
           <% } else { %>
-          {{ __("If they have another type of expense, select it below.", "accessnyc-screener")|trim }}
+          {{ __("If they have another type of expense, select it below.", "accessnyc-screener")|trim|escape("js") }}
           <% } %>
         </label>
         <% } %>
@@ -456,18 +456,18 @@
             data-matrix="expense"
             data-matrix-index="<% print(matrixIndex + 2) %>"
             data-person-index="<%= personIndex %>">
-            <option value="">{{ __("Click to add an expense type", "accessnyc-screener")|trim }}</option>
-            <option value="ChildCare">{{ __("Child Care", "accessnyc-screener")|trim }}</option>
-            <option value="ChildSupport">{{ __("Child Support (Paid)", "accessnyc-screener")|trim }}</option>
-            <option value="DependentCare">{{ __("Dependent Care", "accessnyc-screener")|trim }}</option>
-            <option value="Rent">{{ __("Rent", "accessnyc-screener")|trim }}</option>
-            <option value="Medical">{{ __("Medical expense", "accessnyc-screener")|trim }}</option>
-            <option value="Heating">{{ __("Heating", "accessnyc-screener")|trim }}</option>
-            <option value="Cooling">{{ __("Cooling", "accessnyc-screener")|trim }}</option>
-            <option value="Mortgage">{{ __("Mortgage", "accessnyc-screener")|trim }}</option>
-            <option value="Utilities">{{ __("Utilities", "accessnyc-screener")|trim }}</option>
-            <option value="Telephone">{{ __("Telephone", "accessnyc-screener")|trim }}</option>
-            <option value="InsurancePremiums">{{ __("Third Party Insurance Premiums", "accessnyc-screener")|trim }}</option>
+            <option value="">{{ __("Click to add an expense type", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="ChildCare">{{ __("Child Care", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="ChildSupport">{{ __("Child Support (Paid)", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="DependentCare">{{ __("Dependent Care", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="Rent">{{ __("Rent", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="Medical">{{ __("Medical expense", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="Heating">{{ __("Heating", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="Cooling">{{ __("Cooling", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="Mortgage">{{ __("Mortgage", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="Utilities">{{ __("Utilities", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="Telephone">{{ __("Telephone", "accessnyc-screener")|trim|escape("js") }}</option>
+            <option value="InsurancePremiums">{{ __("Third Party Insurance Premiums", "accessnyc-screener")|trim|escape("js") }}</option>
           </select>
         </div>
       </div>
@@ -475,7 +475,7 @@
       <div id="screener-person-<%= personIndex %>-expense-<% print(matrixIndex + 1) %>-details" class="hidden">
         <div class="c-question">
           <label class="c-question__label" for="person-<%= personIndex %>-expenses-<% print(matrixIndex + 1) %>-amount">
-            {{ __("How much is this type of expense:", "accessnyc-screener")|trim }}
+            {{ __("How much is this type of expense:", "accessnyc-screener")|trim|escape("js") }}
             <span data-js="transaction-label"></span>?
           </label>
           <div class="c-question__container">
@@ -488,21 +488,21 @@
         <div class="c-question">
           <label class="c-question__label" for="person-<%= personIndex %>-expenses-<% print(matrixIndex + 1) %>-frequency">
             <% if (personIndex === 0) { %>
-            {{ __("How often do you have this expense:", "accessnyc-screener")|trim }}
+            {{ __("How often do you have this expense:", "accessnyc-screener")|trim|escape("js") }}
             <% } else { %>
-            {{ __("How often do they have this expense:", "accessnyc-screener")|trim }}
+            {{ __("How often do they have this expense:", "accessnyc-screener")|trim|escape("js") }}
             <% } %>
             <span data-js="transaction-label"></span>?
           </label>
 
           <div class="c-question__container">
             <select class="select" id="person-<%= personIndex %>-expenses-<% print(matrixIndex + 1) %>-frequency" name="Person[<%= personIndex %>].expenses[<% print(matrixIndex + 1) %>].frequency" required>
-              <option value="">{{ __("Click to add an expense frequency", "accessnyc-screener")|trim }}</option>
-              <option value="weekly">{{ __("Every week", "accessnyc-screener")|trim }}</option>
-              <option value="biweekly">{{ __("Every 2 weeks", "accessnyc-screener")|trim }}</option>
-              <option value="monthly">{{ __("Monthly", "accessnyc-screener")|trim }}</option>
-              <option value="semimonthly">{{ __("Twice a month", "accessnyc-screener")|trim }}</option>
-              <option value="yearly">{{ __("Every year", "accessnyc-screener")|trim }}</option>
+              <option value="">{{ __("Click to add an expense frequency", "accessnyc-screener")|trim|escape("js") }}</option>
+              <option value="weekly">{{ __("Every week", "accessnyc-screener")|trim|escape("js") }}</option>
+              <option value="biweekly">{{ __("Every 2 weeks", "accessnyc-screener")|trim|escape("js") }}</option>
+              <option value="monthly">{{ __("Monthly", "accessnyc-screener")|trim|escape("js") }}</option>
+              <option value="semimonthly">{{ __("Twice a month", "accessnyc-screener")|trim|escape("js") }}</option>
+              <option value="yearly">{{ __("Every year", "accessnyc-screener")|trim|escape("js") }}</option>
             </select>
           </div>
         </div>
