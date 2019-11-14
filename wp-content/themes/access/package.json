@@ -94,7 +94,7 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "@nycopportunity/access-patterns": "^0.11.9",
+    "@nycopportunity/access-patterns": "^0.11.10",
     "@nycopportunity/patterns-framework": "0.0.16",
     "cleave.js": "^0.7.23",
     "es6-promise": "^4.2.5",
