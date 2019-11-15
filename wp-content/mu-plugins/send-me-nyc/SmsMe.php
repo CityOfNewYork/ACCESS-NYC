@@ -7,23 +7,30 @@ use Twilio\Exceptions\RestException as TwilioErr;
 
 class SmsMe extends ContactMe {
   protected $action = 'SMS'; // nonce and ajax key for what this class provides
+
   protected $service = 'Twilio'; // name used in settings/options keys
 
   protected $account_label = 'SID';
+
   protected $secret_label = 'Token';
+
   protected $from_label = 'Sender Phone Number';
 
   protected $account_hint = 'EXAMPLEAC43fceec9fb0836fff217f4b4f';
+
   protected $secret_hint = 'EXAMPLE2674d4ec2a325a63cbcc63d25';
+
   protected $from_hint = '+15551230789';
 
   protected $prefix = 'smnyc_twilio';
+
+  const POST_TYPE = 'smnyc-sms';
 
   /**
    * Register post type for email content
    */
   public function registerPostType() {
-    register_post_type('smnyc-sms', array(
+    register_post_type(self::POST_TYPE, array(
       'label' => __('SMNYC SMS', 'text_domain'),
       'description' => __('SMS content for Send Me NYC', 'text_domain'),
       'labels' => array(
@@ -40,36 +47,36 @@ class SmsMe extends ContactMe {
   }
 
   /**
-   * [content description]
-   * @param   [type]  $url       [$url description]
-   * @param   [type]  $page      [$page description]
-   * @param   [type]  $orig_url  [$orig_url description]
-   * @return  [type]             [return description]
+   * Get the content of the email to send.
+   *
+   * @param   String  $url_shortened  Shortened url that is being shared.
+   * @param   String  $url            Full url that is being shared.
+   * @param   String  $template       Slug of the template to retrieve.
+   * @param   String  $lang           Language of the template to retrieve.
+   *
+   * @return  String                  The text message being shared.
    */
-  protected function content($bitly_url, $page, $url) {
-    if ($page == self::RESULTS_PAGE) {
-      $slug = 'screener-results';
-    } else {
-      $slug = 'programs';
-    }
-
+  protected function content($url_shortened, $url, $template, $lang) {
     // Get post and filter ID through WPML
-    $post = get_page_by_path($slug, OBJECT, 'smnyc-sms');
-    $id = apply_filters('wpml_object_id', $post->ID, 'smnyc-sms', true);
+    $post = get_page_by_path($template, OBJECT, self::POST_TYPE);
+
+    // Filter ID through WPML. Need to add conditionals for WPML or admin notice
+    $id = ($lang === 'en') ?
+      $id : apply_filters('wpml_object_id', $post->ID, self::POST_TYPE, true, $lang);
 
     // Get content and replace template tag with bitly url
     $text = trim(strip_tags(get_post($id)->post_content));
-    $text = str_replace('{{ BITLY_URL }}', $bitly_url, $text);
+    $text = str_replace('{{ BITLY_URL }}', $url_shortened, $text);
     $text = str_replace('{{ URL }}', $url, $text);
 
     return $text;
   }
 
   /**
-   * [send description]
-   * @param   [type]  $to   [$to description]
-   * @param   [type]  $msg  [$msg description]
-   * @return  [type]        [return description]
+   * Send an SMS message via the Twilio SDK.
+   *
+   * @param   String  $to   The recipient of the message.
+   * @param   String  $msg  The message to send.
    */
   protected function send($to, $msg) {
     try {
@@ -100,9 +107,11 @@ class SmsMe extends ContactMe {
   }
 
   /**
-   * [validRecipient description]
-   * @param   [type]  $to  [$to description]
-   * @return  [type]       [return description]
+   * Wether the recipient is valid or not.
+   *
+   * @param   String  $to  The recipient of the message.
+   *
+   * @return  Boolean      Wether the recipient is valid or not.
    */
   protected function validRecipient($to) {
     $to = preg_replace('/\D/', '', $to); // strip all non-numbers
@@ -110,9 +119,29 @@ class SmsMe extends ContactMe {
     // grab user's number
     if (empty($to)) {
       $this->failure(1, 'Phone number must be supplied');
+
+      return false;
     } elseif (strlen($to) < 10) {
       $this->failure(2, 'Invalid phone number. Please provide 10-digit number with area code');
-    } elseif (strlen($to) === 10) {
+
+      return false;
+    }
+
+    // assume longer numbers have country code specified
+    return true;
+  }
+
+  /**
+   * Sanitize the phone number by removing characters and adding country code.
+   *
+   * @param   String  $to  The phone number to send to.
+   *
+   * @return  String       The sanitized phone number.
+   */
+  protected function sanitizeRecipient($to) {
+    $to = preg_replace('/\D/', '', $to); // strip all non-numbers
+
+    if (strlen($to) === 10) {
       $to = '1' . $to; // US country code left off
     }
 
@@ -121,10 +150,10 @@ class SmsMe extends ContactMe {
   }
 
   /**
-   * [parseError description]
-   * @param   [type]  $code     [$code description]
-   * @param   [type]  $message  [$message description]
-   * @return  [type]            [return description]
+   * Parse the error response from Twilio
+   *
+   * @param   Number  $code     The number of the error code.
+   * @param   String  $message  A string to pass to the failer response.
    */
   protected function parseError($code, $message = 'An error occurred while sending') {
     $retry = false;

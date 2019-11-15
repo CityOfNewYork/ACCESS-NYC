@@ -7,36 +7,34 @@ namespace SMNYC;
  * Creates AJAX hooks for you, and automatically includes CSRF protection
  */
 class ContactMe {
-  /**
-   * For child classes to override. Used in nonce hash and AJAX hook
-   */
+  /** Used in nonce hash and AJAX hook */
   protected $action;
 
-  /**
-   * For child classes to override. Used in settings/option verification.
-   * Must match the keyname used in settings  e.g. smnyc_SERVICE_user
-   */
+  /** Used in settings/option verification. Must match the keyname used in settings  e.g. smnyc_SERVICE_user */
   protected $service;
 
-  /**
-   * Settings page label hints, and placeholder text
-   */
+  /** Settings page label hints, and placeholder text */
   protected $account_label;
+
   protected $secret_label;
+
   protected $from_label;
 
   protected $account_hint;
+
   protected $secret_hint;
+
   protected $from_hint;
 
   protected $pagename = 'smnyc_config';
+
   protected $fieldgroup = 'smnyc_settings';
+
   protected $prefix = 'smnyc';
 
   protected $text_domain = 'smnyc';
 
-  const RESULTS_PAGE = 1;
-  const OTHER_PAGE = 2;
+  const POST_TYPE = 'smnyc';
 
   /**
    * Constructor
@@ -46,24 +44,23 @@ class ContactMe {
   }
 
   /**
-   * [createEndpoints description]
+   * Set up AJAX hooks to each child's ::submission method.
    */
   protected function createEndpoints() {
-    // Set up AJAX hooks to each child's ::submission method
     add_action('wp_ajax_' . strtolower($this->action) . '_send', [$this, 'submission']);
     add_action('wp_ajax_nopriv_' . strtolower($this->action) . '_send', [$this, 'submission']);
   }
 
   /**
-   * Register post type for email content
+   * Register post type for email content.
    */
   public function registerPostType() {
-    register_post_type('smnyc-email', array(
-      'label' => __('SMNYC Email', 'text_domain'),
-      'description' => __('Email content for Send Me NYC', 'text_domain'),
+    register_post_type(self::POST_TYPE, array(
+      'label' => __('SMNYC', 'text_domain'),
+      'description' => __('Content for Send Me NYC', 'text_domain'),
       'labels' => array(
-        'name' => _x('SMNYC Emails', 'Post Type General Name', 'text_domain'),
-        'singular_name' => _x('SMNYC Email', 'Post Type Singular Name', 'text_domain'),
+        'name' => _x('SMNYC', 'Post Type General Name', 'text_domain'),
+        'singular_name' => _x('SMNYC', 'Post Type Singular Name', 'text_domain'),
       ),
       'hierarchical' => false,
       'public' => true,
@@ -75,34 +72,43 @@ class ContactMe {
   }
 
   /**
-   * [submission description]
+   * Submission handler for the Share Form Component.
    */
   public function submission() {
     if (!isset($_POST['url']) || empty($_POST['url'])) {
       $this->failure(400, 'url required');
     }
 
-    $this->validateNonce($_POST['hash'], $_POST['url']); // use nonce for CSRF protection
-    $this->validConfiguration(strtolower($this->service)); // make sure credentials are specified
-    $recipient = $this->validRecipient($_POST['to']); // also filters addressee
+    $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
+    $valid = $this->validConfiguration(strtolower($this->service));
+    $valid = $this->validRecipient($_POST['to']);
 
-    $url = $this->shorten($_POST['url']); // SMS 160 char limit, should shorten URL
+    if ($valid) {
+      $to = $this->sanitizeRecipient($_POST['to']);
 
-    // results pages have unique email content
-    if ($this->isResultsUrl($_POST['url'])) {
-      $content = $this->content($url, self::RESULTS_PAGE, $_POST['url']);
-    } else {
-      $content = $this->content($url, self::OTHER_PAGE, $_POST['url']);
+      $guid = $_POST['GUID'];
+
+      $url = $_POST['url'];
+
+      $url_shortened = $this->shorten($url);
+
+      $template = $_POST['template'];
+
+      $lang = (!isset($_POST['lang']) || empty($_POST['lang'])) ? 'en' : $_POST['lang'];
+
+      $content = $this->content($url_shortened, $url, $template, $lang);
+
+      $this->send($to, $content);
+      $this->success($content, $to, $guid, $url);
     }
-
-    $this->send($recipient, $content);
-    $this->success($content);
   }
 
   /**
-   * Creates a bit.ly shortened link to provided url. Fails silently
-   * @param  $url    string     The URL to shorten
-   * @return string  shortened  URL on success, original URL on failure
+   * Creates a bit.ly shortened link to provided url. Fails silently.
+   *
+   * @param  String  $url  The URL to shorten.
+   *
+   * @return String        Shortened URL on success, original URL on failure.
    */
   private function shorten($url) {
     $bitly_shortener = get_option('smnyc_bitly_shortener');
@@ -133,19 +139,31 @@ class ContactMe {
   /**
    * To prevent CSRF attacks, and to otherwise protect an open SMS/Email relay.
    * AJAX call should be given a nonce by the webpage, and must submit it back.
-   * We verify it, hashed with the results being saved to make them page-unique
-   * @param   [type]  $nonce    [$nonce description]
-   * @param   [type]  $content  [$content description]
+   * We verify it, hashed with the results being saved to make them page-unique.
+   * Uses the wp_verify_nonce() method.
+   *
+   * @param   String   $nonce    The NONCE to validate
+   * @param   String   $content  Postfix description of the nonce.
+   *
+   * @return  Boolean            Wether the nonce is valid or not.
    */
+
   protected function validateNonce($nonce, $content) {
     if (wp_verify_nonce($nonce, 'bsd_smnyc_token_' . $content) === false) {
       $this->failure(9, 'Invalid request');
+
+      return false;
+    } else {
+      return true;
     }
   }
 
   /**
-   * Just makes sure that the user, secret key, and from fields were filled out
-   * @param   [type]  $service  [$service description]
+   * Just makes sure that the user, secret key, and from fields were filled out.
+   *
+   * @param   String   $service  Email or SMS.
+   *
+   * @return  Boolean            Wether the config is valid or not.
    */
   protected function validConfiguration($service) {
     $user = get_option('smnyc_' . $service . '_user');
@@ -158,23 +176,17 @@ class ContactMe {
 
     if (empty($user) || empty($secret) || empty($from)) {
       $this->failure(-1, 'Invalid Configuration');
+
+      return false;
+    } else {
+      return true;
     }
   }
 
   /**
-   * [isResultsUrl description]
-   * @param   [type]  $url  [$url description]
-   * @return  [type]        [return description]
-   */
-  protected function isResultsUrl($url) {
-    $path = parse_url($_POST['url'], PHP_URL_PATH);
-
-    return preg_match('/.*\/eligibility\/results\/?$/', $path);
-  }
-
-  /**
-   * Helper functions for JSON responses
-   * @param   [type]  $response  [$response description]
+   * Uses the wp_send_json() method to send a php key/value array as json response.
+   *
+   * @param   [type]  $response  Key/value array of the response object.
    */
   protected function respond($response) {
     wp_send_json($response);
@@ -183,25 +195,24 @@ class ContactMe {
   }
 
   /**
-   * [success description]
-   * @param   [type]  $content  [$content description]
+   * Action hook for Stat Collector and sends success response key/value array.
+   *
+   * @param   String/Array  $content  Content sent in the email or sms.
+   * @param   String        $to       Recipient of message.
+   * @param   String        $guid     Session GUID.
+   * @param   String        $url      URL to Save.
    */
-  protected function success($content = null) {
+  protected function success($content = null, $to, $guid, $url) {
     /**
      * Action hook for Stat Collector to save message details to the DB
-     * @param   [type]  $type  email/sms/whatever the class type is
-     * @param   [type]  $to    The number/email sent to
-     * @param   [type]  $uid   The GUID of the results
-     * @param   [type]  $url   The main url shared
-     * @param   [type]  $msg   The body of the message
+     *
+     * @param   String  $type  Email/sms/whatever the class type is.
+     * @param   String  $msg   The body of the message.
      */
     $type = $this->action;
-    $to = $_POST['to'];
-    $uid = isset($_POST['GUID']) ? $_POST['GUID'] : '0';
-    $url = $_POST['url'];
     $msg = is_array($content) ? $content['body'] : $content;
 
-    do_action('results_sent', $type, $to, $uid, $url, $msg);
+    do_action('results_sent', $type, $to, $guid, $url, $msg);
 
     /**
      * Send the success message
@@ -209,15 +220,17 @@ class ContactMe {
     $this->respond(array(
       'success' => true,
       'error' => null,
-      'message' => null
+      'message' => 'Sent!',
+      'content' => $msg
     ));
   }
 
   /**
-   * [failure description]
-   * @param   [type]  $code     [$code description]
-   * @param   [type]  $message  [$message description]
-   * @param   [type]  $retry    [$retry description]
+   * Sends a failer notice to the request.
+   *
+   * @param   Number   $code     The specific error code
+   * @param   String   $message  The feedback message
+   * @param   Boolean  $retry    Wether to retry
    */
   protected function failure($code, $message, $retry = false) {
     $this->respond([
@@ -229,7 +242,7 @@ class ContactMe {
   }
 
   /**
-   * Bitly Settings Section
+   * Bitly Settings Section.
    */
   public function createBitlySection() {
     $section = $this->prefix . '_bitly_section';
@@ -290,6 +303,7 @@ class ContactMe {
   /**
    * Short hand function for adding and registering a setting. Used by child classes
    * to add additional settings for different sections.
+   *
    * @param   object  $args  key > value object containing:
    *                         id = ID of the option
    *                         title = Label for the option
@@ -336,6 +350,7 @@ class ContactMe {
    * Callback function for add_settings_field(). Prints the input field and
    * environment setting if available. Registers the string for translation
    * via WPML.
+   *
    * @param   object  $args  key > value object containing:
    *                         id = ID of the option
    *                         translate = Wether to register for translation
@@ -370,9 +385,11 @@ class ContactMe {
   }
 
   /**
-   * Applies the WPML single string translation filter to the desired option
+   * Applies the WPML single string translation filter to the desired option.
+   *
    * @param   string  $id    The id of the option to pass to get_option() as
    *                         well as the registered name for the translated option.
+   *
    * @return  string         The translated string. Defaults to english.
    */
   public function getTranslatedOption($id) {

@@ -9,57 +9,83 @@ use Soundasleep\Html2Text;
 
 class EmailMe extends ContactMe {
   protected $action = 'Email';
+
   protected $service = 'AWS';
 
   protected $account_label = 'Key';
+
   protected $secret_label = 'Secret';
+
   protected $from_label = 'From Email Address';
 
   protected $account_hint = 'EXAMPLEAKIAIOSFODNN7';
+
   protected $secret_hint = 'EXAMPLEwJalrXUtnFEMI/K7MDENG/bPxRfiCY';
+
   protected $from_hint = 'noreply@example.com';
 
   protected $prefix = 'smnyc_aws';
 
+  const POST_TYPE = 'smnyc-email';
+
   /**
-   * Build the email using content in the admin settings.
-   * @param   [type]  $url       [$url description]
-   * @param   [type]  $page      [$page description]
-   * @param   [type]  $orig_url  [$orig_url description]
-   * @return  array              Key > value object containing subject, body, and email
+   * Register post type for email content
    */
-  protected function content($bitly_url, $page, $url) {
+  public function registerPostType() {
+    register_post_type(self::POST_TYPE, array(
+      'label' => __('SMNYC Email', 'text_domain'),
+      'description' => __('Email content for Send Me NYC', 'text_domain'),
+      'labels' => array(
+        'name' => _x('SMNYC Emails', 'Post Type General Name', 'text_domain'),
+        'singular_name' => _x('SMNYC Email', 'Post Type Singular Name', 'text_domain'),
+      ),
+      'hierarchical' => false,
+      'public' => true,
+      'show_ui' => true,
+      'show_in_rest' => true,
+      'has_archive' => false,
+      'exclude_from_search' => true
+    ));
+  }
+
+  /**
+   * Get the content of the email to send.
+   *
+   * @param   String  $url_shortened  Shortened url that is being shared.
+   * @param   String  $url            Full url that is being shared.
+   * @param   String  $template       Slug of the template to retrieve.
+   * @param   String  $lang           Language of the template to retrieve.
+   *
+   * @return  Array                   Includes the subject, html, and text bodies
+   */
+  protected function content($url_shortened, $url, $template, $lang) {
     if (file_exists(get_template_directory() . '/controllers/single-smnyc-email.php')) {
       require get_template_directory() . '/controllers/single-smnyc-email.php';
     } else {
       error_log(print_r('There is no controller for the email template', true));
+
       return false;
     }
 
-    if ($page == self::RESULTS_PAGE) {
-      $slug = 'screener-results';
-    } else {
-      $slug = 'programs';
-    }
+    $post = get_page_by_path($template, OBJECT, self::POST_TYPE);
 
-    $post = get_page_by_path($slug, OBJECT, 'smnyc-email');
+    $id = $post->ID;
 
-    // Filter ID through WPML
-    $id = apply_filters('wpml_object_id', $post->ID, 'smnyc-email', true);
+    // Filter ID through WPML. Need to add conditionals for WPML or admin notice
+    $id = ($lang === 'en') ?
+      $id : apply_filters('wpml_object_id', $post->ID, 'smnyc-email', true, $lang);
 
     // Render Timber template
     $context = Timber::get_context();
     $context['post'] = new Controller\SingleSmnycEmail($id);
     $html = Timber::compile($context['post']->templates(), $context);
 
-    // error_log(print_r($context['post']->title, true));
-
     $subject = $context['post']->title;
     $text_body = Html2Text::convert($context['post']->post_content);
 
     // Replace Bitly URL
-    $text_body = str_replace('{{ BITLY_URL }}', $bitly_url, $text_body);
-    $html = str_replace('{{ BITLY_URL }}', $bitly_url, $html);
+    $text_body = str_replace('{{ BITLY_URL }}', $url_shortened, $text_body);
+    $html = str_replace('{{ BITLY_URL }}', $url_shortened, $html);
 
     // Replace Standard URL
     $text_body = str_replace('{{ URL }}', $url, $text_body);
@@ -74,8 +100,10 @@ class EmailMe extends ContactMe {
 
   /**
    * Authenticate application and sent email via AWS SES.
-   * @param   [type]  $to    [$to description]
-   * @param   [type]  $info  [$info description]
+   *
+   * @param   String  $to    The recipient to send the message to.
+   *
+   * @param   Array   $info  The email content.
    */
   protected function send($to, $info) {
     try {
@@ -129,17 +157,34 @@ class EmailMe extends ContactMe {
   }
 
   /**
-   * [validRecipient description]
-   * @param   [type]  $addr  [$addr description]
-   * @return  [type]         [return description]
+   * Validates the email address.
+   *
+   * @param   String   $addr  Email address to send message to.
+   *
+   * @return  Boolean         Wether the email is valid or not.
    */
   protected function validRecipient($addr) {
     if (empty($addr)) {
       $this->failure(1, 'Email address must be supplied');
+
+      return false;
     } elseif (!filter_var($addr, FILTER_VALIDATE_EMAIL)) {
       $this->failure(2, 'Invalid email address. Please provide a valid email');
+
+      return false;
     }
 
+    return true;
+  }
+
+  /**
+   * Placeholder for sanitizing the email
+   *
+   * @param   String  $addr  Email address to send
+   *
+   * @return  String         Email address to send
+   */
+  protected function sanitizeRecipient($addr) {
     return $addr;
   }
 

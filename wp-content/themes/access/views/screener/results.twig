@@ -43,7 +43,8 @@
           action: 'sms_send',
           url: shareUrl,
           hash: shareHash,
-          guid: getParams.guid
+          guid: getParams.guid,
+          template: 'screener-results'
         }} only %}
 
         {% include 'components/share-form.twig' with {this: {
@@ -55,7 +56,8 @@
           action: 'email_send',
           url: shareUrl,
           hash: shareHash,
-          guid: getParams.guid
+          guid: getParams.guid,
+          template: 'screener-results'
         }} only %}
 
         <div class="hidden" aria-hidden="true" id="aria-db-share-disclaimer">
