@@ -34,13 +34,19 @@ class ContactMe {
 
   protected $text_domain = 'smnyc';
 
+  protected $template_controller;
+
   const POST_TYPE = 'smnyc';
 
   /**
    * Constructor
    */
-  public function __construct() {
+  public function __construct($template_controller = false) {
     $this->createEndpoints();
+
+    if ($template_controller) {
+      $this->template_controller = $template_controller;
+    }
   }
 
   /**
