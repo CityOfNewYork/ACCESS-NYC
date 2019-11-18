@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-assets",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "WordPress package for asset helpers.",
@@ -18,10 +18,19 @@
     }
   ],
   "keywords": [
+    "nycopportunity",
     "wordpress",
     "assets",
     "configuration",
-    "integrations"
+    "integrations",
+    "scripts",
+    "javascript",
+    "styles",
+    "css",
+    "inline",
+    "theme",
+    "register",
+    "enqueue"
   ],
   "support": {
     "issues": "https://github.com/cityofnewyork/nyco-wp-assets/issues"
