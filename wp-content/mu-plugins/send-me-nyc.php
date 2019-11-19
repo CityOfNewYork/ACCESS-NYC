@@ -7,7 +7,7 @@
  * Text Domain:  smnyc
 */
 
-require plugin_dir_path(__FILE__) . '/send-me-nyc/SendMeNYC.php';
+require plugin_dir_path(__FILE__) . '/wp-send-me-nyc/SendMeNYC.php';
 
 /**
  * Initialize plugin

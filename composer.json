@@ -109,8 +109,8 @@
     "nyco/wp-config": "^0.2.0",
     "nyco/wp-assets": "1.1.0",
     "nyco/wp-open-data-transients": "^0.1.1",
-    "nyco/wp-send-me-nyc": "^1.0",
-    "humanmade/s3-uploads": "2.1.0"
+    "humanmade/s3-uploads": "2.1.0",
+    "nyco/wp-send-me-nyc": "v1.0.2"
   },
   "require-dev": {
     "filp/whoops": "^2.3",

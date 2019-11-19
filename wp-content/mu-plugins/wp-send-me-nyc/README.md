@@ -12,7 +12,7 @@ A developer plugin for WordPress that enables sharing website links via SMS or E
 
 **$2** [Create a proxy PHP loader file](https://wordpress.org/support/article/must-use-plugins/#caveats) inside the mu-plugins directory, or [use the one included with the plugin](https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/blob/master/autoloader-sample.php):
 
-    mv wp-content/mu-plugins/nyco-wp-send-me-nyc/autoloader-sample.php wp-content/mu-plugins/send-me-nyc.php
+    mv wp-content/mu-plugins/wp-send-me-nyc/autoloader-sample.php wp-content/mu-plugins/send-me-nyc.php
 
 ## Initialization
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "356e46510ca0055ded8cc8aab09aa294",
+    "content-hash": "9befd647803f58b9b2dcf69951bf89bb",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1024,16 +1024,16 @@
         },
         {
             "name": "nyco/wp-send-me-nyc",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc.git",
-                "reference": "2da9353089f953e3ed8bdacf03300be88786f8fc"
+                "reference": "2c0148ce0a96b5bf6bbf16c39a25a17d6cfbacf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/2da9353089f953e3ed8bdacf03300be88786f8fc",
-                "reference": "2da9353089f953e3ed8bdacf03300be88786f8fc",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/2c0148ce0a96b5bf6bbf16c39a25a17d6cfbacf4",
+                "reference": "2c0148ce0a96b5bf6bbf16c39a25a17d6cfbacf4",
                 "shasum": ""
             },
             "require": {
@@ -1072,7 +1072,7 @@
                 "twilio",
                 "wordpress"
             ],
-            "time": "2019-11-19T14:31:22+00:00"
+            "time": "2019-11-19T19:42:38+00:00"
         },
         {
             "name": "psr/container",
