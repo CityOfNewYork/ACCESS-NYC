@@ -337,7 +337,7 @@ class S3Client extends AwsClient implements S3ClientInterface
             preg_match('/^[a-z0-9]([a-z0-9\-\.]*[a-z0-9])?$/', $bucket);
     }
 
-    public function createPresignedRequest(CommandInterface $command, $expires)
+    public function createPresignedRequest(CommandInterface $command, $expires, array $options = [])
     {
         $command = clone $command;
         $command->getHandlerList()->remove('signer');
@@ -353,10 +353,24 @@ class S3Client extends AwsClient implements S3ClientInterface
         return $signer->presign(
             \Aws\serialize($command),
             $this->getCredentials()->wait(),
-            $expires
+            $expires,
+            $options
         );
     }
 
+    /**
+     * Returns the URL to an object identified by its bucket and key.
+     *
+     * The URL returned by this method is not signed nor does it ensure that the
+     * bucket and key given to the method exist. If you need a signed URL, then
+     * use the {@see \Aws\S3\S3Client::createPresignedRequest} method and get
+     * the URI of the signed request.
+     *
+     * @param string $bucket  The name of the bucket where the object is located
+     * @param string $key     The key of the object
+     *
+     * @return string The URL to the object
+     */
     public function getObjectUrl($bucket, $key)
     {
         $command = $this->getCommand('GetObject', [
@@ -552,7 +566,7 @@ class S3Client extends AwsClient implements S3ClientInterface
     /** @internal */
     public static function _applyApiProvider($value, array &$args, HandlerList $list)
     {
-        ClientResolver::_apply_api_provider($value, $args, $list);
+        ClientResolver::_apply_api_provider($value, $args);
         $args['parser'] = new GetBucketLocationParser(
             new AmbiguousSuccessParser(
                 new RetryableMalformedResponseParser(
