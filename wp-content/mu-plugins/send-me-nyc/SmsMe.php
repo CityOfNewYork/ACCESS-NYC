@@ -60,9 +60,12 @@ class SmsMe extends ContactMe {
     // Get post and filter ID through WPML
     $post = get_page_by_path($template, OBJECT, self::POST_TYPE);
 
+    $id = $post->ID;
+
     // Filter ID through WPML. Need to add conditionals for WPML or admin notice
-    $id = ($lang === 'en') ?
-      $id : apply_filters('wpml_object_id', $post->ID, self::POST_TYPE, true, $lang);
+    if ($lang !== 'en') {
+      $id = apply_filters('wpml_object_id', $post->ID, self::POST_TYPE, true, $lang);
+    }
 
     // Get content and replace template tag with bitly url
     $text = trim(strip_tags(get_post($id)->post_content));
