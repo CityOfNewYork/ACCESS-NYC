@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32f4b46b5f60030dc732c9664d22de1e",
+    "content-hash": "6d832cf8782c91eec75b9cdb11d84679",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -869,16 +869,16 @@
         },
         {
             "name": "nyco/wp-assets",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-                "reference": "b33c5bec9eef082e7c3ba1b457f25b7aad8acee8"
+                "reference": "cdd9321f120c708de532947f04b57cc5f564c380"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/b33c5bec9eef082e7c3ba1b457f25b7aad8acee8",
-                "reference": "b33c5bec9eef082e7c3ba1b457f25b7aad8acee8",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/cdd9321f120c708de532947f04b57cc5f564c380",
+                "reference": "cdd9321f120c708de532947f04b57cc5f564c380",
                 "shasum": ""
             },
             "require": {
@@ -911,10 +911,19 @@
             "keywords": [
                 "assets",
                 "configuration",
+                "css",
+                "enqueue",
+                "inline",
                 "integrations",
+                "javascript",
+                "nycopportunity",
+                "register",
+                "scripts",
+                "styles",
+                "theme",
                 "wordpress"
             ],
-            "time": "2019-11-13T19:05:03+00:00"
+            "time": "2019-11-18T16:29:09+00:00"
         },
         {
             "name": "nyco/wp-config",

@@ -26,6 +26,8 @@ class EmailMe extends ContactMe {
 
   protected $prefix = 'smnyc_aws';
 
+  protected $template_controller = 'single-smnyc-email.php';
+
   const POST_TYPE = 'smnyc-email';
 
   /**
@@ -59,10 +61,12 @@ class EmailMe extends ContactMe {
    * @return  Array                   Includes the subject, html, and text bodies
    */
   protected function content($url_shortened, $url, $template, $lang) {
-    if (file_exists(get_template_directory() . '/controllers/single-smnyc-email.php')) {
-      require get_template_directory() . '/controllers/single-smnyc-email.php';
+    if (file_exists(get_template_directory() . '/' . $this->template_controller)) {
+      require get_template_directory() . '/' .$this->template_controller;
     } else {
-      error_log(print_r('There is no controller for the email template', true));
+      error_log(print_r('There is no controller for the email template.', true));
+
+      $this->failure(null, 'There is no controller for the email template.');
 
       return false;
     }
@@ -180,9 +184,9 @@ class EmailMe extends ContactMe {
   /**
    * Placeholder for sanitizing the email
    *
-   * @param   String  $addr  Email address to send
+   * @param   String  $addr  Email address to send.
    *
-   * @return  String         Email address to send
+   * @return  String         Email address to send.
    */
   protected function sanitizeRecipient($addr) {
     return $addr;

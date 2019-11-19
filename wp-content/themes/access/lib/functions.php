@@ -77,7 +77,7 @@ function enqueue_inline($name) {
 
   if ($integrations) {
     $index = array_search($name, array_column($integrations, 'handle'));
-    $WpAssets->enqueueInline($integrations[$index]);
+    $WpAssets->addInline($integrations[$index]);
   }
 }
 

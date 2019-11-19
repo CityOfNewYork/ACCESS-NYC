@@ -107,7 +107,7 @@
     "wpml/acfml": "^1.3",
     "wpml/wpml-all-import": "^2.1",
     "nyco/wp-config": "^0.2.0",
-    "nyco/wp-assets": "^1.0",
+    "nyco/wp-assets": "1.1.0",
     "nyco/wp-open-data-transients": "^0.1.1",
     "twilio/sdk": "^5.32",
     "aws/aws-sdk-php": "^3.100",
