@@ -14,7 +14,7 @@ class StatCollector {
     // Internal actions to call in a plugin/hook sense
     add_action('drools_request', [$this, 'droolsRequest'], $this->priority, 2);
     add_action('drools_response', [$this, 'droolsResponse'], $this->priority, 2);
-    add_action('results_sent', [$this, 'resultsSent'], $this->priority, 5);
+    add_action('smnyc_message_sent', [$this, 'resultsSent'], $this->priority, 5);
     add_action('peu_data', [$this, 'peuData'], $this->priority, 3);
 
     // AJAX endpoints to directly write info
