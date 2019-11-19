@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Plugin Name:  Send Me NYC
- * Description:  Email/SMS gateway for saving links for oneself
- * Author:       Blue State Digital
+ * Plugin Name:  NYCO Send Me NYC for WordPress
+ * Description:  A developer plugin for WordPress that enables sharing website links via SMS or Email.
+ * Author:       Blue State Digital, maintained by NYC Opportunity
  * Text Domain:  smnyc
 */
 
