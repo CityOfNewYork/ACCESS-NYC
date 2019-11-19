@@ -1113,6 +1113,52 @@
         ]
     },
     {
+        "name": "nyco/wp-s3-all-import-compatibility",
+        "version": "0.0.1",
+        "version_normalized": "0.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/CityOfNewYork/nyco-wp-s3-all-import-compatibility.git",
+            "reference": "07ec2474bc6f9c23c3f6fc510119bc4daa8a8df3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-s3-all-import-compatibility/zipball/07ec2474bc6f9c23c3f6fc510119bc4daa8a8df3",
+            "reference": "07ec2474bc6f9c23c3f6fc510119bc4daa8a8df3",
+            "shasum": ""
+        },
+        "require": {
+            "composer/installers": "^1.7"
+        },
+        "require-dev": {
+            "codeception/codeception": "^2.3",
+            "squizlabs/php_codesniffer": "3.*"
+        },
+        "time": "2019-11-19T20:06:09+00:00",
+        "type": "wordpress-muplugin",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "NYC Opportunity",
+                "email": "products@nycopportunity.nyc.gov",
+                "homepage": "http://nyc.gov/opportunity"
+            }
+        ],
+        "description": "A developer plugin for WordPress that ensures compatibility between hummanmade / S3 Uploads and WP All Import.",
+        "homepage": "https://github.com/cityofnewyork/nyco-wp-s3-all-import-compatibility",
+        "keywords": [
+            "compatibility",
+            "nycopportunity",
+            "s3-uploads",
+            "wordpress",
+            "wp-all-import"
+        ]
+    },
+    {
         "name": "nyco/wp-send-me-nyc",
         "version": "1.0.2",
         "version_normalized": "1.0.2.0",
