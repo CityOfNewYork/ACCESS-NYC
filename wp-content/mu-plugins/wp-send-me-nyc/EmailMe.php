@@ -64,7 +64,7 @@ class EmailMe extends ContactMe {
     if (file_exists(get_template_directory() . '/' . $this->template_controller)) {
       require get_template_directory() . '/' .$this->template_controller;
     } else {
-      error_log(print_r('There is no controller for the email template.', true));
+      error_log('There is no controller for the email template.');
 
       $this->failure(null, 'There is no controller for the email template.');
 
@@ -76,8 +76,9 @@ class EmailMe extends ContactMe {
     $id = $post->ID;
 
     // Filter ID through WPML. Need to add conditionals for WPML or admin notice
-    $id = ($lang === 'en') ?
-      $id : apply_filters('wpml_object_id', $post->ID, 'smnyc-email', true, $lang);
+    if ($lang !== 'en') {
+      $id = apply_filters('wpml_object_id', $post->ID, self::POST_TYPE, true, $lang);
+    }
 
     // Render Timber template
     $context = Timber::get_context();

@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-send-me-nyc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "A developer plugin for WordPress that enables sharing website links via SMS or Email.",
