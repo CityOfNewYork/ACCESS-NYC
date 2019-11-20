@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05e4309072d1910ad9260b7f1861ed09",
+    "content-hash": "9fa7962e4b293ff2840a338cc98ecad3",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1024,16 +1024,16 @@
         },
         {
             "name": "nyco/wp-s3-all-import-compatibility",
-            "version": "0.0.1",
+            "version": "0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-s3-all-import-compatibility.git",
-                "reference": "07ec2474bc6f9c23c3f6fc510119bc4daa8a8df3"
+                "reference": "d611a3d894b85ff5a26abaf1696c4dab7a38455a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-s3-all-import-compatibility/zipball/07ec2474bc6f9c23c3f6fc510119bc4daa8a8df3",
-                "reference": "07ec2474bc6f9c23c3f6fc510119bc4daa8a8df3",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-s3-all-import-compatibility/zipball/d611a3d894b85ff5a26abaf1696c4dab7a38455a",
+                "reference": "d611a3d894b85ff5a26abaf1696c4dab7a38455a",
                 "shasum": ""
             },
             "require": {
@@ -1064,7 +1064,7 @@
                 "wordpress",
                 "wp-all-import"
             ],
-            "time": "2019-11-19T20:06:09+00:00"
+            "time": "2019-11-20T21:41:35+00:00"
         },
         {
             "name": "nyco/wp-send-me-nyc",
