@@ -66,6 +66,11 @@ class Site extends TimberSite {
     /** Gets object containing all program categories */
     $context['categories'] = get_terms('programs');
 
+    /** Site Alert Banner */
+    $context['site_alert'] = Timber::get_post(array(
+      'post_type' => 'alert'
+    ));
+
     /** Determine if page is in print view */
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
 
