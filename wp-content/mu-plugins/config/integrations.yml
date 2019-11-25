@@ -59,3 +59,8 @@
     position: before
   body_open:
     path: config/integrations/body/google-tag-manager.html
+
+- handle: google-recaptcha
+  dep: GOOGLE_RECAPTCHA
+  path: https://www.google.com/recaptcha/api.js?onload=screenerCallback&render=explicit
+  in_footer: false

@@ -305,21 +305,15 @@ class Screener {
    * @return {this} Screener
    */
   _initRecaptcha() {
-    const $script = $(document.createElement('script'));
-    $script.attr('src',
-        'https://www.google.com/recaptcha/api.js' +
-        '?onload=screenerCallback&render=explicit').prop({
-      async: true,
-      defer: true
-    });
-
     window.screenerCallback = () => {
       window.grecaptcha.render(document.getElementById('screener-recaptcha'), {
         'sitekey': Utility.CONFIG.GRECAPTCHA_SITE_KEY,
         'callback': 'screenerRecaptcha',
         'expired-callback': 'screenerRecaptchaReset'
       });
+
       $('#screener-recaptcha-container').removeClass(Screener.CssClass.HIDDEN);
+
       this._recaptchaRequired = true;
     };
 
@@ -333,7 +327,7 @@ class Screener {
     };
 
     this._recaptchaRequired = true;
-    $('head').append($script);
+
     return this;
   }
 
