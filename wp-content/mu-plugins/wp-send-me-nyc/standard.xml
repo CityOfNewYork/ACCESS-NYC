@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<ruleset name="nyco">
+  <description>PSR2 with two spaces, braces on same line</description>
+
+  <!-- Set width of output -->
+  <arg name="report-width" value="100" />
+
+  <!-- Show colors in console -->
+  <arg value="-colors" />
+
+  <!-- Set tab width to 1, the width of 1 tab is two spaces -->
+  <arg name="tab-width" value="1" />
+
+  <!-- Scan only PHP files -->
+  <arg name="extensions" value="php" />
+
+  <!-- Allow the report to be generated but do not error out -->
+  <config name="ignore_errors_on_exit" value="1" />
+  <config name="ignore_warnings_on_exit" value="1" />
+
+  <!-- Files to scan -->
+  <file>./</file>
+
+  <!-- Ignore WordPress, Composer dependencies, and specific libraries -->
+  <exclude-pattern>./vendor</exclude-pattern>
+
+  <rule ref="PSR2" />
+
+  <rule ref="PSR2">
+    <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine" />
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine" />
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.SpaceAfterFunction" />
+  </rule>
+
+  <rule ref="Generic.Arrays.ArrayIndent">
+    <properties>
+      <property name="indent" value="2" />
+    </properties>
+  </rule>
+
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="2"/>
+      <property name="tabIndent" value="false" />
+    </properties>
+  </rule>
+
+  <rule ref="Squiz.ControlStructures.ControlSignature">
+    <properties>
+      <property name="requiredSpacesBeforeColon" value="0" />
+    </properties>
+  </rule>
+
+  <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+    <properties>
+      <property name="equalsSpacing" value="1" />
+    </properties>
+  </rule>
+
+  <rule ref="Squiz.WhiteSpace.OperatorSpacing">
+    <properties>
+      <property name="ignoreNewlines" value="true" />
+    </properties>
+  </rule>
+
+  <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+    <properties>
+      <property name="spacing" value="1" />
+      <property name="spacingBeforeFirst" value="0" />
+      <property name="spacingAfterLast" value="0" />
+    </properties>
+  </rule>
+
+  <rule ref="PSR2.Methods.FunctionCallSignature">
+    <properties>
+      <property name="indent" value="2" />
+      <property name="allowMultipleArguments" value="true" />
+      <property name="requiredSpacesAfterOpen" value="0" />
+      <property name="requiredSpacesBeforeClose" value="0" />
+    </properties>
+  </rule>
+
+  <rule ref="PSR2.ControlStructures.SwitchDeclaration">
+    <properties>
+      <property name="indent" value="2" />
+    </properties>
+  </rule>
+
+  <rule ref="PSR2.Methods.FunctionCallSignature">
+    <properties>
+      <property name="indent" value="2" />
+    </properties>
+  </rule>
+</ruleset>

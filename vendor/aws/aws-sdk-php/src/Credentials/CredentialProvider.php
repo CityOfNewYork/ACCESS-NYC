@@ -44,10 +44,13 @@ use GuzzleHttp\Promise;
  */
 class CredentialProvider
 {
+    const ENV_ARN = 'AWS_ROLE_ARN';
     const ENV_KEY = 'AWS_ACCESS_KEY_ID';
+    const ENV_PROFILE = 'AWS_PROFILE';
+    const ENV_ROLE_SESSION_NAME = 'AWS_ROLE_SESSION_NAME';
     const ENV_SECRET = 'AWS_SECRET_ACCESS_KEY';
     const ENV_SESSION = 'AWS_SESSION_TOKEN';
-    const ENV_PROFILE = 'AWS_PROFILE';
+    const ENV_TOKEN_FILE = 'AWS_WEB_IDENTITY_TOKEN_FILE';
 
     /**
      * Create a default credential provider that first checks for environment
@@ -69,13 +72,49 @@ class CredentialProvider
      */
     public static function defaultProvider(array $config = [])
     {
-        $localCredentialProviders = self::localCredentialProviders();
-        $remoteCredentialProviders = self::remoteCredentialProviders($config);
+        $cacheable = [
+            'web_identity',
+            'ecs',
+            'process_credentials',
+            'process_config',
+            'instance'
+        ];
+
+        $defaultChain = [
+            'env' => self::env(),
+            'web_identity' => self::assumeRoleWithWebIdentityCredentialProvider($config),
+            'ini' => self::ini(),
+            'ini_config' => self::ini('profile default', self::getHomeDir() . '/.aws/config'),
+        ];
+
+        if (!empty(getenv(EcsCredentialProvider::ENV_URI))) {
+            $defaultChain['ecs'] = self::ecsCredentials($config);
+        }
+        $defaultChain['process_credentials'] = self::process();
+        $defaultChain['process_config'] = self::process(
+            'profile default',
+            self::getHomeDir() . '/.aws/config'
+        );
+        $defaultChain['instance'] = self::instanceProfile($config);
+
+        if (isset($config['credentials'])
+            && $config['credentials'] instanceof CacheInterface
+        ) {
+            foreach ($cacheable as $provider) {
+                if (isset($defaultChain[$provider])) {
+                    $defaultChain[$provider] = self::cache(
+                        $defaultChain[$provider],
+                        $config['credentials'],
+                        'aws_cached_' . $provider . '_credentials'
+                    );
+                };
+            }
+        }
 
         return self::memoize(
             call_user_func_array(
                 'self::chain',
-                array_merge($localCredentialProviders, $remoteCredentialProviders)
+                $defaultChain
             )
         );
     }
@@ -279,6 +318,77 @@ class CredentialProvider
     }
 
     /**
+     * Credential provider that creates credentials by assuming role from a
+     * Web Identity Token
+     *
+     * @param array $config Array of configuration data
+     * @return callable
+     * @see Aws\Credentials\AssumeRoleWithWebIdentityCredentialProvider for
+     * $config details.
+     */
+    public static function assumeRoleWithWebIdentityCredentialProvider(array $config = [])
+    {
+        return function () use ($config) {
+            $arnFromEnv = getenv(self::ENV_ARN);
+            $tokenFromEnv = getenv(self::ENV_TOKEN_FILE);
+            $stsClient = isset($config['stsClient'])
+                ? $config['stsClient']
+                : null;
+            $region = isset($config['region'])
+                ? $config['region']
+                : null;
+
+            if ($tokenFromEnv && $arnFromEnv) {
+                $sessionName = getenv(self::ENV_ROLE_SESSION_NAME)
+                    ? getenv(self::ENV_ROLE_SESSION_NAME)
+                    : null;
+                $provider = new AssumeRoleWithWebIdentityCredentialProvider([
+                    'RoleArn' => $arnFromEnv,
+                    'WebIdentityTokenFile' => $tokenFromEnv,
+                    'SessionName' => $sessionName,
+                    'client' => $stsClient,
+                    'region' => $region
+                ]);
+
+                return $provider();
+            }
+
+            $profileName = getenv(self::ENV_PROFILE) ?: 'default';
+            if (isset($config['filename'])) {
+                $profiles = self::loadProfiles($config['filename']);
+            } else {
+                $profiles = self::loadDefaultProfiles();
+            }
+
+            if (isset($profiles[$profileName])) {
+                $profile = $profiles[$profileName];
+                if (isset($profile['region'])) {
+                    $region = $profile['region'];
+                }
+                if (isset($profile['web_identity_token_file'])
+                    && isset($profile['role_arn'])
+                ) {
+                    $sessionName = isset($profile['role_session_name'])
+                        ? $profile['role_session_name']
+                        : null;
+                    $provider = new AssumeRoleWithWebIdentityCredentialProvider([
+                        'RoleArn' => $profile['role_arn'],
+                        'WebIdentityTokenFile' => $profile['web_identity_token_file'],
+                        'SessionName' => $sessionName,
+                        'client' => $stsClient,
+                        'region' => $region
+                    ]);
+
+                    return $provider();
+                }
+            } else {
+                return self::reject("Unknown profile: $profileName");
+            }
+            return self::reject("No RoleArn or WebIdentityTokenFile specified");
+        };
+    }
+
+    /**
      * Credentials provider that creates credentials using an ini file stored
      * in the current user's home directory.
      *
@@ -313,7 +423,7 @@ class CredentialProvider
             if (!is_readable($filename)) {
                 return self::reject("Cannot read credentials from $filename");
             }
-            $data = \Aws\parse_ini_file($filename, true, INI_SCANNER_RAW);
+            $data = self::loadProfiles($filename);
             if ($data === false) {
                 return self::reject("Invalid credentials file: $filename");
             }
@@ -435,8 +545,9 @@ class CredentialProvider
                 if ($expiration < $now) {
                     return self::reject("credential_process returned expired credentials");
                 }
+                $expires = $expiration->getTimestamp();
             } else {
-                $processData['Expiration'] = null;
+                $expires = null;
             }
 
             if (empty($processData['SessionToken'])) {
@@ -448,7 +559,7 @@ class CredentialProvider
                     $processData['AccessKeyId'],
                     $processData['SecretAccessKey'],
                     $processData['SessionToken'],
-                    $processData['Expiration']
+                    $expires
                 )
             );
         };
@@ -506,62 +617,6 @@ class CredentialProvider
         return Promise\promise_for($creds);
     }
 
-
-    /**
-     * Local credential providers returns a list of local credential providers
-     * in following order:
-     *  - credentials from environment variables
-     *  - 'default' profile in '.aws/credentials' file
-     *  - 'profile default' profile in '.aws/config' file
-     *
-     * @return array
-     */
-    private static function localCredentialProviders()
-    {
-        return [
-            self::env(),
-            self::ini(),
-            self::ini('profile default', self::getHomeDir() . '/.aws/config')
-        ];
-    }
-
-    /**
-     * Remote credential providers returns a list of credentials providers
-     * for the remote endpoints such as EC2 or ECS Roles.
-     *
-     * @param array $config Array of configuration data.
-     *
-     * @return array
-     * @see Aws\Credentials\InstanceProfileProvider for $config details.
-     * @see Aws\Credentials\EcsCredentialProvider for $config details.
-     */
-    private static function remoteCredentialProviders(array $config = [])
-    {
-        if (!empty(getenv(EcsCredentialProvider::ENV_URI))) {
-            $providers['ecs'] = self::ecsCredentials($config);
-        }
-        $providers['process_credentials'] = self::process();
-        $providers['process_config'] = self::process(
-            'profile default',
-            self::getHomeDir() . '/.aws/config'
-        );
-        $providers['instance'] = self::instanceProfile($config);
-
-        if (isset($config['credentials'])
-            && $config['credentials'] instanceof CacheInterface
-        ) {
-            foreach ($providers as $key => $provider) {
-                $providers[$key] = self::cache(
-                    $provider,
-                    $config['credentials'],
-                    'aws_cached_' . $key . '_credentials'
-                );
-            }
-        }
-
-        return $providers;
-    }
-
     /**
      * Gets the environment's HOME directory if available.
      *
@@ -579,6 +634,56 @@ class CredentialProvider
         $homePath = getenv('HOMEPATH');
 
         return ($homeDrive && $homePath) ? $homeDrive . $homePath : null;
+    }
+
+    /**
+     * Gets profiles from specified $filename, or default ini files.
+     */
+    private static function loadProfiles($filename)
+    {
+        $profileData = \Aws\parse_ini_file($filename, true, INI_SCANNER_RAW);
+
+        // If loading .aws/credentials, also load .aws/config when AWS_SDK_LOAD_NONDEFAULT_CONFIG is set
+        if ($filename === self::getHomeDir() . '/.aws/credentials'
+            && getenv('AWS_SDK_LOAD_NONDEFAULT_CONFIG')
+        ) {
+            $configFilename = self::getHomeDir() . '/.aws/config';
+            $configProfileData = \Aws\parse_ini_file($configFilename, true, INI_SCANNER_RAW);
+            foreach ($configProfileData as $name => $profile) {
+                // standardize config profile names
+                $name = str_replace('profile ', '', $name);
+                if (!isset($profileData[$name])) {
+                    $profileData[$name] = $profile;
+                }
+            }
+        }
+
+        return $profileData;
+    }
+
+    /**
+     * Gets profiles from ~/.aws/credentials and ~/.aws/config ini files
+     */
+    private static function loadDefaultProfiles() {
+        $profiles = [];
+        $credFile = self::getHomeDir() . '/.aws/credentials';
+        $configFile = self::getHomeDir() . '/.aws/config';
+        if (file_exists($credFile)) {
+            $profiles = \Aws\parse_ini_file($credFile, true, INI_SCANNER_RAW);
+        }
+
+        if (file_exists($configFile)) {
+        $configProfileData = \Aws\parse_ini_file($configFile, true, INI_SCANNER_RAW);
+            foreach ($configProfileData as $name => $profile) {
+                // standardize config profile names
+                $name = str_replace('profile ', '', $name);
+                if (!isset($profiles[$name])) {
+                    $profiles[$name] = $profile;
+                }
+            }
+        }
+
+        return $profiles;
     }
 
     private static function reject($msg)
