@@ -41,8 +41,6 @@ add_action('wp_headers', function() {
    *
    * @param  Default  self
    * @param  Style    self
-   * @param  Default  self
-   * @param  Style    self
    * @param  Font     self
    * @param  Img      self
    * @param  Script   self nonce-{{ CSP_SCRIPT_NONCE }}
@@ -67,34 +65,18 @@ add_action('wp_headers', function() {
     $csp = $csp . '; report-uri ' . WP_HEADERS_CSP_REPORTING;
   }
 
-  // Send the header
   if (defined('WP_HEADERS_CSP_SEND') && WP_HEADERS_CSP_SEND) {
+    // Send the header
     header($csp);
-  }
 
-  // Add nonce to scripts loaded through the wp_enqueue_script() or wp_add_inline_script()
-  add_filter('script_loader_tag', function($tag) use ($scripts) {
-    return preg_replace('/<script( )*/', '<script nonce="' . $scripts . '"$1', $tag);
-  });
-
-  // Define global var for use elsewhere (to set to template content)
-  // phpcs:disable
-  define('CSP_SCRIPT_NONCE', $scripts);
-  // phpcs:enable
-});
-
-/**
- * Create an endpoint for CSP Reporting. Requires the Timber Router which is
- * installed as plugin dependency.
- */
-if (defined('WP_HEADERS_CSP_REPORTING') && WP_HEADERS_CSP_REPORTING && class_exists('Routes')) {
-  add_filter('plugins_loaded', function() {
-    Routes::map(WP_HEADERS_CSP_REPORTING, function() {
-      http_response_code(204);
-
-      error_log(file_get_contents('php://input'));
-
-      exit();
+    // Add nonce to scripts loaded through the wp_enqueue_script() or wp_add_inline_script()
+    add_filter('script_loader_tag', function($tag) use ($scripts) {
+      return preg_replace('/<script( )*/', '<script nonce="' . $scripts . '"$1', $tag);
     });
-  });
-}
+
+    // Define global var for use elsewhere (to set to template content)
+    // phpcs:disable
+    define('CSP_SCRIPT_NONCE', $scripts);
+    // phpcs:enable
+  }
+});
