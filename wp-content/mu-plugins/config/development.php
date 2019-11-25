@@ -5,6 +5,17 @@
  */
 
 /**
+ * Whoops PHP Error Handler
+ * @link https://github.com/filp/whoops
+ */
+
+if (class_exists('Whoops\Run')) {
+  $whoops = new Whoops\Run;
+  $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler);
+  $whoops->register();
+}
+
+/**
  * Include the plugins module
  */
 
