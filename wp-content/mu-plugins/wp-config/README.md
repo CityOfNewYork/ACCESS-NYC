@@ -1,35 +1,28 @@
 # NYCO WP Config
 
-This "Must Use" Wordpress Plugin sets environment variables for a WordPress installation through a YAML configuration file and autoloads environment specific scripts.
+A developer plugin for WordPress that sets constants and WordPress Options for an installation through a YAML configuration file and autoloads environment specific configuration scripts.
 
 ## Features
 
-* Set environment variables from a **.yml** file.
+* Define constants from a **.yml** file.
 * Set WordPress options from the same **.yml** file.
 * Optionally encrypt the **.yml** file secrets.
-* Autoload default **php** file (like a **functions.php** file)
-* Autoload environment specific **php** file.
+* Autoload default **.php** configuration file.
+* Autoload environment specific **.php** configuration file.
 
-## Usage
+## Installation using [Composer](https://getcomposer.org/)
 
-### Installation
-
-It uses `composer/installers` to install it to the mu-plugin directly using Composer. Just run:
+**$1** This package uses [Composer Installers](https://github.com/composer/installers) to install the package in the **Must Use** plugins directory (*/wp-content/mu-plugins*):
 
     composer require nyco/wp-config
 
-You can also download the package and add it manually to your mu-plugin directory. Create a must-use plugin loader in the root of the `mu-plugins` and name it **@wp-config.php** (the ampersand ensures it runs first) directory and include the following;
+*Not using Composer?* Download an archive of the code and drop it into the mu-plugins directory.
 
-    if (file_exists(WPMU_PLUGIN_DIR . '/wp-config/Config.php')) {
-      require_once WPMU_PLUGIN_DIR . '/wp-config/Config.php'; // loads the Config class
-      new NYCO\Config(); // instantiates the class and sets environment variables
-    }
+**$2** [Create a proxy PHP loader file](https://wordpress.org/support/article/must-use-plugins/#caveats) inside the mu-plugins directory, or [use the one included with the plugin](https://github.com/CityOfNewYork/wp-config/blob/master/autoloader-sample.php):
 
-### Requirements
+    mv wp-content/mu-plugins/wp-config/autoloader-sample.php wp-content/mu-plugins/@config.php
 
-This package requires the `mustangostang/spyc` YAML parser and the `illuminate/encryption` as dependencies. It will expect these to already be loaded so it is recommended to have Composer dependencies defined in the root of the WordPress installation.
-
-The plugin comes in a directory, so you will need to create an mu-plugin autoloader to get it to be used by your WordPress installation. [Here is an example of an autoloader in the codex](https://codex.wordpress.org/Must\_Use\_Plugins#Autoloader_Example).
+## Usage
 
 ### Recommendations
 
@@ -37,34 +30,39 @@ Secure the **config.yml** file and **env.php** described below by A) using the e
 
 ### Configuration
 
-The package comes with a sample config directory **/config-sample**. Copy the directory, place into the **mu-plugins**, and rename it to **config**. In the directory you'll find the following files:
+The package comes with a sample config directory **/config-sample**. Copy the directory, place into the **mu-plugins**, and rename it to **config**.
 
-**development.php** - This is a sample file that would be required if you set the `WP_ENV` constant to `development`. You can add as many environments as you would like, but you need to set them (see below).
+    mv wp-content/mu-plugins/wp-config/config-sample wp-content/mu-plugins/config
+
+In the directory you'll find the following files:
+
+**default.php** - This is the default configuration script for writing global configurations for your site.
+
+**development.php** - This is a sample configuration script that would be required if you set the `WP_ENV` constant to `development`. You can add as many environments as you would like, but you need to set them (see below).
 
 **config.yml** - This file will be automatically loaded and read for your different environments. For example:
 
     development:
         SOME_VAR: someVarHere
 
-`SOME_VAR` would be set for your development environment based on the `WP_ENV` constant. It would be available to your WordPress plugins and themes through `getenv('some_var')` (note the lowercase). If the variable is not set, it will be returned as a blank string. You can add as many environments as you would like, but you need to set them (see below). *It is recommended to add the **config.yml** file to your **.gitignore** if you are storing private keys so they aren't committed to source control*.
+The `SOME_VAR` constant would be set for your development environment. It would be available to your WordPress plugins and themes through `SOME_VAR` or `constant('SOME_VAR')`. You can add as many environments as you would like, but you need to set them (see below). *It is recommended to add the **config.yml** file to your **.gitignore** if you are storing private keys so they aren't committed to source control*.
 
 ### Setting your environment
 
 Simply add the following to your **wp-config.php** to set your environment variable:
 
-    putenv('WP_ENV=development'); // The environment will be set to
-    $_ENV['WP_ENV'] = getenv('WP_ENV');
-    define('WP_ENV', getenv('WP_ENV'));
+    $_ENV['WP_ENV'] = 'development';
+    define('WP_ENV', $_ENV['WP_ENV']);
 
 ### Setting WordPress Options
+
 To set database options in the WordPress Installation, prefix the the variables in the **config.yml** file with `WP_OPTION_`. For example:
 
     development:
         WP_OPTION_SOME_VAR: someVarHere
 
-The variable will be set to the environment w/o the `WP_OPTION_` prefix so `WP_OPTION_SOME_VAR` would be available as `getenv('some_var')`.
-
 ### Encryption
+
 The encryption method is optional. To utilize this method, you will need to  generate a secret key to encrypt and decrypt your **config.yml** secrets.
 
 1. Clone or download the repository down and `cd` into the directory.
@@ -83,6 +81,8 @@ The action `nyco_wp_config_loaded` is fired after the **default.php**, **environ
 
 Clone repository and create feature branch. Make changes and run `composer run lint` to follow the coding specification. `composer run format` can help fix some of the issues.
 
-# About NYCO
+---
 
-NYC Opportunity is the [New York City Mayor's Office for Economic Opportunity](http://nyc.gov/opportunity). We are committed to sharing open source software that we use in our products. Feel free to ask questions and share feedback. Follow @nycopportunity on [Github](https://github.com/orgs/CityOfNewYork/teams/nycopportunity), [Twitter](https://twitter.com/nycopportunity), [Facebook](https://www.facebook.com/NYCOpportunity/), and [Instagram](https://www.instagram.com/nycopportunity/).
+![The Mayor's Office for Economic Opportunity](NYCMOEO_SecondaryBlue256px.png)
+
+[The Mayor's Office for Economic Opportunity](http://nyc.gov/opportunity) (NYC Opportunity) is committed to sharing open source software that we use in our products. Feel free to ask questions and share feedback. **Interested in contributing?** See our open positions on [buildwithnyc.github.io](http://buildwithnyc.github.io/). Follow our team on [Github](https://github.com/orgs/CityOfNewYork/teams/nycopportunity) (if you are part of the [@cityofnewyork](https://github.com/CityOfNewYork/) organization) or [browse our work on Github](https://github.com/search?q=nycopportunity).

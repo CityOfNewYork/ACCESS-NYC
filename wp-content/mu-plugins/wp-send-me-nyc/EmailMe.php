@@ -118,11 +118,11 @@ class EmailMe extends ContactMe {
       $display = get_option('smnyc_aws_display_name');
       $reply = get_option('smnyc_aws_reply');
 
-      $user = (!empty($user)) ? $user : $_ENV['SMNYC_AWS_USER'];
-      $secret = (!empty($secret)) ? $secret : $_ENV['SMNYC_AWS_SECRET'];
-      $from = (!empty($from)) ? $from : $_ENV['SMNYC_AWS_FROM'];
-      $display = (!empty($display)) ? $display : $_ENV['SMNYC_AWS_DISPLAY_NAME'];
-      $reply = (!empty($reply)) ? $reply : $_ENV['SMNYC_AWS_REPLY'];
+      $user = (!empty($user)) ? $user : SMNYC_AWS_USER;
+      $secret = (!empty($secret)) ? $secret : SMNYC_AWS_SECRET;
+      $from = (!empty($from)) ? $from : SMNYC_AWS_FROM;
+      $display = (!empty($display)) ? $display : SMNYC_AWS_DISPLAY_NAME;
+      $reply = (!empty($reply)) ? $reply : SMNYC_AWS_REPLY;
 
       // Build display name
       $from = (!empty($display)) ? "$display<$from>" : $from;

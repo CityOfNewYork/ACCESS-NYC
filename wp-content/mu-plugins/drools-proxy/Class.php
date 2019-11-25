@@ -19,9 +19,9 @@ class DroolsProxy {
     $user = get_option('drools_user');
     $pass = get_option('drools_pass');
 
-    $url = (!empty($url)) ? $url : $_ENV['DROOLS_URL'];
-    $user = (!empty($user)) ? $user : $_ENV['DROOLS_USER'];
-    $pass = (!empty($pass)) ? $pass : $_ENV['DROOLS_PASS'];
+    $url = (!empty($url)) ? $url : DROOLS_URL;
+    $user = (!empty($user)) ? $user : DROOLS_USER;
+    $pass = (!empty($pass)) ? $pass : DROOLS_PASS;
 
     if (empty($url) || empty($user) || empty($pass)) {
       wp_send_json([
@@ -146,11 +146,11 @@ class DroolsProxy {
       '/>'
     ], '');
 
-    if ($_ENV[strtoupper($args[0])]) {
+    if (constant(strtoupper($args[0]))) {
       echo implode([
         '<p class="description">',
         'Environment currently set to ',
-        '<code>' . $_ENV[strtoupper($args[0])] . '</code>',
+        '<code>' . constant(strtoupper($args[0])) . '</code>',
         '<p>'
       ], '');
     }

@@ -1018,17 +1018,17 @@
     },
     {
         "name": "nyco/wp-config",
-        "version": "0.2.0",
-        "version_normalized": "0.2.0.0",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-            "reference": "3961845513a3513e21202521c85b68695e3d5f23"
+            "reference": "9a476e0ee32dc7fb0ebe63724bb295c36c057c80"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/3961845513a3513e21202521c85b68695e3d5f23",
-            "reference": "3961845513a3513e21202521c85b68695e3d5f23",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/9a476e0ee32dc7fb0ebe63724bb295c36c057c80",
+            "reference": "9a476e0ee32dc7fb0ebe63724bb295c36c057c80",
             "shasum": ""
         },
         "require": {
@@ -1040,7 +1040,7 @@
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2019-10-25T15:19:59+00:00",
+        "time": "2019-11-25T18:45:41+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -1049,15 +1049,16 @@
         ],
         "authors": [
             {
-                "name": "Devon Hirth",
-                "email": "dehirth@nycopportunity.nyc.gov",
-                "homepage": "https://github.com/devowhippit"
+                "name": "NYC Opportunity",
+                "email": "products@nycopportunity.nyc.gov",
+                "homepage": "https://nyc.gov/opportunity"
             }
         ],
         "description": "A WordPress package for environment configuration.",
         "homepage": "https://github.com/cityofnewyork/nyco-wp-config",
         "keywords": [
             "configuration",
+            "constants",
             "environment",
             "wordpress"
         ]
@@ -1160,17 +1161,17 @@
     },
     {
         "name": "nyco/wp-send-me-nyc",
-        "version": "1.0.3",
-        "version_normalized": "1.0.3.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc.git",
-            "reference": "66d845ecc4a3ed15f26a4607226fb1c91cfc256b"
+            "reference": "54974d46f050c06063285e8c150135c0be8c4fdb"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/66d845ecc4a3ed15f26a4607226fb1c91cfc256b",
-            "reference": "66d845ecc4a3ed15f26a4607226fb1c91cfc256b",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/54974d46f050c06063285e8c150135c0be8c4fdb",
+            "reference": "54974d46f050c06063285e8c150135c0be8c4fdb",
             "shasum": ""
         },
         "require": {
@@ -1183,7 +1184,7 @@
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2019-11-19T21:39:15+00:00",
+        "time": "2019-11-25T18:47:04+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",

@@ -1,21 +1,22 @@
 {
   "name": "nyco/wp-config",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "A WordPress package for environment configuration.",
   "homepage": "https://github.com/cityofnewyork/nyco-wp-config",
   "authors": [
     {
-      "name": "Devon Hirth",
-      "email": "dehirth@nycopportunity.nyc.gov",
-      "homepage": "https://github.com/devowhippit"
+      "name": "NYC Opportunity",
+      "email": "products@nycopportunity.nyc.gov",
+      "homepage": "https://nyc.gov/opportunity"
     }
   ],
   "keywords": [
     "wordpress",
     "environment",
-    "configuration"
+    "configuration",
+    "constants"
   ],
   "support": {
     "issues": "https://github.com/cityofnewyork/nyco-wp-config/issues"

@@ -131,8 +131,8 @@ class ContactMe {
     $bitly_shortener = get_option('smnyc_bitly_shortener');
     $bitly_token = get_option('smnyc_bitly_token');
 
-    $bitly_shortener = (!empty($bitly_shortener)) ? $bitly_shortener : $_ENV['SMNYC_BITLY_SHORTENER'];
-    $bitly_token = (!empty($bitly_token)) ? $bitly_token : $_ENV['SMNYC_BITLY_TOKEN'];
+    $bitly_shortener = (!empty($bitly_shortener)) ? $bitly_shortener : SMNYC_BITLY_SHORTENER;
+    $bitly_token = (!empty($bitly_token)) ? $bitly_token : SMNYC_BITLY_TOKEN;
 
     $encoded = urlencode($url);
 
@@ -187,9 +187,9 @@ class ContactMe {
     $secret = get_option('smnyc_' . $service . '_secret');
     $from = get_option('smnyc_' . $service . '_from');
 
-    $user = (!empty($user)) ? $user : $_ENV['SMNYC_' . strtoupper($service) . '_USER'];
-    $secret = (!empty($secret)) ? $secret : $_ENV['SMNYC_' . strtoupper($service) . '_SECRET'];
-    $from = (!empty($from)) ? $from : $_ENV['SMNYC_' . strtoupper($service) . '_FROM'];
+    $user = (!empty($user)) ? $user : constant('SMNYC_' . strtoupper($service) . '_USER');
+    $secret = (!empty($secret)) ? $secret : constant('SMNYC_' . strtoupper($service) . '_SECRET');
+    $from = (!empty($from)) ? $from : constant('SMNYC_' . strtoupper($service) . '_FROM');
 
     if (empty($user) || empty($secret) || empty($from)) {
       $this->failure(-1, 'Invalid Configuration');
@@ -385,9 +385,9 @@ class ContactMe {
     echo "/>";
 
     /** Display environment variable if available */
-    if ($_ENV[strtoupper($args['id'])]) {
+    if (constant(strtoupper($args['id']))) {
       echo '<p class="description">';
-      echo '  Environment currently set to <code>' . $_ENV[strtoupper($id)] . '</code>';
+      echo '  Environment currently set to <code>' . constant(strtoupper($id)) . '</code>';
       echo '<p>';
     }
 
