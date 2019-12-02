@@ -1,21 +1,19 @@
 <?php
 
 /**
- * Location detail page.
+ * Location detail page
  */
 
-/**
- * Variables
- */
+use Config\Paths as Path;
 
-global $params;
+require_once get_template_directory() . '/lib/paths.php';
+require_once Path\controller('single-location');
 
 /**
  * Context
  */
 
 $location = new Controller\SingleLocation();
-
 $context = Timber::get_context();
 $context['post'] = $location;
 $templates = $location->templates();

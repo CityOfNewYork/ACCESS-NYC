@@ -16,9 +16,10 @@
 !/vendor/mtdowling
 !/vendor/mustangostang
 !/vendor/nesbot
-!/vendor/nyco
 !/vendor/psr
 !/vendor/ralouphie
+!/vendor/soundasleep
+!/vendor/symfony/polyfill-ctype
 !/vendor/symfony/polyfill-mbstring
 !/vendor/symfony/translation
 !/vendor/symfony/translation-contracts
@@ -34,7 +35,6 @@
 /wp-content/backup-db/*
 /wp-content/backups/
 /wp-content/advanced-cache.php
-/wp-content/themes/access/.env
 /wp-content/wp-cache-config.php
 /wp-content/cache/*
 /wp-content/cache/supercache/*
@@ -68,6 +68,11 @@
 ################
 /wp-content/themes/access/assets/js/*.development.js
 /wp-content/themes/access/assets/**/*.map
+/wp-content/themes/access/testing.php
+
+# ENV Files #
+#############
+.env
 
 # Packages #
 ############

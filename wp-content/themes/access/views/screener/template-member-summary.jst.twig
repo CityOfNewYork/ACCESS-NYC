@@ -1,0 +1,12 @@
+<% members.forEach(function(member, index) { %>
+<li>
+  <% if (index === 0 && !member.isHoh) { %>
+  <span class="c-member-list__item">{{ __("You", "accessnyc-screener")|trim|escape("js") }}</span>
+  <% } %>
+  <span class="c-member-list__item"><%= member.relation %></span>
+  <span class="c-member-list__item"><%= member.age %></span>
+  <% if (index === 0 && member.isHoh) { %>
+  <span class="c-member-list__item">{{ __("Head of household", "accessnyc-screener")|trim|escape("js") }}</span>
+  <% } %>
+</li>
+<% }); %>

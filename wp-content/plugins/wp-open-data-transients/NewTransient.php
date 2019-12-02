@@ -1,12 +1,12 @@
 <?php
 
-namespace nyco\WpOpenDataTransients\NewTransient;
+namespace NYCO\Transients\NewTransient;
 
 /**
  * Dependencies
  */
 
-use nyco\WpOpenDataTransients\Transients\Transients as Transients;
+use NYCO\Transients as Transients;
 
 /**
  * Constants

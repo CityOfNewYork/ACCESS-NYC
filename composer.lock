@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "339e49a8aea77ca980067558c2bf9ca7",
+    "content-hash": "d87113f68bd2750918ff34a75dca86f6",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -91,16 +91,16 @@
         },
         {
             "name": "composer/installers",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
+                "reference": "141b272484481432cda342727a427dc1e206bfa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-                "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+                "url": "https://api.github.com/repos/composer/installers/zipball/141b272484481432cda342727a427dc1e206bfa0",
+                "reference": "141b272484481432cda342727a427dc1e206bfa0",
                 "shasum": ""
             },
             "require": {
@@ -156,6 +156,7 @@
                 "RadPHP",
                 "SMF",
                 "Thelia",
+                "Whmcs",
                 "WolfCMS",
                 "agl",
                 "aimeos",
@@ -178,6 +179,7 @@
                 "installer",
                 "itop",
                 "joomla",
+                "known",
                 "kohana",
                 "laravel",
                 "lavalite",
@@ -207,7 +209,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2018-08-27T06:10:37+00:00"
+            "time": "2019-08-12T15:00:31+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -275,6 +277,58 @@
                 "string"
             ],
             "time": "2018-01-09T20:05:19+00:00"
+        },
+        {
+            "name": "enelogic/wpml-installer",
+            "version": "0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Enelogic/wpml-installer.git",
+                "reference": "3d4c13c7517fa2e1620b1a19b18bc281308ecd14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Enelogic/wpml-installer/zipball/3d4c13c7517fa2e1620b1a19b18bc281308ecd14",
+                "reference": "3d4c13c7517fa2e1620b1a19b18bc281308ecd14",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.5",
+                "vlucas/phpdotenv": "^2.2"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Enelogic\\WPMLInstaller\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Enelogic\\WPMLInstaller\\": "src/WPMLInstaller"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wesley Coppens",
+                    "email": "wesley@enelogic.com"
+                }
+            ],
+            "description": "An install helper for Wordpress Multilingual (WPML), based of Philipp Baschke it's plugin to install ACFPro",
+            "keywords": [
+                "composer",
+                "env",
+                "plugin",
+                "wordpress",
+                "wp",
+                "wpml"
+            ],
+            "time": "2019-02-27T11:41:53+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -458,6 +512,43 @@
                 "url"
             ],
             "time": "2018-12-04T20:46:45+00:00"
+        },
+        {
+            "name": "humanmade/s3-uploads",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/humanmade/S3-Uploads.git",
+                "reference": "f17559cba87e0a0a0191a747f62c74dbde60208d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/f17559cba87e0a0a0191a747f62c74dbde60208d",
+                "reference": "f17559cba87e0a0a0191a747f62c74dbde60208d",
+                "shasum": ""
+            },
+            "require": {
+                "aws/aws-sdk-php": "~3.18",
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Human Made Limited",
+                    "email": "support@humanmade.co.uk",
+                    "homepage": "http://hmn.md/"
+                }
+            ],
+            "description": "WordPress plugin to store uploads on S3",
+            "homepage": "https://github.com/humanmade/S3-Uploads",
+            "keywords": [
+                "wordpress"
+            ],
+            "time": "2019-04-16T05:09:44+00:00"
         },
         {
             "name": "illuminate/contracts",
@@ -778,28 +869,37 @@
         },
         {
             "name": "nyco/wp-assets",
-            "version": "0.0.5",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-                "reference": "3fef28a4da51b697a0e39a2b9883b2865a9ebf35"
+                "reference": "b33c5bec9eef082e7c3ba1b457f25b7aad8acee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/3fef28a4da51b697a0e39a2b9883b2865a9ebf35",
-                "reference": "3fef28a4da51b697a0e39a2b9883b2865a9ebf35",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/b33c5bec9eef082e7c3ba1b457f25b7aad8acee8",
+                "reference": "b33c5bec9eef082e7c3ba1b457f25b7aad8acee8",
                 "shasum": ""
+            },
+            "require": {
+                "composer/installers": "^1.7",
+                "mustangostang/spyc": "0.6.2"
             },
             "require-dev": {
                 "codeception/codeception": "^2.3",
                 "squizlabs/php_codesniffer": "3.*"
             },
-            "type": "package",
+            "type": "wordpress-muplugin",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0+"
             ],
             "authors": [
+                {
+                    "name": "NYC Opportunity",
+                    "email": "products@nycopportunity.nyc.gov",
+                    "homepage": "https://nyc.gov/opportunity"
+                },
                 {
                     "name": "Devon Hirth",
                     "email": "dehirth@nycopportunity.nyc.gov",
@@ -810,22 +910,24 @@
             "homepage": "https://github.com/cityofnewyork/nyco-wp-assets",
             "keywords": [
                 "assets",
+                "configuration",
+                "integrations",
                 "wordpress"
             ],
-            "time": "2018-02-09T21:30:33+00:00"
+            "time": "2019-11-13T19:05:03+00:00"
         },
         {
             "name": "nyco/wp-config",
-            "version": "0.1.1",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-                "reference": "e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1"
+                "reference": "3961845513a3513e21202521c85b68695e3d5f23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1",
-                "reference": "e1e7591785d6c6fe9999cf9023d8ef52ab24a8f1",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/3961845513a3513e21202521c85b68695e3d5f23",
+                "reference": "3961845513a3513e21202521c85b68695e3d5f23",
                 "shasum": ""
             },
             "require": {
@@ -856,20 +958,20 @@
                 "environment",
                 "wordpress"
             ],
-            "time": "2019-03-25T14:32:38+00:00"
+            "time": "2019-10-25T15:19:59+00:00"
         },
         {
             "name": "nyco/wp-open-data-transients",
-            "version": "0.0.4",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-open-data-transients.git",
-                "reference": "3e448e9b00ef8203f197eaba0c19727a5b41bb20"
+                "reference": "0ec6f4ffbfcc7e72c1829a3ced56df6878a09d0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-open-data-transients/zipball/3e448e9b00ef8203f197eaba0c19727a5b41bb20",
-                "reference": "3e448e9b00ef8203f197eaba0c19727a5b41bb20",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-open-data-transients/zipball/0ec6f4ffbfcc7e72c1829a3ced56df6878a09d0d",
+                "reference": "0ec6f4ffbfcc7e72c1829a3ced56df6878a09d0d",
                 "shasum": ""
             },
             "require": {
@@ -886,6 +988,11 @@
             ],
             "authors": [
                 {
+                    "name": "NYC Opportunity",
+                    "email": "products@nycopportunity.nyc.gov",
+                    "homepage": "https://nyc.gov/opportunity"
+                },
+                {
                     "name": "Devon Hirth",
                     "email": "dehirth@nycopportunity.nyc.gov",
                     "homepage": "https://github.com/devowhippit"
@@ -899,7 +1006,7 @@
                 "transients",
                 "wordpress"
             ],
-            "time": "2018-10-10T19:56:02+00:00"
+            "time": "2019-11-13T18:12:40+00:00"
         },
         {
             "name": "psr/container",
@@ -1087,6 +1194,114 @@
             ],
             "description": "A polyfill for getallheaders.",
             "time": "2016-02-11T07:05:27+00:00"
+        },
+        {
+            "name": "soundasleep/html2text",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/soundasleep/html2text.git",
+                "reference": "3243a7107878a61685d2eccf99918d6479e039fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/soundasleep/html2text/zipball/3243a7107878a61685d2eccf99918d6479e039fc",
+                "reference": "3243a7107878a61685d2eccf99918d6479e039fc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~7.0",
+                "soundasleep/component-tests": "~0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Soundasleep\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jevon Wright",
+                    "homepage": "https://jevon.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP script to convert HTML into a plain text format",
+            "homepage": "https://github.com/soundasleep/html2text",
+            "keywords": [
+                "email",
+                "html",
+                "php",
+                "text"
+            ],
+            "time": "2019-02-15T01:44:54+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "550ebaac289296ce228a706d0867afc34687e3f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/550ebaac289296ce228a706d0867afc34687e3f4",
+                "reference": "550ebaac289296ce228a706d0867afc34687e3f4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.12-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2019-08-06T08:03:45+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1327,6 +1542,57 @@
             "time": "2019-05-29T22:54:53+00:00"
         },
         {
+            "name": "vlucas/phpdotenv",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vlucas/phpdotenv.git",
+                "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
+                "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/polyfill-ctype": "^1.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dotenv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vance Lucas",
+                    "email": "vance@vancelucas.com",
+                    "homepage": "http://www.vancelucas.com"
+                }
+            ],
+            "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2019-01-29T11:11:52+00:00"
+        },
+        {
             "name": "wpackagist-plugin/acf-to-rest-api",
             "version": "3.1.0",
             "source": {
@@ -1487,6 +1753,26 @@
             "homepage": "https://wordpress.org/plugins/limit-login-attempts-reloaded/"
         },
         {
+            "name": "wpackagist-plugin/loggedin",
+            "version": "1.2.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/loggedin/",
+                "reference": "tags/1.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/loggedin.1.2.0.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/loggedin/"
+        },
+        {
             "name": "wpackagist-plugin/rollbar",
             "version": "2.6.0",
             "source": {
@@ -1568,15 +1854,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.5.2.2",
+            "version": "1.5.4.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.5.2.2"
+                "reference": "tags/1.5.4.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.2.2.zip",
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.4.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1585,6 +1871,69 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wps-hide-login/"
+        },
+        {
+            "name": "wpml/acfml",
+            "version": "1.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://httpbin.org/status/400?&version=1.3&download=1097589",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "^1.0",
+                "enelogic/wpml-installer": "^0.1"
+            },
+            "type": "wordpress-plugin"
+        },
+        {
+            "name": "wpml/wpml-all-import",
+            "version": "2.1.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://httpbin.org/status/400?&version=2.1.1&download=720221",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "^1.0",
+                "enelogic/wpml-installer": "^0.1"
+            },
+            "type": "wordpress-plugin"
+        },
+        {
+            "name": "wpml/wpml-multilingual-cms",
+            "version": "4.2.6",
+            "dist": {
+                "type": "zip",
+                "url": "https://httpbin.org/status/400?&version=4.2.6&download=6088",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "^1.0",
+                "enelogic/wpml-installer": "^0.1"
+            },
+            "type": "wordpress-plugin",
+            "extra": {
+                "installer-name": "sitepress-multilingual-cms"
+            }
+        },
+        {
+            "name": "wpml/wpml-string-translation",
+            "version": "2.10.4",
+            "dist": {
+                "type": "zip",
+                "url": "https://httpbin.org/status/400?&version=2.10.4&download=6092",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "^1.0",
+                "enelogic/wpml-installer": "^0.1"
+            },
+            "type": "wordpress-plugin"
         }
     ],
     "packages-dev": [

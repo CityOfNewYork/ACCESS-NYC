@@ -1,34 +1,23 @@
-{% if language_code == 'en' %}
-    {% set urlBase = '' %}
-{% else %}
-    {% set urlBase = '/' ~ language_code %}
-{% endif %}
 <!DOCTYPE html>
-<html lang="{{ language_code }}"
-  {% if language_code == 'ar' or language_code =='ur' %}dir="rtl"{% endif %}
-  {% if is_print %}class="print-view"{% endif %}>
-
+<html lang="{{ language_code }}" dir="{{ direction }}" {% if is_print %}class="print-view"{% endif %}>
   <head>
     {% block html_head_container %}
-      {{ function('enqueue_language_style', 'style') }}
       {% include 'partials/html-header.twig' %}
 
       {% block head %}
       <meta name="theme-color" content="#FFFFFF">
-      <link rel="manifest" href="{{theme.path}}/manifest.960190a2.json">
+      <link rel="manifest" href="{{ theme.path }}/manifest.960190a2.json">
       {% endblock %}
 
-      {% block scripts_head %}
-      {% include 'partials/scripts-google-tags.twig' with {head: true} only %}
-      {% endblock %}
+      {% block scripts_head %}{% endblock %}
     {% endblock %}
   </head>
 
   <body data-template="base.twig" class="{% set _bodyClass = block('body_class') %}{% if _bodyClass %} {{ _bodyClass|trim }}{% endif %}">
-    {% include 'partials/scripts-google-tags.twig' with {body: true} only %}
+    {{ function('wp_body_open') }}
 
     <div class="page-wrapper">
-      <a class="sr-only sr-only-focusable" href="#content">{{__('Skip to main content', 'accessnyctheme')}}</a>
+      <a class="sr-only sr-only-focusable" href="#content">{{ __('Skip to main content', 'accessnyctheme') }}</a>
       {% block header %}
         <header class="relative">
           <div class="color-mid-background flex justify-between py-1 px-3 print:block">
@@ -37,7 +26,7 @@
               <svg class="icon icon-logo-nyc">
                 <use xlink:href="#icon-logo-nyc"></use>
               </svg>
-              <span class="text-font-size-xsmall px-1 text-color-grey-mid hidden screen-desktop:inline-block">{{__('Official website of the City of New York', 'accessnyctheme')}}</span>
+              <span class="text-font-size-xsmall px-1 text-color-grey-mid hidden screen-desktop:inline-block">{{ __('Official website of the City of New York', 'accessnyctheme') }}</span>
             </div>
             {% endspaceless %}
 
@@ -50,8 +39,7 @@
         </header>
       {% endblock %}
 
-      {% block content %}
-      {% endblock %}
+      {% block content %}{% endblock %}
 
       {% block footer %}
         <footer class="o-footer color-mid-background">
@@ -64,13 +52,7 @@
       {% endif %}
     </div>
 
-    {% block webtrends %}
-    {% include 'partials/scripts-webtrends.twig' %}
-    {% endblock %}
-
-    {% block scripts_footer %}
-    {{ function('enqueue_script', 'assets/js/main') }}
-    {% endblock %}
+    {% block scripts_footer %}{% endblock %}
 
     {% include 'partials/strings-newsletter.twig' %}
 

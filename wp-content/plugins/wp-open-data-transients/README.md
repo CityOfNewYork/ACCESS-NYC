@@ -13,9 +13,7 @@ This WordPress Plugin will provide an interface in the WP Admin to save saving e
 
 It uses `composer/installers` to install it to the plugin directly using Composer. Just run:
 
-```
-composer require nyco/wp-open-data-transients
-```
+    composer require nyco/wp-open-data-transients
 
 You can also download the package and add it manually to your plugin directory.
 
@@ -33,33 +31,25 @@ Typing the name of an already saved transient and clicking "Save Transient" will
 
 Once the plugin is installed, you can reference the name space to use it;
 
-```
-use nyco\WpOpenDataTransients\Transients\Transients as Transients;
-```
+    use NYCO\Transients as Transients;
 
 #### Save
 
 The transient needs to be saved with a valid name (letters and underscores only) and valid url before it can be exposed to the [`set`](#set) or [`get`](#get) methods.
 
-```
-Transients::save('your_transient_name', 'https://opendata.com/endpoint');
-```
+    Transients::save('your_transient_name', 'https://opendata.com/endpoint');
 
 #### Set
 
 Uses WordPress' `wp_remote_get` and `set_transient` methods to retrieve the saved endpoint and save the response body. It will expect a JSON response and will be saved as a PHP Object.
 
-```
-Transients::set('your_transient_name');
-```
+    Transients::set('your_transient_name');
 
 #### Get
 
 Returns a saved transient. If the transient is empty (expired) it will use the [`set`](#set) method to re-cache it.
 
-```
-Transients::get('your_transient_name');
-```
+    Transients::get('your_transient_name');
 
 ### Potential Improvements
 

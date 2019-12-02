@@ -236,8 +236,8 @@ class OfficeMap {
     }
 
     // Underscore templates.
-    const locationTemplate = $('#map-location-template').html();
-    const paginationTemplate = $('#map-pagination-template').html();
+    const locationTemplate = window.JST['locations/template-card-map'];
+    const paginationTemplate = window.JST['locations/template-pagination'];
 
     // Determine the set of locations to retrieve based on count.
     const currentCount = $(this._listEl).find('li').length;
@@ -259,13 +259,14 @@ class OfficeMap {
     $(this._el).find(OfficeMap.Selectors.MESSAGE_NO_RESULTS)
       .addClass('hidden')
       .attr('aria-hidden', true);
-    $(this._listEl).append(_.template(locationTemplate)({
+
+    $(this._listEl).append(locationTemplate({
       locations: addedLocations,
       localize: Utility.localize
     }));
 
     // Update the pagination controller.
-    $(this._paginationEl).html(_.template(paginationTemplate)({
+    $(this._paginationEl).html(paginationTemplate({
       displayedCount: $(this._listEl).find('li').length,
       totalCount: this._filteredLocations.length
     }));

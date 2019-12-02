@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.11.0",
+  "version": "3.12.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "homepage": "https://access.nyc.gov",
   "authors": [
@@ -18,6 +18,73 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
+    },
+    {
+      "type": "package",
+      "package": {
+          "name": "wpml/wpml-multilingual-cms",
+          "version": "3.12.0",
+          "type": "wordpress-plugin",
+          "dist": {
+            "type": "zip",
+            "url": "https://httpbin.org/status/400?"
+          },
+          "require": {
+            "enelogic/wpml-installer": "^0.1",
+            "composer/installers": "^1.0"
+          },
+          "extra": {
+            "installer-name": "sitepress-multilingual-cms"
+          }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+          "name": "wpml/wpml-string-translation",
+          "version": "3.12.0",
+          "type": "wordpress-plugin",
+          "dist": {
+            "type": "zip",
+            "url": "https://httpbin.org/status/400?"
+          },
+          "require": {
+            "enelogic/wpml-installer": "^0.1",
+            "composer/installers": "^1.0"
+          }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+          "name": "wpml/acfml",
+          "version": "3.12.0",
+          "type": "wordpress-plugin",
+          "dist": {
+            "type": "zip",
+            "url": "https://httpbin.org/status/400?"
+          },
+          "require": {
+            "enelogic/wpml-installer": "^0.1",
+            "composer/installers": "^1.0"
+          }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+          "name": "wpml/wpml-all-import",
+          "version": "3.12.0",
+          "type": "wordpress-plugin",
+          "dist": {
+            "type": "zip",
+            "url": "https://httpbin.org/status/400?"
+          },
+          "require": {
+            "enelogic/wpml-installer": "^0.1",
+            "composer/installers": "^1.0"
+          }
+      }
     }
   ],
   "require": {
@@ -29,16 +96,23 @@
     "wpackagist-plugin/gathercontent-import": "^3.1",
     "wpackagist-plugin/google-authenticator": "^0.52.0",
     "wpackagist-plugin/limit-login-attempts-reloaded": "^2.9",
+    "wpackagist-plugin/loggedin": "^1.2",
     "wpackagist-plugin/rollbar": "^2.6",
     "wpackagist-plugin/search-everything": "8.1.9",
     "wpackagist-plugin/timber-library": "^1.9",
     "wpackagist-plugin/wp-security-questions": "^1.0",
-    "wpackagist-plugin/wps-hide-login": "1.5.2.2",
-    "nyco/wp-assets": "0.0.5",
-    "nyco/wp-config": "^0.1.0",
-    "nyco/wp-open-data-transients": "^0.0.4",
+    "wpackagist-plugin/wps-hide-login": "1.5.4.2",
+    "wpml/wpml-multilingual-cms": "^4.2",
+    "wpml/wpml-string-translation": "^2.10",
+    "wpml/acfml": "^1.3",
+    "wpml/wpml-all-import": "^2.1",
+    "nyco/wp-config": "^0.2.0",
+    "nyco/wp-assets": "^1.0",
+    "nyco/wp-open-data-transients": "^0.1.1",
     "twilio/sdk": "^5.32",
-    "aws/aws-sdk-php": "^3.100"
+    "aws/aws-sdk-php": "^3.100",
+    "humanmade/s3-uploads": "2.1.0",
+    "soundasleep/html2text": "^1.1"
   },
   "require-dev": {
     "filp/whoops": "^2.3",
@@ -47,6 +121,7 @@
     "wpackagist-plugin/wp-crontrol": "^1.7",
     "wpackagist-plugin/redis-cache": "^1.4",
     "wpackagist-plugin/query-monitor": "^3.3",
+    "enelogic/wpml-installer": "^0.1.6",
     "umutphp/wp-vulnerability-check": "^0.1.1",
     "squizlabs/php_codesniffer": "^3.4"
   },
@@ -78,6 +153,9 @@
     ],
     "deps": [
       "composer show --tree"
+    ],
+    "post-install-cmd": [
+      "mv wp-content/plugins/wpml-multilingual-cms wp-content/plugins/sitepress-multilingual-cms"
     ]
   }
 }

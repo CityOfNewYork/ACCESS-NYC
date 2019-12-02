@@ -1,6 +1,6 @@
 <?php
 
-namespace Nyco\WpConfig\Secret;
+namespace NYCO\Config;
 
 /**
  * Dependencies

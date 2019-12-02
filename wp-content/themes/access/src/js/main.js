@@ -14,8 +14,6 @@ import 'core-js/features/object/entries';
 // Fetch
 import 'whatwg-fetch';
 
-import jQuery from 'jquery';
-
 // ACCESS Patterns Polyfills
 import 'utilities/element/matches';
 import 'utilities/element/closest';
@@ -23,7 +21,6 @@ import 'utilities/element/remove';
 import 'utilities/nodelist/foreach';
 
 // Core Modules
-import Tooltip from 'modules/tooltip';
 import Utility from 'modules/utility';
 
 // ACCESS Patterns
@@ -40,28 +37,36 @@ import TextController from 'objects/text-controller/text-controller';
 import Icons from 'utilities/icons/icons';
 import Toggle from 'utilities/toggle/toggle';
 
-(function(window, $) {
+(function(window) {
   'use strict';
 
   Utility.configErrorTracking(window);
 
-  /** Initialize ACCESS NYC Patterns library components */
+  /**
+   * Instantiate ACCESS NYC Patterns
+   */
   new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
   new Toggle();
   new Accordion();
   new Filter();
 
-  /** Instantiate Alert Banner */
+  /**
+   * Instantiate Alert Banner
+   */
   (element => {
     if (element) new AlertBanner(element);
   })(document.querySelector(AlertBanner.selector));
 
-  /** Instantiate Text Controller */
+  /**
+   * Instantiate Text Controller
+   */
   (element => {
     if (element) new TextController(element);
   })(document.querySelector(TextController.selector));
 
-  /** Instantiate Newsletter and pass it translated strings */
+  /**
+   * Instantiate Newsletter and pass it translated strings
+   */
   (element => {
     if (element) {
       let newsletter = new Newsletter(element);
@@ -86,7 +91,9 @@ import Toggle from 'utilities/toggle/toggle';
     }
   })(document.querySelector(Newsletter.selector));
 
-  /** Initialize the Share Form and Disclaimer */
+  /**
+   * Initialize the Share Form and Disclaimer
+   */
   (elements => {
     elements.forEach(element => {
       let shareForm = new ShareForm(element);
@@ -117,9 +124,15 @@ import Toggle from 'utilities/toggle/toggle';
     new Disclaimer();
   })(document.querySelectorAll(ShareForm.selector));
 
+  /**
+   *
+   */
+
   let body = document.querySelector('body');
 
-  /** Initialize Mobile Nav Toggle */
+  /**
+   * Initialize Mobile Nav Toggle
+   */
   body.addEventListener('click', event => {
     if (!event.target.matches('[data-js*="o-mobile-nav"]'))
       return;
@@ -133,7 +146,9 @@ import Toggle from 'utilities/toggle/toggle';
       .classList.toggle('active');
   });
 
-  /** Search Box Control */
+  /**
+   * Search Box Control
+   */
   body.addEventListener('click', event => {
     if (!event.target.matches('[data-js*="o-search-box"]'))
       return;
@@ -150,7 +165,9 @@ import Toggle from 'utilities/toggle/toggle';
     }
   });
 
-  /** Basic click tracking */
+  /**
+   * Basic click tracking
+   */
   body.addEventListener('click', event => {
     if (!event.target.matches('[data-js*="track"]'))
       return;
@@ -161,37 +178,66 @@ import Toggle from 'utilities/toggle/toggle';
     Utility.track(key, data, event);
   });
 
-  // Capture the queries on Search page
-  $(window).on('load', function() {
-    let $wtSearch = $('[data-js="wt-search"]');
-    if (~window.location.href.indexOf('?s=') && $wtSearch.length) {
-      let key = $wtSearch.data('wtSearchKey');
-      let data = $wtSearch.data('wtSearchData');
-      Utility.webtrends(key, data);
+  /**
+   * Capture the queries on Search page
+   */
+  (element => {
+    if (~window.location.href.indexOf('?s=') && element) {
+      window.addEventListener('load', () => {
+        let key = element.dataset.wtSearchKey;
+        let data = JSON.parse(element.dataset.wtSearchData);
+
+        Utility.webtrends(key, data);
+      });
     }
-  });
+  })(document.querySelector('[data-js="wt-search"]'));
 
-  // On the search results page, submits the search form when a category is
-  // chosen.
-  $('.js-program-search-filter').on('change', 'input', e => {
-    $(e.currentTarget).closest('form')[0].submit();
-  });
+  /**
+   * Submit the search form when a category is chosen.
+   */
+  (element => {
+    if (element) {
+      let submitSearch = event => {
+        event.target.closest('form').submit();
+      };
 
-  // Initialize tooltips.
-  $(`.${Tooltip.CssClass.TRIGGER}`).each((i, el) => {
-    const tooltip = new Tooltip(el);
-    tooltip.init();
-  });
+      element.addEventListener('change', submitSearch);
+      element.addEventListener('input', submitSearch);
+    }
+  })(document.querySelector('[data-js="program-search-filter"]'));
 
-  // For pages with "print-view" class, print the page on load. Currently only
-  // used on program detail pages after the print link is clicked.
+  /**
+   * For pages with "print-view" class, print the page on load. Currently only
+   * used on program detail pages after the print link is clicked.
+   */
   if (document.querySelector('html').classList.contains('print-view')) {
     window.onload = window.print;
   }
 
-  // Add noopener attribute to new window links if it isn't there.
-  $('a[target="_blank"]').each(Utility.noopener);
+  /**
+   *
+   */
+  (elements => {
+    elements.forEach(element => {
+      element.addEventListener('click', event => {
+        event.preventDefault();
 
-  // Enable environment warnings
-  $(window).on('load', () => Utility.warnings());
-})(window, jQuery);
+        window.print();
+      });
+    });
+  })(document.querySelectorAll('[data-js*="window-print"]'));
+
+  /**
+   * Add noopener attribute to new window links if it isn't there.
+   */
+  (elements => {
+    elements.forEach((element, index) => {
+      Utility.noopener(index, element);
+    });
+  })(document.querySelectorAll('a[target="_blank"]'));
+
+  /**
+   * Enable environment warnings
+   */
+  window.addEventListener('load', Utility.warnings);
+})(window);

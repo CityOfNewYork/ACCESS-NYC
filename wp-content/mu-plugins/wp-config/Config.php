@@ -10,7 +10,7 @@
  *               illuminate/encryption: ^5.6
  */
 
-namespace Nyco\WpConfig\Config;
+namespace NYCO;
 
 /**
  * Dependencies
@@ -23,13 +23,17 @@ use Exception;
 /**
  * The Config Class
  */
-class Config
-{
-
+class Config {
   const PROTECT = ['WP_ENV']; // List of protected env variables
 
   /** The path to the configuration directory */
   public $path = ABSPATH . 'wp-content/mu-plugins/config/';
+
+  private $config = 'config.yml';
+
+  private $env = 'env.php';
+
+  private $default = 'default.php';
 
   /** Placeholder for environment variables */
   private $envs = array();
@@ -37,12 +41,27 @@ class Config
   public function __construct($secret = false) {
     $this->secret = $secret;
 
-    if (file_exists($this->path . 'config.yml')) {
-      $config = Spyc::YAMLLoad($this->path . 'config.yml');
+    /**
+     * Auto load default environment
+     */
+    if (file_exists($this->path . $this->default)) {
+      require_once $this->path . $this->default;
+    }
+
+    /**
+     * Auto load environment file if it exits
+     * Define WP_ENV in the root wp-config.php before the wp-settings.php include
+     */
+    if (null !== WP_ENV && file_exists($this->path . WP_ENV . '.php')) {
+      require_once $this->path . WP_ENV . '.php';
+    }
+
+    if (file_exists($this->path . $this->config)) {
+      $config = Spyc::YAMLLoad($this->path . $this->config);
 
       // If there is a secret, then assume the file is encrypted
       if ($secret) {
-        $secret = require_once(__DIR__ . '/env.php');
+        $secret = require_once(__DIR__ . '/' . $this->env);
         $encrypter = new \Illuminate\Encryption\Encrypter($secret['key']);
       }
 
@@ -80,12 +99,9 @@ class Config
     }
 
     /**
-     * Auto load environment file if it exits
-     * Define WP_ENV in the root wp-config.php before the wp-settings.php include
+     * A hook for the initiation of the plugin
      */
-    if (null !== WP_ENV && file_exists($this->path . WP_ENV . '.php')) {
-      require_once $this->path . WP_ENV . '.php';
-    }
+    do_action('nyco_wp_config_loaded', $this);
   }
 
   /**

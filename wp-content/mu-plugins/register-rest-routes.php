@@ -1,10 +1,14 @@
 <?php
 
+// phpcs:disable
 /**
  * Plugin Name: Register REST Routes
  * Description: Adds custom routes to the WP REST API. Some rest routes use WordPress Transients to cache requests to speed up requests (this applies to the terms in the Program Filters and Locations in the find help view). This means the caches need to be deleted for content to refresh. If the site is using the WordPress Object Cache on WP Engine use the cache clearing button in the WP Engine Admin page. If not using the WP Object cache, install the Transients Manager plugin to delete them. Developers can also delete the cache using the WP CLI.
  * Author: NYC Opportunity
  */
+// phpcs:enable
+
+use NYCO\WpAssets as WpAssets;
 
 add_action('rest_api_init', function() {
   include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -84,16 +88,16 @@ add_action('rest_api_init', function() {
 
         // Get public taxonomies and build our initial assoc. array
         foreach (get_taxonomies(array(
-            'public' => true,
-            '_builtin' => false
-          ), 'objects') as $taxonomy) {
+          'public' => true,
+          '_builtin' => false
+        ), 'objects') as $taxonomy) {
             $data[] = array(
               'name' => $taxonomy->name,
               'labels' => $taxonomy->labels,
               'taxonomy' => $taxonomy,
               'terms' => array()
             );
-          }
+        }
 
         // Get the terms for each taxonomy
         $data = array_map(function ($tax) {
@@ -181,4 +185,13 @@ add_action('rest_api_init', function() {
       return $response;
     }
   ));
+
+  /**
+   * Use NYCO WP Assets to build rest routes for inline scripts.
+   */
+  // $WpAssets = new WpAssets();
+  // $path = WPMU_PLUGIN_DIR . '/integrations/integrations.json';
+  // $integrations = json_decode(file_get_contents($path), true);
+
+  // $WpAssets->registerRestRoutes($integrations);
 });

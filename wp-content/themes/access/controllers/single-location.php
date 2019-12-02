@@ -1,22 +1,36 @@
 <?php
 
-/**
- * Single Location Controller
- */
-
 namespace Controller;
 
 /**
  * Dependencies
  */
 
-use TimberPost;
-use nyco\WpOpenDataTransients\Transients\Transients as Transients;
+use Timber;
+use NYCO\Transients as Transients;
 
 /**
- * Locations Controller
+ * Single Location Controller
  */
-class SingleLocation extends TimberPost {
+class SingleLocation extends Timber\Post {
+  /**
+   * Constructor
+   * @return  $this
+   */
+  public function __construct() {
+    parent::__construct();
+
+    enqueue_language_style('style');
+    enqueue_inline('rollbar');
+    enqueue_inline('webtrends');
+    enqueue_inline('data-layer');
+    enqueue_inline('google-optimize');
+    enqueue_inline('google-analytics');
+    enqueue_inline('google-tag-manager');
+    enqueue_script('main');
+
+    return $this;
+  }
 
   /**
    * Return the template for the location controller
@@ -32,7 +46,7 @@ class SingleLocation extends TimberPost {
    * @return [array] Collection of nearby stops.
    */
   public function nearbyStops() {
-    if (!class_exists('nyco\WpOpenDataTransients\Transients\Transients')) {
+    if (!class_exists('NYCO\Transients')) {
       return false;
     }
 

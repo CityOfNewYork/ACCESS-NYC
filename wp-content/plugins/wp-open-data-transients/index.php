@@ -4,8 +4,7 @@
  * Plugin Name:  NYCO WP Open Data Transients
  * Description:  Interface for saving Open Data endpoints as WordPress Transients.
  * Author:       NYC Opportunity
- * Requirements: The plugin doesn't include dependencies. These should be added
- *               to the root Composer file for the site (composer require ...)
+ * Requirements: The plugin doesn't include dependencies.
  */
 
 namespace nyco\WpOpenDataTransients;

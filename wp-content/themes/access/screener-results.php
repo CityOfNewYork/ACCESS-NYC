@@ -18,6 +18,15 @@
  * parameter.
 */
 
+enqueue_language_style('style');
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
+enqueue_script('screener');
+
 $context = Timber::get_context();
 $programBlob = '';
 $categoryBlob = '';
@@ -66,26 +75,23 @@ $selectedProgramArgs = array(
     )
   ),
   'posts_per_page' => -1,
-  'meta_key'		=> 'program_code',
-  'meta_value'	=> $context['resultPrograms']
+  'meta_key' => 'program_code',
+  'meta_value' => $context['resultPrograms']
 );
 
 $additionalProgramArgs = array(
-// Get post type project
-'post_type' => 'programs',
-'tax_query' => array(
-  array(
-    'taxonomy' => 'programs',
-    'field' => 'slug',
-    'terms' => $context['resultCategories'],
-    'operator' => 'NOT IN'
-)
-),
-// Get all posts
-'posts_per_page' => -1,
-// Filter posts based on the program code in the URL
-'meta_key'		=> 'program_code',
-'meta_value'	=> $context['resultPrograms']
+  'post_type' => 'programs',
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'programs',
+      'field' => 'slug',
+      'terms' => $context['resultCategories'],
+      'operator' => 'NOT IN'
+    )
+  ),
+  'posts_per_page' => -1,
+  'meta_key' => 'program_code',
+  'meta_value' => $context['resultPrograms']
 );
 
 // Rebuild the query from entity stripped params
@@ -94,14 +100,14 @@ $query = http_build_query($query);
 $query = (isset($query)) ? '?'.$query : '';
 
 // Share by email/sms fields.
-$context['shareAction'] = admin_url( 'admin-ajax.php' );
+$context['shareAction'] = admin_url('admin-ajax.php');
 $context['shareUrl'] = home_url() . '/eligibility/results/' . $query;
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 $context['getParams'] = $get; // pass safe parameters
 
-$context['selectedPrograms'] = Timber::get_posts( $selectedProgramArgs );
-$context['additionalPrograms'] = Timber::get_posts( $additionalProgramArgs );
+$context['selectedPrograms'] = Timber::get_posts($selectedProgramArgs);
+$context['additionalPrograms'] = Timber::get_posts($additionalProgramArgs);
 
 $templates = array( 'screener/results.twig' );
 
-Timber::render( $templates, $context );
+Timber::render($templates, $context);

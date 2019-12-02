@@ -1,6 +1,6 @@
 <?php
 
-namespace Nyco\WpConfig\Decrypt;
+namespace NYCO\Config;
 
 /**
  * Dependencies

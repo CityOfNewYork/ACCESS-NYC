@@ -1,13 +1,24 @@
 <?php
 /**
  * Programs Landing Page
- *
  * Controller for the archive view at /programs
  */
 
+enqueue_language_style('style');
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
+enqueue_script('programs');
+
 $context = Timber::get_context();
 
-/** Retrieve public query variables recognized by WP_Query */
+/**
+ * Retrieve public query variables recognized by WP_Query
+ */
+
 $p1 = get_query_var('program_cat', false);
 $p2 = get_query_var('pop_served', false);
 

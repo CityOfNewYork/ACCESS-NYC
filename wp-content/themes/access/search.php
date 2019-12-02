@@ -9,6 +9,15 @@
  * @since   Timber 0.1
  */
 
+enqueue_language_style('style');
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
+enqueue_script('main');
+
 $templates = array( 'search.twig', 'archive.twig', 'index.twig' );
 $context = Timber::get_context();
 
@@ -38,7 +47,7 @@ if (isset($_GET['lang'])) {
     } else {
       $urlBase = '';
     }
-    wp_redirect( $urlBase . '/?' . $newQuery);
+    wp_redirect($urlBase . '/?' . $newQuery);
   }
 }
 
@@ -53,4 +62,4 @@ $context['title'] = 'Search results for '. get_search_query();
 $context['posts'] = Timber::get_posts();
 $context['pagination'] = Timber::get_pagination();
 
-Timber::render( $templates, $context );
+Timber::render($templates, $context);

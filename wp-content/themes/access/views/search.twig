@@ -4,8 +4,8 @@
 <main class="pb-4 color-light-background" id="content">
   <form class="js-filtered-search" method="get" action="/">
     {{ fn('do_action', 'wpml_add_language_form_field' ) }}
-    <header class="c-header flex-col bg-color-blue-dark text-color-white mb-3">
-      <label class="type-small w-full" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
+    <header class="c-header flex-col color-dark-background mb-3">
+      <label class="type-small w-full mb-2" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
 
       <div class="input-search w-full">
         <input name="s" type="text" value="{{ query }}" id="program-search-field" data-js="wt-search" data-wt-search-key="Search Results" data-wt-search-data='[{"WT.oss": "{{ query }}", "WT.oss_r": "{{ posts|length }}"}]'>

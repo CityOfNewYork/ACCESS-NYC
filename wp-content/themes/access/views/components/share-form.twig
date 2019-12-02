@@ -8,6 +8,7 @@
     {% if this.url %}<input name="url" readonly type="hidden" value="{{ this.url }}" />{% endif %}
     {% if this.hash %}<input name="hash" readonly type="hidden" value="{{ this.hash }}" />{% endif %}
     {% if this.guid %}<input maxlength="13" name="GUID" readonly type="hidden" value="{{ this.guid }}" />{% endif %}
+    {% if this.template %}<input name="template" readonly type="hidden" value="{{ this.template }}" />{% endif %}
 
     <div class="c-share-form__fieldset">
       <div class="c-share-form__input {% if this.type == 'tel' %}input-phone-us{% endif %}">

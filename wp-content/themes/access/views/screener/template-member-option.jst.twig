@@ -1,0 +1,15 @@
+<% people.forEach(function(person, i) { %>
+<label class="checkbox">
+  <input type="checkbox"
+    name="Person[<%= i %>].<%= attribute %>"
+    value="1"
+    data-type="boolean"
+    <% if ((attribute === 'livingRentalOnLease' && person.leasee) || (attribute === 'livingOwnerOnDeed' && person.owner)) { print('checked') } %>>
+  <span class="checkbox__label">
+    <span class="list-inline-comma">
+      <span><%= person.relation %></span>
+      <span><%= person.age %></span>
+    </span>
+  </span>
+</label>
+<% }); %>

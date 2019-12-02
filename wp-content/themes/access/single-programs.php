@@ -3,6 +3,15 @@
  * Program detail page
  */
 
+enqueue_language_style('style');
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
+enqueue_script('programs');
+
 $context = Timber::get_context();
 
 // Gets the url parameter on the page for navigating each section.
@@ -21,7 +30,7 @@ $templates = array('programs/single.twig');
 $context['post'] = $post;
 
 // Share by email/sms fields.
-$context['shareAction'] = admin_url( 'admin-ajax.php' );
+$context['shareAction'] = admin_url('admin-ajax.php');
 $context['shareUrl'] = $post->link.$query;
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 

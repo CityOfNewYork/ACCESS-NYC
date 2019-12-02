@@ -6,6 +6,4 @@
  * Author: Blue State Digital
  */
 
-if (file_exists(WPMU_PLUGIN_DIR . '/send-me-nyc/SendMeNYC.php')) {
-  require WPMU_PLUGIN_DIR . '/send-me-nyc/SendMeNYC.php';
-}
+require plugin_dir_path(__FILE__) . '/send-me-nyc/SendMeNYC.php';

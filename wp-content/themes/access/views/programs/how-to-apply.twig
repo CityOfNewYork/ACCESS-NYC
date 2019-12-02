@@ -117,17 +117,19 @@
             post: shareAction,
             action: 'sms_send',
             url: shareUrl,
-            hash: shareHash
+            hash: shareHash,
+            template: 'programs'
           }} only %}
 
           {% include 'components/share-form.twig' with {this: {
             type: 'email',
             button: __('Email', 'accessnyc-program-detail'),
-            placeholder: __('Email Address', 'accessnyc-program-detail'),
+            placeholder: __('Email address', 'accessnyc-program-detail'),
             post: shareAction,
             action: 'email_send',
             url: shareUrl,
-            hash: shareHash
+            hash: shareHash,
+            template: 'programs'
           }} only %}
         </div>
 

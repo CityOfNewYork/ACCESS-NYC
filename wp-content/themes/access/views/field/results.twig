@@ -113,30 +113,6 @@
             <a class="block btn btn-primary" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "print"}]'>{{__('Print', translationID)}}</a>
           </div>
 
-          {# <div class="flex-1 pr-2 c-share-form">
-            <a class="block btn btn-primary c-share-form__toggle js-show-disclaimer" href="#share-by-sms"
-              data-js="toggle"
-              data-scroll-offset="20">{{__('Text', translationID)}}</a>
-            <div id="share-by-sms" class="c-share-form__input js-needs-disclaimer hidden">
-              <form method="post" action="{{ action }}" class="js-share-form" novalidate><input type="hidden" name="action" value="sms_send">
-                <input type="hidden" name="url" value="{{ url }}" readonly>
-                <input type="hidden" name="hash" value="{{ hash }}" readonly>
-                <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
-                <div class="c-share-form__controls">
-                  <div class="phone-us">
-                    <input type="tel" name="to" placeholder="{{__('Phone Number', translationID)}}">
-                  </div>
-                  <div class="c-share-form__button">
-                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
-                    <div class="c-share-form__spinner" data-js="spinner" style="display: none;">
-                      {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
-                    </div>
-                    <div class="success-message">{{__('Sent!', translationID)}}</div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div> #}
           {% include 'components/share-form.twig' with {this: {
             class: 'flex-1 pr-2',
             type: 'tel',
@@ -145,32 +121,10 @@
             post: action,
             action: 'sms_send',
             url: url,
-            hash: hash
+            hash: hash,
+            template: 'screener-results'
           }} only %}
 
-          {# <div class="flex-1">
-            <a class="block btn btn-primary c-share-form__toggle js-show-disclaimer" href="#share-by-email"
-              data-js="toggle"
-              data-scroll-offset="20">{{__('Email', translationID)}}</a>
-            <div id="share-by-email" class="c-share-form__input js-needs-disclaimer hidden">
-              <form method="post" action="{{ action }}" class="js-share-form" novalidate>
-                <input type="hidden" name="action" value="email_send" readonly>
-                <input type="hidden" name="url" value="{{ url }}"  readonly>
-                <input type="hidden" name="hash" value="{{ hash }}"  readonly>
-                <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
-                <div class="c-share-form__controls">
-                  <input type="email" name="to" placeholder="{{__('Email address', translationID)}}" required>
-                  <div class="c-share-form__button">
-                    <button type="submit" class="btn btn-primary btn-small btn-submit">{{__('Send', translationID)}}</button>
-                    <div class="c-share-form__spinner" data-js="spinner" style="display: none;">
-                      {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
-                    </div>
-                    <div class="success-message">{{__('Sent!', translationID)}}</div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div> #}
           {% include 'components/share-form.twig' with {this: {
             class: 'flex-1',
             type: 'email',
@@ -179,7 +133,8 @@
             post: action,
             action: 'email_send',
             url: url,
-            hash: hash
+            hash: hash,
+            template: 'screener-results'
           }} only %}
 
         </div>
@@ -226,8 +181,6 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/field') }}
-
 {% include 'partials/strings-share.twig' %}
 
 {% include 'partials/strings.twig' with {'translation_id': translationID, 'strings': [

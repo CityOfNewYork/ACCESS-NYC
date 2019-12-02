@@ -27,31 +27,29 @@
 {% endblock %}
 
 {% block scripts_footer %}
-{{ function('enqueue_script', 'assets/js/screener') }}
-
-<script type="template/html" id="screener-income-template">
-  {% include 'screener/template-income.underscore.twig' %}
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
+  {% include 'jst/screener/template-income.js' %}
 </script>
 
-<script type="template/html" id="screener-expense-template">
-  {% include 'screener/template-expense.underscore.twig' %}
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
+  {% include 'jst/screener/template-expense.js' %}
 </script>
 
-<script type="text/template" id="screener-member-summary-template">
-  {% include 'screener/template-member-summary.underscore.twig' %}
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
+  {% include 'jst/screener/template-member-summary.js' %}
 </script>
 
-<script type="text/template" id="screener-member-template">
-  {% include 'screener/template-member.underscore.twig' %}
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
+  {% include 'jst/screener/template-member.js' %}
 </script>
 
-<script type="text/template" id="screener-member-option-template">
-  {% include 'screener/template-member-option.underscore.twig' %}
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
+  {% include 'jst/screener/template-member-option.js' %}
 </script>
 
-<script type="text/template" id="screener-recap-template">
-  {% include 'screener/template-recap.underscore.twig' %}
+<script type="text/javascript" nonce="{{ csp_script_nonce }}">
+  {% include 'jst/screener/template-recap.js' %}
 </script>
 
-{% include 'screener/strings.twig' %}
+{% include 'screener/strings.twig'  %}
 {% endblock %}

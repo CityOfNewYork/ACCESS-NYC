@@ -7,16 +7,19 @@
     <div class="c-question">
       <label class="c-question__label" for="person-0-age">{{ __('How old are you?', 'accessnyc-screener') }}</label>
       <p>
-        <button type="button" class="c-question__info btn btn-text btn-link js-tooltip-trigger" aria-describedby="tooltip-age">
+        <button type="button" class="c-question__info btn btn-text btn-link" data-js="tooltip-control" aria-describedby="tooltip-age">
           {{ __('Here’s why we are asking.', 'accessnyc-screener') }}
+
           <svg class="icon icon-info">
             <use xlink:href="#icon-info"></use>
           </svg>
         </button>
       </p>
-      <div id="tooltip-age" class="tooltip">
+
+      <div id="tooltip-age" class="tooltip animated fadeInUp">
         <p>{{ __('Many benefit programs are meant for people of a specific age group. Sharing your age will help us choose the programs that will be most helpful to you right now. The information you share for the purposes of public benefits screening will be anonymous.', 'accessnyc-screener') }}</p>
       </div>
+
       <div class="c-question__container">
         <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>
       </div>
