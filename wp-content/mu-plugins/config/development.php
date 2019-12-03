@@ -33,9 +33,11 @@ deactivate_plugins([
 
 /**
  * Disable Rollbar because it is only required for remote error monitoring.
+ * Uncomment the activate line if you need to test it.
  */
 
 deactivate_plugins('rollbar/rollbar-php-wordpress.php');
+// activate_plugin(WP_PLUGIN_DIR . 'rollbar/rollbar-php-wordpress.php');
 
 /**
  * A WordPress plugin for the Whoops Error Framework.
