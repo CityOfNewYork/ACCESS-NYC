@@ -834,7 +834,6 @@ class Screener {
           // If we need to add more non-HoH household members, repeat this step.
           if (this._people.length < this._household.get('members')) {
             $step.data('personIndex', personIndex + 1);
-
             this._goToStep(`#${$step[0].id}`)
               ._newState(`#${$step[0].id}`, 'pushState')
               ._reFocus();
@@ -1208,7 +1207,19 @@ class Screener {
 
     const template = window.JST['screener/template-recap'];
     const renderedTemplate = template(templateData);
+
     $('#recap-body').html(renderedTemplate);
+
+    // Reset the data-person-index attribute to zero when editing a member
+    // of the household. Thus, continuing to the results page.
+    let editPersonButton = document.getElementById('recap-edit-person');
+    editPersonButton.addEventListener('click', event => {
+      let elementsWithTag = document.querySelectorAll('[data-person-index]');
+      elementsWithTag.forEach(element => {
+        element.setAttribute('data-person-index', 0);
+      });
+    });
+
     return this;
   }
 

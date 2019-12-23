@@ -43,7 +43,7 @@ __p+='\n        <span class="c-member-list__item">'+
  if (index === 0 && member.isHoh) { 
 __p+='\n        <span class="c-member-list__item">{{ __("Head of household", "accessnyc-screener")|trim|escape("js") }}</span>\n        ';
  } 
-__p+='\n\n        <span class="c-member-list__item inline">\n          <a role="button" data-person="'+
+__p+='\n\n        <span class="c-member-list__item inline">\n          <a id="recap-edit-person" role="button" data-person="'+
 ((__t=( index ))==null?'':__t)+
 '" class="js-edit-person screen-tablet:px-2 font-normal cursor-pointer">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>';
  if (index !== 0 && !member.isHoh) { 
