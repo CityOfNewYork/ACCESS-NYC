@@ -112,6 +112,13 @@ class Screener {
       let step = $(event.currentTarget).closest(`.${Screener.CssClass.STEP}`);
       let input = step.find('input[name="Person[0].headOfHousehold"]:checked');
 
+      // Reset HOH to be element at index 0 and remove current HOH from array.
+      this._people.forEach((member, index) => {
+        if(member._attrs.headOfHousehold === true && index !== 0) {
+          this._people.splice(index, 1);
+        }
+      });
+
       this._people[0].set({
         headOfHousehold: Screener.getTypedVal(input)
       });
