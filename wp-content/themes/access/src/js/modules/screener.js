@@ -1216,6 +1216,13 @@ class Screener {
     const template = window.JST['screener/template-recap'];
     const renderedTemplate = template(templateData);
     $('#recap-body').html(renderedTemplate);
+
+    // Reset personIndex to zero on edit the head of household.
+    let editPersonButton = document.getElementById('recap-edit-person');
+    editPersonButton.addEventListener('click', function resetPersonIndex() {
+      this._$steps.data('personIndex', 0);
+    }.bind(this));
+
     return this;
   }
 
