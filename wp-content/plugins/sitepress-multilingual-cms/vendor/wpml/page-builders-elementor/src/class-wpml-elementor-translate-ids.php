@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * Class WPML_Elementor_Translate_IDs
+ */
 class WPML_Elementor_Translate_IDs implements IWPML_Action {
 
-	/** @var WPML_Debug_BackTrace */
+	/** @var \WPML\Utils\DebugBackTrace */
 	private $debug_backtrace;
 
-	public function __construct( WPML_Debug_BackTrace $debug_backtrace ) {
+	/**
+	 * WPML_Elementor_Translate_IDs constructor.
+	 *
+	 * @param \WPML\Utils\DebugBackTrace $debug_backtrace
+	 */
+	public function __construct( \WPML\Utils\DebugBackTrace $debug_backtrace ) {
 		$this->debug_backtrace = $debug_backtrace;
 	}
 

@@ -15,4 +15,15 @@ class WPML_LS_Shortcode_Actions_Slot extends WPML_LS_Slot {
 
 		return array_merge( parent::get_allowed_properties(), $allowed_properties );
 	}
+
+	public function is_enabled() {
+		/**
+		 * This filter allows to programmatically enable/disable the custom language switcher.
+		 *
+		 * @since 4.3.0
+		 *
+		 * @param bool The original status.
+		 */
+		return apply_filters( 'wpml_custom_language_switcher_is_enabled', parent::is_enabled() );
+	}
 }

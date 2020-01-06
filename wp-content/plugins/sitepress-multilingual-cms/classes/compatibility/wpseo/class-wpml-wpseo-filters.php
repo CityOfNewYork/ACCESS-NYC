@@ -5,7 +5,7 @@
  *
  * Compatibility class for WordPress SEO plugin
  *
- * @deprecated	version 4.3.0	use 'wp-seo-multilingual` plugin instead.
+ * @deprecated  version 4.3.0   use 'wp-seo-multilingual` plugin instead.
  */
 class WPML_WPSEO_Filters_Old {
 
@@ -31,6 +31,9 @@ class WPML_WPSEO_Filters_Old {
 		add_filter( 'wpml_translatable_user_meta_fields', array( $this, 'translatable_user_meta_fields_filter' ) );
 		add_action( 'wpml_before_make_duplicate', array( $this, 'before_make_duplicate_action' ) );
 		add_filter( 'wpseo_canonical', array( $this, 'canonical_filter' ) );
+		/**
+		 * @since 4.1.0
+		 */
 		add_filter( 'wpml_must_translate_canonical_url', array( $this, 'must_translate_canonical_url_filter' ), 10, 2 );
 		add_filter( 'wpseo_prev_rel_link', array( $this, 'rel_link_filter' ) );
 		add_filter( 'wpseo_next_rel_link', array( $this, 'rel_link_filter' ) );

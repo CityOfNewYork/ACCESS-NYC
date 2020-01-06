@@ -123,6 +123,8 @@ function icl_sitepress_activate() {
                 `deadline_date` DATETIME NULL,
                 `completed_date` DATETIME NULL,
                 `editor` VARCHAR(16) NULL,
+                `editor_job_id` BIGINT(20) UNSIGNED NULL,
+                `edit_timestamp` INT(11) UNSIGNED NULL,
                 INDEX ( `rid` , `translator_id` )
                 ) {$charset_collate}    
             ";
@@ -212,7 +214,8 @@ function icl_sitepress_activate() {
                   UNIQUE KEY `uc_domain_name_context_md5` (`domain_name_context_md5`),
                   KEY `language_context` (`language`, `context`),
                   KEY `icl_strings_name` (`name` ASC),
-                  KEY `icl_strings_translation_priority` ( `translation_priority` ASC )
+                  KEY `icl_strings_translation_priority` ( `translation_priority` ASC ),
+                  KEY `context` ( `context` )
                   ) {$charset_collate}
                   ";
 			if ( $wpdb->query( $sql ) === false ) {

@@ -51,13 +51,11 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 	public function save_post_actions( $post_id, $post ) {
 		global $sitepress;
 
-		wp_defer_term_counting( true );
+		$this->defer_term_counting();
 		$post = isset( $post ) ? $post : get_post( $post_id );
 		// exceptions
 		$http_referer = $this->get_http_referer();
 		if ( ! $this->has_save_post_action( $post ) && ! $http_referer->is_rest_request_called_from_post_edit_page() ) {
-			wp_defer_term_counting( false );
-
 			return;
 		}
 		if ( WPML_WordPress_Actions::is_bulk_trash( $post_id ) ||
@@ -262,7 +260,7 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		return $http_referer->get_trid();
 	}
 
-	private function get_http_referer() {
+	protected function get_http_referer() {
 		if ( ! $this->http_referer ) {
 			$factory = new WPML_URL_HTTP_Referer_Factory();
 			$this->http_referer = $factory->create();

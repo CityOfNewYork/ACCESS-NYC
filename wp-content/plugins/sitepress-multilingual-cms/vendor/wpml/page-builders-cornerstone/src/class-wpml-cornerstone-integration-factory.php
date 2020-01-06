@@ -9,6 +9,7 @@ class WPML_Cornerstone_Integration_Factory {
 		$action_filter_loader->load(
 			array(
 				'WPML_PB_Cornerstone_Handle_Custom_Fields_Factory',
+				'WPML_Cornerstone_Media_Hooks_Factory',
 			)
 		);
 

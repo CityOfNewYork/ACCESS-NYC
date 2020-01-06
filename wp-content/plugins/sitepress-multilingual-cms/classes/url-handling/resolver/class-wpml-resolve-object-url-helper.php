@@ -77,7 +77,7 @@ class WPML_Resolve_Object_Url_Helper implements IWPML_Resolve_Object_Url {
 					$new_url = get_permalink( $translations[ $lang_code ]->element_id );
 					break;
 				case 'tax':
-					$term = get_term_by( 'term_taxonomy_id', $translations[ $lang_code ]->element_id, $subtype );
+					$term    = get_term( $translations[ $lang_code ]->element_id, $subtype );
 					$new_url = get_term_link( $term );
 					break;
 			}

@@ -57,7 +57,7 @@ class WPML_PB_String_Translation {
 	 * @return bool
 	 */
 	private function get_job_id( $field_type ) {
-		return $this->wpdb->get_var( $this->wpdb->prepare( "SELECT job_id FROM {$this->wpdb->prefix}icl_translate WHERE field_type = %s", $field_type ) );
+		return $this->wpdb->get_var( $this->wpdb->prepare( "SELECT MAX(job_id) FROM {$this->wpdb->prefix}icl_translate WHERE field_type = %s", $field_type ) );
 	}
 
 	/**

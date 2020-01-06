@@ -12,13 +12,15 @@ if( ( !isset( $sitepress_settings['existing_content_language_verified'] ) ||
 <div class="wrap">
     <h2><?php _e('Theme and plugins localization', 'sitepress') ?></h2>
 
-<?php
+	<div id="wpml-mo-scan-localization-page"></div>
+
+	<?php
 
 	/** @deprecated use wpml_custom_localization_type instead */
-	do_action('icl_custom_localization_type');
+		do_action('icl_custom_localization_type');
 
-	do_action('wpml_custom_localization_type');
-?>
+		do_action('wpml_custom_localization_type');
+	?>
 
     <?php do_action('icl_menu_footer'); ?>
 </div>

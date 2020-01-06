@@ -25,17 +25,19 @@ class WPML_Upgrade_Display_Mode_For_Posts implements IWPML_Upgrade_Command {
 	public function run_admin() {
 
 		if ( $this->sitepress->get_setting( self::DISPLAY_MODE_SETTING ) ) {
-
-			$notice = $this->wpml_notices->create_notice( __CLASS__, $this->get_notice_content() );
-			$notice->add_display_callback( array( 'WPML_Notice_Show_On_Dashboard_And_WPML_Pages', 'is_on_page' ) );
-			$notice->set_css_class_types( 'info' );
-
-			$this->wpml_notices->add_notice( $notice );
-
+			add_action( 'init', [ $this, 'add_notice' ] );
 			return false;
 		} else {
 			return true;
 		}
+	}
+
+	public function add_notice() {
+		$notice = $this->wpml_notices->create_notice( __CLASS__, $this->get_notice_content() );
+		$notice->add_display_callback( array( 'WPML_Notice_Show_On_Dashboard_And_WPML_Pages', 'is_on_page' ) );
+		$notice->set_css_class_types( 'info' );
+
+		$this->wpml_notices->add_notice( $notice );
 	}
 
 	/**

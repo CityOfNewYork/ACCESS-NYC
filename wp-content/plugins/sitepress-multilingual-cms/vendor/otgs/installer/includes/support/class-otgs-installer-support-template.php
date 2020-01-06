@@ -15,7 +15,7 @@ class OTGS_Installer_Support_Template {
 	private $instances;
 
 	public function __construct(
-		OTGS_Installer_Twig_Template_Service $template_service,
+		OTGS_Template_Service $template_service,
 		OTGS_Installer_Logger_Storage $logger_storage,
 		OTGS_Installer_Requirements $requirements,
 		OTGS_Installer_Instances $instances
@@ -89,16 +89,6 @@ class OTGS_Installer_Support_Template {
 						'repository'  => 'toolset',
 						'type'        => 'api',
 						'description' => __( 'Toolset API server', 'installer' )
-					),
-					array(
-						'repository'  => 'wpml',
-						'type'        => 'products',
-						'description' => __( 'WPML remote products file', 'installer' )
-					),
-					array(
-						'repository'  => 'toolset',
-						'type'        => 'products',
-						'description' => __( 'Toolset remote products file', 'installer' )
 					),
 				),
 				'nonce'     => wp_nonce_field( OTGS_Installer_Connection_Test_Ajax::ACTION, OTGS_Installer_Connection_Test_Ajax::ACTION, false ),

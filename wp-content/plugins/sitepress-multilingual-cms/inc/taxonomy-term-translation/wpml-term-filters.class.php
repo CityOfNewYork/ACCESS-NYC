@@ -1,24 +1,46 @@
 <?php
+/**
+ * WPML_Term_Filters class file.
+ *
+ * @package    WPML\Core
+ * @subpackage taxonomy-term-translation
+ */
 
 /**
  * Class WPML_Term_Filters
- *
- * @package    wpml-core
- * @subpackage taxonomy-term-translation
- *
  */
 class WPML_Term_Filters extends WPML_WPDB_And_SP_User {
 
+	/**
+	 * Init class.
+	 */
 	public function init() {
-		add_action( 'registered_taxonomy', array( $this, 'init' ), 10, 0 );
 		$taxonomies = get_taxonomies();
 
 		foreach ( $taxonomies as $taxonomy ) {
-			if ( is_taxonomy_translated( $taxonomy ) ) {
-				add_filter( "pre_option_{$taxonomy}_children", array( $this, 'pre_option_tax_children' ), 10, 0 );
-				add_action( "create_{$taxonomy}", array( $this, 'update_tax_children_option' ), 10, 0 );
-				add_action( "edit_{$taxonomy}", array( $this, 'update_tax_children_option' ), 10, 0 );
-			}
+			$this->add_hooks_to_translated_taxonomy( $taxonomy );
+		}
+
+		add_action( 'registered_taxonomy', [ $this, 'registered_taxonomy' ], 10, 3 );
+	}
+
+	/**
+	 * @param string       $taxonomy        Taxonomy slug.
+	 * @param array|string $object_type     Object type or array of object types.
+	 * @param array        $taxonomy_object Array of taxonomy registration arguments.
+	 */
+	public function registered_taxonomy( $taxonomy, $object_type, $taxonomy_object ) {
+		$this->add_hooks_to_translated_taxonomy( $taxonomy );
+	}
+
+	/**
+	 * @param string $taxonomy Taxonomy slug.
+	 */
+	private function add_hooks_to_translated_taxonomy( $taxonomy ) {
+		if ( is_taxonomy_translated( $taxonomy ) ) {
+			add_filter( "pre_option_{$taxonomy}_children", [ $this, 'pre_option_tax_children' ], 10, 0 );
+			add_action( "create_{$taxonomy}", [ $this, 'update_tax_children_option' ], 10, 0 );
+			add_action( "edit_{$taxonomy}", [ $this, 'update_tax_children_option' ], 10, 0 );
 		}
 	}
 

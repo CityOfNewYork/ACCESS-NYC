@@ -22,8 +22,10 @@ abstract class WPML_Elementor_Module_With_Items implements IWPML_Page_Builders_M
 	 */
 	abstract protected function get_editor_type( $field );
 
-	/** @return string */
-	abstract protected function get_items_field();
+	/**
+	 * @return string
+	 */
+	abstract public function get_items_field();
 
 	/**
 	 * @param string|int $node_id

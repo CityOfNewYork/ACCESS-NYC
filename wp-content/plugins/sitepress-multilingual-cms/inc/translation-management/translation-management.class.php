@@ -3,10 +3,6 @@
  * @package wpml-core
  */
 
-if ( ! class_exists( 'WPML_Translator' ) ) {
-	require_once WPML_PLUGIN_PATH . '/inc/translation-management/wpml-translator.class.php';
-}
-
 /**
  * Class TranslationManagement
  *
@@ -29,9 +25,9 @@ class TranslationManagement {
 	 * @var WPML_Translator
 	 */
 	private $current_translator;
-	private $messages                 = array();
-	public  $settings;
-	public  $admin_texts_to_translate = array();
+	private $messages = array();
+	public $settings;
+	public $admin_texts_to_translate = array();
 	private $comment_duplicator;
 
 	/** @var WPML_Custom_Field_Setting_Factory $settings_factory */
@@ -45,9 +41,9 @@ class TranslationManagement {
 	 *
 	 * @access private
 	 */
-	private $message_ids               = array( 'add_translator', 'edit_translator', 'remove_translator', 'save_notification_settings', 'cancel_jobs' );
+	private $message_ids = array( 'add_translator', 'edit_translator', 'remove_translator', 'save_notification_settings', 'cancel_jobs' );
 
-	function __construct( ){
+	function __construct() {
 
 		global $sitepress, $wpml_cache_factory;
 
@@ -55,7 +51,7 @@ class TranslationManagement {
 		$this->selected_translator->ID = 0;
 		$this->current_translator      = new WPML_Translator();
 		$this->current_translator->ID  = 0;
-		$this->cache_factory = $wpml_cache_factory;
+		$this->cache_factory           = $wpml_cache_factory;
 
 		add_action( 'init', array( $this, 'init' ), self::INIT_PRIORITY );
 		add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
@@ -68,9 +64,9 @@ class TranslationManagement {
 		// 1. on Translation Management dashboard and jobs tabs
 		// 2. on Translation Management dashboard tab (called without sm parameter as default page)
 		// 3. Translations queue
-		if ( ( isset( $_GET[ 'sm' ] ) && ( $_GET[ 'sm' ] == 'dashboard' || $_GET[ 'sm' ] == 'jobs' ) )
-		     || ( isset( $_GET[ 'page' ] ) && preg_match( '@/menu/main\.php$@', $_GET[ 'page' ] ) && ! isset( $_GET[ 'sm' ] ) )
-		     || ( isset( $_GET[ 'page' ] ) && preg_match( '@/menu/translations-queue\.php$@', $_GET[ 'page' ] ) )
+		if ( ( isset( $_GET['sm'] ) && ( $_GET['sm'] == 'dashboard' || $_GET['sm'] == 'jobs' ) )
+			 || ( isset( $_GET['page'] ) && preg_match( '@/menu/main\.php$@', $_GET['page'] ) && ! isset( $_GET['sm'] ) )
+			 || ( isset( $_GET['page'] ) && preg_match( '@/menu/translations-queue\.php$@', $_GET['page'] ) )
 		) {
 			@session_start();
 		}
@@ -82,12 +78,11 @@ class TranslationManagement {
 		add_action( 'wpml_tm_send_post_jobs', array( $this, 'send_jobs' ), 10, 2 );
 		add_action( 'wpml_tm_send_package_jobs', array( $this, 'send_jobs' ), 10, 2 );
 		$this->init_comments_synchronization();
-		add_action('wpml_loaded', array($this, 'wpml_loaded_action'));
+		add_action( 'wpml_loaded', array( $this, 'wpml_loaded_action' ) );
 
 		/**
 		 * @api
 		 * @use \TranslationManagement::get_translation_job_id
-		 *
 		 */
 		add_filter( 'wpml_translation_job_id', array( $this, 'get_translation_job_id_filter' ), 10, 2 );
 
@@ -165,7 +160,7 @@ class TranslationManagement {
 	 * @return array
 	 */
 	private function sanitize_language_pairs( $language_pairs ) {
-		if(!$language_pairs || !is_array($language_pairs)) {
+		if ( ! $language_pairs || ! is_array( $language_pairs ) ) {
 			$language_pairs = array();
 		} else {
 			$language_codes_from = array_keys( $language_pairs );
@@ -190,21 +185,21 @@ class TranslationManagement {
 	 * @param array $args @see \TranslationManagement::wpml_config_action
 	 */
 	private function update_section_translation_setting( $args ) {
-		$section   = $args[ 'section' ];
-		$key       = $args[ 'key' ];
-		$value     = $args[ 'value' ];
-		$read_only = isset( $args[ 'read_only' ] ) ? $args[ 'read_only' ] : true;
+		$section   = $args['section'];
+		$key       = $args['key'];
+		$value     = $args['value'];
+		$read_only = isset( $args['read_only'] ) ? $args['read_only'] : true;
 
 		$section                        = preg_replace( '/-/', '_', $section );
 		$config_section                 = $this->get_translation_setting_name( $section );
 		$custom_config_readonly_section = $this->get_custom_readonly_translation_setting_name( $section );
 		if ( isset( $this->settings[ $config_section ] ) ) {
 			$this->settings[ $config_section ][ esc_sql( $key ) ] = esc_sql( $value );
-			if(!isset($this->settings[ $custom_config_readonly_section ])) {
+			if ( ! isset( $this->settings[ $custom_config_readonly_section ] ) ) {
 				$this->settings[ $custom_config_readonly_section ] = array();
 			}
 			if ( $read_only === true && ! in_array( $key, $this->settings[ $custom_config_readonly_section ] ) ) {
-				$this->settings[ $custom_config_readonly_section ][ ] = esc_sql( $key );
+				$this->settings[ $custom_config_readonly_section ][] = esc_sql( $key );
 			}
 			$this->save_settings();
 		}
@@ -216,8 +211,8 @@ class TranslationManagement {
 
 		WPML_Config::load_config();
 
-		if(is_admin()) {
-			if ( $GLOBALS[ 'pagenow' ] === 'edit.php' ) { // use standard WP admin notices
+		if ( is_admin() ) {
+			if ( $GLOBALS['pagenow'] === 'edit.php' ) { // use standard WP admin notices
 				add_action( 'admin_notices', array( $this, 'show_messages' ) );
 			} else {                               // use custom WP admin notices
 				add_action( 'icl_tm_messages', array( $this, 'show_messages' ) );
@@ -227,8 +222,8 @@ class TranslationManagement {
 			$this->wpml_add_duplicate_check_actions();
 
 			// default settings
-			if ( empty( $this->settings[ 'doc_translation_method' ] ) || ! defined( 'WPML_TM_VERSION' ) ) {
-				$this->settings[ 'doc_translation_method' ] = ICL_TM_TMETHOD_MANUAL;
+			if ( empty( $this->settings['doc_translation_method'] ) || ! defined( 'WPML_TM_VERSION' ) ) {
+				$this->settings['doc_translation_method'] = ICL_TM_TMETHOD_MANUAL;
 			}
 		}
 	}
@@ -289,7 +284,7 @@ class TranslationManagement {
 				break;
 
 			case 'translators':
-				wp_register_style( 'translation-translators', WPML_TM_URL . '/res/css/translation-translators.css', array('otgs-ico'), WPML_TM_VERSION );
+				wp_register_style( 'translation-translators', WPML_TM_URL . '/res/css/translation-translators.css', array( 'otgs-ico' ), WPML_TM_VERSION );
 				wp_enqueue_style( 'translation-translators' );
 				break;
 
@@ -300,7 +295,7 @@ class TranslationManagement {
 			default:
 				wp_register_style( 'translation-dashboard', WPML_TM_URL . '/res/css/translation-dashboard.css', array(), WPML_TM_VERSION );
 				wp_enqueue_style( 'translation-dashboard' );
-				wp_register_style( 'translation-translators', WPML_TM_URL . '/res/css/translation-translators.css', array('otgs-ico'), WPML_TM_VERSION );
+				wp_register_style( 'translation-translators', WPML_TM_URL . '/res/css/translation-translators.css', array( 'otgs-ico' ), WPML_TM_VERSION );
 				wp_enqueue_style( 'translation-translators' );
 		}
 	}
@@ -403,16 +398,16 @@ class TranslationManagement {
 		global $wpdb;
 
 		return ! empty( $wpdb->termmeta )
-			? $this->initial_translation_states( $wpdb->termmeta)
+			? $this->initial_translation_states( $wpdb->termmeta )
 			: array();
 	}
 
-	function process_request($data){
+	function process_request( $data ) {
 		$action = $data['icl_tm_action'];
-		$data = stripslashes_deep($data);
-		switch( $action ){
+		$data   = stripslashes_deep( $data );
+		switch ( $action ) {
 			case 'edit':
-				$this->selected_translator->ID = intval( $data[ 'user_id' ] );
+				$this->selected_translator->ID = intval( $data['user_id'] );
 				break;
 			case 'dashboard_filter':
 				$cookie_data = http_build_query( $data['filter'] );
@@ -424,21 +419,21 @@ class TranslationManagement {
 				$this->set_cookie( 'translation_dashboard_filter', '', time() - HOUR_IN_SECONDS );
 				break;
 			case 'sort':
-				if ( isset( $data[ 'sort_by' ] ) ) {
-					$_SESSION[ 'translation_dashboard_filter' ][ 'sort_by' ] = $data[ 'sort_by' ];
+				if ( isset( $data['sort_by'] ) ) {
+					$_SESSION['translation_dashboard_filter']['sort_by'] = $data['sort_by'];
 				}
-				if ( isset( $data[ 'sort_order' ] ) ) {
-					$_SESSION[ 'translation_dashboard_filter' ][ 'sort_order' ] = $data[ 'sort_order' ];
+				if ( isset( $data['sort_order'] ) ) {
+					$_SESSION['translation_dashboard_filter']['sort_order'] = $data['sort_order'];
 				}
 				break;
 			case 'add_jobs':
-				if ( isset( $data[ 'iclnonce' ] ) && wp_verify_nonce( $data[ 'iclnonce' ], 'pro-translation-icl' ) ) {
+				if ( isset( $data['iclnonce'] ) && wp_verify_nonce( $data['iclnonce'], 'pro-translation-icl' ) ) {
 					TranslationProxy_Basket::add_posts_to_basket( $data );
 					do_action( 'wpml_tm_add_to_basket', $data );
 				}
 				break;
 			case 'jobs_filter':
-				$_SESSION[ 'translation_jobs_filter' ] = $data[ 'filter' ];
+				$_SESSION['translation_jobs_filter'] = $data['filter'];
 				wp_safe_redirect( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=jobs' );
 				break;
 			case 'ujobs_filter':
@@ -448,9 +443,9 @@ class TranslationManagement {
 				wp_safe_redirect( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php' );
 				break;
 			case 'save_translation':
-				if ( ! empty( $data[ 'resign' ] ) ) {
-					$this->resign_translator( $data[ 'job_id' ] );
-					wp_safe_redirect( admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php&resigned=' . $data[ 'job_id' ] ) );
+				if ( ! empty( $data['resign'] ) ) {
+					$this->resign_translator( $data['job_id'] );
+					wp_safe_redirect( admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php&resigned=' . $data['job_id'] ) );
 					exit;
 				} else {
 					do_action( 'wpml_save_translation_data', $data );
@@ -478,35 +473,46 @@ class TranslationManagement {
 		global $wpdb, $sitepress;
 		switch ( $call ) {
 			case 'assign_translator':
-
-				$translator_data        = TranslationProxy_Service::get_translator_data_from_wpml( $data[ 'translator_id' ] );
-				$service_id             = $translator_data[ 'translation_service' ];
-				$translator_id          = $translator_data[ 'translator_id' ];
-				$assign_translation_job = $this->assign_translation_job( $data[ 'job_id' ], $translator_id, $service_id, $data['job_type'] );
+				$translator_data        = TranslationProxy_Service::get_translator_data_from_wpml( $data['translator_id'] );
+				$service_id             = $translator_data['translation_service'];
+				$translator_id          = $translator_data['translator_id'];
+				$assign_translation_job = $this->assign_translation_job( $data['job_id'], $translator_id, $service_id, $data['job_type'] );
 				if ( $assign_translation_job ) {
 					$translator_edit_link = '';
 					if ( $translator_id ) {
 						if ( $service_id == TranslationProxy::get_current_service_id() ) {
-							$job = $this->get_translation_job( $data[ 'job_id' ] );
+							$job = $this->get_translation_job( $data['job_id'] );
 							/** @var $ICL_Pro_Translation WPML_Pro_Translation */
 							global $ICL_Pro_Translation;
-							$ICL_Pro_Translation->send_post( $job->original_doc_id, array( $job->language_code ), $translator_id, $data[ 'job_id' ] );
+							$ICL_Pro_Translation->send_post( $job->original_doc_id, array( $job->language_code ), $translator_id, $data['job_id'] );
 							$project = TranslationProxy::get_current_project();
 
 							$translator_edit_link =
-								TranslationProxy_Popup::get_link( $project->translator_contact_iframe_url( $translator_id ), array( 'title' => __( 'Contact the translator', 'sitepress' ), 'unload_cb' => 'icl_thickbox_refresh' ) )
+								TranslationProxy_Popup::get_link(
+									$project->translator_contact_iframe_url( $translator_id ), array(
+										'title'     => __( 'Contact the translator', 'sitepress' ),
+										'unload_cb' => 'icl_thickbox_refresh',
+									)
+								)
 								. esc_html( TranslationProxy_Translator::get_translator_name( $translator_id ) )
 								. "</a> ($project->service->name)";
 						} else {
 							$translator_edit_link =
 								'<a href="'
-								. TranslationManagement::get_translator_edit_url( $data[ 'translator_id' ] )
+								. self::get_translator_edit_url( $data['translator_id'] )
 								. '">'
-								. esc_html( $wpdb->get_var( $wpdb->prepare( "SELECT display_name FROM {$wpdb->users} WHERE ID=%d", $data[ 'translator_id' ] ) ) )
+								. esc_html( $wpdb->get_var( $wpdb->prepare( "SELECT display_name FROM {$wpdb->users} WHERE ID=%d", $data['translator_id'] ) ) )
 								. '</a>';
 						}
 					}
-					echo wp_json_encode( array( 'error' => 0, 'message' => $translator_edit_link, 'status' => TranslationManagement::status2text( ICL_TM_WAITING_FOR_TRANSLATOR ), 'service' => $service_id ) );
+					echo wp_json_encode(
+						array(
+							'error'   => 0,
+							'message' => $translator_edit_link,
+							'status'  => self::status2text( ICL_TM_WAITING_FOR_TRANSLATOR ),
+							'service' => $service_id,
+						)
+					);
 				} else {
 					echo wp_json_encode( array( 'error' => 1 ) );
 				}
@@ -533,45 +539,35 @@ class TranslationManagement {
 							/**
 							 * Fires after update of custom fields synchronisation preferences in WPML > Settings
 							 */
-							do_action('wpml_custom_fields_sync_option_updated', $cft );
+							do_action( 'wpml_custom_fields_sync_option_updated', $cft );
 						}
 					}
 				}
 				echo '1|';
 				break;
 			case 'icl_doc_translation_method':
-				$this->settings[ 'doc_translation_method' ] = $data[ 't_method' ];
-				$sitepress->set_setting( 'doc_translation_method', $this->settings[ 'doc_translation_method' ] );
-				$sitepress->save_settings( array( 'hide_how_to_translate' => empty( $data[ 'how_to_translate' ] ) ) );
+				$this->settings['doc_translation_method'] = $data['t_method'];
+				$sitepress->set_setting( 'doc_translation_method', $this->settings['doc_translation_method'] );
+				$sitepress->save_settings( array( 'hide_how_to_translate' => empty( $data['how_to_translate'] ) ) );
 
-				if ( isset( $data[ 'tm_block_retranslating_terms' ] ) ) {
-					$sitepress->set_setting( 'tm_block_retranslating_terms', $data[ 'tm_block_retranslating_terms' ] );
+				if ( isset( $data['tm_block_retranslating_terms'] ) ) {
+					$sitepress->set_setting( 'tm_block_retranslating_terms', $data['tm_block_retranslating_terms'] );
 				} else {
 					$sitepress->set_setting( 'tm_block_retranslating_terms', '' );
 				}
-				if ( isset( $data[ 'translation_memory' ] ) ) {
-					$sitepress->set_setting( 'translation_memory', $data[ 'translation_memory' ] );
+				if ( isset( $data['translation_memory'] ) ) {
+					$sitepress->set_setting( 'translation_memory', $data['translation_memory'] );
 				}
 
 				$this->save_settings();
 				echo '1|';
 				break;
 			case 'reset_duplication':
-				$this->reset_duplicate_flag( $_POST[ 'post_id' ] );
+				$this->reset_duplicate_flag( $_POST['post_id'] );
 				break;
 			case 'set_duplication':
-				$new_id = $this->set_duplicate( $_POST[ 'wpml_original_post_id' ], $_POST[ 'post_lang' ] );
+				$new_id = $this->set_duplicate( $_POST['wpml_original_post_id'], $_POST['post_lang'] );
 				wp_send_json_success( array( 'id' => $new_id ) );
-				break;
-			case 'make_duplicates':
-				$mdata[ 'iclpost' ] = array( $data[ 'post_id' ] );
-				$langs              = explode( ',', $data[ 'langs' ] );
-				foreach ( $langs as $lang ) {
-					$mdata[ 'duplicate_to' ][ $lang ] = 1;
-				}
-				$this->make_duplicates( $mdata );
-				do_action( 'wpml_new_duplicated_terms', (array) $mdata[ 'iclpost' ], false );
-				wp_send_json_success();
 				break;
 		}
 	}
@@ -583,7 +579,7 @@ class TranslationManagement {
 	 */
 	public function get_element_prefix( $element_type_full ) {
 		$element_type_parts = explode( '_', $element_type_full );
-		$element_type       = $element_type_parts[ 0 ];
+		$element_type       = $element_type_parts[0];
 
 		return $element_type;
 	}
@@ -625,16 +621,17 @@ class TranslationManagement {
 	public function show_messages() {
 		foreach ( $this->message_ids as $message_suffix ) {
 			$message_id = 'icl_tm_message_' . $message_suffix;
-			$message = ICL_AdminNotifier::get_message( $message_id );
-			if ( isset( $message[ 'type' ], $message[ 'text' ] ) ) {
-				echo '<div class="' . esc_attr( $message[ 'type' ] ) . ' below-h2"><p>' . esc_html( $message[ 'text' ] ) . '</p></div>';
+			$message    = ICL_AdminNotifier::get_message( $message_id );
+			if ( isset( $message['type'], $message['text'] ) ) {
+				echo '<div class="' . esc_attr( $message['type'] ) . ' below-h2"><p>' . esc_html( $message['text'] ) . '</p></div>';
 				ICL_AdminNotifier::remove_message( $message_id );
 			}
 		}
 	}
 
-	/* TRANSLATORS */
-	/* ******************************************************************************************** */
+	/*
+	 TRANSLATORS */
+
 	/**
 	 * @deprecated use `WPML_TM_Blog_Translators::get_blog_translators` instead
 	 *
@@ -642,7 +639,8 @@ class TranslationManagement {
 	 */
 	public function has_translators() {
 		$translators = self::get_blog_translators();
-		return count($translators) > 0;
+
+		return count( $translators ) > 0;
 	}
 
 	/**
@@ -658,7 +656,7 @@ class TranslationManagement {
 		if ( function_exists( 'wpml_tm_load_blog_translators' ) ) {
 			$translators = wpml_tm_load_blog_translators()->get_blog_translators( $args );
 		}
-		
+
 		return $translators;
 	}
 
@@ -683,7 +681,7 @@ class TranslationManagement {
 	 * @return WPML_Translator
 	 */
 	function get_current_translator() {
-		$current_translator = $this->current_translator;
+		$current_translator        = $this->current_translator;
 		$current_translator_is_set = $current_translator && $current_translator->ID > 0 && $current_translator->language_pairs;
 
 		if ( ! $current_translator_is_set ) {
@@ -702,12 +700,13 @@ class TranslationManagement {
 		return $url;
 	}
 
-	/* HOOKS */
-	/* ******************************************************************************************** */
+	/*
+	 HOOKS */
+
 
 	function make_duplicates( $data ) {
-		foreach ( $data[ 'iclpost' ] as $master_post_id ) {
-			foreach ( $data[ 'duplicate_to' ] as $lang => $one ) {
+		foreach ( $data['iclpost'] as $master_post_id ) {
+			foreach ( $data['duplicate_to'] as $lang => $one ) {
 				$this->make_duplicate( $master_post_id, $lang );
 			}
 		}
@@ -733,10 +732,10 @@ class TranslationManagement {
 			return;
 		}
 
-		$data[ 'iclpost' ] = array( $master_post_id );
+		$data['iclpost'] = array( $master_post_id );
 		foreach ( $sitepress->get_active_languages() as $lang => $details ) {
 			if ( $lang != $language_details_original->language_code ) {
-				$data[ 'duplicate_to' ][ $lang ] = 1;
+				$data['duplicate_to'][ $lang ] = 1;
 			}
 		}
 
@@ -753,10 +752,12 @@ class TranslationManagement {
 
 		foreach ( $translations as $tr ) {
 			if ( $tr->element_id == $post_id ) {
-				$this->update_translation_status( array(
-					                                  'translation_id' => $tr->translation_id,
-					                                  'status'         => ICL_TM_COMPLETE
-				                                  ) );
+				$this->update_translation_status(
+					array(
+						'translation_id' => $tr->translation_id,
+						'status'         => ICL_TM_COMPLETE,
+					)
+				);
 			}
 		}
 
@@ -777,10 +778,14 @@ class TranslationManagement {
 
 		$original_comment = (bool) get_comment_meta( $comment_id, '_icl_duplicate_of', true ) === false;
 		if ( $original_comment ) {
-			$duplicates = $wpdb->get_col( $wpdb->prepare( "SELECT comment_id
+			$duplicates = $wpdb->get_col(
+				$wpdb->prepare(
+					"SELECT comment_id
 														   FROM {$wpdb->commentmeta}
 														   WHERE meta_key='_icl_duplicate_of'
-														   AND meta_value=%d", $comment_id ) );
+														   AND meta_value=%d", $comment_id
+				)
+			);
 			foreach ( $duplicates as $dup ) {
 				wp_delete_comment( $dup, true );
 			}
@@ -791,7 +796,7 @@ class TranslationManagement {
 		global $wpdb;
 
 		$comment = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->comments} WHERE comment_ID=%d", $comment_id ), ARRAY_A );
-		unset( $comment[ 'comment_ID' ], $comment[ 'comment_post_ID' ] );
+		unset( $comment['comment_ID'], $comment['comment_post_ID'] );
 
 		$comment_meta = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM {$wpdb->commentmeta} WHERE comment_id=%d AND meta_key <> '_icl_duplicate_of'", $comment_id ) );
 
@@ -855,7 +860,7 @@ class TranslationManagement {
 		$comment = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->comments} WHERE comment_ID=%d", $comment_id ), ARRAY_A );
 
 		// loop duplicate posts, add new comment
-		$post_id = $comment[ 'comment_post_ID' ];
+		$post_id = $comment['comment_post_ID'];
 
 		// if this is a duplicate post
 		$duplicate_of = get_post_meta( $post_id, '_icl_lang_duplicate_of', true );
@@ -868,17 +873,17 @@ class TranslationManagement {
 		} else {
 			$post_duplicates = $sitepress->get_duplicates( $post_id );
 		}
-		unset( $comment[ 'comment_ID' ], $comment[ 'comment_post_ID' ] );
+		unset( $comment['comment_ID'], $comment['comment_post_ID'] );
 		foreach ( $post_duplicates as $lang => $dup_id ) {
-			$comment[ 'comment_post_ID' ] = $dup_id;
+			$comment['comment_post_ID'] = $dup_id;
 
-			if ( $comment[ 'comment_parent' ] ) {
+			if ( $comment['comment_parent'] ) {
 				$translated_parent = $duplicator->get_correct_parent( $comment, $dup_id );
 				if ( ! $translated_parent ) {
-					$this->duplication_insert_comment( $comment[ 'comment_parent' ] );
+					$this->duplication_insert_comment( $comment['comment_parent'] );
 					$translated_parent = $duplicator->get_correct_parent( $comment, $dup_id );
 				}
-				$comment[ 'comment_parent' ] = $translated_parent;
+				$comment['comment_parent'] = $translated_parent;
 			}
 
 			$duplicator->insert_duplicated_comment( $comment, $dup_id, $comment_id );
@@ -907,15 +912,16 @@ class TranslationManagement {
 					$jobs = $wpdb->get_col( $wpdb->prepare( "SELECT job_id FROM {$wpdb->prefix}icl_translate_job WHERE rid=%d", $rid ) );
 					$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_translate_job WHERE rid=%d", $rid ) );
 					if ( ! empty( $jobs ) ) {
-						$wpdb->query( "DELETE FROM {$wpdb->prefix}icl_translate WHERE job_id IN (" . wpml_prepare_in( $jobs, '%d' ) . ")" );
+						$wpdb->query( "DELETE FROM {$wpdb->prefix}icl_translate WHERE job_id IN (" . wpml_prepare_in( $jobs, '%d' ) . ')' );
 					}
 				}
 			}
 		}
 	}
 
-	/* TRANSLATIONS */
-	/* ******************************************************************************************** */
+	/*
+	 TRANSLATIONS */
+
 	/**
 	 * calculate post md5
 	 *
@@ -933,12 +939,16 @@ class TranslationManagement {
 		$trid        = $sitepress->get_element_trid( $element_id, $element_type );
 		$translation = array();
 		if ( $trid ) {
-			$translation = $wpdb->get_row( $wpdb->prepare( "
+			$translation = $wpdb->get_row(
+				$wpdb->prepare(
+					"
 				SELECT *
 				FROM {$wpdb->prefix}icl_translations tr
 				JOIN {$wpdb->prefix}icl_translation_status ts ON tr.translation_id = ts.translation_id
 				WHERE tr.trid=%d AND tr.language_code= %s
-			", $trid, $language ) );
+			", $trid, $language
+				)
+			);
 		}
 
 		return $translation;
@@ -949,13 +959,17 @@ class TranslationManagement {
 		$trid         = $sitepress->get_element_trid( $element_id, $element_type );
 		$translations = array();
 		if ( $trid ) {
-			$service      = $service ? $wpdb->prepare( " AND translation_service = %s ", $service ) : '';
-			$translations = $wpdb->get_results( $wpdb->prepare( "
+			$service      = $service ? $wpdb->prepare( ' AND translation_service = %s ', $service ) : '';
+			$translations = $wpdb->get_results(
+				$wpdb->prepare(
+					"
 				SELECT *
 				FROM {$wpdb->prefix}icl_translations tr
 				JOIN {$wpdb->prefix}icl_translation_status ts ON tr.translation_id = ts.translation_id
 				WHERE tr.trid=%d {$service}
-			", $trid ) );
+			", $trid
+				)
+			);
 			foreach ( $translations as $k => $v ) {
 				$translations[ $v->language_code ] = $v;
 				unset( $translations[ $k ] );
@@ -1061,7 +1075,7 @@ class TranslationManagement {
 	 */
 	function create_translation_package( $post ) {
 
-		return apply_filters('wpml_post_to_translation_package', false, $post);
+		return apply_filters( 'wpml_post_to_translation_package', false, $post );
 	}
 
 	function messages_by_type( $type ) {
@@ -1069,8 +1083,8 @@ class TranslationManagement {
 
 		$result = false;
 		foreach ( $messages as $message ) {
-			if ( $type === false || ( ! empty( $message[ 'type' ] ) && $message[ 'type' ] == $type ) ) {
-				$result[ ] = $message;
+			if ( $type === false || ( ! empty( $message['type'] ) && $message['type'] == $type ) ) {
+				$result[] = $message;
 			}
 		}
 
@@ -1090,8 +1104,8 @@ class TranslationManagement {
 	}
 
 	function add_message( $message ) {
-		$this->messages[ ] = $message;
-		$this->messages    = array_unique( $this->messages, SORT_REGULAR );
+		$this->messages[] = $message;
+		$this->messages   = array_unique( $this->messages, SORT_REGULAR );
 	}
 
 	/**
@@ -1104,7 +1118,7 @@ class TranslationManagement {
 	 */
 	function update_translation_status( $data, $rid = null ) {
 		global $wpdb;
-		if ( ! isset( $data[ 'translation_id' ] ) ) {
+		if ( ! isset( $data['translation_id'] ) ) {
 			return array( false, false );
 		}
 
@@ -1118,9 +1132,9 @@ class TranslationManagement {
 			$wpdb->update( $wpdb->prefix . 'icl_translation_status', $data, $data_where );
 		} else {
 			$wpdb->insert( $wpdb->prefix . 'icl_translation_status', $data );
-			$rid    = $wpdb->insert_id;
+			$rid = $wpdb->insert_id;
 		}
-		$data[ 'rid' ] = $rid;
+		$data['rid'] = $rid;
 
 		do_action( 'wpml_updated_translation_status', $data );
 
@@ -1145,23 +1159,49 @@ class TranslationManagement {
 		);
 	}
 
-	/* TRANSLATION JOBS */
-	/* ******************************************************************************************** */
+	/*
+	 TRANSLATION JOBS */
+
 
 	/**
-	 * @param WPML_TM_Translation_Batch $batch
-	 * @param string                    $type
+	 * @param \WPML_TM_Translation_Batch $batch
+	 * @param string                     $type
 	 *
 	 * @return array
 	 */
-	function send_jobs( WPML_TM_Translation_Batch $batch, $type = 'post' ) {
+	function send_jobs( $batch, $type = 'post' ) {
+
+		/**
+		 * `\TranslationManagement::send_jobs` is in Core, and requires an instance of \WPML_TM_Translation_Batch
+		 * which is defined in TM.
+		 *
+		 * We should move this code to TM instead.
+		 *
+		 * Until then, to prevent tests from failing:
+		 *
+		 * - We remove the type-hint from the method's signature
+		 * - We compensate by using the following check
+		 */
+		if ( ! is_a( $batch, '\WPML_TM_Translation_Batch' ) ) {
+			throw new InvalidArgumentException( '$batch must be an instance of \WPML_TM_Translation_Batch' );
+		}
+
 		global $wpdb, $sitepress;
 
 		$job_ids    = array();
 		$added_jobs = array();
 		$batch_id   = TranslationProxy_Batch::update_translation_batch( $batch->get_basket_name() );
 
-		foreach ( $batch->get_elements_by_type($type) as $element ) {
+		/**
+		 * Allows to filter the translation batch
+		 *
+		 * @since 4.3.0
+		 *
+		 * @param \WPML_TM_Translation_Batch $batch
+		 */
+		$batch = apply_filters( 'wpml_send_jobs_batch', $batch );
+
+		foreach ( $batch->get_elements_by_type( $type ) as $element ) {
 			$post = $this->get_post( $element->get_element_id(), $type );
 			if ( ! $post ) {
 				continue;
@@ -1182,7 +1222,7 @@ class TranslationManagement {
 						continue;
 					}
 
-					$job_ids[ ] = $this->make_duplicate( $element->get_element_id(), $lang );
+					$job_ids[] = $this->make_duplicate( $element->get_element_id(), $lang );
 				} elseif ( $action == self::TRANSLATE_ELEMENT_ACTION ) {
 
 					// INSERT DATA TO icl_translations
@@ -1205,11 +1245,11 @@ class TranslationManagement {
 
 					$_status = ICL_TM_WAITING_FOR_TRANSLATOR;
 
-					$translator = $batch->get_translator( $lang );
+					$translator       = $batch->get_translator( $lang );
 					$translation_data = TranslationProxy_Service::get_translator_data_from_wpml( $translator );
-					$translator_id = $translation_data[ 'translator_id' ];
+					$translator_id    = $translation_data['translator_id'];
 
-					$translation_service = $translation_data[ 'translation_service' ];
+					$translation_service = $translation_data['translation_service'];
 
 					// add translation_status record
 					$data = array(
@@ -1223,14 +1263,14 @@ class TranslationManagement {
 						'batch_id'            => $batch_id,
 						'uuid'                => $this->get_uuid( $current_translation_status, $post ),
 						'ts_status'           => null,
-						'timestamp'           => date( 'Y-m-d H:i:s', time()),
+						'timestamp'           => date( 'Y-m-d H:i:s', time() ),
 					);
 
 					$backup_translation_status = $this->get_translation_status_data( $translation_id );
 					$prevstate                 = $this->get_translation_prev_state( $backup_translation_status );
 
 					if ( $prevstate ) {
-						$data[ '_prevstate' ] = serialize( $prevstate );
+						$data['_prevstate'] = serialize( $prevstate );
 					}
 
 					$rid = isset( $backup_translation_status['rid'] )
@@ -1240,7 +1280,7 @@ class TranslationManagement {
 					$job_id      = $this->add_translation_job( $rid, $translator_id, $translation_package, $batch->get_batch_options() );
 					wpml_tm_load_job_factory()->update_job_data( $job_id, array( 'editor' => WPML_TM_Editors::NONE ) );
 
-					$job_ids[]     = $job_id;
+					$job_ids[] = $job_id;
 
 					if ( $translation_service !== 'local' ) {
 						/** @global WPML_Pro_Translation $ICL_Pro_Translation */
@@ -1254,10 +1294,10 @@ class TranslationManagement {
 							if ( $backup_translation_status ) {
 								$wpdb->update( "{$wpdb->prefix}icl_translation_status", $backup_translation_status, array( 'translation_id' => $data['translation_id'] ) );
 							} else {
-								$wpdb->delete( "{$wpdb->prefix}icl_translation_status", array( 'translation_id' => $data['translation_id'] )  );
+								$wpdb->delete( "{$wpdb->prefix}icl_translation_status", array( 'translation_id' => $data['translation_id'] ) );
 							}
 							foreach ( $ICL_Pro_Translation->errors as $error ) {
-								if ( $error instanceof Exception) {
+								if ( $error instanceof Exception ) {
 									/** @var Exception $error */
 									$message = array(
 										'type' => 'error',
@@ -1278,15 +1318,15 @@ class TranslationManagement {
 						);
 					}
 
-					$added_jobs[$translation_service][] = $job_id;
+					$added_jobs[ $translation_service ][] = $job_id;
 				}
 			}
 		}
 
-		do_action('wpml_added_translation_jobs', $added_jobs);
+		do_action( 'wpml_added_translation_jobs', $added_jobs );
 
 		icl_cache_clear();
-		do_action('wpml_tm_empty_mail_queue');
+		do_action( 'wpml_tm_empty_mail_queue' );
 
 		return $job_ids;
 	}
@@ -1307,10 +1347,14 @@ class TranslationManagement {
 
 	private function get_translation_status_data( $translation_id ) {
 		global $wpdb;
-		$data = $wpdb->get_results( $wpdb->prepare( "SELECT *
+		$data = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT *
 													FROM {$wpdb->prefix}icl_translation_status
 													WHERE translation_id = %d",
-			$translation_id ), ARRAY_A );
+				$translation_id
+			), ARRAY_A
+		);
 
 		return isset( $data[0] ) ? $data[0] : array();
 	}
@@ -1421,26 +1465,28 @@ class TranslationManagement {
 			// set post_id
 			$final_posts[ $post_data->ID ] = false;
 			// set post_title
-			$final_posts[ $post_data->ID ][ 'post_title' ] = $post_data->post_title;
+			$final_posts[ $post_data->ID ]['post_title'] = $post_data->post_title;
 			// set post_date
-			$final_posts[ $post_data->ID ][ 'post_date' ] = $post_data->post_date;
+			$final_posts[ $post_data->ID ]['post_date'] = $post_data->post_date;
 			// set post_notes
-			$final_posts[ $post_data->ID ][ 'post_notes' ] = get_post_meta( $post_data->ID, '_icl_translator_note', true );;
+			$final_posts[ $post_data->ID ]['post_notes'] = get_post_meta( $post_data->ID, '_icl_translator_note', true );
+
 			// set post_type
-			$final_posts[ $post_data->ID ][ 'post_type' ] = $post_data->post_type;
+			$final_posts[ $post_data->ID ]['post_type'] = $post_data->post_type;
 			// set post_status
-			$final_posts[ $post_data->ID ][ 'post_status' ] = $post_data->post_status;
+			$final_posts[ $post_data->ID ]['post_status'] = $post_data->post_status;
 			// set from_lang
-			$final_posts[ $post_data->ID ][ 'from_lang' ]        = $posts[ $post_data->ID ][ 'from_lang' ];
-			$final_posts[ $post_data->ID ][ 'from_lang_string' ] = ucfirst( $sitepress->get_display_language_name( $posts[ $post_data->ID ][ 'from_lang' ], $sitepress->get_admin_language() ) );
+			$final_posts[ $post_data->ID ]['from_lang']        = $posts[ $post_data->ID ]['from_lang'];
+			$final_posts[ $post_data->ID ]['from_lang_string'] = ucfirst( $sitepress->get_display_language_name( $posts[ $post_data->ID ]['from_lang'], $sitepress->get_admin_language() ) );
 			// set to_langs
-			$final_posts[ $post_data->ID ][ 'to_langs' ] = $posts[ $post_data->ID ][ 'to_langs' ];
+			$final_posts[ $post_data->ID ]['to_langs'] = $posts[ $post_data->ID ]['to_langs'];
 			// set comma separated to_langs -> to_langs_string
 			$language_names = array();
-			foreach ( $final_posts[ $post_data->ID ][ 'to_langs' ] as $language_code => $value ) {
-				$language_names[ ] = ucfirst( $sitepress->get_display_language_name( $language_code, $sitepress->get_admin_language() ) );
+			foreach ( $final_posts[ $post_data->ID ]['to_langs'] as $language_code => $value ) {
+				$language_names[] = ucfirst( $sitepress->get_display_language_name( $language_code, $sitepress->get_admin_language() ) );
 			}
-			$final_posts[ $post_data->ID ][ 'to_langs_string' ] = implode( ", ", $language_names );
+			$final_posts[ $post_data->ID ]['to_langs_string'] = implode( ', ', $language_names );
+			$final_posts[ $post_data->ID ]['auto_added']      = isset( $posts[ $post_data->ID ]['auto_added'] ) && $posts[ $post_data->ID ]['auto_added'];
 		}
 
 		return $final_posts;
@@ -1465,21 +1511,21 @@ class TranslationManagement {
 					// set post_id
 					$final_strings[ $string_id ] = false;
 					// set post_title
-					$final_strings[ $string_id ][ 'post_title' ] = icl_get_string_by_id( $string_id );
+					$final_strings[ $string_id ]['post_title'] = icl_get_string_by_id( $string_id );
 					// set post_type
-					$final_strings[ $string_id ][ 'post_type' ] = 'string';
+					$final_strings[ $string_id ]['post_type'] = 'string';
 					// set from_lang
-					$final_strings[ $string_id ][ 'from_lang' ]        = $source_language;
-					$final_strings[ $string_id ][ 'from_lang_string' ] = ucfirst( $sitepress->get_display_language_name( $source_language, $sitepress->get_admin_language() ) );
+					$final_strings[ $string_id ]['from_lang']        = $source_language;
+					$final_strings[ $string_id ]['from_lang_string'] = ucfirst( $sitepress->get_display_language_name( $source_language, $sitepress->get_admin_language() ) );
 					// set to_langs
-					$final_strings[ $string_id ][ 'to_langs' ] = $data[ 'to_langs' ];
+					$final_strings[ $string_id ]['to_langs'] = $data['to_langs'];
 					// set comma separated to_langs -> to_langs_string
 					// set comma separated to_langs -> to_langs_string
 					$language_names = array();
-					foreach ( $final_strings[ $string_id ][ 'to_langs' ] as $language_code => $value ) {
-						$language_names[ ] = ucfirst( $sitepress->get_display_language_name( $language_code, $sitepress->get_admin_language() ) );
+					foreach ( $final_strings[ $string_id ]['to_langs'] as $language_code => $value ) {
+						$language_names[] = ucfirst( $sitepress->get_display_language_name( $language_code, $sitepress->get_admin_language() ) );
 					}
-					$final_strings[ $string_id ][ 'to_langs_string' ] = implode( ", ", $language_names );
+					$final_strings[ $string_id ]['to_langs_string'] = implode( ', ', $language_names );
 				}
 			}
 		}
@@ -1492,37 +1538,72 @@ class TranslationManagement {
 	}
 
 	function get_translation_job_id_filter( $empty, $args ) {
-		$trid = $args['trid'];
+		$trid          = $args['trid'];
 		$language_code = $args['language_code'];
-		return $this->get_translation_job_id($trid, $language_code);
+
+		return $this->get_translation_job_id( $trid, $language_code );
 	}
 
-	function get_translation_job_id( $trid, $language_code ) {
+	/**
+	 * @param int $trid
+	 *
+	 * @return array
+	 */
+	private function get_translation_job_info( $trid ) {
 		global $wpdb;
 
-		$found = false;
-		$cache = $this->cache_factory->get( 'TranslationManagement::get_translation_job_id' );
-		$job_ids = $cache->get( $trid, $found );
+		$found    = false;
+		$cache    = $this->cache_factory->get( 'TranslationManagement::get_translation_job_id' );
+		$job_info = $cache->get( $trid, $found );
 		if ( ! $found ) {
-
-			$results = $wpdb->get_results( $wpdb->prepare( "
-				SELECT tj.job_id, t.language_code FROM {$wpdb->prefix}icl_translate_job tj
+			$results = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT tj.job_id, tj.editor, t.language_code FROM {$wpdb->prefix}icl_translate_job tj
 					JOIN {$wpdb->prefix}icl_translation_status ts ON tj.rid = ts.rid
 					JOIN {$wpdb->prefix}icl_translations t ON ts.translation_id = t.translation_id
 					WHERE t.trid = %d
-					ORDER BY tj.job_id DESC 
-					", $trid ) );
+					ORDER BY tj.job_id DESC",
+					$trid
+				)
+			);
 
-			$job_ids = array();
+			$job_info = array();
 			foreach ( $results as $result ) {
-				if ( ! isset( $job_ids[ $result->language_code ] ) ) {
-					$job_ids[ $result->language_code ] = $result->job_id;
+				if ( ! isset( $job_info[ $result->language_code ] ) ) {
+					$job_info[ $result->language_code ] = [
+						'job_id' => $result->job_id,
+						'editor' => $result->editor,
+					];
 				}
 			}
-			$cache->set( $trid, $job_ids );
+			$cache->set( $trid, $job_info );
 		}
 
-		return isset( $job_ids[ $language_code ] ) ? $job_ids[ $language_code ] : null;
+		return $job_info;
+	}
+
+	/**
+	 * @param int    $trid
+	 * @param string $language_code
+	 *
+	 * @return int|null
+	 */
+	public function get_translation_job_id( $trid, $language_code ) {
+		$job_info = $this->get_translation_job_info( $trid );
+
+		return isset( $job_info[ $language_code ] ) ? $job_info[ $language_code ]['job_id'] : null;
+	}
+
+	/**
+	 * @param int    $trid
+	 * @param string $language_code
+	 *
+	 * @return string|null
+	 */
+	public function get_translation_job_editor( $trid, $language_code ) {
+		$job_info = $this->get_translation_job_info( $trid );
+
+		return isset( $job_info[ $language_code ] ) ? $job_info[ $language_code ]['editor'] : null;
 	}
 
 	function save_translation( $data ) {
@@ -1532,11 +1613,11 @@ class TranslationManagement {
 	/**
 	 * Saves the contents a job's post to the job itself
 	 *
-	 * @deprecated since WPML 3.2.3 use the action hook wpml_save_job_fields_from_post
-	 *
-	 * @param int   $job_id
+	 * @param int $job_id
 	 *
 	 * @hook wpml_save_job_fields_from_post
+	 * @deprecated since WPML 3.2.3 use the action hook wpml_save_job_fields_from_post
+	 *
 	 */
 	function save_job_fields_from_post( $job_id ) {
 		do_action( 'wpml_save_job_fields_from_post', $job_id );
@@ -1546,17 +1627,22 @@ class TranslationManagement {
 		global $wpdb;
 		$wpdb->update( $wpdb->prefix . 'icl_translate_job', array( 'translated' => 1 ), array( 'job_id' => $job_id ) );
 		$wpdb->update( $wpdb->prefix . 'icl_translate', array( 'field_finished' => 1 ), array( 'job_id' => $job_id ) );
-		do_action('wpml_tm_empty_mail_queue');
+		do_action( 'wpml_tm_empty_mail_queue' );
 	}
 
 	function resign_translator( $job_id ) {
 		global $wpdb;
 		list( $translator_id, $rid ) = $wpdb->get_row( $wpdb->prepare( "SELECT translator_id, rid FROM {$wpdb->prefix}icl_translate_job WHERE job_id=%d", $job_id ), ARRAY_N );
-		if ( !empty( $translator_id ) && $this->settings[ 'notification' ][ 'resigned' ] != ICL_TM_NOTIFICATION_NONE && $job_id ) {
+		if ( ! empty( $translator_id ) && $this->settings['notification']['resigned'] != ICL_TM_NOTIFICATION_NONE && $job_id ) {
 			do_action( 'wpml_tm_resign_job_notification', $translator_id, $job_id );
 		}
 		$wpdb->update( $wpdb->prefix . 'icl_translate_job', array( 'translator_id' => 0 ), array( 'job_id' => $job_id ) );
-		$wpdb->update( $wpdb->prefix . 'icl_translation_status', array( 'translator_id' => 0, 'status' => ICL_TM_WAITING_FOR_TRANSLATOR ), array( 'rid' => $rid ) );
+		$wpdb->update(
+			$wpdb->prefix . 'icl_translation_status', array(
+			'translator_id' => 0,
+			'status'        => ICL_TM_WAITING_FOR_TRANSLATOR,
+		), array( 'rid' => $rid )
+		);
 	}
 
 	function remove_translation_job( $job_id, $new_translation_status = ICL_TM_WAITING_FOR_TRANSLATOR, $new_translator_id = 0 ) {
@@ -1567,14 +1653,22 @@ class TranslationManagement {
 		list( $prev_translator_id, $rid ) = $wpdb->get_row( $wpdb->prepare( "SELECT translator_id, rid FROM {$wpdb->prefix}icl_translate_job WHERE job_id=%d", $job_id ), ARRAY_N );
 
 		$wpdb->update( $wpdb->prefix . 'icl_translate_job', array( 'translator_id' => $new_translator_id ), array( 'job_id' => $job_id ) );
-		$wpdb->update( $wpdb->prefix . 'icl_translate', array( 'field_data_translated' => '', 'field_finished' => 0 ), array( 'job_id' => $job_id ) );
+		$wpdb->update(
+			$wpdb->prefix . 'icl_translate', array(
+			'field_data_translated' => '',
+			'field_finished'        => 0,
+		), array( 'job_id' => $job_id )
+		);
 
 		if ( $rid ) {
-			$data       = array( 'status' => $new_translation_status, 'translator_id' => $new_translator_id );
+			$data       = array(
+				'status'        => $new_translation_status,
+				'translator_id' => $new_translator_id,
+			);
 			$data_where = array( 'rid' => $rid );
 			$wpdb->update( $wpdb->prefix . 'icl_translation_status', $data, $data_where );
 
-			if ( $this->settings[ 'notification' ][ 'resigned' ] == ICL_TM_NOTIFICATION_IMMEDIATELY && ! empty( $prev_translator_id ) ) {
+			if ( $this->settings['notification']['resigned'] == ICL_TM_NOTIFICATION_IMMEDIATELY && ! empty( $prev_translator_id ) ) {
 				do_action( 'wpml_tm_remove_job_notification', $prev_translator_id, $job_id );
 			}
 		} else {
@@ -1585,7 +1679,7 @@ class TranslationManagement {
 	}
 
 	function abort_translation() {
-		$job_id  = $_POST[ 'job_id' ];
+		$job_id  = $_POST['job_id'];
 		$message = '';
 
 		$error = $this->remove_translation_job( $job_id, ICL_TM_WAITING_FOR_TRANSLATOR, 0 );
@@ -1593,13 +1687,18 @@ class TranslationManagement {
 			$message = __( 'Job removed', 'sitepress' );
 		}
 
-		echo wp_json_encode( array( 'message' => $message, 'error' => $error ) );
+		echo wp_json_encode(
+			array(
+				'message' => $message,
+				'error'   => $error,
+			)
+		);
 		exit;
 	}
 
 	// $translation_id - int or array
 	function cancel_translation_request( $translation_id, $remove_translation_record = true ) {
-		global $wpdb, $WPML_String_Translation;;
+		global $wpdb, $WPML_String_Translation;
 
 		if ( is_array( $translation_id ) ) {
 			foreach ( $translation_id as $id ) {
@@ -1608,26 +1707,30 @@ class TranslationManagement {
 		} else {
 
 			if ( $WPML_String_Translation && wpml_mb_strpos( $translation_id, 'string|' ) === 0 ) {
-				//string translations get handled in wpml-string-translation
-				//first remove the "string|" prefix
+				// string translations get handled in wpml-string-translation
+				// first remove the "string|" prefix
 				$id = substr( $translation_id, 7 );
-				//then send it to the respective function in wpml-string-translation
+				// then send it to the respective function in wpml-string-translation
 				$WPML_String_Translation->cancel_local_translation( $id );
 
 				return;
 			}
 
-			list( $rid, $translator_id ) = $wpdb->get_row( $wpdb->prepare( "SELECT rid, translator_id
+			list( $rid, $translator_id ) = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT rid, translator_id
                      FROM {$wpdb->prefix}icl_translation_status
                      WHERE translation_id=%d
-                       AND ( status = %d OR status = %d )", $translation_id, ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS ), ARRAY_N );
+                       AND ( status = %d OR status = %d )", $translation_id, ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS
+				), ARRAY_N
+			);
 			if ( ! $rid ) {
 				return;
 			}
 			$job_id = $wpdb->get_var( $wpdb->prepare( "SELECT job_id FROM {$wpdb->prefix}icl_translate_job WHERE rid=%d AND revision IS NULL ", $rid ) );
 
-			if ( isset($this->settings[ 'notification' ][ 'resigned' ])
-				 && $this->settings[ 'notification' ][ 'resigned' ] == ICL_TM_NOTIFICATION_IMMEDIATELY && !empty( $translator_id ) ) {
+			if ( isset( $this->settings['notification']['resigned'] )
+				 && $this->settings['notification']['resigned'] == ICL_TM_NOTIFICATION_IMMEDIATELY && ! empty( $translator_id ) ) {
 				do_action( 'wpml_tm_remove_job_notification', $translator_id, $job_id );
 			}
 
@@ -1641,14 +1744,14 @@ class TranslationManagement {
 				if ( ! empty( $previous_state ) ) {
 					$previous_state = unserialize( $previous_state );
 					$arr_data       = array(
-						'status'              => $previous_state[ 'status' ],
-						'translator_id'       => $previous_state[ 'translator_id' ],
-						'needs_update'        => $previous_state[ 'needs_update' ],
-						'md5'                 => $previous_state[ 'md5' ],
-						'translation_service' => $previous_state[ 'translation_service' ],
-						'translation_package' => $previous_state[ 'translation_package' ],
-						'timestamp'           => $previous_state[ 'timestamp' ],
-						'links_fixed'         => $previous_state[ 'links_fixed' ]
+						'status'              => $previous_state['status'],
+						'translator_id'       => $previous_state['translator_id'],
+						'needs_update'        => $previous_state['needs_update'],
+						'md5'                 => $previous_state['md5'],
+						'translation_service' => $previous_state['translation_service'],
+						'translation_package' => $previous_state['translation_package'],
+						'timestamp'           => $previous_state['timestamp'],
+						'links_fixed'         => $previous_state['links_fixed'],
 					);
 					$data_where     = array( 'translation_id' => $translation_id );
 					$wpdb->update( $wpdb->prefix . 'icl_translation_status', $arr_data, $data_where );
@@ -1670,7 +1773,7 @@ class TranslationManagement {
 		if ( ! defined( 'WPML_ST_FOLDER' ) ) {
 			return;
 		}
-		//Cache the previous option, when called recursively
+		// Cache the previous option, when called recursively
 		static $option = false;
 
 		if ( ! $key ) {
@@ -1727,10 +1830,10 @@ class TranslationManagement {
 		if ( is_scalar( $value ) ) {
 			preg_match_all( '#\[([^\]]+)\]#', $key, $matches );
 
-			if ( count( $matches[ 1 ] ) > 1 ) {
+			if ( count( $matches[1] ) > 1 ) {
 				$o_value = $option;
-				for ( $i = 1; $i < count( $matches[ 1 ] ); $i ++ ) {
-					$o_value = $o_value[ $matches[ 1 ][ $i ] ];
+				for ( $i = 1; $i < count( $matches[1] ); $i++ ) {
+					$o_value = $o_value[ $matches[1][ $i ] ];
 				}
 				$o_value   = $o_value[ $name ];
 				$edit_link = '';
@@ -1775,7 +1878,7 @@ class TranslationManagement {
 				$this->render_option_writes( $o_key, $o_value, $o_key . '[' . $name . ']' );
 			}
 
-			//Reset cached data
+			// Reset cached data
 			$option = false;
 		}
 		echo '</li>';
@@ -1797,7 +1900,7 @@ class TranslationManagement {
 
 		global $wpdb;
 
-		if (  wpml_get_setting_filter( false, 'translated_document_page_url' ) === 'copy-encoded' ) {
+		if ( wpml_get_setting_filter( false, 'translated_document_page_url' ) === 'copy-encoded' ) {
 
 			$post            = $wpdb->get_row( $wpdb->prepare( "SELECT post_type FROM {$wpdb->posts} WHERE ID=%d", $post_id ) );
 			$translation_row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}icl_translations WHERE element_id=%d AND element_type=%s", $post_id, 'post_' . $post->post_type ) );
@@ -1812,11 +1915,15 @@ class TranslationManagement {
 				$post_name_to_be = $post_name_original;
 				$incr            = 1;
 				do {
-					$taken = $wpdb->get_var( $wpdb->prepare( "
+					$taken = $wpdb->get_var(
+						$wpdb->prepare(
+							"
 						SELECT ID FROM {$wpdb->posts} p
 						JOIN {$wpdb->prefix}icl_translations t ON p.ID = t.element_id
 						WHERE ID <> %d AND t.element_type = %s AND t.language_code = %s AND p.post_name = %s
-						", $post_id, 'post_' . $post->post_type, $translation_row->language_code, $post_name_to_be ) );
+						", $post_id, 'post_' . $post->post_type, $translation_row->language_code, $post_name_to_be
+						)
+					);
 					if ( $taken ) {
 						$incr ++;
 						$post_name_to_be = $post_name_original . '-' . $incr;
@@ -1831,6 +1938,8 @@ class TranslationManagement {
 	}
 
 	/**
+	 * @deprecated since 4.2.8 Use directly `wpml_get_create_post_helper()` instead.
+	 *
 	 * @param $postarr
 	 * @param $lang
 	 *
@@ -1850,7 +1959,7 @@ class TranslationManagement {
 	private function add_missing_language_to_posts( $post_types ) {
 		global $wpdb;
 
-		//This will be improved when it will be possible to pass an array to the IN clause
+		// This will be improved when it will be possible to pass an array to the IN clause
 		$posts_prepared = "SELECT ID, post_type, post_status FROM {$wpdb->posts} WHERE post_type IN ('" . implode( "', '", esc_sql( $post_types ) ) . "')";
 		$posts          = $wpdb->get_results( $posts_prepared );
 		if ( $posts ) {
@@ -1871,7 +1980,7 @@ class TranslationManagement {
 		$query_prepared = $wpdb->prepare( "SELECT translation_id, language_code FROM {$wpdb->prefix}icl_translations WHERE element_type=%s AND element_id=%d", array( 'post_' . $post->post_type, $post->ID ) );
 		$query_results  = $wpdb->get_row( $query_prepared );
 
-		//if translation exists
+		// if translation exists
 		if ( ! is_null( $query_results ) ) {
 			$translation_id = $query_results->translation_id;
 			$language_code  = $query_results->language_code;
@@ -1881,7 +1990,7 @@ class TranslationManagement {
 		}
 
 		$urls             = $sitepress->get_setting( 'urls' );
-		$is_root_page     = $urls && isset( $urls[ 'root_page' ] ) && $urls[ 'root_page' ] == $post->ID;
+		$is_root_page     = $urls && isset( $urls['root_page'] ) && $urls['root_page'] == $post->ID;
 		$default_language = $sitepress->get_default_language();
 
 		if ( ! $translation_id && ! $is_root_page && ! in_array( $post->post_status, array( 'auto-draft' ) ) ) {
@@ -1899,11 +2008,11 @@ class TranslationManagement {
 			do_action(
 				'wpml_translation_update',
 				array(
-					'type' => 'update',
-					'element_id' => $post->ID,
-					'element_type' => 'post_' . $post->post_type,
+					'type'           => 'update',
+					'element_id'     => $post->ID,
+					'element_type'   => 'post_' . $post->post_type,
 					'translation_id' => $translation_id,
-					'context' => 'post'
+					'context'        => 'post',
 				)
 			);
 		}
@@ -1921,7 +2030,7 @@ class TranslationManagement {
 			$taxonomy_types = array_merge( $sitepress->get_translatable_taxonomies( true, $post_type ), $taxonomy_types );
 		}
 		$taxonomy_types = array_unique( $taxonomy_types );
-		$taxonomies     = $wpdb->get_results( "SELECT taxonomy, term_taxonomy_id FROM {$wpdb->term_taxonomy} WHERE taxonomy IN (" . wpml_prepare_in( $taxonomy_types ) . ")" );
+		$taxonomies     = $wpdb->get_results( "SELECT taxonomy, term_taxonomy_id FROM {$wpdb->term_taxonomy} WHERE taxonomy IN (" . wpml_prepare_in( $taxonomy_types ) . ')' );
 		if ( $taxonomies ) {
 			foreach ( $taxonomies as $taxonomy ) {
 				$this->add_missing_language_to_taxonomy( $taxonomy );
@@ -1960,7 +2069,7 @@ class TranslationManagement {
 		$dir_str = WPML_TM_PATH . '/res/js/' . $name . '/templates/';
 		$dir     = opendir( $dir_str );
 		while ( ( $currentFile = readdir( $dir ) ) !== false ) {
-			if ( $currentFile == '.' || $currentFile == '..' || $currentFile[ 0 ] == '.' ) {
+			if ( $currentFile == '.' || $currentFile == '..' || $currentFile[0] == '.' ) {
 				continue;
 			}
 
@@ -1971,7 +2080,7 @@ class TranslationManagement {
 	}
 
 	public static function get_job_status_string( $status_id, $needs_update = false ) {
-		$job_status_text = TranslationManagement::status2text( $status_id );
+		$job_status_text = self::status2text( $status_id );
 		if ( $needs_update ) {
 			$job_status_text .= __( ' - (needs update)', 'sitepress' );
 		}
@@ -2034,42 +2143,42 @@ class TranslationManagement {
 	}
 
 	private function init_default_settings() {
-		if ( ! isset( $this->settings[ $this->get_translation_setting_name('custom-fields') ] ) ) {
-			$this->settings[ $this->get_translation_setting_name('custom-fields') ] = array();
+		if ( ! isset( $this->settings[ $this->get_translation_setting_name( 'custom-fields' ) ] ) ) {
+			$this->settings[ $this->get_translation_setting_name( 'custom-fields' ) ] = array();
 		}
 
-		if ( ! isset( $this->settings[ $this->get_readonly_translation_setting_name('custom-fields') ] ) ) {
-			$this->settings[ $this->get_readonly_translation_setting_name('custom-fields') ] = array();
+		if ( ! isset( $this->settings[ $this->get_readonly_translation_setting_name( 'custom-fields' ) ] ) ) {
+			$this->settings[ $this->get_readonly_translation_setting_name( 'custom-fields' ) ] = array();
 		}
 
-		if ( ! isset( $this->settings[ $this->get_custom_translation_setting_name('custom-fields') ] ) ) {
-			$this->settings[ $this->get_custom_translation_setting_name('custom-fields') ] = array();
+		if ( ! isset( $this->settings[ $this->get_custom_translation_setting_name( 'custom-fields' ) ] ) ) {
+			$this->settings[ $this->get_custom_translation_setting_name( 'custom-fields' ) ] = array();
 		}
 
-		if ( ! isset( $this->settings[ $this->get_custom_readonly_translation_setting_name('custom-fields') ] ) ) {
-			$this->settings[ $this->get_custom_readonly_translation_setting_name('custom-fields') ] = array();
+		if ( ! isset( $this->settings[ $this->get_custom_readonly_translation_setting_name( 'custom-fields' ) ] ) ) {
+			$this->settings[ $this->get_custom_readonly_translation_setting_name( 'custom-fields' ) ] = array();
 		}
 
-		if ( ! isset( $this->settings[ 'doc_translation_method' ] ) ) {
-			$this->settings[ 'doc_translation_method' ] = ICL_TM_TMETHOD_MANUAL;
+		if ( ! isset( $this->settings['doc_translation_method'] ) ) {
+			$this->settings['doc_translation_method'] = ICL_TM_TMETHOD_MANUAL;
 		}
 	}
 
-	public function init_current_translator( ) {
-		if(did_action('init')) {
+	public function init_current_translator() {
+		if ( did_action( 'init' ) ) {
 			global $current_user;
 			$current_translator = null;
-			$user = false;
+			$user               = false;
 			if ( isset( $current_user->ID ) ) {
 				$user = new WP_User( $current_user->ID );
 			}
 
 			if ( $user && isset( $user->data ) && $user->data ) {
-				$current_translator                 = new WPML_Translator();
-				$current_translator->ID             = $current_user->ID;
-				$current_translator->user_login     = isset( $user->data->user_login ) ? $user->data->user_login : false;
-				$current_translator->display_name   = isset( $user->data->display_name ) ? $user->data->display_name : $current_translator->user_login;
-				$current_translator                 = $this->init_translator_language_pairs( $current_user, $current_translator );
+				$current_translator               = new WPML_Translator();
+				$current_translator->ID           = $current_user->ID;
+				$current_translator->user_login   = isset( $user->data->user_login ) ? $user->data->user_login : false;
+				$current_translator->display_name = isset( $user->data->display_name ) ? $user->data->display_name : $current_translator->user_login;
+				$current_translator               = $this->init_translator_language_pairs( $current_user, $current_translator );
 			}
 
 			$this->current_translator = $current_translator;
@@ -2124,7 +2233,8 @@ class TranslationManagement {
 	public function icl_tm_save_notification_settings( $data ) {
 		if ( wp_verify_nonce(
 			$data['save_notification_settings_nonce'],
-			'save_notification_settings_nonce' )
+			'save_notification_settings_nonce'
+		)
 		) {
 			foreach (
 				array(
@@ -2134,7 +2244,7 @@ class TranslationManagement {
 					'completed',
 					'completed_frequency',
 					'overdue',
-					'overdue_offset'
+					'overdue_offset',
 				) as $setting
 			) {
 				if ( ! array_key_exists( $setting, $data['notification'] ) ) {
@@ -2147,7 +2257,7 @@ class TranslationManagement {
 			$message = array(
 				'id'   => 'icl_tm_message_save_notification_settings',
 				'type' => 'updated',
-				'text' => __( 'Preferences saved.', 'sitepress' )
+				'text' => __( 'Preferences saved.', 'sitepress' ),
 			);
 			ICL_AdminNotifier::add_message( $message );
 			do_action( 'wpml_tm_notification_settings_saved', $this->settings['notification'] );
@@ -2162,10 +2272,10 @@ class TranslationManagement {
 	public function icl_tm_cancel_jobs( $data ) {
 		$message = array(
 			'id'   => 'icl_tm_message_cancel_jobs',
-			'type' => 'updated'
+			'type' => 'updated',
 		);
-		if ( isset( $data[ 'icl_translation_id' ] ) ) {
-			$this->cancel_translation_request( $data[ 'icl_translation_id' ] );
+		if ( isset( $data['icl_translation_id'] ) ) {
+			$this->cancel_translation_request( $data['icl_translation_id'] );
 			$message['text'] = __( 'Translation requests cancelled.', 'sitepress' );
 		} else {
 			$message['text'] = __( 'No Translation requests selected.', 'sitepress' );

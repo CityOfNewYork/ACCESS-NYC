@@ -1,8 +1,8 @@
 <?php
 
 class WPML_URL_Converter_Subdir_Strategy extends WPML_URL_Converter_Abstract_Strategy {
-	/** @var string */
-	private $dir_default;
+	/** @var bool */
+	private $use_directory_for_default_lang;
 
 	/** @var array copy of $sitepress->get_settings( 'urls' ) */
 	private $urls_settings;
@@ -14,21 +14,24 @@ class WPML_URL_Converter_Subdir_Strategy extends WPML_URL_Converter_Abstract_Str
 	private $language_codes_map;
 	private $language_codes_reverse_map;
 
+	/** @var bool */
+	private $is_rest_request;
+
 	/**
-	 * @param string $dir_default
+	 * @param bool   $use_directory_for_default_lang
 	 * @param string $default_language
 	 * @param array  $active_languages
 	 * @param array  $urls_settings
 	 */
 	public function __construct(
-		$dir_default,
+		$use_directory_for_default_lang,
 		$default_language,
 		$active_languages,
 		$urls_settings
 	) {
 		parent::__construct( $default_language, $active_languages );
-		$this->dir_default   = $dir_default;
-		$this->urls_settings = $urls_settings;
+		$this->use_directory_for_default_lang = (bool) $use_directory_for_default_lang;
+		$this->urls_settings                  = $urls_settings;
 
 		$this->language_codes_map = array_combine( $active_languages, $active_languages );
 		$this->language_codes_map = apply_filters( 'wpml_language_codes_map', $this->language_codes_map );
@@ -37,37 +40,18 @@ class WPML_URL_Converter_Subdir_Strategy extends WPML_URL_Converter_Abstract_Str
 	}
 
 	public function get_lang_from_url_string( $url ) {
-
-		$url = wpml_strip_subdir_from_url( $url );
-
-		if ( strpos( $url, 'http://' ) === 0 || strpos( $url, 'https://' ) === 0 ) {
-			$url_path = wpml_parse_url( $url, PHP_URL_PATH );
-		} else {
-			$pathparts = array_filter( explode( '/', $url ) );
-			if ( count( $pathparts ) > 1 ) {
-				unset( $pathparts[0] );
-				$url_path = implode( '/', $pathparts );
-			} else {
-				$url_path = $url;
-			}
-		}
-
-		$fragments = array_filter( (array) explode( '/', $url_path ) );
-		$lang      = array_shift( $fragments );
-
-		$lang_get_parts = explode( '?', $lang );
-		$lang = $lang_get_parts[0];
-
-		$lang           = isset( $this->language_codes_reverse_map[ $lang ] ) ? $this->language_codes_reverse_map[ $lang ] : $lang;
+		$url_path = $this->get_url_path( wpml_strip_subdir_from_url( $url ) );
+		$lang     = $this->extract_lang_from_url_path( $url_path );
 
 		if ( $lang && in_array( $lang, $this->active_languages, true ) ) {
 			return $lang;
 		}
-		return $this->dir_default ? null : $this->default_language;
+		
+		return $this->use_directory_for_default_lang ? null : $this->default_language;
 	}
 
 	public function validate_language( $language, $url ) {
-		if ( ! ( null === $language && $this->dir_default && ! $this->get_url_helper()->is_url_admin( $url ) ) ) {
+		if ( ! ( null === $language && $this->use_directory_for_default_lang && ! $this->get_url_helper()->is_url_admin( $url ) ) ) {
 			$language = parent::validate_language( $language, $url );
 		}
 
@@ -84,22 +68,22 @@ class WPML_URL_Converter_Subdir_Strategy extends WPML_URL_Converter_Abstract_Str
 		$absolute_home_url = trailingslashit( preg_replace( '#^(http|https)://#', '', $this->get_url_helper()->get_abs_home() ) );
 		$absolute_home_url = strpos( $source_url, $absolute_home_url ) === false ? trailingslashit( get_option( 'home' ) ) : $absolute_home_url;
 
-		$code              = ! $this->dir_default && $code === $this->default_language ? '' : $code;
-		$current_language  = $this->get_lang_from_url_string( $source_url );
-		$current_language  = ! $this->dir_default && $current_language === $this->default_language ? '' : $current_language;
+		$current_language = $this->get_lang_from_url_string( $source_url );
+		$code             = $this->get_language_of_current_dir( $code, '' );
+		$current_language = $this->get_language_of_current_dir( $current_language, '' );
 
 		$code             = isset( $this->language_codes_map[ $code ] ) ? $this->language_codes_map[ $code ] : $code;
 		$current_language = isset( $this->language_codes_map[ $current_language ] ) ? $this->language_codes_map[ $current_language ] : $current_language;
 
 		$source_url = str_replace(
-			array(
+			[
 				trailingslashit( $absolute_home_url . $current_language ),
 				'/' . $code . '//',
-			),
-			array(
+			],
+			[
 				$code ? ( $absolute_home_url . $code . '/' ) : trailingslashit( $absolute_home_url ),
 				'/' . $code . '/',
-			),
+			],
 			$source_url
 		);
 
@@ -117,8 +101,7 @@ class WPML_URL_Converter_Subdir_Strategy extends WPML_URL_Converter_Abstract_Str
 	 * @return string
 	 */
 	public function get_home_url_relative( $url, $language ) {
-
-		$language = ! $this->dir_default && $language === $this->default_language ? '' : $language;
+		$language = $this->get_language_of_current_dir( $language, '' );
 		$language = isset( $this->language_codes_map[ $language ] ) ? $this->language_codes_map[ $language ] : $language;
 
 		if ( $language ) {
@@ -188,4 +171,55 @@ class WPML_URL_Converter_Subdir_Strategy extends WPML_URL_Converter_Abstract_Str
 
 		return $source_url;
 	}
+
+	/**
+	 * @param $url
+	 *
+	 * @return string
+	 */
+	private function get_url_path( $url ) {
+		if ( strpos( $url, 'http://' ) === 0 || strpos( $url, 'https://' ) === 0 ) {
+			$url_path = wpml_parse_url( $url, PHP_URL_PATH );
+		} else {
+			$pathparts = array_filter( explode( '/', $url ) );
+			if ( count( $pathparts ) > 1 ) {
+				unset( $pathparts[0] );
+				$url_path = implode( '/', $pathparts );
+			} else {
+				$url_path = $url;
+			}
+		}
+
+		return $url_path;
+}
+
+	/**
+	 * @param string $url_path
+	 *
+	 * @return string
+	 */
+	private function extract_lang_from_url_path( $url_path ) {
+		$fragments = array_filter( (array) explode( '/', $url_path ) );
+		$lang      = array_shift( $fragments );
+
+		$lang_get_parts = explode( '?', $lang );
+		$lang           = $lang_get_parts[0];
+
+		return isset( $this->language_codes_reverse_map[ $lang ] ) ? $this->language_codes_reverse_map[ $lang ] : $lang;
+	}
+
+	/**
+	 * @param string      $language_code
+	 * @param null|string $value_if_default_language
+	 *
+	 * @return string|null
+	 */
+	private function get_language_of_current_dir( $language_code, $value_if_default_language = null ) {
+		if ( ! $this->use_directory_for_default_lang && $language_code === $this->default_language ) {
+			return $value_if_default_language;
+		}
+
+		return $language_code;
+	}
+
 }

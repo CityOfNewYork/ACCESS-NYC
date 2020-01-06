@@ -42,7 +42,7 @@ class WPML_Compatibility_Plugin_Visual_Composer {
 	 */
 	public function suspend_vc_widget_translation( $text ) {
 		if ( $this->debug_backtrace->is_function_in_call_stack( 'vc_do_shortcode' )
-			&& ! $this->debug_backtrace->is_function_in_call_stack( 'dynamic_sidebar' )
+			&& ! $this->debug_backtrace->is_function_in_call_stack( 'dynamic_sidebar', false )
 		) {
 			$filter           = new stdClass();
 			$filter->hook     = current_filter();

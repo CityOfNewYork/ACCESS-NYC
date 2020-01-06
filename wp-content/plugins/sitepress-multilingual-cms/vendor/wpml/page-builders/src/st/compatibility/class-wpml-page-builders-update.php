@@ -49,10 +49,12 @@ class WPML_Page_Builders_Update {
 		foreach ( $meta_fields as $meta_key ) {
 			if ( 'post_content' === $meta_key ) {
 				$original_post = get_post( $original_post_id );
-				wp_update_post( array(
-					                'ID' => $translated_post_id,
-					                'post_content' => $original_post->post_content,
-				                ) );
+				wpml_update_escaped_post(
+					[
+		                'ID'           => $translated_post_id,
+		                'post_content' => $original_post->post_content,
+					]
+				);
 			} else {
 				$value = get_post_meta( $original_post_id, $meta_key, true );
 				update_post_meta(

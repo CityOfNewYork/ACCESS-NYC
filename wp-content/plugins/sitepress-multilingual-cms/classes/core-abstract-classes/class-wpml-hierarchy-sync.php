@@ -2,6 +2,8 @@
 
 abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 
+	const CACHE_GROUP = __CLASS__;
+
 	protected $original_elements_table_alias            = 'org';
 	protected $translated_elements_table_alias          = 'tra';
 	protected $original_elements_language_table_alias   = 'iclo';
@@ -24,41 +26,76 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 	public function __construct( &$wpdb ) {
 		parent::__construct( $wpdb );
 		$this->lang_info_table = $wpdb->prefix . 'icl_translations';
+		add_action( 'clean_post_cache', [ $this, 'clean_cache' ] );
+		add_action( 'set_object_terms', [ $this, 'clean_cache' ] );
+		add_action( 'wpml_sync_term_hierarchy_done', [ $this, 'clean_cache' ] );
+	}
+
+	public function clean_cache() {
+		WPML_Non_Persistent_Cache::flush_group( self::CACHE_GROUP );
 	}
 
 	public function get_unsynced_elements( $element_types, $ref_lang_code = false ) {
 		$element_types = (array) $element_types;
 		$results       = array();
 		if ( $element_types ) {
-			$results_sql_parts = array();
+			$key     = md5( wp_json_encode( array( $element_types, $ref_lang_code ) ) );
+			$found   = false;
+			$results = WPML_Non_Persistent_Cache::get( $key, self::CACHE_GROUP, $found );
+			if ( ! $found ) {
+				$results_sql_parts = array();
 
-			$results_sql_parts['source_element_table']           = $this->get_source_element_table();
-			$results_sql_parts['source_element_join']            = $this->get_source_element_join();
-			$results_sql_parts['join_translation_language_data'] = $this->get_join_translation_language_data( $ref_lang_code );
-			$results_sql_parts['translated_element_join']        = $this->get_translated_element_join();
-			$results_sql_parts['original_parent_join']           = $this->get_original_parent_join();
-			$results_sql_parts['original_parent_language_join']  = $this->get_original_parent_language_join();
-			$results_sql_parts['correct_parent_language_join']   = $this->get_correct_parent_language_join();
-			$results_sql_parts['correct_parent_element_join']    = $this->get_correct_parent_element_join();
-			$results_sql_parts['where_statement']                = $this->get_where_statement( $element_types,
-			                                                                                   $ref_lang_code );
+				$results_sql_parts['source_element_table']           = $this->get_source_element_table();
+				$results_sql_parts['source_element_join']            = $this->get_source_element_join();
+				$results_sql_parts['join_translation_language_data'] = $this->get_join_translation_language_data( $ref_lang_code );
+				$results_sql_parts['translated_element_join']        = $this->get_translated_element_join();
+				$results_sql_parts['original_parent_join']           = $this->get_original_parent_join();
+				$results_sql_parts['original_parent_language_join']  = $this->get_original_parent_language_join();
+				$results_sql_parts['correct_parent_language_join']   = $this->get_correct_parent_language_join();
+				$results_sql_parts['correct_parent_element_join']    = $this->get_correct_parent_element_join();
+				$results_sql_parts['where_statement']                = $this->get_where_statement(
+					$element_types,
+					$ref_lang_code
+				);
 
-			$results_sql = $this->get_select_statement();
-			$results_sql .= " FROM ";
-			$results_sql .= implode( ' ', $results_sql_parts );
-			$results = $this->wpdb->get_results( $results_sql );
+				$results_sql = $this->get_select_statement();
+
+				$results_sql .= ' FROM ';
+				$results_sql .= implode( ' ', $results_sql_parts );
+
+				$results = $this->wpdb->get_results( $results_sql );
+
+				WPML_Non_Persistent_Cache::set( $key, $results, self::CACHE_GROUP );
+			}
 		}
 
 		return $results;
 	}
 
+	/**
+	 * @param string|array $element_types
+	 * @param bool         $ref_lang_code
+	 */
 	public function sync_element_hierarchy( $element_types, $ref_lang_code = false ) {
-		$unsynced = $this->get_unsynced_elements( $element_types, $ref_lang_code );
+		$hierarchical_element_types = wpml_collect( $element_types )->filter( [ $this, 'is_hierarchical' ] );
+
+		if ( $hierarchical_element_types->isEmpty() ) {
+			return;
+		}
+
+		$unsynced = $this->get_unsynced_elements( $hierarchical_element_types->toArray(), $ref_lang_code );
 
 		foreach ( $unsynced as $row ) {
 			$this->update_hierarchy_for_element( $row );
 		}
 	}
+
+	/**
+	 * @param string $element_type
+	 *
+	 * @return mixed
+	 */
+	abstract public function is_hierarchical( $element_type );
 
 	private final function update_hierarchy_for_element( $row ) {
 		$update = $this->validate_parent_synchronization( $row );

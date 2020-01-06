@@ -18,12 +18,12 @@ class WPML_Menu_Element extends WPML_Term_Element {
 	}
 
 	/**
-	 * @param stdClass $element_data standard object containing at least the `term_id` property
+	 * @param stdClass $element_data standard object containing at least the `term_id` property.
 	 *
 	 * @return WPML_Menu_Element
-	 * @throws \InvalidArgumentException
+	 * @throws \InvalidArgumentException Exception.
 	 */
-	function get_new_instance( $element_data ) {
+	public function get_new_instance( $element_data ) {
 		return new WPML_Menu_Element( $element_data->term_id, $this->sitepress, $this->wpml_cache );
 	}
 }

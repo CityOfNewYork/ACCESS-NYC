@@ -781,7 +781,7 @@ function wpml_get_copied_fields_for_post_edit( $fields = array() ) {
  *
  * @param int   $post_id Optional The post id to retrieve information of (post, page, attachment, custom) Defaults to current post ID.
  *
- * @return array
+ * @return array|WP_Error
  * @use \SitePress::api_hooks
  */
 function wpml_get_language_information( $empty_value = null, $post_id = null ) {
@@ -796,6 +796,7 @@ function wpml_get_language_information( $empty_value = null, $post_id = null ) {
 
 	$post = get_post( $post_id );
 	if ( empty( $post ) ) {
+		// translators: Post id.
 		return new WP_Error( 'missing_post', sprintf( __( 'No such post for ID = %d', 'sitepress' ), $post_id ) );
 	}
 
@@ -803,14 +804,14 @@ function wpml_get_language_information( $empty_value = null, $post_id = null ) {
 	$language_information = $sitepress->get_language_details( $language );
 
 	$current_language = $sitepress->get_current_language();
-	$info = array(
+	$info             = [
 		'language_code'      => $language,
 		'locale'             => $sitepress->get_locale( $language ),
 		'text_direction'     => $sitepress->is_rtl( $language ),
 		'display_name'       => $sitepress->get_display_language_name( $language, $current_language ),
-		'native_name'        => $language_information[ 'display_name' ],
-		'different_language' => $language != $current_language
-	);
+		'native_name'        => isset( $language_information['display_name'] ) ? $language_information['display_name'] : '',
+		'different_language' => $language !== $current_language,
+	];
 
 	return $info;
 }
@@ -1134,14 +1135,13 @@ function wpml_element_has_translations_filter( $empty_value, $element_id, $eleme
 		$wpml_element_type = apply_filters( 'wpml_element_type', $element_type );
 
 		if ( strpos( $wpml_element_type, 'tax_' ) === 0 ) {
+			/** @var WPML_Term_Translation $wpml_term_translations*/
 			global $wpml_term_translations;
-			$term_language_code = $wpml_term_translations->lang_code_by_termid( $element_id );
-			$element_id         = $wpml_term_translations->term_id_in( $element_id, $term_language_code );
+			$element_id = $wpml_term_translations->adjust_ttid_for_term_id( $element_id );
 		}
 
 		$trid = $sitepress->get_element_trid( $element_id, $wpml_element_type );
 
-		//$translations = $sitepress->get_element_translations($trid);
 		$translations = apply_filters( 'wpml_get_element_translations_filter', '', $trid, $wpml_element_type );
 
 		if ( $translations && count( $translations ) > 1 ) {

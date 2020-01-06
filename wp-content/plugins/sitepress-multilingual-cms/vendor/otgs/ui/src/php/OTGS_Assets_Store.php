@@ -20,15 +20,16 @@ class OTGS_Assets_Store {
 		$result = array();
 
 		$this->parse_assets();
+
 		if ( array_key_exists( $type, $this->assets ) ) {
 			$result = $this->assets[ $type ];
-		}
 
-		if ( $handle ) {
-			if ( array_key_exists( $handle, $this->assets[ $type ] ) ) {
-				$result = $this->assets[ $type ][ $handle ];
-			} else {
-				$result = array();
+			if ( $handle ) {
+				if ( array_key_exists( $handle, $this->assets[ $type ] ) ) {
+					$result = $this->assets[ $type ][ $handle ];
+				} else {
+					$result = [];
+				}
 			}
 		}
 
@@ -59,6 +60,10 @@ class OTGS_Assets_Store {
 	 * @param string $assets_file
 	 */
 	private function add_asset( $assets_file ) {
+		if ( ! is_file( $assets_file ) ) {
+			return;
+		}
+
 		// @codingStandardsIgnoreStart
 		$assets = file_get_contents( $assets_file );
 		// @codingStandardsIgnoreEnd

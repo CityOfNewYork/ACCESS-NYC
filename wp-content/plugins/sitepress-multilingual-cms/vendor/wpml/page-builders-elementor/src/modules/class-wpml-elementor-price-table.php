@@ -39,7 +39,7 @@ class WPML_Elementor_Price_Table extends WPML_Elementor_Module_With_Items  {
 	 */
 	protected function get_editor_type( $field ) {
 		if ( 'item_text' === $field ) {
-			return 'VISUAL';
+			return 'LINE';
 		}
 
 		return '';

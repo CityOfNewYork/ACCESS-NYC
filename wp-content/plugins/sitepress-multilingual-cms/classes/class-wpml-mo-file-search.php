@@ -52,12 +52,9 @@ class WPML_MO_File_Search {
 	}
 
 	public function reload_theme_dirs() {
-		$type = isset( $this->settings['theme_localization_type'] ) ? $this->settings['theme_localization_type'] : WPML_Theme_Localization_Type::USE_MO_FILES;
-		if ( WPML_Theme_Localization_Type::USE_MO_FILES === $type ) {
-			$dirs = $this->find_theme_mo_dirs();
-			$this->save_mo_dirs( $dirs );
-			$this->settings['theme_language_folders'] = $dirs;
-		}
+		$dirs = $this->find_theme_mo_dirs();
+		$this->save_mo_dirs( $dirs );
+		$this->settings['theme_language_folders'] = $dirs;
 	}
 
 	/**

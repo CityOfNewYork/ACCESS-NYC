@@ -1,5 +1,8 @@
 <?php
 
+use WPML\Core\Twig_Loader_Filesystem;
+use WPML\Core\Twig_Environment;
+
 /**
  * @package    wpml-core
  * @subpackage wpml-user-language

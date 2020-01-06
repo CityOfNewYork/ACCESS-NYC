@@ -46,5 +46,4 @@ class WPML_LS_Actions extends WPML_LS_Public_API {
 
 		return $args;
 	}
-
 }

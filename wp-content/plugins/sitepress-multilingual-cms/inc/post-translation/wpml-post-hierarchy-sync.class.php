@@ -15,4 +15,13 @@ class WPML_Post_Hierarchy_Sync extends WPML_Hierarchy_Sync {
 		parent::__construct( $wpdb );
 		$this->elements_table = $wpdb->posts;
 	}
+
+	/**
+	 * @param string $element_type
+	 *
+	 * @return bool
+	 */
+	public function is_hierarchical( $element_type ) {
+		return is_post_type_hierarchical( $element_type );
+	}
 }

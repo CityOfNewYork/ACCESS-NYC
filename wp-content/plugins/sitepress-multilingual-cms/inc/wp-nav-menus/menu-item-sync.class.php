@@ -65,22 +65,27 @@ class WPML_Menu_Item_Sync extends WPML_Menu_Sync_Functionality {
 		}
 	}
 
-	function sync_menu_order( array $menus ) {
+	public function sync_menu_order( array $menus ) {
 		global $wpdb;
 
 		foreach ( $menus as $menu_id => $menu ) {
 			$menu_index_by_lang = array();
 			foreach ( $menu['items'] as $item_id => $item ) {
-				foreach ( $item['translations'] as $language => $item_translation ) {
-					if ( $item_translation['ID'] ) {
-						$new_menu_order                  = empty( $menu_index_by_lang[ $language ] ) ? 1 : $menu_index_by_lang[ $language ] + 1;
-						$menu_index_by_lang[ $language ] = $new_menu_order;
-						if ( $new_menu_order != $menus[ $menu_id ]['items'][ $item_id ]['translations'][ $language ]['menu_order'] ) {
-							$menus[ $menu_id ]['items'][ $item_id ]['translations'][ $language ]['menu_order'] = $new_menu_order;
-							$wpdb->update( $wpdb->posts,
-							               array( 'menu_order' => $new_menu_order ),
-							               array( 'ID' => $item_translation['ID'] ) );
-						}
+				$valid_translations = array_filter(
+					$item['translations'],
+					function ( $item ) {
+						return $item && $item['ID'];
+					}
+				);
+
+				foreach ( $valid_translations as $language => $item_translation ) {
+					$new_menu_order                  = empty( $menu_index_by_lang[ $language ] ) ? 1 : $menu_index_by_lang[ $language ] + 1;
+					$menu_index_by_lang[ $language ] = $new_menu_order;
+					if ( $new_menu_order != $menus[ $menu_id ]['items'][ $item_id ]['translations'][ $language ]['menu_order'] ) {
+						$menus[ $menu_id ]['items'][ $item_id ]['translations'][ $language ]['menu_order'] = $new_menu_order;
+						$wpdb->update( $wpdb->posts,
+							[ 'menu_order' => $new_menu_order ],
+							[ 'ID' => $item_translation['ID'] ] );
 					}
 				}
 			}

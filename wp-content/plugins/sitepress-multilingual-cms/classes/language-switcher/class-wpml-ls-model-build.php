@@ -29,6 +29,7 @@ class WPML_LS_Model_Build extends WPML_SP_User {
         'url'                    => 'string',
         'flag_url'               => 'string',
         'flag_title'             => 'string',
+        'flag_alt'               => 'string',
         'native_name'            => 'string',
         'display_name'           => 'string',
         'is_current'             => 'bool',
@@ -123,18 +124,22 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 
                 $css_classes = $this->get_language_css_classes( $slot, $code );
 
-                if ( $slot->get( 'display_flags' ) ) {
-                    $ret[ $code ]['flag_url']   = $this->filter_flag_url( $data['country_flag_url'], $template_data );
-                    $ret[ $code ]['flag_title'] = $data['native_name'];
-                }
+	            $display_native = $slot->get( 'display_names_in_native_lang' );
+	            $display_name   = $slot->get( 'display_names_in_current_lang' );
 
-                if ( $slot->get( 'display_names_in_native_lang' ) ) {
-                    $ret[ $code ]['native_name'] = $data['native_name'];
-                }
+	            if ( $slot->get( 'display_flags' ) ) {
+		            $ret[ $code ]['flag_url']   = $this->filter_flag_url( $data['country_flag_url'], $template_data );
+		            $ret[ $code ]['flag_title'] = $data['native_name'];
+		            $ret[ $code ]['flag_alt']   = ( $display_name || $display_native ) ? '' : $data['translated_name'];
+	            }
 
-	            if ( $slot->get( 'display_names_in_current_lang' ) ) {
-                    $ret[ $code ]['display_name'] = $data['translated_name'];
-                }
+	            if ( $display_native ) {
+		            $ret[ $code ]['native_name'] = $data['native_name'];
+	            }
+
+	            if ( $display_name ) {
+		            $ret[ $code ]['display_name'] = $data['translated_name'];
+	            }
 
                 if ( $is_current_language ) {
                     $ret[ $code ]['is_current'] = true;

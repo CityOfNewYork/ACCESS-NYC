@@ -1,6 +1,6 @@
 <?php
 
-class WPML_Table_Collate_Fix {
+class WPML_Table_Collate_Fix implements IWPML_AJAX_Action, IWPML_Backend_Action, IWPML_DIC_Action {
 
 	const AJAX_ACTION = 'fix_tables_collation';
 

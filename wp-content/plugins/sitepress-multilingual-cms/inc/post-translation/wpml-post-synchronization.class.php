@@ -239,7 +239,7 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 			}
 
 			$this->sync_custom_fields ( $post_id, $translated_pid );
-			if ( $post_format !== null ) {
+			if ( $post_format ) {
 				set_post_format ( $translated_pid, $post_format );
 			}
 			if ( $post_date !== null ) {

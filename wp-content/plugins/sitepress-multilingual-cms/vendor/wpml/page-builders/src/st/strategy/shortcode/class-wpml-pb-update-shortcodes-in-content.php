@@ -32,10 +32,12 @@ class WPML_PB_Update_Shortcodes_In_Content {
 
 		if ( ! $translation_saved ) {
 			if ( $new_translation != $original_content || '' === $current_translation ) {
-				wp_update_post( array(
-					'ID'           => $translated_post_id,
-					'post_content' => $new_translation,
-				) );
+				wpml_update_escaped_post(
+					[
+						'ID'           => $translated_post_id,
+						'post_content' => $new_translation,
+					]
+				);
 			}
 		}
 	}

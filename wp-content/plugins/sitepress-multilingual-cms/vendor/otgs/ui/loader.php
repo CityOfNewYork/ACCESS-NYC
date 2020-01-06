@@ -22,7 +22,7 @@
 /**
  * OTGS UI version - increase after every major update.
  */
-$otg_ui_version = 107;
+$otg_ui_version = 109;
 
 /**
  * =================
@@ -41,7 +41,7 @@ if ( ! isset( $otg_ui_versions ) ) {
 if ( ! isset( $otg_ui_versions[ $otg_ui_version ] ) ) {
 	// Initialize the path to this version.
 	$otg_ui_versions[ $otg_ui_version ] = array(
-		'path' => str_replace( '\\', '/', dirname( __FILE__ ) ),
+		'path' => wp_normalize_path( dirname( __FILE__ ) ),
 	);
 }
 
@@ -55,8 +55,12 @@ if ( ! function_exists( 'otgs_ui_initialize' ) ) {
 	function otgs_ui_initialize( $vendor_path, $vendor_url ) {
 		global $otg_ui_versions;
 
-		$vendor_path = str_replace( '\\', '/', $vendor_path );
+		// Make sure we compare with the canonical path.
+		if ( is_link( $vendor_path ) ) {
+			$vendor_path = readlink( $vendor_path );
+		}
 
+		$vendor_path = wp_normalize_path( $vendor_path );
 		$vendor_path = untrailingslashit( $vendor_path );
 		$vendor_url  = untrailingslashit( $vendor_url );
 

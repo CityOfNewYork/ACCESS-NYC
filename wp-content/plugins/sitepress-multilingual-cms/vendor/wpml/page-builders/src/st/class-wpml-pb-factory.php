@@ -1,5 +1,7 @@
 <?php
 
+use function WPML\Container\make;
+
 class WPML_PB_Factory {
 
 	private $wpdb;
@@ -35,18 +37,14 @@ class WPML_PB_Factory {
 	 * @return WPML_PB_Register_Shortcodes
 	 */
 	public function get_register_shortcodes( WPML_PB_Shortcode_Strategy $strategy, $migration_mode = false ) {
-		$absolute_links         = new AbsoluteLinks();
-		$permalinks_converter   = new WPML_Absolute_To_Permalinks( $this->sitepress );
-		$translate_link_targets = new WPML_Translate_Link_Targets( $absolute_links, $permalinks_converter );
-
 		$string_factory = new WPML_ST_String_Factory( $this->wpdb );
 
 		$string_registration = new WPML_PB_String_Registration(
 			$strategy,
 			$string_factory,
 			new WPML_ST_Package_Factory(),
-			$translate_link_targets,
-			$this->sitepress->get_active_languages(),
+			make( 'WPML_Translate_Link_Targets' ),
+			WPML\PB\TranslateLinks::getTranslatorForString( $string_factory, $this->sitepress->get_active_languages() ),
 			$migration_mode
 		);
 

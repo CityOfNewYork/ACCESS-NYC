@@ -153,9 +153,11 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 						function () {
 							var block_editor = wpml_get_block_editor();
 							if(block_editor){
-								block_editor.then( function () {
-									wp.data.dispatch( 'core/editor' ).editPost( { sticky: true } );
-								});
+								document.addEventListener( 'DOMContentLoaded', function() {
+									block_editor.then( function () {
+										wp.data.dispatch( 'core/editor' ).editPost( { sticky: true } );
+									});
+								} );
 							} else {
 								jQuery('#sticky').attr('checked', 'checked');
 								var post_visibility_display = jQuery('#post-visibility-display');

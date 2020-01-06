@@ -10,7 +10,7 @@ abstract class WPML_REST_Base {
 	/**
 	 * @var null
 	 */
-	private $namespace;
+	protected $namespace;
 
 	/**
 	 * WPML_REST_Base constructor.

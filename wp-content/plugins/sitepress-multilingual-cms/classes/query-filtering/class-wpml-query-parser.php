@@ -277,7 +277,7 @@ class WPML_Query_Parser {
 		foreach ( $this->get_query_taxonomy_term_slugs( $q ) as $slug => $taxonomy ) {
 			$translated_slugs = $this->translate_term_values( array( $slug ), 'slugs', $taxonomy, $current_lang );
 
-			if ( $translated_slugs && $slug !== $translated_slugs[0] ) {
+			if ( $translated_slugs && (string)$slug !== $translated_slugs[0] ) {
 				$translated_term = get_term_by(
 					'slug',
 					$translated_slugs[0],

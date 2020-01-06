@@ -6,7 +6,7 @@
 	<ul id="wpml-ls-languages-order" class="wpml-ls-languages-order">
 		{% for language in ordered_languages %}
 		<li class="js-wpml-languages-order-item" data-language-code="{{ language.code }}">
-			<img src="{{ language.flag_url }}"> {{ language.display_name }}<input type="hidden" name="languages_order[]" value="{{ language.code }}">
+			<img width="18" height="12" src="{{ language.flag_url }}"> {{ language.display_name }}<input type="hidden" name="languages_order[]" value="{{ language.code }}">
 		</li>
 		{%  endfor %}
 	</ul>

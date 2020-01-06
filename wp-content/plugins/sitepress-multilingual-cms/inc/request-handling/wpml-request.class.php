@@ -16,7 +16,7 @@ abstract class WPML_Request {
 	protected $active_languages;
 	protected $default_language;
 	protected $qs_lang_cache;
-	private   $cookie;
+	private $cookie;
 	protected $wp_api;
 
 	/**
@@ -34,7 +34,7 @@ abstract class WPML_Request {
 		$this->wp_api           = $wp_api;
 	}
 
-	protected abstract function get_cookie_name();
+	abstract protected function get_cookie_name();
 
 	/**
 	 * Determines the language of the current request.
@@ -42,7 +42,7 @@ abstract class WPML_Request {
 	 * @return string|false language code of the current request, determined from the requested url and the user's
 	 *                      cookie.
 	 */
-	public abstract function get_requested_lang();
+	abstract public function get_requested_lang();
 
 	/**
 	 * Returns the current REQUEST_URI optionally filtered
@@ -67,14 +67,14 @@ abstract class WPML_Request {
 	 * @return string|false language code that can be determined from the currently requested URI.
 	 */
 	public function get_request_uri_lang() {
-		$req_url = isset($_SERVER[ 'HTTP_HOST' ])
-			? untrailingslashit($_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) : "";
+		$req_url = isset( $_SERVER['HTTP_HOST'] )
+			? untrailingslashit( $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ) : '';
 
-		return $this->url_converter->get_language_from_url ( $req_url );
+		return $this->url_converter->get_language_from_url( $req_url );
 	}
 
 	/**
-	 * @return string language code stored in the user's _icl_current_language cookie
+	 * @return string language code stored in the user's wp-wpml_current_language cookie
 	 */
 	public function get_cookie_lang() {
 		global $wpml_language_resolution;
@@ -95,13 +95,13 @@ abstract class WPML_Request {
 	 */
 	public function show_hidden() {
 
-		return !did_action( 'init' )
-		       || ( get_user_meta( get_current_user_id(), 'icl_show_hidden_languages', true )
-		            || ( is_admin() && current_user_can( 'manage_options' ) ) );
+		return ! did_action( 'init' )
+			   || ( get_user_meta( get_current_user_id(), 'icl_show_hidden_languages', true )
+					|| ( is_admin() && current_user_can( 'manage_options' ) ) );
 	}
 
 	/**
-	 * Sets the language code of the current screen in the User's _icl_current_language cookie
+	 * Sets the language code of the current screen in the User's wp-wpml_current_language cookie
 	 *
 	 * When user is not logged we must set cookie with JS to avoid issues with cached pages
 	 *
@@ -114,21 +114,23 @@ abstract class WPML_Request {
 
 		if ( is_user_logged_in() ) {
 			if ( ! $this->cookie->headers_sent() ) {
-				if ( preg_match( '@\.(css|js|png|jpg|gif|jpeg|bmp)@i',
-						basename( preg_replace( '@\?.*$@', '', $_SERVER['REQUEST_URI'] ) ) )
-				     || isset( $_POST['icl_ajx_action'] ) || isset( $_POST['_ajax_nonce'] ) || defined( 'DOING_AJAX' )
+				if ( preg_match(
+					'@\.(css|js|png|jpg|gif|jpeg|bmp)@i',
+					basename( preg_replace( '@\?.*$@', '', $_SERVER['REQUEST_URI'] ) )
+				)
+					 || isset( $_POST['icl_ajx_action'] ) || isset( $_POST['_ajax_nonce'] ) || defined( 'DOING_AJAX' )
 				) {
 					return;
 				}
 
 				$current_cookie_value = $this->cookie->get_cookie( $cookie_name );
-				if ( ! $current_cookie_value || $current_cookie_value !== $lang_code) {
+				if ( ! $current_cookie_value || $current_cookie_value !== $lang_code ) {
 					$cookie_domain = $this->get_cookie_domain();
 					$cookie_path   = defined( 'COOKIEPATH' ) ? COOKIEPATH : '/';
 					$this->cookie->set_cookie( $cookie_name, $lang_code, time() + DAY_IN_SECONDS, $cookie_path, $cookie_domain );
 				}
 			}
-		} else if ( $sitepress->get_setting( WPML_Cookie_Setting::COOKIE_SETTING_FIELD ) ) {
+		} elseif ( $sitepress->get_setting( WPML_Cookie_Setting::COOKIE_SETTING_FIELD ) ) {
 			$wpml_cookie_scripts = new WPML_Cookie_Scripts( $cookie_name, $sitepress->get_current_language() );
 			$wpml_cookie_scripts->add_hooks();
 		}
@@ -152,23 +154,24 @@ abstract class WPML_Request {
 	 * @return string
 	 */
 	public function get_server_host_name() {
-		$host = isset( $_SERVER[ 'HTTP_HOST' ] ) ? $_SERVER[ 'HTTP_HOST' ] : null;
+		$host = isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : null;
 		$host = $host !== null
 			? $host
-			: ( isset( $_SERVER[ 'SERVER_NAME' ] )
-				? $_SERVER[ 'SERVER_NAME' ]
-				  . ( isset( $_SERVER[ 'SERVER_PORT' ] ) && ! in_array( $_SERVER[ 'SERVER_PORT' ], array( 80, 443 ) )
-					? ':' . $_SERVER[ 'SERVER_PORT' ] : '' )
+			: ( isset( $_SERVER['SERVER_NAME'] )
+				? $_SERVER['SERVER_NAME']
+				  . ( isset( $_SERVER['SERVER_PORT'] ) && ! in_array( $_SERVER['SERVER_PORT'], array( 80, 443 ) )
+					? ':' . $_SERVER['SERVER_PORT'] : '' )
 				: '' );
 
-		//Removes standard ports 443 (80 should be already omitted in all cases)
-		$result = preg_replace( "@:[443]+([/]?)@", '$1', $host );
+		// Removes standard ports 443 (80 should be already omitted in all cases)
+		$result = preg_replace( '@:[443]+([/]?)@', '$1', $host );
 
 		return $result;
 	}
 
 	/**
 	 * Gets the source_language $_GET parameter from the HTTP_REFERER
+	 *
 	 * @return string|bool
 	 */
 	public function get_source_language_from_referer() {
@@ -187,7 +190,7 @@ abstract class WPML_Request {
 		$comment_language = $this->default_language;
 
 		if ( array_key_exists( WPML_WP_Comments::LANG_CODE_FIELD, $_POST ) ) {
-			$comment_language = filter_var( $_POST[WPML_WP_Comments::LANG_CODE_FIELD], FILTER_SANITIZE_SPECIAL_CHARS );
+			$comment_language = filter_var( $_POST[ WPML_WP_Comments::LANG_CODE_FIELD ], FILTER_SANITIZE_SPECIAL_CHARS );
 		}
 		return $comment_language;
 	}

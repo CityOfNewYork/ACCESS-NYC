@@ -42,12 +42,6 @@ class WPML_Save_Themes_Plugins_Localization_Options {
 	/** @return array */
 	private function get_settings() {
 		$settings = array();
-		$settings['theme_localization_type'] = array(
-			'settings_var' => 'theme_localization_type',
-			'filter' => FILTER_SANITIZE_NUMBER_INT,
-			'type' => 'setting',
-			'st_setting' => false,
-		);
 		$settings['theme_localization_load_textdomain'] = array(
 			'settings_var' => 'theme_localization_load_textdomain',
 			'filter' => FILTER_SANITIZE_NUMBER_INT,

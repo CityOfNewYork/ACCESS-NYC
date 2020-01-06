@@ -14,7 +14,9 @@ class WPML_PB_String_Registration {
 	/** @var WPML_Translate_Link_Targets $translate_link_targets */
 	private $translate_link_targets;
 
-	private $active_languages;
+	/** @var callable $set_link_translations */
+	private $set_link_translations;
+
 	/** @var  bool $migration_mode */
 	private $migration_mode;
 
@@ -25,7 +27,7 @@ class WPML_PB_String_Registration {
 	 * @param WPML_ST_String_Factory $string_factory
 	 * @param WPML_ST_Package_Factory $package_factory
 	 * @param WPML_Translate_Link_Targets $translate_link_targets
-	 * @param array $active_languages
+	 * @param callable $set_link_translations
 	 * @param bool $migration_mode
 	 */
 	public function __construct(
@@ -33,14 +35,14 @@ class WPML_PB_String_Registration {
 		WPML_ST_String_Factory $string_factory,
 		WPML_ST_Package_Factory $package_factory,
 		WPML_Translate_Link_Targets $translate_link_targets,
-		array $active_languages,
+		callable $set_link_translations,
 		$migration_mode = false
 	) {
 		$this->strategy               = $strategy;
 		$this->string_factory         = $string_factory;
 		$this->package_factory        = $package_factory;
 		$this->translate_link_targets = $translate_link_targets;
-		$this->active_languages       = $active_languages;
+		$this->set_link_translations  = $set_link_translations;
 		$this->migration_mode         = $migration_mode;
 	}
 
@@ -113,7 +115,7 @@ class WPML_PB_String_Registration {
 				$this->update_string_data( $string_id, $location, $wrap_tag );
 
 				if ( 'LINK' === $type ) {
-					$this->set_link_translations( $string_id );
+					call_user_func( $this->set_link_translations, $string_id );
 				}
 			}
 		}
@@ -133,27 +135,5 @@ class WPML_PB_String_Registration {
 		$string = $this->string_factory->find_by_id( $string_id );
 		$string->set_location( $location );
 		$string->set_wrap_tag( $wrap_tag );
-	}
-
-	private function set_link_translations( $string_id ) {
-		$string   = $this->string_factory->find_by_id( $string_id );
-		$statuses = $string->get_translation_statuses();
-		foreach ( $this->active_languages as $language ) {
-			$language = $language['code'];
-			if ( $language != $string->get_language() ) {
-				$value = $this->has_translation( $statuses, $language ) ? null : $string->get_value();
-				$string->set_translation( $language, $value );
-			}
-		}
-	}
-
-	private function has_translation( $statuses, $language ) {
-		foreach ( $statuses as $status ) {
-			if ( $status->language == $language ) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 }

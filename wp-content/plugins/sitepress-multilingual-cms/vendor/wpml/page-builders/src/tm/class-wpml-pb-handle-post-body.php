@@ -31,7 +31,7 @@ class WPML_PB_Handle_Post_Body {
 	public function copy( $new_post_id, $original_post_id, array $fields ) {
 		$original_post = get_post( $original_post_id );
 		if ( $original_post && $this->page_builders_built->is_page_builder_page( $original_post ) && ! $this->job_has_packages( $fields ) ) {
-			wp_update_post( array( 'ID' => $new_post_id, 'post_content' => $original_post->post_content ) );
+			wpml_update_escaped_post( [ 'ID' => $new_post_id, 'post_content' => $original_post->post_content ] );
 			do_action( 'wpml_pb_after_page_without_elements_post_content_copy', $new_post_id, $original_post_id );
 		}
 	}

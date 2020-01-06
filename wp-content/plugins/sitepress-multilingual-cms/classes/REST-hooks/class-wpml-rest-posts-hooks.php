@@ -22,6 +22,8 @@ class WPML_REST_Posts_Hooks implements IWPML_Action {
 		foreach ( $post_types as $post_type => $post_object ) {
 			add_filter( "rest_prepare_$post_type", array( $this, 'prepare_post' ), 10, 2 );
 		}
+
+		add_filter( 'rest_request_before_callbacks', array( $this, 'reload_wpml_post_translation' ), 10, 3 );
 	}
 
 	/**
@@ -145,5 +147,25 @@ class WPML_REST_Posts_Hooks implements IWPML_Action {
 		}
 
 		return $response;
+	}
+
+	/**
+	 * @param WP_HTTP_Response|WP_Error $response Result to send to the client. Usually a WP_REST_Response or WP_Error.
+	 * @param array                     $handler  Route handler used for the request.
+	 * @param WP_REST_Request           $request  Request used to generate the response.
+	 *
+	 * @return WP_HTTP_Response|WP_Error
+	 */
+	public function reload_wpml_post_translation( $response, array $handler, WP_REST_Request $request ) {
+		if ( ! is_wp_error( $response ) && $this->is_saving_reusable_block( $request ) ) {
+			wpml_load_post_translation( is_admin(), $this->sitepress->get_settings() );
+		}
+
+		return $response;
+	}
+
+	private function is_saving_reusable_block( WP_REST_Request $request ) {
+		return in_array( $request->get_method(), array( 'POST', 'PUT', 'PATCH' ) )
+		       && preg_match( '#\/wp\/v2\/blocks(?:\/\d+)*#', $request->get_route() );
 	}
 }

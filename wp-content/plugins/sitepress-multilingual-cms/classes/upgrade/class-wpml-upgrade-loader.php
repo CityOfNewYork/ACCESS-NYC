@@ -5,6 +5,12 @@
  * @package WPML
  */
 
+use WPML\Upgrade\Commands\AddContextIndexToStrings;
+use WPML\Upgrade\Commands\AddStatusIndexToStringTranslations;
+use WPML\Upgrade\Commands\AddStringPackageIdIndexToStrings;
+use WPML\Upgrade\Command\DisableOptionsAutoloading;
+use WPML\Upgrade\Commands\RemoveRestDisabledNotice;
+
 /**
  * Class WPML_Upgrade_Loader
  */
@@ -85,25 +91,30 @@ class WPML_Upgrade_Loader implements IWPML_Action {
 			return;
 		}
 
-		$commands = array(
-			$this->factory->create_command_definition( 'WPML_Upgrade_Localization_Files', array( $this->sitepress ), array( 'admin' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Fix_Non_Admin_With_Admin_Cap', array(), array( 'admin' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Table_Translate_Job_For_3_9_0', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Remove_Translation_Services_Transient', array(), array( 'admin' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Display_Mode_For_Posts', array( $this->sitepress, $this->settings, $this->notices ), array( 'admin', 'ajax' ) ),
-			$this->factory->create_command_definition( 'WPML_Add_UUID_Column_To_Translation_Status', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Element_Type_Length_And_Collation', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Word_Count_Column_To_Strings', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Media_Without_Language', array( $this->upgrade_schema->get_wpdb(), $this->sitepress->get_default_language() ), array( 'admin', 'ajax' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Media_Duplication_In_Core', array( $this->sitepress, $this->upgrade_schema, $this->notices ), array( 'admin', 'ajax' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Chinese_Flags', array( 'wpdb' => $this->sitepress->wpdb() ), array( 'admin' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Editor_Column_To_Icl_Translate_Job', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_WPML_Site_ID', array(), array( 'admin' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_WPML_Site_ID_Remaining', array(), array( 'admin' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Location_Column_To_Strings', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Wrap_Column_To_Translate', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Wrap_Column_To_Strings', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-		);
+		$commands = [
+			$this->factory->create_command_definition( 'WPML_Upgrade_Localization_Files', [ $this->sitepress ], [ 'admin' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Fix_Non_Admin_With_Admin_Cap', [], [ 'admin' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Table_Translate_Job_For_3_9_0', [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Remove_Translation_Services_Transient', [], [ 'admin' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Display_Mode_For_Posts', [ $this->sitepress, $this->settings, $this->notices ], [ 'admin', 'ajax' ] ),
+			$this->factory->create_command_definition( 'WPML_Add_UUID_Column_To_Translation_Status', [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Element_Type_Length_And_Collation', [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Word_Count_Column_To_Strings', [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Media_Without_Language', [ $this->upgrade_schema->get_wpdb(), $this->sitepress->get_default_language() ], [ 'admin', 'ajax' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Media_Duplication_In_Core', [ $this->sitepress, $this->upgrade_schema, $this->notices ], [ 'admin', 'ajax' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Chinese_Flags', [ 'wpdb' => $this->sitepress->wpdb() ], [ 'admin' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Editor_Column_To_Icl_Translate_Job', [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_WPML_Site_ID', [], [ 'admin' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_WPML_Site_ID_Remaining', [], [ 'admin' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Location_Column_To_Strings', [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Wrap_Column_To_Translate', [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( 'WPML_Upgrade_Add_Wrap_Column_To_Strings', [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( AddContextIndexToStrings::class, array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
+			$this->factory->create_command_definition( AddStatusIndexToStringTranslations::class, array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
+			$this->factory->create_command_definition( AddStringPackageIdIndexToStrings::class, array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
+			$this->factory->create_command_definition( DisableOptionsAutoloading::class, [], [ 'admin' ] ),
+			$this->factory->create_command_definition( RemoveRestDisabledNotice::class, [], [ 'admin' ] ),
+		];
 
 		$upgrade = new WPML_Upgrade( $commands, $this->sitepress, $this->factory );
 		$upgrade->run();

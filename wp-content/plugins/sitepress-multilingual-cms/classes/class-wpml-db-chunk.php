@@ -1,5 +1,7 @@
 <?php
 
+use PhpMyAdmin\SqlParser\Parser;
+
 class WPML_DB_Chunk {
 	/**
 	 * @var wpdb
@@ -53,11 +55,16 @@ class WPML_DB_Chunk {
 	 * @param string $query
 	 */
 	private function validate_query( $query ) {
-		$query2tree = new dqml2tree( $query );
-		$sql_tree   = $query2tree->make();
+		$parser = new Parser( $query );
 
-		if ( array_key_exists( 'LIMIT', $sql_tree['SQL']['SELECT'] ) || array_key_exists( 'OFFSET', $sql_tree['SQL']['SELECT'] ) ) {
-			throw new InvalidArgumentException( "Query can't contain OFFSET or LIMIT keyword" );
+		if ( isset( $parser->statements ) ) {
+			wpml_collect( $parser->statements )->each(
+				function( $statement ) {
+					if ( ! empty( $statement->limit ) ) {
+						throw new InvalidArgumentException( "Query can't contain OFFSET or LIMIT keyword" );
+					}
+				}
+			);
 		}
 	}
 }
