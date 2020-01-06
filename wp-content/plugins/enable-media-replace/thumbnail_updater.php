@@ -100,7 +100,6 @@ class ThumbnailUpdater
 
         $replace_sql = $wpdb->prepare($sql, $from, $to );
         $wpdb->query($replace_sql);
-
     }
   }
 

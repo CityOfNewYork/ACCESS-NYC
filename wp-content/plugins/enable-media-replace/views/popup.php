@@ -5,7 +5,6 @@ namespace EnableMediaReplace;
 use EnableMediaReplace\ShortPixelLogger\ShortPixelLogger as Log;
 use EnableMediaReplace\Notices\NoticeController as Notices;
 
-
 /**
  * Uploadscreen for selecting and uploading new media file
  *

@@ -10,7 +10,7 @@ class emrFile
   protected $file; // the full file w/ path.
   protected $extension;
   protected $fileName;
-  protected $filePath;
+  protected $filePath; // with trailing slash! not the image name.
   protected $fileURL;
   protected $fileMime;
   protected $permissions = 0;
@@ -30,13 +30,14 @@ class emrFile
      $fileparts = pathinfo($file);
 
      $this->fileName = isset($fileparts['basename']) ? $fileparts['basename'] : '';
-     $this->filePath = isset($fileparts['dirname']) ? $fileparts['dirname'] : '';
+     $this->filePath = isset($fileparts['dirname']) ? trailingslashit($fileparts['dirname']) : '';
      $this->extension = isset($fileparts['extension']) ? $fileparts['extension'] : '';
      if ($this->exists) // doesn't have to be.
       $this->permissions = fileperms($file) & 0777;
 
      $filedata = wp_check_filetype_and_ext($this->file, $this->fileName);
      // This will *not* be checked, is not meant for permission of validation!
+     // Note: this function will work on non-existing file, but not on existing files containing wrong mime in file.
      $this->fileMime = (isset($filedata['type'])) ? $filedata['type'] : false;
 
   }
@@ -89,9 +90,4 @@ class emrFile
   {
     return $this->exists;
   }
-
-
 }
-
-
-?>

@@ -64,9 +64,18 @@ class NoticeController //extends ShortPixelController
   }
 
 
-  public function addNotice($message, $code)
+  public function addNotice($message, $code, $unique)
   {
       $notice = new NoticeModel($message, $code);
+
+      if ($unique)
+      {
+        foreach(self::$notices as $nitem)
+        {
+          if ($nitem->message == $notice->message && $nitem->code == $notice->code) // same message.
+            return false;
+        }
+      }
       self::$notices[] = $notice;
       $this->countNotices();
       Log::addDebug('Adding notice - ', $notice);
@@ -124,38 +133,39 @@ class NoticeController //extends ShortPixelController
 
   /** Adds a notice, quick and fast method
   * @param String $message The Message you want to notify
+  * @param Boolean $unique If unique, check to not repeat notice exact same text in notices.  Discard if so
   * @param int $code A value of messageType as defined in model
   * @returm Object Instance of noticeModel
   */
 
-  public static function addNormal($message)
+  public static function addNormal($message, $unique = false)
   {
     $noticeController = self::getInstance();
-    $notice = $noticeController->addNotice($message, NoticeModel::NOTICE_NORMAL);
+    $notice = $noticeController->addNotice($message, NoticeModel::NOTICE_NORMAL, $unique);
     return $notice;
 
   }
 
-  public static function addError($message)
+  public static function addError($message, $unique = false)
   {
     $noticeController = self::getInstance();
-    $notice = $noticeController->addNotice($message, NoticeModel::NOTICE_ERROR);
+    $notice = $noticeController->addNotice($message, NoticeModel::NOTICE_ERROR, $unique);
     return $notice;
 
   }
 
-  public static function addWarning($message)
+  public static function addWarning($message, $unique = false)
   {
     $noticeController = self::getInstance();
-    $notice = $noticeController->addNotice($message, NoticeModel::NOTICE_WARNING);
+    $notice = $noticeController->addNotice($message, NoticeModel::NOTICE_WARNING, $unique);
     return $notice;
 
   }
 
-  public static function addSuccess($message)
+  public static function addSuccess($message, $unique = false)
   {
     $noticeController = self::getInstance();
-    $notice = $noticeController->addNotice($message, NoticeModel::NOTICE_SUCCESS);
+    $notice = $noticeController->addNotice($message, NoticeModel::NOTICE_SUCCESS, $unique);
     return $notice;
 
   }

@@ -51,8 +51,20 @@ class UIHelper
   public function getSuccesRedirect($post_id)
   {
     $url = admin_url('post.php');
-    $url = add_query_arg(array('action' => 'edit', 'post' => $post_id), $url);
+    $url = add_query_arg(array('action' => 'edit', 'post' => $post_id, 'emr_replaced' => '1'), $url);
 
+    if (isset($_REQUEST['SHORTPIXEL_DEBUG']))
+    {
+      $spdebug = $_REQUEST['SHORTPIXEL_DEBUG'];
+      if (is_numeric($spdebug))
+        $spdebug = intval($spdebug);
+      else {
+        $spdebug = sanitize_text_field($spdebug);
+      }
+
+      $url = add_query_arg('SHORTPIXEL_DEBUG', $spdebug, $url);
+    }
+    
     $url = apply_filters('emr_returnurl', $url);
     Log::addDebug('Success URL- ' . $url);
 
