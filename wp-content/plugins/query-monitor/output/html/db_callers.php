@@ -7,9 +7,20 @@
 
 class QM_Output_Html_DB_Callers extends QM_Output_Html {
 
+	/**
+	 * Collector instance.
+	 *
+	 * @var QM_Collector_DB_Callers Collector.
+	 */
+	protected $collector;
+
 	public function __construct( QM_Collector $collector ) {
 		parent::__construct( $collector );
 		add_filter( 'qm/output/panel_menus', array( $this, 'panel_menu' ), 30 );
+	}
+
+	public function name() {
+		return __( 'Queries by Caller', 'query-monitor' );
 	}
 
 	public function output() {
@@ -99,7 +110,7 @@ class QM_Output_Html_DB_Callers extends QM_Output_Html {
 			$dbq_data = $dbq->get_data();
 			if ( isset( $dbq_data['times'] ) ) {
 				$menu['qm-db_queries-$wpdb']['children'][] = $this->menu( array(
-					'title' => '└ ' . esc_html__( 'Queries by Caller', 'query-monitor' ),
+					'title' => esc_html__( 'Queries by Caller', 'query-monitor' ),
 				) );
 			}
 		}

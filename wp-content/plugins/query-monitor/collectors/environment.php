@@ -17,10 +17,6 @@ class QM_Collector_Environment extends QM_Collector {
 		'log_errors',
 	);
 
-	public function name() {
-		return __( 'Environment', 'query-monitor' );
-	}
-
 	public function __construct() {
 
 		global $wpdb;
@@ -134,8 +130,6 @@ class QM_Collector_Environment extends QM_Collector {
 					$info = mysql_get_server_info( $db->dbh );
 				}
 
-				$rdbms = trim( preg_replace( '#[^a-zA-Z ]#', '', $info ) );
-
 				if ( $client ) {
 					$client_version = implode( '.', QM_Util::get_client_version( $client ) );
 					$client_version = sprintf( '%s (%s)', $client, $client_version );
@@ -144,7 +138,6 @@ class QM_Collector_Environment extends QM_Collector {
 				}
 
 				$info = array(
-					'rdbms'          => $rdbms,
 					'server-version' => $server,
 					'extension'      => $extension,
 					'client-version' => $client_version,
@@ -207,8 +200,8 @@ class QM_Collector_Environment extends QM_Collector {
 			$this->data['wp']['constants']['SUNRISE'] = self::format_bool_constant( 'SUNRISE' );
 		}
 
-		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) { // WPCS: input var ok
-			$server = explode( ' ', wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ); // WPCS: sanitization ok, input var ok
+		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
+			$server = explode( ' ', wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) );
 			$server = explode( '/', reset( $server ) );
 		} else {
 			$server = array( '' );
@@ -220,8 +213,8 @@ class QM_Collector_Environment extends QM_Collector {
 			$server_version = null;
 		}
 
-		if ( isset( $_SERVER['SERVER_ADDR'] ) ) { // WPCS: input var ok
-			$address = wp_unslash( $_SERVER['SERVER_ADDR'] ); // WPCS: sanitization ok, input var ok
+		if ( isset( $_SERVER['SERVER_ADDR'] ) ) {
+			$address = wp_unslash( $_SERVER['SERVER_ADDR'] );
 		} else {
 			$address = null;
 		}
@@ -244,7 +237,7 @@ class QM_Collector_Environment extends QM_Collector {
 	public function get_extension_version( $extension ) {
 		// Nothing is simple in PHP. The exif and mysqlnd extensions (and probably others) add a bunch of
 		// crap to their version number, so we need to pluck out the first numeric value in the string.
-		$version = phpversion( $extension );
+		$version = trim( phpversion( $extension ) );
 
 		if ( ! $version ) {
 			return $version;
@@ -253,7 +246,7 @@ class QM_Collector_Environment extends QM_Collector {
 		$parts = explode( ' ', $version );
 
 		foreach ( $parts as $part ) {
-			if ( is_numeric( $part[0] ) ) {
+			if ( $part && is_numeric( $part[0] ) ) {
 				$version = $part;
 				break;
 			}
@@ -279,8 +272,8 @@ class QM_Collector_Environment extends QM_Collector {
 			}
 		}
 
-		if ( empty( $php_u ) && isset( $_SERVER['USER'] ) ) { // WPCS: input var ok
-			$php_u = wp_unslash( $_SERVER['USER'] ); // WPCS: sanitization ok, input var ok
+		if ( empty( $php_u ) && isset( $_SERVER['USER'] ) ) {
+			$php_u = wp_unslash( $_SERVER['USER'] );
 		}
 
 		if ( empty( $php_u ) && function_exists( 'exec' ) ) {

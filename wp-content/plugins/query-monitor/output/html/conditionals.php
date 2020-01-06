@@ -7,10 +7,21 @@
 
 class QM_Output_Html_Conditionals extends QM_Output_Html {
 
+	/**
+	 * Collector instance.
+	 *
+	 * @var QM_Collector_Conditionals Collector.
+	 */
+	protected $collector;
+
 	public function __construct( QM_Collector $collector ) {
 		parent::__construct( $collector );
 		add_filter( 'qm/output/menus', array( $this, 'admin_menu' ), 1000 );
 		add_filter( 'qm/output/panel_menus', array( $this, 'panel_menu' ), 1000 );
+	}
+
+	public function name() {
+		return __( 'Conditionals', 'query-monitor' );
 	}
 
 	public function output() {

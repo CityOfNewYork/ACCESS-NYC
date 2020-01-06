@@ -7,10 +7,21 @@
 
 class QM_Output_Html_Theme extends QM_Output_Html {
 
+	/**
+	 * Collector instance.
+	 *
+	 * @var QM_Collector_Theme Collector.
+	 */
+	protected $collector;
+
 	public function __construct( QM_Collector $collector ) {
 		parent::__construct( $collector );
 		add_filter( 'qm/output/menus', array( $this, 'admin_menu' ), 60 );
 		add_filter( 'qm/output/panel_menus', array( $this, 'panel_menu' ), 60 );
+	}
+
+	public function name() {
+		return __( 'Theme', 'query-monitor' );
 	}
 
 	public function output() {
@@ -27,7 +38,7 @@ class QM_Output_Html_Theme extends QM_Output_Html {
 		echo '<p>' . esc_html( $data['stylesheet'] ) . '</p>';
 
 		if ( $data['is_child_theme'] ) {
-			echo '<h3>' . esc_html__( 'Parent Theme:', 'query-monitor' ) . '</h3>';
+			echo '<h3>' . esc_html__( 'Parent Theme', 'query-monitor' ) . '</h3>';
 			echo '<p>' . esc_html( $data['template'] ) . '</p>';
 		}
 
@@ -52,14 +63,12 @@ class QM_Output_Html_Theme extends QM_Output_Html {
 			echo '<p><em>' . esc_html__( 'Unknown', 'query-monitor' ) . '</em></p>';
 		}
 
-		echo '</section>';
-
 		if ( ! empty( $data['template_hierarchy'] ) ) {
-			echo '<section>';
 			echo '<h3>' . esc_html__( 'Template Hierarchy', 'query-monitor' ) . '</h3>';
-			echo '<ol class="qm-ltr qm-numbered"><li>' . implode( '</li><li>', array_map( 'esc_html', $data['template_hierarchy'] ) ) . '</li></ol>';
-			echo '</section>';
+			echo '<ol class="qm-ltr"><li>' . implode( '</li><li>', array_map( 'esc_html', $data['template_hierarchy'] ) ) . '</li></ol>';
 		}
+
+		echo '</section>';
 
 		echo '<section>';
 		echo '<h3>' . esc_html__( 'Template Parts', 'query-monitor' ) . '</h3>';
@@ -98,6 +107,32 @@ class QM_Output_Html_Theme extends QM_Output_Html {
 
 		} else {
 			echo '<p><em>' . esc_html__( 'None', 'query-monitor' ) . '</em></p>';
+		}
+
+		if ( $data['has_template_part_action'] ) {
+			echo '<h4>' . esc_html__( 'Not Loaded', 'query-monitor' ) . '</h4>';
+
+			if ( ! empty( $data['unsuccessful_template_parts'] ) ) {
+				echo '<ul>';
+
+				foreach ( $data['unsuccessful_template_parts'] as $requested ) {
+					if ( $requested['name'] ) {
+						echo '<li>';
+						$text = $requested['slug'] . '-' . $requested['name'] . '.php';
+						echo self::output_filename( $text, $requested['caller']['file'], $requested['caller']['line'], true ); // WPCS: XSS ok.
+						echo '</li>';
+					}
+
+					echo '<li>';
+					$text = $requested['slug'] . '.php';
+					echo self::output_filename( $text, $requested['caller']['file'], $requested['caller']['line'], true ); // WPCS: XSS ok.
+					echo '</li>';
+				}
+
+				echo '</ul>';
+			} elseif ( $data['has_template_part_action'] ) {
+				echo '<p><em>' . esc_html__( 'None', 'query-monitor' ) . '</em></p>';
+			}
 		}
 
 		echo '</section>';

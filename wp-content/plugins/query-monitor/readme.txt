@@ -2,8 +2,8 @@
 Contributors: johnbillion
 Tags: debug, debug-bar, debugging, development, developer, performance, profiler, queries, query monitor, rest-api
 Requires at least: 3.7
-Tested up to: 5.2
-Stable tag: 3.3.6
+Tested up to: 5.3
+Stable tag: 3.5.2
 License: GPLv2 or later
 Requires PHP: 5.3
 
@@ -22,7 +22,7 @@ For complete information, please see [the Query Monitor website](https://querymo
 Here's an overview of what's shown for each page load:
 
 * Database queries, including notifications for slow, duplicate, or erroneous queries. Allows filtering by query type (`SELECT`, `UPDATE`, `DELETE`, etc), responsible component (plugin, theme, WordPress core), and calling function, and provides separate aggregate views for each.
-* The template filename, the complete template hierarchy, and names of all template parts used.
+* The template filename, the complete template hierarchy, and names of all template parts that were loaded or not loaded.
 * PHP errors presented nicely along with their responsible component and call stack, and a visible warning in the admin toolbar.
 * Blocks and associated properties in post content when using WordPress 5.0+ or the Gutenberg plugin.
 * Matched rewrite rules, associated query strings, and query vars.
@@ -46,7 +46,7 @@ In addition to this, you can set an authentication cookie which allows you to vi
 
 = Privacy Statement =
 
-Query Monitor does not persistently store any of the data that it collects. It does not send data to any third party, nor does it include any third party resources.
+Query Monitor is private by default and always will be. It does not persistently store any of the data that it collects. It does not send data to any third party, nor does it include any third party resources.
 
 [Query Monitor's full privacy statement can be found here](https://github.com/johnbillion/query-monitor/wiki/Privacy-Statement).
 
@@ -88,15 +88,24 @@ Please use [the issue tracker on Query Monitor's GitHub repo](https://github.com
 
 = Is Query Monitor available on WordPress.com VIP Go? =
 
-Yep! You just need to add `define( 'WPCOM_VIP_QM_ENABLE', true );` to your `vip-config/vip-config.php` file.
+Yep! However, a user needs to be granted the `view_query_monitor` capability to see Query Monitor even if they're an administrator.
 
 = I'm using multiple instances of `wpdb`. How do I get my additional instances to show up in Query Monitor? =
 
-You'll need to hook into the `qm/collect/db_objects` filter and add an item to the array with your connection name as the key and the `wpdb` instance as the value. Your `wpdb` instance will then show up as a separate panel, and the query time and query count will show up separately in the admin toolbar menu. Aggregate information (queries by caller and component) will not be separated.
+You'll need to hook into the `qm/collect/db_objects` filter and add an item to the array containing your `wpdb` instance. For example:
+
+`
+add_filter( 'qm/collect/db_objects', function( $objects ) {
+	$objects['my_db'] = $GLOBALS['my_db'];
+	return $objects;
+} );
+`
+
+Your `wpdb` instance will then show up as a separate panel, and the query time and query count will show up separately in the admin toolbar menu. Aggregate information (queries by caller and component) will not be separated.
 
 = Can I click on stack traces to open the file in my editor? =
 
-Yes! You just need to [enable clickable stack traces](https://querymonitor.com/blog/2019/02/clickable-stack-traces-and-function-names-in-query-monitor/).
+Yes! You can enable this on the Settings panel.
 
 = Do you accept donations? =
 
