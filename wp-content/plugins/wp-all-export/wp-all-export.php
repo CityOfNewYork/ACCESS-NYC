@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: WP All Export
-Plugin URI: http://www.wpallimport.com/export/
+Plugin URI: http://www.wpallimport.com/upgrade-to-wp-all-export-pro/?utm_source=export-plugin-free&utm_medium=wp-plugins-page&utm_campaign=upgrade-to-pro
 Description: Export any post type to a CSV or XML file. Edit the exported data, and then re-import it later using WP All Import.
-Version: 1.2.3
+Version: 1.2.5
 Author: Soflyy
 */
 
@@ -59,7 +59,7 @@ else {
 	 */
 	define('PMXE_PREFIX', 'pmxe_');
 
-	define('PMXE_VERSION', '1.2.3');
+	define('PMXE_VERSION', '1.2.5');
 
 	define('PMXE_EDITION', 'free');
 
@@ -187,12 +187,14 @@ else {
             // init plugin options
             $option_name = get_class($this) . '_Options';
             $options_default = PMXE_Config::createFromFile(self::ROOT_DIR . '/config/options.php')->toArray();
-            $this->options = array_intersect_key(get_option($option_name, array()), $options_default) + $options_default;
+            $current_options = get_option($option_name, array());
+            $this->options = array_intersect_key($current_options, $options_default) + $options_default;
             $this->options = array_intersect_key($options_default, array_flip(array('info_api_url'))) + $this->options; // make sure hidden options apply upon plugin reactivation
             if ('' == $this->options['cron_job_key']) $this->options['cron_job_key'] = wp_all_export_url_title(wp_all_export_rand_char(12));
 
-            update_option($option_name, $this->options);
-            $this->options = get_option(get_class($this) . '_Options');
+            if ($current_options !== $this->options) {
+                update_option($option_name, $this->options);
+            }
             register_activation_hook(self::FILE, array($this, 'activation'));
 
             // register action handlers
@@ -391,15 +393,36 @@ else {
 						);
 						add_filter('current_screen', array($this, 'getAdminCurrentScreen'));
                         add_filter('admin_body_class',
-                            function() {
-                                return 'wpallexport-plugin';
+                            function($admin_body_class) {
+                                return $admin_body_class.' wpallexport-plugin';
                             }
                         );
 
 						$controller = new $controllerName();
 						if ( ! $controller instanceof PMXE_Controller_Admin) {
-							throw new Exception("Administration page `$page` matches to a wrong controller type.");
-						}
+                            throw new Exception("Administration page `$page` matches to a wrong controller type.");
+                        }
+
+                            if($controller instanceof PMXE_Admin_Manage && ($action == 'update' || $action == 'template' || $action == 'options') && isset($_GET['id'])) {
+                                $addons = new \Wpae\App\Service\Addons\AddonService();
+                                $exportId = intval($_GET['id']);
+
+                                $export = new \PMXE_Export_Record();
+                                $export->getById($exportId);
+
+                                $cpt = $export->options['cpt'];
+                                if (!is_array($cpt)) {
+                                    $cpt = array($cpt);
+                                }
+
+                                if (
+                                    ((in_array('users', $cpt) || in_array('shop_customer', $cpt)) && !$addons->isUserAddonActive()) ||
+                                    ($export->options['export_type'] == 'advanced' && $export->options['wp_query_selector'] == 'wp_user_query' && !$addons->isUserAddonActive())
+                                ) {
+                                    die(\__('The User Export Add-On Pro is required to run this export. You can download the add-on here: <a href="http://www.wpallimport.com/portal/" target="_blank">http://www.wpallimport.com/portal/</a>', \PMXE_Plugin::LANGUAGE_DOMAIN));
+                                }
+                            }
+
 
 						if ($this->_admin_current_screen->is_ajax) { // ajax request						
 							$controller->$action();
@@ -698,7 +721,7 @@ else {
 				$wpdb->query("ALTER TABLE {$table} ADD `parent_id` BIGINT(20) NOT NULL DEFAULT 0;");
 			}
 			if ( ! $export_post_type ){				
-				$wpdb->query("ALTER TABLE {$table} ADD `export_post_type` VARCHAR(64) NOT NULL DEFAULT '';");
+				$wpdb->query("ALTER TABLE {$table} ADD `export_post_type` TEXT NOT NULL DEFAULT '';");
 			}
 
 			update_option( "wp_all_export_db_version", PMXE_VERSION );
@@ -877,6 +900,6 @@ else {
 
 	// Include the api front controller
 	include_once('wpae_api.php');
-	
+
 }
 

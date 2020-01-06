@@ -22,7 +22,7 @@ $l10n = array(
 				<h2><?php _e('Export to XML / CSV', 'wp_all_export_plugin'); ?></h2>					
 			</div>
 			<div class="wpallexport-links">
-				<a href="http://www.wpallimport.com/support/" target="_blank"><?php _e('Support', 'wp_all_export_plugin'); ?></a> | <a href="http://www.wpallimport.com/documentation/" target="_blank"><?php _e('Documentation', 'wp_all_export_plugin'); ?></a>
+				<a href="http://www.wpallimport.com/support/?utm_source=export-plugin-free&utm_medium=help&utm_campaign=premium-support" target="_blank"><?php _e('Support', 'wp_all_export_plugin'); ?></a> | <a href="http://www.wpallimport.com/documentation/?utm_source=export-plugin-free&utm_medium=help&utm_campaign=docs" target="_blank"><?php _e('Documentation', 'wp_all_export_plugin'); ?></a>
 			</div>
 		</div>	
 		<div class="clear"></div>		
@@ -79,8 +79,9 @@ $l10n = array(
 					<input type="hidden" class="hierarhy-output" name="filter_rules_hierarhy" value="<?php echo esc_html($post['filter_rules_hierarhy']);?>"/>
 					
 					<?php
+                    $addons = new \Wpae\App\Service\Addons\AddonService();
 					$selected_post_type = '';
-					if (XmlExportUser::$is_active): 
+					if ($addons->isUserAddonActive() && XmlExportUser::$is_active):
 						$selected_post_type = empty($post['cpt'][0]) ? 'users' : $post['cpt'][0];
 					endif;
 					if (XmlExportComment::$is_active):

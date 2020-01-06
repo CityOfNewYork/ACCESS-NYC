@@ -499,7 +499,7 @@ final class PMXE_Wpallimport
 							$required_add_ons['PMWI_Plugin'] = array(
 								'name' => 'WooCommerce Add-On Pro',
 								'paid' => true,
-								'url'  => 'http://www.wpallimport.com/woocommerce-product-import/'
+								'url'  => 'http://www.wpallimport.com/woocommerce-product-import/?utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=import-wooco-products-template'
 							);
 						}
 
@@ -515,7 +515,7 @@ final class PMXE_Wpallimport
 						$required_add_ons['PMAI_Plugin'] = array(
 							'name' => 'ACF Add-On Pro',
 							'paid' => true,
-							'url'  => 'http://www.wpallimport.com/advanced-custom-fields/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin'
+							'url'  => 'http://www.wpallimport.com/advanced-custom-fields/?utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=import-acf-template'
 						);
 					}
 
@@ -532,11 +532,14 @@ final class PMXE_Wpallimport
 
 				default:
 
+				    $addons = new \Wpae\App\Service\Addons\AddonService();
 					XmlExportCpt::prepare_import_template( $options, self::$templateOptions, $cf_list, $attr_list, $taxs_list, $element_name, $ID);
 					
 					XmlExportMediaGallery::prepare_import_template( $options, self::$templateOptions, $element_name, $ID);
 
-					XmlExportUser::prepare_import_template( $options, self::$templateOptions, $element_name, $ID);
+					if($addons->isUserAddonActive()) {
+                        XmlExportUser::prepare_import_template($options, self::$templateOptions, $element_name, $ID);
+                    }
 
                     XmlExportTaxonomy::prepare_import_template( $options, self::$templateOptions, $element_name, $ID);
 

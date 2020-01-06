@@ -8,7 +8,7 @@
 				<td class="left">
 					<p style="font-size: 1.3em !important;">
 						<b>E-mail</b> - <a href="mailto:support@wpallimport.com?Subject=WP%20All%20Export%20feedback">support@wpallimport.com</a><br>
-						<b>Support Form </b> - <a target="_blank" href="http://www.wpallimport.com/support/?utm_source=wordpress.org&utm_medium=feedback-page&utm_campaign=free+wp+all+export+plugin">http://www.wpallimport.com/support</a>
+						<b>Support Form </b> - <a target="_blank" href="http://www.wpallimport.com/support/?utm_source=export-plugin-free&utm_medium=feedback&utm_campaign=premium-support">http://www.wpallimport.com/support/</a>
 					</p>
 
 					<p style="font-size: 1.3em !important;">Thanks for using WP All Export.</p>

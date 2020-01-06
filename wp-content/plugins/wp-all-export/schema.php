@@ -45,7 +45,7 @@ CREATE TABLE {$table_prefix}exports (
 	options LONGTEXT,
 	scheduled VARCHAR(64) NOT NULL DEFAULT '',
 	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',	
-	friendly_name VARCHAR(64) NOT NULL DEFAULT '',	
+	friendly_name TEXT NOT NULL DEFAULT '',	
 	exported BIGINT(20) NOT NULL DEFAULT 0,
 	canceled BOOL NOT NULL DEFAULT 0,  	
   	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -55,7 +55,7 @@ CREATE TABLE {$table_prefix}exports (
   	executing BOOL NOT NULL DEFAULT 0,
   	triggered BOOL NOT NULL DEFAULT 0,
   	iteration BIGINT(20) NOT NULL DEFAULT 0,
-  	export_post_type VARCHAR(64) NOT NULL DEFAULT '',
+  	export_post_type TEXT NOT NULL DEFAULT '',
 	PRIMARY KEY  (id)
 ) $charset_collate;
 SCHEMA;

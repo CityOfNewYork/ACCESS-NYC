@@ -26,7 +26,7 @@ if(getenv('WPAE_DEV')) {
             <h2>Export to XML / CSV</h2>
         </div>
         <div class="wpallexport-links">
-            <a href="http://www.wpallimport.com/support/" target="_blank">Support</a> | <a href="http://www.wpallimport.com/documentation/" target="_blank">Documentation</a>
+            <a href="http://www.wpallimport.com/support/?utm_source=export-plugin-free&utm_medium=help&utm_campaign=premium-support" target="_blank">Support</a> | <a href="http://www.wpallimport.com/documentation/?utm_source=export-plugin-free&utm_medium=help&utm_campaign=docs" target="_blank">Documentation</a>
         </div>
     </div>
     <div class="clear"></div>

@@ -50,7 +50,7 @@ final Class XmlCsvExport
 		if ( XmlExportEngine::$is_user_export )  { // exporting WordPress users
 
 			foreach ( XmlExportEngine::$exportQuery->results as $user ) {
-                $articles[] = XmlExportUser::prepare_data($user, false, $acfs, XmlExportEngine::$implode, $preview);
+                $articles[] = XmlExportUser::prepare_data($user, XmlExportEngine::$exportOptions ,false, $acfs, XmlExportEngine::$implode, $preview);
                 $articles = apply_filters('wp_all_export_csv_rows', $articles, XmlExportEngine::$exportOptions, XmlExportEngine::$exportID);
                 if (!$preview) do_action('pmxe_exported_post', $user->ID, XmlExportEngine::$exportRecord);
             }
@@ -217,7 +217,7 @@ final Class XmlCsvExport
 
 					$xmlWriter->startElement(self::$node_xml_tag);
 
-						XmlExportUser::prepare_data( $user, $xmlWriter, $acfs, XmlExportEngine::$implode, $preview );
+					XmlExportUser::prepare_data( $user, XmlExportEngine::$exportOptions, $xmlWriter, $acfs, XmlExportEngine::$implode, $preview );
 
 					$xmlWriter->closeElement(); // end post
 
@@ -226,7 +226,7 @@ final Class XmlCsvExport
 				}
 				else {
 					$articles = array();
-					$articles[] = XmlExportUser::prepare_data( $user, $xmlWriter, $acfs, XmlExportEngine::$implode, $preview );
+					$articles[] = XmlExportUser::prepare_data( $user, XmlExportEngine::$exportOptions, $xmlWriter, $acfs, XmlExportEngine::$implode, $preview );
 					$articles = apply_filters('wp_all_export_csv_rows', $articles, XmlExportEngine::$exportOptions, XmlExportEngine::$exportID);										
 
 					$xmlWriter->writeArticle( $articles );
@@ -727,116 +727,113 @@ final Class XmlCsvExport
 			return true;
 		}
 	}
-	// [ \CSV Export Helpers ]
+    // [ \CSV Export Helpers ]
 
-	public static function auto_genetate_export_fields( $post, $errors = false )
-	{		
-		$errors or $errors = new WP_Error();
+    public static function auto_genetate_export_fields($post, $errors = false)
+    {
+        $errors or $errors = new WP_Error();
 
-		remove_all_filters( "wp_all_export_init_fields", 10 );
-		remove_all_filters( "wp_all_export_default_fields", 10 );
-		remove_all_filters( "wp_all_export_other_fields", 10 );
-		remove_all_filters( "wp_all_export_available_sections", 10 );
-		remove_all_filters( "wp_all_export_available_data", 10 );
+        remove_all_filters("wp_all_export_init_fields", 10);
+        remove_all_filters("wp_all_export_default_fields", 10);
+        remove_all_filters("wp_all_export_other_fields", 10);
+        remove_all_filters("wp_all_export_available_sections", 10);
+        remove_all_filters("wp_all_export_available_data", 10);
 
-		$engine = new XmlExportEngine($post, $errors);	
-		$engine->init_additional_data();													
+        $engine = new XmlExportEngine($post, $errors);
+        $engine->init_additional_data();
 
-		$auto_generate = array(
-			'ids' 		 => array(),
-			'cc_label' 	 => array(),
-			'cc_php' 	 => array(),
-			'cc_code' 	 => array(),
-			'cc_sql' 	 => array(),
-			'cc_type' 	 => array(),
-			'cc_options' => array(),
-			'cc_value' 	 => array(),
-			'cc_name' 	 => array()
-		);
+        $auto_generate = array(
+            'ids' => array(),
+            'cc_label' => array(),
+            'cc_php' => array(),
+            'cc_code' => array(),
+            'cc_sql' => array(),
+            'cc_type' => array(),
+            'cc_options' => array(),
+            'cc_value' => array(),
+            'cc_name' => array()
+        );
 
-		$available_data     = $engine->init_available_data();		
+        $available_data = $engine->init_available_data();
 
-		$available_sections = apply_filters("wp_all_export_available_sections", $engine->get('available_sections'));
-		
-		foreach ($available_sections as $slug => $section) 
-		{
-			if ( ! empty($section['content']) and ! empty($available_data[$section['content']]))
-			{				
-				foreach ($available_data[$section['content']] as $field) 
-				{					
-					if ( is_array($field) and (isset($field['auto']) or (is_array($post['cpt']) && ! in_array('product', $post['cpt']) )))
-					{							
-						$auto_generate['ids'][] 	   = 1;
-						$auto_generate['cc_label'][]   = is_array($field) ? $field['label'] : $field;
-						$auto_generate['cc_php'][] 	   = 0;
-						$auto_generate['cc_code'][]    = '';
-						$auto_generate['cc_sql'][]     = '';
-						$auto_generate['cc_settings'][]     = '';
-						$auto_generate['cc_type'][]    = is_array($field) ? $field['type'] : $slug;
-						$auto_generate['cc_options'][] = '';
-						$auto_generate['cc_value'][]   = is_array($field) ? $field['label'] : $field;
-						$auto_generate['cc_name'][]    = is_array($field) ? $field['name'] : $field;
-					}
-				}				
-			}		
-			if ( ! empty($section['additional']) )
-			{
-				foreach ($section['additional'] as $sub_slug => $sub_section) {
-					foreach ($sub_section['meta'] as $field) {
-						$field_options = ( in_array($sub_slug, array('images', 'attachments')) ) ? esc_attr('{"is_export_featured":true,"is_export_attached":true,"image_separator":"|"}') : '0';
-						$field_name = '';
-						switch ($sub_slug) {
-							case 'images':
-								$field_name = 'Image ' . $field['name'];
-								break;
-							case 'attachments':
-								$field_name = 'Attachment ' . $field['name'];
-								break;							
-							default:
-								$field_name = $field['name'];
-								break;
-						}
+        $available_sections = apply_filters("wp_all_export_available_sections", $engine->get('available_sections'));
 
-						if ( is_array($field) and isset($field['auto']) ) {
-							$auto_generate['ids'][] 	   = 1;
-							$auto_generate['cc_label'][]   = is_array($field) ? $field['label'] : $field;
-							$auto_generate['cc_php'][] 	   = 0;
-							$auto_generate['cc_code'][]    = '';
-							$auto_generate['cc_sql'][]     = '';
-							$auto_generate['cc_settings'][]     = '';
-							$auto_generate['cc_type'][]    = is_array($field) ? $field['type'] : $sub_slug;
-							$auto_generate['cc_options'][] = $field_options;
-							$auto_generate['cc_value'][]   = is_array($field) ? $field['label'] : $field;
-							$auto_generate['cc_name'][]    = $field_name;
-						}
-					}
-				}
-			}	
-		}		
+        foreach ($available_sections as $slug => $section) {
+            if (!empty($section['content']) and !empty($available_data[$section['content']])) {
+                foreach ($available_data[$section['content']] as $field) {
+                    if (is_array($field) and (isset($field['auto']) or !in_array('product', $post['cpt']))) {
+                        $auto_generate['ids'][] = 1;
+                        $auto_generate['cc_label'][] = is_array($field) ? $field['label'] : $field;
+                        $auto_generate['cc_php'][] = 0;
+                        $auto_generate['cc_code'][] = '';
+                        $auto_generate['cc_sql'][] = '';
+                        $auto_generate['cc_settings'][] = '';
+                        $auto_generate['cc_type'][] = is_array($field) ? $field['type'] : $slug;
+                        $auto_generate['cc_options'][] = '';
+                        $auto_generate['cc_value'][] = is_array($field) ? $field['label'] : $field;
+                        $auto_generate['cc_name'][] = is_array($field) ? $field['name'] : $field;
+                    }
+                }
+            }
+            if (!empty($section['additional'])) {
+                foreach ($section['additional'] as $sub_slug => $sub_section) {
+                    foreach ($sub_section['meta'] as $field) {
+                        $field_options = (in_array($sub_slug, array('images', 'attachments'))) ? esc_attr('{"is_export_featured":true,"is_export_attached":true,"image_separator":"|"}') : '0';
+                        $field_name = '';
+                        switch ($sub_slug) {
+                            case 'images':
+                                $field_name = 'Image ' . $field['name'];
+                                break;
+                            case 'attachments':
+                                $field_name = 'Attachment ' . $field['name'];
+                                break;
+                            default:
+                                $field_name = $field['name'];
+                                break;
+                        }
 
-		if ( XmlExportWooCommerceOrder::$is_active ) {
-			foreach (XmlExportWooCommerceOrder::$order_sections as $slug => $section) {
-				if ( ! empty($section['meta']) ) {
-					foreach ($section['meta'] as $cur_meta_key => $field) {									
-						$auto_generate['ids'][] 	   = 1;
-						$auto_generate['cc_label'][]   = is_array($field) ? $field['label'] : $cur_meta_key;
-						$auto_generate['cc_php'][] 	   = 0;
-						$auto_generate['cc_code'][]    = '';
-						$auto_generate['cc_sql'][]     = '';
-						$auto_generate['cc_settings'][]     = '';
-						$auto_generate['cc_type'][]    = is_array($field) ? $field['type'] : 'woo_order';
-						$auto_generate['cc_options'][] = is_array($field) ? $field['options'] : $slug;
-						$auto_generate['cc_value'][]   = is_array($field) ? $field['label'] : $cur_meta_key;
-						$auto_generate['cc_name'][]    = is_array($field) ? $field['name'] : $field;
-					}
-				}
-			}
-		}
+                        if (is_array($field) and isset($field['auto'])) {
+                            $auto_generate['ids'][] = 1;
+                            $auto_generate['cc_label'][] = is_array($field) ? $field['label'] : $field;
+                            $auto_generate['cc_php'][] = 0;
+                            $auto_generate['cc_code'][] = '';
+                            $auto_generate['cc_sql'][] = '';
+                            $auto_generate['cc_settings'][] = '';
+                            $auto_generate['cc_type'][] = is_array($field) ? $field['type'] : $sub_slug;
+                            $auto_generate['cc_options'][] = $field_options;
+                            $auto_generate['cc_value'][] = is_array($field) ? $field['label'] : $field;
+                            $auto_generate['cc_name'][] = $field_name;
+                        }
+                    }
+                }
+            }
+        }
 
-        if ( ! XmlExportEngine::$is_comment_export ) XmlExportEngine::$acf_export->auto_generate_export_fields( $auto_generate );
+        if (XmlExportWooCommerceOrder::$is_active) {
+            foreach (XmlExportWooCommerceOrder::$order_sections as $slug => $section) {
+                if (!empty($section['meta'])) {
+                    foreach ($section['meta'] as $cur_meta_key => $field) {
+                        $auto_generate['ids'][] = 1;
+                        $auto_generate['cc_label'][] = is_array($field) ? $field['label'] : $cur_meta_key;
+                        $auto_generate['cc_php'][] = 0;
+                        $auto_generate['cc_code'][] = '';
+                        $auto_generate['cc_sql'][] = '';
+                        $auto_generate['cc_settings'][] = '';
+                        $auto_generate['cc_type'][] = is_array($field) ? $field['type'] : 'woo_order';
+                        $auto_generate['cc_options'][] = is_array($field) ? $field['options'] : $slug;
+                        $auto_generate['cc_value'][] = is_array($field) ? $field['label'] : $cur_meta_key;
+                        $auto_generate['cc_name'][] = is_array($field) ? $field['name'] : $field;
+                    }
+                }
+            }
+        }
 
-		return $auto_generate;
-	}
+        if (!XmlExportEngine::$is_comment_export) XmlExportEngine::$acf_export->auto_generate_export_fields($auto_generate);
+
+        return $auto_generate;
+    }
+
+
 
     /**
      * @param $xmlWriter

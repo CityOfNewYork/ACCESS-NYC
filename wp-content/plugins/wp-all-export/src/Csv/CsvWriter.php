@@ -17,6 +17,8 @@ class CsvWriter
 
     public function writeCsv($resource, $value, $delimiter)
     {
+        $value = apply_filters('pmxe_csv_value', $value);
+
         if($this->csvStrategy == self::CSV_STRATEGY_DEFAULT) {
             fputcsv($resource, $value, $delimiter);
         } else {

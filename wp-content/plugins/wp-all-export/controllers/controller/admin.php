@@ -87,7 +87,7 @@ abstract class PMXE_Controller_Admin extends PMXE_Controller {
 		wp_enqueue_script('wp-pointer');
 
 		/* load plupload scripts */		
-		wp_enqueue_script('pmxe-admin-script', PMXE_ROOT_URL . '/static/js/admin.js', array('jquery', 'jquery-ui-dialog', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-position', 'jquery-ui-autocomplete' ), PMXE_VERSION);
+		wp_enqueue_script('pmxe-admin-script', PMXE_ROOT_URL . '/static/js/admin.js', array('jquery', 'jquery-ui-dialog', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-position', 'jquery-ui-autocomplete', 'updates' ), PMXE_VERSION);
 		wp_enqueue_script('pmxe-admin-validate-braces', PMXE_ROOT_URL . '/static/js/validate-braces.js', array('pmxe-admin-script' ), PMXE_VERSION);
 
 		if(getenv('WPAE_DEV')) {
