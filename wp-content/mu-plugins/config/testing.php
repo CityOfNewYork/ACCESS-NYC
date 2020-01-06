@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Development environment config
+ * Testing environment config for *almost* live testing
  */
 
 /**
@@ -22,21 +22,12 @@ if (class_exists('Whoops\Run')) {
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 /**
- * Disable plugins required for security but slow down logging into the
- * site for development purposes.
+ * Activate plugins
  */
 
-deactivate_plugins([
-  'google-authenticator/google-authenticator.php',
-  'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php'
-]);
-
-/**
- * Disable Rollbar because it is only required for remote error monitoring.
- * Uncomment the activate line if you need to test it.
- */
-
-deactivate_plugins('rollbar/rollbar-php-wordpress.php');
+activate_plugin('google-authenticator/google-authenticator.php');
+activate_plugin('limit-login-attempts-reloaded/limit-login-attempts-reloaded.php');
+activate_plugin('rollbar/rollbar-php-wordpress.php');
 
 /**
  * Enable the Redis Caching Plugin if we have WP_REDIS_HOST defined in
@@ -56,7 +47,7 @@ activate_plugin('query-monitor/query-monitor.php');
 
 /**
  * Remove Stat Collector data logging actions
- * @param   [class]  $instance  The instantiated StatCollector class
+ * @param   Class  $instance  The instantiated StatCollector class
  */
 
 add_action('init_stat_collector', function($instance) {
