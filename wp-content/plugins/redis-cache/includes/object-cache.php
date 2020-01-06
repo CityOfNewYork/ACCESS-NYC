@@ -3,7 +3,7 @@
 Plugin Name: Redis Object Cache Drop-In
 Plugin URI: http://wordpress.org/plugins/redis-cache/
 Description: A persistent object cache backend powered by Redis. Supports Predis, PhpRedis, HHVM, replication, clustering and WP-CLI.
-Version: 1.4.3
+Version: 1.5.5
 Author: Till Krüss
 Author URI: https://till.im/
 License: GPLv3
@@ -289,6 +289,13 @@ class WP_Object_Cache
     private $redis;
 
     /**
+     * The Redis server version.
+     *
+     * @var null|string
+     */
+    private $redis_version = null;
+
+    /**
      * Track if Redis is available
      *
      * @var bool
@@ -342,6 +349,13 @@ class WP_Object_Cache
     );
 
     /**
+     * List of groups that will not be flushed.
+     *
+     * @var array
+     */
+    public $unflushable_groups = array();
+
+    /**
      * List of groups not saved to Redis.
      *
      * @var array
@@ -390,10 +404,13 @@ class WP_Object_Cache
         $parameters = array(
             'scheme' => 'tcp',
             'host' => '127.0.0.1',
-            'port' => 6379
+            'port' => 6379,
+            'timeout' => 5,
+            'read_timeout' => 5,
+            'retry_interval' => null
         );
 
-        foreach (array('scheme', 'host', 'port', 'path', 'password', 'database') as $setting) {
+        foreach (array('scheme', 'host', 'port', 'path', 'password', 'database', 'timeout', 'read_timeout', 'retry_interval') as $setting) {
             $constant = sprintf('WP_REDIS_%s', strtoupper($setting));
 
             if (defined($constant)) {
@@ -407,6 +424,10 @@ class WP_Object_Cache
 
         if (defined('WP_REDIS_IGNORED_GROUPS') && is_array(WP_REDIS_IGNORED_GROUPS)) {
             $this->ignored_groups = WP_REDIS_IGNORED_GROUPS;
+        }
+
+        if (defined('WP_REDIS_UNFLUSHABLE_GROUPS') && is_array(WP_REDIS_UNFLUSHABLE_GROUPS)) {
+            $this->unflushable_groups = WP_REDIS_UNFLUSHABLE_GROUPS;
         }
 
         $client = defined('WP_REDIS_CLIENT') ? WP_REDIS_CLIENT : null;
@@ -428,11 +449,19 @@ class WP_Object_Cache
                     $parameters['port'] = 0;
                 }
 
-                $this->redis->connect($parameters['host'], $parameters['port']);
+                $this->redis->connect($parameters['host'], $parameters['port'], $parameters['timeout'], null, $parameters['retry_interval']);
+
+                if ($parameters['read_timeout']) {
+                    $this->redis->setOption(Redis::OPT_READ_TIMEOUT, $parameters['read_timeout']);
+                }
             }
 
             if (strcasecmp('pecl', $client) === 0) {
-                $this->redis_client = sprintf('PhpRedis (v%s)', phpversion('redis'));
+                $phpredis_version = phpversion('redis');
+                $this->redis_client = sprintf(
+                    'PhpRedis (v%s)',
+                    $phpredis_version
+                );
 
                 if (defined('WP_REDIS_SHARDS')) {
                     $this->redis = new RedisArray(array_values(WP_REDIS_SHARDS));
@@ -441,11 +470,31 @@ class WP_Object_Cache
                 } else {
                     $this->redis = new Redis();
 
+                    $connection_args = [
+                        $parameters['host'],
+                        $parameters['port'],
+                        $parameters['timeout'],
+                        null,
+                        $parameters['retry_interval'],
+                    ];
+
                     if (strcasecmp('unix', $parameters['scheme']) === 0) {
-                        $this->redis->connect($parameters['path']);
-                    } else {
-                        $this->redis->connect($parameters['host'], $parameters['port']);
+                        $connection_args[0] = $parameters['path'];
+                        $connection_args[1] = null;
                     }
+
+                    if (version_compare($phpredis_version,'3.1.3','>=')){
+                        $connection_args[] = $parameters['read_timeout'];
+                    }
+
+                    call_user_func_array(
+                        [ $this->redis, 'connect' ],
+                        $connection_args
+                    );
+                }
+
+                if (defined('WP_REDIS_SERIALIZER') && ! empty(WP_REDIS_SERIALIZER)) {
+                    $this->redis->setOption(Redis::OPT_SERIALIZER, WP_REDIS_SERIALIZER);
                 }
             }
 
@@ -455,6 +504,10 @@ class WP_Object_Cache
                 }
 
                 if (isset($parameters['database'])) {
+                    if (ctype_digit($parameters['database'])) {
+                        $parameters['database'] = intval($parameters['database']);
+                    }
+
                     $this->redis->select($parameters['database']);
                 }
             }
@@ -495,6 +548,10 @@ class WP_Object_Cache
                 } elseif (defined('WP_REDIS_CLUSTER')) {
                     $parameters = WP_REDIS_CLUSTER;
                     $options['cluster'] = 'redis';
+				}
+
+                if ($parameters['read_timeout']) {
+                    $parameters['read_write_timeout'] = $parameters['read_timeout'];
                 }
 
                 foreach (array('WP_REDIS_SERVERS', 'WP_REDIS_SHARDS', 'WP_REDIS_CLUSTER') as $constant) {
@@ -513,6 +570,16 @@ class WP_Object_Cache
                 $this->redis->ping(current(array_values(WP_REDIS_CLUSTER)));
             } else {
                 $this->redis->ping();
+            }
+
+            if ( ! isset( $options['replication'] ) || ! $options['replication'] ) {
+                $server_info = $this->redis->info( 'SERVER' );
+
+                if (isset($server_info['redis_version'])) {
+                    $this->redis_version = $server_info['redis_version'];
+                } elseif (isset( $server_info['Server']['redis_version'])) {
+                    $this->redis_version = $server_info['Server']['redis_version'];
+                }
             }
 
             $this->redis_connected = true;
@@ -545,6 +612,16 @@ class WP_Object_Cache
     public function redis_instance()
     {
         return $this->redis;
+    }
+
+    /**
+     * Returns the Redis server version.
+     *
+     * @return null|string
+     */
+    public function redis_version()
+    {
+        return $this->redis_version;
     }
 
     /**
@@ -651,6 +728,8 @@ class WP_Object_Cache
      */
     public function delete($key, $group = 'default')
     {
+        $start_time = microtime(true);
+
         $result = false;
         $derived_key = $this->build_key($key, $group);
 
@@ -670,7 +749,8 @@ class WP_Object_Cache
         }
 
         if (function_exists('do_action')) {
-            do_action('redis_object_cache_delete', $key, $group);
+            $execute_time = microtime(true) - $start_time;
+            do_action('redis_object_cache_delete', $key, $group, $execute_time);
         }
 
         return $result;
@@ -698,22 +778,17 @@ class WP_Object_Cache
             $salt = defined('WP_CACHE_KEY_SALT') ? trim(WP_CACHE_KEY_SALT) : null;
             $selective = defined('WP_REDIS_SELECTIVE_FLUSH') ? WP_REDIS_SELECTIVE_FLUSH : null;
 
+            $start_time = microtime(true);
+
             if ($salt && $selective) {
-                $script = "
-                    local i = 0
-                    for _,k in ipairs(redis.call('keys', '{$salt}*')) do
-                        redis.call('del', k)
-                        i = i + 1
-                    end
-                    return i
-                ";
+                $script = $this->get_flush_closure($salt);
 
                 if (defined('WP_REDIS_CLUSTER')) {
                     try {
                         foreach ($this->redis->_masters() as $master) {
                             $redis = new Redis;
                             $redis->connect($master[0], $master[1]);
-                            $results[] = $this->parse_redis_response($this->redis->eval($script));
+                            $results[] = $this->parse_redis_response($script());
                             unset($redis);
                         }
                     } catch (Exception $exception) {
@@ -723,12 +798,7 @@ class WP_Object_Cache
                     }
                 } else {
                     try {
-                        $results[] = $this->parse_redis_response(
-                            $this->redis->eval(
-                                $script,
-                                $this->redis instanceof Predis\Client ? 0 : []
-                            )
-                        );
+                        $results[] = $this->parse_redis_response($script());
                     } catch (Exception $exception) {
                         $this->handle_exception($exception);
 
@@ -758,7 +828,9 @@ class WP_Object_Cache
             }
 
             if (function_exists('do_action')) {
-                do_action('redis_object_cache_flush', $results, $delay, $selective, $salt);
+                $execute_time = microtime(true) - $start_time;
+
+                do_action('redis_object_cache_flush', $results, $delay, $selective, $salt, $execute_time);
             }
         }
 
@@ -776,6 +848,109 @@ class WP_Object_Cache
     }
 
     /**
+     * Returns a closure to flush selectively.
+     *
+     * @param   string        $salt The salt to be used to differentiate.
+     * @return  callable      Generated callable executing the lua script.
+     */
+    protected function get_flush_closure($salt)
+    {
+        if ($this->unflushable_groups) {
+            return $this->lua_flush_extended_closure($salt);
+        } else {
+            return $this->lua_flush_closure($salt);
+        }
+    }
+
+    /**
+     * Returns a closure ready to be called to flush selectively ignoring unflushable groups.
+     *
+     * @param   string        $salt The salt to be used to differentiate.
+     * @return  callable      Generated callable executing the lua script.
+     */
+    protected function lua_flush_closure($salt)
+    {
+        return function () use ($salt) {
+            $script = <<<LUA
+                local cur = 0
+                local i = 0
+                local tmp
+                repeat
+                    tmp = redis.call('SCAN', cur, 'MATCH', '{$salt}*')
+                    cur = tonumber(tmp[1])
+                    if tmp[2] then
+                        for _, v in pairs(tmp[2]) do
+                            redis.call('del', v)
+                            i = i + 1
+                        end
+                    end
+                until 0 == cur
+                return i
+LUA;
+
+            if (version_compare($this->redis_version(), '5', '<') && version_compare($this->redis_version(), '3.2', '>=')) {
+                $script = 'redis.replicate_commands()' . "\n" . $script;
+            }
+
+            $args = ($this->redis instanceof Predis\Client)
+                ? [$script, 0]
+                : [$script];
+
+            return call_user_func_array([$this->redis, 'eval'], $args);
+        };
+    }
+
+    /**
+     * Returns a closure ready to be called to flush selectively.
+     *
+     * @param   string        $salt The salt to be used to differentiate.
+     * @return  callable      Generated callable executing the lua script.
+     */
+    protected function lua_flush_extended_closure($salt)
+    {
+        return function () use ($salt) {
+            $salt_length = strlen($salt);
+
+            $unflushable = array_map(function ($group) {
+                return ":{$group}:";
+            }, $this->unflushable_groups);
+
+            $script = <<<LUA
+                local cur = 0
+                local i = 0
+                local d, tmp
+                repeat
+                    tmp = redis.call('SCAN', cur, 'MATCH', '{$salt}*')
+                    cur = tonumber(tmp[1])
+                    if tmp[2] then
+                        for _, v in pairs(tmp[2]) do
+                            d = true
+                            for _, s in pairs(KEYS) do
+                                d = d and not v:find(s, {$salt_length})
+                                if not d then break end
+                            end
+                            if d then
+                                redis.call('del', v)
+                                i = i + 1
+                            end
+                        end
+                    end
+                until 0 == cur
+                return i
+LUA;
+            if (version_compare($this->redis_version(), '5', '<') && version_compare($this->redis_version(), '3.2', '>=')) {
+                $script = 'redis.replicate_commands()' . "\n" . $script;
+            }
+
+            $args = ($this->redis instanceof Predis\Client)
+                ? array_merge([$script, count($unflushable)], $unflushable)
+                : [$script, $unflushable, count($unflushable)];
+
+            return call_user_func_array([$this->redis, 'eval'], $args);
+        };
+    }
+
+    /**
      * Retrieve object from cache.
      *
      * Gets an object from cache based on $key and $group.
@@ -790,6 +965,8 @@ class WP_Object_Cache
      */
     public function get($key, $group = 'default', $force = false, &$found = null)
     {
+        $start_time = microtime(true);
+
         $derived_key = $this->build_key($key, $group);
 
         if (isset($this->cache[$derived_key]) && ! $force) {
@@ -828,7 +1005,10 @@ class WP_Object_Cache
         $value = is_object($value) ? clone $value : $value;
 
         if (function_exists('do_action')) {
-            do_action('redis_object_cache_get', $key, $value, $group, $force, $found);
+
+            $execute_time = microtime(true) - $start_time;
+
+            do_action('redis_object_cache_get', $key, $value, $group, $force, $found, $execute_time);
         }
 
         if (function_exists('apply_filters') && function_exists('has_filter')) {
@@ -921,6 +1101,8 @@ class WP_Object_Cache
      */
     public function set($key, $value, $group = 'default', $expiration = 0)
     {
+        $start_time = microtime(true);
+
         $result = true;
         $derived_key = $this->build_key($key, $group);
 
@@ -947,7 +1129,9 @@ class WP_Object_Cache
         }
 
         if (function_exists('do_action')) {
-            do_action('redis_object_cache_set', $key, $value, $group, $expiration);
+            $execute_time = microtime(true) - $start_time;
+
+            do_action('redis_object_cache_set', $key, $value, $group, $expiration, $execute_time);
         }
 
         return $result;
@@ -1078,6 +1262,11 @@ class WP_Object_Cache
         $salt = defined('WP_CACHE_KEY_SALT') ? trim(WP_CACHE_KEY_SALT) : '';
         $prefix = in_array($group, $this->global_groups) ? $this->global_prefix : $this->blog_prefix;
 
+        $key = str_replace(':', '-', $key);
+        $group = str_replace(':', '-', $group);
+
+        $prefix = trim($prefix, '_-:$');
+
         return "{$salt}{$prefix}:{$group}:{$key}";
     }
 
@@ -1198,6 +1387,18 @@ class WP_Object_Cache
     }
 
     /**
+     * Sets the list of groups not to flushed cached.
+     *
+     * @param array $groups List of groups that are unflushable.
+     */
+    public function add_unflushable_groups($groups)
+    {
+        $groups = (array) $groups;
+
+        $this->unflushable_groups = array_unique(array_merge($this->unflushable_groups, $groups));
+    }
+
+    /**
      * Wrapper to validate the cache keys expiration value
      *
      * @param mixed $expiration Incomming expiration value (whatever it is)
@@ -1225,6 +1426,10 @@ class WP_Object_Cache
      */
     protected function maybe_unserialize($original)
     {
+        if (defined('WP_REDIS_SERIALIZER') && ! empty(WP_REDIS_SERIALIZER)) {
+            return $original;
+        }
+
         if (defined('WP_REDIS_IGBINARY') && WP_REDIS_IGBINARY && function_exists('igbinary_unserialize')) {
             return igbinary_unserialize($original);
         }
@@ -1244,6 +1449,10 @@ class WP_Object_Cache
      */
     protected function maybe_serialize($data)
     {
+        if (defined('WP_REDIS_SERIALIZER') && ! empty(WP_REDIS_SERIALIZER)) {
+            return $data;
+        }
+
         if (defined('WP_REDIS_IGBINARY') && WP_REDIS_IGBINARY && function_exists('igbinary_serialize')) {
             return igbinary_serialize($data);
         }
@@ -1357,6 +1566,10 @@ class WP_Object_Cache
         }
 
         error_log($exception);
+
+        if (function_exists('do_action')) {
+            do_action('redis_object_cache_error', $exception);
+        }
     }
 }
 
