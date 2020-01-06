@@ -3,7 +3,9 @@
 class WPML_ACF_Field_Settings {
 	public function __construct( TranslationManagement $iclTranslationManagement ) {
 		$this->iclTranslationManagement = $iclTranslationManagement;
+	}
 
+	public function add_hooks() {
 		// add radio buttons on Field Group page
 		add_action( 'acf/render_field_settings', array( $this, 'render_field_settings'), 10, 1);
 
@@ -27,7 +29,6 @@ class WPML_ACF_Field_Settings {
 
 		// mark field as not migrated yet
 		add_filter( "acf/get_field_label", array($this, "mark_not_migrated_field"), 10, 2);
-
 	}
 
 	public function render_field_settings( $field ) {
@@ -48,10 +49,9 @@ class WPML_ACF_Field_Settings {
 
 	public function update_field_settings( $field ) {
 
-		if ( isset( $field['wpml_cf_preferences'] ) && isset( $field['name'] ) ) {
+		if ( $this->is_field_parsable( $field ) ) {
 			$this->update_existing_subfields( $field );
-			$this->iclTranslationManagement->settings[ 'custom_fields_translation' ][ $field['name'] ] = $field['wpml_cf_preferences'];
-			$this->iclTranslationManagement->save_settings();
+			$this->save_field_settings( $field );
 		}
 
 		return $field;
@@ -59,14 +59,25 @@ class WPML_ACF_Field_Settings {
 
 	public function field_value_updated( $value, $post_id, $field, $_value = null ) {
 
-		if ( isset( $field['wpml_cf_preferences'] ) && isset( $field['name'] ) ) {
+		if ( $this->is_field_parsable( $field ) ) {
 			if ( !isset( $this->iclTranslationManagement->settings[ 'custom_fields_translation' ][ $field['name'] ] ) ) {
-				$this->iclTranslationManagement->settings[ 'custom_fields_translation' ][ $field['name'] ] = $field['wpml_cf_preferences'];
-				$this->iclTranslationManagement->save_settings();
+				$this->save_field_settings( $field );
 			}
 		}
 
 		return $value;
+	}
+
+	private function is_field_parsable( $field ) {
+		return isset( $field['wpml_cf_preferences'], $field['name'] ) && $field['wpml_cf_preferences'] && $field['name'];
+	}
+
+	private function save_field_settings( $field ) {
+		$this->iclTranslationManagement->settings[ 'custom_fields_translation' ][ $field['name'] ] = $field['wpml_cf_preferences'];
+		if ( (int) $field['wpml_cf_preferences'] !== WPML_IGNORE_CUSTOM_FIELD ) {
+			$this->update_corresponding_system_field_settings( $field['name'] );
+		}
+		$this->iclTranslationManagement->save_settings();
 	}
 
 	public function user_set_sync_preferences($cft) {
@@ -120,6 +131,9 @@ class WPML_ACF_Field_Settings {
 								$acf_field_object = get_field_object( $custom_field->meta_key, $custom_field->post_id );
 								if ( $acf_field_object ) { // this is valid ACF field
 									$this->iclTranslationManagement->settings[ 'custom_fields_translation' ][ $custom_field->meta_key ] = $field['wpml_cf_preferences'];
+									if ( (int) $field['wpml_cf_preferences'] !== WPML_IGNORE_CUSTOM_FIELD ) {
+										$this->update_corresponding_system_field_settings( $custom_field->meta_key );
+									}
 								}
 							}
 						}
@@ -127,6 +141,14 @@ class WPML_ACF_Field_Settings {
 				}
 			}
 		}
+	}
+
+	private function update_corresponding_system_field_settings( $field_name ) {
+		$corresponding_field_name = "_" . $field_name;
+		if ( empty( $this->iclTranslationManagement->settings[ 'custom_fields_translation' ][ $corresponding_field_name ] ) ) {
+			$this->iclTranslationManagement->settings[ 'custom_fields_translation' ][ $corresponding_field_name ] = WPML_COPY_CUSTOM_FIELD;
+		}
+
 	}
 
 	public function mark_not_migrated_field( $label, $field ) {
