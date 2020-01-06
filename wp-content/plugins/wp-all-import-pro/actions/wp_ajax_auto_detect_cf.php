@@ -14,10 +14,22 @@ function pmxi_wp_ajax_auto_detect_cf(){
     global $wpdb;
     $table_prefix = $wpdb->prefix;
 
+    $ignoreFields = array(
+        '_edit_lock', '_edit_last', '_wp_trash_meta_status', '_wp_trash_meta_time', '_visibility', '_stock_status', '_downloadable', '_virtual', '_regular_price', '_sale_price', '_purchase_note', '_featured', '_weight', '_length',
+        '_width', '_height', '_sku', '_sale_price_dates_from', '_sale_price_dates_to', '_price', '_sold_individually', '_manage_stock', '_stock', '_upsell_ids', '_crosssell_ids','_downloadable_files', '_download_limit', '_download_expiry', '_download_type', '_product_url', '_button_text', '_backorders', '_tax_status', '_tax_class', '_product_image_gallery', '_default_attributes','total_sales', '_product_attributes', '_product_version', '_thumbnail_id', '_is_first_variation_created', '_regular_price_tmp', '_sale_price_tmp', '_price_tmp', '_stock_tmp',
+        '_order_total', '_order_version', '_order_tax', '_order_shipping_tax', '_order_shipping', '_cart_discount_tax', '_cart_discount', '_order_currency', '_order_key', '_prices_include_tax'
+    );
+
     $fields = array();
     switch ($post_type) {
-        case 'import_users':
         case 'shop_customer':
+            $user_fields = array('first_name', 'last_name', 'nickname', 'description', PMXI_Plugin::getInstance()->getWPPrefix() . 'capabilities');
+            $billing_fields = array('billing_first_name','billing_last_name','billing_company','billing_address_1','billing_address_2','billing_city','billing_postcode','billing_country','billing_state','billing_phone','billing_email');
+            $shipping_fields = array('shipping_first_name','shipping_last_name','shipping_company','shipping_address_1','shipping_address_2','shipping_city','shipping_postcode','shipping_country','shipping_state');
+            $ignoreFields = array_merge($ignoreFields, $user_fields, $billing_fields, $shipping_fields);
+            $fields = $input->post('fields', array());
+            break;
+        case 'import_users':
         case 'taxonomies':
             $fields = $input->post('fields', array());
             break;
@@ -30,12 +42,6 @@ function pmxi_wp_ajax_auto_detect_cf(){
             }
             break;
     }
-
-    $ignoreFields = array(
-        '_edit_lock', '_edit_last', '_wp_trash_meta_status', '_wp_trash_meta_time', '_visibility', '_stock_status', '_downloadable', '_virtual', '_regular_price', '_sale_price', '_purchase_note', '_featured', '_weight', '_length',
-        '_width', '_height', '_sku', '_sale_price_dates_from', '_sale_price_dates_to', '_price', '_sold_individually', '_manage_stock', '_stock', '_upsell_ids', '_crosssell_ids','_downloadable_files', '_download_limit', '_download_expiry', '_download_type', '_product_url', '_button_text', '_backorders', '_tax_status', '_tax_class', '_product_image_gallery', '_default_attributes','total_sales', '_product_attributes', '_product_version', '_thumbnail_id', '_is_first_variation_created', '_regular_price_tmp', '_sale_price_tmp', '_price_tmp', '_stock_tmp',
-        '_order_total', '_order_version', '_order_tax', '_order_shipping_tax', '_order_shipping', '_cart_discount_tax', '_cart_discount', '_order_currency', '_order_key', '_prices_include_tax'
-    );
 
     $result = array();
 

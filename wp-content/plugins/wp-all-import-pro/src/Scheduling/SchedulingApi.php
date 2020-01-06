@@ -31,7 +31,15 @@ class SchedulingApi
      */
     public function checkConnection()
     {
-        $pingBackUrl = $this->getApiUrl('connection').'?url='.urlencode(get_site_url('admin-ajax.php'));
+
+        if(is_multisite()) {
+            $url = get_site_url(get_current_blog_id());
+        } else {
+            $url = get_site_url('admin-ajax.php');
+        }
+
+        $pingBackUrl = $this->getApiUrl('connection').'?url='.urlencode($url);
+
 
         $response = wp_remote_request(
             $pingBackUrl,

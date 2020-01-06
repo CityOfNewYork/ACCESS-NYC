@@ -153,8 +153,10 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 			}
 			if (empty($post['html_entities'])) $post['html_entities'] = 0;
 			if (empty($post['utf8_decode'])) $post['utf8_decode'] = 0;
-			
-			if ( ! $this->errors->get_error_codes()) { // no validation errors detected
+
+            $post['cron_job_key'] = preg_replace('/[^A-Za-z0-9-_]+/', '', $post['cron_job_key']);
+
+            if ( ! $this->errors->get_error_codes()) { // no validation errors detected
 
 				PMXI_Plugin::getInstance()->updateOption($post);
 
@@ -569,17 +571,6 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		if ( ! check_ajax_referer( 'wp_all_import_secure', '_wpnonce', false )){
 			exit(json_encode(array("jsonrpc" => "2.0", "error" => array("code" => 100, "message" => __('Security check', 'wp_all_import_plugin')), "id" => "id")));
 		}
-		
-		// HTTP headers for no cache etc
-		// header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-		// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-		// header("Cache-Control: no-store, no-cache, must-revalidate");
-		// header("Cache-Control: post-check=0, pre-check=0", false);
-		// header("Pragma: no-cache");
-
-		// Settings
-		//$targetDir = ini_get("upload_tmp_dir") . DIRECTORY_SEPARATOR . "plupload";
-		//$uploads = wp_upload_dir();	
 
 		$targetDir = self::$path;
 
@@ -665,14 +656,14 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 					if ($in) {
 						while ($buff = fread($in, 4096))
 							fwrite($out, $buff);
-					} else{
+					} else {
 						delete_transient( self::$upload_transient );
 						exit(json_encode(array("jsonrpc" => "2.0", "error" => array("code" => 101, "message" => __("Failed to open input stream.", "wp_all_import_plugin")), "id" => "id")));
 					}
 					fclose($in);
 					fclose($out);
 					@unlink($_FILES['async-upload']['tmp_name']);
-				} else{
+				} else {
 					delete_transient( self::$upload_transient );					
 					exit(json_encode(array("jsonrpc" => "2.0", "error" => array("code" => 102, "message" => __("Failed to open output stream.", "wp_all_import_plugin")), "id" => "id")));
 				}
@@ -717,7 +708,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 				@copy("{$filePath}.part", $filePath);
 				@unlink("{$filePath}.part");
 			}
-			chmod($filePath, 0755);
+			@chmod($filePath, 0755);
 			delete_transient( self::$upload_transient );
 
 			$errors = new WP_Error;
@@ -727,7 +718,8 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 			$upload_result = $uploader->upload();			
 
 			if ($upload_result instanceof WP_Error){
-				$errors = $upload_result;
+
+			    $errors = $upload_result;
 
 				$msgs = $errors->get_error_messages();
 				ob_start();
@@ -739,90 +731,61 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 				$response = ob_get_clean();
 
 				exit(json_encode(array("jsonrpc" => "2.0", "error" => array("code" => 102, "message" => $response), "id" => "id")));
-			}
-			else 
-			{
-				
-				if ( ! empty($upload_result['post_type'])) 
-				{
+
+			} else {
+
+				if ( ! empty($upload_result['post_type'])) {
 					$post_type = $upload_result['post_type'];
-
 					$taxonomy_type = $upload_result['taxonomy_type'];
-
 					switch ( $post_type ) {
-
 						case 'shop_order':
-							
 							if ( ! class_exists('WooCommerce') ) {
 								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires WooCommerce.</p><a class="upgrade_link" href="https://wordpress.org/plugins/woocommerce/" target="_blank">Get WooCommerce</a>.', 'wp_all_import_plugin');							
-							}
-							else {
-
+							} else {
 								if ( ! defined('PMWI_EDITION') ) {
-
 									$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the Pro version of the WooCommerce Add-On.</p><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1529&edd_options%5Bprice_id%5D=1" class="upgrade_link" target="_blank">Purchase the WooCommerce Add-On</a>.', 'wp_all_import_plugin');
-
-								}
-								elseif ( PMWI_EDITION != 'paid' ) {
-
+								} elseif ( PMWI_EDITION != 'paid' ) {
 									$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the Pro version of the WooCommerce Add-On, but you have the free version installed.</p><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1529&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the WooCommerce Add-On</a>.', 'wp_all_import_plugin');
-
 								}							
 							}
-
 							break;
-
 						case 'import_users':
-
 							if ( ! class_exists('PMUI_Plugin') ) {
 								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Add-On.</p><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Add-On</a>.', 'wp_all_import_plugin');
 							}
-
 							break;
-						
-
 						case 'shop_customer':
-
 							if ( ! class_exists('WooCommerce') ) {
 								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires WooCommerce.</p><a class="upgrade_link" href="https://wordpress.org/plugins/woocommerce/" target="_blank">Get WooCommerce</a>.', 'wp_all_import_plugin');							
-							}
-							elseif ( ! class_exists('PMUI_Plugin') ) {
+							} elseif ( ! class_exists('PMUI_Plugin') ) {
 								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Add-On.</p><p class="wpallimport-upgrade-links-container"><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Add-On</a></p>', 'wp_all_import_plugin');
 							}
-		
 							break;
-
 						default:
 							# code...
 							break;
 					}					
 				}
 
-				if ( ! empty($upload_result['is_empty_bundle_file']))
-				{
+				if ( ! empty($upload_result['is_empty_bundle_file'])) {
 					// Return JSON-RPC response
 					exit(json_encode(array("jsonrpc" => "2.0", "error" => null, "result" => null, "id" => "id", "name" => $upload_result['filePath'], "post_type" => $post_type, "taxonomy_type" => $taxonomy_type, "notice" => $notice, "template" => $upload_result['template'], "url_bundle" => true)));
 				}
-				else
-				{					
-					// $root_element = wp_all_import_get_reader_engine( array($upload_result['filePath']), array('root_element' => $upload_result['root_element']) );	
-
-					// if ( ! empty($root_element) and empty($upload_result['root_element']))
-					// {
-					// 	$upload_result['root_element'] = $root_element;
-					// }
+				else {
 
 					// validate XML					
 					$file = new PMXI_Chunk($upload_result['filePath'], array('element' => $upload_result['root_element']));										    					    					   												
 
 					$is_valid = true;
 
-					if ( ! empty($file->options['element']) ) 						
-						$defaultXpath = "/". $file->options['element'];																			    		  
-					else
-						$is_valid = false;					
+					if ( ! empty($file->options['element']) ) {
+                        $defaultXpath = "/". $file->options['element'];
+                    }
+					else {
+                        $is_valid = false;
+                    }
 
-					if ( $is_valid ){
+					if ( $is_valid ) {
 
 						while ($xml = $file->read()) {
 
@@ -841,22 +804,18 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 								}	
 
 						    }
-						    /*else {
-						    	$is_valid = false;
-						    	break;
-						    }*/
-
 						}
-
-						if ( empty($xml) ) $is_valid = false;
+						if ( empty($xml) ) {
+                            $is_valid = false;
+                        }
 					}
 
 					unset($file);
 
 					if ( ! preg_match('%\W(xml)$%i', trim($upload_result['source']['path']))) @unlink($upload_result['filePath']);
 					
-					if ( ! $is_valid )
-					{
+					if ( ! $is_valid ) {
+
 						ob_start();					
 						
 						?>

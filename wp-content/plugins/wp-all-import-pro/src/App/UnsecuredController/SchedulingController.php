@@ -95,7 +95,14 @@ class SchedulingController
             $response = $this->scheduledImportService->process($import, $this->logger);
 
             if ( ! empty($response) and is_array($response)){
-                wp_send_json($response);
+                if($response == array(
+                    'status'     => 200,
+                    'message'    => sprintf(__('Import #%s complete', 'wp_all_import_plugin'),$importId)
+                )) {
+                    return new JsonResponse(array('Import #' . $importId . ' complete'), 201);
+                } else {
+                    wp_send_json($response);
+                }
             }
             elseif ( ! (int) $import->queue_chunk_number ){
                 return new JsonResponse(array('Import #' . $importId . ' complete'), 201);
