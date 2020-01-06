@@ -20,7 +20,7 @@ class FieldGoogleMap extends BaseGoogleMap {
     /**
      * @var array
      */
-    public $keys = array('address', 'lat', 'lng', 'zoom', 'center_lat', 'center_lng');
+    public $keys = array('address', 'lat', 'lng', 'zoom', 'street_number', 'street_name', 'street_short_name', 'city', 'state', 'state_short', 'post_code', 'country', 'country_short', 'place_id');
 
     /**
      *
@@ -37,7 +37,8 @@ class FieldGoogleMap extends BaseGoogleMap {
         $values = array();
 
         foreach ($this->keys as $key){
-            $values[$key] = $this->getByXPath($xpath[$key]);
+            $fieldXpath = isset($xpath[$key]) ? $xpath[$key] : '';
+            $values[$key] = $this->getByXPath($fieldXpath);
         }
 
         switch ($xpath['address_geocode']) {
@@ -79,10 +80,36 @@ class FieldGoogleMap extends BaseGoogleMap {
     public function getFieldValue() {
         $this->getAddress();
         $values = $this->getOption('values');
+        $parents = $this->getParents();
+        if (!empty($parents)){
+            foreach ($this->keys as $key){
+                $value = '';
+                foreach ($parents as $parent) {
+                    if (!empty($parent['delimiter'])) {
+                        $value = explode($parent['delimiter'], $values[$key][$this->getPostIndex()]);
+                        $value = $value[$parent['index']];
+                    } else {
+                        $value = $values[$key][$this->getPostIndex()];
+                    }
+                }
+                $values[$key][$this->getPostIndex()] = $value;
+            }
+        }
         return array(
             'address' => $values['address'][$this->getPostIndex()],
             'lat' => $values['lat'][$this->getPostIndex()],
-            'lng' => $values['lng'][$this->getPostIndex()]
+            'lng' => $values['lng'][$this->getPostIndex()],
+            'zoom' => $values['zoom'][$this->getPostIndex()],
+            'street_number' => $values['street_number'][$this->getPostIndex()],
+            'street_name' => $values['street_name'][$this->getPostIndex()],
+            'street_short_name' => $values['street_short_name'][$this->getPostIndex()],
+            'city' => $values['city'][$this->getPostIndex()],
+            'state' => $values['state'][$this->getPostIndex()],
+            'state_short' => $values['state_short'][$this->getPostIndex()],
+            'post_code' => $values['post_code'][$this->getPostIndex()],
+            'country' => $values['country'][$this->getPostIndex()],
+            'country_short' => $values['country_short'][$this->getPostIndex()],
+            'place_id' => $values['place_id'][$this->getPostIndex()],
         );
     }
 

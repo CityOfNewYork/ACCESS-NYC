@@ -36,29 +36,59 @@ abstract class BaseGoogleMap extends Field {
             if (!empty($json)) {
 
                 $values = $this->getOption('values');
-
                 $details = json_decode($json, TRUE);
 
-                $address_data = array();
+                if (!empty($details['results'])) {
+                    $address_data = array();
+                    foreach ($details['results'][0]['address_components'] as $type) {
+                        // parse Google Maps output into an array we can use
+                        $address_data[$type['types'][0]] = $type;
+                    }
 
-                foreach ($details['results'][0]['address_components'] as $type) {
-                    // parse Google Maps output into an array we can use
-                    $address_data[$type['types'][0]] = $type['long_name'];
-                }
+                    $lat = $details['results'][0]['geometry']['location']['lat'];
+                    $lng = $details['results'][0]['geometry']['location']['lng'];
 
-                $lat = $details['results'][0]['geometry']['location']['lat'];
-                $lng = $details['results'][0]['geometry']['location']['lng'];
+                    $address = $address_data['street_number']['long_name'] . ' ' . $address_data['route']['long_name'];
 
-                $address = $address_data['street_number'] . ' ' . $address_data['route'];
-
-                if (empty($values['address'][$this->getPostIndex()])) {
-                    $values['address'][$this->getPostIndex()] = $address;
-                }
-                if (empty($values['lat'][$this->getPostIndex()])) {
-                    $values['lat'][$this->getPostIndex()] = str_replace(',','.', $lat);
-                }
-                if (empty($values['lng'][$this->getPostIndex()])) {
-                    $values['lng'][$this->getPostIndex()] = str_replace(',','.', $lng);
+                    if (empty($values['address'][$this->getPostIndex()])) {
+                        $values['address'][$this->getPostIndex()] = $address;
+                    }
+                    if (empty($values['lat'][$this->getPostIndex()])) {
+                        $values['lat'][$this->getPostIndex()] = str_replace(',','.', $lat);
+                    }
+                    if (empty($values['lng'][$this->getPostIndex()])) {
+                        $values['lng'][$this->getPostIndex()] = str_replace(',','.', $lng);
+                    }
+                    if (empty($values['street_number'][$this->getPostIndex()]) && isset($address_data['street_number'])) {
+                        $values['street_number'][$this->getPostIndex()] = $address_data['street_number']['long_name'];
+                    }
+                    if (empty($values['street_name'][$this->getPostIndex()]) && isset($address_data['route'])) {
+                        $values['street_name'][$this->getPostIndex()] = $address_data['route']['long_name'];
+                    }
+                    if (empty($values['street_short_name'][$this->getPostIndex()]) && isset($address_data['route'])) {
+                        $values['street_short_name'][$this->getPostIndex()] = $address_data['route']['short_name'];
+                    }
+                    if (empty($values['city'][$this->getPostIndex()]) && isset($address_data['locality'])) {
+                        $values['city'][$this->getPostIndex()] = $address_data['locality']['long_name'];
+                    }
+                    if (empty($values['state'][$this->getPostIndex()]) && isset($address_data['administrative_area_level_1'])) {
+                        $values['state'][$this->getPostIndex()] = $address_data['administrative_area_level_1']['long_name'];
+                    }
+                    if (empty($values['state_short'][$this->getPostIndex()]) && isset($address_data['administrative_area_level_1'])) {
+                       $values['state_short'][$this->getPostIndex()] = $address_data['administrative_area_level_1']['short_name'];
+                    }
+                    if (empty($values['post_code'][$this->getPostIndex()]) && isset($address_data['postal_code'])) {
+                       $values['post_code'][$this->getPostIndex()] = $address_data['postal_code']['long_name'];
+                    }
+                    if (empty($values['country'][$this->getPostIndex()]) && isset($address_data['country'])) {
+                        $values['country'][$this->getPostIndex()] = $address_data['country']['long_name'];
+                    }
+                    if (empty($values['country_short'][$this->getPostIndex()]) && isset($address_data['country'])) {
+                        $values['country_short'][$this->getPostIndex()] = $address_data['country']['short_name'];
+                    }
+                    if (empty($values['place_id'][$this->getPostIndex()]) && isset($details['results'][0]['place_id'])) {
+                        $values['place_id'][$this->getPostIndex()] = $details['results'][0]['place_id'];
+                    }
                 }
                 $this->setOption('values', $values);
             }

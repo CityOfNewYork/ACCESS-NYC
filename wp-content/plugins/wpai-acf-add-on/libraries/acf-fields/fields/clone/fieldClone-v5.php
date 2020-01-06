@@ -167,10 +167,12 @@ class FieldCloneV5 extends Field {
         $countRows = 0;
         /** @var Field $field */
         foreach ($values as $field){
-            $field->importData = $this->getImportData();
-            $count = $field->getCountValues();
-            if ($count > $countRows){
-                $countRows = $count;
+            if (!empty($field)) {
+                $field->importData = $this->getImportData();
+                $count = $field->getCountValues();
+                if ($count > $countRows){
+                    $countRows = $count;
+                }
             }
         }
         return $countRows;
