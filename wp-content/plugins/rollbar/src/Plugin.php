@@ -9,7 +9,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 
 class Plugin {
     
-    const VERSION = "2.6.0";
+    const VERSION = "2.6.1";
     
     private $config;
     
@@ -265,12 +265,12 @@ class Plugin {
     
     public function initPhpLogging()
     {
+        $this->fetchSettings();
+
         // Return if logging is not enabled
         if ( $this->settings['php_logging_enabled'] === 0 ) {
             return;
         }
-        
-        $this->fetchSettings();
         
         // installs global error and exception handlers
         try {
