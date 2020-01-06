@@ -47,6 +47,7 @@ use Twilio\Version;
  * @property string $voiceUrl
  * @property string $emergencyStatus
  * @property string $emergencyAddressSid
+ * @property string $bundleSid
  */
 class IncomingPhoneNumberInstance extends InstanceResource {
     protected $_assignedAddOns = null;
@@ -95,6 +96,7 @@ class IncomingPhoneNumberInstance extends InstanceResource {
             'voiceUrl' => Values::array_get($payload, 'voice_url'),
             'emergencyStatus' => Values::array_get($payload, 'emergency_status'),
             'emergencyAddressSid' => Values::array_get($payload, 'emergency_address_sid'),
+            'bundleSid' => Values::array_get($payload, 'bundle_sid'),
         );
 
         $this->solution = array('accountSid' => $accountSid, 'sid' => $sid ?: $this->properties['sid'], );
@@ -168,12 +170,12 @@ class IncomingPhoneNumberInstance extends InstanceResource {
      * @throws TwilioException For unknown properties
      */
     public function __get($name) {
-        if (array_key_exists($name, $this->properties)) {
+        if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
 
-        if (property_exists($this, '_' . $name)) {
-            $method = 'get' . ucfirst($name);
+        if (\property_exists($this, '_' . $name)) {
+            $method = 'get' . \ucfirst($name);
             return $this->$method();
         }
 
@@ -190,6 +192,6 @@ class IncomingPhoneNumberInstance extends InstanceResource {
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
-        return '[Twilio.Api.V2010.IncomingPhoneNumberInstance ' . implode(' ', $context) . ']';
+        return '[Twilio.Api.V2010.IncomingPhoneNumberInstance ' . \implode(' ', $context) . ']';
     }
 }

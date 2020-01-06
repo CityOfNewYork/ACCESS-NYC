@@ -18,6 +18,13 @@ use InvalidArgumentException;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
+if (!interface_exists('Symfony\\Component\\Translation\\TranslatorInterface')) {
+    class_alias(
+        'Symfony\\Contracts\\Translation\\TranslatorInterface',
+        'Symfony\\Component\\Translation\\TranslatorInterface'
+    );
+}
+
 /**
  * Trait Localization.
  *
@@ -214,7 +221,13 @@ trait Localization
             $parameters[':count'] = $parameters['%count%'];
         }
 
-        return (string) $translator->transChoice($key, $number, $parameters);
+        // @codeCoverageIgnoreStart
+        $choice = method_exists($translator, 'transChoice')
+            ? $translator->transChoice($key, $number, $parameters)
+            : $translator->trans($key, $parameters);
+        // @codeCoverageIgnoreEnd
+
+        return (string) $choice;
     }
 
     /**
@@ -227,9 +240,65 @@ trait Localization
      *
      * @return string
      */
-    public function translate(string $key, array $parameters = [], $number = null, TranslatorInterface $translator = null): string
+    public function translate(string $key, array $parameters = [], $number = null, TranslatorInterface $translator = null, bool $altNumbers = false): string
     {
-        return static::translateWith($translator ?: $this->getLocalTranslator(), $key, $parameters, $number);
+        $translation = static::translateWith($translator ?: $this->getLocalTranslator(), $key, $parameters, $number);
+
+        if ($number !== null && $altNumbers) {
+            return str_replace($number, $this->translateNumber($number), $translation);
+        }
+
+        return $translation;
+    }
+
+    /**
+     * Returns the alternative number for a given integer if available in the current locale.
+     *
+     * @param int $number
+     *
+     * @return string
+     */
+    public function translateNumber(int $number): string
+    {
+        $translateKey = "alt_numbers.$number";
+        $symbol = $this->translate($translateKey);
+
+        if ($symbol !== $translateKey) {
+            return $symbol;
+        }
+
+        if ($number > 99 && $this->translate('alt_numbers.99') !== 'alt_numbers.99') {
+            $start = '';
+            foreach ([10000, 1000, 100] as $exp) {
+                $key = "alt_numbers_pow.$exp";
+                if ($number >= $exp && $number < $exp * 10 && ($pow = $this->translate($key)) !== $key) {
+                    $unit = floor($number / $exp);
+                    $number -= $unit * $exp;
+                    $start .= ($unit > 1 ? $this->translate("alt_numbers.$unit") : '').$pow;
+                }
+            }
+            $result = '';
+            while ($number) {
+                $chunk = $number % 100;
+                $result = $this->translate("alt_numbers.$chunk").$result;
+                $number = floor($number / 100);
+            }
+
+            return "$start$result";
+        }
+
+        if ($number > 9 && $this->translate('alt_numbers.9') !== 'alt_numbers.9') {
+            $result = '';
+            while ($number) {
+                $chunk = $number % 10;
+                $result = $this->translate("alt_numbers.$chunk").$result;
+                $number = floor($number / 10);
+            }
+
+            return $result;
+        }
+
+        return "$number";
     }
 
     /**

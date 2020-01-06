@@ -17,8 +17,6 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- *
  * @property \Twilio\Rest\Verify\V2\Service\RateLimit\BucketList $buckets
  * @method \Twilio\Rest\Verify\V2\Service\RateLimit\BucketContext buckets(string $sid)
  */
@@ -40,7 +38,7 @@ class RateLimitContext extends InstanceContext {
         // Path Solution
         $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
 
-        $this->uri = '/Services/' . rawurlencode($serviceSid) . '/RateLimits/' . rawurlencode($sid) . '';
+        $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/RateLimits/' . \rawurlencode($sid) . '';
     }
 
     /**
@@ -128,8 +126,8 @@ class RateLimitContext extends InstanceContext {
      * @throws TwilioException For unknown subresources
      */
     public function __get($name) {
-        if (property_exists($this, '_' . $name)) {
-            $method = 'get' . ucfirst($name);
+        if (\property_exists($this, '_' . $name)) {
+            $method = 'get' . \ucfirst($name);
             return $this->$method();
         }
 
@@ -146,8 +144,8 @@ class RateLimitContext extends InstanceContext {
      */
     public function __call($name, $arguments) {
         $property = $this->$name;
-        if (method_exists($property, 'getContext')) {
-            return call_user_func_array(array($property, 'getContext'), $arguments);
+        if (\method_exists($property, 'getContext')) {
+            return \call_user_func_array(array($property, 'getContext'), $arguments);
         }
 
         throw new TwilioException('Resource does not have a context');
@@ -163,6 +161,6 @@ class RateLimitContext extends InstanceContext {
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
-        return '[Twilio.Verify.V2.RateLimitContext ' . implode(' ', $context) . ']';
+        return '[Twilio.Verify.V2.RateLimitContext ' . \implode(' ', $context) . ']';
     }
 }

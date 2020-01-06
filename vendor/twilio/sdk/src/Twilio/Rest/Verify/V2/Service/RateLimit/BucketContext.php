@@ -15,9 +15,6 @@ use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class BucketContext extends InstanceContext {
     /**
      * Initialize the BucketContext
@@ -39,7 +36,7 @@ class BucketContext extends InstanceContext {
             'sid' => $sid,
         );
 
-        $this->uri = '/Services/' . rawurlencode($serviceSid) . '/RateLimits/' . rawurlencode($rateLimitSid) . '/Buckets/' . rawurlencode($sid) . '';
+        $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/RateLimits/' . \rawurlencode($rateLimitSid) . '/Buckets/' . \rawurlencode($sid) . '';
     }
 
     /**
@@ -114,6 +111,6 @@ class BucketContext extends InstanceContext {
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
-        return '[Twilio.Verify.V2.BucketContext ' . implode(' ', $context) . ']';
+        return '[Twilio.Verify.V2.BucketContext ' . \implode(' ', $context) . ']';
     }
 }

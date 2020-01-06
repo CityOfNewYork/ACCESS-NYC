@@ -27,6 +27,7 @@ use Twilio\Version;
  * @property string $body
  * @property array $media
  * @property string $attributes
+ * @property string $participantSid
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
  * @property string $url
@@ -56,6 +57,7 @@ class MessageInstance extends InstanceResource {
             'body' => Values::array_get($payload, 'body'),
             'media' => Values::array_get($payload, 'media'),
             'attributes' => Values::array_get($payload, 'attributes'),
+            'participantSid' => Values::array_get($payload, 'participant_sid'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'url' => Values::array_get($payload, 'url'),
@@ -126,12 +128,12 @@ class MessageInstance extends InstanceResource {
      * @throws TwilioException For unknown properties
      */
     public function __get($name) {
-        if (array_key_exists($name, $this->properties)) {
+        if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
 
-        if (property_exists($this, '_' . $name)) {
-            $method = 'get' . ucfirst($name);
+        if (\property_exists($this, '_' . $name)) {
+            $method = 'get' . \ucfirst($name);
             return $this->$method();
         }
 
@@ -148,6 +150,6 @@ class MessageInstance extends InstanceResource {
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
-        return '[Twilio.Conversations.V1.MessageInstance ' . implode(' ', $context) . ']';
+        return '[Twilio.Conversations.V1.MessageInstance ' . \implode(' ', $context) . ']';
     }
 }

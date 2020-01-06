@@ -14,9 +14,6 @@ use Twilio\ListResource;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class MessagingConfigurationList extends ListResource {
     /**
      * Construct the MessagingConfigurationList
@@ -32,7 +29,7 @@ class MessagingConfigurationList extends ListResource {
         // Path Solution
         $this->solution = array('serviceSid' => $serviceSid, );
 
-        $this->uri = '/Services/' . rawurlencode($serviceSid) . '/MessagingConfigurations';
+        $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/MessagingConfigurations';
     }
 
     /**
@@ -101,7 +98,7 @@ class MessagingConfigurationList extends ListResource {
      * @return MessagingConfigurationInstance[] Array of results
      */
     public function read($limit = null, $pageSize = null) {
-        return iterator_to_array($this->stream($limit, $pageSize), false);
+        return \iterator_to_array($this->stream($limit, $pageSize), false);
     }
 
     /**

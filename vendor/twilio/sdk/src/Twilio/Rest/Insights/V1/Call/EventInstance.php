@@ -24,8 +24,6 @@ use Twilio\Version;
  * @property string $group
  * @property string $level
  * @property string $name
- * @property array $client
- * @property array $gateway
  * @property array $carrierEdge
  * @property array $sipEdge
  * @property array $sdkEdge
@@ -52,8 +50,6 @@ class EventInstance extends InstanceResource {
             'group' => Values::array_get($payload, 'group'),
             'level' => Values::array_get($payload, 'level'),
             'name' => Values::array_get($payload, 'name'),
-            'client' => Values::array_get($payload, 'client'),
-            'gateway' => Values::array_get($payload, 'gateway'),
             'carrierEdge' => Values::array_get($payload, 'carrier_edge'),
             'sipEdge' => Values::array_get($payload, 'sip_edge'),
             'sdkEdge' => Values::array_get($payload, 'sdk_edge'),
@@ -71,12 +67,12 @@ class EventInstance extends InstanceResource {
      * @throws TwilioException For unknown properties
      */
     public function __get($name) {
-        if (array_key_exists($name, $this->properties)) {
+        if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
 
-        if (property_exists($this, '_' . $name)) {
-            $method = 'get' . ucfirst($name);
+        if (\property_exists($this, '_' . $name)) {
+            $method = 'get' . \ucfirst($name);
             return $this->$method();
         }
 

@@ -11,6 +11,8 @@ namespace Twilio\Rest\Chat\V2\Service\User;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\Options;
+use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -37,7 +39,7 @@ class UserChannelContext extends InstanceContext {
             'channelSid' => $channelSid,
         );
 
-        $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Users/' . rawurlencode($userSid) . '/Channels/' . rawurlencode($channelSid) . '';
+        $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Users/' . \rawurlencode($userSid) . '/Channels/' . \rawurlencode($channelSid) . '';
     }
 
     /**
@@ -65,15 +67,30 @@ class UserChannelContext extends InstanceContext {
     }
 
     /**
+     * Deletes the UserChannelInstance
+     *
+     * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function delete() {
+        return $this->version->delete('delete', $this->uri);
+    }
+
+    /**
      * Update the UserChannelInstance
      *
-     * @param string $notificationLevel The push notification level to assign to
-     *                                  the User Channel
+     * @param array|Options $options Optional Arguments
      * @return UserChannelInstance Updated UserChannelInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($notificationLevel) {
-        $data = Values::of(array('NotificationLevel' => $notificationLevel, ));
+    public function update($options = array()) {
+        $options = new Values($options);
+
+        $data = Values::of(array(
+            'NotificationLevel' => $options['notificationLevel'],
+            'LastConsumedMessageIndex' => $options['lastConsumedMessageIndex'],
+            'LastConsumptionTimestamp' => Serialize::iso8601DateTime($options['lastConsumptionTimestamp']),
+        ));
 
         $payload = $this->version->update(
             'POST',
@@ -101,6 +118,6 @@ class UserChannelContext extends InstanceContext {
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
-        return '[Twilio.Chat.V2.UserChannelContext ' . implode(' ', $context) . ']';
+        return '[Twilio.Chat.V2.UserChannelContext ' . \implode(' ', $context) . ']';
     }
 }

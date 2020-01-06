@@ -22,11 +22,12 @@ class AssetVersionContext extends InstanceContext {
      * Initialize the AssetVersionContext
      *
      * @param \Twilio\Version $version Version that contains the resource
-     * @param string $serviceSid The SID of the Service to fetch the AssetVersion
+     * @param string $serviceSid The SID of the Service to fetch the Asset Version
      *                           resource from
      * @param string $assetSid The SID of the Asset resource that is the parent of
-     *                         the AssetVersion resource to fetch
-     * @param string $sid The SID that identifies the AssetVersion resource to fetch
+     *                         the Asset Version resource to fetch
+     * @param string $sid The SID that identifies the Asset Version resource to
+     *                    fetch
      * @return \Twilio\Rest\Serverless\V1\Service\Asset\AssetVersionContext
      */
     public function __construct(Version $version, $serviceSid, $assetSid, $sid) {
@@ -35,7 +36,7 @@ class AssetVersionContext extends InstanceContext {
         // Path Solution
         $this->solution = array('serviceSid' => $serviceSid, 'assetSid' => $assetSid, 'sid' => $sid, );
 
-        $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Assets/' . rawurlencode($assetSid) . '/Versions/' . rawurlencode($sid) . '';
+        $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Assets/' . \rawurlencode($assetSid) . '/Versions/' . \rawurlencode($sid) . '';
     }
 
     /**
@@ -72,6 +73,6 @@ class AssetVersionContext extends InstanceContext {
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
-        return '[Twilio.Serverless.V1.AssetVersionContext ' . implode(' ', $context) . ']';
+        return '[Twilio.Serverless.V1.AssetVersionContext ' . \implode(' ', $context) . ']';
     }
 }

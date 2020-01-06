@@ -25,7 +25,7 @@ use Twilio\Version;
  * @property \DateTime $dateUpdated
  * @property string $shortCode
  * @property string $countryCode
- * @property array $capabilities
+ * @property string $capabilities
  * @property string $url
  */
 class ShortCodeInstance extends InstanceResource {
@@ -105,12 +105,12 @@ class ShortCodeInstance extends InstanceResource {
      * @throws TwilioException For unknown properties
      */
     public function __get($name) {
-        if (array_key_exists($name, $this->properties)) {
+        if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
 
-        if (property_exists($this, '_' . $name)) {
-            $method = 'get' . ucfirst($name);
+        if (\property_exists($this, '_' . $name)) {
+            $method = 'get' . \ucfirst($name);
             return $this->$method();
         }
 
@@ -127,6 +127,6 @@ class ShortCodeInstance extends InstanceResource {
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
-        return '[Twilio.Messaging.V1.ShortCodeInstance ' . implode(' ', $context) . ']';
+        return '[Twilio.Messaging.V1.ShortCodeInstance ' . \implode(' ', $context) . ']';
     }
 }

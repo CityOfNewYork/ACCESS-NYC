@@ -34,7 +34,7 @@ class NotificationList extends ListResource {
         // Path Solution
         $this->solution = array('serviceSid' => $serviceSid, );
 
-        $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Notifications';
+        $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Notifications';
     }
 
     /**
@@ -65,6 +65,7 @@ class NotificationList extends ListResource {
             'Segment' => Serialize::map($options['segment'], function($e) { return $e; }),
             'Alexa' => Serialize::jsonObject($options['alexa']),
             'ToBinding' => Serialize::map($options['toBinding'], function($e) { return $e; }),
+            'DeliveryCallbackUrl' => $options['deliveryCallbackUrl'],
         ));
 
         $payload = $this->version->create(

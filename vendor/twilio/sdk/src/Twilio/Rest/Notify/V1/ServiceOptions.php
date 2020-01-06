@@ -77,10 +77,12 @@ abstract class ServiceOptions {
      * @param bool $logEnabled Whether to log notifications
      * @param string $alexaSkillId Deprecated
      * @param string $defaultAlexaNotificationProtocolVersion Deprecated
+     * @param string $deliveryCallbackUrl Webhook URL
+     * @param bool $deliveryCallbackEnabled Enable delivery callbacks
      * @return UpdateServiceOptions Options builder
      */
-    public static function update($friendlyName = Values::NONE, $apnCredentialSid = Values::NONE, $gcmCredentialSid = Values::NONE, $messagingServiceSid = Values::NONE, $facebookMessengerPageId = Values::NONE, $defaultApnNotificationProtocolVersion = Values::NONE, $defaultGcmNotificationProtocolVersion = Values::NONE, $fcmCredentialSid = Values::NONE, $defaultFcmNotificationProtocolVersion = Values::NONE, $logEnabled = Values::NONE, $alexaSkillId = Values::NONE, $defaultAlexaNotificationProtocolVersion = Values::NONE) {
-        return new UpdateServiceOptions($friendlyName, $apnCredentialSid, $gcmCredentialSid, $messagingServiceSid, $facebookMessengerPageId, $defaultApnNotificationProtocolVersion, $defaultGcmNotificationProtocolVersion, $fcmCredentialSid, $defaultFcmNotificationProtocolVersion, $logEnabled, $alexaSkillId, $defaultAlexaNotificationProtocolVersion);
+    public static function update($friendlyName = Values::NONE, $apnCredentialSid = Values::NONE, $gcmCredentialSid = Values::NONE, $messagingServiceSid = Values::NONE, $facebookMessengerPageId = Values::NONE, $defaultApnNotificationProtocolVersion = Values::NONE, $defaultGcmNotificationProtocolVersion = Values::NONE, $fcmCredentialSid = Values::NONE, $defaultFcmNotificationProtocolVersion = Values::NONE, $logEnabled = Values::NONE, $alexaSkillId = Values::NONE, $defaultAlexaNotificationProtocolVersion = Values::NONE, $deliveryCallbackUrl = Values::NONE, $deliveryCallbackEnabled = Values::NONE) {
+        return new UpdateServiceOptions($friendlyName, $apnCredentialSid, $gcmCredentialSid, $messagingServiceSid, $facebookMessengerPageId, $defaultApnNotificationProtocolVersion, $defaultGcmNotificationProtocolVersion, $fcmCredentialSid, $defaultFcmNotificationProtocolVersion, $logEnabled, $alexaSkillId, $defaultAlexaNotificationProtocolVersion, $deliveryCallbackUrl, $deliveryCallbackEnabled);
     }
 }
 
@@ -278,7 +280,7 @@ class CreateServiceOptions extends Options {
                 $options[] = "$key=$value";
             }
         }
-        return '[Twilio.Notify.V1.CreateServiceOptions ' . implode(' ', $options) . ']';
+        return '[Twilio.Notify.V1.CreateServiceOptions ' . \implode(' ', $options) . ']';
     }
 }
 
@@ -315,7 +317,7 @@ class ReadServiceOptions extends Options {
                 $options[] = "$key=$value";
             }
         }
-        return '[Twilio.Notify.V1.ReadServiceOptions ' . implode(' ', $options) . ']';
+        return '[Twilio.Notify.V1.ReadServiceOptions ' . \implode(' ', $options) . ']';
     }
 }
 
@@ -343,8 +345,10 @@ class UpdateServiceOptions extends Options {
      * @param bool $logEnabled Whether to log notifications
      * @param string $alexaSkillId Deprecated
      * @param string $defaultAlexaNotificationProtocolVersion Deprecated
+     * @param string $deliveryCallbackUrl Webhook URL
+     * @param bool $deliveryCallbackEnabled Enable delivery callbacks
      */
-    public function __construct($friendlyName = Values::NONE, $apnCredentialSid = Values::NONE, $gcmCredentialSid = Values::NONE, $messagingServiceSid = Values::NONE, $facebookMessengerPageId = Values::NONE, $defaultApnNotificationProtocolVersion = Values::NONE, $defaultGcmNotificationProtocolVersion = Values::NONE, $fcmCredentialSid = Values::NONE, $defaultFcmNotificationProtocolVersion = Values::NONE, $logEnabled = Values::NONE, $alexaSkillId = Values::NONE, $defaultAlexaNotificationProtocolVersion = Values::NONE) {
+    public function __construct($friendlyName = Values::NONE, $apnCredentialSid = Values::NONE, $gcmCredentialSid = Values::NONE, $messagingServiceSid = Values::NONE, $facebookMessengerPageId = Values::NONE, $defaultApnNotificationProtocolVersion = Values::NONE, $defaultGcmNotificationProtocolVersion = Values::NONE, $fcmCredentialSid = Values::NONE, $defaultFcmNotificationProtocolVersion = Values::NONE, $logEnabled = Values::NONE, $alexaSkillId = Values::NONE, $defaultAlexaNotificationProtocolVersion = Values::NONE, $deliveryCallbackUrl = Values::NONE, $deliveryCallbackEnabled = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['apnCredentialSid'] = $apnCredentialSid;
         $this->options['gcmCredentialSid'] = $gcmCredentialSid;
@@ -357,6 +361,8 @@ class UpdateServiceOptions extends Options {
         $this->options['logEnabled'] = $logEnabled;
         $this->options['alexaSkillId'] = $alexaSkillId;
         $this->options['defaultAlexaNotificationProtocolVersion'] = $defaultAlexaNotificationProtocolVersion;
+        $this->options['deliveryCallbackUrl'] = $deliveryCallbackUrl;
+        $this->options['deliveryCallbackEnabled'] = $deliveryCallbackEnabled;
     }
 
     /**
@@ -502,6 +508,28 @@ class UpdateServiceOptions extends Options {
     }
 
     /**
+     * URL to send delivery status callback.
+     *
+     * @param string $deliveryCallbackUrl Webhook URL
+     * @return $this Fluent Builder
+     */
+    public function setDeliveryCallbackUrl($deliveryCallbackUrl) {
+        $this->options['deliveryCallbackUrl'] = $deliveryCallbackUrl;
+        return $this;
+    }
+
+    /**
+     * Callback configuration that enables delivery callbacks, default false
+     *
+     * @param bool $deliveryCallbackEnabled Enable delivery callbacks
+     * @return $this Fluent Builder
+     */
+    public function setDeliveryCallbackEnabled($deliveryCallbackEnabled) {
+        $this->options['deliveryCallbackEnabled'] = $deliveryCallbackEnabled;
+        return $this;
+    }
+
+    /**
      * Provide a friendly representation
      *
      * @return string Machine friendly representation
@@ -513,6 +541,6 @@ class UpdateServiceOptions extends Options {
                 $options[] = "$key=$value";
             }
         }
-        return '[Twilio.Notify.V1.UpdateServiceOptions ' . implode(' ', $options) . ']';
+        return '[Twilio.Notify.V1.UpdateServiceOptions ' . \implode(' ', $options) . ']';
     }
 }

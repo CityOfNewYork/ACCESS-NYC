@@ -33,11 +33,12 @@ class AssetVersionInstance extends InstanceResource {
      *
      * @param \Twilio\Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @param string $serviceSid The SID of the Service that the AssetVersion
+     * @param string $serviceSid The SID of the Service that the Asset Version
      *                           resource is associated with
      * @param string $assetSid The SID of the Asset resource that is the parent of
      *                         the asset version
-     * @param string $sid The SID that identifies the AssetVersion resource to fetch
+     * @param string $sid The SID that identifies the Asset Version resource to
+     *                    fetch
      * @return \Twilio\Rest\Serverless\V1\Service\Asset\AssetVersionInstance
      */
     public function __construct(Version $version, array $payload, $serviceSid, $assetSid, $sid = null) {
@@ -102,12 +103,12 @@ class AssetVersionInstance extends InstanceResource {
      * @throws TwilioException For unknown properties
      */
     public function __get($name) {
-        if (array_key_exists($name, $this->properties)) {
+        if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
 
-        if (property_exists($this, '_' . $name)) {
-            $method = 'get' . ucfirst($name);
+        if (\property_exists($this, '_' . $name)) {
+            $method = 'get' . \ucfirst($name);
             return $this->$method();
         }
 
@@ -124,6 +125,6 @@ class AssetVersionInstance extends InstanceResource {
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
-        return '[Twilio.Serverless.V1.AssetVersionInstance ' . implode(' ', $context) . ']';
+        return '[Twilio.Serverless.V1.AssetVersionInstance ' . \implode(' ', $context) . ']';
     }
 }

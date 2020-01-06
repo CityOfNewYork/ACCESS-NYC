@@ -36,10 +36,12 @@ abstract class ConversationOptions {
      * @param \DateTime $dateUpdated The date that this resource was last updated.
      * @param string $attributes An optional string metadata field you can use to
      *                           store any data you wish.
+     * @param string $messagingServiceSid The unique id of the SMS Service this
+     *                                    conversation belongs to.
      * @return UpdateConversationOptions Options builder
      */
-    public static function update($friendlyName = Values::NONE, $dateCreated = Values::NONE, $dateUpdated = Values::NONE, $attributes = Values::NONE) {
-        return new UpdateConversationOptions($friendlyName, $dateCreated, $dateUpdated, $attributes);
+    public static function update($friendlyName = Values::NONE, $dateCreated = Values::NONE, $dateUpdated = Values::NONE, $attributes = Values::NONE, $messagingServiceSid = Values::NONE) {
+        return new UpdateConversationOptions($friendlyName, $dateCreated, $dateUpdated, $attributes, $messagingServiceSid);
     }
 }
 
@@ -130,7 +132,7 @@ class CreateConversationOptions extends Options {
                 $options[] = "$key=$value";
             }
         }
-        return '[Twilio.Conversations.V1.CreateConversationOptions ' . implode(' ', $options) . ']';
+        return '[Twilio.Conversations.V1.CreateConversationOptions ' . \implode(' ', $options) . ']';
     }
 }
 
@@ -141,12 +143,15 @@ class UpdateConversationOptions extends Options {
      * @param \DateTime $dateUpdated The date that this resource was last updated.
      * @param string $attributes An optional string metadata field you can use to
      *                           store any data you wish.
+     * @param string $messagingServiceSid The unique id of the SMS Service this
+     *                                    conversation belongs to.
      */
-    public function __construct($friendlyName = Values::NONE, $dateCreated = Values::NONE, $dateUpdated = Values::NONE, $attributes = Values::NONE) {
+    public function __construct($friendlyName = Values::NONE, $dateCreated = Values::NONE, $dateUpdated = Values::NONE, $attributes = Values::NONE, $messagingServiceSid = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['dateCreated'] = $dateCreated;
         $this->options['dateUpdated'] = $dateUpdated;
         $this->options['attributes'] = $attributes;
+        $this->options['messagingServiceSid'] = $messagingServiceSid;
     }
 
     /**
@@ -195,6 +200,18 @@ class UpdateConversationOptions extends Options {
     }
 
     /**
+     * The unique id of the [SMS Service](https://www.twilio.com/docs/sms/services/api) this conversation belongs to.
+     *
+     * @param string $messagingServiceSid The unique id of the SMS Service this
+     *                                    conversation belongs to.
+     * @return $this Fluent Builder
+     */
+    public function setMessagingServiceSid($messagingServiceSid) {
+        $this->options['messagingServiceSid'] = $messagingServiceSid;
+        return $this;
+    }
+
+    /**
      * Provide a friendly representation
      *
      * @return string Machine friendly representation
@@ -206,6 +223,6 @@ class UpdateConversationOptions extends Options {
                 $options[] = "$key=$value";
             }
         }
-        return '[Twilio.Conversations.V1.UpdateConversationOptions ' . implode(' ', $options) . ']';
+        return '[Twilio.Conversations.V1.UpdateConversationOptions ' . \implode(' ', $options) . ']';
     }
 }

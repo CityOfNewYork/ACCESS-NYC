@@ -12,9 +12,6 @@ namespace Twilio\Rest\Verify\V2\Service;
 use Twilio\Options;
 use Twilio\Values;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 abstract class RateLimitOptions {
     /**
      * @param string $description Description of this Rate Limit
@@ -64,7 +61,7 @@ class CreateRateLimitOptions extends Options {
                 $options[] = "$key=$value";
             }
         }
-        return '[Twilio.Verify.V2.CreateRateLimitOptions ' . implode(' ', $options) . ']';
+        return '[Twilio.Verify.V2.CreateRateLimitOptions ' . \implode(' ', $options) . ']';
     }
 }
 
@@ -99,6 +96,6 @@ class UpdateRateLimitOptions extends Options {
                 $options[] = "$key=$value";
             }
         }
-        return '[Twilio.Verify.V2.UpdateRateLimitOptions ' . implode(' ', $options) . ']';
+        return '[Twilio.Verify.V2.UpdateRateLimitOptions ' . \implode(' ', $options) . ']';
     }
 }

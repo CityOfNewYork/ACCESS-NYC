@@ -6,20 +6,16 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Whoops\\Handler\\' => array($vendorDir . '/whoops/soap/src'),
-    'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
-    'UmutPHP\\WPVulnerabilityCheck\\' => array($vendorDir . '/umutphp/wp-vulnerability-check/src'),
     'Twilio\\' => array($vendorDir . '/twilio/sdk/src/Twilio'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
-    'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'Soundasleep\\' => array($vendorDir . '/soundasleep/html2text/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'PhilippBaschke\\ACFProInstaller\\' => array($vendorDir . '/philippbaschke/acf-pro-installer/src/ACFProInstaller'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
     'Illuminate\\Support\\' => array($vendorDir . '/illuminate/support'),
     'Illuminate\\Encryption\\' => array($vendorDir . '/illuminate/encryption'),

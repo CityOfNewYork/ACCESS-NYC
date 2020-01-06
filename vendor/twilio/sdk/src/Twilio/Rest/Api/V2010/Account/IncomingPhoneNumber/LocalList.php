@@ -30,7 +30,7 @@ class LocalList extends ListResource {
         // Path Solution
         $this->solution = array('accountSid' => $accountSid, );
 
-        $this->uri = '/Accounts/' . rawurlencode($accountSid) . '/IncomingPhoneNumbers/Local.json';
+        $this->uri = '/Accounts/' . \rawurlencode($accountSid) . '/IncomingPhoneNumbers/Local.json';
     }
 
     /**
@@ -77,7 +77,7 @@ class LocalList extends ListResource {
      * @return LocalInstance[] Array of results
      */
     public function read($options = array(), $limit = null, $pageSize = null) {
-        return iterator_to_array($this->stream($options, $limit, $pageSize), false);
+        return \iterator_to_array($this->stream($options, $limit, $pageSize), false);
     }
 
     /**
@@ -157,6 +157,11 @@ class LocalList extends ListResource {
             'VoiceUrl' => $options['voiceUrl'],
             'IdentitySid' => $options['identitySid'],
             'AddressSid' => $options['addressSid'],
+            'EmergencyStatus' => $options['emergencyStatus'],
+            'EmergencyAddressSid' => $options['emergencyAddressSid'],
+            'TrunkSid' => $options['trunkSid'],
+            'VoiceReceiveMode' => $options['voiceReceiveMode'],
+            'BundleSid' => $options['bundleSid'],
         ));
 
         $payload = $this->version->create(

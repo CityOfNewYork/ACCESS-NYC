@@ -16,9 +16,6 @@ use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class VerificationList extends ListResource {
     /**
      * Construct the VerificationList
@@ -34,7 +31,7 @@ class VerificationList extends ListResource {
         // Path Solution
         $this->solution = array('serviceSid' => $serviceSid, );
 
-        $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Verifications';
+        $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Verifications';
     }
 
     /**
