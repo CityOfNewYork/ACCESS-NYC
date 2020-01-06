@@ -45,12 +45,8 @@
 ################################
 /wp-content/plugins/akismet/
 /wp-content/plugins/akismet/*
-/wp-content/themes/twentysixteen/
-/wp-content/themes/twentysixteen/*
-/wp-content/themes/twentyfifteen/
-/wp-content/themes/twentyfifteen/*
-/wp-content/themes/twentyseventeen/
-/wp-content/themes/twentyseventeen/*
+/wp-content/themes/*twenty*/
+/wp-content/themes/*twenty*/*
 /wp-content/plugins/hello.php
 
 # WP-Engine Specific #
