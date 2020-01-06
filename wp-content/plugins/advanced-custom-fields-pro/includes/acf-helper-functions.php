@@ -1,5 +1,35 @@
 <?php 
 
+/*
+ * acf_is_empty
+ *
+ * Returns true if the value provided is considered "empty". Allows numbers such as 0.
+ *
+ * @date	6/7/16
+ * @since	5.4.0
+ *
+ * @param	mixed $var The value to check.
+ * @return	bool
+ */
+function acf_is_empty( $var ) {
+	return ( !$var && !is_numeric($var) );
+}
+
+/**
+ * acf_not_empty
+ *
+ * Returns true if the value provided is considered "not empty". Allows numbers such as 0.
+ *
+ * @date	15/7/19
+ * @since	5.8.1
+ *
+ * @param	mixed $var The value to check.
+ * @return	bool
+ */
+function acf_not_empty( $var ) {
+	return ( $var || is_numeric($var) );
+}
+
 /**
  * acf_uniqid
  *
@@ -47,7 +77,7 @@ function acf_merge_attributes( $array1, $array2 ) {
 		}
 	}
 	
-	// Return
+	// Return.
 	return $array3;
 }
 
@@ -285,4 +315,73 @@ function acf_maybe_idval( $value ) {
  */
 function acf_numval( $value ) {
 	return ( intval($value) == floatval($value) ) ? intval($value) : floatval($value);
+}
+
+/**
+ * acf_idify
+ *
+ * Returns an id attribute friendly string.
+ *
+ * @date	24/12/17
+ * @since	5.6.5
+ *
+ * @param	string $str The string to convert.
+ * @return	string
+ */
+function acf_idify( $str = '' ) {
+	return str_replace(array('][', '[', ']'), array('-', '-', ''), strtolower($str));
+}
+
+/**
+ * acf_slugify
+ *
+ * Returns a slug friendly string.
+ *
+ * @date	24/12/17
+ * @since	5.6.5
+ *
+ * @param	string $str The string to convert.
+ * @return	string
+ */
+function acf_slugify( $str = '' ) {
+	return str_replace(array('_', '/', ' '), '-', strtolower($str));
+}
+
+/**
+ * acf_punctify
+ *
+ * Returns a string with correct full stop puctuation.
+ *
+ * @date	12/7/19
+ * @since	5.8.2
+ *
+ * @param	string $str The string to format.
+ * @return	string
+ */
+function acf_punctify( $str = '' ) {
+	return trim($str, '.') . '.';
+}
+
+/**
+ * acf_did
+ *
+ * Returns true if ACF already did an event.
+ *
+ * @date	30/8/19
+ * @since	5.8.1
+ *
+ * @param	string $name The name of the event.
+ * @return	bool
+ */
+function acf_did( $name ) {
+	
+	// Return true if already did the event (preventing event).
+	if( acf_get_data("acf_did_$name") ) {
+		return true;
+	
+	// Otherwise, update store and return false (alowing event).
+	} else {
+		acf_set_data("acf_did_$name", true);
+		return false;
+	}
 }

@@ -233,6 +233,10 @@ function acf_validate_field( $field = array() ) {
 		//'attributes'		=> array()
 	));
 	
+	// Convert types.
+	$field['ID'] = (int) $field['ID'];
+	$field['menu_order'] = (int) $field['menu_order'];
+	
 	// Add backwards compatibility for wrapper attributes.
 	// Todo: Remove need for this.
 	$field['wrapper'] = wp_parse_args($field['wrapper'], array(
@@ -369,7 +373,6 @@ function acf_get_fields( $parent ) {
 	 * @param	array $fields The array of fields.
 	 */
 	$fields = apply_filters( 'acf/load_fields', $fields, $parent );
-	$fields = apply_filters( 'acf/get_fields', $fields, $parent );
 	
 	// Return fields
 	return $fields;	
