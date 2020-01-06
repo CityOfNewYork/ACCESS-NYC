@@ -2,10 +2,13 @@
 
 class WPML_Package_Translation_Schema {
 
+	const OPTION_NAME      = 'wpml-package-translation-db-updates-run';
+	const REQUIRED_VERSION = '0.0.2';
+
 	private static $table_name;
 
 	static function run_update() {
-		$updates_run = get_option( 'wpml-package-translation-db-updates-run', array() );
+		$updates_run = get_option( self::OPTION_NAME, array() );
 
 		if ( defined( 'WPML_PT_VERSION_DEV' ) ) {
 			delete_option( 'wpml-package-translation-string-packages-table-updated' );
@@ -14,7 +17,7 @@ class WPML_Package_Translation_Schema {
 			}
 		}
 
-		if ( ! in_array( '0.0.2', $updates_run ) ) {
+		if ( ! in_array( self::REQUIRED_VERSION, $updates_run ) ) {
 			// We need to make sure we build everything for 0.0.2 because users may
 			// only be updating the string translation plugin and may not do an
 			// activation.
@@ -23,9 +26,9 @@ class WPML_Package_Translation_Schema {
 			self::fix_icl_string_packages_ID_column();
 			self::build_icl_strings_columns_if_required();
 
-			$updates_run[ ] = '0.0.2';
+			$updates_run[ ] = self::REQUIRED_VERSION;
 
-			update_option( 'wpml-package-translation-db-updates-run', $updates_run );
+			update_option( self::OPTION_NAME, $updates_run );
 		}
 
 	}

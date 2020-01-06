@@ -113,14 +113,10 @@ class WPML_ST_Theme_Plugin_Scan_Dir_Ajax {
 	 * @return array
 	 */
 	private function get_folders_to_ignore() {
-		$folders = array(
-			WPML_ST_PATH . '/tests/',
-			WPML_PLUGIN_PATH . '/tests/',
-		);
-
-		if ( defined( 'WPML_TM_PATH' ) ) {
-			$folder[] = WPML_TM_PATH . '/tests/';
-		}
+		$folders = [
+			WPML_ST_Scan_Dir::PLACEHOLDERS_ROOT . '/node_modules',
+			WPML_ST_Scan_Dir::PLACEHOLDERS_ROOT . '/tests',
+		];
 
 		return $folders;
 	}

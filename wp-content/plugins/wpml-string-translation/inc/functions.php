@@ -1,5 +1,14 @@
 <?php
-/** @todo: Move the functions code to classes and keep the functions as wrappers only */
+/**
+ * String translation common functions.
+ *
+ * @package WPML\ST
+ * @todo    : Move the functions code to classes and keep the functions as wrappers only
+ */
+
+use function WPML\Container\make;
+use WPML\ST\Gettext\Hooks;
+use WPML\ST\Gettext\HooksFactory;
 
 add_action( 'plugins_loaded', 'icl_st_init' );
 
@@ -11,10 +20,6 @@ function icl_st_init(){
     add_action('icl_update_active_languages', 'icl_update_string_status_all');
     add_action('update_option_blogname', 'icl_st_update_blogname_actions',5,2);
     add_action('update_option_blogdescription', 'icl_st_update_blogdescription_actions',5,2);
-
-    if ( get_magic_quotes_gpc() && isset($_GET['page']) && $_GET['page'] === WPML_ST_FOLDER . '/menu/string-translation.php'){
-        $_POST = stripslashes_deep( $_POST );
-    }
 
     if(!isset($sitepress_settings['existing_content_language_verified']) || !$sitepress_settings['existing_content_language_verified']){
         return;
@@ -79,8 +84,12 @@ function icl_st_init(){
         exit(0);
     }
 
-	$blog_name_and_desc_hooks = new WPML_ST_Blog_Name_And_Description_Hooks( $sitepress );
-	$blog_name_and_desc_hooks->init_hooks();
+	/**
+	 * @todo: Move this class to the standard hooks loader
+	 * @var WPML_ST_Blog_Name_And_Description_Hooks $blog_name_and_desc_hooks
+	 */
+	$blog_name_and_desc_hooks = make( WPML_ST_Blog_Name_And_Description_Hooks::class );
+	$blog_name_and_desc_hooks->add_hooks();
 	add_filter('widget_title', 'icl_sw_filters_widget_title', 0);  //highest priority
 	add_filter('widget_text', 'icl_sw_filters_widget_text', 0); //highest priority
 
@@ -136,7 +145,7 @@ function wpml_st_init_register_widget_titles(){
         }
 
         if($w_title){
-            icl_register_string('Widgets', 'widget title - ' . md5($w_title), $w_title);
+            icl_register_string( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget title - ' . md5( $w_title ), $w_title );
         }
     }
 }
@@ -233,36 +242,34 @@ function wpml_register_single_string_action( $context, $name, $value, $allow_emp
  */
 add_action('wpml_register_single_string', 'wpml_register_single_string_action', 10, 5);
 
+/**
+ * @param string|array $context
+ * @param string       $name
+ * @param bool         $value
+ * @param bool         $allow_empty_value
+ * @param null|bool    $has_translation
+ * @param null|string  $target_lang
+ *
+ * @return bool|string
+ */
 function icl_translate( $context, $name, $value = false, $allow_empty_value = false, &$has_translation = null, $target_lang = null ) {
-	static $lock = false;
-	if ( $lock ) {
-		return $value;
-	}
-	$lock = true;
+	static $translate_wpml_string;
 
-	$is_requested_blog = ! ( is_multisite() && ms_is_switched() ) || (int)$GLOBALS['blog_id'] === (int)end( $GLOBALS['_wp_switched_stack'] );
-
-	if ( $is_requested_blog ) {
-		if ( is_translated_admin_string( $name ) ) {
-			$value = wpml_get_string_current_translation( $value, $context, $name );
-		} else {
-			/** @var WPML_ST_Gettext_Hooks $st_gettext_hooks */
-			global $st_gettext_hooks;
-
-			$filter = $st_gettext_hooks->get_filter( $target_lang, $name );
-				
-			if ( $filter ) {
-				$new_value = $filter->translate_by_name_and_context( $value, $name, $context, $has_translation );
-				if ( $has_translation ) {
-					$value = $new_value;
-				}
-			}
-		}
+	if ( ! $translate_wpml_string ) {
+		/** @var \WPML\ST\TranslateWpmlString $translate_wpml_string */
+		$translate_wpml_string = \WPML\Container\make( \WPML\ST\TranslateWpmlString::class );
+		$translate_wpml_string->init();
 	}
 
-	$lock = false;
+	return $translate_wpml_string->translate( $context, $name, $value, $allow_empty_value, $has_translation, $target_lang );
+}
 
-	return $value;
+/**
+ * @return bool
+ */
+function wpml_st_is_requested_blog() {
+	return ! ( is_multisite() && ms_is_switched() )
+		   || (int)$GLOBALS['blog_id'] === (int)end( $GLOBALS['_wp_switched_stack'] );
 }
 
 /**
@@ -334,27 +341,79 @@ function icl_update_string_status_all(){
     $updater->run();
 }
 
-function icl_unregister_string($context, $name){
-    global $wpdb;
-    $string_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$wpdb->prefix}icl_strings
-                                                WHERE context=%s AND name=%s",
-                                               $context, $name));
-    if($string_id){
-        $wpdb->query( $wpdb->prepare("DELETE FROM {$wpdb->prefix}icl_strings WHERE id=%d", $string_id));
-        $wpdb->query( $wpdb->prepare("DELETE FROM {$wpdb->prefix}icl_string_translations WHERE string_id=%d", $string_id));
-        $wpdb->query( $wpdb->prepare("DELETE FROM {$wpdb->prefix}icl_string_positions WHERE string_id=%d", $string_id));
+/**
+ * @param string $context
+ * @param string $name
+ */
+function icl_unregister_string( $context, $name ) {
+	global $wpdb;
+
+	$string_id = $wpdb->get_var(
+		$wpdb->prepare( "
+				SELECT id FROM {$wpdb->prefix}icl_strings
+            	WHERE context=%s AND name=%s
+        	",
+			$context,
+			$name
+		)
+	);
+
+	if ( $string_id ) {
+		/**
+		 * This action is is fired before several strings are deleted at once.
+		 *
+		 * @param array Here containing only the single string that is deleted.
+		 *
+		 * @since 3.0.0
+		 *
+		 */
+		do_action( 'wpml_st_before_remove_strings', [ $string_id ] );
+
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_strings WHERE id=%d", $string_id ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_string_translations WHERE string_id=%d",
+		                              $string_id ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_string_positions WHERE string_id=%d",
+		                              $string_id ) );
     }
-    do_action('icl_st_unregister_string', $string_id);
+
+	/**
+	 * This action is is fired when a string is deleted.
+	 *
+	 * @param array $string_id
+	 */
+    do_action( 'icl_st_unregister_string', $string_id );
 }
 
-function wpml_unregister_string_multi($arr){
-    global $wpdb;
-    $str = wpml_prepare_in( $arr, '%d' );
-    $wpdb->query("
-        DELETE s.*, t.* FROM {$wpdb->prefix}icl_strings s LEFT JOIN {$wpdb->prefix}icl_string_translations t ON s.id = t.string_id
-        WHERE s.id IN ({$str})");
-    $wpdb->query("DELETE FROM {$wpdb->prefix}icl_string_positions WHERE string_id IN ({$str})");
-    do_action('icl_st_unregister_string_multi', $arr);
+/**
+ * @param array $string_ids
+ */
+function wpml_unregister_string_multi( array $string_ids ) {
+	global $wpdb;
+
+	/**
+	 * This action is is fired before several strings are deleted at once.
+	 *
+	 * @param array $string_ids
+	 *
+	 * @since 3.0.0
+	 *
+	 */
+	do_action( 'wpml_st_before_remove_strings', $string_ids );
+
+	$str = wpml_prepare_in( $string_ids, '%d' );
+	$wpdb->query( "
+		DELETE s.*, t.* FROM {$wpdb->prefix}icl_strings s
+		LEFT JOIN {$wpdb->prefix}icl_string_translations t ON s.id = t.string_id
+        WHERE s.id IN ({$str})
+    " );
+	$wpdb->query( "DELETE FROM {$wpdb->prefix}icl_string_positions WHERE string_id IN ({$str})" );
+
+	/**
+	 * This action is is fired when several strings are deleted at once.
+	 *
+	 * @param array $string_ids
+	 */
+	do_action( 'icl_st_unregister_string_multi', $string_ids );
 }
 
 /**
@@ -425,17 +484,14 @@ function icl_t( $context, $name, $original_value = false, &$has_translation = nu
 }
 
 /**
- * @param string $name
+ * @deprecated since WPML ST 3.0.0
  *
- * Checks whether a given string is to be translated in the Admin back-end.
- * Currently only tagline and title of a site are to be translated.
- * All other admin strings are to always be displayed in the user admin language.
+ * @param string $name
  *
  * @return bool
  */
 function is_translated_admin_string( $name ) {
-
-	return in_array( $name, array( 'Tagline', 'Blog Title' ), true );
+	return WPML_ST_Blog_Name_And_Description_Hooks::is_string( $name );
 }
 
 /**
@@ -599,102 +655,54 @@ function icl_get_strings_tracked_in_pages($string_translations){
 }
 
 function icl_sw_filters_widget_title($val){
-	$val = icl_translate('Widgets', 'widget title - ' . md5($val) , $val);
+	$val = icl_translate( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget title - ' . md5( $val ) , $val );
   return $val;
 }
 
 function icl_sw_filters_widget_text($val){
-	$val = icl_translate('Widgets', 'widget body - ' . md5($val) , $val);
+	$val = icl_translate( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget body - ' . md5( $val ) , $val );
   return $val;
 }
 
 /**
+ * @deprecated since WPML ST 3.0.0
+ *
  * @param string $translation String This parameter is not important to the filter since we filter before other filters.
  * @param string $text
  * @param string|array $domain
  * @param bool|string $name
  *
  * @return string
+ * @throws Auryn\InjectionException Auryn Exception.
  */
 function icl_sw_filters_gettext( $translation, $text, $domain, $name = false ) {
-	/** @var WPML_ST_Gettext_Hooks $st_gettext_hooks */
-	global $sitepress, $sitepress_settings, $st_gettext_hooks, $icl_language_switched;
+	static $gettext_hooks;
 
-	static $cache = array();
-
-	if ( is_array( $domain ) ) {
-		$domain_key = implode( '', $domain );
-	} else {
-		$domain_key = $domain;
+	if ( null === $gettext_hooks ) {
+		/**
+		 * @var	HooksFactory $factory
+		 * @var Hooks|null   $gettext_hooks
+		 */
+		$factory       = WPML\Container\make( HooksFactory::class );
+		$gettext_hooks = $factory->create();
+		$gettext_hooks = $gettext_hooks ?: false;
 	}
 
-	static $lang = null;
-	if ( ! $lang || ( isset( $icl_language_switched ) && $icl_language_switched ) ) {
-		$lang = $sitepress->get_current_language();
-	}
-	$key  = $translation . $text . $domain_key . $name . $lang;
-
-	if ( isset( $cache[ $key ] ) ) {
-		return $cache[ $key ];
-	}
-
-	if ( ! defined( 'ICL_STRING_TRANSLATION_DYNAMIC_CONTEXT' ) ) {
-		define( 'ICL_STRING_TRANSLATION_DYNAMIC_CONTEXT', 'wpml_string' );
-	}
-
-	if ( icl_sw_must_track_strings( $sitepress_settings ) ) {
-		// track strings if the user has enabled this and if it's and editor or admin
-		icl_st_track_string( $text, $domain, ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_PAGE );
-	}
-
-	if ( $domain == ICL_STRING_TRANSLATION_DYNAMIC_CONTEXT ) {
-		// register strings if the user has used ICL_STRING_TRANSLATION_DYNAMIC_CONTEXT (or it's value) as a text domain
-		icl_register_string( $domain, $name, $text );
-	}
-
-	if ( ! $name ) {
-		$name = md5( $text );
-	}
-
-	$has_translation = null;
-	$ret_translation = null;
-
-	if ( $st_gettext_hooks->should_gettext_filters_be_turned_on() ) {
-		$ret_translation = icl_translate( $domain, $name, $text, false, $has_translation );
-	}
-
-	if ( ! $has_translation ) {
-		$ret_translation = $translation;
-	}
-
-	if ( isset( $_GET['icl_string_track_value'], $_GET['icl_string_track_context'] )
-	     && stripslashes( $_GET['icl_string_track_context'] ) === $domain
-	     && stripslashes( $_GET['icl_string_track_value'] ) === $text ) {
-		$ret_translation = '<span style="background-color:' . esc_attr( $sitepress_settings['st']['hl_color'] ) . '">' . $ret_translation . '</span>';
-	}
-
-	$cache[ $key ] = $ret_translation;
-
-	return $ret_translation;
+	return $gettext_hooks ? $gettext_hooks->gettext_filter( $translation, $text, $domain, $name ) : $translation;
 }
 
 /**
+ * @deprecated since WPML ST 3.0.0
+ *
  * @param $sitepress_settings
  *
  * @return bool
  */
 function icl_sw_must_track_strings( $sitepress_settings ) {
-	static $checking_if_must_track_strings;
-	$found  = false;
-	$result = wp_cache_get( 'must_track_strings', 'wpml_st', false, $found );
-	if ( ! $found && ! $checking_if_must_track_strings && did_action( 'after_setup_theme' ) ) {
-	    $checking_if_must_track_strings = true;
-		$result = isset( $sitepress_settings['st']['track_strings'] ) && $sitepress_settings['st']['track_strings'] && current_user_can( 'edit_others_posts' ) && ! is_admin();
-		wp_cache_set( 'must_track_strings', $result, 'wpml_st' );
-	    $checking_if_must_track_strings = false;
-	}
+	/** @var Hooks $gettext_hooks */
+	$gettext_hooks = WPML\Container\make( Hooks::class );
 
-	return $result;
+	return $gettext_hooks->must_track_strings();
 }
 
 function icl_st_track_string( $text, $domain, $kind = ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_PAGE ) {
@@ -708,7 +716,7 @@ function icl_st_track_string( $text, $domain, $kind = ICL_STRING_TRANSLATION_STR
     static $string_scanner = null;
     if ( ! $string_scanner ) {
         try {
-            $wp_filesystem = wp_filesystem_init();
+            $wp_filesystem = wpml_get_filesystem_direct();
             $string_scanner = new WPML_String_Scanner( $wp_filesystem, new WPML_ST_File_Hashing() );
         } catch( Exception $e ) {
             trigger_error($e->getMessage(), E_USER_WARNING);
@@ -720,7 +728,18 @@ function icl_st_track_string( $text, $domain, $kind = ICL_STRING_TRANSLATION_STR
     }
 }
 
-function icl_sw_filters_gettext_with_context($translation, $text, $_gettext_context, $domain){
+/**
+ * @deprecated since WPML ST 3.0.0
+ *
+ * @param string $translation
+ * @param string $text
+ * @param string $_gettext_context
+ * @param string $domain
+ *
+ * @return string
+ * @throws Auryn\InjectionException Auryn Exception.
+ */
+function icl_sw_filters_gettext_with_context( $translation, $text, $_gettext_context, $domain ){
     if ( $_gettext_context ) {
         return icl_sw_filters_gettext( $translation, $text, array( 'domain' => $domain, 'context' => $_gettext_context ) );
     } else {
@@ -728,16 +747,43 @@ function icl_sw_filters_gettext_with_context($translation, $text, $_gettext_cont
     }
 }
 
-function icl_sw_filters_ngettext($translation, $single, $plural, $number, $domain, $_gettext_context = false){
-    if($number == 1){
-        return icl_sw_filters_gettext_with_context($translation, $single, $_gettext_context, $domain);
+/**
+ * @deprecated since WPML ST 3.0.0
+ *
+ * @param string       $translation
+ * @param string       $single
+ * @param string       $plural
+ * @param string       $number
+ * @param string|array $domain
+ * @param string|false $_gettext_context
+ *
+ * @return string
+ * @throws Auryn\InjectionException Auryn Exception.
+ */
+function icl_sw_filters_ngettext( $translation, $single, $plural, $number, $domain, $_gettext_context = false ) {
+    if ( $number == 1 ){
+        return icl_sw_filters_gettext_with_context( $translation, $single, $_gettext_context, $domain );
     }else{
-        return icl_sw_filters_gettext_with_context($translation, $plural, $_gettext_context, $domain);
+        return icl_sw_filters_gettext_with_context( $translation, $plural, $_gettext_context, $domain );
     }
 }
 
-function icl_sw_filters_nxgettext($translation, $single, $plural, $number, $_gettext_context, $domain){
-    return icl_sw_filters_ngettext($translation, $single, $plural, $number, $domain, $_gettext_context);
+/**
+ * @deprecated since WPML ST 3.0.0
+ *
+ * @param string $translation
+ * @param string $single
+ * @param string $plural
+ * @param string $number
+ * @param string $_gettext_context
+ * @param string $domain
+ *
+ * @return string
+ * @throws Auryn\InjectionException Auryn Exception.
+ *
+ */
+function icl_sw_filters_nxgettext( $translation, $single, $plural, $number, $_gettext_context, $domain ) {
+    return icl_sw_filters_ngettext( $translation, $single, $plural, $number, $domain, $_gettext_context );
 }
 
 /**
@@ -775,10 +821,10 @@ function icl_st_update_widget_title_actions($old_options, $new_options){
     foreach($new_options as $k=>$o){
         if(isset($o['title'])){
             if(isset($old_options[$k]['title']) && $old_options[$k]['title']){
-                icl_st_update_string_actions('Widgets', 'widget title - ' . md5($old_options[$k]['title']), $old_options[$k]['title'], $o['title']);
+                icl_st_update_string_actions( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget title - ' . md5( $old_options[ $k ]['title'] ), $old_options[ $k ]['title'], $o['title'] );
             }else{
                 if($new_options[$k]['title']){
-                    icl_register_string('Widgets', 'widget title - ' . md5($new_options[$k]['title']), $new_options[$k]['title']);
+                    icl_register_string( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget title - ' . md5( $new_options[ $k ]['title'] ), $new_options[ $k ]['title'] );
                 }
             }
         }
@@ -796,14 +842,14 @@ function icl_st_update_text_widgets_actions($old_options, $new_options){
         foreach($widget_text as $k=>$w){
             if(isset($old_options[$k]['text']) && trim($old_options[$k]['text']) && $old_options[$k]['text'] != $w['text']){
                 $old_md5 = md5($old_options[$k]['text']);
-                $string = $wpdb->get_row($wpdb->prepare("SELECT id, value, status FROM {$wpdb->prefix}icl_strings WHERE context=%s AND name=%s", 'Widgets', 'widget body - ' . $old_md5));
+                $string = $wpdb->get_row($wpdb->prepare( "SELECT id, value, status FROM {$wpdb->prefix}icl_strings WHERE context=%s AND name=%s", WP_Widget_Text_Icl::STRING_DOMAIN, 'widget body - ' . $old_md5 ) );
                 if ($string) {
-                    icl_st_update_string_actions('Widgets', 'widget body - ' . $old_md5, $old_options[$k]['text'], $w['text']);
+                    icl_st_update_string_actions( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget body - ' . $old_md5, $old_options[ $k ]['text'], $w['text'] );
                 } else {
-                    icl_register_string('Widgets', 'widget body - ' . md5($w['text']), $w['text']);
+                    icl_register_string( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget body - ' . md5($w['text']), $w['text']);
                 }
             }elseif(isset($new_options[$k]['text']) && (!isset($old_options[$k]['text']) || $old_options[$k]['text']!=$new_options[$k]['text'])){
-                icl_register_string('Widgets', 'widget body - ' . md5($new_options[$k]['text']), $new_options[$k]['text']);
+                icl_register_string( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget body - ' . md5( $new_options[ $k ]['text'] ), $new_options[ $k ]['text'] );
             }
         }
     }
@@ -992,29 +1038,6 @@ function icl_st_admin_notices_string_updated() {
 			<p><?php _e( 'Strings translations updated', 'wpml-string-translation' ); ?></p>
 	</div>
 	<?php
-}
-
-function wp_filesystem_init() {
-    add_filter( 'filesystem_method', 'set_direct_fs_method', PHP_INT_MAX );
-    return get_wp_filesystem();
-}
-
-function get_wp_filesystem() {
-    global $wp_filesystem;
-
-    if ( ! function_exists( 'WP_Filesystem' ) ) {
-        require_once( ABSPATH . 'wp-admin/includes/file.php' );
-    }
-
-    if ( ! WP_Filesystem() ) {
-        throw new RuntimeException( __( 'Unable to get filesystem access', 'wpml-string-translation' ) );
-    }
-
-    return $wp_filesystem;
-}
-
-function set_direct_fs_method() {
-    return 'direct';
 }
 
 /**

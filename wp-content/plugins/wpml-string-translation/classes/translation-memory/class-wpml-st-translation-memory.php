@@ -30,7 +30,7 @@ class WPML_ST_Translation_Memory implements IWPML_Action {
 			isset( $_POST['strings'], $_POST['languages']['source'], $_POST['languages']['target'] )
 		) {
 			$args = array(
-				'strings'     => $_POST['strings'],
+				'strings'     => wp_unslash( $_POST['strings'] ),
 				'source_lang' => $_POST['languages']['source'],
 				'target_lang' => $_POST['languages']['target'],
 			);

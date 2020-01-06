@@ -10,10 +10,11 @@ class WPML_ST_Upgrade_Db_Cache_Command implements IWPML_St_Upgrade_Command {
 	private $icl_string_pages_sql_prototype = '
 	CREATE TABLE IF NOT EXISTS `%sicl_string_pages` (
 	  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-	  `string_id` bigint(20) NOT NULL,
-	  `url_id` bigint(20) NOT NULL,
+	  `string_id` bigint(20) unsigned NOT NULL,
+	  `url_id` bigint(20) unsigned NOT NULL,
 	  PRIMARY KEY (`id`),
-	  KEY `string_to_url_id` (`url_id`)
+	  KEY `string_to_url_id` (`url_id`),
+	  INDEX ( `string_id` )
 		)
 	';
 
@@ -70,7 +71,7 @@ class WPML_ST_Upgrade_Db_Cache_Command implements IWPML_St_Upgrade_Command {
 	 * @return string
 	 */
 	public static function get_command_id() {
-		return __CLASS__ . '_2.4.2_1';
+		return __CLASS__ . '_2.4.2_2';
 	}
 
 

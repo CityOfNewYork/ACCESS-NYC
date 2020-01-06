@@ -428,6 +428,8 @@ function _potx_find_t_calls_with_context(
 ) {
 	global $_potx_tokens, $_potx_lookup;
 
+	$filter_by_domain = isset( $_GET['domain'] ) ? filter_var( $_GET['domain'], FILTER_SANITIZE_STRING ) : null;
+
 	// Lookup tokens by function name.
 	if ( isset( $_potx_lookup[ $function_name ] ) ) {
 		foreach ( $_potx_lookup[ $function_name ] as $ti ) {
@@ -497,7 +499,11 @@ function _potx_find_t_calls_with_context(
 							$context = false;
 						}
 					}
-					if ( $domain !== POTX_CONTEXT_ERROR && is_callable( $save_callback, false, $callback_name ) ) {
+					if (
+						$domain !== POTX_CONTEXT_ERROR &&
+						( ! $filter_by_domain || $filter_by_domain === $domain ) &&
+						is_callable( $save_callback, false, $callback_name )
+					) {
 						// Only save if there was no error in context parsing.
 						call_user_func( $save_callback,
 										_potx_format_quoted_string( $mid[ 1 ] ),

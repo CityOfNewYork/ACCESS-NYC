@@ -471,8 +471,10 @@ function icl_st_ow_export_close(){
 }
 
 function icl_st_pop_download(){
+    var file = jQuery(this).data('file');
+    var domain = jQuery(this).data('domain');
 
-    location.href = ajaxurl + "?action=icl_st_pop_download&file="+jQuery(this).attr('href').substr(1);
+    location.href = ajaxurl + "?action=icl_st_pop_download&file=" + file + "&domain=" + domain;
 
     return false;
 }

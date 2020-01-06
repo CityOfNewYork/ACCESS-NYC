@@ -14,16 +14,9 @@ class WPML_ST_Theme_Plugin_Localization_Resources {
 			WPML_ST_VERSION
 		);
 
-		wp_enqueue_script(
-			'wpml-enable-fastest-settings',
-			WPML_ST_URL . '/res/js/performance/enable-fastest-settings.js',
-			array( 'jquery' ),
-			WPML_ST_VERSION
-		);
-
 		wp_enqueue_style(
 			'wpml-theme-plugin-localization-scan',
-			WPML_ST_URL . '/res/css/theme-plugin-localization/theme-plugin-localization.css',
+			WPML_ST_URL . '/res/css/theme-plugin-localization.css',
 			array(),
 			WPML_ST_VERSION
 		);
@@ -32,20 +25,6 @@ class WPML_ST_Theme_Plugin_Localization_Resources {
 			'wpml-theme-plugin-localization-scan',
 			'wpml_groups_to_scan',
 			get_option( WPML_ST_Themes_And_Plugins_Updates::WPML_ST_ITEMS_TO_SCAN )
-		);
-
-		wp_enqueue_script(
-			'wpml-st-tracking-all-strings-as-english-notice',
-			WPML_ST_URL . '/res/js/tracking-all-strings-as-english-notice.js',
-			array( 'jquery' ),
-			WPML_ST_VERSION
-		);
-
-		wp_enqueue_script(
-			'wpml-enable-fastest-settings',
-			WPML_ST_URL . '/res/js/performance/enable-fastest-settings.js',
-			array( 'jquery' ),
-			WPML_ST_VERSION
 		);
 
 		wp_localize_script(

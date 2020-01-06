@@ -17,9 +17,7 @@ class WPML_ST_Admin_Blog_Option extends WPML_SP_User {
 		&$st_instance,
 		$option_name
 	) {
-		if ( ! in_array( $option_name, array( 'Tagline', 'Blog Title' ),
-			true )
-		) {
+		if ( ! WPML_ST_Blog_Name_And_Description_Hooks::is_string( $option_name ) ) {
 			throw  new InvalidArgumentException( $option_name . ' Is not a valid blog option that is handled by this class, allowed values are "Tagline" and "Blog Title"' );
 		}
 		parent::__construct( $sitepress );

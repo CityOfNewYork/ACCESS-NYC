@@ -6,6 +6,7 @@ class WPML_ST_Translations_File_Entry {
 	const IMPORTED = 'imported';
 	const PARTLY_IMPORTED = 'partly_imported';
 	const FINISHED = 'finished';
+	const SKIPPED = 'skipped';
 
 	const PATTERN_SEARCH_LANG_MO   = '#[-]?([a-z]+[_A-Z]*)\.mo$#i';
 	const PATTERN_SEARCH_LANG_JSON = '#([a-z]+[_A-Z]*)-[-a-z0-9]+\.json$#i';
@@ -197,7 +198,7 @@ class WPML_ST_Translations_File_Entry {
 	 * @param $status
 	 */
 	private function validate_status( $status ) {
-		$allowed_statuses = array( self::NOT_IMPORTED, self::IMPORTED, self::PARTLY_IMPORTED, self::FINISHED );
+		$allowed_statuses = array( self::NOT_IMPORTED, self::IMPORTED, self::PARTLY_IMPORTED, self::FINISHED, self::SKIPPED );
 
 		if ( ! in_array( $status, $allowed_statuses, true ) ) {
 			throw new InvalidArgumentException( 'Status of MO file is invalid' );
@@ -213,7 +214,7 @@ class WPML_ST_Translations_File_Entry {
 		return ( '\\' === DIRECTORY_SEPARATOR ) ? str_replace( '/', '\\', $path ) : str_replace( '\\', '/', $path );
 	}
 
-	private function get_extension() {
+	public function get_extension() {
 		return pathinfo( $this->path, PATHINFO_EXTENSION );
 	}
 }

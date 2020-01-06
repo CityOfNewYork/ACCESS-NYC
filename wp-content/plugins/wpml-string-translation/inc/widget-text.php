@@ -110,8 +110,8 @@ function icl_widget_text_convert_to_multilingual($text_widget, $instance) {
 
     // Register strings
     if ($_POST['icl_language'] == 'multilingual') {
-        icl_register_string('Widgets', 'widget title', $instance['title']);
-        icl_register_string('Widgets', 'widget body - ' . $icl_widget->id, $instance['text']);
+        icl_register_string( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget title', $instance['title'] );
+        icl_register_string( WP_Widget_Text_Icl::STRING_DOMAIN, 'widget body - ' . $icl_widget->id, $instance['text'] );
     }
 
     // Refresh

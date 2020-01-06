@@ -196,7 +196,7 @@ class WPML_Package_Translation_Metabox {
 			}
 		}
 		if ( $this->show_description ) {
-			$result .= '<p>' . $this->metabox_data[ 'package_language_title' ] . '</p>';
+			$result .= '<div>' . $this->metabox_data[ 'package_language_title' ] . '</div>';
 		}
 		if ( $this->show_status ) {
 			$result .= '<p>' . $this->metabox_data[ 'statuses_title' ] . '</p>';
@@ -226,7 +226,7 @@ class WPML_Package_Translation_Metabox {
 				}
 				foreach ( $this->metabox_data[ 'statuses' ] as $code => $status ) {
 					$result .= $this->get_tag( $this->status_element_tag );
-					$result .= '<img src="' . $this->sitepress->get_flag_url( $code ) . '"> ' . $status[ 'name' ] . ' : ' . $status[ 'status' ];
+					$result .= '<img width="18" height="12" src="' . $this->sitepress->get_flag_url( $code ) . '"> ' . $status[ 'name' ] . ' : ' . $status[ 'status' ];
 					$result .= $this->get_tag( $this->status_element_tag, 'closed' );
 				}
 				if ( $this->status_container_tag ) {

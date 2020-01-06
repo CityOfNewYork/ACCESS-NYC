@@ -61,7 +61,9 @@ class WPML_Autoregister_Save_Strings {
 		$domain_lang    = $this->lang_of_domain->get_language( $domain );
 
 		if ( ! $domain_lang ) {
-			$flag = 0 === strpos( $domain, 'admin_texts_' ) || 'Tagline' === $name || 'Blog Title' === $name;
+			$flag = 0 === strpos( $domain, 'admin_texts_' )
+			        || WPML_ST_Blog_Name_And_Description_Hooks::is_string( $name );
+			
 			$domain_lang = $flag ? $this->sitepress->get_user_admin_language( get_current_user_id() ) : 'en';
 		}
 

@@ -16,19 +16,25 @@ class WPML_ST_Upgrade_DB_String_Packages implements IWPML_St_Upgrade_Command {
 	}
 
 	public function run() {
-		$result = false;
 		$sql_get_st_package_table_name = "SHOW TABLES LIKE '{$this->wpdb->prefix}icl_string_packages'";
-		$sql_get_post_id_column_from_st_package = "SHOW COLUMNS FROM {$this->wpdb->prefix}icl_string_packages LIKE 'post_id'";
 
 		$st_packages_table_exist = $this->wpdb->get_var( $sql_get_st_package_table_name ) === "{$this->wpdb->prefix}icl_string_packages";
-		$post_id_column_exists = $st_packages_table_exist ? $this->wpdb->get_var( $sql_get_post_id_column_from_st_package ) === 'post_id' : false;
-		if ( $st_packages_table_exist && ! $post_id_column_exists ) {
-			$sql = "ALTER TABLE {$this->wpdb->prefix}icl_string_packages
-				ADD COLUMN `post_id` INTEGER";
-			$result = $this->wpdb->query( $sql );
+
+		if ( ! $st_packages_table_exist ) {
+			return false;
 		}
 
-		return false !== $result;
+		$sql_get_post_id_column_from_st_package = "SHOW COLUMNS FROM {$this->wpdb->prefix}icl_string_packages LIKE 'post_id'";
+		$post_id_column_exists = $st_packages_table_exist
+			? $this->wpdb->get_var( $sql_get_post_id_column_from_st_package ) === 'post_id'
+			: false;
+
+		if ( ! $post_id_column_exists ) {
+			$sql = "ALTER TABLE {$this->wpdb->prefix}icl_string_packages ADD COLUMN `post_id` INTEGER";
+			return (bool) $this->wpdb->query( $sql );
+		}
+
+		return true;
 	}
 
 	public function run_ajax() {

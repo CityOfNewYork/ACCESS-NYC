@@ -20,13 +20,6 @@ class WPML_ST_Upgrade {
 	private $sitepress;
 
 	/**
-	 * String Translation settings.
-	 *
-	 * @var bool|mixed
-	 */
-	private $string_settings;
-
-	/**
 	 * Upgrade Command Factory instance.
 	 *
 	 * @var  WPML_ST_Upgrade_Command_Factory
@@ -46,9 +39,8 @@ class WPML_ST_Upgrade {
 	 * @param SitePress                            $sitepress SitePress instance.
 	 * @param WPML_ST_Upgrade_Command_Factory|null $command_factory Upgrade Command Factory instance.
 	 */
-	public function __construct( $sitepress, WPML_ST_Upgrade_Command_Factory $command_factory = null ) {
+	public function __construct( SitePress $sitepress, WPML_ST_Upgrade_Command_Factory $command_factory = null ) {
 		$this->sitepress       = $sitepress;
-		$this->string_settings = $this->sitepress->get_setting( 'st', array() );
 		$this->command_factory = $command_factory;
 	}
 
@@ -101,6 +93,7 @@ class WPML_ST_Upgrade {
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_Longtext_String_Value' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_Strings_Add_Translation_Priority_Field' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages_Word_Count' );
+		$this->maybe_run( '\WPML\ST\Upgrade\Command\RegenerateMoFilesWithStringNames' );
 	}
 
 	/**
@@ -195,9 +188,10 @@ class WPML_ST_Upgrade {
 	 * @return bool
 	 */
 	public function has_command_been_executed( $class ) {
-		$id = call_user_func( array( $class, 'get_command_id' ) );
+		$id       = call_user_func( [ $class, 'get_command_id' ] );
+		$settings = $this->sitepress->get_setting( 'st', [] );
 
-		return isset( $this->string_settings[ $id . '_has_run' ] );
+		return isset( $settings[ $id . '_has_run' ] );
 	}
 
 	/**
@@ -205,10 +199,11 @@ class WPML_ST_Upgrade {
 	 *
 	 * @param string $class Command class name.
 	 */
-	private function mark_command_as_executed( $class ) {
-		$id                                        = call_user_func( array( $class, 'get_command_id' ) );
-		$this->string_settings[ $id . '_has_run' ] = true;
-		$this->sitepress->set_setting( 'st', $this->string_settings, true );
+	public function mark_command_as_executed( $class ) {
+		$id                           = call_user_func( [ $class, 'get_command_id' ] );
+		$settings                     = $this->sitepress->get_setting( 'st', [] );
+		$settings[ $id . '_has_run' ] = true;
+		$this->sitepress->set_setting( 'st', $settings, true );
 		wp_cache_flush();
 	}
 

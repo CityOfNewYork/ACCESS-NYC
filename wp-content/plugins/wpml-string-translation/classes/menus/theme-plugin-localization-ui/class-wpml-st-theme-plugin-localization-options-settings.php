@@ -24,12 +24,6 @@ class WPML_ST_Theme_Plugin_Localization_Options_Settings implements IWPML_Action
 			'type' => 'setting',
 			'st_setting' => true,
 		);
-		$settings['all_strings_are_english'] = array(
-			'settings_var' => WPML_ST_Gettext_Hooks_Factory::ALL_STRINGS_ARE_IN_ENGLISH_OPTION,
-			'filter' => FILTER_SANITIZE_NUMBER_INT,
-			'type' => 'option',
-			'st_setting' => false,
-		);
 
 		return $settings;
 	}

@@ -49,10 +49,30 @@ if ( is_admin() ) {
 	add_action( 'wp_loaded', 'wpml_st_initialize_basic_strings' );
 }
 
+/**
+ * @param string $old
+ * @param string $new
+ */
 function icl_st_update_blogname_actions( $old, $new ) {
-	icl_st_update_string_actions( 'WP', 'Blog Title', $old, $new, true );
+	icl_st_update_string_actions(
+		WPML_ST_Blog_Name_And_Description_Hooks::STRING_DOMAIN,
+		WPML_ST_Blog_Name_And_Description_Hooks::STRING_NAME_BLOGNAME,
+		$old,
+		$new,
+		true
+	);
 }
 
+/**
+ * @param string $old
+ * @param string $new
+ */
 function icl_st_update_blogdescription_actions( $old, $new ) {
-	icl_st_update_string_actions( 'WP', 'Tagline', $old, $new, true );
+	icl_st_update_string_actions(
+		WPML_ST_Blog_Name_And_Description_Hooks::STRING_DOMAIN,
+		WPML_ST_Blog_Name_And_Description_Hooks::STRING_NAME_BLOGDESCRIPTION,
+		$old,
+		$new,
+		true
+	);
 }

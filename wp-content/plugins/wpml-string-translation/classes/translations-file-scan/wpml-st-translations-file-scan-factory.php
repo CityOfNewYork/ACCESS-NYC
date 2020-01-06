@@ -1,11 +1,10 @@
 <?php
 
+use function WPML\Container\make;
+
 class WPML_ST_Translations_File_Scan_Factory {
 	private $dictionary;
-	private $notices;
 	private $queue;
-	/** @var WPML_Theme_Localization_Type */
-	private $localization_type;
 	private $storage;
 	private $wpml_file;
 	private $find_aggregate;
@@ -13,7 +12,7 @@ class WPML_ST_Translations_File_Scan_Factory {
 	public function check_core_dependencies() {
 		global $wpdb;
 		$string_index_check = new WPML_ST_Upgrade_String_Index( $wpdb );
-		$scan_ui_block      = new WPML_ST_Translations_File_Scan_UI_Block( $this->create_localization_type(), wpml_get_admin_notices() );
+		$scan_ui_block      = new WPML_ST_Translations_File_Scan_UI_Block( wpml_get_admin_notices() );
 		if ( ! $string_index_check->is_uc_domain_name_context_index_unique() ) {
 			$scan_ui_block->block_ui();
 
@@ -40,23 +39,22 @@ class WPML_ST_Translations_File_Scan_Factory {
 	 * @return array
 	 */
 	public function create_hooks() {
-		$localization_type = $this->create_localization_type();
-		if ( $localization_type->get_use_st_and_no_mo_files_value() !== (int) $localization_type->get_theme_localization_type() ) {
-			return array();
+		$st_upgrade = WPML\Container\make( 'WPML_ST_Upgrade' );
+		if ( $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning') ) {
+			return [
+				'stats-update'         => $this->get_stats_update(),
+				'string-status-update' => $this->get_string_status_update(),
+				'mo-file-registration' => $this->get_translations_file_registration(),
+			];
+		} else {
+			return [];
 		}
-
-		return array(
-			'stats-update'         => $this->get_stats_update(),
-			'string-status-update' => $this->get_string_status_update(),
-			'mo-file-registration' => $this->get_translations_file_registration(),
-			'scanning-hooks'       => new WPML_ST_Translations_File_Scan_Hooks( $this->create_queue(), $this->create_dictionary(), $this->get_wpml_file() ),
-		);
 	}
 
 	/**
 	 * @return WPML_ST_Translations_File_Queue
 	 */
-	private function create_queue() {
+	public function create_queue() {
 		if ( ! $this->queue ) {
 			global $wpdb;
 
@@ -93,10 +91,10 @@ class WPML_ST_Translations_File_Scan_Factory {
 	 */
 	private function create_dictionary() {
 		if ( ! $this->dictionary ) {
-			global $wpdb, $sitepress;
+			global $sitepress;
 
-
-			$table_storage = new WPML_ST_Translations_File_Dictionary_Storage_Table( $wpdb );
+			/** @var WPML_ST_Translations_File_Dictionary_Storage_Table $table_storage */
+			$table_storage = make( WPML_ST_Translations_File_Dictionary_Storage_Table::class );
 
 			$st_upgrade = new WPML_ST_Upgrade( $sitepress );
 			if ( $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning') ) {
@@ -107,18 +105,6 @@ class WPML_ST_Translations_File_Scan_Factory {
 		}
 
 		return $this->dictionary;
-	}
-
-	/**
-	 * @return WPML_Theme_Localization_Type
-	 */
-	private function create_localization_type() {
-		if ( ! $this->localization_type ) {
-			global $sitepress;
-			$this->localization_type = new WPML_Theme_Localization_Type( $sitepress );
-		}
-
-		return $this->localization_type;
 	}
 
 	/**
@@ -184,7 +170,7 @@ class WPML_ST_Translations_File_Scan_Factory {
 	 */
 	private function get_aggregate_find_component() {
 		if ( null === $this->find_aggregate ) {
-			$debug_backtrace = new WPML_Debug_BackTrace( $this->get_wpml_wp_api()->phpversion(), 0 );
+			$debug_backtrace = new WPML_Debug_BackTrace();
 
 			$this->find_aggregate = new WPML_ST_Translations_File_Component_Details(
 				new WPML_ST_Translations_File_Components_Find_Plugin( $debug_backtrace ),

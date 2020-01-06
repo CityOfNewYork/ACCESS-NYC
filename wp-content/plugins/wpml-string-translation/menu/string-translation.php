@@ -1,4 +1,7 @@
 <?php
+
+use WPML\ST\Gettext\AutoRegisterSettings;
+
 /** @var WPML_String_Translation $WPML_String_Translation */
 global $sitepress, $WPML_String_Translation, $wpdb, $wpml_st_string_factory, $wp_query;
 
@@ -77,6 +80,9 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 <div class="wrap">
 
 	<h2><?php echo esc_html__( 'String translation', 'wpml-string-translation' ) ?></h2>
+
+	<div id="wpml-mo-scan-st-page"></div>
+
 
 	<?php
 		do_action( 'display_basket_notification', 'st_dashboard_top' );
@@ -483,7 +489,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 	                                        <p class="js-track-strings-note" <?php echo $track_strings_display; ?>>
 		                                        <?php echo $message; ?>
 	                                        </p>
-											<p><a href="https://wpml.org/?p=9073" target="_blank"><?php esc_html_e( 'Performance considerations', 'wpml-string-translation' ) ?>&nbsp;&raquo;</a></p>
+											<p><a href="https://wpml.org/faq/prevent-performance-issues-with-wpml/?utm_source=wpmlplugin&utm_campaign=product&utm_medium=plugin&utm_term=performance" target="_blank"><?php esc_html_e( 'Performance considerations', 'wpml-string-translation' ) ?>&nbsp;&raquo;</a></p>
                                         </li>
                                         <li>
                                             <?php
@@ -515,7 +521,11 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
                             </div>
                         </div>
 
-                        <div id="dashboard_wpml_stsel_1.5" class="postbox wpml-st-exclude-contexts">
+                        <div id="dashboard_wpml_stsel_1.5" class="postbox wpml-st-auto-register-strings">
+							<?php
+							/** @var AutoRegisterSettings $auto_register_settings */
+							$auto_register_settings = WPML\Container\make( AutoRegisterSettings::class );
+							?>
                             <div class="handlediv" title="<?php echo esc_attr__('Click to toggle', 'wpml-string-translation'); ?>">
                                 <br/>
                             </div>
@@ -523,64 +533,84 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
                                 <span><?php echo esc_html__('Auto register strings for translation', 'wpml-string-translation')?></span>
                             </h3>
                             <div class="inside">
-                                <p class="sub"><?php echo esc_html__('WPML can automatically register strings for translation. This allows you to translate user-generated content with minimal PHP code.', 'wpml-string-translation')?></p>
+								<p>
+									<label for="auto_register_enabled">
+										<input type="checkbox"
+											   class="js-auto-register-enabled"
+											   id="<?php echo AutoRegisterSettings::KEY_ENABLED; ?>"
+											   name="<?php echo AutoRegisterSettings::KEY_ENABLED; ?>"
+											   <?php checked( true, $auto_register_settings->isEnabled() ); ?>"
+										>
+										<?php echo esc_html__( 'Look for strings while pages are rendered', 'wpml-string-translation' )?>
+									</label>
+								</p>
 
-                                <p class="wpml-st-excluded-info"
-                                   data-all-included="<?php echo esc_attr__('Strings from all text domains will be auto-registered', 'wpml-string-translation') ?>"
-                                   data-all-excluded="<?php echo esc_attr__('Strings from all text domains are excluded', 'wpml-string-translation') ?>"
-                                   data-excluded-preview="<?php echo esc_attr__('You excluded: ', 'wpml-string-translation') ?>"
-                                   data-included-preview="<?php echo esc_attr__('You included: ', 'wpml-string-translation') ?>"
-                                   data-preview-suffix="<?php echo esc_attr__('and others', 'wpml-string-translation') ?>"
-                                >
+								<p class="js-auto-register-description sub"
+								   data-enabled-string="<?php echo esc_attr( $auto_register_settings->getFeatureEnabledDescription() ); ?>"
+								   data-disabled-string="<?php echo esc_attr( $auto_register_settings->getFeatureDisabledDescription() ); ?>"
+								   data-running-countdown="<?php echo $auto_register_settings->getTimeToAutoDisable(); ?>"
+								   data-reset-countdown="<?php echo AutoRegisterSettings::RESET_AUTOLOAD_TIMEOUT; ?>"
+								></p>
 
-                                </p>
-                                <p>
-                                    <input type="button"
-                                           class="button-secondary js-wpml-autoregister-edit-contexts"
-                                           value="<?php echo esc_attr__('Edit', 'wpml-string-translation')?>"
-                                    />
-                                </p>
+								<div class="wpml-st-excluded-info-wrapper"
+									<?php echo ! $auto_register_settings->isEnabled() ? 'style="display:none"' : ''; ?>
+								>
+									<p class="wpml-st-excluded-info"
+									   data-all-included="<?php echo esc_attr__('Strings from all text domains will be auto-registered', 'wpml-string-translation') ?>"
+									   data-all-excluded="<?php echo esc_attr__('Strings from all text domains are excluded', 'wpml-string-translation') ?>"
+									   data-excluded-preview="<?php echo esc_attr__('You excluded: ', 'wpml-string-translation') ?>"
+									   data-included-preview="<?php echo esc_attr__('You included: ', 'wpml-string-translation') ?>"
+									   data-preview-suffix="<?php echo esc_attr__('and others', 'wpml-string-translation') ?>"
+									>
 
-                                <div class="wpml-st-exclude-contexts-box"
-                                     style="display:none;"
-                                     title="<?php echo esc_attr__('Auto-register strings from these text domains', 'wpml-string-translation');?>"
-                                >
-                                    <form method="post" action="" data-nonce="<?php echo wp_create_nonce( 'wpml-st-cancel-button' ); ?>" >
-                                        <?php
-                                            $exclude      = new WPML_Autoregister_Context_Exclude( $wpdb, new WPML_ST_Settings() );
-                                            $excluded     = $exclude->get_excluded_contexts();
-                                            $has_excluded = count($excluded) > 0;
-                                        ?>
+									</p>
+									<p>
+										<input type="button"
+											   class="button-secondary js-wpml-autoregister-edit-contexts"
+											   value="<?php echo esc_attr__('Edit', 'wpml-string-translation')?>"
+										/>
+									</p>
 
-                                        <div id="wpml-st-filter-and-select-all-box">
-                                            <input type="input" name="search" placeholder="<?php echo esc_attr__('Search', 'wpml-string-translation')?>" />
+									<div class="wpml-st-exclude-contexts-box"
+										 style="display:none;"
+										 title="<?php echo esc_attr__('Auto-register strings from these text domains', 'wpml-string-translation');?>"
+									>
+										<form method="post" action="" data-nonce="<?php echo wp_create_nonce( 'wpml-st-cancel-button' ); ?>" >
+											<?php
+											$excluded     = $auto_register_settings->getExcludedDomains();
+											$has_excluded = count( $excluded) > 0;
+											?>
 
-                                            <br/>
+											<div id="wpml-st-filter-and-select-all-box">
+												<input type="input" name="search" placeholder="<?php echo esc_attr__('Search', 'wpml-string-translation')?>" />
 
-                                            <p>
-                                                <input type="checkbox" name="select_all" <?php checked( false, $has_excluded); ?> />
-                                                <span><?php esc_html__('Select all', 'wpml-string-translation')?></span>
-                                            </p>
-                                        </div>
+												<br/>
 
-                                        <div class="contexts">
-                                            <?php foreach ($exclude->get_contexts_and_their_exclude_status() as $context => $status): ?>
-                                                <?php if(strlen($context)): ?>
-                                                <p>
-                                                    <input
-                                                        type="checkbox"
-                                                        name="<?php echo WPML_Autoregister_Context_Exclude::SETTING_KEY ?>[]"
-                                                        value="<?php echo $context ?>"
-                                                        <?php checked(false, $status); ?>
-                                                    />
-                                                    <span><?php echo $context; ?></span>
-                                                </p>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+												<p>
+													<input type="checkbox" name="select_all" <?php checked( false, $has_excluded); ?> />
+													<span><?php echo esc_html__( 'Select all', 'wpml-string-translation' )?></span>
+												</p>
+											</div>
+
+											<div class="contexts">
+												<?php foreach ($auto_register_settings->getDomainsAndTheirExcludeStatus() as $context => $status): ?>
+													<?php if(strlen($context)): ?>
+													<p>
+														<input
+															type="checkbox"
+															name="<?php echo AutoRegisterSettings::KEY_EXCLUDED_DOMAINS ?>[]"
+															value="<?php echo $context ?>"
+															<?php checked(false, $status); ?>
+														/>
+														<span><?php echo $context; ?></span>
+													</p>
+													<?php endif; ?>
+												<?php endforeach; ?>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div><!-- .wpml-st-excluded-info-wrapper -->
                         </div>
 
 

@@ -4,9 +4,6 @@ class WPML_ST_Translations_File_Scan_UI_Block {
 	const NOTICES_GROUP = 'wpml-st-mo-scan';
 	const NOTICES_MO_SCANNING_BLOCKED = 'mo-scanning-blocked';
 
-	/** @var  WPML_Theme_Localization_Type */
-	private $localization_type;
-
 	/** @var WPML_Notices */
 	private $notices;
 
@@ -14,17 +11,14 @@ class WPML_ST_Translations_File_Scan_UI_Block {
 	private $link = 'https://wpml.org/forums/topic/wpml-is-telling-me-that-it-has-a-broken-table-that-needs-fixing/';
 
 	/**
-	 * @param WPML_Theme_Localization_Type $localization_type
 	 * @param WPML_Notices $notices
 	 */
-	public function __construct( WPML_Theme_Localization_Type $localization_type, WPML_Notices $notices ) {
-		$this->localization_type = $localization_type;
-		$this->notices           = $notices;
+	public function __construct( WPML_Notices $notices ) {
+		$this->notices = $notices;
 	}
 
 	public function block_ui() {
 		$this->disable_option();
-		$this->change_option_value_if_required();
 		$this->remove_default_notice();
 		$this->display_notice();
 	}
@@ -61,12 +55,6 @@ class WPML_ST_Translations_File_Scan_UI_Block {
 			'MO Import blocked short 3/3', 'wpml-string-translation' ), $this->link );
 
 		return '<span class="icl_error_text" >' . $message . '</span>';
-	}
-
-	private function change_option_value_if_required() {
-		if ( $this->localization_type->get_use_st_and_no_mo_files_value() === (int) $this->localization_type->get_theme_localization_type() ) {
-			$this->localization_type->save_localization_type( $this->localization_type->get_use_st_value() );
-		}
 	}
 
 	private function display_notice() {

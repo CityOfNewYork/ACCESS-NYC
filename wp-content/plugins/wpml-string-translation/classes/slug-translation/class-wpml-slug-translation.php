@@ -2,6 +2,8 @@
 
 class WPML_Slug_Translation implements IWPML_Action {
 
+	const STRING_DOMAIN = 'WordPress';
+
 	/** @var array $post_link_cache */
 	private $post_link_cache = array();
 
@@ -14,9 +16,6 @@ class WPML_Slug_Translation implements IWPML_Action {
 	/** @var WPML_ST_Term_Link_Filter $term_link_filter */
 	private $term_link_filter;
 
-	/** @var WPML_ST_Slug_Translation_Strings_Sync $slug_strings_sync */
-	private $slug_strings_sync;
-
 	/** @var WPML_Get_LS_Languages_Status $ls_languages_status */
 	private $ls_languages_status;
 
@@ -24,9 +23,6 @@ class WPML_Slug_Translation implements IWPML_Action {
 	private $slug_translation_settings;
 
 	private $ignore_post_type_link = false;
-
-	/** @var array $translated_slugs */
-	private $translated_slugs = array();
 
 	public function __construct(
 		SitePress $sitepress,
@@ -50,7 +46,6 @@ class WPML_Slug_Translation implements IWPML_Action {
 		$this->migrate_global_enabled_setting();
 
 		if ( $this->slug_translation_settings->is_enabled() ) {
-			add_filter( 'option_rewrite_rules', array( $this, 'rewrite_rules_filter' ), 1, 1 ); // high priority
 			add_filter( 'post_type_link', array( $this, 'post_type_link_filter' ), apply_filters( 'wpml_post_type_link_priority', 1 ), 4 );
 			add_filter( 'pre_term_link', array( $this->term_link_filter, 'replace_slug_in_termlink' ), 1, 2 ); // high priority
 			add_filter( 'edit_post', array( $this, 'clear_post_link_cache' ), 1, 2 );
@@ -79,21 +74,6 @@ class WPML_Slug_Translation implements IWPML_Action {
 	}
 
 	/**
-	 * @param array $value
-	 *
-	 * @return array
-	 */
-	public static function rewrite_rules_filter( $value ) {
-		if ( empty( $value ) ) {
-			return $value;
-		} else {
-			$rewrite_rule_filter_factory = new WPML_Rewrite_Rule_Filter_Factory();
-
-			return $rewrite_rule_filter_factory->create()->rewrite_rules_filter( $value );
-		}
-	}
-
-	/**
 	 * This method is only for CPT
 	 *
 	 * @deprecated use `WPML_ST_Slug::filter_value` directly of the filter hook `wpml_get_translated_slug`
@@ -117,6 +97,17 @@ class WPML_Slug_Translation implements IWPML_Action {
 	}
 
 	/**
+	 * @param array $value
+	 *
+	 * @return array
+	 * @deprecated Use WPML\ST\SlugTranslation\Hooks\Hooks::filter
+	 */
+	public static function rewrite_rules_filter( $value ) {
+		return ( new \WPML\ST\SlugTranslation\Hooks\HooksFactory() )->create()->filter( $value );
+	}
+
+
+	/**
 	 * @param string  $post_link
 	 * @param WP_Post $post
 	 * @param bool    $leavename
@@ -138,8 +129,9 @@ class WPML_Slug_Translation implements IWPML_Action {
 
 		$cache_key = $leavename . '#' . $sample;
 		$cache_key .= $this->ls_languages_status->is_getting_ls_languages() ? 'yes' : 'no';
-		if ( isset( $this->post_link_cache[ $post->ID ][ $cache_key ] ) ) {
-			$post_link = $this->post_link_cache[ $post->ID ][ $cache_key ];
+		$blog_id = get_current_blog_id();
+		if ( isset( $this->post_link_cache[ $blog_id ][ $post->ID ][ $cache_key ] ) ) {
+			$post_link = $this->post_link_cache[ $blog_id ][ $post->ID ][ $cache_key ];
 		} else {
 			$slug_settings = $this->sitepress->get_setting( 'posts_slug_translation' );
 			$slug_settings = ! empty( $slug_settings['types'][ $post->post_type ] ) ? $slug_settings['types'][ $post->post_type ] : null;
@@ -170,7 +162,7 @@ class WPML_Slug_Translation implements IWPML_Action {
 					$post_link = str_replace( $slug_this . '=', $slug_real . '=', $post_link );
 				}
 			}
-			$this->post_link_cache[ $post->ID ][ $cache_key ] = $post_link;
+			$this->post_link_cache[ $blog_id ][ $post->ID ][ $cache_key ] = $post_link;
 		}
 
 		return $post_link;
@@ -181,7 +173,8 @@ class WPML_Slug_Translation implements IWPML_Action {
 	 * @param $post
 	 */
 	public function clear_post_link_cache( $post_ID, $post ) {
-		unset( $this->post_link_cache[ $post_ID ] );
+		$blog_id = get_current_blog_id();
+		unset( $this->post_link_cache[ $blog_id ][ $post_ID ] );
 	}
 
 	/**
@@ -313,7 +306,7 @@ class WPML_Slug_Translation implements IWPML_Action {
 	 * @deprecated since 2.8.0, use the class `WPML_Post_Slug_Translation_Records` instead.
 	 */
 	public static function register_string_for_slug( $post_type, $slug ) {
-		return icl_register_string( 'WordPress', 'URL slug: ' . $post_type, $slug );
+		return icl_register_string( self::STRING_DOMAIN, 'URL slug: ' . $post_type, $slug );
 	}
 
 	public function maybe_migrate_string_name() {
@@ -327,8 +320,11 @@ class WPML_Slug_Translation implements IWPML_Action {
 
 			foreach ( $queryable_post_types as $type ) {
 				$post_type_obj = get_post_type_object( $type );
-				$slug          = trim( $post_type_obj->rewrite['slug'], '/' );
+				if ( null === $post_type_obj || ! isset( $post_type_obj->rewrite['slug'] ) ) {
+					continue;
+				}
 
+				$slug = trim( $post_type_obj->rewrite['slug'], '/' );
 				if ( $slug ) {
 					// First check if we should migrate from the old format URL slug: slug
 					$string_id = $wpdb->get_var( $wpdb->prepare( "SELECT id

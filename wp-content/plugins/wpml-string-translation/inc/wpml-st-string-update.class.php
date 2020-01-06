@@ -15,25 +15,40 @@ class WPML_ST_String_Update {
 	/**
 	 * Updates an original string without changing its id or its translations
 	 *
-	 * @param string     $context
+	 * @param string     $domain
 	 * @param string     $name
 	 * @param string     $old_value
 	 * @param string     $new_value
 	 * @param bool|false $force_complete , @see \WPML_ST_String_Update::handle_status_change
 	 *
-	 * @return null
+	 * @return int|null
 	 */
-	public function update_string( $context, $name, $old_value, $new_value, $force_complete = false ) {
+	public function update_string( $domain, $name, $old_value, $new_value, $force_complete = false ) {
 		if ( $new_value != $old_value ) {
-			$string = $this->get_initial_string( $name, $context, $old_value, $new_value );
+			$string = $this->get_initial_string( $name, $domain, $old_value, $new_value );
 			$this->wpdb->update( $this->wpdb->prefix . 'icl_strings',
-			                     array( 'value' => $this->sanitize_string( $new_value ) ),
+			                     array( 'value' => $new_value ),
 			                     array( 'id' => $string->id ) );
-			$is_widget = $context === 'Widgets';
+			$is_widget = $domain === WP_Widget_Text_Icl::STRING_DOMAIN;
 			if ( $is_widget && $new_value ) {
 				$this->update_widget_name( $string->name, $old_value, $new_value );
 			}
 			$this->handle_status_change( $string, $force_complete || $is_widget );
+
+			/**
+			 * This action is fired when a string original value is modified.
+			 *
+			 * @since 3.0.0
+			 *
+			 * @param string     $domain
+			 * @param string     $name
+			 * @param string     $old_value
+			 * @param string     $new_value
+			 * @param bool|false $force_complete
+			 * @param stdClass   $string
+			 *
+			 */
+			do_action( 'wpml_st_update_string', $domain, $name, $old_value, $new_value, $force_complete, $string );
 		}
 
 		return isset( $string ) && isset( $string->id ) ? $string->id : null;
@@ -81,7 +96,7 @@ class WPML_ST_String_Update {
 	private function get_initial_string( $name, $context, $old_value, $new_value ) {
 		$string = $this->read_string_from_db( $name, $context );
 		if ( ! $string ) {
-			if ( $context !== 'Widgets' ) {
+			if ( $context !== WP_Widget_Text_Icl::STRING_DOMAIN ) {
 				icl_register_string( $context, $name, $new_value );
 			} else {
 				list( $res, $name ) = $this->update_widget_name( $name, $old_value, $new_value );
@@ -130,18 +145,18 @@ class WPML_ST_String_Update {
 			$name = 'widget title - ' . md5( $new_value );
 			$old_name = 'widget title - ' . md5( $old_value );
 
-			if ( $this->read_string_from_db( $name, 'Widgets' ) ) {
-				$old_string = $this->read_string_from_db( $old_name, 'Widgets' );
+			if ( $this->read_string_from_db( $name, WP_Widget_Text_Icl::STRING_DOMAIN ) ) {
+				$old_string = $this->read_string_from_db( $old_name, WP_Widget_Text_Icl::STRING_DOMAIN );
 				if ( $old_string ) {
 					$this->delete_old_widget_title_string_if_new_already_exists( $old_string );
 				}
 			} else {
-				$res = $this->write_widget_update_to_db( 'Widgets', $old_name, $name );
+				$res = $this->write_widget_update_to_db( WP_Widget_Text_Icl::STRING_DOMAIN, $old_name, $name );
 			}
 
 		} elseif ( 0 === strpos( $name, 'widget body - ' ) ) {
 			$name = 'widget body - ' . md5( $new_value );
-			$res  = $this->write_widget_update_to_db( 'Widgets',
+			$res  = $this->write_widget_update_to_db( WP_Widget_Text_Icl::STRING_DOMAIN,
 			                                          'widget body - ' . md5( $old_value ),
 			                                          $name );
 		}
@@ -163,7 +178,7 @@ class WPML_ST_String_Update {
 		return $this->wpdb->update( $this->wpdb->prefix . 'icl_strings',
 		                            array(
 			                            'name'                    => $new_name,
-			                            'domain_name_context_md5' => md5( 'Widgets' . $new_name )
+			                            'domain_name_context_md5' => md5( WP_Widget_Text_Icl::STRING_DOMAIN . $new_name )
 		                            ),
 		                            array( 'context' => $context, 'name' => $old_name ) );
 	}
