@@ -15,22 +15,26 @@ import 'core-js/features/url-search-params';
 // Fetch
 import 'whatwg-fetch';
 
-import jQuery from 'jquery';
+// Librarires
 import Vue from 'vue/dist/vue.runtime.min';
 
+// Core Modules
 import CardVue from 'components/card/card.vue';
 import FilterMultiVue from 'components/filter/filter-multi.vue';
 
-import Utility from 'modules/utility';
-import Archive from '../../views/programs/archive.vue';
+import ProgramsArchive from '../../views/programs/archive.vue';
+import ProgramsDetail from 'modules/programs-detail';
+
+// Patterns Framework
+import localize from 'utilities/localize/localize';
 
 import 'main';
 
-((window, Vue, $) => {
+((window, Vue) => {
   'use strict';
 
   /**
-   * Archive
+   * Programs Archive
    */
 
   (element => {
@@ -67,7 +71,7 @@ import 'main';
         'ARCHIVE_NO_RESULTS_INSTRUCTIONS', 'ARCHIVE_MORE_RESULTS'
       ].map(i => [
         i.replace('ARCHIVE_', ''),
-        Utility.localize(i)
+        localize(i)
       ]));
 
       /**
@@ -82,7 +86,7 @@ import 'main';
        */
 
       new Vue({
-        render: createElement => createElement(Archive, {
+        render: createElement => createElement(ProgramsArchive, {
           props: {
             perPage: parseInt(element.dataset.perPage),
             page: parseInt(element.dataset.page),
@@ -97,81 +101,14 @@ import 'main';
   })(document.querySelector('[data-js="programs"]'));
 
   /**
-   * Single
+   * Programs Detail
    */
 
-  // TODO: This function and the conditional afterwards should be refactored
-  // and pulled out to its own program detail controller module. The main
-  // unique thing about program details is that they use a ?step=x query
-  // parameter in the URL to determine the visible section. It is still all
-  // the same page. A hash would seem more appropriate, but there were
-  // some supposed issues with WPML where the hash was being stripped when
-  // switching between langauges. Because it is a single page, we don't need
-  // to actually reload the browser, which is why history.pushState is used.
-
-  /**
-   * Advances Program Page Steps
-   * @param {string} step - the kebab case identifier for the section
-   */
-  function showSection(step) {
-    $('[data-js="program-detail-step"]')
-       .removeClass('active').filter(`#${step}`).addClass('active');
-
-    $('[data-js="program-nav"] a').removeClass('active')
-       .filter(`#nav-link-${step}`).addClass('active');
-  }
-
-  if ($('[data-js="program-detail-content"]').length) {
-    const isMobileView = () => $('[data-js="site-desktop-nav"]')
-      .is(':hidden');
-
-    $('[data-js*="program-nav-step-link"]').on('click', e => {
-      if (!history.pushState) {
-        return true;
-      }
-      e.preventDefault();
-
-      const step = Utility.getUrlParameter('step', $(e.target).attr('href'));
-      let linkType = '';
-
-      window.history.pushState(null, null, '?step=' + step);
-
-      if ($(e.target).hasClass('[data-js*="jump-to-anchor"]')) {
-        linkType = 'buttonLink';
-      } else {
-        linkType = 'navLink';
-      }
-      $(window).trigger('popstate', linkType);
-    });
-
-    $(window).on('popstate', (e, linkType) => {
-      const possibleSections = [
-        'how-it-works',
-        'how-to-apply',
-        'determine-your-eligibility',
-        'what-you-need-to-include'
-      ];
-
-      let sectionId = Utility.getUrlParameter('step');
-
-      if (!sectionId || !$.inArray(sectionId, possibleSections)) {
-        sectionId = 'how-it-works';
-      }
-
-      // If the page is in a mobile view, and the user has clicked a button
-      // (as opposed to one of the table of content links) we want to scroll
-      // the browser to the content body as opposed to the top of the page.
-      if (isMobileView() && linkType === 'buttonLink') {
-        $(document).scrollTop(
-          $('[data-js="program-detail-content"]').offset().top
-        );
-      } else {
-        $(document).scrollTop(0);
-      }
-      showSection(sectionId);
-    }).trigger('popstate');
-  }
-  // END TODO
-})(window, Vue, jQuery);
+  (element => {
+    if (element) {
+      new ProgramsDetail();
+    }
+  })(document.querySelector(ProgramsDetail.selector));
+})(window, Vue);
 
 
