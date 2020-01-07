@@ -7,11 +7,6 @@
  */
 
 add_action('wp_headers', function() {
-  $req = $_SERVER['REQUEST_URI'];
-  if ($req === '/peu/' || $req === '/peu/results/') {
-    return;
-  }
-
   // Do not send headers if the admin area is in use
   if (is_user_logged_in() || is_admin()) {
     return;

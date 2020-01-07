@@ -25,19 +25,6 @@ add_action('init', function() {
   );
 
   register_taxonomy(
-    'outreach',
-    'programs',
-    array(
-      'label' => __('PEU Outreach Categories'),
-      'labels' => array(
-        'archives' => __('Outreach', 'accessnyctheme')
-      ),
-      'hierarchical' => true,
-      'public' => false // will affect the terms rest route
-    )
-  );
-
-  register_taxonomy(
     'page-type',
     'programs',
     array(
