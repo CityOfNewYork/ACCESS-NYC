@@ -33,7 +33,7 @@ import 'main';
         'https://maps.googleapis.com/maps/api/js',
         '?key=' + googleMapsEmbed.dataset.key,
         '&callback=window.' + callback,
-        '&libraries=geometry,places&v=3.36'
+        '&libraries=geometry,places&v=quarterly'
       ].join('');
 
     document.body.appendChild(script);
