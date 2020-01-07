@@ -112,6 +112,13 @@ class Screener {
       let step = $(event.currentTarget).closest(`.${Screener.CssClass.STEP}`);
       let input = step.find('input[name="Person[0].headOfHousehold"]:checked');
 
+      // Reset HOH to be element at index 0 and remove current HOH from array.
+      this._people.forEach((member, index) => {
+        if(member._attrs.headOfHousehold === true && index !== 0) {
+          this._people.splice(index, 1);
+        }
+      });
+
       this._people[0].set({
         headOfHousehold: Screener.getTypedVal(input)
       });
@@ -1209,6 +1216,13 @@ class Screener {
     const template = window.JST['screener/template-recap'];
     const renderedTemplate = template(templateData);
     $('#recap-body').html(renderedTemplate);
+
+    // Reset personIndex to zero on edit the head of household.
+    let editPersonButton = document.getElementById('recap-edit-person');
+    editPersonButton.addEventListener('click', function resetPersonIndex() {
+      this._$steps.data('personIndex', 0);
+    }.bind(this));
+
     return this;
   }
 
