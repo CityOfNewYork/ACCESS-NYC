@@ -36,6 +36,7 @@ import TextController from 'objects/text-controller/text-controller';
 // import Track from 'utilities/track/track'; TODO: modify src for compatibility
 import Icons from 'utilities/icons/icons';
 import Toggle from 'utilities/toggle/toggle';
+import localize from 'utilities/localize/localize';
 
 (function(window) {
   'use strict';
@@ -83,7 +84,7 @@ import Toggle from 'utilities/toggle/toggle';
         'NEWSLETTER_ERR_INVALID_EMAIL'
       ].map(i => [
         i.replace('NEWSLETTER_', ''),
-        Utility.localize(i)
+        localize(i)
       ]));
 
       newsletter.strings = strings;
@@ -105,7 +106,7 @@ import Toggle from 'utilities/toggle/toggle';
         'SHARE_FORM_VALID_TEL_INVALID'
       ].map(i => [
         i.replace('SHARE_FORM_', ''),
-        Utility.localize(i)
+        localize(i)
       ]));
 
       shareForm.strings = strings;
