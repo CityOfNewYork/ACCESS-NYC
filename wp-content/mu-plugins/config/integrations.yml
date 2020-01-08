@@ -53,6 +53,7 @@
   dep: GOOGLE_TAG_MANAGER
   localize:
     - GOOGLE_TAG_MANAGER
+    - GOOGLE_TAG_MANAGER_PREVIEW
   in_footer: false
   inline:
     path: config/integrations/scripts/google-tag-manager.js
