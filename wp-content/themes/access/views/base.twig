@@ -19,7 +19,7 @@
     <div class="page-wrapper">
       <a class="sr-only sr-only-focusable" href="#content">{{ __('Skip to main content', 'accessnyctheme') }}</a>
       {% block header %}
-        <header class="relative">
+        <header class="overflow-hidden">
           <div class="color-mid-background flex justify-between py-1 px-3 print:block">
             {% spaceless %}
             <div class="flex-none">
@@ -34,9 +34,13 @@
           </div>
 
           {% include 'objects/navigation.twig' %}
-          {% include 'objects/mobile-nav.twig' %}
-          {% include 'objects/search-box.twig' %}
         </header>
+
+        {% include 'objects/mobile-nav.twig' %}
+
+        <div class='relative'>
+          {% include 'objects/search-box.twig' %}
+        </div>
       {% endblock %}
 
       {% block content %}{% endblock %}
