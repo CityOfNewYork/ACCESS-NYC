@@ -126,8 +126,6 @@ For example:
 
     composer run predeploy
 
-##### WPML Installer
-
 ## Using Composer
 
 In addition to WordPress Plugins, Composer is used to manage third party dependencies that some plugins rely on as well as provide developer tools for working with PHP applications. The Composer package comes with scripts that can be run via the command:
