@@ -113,9 +113,12 @@ class Screener {
       let input = step.find('input[name="Person[0].headOfHousehold"]:checked');
 
       // Reset HOH to be element at index 0 and remove current HOH from array.
-      this._people.forEach((member, index) => {
-        if(member._attrs.headOfHousehold === true && index !== 0) {
-          this._people.splice(index, 1);
+      this._people.forEach((member, i) => {
+        if (member._attrs.headOfHousehold === true && i !== 0) {
+          this._people.splice(i, 1);
+
+          $(this._el).find(`[id*="screener-person-${i}-income-"]`).remove();
+          $(this._el).find(`[id*="screener-person-${i}-expenses-"]`).remove();
         }
       });
 
@@ -429,15 +432,18 @@ class Screener {
       personIndex: parseInt($el.data('personIndex'), 10) || 0,
       matrixIndex: parseInt($el.data('matrixIndex'), 10) || 0
     });
+
     const $renderTarget = $el.data('renderTarget') ?
         $($el.data('renderTarget')) :
         $el.closest(`.${Screener.CssClass.MATRIX}`);
+
     if ($target.length) {
       $target.removeClass(Screener.CssClass.HIDDEN);
     } else if (!$el.data('renderTarget') ||
         !$renderTarget.find(`.${Screener.CssClass.MATRIX_ITEM}`).length) {
       $renderTarget.append(renderedTemplate);
     }
+
     return this;
   }
 
@@ -805,6 +811,7 @@ class Screener {
           incomes: [],
           expenses: []
         });
+
         _.each(['incomes', 'expenses'], key => {
           $step.find('[name$="amount"]').filter(':visible')
               .filter(`[name*="${key}"]`).each((i, el) => {
@@ -849,6 +856,7 @@ class Screener {
             return false;
           }
         }
+
         break;
       }
       case 'step-10': {
@@ -1233,10 +1241,14 @@ class Screener {
    * @return {this} Screener
    */
   _removePerson(i) {
+    let el = $(this._el);
+
     this._people.splice(i, 1);
     this._household.set('members', this._people.length);
-    $(this._el).find('input[name="Household.members"]')
+
+    el.find('input[name="Household.members"]')
         .val(this._people.length);
+
     return this;
   }
 
