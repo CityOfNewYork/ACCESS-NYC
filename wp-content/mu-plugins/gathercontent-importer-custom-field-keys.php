@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: GatherContent Importer Custom Field Keys
- * Description: Mapped WordPress Field meta_keys edit
+ * Description: Mapped WordPress Field meta_keys
  * Author: NYC Opportunity
  */
 
@@ -16,6 +16,7 @@ add_filter('gathercontent_importer_custom_field_keys', function($meta_keys) {
       $new_meta_keys[$key] = $value;
     }
   }
+
   // return the new array
   return $new_meta_keys;
 });
