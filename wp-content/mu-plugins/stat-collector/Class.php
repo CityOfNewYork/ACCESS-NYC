@@ -2,63 +2,93 @@
 
 namespace StatCollector;
 
-use MockDatabase;
+use wpdb;
+use Aws\Ses\SesClient;
+use StatCollector\Check as Check;
+use StatCollector\MockDatabase as MockDatabase;
+use StatCollector\wpdbssl as wpdbssl;
 
 class StatCollector {
-  public $priority = 10;
-
   /**
-   * Constructor
+   * Plugin Constructor
+   *
+   * @param   Object  $settings  Instantiated settings object.
    */
-  public function __construct() {
-    // Internal actions to call in a plugin/hook sense
-    add_action('drools_request', [$this, 'droolsRequest'], $this->priority, 2);
-    add_action('drools_response', [$this, 'droolsResponse'], $this->priority, 2);
-    add_action('smnyc_message_sent', [$this, 'resultsSent'], $this->priority, 5);
-    add_action('peu_data', [$this, 'peuData'], $this->priority, 3);
+  public function __construct($settings) {
+    $this->settings = $settings;
 
-    // AJAX endpoints to directly write info
-    add_action('wp_ajax_response_update', [$this, 'responseUpdate'], $this->priority);
-    add_action('wp_ajax_nopriv_response_update', [$this, 'responseUpdate'], $this->priority);
+    $this->check = new Check($settings);
 
-    // Hook for plugin instantiation
+    /**
+     * Hooks for internal actions that collect information to write to the DB.
+     */
+
+    add_action('drools_request', [$this, 'droolsRequest'], $this->settings->priority, 2);
+    add_action('drools_response', [$this, 'droolsResponse'], $this->settings->priority, 2);
+    add_action('smnyc_message_sent', [$this, 'resultsSent'], $this->settings->priority, 5);
+
+    /**
+     * Hook for plugin post-instantiation.
+     */
+
     do_action('init_stat_collector', $this);
   }
 
+  /**
+   * Hook to save the Drools (eligibility screening) request
+   *
+   * @param   String  $data  The JSON object of the request
+   * @param   String  $uid   The GUID of the request
+   */
   public function droolsRequest($data, $uid) {
     $db = $this->getDb();
+
     $result = $db->insert('requests', [
       'uid' => $uid,
       'data' => json_encode($data),
     ]);
 
     if ($result === false) {
-      error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($data));
+      $this->notify($db->last_error, true);
     }
+
+    $db->close();
   }
 
+  /**
+   * Hook to save the Drools (eligibility screening) Response
+   *
+   * @param   String  $response  The JSON object of the response
+   * @param   String  $uid       The GUID of the response
+   */
   public function droolsResponse($response, $uid) {
     $db = $this->getDb();
+
     $result = $db->insert('responses', [
       'uid' => $uid,
       'data' => json_encode($response),
     ]);
 
+    // Log errors
     if ($result === false) {
-      error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($response));
+      $this->notify($db->last_error, true);
     }
+
+    $db->close();
   }
 
   /**
    * Hook for the Stat Collector action for saving the email content to the DB
-   * @param   [type]  $type  email/sms/whatever the class type is
-   * @param   [type]  $to    The number/email sent to
-   * @param   [type]  $uid   The GUID of the results
-   * @param   [type]  $url   The main url shared
-   * @param   [type]  $msg   The body of the message
+   *
+   * @param   String  $type  email/sms/whatever the class type is
+   * @param   String  $to    The number/email sent to
+   * @param   String  $uid   The GUID of the results
+   * @param   String  $url   The main url shared
+   * @param   String  $msg   The body of the message
    */
   public function resultsSent($type, $to, $uid, $url = null, $message = null) {
     $db = $this->getDb();
+
     $result = $db->insert('messages', [
       'uid' => $uid,
       'msg_type' => strtolower($type),
@@ -67,110 +97,93 @@ class StatCollector {
       'message' => $message
     ]);
 
-    // Log Data
-    // if ($result === false) {
-    //   $request_parameters = array(strtolower($type), $to, $uid, $url, $message);
-    //   error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($request_parameters));
-    // }
-  }
-
-  public function peuData($staff, $client, $uid) {
-    if (empty($uid)) {
-      return;
-    }
-
-    $db = $this->getDb();
-
-    if (!empty($staff)) {
-      $result = $db->query($db->prepare(
-        'INSERT into peu_staff (uid, data) VALUES (%s, %s)',
-        $uid,
-        json_encode($staff)
-      ));
-
-      // Log Data
-      // if ($result === false) {
-      //   $request_parameters = array($staff, $client, $uid);
-      //   error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($request_parameters));
-      // }
-    }
-
-    if (!empty($client)) {
-      $result = $db->query($db->prepare(
-        'INSERT into peu_client (uid, data) VALUES (%s, %s)',
-        $uid,
-        json_encode($client)
-      ));
-
-      // Log Data
-      // if ($result === false) {
-      //   $request_parameters = array($staff, $client, $uid);
-      //   error_log('STAT COLLECTOR ERROR ' . $db->last_error.json_encode($request_parameters));
-      // }
-    }
-  }
-
-  public function responseUpdate() {
-    $uid = $_POST['GUID'];
-    $url = $_POST['url'];
-    $programs = $_POST['programs'];
-
-    if (empty($uid) || empty($url) || empty($programs)) {
-      wp_send_json(array(
-        'status' => 'fail',
-        'message' => 'missing values'
-      ));
-
-      return wp_die();
-    }
-
-    $db = $this->getDb();
-    $result = $db->query($db->prepare(
-      'INSERT into response_update (uid, url, program_codes) VALUES (%s, %s, %s)',
-      $uid,
-      $url,
-      $programs
-    ));
-
+    // Log errors
     if ($result === false) {
-      $request_parameters = array($uid, $url, $programs);
-      error_log('STAT COLLECTOR ERROR ' . $db->last_error . json_encode($request_parameters));
+      $this->notify($db->last_error, true);
     }
 
-    wp_send_json(array('status' => 'ok'));
-    wp_die();
+    $db->close();
   }
 
+  /**
+   * Logs a message and sends notification via wp_mail email. The admin will need
+   * to reset the notify option once a message is sent to prevent continuous mailing.
+   *
+   * @param   String  $msg  The message to send.
+   */
+  public function notify($msg, $mail = false, $throttle = true) {
+    $msg = $this->settings->plugin . ': ' . $msg;
+    $statc_notify = $this->settings->prefix . '_' . $this->settings->notify;
+    $notify = get_option($statc_notify);
+
+    error_log($msg);
+
+    if ($mail && $throttle && $notify === $this->settings->notify_value) {
+      $msg = $msg . ' This is the first instance of the error. All following
+      instances will be logged to the server. Recheck the "Send Notifications"
+      option in the admin menu.';
+
+      wp_mail(get_option('admin_email'), $this->settings->notify_subject, $msg);
+
+      update_option($statc_notify, '0');
+    } elseif ($mail && !$throttle) {
+      wp_mail(get_option('admin_email'), $this->settings->notify_subject, $msg);
+    }
+  }
+
+  /**
+   * Connects to the database using credentials and the WP DB SSL abstraction included in this plugin
+   *
+   * @return  Object  Instance of wpdb.
+   */
   private function getDb() {
-    $host = get_option('statc_host');
-    $database = get_option('statc_database');
-    $user = get_option('statc_user');
-    $password = get_option('statc_password');
-    $bootstrapped = get_option('statc_bootstrapped');
+    $prefix = $this->settings->prefix . '_';
+
+    $host = get_option($prefix . $this->settings->host);
+    $database = get_option($prefix . $this->settings->database);
+    $user = get_option($prefix . $this->settings->user);
+    $password = get_option($prefix . $this->settings->password);
 
     $host = (!empty($host)) ? $host : STATC_HOST;
     $database = (!empty($database)) ? $database : STATC_DATABASE;
     $user = (!empty($user)) ? $user : STATC_USER;
     $password = (!empty($password)) ? $password : STATC_PASSWORD;
-    $bootstrapped = (!empty($bootstrapped)) ? $bootstrapped : STATC_BOOTSTRAPPED;
 
     if (empty($host) || empty($database) || empty($user) || empty($password)) {
-      error_log('StatCollector is missing database connection information. Cannot log');
+      $this->notify('Missing database connection information. Cannot log.');
+
       return new MockDatabase();
     }
 
-    $db = new \wpdb($user, $password, $database, $host);
+    if ($this->check->certificateAuthority()) {
+      $certificate_authority = plugin_dir_path(__FILE__) . $this->settings->ssl_ca;
+
+      $db = new wpdbssl($user, $password, $database, $host, $certificate_authority);
+    } else {
+      $db = new wpdb($user, $password, $database, $host);
+
+      $this->notify('Certificate Authority not found.', true, false);
+    }
+
     $db->suppress_errors();
     $db->show_errors();
 
-    if ($bootstrapped !== '5') {
+    if (!$this->check->tables()) {
       $this->__bootstrap($db);
     }
 
     return $db;
   }
 
+  /**
+   * Creates the tables for the data if they do not exist. Sets the 'statc_bootstrapped'
+   * admin option to confirm that this process has been done.
+   *
+   * @param   Object  $db  Instance of wpdb (WordPress DB abstraction method)
+   */
   private function __bootstrap($db) {
+    $statc_bootstrapped = $this->settings->prefix . '_' . $this->settings->bootstrapped;
+
     $db->query(
       'CREATE TABLE IF NOT EXISTS messages (
         id INT(11) NOT NULL AUTO_INCREMENT,
@@ -205,26 +218,6 @@ class StatCollector {
     );
 
     $db->query(
-      'CREATE TABLE IF NOT EXISTS peu_staff (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        uid VARCHAR(13) DEFAULT NULL,
-        data MEDIUMBLOB NOT NULL,
-        date DATETIME DEFAULT NOW(),
-        PRIMARY KEY(id)
-      ) ENGINE=InnoDB'
-    );
-
-    $db->query(
-      'CREATE TABLE IF NOT EXISTS peu_client (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        uid VARCHAR(13) DEFAULT NULL,
-        data MEDIUMBLOB NOT NULL,
-        date DATETIME DEFAULT NOW(),
-        PRIMARY KEY(id)
-      ) ENGINE=InnoDB'
-    );
-
-    $db->query(
       'CREATE TABLE IF NOT EXISTS response_update (
         id INT(11) NOT NULL AUTO_INCREMENT,
         uid VARCHAR(13) DEFAULT NULL,
@@ -234,8 +227,8 @@ class StatCollector {
       ) ENGINE=InnoDB'
     );
 
-    // we will just let this fail if the columns exist
-    // from previous migrations. But silence the error
+    // We will just let this fail if the columns exist from previous migrations.
+    // But silence the error.
     $db->hide_errors();
 
     $db->query(
@@ -251,96 +244,6 @@ class StatCollector {
 
     $db->show_errors();
 
-    update_option('statc_bootstrapped', 5);
-  }
-
-  public function createSettingsSection() {
-    $id = 'statcollect_aws';
-    $title = 'Stat Collector Settings';
-    $callback = [$this, 'settingsHeadingText'];
-    $page = 'collector_config';
-
-    add_settings_section($id, $title, $callback, $page);
-
-    add_settings_field(
-      'statc_host', // field name
-      'MySQL host/endpoint', // label
-      [$this, 'settingsFieldHtml'], // HTML content
-      'collector_config', // page
-      'statcollect_aws', // section
-      ['statc_host', '']
-    );
-
-    add_settings_field(
-      'statc_database',
-      'Database Name',
-      [$this, 'settingsFieldHtml'],
-      'collector_config',
-      'statcollect_aws',
-      ['statc_database', '']
-    );
-
-    add_settings_field(
-      'statc_user',
-      'Database Username',
-      [$this, 'settingsFieldHtml'],
-      'collector_config',
-      'statcollect_aws',
-      ['statc_user', '']
-    );
-
-    add_settings_field(
-      'statc_password',
-      'Database Password',
-      [$this, 'settingsFieldHtml'],
-      'collector_config',
-      'statcollect_aws',
-      ['statc_password', '']
-    );
-
-    register_setting('statcollect_settings', 'statc_host');
-    register_setting('statcollect_settings', 'statc_database');
-    register_setting('statcollect_settings', 'statc_user');
-    register_setting('statcollect_settings', 'statc_password');
-  }
-
-  public function settingsHeadingText() {
-    echo "<p>Enter your MySQL credentials here.</p>";
-  }
-
-  public function settingsFieldHtml($args) {
-    echo implode([
-      '<input ',
-      'type="text" ',
-      'size="40" ',
-      'name="' . $args[0] . '" ',
-      'id="' . $args[0] . '" ',
-      'value="' . get_option($args[0], '') . '" ',
-      'placeholder="' . $args[1] . '" ',
-      '/>'
-    ], '');
-
-    if (constant(strtoupper($args[0]))) {
-      echo implode([
-        '<p class="description">',
-        'Environment currently set to ',
-        '<code>' . constant(strtoupper($args[0])) . '</code>',
-        '<p>'
-      ], '');
-    }
-  }
-
-  /**
-   * Singleton class instance.
-   * @return AdManager
-   */
-  public static function getInstance() {
-    static $instance = null;
-
-    if ($instance == null) {
-      $instance = new self();
-    }
-
-    return $instance;
+    update_option($statc_bootstrapped, $this->settings->bootstrapped_value); // Update admin panel
   }
 }
