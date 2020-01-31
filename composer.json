@@ -119,7 +119,7 @@
     "wpackagist-plugin/timber-library": "^1.14.0",
     "wpackagist-plugin/wp-all-export": "^1.2.5",
     "wpackagist-plugin/wp-security-questions": "^1.0",
-    "wpackagist-plugin/wps-hide-login": "1.5.4.2",
+    "wpackagist-plugin/wps-hide-login": "^1.5",
     "advanced-custom-fields/advanced-custom-fields-pro": "^5.8",
     "wpml/wpml-multilingual-cms": "^4.3.6",
     "wpml/wpml-string-translation": "^3.0.6",
