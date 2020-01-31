@@ -181,6 +181,6 @@ class wpdbssl extends wpdb {
   private function mysqli_ssl_set() {
     $certificate_authority = $this->certificate_authority;
 
-    mysqli_ssl_set($this->dbh, NULL, NULL, $certificate_authority);
+    mysqli_ssl_set($this->dbh, NULL, NULL, $certificate_authority, NULL, NULL);
   }
 }

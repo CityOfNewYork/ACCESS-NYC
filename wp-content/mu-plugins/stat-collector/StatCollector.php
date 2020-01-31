@@ -19,8 +19,16 @@ require_once plugin_dir_path(__FILE__) . 'MockDatabase.php';
 
 $settings = new Settings();
 
-new StatCollector($settings);
+/**
+ * Init Stat Collector
+ */
+add_action('init', function() use ($settings) {
+  new StatCollector($settings);
+});
 
+/**
+ * Init Admin Options
+ */
 add_action('admin_menu', function() use ($settings) {
   $check = new Check($settings);
 

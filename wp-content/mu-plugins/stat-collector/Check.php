@@ -54,7 +54,7 @@ class Check {
    *
    * @return  Boolean  True if connection works, false if not
    */
-  public function connection() {
+  public function connection($table = false) {
     $prefix = $this->settings->prefix . '_';
 
     $host = get_option($prefix . $this->settings->host);

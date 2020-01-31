@@ -128,9 +128,6 @@ class Settings {
   /** @var  String  Disabled state for the checkbox flag option */
   private $notify_disabled = false;
 
-  /** @var  String  Subject line for notification emails */
-  public $notify_subject = 'Stat Collector';
-
   /** @var  String  Amount of errors to tolerate before sending another error notification. */
   public $notify_error_count = 20;
 

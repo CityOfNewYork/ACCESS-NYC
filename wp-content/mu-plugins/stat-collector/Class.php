@@ -3,7 +3,6 @@
 namespace StatCollector;
 
 use wpdb;
-use Aws\Ses\SesClient;
 use StatCollector\Check as Check;
 use StatCollector\MockDatabase as MockDatabase;
 use StatCollector\wpdbssl as wpdbssl;
@@ -17,85 +16,49 @@ class StatCollector {
   public function __construct($settings) {
     $this->settings = $settings;
 
+    $this->prefix = $this->settings->prefix . '_';
+
     $this->check = new Check($settings);
 
     /**
-     * Hooks for internal actions that collect information to write to the DB.
+     * Hook for internal actions that collect information to write to the DB.
+     *
+     * @param  Object  $this  Instance of StatCollector
      */
-
-    add_action('drools_request', [$this, 'droolsRequest'], $this->settings->priority, 2);
-    add_action('drools_response', [$this, 'droolsResponse'], $this->settings->priority, 2);
-    add_action('smnyc_message_sent', [$this, 'resultsSent'], $this->settings->priority, 5);
+    do_action($this->prefix . 'register', $this);
 
     /**
      * Hook for plugin post-instantiation.
+     *
+     * @param  Object  $this  Instance of StatCollector
      */
-
-    do_action('init_stat_collector', $this);
+    do_action($this->prefix . 'init', $this);
   }
 
   /**
-   * Hook to save the Drools (eligibility screening) request
+   * Method to insert information into the database. It will log MySQL errors upon failure.
    *
-   * @param   String  $data  The JSON object of the request
-   * @param   String  $uid   The GUID of the request
+   * @param   String   $table  The name of the table to use
+   * @param   Data     $data   The data to insert into the DB
+   *
+   * @return  Boolean          False if failure, true if successful
    */
-  public function droolsRequest($data, $uid) {
-    $db = $this->getDb();
+  public function collect($table, $data) {
+    if (gettype($table) !== 'string') {
+      $this->notify('Collector argument type incorrect.');
 
-    $result = $db->insert('requests', [
-      'uid' => $uid,
-      'data' => json_encode($data),
-    ]);
-
-    if ($result === false) {
-      $this->notify($db->last_error, true);
+      return false;
     }
 
-    $db->close();
-  }
+    if (gettype($data) !== 'array') {
+      $this->notify('Collector argument type incorrect.');
 
-  /**
-   * Hook to save the Drools (eligibility screening) Response
-   *
-   * @param   String  $response  The JSON object of the response
-   * @param   String  $uid       The GUID of the response
-   */
-  public function droolsResponse($response, $uid) {
-    $db = $this->getDb();
-
-    $result = $db->insert('responses', [
-      'uid' => $uid,
-      'data' => json_encode($response),
-    ]);
-
-    // Log errors
-    if ($result === false) {
-      $this->notify($db->last_error, true);
+      return false;
     }
 
-    $db->close();
-  }
+    $db = $this->getDb($table);
 
-  /**
-   * Hook for the Stat Collector action for saving the email content to the DB
-   *
-   * @param   String  $type  email/sms/whatever the class type is
-   * @param   String  $to    The number/email sent to
-   * @param   String  $uid   The GUID of the results
-   * @param   String  $url   The main url shared
-   * @param   String  $msg   The body of the message
-   */
-  public function resultsSent($type, $to, $uid, $url = null, $message = null) {
-    $db = $this->getDb();
-
-    $result = $db->insert('messages', [
-      'uid' => $uid,
-      'msg_type' => strtolower($type),
-      'address' => $to,
-      'url' => $url,
-      'message' => $message
-    ]);
+    $result = $db->insert($table, $data);
 
     // Log errors
     if ($result === false) {
@@ -109,11 +72,13 @@ class StatCollector {
    * Logs a message and sends notification via wp_mail email. The admin will need
    * to reset the notify option once a message is sent to prevent continuous mailing.
    *
-   * @param   String  $msg  The message to send.
+   * @param  String  $msg  The message to send.
    */
   public function notify($msg, $mail = false, $throttle = true) {
     $msg = $this->settings->plugin . ': ' . $msg;
-    $statc_notify = $this->settings->prefix . '_' . $this->settings->notify;
+
+    $statc_notify = $this->prefix . $this->settings->notify;
+
     $notify = get_option($statc_notify);
 
     error_log($msg);
@@ -123,11 +88,11 @@ class StatCollector {
       instances will be logged to the server. Recheck the "Send Notifications"
       option in the admin menu.';
 
-      wp_mail(get_option('admin_email'), $this->settings->notify_subject, $msg);
+      wp_mail(get_option('admin_email'), $this->settings->plugin, $msg);
 
       update_option($statc_notify, '0');
     } elseif ($mail && !$throttle) {
-      wp_mail(get_option('admin_email'), $this->settings->notify_subject, $msg);
+      wp_mail(get_option('admin_email'), $this->settings->plugin, $msg);
     }
   }
 
@@ -136,13 +101,11 @@ class StatCollector {
    *
    * @return  Object  Instance of wpdb.
    */
-  private function getDb() {
-    $prefix = $this->settings->prefix . '_';
-
-    $host = get_option($prefix . $this->settings->host);
-    $database = get_option($prefix . $this->settings->database);
-    $user = get_option($prefix . $this->settings->user);
-    $password = get_option($prefix . $this->settings->password);
+  private function getDb($table = false) {
+    $host = get_option($this->prefix . $this->settings->host);
+    $database = get_option($this->prefix . $this->settings->database);
+    $user = get_option($this->prefix . $this->settings->user);
+    $password = get_option($this->prefix . $this->settings->password);
 
     $host = (!empty($host)) ? $host : STATC_HOST;
     $database = (!empty($database)) ? $database : STATC_DATABASE;
@@ -166,6 +129,7 @@ class StatCollector {
     }
 
     $db->suppress_errors();
+
     $db->show_errors();
 
     if (!$this->check->tables()) {
@@ -179,71 +143,24 @@ class StatCollector {
    * Creates the tables for the data if they do not exist. Sets the 'statc_bootstrapped'
    * admin option to confirm that this process has been done.
    *
-   * @param   Object  $db  Instance of wpdb (WordPress DB abstraction method)
+   * @param  Object  $db  Instance of wpdb (WordPress DB abstraction method)
    */
   private function __bootstrap($db) {
-    $statc_bootstrapped = $this->settings->prefix . '_' . $this->settings->bootstrapped;
+    $prefix = $this->prefix;
 
-    $db->query(
-      'CREATE TABLE IF NOT EXISTS messages (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        uid VARCHAR(13) DEFAULT NULL,
-        msg_type VARCHAR(10) DEFAULT NULL,
-        address VARCHAR(255) NOT NULL,
-        date DATETIME DEFAULT NOW(),
-        url VARCHAR(512) DEFAULT NULL,
-        message TEXT DEFAULT NULL,
-        PRIMARY KEY(id)
-      ) ENGINE=InnoDB'
-    );
+    $statc_bootstrapped = $this->prefix . $this->settings->bootstrapped;
 
-    $db->query(
-      'CREATE TABLE IF NOT EXISTS requests (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        uid VARCHAR(13) DEFAULT NULL,
-        data MEDIUMBLOB NOT NULL,
-        date DATETIME DEFAULT NOW(),
-        PRIMARY KEY(id)
-      ) ENGINE=InnoDB'
-    );
+    /**
+     * Hook for bootstrapping the database. Example hook below.
+     *
+     * @param   Object   The wpdb abstraction object.
+     *
+     * @return  Boolean  Wether the bootstrapping is successful.
+     */
+    $success = do_action($this->prefix . 'bootstrap', $db);
 
-    $db->query(
-      'CREATE TABLE IF NOT EXISTS responses (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        uid VARCHAR(13) DEFAULT NULL,
-        data MEDIUMBLOB NOT NULL,
-        date DATETIME DEFAULT NOW(),
-        PRIMARY KEY(id)
-      ) ENGINE=InnoDB'
-    );
-
-    $db->query(
-      'CREATE TABLE IF NOT EXISTS response_update (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        uid VARCHAR(13) DEFAULT NULL,
-        url MEDIUMBLOB NOT NULL,
-        program_codes VARCHAR(256) DEFAULT NULL,
-        PRIMARY KEY(id)
-      ) ENGINE=InnoDB'
-    );
-
-    // We will just let this fail if the columns exist from previous migrations.
-    // But silence the error.
-    $db->hide_errors();
-
-    $db->query(
-      'ALTER TABLE messages
-      ADD url VARCHAR(512) DEFAULT NULL AFTER date,
-      ADD message TEXT DEFAULT NULL AFTER url'
-    );
-
-    $db->query(
-      'ALTER TABLE response_update
-      ADD date DATETIME DEFAULT NOW() AFTER program_codes'
-    );
-
-    $db->show_errors();
-
-    update_option($statc_bootstrapped, $this->settings->bootstrapped_value); // Update admin panel
+    if ($success) {
+      update_option($statc_bootstrapped, $this->settings->bootstrapped_value); // Update admin panel
+    }
   }
 }
