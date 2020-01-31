@@ -16,6 +16,18 @@ if (class_exists('Whoops\Run')) {
 }
 
 /**
+ * Shorthand for debug logging
+ *
+ * @param   String   $str     The string to log.
+ * @param   Boolean  $return  Wether to make it human readable.
+ */
+// phpcs:disable
+function debug($str, $return = true) {
+  error_log(print_r($str, $return));
+}
+// phpcs:enable
+
+/**
  * Include the plugins module
  */
 
@@ -44,21 +56,6 @@ if (null !== WP_REDIS_HOST) {
  */
 
 activate_plugin('query-monitor/query-monitor.php');
-
-/**
- * Remove Stat Collector data logging actions
- * @param   Class  $instance  The instantiated StatCollector class
- */
-
-add_action('init_stat_collector', function($instance) {
-  remove_action('drools_request', [$instance, 'droolsRequest'], $instance->priority);
-  remove_action('drools_response', [$instance, 'droolsResponse'], $instance->priority);
-  remove_action('results_sent', [$instance, 'resultsSent'], $instance->priority);
-  remove_action('peu_data', [$instance, 'peuData'], $instance->priority);
-
-  remove_action('wp_ajax_response_update', [$instance, 'responseUpdate'], $instance->priority);
-  remove_action('wp_ajax_nopriv_response_update', [$instance, 'responseUpdate'], $instance->priority);
-});
 
 /**
  * Allow local development requests
