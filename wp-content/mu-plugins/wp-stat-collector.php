@@ -114,4 +114,4 @@ add_action('statc_bootstrap', function($db) {
   return true;
 });
 
-require plugin_dir_path(__FILE__) . '/stat-collector/StatCollector.php';
+require plugin_dir_path(__FILE__) . '/wp-stat-collector/StatCollector.php';

@@ -7,7 +7,7 @@ if (!defined('WPINC')) {
 }
 
 require_once ABSPATH . WPINC . '/wp-db.php'; // wpdb; WordPress DB abstraction
-require_once plugin_dir_path(__FILE__) . 'wp-db-ssl.php'; // wpdb SSL extention
+require_once plugin_dir_path(__FILE__) . 'WordPressDatabaseSSL.php'; // wpdb class extention
 require_once plugin_dir_path(__FILE__) . 'Class.php';
 require_once plugin_dir_path(__FILE__) . 'Settings.php';
 require_once plugin_dir_path(__FILE__) . 'Check.php';

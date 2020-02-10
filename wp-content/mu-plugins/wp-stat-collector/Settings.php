@@ -206,7 +206,11 @@ class Settings {
       [$this, 'settingsFieldInput'], // HTML content
       $this->page,                   // Page
       $statc_section_id,             // Section ID
-      [$statc_host, '']              // Args passed to callback
+      array(                         // Args passed to callback
+        'id' => $statc_host,
+        'placeholder' => '',
+        'private' => false
+      )
     );
 
     add_settings_field(
@@ -215,7 +219,11 @@ class Settings {
       [$this, 'settingsFieldInput'],
       $this->page,
       $statc_section_id,
-      [$statc_database, '']
+      array(
+        'id' => $statc_database,
+        'placeholder' => '',
+        'private' => false
+      )
     );
 
     add_settings_field(
@@ -224,7 +232,11 @@ class Settings {
       [$this, 'settingsFieldInput'],
       $this->page,
       $statc_section_id,
-      [$statc_user, '']
+      array(
+        'id' => $statc_user,
+        'placeholder' => '',
+        'private' => false
+      )
     );
 
     add_settings_field(
@@ -233,7 +245,11 @@ class Settings {
       [$this, 'settingsFieldInput'],
       $this->page,
       $statc_section_id,
-      [$statc_password, '']
+      array(
+        'id' => $statc_password,
+        'placeholder' => '',
+        'private' => true
+      )
     );
 
     add_settings_field(
@@ -314,24 +330,28 @@ class Settings {
    * @param   Array  $args  Field arguments, [ID, Placeholder] of the text input
    */
   public function settingsFieldInput($args) {
-    echo implode([
+    echo implode('', [
       '<input ',
-      'type="text" ',
+      ($args['private']) ? 'type="password" ' : 'type="text" ',
       'size="40" ',
-      'name="' . $args[0] . '" ',
-      'id="' . $args[0] . '" ',
-      'value="' . get_option($args[0], '') . '" ',
-      'placeholder="' . __($args[1]) . '" ',
+      'name="' . $args['id'] . '" ',
+      'id="' . $args['id'] . '" ',
+      'value="' . get_option($args['id'], '') . '" ',
+      'placeholder="' . __($args['placeholder']) . '" ',
       '/>'
-    ], '');
+    ]);
 
-    if (constant(strtoupper($args[0]))) {
-      echo implode([
+    if (defined(strtoupper($args['id']))) {
+      $constant = constant(strtoupper($args['id']));
+      $html = $constant;
+      $html = ($args['private']) ? str_repeat('•', strlen($constant)) : $constant;
+
+      echo implode('', [
         '<p class="description">',
         __('Environment currently set to '),
-        '<code>' . constant(strtoupper($args[0])) . '</code>',
+        '<code>' . $html . '</code>',
         '<p>'
-      ], '');
+      ]);
     }
   }
 
@@ -342,7 +362,9 @@ class Settings {
    * @param   [type]  $args  Field arguments [ID, Value, Label, Disabled], of the text input
    */
   public function settingsFieldCheckbox($args) {
-    echo implode([
+    debug($args['id']);
+    debug(get_option($args['id']));
+    echo implode('', [
       '<fieldset>',
       '  <legend class="screen-reader-text"><span>' . __($args['label']) . '</span></legend>',
       '  <label for="' . $args['id'] . '">',
@@ -352,9 +374,9 @@ class Settings {
       '    ' . __($args['label']) . '',
       '  </label>',
       '</fieldset>',
-    ], '');
+    ]);
 
-    if (constant(strtoupper($args['id']))) {
+    if (defined(strtoupper($args['id']))) {
       echo implode([
         '<p class="description">',
         __('Environment currently set to '),

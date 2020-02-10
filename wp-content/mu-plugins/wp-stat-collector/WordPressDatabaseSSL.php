@@ -73,13 +73,6 @@ class wpdbssl extends wpdb {
   public function db_connect($allow_bail = true) {
     $this->is_mysql = true;
 
-    /**
-     * Deprecated in 3.9+ when using MySQLi. No equivalent
-     * $new_link parameter exists for mysqli_* functions.
-     */
-    $new_link = defined('MYSQL_NEW_LINK') ? MYSQL_NEW_LINK : true;
-    $client_flags = defined('MYSQL_CLIENT_FLAGS') ? MYSQL_CLIENT_FLAGS : 0;
-
     if ($this->use_mysqli) {
       $this->dbh = mysqli_init();
 
@@ -104,10 +97,22 @@ class wpdbssl extends wpdb {
 
       /**
        * Use mysqli_ssl_set to configure SSL if the certificate authority exists.
+       *
+       * @link https://www.php.net/manual/en/mysqli.ssl-set.php
+       *
+       * MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT
+       * Like MYSQLI_CLIENT_SSL, but disables validation of the provided SSL
+       * certificate. This is only for installations using MySQL Native Driver
+       * and MySQL 5.6 or later.
+       *
+       * @link https://www.php.net/manual/en/mysqli.real-connect.php
+       *
        * @author NYC Opportunity
        */
       if (file_exists($this->certificate_authority)) {
         $this->mysqli_ssl_set();
+
+        $client_flags = MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
       }
 
       if (WP_DEBUG) {
