@@ -205,6 +205,7 @@ class EmailMe extends ContactMe {
       'id' => $this->prefix . '_display_name',
       'title' => 'Email Display Name <small><em>optional</em></small>',
       'section' => $section,
+      'translate' => true
     ));
 
     $this->registerSetting(array(

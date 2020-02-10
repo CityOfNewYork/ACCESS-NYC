@@ -301,19 +301,20 @@ class ContactMe {
     $this->registerSetting(array(
       'id' => $this->prefix . '_user',
       'title' => $this->account_label,
-      'section' => $section,
+      'section' => $section
     ));
 
     $this->registerSetting(array(
       'id' => $this->prefix . '_secret',
       'title' => $this->secret_label,
       'section' => $section,
+      'private' => true
     ));
 
     $this->registerSetting(array(
       'id' => $this->prefix . '_from',
       'title' => $this->from_label,
-      'section' => $section,
+      'section' => $section
     ));
   }
 
@@ -336,7 +337,8 @@ class ContactMe {
       $args['section'],
       array(
         'id' => $args['id'],
-        'translate' => (isset($args['translate'])) ? $args['translate'] : false
+        'translate' => (isset($args['translate'])) ? $args['translate'] : false,
+        'private' => (isset($args['private'])) ? $args['private'] : false
       )
     );
 
@@ -358,8 +360,6 @@ class ContactMe {
   public function settingsHeadingText() {
     echo '<p>';
     echo '  Enter your ' . $this->service . ' credentials here. ';
-    echo '  Values with <b>WPML</b> can be managed in <b>WPML</b> > <b>String Translations</b>.';
-    echo '  The text domain for this plugin is <b>smnyc</b>.';
     echo '</p>';
   }
 
@@ -373,30 +373,40 @@ class ContactMe {
    *                         translate = Wether to register for translation
    */
   public function settingsFieldCallback($args) {
-    $id = $args['id'];
-    $value = get_option($id, '');
+    $value = get_option($args['id'], '');
 
-    echo "<input ";
-    echo "type=\"text\" ";
-    echo "name=\"$id\" ";
-    echo "size=40 ";
-    echo "id=\"$id\" ";
-    echo "value=\"$value\" ";
-    echo "/>";
+    echo implode('', [
+      '<input ',
+      ($args['private']) ? 'type="password" ' : 'type="text" ',
+      'size="40" ',
+      'name="' . $args['id'] . '" ',
+      'id="' . $args['id'] . '" ',
+      'value="' . get_option($args['id'], '') . '" ',
+      'placeholder="' . __($args['placeholder']) . '" ',
+      '/>'
+    ]);
 
-    /** Display environment variable if available */
-    if (constant(strtoupper($args['id']))) {
-      echo '<p class="description">';
-      echo '  Environment currently set to <code>' . constant(strtoupper($id)) . '</code>';
-      echo '<p>';
+    if (defined(strtoupper($args['id']))) {
+      $constant = constant(strtoupper($args['id']));
+      $html = $constant;
+      $html = ($args['private']) ? str_repeat('•', strlen($constant)) : $constant;
+
+      echo implode('', [
+        '<p class="description">',
+        __('Environment currently set to '),
+        '<code>' . $html . '</code>',
+        '<p>'
+      ]);
     }
 
     /** Register this string for WPML translation */
     if ($args['translate']) {
-      do_action('wpml_register_single_string', $this->text_domain, $id, $value);
+      do_action('wpml_register_single_string', $this->text_domain, $args['id'], $value);
 
       echo '<p class="description">';
-      echo '  Translation name <code>' . $id . '</code>';
+      echo __('This should be the default language. ');
+      echo __('Create translations in WPML > String Translations. ');
+      echo __('Look for the translation name ') . '<code>' . $args['id'] . '</code>';
       echo '</p>';
     }
   }
