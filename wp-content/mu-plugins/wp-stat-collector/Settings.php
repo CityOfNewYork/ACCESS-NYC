@@ -316,10 +316,12 @@ class Settings {
     register_setting($statc_option_group, $statc_database);
     register_setting($statc_option_group, $statc_user);
     register_setting($statc_option_group, $statc_password);
-    register_setting($statc_option_group, $statc_bootstrapped);
-    register_setting($statc_option_group, $statc_ssl);
-    register_setting($statc_option_group, $statc_connection);
     register_setting($statc_option_group, $statc_notify);
+
+    /** If these are not disabled, they will need to be registered */
+    // register_setting($statc_option_group, $statc_bootstrapped);
+    // register_setting($statc_option_group, $statc_ssl);
+    // register_setting($statc_option_group, $statc_connection);
   }
 
   /**
@@ -366,7 +368,7 @@ class Settings {
       '<fieldset>',
       '  <legend class="screen-reader-text"><span>' . __($args['label']) . '</span></legend>',
       '  <label for="' . $args['id'] . '">',
-      '    <input type="checkbox" value="5" name="' . $args['id'] . '" id="' . $args['id'] . '" ',
+      '    <input type="checkbox" value="' . $args['value'] . '" name="' . $args['id'] . '" id="' . $args['id'] . '" ',
       '    ' . checked($args['value'], get_option($args['id']), false) . ' ',
       '    ' . disabled($args['disabled'], true, false) . ' >',
       '    ' . __($args['label']) . '',
