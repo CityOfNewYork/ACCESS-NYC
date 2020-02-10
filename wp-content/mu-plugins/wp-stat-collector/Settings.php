@@ -362,8 +362,6 @@ class Settings {
    * @param   [type]  $args  Field arguments [ID, Value, Label, Disabled], of the text input
    */
   public function settingsFieldCheckbox($args) {
-    debug($args['id']);
-    debug(get_option($args['id']));
     echo implode('', [
       '<fieldset>',
       '  <legend class="screen-reader-text"><span>' . __($args['label']) . '</span></legend>',
