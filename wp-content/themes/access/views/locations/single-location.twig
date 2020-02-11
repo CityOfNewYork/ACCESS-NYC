@@ -125,7 +125,7 @@
 
             {% include 'components/accordion.twig' with {
               this: {
-                id: program.slug,
+                id: function('url_decode', program.slug),
                 active: (loop.index == 1) ? true : false,
                 header: header,
                 body: body,
