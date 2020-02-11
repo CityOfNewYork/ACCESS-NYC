@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cddd755464c800b7660ac2b7a5220112",
+    "content-hash": "862c64e333c88bf7c45cdf237236eb2f",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1150,16 +1150,16 @@
         },
         {
             "name": "nyco/wp-stat-collector",
-            "version": "0.0.3",
+            "version": "0.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-stat-collector.git",
-                "reference": "269c20762d0955657f393ebf3a49e568ef168c5a"
+                "reference": "96b66ed2ca7e815a816a4e47b60b4f7d13efcba6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-stat-collector/zipball/269c20762d0955657f393ebf3a49e568ef168c5a",
-                "reference": "269c20762d0955657f393ebf3a49e568ef168c5a",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-stat-collector/zipball/96b66ed2ca7e815a816a4e47b60b4f7d13efcba6",
+                "reference": "96b66ed2ca7e815a816a4e47b60b4f7d13efcba6",
                 "shasum": ""
             },
             "require": {
@@ -1191,7 +1191,7 @@
                 "nycopportunity",
                 "wordpress"
             ],
-            "time": "2020-02-10T20:14:20+00:00"
+            "time": "2020-02-11T15:02:49+00:00"
         },
         {
             "name": "philippbaschke/acf-pro-installer",

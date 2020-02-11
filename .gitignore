@@ -74,6 +74,7 @@
 # Certs #
 #########
 *.pem
+!/wp-content/mu-plugins/wp-stat-collector/ca.pem
 
 # Packages #
 ############

@@ -38,6 +38,10 @@ The [sample autoloader](https://github.com/CityOfNewYork/nyco-wp-stat-collector/
 - Certificate Authority - A notice that a certificate authority has been found.
 - Connection - A notice that a connection can be made using the credetials above.
 
+## SSL
+
+Stat Collector uses the [Amazon Web Services RDS certificate bundle](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) for making MySQL connections over SSL.
+
 ## Actions
 
 ### statc_register
