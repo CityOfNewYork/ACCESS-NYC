@@ -102,6 +102,23 @@ function validate_params($namespace, $subject) {
 }
 
 /**
+ * Adds functionality to Twig.
+ *
+ * @param \Twig\Environment $twig The Twig environment.
+ * @return \Twig\Environment
+ */
+function add_to_twig( $twig ) {
+    // Adding functions as filters.
+    $twig->addFilter( new Timber\Twig_Filter( 'url_decode', 'url_decode' ) );
+
+    return $twig;
+}
+
+function url_decode( $text ) {
+    return  urldecode($text);
+}
+
+/**
  * Creates a shareable url along with valid hash
  * @param  array $params Requires programs, categories, date, guid, share_link
  * @return array         0; the url 1; the hash
