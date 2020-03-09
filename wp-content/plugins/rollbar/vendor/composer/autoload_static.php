@@ -33,9 +33,11 @@ class ComposerStaticInited105be67bb9151573b323ff5c8bb30a
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Prophecy\\' => 9,
         ),
         'M' => 
         array (
+            'Monolog\\' => 8,
             'Michelf\\' => 8,
         ),
         'D' => 
@@ -48,8 +50,8 @@ class ComposerStaticInited105be67bb9151573b323ff5c8bb30a
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -79,6 +81,14 @@ class ComposerStaticInited105be67bb9151573b323ff5c8bb30a
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Prophecy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
         'Michelf\\' => 
         array (
             0 => __DIR__ . '/..' . '/michelf/php-markdown/Michelf',
@@ -86,16 +96,6 @@ class ComposerStaticInited105be67bb9151573b323ff5c8bb30a
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'Prophecy\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
-            ),
         ),
     );
 
@@ -552,7 +552,6 @@ class ComposerStaticInited105be67bb9151573b323ff5c8bb30a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInited105be67bb9151573b323ff5c8bb30a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInited105be67bb9151573b323ff5c8bb30a::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInited105be67bb9151573b323ff5c8bb30a::$prefixesPsr0;
             $loader->classMap = ComposerStaticInited105be67bb9151573b323ff5c8bb30a::$classMap;
 
         }, null, ClassLoader::class);

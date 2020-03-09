@@ -3,6 +3,8 @@
 namespace Wpae\App\UnsecuredController;
 
 
+use Wpae\App\Service\Addons\AddonNotFoundException;
+use Wpae\App\Service\Addons\AddonService;
 use Wpae\Controller\BaseController;
 use Wpae\Http\Request;
 use Wpae\Scheduling\Export;
@@ -68,6 +70,8 @@ class SchedulingController extends BaseController
         $export = new \PMXE_Export_Record();
         $export->getById($exportId);
 
+        $this->disableExportsThatDontHaveAddon($export);
+
         if ($export->isEmpty()) {
             return new JsonResponse(array('message' => 'Export not found'), 404);
         }
@@ -92,8 +96,11 @@ class SchedulingController extends BaseController
             return new JsonResponse(array('message' => 'Export #' . $exportId . ' is currently in manually process. Request skipped.'), 409);
         } elseif ((int)$export->triggered and !(int)$export->processing) {
 
-            $export->set(array('canceled' => 0))->execute($logger, true);
-
+            try {
+                $export->set(array('canceled' => 0))->execute($logger, true);
+            } catch (AddonNotFoundException $e) {
+                die($e->getMessage());
+            }
             if (!(int)$export->triggered and !(int)$export->processing) {
                 $this->scheduledExportService->process($export);
                 return new JsonResponse(array('Export #' . $exportId . ' complete'), 201);
@@ -124,6 +131,27 @@ class SchedulingController extends BaseController
             !empty($_GET['export_id']) and
             !empty($_GET['export_key']) and
             $_GET['export_key'] == $cron_job_key;
+    }
+
+    /**
+     * @param $export
+     */
+    private function disableExportsThatDontHaveAddon($export)
+    {
+        $cpt = $export->options['cpt'];
+        if (!is_array($cpt)) {
+            $cpt = array($cpt);
+        }
+
+        $addons = new AddonService();
+
+        if (
+            ((in_array('users', $cpt) || in_array('shop_customer', $cpt)) && !$addons->isUserAddonActive())
+            ||
+            ($export->options['export_type'] == 'advanced' && $export->options['wp_query_selector'] == 'wp_user_query' && !$addons->isUserAddonActive())
+        ) {
+            die(\__('The User Export Add-On Pro is required to run this export. You can download the add-on here: <a href="http://www.wpallimport.com/portal/" target="_blank">http://www.wpallimport.com/portal/</a>', \PMXE_Plugin::LANGUAGE_DOMAIN));
+        }
     }
 
 }

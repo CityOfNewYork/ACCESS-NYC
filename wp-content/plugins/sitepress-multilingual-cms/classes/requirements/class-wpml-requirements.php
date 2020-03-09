@@ -21,21 +21,21 @@ class WPML_Requirements {
 			'name'    => 'WPML Translation Management',
 		),
 		'woocommerce-multilingual'    => array(
-			'version' => '2.5.2',
+			'version' => '4.7.0',
 			'name'    => 'WooCommerce Multilingual',
-			'url'     => '#',
+			'url'     => 'https://wpml.org/download/woocommerce-multilingual/',
 		),
 		'gravityforms-multilingual'   => array(
 			'name' => 'GravityForms Multilingual',
-			'url'  => '#',
+			'url'  => 'https://wpml.org/download/gravityforms-multilingual/',
 		),
 		'buddypress-multilingual'     => array(
 			'name' => 'BuddyPress Multilingual',
-			'url'  => '#',
+			'url'  => 'https://wpml.org/download/buddypress-multilingual/',
 		),
 		'wp-seo-multilingual'     => array(
 			'name' => 'Yoast SEO Multilingual',
-			'url'  => '#',
+			'url'  => 'https://wpml.org/download/yoast-seo-multilingual/',
 		),
 	);
 

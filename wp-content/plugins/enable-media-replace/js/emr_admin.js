@@ -26,7 +26,7 @@ jQuery(document).ready(function($)
       var source = $('.image_placeholder').first();
       if (typeof( $(source).data('filetype') ) !== 'undefined')
       {
-        source_type = $(source).data('filetype');
+        source_type = $(source).data('filetype').trim();
         this.debug('detected type - ' + source_type);
       }
       if (source.hasClass('is_image'))
@@ -108,7 +108,7 @@ jQuery(document).ready(function($)
       if (file !== null) /// file is null when empty, or error
       {
         target_is_image = (file.type.indexOf('image') >= 0) ? true : false;
-        target_type = file.type;
+        target_type = file.type.trim();
       }
       // If image, load thumbnail and get dimensions.
       if (file && target_is_image)

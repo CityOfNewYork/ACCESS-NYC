@@ -146,4 +146,17 @@ class WPML_Term_Translation extends WPML_Element_Translation {
 		}
 		return WPML_Terms_Translations::term_unique_slug( $slug, $taxonomy, $lang_code );
 	}
+
+	/**
+	 * @return self
+	 */
+	public static function getGlobalInstance() {
+		global $wpml_term_translations, $wpdb;
+
+		if ( ! isset( $wpml_term_translations ) ) {
+			$wpml_term_translations = new WPML_Term_Translation( $wpdb );
+		}
+
+		return $wpml_term_translations;
+	}
 }

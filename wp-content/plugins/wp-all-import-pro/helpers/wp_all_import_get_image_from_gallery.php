@@ -19,7 +19,7 @@ function wp_all_import_get_image_from_gallery($image_name, $targetDir = FALSE, $
     $attch = '';
 
     // search attachment by attached file
-    $attachment_metas = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $wpdb->postmeta . " WHERE meta_key = %s AND (meta_value = %s OR meta_value LIKE %s);", '_wp_attached_file', $image_name, "%/" . $image_name));
+    $attachment_metas = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $wpdb->postmeta . " WHERE meta_key = %s AND (meta_value = %s OR meta_value LIKE %s ESCAPE '$');", '_wp_attached_file', $image_name, "%/" . str_replace('_', '$_', $image_name)));
 
     if (!empty($attachment_metas)) {
         foreach ($attachment_metas as $attachment_meta) {
@@ -32,7 +32,7 @@ function wp_all_import_get_image_from_gallery($image_name, $targetDir = FALSE, $
     }
 
     if (empty($attch)) {
-        $attachment_metas = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $wpdb->postmeta . " WHERE meta_key = %s AND (meta_value = %s OR meta_value LIKE %s);", '_wp_attached_file', sanitize_file_name($image_name), "%/" . sanitize_file_name($image_name)));
+        $attachment_metas = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $wpdb->postmeta . " WHERE meta_key = %s AND (meta_value = %s OR meta_value LIKE %s ESCAPE '$');", '_wp_attached_file', sanitize_file_name($image_name), "%/" . str_replace('_', '$_', sanitize_file_name($image_name))));
 
         if (!empty($attachment_metas)) {
             foreach ($attachment_metas as $attachment_meta) {
@@ -55,6 +55,9 @@ function wp_all_import_get_image_from_gallery($image_name, $targetDir = FALSE, $
 
     // Search attachment by file headers.
     if (empty($attch) and @file_exists($targetDir . DIRECTORY_SEPARATOR . $original_image_name)) {
+        if ( ! function_exists('wp_read_image_metadata') ) {
+            require_once( ABSPATH . 'wp-admin/includes/image.php' );
+        }
         if ($bundle_type == 'images' and ($img_meta = wp_read_image_metadata($targetDir . DIRECTORY_SEPARATOR . $original_image_name))) {
             if (trim($img_meta['title']) && !is_numeric(sanitize_title($img_meta['title']))) {
                 $img_title = $img_meta['title'];

@@ -68,7 +68,7 @@ function wp_all_export_prepare_template_csv($exportOptions, &$templateOptions)
 							$required_add_ons['PMWI_Plugin'] = array(
 								'name' => 'WooCommerce Add-On Pro',
 								'paid' => true,
-								'url'  => 'http://www.wpallimport.com/woocommerce-product-import/'
+								'url'  => 'http://www.wpallimport.com/woocommerce-product-import/?utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=import-wooco-products-template'
 							);
 						}
 
@@ -255,7 +255,7 @@ function wp_all_export_prepare_template_csv($exportOptions, &$templateOptions)
 						$required_add_ons['PMAI_Plugin'] = array(
 							'name' => 'ACF Add-On Pro',
 							'paid' => true,
-							'url'  => 'http://www.wpallimport.com/advanced-custom-fields/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin'
+							'url'  => 'http://www.wpallimport.com/advanced-custom-fields/?utm_source=export-plugin-free&utm_medium=required-addons&utm_campaign=acf'
 						);
 					}
 

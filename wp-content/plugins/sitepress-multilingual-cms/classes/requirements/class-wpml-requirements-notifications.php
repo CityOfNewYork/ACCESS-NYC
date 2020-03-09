@@ -17,8 +17,8 @@ class WPML_Requirements_Notification {
 	public function get_core_message( $issues ) {
 		if ( $issues ) {
 			$strings = array(
-				'title'   => __( 'Your WPML installation may cause problems with Gutenberg editor', 'sitepress' ),
-				'message' => __( 'You are using WPML Translation Management without String Translation. Some of the translations may not work this way. Please download and install WPML String Translation before you translate the content from Gutenberg editor.', 'sitepress' ),
+				'title'   => __( 'Your WPML installation may cause problems with Block editor', 'sitepress' ),
+				'message' => __( 'You are using WPML Translation Management without String Translation. Some of the translations may not work this way. Please download and install WPML String Translation before you translate the content from Block editor.', 'sitepress' ),
 			);
 
 			return $this->get_shared_message( $strings, $issues );

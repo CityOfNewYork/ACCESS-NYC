@@ -158,7 +158,7 @@ class WPML_PB_Integration {
 	 * Add all actions filters.
 	 */
 	public function add_hooks() {
-		add_action( 'pre_post_update', array( $this, 'migrate_location' ), 10, 2 );
+		add_action( 'pre_post_update', array( $this, 'migrate_location' ) );
 		add_action( 'save_post', array( $this, 'queue_save_post_actions' ), PHP_INT_MAX, 2 );
 		add_action( 'wpml_pb_resave_post_translation', array( $this, 'resave_post_translation_in_shutdown' ), 10, 1 );
 		add_action( 'icl_st_add_string_translation', array( $this, 'new_translation' ), 10, 1 );
@@ -227,9 +227,8 @@ class WPML_PB_Integration {
 
 	/**
 	 * @param int $post_id
-	 * @param object $post_data
 	 */
-	public function migrate_location( $post_id, $post_data ) {
+	public function migrate_location( $post_id ) {
 		if ( $this->post_has_strings( $post_id ) && ! $this->is_migrate_location_done( $post_id ) ) {
 			$wpdb = $this->sitepress->get_wpdb();
 			$post = $wpdb->get_row( $wpdb->prepare( "SELECT ID, post_type, post_status, post_content FROM {$wpdb->posts} WHERE ID = %d", $post_id ) );

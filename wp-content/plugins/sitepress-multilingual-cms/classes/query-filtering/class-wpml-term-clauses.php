@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class WPML_Term_Clauses
+ */
 class WPML_Term_Clauses {
 
 	/** @var SitePress $sitepress */
@@ -14,6 +17,14 @@ class WPML_Term_Clauses {
 	/** @var WPML_Debug_BackTrace $debug_backtrace */
 	private $debug_backtrace;
 
+	/**
+	 * WPML_Term_Clauses constructor.
+	 *
+	 * @param SitePress                                 $sitepress
+	 * @param wpdb                                      $wpdb
+	 * @param WPML_Display_As_Translated_Taxonomy_Query $display_as_translated_query
+	 * @param WPML_Debug_BackTrace                      $debug_backtrace
+	 */
 	public function __construct(
 		SitePress $sitepress,
 		wpdb $wpdb,
@@ -34,12 +45,17 @@ class WPML_Term_Clauses {
 	 * @return array
 	 */
 	public function filter( $clauses, $taxonomies, $args ) {
-		// special case for when term hierarchy is cached in wp_options
-		if ( (bool) $taxonomies === false
-		     || $this->debug_backtrace->is_function_in_call_stack( '_get_term_hierarchy' )
-		     || $this->debug_backtrace->is_class_function_in_call_stack( 'WPML_Term_Translation_Utils', 'synchronize_terms' )
-		     || $this->debug_backtrace->is_function_in_call_stack( 'wp_get_object_terms' )
-		     || $this->debug_backtrace->is_function_in_call_stack( 'get_term_by' )
+		// Special case for when term hierarchy is cached in wp_options.
+		if (
+			! $taxonomies
+			|| $this->debug_backtrace->are_functions_in_call_stack(
+				[
+					'_get_term_hierarchy',
+					[ 'WPML_Term_Translation_Utils', 'synchronize_terms' ],
+					'wp_get_object_terms',
+					'get_term_by',
+				]
+			)
 		) {
 			return $clauses;
 		}
@@ -51,7 +67,7 @@ class WPML_Term_Clauses {
 			}
 		}
 
-		if ( (bool) $icl_taxonomies === false ) {
+		if ( ! $icl_taxonomies ) {
 			return $clauses;
 		}
 
@@ -69,9 +85,12 @@ class WPML_Term_Clauses {
 
 	}
 
+	/**
+	 * @return string|void
+	 */
 	private function get_where_lang() {
 		$lang = $this->sitepress->get_current_language();
-		if ( $lang === 'all' ) {
+		if ( 'all' === $lang ) {
 			return '';
 		} else {
 			$display_as_translated_snippet = $this->get_display_as_translated_snippet( $lang, $this->sitepress->get_default_language() );
@@ -79,6 +98,12 @@ class WPML_Term_Clauses {
 		}
 	}
 
+	/**
+	 * @param string $current_language
+	 * @param string $fallback_language
+	 *
+	 * @return string
+	 */
 	private function get_display_as_translated_snippet( $current_language, $fallback_language ) {
 		$taxonomies = $this->sitepress->get_display_as_translated_taxonomies();
 		if ( $taxonomies && ( ! is_admin() || WPML_Ajax::is_frontend_ajax_request() ) ) {
@@ -87,5 +112,4 @@ class WPML_Term_Clauses {
 			return '0';
 		}
 	}
-
 }

@@ -10,10 +10,10 @@
  * @return string
  *	 The direct download URL.
  */
-if ( ! function_exists('wp_all_import_sanitize_url')){
+if ( ! function_exists('wp_all_import_sanitize_url')) {
 
-	function wp_all_import_sanitize_url( $link, $format = 'csv' )
-	{
+	function wp_all_import_sanitize_url( $link, $format = 'csv' ) {
+        $link = str_replace(" ", "%20", $link);
         $parse = parse_url( $link );
         preg_match( '/(?<=.com\/).*?(?=\/d)/', $link, $match );
         // Check for 'spreadsheets' or 'file' from Google URL.

@@ -3,7 +3,7 @@ Contributors: ShortPixel
 Donate link: https://www.paypal.me/resizeImage
 Tags: replace, attachment, media, files, replace image, replace jpg, change media, replace media, image, file
 Requires at least: 4.2
-Tested up to: 5.2
+Tested up to: 5.3
 Requires PHP: 5.4
 Stable tag: trunk
 
@@ -46,6 +46,34 @@ If you want more control over the format used to display the time, you can use t
 * [Regenerate Thumbnails Advanced](https://wordpress.org/plugins/regenerate-thumbnails-advanced/) - Fast, free and simple to use plugin to regenerate the thumbnails for your site after changing a theme (for example). Supported & maintained by [ShortPixel](https://ShortPixel.com)
 
 == Changelog ==
+
+= 3.3.7 =
+
+Release date: 13th November 2019
+* call the hook enable-media-replace-upload-done on both modes
+* fix JSON compatibility for hostings that don't have JSON module activated
+* Language – 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted
+
+= 3.3.6 =
+
+Release date: 5th September 2019
+* fix JSON compatibility for hostings that don't have JSON module activated
+
+= 3.3.5 =
+
+Release date: 25th July 2019
+* fix Replace button on the MediaLibrary image details popup
+
+= 3.3.4 =
+
+Release date: 23rd July 2019
+* compatibility fixes for WP version 4.8 and below
+* cache killer
+
+= 3.3.3 =
+
+Release date: 19th July 2019
+* Fix error "using $this when not in object context" on some PHP versions
 
 = 3.3.2 =
 
@@ -306,3 +334,8 @@ Second, if the file really looks unchanged, make sure WordPress has write permis
 == Wishlist / Coming attractions ==
 
 Do you have suggestions? Feel free to contact ShortPixel <a href="https://shortpixel.com/contact" target="_blank">here</a>
+
+
+== Contribute ==
+
+Want to help us improve the plugin feel free to submit PRs via GitHub <a href="https://github.com/short-pixel-optimizer/enable-media-replace" target="_blank">here</a>.

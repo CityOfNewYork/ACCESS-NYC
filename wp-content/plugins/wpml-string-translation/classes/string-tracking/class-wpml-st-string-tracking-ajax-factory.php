@@ -1,5 +1,8 @@
 <?php
 
+use WPML\Core\Twig_Loader_Filesystem;
+use WPML\Core\Twig_Environment;
+
 class WPML_ST_String_Tracking_AJAX_Factory implements IWPML_AJAX_Action_Loader {
 
 	const ACTION_POSITION_IN_SOURCE = 'view_string_in_source';

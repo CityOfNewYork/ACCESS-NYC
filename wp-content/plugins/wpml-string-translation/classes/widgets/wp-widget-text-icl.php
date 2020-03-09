@@ -3,6 +3,8 @@
 class WP_Widget_Text_Icl extends WP_Widget {
 	const FILTER_PRIORITY = 0;
 
+	const STRING_DOMAIN = 'Widgets';
+
 	/**
 	 * WP_Widget_Text_Icl constructor.
 	 */
@@ -23,7 +25,7 @@ class WP_Widget_Text_Icl extends WP_Widget {
 			// Get translations
 			$title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title'], $instance, $this->id_base);
 			$was_hooked = remove_filter('widget_text', 'icl_sw_filters_widget_text', self::FILTER_PRIORITY);
-			$text = apply_filters('widget_text', icl_t('Widgets', 'widget body - ' . $this->id, $instance['text']), $instance);
+			$text = apply_filters('widget_text', icl_t( self::STRING_DOMAIN, 'widget body - ' . $this->id, $instance['text']), $instance);
 			if( $was_hooked ) {
 				add_filter('widget_text', 'icl_sw_filters_widget_text', self::FILTER_PRIORITY);
 			}
@@ -58,11 +60,11 @@ class WP_Widget_Text_Icl extends WP_Widget {
 		$instance['filter'] = isset($new_instance['filter']);
 
 		if ($new_instance['icl_language'] == 'multilingual') {
-			$string = $wpdb->get_row($wpdb->prepare("SELECT id, value, status FROM {$wpdb->prefix}icl_strings WHERE context=%s AND name=%s", 'Widgets', 'widget body - ' . $this->id));
+			$string = $wpdb->get_row($wpdb->prepare("SELECT id, value, status FROM {$wpdb->prefix}icl_strings WHERE context=%s AND name=%s", self::STRING_DOMAIN, 'widget body - ' . $this->id));
 			if ($string) {
-				icl_st_update_string_actions('Widgets', 'widget body - ' . $this->id, $old_instance['text'], $instance['text']);
+				icl_st_update_string_actions( self::STRING_DOMAIN, 'widget body - ' . $this->id, $old_instance['text'], $instance['text']);
 			} else {
-				icl_register_string('Widgets', 'widget body - ' . $this->id, $instance['text']);
+				icl_register_string( self::STRING_DOMAIN, 'widget body - ' . $this->id, $instance['text']);
 			}
 		}
 		$instance['icl_language'] = $new_instance['icl_language'];

@@ -193,7 +193,7 @@ class FieldTaxonomy extends Field {
      */
     public function saved_post($importData) {
 
-        $assign_taxes = get_post_meta($this->getPostID(), $this->getFieldName(), true);
+        $assign_taxes = ACFService::get_post_meta($this, $this->getPostID(), $this->getFieldName());
 
         $field = $this->getData('field');
 
@@ -208,9 +208,7 @@ class FieldTaxonomy extends Field {
                     $assign_terms[] = $term->term_taxonomy_id;
                 }
             }
-            if ($this->getImportType() != 'import_users') {
-                ACFService::associate_terms($this->getPostID(), (empty($assign_terms) ? FALSE : $assign_terms), $field['taxonomy'], $this->getLogger());
-            }
+            ACFService::associate_terms($this->getPostID(), (empty($assign_terms) ? FALSE : $assign_terms), $field['taxonomy'], $this->getLogger());
         }
     }
 

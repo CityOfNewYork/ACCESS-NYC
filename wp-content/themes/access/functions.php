@@ -23,3 +23,10 @@ Path\require_blocks();
 require_once Path\controller('site');
 
 new Controller\Site();
+
+/**
+ * Add filter to Twig
+ */
+
+add_filter('timber/twig', 'add_to_twig');
+

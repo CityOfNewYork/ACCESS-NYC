@@ -1,15 +1,5 @@
 <?php
 
-/**
- * Plugin Name:  Nyco Wp Config
- * Description:  Autoload configuration based on environment
- * Author:       NYC Opportunity
- * Requirements: The plugin doesn't include dependencies. These should be added
- *               to the root Composer file for the site (composer require ...)
- *               mustangostang/spyc: ^0.6.2
- *               illuminate/encryption: ^5.6
- */
-
 namespace NYCO;
 
 /**
@@ -76,18 +66,6 @@ class Config {
 
       // Merge env variables over root variables
       $this->set(array_merge($config, $this->envs));
-
-      /**
-       * Auto update WordPress Admin options
-       */
-      foreach ($_ENV as $key => $value) {
-        if (substr($key, 0, 10) === 'WP_OPTION_') {
-          update_option(
-            strtolower(str_replace('WP_OPTION_', '', $key)),
-            $value
-          );
-        }
-      }
     } elseif (null !== WP_DEBUG && WP_DEBUG) {
       throw new Exception(
         "The configuration file or secret could not be found at $this->path."
@@ -106,8 +84,8 @@ class Config {
 
   /**
    * Set configuration to environment variables
-   * @param array $config An array containing environment variables to set.
-   *                      Variables containing arrays or objects are not set.
+   * @param  Array  $config  An array containing environment variables to set.
+   *                         Variables containing arrays or objects are not set.
    */
   private function set($config) {
     foreach ($config as $key => $value) {
@@ -116,9 +94,19 @@ class Config {
 
         if (!in_array($name, Config::PROTECT)) {
           $decrypted = ($this->secret) ? $encrypter->decrypt($value) : $value;
-          putenv("$name=$decrypted");
-          $_ENV[$name] = $decrypted;
+
+          /**
+           * Define the constant
+           */
           define($name, $decrypted);
+
+          /**
+           * Update WordPress Admin option if it is an option
+           */
+          if (substr($name, 0, 10) === 'WP_OPTION_') {
+            update_option(strtolower(str_replace('WP_OPTION_', '', $name)),
+              $decrypted);
+          }
         }
       }
     }

@@ -7,6 +7,13 @@
 
 abstract class QM_Output_Html_Assets extends QM_Output_Html {
 
+	/**
+	 * Collector instance.
+	 *
+	 * @var QM_Collector_Assets Collector.
+	 */
+	protected $collector;
+
 	public function __construct( QM_Collector $collector ) {
 		parent::__construct( $collector );
 		add_filter( 'qm/output/menus',      array( $this, 'admin_menu' ), 70 );
@@ -100,6 +107,23 @@ abstract class QM_Output_Html_Assets extends QM_Output_Html {
 		$dependencies_list = implode( ' ', $asset['dependencies'] );
 		$dependents_list   = implode( ' ', $asset['dependents'] );
 
+		$dependency_output = array();
+
+		foreach ( $asset['dependencies'] as $dep ) {
+			if ( isset( $data['missing_dependencies'][ $dep ] ) ) {
+				$dependency_output[] = sprintf(
+					'<span style="white-space:nowrap"><span class="dashicons dashicons-warning" aria-hidden="true"></span>%s</span>',
+					sprintf(
+						/* translators: %s: Name of missing script or style dependency */
+						__( '%s (missing)', 'query-monitor' ),
+						esc_html( $dep )
+					)
+				);
+			} else {
+				$dependency_output[] = $dep;
+			}
+		}
+
 		$qm_host = ( $asset['local'] ) ? 'local' : __( 'Other', 'query-monitor' );
 
 		$class = '';
@@ -118,8 +142,19 @@ abstract class QM_Output_Html_Assets extends QM_Output_Html {
 		echo esc_html( $label );
 		echo '</td>';
 
+		$host  = $asset['host'];
+		$parts = explode( '.', $host );
+
+		foreach ( $parts as $k => $part ) {
+			if ( strlen( $part ) > 16 ) {
+				$parts[ $k ] = substr( $parts[ $k ], 0, 6 ) . '&hellip;' . substr( $parts[ $k ], -6 );
+			}
+		}
+
+		$host = implode( '.', $parts );
+
 		echo '<td class="qm-nowrap qm-ltr">' . esc_html( $handle ) . '</td>';
-		echo '<td class="qm-nowrap qm-ltr">' . esc_html( $asset['host'] ) . '</td>';
+		echo '<td class="qm-nowrap qm-ltr">' . esc_html( $host ) . '</td>';
 		echo '<td class="qm-ltr">';
 		if ( is_wp_error( $asset['source'] ) ) {
 			$error_data = $asset['source']->get_error_data();
@@ -143,7 +178,12 @@ abstract class QM_Output_Html_Assets extends QM_Output_Html {
 			);
 		}
 		echo '</td>';
-		echo '<td class="qm-ltr qm-highlighter" data-qm-highlight="' . esc_attr( implode( ' ', $highlight_deps ) ) . '">' . implode( ', ', array_map( 'esc_html', $asset['dependencies'] ) ) . '</td>';
+		echo '<td class="qm-ltr qm-highlighter" data-qm-highlight="' . esc_attr( implode( ' ', $highlight_deps ) ) . '">';
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo implode( ', ', $dependency_output );
+
+		echo '</td>';
 		echo '<td class="qm-ltr qm-highlighter" data-qm-highlight="' . esc_attr( implode( ' ', $highlight_dependents ) ) . '">' . implode( ', ', array_map( 'esc_html', $asset['dependents'] ) ) . '</td>';
 		echo '<td class="qm-ltr">' . esc_html( $asset['ver'] ) . '</td>';
 
@@ -175,7 +215,10 @@ abstract class QM_Output_Html_Assets extends QM_Output_Html {
 		}
 
 		$type_label = $this->get_type_labels();
-		$label = sprintf( $type_label['count'], number_format_i18n( $data['counts']['total'] ) );
+		$label = sprintf(
+			$type_label['count'],
+			number_format_i18n( $data['counts']['total'] )
+		);
 
 		$args = array(
 			'title' => esc_html( $label ),

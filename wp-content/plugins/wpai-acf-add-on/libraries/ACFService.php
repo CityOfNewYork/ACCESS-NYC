@@ -31,6 +31,19 @@ final class ACFService{
      */
     public static function update_post_meta(Field $field, $pid, $name, $value) {
 
+        // Prepare field data for acf/update_value filter.
+        $fieldData = [
+            'key' => $field->getFieldKey(),
+            'name' => $field->getFieldName(),
+            'type' => $field->getType(),
+            'save_custom' => 0,
+            'save_other_choice'	=> 0,
+            'allow_null' 		=> 0,
+            'return_format'		=> 'value',
+            'save_terms' => 0
+        ];
+        // Apply filters to field value.
+        $value = apply_filters( "acf/update_value", $value, $pid, $fieldData, $value );
         $cf_value = apply_filters('pmxi_acf_custom_field', $value, $pid, $name);
 
         switch ($field->getImportType()) {
@@ -81,6 +94,20 @@ final class ACFService{
      */
     public static function associate_terms($pid, $assign_taxes, $tx_name, $logger = FALSE) {
 
+        $use_wp_set_object_terms = apply_filters('wp_all_import_use_wp_set_object_terms', false, $tx_name);
+        if ($use_wp_set_object_terms) {
+            $term_ids = [];
+            if (!empty($assign_taxes)) {
+                foreach ($assign_taxes as $ttid) {
+                    $term = get_term_by('term_taxonomy_id', $ttid, $tx_name);
+                    if ($term) {
+                        $term_ids[] = $term->term_id;
+                    }
+                }
+            }
+            return wp_set_object_terms($pid, $term_ids, $tx_name);
+        }
+
         global $wpdb;
 
         $term_ids = wp_get_object_terms( $pid, $tx_name, array( 'fields' => 'ids' ) );
@@ -124,9 +151,10 @@ final class ACFService{
      * @param bool $search_in_gallery
      * @param bool $search_in_files
      *
+     * @param array $articleData
      * @return bool|int|\WP_Error
      */
-    public static function import_image($img_url, $pid, $logger, $search_in_gallery = FALSE, $search_in_files = FALSE) {
+    public static function import_image($img_url, $pid, $logger, $search_in_gallery = FALSE, $search_in_files = FALSE, $articleData = array()) {
 
         // Search image attachment by ID.
         if ($search_in_gallery and is_numeric($img_url)) {
@@ -143,9 +171,9 @@ final class ACFService{
             if ($search_in_gallery) {
                 $logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` by Filename...', 'wp_all_import_plugin'), rawurldecode($img_url)));
                 $imageList = new \PMXI_Image_List();
-                $attch = $imageList->getExistingImageByFilename($img_url);
+                $attch = $imageList->getExistingImageByFilename(basename($img_url));
                 if ($attch){
-                    $logger and call_user_func($logger, sprintf(__('Existing image was found by Filename `%s`...', 'wp_all_import_plugin'), $img_url));
+                    $logger and call_user_func($logger, sprintf(__('Existing image was found by Filename `%s`...', 'wp_all_import_plugin'), basename($img_url)));
                     return $attch->ID;
                 }
             }
@@ -154,7 +182,7 @@ final class ACFService{
             $fileName = $img_url;
         }
 
-        return PMXI_API::upload_image($pid, $img_url, $downloadFiles, $logger, true, $fileName, 'images', $search_in_gallery);
+        return PMXI_API::upload_image($pid, $img_url, $downloadFiles, $logger, true, $fileName, 'images', $search_in_gallery, $articleData);
     }
 
     /**
@@ -167,7 +195,7 @@ final class ACFService{
      *
      * @return bool|int|\WP_Error
      */
-    public static function import_file($atch_url, $pid, $logger, $fast = FALSE, $search_in_gallery = FALSE, $search_in_files = FALSE) {
+    public static function import_file($atch_url, $pid, $logger, $fast = FALSE, $search_in_gallery = FALSE, $search_in_files = FALSE, $articleData = array()) {
 
         // search file attachment by ID
         if ($search_in_gallery and is_numeric($atch_url)) {
@@ -184,9 +212,9 @@ final class ACFService{
             if ($search_in_gallery) {
                 $logger and call_user_func($logger, sprintf(__('- Searching for existing file `%s` by Filename...', 'wp_all_import_plugin'), rawurldecode($atch_url)));
                 $imageList = new \PMXI_Image_List();
-                $attch = $imageList->getExistingImageByFilename($atch_url);
+                $attch = $imageList->getExistingImageByFilename(basename($atch_url));
                 if ($attch){
-                    $logger and call_user_func($logger, sprintf(__('Existing file was found by Filename `%s`...', 'wp_all_import_plugin'), $atch_url));
+                    $logger and call_user_func($logger, sprintf(__('Existing file was found by Filename `%s`...', 'wp_all_import_plugin'), basename($atch_url)));
                     return $attch->ID;
                 }
             }
@@ -195,7 +223,7 @@ final class ACFService{
             $fileName = $atch_url;
         }
 
-        return PMXI_API::upload_image($pid, $atch_url, $downloadFiles, $logger, true, $fileName, "files", $search_in_gallery);
+        return PMXI_API::upload_image($pid, $atch_url, $downloadFiles, $logger, true, $fileName, "files", $search_in_gallery, $articleData);
     }
 
     /**

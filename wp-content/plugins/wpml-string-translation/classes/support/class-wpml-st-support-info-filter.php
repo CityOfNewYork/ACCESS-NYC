@@ -2,12 +2,17 @@
 /**
  * @author OnTheGo Systems
  */
-class WPML_ST_Support_Info_Filter {
+class WPML_ST_Support_Info_Filter implements IWPML_Backend_Action, IWPML_DIC_Action {
 	/** @var WPML_ST_Support_Info */
 	private $support_info;
 
 	function __construct( WPML_ST_Support_Info $support_info ) {
 		$this->support_info     = $support_info;
+	}
+
+	public function add_hooks() {
+		/** This filter is documented WPML Core in classes/support/class-wpml-support-info-ui.php */
+		add_filter( 'wpml_support_info_blocks', [ $this, 'filter_blocks' ] );
 	}
 
 	/**

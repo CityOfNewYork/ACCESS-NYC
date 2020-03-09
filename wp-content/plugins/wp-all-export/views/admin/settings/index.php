@@ -128,7 +128,7 @@
 	</table>	
 
 	<div class="wpallexport-free-edition-notice zapier-upgrade" style="margin: 15px 0; padding: 20px; display: none;">
-		<a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=118611&edd_options%5Bprice_id%5D=1&utm_source=wordpress.org&utm_medium=custom-php&utm_campaign=free+wp+all+export+plugin"><?php _e('Upgrade to the Pro edition of WP All Export for Zapier Integration','wp_all_export_plugin');?></a>
+		<a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=118611&edd_options%5Bprice_id%5D=1&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=zapier"><?php _e('Upgrade to the Pro edition of WP All Export for Zapier Integration','wp_all_export_plugin');?></a>
 		<p><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_export_plugin'); ?></p>
 	</div>
 
@@ -160,7 +160,7 @@
                 $scheduling = \Wpae\Scheduling\Scheduling::create();
                 if(!($scheduling->checkLicense())){
                     ?>
-                    <p class="description"><?php _e('A license key is required to use Automatic Scheduling. If you have already subscribed, <a href="https://www.wpallimport.com/portal/automatic-scheduling/" target="_blank">click here to access your license key</a>. If you dont have a license, <a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=515704" target="_blank">click here to subscribe</a>.', 'wp_all_export_plugin'); ?></p>
+                    <p class="description"><?php _e('A license key is required to use Automatic Scheduling. If you have already subscribed, <a href="https://www.wpallimport.com/portal/automatic-scheduling/" target="_blank">click here to access your license key</a>. If you dont have a license, <a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=515704&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=automatic-scheduling" target="_blank">click here to subscribe</a>.', 'wp_all_export_plugin'); ?></p>
                     <?php
                 }
                 ?>
@@ -188,7 +188,7 @@
 
 <textarea id="wp_all_export_code" name="wp_all_export_code"><?php echo "<?php\n\n?>";?></textarea>						
 <div class="wpallexport-free-edition-notice php-functions-upgrade" style="margin: 15px 0; padding: 20px; display: none;">
-	<a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=118611&edd_options%5Bprice_id%5D=1&utm_source=wordpress.org&utm_medium=custom-php&utm_campaign=free+wp+all+export+plugin"><?php _e('Upgrade to the Pro edition of WP All Export to enable the Function Editor','wp_all_export_plugin');?></a>
+	<a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=118611&edd_options%5Bprice_id%5D=1&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=function-editor"><?php _e('Upgrade to the Pro edition of WP All Export to enable the Function Editor','wp_all_export_plugin');?></a>
 	<p><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_export_plugin'); ?></p>
 </div>
 

@@ -12,8 +12,6 @@ define( 'WPML_PACKAGE_TRANSLATION', '0.0.2' );
 define( 'WPML_PACKAGE_TRANSLATION_PATH', dirname( __FILE__ ) );
 define( 'WPML_PACKAGE_TRANSLATION_URL', WPML_ST_URL . '/inc/' . basename( WPML_PACKAGE_TRANSLATION_PATH ) );
 
-require WPML_PACKAGE_TRANSLATION_PATH . '/inc/wpml-package-translation-schema.class.php';
-
 require WPML_PACKAGE_TRANSLATION_PATH . '/inc/wpml-package-constants.php';
 
 require WPML_PACKAGE_TRANSLATION_PATH . '/inc/wpml-package-translation-exception.class.php';

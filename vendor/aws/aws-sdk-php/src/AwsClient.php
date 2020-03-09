@@ -71,6 +71,16 @@ class AwsClient implements AwsClientInterface
      *   credentials or return null. See Aws\Credentials\CredentialProvider for
      *   a list of built-in credentials providers. If no credentials are
      *   provided, the SDK will attempt to load them from the environment.
+     * - csm:
+     *   (Aws\ClientSideMonitoring\ConfigurationInterface|array|callable) Specifies
+     *   the credentials used to sign requests. Provide an
+     *   Aws\ClientSideMonitoring\ConfigurationInterface object, a callable
+     *   configuration provider used to create client-side monitoring configuration,
+     *   `false` to disable csm, or an associative array with the following keys:
+     *   enabled: (bool) Set to true to enable client-side monitoring, defaults
+     *   to false; host: (string) the host location to send monitoring events to,
+     *   defaults to 127.0.0.1; port: (int) The port used for the host connection,
+     *   defaults to 31000; client_id: (string) An identifier for this project
      * - debug: (bool|array) Set to true to display debug information when
      *   sending requests. Alternatively, you can provide an associative array
      *   with the following keys: logfn: (callable) Function that is invoked
@@ -184,7 +194,6 @@ class AwsClient implements AwsClientInterface
         $this->defaultRequestOptions = $config['http'];
         $this->addSignatureMiddleware();
         $this->addInvocationId();
-        $this->addClientSideMonitoring($args);
         $this->addEndpointParameterMiddleware($args);
         $this->addEndpointDiscoveryMiddleware($config, $args);
         $this->loadAliases();
@@ -327,6 +336,9 @@ class AwsClient implements AwsClientInterface
         $resolver = static function (
             CommandInterface $c
         ) use ($api, $provider, $name, $region, $version) {
+            if (!empty($c['@context']['signing_region'])) {
+                $region = $c['@context']['signing_region'];
+            }
             $authType = $api->getOperation($c->getName())['authtype'];
             switch ($authType){
                 case 'none':
@@ -350,31 +362,6 @@ class AwsClient implements AwsClientInterface
         $this->handlerList->prependSign(Middleware::invocationId(), 'invocation-id');
     }
 
-    private function addClientSideMonitoring($args)
-    {
-        $options = ConfigurationProvider::defaultProvider($args);
-
-        $this->handlerList->appendBuild(
-            ApiCallMonitoringMiddleware::wrap(
-                $this->credentialProvider,
-                $options,
-                $this->region,
-                $this->getApi()->getServiceId()
-            ),
-            'ApiCallMonitoringMiddleware'
-        );
-
-        $callAttemptMiddleware = ApiCallAttemptMonitoringMiddleware::wrap(
-            $this->credentialProvider,
-            $options,
-            $this->region,
-            $this->getApi()->getServiceId()
-        );
-        $this->handlerList->appendAttempt (
-            $callAttemptMiddleware,
-            'ApiCallAttemptMonitoringMiddleware'
-        );
-    }
     private function loadAliases($file = null)
     {
         if (!isset($this->aliases)) {

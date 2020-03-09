@@ -7,9 +7,26 @@
 
 class QM_Output_Html_Debug_Bar extends QM_Output_Html {
 
+	/**
+	 * Collector instance.
+	 *
+	 * @var QM_Collector_Debug_Bar Collector.
+	 */
+	protected $collector;
+
 	public function __construct( QM_Collector $collector ) {
 		parent::__construct( $collector );
 		add_filter( 'qm/output/menus', array( $this, 'admin_menu' ), 200 );
+	}
+
+	public function name() {
+		$title = $this->collector->get_panel()->title();
+
+		return sprintf(
+			/* translators: Debug Bar add-on name */
+			__( 'Debug Bar: %s', 'query-monitor' ),
+			$title
+		);
 	}
 
 	public function output() {

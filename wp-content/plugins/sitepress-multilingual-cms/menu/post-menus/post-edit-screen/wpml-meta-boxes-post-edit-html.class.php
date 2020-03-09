@@ -6,6 +6,8 @@
 class WPML_Meta_Boxes_Post_Edit_HTML {
 
 	const FLAG_HAS_MEDIA_OPTIONS = 'wpml_has_media_options';
+	const TAXONOMIES_PRIORITY    = 'translation_priority';
+	const WRAPPER_ID = 'icl_div';
 
 	/** @var SitePress $sitepress */
 	private $sitepress;
@@ -135,36 +137,14 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
                 </label>
             </p>
 			<?php
-			$taxonomy = 'translation_priority';
 			wp_nonce_field( 'wpml_translation_priority', 'nonce' );
-
-			if ( $this->is_original ) {
-				$term_obj = wp_get_object_terms( $this->post->ID, $taxonomy );
-				$selected = $term_obj ? $term_obj[0]->term_id : WPML_TM_Translation_Priorities::get_default_term()->term_id;
-			} else {
-				$this->fix_source_language();
-				$element_id = $this->post_translation->get_element_id( $this->source_language, $this->trid );
-				$element_terms  = wp_get_object_terms( (int)$element_id, $taxonomy );
-
-				if( !$element_terms ){
-				    $term_obj = WPML_TM_Translation_Priorities::get_default_term();
-                }else{
-					$term_obj = $element_terms[0];
-                }
-
-                $selected = apply_filters( 'translate_object_id', $term_obj->term_id, $taxonomy, false, $this->selected_language );
-
-                if ( ! $selected ) {
-                    $selected = WPML_TM_Translation_Priorities::insert_missing_translation( $term_obj->term_id, $term_obj->name, $this->selected_language );
-                }
-			}
 
 			wp_dropdown_categories(
 				array(
 					'hide_empty' => 0,
-					'selected'   => $selected,
+					'selected'   => $this->get_selected_priority(),
 					'name'       => 'icl_translation_priority',
-					'taxonomy'   => $taxonomy
+					'taxonomy'   => self::TAXONOMIES_PRIORITY
 				)
 			);
 			?>
@@ -172,6 +152,20 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
                target="_blank"><?php esc_html_e( 'edit terms', 'sitepress' ); ?></a>
         </div>
 		<?php
+	}
+
+	/**
+	 * @param int $element_id
+	 *
+	 * @return WP_Term|null
+	 */
+	private function get_term_obj( $element_id ) {
+		$terms = wp_get_object_terms( $element_id, self::TAXONOMIES_PRIORITY );
+		if ( is_wp_error( $terms ) ) {
+			return null;
+		}
+
+		return empty( $terms ) ? null : $terms[0];
 	}
 
 	private function connect_translations() {
@@ -276,7 +270,7 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
 	}
 
 	private function minor_edit() {
-		$stacktrace = new WPML_Debug_BackTrace( phpversion() );
+		$stacktrace = new WPML\Utils\DebugBackTrace();
 		if ( $stacktrace->is_function_in_call_stack( 'the_block_editor_meta_boxes' ) ) {
 			do_action( 'wpml_minor_edit_for_gutenberg' );
 		}
@@ -389,8 +383,17 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
 			?>
 			<tr>
 				<td colspan="3" align="right">
-					<input id="icl_make_duplicates" type="button" class="button-secondary" value="<?php echo esc_attr__( 'Duplicate', 'sitepress' ) ?>" disabled="disabled" style="display:none;"/>
-					<?php wp_nonce_field( 'make_duplicates_nonce', '_icl_nonce_mdup' ); ?>
+					<input
+							id="icl_make_duplicates"
+							type="button"
+							class="button-secondary"
+							value="<?php echo esc_attr__( 'Duplicate', 'sitepress' ) ?>"
+							disabled="disabled"
+							style="display:none;"
+							data-action="<?php echo WPML_Meta_Boxes_Post_Edit_Ajax::ACTION_DUPLICATE; ?>"
+        					data-nonce="<?php echo wp_create_nonce( WPML_Meta_Boxes_Post_Edit_Ajax::ACTION_DUPLICATE ); ?>"
+        					data-post-id="<?php echo isset( $this->post->ID ) ? $this->post->ID : 0; ?>"
+					/>
 				</td>
 			</tr>
 		</table>
@@ -854,5 +857,33 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @return bool|int|mixed|void
+	 */
+	private function get_selected_priority() {
+		$selected = null;
+
+		if ( $this->is_original ) {
+			$term_obj = $this->get_term_obj( $this->post->ID );
+			$selected = $term_obj ? $term_obj->term_id : WPML_TM_Translation_Priorities::get_default_term()->term_id;
+		} else {
+			$this->fix_source_language();
+			$element_id = $this->post_translation->get_element_id( $this->source_language, $this->trid );
+			$term_obj   = $this->get_term_obj( $element_id );
+
+			if ( $term_obj ) {
+				$selected = apply_filters( 'translate_object_id', $term_obj->term_id, self::TAXONOMIES_PRIORITY, false, $this->selected_language );
+			}
+
+			if ( ! $selected ) {
+				$selected = $term_obj ?
+					WPML_TM_Translation_Priorities::insert_missing_translation( $term_obj->term_id, $term_obj->name, $this->selected_language ) :
+					WPML_TM_Translation_Priorities::get_default_term()->term_id;
+			}
+		}
+
+		return $selected;
 	}
 }

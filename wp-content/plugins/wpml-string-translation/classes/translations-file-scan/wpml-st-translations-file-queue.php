@@ -1,7 +1,11 @@
 <?php
 
+use WPML\ST\TranslationFile\EntryQueries;
+use WPML\ST\TranslationFile\QueueFilter;
+
 class WPML_ST_Translations_File_Queue {
-	const DEFAULT_LIMIT = 10000;
+	const DEFAULT_LIMIT = 20000;
+	const TIME_LIMIT = 10; // seconds
 	const LOCK_FIELD = '_wpml_st_file_scan_in_progress';
 
 	/** @var WPML_ST_Translations_File_Dictionary */
@@ -22,19 +26,19 @@ class WPML_ST_Translations_File_Queue {
 	private $transient;
 
 	/**
-	 * @param WPML_ST_Translations_File_Dictionary   $file_dictionary
-	 * @param WPML_ST_Translations_File_Scan         $file_scan
+	 * @param WPML_ST_Translations_File_Dictionary $file_dictionary
+	 * @param WPML_ST_Translations_File_Scan $file_scan
 	 * @param WPML_ST_Translations_File_Scan_Storage $file_scan_storage
-	 * @param WPML_Language_Records                  $language_records
-	 * @param int                                    $limit
-	 * @param WPML_Transient                         $transient
+	 * @param WPML_Language_Records $language_records
+	 * @param int $limit
+	 * @param WPML_Transient $transient
 	 */
 	public function __construct(
 		WPML_ST_Translations_File_Dictionary $file_dictionary,
 		WPML_ST_Translations_File_Scan $file_scan,
 		WPML_ST_Translations_File_Scan_Storage $file_scan_storage,
 		WPML_Language_Records $language_records,
-		$limit = self::DEFAULT_LIMIT,
+		$limit,
 		WPML_Transient $transient
 	) {
 		$this->file_dictionary   = $file_dictionary;
@@ -45,53 +49,63 @@ class WPML_ST_Translations_File_Queue {
 		$this->transient         = $transient;
 	}
 
-	public function import() {
+	/**
+	 * @param QueueFilter|null $queueFilter
+	 */
+	public function import( QueueFilter $queueFilter = null ) {
+		$this->file_dictionary->clear_skipped();
 		$files = $this->file_dictionary->get_not_imported_files();
 
 		if ( count( $files ) ) {
 			$this->lock();
 
-			$imported = 0;
+			$start_time = time();
+			$imported   = 0;
 			foreach ( $files as $file ) {
-				if ( $imported >= $this->limit ) {
+				if ( $imported >= $this->limit || time() - $start_time > self::TIME_LIMIT ) {
 					break;
 				}
 
-				$translations = $this->file_scan->load_translations( $file->get_full_path() );
+				if ( ! $queueFilter || $queueFilter->isSelected( $file ) ) {
 
-				try {
-					$number_of_translations = count( $translations );
-					if ( ! $number_of_translations ) {
-						throw new RuntimeException( 'File is empty' );
-					}
+					$translations = $this->file_scan->load_translations( $file->get_full_path() );
 
-					$translations = $this->constrain_translations_number(
-						$translations,
-						$file->get_imported_strings_count(),
-						$this->limit - $imported
-					);
+					try {
+						$number_of_translations = count( $translations );
+						if ( ! $number_of_translations ) {
+							throw new RuntimeException( 'File is empty' );
+						}
 
-					$imported += $imported_in_file = count( $translations );
+						$translations = $this->constrain_translations_number(
+							$translations,
+							$file->get_imported_strings_count(),
+							$this->limit - $imported
+						);
 
-					$this->file_scan_storage->save(
-						$translations,
-						$file->get_domain(),
-						$this->map_language_code( $file->get_file_locale() )
-					);
+						$imported += $imported_in_file = count( $translations );
 
-					$file->set_imported_strings_count( $file->get_imported_strings_count() + $imported_in_file );
+						$this->file_scan_storage->save(
+							$translations,
+							$file->get_domain(),
+							$this->map_language_code( $file->get_file_locale() )
+						);
 
-					if ( $file->get_imported_strings_count() >= $number_of_translations ) {
-						$file->set_status( WPML_ST_Translations_File_Entry::IMPORTED );
-					} else {
+						$file->set_imported_strings_count( $file->get_imported_strings_count() + $imported_in_file );
+
+						if ( $file->get_imported_strings_count() >= $number_of_translations ) {
+							$file->set_status( WPML_ST_Translations_File_Entry::IMPORTED );
+						} else {
+							$file->set_status( WPML_ST_Translations_File_Entry::PARTLY_IMPORTED );
+						}
+
+					} catch ( WPML_ST_Bulk_Strings_Insert_Exception $e ) {
 						$file->set_status( WPML_ST_Translations_File_Entry::PARTLY_IMPORTED );
+						break;
+					} catch ( Exception $e ) {
+						$file->set_status( WPML_ST_Translations_File_Entry::IMPORTED );
 					}
-
-				} catch ( WPML_ST_Bulk_Strings_Insert_Exception $e ) {
-					$file->set_status( WPML_ST_Translations_File_Entry::PARTLY_IMPORTED );
-					break;
-				} catch ( Exception $e ) {
-					$file->set_status( WPML_ST_Translations_File_Entry::IMPORTED );
+				} else {
+					$file->set_status( WPML_ST_Translations_File_Entry::SKIPPED );
 				}
 				$this->file_dictionary->save( $file );
 

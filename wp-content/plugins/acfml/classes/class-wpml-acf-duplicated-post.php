@@ -2,95 +2,39 @@
 
 class WPML_ACF_Duplicated_Post {
 
-	protected $wpdb;
-
-	public function __construct( $wpdb )
-	{
-		$this->wpdb = $wpdb;
+	/**
+	 * @param \WPML_ACF_Processed_Data $processed_data
+	 *
+	 * @return \WPML_ACF_Field
+	 */
+	public function resolve_field( WPML_ACF_Processed_Data $processed_data ) {
+		return $this->get_field_object( $processed_data, new WPML_ACF_Void_Field($processed_data) );
 	}
 
-	public function resolve_field($processed_data) {
-		$field = new WPML_ACF_Void_Field($processed_data);
-		
-		if (isset($processed_data->meta_data['context']) && 'custom_field' == $processed_data->meta_data['context']) {
+	/**
+	 * @param \WPML_ACF_Processed_Data $processed_data
+	 * @param \WPML_ACF_Field          $field
+	 *
+	 * @return \WPML_ACF_Field
+	 */
+	private function get_field_object( WPML_ACF_Processed_Data $processed_data, $field ) {
+		if ( isset( $processed_data->meta_data['master_post_id'], $processed_data->meta_data['key'] ) ) {
+			$acf_field_object = get_field_object( $processed_data->meta_data['key'], $processed_data->meta_data['master_post_id'] );
 
-			$related_acf_field_name = maybe_unserialize(
-					get_post_meta($processed_data->meta_data['master_post_id'], "_".$processed_data->meta_data['key'], true)
-					);
-
-			if (is_string($related_acf_field_name) && strpos($related_acf_field_name, "field_") === 0) {
-
-				if ($key_parts = $this->check_repeater_field($processed_data->meta_data['key'])) {
-					$WPML_ACF_Repeater_Field = new WPML_ACF_Repeater_Field($this, $this->wpdb);
-					$field = $WPML_ACF_Repeater_Field->resolve_repeater_subfield($processed_data, $key_parts, $field);
-				} else {
-					$related_acf_field_value = $this->get_related_acf_field_value($related_acf_field_name);
-
-					if (isset($related_acf_field_value['key']) && $related_acf_field_value['key'] == $related_acf_field_name) { // acf free
-
-						if (isset($related_acf_field_value['type'])) {
-							$processed_data->related_acf_field_value = $related_acf_field_value;
-							$field = $this->get_field_object($processed_data, $field);
-						}
-
-					} else { // acf pro
-						$related_acf_pro_field_value = $this->get_related_acf_pro_field_value($related_acf_field_name);
-						if (isset($related_acf_pro_field_value['type'])) {
-							$processed_data->related_acf_field_value = $related_acf_pro_field_value;
-							$field = $this->get_field_object($processed_data, $field);
-						}
-					}
+			if ( isset ( $acf_field_object['type'] ) ) {
+				if ( 'post_object' ===  $acf_field_object['type'] ) {
+					$field = new WPML_ACF_Post_Object_Field( $processed_data, new WPML_ACF_Post_Ids() );
+				} elseif ( 'page_link' ===  $acf_field_object['type'] ) {
+					$field = new WPML_ACF_Page_Link_Field( $processed_data, new WPML_ACF_Post_Ids() );
+				} elseif ( 'relationship' ===  $acf_field_object['type'] ) {
+					$field = new WPML_ACF_Relationship_Field( $processed_data, new WPML_ACF_Post_Ids() );
+				} elseif ( 'taxonomy' ===  $acf_field_object['type'] ) {
+					$field = new WPML_ACF_Taxonomy_Field( $processed_data, new WPML_ACF_Term_Ids() );
+				} elseif ( 'gallery' ===  $acf_field_object['type'] ) {
+					$field = new WPML_ACF_Post_Object_Field( $processed_data, new WPML_ACF_Post_Ids() );
 				}
-
-
 			}
-			
 		}
-		
 		return $field;
-	}
-	
-	public function get_related_acf_field_value($field_name) {
-
-		return $value = maybe_unserialize($this->wpdb->get_var( $this->wpdb->prepare("SELECT meta_value FROM {$this->wpdb->postmeta} WHERE meta_key = %s LIMIT 1" , $field_name) ));
-	}
-
-	public function get_related_acf_pro_field_value($field_name) {
-		return $value = maybe_unserialize($this->wpdb->get_var( $this->wpdb->prepare("SELECT post_content FROM {$this->wpdb->posts} WHERE post_name = %s AND post_type = 'acf-field' LIMIT 1", $field_name) ));
-
-	}
-
-	private function check_repeater_field($key) {
-		$re = "/([a-z_]+)_(\\d)_(\\S+)/";
-
-		$matches = false;
-
-		preg_match($re, $key, $matches);
-
-		return $matches;
-	}
-
-
-
-	public function get_field_object($processed_data, $field) {
-		if ('post_object' ==  $processed_data->related_acf_field_value['type']) {
-			$ids_object = new WPML_ACF_Post_Ids();
-			$field = new WPML_ACF_Post_Object_Field($processed_data, $ids_object);
-		} else if ('page_link' == $processed_data->related_acf_field_value['type']) {
-			$ids_object = new WPML_ACF_Post_Ids();
-			$field = new WPML_ACF_Page_Link_Field($processed_data, $ids_object);
-		} else if ('relationship' == $processed_data->related_acf_field_value['type']) {
-			$ids_object = new WPML_ACF_Post_Ids();
-			$field = new WPML_ACF_Relationship_Field($processed_data, $ids_object);
-		} else if ('taxonomy' == $processed_data->related_acf_field_value['type']) {
-			$ids_object = new WPML_ACF_Term_Ids();
-			$field = new WPML_ACF_Taxonomy_Field($processed_data, $ids_object);
-		} else if ('gallery' == $processed_data->related_acf_field_value['type']) {
-			$ids_object = new WPML_ACF_Post_Ids();
-			$field = new WPML_ACF_Post_Object_Field($processed_data, $ids_object);
-		}
-
-		return $field;
-
 	}
 }

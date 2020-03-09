@@ -54,7 +54,7 @@ class WPML_Language_Records {
 			$rowset = $this->wpdb->get_results( $sql );
 
 			foreach ( $rowset as $row ) {
-				$this->locale_lang_map[ $row->default_locale ] = $row->code;
+				$this->locale_lang_map[ $row->default_locale ?: $row->code ] = $row->code;
 			}
 		}
 	}

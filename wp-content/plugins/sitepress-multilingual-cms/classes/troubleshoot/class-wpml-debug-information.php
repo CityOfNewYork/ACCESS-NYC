@@ -51,7 +51,8 @@ class WPML_Debug_Information {
 				'Version'            => get_bloginfo( 'version' ),
 				'PermalinkStructure' => get_option( 'permalink_structure' ),
 				'PostTypes'          => implode( ', ', get_post_types( '', 'names' ) ),
-				'PostStatus'          => implode( ', ', get_post_stati() )
+				'PostStatus'         => implode( ', ', get_post_stati() ),
+				'RestEnabled'        => wpml_is_rest_enabled() ? 'Yes' : 'No',
 			),
 			'Server'    => array(
 				'jQueryVersion'  => wp_script_is( 'jquery', 'registered' ) ? $GLOBALS['wp_scripts']->registered['jquery']->ver : __( 'n/a', 'bbpress' ),

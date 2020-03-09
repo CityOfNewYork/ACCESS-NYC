@@ -38,10 +38,33 @@ class WPML_PB_Handle_Custom_Fields {
 		$fields = array_merge( $this->data_settings->get_fields_to_copy(), $this->data_settings->get_fields_to_save() );
 
 		foreach ( $fields as $field ) {
-			$original_field = get_post_meta( $original_post_id, $field, true );
-			if ( $original_field ) {
-				update_post_meta( $new_post_id, $field, $original_field );
-			}
+			self::copy_field( $new_post_id, $original_post_id, $field );
 		}
+	}
+
+	/**
+	 * @param int $new_post_id
+	 * @param int $original_post_id
+	 * @param string $field
+	 */
+	public static function copy_field( $new_post_id, $original_post_id, $field ) {
+		$original_field = get_post_meta( $original_post_id, $field, true );
+		if ( $original_field ) {
+			update_post_meta( $new_post_id, $field, self::slash_json( $original_field ) );
+		}
+	}
+
+	/**
+	 * @param mixed $data
+	 *
+	 * @return mixed string
+	 */
+	public static function slash_json( $data ) {
+ 		json_decode( $data );
+		if ( json_last_error() === JSON_ERROR_NONE ) {
+			return wp_slash( $data );
+		}
+		return $data;
+
 	}
 }

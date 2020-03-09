@@ -17,7 +17,7 @@ WPML_Core.SimpleLanguageSelector = function () {
             text = '<strong>&nbsp;' + text + '</strong>';
         }
         
-        return '<img src="' + jQuery(state.element).data('flag_url') + '"/> ' + text;        
+        return '<img width="18" height="12" src="' + jQuery(state.element).data('flag_url') + '"/> ' + text;
     };
     
     self.initialize_select2 = function () {

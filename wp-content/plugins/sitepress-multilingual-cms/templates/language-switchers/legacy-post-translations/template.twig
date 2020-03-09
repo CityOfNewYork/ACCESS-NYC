@@ -9,7 +9,7 @@
     <span class="{{ language.css_classes }} wpml-ls-item-legacy-post-translations">
         <a href="{{ language.url }}" class="{{ css_classes_link }}">
             {%- if language.flag_url -%}
-                <img class="{{ css_classes_flag }}" src="{{ language.flag_url }}" alt="{{ language.code }}" title="{{ language.flag_title }}">
+                <img class="{{ css_classes_flag }}" src="{{ language.flag_url }}" alt="{{ language.flag_alt }}">
             {%- endif -%}
 
             {%- if language.is_current and (language.native_name or language.display_name)  -%}
@@ -20,7 +20,7 @@
             {%- else -%}
 
                 {%- if language.native_name -%}
-                    <span class="{{ css_classes_native }}">{{- language.native_name -}}</span>
+                    <span class="{{ css_classes_native }}" lang="{{ language.code }}">{{- language.native_name -}}</span>
                 {%- endif -%}
 
                 {%- if language.display_name -%}

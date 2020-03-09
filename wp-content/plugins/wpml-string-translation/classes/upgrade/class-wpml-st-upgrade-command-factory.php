@@ -5,6 +5,9 @@
  * @package wpml-string-translation
  */
 
+use function WPML\Container\make;
+use WPML\ST\Upgrade\Command\RegenerateMoFilesWithStringNames;
+
 /**
  * Class WPML_ST_Upgrade_Command_Factory
  */
@@ -71,6 +74,13 @@ class WPML_ST_Upgrade_Command_Factory {
 				break;
 			case 'WPML_ST_Upgrade_DB_String_Packages_Word_Count':
 				$result = new WPML_ST_Upgrade_DB_String_Packages_Word_Count( wpml_get_upgrade_schema() );
+				break;
+			case '\WPML\ST\Upgrade\Command\RegenerateMoFilesWithStringNames':
+				$isBackground = true;
+				$result       = new RegenerateMoFilesWithStringNames(
+					\WPML\ST\MO\Generate\Process\ProcessFactory::createStatus( $isBackground ),
+					\WPML\ST\MO\Generate\Process\ProcessFactory::createSingle( $isBackground )
+				);
 				break;
 			default:
 				throw new WPML_ST_Upgrade_Command_Not_Found_Exception( $class_name );

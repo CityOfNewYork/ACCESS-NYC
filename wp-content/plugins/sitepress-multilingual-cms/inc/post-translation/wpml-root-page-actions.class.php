@@ -151,12 +151,23 @@ class WPML_Root_Page_Actions {
 	}
 
 	function wpml_home_url_language_box_setup() {
-		add_meta_box (
-			'icl_div',
-			__ ( 'Language', 'sitepress' ),
+		add_meta_box(
+			WPML_Meta_Boxes_Post_Edit_HTML::WRAPPER_ID,
+			__( 'Language', 'sitepress' ),
 			array( $this, 'wpml_home_url_language_box' ),
 			'page',
-			'side',
+			/**
+			 * Filter meta box position.
+			 *
+			 * The context within the screen where the boxes should display. Available contexts vary from screen to screen.
+			 * Post edit screen contexts include 'normal', 'side', and 'advanced'.
+			 *
+			 * @param String WPML_Meta_Boxes_Post_Edit_HTML::WRAPPER_ID Meta box ID.
+			 *
+			 * @since 4.2.8
+			 *
+			 */
+			apply_filters( 'wpml_post_edit_meta_box_context', 'side', WPML_Meta_Boxes_Post_Edit_HTML::WRAPPER_ID ),
 			apply_filters( 'wpml_post_edit_meta_box_priority', 'high' )
 		);
 	}

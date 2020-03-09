@@ -55,7 +55,7 @@ if ( window.jQuery ) {
 		var maxwidth               = $(window).width();
 		var container              = $('#query-monitor-main');
 		var container_height_key   = 'qm-container-height';
-		var container_pinned_key   = 'qm-container-pinned';
+		var container_pinned_key   = 'qm-' + ( $('body').hasClass('wp-admin') ? 'admin' : 'front' ) + '-container-pinned';
 		var container_position_key = 'qm-container-position';
 		var container_width_key    = 'qm-container-width';
 
@@ -89,9 +89,9 @@ if ( window.jQuery ) {
 				container.height( minheight );
 			}
 
-			$('#qm-panel-menu').find('button').removeClass('qm-selected-menu');
+			$('#qm-panel-menu').find('button').removeAttr('aria-selected');
 			$('#qm-panel-menu').find('li').removeClass('qm-current-menu');
-			var selected_menu = $('#qm-panel-menu').find('[data-qm-href="' + panel + '"]').addClass('qm-selected-menu');
+			var selected_menu = $('#qm-panel-menu').find('[data-qm-href="' + panel + '"]').attr('aria-selected',true);
 
 			if ( selected_menu.length ) {
 				var selected_menu_top = selected_menu.position().top - 27;
@@ -370,22 +370,51 @@ if ( window.jQuery ) {
 			e.preventDefault();
 		});
 
+		var editorSuccessIndicator = $('#qm-editor-save-status');
+		editorSuccessIndicator.hide();
+
+		$('.qm-editor-button').on('click',function(e){
+			var state  = $('#qm-settings').data('qm-state');
+			var editor = $('#qm-editor-select').val();
+
+			$.ajax(qm_l10n.ajaxurl,{
+				type : 'POST',
+				context : this,
+				data : {
+					action : 'qm_editor_set',
+					nonce  : qm_l10n.auth_nonce['editor-set'],
+					editor : editor
+				},
+				success : function(response){
+					if (response.success) {
+						editorSuccessIndicator.show();
+					}
+				},
+				dataType : 'json',
+				xhrFields: {
+					withCredentials: true
+				}
+			});
+
+			e.preventDefault();
+		});
+
 		$.qm.tableSort({target: $('.qm-sortable')});
 
 		var startY, startX, resizerHeight;
 
-		$(document).on('mousedown', '.qm-resizer', function(event) {
+		$(document).on('mousedown touchstart', '.qm-resizer', function(event) {
 			resizerHeight = $(this).outerHeight() - 1;
-			startY        = container.outerHeight() + event.clientY;
-			startX        = container.outerWidth() + event.clientX;
+			startY        = container.outerHeight() + ( event.clientY || event.originalEvent.targetTouches[0].pageY );
+			startX        = container.outerWidth() + ( event.clientX || event.originalEvent.targetTouches[0].pageX );
 
-			$(document).on('mousemove', qm_do_resizer_drag);
-			$(document).on('mouseup', qm_stop_resizer_drag);
+			$(document).on('mousemove touchmove', qm_do_resizer_drag);
+			$(document).on('mouseup touchend', qm_stop_resizer_drag);
 		});
 
 		function qm_do_resizer_drag(event) {
 			if ( ! container.hasClass('qm-show-right') ) {
-				var h = ( startY - event.clientY );
+				var h = ( startY - ( event.clientY || event.originalEvent.targetTouches[0].pageY ) );
 				if ( h >= resizerHeight && h <= maxheight ) {
 					container.height( h );
 				}
@@ -398,8 +427,8 @@ if ( window.jQuery ) {
 		}
 
 		function qm_stop_resizer_drag(event) {
-			$(document).off('mousemove', qm_do_resizer_drag);
-			$(document).off('mouseup', qm_stop_resizer_drag);
+			$(document).off('mousemove touchmove', qm_do_resizer_drag);
+			$(document).off('mouseup touchend', qm_stop_resizer_drag);
 
 			if ( ! container.hasClass('qm-show-right') ) {
 				localStorage.removeItem( container_position_key );
@@ -414,14 +443,16 @@ if ( window.jQuery ) {
 		var h = localStorage.getItem( container_height_key );
 		var w = localStorage.getItem( container_width_key );
 		if ( ! container.hasClass('qm-peek') ) {
-			if ( p === 'right' && w !== null ) {
-				if ( w < minwidth ) {
-					w = minwidth;
+			if ( p === 'right' ) {
+				if ( w !== null ) {
+					if ( w < minwidth ) {
+						w = minwidth;
+					}
+					if ( w > maxwidth ) {
+						w = maxwidth;
+					}
+					container.width( w );
 				}
-				if ( w > maxwidth ) {
-					w = maxwidth;
-				}
-				container.width( w );
 				container.addClass('qm-show-right');
 			} else if ( p !== 'right' && h !== null ) {
 				if ( h < minheight ) {

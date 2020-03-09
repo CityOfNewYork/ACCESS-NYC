@@ -9,10 +9,6 @@ class QM_Collector_Cache extends QM_Collector {
 
 	public $id = 'cache';
 
-	public function name() {
-		return __( 'Cache', 'query-monitor' );
-	}
-
 	public function process() {
 		global $wp_object_cache;
 
@@ -67,8 +63,13 @@ class QM_Collector_Cache extends QM_Collector {
 			}
 		}
 
-		if ( isset( $this->data['stats']['cache_hits'] ) && isset( $this->data['stats']['cache_misses'] ) ) {
-			$total                              = $this->data['stats']['cache_misses'] + $this->data['stats']['cache_hits'];
+		if ( ! empty( $this->data['stats']['cache_hits'] ) ) {
+			$total = $this->data['stats']['cache_hits'];
+
+			if ( ! empty( $this->data['stats']['cache_misses'] ) ) {
+				$total += $this->data['stats']['cache_misses'];
+			}
+
 			$this->data['cache_hit_percentage'] = ( 100 / $total ) * $this->data['stats']['cache_hits'];
 		}
 

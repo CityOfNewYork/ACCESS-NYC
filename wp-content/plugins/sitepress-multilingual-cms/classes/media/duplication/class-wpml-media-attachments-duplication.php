@@ -44,8 +44,8 @@ class WPML_Media_Attachments_Duplication {
 			add_action( 'icl_make_duplicate', array( $this, 'make_duplicate' ), 10, 4 );
 		}
 
-		add_action( 'update_postmeta', array( $this, 'record_original_thumbnail_ids_and_sync' ), 10, 4 );
-		add_action( 'delete_post_meta', array($this, 'record_original_thumbnail_ids_and_sync' ), 10, 4 );
+		$this->add_postmeta_hooks();
+
 		add_action( 'save_post', array( $this, 'save_post_actions' ), 100, 2 );
 		add_action( 'wpml_pro_translation_completed', array( $this, 'sync_on_translation_complete' ), 10, 3 );
 
@@ -59,6 +59,24 @@ class WPML_Media_Attachments_Duplication {
 
 		add_action( 'wp_ajax_wpml_media_set_content_prepare', array( $this, 'set_content_defaults_prepare' ) );
 		add_action( 'wp_ajax_wpml_media_set_content_defaults', array( $this, 'set_content_defaults' ) );
+	}
+
+	private function add_postmeta_hooks() {
+		add_action( 'update_postmeta', [ $this, 'record_original_thumbnail_ids_and_sync' ], 10, 4 );
+		add_action( 'delete_post_meta', [ $this, 'record_original_thumbnail_ids_and_sync' ], 10, 4 );
+	}
+
+	private function withPostMetaFiltersDisabled( callable $callback ) {
+		$filter = [ $this, 'record_original_thumbnail_ids_and_sync' ];
+
+		$shouldRestoreFilters = remove_action( 'update_postmeta', $filter, 10 )
+		                        && remove_action( 'delete_post_meta', $filter, 10 );
+
+		$callback();
+
+		if ( $shouldRestoreFilters ) {
+			$this->add_postmeta_hooks();
+		}
 	}
 
 	private function is_admin_or_xmlrpc() {
@@ -510,6 +528,10 @@ class WPML_Media_Attachments_Duplication {
 		}
 	}
 
+	/**
+	 * @param int      $post_id
+	 * @param int|null $request_post_thumbnail_id
+	 */
 	public function sync_post_thumbnail( $post_id, $request_post_thumbnail_id = null ) {
 
 		if ( $post_id && get_post_meta( $post_id, '_wpml_media_featured', true ) ) {
@@ -532,33 +554,49 @@ class WPML_Media_Attachments_Duplication {
 			$trid         = $this->sitepress->get_element_trid( $post_id, 'post_' . get_post_type( $post_id ) );
 			$translations = $this->sitepress->get_element_translations( $trid, 'post_' . get_post_type( $post_id ) );
 
-			// is original
+			// Check if it is original.
 			$is_original = false;
 			foreach ( $translations as $translation ) {
-				if ( $translation->original == 1 && $translation->element_id == $post_id ) {
+				if ( 1 === (int) $translation->original && (int) $translation->element_id === $post_id ) {
 					$is_original = true;
 				}
 			}
 
 			if ( $is_original ) {
 				foreach ( $translations as $translation ) {
-					if ( !$translation->original && $translation->element_id ) {
+					if ( ! $translation->original && $translation->element_id ) {
 						if ( $this->are_post_thumbnails_still_in_sync( $post_id, $thumbnail_id, $translation ) ) {
-							if ( ! $thumbnail_id || $thumbnail_id == "-1" ) {
-								delete_post_meta( $translation->element_id, '_thumbnail_id' );
+							if ( ! $thumbnail_id || - 1 === (int) $thumbnail_id ) {
+								$this->withPostMetaFiltersDisabled(
+									function () use ( $translation ) {
+										delete_post_meta( $translation->element_id, '_thumbnail_id' );
+									}
+								);
 							} else {
-								$translated_thumbnail_id = icl_object_id( $thumbnail_id, 'attachment', false, $translation->language_code );
-								update_post_meta( $translation->element_id, '_thumbnail_id', $translated_thumbnail_id );
+								$translated_thumbnail_id = wpml_object_id_filter(
+									$thumbnail_id,
+									'attachment',
+									false,
+									$translation->language_code
+								);
+
+								$id = get_post_meta( $translation->element_id, '_thumbnail_id', true );
+								if ( (int) $id !== $translated_thumbnail_id ) {
+									$this->withPostMetaFiltersDisabled(
+										function () use ( $translation, $translated_thumbnail_id ) {
+											update_post_meta( $translation->element_id, '_thumbnail_id', $translated_thumbnail_id );
+										}
+									);
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-
 	}
 
-	private function are_post_thumbnails_still_in_sync( $source_id, $source_thumbnail_id, $translation ) {
+	protected function are_post_thumbnails_still_in_sync( $source_id, $source_thumbnail_id, $translation ) {
 
 		$translation_thumbnail_id = get_post_meta( $translation->element_id, '_thumbnail_id', true );
 
@@ -819,7 +857,7 @@ class WPML_Media_Attachments_Duplication {
 												FROM {$wpdb->prefix}icl_translations
 												WHERE element_id=%d
 													AND element_type = %s",
-		                                array( $post->ID, 'post_' . $post->post_type ) );
+			array( $post->ID, 'post_' . $post->post_type ) );
 		$row          = $wpdb->get_row( $row_prepared );
 		if ( $row && $row->trid && ( $row->source_language_code == null || $row->source_language_code == "" ) ) {
 			update_post_meta( $post->ID, '_wpml_media_featured', 1 );

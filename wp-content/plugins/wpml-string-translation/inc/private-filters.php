@@ -1,5 +1,7 @@
 <?php
 
+use function WPML\Container\make;
+
 /**
  * @param array $source_languages
  *
@@ -55,11 +57,30 @@ add_filter( 'wpml_tm_allowed_source_languages', 'filter_tm_source_langs', 10, 1 
 add_filter( 'wpml_tm_dashboard_cpt_notice', 'filter_tm_cpt_dashboard_notice', 10, 3 );
 add_filter( 'wpml_job_assigned_to_after_assignment', 'wpml_st_filter_job_assignment', 10, 4 );
 
+/**
+ * @deprecated since WPML ST 3.0.0
+ *
+ * @param string $val
+ *
+ * @return string
+ * @throws \Auryn\InjectionException
+ */
 function wpml_st_blog_title_filter( $val ) {
-	return icl_t( 'WP', 'Blog Title', $val );
+	/** @var WPML_ST_Blog_Name_And_Description_Hooks $filter */
+	$filter = make( WPML_ST_Blog_Name_And_Description_Hooks::class );
+	return $filter->option_blogname_filter( $val );
 }
 
+/**
+ * @deprecated since WPML ST 3.0.0
+ *
+ * @param string $val
+ *
+ * @return string
+ * @throws \Auryn\InjectionException
+ */
 function wpml_st_blog_description_filter( $val ) {
-
-	return icl_t( 'WP', 'Tagline', $val );
+	/** @var WPML_ST_Blog_Name_And_Description_Hooks $filter */
+	$filter = make( WPML_ST_Blog_Name_And_Description_Hooks::class );
+	return $filter->option_blogdescription_filter( $val );
 }

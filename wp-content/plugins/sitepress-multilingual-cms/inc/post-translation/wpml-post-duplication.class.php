@@ -62,11 +62,11 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		$post_array['post_date']     = $master_post->post_date;
 		$post_array['post_date_gmt'] = $master_post->post_date_gmt;
 		$duplicated_post_content     = $this->duplicate_post_content( $lang, $master_post );
-		$post_array['post_content']  = addslashes_gpc( $duplicated_post_content );
+		$post_array['post_content']  = $duplicated_post_content;
 		$duplicated_post_title       = $this->duplicate_post_title( $lang, $master_post );
-		$post_array['post_title']    = addslashes_gpc( $duplicated_post_title );
+		$post_array['post_title']    = $duplicated_post_title;
 		$duplicated_post_excerpt     = $this->duplicate_post_excerpt( $lang, $master_post );
-		$post_array['post_excerpt']  = addslashes_gpc( $duplicated_post_excerpt );
+		$post_array['post_excerpt']  = $duplicated_post_excerpt;
 		if ( $this->sitepress->get_setting('sync_post_status' ) ) {
 			$sync_post_status = true;
 		} else {
@@ -180,15 +180,14 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		wp_update_comment_count_now( $translated_id );
 	}
 
-	private function save_duplicate( $post_array, $lang ) {
-		if ( isset( $post_array[ 'ID' ] ) ) {
-			$id = wp_update_post( $post_array, true );
-		} else {
-			$create_post_helper = wpml_get_create_post_helper();
-			$id                 = $create_post_helper->insert_post( $post_array, $lang, true );
-		}
-
-		return $id;
+	/**
+	 * @param array  $post_array
+	 * @param string $lang
+	 *
+	 * @return int|WP_Error
+	 */
+	private function save_duplicate( array $post_array, $lang ) {
+		return wpml_get_create_post_helper()->insert_post( $post_array, $lang, true );
 	}
 
 	private function duplicate_fix_children( $master_post_id, $lang ) {
@@ -271,6 +270,7 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 																								 $master_post_id ) );
 		$this->wpdb->query( "DELETE " . $this->wpdb->prepare( $from_where_string, $duplicate_post_id ) );
 
+		$values = [];
 		foreach ( $post_meta_master as $post_meta ) {
 			$is_serialized = is_serialized( $post_meta->meta_value );
 			$meta_data     = array(
@@ -298,13 +298,21 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 			if ( ! is_serialized( $post_meta->meta_value ) ) {
 				$post_meta->meta_value = maybe_serialize( $post_meta->meta_value );
 			}
-			$this->wpdb->insert( $this->wpdb->postmeta,
-						   array(
-							   'post_id'    => $duplicate_post_id,
-							   'meta_key'   => $post_meta->meta_key,
-							   'meta_value' => $post_meta->meta_value
-						   ),
-						   array( '%d', '%s', '%s' ) );
+
+			$values[] = $this->wpdb->prepare(
+				'( %d, %s, %s )',
+				$duplicate_post_id,
+				$post_meta->meta_key,
+				$post_meta->meta_value
+			);
+		}
+
+		if ( ! empty( $values ) ) {
+			$values = implode( ', ', $values );
+			$this->wpdb->query(
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				"INSERT INTO `{$this->wpdb->postmeta}` (`post_id`, `meta_key`, `meta_value`) VALUES {$values}"
+				);
 		}
 
 		return true;

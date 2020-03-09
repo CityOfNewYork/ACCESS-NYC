@@ -5,5 +5,4 @@
         </label>
     </p>
     <div class="wpallimport-clear"></div>
-    <p class="label" style="display:block; margin:0;"><label></label></p>
     <div class="acf-input-wrap">

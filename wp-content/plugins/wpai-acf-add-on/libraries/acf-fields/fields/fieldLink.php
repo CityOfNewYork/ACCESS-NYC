@@ -61,8 +61,12 @@ class FieldLink extends Field {
             foreach ($this->keys as $key){
                 $value = '';
                 foreach ($parents as $parent) {
-                    $value = explode($parent['delimiter'], $values[$key][$this->getPostIndex()]);
-                    $value = $value[$parent['index']];
+                    if (!empty($parent['delimiter'])) {
+                        $value = explode($parent['delimiter'], $values[$key][$this->getPostIndex()]);
+                        $value = $value[$parent['index']];
+                    } else {
+                        $value = $values[$key][$this->getPostIndex()];
+                    }
                 }
                 $values[$key][$this->getPostIndex()] = $value;
             }

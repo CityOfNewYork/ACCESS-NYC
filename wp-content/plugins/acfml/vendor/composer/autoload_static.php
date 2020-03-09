@@ -4,18 +4,8 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf0d2eb4ff725ef82bb701faf799e93d2
+class ComposerStaticInitddad4a8ef65d06f45da608143d241ade
 {
-    public static $prefixesPsr0 = array (
-        'x' => 
-        array (
-            'xrstf\\Composer52' => 
-            array (
-                0 => __DIR__ . '/..' . '/xrstf/composer-php52/lib',
-            ),
-        ),
-    );
-
     public static $classMap = array (
         'WPML_ACF' => __DIR__ . '/../..' . '/classes/class-wpml-acf.php',
         'WPML_ACF_Attachments' => __DIR__ . '/../..' . '/classes/class-wpml-acf-attachments.php',
@@ -28,6 +18,7 @@ class ComposerStaticInitf0d2eb4ff725ef82bb701faf799e93d2
         'WPML_ACF_Editor_Hooks' => __DIR__ . '/../..' . '/classes/class-wpml-acf-editor-hooks.php',
         'WPML_ACF_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-field.php',
         'WPML_ACF_Field_Annotations' => __DIR__ . '/../..' . '/classes/class-wpml-acf-field-annotations.php',
+        'WPML_ACF_Field_Groups' => __DIR__ . '/../..' . '/classes/class-wpml-acf-field-groups.php',
         'WPML_ACF_Field_Settings' => __DIR__ . '/../..' . '/classes/class-wpml-acf-field-settings.php',
         'WPML_ACF_Location_Rules' => __DIR__ . '/../..' . '/classes/class-wpml-acf-location-rules.php',
         'WPML_ACF_Migrate_Option_Page_Strings' => __DIR__ . '/../..' . '/classes/class-wpml-acf-migrate-option-page-strings.php',
@@ -39,7 +30,6 @@ class ComposerStaticInitf0d2eb4ff725ef82bb701faf799e93d2
         'WPML_ACF_Pro' => __DIR__ . '/../..' . '/classes/class-wpml-acf-pro.php',
         'WPML_ACF_Processed_Data' => __DIR__ . '/../..' . '/classes/class-wpml-acf-processed-data.php',
         'WPML_ACF_Relationship_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-relationship-field.php',
-        'WPML_ACF_Repeater_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-repeater-field.php',
         'WPML_ACF_Requirements' => __DIR__ . '/../..' . '/classes/class-wpml-acf-requirements.php',
         'WPML_ACF_Taxonomy_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-taxonomy-field.php',
         'WPML_ACF_Term_Id' => __DIR__ . '/../..' . '/classes/class-wpml-acf-term-id.php',
@@ -47,15 +37,12 @@ class ComposerStaticInitf0d2eb4ff725ef82bb701faf799e93d2
         'WPML_ACF_Void_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-void-field.php',
         'WPML_ACF_Worker' => __DIR__ . '/../..' . '/classes/class-wpml-acf-worker.php',
         'WPML_ACF_Xliff' => __DIR__ . '/../..' . '/classes/class-wpml-acf-xliff.php',
-        'xrstf\\Composer52\\AutoloadGenerator' => __DIR__ . '/..' . '/xrstf/composer-php52/lib/xrstf/Composer52/AutoloadGenerator.php',
-        'xrstf\\Composer52\\Generator' => __DIR__ . '/..' . '/xrstf/composer-php52/lib/xrstf/Composer52/Generator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixesPsr0 = ComposerStaticInitf0d2eb4ff725ef82bb701faf799e93d2::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitf0d2eb4ff725ef82bb701faf799e93d2::$classMap;
+            $loader->classMap = ComposerStaticInitddad4a8ef65d06f45da608143d241ade::$classMap;
 
         }, null, ClassLoader::class);
     }

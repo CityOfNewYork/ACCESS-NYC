@@ -935,7 +935,11 @@ class SitePress_EditLanguages {
 
 			$wpml_wp_api = new WPML_WP_API();
 
-			$mime               = $wpml_wp_api->get_file_mime_type( $_FILES['icl_edit_languages']['tmp_name'][ $id ]['flag_file'] );
+			$mime = $wpml_wp_api->get_file_mime_type(
+				$_FILES['icl_edit_languages']['tmp_name'][ $id ]['flag_file'],
+				$_FILES['icl_edit_languages']['name'][ $id ]['flag_file']
+			);
+
 			$allowed_mime_types = array_values( $this->allowed_flag_mime_types );
 			$validated          = in_array( $mime, $allowed_mime_types, true );
 

@@ -1167,6 +1167,8 @@ class PMXI_CsvParser
             'pipe'         => '|',
             'tabulation' => "\t"
         );
+
+        $delimiters = apply_filters('wp_all_import_specified_delimiters', $delimiters);
        
         // specify allowed line endings
         $line_endings = array(

@@ -50,6 +50,6 @@ class WPML_Page_Builders_Media_Shortcodes_Update implements IWPML_PB_Media_Updat
 			'post_content' => $post->post_content,
 			'tags_input'   => $tag_ids,
 		);
-		wp_update_post( $postarr );
+		wpml_update_escaped_post( $postarr );
 	}
 }

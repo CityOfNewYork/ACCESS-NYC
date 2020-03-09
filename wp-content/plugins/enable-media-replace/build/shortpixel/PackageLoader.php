@@ -14,6 +14,8 @@ class PackageLoader
     {
         $this->dir = $dir;
         $composer = $this->getComposerFile();
+
+
         if(isset($composer["autoload"]["psr-4"])){
             $this->loadPSR4($composer['autoload']['psr-4']);
         }
@@ -59,9 +61,10 @@ class PackageLoader
                     if ($psr4) {
                         $classname = str_replace($namespace, "", $classname);
                     }
-                    $filename = preg_replace("#\\\\#", "/", $classname).".php";
+                    $filename = preg_replace("#\\\\#", "", $classname).".php";
+
                     foreach ($classpaths as $classpath) {
-                        $fullpath = $this->dir."/".$classpath."/$filename";
+                      $fullpath = trailingslashit($dir) . trailingslashit($classpath) .$filename;
                         if (file_exists($fullpath)) {
                             include_once $fullpath;
                         }

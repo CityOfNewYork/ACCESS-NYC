@@ -30,6 +30,16 @@ class WPML_Upgrade_Schema {
 
 	/**
 	 * @param string $table_name
+	 * @param string $index_name
+	 *
+	 * @return bool
+	 */
+	public function does_index_exist( $table_name, $index_name ) {
+		return (bool) count( $this->wpdb->get_results( "SHOW INDEXES FROM {$this->wpdb->prefix}{$table_name} WHERE key_name = '{$index_name}'" ) );
+	}
+
+	/**
+	 * @param string $table_name
 	 * @param string $column_name
 	 * @param string $attribute_string
 	 *
@@ -48,6 +58,17 @@ class WPML_Upgrade_Schema {
 	 */
 	public function modify_column( $table_name, $column_name, $attribute_string ) {
 		return $this->wpdb->query( "ALTER TABLE {$this->wpdb->prefix}{$table_name} MODIFY COLUMN `{$column_name}` {$attribute_string}" );
+	}
+
+	/**
+	 * @param string $table_name
+	 * @param string $index_name
+	 * @param string $attribute_string
+	 *
+	 * @return false|int
+	 */
+	public function add_index( $table_name, $index_name, $attribute_string ) {
+		return $this->wpdb->query( "ALTER TABLE {$this->wpdb->prefix}{$table_name} ADD INDEX `{$index_name}` {$attribute_string}" );
 	}
 
 	/**
@@ -144,6 +165,9 @@ class WPML_Upgrade_Schema {
 		return null;
 	}
 
+	/**
+	 * @return wpdb
+	 */
 	public function get_wpdb() {
 		return $this->wpdb;
 	}

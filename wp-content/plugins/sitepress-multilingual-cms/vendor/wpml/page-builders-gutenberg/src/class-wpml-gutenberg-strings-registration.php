@@ -2,7 +2,7 @@
 
 class WPML_Gutenberg_Strings_Registration {
 
-	/** @var WPML_Gutenberg_Strings_In_Block $strings_in_blocks */
+	/** @var WPML\PB\Gutenberg\StringsInBlock\StringsInBlock $strings_in_blocks */
 	private $strings_in_blocks;
 
 	/** @var WPML_ST_String_Factory $string_factory */
@@ -20,16 +20,26 @@ class WPML_Gutenberg_Strings_Registration {
 	/** @var array $leftover_strings */
 	private $leftover_strings;
 
+	/** @var WPML_Translate_Link_Targets $translate_link_targets */
+	private $translate_link_targets;
+
+	/** @var callable $set_link_translations */
+	private $set_link_translations;
+
 	public function __construct(
-		WPML_Gutenberg_Strings_In_Block $strings_in_blocks,
+		WPML\PB\Gutenberg\StringsInBlock\StringsInBlock $strings_in_blocks,
 		WPML_ST_String_Factory $string_factory,
 		WPML_PB_Reuse_Translations $reuse_translations,
-		WPML_PB_String_Translation $string_translation
+		WPML_PB_String_Translation $string_translation,
+		WPML_Translate_Link_Targets $translate_link_targets,
+		callable $set_link_translations
 	) {
-		$this->strings_in_blocks = $strings_in_blocks;
-		$this->string_factory = $string_factory;
-		$this->reuse_translations = $reuse_translations;
-		$this->string_translation = $string_translation;
+		$this->strings_in_blocks      = $strings_in_blocks;
+		$this->string_factory         = $string_factory;
+		$this->reuse_translations     = $reuse_translations;
+		$this->string_translation     = $string_translation;
+		$this->translate_link_targets = $translate_link_targets;
+		$this->set_link_translations  = $set_link_translations;
 	}
 
 	/**
@@ -67,6 +77,10 @@ class WPML_Gutenberg_Strings_Registration {
 
 			foreach ( $strings as $string ) {
 
+				if ( 'LINK' === $string->type && ! $this->translate_link_targets->is_internal_url( $string->value ) ) {
+					$string->type = 'LINE';
+				}
+
 				do_action(
 					'wpml_register_string',
 					$string->value,
@@ -84,6 +98,11 @@ class WPML_Gutenberg_Strings_Registration {
 					$wrap_tag = (string) isset( $block->attrs['level'] ) ? $block->attrs['level'] : 2;
 					$wrap_tag = 'h' . $wrap_tag;
 					$this->update_wrap_tag( $package_data, $string, $wrap_tag );
+				}
+
+				if ( 'LINK' === $string->type ) {
+					$string_id = apply_filters( 'wpml_string_id_from_package', 0, $package_data, $string->id, $string->value );
+					call_user_func( $this->set_link_translations, $string_id );
 				}
 
 				$this->remove_string_from_leftovers( $string->value );

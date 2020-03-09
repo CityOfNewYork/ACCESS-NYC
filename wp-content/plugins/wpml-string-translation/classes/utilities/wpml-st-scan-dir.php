@@ -1,6 +1,7 @@
 <?php
 
 class WPML_ST_Scan_Dir {
+	const PLACEHOLDERS_ROOT = '<root>';
 
 	/**
 	 * @param string $folder
@@ -27,7 +28,7 @@ class WPML_ST_Scan_Dir {
 			if ( in_array( $file->getExtension(), $extensions, true ) ) {
 
 				foreach( $ignore_folders as $ignore_folder ) {
-					if ( false !== strpos( $file->getPathname(), $ignore_folder ) ) {
+					if ( false !== strpos( $file->getPathname(), str_replace( self::PLACEHOLDERS_ROOT, $folder, $ignore_folder ) ) ) {
 						$ignore_file = true;
 					}
 				}

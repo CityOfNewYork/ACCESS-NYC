@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class WPML_Term_Adjust_Id
+ */
 class WPML_Term_Adjust_Id {
 
 	private $debug_backtrace;
@@ -8,6 +11,15 @@ class WPML_Term_Adjust_Id {
 	private $adjust_id_url_filter_off;
 	private $sitepress;
 
+	/**
+	 * WPML_Term_Adjust_Id constructor.
+	 *
+	 * @param WPML_Debug_BackTrace  $debug_backtrace
+	 * @param WPML_Term_Translation $term_translation
+	 * @param WPML_Post_Translation $post_translation
+	 * @param boolean               $adjust_id_url_filter_off
+	 * @param SitePress             $sitepress
+	 */
 	public function __construct(
 		WPML_Debug_BackTrace $debug_backtrace,
 		WPML_Term_Translation $term_translation,
@@ -28,13 +40,12 @@ class WPML_Term_Adjust_Id {
 	 * @return WP_Term
 	 */
 	public function filter( WP_Term $term ) {
-		if ( $this->adjust_id_url_filter_off
-		     || ! $this->sitepress->get_setting( 'auto_adjust_ids' )
-		     || $this->debug_backtrace->is_function_in_call_stack( 'get_category_parents' )
-		     || $this->debug_backtrace->is_function_in_call_stack( 'get_permalink' )
-		     || ( $this->debug_backtrace->is_function_in_call_stack( 'wp_update_post' )
-		          && $this->debug_backtrace->is_function_in_call_stack( 'get_term' ) )
-		     || $this->is_ajax_add_term_translation()
+		if (
+			$this->adjust_id_url_filter_off
+			|| ! $this->sitepress->get_setting( 'auto_adjust_ids' )
+			|| $this->debug_backtrace->are_functions_in_call_stack( [ 'get_category_parents', 'get_permalink' ] )
+			|| $this->is_getting_term_when_updating_a_post()
+			|| $this->is_ajax_add_term_translation()
 		) {
 			return $term;
 		}
@@ -48,7 +59,7 @@ class WPML_Term_Adjust_Id {
 				$translated_object_id = $this->post_translation->element_id_in( $object_id, $this->sitepress->get_current_language() );
 				if ( $translated_object_id ) {
 					$term->object_id = $translated_object_id;
-				} else if ( $this->sitepress->is_display_as_translated_post_type( $this->post_translation->get_type( $object_id ) ) ) {
+				} elseif ( $this->sitepress->is_display_as_translated_post_type( $this->post_translation->get_type( $object_id ) ) ) {
 					$term->object_id = $this->post_translation->element_id_in( $object_id, $this->sitepress->get_default_language() );
 				}
 			}
@@ -57,6 +68,16 @@ class WPML_Term_Adjust_Id {
 		return $term;
 	}
 
+	private function is_getting_term_when_updating_a_post() {
+		return (
+			$this->debug_backtrace->are_functions_in_call_stack( [ 'wp_update_post' ], false )
+			&& $this->debug_backtrace->are_functions_in_call_stack( [ 'get_term' ], false )
+		);
+	}
+
+	/**
+	 * @return bool
+	 */
 	private function is_ajax_add_term_translation() {
 		$taxonomy = isset( $_POST['taxonomy'] ) ? $_POST['taxonomy'] : false;
 		if ( $taxonomy ) {

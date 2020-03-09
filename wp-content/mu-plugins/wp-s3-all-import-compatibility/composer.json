@@ -1,0 +1,40 @@
+{
+  "name": "nyco/wp-s3-all-import-compatibility",
+  "version": "0.0.3",
+  "type": "wordpress-muplugin",
+  "license": "GPL-3.0+",
+  "description": "A developer plugin for WordPress that ensures compatibility between hummanmade / S3 Uploads and WP All Import.",
+  "homepage": "https://github.com/cityofnewyork/nyco-wp-s3-all-import-compatibility",
+  "authors": [
+    {
+      "name": "NYC Opportunity",
+      "email": "products@nycopportunity.nyc.gov",
+      "homepage": "http://nyc.gov/opportunity"
+    }
+  ],
+  "keywords": [
+    "nycopportunity",
+    "wordpress",
+    "s3-uploads",
+    "wp-all-import",
+    "compatibility"
+  ],
+  "support": {
+    "issues": "https://github.com/cityofnewyork/nyco-wp-s3-all-import-compatibility/issues"
+  },
+  "require": {
+    "composer/installers": "^1.7"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.*",
+    "codeception/codeception": "^2.3"
+  },
+  "scripts": {
+    "lint": [
+      "vendor/bin/phpcs --standard=standard.xml --extensions=php"
+    ],
+    "fix": [
+      "vendor/bin/phpcbf --standard=standard.xml --extensions=php"
+    ]
+  }
+}

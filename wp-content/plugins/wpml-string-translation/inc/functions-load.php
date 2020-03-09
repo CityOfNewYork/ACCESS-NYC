@@ -21,10 +21,10 @@ function wpml_st_load_admin_texts() {
  * @return WPML_ST_String_Factory
  */
 function wpml_st_load_string_factory() {
-	global $wpml_st_string_factory, $wpdb;
+	global $wpml_st_string_factory;
 
 	if ( ! isset( $wpml_st_string_factory ) ) {
-		$wpml_st_string_factory = new WPML_ST_String_Factory( $wpdb );
+		$wpml_st_string_factory = WPML\Container\make( WPML_ST_String_Factory::class );
 	}
 
 	return $wpml_st_string_factory;

@@ -16,13 +16,17 @@ class WPML_WP_Post {
 		$this->post_id = $post_id;
 	}
 
-	public function update( Array $post_data_array, $direct_db_update = false) {
+	/**
+	 * @param array $post_data_array
+	 * @param bool  $direct_db_update
+	 */
+	public function update( array $post_data_array, $direct_db_update = false) {
 		if ( $direct_db_update ) {
 			$this->wpdb->update( $this->wpdb->posts, $post_data_array, array( 'ID' => $this->post_id ) );
 			clean_post_cache( $this->post_id );
 		} else {
 			$post_data_array['ID'] = $this->post_id;
-			wp_update_post( $post_data_array );
+			wpml_update_escaped_post( $post_data_array );
 		}
 	}
 }

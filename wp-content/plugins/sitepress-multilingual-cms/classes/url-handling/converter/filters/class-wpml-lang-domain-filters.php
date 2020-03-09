@@ -33,7 +33,7 @@ class WPML_Lang_Domain_Filters {
 		add_filter( 'login_url', array( $this, 'convert_url' ) );
 		add_filter( 'logout_url', array( $this, 'convert_logout_url' ) );
 		add_filter( 'admin_url', array( $this, 'admin_url_filter' ), 10, 2 );
-		add_filter( 'login_redirect', array( $this, 'convert_url' ), 1, 3);
+		add_filter( 'login_redirect', array( $this, 'convert_url' ), 1, 3 );
 	}
 
 	/**
@@ -65,7 +65,7 @@ class WPML_Lang_Domain_Filters {
 	public function siteurl_callback( $url ) {
 		$getting_network_site_url = $this->debug_backtrace->is_function_in_call_stack( 'get_admin_url' ) && is_multisite();
 
-		if ( ! $this->debug_backtrace->is_function_in_call_stack( 'get_home_path' ) && ! $getting_network_site_url ) {
+		if ( ! $this->debug_backtrace->is_function_in_call_stack( 'get_home_path', false ) && ! $getting_network_site_url ) {
 			$parsed_url = wpml_parse_url( $url );
 			$host       = is_array( $parsed_url ) && isset( $parsed_url['host'] );
 			if ( $host && isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] ) {

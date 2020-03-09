@@ -1,6 +1,9 @@
 <?php
 
 class WPML_String_Shortcode {
+
+	const STRING_DOMAIN = 'wpml-shortcode';
+
 	private $context;
 	private $name;
 
@@ -41,7 +44,7 @@ class WPML_String_Shortcode {
 	 */
 	private function parse_attributes( $attributes, $value ) {
 		$pairs = array(
-			'context' => 'wpml-shortcode',
+			'context' => self::STRING_DOMAIN,
 			'name'    => 'wpml-shortcode-' . md5( $value ),
 		);
 

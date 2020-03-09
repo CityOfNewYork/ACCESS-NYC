@@ -12,10 +12,20 @@ abstract class QM_Output_Html extends QM_Output {
 	protected $current_id   = null;
 	protected $current_name = null;
 
+	public function name() {
+		_deprecated_function(
+			esc_html( get_class( $this->collector ) . '::name()' ),
+			'3.5',
+			esc_html( get_class( $this ) . '::name()' )
+		);
+
+		return $this->collector->name();
+	}
+
 	public function admin_menu( array $menu ) {
 
 		$menu[ $this->collector->id() ] = $this->menu( array(
-			'title' => esc_html( $this->collector->name() ),
+			'title' => esc_html( $this->name() ),
 		) );
 		return $menu;
 
@@ -34,14 +44,14 @@ abstract class QM_Output_Html extends QM_Output {
 			$id = $this->collector->id();
 		}
 		if ( null === $name ) {
-			$name = $this->collector->name();
+			$name = $this->name();
 		}
 
 		$this->current_id   = $id;
 		$this->current_name = $name;
 
 		printf(
-			'<div class="qm" id="%1$s" role="group" aria-labelledby="%1$s-caption" tabindex="-1">',
+			'<div class="qm" id="%1$s" role="tabpanel" aria-labelledby="%1$s-caption" tabindex="-1">',
 			esc_attr( $id )
 		);
 
@@ -66,14 +76,14 @@ abstract class QM_Output_Html extends QM_Output {
 			$id = $this->collector->id();
 		}
 		if ( null === $name ) {
-			$name = $this->collector->name();
+			$name = $this->name();
 		}
 
 		$this->current_id   = $id;
 		$this->current_name = $name;
 
 		printf(
-			'<div class="qm qm-non-tabular" id="%1$s" role="group" aria-labelledby="%1$s-caption" tabindex="-1">',
+			'<div class="qm qm-non-tabular" id="%1$s" role="tabpanel" aria-labelledby="%1$s-caption" tabindex="-1">',
 			esc_attr( $id )
 		);
 
@@ -110,7 +120,7 @@ abstract class QM_Output_Html extends QM_Output {
 		}
 
 		printf(
-			'<div class="qm qm-concerns" id="%1$s" role="group" aria-labelledby="%1$s" tabindex="-1">',
+			'<div class="qm qm-concerns" id="%1$s" role="tabpanel" aria-labelledby="%1$s-caption" tabindex="-1">',
 			esc_attr( $this->current_id . '-concerned_hooks' )
 		);
 
@@ -119,7 +129,11 @@ abstract class QM_Output_Html extends QM_Output {
 		printf(
 			'<caption><h2 id="%1$s-caption">%2$s</h2></caption>',
 			esc_attr( $this->current_id . '-concerned_hooks' ),
-			esc_html__( 'Related Hooks with Filters or Actions Attached', 'query-monitor' )
+			sprintf(
+				/* translators: %s: Panel name */
+				esc_html__( '%s: Related Hooks with Filters or Actions Attached', 'query-monitor' ),
+				esc_html( $this->name() )
+			)
 		);
 
 		echo '<thead>';
@@ -152,11 +166,11 @@ abstract class QM_Output_Html extends QM_Output {
 			$id = $this->collector->id();
 		}
 		if ( null === $name ) {
-			$name = $this->collector->name();
+			$name = $this->name();
 		}
 
 		printf(
-			'<div class="qm qm-debug-bar" id="%1$s" role="group" aria-labelledby="%1$s-caption" tabindex="-1">',
+			'<div class="qm qm-debug-bar" id="%1$s" role="tabpanel" aria-labelledby="%1$s-caption" tabindex="-1">',
 			esc_attr( $id )
 		);
 
@@ -269,8 +283,12 @@ abstract class QM_Output_Html extends QM_Output {
 			}
 		}
 
-		foreach ( $values as $value ) {
-			$out .= '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . '</option>';
+		foreach ( $values as $key => $value ) {
+			if ( is_int( $key ) && $key >= 0 ) {
+				$out .= '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . '</option>';
+			} else {
+				$out .= '<option value="' . esc_attr( $key ) . '">' . esc_html( $value ) . '</option>';
+			}
 		}
 
 		if ( ! empty( $args['append'] ) ) {
@@ -374,7 +392,6 @@ abstract class QM_Output_Html extends QM_Output {
 	 * @return string The fully formatted file link or file name, safe for output.
 	 */
 	public static function output_filename( $text, $file, $line = 0, $is_filename = false ) {
-
 		if ( empty( $file ) ) {
 			if ( $is_filename ) {
 				return esc_html( $text );
@@ -424,9 +441,41 @@ abstract class QM_Output_Html extends QM_Output {
 		);
 	}
 
+	/**
+	 * Provides a protocol URL for edit links in QM stack traces for various editors.
+	 *
+	 * @param string $editor the chosen code editor
+	 * @param string $default_format a format to use if no editor is found
+	 *
+	 * @return string a protocol URL format
+	 */
+	public static function get_editor_file_link_format( $editor, $default_format ) {
+		switch ( $editor ) {
+			case 'phpstorm':
+				return 'phpstorm://open?file=%f&line=%l';
+			case 'vscode':
+				return 'vscode://file/%f:%l';
+			case 'atom':
+				return 'atom://open/?url=file://%f&line=%l';
+			case 'sublime':
+				return 'subl://open/?url=file://%f&line=%l';
+			case 'netbeans':
+				return 'nbopen://%f:%l';
+			default:
+				return $default_format;
+		}
+	}
+
 	public static function get_file_link_format() {
 		if ( ! isset( self::$file_link_format ) ) {
 			$format = ini_get( 'xdebug.file_link_format' );
+
+			if ( isset( $_COOKIE[ QM_EDITOR_COOKIE ] ) ) {
+				$format = self::get_editor_file_link_format(
+					$_COOKIE[ QM_EDITOR_COOKIE ],
+					$format
+				);
+			}
 
 			/**
 			 * Filters the clickable file link format.

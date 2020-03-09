@@ -4,9 +4,6 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 	/** @var wpdb */
 	private $wpdb;
 
-	/** @var string */
-	private $table;
-
 	/** @var null|array */
 	private $data;
 
@@ -21,7 +18,6 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 	 */
 	public function __construct( wpdb $wpdb ) {
 		$this->wpdb  = $wpdb;
-		$this->table = $this->wpdb->prefix . 'icl_mo_files_domains';
 	}
 
 	public function add_hooks() {
@@ -46,7 +42,7 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 	 */
 	public function persist() {
 		foreach ( $this->new_data as $file ) {
-			$sql = "INSERT IGNORE INTO $this->table ( file_path, file_path_md5, domain, status, num_of_strings, last_modified, component_type, component_id ) VALUES ( %s, %s, %s, %s, %d, %d, %s, %s )";
+			$sql = "INSERT IGNORE INTO {$this->wpdb->prefix}icl_mo_files_domains ( file_path, file_path_md5, domain, status, num_of_strings, last_modified, component_type, component_id ) VALUES ( %s, %s, %s, %s, %d, %d, %s, %s )";
 			$this->wpdb->query(
 				$this->wpdb->prepare(
 					$sql,
@@ -66,7 +62,7 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 
 		foreach ( $this->updated_data as $file ) {
 			$this->wpdb->update(
-				$this->table,
+				$this->wpdb->prefix . 'icl_mo_files_domains',
 				$this->file_to_array( $file ),
 				array(
 					'file_path_md5' => $file->get_path_hash(),
@@ -119,7 +115,7 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 	private function load_data() {
 		if ( null === $this->data ) {
 			$this->data = array();
-			$sql        = "SELECT * FROM {$this->table}";
+			$sql = "SELECT * FROM {$this->wpdb->prefix}icl_mo_files_domains";
 			$rowset     = $this->wpdb->get_results( $sql );
 
 			foreach ( $rowset as $row ) {
@@ -132,5 +128,9 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 				$this->data[ $file->get_path() ] = $file;
 			}
 		}
+	}
+
+	public function reset() {
+		$this->data = null;
 	}
 }

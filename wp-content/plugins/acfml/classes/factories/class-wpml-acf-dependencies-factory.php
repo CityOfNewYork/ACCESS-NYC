@@ -18,6 +18,7 @@ class WPML_ACF_Dependencies_Factory {
 	private $annotations;
 	private $xliff;
 	private $blocks;
+	private $field_groups;
 
 	public function create_options_page() {
 		if ( ! $this->options_page ) {
@@ -61,7 +62,7 @@ class WPML_ACF_Dependencies_Factory {
 
 	public function create_duplicated_post() {
 		if ( ! $this->duplicated_post ) {
-			$this->duplicated_post = new WPML_ACF_Duplicated_Post( $this->get_wpdb() );
+			$this->duplicated_post = new WPML_ACF_Duplicated_Post();
 		}
 
 		return $this->duplicated_post;
@@ -129,6 +130,14 @@ class WPML_ACF_Dependencies_Factory {
 		}
 
 		return $this->blocks;
+	}
+
+	public function create_field_groups() {
+		if ( ! $this->field_groups ) {
+			$this->field_groups = new WPML_ACF_Field_Groups( $this->get_sitepress() );
+		}
+
+		return $this->field_groups;
 	}
 
 	private function get_sitepress() {

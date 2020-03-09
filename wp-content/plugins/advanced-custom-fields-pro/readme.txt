@@ -2,7 +2,7 @@
 Contributors: elliotcondon
 Tags: acf, advanced, custom, field, fields, form, repeater, content
 Requires at least: 4.7.0
-Tested up to: 5.2
+Tested up to: 5.3.0
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -66,6 +66,68 @@ From your WordPress dashboard
 
 
 == Changelog ==
+
+= 5.8.7 =
+*Release Date - 12 November 2019*
+
+* New - Updated admin CSS for new WordPress 5.3 styling.
+* Fix - Fixed various issues affecting dynamic metaboxes in the block editor (requires WordPress 5.3)
+* Fix - Fixed performance issue when checking network sites for upgrades.
+* Fix - Fixed Select2 clones appearing after duplicating a Relationship field.
+* Tweak - Repeater field "Add row" icons will now hide when maximum rows are reached.
+* Tweak - Removed ACF Blocks keyword limit for later versions of Gutenberg.
+
+= 5.8.6 =
+*Release Date - 24 October 2019*
+
+* New - Added more data to Google Maps field value including place_id, street_name, country and more.
+* Fix - Fixed bug in Gallery field incorrectly displaying .pdf attachments as icons.
+* Fix - Fixed bug in Checkbox field missing "selected" class after "Toggle All".
+* Dev - Added compatibility for Attachments in the Post Taxonomy location rule.
+* Dev - Added missing return statement from `acf_get_form()` function.
+* Dev - Added "google_map_result" JS filter.
+
+= 5.8.5 =
+*Release Date - 8 October 2019*
+
+* New - Added new choice "Add" to the User Form location rule.
+* New - Optimized `acf_form()` logic when used in combination with `acf_register_form()`.
+* Fix - Fixed bug causing incorrect field order after sync.
+* Fix - Fixed bug reverting the first field type to Text in Firefox version 69.0.1.
+* Fix - Fixed bug causing tinymce issues when changing between block modes.
+* Fix - Fixed bug preventing block registration when category does not exist.
+* Fix - Fixed bug preventing block registration when no icon is declared.
+* Dev - Added RegExp compatibility for innerBlocks.
+
+= 5.8.4 =
+*Release Date - 3 September 2019*
+
+* New - Optimized Relationship field by delaying AJAX call until UI is visible.
+* Fix - Fixed bug incorrectly escaping HTML in the Link field title.
+* Fix - Fixed bug showing Discussion and Comment metaboxes for newly imported field groups.
+* Fix - Fixed PHP warning when loading meta from Post 0.
+* Dev - Ensure Checkbox field value is an array even when empty.
+* Dev - Added new `ACF_MAJOR_VERSION` constant.
+
+= 5.8.3 =
+*Release Date - 7 August 2019*
+
+* Tweak - Changed Options Page location rules to show "page_title" instead of "menu_title".
+* Fix - Fixed bug causing Textarea field to incorrectly validate maxlength.
+* Fix - Fixed bug allowing Range field values outside of the min and max settings.
+* Fix - Fixed bug in block RegExp causing some blocks to miss the "acf/pre_save_block" filter.
+* Dev - Added `$block_type` parameter to block settings "enqueue_assets" callback.
+* i18n - Added French Canadian language thanks to Bérenger Zyla.
+* i18n - Updated French language thanks to Bérenger Zyla.
+
+= 5.8.2 =
+*Release Date - 15 July 2019*
+
+* Fix - Fixed bug where validation did not prevent new user registration.
+* Fix - Fixed bug causing some "reordered" metaboxes to not appear in the Gutenberg editor.
+* Fix - Fixed bug causing WYSIWYG field with delayed initialization to appear blank.
+* Fix - Fixed bug when editing a post and adding a new tag did not refresh metaboxes.
+* Dev - Added missing `$value` parameter in "acf/pre_format_value" filter.
 
 = 5.8.1 =
 *Release Date - 3 June 2019*

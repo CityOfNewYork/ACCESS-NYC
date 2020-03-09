@@ -4,11 +4,17 @@
 
 		function setUp() {
 			self::_setupStarterTheme();
-			require_once(get_template_directory().'/functions.php');
+			switch_theme( basename( dirname( dirname( __FILE__ ) ) ) );
+			require_once(__DIR__.'/../functions.php');
 		}
 
 		function tearDown() {
 			switch_theme('twentythirteen');
+		}
+
+		function testTimberExists() {
+			$context = Timber::context();
+			$this->assertTrue(is_array($context));
 		}
 
 		function testFunctionsPHP() {
@@ -24,31 +30,26 @@
 			$this->assertStringEndsWith('</article>', $str);
 		}
 
+		/**
+		 * Helper test to output current twig version
+		 */
+		function testTwigVersion() {
+			$str = Timber::compile_string("{{ constant('Twig_Environment::VERSION') }}");
+			//error_log('Twig version = '.$str);
+		}
+
+		function testTwigFilter() {
+			$str = Timber::compile_string('{{ "foo" | myfoo }}');
+			$this->assertEquals('foo bar!', $str);
+		}
+
 		static function _setupStarterTheme(){
-			$dest = WP_CONTENT_DIR.'/themes/starter-theme/';
-			$src = __DIR__.'/../../starter-theme/';
-			if (is_dir($src)) {
-				self::_copyDirectory($src, $dest);
-				switch_theme('starter-theme');
-			} else {
-				echo 'no its not';
+			$dest = WP_CONTENT_DIR . '/themes/' . basename( dirname( dirname( __FILE__ ) ) );
+			$src  = realpath( __DIR__ . '/../../' . basename( dirname( dirname( __FILE__ ) ) ) );
+			if ( is_dir($src) && !file_exists($dest) ) {
+				symlink($src, $dest);
 			}
 		}
 
-		static function _copyDirectory($src, $dst){
-			$dir = opendir($src);
-			@mkdir($dst);
-			while(false !== ( $file = readdir($dir)) ) {
-			    if (( $file != '.' ) && ( $file != '..' )) {
-			        if ( is_dir($src . '/' . $file) ) {
-			            self::_copyDirectory($src . '/' . $file,$dst . '/' . $file);
-			        }
-			        else {
-			            copy($src . '/' . $file,$dst . '/' . $file);
-			        }
-			    }
-			}
-			closedir($dir);
-		}
 
 	}

@@ -1,5 +1,8 @@
 <?php
 
+use WPML\Core\Twig_Loader_Filesystem;
+use WPML\Core\Twig_Environment;
+
 class WPML_End_User_Loader_Factory implements IWPML_Deferred_Action_Loader, IWPML_Backend_Action_Loader {
 	/**
 	 * @return WPML_End_User_Loader|null

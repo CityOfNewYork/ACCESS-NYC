@@ -9,7 +9,6 @@ class WPML_API_Hooks_Factory implements IWPML_Backend_Action_Loader, IWPML_Front
 
 		$hooks[] = new WPML_API_Hook_Sync_Custom_Fields(
 			new WPML_Sync_Custom_Fields(
-				$wpdb,
 				new WPML_Translation_Element_Factory( $sitepress ),
 				$sitepress->get_custom_fields_translation_settings( WPML_COPY_CUSTOM_FIELD )
 			)

@@ -13,7 +13,7 @@ class WPML_Translate_Link_Targets {
 	 * @param AbsoluteLinks $absolute_links
 	 * @param WPML_Absolute_To_Permalinks $permalinks_converter
 	 */
-	public function __construct( $absolute_links, $permalinks_converter ) {
+	public function __construct( AbsoluteLinks $absolute_links, WPML_Absolute_To_Permalinks $permalinks_converter ) {
 		$this->absolute_links       = $absolute_links;
 		$this->permalinks_converter = $permalinks_converter;
 	}

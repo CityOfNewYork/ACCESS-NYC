@@ -790,7 +790,7 @@ function twig_join_filter($value, $glue = '', $and = null)
  */
 function twig_split_filter(Environment $env, $value, $delimiter, $limit = null)
 {
-    if (!empty($delimiter)) {
+    if (\strlen($delimiter) > 0) {
         return null === $limit ? explode($delimiter, $value) : explode($delimiter, $value, $limit);
     }
 
@@ -942,6 +942,9 @@ function twig_in_filter($value, $compare)
 {
     if ($value instanceof Markup) {
         $value = (string) $value;
+    }
+    if ($compare instanceof Markup) {
+        $compare = (string) $compare;
     }
 
     if (\is_array($compare)) {
@@ -1504,6 +1507,10 @@ function twig_test_empty($value)
         return 0 == \count($value);
     }
 
+    if ($value instanceof \Traversable) {
+        return !iterator_count($value);
+    }
+
     if (\is_object($value) && method_exists($value, '__toString')) {
         return '' === (string) $value;
     }
@@ -1696,11 +1703,8 @@ function twig_array_filter($array, $arrow)
         return array_filter($array, $arrow);
     }
 
-    while ($array instanceof \IteratorAggregate) {
-        $array = $array->getIterator();
-    }
-
-    return new \CallbackFilterIterator($array, $arrow);
+    // the IteratorIterator wrapping is needed as some internal PHP classes are \Traversable but do not implement \Iterator
+    return new \CallbackFilterIterator(new \IteratorIterator($array), $arrow);
 }
 
 function twig_array_map($array, $arrow)

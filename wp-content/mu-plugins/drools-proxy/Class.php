@@ -19,9 +19,9 @@ class DroolsProxy {
     $user = get_option('drools_user');
     $pass = get_option('drools_pass');
 
-    $url = (!empty($url)) ? $url : $_ENV['DROOLS_URL'];
-    $user = (!empty($user)) ? $user : $_ENV['DROOLS_USER'];
-    $pass = (!empty($pass)) ? $pass : $_ENV['DROOLS_PASS'];
+    $url = (!empty($url)) ? $url : DROOLS_URL;
+    $user = (!empty($user)) ? $user : DROOLS_USER;
+    $pass = (!empty($pass)) ? $pass : DROOLS_PASS;
 
     if (empty($url) || empty($user) || empty($pass)) {
       wp_send_json([
@@ -33,13 +33,13 @@ class DroolsProxy {
 
     $uid = uniqid();
 
-    do_action('peu_data', $_POST['staff'], $_POST['client'], $uid);
     do_action('drools_request', $_POST['data'], $uid);
 
     $response = $this->request($url, json_encode($_POST['data']), $user, $pass);
 
     if ($response === false || empty($response)) {
-      wp_send_json([ 'status' => 'fail'], 500);
+      wp_send_json(['status' => 'fail'], 500);
+
       wp_die();
     }
 
@@ -63,6 +63,7 @@ class DroolsProxy {
    */
   private function request($url, $data, $user, $pass) {
     $ch = curl_init();
+
     curl_setopt_array($ch, [
       CURLOPT_URL => $url,
       CURLOPT_RETURNTRANSFER => true,
@@ -92,12 +93,16 @@ class DroolsProxy {
     add_settings_section('drools_proxy', 'Drools Settings', [$this, 'settingsHeadingText'], 'drools_config');
 
     add_settings_field(
-      'drools_url', // field name
-      'Drools Endpoint (URL)', // label
+      'drools_url',                 // field name
+      'Drools Endpoint (URL)',      // label
       [$this, 'settingsFieldHtml'], // HTML content
-      'drools_config', // page
-      'drools_proxy', // section
-      ['drools_url', '']
+      'drools_config',              // page
+      'drools_proxy',               // section
+      array(
+        'id' => 'drools_url',
+        'placeholder' => '',
+        'private' => false
+      )
     );
 
     add_settings_field(
@@ -106,7 +111,11 @@ class DroolsProxy {
       [$this, 'settingsFieldHtml'],
       'drools_config',
       'drools_proxy',
-      ['drools_user', '']
+      array(
+        'id' => 'drools_user',
+        'placeholder' => '',
+        'private' => false
+      )
     );
 
     add_settings_field(
@@ -115,7 +124,11 @@ class DroolsProxy {
       [$this, 'settingsFieldHtml'],
       'drools_config',
       'drools_proxy',
-      ['drools_pass', '']
+      array(
+        'id' => 'drools_pass',
+        'placeholder' => '',
+        'private' => true
+      )
     );
 
     register_setting('drools_settings', 'drools_url');
@@ -135,24 +148,28 @@ class DroolsProxy {
    * @param   [type]  $args  [$args description]
    */
   public function settingsFieldHtml($args) {
-    echo implode([
+    echo implode('', [
       '<input ',
-      'type="text" ',
+      ($args['private']) ? 'type="password" ' : 'type="text" ',
       'size="40" ',
-      'name="' . $args[0] . '" ',
-      'id="' . $args[0] . '" ',
-      'value="' . get_option($args[0], '') . '" ',
-      'placeholder="' . $args[1] . '" ',
+      'name="' . $args['id'] . '" ',
+      'id="' . $args['id'] . '" ',
+      'value="' . get_option($args['id'], '') . '" ',
+      'placeholder="' . __($args['placeholder']) . '" ',
       '/>'
-    ], '');
+    ]);
 
-    if ($_ENV[strtoupper($args[0])]) {
-      echo implode([
+    if (defined(strtoupper($args['id']))) {
+      $constant = constant(strtoupper($args['id']));
+      $html = $constant;
+      $html = ($args['private']) ? str_repeat('•', strlen($constant)) : $constant;
+
+      echo implode('', [
         '<p class="description">',
-        'Environment currently set to ',
-        '<code>' . $_ENV[strtoupper($args[0])] . '</code>',
+        __('Environment currently set to '),
+        '<code>' . $html . '</code>',
         '<p>'
-      ], '');
+      ]);
     }
   }
 }

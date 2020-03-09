@@ -54,7 +54,8 @@ class WpAssets {
 
   /**
    * Register and/or enqueue a hashed script based on it's name.  File name should
-   * match the pattern "scripts.{{ hash }}.js" by default. The separator '.' can be configured.
+   * match the pattern "scripts.{{ hash }}.js" by default. The separator between the
+   * filename and the hash can be configured.
    *
    * @param   String   $handle     The name of the file without a hashname. Default: 'scripts'
    * @param   Boolean  $enqueue    Wether to enqueue the file or not. Default: true
@@ -99,7 +100,8 @@ class WpAssets {
 
   /**
    * Register and/or enqueue a hashed style based on it's name. File name should
-   * match the pattern "styles.{{ hash }}.css". The separator '.' can be configured.
+   * match the pattern "styles.{{ hash }}.css". The separator between the filename
+   * and the hash can be configured.
    *
    * @param   String   $handle   The name of the file without a hashname. Default: 'styles'
    * @param   Boolean  $enqueue  Wether to enqueue the file or not. Default: true
@@ -108,8 +110,8 @@ class WpAssets {
    * @param   String   $media    Maps to wp_register/enqueue_style $media. Default: 'all'
    * @param   String   $sep      The separator between the base name and the hash. Default: '.'
    *
-   * @return  Array              Key/value pair including registered Boolean, enqueued Boolean,
-   *                             and found source String of file.
+   * @return  Array              Returns Key/value pair including wp_register_script response,
+   *                             wp_enqueue_script response, and the source uri of the file.
    */
   public function addStyle(
       $handle = 'styles',
@@ -167,32 +169,11 @@ class WpAssets {
   }
 
   /**
-   * Scans the specified asset directory of the current theme
-   *
-   * @param   String  $sub     The sub directory within $assets to look for the file in.
-   * @param   String  $handle  The main prefix of the filename.
-   * @param   String  $sep     The seperator between the hash and the filename. Default '.'
-   *
-   * @return  Array            An array of all matched files.
-   */
-  private function find($sub, $handle, $sep = '.') {
-    $dir = $this->templates . '/' . $this->assets . $sub;
-    return array_filter(
-      scandir($dir),
-      function ($var) use ($handle, $sep) {
-        return (strpos($var, "$handle$sep") !== false);
-      }
-    );
-  }
-
-  /**
-   * Helper to add cross origin anonymous attribute to a specific script.
+   * Uses the script_loader_tag filter to add crossorigin="anonymous" attribute to a specific script.
    *
    * @param  String  $name  The name of the script.
    */
   public function addCrossoriginAttr($name) {
-    $name = end(explode('/', $name));
-
     add_filter('script_loader_tag', function ($tag, $handle) use ($name) {
       if ($name === $handle) {
         return preg_replace('/<script( )*/', '<script crossorigin="anonymous"$1', $tag);
@@ -201,11 +182,16 @@ class WpAssets {
   }
 
   /**
-   * Gets integrations from the MU Plugins directory
+   * This retrieves an integration configuration file from the MU Plugins directory.
+   * By default it will look for a YAML file at config/integrations.yml that contains
+   * an array of individual configuration objects then it converts the YAML file to
+   * a PHP Array and returns it. This is meant to be used with the ->enqueueInline( ...args )
+   * method.
    *
-   * @param   String  $path  Accepts a custom to the integrations file within the Must Use Plugins directory
+   * @param   String  $path  Accepts a custom to the integrations file within the
+   *                         Must Use Plugins directory.
    *
-   * @return  Array          Key/value array of all integrations
+   * @return  Array          An array of individual configuration objects.
    */
   public function loadIntegrations($path = false) {
     $path = ($path) ? $path : $this->config;
@@ -231,17 +217,19 @@ class WpAssets {
    * possible by default and uses a technique described in this article
    * https://www.cssigniter.com/late-enqueue-inline-css-wordpress/
    *
-   * Accepts a single configuration array with multiple scripts;
+   * @param   Array  $script  Accepts a single key/value array of a configuration.
+   *                          Refer to the `->loadIntegrations( ...args )` method.
+   *                          PHP example below;
    * [
    *   array(
    *     'handle' => 'my-script-handle',
-   *     'path' => 'https://url/to/script.js',
+   *     'path' => 'https://remote/url/to/integration/source.js',
    *     'dep' => 'CONSTANT_MY_SCRIPT_IS_DEPENDENT_ON',
    *     'localize' => [
    *        'ARRAY_OF_CONSTANTS_TO_LOCALIZE_IN_SCRIPT',
    *        'CONSTANT_MY_SCRIPT_IS_DEPENDENT_ON'
    *      ], // in the script they should be written as '{{ MY_CONSTANT }}'
-   *     'position' => 'head'/'body'/'footer', // where the script should go
+   *     'in_footer' => true/false, // where the script should go
    *     'inline' => array( // the inline script
    *       'path' => WPMU_PLUGIN_DIR . '/path/to/my-script.js',
    *       'position' => 'before' // wether it comes before or after the script
@@ -249,13 +237,16 @@ class WpAssets {
    *     'style' => array(
    *       'path' => WPMU_PLUGIN_DIR . '/path/to/css.css'
    *     )
-   *   )
-   * ... additional key value paired arrays ...
+   *    'body_open' => array(
+   *       'path' => 'config/integrations/body/a-html-tag-to-include-in-the-body.html'
+   *    )
+   *   ),
+   *   ... additional key value paired arrays ...
    * ]
    *
-   * @return Array The same array with additional inline script contents
+   * @return  Array  The same array with additional inline script contents
    */
-  public function enqueueInline($script) {
+  public function addInline($script) {
     if (array_key_exists('dep', $script) && !defined($script['dep'])) {
       return $script;
     }
@@ -338,6 +329,48 @@ class WpAssets {
   }
 
   /**
+   * Uses an array of configuration objects to register WP Rest Routes that act
+   * as JavaScript files instead of inline scripts.
+   *
+   * @param   Array     $scripts  Array of integration objects (use ->loadIntegrations()
+   *                              to retrieve them).
+   * @param   Function  $auth     The authentication function to use for routes (passed
+   *                              to register_rest_route() as the 'permission_callback'
+   *                              argument).
+   *
+   * @return  Array               Returns the integrations configuration with all rest
+   *                              route details.
+   */
+  public function registerRestRoutes($scripts, $auth) {
+    return array_map(function($script) use ($auth) {
+      if (array_key_exists('inline', $script)) {
+        return self::registerRestRoute($script, $auth);
+      } else {
+        return $script;
+      }
+    }, $scripts);
+  }
+
+  /**
+   * Scans the specified asset directory of the current theme
+   *
+   * @param   String  $sub     The sub directory within $assets to look for the file in.
+   * @param   String  $handle  The main prefix of the filename.
+   * @param   String  $sep     The seperator between the hash and the filename. Default '.'
+   *
+   * @return  Array            An array of all matched files.
+   */
+  private function find($sub, $handle, $sep = '.') {
+    $dir = $this->templates . '/' . $this->assets . $sub;
+    return array_filter(
+      scandir($dir),
+      function ($var) use ($handle, $sep) {
+        return (strpos($var, "$handle$sep") !== false);
+      }
+    );
+  }
+
+  /**
    * Removes the placeholder script created for including an inline script.
    *
    * @param   String  $tag  The script code block passed to the script_loader_tag WP hook.
@@ -365,24 +398,6 @@ class WpAssets {
    */
   private function scriptArgs($handle, $src, $in_footer) {
     return [$handle, $src, [], null, $in_footer];
-  }
-
-  /**
-   * Takes a configuration object of scripts and registers WP Rest Routes for
-   * the configured inline scripts.
-   *
-   * @param   Object  $scripts  The integrations configuration.
-   *
-   * @return  Object            Returns the integrations configuration with all rest route details.
-   */
-  public function registerRestRoutes($scripts) {
-    return array_map(function($script) use ($namespace) {
-      if (array_key_exists('inline', $script)) {
-        return self::registerRestRoute($script);
-      } else {
-        return $script;
-      }
-    }, $scripts);
   }
 
   /**

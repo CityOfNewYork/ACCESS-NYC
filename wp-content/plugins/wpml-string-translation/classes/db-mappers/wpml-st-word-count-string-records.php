@@ -2,6 +2,8 @@
 
 class WPML_ST_Word_Count_String_Records {
 
+	const CACHE_GROUP = __CLASS__;
+
 	/** @var wpdb */
 	private $wpdb;
 
@@ -31,24 +33,34 @@ class WPML_ST_Word_Count_String_Records {
 	 * @return int
 	 */
 	public function get_words_to_translate_per_lang( $lang, $package_id = null ) {
-		$query = "
+		$key   = $lang . ':' . $package_id;
+		$found = false;
+		$words = WPML_Non_Persistent_Cache::get( $key, self::CACHE_GROUP, $found );
+		if ( ! $found ) {
+			$query = "
 			SELECT SUM(word_count) FROM {$this->wpdb->prefix}icl_strings AS s
 			LEFT JOIN {$this->wpdb->prefix}icl_string_translations AS st
 				ON st.string_id = s.id AND st.language = %s
 			WHERE (st.status <> %d OR st.status IS NULL)
 		";
 
-		$prepare_args = array(
-			$lang,
-			ICL_STRING_TRANSLATION_COMPLETE,
-		);
+			$prepare_args = [
+				$lang,
+				ICL_STRING_TRANSLATION_COMPLETE,
+			];
 
-		if ( $package_id ) {
-			$query          .= " AND s.string_package_id = %d";
-			$prepare_args[] = $package_id;
+			if ( $package_id ) {
+				$query .= ' AND s.string_package_id = %d';
+
+				$prepare_args[] = $package_id;
+			}
+
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$words = (int) $this->wpdb->get_var( $this->wpdb->prepare( $query, $prepare_args ) );
+			WPML_Non_Persistent_Cache::set( $key, $words, self::CACHE_GROUP );
 		}
 
-		return (int) $this->wpdb->get_var( $this->wpdb->prepare( $query, $prepare_args ) );
+		return $words;
 	}
 
 	/**

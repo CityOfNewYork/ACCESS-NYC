@@ -7,9 +7,20 @@
 
 class QM_Output_Html_Block_Editor extends QM_Output_Html {
 
+	/**
+	 * Collector instance.
+	 *
+	 * @var QM_Collector_Block_Editor Collector.
+	 */
+	protected $collector;
+
 	public function __construct( QM_Collector $collector ) {
 		parent::__construct( $collector );
 		add_filter( 'qm/output/menus', array( $this, 'admin_menu' ), 55 );
+	}
+
+	public function name() {
+		return __( 'Blocks', 'query-monitor' );
 	}
 
 	public function output() {
@@ -58,10 +69,10 @@ class QM_Output_Html_Block_Editor extends QM_Output_Html {
 		echo '<tfoot>';
 		echo '<tr>';
 		printf(
-			'<td colspan="6">%1$s</td>',
+			'<td colspan="6">%s</td>',
 			sprintf(
 				/* translators: %s: Total number of content blocks used */
-				esc_html_x( 'Total: %s', 'Content blocks used', 'query-monitor' ),
+				esc_html( _nx( 'Total: %s', 'Total: %s', $data['total_blocks'], 'Content blocks used', 'query-monitor' ) ),
 				'<span class="qm-items-number">' . esc_html( number_format_i18n( $data['total_blocks'] ) ) . '</span>'
 			)
 		);
@@ -178,8 +189,9 @@ class QM_Output_Html_Block_Editor extends QM_Output_Html {
 					echo self::output_filename( $block['callback']['name'], $block['callback']['file'], $block['callback']['line'] ); // WPCS: XSS ok.
 					echo '</td>';
 				} else {
-					echo '<td class="qm-nowrap qm-ltr qm-has-toggle' . esc_attr( $class ) . '"><ol class="qm-toggler">';
+					echo '<td class="qm-nowrap qm-ltr qm-has-toggle' . esc_attr( $class ) . '">';
 					echo self::build_toggler(); // WPCS: XSS ok;
+					echo '<ol>';
 					echo '<li>';
 					echo self::output_filename( $block['callback']['name'], $block['callback']['file'], $block['callback']['line'] ); // WPCS: XSS ok.
 					echo '</li>';
@@ -216,10 +228,10 @@ class QM_Output_Html_Block_Editor extends QM_Output_Html {
 			}
 		}
 
-		$inner_html = trim( $block['innerHTML'] );
+		$inner_html = $block['innerHTML'];
 
 		if ( $block['size'] > 300 ) {
-			echo '<td class="qm-ltr qm-has-toggle qm-row-block-html"><div class="qm-toggler">';
+			echo '<td class="qm-ltr qm-has-toggle qm-row-block-html">';
 			echo self::build_toggler(); // WPCS: XSS ok;
 			echo '<div class="qm-inverse-toggled"><pre class="qm-pre-wrap"><code>';
 			echo esc_html( substr( $inner_html, 0, 200 ) ) . '&nbsp;&hellip;';
@@ -227,7 +239,7 @@ class QM_Output_Html_Block_Editor extends QM_Output_Html {
 			echo '<div class="qm-toggled"><pre class="qm-pre-wrap"><code>';
 			echo esc_html( $inner_html );
 			echo '</code></pre></div>';
-			echo '</div></td>';
+			echo '</td>';
 		} else {
 			echo '<td class="qm-row-block-html"><pre class="qm-pre-wrap"><code>';
 			echo esc_html( $inner_html );

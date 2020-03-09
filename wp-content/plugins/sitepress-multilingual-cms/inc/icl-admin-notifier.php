@@ -141,7 +141,9 @@ if(!class_exists('ICL_AdminNotifier')) {
 						return;
 					}
 
-					$args['hidden'] = $message_user_data['hidden'] ? false : $args['hidden'];
+					if ( isset( $message_user_data['hidden'] ) ) {
+						$args['hidden'] = $message_user_data['hidden'] ? false : $args['hidden'];
+					}
 				}
 			}
 

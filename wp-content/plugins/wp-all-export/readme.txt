@@ -1,18 +1,23 @@
-=== Export WordPress data to XML/CSV ===
+=== Export any WordPress data to XML/CSV ===
 Contributors: soflyy, wpallimport
 Requires at least: 4.1
-Tested up to: 5.2
-Stable tag: 1.2.3
-Tags: wordpress csv export, wordpress xml export, xml, csv, datafeed, export, migrate, export csv from wordpress, export xml from wordpress, advanced xml export, advanced csv export, export data, bulk csv export, export custom post type, export woocommerce products, export woocommerce orders, migrate woocommerce, csv export, export csv, xml export, export xml, csv exporter, datafeed
+Tested up to: 5.3
+Stable tag: 1.2.5
+Tags: export, wordpress csv export, wordpress xml export, export woocommerce, migrate, export csv from wordpress, export xml from wordpress, advanced xml export, advanced csv export, export data, bulk csv export, export custom post type, export woocommerce products, export woocommerce orders, migrate woocommerce, csv export, export csv, xml export, export xml, csv exporter, datafeed
 
-WP All Export is an extremely powerful exporter that makes it easy to export any XML, CSV, or Excel file from WordPress.
+Easily export any data from WordPress. Drag & drop to create a completely custom spreadsheet, CSV, or XML file.
 
 == Description ==
+
+= WP All Export - Simple & Powerful XML / CSV Export Plugin =
 
 WP All Export features a three step export process and an intuitive drag & drop interface that makes complicated export tasks simple and fast.
 
 With WP All Export you can: export data for easy editing, migrate content from WordPress to another site, create a WooCommerce affiliate feed, generate filtered lists of WooCommerce orders, export the email addresses of new customers, create and publish customized WordPress RSS feeds - and much more.
-[youtube https://www.youtube.com/watch?v=a-z0R-Ldkqo /]
+
+**[Click here to try WP All Export right now](https://www.wpallimport.com/try-export-free/).**
+
+[youtube https://www.youtube.com/watch?v=a-z0R-Ldkqo/]
 
 * **Turn your WordPress data into a customized CSV or XML**
 
@@ -50,7 +55,7 @@ For technical support from the developers, please consider purchasing WP All Exp
 
 * **Guaranteed technical support via e-mail.**
 
-[Upgrade to the Pro edition of WP All Export.](http://www.wpallimport.com/upgrade-to-wp-all-export-pro/?utm_source=wordpress.org&utm_medium=wordpress-dot-org-slash-wpae&utm_campaign=free+wp+all+export+plugin)
+[Upgrade to the Pro edition of WP All Export.](http://www.wpallimport.com/upgrade-to-wp-all-export-pro/?utm_source=export-plugin-free&utm_medium=readme&utm_campaign=premium-support)
 
 = Automatic Scheduling =
 
@@ -85,6 +90,15 @@ Either: -
 * Unzip wp-all-export.zip and upload the contents to /wp-content/plugins/, and then activate the plugin from the Plugins page in WordPress
 
 == Changelog ==
+= 1.2.5 =
+* bug fix: preserve existing admin body classes
+
+= 1.2.4 =
+* improvement: add support for User Export Add-On
+* improvement: better local timezone detection for Automatic Scheduling
+* improvement: more consistent "Add New Field" user interface
+* bugfix: ACF repeater fields broken in ACF 5.7.10+
+* bugfix: when using migrate posts, only the image fields are added to the import template
 
 = 1.2.3 =
 * bugfix: compatibility with ACF 5.7.11

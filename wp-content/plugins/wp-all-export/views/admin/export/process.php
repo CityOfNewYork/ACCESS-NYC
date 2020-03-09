@@ -9,9 +9,9 @@
             <h2><?php _e('Export to XML / CSV', 'wp_all_export_plugin'); ?></h2>
         </div>
         <div class="wpallexport-links">
-            <a href="http://www.wpallimport.com/support/"
+            <a href="http://www.wpallimport.com/support/?utm_source=export-plugin-free&utm_medium=help&utm_campaign=premium-support"
                target="_blank"><?php _e('Support', 'wp_all_export_plugin'); ?></a> | <a
-                href="http://www.wpallimport.com/documentation/"
+                href="http://www.wpallimport.com/documentation/?utm_source=export-plugin-free&utm_medium=help&utm_campaign=docs"
                 target="_blank"><?php _e('Documentation', 'wp_all_export_plugin'); ?></a>
         </div>
 

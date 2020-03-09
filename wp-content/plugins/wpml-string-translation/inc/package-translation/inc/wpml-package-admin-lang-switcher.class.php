@@ -26,8 +26,7 @@ class WPML_Package_Admin_Lang_Switcher {
 		$package_language_name = $wpml_pt_meta->get_package_language_name();
 		$wp_admin_bar->add_menu( array(
 									  'parent' => false, 'id' => $parent,
-									  'title'  => '<img src="' . $sitepress->get_flag_url( $package_language ) . '"> ' . $package_language_name,
-									  'href'   => '#'
+									  'title'  => '<img width="18" height="12" src="' . $sitepress->get_flag_url( $package_language ) . '"> ' . $package_language_name,
 									)
 								);
 	}
@@ -36,7 +35,7 @@ class WPML_Package_Admin_Lang_Switcher {
 		
 		global $wpdb, $sitepress;
 
-		$metabox = '<div id="wpml-package-admin-bar-popup" style="display:none;position:fixed;z-index:9002;width:200px;padding:10px;border: 1px solid #8CCEEA;background-color:#FFF">';
+		$metabox = '<div id="wpml-package-admin-bar-popup" class="wpml-package-popup">';
 		
 		$wpml_pt_meta = new WPML_Package_Translation_Metabox( $this->package, $wpdb, $sitepress, $this->args );
 		$metabox .= $wpml_pt_meta->get_metabox();
@@ -48,8 +47,11 @@ class WPML_Package_Admin_Lang_Switcher {
 		// This is required when a new package is created but it doesn't have any translated content yet.
 		// https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlst-556
 		WPML_Simple_Language_Selector::enqueue_scripts();
-		
-		echo $metabox;
+
+	  wp_enqueue_style( 'wpml-package-adminbar-popup', WPML_ST_URL . '/res/css/wpml-package-adminbar-popup.css', array(), ICL_SITEPRESS_VERSION );
+
+
+	  echo $metabox;
 	}
 	
 	function add_js() {
@@ -103,7 +105,7 @@ class WPML_Package_Admin_Lang_Switcher {
 						var flag = '';
 						jQuery('.js-simple-lang-selector option').each( function() {
 							if (jQuery(this).text().trim() == lang.trim()) {
-								flag = '<img src="' + jQuery(this).data('flag_url') + '">';
+								flag = '<img width="18" height="12" src="' + jQuery(this).data('flag_url') + '">';
 							}
 							
 						});

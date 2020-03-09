@@ -15,7 +15,10 @@ class WPML_URL_Converter_Parameter_Strategy extends WPML_URL_Converter_Abstract_
 			$lang_code = '';
 		}
 
-		$url_parts  = wpml_parse_url( $source_url );
+		$url_parts = wpml_parse_url( $source_url );
+		if ( ! is_array( $url_parts ) ) {
+			$url_parts = [];
+		}
 		$query_args = $this->get_query_args( $url_parts );
 
 		if ( $lang_code ) {

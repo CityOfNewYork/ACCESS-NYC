@@ -77,7 +77,7 @@ function enqueue_inline($name) {
 
   if ($integrations) {
     $index = array_search($name, array_column($integrations, 'handle'));
-    $WpAssets->enqueueInline($integrations[$index]);
+    $WpAssets->addInline($integrations[$index]);
   }
 }
 
@@ -99,6 +99,23 @@ function validate_params($namespace, $subject) {
   preg_match($patterns[$namespace], $subject, $matches);
 
   return (isset($matches[0])) ? $matches[0] : ''; // fail silently
+}
+
+/**
+ * Adds functionality to Twig.
+ *
+ * @param \Twig\Environment $twig The Twig environment.
+ * @return \Twig\Environment
+ */
+function add_to_twig( $twig ) {
+    // Adding functions as filters.
+    $twig->addFilter( new Timber\Twig_Filter( 'url_decode', 'url_decode' ) );
+
+    return $twig;
+}
+
+function url_decode( $text ) {
+    return  urldecode($text);
 }
 
 /**
@@ -142,13 +159,4 @@ function share_data($params) {
   $hash = \SMNYC\hash($url);
 
   return array('url' => $url, 'hash' => $hash, 'query' => $query);
-}
-
-/**
- * Get the environment variable from config
- * @param  string $value The key for the environment variable
- * @return string        The environment variable
- */
-function get_env($value) {
-  return $_ENV[$value];
 }

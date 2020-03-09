@@ -129,11 +129,16 @@ function pmxi_wp_loaded_99() {
 
 						case 'processing':
 
-							if ( $import->processing == 1 and (time() - strtotime($import->registered_on)) > ((PMXI_Plugin::getInstance()->getOption('cron_processing_time_limit')) ? PMXI_Plugin::getInstance()->getOption('cron_processing_time_limit') : 120)){ // it means processor crashed, so it will reset processing to false, and terminate. Then next run it will work normally.
-								$import->set(array(
-									'processing' => 0									
-								))->update();
-							}
+                            // check the maximum amount of time we should wait before assuming the iteration failed
+                            $max_wait = ini_get('max_execution_time');
+
+                            $max_wait = $max_wait > 0 ? $max_wait : 1200; // failsafe max_wait should be high enough to avoid falsely marking as failed
+
+                            if ( $import->processing == 1 and (time() - strtotime($import->registered_on)) > $max_wait ){ // it means processor crashed, so it will reset processing to false, and terminate. Then next run it will work normally.
+                                $import->set(array(
+                                    'processing' => 0
+                                ))->update();
+                            }
 							
 							// start execution imports that is in the cron process												
 							if ( ! (int) $import->triggered ){

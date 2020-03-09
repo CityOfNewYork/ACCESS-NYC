@@ -5,23 +5,26 @@
 
     <h1><?php _e( 'Redis Object Cache', 'redis-cache' ); ?></h1>
 
-    <?php if (
-        defined( 'EAE_DISABLE_NOTICES' ) ||
-        ! is_plugin_active( 'email-address-encoder' ) &&
-        ! is_plugin_active( 'email-encoder-premium' ) &&
-        ! is_plugin_inactive( 'email-address-encoder' ) &&
-        ! is_plugin_inactive( 'email-encoder-premium' )
-    ) : ?>
+    <?php if ( ! defined( 'WP_REDIS_DISABLE_BANNERS' ) || ! WP_REDIS_DISABLE_BANNERS ) : ?>
         <div class="card">
             <h2 class="title">
-                <?php _e( 'Are your email addresses protected?', 'redis-cache' ); ?>
+                <?php _e( 'Redis Cache Pro', 'redis-cache' ); ?>
             </h2>
             <p>
-                <?php _e( 'Enjoy a clean inbox and peace of mind knowing that your email address is safe from email-harvesting robots.', 'redis-cache' ); ?>
+                <?php _e( '<b>A business class object cache backend.</b> Truly reliable, highly-optimized and fully customizable, with a <u>dedicated engineer</u> when you most need it.', 'redis-cache' ); ?>
             </p>
+            <ul>
+                <li>Rewritten for raw performance</li>
+                <li>100% WordPress object cache API compliant</li>
+                <li>Easy debugging & logging</li>
+                <li>Fully unit tested (100% code coverage)</li>
+                <li>Secure connections with TLS</li>
+                <li>Seamless WP CLI & Debug Bar integration</li>
+                <li>Optimized for WooCommerce, Jetpack & Yoast SEO</li>
+            </ul>
             <p>
-                <a class="button button-primary" target="_blank" rel="noopener" href="https://encoder.till.im/?utm_source=wp-plugin&amp;utm_medium=redis">
-                    <?php _e( 'Download for Free', 'email-address-encoder' ); ?>
+                <a class="button button-primary" target="_blank" rel="noopener" href="https://wprediscache.com/?utm_source=wp-plugin&amp;utm_medium=settings">
+                    <?php _e( 'Learn more', 'redis-cache' ); ?>
                 </a>
             </p>
         </div>

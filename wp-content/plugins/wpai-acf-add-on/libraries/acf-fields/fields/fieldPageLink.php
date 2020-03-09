@@ -48,29 +48,36 @@ class FieldPageLink extends Field {
     public function getFieldValue() {
         $post_ids = array();
         $entries = explode(",", parent::getFieldValue());
+        $field = $this->getData('field');
         if ( ! empty($entries) and is_array($entries) ) {
+            $entries = array_map('trim', $entries);
+            $entries = array_filter($entries);
             foreach ($entries as $ev) {
                 $args = array(
                     'name' => $ev,
-                    'post_type' => 'any',
+                    'post_type' => empty($field['post_type']) ? 'any' : $field['post_type'],
                     'post_status' => 'any',
                     'numberposts' => 1
                 );
                 $my_posts = get_posts($args);
                 if ($my_posts) {
-                    $post_ids[] = get_permalink($my_posts[0]->ID);
+                    $post_ids[] = $my_posts[0]->ID;
                 }
                 elseif (ctype_digit($ev)) {
-                    $my_post = get_post($ev);
-                    if ($my_post) {
-                        $post_ids[] = get_permalink($my_post->ID);
+                    $args = array(
+                      'post_type' => empty($field['post_type']) ? 'any' : $field['post_type'],
+                      'numberposts' => 1,
+                      'post__in'=> [$ev]
+                    );
+                    $my_posts = get_posts($args);
+                    if ($my_posts) {
+                      $post_ids[] = $my_posts[0]->ID;
                     }
                 }
             }
         }
         if (!empty($post_ids)) {
-            $parsedData = $this->getParsedData();
-            return empty($parsedData['multiple']) ? array_shift($post_ids) : $post_ids;
+            return empty($field['multiple']) ? array_shift($post_ids) : $post_ids;
         }
         return '';
     }

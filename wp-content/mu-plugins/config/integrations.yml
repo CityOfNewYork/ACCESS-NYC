@@ -53,9 +53,17 @@
   dep: GOOGLE_TAG_MANAGER
   localize:
     - GOOGLE_TAG_MANAGER
+    - GOOGLE_TAG_MANAGER_AUTH
+    - GOOGLE_TAG_MANAGER_PREVIEW
+    - GOOGLE_TAG_MANAGER_COOKIES
   in_footer: false
   inline:
     path: config/integrations/scripts/google-tag-manager.js
     position: before
   body_open:
     path: config/integrations/body/google-tag-manager.html
+
+- handle: google-recaptcha
+  dep: GOOGLE_RECAPTCHA
+  path: https://www.google.com/recaptcha/api.js?onload=screenerCallback&render=explicit
+  in_footer: false

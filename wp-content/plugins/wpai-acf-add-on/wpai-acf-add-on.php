@@ -3,7 +3,7 @@
 Plugin Name: WP All Import - ACF Add-On
 Plugin URI: http://www.wpallimport.com/
 Description: Import to Advanced Custom Fields. Requires WP All Import & Advanced Custom Fields.
-Version: 3.2.0
+Version: 3.2.5
 Author: Soflyy
 */
 /**
@@ -24,7 +24,7 @@ define('PMAI_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
  */
 define('PMAI_PREFIX', 'pmai_');
 
-define('PMAI_VERSION', '3.2.0');
+define('PMAI_VERSION', '3.2.5');
 
 if ( class_exists('PMAI_Plugin') and PMAI_EDITION == "free"){
 
@@ -66,8 +66,6 @@ else {
 		 * Plugin options
 		 * @var array
 		 */
-		protected $options = array();
-
 		public static $all_acf_fields = array();
 
 		/**
@@ -193,15 +191,6 @@ else {
 				$subPath = substr($filePath, strlen( self::ROOT_DIR ));
 				if (strpos($subPath, 'view') === false && strpos($subPath, 'template') === false) require_once $filePath;
 			}
-
-			// init plugin options
-			$option_name = get_class($this) . '_Options';
-			$options_default = PMAI_Config::createFromFile(self::ROOT_DIR . '/config/options.php')->toArray();
-			$this->options = array_intersect_key(get_option($option_name, array()), $options_default) + $options_default;
-			$this->options = array_intersect_key($options_default, array_flip(array('info_api_url'))) + $this->options; // make sure hidden options apply upon plugin reactivation		
-
-			update_option($option_name, $this->options);
-			$this->options = get_option(get_class($this) . '_Options');
 
 			register_activation_hook(self::FILE, array($this, 'activation'));
 
@@ -406,49 +395,11 @@ else {
 		}
 
 		/**
-		 * Get plugin option
-		 * @param string[optional] $option Parameter to return, all array of options is returned if not set
-		 * @return mixed
-		 */
-		public function getOption($option = NULL) {
-			if (is_null($option)) {
-				return $this->options;
-			} else if (isset($this->options[$option])) {
-				return $this->options[$option];
-			} else {
-				throw new Exception("Specified option is not defined for the plugin");
-			}
-		}
-		/**
-		 * Update plugin option value
-		 * @param string $option Parameter name or array of name => value pairs
-		 * @param mixed[optional] $value New value for the option, if not set than 1st parameter is supposed to be array of name => value pairs
-		 * @return array
-		 */
-		public function updateOption($option, $value = NULL) {
-			is_null($value) or $option = array($option => $value);
-			if (array_diff_key($option, $this->options)) {
-				throw new Exception("Specified option is not defined for the plugin");
-			}
-			$this->options = $option + $this->options;
-			update_option(get_class($this) . '_Options', $this->options);
-
-			return $this->options;
-		}
-
-		/**
 		 * Plugin activation logic
 		 */
 		public function activation() {
-
-			// uncaught exception doesn't prevent plugin from being activated, therefore replace it with fatal error so it does
+			// Uncaught exception doesn't prevent plugin from being activated, therefore replace it with fatal error so it does.
 			set_exception_handler(function($e){trigger_error($e->getMessage(), E_USER_ERROR);});
-
-			// create plugin options
-			$option_name = get_class($this) . '_Options';
-			$options_default = PMAI_Config::createFromFile(self::ROOT_DIR . '/config/options.php')->toArray();
-			update_option($option_name, $options_default);
-
 		}
 
         /**

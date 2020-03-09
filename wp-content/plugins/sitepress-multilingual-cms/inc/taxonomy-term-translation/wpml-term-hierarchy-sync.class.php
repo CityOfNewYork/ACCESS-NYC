@@ -35,4 +35,13 @@ class WPML_Term_Hierarchy_Sync extends WPML_Hierarchy_Sync {
 			$wpml_term_filters_general->update_tax_children_option( $taxonomy );
 		}
 	}
+
+	/**
+	 * @param string $element_type
+	 *
+	 * @return bool
+	 */
+	public function is_hierarchical( $element_type ) {
+		return is_taxonomy_hierarchical( $element_type );
+	}
 }

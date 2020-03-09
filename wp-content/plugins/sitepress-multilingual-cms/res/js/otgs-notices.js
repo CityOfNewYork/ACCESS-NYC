@@ -37,6 +37,10 @@
 					dataType: 'json'
 				});
 
+				if (action === 'dismiss') {
+					noticeBox.remove();
+				}
+
 				document.dispatchEvent(new CustomEvent('otgs-notice-' + action, {'detail': noticeBox}));
 			}
 		};

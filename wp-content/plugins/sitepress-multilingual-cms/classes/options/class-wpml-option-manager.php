@@ -1,9 +1,11 @@
 <?php
-
 /**
  * @author OnTheGo Systems
  */
-class WPML_Option_Manager implements IWPML_Action {
+
+namespace WPML\WP;
+
+class OptionManager implements \IWPML_Backend_Action {
 
 	private $group_keys_key = 'WPML_Group_Keys';
 
@@ -77,15 +79,3 @@ class WPML_Option_Manager implements IWPML_Action {
 		return array_merge( $options, get_option( $this->group_keys_key, array() ) );
 	}
 }
-
-/**
- * Class WPML_Option_Manager_Factory
- * @todo Remove this after https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-6510 is merged and use IWPML_Backend_Action in above class
- */
-class WPML_Option_Manager_Factory implements IWPML_Backend_Action_Loader {
-
-	public function create() {
-		return new WPML_Option_Manager();
-	}
-}
-

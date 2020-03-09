@@ -60,7 +60,7 @@
         <% } %>
 
         <span class="c-member-list__item inline">
-          <a role="button" data-person="<%= index %>" class="js-edit-person screen-tablet:px-2 font-normal cursor-pointer">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a><% if (index !== 0 && !member.isHoh) { %><a role="button" data-person="<%= index %>" class="js-remove-person px-2 font-normal">{{ __("Remove", "accessnyc-screener")|trim|escape("js") }}</a><% } %>
+          <a id="recap-edit-person" role="button" data-person="<%= index %>" class="js-edit-person screen-tablet:px-2 font-normal cursor-pointer">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a><% if (index !== 0 && !member.isHoh) { %><a role="button" data-person="<%= index %>" class="js-remove-person px-2 font-normal">{{ __("Remove", "accessnyc-screener")|trim|escape("js") }}</a><% } %>
         </span>
 
         <% if (member.conditions.length) { %>

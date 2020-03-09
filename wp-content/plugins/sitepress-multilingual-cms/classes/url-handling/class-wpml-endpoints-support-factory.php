@@ -12,10 +12,17 @@ class WPML_Endpoints_Support_Factory implements IWPML_Frontend_Action_Loader, IW
 	public function create() {
 		global $sitepress, $wpml_post_translations;
 
-		if ( defined( 'WPML_ST_VERSION' ) ) {
+		if ( $this->are_st_functions_loaded() ) {
 			return new WPML_Endpoints_Support( $wpml_post_translations, $sitepress->get_current_language(), $sitepress->get_default_language() );
 		}
 
 		return null;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function are_st_functions_loaded() {
+		return function_exists( 'icl_get_string_id' );
 	}
 }

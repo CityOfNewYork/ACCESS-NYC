@@ -5,45 +5,32 @@
     <div class="wpml-section-content">
         <input type="hidden" id="{{ nonce_field }}" name="{{ nonce_field }}" value="{{ nonce_value }}">
         <div class="top">
-            <h3>{{ top_title }}</h3>
 
             <ul>
             {% for option in top_options %}
                 <li>
-                    <input {{ not st_active or option.disabled ? 'disabled="disabled"' : '' }} type="radio" {{ option.checked }} name="{{ option.name }}" value="{{ option.value }}" > {{ option.label }}
+                    {% if option.template %}
+                        {% include option.template with option.model %}
+                    {% else %}
+                        <label for="{{ option.name }}">
+                            <input type="{{ option.type }}" {{ option.checked }}
+                                   name="{{ option.name }}" id="{{ option.name }}"
+                                   value="{{ option.value }}"
+                            >
+                            {{ option.label }}
+                        </label>
 
-                    {% if option.message %}
-                        {{ option.message|raw }}
-                    {% endif %}
-
-                    {% if option.sub_options %}
-                        {% include 'automatic-load-check.twig' with option.sub_options %}
+                        {% if option.tooltip %}
+                            <a class="otgs-ico-help js-otgs-popover-tooltip"
+                               data-tippy-zindex="999999"
+                               title="{{ option.tooltip }}"></a>
+                        {% endif %}
                     {% endif %}
                 </li>
             {% endfor %}
             </ul>
 
         </div>
-        {% if st_active %}
-        <div class="bottom">
-            <h3>{{ bottom_tittle }}</h3>
-
-            <ul>
-            {% for option in bottom_options %}
-                <li>
-                    <input {{ option.checked }} {{ option.disabled ? 'disabled="disabled"' : '' }} type="checkbox" name="{{ option.name }}" value="{{ option.value }}" > {{ option.label }}
-
-                {% if option.tooltip %}
-                    <a href="#" class="js-wpml-tooltip-open otgs-ico-help">
-                        {{ option.tooltip }}
-                    </a>
-                {% endif %}
-
-                <li>
-            {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
         <input id="wpml-js-theme-plugin-save-option" type="button" class="other-options-save button button-primary" value="{{ button_label }}">
         <span id="wpml-js-theme-plugin-options-spinner" class="spinner"></span><span class="wpml-ajax-response" id="wpml-js-theme-plugin-options-response"></span>
     </div>

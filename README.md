@@ -1,4 +1,5 @@
 # ACCESS NYC
+
 [ACCESS NYC](http://nyc.gov/accessnyc) provides a mobile-friendly front door for New Yorkers to screen for City, State, and Federal benefit and program eligibility as well as learn how to apply to programs and find local help.
 
 ACCESS NYC is for benefits-seeking residents in NYC and accommodates residents...
@@ -35,6 +36,7 @@ Learn more about ACCESS NYC at [nyc.gov/opportunity](http://www1.nyc.gov/site/op
 * [About NYCO](#about-nyco)
 
 ## Tech
+
 ACCESS NYC is a publicly available [WordPress](https://wordpress.org/) site hosted on [WP Engine](https://wpengine.com/). Source code is available as in this repository. All benefit program information on ACCESS NYC is publicly available through the [Benefits and Programs API](https://data.cityofnewyork.us/Social-Services/Benefits-and-Programs-API/2j8u-wtju) on the City of New York’s Open Data portal.
 
 The ACCESS NYC eligibility screener is a single page web application powered by an API built on the [Drools Business Rules Management System](https://www.drools.org/) hosted on [Amazon Web Services](https://aws.amazon.com/) through the [NYC Department of Information Technology and Telecommunications](http://www.nyc.gov/doitt). The [NYC Benefits Screening API](https://screeningapidocs.cityofnewyork.us) is an open API that allows developers to utilize the rules engine that governs the ACCESS NYC Eligibility Screener.
@@ -44,6 +46,7 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 ## Local Installation
 
 ### Requirements
+
 * **Virtualization** (Docker, Virtualbox, or other). This WordPress repository can be run many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WP Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally.
 
 * **Composer**. PHP and WordPress plugin dependencies for WordPress core and the ACCESS NYC Theme are managed via Composer. [Learn more about Composer on it's website](https://getcomposer.org/).
@@ -51,6 +54,7 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 * **Node and NPM**. The ACCESS NYC Theme uses Node with NPM to manage packages such as Gulp to compile assets for the front-end. Learn more about [Node](https://nodejs.org), [NPM](https://www.npmjs.com/), and [Gulp](https://gulpjs.com/) at their respective websites.
 
 ### Installation
+
 This won't cover everything for standing up a WordPress site given all of the options available but it can be done with [Docker for Mac](https://www.docker.com/docker-mac) but it can be done following the instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. *The following instructions assume you have a working environment ready to drop a WordPress site into, including a server and MySQL database*.
 
 **$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/master/wp/wp-config.php) but you should still update the salts.
@@ -64,32 +68,41 @@ This won't cover everything for standing up a WordPress site given all of the op
 ## WordPress Site Structure
 
 ### Configuration
+
 ACCESS NYC integrates the [NYCO WordPress Config plugin](https://packagist.org/packages/nyco/wp-config) for determining configurations based on environment. This plugin will pull from an array of variables set in the **mu-plugins/config/config.yml** file and set the appropriate group to environment variables that can be accessed by site functions, templates, and plugins.
 
 ### ACCESS NYC Theme
+
 The theme for the site contains all of the php functions, templates, styling, and scripts for the site front-end and can be found in the [**themes**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access) directory. This is the only WordPress theme that is compatible with the WordPress site.
 
 #### Twig Templates
+
 The theme is built on [Timber](https://www.upstatement.com/timber/) which uses the [Twig Templating Engine](https://twig.symfony.com/). Templates can be edited in the [**/views**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/views) directory.
 
 #### PHP Functions
+
 Some functions are included in the theme's [**functions.php**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/functions.php), however, new modules are stored in the [**/includes**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/includes) directory and are included in **functions.php** at the bottom of the file.
 
 #### Assets
+
 The source for image, style, and script files live in the [**src**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/src) and are compiled to the [**/assets**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/assets) directory. This is done with NPM Scripts in [**package.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/package.json) and tasks in the [GulpFile](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/gulpfile.babel.js). The theme relies heaviliy on the [ACCESS NYC Patterns](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets and JavaScript modules. Refer to the [documentation](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage.
 
 ### Plugins
+
 WordPress Plugins are managed via Composer and the WordPress Admin. They are tracked by the repository to be easily shipped to different environments. Plugins utilized by the WordPress site can be found in the [**plugins**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/plugins) directory. Key plugins include [Advanced Custom Fields](https://www.advancedcustomfields.com/), [WordPress Multilingual](https://wpml.org/), [Timber](https://www.upstatement.com/timber/), and the [Gather Content WordPress Integration](https://wordpress.org/plugins/gathercontent-import/). There are a few ways of managing plugins.
 
 #### WordPress Admin Plugins
+
 Not all plugins can be managed by Composer. Specifically [Advanced Custom Fields](https://www.advancedcustomfields.com/) and [WordPress Multilingual](https://wpml.org/). These plugins must be updated by either downloading from their respective sites and adding directly to the **wp-content/plugins** directory or by logging into the *WordPress Admin* and updating via the **/wp-admin/plugins** page.
 
 #### Must Use Plugins
+
 [Must Use Plugins](https://codex.wordpress.org/Must_Use_Plugins) are used to handle most of the custom configuration for the WordPress site including custom post types, plugin configuration, and special plugins that enable additional functionality for major features of the site. Those can be found in the [**mu-plugins**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/mu-plugins) directory.
 
 Additional configuration and functions can be found in the ACCESS NYC Theme.
 
 #### Composer Plugins
+
 The [**composer.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/composer.json) file illustrates which plugins can be managed by Composer. WordPress Plugins can be installed either from [WordPress Packagist](https://wpackagist.org/) or from Packagist via the [Composer Libray Installer](https://github.com/composer/installers). Also, included is a [special installer that will download WPML plugins](https://packagist.org/packages/enelogic/wpml-installer) that are not available on WordPress Packagist or Packagist. Other php packages that are not plugins and stored in the `/vendor` directory are tracked by git so they can be deployed with the code. See the [**.gitignore**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/.gitignore) file under the "Composer" section to see which ones.
 
 The [WPML Installer](https://packagist.org/packages/enelogic/wpml-installer) requires setting environment variables containing your WPML account information so they aren't committed to the repository. This can either be done with a **.env** file or by exporting them in your bash profile;
@@ -112,8 +125,6 @@ For example:
 ... will update the *ACF to Rest API* plugin to version 3.1.0. Updating plugins individually is recommended when testing for compatibility. **Once you are done developing generate the production autoloader which will remove development dependencies in the autoloader:**
 
     composer run predeploy
-
-##### WPML Installer
 
 ## Using Composer
 
@@ -168,6 +179,7 @@ The query parameter `?debug=1` to the site URL in any environment to help in deb
 ## Coding Style
 
 ### PHP
+
 PHP is linted using [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) with the [PSR-2 standard](https://www.php-fig.org/psr/psr-2/). The configuration can be found in the [phpcs.xml](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/phpcs.xml). Linting must be done manually using the command:
 
     composer run lint
@@ -175,12 +187,17 @@ PHP is linted using [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSnif
 PHP Code Sniffer can attempt to fix violations using `composer run fix` but it is not recommended for multiple files or large scripts as it can fail and leave malformed php files.
 
 ### Javascript
+
 The JavaScript is written in ES6 syntax. Source files are located in the theme **/src/js** directory. JavaScript is linted by the `gulp lint` task with the ESLint [Google's standards](https://google.github.io/styleguide/javascriptguide.xml). It is transpiled, concatenated, and minified by the `gulp scripts` task, using [Webpack Stream](https://www.npmjs.com/package/webpack-stream).
 
 The main JavaScript libraries used are [jQuery](http://jquery.com/), [Underscore.js](http://underscorejs.org/), and [Vue.js](https://vuejs.org/).
 
 ### SCSS
+
 The theme relies heaviliy on the [ACCESS NYC Patterns](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets. Refer to the [documentation](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage. The Pattern SCSS files are processed, concatenated, and minfied by the gulp styles task.
 
-# About NYCO
-NYC Opportunity is the [New York City Mayor's Office for Economic Opportunity](http://nyc.gov/opportunity). We are committed to sharing open source software that we use in our products. Feel free to ask questions and share feedback. Follow @nycopportunity on [Github](https://github.com/orgs/CityOfNewYork/teams/nycopportunity), [Twitter](https://twitter.com/nycopportunity), [Facebook](https://www.facebook.com/NYCOpportunity/), and [Instagram](https://www.instagram.com/nycopportunity/).
+---
+
+![The Mayor's Office for Economic Opportunity](NYCMOEO_SecondaryBlue256px.png)
+
+[The Mayor's Office for Economic Opportunity](http://nyc.gov/opportunity) (NYC Opportunity) is committed to sharing open source software that we use in our products. Feel free to ask questions and share feedback. **Interested in contributing?** See our open positions on [buildwithnyc.github.io](http://buildwithnyc.github.io/). Follow our team on [Github](https://github.com/orgs/CityOfNewYork/teams/nycopportunity) (if you are part of the [@cityofnewyork](https://github.com/CityOfNewYork/) organization) or [browse our work on Github](https://github.com/search?q=nycopportunity).

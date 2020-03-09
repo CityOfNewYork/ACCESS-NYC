@@ -4,71 +4,91 @@ if ( ! defined( 'ICL_DISABLE_CACHE' ) ) {
 	define( 'ICL_DISABLE_CACHE', false );
 }
 
-class icl_cache{
-   
-    private $data;
-    
-    function __construct($name = "", $cache_to_option = false){
-        $this->data = array();
-        $this->name = $name;
-        $this->cache_to_option = $cache_to_option;
+// phpcs:disable PEAR.NamingConventions.ValidClassName.Invalid
+// phpcs:disable PEAR.NamingConventions.ValidClassName.StartWithCapital
+
+/**
+ * Class icl_cache
+ */
+class icl_cache {
+
+	/** @var array */
+	protected $data;
+
+	/** @var string */
+	protected $name;
+
+	/** @var bool */
+	protected $cache_to_option;
+
+	/** @var bool */
+	protected $cache_needs_saving;
+
+	public function __construct( $name = '', $cache_to_option = false ) {
+		$this->data               = [];
+		$this->name               = $name;
+		$this->cache_to_option    = $cache_to_option;
 		$this->cache_needs_saving = false;
-        
-        if ($cache_to_option) {
-            $this->data = icl_cache_get($name.'_cache_class');
-            if ($this->data == false){
-                $this->data = array();
-            }
-			
-			add_action( 'shutdown', array( $this, 'save_cache_if_required' ) );
-        }
-    }
-	
-	function save_cache_if_required( ) {
-		if( $this->cache_needs_saving ) {
-	        icl_cache_set($this->name.'_cache_class', $this->data);
+
+		$this->init();
+	}
+
+	public function init() {
+		if ( $this->cache_to_option ) {
+			$this->data = icl_cache_get( $this->name . '_cache_class' );
+			if ( false === $this->data ) {
+				$this->data = [];
+			}
+
+			add_action( 'shutdown', [ $this, 'save_cache_if_required' ] );
+		}
+	}
+
+	public function save_cache_if_required() {
+		if ( $this->cache_needs_saving ) {
+			icl_cache_set( $this->name . '_cache_class', $this->data );
 			$this->cache_needs_saving = false;
 		}
 	}
-    
-    function get($key) {
-        if(ICL_DISABLE_CACHE){
-            return null;
-        }
-        return isset($this->data[$key]) ? $this->data[$key] : false;
-    }
-    
-    function has_key($key){
-        if(ICL_DISABLE_CACHE){
-            return false;
-        }
-        return array_key_exists($key, (array)$this->data);
-    }
-    
-    function set($key, $value) {
-        if(ICL_DISABLE_CACHE){
-            return;
-        }
-        if ($this->cache_to_option) {
+
+	public function get( $key ) {
+		if ( ICL_DISABLE_CACHE ) {
+			return null;
+		}
+		return isset( $this->data[ $key ] ) ? $this->data[ $key ] : false;
+	}
+
+	public function has_key( $key ) {
+		if ( ICL_DISABLE_CACHE ) {
+			return false;
+		}
+		return array_key_exists( $key, (array) $this->data );
+	}
+
+	public function set( $key, $value ) {
+		if ( ICL_DISABLE_CACHE ) {
+			return;
+		}
+		if ( $this->cache_to_option ) {
 			$old_value = null;
-			if ( isset ( $this->data[$key] ) ) {
-				$old_value = $this->data[$key];
+			if ( isset( $this->data[ $key ] ) ) {
+				$old_value = $this->data[ $key ];
 			}
 			if ( $old_value !== $value ) {
-				$this->data[$key] = $value;
+				$this->data[ $key ]       = $value;
 				$this->cache_needs_saving = true;
 			}
-        } else {
-			$this->data[$key] = $value;
+		} else {
+			$this->data[ $key ] = $value;
 		}
-    }
-    
-    function clear() {
-        $this->data = array();
-        if ($this->cache_to_option) {
-            icl_cache_clear($this->name.'_cache_class');
-        }
-    }
+	}
+
+	public function clear() {
+		$this->data = array();
+		if ( $this->cache_to_option ) {
+			icl_cache_clear( $this->name . '_cache_class' );
+		}
+	}
 }
 
 if ( ! function_exists( 'icl_disable_cache' ) ) {
@@ -100,14 +120,14 @@ if ( ! function_exists( 'icl_cache_set' ) ) {
 				delete_option( '_icl_cache' );
 			}
 
-			if ( ! isset( $icl_cache[ $key ] ) || $icl_cache[ $key ] != $value ) {
+			if ( ! isset( $icl_cache[ $key ] ) || $icl_cache[ $key ] !== $value ) {
 				if ( ! is_null( $value ) ) {
 					$icl_cache[ $key ] = $value;
 				} elseif ( isset( $icl_cache[ $key ] ) ) {
 					unset( $icl_cache[ $key ] );
 				}
 
-				update_option( '_icl_cache', $icl_cache );
+				update_option( '_icl_cache', $icl_cache, 'no' );
 			}
 		}
 	}
@@ -125,7 +145,7 @@ if ( ! function_exists( 'icl_cache_clear' ) ) {
 			$wpml_term_translations->reload();
 			$wpml_post_translations->reload();
 
-			if ( $key === false ) {
+			if ( false === $key ) {
 				delete_option( '_icl_cache' );
 			} else {
 				/** @var array $icl_cache */
@@ -140,12 +160,12 @@ if ( ! function_exists( 'icl_cache_clear' ) ) {
 						$cache_keys = array_keys( $icl_cache );
 						foreach ( $cache_keys as $cache_key ) {
 							if ( strpos( $cache_key, $key ) === 0 ) {
-								unset( $icl_cache[ $key ] );
+								unset( $icl_cache[ $cache_key ] );
 							}
 						}
 					}
 
-					// special cache of 'per language' - clear different statuses
+					// Special cache of 'per language' - clear different statuses.
 					if ( false !== strpos( $key, '_per_language' ) ) {
 						foreach ( $icl_cache as $k => $v ) {
 							if ( false !== strpos( $k, $key . '#' ) ) {
@@ -153,7 +173,7 @@ if ( ! function_exists( 'icl_cache_clear' ) ) {
 							}
 						}
 					}
-					update_option( '_icl_cache', $icl_cache );
+					update_option( '_icl_cache', $icl_cache, 'no' );
 				}
 			}
 		}

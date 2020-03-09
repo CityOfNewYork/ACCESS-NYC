@@ -3,7 +3,7 @@ namespace EnableMediaReplace\Notices;
 
 class NoticeModel //extends ShortPixelModel
 {
-  protected $message;
+  public $message;
   public $code;
 
   protected $viewed = false;
@@ -88,9 +88,6 @@ class NoticeModel //extends ShortPixelModel
       break;
     }
 
-    /*$image =  '<img src="' . plugins_url('/shortpixel-image-optimiser/res/img/robo-' . $icon . '.png') . '"
-             srcset="' . plugins_url( 'shortpixel-image-optimiser/res/img/robo-' . $icon . '.png' ) . ' 1x, ' . plugins_url( 'shortpixel-image-optimiser/res/img/robo-' . $icon . '@2x.png') . ' 2x" class="short-pixel-notice-icon">';
-    */
 
     if ($this->is_removable)
     {
@@ -105,12 +102,6 @@ class NoticeModel //extends ShortPixelModel
     return "<div class='$class'>" . $icon . "<p>" . $this->message . "</p></div>";
 
   }
-
-
-
-  // @todo Transient save, since that is used in some parts.
-  // save
-  // load
 
 
 }

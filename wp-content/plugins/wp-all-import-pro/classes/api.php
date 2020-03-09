@@ -62,8 +62,8 @@ class PMXI_API
 
 				$is_set_with_xpath_visible = true;
 				foreach ($params['enum_values'] as $key => $value): ?>
-					<div class="form-field wpallimport-radio-field wpallimport-<?php echo sanitize_title($params['field_name']); ?>_<?php echo $key; ?>">						
-						<input type="radio" id="<?php echo sanitize_title($params['field_name']); ?>_<?php echo $key; ?>" class="switcher" name="<?php echo $params['field_name']; ?>" value="<?php echo $key; ?>" <?php echo $key == $params['field_value'] ? 'checked="checked"': '' ?>/>
+					<div class="form-field wpallimport-radio-field wpallimport-<?php echo sanitize_title($params['field_name']); ?>_<?php echo sanitize_title($key); ?>">
+						<input type="radio" id="<?php echo sanitize_title($params['field_name']); ?>_<?php echo sanitize_title($key); ?>" class="switcher" name="<?php echo $params['field_name']; ?>" value="<?php echo $key; ?>" <?php echo $key == $params['field_value'] ? 'checked="checked"': '' ?>/>
 						<?php  
 							$label = '';
 							$tooltip = '';
@@ -74,7 +74,7 @@ class PMXI_API
 								$label = $value;
 							}
 						?>
-						<label for="<?php echo sanitize_title($params['field_name']); ?>_<?php echo $key; ?>"><?php echo $label; ?></label>
+						<label for="<?php echo sanitize_title($params['field_name']); ?>_<?php echo sanitize_title($key); ?>"><?php echo $label; ?></label>
 						<?php 
 							if (is_array($value) and ! empty($value)){
 								foreach ($value as $k => $p) {
@@ -387,14 +387,23 @@ class PMXI_API
 		$wp_filetype = false;
 		$attch = false;
 
-		if($check_existing) {
-            // trying to find existing image in hash table
-            if ("yes" == $download_images) {
+		if ( $check_existing ) {
+            // Trying to find existing image in hash table.
+            if  ("yes" == $download_images ) {
                 $logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` by URL...', 'wp_all_import_plugin'), rawurldecode($img_url)));
                 $imageList = new PMXI_Image_List();
                 $attch = $imageList->getExistingImageByUrl($img_url);
                 if ($attch) {
                     $logger and call_user_func($logger, sprintf(__('Existing image was found by URL `%s`...', 'wp_all_import_plugin'), $img_url));
+                    // Attach media to current post if it's currently unattached.
+                    if (empty($attch->post_parent)) {
+                        wp_update_post(
+                            array(
+                                'ID' => $attch->ID,
+                                'post_parent' => $pid
+                            )
+                        );
+                    }
                     return $attch->ID;
                 }
             }
@@ -415,7 +424,15 @@ class PMXI_API
                     'image_url' => $img_url,
                     'image_filename' => $image_name
                 ))->insert();
-
+                // Attach media to current post if it's currently unattached.
+                if (empty($attch->post_parent)) {
+                    wp_update_post(
+                        array(
+                            'ID' => $attch->ID,
+                            'post_parent' => $pid
+                        )
+                    );
+                }
                 return $attch->ID;
             }
         }
@@ -427,30 +444,34 @@ class PMXI_API
 
 		$is_base64_images_allowed = apply_filters("wp_all_import_is_base64_images_allowed", true, $url, false);
 
-		if ( $file_type == 'images' and base64_encode(base64_decode($url)) == $url and $is_base64_images_allowed ){
-
+		if ( $file_type == 'images' && base64_encode(base64_decode($url)) == $url && $is_base64_images_allowed ) {
 			$image_name = md5($url) . '.jpg';
-
-			// search existing attachment
+			// Search existing attachment.
 			$attch = wp_all_import_get_image_from_gallery($image_name, $targetDir, $file_type);
-
 			if (empty($attch)) {
 				$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: Image %s not found in media gallery.', 'wp_all_import_plugin'), trim($image_name)));
-			}
-			else {
+			} else {
 				$logger and call_user_func($logger, sprintf(__('- Using existing image `%s`...', 'wp_all_import_plugin'), trim($image_name)));
+				// Attach media to current post if it's currently unattached.
+                if (empty($attch->post_parent)) {
+                    wp_update_post(
+                        array(
+                            'ID' => $attch->ID,
+                            'post_parent' => $pid
+                        )
+                    );
+                }
 				return $attch->ID;
 			}
 
-			if ("yes" == $download_images){
+			if ("yes" == $download_images) {
 				$img = @imagecreatefromstring(base64_decode($url));
-				if($img)
-				{
+				if ($img) {
 					$image_filename = $image_name;
 					$logger and call_user_func($logger, __('- found base64_encoded image', 'wp_all_import_plugin'));
 					$image_filepath = $targetDir . '/' . $image_filename;
 					imagejpeg($img, $image_filepath);
-					if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+					if ( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
 						$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $image_filepath));
 					} else {
 						$result = true;
@@ -460,8 +481,8 @@ class PMXI_API
 			}
 		}
 
-		// do not download images
-		if ( "yes" != $download_images ){					
+		// Do not download images.
+		if ( "yes" != $download_images ) {
 
 			$image_filename = wp_unique_filename($targetDir, basename($image_name));
 			$image_filepath = $targetDir . '/' . basename($image_filename);
@@ -473,9 +494,9 @@ class PMXI_API
 
 			if ( @file_exists($wpai_image_path) and @copy( $wpai_image_path, $image_filepath )){
 				$download_image = false;		
-				// valdate import attachments
-				if ($file_type == 'files'){
-					if( ! $wp_filetype = wp_check_filetype(basename($image_filepath), null )) {
+				// Validate import attachments.
+				if ($file_type == 'files') {
+					if ( ! $wp_filetype = wp_check_filetype(basename($image_filepath), null )) {
 						$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: Can\'t detect attachment file type %s', 'wp_all_import_plugin'), trim($image_filepath)));
 						@unlink($image_filepath);
 					}
@@ -484,9 +505,9 @@ class PMXI_API
 						$logger and call_user_func($logger, sprintf(__('- File `%s` has been successfully found', 'wp_all_import_plugin'), $wpai_image_path));
 					}
 				}	
-				// validate import images
-				elseif($file_type == 'images'){
-					if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+				// Validate import images.
+				elseif ($file_type == 'images') {
+					if ( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
 						$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $image_filepath));					
 						@unlink($image_filepath);
 					} else {
@@ -497,12 +518,11 @@ class PMXI_API
 			}													
 		}	
 
-		if ($download_image){
+		if ( $download_image ) {
 			
-			if ($file_type == 'images'){
+			if ($file_type == 'images') {
 				$logger and call_user_func($logger, sprintf(__('- Downloading image from `%s`', 'wp_all_import_plugin'), $url));
-			}
-			elseif ($file_type == 'files') {
+			} elseif ($file_type == 'files') {
 				$logger and call_user_func($logger, sprintf(__('- Downloading file from `%s`', 'wp_all_import_plugin'), $url));
 			}
 
@@ -515,34 +535,33 @@ class PMXI_API
 
 			if ( (is_wp_error($request) or $request === false) and ! @file_put_contents($image_filepath, @file_get_contents($url))) {
 				@unlink($image_filepath); // delete file since failed upload may result in empty file created
-			} else{
+			} else {
 					
-				if($file_type == 'images'){
-					if( ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+				if ($file_type == 'images') {
+					if ( ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
 						$result = true;		
 						$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'wp_all_import_plugin'), $url));									
 					}
 				}
-				elseif($file_type == 'files'){
-					if( $wp_filetype = wp_check_filetype(basename($image_filepath), null )) {
+				elseif ($file_type == 'files'){
+					if ( $wp_filetype = wp_check_filetype(basename($image_filepath), null )) {
 						$result = true;		
 						$logger and call_user_func($logger, sprintf(__('- File `%s` has been successfully downloaded', 'wp_all_import_plugin'), $url));
 					}
 				}
-
 			}																	
 
-			if ( ! $result ){
+			if ( ! $result ) {
 				
 				$request = get_file_curl($url, $image_filepath);
 
 				if ( (is_wp_error($request) or $request === false) and ! @file_put_contents($image_filepath, @file_get_contents($url))) {
 					$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s cannot be saved locally as %s', 'wp_all_import_plugin'), $url, $image_filepath));				
 					@unlink($image_filepath); // delete file since failed upload may result in empty file created										
-				} else{
+				} else {
 					
-					if($file_type == 'images'){
-						if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+					if ($file_type == 'images') {
+						if ( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
 							$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $url));							
 							@unlink($image_filepath);
 						} else {
@@ -550,12 +569,11 @@ class PMXI_API
 							$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'wp_all_import_plugin'), $url));												
 						}
 					}
-					elseif($file_type == 'files'){
-						if( ! $wp_filetype = wp_check_filetype(basename($image_filepath), null )) {
+					elseif ($file_type == 'files') {
+						if ( ! $wp_filetype = wp_check_filetype(basename($image_filepath), null )) {
 							$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: Can\'t detect attachment file type %s', 'wp_all_import_plugin'), trim($url)));							
 							@unlink($image_filepath);
-						}
-						else {
+						} else {
 							$result = true;											
 							$logger and call_user_func($logger, sprintf(__('- File `%s` has been successfully found', 'wp_all_import_plugin'), $url));
 						}
@@ -564,16 +582,15 @@ class PMXI_API
 			}			
 		}
 
-		if ($create_image and $result){
+		if ( $create_image && $result ) {
 
 			// you must first include the image.php file
 			// for the function wp_generate_attachment_metadata() to work
 			require_once(ABSPATH . 'wp-admin/includes/image.php');
 				
-			if($file_type == 'images'){
+			if ($file_type == 'images') {
 				$logger and call_user_func($logger, sprintf(__('- Creating an attachment for image `%s`', 'wp_all_import_plugin'), $targetUrl . '/' . basename($image_filename)));
-			}
-			else{
+			} else {
 				$logger and call_user_func($logger, sprintf(__('- Creating an attachment for file `%s`', 'wp_all_import_plugin'), $targetUrl . '/' . basename($image_filename)));
 			}
 
@@ -583,6 +600,9 @@ class PMXI_API
 				'post_title' => basename($image_filename),
 				'post_content' => '',				
 			);
+			if (!empty($articleData['post_author'])) {
+			    $attachment['post_author'] = $articleData['post_author'];
+            }
 			if ($file_type == 'images' and ($image_meta = wp_read_image_metadata($image_filepath))) {
 				if (trim($image_meta['title']) && ! is_numeric(sanitize_title($image_meta['title'])))
 					$attachment['post_title'] = $image_meta['title'];
@@ -611,8 +631,8 @@ class PMXI_API
 				$logger and call_user_func($logger, sprintf(__('- Attachment has been successfully created for image `%s`', 'wp_all_import_plugin'), $targetUrl . '/' . basename($image_filename)));
 				return $attid;											
 			}
-
 		}
-		else return $result;		
+
+		return $result;
 	}		
 }

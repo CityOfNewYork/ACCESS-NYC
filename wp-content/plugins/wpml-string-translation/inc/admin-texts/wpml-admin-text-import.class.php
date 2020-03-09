@@ -95,7 +95,7 @@ class WPML_Admin_Text_Import extends WPML_Admin_Text_Functionality {
 
 	private function register_string_recursive( $key, $value, $arr, $prefix = '', $suffix, $requires_upgrade, $type, $admin_text_context_old ) {
 		if ( is_scalar( $value ) ) {
-			icl_register_string( 'admin_texts_' . $suffix, $prefix . $key, $value, true );
+			icl_register_string( WPML_Admin_Texts::DOMAIN_NAME_PREFIX . $suffix, $prefix . $key, $value, true );
 			if ( $requires_upgrade ) {
 				$this->migrate_3_2( $type, $admin_text_context_old, $suffix, $prefix . $key );
 			}
@@ -118,9 +118,9 @@ class WPML_Admin_Text_Import extends WPML_Admin_Text_Functionality {
 	private function migrate_3_2( $type, $old_admin_text_context, $new_admin_text_context, $key ) {
 		global $wpdb;
 
-		$old_string_id = icl_st_is_registered_string( 'admin_texts_' . $type . '_' . $old_admin_text_context, $key );
+		$old_string_id = icl_st_is_registered_string( WPML_Admin_Texts::DOMAIN_NAME_PREFIX . $type . '_' . $old_admin_text_context, $key );
 		if ( $old_string_id ) {
-			$new_string_id = icl_st_is_registered_string( 'admin_texts_' . $new_admin_text_context, $key );
+			$new_string_id = icl_st_is_registered_string( WPML_Admin_Texts::DOMAIN_NAME_PREFIX . $new_admin_text_context, $key );
 			if ( $new_string_id ) {
 				$wpdb->update( $wpdb->prefix . 'icl_string_translations', array( 'string_id' => $new_string_id ), array( 'string_id' => $old_string_id ) );
 				$this->st_records->icl_strings_by_string_id( $new_string_id )

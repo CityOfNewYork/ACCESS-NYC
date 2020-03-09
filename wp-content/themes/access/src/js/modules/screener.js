@@ -112,6 +112,16 @@ class Screener {
       let step = $(event.currentTarget).closest(`.${Screener.CssClass.STEP}`);
       let input = step.find('input[name="Person[0].headOfHousehold"]:checked');
 
+      // Reset HOH to be element at index 0 and remove current HOH from array.
+      // this._people.forEach((member, i) => {
+      //   if (member._attrs.headOfHousehold === true && i !== 0) {
+      //     this._people.splice(i, 1);
+
+      //     $(this._el).find(`[id*="screener-person-${i}-income-"]`).remove();
+      //     $(this._el).find(`[id*="screener-person-${i}-expenses-"]`).remove();
+      //   }
+      // });
+
       this._people[0].set({
         headOfHousehold: Screener.getTypedVal(input)
       });
@@ -305,21 +315,15 @@ class Screener {
    * @return {this} Screener
    */
   _initRecaptcha() {
-    const $script = $(document.createElement('script'));
-    $script.attr('src',
-        'https://www.google.com/recaptcha/api.js' +
-        '?onload=screenerCallback&render=explicit').prop({
-      async: true,
-      defer: true
-    });
-
     window.screenerCallback = () => {
       window.grecaptcha.render(document.getElementById('screener-recaptcha'), {
         'sitekey': Utility.CONFIG.GRECAPTCHA_SITE_KEY,
         'callback': 'screenerRecaptcha',
         'expired-callback': 'screenerRecaptchaReset'
       });
+
       $('#screener-recaptcha-container').removeClass(Screener.CssClass.HIDDEN);
+
       this._recaptchaRequired = true;
     };
 
@@ -333,7 +337,7 @@ class Screener {
     };
 
     this._recaptchaRequired = true;
-    $('head').append($script);
+
     return this;
   }
 
@@ -428,15 +432,18 @@ class Screener {
       personIndex: parseInt($el.data('personIndex'), 10) || 0,
       matrixIndex: parseInt($el.data('matrixIndex'), 10) || 0
     });
+
     const $renderTarget = $el.data('renderTarget') ?
         $($el.data('renderTarget')) :
         $el.closest(`.${Screener.CssClass.MATRIX}`);
+
     if ($target.length) {
       $target.removeClass(Screener.CssClass.HIDDEN);
     } else if (!$el.data('renderTarget') ||
         !$renderTarget.find(`.${Screener.CssClass.MATRIX_ITEM}`).length) {
       $renderTarget.append(renderedTemplate);
     }
+
     return this;
   }
 
@@ -804,6 +811,7 @@ class Screener {
           incomes: [],
           expenses: []
         });
+
         _.each(['incomes', 'expenses'], key => {
           $step.find('[name$="amount"]').filter(':visible')
               .filter(`[name*="${key}"]`).each((i, el) => {
@@ -848,6 +856,7 @@ class Screener {
             return false;
           }
         }
+
         break;
       }
       case 'step-10': {
@@ -1215,6 +1224,13 @@ class Screener {
     const template = window.JST['screener/template-recap'];
     const renderedTemplate = template(templateData);
     $('#recap-body').html(renderedTemplate);
+
+    // Reset personIndex to zero on edit the head of household.
+    // let editPersonButton = document.getElementById('recap-edit-person');
+    // editPersonButton.addEventListener('click', function resetPersonIndex() {
+    //   this._$steps.data('personIndex', 0);
+    // }.bind(this));
+
     return this;
   }
 
@@ -1225,10 +1241,14 @@ class Screener {
    * @return {this} Screener
    */
   _removePerson(i) {
+    let el = $(this._el);
+
     this._people.splice(i, 1);
     this._household.set('members', this._people.length);
-    $(this._el).find('input[name="Household.members"]')
+
+    el.find('input[name="Household.members"]')
         .val(this._people.length);
+
     return this;
   }
 

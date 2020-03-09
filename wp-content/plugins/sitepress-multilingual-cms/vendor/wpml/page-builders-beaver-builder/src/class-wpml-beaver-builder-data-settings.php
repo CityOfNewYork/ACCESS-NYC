@@ -38,7 +38,7 @@ class WPML_Beaver_Builder_Data_Settings implements IWPML_Page_Builders_Data_Sett
 	 * @return array
 	 */
 	public function prepare_data_for_saving( array $data ) {
-		return $data;
+		return $this->slash( $data );
 	}
 
 	/**
@@ -56,4 +56,31 @@ class WPML_Beaver_Builder_Data_Settings implements IWPML_Page_Builders_Data_Sett
 	}
 
 	public function add_hooks(){}
+
+	/**
+	 * Adds slashes to data going into the database as WordPress
+	 * removes them when we save using update_metadata. This is done
+	 * to ensure slashes in user input aren't removed.
+	 *
+	 * Inspired by `\FLBuilderModel::slash_settings`
+	 *
+	 * @param mixed $data The data to slash.
+	 *
+	 * @return mixed The slashed data.
+	 */
+	private function slash( $data ) {
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => $val ) {
+				$data[ $key ] = $this->slash( $val );
+			}
+		} elseif ( is_object( $data ) ) {
+			foreach ( $data as $key => $val ) {
+				$data->$key = $this->slash( $val );
+			}
+		} elseif ( is_string( $data ) ) {
+			$data = wp_slash( $data );
+		}
+
+		return $data;
+	}
 }

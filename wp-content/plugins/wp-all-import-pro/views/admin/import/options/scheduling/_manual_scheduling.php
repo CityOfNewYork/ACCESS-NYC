@@ -9,13 +9,13 @@
         <p style="margin:0;">
         <h5 style="margin-bottom: 10px; margin-top: 10px; font-size: 14px;"><?php _e('Trigger URL'); ?></h5>
         <code style="padding: 10px; border: 1px solid #ccc; display: block; width: 90%;">
-            <?php echo site_url() . '/wp-cron.php?import_key=' . $cron_job_key . '&import_id=' . $import_id . '&action=trigger'; ?>
+            <?php echo site_url() . '/wp-load.php?import_key=' . $cron_job_key . '&import_id=' . $import_id . '&action=trigger'; ?>
         </code>
         </p>
         <p style="margin: 0 0 15px;">
         <h5 style="margin-bottom: 10px; margin-top: 10px; font-size: 14px;"><?php _e('Processing URL'); ?></h5>
         <code style="padding: 10px; border: 1px solid #ccc; display: block; width: 90%;">
-            <?php echo site_url() . '/wp-cron.php?import_key=' . $cron_job_key . '&import_id=' . $import_id . '&action=processing'; ?>
+            <?php echo site_url() . '/wp-load.php?import_key=' . $cron_job_key . '&import_id=' . $import_id . '&action=processing'; ?>
         </code>
         </p>
         <p style="margin:0; padding-left: 0;"><?php _e('Read more about manual scheduling'); ?>: <a target="_blank" href="http://www.wpallimport.com/documentation/recurring/cron/">http://www.wpallimport.com/documentation/recurring/cron/</a>

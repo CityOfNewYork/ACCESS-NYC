@@ -11,7 +11,7 @@
 
 			<a href="#" class="{{ ('js-wpml-ls-item-toggle wpml-ls-item-toggle ' ~ current_language.backward_compatibility.css_classes_a)|trim }}">
 				{%- if current_language.flag_url -%}
-					<img class="{{ css_classes_flag }}" src="{{ current_language.flag_url }}" alt="{{ current_language_code }}" title="{{ current_language.flag_title }}">
+					<img class="{{ css_classes_flag }}" src="{{ current_language.flag_url }}" alt="{{ current_language.flag_alt }}">
 				{%- endif -%}
 
 				{%- if current_language.display_name or current_language.native_name -%}
@@ -26,11 +26,11 @@
 					<li class="{{ language.css_classes }}">
 						<a href="{{ language.url }}" class="{{ css_classes_link }}">
 							{%- if language.flag_url -%}
-								<img class="{{ css_classes_flag }}" src="{{ language.flag_url }}" alt="{{ language.code }}" title="{{ language.flag_title }}">
+								<img class="{{ css_classes_flag }}" src="{{ language.flag_url }}" alt="{{ language.flag_alt }}">
 							{%- endif -%}
 
 							{%- if language.native_name -%}
-							<span class="{{ css_classes_native }}">{{ language.native_name }}</span>
+								<span class="{{ css_classes_native }}" lang="{{ language.code }}">{{ language.native_name }}</span>
 							{%- endif -%}
 							{%- if language.display_name -%}
 								<span class="{{ css_classes_display }}">

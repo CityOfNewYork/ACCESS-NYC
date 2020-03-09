@@ -3,7 +3,7 @@
 Plugin Name: Redis Object Cache
 Plugin URI: https://wordpress.org/plugins/redis-cache/
 Description: A persistent object cache backend powered by Redis. Supports Predis, PhpRedis, HHVM, replication, clustering and WP-CLI.
-Version: 1.4.3
+Version: 1.5.5
 Text Domain: redis-cache
 Domain Path: /languages
 Author: Till Krüss
@@ -15,6 +15,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+define( 'WP_REDIS_VERSION', '1.5.5' );
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
     require_once dirname( __FILE__ ) . '/includes/wp-cli-commands.php';
@@ -28,6 +30,8 @@ class RedisObjectCache {
 
     public function __construct() {
 
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
         load_plugin_textdomain( 'redis-cache', false, 'redis-cache/languages' );
 
         register_activation_hook( __FILE__, 'wp_cache_flush' );
@@ -38,9 +42,12 @@ class RedisObjectCache {
 
         add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', array( $this, 'add_admin_menu_page' ) );
         add_action( 'admin_notices', array( $this, 'show_admin_notices' ) );
+        add_action( 'admin_notices', array( $this, 'pro_notice' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
         add_action( 'load-' . $this->screen, array( $this, 'do_admin_actions' ) );
         add_action( 'load-' . $this->screen, array( $this, 'add_admin_page_notices' ) );
+        add_action( 'wp_ajax_roc_dismiss_notice', array( $this, 'dismiss_notice' ) );
 
         add_filter( sprintf(
             '%splugin_action_links_%s',
@@ -88,6 +95,10 @@ class RedisObjectCache {
 
         }
 
+        if ( wp_next_scheduled( 'redis_gather_metrics' ) ) {
+            wp_clear_scheduled_hook( 'redis_gather_metrics' );
+        }
+
         // show admin page
         require_once plugin_dir_path( __FILE__ ) . '/includes/admin-page.php';
 
@@ -116,10 +127,28 @@ class RedisObjectCache {
     public function enqueue_admin_styles( $hook_suffix ) {
 
         if ( $hook_suffix === $this->screen ) {
-            $plugin = get_plugin_data( __FILE__ );
-            wp_enqueue_style( 'redis-cache', plugin_dir_url( __FILE__ ) . 'includes/admin-page.css', null, $plugin[ 'Version' ] );
+            wp_enqueue_style( 'redis-cache', plugin_dir_url( __FILE__ ) . 'includes/admin-page.css', null, WP_REDIS_VERSION );
         }
 
+    }
+
+    public function enqueue_admin_scripts() {
+        $screen = get_current_screen();
+
+        if ( ! isset( $screen->id ) ) {
+            return;
+        }
+
+        if ( ! in_array( $screen->id, array( 'dashboard', $this->screen ) ) ) {
+            return;
+        }
+
+        wp_enqueue_script(
+            'roc-dismissible-notices',
+            plugins_url( 'includes/admin-page.js', __FILE__ ),
+            array( 'jquery' ),
+            WP_REDIS_VERSION
+        );
     }
 
     public function object_cache_dropin_exists() {
@@ -182,6 +211,20 @@ class RedisObjectCache {
 
     }
 
+    public function get_redis_version() {
+
+        global $wp_object_cache;
+
+        if ( defined( 'WP_REDIS_DISABLED' ) && WP_REDIS_DISABLED ) {
+            return;
+        }
+
+        if ( $this->validate_object_cache_dropin() && method_exists( $wp_object_cache, 'redis_version' ) ) {
+            return $wp_object_cache->redis_version();
+        }
+
+    }
+
     public function get_redis_client_name() {
 
         global $wp_object_cache;
@@ -193,8 +236,6 @@ class RedisObjectCache {
         if ( defined( 'WP_REDIS_CLIENT' ) ) {
             return WP_REDIS_CLIENT;
         }
-
-        return null;
 
     }
 
@@ -345,6 +386,50 @@ class RedisObjectCache {
 
         }
 
+    }
+
+    public function dismiss_notice() {
+        $notice = sprintf(
+            'roc_dismissed_%s',
+            sanitize_key( $_POST[ 'notice' ] )
+        );
+
+        update_user_meta( get_current_user_id(), $notice, '1' );
+
+        wp_die();
+    }
+
+    public function pro_notice() {
+        $screen = get_current_screen();
+
+        if ( ! isset( $screen->id ) ) {
+            return;
+        }
+
+        if ( ! in_array( $screen->id, array( 'dashboard', $this->screen ) ) ) {
+            return;
+        }
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
+        if ( defined( 'WP_REDIS_DISABLE_BANNERS' ) && WP_REDIS_DISABLE_BANNERS ) {
+            return;
+        }
+
+        if ( get_user_meta( get_current_user_id(), 'roc_dismissed_pro_release_notice', true ) == '1' ) {
+            return;
+        }
+
+        printf(
+            '<div class="notice notice-info is-dismissible" data-dismissible="pro_release_notice"><p><strong>%s</strong> %s</p></div>',
+            __( 'Redis Cache Pro is out!', 'redis-cache' ),
+            sprintf(
+                __( 'A <u>business class</u> object cache backend. Truly reliable, highly-optimized and fully customizable, with a <u>dedicated engineer</u> when you most need it. <a href="%1$s">Learn more »</a>', 'redis-cache' ),
+                network_admin_url( $this->page )
+            )
+        );
     }
 
     public function initialize_filesystem( $url, $silent = false ) {

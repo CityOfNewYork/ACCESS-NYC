@@ -4,11 +4,11 @@
 {% set css_classes_bracket = ('wpml-ls-bracket ' ~ backward_compatibility.css_classes_bracket)|trim %}
 
 {%- if flag_url -%}
-    <img class="{{ css_classes_flag }}" src="{{ flag_url }}" alt="{{ code }}" title="{{ flag_title }}">
+    <img class="{{ css_classes_flag }}" src="{{ flag_url }}" alt="{{ flag_alt }}">
 {%- endif -%}
 
 {%- if native_name -%}
-    <span class="{{ css_classes_native }}">{{ native_name }}</span>
+    <span class="{{ css_classes_native }}" lang="{{ code }}">{{ native_name }}</span>
 {%- endif -%}
 
 {%- if display_name -%}

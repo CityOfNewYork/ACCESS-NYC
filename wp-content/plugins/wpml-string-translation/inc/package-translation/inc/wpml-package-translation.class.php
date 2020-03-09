@@ -17,23 +17,28 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			global $sitepress;
 		}
 
-	  if ( $this->passed_dependencies() && $sitepress->get_setting( 'setup_complete', false ) ) {
-		  $this->add_admin_hooks();
-		  $this->add_global_hooks();
+		$is_setup_complete = (bool) $sitepress->get_setting( 'setup_complete', false );
 
-		  if ( is_admin() ) {
-			  $this->run_db_update();
+		if ( $is_setup_complete ) {
+			$this->run_db_update();
+		}
 
-			  if ( $this->is_refresh_required() ) {
-				  add_action( 'init', array( $this, 'refresh_packages' ), 999, 0 );
-				  $this->set_refresh_not_required();
-			  }
-		  }
+		if ( $this->passed_dependencies() && $is_setup_complete ) {
+			$this->add_admin_hooks();
+			$this->add_global_hooks();
+
+			if ( is_admin() ) {
+
+				if ( $this->is_refresh_required() ) {
+					add_action( 'init', array( $this, 'refresh_packages' ), 999, 0 );
+					$this->set_refresh_not_required();
+				}
+			}
 		}
 	}
 
 	private function add_admin_hooks() {
-		if ( is_admin() || $this->is_doing_xmlrpc() || $this->is_doing_rest_request() ) {
+		if ( is_admin() || $this->is_doing_xmlrpc() || wpml_is_rest_request() ) {
 			add_action( 'wp_ajax_wpml_delete_packages', array( $this, 'delete_packages_ajax' ) );
 			add_action( 'wp_ajax_wpml_change_package_lang', array( $this, 'change_package_lang_ajax' ) );
 
@@ -97,17 +102,6 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 
 	private function is_doing_xmlrpc() {
 		return ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST );
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function is_doing_rest_request() {
-        /*
-         * We can't rely on REST_REQUEST constant because it is defined much later than this action
-         */
-
-		return false !== strpos( $_SERVER['REQUEST_URI'], 'wp-json' );
 	}
 
 	private function add_global_hooks() {

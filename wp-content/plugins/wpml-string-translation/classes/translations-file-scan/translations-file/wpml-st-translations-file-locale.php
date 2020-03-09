@@ -2,8 +2,8 @@
 
 class WPML_ST_Translations_File_Locale {
 
-	const PATTERN_SEARCH_LANG_MO   = '#[-]?([a-z]+[_A-Z]*)\.mo$#i';
-	const PATTERN_SEARCH_LANG_JSON = '#DOMAIN_PLACEHOLDER([a-z]+[_A-Z]*)-[-_a-z0-9]+\.json$#i';
+	const PATTERN_SEARCH_LANG_MO   = '#[-]?([a-z0-9]+_?[A-Z]*)\.mo$#i';
+	const PATTERN_SEARCH_LANG_JSON = '#DOMAIN_PLACEHOLDER([a-z0-9]+[_A-Z]*)-[-_a-z0-9]+\.json$#i';
 
 	/** @var string $filepath */
 	private $filepath;
@@ -12,10 +12,10 @@ class WPML_ST_Translations_File_Locale {
 	private $domain;
 
 	/**
-	 * @param string $filepath
-	 * @param string $domain
+	 * @param string|null $filepath
+	 * @param string|null $domain
 	 */
-	public function __construct( $filepath, $domain ) {
+	public function __construct( $filepath = null, $domain = null ) {
 		$this->filepath = $filepath;
 		$this->domain   = $domain;
 	}
@@ -27,10 +27,21 @@ class WPML_ST_Translations_File_Locale {
 	 * '/wp-content/languages/fr_FR-4gh5e6d3g5s33d6gg51zas2.json' => 'fr_FR'
 	 * '/wp-content/plugins/my-plugin/languages/-my-plugin-fr_FR-my-handler.json' => 'fr_FR'
 	 *
+	 * @param string|null $filepath
+	 * @param string|null $domain
+	 *
 	 * @return string
 	 * @throws RuntimeException
 	 */
-	public function get() {
+	public function get( $filepath = null, $domain = null ) {
+		if ( $filepath ) {
+			$this->filepath = $filepath;
+		}
+
+		if ( $domain ) {
+			$this->domain = $domain;
+		}
+
 		switch( $this->get_extension() ) {
 			case 'mo':
 				$search = self::PATTERN_SEARCH_LANG_MO;
@@ -51,7 +62,7 @@ class WPML_ST_Translations_File_Locale {
 			return $matches[1];
 		}
 
-		throw new RuntimeException( 'Language of ' . $this->filepath. ' cannot be recognized' );
+		return '';
 	}
 
 	/** @return string|null */

@@ -247,12 +247,22 @@ abstract class Field implements FieldInterface {
         $parsedData = $this->getParsedData();
 
         // If update is not allowed
-        if (!empty($this->importData['articleData']['ID']) && ! \pmai_is_acf_update_allowed($this->importData['container_name'] . $field['name'], $this->parsingData['import']->options, $this->parsingData['import']->id) && empty($parsedData['xpath']['only_append_new'])) {
+        if (!empty($this->importData['articleData']['ID']) && ! \pmai_is_acf_update_allowed($this->importData['container_name'] . $field['name'], $this->parsingData['import']->options, $this->parsingData['import']->id)) {
             $this->parsingData['logger'] && call_user_func($this->parsingData['logger'], sprintf(__('- Field `%s` is skipped attempted to import options', 'wp_all_import_acf_add_on'), $this->getFieldName()));
             return FALSE;
         }
 
-        ACFService::update_post_meta($this, $this->getPostID(), "_" . $this->getFieldName(), $this->getFieldKey());
+        switch ($this->getImportType()) {
+            case 'import_users':
+                update_user_meta($this->getPostID(), "_" . $this->getFieldName(), $this->getFieldKey());
+                break;
+            case 'taxonomies':
+                update_term_meta($this->getPostID(), "_" . $this->getFieldName(), $this->getFieldKey());
+                break;
+            default:
+                update_post_meta($this->getPostID(), "_" . $this->getFieldName(), $this->getFieldKey());
+                break;
+        }
 
         return TRUE;
     }
@@ -711,6 +721,9 @@ abstract class Field implements FieldInterface {
                 }
                 if ($parent['delimiter'] !== FALSE) {
                     $value = explode($parent['delimiter'], $value);
+                    if (is_array($value)) {
+                        $value = array_filter($value);
+                    }
                     $parentIndex = $parent['index'];
                 }
             }

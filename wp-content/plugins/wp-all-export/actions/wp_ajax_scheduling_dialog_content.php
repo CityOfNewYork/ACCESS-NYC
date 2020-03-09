@@ -494,8 +494,18 @@ function pmxe_wp_ajax_scheduling_dialog_content()
                     ?>
                     var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-                    $('#timezone').val(timeZone);
-                    $('#timezone').trigger("chosen:updated");
+                    if($('#timezone').find("option:contains('"+ timeZone +"')").length != 0){
+                        $('#timezone').trigger("chosen:updated");
+                        $('#timezone').val(timeZone);
+                        $('#timezone').trigger("chosen:updated");
+                    }else{
+                        var parts = timeZone.split('/');
+                        var lastPart = parts[parts.length-1];
+                        var opt = $('#timezone').find("option:contains('"+ lastPart +"')");
+
+                        $('#timezone').val(opt.val());
+                        $('#timezone').trigger("chosen:updated");
+                    }
 
                     <?php
                     }
@@ -787,7 +797,7 @@ function pmxe_wp_ajax_scheduling_dialog_content()
                              style="margin-left: 5px; margin-top: 65px; margin-bottom: 130px; position: relative;">
                             <div class="button-container">
 
-                                <a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=515704"
+                                <a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=515704&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=automatic-scheduling"
                                    target="_blank" id="subscribe-button">
                                     <div class="button button-primary button-hero wpallexport-large-button button-subscribe"
                                          style="background-image: none; width: 140px; text-align: center; position: absolute; z-index: 4;">

@@ -141,9 +141,18 @@ function or_chain()
  */
 function load_compiled_json($path)
 {
+    static $compiledList = [];
+
     $compiledFilepath = "{$path}.php";
-    if (is_readable($compiledFilepath)) {
-        return include($compiledFilepath);
+
+    if (!isset($compiledList[$compiledFilepath])) {
+        if (is_readable($compiledFilepath)) {
+            $compiledList[$compiledFilepath] = include($compiledFilepath);
+        }
+    }
+
+    if (isset($compiledList[$compiledFilepath])) {
+        return $compiledList[$compiledFilepath];
     }
 
     if (!file_exists($path)) {
@@ -408,4 +417,43 @@ function parse_ini_file(
         $process_sections,
         $scanner_mode
     );
+}
+
+/**
+ * Outputs boolean value of input for a select range of possible values,
+ * null otherwise
+ *
+ * @param $input
+ * @return bool|null
+ */
+function boolean_value($input)
+{
+    if (is_bool($input)) {
+        return $input;
+    }
+
+    if ($input === 0) {
+        return false;
+    }
+
+    if ($input === 1) {
+        return true;
+    }
+
+    if (is_string($input)) {
+        switch (strtolower($input)) {
+            case "true":
+            case "on":
+            case "1":
+                return true;
+                break;
+
+            case "false":
+            case "off":
+            case "0":
+                return false;
+                break;
+        }
+    }
+    return null;
 }

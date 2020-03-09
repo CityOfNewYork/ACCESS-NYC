@@ -25,7 +25,7 @@
             <xs:element type="wpml-custom-term-fields" name="custom-term-fields" minOccurs="0"/>
             <xs:element type="wpml-custom-fields-texts" name="custom-fields-texts" minOccurs="0"/>
             <xs:element type="wpml-admin-texts" name="admin-texts" minOccurs="0"/>
-            <xs:element type="gutenberg-blocks" name="gutenberg-blocks" minOccurs="0"/>
+            <xs:element type="wpml-gutenberg-blocks" name="gutenberg-blocks" minOccurs="0"/>
         </xs:all>
     </xs:complexType>
     <!-- Main: end -->
@@ -111,6 +111,14 @@
             <xs:element type="wpml-generic-setting-key" name="key" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute type="xs:string" name="name" use="required"/>
+        <xs:attribute name="search-method">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="wildcards"/>
+                    <xs:enumeration value="regex"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:simpleType name="wpml-non-empty-string">
@@ -256,26 +264,36 @@
 	</xs:simpleType>
 	<!-- Shortcode list: end -->
 
+
     <!-- Gutenberg: start -->
-    <xs:complexType name="gutenberg-blocks">
+    <xs:complexType name="wpml-gutenberg-blocks">
         <xs:sequence>
-            <xs:element name="gutenberg-block" maxOccurs="unbounded" minOccurs="1">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element type="xs:string" name="xpath" maxOccurs="unbounded" minOccurs="0"/>
-                    </xs:sequence>
-                    <xs:attribute type="xs:string" name="type" use="required"/>
-                    <xs:attribute name="translate" use="required">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:integer">
-                                <xs:enumeration value="0"/>
-                                <xs:enumeration value="1"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:attribute>
-                </xs:complexType>
-            </xs:element>
+            <xs:element type="wpml-gutenberg-block" name="gutenberg-block" maxOccurs="unbounded" minOccurs="1" />
         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="wpml-gutenberg-block">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element type="wpml-xpath" name="xpath" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element type="wpml-generic-setting-key" name="key" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:choice>
+        <xs:attribute type="xs:string" name="type" use="required"/>
+        <xs:attribute name="translate" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                    <xs:enumeration value="0"/>
+                    <xs:enumeration value="1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="wpml-xpath">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="type" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
     <!-- Gutenberg: end -->
 

@@ -94,11 +94,11 @@
 											$sorted_cpt['import_users']->labels = new stdClass();
 											$sorted_cpt['import_users']->labels->name = __('Users','wp_all_export_plugin');
 
-											if ( class_exists('WooCommerce') ) {
-												$sorted_cpt['shop_customer'] = new stdClass();
-												$sorted_cpt['shop_customer']->labels = new stdClass();
-												$sorted_cpt['shop_customer']->labels->name = __('WooCommerce Customers','wp_all_export_plugin');
-											}
+//											if ( class_exists('WooCommerce') ) {
+//												$sorted_cpt['shop_customer'] = new stdClass();
+//												$sorted_cpt['shop_customer']->labels = new stdClass();
+//												$sorted_cpt['shop_customer']->labels->name = __('WooCommerce Customers','wp_all_export_plugin');
+//											}
 
 											break;
 										}

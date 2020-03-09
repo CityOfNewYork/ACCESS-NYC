@@ -12,15 +12,16 @@ class WPML_ST_Upgrade_DB_String_Packages_Word_Count implements IWPML_St_Upgrade_
 	public function run() {
 		$table  = 'icl_string_packages';
 		$column = 'word_count';
-		$result = false;
 
-		if ( $this->upgrade_schema->does_table_exist( $table )
-		     && ! $this->upgrade_schema->does_column_exist( $table, $column )
-		) {
-			$result = $this->upgrade_schema->add_column( $table, $column, 'VARCHAR(2000) DEFAULT NULL' );
+		if ( ! $this->upgrade_schema->does_table_exist( $table ) ) {
+			return false;
 		}
 
-		return false !== $result;
+		if ( ! $this->upgrade_schema->does_column_exist( $table, $column ) ) {
+			return (bool) $this->upgrade_schema->add_column( $table, $column, 'VARCHAR(2000) DEFAULT NULL' );
+		}
+
+		return true;
 	}
 
 	public function run_ajax() {

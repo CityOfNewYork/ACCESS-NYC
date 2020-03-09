@@ -8,15 +8,36 @@
  * @since   Timber 0.1
  */
 
+/**
+ * If you are installing Timber as a Composer dependency in your theme, you'll need this block
+ * to load your dependencies and initialize Timber. If you are using Timber via the WordPress.org
+ * plug-in, you can safely delete this block.
+ */
+$composer_autoload = __DIR__ . '/vendor/autoload.php';
+if ( file_exists( $composer_autoload ) ) {
+	require_once $composer_autoload;
+	$timber = new Timber\Timber();
+}
+
+/**
+ * This ensures that Timber is loaded and available as a PHP class.
+ * If not, it gives an error message to help direct developers on where to activate
+ */
 if ( ! class_exists( 'Timber' ) ) {
-	add_action( 'admin_notices', function() {
-		echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php' ) ) . '</a></p></div>';
-	});
 
-	add_filter('template_include', function( $template ) {
-		return get_stylesheet_directory() . '/static/no-timber.html';
-	});
+	add_action(
+		'admin_notices',
+		function() {
+			echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php' ) ) . '</a></p></div>';
+		}
+	);
 
+	add_filter(
+		'template_include',
+		function( $template ) {
+			return get_stylesheet_directory() . '/static/no-timber.html';
+		}
+	);
 	return;
 }
 
@@ -60,11 +81,11 @@ class StarterSite extends Timber\Site {
 	 * @param string $context context['this'] Being the Twig's {{ this }}.
 	 */
 	public function add_to_context( $context ) {
-		$context['foo'] = 'bar';
+		$context['foo']   = 'bar';
 		$context['stuff'] = 'I am a value set in your functions.php file';
 		$context['notes'] = 'These values are available everytime you call Timber::context();';
-		$context['menu'] = new Timber\Menu();
-		$context['site'] = $this;
+		$context['menu']  = new Timber\Menu();
+		$context['site']  = $this;
 		return $context;
 	}
 
@@ -92,7 +113,8 @@ class StarterSite extends Timber\Site {
 		 * to output valid HTML5.
 		 */
 		add_theme_support(
-			'html5', array(
+			'html5',
+			array(
 				'comment-form',
 				'comment-list',
 				'gallery',
@@ -106,7 +128,8 @@ class StarterSite extends Timber\Site {
 		 * See: https://codex.wordpress.org/Post_Formats
 		 */
 		add_theme_support(
-			'post-formats', array(
+			'post-formats',
+			array(
 				'aside',
 				'image',
 				'video',
@@ -134,8 +157,8 @@ class StarterSite extends Timber\Site {
 	 * @param string $twig get extension.
 	 */
 	public function add_to_twig( $twig ) {
-		$twig->addExtension( new Twig_Extension_StringLoader() );
-		$twig->addFilter( new Twig_SimpleFilter( 'myfoo', array( $this, 'myfoo' ) ) );
+		$twig->addExtension( new Twig\Extension\StringLoaderExtension() );
+		$twig->addFilter( new Twig\TwigFilter( 'myfoo', array( $this, 'myfoo' ) ) );
 		return $twig;
 	}
 

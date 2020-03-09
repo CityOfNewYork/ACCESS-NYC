@@ -6,6 +6,13 @@
  */
 class QM_Output_Headers_PHP_Errors extends QM_Output_Headers {
 
+	/**
+	 * Collector instance.
+	 *
+	 * @var QM_Collector_PHP_Errors Collector.
+	 */
+	protected $collector;
+
 	public function get_output() {
 
 		$data    = $this->collector->get_data();
@@ -42,12 +49,11 @@ class QM_Output_Headers_PHP_Errors extends QM_Output_Headers {
 		}
 
 		return array_merge(
-			 array(
-				 'error-count' => $count,
-			 ),
+			array(
+				'error-count' => $count,
+			),
 			$headers
-			);
-
+		);
 	}
 
 }

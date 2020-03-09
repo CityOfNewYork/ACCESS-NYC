@@ -1,0 +1,48 @@
+{
+  "name": "nyco/wp-send-me-nyc",
+  "version": "1.1.2",
+  "type": "wordpress-muplugin",
+  "license": "GPL-3.0+",
+  "description": "A developer plugin for WordPress that enables sharing website links via SMS or Email.",
+  "homepage": "https://github.com/cityofnewyork/nyco-wp-send-me-nyc",
+  "authors": [
+    {
+      "name": "NYC Opportunity",
+      "email": "products@nycopportunity.nyc.gov",
+      "homepage": "http://nyc.gov/opportunity"
+    }
+  ],
+  "keywords": [
+    "nycopportunity",
+    "wordpress",
+    "integrations",
+    "theme",
+    "sms",
+    "email",
+    "AWS",
+    "Twilio",
+    "Bitly",
+    "sharing"
+  ],
+  "support": {
+    "issues": "https://github.com/cityofnewyork/nyco-wp-send-me-nyc/issues"
+  },
+  "require": {
+    "composer/installers": "^1.7",
+    "twilio/sdk": "^5.41.1",
+    "aws/aws-sdk-php": "^3.130",
+    "soundasleep/html2text": "^1.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.*",
+    "codeception/codeception": "^2.3"
+  },
+  "scripts": {
+    "lint": [
+      "vendor/bin/phpcs --standard=standard.xml --extensions=php"
+    ],
+    "fix": [
+      "vendor/bin/phpcbf --standard=standard.xml --extensions=php"
+    ]
+  }
+}

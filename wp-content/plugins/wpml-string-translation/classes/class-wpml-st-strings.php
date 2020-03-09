@@ -97,7 +97,6 @@ class WPML_ST_Strings {
 
 		}
 
-		$extra_cond .= '';
 		if ( isset( $context ) ) {
 			$extra_cond .= " AND s.context = '" . esc_sql( $context ) . "'";
 		}

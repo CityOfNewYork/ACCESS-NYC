@@ -1,7 +1,8 @@
 jQuery(document).ready(function () {
-    jQuery('#icl_run_st_db_cache_command').click(function () {
+    jQuery('.js-wpml-st-troubleshooting-action').click(function () {
         var self = jQuery(this);
         var nonce = self.data('nonce');
+        var reload = self.data('reload');
 
         self.attr('disabled', 'disabled');
         self.after(icl_ajxloaderimg);
@@ -9,12 +10,15 @@ jQuery(document).ready(function () {
             type : "post",
             url : ajaxurl,
             data : {
-                action: "wpml-st-upgrade-db-cache-command",
+                action: self.data('action'),
                 nonce: nonce
             },
-            success: function(response) {
-                var msg = self.data('success-message');
-                alert(msg);
+            success: function() {
+                if (reload) {
+                    window.location.reload(true);
+                } else {
+                    alert(self.data('success-message'));
+                }
             },
             complete: function() {
                 self.removeAttr('disabled');

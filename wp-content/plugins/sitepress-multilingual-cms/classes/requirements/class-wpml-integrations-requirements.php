@@ -1,5 +1,8 @@
 <?php
 
+use WPML\Core\Twig_Loader_Filesystem;
+use WPML\Core\Twig_Environment;
+
 /**
  * @author OnTheGo Systems
  */
@@ -221,7 +224,7 @@ class WPML_Integrations_Requirements {
 		$notice->add_action( $dismiss_action );
 
 		if ( $this->has_issues( WPML_Integrations::SCOPE_WP_CORE ) ) {
-			$document_action = new WPML_Notice_Action( __( 'How to translate Gutenberg content', 'sitepress' ), self::DOCUMENTATION_LINK_BLOCK_EDITOR );
+			$document_action = new WPML_Notice_Action( __( 'How to translate Block editor content', 'sitepress' ), self::DOCUMENTATION_LINK_BLOCK_EDITOR );
 			$document_action->set_link_target( '_blank' );
 			$notice->add_action( $document_action );
 		}

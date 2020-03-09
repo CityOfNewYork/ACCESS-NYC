@@ -129,7 +129,10 @@ class WPML_ST_Translations_File_Registration {
 	 * @param string $file_path
 	 */
 	private function register_single_file( $registration_domain, $file_path ) {
-		if ( ! $this->wpml_file->file_exists( $file_path ) ) {
+		if (
+			! $this->wpml_file->file_exists( $file_path ) ||
+			$this->isGeneratedFile( $file_path )
+		) {
 			return ;
 		}
 
@@ -158,5 +161,13 @@ class WPML_ST_Translations_File_Registration {
 			$this->file_dictionary->save( $file );
 		}
 	}
+
+	private function isGeneratedFile( $path ) {
+		return strpos(
+			       $this->wpml_file->fix_dir_separator( $path ),
+			       $this->wpml_file->fix_dir_separator( WPML\ST\TranslationFile\Manager::getSubdir() )
+		       ) === 0;
+	}
+
 }
 

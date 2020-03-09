@@ -1,3 +1,6 @@
+<?php
+$addons = new \Wpae\App\Service\Addons\AddonService();
+?>
 <div class="wpallexport-header" style="overflow:hidden; height: 60px; padding-top: 10px; margin-bottom: -20px;">
     <div class="wpallexport-logo"></div>
     <div class="wpallexport-title">
@@ -176,7 +179,21 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
 							case 'info':
 								?>
 								<td style="min-width: 180px;">
-                                    <a href="#" class="open_cron_scheduling"
+                                    <a <?php
+                                    if (!is_array($item['options']['cpt'])) {
+                                        $item['options']['cpt'] = array($item['options']['cpt']);
+                                    }
+                                    if (
+                                        ((in_array('users', $item['options']['cpt']) || in_array('shop_customer', $item['options']['cpt'])) && !$addons->isUserAddonActive()) ||
+                                        ($item['options']['export_type'] == 'advanced' && $item['options']['wp_query_selector'] == 'wp_user_query' && !$addons->isUserAddonActive())
+                                    ) {
+                                        ?>
+                                        href="<?php echo esc_url(add_query_arg(array('id' => $item['id'], 'action' => 'update'), $this->baseUrl)) ?>"
+                                        <?php
+                                    } else {
+                                        ?>
+                                        href="#" class="open_cron_scheduling"
+                                    <?php } ?>
                                        data-itemid="<?php echo $item['id']; ?>"><?php _e('Scheduling Options', 'wp_all_export_plugin'); ?></a>
                                     <br>
 									<?php									

@@ -30,6 +30,7 @@
 /.htaccess
 /wp-config.php
 /wp-content/uploads/
+# !/wp-content/uploads/wpallimport/functions.php
 /wp-content/blogs.dir/
 /wp-content/upgrade/*
 /wp-content/backup-db/*
@@ -44,12 +45,8 @@
 ################################
 /wp-content/plugins/akismet/
 /wp-content/plugins/akismet/*
-/wp-content/themes/twentysixteen/
-/wp-content/themes/twentysixteen/*
-/wp-content/themes/twentyfifteen/
-/wp-content/themes/twentyfifteen/*
-/wp-content/themes/twentyseventeen/
-/wp-content/themes/twentyseventeen/*
+/wp-content/themes/*twenty*/
+/wp-content/themes/*twenty*/*
 /wp-content/plugins/hello.php
 
 # WP-Engine Specific #
@@ -73,6 +70,11 @@
 # ENV Files #
 #############
 .env
+
+# Certs #
+#########
+*.pem
+!/wp-content/mu-plugins/wp-stat-collector/ca.pem
 
 # Packages #
 ############

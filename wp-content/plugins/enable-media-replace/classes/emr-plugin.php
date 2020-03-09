@@ -20,6 +20,11 @@ class EnableMediaReplacePlugin
     if (is_null(self::$instance))
       self::$instance = new EnableMediaReplacePlugin();
 
+    $log = Log::getInstance();
+    $uploaddir =wp_upload_dir();
+    if (isset($uploaddir['basedir']))
+      $log->setLogPath($uploaddir['basedir'] . "/emr_log");
+      
     return self::$instance;
   }
 
@@ -34,8 +39,8 @@ class EnableMediaReplacePlugin
     add_action('admin_init', array($this,'init'));
     add_action('admin_enqueue_scripts', array($this,'admin_scripts'));
 
+
     // content filters
-    add_filter('attachment_fields_to_edit', array($this, 'attachment_editor'), 10, 2);
     add_filter('media_row_actions', array($this,'add_media_action'), 10, 2);
     add_action('attachment_submitbox_misc_actions', array($this,'admin_date_replaced_media_on_edit_media_screen'), 91 );
     add_filter('upload_mimes', array($this,'add_mime_types'), 1, 1);
@@ -45,8 +50,22 @@ class EnableMediaReplacePlugin
     add_action('network_admin_notices', array($this,'display_network_notices'));
     add_action('wp_ajax_emr_dismiss_notices', array($this,'dismiss_notices'));
 
+    // editors
+    add_action( 'add_meta_boxes', function () { add_meta_box('emr-eplace-box', __('Replace Image', 'enable-media-replace'), array($this, 'replace_meta_box'), 'attachment', 'side', 'low'); }  );
+    add_filter('attachment_fields_to_edit', array($this, 'attachment_editor'), 10, 2);
+
     // shortcode
     add_shortcode('file_modified', array($this, 'get_modified_date'));
+
+    /** Just after an image is replaced, try to browser decache the images */
+    if (isset($_GET['emr_replaced']) && intval($_GET['emr_replaced'] == 1))
+    {
+      add_filter('wp_get_attachment_image_src',array($this, 'attempt_uncache_image'),  10, 4);
+
+      // adds a metabox to list thumbnails. This is a cache reset hidden as feature.
+      add_action( 'add_meta_boxes', function () { add_meta_box('emr-replace-box', __('Replaced Thumbnails Preview', 'enable-media-replace'), array($this, 'show_thumbs_box'), 'attachment', 'side', 'low'); }  );
+      add_filter('postbox_classes_attachment_emr-replace-box', function($classes) { $classes[] = 'closed'; return $classes; });
+    }
 
   }
 
@@ -128,12 +147,15 @@ class EnableMediaReplacePlugin
       wp_register_style('emr_style', plugins_url('css/admin.css', EMR_ROOT_FILE) );
     }
 
+    wp_register_style('emr_edit-attachment', plugins_url('css/edit_attachment.css', EMR_ROOT_FILE));
+
     wp_register_script('emr_admin', plugins_url('js/emr_admin.js', EMR_ROOT_FILE), array('jquery'), false, true );
     $emr_options = array(
         'dateFormat' => $this->convertdate(get_option( 'date_format' )),
         'maxfilesize' => wp_max_upload_size(),
 
     );
+
 
     if (Log::debugIsActive())
         $emr_options['is_debug'] = true;
@@ -179,30 +201,55 @@ class EnableMediaReplacePlugin
 
   }
 
-  /**
-   * Add some new fields to the attachment edit panel.
-   * @param array form fields edit panel
-   * @return array form fields with enable-media-replace fields added
-   */
+  public function replace_meta_box($post)
+  {
+    $url = $this->getMediaReplaceURL($post->ID);
+
+    $action = "media_replace";
+    $editurl = wp_nonce_url( $url, $action );
+
+    /* Unneeded - admin_url already checks for force_ssl_admin ( in set_scheme function )
+    if (FORCE_SSL_ADMIN) {
+      $editurl = str_replace("http:", "https:", $editurl);
+    } */
+    $link = "href=\"$editurl\"";
+
+
+    echo "<p><a class='button-secondary' $link>" . esc_html__("Upload a new file", "enable-media-replace") . "</a></p><p>" . esc_html__("To replace the current file, click the link and upload a replacement.", "enable-media-replace") . "</p>";
+  }
+
+  public function show_thumbs_box($post)
+  {
+    wp_enqueue_style('emr_edit-attachment');
+
+    $meta = wp_get_attachment_metadata($post->ID);
+
+    if (! isset($meta['sizes']) )
+    {  echo __('Thumbnails were not generated', 'enable-media-replace');
+      return false;
+    }
+
+    foreach($meta['sizes'] as $size => $data)
+    {
+      $display_size = ucfirst(str_replace("_", " ", $size));
+      $img = wp_get_attachment_image_src($post->ID, $size);
+      echo "<div class='$size previewwrapper'><img src='" . $img[0] . "'><span class='label'>$display_size</span></div>";
+    }
+  }
+
   public function attachment_editor($form_fields, $post)
   {
       $url = $this->getMediaReplaceURL($post->ID);
-
-    	$action = "media_replace";
+      $action = "media_replace";
       $editurl = wp_nonce_url( $url, $action );
 
-    	/* Unneeded - admin_url already checks for force_ssl_admin ( in set_scheme function )
-    	if (FORCE_SSL_ADMIN) {
-    		$editurl = str_replace("http:", "https:", $editurl);
-    	} */
-    	$link = "href=\"$editurl\"";
-    	$form_fields["enable-media-replace"] = array(
+      $link = "href=\"$editurl\"";
+      $form_fields["enable-media-replace"] = array(
               "label" => esc_html__("Replace media", "enable-media-replace"),
               "input" => "html",
               "html" => "<p><a class='button-secondary' $link>" . esc_html__("Upload a new file", "enable-media-replace") . "</a></p>", "helps" => esc_html__("To replace the current file, click the link and upload a replacement.", "enable-media-replace")
             );
-
-    	return $form_fields;
+      return $form_fields;
   }
 
   /**
@@ -266,8 +313,15 @@ class EnableMediaReplacePlugin
   *   @param $post Obj Post Object
   */
   function admin_date_replaced_media_on_edit_media_screen($post) {
-  	$post_id = $post->ID;
 
+    // Fallback for before version 4.9, doens't pass post.
+    if (! is_object($post))
+      global $post;
+
+    if (! is_object($post)) // try to global, if it doesn't work - return.
+      return false;
+
+    $post_id = $post->ID;
   	if ( $post->post_modified == $post->post_date ) {
   		return;
   	}
@@ -279,6 +333,18 @@ class EnableMediaReplacePlugin
   		<span id="timestamp"><?php echo esc_html__( 'Revised', 'enable-media-replace' ); ?>: <b><?php echo $modified; ?></b></span>
   	</div>
   	<?php
+  }
+
+  /** When an image is just replaced, it can stuck in the browser cache making a look like it was not replaced. Try
+  * undo that effect by adding a timestamp to the query string */
+  public function attempt_uncache_image($image, $attachment_id, $size, $icon)
+  {
+    if ($image === false)
+      return $image;
+
+      // array with image src on 0
+      $image[0] = add_query_arg('time', time(), $image[0]);
+      return $image;
   }
 
   /**

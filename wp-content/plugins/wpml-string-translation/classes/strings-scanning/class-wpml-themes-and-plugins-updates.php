@@ -17,25 +17,18 @@ class WPML_ST_Themes_And_Plugins_Updates {
 	private $settings;
 
 	/**
-	 * @var WPML_ST_Fastest_Settings_Notice
-	 */
-	private $fastest_settings_notice;
-
-	/**
 	 * WPML_ST_Admin_Notices constructor.
 	 *
 	 * @param WPML_Notices                        $admin_notices
 	 * @param WPML_ST_Themes_And_Plugins_Settings $settings
 	 */
-	public function __construct( WPML_Notices $admin_notices, WPML_ST_Themes_And_Plugins_Settings $settings, WPML_ST_Fastest_Settings_Notice $fastest_settings ) {
+	public function __construct( WPML_Notices $admin_notices, WPML_ST_Themes_And_Plugins_Settings $settings ) {
 		$this->admin_notices           = $admin_notices;
 		$this->settings                = $settings;
-		$this->fastest_settings_notice = $fastest_settings;
 	}
 
 	public function init_hooks() {
 		add_action( 'upgrader_process_complete', array( $this, 'store_mo_file_update' ), 10, 2 );
-		add_action( 'init', array( $this, 'handle_fastest_settings_notice' ), 10, 2 );
 	}
 
 	public function data_is_valid( $thing ) {
@@ -72,13 +65,5 @@ class WPML_ST_Themes_And_Plugins_Updates {
 				update_option( self::WPML_WP_UPDATED_MO_FILES, $last_update, false );
 			}
 		}
-	}
-
-	public function handle_fastest_settings_notice() {
-		$this->fastest_settings_notice->add();
-	}
-
-	public function remove_fastest_settings_notice() {
-		$this->fastest_settings_notice->remove();
 	}
 }

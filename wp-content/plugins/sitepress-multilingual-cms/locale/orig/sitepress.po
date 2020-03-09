@@ -13,90 +13,6 @@ msgstr ""
 "Language:en\n"
 "MIME-Version: 1.0\n"
 
-# //success
-# $ret['success'] = sprintf(__('WPML will work on your site, but you will not receive updates. WPML updates are essential for keeping your site running smoothly and secure. To receive automated updates, you need to complete the registration, in the %splugins admin%s page.', 'sitepress'),
-# '<a href="' . admin_url('plugin-install.php?tab=commercial') . '">', '</a>');
-
-msgid "WPML will work on your site, but you will not receive updates. WPML updates are essential for keeping your site running smoothly and secure. To receive automated updates, you need to complete the registration, in the %splugins admin%s page."
-msgstr ""
-
-# if(empty($_POST['installer_site_key'])){
-# $ret['error'] = __('Missing site key.');
-# }else{
-
-msgid "Missing site key."
-msgstr ""
-
-# //success
-# $ret['success'] = __('Thank you for registering WPML on this site. You will receive automatic updates when new versions are available.', 'sitepress');
-# }
-
-msgid "Thank you for registering WPML on this site. You will receive automatic updates when new versions are available."
-msgstr ""
-
-# if(1 == count($iclsettings['hidden_languages'])){
-# $out = sprintf(__('%s is currently hidden to visitors.', 'sitepress'),
-# $active_languages[$iclsettings['hidden_languages'][0]]['display_name']);
-
-msgid "%s is currently hidden to visitors."
-msgstr ""
-
-# $hlangs = join(', ', $_hlngs);
-# $out = sprintf(__('%s are currently hidden to visitors.', 'sitepress'), $hlangs);
-# }
-
-msgid "%s are currently hidden to visitors."
-msgstr ""
-
-# }
-# $out .= ' ' . sprintf(__('You can enable its/their display for yourself, in your <a href="%s">profile page</a>.', 'sitepress'),
-# 'profile.php#wpml');
-
-msgid "You can enable its/their display for yourself, in your <a href=\"%s\">profile page</a>."
-msgstr ""
-
-# } else {
-# $out = __('All languages are currently displayed.', 'sitepress');
-# }
-
-msgid "All languages are currently displayed."
-msgstr ""
-
-# echo '<span style="color:#FF0000;">'
-# . __( 'Error: No custom field', 'sitepress' ) . '</span>';
-# die();
-
-msgid "Error: No custom field"
-msgstr ""
-
-# echo '<span style="color:#FF0000;">'
-# . __( 'Error: Please provide translation action', 'sitepress' ) . '</span>';
-# die();
-
-msgid "Error: Please provide translation action"
-msgstr ""
-
-# $iclTranslationManagement->save_settings();
-# echo '<strong><em>' . __( 'Settings updated', 'sitepress' ) . '</em></strong>';
-# } else {
-
-msgid "Settings updated"
-msgstr ""
-
-# echo '<span style="color:#FF0000;">'
-# . __( 'Error: WPML Translation Management plugin not initiated', 'sitepress' )
-# . '</span>';
-
-msgid "Error: WPML Translation Management plugin not initiated"
-msgstr ""
-
-# echo '<span style="color:#FF0000;">'
-# . __( 'Error: Please activate WPML Translation Management plugin', 'sitepress' )
-# . '</span>';
-
-msgid "Error: Please activate WPML Translation Management plugin"
-msgstr ""
-
 # } else {
 # wp_send_json_error( esc_html__( 'Invalid request!', 'sitepress' ) );
 # }
@@ -158,29 +74,6 @@ msgstr ""
 # $menu->set_menu_title( __( 'Debug information', 'sitepress' ) );
 
 msgid "Debug information"
-msgstr ""
-
-# 'icl_duplicate_message' => $success,
-# 'icl_duplicate_fail'    => __( 'Unable to remove relationship!', 'sitepress' ),
-# );
-
-msgid "Unable to remove relationship!"
-msgstr ""
-
-# public function localize_scripts() {
-# $success = _x( 'You are updating a duplicate post.', '1/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
-# $success .= _x( 'To not lose your changes, WPML will set this post to be translated independently.', '2/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
-
-msgctxt "1/2 Confirm to make duplicated translations independent"
-msgid "You are updating a duplicate post."
-msgstr ""
-
-# $success = _x( 'You are updating a duplicate post.', '1/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
-# $success .= _x( 'To not lose your changes, WPML will set this post to be translated independently.', '2/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
-# $duplicate_data = array(
-
-msgctxt "2/2 Confirm to make duplicated translations independent"
-msgid "To not lose your changes, WPML will set this post to be translated independently."
 msgstr ""
 
 # echo '<h3>' . esc_html__( 'WPML', 'sitepress' ) . '</h3>';
@@ -260,20 +153,6 @@ msgstr ""
 msgid "Read how this works"
 msgstr ""
 
-# 'endpoint' => $endpoint,
-# 'confirm_button_label' => esc_attr__( 'Continue', 'sitepress' ),
-# );
-
-msgid "Continue"
-msgstr ""
-
-# 
-# $button = sprintf( $button, esc_html__( 'How to translate', 'sitepress' ) );
-# 
-
-msgid "How to translate"
-msgstr ""
-
 # $text = $twig_service->show(array(
 # 'header' => __( 'Need help with how to translate?', 'sitepress' ),
 # 'content_1' => __( 'Get personalized instructions for translating this site. You will also have access to WPML-users support.', 'sitepress' ),
@@ -307,6 +186,20 @@ msgstr ""
 # ), 'notice.twig');
 
 msgid "We are sending you to WPML.org to see your personalized translation instructions. If you need to access these instructions again, click on the \"How to translate\" button in the list of pages or in WPML's Translation Dashboard."
+msgstr ""
+
+# 'endpoint' => $endpoint,
+# 'confirm_button_label' => esc_attr__( 'Continue', 'sitepress' ),
+# );
+
+msgid "Continue"
+msgstr ""
+
+# 
+# $button = sprintf( $button, esc_html__( 'How to translate', 'sitepress' ) );
+# 
+
+msgid "How to translate"
 msgstr ""
 
 # 'url'    => $url,
@@ -1169,27 +1062,6 @@ msgstr ""
 msgid "WordPress language file (.mo) is missing. Keeping existing display language."
 msgstr ""
 
-# <p>
-# <?php esc_html_e( 'WPML needs to set languages to existing media in your site.', 'sitepress' ) ?>
-# <a href="<?php echo $settings_page ?>"
-
-msgid "WPML needs to set languages to existing media in your site."
-msgstr ""
-
-# <a href="<?php echo $settings_page ?>"
-# class="button-secondary"><?php esc_html_e( 'Set media languages', 'sitepress' ) ?></a>
-# 
-
-msgid "Set media languages"
-msgstr ""
-
-# onclick="<?php echo $onclick_js; ?> ">
-# <span class="screen-reader-text"><?php esc_html_e( "Dismiss", 'sitepress' ) ?></span>
-# </span>
-
-msgid "Dismiss"
-msgstr ""
-
 # if ( $response['left'] ) {
 # $response['message'] = sprintf( __( 'Duplicating featured images. %d left', 'sitepress' ), $response['left'] );
 # } else {
@@ -1260,6 +1132,34 @@ msgstr ""
 msgid "Translating media: done!"
 msgstr ""
 
+# public function mcsetup_navigation_links( array $mcsetup_sections ) {
+# $mcsetup_sections[ self::ID ] = esc_html__( 'Media Translation', 'sitepress' );
+# 
+
+msgid "Media Translation"
+msgstr ""
+
+# <p>
+# <?php esc_html_e( 'WPML needs to set languages to existing media in your site.', 'sitepress' ) ?>
+# <a href="<?php echo $settings_page ?>"
+
+msgid "WPML needs to set languages to existing media in your site."
+msgstr ""
+
+# <a href="<?php echo $settings_page ?>"
+# class="button-secondary"><?php esc_html_e( 'Set media languages', 'sitepress' ) ?></a>
+# 
+
+msgid "Set media languages"
+msgstr ""
+
+# onclick="<?php echo $onclick_js; ?> ">
+# <span class="screen-reader-text"><?php esc_html_e( "Dismiss", 'sitepress' ) ?></span>
+# </span>
+
+msgid "Dismiss"
+msgstr ""
+
 # <td align="right">
 # <input class="button-primary" name="start" type="submit" value="<?php esc_attr_e('Start', 'sitepress'); ?> &raquo;"/>
 # </td>
@@ -1272,13 +1172,6 @@ msgstr ""
 # </td>
 
 msgid "Apply"
-msgstr ""
-
-# <div class="wpml-section-header">
-# <h3><?php esc_html_e('Media Translation', 'sitepress'); ?></h3>
-# </div>
-
-msgid "Media Translation"
 msgstr ""
 
 # 
@@ -1626,6 +1519,20 @@ msgstr ""
 msgid "Default admin language (currently %s)"
 msgstr ""
 
+# if ( 1 === count( $hidden_languages ) ) {
+# echo esc_html( sprintf( __( '%s is currently hidden to visitors.', 'sitepress' ), $this->all_languages[ end( $hidden_languages ) ]['display_name'] ) );
+# } else {
+
+msgid "%s is currently hidden to visitors."
+msgstr ""
+
+# $hidden_languages = implode( ', ', $hidden_languages_array );
+# echo esc_html( sprintf( __( '%s are currently hidden to visitors.', 'sitepress' ), $hidden_languages ) );
+# }
+
+msgid "%s are currently hidden to visitors."
+msgstr ""
+
 # <tr class="user-language-wrap">
 # <th colspan="2"><h3><a name="wpml"></a><?php esc_html_e( 'WPML language settings', 'sitepress' ); ?></h3></th>
 # </tr>
@@ -1923,6 +1830,20 @@ msgctxt "Used before the last element of a three or more elements list"
 msgid ", and"
 msgstr ""
 
+# '<li>' .
+# __( 'This will be the last version of WPML which works with the currently installed PHP version', 'sitepress' ) .
+# '</li>' .
+
+msgid "This will be the last version of WPML which works with the currently installed PHP version"
+msgstr ""
+
+# '<li>' .
+# __( 'This version of WPML will only receive security fixes for the next 12 months', 'sitepress' ) .
+# '</li>';
+
+msgid "This version of WPML will only receive security fixes for the next 12 months"
+msgstr ""
+
 # foreach ( array( 1, 10 ) as $priority ) {
 # $label    = __( 'As early as possible', 'sitepress' );
 # if ( $priority > 1 ) {
@@ -1987,14 +1908,14 @@ msgid "Version"
 msgstr ""
 
 # 'messages'   => array(
-# __( 'PHP 5.6 and above are recommended. PHP 5.3 is the minimum requirement.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
-# __( 'Find how you can update PHP.', 'sitepress' )                                           => 'http://www.wpupdatephp.com/update/',
+# sprintf( __( 'PHP %1$s and above are recommended. PHP %2$s is the minimum requirement.', 'sitepress' ), $minimum_recommended_php_version, $minimum_required_php_version ) => 'https://wpml.org/home/minimum-requirements/',
+# __( 'Find how you can update PHP.', 'sitepress' )                                                                                                                         => 'http://www.wpupdatephp.com/update/',
 
-msgid "PHP 5.6 and above are recommended. PHP 5.3 is the minimum requirement."
+msgid "PHP %1$s and above are recommended. PHP %2$s is the minimum requirement."
 msgstr ""
 
-# __( 'PHP 5.6 and above are recommended. PHP 5.3 is the minimum requirement.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
-# __( 'Find how you can update PHP.', 'sitepress' )                                           => 'http://www.wpupdatephp.com/update/',
+# sprintf( __( 'PHP %1$s and above are recommended. PHP %2$s is the minimum requirement.', 'sitepress' ), $minimum_recommended_php_version, $minimum_required_php_version ) => 'https://wpml.org/home/minimum-requirements/',
+# __( 'Find how you can update PHP.', 'sitepress' )                                                                                                                         => 'http://www.wpupdatephp.com/update/',
 # ),
 
 msgid "Find how you can update PHP."
@@ -2008,10 +1929,10 @@ msgid "Memory limit"
 msgstr ""
 
 # 'messages' => array(
-# __( 'A memory limit of at least 128MB is required.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
+# sprintf( __( 'A memory limit of at least %s is required.', 'sitepress' ), $minimum_required_memory ) => 'https://wpml.org/home/minimum-requirements/',
 # ),
 
-msgid "A memory limit of at least 128MB is required."
+msgid "A memory limit of at least %s is required."
 msgstr ""
 
 # 'memory_usage'       => array(
@@ -2084,6 +2005,13 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+# 'messages' => array(
+# __( 'A memory limit of at least 128MB is required.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
+# ),
+
+msgid "A memory limit of at least 128MB is required."
+msgstr ""
+
 # 'max_memory_limit' => array(
 # 'label'    => __( 'Max memory limit', 'sitepress' ),
 # 'value'    => $this->support_info->get_wp_max_memory_limit(),
@@ -2140,14 +2068,14 @@ msgstr ""
 msgid " %s translation"
 msgstr ""
 
-# if ( false !== strpos( $e->getMessage(), 'create' ) ) {
+# /* translators: %s: Cache directory path */
 # $text = sprintf( __( 'WPML could not create a cache directory in %s', 'sitepress' ), $this->cache_directory );
 # } else {
 
 msgid "WPML could not create a cache directory in %s"
 msgstr ""
 
-# } else {
+# /* translators: %s: Cache directory path */
 # $text = sprintf( __( 'WPML could not write in the cache directory: %s', 'sitepress' ), $this->cache_directory );
 # }
 
@@ -2156,37 +2084,9 @@ msgstr ""
 
 # 'nonce_value' => wp_create_nonce( WPML_Theme_Plugin_Localization_Options_Ajax::NONCE_LOCALIZATION_OPTIONS ),
 # 'section_label' => __( 'Localization options', 'sitepress' ),
-# 'top_title' => __( 'How to translate strings in themes and plugins?', 'sitepress' ),
+# 'top_options'   => array(
 
 msgid "Localization options"
-msgstr ""
-
-# 'section_label' => __( 'Localization options', 'sitepress' ),
-# 'top_title' => __( 'How to translate strings in themes and plugins?', 'sitepress' ),
-# 'top_options' => array(
-
-msgid "How to translate strings in themes and plugins?"
-msgstr ""
-
-# 'value' => WPML_Theme_Localization_Type::USE_ST_AND_NO_MO_FILES,
-# 'label' => __( "Translate themes and plugins using WPML's String Translation only (don't load .mo files)", 'sitepress' ),
-# 'checked' => checked( $this->sitepress->get_setting( 'theme_localization_type' ), WPML_Theme_Localization_Type::USE_ST_AND_NO_MO_FILES, false ),
-
-msgid "Translate themes and plugins using WPML's String Translation only (don't load .mo files)"
-msgstr ""
-
-# 'value' => WPML_Theme_Localization_Type::USE_ST,
-# 'label' => __( "Translate themes and plugins using WPML's String Translation and always load .mo files as backup", 'sitepress' ),
-# 'checked' => checked( $this->sitepress->get_setting( 'theme_localization_type' ), WPML_Theme_Localization_Type::USE_ST, false ),
-
-msgid "Translate themes and plugins using WPML's String Translation and always load .mo files as backup"
-msgstr ""
-
-# 'value' => WPML_Theme_Localization_Type::USE_MO_FILES,
-# 'label' => __( "Don't use String Translation to translate themes and plugins", 'sitepress' ),
-# 'checked' => checked( $this->sitepress->get_setting( 'theme_localization_type' ), WPML_Theme_Localization_Type::USE_MO_FILES, false ),
-
-msgid "Don't use String Translation to translate themes and plugins"
 msgstr ""
 
 # 'value' => 1,
@@ -2196,14 +2096,14 @@ msgstr ""
 msgid "Automatically load the theme's .mo file using 'load_theme_textdomain'"
 msgstr ""
 
-# 'value' => $this->sitepress->get_setting( 'gettext_theme_domain_name' ) ? $this->sitepress->get_setting( 'gettext_theme_domain_name' ) : '',
+# 'value' => $this->sitepress->get_setting( 'gettext_theme_domain_name', '' ),
 # 'label' => __( 'Enter textdomain:', 'sitepress' ),
 # ),
 
 msgid "Enter textdomain:"
 msgstr ""
 
-# 'st_active' => defined( 'WPML_ST_VERSION' ),
+# 'button_label' => __( 'Save', 'sitepress' ),
 # 'scanning_progress_msg' => __( "Scanning now, please don't close this page.", 'sitepress' ),
 # 'scanning_results_title' => __( 'Scanning Results', 'sitepress' ),
 
@@ -3085,6 +2985,20 @@ msgstr ""
 msgid "n/a"
 msgstr ""
 
+# <input id="wpml_fix_tables_collation" type="button" class="button-secondary"
+# value="<?php _e( 'Fix WPML tables collation', 'sitepress' ) ?>"/><br/>
+# <?php wp_nonce_field( self::AJAX_ACTION, 'wpml-fix-tables-collation-nonce' ); ?>
+
+msgid "Fix WPML tables collation"
+msgstr ""
+
+# <?php wp_nonce_field( self::AJAX_ACTION, 'wpml-fix-tables-collation-nonce' ); ?>
+# <small style="margin-left:10px;"><?php esc_attr_e( 'Fixes the collation of WPML tables in order to match the collation of default WP tables.', 'sitepress' ) ?></small>
+# </p>
+
+msgid "Fixes the collation of WPML tables in order to match the collation of default WP tables."
+msgstr ""
+
 # if ( ! $response ) {
 # wp_send_json_error( array( 'message' => esc_html__( 'Invalid nonce.', 'sitepress' ) ) );
 # return $response;
@@ -3340,20 +3254,20 @@ msgid "Display on language:"
 msgstr ""
 
 # $this->model['strings'] = array(
-# 'back' => __( '<<< Back', 'sitepress' ),
-# 'next' => __( 'Next >>>', 'sitepress' ),
+# 'back'     => __( '<<< Back', 'sitepress' ),
+# 'next'     => __( 'Next >>>', 'sitepress' ),
 
 msgid "<<< Back"
 msgstr ""
 
-# 'back' => __( '<<< Back', 'sitepress' ),
-# 'next' => __( 'Next >>>', 'sitepress' ),
+# 'back'     => __( '<<< Back', 'sitepress' ),
+# 'next'     => __( 'Next >>>', 'sitepress' ),
 # 'finished' => __( 'Finished', 'sitepress' ),
 
 msgid "Next >>>"
 msgstr ""
 
-# 'next' => __( 'Next >>>', 'sitepress' ),
+# 'next'     => __( 'Next >>>', 'sitepress' ),
 # 'finished' => __( 'Finished', 'sitepress' ),
 # );
 
@@ -3430,6 +3344,29 @@ msgstr ""
 msgid "Clear log"
 msgstr ""
 
+# 'icl_duplicate_message' => $success,
+# 'icl_duplicate_fail'    => __( 'Unable to remove relationship!', 'sitepress' ),
+# );
+
+msgid "Unable to remove relationship!"
+msgstr ""
+
+# public function localize_scripts() {
+# $success = _x( 'You are updating a duplicate post.', '1/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
+# $success .= _x( 'To not lose your changes, WPML will set this post to be translated independently.', '2/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
+
+msgctxt "1/2 Confirm to make duplicated translations independent"
+msgid "You are updating a duplicate post."
+msgstr ""
+
+# $success = _x( 'You are updating a duplicate post.', '1/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
+# $success .= _x( 'To not lose your changes, WPML will set this post to be translated independently.', '2/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
+# $duplicate_data = array(
+
+msgctxt "2/2 Confirm to make duplicated translations independent"
+msgid "To not lose your changes, WPML will set this post to be translated independently."
+msgstr ""
+
 # private function get_message() {
 # $msg = esc_html_x(
 # 'You are using DIVI theme, and you have chosen to use the standard editor for translating content.',
@@ -3473,6 +3410,335 @@ msgstr ""
 # foreach ( $languages as $l ) {
 
 msgid "This post is also available in: "
+msgstr ""
+
+# && $post->ID == $root_id ) ) {
+# _e ( "This page does not have a language since it's the site's root page." );
+# echo '<input type="hidden" name="_wpml_root_page" value="1" />';
+
+msgid "This page does not have a language since it's the site's root page."
+msgstr ""
+
+# /* general string translation */
+# $translation_priority_default = __( 'Optional', 'sitepress' );
+# $table_name = $wpdb->prefix . 'icl_strings';
+
+msgid "Optional"
+msgstr ""
+
+# $sitepress->switch_locale ( $lang_code );
+# $tr_cat = __ ( 'Uncategorized', 'sitepress' );
+# $tr_cat = $tr_cat === 'Uncategorized' && $lang_code !== 'en' ? 'Uncategorized @' . $lang_code : $tr_cat;
+
+msgid "Uncategorized"
+msgstr ""
+
+# if ( ! $batch_data || ! isset( $batch_data->batch_name ) ) {
+# $batch_name = __( 'No Batch', 'sitepress' );
+# } else {
+
+msgid "No Batch"
+msgstr ""
+
+# $project->translator_contact_iframe_url( $translator_id ), array(
+# 'title'     => __( 'Contact the translator', 'sitepress' ),
+# 'unload_cb' => 'icl_thickbox_refresh',
+
+msgid "Contact the translator"
+msgstr ""
+
+# case ICL_TM_NOT_TRANSLATED:
+# $text = __( 'Not translated', 'sitepress' );
+# break;
+
+msgid "Not translated"
+msgstr ""
+
+# case ICL_TM_WAITING_FOR_TRANSLATOR:
+# $text = __( 'Waiting for translator', 'sitepress' );
+# break;
+
+msgid "Waiting for translator"
+msgstr ""
+
+# case ICL_TM_IN_PROGRESS:
+# $text = __( 'In progress', 'sitepress' );
+# break;
+
+msgid "In progress"
+msgstr ""
+
+# case ICL_TM_NEEDS_UPDATE:
+# $text = __( 'Needs update', 'sitepress' );
+# break;
+
+msgid "Needs update"
+msgstr ""
+
+# case ICL_TM_DUPLICATE:
+# $text = __( 'Duplicate', 'sitepress' );
+# break;
+
+msgid "Duplicate"
+msgstr ""
+
+# case ICL_TM_COMPLETE:
+# $text = __( 'Complete', 'sitepress' );
+# break;
+
+msgid "Complete"
+msgstr ""
+
+# case ICL_TM_TRANSLATION_READY_TO_DOWNLOAD:
+# $text = __( 'Translation ready to download', 'sitepress' );
+# break;
+
+msgid "Translation ready to download"
+msgstr ""
+
+# } else {
+# $error = sprintf( __( 'Translation entry not found for: %d', 'sitepress' ), $job_id );
+# }
+
+msgid "Translation entry not found for: %d"
+msgstr ""
+
+# if ( ! $error ) {
+# $message = __( 'Job removed', 'sitepress' );
+# }
+
+msgid "Job removed"
+msgstr ""
+
+# if ( $needs_update ) {
+# $job_status_text .= __( ' - (needs update)', 'sitepress' );
+# }
+
+msgid " - (needs update)"
+msgstr ""
+
+# 'type' => 'updated',
+# 'text' => __( 'Preferences saved.', 'sitepress' ),
+# );
+
+msgid "Preferences saved."
+msgstr ""
+
+# $this->cancel_translation_request( $data['icl_translation_id'] );
+# $message['text'] = __( 'Translation requests cancelled.', 'sitepress' );
+# } else {
+
+msgid "Translation requests cancelled."
+msgstr ""
+
+# } else {
+# $message['text'] = __( 'No Translation requests selected.', 'sitepress' );
+# }
+
+msgid "No Translation requests selected."
+msgstr ""
+
+# if ( icl_st_is_registered_string( $es_context, $name ) ) {
+# $edit_link = '[<a href="' . admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&context=' . esc_html( $es_context ) ) . '">' . esc_html__( 'translate', 'sitepress' ) . '</a>]';
+# } else {
+
+msgid "translate"
+msgstr ""
+
+# } else {
+# $edit_link = '<div class="updated below-h2">' . esc_html__( 'string not registered', 'sitepress' ) . '</div>';
+# }
+
+msgid "string not registered"
+msgstr ""
+
+# if ( false !== strpos( $name, '*' ) ) {
+# $o_value = '<span style="color:#bbb">{{ ' . esc_html__( 'Multiple options', 'sitepress' ) . ' }}</span>';
+# } else {
+
+msgid "Multiple options"
+msgstr ""
+
+# if ( ! icl_st_is_registered_string( $es_context, $name ) ) {
+# $notice = '<div class="updated below-h2">' . esc_html__( 'some strings might be not registered', 'sitepress' ) . '</div>';
+# echo $notice;
+
+msgid "some strings might be not registered"
+msgstr ""
+
+# 
+# return array('message' => __('Processing translations...', 'sitepress'));
+# break;
+
+msgid "Processing translations..."
+msgstr ""
+
+# }
+# $message = $processing ? __('Processing translations...', 'sitepress') : __('Finalizing upgrade...', 'sitepress');
+# return array('message' => $message);
+
+msgid "Finalizing upgrade..."
+msgstr ""
+
+# delete_option('icl_temp_upgrade_data');
+# return array('message' => __('Done', 'sitepress'), 'completed' => 1);
+# break;
+
+msgid "Done"
+msgstr ""
+
+# default:
+# return array('error' => __('Missing step', 'sitepress'), 'stop' => 1);
+# }
+
+msgid "Missing step"
+msgstr ""
+
+# $link = 'index.php?icl_ajx_action=' . $ajax_action . '&nonce=' . $ajax_action_none;
+# $txt = get_option('icl_temp_upgrade_data', FALSE) ? __('Resume Upgrade Process', 'sitepress') : __('Run Upgrade Process', 'sitepress');
+# echo '<div class="message error" id="icl-migrate"><p><strong>'.__('WPML requires database upgrade', 'sitepress').'</strong></p>'
+
+msgid "Resume Upgrade Process"
+msgstr ""
+
+# $link = 'index.php?icl_ajx_action=' . $ajax_action . '&nonce=' . $ajax_action_none;
+# $txt = get_option('icl_temp_upgrade_data', FALSE) ? __('Resume Upgrade Process', 'sitepress') : __('Run Upgrade Process', 'sitepress');
+# echo '<div class="message error" id="icl-migrate"><p><strong>'.__('WPML requires database upgrade', 'sitepress').'</strong></p>'
+
+msgid "Run Upgrade Process"
+msgstr ""
+
+# $txt = get_option('icl_temp_upgrade_data', FALSE) ? __('Resume Upgrade Process', 'sitepress') : __('Run Upgrade Process', 'sitepress');
+# echo '<div class="message error" id="icl-migrate"><p><strong>'.__('WPML requires database upgrade', 'sitepress').'</strong></p>'
+# .'<p>' . __('This normally takes a few seconds, but may last up to several minutes of very large databases.', 'sitepress') . '</p>'
+
+msgid "WPML requires database upgrade"
+msgstr ""
+
+# echo '<div class="message error" id="icl-migrate"><p><strong>'.__('WPML requires database upgrade', 'sitepress').'</strong></p>'
+# .'<p>' . __('This normally takes a few seconds, but may last up to several minutes of very large databases.', 'sitepress') . '</p>'
+# . '<p><a href="' . $link . '" style="" id="icl-migrate-start">' . $txt . '</a></p>'
+
+msgid "This normally takes a few seconds, but may last up to several minutes of very large databases."
+msgstr ""
+
+# $stop = 0;
+# $message = __('Starting the upgrade process...', 'sitepress');
+# include_once WPML_PLUGIN_PATH . '/inc/upgrade-functions/2.0.0/stepper.php';
+
+msgid "Starting the upgrade process..."
+msgstr ""
+
+# 'step' => $migration->getNextStep(),
+# 'message' => __('Creating new tables...', 'sitepress'),
+# 'stop' => $stop,
+
+msgid "Creating new tables..."
+msgstr ""
+
+# $output .= sprintf (
+# __ ( 'HTTP code: %s (%s)', 'sitepress' ),
+# $response[ 'response' ][ 'code' ],
+
+msgid "HTTP code: %s (%s)"
+msgstr ""
+
+# $menu['order']      = 700;
+# $menu['page_title'] = __( 'WP Menus Sync', 'sitepress' );
+# $menu['menu_title'] = __( 'WP Menus Sync', 'sitepress' );
+
+msgid "WP Menus Sync"
+msgstr ""
+
+# $langsel .= '<div class="icl_nav_menu_text" style="float:right;">';
+# $langsel .= __('Translations:', 'sitepress');
+# foreach($sitepress->get_active_languages() as $lang){
+
+msgid "Translations:"
+msgstr ""
+
+# $menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id=%d", $this->current_menu['translations'][ $lang['code'] ]->element_id ) );
+# $label   = __( 'edit translation', 'sitepress' );
+# $tr_link = '<a style="text-decoration:none" title="' . esc_attr( $label ) . '" href="' . admin_url( 'nav-menus.php' ) .
+
+msgid "edit translation"
+msgstr ""
+
+# } else {
+# $label   = __( 'add translation', 'sitepress' );
+# $tr_link = '<a style="text-decoration:none" title="' . esc_attr( $label ) . '" href="' . admin_url( 'nav-menus.php' ) .
+
+msgid "add translation"
+msgstr ""
+
+# $langsel .= '<div class="icl_nav_menu_text" style="float:right; clear:right">';
+# $langsel .= '<div><a href="'.admin_url('admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php').'">' . __('Synchronize menus between languages.', 'sitepress') . '</a></div>';
+# $langsel .= '</div>';
+
+msgid "Synchronize menus between languages."
+msgstr ""
+
+# $disabled = empty( $this->current_menu['id'] ) && isset( $_GET['trid'] ) ? ' disabled="disabled"' : '';
+# $out .= '<label class="menu-name-label howto"><span>' . __( 'Translation of', 'sitepress' ) . '</span>&nbsp;';
+# $out .= '<select name="icl_translation_of" id="icl_menu_translation_of"' . $disabled . '>';
+
+msgid "Translation of"
+msgstr ""
+
+# $out .= '<select name="icl_translation_of" id="icl_menu_translation_of"' . $disabled . '>';
+# $out .= '<option value="none">--' . __( 'none', 'sitepress' ) . '--</option>';
+# foreach ( $menus as $mtrid => $m ) {
+
+msgid "none"
+msgstr ""
+
+# if (location_menu_id.length > 0) {
+# location_menu_id.find('option').first().html('<?php echo esc_js( __( 'not translated in current language', 'sitepress' ) ) ?>');
+# location_menu_id.css('font-style', 'italic');
+
+msgid "not translated in current language"
+msgstr ""
+
+# {
+# echo '<div class="updated"><p>' . esc_html__( 'Menu(s) syncing complete.', 'sitepress' ) . '</p></div>';
+# }
+
+msgid "Menu(s) syncing complete."
+msgstr ""
+
+# $response = array(
+# 'label' => esc_html__( 'Translate menu strings and URLs for:', 'sitepress' ),
+# 'items' => $menu_links,
+
+msgid "Translate menu strings and URLs for:"
+msgstr ""
+
+# if ( $lang_code === $default_language ) {
+# esc_html_e( 'Menu Option: auto_add', 'sitepress' );
+# continue;
+
+msgid "Menu Option: auto_add"
+msgstr ""
+
+# echo '<p>';
+# esc_html_e( "Your menu includes custom items, which you need to translate using WPML's String Translation.", 'sitepress' );
+# echo '<br/>';
+
+msgid "Your menu includes custom items, which you need to translate using WPML's String Translation."
+msgstr ""
+
+# echo '<br/>';
+# esc_html_e( '1. Translate these strings: ', 'sitepress' );
+# $i = 0;
+
+msgid "1. Translate these strings: "
+msgstr ""
+
+# echo '<br/>';
+# esc_html_e( "2. When you're done translating, return here and run the menu synchronization again. This will use the strings that you translated to update the menus.", 'sitepress' );
+# echo '</p>';
+
+msgid "2. When you're done translating, return here and run the menu synchronization again. This will use the strings that you translated to update the menus."
 msgstr ""
 
 # WPML_PLUGIN_FOLDER . '/menu/network.php',
@@ -3594,13 +3860,6 @@ msgstr ""
 msgid "Remove all messages and notifications, for all users."
 msgstr ""
 
-# self::save_messages( array() );
-# echo wp_json_encode( array( 'errors' => 0, 'message' => __( 'Done', 'sitepress' ), 'cont' => 0, 'reload' => 1 ) );
-# die();
-
-msgid "Done"
-msgstr ""
-
 # ?>
 # <h4><?php _e( 'Messages and notifications', 'sitepress' ) ?></h4>
 # <?php
@@ -3641,27 +3900,6 @@ msgstr ""
 # echo '<ul style="list-style:disc;margin-left:20px;">';
 
 msgid "These plugins are known to have compatibiliy issues with WPML:"
-msgstr ""
-
-# && $post->ID == $root_id ) ) {
-# _e ( "This page does not have a language since it's the site's root page." );
-# echo '<input type="hidden" name="_wpml_root_page" value="1" />';
-
-msgid "This page does not have a language since it's the site's root page."
-msgstr ""
-
-# /* general string translation */
-# $translation_priority_default = __( 'Optional', 'sitepress' );
-# $table_name = $wpdb->prefix . 'icl_strings';
-
-msgid "Optional"
-msgstr ""
-
-# $sitepress->switch_locale ( $lang_code );
-# $tr_cat = __ ( 'Uncategorized', 'sitepress' );
-# $tr_cat = $tr_cat === 'Uncategorized' && $lang_code !== 'en' ? 'Uncategorized @' . $lang_code : $tr_cat;
-
-msgid "Uncategorized"
 msgstr ""
 
 # $capabilities = array(
@@ -3888,312 +4126,11 @@ msgstr ""
 msgid "%s is not translated. %sClick here to make this post type translatable.%s"
 msgstr ""
 
-# if ( ! $batch_data || ! isset( $batch_data->batch_name ) ) {
-# $batch_name = __( 'No Batch', 'sitepress' );
-# } else {
-
-msgid "No Batch"
-msgstr ""
-
-# $translator_edit_link =
-# TranslationProxy_Popup::get_link( $project->translator_contact_iframe_url( $translator_id ), array( 'title' => __( 'Contact the translator', 'sitepress' ), 'unload_cb' => 'icl_thickbox_refresh' ) )
-# . esc_html( TranslationProxy_Translator::get_translator_name( $translator_id ) )
-
-msgid "Contact the translator"
-msgstr ""
-
-# case ICL_TM_NOT_TRANSLATED:
-# $text = __( 'Not translated', 'sitepress' );
-# break;
-
-msgid "Not translated"
-msgstr ""
-
-# case ICL_TM_WAITING_FOR_TRANSLATOR:
-# $text = __( 'Waiting for translator', 'sitepress' );
-# break;
-
-msgid "Waiting for translator"
-msgstr ""
-
-# case ICL_TM_IN_PROGRESS:
-# $text = __( 'In progress', 'sitepress' );
-# break;
-
-msgid "In progress"
-msgstr ""
-
-# case ICL_TM_NEEDS_UPDATE:
-# $text = __( 'Needs update', 'sitepress' );
-# break;
-
-msgid "Needs update"
-msgstr ""
-
-# case ICL_TM_DUPLICATE:
-# $text = __( 'Duplicate', 'sitepress' );
-# break;
-
-msgid "Duplicate"
-msgstr ""
-
-# case ICL_TM_COMPLETE:
-# $text = __( 'Complete', 'sitepress' );
-# break;
-
-msgid "Complete"
-msgstr ""
-
-# case ICL_TM_TRANSLATION_READY_TO_DOWNLOAD:
-# $text = __( 'Translation ready to download', 'sitepress' );
-# break;
-
-msgid "Translation ready to download"
-msgstr ""
-
-# } else {
-# $error = sprintf( __( 'Translation entry not found for: %d', 'sitepress' ), $job_id );
-# }
-
-msgid "Translation entry not found for: %d"
-msgstr ""
-
-# if ( ! $error ) {
-# $message = __( 'Job removed', 'sitepress' );
-# }
-
-msgid "Job removed"
-msgstr ""
-
-# if ( $needs_update ) {
-# $job_status_text .= __( ' - (needs update)', 'sitepress' );
-# }
-
-msgid " - (needs update)"
-msgstr ""
-
-# 'type' => 'updated',
-# 'text' => __( 'Preferences saved.', 'sitepress' )
-# );
-
-msgid "Preferences saved."
-msgstr ""
-
-# $this->cancel_translation_request( $data[ 'icl_translation_id' ] );
-# $message['text'] = __( 'Translation requests cancelled.', 'sitepress' );
-# } else {
-
-msgid "Translation requests cancelled."
-msgstr ""
-
-# } else {
-# $message['text'] = __( 'No Translation requests selected.', 'sitepress' );
-# }
-
-msgid "No Translation requests selected."
-msgstr ""
-
-# if ( icl_st_is_registered_string( $es_context, $name ) ) {
-# $edit_link = '[<a href="' . admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&context=' . esc_html( $es_context ) ) . '">' . esc_html__( 'translate', 'sitepress' ) . '</a>]';
-# } else {
-
-msgid "translate"
-msgstr ""
-
-# } else {
-# $edit_link = '<div class="updated below-h2">' . esc_html__( 'string not registered', 'sitepress' ) . '</div>';
-# }
-
-msgid "string not registered"
-msgstr ""
-
-# if ( false !== strpos( $name, '*' ) ) {
-# $o_value = '<span style="color:#bbb">{{ ' . esc_html__( 'Multiple options', 'sitepress' ) . ' }}</span>';
-# } else {
-
-msgid "Multiple options"
-msgstr ""
-
-# if ( ! icl_st_is_registered_string( $es_context, $name ) ) {
-# $notice = '<div class="updated below-h2">' . esc_html__( 'some strings might be not registered', 'sitepress' ) . '</div>';
-# echo $notice;
-
-msgid "some strings might be not registered"
-msgstr ""
-
-# 
-# return array('message' => __('Processing translations...', 'sitepress'));
-# break;
-
-msgid "Processing translations..."
-msgstr ""
-
-# }
-# $message = $processing ? __('Processing translations...', 'sitepress') : __('Finalizing upgrade...', 'sitepress');
-# return array('message' => $message);
-
-msgid "Finalizing upgrade..."
-msgstr ""
-
-# default:
-# return array('error' => __('Missing step', 'sitepress'), 'stop' => 1);
-# }
-
-msgid "Missing step"
-msgstr ""
-
-# $link = 'index.php?icl_ajx_action=' . $ajax_action . '&nonce=' . $ajax_action_none;
-# $txt = get_option('icl_temp_upgrade_data', FALSE) ? __('Resume Upgrade Process', 'sitepress') : __('Run Upgrade Process', 'sitepress');
-# echo '<div class="message error" id="icl-migrate"><p><strong>'.__('WPML requires database upgrade', 'sitepress').'</strong></p>'
-
-msgid "Resume Upgrade Process"
-msgstr ""
-
-# $link = 'index.php?icl_ajx_action=' . $ajax_action . '&nonce=' . $ajax_action_none;
-# $txt = get_option('icl_temp_upgrade_data', FALSE) ? __('Resume Upgrade Process', 'sitepress') : __('Run Upgrade Process', 'sitepress');
-# echo '<div class="message error" id="icl-migrate"><p><strong>'.__('WPML requires database upgrade', 'sitepress').'</strong></p>'
-
-msgid "Run Upgrade Process"
-msgstr ""
-
-# $txt = get_option('icl_temp_upgrade_data', FALSE) ? __('Resume Upgrade Process', 'sitepress') : __('Run Upgrade Process', 'sitepress');
-# echo '<div class="message error" id="icl-migrate"><p><strong>'.__('WPML requires database upgrade', 'sitepress').'</strong></p>'
-# .'<p>' . __('This normally takes a few seconds, but may last up to several minutes of very large databases.', 'sitepress') . '</p>'
-
-msgid "WPML requires database upgrade"
-msgstr ""
-
-# echo '<div class="message error" id="icl-migrate"><p><strong>'.__('WPML requires database upgrade', 'sitepress').'</strong></p>'
-# .'<p>' . __('This normally takes a few seconds, but may last up to several minutes of very large databases.', 'sitepress') . '</p>'
-# . '<p><a href="' . $link . '" style="" id="icl-migrate-start">' . $txt . '</a></p>'
-
-msgid "This normally takes a few seconds, but may last up to several minutes of very large databases."
-msgstr ""
-
-# $stop = 0;
-# $message = __('Starting the upgrade process...', 'sitepress');
-# include_once WPML_PLUGIN_PATH . '/inc/upgrade-functions/2.0.0/stepper.php';
-
-msgid "Starting the upgrade process..."
-msgstr ""
-
-# 'step' => $migration->getNextStep(),
-# 'message' => __('Creating new tables...', 'sitepress'),
-# 'stop' => $stop,
-
-msgid "Creating new tables..."
-msgstr ""
-
 # <p><?php
 # printf(__("<strong>WPML notice:</strong> Upgrades to this version are only supported from versions %s and above. To upgrade from version %s, first, download <a%s>2.0.4</a>, do the DB upgrade and then go to this version.", 'sitepress'),
 # '1.7.0', get_option('icl_sitepress_version'), ' href="http://downloads.wordpress.org/plugin/sitepress-multilingual-cms.2.0.4.zip"'); ?></p>
 
 msgid "<strong>WPML notice:</strong> Upgrades to this version are only supported from versions %s and above. To upgrade from version %s, first, download <a%s>2.0.4</a>, do the DB upgrade and then go to this version."
-msgstr ""
-
-# $output .= sprintf (
-# __ ( 'HTTP code: %s (%s)', 'sitepress' ),
-# $response[ 'response' ][ 'code' ],
-
-msgid "HTTP code: %s (%s)"
-msgstr ""
-
-# $menu['order']      = 700;
-# $menu['page_title'] = __( 'WP Menus Sync', 'sitepress' );
-# $menu['menu_title'] = __( 'WP Menus Sync', 'sitepress' );
-
-msgid "WP Menus Sync"
-msgstr ""
-
-# $langsel .= '<div class="icl_nav_menu_text" style="float:right;">';
-# $langsel .= __('Translations:', 'sitepress');
-# foreach($sitepress->get_active_languages() as $lang){
-
-msgid "Translations:"
-msgstr ""
-
-# $menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id=%d", $this->current_menu['translations'][ $lang['code'] ]->element_id ) );
-# $label   = __( 'edit translation', 'sitepress' );
-# $tr_link = '<a style="text-decoration:none" title="' . esc_attr( $label ) . '" href="' . admin_url( 'nav-menus.php' ) .
-
-msgid "edit translation"
-msgstr ""
-
-# } else {
-# $label   = __( 'add translation', 'sitepress' );
-# $tr_link = '<a style="text-decoration:none" title="' . esc_attr( $label ) . '" href="' . admin_url( 'nav-menus.php' ) .
-
-msgid "add translation"
-msgstr ""
-
-# $langsel .= '<div class="icl_nav_menu_text" style="float:right; clear:right">';
-# $langsel .= '<div><a href="'.admin_url('admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/menu-sync/menus-sync.php').'">' . __('Synchronize menus between languages.', 'sitepress') . '</a></div>';
-# $langsel .= '</div>';
-
-msgid "Synchronize menus between languages."
-msgstr ""
-
-# $disabled = empty( $this->current_menu['id'] ) && isset( $_GET['trid'] ) ? ' disabled="disabled"' : '';
-# $out .= '<label class="menu-name-label howto"><span>' . __( 'Translation of', 'sitepress' ) . '</span>&nbsp;';
-# $out .= '<select name="icl_translation_of" id="icl_menu_translation_of"' . $disabled . '>';
-
-msgid "Translation of"
-msgstr ""
-
-# $out .= '<select name="icl_translation_of" id="icl_menu_translation_of"' . $disabled . '>';
-# $out .= '<option value="none">--' . __( 'none', 'sitepress' ) . '--</option>';
-# foreach ( $menus as $mtrid => $m ) {
-
-msgid "none"
-msgstr ""
-
-# if (location_menu_id.length > 0) {
-# location_menu_id.find('option').first().html('<?php echo esc_js( __( 'not translated in current language', 'sitepress' ) ) ?>');
-# location_menu_id.css('font-style', 'italic');
-
-msgid "not translated in current language"
-msgstr ""
-
-# {
-# echo '<div class="updated"><p>' . esc_html__( 'Menu(s) syncing complete.', 'sitepress' ) . '</p></div>';
-# }
-
-msgid "Menu(s) syncing complete."
-msgstr ""
-
-# $response = array(
-# 'label' => esc_html__( 'Translate menu strings and URLs for:', 'sitepress' ),
-# 'items' => $menu_links,
-
-msgid "Translate menu strings and URLs for:"
-msgstr ""
-
-# if ( $lang_code === $default_language ) {
-# esc_html_e( 'Menu Option: auto_add', 'sitepress' );
-# continue;
-
-msgid "Menu Option: auto_add"
-msgstr ""
-
-# echo '<p>';
-# esc_html_e( "Your menu includes custom items, which you need to translate using WPML's String Translation.", 'sitepress' );
-# echo '<br/>';
-
-msgid "Your menu includes custom items, which you need to translate using WPML's String Translation."
-msgstr ""
-
-# echo '<br/>';
-# esc_html_e( '1. Translate these strings: ', 'sitepress' );
-# $i = 0;
-
-msgid "1. Translate these strings: "
-msgstr ""
-
-# echo '<br/>';
-# esc_html_e( "2. When you're done translating, return here and run the menu synchronization again. This will use the strings that you translated to update the menus.", 'sitepress' );
-# echo '</p>';
-
-msgid "2. When you're done translating, return here and run the menu synchronization again. This will use the strings that you translated to update the menus."
 msgstr ""
 
 # <br>
@@ -4287,6 +4224,1049 @@ msgstr ""
 msgid "Not valid"
 msgstr ""
 
+# <h2><?php esc_html_e( 'WP Menus Sync', 'sitepress' ) ?></h2>
+# <p><?php printf( esc_html__( 'Menu synchronization will sync the menu structure from the default language of %s to the secondary languages.', 'sitepress' ), $def_lang['display_name'] ) ?></p>
+# 
+
+msgid "Menu synchronization will sync the menu structure from the default language of %s to the secondary languages."
+msgstr ""
+
+# <td><?php echo esc_html( $lang_details['display_name'] ) ?></td>
+# <td><?php printf( esc_html__( 'Add menu translation:  %s', 'sitepress' ), '<strong>' . esc_html( $name ) . '</strong>' ) ?> </td>
+# </tr>
+
+msgid "Add menu translation:  %s"
+msgstr ""
+
+# printf(
+# esc_html__( 'The menus on this page may not sync because it requires more input variables. Please modify the %s setting in your php.ini or .htaccess files to %s or more.', 'sitepress' ),
+# '<strong>max_input_vars</strong>',
+
+msgid "The menus on this page may not sync because it requires more input variables. Please modify the %s setting in your php.ini or .htaccess files to %s or more."
+msgstr ""
+
+# <?php echo $icl_menu_sync_submit_disabled; ?> />&nbsp;
+# <input id="icl_msync_cancel" class="button-secondary" type="button" value="<?php _e( 'Cancel' ) ?>"/>
+# <span id="icl_msync_message"></span>
+
+msgid "Cancel"
+msgstr ""
+
+# type="button"
+# value="<?php esc_attr_e( 'Apply changes' ) ?>"
+# data-message="<?php esc_attr_e( 'Syncing menus %1 of %2', 'sitepress' ) ?>"
+
+msgid "Apply changes"
+msgstr ""
+
+# value="<?php esc_attr_e( 'Apply changes' ) ?>"
+# data-message="<?php esc_attr_e( 'Syncing menus %1 of %2', 'sitepress' ) ?>"
+# data-message-complete="<?php esc_attr_e( 'The selected menus have been synchonized.', 'sitepress' ) ?>"
+
+msgid "Syncing menus %1 of %2"
+msgstr ""
+
+# data-message="<?php esc_attr_e( 'Syncing menus %1 of %2', 'sitepress' ) ?>"
+# data-message-complete="<?php esc_attr_e( 'The selected menus have been synchonized.', 'sitepress' ) ?>"
+# <?php echo $icl_menu_sync_submit_disabled; ?> />&nbsp;
+
+msgid "The selected menus have been synchonized."
+msgstr ""
+
+# <input id="icl_msync_sync" type="submit" class="button-primary"
+# value="<?php esc_attr_e( 'Sync', 'sitepress' ) ?>"
+# <?php disabled( ! $need_sync ) ?>
+
+msgid "Sync"
+msgstr ""
+
+# <input id="icl_msync_sync" type="submit" class="button-primary"
+# value="<?php esc_attr_e( 'Nothing Sync', 'sitepress' ) ?>"<?php disabled( ! $need_sync ) ?>
+# />
+
+msgid "Nothing Sync"
+msgstr ""
+
+# <th><?php esc_html_e( 'Language', 'sitepress' ) ?></th>
+# <th><?php esc_html_e( 'Action', 'sitepress' ) ?></th>
+# </tr>
+
+msgid "Action"
+msgstr ""
+
+# <tr>
+# <td align="center" colspan="3"><?php esc_html_e( 'Nothing to sync.', 'sitepress' ) ?></td>
+# </tr>
+
+msgid "Nothing to sync."
+msgstr ""
+
+# <tr>
+# <td align="center" colspan="<?php echo count( $active_languages ) ?>"><?php esc_html_e( 'No menus found', 'sitepress' ) ?></td>
+# </tr>
+
+msgid "No menus found"
+msgstr ""
+
+# />
+# <small><?php esc_html_e( 'Auto-generated title. Click to edit.', 'sitepress' ) ?></small>
+# <input type="hidden" value=""
+
+msgid "Auto-generated title. Click to edit."
+msgstr ""
+
+# ?>
+# <span class="icl_msync_item icl_msync_add"><?php esc_html_e( 'Item will be added', 'sitepress' ) ?></span>
+# <?php
+
+msgid "Item will be added"
+msgstr ""
+
+# ?>
+# <span class="icl_msync_item icl_msync_del"><?php esc_html_e( 'Item will be removed', 'sitepress' ) ?></span>
+# <?php
+
+msgid "Item will be removed"
+msgstr ""
+
+# ?>
+# <span class="icl_msync_item icl_msync_not"><?php esc_html_e( 'Item cannot be added (parent not translated)', 'sitepress' ) ?></span>
+# <?php
+
+msgid "Item cannot be added (parent not translated)"
+msgstr ""
+
+# ?>
+# <span class="icl_msync_item icl_msync_mov"><?php esc_html_e( 'Item changed position', 'sitepress' ) ?></span>
+# <?php
+
+msgid "Item changed position"
+msgstr ""
+
+# ?>
+# <span class="icl_msync_item icl_msync_copy"><?php esc_html_e( 'Item will be copied', 'sitepress' ) ?></span>
+# <?php
+
+msgid "Item will be copied"
+msgstr ""
+
+# ?>
+# <span class="icl_msync_item icl_msync_label_changed"><?php esc_html_e( 'Strings for menus will be updated', 'sitepress' ) ?></span>
+# <?php
+
+msgid "Strings for menus will be updated"
+msgstr ""
+
+# ?>
+# <span class="icl_msync_item icl_msync_url_changed"><?php esc_html_e( 'URLs for menus will be updated', 'sitepress' ) ?></span>
+# <?php
+
+msgid "URLs for menus will be updated"
+msgstr ""
+
+# ?>
+# <span class="icl_msync_item icl_msync_options_changed"><?php esc_html_e( 'Menu Options will be updated', 'sitepress' ) ?></span>
+# <?php
+
+msgid "Menu Options will be updated"
+msgstr ""
+
+# <span class="icl_msync_item icl_msync_label_missing">
+# <?php esc_html_e( 'Untranslated strings for menus', 'sitepress' ) ?>
+# </span>
+
+msgid "Untranslated strings for menus"
+msgstr ""
+
+# <span class="icl_msync_item icl_msync_url_missing">
+# <?php esc_html_e( 'Untranslated URLs for menus', 'sitepress' ) ?>
+# </span>
+
+msgid "Untranslated URLs for menus"
+msgstr ""
+
+# $this->labels = array(
+# 'del' => array( esc_html__( 'Remove %s', 'sitepress' ), '' ),
+# 'label_changed' => array( esc_html__( 'Rename label to %s', 'sitepress' ), '' ),
+
+msgid "Remove %s"
+msgstr ""
+
+# 'del' => array( esc_html__( 'Remove %s', 'sitepress' ), '' ),
+# 'label_changed' => array( esc_html__( 'Rename label to %s', 'sitepress' ), '' ),
+# 'url_changed' => array( esc_html__( 'Update URL to %s', 'sitepress' ), '' ),
+
+msgid "Rename label to %s"
+msgstr ""
+
+# 'label_changed' => array( esc_html__( 'Rename label to %s', 'sitepress' ), '' ),
+# 'url_changed' => array( esc_html__( 'Update URL to %s', 'sitepress' ), '' ),
+# 'url_missing' => array( esc_html__( 'Untranslated URL %s', 'sitepress' ), '' ),
+
+msgid "Update URL to %s"
+msgstr ""
+
+# 'url_changed' => array( esc_html__( 'Update URL to %s', 'sitepress' ), '' ),
+# 'url_missing' => array( esc_html__( 'Untranslated URL %s', 'sitepress' ), '' ),
+# 'mov' => array( esc_html__( 'Change menu order for %s', 'sitepress' ), '' ),
+
+msgid "Untranslated URL %s"
+msgstr ""
+
+# 'url_missing' => array( esc_html__( 'Untranslated URL %s', 'sitepress' ), '' ),
+# 'mov' => array( esc_html__( 'Change menu order for %s', 'sitepress' ), '' ),
+# 'add' => array( esc_html__( 'Add %s', 'sitepress' ), '' ),
+
+msgid "Change menu order for %s"
+msgstr ""
+
+# 'mov' => array( esc_html__( 'Change menu order for %s', 'sitepress' ), '' ),
+# 'add' => array( esc_html__( 'Add %s', 'sitepress' ), '' ),
+# 'options_changed' => array( esc_html__( 'Update %s menu option to %s', 'sitepress' ), '' ),
+
+msgid "Add %s"
+msgstr ""
+
+# 'add' => array( esc_html__( 'Add %s', 'sitepress' ), '' ),
+# 'options_changed' => array( esc_html__( 'Update %s menu option to %s', 'sitepress' ), '' ),
+# );
+
+msgid "Update %s menu option to %s"
+msgstr ""
+
+# $this->labels['label_missing'] = array(
+# esc_html__( 'Untranslated string %s', 'sitepress' ),
+# $this->print_label_missing_text( $icl_ms, $menu_id ),
+
+msgid "Untranslated string %s"
+msgstr ""
+
+# $res = '&nbsp;' . sprintf(
+# esc_html__(
+# 'The selected strings can now be translated using the %s string translation %s screen',
+
+msgid "The selected strings can now be translated using the %s string translation %s screen"
+msgstr ""
+
+# title="<?php esc_attr_e( 'Choose a post to assign', 'sitepress' ); ?>"
+# data-set_as_source-text="<?php echo esc_attr( sprintf( __( 'Make %s the original language for this %s', 'sitepress' ), $language_name, $this->post->post_type ) ); ?>"
+# data-alert-text="<?php esc_attr_e( "Please make sure to save your post, if you've made any change, before proceeding with this action!", 'sitepress' ); ?>"
+
+msgid "Make %s the original language for this %s"
+msgstr ""
+
+# }
+# $this->add_translation_of_option( 'none', __( '--None--', 'sitepress' ), false );
+# if ( $element_id && ! isset( $_GET['icl_ajx'] ) ) {
+
+msgid "--None--"
+msgstr ""
+
+# if ( trim( $label ) == '' ) {
+# $label = '{' . __( 'Post without a title', 'sitepress' ) . '}';
+# }
+
+msgid "Post without a title"
+msgstr ""
+
+# sprintf(
+# __(
+# 'The current content of this %s will be permanently lost. WPML will copy the %s content and replace the current content.',
+
+msgid "The current content of this %s will be permanently lost. WPML will copy the %s content and replace the current content."
+msgstr ""
+
+# $disabled_duplication       = false;
+# $disabled_duplication_title = esc_attr__( 'Create duplicate', 'sitepress' );
+# $element_key                = array( 'trid' => $this->trid, 'language_code' => $lang['code'] );
+
+msgid "Create duplicate"
+msgstr ""
+
+# if ( ICL_TM_DUPLICATE === (int) $translation_status ) {
+# $disabled_duplication_title = esc_attr__( 'This post is already duplicated.', 'sitepress' );
+# } else {
+
+msgid "This post is already duplicated."
+msgstr ""
+
+# } else {
+# $disabled_duplication_title = esc_attr__( "Can't create a duplicate. A translation is in progress.", 'sitepress' );
+# }
+
+msgid "Can't create a duplicate. A translation is in progress."
+msgstr ""
+
+# <div class="icl_cyan_box"><?php
+# printf( esc_html__( 'This document is a duplicate of %s and it is maintained by WPML.', 'sitepress' ), '<a href="' . esc_url( get_edit_post_link( $duplicate_original_id ) ) . '">' . esc_html( get_the_title( $duplicate_original_id ) ) . '</a>' );
+# ?>
+
+msgid "This document is a duplicate of %s and it is maintained by WPML."
+msgstr ""
+
+# <?php wp_nonce_field( 'reset_duplication_nonce', '_icl_nonce_rd' ) ?>
+# <i><?php printf( esc_html__( 'WPML will no longer synchronize this %s with the original content.', 'sitepress' ), $this->post->post_type ); ?></i>
+# </div>
+
+msgid "WPML will no longer synchronize this %s with the original content."
+msgstr ""
+
+# <label for="icl_post_language">
+# <strong><?php printf( esc_html__( 'Language of this %s', 'sitepress' ), esc_html( $this->post_type_label ) ); ?></strong>
+# </label>
+
+msgid "Language of this %s"
+msgstr ""
+
+# <?php if ( isset( $dupes[ $lang['code'] ] ) ) {
+# echo ' (' . esc_html__( 'duplicate', 'sitepress' ) . ')';
+# } ?>
+
+msgid "duplicate"
+msgstr ""
+
+# private function media_options( $post ) {
+# echo '<br /><br /><strong>' . esc_html__( 'Media attachments', 'sitepress' ) . '</strong>';
+# 
+
+msgid "Media attachments"
+msgstr ""
+
+# if( ! $original_post_id || (int) $post->ID === $original_post_id ){
+# $duplicate_media_label =  esc_html__('Duplicate uploaded media to translations', 'sitepress');
+# $duplicate_featured_label =  esc_html__('Duplicate featured image to translations', 'sitepress');
+
+msgid "Duplicate uploaded media to translations"
+msgstr ""
+
+# $duplicate_media_label =  esc_html__('Duplicate uploaded media to translations', 'sitepress');
+# $duplicate_featured_label =  esc_html__('Duplicate featured image to translations', 'sitepress');
+# } else {
+
+msgid "Duplicate featured image to translations"
+msgstr ""
+
+# } else {
+# $duplicate_media_label =  esc_html__('Duplicate uploaded media from original', 'sitepress');
+# $duplicate_featured_label =  esc_html__('Duplicate featured image from original', 'sitepress');
+
+msgid "Duplicate uploaded media from original"
+msgstr ""
+
+# $duplicate_media_label =  esc_html__('Duplicate uploaded media from original', 'sitepress');
+# $duplicate_featured_label =  esc_html__('Duplicate featured image from original', 'sitepress');
+# }
+
+msgid "Duplicate featured image from original"
+msgstr ""
+
+# echo '<input id="icl_cfo" class="button-secondary" type="button" value="' . sprintf(
+# esc_html__( 'Copy content from %s', 'sitepress' ),
+# $source_lang_name
+
+msgid "Copy content from %s"
+msgstr ""
+
+# data-tippy-zindex="999999"
+# title="<?php echo  esc_html__("This operation copies the content from the original language onto this translation. It's meant for when you want to start with the original content, but keep translating in this language. This button is only enabled when there's no content in the editor.",'sitepress');?>"></i>
+# <?php }
+
+msgid "This operation copies the content from the original language onto this translation. It's meant for when you want to start with the original content, but keep translating in this language. This button is only enabled when there's no content in the editor."
+msgstr ""
+
+# <input id="icl_set_duplicate" type="button" class="button-secondary"
+# value="<?php printf( esc_html__( 'Overwrite with %s content.', 'sitepress' ), $source_lang_name ) ?>"
+# data-wpml_original_post_id="<?php echo absint( $original_post_id ); ?>"
+
+msgid "Overwrite with %s content."
+msgstr ""
+
+# data-tippy-zindex="999999"
+# title="	  <?php echo esc_html__("This operation will synchronize this translation with the original language. When you edit the original, this translation will update immediately. It's meant when you want the content in this language to always be the same as the content in the original language.",'sitepress') ?>"></i>
+# <?php
+
+msgid "This operation will synchronize this translation with the original language. When you edit the original, this translation will update immediately. It's meant when you want the content in this language to always be the same as the content in the original language."
+msgstr ""
+
+# <div id="connect_translations_dialog"
+# title="<?php esc_attr_e( 'Choose a post to assign', 'sitepress' ); ?>"
+# data-set_as_source-text="<?php echo esc_attr( sprintf( __( 'Make %s the original language for this %s', 'sitepress' ), $language_name, $this->post->post_type ) ); ?>"
+
+msgid "Choose a post to assign"
+msgstr ""
+
+# data-set_as_source-text="<?php echo esc_attr( sprintf( __( 'Make %s the original language for this %s', 'sitepress' ), $language_name, $this->post->post_type ) ); ?>"
+# data-alert-text="<?php esc_attr_e( "Please make sure to save your post, if you've made any change, before proceeding with this action!", 'sitepress' ); ?>"
+# data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"
+
+msgid "Please make sure to save your post, if you've made any change, before proceeding with this action!"
+msgstr ""
+
+# data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"
+# data-ok-label="<?php esc_attr_e( 'Ok', 'sitepress' ); ?>">
+# <p class="js-ajax-loader ajax-loader">
+
+msgid "Ok"
+msgstr ""
+
+# <div id="connect_translations_dialog_confirm"
+# title="<?php esc_attr_e( 'Connect this post?', 'sitepress' ); ?>"
+# data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"
+
+msgid "Connect this post?"
+msgstr ""
+
+# data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"
+# data-assign-label="<?php esc_attr_e( 'Assign', 'sitepress' ); ?>">
+# <p>
+
+msgid "Assign"
+msgstr ""
+
+# ?>
+# <p><input id="icl_translate_independent" class="button-secondary" type="button" value="<?php esc_html_e( 'Translate independently', 'sitepress' ) ?>"/></p>
+# <?php wp_nonce_field( 'reset_duplication_nonce', '_icl_nonce_rd' ) ?>
+
+msgid "Translate independently"
+msgstr ""
+
+# <label for="icl_translation_priority_dropdown">
+# <strong><?php esc_html_e( 'Translation Priority', 'sitepress' ); ?></strong>
+# </label>
+
+msgid "Translation Priority"
+msgstr ""
+
+# <a href="<?php echo admin_url( 'edit-tags.php?taxonomy=translation_priority' ); ?>"
+# target="_blank"><?php esc_html_e( 'edit terms', 'sitepress' ); ?></a>
+# </div>
+
+msgid "edit terms"
+msgstr ""
+
+# <a class="js-set-post-as-source" href="#">
+# <?php esc_html_e( 'Connect with translations', 'sitepress' ); ?>
+# </a>
+
+msgid "Connect with translations"
+msgstr ""
+
+# <p class="js-ajax-loader ajax-loader">
+# <?php esc_html_e( 'Loading', 'sitepress' ); ?>&hellip; <span class="spinner"></span>
+# </p>
+
+msgid "Loading"
+msgstr ""
+
+# <label id="post-label" for="post_search">
+# <?php esc_html_e( 'Type a post title', 'sitepress' ); ?>: </label>
+# <input id="post_search" type="text">
+
+msgid "Type a post title"
+msgstr ""
+
+# </div>
+# <p class="js-no-posts-found no-posts-found"><?php esc_html_e( 'No posts found', 'sitepress' ) ?></p>
+# <input type="hidden" id="assign_to_trid">
+
+msgid "No posts found"
+msgstr ""
+
+# <p>
+# <span class="ui-icon ui-icon-alert"></span> <?php esc_html_e( 'You are about to connect the current post with these following posts', 'sitepress' ); ?>
+# : </p>
+
+msgid "You are about to connect the current post with these following posts"
+msgstr ""
+
+# <div id="icl_translation_of_panel" class="icl_box_paragraph">
+# <label for="icl_translation_of"><?php esc_html_e( 'This is a translation of', 'sitepress' ); ?></label>&nbsp;
+# <select name="icl_translation_of" id="icl_translation_of" <?php echo $disabled; ?>>
+
+msgid "This is a translation of"
+msgstr ""
+
+# ?>
+# <p style="clear:both;"><b><?php esc_html_e( 'Translate this Document', 'sitepress' ); ?></b></p>
+# 
+
+msgid "Translate this Document"
+msgstr ""
+
+# <div class="icl_box_paragraph">
+# <p><b><?php esc_html_e( 'Translations', 'sitepress' ) ?></b>
+# (<a class="icl_toggle_show_translations" href="#" <?php if ( $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'hide', 'sitepress' ); ?></a><a class="icl_toggle_show_translations" href="#" <?php if ( ! $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'show', 'sitepress' ) ?></a>)
+
+msgid "Translations"
+msgstr ""
+
+# <p><b><?php esc_html_e( 'Translations', 'sitepress' ) ?></b>
+# (<a class="icl_toggle_show_translations" href="#" <?php if ( $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'hide', 'sitepress' ); ?></a><a class="icl_toggle_show_translations" href="#" <?php if ( ! $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'show', 'sitepress' ) ?></a>)
+# </p>
+
+msgid "hide"
+msgstr ""
+
+# <p><b><?php esc_html_e( 'Translations', 'sitepress' ) ?></b>
+# (<a class="icl_toggle_show_translations" href="#" <?php if ( $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'hide', 'sitepress' ); ?></a><a class="icl_toggle_show_translations" href="#" <?php if ( ! $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'show', 'sitepress' ) ?></a>)
+# </p>
+
+msgid "show"
+msgstr ""
+
+# $ccf_note .= sprintf(
+# esc_html__( 'WPML will copy %s from %s when you save this post.', 'sitepress' ),
+# '<i><strong>' . join( '</strong>, <strong>', $copied_cf ) . '</strong></i>',
+
+msgid "WPML will copy %s from %s when you save this post."
+msgstr ""
+
+# );
+# $ccf_note .= '<a class="icl_user_notice_hide notice-dismiss" href="#hide_custom_fields_copy"><span class="screen-reader-text">'. esc_html__( 'Never show this', 'sitepress' ) . '</span></a>';
+# $this->sitepress->admin_notices( $ccf_note, 'notice notice-info otgs-notice otgs-is-dismissible' );
+
+msgid "Never show this"
+msgstr ""
+
+# $labels = array(
+# 'Show'                            => __( 'Show', 'sitepress' ),
+# 'untranslated'                    => __( 'untranslated', 'sitepress' ),
+
+msgid "Show"
+msgstr ""
+
+# 'Show'                            => __( 'Show', 'sitepress' ),
+# 'untranslated'                    => __( 'untranslated', 'sitepress' ),
+# 'all'                             => __( 'all', 'sitepress' ),
+
+msgid "untranslated"
+msgstr ""
+
+# 'untranslated'                    => __( 'untranslated', 'sitepress' ),
+# 'all'                             => __( 'all', 'sitepress' ),
+# 'in'                              => __( 'in', 'sitepress' ),
+
+msgid "all"
+msgstr ""
+
+# 'all'                             => __( 'all', 'sitepress' ),
+# 'in'                              => __( 'in', 'sitepress' ),
+# 'to'                              => __( 'to', 'sitepress' ),
+
+msgid "in"
+msgstr ""
+
+# 'in'                              => __( 'in', 'sitepress' ),
+# 'to'                              => __( 'to', 'sitepress' ),
+# 'of'                              => __( 'of', 'sitepress' ),
+
+msgid "to"
+msgstr ""
+
+# 'of'                              => __( 'of', 'sitepress' ),
+# 'taxonomy'                        => __( 'Taxonomy', 'sitepress' ),
+# 'anyLang'                         => __( 'any language', 'sitepress' ),
+
+msgid "Taxonomy"
+msgstr ""
+
+# 'taxonomy'                        => __( 'Taxonomy', 'sitepress' ),
+# 'anyLang'                         => __( 'any language', 'sitepress' ),
+# 'apply'                           => __( 'Refresh', 'sitepress' ),
+
+msgid "any language"
+msgstr ""
+
+# 'anyLang'                         => __( 'any language', 'sitepress' ),
+# 'apply'                           => __( 'Refresh', 'sitepress' ),
+# 'synchronizeBtn'                  => __( 'Update Taxonomy Hierarchy', 'sitepress' ),
+
+msgid "Refresh"
+msgstr ""
+
+# 'apply'                           => __( 'Refresh', 'sitepress' ),
+# 'synchronizeBtn'                  => __( 'Update Taxonomy Hierarchy', 'sitepress' ),
+# 'searchPlaceHolder'               => __( 'Search', 'sitepress' ),
+
+msgid "Update Taxonomy Hierarchy"
+msgstr ""
+
+# 'synchronizeBtn'                  => __( 'Update Taxonomy Hierarchy', 'sitepress' ),
+# 'searchPlaceHolder'               => __( 'Search', 'sitepress' ),
+# 'selectParent'                    => __( 'select parent', 'sitepress' ),
+
+msgid "Search"
+msgstr ""
+
+# 'searchPlaceHolder'               => __( 'Search', 'sitepress' ),
+# 'selectParent'                    => __( 'select parent', 'sitepress' ),
+# 'taxToTranslate'                  => __( 'Select the taxonomy to translate: ', 'sitepress' ),
+
+msgid "select parent"
+msgstr ""
+
+# 'selectParent'                    => __( 'select parent', 'sitepress' ),
+# 'taxToTranslate'                  => __( 'Select the taxonomy to translate: ', 'sitepress' ),
+# 'translate'                       => sprintf( __( '%1$s Translation', 'sitepress' ), '%taxonomy%' ),
+
+msgid "Select the taxonomy to translate: "
+msgstr ""
+
+# 'taxToTranslate'                  => __( 'Select the taxonomy to translate: ', 'sitepress' ),
+# 'translate'                       => sprintf( __( '%1$s Translation', 'sitepress' ), '%taxonomy%' ),
+# 'Synchronize'                     => __( 'Hierarchy Synchronization', 'sitepress' ),
+
+msgid "%1$s Translation"
+msgstr ""
+
+# 'translate'                       => sprintf( __( '%1$s Translation', 'sitepress' ), '%taxonomy%' ),
+# 'Synchronize'                     => __( 'Hierarchy Synchronization', 'sitepress' ),
+# 'lowercaseTranslate'              => __( 'translate', 'sitepress' ),
+
+msgid "Hierarchy Synchronization"
+msgstr ""
+
+# 'lowercaseTranslate'              => __( 'translate', 'sitepress' ),
+# 'copyToAllLanguages'              => __( 'Copy to all languages', 'sitepress' ),
+# 'copyToAllMessage'                => sprintf( __( 'Copy this term from original: %1$s to all other languages?' ), '%language%' ),
+
+msgid "Copy to all languages"
+msgstr ""
+
+# 'copyToAllLanguages'              => __( 'Copy to all languages', 'sitepress' ),
+# 'copyToAllMessage'                => sprintf( __( 'Copy this term from original: %1$s to all other languages?' ), '%language%' ),
+# 'copyAllOverwrite'                => __( 'Overwrite existing translations', 'sitepress' ),
+
+msgid "Copy this term from original: %1$s to all other languages?"
+msgstr ""
+
+# 'copyToAllMessage'                => sprintf( __( 'Copy this term from original: %1$s to all other languages?' ), '%language%' ),
+# 'copyAllOverwrite'                => __( 'Overwrite existing translations', 'sitepress' ),
+# 'willBeRemoved'                   => __( 'Will be removed', 'sitepress' ),
+
+msgid "Overwrite existing translations"
+msgstr ""
+
+# 'copyAllOverwrite'                => __( 'Overwrite existing translations', 'sitepress' ),
+# 'willBeRemoved'                   => __( 'Will be removed', 'sitepress' ),
+# 'willBeAdded'                     => __( 'Will be added', 'sitepress' ),
+
+msgid "Will be removed"
+msgstr ""
+
+# 'willBeRemoved'                   => __( 'Will be removed', 'sitepress' ),
+# 'willBeAdded'                     => __( 'Will be added', 'sitepress' ),
+# 'legend'                          => __( 'Legend:', 'sitepress' ),
+
+msgid "Will be added"
+msgstr ""
+
+# 'willBeAdded'                     => __( 'Will be added', 'sitepress' ),
+# 'legend'                          => __( 'Legend:', 'sitepress' ),
+# 'refLang'                         => sprintf( __( 'Synchronize taxonomy hierarchy according to: %1$s language.', 'sitepress' ), '%language%' ),
+
+msgid "Legend:"
+msgstr ""
+
+# 'legend'                          => __( 'Legend:', 'sitepress' ),
+# 'refLang'                         => sprintf( __( 'Synchronize taxonomy hierarchy according to: %1$s language.', 'sitepress' ), '%language%' ),
+# 'targetLang'                      => __( 'Target Language', 'sitepress' ),
+
+msgid "Synchronize taxonomy hierarchy according to: %1$s language."
+msgstr ""
+
+# 'refLang'                         => sprintf( __( 'Synchronize taxonomy hierarchy according to: %1$s language.', 'sitepress' ), '%language%' ),
+# 'targetLang'                      => __( 'Target Language', 'sitepress' ),
+# 'termPopupDialogTitle'            => __( 'Term translation', 'sitepress' ),
+
+msgid "Target Language"
+msgstr ""
+
+# 'targetLang'                      => __( 'Target Language', 'sitepress' ),
+# 'termPopupDialogTitle'            => __( 'Term translation', 'sitepress' ),
+# 'originalTermPopupDialogTitle'    => __( 'Original term', 'sitepress' ),
+
+msgid "Term translation"
+msgstr ""
+
+# 'termPopupDialogTitle'            => __( 'Term translation', 'sitepress' ),
+# 'originalTermPopupDialogTitle'    => __( 'Original term', 'sitepress' ),
+# 'labelPopupDialogTitle'           => __( 'Label translation', 'sitepress' ),
+
+msgid "Original term"
+msgstr ""
+
+# 'originalTermPopupDialogTitle'    => __( 'Original term', 'sitepress' ),
+# 'labelPopupDialogTitle'           => __( 'Label translation', 'sitepress' ),
+# 'copyFromOriginal'                => __( 'Copy from original', 'sitepress' ),
+
+msgid "Label translation"
+msgstr ""
+
+# 'labelPopupDialogTitle'           => __( 'Label translation', 'sitepress' ),
+# 'copyFromOriginal'                => __( 'Copy from original', 'sitepress' ),
+# 'original'                        => __( 'Original:', 'sitepress' ),
+
+msgid "Copy from original"
+msgstr ""
+
+# 'copyFromOriginal'                => __( 'Copy from original', 'sitepress' ),
+# 'original'                        => __( 'Original:', 'sitepress' ),
+# 'translationTo'                   => __( 'Translation to:', 'sitepress' ),
+
+msgid "Original:"
+msgstr ""
+
+# 'original'                        => __( 'Original:', 'sitepress' ),
+# 'translationTo'                   => __( 'Translation to:', 'sitepress' ),
+# 'Name'                            => __( 'Name', 'sitepress' ),
+
+msgid "Translation to:"
+msgstr ""
+
+# 'translationTo'                   => __( 'Translation to:', 'sitepress' ),
+# 'Name'                            => __( 'Name', 'sitepress' ),
+# 'Slug'                            => __( 'Slug', 'sitepress' ),
+
+msgid "Name"
+msgstr ""
+
+# 'Name'                            => __( 'Name', 'sitepress' ),
+# 'Slug'                            => __( 'Slug', 'sitepress' ),
+# 'Description'                     => __( 'Description', 'sitepress' ),
+
+msgid "Slug"
+msgstr ""
+
+# 'Slug'                            => __( 'Slug', 'sitepress' ),
+# 'Description'                     => __( 'Description', 'sitepress' ),
+# 'Ok'                              => __( 'OK', 'sitepress' ),
+
+msgid "Description"
+msgstr ""
+
+# 'Description'                     => __( 'Description', 'sitepress' ),
+# 'Ok'                              => __( 'OK', 'sitepress' ),
+# 'save'                            => __( 'Save', 'sitepress' ),
+
+msgid "OK"
+msgstr ""
+
+# 'save'                            => __( 'Save', 'sitepress' ),
+# 'Singular'                        => __( 'Singular', 'sitepress' ),
+# 'Plural'                          => __( 'Plural', 'sitepress' ),
+
+msgid "Singular"
+msgstr ""
+
+# 'Singular'                        => __( 'Singular', 'sitepress' ),
+# 'Plural'                          => __( 'Plural', 'sitepress' ),
+# 'changeLanguage'                  => __( 'Change language', 'sitepress' ),
+
+msgid "Plural"
+msgstr ""
+
+# 'Plural'                          => __( 'Plural', 'sitepress' ),
+# 'changeLanguage'                  => __( 'Change language', 'sitepress' ),
+# 'cancel'                          => __( 'Cancel', 'sitepress' ),
+
+msgid "Change language"
+msgstr ""
+
+# 'cancel'                          => __( 'Cancel', 'sitepress' ),
+# 'loading'                         => __( 'loading', 'sitepress' ),
+# 'Save'                            => __( 'Save', 'sitepress' ),
+
+msgid "loading"
+msgstr ""
+
+# 'currentPage'                     => __( 'Current page', 'sitepress' ),
+# 'goToPreviousPage'                => __( 'Go to previous page', 'sitepress' ),
+# 'goToNextPage'                    => __( 'Go to the next page', 'sitepress' ),
+
+msgid "Go to previous page"
+msgstr ""
+
+# 'goToPreviousPage'                => __( 'Go to previous page', 'sitepress' ),
+# 'goToNextPage'                    => __( 'Go to the next page', 'sitepress' ),
+# 'goToFirstPage'                   => __( 'Go to the first page', 'sitepress' ),
+
+msgid "Go to the next page"
+msgstr ""
+
+# 'goToNextPage'                    => __( 'Go to the next page', 'sitepress' ),
+# 'goToFirstPage'                   => __( 'Go to the first page', 'sitepress' ),
+# 'goToLastPage'                    => __( 'Go to the last page', 'sitepress' ),
+
+msgid "Go to the first page"
+msgstr ""
+
+# 'goToFirstPage'                   => __( 'Go to the first page', 'sitepress' ),
+# 'goToLastPage'                    => __( 'Go to the last page', 'sitepress' ),
+# 'hieraSynced'                     => __( 'The taxonomy hierarchy is now synchronized.', 'sitepress' ),
+
+msgid "Go to the last page"
+msgstr ""
+
+# 'goToLastPage'                    => __( 'Go to the last page', 'sitepress' ),
+# 'hieraSynced'                     => __( 'The taxonomy hierarchy is now synchronized.', 'sitepress' ),
+# 'hieraAlreadySynced'              => __( 'The taxonomy hierarchy is already synchronized.', 'sitepress' ),
+
+msgid "The taxonomy hierarchy is now synchronized."
+msgstr ""
+
+# 'hieraSynced'                     => __( 'The taxonomy hierarchy is now synchronized.', 'sitepress' ),
+# 'hieraAlreadySynced'              => __( 'The taxonomy hierarchy is already synchronized.', 'sitepress' ),
+# 'noTermsFound'                    => sprintf( __( 'No %1$s found.', 'sitepress' ), '%taxonomy%' ),
+
+msgid "The taxonomy hierarchy is already synchronized."
+msgstr ""
+
+# 'hieraAlreadySynced'              => __( 'The taxonomy hierarchy is already synchronized.', 'sitepress' ),
+# 'noTermsFound'                    => sprintf( __( 'No %1$s found.', 'sitepress' ), '%taxonomy%' ),
+# 'items'                           => __( 'items', 'sitepress' ),
+
+msgid "No %1$s found."
+msgstr ""
+
+# 'noTermsFound'                    => sprintf( __( 'No %1$s found.', 'sitepress' ), '%taxonomy%' ),
+# 'items'                           => __( 'items', 'sitepress' ),
+# 'item'                            => __( 'item', 'sitepress' ),
+
+msgid "items"
+msgstr ""
+
+# 'items'                           => __( 'items', 'sitepress' ),
+# 'item'                            => __( 'item', 'sitepress' ),
+# 'summaryTerms'                    => sprintf( __( 'Translation of %1$s', 'sitepress' ), '%taxonomy%' ),
+
+msgid "item"
+msgstr ""
+
+# 'item'                            => __( 'item', 'sitepress' ),
+# 'summaryTerms'                    => sprintf( __( 'Translation of %1$s', 'sitepress' ), '%taxonomy%' ),
+# 'summaryLabels'                   => sprintf( __( 'Translations of taxonomy %1$s labels and slug', 'sitepress' ), '%taxonomy%' ),
+
+msgid "Translation of %1$s"
+msgstr ""
+
+# 'summaryTerms'                    => sprintf( __( 'Translation of %1$s', 'sitepress' ), '%taxonomy%' ),
+# 'summaryLabels'                   => sprintf( __( 'Translations of taxonomy %1$s labels and slug', 'sitepress' ), '%taxonomy%' ),
+# 'activateStringTranslation'       => sprintf( __( 'To translate taxonomy labels and slug you need %s plugin.', 'sitepress' ), $st_plugin ),
+
+msgid "Translations of taxonomy %1$s labels and slug"
+msgstr ""
+
+# 'summaryLabels'                   => sprintf( __( 'Translations of taxonomy %1$s labels and slug', 'sitepress' ), '%taxonomy%' ),
+# 'activateStringTranslation'       => sprintf( __( 'To translate taxonomy labels and slug you need %s plugin.', 'sitepress' ), $st_plugin ),
+# 'preparingTermsData'              => __( 'Loading ...', 'sitepress' ),
+
+msgid "To translate taxonomy labels and slug you need %s plugin."
+msgstr ""
+
+# 'activateStringTranslation'       => sprintf( __( 'To translate taxonomy labels and slug you need %s plugin.', 'sitepress' ), $st_plugin ),
+# 'preparingTermsData'              => __( 'Loading ...', 'sitepress' ),
+# 'firstColumnHeading'              => sprintf( __( '%1$s terms (in original language)', 'sitepress' ), '%taxonomy%' ),
+
+msgid "Loading ..."
+msgstr ""
+
+# 'preparingTermsData'              => __( 'Loading ...', 'sitepress' ),
+# 'firstColumnHeading'              => sprintf( __( '%1$s terms (in original language)', 'sitepress' ), '%taxonomy%' ),
+# 'resultsTruncated'                => sprintf( __( 'Because too many %1$s were found, only the first %2$s results are listed. You can refine the results using the Search field below.', 'sitepress' ), '%taxonomy%', '<strong>' . $term_results_cap . '</strong>' ),
+
+msgid "%1$s terms (in original language)"
+msgstr ""
+
+# 'firstColumnHeading'              => sprintf( __( '%1$s terms (in original language)', 'sitepress' ), '%taxonomy%' ),
+# 'resultsTruncated'                => sprintf( __( 'Because too many %1$s were found, only the first %2$s results are listed. You can refine the results using the Search field below.', 'sitepress' ), '%taxonomy%', '<strong>' . $term_results_cap . '</strong>' ),
+# 'wpml_save_term_nonce'            => wp_create_nonce( 'wpml_save_term_nonce' ),
+
+msgid "Because too many %1$s were found, only the first %2$s results are listed. You can refine the results using the Search field below."
+msgstr ""
+
+# 
+# 'addTranslation'   => __( 'Add translation', 'sitepress' ),
+# 'editTranslation'  => __( 'Edit translation', 'sitepress' ),
+
+msgid "Add translation"
+msgstr ""
+
+# 'editTranslation'  => __( 'Edit translation', 'sitepress' ),
+# 'originalLanguage' => __( 'Original language', 'sitepress' ),
+# 'termMetaLabel'    => __( 'This term has additional meta fields:', 'sitepress' ),
+
+msgid "Original language"
+msgstr ""
+
+# 'originalLanguage' => __( 'Original language', 'sitepress' ),
+# 'termMetaLabel'    => __( 'This term has additional meta fields:', 'sitepress' ),
+# );
+
+msgid "This term has additional meta fields:"
+msgstr ""
+
+# if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wpml_taxonomy_translation_nonce' ) ) {
+# wp_send_json_error( __( 'Wrong nonce', 'sitepress' ) );
+# return;
+
+msgid "Wrong nonce"
+msgstr ""
+
+# echo '<div id="icl_tax_adding_notice" class="updated fade"><p>'
+# . sprintf ( __ ( 'Adding translation for: %s.', 'sitepress' ), $tax_name )
+# . '</p></div>';
+
+msgid "Adding translation for: %s."
+msgstr ""
+
+# if ( $elements ) {
+# $msg = esc_html( __( "You haven't set your synchronization preferences for these %s: %s. Default value was selected.", 'sitepress' ) );
+# $notice .= '<div class="updated below-h2"><p>';
+
+msgid "You haven't set your synchronization preferences for these %s: %s. Default value was selected."
+msgstr ""
+
+# <div class="wpml-flex-table wpml-translation-setup-table wpml-margin-top-sm">
+# <?php $custom_types_ui->render_custom_types_header_ui( esc_html__( 'Post types', 'sitepress' ) ); ?>
+# <div class="wpml-flex-table-body">
+
+msgid "Post types"
+msgstr ""
+
+# <div class="wpml-section-header">
+# <h3><?php esc_html_e( 'Post Types Translation', 'sitepress' );?></h3>
+# </div>
+
+msgid "Post Types Translation"
+msgstr ""
+
+# <div class="wpml-section-header">
+# <h3><?php esc_html_e( 'Taxonomies Translation', 'sitepress' ); ?></h3>
+# </div>
+
+msgid "Taxonomies Translation"
+msgstr ""
+
+# <div class="wpml-section-header">
+# <h3><?php esc_html_e( 'Posts and pages synchronization', 'sitepress' ); ?></h3>
+# </div>
+
+msgid "Posts and pages synchronization"
+msgstr ""
+
+# <label><input type="checkbox" id="icl_sync_page_ordering" name="icl_sync_page_ordering" <?php checked( $sitepress_settings['sync_page_ordering'] ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize page order for translations', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize page order for translations"
+msgstr ""
+
+# <label><input type="checkbox" id="icl_sync_page_parent" name="icl_sync_page_parent" <?php checked( $sitepress_settings['sync_page_parent'] ) ?> value="1" />
+# <?php esc_html_e( 'Set page parent for translation according to page parent of the original language', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Set page parent for translation according to page parent of the original language"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_page_template" <?php checked( $sitepress_settings['sync_page_template'] ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize page template', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize page template"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_comment_status" <?php checked( $sitepress_settings['sync_comment_status'] ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize comment status', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize comment status"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_ping_status" <?php checked( $sitepress_settings['sync_ping_status'] ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize ping status', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize ping status"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_sticky_flag" <?php checked( $sitepress_settings['sync_sticky_flag'] ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize sticky flag', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize sticky flag"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_password" <?php checked( $sitepress_settings['sync_password'] ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize password for password protected posts', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize password for password protected posts"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_private_flag" <?php checked( $sitepress_settings['sync_private_flag'] ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize private flag', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize private flag"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_post_format" <?php checked( $sitepress_settings['sync_post_format'] ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize posts format', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize posts format"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_delete" <?php checked( $sitepress_settings['sync_delete'] ) ?> value="1" />
+# <?php esc_html_e( 'When deleting a post, delete translations as well', 'sitepress' ) ?></label>
+# </p>
+
+msgid "When deleting a post, delete translations as well"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_delete_tax" <?php checked( $sitepress_settings['sync_delete_tax'] ) ?> value="1" />
+# <?php esc_html_e( 'When deleting a taxonomy (category, tag or custom), delete translations as well', 'sitepress' ) ?></label>
+# </p>
+
+msgid "When deleting a taxonomy (category, tag or custom), delete translations as well"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_post_taxonomies" <?php checked( $sitepress_settings['sync_post_taxonomies'] ) ?> value="1" />
+# <?php esc_html_e( 'Copy taxonomy to translations', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Copy taxonomy to translations"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_post_date" <?php checked( $sitepress_settings['sync_post_date'] ) ?> value="1" />
+# <?php esc_html_e( 'Copy publishing date to translations', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Copy publishing date to translations"
+msgstr ""
+
+# <label><input type="checkbox" name="icl_sync_comments_on_duplicates" <?php checked( $sitepress->get_setting( 'sync_comments_on_duplicates' ) ) ?> value="1" />
+# <?php esc_html_e( 'Synchronize comments on duplicate content', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Synchronize comments on duplicate content"
+msgstr ""
+
+# <div class="wpml-section-content-inner">
+# <h4><?php esc_html_e( 'Page builders options', 'sitepress' ) ?></h4>
+# <?php $wpml_page_builder_options = new WPML_Page_Builder_Settings(); ?>
+
+msgid "Page builders options"
+msgstr ""
+
+# <label><input type="checkbox" name="wpml_pb_translate_raw_html" <?php checked( $wpml_page_builder_options->is_raw_html_translatable() ); ?> value="1" />
+# <?php esc_html_e( 'Send to translation the content of raw HTML cells', 'sitepress' ) ?></label>
+# </p>
+
+msgid "Send to translation the content of raw HTML cells"
+msgstr ""
+
 # <div class="inside">
 # <p><?php _e( 'This information allows our support team to see the versions of WordPress, plugins and theme on your site. Provide this information if requested in our support forum. No passwords or other confidential information is included.', 'sitepress' ) ?></p>
 # <br/>
@@ -4355,6 +5335,13 @@ msgstr ""
 # }
 
 msgid "Error adding flag."
+msgstr ""
+
+# if ( ! $this->is_language_code_valid( $data[ $name ] ) ) {
+# $this->set_errors( __( 'Invalid character in language code.', 'sitepress' ) );
+# $this->set_validation_failed( $id );
+
+msgid "Invalid character in language code."
 msgstr ""
 
 # }
@@ -4820,6 +5807,13 @@ msgstr ""
 msgid "Each user can choose the admin language. You can edit your language preferences by visiting your <a href=\"%s\">profile page</a>."
 msgstr ""
 
+# echo '<p>';
+# printf( __( 'You can enable its/their display for yourself, in your <a href="%s">profile page</a>.', 'sitepress' ), 'profile.php#wpml' );
+# echo '</p>';
+
+msgid "You can enable its/their display for yourself, in your <a href=\"%s\">profile page</a>."
+msgstr ""
+
 # <label><input type="checkbox" name="icl_promote" <?php checked( $sitepress->get_setting( 'promote_wpml' ) ) ?> value="1" />
 # <?php printf(__("Tell the world your site is running multilingual with WPML (places a message in your site's footer) - <a href=\"%s\">read more</a>", 'sitepress'),'https://wpml.org/?page_id=4560'); ?></label>
 # </p>
@@ -5007,6 +6001,13 @@ msgstr ""
 # <input type="text" name="installer_site_key" value="<?php echo esc_attr( $site_key ) ?>" <?php disabled( ! empty( $site_key ) ) ?> />
 
 msgid "Site key:"
+msgstr ""
+
+# if ( $site_key ) {
+# esc_html_e( 'Thank you for registering WPML on this site. You will receive automatic updates when new versions are available.', 'sitepress' );
+# }
+
+msgid "Thank you for registering WPML on this site. You will receive automatic updates when new versions are available."
 msgstr ""
 
 # <div class="wpml-section-content">
@@ -5212,6 +6213,13 @@ msgstr ""
 msgid "You can completely hide content in specific languages from visitors and search engines, but still view it yourself. This allows reviewing translations that are in progress."
 msgstr ""
 
+# else {
+# esc_html_e( 'All languages are currently displayed.', 'sitepress' );
+# }
+
+msgid "All languages are currently displayed."
+msgstr ""
+
 # <?php wp_nonce_field('icl_adjust_ids_nonce', '_icl_nonce'); ?>
 # <p><?php esc_html_e( 'This feature turns themes into multilingual, without having to edit their PHP files.', 'sitepress' ) ?></p>
 # <p>
@@ -5273,237 +6281,6 @@ msgstr ""
 # <?php endif; ?>
 
 msgid "Your browser doesn't seem to be allowing cookies to be set."
-msgstr ""
-
-# <h2><?php esc_html_e( 'WP Menus Sync', 'sitepress' ) ?></h2>
-# <p><?php printf( esc_html__( 'Menu synchronization will sync the menu structure from the default language of %s to the secondary languages.', 'sitepress' ), $def_lang['display_name'] ) ?></p>
-# 
-
-msgid "Menu synchronization will sync the menu structure from the default language of %s to the secondary languages."
-msgstr ""
-
-# <td><?php echo esc_html( $lang_details['display_name'] ) ?></td>
-# <td><?php printf( esc_html__( 'Add menu translation:  %s', 'sitepress' ), '<strong>' . esc_html( $name ) . '</strong>' ) ?> </td>
-# </tr>
-
-msgid "Add menu translation:  %s"
-msgstr ""
-
-# printf(
-# esc_html__( 'The menus on this page may not sync because it requires more input variables. Please modify the %s setting in your php.ini or .htaccess files to %s or more.', 'sitepress' ),
-# '<strong>max_input_vars</strong>',
-
-msgid "The menus on this page may not sync because it requires more input variables. Please modify the %s setting in your php.ini or .htaccess files to %s or more."
-msgstr ""
-
-# <?php echo $icl_menu_sync_submit_disabled; ?> />&nbsp;
-# <input id="icl_msync_cancel" class="button-secondary" type="button" value="<?php _e( 'Cancel' ) ?>"/>
-# <span id="icl_msync_message"></span>
-
-msgid "Cancel"
-msgstr ""
-
-# type="button"
-# value="<?php esc_attr_e( 'Apply changes' ) ?>"
-# data-message="<?php esc_attr_e( 'Syncing menus %1 of %2', 'sitepress' ) ?>"
-
-msgid "Apply changes"
-msgstr ""
-
-# value="<?php esc_attr_e( 'Apply changes' ) ?>"
-# data-message="<?php esc_attr_e( 'Syncing menus %1 of %2', 'sitepress' ) ?>"
-# data-message-complete="<?php esc_attr_e( 'The selected menus have been synchonized.', 'sitepress' ) ?>"
-
-msgid "Syncing menus %1 of %2"
-msgstr ""
-
-# data-message="<?php esc_attr_e( 'Syncing menus %1 of %2', 'sitepress' ) ?>"
-# data-message-complete="<?php esc_attr_e( 'The selected menus have been synchonized.', 'sitepress' ) ?>"
-# <?php echo $icl_menu_sync_submit_disabled; ?> />&nbsp;
-
-msgid "The selected menus have been synchonized."
-msgstr ""
-
-# <input id="icl_msync_sync" type="submit" class="button-primary"
-# value="<?php esc_attr_e( 'Sync', 'sitepress' ) ?>"
-# <?php disabled( ! $need_sync ) ?>
-
-msgid "Sync"
-msgstr ""
-
-# <input id="icl_msync_sync" type="submit" class="button-primary"
-# value="<?php esc_attr_e( 'Nothing Sync', 'sitepress' ) ?>"<?php disabled( ! $need_sync ) ?>
-# />
-
-msgid "Nothing Sync"
-msgstr ""
-
-# <th><?php esc_html_e( 'Language', 'sitepress' ) ?></th>
-# <th><?php esc_html_e( 'Action', 'sitepress' ) ?></th>
-# </tr>
-
-msgid "Action"
-msgstr ""
-
-# <tr>
-# <td align="center" colspan="3"><?php esc_html_e( 'Nothing to sync.', 'sitepress' ) ?></td>
-# </tr>
-
-msgid "Nothing to sync."
-msgstr ""
-
-# <tr>
-# <td align="center" colspan="<?php echo count( $active_languages ) ?>"><?php esc_html_e( 'No menus found', 'sitepress' ) ?></td>
-# </tr>
-
-msgid "No menus found"
-msgstr ""
-
-# />
-# <small><?php esc_html_e( 'Auto-generated title. Click to edit.', 'sitepress' ) ?></small>
-# <input type="hidden" value=""
-
-msgid "Auto-generated title. Click to edit."
-msgstr ""
-
-# ?>
-# <span class="icl_msync_item icl_msync_add"><?php esc_html_e( 'Item will be added', 'sitepress' ) ?></span>
-# <?php
-
-msgid "Item will be added"
-msgstr ""
-
-# ?>
-# <span class="icl_msync_item icl_msync_del"><?php esc_html_e( 'Item will be removed', 'sitepress' ) ?></span>
-# <?php
-
-msgid "Item will be removed"
-msgstr ""
-
-# ?>
-# <span class="icl_msync_item icl_msync_not"><?php esc_html_e( 'Item cannot be added (parent not translated)', 'sitepress' ) ?></span>
-# <?php
-
-msgid "Item cannot be added (parent not translated)"
-msgstr ""
-
-# ?>
-# <span class="icl_msync_item icl_msync_mov"><?php esc_html_e( 'Item changed position', 'sitepress' ) ?></span>
-# <?php
-
-msgid "Item changed position"
-msgstr ""
-
-# ?>
-# <span class="icl_msync_item icl_msync_copy"><?php esc_html_e( 'Item will be copied', 'sitepress' ) ?></span>
-# <?php
-
-msgid "Item will be copied"
-msgstr ""
-
-# ?>
-# <span class="icl_msync_item icl_msync_label_changed"><?php esc_html_e( 'Strings for menus will be updated', 'sitepress' ) ?></span>
-# <?php
-
-msgid "Strings for menus will be updated"
-msgstr ""
-
-# ?>
-# <span class="icl_msync_item icl_msync_url_changed"><?php esc_html_e( 'URLs for menus will be updated', 'sitepress' ) ?></span>
-# <?php
-
-msgid "URLs for menus will be updated"
-msgstr ""
-
-# ?>
-# <span class="icl_msync_item icl_msync_options_changed"><?php esc_html_e( 'Menu Options will be updated', 'sitepress' ) ?></span>
-# <?php
-
-msgid "Menu Options will be updated"
-msgstr ""
-
-# <span class="icl_msync_item icl_msync_label_missing">
-# <?php esc_html_e( 'Untranslated strings for menus', 'sitepress' ) ?>
-# </span>
-
-msgid "Untranslated strings for menus"
-msgstr ""
-
-# <span class="icl_msync_item icl_msync_url_missing">
-# <?php esc_html_e( 'Untranslated URLs for menus', 'sitepress' ) ?>
-# </span>
-
-msgid "Untranslated URLs for menus"
-msgstr ""
-
-# $this->labels = array(
-# 'del' => array( esc_html__( 'Remove %s', 'sitepress' ), '' ),
-# 'label_changed' => array( esc_html__( 'Rename label to %s', 'sitepress' ), '' ),
-
-msgid "Remove %s"
-msgstr ""
-
-# 'del' => array( esc_html__( 'Remove %s', 'sitepress' ), '' ),
-# 'label_changed' => array( esc_html__( 'Rename label to %s', 'sitepress' ), '' ),
-# 'url_changed' => array( esc_html__( 'Update URL to %s', 'sitepress' ), '' ),
-
-msgid "Rename label to %s"
-msgstr ""
-
-# 'label_changed' => array( esc_html__( 'Rename label to %s', 'sitepress' ), '' ),
-# 'url_changed' => array( esc_html__( 'Update URL to %s', 'sitepress' ), '' ),
-# 'url_missing' => array( esc_html__( 'Untranslated URL %s', 'sitepress' ), '' ),
-
-msgid "Update URL to %s"
-msgstr ""
-
-# 'url_changed' => array( esc_html__( 'Update URL to %s', 'sitepress' ), '' ),
-# 'url_missing' => array( esc_html__( 'Untranslated URL %s', 'sitepress' ), '' ),
-# 'mov' => array( esc_html__( 'Change menu order for %s', 'sitepress' ), '' ),
-
-msgid "Untranslated URL %s"
-msgstr ""
-
-# 'url_missing' => array( esc_html__( 'Untranslated URL %s', 'sitepress' ), '' ),
-# 'mov' => array( esc_html__( 'Change menu order for %s', 'sitepress' ), '' ),
-# 'add' => array( esc_html__( 'Add %s', 'sitepress' ), '' ),
-
-msgid "Change menu order for %s"
-msgstr ""
-
-# 'mov' => array( esc_html__( 'Change menu order for %s', 'sitepress' ), '' ),
-# 'add' => array( esc_html__( 'Add %s', 'sitepress' ), '' ),
-# 'options_changed' => array( esc_html__( 'Update %s menu option to %s', 'sitepress' ), '' ),
-
-msgid "Add %s"
-msgstr ""
-
-# 'add' => array( esc_html__( 'Add %s', 'sitepress' ), '' ),
-# 'options_changed' => array( esc_html__( 'Update %s menu option to %s', 'sitepress' ), '' ),
-# );
-
-msgid "Update %s menu option to %s"
-msgstr ""
-
-# $this->labels['label_missing'] = array(
-# esc_html__( 'Untranslated string %s', 'sitepress' ),
-# $this->print_label_missing_text( $icl_ms, $menu_id ),
-
-msgid "Untranslated string %s"
-msgstr ""
-
-# $res = '&nbsp;' . sprintf(
-# esc_html__(
-# 'The selected strings can now be translated using the %s string translation %s screen',
-
-msgid "The selected strings can now be translated using the %s string translation %s screen"
-msgstr ""
-
-# <input type="text" id="icl_ss" name="s" value="<?php _admin_search_query(); ?>"/>
-# <?php submit_button( __( 'Search', 'sitepress' ), 'button', false, false, array( 'id' => 'search-submit' ) ); ?>
-# 
-
-msgid "Search"
 msgstr ""
 
 # case 'resetwpml':
@@ -5625,286 +6402,6 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-# title="<?php esc_attr_e( 'Choose a post to assign', 'sitepress' ); ?>"
-# data-set_as_source-text="<?php echo esc_attr( sprintf( __( 'Make %s the original language for this %s', 'sitepress' ), $language_name, $this->post->post_type ) ); ?>"
-# data-alert-text="<?php esc_attr_e( "Please make sure to save your post, if you've made any change, before proceeding with this action!", 'sitepress' ); ?>"
-
-msgid "Make %s the original language for this %s"
-msgstr ""
-
-# }
-# $this->add_translation_of_option( 'none', __( '--None--', 'sitepress' ), false );
-# if ( $element_id && ! isset( $_GET['icl_ajx'] ) ) {
-
-msgid "--None--"
-msgstr ""
-
-# if ( trim( $label ) == '' ) {
-# $label = '{' . __( 'Post without a title', 'sitepress' ) . '}';
-# }
-
-msgid "Post without a title"
-msgstr ""
-
-# sprintf(
-# __(
-# 'The current content of this %s will be permanently lost. WPML will copy the %s content and replace the current content.',
-
-msgid "The current content of this %s will be permanently lost. WPML will copy the %s content and replace the current content."
-msgstr ""
-
-# $disabled_duplication       = false;
-# $disabled_duplication_title = esc_attr__( 'Create duplicate', 'sitepress' );
-# $element_key                = array( 'trid' => $this->trid, 'language_code' => $lang['code'] );
-
-msgid "Create duplicate"
-msgstr ""
-
-# if ( ICL_TM_DUPLICATE === (int) $translation_status ) {
-# $disabled_duplication_title = esc_attr__( 'This post is already duplicated.', 'sitepress' );
-# } else {
-
-msgid "This post is already duplicated."
-msgstr ""
-
-# } else {
-# $disabled_duplication_title = esc_attr__( "Can't create a duplicate. A translation is in progress.", 'sitepress' );
-# }
-
-msgid "Can't create a duplicate. A translation is in progress."
-msgstr ""
-
-# <div class="icl_cyan_box"><?php
-# printf( esc_html__( 'This document is a duplicate of %s and it is maintained by WPML.', 'sitepress' ), '<a href="' . esc_url( get_edit_post_link( $duplicate_original_id ) ) . '">' . esc_html( get_the_title( $duplicate_original_id ) ) . '</a>' );
-# ?>
-
-msgid "This document is a duplicate of %s and it is maintained by WPML."
-msgstr ""
-
-# <?php wp_nonce_field( 'reset_duplication_nonce', '_icl_nonce_rd' ) ?>
-# <i><?php printf( esc_html__( 'WPML will no longer synchronize this %s with the original content.', 'sitepress' ), $this->post->post_type ); ?></i>
-# </div>
-
-msgid "WPML will no longer synchronize this %s with the original content."
-msgstr ""
-
-# <label for="icl_post_language">
-# <strong><?php printf( esc_html__( 'Language of this %s', 'sitepress' ), esc_html( $this->post_type_label ) ); ?></strong>
-# </label>
-
-msgid "Language of this %s"
-msgstr ""
-
-# <?php if ( isset( $dupes[ $lang['code'] ] ) ) {
-# echo ' (' . esc_html__( 'duplicate', 'sitepress' ) . ')';
-# } ?>
-
-msgid "duplicate"
-msgstr ""
-
-# private function media_options( $post ) {
-# echo '<br /><br /><strong>' . esc_html__( 'Media attachments', 'sitepress' ) . '</strong>';
-# 
-
-msgid "Media attachments"
-msgstr ""
-
-# if( ! $original_post_id || (int) $post->ID === $original_post_id ){
-# $duplicate_media_label =  esc_html__('Duplicate uploaded media to translations', 'sitepress');
-# $duplicate_featured_label =  esc_html__('Duplicate featured image to translations', 'sitepress');
-
-msgid "Duplicate uploaded media to translations"
-msgstr ""
-
-# $duplicate_media_label =  esc_html__('Duplicate uploaded media to translations', 'sitepress');
-# $duplicate_featured_label =  esc_html__('Duplicate featured image to translations', 'sitepress');
-# } else {
-
-msgid "Duplicate featured image to translations"
-msgstr ""
-
-# } else {
-# $duplicate_media_label =  esc_html__('Duplicate uploaded media from original', 'sitepress');
-# $duplicate_featured_label =  esc_html__('Duplicate featured image from original', 'sitepress');
-
-msgid "Duplicate uploaded media from original"
-msgstr ""
-
-# $duplicate_media_label =  esc_html__('Duplicate uploaded media from original', 'sitepress');
-# $duplicate_featured_label =  esc_html__('Duplicate featured image from original', 'sitepress');
-# }
-
-msgid "Duplicate featured image from original"
-msgstr ""
-
-# echo '<input id="icl_cfo" class="button-secondary" type="button" value="' . sprintf(
-# esc_html__( 'Copy content from %s', 'sitepress' ),
-# $source_lang_name
-
-msgid "Copy content from %s"
-msgstr ""
-
-# data-tippy-zindex="999999"
-# title="<?php echo  esc_html__("This operation copies the content from the original language onto this translation. It's meant for when you want to start with the original content, but keep translating in this language. This button is only enabled when there's no content in the editor.",'sitepress');?>"></i>
-# <?php }
-
-msgid "This operation copies the content from the original language onto this translation. It's meant for when you want to start with the original content, but keep translating in this language. This button is only enabled when there's no content in the editor."
-msgstr ""
-
-# <input id="icl_set_duplicate" type="button" class="button-secondary"
-# value="<?php printf( esc_html__( 'Overwrite with %s content.', 'sitepress' ), $source_lang_name ) ?>"
-# data-wpml_original_post_id="<?php echo absint( $original_post_id ); ?>"
-
-msgid "Overwrite with %s content."
-msgstr ""
-
-# data-tippy-zindex="999999"
-# title="	  <?php echo esc_html__("This operation will synchronize this translation with the original language. When you edit the original, this translation will update immediately. It's meant when you want the content in this language to always be the same as the content in the original language.",'sitepress') ?>"></i>
-# <?php
-
-msgid "This operation will synchronize this translation with the original language. When you edit the original, this translation will update immediately. It's meant when you want the content in this language to always be the same as the content in the original language."
-msgstr ""
-
-# <div id="connect_translations_dialog"
-# title="<?php esc_attr_e( 'Choose a post to assign', 'sitepress' ); ?>"
-# data-set_as_source-text="<?php echo esc_attr( sprintf( __( 'Make %s the original language for this %s', 'sitepress' ), $language_name, $this->post->post_type ) ); ?>"
-
-msgid "Choose a post to assign"
-msgstr ""
-
-# data-set_as_source-text="<?php echo esc_attr( sprintf( __( 'Make %s the original language for this %s', 'sitepress' ), $language_name, $this->post->post_type ) ); ?>"
-# data-alert-text="<?php esc_attr_e( "Please make sure to save your post, if you've made any change, before proceeding with this action!", 'sitepress' ); ?>"
-# data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"
-
-msgid "Please make sure to save your post, if you've made any change, before proceeding with this action!"
-msgstr ""
-
-# data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"
-# data-ok-label="<?php esc_attr_e( 'Ok', 'sitepress' ); ?>">
-# <p class="js-ajax-loader ajax-loader">
-
-msgid "Ok"
-msgstr ""
-
-# <div id="connect_translations_dialog_confirm"
-# title="<?php esc_attr_e( 'Connect this post?', 'sitepress' ); ?>"
-# data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"
-
-msgid "Connect this post?"
-msgstr ""
-
-# data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"
-# data-assign-label="<?php esc_attr_e( 'Assign', 'sitepress' ); ?>">
-# <p>
-
-msgid "Assign"
-msgstr ""
-
-# ?>
-# <p><input id="icl_translate_independent" class="button-secondary" type="button" value="<?php esc_html_e( 'Translate independently', 'sitepress' ) ?>"/></p>
-# <?php wp_nonce_field( 'reset_duplication_nonce', '_icl_nonce_rd' ) ?>
-
-msgid "Translate independently"
-msgstr ""
-
-# <label for="icl_translation_priority_dropdown">
-# <strong><?php esc_html_e( 'Translation Priority', 'sitepress' ); ?></strong>
-# </label>
-
-msgid "Translation Priority"
-msgstr ""
-
-# <a href="<?php echo admin_url( 'edit-tags.php?taxonomy=translation_priority' ); ?>"
-# target="_blank"><?php esc_html_e( 'edit terms', 'sitepress' ); ?></a>
-# </div>
-
-msgid "edit terms"
-msgstr ""
-
-# <a class="js-set-post-as-source" href="#">
-# <?php esc_html_e( 'Connect with translations', 'sitepress' ); ?>
-# </a>
-
-msgid "Connect with translations"
-msgstr ""
-
-# <p class="js-ajax-loader ajax-loader">
-# <?php esc_html_e( 'Loading', 'sitepress' ); ?>&hellip; <span class="spinner"></span>
-# </p>
-
-msgid "Loading"
-msgstr ""
-
-# <label id="post-label" for="post_search">
-# <?php esc_html_e( 'Type a post title', 'sitepress' ); ?>: </label>
-# <input id="post_search" type="text">
-
-msgid "Type a post title"
-msgstr ""
-
-# </div>
-# <p class="js-no-posts-found no-posts-found"><?php esc_html_e( 'No posts found', 'sitepress' ) ?></p>
-# <input type="hidden" id="assign_to_trid">
-
-msgid "No posts found"
-msgstr ""
-
-# <p>
-# <span class="ui-icon ui-icon-alert"></span> <?php esc_html_e( 'You are about to connect the current post with these following posts', 'sitepress' ); ?>
-# : </p>
-
-msgid "You are about to connect the current post with these following posts"
-msgstr ""
-
-# <div id="icl_translation_of_panel" class="icl_box_paragraph">
-# <label for="icl_translation_of"><?php esc_html_e( 'This is a translation of', 'sitepress' ); ?></label>&nbsp;
-# <select name="icl_translation_of" id="icl_translation_of" <?php echo $disabled; ?>>
-
-msgid "This is a translation of"
-msgstr ""
-
-# ?>
-# <p style="clear:both;"><b><?php esc_html_e( 'Translate this Document', 'sitepress' ); ?></b></p>
-# 
-
-msgid "Translate this Document"
-msgstr ""
-
-# <div class="icl_box_paragraph">
-# <p><b><?php esc_html_e( 'Translations', 'sitepress' ) ?></b>
-# (<a class="icl_toggle_show_translations" href="#" <?php if ( $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'hide', 'sitepress' ); ?></a><a class="icl_toggle_show_translations" href="#" <?php if ( ! $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'show', 'sitepress' ) ?></a>)
-
-msgid "Translations"
-msgstr ""
-
-# <p><b><?php esc_html_e( 'Translations', 'sitepress' ) ?></b>
-# (<a class="icl_toggle_show_translations" href="#" <?php if ( $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'hide', 'sitepress' ); ?></a><a class="icl_toggle_show_translations" href="#" <?php if ( ! $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'show', 'sitepress' ) ?></a>)
-# </p>
-
-msgid "hide"
-msgstr ""
-
-# <p><b><?php esc_html_e( 'Translations', 'sitepress' ) ?></b>
-# (<a class="icl_toggle_show_translations" href="#" <?php if ( $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'hide', 'sitepress' ); ?></a><a class="icl_toggle_show_translations" href="#" <?php if ( ! $not_show_flags ) : ?>style="display:none;"<?php endif; ?>><?php esc_html_e( 'show', 'sitepress' ) ?></a>)
-# </p>
-
-msgid "show"
-msgstr ""
-
-# $ccf_note .= sprintf(
-# esc_html__( 'WPML will copy %s from %s when you save this post.', 'sitepress' ),
-# '<i><strong>' . join( '</strong>, <strong>', $copied_cf ) . '</strong></i>',
-
-msgid "WPML will copy %s from %s when you save this post."
-msgstr ""
-
-# );
-# $ccf_note .= '<a class="icl_user_notice_hide notice-dismiss" href="#hide_custom_fields_copy"><span class="screen-reader-text">'. esc_html__( 'Never show this', 'sitepress' ) . '</span></a>';
-# $this->sitepress->admin_notices( $ccf_note, 'notice notice-info otgs-notice otgs-is-dismissible' );
-
-msgid "Never show this"
-msgstr ""
-
 # <p style="margin-top: 20px;">
 # <?php printf( esc_html__( 'Technical support for clients is available via %sWPML forums%s.', 'sitepress' ), '<a target="_blank" href="https://wpml.org/forums/">', '</a>' ); ?>
 # </p>
@@ -5952,391 +6449,6 @@ msgstr ""
 # </p>
 
 msgid "For retrieving debug information if asked by support person, use the %sdebug information%s page."
-msgstr ""
-
-# $labels = array(
-# 'Show'                            => __( 'Show', 'sitepress' ),
-# 'untranslated'                    => __( 'untranslated', 'sitepress' ),
-
-msgid "Show"
-msgstr ""
-
-# 'Show'                            => __( 'Show', 'sitepress' ),
-# 'untranslated'                    => __( 'untranslated', 'sitepress' ),
-# 'all'                             => __( 'all', 'sitepress' ),
-
-msgid "untranslated"
-msgstr ""
-
-# 'untranslated'                    => __( 'untranslated', 'sitepress' ),
-# 'all'                             => __( 'all', 'sitepress' ),
-# 'in'                              => __( 'in', 'sitepress' ),
-
-msgid "all"
-msgstr ""
-
-# 'all'                             => __( 'all', 'sitepress' ),
-# 'in'                              => __( 'in', 'sitepress' ),
-# 'to'                              => __( 'to', 'sitepress' ),
-
-msgid "in"
-msgstr ""
-
-# 'in'                              => __( 'in', 'sitepress' ),
-# 'to'                              => __( 'to', 'sitepress' ),
-# 'of'                              => __( 'of', 'sitepress' ),
-
-msgid "to"
-msgstr ""
-
-# 'of'                              => __( 'of', 'sitepress' ),
-# 'taxonomy'                        => __( 'Taxonomy', 'sitepress' ),
-# 'anyLang'                         => __( 'any language', 'sitepress' ),
-
-msgid "Taxonomy"
-msgstr ""
-
-# 'taxonomy'                        => __( 'Taxonomy', 'sitepress' ),
-# 'anyLang'                         => __( 'any language', 'sitepress' ),
-# 'apply'                           => __( 'Refresh', 'sitepress' ),
-
-msgid "any language"
-msgstr ""
-
-# 'anyLang'                         => __( 'any language', 'sitepress' ),
-# 'apply'                           => __( 'Refresh', 'sitepress' ),
-# 'synchronizeBtn'                  => __( 'Update Taxonomy Hierarchy', 'sitepress' ),
-
-msgid "Refresh"
-msgstr ""
-
-# 'apply'                           => __( 'Refresh', 'sitepress' ),
-# 'synchronizeBtn'                  => __( 'Update Taxonomy Hierarchy', 'sitepress' ),
-# 'searchPlaceHolder'               => __( 'Search', 'sitepress' ),
-
-msgid "Update Taxonomy Hierarchy"
-msgstr ""
-
-# 'searchPlaceHolder'               => __( 'Search', 'sitepress' ),
-# 'selectParent'                    => __( 'select parent', 'sitepress' ),
-# 'taxToTranslate'                  => __( 'Select the taxonomy to translate: ', 'sitepress' ),
-
-msgid "select parent"
-msgstr ""
-
-# 'selectParent'                    => __( 'select parent', 'sitepress' ),
-# 'taxToTranslate'                  => __( 'Select the taxonomy to translate: ', 'sitepress' ),
-# 'translate'                       => sprintf( __( '%1$s Translation', 'sitepress' ), '%taxonomy%' ),
-
-msgid "Select the taxonomy to translate: "
-msgstr ""
-
-# 'taxToTranslate'                  => __( 'Select the taxonomy to translate: ', 'sitepress' ),
-# 'translate'                       => sprintf( __( '%1$s Translation', 'sitepress' ), '%taxonomy%' ),
-# 'Synchronize'                     => __( 'Hierarchy Synchronization', 'sitepress' ),
-
-msgid "%1$s Translation"
-msgstr ""
-
-# 'translate'                       => sprintf( __( '%1$s Translation', 'sitepress' ), '%taxonomy%' ),
-# 'Synchronize'                     => __( 'Hierarchy Synchronization', 'sitepress' ),
-# 'lowercaseTranslate'              => __( 'translate', 'sitepress' ),
-
-msgid "Hierarchy Synchronization"
-msgstr ""
-
-# 'lowercaseTranslate'              => __( 'translate', 'sitepress' ),
-# 'copyToAllLanguages'              => __( 'Copy to all languages', 'sitepress' ),
-# 'copyToAllMessage'                => sprintf( __( 'Copy this term from original: %1$s to all other languages?' ), '%language%' ),
-
-msgid "Copy to all languages"
-msgstr ""
-
-# 'copyToAllLanguages'              => __( 'Copy to all languages', 'sitepress' ),
-# 'copyToAllMessage'                => sprintf( __( 'Copy this term from original: %1$s to all other languages?' ), '%language%' ),
-# 'copyAllOverwrite'                => __( 'Overwrite existing translations', 'sitepress' ),
-
-msgid "Copy this term from original: %1$s to all other languages?"
-msgstr ""
-
-# 'copyToAllMessage'                => sprintf( __( 'Copy this term from original: %1$s to all other languages?' ), '%language%' ),
-# 'copyAllOverwrite'                => __( 'Overwrite existing translations', 'sitepress' ),
-# 'willBeRemoved'                   => __( 'Will be removed', 'sitepress' ),
-
-msgid "Overwrite existing translations"
-msgstr ""
-
-# 'copyAllOverwrite'                => __( 'Overwrite existing translations', 'sitepress' ),
-# 'willBeRemoved'                   => __( 'Will be removed', 'sitepress' ),
-# 'willBeAdded'                     => __( 'Will be added', 'sitepress' ),
-
-msgid "Will be removed"
-msgstr ""
-
-# 'willBeRemoved'                   => __( 'Will be removed', 'sitepress' ),
-# 'willBeAdded'                     => __( 'Will be added', 'sitepress' ),
-# 'legend'                          => __( 'Legend:', 'sitepress' ),
-
-msgid "Will be added"
-msgstr ""
-
-# 'willBeAdded'                     => __( 'Will be added', 'sitepress' ),
-# 'legend'                          => __( 'Legend:', 'sitepress' ),
-# 'refLang'                         => sprintf( __( 'Synchronize taxonomy hierarchy according to: %1$s language.', 'sitepress' ), '%language%' ),
-
-msgid "Legend:"
-msgstr ""
-
-# 'legend'                          => __( 'Legend:', 'sitepress' ),
-# 'refLang'                         => sprintf( __( 'Synchronize taxonomy hierarchy according to: %1$s language.', 'sitepress' ), '%language%' ),
-# 'targetLang'                      => __( 'Target Language', 'sitepress' ),
-
-msgid "Synchronize taxonomy hierarchy according to: %1$s language."
-msgstr ""
-
-# 'refLang'                         => sprintf( __( 'Synchronize taxonomy hierarchy according to: %1$s language.', 'sitepress' ), '%language%' ),
-# 'targetLang'                      => __( 'Target Language', 'sitepress' ),
-# 'termPopupDialogTitle'            => __( 'Term translation', 'sitepress' ),
-
-msgid "Target Language"
-msgstr ""
-
-# 'targetLang'                      => __( 'Target Language', 'sitepress' ),
-# 'termPopupDialogTitle'            => __( 'Term translation', 'sitepress' ),
-# 'originalTermPopupDialogTitle'    => __( 'Original term', 'sitepress' ),
-
-msgid "Term translation"
-msgstr ""
-
-# 'termPopupDialogTitle'            => __( 'Term translation', 'sitepress' ),
-# 'originalTermPopupDialogTitle'    => __( 'Original term', 'sitepress' ),
-# 'labelPopupDialogTitle'           => __( 'Label translation', 'sitepress' ),
-
-msgid "Original term"
-msgstr ""
-
-# 'originalTermPopupDialogTitle'    => __( 'Original term', 'sitepress' ),
-# 'labelPopupDialogTitle'           => __( 'Label translation', 'sitepress' ),
-# 'copyFromOriginal'                => __( 'Copy from original', 'sitepress' ),
-
-msgid "Label translation"
-msgstr ""
-
-# 'labelPopupDialogTitle'           => __( 'Label translation', 'sitepress' ),
-# 'copyFromOriginal'                => __( 'Copy from original', 'sitepress' ),
-# 'original'                        => __( 'Original:', 'sitepress' ),
-
-msgid "Copy from original"
-msgstr ""
-
-# 'copyFromOriginal'                => __( 'Copy from original', 'sitepress' ),
-# 'original'                        => __( 'Original:', 'sitepress' ),
-# 'translationTo'                   => __( 'Translation to:', 'sitepress' ),
-
-msgid "Original:"
-msgstr ""
-
-# 'original'                        => __( 'Original:', 'sitepress' ),
-# 'translationTo'                   => __( 'Translation to:', 'sitepress' ),
-# 'Name'                            => __( 'Name', 'sitepress' ),
-
-msgid "Translation to:"
-msgstr ""
-
-# 'translationTo'                   => __( 'Translation to:', 'sitepress' ),
-# 'Name'                            => __( 'Name', 'sitepress' ),
-# 'Slug'                            => __( 'Slug', 'sitepress' ),
-
-msgid "Name"
-msgstr ""
-
-# 'Name'                            => __( 'Name', 'sitepress' ),
-# 'Slug'                            => __( 'Slug', 'sitepress' ),
-# 'Description'                     => __( 'Description', 'sitepress' ),
-
-msgid "Slug"
-msgstr ""
-
-# 'Slug'                            => __( 'Slug', 'sitepress' ),
-# 'Description'                     => __( 'Description', 'sitepress' ),
-# 'Ok'                              => __( 'OK', 'sitepress' ),
-
-msgid "Description"
-msgstr ""
-
-# 'Description'                     => __( 'Description', 'sitepress' ),
-# 'Ok'                              => __( 'OK', 'sitepress' ),
-# 'save'                            => __( 'Save', 'sitepress' ),
-
-msgid "OK"
-msgstr ""
-
-# 'save'                            => __( 'Save', 'sitepress' ),
-# 'Singular'                        => __( 'Singular', 'sitepress' ),
-# 'Plural'                          => __( 'Plural', 'sitepress' ),
-
-msgid "Singular"
-msgstr ""
-
-# 'Singular'                        => __( 'Singular', 'sitepress' ),
-# 'Plural'                          => __( 'Plural', 'sitepress' ),
-# 'changeLanguage'                  => __( 'Change language', 'sitepress' ),
-
-msgid "Plural"
-msgstr ""
-
-# 'Plural'                          => __( 'Plural', 'sitepress' ),
-# 'changeLanguage'                  => __( 'Change language', 'sitepress' ),
-# 'cancel'                          => __( 'Cancel', 'sitepress' ),
-
-msgid "Change language"
-msgstr ""
-
-# 'cancel'                          => __( 'Cancel', 'sitepress' ),
-# 'loading'                         => __( 'loading', 'sitepress' ),
-# 'Save'                            => __( 'Save', 'sitepress' ),
-
-msgid "loading"
-msgstr ""
-
-# 'currentPage'                     => __( 'Current page', 'sitepress' ),
-# 'goToPreviousPage'                => __( 'Go to previous page', 'sitepress' ),
-# 'goToNextPage'                    => __( 'Go to the next page', 'sitepress' ),
-
-msgid "Go to previous page"
-msgstr ""
-
-# 'goToPreviousPage'                => __( 'Go to previous page', 'sitepress' ),
-# 'goToNextPage'                    => __( 'Go to the next page', 'sitepress' ),
-# 'goToFirstPage'                   => __( 'Go to the first page', 'sitepress' ),
-
-msgid "Go to the next page"
-msgstr ""
-
-# 'goToNextPage'                    => __( 'Go to the next page', 'sitepress' ),
-# 'goToFirstPage'                   => __( 'Go to the first page', 'sitepress' ),
-# 'goToLastPage'                    => __( 'Go to the last page', 'sitepress' ),
-
-msgid "Go to the first page"
-msgstr ""
-
-# 'goToFirstPage'                   => __( 'Go to the first page', 'sitepress' ),
-# 'goToLastPage'                    => __( 'Go to the last page', 'sitepress' ),
-# 'hieraSynced'                     => __( 'The taxonomy hierarchy is now synchronized.', 'sitepress' ),
-
-msgid "Go to the last page"
-msgstr ""
-
-# 'goToLastPage'                    => __( 'Go to the last page', 'sitepress' ),
-# 'hieraSynced'                     => __( 'The taxonomy hierarchy is now synchronized.', 'sitepress' ),
-# 'hieraAlreadySynced'              => __( 'The taxonomy hierarchy is already synchronized.', 'sitepress' ),
-
-msgid "The taxonomy hierarchy is now synchronized."
-msgstr ""
-
-# 'hieraSynced'                     => __( 'The taxonomy hierarchy is now synchronized.', 'sitepress' ),
-# 'hieraAlreadySynced'              => __( 'The taxonomy hierarchy is already synchronized.', 'sitepress' ),
-# 'noTermsFound'                    => sprintf( __( 'No %1$s found.', 'sitepress' ), '%taxonomy%' ),
-
-msgid "The taxonomy hierarchy is already synchronized."
-msgstr ""
-
-# 'hieraAlreadySynced'              => __( 'The taxonomy hierarchy is already synchronized.', 'sitepress' ),
-# 'noTermsFound'                    => sprintf( __( 'No %1$s found.', 'sitepress' ), '%taxonomy%' ),
-# 'items'                           => __( 'items', 'sitepress' ),
-
-msgid "No %1$s found."
-msgstr ""
-
-# 'noTermsFound'                    => sprintf( __( 'No %1$s found.', 'sitepress' ), '%taxonomy%' ),
-# 'items'                           => __( 'items', 'sitepress' ),
-# 'item'                            => __( 'item', 'sitepress' ),
-
-msgid "items"
-msgstr ""
-
-# 'items'                           => __( 'items', 'sitepress' ),
-# 'item'                            => __( 'item', 'sitepress' ),
-# 'summaryTerms'                    => sprintf( __( 'Translation of %1$s', 'sitepress' ), '%taxonomy%' ),
-
-msgid "item"
-msgstr ""
-
-# 'item'                            => __( 'item', 'sitepress' ),
-# 'summaryTerms'                    => sprintf( __( 'Translation of %1$s', 'sitepress' ), '%taxonomy%' ),
-# 'summaryLabels'                   => sprintf( __( 'Translations of taxonomy %1$s labels and slug', 'sitepress' ), '%taxonomy%' ),
-
-msgid "Translation of %1$s"
-msgstr ""
-
-# 'summaryTerms'                    => sprintf( __( 'Translation of %1$s', 'sitepress' ), '%taxonomy%' ),
-# 'summaryLabels'                   => sprintf( __( 'Translations of taxonomy %1$s labels and slug', 'sitepress' ), '%taxonomy%' ),
-# 'activateStringTranslation'       => sprintf( __( 'To translate taxonomy labels and slug you need %s plugin.', 'sitepress' ), $st_plugin ),
-
-msgid "Translations of taxonomy %1$s labels and slug"
-msgstr ""
-
-# 'summaryLabels'                   => sprintf( __( 'Translations of taxonomy %1$s labels and slug', 'sitepress' ), '%taxonomy%' ),
-# 'activateStringTranslation'       => sprintf( __( 'To translate taxonomy labels and slug you need %s plugin.', 'sitepress' ), $st_plugin ),
-# 'preparingTermsData'              => __( 'Loading ...', 'sitepress' ),
-
-msgid "To translate taxonomy labels and slug you need %s plugin."
-msgstr ""
-
-# 'activateStringTranslation'       => sprintf( __( 'To translate taxonomy labels and slug you need %s plugin.', 'sitepress' ), $st_plugin ),
-# 'preparingTermsData'              => __( 'Loading ...', 'sitepress' ),
-# 'firstColumnHeading'              => sprintf( __( '%1$s terms (in original language)', 'sitepress' ), '%taxonomy%' ),
-
-msgid "Loading ..."
-msgstr ""
-
-# 'preparingTermsData'              => __( 'Loading ...', 'sitepress' ),
-# 'firstColumnHeading'              => sprintf( __( '%1$s terms (in original language)', 'sitepress' ), '%taxonomy%' ),
-# 'resultsTruncated'                => sprintf( __( 'Because too many %1$s were found, only the first %2$s results are listed. You can refine the results using the Search field below.', 'sitepress' ), '%taxonomy%', '<strong>' . $term_results_cap . '</strong>' ),
-
-msgid "%1$s terms (in original language)"
-msgstr ""
-
-# 'firstColumnHeading'              => sprintf( __( '%1$s terms (in original language)', 'sitepress' ), '%taxonomy%' ),
-# 'resultsTruncated'                => sprintf( __( 'Because too many %1$s were found, only the first %2$s results are listed. You can refine the results using the Search field below.', 'sitepress' ), '%taxonomy%', '<strong>' . $term_results_cap . '</strong>' ),
-# 'wpml_save_term_nonce'            => wp_create_nonce( 'wpml_save_term_nonce' ),
-
-msgid "Because too many %1$s were found, only the first %2$s results are listed. You can refine the results using the Search field below."
-msgstr ""
-
-# 
-# 'addTranslation'   => __( 'Add translation', 'sitepress' ),
-# 'editTranslation'  => __( 'Edit translation', 'sitepress' ),
-
-msgid "Add translation"
-msgstr ""
-
-# 'editTranslation'  => __( 'Edit translation', 'sitepress' ),
-# 'originalLanguage' => __( 'Original language', 'sitepress' ),
-# 'termMetaLabel'    => __( 'This term has additional meta fields:', 'sitepress' ),
-
-msgid "Original language"
-msgstr ""
-
-# 'originalLanguage' => __( 'Original language', 'sitepress' ),
-# 'termMetaLabel'    => __( 'This term has additional meta fields:', 'sitepress' ),
-# );
-
-msgid "This term has additional meta fields:"
-msgstr ""
-
-# if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wpml_taxonomy_translation_nonce' ) ) {
-# wp_send_json_error( __( 'Wrong nonce', 'sitepress' ) );
-# return;
-
-msgid "Wrong nonce"
-msgstr ""
-
-# echo '<div id="icl_tax_adding_notice" class="updated fade"><p>'
-# . sprintf ( __ ( 'Adding translation for: %s.', 'sitepress' ), $tax_name )
-# . '</p></div>';
-
-msgid "Adding translation for: %s."
 msgstr ""
 
 # <div id="icl_theme_plugins_compatibility">
@@ -6668,6 +6780,13 @@ msgstr ""
 msgid "Please note that all translations you have sent to remote translation services will be lost if you reset WPML's data. They cannot be recovered later."
 msgstr ""
 
+# echo '<p class="error" style="padding:6px;">';
+# _e( "If you are using the Advanced Translation Editor, you will lose the translations that are in progress, as well as the existing translation memory and glossary. You will also lose access to purchases, invoices, and history related to your work with the Advanced Translation Editor.", 'sitepress' );
+# echo '</p>';
+
+msgid "If you are using the Advanced Translation Editor, you will lose the translations that are in progress, as well as the existing translation memory and glossary. You will also lose access to purchases, invoices, and history related to your work with the Advanced Translation Editor."
+msgstr ""
+
 # </select>
 # <input id="wpml_sync_posts_taxonomies" type="button" class="button-secondary" value="<?php esc_html_e( 'Synchronize posts taxonomies', 'sitepress' ); ?>"/> <span class="wpml-notice"></span><br/>
 # <small style="margin-left:10px;"><?php esc_html_e( 'This will assign the same taxonomy terms as the source for each post translation.', 'sitepress' ); ?></small>
@@ -6792,10 +6911,10 @@ msgid "Add translation to %s"
 msgstr ""
 
 # $message = '<p>';
-# $message .= sprintf( __( "This version of WPML allows the use of taxonomy terms with the same name across multiple languages. Your site currently has %d taxonomy terms that require an update, so they will not be displayed with language suffixes.", "sitepress" ), $suffix_count );
+# $message .= sprintf( __( "In this version of WPML, you can give your taxonomy terms the same name across multiple languages. You need to update %d taxonomy terms on your website so that they display the same name without any language suffixes.", "sitepress" ), $suffix_count );
 # $message .= '</p>';
 
-msgid "This version of WPML allows the use of taxonomy terms with the same name across multiple languages. Your site currently has %d taxonomy terms that require an update, so they will not be displayed with language suffixes."
+msgid "In this version of WPML, you can give your taxonomy terms the same name across multiple languages. You need to update %d taxonomy terms on your website so that they display the same name without any language suffixes."
 msgstr ""
 
 # $output .= '<a name="termsuffixupdate"></a>';
@@ -6840,153 +6959,6 @@ msgstr ""
 msgid "All term names updated"
 msgstr ""
 
-# if ( $elements ) {
-# $msg = esc_html( __( "You haven't set your synchronization preferences for these %s: %s. Default value was selected.", 'sitepress' ) );
-# $notice .= '<div class="updated below-h2"><p>';
-
-msgid "You haven't set your synchronization preferences for these %s: %s. Default value was selected."
-msgstr ""
-
-# <div class="wpml-flex-table wpml-translation-setup-table wpml-margin-top-sm">
-# <?php $custom_types_ui->render_custom_types_header_ui( esc_html__( 'Post types', 'sitepress' ) ); ?>
-# <div class="wpml-flex-table-body">
-
-msgid "Post types"
-msgstr ""
-
-# <div class="wpml-section-header">
-# <h3><?php esc_html_e( 'Post Types Translation', 'sitepress' );?></h3>
-# </div>
-
-msgid "Post Types Translation"
-msgstr ""
-
-# <div class="wpml-section-header">
-# <h3><?php esc_html_e( 'Taxonomies Translation', 'sitepress' ); ?></h3>
-# </div>
-
-msgid "Taxonomies Translation"
-msgstr ""
-
-# <div class="wpml-section-header">
-# <h3><?php esc_html_e( 'Posts and pages synchronization', 'sitepress' ); ?></h3>
-# </div>
-
-msgid "Posts and pages synchronization"
-msgstr ""
-
-# <label><input type="checkbox" id="icl_sync_page_ordering" name="icl_sync_page_ordering" <?php checked( $sitepress_settings['sync_page_ordering'] ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize page order for translations', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize page order for translations"
-msgstr ""
-
-# <label><input type="checkbox" id="icl_sync_page_parent" name="icl_sync_page_parent" <?php checked( $sitepress_settings['sync_page_parent'] ) ?> value="1" />
-# <?php esc_html_e( 'Set page parent for translation according to page parent of the original language', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Set page parent for translation according to page parent of the original language"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_page_template" <?php checked( $sitepress_settings['sync_page_template'] ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize page template', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize page template"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_comment_status" <?php checked( $sitepress_settings['sync_comment_status'] ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize comment status', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize comment status"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_ping_status" <?php checked( $sitepress_settings['sync_ping_status'] ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize ping status', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize ping status"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_sticky_flag" <?php checked( $sitepress_settings['sync_sticky_flag'] ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize sticky flag', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize sticky flag"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_password" <?php checked( $sitepress_settings['sync_password'] ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize password for password protected posts', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize password for password protected posts"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_private_flag" <?php checked( $sitepress_settings['sync_private_flag'] ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize private flag', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize private flag"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_post_format" <?php checked( $sitepress_settings['sync_post_format'] ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize posts format', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize posts format"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_delete" <?php checked( $sitepress_settings['sync_delete'] ) ?> value="1" />
-# <?php esc_html_e( 'When deleting a post, delete translations as well', 'sitepress' ) ?></label>
-# </p>
-
-msgid "When deleting a post, delete translations as well"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_delete_tax" <?php checked( $sitepress_settings['sync_delete_tax'] ) ?> value="1" />
-# <?php esc_html_e( 'When deleting a taxonomy (category, tag or custom), delete translations as well', 'sitepress' ) ?></label>
-# </p>
-
-msgid "When deleting a taxonomy (category, tag or custom), delete translations as well"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_post_taxonomies" <?php checked( $sitepress_settings['sync_post_taxonomies'] ) ?> value="1" />
-# <?php esc_html_e( 'Copy taxonomy to translations', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Copy taxonomy to translations"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_post_date" <?php checked( $sitepress_settings['sync_post_date'] ) ?> value="1" />
-# <?php esc_html_e( 'Copy publishing date to translations', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Copy publishing date to translations"
-msgstr ""
-
-# <label><input type="checkbox" name="icl_sync_comments_on_duplicates" <?php checked( $sitepress->get_setting( 'sync_comments_on_duplicates' ) ) ?> value="1" />
-# <?php esc_html_e( 'Synchronize comments on duplicate content', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Synchronize comments on duplicate content"
-msgstr ""
-
-# <div class="wpml-section-content-inner">
-# <h4><?php esc_html_e( 'Page builders options', 'sitepress' ) ?></h4>
-# <?php $wpml_page_builder_options = new WPML_Page_Builder_Settings(); ?>
-
-msgid "Page builders options"
-msgstr ""
-
-# <label><input type="checkbox" name="wpml_pb_translate_raw_html" <?php checked( $wpml_page_builder_options->is_raw_html_translatable() ); ?> value="1" />
-# <?php esc_html_e( 'Send to translation the content of raw HTML cells', 'sitepress' ) ?></label>
-# </p>
-
-msgid "Send to translation the content of raw HTML cells"
-msgstr ""
-
 # echo '<div class="updated message">';
 # echo '<h3>' . sprintf(__('<i>%s</i> integration', 'sitepress'), str_replace('_', ' ', substr($this->plugin_cp_class, 7))) . '</h3>';
 # echo '<p>';
@@ -7022,223 +6994,186 @@ msgstr ""
 msgid "You are using a caching plugin. When you translate strings, the cache needs to be cleared in order for the translation to display."
 msgstr ""
 
-# $message              = '';
-# $message              .= __(
-# 'WPML is missing some records in the languages tables and it cannot fully work until this issue is fixed.',
-
-msgid "WPML is missing some records in the languages tables and it cannot fully work until this issue is fixed."
-msgstr ""
-
-# $message              .= sprintf(
-# __(
-# 'Please go to the %1$s page and click on "%2$s" to fix this problem.',
-
-msgid "Please go to the %1$s page and click on \"%2$s\" to fix this problem."
-msgstr ""
-
-# $message              .= '<br />';
-# $message              .= __( 'This warning will disappear once this issue is fixed.', 'sitepress' );
-# ICL_AdminNotifier::removeMessage( 'setup-incomplete' );
-
-msgid "This warning will disappear once this issue is fixed."
-msgstr ""
-
-# $post_edit_messages = array(
-# 'switch_language_title'   => __( 'You are about to change the language of {post_name}.', 'sitepress' ),
-# 'switch_language_alert'   => __( 'All categories and tags will be translated if possible.', 'sitepress' ),
-
-msgid "You are about to change the language of {post_name}."
-msgstr ""
-
-# 'switch_language_title'   => __( 'You are about to change the language of {post_name}.', 'sitepress' ),
-# 'switch_language_alert'   => __( 'All categories and tags will be translated if possible.', 'sitepress' ),
-# 'connection_loss_alert'   => __( 'The following terms do not have a translation in the chosen language and will be disconnected from this post:', 'sitepress' ),
-
-msgid "All categories and tags will be translated if possible."
-msgstr ""
-
-# 'switch_language_alert'   => __( 'All categories and tags will be translated if possible.', 'sitepress' ),
-# 'connection_loss_alert'   => __( 'The following terms do not have a translation in the chosen language and will be disconnected from this post:', 'sitepress' ),
-# 'loading'                 => __( 'Loading Language Data for {post_name}', 'sitepress' ),
-
-msgid "The following terms do not have a translation in the chosen language and will be disconnected from this post:"
-msgstr ""
-
-# 'connection_loss_alert'   => __( 'The following terms do not have a translation in the chosen language and will be disconnected from this post:', 'sitepress' ),
-# 'loading'                 => __( 'Loading Language Data for {post_name}', 'sitepress' ),
-# 'switch_language_message' => __( 'Please make sure that you\'ve saved all the changes. We will have to reload the page.', 'sitepress' ),
-
-msgid "Loading Language Data for {post_name}"
-msgstr ""
-
-# 'loading'                 => __( 'Loading Language Data for {post_name}', 'sitepress' ),
-# 'switch_language_message' => __( 'Please make sure that you\'ve saved all the changes. We will have to reload the page.', 'sitepress' ),
-# 'switch_language_confirm' => __( 'Do you want to continue?', 'sitepress' ),
-
-msgid "Please make sure that you've saved all the changes. We will have to reload the page."
-msgstr ""
-
-# 'switch_language_message' => __( 'Please make sure that you\'ve saved all the changes. We will have to reload the page.', 'sitepress' ),
-# 'switch_language_confirm' => __( 'Do you want to continue?', 'sitepress' ),
-# '_nonce'                  => wp_create_nonce( 'wpml_switch_post_lang_nonce' ),
-
-msgid "Do you want to continue?"
-msgstr ""
-
-# '_nonce'                  => wp_create_nonce( 'wpml_switch_post_lang_nonce' ),
-# 'empty_post_title'        => __( '(No title for this post yet)', 'sitepress' ),
-# 'ok_button_label'         => __( 'OK', 'sitepress' ),
-
-msgid "(No title for this post yet)"
-msgstr ""
-
-# 'strings'     => array(
-# 'success_1'         => __( 'Post type and source language assignment have been fixed for ', 'sitepress' ),
-# 'success_2'         => __( ' elements', 'sitepress' ),
-
-msgid "Post type and source language assignment have been fixed for "
-msgstr ""
-
-# 'success_1'         => __( 'Post type and source language assignment have been fixed for ', 'sitepress' ),
-# 'success_2'         => __( ' elements', 'sitepress' ),
-# 'no_problems'       => __( 'No errors were found in the assignment of post types.' ),
-
-msgid " elements"
-msgstr ""
-
-# 'success_2'         => __( ' elements', 'sitepress' ),
-# 'no_problems'       => __( 'No errors were found in the assignment of post types.' ),
-# 'suffixesRemoved'   => __( 'Language suffixes were removed from the selected terms.' ),
-
-msgid "No errors were found in the assignment of post types."
-msgstr ""
-
-# 'no_problems'       => __( 'No errors were found in the assignment of post types.' ),
-# 'suffixesRemoved'   => __( 'Language suffixes were removed from the selected terms.' ),
-# 'done'              => __( 'Done', 'sitepress' ),
-
-msgid "Language suffixes were removed from the selected terms."
-msgstr ""
-
-# if ( $description == '' ) {
-# $_POST['icl_form_errors'] = __( 'Please provide a short description of the website so that translators know what background is required from them.', 'sitepress' );
 # } else {
-
-msgid "Please provide a short description of the website so that translators know what background is required from them."
-msgstr ""
-
-# if ( current_user_can( 'manage_options' ) ) {
-# add_meta_box( 'icl_div_config', __( 'Multilingual Content Setup', 'sitepress' ), array( $this, 'meta_box_config' ), $post->post_type, 'normal', 'low' );
+# $error = __( 'Invalid site key for the current site.', 'installer' ) . '<br /><div class="installer-footnote">' . __( 'Please note that the site key is case sensitive.', 'installer' ) . '</div>';
 # }
 
-msgid "Multilingual Content Setup"
-msgstr ""
-
-# 'url'  => add_query_arg( array( 'show_system_fields' => ! $settings_factory->show_system_fields ) ),
-# 'text' => $settings_factory->show_system_fields ? __( 'Hide system fields', 'sitepress' ) : __( 'Show system fields', 'sitepress' ),
-# );
-
-msgid "Hide system fields"
-msgstr ""
-
-# 'url'  => add_query_arg( array( 'show_system_fields' => ! $settings_factory->show_system_fields ) ),
-# 'text' => $settings_factory->show_system_fields ? __( 'Hide system fields', 'sitepress' ) : __( 'Show system fields', 'sitepress' ),
-# );
-
-msgid "Show system fields"
-msgstr ""
-
-# if ( ! empty( $custom_taxonomies ) || ! empty( $custom_keys ) ) {
-# echo '<small>' . __( 'Note: Custom taxonomies and custom fields are shared across different post types.', 'sitepress' ) . '</small>';
-# }
-
-msgid "Note: Custom taxonomies and custom fields are shared across different post types."
-msgstr ""
-
-# if ( ! $output ) {
-# $output = '<select id="parent_id"><option value="">' . __( 'Main Page (no parent)', 'sitepress' ) . '</option></select>';
-# }
-
-msgid "Main Page (no parent)"
-msgstr ""
-
-# <noscript>
-# <div class="error"><?php echo __( 'WPML admin screens require JavaScript in order to display. JavaScript is currently off in your browser.', 'sitepress' ); ?></div>
-# </noscript>
-
-msgid "WPML admin screens require JavaScript in order to display. JavaScript is currently off in your browser."
-msgstr ""
-
-# if ( ! $this->wpdb->get_var( $this->wpdb->prepare( "SELECT code FROM {$this->wpdb->prefix}icl_languages WHERE code=%s", $lang ) ) ) {
-# $IXR_Error = new IXR_Error( 401, __( 'Invalid language code', 'sitepress' ) );
-# echo $IXR_Error->getXml();
-
-msgid "Invalid language code"
-msgstr ""
-
-# ?>
-# <td style="padding:4px;line-height:normal;"><a href="<?php echo $add_link; ?>"><?php echo esc_html__( 'add', 'sitepress' ); ?></a></td>
-# <?php endif; ?>
-
-msgid "add"
-msgstr ""
-
-# <tr>
-# <th colspan="2"><?php _e( 'Custom taxonomies', 'sitepress' ); ?></th>
-# </tr>
-
-msgid "Custom taxonomies"
-msgstr ""
-
-# value="<?php echo $ctax; ?>" <?php echo $checked_tax_translate; ?><?php echo $radio_disabled; ?> />&nbsp;<?php _e( 'Translate', 'sitepress' ); ?></label>
-# <label><input name="icl_mcs_custom_taxs_<?php echo $ctax; ?>" type="radio" value="0" <?php echo $checked_do_nothing; ?><?php echo $radio_disabled; ?> />&nbsp;<?php _e( 'Do nothing', 'sitepress' ); ?></label>
-# </td>
-
-msgid "Do nothing"
+msgid "Invalid site key for the current site."
 msgstr ""
 
 # } else {
-# _e( 'Nothing to configure.', 'sitepress' );
+# $error = __( 'Invalid site key for the current site.', 'installer' ) . '<br /><div class="installer-footnote">' . __( 'Please note that the site key is case sensitive.', 'installer' ) . '</div>';
 # }
 
-msgid "Nothing to configure."
+msgid "Please note that the site key is case sensitive."
 msgstr ""
 
-# <p>
-# <?php _e( 'You need to configure WPML before you can start translating.', 'sitepress' ); ?>
-# </p>
+# $repository_data->set_subscription( null );
+# $error = __( 'Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key.', 'installer' );
+# }
 
-msgid "You need to configure WPML before you can start translating."
+msgid "Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key."
 msgstr ""
 
-# <input type="hidden" id="icl_dismiss_help_nonce" value="<?php echo $icl_dhn = wp_create_nonce( 'dismiss_help_nonce' ); ?>"/>
-# <a href="admin.php?page=<?php echo WPML_PLUGIN_FOLDER . '/menu/languages.php'; ?>" class="button-primary configure-wpml"><?php _e( 'Configure WPML', 'sitepress' ); ?></a>&nbsp;
-# <a href="https://wpml.org/documentation/getting-started-guide/?utm_source=wpmlplugin&utm_medium=wpadmin&utm_term=getting-started&utm_content=getting-started&utm_campaign=wpml" target="_blank">
+# if ( preg_match( '#Could not resolve host: (.*)#', $error, $matches ) || preg_match( '#Couldn\'t resolve host \'(.*)\'#', $error, $matches ) ) {
+# $error = sprintf( __( "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates.", 'installer' ),
+# '<strong><i>' . $repository_data->get_product_name() . '</i></strong>',
 
-msgid "Configure WPML"
+msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates."
 msgstr ""
 
-# <a href="https://wpml.org/documentation/getting-started-guide/?utm_source=wpmlplugin&utm_medium=wpadmin&utm_term=getting-started&utm_content=getting-started&utm_campaign=wpml" target="_blank">
-# <?php _e( 'Getting started guide', 'sitepress' ); ?>
-# </a>
+# if ( ! $repository || ! $nonce || ! $site_key || ! wp_verify_nonce( $nonce, 'save_site_key_' . $repository ) ) {
+# wp_send_json_error( esc_html__( 'Invalid request!', 'installer' ) );
+# }
 
-msgid "Getting started guide"
+msgid "Invalid request!"
 msgstr ""
 
-# 
-# $part_one = _x( 'Multilingual WordPress', 'Multilingual WordPress with WPML: first part', 'sitepress' );
-# $part_two = _x( 'with WPML', 'Multilingual WordPress with WPML: second part', 'sitepress' );
+# 'commercial',
+# __( 'Installer Support', 'installer' ),
+# 'Installer Support',
 
-msgctxt "Multilingual WordPress with WPML: first part"
-msgid "Multilingual WordPress"
+msgid "Installer Support"
 msgstr ""
 
-# $part_one = _x( 'Multilingual WordPress', 'Multilingual WordPress with WPML: first part', 'sitepress' );
-# $part_two = _x( 'with WPML', 'Multilingual WordPress with WPML: second part', 'sitepress' );
-# 
+# 'title' => __( 'Installer Support', 'installer' ),
+# 'content' => __( 'For retrieving Installer debug information use the %s page.', 'installer' ),
+# 'link' => array(
 
-msgctxt "Multilingual WordPress with WPML: second part"
-msgid "with WPML"
+msgid "For retrieving Installer debug information use the %s page."
+msgstr ""
+
+# 'log'          => array(
+# 'title'             => __( 'Installer Log', 'installer' ),
+# 'request_url'       => __( 'Request URL', 'installer' ),
+
+msgid "Installer Log"
+msgstr ""
+
+# 'title'             => __( 'Installer Log', 'installer' ),
+# 'request_url'       => __( 'Request URL', 'installer' ),
+# 'request_arguments' => __( 'Request Arguments', 'installer' ),
+
+msgid "Request URL"
+msgstr ""
+
+# 'request_url'       => __( 'Request URL', 'installer' ),
+# 'request_arguments' => __( 'Request Arguments', 'installer' ),
+# 'response'          => __( 'Response', 'installer' ),
+
+msgid "Request Arguments"
+msgstr ""
+
+# 'request_arguments' => __( 'Request Arguments', 'installer' ),
+# 'response'          => __( 'Response', 'installer' ),
+# 'component'         => __( 'Component', 'installer' ),
+
+msgid "Response"
+msgstr ""
+
+# 'response'          => __( 'Response', 'installer' ),
+# 'component'         => __( 'Component', 'installer' ),
+# 'time'              => __( 'Time', 'installer' ),
+
+msgid "Component"
+msgstr ""
+
+# 'component'         => __( 'Component', 'installer' ),
+# 'time'              => __( 'Time', 'installer' ),
+# 'empty_log'         => __( 'Log is empty', 'installer' ),
+
+msgid "Time"
+msgstr ""
+
+# 'time'              => __( 'Time', 'installer' ),
+# 'empty_log'         => __( 'Log is empty', 'installer' ),
+# ),
+
+msgid "Log is empty"
+msgstr ""
+
+# 'tester'       => array(
+# 'title'        => __( 'Installer System Status', 'installer' ),
+# 'button_label' => __( 'Check Now', 'installer' ),
+
+msgid "Installer System Status"
+msgstr ""
+
+# 'title'        => __( 'Installer System Status', 'installer' ),
+# 'button_label' => __( 'Check Now', 'installer' ),
+# ),
+
+msgid "Check Now"
+msgstr ""
+
+# 'requirements' => array(
+# 'title' => __( 'Required PHP Libraries', 'installer' ),
+# ),
+
+msgid "Required PHP Libraries"
+msgstr ""
+
+# 'instances' => array(
+# 'title' => __( 'All Installer Instances', 'installer' ),
+# 'path' => __( 'Path', 'installer' ),
+
+msgid "All Installer Instances"
+msgstr ""
+
+# 'title' => __( 'All Installer Instances', 'installer' ),
+# 'path' => __( 'Path', 'installer' ),
+# 'version' => __( 'Version', 'installer' ),
+
+msgid "Path"
+msgstr ""
+
+# 'path' => __( 'Path', 'installer' ),
+# 'version' => __( 'Version', 'installer' ),
+# 'high_priority' => __( 'High priority', 'installer' ),
+
+msgid "Version"
+msgstr ""
+
+# 'version' => __( 'Version', 'installer' ),
+# 'high_priority' => __( 'High priority', 'installer' ),
+# 'delegated' => __( 'Delegated', 'installer' ),
+
+msgid "High priority"
+msgstr ""
+
+# 'high_priority' => __( 'High priority', 'installer' ),
+# 'delegated' => __( 'Delegated', 'installer' ),
+# ),
+
+msgid "Delegated"
+msgstr ""
+
+# 'type'        => 'api',
+# 'description' => __( 'WPML API server', 'installer' )
+# ),
+
+msgid "WPML API server"
+msgstr ""
+
+# 'type'        => 'api',
+# 'description' => __( 'Toolset API server', 'installer' )
+# ),
+
+msgid "Toolset API server"
+msgstr ""
+
+# 'type'        => 'products',
+# 'description' => __( 'WPML remote products file', 'installer' )
+# ),
+
+msgid "WPML remote products file"
+msgstr ""
+
+# 'type'        => 'products',
+# 'description' => __( 'Toolset remote products file', 'installer' )
+# ),
+
+msgid "Toolset remote products file"
 msgstr ""
 
 # public function win_paths_exception_message() {
@@ -7486,27 +7421,6 @@ msgstr ""
 msgid "No repositories defined."
 msgstr ""
 
-# } else {
-# $error = __( 'Invalid site key for the current site.', 'installer' )
-# . '<br /><div class="installer-footnote">' . __( 'Please note that the site key is case sensitive.', 'installer' ) . '</div>';
-
-msgid "Invalid site key for the current site."
-msgstr ""
-
-# $error = __( 'Invalid site key for the current site.', 'installer' )
-# . '<br /><div class="installer-footnote">' . __( 'Please note that the site key is case sensitive.', 'installer' ) . '</div>';
-# }
-
-msgid "Please note that the site key is case sensitive."
-msgstr ""
-
-# if ( preg_match( '#Could not resolve host: (.*)#', $error, $matches ) || preg_match( '#Couldn\'t resolve host \'(.*)\'#', $error, $matches ) ) {
-# $error = sprintf( __( "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates.", 'installer' ),
-# '<strong><i>' . $this->get_generic_product_name( $repository_id ) . '</i></strong>',
-
-msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates."
-msgstr ""
-
 # $days    = 30;
 # $message = __( 'You will have to renew your subscription in order to continue getting the updates and support.', 'installer' );
 # 
@@ -7568,167 +7482,6 @@ msgstr ""
 # '<br />' . $message .
 
 msgid "Your subscription expires in %d days."
-msgstr ""
-
-# $repository_data->set_subscription( null );
-# $error = __( 'Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key.', 'installer' );
-# }
-
-msgid "Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key."
-msgstr ""
-
-# if ( ! $repository || ! $nonce || ! $site_key || ! wp_verify_nonce( $nonce, 'save_site_key_' . $repository ) ) {
-# wp_send_json_error( esc_html__( 'Invalid request!', 'installer' ) );
-# }
-
-msgid "Invalid request!"
-msgstr ""
-
-# 'commercial',
-# __( 'Installer Support', 'installer' ),
-# 'Installer Support',
-
-msgid "Installer Support"
-msgstr ""
-
-# 'title' => __( 'Installer Support', 'installer' ),
-# 'content' => __( 'For retrieving Installer debug information use the %s page.', 'installer' ),
-# 'link' => array(
-
-msgid "For retrieving Installer debug information use the %s page."
-msgstr ""
-
-# 'log'          => array(
-# 'title'             => __( 'Installer Log', 'installer' ),
-# 'request_url'       => __( 'Request URL', 'installer' ),
-
-msgid "Installer Log"
-msgstr ""
-
-# 'title'             => __( 'Installer Log', 'installer' ),
-# 'request_url'       => __( 'Request URL', 'installer' ),
-# 'request_arguments' => __( 'Request Arguments', 'installer' ),
-
-msgid "Request URL"
-msgstr ""
-
-# 'request_url'       => __( 'Request URL', 'installer' ),
-# 'request_arguments' => __( 'Request Arguments', 'installer' ),
-# 'response'          => __( 'Response', 'installer' ),
-
-msgid "Request Arguments"
-msgstr ""
-
-# 'request_arguments' => __( 'Request Arguments', 'installer' ),
-# 'response'          => __( 'Response', 'installer' ),
-# 'component'         => __( 'Component', 'installer' ),
-
-msgid "Response"
-msgstr ""
-
-# 'response'          => __( 'Response', 'installer' ),
-# 'component'         => __( 'Component', 'installer' ),
-# 'time'              => __( 'Time', 'installer' ),
-
-msgid "Component"
-msgstr ""
-
-# 'component'         => __( 'Component', 'installer' ),
-# 'time'              => __( 'Time', 'installer' ),
-# 'empty_log'         => __( 'Log is empty', 'installer' ),
-
-msgid "Time"
-msgstr ""
-
-# 'time'              => __( 'Time', 'installer' ),
-# 'empty_log'         => __( 'Log is empty', 'installer' ),
-# ),
-
-msgid "Log is empty"
-msgstr ""
-
-# 'tester'       => array(
-# 'title'        => __( 'Installer System Status', 'installer' ),
-# 'button_label' => __( 'Check Now', 'installer' ),
-
-msgid "Installer System Status"
-msgstr ""
-
-# 'title'        => __( 'Installer System Status', 'installer' ),
-# 'button_label' => __( 'Check Now', 'installer' ),
-# ),
-
-msgid "Check Now"
-msgstr ""
-
-# 'requirements' => array(
-# 'title' => __( 'Required PHP Libraries', 'installer' ),
-# ),
-
-msgid "Required PHP Libraries"
-msgstr ""
-
-# 'instances' => array(
-# 'title' => __( 'All Installer Instances', 'installer' ),
-# 'path' => __( 'Path', 'installer' ),
-
-msgid "All Installer Instances"
-msgstr ""
-
-# 'title' => __( 'All Installer Instances', 'installer' ),
-# 'path' => __( 'Path', 'installer' ),
-# 'version' => __( 'Version', 'installer' ),
-
-msgid "Path"
-msgstr ""
-
-# 'path' => __( 'Path', 'installer' ),
-# 'version' => __( 'Version', 'installer' ),
-# 'high_priority' => __( 'High priority', 'installer' ),
-
-msgid "Version"
-msgstr ""
-
-# 'version' => __( 'Version', 'installer' ),
-# 'high_priority' => __( 'High priority', 'installer' ),
-# 'delegated' => __( 'Delegated', 'installer' ),
-
-msgid "High priority"
-msgstr ""
-
-# 'high_priority' => __( 'High priority', 'installer' ),
-# 'delegated' => __( 'Delegated', 'installer' ),
-# ),
-
-msgid "Delegated"
-msgstr ""
-
-# 'type'        => 'api',
-# 'description' => __( 'WPML API server', 'installer' )
-# ),
-
-msgid "WPML API server"
-msgstr ""
-
-# 'type'        => 'api',
-# 'description' => __( 'Toolset API server', 'installer' )
-# ),
-
-msgid "Toolset API server"
-msgstr ""
-
-# 'type'        => 'products',
-# 'description' => __( 'WPML remote products file', 'installer' )
-# ),
-
-msgid "WPML remote products file"
-msgstr ""
-
-# 'type'        => 'products',
-# 'description' => __( 'Toolset remote products file', 'installer' )
-# ),
-
-msgid "Toolset remote products file"
 msgstr ""
 
 # echo esc_attr( sprintf(
@@ -8228,314 +7981,6 @@ msgstr ""
 msgid "Deactivate WPML Page Builders"
 msgstr ""
 
-# 'field'       => 'text',
-# 'type'        => __( 'Button: Text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Button: Text"
-msgstr ""
-
-# 'field'       => 'link',
-# 'type'        => __( 'Button: Link', 'sitepress' ),
-# 'editor_type' => 'LINK'
-
-msgid "Button: Link"
-msgstr ""
-
-# 'field'       => 'heading',
-# 'type'        => __( 'Heading', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Heading"
-msgstr ""
-
-# 'field'       => 'link',
-# 'type'        => __( 'Heading: Link', 'sitepress' ),
-# 'editor_type' => 'LINK'
-
-msgid "Heading: Link"
-msgstr ""
-
-# 'field'       => 'html',
-# 'type'        => __( 'HTML', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "HTML"
-msgstr ""
-
-# 'field'       => 'link_url',
-# 'type'        => __( 'Photo: Link', 'sitepress' ),
-# 'editor_type' => 'LINK'
-
-msgid "Photo: Link"
-msgstr ""
-
-# 'field'       => 'text',
-# 'type'        => __( 'Text Editor', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Text Editor"
-msgstr ""
-
-# 'field'       => 'title',
-# 'type'        => __( 'Callout: Heading', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Callout: Heading"
-msgstr ""
-
-# 'field'       => 'text',
-# 'type'        => __( 'Callout: Text', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Callout: Text"
-msgstr ""
-
-# 'field'       => 'cta_text',
-# 'type'        => __( 'Callout: Call to action text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Callout: Call to action text"
-msgstr ""
-
-# 'field'       => 'link',
-# 'type'        => __( 'Callout: Link', 'sitepress' ),
-# 'editor_type' => 'LINK'
-
-msgid "Callout: Link"
-msgstr ""
-
-# 'field'       => 'name_placeholder',
-# 'type'        => __( 'Contact Form: Name Field Placeholder', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Contact Form: Name Field Placeholder"
-msgstr ""
-
-# 'field'       => 'subject_placeholder',
-# 'type'        => __( 'Contact Form: Subject Field Placeholder', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Contact Form: Subject Field Placeholder"
-msgstr ""
-
-# 'field'       => 'email_placeholder',
-# 'type'        => __( 'Contact Form: Email Field Placeholder', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Contact Form: Email Field Placeholder"
-msgstr ""
-
-# 'field'       => 'phone_placeholder',
-# 'type'        => __( 'Contact Form: Phone Field Placeholder', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Contact Form: Phone Field Placeholder"
-msgstr ""
-
-# 'field'       => 'message_placeholder',
-# 'type'        => __( 'Contact Form: Your Message Placeholder', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Contact Form: Your Message Placeholder"
-msgstr ""
-
-# 'field'       => 'terms_checkbox_text',
-# 'type'        => __( 'Contact Form: Checkbox Text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Contact Form: Checkbox Text"
-msgstr ""
-
-# 'field'       => 'terms_text',
-# 'type'        => __( 'Contact Form: Terms and Conditions', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Contact Form: Terms and Conditions"
-msgstr ""
-
-# 'field'       => 'success_message',
-# 'type'        => __( 'Contact Form: Success Message', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Contact Form: Success Message"
-msgstr ""
-
-# 'field'       => 'btn_text',
-# 'type'        => __( 'Contact Form: Button Text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Contact Form: Button Text"
-msgstr ""
-
-# 'field'       => 'success_url',
-# 'type'        => __( 'Contact Form: Redirect Link', 'sitepress' ),
-# 'editor_type' => 'LINK'
-
-msgid "Contact Form: Redirect Link"
-msgstr ""
-
-# 'field'       => 'title',
-# 'type'        => __( 'Call to Action: Heading', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Call to Action: Heading"
-msgstr ""
-
-# 'field'       => 'text',
-# 'type'        => __( 'Call to Action: Text', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Call to Action: Text"
-msgstr ""
-
-# 'field'       => 'btn_text',
-# 'type'        => __( 'Call to Action: Button text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Call to Action: Button text"
-msgstr ""
-
-# 'field'       => 'btn_link',
-# 'type'        => __( 'Call to Action: Button link', 'sitepress' ),
-# 'editor_type' => 'LINK'
-
-msgid "Call to Action: Button link"
-msgstr ""
-
-# 'field'       => 'terms_checkbox_text',
-# 'type'        => __( 'Subscribe form: Checkbox Text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Subscribe form: Checkbox Text"
-msgstr ""
-
-# 'field'       => 'terms_text',
-# 'type'        => __( 'Subscribe form: Terms and Conditions', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Subscribe form: Terms and Conditions"
-msgstr ""
-
-# 'field'       => 'custom_subject',
-# 'type'        => __( 'Subscribe form: Notification Subject', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Subscribe form: Notification Subject"
-msgstr ""
-
-# 'field'       => 'success_message',
-# 'type'        => __( 'Subscribe form: Success Message', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Subscribe form: Success Message"
-msgstr ""
-
-# 'field'       => 'btn_text',
-# 'type'        => __( 'Subscribe form: Button Text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Subscribe form: Button Text"
-msgstr ""
-
-# 'field'       => 'success_url',
-# 'type'        => __( 'Subscribe form: Redirect Link', 'sitepress' ),
-# 'editor_type' => 'LINK'
-
-msgid "Subscribe form: Redirect Link"
-msgstr ""
-
-# 'field'       => 'text',
-# 'type'        => __( 'Icon: Text', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Icon: Text"
-msgstr ""
-
-# 'field'       => 'link',
-# 'type'        => __( 'Icon: Link', 'sitepress' ),
-# 'editor_type' => 'LINK'
-
-msgid "Icon: Link"
-msgstr ""
-
-# 'field'       => 'address',
-# 'type'        => __( 'Map: Address', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Map: Address"
-msgstr ""
-
-# 'field'       => 'heading',
-# 'type'        => __( 'Testimonial: Heading', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Testimonial: Heading"
-msgstr ""
-
-# 'field'       => 'before_number_text',
-# 'type'        => __( 'Number Counter: Text before number', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Number Counter: Text before number"
-msgstr ""
-
-# 'field'       => 'after_number_text',
-# 'type'        => __( 'Number Counter: Text after number', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Number Counter: Text after number"
-msgstr ""
-
-# 'field'       => 'number_prefix',
-# 'type'        => __( 'Number Counter: Number Prefix', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Number Counter: Number Prefix"
-msgstr ""
-
-# 'field'       => 'number_suffix',
-# 'type'        => __( 'Number Counter: Number Suffix', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Number Counter: Number Suffix"
-msgstr ""
-
-# 'field'       => 'no_results_message',
-# 'type'        => __( 'Posts: No Results Message', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
-
-msgid "Posts: No Results Message"
-msgstr ""
-
-# 'field'       => 'more_btn_text',
-# 'type'        => __( 'Posts: Button Text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Posts: Button Text"
-msgstr ""
-
-# 'field'       => 'terms_list_label',
-# 'type'        => __( 'Posts: Terms Label', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Posts: Terms Label"
-msgstr ""
-
-# 'field'       => 'more_link_text',
-# 'type'        => __( 'Posts: More Link Text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Posts: More Link Text"
-msgstr ""
-
-# 'field'       => 'more_link_text',
-# 'type'        => __( 'Posts Slider: More Link Text', 'sitepress' ),
-# 'editor_type' => 'LINE'
-
-msgid "Posts Slider: More Link Text"
-msgstr ""
-
 # case 'label':
 # return esc_html__( 'Accordion Item Label', 'sitepress' );
 # 
@@ -8648,137 +8093,312 @@ msgstr ""
 msgid "Testimonial content"
 msgstr ""
 
-# 'field'       => 'alert_content',
-# 'type'        => __( 'Alert Content', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
+# 'field'       => 'text',
+# 'type'        => __( 'Button: Text', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Alert Content"
+msgid "Button: Text"
 msgstr ""
 
-# 'field'       => 'text_content',
-# 'type'        => __( 'Text content', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
+# 'field'       => 'link',
+# 'type'        => __( 'Button: Link', 'sitepress' ),
+# 'editor_type' => 'LINK',
 
-msgid "Text content"
+msgid "Button: Link"
 msgstr ""
 
-# 'field'       => 'quote_content',
-# 'type'        => __( 'Quote content', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
+# 'field'       => 'heading',
+# 'type'        => __( 'Heading', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Quote content"
+msgid "Heading"
 msgstr ""
 
-# 'field'       => 'quote_cite_content',
-# 'type'        => __( 'Quote: cite content', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'link',
+# 'type'        => __( 'Heading: Link', 'sitepress' ),
+# 'editor_type' => 'LINK',
 
-msgid "Quote: cite content"
+msgid "Heading: Link"
 msgstr ""
 
-# 'field'       => 'counter_number_prefix_content',
-# 'type'        => __( 'Counter: number prefix', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'html',
+# 'type'        => __( 'HTML', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
 
-msgid "Counter: number prefix"
+msgid "HTML"
 msgstr ""
 
-# 'field'       => 'counter_number_suffix_content',
-# 'type'        => __( 'Counter: number suffix', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'link_url',
+# 'type'        => __( 'Photo: Link', 'sitepress' ),
+# 'editor_type' => 'LINK',
 
-msgid "Counter: number suffix"
+msgid "Photo: Link"
 msgstr ""
 
-# 'field'       => 'content',
-# 'type'        => __( 'Content Area: content', 'sitepress' ),
-# 'editor_type' => 'AREA'
+# 'field'       => 'text',
+# 'type'        => __( 'Text Editor', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
 
-msgid "Content Area: content"
+msgid "Text Editor"
 msgstr ""
 
-# 'field'       => 'breadcrumbs_home_label_text',
-# 'type'        => __( 'Breadcrumbs: home label text', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'title',
+# 'type'        => __( 'Callout: Heading', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Breadcrumbs: home label text"
+msgid "Callout: Heading"
 msgstr ""
 
-# 'field'       => 'audio_embed_code',
-# 'type'        => __( 'Audio: embed code', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
+# 'field'       => 'text',
+# 'type'        => __( 'Callout: Text', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
 
-msgid "Audio: embed code"
+msgid "Callout: Text"
 msgstr ""
 
-# 'field'       => 'text_content',
-# 'type'        => __( 'Headline text content', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
+# 'field'       => 'cta_text',
+# 'type'        => __( 'Callout: Call to action text', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Headline text content"
+msgid "Callout: Call to action text"
 msgstr ""
 
-# 'field'       => 'off_canvas_content',
-# 'type'        => __( 'Canvas content', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
+# 'field'       => 'link',
+# 'type'        => __( 'Callout: Link', 'sitepress' ),
+# 'editor_type' => 'LINK',
 
-msgid "Canvas content"
+msgid "Callout: Link"
 msgstr ""
 
-# 'field'       => 'modal_content',
-# 'type'        => __( 'Modal content', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
+# 'field'       => 'name_placeholder',
+# 'type'        => __( 'Contact Form: Name Field Placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Modal content"
+msgid "Contact Form: Name Field Placeholder"
 msgstr ""
 
-# 'field'       => 'dropdown_content',
-# 'type'        => __( 'Dropdown content', 'sitepress' ),
-# 'editor_type' => 'VISUAL'
+# 'field'       => 'subject_placeholder',
+# 'type'        => __( 'Contact Form: Subject Field Placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Dropdown content"
+msgid "Contact Form: Subject Field Placeholder"
 msgstr ""
 
-# 'field'       => 'anchor_text_primary_content',
-# 'type'        => __( 'Anchor text: primary content', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'email_placeholder',
+# 'type'        => __( 'Contact Form: Email Field Placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Anchor text: primary content"
+msgid "Contact Form: Email Field Placeholder"
 msgstr ""
 
-# 'field'       => 'anchor_text_secondary_content',
-# 'type'        => __( 'Anchor text: secondary content', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'phone_placeholder',
+# 'type'        => __( 'Contact Form: Phone Field Placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Anchor text: secondary content"
+msgid "Contact Form: Phone Field Placeholder"
 msgstr ""
 
-# 'field'       => 'video_embed_code',
-# 'type'        => __( 'Video: embed code', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'message_placeholder',
+# 'type'        => __( 'Contact Form: Your Message Placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Video: embed code"
+msgid "Contact Form: Your Message Placeholder"
 msgstr ""
 
-# 'field'       => 'search_placeholder',
-# 'type'        => __( 'Search Inline: placeholder', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'terms_checkbox_text',
+# 'type'        => __( 'Contact Form: Checkbox Text', 'sitepress' ),
+# 'editor_type' => 'LINE',
 
-msgid "Search Inline: placeholder"
+msgid "Contact Form: Checkbox Text"
 msgstr ""
 
-# 'field'       => 'search_placeholder',
-# 'type'        => __( 'Search Modal: placeholder', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'terms_text',
+# 'type'        => __( 'Contact Form: Terms and Conditions', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
 
-msgid "Search Modal: placeholder"
+msgid "Contact Form: Terms and Conditions"
 msgstr ""
 
-# 'field'       => 'search_placeholder',
-# 'type'        => __( 'Search Dropdown: placeholder', 'sitepress' ),
-# 'editor_type' => 'LINE'
+# 'field'       => 'success_message',
+# 'type'        => __( 'Contact Form: Success Message', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
 
-msgid "Search Dropdown: placeholder"
+msgid "Contact Form: Success Message"
+msgstr ""
+
+# 'field'       => 'btn_text',
+# 'type'        => __( 'Contact Form: Button Text', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Contact Form: Button Text"
+msgstr ""
+
+# 'field'       => 'success_url',
+# 'type'        => __( 'Contact Form: Redirect Link', 'sitepress' ),
+# 'editor_type' => 'LINK',
+
+msgid "Contact Form: Redirect Link"
+msgstr ""
+
+# 'field'       => 'title',
+# 'type'        => __( 'Call to Action: Heading', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Call to Action: Heading"
+msgstr ""
+
+# 'field'       => 'text',
+# 'type'        => __( 'Call to Action: Text', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Call to Action: Text"
+msgstr ""
+
+# 'field'       => 'btn_text',
+# 'type'        => __( 'Call to Action: Button text', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Call to Action: Button text"
+msgstr ""
+
+# 'field'       => 'btn_link',
+# 'type'        => __( 'Call to Action: Button link', 'sitepress' ),
+# 'editor_type' => 'LINK',
+
+msgid "Call to Action: Button link"
+msgstr ""
+
+# 'field'       => 'terms_checkbox_text',
+# 'type'        => __( 'Subscribe form: Checkbox Text', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Subscribe form: Checkbox Text"
+msgstr ""
+
+# 'field'       => 'terms_text',
+# 'type'        => __( 'Subscribe form: Terms and Conditions', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Subscribe form: Terms and Conditions"
+msgstr ""
+
+# 'field'       => 'custom_subject',
+# 'type'        => __( 'Subscribe form: Notification Subject', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Subscribe form: Notification Subject"
+msgstr ""
+
+# 'field'       => 'success_message',
+# 'type'        => __( 'Subscribe form: Success Message', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Subscribe form: Success Message"
+msgstr ""
+
+# 'field'       => 'btn_text',
+# 'type'        => __( 'Subscribe form: Button Text', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Subscribe form: Button Text"
+msgstr ""
+
+# 'field'       => 'success_url',
+# 'type'        => __( 'Subscribe form: Redirect Link', 'sitepress' ),
+# 'editor_type' => 'LINK',
+
+msgid "Subscribe form: Redirect Link"
+msgstr ""
+
+# 'field'       => 'text',
+# 'type'        => __( 'Icon: Text', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Icon: Text"
+msgstr ""
+
+# 'field'       => 'link',
+# 'type'        => __( 'Icon: Link', 'sitepress' ),
+# 'editor_type' => 'LINK',
+
+msgid "Icon: Link"
+msgstr ""
+
+# 'field'       => 'address',
+# 'type'        => __( 'Map: Address', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Map: Address"
+msgstr ""
+
+# 'field'       => 'heading',
+# 'type'        => __( 'Testimonial: Heading', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Testimonial: Heading"
+msgstr ""
+
+# 'field'       => 'before_number_text',
+# 'type'        => __( 'Number Counter: Text before number', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Number Counter: Text before number"
+msgstr ""
+
+# 'field'       => 'after_number_text',
+# 'type'        => __( 'Number Counter: Text after number', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Number Counter: Text after number"
+msgstr ""
+
+# 'field'       => 'number_prefix',
+# 'type'        => __( 'Number Counter: Number Prefix', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Number Counter: Number Prefix"
+msgstr ""
+
+# 'field'       => 'number_suffix',
+# 'type'        => __( 'Number Counter: Number Suffix', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Number Counter: Number Suffix"
+msgstr ""
+
+# 'field'       => 'no_results_message',
+# 'type'        => __( 'Posts: No Results Message', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Posts: No Results Message"
+msgstr ""
+
+# 'field'       => 'more_btn_text',
+# 'type'        => __( 'Posts: Button Text', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Posts: Button Text"
+msgstr ""
+
+# 'field'       => 'terms_list_label',
+# 'type'        => __( 'Posts: Terms Label', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Posts: Terms Label"
+msgstr ""
+
+# 'field'       => 'more_link_text',
+# 'type'        => __( 'Posts: More Link Text', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Posts: More Link Text"
+msgstr ""
+
+# 'field'       => 'more_link_text',
+# 'type'        => __( 'Posts Slider: More Link Text', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Posts Slider: More Link Text"
 msgstr ""
 
 # if ( 'accordion_item_header_content' === $field ) {
@@ -8809,6 +8429,314 @@ msgstr ""
 msgid "Tabs: content"
 msgstr ""
 
+# 'field'       => 'alert_content',
+# 'type'        => __( 'Alert Content', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Alert Content"
+msgstr ""
+
+# 'field'       => 'text_content',
+# 'type'        => __( 'Text content', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Text content"
+msgstr ""
+
+# 'field'       => 'quote_content',
+# 'type'        => __( 'Quote content', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Quote content"
+msgstr ""
+
+# 'field'       => 'quote_cite_content',
+# 'type'        => __( 'Quote: cite content', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Quote: cite content"
+msgstr ""
+
+# 'field'       => 'counter_number_prefix_content',
+# 'type'        => __( 'Counter: number prefix', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Counter: number prefix"
+msgstr ""
+
+# 'field'       => 'counter_number_suffix_content',
+# 'type'        => __( 'Counter: number suffix', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Counter: number suffix"
+msgstr ""
+
+# 'field'       => 'content',
+# 'type'        => __( 'Content Area: content', 'sitepress' ),
+# 'editor_type' => 'AREA',
+
+msgid "Content Area: content"
+msgstr ""
+
+# 'field'       => 'breadcrumbs_home_label_text',
+# 'type'        => __( 'Breadcrumbs: home label text', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Breadcrumbs: home label text"
+msgstr ""
+
+# 'field'       => 'audio_embed_code',
+# 'type'        => __( 'Audio: embed code', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Audio: embed code"
+msgstr ""
+
+# 'field'       => 'text_content',
+# 'type'        => __( 'Headline text content', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Headline text content"
+msgstr ""
+
+# 'field'       => 'off_canvas_content',
+# 'type'        => __( 'Canvas content', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Canvas content"
+msgstr ""
+
+# 'field'       => 'modal_content',
+# 'type'        => __( 'Modal content', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Modal content"
+msgstr ""
+
+# 'field'       => 'dropdown_content',
+# 'type'        => __( 'Dropdown content', 'sitepress' ),
+# 'editor_type' => 'VISUAL',
+
+msgid "Dropdown content"
+msgstr ""
+
+# 'field'       => 'anchor_text_primary_content',
+# 'type'        => __( 'Anchor text: primary content', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Anchor text: primary content"
+msgstr ""
+
+# 'field'       => 'anchor_text_secondary_content',
+# 'type'        => __( 'Anchor text: secondary content', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Anchor text: secondary content"
+msgstr ""
+
+# 'field'       => 'video_embed_code',
+# 'type'        => __( 'Video: embed code', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Video: embed code"
+msgstr ""
+
+# 'field'       => 'search_placeholder',
+# 'type'        => __( 'Search Inline: placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Search Inline: placeholder"
+msgstr ""
+
+# 'field'       => 'search_placeholder',
+# 'type'        => __( 'Search Modal: placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Search Modal: placeholder"
+msgstr ""
+
+# 'field'       => 'search_placeholder',
+# 'type'        => __( 'Search Dropdown: placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE',
+
+msgid "Search Dropdown: placeholder"
+msgstr ""
+
+# case 'tab_title':
+# return esc_html__( 'Accordion: Title', 'sitepress' );
+# 
+
+msgid "Accordion: Title"
+msgstr ""
+
+# case 'tab_content':
+# return esc_html__( 'Accordion: Content', 'sitepress' );
+# 
+
+msgid "Accordion: Content"
+msgstr ""
+
+# case 'field_label':
+# return esc_html__( 'Form: Field label', 'sitepress' );
+# 
+
+msgid "Form: Field label"
+msgstr ""
+
+# case 'placeholder':
+# return esc_html__( 'Form: Field placeholder', 'sitepress' );
+# 
+
+msgid "Form: Field placeholder"
+msgstr ""
+
+# case 'field_html':
+# return esc_html__( 'Form: Field HTML', 'sitepress' );
+# 
+
+msgid "Form: Field HTML"
+msgstr ""
+
+# case 'acceptance_text':
+# return esc_html__( 'Form: Acceptance Text', 'sitepress' );
+# 
+
+msgid "Form: Acceptance Text"
+msgstr ""
+
+# case 'field_options':
+# return esc_html__( 'Form: Checkbox Options', 'sitepress' );
+# 
+
+msgid "Form: Checkbox Options"
+msgstr ""
+
+# case 'text':
+# return esc_html__( 'Icon List: Text', 'sitepress' );
+# 
+
+msgid "Icon List: Text"
+msgstr ""
+
+# case 'url':
+# return esc_html__( 'Icon List: Link URL', 'sitepress' );
+# 
+
+msgid "Icon List: Link URL"
+msgstr ""
+
+# if ( 'title' === $field ) {
+# return esc_html__( 'Price list: title', 'sitepress' );
+# }
+
+msgid "Price list: title"
+msgstr ""
+
+# if ( 'item_description' === $field ) {
+# return esc_html__( 'Pricing list: description', 'sitepress' );
+# }
+
+msgid "Pricing list: description"
+msgstr ""
+
+# if ( 'url' === $field ) {
+# return esc_html__( 'Pricing list: link', 'sitepress' );
+# }
+
+msgid "Pricing list: link"
+msgstr ""
+
+# if ( 'item_text' === $field ) {
+# return esc_html__( 'Price table: text', 'sitepress' );
+# }
+
+msgid "Price table: text"
+msgstr ""
+
+# case 'heading':
+# return esc_html__( 'Slides: heading', 'sitepress' );
+# 
+
+msgid "Slides: heading"
+msgstr ""
+
+# case 'description':
+# return esc_html__( 'Slides: description', 'sitepress' );
+# 
+
+msgid "Slides: description"
+msgstr ""
+
+# case 'button_text':
+# return esc_html__( 'Slides: button text', 'sitepress' );
+# 
+
+msgid "Slides: button text"
+msgstr ""
+
+# case 'url':
+# return esc_html__( 'Slides: link URL', 'sitepress' );
+# 
+
+msgid "Slides: link URL"
+msgstr ""
+
+# case 'tab_title':
+# return esc_html__( 'Tabs: Title', 'sitepress' );
+# 
+
+msgid "Tabs: Title"
+msgstr ""
+
+# case 'tab_content':
+# return esc_html__( 'Tabs: Content', 'sitepress' );
+# 
+
+msgid "Tabs: Content"
+msgstr ""
+
+# case 'content':
+# return esc_html__( 'Testimonial Carousel: Content', 'sitepress' );
+# 
+
+msgid "Testimonial Carousel: Content"
+msgstr ""
+
+# case 'name':
+# return esc_html__( 'Testimonial Carousel: Name', 'sitepress' );
+# 
+
+msgid "Testimonial Carousel: Name"
+msgstr ""
+
+# case 'title':
+# return esc_html__( 'Testimonial Carousel: Title', 'sitepress' );
+# 
+
+msgid "Testimonial Carousel: Title"
+msgstr ""
+
+# case 'tab_title':
+# return esc_html__( 'Toggle: Title', 'sitepress' );
+# 
+
+msgid "Toggle: Title"
+msgstr ""
+
+# case 'tab_content':
+# return esc_html__( 'Toggle: Content', 'sitepress' );
+# 
+
+msgid "Toggle: Content"
+msgstr ""
+
+# 'field'       => 'url',
+# 'type'        => __( 'Heading: Link URL', 'sitepress' ),
+# 'editor_type' => 'LINK'
+
+msgid "Heading: Link URL"
+msgstr ""
+
 # 'field'       => 'editor',
 # 'type'        => __( 'Text editor', 'sitepress' ),
 # 'editor_type' => 'VISUAL'
@@ -8835,6 +8763,27 @@ msgstr ""
 # 'editor_type' => 'LINE'
 
 msgid "Video: Vimeo link"
+msgstr ""
+
+# 'field'       => 'youtube_url',
+# 'type'        => __( 'Video: Youtube URL', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Video: Youtube URL"
+msgstr ""
+
+# 'field'       => 'vimeo_url',
+# 'type'        => __( 'Video: Vimeo URL', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Video: Vimeo URL"
+msgstr ""
+
+# 'field'       => 'dailymotion_url',
+# 'type'        => __( 'Video: DailyMotion URL', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Video: DailyMotion URL"
 msgstr ""
 
 # 'field'       => 'button_text',
@@ -9033,6 +8982,13 @@ msgstr ""
 msgid "Image Box: Description text"
 msgstr ""
 
+# 'field'       => 'url',
+# 'type'        => __( 'Image Box: Link', 'sitepress' ),
+# 'editor_type' => 'LINK'
+
+msgid "Image Box: Link"
+msgstr ""
+
 # 'field'       => 'before_text',
 # 'type'        => __( 'Animated Headline: Before text', 'sitepress' ),
 # 'editor_type' => 'LINE'
@@ -9059,6 +9015,13 @@ msgstr ""
 # 'editor_type' => 'LINE'
 
 msgid "Animated Headline: After text"
+msgstr ""
+
+# 'field'       => 'url',
+# 'type'        => __( 'Animated Headline: Link URL', 'sitepress' ),
+# 'editor_type' => 'LINK'
+
+msgid "Animated Headline: Link URL"
 msgstr ""
 
 # 'field'       => 'title_text_a',
@@ -9222,6 +9185,13 @@ msgstr ""
 msgid "Form: Email Content"
 msgstr ""
 
+# 'field'       => 'email_subject_2',
+# 'type'        => __( 'Form: Email subject 2', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Email subject 2"
+msgstr ""
+
 # 'field'       => 'success_message',
 # 'type'        => __( 'Form: Success message', 'sitepress' ),
 # 'editor_type' => 'LINE'
@@ -9248,6 +9218,13 @@ msgstr ""
 # 'editor_type' => 'LINE'
 
 msgid "Form: Invalid message"
+msgstr ""
+
+# 'field'       => 'redirect_to',
+# 'type'        => __( 'Form: Redirect to URL', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Form: Redirect to URL"
 msgstr ""
 
 # 'field'       => 'classic_read_more_text',
@@ -9285,172 +9262,74 @@ msgstr ""
 msgid "Menu Anchor"
 msgstr ""
 
-# case 'tab_title':
-# return esc_html__( 'Accordion: Title', 'sitepress' );
+# 'field'       => 'archive_cards_meta_separator',
+# 'type'        => __( 'Cards: Separator Between', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Cards: Separator Between"
+msgstr ""
+
+# 'field'       => 'archive_cards_read_more_text',
+# 'type'        => __( 'Cards: Read More Text', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Cards: Read More Text"
+msgstr ""
+
+# 'field'       => 'nothing_found_message',
+# 'type'        => __( 'Nothing Found Message', 'sitepress' ),
+# 'editor_type' => 'AREA'
+
+msgid "Nothing Found Message"
+msgstr ""
+
+# 'field'       => 'pagination_prev_label',
+# 'type'        => __( 'Previous Label', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Previous Label"
+msgstr ""
+
+# 'field'       => 'pagination_next_label',
+# 'type'        => __( 'Next Label', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Next Label"
+msgstr ""
+
+# 'field'       => 'archive_classic_meta_separator',
+# 'type'        => __( 'Classic: Separator Between', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Classic: Separator Between"
+msgstr ""
+
+# 'field'       => 'archive_classic_read_more_text',
+# 'type'        => __( 'Classic: Read More Text', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Classic: Read More Text"
+msgstr ""
+
+# 'field'       => 'placeholder',
+# 'type'        => __( 'Placeholder', 'sitepress' ),
+# 'editor_type' => 'LINE'
+
+msgid "Placeholder"
+msgstr ""
+
 # 
+# $text = '<p>' . _n(
+# 'We automatically created a translation job for the reusable block:',
 
-msgid "Accordion: Title"
+msgid "We automatically created a translation job for the reusable block:"
 msgstr ""
 
-# case 'tab_content':
-# return esc_html__( 'Accordion: Content', 'sitepress' );
 # 
+# $text = '<p>' . _n(
+# 'We automatically created a translation job for the reusable block:',
 
-msgid "Accordion: Content"
-msgstr ""
-
-# case 'field_label':
-# return esc_html__( 'Form: Field label', 'sitepress' );
-# 
-
-msgid "Form: Field label"
-msgstr ""
-
-# case 'placeholder':
-# return esc_html__( 'Form: Field placeholder', 'sitepress' );
-# 
-
-msgid "Form: Field placeholder"
-msgstr ""
-
-# case 'field_html':
-# return esc_html__( 'Form: Field HTML', 'sitepress' );
-# 
-
-msgid "Form: Field HTML"
-msgstr ""
-
-# case 'acceptance_text':
-# return esc_html__( 'Form: Acceptance Text', 'sitepress' );
-# 
-
-msgid "Form: Acceptance Text"
-msgstr ""
-
-# case 'field_options':
-# return esc_html__( 'Form: Checkbox Options', 'sitepress' );
-# 
-
-msgid "Form: Checkbox Options"
-msgstr ""
-
-# case 'text':
-# return esc_html__( 'Icon List: Text', 'sitepress' );
-# 
-
-msgid "Icon List: Text"
-msgstr ""
-
-# case 'url':
-# return esc_html__( 'Icon List: Link URL', 'sitepress' );
-# 
-
-msgid "Icon List: Link URL"
-msgstr ""
-
-# if ( 'title' === $field ) {
-# return esc_html__( 'Price list: title', 'sitepress' );
-# }
-
-msgid "Price list: title"
-msgstr ""
-
-# if ( 'item_description' === $field ) {
-# return esc_html__( 'Pricing list: description', 'sitepress' );
-# }
-
-msgid "Pricing list: description"
-msgstr ""
-
-# if ( 'url' === $field ) {
-# return esc_html__( 'Pricing list: link', 'sitepress' );
-# }
-
-msgid "Pricing list: link"
-msgstr ""
-
-# if ( 'item_text' === $field ) {
-# return esc_html__( 'Price table: text', 'sitepress' );
-# }
-
-msgid "Price table: text"
-msgstr ""
-
-# case 'heading':
-# return esc_html__( 'Slides: heading', 'sitepress' );
-# 
-
-msgid "Slides: heading"
-msgstr ""
-
-# case 'description':
-# return esc_html__( 'Slides: description', 'sitepress' );
-# 
-
-msgid "Slides: description"
-msgstr ""
-
-# case 'button_text':
-# return esc_html__( 'Slides: button text', 'sitepress' );
-# 
-
-msgid "Slides: button text"
-msgstr ""
-
-# case 'url':
-# return esc_html__( 'Slides: link URL', 'sitepress' );
-# 
-
-msgid "Slides: link URL"
-msgstr ""
-
-# case 'tab_title':
-# return esc_html__( 'Tabs: Title', 'sitepress' );
-# 
-
-msgid "Tabs: Title"
-msgstr ""
-
-# case 'tab_content':
-# return esc_html__( 'Tabs: Content', 'sitepress' );
-# 
-
-msgid "Tabs: Content"
-msgstr ""
-
-# case 'content':
-# return esc_html__( 'Testimonial Carousel: Content', 'sitepress' );
-# 
-
-msgid "Testimonial Carousel: Content"
-msgstr ""
-
-# case 'name':
-# return esc_html__( 'Testimonial Carousel: Name', 'sitepress' );
-# 
-
-msgid "Testimonial Carousel: Name"
-msgstr ""
-
-# case 'title':
-# return esc_html__( 'Testimonial Carousel: Title', 'sitepress' );
-# 
-
-msgid "Testimonial Carousel: Title"
-msgstr ""
-
-# case 'tab_title':
-# return esc_html__( 'Toggle: Title', 'sitepress' );
-# 
-
-msgid "Toggle: Title"
-msgstr ""
-
-# case 'tab_content':
-# return esc_html__( 'Toggle: Content', 'sitepress' );
-# 
-
-msgid "Toggle: Content"
+msgid "We automatically created translation jobs for the reusable blocks:"
 msgstr ""
 
 # $this->admin_notice = '<div class="error wpml-admin-notice">';
@@ -9514,4 +9393,272 @@ msgstr ""
 # 
 
 msgid "Remind me again in 4 weeks."
+msgstr ""
+
+# //success
+# $ret['success'] = sprintf(__('WPML will work on your site, but you will not receive updates. WPML updates are essential for keeping your site running smoothly and secure. To receive automated updates, you need to complete the registration, in the %splugins admin%s page.', 'sitepress'),
+# '<a href="' . admin_url('plugin-install.php?tab=commercial') . '">', '</a>');
+
+msgid "WPML will work on your site, but you will not receive updates. WPML updates are essential for keeping your site running smoothly and secure. To receive automated updates, you need to complete the registration, in the %splugins admin%s page."
+msgstr ""
+
+# if(empty($_POST['installer_site_key'])){
+# $ret['error'] = __('Missing site key.');
+# }else{
+
+msgid "Missing site key."
+msgstr ""
+
+# echo '<span style="color:#FF0000;">'
+# . __( 'Error: No custom field', 'sitepress' ) . '</span>';
+# die();
+
+msgid "Error: No custom field"
+msgstr ""
+
+# echo '<span style="color:#FF0000;">'
+# . __( 'Error: Please provide translation action', 'sitepress' ) . '</span>';
+# die();
+
+msgid "Error: Please provide translation action"
+msgstr ""
+
+# $iclTranslationManagement->save_settings();
+# echo '<strong><em>' . __( 'Settings updated', 'sitepress' ) . '</em></strong>';
+# } else {
+
+msgid "Settings updated"
+msgstr ""
+
+# echo '<span style="color:#FF0000;">'
+# . __( 'Error: WPML Translation Management plugin not initiated', 'sitepress' )
+# . '</span>';
+
+msgid "Error: WPML Translation Management plugin not initiated"
+msgstr ""
+
+# echo '<span style="color:#FF0000;">'
+# . __( 'Error: Please activate WPML Translation Management plugin', 'sitepress' )
+# . '</span>';
+
+msgid "Error: Please activate WPML Translation Management plugin"
+msgstr ""
+
+# $message              = '';
+# $message             .= __(
+# 'WPML is missing some records in the languages tables and it cannot fully work until this issue is fixed.',
+
+msgid "WPML is missing some records in the languages tables and it cannot fully work until this issue is fixed."
+msgstr ""
+
+# $message             .= sprintf(
+# __(
+# 'Please go to the %1$s page and click on "%2$s" to fix this problem.',
+
+msgid "Please go to the %1$s page and click on \"%2$s\" to fix this problem."
+msgstr ""
+
+# $message             .= '<br />';
+# $message             .= __( 'This warning will disappear once this issue is fixed.', 'sitepress' );
+# ICL_AdminNotifier::removeMessage( 'setup-incomplete' );
+
+msgid "This warning will disappear once this issue is fixed."
+msgstr ""
+
+# $post_edit_messages = array(
+# 'switch_language_title'   => __( 'You are about to change the language of {post_name}.', 'sitepress' ),
+# 'switch_language_alert'   => __( 'All categories and tags will be translated if possible.', 'sitepress' ),
+
+msgid "You are about to change the language of {post_name}."
+msgstr ""
+
+# 'switch_language_title'   => __( 'You are about to change the language of {post_name}.', 'sitepress' ),
+# 'switch_language_alert'   => __( 'All categories and tags will be translated if possible.', 'sitepress' ),
+# 'connection_loss_alert'   => __( 'The following terms do not have a translation in the chosen language and will be disconnected from this post:', 'sitepress' ),
+
+msgid "All categories and tags will be translated if possible."
+msgstr ""
+
+# 'switch_language_alert'   => __( 'All categories and tags will be translated if possible.', 'sitepress' ),
+# 'connection_loss_alert'   => __( 'The following terms do not have a translation in the chosen language and will be disconnected from this post:', 'sitepress' ),
+# 'loading'                 => __( 'Loading Language Data for {post_name}', 'sitepress' ),
+
+msgid "The following terms do not have a translation in the chosen language and will be disconnected from this post:"
+msgstr ""
+
+# 'connection_loss_alert'   => __( 'The following terms do not have a translation in the chosen language and will be disconnected from this post:', 'sitepress' ),
+# 'loading'                 => __( 'Loading Language Data for {post_name}', 'sitepress' ),
+# 'switch_language_message' => __( 'Please make sure that you\'ve saved all the changes. We will have to reload the page.', 'sitepress' ),
+
+msgid "Loading Language Data for {post_name}"
+msgstr ""
+
+# 'loading'                 => __( 'Loading Language Data for {post_name}', 'sitepress' ),
+# 'switch_language_message' => __( 'Please make sure that you\'ve saved all the changes. We will have to reload the page.', 'sitepress' ),
+# 'switch_language_confirm' => __( 'Do you want to continue?', 'sitepress' ),
+
+msgid "Please make sure that you've saved all the changes. We will have to reload the page."
+msgstr ""
+
+# 'switch_language_message' => __( 'Please make sure that you\'ve saved all the changes. We will have to reload the page.', 'sitepress' ),
+# 'switch_language_confirm' => __( 'Do you want to continue?', 'sitepress' ),
+# '_nonce'                  => wp_create_nonce( 'wpml_switch_post_lang_nonce' ),
+
+msgid "Do you want to continue?"
+msgstr ""
+
+# '_nonce'                  => wp_create_nonce( 'wpml_switch_post_lang_nonce' ),
+# 'empty_post_title'        => __( '(No title for this post yet)', 'sitepress' ),
+# 'ok_button_label'         => __( 'OK', 'sitepress' ),
+
+msgid "(No title for this post yet)"
+msgstr ""
+
+# 'strings'     => array(
+# 'success_1'         => __( 'Post type and source language assignment have been fixed for ', 'sitepress' ),
+# 'success_2'         => __( ' elements', 'sitepress' ),
+
+msgid "Post type and source language assignment have been fixed for "
+msgstr ""
+
+# 'success_1'         => __( 'Post type and source language assignment have been fixed for ', 'sitepress' ),
+# 'success_2'         => __( ' elements', 'sitepress' ),
+# 'no_problems'       => __( 'No errors were found in the assignment of post types.' ),
+
+msgid " elements"
+msgstr ""
+
+# 'success_2'         => __( ' elements', 'sitepress' ),
+# 'no_problems'       => __( 'No errors were found in the assignment of post types.' ),
+# 'suffixesRemoved'   => __( 'Language suffixes were removed from the selected terms.' ),
+
+msgid "No errors were found in the assignment of post types."
+msgstr ""
+
+# 'no_problems'       => __( 'No errors were found in the assignment of post types.' ),
+# 'suffixesRemoved'   => __( 'Language suffixes were removed from the selected terms.' ),
+# 'done'              => __( 'Done', 'sitepress' ),
+
+msgid "Language suffixes were removed from the selected terms."
+msgstr ""
+
+# if ( $description == '' ) {
+# $_POST['icl_form_errors'] = __( 'Please provide a short description of the website so that translators know what background is required from them.', 'sitepress' );
+# } else {
+
+msgid "Please provide a short description of the website so that translators know what background is required from them."
+msgstr ""
+
+# if ( current_user_can( 'manage_options' ) ) {
+# add_meta_box( 'icl_div_config', __( 'Multilingual Content Setup', 'sitepress' ), array( $this, 'meta_box_config' ), $post->post_type, 'normal', 'low' );
+# }
+
+msgid "Multilingual Content Setup"
+msgstr ""
+
+# 'url'  => add_query_arg( array( 'show_system_fields' => ! $settings_factory->show_system_fields ) ),
+# 'text' => $settings_factory->show_system_fields ? __( 'Hide system fields', 'sitepress' ) : __( 'Show system fields', 'sitepress' ),
+# );
+
+msgid "Hide system fields"
+msgstr ""
+
+# 'url'  => add_query_arg( array( 'show_system_fields' => ! $settings_factory->show_system_fields ) ),
+# 'text' => $settings_factory->show_system_fields ? __( 'Hide system fields', 'sitepress' ) : __( 'Show system fields', 'sitepress' ),
+# );
+
+msgid "Show system fields"
+msgstr ""
+
+# if ( ! empty( $custom_taxonomies ) || ! empty( $custom_keys ) ) {
+# echo '<small>' . __( 'Note: Custom taxonomies and custom fields are shared across different post types.', 'sitepress' ) . '</small>';
+# }
+
+msgid "Note: Custom taxonomies and custom fields are shared across different post types."
+msgstr ""
+
+# if ( ! $output ) {
+# $output = '<select id="parent_id"><option value="">' . __( 'Main Page (no parent)', 'sitepress' ) . '</option></select>';
+# }
+
+msgid "Main Page (no parent)"
+msgstr ""
+
+# <noscript>
+# <div class="error"><?php echo __( 'WPML admin screens require JavaScript in order to display. JavaScript is currently off in your browser.', 'sitepress' ); ?></div>
+# </noscript>
+
+msgid "WPML admin screens require JavaScript in order to display. JavaScript is currently off in your browser."
+msgstr ""
+
+# if ( ! $this->wpdb->get_var( $this->wpdb->prepare( "SELECT code FROM {$this->wpdb->prefix}icl_languages WHERE code=%s", $lang ) ) ) {
+# $IXR_Error = new IXR_Error( 401, __( 'Invalid language code', 'sitepress' ) );
+# echo $IXR_Error->getXml();
+
+msgid "Invalid language code"
+msgstr ""
+
+# ?>
+# <td style="padding:4px;line-height:normal;"><a href="<?php echo $add_link; ?>"><?php echo esc_html__( 'add', 'sitepress' ); ?></a></td>
+# <?php endif; ?>
+
+msgid "add"
+msgstr ""
+
+# <tr>
+# <th colspan="2"><?php _e( 'Custom taxonomies', 'sitepress' ); ?></th>
+# </tr>
+
+msgid "Custom taxonomies"
+msgstr ""
+
+# value="<?php echo $ctax; ?>" <?php echo $checked_tax_translate; ?><?php echo $radio_disabled; ?> />&nbsp;<?php _e( 'Translate', 'sitepress' ); ?></label>
+# <label><input name="icl_mcs_custom_taxs_<?php echo $ctax; ?>" type="radio" value="0" <?php echo $checked_do_nothing; ?><?php echo $radio_disabled; ?> />&nbsp;<?php _e( 'Do nothing', 'sitepress' ); ?></label>
+# </td>
+
+msgid "Do nothing"
+msgstr ""
+
+# } else {
+# _e( 'Nothing to configure.', 'sitepress' );
+# }
+
+msgid "Nothing to configure."
+msgstr ""
+
+# <p>
+# <?php _e( 'You need to configure WPML before you can start translating.', 'sitepress' ); ?>
+# </p>
+
+msgid "You need to configure WPML before you can start translating."
+msgstr ""
+
+# <input type="hidden" id="icl_dismiss_help_nonce" value="<?php echo $icl_dhn = wp_create_nonce( 'dismiss_help_nonce' ); ?>"/>
+# <a href="admin.php?page=<?php echo WPML_PLUGIN_FOLDER . '/menu/languages.php'; ?>" class="button-primary configure-wpml"><?php _e( 'Configure WPML', 'sitepress' ); ?></a>&nbsp;
+# <a href="https://wpml.org/documentation/getting-started-guide/?utm_source=wpmlplugin&utm_medium=wpadmin&utm_term=getting-started&utm_content=getting-started&utm_campaign=wpml" target="_blank">
+
+msgid "Configure WPML"
+msgstr ""
+
+# <a href="https://wpml.org/documentation/getting-started-guide/?utm_source=wpmlplugin&utm_medium=wpadmin&utm_term=getting-started&utm_content=getting-started&utm_campaign=wpml" target="_blank">
+# <?php _e( 'Getting started guide', 'sitepress' ); ?>
+# </a>
+
+msgid "Getting started guide"
+msgstr ""
+
+# 
+# $part_one = _x( 'Multilingual WordPress', 'Multilingual WordPress with WPML: first part', 'sitepress' );
+# $part_two = _x( 'with WPML', 'Multilingual WordPress with WPML: second part', 'sitepress' );
+
+msgctxt "Multilingual WordPress with WPML: first part"
+msgid "Multilingual WordPress"
+msgstr ""
+
+# $part_one = _x( 'Multilingual WordPress', 'Multilingual WordPress with WPML: first part', 'sitepress' );
+# $part_two = _x( 'with WPML', 'Multilingual WordPress with WPML: second part', 'sitepress' );
+# 
+
+msgctxt "Multilingual WordPress with WPML: second part"
+msgid "with WPML"
 msgstr ""

@@ -356,10 +356,12 @@ final class XmlExportMediaGallery
 	}
 
 	public static function get_meta($pid, $key){
+	    $addons = new \Wpae\App\Service\Addons\AddonService();
+
 	    if (XmlExportTaxonomy::$is_active){
             return get_term_meta($pid, $key, true);
         }
-        if (XmlExportUser::$is_active){
+        if ($addons->isUserAddonActive() && XmlExportUser::$is_active){
             return get_user_meta($pid, $key, true);
         }
 	    return get_post_meta($pid, $key, true);

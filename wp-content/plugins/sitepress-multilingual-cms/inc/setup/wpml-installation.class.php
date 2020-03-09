@@ -2,6 +2,8 @@
 
 class WPML_Installation extends WPML_WPDB_And_SP_User {
 
+	const WPML_START_VERSION_KEY = 'wpml_start_version';
+
 	function go_to_setup1() {
 		// Reverse $this->prepopulate_translations()
 		$this->wpdb->query( "TRUNCATE TABLE {$this->wpdb->prefix}icl_translations" );
@@ -117,6 +119,8 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 		if ( $site_key ) {
 			icl_set_setting( 'site_key', $site_key, true );
 		}
+
+		update_option( self::WPML_START_VERSION_KEY, ICL_SITEPRESS_VERSION );
 
 		do_action( 'wpml_setup_completed' );
 	}

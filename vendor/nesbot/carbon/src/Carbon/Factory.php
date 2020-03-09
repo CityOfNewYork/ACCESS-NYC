@@ -10,6 +10,8 @@
  */
 namespace Carbon;
 
+use Closure;
+
 /**
  * A factory to generate Carbon instances with common settings.
  *
@@ -62,8 +64,9 @@ namespace Carbon;
  * @method Carbon                                             getLastErrors()                                                                                                                    {@inheritdoc}
  * @method string                                             getLocale()                                                                                                                        Get the current translator locale.
  * @method int                                                getMidDayAt()                                                                                                                      get midday/noon hour
- * @method Carbon                                             getTestNow()                                                                                                                       Get the Carbon instance (real or mock) to be returned when a "now"
+ * @method Closure|Carbon                                     getTestNow()                                                                                                                       Get the Carbon instance (real or mock) to be returned when a "now"
  *                                                                                                                                                                                               instance is created.
+ * @method string                                             getTimeFormatByPrecision($unitPrecision)                                                                                           Return a format from H:i to H:i:s.u according to given unit precision.
  * @method string                                             getTranslationMessageWith($translator, string $key, string $locale = null, string $default = null)                                 Returns raw translation message for a given key.
  * @method \Symfony\Component\Translation\TranslatorInterface getTranslator()                                                                                                                    Get the default translator instance in use.
  * @method int                                                getWeekEndsAt()                                                                                                                    Get the last day of week
@@ -77,7 +80,7 @@ namespace Carbon;
  * @method Carbon                                             instance($date)                                                                                                                    Create a Carbon instance from a DateTime one.
  * @method bool                                               isImmutable()                                                                                                                      Returns true if the current class/instance is immutable.
  * @method bool                                               isModifiableUnit($unit)                                                                                                            Returns true if a property can be changed via setter.
- * @method Carbon                                             isMutable()
+ * @method bool                                               isMutable()                                                                                                                        Returns true if the current class/instance is mutable.
  * @method bool                                               isStrictModeEnabled()                                                                                                              Returns true if the strict mode is globally in use, false else.
  *                                                                                                                                                                                               (It can be overridden in specific instances.)
  * @method bool                                               localeHasDiffOneDayWords($locale)                                                                                                  Returns true if the given locale is internally supported and has words for 1-day diff (just now, yesterday, tomorrow).

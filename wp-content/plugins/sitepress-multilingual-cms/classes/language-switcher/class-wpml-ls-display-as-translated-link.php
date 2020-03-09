@@ -88,7 +88,7 @@ class WPML_LS_Display_As_Translated_Link {
 		$translation = $cat_element->get_translation( $this->processed_language );
 
 		if ( $translation ) {
-			$cat = $translation->get_wp_object();
+			$cat = $translation->get_wp_object() ?: $cat;
 		}
 
 		return $cat;

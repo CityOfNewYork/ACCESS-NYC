@@ -8,12 +8,20 @@ class WPML_REST_Request_Analyze {
 	/** @var array $active_language_codes */
 	private $active_language_codes;
 
-	/** @var string $request_uri_without_subdir */
-	private $request_uri_without_subdir;
+	/** @var WP_Rewrite $wp_rewrite */
+	private $wp_rewrite;
 
-	public function __construct( WPML_URL_Converter $url_converter, array $active_language_codes ) {
+	/** @var array $uri_parts */
+	private $uri_parts;
+
+	public function __construct(
+		WPML_URL_Converter $url_converter,
+		array $active_language_codes,
+		WP_Rewrite $wp_rewrite
+	) {
 		$this->url_converter         = $url_converter;
 		$this->active_language_codes = $active_language_codes;
+		$this->wp_rewrite            = $wp_rewrite;
 	}
 
 	/** @return bool */
@@ -49,13 +57,18 @@ class WPML_REST_Request_Analyze {
 	 * @return string
 	 */
 	private function get_uri_part( $index = 0 ) {
-		if ( null === $this->request_uri_without_subdir ) {
-			$request_uri                      = filter_var( $_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING );
-			$this->request_uri_without_subdir = wpml_strip_subdir_from_url( $request_uri );
+		if ( null === $this->uri_parts ) {
+			$request_uri = filter_var( $_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING );
+			$cleaned_uri = ltrim( wpml_strip_subdir_from_url( $request_uri ), '/' );
+
+			if ( $this->wp_rewrite->using_index_permalinks() ) {
+				$cleaned_uri = preg_replace( '/^' . $this->wp_rewrite->index . '\//', '', $cleaned_uri, 1 );
+			}
+
+			$this->uri_parts = explode( '/', $cleaned_uri );
 		}
 
-		$parts = explode( '/', ltrim( $this->request_uri_without_subdir, '/' ) );
-		return isset( $parts[ $index ] ) ? $parts[ $index ] : '';
+		return isset( $this->uri_parts[ $index ] ) ? $this->uri_parts[ $index ] : '';
 	}
 
 	/**

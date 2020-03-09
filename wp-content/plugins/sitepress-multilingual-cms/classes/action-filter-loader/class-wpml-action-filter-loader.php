@@ -30,31 +30,29 @@ class WPML_Action_Filter_Loader {
 	 * @param string[] $loaders Action loaders.
 	 */
 	public function load( $loaders ) {
+
 		foreach ( $loaders as $loader ) {
-			$implementations = class_implements( $loader );
+			$loader_type = new WPML\Action\Type( $loader );
 
-			if ( ! $implementations ) {
-				continue;
-			}
-
-			$backend  = in_array( 'IWPML_Backend_Action_Loader', $implementations, true );
-			$frontend = in_array( 'IWPML_Frontend_Action_Loader', $implementations, true );
-			$ajax     = in_array( 'IWPML_AJAX_Action_Loader', $implementations, true );
-			$rest     = in_array( 'IWPML_REST_Action_Loader', $implementations, true );
-			$cli      = in_array( 'IWPML_CLI_Action_Loader', $implementations, true );
+			$backend  = $loader_type->is( 'backend' );
+			$frontend = $loader_type->is( 'frontend' );
+			$ajax     = $loader_type->is( 'ajax' );
+			$rest     = $loader_type->is( 'rest' );
+			$cli      = $loader_type->is( 'cli' );
+			$dic      = $loader_type->is( 'dic' );
 
 			if ( $backend && $frontend ) {
-				$this->load_factory( $loader );
+				$this->load_factory_or_action( $loader, $dic );
 			} elseif ( $backend && is_admin() ) {
-				$this->load_factory( $loader );
+				$this->load_factory_or_action( $loader, $dic );
 			} elseif ( $frontend && ! is_admin() ) {
-				$this->load_factory( $loader );
+				$this->load_factory_or_action( $loader, $dic );
 			} elseif ( $ajax && wpml_is_ajax() ) {
-				$this->load_factory( $loader );
-			} elseif ( $rest && wpml_is_rest_request() ) {
-				$this->load_factory( $loader );
+				$this->load_factory_or_action( $loader, $dic );
+			} elseif ( $rest ) {
+				$this->load_factory_or_action( $loader, $dic );
 			} elseif ( $cli && wpml_is_cli() ) {
-				$this->load_factory( $loader );
+				$this->load_factory_or_action( $loader, $dic );
 			}
 		}
 	}
@@ -64,20 +62,27 @@ class WPML_Action_Filter_Loader {
 	 *
 	 * @param string $loader Action loader.
 	 */
-	private function load_factory( $loader ) {
-		/**
-		 * Action loader factory
-		 *
-		 * @var IWPML_Action_Loader_Factory $factory
-		 */
-		$factory = new $loader();
+	private function load_factory_or_action( $loader, $use_dic ) {
+		/** @var IWPML_Action_Loader_Factory|IWPML_AJAX_Action $action_or_factory */
+		if ( $use_dic ) {
+			$action_or_factory = WPML\Container\make( $loader );
+		} else {
+			$action_or_factory = new $loader();
+		}
 
+		if ( $action_or_factory instanceof IWPML_Action ) {
+			$action_or_factory->add_hooks();
+		} else {
+			$this->load_factory( $action_or_factory );
+		}
+	}
+
+	/**
+	 * @param IWPML_Action_Loader_Factory $factory
+	 */
+	private function load_factory( IWPML_Action_Loader_Factory $factory ) {
 		if ( $factory instanceof WPML_AJAX_Base_Factory ) {
-			/**
-			 * Ajax base factory
-			 *
-			 * @var WPML_AJAX_Base_Factory $factory
-			 */
+			/** @var WPML_AJAX_Base_Factory $factory */
 			$factory->set_ajax_action_validation( $this->get_ajax_action_validation() );
 		}
 

@@ -1540,6 +1540,10 @@ div.error a.acf-button {
 	display: none;
 }
 
+.repeater .field_type-google_map p.label{
+	display: block;
+}
+
 /*
 *  Conditiona Logic
 */
@@ -1593,10 +1597,12 @@ div.error a.acf-button {
 .acf-flexible-content .layout {
 	margin: 20px 0 0;
 	position: relative;
-	
 	border-radius: 0;
-   
     background: #fff;
+}
+
+.acf-flexible-content .layout .acf-input-table tr td {
+	display: inline;
 }
 
 .acf-flexible-content .layout:first-child {

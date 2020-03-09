@@ -52,7 +52,7 @@ namespace EnableMediaReplace\ShortPixelLogger;
       if ($this->logPath === false)
       {
         $upload_dir = wp_upload_dir(null,false,false);
-        $this->logPath = $upload_dir['basedir'] . '/' . $this->namespace . ".log";
+        $this->logPath = $this->setLogPath($upload_dir['basedir'] . '/' . $this->namespace . ".log");
       }
 
       if (isset($_REQUEST['SHORTPIXEL_DEBUG'])) // manual takes precedence over constants
@@ -130,7 +130,7 @@ namespace EnableMediaReplace\ShortPixelLogger;
 
    public function setLogPath($logPath)
    {
-     $this->logPath = $logPath;
+      $this->logPath = $logPath;
    }
    protected static function addLog($message, $level, $data = array())
    {
@@ -170,7 +170,8 @@ namespace EnableMediaReplace\ShortPixelLogger;
 
       $line = $this->formatLine($items);
 
-      if ($this->logPath)
+      // try to write to file. Don't write if directory doesn't exists (leads to notices)
+      if ($this->logPath && is_dir(dirname($this->logPath)) )
       {
         file_put_contents($this->logPath,$line, FILE_APPEND);
       }

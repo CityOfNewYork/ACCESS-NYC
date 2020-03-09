@@ -206,6 +206,12 @@ class WPML_User_Language {
 	}
 
 	private function get_wp_locale( $lang_details ) {
+		$locale = null;
+
+		if ( ! isset( $lang_details['default_locale'], $lang_details['code'] ) ) {
+			return $locale;
+		}
+
 		$locale = $lang_details['default_locale'];
 
 		if ( array_key_exists( $lang_details['code'], $this->wp_locale_fixup ) ) {
