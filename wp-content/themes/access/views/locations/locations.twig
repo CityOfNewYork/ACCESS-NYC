@@ -8,7 +8,7 @@
     </header>
 
     <div class="p-2 screen-tablet:p-3">
-      {% include 'components/alert-locations.twig' with {'class': ' relative z-10 animated fadeInUp'} only %}
+      {% include 'components/alert-locations.twig' with {'class': 'animated fadeInUp'} only %}
     </div>
 
     <div class="js-map layout--map screen-desktop:layout--sidebar " data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('constant', 'GOOGLE_MAPS_EMBED') }}">
