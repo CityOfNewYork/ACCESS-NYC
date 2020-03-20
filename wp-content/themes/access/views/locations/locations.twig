@@ -2,66 +2,76 @@
 
 {% block content %}
   {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ url_base }}/locations/json #}
-  <main class="js-map layout--map screen-desktop:layout--sidebar color-light-background" id="content" data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('constant', 'GOOGLE_MAPS_EMBED') }}">
-    <div class="js-map-controls layout--map__sidebar">
-      <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
+  <main class="color-light-background" id="content">
+    <header class="hidden">
+      <h1>{{ post.title }}</h1>
+    </header>
 
-      <div class="map-filter-container js-map-filter">
-        <a href="#map-filter-settings" class="map-filter-header btn btn-toggle btn-primary btn-small rounded-none w-full js-toggle-filter js-main-filter-toggle">
-          <span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span>
-        </a>
-
-        <div id="map-filter-settings" class="c-filter-multi hidden:overflow animated hidden" aria-hidden="true">
-          <ul class="c-filter-multi__list px-3">
-            {% for filter in filters %}
-            <li class="c-filter-multi__item">
-              <div class="c-filter-multi__item-header">
-                <label class="checkbox">
-                  <input type="checkbox" data-toggles="#program-{{ filter.category.slug }}" class="js-map-filter-parent-input" tabindex="-1">
-                  <span class="checkbox__label">{{ filter.category.name }}</span>
-                </label>
-                <a href="#program-{{ filter.category.slug }}" class="c-filter-multi__item-header-toggle js-toggle-filter"  tabindex="-1">
-                  <span class="sr-only map-filter-expand">{{__('Expand category', 'accessnyc-locations')}}</span>
-                  <span class="sr-only map-filter-collapse">{{__('Collapse category', 'accessnyc-locations')}}</span>
-                </a>
-              </div>
-
-              <div id="program-{{ filter.category.slug }}" class="c-filter-multi__item-group js-map-filter-program-group" aria-hidden="true">
-                <ul class="c-filter-multi__item-group-list">
-                  {% for program in filter.programs %}
-                  <li class="c-filter-multi__item-group-subitem">
-                    <label class="checkbox">
-                      <input type="checkbox" value="{{ program.uid }}" class="js-map-filter-program-input" tabindex="-1">
-                      <span class="checkbox__label text-font-size-small font-normal">{{ program.post_title }}</span>
-                    </label>
-                  </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-
-      <div class="js-map-results-container">
-        <div class="border-t border-color-grey-light">
-          <ul class="js-map-results p-0 m-0"></ul>
-          <p class="p-4 m-0 flex items-center justify-center hidden" data-js="message-loading" aria-hidden="true">
-            {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
-            &nbsp;&nbsp;
-            {{ __('Loading&hellip;', 'accessnyc-locations') }}
-          </p>
-
-          <p class="p-4 m-0 text-center hidden" data-js="message-no-results" aria-hidden="true">
-            {{ __('No results.', 'accessnyc-locations') }}
-          </p>
-        </div>
-      </div>
-      <div class="js-map-pagination"> </div>
+    <div class="p-2 screen-tablet:p-3">
+      {% include 'components/alert-locations.twig' with {'class': ' relative z-10 animated fadeInUp'} only %}
     </div>
 
-    <div class="js-map-mapbox layout--map__map"></div>
+    <div class="js-map layout--map screen-desktop:layout--sidebar " data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('constant', 'GOOGLE_MAPS_EMBED') }}">
+      <div class="js-map-controls layout--map__sidebar">
+        <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
+
+        <div class="map-filter-container js-map-filter">
+          <a href="#map-filter-settings" class="map-filter-header btn btn-toggle btn-primary btn-small rounded-none w-full js-toggle-filter js-main-filter-toggle">
+            <span class="map-filter-header-label">{{__('Select a type of help', 'accessnyc-locations')}}</span>
+          </a>
+
+          <div id="map-filter-settings" class="c-filter-multi hidden:overflow animated hidden" aria-hidden="true">
+            <ul class="c-filter-multi__list px-3">
+              {% for filter in filters %}
+              <li class="c-filter-multi__item">
+                <div class="c-filter-multi__item-header">
+                  <label class="checkbox">
+                    <input type="checkbox" data-toggles="#program-{{ filter.category.slug }}" class="js-map-filter-parent-input" tabindex="-1">
+                    <span class="checkbox__label">{{ filter.category.name }}</span>
+                  </label>
+                  <a href="#program-{{ filter.category.slug }}" class="c-filter-multi__item-header-toggle js-toggle-filter"  tabindex="-1">
+                    <span class="sr-only map-filter-expand">{{__('Expand category', 'accessnyc-locations')}}</span>
+                    <span class="sr-only map-filter-collapse">{{__('Collapse category', 'accessnyc-locations')}}</span>
+                  </a>
+                </div>
+
+                <div id="program-{{ filter.category.slug }}" class="c-filter-multi__item-group js-map-filter-program-group" aria-hidden="true">
+                  <ul class="c-filter-multi__item-group-list">
+                    {% for program in filter.programs %}
+                    <li class="c-filter-multi__item-group-subitem">
+                      <label class="checkbox">
+                        <input type="checkbox" value="{{ program.uid }}" class="js-map-filter-program-input" tabindex="-1">
+                        <span class="checkbox__label text-font-size-small font-normal">{{ program.post_title }}</span>
+                      </label>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="js-map-results-container">
+          <div class="border-t border-color-grey-light">
+            <ul class="js-map-results p-0 m-0"></ul>
+            <p class="p-4 m-0 flex items-center justify-center hidden" data-js="message-loading" aria-hidden="true">
+              {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
+              &nbsp;&nbsp;
+              {{ __('Loading&hellip;', 'accessnyc-locations') }}
+            </p>
+
+            <p class="p-4 m-0 text-center hidden" data-js="message-no-results" aria-hidden="true">
+              {{ __('No results.', 'accessnyc-locations') }}
+            </p>
+          </div>
+        </div>
+        <div class="js-map-pagination"> </div>
+      </div>
+
+      <div class="js-map-mapbox layout--map__map"></div>
+    </div>
   </main>
 {% endblock %}
 

@@ -89,4 +89,6 @@ foreach ($categories as $category) {
 
 $templates = array('locations/locations.twig');
 
+$context['post'] = Timber::get_post();
+
 Timber::render($templates, $context);

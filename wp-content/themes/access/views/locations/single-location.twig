@@ -4,6 +4,10 @@
   {# {% for post in posts %} #}
   {% set isGovtOffice = __('Government Office', 'accessnyc-locations')|trim == post.type %}
   <main id="content" class="main-content color-light-background" itemscope itemtype="https://schema.org/{% if isGovtOffice %}GovernmentOffice{% else %}Organization{% endif %}">
+    <div class="p-2 screen-tablet:p-3">
+      {% include 'components/alert-locations.twig' with {'class': 'animated fadeInUp'} only %}
+    </div>
+
     <section>
       <iframe class="block bg-color-blue-light border border-color-grey-light print:hidden screen-desktop:hidden"
         width="100%" height="300" frameborder="0"
@@ -12,7 +16,7 @@
 
     {{ cspr_iframes_nonce }}
 
-    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
+    <header class="c-header p-2 screen-tablet:p-3 mb-3 print:mt-0">
       <div>
         <h1 class="c-header__descriptor" itemprop="name">
           {{ post.title }}
