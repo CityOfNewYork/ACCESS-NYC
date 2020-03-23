@@ -62,7 +62,12 @@ class StatCollector {
 
     // Log errors
     if ($result === false) {
-      $this->notify($db->last_error, true);
+      $error = implode(" \r\n", [
+        'Last error: ' . (('' === $db->last_error) ? 'Insert error' : $db->last_error),
+        'Last query: ' . $this->last_query,
+      ]);
+
+      $this->notify($error, true);
     }
 
     $db->close();
