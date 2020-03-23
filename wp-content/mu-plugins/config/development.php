@@ -23,7 +23,12 @@ if (class_exists('Whoops\Run')) {
  */
 // phpcs:disable
 function debug($str, $return = true) {
-  error_log(print_r($str, $return));
+  $backtrace = debug_backtrace()[0];
+
+  error_log(
+    var_export($str, $return) . " " .
+    $backtrace['file'] . ':' . $backtrace['line'] . "\r\n"
+  );
 }
 // phpcs:enable
 
