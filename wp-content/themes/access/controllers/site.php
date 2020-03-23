@@ -81,7 +81,6 @@ class Site extends TimberSite {
 
     /** Only get alerts that have a location set */
     $context['alert_sitewide'] = reset(array_filter($alerts, function($post) {
-      debug($post);
       return !$post->custom['location'];
     }));
 
