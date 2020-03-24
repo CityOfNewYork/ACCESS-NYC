@@ -14,7 +14,7 @@
 
     <div class="usa-grid screen-desktop:layout--sidebar-gutter">
       <aside>
-        <nav class="c-side-nav print:hidden">
+        <nav class="c-side-nav sticky top-0 pt-1 print:hidden">
           <ul>
             {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
             {% if section.section_title %}
