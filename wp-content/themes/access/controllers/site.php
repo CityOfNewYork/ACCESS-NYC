@@ -74,10 +74,10 @@ class Site extends TimberSite {
       'posts_per_page' => -1
     ));
 
-    /** Only set alerts that have a location */
-    $context['alerts'] = array_filter($alerts, function($post) {
-      return $post->custom['location'];
-    });
+    // /** Only set alerts that have a location */
+    // $context['alerts'] = array_filter($alerts, function($post) {
+    //   return $post->custom['location'];
+    // });
 
     /** Only get alerts that have a location set */
     $context['alert_sitewide'] = reset(array_filter($alerts, function($post) {

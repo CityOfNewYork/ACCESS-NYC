@@ -33,8 +33,17 @@ $context['pagination'] = Timber::get_pagination();
 $context['per_page'] = $wp_query->post_count;
 $context['count'] = $wp_query->found_posts;
 
-// $this->alerts = array_filter($context['alerts'], function($p) {
-//   return count(array_intersect(array_values($p->custom['location']), ['programs', 'single'])) > 0;
-// });
+/**
+ * Set Alerts
+ */
+
+$alerts = Timber::get_posts(array(
+  'post_type' => 'alert',
+  'posts_per_page' => -1
+));
+
+$context['alerts'] = array_filter($alerts, function($p) {
+  return in_array('programs', array_values($p->custom['location']));
+});
 
 Timber::render('programs/archive.twig', $context);

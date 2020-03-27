@@ -98,6 +98,7 @@
                 "screener": "Screener",
                 "programs": "Programs",
                 "locations": "Locations",
+                "pages": "Pages",
                 "single": "Single (select this if you want to display the alert in the single view selected location(s) above as well)"
             },
             "allow_custom": 0,
@@ -125,5 +126,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1584736293
+    "modified": 1585332163
 }

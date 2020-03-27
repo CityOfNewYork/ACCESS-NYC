@@ -20,4 +20,17 @@ $post = Timber::get_post();
 $templates = array( 'single-' . $post->ID . '.twig', 'single-' . $post->post_type . '.twig', 'single.twig' );
 $context['post'] = $post;
 
+/**
+ * Set Alerts
+ */
+
+$alerts = Timber::get_posts(array(
+  'post_type' => 'alert',
+  'posts_per_page' => -1
+));
+
+$context['alerts'] = array_filter($alerts, function($p) {
+  return in_array('pages', array_values($p->custom['location']));
+});
+
 Timber::render($templates, $context);
