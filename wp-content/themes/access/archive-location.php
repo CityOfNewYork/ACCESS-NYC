@@ -91,7 +91,16 @@ $templates = array('locations/locations.twig');
 
 $context['post'] = Timber::get_post();
 
-$context['post']->alerts = array_filter($context['alerts'], function($p) {
+/**
+ * Set Alerts
+ */
+
+$alerts = Timber::get_posts(array(
+  'post_type' => 'alert',
+  'posts_per_page' => -1
+));
+
+$context['post']->alerts = array_filter($alerts, function($p) {
   return in_array('locations', array_values($p->custom['location']));
 });
 
