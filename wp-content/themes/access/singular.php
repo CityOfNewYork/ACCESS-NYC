@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Single entry template. Used for posts and other individual content items.
  *
@@ -18,6 +19,7 @@ $context = Timber::get_context();
 $post = Timber::get_post();
 
 $templates = array( 'single-' . $post->ID . '.twig', 'single-' . $post->post_type . '.twig', 'single.twig' );
+
 $context['post'] = $post;
 
 /**
@@ -32,5 +34,9 @@ $alerts = Timber::get_posts(array(
 $context['alerts'] = array_filter($alerts, function($p) {
   return in_array('pages', array_values($p->custom['location']));
 });
+
+/**
+ * Render Template
+ */
 
 Timber::render($templates, $context);

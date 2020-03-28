@@ -22,7 +22,12 @@
       </div>
     </header>
 
-    <div class="usa-grid screen-desktop:layout--sidebar-gutter">
+    {% if post.custom.jump_navigation == '' or post.custom.jump_navigation == '1' %}
+    {% set sidebar = true %}
+    {% endif %}
+
+    <div class="usa-grid {% if sidebar %}screen-desktop:layout--sidebar-gutter{% endif %}">
+      {% if sidebar %}
       <aside>
         <nav class="c-side-nav sticky top-0 pt-1 print:hidden">
           <ul>
@@ -36,8 +41,9 @@
           </ul>
         </nav>
       </aside>
+      {% endif %}
 
-      <div class="o-content usa-width-two-thirds">
+      <div class="o-content">
         {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
         <section id="section-{{ loop.index }}">
           {% if section.section_title %}<h2>{{ section.section_title }}</h2>{% endif %}
