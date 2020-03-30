@@ -30,11 +30,14 @@ add_action('init', function() use ($settings) {
  * Init Admin Options
  */
 add_action('admin_menu', function() use ($settings) {
-  $check = new Check($settings);
+  // Run checks if on the settings page
+  if ($settings->page === $_GET['page']) {
+    $check = new Check($settings);
 
-  $check->certificateAuthority();
-  $check->connection();
-  $check->tables();
+    $check->certificateAuthority();
+    $check->connection();
+    $check->tables();
+  }
 
   $settings->addOptions()->addSettings();
 }, $settings->priority);

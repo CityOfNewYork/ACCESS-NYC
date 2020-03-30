@@ -1,8 +1,18 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  {# TODO(jjandoc): data-source is the json endpoint to hit for this data. When translations are available, this needs to be updated with the langauge code, e.g. /ar/locations/json. In code, this would be replacing the data-source value with {{ url_base }}/locations/json #}
-  <main class="js-map layout--map screen-desktop:layout--sidebar color-light-background" id="content" data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('constant', 'GOOGLE_MAPS_EMBED') }}">
+<main class="color-light-background" id="content">
+  {% if post.alerts %}
+  <div class="p-2 screen-tablet:p-3">
+    {% for alert in post.alerts %}
+      {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
+
+      {% include 'components/alert.twig' with {this: alert, class: class} only %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="js-map layout--map screen-desktop:layout--sidebar " data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('constant', 'GOOGLE_MAPS_EMBED') }}">
     <div class="js-map-controls layout--map__sidebar">
       <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
 
@@ -62,7 +72,8 @@
     </div>
 
     <div class="js-map-mapbox layout--map__map"></div>
-  </main>
+  </div>
+</main>
 {% endblock %}
 
 {% block scripts_footer %}

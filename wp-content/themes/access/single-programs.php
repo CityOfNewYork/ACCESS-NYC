@@ -34,4 +34,18 @@ $context['shareAction'] = admin_url('admin-ajax.php');
 $context['shareUrl'] = $post->link.$query;
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 
+/**
+ * Get alerts
+ */
+
+$alerts = Timber::get_posts(array(
+  'post_type' => 'alert',
+  'posts_per_page' => -1
+));
+
+$context['alerts'] = array_filter($alerts, function($p) {
+  $flags = ['programs', 'single'];
+  return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
+});
+
 Timber::render($templates, $context);
