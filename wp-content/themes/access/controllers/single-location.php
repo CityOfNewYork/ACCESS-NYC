@@ -29,6 +29,16 @@ class SingleLocation extends Timber\Post {
     enqueue_inline('google-tag-manager');
     enqueue_script('main');
 
+    $alerts = Timber::get_posts(array(
+      'post_type' => 'alert',
+      'posts_per_page' => -1
+    ));
+
+    $this->alerts = array_filter($alerts, function($p) {
+      $flags = ['locations', 'single'];
+      return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
+    });
+
     return $this;
   }
 

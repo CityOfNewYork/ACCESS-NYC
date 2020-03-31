@@ -65,10 +65,24 @@ class Site extends TimberSite {
     /** Gets object containing all program categories */
     $context['categories'] = get_terms('programs');
 
-    /** Site Alert Banner */
-    $context['site_alert'] = Timber::get_post(array(
-      'post_type' => 'alert'
+    /**
+     * Site Alerts
+     */
+
+    $alerts = Timber::get_posts(array(
+      'post_type' => 'alert',
+      'posts_per_page' => -1
     ));
+
+    // /** Only set alerts that have a location */
+    // $context['alerts'] = array_filter($alerts, function($post) {
+    //   return $post->custom['location'];
+    // });
+
+    /** Only get alerts that have a location set */
+    $context['alert_sitewide'] = reset(array_filter($alerts, function($post) {
+      return !$post->custom['location'];
+    }));
 
     /** Determine if page is in print view */
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;

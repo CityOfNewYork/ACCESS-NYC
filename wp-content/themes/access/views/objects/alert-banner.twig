@@ -1,8 +1,8 @@
 <article aria-hidden="{% if active %}false{% else %}true{% endif %}" class="c-alert-banner z-20 color-mid-background bg-status-{{ this.alert_color }} animated hidden:fadeInUp {% if active %}active{% else %}hidden{% endif %} print:hidden" data-alert-name="{{ this.slug }}" data-js="alert-banner" id="aria-c-{{ this.slug }}" role="dialog">
   <div class="c-alert-banner-wrapper">
-    <div class="c-alert-banner__content">
-      <div class="c-alert-banner__icon">
-        <svg aria-hidden="true" class="c-alert-banner__svg icon icon-{{ this.alert_icon }}">
+    <div class="c-alert-banner__content screen-mobile:flex">
+      <div class="c-alert-box__icon">
+        <svg aria-hidden="true" class="c-alert-box__svg icon icon-{{ this.alert_icon }} icon-3 screen-tablet:icon-4">
           <use xlink:href="#icon-{{ this.alert_icon }}"></use>
         </svg>
       </div>

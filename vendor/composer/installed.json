@@ -1246,17 +1246,17 @@
     },
     {
         "name": "nyco/wp-stat-collector",
-        "version": "0.0.6",
-        "version_normalized": "0.0.6.0",
+        "version": "0.0.7",
+        "version_normalized": "0.0.7.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/CityOfNewYork/nyco-wp-stat-collector.git",
-            "reference": "96b66ed2ca7e815a816a4e47b60b4f7d13efcba6"
+            "url": "git@github.com:CityOfNewYork/nyco-wp-stat-collector.git",
+            "reference": "8d5b04b8e0463dbc4ab965d6e4be11ffbd3e3ef5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-stat-collector/zipball/96b66ed2ca7e815a816a4e47b60b4f7d13efcba6",
-            "reference": "96b66ed2ca7e815a816a4e47b60b4f7d13efcba6",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-stat-collector/zipball/8d5b04b8e0463dbc4ab965d6e4be11ffbd3e3ef5",
+            "reference": "8d5b04b8e0463dbc4ab965d6e4be11ffbd3e3ef5",
             "shasum": ""
         },
         "require": {
@@ -1266,7 +1266,7 @@
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2020-02-11T15:02:49+00:00",
+        "time": "2020-03-20T19:20:04+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -2316,6 +2316,28 @@
         "type": "wordpress-plugin",
         "installation-source": "dist",
         "homepage": "https://wordpress.org/plugins/bulk-delete/"
+    },
+    {
+        "name": "wpackagist-plugin/core-sitemaps",
+        "version": "0.2.0",
+        "version_normalized": "0.2.0.0",
+        "source": {
+            "type": "svn",
+            "url": "https://plugins.svn.wordpress.org/core-sitemaps/",
+            "reference": "tags/0.2.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://downloads.wordpress.org/plugin/core-sitemaps.0.2.0.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "homepage": "https://wordpress.org/plugins/core-sitemaps/"
     },
     {
         "name": "wpackagist-plugin/enable-media-replace",

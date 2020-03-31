@@ -33,6 +33,19 @@ array_map(function($category) {
 
 $context['formAction'] = admin_url('admin-ajax.php');
 
-$templates = array( 'screener/screener.twig' );
+/**
+ * Set Alerts
+ */
+
+$alerts = Timber::get_posts(array(
+  'post_type' => 'alert',
+  'posts_per_page' => -1
+));
+
+$context['alerts'] = array_filter($alerts, function($p) {
+  return in_array('screener', array_values($p->custom['location']));
+});
+
+$templates = array('screener/screener.twig');
 
 Timber::render($templates, $context);

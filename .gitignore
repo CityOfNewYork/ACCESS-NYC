@@ -28,6 +28,7 @@
 # WordPress #
 ############
 /.htaccess
+/robots.txt
 /wp-config.php
 /wp-content/uploads/
 # !/wp-content/uploads/wpallimport/functions.php

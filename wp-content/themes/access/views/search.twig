@@ -18,6 +18,16 @@
       </div>
     </header>
 
+    {% if alerts %}
+    <div class="px-2 screen-tablet:px-3 pb-2 screen-tablet:pb-3">
+      {% for alert in alerts %}
+        {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
+
+        {% include 'components/alert.twig' with {this: alert, class: class} only %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="usa-grid screen-desktop:layout--sidebar-small-gutter">
       <aside>
         <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
