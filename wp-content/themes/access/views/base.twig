@@ -51,8 +51,8 @@
         </footer>
       {% endblock %}
 
-      {% if alert_sitewide %}
-      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+      {% if site_alert %}
+      {% include 'objects/alert-banner.twig' with {this: site_alert, active: true} only %}
       {% endif %}
     </div>
 

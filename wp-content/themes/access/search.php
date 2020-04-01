@@ -62,17 +62,4 @@ $context['title'] = 'Search results for '. get_search_query();
 $context['posts'] = Timber::get_posts();
 $context['pagination'] = Timber::get_pagination();
 
-/**
- * Alerts
- */
-
-$alerts = Timber::get_posts(array(
-  'post_type' => 'alert',
-  'posts_per_page' => -1
-));
-
-$context['alerts'] = array_filter($alerts, function($p) {
-  return in_array('programs', array_values($p->custom['location']));
-});
-
 Timber::render($templates, $context);

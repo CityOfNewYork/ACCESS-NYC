@@ -2,16 +2,6 @@
 
 {% block content %}
 <main class="color-light-background" id="content">
-  {% if alerts %}
-  <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
-    {% for alert in alerts %}
-      {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
-
-      {% include 'components/alert.twig' with {this: alert, class: class} only %}
-    {% endfor %}
-  </div>
-  {% endif %}
-
   <article>
     <header class="c-header mt-3 print:mt-0">
       <div>
@@ -22,14 +12,9 @@
       </div>
     </header>
 
-    {% if post.custom.jump_navigation == '' or post.custom.jump_navigation == '1' %}
-    {% set sidebar = true %}
-    {% endif %}
-
-    <div class="usa-grid {% if sidebar %}screen-desktop:layout--sidebar-gutter{% endif %}">
-      {% if sidebar %}
+    <div class="usa-grid screen-desktop:layout--sidebar-gutter">
       <aside>
-        <nav class="c-side-nav sticky top-0 pt-1 print:hidden">
+        <nav class="c-side-nav print:hidden">
           <ul>
             {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
             {% if section.section_title %}
@@ -41,9 +26,8 @@
           </ul>
         </nav>
       </aside>
-      {% endif %}
 
-      <div class="o-content">
+      <div class="content-body usa-width-two-thirds">
         {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
         <section id="section-{{ loop.index }}">
           {% if section.section_title %}<h2>{{ section.section_title }}</h2>{% endif %}

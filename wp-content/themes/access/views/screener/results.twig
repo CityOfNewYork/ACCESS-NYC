@@ -26,16 +26,6 @@
       </div>
     </header>
 
-    {% if alerts %}
-    <div class="p-2 screen-tablet:px-3">
-      {% for alert in alerts %}
-        {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
-
-        {% include 'components/alert.twig' with {this: alert, class: class} only %}
-      {% endfor %}
-    </div>
-    {% endif %}
-
     <div class="usa-grid screen-desktop:layout--sidebar-small-gutter bg-color-white pt-4">
       <aside class="mb-4 print:hidden">
         <h4 class="type-h3 text-color-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>

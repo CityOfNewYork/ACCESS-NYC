@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden" aria-hidden="true" data-js="loaded">
+  <main class="color-light-background pb-3 hidden" aria-hidden="true" id="content" data-js="loaded">
     <span class="hidden" aria-hidden="true">{{ initialized }}</span>
 
     <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

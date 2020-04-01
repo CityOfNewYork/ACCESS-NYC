@@ -1,18 +1,9 @@
 {% extends "base.twig" %}
 
 {% block content %}
+  {# {% for post in posts %} #}
   {% set isGovtOffice = __('Government Office', 'accessnyc-locations')|trim == post.type %}
   <main id="content" class="main-content color-light-background" itemscope itemtype="https://schema.org/{% if isGovtOffice %}GovernmentOffice{% else %}Organization{% endif %}">
-    {% if post.alerts %}
-    <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
-      {% for alert in post.alerts %}
-        {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
-
-        {% include 'components/alert.twig' with {this: alert, class: class} only %}
-      {% endfor %}
-    </div>
-    {% endif %}
-
     <section>
       <iframe class="block bg-color-blue-light border border-color-grey-light print:hidden screen-desktop:hidden"
         width="100%" height="300" frameborder="0"
@@ -21,7 +12,7 @@
 
     {{ cspr_iframes_nonce }}
 
-    <header class="c-header p-2 screen-tablet:p-3 mb-3 mt-3 print:mt-0">
+    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
       <div>
         <h1 class="c-header__descriptor" itemprop="name">
           {{ post.title }}
@@ -164,4 +155,5 @@
       </a> #}
     </footer>
   </main>
+  {# {% endfor %} #}
 {% endblock %}
