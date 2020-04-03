@@ -37,15 +37,18 @@ $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 /**
  * Get alerts
  */
+if (get_field('alert')) {
+  $context['alerts'] = get_field('alert');
+} else {
+  $alerts = Timber::get_posts(array(
+    'post_type' => 'alert',
+    'posts_per_page' => -1
+  ));
 
-$alerts = Timber::get_posts(array(
-  'post_type' => 'alert',
-  'posts_per_page' => -1
-));
-
-$context['alerts'] = array_filter($alerts, function($p) {
-  $flags = ['programs', 'single'];
-  return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
-});
+  $context['alerts'] = array_filter($alerts, function($p) {
+    $flags = ['programs', 'single'];
+    return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
+  });
+}
 
 Timber::render($templates, $context);
