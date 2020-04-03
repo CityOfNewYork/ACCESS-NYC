@@ -80,11 +80,11 @@
             "return_format": "value"
         },
         {
-            "key": "field_5e750858e9c43",
-            "label": "Location",
-            "name": "location",
-            "type": "checkbox",
-            "instructions": "Select a site view for this alert to appear in.",
+            "key": "field_5e86296d6c6c7",
+            "label": "Alert Sitewide",
+            "name": "alert_sitewide",
+            "type": "true_false",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -94,19 +94,11 @@
             },
             "show_in_rest": 0,
             "wpml_cf_preferences": 0,
-            "choices": {
-                "screener": "Screener",
-                "programs": "Programs",
-                "locations": "Locations",
-                "pages": "Pages",
-                "single": "Single (select this if you want to display the alert in the single view selected location(s) above as well)"
-            },
-            "allow_custom": 0,
-            "default_value": [],
-            "layout": "vertical",
-            "toggle": 0,
-            "return_format": "value",
-            "save_custom": 0
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -126,5 +118,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585332163
+    "modified": 1585939325
 }

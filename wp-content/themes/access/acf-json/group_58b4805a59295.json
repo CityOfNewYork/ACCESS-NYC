@@ -22,27 +22,6 @@
             "delay": 0
         },
         {
-            "key": "field_5e7f7a53b9c98",
-            "label": "Section Jump Navigation",
-            "name": "jump_navigation",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "message": "Show jump navigation",
-            "default_value": 1,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
             "key": "field_58b480f33081d",
             "label": "Sections",
             "name": "sections",
@@ -120,6 +99,35 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5e8630457b54c",
+            "label": "Alert",
+            "name": "alert",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "post_type": [
+                "alert"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "object",
+            "wpml_cf_preferences": 0
         }
     ],
     "location": [
@@ -139,5 +147,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585413789
+    "modified": 1585939390
 }

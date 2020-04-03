@@ -79,16 +79,6 @@ class Site extends TimberSite {
       return $post->custom['alert_sitewide'];
     }));
 
-    // /** Only set alerts that have a location */
-    // $context['alerts'] = array_filter($alerts, function($post) {
-    //   return $post->custom['location'];
-    // });
-
-    /** Only get alerts that have a location set */
-    $context['alert_sitewide'] = reset(array_filter($alerts, function($post) {
-      return !$post->custom['location'];
-    }));
-
     /** Determine if page is in print view */
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
 
