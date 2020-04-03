@@ -135,20 +135,18 @@
                 "id": ""
             },
             "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
             "post_type": [
                 "alert"
             ],
             "taxonomy": "",
             "filters": [
-                "search",
-                "post_type",
-                "taxonomy"
+                "search"
             ],
             "elements": "",
             "min": "",
             "max": "",
-            "return_format": "object",
-            "wpml_cf_preferences": 0
+            "return_format": "object"
         }
     ],
     "location": [
@@ -168,5 +166,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585942907
+    "modified": 1585944741
 }

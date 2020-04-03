@@ -1,5 +1,5 @@
 {
-    "key": "group_588bb8786241f",
+    "key": "group_588bb8786241g",
     "title": "Site Alert Fields",
     "fields": [
         {
@@ -99,7 +99,36 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
-        }
+        },
+        {
+          "key": "field_5e750858e9c43",
+          "label": "Location",
+          "name": "location",
+          "type": "checkbox",
+          "instructions": "Select a site view for this alert to appear in.",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "show_in_rest": 0,
+          "wpml_cf_preferences": 0,
+          "choices": {
+              "screener": "Screener",
+              "programs": "Programs",
+              "locations": "Locations",
+              "pages": "Pages",
+              "single": "Single (select this if you want to display the alert in the single view selected location(s) above as well)"
+          },
+          "allow_custom": 0,
+          "default_value": [],
+          "layout": "vertical",
+          "toggle": 0,
+          "return_format": "value",
+          "save_custom": 0
+      }
     ],
     "location": [
         [
