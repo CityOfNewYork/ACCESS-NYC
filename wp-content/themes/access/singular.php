@@ -25,15 +25,18 @@ $context['post'] = $post;
 /**
  * Set Alerts
  */
+if (get_field('alert')) {
+  $context['alerts'] = get_field('alert');
+} else {
+  $alerts = Timber::get_posts(array(
+    'post_type' => 'alert',
+    'posts_per_page' => -1
+  ));
 
-$alerts = Timber::get_posts(array(
-  'post_type' => 'alert',
-  'posts_per_page' => -1
-));
-
-$context['alerts'] = array_filter($alerts, function($p) {
-  return in_array('pages', array_values($p->custom['location']));
-});
+  $context['alerts'] = array_filter($alerts, function($p) {
+    return in_array('pages', array_values($p->custom['location']));
+  });
+}
 
 /**
  * Render Template
