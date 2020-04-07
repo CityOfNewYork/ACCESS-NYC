@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-<main class="color-light-background" id="content">
+<main class="color-light-background" id="content" itemtype="http://schema.org/WebPage">
   {% if alerts %}
   <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
     {% for alert in alerts %}
@@ -12,11 +12,11 @@
   </div>
   {% endif %}
 
-  <article>
+  <article itemtype="https://schema.org/mainEntityOfPage">
     <header class="c-header mt-3 print:mt-0">
       <div>
-        <h1 class="c-header__descriptor">{{ post.title }}</h1>
-        <h2 class="c-header__information text-color-grey-mid mb-4">
+        <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
+        <h2 class="c-header__information text-color-grey-mid mb-4" itemtype="https://schema.org/dateModified">
           {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_date_modified|date('l, F dS, H:ia') }}
         </h2>
         <div class="screen-tablet:text-font-size-larger font-serif">
@@ -32,7 +32,7 @@
     <div class="usa-grid {% if sidebar %}screen-desktop:layout--sidebar-gutter{% endif %}">
       {% if sidebar %}
       <aside>
-        <nav class="c-side-nav sticky top-0 pt-1 print:hidden">
+        <nav class="c-side-nav sticky top-0 pt-1 print:hidden" itemprop="breadcrumb">
           <ul>
             {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
             {% if section.section_title %}
@@ -46,7 +46,7 @@
       </aside>
       {% endif %}
 
-      <div class="o-content">
+      <div class="o-content" itemtype="https://schema.org/about">
         {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
         <section id="section-{{ loop.index }}">
           {% if section.section_title %}<h2>{{ section.section_title }}</h2>{% endif %}
@@ -57,7 +57,7 @@
     </div>
 
     <footer class="usa-grid py-4">
-      <p class="text-color-grey-mid m-0">
+      <p class="text-color-grey-mid m-0" itemtype="https://schema.org/dateModified">
         {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_date_modified|date('l, F dS, H:ia') }}
       </p>
     </footer>
