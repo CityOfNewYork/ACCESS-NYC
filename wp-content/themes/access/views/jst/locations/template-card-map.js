@@ -5,7 +5,7 @@ var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments
 with(obj||{}){
 __p+='';
  locations.forEach(function(location) { 
-__p+='\n<li class="js-map-location c-card px-2 py-3 border-b border-color-grey-light" data-marker="'+
+__p+='\n<li class="js-map-location c-card px-2 py-3 border-b border-grey-light" data-marker="'+
 ((__t=( location.id ))==null?'':__t)+
 '" tabindex="0" itemscope itemtype="https://schema.org/';
  if (location.isGovtOffice) { 
@@ -21,11 +21,11 @@ __p+='\n    <img src="/wp-content/themes/access/assets/img/map-pin-green.png" wi
  } 
 __p+='\n  </div>\n  <div class="c-card__body">\n    <h3 class="type-h4 serif m-0">'+
 ((__t=( location.name ))==null?'':__t)+
-'</h3>\n    <p class="text-font-size-small text-color-grey-mid m-0">\n      ';
+'</h3>\n    <p class="text-font-size-small text-grey-mid m-0">\n      ';
  print(location.type) 
 __p+=' |\n      <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">\n        <span itemprop="streetAddress">';
  print(location.address.street) 
-__p+='</span>\n      </span>\n    </p>\n    <p class="text-font-size-small text-color-grey-mid m-0" itemprop="description">\n      ';
+__p+='</span>\n      </span>\n    </p>\n    <p class="text-font-size-small text-grey-mid m-0" itemprop="description">\n      ';
  print(location.programs.map(function(program) { return localize(program) }).join(", ")) 
 __p+='\n    </p>\n    <a href="'+
 ((__t=( location.link ))==null?'':__t)+

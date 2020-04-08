@@ -15,9 +15,9 @@
   <div data-js="preload">
     <header class="c-header p-2 screen-tablet:p-3 {% if post.alerts %}{% else %}mt-3{% endif %} mb-3 print:mt-0">
       <div>
-        <h1 class="c-header__descriptor text-color-blue-dark">{{ __('Programs', 'accessnyctheme') }}</h1>
+        <h1 class="c-header__descriptor text-blue-dark">{{ __('Programs', 'accessnyctheme') }}</h1>
 
-        <h2 class="c-header__information text-color-grey-mid mb-0 list-inline-comma">&nbsp;</h2>
+        <h2 class="c-header__information text-grey-mid mb-0 list-inline-comma">&nbsp;</h2>
       </div>
     </header>
 
@@ -32,7 +32,7 @@
         </span>
 
         <div class="flex items-center justify-center py-4" v-if="!init">
-          {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-color-yellow-access'}} only %}
+          {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-yellow-access'}} only %}
 
           &nbsp;&nbsp;
 
@@ -41,7 +41,7 @@
       </aside>
 
       <div id="see-programs" class="pt-2 screen-desktop:pt-0">
-        <div class="layout--gutter p-3 bg-color-grey-lightest mb-3">
+        <div class="layout--gutter p-3 bg-grey-lightest mb-3">
           {% if page.term_id | length %}
             {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
           {% else %}

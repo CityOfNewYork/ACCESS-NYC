@@ -14,7 +14,7 @@
     {% endif %}
 
     <section>
-      <iframe class="block bg-color-blue-light border border-color-grey-light print:hidden screen-desktop:hidden"
+      <iframe class="block bg-blue-light border border-grey-light print:hidden screen-desktop:hidden"
         width="100%" height="300" frameborder="0"
         src="https://www.google.com/maps/embed/v1/place?&center={{ post.address.lat}},{{ post.address.lng }}&q={{ post.address.address|url_encode }}&key={{ function('constant', 'GOOGLE_MAPS_EMBED') }}&zoom=15"></iframe>
     </section>
@@ -37,7 +37,7 @@
 
     <section class="usa-grid screen-desktop:layout--sidebar-gutter">
       <aside class="hidden screen-desktop:block">
-        <iframe class="block bg-color-blue-light border border-color-grey-light print:hidden"
+        <iframe class="block bg-blue-light border border-grey-light print:hidden"
           width="100%" height="496" frameborder="0"
           src="https://www.google.com/maps/embed/v1/place?&center={{ post.address.lat}},{{ post.address.lng }}&q={{ post.address.address|url_encode }}&key={{ function('constant', 'GOOGLE_MAPS_EMBED') }}&zoom=15"></iframe>
 
@@ -122,7 +122,7 @@
 
           {% for program in post.get_field('programs') %}
             {% set header = program.plain_language_program_name ~ '<em class="block font-normal">' ~ program.name ~ '</em>' %}
-            {% set body = '<p class="text-color-blue">' ~ program.government_agency ~ '</p>' ~ '<p>' ~ program.program_description ~ '</p>' %}
+            {% set body = '<p class="text-blue">' ~ program.government_agency ~ '</p>' ~ '<p>' ~ program.program_description ~ '</p>' %}
 
             {% if program.how_to_apply_or_enroll_in_person %}
               {% set body = body ~ '<h4>' ~ __('Apply in person', 'accessnyc-locations') ~ '</h4>' ~ '<p>' ~ program.how_to_apply_or_enroll_in_person ~ '</p>' %}
@@ -150,7 +150,7 @@
     </section>
 
     <footer class="usa-grid py-4">
-      <p class="text-color-grey-mid screen-desktop:mb-0">
+      <p class="text-grey-mid screen-desktop:mb-0">
         {{__('Updated', 'accessnyc-locations')}}
         {% if post.post_modified | length %}
         {{post.post_modified|date}}

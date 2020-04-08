@@ -24,11 +24,11 @@
       </div>
 
       <div>
-        <h1 class="c-header__descriptor text-color-blue-dark" itemprop="alternateName">
+        <h1 class="c-header__descriptor text-blue-dark" itemprop="alternateName">
           {{ post.plain_language_program_name }}
         </h1>
 
-        <h2 class="c-header__information text-color-grey-mid mb-0">
+        <h2 class="c-header__information text-grey-mid mb-0">
           <span itemprop="name">
             {{ post.program_name }}
           </span>
@@ -88,7 +88,7 @@
 
     <section class="usa-grid print:hidden">
       <header>
-        <h3 class="text-color-blue-dark border-t-2 border-color-yellow-access pt-4 mt-4">
+        <h3 class="text-blue-dark border-t-2 border-yellow-access pt-4 mt-4">
           {{__('More ways to get help with this program', 'accessnyc-program-detail')}}
         </h3>
       </header>
@@ -119,7 +119,7 @@
     </section>
 
     <footer class="usa-grid py-4">
-      <p class="text-color-grey-mid">
+      <p class="text-grey-mid">
         {{__('Updated', 'accessnyc-program-detail')}}
         {% if post.post_modified | length %}
         {{post.post_modified|date}}
@@ -131,7 +131,7 @@
       {# {% include 'partials/was-this-page-helpful.twig' %} #}
 
       <div class="text-align-end">
-        <a href="#content" class="btn btn-small bg-color-blue-light text-color-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
+        <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
       </div>
     </footer>
   </main>

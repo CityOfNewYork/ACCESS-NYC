@@ -4,9 +4,9 @@
 
     <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
       <div>
-        <h1 class="c-header__descriptor text-color-blue-dark">{{ strings.PROGRAMS }}</h1>
+        <h1 class="c-header__descriptor text-blue-dark">{{ strings.PROGRAMS }}</h1>
 
-        <h2 class="c-header__information text-color-grey-mid mb-0 list-inline-comma">
+        <h2 class="c-header__information text-grey-mid mb-0 list-inline-comma">
           <span v-if="init" v-for="c in categories" v-html="c"></span> &nbsp;
         </h2>
       </div>
@@ -33,7 +33,7 @@
 
       <div id="see-programs" class="pt-2 screen-desktop:pt-0">
         <div class="h-full hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
-          <div class="px-3 pt-3 mb-2 bg-color-grey-lightest items-center" v-if="!loading">
+          <div class="px-3 pt-3 mb-2 bg-grey-lightest items-center" v-if="!loading">
             <div class="layout--gutter pb-3" v-for="page in posts" v-if="page && page.show">
               <c-card v-for="post in page.posts" :key="post.id" v-bind="post" v-bind:strings="strings" taxonomy="programs" v-if="page.show"></c-card>
             </div>
@@ -47,7 +47,7 @@
 
           <div class="min-h-full flex items-center justify-center" v-else-if="loading">
             <div class="sticky top-0 bottom-0 flex items-center justify-center py-4">
-              <svg class="spinner icon-4 block text-color-yellow-access" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <svg class="spinner icon-4 block text-yellow-access" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <circle class="spinner__path" cx="12" cy="12" r="10" fill="none"></circle>
               </svg>
 

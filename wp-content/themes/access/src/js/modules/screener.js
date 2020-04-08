@@ -112,15 +112,15 @@ class Screener {
       let step = $(event.currentTarget).closest(`.${Screener.CssClass.STEP}`);
       let input = step.find('input[name="Person[0].headOfHousehold"]:checked');
 
-      // Reset HOH to be element at index 0 and remove current HOH from array.
-      // this._people.forEach((member, i) => {
-      //   if (member._attrs.headOfHousehold === true && i !== 0) {
-      //     this._people.splice(i, 1);
+      //Reset HOH to be element at index 0 and remove current HOH from array.
+      //this._people.forEach((member, i) => {
+      //  if (member._attrs.headOfHousehold === true && i !== 0) {
+      //    this._people.splice(i, 1);
 
-      //     $(this._el).find(`[id*="screener-person-${i}-income-"]`).remove();
-      //     $(this._el).find(`[id*="screener-person-${i}-expenses-"]`).remove();
-      //   }
-      // });
+      //    $(this._el).find(`[id*="screener-person-${i}-income-"]`).remove();
+      //    $(this._el).find(`[id*="screener-person-${i}-expenses-"]`).remove();
+      //  }
+      //});
 
       this._people[0].set({
         headOfHousehold: Screener.getTypedVal(input)

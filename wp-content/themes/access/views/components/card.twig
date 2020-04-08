@@ -5,20 +5,20 @@
   </div>
 
   <div class="c-card__body">
-    <a href="{{ post.get_permalink }}" class="text-color-blue-dark" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>
-      <h3 class="c-card__title text-color-blue-dark">
+    <a href="{{ post.get_permalink }}" class="text-blue-dark" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>
+      <h3 class="c-card__title text-blue-dark">
         {{ post.plain_language_program_name }}
       </h3>
     </a>
 
-    {% if not short_post %}<p class="program-card-subtitle type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>{% endif %}
+    {% if not short_post %}<p class="c-card__subtitle text-grey-mid type-small">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>{% endif %}
     <div class="c-card__summary">
       {% if post.brief_excerpt and not short_post %}<p>{{ post.brief_excerpt }}</p>{% endif %}
 
       <p class="hide-for-print">
         <a href="{{ post.get_permalink }}" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>{{__('Learn more', 'accessnyctheme')}} <span class="sr-only">: {{ post.program_name }}</span></a>
       </p>
-      
+
       {% if show_apply %}
       <p class="hide-for-print">
         <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}{% if "how-to-apply" in post.show_sections %}?step=how-to-apply{% endif %}" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>{{__('Apply', 'accessnyc-results')}}</a>

@@ -16,7 +16,7 @@
     <header class="c-header mt-3 print:mt-0">
       <div>
         <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
-        <h2 class="c-header__information text-color-grey-mid mb-4" itemprop="dateModified">
+        <h2 class="c-header__information text-grey-mid mb-4" itemprop="dateModified">
           {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_date_modified|date('l, F dS, H:ia') }}
         </h2>
         <div class="screen-tablet:text-font-size-larger font-serif">
@@ -57,7 +57,7 @@
     </div>
 
     <footer class="usa-grid py-4">
-      <p class="text-color-grey-mid m-0" itemprop="dateModified">
+      <p class="text-grey-mid m-0" itemprop="dateModified">
         {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_date_modified|date('l, F dS, H:ia') }}
       </p>
     </footer>

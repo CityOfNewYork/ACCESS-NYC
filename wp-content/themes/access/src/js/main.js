@@ -46,7 +46,7 @@ import localize from 'utilities/localize/localize';
   /**
    * Instantiate ACCESS NYC Patterns
    */
-  new Icons('/wp-content/themes/access/assets/svg/icons.475e6e65.svg');
+  new Icons('/wp-content/themes/access/assets/svg/icons.789ff509.svg');
   new Toggle();
   new Accordion();
   new Filter();

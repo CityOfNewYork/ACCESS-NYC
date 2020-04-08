@@ -2,8 +2,8 @@
 
 {% set styles = {
   fieldset: 'js-screener-step',
-  number: 'text-color-blue-bright font-bold',
-  heading: 'text-font-size-larger text-color-blue-dark border-b border-color-grey-mid pb-4 mb-3',
+  number: 'text-blue-bright font-bold',
+  heading: 'text-font-size-larger text-blue-dark border-b border-grey-mid pb-4 mb-3',
   padding: 'p-3 screen-desktop:p-4',
   label: 'font-bold text-font-size-normal'
 } %}
@@ -11,16 +11,16 @@
 {% block content %}
 <main class="main-content screen-desktop:my-2 screen-desktop:mx-4 screen-desktop:px-2" id="content" data-js="view">
   {% if alerts %}
-  <div class="px-3 pt-3 screen-desktop:px-4 screen-desktop:pt-2 bg-color-white screen-desktop:bg-color-transparent">
+  <div class="px-3 pt-3 screen-desktop:px-4 screen-desktop:pt-2 bg-white screen-desktop:bg-transparent">
     {% for alert in alerts %}
-      {% set class = loop.last ? 'screen-desktop:border border-color-grey-light' : 'mb-2 screen-tablet:mb-3 screen-desktop:border border-color-grey-light' %}
+      {% set class = loop.last ? 'screen-desktop:border border-grey-light' : 'mb-2 screen-tablet:mb-3 screen-desktop:border border-grey-light' %}
 
       {% include 'components/alert.twig' with {this: alert, class: class} only %}
     {% endfor %}
   </div>
   {% endif %}
 
-  <form data-js="screener" class="color-light-background screen-desktop:border border-color-grey-light screen-desktop:m-4 text-font-size-small" action="/eligibility/results/">
+  <form data-js="screener" class="color-light-background screen-desktop:border border-grey-light screen-desktop:m-4 text-font-size-small" action="/eligibility/results/">
     {% include 'screener/step-1.twig' with {'categories': categories} %}
     {% include 'screener/step-2.twig' %}
     {% include 'screener/step-3.twig' %}
