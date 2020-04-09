@@ -17,7 +17,7 @@
       <div>
         <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
         <h2 class="c-header__information text-color-grey-mid mb-4" itemprop="dateModified">
-          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_date_modified|date('l, F dS, H:ia') }}
+          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
         </h2>
         <div class="screen-tablet:text-font-size-larger font-serif">
           {{ post.get_field('field_58b480ca3081c') }} {# lead #}
@@ -58,7 +58,7 @@
 
     <footer class="usa-grid py-4">
       <p class="text-color-grey-mid m-0" itemprop="dateModified">
-        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_date_modified|date('l, F dS, H:ia') }}
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
       </p>
     </footer>
   </article>
