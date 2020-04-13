@@ -47,7 +47,7 @@ __p+='>{{ __("Domestic Partner", "accessnyc-screener")|trim|escape("js") }}</opt
  if (person.headOfHouseholdRelation === "Unrelated") { print(" selected") }
 __p+='>{{ __("Unrelated", "accessnyc-screener")|trim|escape("js") }}</option>\n      <option value="Other"';
  if (person.headOfHouseholdRelation === "Other") { print(" selected") }
-__p+='>{{ __("Related in some other way", "accessnyc-screener")|trim|escape("js") }}</option>\n    </select>\n  </div>\n</div>\n\n<hr class="divider-light">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do any of these apply to them?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <p>{{ __("It’s OK to pick more than one.", "accessnyc-screener")|trim|escape("js") }}</p>\n  <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">\n    <label class="checkbox">\n      <input class="js-screener-toggle" type="checkbox" name="Person['+
+__p+='>{{ __("Related in some other way", "accessnyc-screener")|trim|escape("js") }}</option>\n    </select>\n  </div>\n</div>\n\n<hr class="divider-light">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do any of these apply to them?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <p>{{ __("It’s OK to pick more than one.", "accessnyc-screener")|trim|escape("js") }}</p>\n  <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">\n    <label class="checkbox">\n      <input class="js-screener-toggle" type="checkbox" name="Person['+
 ((__t=( personIndex ))==null?'':__t)+
 '].student" value="1" data-toggles="#screener-is-person-'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -101,7 +101,7 @@ __p+='/>\n      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|t
 ((__t=( personIndex ))==null?'':__t)+
 '].unemployedWorkedLast18Months" data-type="boolean"';
  if (!person.unemployedWorkedLast18Months) { print(" checked") }
-__p+='/>\n      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim|escape("js") }}</span>\n    </label>\n  </div>\n</fieldset>\n\n<hr class="divider-light">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do they receive any of these benefits?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">\n    <label class="checkbox">\n      <input type="checkbox" name="Person['+
+__p+='/>\n      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim|escape("js") }}</span>\n    </label>\n  </div>\n</fieldset>\n\n<hr class="divider-light">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do they receive any of these benefits?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">\n    <label class="checkbox">\n      <input type="checkbox" name="Person['+
 ((__t=( personIndex ))==null?'':__t)+
 '].benefitsMedicaid" value="1" data-type="boolean"';
  if (person.benefitsMedicaid) { print(" checked") }

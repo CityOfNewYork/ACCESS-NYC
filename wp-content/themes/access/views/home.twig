@@ -28,13 +28,13 @@
       </div>
     </div>
 
-    <div class="layout--home-body">
+    <div class="layout-home-body">
       <div>
         {% if homepage_touts %}
         <div class="pb-4 mx-3">
           <h2 class="type-h5 divider m-0 text-grey-mid">{{ post.hero_touts_heading }}</h2>
 
-          <div class="screen-tablet:layout--columns">
+          <div class="screen-tablet:layout-columns">
             {% for tout in homepage_touts %}
             <div class="c-card px-0 screen-tablet:px-2 screen-tablet:py-3">
               <div class="c-card__body">
@@ -57,7 +57,7 @@
 
           {% if post.featured_programs_subheading | length %}<h3 class="type-supplemental text-grey-mid">{{ post.featured_programs_subheading }}</h3>{% endif %}
 
-          <div class="layout--gutter screen-tablet:layout--columns-gutter mb-4">
+          <div class="layout-gutter screen-tablet:layout-columns-gutter mb-4">
             {% include 'partials/post-teaser.twig' with {'short_post': true, 'posts': post.get_field('field_58912c8ce0c21')} %} {# featured_programs #}
           </div>
 

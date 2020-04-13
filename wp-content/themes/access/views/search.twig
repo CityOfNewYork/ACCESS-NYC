@@ -28,7 +28,7 @@
     </div>
     {% endif %}
 
-    <div class="usa-grid screen-desktop:layout--sidebar-small-gutter">
+    <div class="usa-grid screen-desktop:layout-sidebar-small-gutter">
       <aside>
         <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
 
@@ -36,9 +36,9 @@
       </aside>
 
       <div>
-        <div class="layout--gutter p-3 bg-grey-lightest mb-3">
+        <div class="layout-gutter p-3 bg-grey-lightest mb-3">
           {% if not posts | length %}
-          <h1 class="text-font-size-large">
+          <h1 class="text-large">
             {{__('Sorry, we couldn’t find anything matching your search.', 'accessnyctheme')}} <br class="hidden screen-desktop:inline-block">
             <a class="js-filter-reset" href="/?s={{query}}">{{__('Clear filters.', 'accessnyctheme')}}</a>
           </h1>

@@ -21,13 +21,13 @@
       </div>
     </header>
 
-    <div class="usa-grid screen-desktop:layout--sidebar-small-gutter">
+    <div class="usa-grid screen-desktop:layout-sidebar-small-gutter">
       <aside id="filter-programs">
         <h2 class="type-h4 mb-0 hidden screen-desktop:inline-block">
           {{ __('Filter Programs', 'accessnyctheme') }}:
         </h2>
 
-        <span class="text-font-size-small screen-desktop:hidden">
+        <span class="text-small screen-desktop:hidden">
           {{ __('Filter Programs', 'accessnyctheme') }}
         </span>
 
@@ -41,7 +41,7 @@
       </aside>
 
       <div id="see-programs" class="pt-2 screen-desktop:pt-0">
-        <div class="layout--gutter p-3 bg-grey-lightest mb-3">
+        <div class="layout-gutter p-3 bg-grey-lightest mb-3">
           {% if page.term_id | length %}
             {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
           {% else %}

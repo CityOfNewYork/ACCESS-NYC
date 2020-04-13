@@ -12,11 +12,11 @@
       </div>
     </header>
 
-    <div class="usa-grid screen-desktop:layout--sidebar-small-gutter">
+    <div class="usa-grid screen-desktop:layout-sidebar-small-gutter">
       <aside id="filter-programs">
         <h2 class="type-h4 mb-0 hidden screen-desktop:inline-block">{{ strings.FILTER_PROGRAMS }}:</h2>
 
-        <span class="text-font-size-small screen-desktop:hidden">{{ strings.FILTER_PROGRAMS }}</span>
+        <span class="text-small screen-desktop:hidden">{{ strings.FILTER_PROGRAMS }}</span>
 
         <div class="hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
           <c-filter-multi v-bind:terms="terms" v-bind:strings="strings" v-on:fetch="click" v-on:reset="toggle"></c-filter-multi>
@@ -34,7 +34,7 @@
       <div id="see-programs" class="pt-2 screen-desktop:pt-0">
         <div class="h-full hidden:preload" v-bind:class="{'loaded': init}" v-bind:aria-hidden="!init">
           <div class="px-3 pt-3 mb-2 bg-grey-lightest items-center" v-if="!loading">
-            <div class="layout--gutter pb-3" v-for="page in posts" v-if="page && page.show">
+            <div class="layout-gutter pb-3" v-for="page in posts" v-if="page && page.show">
               <c-card v-for="post in page.posts" :key="post.id" v-bind="post" v-bind:strings="strings" taxonomy="programs" v-if="page.show"></c-card>
             </div>
           </div>

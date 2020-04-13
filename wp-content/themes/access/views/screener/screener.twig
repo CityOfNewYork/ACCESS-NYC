@@ -3,9 +3,9 @@
 {% set styles = {
   fieldset: 'js-screener-step',
   number: 'text-blue-bright font-bold',
-  heading: 'text-font-size-larger text-blue-dark border-b border-grey-mid pb-4 mb-3',
+  heading: 'text-larger text-blue-dark border-b border-grey-mid pb-4 mb-3',
   padding: 'p-3 screen-desktop:p-4',
-  label: 'font-bold text-font-size-normal'
+  label: 'font-bold text-normal'
 } %}
 
 {% block content %}
@@ -20,7 +20,7 @@
   </div>
   {% endif %}
 
-  <form data-js="screener" class="color-light-background screen-desktop:border border-grey-light screen-desktop:m-4 text-font-size-small" action="/eligibility/results/">
+  <form data-js="screener" class="color-light-background screen-desktop:border border-grey-light screen-desktop:m-4 text-small" action="/eligibility/results/">
     {% include 'screener/step-1.twig' with {'categories': categories} %}
     {% include 'screener/step-2.twig' %}
     {% include 'screener/step-3.twig' %}

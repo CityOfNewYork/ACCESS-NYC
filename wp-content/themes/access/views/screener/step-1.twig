@@ -9,7 +9,7 @@
 
       <p>{{ __('It’s OK to pick more than one. Don’t worry if you forget one, we’ll still check if you may be eligible for help with all of them.', 'accessnyc-screener') }}</p>
 
-      <div class="c-question__container screen-tablet:layout--columns mb-4">
+      <div class="c-question__container screen-tablet:layout-columns mb-4">
         {% for category in categories %}
         {% if language_code != 'en' %}
           {% set langLength = (language_code | length + 1) * -1 %}

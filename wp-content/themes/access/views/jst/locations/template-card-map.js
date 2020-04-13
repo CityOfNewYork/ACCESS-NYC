@@ -21,15 +21,15 @@ __p+='\n    <img src="/wp-content/themes/access/assets/img/map-pin-green.png" wi
  } 
 __p+='\n  </div>\n  <div class="c-card__body">\n    <h3 class="type-h4 serif m-0">'+
 ((__t=( location.name ))==null?'':__t)+
-'</h3>\n    <p class="text-font-size-small text-grey-mid m-0">\n      ';
+'</h3>\n    <p class="text-small text-grey-mid m-0">\n      ';
  print(location.type) 
 __p+=' |\n      <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">\n        <span itemprop="streetAddress">';
  print(location.address.street) 
-__p+='</span>\n      </span>\n    </p>\n    <p class="text-font-size-small text-grey-mid m-0" itemprop="description">\n      ';
+__p+='</span>\n      </span>\n    </p>\n    <p class="text-small text-grey-mid m-0" itemprop="description">\n      ';
  print(location.programs.map(function(program) { return localize(program) }).join(", ")) 
 __p+='\n    </p>\n    <a href="'+
 ((__t=( location.link ))==null?'':__t)+
-'" class="link-more text-font-size-small" itemprop="url" target="_blank">{{ __("more about this location", "accessnyc-locations")|trim|escape("js") }}</a>\n  </div>\n</li>\n';
+'" class="link-more text-small" itemprop="url" target="_blank">{{ __("more about this location", "accessnyc-locations")|trim|escape("js") }}</a>\n  </div>\n</li>\n';
  }); 
 __p+='\n';
 }

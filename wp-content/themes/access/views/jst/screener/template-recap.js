@@ -3,7 +3,7 @@ window.JST = window.JST || {};
 window.JST["screener/template-recap"] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<h2 class="recap-confirmation">{{ __("Is all of your information correct?", "accessnyc-screener")|trim|escape("js") }}</h2>\n\n<div class="text-font-size-normal bg-white p-2 screen-tablet:p-4">\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Looking for help with", "accessnyc-screener")|trim|escape("js") }}\n      <a role="button" href="#step-1" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <div class="layout--gutter screen-tablet:layout--columns-gutter mb-4">\n      ';
+__p+='<h2 class="recap-confirmation">{{ __("Is all of your information correct?", "accessnyc-screener")|trim|escape("js") }}</h2>\n\n<div class="text-normal bg-white p-2 screen-tablet:p-4">\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Looking for help with", "accessnyc-screener")|trim|escape("js") }}\n      <a role="button" href="#step-1" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <div class="layout-gutter screen-tablet:layout-columns-gutter mb-4">\n      ';
  if (categories.length === 0) { 
 __p+='\n      <p>{{ __("No categories selected.", "accessnyc-screener")|trim|escape("js") }}</p>\n      ';
  } 

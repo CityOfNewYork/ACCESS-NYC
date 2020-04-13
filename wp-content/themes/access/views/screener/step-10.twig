@@ -8,7 +8,7 @@
     <fieldset class="c-question" id="screener-housing-situation">
       <legend class="c-question__label" for="housing-situation">{{ __('Which of these best applies to your housing situation?', 'accessnyc-screener') }}</legend>
       <p>{{ __('It’s OK to pick more than one.', 'accessnyc-screener') }}</p>
-      <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
+      <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">
         <label class="checkbox">
           <input class="js-screener-toggle" type="checkbox" name="Household.livingRenting" value="1" data-toggles="#screener-rental-type" data-type="boolean">
           <span class="checkbox__label">{{ __('Renting', 'accessnyc-screener') }}</span>
@@ -60,13 +60,13 @@
 
       <fieldset class="c-question js-screener-checkbox-group" id="screener-lease-owner">
         <legend class="c-question__label">{{ __('Who is on the lease?', 'accessnyc-screener') }}</legend>
-        <div id="screener-possible-leasees" class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group"></div>
+        <div id="screener-possible-leasees" class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group"></div>
       </fieldset>
     </div>
 
     <fieldset class="c-question hidden" id="screener-homeowner">
       <legend class="c-question__label">{{ __('Who is the owner?', 'accessnyc-screener') }}</legend>
-      <div id="screener-possible-owners" class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group"></div>
+      <div id="screener-possible-owners" class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group"></div>
     </fieldset>
 
     <hr class="divider-light">

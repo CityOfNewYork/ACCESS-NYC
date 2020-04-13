@@ -12,8 +12,8 @@
   </div>
   {% endif %}
 
-  <div class="js-map layout--map screen-desktop:layout--sidebar " data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('constant', 'GOOGLE_MAPS_EMBED') }}">
-    <div class="js-map-controls layout--map__sidebar">
+  <div class="js-map layout-map screen-desktop:layout-sidebar " data-js="google-maps-embed" data-source="/wp-json/api/v1/locations/" data-key="{{ function('constant', 'GOOGLE_MAPS_EMBED') }}">
+    <div class="js-map-controls layout-map__sidebar">
       <input type="text" class="w-full js-map-searchbox truncate" placeholder="{{ __('Enter an address or zip code', 'accessnyc-locations')}}">
 
       <div class="map-filter-container js-map-filter">
@@ -42,7 +42,7 @@
                   <li class="c-filter-multi__item-group-subitem">
                     <label class="checkbox">
                       <input type="checkbox" value="{{ program.uid }}" class="js-map-filter-program-input" tabindex="-1">
-                      <span class="checkbox__label text-font-size-small font-normal">{{ program.post_title }}</span>
+                      <span class="checkbox__label text-small font-normal">{{ program.post_title }}</span>
                     </label>
                   </li>
                   {% endfor %}
@@ -71,7 +71,7 @@
       <div class="js-map-pagination"> </div>
     </div>
 
-    <div class="js-map-mapbox layout--map__map"></div>
+    <div class="js-map-mapbox layout-map__map"></div>
   </div>
 </main>
 {% endblock %}

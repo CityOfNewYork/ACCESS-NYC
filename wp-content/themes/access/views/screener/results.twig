@@ -36,7 +36,7 @@
     </div>
     {% endif %}
 
-    <div class="usa-grid screen-desktop:layout--sidebar-small-gutter bg-white pt-4">
+    <div class="usa-grid screen-desktop:layout-sidebar-small-gutter bg-white pt-4">
       <aside class="mb-4 print:hidden">
         <h4 class="type-h3 text-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>
 
@@ -80,7 +80,7 @@
         <div class="mb-4">
           <h3 class="text-blue-dark">{{__('These are programs for you in the categories you selected.', 'accessnyc-results')}}</h3>
 
-          <div class="layout--gutter p-2 bg-grey-lightest">
+          <div class="layout-gutter p-2 bg-grey-lightest">
             {% for post in selectedPrograms %}
               {% include 'components/card.twig' with {'post': post, 'language_code': language_code, 'show_apply': true, 'target_blank': true} only %}
             {% endfor %}
@@ -98,7 +98,7 @@
             {% endif %}
           </h3>
 
-          <div class="layout--gutter p-2 bg-grey-lightest">
+          <div class="layout-gutter p-2 bg-grey-lightest">
             {% for post in additionalPrograms %}
               {% include 'components/card.twig' with {'post': post, 'language_code': language_code, 'show_apply': true, 'target_blank': true} only %}
             {% endfor %}

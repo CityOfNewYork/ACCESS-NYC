@@ -36,7 +36,7 @@
 <fieldset class="c-question">
   <legend class="c-question__label">{{ __("Do any of these apply to them?", "accessnyc-screener")|trim|escape("js") }}</legend>
   <p>{{ __("It’s OK to pick more than one.", "accessnyc-screener")|trim|escape("js") }}</p>
-  <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
+  <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">
     <label class="checkbox">
       <input class="js-screener-toggle" type="checkbox" name="Person[<%= personIndex %>].student" value="1" data-toggles="#screener-is-person-<%= personIndex %>-full-time-student" data-type="boolean"<% if (person.student) { print(" checked") }%>>
       <span class="checkbox__label">{{ __("Student", "accessnyc-screener")|trim|escape("js") }}</span>
@@ -100,7 +100,7 @@
 
 <fieldset class="c-question">
   <legend class="c-question__label">{{ __("Do they receive any of these benefits?", "accessnyc-screener")|trim|escape("js") }}</legend>
-  <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
+  <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">
     <label class="checkbox">
       <input type="checkbox" name="Person[<%= personIndex %>].benefitsMedicaid" value="1" data-type="boolean"<% if (person.benefitsMedicaid) { print(" checked") }%>>
       <span class="checkbox__label">{{ __("Medicaid", "accessnyc-screener")|trim|escape("js") }}</span>
