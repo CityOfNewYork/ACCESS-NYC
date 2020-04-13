@@ -299,7 +299,7 @@ gulp.task('images', callback => {
     .pipe(gulp.dest(`${ DIST }/img`));
 
   gulp.src([
-      `${ PATTERNS_ACCESS }/src/svg/**/*.svg`
+      `${ PATTERNS_ACCESS }/dist/svg/**/*.svg`
     ])
     .pipe(gulp.dest(`${ DIST }/svg`));
 
