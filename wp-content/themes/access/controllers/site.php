@@ -43,6 +43,9 @@ class Site extends TimberSite {
     $context['direction'] = $direction;
     $context['end'] = ($direction === 'ltr') ? 'right' : 'left';
     $context['start'] = ($direction === 'ltr') ? 'left' : 'right';
+    $context['google_translate_languages'] = $this->getGoogleTranslateLanguages();
+
+    $context['stylesheets'] = $this->getStylesheets();
 
     $context['url_base'] = ($lang === 'en') ? '' : '/' . $lang;
 
@@ -89,6 +92,49 @@ class Site extends TimberSite {
     $context['csp_script_nonce'] = (defined('CSP_SCRIPT_NONCE')) ? CSP_SCRIPT_NONCE : false;
 
     return $context;
+  }
+
+  /**
+   * Get the list of stylesheets for the front-end (for the Google Translate
+   * Element).
+   *
+   * @return  Array  List of stylesheets
+   */
+  public function getStylesheets() {
+    $files = scandir(get_stylesheet_directory() . '/assets/styles/');
+
+    $files = array_values(array_filter($files, function($file) {
+      return (pathinfo($file)['extension'] === 'css');
+    }));
+
+    $files = array_map(function($file) {
+      return get_stylesheet_directory_uri() . '/assets/styles/' . $file;
+    }, $files);
+
+    return $files;
+  }
+
+  /**
+   * Create a list of missing languages for Google Translate to augment.
+   *
+   * @return  Array  An array of missing WPML Active Languages
+   */
+  public function getGoogleTranslateLanguages() {
+    $languages = apply_filters('wpml_active_languages', null, array('skip_missing' => 0));
+
+    $langs = array_filter($languages, function($lang) {
+      return ($lang['missing'] === 1);
+    });
+
+    $langs = array_map(function($lang) {
+      if ($lang['code'] === 'zh-hant') {
+        $lang['code'] = 'zh-CN';
+      }
+
+      return $lang;
+    }, $langs);
+
+    return $langs;
   }
 
   /**

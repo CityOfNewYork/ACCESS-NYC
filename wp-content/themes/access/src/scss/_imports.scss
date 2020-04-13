@@ -80,14 +80,16 @@ $path-to-images: 'img/';
 ************/
 
 @import '@nycopportunity/access-patterns/src/utilities/animate/animate';
-@import '@nycopportunity/access-patterns/src/utilities/accessibility/accessibility';
 @import '@nycopportunity/access-patterns/src/utilities/color/color';
 @import '@nycopportunity/access-patterns/src/utilities/font/font';
 @import '@nycopportunity/access-patterns/src/utilities/inherit/inherit';
 @import '@nycopportunity/access-patterns/src/utilities/language/language';
+@import '@nycopportunity/access-patterns/src/utilities/margin/margin';
 @import '@nycopportunity/access-patterns/src/utilities/media/media-print';
+@import '@nycopportunity/access-patterns/src/utilities/padding/padding';
+@import '@nycopportunity/access-patterns/src/utilities/screen-reader/screen-reader';
 @import '@nycopportunity/access-patterns/src/utilities/statuses/statuses';
-@import '@nycopportunity/access-patterns/dist/styles/_tailwind.scss';
+@import '@nycopportunity/access-patterns/dist/styles/_tailwindcss.scss';
 @import '@nycopportunity/access-patterns/src/utilities/text/text';
 @import '@nycopportunity/access-patterns/src/utilities/toggle/toggle';
 @import '@nycopportunity/access-patterns/src/utilities/typography/typography';

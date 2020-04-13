@@ -13,6 +13,7 @@ enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
+enqueue_inline('google-translate-element');
 enqueue_script('main');
 
 $context = Timber::get_context();
@@ -37,6 +38,8 @@ if (get_field('alert')) {
     return in_array('pages', array_values($p->custom['location']));
   });
 }
+
+$context['google_translate_element'] = true;
 
 /**
  * Render Template

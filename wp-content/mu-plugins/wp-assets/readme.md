@@ -8,11 +8,11 @@ A developer plugin with helpers for managing assets in WordPress. It can be used
 
     composer require nyco/wp-assets
 
-*Not using Composer?* Download an archive of the code and drop it nto the mu-plugins directory.
+*Not using Composer?* Download an archive of the code and drop it into the mu-plugins directory.
 
-**$2** [Create a proxy PHP loader file](https://wordpress.org/support/article/must-use-plugins/#caveats) inside the mu-plugins directory, or [use the one included with the plugin](https://github.com/CityOfNewYork/nyco-wp-assets):
+**$2** [Create a proxy PHP loader file](https://wordpress.org/support/article/must-use-plugins/#caveats) inside the mu-plugins directory, or [use the one included with the plugin](https://github.com/CityOfNewYork/nyco-wp-assets/blob/master/autoloader-sample.php):
 
-    mv wp-content/mu-plugins/nyco-wp-assets/autoloader-sample.php wp-content/mu-plugins/wp-assets.php
+    mv wp-content/mu-plugins/wp-assets/autoloader-sample.php wp-content/mu-plugins/wp-assets.php
 
 ## Usage
 

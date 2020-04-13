@@ -6,10 +6,12 @@ import 'core-js/features/array/for-each';
 import 'core-js/features/array/find';
 import 'core-js/features/array/flat';
 import 'core-js/features/array/flat-map';
+import 'core-js/features/array/includes';
 import 'core-js/features/array/map';
 import 'core-js/features/object/assign';
 import 'core-js/features/object/from-entries';
 import 'core-js/features/object/entries';
+import 'core-js/features/string/includes';
 
 // Fetch
 import 'whatwg-fetch';
@@ -22,6 +24,7 @@ import 'utilities/nodelist/foreach';
 
 // Core Modules
 import Utility from 'modules/utility';
+import TranslateElement from 'modules/google-translate-element';
 
 // ACCESS Patterns
 import Accordion from 'components/accordion/accordion';
@@ -46,7 +49,7 @@ import localize from 'utilities/localize/localize';
   /**
    * Instantiate ACCESS NYC Patterns
    */
-  new Icons('/wp-content/themes/access/assets/svg/icons.789ff509.svg');
+  new Icons('/wp-content/themes/access/assets/svg/icons.0ac834d8.svg');
   new Toggle();
   new Accordion();
   new Filter();
@@ -215,9 +218,6 @@ import localize from 'utilities/localize/localize';
     window.onload = window.print;
   }
 
-  /**
-   *
-   */
   (elements => {
     elements.forEach(element => {
       element.addEventListener('click', event => {
@@ -241,4 +241,13 @@ import localize from 'utilities/localize/localize';
    * Enable environment warnings
    */
   window.addEventListener('load', Utility.warnings);
+
+  /**
+   * Instantiate Google Translate Element
+   */
+  (element => {
+    if (element) {
+      new TranslateElement(element);
+    }
+  })(document.querySelector(TranslateElement.selector));
 })(window);

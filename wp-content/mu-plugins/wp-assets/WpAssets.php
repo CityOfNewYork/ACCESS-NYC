@@ -41,9 +41,9 @@ class WpAssets {
    * @return  This
    */
   public function __construct() {
-    $this->templates = get_template_directory();
+    $this->templates = get_stylesheet_directory();
 
-    $this->uri = get_template_directory_uri();
+    $this->uri = get_stylesheet_directory_uri();
 
     $this->version = wp_get_theme()->version;
 
@@ -273,7 +273,7 @@ class WpAssets {
       // Add inline script to source script if it exists
       if (array_key_exists('inline', $s)) {
         $s['inline']['contents'] = self::getFileContents($s['inline']['path'], $s['localize']);
-        wp_add_inline_script($s['handle'], $s['inline']['contents'], $s['inline']['before']);
+        wp_add_inline_script($s['handle'], $s['inline']['contents'], $s['inline']['position']);
       }
     }
 
@@ -294,7 +294,7 @@ class WpAssets {
 
       wp_register_script(...$inline);
       wp_enqueue_script(...$inline);
-      wp_add_inline_script($s['handle'] . '-inline', $s['inline']['contents'], $s['inline']['before']);
+      wp_add_inline_script($s['handle'] . '-inline', $s['inline']['contents'], $s['inline']['position']);
 
       // Remove the fake script from the printed script tag.
       add_filter('script_loader_tag', function($tag) {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bc4a19f18d19edad277da802ccd4cc8",
+    "content-hash": "8e0ef9f2084969b1c03a58ec704db536",
     "packages": [
         {
             "name": "composer/installers",
@@ -1040,12 +1040,12 @@
             "version": "1.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/php-webdriver.git",
+                "url": "https://github.com/php-webdriver/php-webdriver-archive.git",
                 "reference": "e43de70f3c7166169d0f14a374505392734160e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/e43de70f3c7166169d0f14a374505392734160e5",
+                "url": "https://api.github.com/repos/php-webdriver/php-webdriver-archive/zipball/e43de70f3c7166169d0f14a374505392734160e5",
                 "reference": "e43de70f3c7166169d0f14a374505392734160e5",
                 "shasum": ""
             },
@@ -1093,6 +1093,7 @@
                 "selenium",
                 "webdriver"
             ],
+            "abandoned": "php-webdriver/webdriver",
             "time": "2019-06-13T08:02:18+00:00"
         },
         {
