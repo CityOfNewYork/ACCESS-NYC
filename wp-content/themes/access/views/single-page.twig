@@ -17,7 +17,7 @@
       <div>
         <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
         <h2 class="c-header__information text-grey-mid mb-4" itemprop="dateModified">
-          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_date_modified|date('l, F dS, H:ia') }}
+          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
         </h2>
         <div class="screen-tablet:text-larger font-serif">
           {{ post.get_field('field_58b480ca3081c') }} {# lead #}
