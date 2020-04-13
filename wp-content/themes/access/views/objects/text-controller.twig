@@ -14,7 +14,7 @@
     <div class="notranslate o-text-controller__languages screen-tablet:flex screen-tablet:justify-end">
       {% do action('icl_language_selector') %}
 
-      {% if google_translate_element %}
+      {% if google_translate_languages and google_translate_element %}
       <div id="js-google-translate" class="hidden" aria-hidden="true"></div>
       <label class="flex flex-col ms-2 mb-2" for="js-google-translate-control">
         <div class="flex items-center mb-1">
