@@ -26,6 +26,7 @@ $context['post'] = $post;
 /**
  * Set Alerts
  */
+
 if (get_field('alert')) {
   $context['alerts'] = get_field('alert');
 } else {
@@ -38,6 +39,10 @@ if (get_field('alert')) {
     return in_array('pages', array_values($p->custom['location']));
   });
 }
+
+/**
+ * Show Google Translate
+ */
 
 $context['google_translate_element'] = true;
 

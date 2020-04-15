@@ -108,15 +108,31 @@ $context['getParams'] = $get; // pass safe parameters
 $context['selectedPrograms'] = Timber::get_posts($selectedProgramArgs);
 $context['additionalPrograms'] = Timber::get_posts($additionalProgramArgs);
 
-$alerts = Timber::get_posts(array(
-  'post_type' => 'alert',
-  'posts_per_page' => -1
-));
+/**
+ * Alerts
+ */
 
-$context['alerts'] = array_filter($alerts, function($p) {
-  return in_array('screener', array_values($p->custom['location']));
-});
+if (get_field('alert')) {
+  $context['alerts'] = get_field('alert');
+} else {
+  $alerts = Timber::get_posts(array(
+    'post_type' => 'alert',
+    'posts_per_page' => -1
+  ));
+
+  $context['alerts'] = array_filter($alerts, function($p) {
+    return in_array('screener', array_values($p->custom['location']));
+  });
+}
+
+/**
+ * Set Template
+ */
 
 $templates = array('screener/results.twig');
+
+/**
+ * Render the view
+ */
 
 Timber::render($templates, $context);
