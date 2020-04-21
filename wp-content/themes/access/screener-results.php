@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Eligibility Screener Results
  *
@@ -16,20 +17,40 @@
  * TODO: This page was originally spec'd to display a line of copy that said
  * "these results are valid as of SOME_DATE" which would be based on the date
  * parameter.
-*/
+ */
 
+use Config\Paths as asset;
+
+require_once asset\controller('programs');
+
+/**
+ * Enqueue
+ */
+
+// Main
 enqueue_language_style('style');
+
+// Integrations
 enqueue_inline('rollbar');
 enqueue_inline('webtrends');
 enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
+
+// Main
 enqueue_script('screener');
 
+/**
+ * Context
+ */
+
 $context = Timber::get_context();
+
 $programBlob = '';
+
 $categoryBlob = '';
+
 $query = array();
 
 // Gets the URL Parameters for the search value,
@@ -101,12 +122,20 @@ $query = (isset($query)) ? '?'.$query : '';
 
 // Share by email/sms fields.
 $context['shareAction'] = admin_url('admin-ajax.php');
+
 $context['shareUrl'] = home_url() . '/eligibility/results/' . $query;
+
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
+
 $context['getParams'] = $get; // pass safe parameters
 
-$context['selectedPrograms'] = Timber::get_posts($selectedProgramArgs);
-$context['additionalPrograms'] = Timber::get_posts($additionalProgramArgs);
+$context['selectedPrograms'] = array_map(function($post) {
+    return new Controller\Programs($post);
+  }, Timber::get_posts($selectedProgramArgs));
+
+$context['additionalPrograms'] = array_map(function($post) {
+    return new Controller\Programs($post);
+  }, Timber::get_posts($additionalProgramArgs));
 
 /**
  * Alerts
@@ -126,13 +155,7 @@ if (get_field('alert')) {
 }
 
 /**
- * Set Template
- */
-
-$templates = array('screener/results.twig');
-
-/**
  * Render the view
  */
 
-Timber::render($templates, $context);
+Timber::render('screener/results.twig', $context);

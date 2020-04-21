@@ -11,7 +11,7 @@ __p+='<div class="c-question">\n  <label class="c-question__label" for="person-'
 ((__t=( personIndex ))==null?'':__t)+
 '].age" value="';
  if(person.age) { print(person.age) } 
-__p+='" type="number" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>\n  </div>\n</div>\n\n<hr class="divider-light">\n\n<div class="c-question">\n  <label class="c-question__label" for="person-'+
+__p+='" type="number" min="0" maxlength="3" pattern="[0-9]" step="1" data-type="integer" required>\n  </div>\n</div>\n\n<hr class="divider screen-tablet:divider-large border-grey-mid">\n\n<div class="c-question">\n  <label class="c-question__label" for="person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-relation">{{ __("What is this person’s relationship to the head of the household?", "accessnyc-screener")|trim|escape("js") }}</label>\n  <div class="c-question__container">\n    <select class="select" id="person'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -47,7 +47,7 @@ __p+='>{{ __("Domestic Partner", "accessnyc-screener")|trim|escape("js") }}</opt
  if (person.headOfHouseholdRelation === "Unrelated") { print(" selected") }
 __p+='>{{ __("Unrelated", "accessnyc-screener")|trim|escape("js") }}</option>\n      <option value="Other"';
  if (person.headOfHouseholdRelation === "Other") { print(" selected") }
-__p+='>{{ __("Related in some other way", "accessnyc-screener")|trim|escape("js") }}</option>\n    </select>\n  </div>\n</div>\n\n<hr class="divider-light">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do any of these apply to them?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <p>{{ __("It’s OK to pick more than one.", "accessnyc-screener")|trim|escape("js") }}</p>\n  <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">\n    <label class="checkbox">\n      <input class="js-screener-toggle" type="checkbox" name="Person['+
+__p+='>{{ __("Related in some other way", "accessnyc-screener")|trim|escape("js") }}</option>\n    </select>\n  </div>\n</div>\n\n<hr class="divider screen-tablet:divider-large border-grey-mid">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do any of these apply to them?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <p>{{ __("It’s OK to pick more than one.", "accessnyc-screener")|trim|escape("js") }}</p>\n  <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">\n    <label class="checkbox">\n      <input class="js-screener-toggle" type="checkbox" name="Person['+
 ((__t=( personIndex ))==null?'':__t)+
 '].student" value="1" data-toggles="#screener-is-person-'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -101,7 +101,7 @@ __p+='/>\n      <span class="toggle__label">{{ __("Yes", "accessnyc-screener")|t
 ((__t=( personIndex ))==null?'':__t)+
 '].unemployedWorkedLast18Months" data-type="boolean"';
  if (!person.unemployedWorkedLast18Months) { print(" checked") }
-__p+='/>\n      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim|escape("js") }}</span>\n    </label>\n  </div>\n</fieldset>\n\n<hr class="divider-light">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do they receive any of these benefits?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">\n    <label class="checkbox">\n      <input type="checkbox" name="Person['+
+__p+='/>\n      <span class="toggle__label">{{ __("No", "accessnyc-screener")|trim|escape("js") }}</span>\n    </label>\n  </div>\n</fieldset>\n\n<hr class="divider screen-tablet:divider-large border-grey-mid">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do they receive any of these benefits?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">\n    <label class="checkbox">\n      <input type="checkbox" name="Person['+
 ((__t=( personIndex ))==null?'':__t)+
 '].benefitsMedicaid" value="1" data-type="boolean"';
  if (person.benefitsMedicaid) { print(" checked") }
@@ -109,7 +109,7 @@ __p+='>\n      <span class="checkbox__label">{{ __("Medicaid", "accessnyc-screen
 ((__t=( personIndex ))==null?'':__t)+
 '].benefitsMedicaidDisability" value="1" data-type="boolean"';
  if (person.benefitsMedicaidDisability) { print(" checked") }
-__p+='>\n      <span class="checkbox__label">{{ __("Disability-related Medicaid", "accessnyc-screener")|trim|escape("js") }}</span>\n    </label>\n    <label class="checkbox">\n      <input class="screener-checkboxes-input sr-only js-clear-group" type="checkbox" checked>\n      <span class="checkbox__label">{{ __("None of these apply", "accessnyc-screener")|trim|escape("js") }}</span>\n    </label>\n  </div>\n</fieldset>\n\n<hr class="divider-light">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do they have an income?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <p>{{ __("This includes money from jobs, alimony, investments or gifts.", "accessnyc-screener")|trim|escape("js") }}</p>\n  <div class="c-question__container js-screener-radio-group">\n    <label class="toggle js-screener-radio-label">\n      <input class="js-screener-toggle js-add-section sr-only"\n        value="1"\n        type="radio"\n        name="person-'+
+__p+='>\n      <span class="checkbox__label">{{ __("Disability-related Medicaid", "accessnyc-screener")|trim|escape("js") }}</span>\n    </label>\n    <label class="checkbox">\n      <input class="screener-checkboxes-input sr-only js-clear-group" type="checkbox" checked>\n      <span class="checkbox__label">{{ __("None of these apply", "accessnyc-screener")|trim|escape("js") }}</span>\n    </label>\n  </div>\n</fieldset>\n\n<hr class="divider screen-tablet:divider-large border-grey-mid">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do they have an income?", "accessnyc-screener")|trim|escape("js") }}</legend>\n  <p>{{ __("This includes money from jobs, alimony, investments or gifts.", "accessnyc-screener")|trim|escape("js") }}</p>\n  <div class="c-question__container js-screener-radio-group">\n    <label class="toggle js-screener-radio-label">\n      <input class="js-screener-toggle js-add-section sr-only"\n        value="1"\n        type="radio"\n        name="person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-has-income"\n        data-type="boolean"\n        data-shows="#person-'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -137,7 +137,7 @@ __p+='\n  <div id="screener-person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-income-'+
 ((__t=( matrixIndex ))==null?'':__t)+
-'" class="matrix-item js-matrix-item">\n    <hr class="divider-light">\n\n    <div class="c-question">\n      <div class="prime-label">\n        <label class="c-question__label" for="person-'+
+'" class="matrix-item js-matrix-item">\n    <hr class="divider screen-tablet:divider-large border-grey-mid">\n\n    <div class="c-question">\n      <div class="prime-label">\n        <label class="c-question__label" for="person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-incomes-'+
 ((__t=( matrixIndex ))==null?'':__t)+
@@ -257,7 +257,7 @@ __p+='\n  <div id="screener-person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-income-';
  print(matrixIndex + 1) 
-__p+='" class="matrix-item js-matrix-item">\n\n    <hr class="divider-light">\n\n    <div class="c-question">\n      ';
+__p+='" class="matrix-item js-matrix-item">\n\n    <hr class="divider screen-tablet:divider-large border-grey-mid">\n\n    <div class="c-question">\n      ';
  if (matrixIndex === 0) { 
 __p+='\n      <label class="c-question__label" for="person-'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -335,7 +335,7 @@ __p+='].frequency" required>\n            <option value="">{{ __("Click to add a
  } 
 __p+='\n  ';
  }); } 
-__p+='\n</div>\n\n<hr class="divider-light">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do they have any expenses?", "accessnyc-screener")|trim|escape("js") }}</legend>\n\n  <p>{{ __("This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.", "accessnyc-screener")|trim|escape("js") }}</p>\n\n  <div class="c-question__container js-screener-radio-group">\n    <label class="toggle js-screener-radio-label">\n      <input class="js-screener-toggle js-add-section sr-only"\n        value="1"\n        type="radio"\n        name="person-'+
+__p+='\n</div>\n\n<hr class="divider screen-tablet:divider-large border-grey-mid">\n\n<fieldset class="c-question">\n  <legend class="c-question__label">{{ __("Do they have any expenses?", "accessnyc-screener")|trim|escape("js") }}</legend>\n\n  <p>{{ __("This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.", "accessnyc-screener")|trim|escape("js") }}</p>\n\n  <div class="c-question__container js-screener-radio-group">\n    <label class="toggle js-screener-radio-label">\n      <input class="js-screener-toggle js-add-section sr-only"\n        value="1"\n        type="radio"\n        name="person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-has-expenses"\n        data-type="boolean"\n        data-shows="#person-'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -363,7 +363,7 @@ __p+='\n  <div id="screener-person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-expense-'+
 ((__t=( matrixIndex ))==null?'':__t)+
-'" class="matrix-item js-matrix-item">\n    <hr class="divider-light">\n\n    <div class="c-question">\n      ';
+'" class="matrix-item js-matrix-item">\n    <hr class="divider screen-tablet:divider-large border-grey-mid">\n\n    <div class="c-question">\n      ';
  if (matrixIndex === 0) { 
 __p+='\n      <label class="c-question__label" for="person-'+
 ((__t=( personIndex ))==null?'':__t)+
@@ -469,7 +469,7 @@ __p+='\n    <div id="screener-person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-expense-';
  print(matrixIndex + 1) 
-__p+='" class="matrix-item js-matrix-item">\n      <hr class="divider-light">\n\n      <div class="c-question">\n        ';
+__p+='" class="matrix-item js-matrix-item">\n      <hr class="divider screen-tablet:divider-large border-grey-mid">\n\n      <div class="c-question">\n        ';
  if (matrixIndex === 0) { 
 __p+='\n        <label class="c-question__label" for="person-'+
 ((__t=( personIndex ))==null?'':__t)+

@@ -3,9 +3,9 @@
 {% block content %}
   {% set isGovtOffice = __('Government Office', 'accessnyc-locations')|trim == post.type %}
   <main id="content" class="main-content color-light-background" itemscope itemtype="https://schema.org/{% if isGovtOffice %}GovernmentOffice{% else %}Organization{% endif %}">
-    {% if post.alerts %}
+    {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
-      {% for alert in post.alerts %}
+      {% for alert in alerts %}
         {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
 
         {% include 'components/alert.twig' with {this: alert, class: class} only %}
@@ -59,7 +59,7 @@
           {% endif %}
         </section>
 
-        <hr class="divider-light" aria-hidden="true">
+        <hr class="divider screen-tablet:divider-large border-grey-mid" aria-hidden="true">
 
         <section class="mb-3 screen-desktop:hidden">
           <a class="btn btn-primary btn-next w-full print:hidden" href="https://www.google.com/maps/dir//{{ post.address.address }}" target="_blank" rel="noopener noreferrer" itemprop="hasMap" data-js="track" data-track-key="Get Directions" data-track-data='[{"DCS.dcsuri": "get-directions"}]'>{{__('Get directions', 'accessnyc-locations')}}</a>
@@ -115,7 +115,7 @@
         </section>
         {% endif %}
 
-        <hr class="divider-light" aria-hidden="true">
+        <hr class="divider screen-tablet:divider-large border-grey-mid" aria-hidden="true">
 
         <section>
           <h3>{{ __('Programs at this location', 'accessnyc-locations')}}</h3>

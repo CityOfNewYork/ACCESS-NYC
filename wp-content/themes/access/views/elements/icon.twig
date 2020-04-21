@@ -1,0 +1,9 @@
+{##
+ # Setting a length here to strip the language code from the category slug
+ # and use a single sprite image for all languages.
+ #}
+<svg class="icon {{ icon }} {{ class }}"{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %} role="img">
+  <title id="{{ icon }}__title">{{ title }}</title>
+
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#{{ icon }}"></use>
+</svg>

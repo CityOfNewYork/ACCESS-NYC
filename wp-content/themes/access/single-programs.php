@@ -1,16 +1,34 @@
 <?php
+
 /**
- * Program detail page
+ * Single Program
  */
 
+use Config\Paths as asset;
+
+require_once asset\controller('programs');
+
+/**
+ * Enqueue
+ */
+
+// Main
 enqueue_language_style('style');
+
+// Integrations
 enqueue_inline('rollbar');
 enqueue_inline('webtrends');
 enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
+
+// Main
 enqueue_script('programs');
+
+/**
+ * Context
+ */
 
 $context = Timber::get_context();
 
@@ -23,20 +41,21 @@ if (isset($_GET['step'])) {
   $context['step'] = '';
 }
 
-$query = ($context['step'] !== '') ? '?step='.$context['step'] : '';
+$query = ($context['step'] !== '') ? '?step=' . $context['step'] : '';
 
-$post = Timber::get_post();
-$templates = array('programs/single.twig');
-$context['post'] = $post;
+$context['post'] = new Controller\Programs(Timber::get_post());
 
 // Share by email/sms fields.
 $context['shareAction'] = admin_url('admin-ajax.php');
-$context['shareUrl'] = $post->link.$query;
+
+$context['shareUrl'] = $post->link . $query;
+
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 
 /**
- * Get alerts
+ * Alerts
  */
+
 if (get_field('alert')) {
   $context['alerts'] = get_field('alert');
 } else {
@@ -51,4 +70,4 @@ if (get_field('alert')) {
   });
 }
 
-Timber::render($templates, $context);
+Timber::render('programs/single.twig', $context);

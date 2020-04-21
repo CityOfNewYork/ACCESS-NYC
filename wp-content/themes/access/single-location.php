@@ -4,18 +4,57 @@
  * Location detail page
  */
 
-use Config\Paths as Path;
+use Config\Paths as asset;
 
-require_once get_template_directory() . '/lib/paths.php';
-require_once Path\controller('single-location');
+require_once asset\controller('location');
+
+/**
+ * Enqueue
+ */
+
+// Main
+enqueue_language_style('style');
+
+// Integrations
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
+
+// Main
+enqueue_script('main');
 
 /**
  * Context
  */
 
-$location = new Controller\SingleLocation();
+$location = new Controller\Location();
+
 $context = Timber::get_context();
 $context['post'] = $location;
-$templates = $location->templates();
 
-Timber::render($templates, $context);
+/**
+ * Alerts
+ */
+
+if (get_field('alert')) {
+  $context['alerts'] = get_field('alert');
+} else {
+  $alerts = Timber::get_posts(array(
+    'post_type' => 'alert',
+    'posts_per_page' => -1
+  ));
+
+  $context['alerts'] = array_filter($alerts, function($p) {
+    $flags = ['locations', 'single'];
+    return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
+  });
+}
+
+/**
+ * Render the view
+ */
+
+Timber::render('locations/single.twig', $context);

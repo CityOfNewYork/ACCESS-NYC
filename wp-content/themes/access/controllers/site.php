@@ -39,10 +39,15 @@ class Site extends TimberSite {
     $wpml = 'sitepress-multilingual-cms/sitepress.php';
     $lang = is_plugin_active($wpml) ? ICL_LANGUAGE_CODE : 'en';
     $direction = ($lang === 'ar' || $lang === 'ur') ? 'rtl' : 'ltr';
+
     $context['language_code'] = is_plugin_active($wpml) ? ICL_LANGUAGE_CODE : 'en';
+
     $context['direction'] = $direction;
+
     $context['end'] = ($direction === 'ltr') ? 'right' : 'left';
+
     $context['start'] = ($direction === 'ltr') ? 'left' : 'right';
+
     $context['google_translate_languages'] = $this->getGoogleTranslateLanguages();
 
     $context['stylesheets'] = $this->getStylesheets();
@@ -60,9 +65,13 @@ class Site extends TimberSite {
      */
 
     $context['menu'] = new TimberMenu('header-menu');
+
     $context['footer_get_help_now_menu'] = new TimberMenu('get-help-now');
+
     $context['footer_for_caseworkers_menu'] = new TimberMenu('for-caseworkers');
+
     $context['footer_programs_menu'] = new TimberMenu('programs');
+
     $context['footer_about_access_nyc_menu'] = new TimberMenu('about-access-nyc');
 
     /** Gets object containing all program categories */

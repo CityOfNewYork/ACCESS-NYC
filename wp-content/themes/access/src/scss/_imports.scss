@@ -22,6 +22,7 @@ $path-to-images: 'img/';
 ***********/
 
 @import '@nycopportunity/access-patterns/src/elements/base/base';
+@import '@nycopportunity/access-patterns/src/elements/badge/badge';
 @import '@nycopportunity/access-patterns/src/elements/code/code';
 @import '@nycopportunity/access-patterns/src/elements/layouts/layouts';
 @import '@nycopportunity/access-patterns/src/elements/links/links';
@@ -39,7 +40,6 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/elements/tables/tables';
 @import '@nycopportunity/access-patterns/src/elements/tooltips/tooltips';
 @import '@nycopportunity/access-patterns/src/elements/divider/divider';
-@import '@nycopportunity/access-patterns/src/elements/program-labels/program-labels';
 @import '@nycopportunity/access-patterns/src/elements/inputs/inputs';
 @import '@nycopportunity/access-patterns/src/elements/lists/lists';
 
@@ -82,7 +82,6 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/utilities/animate/animate';
 @import '@nycopportunity/access-patterns/src/utilities/color/color';
 @import '@nycopportunity/access-patterns/src/utilities/font/font';
-@import '@nycopportunity/access-patterns/src/utilities/inherit/inherit';
 @import '@nycopportunity/access-patterns/src/utilities/language/language';
 @import '@nycopportunity/access-patterns/src/utilities/margin/margin';
 @import '@nycopportunity/access-patterns/src/utilities/media/media-print';

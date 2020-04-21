@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template name: Locations
  *
@@ -10,6 +11,10 @@
  * not related.
  */
 
+/**
+ * Enqueue
+ */
+
 enqueue_language_style('style');
 enqueue_inline('rollbar');
 enqueue_inline('webtrends');
@@ -18,6 +23,10 @@ enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 enqueue_script('locations');
+
+/**
+ * Context
+ */
 
 $context = Timber::get_context();
 
@@ -87,8 +96,6 @@ foreach ($categories as $category) {
   }
 }
 
-$templates = array('locations/locations.twig');
-
 $context['post'] = Timber::get_post();
 
 /**
@@ -104,4 +111,8 @@ $context['post']->alerts = array_filter($alerts, function($p) {
   return in_array('locations', array_values($p->custom['location']));
 });
 
-Timber::render($templates, $context);
+/**
+ * Render the view
+ */
+
+Timber::render('locations/archive.twig', $context);

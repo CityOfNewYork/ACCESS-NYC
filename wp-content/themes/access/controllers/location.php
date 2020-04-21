@@ -10,48 +10,35 @@ use Timber;
 use NYCO\Transients as Transients;
 
 /**
- * Single Location Controller
+ * Location Post Controller
+ *
+ * @link /wp-json/wp/v2/location
  */
-class SingleLocation extends Timber\Post {
+class Location extends Timber\Post {
   /**
    * Constructor
    * @return  $this
    */
-  public function __construct() {
-    parent::__construct();
-
-    enqueue_language_style('style');
-    enqueue_inline('rollbar');
-    enqueue_inline('webtrends');
-    enqueue_inline('data-layer');
-    enqueue_inline('google-optimize');
-    enqueue_inline('google-analytics');
-    enqueue_inline('google-tag-manager');
-    enqueue_script('main');
-
-    if (get_field('alert')) {
-      $this->alerts = get_field('alert');
+  public function __construct($pid = false) {
+    if ($pid) {
+      parent::__construct($pid);
     } else {
-      $alerts = Timber::get_posts(array(
-        'post_type' => 'alert',
-        'posts_per_page' => -1
-      ));
-
-      $this->alerts = array_filter($alerts, function($p) {
-        $flags = ['locations', 'single'];
-        return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
-      });
+      parent::__construct();
     }
 
     return $this;
   }
 
   /**
-   * Return the template for the location controller
-   * @return [array] Array including the template string
+   * Items returned in this object determine what is shown in the WP REST API.
+   * Called by 'rest-prepare-posts.php' must use plugin.
+   *
+   * @return  Array  Items to show in the WP REST API
    */
-  public function templates() {
-    return array(self::TEMPLATE);
+  public function showInRest() {
+    return array(
+      'nearby_stops' => $this->nearbyStops()
+    );
   }
 
   /**
@@ -182,7 +169,7 @@ class SingleLocation extends Timber\Post {
   const TRANSIENT = 'subway_data';
 
   /** The template for the controller */
-  const TEMPLATE = 'locations/single-location.twig';
+  // const TEMPLATE = 'locations/single-location.twig';
 
   /** The amount of nearby stops to show */
   const NEARBY_STOPS_AMOUNT = 3;

@@ -42,11 +42,9 @@
 
       <div id="see-programs" class="pt-2 screen-desktop:pt-0">
         <div class="layout-gutter p-3 bg-grey-lightest mb-3">
-          {% if page.term_id | length %}
-            {% include 'partials/post-teaser.twig' with {'cat': page.name} %}
-          {% else %}
-            {% include 'partials/post-teaser.twig' %}
-          {% endif %}
+          {% for post in posts %}
+            {% include 'components/card.twig' with {'post': post, 'short_post': short_post} only %}
+          {% endfor %}
         </div>
       </div>
     </div>

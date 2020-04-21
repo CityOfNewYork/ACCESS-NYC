@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<hr class="divider-light">
+<hr class="divider screen-tablet:divider-large border-grey-mid">
 
 <div class="c-question">
   <label class="c-question__label" for="person-<%= personIndex %>-relation">{{ __("What is this person’s relationship to the head of the household?", "accessnyc-screener")|trim|escape("js") }}</label>
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<hr class="divider-light">
+<hr class="divider screen-tablet:divider-large border-grey-mid">
 
 <fieldset class="c-question">
   <legend class="c-question__label">{{ __("Do any of these apply to them?", "accessnyc-screener")|trim|escape("js") }}</legend>
@@ -96,7 +96,7 @@
   </div>
 </fieldset>
 
-<hr class="divider-light">
+<hr class="divider screen-tablet:divider-large border-grey-mid">
 
 <fieldset class="c-question">
   <legend class="c-question__label">{{ __("Do they receive any of these benefits?", "accessnyc-screener")|trim|escape("js") }}</legend>
@@ -116,7 +116,7 @@
   </div>
 </fieldset>
 
-<hr class="divider-light">
+<hr class="divider screen-tablet:divider-large border-grey-mid">
 
 <fieldset class="c-question">
   <legend class="c-question__label">{{ __("Do they have an income?", "accessnyc-screener")|trim|escape("js") }}</legend>
@@ -147,7 +147,7 @@
 <div class="js-screener-matrix screener-matrix<% if (!person.incomes.length) { print(" hidden") }%>" id="person-<%= personIndex %>-income">
   <% if (person.incomes.length) { person.incomes.forEach(function(item, matrixIndex, list) { %>
   <div id="screener-person-<%= personIndex %>-income-<%= matrixIndex %>" class="matrix-item js-matrix-item">
-    <hr class="divider-light">
+    <hr class="divider screen-tablet:divider-large border-grey-mid">
 
     <div class="c-question">
       <div class="prime-label">
@@ -229,7 +229,7 @@
   <% if (matrixIndex === list.length - 1) { %>
   <div id="screener-person-<%= personIndex %>-income-<% print(matrixIndex + 1) %>" class="matrix-item js-matrix-item">
 
-    <hr class="divider-light">
+    <hr class="divider screen-tablet:divider-large border-grey-mid">
 
     <div class="c-question">
       <% if (matrixIndex === 0) { %>
@@ -322,7 +322,7 @@
   <% }); } %>
 </div>
 
-<hr class="divider-light">
+<hr class="divider screen-tablet:divider-large border-grey-mid">
 
 <fieldset class="c-question">
   <legend class="c-question__label">{{ __("Do they have any expenses?", "accessnyc-screener")|trim|escape("js") }}</legend>
@@ -355,7 +355,7 @@
 <div class="js-screener-matrix screener-matrix<% if (!person.expenses.length) { print(" hidden") }%>" id="person-<%= personIndex %>-expense">
   <% if (person.expenses.length) { person.expenses.forEach(function(item, matrixIndex, list) { %>
   <div id="screener-person-<%= personIndex %>-expense-<%= matrixIndex %>" class="matrix-item js-matrix-item">
-    <hr class="divider-light">
+    <hr class="divider screen-tablet:divider-large border-grey-mid">
 
     <div class="c-question">
       <% if (matrixIndex === 0) { %>
@@ -424,7 +424,7 @@
   </div>
   <% if (matrixIndex === list.length - 1) { %>
     <div id="screener-person-<%= personIndex %>-expense-<% print(matrixIndex + 1) %>" class="matrix-item js-matrix-item">
-      <hr class="divider-light">
+      <hr class="divider screen-tablet:divider-large border-grey-mid">
 
       <div class="c-question">
         <% if (matrixIndex === 0) { %>
