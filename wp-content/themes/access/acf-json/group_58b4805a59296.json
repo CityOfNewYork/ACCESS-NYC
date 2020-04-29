@@ -7,7 +7,7 @@
             "label": "Lead Content",
             "name": "lead",
             "type": "wysiwyg",
-            "instructions": "Page header content.",
+            "instructions": "This content appears at the top of the article in the header tag. This should be treated as a subtitle and only a limited amount of content. Body copy can be placed in sections below.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -15,10 +15,12 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
             "tabs": "all",
             "toolbar": "basic",
             "media_upload": 0,
-            "default_value": "",
             "delay": 0
         },
         {
@@ -26,7 +28,7 @@
             "label": "Section Jump Navigation",
             "name": "jump_navigation",
             "type": "true_false",
-            "instructions": "",
+            "instructions": "Toggling this will show\/hide the jump navigation in the sidebar allowing the content to span the whole width of the page.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -47,7 +49,7 @@
             "label": "Sections",
             "name": "sections",
             "type": "repeater",
-            "instructions": "",
+            "instructions": "<b>Section Title<\/b>. The section title will appear above the section content and will be used as the link text in the jump nav. Use regular case or title case. Do not use ALL CAPS. It is more difficult to read and scan.\r\n<br><br>\r\n<b>Section Content<\/b>. Note for headings; section titles appear as h2 tags so use h3 or lower. Custom elements and dynamic components also work in this field by adding html in the \"text\" tab. Refer to the <a href=\"https:\/\/accesspatterns.cityofnewyork.us\" target=\"_blank\">ACCESS NYC Patterns<\/a> for available patterns.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -55,11 +57,13 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "collapsed": "field_58b481043081e",
             "min": 0,
             "max": 0,
             "layout": "block",
-            "button_label": "",
-            "collapsed": "field_58b481043081e",
+            "button_label": "Add Section",
             "sub_fields": [
                 {
                     "key": "field_58b481043081e",
@@ -70,15 +74,17 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "30",
+                        "width": "100",
                         "class": "",
                         "id": ""
                     },
+                    "show_in_rest": 0,
+                    "wpml_cf_preferences": 0,
                     "default_value": "",
-                    "maxlength": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": ""
+                    "append": "",
+                    "maxlength": ""
                 },
                 {
                     "key": "field_58b481143081f",
@@ -93,10 +99,12 @@
                         "class": "",
                         "id": ""
                     },
+                    "show_in_rest": 0,
+                    "wpml_cf_preferences": 0,
+                    "default_value": "",
                     "tabs": "all",
                     "toolbar": "basic",
-                    "media_upload": 0,
-                    "default_value": "",
+                    "media_upload": 1,
                     "delay": 0
                 }
             ]
@@ -155,6 +163,11 @@
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
+            },
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "single-page-legacy.php"
             }
         ]
     ],
@@ -163,8 +176,10 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": "",
+    "hide_on_screen": [
+        "the_content"
+    ],
     "active": 1,
     "description": "",
-    "modified": 1585944741
+    "modified": 1587756992
 }

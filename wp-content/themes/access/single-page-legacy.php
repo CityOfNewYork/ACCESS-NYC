@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Single Entries (w/o templates)
+ * Template name: Legacy Page
  *
  * @author NYC Opportunity
  */
@@ -59,7 +59,7 @@ if (get_field('alert')) {
 $context['google_translate_element'] = true;
 
 /**
- * Render the view
+ * Render Template
  */
 
-Timber::render('singular.twig', $context);
+Timber::render('single-page-legacy.twig', $context);
