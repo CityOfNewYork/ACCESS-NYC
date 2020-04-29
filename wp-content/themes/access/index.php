@@ -4,10 +4,8 @@
  * 404 or Homepage
  */
 
-use Config\Paths as asset;
-
-require_once asset\controller('programs');
-require_once asset\controller('homepage-tout');
+require_once Path\controller('programs');
+require_once Path\controller('homepage-tout');
 
 /**
  * Enqueue

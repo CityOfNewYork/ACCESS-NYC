@@ -1,20 +1,18 @@
 <?php
 
-namespace Controller;
-
 /**
- * Dependencies
+ * Locations
+ *
+ * @link /wp-json/wp/v2/homepage_tout
+ * @author NYC Opportunity
  */
+
+namespace Controller;
 
 use Timber;
 use DateTime;
 use DateTimeZone;
 
-/**
- * HomepageTout Post Controller
- *
- * @link /wp-json/wp/v2/homepage_tout
- */
 class HomepageTout extends Timber\Post {
   /**
    * Constructor

@@ -2,11 +2,11 @@
 
 /**
  * Single Program
+ *
+ * @author Blue State Digital
  */
 
-use Config\Paths as asset;
-
-require_once asset\controller('programs');
+require_once Path\controller('programs');
 
 /**
  * Enqueue
@@ -69,5 +69,9 @@ if (get_field('alert')) {
     return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
   });
 }
+
+/**
+ * Render the view
+ */
 
 Timber::render('programs/single.twig', $context);

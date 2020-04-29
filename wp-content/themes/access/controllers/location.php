@@ -1,19 +1,17 @@
 <?php
 
-namespace Controller;
-
 /**
- * Dependencies
+ * Locations
+ *
+ * @link /wp-json/wp/v2/location
+ * @author NYC Opportunity
  */
+
+namespace Controller;
 
 use Timber;
 use NYCO\Transients as Transients;
 
-/**
- * Location Post Controller
- *
- * @link /wp-json/wp/v2/location
- */
 class Location extends Timber\Post {
   /**
    * Constructor

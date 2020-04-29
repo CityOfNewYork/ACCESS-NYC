@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Location detail page
+ * Location Detail Page
+ *
+ * @author Blue State Digital
  */
 
-use Config\Paths as asset;
-
-require_once asset\controller('location');
+require_once Path\controller('location');
 
 /**
  * Enqueue
@@ -33,6 +33,7 @@ enqueue_script('main');
 $location = new Controller\Location();
 
 $context = Timber::get_context();
+
 $context['post'] = $location;
 
 /**

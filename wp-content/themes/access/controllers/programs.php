@@ -1,20 +1,18 @@
 <?php
 
-namespace Controller;
-
 /**
- * Dependencies
+ * Program Guide
+ *
+ * @link /wp-json/wp/v2/programs
+ * @author NYC Opportunity
  */
+
+namespace Controller;
 
 use Timber;
 use DateTime;
 use DateTimeZone;
 
-/**
- * Programs Post Controller
- *
- * @link /wp-json/wp/v2/programs
- */
 class Programs extends Timber\Post {
   /**
    * Constructor

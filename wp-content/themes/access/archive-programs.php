@@ -2,11 +2,11 @@
 
 /**
  * Programs Landing Page
+ *
+ * @author NYC Opportunity
  */
 
-use Config\Paths as asset;
-
-require_once asset\controller('programs');
+require_once Path\controller('programs');
 
 /**
  * Enqueue

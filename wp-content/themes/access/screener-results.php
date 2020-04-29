@@ -3,25 +3,28 @@
 /**
  * Template Name: Eligibility Screener Results
  *
- * This controls the view at /elgibility/screener. It expects a few URL parameters.
+ * This controls the view at /elgibility/screener. It expects a few URL
+ * parameters.
  *   programs: a comma separated list of program codes
  *   categories: a comma separated list of category slugs
  *   date: a UNIX timestamp of when the screener was completed
  *   guid: a unique user ID provided in the Drools Proxy response
+ *
  * The screener results list is composed of programs listed in the programs
- * parameter. They are organized into "programs you are interested in" and "other
- * programs you qualify for" based on the categories. In the sidebar of the
- * screener, there are options to share the results via SMS or email via a form.
- * Parameters for that form are created via a hash based on the URL parameters.
+ * parameter. They are organized into "programs you are interested in" and
+ * "other programs you qualify for" based on the categories. In the sidebar of
+ * the screener, there are options to share the results via SMS or email via a
+ * form. Parameters for that form are created via a hash based on the URL
+ * parameters.
  *
  * TODO: This page was originally spec'd to display a line of copy that said
  * "these results are valid as of SOME_DATE" which would be based on the date
  * parameter.
+ *
+ * @author Blue State Digital
  */
 
-use Config\Paths as asset;
-
-require_once asset\controller('programs');
+require_once Path\controller('programs');
 
 /**
  * Enqueue

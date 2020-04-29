@@ -1,18 +1,17 @@
 <?php
 
-namespace Controller;
-
 /**
- * Dependencies
+ * Site Controller
+ *
+ * @author Blue State Digital
  */
+
+namespace Controller;
 
 use Timber;
 use TimberSite;
 use TimberMenu;
 
-/**
- * Site Controller
- */
 class Site extends TimberSite {
   /**
    * Constructor

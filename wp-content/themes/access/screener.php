@@ -4,9 +4,18 @@
  *
  * Most of the magic here happens in JavaScript. The
  * only thing we want is a list of program categories.
+ *
+ * @author Blue State Digital
  */
 
+/**
+ * Enqueue
+ */
+
+// Main
 enqueue_language_style('style');
+
+// Integrations
 enqueue_inline('rollbar');
 enqueue_inline('webtrends');
 enqueue_inline('data-layer');
@@ -14,7 +23,13 @@ enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 enqueue_inline('google-recaptcha');
+
+// Main
 enqueue_script('screener');
+
+/**
+ * Context
+ */
 
 $context = Timber::get_context();
 
@@ -34,7 +49,7 @@ array_map(function($category) {
 $context['formAction'] = admin_url('admin-ajax.php');
 
 /**
- * Set Alerts
+ * Alerts
  */
 
 if (get_field('alert')) {
@@ -51,13 +66,7 @@ if (get_field('alert')) {
 }
 
 /**
- * Set Template
- */
-
-$templates = array('screener/screener.twig');
-
-/**
  * Render the view
  */
 
-Timber::render($templates, $context);
+Timber::render('screener/screener.twig', $context);

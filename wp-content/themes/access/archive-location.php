@@ -9,19 +9,26 @@
  * We only want to list Programs that are reverse-related to a location so we
  * need to do a reverse-relationship query and weed out any programs that are
  * not related.
+ *
+ * @author Blue State Digital
  */
 
 /**
  * Enqueue
  */
 
+// Main
 enqueue_language_style('style');
+
+// Integrations
 enqueue_inline('rollbar');
 enqueue_inline('webtrends');
 enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
+
+// Main
 enqueue_script('locations');
 
 /**
@@ -99,7 +106,7 @@ foreach ($categories as $category) {
 $context['post'] = Timber::get_post();
 
 /**
- * Set Alerts
+ * Alerts
  */
 
 $alerts = Timber::get_posts(array(

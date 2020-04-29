@@ -2,11 +2,11 @@
 
 /**
  * Search Results Page
+ *
+ * @author Blue State Digital
  */
 
-use Config\Paths as asset;
-
-require_once asset\controller('programs');
+require_once Path\controller('programs');
 
 /**
  * Enqueue
