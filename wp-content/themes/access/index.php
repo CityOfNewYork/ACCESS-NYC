@@ -17,12 +17,12 @@ require_once asset\controller('homepage-tout');
 enqueue_language_style('style');
 
 // Integrations
-// enqueue_inline('rollbar');
-// enqueue_inline('webtrends');
-// enqueue_inline('data-layer');
-// enqueue_inline('google-optimize');
-// enqueue_inline('google-analytics');
-// enqueue_inline('google-tag-manager');
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
 
 // Main
 enqueue_script('main');
