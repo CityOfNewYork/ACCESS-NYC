@@ -27,7 +27,7 @@ function debug($str, $return = true) {
 
   error_log(
     var_export($str, $return) . " " .
-    $backtrace['file'] . ':' . $backtrace['line'] . "\r\n"
+    $backtrace['file'] . ':' . $backtrace['line']
   );
 }
 // phpcs:enable
