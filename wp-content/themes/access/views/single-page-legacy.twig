@@ -52,7 +52,12 @@
         {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
         <section id="section-{{ loop.index }}">
           {% if section.section_title %}<h2>{{ section.section_title }}</h2>{% endif %}
+
+          {% if section.section_raw_content %}
+          {{ fn('do_shortcode', section.section_raw) }}
+          {% else %}
           {{ section.section_content }}
+          {% endif %}
         </section>
         {% endfor %}
       </div>

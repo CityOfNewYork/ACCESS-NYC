@@ -49,7 +49,7 @@
             "label": "Sections",
             "name": "sections",
             "type": "repeater",
-            "instructions": "<b>Section Title<\/b>. The section title will appear above the section content and will be used as the link text in the jump nav. Use regular case or title case. Do not use ALL CAPS. It is more difficult to read and scan.\r\n<br><br>\r\n<b>Section Content<\/b>. Note for headings; section titles appear as h2 tags so use h3 or lower. Custom elements and dynamic components also work in this field by adding html in the \"text\" tab. Refer to the <a href=\"https:\/\/accesspatterns.cityofnewyork.us\" target=\"_blank\">ACCESS NYC Patterns<\/a> for available patterns.",
+            "instructions": "The <b>Section title<\/b> will appear above the section content and will be used as the link text in the jump nav. Use regular case or title case. Do not use ALL CAPS. It is more difficult to read and scan.\r\n<br><br>\r\nNotes for <b>Section Content<\/b>; Headings. Section titles appear as h2 tags so use h3 or lower. Custom elements and dynamic components also work in this field by inserting html with <b>Use Raw Content<\/b> checked. Refer to the <a href=\"https:\/\/accesspatterns.cityofnewyork.us\" target=\"_blank\">ACCESS NYC Patterns<\/a> for available patterns. <code>&lt;p&gt;<\/code> and <code>&lt;br&gt;<\/code> tags are added automatically to content on the front-end with single and double line breaks in regular content (WYSIWYG) editors.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -87,13 +87,42 @@
                     "maxlength": ""
                 },
                 {
+                    "key": "field_5eaae85bcb73a",
+                    "label": "Use Raw Content",
+                    "name": "section_raw_content",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_rest": 0,
+                    "wpml_cf_preferences": 0,
+                    "message": "Check to use a raw content field",
+                    "default_value": 0,
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
                     "key": "field_58b481143081f",
                     "label": "Section Content",
                     "name": "section_content",
                     "type": "wysiwyg",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5eaae85bcb73a",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -106,6 +135,35 @@
                     "toolbar": "basic",
                     "media_upload": 1,
                     "delay": 0
+                },
+                {
+                    "key": "field_5eab124d63016",
+                    "label": "Section Content (Raw)",
+                    "name": "section_raw",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5eaae85bcb73a",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_rest": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": "",
+                    "wpml_cf_preferences": 0
                 }
             ]
         },
@@ -181,5 +239,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1587756992
+    "modified": 1588273058
 }

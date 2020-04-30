@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Add Theme Support
- * Description: Add theme support items. Currently, Title Tag, Menus and Editor Styles are added.
+ * Description: Add theme support items. Currently, title tag, menus and editor styles are added.
  * Author: Blue State Digital
  */
 
