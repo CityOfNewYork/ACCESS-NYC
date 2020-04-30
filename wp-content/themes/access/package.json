@@ -98,7 +98,7 @@
     "@nycopportunity/patterns-framework": "0.0.16",
     "cleave.js": "^0.7.23",
     "es6-promise": "^4.2.5",
-    "jquery": "^3.1.1",
+    "jquery": "^3.5.0",
     "js-cookie": "^3.0.0-beta.3",
     "smoothscroll-polyfill": "^0.4.3",
     "underscore": "^1.9.2",
