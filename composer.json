@@ -132,7 +132,8 @@
     "nyco/wp-send-me-nyc": "1.1.2",
     "nyco/wp-s3-all-import-compatibility": "^0.0.3",
     "nyco/wp-stat-collector": "^0.0.7",
-    "humanmade/s3-uploads": "^2.2.1"
+    "humanmade/s3-uploads": "^2.2.1",
+    "wpackagist-plugin/duplicate-post": "^3.2"
   },
   "require-dev": {
     "filp/whoops": "^2.7.0",

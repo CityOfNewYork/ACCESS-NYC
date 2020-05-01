@@ -2335,6 +2335,28 @@
         "homepage": "https://wordpress.org/plugins/core-sitemaps/"
     },
     {
+        "name": "wpackagist-plugin/duplicate-post",
+        "version": "3.2.4",
+        "version_normalized": "3.2.4.0",
+        "source": {
+            "type": "svn",
+            "url": "https://plugins.svn.wordpress.org/duplicate-post/",
+            "reference": "tags/3.2.4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.4.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "homepage": "https://wordpress.org/plugins/duplicate-post/"
+    },
+    {
         "name": "wpackagist-plugin/enable-media-replace",
         "version": "3.3.7",
         "version_normalized": "3.3.7.0",
