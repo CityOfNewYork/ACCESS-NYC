@@ -134,11 +134,11 @@ $context['getParams'] = $get; // pass safe parameters
 
 $context['selectedPrograms'] = array_map(function($post) {
     return new Controller\Programs($post);
-  }, Timber::get_posts($selectedProgramArgs));
+}, Timber::get_posts($selectedProgramArgs));
 
 $context['additionalPrograms'] = array_map(function($post) {
     return new Controller\Programs($post);
-  }, Timber::get_posts($additionalProgramArgs));
+}, Timber::get_posts($additionalProgramArgs));
 
 /**
  * Alerts

@@ -34,7 +34,7 @@ $context = Timber::get_context();
 
 $context['posts'] = array_map(function($post) {
     return new Controller\Programs($post);
-  }, Timber::get_posts());
+}, Timber::get_posts());
 
 $context['pagination'] = Timber::get_pagination();
 

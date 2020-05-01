@@ -25,7 +25,7 @@ function functions() {
 function block($name = false, $uri = false) {
   if ($name & $uri) {
     return get_template_directory_uri() . "/blocks/$name";
-  } else if ($name) {
+  } elseif ($name) {
     return get_template_directory() . "/blocks/$name.php";
   } else {
     return get_template_directory() . '/blocks/';

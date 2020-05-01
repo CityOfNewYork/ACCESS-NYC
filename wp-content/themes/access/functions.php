@@ -30,6 +30,7 @@ require_once Path\block('smnyc-email-button');
  * Shortcodes
  */
 
+require_once Path\shortcode('shortcode');
 require_once Path\shortcode('accordion');
 // require_shortcodes(); // Require all shortcodes
 

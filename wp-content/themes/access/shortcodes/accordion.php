@@ -8,8 +8,6 @@
 
 namespace Shortcode;
 
-require_once 'shortcode.php';
-
 use Timber;
 
 /**
@@ -34,7 +32,8 @@ class Accordion extends Shortcode {
   public function shortcode($atts, $content, $shortcode_tag) {
     $id = sanitize_title($atts['header']). '-' . uniqid();
 
-    return Timber::compile($this->template,
+    return Timber::compile(
+      $this->template,
       array(
         'this' => array(
           'id' => $id,
