@@ -8,27 +8,22 @@
 
 namespace Shortcode;
 
+require_once 'shortcode.php';
+
 use Timber;
 
 /**
  * Class
  */
-class Accordion {
+class Accordion extends Shortcode {
   /** The shortcode tag */
-  public $shortcode = 'anyc_accordion';
+  public $tag = 'accordion';
 
   /** The path to the Timber Component */
   public $template = 'components/accordion.twig';
 
   /**
-   * Constructor
-   */
-  public function __construct() {
-    add_shortcode($this->shortcode, [$this, 'shortcode']);
-  }
-
-  /**
-   * Add Shortcode Callback
+   * Shortcode Callback
    *
    * @param   Array   $atts           Attributes added to the shortcode
    * @param   String  $content        Content within shortcode tags
