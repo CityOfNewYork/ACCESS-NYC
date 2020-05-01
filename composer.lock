@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b49babbfbbf406d9436825af50f0073",
+    "content-hash": "7fe81d6a35c3c9d5295975da99815d7a",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -2174,15 +2174,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.5.5",
+            "version": "1.5.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.5.5"
+                "reference": "tags/1.5.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.5.zip",
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.6.zip",
                 "reference": null,
                 "shasum": null
             },

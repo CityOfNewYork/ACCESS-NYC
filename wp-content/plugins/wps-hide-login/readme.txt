@@ -4,9 +4,9 @@ Contributors: tabrisrp, WPServeur, nicolaskulka
 Donate link : https://www.paypal.me/donateWPServeur
 Tags: rename, login, wp-login, wp-login.php, custom login url, jetpack, wpserveur
 Requires at least: 4.1
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 7.0
-Stable tag: 1.5.5
+Stable tag: 1.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -146,9 +146,13 @@ La première étape consiste à vérifier votre fichier .htaccess et à le compa
 
 == Changelog ==
 
+= 1.5.6 =
+* Fix : flush rewrite rules after install or update option
+* Tested up to 5.4
+
 = 1.5.5 =
 * Add filter to redirect in cases where the user is already logged in.
-* Fix : add rawurldecode for all $_SERVER['REQUEST_URI'] (Thanks NinTechNet)
+* Fix : add rawurldecode for all $_SERVER['REQUEST_URI'] (Thanks @nintechnet)
 
 = 1.5.4.2 =
 * Revert to code in tag 1.5.3
