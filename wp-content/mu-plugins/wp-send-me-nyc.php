@@ -15,7 +15,7 @@ require plugin_dir_path(__FILE__) . '/wp-send-me-nyc/SendMeNYC.php';
 
 $contact = new SMNYC\ContactMe();
 $sms = new SMNYC\SmsMe();
-$email = new SMNYC\EmailMe('controllers/single-smnyc-email.php');
+$email = new SMNYC\EmailMe();
 
 /**
  * Register post types for the email and SMS templates.
