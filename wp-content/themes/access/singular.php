@@ -1,30 +1,44 @@
 <?php
 
 /**
- * Single entry template. Used for posts and other individual content items.
+ * Single Entries (w/o templates)
  *
- * To override for a particular post type, create a template named single-[post_type]
+ * @author NYC Opportunity
  */
 
+/**
+ * Enqueue
+ */
+
+// Main
 enqueue_language_style('style');
+
+// Integrations
 enqueue_inline('rollbar');
 enqueue_inline('webtrends');
 enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
+enqueue_inline('google-translate-element');
+
+// Main
 enqueue_script('main');
 
-$context = Timber::get_context();
-$post = Timber::get_post();
+/**
+ * Context
+ */
 
-$templates = array( 'single-' . $post->ID . '.twig', 'single-' . $post->post_type . '.twig', 'single.twig' );
+$context = Timber::get_context();
+
+$post = Timber::get_post();
 
 $context['post'] = $post;
 
 /**
  * Set Alerts
  */
+
 if (get_field('alert')) {
   $context['alerts'] = get_field('alert');
 } else {
@@ -39,7 +53,13 @@ if (get_field('alert')) {
 }
 
 /**
- * Render Template
+ * Show Google Translate
  */
 
-Timber::render($templates, $context);
+$context['google_translate_element'] = true;
+
+/**
+ * Render the view
+ */
+
+Timber::render('singular.twig', $context);

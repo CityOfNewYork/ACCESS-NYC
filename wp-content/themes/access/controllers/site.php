@@ -1,18 +1,17 @@
 <?php
 
-namespace Controller;
-
 /**
- * Dependencies
+ * Site Controller
+ *
+ * @author Blue State Digital
  */
+
+namespace Controller;
 
 use Timber;
 use TimberSite;
 use TimberMenu;
 
-/**
- * Site Controller
- */
 class Site extends TimberSite {
   /**
    * Constructor
@@ -39,10 +38,18 @@ class Site extends TimberSite {
     $wpml = 'sitepress-multilingual-cms/sitepress.php';
     $lang = is_plugin_active($wpml) ? ICL_LANGUAGE_CODE : 'en';
     $direction = ($lang === 'ar' || $lang === 'ur') ? 'rtl' : 'ltr';
+
     $context['language_code'] = is_plugin_active($wpml) ? ICL_LANGUAGE_CODE : 'en';
+
     $context['direction'] = $direction;
+
     $context['end'] = ($direction === 'ltr') ? 'right' : 'left';
+
     $context['start'] = ($direction === 'ltr') ? 'left' : 'right';
+
+    $context['google_translate_languages'] = $this->getGoogleTranslateLanguages();
+
+    $context['stylesheets'] = $this->getStylesheets();
 
     $context['url_base'] = ($lang === 'en') ? '' : '/' . $lang;
 
@@ -57,9 +64,13 @@ class Site extends TimberSite {
      */
 
     $context['menu'] = new TimberMenu('header-menu');
+
     $context['footer_get_help_now_menu'] = new TimberMenu('get-help-now');
+
     $context['footer_for_caseworkers_menu'] = new TimberMenu('for-caseworkers');
+
     $context['footer_programs_menu'] = new TimberMenu('programs');
+
     $context['footer_about_access_nyc_menu'] = new TimberMenu('about-access-nyc');
 
     /** Gets object containing all program categories */
@@ -89,6 +100,49 @@ class Site extends TimberSite {
     $context['csp_script_nonce'] = (defined('CSP_SCRIPT_NONCE')) ? CSP_SCRIPT_NONCE : false;
 
     return $context;
+  }
+
+  /**
+   * Get the list of stylesheets for the front-end (for the Google Translate
+   * Element).
+   *
+   * @return  Array  List of stylesheets
+   */
+  public function getStylesheets() {
+    $files = scandir(get_stylesheet_directory() . '/assets/styles/');
+
+    $files = array_values(array_filter($files, function($file) {
+      return (pathinfo($file)['extension'] === 'css');
+    }));
+
+    $files = array_map(function($file) {
+      return get_stylesheet_directory_uri() . '/assets/styles/' . $file;
+    }, $files);
+
+    return $files;
+  }
+
+  /**
+   * Create a list of missing languages for Google Translate to augment.
+   *
+   * @return  Array  An array of missing WPML Active Languages
+   */
+  public function getGoogleTranslateLanguages() {
+    $languages = apply_filters('wpml_active_languages', null, array('skip_missing' => 0));
+
+    $langs = array_filter($languages, function($lang) {
+      return ($lang['missing'] === 1);
+    });
+
+    $langs = array_map(function($lang) {
+      if ($lang['code'] === 'zh-hant') {
+        $lang['code'] = 'zh-CN';
+      }
+
+      return $lang;
+    }, $langs);
+
+    return $langs;
   }
 
   /**

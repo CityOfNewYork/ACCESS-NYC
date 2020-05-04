@@ -80,7 +80,7 @@
     "gulp-imagemin": "^6.2.0",
     "gulp-postcss": "^7.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-svgmin": "^2.2.0",
     "gulp-svgstore": "^6.1.0",
@@ -94,7 +94,7 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "@nycopportunity/access-patterns": "^0.11.12",
+    "@nycopportunity/access-patterns": "^0.14.7",
     "@nycopportunity/patterns-framework": "0.0.16",
     "cleave.js": "^0.7.23",
     "es6-promise": "^4.2.5",

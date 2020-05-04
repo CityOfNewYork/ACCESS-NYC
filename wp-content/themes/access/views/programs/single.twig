@@ -12,23 +12,33 @@
     </div>
     {% endif %}
 
-    <p class="usa-grid m-0 pt-3 hidden print:block" aria-hidden="true">
-      <strong>{{__('Get back to this page', 'accessnyc-program-detail')}}:</strong>
-      <a href="{{ post.get_permalink }}" itemprop="url">{{ post.get_permalink | replace({'http://': ''})}}</a>
+    <p class="wrap m-0 pt-3 hidden print:block" aria-hidden="true">
+      <strong>{{ __('Get back to this page', 'accessnyc-program-detail') }}:</strong>
+
+      <a href="{{ post.get_permalink }}" itemprop="url">{{ post.get_permalink|replace({'http://': ''})}}</a>
     </p>
 
     <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
       <div class="c-header__icon">
-        <span class="hidden" aria-hidden="true" itemprop="serviceType">{{ category.name }}</span>
-        {% include 'partials/category-icon.twig' %}
+        <span class="hidden" aria-hidden="true" itemprop="serviceType">{{ post.category.name }}</span>
+
+        {% include 'elements/icon.twig' with {
+          'icon': 'icon-card-' ~ post.category.slug ~ '-v' ~ post.icon.version,
+          'class': post.icon.class,
+          'title': post.category.name
+        } only %}
       </div>
 
       <div>
-        <h1 class="c-header__descriptor text-color-blue-dark" itemprop="alternateName">
+        <h1 class="c-header__descriptor" itemprop="alternateName">
+          {% if post.status %}
+          <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
+          {% endif %}
+
           {{ post.plain_language_program_name }}
         </h1>
 
-        <h2 class="c-header__information text-color-grey-mid mb-0">
+        <h2 class="c-header__information color__alt mb-0">
           <span itemprop="name">
             {{ post.program_name }}
           </span>
@@ -46,14 +56,14 @@
       </div>
     </header>
 
-    <section class="usa-grid screen-desktop:layout--sidebar-small-gutter">
+    <section class="wrap screen-desktop:layout-sidebar-small-gutter">
       <aside>
         <nav class="c-side-nav print:hidden" data-js="program-nav">
           <ol>
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
             <li>
               <a id="nav-link-{{ item.value }}" data-js="program-nav-step-link" {% if (loop.index == 1 and step == '') or step == '{{ item.value }}' %}class="active"{% endif %} href="?step={{ item.value }}">
-                {{__(item.label, 'accessnyc-program-detail')}}
+                {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             </li>
             {% endfor %}
@@ -64,13 +74,13 @@
           <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer">
             <svg class="icon icon-ui-printer">
               <use xlink:href="#icon-ui-printer"></use>
-            </svg>{{__('Print the whole guide', 'accessnyc-program-detail')}}
+            </svg>{{ __('Print the whole guide', 'accessnyc-program-detail') }}
           </a>
           {% endspaceless %}
         </div>
       </aside>
 
-      <article data-js="program-detail-content">
+      <article class="pt-2 screen-desktop:pt-0" data-js="program-detail-content">
         {% set sectionArray = [] %}
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
@@ -86,14 +96,14 @@
       </article>
     </section>
 
-    <section class="usa-grid print:hidden">
+    <section class="wrap print:hidden">
       <header>
-        <h3 class="text-color-blue-dark border-t-2 border-color-yellow-access pt-4 mt-4">
-          {{__('More ways to get help with this program', 'accessnyc-program-detail')}}
+        <h3 class="text-blue-dark border-t-2 border-yellow-access pt-4 mt-4">
+          {{ __('More ways to get help with this program', 'accessnyc-program-detail') }}
         </h3>
       </header>
 
-      <div class="screen-desktop:layout--columns-gutter">
+      <div class="screen-desktop:layout-columns-gutter">
         {# {% for method in [
           'get_help_online',
           'get_help_by_email',
@@ -113,26 +123,18 @@
           {{ post.get_field(method) }}
         </div>
         {% endif %}
-
         {% endfor %}
       </div>
     </section>
 
-    <footer class="usa-grid py-4">
-      <p class="text-color-grey-mid">
-        {{__('Updated', 'accessnyc-program-detail')}}
-        {% if post.post_modified | length %}
-        {{post.post_modified|date}}
-        {% else %}
-        {{ post.post_date|date}}
-        {% endif %}
+    <footer class="wrap pt-4">
+      <p class="color__alt">
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
       </p>
-
-      {# {% include 'partials/was-this-page-helpful.twig' %} #}
-
-      <div class="text-align-end">
-        <a href="#content" class="btn btn-small bg-color-blue-light text-color-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
-      </div>
     </footer>
+
+    <div class="wrap sticky bottom-0 text-end pb-3">
+      <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
+    </div>
   </main>
 {% endblock %}

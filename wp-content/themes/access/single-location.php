@@ -1,21 +1,61 @@
 <?php
 
 /**
- * Location detail page
+ * Location Detail Page
+ *
+ * @author Blue State Digital
  */
 
-use Config\Paths as Path;
+require_once Path\controller('location');
 
-require_once get_template_directory() . '/lib/paths.php';
-require_once Path\controller('single-location');
+/**
+ * Enqueue
+ */
+
+// Main
+enqueue_language_style('style');
+
+// Integrations
+enqueue_inline('rollbar');
+enqueue_inline('webtrends');
+enqueue_inline('data-layer');
+enqueue_inline('google-optimize');
+enqueue_inline('google-analytics');
+enqueue_inline('google-tag-manager');
+
+// Main
+enqueue_script('main');
 
 /**
  * Context
  */
 
-$location = new Controller\SingleLocation();
-$context = Timber::get_context();
-$context['post'] = $location;
-$templates = $location->templates();
+$location = new Controller\Location();
 
-Timber::render($templates, $context);
+$context = Timber::get_context();
+
+$context['post'] = $location;
+
+/**
+ * Alerts
+ */
+
+if (get_field('alert')) {
+  $context['alerts'] = get_field('alert');
+} else {
+  $alerts = Timber::get_posts(array(
+    'post_type' => 'alert',
+    'posts_per_page' => -1
+  ));
+
+  $context['alerts'] = array_filter($alerts, function($p) {
+    $flags = ['locations', 'single'];
+    return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
+  });
+}
+
+/**
+ * Render the view
+ */
+
+Timber::render('locations/single.twig', $context);

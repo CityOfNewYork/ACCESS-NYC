@@ -1,13 +1,13 @@
 <h2 class="recap-confirmation">{{ __("Is all of your information correct?", "accessnyc-screener")|trim|escape("js") }}</h2>
 
-<div class="text-font-size-normal bg-color-white p-2 screen-tablet:p-4">
+<div class="text-normal bg-white p-2 screen-tablet:p-4">
   <div>
-    <h3 class="type-h4 text-color-blue-dark">
+    <h3 class="type-h4 text-blue-dark">
       {{ __("Looking for help with", "accessnyc-screener")|trim|escape("js") }}
       <a role="button" href="#step-1" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>
     </h3>
 
-    <div class="layout--gutter screen-tablet:layout--columns-gutter mb-4">
+    <div class="layout-gutter screen-tablet:layout-columns-gutter mb-4">
       <% if (categories.length === 0) { %>
       <p>{{ __("No categories selected.", "accessnyc-screener")|trim|escape("js") }}</p>
       <% } %>
@@ -34,10 +34,10 @@
 
   </div>
 
-  <hr class="divider-light">
+  <hr class="divider screen-tablet:divider-large border-grey-light">
 
   <div>
-    <h3 class="type-h4 text-color-blue-dark">
+    <h3 class="type-h4 text-blue-dark">
       {{ __("Your household:", "accessnyc-screener")|trim|escape("js") }}
       <%= members.length %>
       <% if (members.length === 1) { %>
@@ -123,10 +123,10 @@
     {% endspaceless %}</ul>
   </div>
 
-  <hr class="divider-light">
+  <hr class="divider screen-tablet:divider-large border-grey-light">
 
   <div>
-    <h3 class="type-h4 text-color-blue-dark">
+    <h3 class="type-h4 text-blue-dark">
       {{ __("Household resources:", "accessnyc-screener")|trim|escape("js") }} <span class="force-ltr"><%= household.assets %></span>
       <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>
     </h3>
@@ -134,10 +134,10 @@
     <p>{{ __("This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.", "accessnyc-screener")|trim|escape("js") }}</p>
   </div>
 
-  <hr class="divider-light">
+  <hr class="divider screen-tablet:divider-large border-grey-light">
 
   <div>
-    <h3 class="type-h4 text-color-blue-dark">
+    <h3 class="type-h4 text-blue-dark">
       {{ __("Housing", "accessnyc-screener")|trim|escape("js") }}
       <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>
     </h3>
@@ -194,10 +194,10 @@
     {% endspaceless %}</ul>
   </div>
 
-  <hr class="divider-light">
+  <hr class="divider screen-tablet:divider-large border-grey-light">
 
   <div>
-    <h3 class="type-h4 text-color-blue-dark">
+    <h3 class="type-h4 text-blue-dark">
       {{ __("Your zip code:", "accessnyc-screener")|trim|escape("js") }} <%= household.zip %>
       <a role="button" href="#step-3" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>
     </h3>

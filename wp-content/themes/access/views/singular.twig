@@ -1,0 +1,37 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<main class="color-light-background" id="content" itemscope itemtype="http://schema.org/WebPage">
+  {% if alerts %}
+  <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
+    {% for alert in alerts %}
+      {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
+
+      {% include 'components/alert.twig' with {this: alert, class: class} only %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <article itemprop="mainEntityOfPage">
+    <header class="c-header mt-3 print:mt-0">
+      <div>
+        <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
+
+        <h2 class="c-header__information text-grey-mid mb-4" itemprop="dateModified">
+          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+        </h2>
+      </div>
+    </header>
+
+    <div class="wrap">
+      {{ post.content }}
+    </div>
+
+    <footer class="wrap py-4">
+      <p class="text-grey-mid m-0" itemprop="dateModified">
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+      </p>
+    </footer>
+  </article>
+</main>
+{% endblock %}

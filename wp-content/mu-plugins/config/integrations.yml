@@ -64,6 +64,11 @@
     path: config/integrations/body/google-tag-manager.html
 
 - handle: google-recaptcha
-  dep: GOOGLE_RECAPTCHA
   path: https://www.google.com/recaptcha/api.js?onload=screenerCallback&render=explicit
   in_footer: false
+
+- handle: google-translate-element
+  path: https://translate.google.com/translate_a/element.js?cb=window.googleTranslateInit
+  in_footer: false
+  style:
+    path: config/integrations/styles/google-translate-element.css

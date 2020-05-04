@@ -5,7 +5,7 @@
   <main class="color-light-background" id="content">
     <header class="c-header color-dark-background">
       <div class="c-header__icon print:hidden">
-        <svg class="icon icon-success rounded-full text-color-green bg-color-white">
+        <svg class="icon icon-success rounded-full text-green bg-white">
           <use xlink:href="#icon-success"></use>
         </svg>
       </div>
@@ -36,9 +36,9 @@
     </div>
     {% endif %}
 
-    <div class="usa-grid screen-desktop:layout--sidebar-small-gutter bg-color-white pt-4">
+    <div class="wrap screen-desktop:layout-sidebar-small-gutter bg-white pt-4">
       <aside class="mb-4 print:hidden">
-        <h4 class="type-h3 text-color-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>
+        <h4 class="type-h3 text-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>
 
         <button class="btn btn-primary w-full mb-2" data-js="window-print, track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]'>
           {{ __('Print', 'accessnyc-results') }}
@@ -78,9 +78,9 @@
       <div class="content-body">
         {% if selectedPrograms | length %}
         <div class="mb-4">
-          <h3 class="text-color-blue-dark">{{__('These are programs for you in the categories you selected.', 'accessnyc-results')}}</h3>
+          <h3 class="text-blue-dark">{{__('These are programs for you in the categories you selected.', 'accessnyc-results')}}</h3>
 
-          <div class="layout--gutter p-2 bg-color-grey-lightest">
+          <div class="layout-gutter p-2 bg-grey-lightest">
             {% for post in selectedPrograms %}
               {% include 'components/card.twig' with {'post': post, 'language_code': language_code, 'show_apply': true, 'target_blank': true} only %}
             {% endfor %}
@@ -90,7 +90,7 @@
 
         {% if additionalPrograms | length %}
         <div class="mb-4">
-          <h3 class="text-color-blue-dark">
+          <h3 class="text-blue-dark">
             {% if additionalPrograms | length == 1 %}
               {{ additionalPrograms | length }} {{__('additional program.', 'accessnyc-results')}}
             {% else %}
@@ -98,7 +98,7 @@
             {% endif %}
           </h3>
 
-          <div class="layout--gutter p-2 bg-color-grey-lightest">
+          <div class="layout-gutter p-2 bg-grey-lightest">
             {% for post in additionalPrograms %}
               {% include 'components/card.twig' with {'post': post, 'language_code': language_code, 'show_apply': true, 'target_blank': true} only %}
             {% endfor %}

@@ -7,8 +7,6 @@
  * @package access
  */
 
-use Config\Paths as Path;
-
 // phpcs:disable
 /**
  * Registers all block assets so that they can be enqueued through Gutenberg in
@@ -19,10 +17,11 @@ use Config\Paths as Path;
 add_action('enqueue_block_editor_assets', function() {
   wp_enqueue_script(
     'access/smnyc-email-button',                                // theme/name
-    Path\blocks(true) . 'smnyc-email-button/index.js',          // script path
+    Path\block('smnyc-email-button/index.js', true),            // script uri
     array('wp-blocks', 'wp-element', 'wp-editor'),              // dependencies
     ('development' === WP_ENV) ? null : wp_get_theme()->version // use theme version if not in development
   );
+
   // register_block_type('access/smnyc-email-button', array(
   //   'editor_script' => 'smnyc-email-button-block-editor',
   //   'editor_style'  => 'smnyc-email-button-block-editor',

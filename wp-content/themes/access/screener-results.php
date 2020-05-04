@@ -1,35 +1,59 @@
 <?php
+
 /**
  * Template Name: Eligibility Screener Results
  *
- * This controls the view at /elgibility/screener. It expects a few URL parameters.
+ * This controls the view at /elgibility/screener. It expects a few URL
+ * parameters.
  *   programs: a comma separated list of program codes
  *   categories: a comma separated list of category slugs
  *   date: a UNIX timestamp of when the screener was completed
  *   guid: a unique user ID provided in the Drools Proxy response
+ *
  * The screener results list is composed of programs listed in the programs
- * parameter. They are organized into "programs you are interested in" and "other
- * programs you qualify for" based on the categories. In the sidebar of the
- * screener, there are options to share the results via SMS or email via a form.
- * Parameters for that form are created via a hash based on the URL parameters.
+ * parameter. They are organized into "programs you are interested in" and
+ * "other programs you qualify for" based on the categories. In the sidebar of
+ * the screener, there are options to share the results via SMS or email via a
+ * form. Parameters for that form are created via a hash based on the URL
+ * parameters.
  *
  * TODO: This page was originally spec'd to display a line of copy that said
  * "these results are valid as of SOME_DATE" which would be based on the date
  * parameter.
-*/
+ *
+ * @author Blue State Digital
+ */
 
+require_once Path\controller('programs');
+
+/**
+ * Enqueue
+ */
+
+// Main
 enqueue_language_style('style');
+
+// Integrations
 enqueue_inline('rollbar');
 enqueue_inline('webtrends');
 enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
+
+// Main
 enqueue_script('screener');
 
+/**
+ * Context
+ */
+
 $context = Timber::get_context();
+
 $programBlob = '';
+
 $categoryBlob = '';
+
 $query = array();
 
 // Gets the URL Parameters for the search value,
@@ -101,22 +125,40 @@ $query = (isset($query)) ? '?'.$query : '';
 
 // Share by email/sms fields.
 $context['shareAction'] = admin_url('admin-ajax.php');
+
 $context['shareUrl'] = home_url() . '/eligibility/results/' . $query;
+
 $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
+
 $context['getParams'] = $get; // pass safe parameters
 
-$context['selectedPrograms'] = Timber::get_posts($selectedProgramArgs);
-$context['additionalPrograms'] = Timber::get_posts($additionalProgramArgs);
+$context['selectedPrograms'] = array_map(function($post) {
+    return new Controller\Programs($post);
+}, Timber::get_posts($selectedProgramArgs));
 
-$alerts = Timber::get_posts(array(
-  'post_type' => 'alert',
-  'posts_per_page' => -1
-));
+$context['additionalPrograms'] = array_map(function($post) {
+    return new Controller\Programs($post);
+}, Timber::get_posts($additionalProgramArgs));
 
-$context['alerts'] = array_filter($alerts, function($p) {
-  return in_array('screener', array_values($p->custom['location']));
-});
+/**
+ * Alerts
+ */
 
-$templates = array('screener/results.twig');
+if (get_field('alert')) {
+  $context['alerts'] = get_field('alert');
+} else {
+  $alerts = Timber::get_posts(array(
+    'post_type' => 'alert',
+    'posts_per_page' => -1
+  ));
 
-Timber::render($templates, $context);
+  $context['alerts'] = array_filter($alerts, function($p) {
+    return in_array('screener', array_values($p->custom['location']));
+  });
+}
+
+/**
+ * Render the view
+ */
+
+Timber::render('screener/results.twig', $context);

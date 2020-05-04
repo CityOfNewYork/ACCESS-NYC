@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a635ce5b859a8200821148725356da54",
+    "content-hash": "7fe81d6a35c3c9d5295975da99815d7a",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -903,21 +903,21 @@
         },
         {
             "name": "nyco/wp-assets",
-            "version": "1.1.0",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-                "reference": "cdd9321f120c708de532947f04b57cc5f564c380"
+                "reference": "47c074595ca8d21af46a4a8ec62a40b54a94f904"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/cdd9321f120c708de532947f04b57cc5f564c380",
-                "reference": "cdd9321f120c708de532947f04b57cc5f564c380",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/47c074595ca8d21af46a4a8ec62a40b54a94f904",
+                "reference": "47c074595ca8d21af46a4a8ec62a40b54a94f904",
                 "shasum": ""
             },
             "require": {
                 "composer/installers": "^1.7",
-                "mustangostang/spyc": "0.6.2"
+                "mustangostang/spyc": "^0.6"
             },
             "require-dev": {
                 "codeception/codeception": "^2.3",
@@ -933,14 +933,9 @@
                     "name": "NYC Opportunity",
                     "email": "products@nycopportunity.nyc.gov",
                     "homepage": "https://nyc.gov/opportunity"
-                },
-                {
-                    "name": "Devon Hirth",
-                    "email": "dehirth@nycopportunity.nyc.gov",
-                    "homepage": "https://github.com/devowhippit"
                 }
             ],
-            "description": "WordPress package for asset helpers.",
+            "description": "A developer plugin with helpers for managing assets in WordPress.",
             "homepage": "https://github.com/cityofnewyork/nyco-wp-assets",
             "keywords": [
                 "assets",
@@ -957,26 +952,26 @@
                 "theme",
                 "wordpress"
             ],
-            "time": "2019-11-18T16:29:09+00:00"
+            "time": "2020-04-09T20:46:50+00:00"
         },
         {
             "name": "nyco/wp-config",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-                "reference": "9a476e0ee32dc7fb0ebe63724bb295c36c057c80"
+                "reference": "04d74c5b78030066e1c334943e0a10da2e78e2a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/9a476e0ee32dc7fb0ebe63724bb295c36c057c80",
-                "reference": "9a476e0ee32dc7fb0ebe63724bb295c36c057c80",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/04d74c5b78030066e1c334943e0a10da2e78e2a9",
+                "reference": "04d74c5b78030066e1c334943e0a10da2e78e2a9",
                 "shasum": ""
             },
             "require": {
                 "composer/installers": "~1.0",
                 "illuminate/encryption": "^5.6",
-                "mustangostang/spyc": "^0.6.2"
+                "mustangostang/spyc": "^0.6"
             },
             "require-dev": {
                 "codeception/codeception": "^2.3",
@@ -1002,7 +997,7 @@
                 "environment",
                 "wordpress"
             ],
-            "time": "2019-11-25T18:45:41+00:00"
+            "time": "2020-04-09T20:44:23+00:00"
         },
         {
             "name": "nyco/wp-open-data-transients",
@@ -1958,6 +1953,26 @@
             "homepage": "https://wordpress.org/plugins/core-sitemaps/"
         },
         {
+            "name": "wpackagist-plugin/duplicate-post",
+            "version": "3.2.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/duplicate-post/",
+                "reference": "tags/3.2.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.4.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/duplicate-post/"
+        },
+        {
             "name": "wpackagist-plugin/enable-media-replace",
             "version": "3.3.7",
             "source": {
@@ -2159,15 +2174,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.5.5",
+            "version": "1.5.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.5.5"
+                "reference": "tags/1.5.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.5.zip",
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.6.zip",
                 "reference": null,
                 "shasum": null
             },

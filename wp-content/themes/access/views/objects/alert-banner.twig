@@ -1,4 +1,4 @@
-<article aria-hidden="{% if active %}false{% else %}true{% endif %}" class="c-alert-banner z-20 color-mid-background bg-status-{{ this.alert_color }} animated hidden:fadeInUp {% if active %}active{% else %}hidden{% endif %} print:hidden" data-alert-name="{{ this.slug }}" data-js="alert-banner" id="aria-c-{{ this.slug }}" role="dialog">
+<article aria-hidden="{% if active %}false{% else %}true{% endif %}" class="c-alert-banner z-20 color-mid-background color-{{ this.alert_color }}-status animated hidden:fadeInUp {% if active %}active{% else %}hidden{% endif %} print:hidden" data-alert-name="{{ this.slug }}" data-js="alert-banner" id="aria-c-{{ this.slug }}" role="dialog">
   <div class="c-alert-banner-wrapper">
     <div class="c-alert-banner__content screen-mobile:flex">
       <div class="c-alert-box__icon">
@@ -11,7 +11,7 @@
     </div>
 
     <div class="c-alert-banner__closing">
-      <button aria-controls="aria-c-{{ this.slug }}" aria-expanded="{{ active }}" class="text-color-blue" data-js="alert-controller">
+      <button aria-controls="aria-c-{{ this.slug }}" aria-expanded="{{ active }}" class="text-blue" data-js="alert-controller">
         <span class="sr-only">{{ __('close &amp; return to site', 'accessnyctheme') }}</span>
 
         <svg aria-hidden="true" class="icon-ui-x">
