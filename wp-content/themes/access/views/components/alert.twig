@@ -1,11 +1,18 @@
-<article class="c-alert-box color-{{ this.alert_color }}-status color-mid-background {{ class }}" role="alert">
+<article itemscope itemprop="SpecialAnnouncement" itemtype="https://schema.org/SpecialAnnouncement" class="c-alert-box color-{{ this.alert_color }}-status color-mid-background {{ class }}" role="alert">
+  <meta itemprop="name" content="{{ this.post_title }}" />
+  <meta itemprop="datePosted" content="{{ this.post_date }}" />
+
   <div class="c-alert-box__icon">
     <svg aria-hidden="true" class="c-alert-box__svg icon icon-{{ this.alert_icon }}">
       <use xlink:href="#icon-{{ this.alert_icon }}"></use>
     </svg>
   </div>
 
-  <div class="c-alert-box__body">
+  <div itemprop="text" class="c-alert-box__body">
     {{ this.alert_content }}
   </div>
+
+  {% if this.alert_color == 'covid-response' %}
+    <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
+  {% endif %}
 </article>

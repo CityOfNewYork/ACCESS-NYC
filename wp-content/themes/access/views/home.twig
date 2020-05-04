@@ -55,26 +55,31 @@
 
             <div class="screen-tablet:layout-columns-gutter">
               {% for tout in homepage_touts %}
-              <div class="c-card p-0 pb-4">
+              <div itemscope itemprop="SpecialAnnouncement" itemtype="https://schema.org/SpecialAnnouncement" class="c-card p-0 pb-4">
                 <div class="c-card__body">
                   {% if tout.tout_title %}
-                  <h3 class="c-card__title mt-0">
+                  <h3 itemprop="name" class="c-card__title mt-0">
                     {% if tout.status %}
                     <mark class="badge color-{{ tout.status.type }}-status">{{ tout.status.text }}</mark>
                     {% endif %}
 
-                    <a class="text-blue-dark" href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                    <a itemprop="newsUpdatesAndGuidelines" class="text-blue-dark" href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>
                       {{ tout.tout_title }}
                     </a>
                   </h3>
                   {% endif %}
 
-                  <p class='c-card__subtitle color__alt'>
+                  <p itemprop="datePosted" class='c-card__subtitle color__alt'>
                     {{ __('Updated', 'accessnyctheme') }} {{ tout.post_modified|date('l, F jS, g:ia') }}
                   </p>
 
                   {% if tout.link_text %}
-                  <div class="c-card__summary">{{ tout.link_text }}</div>
+                    <div itemprop="text" class="c-card__summary">{{ tout.link_text }}</div>
+                    <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
+                  {% endif %}
+
+                  {% if tout.custom.tout_status_clear_date %}
+                    <meta itemprop="expires" content="{{ tout.custom.tout_status_clear_date }}" />
                   {% endif %}
                 </div>
               </div>
@@ -98,7 +103,11 @@
             <div class="bg-grey-lightest px-3 py-3 mb-3">
               <div class="layout-gutter screen-tablet:layout-columns-gutter">
                 {% for post in featured_programs %}
-                  {% include 'components/card.twig' with {'post': post, 'short_post': true} only %}
+                  {% if post.custom.program_status_type == 'covid-response' %}
+                    {% include 'components/covid-response-card.twig' with {'post': post, 'short_post': true} only %}
+                  {% else %}
+                    {% include 'components/card.twig' with {'post': post, 'short_post': true} only %}
+                  {% endif %}
                 {% endfor %}
               </div>
             </div>

@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main id="content" class="color-light-background" itemscope itemtype="http://schema.org/GovernmentService">
+  <main id="content" class="color-light-background" itemscope itemtype="http://schema.org/{{ post.item_scope }}">
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
       {% for alert in alerts %}
@@ -30,7 +30,7 @@
       </div>
 
       <div>
-        <h1 class="c-header__descriptor" itemprop="alternateName">
+        <h1 class="c-header__descriptor" itemprop="name">
           {% if post.status %}
           <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
           {% endif %}
@@ -53,8 +53,15 @@
           </span>
           {% endif %}
         </h2>
+        <p itemprop="datePosted" class="color__alt mt-1">
+          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+        </p>
       </div>
     </header>
+
+    {% if post.custom.program_status_clear_date %}
+      <meta itemprop="expires" content="{{ post.custom.program_status_clear_date }}" />
+    {% endif %}
 
     <section class="wrap screen-desktop:layout-sidebar-small-gutter">
       <aside>
@@ -126,6 +133,20 @@
         {% endfor %}
       </div>
     </section>
+
+    <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
+      {% if post.structured_data_url %}
+        <meta itemprop="url" content="{{ post.structured_data_url }}" />
+      {% endif %}
+
+      <div itemprop="provider" itemtype="http://schema.org/GovernmentOrganization" itemscope>
+        <meta itemprop="name" content="{{ post.government_agency }}" />
+      </div>
+
+      {% if post.structured_data_service_type %}
+        <meta itemprop="serviceType" content="http://schema.org/{{ post.structured_data_service_type[0] }}" />
+      {% endif %}
+    </div>
 
     <footer class="wrap pt-4">
       <p class="color__alt">

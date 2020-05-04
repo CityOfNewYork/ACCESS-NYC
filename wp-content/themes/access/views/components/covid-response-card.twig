@@ -1,4 +1,4 @@
-<article itemscope itemtype="http://schema.org/GovernmentService" class="c-card">
+<article itemscope itemprop="SpecialAnnouncement" itemtype="https://schema.org/SpecialAnnouncement" class="c-card">
   <div class="c-card__icon">
     {% include 'elements/icon.twig' with {
       'icon': 'icon-card-' ~ post.category.slug ~ '-v' ~ post.icon.version,
@@ -7,7 +7,7 @@
     } only %}
   </div>
 
-  <div class="c-card__body">
+  <div itemprop="text" class="c-card__body">
     <h3 itemprop="name" class="c-card__title">
       {% if post.status %}
       <mark class="badge color-{{ post.status.type }}-status">{{ post.status.text }}</mark>
@@ -34,4 +34,5 @@
       {% endif %}
     </div>
   </div>
+  <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
 </article>
