@@ -12,10 +12,10 @@
     </div>
     {% endif %}
 
-    <p class="usa-grid m-0 pt-3 hidden print:block" aria-hidden="true">
+    <p class="wrap m-0 pt-3 hidden print:block" aria-hidden="true">
       <strong>{{ __('Get back to this page', 'accessnyc-program-detail') }}:</strong>
 
-      <a href="{{ post.get_permalink }}" itemprop="url">{{ post.get_permalink | replace({'http://': ''})}}</a>
+      <a href="{{ post.get_permalink }}" itemprop="url">{{ post.get_permalink|replace({'http://': ''})}}</a>
     </p>
 
     <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
@@ -56,7 +56,7 @@
       </div>
     </header>
 
-    <section class="usa-grid screen-desktop:layout-sidebar-small-gutter">
+    <section class="wrap screen-desktop:layout-sidebar-small-gutter">
       <aside>
         <nav class="c-side-nav print:hidden" data-js="program-nav">
           <ol>
@@ -74,15 +74,13 @@
           <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer">
             <svg class="icon icon-ui-printer">
               <use xlink:href="#icon-ui-printer"></use>
-            </svg>
-
-            {{ __('Print the whole guide', 'accessnyc-program-detail') }}
+            </svg>{{ __('Print the whole guide', 'accessnyc-program-detail') }}
           </a>
           {% endspaceless %}
         </div>
       </aside>
 
-      <article data-js="program-detail-content">
+      <article class="pt-2 screen-desktop:pt-0" data-js="program-detail-content">
         {% set sectionArray = [] %}
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
@@ -98,7 +96,7 @@
       </article>
     </section>
 
-    <section class="usa-grid print:hidden">
+    <section class="wrap print:hidden">
       <header>
         <h3 class="text-blue-dark border-t-2 border-yellow-access pt-4 mt-4">
           {{ __('More ways to get help with this program', 'accessnyc-program-detail') }}
@@ -125,26 +123,18 @@
           {{ post.get_field(method) }}
         </div>
         {% endif %}
-
         {% endfor %}
       </div>
     </section>
 
-    <footer class="usa-grid py-4">
-      <p class="text-grey-mid">
-        {{ __('Updated', 'accessnyc-program-detail') }}
-        {% if post.post_modified | length %}
-        {{ post.post_modified|date }}
-        {% else %}
-        {{ post.post_date|date }}
-        {% endif %}
+    <footer class="wrap pt-4">
+      <p class="color__alt">
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
       </p>
-
-      {# {% include 'partials/was-this-page-helpful.twig' %} #}
-
-      <div class="text-end">
-        <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
-      </div>
     </footer>
+
+    <div class="wrap sticky bottom-0 text-end pb-3">
+      <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
+    </div>
   </main>
 {% endblock %}

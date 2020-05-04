@@ -9,6 +9,7 @@
 
 namespace Controller;
 
+use SMNYC;
 use Timber;
 use DateTime;
 use DateTimeZone;
@@ -26,6 +27,10 @@ class Programs extends Timber\Post {
       parent::__construct();
     }
 
+    /**
+     * Icon Slug
+     */
+
     $this->category_slug = $this->getCategorySlug();
 
     $this->category = $this->getCategory();
@@ -33,6 +38,16 @@ class Programs extends Timber\Post {
     $this->status = $this->getStatus();
 
     $this->icon = $this->getIcon();
+
+    /**
+     * Share Properties
+     */
+
+    $this->share_action = admin_url('admin-ajax.php');
+
+    $this->share_url = get_permalink($this->id) . '?step=how-to-apply';
+
+    $this->share_hash = SMNYC\hash($this->share_url);
 
     return $this;
   }

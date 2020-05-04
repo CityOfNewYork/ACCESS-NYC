@@ -5,7 +5,7 @@ var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments
 with(obj||{}){
 __p+='';
  locations.forEach(function(location) { 
-__p+='\n<li class="js-map-location c-card px-2 py-3 border-b border-grey-light" data-marker="'+
+__p+='\n<li class="js-map-location c-card px-2 py-3 mb-0 border-b border-grey-light" data-marker="'+
 ((__t=( location.id ))==null?'':__t)+
 '" tabindex="0" itemscope itemtype="https://schema.org/';
  if (location.isGovtOffice) { 

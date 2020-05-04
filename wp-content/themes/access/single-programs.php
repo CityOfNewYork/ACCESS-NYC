@@ -41,16 +41,7 @@ if (isset($_GET['step'])) {
   $context['step'] = '';
 }
 
-$query = ($context['step'] !== '') ? '?step=' . $context['step'] : '';
-
 $context['post'] = new Controller\Programs(Timber::get_post());
-
-// Share by email/sms fields.
-$context['shareAction'] = admin_url('admin-ajax.php');
-
-$context['shareUrl'] = $post->link . $query;
-
-$context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 
 /**
  * Alerts

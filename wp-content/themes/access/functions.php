@@ -63,4 +63,4 @@ new Controller\Site();
  */
 // phpcs:enable
 
-// require_once Path\lib('filters');
+require_once Path\lib('filters');

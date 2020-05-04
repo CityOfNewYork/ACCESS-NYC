@@ -21,7 +21,7 @@
           {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
         </h2>
 
-        <div class="screen-tablet:text-larger font-serif">
+        <div class="font-serif screen-tablet:text-large">
           {{ post.get_field('field_58b480ca3081c') }} {# lead #}
         </div>
       </div>
@@ -31,7 +31,7 @@
     {% set sidebar = true %}
     {% endif %}
 
-    <div class="usa-grid {% if sidebar %}screen-desktop:layout-sidebar-gutter{% endif %}">
+    <div class="wrap pt-2 screen-desktop:pt-3 {% if sidebar %}screen-desktop:layout-sidebar-gutter{% endif %}">
       {% if sidebar %}
       <aside>
         <nav class="c-side-nav sticky top-0 pt-1 print:hidden">
@@ -48,10 +48,12 @@
       </aside>
       {% endif %}
 
-      <div class="o-content">
+      <div class="o-content pt-2 screen-desktop:pt-0">
         {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
         <section id="section-{{ loop.index }}">
-          {% if section.section_title %}<h2>{{ section.section_title }}</h2>{% endif %}
+          {% if section.section_title %}
+          <h3 class="font-normal border-b pb-3 border-grey-light">{{ section.section_title }}</h3>
+          {% endif %}
 
           {% if section.section_raw_content %}
           {{ fn('do_shortcode', section.section_raw) }}
@@ -63,11 +65,15 @@
       </div>
     </div>
 
-    <footer class="usa-grid py-4">
+    <footer class="wrap pt-4">
       <p class="text-grey-mid m-0" itemprop="dateModified">
         {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
       </p>
     </footer>
   </article>
+
+  <div class="wrap sticky bottom-0 text-end pb-3">
+    <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
+  </div>
 </main>
 {% endblock %}

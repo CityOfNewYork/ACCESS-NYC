@@ -12,7 +12,7 @@
       </div>
     </header>
 
-    <div class="usa-grid screen-desktop:layout-sidebar-small-gutter">
+    <div class="wrap screen-desktop:layout-sidebar-small-gutter">
       <aside id="filter-programs">
         <h2 class="type-h4 mb-0 hidden screen-desktop:inline-block">{{ strings.FILTER_PROGRAMS }}:</h2>
 
@@ -58,7 +58,7 @@
           </div>
 
           <div class="text-center screen-desktop:text-left" v-if="!loading">
-            <a class="btn btn-secondary btn-small screen-tablet:btn-normal" :href="paginationNextLink" v-on:click="paginate" v-if="next" data-amount="1">
+            <a class="btn btn-secondary btn-small screen-tablet:btn" :href="paginationNextLink" v-on:click="paginate" v-if="next" data-amount="1">
               {{ strings.MORE_RESULTS }}
             </a>
           </div>
