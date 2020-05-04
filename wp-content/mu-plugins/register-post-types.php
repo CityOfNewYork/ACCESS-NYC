@@ -49,6 +49,7 @@ add_action('init', function() {
       ),
       'description' => __('Homepage "did you know" announcements.'),
       'public' => true,
+      'show_in_rest' => true,
       'exclude_from_search' => true,
       'show_ui' => true,
       'hierarchical' => false,

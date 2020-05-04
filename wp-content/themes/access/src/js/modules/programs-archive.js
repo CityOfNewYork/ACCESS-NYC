@@ -63,44 +63,38 @@ export default {
       maps: function() {
         return {
           terms: terms => ({
-            'active': false,
-            'name': terms.labels.archives,
-            'slug': terms.name,
-            'checkbox': false,
-            'toggle': true,
-            'filters': terms.terms.map(filters => ({
-              'id': filters.term_id,
-              'name': filters.name,
-              'slug': filters.slug,
-              'parent': terms.name,
-              'active': (
+            active: false,
+            name: terms.labels.archives,
+            slug: terms.name,
+            checkbox: false,
+            toggle: true,
+            filters: terms.terms.map(filters => ({
+              id: filters.term_id,
+              name: filters.name,
+              slug: filters.slug,
+              parent: terms.name,
+              active: (
                   this.query.hasOwnProperty(terms.name) &&
                   this.query[terms.name].includes(filters.term_id)
                 ),
-              'checked': (
+              checked: (
                   this.query.hasOwnProperty(terms.name) &&
                   this.query[terms.name].includes(filters.term_id)
                 )
             }))
           }),
           programs: p => ({
-            'title': p.acf.plain_language_program_name,
-            'link': p.link,
-            'subtitle': p.acf.program_name + ((p.acf.program_acronym) ?
+            title: p.acf.plain_language_program_name,
+            link: p.link,
+            subtitle: p.acf.program_name + ((p.acf.program_acronym) ?
               ' (' + p.acf.program_acronym + ')' : ''),
-            'summary': p.acf.brief_excerpt,
-            'category': {
-              'slug':
-                (
-                  p.terms && p.terms.find(t => t.taxonomy === 'programs')
-                    .slug.replace(new RegExp(`\\-${this.lang.code}$`), '')
-                ) || 'PROGRAMS',
-              'name':
-                (
-                  p.terms &&
-                  p.terms.find(t => t.taxonomy === 'programs').name
-                ) || 'NAME'
-            }
+            summary: p.acf.brief_excerpt,
+            category: {
+              slug: p.timber.category.slug || 'PROGRAMS',
+              name: p.timber.category.name || 'NAME'
+            },
+            icon: p.timber.icon,
+            status: p.timber.status
           })
         };
       }

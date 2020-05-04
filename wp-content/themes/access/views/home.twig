@@ -1,25 +1,32 @@
 {% extends "base.twig" %}
 
-{% block body_class %}
-  home
-{% endblock %}
+{% block body_class %}home{% endblock %}
 
 {% block content %}
   <main class="color-light-background" id="content">
+    {# Banner #}
     <div class="o-banner color-dark-background">
       <div class="o-banner__inner">
         <h1 class="o-banner__title">{{ post.hero_headline }}</h1>
 
-        <div class="o-banner__touts">
+        <hr class='divider border-blue'>
+
+        <div class="screen-tablet:layout-columns-gutter mb-3">
           {% for tout in post.get_field('field_58912c8ce0c05') %} {# hero_touts #}
           <div class="o-banner__tout">
-            {% if tout.title %}<h2 class="o-banner__tout-title type-h3">{{ tout.title }}</h2>{% endif %}
+            {% if tout.title %}
+            <h2 class="o-banner__tout-title">{{ tout.title }}</h2>
+            {% endif %}
 
-            {% if tout.body %}<div class="o-banner__tout-body">{{ tout.body }}</div>{% endif %}
+            {% if tout.body %}
+            <div class="o-banner__tout-body">{{ tout.body }}</div>
+            {% endif %}
 
             {% if tout.link_text %}
             <div class="o-banner__tout-cta">
-              <a class="btn btn-{{ tout.link_type }}{% if tout.link_arrow %} btn-next{% endif %}" href="{{ tout.link_url }}" {% if tout.link_new_window %}target="_blank"{% endif %} {% if tout.link_relationship %}rel="{{ tout.link_relationship }}"{% endif %}>{{ tout.link_text }}</a>
+              <a class="btn btn-{{ tout.link_type }}{% if tout.link_arrow %} btn-next{% endif %}" href="{{ tout.link_url }}" {% if tout.link_new_window %}target="_blank"{% endif %} {% if tout.link_relationship %}rel="{{ tout.link_relationship }}"{% endif %}>
+                {{ tout.link_text }}
+              </a>
             </div>
             {% endif %}
           </div>
@@ -30,66 +37,107 @@
 
     <div class="layout-home-body">
       <div>
-        {% if homepage_touts %}
-        <div class="pb-4 mx-3">
-          <h2 class="type-h5 divider m-0 text-grey-mid">{{ post.hero_touts_heading }}</h2>
+        <div class="mx-3">
+          {# Announcements #}
+          {% if homepage_touts %}
+          <div class="pb-4">
+            <div class="screen-tablet:flex justify-between items-center">
+              <h2 class="color__alt font-normal no-underline capitalize mb-0">
+                {{ post.hero_touts_heading }}
+              </h2>
 
-          <div class="screen-tablet:layout-columns">
-            {% for tout in homepage_touts %}
-            <div class="c-card px-0 screen-tablet:px-2 screen-tablet:py-3">
-              <div class="c-card__body">
-                {% if tout.tout_title %}<h3 class="c-card__title mb-3 text-blue-dark">{{ tout.tout_title }}</h3>{% endif %}
+              <p class="color__alt text-small mb-0">
+                {{ __('Latest Update', 'accessnyctheme') }} {{ homepage_touts_latest_update|date('l, F jS') }}
+              </p>
+            </div>
 
-                {% if tout.link_text %}
-                <div class="c-card__summary">
-                  <a href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ tout.link_text }}</a>
+            <hr class="divider color__alt mb-3">
+
+            <div class="screen-tablet:layout-columns-gutter">
+              {% for tout in homepage_touts %}
+              <div class="c-card p-0 pb-4">
+                <div class="c-card__body">
+                  {% if tout.tout_title %}
+                  <h3 class="c-card__title mt-0">
+                    {% if tout.status %}
+                    <mark class="badge color-{{ tout.status.type }}-status">{{ tout.status.text }}</mark>
+                    {% endif %}
+
+                    <a class="text-blue-dark" href="{{ tout.link_url }}"{% if tout.link_new_window %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                      {{ tout.tout_title }}
+                    </a>
+                  </h3>
+                  {% endif %}
+
+                  <p class='c-card__subtitle color__alt'>
+                    {{ __('Updated', 'accessnyctheme') }} {{ tout.post_modified|date('l, F jS, g:ia') }}
+                  </p>
+
+                  {% if tout.link_text %}
+                  <div class="c-card__summary">{{ tout.link_text }}</div>
+                  {% endif %}
                 </div>
-                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {# Featured Programs #}
+          <div class="mb-4">
+            <h2 class="color__alt font-normal no-underline capitalize mb-4">
+              {{ post.featured_programs_heading }}
+            </h2>
+
+            {% if post.featured_programs_subheading %}
+            <hr class="divider color__alt mb-3">
+
+            <div class="mb-4">{{ post.featured_programs_subheading }}</div>
+            {% endif %}
+
+            <div class="bg-grey-lightest px-3 py-3 mb-3">
+              <div class="layout-gutter screen-tablet:layout-columns-gutter">
+                {% for post in featured_programs %}
+                  {% include 'components/card.twig' with {'post': post, 'short_post': true} only %}
+                {% endfor %}
               </div>
             </div>
-            {% endfor %}
-          </div>
-        </div>
-        {% endif %}
 
-        <div class="bg-grey-lightest px-3 py-4 mb-3 screen-tablet:mx-3">
-          <h2 class="type-h3 m-0 text-blue-dark">{{ post.featured_programs_heading }}</h2>
-
-          {% if post.featured_programs_subheading | length %}<h3 class="type-supplemental text-grey-mid">{{ post.featured_programs_subheading }}</h3>{% endif %}
-
-          <div class="layout-gutter screen-tablet:layout-columns-gutter mb-4">
-            {% include 'partials/post-teaser.twig' with {'short_post': true, 'posts': post.get_field('field_58912c8ce0c21')} %} {# featured_programs #}
+            <div class="{% if post.contact_us_text %}text-end{% else %}text-center{% endif %}">
+              <a class="btn btn-secondary btn-next" href="{{ url_base }}/programs">
+                {{ __('See all programs', 'accessnyctheme') }}
+              </a>
+            </div>
           </div>
 
-          <a class="btn btn-secondary btn-next" href="{{ url_base }}/programs">{{__('See all programs', 'accessnyctheme')}}</a>
-        </div>
-
-        {% if alert_sitewide %}
-        <div class="c-alert-box bg-status-{{ alert_sitewide.alert_color }} screen-tablet:mx-3 mb-2">
-          <div class="c-alert-box__icon">
-            <svg class="c-alert-box__svg icon icon-{{ alert_sitewide.alert_icon }}">
-              <use xlink:href="#icon-{{ alert_sitewide.alert_icon }}"></use>
-            </svg>
+          {# Banner Alert #}
+          {% if alert_sitewide %}
+          <div class="py-3">
+            {% include 'components/alert.twig' with {this: alert_sitewide} %}
           </div>
-
-          <div class="c-alert-box__body">
-            {{ alert_sitewide.alert_content }}
-          </div>
-        </div>
-        {% endif %}
-
-        <footer class="py-2 mx-3">
-          {% if post.contact_us_cta and post.contact_us_link %}
-          <h2 class="type-h4">{{ post.contact_us_heading }}</h2>
-
-          <a class="btn btn-primary" href="{{ post.contact_us_link }}" {% if post.contact_us_new_window %}target="_blank"{% endif %} {% if post.contact_us_relationship %}rel="{{ post.contact_us_relationship }}"{% endif %}>
-            <svg class="icon icon-contact">
-              <use xlink:href="#icon-contact"></use>
-            </svg> {{ post.contact_us_cta }}
-          </a>
           {% endif %}
-        </footer>
 
+          {# Contact Us #}
+          <footer class="py-2 {% if post.contact_us_text == '' %}text-center{% endif %}">
+            {% if post.contact_us_cta and post.contact_us_link %}
+            <h2 class="color__alt font-normal no-underline capitalize">
+              {{ post.contact_us_heading }}
+            </h2>
+
+            {% if post.contact_us_text %}
+            <hr class="divider color__alt mb-3">
+
+            <div class="mb-4">{{ post.contact_us_text }}</div>
+            {% endif %}
+
+            <div class="{% if post.contact_us_text %}text-end{% else %}text-center{% endif %}">
+              <a class="btn btn-secondary btn-next" href="{{ post.contact_us_link }}" {% if post.contact_us_new_window %}target="_blank"{% endif %} {% if post.contact_us_relationship %}rel="{{ post.contact_us_relationship }}"{% endif %}>
+                {{ post.contact_us_cta }}
+              </a>
+            </div>
+            {% endif %}
+          </footer>
+        </div>
       </div>
     </div>
   </main>

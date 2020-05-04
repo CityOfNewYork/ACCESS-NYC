@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * Theme Functions
+ *
+ * Only functions to be made available to view templates should be added to
+ * functions. Site configuration should be modified/added as Must Use Plugins.
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions
+ */
+
+/**
  * Dependencies
  */
 
@@ -102,20 +111,15 @@ function validate_params($namespace, $subject) {
 }
 
 /**
- * Adds functionality to Twig.
+ * Expose urldecode() method to templates. Decodes URL-encoded string
+ * @link https://www.php.net/manual/en/function.urldecode.php
  *
- * @param \Twig\Environment $twig The Twig environment.
- * @return \Twig\Environment
+ * @param   String  $text  The string to be decoded
+ *
+ * @return  String         Decoded string
  */
-function add_to_twig( $twig ) {
-    // Adding functions as filters.
-    $twig->addFilter( new Timber\Twig_Filter( 'url_decode', 'url_decode' ) );
-
-    return $twig;
-}
-
-function url_decode( $text ) {
-    return  urldecode($text);
+function url_decode($text) {
+    return urldecode($text);
 }
 
 /**

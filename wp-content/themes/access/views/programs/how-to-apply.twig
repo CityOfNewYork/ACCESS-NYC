@@ -1,10 +1,8 @@
 <section id="how-to-apply" data-js="program-detail-step" class="hidden:overflow{% if step in sectionArray | keys %} active{% endif %} print:active w-full">
   <header>
-    <h3 class="text-blue-dark">
-      {{ stepNumber }}. {{__('How to apply', 'accessnyc-program-detail')}}
-    </h3>
+    <h3>{{ stepNumber }}. {{ __('How to apply', 'accessnyc-program-detail') }}</h3>
 
-    <h4 class="font-normal">{{__('Here are your options.', 'accessnyc-program-detail')}}</h4>
+    <h4 class="font-normal">{{ __('Here are your options.', 'accessnyc-program-detail') }}</h4>
   </header>
 
   {# {% set sections = [
@@ -105,8 +103,10 @@
 
     <div class="c-alert-box__body">
       <p>
-        <b>{{__('Come back to it later.', 'accessnyc-program-detail')}}</b>
+        <b>{{ __('Come back to it later.', 'accessnyc-program-detail') }}</b>
+
         <br/>
+
         {{__('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail')}}</p>
 
         <div class="layout-gutter screen-tablet:layout-columns-gutter">
@@ -114,10 +114,10 @@
             type: 'tel',
             button: __('Text', 'accessnyc-program-detail'),
             placeholder: __('Phone Number', 'accessnyc-program-detail'),
-            post: shareAction,
+            post: post.share_action,
             action: 'sms_send',
-            url: shareUrl,
-            hash: shareHash,
+            url: post.share_url,
+            hash: post.share_hash,
             template: 'programs'
           }} only %}
 
@@ -125,10 +125,10 @@
             type: 'email',
             button: __('Email', 'accessnyc-program-detail'),
             placeholder: __('Email address', 'accessnyc-program-detail'),
-            post: shareAction,
+            post: post.share_action,
             action: 'email_send',
-            url: shareUrl,
-            hash: shareHash,
+            url: post.share_url,
+            hash: post.share_hash,
             template: 'programs'
           }} only %}
         </div>

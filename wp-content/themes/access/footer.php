@@ -1,7 +1,11 @@
 <?php
+
 /**
- * Third party plugins that hijack the theme will call wp_footer() to get the footer template.
- * We use this to end our output buffer (started in header.php) and render into the view/page-plugin.twig template.
+ * Third party plugins that hijack the theme will call wp_footer() to get the
+ * footer template. We use this to end our output buffer (started in header.php)
+ * and render into the view/page-plugin.twig template.
+ *
+ * @author Blue State Digital
  */
 
 $timberContext = $GLOBALS['timberContext'];

@@ -1,8 +1,12 @@
 <div class="o-text-controller text-end print:hidden" data-js="text-controller">
   {% spaceless %}
   <button type="button" class="o-text-controller__control btn-link" aria-controls="aria-c-text-controller__options" aria-expanded="false" data-js="text-controller__control track" data-track-key="Text Controls" data-track-data='[{"action": "text-controls"}]'>
-    <svg class="icon icon-ui-settings">
+    <svg class="o-text-controller__icon o-text-controller__icon-full icon-ui icon-3 hidden screen-desktop:inline-block" aria-hidden="true">
       <use xlink:href="#icon-ui-settings"></use>
+    </svg>
+
+    <svg class="o-text-controller__icon o-text-controller__icon-short icon-ui icon-3 text-blue screen-desktop:hidden" aria-hidden="true">
+      <use xlink:href="#icon-ui-translate"></use>
     </svg>
 
     <span class="o-text-controller__title-full">{{ __('Translate &amp; Adjust Text', 'accessnyctheme') }}</span>
@@ -16,7 +20,7 @@
 
       {% if google_translate_languages and google_translate_element %}
       <div id="js-google-translate" class="hidden" aria-hidden="true"></div>
-      <label class="flex flex-col ms-2 mb-2" for="js-google-translate-control">
+      <label class="flex flex-col ms-2 screen-desktop:mb-2" for="js-google-translate-control">
         <div class="flex items-center mb-1">
           <svg class="icon-ui-translate icon-3 text-blue" aria-hidden="true">
             <use xlink:href="#icon-ui-translate"></use>

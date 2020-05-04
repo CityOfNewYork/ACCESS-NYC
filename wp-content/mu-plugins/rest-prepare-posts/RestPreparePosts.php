@@ -100,4 +100,48 @@ class RestPreparePosts {
 
     return $terms;
   }
+
+  /**
+   * Get the Timber Controller and construct a Timber post. Return context
+   * that extends the Timber View of the post.
+   *
+   * @param   Number  $id  ID of the post
+   *
+   * @return  Object       If REST method exists in post ctrl, return items.
+   */
+  public function getTimberContext($id) {
+    $path = get_stylesheet_directory() . '/controllers/' . $this->type . '.php';
+
+    if (file_exists($path)) {
+      require_once $path;
+    } else {
+      return null;
+    }
+
+    $cntrlClass = "Controller\\" . ucfirst($this->type);
+
+    $cntrlPost = new $cntrlClass($id);
+
+    return (method_exists($cntrlPost, 'showInRest')) ?
+      $cntrlPost->showInRest() : null;
+  }
+
+  /**
+   * Show the ACF "Show in REST API" field setting
+   *
+   * @return  Null
+   */
+  public static function renderRestFieldSetting() {
+    add_action('acf/render_field_settings', function ($field) {
+      acf_render_field_setting($field, array(
+        'label' => __('Show in REST API?'),
+        'instructions' => '',
+        'type' => 'true_false',
+        'name' => 'show_in_rest',
+        'ui' => 1,
+        'class' => 'field-show_in_rest',
+        'default_value' => 0,
+      ), true);
+    });
+  }
 }

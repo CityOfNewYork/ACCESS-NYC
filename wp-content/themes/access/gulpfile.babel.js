@@ -68,7 +68,6 @@ const PATTERNS_FRAMEWORK = `${NYCOPPORTUNITY}/patterns-framework`;
 const HASH_FORMAT = '{name}.{hash:8}{ext}';
 const HASH_FORMAT_WEBPACK = '[name].[chunkhash:8].js';
 const HASH_FILES = [
-  'manifest-screener-field.json',
   'manifest.json'
 ];
 

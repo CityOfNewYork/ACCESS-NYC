@@ -21,7 +21,7 @@ __p+='\n      {% endif %}\n\n      <article class="c-card p-0 items-center">\n  
 ((__t=( category.label ))==null?'':__t)+
 '</div>\n      </article>\n      ';
  }); 
-__p+='\n    </div>\n\n  </div>\n\n  <hr class="divider-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Your household:", "accessnyc-screener")|trim|escape("js") }}\n      '+
+__p+='\n    </div>\n\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Your household:", "accessnyc-screener")|trim|escape("js") }}\n      '+
 ((__t=( members.length ))==null?'':__t)+
 '\n      ';
  if (members.length === 1) { 
@@ -101,9 +101,9 @@ __p+='\n          </ul>\n        </div>\n        ';
  } 
 __p+='\n      </li>\n      ';
  }) 
-__p+='\n    {% endspaceless %}</ul>\n  </div>\n\n  <hr class="divider-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Household resources:", "accessnyc-screener")|trim|escape("js") }} <span class="force-ltr">'+
+__p+='\n    {% endspaceless %}</ul>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Household resources:", "accessnyc-screener")|trim|escape("js") }} <span class="force-ltr">'+
 ((__t=( household.assets ))==null?'':__t)+
-'</span>\n      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <p>{{ __("This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.", "accessnyc-screener")|trim|escape("js") }}</p>\n  </div>\n\n  <hr class="divider-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Housing", "accessnyc-screener")|trim|escape("js") }}\n      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <ul class="list-inline-semicolon">{% spaceless %}\n      ';
+'</span>\n      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <p>{{ __("This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.", "accessnyc-screener")|trim|escape("js") }}</p>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Housing", "accessnyc-screener")|trim|escape("js") }}\n      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <ul class="list-inline-semicolon">{% spaceless %}\n      ';
  household.types.forEach(function(type) { 
 __p+='\n      <li>\n        <div class="list-inline-comma">\n          <span>'+
 ((__t=( type.label ))==null?'':__t)+
@@ -161,7 +161,7 @@ __p+='\n            </span>\n          ';
  } 
 __p+='\n        </div>\n      </li>\n      ';
  }); 
-__p+='\n    {% endspaceless %}</ul>\n  </div>\n\n  <hr class="divider-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Your zip code:", "accessnyc-screener")|trim|escape("js") }} '+
+__p+='\n    {% endspaceless %}</ul>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Your zip code:", "accessnyc-screener")|trim|escape("js") }} '+
 ((__t=( household.zip ))==null?'':__t)+
 '\n      <a role="button" href="#step-3" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n  </div>\n</div>\n';
 }
