@@ -30,6 +30,7 @@
                   <input type="checkbox" data-toggles="#program-{{ filter.category.slug }}" class="js-map-filter-parent-input" tabindex="-1">
                   <span class="checkbox__label">{{ filter.category.name }}</span>
                 </label>
+
                 <a href="#program-{{ filter.category.slug }}" class="c-filter-multi__item-header-toggle js-toggle-filter"  tabindex="-1">
                   <span class="sr-only map-filter-expand">{{__('Expand category', 'accessnyc-locations')}}</span>
                   <span class="sr-only map-filter-collapse">{{__('Collapse category', 'accessnyc-locations')}}</span>
@@ -57,6 +58,7 @@
       <div class="js-map-results-container">
         <div class="border-t border-grey-light">
           <ul class="js-map-results p-0 m-0"></ul>
+
           <p class="p-4 m-0 flex items-center justify-center hidden" data-js="message-loading" aria-hidden="true">
             {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-yellow-access'}} only %}
             &nbsp;&nbsp;

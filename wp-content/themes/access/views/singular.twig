@@ -23,11 +23,11 @@
       </div>
     </header>
 
-    <div class="usa-grid">
+    <div class="wrap">
       {{ post.content }}
     </div>
 
-    <footer class="usa-grid py-4">
+    <footer class="wrap py-4">
       <p class="text-grey-mid m-0" itemprop="dateModified">
         {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
       </p>

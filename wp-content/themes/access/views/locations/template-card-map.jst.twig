@@ -1,5 +1,5 @@
 <% locations.forEach(function(location) { %>
-<li class="js-map-location c-card px-2 py-3 border-b border-grey-light" data-marker="<%= location.id %>" tabindex="0" itemscope itemtype="https://schema.org/<% if (location.isGovtOffice) { %>GovernmentOffice<% } else { %>Organization<% } %>">
+<li class="js-map-location c-card px-2 py-3 mb-0 border-b border-grey-light" data-marker="<%= location.id %>" tabindex="0" itemscope itemtype="https://schema.org/<% if (location.isGovtOffice) { %>GovernmentOffice<% } else { %>Organization<% } %>">
   <div class="c-card__icon m-0">
     <% if (location.isGovtOffice) { %>
     <img src="/wp-content/themes/access/assets/img/map-pin-blue.png" width="33" height="40" alt="Government office map marker">
