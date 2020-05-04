@@ -15,14 +15,14 @@
     </button>
   </header>
 
-  <div id="aria-c-{{ this.id }}" aria-labelledby="aria-lb-{{ this.id }}" class="c-accordion__body color-mid-background text-font-size-small screen-tablet:text-font-size-normal print:active hidden:overflow animated {% if this.active %}active{% else %}hidden{% endif %}" aria-hidden="{% if this.active %}false{% else %}true{% endif %}">
+  <div id="aria-c-{{ this.id }}" aria-labelledby="aria-lb-{{ this.id }}" class="c-accordion__body color-mid-background text-small screen-tablet:text-normal print:active hidden:overflow animated {% if this.active %}active{% else %}hidden{% endif %}" aria-hidden="{% if this.active %}false{% else %}true{% endif %}">
     <div class="c-accordion__padding">
       {{ this.body }}
 
       {% if this.cta %}
       <p class="print:hidden">
         {% if this.itemtype %}<span class="hidden" aria-hidden="true" itemprop="url">{{ this.cta.href }}</span>{% endif %}
-        <a class="btn btn-secondary btn-next btn-small" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
+        <a class="btn btn-secondary btn-next text-small" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
           {{ this.cta.text }}
         </a>
       </p>

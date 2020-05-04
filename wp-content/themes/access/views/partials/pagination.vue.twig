@@ -1,5 +1,5 @@
-<h4 class="text-align-end">{{__('See more results:', 'accessnyctheme')}}</h4>
-<nav class="text-align-end">
-  <a class="btn btn-secondary btn-small screen-tablet:btn-normal btn-previous mb-1 screen-mobile:mb-0" href="{{ pagination.prev.link }}" v-on:click="paginate" data-amount="-1" v-if="previous">{{__('Previous', 'accessnyctheme')}}</a>
-  <a class="btn btn-secondary btn-small screen-tablet:btn-normal btn-next mb-1 screen-mobile:mb-0" href="{{ pagination.next.link }}" v-on:click="paginate" data-amount="1" v-if="next">{{__('Next', 'accessnyctheme')}}</a>
+<h4 class="text-end">{{__('See more results:', 'accessnyctheme')}}</h4>
+<nav class="text-end">
+  <a class="btn btn-secondary btn-small screen-tablet:btn btn-previous mb-1 screen-mobile:mb-0" href="{{ pagination.prev.link }}" v-on:click="paginate" data-amount="-1" v-if="previous">{{__('Previous', 'accessnyctheme')}}</a>
+  <a class="btn btn-secondary btn-small screen-tablet:btn btn-next mb-1 screen-mobile:mb-0" href="{{ pagination.next.link }}" v-on:click="paginate" data-amount="1" v-if="next">{{__('Next', 'accessnyctheme')}}</a>
 </nav>

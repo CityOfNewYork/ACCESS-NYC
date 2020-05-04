@@ -3,6 +3,74 @@
     "title": "Homepage Tout Fields",
     "fields": [
         {
+            "key": "field_5e9f1a9c257da",
+            "label": "Tout Status",
+            "name": "tout_status",
+            "type": "text",
+            "instructions": "Add text for a badge that appears in tout cards next to the title. Limit the characters to as few as possible. For example; \"New.\" Reference the <a href=\"https:\/\/accesspatterns.cityofnewyork.us\/badge\" target=\"_blank\">Badge documentation<\/a>.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "New",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5e9f1aef257db",
+            "label": "Tout Status Type",
+            "name": "tout_status_type",
+            "type": "radio",
+            "instructions": "Select a status color for the tout. This will be used to colorize the badge in the title of the card.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "info": "Info (blue)",
+                "warning": "Warning (yellow)",
+                "success": "Success (green)",
+                "urgent": "Urgent (red)",
+                "covid-response": "COVID Response (purple)"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "wpml_cf_preferences": 0,
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5e9f1c74a2d95",
+            "label": "Tout Status Clear Date",
+            "name": "tout_status_clear_date",
+            "type": "date_time_picker",
+            "instructions": "Select a date and time in the future to clear the tout status (hide the tout status badge).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 1,
+            "wpml_cf_preferences": 0,
+            "display_format": "F j, Y g:i a",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 0
+        },
+        {
             "key": "field_587806aacc17e",
             "label": "Tout Title",
             "name": "tout_title",
@@ -127,5 +195,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1555360040
+    "modified": 1587491698
 }

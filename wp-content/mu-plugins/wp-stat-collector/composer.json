@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-stat-collector",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "A developer plugin for WordPress that adds hooks to enable the logging of data from the site to a specified MySQL database.",

@@ -989,28 +989,28 @@
     },
     {
         "name": "nyco/wp-assets",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.1.5",
+        "version_normalized": "1.1.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-            "reference": "cdd9321f120c708de532947f04b57cc5f564c380"
+            "reference": "47c074595ca8d21af46a4a8ec62a40b54a94f904"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/cdd9321f120c708de532947f04b57cc5f564c380",
-            "reference": "cdd9321f120c708de532947f04b57cc5f564c380",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/47c074595ca8d21af46a4a8ec62a40b54a94f904",
+            "reference": "47c074595ca8d21af46a4a8ec62a40b54a94f904",
             "shasum": ""
         },
         "require": {
             "composer/installers": "^1.7",
-            "mustangostang/spyc": "0.6.2"
+            "mustangostang/spyc": "^0.6"
         },
         "require-dev": {
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2019-11-18T16:29:09+00:00",
+        "time": "2020-04-09T20:46:50+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -1022,14 +1022,9 @@
                 "name": "NYC Opportunity",
                 "email": "products@nycopportunity.nyc.gov",
                 "homepage": "https://nyc.gov/opportunity"
-            },
-            {
-                "name": "Devon Hirth",
-                "email": "dehirth@nycopportunity.nyc.gov",
-                "homepage": "https://github.com/devowhippit"
             }
         ],
-        "description": "WordPress package for asset helpers.",
+        "description": "A developer plugin with helpers for managing assets in WordPress.",
         "homepage": "https://github.com/cityofnewyork/nyco-wp-assets",
         "keywords": [
             "assets",
@@ -1049,29 +1044,29 @@
     },
     {
         "name": "nyco/wp-config",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-            "reference": "9a476e0ee32dc7fb0ebe63724bb295c36c057c80"
+            "reference": "04d74c5b78030066e1c334943e0a10da2e78e2a9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/9a476e0ee32dc7fb0ebe63724bb295c36c057c80",
-            "reference": "9a476e0ee32dc7fb0ebe63724bb295c36c057c80",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/04d74c5b78030066e1c334943e0a10da2e78e2a9",
+            "reference": "04d74c5b78030066e1c334943e0a10da2e78e2a9",
             "shasum": ""
         },
         "require": {
             "composer/installers": "~1.0",
             "illuminate/encryption": "^5.6",
-            "mustangostang/spyc": "^0.6.2"
+            "mustangostang/spyc": "^0.6"
         },
         "require-dev": {
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2019-11-25T18:45:41+00:00",
+        "time": "2020-04-09T20:44:23+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -1246,17 +1241,17 @@
     },
     {
         "name": "nyco/wp-stat-collector",
-        "version": "0.0.6",
-        "version_normalized": "0.0.6.0",
+        "version": "0.0.7",
+        "version_normalized": "0.0.7.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/CityOfNewYork/nyco-wp-stat-collector.git",
-            "reference": "96b66ed2ca7e815a816a4e47b60b4f7d13efcba6"
+            "url": "git@github.com:CityOfNewYork/nyco-wp-stat-collector.git",
+            "reference": "8d5b04b8e0463dbc4ab965d6e4be11ffbd3e3ef5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-stat-collector/zipball/96b66ed2ca7e815a816a4e47b60b4f7d13efcba6",
-            "reference": "96b66ed2ca7e815a816a4e47b60b4f7d13efcba6",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-stat-collector/zipball/8d5b04b8e0463dbc4ab965d6e4be11ffbd3e3ef5",
+            "reference": "8d5b04b8e0463dbc4ab965d6e4be11ffbd3e3ef5",
             "shasum": ""
         },
         "require": {
@@ -1266,7 +1261,7 @@
             "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2020-02-11T15:02:49+00:00",
+        "time": "2020-03-20T19:20:04+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -2318,6 +2313,50 @@
         "homepage": "https://wordpress.org/plugins/bulk-delete/"
     },
     {
+        "name": "wpackagist-plugin/core-sitemaps",
+        "version": "0.2.0",
+        "version_normalized": "0.2.0.0",
+        "source": {
+            "type": "svn",
+            "url": "https://plugins.svn.wordpress.org/core-sitemaps/",
+            "reference": "tags/0.2.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://downloads.wordpress.org/plugin/core-sitemaps.0.2.0.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "homepage": "https://wordpress.org/plugins/core-sitemaps/"
+    },
+    {
+        "name": "wpackagist-plugin/duplicate-post",
+        "version": "3.2.4",
+        "version_normalized": "3.2.4.0",
+        "source": {
+            "type": "svn",
+            "url": "https://plugins.svn.wordpress.org/duplicate-post/",
+            "reference": "tags/3.2.4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.4.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "homepage": "https://wordpress.org/plugins/duplicate-post/"
+    },
+    {
         "name": "wpackagist-plugin/enable-media-replace",
         "version": "3.3.7",
         "version_normalized": "3.3.7.0",
@@ -2605,16 +2644,16 @@
     },
     {
         "name": "wpackagist-plugin/wps-hide-login",
-        "version": "1.5.5",
-        "version_normalized": "1.5.5.0",
+        "version": "1.5.6",
+        "version_normalized": "1.5.6.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-            "reference": "tags/1.5.5"
+            "reference": "tags/1.5.6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.5.zip",
+            "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.6.zip",
             "reference": null,
             "shasum": null
         },

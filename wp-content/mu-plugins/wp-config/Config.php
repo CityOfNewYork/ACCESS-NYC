@@ -28,6 +28,16 @@ class Config {
   /** Placeholder for environment variables */
   private $envs = array();
 
+  /** List of allowable filters */
+  private $allowed_filters = [
+    '__return_false',
+    '__return_true',
+    '__return_empty_array',
+    '__return_zero',
+    '__return_null',
+    '__return_empty_string'
+  ];
+
   public function __construct($secret = false) {
     $this->secret = $secret;
 
@@ -98,14 +108,24 @@ class Config {
           /**
            * Define the constant
            */
+
           define($name, $decrypted);
 
           /**
            * Update WordPress Admin option if it is an option
            */
+
           if (substr($name, 0, 10) === 'WP_OPTION_') {
             update_option(strtolower(str_replace('WP_OPTION_', '', $name)),
               $decrypted);
+          }
+
+          /**
+           * Create a filter if the option is a filter
+           */
+
+          if (substr($name, 0, 10) === 'WP_FILTER_' && in_array($decrypted, $allowed_filters)) {
+            add_filter(strtolower(str_replace('WP_FILTER_', '', $name)), $decrypted);
           }
         }
       }

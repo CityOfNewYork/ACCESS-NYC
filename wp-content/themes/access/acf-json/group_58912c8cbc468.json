@@ -53,11 +53,13 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "collapsed": "",
             "min": 0,
             "max": 2,
-            "layout": "table",
+            "layout": "row",
             "button_label": "",
-            "collapsed": "",
             "sub_fields": [
                 {
                     "key": "field_58912c8d18ddd",
@@ -137,7 +139,7 @@
                     "label": "Link Type",
                     "name": "link_type",
                     "type": "select",
-                    "instructions": "Navigational links show as green buttons. Functional buttons show as blue buttons.",
+                    "instructions": "Refer to different button types and their use cases in the <a href=\"accesspatterns.cityofnewyork.us\/buttons\" target=\"_blank\">ACCESS NYC Patterns documentation<\/a>.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -145,16 +147,19 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 0,
                     "choices": {
-                        "secondary": "Navigational",
-                        "primary": "Functional"
+                        "primary": "Primary",
+                        "secondary": "Secondary",
+                        "tertiary": "Tertiary",
+                        "covid-response": "COVID Response"
                     },
                     "default_value": [],
                     "allow_null": 0,
                     "multiple": 0,
                     "ui": 0,
-                    "ajax": 0,
                     "return_format": "value",
+                    "ajax": 0,
                     "placeholder": ""
                 },
                 {
@@ -239,7 +244,7 @@
             "key": "field_58a60d6ebd0be",
             "label": "Featured Programs Subheading",
             "name": "featured_programs_subheading",
-            "type": "text",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -249,10 +254,11 @@
                 "id": ""
             },
             "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0,
+            "wpml_cf_preferences": 0
         },
         {
             "key": "field_58912c8ce0c21",
@@ -267,18 +273,19 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
             "post_type": [
                 "programs"
             ],
-            "taxonomy": [],
-            "min": "",
-            "max": 4,
+            "taxonomy": "",
             "filters": [
                 "search",
-                "post_type",
                 "taxonomy"
             ],
             "elements": "",
+            "min": "",
+            "max": 4,
             "return_format": "object"
         },
         {
@@ -299,6 +306,26 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_5e9f0e9cad067",
+            "label": "Contact Us Text",
+            "name": "contact_us_text",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0,
+            "wpml_cf_preferences": 0
         },
         {
             "key": "field_58acb11629be8",
@@ -406,5 +433,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1555360019
+    "modified": 1587492213
 }

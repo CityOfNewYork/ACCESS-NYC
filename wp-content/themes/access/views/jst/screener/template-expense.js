@@ -7,7 +7,7 @@ __p+='<div id="screener-person-'+
 ((__t=( personIndex ))==null?'':__t)+
 '-expense-'+
 ((__t=( matrixIndex ))==null?'':__t)+
-'" class="js-matrix-item">\n  <hr class="divider-light">\n\n  <div class="c-question">\n    ';
+'" class="js-matrix-item">\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div class="c-question">\n    ';
  if (matrixIndex === 0) { 
 __p+='\n    <label class="c-question__label" for="person-'+
 ((__t=( personIndex ))==null?'':__t)+

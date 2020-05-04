@@ -1,0 +1,156 @@
+{
+    "key": "group_588bb8786241g",
+    "title": "Site Alert Fields",
+    "fields": [
+        {
+            "key": "field_58a4af5d01e8f",
+            "label": "Content",
+            "name": "alert_content",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "default_value": "",
+            "delay": 0
+        },
+        {
+            "key": "field_58a4af7901e90",
+            "label": "Alert Icon",
+            "name": "alert_icon",
+            "type": "select",
+            "instructions": "Reference the <a href=\"http:\/\/localhost:7000\/icons#status-icons\" target=\"_blank\">Icon Documentation<\/a> to preview available icons.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "info": "Informational (\"i\" icon)",
+                "success": "Success (checkmark icon)",
+                "warning": "Warning (exclamation icon)",
+                "urgent": "Error (\"x\" icon)"
+            },
+            "default_value": [
+                "info"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_58a4afa001e91",
+            "label": "Alert Color",
+            "name": "alert_color",
+            "type": "select",
+            "instructions": "Reference the <a href=\"https:\/\/accesspatterns.cityofnewyork.us\/alert-box\" target=\"_blank\">Alert Box Documentation<\/a> to preview available colors.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "info": "Informational (blue)",
+                "success": "Success (green)",
+                "warning": "Warning (yellow)",
+                "urgent": "Urgent (red)",
+                "covid-response": "COVID Response (purple)"
+            },
+            "default_value": [
+                "info"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5e86296d6c6c7",
+            "label": "Alert Sitewide",
+            "name": "alert_sitewide",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5e750858e9c43",
+            "label": "Location",
+            "name": "location",
+            "type": "checkbox",
+            "instructions": "Select a site view for this alert to appear in.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "screener": "Screener",
+                "programs": "Programs",
+                "locations": "Locations",
+                "pages": "Pages",
+                "single": "Single (select this if you want to display the alert in the single view selected location(s) above as well)"
+            },
+            "allow_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "alert"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1587493153
+}

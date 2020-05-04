@@ -1,0 +1,17 @@
+font {
+  pointer-events: none;
+}
+
+a {
+  pointer-events: all;
+}
+
+/* .goog-te-banner-frame {
+  display: none !important;
+} */
+
+/* body {
+  top: auto !important;
+  min-height: auto !important;
+  position: static !important;
+} */

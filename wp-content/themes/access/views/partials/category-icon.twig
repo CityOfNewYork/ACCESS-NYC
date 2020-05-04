@@ -1,7 +1,7 @@
-{#
-  Setting a length here to strip the language code from the category slug
-  and use a single sprite image for all languages.
-#}
+{##
+ # Setting a length here to strip the language code from the category slug
+ # and use a single sprite image for all languages.
+ #}
 {% for category in post.terms('programs') %}
   {% if language_code != 'en' %}
     {% set langLength = (language_code | length + 1) * -1 %}
@@ -9,8 +9,9 @@
   {% else %}
     {% set catSlug = category.slug %}
   {% endif %}
-    <svg class="icon icon-card-{{ catSlug }}"{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %} role="img">
-      <title id="icon-card-{{ catSlug }}_title">{{ category.name }}</title>
-      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-card-{{ catSlug }}"></use>
-    </svg>
+  <svg class="icon icon-card-{{ catSlug }}-v2 text-blue-bright fill-blue-light"{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %} role="img">
+    <title id="icon-card-{{ catSlug }}_title">{{ category.name }}</title>
+
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-card-{{ catSlug }}-v2"></use>
+  </svg>
 {% endfor %}

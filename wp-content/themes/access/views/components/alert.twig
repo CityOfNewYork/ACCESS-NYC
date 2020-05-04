@@ -1,0 +1,11 @@
+<article class="c-alert-box color-{{ this.alert_color }}-status color-mid-background {{ class }}" role="alert">
+  <div class="c-alert-box__icon">
+    <svg aria-hidden="true" class="c-alert-box__svg icon icon-{{ this.alert_icon }}">
+      <use xlink:href="#icon-{{ this.alert_icon }}"></use>
+    </svg>
+  </div>
+
+  <div class="c-alert-box__body">
+    {{ this.alert_content }}
+  </div>
+</article>

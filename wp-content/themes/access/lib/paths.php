@@ -1,10 +1,14 @@
 <?php
 
 /**
- * Path organization for different scripts
+ * Path shortands for different files
  */
 
-namespace Config\Paths;
+namespace Path;
+
+function lib($name) {
+  return get_template_directory() . "/lib/$name.php";
+}
 
 function controller($name) {
   return get_template_directory() . "/controllers/$name.php";
@@ -14,17 +18,46 @@ function functions() {
   return get_template_directory() . '/lib/functions.php';
 }
 
-function blocks($uri = false) {
-  if ($uri) {
-    return get_template_directory_uri() . '/blocks/';
+/**
+ * Gutenberg Blocks
+ */
+
+function block($name = false, $uri = false) {
+  if ($name & $uri) {
+    return get_template_directory_uri() . "/blocks/$name";
+  } elseif ($name) {
+    return get_template_directory() . "/blocks/$name.php";
   } else {
     return get_template_directory() . '/blocks/';
   }
 }
 
 function require_blocks() {
-  foreach (scandir(blocks()) as $filename) {
-    $path = blocks() . $filename;
+  foreach (scandir(block()) as $filename) {
+    $path = block() . $filename;
+
+    if (is_file($path)) {
+      require $path;
+    }
+  }
+}
+
+/**
+ * Shortcodes
+ */
+
+function shortcode($name = false) {
+  if ($name) {
+    return get_template_directory() . "/shortcodes/$name.php";
+  } else {
+    return get_template_directory() . '/shortcodes/';
+  }
+}
+
+function require_shortcodes() {
+  foreach (scandir(shortcode()) as $filename) {
+    $path = shortcode($filename);
+
     if (is_file($path)) {
       require $path;
     }

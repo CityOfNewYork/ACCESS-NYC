@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <hr class="divider-light">
+      <hr class="divider screen-tablet:divider-large border-grey-light">
 
       <div class="c-question">
         <label class="c-question__label" for="hoh-relation">{{ __('What is your relationship to the head of the household? I am their:', 'accessnyc-screener') }}</label>
@@ -68,12 +68,12 @@
         </div>
       </div>
 
-      <hr class="divider-light">
+      <hr class="divider screen-tablet:divider-large border-grey-light">
 
       <fieldset class="c-question">
         <legend class="c-question__label">{{ __('Do any of these apply to them?', 'accessnyc-screener') }}</legend>
         <p>{{ __('It’s OK to pick more than one.', 'accessnyc-screener') }}</p>
-        <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
+        <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">
           <label class="checkbox">
             <input class="js-screener-toggle" type="checkbox" name="Person[1].student" value="1" data-toggles="#screener-is-hoh-full-time-student" data-type="boolean">
             <span class="checkbox__label">{{ __('Student', 'accessnyc-screener') }}</span>
@@ -133,11 +133,11 @@
         </div>
       </fieldset>
 
-      <hr class="divider-light">
+      <hr class="divider screen-tablet:divider-large border-grey-light">
 
       <fieldset class="c-question">
         <legend class="c-question__label mb-3">{{ __('Do they receive any of these benefits?', 'accessnyc-screener') }}</legend>
-        <div class="c-question__container screen-tablet:layout--columns js-screener-checkbox-group">
+        <div class="c-question__container screen-tablet:layout-columns js-screener-checkbox-group">
           <label class="checkbox">
             <input type="checkbox" name="Person[1].benefitsMedicaid" value="1" data-type="boolean">
             <span class="checkbox__label">{{ __('Medicaid', 'accessnyc-screener') }}</span>
@@ -153,7 +153,7 @@
         </div>
       </fieldset>
 
-      <hr class="divider-light">
+      <hr class="divider screen-tablet:divider-large border-grey-light">
 
       <fieldset class="c-question">
         <legend class="c-question__label">{{ __('Do they have an income?', 'accessnyc-screener') }}</legend>
@@ -181,7 +181,7 @@
       </fieldset>
       <div class="hidden js-screener-matrix screener-matrix" id="hoh-income"></div>
 
-      <hr class="divider-light">
+      <hr class="divider screen-tablet:divider-large border-grey-light">
 
       <fieldset class="c-question" id="screener-have-expenses-head-of-household">
         <legend class="c-question__label">{{ __('Do they have any expenses?', 'accessnyc-screener') }}</legend>
@@ -212,7 +212,7 @@
     </div>
 
     <div class="pt-2">
-      <a class="btn btn-primary btn-next btn-small js-screener-validate-step" href="#step-9" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
+      <a class="btn btn-primary btn-next text-small js-screener-validate-step" href="#step-9" role="button">{{ __('Continue', 'accessnyc-screener') }}</a>
     </div>
   </div>
 </div>{# /#step-8 #}

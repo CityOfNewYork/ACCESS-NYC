@@ -2,9 +2,9 @@
   data-track-data='[{"WT.si_n": "ScreeningHH"},{"WT.si_p": "Recap"},{"WT.si_cs": 1}]'>
   <div data-js="step-title" class="{{ styles.number }} hidden" aria-hidden="true">{{ __('Is all of your information correct?', 'accessnyc-screener') }}</div>
 
-  <h1 class="text-color-blue-dark px-3 pt-3" data-js="question">{{ __('Ok. Here’s what we’ve got so far:', 'accessnyc-screener') }}</h1>
+  <h1 class="text-blue-dark px-3 pt-3" data-js="question">{{ __('Ok. Here’s what we’ve got so far:', 'accessnyc-screener') }}</h1>
 
-  <div class="p-3 screen-tablet:m-3 screen-desktop:p-4 bg-color-grey-lightest">
+  <div class="p-3 screen-tablet:m-3 screen-desktop:p-4 bg-grey-lightest">
     <div id="recap-body" class="pb-4"></div>
 
     <div id="screener-recaptcha-container" class="recap-captcha hidden pb-4">
@@ -20,7 +20,7 @@
 
     <div data-js="spinner" style="display:none;">
       <div class="flex justify-center">
-        {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
+        {% include 'partials/spinner.twig' with {this: {class: 'icon-4 text-yellow-access'}} only %}
       </div>
     </div>
   </div>

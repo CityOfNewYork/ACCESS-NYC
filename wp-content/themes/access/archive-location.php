@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template name: Locations
  *
@@ -8,16 +9,31 @@
  * We only want to list Programs that are reverse-related to a location so we
  * need to do a reverse-relationship query and weed out any programs that are
  * not related.
+ *
+ * @author Blue State Digital
  */
 
+/**
+ * Enqueue
+ */
+
+// Main
 enqueue_language_style('style');
+
+// Integrations
 enqueue_inline('rollbar');
 enqueue_inline('webtrends');
 enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
+
+// Main
 enqueue_script('locations');
+
+/**
+ * Context
+ */
 
 $context = Timber::get_context();
 
@@ -87,6 +103,23 @@ foreach ($categories as $category) {
   }
 }
 
-$templates = array('locations/locations.twig');
+$context['post'] = Timber::get_post();
 
-Timber::render($templates, $context);
+/**
+ * Alerts
+ */
+
+$alerts = Timber::get_posts(array(
+  'post_type' => 'alert',
+  'posts_per_page' => -1
+));
+
+$context['post']->alerts = array_filter($alerts, function($p) {
+  return in_array('locations', array_values($p->custom['location']));
+});
+
+/**
+ * Render the view
+ */
+
+Timber::render('locations/archive.twig', $context);

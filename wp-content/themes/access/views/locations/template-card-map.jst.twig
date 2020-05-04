@@ -1,5 +1,5 @@
 <% locations.forEach(function(location) { %>
-<li class="js-map-location c-card px-2 py-3 border-b border-color-grey-light" data-marker="<%= location.id %>" tabindex="0" itemscope itemtype="https://schema.org/<% if (location.isGovtOffice) { %>GovernmentOffice<% } else { %>Organization<% } %>">
+<li class="js-map-location c-card px-2 py-3 mb-0 border-b border-grey-light" data-marker="<%= location.id %>" tabindex="0" itemscope itemtype="https://schema.org/<% if (location.isGovtOffice) { %>GovernmentOffice<% } else { %>Organization<% } %>">
   <div class="c-card__icon m-0">
     <% if (location.isGovtOffice) { %>
     <img src="/wp-content/themes/access/assets/img/map-pin-blue.png" width="33" height="40" alt="Government office map marker">
@@ -9,16 +9,16 @@
   </div>
   <div class="c-card__body">
     <h3 class="type-h4 serif m-0"><%= location.name %></h3>
-    <p class="text-font-size-small text-color-grey-mid m-0">
+    <p class="text-small text-grey-mid m-0">
       <% print(location.type) %> |
       <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
         <span itemprop="streetAddress"><% print(location.address.street) %></span>
       </span>
     </p>
-    <p class="text-font-size-small text-color-grey-mid m-0" itemprop="description">
+    <p class="text-small text-grey-mid m-0" itemprop="description">
       <% print(location.programs.map(function(program) { return localize(program) }).join(", ")) %>
     </p>
-    <a href="<%= location.link %>" class="link-more text-font-size-small" itemprop="url" target="_blank">{{ __("more about this location", "accessnyc-locations")|trim|escape("js") }}</a>
+    <a href="<%= location.link %>" class="link-more text-small" itemprop="url" target="_blank">{{ __("more about this location", "accessnyc-locations")|trim|escape("js") }}</a>
   </div>
 </li>
 <% }); %>
