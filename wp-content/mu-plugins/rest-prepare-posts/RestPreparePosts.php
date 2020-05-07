@@ -110,7 +110,10 @@ class RestPreparePosts {
    * @return  Object       If REST method exists in post ctrl, return items.
    */
   public function getTimberContext($id) {
-    $path = get_stylesheet_directory() . '/controllers/' . $this->type . '.php';
+    $slug = str_replace('_', '-', $this->type);
+    $class = str_replace(' ', '', ucwords(str_replace('-', ' ', $slug)));
+
+    $path = get_stylesheet_directory() . '/controllers/' . $slug . '.php';
 
     if (file_exists($path)) {
       require_once $path;
@@ -118,7 +121,7 @@ class RestPreparePosts {
       return null;
     }
 
-    $cntrlClass = "Controller\\" . ucfirst($this->type);
+    $cntrlClass = "Controller\\" . $class;
 
     $cntrlPost = new $cntrlClass($id);
 
