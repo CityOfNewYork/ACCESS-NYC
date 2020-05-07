@@ -30,7 +30,7 @@
       </div>
 
       <div>
-        <h1 class="c-header__descriptor" itemprop="name">
+        <h1 class="c-header__descriptor" itemprop="alterName">
           {% if post.status %}
           <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
           {% endif %}
@@ -53,8 +53,9 @@
           </span>
           {% endif %}
         </h2>
-        <p itemprop="datePosted" class="color__alt mt-1">
+        <p class="color__alt mt-1">
           {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+          <meta itemprop="datePosted" content="{{ post.post_modified }}" />
         </p>
       </div>
     </header>
@@ -147,6 +148,10 @@
         <meta itemprop="serviceType" content="http://schema.org/{{ post.structured_data_service_type[0] }}" />
       {% endif %}
     </div>
+
+    {% if post.item_scope == 'SpecialAnnouncement' %}
+      <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
+    {% endif %}
 
     <footer class="wrap pt-4">
       <p class="color__alt">

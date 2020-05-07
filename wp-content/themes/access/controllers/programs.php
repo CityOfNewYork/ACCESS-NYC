@@ -158,7 +158,7 @@ class Programs extends Timber\Post {
    */
 
   public function getItemScope() {
-    if ($this->status == 'covid-response') {
+    if ($this->custom['program_status_type'] == 'covid-response') {
       $item_scope = 'SpecialAnnouncement';
     } else {
       $item_scope = 'GovernmentService';
