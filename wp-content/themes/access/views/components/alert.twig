@@ -1,6 +1,8 @@
-<article itemscope itemprop="SpecialAnnouncement" itemtype="https://schema.org/SpecialAnnouncement" class="c-alert-box color-{{ this.status.type }}-status color-mid-background {{ class }}" role="alert">
-  <meta itemprop="name" content="{{ this.post_title }}" />
-  <meta itemprop="datePosted" content="{{ this.post_date }}" />
+<article {% if this.item_scope %}itemscope itemprop="{{ this.item_scope }}" itemtype="https://schema.org/{{ this.item_scope }}" {% endif %}class="c-alert-box color-{{ this.status.type }}-status color-mid-background {{ class }}" role="alert">
+  {% if this.item_scope %}
+    <meta itemprop="name" content="{{ this.post_title }}" />
+    <meta itemprop="datePosted" content="{{ this.post_date }}" />
+  {% endif %}
 
   <div class="c-alert-box__icon">
     <svg aria-hidden="true" class="c-alert-box__svg icon icon-{{ this.alert_icon }}">
@@ -8,11 +10,11 @@
     </svg>
   </div>
 
-  <div itemprop="text" class="c-alert-box__body">
-    {{ this.alert_content }}
+  <div {% if this.itemprop_body %}itemprop="{{ this.itemprop_body }}" {% endif%}class="c-alert-box__body">
+      {{ this.alert_content }}
   </div>
 
-  {% if this.alert_color == 'covid-response' %}
+  {% if this.item_scope %}
     <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
   {% endif %}
 </article>

@@ -40,6 +40,8 @@ class Alert extends Timber\Post {
 
     $this->item_scope = $this->getItemScope();
 
+    $this->itemprop_body = $this->getItempropBody();
+
     return $this;
   }
 
@@ -80,6 +82,22 @@ class Alert extends Timber\Post {
     }
 
     return $item_scope;
+  }
+
+  /**
+   * Get the itemprop for body element
+   *
+   * @return  String  The itemprop
+   */
+
+  public function getItempropBody() {
+    $itemprop_body = false;
+
+    if ($this->getStatus()['type'] === self::STATUS_COVID) {
+      $itemprop_body = 'text';
+    }
+
+    return $itemprop_body;
   }
 
   /**
