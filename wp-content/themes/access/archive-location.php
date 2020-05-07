@@ -13,6 +13,8 @@
  * @author Blue State Digital
  */
 
+require_once Path\controller('alert');
+
 /**
  * Enqueue
  */
@@ -117,6 +119,11 @@ $alerts = Timber::get_posts(array(
 $context['post']->alerts = array_filter($alerts, function($p) {
   return in_array('locations', array_values($p->custom['location']));
 });
+
+// Extend alerts with Timber Post Controller
+$context['post']->alerts = array_map(function($post) {
+  return new Controller\Alert($post);
+}, $context['post']->alerts);
 
 /**
  * Render the view

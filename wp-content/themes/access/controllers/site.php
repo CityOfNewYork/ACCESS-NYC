@@ -17,6 +17,8 @@ class Site extends TimberSite {
    * Constructor
    */
   public function __construct() {
+    require_once __dir__ . '/alert.php';
+
     add_filter('timber_context', array($this, 'addToContext'));
 
     parent::__construct();
@@ -80,10 +82,12 @@ class Site extends TimberSite {
      * Site Alerts
      */
 
-    $alerts = Timber::get_posts(array(
+    $alerts = array_map(function($post) {
+      return new Alert($post);
+    }, Timber::get_posts(array(
       'post_type' => 'alert',
       'posts_per_page' => -1
-    ));
+    )));
 
     /** Get the first alert that is set to site wide */
     $context['alert_sitewide'] = reset(array_filter($alerts, function($post) {
