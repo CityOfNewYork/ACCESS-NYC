@@ -213,6 +213,8 @@ class Screener {
     if (viewCount >= 10) {
       this._initRecaptcha();
       viewCount = 0;
+    } else {
+      window.screenerCallback = () => {};
     }
 
     // `2/1440` sets the cookie to expire after two minutes.
@@ -318,8 +320,13 @@ class Screener {
     window.screenerCallback = () => {
       window.grecaptcha.render(document.getElementById('screener-recaptcha'), {
         'sitekey': Utility.CONFIG.GRECAPTCHA_SITE_KEY,
-        'callback': 'screenerRecaptcha',
-        'expired-callback': 'screenerRecaptchaReset'
+        'callback': () => {
+          this._recaptchaVerified = true;
+          this._removeError(document.getElementById('screener-recaptcha'));
+        },
+        'expired-callback': () => {
+          this._recaptchaVerified = false;
+        }
       });
 
       $('#screener-recaptcha-container').removeClass(Screener.CssClass.HIDDEN);
@@ -327,14 +334,14 @@ class Screener {
       this._recaptchaRequired = true;
     };
 
-    window.screenerRecaptcha = () => {
-      this._recaptchaVerified = true;
-      this._removeError(document.getElementById('screener-recaptcha'));
-    };
+    // window.screenerRecaptcha = () => {
+    //   this._recaptchaVerified = true;
+    //   this._removeError(document.getElementById('screener-recaptcha'));
+    // };
 
-    window.screenerRecaptchaReset = () => {
-      this._recaptchaVerified = false;
-    };
+    // window.screenerRecaptchaReset = () => {
+    //   this._recaptchaVerified = false;
+    // };
 
     this._recaptchaRequired = true;
 
