@@ -27,6 +27,11 @@ class HomepageTout extends Timber\Post {
     }
 
     $this->status = $this->getStatus();
+    /**
+     * Structure Data itemtype
+     */
+    $this->item_scope = $this->getItemScope();
+
 
     return $this;
   }
@@ -68,5 +73,21 @@ class HomepageTout extends Timber\Post {
     } else {
       return $status;
     }
+  }
+
+  /**
+   * Get the itemtype for structure data
+   *
+   * @return  String  The itemtype
+   */
+
+  public function getItemScope() {
+    if ($this->custom['tout_status_type'] == 'covid-response') {
+      $item_scope = 'SpecialAnnouncement';
+    } else {
+      $item_scope = 'GovernmentService';
+    }
+
+    return $item_scope;
   }
 }

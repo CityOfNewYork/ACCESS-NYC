@@ -1,4 +1,4 @@
-<article itemscope itemtype="http://schema.org/GovernmentService" class="c-card">
+<article itemscope itemtype="http://schema.org/{{ post.item_scope }}" class="c-card">
   <div class="c-card__icon">
     {% include 'elements/icon.twig' with {
       'icon': 'icon-card-' ~ post.category.slug ~ '-v' ~ post.icon.version,
@@ -8,7 +8,7 @@
   </div>
 
   <div class="c-card__body">
-    <h3 itemprop="name" class="c-card__title">
+    <h3 itemprop="alternateName" class="c-card__title">
       {% if post.status %}
       <mark class="badge color-{{ post.status.type }}-status">{{ post.status.text }}</mark>
       {% endif %}
@@ -31,6 +31,10 @@
       <p class="hide-for-print">
         <a itemprop="url" class="btn btn-secondary btn-next" href="{{ post.get_permalink }}{% if "how-to-apply" in post.show_sections %}?step=how-to-apply{% endif %}" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>{{__('Apply', 'accessnyc-results')}}</a>
       </p>
+      {% endif %}
+
+      {% if post.item_scope == 'SpecialAnnouncement' %}
+        <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
       {% endif %}
     </div>
   </div>
