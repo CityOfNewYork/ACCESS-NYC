@@ -55,8 +55,18 @@ import localize from 'utilities/localize/localize';
   new Toggle();
   new Accordion();
   new Filter();
-  new WebShare();
   new Copy();
+
+  /**
+   * Instantiate Web Share and tracking callback
+   */
+  new WebShare({
+    callback: () => {
+      Utility.track('Web Share', [
+        {action: 'web-share/shared'}
+      ]);
+    }
+  });
 
   /**
    * Instantiate Alert Banner

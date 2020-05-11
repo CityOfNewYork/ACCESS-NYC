@@ -1,6 +1,6 @@
 {
     "key": "group_5eb97faaae31b",
-    "title": "Web Share Content and Open Graph Meta",
+    "title": "Web Share and Open Graph (OG) meta",
     "fields": [
         {
             "key": "field_5eb981510ade2",
@@ -25,7 +25,7 @@
         },
         {
             "key": "field_5eb97fb30adde",
-            "label": "Open Graph Title",
+            "label": "OG Title",
             "name": "og_title",
             "type": "text",
             "instructions": "Will display as the page title in social media posts. Only use if different from post title.",
@@ -46,7 +46,7 @@
         },
         {
             "key": "field_5eb97ff40addf",
-            "label": "Open Graph Description",
+            "label": "OG Description",
             "name": "og_description",
             "type": "text",
             "instructions": "Will display as the content in social media posts. Leave blank to use default page content.",
@@ -67,10 +67,10 @@
         },
         {
             "key": "field_5eb980150ade0",
-            "label": "Open Graph Image",
+            "label": "OG Image",
             "name": "og_image",
             "type": "image",
-            "instructions": "Will display as the preview image in social media posts.",
+            "instructions": "Will display as the preview image in social media posts. Be sure the media item has Alt Text for screen readers.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -79,7 +79,8 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "return_format": "array",
+            "wpml_cf_preferences": 0,
+            "return_format": "url",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
@@ -88,8 +89,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "",
-            "wpml_cf_preferences": 0
+            "mime_types": ""
         }
     ],
     "location": [
@@ -123,5 +123,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1589222450
+    "modified": 1589229299
 }
