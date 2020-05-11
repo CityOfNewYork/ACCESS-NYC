@@ -14,7 +14,7 @@
   </head>
 
   <body data-template="base.twig" class="{% set _bodyClass = block('body_class') %}{% if _bodyClass %} {{ _bodyClass|trim }}{% endif %}">
-    {{ function('wp_body_open') }}
+    {{ fn('wp_body_open') }}
 
     <div class="page-wrapper">
       <a class="sr-only sr-only-focusable" href="#content">{{ __('Skip to main content', 'accessnyctheme') }}</a>
@@ -45,15 +45,21 @@
 
       {% block content %}{% endblock %}
 
+      {# <div class="sticky bottom-0">
+        <div class="wrap text-end pb-3">
+          <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
+        </div>
+
+        {% if alert_sitewide %}
+          {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+        {% endif %}
+      </div> #}
+
       {% block footer %}
         <footer class="o-footer color-mid-background">
           {% include 'objects/footer.twig' %}
         </footer>
       {% endblock %}
-
-      {% if alert_sitewide %}
-      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
-      {% endif %}
     </div>
 
     {% block scripts_footer %}{% endblock %}

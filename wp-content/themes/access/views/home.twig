@@ -111,11 +111,11 @@
           </div>
 
           {# Banner Alert #}
-          {% if alert_sitewide %}
-          <div class="py-3">
+          {# {% if alert_sitewide %}
+          <div class="sticky top-0 py-3">
             {% include 'components/alert.twig' with {this: alert_sitewide} %}
           </div>
-          {% endif %}
+          {% endif %} #}
 
           {# Contact Us #}
           <footer class="py-2 {% if post.contact_us_text == '' %}text-center{% endif %}">
@@ -140,5 +140,11 @@
         </div>
       </div>
     </div>
+
+    {% if alert_sitewide %}
+    <div class="sticky bottom-0">
+      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true, static: true} only %}
+    </div>
+    {% endif %}
   </main>
 {% endblock %}
