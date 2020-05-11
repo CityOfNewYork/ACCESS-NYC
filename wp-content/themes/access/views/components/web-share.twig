@@ -23,13 +23,13 @@
         </svg>{{ __('Copy URL', 'accessnyctheme') }}
       </button>
 
-      <a class="c-web-share__item btn btn-small btn-primary" href="https://www.facebook.com/sharer/sharer.php?u={{ this.share.url }}" target="_blank">
+      <a class="c-web-share__item btn btn-small btn-primary" href="https://www.facebook.com/sharer/sharer.php?u={{ this.share.url|url_encode }}" target="_blank">
         <svg class="c-web-share__icon icon-ui">
           <use xlink:href="#icon-ui-facebook"></use>
         </svg>{{ __('Facebook', 'accessnyctheme') }}
       </a>
 
-      <a class="c-web-share__item btn btn-small btn-primary me-0" href="https://twitter.com/intent/tweet?text={{ this.share.text }}%20{{ this.share.url }}" target="_blank">
+      <a class="c-web-share__item btn btn-small btn-primary me-0" href="https://twitter.com/intent/tweet?text={{ this.share.text|url_encode }}%20{{ this.share.url|url_encode }}" target="_blank">
         <svg class="c-web-share__icon icon-ui">
           <use xlink:href="#icon-ui-twitter"></use>
         </svg>{{ __('Twitter', 'accessnyctheme') }}
