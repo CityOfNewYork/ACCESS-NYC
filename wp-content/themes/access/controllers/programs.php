@@ -55,6 +55,12 @@ class Programs extends Timber\Post {
       'url' => wp_get_shortlink()
     );
 
+    /**
+     * Structure Data itemtype
+     */
+    
+    $this->item_scope = $this->getItemScope();
+
     return $this;
   }
 
@@ -150,6 +156,22 @@ class Programs extends Timber\Post {
     $key = ($type || isset($type)) ? $type : self::STATUS_DEFAULT;
 
     return self::ICON_COLORS[$key];
+  }
+
+  /**
+   * Get the itemtype for structure data
+   *
+   * @return  String  The itemtype
+   */
+
+  public function getItemScope() {
+    if ($this->custom['program_status_type'] == 'covid-response') {
+      $item_scope = 'SpecialAnnouncement';
+    } else {
+      $item_scope = 'GovernmentService';
+    }
+
+    return $item_scope;
   }
 
   /**
