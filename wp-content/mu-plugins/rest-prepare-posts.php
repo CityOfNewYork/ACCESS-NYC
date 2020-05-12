@@ -11,7 +11,7 @@ use RestPreparePosts\RestPreparePosts as RestPreparePosts;
 require_once plugin_dir_path(__FILE__) . '/rest-prepare-posts/RestPreparePosts.php';
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-$types = ['programs', 'location'];
+$types = ['programs', 'location', 'homepage_tout', 'alert'];
 
 // Render the ACF "Show in REST" field
 RestPreparePosts::renderRestFieldSetting();

@@ -170,6 +170,7 @@ add_action('init', function() {
       ),
       'description' => __('A site alert.'),
       'public' => true,
+      'show_in_rest' => true,
       'exclude_from_search' => true,
       'show_ui' => true,
       'hierarchical' => false,
