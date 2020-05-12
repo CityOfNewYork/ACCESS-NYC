@@ -82,10 +82,10 @@ class HomepageTout extends Timber\Post {
    */
 
   public function getItemScope() {
+    $item_scope = false;
+
     if ($this->custom['tout_status_type'] == 'covid-response') {
       $item_scope = 'SpecialAnnouncement';
-    } else {
-      $item_scope = 'GovernmentService';
     }
 
     return $item_scope;

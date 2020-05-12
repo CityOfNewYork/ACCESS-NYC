@@ -30,7 +30,7 @@
       </div>
 
       <div>
-        <h1 class="c-header__descriptor" itemprop="alterName">
+        <h1 class="c-header__descriptor" itemprop="alternateName">
           {% if post.status %}
           <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
           {% endif %}
@@ -135,19 +135,21 @@
       </div>
     </section>
 
-    <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
-      {% if post.structured_data_url %}
-        <meta itemprop="url" content="{{ post.structured_data_url }}" />
-      {% endif %}
+    {% if post.item_scope == 'SpecialAnnouncement' %}
+      <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
+        {% if post.structured_data_url %}
+          <meta itemprop="url" content="{{ post.structured_data_url }}" />
+        {% endif %}
 
-      <div itemprop="provider" itemtype="http://schema.org/GovernmentOrganization" itemscope>
-        <meta itemprop="name" content="{{ post.government_agency }}" />
+        <div itemprop="provider" itemtype="http://schema.org/GovernmentOrganization" itemscope>
+          <meta itemprop="name" content="{{ post.government_agency }}" />
+        </div>
+
+        {% if post.structured_data_service_type %}
+          <meta itemprop="serviceType" content="http://schema.org/{{ post.structured_data_service_type[0] }}" />
+        {% endif %}
       </div>
-
-      {% if post.structured_data_service_type %}
-        <meta itemprop="serviceType" content="http://schema.org/{{ post.structured_data_service_type[0] }}" />
-      {% endif %}
-    </div>
+    {% endif %}
 
     {% if post.item_scope == 'SpecialAnnouncement' %}
       <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />

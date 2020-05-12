@@ -10,11 +10,11 @@
     </svg>
   </div>
 
-  <div {% if this.itemprop_body %}itemprop="{{ this.itemprop_body }}" {% endif%}class="c-alert-box__body">
+  <div {% if this.item_scope %}itemprop="{{ this.itemprop_body }}" {% endif%}class="c-alert-box__body">
       {{ this.alert_content }}
   </div>
 
-  {% if this.item_scope %}
+  {% if this.item_scope == 'SpecialAnnouncement' %}
     <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
   {% endif %}
 </article>
