@@ -1,21 +1,22 @@
 <div class="o-mobile-nav color-mid-background print:hidden" id="o-mobile-nav" aria-hidden="true">
   <a class="o-mobile-nav__close" href="#o-mobile-nav" data-js="o-mobile-nav track" aria-expanded="false" data-track-key="Main Nav" data-track-data='[{"action": "menu/close"}]'>
-    {{ __('close &amp; return to site', 'accessnyctheme') }}<svg class="icon icon-ui-x">
+    {{ __('close &amp; return to site', 'accessnyctheme') }}<svg class="icon icon-ui icon-3">
       <use xlink:href="#icon-ui-x"></use>
     </svg>
   </a>
 
   <div class="o-mobile-nav__inner">
     <h4 class="o-mobile-nav__header">
-      {{__('Get help now', 'accessnyctheme')}}
+      {{ __('Get help now', 'accessnyctheme') }}
     </h4>
 
     <nav class="nav-block">
       {% include 'partials/nav.twig' %}
+
       <a href="{{ url_base }}/?s=" data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "search"}]'>
-        <svg class="icon icon-ui-search">
+        <svg class="icon icon-ui icon-3">
           <use xlink:href="#icon-ui-search"></use>
-        </svg>{{__('Search', 'accessnyctheme')}}
+        </svg>{{ __('Search', 'accessnyctheme') }}
       </a>
     </nav>
   </div>

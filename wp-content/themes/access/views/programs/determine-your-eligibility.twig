@@ -14,14 +14,16 @@
   {% if post.display_screen_for_eligibility_box %}
   <div class="c-alert-box bg-status-info mb-4 print:hidden">
     <div class="icon c-alert-box__icon" aria-hidden="true">
-      <div class="c-alert-box__svg bg-icon-info"></div>
+      <svg class="c-alert-box__svg icon-4">
+        <use xlink:href="#icon-info"></use>
+      </svg>
     </div>
 
     <div class="c-alert-box__body">
       <p>{{ __('Take a short survey to see if you might be eligible for this or 30 other programs.', 'accessnyc-program-detail') }}</p>
 
       <a class="btn btn-primary btn-small" href="{{ url_base }}/eligibility">
-        <svg class="icon icon-3 icon-screening pe-1" aria-hidden="true">
+        <svg class="icon icon-2" aria-hidden="true">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-screening"></use>
         </svg>{{ __('Am I Eligible?', 'accessnyc-program-detail') }}
       </a>

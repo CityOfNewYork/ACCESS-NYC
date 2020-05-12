@@ -62,18 +62,41 @@
           {% endif %}
         </section>
         {% endfor %}
+
+        <footer class="pb-3">
+          <p class="text-grey-mid m-0" itemprop="dateModified">
+            {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+          </p>
+        </footer>
       </div>
     </div>
 
-    <footer class="wrap pt-4">
-      <p class="text-grey-mid m-0" itemprop="dateModified">
-        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
-      </p>
-    </footer>
-  </article>
+    <div class="sticky bottom-0 pointer-events-none z-10">
+      <div class="wrap pb-3 flex justify-end items-end flex-col screen-tablet:flex-row">
+        {% include 'components/web-share.twig' with {this: {
+          class: 'mb-1 screen-tablet:mb-0 screen-tablet:me-2',
+          fallback_class: 'right-0 bottom-100',
+          fallback_style: 'width: 458px; max-width: calc(100vw - 32px);',
+          share: {
+            title: (post.custom.og_title) ? post.custom.og_title : post.title,
+            text: (post.custom.web_share_text) ? post.custom.web_share_text : site.description,
+            url: fn('wp_get_shortlink')
+          }
+        }} only %}
 
-  <div class="wrap sticky bottom-0 text-end pb-3">
-    <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
-  </div>
+        {# <a class="btn btn-small btn-primary mb-1 screen-tablet:mb-0 screen-tablet:me-2">
+          <svg class="icon-2 icon-ui">
+            <use xlink:href="#icon-ui-mail"></use>
+          </svg>{{ __('Subscribe', 'accessnyctheme') }}
+        </a> #}
+
+        <a href="#content" class="btn btn-small text-blue pointer-events-auto">{{ __('Back to top', 'accessnyctheme') }}</a>
+      </div>
+
+      {% if alert_sitewide %}
+      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+      {% endif %}
+    </div>
+  </article>
 </main>
 {% endblock %}

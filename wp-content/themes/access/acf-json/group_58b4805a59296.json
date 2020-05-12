@@ -49,7 +49,7 @@
             "label": "Sections",
             "name": "sections",
             "type": "repeater",
-            "instructions": "The <b>Section title<\/b> will appear above the section content and will be used as the link text in the jump nav. Use regular case or title case. Do not use ALL CAPS. It is more difficult to read and scan.\r\n<br><br>\r\nNotes for <b>Section Content<\/b>; Refer to the <a href=\"https:\/\/blueprint.cityofnewyork.us\/content\/plain-language-and-readability\/\" target=\"_blank\">plain language best practices<\/a> for guidance.\r\n<br><br>\r\n<code>&lt;p&gt;<\/code> and <code>&lt;br&gt;<\/code> tags are added automatically to content on the front-end with single and double line breaks in regular content (WYSIWYG) editors.\r\n<br><br>\r\nSection titles appear as <code>&lth3&gt;<\/code> tags so use <code>&lth4&gt;<\/code> or lower. \r\n<br><br>\r\nCustom elements and dynamic components also work in this field by inserting html with <b>Use Raw Content<\/b> checked. Refer to the <a href=\"https:\/\/accesspatterns.cityofnewyork.us\" target=\"_blank\">ACCESS NYC Patterns<\/a> for available patterns.",
+            "instructions": "The <b>Section title<\/b> will appear above the section content and will be used as the link text in the jump nav. Use regular case or title case. Do not use ALL CAPS. It is more difficult to read and scan.\r\n<br><br>\r\nNotes for <b>Section Content<\/b>; Refer to the <a href=\"https:\/\/blueprint.cityofnewyork.us\/content\/plain-language-and-readability\/\" target=\"_blank\">plain language best practices<\/a> for guidance.\r\n<br><br>\r\n<code>&lt;p&gt;<\/code> and <code>&lt;br&gt;<\/code> tags are added automatically to content on the front-end with single and double line breaks in regular content (WYSIWYG) editors.\r\n<br><br>\r\nSection titles appear as <code>&lth3&gt;<\/code> tags so use <code>&lth4&gt;<\/code> or lower. \r\n<br><br>\r\nEmbedded media items <b>must<\/b> have Alt Text for screen readers.\r\n<br><br>\r\nCustom elements and dynamic components also work in this field by inserting html with <b>Use Raw Content<\/b> checked. Refer to the <a href=\"https:\/\/accesspatterns.cityofnewyork.us\" target=\"_blank\">ACCESS NYC Patterns<\/a> for available patterns.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -239,5 +239,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1588601230
+    "modified": 1589229489
 }
