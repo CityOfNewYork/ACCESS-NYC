@@ -23,13 +23,13 @@
         </svg>{{ __('Copy URL', 'accessnyctheme') }}
       </button>
 
-      <a data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/facebook"}]' class="c-web-share__item btn btn-small btn-primary" href="https://www.facebook.com/sharer/sharer.php?u={{ this.share.url|url_encode }}" target="_blank" >
+      <a class="c-web-share__item btn btn-small btn-primary" href="https://www.facebook.com/sharer/sharer.php?u={{ this.share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/facebook"}]'>
         <svg class="c-web-share__icon icon-ui">
           <use xlink:href="#icon-ui-facebook"></use>
         </svg>{{ __('Facebook', 'accessnyctheme') }}
       </a>
 
-      <a data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/twitter"}]' class="c-web-share__item btn btn-small btn-primary me-0" href="https://twitter.com/intent/tweet?text={{ this.share.text|url_encode }}%20{{ this.share.url|url_encode }}" target="_blank">
+      <a class="c-web-share__item btn btn-small btn-primary me-0" href="https://twitter.com/intent/tweet?text={{ this.share.text|url_encode }}%20{{ this.share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/twitter"}]'>
         <svg class="c-web-share__icon icon-ui">
           <use xlink:href="#icon-ui-twitter"></use>
         </svg>{{ __('Twitter', 'accessnyctheme') }}
