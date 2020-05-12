@@ -1,5 +1,5 @@
 <div class="o-text-controller text-end print:hidden" data-js="text-controller">
-  {% spaceless %}
+  {% apply spaceless %}
   <button type="button" class="o-text-controller__control btn-link" aria-controls="aria-c-text-controller__options" aria-expanded="false" data-js="text-controller__control track" data-track-key="Text Controls" data-track-data='[{"action": "text-controls"}]'>
     <svg class="o-text-controller__icon o-text-controller__icon-full icon-ui icon-3 hidden screen-desktop:inline-block" aria-hidden="true">
       <use xlink:href="#icon-ui-settings"></use>
@@ -13,7 +13,7 @@
     <span class="o-text-controller__title-short">{{ __('Translate Text', 'accessnyctheme') }}</span>
   </button>
 
-  {% endspaceless %}
+  {% endapply %}
   <div id="aria-c-text-controller__options" class="o-text-controller__options hidden" aria-hidden="true">
     <div class="notranslate o-text-controller__languages screen-tablet:flex screen-tablet:justify-end">
       {% do action('icl_language_selector') %}

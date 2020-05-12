@@ -75,6 +75,12 @@
 
     <div class="js-map-mapbox layout-map__map"></div>
   </div>
+
+  <div class="sticky bottom-0 pointer-events-none z-10">
+    {% if alert_sitewide %}
+    {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+    {% endif %}
+  </div>
 </main>
 {% endblock %}
 

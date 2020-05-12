@@ -142,7 +142,7 @@
     </div>
 
     {% if alert_sitewide %}
-    <div class="sticky bottom-0">
+    <div class="sticky bottom-0 z-10">
       {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true, static: true} only %}
     </div>
     {% endif %}

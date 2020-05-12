@@ -71,9 +71,8 @@
       </div>
     </div>
 
-    <div class="sticky bottom-0 pointer-events-none">
+    <div class="sticky bottom-0 pointer-events-none z-10">
       <div class="wrap pb-3 flex justify-end items-end flex-col screen-tablet:flex-row">
-        {{ fn('debug', site) }}
         {% include 'components/web-share.twig' with {this: {
           class: 'mb-1 screen-tablet:mb-0 screen-tablet:me-2',
           fallback_class: 'right-0 bottom-100',
@@ -91,7 +90,7 @@
           </svg>{{ __('Subscribe', 'accessnyctheme') }}
         </a> #}
 
-        <a href="#content" class="btn btn-small text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
+        <a href="#content" class="btn btn-small text-blue pointer-events-auto">{{ __('Back to top', 'accessnyctheme') }}</a>
       </div>
 
       {% if alert_sitewide %}
