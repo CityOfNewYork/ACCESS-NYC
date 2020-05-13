@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main id="content" class="color-light-background" itemscope itemtype="http://schema.org/GovernmentService">
+  <main id="content" class="color-light-background" itemscope itemtype="http://schema.org/{{ post.item_scope }}">
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
       {% for alert in alerts %}
@@ -53,8 +53,16 @@
           </span>
           {% endif %}
         </h2>
+        <p class="color__alt mt-1">
+          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+          <meta itemprop="datePosted" content="{{ post.post_modified }}" />
+        </p>
       </div>
     </header>
+
+    {% if post.custom.program_status_clear_date %}
+      <meta itemprop="expires" content="{{ post.custom.program_status_clear_date }}" />
+    {% endif %}
 
     <section class="wrap screen-desktop:layout-sidebar-small-gutter">
       <aside>
@@ -69,15 +77,48 @@
             {% endfor %}
           </ol>
         </nav>
-        <div class="c-share print:hidden pb-2">
-          {% spaceless %}
-          <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer">
-            <svg class="icon icon-ui-printer">
+        <div class="c-share print:hidden pb-2">{% apply spaceless %}
+          <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer" data-js="track" data-track-key="Print" data-track-data='[{"action": "print"}]'>
+            <svg class="c-share__icon icon-ui">
               <use xlink:href="#icon-ui-printer"></use>
             </svg>{{ __('Print the whole guide', 'accessnyc-program-detail') }}
           </a>
-          {% endspaceless %}
-        </div>
+
+          <button aria-controls="web-share-fallback" aria-expanded="false" class="c-share__link btn-link underline font-normal" data-js="web-share track" data-web-share='{{ post.web_share|json_encode }}' data-track-key="Web Share" data-track-data='[{"action": "web-share"}]'>
+            <svg class="c-share__icon icon-ui">
+              <use xlink:href="#icon-ui-share-2"></use>
+            </svg>{{ __('Share the guide', 'accessnyctheme') }}
+          </button>
+
+          <div aria-hidden="true" class="c-share__section hidden:fadeInUp animated hidden" id="web-share-fallback" role="region">
+            <label class="block mb-1 sr-only" for="web-share-url">
+              <b>{{ __('Share the Guide', 'accessnyctheme') }}</b>
+            </label>
+
+            <input class="c-share__input" data-copy-target="web-share-url" id="web-share-url" name="web-share-url" type="text" value="{{ post.web_share.url }}" />
+
+            <button aria-pressed="false" class="c-share__link btn-link underline font-normal" data-copy="web-share-url" data-js="copy track" data-track-key="Web Share" data-track-data='[{"action": "web-share/copied"}]'>
+              <svg class="c-share__icon icon icon-ui">
+                <use xlink:href="#icon-ui-copy"></use>
+              </svg>
+              <svg class="c-share__icon icon-pressed icon-ui me-1">
+                <use xlink:href="#icon-ui-check"></use>
+              </svg>{{ __('Copy URL', 'accessnyctheme') }}
+            </button>
+
+            <a class="c-share__link" href="https://www.facebook.com/sharer/sharer.php?u={{ post.web_share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/facebook"}]'>
+              <svg class="c-share__icon icon-ui">
+                <use xlink:href="#icon-ui-facebook"></use>
+              </svg>{{ __('Share on Facebook', 'accessnyctheme') }}
+            </a>
+
+            <a class="c-share__link" href="https://twitter.com/intent/tweet?text={{ post.web_share.text|url_encode }}%20{{ post.web_share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/twitter"}]'>
+              <svg class="c-share__icon icon-ui">
+                <use xlink:href="#icon-ui-twitter"></use>
+              </svg>{{ __('Share on Twitter', 'accessnyctheme') }}
+            </a>
+          </div>
+        {% endapply %}</div>
       </aside>
 
       <article class="pt-2 screen-desktop:pt-0" data-js="program-detail-content">
@@ -127,14 +168,40 @@
       </div>
     </section>
 
+    {% if post.item_scope == 'SpecialAnnouncement' %}
+      <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
+        {% if post.structured_data_url %}
+          <meta itemprop="url" content="{{ post.structured_data_url }}" />
+        {% endif %}
+
+        <div itemprop="provider" itemtype="http://schema.org/GovernmentOrganization" itemscope>
+          <meta itemprop="name" content="{{ post.government_agency }}" />
+        </div>
+
+        {% if post.structured_data_service_type %}
+          <meta itemprop="serviceType" content="http://schema.org/{{ post.structured_data_service_type[0] }}" />
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if post.item_scope == 'SpecialAnnouncement' %}
+      <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
+    {% endif %}
+
     <footer class="wrap pt-4">
       <p class="color__alt">
         {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
       </p>
     </footer>
 
-    <div class="wrap sticky bottom-0 text-end pb-3">
-      <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
+    <div class="sticky bottom-0 pointer-events-none z-10">
+      <div class="wrap text-end pb-3">
+        <a href="#content" class="btn btn-small text-blue pointer-events-auto">{{ __('Back to top', 'accessnyctheme') }}</a>
+      </div>
+
+      {% if alert_sitewide %}
+      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+      {% endif %}
     </div>
   </main>
 {% endblock %}

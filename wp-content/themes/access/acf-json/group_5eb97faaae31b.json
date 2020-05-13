@@ -1,0 +1,127 @@
+{
+    "key": "group_5eb97faaae31b",
+    "title": "Web Share and Open Graph (OG) meta",
+    "fields": [
+        {
+            "key": "field_5eb981510ade2",
+            "label": "Web Share Text",
+            "name": "web_share_text",
+            "type": "text",
+            "instructions": "This text will pre-fill what users say about this content. Limit to 160 characters. Defaults to the <a href=\"\/wp-admin\/options-general.php\">site tagline<\/a>.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5eb97fb30adde",
+            "label": "OG Title",
+            "name": "og_title",
+            "type": "text",
+            "instructions": "Will display as the page title in social media posts. Only use if different from post title.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5eb97ff40addf",
+            "label": "OG Description",
+            "name": "og_description",
+            "type": "text",
+            "instructions": "Will display as the content in social media posts. Leave blank to use default page content.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5eb980150ade0",
+            "label": "OG Image",
+            "name": "og_image",
+            "type": "image",
+            "instructions": "Will display as the preview image in social media posts. Be sure the media item has Alt Text for screen readers.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "return_format": "url",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "default"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "single-page-legacy.php"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "programs"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1589229299
+}

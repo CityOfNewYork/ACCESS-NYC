@@ -7,6 +7,7 @@
  */
 
 require_once Path\controller('programs');
+require_once Path\controller('alert');
 
 /**
  * Enqueue
@@ -68,6 +69,11 @@ $alerts = Timber::get_posts(array(
 $context['alerts'] = array_filter($alerts, function($p) {
   return in_array('programs', array_values($p->custom['location']));
 });
+
+// Extend alerts with Timber Post Controller
+$context['alerts'] = array_map(function($post) {
+  return new Controller\Alert($post);
+}, $context['alerts']);
 
 /**
  * Render View

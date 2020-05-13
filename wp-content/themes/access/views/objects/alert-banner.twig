@@ -1,8 +1,8 @@
-<article aria-hidden="{% if active %}false{% else %}true{% endif %}" class="c-alert-banner z-20 color-mid-background color-{{ this.alert_color }}-status animated hidden:fadeInUp {% if active %}active{% else %}hidden{% endif %} print:hidden" data-alert-name="{{ this.slug }}" data-js="alert-banner" id="aria-c-{{ this.slug }}" role="dialog">
+<article {% if static != true %}data-js="alert-banner" data-alert-name="{{ this.slug }}" id="aria-c-{{ this.slug }}" aria-hidden="{% if active %}false{% else %}true{% endif %}" role="dialog"{% else %}role="alert"{% endif %} class="c-alert-banner z-20 color-mid-background color-{{ this.status.type }}-status animated hidden:fadeInUp {% if active %}active{% else %}hidden{% endif %} print:hidden pointer-events-auto">
   <div class="c-alert-banner-wrapper">
     <div class="c-alert-banner__content screen-mobile:flex">
       <div class="c-alert-box__icon">
-        <svg aria-hidden="true" class="c-alert-box__svg icon icon-{{ this.alert_icon }} icon-3 screen-tablet:icon-4">
+        <svg aria-hidden="true" class="c-alert-box__svg icon-3 screen-tablet:icon-4">
           <use xlink:href="#icon-{{ this.alert_icon }}"></use>
         </svg>
       </div>
@@ -10,14 +10,14 @@
       <div class="c-alert-banner__body">{{ this.alert_content }}</div>
     </div>
 
-    <div class="c-alert-banner__closing">
-      <button aria-controls="aria-c-{{ this.slug }}" aria-expanded="{{ active }}" class="text-blue" data-js="alert-controller">
+    {% if static != true %}<div class="c-alert-banner__closing">
+      <button aria-controls="aria-c-{{ this.slug }}" aria-expanded="{{ active }}" class="text-blue mr-0" data-js="alert-controller">
         <span class="sr-only">{{ __('close &amp; return to site', 'accessnyctheme') }}</span>
 
-        <svg aria-hidden="true" class="icon-ui-x">
-            <use xlink:href="#icon-ui-x"></use>
+        <svg aria-hidden="true" class="icon-ui icon-3" aria-hidden='true'>
+          <use xlink:href="#icon-ui-x"></use>
         </svg>
       </button>
-    </div>
+    </div>{% endif %}
   </div>
 </article>

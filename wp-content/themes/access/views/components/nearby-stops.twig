@@ -1,7 +1,7 @@
 <div class='c-nearby-stops'>
   {% for stop in stops %}
     <div class='c-nearby-stops__stop'>
-      {% spaceless %}
+      {% apply spaceless %}
       {% for trunk in stop.trunks %}
         {% set letter = trunk.line %}
         {% set express = '' %}
@@ -24,7 +24,7 @@
 
         {{ __(stop.stop.name, 'accessnyc-locations') }}
       </span>
-      {% endspaceless %}
+      {% endapply %}
     </div>
   {% endfor %}
 </div>

@@ -34,6 +34,12 @@
     {% include 'screener/recap.twig' with {'formAction': formAction} %}
   </form>
 </main>
+
+<div class="sticky bottom-0 pointer-events-none z-10">
+  {% if alert_sitewide %}
+  {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+  {% endif %}
+</div>
 {% endblock %}
 
 {% block scripts_footer %}
