@@ -846,40 +846,11 @@
             "delay": 0
         },
         {
-            "key": "field_5e8633e3743f9",
-            "label": "Alert",
-            "name": "alert",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "post_type": [
-                "alert"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search",
-                "post_type",
-                "taxonomy"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "object",
-            "wpml_cf_preferences": 0
-        },
-        {
             "key": "field_5eb2fb4b86d6c",
-            "label": "structure data url",
+            "label": "Structured Data URL",
             "name": "structured_data_url",
             "type": "text",
-            "instructions": "",
+            "instructions": "The URL to more information about the government benefit.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -926,6 +897,33 @@
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
+        },
+        {
+            "key": "field_5e8633e3743f9",
+            "label": "Alert",
+            "name": "alert",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "post_type": [
+                "alert"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "object"
         }
     ],
     "location": [
@@ -948,5 +946,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1589394210
+    "modified": 1589400451
 }
