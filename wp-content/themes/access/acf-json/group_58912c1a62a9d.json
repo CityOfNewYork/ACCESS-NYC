@@ -859,18 +859,73 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
             "post_type": [
                 "alert"
             ],
             "taxonomy": "",
             "filters": [
-                "search"
+                "search",
+                "post_type",
+                "taxonomy"
             ],
             "elements": "",
             "min": "",
             "max": "",
-            "return_format": "object"
+            "return_format": "object",
+            "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_5eb2fb4b86d6c",
+            "label": "structure data url",
+            "name": "structured_data_url",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5eb2fba586d6d",
+            "label": "Structured Data Service Type",
+            "name": "structured_data_service_type",
+            "type": "radio",
+            "instructions": "Select a service type being offered",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "BasicIncome": "BasicIncome",
+                "BusinessSupport": "BusinessSupport",
+                "DisabilitySupport": "DisabilitySupport",
+                "HealthCare": "HealthCare",
+                "OneTimePayments": "OneTimePayments",
+                "PaidLeave": "PaidLeave",
+                "ParentalSupport": "ParentalSupport",
+                "UnemploymentSupport": "UnemploymentSupport"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -893,5 +948,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1587491734
+    "modified": 1589394210
 }
