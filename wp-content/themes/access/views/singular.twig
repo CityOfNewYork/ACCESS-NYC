@@ -32,6 +32,12 @@
         {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
       </p>
     </footer>
+
+    <div class="sticky bottom-0 pointer-events-none z-10">
+      {% if alert_sitewide %}
+      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+      {% endif %}
+    </div>
   </article>
 </main>
 {% endblock %}

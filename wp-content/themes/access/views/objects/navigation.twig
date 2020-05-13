@@ -1,25 +1,23 @@
 <nav class="o-navigation color-dark-background">
   <div class="logo-access">
     <a href="{{ url_base }}/" data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "home"}]'>
-      <svg class="icon icon-logo-full">
+      <svg class="icon icon-logo-full" aria-hidden="true">
         <use xlink:href="#icon-logo-full"></use>
-      </svg><span class="sr-only">{{__('Access NYC', 'accessnyctheme')}}</span>
+      </svg><span class="sr-only">{{ __('Access NYC', 'accessnyctheme') }}</span>
     </a>
   </div>
 
-  <nav class="o-navigation__nav nav-inline text-end print:hidden" data-js="site-desktop-nav">{% spaceless %}
+  <nav class="o-navigation__nav nav-inline text-end print:hidden" data-js="site-desktop-nav">{% apply spaceless %}
     <a class="screen-desktop:hidden" href="#o-mobile-nav" data-js="o-mobile-nav track" aria-expanded="false" data-track-key="Main Nav" data-track-data='[{"action": "menu"}]'>
-      {{__('Menu', 'accessnyctheme')}}
+      {{ __('Menu', 'accessnyctheme') }}
     </a>
 
     {% include 'partials/nav.twig' with {this: {style: 'hidden screen-desktop:inline-block'}} %}
 
     <a class="o-navigation__search no-underline" href="#search" data-js="o-search-box track" data-track-key="Main Nav" data-track-data='[{"action": "search"}]'>
-      <svg class="icon icon-ui-search">
+      <svg class="icon icon-ui icon-3 hidden screen-tablet:inline-block" aria-hidden="true">
         <use xlink:href="#icon-ui-search"></use>
-      </svg>
-
-      {{ __('Search', 'accessnyctheme') }}
+      </svg>{{ __('Search', 'accessnyctheme') }}
     </a>
-  {% endspaceless %}</nav>
+  {% endapply %}</nav>
 </nav>

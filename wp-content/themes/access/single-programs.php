@@ -7,6 +7,7 @@
  */
 
 require_once Path\controller('programs');
+require_once Path\controller('alert');
 
 /**
  * Enqueue
@@ -60,6 +61,11 @@ if (get_field('alert')) {
     return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
   });
 }
+
+// Extend alerts with Timber Post Controller
+$context['alerts'] = array_map(function($post) {
+  return new Controller\Alert($post);
+}, $context['alerts']);
 
 /**
  * Render the view

@@ -3,30 +3,31 @@
     <div class="wrap">
       <div class="usa-width-one-whole">
         <a class="o-search-box__close" href="#content" data-js="o-search-box track" data-track-key="Main Nav" data-track-data='[{"action": "search/close"}]'>
-          <svg class="icon icon-ui-x">
+          <svg class="icon-ui icon-3">
             <use xlink:href="#icon-ui-x"></use>
-          </svg><span class="sr-only">{{__('Close search', 'accessnyctheme')}}</span>
+          </svg><span class="sr-only">{{ __('Close search', 'accessnyctheme') }}</span>
         </a>
 
         <form class="o-search-box__form" method="get" action="/">
           {{ fn('do_action', 'wpml_add_language_form_field' ) }}
-          <label class="type-small" for="search-field">{{__('Search for programs or services', 'accessnyctheme')}}</label>
+
+          <label class="type-small" for="search-field">{{ __('Search for programs or services', 'accessnyctheme') }}</label>
 
           <div class="input-search">
-            <input name="s" type="text" value="" placeholder="{{__('Search', 'accessnyctheme')}}" id="search-field">
+            <input name="s" type="text" value="" placeholder="{{ __('Search', 'accessnyctheme') }}" id="search-field">
             <button class="btn-text input-search__submit" type="submit">
               <svg class="icon icon-ui-search">
                 <use xlink:href="#icon-ui-search"></use>
-              </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
+              </svg><span class="sr-only">{{ __('Submit', 'accessnyctheme') }}</span>
             </button>
           </div>
         </form>
 
         <div class="o-search-box__suggestions">
           <div class="o-search-box__suggestions-header">
-            <h3>{{__('Programs', 'accessnyctheme')}}</h3>
+            <h3>{{ __('Programs', 'accessnyctheme') }}</h3>
 
-            <a class="link-more hidden screen-tablet:inline-block" href="{{ url_base }}/programs">{{__('See all programs', 'accessnyctheme')}}</a>
+            <a class="link-more hidden screen-tablet:inline-block" href="{{ url_base }}/programs">{{ __('See all programs', 'accessnyctheme') }}</a>
           </div>
 
           {% if search_links %}
@@ -39,7 +40,7 @@
           </div>
           {% endif %}
 
-          <a class="link-more screen-tablet:hidden" href="{{ url_base }}/programs" aria-hidden="true">{{__('see all programs', 'accessnyctheme')}}</a>
+          <a class="link-more screen-tablet:hidden" href="{{ url_base }}/programs" aria-hidden="true">{{ __('see all programs', 'accessnyctheme') }}</a>
         </div>
       </div>
     </div>

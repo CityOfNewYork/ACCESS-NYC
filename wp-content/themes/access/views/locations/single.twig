@@ -49,13 +49,13 @@
       <article>
         <section itemprop="description">
           {% if post.get_field('programs')|length > 0 %}
-          <p class="mb-0">{% spaceless %}
+          <p class="mb-0">{% apply spaceless %}
             {{__('This location can help you with:', 'accessnyc-locations')}}
 
             {% for program in post.get_field('programs') %}
               {{ program.name }}{% if loop.last %}.{% else %},{% endif %}
             {% endfor %}
-          {% endspaceless %}</p>
+          {% endapply %}</p>
           {% endif %}
         </section>
 
@@ -159,8 +159,14 @@
       </a> #}
     </footer>
 
-    <div class="wrap sticky bottom-0 text-end pb-3">
-      <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
+    <div class="sticky bottom-0 pointer-events-none z-10">
+      <div class="wrap text-end pb-3">
+        <a href="#content" class="btn btn-small text-blue pointer-events-auto">{{ __('Back to top', 'accessnyctheme') }}</a>
+      </div>
+
+      {% if alert_sitewide %}
+      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+      {% endif %}
     </div>
   </main>
 {% endblock %}

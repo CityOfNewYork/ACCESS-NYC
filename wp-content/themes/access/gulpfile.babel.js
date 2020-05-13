@@ -95,7 +95,7 @@ gulp.task('sass', () => gulp.src(`${ SRC }/scss/style-*.scss`)
   })
   .on('error', sass.logError))
   .pipe(postcss([
-    autoprefixer('last 2 versions'),
+    autoprefixer('last 3 versions'),
     mqpacker({sort: true}),
     cssnano()
   ]))

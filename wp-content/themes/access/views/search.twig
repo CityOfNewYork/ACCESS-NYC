@@ -1,7 +1,7 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-<main class="pb-4 color-light-background" id="content">
+<main class="color-light-background" id="content">
   <form class="js-filtered-search" method="get" action="/">
     {{ fn('do_action', 'wpml_add_language_form_field' ) }}
 
@@ -57,5 +57,11 @@
       </div>
     </div>
   </form>
+
+  <div class="sticky bottom-0 pointer-events-none z-10">
+    {% if alert_sitewide %}
+    {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+    {% endif %}
+  </div>
 </main>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
 <script type="text/javascript" nonce="{{ csp_script_nonce }}">
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS || [];
   window.LOCALIZED_STRINGS = window.LOCALIZED_STRINGS.concat([
@@ -8,4 +8,4 @@
     }{% if not loop.last %},{% endif %}{% endfor %}
   ]);
 </script>
-{% endspaceless %}
+{% endapply %}

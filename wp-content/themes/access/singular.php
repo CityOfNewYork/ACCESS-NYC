@@ -6,6 +6,8 @@
  * @author NYC Opportunity
  */
 
+require_once Path\controller('alert');
+
 /**
  * Enqueue
  */
@@ -51,6 +53,11 @@ if (get_field('alert')) {
     return in_array('pages', array_values($p->custom['location']));
   });
 }
+
+// Extend alerts with Timber Post Controller
+$context['alerts'] = array_map(function($post) {
+  return new Controller\Alert($post);
+}, $context['alerts']);
 
 /**
  * Show Google Translate
