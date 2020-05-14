@@ -18,6 +18,12 @@
       </a>
     </h3>
 
+    <meta itemprop="name" content="{{ post.program_name }}" />
+    <meta itemprop="datePosted" content="{{ post.post_date }}" />
+    {% if post.program_status_clear_date %}
+      <meta itemprop="expires" content="{{ post.program_status_clear_date }}" />
+    {% endif %}
+
     {% if not short_post %}<p class="c-card__subtitle color__alt">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>{% endif %}
 
     <div class="c-card__summary">

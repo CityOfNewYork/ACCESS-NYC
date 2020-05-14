@@ -170,6 +170,8 @@
 
     {% if post.item_scope == 'SpecialAnnouncement' %}
       <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
+        <meta itemprop="name" content="{{ post.program_name }}" />
+
         {% if post.structured_data_url %}
           <meta itemprop="url" content="{{ post.structured_data_url }}" />
         {% endif %}
