@@ -136,14 +136,15 @@
     "humanmade/s3-uploads": "^2.2.1"
   },
   "require-dev": {
-    "filp/whoops": "^2.7.0",
-    "whoops/soap": "^1.0",
-    "wpackagist-plugin/wp-crontrol": "^1.7",
-    "wpackagist-plugin/query-monitor": "^3.5.2",
-    "wpackagist-plugin/redis-cache": "^1.5.5",
     "enelogic/wpml-installer": "^0.1.6",
+    "filp/whoops": "^2.7.2",
+    "squizlabs/php_codesniffer": "^3.5.3",
     "umutphp/wp-vulnerability-check": "^0.1.1",
-    "squizlabs/php_codesniffer": "^3.5.3"
+    "whoops/soap": "^1.0",
+    "wpackagist-plugin/query-monitor": "^3.6.0",
+    "wpackagist-plugin/redis-cache": "^1.5.8",
+    "wpackagist-plugin/wp-auto-login": "^1.0",
+    "wpackagist-plugin/wp-crontrol": "^1.8.3"
   },
   "scripts": {
     "development": [
