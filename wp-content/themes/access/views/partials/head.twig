@@ -23,7 +23,8 @@
 
 {% if page_meta_desc %}<meta name="description" content="{{ page_meta_desc }}"/>{% endif %}
 
-<meta property="og:type" content="website" />
+{% if fn('defined', 'META_OG_TYPE') %}<meta property="og:type" content="{{ fn('constant', 'META_OG_TYPE') }}" />{% endif %}
+{% if fn('defined', 'META_TWITTER_SITE') %}<meta name="twitter:site" content="{{ fn('constant', 'META_TWITTER_SITE') }}" />{% endif %}
 {% if post.custom.og_title %}<meta property="og:title" content="{{ post.custom.og_title }}"/>{% endif %}
 {% if post.custom.og_description %}<meta property="og:description" content="{{ post.custom.og_description }}"/>{% endif %}
 
