@@ -23,15 +23,16 @@
 
 {% if page_meta_desc %}<meta name="description" content="{{ page_meta_desc }}"/>{% endif %}
 
+<meta property="og:type" content="website" />
 {% if post.custom.og_title %}<meta property="og:title" content="{{ post.custom.og_title }}"/>{% endif %}
 {% if post.custom.og_description %}<meta property="og:description" content="{{ post.custom.og_description }}"/>{% endif %}
 
 {% if post.custom.og_image %}
 <meta property="og:image" content="{{ post.get_field(post.custom._og_image) }}"/>
 <meta property="og:image:alt" content="{{ fn('get_post_meta', post.custom.og_image, '_wp_attachment_image_alt', true) }}"/>
-{# At the time of implementation it did not seem Twitter used og:image:alt https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup #}
 <meta name="twitter:image:alt" content="{{ fn('get_post_meta', post.custom.og_image, '_wp_attachment_image_alt', true) }}"/>
-<meta name="twitter:card" content="summary_large_image"/>
 {% endif %}
+
+<meta name="twitter:card" content="summary{% if post.custom.og_image %}_large_image{% endif %}"/>
 
 {{ function('wp_head') }}
