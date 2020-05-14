@@ -107,5 +107,4 @@ class Alert extends Timber\Post {
   const STATUS_COVID = 'covid-response';
 
   const ITEMSCOPE_COVID = 'SpecialAnnouncement';
-
 }

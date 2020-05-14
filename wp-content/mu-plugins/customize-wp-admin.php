@@ -27,15 +27,17 @@ add_action('wp_before_admin_bar_render', function() {
  * bar using the wp_body_open filter (if present in the theme).
  */
 
-if (version_compare(get_bloginfo('version'), '5.4', '>=' )) {
+if (version_compare(get_bloginfo('version'), '5.4', '>=')) {
   add_action('admin_bar_init', function() {
     // Remove the admin bar HTML styling
     remove_action('wp_head', '_admin_bar_bump_cb');
 
     // Add our theme's admin bar styling
     if (false === is_admin()) {
-      wp_register_style('wp-admin-bar',
-        get_stylesheet_directory_uri() . '/wp-admin-bar.css');
+      wp_register_style(
+        'wp-admin-bar',
+        get_stylesheet_directory_uri() . '/wp-admin-bar.css'
+      );
       wp_enqueue_style('wp-admin-bar');
     }
   });
