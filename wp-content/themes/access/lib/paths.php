@@ -54,11 +54,13 @@ function shortcode($name = false) {
   }
 }
 
-function require_shortcodes() {
-  foreach (scandir(shortcode()) as $filename) {
-    $path = shortcode($filename);
+function require_shortcodes($base = 'shortcode') {
+  require_once shortcode($base);
 
-    if (is_file($path)) {
+  foreach (scandir(shortcode()) as $filename) {
+    $path = shortcode() . $filename;
+
+    if (is_file($path) && $filename != $base . '.php') {
       require $path;
     }
   }

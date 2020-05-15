@@ -85,9 +85,10 @@ import localize from 'utilities/localize/localize';
   /**
    * Instantiate Newsletter and pass it translated strings
    */
-  (element => {
-    if (element) {
+  (elements => {
+    elements.forEach(element => {
       let newsletter = new Newsletter(element);
+
       let strings = Object.fromEntries([
         'NEWSLETTER_VALID_REQUIRED',
         'NEWSLETTER_VALID_EMAIL_REQUIRED',
@@ -106,8 +107,8 @@ import localize from 'utilities/localize/localize';
 
       newsletter.strings = strings;
       newsletter.form.strings = strings;
-    }
-  })(document.querySelector(Newsletter.selector));
+    });
+  })(document.querySelectorAll(Newsletter.selector));
 
   /**
    * Initialize the Share Form and Disclaimer
