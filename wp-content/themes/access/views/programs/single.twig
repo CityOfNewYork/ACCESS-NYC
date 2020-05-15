@@ -45,12 +45,12 @@
 
           {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}
 
-          {% if post.government_agency | length %} |
-          <span itemprop="serviceOperator" itemscope itemtype="http://schema.org/GovernmentOrganization">
-            <span itemprop="name">
-              {{ post.government_agency }}
+          {% if post.government_agency %} |
+            <span itemprop="serviceOperator" itemscope itemtype="http://schema.org/GovernmentOrganization">
+              <span itemprop="name">
+                {{ post.government_agency }}
+              </span>
             </span>
-          </span>
           {% endif %}
         </h2>
         <p class="color__alt mt-1">
@@ -170,6 +170,8 @@
 
     {% if post.item_scope == 'SpecialAnnouncement' %}
       <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
+        <meta itemprop="name" content="{{ post.program_name }}" />
+
         {% if post.structured_data_url %}
           <meta itemprop="url" content="{{ post.structured_data_url }}" />
         {% endif %}
