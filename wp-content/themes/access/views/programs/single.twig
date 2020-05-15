@@ -45,7 +45,7 @@
 
           {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}
 
-          {% if post.government_agency and post.item_scope == 'GovernmentService' %} |
+          {% if post.government_agency %} |
             <span itemprop="serviceOperator" itemscope itemtype="http://schema.org/GovernmentOrganization">
               <span itemprop="name">
                 {{ post.government_agency }}
@@ -180,7 +180,7 @@
           <meta itemprop="name" content="{{ post.government_agency }}" />
         </div>
 
-        {% if post.item_scope == 'GovernmentService' %}
+        {% if post.structured_data_service_type %}
           <meta itemprop="serviceType" content="http://schema.org/{{ post.structured_data_service_type[0] }}" />
         {% endif %}
       </div>
