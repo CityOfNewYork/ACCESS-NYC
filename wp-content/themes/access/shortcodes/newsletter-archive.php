@@ -46,7 +46,8 @@ class NewsletterArchive extends Shortcode {
           $atts['archive'] : MAILCHIMP_ARCHIVE_ID,
         'mailchimp_archive_show' => ($atts['show']) ?
           $atts['show'] : MAILCHIMP_ARCHIVE_SHOW,
-        'csp_script_nonce' => CSP_SCRIPT_NONCE
+        'csp_script_nonce' => (defined('CSP_SCRIPT_NONCE'))
+          ? CSP_SCRIPT_NONCE : false
       ))
     );
   }
