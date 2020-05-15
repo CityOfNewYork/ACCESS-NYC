@@ -49,16 +49,21 @@ class Programs extends Timber\Post {
 
     $this->share_hash = SMNYC\hash($this->share_url);
 
+    $og_title = $this->custom['og_title'];
+    $web_share_text = $this->custom['web_share_text'];
+
     $this->web_share = array(
-      'title' => ($this->custom['og_title']) ? $this->custom['og_title'] : $this->custom['plain_language_program_name'],
-      'text' => ($this->custom['web_share_text']) ? $this->custom['web_share_text'] : strip_tags($this->custom['brief_excerpt']),
+      'title' => ($og_title) ?
+        $og_title : $this->custom['plain_language_program_name'],
+      'text' => ($web_share_text) ?
+        $web_share_text : strip_tags($this->custom['brief_excerpt']),
       'url' => wp_get_shortlink()
     );
 
     /**
      * Structure Data itemtype
      */
-    
+
     $this->item_scope = $this->getItemScope();
 
     return $this;

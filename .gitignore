@@ -8,6 +8,8 @@
 !/vendor/autoload.php
 
 # Add packages that need to be shipped with the source here with !
+!/vendor/altorouter
+!/vendor/asm89
 !/vendor/aws
 !/vendor/composer
 !/vendor/doctrine
@@ -23,7 +25,10 @@
 !/vendor/symfony/polyfill-mbstring
 !/vendor/symfony/translation
 !/vendor/symfony/translation-contracts
+!/vendor/timber
+!/vendor/twig
 !/vendor/twilio
+!/vendor/upstatement
 
 # WordPress #
 ############
@@ -49,6 +54,7 @@
 /wp-content/themes/*twenty*/
 /wp-content/themes/*twenty*/*
 /wp-content/plugins/hello.php
+/wp-content/plugins/wp-auto-login/*
 
 # WP-Engine Specific #
 ######################

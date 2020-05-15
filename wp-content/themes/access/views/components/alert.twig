@@ -1,12 +1,12 @@
 <article {% if this.item_scope %}itemscope itemprop="{{ this.item_scope }}" itemtype="https://schema.org/{{ this.item_scope }}" {% endif %}class="c-alert-box color-{{ this.status.type }}-status color-mid-background {{ class }}" role="alert">
   {% if this.item_scope %}
-  <meta itemprop="name" content="{{ this.post_title }}" />
-  <meta itemprop="datePosted" content="{{ this.post_date }}" />
+    <meta itemprop="name" content="{{ this.post_title }}" />
+    <meta itemprop="datePosted" content="{{ this.post_modified }}" />
   {% endif %}
 
   <div class="c-alert-box__icon" aria-hidden="true">
     <svg class="c-alert-box__svg icon-4">
-      <use xlink:href="#icon-{{ this.alert_color }}"></use>
+      <use xlink:href="#icon-{{ this.alert_icon }}"></use>
     </svg>
   </div>
 

@@ -95,23 +95,44 @@
     "location": [
         [
             {
-                "param": "page_template",
-                "operator": "==",
-                "value": "default"
-            }
-        ],
-        [
-            {
-                "param": "page_template",
-                "operator": "==",
-                "value": "single-page-legacy.php"
+                "param": "post_type",
+                "operator": "!=",
+                "value": "homepage_tout"
             }
         ],
         [
             {
                 "param": "post_type",
-                "operator": "==",
-                "value": "programs"
+                "operator": "!=",
+                "value": "program_search_links"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "alert"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "smnyc-email"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "smnyc-sms"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "gc_templates"
             }
         ]
     ],
@@ -123,5 +144,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1589229299
+    "modified": 1589473344
 }

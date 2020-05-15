@@ -13,7 +13,7 @@
     {% endblock %}
   </head>
 
-  <body data-template="base.twig" class="{% set _bodyClass = block('body_class') %}{% if _bodyClass %} {{ _bodyClass|trim }}{% endif %}">
+  <body>
     {{ fn('wp_body_open') }}
 
     <div class="page-wrapper">
@@ -26,7 +26,10 @@
               <svg class="icon icon-logo-nyc">
                 <use xlink:href="#icon-logo-nyc"></use>
               </svg>
-              <span class="text-xsmall px-1 text-grey-mid hidden screen-desktop:inline-block">{{ __('Official website of the City of New York', 'accessnyctheme') }}</span>
+
+              <span class="text-xsmall px-1 text-grey-mid hidden screen-desktop:inline-block">
+                {{ __('Official website of the City of New York', 'accessnyctheme') }}
+              </span>
             </div>
             {% endapply %}
 
@@ -44,16 +47,6 @@
       {% endblock %}
 
       {% block content %}{% endblock %}
-
-      {# <div class="sticky bottom-0">
-        <div class="wrap text-end pb-3">
-          <a href="#content" class="btn btn-small bg-blue-light text-blue">{{ __('Back to top', 'accessnyctheme') }}</a>
-        </div>
-
-        {% if alert_sitewide %}
-          {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
-        {% endif %}
-      </div> #}
 
       {% block footer %}
         <footer class="o-footer color-mid-background">
