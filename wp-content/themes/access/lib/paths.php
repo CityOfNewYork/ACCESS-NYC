@@ -23,7 +23,7 @@ function functions() {
  */
 
 function block($name = false, $uri = false) {
-  if ($name & $uri) {
+  if ($name && $uri) {
     return get_template_directory_uri() . "/blocks/$name";
   } elseif ($name) {
     return get_template_directory() . "/blocks/$name.php";
