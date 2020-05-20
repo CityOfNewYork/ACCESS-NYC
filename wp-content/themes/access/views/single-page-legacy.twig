@@ -17,13 +17,13 @@
       <div>
         <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
 
-        <h2 class="c-header__information text-grey-mid mb-4" itemprop="dateModified">
+        {% set lead = post.get_field('field_58b480ca3081c') %} {# lead #}
+
+        <h2 class="c-header__information color__alt {% if lead %}mb-4{% endif %}" itemprop="dateModified">
           {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
         </h2>
 
-        <div class="font-serif screen-tablet:text-large">
-          {{ post.get_field('field_58b480ca3081c') }} {# lead #}
-        </div>
+        {% if lead %}<div class="font-serif screen-tablet:text-large">{{ lead }}</div>{% endif %}
       </div>
     </header>
 
@@ -34,7 +34,7 @@
     <div class="wrap pt-2 screen-desktop:pt-3 {% if sidebar %}screen-desktop:layout-sidebar-gutter{% endif %}">
       {% if sidebar %}
       <aside>
-        <nav class="c-side-nav sticky top-0 pt-1 print:hidden">
+        <nav class="c-side-nav sticky top-0 pt-1 print:hidden border-none">
           <ul>
             {% for section in post.get_field('field_58b480f33081d') %} {# sections #}
             {% if section.section_title %}
