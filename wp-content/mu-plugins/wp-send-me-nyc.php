@@ -35,5 +35,5 @@ add_action('init', function() use ($email, $sms) {
 add_action('admin_init', function() use ($contact, $sms, $email) {
   $contact->createBitlySection();
   $sms->createSettingsSection();
-  $email = $email->createSettingsSection();
+  $email->createSettingsSection();
 });
