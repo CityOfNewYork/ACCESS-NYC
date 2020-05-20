@@ -42,7 +42,8 @@ class Newsletter extends Shortcode {
           $atts['account'] : MAILCHIMP_ACCOUNT,
         'mailchimp_audience_id' => ($atts['audience']) ?
           $atts['audience'] : MAILCHIMP_AUDIENCE_ID,
-      ))
+      )
+      )
     );
   }
 }

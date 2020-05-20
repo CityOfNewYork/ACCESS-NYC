@@ -127,7 +127,6 @@
     "wpackagist-plugin/loggedin": "^1.2",
     "wpackagist-plugin/rollbar": "^2.6.1",
     "wpackagist-plugin/search-everything": "^8.1.9",
-    "wpackagist-plugin/timber-library": "^1.14.0",
     "wpackagist-plugin/wp-all-export": "^1.2.5",
     "wpackagist-plugin/wp-security-questions": "^1.0",
     "wpackagist-plugin/wps-hide-login": "^1.5.5",
