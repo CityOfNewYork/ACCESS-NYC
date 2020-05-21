@@ -3,9 +3,12 @@
 /**
  * Accordion Shortcode Handler. The shortcode accepts the following attributes;
  *
- * @param  header    The header text/html to display. This is always visible.
- * @param  cta-href  The url for the call-to-action.
- * @param  cta-text  The text for the call-to-action.
+ * @param  String/HTML  header    The header text/html to display. This is
+ *                                always visible.
+ * @param  Blank        active    Presence determines wether the accordion is
+ *                                open or not. Does not need to be set to value.
+ * @param  String       cta-href  The url for the call-to-action.
+ * @param  String       cta-text  The text for the call-to-action.
  *
  * @author NYC Opportunity
  */

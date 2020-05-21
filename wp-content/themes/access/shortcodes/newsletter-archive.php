@@ -4,9 +4,12 @@
  * Newsletter Archive Shortcode Handler. The shortcode accepts the following
  * attributes;
  *
- * @param  account  The Mailchimp Account ID
- * @param  archive  The Archive Folder ID that will display
- * @param  show     The amount of archives to show
+ * @param  String  account  The Mailchimp Account ID. Defaults to the
+ *                          constant MAILCHIMP_ACCOUNT
+ * @param  String  archive  The Archive Folder ID that will display. Defaults
+ *                          to the constant MAILCHIMP_ARCHIVE_ID
+ * @param  Number  show     The amount of archives to show. Defaults to the
+ *                          constant MAILCHIMP_ARCHIVE_SHOW
  *
  * @author NYC Opportunity
  */
@@ -38,17 +41,18 @@ class NewsletterArchive extends Shortcode {
     $id = $this->tag . '-' . uniqid();
 
     return Timber::compile(
-      $this->template, array('this' => array(
-        'id' => $id,
-        'mailchimp_account' => ($atts['account']) ?
-          $atts['account'] : MAILCHIMP_ACCOUNT,
-        'mailchimp_archive_id' => ($atts['archive']) ?
-          $atts['archive'] : MAILCHIMP_ARCHIVE_ID,
-        'mailchimp_archive_show' => ($atts['show']) ?
-          $atts['show'] : MAILCHIMP_ARCHIVE_SHOW,
-        'csp_script_nonce' => (defined('CSP_SCRIPT_NONCE'))
-          ? CSP_SCRIPT_NONCE : false
-      )
+      $this->template, array(
+        'this' => array(
+          'id' => $id,
+          'mailchimp_account' => ($atts['account']) ?
+            $atts['account'] : MAILCHIMP_ACCOUNT,
+          'mailchimp_archive_id' => ($atts['archive']) ?
+            $atts['archive'] : MAILCHIMP_ARCHIVE_ID,
+          'mailchimp_archive_show' => ($atts['show']) ?
+            $atts['show'] : MAILCHIMP_ARCHIVE_SHOW,
+          'csp_script_nonce' => (defined('CSP_SCRIPT_NONCE'))
+            ? CSP_SCRIPT_NONCE : false
+        )
       )
     );
   }
