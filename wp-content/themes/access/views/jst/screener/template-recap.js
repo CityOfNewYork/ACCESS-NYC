@@ -13,11 +13,9 @@ __p+='\n      {% if language_code == "en" %}\n      ';
  var slug = category.slug 
 __p+='\n      {% else %}\n      ';
  var slug = category.slug.substring(0, category.slug.lastIndexOf("-{{ language_code }}")); 
-__p+='\n      {% endif %}\n\n      <article class="c-card p-0 items-center">\n        <div class="c-card__icon">\n          <span class="icon">\n            <svg class="icon icon-'+
+__p+='\n      {% endif %}\n\n      <article class="c-card p-0 items-center">\n        <div class="c-card__icon">\n          <svg class="icon icon-6 text-blue-bright fill-blue-light" aria-hidden="true">\n            <use xlink:href="#icon-'+
 ((__t=( slug ))==null?'':__t)+
-'">\n              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-'+
-((__t=( slug ))==null?'':__t)+
-'"></use>\n            </svg>\n          </span>\n        </div>\n        <div class="c-card__body">'+
+'-v2"></use>\n          </svg>\n        </div>\n\n        <div class="c-card__body">'+
 ((__t=( category.label ))==null?'':__t)+
 '</div>\n      </article>\n      ';
  }); 
@@ -29,7 +27,7 @@ __p+='\n      {{ __("person", "accessnyc-screener")|trim|escape("js") }}\n      
  } else { 
 __p+='\n      {{ __("people", "accessnyc-screener")|trim|escape("js") }}\n      ';
  } 
-__p+='\n    </h3>\n\n    <ul class="c-member-list ">{% spaceless %}\n      ';
+__p+='\n    </h3>\n\n    <ul class="c-member-list ">{% apply spaceless %}\n      ';
  members.forEach(function(member, index) { 
 __p+='\n      <li class="pb-4">\n        ';
  if (index === 0 && !member.isHoh) { 
@@ -101,9 +99,9 @@ __p+='\n          </ul>\n        </div>\n        ';
  } 
 __p+='\n      </li>\n      ';
  }) 
-__p+='\n    {% endspaceless %}</ul>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Household resources:", "accessnyc-screener")|trim|escape("js") }} <span class="force-ltr">'+
+__p+='\n    {% endapply %}</ul>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Household resources:", "accessnyc-screener")|trim|escape("js") }} <span class="force-ltr">'+
 ((__t=( household.assets ))==null?'':__t)+
-'</span>\n      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <p>{{ __("This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.", "accessnyc-screener")|trim|escape("js") }}</p>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Housing", "accessnyc-screener")|trim|escape("js") }}\n      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <ul class="list-inline-semicolon">{% spaceless %}\n      ';
+'</span>\n      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <p>{{ __("This is cash on hand; checking or savings accounts; stocks, bonds or mutual funds.", "accessnyc-screener")|trim|escape("js") }}</p>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Housing", "accessnyc-screener")|trim|escape("js") }}\n      <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n\n    <ul class="list-inline-semicolon">{% apply spaceless %}\n      ';
  household.types.forEach(function(type) { 
 __p+='\n      <li>\n        <div class="list-inline-comma">\n          <span>'+
 ((__t=( type.label ))==null?'':__t)+
@@ -161,7 +159,7 @@ __p+='\n            </span>\n          ';
  } 
 __p+='\n        </div>\n      </li>\n      ';
  }); 
-__p+='\n    {% endspaceless %}</ul>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Your zip code:", "accessnyc-screener")|trim|escape("js") }} '+
+__p+='\n    {% endapply %}</ul>\n  </div>\n\n  <hr class="divider screen-tablet:divider-large border-grey-light">\n\n  <div>\n    <h3 class="type-h4 text-blue-dark">\n      {{ __("Your zip code:", "accessnyc-screener")|trim|escape("js") }} '+
 ((__t=( household.zip ))==null?'':__t)+
 '\n      <a role="button" href="#step-3" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>\n    </h3>\n  </div>\n</div>\n';
 }

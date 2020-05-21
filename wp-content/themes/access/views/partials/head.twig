@@ -1,29 +1,39 @@
-<meta charset="UTF-8">
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-<link rel="apple-touch-icon" sizes="57x57" href="{{theme.path}}/assets/img/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="{{theme.path}}/assets/img/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="{{theme.path}}/assets/img/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="{{theme.path}}/assets/img/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="{{theme.path}}/assets/img/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="{{theme.path}}/assets/img/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="{{theme.path}}/assets/img/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="{{theme.path}}/assets/img/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="{{theme.path}}/assets/img/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="{{theme.path}}/assets/img/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="{{theme.path}}/assets/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="{{theme.path}}/assets/img/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="{{theme.path}}/assets/img/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="57x57" href="{{ theme.path }}/assets/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="{{ theme.path }}/assets/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="{{ theme.path }}/assets/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="{{ theme.path }}/assets/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="{{ theme.path }}/assets/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="{{ theme.path }}/assets/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="{{ theme.path }}/assets/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="{{ theme.path }}/assets/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ theme.path }}/assets/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ theme.path }}/assets/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ theme.path }}/assets/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="{{ theme.path }}/assets/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ theme.path }}/assets/img/favicon-16x16.png">
 
 <meta name="msapplication-TileColor" content="#112E51">
-<meta name="msapplication-TileImage" content="{{theme.path}}/assets/img/ms-icon-144x144.png">
+<meta name="msapplication-TileImage" content="{{ theme.path }}/assets/img/ms-icon-144x144.png">
 
-{# Adding a meta description for each page if it exists #}
-{% if page_meta_desc != '' %}
-	<meta name="description" content="{{ page_meta_desc }}">
+<link rel="icon" type="image/x-icon" href="{{ theme.path }}/assets/img/favicon.ico">
+
+{% if page_meta_desc %}<meta name="description" content="{{ page_meta_desc }}"/>{% endif %}
+
+{% if fn('defined', 'META_OG_TYPE') %}<meta property="og:type" content="{{ fn('constant', 'META_OG_TYPE') }}" />{% endif %}
+{% if fn('defined', 'META_TWITTER_SITE') %}<meta name="twitter:site" content="{{ fn('constant', 'META_TWITTER_SITE') }}" />{% endif %}
+{% if post.custom.og_title %}<meta property="og:title" content="{{ post.custom.og_title }}"/>{% endif %}
+{% if post.custom.og_description %}<meta property="og:description" content="{{ post.custom.og_description }}"/>{% endif %}
+
+{% if post.custom.og_image %}
+<meta property="og:image" content="{{ post.get_field(post.custom._og_image) }}"/>
+<meta property="og:image:alt" content="{{ fn('get_post_meta', post.custom.og_image, '_wp_attachment_image_alt', true) }}"/>
+<meta name="twitter:image:alt" content="{{ fn('get_post_meta', post.custom.og_image, '_wp_attachment_image_alt', true) }}"/>
 {% endif %}
 
-<link rel="icon" type="image/x-icon" href="{{theme.path}}/assets/img/favicon.ico">
+<meta name="twitter:card" content="summary{% if post.custom.og_image %}_large_image{% endif %}"/>
 
 {{ function('wp_head') }}

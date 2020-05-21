@@ -11,7 +11,7 @@
       </div>
 
       <div>
-        {% spaceless %}
+        {% apply spaceless %}
         <h1 class="c-header__descriptor">
           {% if programResultTotal == 0 %}
             {{__('There are no programs for you to look at.', 'accessnyc-results')}}
@@ -22,12 +22,12 @@
           {% endif %}
         </h1>
         <p class="c-header__disclaimer">{{__('Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.', 'accessnyc-results')}}</p>
-        {% endspaceless %}
+        {% endapply %}
       </div>
     </header>
 
     {% if alerts %}
-    <div class="p-2 screen-tablet:px-3">
+    <div class="p-2 screen-tablet:pt-3 screen-tablet:px-3">
       {% for alert in alerts %}
         {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
 
@@ -40,7 +40,7 @@
       <aside class="mb-4 print:hidden">
         <h4 class="type-h3 text-blue-dark">{{__('Save your results.', 'accessnyc-results')}}</h4>
 
-        <button class="btn btn-primary w-full mb-2" data-js="window-print, track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]'>
+        <button class="btn btn-primary w-full justify-center mb-2" data-js="window-print, track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "/print"}]'>
           {{ __('Print', 'accessnyc-results') }}
         </button>
 
@@ -77,7 +77,7 @@
 
       <div class="content-body">
         {% if selectedPrograms | length %}
-        <div class="mb-4">
+        <div class="mb-3">
           <h3 class="text-blue-dark">{{__('These are programs for you in the categories you selected.', 'accessnyc-results')}}</h3>
 
           <div class="layout-gutter p-2 bg-grey-lightest">
@@ -89,7 +89,7 @@
         {% endif %}
 
         {% if additionalPrograms | length %}
-        <div class="mb-4">
+        <div class="mb-3">
           <h3 class="text-blue-dark">
             {% if additionalPrograms | length == 1 %}
               {{ additionalPrograms | length }} {{__('additional program.', 'accessnyc-results')}}
@@ -106,6 +106,12 @@
         </div>
         {% endif %}
       </div>
+    </div>
+
+    <div class="sticky bottom-0 pointer-events-none z-10">
+      {% if alert_sitewide %}
+      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+      {% endif %}
     </div>
   </main>
 {% endblock %}

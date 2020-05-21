@@ -31,6 +31,7 @@ import Accordion from 'components/accordion/accordion';
 import Filter from 'components/filter/filter';
 import ShareForm from 'components/share-form/share-form';
 import Disclaimer from 'components/disclaimer/disclaimer';
+import WebShare from 'components/web-share/web-share';
 import AlertBanner from 'objects/alert-banner/alert-banner';
 import Newsletter from 'objects/newsletter/newsletter';
 import TextController from 'objects/text-controller/text-controller';
@@ -39,6 +40,7 @@ import TextController from 'objects/text-controller/text-controller';
 // import Track from 'utilities/track/track'; TODO: modify src for compatibility
 import Icons from 'utilities/icons/icons';
 import Toggle from 'utilities/toggle/toggle';
+import Copy from 'utilities/copy/copy';
 import localize from 'utilities/localize/localize';
 
 (function(window) {
@@ -49,10 +51,22 @@ import localize from 'utilities/localize/localize';
   /**
    * Instantiate ACCESS NYC Patterns
    */
-  new Icons('/wp-content/themes/access/assets/svg/icons.a6060901.svg');
+  new Icons('/wp-content/themes/access/assets/svg/icons.74267311.svg');
   new Toggle();
   new Accordion();
   new Filter();
+  new Copy();
+
+  /**
+   * Instantiate Web Share and tracking callback
+   */
+  new WebShare({
+    callback: () => {
+      Utility.track('Web Share', [
+        {action: 'web-share/shared'}
+      ]);
+    }
+  });
 
   /**
    * Instantiate Alert Banner
@@ -71,9 +85,10 @@ import localize from 'utilities/localize/localize';
   /**
    * Instantiate Newsletter and pass it translated strings
    */
-  (element => {
-    if (element) {
+  (elements => {
+    elements.forEach(element => {
       let newsletter = new Newsletter(element);
+
       let strings = Object.fromEntries([
         'NEWSLETTER_VALID_REQUIRED',
         'NEWSLETTER_VALID_EMAIL_REQUIRED',
@@ -92,8 +107,8 @@ import localize from 'utilities/localize/localize';
 
       newsletter.strings = strings;
       newsletter.form.strings = strings;
-    }
-  })(document.querySelector(Newsletter.selector));
+    });
+  })(document.querySelectorAll(Newsletter.selector));
 
   /**
    * Initialize the Share Form and Disclaimer

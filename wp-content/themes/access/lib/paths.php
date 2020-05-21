@@ -23,7 +23,7 @@ function functions() {
  */
 
 function block($name = false, $uri = false) {
-  if ($name & $uri) {
+  if ($name && $uri) {
     return get_template_directory_uri() . "/blocks/$name";
   } elseif ($name) {
     return get_template_directory() . "/blocks/$name.php";
@@ -54,11 +54,13 @@ function shortcode($name = false) {
   }
 }
 
-function require_shortcodes() {
-  foreach (scandir(shortcode()) as $filename) {
-    $path = shortcode($filename);
+function require_shortcodes($base = 'shortcode') {
+  require_once shortcode($base);
 
-    if (is_file($path)) {
+  foreach (scandir(shortcode()) as $filename) {
+    $path = shortcode() . $filename;
+
+    if (is_file($path) && $filename != $base . '.php') {
       require $path;
     }
   }

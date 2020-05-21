@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Twilio\\' => array($vendorDir . '/twilio/sdk/src/Twilio'),
+    'Twig\\' => array($vendorDir . '/twig/twig/src'),
+    'Timber\\' => array($vendorDir . '/timber/timber/lib'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
@@ -29,4 +31,5 @@ return array(
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
+    '' => array($vendorDir . '/asm89/twig-cache-extension/lib'),
 );

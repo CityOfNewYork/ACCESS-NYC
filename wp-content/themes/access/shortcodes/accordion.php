@@ -1,7 +1,11 @@
 <?php
 
 /**
- * Accordion Shortcode Handler
+ * Accordion Shortcode Handler. The shortcode accepts the following attributes;
+ *
+ * @param  header    The header text/html to display. This is always visible.
+ * @param  cta-href  The url for the call-to-action.
+ * @param  cta-text  The text for the call-to-action.
  *
  * @author NYC Opportunity
  */
@@ -40,11 +44,11 @@ class Accordion extends Shortcode {
           'active' => in_array('active', $atts),
           'header' => $atts['header'],
           'body' => $content,
-          'cta' => ($atts['cta_href']) ?
+          'cta' => ($atts['cta-href']) ?
             array(
-              'href' => $atts['cta_href'],
-              'text' => ($atts['cta_text']) ?
-                $atts['cta_text'] : __('Learn More', 'accessnyc')
+              'href' => $atts['cta-href'],
+              'text' => ($atts['cta-text']) ?
+                $atts['cta-text'] : __('Learn More', 'accessnyc')
             ) : false
         )
       )

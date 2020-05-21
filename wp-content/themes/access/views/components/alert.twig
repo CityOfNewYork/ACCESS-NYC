@@ -1,11 +1,20 @@
-<article class="c-alert-box color-{{ this.alert_color }}-status color-mid-background {{ class }}" role="alert">
-  <div class="c-alert-box__icon">
-    <svg aria-hidden="true" class="c-alert-box__svg icon icon-{{ this.alert_icon }}">
+<article {% if this.item_scope %}itemscope itemprop="{{ this.item_scope }}" itemtype="https://schema.org/{{ this.item_scope }}" {% endif %}class="c-alert-box color-{{ this.status.type }}-status color-mid-background {{ class }}" role="alert">
+  {% if this.item_scope %}
+    <meta itemprop="name" content="{{ this.post_title }}" />
+    <meta itemprop="datePosted" content="{{ this.post_modified }}" />
+  {% endif %}
+
+  <div class="c-alert-box__icon" aria-hidden="true">
+    <svg class="c-alert-box__svg icon-4">
       <use xlink:href="#icon-{{ this.alert_icon }}"></use>
     </svg>
   </div>
 
-  <div class="c-alert-box__body">
-    {{ this.alert_content }}
+  <div {% if this.item_scope %}itemprop="{{ this.itemprop_body }}" {% endif%}class="c-alert-box__body">
+      {{ this.alert_content }}
   </div>
+
+  {% if this.item_scope == 'SpecialAnnouncement' %}
+    <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
+  {% endif %}
 </article>

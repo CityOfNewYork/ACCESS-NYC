@@ -19,8 +19,12 @@
         {% endif %}
         <label class="checkbox" for="person-help-{{ slug }}">
           <input id="person-help-{{ slug }}" name="category" type="checkbox" value="{{ category.slug }}">
+
           <span class="checkbox__label items-center">
-            <span class="checkbox__icon bg-icon-{{ slug }}"></span>
+            <svg class="checkbox__icon icon-6 text-blue-bright fill-blue-light" aria-hidden="true">
+              <use xlink:href="#icon-{{ slug }}-v2"></use>
+            </svg>
+
             {{ category.name }}
           </span>
         </label>

@@ -17,7 +17,7 @@
       <div>
         <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
 
-        <h2 class="c-header__information text-grey-mid mb-4" itemprop="dateModified">
+        <h2 class="c-header__information color__alt" itemprop="dateModified">
           {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
         </h2>
       </div>
@@ -32,6 +32,12 @@
         {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
       </p>
     </footer>
+
+    <div class="sticky bottom-0 pointer-events-none z-10">
+      {% if alert_sitewide %}
+      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+      {% endif %}
+    </div>
   </article>
 </main>
 {% endblock %}

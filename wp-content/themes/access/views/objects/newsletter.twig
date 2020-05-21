@@ -1,43 +1,51 @@
-<div class="mb-4 p-3 screen-desktop:p-4 bg-white relative overflow-hidden" data-js="newsletter">
-  <div class="type-h3">{{ __('Get Updates', 'accessnyctheme') }}</div>
-  <form action="https://nyc.us18.list-manage.com/subscribe/post?u=d04b7b607bddbd338b416fa89&id=aa67394696" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" novalidate target="_blank">
+<div >
+  <form action="https://nyc.us18.list-manage.com/subscribe/post?u={{ this.mailchimp_account }}&id={{ this.mailchimp_audience_id }}" method="post" id="{{ this.id }}" name="{{ this.id }}" novalidate target="_blank">
     <div class="c-question">
-      <label class="c-question__label">{{ __('Receive benefits news and reminders about upcoming open enrollment periods.', 'accessnyctheme') }}</label>
+      <p class="c-question__label">
+        {{ __('Receive benefits news and reminders about upcoming open enrollment periods.', 'accessnyctheme') }}
+      </p>
+
+      <label class="sr-only" for="mce-email-{{ this.id }}">{{ __('Email address', 'accessnyctheme') }}</label>
+
       <div class="c-question__container">
-        <input class="w-full" name="EMAIL" placeholder="{{ __('Email address', 'accessnyctheme') }}" required="true" type="email" />
+        <input id="mce-email-{{ this.id }}" class="w-full" name="EMAIL" placeholder="{{ __('Email address', 'accessnyctheme') }}" required="true" type="email" />
       </div>
     </div>
+
     <div class="c-question mt-3">
       <fieldset class="c-question">
-        <legend class="c-question__label">{{ __('Which borough(s) would you like to receive updates for?', 'accessnyctheme') }}</legend>
+        <legend class="c-question__label">
+          {{ __('Which borough(s) would you like to receive updates for?', 'accessnyctheme') }}
+        </legend>
+
         <div class="c-question__container screen-tablet:layout-columns">
           {% set values = [
             {
-              'id': 'mce-group[4369]-4369-0',
+              'id': 'mce-group[4369]-' ~ this.id ~ '-0',
               'name': 'group[4369][1]',
               'value': '1',
               'label': 'Bronx'
             },
             {
-              'id': 'mce-group[4369]-4369-4',
+              'id': 'mce-group[4369]-' ~ this.id ~ '-4',
               'name': 'group[4369][16]',
               'value': '16',
               'label': 'Staten Island'
             },
             {
-              'id': 'mce-group[4369]-4369-3',
+              'id': 'mce-group[4369]-' ~ this.id ~ '-3',
               'name': 'group[4369][8]',
               'value': '8',
               'label': 'Queens'
             },
             {
-              'id': 'mce-group[4369]-4369-1',
+              'id': 'mce-group[4369]-' ~ this.id ~ '-1',
               'name': 'group[4369][2]',
               'value': '2',
               'label': 'Brooklyn'
             },
             {
-              'id': 'mce-group[4369]-4369-2',
+              'id': 'mce-group[4369]-' ~ this.id ~ '-2',
               'name': 'group[4369][4]',
               'value': '4',
               'label': 'Manhattan'
@@ -50,20 +58,49 @@
         </div>
       </fieldset>
     </div>
+
+    <fieldset class="c-question text-small">
+      <legend class="c-question__label">{{ __('¿Le gustaría recibir el boletín en español?', 'accessnyctheme') }}</legend>
+      <p>{{ __('Would you like to recieve the newsletter in Spanish?', 'accessnyctheme') }}</p>
+
+      <div class="c-question__container">
+        <div>
+          <label class="toggle">
+            <input data-type="boolean" type="radio" value="64" name="group[4974]" id="mce-group[4974]-{{ this.id }}-0" />
+            <span class="toggle__label">{{ __('Sí', 'accessnyctheme') }}</span>
+          </label>
+
+          <label class="toggle">
+            <input checked data-type="boolean" type="radio" value="128" name="group[4974]" id="mce-group[4974]-{{ this.id }}-1" />
+            <span class="toggle__label">{{ __('No', 'accessnyctheme') }}</span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
     <div aria-hidden="true" style="position: absolute; left: -5000px;">
       <input name="b_d04b7b607bddbd338b416fa89_98ff3f3900" tabindex="-1" type="text" value="" />
     </div>
+
     <button class="btn-primary btn-small" type="submit">{{ __('Sign Up', 'accessnyctheme') }}</button>
+
     <article aria-hidden="true" class="c-alert-box bg-status-warning mt-3 text-small hidden" data-js-newsletter="alert-box-warning">
-      <div class="c-alert-box__icon">
-        <div class="c-alert-box__svg bg-icon-warning"></div>
+      <div class="c-alert-box__icon" aria-hidden="true">
+        <svg class="c-alert-box__svg icon-4">
+          <use xlink:href="#icon-warning"></use>
+        </svg>
       </div>
+
       <div class="c-alert-box__body" data-js-newsletter="alert-box__text"></div>
     </article>
+
     <article aria-hidden="true" class="c-alert-box bg-status-success mt-3 text-small hidden" data-js-newsletter="alert-box-success">
-      <div class="c-alert-box__icon">
-        <div class="c-alert-box__svg bg-icon-success"></div>
+      <div class="c-alert-box__icon" aria-hidden="true">
+        <svg class="c-alert-box__svg icon-4">
+          <use xlink:href="#icon-success"></use>
+        </svg>
       </div>
+
       <div class="c-alert-box__body" data-js-newsletter="alert-box__text"></div>
     </article>
   </form>

@@ -21,12 +21,11 @@
 
       <article class="c-card p-0 items-center">
         <div class="c-card__icon">
-          <span class="icon">
-            <svg class="icon icon-<%= slug %>">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-<%= slug %>"></use>
-            </svg>
-          </span>
+          <svg class="icon icon-6 text-blue-bright fill-blue-light" aria-hidden="true">
+            <use xlink:href="#icon-<%= slug %>-v2"></use>
+          </svg>
         </div>
+
         <div class="c-card__body"><%= category.label %></div>
       </article>
       <% }); %>
@@ -47,7 +46,7 @@
       <% } %>
     </h3>
 
-    <ul class="c-member-list ">{% spaceless %}
+    <ul class="c-member-list ">{% apply spaceless %}
       <% members.forEach(function(member, index) { %>
       <li class="pb-4">
         <% if (index === 0 && !member.isHoh) { %>
@@ -120,7 +119,7 @@
         <% } %>
       </li>
       <% }) %>
-    {% endspaceless %}</ul>
+    {% endapply %}</ul>
   </div>
 
   <hr class="divider screen-tablet:divider-large border-grey-light">
@@ -142,7 +141,7 @@
       <a role="button" href="#step-10" class="block screen-tablet:inline screen-tablet:px-2 font-normal">{{ __("Edit", "accessnyc-screener")|trim|escape("js") }}</a>
     </h3>
 
-    <ul class="list-inline-semicolon">{% spaceless %}
+    <ul class="list-inline-semicolon">{% apply spaceless %}
       <% household.types.forEach(function(type) { %>
       <li>
         <div class="list-inline-comma">
@@ -191,7 +190,7 @@
         </div>
       </li>
       <% }); %>
-    {% endspaceless %}</ul>
+    {% endapply %}</ul>
   </div>
 
   <hr class="divider screen-tablet:divider-large border-grey-light">

@@ -45,9 +45,26 @@ class Programs extends Timber\Post {
 
     $this->share_action = admin_url('admin-ajax.php');
 
-    $this->share_url = get_permalink($this->id) . '?step=how-to-apply';
+    $this->share_url = $this->get_permalink() . '?step=how-to-apply';
 
     $this->share_hash = SMNYC\hash($this->share_url);
+
+    $og_title = $this->custom['og_title'];
+    $web_share_text = $this->custom['web_share_text'];
+
+    $this->web_share = array(
+      'title' => ($og_title) ?
+        $og_title : $this->custom['plain_language_program_name'],
+      'text' => ($web_share_text) ?
+        $web_share_text : strip_tags($this->custom['brief_excerpt']),
+      'url' => wp_get_shortlink()
+    );
+
+    /**
+     * Structure Data itemtype
+     */
+
+    $this->item_scope = $this->getItemScope();
 
     return $this;
   }
@@ -144,6 +161,22 @@ class Programs extends Timber\Post {
     $key = ($type || isset($type)) ? $type : self::STATUS_DEFAULT;
 
     return self::ICON_COLORS[$key];
+  }
+
+  /**
+   * Get the itemtype for structure data
+   *
+   * @return  String  The itemtype
+   */
+
+  public function getItemScope() {
+    if ($this->custom['program_status_type'] == 'covid-response') {
+      $item_scope = 'SpecialAnnouncement';
+    } else {
+      $item_scope = 'GovernmentService';
+    }
+
+    return $item_scope;
   }
 
   /**

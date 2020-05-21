@@ -13,22 +13,25 @@
     {% endblock %}
   </head>
 
-  <body data-template="base.twig" class="{% set _bodyClass = block('body_class') %}{% if _bodyClass %} {{ _bodyClass|trim }}{% endif %}">
-    {{ function('wp_body_open') }}
+  <body>
+    {{ fn('wp_body_open') }}
 
     <div class="page-wrapper">
       <a class="sr-only sr-only-focusable" href="#content">{{ __('Skip to main content', 'accessnyctheme') }}</a>
       {% block header %}
         <header class="overflow-hidden">
           <div class="color-mid-background flex justify-between py-1 px-3 print:block">
-            {% spaceless %}
+            {% apply spaceless %}
             <div class="flex-none">
               <svg class="icon icon-logo-nyc">
                 <use xlink:href="#icon-logo-nyc"></use>
               </svg>
-              <span class="text-xsmall px-1 text-grey-mid hidden screen-desktop:inline-block">{{ __('Official website of the City of New York', 'accessnyctheme') }}</span>
+
+              <span class="text-xsmall px-1 text-grey-mid hidden screen-desktop:inline-block">
+                {{ __('Official website of the City of New York', 'accessnyctheme') }}
+              </span>
             </div>
-            {% endspaceless %}
+            {% endapply %}
 
             {% include 'objects/text-controller.twig' %}
           </div>
@@ -50,10 +53,6 @@
           {% include 'objects/footer.twig' %}
         </footer>
       {% endblock %}
-
-      {% if alert_sitewide %}
-      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
-      {% endif %}
     </div>
 
     {% block scripts_footer %}{% endblock %}
