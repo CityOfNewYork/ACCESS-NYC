@@ -21,12 +21,11 @@
 
       <article class="c-card p-0 items-center">
         <div class="c-card__icon">
-          <span class="icon">
-            <svg class="icon icon-<%= slug %>">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-<%= slug %>"></use>
-            </svg>
-          </span>
+          <svg class="icon icon-6 text-blue-bright fill-blue-light" aria-hidden="true">
+            <use xlink:href="#icon-<%= slug %>-v2"></use>
+          </svg>
         </div>
+
         <div class="c-card__body"><%= category.label %></div>
       </article>
       <% }); %>

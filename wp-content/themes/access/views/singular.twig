@@ -13,11 +13,11 @@
   {% endif %}
 
   <article itemprop="mainEntityOfPage">
-    <header class="c-header mt-3 print:mt-0">
+    <header class="c-header my-3 print:mt-0">
       <div>
         <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
 
-        <h2 class="c-header__information text-grey-mid mb-4" itemprop="dateModified">
+        <h2 class="c-header__information color__alt" itemprop="dateModified">
           {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
         </h2>
       </div>

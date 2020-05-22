@@ -53,10 +53,8 @@
             </span>
           {% endif %}
         </h2>
-        <p class="color__alt mt-1">
-          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
-          <meta itemprop="datePosted" content="{{ post.post_modified }}" />
-        </p>
+
+        <meta itemprop="datePosted" content="{{ post.post_modified }}" />
       </div>
     </header>
 
@@ -64,7 +62,7 @@
       <meta itemprop="expires" content="{{ post.custom.program_status_clear_date }}" />
     {% endif %}
 
-    <section class="wrap screen-desktop:layout-sidebar-small-gutter">
+    <section class="wrap pt-2 screen-desktop:layout-sidebar-small-gutter">
       <aside>
         <nav class="c-side-nav print:hidden" data-js="program-nav">
           <ol>

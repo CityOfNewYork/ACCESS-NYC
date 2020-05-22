@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.18.0",
+  "version": "3.19.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "homepage": "https://access.nyc.gov",
   "authors": [
@@ -23,7 +23,7 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "3.18.0",
+        "version": "3.19.0",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -39,7 +39,7 @@
       "type": "package",
       "package": {
           "name": "wpml/wpml-multilingual-cms",
-          "version": "3.18.0",
+          "version": "3.19.0",
           "type": "wordpress-plugin",
           "dist": {
             "type": "zip",
@@ -58,7 +58,7 @@
       "type": "package",
       "package": {
           "name": "wpml/wpml-string-translation",
-          "version": "3.18.0",
+          "version": "3.19.0",
           "type": "wordpress-plugin",
           "dist": {
             "type": "zip",
@@ -74,7 +74,7 @@
       "type": "package",
       "package": {
           "name": "wpml/acfml",
-          "version": "3.18.0",
+          "version": "3.19.0",
           "type": "wordpress-plugin",
           "dist": {
             "type": "zip",
@@ -90,7 +90,7 @@
       "type": "package",
       "package": {
           "name": "wpml/wpml-all-import",
-          "version": "3.18.0",
+          "version": "3.19.0",
           "type": "wordpress-plugin",
           "dist": {
             "type": "zip",
@@ -127,7 +127,6 @@
     "wpackagist-plugin/loggedin": "^1.2",
     "wpackagist-plugin/rollbar": "^2.6.1",
     "wpackagist-plugin/search-everything": "^8.1.9",
-    "wpackagist-plugin/timber-library": "^1.14.0",
     "wpackagist-plugin/wp-all-export": "^1.2.5",
     "wpackagist-plugin/wp-security-questions": "^1.0",
     "wpackagist-plugin/wps-hide-login": "^1.5.5",

@@ -13,11 +13,9 @@ __p+='\n      {% if language_code == "en" %}\n      ';
  var slug = category.slug 
 __p+='\n      {% else %}\n      ';
  var slug = category.slug.substring(0, category.slug.lastIndexOf("-{{ language_code }}")); 
-__p+='\n      {% endif %}\n\n      <article class="c-card p-0 items-center">\n        <div class="c-card__icon">\n          <span class="icon">\n            <svg class="icon icon-'+
+__p+='\n      {% endif %}\n\n      <article class="c-card p-0 items-center">\n        <div class="c-card__icon">\n          <svg class="icon icon-6 text-blue-bright fill-blue-light" aria-hidden="true">\n            <use xlink:href="#icon-'+
 ((__t=( slug ))==null?'':__t)+
-'">\n              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-'+
-((__t=( slug ))==null?'':__t)+
-'"></use>\n            </svg>\n          </span>\n        </div>\n        <div class="c-card__body">'+
+'-v2"></use>\n          </svg>\n        </div>\n\n        <div class="c-card__body">'+
 ((__t=( category.label ))==null?'':__t)+
 '</div>\n      </article>\n      ';
  }); 

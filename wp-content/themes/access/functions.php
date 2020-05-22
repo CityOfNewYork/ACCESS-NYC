@@ -24,17 +24,17 @@ require_once Path\functions();
  */
 
 require_once Path\block('smnyc-email-button');
-// require_blocks(); // Require all blocks
+// Path\require_blocks(); // Require all blocks
 
 /**
  * Shortcodes
  */
 
-require_once Path\shortcode('shortcode');
-require_once Path\shortcode('accordion');
-// require_shortcodes(); // Require all shortcodes
+Path\require_shortcodes(); // Require all shortcodes
 
 new Shortcode\Accordion();
+new Shortcode\Newsletter();
+new Shortcode\NewsletterArchive();
 
 // phpcs:disable
 /**
