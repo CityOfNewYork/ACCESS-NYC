@@ -61,10 +61,12 @@ class Programs extends Timber\Post {
     );
 
     /**
-     * Structure Data itemtype
+     * Structure Data
      */
 
     $this->item_scope = $this->getItemScope();
+
+    $this->audience = $this->getAudience();
 
     return $this;
   }
@@ -177,6 +179,29 @@ class Programs extends Timber\Post {
     }
 
     return $item_scope;
+  }
+
+  /**
+   * Return the populations served names to use for Audience tag.
+   *
+   * @return String list of names used for Audience name tag
+   */
+  public function getAudience() {
+    $objs = array_filter($this->terms, function($term) {
+      if ($term->taxonomy == "populations-served") {
+        return $term;
+      }
+    });
+
+    $names = array_map(function($item) {
+      return $item->name;
+    }, $objs);
+
+    if (sizeof($names) > 1) {
+      return implode(', ', $names);
+    } else {
+      return  array_pop($names);
+    }
   }
 
   /**
