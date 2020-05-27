@@ -67,24 +67,24 @@ An example of post content could be the same as the SMS, however, you may not ne
 
 > REMINDER: you may be eligible for these NYC Programs: {{ URL }}
 
-The SMNYC Email post type requires a template controller that extends the [`Timber\Post` class](https://timber.github.io/docs/reference/timber-post/) and a [Twig](https://twig.symfony.com/) file containing the template that will render the content into an HTML email. The [sample controller](https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/blob/master/controllers/smnyc-email-single-sample.php) contains a working class that extends `Timber\Post`. Move this file to the root of your active theme directory.
+The SMNYC Email post type requires a template controller that extends the [`Timber\Post` class](https://timber.github.io/docs/reference/timber-post/) and a [Twig](https://twig.symfony.com/) file containing the template that will render the content into an HTML email. The [sample controller](https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/blob/master/controllers/smnyc-email-sample.php) contains a working class that extends `Timber\Post`. Move this file to the root of your active theme directory.
 
-    mv wp-content/mu-plugins/nyco-wp-send-me-nyc/controllers/smnyc-email-single-sample.php wp-content/themes/theme/smnyc-email-single.php
+    mv wp-content/mu-plugins/nyco-wp-send-me-nyc/controllers/smnyc-email-single-sample.php wp-content/themes/theme/smnyc-email.php
 
 The [sample email](https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/blob/master/views/email/single-sample.twig) contains a working email twig template. Use this file or create a file within your [Timber Views](https://timber.github.io/docs/guides/template-locations/#changing-the-default-folder-for-twig-files) directory called *emails/single.twig*. This is where the HTML markup for your email will be placed.
 
 **Customization**
 
-The path to the controller file and class contents can be used as is or modified as needed. By default, `SMNYC\EmailMe` requires a file called `single-smnyc-email.php` in the root of the activated WordPress theme that contains the the controller class. However, different path can be passed to the `SMNYC\EmailMe` class on instatiation in the [auto loader](#initialization);
+The path to the controller file and class contents can be used as is or modified as needed. By default, `SMNYC\EmailMe` requires a file called `smnyc-email.php` in the root of the activated WordPress theme that contains the the controller class. However, different path can be passed to the `SMNYC\EmailMe` class on instatiation in the [auto loader](#initialization);
 
-    $email = new SMNYC\EmailMe('controllers/single-smnyc-email.php');
+    $email = new SMNYC\EmailMe('controllers/smnyc-email.php');
 
-Examining the `single-smnyc-email.php` file, we can see that the class has a template constant.
+Examining the `smnyc-email.php` file, we can see that the class has a template constant.
 
     /** The twig template for emails */
     const TEMPLATE = 'emails/single.twig';
 
-This is the path inside the [*views*](https://timber.github.io/docs/guides/template-locations/#changing-the-default-folder-for-twig-files) where the email template is stored. Modify the string with a different path if desired. The `single-smnyc-email.php` also contains a method called `->addToPost()` where programmable post content can be added to pass to the view when it is rendered.
+This is the path inside the [*views*](https://timber.github.io/docs/guides/template-locations/#changing-the-default-folder-for-twig-files) where the email template is stored. Modify the string with a different path if desired. The `smnyc-email.php` also contains a method called `->addToPost()` where programmable post content can be added to pass to the view when it is rendered.
 
 ## Sending a Message
 

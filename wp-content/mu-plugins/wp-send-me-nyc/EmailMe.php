@@ -26,7 +26,7 @@ class EmailMe extends ContactMe {
 
   protected $prefix = 'smnyc_aws';
 
-  protected $template_controller = 'single-smnyc-email.php';
+  protected $template_controller = 'smnyc-email.php';
 
   const POST_TYPE = 'smnyc-email';
 
@@ -61,8 +61,10 @@ class EmailMe extends ContactMe {
    * @return  Array                   Includes the subject, html, and text bodies
    */
   protected function content($url_shortened, $url, $template, $lang) {
-    if (file_exists(get_template_directory() . '/' . $this->template_controller)) {
-      require get_template_directory() . '/' .$this->template_controller;
+    $controller = get_stylesheet_directory() . '/' . $this->template_controller;
+
+    if (file_exists($controller)) {
+      require_once $controller;
     } else {
       error_log('There is no controller for the email template.');
 
@@ -82,7 +84,7 @@ class EmailMe extends ContactMe {
 
     // Render Timber template
     $context = Timber::get_context();
-    $context['post'] = new Controller\SingleSmnycEmail($id);
+    $context['post'] = new Controller\SmnycEmail($id);
     $html = Timber::compile($context['post']->templates(), $context);
 
     $subject = $context['post']->title;
@@ -156,6 +158,12 @@ class EmailMe extends ContactMe {
       }
 
       $result = $client->sendEmail($config);
+
+      if (isset($result['MessageId'])) {
+        return true;
+      }
+
+      return false;
     } catch (\Aws\Ses\Exception\SesException $e) {
       $this->failure(3, $e->getMessage());
     }

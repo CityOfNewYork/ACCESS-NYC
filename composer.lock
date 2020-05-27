@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43e50474dd7e07b6bdcc77ce3f30f9fc",
+    "content-hash": "81167c0a15bb78427941c96ee2abf3f5",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1208,16 +1208,16 @@
         },
         {
             "name": "nyco/wp-send-me-nyc",
-            "version": "1.1.2",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc.git",
-                "reference": "5c230855f77dc05d06994181fb04fa87b453c5de"
+                "reference": "f75c77698859a890ab59bdea2216ed4ccb444410"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/5c230855f77dc05d06994181fb04fa87b453c5de",
-                "reference": "5c230855f77dc05d06994181fb04fa87b453c5de",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/f75c77698859a890ab59bdea2216ed4ccb444410",
+                "reference": "f75c77698859a890ab59bdea2216ed4ccb444410",
                 "shasum": ""
             },
             "require": {
@@ -1256,7 +1256,7 @@
                 "twilio",
                 "wordpress"
             ],
-            "time": "2020-02-10T19:21:14+00:00"
+            "time": "2020-05-27T14:17:54+00:00"
         },
         {
             "name": "nyco/wp-stat-collector",

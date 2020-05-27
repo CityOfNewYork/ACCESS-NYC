@@ -7,7 +7,7 @@
  */
 
 require_once get_template_directory() . '/lib/paths.php';
-require_once Path\controller('single-smnyc-email');
+require_once Path\controller('smnyc-email');
 
 /**
  * Context
@@ -15,7 +15,7 @@ require_once Path\controller('single-smnyc-email');
 
 $context = Timber::get_context();
 
-$context['post'] = new Controller\SingleSmnycEmail();
+$context['post'] = new Controller\SmnycEmail();
 
 /**
  * Render the view
