@@ -187,20 +187,20 @@ class Programs extends Timber\Post {
    * @return String list of names used for Audience name tag
    */
   public function getAudience() {
-    $objs = array_filter($this->terms, function($term) {
-      if ($term->taxonomy == "populations-served") {
+    $terms = array_filter($this->terms, function($term) {
+      if ($term->taxonomy === 'populations-served') {
         return $term;
       }
     });
 
     $names = array_map(function($item) {
       return $item->name;
-    }, $objs);
+    }, $terms);
 
     if (sizeof($names) > 1) {
       return implode(', ', $names);
     } else {
-      return  array_pop($names);
+      return array_pop($names);
     }
   }
 
