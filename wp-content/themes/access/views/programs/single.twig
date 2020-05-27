@@ -178,9 +178,11 @@
           <meta itemprop="name" content="{{ post.government_agency }}" />
         </div>
 
-        {% if post.structured_data_service_type %}
-          <meta itemprop="serviceType" content="http://schema.org/{{ post.structured_data_service_type[0] }}" />
-        {% endif %}
+        <div itemprop="audience" itemtype="http://schema.org/Audience" itemscope>
+          <meta itemprop="name" content="{{ post.audience }}" />
+        </div>
+
+        <meta itemprop="serviceType" content="http://schema.org/{{ post.category.name }}" />
       </div>
     {% endif %}
 
