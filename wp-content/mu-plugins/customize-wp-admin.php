@@ -1,10 +1,12 @@
 <?php
 
+// phpcs:disable
 /**
- * Plugin Name: Customize Admin
- * Description: Customize the display of the WordPress Admin.
+ * Plugin Name: Customize WordPress Admin
+ * Description: Customize the display of the WordPress Admin. Remove menu items and make the wp admin bar statically positioned when viewing the theme.
  * Author: NYC Opportunity
  */
+// phpcs:enable
 
 /**
  * Remove menu items

@@ -47,8 +47,8 @@
 /wp-content/cache/supercache/*
 /wp-content/wpallimport/*
 
-# Docker and Docker Image Adds #
-################################
+# Plugins #
+###########
 /wp-content/plugins/akismet/
 /wp-content/plugins/akismet/*
 /wp-content/themes/*twenty*/

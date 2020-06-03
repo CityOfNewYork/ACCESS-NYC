@@ -10,7 +10,7 @@ namespace Controller;
 
 use Timber;
 
-class SingleSmnycEmail extends Timber\Post {
+class SmnycEmail extends Timber\Post {
   /** The twig template for emails */
   const TEMPLATE = 'emails/single.twig';
 
@@ -25,7 +25,7 @@ class SingleSmnycEmail extends Timber\Post {
       parent::__construct();
     }
 
-    $this->addToPost();
+    return $this;
   }
 
   /**
@@ -34,21 +34,5 @@ class SingleSmnycEmail extends Timber\Post {
    */
   public function templates() {
     return array(self::TEMPLATE);
-  }
-
-  /**
-   * [getContext description]
-   * @param   [type]  $post     [$post description]
-   * @param   [type]  $context  [$context description]
-   * @return  [type]            [return description]
-   */
-  public function addToPost() {
-    /**
-     * Any additional post content manipulation should be added here
-     */
-
-    // $this->variable = 'something';
-
-    return $this;
   }
 }

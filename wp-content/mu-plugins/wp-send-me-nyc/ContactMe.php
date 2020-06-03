@@ -207,8 +207,6 @@ class ContactMe {
    */
   protected function respond($response) {
     wp_send_json($response);
-
-    wp_die();
   }
 
   /**

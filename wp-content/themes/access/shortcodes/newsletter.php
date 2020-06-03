@@ -3,8 +3,10 @@
 /**
  * Newsletter Shortcode Handler. The shortcode accepts the following attributes;
  *
- * @param  account   The Mailchimp Account ID the form posts to.
- * @param  audience  The Audience ID that signups will post to.
+ * @param  String  account   The Mailchimp Account ID the form posts to.
+ *                           Defaults to the constant MAILCHIMP_ACCOUNT
+ * @param  String  audience  The Audience ID that signups will post to.
+ *                           Defaults to the constant MAILCHIMP_AUDIENCE_ID
  *
  * @author NYC Opportunity
  */
@@ -36,13 +38,14 @@ class Newsletter extends Shortcode {
     $id = $this->tag . '-' . uniqid();
 
     return Timber::compile(
-      $this->template, array('this' => array(
-        'id' => $id,
-        'mailchimp_account' => ($atts['account']) ?
-          $atts['account'] : MAILCHIMP_ACCOUNT,
-        'mailchimp_audience_id' => ($atts['audience']) ?
-          $atts['audience'] : MAILCHIMP_AUDIENCE_ID,
-      )
+      $this->template, array(
+        'this' => array(
+          'id' => $id,
+          'mailchimp_account' => ($atts['account']) ?
+            $atts['account'] : MAILCHIMP_ACCOUNT,
+          'mailchimp_audience_id' => ($atts['audience']) ?
+            $atts['audience'] : MAILCHIMP_AUDIENCE_ID,
+        )
       )
     );
   }

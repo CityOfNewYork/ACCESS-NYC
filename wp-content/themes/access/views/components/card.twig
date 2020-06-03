@@ -1,4 +1,16 @@
 <article itemscope itemtype="http://schema.org/{{ post.item_scope }}" class="c-card">
+  <meta itemprop="name" content="{{ post.program_name }}" />
+
+  <meta itemprop="datePosted" content="{{ post.post_modified }}" />
+
+  {% if post.program_status_clear_date %}
+  <meta itemprop="expires" content="{{ post.program_status_clear_date }}" />
+  {% endif %}
+
+  {% if post.item_scope == 'SpecialAnnouncement' %}
+  <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
+  {% endif %}
+
   <div class="c-card__icon">
     {% include 'elements/icon.twig' with {
       'icon': 'icon-card-' ~ post.category.slug ~ '-v' ~ post.icon.version,
@@ -18,12 +30,6 @@
       </a>
     </h3>
 
-    <meta itemprop="name" content="{{ post.program_name }}" />
-    <meta itemprop="datePosted" content="{{ post.post_modified }}" />
-    {% if post.program_status_clear_date %}
-      <meta itemprop="expires" content="{{ post.program_status_clear_date }}" />
-    {% endif %}
-
     {% if not short_post %}<p class="c-card__subtitle color__alt">{{ post.program_name }} {% if post.program_acronym != '' %}({{ post.program_acronym }}){% endif %}</p>{% endif %}
 
     <div class="c-card__summary">
@@ -37,10 +43,6 @@
       <p class="hide-for-print">
         <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}{% if "how-to-apply" in post.show_sections %}?step=how-to-apply{% endif %}" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>{{__('Apply', 'accessnyc-results')}}</a>
       </p>
-      {% endif %}
-
-      {% if post.item_scope == 'SpecialAnnouncement' %}
-        <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
       {% endif %}
     </div>
   </div>
