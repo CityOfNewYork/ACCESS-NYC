@@ -7,10 +7,12 @@ version: 2
 updates:
   - package-ecosystem: "composer"
     directory: "/"
+    target-branch: "env/accessnyctest"
     schedule:
       interval: "daily"
       
   - package-ecosystem: "npm"
     directory: "/wp-content/themes/access/"
+    target-branch: "env/accessnyctest"
     schedule:
       interval: "daily"
