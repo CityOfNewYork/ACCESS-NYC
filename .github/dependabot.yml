@@ -13,6 +13,11 @@ updates:
     ignore:
       - dependency-name: "philippbaschke/acf-pro-installer"
       - dependency-name: "enelogic/wpml-installer"
+      - dependency-name: "advanced-custom-fields/advanced-custom-fields-pro"
+      - dependency-name: "wpml/acfml"
+      - dependency-name: "wpml/wpml-all-import"
+      - dependency-name: "wpml/wpml-multilingual-cms"
+      - dependency-name: "wpml/wpml-string-translation"
       
   - package-ecosystem: "npm"
     directory: "/wp-content/themes/access/"
