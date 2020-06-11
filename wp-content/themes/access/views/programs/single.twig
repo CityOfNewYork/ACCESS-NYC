@@ -2,6 +2,34 @@
 
 {% block content %}
   <main id="content" class="color-light-background" itemscope itemtype="http://schema.org/{{ post.item_scope }}">
+    <meta itemprop="datePosted" content="{{ post.post_modified }}" />
+
+    {% if post.custom.program_status_clear_date %}
+    <meta itemprop="expires" content="{{ post.custom.program_status_clear_date }}" />
+    {% endif %}
+
+    {% if post.item_scope == 'SpecialAnnouncement' %}
+    <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
+
+    <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
+      <meta itemprop="name" content="{{ post.program_name }}" />
+
+      {% if post.structured_data_url %}
+      <meta itemprop="url" content="{{ post.structured_data_url }}" />
+      {% endif %}
+
+      <div itemprop="provider" itemtype="http://schema.org/GovernmentOrganization" itemscope>
+        <meta itemprop="name" content="{{ post.government_agency }}" />
+      </div>
+
+      <div itemprop="audience" itemtype="http://schema.org/Audience" itemscope>
+        <meta itemprop="name" content="{{ post.audience }}" />
+      </div>
+
+      <meta itemprop="serviceType" content="{{ post.category.name }}" />
+    </div>
+    {% endif %}
+
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
       {% for alert in alerts %}
@@ -53,14 +81,8 @@
             </span>
           {% endif %}
         </h2>
-
-        <meta itemprop="datePosted" content="{{ post.post_modified }}" />
       </div>
     </header>
-
-    {% if post.custom.program_status_clear_date %}
-      <meta itemprop="expires" content="{{ post.custom.program_status_clear_date }}" />
-    {% endif %}
 
     <section class="wrap pt-2 screen-desktop:layout-sidebar-small-gutter">
       <aside>
@@ -165,28 +187,6 @@
         {% endfor %}
       </div>
     </section>
-
-    {% if post.item_scope == 'SpecialAnnouncement' %}
-      <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
-        <meta itemprop="name" content="{{ post.program_name }}" />
-
-        {% if post.structured_data_url %}
-          <meta itemprop="url" content="{{ post.structured_data_url }}" />
-        {% endif %}
-
-        <div itemprop="provider" itemtype="http://schema.org/GovernmentOrganization" itemscope>
-          <meta itemprop="name" content="{{ post.government_agency }}" />
-        </div>
-
-        {% if post.structured_data_service_type %}
-          <meta itemprop="serviceType" content="http://schema.org/{{ post.structured_data_service_type[0] }}" />
-        {% endif %}
-      </div>
-    {% endif %}
-
-    {% if post.item_scope == 'SpecialAnnouncement' %}
-      <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
-    {% endif %}
 
     <footer class="wrap pt-4">
       <p class="color__alt">

@@ -867,38 +867,6 @@
             "maxlength": ""
         },
         {
-            "key": "field_5eb2fba586d6d",
-            "label": "Structured Data Service Type",
-            "name": "structured_data_service_type",
-            "type": "radio",
-            "instructions": "Select a service type being offered",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "choices": {
-                "BasicIncome": "BasicIncome",
-                "BusinessSupport": "BusinessSupport",
-                "DisabilitySupport": "DisabilitySupport",
-                "HealthCare": "HealthCare",
-                "OneTimePayments": "OneTimePayments",
-                "PaidLeave": "PaidLeave",
-                "ParentalSupport": "ParentalSupport",
-                "UnemploymentSupport": "UnemploymentSupport"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
             "key": "field_5e8633e3743f9",
             "label": "Alert",
             "name": "alert",
@@ -946,5 +914,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1589400451
+    "modified": 1590504298
 }

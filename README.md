@@ -47,7 +47,7 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 
 ### Requirements
 
-* **Virtualization** (Docker, Virtualbox, or other). This WordPress repository can be run many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WP Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally.
+* **Virtualization** ([Docker](https://docs.docker.com/compose/wordpress/), [Vagrant](https://www.vagrantup.com/) + Virtualbox, [Local](https://localwp.com/), or other). This WordPress repository can be run many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WP Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally.
 
 * **Composer**. PHP and WordPress plugin dependencies for WordPress core and the ACCESS NYC Theme are managed via Composer. [Learn more about Composer on it's website](https://getcomposer.org/).
 
@@ -55,7 +55,7 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 
 ### Installation
 
-This won't cover everything for standing up a WordPress site given all of the options available but it can be done with [Docker for Mac](https://www.docker.com/docker-mac) but it can be done following the instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. *The following instructions assume you have a working environment ready to drop a WordPress site into, including a server and MySQL database*.
+This won't cover everything for standing up a WordPress site given all of the options available but it can be done with instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. *The following instructions assume you have a working environment ready to drop a WordPress site into, including a server and MySQL database*.
 
 **$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/master/wp/wp-config.php) but you should still update the salts.
 
