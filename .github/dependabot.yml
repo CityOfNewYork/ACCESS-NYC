@@ -11,7 +11,7 @@ updates:
     schedule:
       interval: "daily"
     ignore:
-      - dependency-name: "acf-pro-installer"
+      - dependency-name: "philippbaschke/acf-pro-installer"
       
   - package-ecosystem: "npm"
     directory: "/wp-content/themes/access/"
