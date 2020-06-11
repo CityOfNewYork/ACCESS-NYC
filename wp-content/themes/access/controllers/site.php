@@ -156,6 +156,14 @@ class Site extends TimberSite {
    */
   public function getPageMetaDescription() {
     /**
+     * Homepage
+     */
+
+    if (is_home()) {
+      return get_bloginfo('description');
+    }
+
+    /**
      * Posts
      */
 
@@ -166,13 +174,13 @@ class Site extends TimberSite {
        * Page Meta Description Field
        */
 
-      $description = get_field('page_meta_description', $translated);
+      $description = get_field('page_meta_description', $id);
 
       if (isset($description)) {
         return $description;
       }
     }
 
-    return get_bloginfo('description');
+    return '';
   }
 }

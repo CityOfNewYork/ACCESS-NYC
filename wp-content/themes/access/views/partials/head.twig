@@ -23,7 +23,10 @@
 
 {% if fn('defined', 'META_OG_TYPE') %}<meta property="og:type" content="{{ fn('constant', 'META_OG_TYPE') }}" />{% endif %}
 <meta property="og:title" content="{% if post.custom.og_title %}{{ post.custom.og_title }}{% else %}{{ fn('wp_get_document_title') }}{% endif %}"/>
-{% if post.custom.og_description %}<meta property="og:description" content="{{ post.custom.og_description }}"/>{% endif %}
+
+{% if page_meta_description or post.custom.og_description %}
+<meta property="og:description" content="{% if post.custom.og_description %}{{ post.custom.og_description }}{% else %}{{ page_meta_description }}{% endif %}"/>
+{% endif %}
 
 {% if post.custom.og_image %}
 <meta property="og:image" content="{{ post.get_field(post.custom._og_image) }}"/>
