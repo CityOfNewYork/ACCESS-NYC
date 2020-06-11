@@ -97,8 +97,8 @@ class Site extends TimberSite {
     /** Determine if page is in print view */
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
 
-    /** Get the meta description for the page */
-    $context['page_meta_desc'] = $this->getMetaDescription($context['language_code']);
+    /** Get the default page meta description for the page */
+    $context['page_meta_description'] = $this->getPageMetaDescription();
 
     /** Create nonce for allowed resources */
     $context['csp_script_nonce'] = (defined('CSP_SCRIPT_NONCE')) ? CSP_SCRIPT_NONCE : false;
@@ -150,28 +150,29 @@ class Site extends TimberSite {
   }
 
   /**
-   * Get the meta description for the page if it exists
-   * @param   string  $lang  The language of the description needed
+   * Get the default meta of the page if it exists.
+
    * @return  string         The view description
    */
-  public function getMetaDescription($lang) {
-    if (is_home()) {
-      return get_bloginfo('description');
+  public function getPageMetaDescription() {
+    /**
+     * Posts
+     */
+
+    if (is_single() || is_page()) {
+      $id = get_post()->ID;
+
+      /**
+       * Page Meta Description Field
+       */
+
+      $description = get_field('page_meta_description', $translated);
+
+      if (isset($description)) {
+        return $description;
+      }
     }
 
-    if ($lang != 'en') {
-      $id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/' . $lang))->ID;
-    } else {
-      $id = get_page_by_path(trim($_SERVER["REQUEST_URI"], '/'))->ID;
-    }
-
-    $translated = apply_filters('wpml_object_id', $id, 'page', true, $lang);
-    $description = get_field('page_meta_description', $translated);
-
-    if ($description == '') {
-      $description = get_field('page_meta_description', $id);
-    }
-
-    return $description;
+    return get_bloginfo('description');
   }
 }
