@@ -12,6 +12,7 @@ updates:
       interval: "daily"
     ignore:
       - dependency-name: "philippbaschke/acf-pro-installer"
+      - dependency-name: "enelogic/wpml-installer"
       
   - package-ecosystem: "npm"
     directory: "/wp-content/themes/access/"
