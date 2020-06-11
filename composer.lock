@@ -11,9 +11,7 @@
             "version": "5.8.7",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&t=5.8.7",
-                "reference": null,
-                "shasum": null
+                "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&t=5.8.7"
             },
             "require": {
                 "composer/installers": "^1.0",
@@ -1598,16 +1596,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.13.1",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
+                "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
-                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
+                "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
                 "shasum": ""
             },
             "require": {
@@ -1619,7 +1617,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -1652,20 +1650,34 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-11-27T13:56:44+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-12T16:14:59+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.13.1",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
-                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fa79b11539418b02fc5e1897267673ba2c19419c",
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c",
                 "shasum": ""
             },
             "require": {
@@ -1677,7 +1689,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -1711,7 +1723,21 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T14:18:11+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-12T16:47:27+00:00"
         },
         {
             "name": "symfony/translation",
@@ -1848,16 +1874,16 @@
         },
         {
             "name": "timber/timber",
-            "version": "1.15.2",
+            "version": "1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/timber/timber.git",
-                "reference": "c0856786f5f2bb9bbcca9febc1ae8998d912734b"
+                "reference": "cdae62c0108cd60c256e9bb00d634645eb0127c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/timber/timber/zipball/c0856786f5f2bb9bbcca9febc1ae8998d912734b",
-                "reference": "c0856786f5f2bb9bbcca9febc1ae8998d912734b",
+                "url": "https://api.github.com/repos/timber/timber/zipball/cdae62c0108cd60c256e9bb00d634645eb0127c0",
+                "reference": "cdae62c0108cd60c256e9bb00d634645eb0127c0",
                 "shasum": ""
             },
             "require": {
@@ -1874,7 +1900,7 @@
                 "squizlabs/php_codesniffer": "3.*",
                 "wp-coding-standards/wpcs": "^2.0",
                 "wpackagist-plugin/advanced-custom-fields": "5.*",
-                "wpackagist-plugin/co-authors-plus": "3.2.*"
+                "wpackagist-plugin/co-authors-plus": "3.2.*|3.4.*"
             },
             "suggest": {
                 "satooshi/php-coveralls": "1.0.* for code coverage"
@@ -1909,7 +1935,7 @@
                 "timber",
                 "twig"
             ],
-            "time": "2020-03-24T17:38:21+00:00"
+            "time": "2020-05-18T19:28:12+00:00"
         },
         {
             "name": "twig/twig",
@@ -2138,9 +2164,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/acf-google-maps-radius-search.zip?timestamp=1466072928",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/acf-google-maps-radius-search.zip?timestamp=1466072928"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2158,9 +2182,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/acf-to-rest-api.3.1.0.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/acf-to-rest-api.3.1.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2178,9 +2200,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.2.5.2.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.2.5.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2198,9 +2218,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/better-search-replace.zip?timestamp=1557317815",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/better-search-replace.zip?timestamp=1557317815"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2218,9 +2236,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/bulk-delete.6.0.2.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/bulk-delete.6.0.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2238,9 +2254,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/core-sitemaps.0.2.0.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/core-sitemaps.0.2.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2258,9 +2272,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.4.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.4.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2278,9 +2290,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.3.7.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.3.7.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2298,9 +2308,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.1.14.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.1.14.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2318,9 +2326,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.52.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.52.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2338,9 +2344,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.10.0.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.10.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2358,9 +2362,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/loggedin.1.2.0.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/loggedin.1.2.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2378,9 +2380,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/rollbar.2.6.1.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/rollbar.2.6.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2398,9 +2398,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/search-everything.8.1.9.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/search-everything.8.1.9.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2418,9 +2416,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-all-export.1.2.5.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/wp-all-export.1.2.5.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2438,9 +2434,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-security-questions.zip?timestamp=1559124291",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/wp-security-questions.zip?timestamp=1559124291"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2458,9 +2452,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.6.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.6.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2473,9 +2465,7 @@
             "version": "1.5.0",
             "dist": {
                 "type": "zip",
-                "url": "https://httpbin.org/status/400?&version=1.5.0&download=1097589",
-                "reference": null,
-                "shasum": null
+                "url": "https://httpbin.org/status/400?&version=1.5.0&download=1097589"
             },
             "require": {
                 "composer/installers": "^1.0",
@@ -2488,9 +2478,7 @@
             "version": "2.1.1",
             "dist": {
                 "type": "zip",
-                "url": "https://httpbin.org/status/400?&version=2.1.1&download=720221",
-                "reference": null,
-                "shasum": null
+                "url": "https://httpbin.org/status/400?&version=2.1.1&download=720221"
             },
             "require": {
                 "composer/installers": "^1.0",
@@ -2503,9 +2491,7 @@
             "version": "4.3.6",
             "dist": {
                 "type": "zip",
-                "url": "https://httpbin.org/status/400?&version=4.3.6&download=6088",
-                "reference": null,
-                "shasum": null
+                "url": "https://httpbin.org/status/400?&version=4.3.6&download=6088"
             },
             "require": {
                 "composer/installers": "^1.0",
@@ -2521,9 +2507,7 @@
             "version": "3.0.6",
             "dist": {
                 "type": "zip",
-                "url": "https://httpbin.org/status/400?&version=3.0.6&download=6092",
-                "reference": null,
-                "shasum": null
+                "url": "https://httpbin.org/status/400?&version=3.0.6&download=6092"
             },
             "require": {
                 "composer/installers": "^1.0",
@@ -2842,9 +2826,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.6.0.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.6.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2862,9 +2844,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/redis-cache.1.5.8.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/redis-cache.1.5.8.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2882,9 +2862,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-auto-login.1.0.1.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/wp-auto-login.1.0.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2902,9 +2880,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.8.3.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.8.3.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2919,5 +2895,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
