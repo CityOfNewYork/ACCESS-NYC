@@ -10,6 +10,8 @@ updates:
     target-branch: "env/accessnyctest"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "acf-pro-installer"
       
   - package-ecosystem: "npm"
     directory: "/wp-content/themes/access/"
