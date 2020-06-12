@@ -18,93 +18,9 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "3.19.2",
-        "type": "wordpress-plugin",
-        "dist": {
-          "type": "zip",
-          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download"
-        },
-        "require": {
-          "philippbaschke/acf-pro-installer": "^1.0",
-          "composer/installers": "^1.0"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-          "name": "wpml/wpml-multilingual-cms",
-          "version": "3.19.2",
-          "type": "wordpress-plugin",
-          "dist": {
-            "type": "zip",
-            "url": "https://httpbin.org/status/400?"
-          },
-          "require": {
-            "enelogic/wpml-installer": "^0.1",
-            "composer/installers": "^1.0"
-          },
-          "extra": {
-            "installer-name": "sitepress-multilingual-cms"
-          }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-          "name": "wpml/wpml-string-translation",
-          "version": "3.19.2",
-          "type": "wordpress-plugin",
-          "dist": {
-            "type": "zip",
-            "url": "https://httpbin.org/status/400?"
-          },
-          "require": {
-            "enelogic/wpml-installer": "^0.1",
-            "composer/installers": "^1.0"
-          }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-          "name": "wpml/acfml",
-          "version": "3.19.2",
-          "type": "wordpress-plugin",
-          "dist": {
-            "type": "zip",
-            "url": "https://httpbin.org/status/400?"
-          },
-          "require": {
-            "enelogic/wpml-installer": "^0.1",
-            "composer/installers": "^1.0"
-          }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-          "name": "wpml/wpml-all-import",
-          "version": "3.19.2",
-          "type": "wordpress-plugin",
-          "dist": {
-            "type": "zip",
-            "url": "https://httpbin.org/status/400?"
-          },
-          "require": {
-            "enelogic/wpml-installer": "^0.1",
-            "composer/installers": "^1.0"
-          }
-      }
     }
   ],
   "require": {
-    "advanced-custom-fields/advanced-custom-fields-pro": "^5.8",
     "humanmade/s3-uploads": "^2.2.1",
     "nyco/wp-assets": "^1.1.5",
     "nyco/wp-config": "^1.0.1",
@@ -129,14 +45,9 @@
     "wpackagist-plugin/search-everything": "^8.1.9",
     "wpackagist-plugin/wp-all-export": "^1.2.5",
     "wpackagist-plugin/wp-security-questions": "^1.0",
-    "wpackagist-plugin/wps-hide-login": "^1.5.5",
-    "wpml/acfml": "^1.5.0",
-    "wpml/wpml-all-import": "^2.1.1",
-    "wpml/wpml-multilingual-cms": "^4.3.6",
-    "wpml/wpml-string-translation": "^3.0.6"
+    "wpackagist-plugin/wps-hide-login": "^1.5.5"
   },
   "require-dev": {
-    "enelogic/wpml-installer": "^0.1.6",
     "filp/whoops": "^2.7.2",
     "squizlabs/php_codesniffer": "^3.5.3",
     "umutphp/wp-vulnerability-check": "^0.1.1",
