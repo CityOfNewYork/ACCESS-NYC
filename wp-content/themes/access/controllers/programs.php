@@ -87,6 +87,15 @@ class Programs extends Timber\Post {
   }
 
   /**
+   * Get the page meta description.
+   *
+   * @return  String
+   */
+  public function getPageMetaDescription() {
+    return $this->custom['plain_language_program_name'];
+  }
+
+  /**
    * Return details of the main category for the program
    *
    * @return  Array  The slug and name of the category

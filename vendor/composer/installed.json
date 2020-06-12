@@ -1,22 +1,5 @@
 [
     {
-        "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.8.7",
-        "version_normalized": "5.8.7.0",
-        "dist": {
-            "type": "zip",
-            "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&t=5.8.7",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "^1.0",
-            "philippbaschke/acf-pro-installer": "^1.0"
-        },
-        "type": "wordpress-plugin",
-        "installation-source": "dist"
-    },
-    {
         "name": "altorouter/altorouter",
         "version": "v1.2.0",
         "version_normalized": "1.2.0.0",
@@ -412,60 +395,6 @@
             "pluralize",
             "singularize",
             "string"
-        ]
-    },
-    {
-        "name": "enelogic/wpml-installer",
-        "version": "0.1.6",
-        "version_normalized": "0.1.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Enelogic/wpml-installer.git",
-            "reference": "3d4c13c7517fa2e1620b1a19b18bc281308ecd14"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Enelogic/wpml-installer/zipball/3d4c13c7517fa2e1620b1a19b18bc281308ecd14",
-            "reference": "3d4c13c7517fa2e1620b1a19b18bc281308ecd14",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "^1.0",
-            "php": ">=5.5",
-            "vlucas/phpdotenv": "^2.2"
-        },
-        "require-dev": {
-            "composer/composer": "1.0.*"
-        },
-        "time": "2019-02-27T11:41:53+00:00",
-        "type": "composer-plugin",
-        "extra": {
-            "class": "Enelogic\\WPMLInstaller\\Plugin"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Enelogic\\WPMLInstaller\\": "src/WPMLInstaller"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Wesley Coppens",
-                "email": "wesley@enelogic.com"
-            }
-        ],
-        "description": "An install helper for Wordpress Multilingual (WPML), based of Philipp Baschke it's plugin to install ACFPro",
-        "keywords": [
-            "composer",
-            "env",
-            "plugin",
-            "wordpress",
-            "wp",
-            "wpml"
         ]
     },
     {
@@ -1406,64 +1335,6 @@
         ]
     },
     {
-        "name": "philippbaschke/acf-pro-installer",
-        "version": "v1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/PhilippBaschke/acf-pro-installer.git",
-            "reference": "f18e537183958159ef5f6cb1f5b684f59d55f3eb"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/PhilippBaschke/acf-pro-installer/zipball/f18e537183958159ef5f6cb1f5b684f59d55f3eb",
-            "reference": "f18e537183958159ef5f6cb1f5b684f59d55f3eb",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "^1.0",
-            "php": ">=5.5",
-            "vlucas/phpdotenv": "^2.2"
-        },
-        "require-dev": {
-            "composer/composer": "1.0.*",
-            "phpunit/phpunit": "4.8.*",
-            "satooshi/php-coveralls": "1.*",
-            "squizlabs/php_codesniffer": "2.*"
-        },
-        "time": "2016-07-20T10:19:36+00:00",
-        "type": "composer-plugin",
-        "extra": {
-            "class": "PhilippBaschke\\ACFProInstaller\\Plugin"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PhilippBaschke\\ACFProInstaller\\": "src/ACFProInstaller"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Philipp Baschke",
-                "email": "philipp@baschke.com"
-            }
-        ],
-        "description": "An install helper for Advanced Custom Fields PRO",
-        "keywords": [
-            "acf",
-            "composer",
-            "env",
-            "plugin",
-            "pro",
-            "wordpress",
-            "wp"
-        ]
-    },
-    {
         "name": "psr/container",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -1814,17 +1685,17 @@
     },
     {
         "name": "symfony/polyfill-ctype",
-        "version": "v1.13.1",
-        "version_normalized": "1.13.1.0",
+        "version": "v1.17.0",
+        "version_normalized": "1.17.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-ctype.git",
-            "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
+            "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
-            "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
+            "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
             "shasum": ""
         },
         "require": {
@@ -1833,11 +1704,11 @@
         "suggest": {
             "ext-ctype": "For best performance"
         },
-        "time": "2019-11-27T13:56:44+00:00",
+        "time": "2020-05-12T16:14:59+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.13-dev"
+                "dev-master": "1.17-dev"
             }
         },
         "installation-source": "dist",
@@ -2417,59 +2288,6 @@
         ]
     },
     {
-        "name": "vlucas/phpdotenv",
-        "version": "v2.6.1",
-        "version_normalized": "2.6.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/vlucas/phpdotenv.git",
-            "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
-            "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.9",
-            "symfony/polyfill-ctype": "^1.9"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.8.35 || ^5.0"
-        },
-        "time": "2019-01-29T11:11:52+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.6-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Dotenv\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Vance Lucas",
-                "email": "vance@vancelucas.com",
-                "homepage": "http://www.vancelucas.com"
-            }
-        ],
-        "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
-        "keywords": [
-            "dotenv",
-            "env",
-            "environment"
-        ]
-    },
-    {
         "name": "whoops/soap",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -2969,76 +2787,5 @@
         "type": "wordpress-plugin",
         "installation-source": "dist",
         "homepage": "https://wordpress.org/plugins/wps-hide-login/"
-    },
-    {
-        "name": "wpml/acfml",
-        "version": "1.5.0",
-        "version_normalized": "1.5.0.0",
-        "dist": {
-            "type": "zip",
-            "url": "https://httpbin.org/status/400?&version=1.5.0&download=1097589",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "^1.0",
-            "enelogic/wpml-installer": "^0.1"
-        },
-        "type": "wordpress-plugin",
-        "installation-source": "dist"
-    },
-    {
-        "name": "wpml/wpml-all-import",
-        "version": "2.1.1",
-        "version_normalized": "2.1.1.0",
-        "dist": {
-            "type": "zip",
-            "url": "https://httpbin.org/status/400?&version=2.1.1&download=720221",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "^1.0",
-            "enelogic/wpml-installer": "^0.1"
-        },
-        "type": "wordpress-plugin",
-        "installation-source": "dist"
-    },
-    {
-        "name": "wpml/wpml-multilingual-cms",
-        "version": "4.3.6",
-        "version_normalized": "4.3.6.0",
-        "dist": {
-            "type": "zip",
-            "url": "https://httpbin.org/status/400?&version=4.3.6&download=6088",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "^1.0",
-            "enelogic/wpml-installer": "^0.1"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "installer-name": "sitepress-multilingual-cms"
-        },
-        "installation-source": "dist"
-    },
-    {
-        "name": "wpml/wpml-string-translation",
-        "version": "3.0.6",
-        "version_normalized": "3.0.6.0",
-        "dist": {
-            "type": "zip",
-            "url": "https://httpbin.org/status/400?&version=3.0.6&download=6092",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "^1.0",
-            "enelogic/wpml-installer": "^0.1"
-        },
-        "type": "wordpress-plugin",
-        "installation-source": "dist"
     }
 ]

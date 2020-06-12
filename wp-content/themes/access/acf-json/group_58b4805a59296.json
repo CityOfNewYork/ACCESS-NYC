@@ -166,26 +166,6 @@
                     "wpml_cf_preferences": 0
                 }
             ]
-        },
-        {
-            "key": "field_5c9ceb64e440d",
-            "label": "Page Meta Description",
-            "name": "page_meta_description",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
         }
     ],
     "location": [
@@ -212,5 +192,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1591192311
+    "modified": 1591895228
 }

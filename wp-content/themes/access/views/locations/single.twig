@@ -47,17 +47,9 @@
       </aside>
 
       <article>
-        <section itemprop="description">
-          {% if post.get_field('programs')|length > 0 %}
-          <p class="mb-0">{% apply spaceless %}
-            {{__('This location can help you with:', 'accessnyc-locations')}}
-
-            {% for program in post.get_field('programs') %}
-              {{ program.name }}{% if loop.last %}.{% else %},{% endif %}
-            {% endfor %}
-          {% endapply %}</p>
-          {% endif %}
-        </section>
+        {% if post.get_help %}<section itemprop="description">
+          <p class="mb-0">{{ post.get_help }}</p>
+        </section>{% endif %}
 
         <hr class="divider screen-tablet:divider-large border-grey-light" aria-hidden="true">
 

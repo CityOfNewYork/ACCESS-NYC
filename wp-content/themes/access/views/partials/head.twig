@@ -21,12 +21,12 @@
 
 <link rel="icon" type="image/x-icon" href="{{ theme.path }}/assets/img/favicon.ico">
 
-{% if page_meta_desc %}<meta name="description" content="{{ page_meta_desc }}"/>{% endif %}
-
 {% if fn('defined', 'META_OG_TYPE') %}<meta property="og:type" content="{{ fn('constant', 'META_OG_TYPE') }}" />{% endif %}
-{% if fn('defined', 'META_TWITTER_SITE') %}<meta name="twitter:site" content="{{ fn('constant', 'META_TWITTER_SITE') }}" />{% endif %}
-{% if post.custom.og_title %}<meta property="og:title" content="{{ post.custom.og_title }}"/>{% endif %}
-{% if post.custom.og_description %}<meta property="og:description" content="{{ post.custom.og_description }}"/>{% endif %}
+<meta property="og:title" content="{% if post.custom.og_title %}{{ post.custom.og_title }}{% else %}{{ fn('wp_get_document_title') }}{% endif %}"/>
+
+{% if page_meta_description or post.custom.og_description %}
+<meta property="og:description" content="{% if post.custom.og_description %}{{ post.custom.og_description }}{% else %}{{ page_meta_description }}{% endif %}"/>
+{% endif %}
 
 {% if post.custom.og_image %}
 <meta property="og:image" content="{{ post.get_field(post.custom._og_image) }}"/>
@@ -35,5 +35,9 @@
 {% endif %}
 
 <meta name="twitter:card" content="summary{% if post.custom.og_image %}_large_image{% endif %}"/>
+
+{% if fn('defined', 'META_TWITTER_SITE') %}<meta name="twitter:site" content="{{ fn('constant', 'META_TWITTER_SITE') }}" />{% endif %}
+
+{% if page_meta_description %}<meta name="description" content="{{ page_meta_description }}"/>{% endif %}
 
 {{ function('wp_head') }}

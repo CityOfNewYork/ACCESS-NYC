@@ -8,11 +8,11 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
@@ -39,7 +39,6 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
-            'PhilippBaschke\\ACFProInstaller\\' => 31,
         ),
         'J' => 
         array (
@@ -57,13 +56,8 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
-        'E' => 
-        array (
-            'Enelogic\\WPMLInstaller\\' => 23,
-        ),
         'D' => 
         array (
-            'Dotenv\\' => 7,
             'Doctrine\\Common\\Inflector\\' => 26,
         ),
         'C' => 
@@ -122,10 +116,6 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'PhilippBaschke\\ACFProInstaller\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/philippbaschke/acf-pro-installer/src/ACFProInstaller',
-        ),
         'JmesPath\\' => 
         array (
             0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
@@ -153,14 +143,6 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-        ),
-        'Enelogic\\WPMLInstaller\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/enelogic/wpml-installer/src/WPMLInstaller',
-        ),
-        'Dotenv\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
@@ -1005,18 +987,6 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
         'Composer\\Installers\\ZendInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
         'Composer\\Installers\\ZikulaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
         'Doctrine\\Common\\Inflector\\Inflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
-        'Dotenv\\Dotenv' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Dotenv.php',
-        'Dotenv\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Exception/ExceptionInterface.php',
-        'Dotenv\\Exception\\InvalidCallbackException' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Exception/InvalidCallbackException.php',
-        'Dotenv\\Exception\\InvalidFileException' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Exception/InvalidFileException.php',
-        'Dotenv\\Exception\\InvalidPathException' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Exception/InvalidPathException.php',
-        'Dotenv\\Exception\\ValidationException' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Exception/ValidationException.php',
-        'Dotenv\\Loader' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Loader.php',
-        'Dotenv\\Parser' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Parser.php',
-        'Dotenv\\Validator' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Validator.php',
-        'Enelogic\\WPMLInstaller\\Exceptions\\MissingKeyException' => __DIR__ . '/..' . '/enelogic/wpml-installer/src/WPMLInstaller/Exceptions/MissingKeyException.php',
-        'Enelogic\\WPMLInstaller\\Plugin' => __DIR__ . '/..' . '/enelogic/wpml-installer/src/WPMLInstaller/Plugin.php',
-        'Enelogic\\WPMLInstaller\\RemoteFilesystem' => __DIR__ . '/..' . '/enelogic/wpml-installer/src/WPMLInstaller/RemoteFilesystem.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
         'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
         'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
@@ -1261,9 +1231,6 @@ class ComposerStaticInit06da6ab86ab017ea8917c4f8ddd50a18
         'JmesPath\\TreeCompiler' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/TreeCompiler.php',
         'JmesPath\\TreeInterpreter' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/TreeInterpreter.php',
         'JmesPath\\Utils' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/Utils.php',
-        'PhilippBaschke\\ACFProInstaller\\Exceptions\\MissingKeyException' => __DIR__ . '/..' . '/philippbaschke/acf-pro-installer/src/ACFProInstaller/Exceptions/MissingKeyException.php',
-        'PhilippBaschke\\ACFProInstaller\\Plugin' => __DIR__ . '/..' . '/philippbaschke/acf-pro-installer/src/ACFProInstaller/Plugin.php',
-        'PhilippBaschke\\ACFProInstaller\\RemoteFilesystem' => __DIR__ . '/..' . '/philippbaschke/acf-pro-installer/src/ACFProInstaller/RemoteFilesystem.php',
         'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',

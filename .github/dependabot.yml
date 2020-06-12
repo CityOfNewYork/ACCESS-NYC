@@ -4,23 +4,16 @@
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+
 updates:
-  - package-ecosystem: "composer"
-    directory: "/"
-    target-branch: "env/accessnyctest"
+  - package-ecosystem: composer
+    directory: /
+    target-branch: env/accessnyctest
     schedule:
-      interval: "daily"
-    ignore:
-      - dependency-name: "philippbaschke/acf-pro-installer"
-      - dependency-name: "enelogic/wpml-installer"
-      - dependency-name: "advanced-custom-fields/advanced-custom-fields-pro"
-      - dependency-name: "wpml/acfml"
-      - dependency-name: "wpml/wpml-all-import"
-      - dependency-name: "wpml/wpml-multilingual-cms"
-      - dependency-name: "wpml/wpml-string-translation"
-      
-  - package-ecosystem: "npm"
-    directory: "/wp-content/themes/access/"
-    target-branch: "env/accessnyctest"
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /wp-content/themes/access/
+    target-branch: env/accessnyctest
     schedule:
-      interval: "daily"
+      interval: daily
