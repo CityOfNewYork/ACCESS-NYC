@@ -5,7 +5,14 @@
  * Breakpoints & Media Queries
  */
 /**
+ * Colors
+ */
+/**
  * Often re-used variables
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
  */
 /**
  * Breakpoint mixins
@@ -21,9 +28,6 @@
  */
 /**
  * Applies editor left position to the selector passed as argument
- */
-/**
- * Applies editor right position to the selector passed as argument
  */
 /**
  * Styles that are reused verbatim in a few places
@@ -121,7 +125,9 @@ p {
 ul,
 ol {
   margin-bottom: 28px;
-  padding: inherit; }
+  padding: inherit;
+  padding-right: 1.3em;
+  margin-right: 1.3em; }
   ul ul,
   ul ol,
   ol ul,
