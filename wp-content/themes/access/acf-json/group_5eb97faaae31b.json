@@ -3,11 +3,32 @@
     "title": "Web Share and Open Graph (OG) meta",
     "fields": [
         {
+            "key": "field_5ee263b85f954",
+            "label": "Page Meta Description",
+            "name": "page_meta_description",
+            "type": "text",
+            "instructions": "This is the generic page meta description. Defaults to the <a href=\"\/wp-admin\/options-general.php\">site tagline<\/a> on the homepage, the \"Plain Language Name\" field for program posts, and the \"This location can help you with... \" programs list for location posts.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5eb981510ade2",
             "label": "Web Share Text",
             "name": "web_share_text",
             "type": "text",
-            "instructions": "This text will pre-fill what users say about this content. Limit to 160 characters. Defaults to the <a href=\"\/wp-admin\/options-general.php\">site tagline<\/a>.",
+            "instructions": "This text will pre-fill what users say about this content. Limit to 160 characters. Defaults to the <a href=\"\/wp-admin\/options-general.php\">site tagline<\/a> for page posts and the \"Brief Excerpt\" field for program posts.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -49,7 +70,7 @@
             "label": "OG Description",
             "name": "og_description",
             "type": "text",
-            "instructions": "Will display as the content in social media posts. Leave blank to use default page content.",
+            "instructions": "Will display as the content in social media posts and override the generic page meta description. Leave blank to use default page content or generic page meta description.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -144,5 +165,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591192374
+    "modified": 1591903691
 }

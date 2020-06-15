@@ -38,6 +38,12 @@ $context = Timber::get_context();
 $context['post'] = $location;
 
 /**
+ * Page Meta Description
+ */
+
+$context['page_meta_description'] = $location->getPageMetaDescription();
+
+/**
  * Alerts
  */
 

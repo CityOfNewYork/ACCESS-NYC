@@ -31,6 +31,8 @@ enqueue_script('programs');
  * Context
  */
 
+$program = new Controller\Programs();
+
 $context = Timber::get_context();
 
 // Gets the url parameter on the page for navigating each section.
@@ -42,7 +44,13 @@ if (isset($_GET['step'])) {
   $context['step'] = '';
 }
 
-$context['post'] = new Controller\Programs(Timber::get_post());
+$context['post'] = $program;
+
+/**
+ * Page Meta Description
+ */
+
+$context['page_meta_description'] = $program->getPageMetaDescription();
 
 /**
  * Alerts

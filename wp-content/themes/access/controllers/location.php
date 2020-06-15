@@ -24,6 +24,8 @@ class Location extends Timber\Post {
       parent::__construct();
     }
 
+    $this->get_help = $this->getHelp();
+
     return $this;
   }
 
@@ -37,6 +39,29 @@ class Location extends Timber\Post {
     return array(
       'nearby_stops' => $this->nearbyStops()
     );
+  }
+
+  /**
+   * Get the page meta description.
+   *
+   * @return  String
+   */
+  public function getPageMetaDescription() {
+    return $this->getHelp();
+  }
+
+  /**
+   * Get the line of text regarding what this location can help with.
+   *
+   * @return  String/Boolean  String if programs are available. False if not.
+   */
+  public function getHelp() {
+    if ($this->custom['programs']) {
+      return __('This location can help you with:', 'accessnyc-locations') .
+        ' ' . implode(', ', $this->get_field('programs')) . '.';
+    } else {
+      return false;
+    }
   }
 
   /**
