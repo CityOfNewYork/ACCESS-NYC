@@ -20,7 +20,8 @@ import _ from 'underscore';
  * Style Deps
  */
 
-import sass from 'gulp-sass';
+import sass from 'sass';
+import gulpSass from 'gulp-sass';
 import postcss from 'gulp-postcss';
 import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'autoprefixer';
@@ -87,13 +88,15 @@ gulp.task('clean:styles', callback => {
   callback();
 });
 
+gulpSass.compiler = sass;
+
 gulp.task('sass', () => gulp.src(`${ SRC }/scss/style-*.scss`)
   .pipe(sourcemaps.init())
-  .pipe(sass({
+  .pipe(gulpSass({
     includePaths: ['node_modules', `${ PATTERNS_ACCESS }/src/`]
     .concat(require('bourbon').includePaths)
   })
-  .on('error', sass.logError))
+  .on('error', gulpSass.logError))
   .pipe(postcss([
     autoprefixer('last 3 versions'),
     mqpacker({sort: true}),
