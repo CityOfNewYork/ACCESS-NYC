@@ -1,9 +1,5 @@
 <?php
 
-// TODO: detect constants being defined too late...
-// open config file, strpos()
-// defined to late, or commented out...
-
 global $wp_object_cache;
 
 $info = $plugins = $dropins = array();
