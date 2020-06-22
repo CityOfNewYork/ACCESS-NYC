@@ -2,21 +2,20 @@
 Contributors: wpchefgadget
 Tags: brute force, login, security, GDPR, protection
 Requires at least: 3.0
-Tested up to: 5.3
-Stable tag: 2.10.0
+Tested up to: 5.4
+Stable tag: 2.13.0
 
 Reloaded version of the original Limit Login Attempts plugin for Login Protection by a team of WordPress developers. GDPR compliant.
 
 == Description ==
 
-Limit the number of login attempts that possible both through the normal login as well as using the auth cookies.
-WordPress by default allows unlimited login attempts either through the login page or by sending special cookies. This allows passwords (or hashes) to be cracked via brute-force relatively easily.
+Limit the number of login attempts that possible through the normal login as well as XMLRPC, Woocommerce and custom login pages.
+WordPress by default allows unlimited login attempts. This allows passwords to be cracked via brute-force relatively easily.
 Limit Login Attempts Reloaded blocks an Internet address from making further attempts after a specified limit on retries has been reached, making a brute-force attack difficult or impossible.
 
 Features:
 
 * Limit the number of retry attempts when logging in (per each IP). This is fully customizable.
-* Limit the number of attempts to log in using authorization cookies in the same way.
 * Informs the user about the remaining retries or lockout time on the login page.
 * Optional logging and optional email notification.
 * It is possible to whitelist/blacklist IPs and Usernames.
@@ -50,6 +49,30 @@ Based on the original code from Limit Login Attemps plugin by Johan Eenfeldt.
 3. Administration interface in WordPress 5.2.1
 
 == Changelog ==
+
+= 2.13.0 =
+* Fixed incompatibility with PHP < 5.6.
+* Settings page layout refactored.
+
+= 2.12.3 =
+* The feedback message is shown for admins only now, and it can also be closed even if the site has issues with AJAX.
+
+= 2.12.2 =
+* Fixed the feedback message not being shown, again.
+
+= 2.12.1 =
+* Fixed the feedback message not being shown.
+
+= 2.12.0 =
+* Small refactoring.
+* get_message() - fixed error notices.
+* This is the first time we are asking you for a feedback.
+
+= 2.11.0 =
+* Blacklisted usernames can't be registered anymore.
+
+= 2.10.1 =
+* Fixed: GDPR compliance option could not be selected on the multisite installations.
 
 = 2.10.0 =
 * Debug information has been added for better support.

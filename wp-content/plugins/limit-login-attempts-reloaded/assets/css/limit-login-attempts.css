@@ -1,11 +1,1 @@
-.limit-login-page-settings .field-col {
-  display: inline-block;
-  margin-right: 20px; }
-.limit-login-page-settings .limit-login-log table {
-  background-color: #fff; }
-  .limit-login-page-settings .limit-login-log table th, .limit-login-page-settings .limit-login-log table td {
-    padding: 10px; }
-  .limit-login-page-settings .limit-login-log table tr:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.09); }
-.limit-login-page-settings input[name="admin_notify_email"] {
-  min-width: 243px; }
+.limit-login-page-settings .field-col{display:inline-block;margin-right:20px}.limit-login-page-settings .limit-login-log table{background-color:#fff}.limit-login-page-settings .limit-login-log table th,.limit-login-page-settings .limit-login-log table td{padding:10px}.limit-login-page-settings .limit-login-log table tr:nth-child(even){background-color:rgba(0,0,0,0.09)}.limit-login-page-settings input[name="admin_notify_email"]{min-width:243px}.llar-notice-review{display:-webkit-box;display:-ms-flexbox;display:flex;padding:15px 20px 0 !important;border-left:4px solid #333 !important}.llar-notice-review .llar-review-image img{margin-top:10px}.llar-notice-review .llar-review-info{-webkit-box-flex:1;-ms-flex:1;flex:1;margin-left:30px}.llar-notice-review .llar-review-info .llar-buttons{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.llar-notice-review .llar-review-info .llar-buttons li{margin-right:10px}.llar-notice-review .llar-review-info .llar-buttons li .dashicons{margin-right:5px}.llar-accordion .ui-accordion-header{font-weight:bold;background-color:#778899;color:#fff}.llar-accordion .ui-accordion-header.ui-accordion-header-active{background-color:#87CEFA}
