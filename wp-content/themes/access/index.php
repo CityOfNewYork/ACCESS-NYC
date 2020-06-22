@@ -4,8 +4,8 @@
  * 404 or Homepage
  */
 
-require_once Path\controller('programs');
-require_once Path\controller('homepage-tout');
+require_once ACCESS\controller('programs');
+require_once ACCESS\controller('homepage-tout');
 
 /**
  * Enqueue
