@@ -1,0 +1,95 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enable Media Replace\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-24 10:57+0100\n"
+"PO-Revision-Date: 2012-11-27 12:03+0100\n"
+"Last-Translator: Marco <marco@blackstudio.it>\n"
+"Language-Team: Black Studio <info@blackstudio.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: enable-media-replace.php:39
+#: enable-media-replace.php:67
+msgid "Replace media"
+msgstr "Sostituisci file"
+
+#: enable-media-replace.php:67
+msgid "Upload a new file"
+msgstr "Carica un nuovo file"
+
+#: enable-media-replace.php:67
+msgid "To replace the current file, click the link and upload a replacement."
+msgstr "Per sostituire il file corrente, clicca il link e carica un file sostitutivo."
+
+#: popup.php:14
+#: upload.php:3
+msgid "You do not have permission to upload files."
+msgstr "Non hai sufficienti permessi per caricare file."
+
+#: popup.php:30
+msgid "Replace Media Upload"
+msgstr "Caricamento file sostitutivo"
+
+#: popup.php:46
+msgid "NOTE: You are about to replace the media file"
+msgstr "NOTA: Stai per sostituire il file"
+
+#: popup.php:46
+msgid "There is no undo. Think about it!"
+msgstr "Questa operazione non è reversibile. Fai attenzione!"
+
+#: popup.php:48
+msgid "Choose a file to upload from your computer"
+msgstr "Seleziona un file da caricare dal tuo computer"
+
+#: popup.php:52
+msgid "Select media replacement type:"
+msgstr "Seleziona il tipo di sostituzione:"
+
+#: popup.php:54
+msgid "Just replace the file"
+msgstr "Sostituire semplicemente il file"
+
+#: popup.php:55
+msgid "Note: This option requires you to upload a file of the same type ("
+msgstr "Nota: Questa opzione richiede il caricamento di un file dello stesso tipo ("
+
+#: popup.php:55
+msgid ") as the one you are replacing. The name of the attachment will stay the same ("
+msgstr ") di quello sostituito. Il nome dell'allegato rimarrà invariato ("
+
+#: popup.php:55
+msgid ") no matter what the file you upload is called."
+msgstr ") indipendentemente dal nome del file caricato."
+
+#: popup.php:57
+msgid "Replace the file, use new file name and update all links"
+msgstr "Sostituire il file, usare il nome del nuovo file ed aggiornare tutti i collegamenti"
+
+#: popup.php:58
+msgid "Note: If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file ("
+msgstr "Nota: Se selezioni questa opzione, il nome ed il tipo di file che stai per caricare sostituiranno quelli del file precedente. Tutti i collegamenti che puntavano al file precedente ("
+
+#: popup.php:58
+msgid ") will be updated to point to the new file name."
+msgstr ") saranno aggiornati per puntare al nuovo file."
+
+#: popup.php:60
+msgid "Upload"
+msgstr "Carica"
+
+#: popup.php:60
+msgid "Cancel"
+msgstr "Annulla"
+
+#: upload.php:35
+msgid "File type does not meet security guidelines. Try another."
+msgstr "Il tipo di file non rispetta le restrizioni di sicurezza. Riprova con un altro tipo."
+
