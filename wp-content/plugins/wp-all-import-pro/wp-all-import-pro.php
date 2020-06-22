@@ -3,7 +3,7 @@
 Plugin Name: WP All Import Pro
 Plugin URI: http://www.wpallimport.com/
 Description: The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more.
-Version: 4.5.9
+Version: 4.6.1
 Author: Soflyy
 */
 
@@ -31,7 +31,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 }
 else {
 
-	define('PMXI_VERSION', '4.5.9');
+	define('PMXI_VERSION', '4.6.1');
 
 	define('PMXI_EDITION', 'paid');
 
@@ -374,6 +374,10 @@ else {
 			add_action('admin_init', array($this, 'fix_options'));
 			add_action('init', array($this, 'init'));
 			add_action('plugins_loaded', array($this, 'setup_allimport_dir'));
+            // Define WP CLI command.
+            if (class_exists('WP_CLI')) {
+                WP_CLI::add_command( 'all-import', 'PMXI_Cli' );
+            }
 		}
 
         /**
@@ -383,10 +387,19 @@ else {
          */
         public function isAdminDashboardOrCronImport() {
             // Load libraries only on admin dashboard or cron import.
-            if (is_admin() || isset($_GET['import_key']) || isset($_GET['action']) || isset($_GET['check_connection']) || defined('PHPUNIT_WPALLIMPORT_TESTSUITE')) {
+            if (is_admin() || isset($_GET['import_key']) || isset($_GET['action']) || isset($_GET['check_connection']) || defined('PHPUNIT_WPALLIMPORT_TESTSUITE') || $this->isCli()) {
                 return TRUE;
             }
             return FALSE;
+        }
+
+        /**
+         * Determines is process running from cli.
+         *
+         * @return bool
+         */
+        public function isCli() {
+            return php_sapi_name() === 'cli';
         }
 
 		/**

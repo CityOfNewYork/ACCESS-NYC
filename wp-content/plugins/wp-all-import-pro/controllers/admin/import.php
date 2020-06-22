@@ -68,7 +68,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			or ! @$dom->loadXML($xml)// FIX: libxml xpath doesn't handle default namespace properly, so remove it upon XML load			
 		) {					
 			if ( ! PMXI_Plugin::is_ajax() ){
-				$this->errors->add('form-validation', __('WP All Import lost track of where you are.<br/><br/>Maybe you cleared your cookies or maybe it is just a temporary issue on your or your web host\'s end.<br/>If you can\'t do an import without seeing this error, change your session settings on the All Import -> Settings page.', 'wp_all_import_plugin')); 
+				$this->errors->add('form-validation', __('WP All Import lost track of where you are.<br/><br/>Maybe you cleared your cookies or maybe it is just a temporary issue on your or your web host\'s end.', 'wp_all_import_plugin'));
 				wp_redirect_or_javascript($this->baseUrl); die();
 			}
 		}
@@ -139,32 +139,22 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			$DefaultOptions['custom_type'] = $parent_import_record->options['custom_type'];
 		}
 
-		if ($id) { // update requested but corresponding import is not found
-			if ($import->getById($id)->isEmpty()){				
-
-				if (!empty($_GET['deligate']) and $_GET['deligate'] == 'wpallexport'){
-				
+		if ( $id ) { // update requested but corresponding import is not found
+			if ( $import->getById($id)->isEmpty() ) {
+				if ( ! empty($_GET['deligate']) and $_GET['deligate'] == 'wpallexport' ) {
 					wp_redirect(add_query_arg('pmxi_nt', array('error' => urlencode(__('The import associated with this export has been deleted.', 'wp_all_import_plugin')), 'updated' => urlencode(__('Please re-run your export by clicking Run Export on the All Export -> Manage Exports page. Then try your import again.', 'wp_all_import_plugin'))), remove_query_arg('id', $this->baseUrl))); die();
-
-				}
-				else{
-
+				} else {
 					wp_redirect(add_query_arg('pmxi_nt', array('error' => urlencode(__('This import has been deleted.', 'wp_all_import_plugin'))), remove_query_arg('id', $this->baseUrl))); die();
 				}
-
-			}
-			else{
+			} else {
 				$DefaultOptions['custom_type'] = $import->options['custom_type'];	
 			}
 		}			
 
-		if ( ! in_array($action, array('index')))
-		{
+		if ( ! in_array($action, array('index'))) {
 			PMXI_Plugin::$session->clean_session();				
-		}		 
-		else
-		{			
-			$DefaultOptions = (PMXI_Plugin::$session->has_session() ? PMXI_Plugin::$session->first_step : array()) + $DefaultOptions;											
+		} else {
+			$DefaultOptions = (PMXI_Plugin::$session->has_session() && !empty(PMXI_Plugin::$session->first_step) ? PMXI_Plugin::$session->first_step : array()) + $DefaultOptions;
 		}
 		
 		$this->data['post'] = $post = $this->input->post( $DefaultOptions );					
@@ -1000,7 +990,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			// validate
 			try {
 				if (empty($xml)){
-					$this->errors->add('form-validation', __('WP All Import lost track of where you are.<br/><br/>Maybe you cleared your cookies or maybe it is just a temporary issue on your web host\'s end.<br/>If you can\'t do an import without seeing this error, change your session settings on the All Import -> Settings page.', 'wp_all_import_plugin'));
+					$this->errors->add('form-validation', __('WP All Import lost track of where you are.<br/><br/>Maybe you cleared your cookies or maybe it is just a temporary issue on your web host\'s end.', 'wp_all_import_plugin'));
 				} elseif (empty($post['title'])) {				
 					$this->errors->add('form-validation', __('<strong>Warning</strong>: your title is blank.', 'wp_all_import_plugin'));
 					$this->data['title'] = "";
@@ -1016,7 +1006,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			}
 			try {	
 				if (empty($xml)){
-					$this->errors->add('form-validation', __('WP All Import lost track of where you are.<br/><br/>Maybe you cleared your cookies or maybe it is just a temporary issue on your web host\'s end.<br/>If you can\'t do an import without seeing this error, change your session settings on the All Import -> Settings page.', 'wp_all_import_plugin'));
+					$this->errors->add('form-validation', __('WP All Import lost track of where you are.<br/><br/>Maybe you cleared your cookies or maybe it is just a temporary issue on your web host\'s end.', 'wp_all_import_plugin'));
 				} elseif (empty($post['content'])) {
 					$this->errors->add('form-validation', __('<strong>Warning</strong>: your content is blank.', 'wp_all_import_plugin'));
 					$this->data['content'] = "";				
@@ -1147,7 +1137,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 				$this->data['featured_images'] = false;
 				
 				if (empty($xml)){
-					$this->errors->add('form-validation', __('WP All Import lost track of where you are.<br/><br/>Maybe you cleared your cookies or maybe it is just a temporary issue on your web host\'s end.<br/>If you can\'t do an import without seeing this error, change your session settings on the All Import -> Settings page.', 'wp_all_import_plugin'));
+					$this->errors->add('form-validation', __('WP All Import lost track of where you are.<br/><br/>Maybe you cleared your cookies or maybe it is just a temporary issue on your web host\'s end.', 'wp_all_import_plugin'));
 				} 
 				else
 				{
@@ -1776,6 +1766,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
                 // Get all meta keys for requested post type
                 $this->data['meta_keys'] = array();
                 $hide_fields = array('_edit_lock', '_edit_last', '_wp_trash_meta_status', '_wp_trash_meta_time');
+
                 $records = get_posts( array('post_type' => $post['custom_type'], 'post_status' => 'any') );
                 if ( ! empty($records)){
                     foreach ($records as $record) {
@@ -1783,6 +1774,20 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
                         if ( ! empty($record_meta)){
                             foreach ($record_meta as $record_meta_key => $record_meta_value) {
                                 if ( ! in_array($record_meta_key, $this->data['meta_keys']) and ! in_array($record_meta_key, $hide_fields)) $this->data['meta_keys'][] = $record_meta_key;
+                            }
+                        }
+                    }
+                }
+
+                if ($post['custom_type'] == 'product') {
+                    $records = get_posts( array('post_type' => 'product_variation', 'post_status' => 'any') );
+                    if ( ! empty($records)){
+                        foreach ($records as $record) {
+                            $record_meta = get_post_meta($record->ID, '');
+                            if ( ! empty($record_meta)){
+                                foreach ($record_meta as $record_meta_key => $record_meta_value) {
+                                    if ( ! in_array($record_meta_key, $this->data['meta_keys']) and ! in_array($record_meta_key, $hide_fields)) $this->data['meta_keys'][] = $record_meta_key;
+                                }
                             }
                         }
                     }

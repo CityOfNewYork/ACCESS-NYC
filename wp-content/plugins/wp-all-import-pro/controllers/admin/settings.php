@@ -154,7 +154,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 			if (empty($post['html_entities'])) $post['html_entities'] = 0;
 			if (empty($post['utf8_decode'])) $post['utf8_decode'] = 0;
 
-            $post['cron_job_key'] = preg_replace('/[^A-Za-z0-9-_]+/', '', $post['cron_job_key']);
+            $post['cron_job_key'] = preg_replace('/[^A-Za-z0-9-_\.]+/', '', $post['cron_job_key']);
 
             if ( ! $this->errors->get_error_codes()) { // no validation errors detected
 

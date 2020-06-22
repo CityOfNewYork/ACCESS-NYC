@@ -128,6 +128,13 @@
 				pmai_init($ths.find('.acf_signle_group:first'));
 				// swither show/hide logic
 				$ths.find('.acf_groups').find('input.switcher').change();
+				$ths.find('.acf_groups').find('input, textarea').bind('focus', function() {
+					var selected = $('.xml-element.selected');
+					if (selected.length) {
+						$(this).val($(this).val() + selected.attr('title').replace(/\/[^\/]*\//, '{') + '}');
+						selected.removeClass('selected');
+					}
+				} );
 			},
 			error: function(jqXHR, textStatus){
 				$('.pmai_acf_group').removeAttr('disabled');
