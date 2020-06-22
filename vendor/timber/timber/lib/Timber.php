@@ -35,7 +35,7 @@ use Timber\Loader;
  */
 class Timber {
 
-	public static $version = '1.15.2';
+	public static $version = '1.16.0';
 	public static $locations;
 	public static $dirname = 'views';
 	public static $twig_cache = false;
@@ -278,6 +278,7 @@ class Timber {
 	 * Compile a Twig file.
 	 *
 	 * Passes data to a Twig file and returns the output.
+	 * If the template file doesn't exist it will throw a warning when WP_DEBUG is enabled.
 	 *
 	 * @api
 	 * @example
@@ -331,6 +332,11 @@ class Timber {
 			}
 
 			$output = $loader->render($file, $data, $expires, $cache_mode);
+		} else {
+			if ( is_array($filenames) ) {
+				$filenames = implode(", ", $filenames);
+			}
+			Helper::error_log( 'Error loading your template files: '.$filenames.'. Make sure one of these files exists.' );
 		}
 
 		do_action('timber_compile_done');
