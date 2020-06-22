@@ -29,6 +29,8 @@
  * - Nicolás Hock Isaza
  * - Viesturs Kavacs (Kavacky)
  * - zakse
+ * - Janis Eglitis (janiseglitis)
+ * - Guntars
  */
 return [
     'year' => '0 gadiem|:count gads|:count gadiem',
@@ -106,7 +108,7 @@ return [
     'weekdays' => ['svētdiena', 'pirmdiena', 'otrdiena', 'trešdiena', 'ceturtdiena', 'piektdiena', 'sestdiena'],
     'weekdays_short' => ['Sv.', 'P.', 'O.', 'T.', 'C.', 'Pk.', 'S.'],
     'weekdays_min' => ['Sv.', 'P.', 'O.', 'T.', 'C.', 'Pk.', 'S.'],
-    'months' => ['janvārī', 'ferbruārī', 'martā', 'aprīlī', 'maijā', 'jūnijā', 'jūlijā', 'augustā', 'septembrī', 'oktobrī', 'novembrī', 'decembrī'],
-    'months_short' => ['Janv', 'Febr', 'Marts', 'Apr', 'Maijs', 'Jūn', 'Jūl', 'Aug', 'Sept', 'Okt', 'Nov', 'Dec'],
+    'months' => ['janvārī', 'februārī', 'martā', 'aprīlī', 'maijā', 'jūnijā', 'jūlijā', 'augustā', 'septembrī', 'oktobrī', 'novembrī', 'decembrī'],
+    'months_short' => ['Janv', 'Feb', 'Mar', 'Apr', 'Mai', 'Jūn', 'Jūl', 'Aug', 'Sept', 'Okt', 'Nov', 'Dec'],
     'meridiem' => ['priekšpusdiena', 'pēcpusdiena'],
 ];
