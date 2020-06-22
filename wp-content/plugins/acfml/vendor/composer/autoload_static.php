@@ -4,9 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitddad4a8ef65d06f45da608143d241ade
+class ComposerStaticInit95e2406051fa1009d216c2846c35dced
 {
     public static $classMap = array (
+        'ACFML\\Repeater\\Shuffle\\Post' => __DIR__ . '/../..' . '/classes/strategy/repeater-shuffle/post.php',
+        'ACFML\\Repeater\\Shuffle\\Strategy' => __DIR__ . '/../..' . '/classes/strategy/repeater-shuffle/strategy.php',
+        'ACFML\\Repeater\\Shuffle\\Term' => __DIR__ . '/../..' . '/classes/strategy/repeater-shuffle/term.php',
         'WPML_ACF' => __DIR__ . '/../..' . '/classes/class-wpml-acf.php',
         'WPML_ACF_Attachments' => __DIR__ . '/../..' . '/classes/class-wpml-acf-attachments.php',
         'WPML_ACF_Blocks' => __DIR__ . '/../..' . '/classes/class-wpml-acf-blocks.php',
@@ -30,6 +33,7 @@ class ComposerStaticInitddad4a8ef65d06f45da608143d241ade
         'WPML_ACF_Pro' => __DIR__ . '/../..' . '/classes/class-wpml-acf-pro.php',
         'WPML_ACF_Processed_Data' => __DIR__ . '/../..' . '/classes/class-wpml-acf-processed-data.php',
         'WPML_ACF_Relationship_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-relationship-field.php',
+        'WPML_ACF_Repeater_Shuffle' => __DIR__ . '/../..' . '/classes/class-wpml-acf-repeater-shuffle.php',
         'WPML_ACF_Requirements' => __DIR__ . '/../..' . '/classes/class-wpml-acf-requirements.php',
         'WPML_ACF_Taxonomy_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-taxonomy-field.php',
         'WPML_ACF_Term_Id' => __DIR__ . '/../..' . '/classes/class-wpml-acf-term-id.php',
@@ -42,7 +46,7 @@ class ComposerStaticInitddad4a8ef65d06f45da608143d241ade
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitddad4a8ef65d06f45da608143d241ade::$classMap;
+            $loader->classMap = ComposerStaticInit95e2406051fa1009d216c2846c35dced::$classMap;
 
         }, null, ClassLoader::class);
     }

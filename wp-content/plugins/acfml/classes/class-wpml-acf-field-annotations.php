@@ -1,9 +1,31 @@
 <?php
 class WPML_ACF_Field_Annotations {
 
-	public function __construct( WPML_ACF_Options_Page $WPML_ACF_Options_Page ) {
-		$this->WPML_ACF_Options_Page = $WPML_ACF_Options_Page;
+	/**
+	 * @var WPML_ACF_Options_Page
+	 */
+	private $acf_options_page;
 
+	/**
+	 * @var WPML_ACF_Field_Settings
+	 */
+	private $acf_field_settings;
+
+	/**
+	 * WPML_ACF_Field_Annotations constructor.
+	 *
+	 * @param WPML_ACF_Options_Page   $options_page
+	 * @param WPML_ACF_Field_Settings $field_settings
+	 */
+	public function __construct( WPML_ACF_Options_Page $options_page, WPML_ACF_Field_Settings $field_settings ) {
+		$this->acf_options_page   = $options_page;
+		$this->acf_field_settings = $field_settings;
+	}
+
+	/**
+	 * Registers WP hooks related to field annotations.
+	 */
+	public function register_hooks() {
 		if ( !defined( 'ACFML_HIDE_FIELD_ANNOTATIONS' ) || ACFML_HIDE_FIELD_ANNOTATIONS != true ) {
 			add_action( 'acf/create_field', array( $this, 'acf_create_field' ), 10, 2 );
 			add_action( 'acf/render_field', array( $this, 'acf_create_field' ), 10, 2 );
@@ -11,39 +33,52 @@ class WPML_ACF_Field_Annotations {
 		}
 	}
 
+	/**
+	 * @param array $field   The ACF field.
+	 * @param mixed $post_id Current post ID.
+	 */
 	public function acf_create_field($field, $post_id = null) {
-		if ( $this->WPML_ACF_Options_Page->is_acf_options_page() ) {
+		if ( $this->acf_options_page->is_acf_options_page() ) {
 			return;
 		}
 
-        if ( null == $post_id ) {
-            $post_id = get_the_ID();
-        }
+		if ( null === $post_id ) {
+			$post_id = get_the_ID();
+		}
 
-        if ( $post_id ) {
-        	$this->field_original_value($field, $post_id);
-			$this->display_translated_warning($field);
-        }
+		if ( $post_id ) {
+			$this->field_original_value( $field, $post_id );
+			$this->display_translated_warning( $field );
+		}
 	}
 
+	/**
+	 * Displays HTML code with information about original value of the field.
+	 *
+	 * @param array $field   The ACF field.
+	 * @param mixed $post_id Current post ID.
+	 */
 	private function field_original_value($field, $post_id) {
-		if ( $this->is_secondary_language() ) {
+		if ( $this->is_secondary_language() && 'repeater' !== $field['type'] ) {
 			$custom_field_original_data = apply_filters('wpml_custom_field_original_data', null, $post_id, $field['_name'] );
-			if ( isset( $custom_field_original_data['value'] ) && is_string( $custom_field_original_data['value'] ) ) {
-				echo "<div class='wpml_acf_original_value'>";
-				echo "<strong>" . __("Field's value in original language", "acfml") . ":</strong><br>";
+			if ( ! empty( $custom_field_original_data['value'] ) && is_string( $custom_field_original_data['value'] ) ) {
+				echo '<div class="wpml_acf_original_value">';
+				echo '<strong>' . esc_html_x( 'Original', 'It is displayed before hint with value of ACF field in original language.', 'acfml' ) . ': </strong>';
 				echo strip_tags( $custom_field_original_data['value'] );
-				echo "</div>";
+				echo '</div>';
 			}
 		}
 	}
 
+	/**
+	 * @param array $field
+	 */
 	private function display_translated_warning($field) {
 		static $run_times = array();
 
-        if ( !isset( $field['key'] ) ) {
-            return;
-        }
+		if ( ! isset( $field['key'] ) ) {
+			return;
+		}
 
 		if (!isset($run_times[ $field['key'] ]) || $run_times[ $field['key'] ] == 0) {
 			$has_element_with_display_translated = false;
@@ -103,20 +138,35 @@ class WPML_ACF_Field_Annotations {
 		return $field_object;
 	}
 
+	/**
+	 * Displays description under custom field name in translation preferences metabox on post edit screen.
+	 *
+	 * @param string $description The current description where additional info would be added.
+	 * @param string $name        Custom field name.
+	 * @param int    $post_id     Edited post ID.
+	 *
+	 * @return string
+	 */
 	public function metabox_field_description( $description, $name, $post_id ) {
 
-        $field_object = get_field_object( $name, $post_id );
+		$field_object = get_field_object( $name, $post_id );
 
-        if ( $field_object && isset( $field_object['label'] ) && isset( $field_object['type'] ) ) {
-            $field_data = array(
-                __("ACF field name:", "acfml"),
-                $field_object['label'],
-                __("ACF field type:", "acfml"),
-                $field_object['type']
-            );
-            $description .=  implode(" ", $field_data) ;
-        }
+		if ( $field_object && isset( $field_object['label'] ) && isset( $field_object['type'] ) ) {
+			if ( $this->acf_field_settings->field_should_be_set_to_copy( $field_object ) ) {
+				$field_data = [
+					__( 'This type of ACF field will always be set to "Copy".', 'acfml' ),
+				];
+			} else {
+				$field_data = array(
+					__( 'ACF field name:', 'acfml' ),
+					$field_object['label'],
+					__( 'ACF field type:', 'acfml' ),
+					$field_object['type'],
+				);
+			}
+			$description .= implode( ' ', $field_data );
+		}
 
-        return $description;
-    }
+		return $description;
+	}
 }

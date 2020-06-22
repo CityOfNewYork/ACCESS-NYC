@@ -1,5 +1,7 @@
 <?php
 
+use \ACFML\Repeater\Shuffle\Strategy;
+
 /**
  * @author OnTheGo Systems
  */
@@ -18,11 +20,20 @@ class WPML_ACF_Dependencies_Factory {
 	private $annotations;
 	private $xliff;
 	private $blocks;
+	/**
+	 * @var WPML_ACF_Repeater_Shuffle
+	 */
+	private $repeater_shuffle;
 	private $field_groups;
 
+	/**
+	 * WPML_ACF_Options_Page factory.
+	 *
+	 * @return WPML_ACF_Options_Page
+	 */
 	public function create_options_page() {
 		if ( ! $this->options_page ) {
-			$this->options_page = new WPML_ACF_Options_Page();
+			$this->options_page = new WPML_ACF_Options_Page( $this->get_sitepress(), $this->create_worker() );
 		}
 
 		return $this->options_page;
@@ -108,9 +119,14 @@ class WPML_ACF_Dependencies_Factory {
 		return $this->pro;
 	}
 
+	/**
+	 * Returns WPML_ACF_Field_Annotations object.
+	 *
+	 * @return WPML_ACF_Field_Annotations
+	 */
 	public function create_field_annotations() {
 		if ( ! $this->annotations ) {
-			$this->annotations = new WPML_ACF_Field_Annotations( $this->create_options_page() );
+			$this->annotations = new WPML_ACF_Field_Annotations( $this->create_options_page(), $this->create_field_settings() );
 		}
 
 		return $this->annotations;
@@ -130,6 +146,19 @@ class WPML_ACF_Dependencies_Factory {
 		}
 
 		return $this->blocks;
+	}
+
+	/**
+	 * @param $strategy
+	 *
+	 * @return WPML_ACF_Repeater_Shuffle
+	 */
+	public function create_repeater_shuffle( Strategy $strategy ) {
+		if ( ! $this->repeater_shuffle ) {
+			$this->repeater_shuffle = new WPML_ACF_Repeater_Shuffle( $strategy );
+		}
+
+		return $this->repeater_shuffle;
 	}
 
 	public function create_field_groups() {

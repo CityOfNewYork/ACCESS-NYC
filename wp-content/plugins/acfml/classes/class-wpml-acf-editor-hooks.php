@@ -2,7 +2,7 @@
 
 class WPML_ACF_Editor_Hooks {
 	public function init_hooks() {
-		add_filter('wpml_tm_editor_string_style', array($this, 'wpml_tm_editor_string_style'), 10, 3);
+		add_filter( 'wpml_tm_editor_string_style', array( $this, 'wpml_tm_editor_string_style' ), 10, 3 );
 	}
 
 	public function wpml_tm_editor_string_style($field_style, $field_type, $original_post) {
@@ -11,7 +11,9 @@ class WPML_ACF_Editor_Hooks {
 
 	private function maybe_set_acf_wyswig_style($field_style, $field_type, $original_post) {
 
-		if ( preg_match_all('/field-(.+)-\d+/', $field_type, $matches, PREG_SET_ORDER, 0) !== false ) {
+		if ( preg_match_all('/field-(.+)-\d+/', $field_type, $matches, PREG_SET_ORDER, 0) !== false
+		     &&	isset( $matches[0][1] )
+		) {
 
 			$field_name = $matches[0][1];
 
