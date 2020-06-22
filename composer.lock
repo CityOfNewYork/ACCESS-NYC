@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a8480a94c2dc72140cc9cbbe52afdf3",
+    "content-hash": "7217f71fe663b944c9f509b3cc3b6705",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2287,15 +2287,15 @@
         },
         {
             "name": "wpackagist-plugin/enable-media-replace",
-            "version": "1.4.1",
+            "version": "3.4.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/enable-media-replace/",
-                "reference": "tags/1.4.1"
+                "reference": "tags/3.4.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.1.4.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.4.1.zip",
                 "reference": null,
                 "shasum": null
             },

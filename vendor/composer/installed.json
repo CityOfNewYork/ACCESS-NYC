@@ -2626,16 +2626,16 @@
     },
     {
         "name": "wpackagist-plugin/enable-media-replace",
-        "version": "1.4.1",
-        "version_normalized": "1.4.1.0",
+        "version": "3.4.1",
+        "version_normalized": "3.4.1.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/enable-media-replace/",
-            "reference": "tags/1.4.1"
+            "reference": "tags/3.4.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/enable-media-replace.1.4.1.zip",
+            "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.4.1.zip",
             "reference": null,
             "shasum": null
         },
