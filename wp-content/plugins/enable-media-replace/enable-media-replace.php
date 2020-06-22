@@ -1,56 +1,37 @@
 <?php
 /*
 Plugin Name: Enable Media Replace
-Plugin URI: https://wordpress.org/plugins/enable-media-replace/
-Description: Enable replacing media files by uploading a new file in the "Edit Media" section of the WordPress Media Library.
-Version: 3.3.7
-Author: ShortPixel
-Author URI: https://shortpixel.com
-Text Domain: enable-media-replace
-Domain Path: /languages
+Plugin URI: http://www.mansjonasson.se/enable-media-replace
+Description: Enable replacing media files by uploading a new file in the "Edit Media" section of the WordPress Media Library. 
+Version: 1.4.1
+Author: Måns Jonasson
+Author URI: http://www.mansjonasson.se
+
 Dual licensed under the MIT and GPL licenses:
 http://www.opensource.org/licenses/mit-license.php
 http://www.gnu.org/licenses/gpl.html
+
+Developed for .SE (Stiftelsen för Internetinfrastruktur) - http://www.iis.se
 */
 
-/**
- * Main Plugin file
- * Set action hooks and add shortcode
- *
- * @author      ShortPixel  <https://shortpixel.com>
- * @copyright   ShortPixel 2018-2019
- * @package     wordpress
- * @subpackage  enable-media-replace
- *
- */
+add_action( 'init', 'enable_media_replace_init' );
+add_filter('attachment_fields_to_edit', 'enable_media_replace', 10, 2);
 
-namespace EnableMediaReplace;
+// Initialize this plugin. Called by 'init' hook.
+function enable_media_replace_init() {
+	load_plugin_textdomain( 'enable-media-replace', '/wp-content/plugins/enable-media-replace' );
+	}
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+function enable_media_replace( $form_fields, $post ) {
+	if ($_GET["attachment_id"]) {
+		$popupurl = plugins_url("popup.php?attachment_id={$_GET["attachment_id"]}", __FILE__);
+				
+		$link = "href=\"#\" onclick=\"window.open('$popupurl', 'enable_media_replace_popup', 'width=500,height=500');\"";
+		$form_fields["enable-media-replace"] = array("label" => __("Replace media", "enable-media-replace"), "input" => "html", "html" => "<p><a $link>" . __("Upload a new file", "enable-media-replace") . "</a></p>", "helps" => __("To replace the current file, click the link and upload a replacement.", "enable-media-replace"));
+	}
+	return $form_fields;
 }
 
-if(!defined("S3_UPLOADS_AUTOENABLE")) {
-    define('S3_UPLOADS_AUTOENABLE', true);
-}
 
-if (! defined("EMR_ROOT_FILE")) {
-	  define("EMR_ROOT_FILE", __FILE__);
-}
 
-if(!defined("SHORTPIXEL_AFFILIATE_CODE")) {
-	define("SHORTPIXEL_AFFILIATE_CODE", 'VKG6LYN28044');
-}
-
-require_once('build/shortpixel/autoload.php');
-require_once('classes/compat.php');
-require_once('classes/functions.php');
-require_once('classes/replacer.php');
-require_once('classes/uihelper.php');
-require_once('classes/file.php');
-require_once('classes/cache.php');
-require_once('classes/emr-plugin.php');
-require_once('classes/externals.php');
-require_once('thumbnail_updater.php');
-
-$emr_plugin = EnableMediaReplacePlugin::get();
+?>
