@@ -22,7 +22,7 @@ if ( ! isset( $vendor_root_url ) ) {
 /*
  * OTGS icons version - increase after every major update.
  */
-$otg_icons_version = 100;
+$otg_icons_version = 101;
 
 /*
  * =================

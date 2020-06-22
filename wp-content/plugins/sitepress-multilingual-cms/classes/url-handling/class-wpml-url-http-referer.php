@@ -67,10 +67,10 @@ class WPML_URL_HTTP_Referer {
 	 * @return bool
 	 */
 	public function is_rest_request_called_from_post_edit_page() {
-		return $this->rest->is_rest_request() && $this->is_post_edit_page();
+		return $this->rest->is_rest_request() && self::is_post_edit_page();
 	}
 
-	public function is_post_edit_page() {
+	public static function is_post_edit_page() {
 		return isset( $_SERVER['HTTP_REFERER'] )
 		       && ( strpos( $_SERVER['HTTP_REFERER'], 'wp-admin/post.php' )
 		            || strpos( $_SERVER['HTTP_REFERER'], 'wp-admin/post-new.php' )

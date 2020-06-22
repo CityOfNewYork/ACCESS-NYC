@@ -3,7 +3,7 @@
 use WPML\ST\Gettext\AutoRegisterSettings;
 
 /** @var WPML_String_Translation $WPML_String_Translation */
-global $sitepress, $WPML_String_Translation, $wpdb, $wpml_st_string_factory, $wp_query;
+global $sitepress, $WPML_String_Translation, $wpdb, $wp_query;
 
 $string_settings = $WPML_String_Translation->get_strings_settings();
 
@@ -161,18 +161,17 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 			<?php echo esc_html__( 'Select which strings to display:', 'wpml-string-translation' ); ?>
         <select name="icl_st_filter_status">
 	        <?php
-	        $selected = selected(false, $status_filter, false);
-	        ?>
-            <option value="" <?php echo $selected;?>>
-				<?php echo esc_html__( 'All strings', 'wpml-string-translation' ) ?>
-            </option>
-	        <?php
-	        $selected = selected(ICL_TM_COMPLETE, $status_filter, false);
-	        ?>
-            <option value="<?php echo ICL_TM_COMPLETE ?>" <?php echo $selected;?>>
-	            <?php echo WPML_ST_String_Statuses::get_status( ICL_TM_COMPLETE ) ?>
-            </option>
-	        <?php
+	        $createOption = function( $str, $option ) use ( $status_filter ) {
+		        $selected = selected($option, $status_filter, false);
+		        ?>
+				<option value="<?php echo $option ?>" <?php echo $selected; ?>>
+			        <?php echo esc_html( $str ) ?>
+				</option>
+		        <?php
+	        };
+
+	        $createOption( __( 'All strings', 'wpml-string-translation' ), false  );
+	        $createOption( WPML_ST_String_Statuses::get_status( ICL_TM_COMPLETE ), ICL_TM_COMPLETE );
 	        if ( icl_st_is_translator() ) {
 
 		        if ( $icl_st_pending = icl_st_get_pending_string_translations_stats() ) {
@@ -191,18 +190,9 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 			        }
 		        }
 	        } else {
-		        $selected = selected(ICL_TM_NOT_TRANSLATED, $status_filter, false);
-		        ?>
-		        <option value="<?php echo ICL_TM_NOT_TRANSLATED ?>" <?php echo $selected; ?>>
-					<?php echo esc_html__( 'Translation needed', 'wpml-string-translation' ) ?>
-		        </option>
-		        <?php
-		        $selected = selected(ICL_TM_WAITING_FOR_TRANSLATOR, $status_filter, false);
-		        ?>
-		        <option value="<?php echo ICL_TM_WAITING_FOR_TRANSLATOR ?>" <?php echo $selected; ?>>
-					<?php echo esc_html__( 'Waiting for translator', 'wpml-string-translation' ) ?>
-		        </option>
-	        <?php
+	        	$createOption( __( 'Translation needed', 'wpml-string-translation' ), ICL_TM_NOT_TRANSLATED );
+	        	$createOption( __( 'Waiting for translator', 'wpml-string-translation' ), ICL_TM_WAITING_FOR_TRANSLATOR );
+	        	$createOption( __( 'Partial Translation', 'wpml-string-translation' ), ICL_STRING_TRANSLATION_PARTIAL );
 	        }
 	        ?>
 

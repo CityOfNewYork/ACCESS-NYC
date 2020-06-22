@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPML Multilingual CMS
  * Plugin URI: https://wpml.org/
- * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-3-6/">WPML 4.3.6 release notes</a>
+ * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-3-15/">WPML 4.3.15 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 4.3.6
+ * Version: 4.3.15
  * Plugin Slug: sitepress-multilingual-cms
  *
  * @package WPML\Core
@@ -27,7 +27,7 @@ if ( ! \WPML\Requirements\WordPress::checkMinimumRequiredVersion() ) {
 	return;
 }
 
-define( 'ICL_SITEPRESS_VERSION', '4.3.6' );
+define( 'ICL_SITEPRESS_VERSION', '4.3.15' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -181,8 +181,6 @@ if ( $sitepress->is_setup_complete() ) {
 		'WPML_Copy_Once_Custom_Field_Factory',
 		'WPML_Adjacent_Links_Hooks_Factory',
 		'WPML_Widgets_Support_Factory',
-		'WPML_End_User_Loader_Factory',
-		'WPML_End_User_Confirmation_Factory',
 		'WPML_Admin_Resources_Hooks_Factory',
 		'WPML_Themes_Plugin_Localization_UI_Hooks_Factory',
 		'WPML_Theme_Plugin_Localization_Options_Ajax_Factory',
@@ -222,6 +220,7 @@ if ( $sitepress->is_setup_complete() ) {
 		$media_actions = [
 			'WPML_Attachment_Action_Factory',
 			'WPML_Media_Attachments_Duplication_Factory',
+			\WPML\Media\Duplication\HooksFactory::class,
 			'WPML_Deactivate_Old_Media_Factory',
 			'WPML_Set_Attachments_Language_Factory',
 			'WPML_Display_As_Translated_Attachments_Query_Factory',
@@ -272,7 +271,8 @@ $wpml_slug_filter = new WPML_Slug_Filter( $wpdb, $sitepress, $wpml_post_translat
 /** @var array $sitepress_settings */
 $sitepress_settings = $sitepress->get_settings();
 wpml_load_term_filters();
-wpml_maybe_setup_post_edit();
+// Add wpml_maybe_setup_post_edit() before wpml_home_url_init().
+add_action( 'init', 'wpml_maybe_setup_post_edit', - 1 );
 
 require_once WPML_PLUGIN_PATH . '/modules/cache-plugins-integration/cache-plugins-integration.php';
 require_once WPML_PLUGIN_PATH . '/inc/plugins-integration.php';

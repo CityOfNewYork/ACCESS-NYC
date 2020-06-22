@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPML String Translation
  * Plugin URI: https://wpml.org/
- * Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/string-translation-3-0-6/">WPML String Translation 3.0.6 release notes</a>
+ * Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/string-translation-3-0-11/">WPML String Translation 3.0.11 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 3.0.6
+ * Version: 3.0.11
  * Plugin Slug: wpml-string-translation
  *
  * @package WPML\ST
@@ -15,7 +15,7 @@ if ( defined( 'WPML_ST_VERSION' ) || get_option( '_wpml_inactive' ) ) {
 	return;
 }
 
-define( 'WPML_ST_VERSION', '3.0.6' );
+define( 'WPML_ST_VERSION', '3.0.11' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -78,9 +78,7 @@ function load_wpml_st_basics() {
 		return;
 	}
 
-	global $WPML_String_Translation, $wpml_st_string_factory, $sitepress;
-
-	$wpml_st_string_factory = WPML\Container\make( WPML_ST_String_Factory::class );
+	global $WPML_String_Translation, $sitepress;
 
 	require WPML_ST_PATH . '/inc/functions-load.php';
 	require WPML_ST_PATH . '/inc/constants.php';

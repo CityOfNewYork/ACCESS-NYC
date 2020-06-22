@@ -195,4 +195,10 @@ class WPML_URL_Converter {
 
 		return $is_request_url && ! $is_home_url && ! $is_home_url_filter;
 	}
+
+	/** @return WPML_URL_Converter */
+	public static function getGlobalInstance() {
+		global $wpml_url_converter;
+		return $wpml_url_converter;
+	}
 }

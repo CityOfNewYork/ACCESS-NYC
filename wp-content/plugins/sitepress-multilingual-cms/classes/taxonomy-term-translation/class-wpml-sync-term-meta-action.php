@@ -65,17 +65,14 @@ class WPML_Sync_Term_Meta_Action {
 			}
 		}
 
-		$term_id_to   = $this->sitepress->term_translations()->adjust_ttid_for_term_id( $term_taxonomy_id_to );
-		$term_id_from = $this->sitepress->term_translations()->adjust_ttid_for_term_id( $term_taxonomy_id_from );
+		$term_id_to   = $this->sitepress->term_translations()->adjust_term_id_for_ttid( $term_taxonomy_id_to );
+		$term_id_from = $this->sitepress->term_translations()->adjust_term_id_for_ttid( $term_taxonomy_id_from );
 
 		foreach ( $cf_copy as $meta_key ) {
-			$meta_from = $this->sitepress->get_wp_api()->get_term_meta( $term_id_from,
-				$meta_key );
-			$meta_to   = $this->sitepress->get_wp_api()->get_term_meta( $term_id_to,
-				$meta_key );
+			$meta_from = $this->sitepress->get_wp_api()->get_term_meta( $term_id_from, $meta_key );
+			$meta_to   = $this->sitepress->get_wp_api()->get_term_meta( $term_id_to, $meta_key );
 			if ( $meta_from || $meta_to ) {
-				$this->sync_custom_field( $term_id_from, $term_id_to,
-					$meta_key );
+				$this->sync_custom_field( $term_id_from, $term_id_to, $meta_key );
 			}
 		}
 	}

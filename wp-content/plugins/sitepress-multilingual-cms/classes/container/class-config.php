@@ -46,6 +46,13 @@ class Config {
 			\WPML_Locale::class               => [ \WPML_Locale::class, 'get_instance_from_sitepress' ],
 			\WPML_Post_Translation::class     => [ \WPML_Post_Translation::class, 'getGlobalInstance' ],
 			\WPML_Term_Translation::class     => [ \WPML_Term_Translation::class, 'getGlobalInstance' ],
+			\WPML_URL_Converter::class        => [ \WPML_URL_Converter::class, 'getGlobalInstance' ],
+			\WPML_Post_Status::class          => 'wpml_get_post_status_helper',
+			'\WPML_Language_Resolution'       => function () {
+				global $wpml_language_resolution;
+
+				return $wpml_language_resolution;
+			},
 		];
 	}
 }

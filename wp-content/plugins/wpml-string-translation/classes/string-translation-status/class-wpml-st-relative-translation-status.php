@@ -58,23 +58,17 @@ class WPML_ST_Relative_Translation_Status {
             WHERE st.language IN (" . wpml_prepare_in( $to_langs ) . ") AND s.id = %d
         ";
 
-		$statuses = $this->wpdb->get_col( $this->wpdb->prepare( $sql, $string_id ) );
+		$statuses = wpml_collect( $this->wpdb->get_col( $this->wpdb->prepare( $sql, $string_id ) ) );
 
-		$status         = ICL_TM_NOT_TRANSLATED;
-		$one_incomplete = false;
+		$completed      = $statuses->filter( function( $s ) { return $s == ICL_TM_COMPLETE; } );
+		$not_translated = $statuses->filter( function( $s ) { return $s == ICL_TM_NOT_TRANSLATED; } );
 
-		foreach( $statuses as $s ) {
-			if ( ICL_TM_COMPLETE == $s ){
-				$status = ICL_TM_COMPLETE;
-			} elseif ( ICL_TM_NOT_TRANSLATED == $s ){
-				$one_incomplete = true;
-			}
+		if ( $completed->isEmpty() ) {
+			return ICL_TM_NOT_TRANSLATED;
+		} elseif ( $not_translated->count() ) {
+			return ICL_STRING_TRANSLATION_PARTIAL;
+		} else {
+			return ICL_TM_COMPLETE;
 		}
-
-		if( ICL_TM_COMPLETE == $status && $one_incomplete ){
-			$status = ICL_STRING_TRANSLATION_PARTIAL;
-		}
-
-		return $status;
 	}
 }

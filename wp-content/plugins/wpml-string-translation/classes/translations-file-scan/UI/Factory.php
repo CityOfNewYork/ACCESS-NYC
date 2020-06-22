@@ -10,7 +10,7 @@ use WPML_ST_Translations_File_Dictionary;
 use WPML\WP\OptionManager;
 use function WPML\Container\make;
 
-class Factory implements \IWPML_Backend_Action_Loader {
+class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Deferred_Action_Loader {
 
 	const WPML_VERSION_INTRODUCING_ST_MO_FLOW = '4.3.0';
 	const OPTION_GROUP = 'ST-MO';
@@ -21,7 +21,10 @@ class Factory implements \IWPML_Backend_Action_Loader {
 	 * @throws \Auryn\InjectionException
 	 */
 	public function create() {
-		if ( current_user_can( 'manage_options' ) ) {
+		if (
+			current_user_can( 'manage_options' ) &&
+			function_exists( 'wpml_is_rest_enabled' ) && wpml_is_rest_enabled()
+		) {
 			global $sitepress;
 			$wp_api = $sitepress->get_wp_api();
 
@@ -43,6 +46,11 @@ class Factory implements \IWPML_Backend_Action_Loader {
 			}
 		}
 	}
+
+	public function get_load_action() {
+		return 'init';
+	}
+
 
 	/**
 	 * @return bool

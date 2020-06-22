@@ -33,7 +33,7 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 	function get_save_post_trid( $post_id, $post_status ) {
 		$trid = $this->get_element_trid( $post_id );
 
-		if ( ! $this->is_inner_post_insertion() ) {
+		if ( ! ( $this->is_inner_post_insertion() && $this->is_editing_different_post( $post_id ) ) ) {
 			$trid = $trid ? $trid : filter_var( isset( $_POST['icl_trid'] ) ? $_POST['icl_trid'] : '', FILTER_SANITIZE_NUMBER_INT );
 			$trid = $trid ? $trid : filter_var( isset( $_GET['trid'] ) ? $_GET['trid'] : '', FILTER_SANITIZE_NUMBER_INT );
 			$trid = $trid ? $trid : $this->get_trid_from_referer();

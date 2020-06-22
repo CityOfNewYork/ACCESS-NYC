@@ -1,6 +1,6 @@
 <?php
 
-class WPML_PB_Handle_Post_Body {
+class WPML_PB_Handle_Post_Body implements IWPML_Backend_Action, IWPML_Frontend_Action, IWPML_DIC_Action {
 
 	private $page_builders_built;
 

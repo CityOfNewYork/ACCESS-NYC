@@ -45,4 +45,11 @@ interface IWPML_Page_Builders_Data_Settings {
 	public function get_pb_name();
 
 	public function add_hooks();
+
+	/**
+	 * @param int $postId
+	 *
+	 * @return bool
+	 */
+	public function is_handling_post( $postId );
 }

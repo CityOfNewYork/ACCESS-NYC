@@ -23,6 +23,31 @@ class WPML_URL_Converter_Domain_Strategy extends WPML_URL_Converter_Abstract_Str
 		if ( isset( $this->domains[ $default_language ] ) ) {
 			unset( $this->domains[ $default_language ] );
 		}
+
+		$this->add_hooks();
+	}
+
+	public function add_hooks() {
+		add_filter( 'rest_url', [ $this, 'convertRestUrlToCurrentDomain' ], 10, 4 );
+	}
+
+	/**
+	 * Filter REST url to avoid CORS error in Gutenberg.
+	 * https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-7022
+	 *
+	 * @param string $url     REST URL.
+	 * @param string $path    REST route.
+	 * @param int    $blog_id Blog ID.
+	 * @param string $scheme  Sanitization scheme.
+	 *
+	 * @return mixed|void
+	 */
+	public function convertRestUrlToCurrentDomain( $url, $path, $blog_id, $scheme ) {
+		$url_parts         = $this->parse_domain_and_subdir( $url );
+		$url_parts['host'] = $_SERVER['SERVER_NAME'];
+		$url               = http_build_url( $url_parts );
+
+		return $url;
 	}
 
 	public function get_lang_from_url_string( $url ) {

@@ -2,23 +2,23 @@
 
 class WPML_ST_Translations_File_Locale {
 
-	const PATTERN_SEARCH_LANG_MO   = '#[-]?([a-z0-9]+_?[A-Z]*)\.mo$#i';
-	const PATTERN_SEARCH_LANG_JSON = '#DOMAIN_PLACEHOLDER([a-z0-9]+[_A-Z]*)-[-_a-z0-9]+\.json$#i';
+	const PATTERN_SEARCH_LANG_JSON = '#DOMAIN_PLACEHOLDER(LOCALES_PLACEHOLDER)-[-_a-z0-9]+\.json$#i';
 
-	/** @var string $filepath */
-	private $filepath;
+	/** @var \SitePress */
+	private $sitepress;
 
-	/** @var string $domain */
-	private $domain;
+	/** @var \WPML_Locale */
+	private $locale;
 
 	/**
-	 * @param string|null $filepath
-	 * @param string|null $domain
+	 * @param SitePress   $sitepress
+	 * @param WPML_Locale $locale
 	 */
-	public function __construct( $filepath = null, $domain = null ) {
-		$this->filepath = $filepath;
-		$this->domain   = $domain;
+	public function __construct( SitePress $sitepress, WPML_Locale $locale ) {
+		$this->sitepress = $sitepress;
+		$this->locale    = $locale;
 	}
+
 
 	/**
 	 * It extracts language code from mo file path, examples
@@ -27,48 +27,66 @@ class WPML_ST_Translations_File_Locale {
 	 * '/wp-content/languages/fr_FR-4gh5e6d3g5s33d6gg51zas2.json' => 'fr_FR'
 	 * '/wp-content/plugins/my-plugin/languages/-my-plugin-fr_FR-my-handler.json' => 'fr_FR'
 	 *
-	 * @param string|null $filepath
-	 * @param string|null $domain
+	 * @param string $filepath
+	 * @param string $domain
 	 *
 	 * @return string
-	 * @throws RuntimeException
 	 */
-	public function get( $filepath = null, $domain = null ) {
-		if ( $filepath ) {
-			$this->filepath = $filepath;
-		}
-
-		if ( $domain ) {
-			$this->domain = $domain;
-		}
-
-		switch( $this->get_extension() ) {
+	public function get( $filepath, $domain ) {
+		switch ( $this->get_extension( $filepath ) ) {
 			case 'mo':
-				$search = self::PATTERN_SEARCH_LANG_MO;
-				break;
+				return $this->get_from_mo_file( $filepath );
 
 			case 'json':
-				$original_domain = $this->get_original_domain_for_json();
-				$domain_replace  = 'default' === $original_domain ? '' : $original_domain . '-';
-				$search          = str_replace( 'DOMAIN_PLACEHOLDER', $domain_replace, self::PATTERN_SEARCH_LANG_JSON );
-				break;
+				return $this->get_from_json_file( $filepath, $domain );
 
 			default:
-				throw new RuntimeException( 'Unable to parse the language from the translations file ' . $this->filepath );
+				return '';
 		}
+	}
 
-		$i = preg_match( $search, $this->filepath, $matches );
+	/**
+	 * @param string $filepath
+	 *
+	 * @return string|null
+	 */
+	private function get_extension( $filepath ) {
+		return wpml_collect( pathinfo( $filepath ) )->get( 'extension', null );
+	}
+
+	/**
+	 * @param string $filepath
+	 *
+	 * @return string
+	 */
+	private function get_from_mo_file( $filepath ) {
+		return $this->get_locales()
+		            ->first( function ( $locale ) use ( $filepath ) {
+			            return strpos( $filepath, $locale . '.mo' );
+		            }, '' );
+	}
+
+	/**
+	 * @param string $filepath
+	 * @param string $domain
+	 *
+	 * @return string
+	 */
+	private function get_from_json_file( $filepath, $domain ) {
+		$original_domain = $this->get_original_domain_for_json( $filepath, $domain );
+		$domain_replace  = 'default' === $original_domain ? '' : $original_domain . '-';
+
+		$search = str_replace( 'DOMAIN_PLACEHOLDER', $domain_replace, self::PATTERN_SEARCH_LANG_JSON );
+
+		$locales = $this->get_locales()->implode( '|' );
+		$search  = str_replace( 'LOCALES_PLACEHOLDER', $locales, $search );
+
+		$i = preg_match( $search, $filepath, $matches );
 		if ( $i && isset( $matches[1] ) ) {
 			return $matches[1];
 		}
 
 		return '';
-	}
-
-	/** @return string|null */
-	private function get_extension() {
-		$pathinfo  = pathinfo( $this->filepath );
-		return isset( $pathinfo['extension'] ) ? $pathinfo['extension'] : null;
 	}
 
 	/**
@@ -77,10 +95,13 @@ class WPML_ST_Translations_File_Locale {
 	 * in the import queue table. That's why we need to retrieve the original
 	 * domain from the registration domain and the filepath.
 	 *
+	 * @param string $filepath
+	 * @param string $domain
+	 *
 	 * @return string
 	 */
-	private function get_original_domain_for_json() {
-		$filename = basename( $this->filepath );
+	private function get_original_domain_for_json( $filepath, $domain ) {
+		$filename = basename( $filepath );
 
 		/**
 		 * Case of WP JED files:
@@ -88,7 +109,7 @@ class WPML_ST_Translations_File_Locale {
 		 * - domain: default-some-script
 		 * => original_domain: default
 		 */
-		if ( 0 === strpos( $this->domain, 'default' ) && 0 !== strpos( $filename, 'default' ) ) {
+		if ( 0 === strpos( $domain, 'default' ) && 0 !== strpos( $filename, 'default' ) ) {
 			return 'default';
 		}
 
@@ -99,7 +120,7 @@ class WPML_ST_Translations_File_Locale {
 		 * => original_domain: plugin-domain
 		 */
 		$filename_parts        = explode( '-', $filename );
-		$domain_parts          = explode( '-', $this->domain );
+		$domain_parts          = explode( '-', $domain );
 		$original_domain_parts = array();
 
 		foreach ( $domain_parts as $i => $part ) {
@@ -111,5 +132,14 @@ class WPML_ST_Translations_File_Locale {
 		}
 
 		return implode( '-', $original_domain_parts );
+	}
+
+	/**
+	 * @return \WPML\Collect\Support\Collection
+	 */
+	private function get_locales() {
+		return \wpml_collect( $this->sitepress->get_active_languages() )
+			->keys()
+			->map( [ $this->locale, 'get_locale' ] );
 	}
 }

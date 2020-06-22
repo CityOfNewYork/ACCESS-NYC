@@ -10,7 +10,7 @@ use function wpml_prepare_in;
 use WPML_Slug_Translation;
 use WPML_ST_Blog_Name_And_Description_Hooks;
 use WPML_ST_Translations_File_Dictionary;
-use WPML_String_Shortcode;
+use WPML\ST\Shortcode;
 
 class Domains {
 
@@ -108,7 +108,7 @@ class Domains {
 				 */
 				return 0 === strpos( $domain, WPML_Admin_Texts::DOMAIN_NAME_PREFIX )
 				       || $this->package_domains->isPackage( $domain )
-				       || WPML_String_Shortcode::STRING_DOMAIN === $domain
+				       || Shortcode::STRING_DOMAIN === $domain
 				       || in_array( $domain, $native_mo_domains, true );
 			}
 		)->values();

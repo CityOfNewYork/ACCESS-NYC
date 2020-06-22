@@ -77,17 +77,11 @@ function wpml_plugins_integration_setup() {
 		$wpml_google_sitemap_generator->init_hooks();
 	}
 
-	if ( defined( 'EP_VERSION' ) ) {
-		$elastic_press_integration = new WPML_Compatibility_ElasticPress(
-			new WPML_Compatibility_ElasticPress_Lang( new WPML_Translation_Element_Factory( $sitepress ), $sitepress )
-		);
-		$elastic_press_integration->register_feature();
-	}
-
 	$factories_to_load = array();
 
 	if ( defined( 'FUSION_BUILDER_VERSION' ) ) {
 		$factories_to_load[] = 'WPML_Compatibility_Plugin_Fusion_Hooks_Factory';
+		$factories_to_load[] = '\WPML\Compatibility\FusionBuilder\Frontend\Hooks';
 	}
 
 	if ( class_exists( 'Tiny_Plugin' ) ) {
@@ -101,6 +95,10 @@ function wpml_plugins_integration_setup() {
 	}
 	// phpcs:enable
 
+	if ( defined( 'ELEMENTOR_VERSION' ) ) {
+		$factories_to_load[] = WPML_PB_Fix_Maintenance_Query::class;
+	}
+
 	$action_filter_loader = new WPML_Action_Filter_Loader();
 	$action_filter_loader->load( $factories_to_load );
 }
@@ -111,6 +109,9 @@ add_action( 'after_setup_theme', 'wpml_themes_integration_setup' );
  * Loads compatibility classes for active themes.
  */
 function wpml_themes_integration_setup() {
+
+	$actions = [];
+
 	if ( function_exists( 'twentyseventeen_panel_count' ) && ! function_exists( 'twentyseventeen_translate_panel_id' ) ) {
 		$wpml_twentyseventeen = new WPML_Compatibility_2017();
 		$wpml_twentyseventeen->init_hooks();
@@ -125,8 +126,18 @@ function wpml_themes_integration_setup() {
 	}
 
 	if ( defined( 'ET_BUILDER_THEME' ) || defined( 'ET_BUILDER_PLUGIN_VERSION' ) ) {
-		global $sitepress;
-		$divi = new WPML_Compatibility_Divi( $sitepress );
-		$divi->add_hooks();
+		$actions[] = WPML_Compatibility_Divi::class;
+		$actions[] = WPML\Compatibility\Divi\DynamicContent::class;
+		$actions[] = WPML\Compatibility\Divi\Search::class;
+		$actions[] = WPML\Compatibility\Divi\DiviOptionsEncoding::class;
+		$actions[] = WPML\Compatibility\Divi\ThemeBuilderFactory::class;
 	}
+
+	if ( defined( 'FUSION_BUILDER_VERSION' ) ) {
+		$actions[] = WPML\Compatibility\FusionBuilder\DynamicContent::class;
+	}
+
+	$action_filter_loader = new WPML_Action_Filter_Loader();
+	$action_filter_loader->load( $actions );
 }
+

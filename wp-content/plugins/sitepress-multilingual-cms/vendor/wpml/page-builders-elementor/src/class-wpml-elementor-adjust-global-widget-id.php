@@ -27,7 +27,7 @@ class WPML_Elementor_Adjust_Global_Widget_ID {
 	public function add_hooks() {
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'adjust_ids' ) );
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'restore_current_language' ) );
-		add_action( 'elementor/frontend/the_content', array( $this, 'replace_css_class_id_with_original' ) );
+		add_action( 'elementor/frontend/the_content', array( $this, 'duplicate_css_class_with_original_id' ) );
 
 		if ( is_admin() ) {
 			add_filter(
@@ -124,18 +124,31 @@ class WPML_Elementor_Adjust_Global_Widget_ID {
 		return $display_as_translated;
 	}
 
-	public function replace_css_class_id_with_original( $content ) {
-		return preg_replace_callback( '/(class=".*elementor-global-)(\d+)*/', array( $this, 'convert_id_to_original' ), $content );
+	/**
+	 * @param string $content
+	 *
+	 * @return string
+	 */
+	public function duplicate_css_class_with_original_id( $content ) {
+		$classPrefixes = wpml_collect( [
+			'elementor-',
+			'elementor-global-',
+		] )->implode( '|' );
+
+		return preg_replace_callback( '/(class=".*(' . $classPrefixes . '))(\d+)/', array( $this, 'convert_id_to_original' ), $content );
 	}
 
 	private function convert_id_to_original( array $matches ) {
-		$id      = (int) $matches[2];
-		$element = $this->translation_element_factory->create_post( $id );
-		$source  = $element->get_source_element();
+		$class_prefix = $matches[2];
+		$id           = (int)$matches[3];
+		$element      = $this->translation_element_factory->create_post( $id );
+		$source       = $element->get_source_element();
 
 		if ( $source ) {
-			$before_id  = $matches[1];
-			$matches[0] = str_replace( $before_id . $id, $before_id . $source->get_id(), $matches[0] );
+			$new_class  = $class_prefix . $source->get_id();
+			$search     = $matches[0];
+			$replace    = $search . ' ' . $new_class;
+			$matches[0] = str_replace( $search, $replace, $matches[0] );
 		}
 
 		return $matches[0];

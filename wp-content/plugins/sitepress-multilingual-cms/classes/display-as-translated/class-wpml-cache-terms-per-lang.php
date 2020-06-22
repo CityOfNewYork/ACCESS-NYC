@@ -29,22 +29,24 @@ class WPML_Cache_Terms_Per_Lang implements IWPML_Action {
 	 * @return array|bool
 	 */
 	public function terms_per_lang( $terms, $post_id, $taxonomy ) {
-		$current_post = get_post( $post_id );
+		$all_terms = wp_cache_get( $post_id, self::CACHE_GROUP, false );
+		if ( ! is_array( $all_terms ) ) {
+			$current_post = get_post( $post_id );
 
-		if ( $current_post && $this->sitepress->is_display_as_translated_post_type( $current_post->post_type ) ) {
-			$all_terms = wp_cache_get( $post_id, self::CACHE_GROUP );
-			if ( ! is_array( $all_terms ) ) {
+			$all_terms = [];
+			if ( $current_post && $this->sitepress->is_display_as_translated_post_type( $current_post->post_type ) ) {
 				$taxonomies = get_post_taxonomies( $current_post );
 				$all_terms  = wp_get_object_terms( $post_id, $taxonomies );
-				$all_terms  = is_wp_error( $all_terms ) ? array() : $all_terms;
-				wp_cache_add( $post_id, $all_terms, self::CACHE_GROUP );
+				$all_terms  = is_wp_error( $all_terms ) ? [] : $all_terms;
 			}
-			$terms = $this->get_terms_by_tax( $all_terms, $taxonomy );
 
-			$terms = $terms->isEmpty() ? false : $terms->toArray();
+			wp_cache_set( $post_id, $all_terms, self::CACHE_GROUP );
 		}
 
-		return $terms;
+		$terms_per_lang = $this->get_terms_by_tax( $all_terms ? $all_terms : [], $taxonomy );
+		$terms_per_lang = $terms_per_lang->isEmpty() ? false : $terms_per_lang->toArray();
+
+		return $terms_per_lang ?: $terms;
 	}
 
 	/**

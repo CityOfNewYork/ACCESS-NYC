@@ -81,13 +81,12 @@ class WPML_PB_Integration {
 			);
 		}
 
-		foreach ( $this->strategies as $strategy ) {
-
+		$this->with_strategies( function( IWPML_PB_Strategy $strategy ) use ( $updated_packages, $post_element ) {
 			foreach ( $updated_packages as $package ) {
 				$this->factory->get_string_translations( $strategy )
 					->add_package_to_update_list( $package, $post_element->get_language_code() );
 			}
-		}
+		} );
 
 		$this->new_translations_recieved = true;
 		$this->queue_save_post_actions( $post_element->get_id(), $post_element->get_wp_object() );
@@ -129,9 +128,9 @@ class WPML_PB_Integration {
 	public function register_all_strings_for_translation( $post ) {
 		if ( $this->is_post_status_ok( $post ) && $this->is_original_post( $post ) ) {
 			$this->is_registering_string = true;
-			foreach ( $this->strategies as $strategy ) {
+			$this->with_strategies( function( IWPML_PB_Strategy $strategy ) use ( $post ) {
 				$strategy->register_strings( $post );
-			}
+			} );
 			$this->is_registering_string = false;
 		}
 	}
@@ -163,7 +162,8 @@ class WPML_PB_Integration {
 		add_action( 'wpml_pb_resave_post_translation', array( $this, 'resave_post_translation_in_shutdown' ), 10, 1 );
 		add_action( 'icl_st_add_string_translation', array( $this, 'new_translation' ), 10, 1 );
 		add_action( 'shutdown', array( $this, 'do_shutdown_action' ) );
-		add_action( 'wpml_pb_finished_adding_string_translations', array( $this, 'save_translations_to_post' ) );
+		add_action( 'wpml_pb_finished_adding_string_translations', array( $this, 'process_pb_content_with_hidden_strings_only' ), 9, 2 );
+		add_action( 'wpml_pb_finished_adding_string_translations', array( $this, 'save_translations_to_post' ), 10 );
 		add_action( 'wpml_pro_translation_completed', array( $this, 'cleanup_strings_after_translation_completed' ), 10, 3 );
 
 		add_filter( 'wpml_tm_translation_job_data', array( $this, 'rescan' ), 9, 2 );
@@ -195,18 +195,57 @@ class WPML_PB_Integration {
 
 	public function new_translation( $translated_string_id ) {
 		if ( ! $this->is_registering_string ) {
-			foreach ( $this->strategies as $strategy ) {
+			$this->with_strategies( function( $strategy ) use ( $translated_string_id ) {
 				$this->factory->get_string_translations( $strategy )->new_translation( $translated_string_id );
-			}
+			} );
 			$this->new_translations_recieved = true;
+		}
+	}
+
+	/**
+	 * @param callable $callable
+	 * 
+	 * @return mixed
+	 */
+	private function with_strategies( callable $callable ) {
+		wpml_collect( $this->strategies )->each( $callable );
+	}
+
+	/**
+	 * When a Page Builder content has only a "LINK" string, it's won't be part
+	 * of the translation job as it's automatically converted.
+	 * We need to add the package to the update list (by strategies).
+	 *
+	 * @param int $new_post_id
+	 * @param int $original_doc_id
+	 */
+	public function process_pb_content_with_hidden_strings_only( $new_post_id, $original_doc_id ) {
+		if (
+			! did_action( 'wpml_add_string_translation' )
+			&& apply_filters( 'wpml_pb_is_page_builder_page', false, get_post( $new_post_id ) )
+		) {
+			$targetLang = $this->sitepress->get_language_for_element( $new_post_id, 'post_' . get_post_type( $new_post_id ) );
+
+			$addPackageToUpdateList = function( WPML_Package $package ) use ( $targetLang ) {
+				$this->with_strategies( function( IWPML_PB_Strategy $strategy ) use ( $package, $targetLang ) {
+					$this->factory
+						->get_string_translations( $strategy )
+						->add_package_to_update_list( $package, $targetLang );
+				} );
+			};
+
+			$this->new_translations_recieved = wpml_collect( apply_filters( 'wpml_st_get_post_string_packages', [], $original_doc_id ) )
+				->each( $addPackageToUpdateList )
+				->isNotEmpty();
 		}
 	}
 
 	public function save_translations_to_post() {
 		if ( $this->new_translations_recieved ) {
-			foreach ( $this->strategies as $strategy ) {
+			$this->with_strategies( function( IWPML_PB_Strategy $strategy ) {
 				$this->factory->get_string_translations( $strategy )->save_translations_to_post();
-			}
+			} );
+			$this->new_translations_recieved = false;
 		}
 	}
 
@@ -233,9 +272,9 @@ class WPML_PB_Integration {
 			$wpdb = $this->sitepress->get_wpdb();
 			$post = $wpdb->get_row( $wpdb->prepare( "SELECT ID, post_type, post_status, post_content FROM {$wpdb->posts} WHERE ID = %d", $post_id ) );
 			if ( $this->is_post_status_ok( $post ) && $this->is_original_post( $post ) ) {
-				foreach ( $this->strategies as $strategy ) {
+				$this->with_strategies( function( IWPML_PB_Strategy $strategy ) use ( $post_id, $post ) {
 					$strategy->migrate_location( $post_id, $post->post_content );
-				}
+				} );
 			}
 
 			$this->mark_migrate_location_done( $post_id );
@@ -294,7 +333,7 @@ class WPML_PB_Integration {
 	/** @return IWPML_PB_Media_Update[] $media_updaters */
 	private function get_media_updaters() {
 		if ( ! $this->media_updaters ) {
-			$this->media_updaters = apply_filters( 'wmpl_pb_get_media_updaters', array() );
+			$this->media_updaters = apply_filters( 'wpml_pb_get_media_updaters', array() );
 		}
 
 		return $this->media_updaters;

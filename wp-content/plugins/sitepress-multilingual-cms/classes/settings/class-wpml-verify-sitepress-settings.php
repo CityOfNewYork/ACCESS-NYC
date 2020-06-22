@@ -17,9 +17,11 @@ class WPML_Verify_SitePress_Settings {
 
 	/**
 	 * @param array $settings
+	 *
+	 * @return array
 	 */
 	public function verify( $settings ) {
-		$default_settings = array(
+		$default_settings = [
 			'interview_translators'              => 1,
 			'existing_content_language_verified' => 0,
 			'language_negotiation_type'          => 3,
@@ -49,35 +51,35 @@ class WPML_Verify_SitePress_Settings {
 			'remember_language'                  => 24,
 			'icl_lang_sel_copy_parameters'       => '',
 			'translated_document_page_url'       => 'auto-generate',
-			'sync_comments_on_duplicates '       => 0,
-			'seo'                                => array(
+			'sync_comments_on_duplicates'        => 0,
+			'seo'                                => [
 				'head_langs'                  => 1,
 				'canonicalization_duplicates' => 1,
-				'head_langs_priority'         => 1
-			),
-			'posts_slug_translation'             => array(
+				'head_langs_priority'         => 1,
+			],
+			'posts_slug_translation'             => [
 				/** @deprected key `on`, use option `wpml_base_slug_translation` instead */
 				'on' => 1,
-			),
-			'languages_order'                    => array(),
-			'urls'                               => array(
+			],
+			'languages_order'                    => [],
+			'urls'                               => [
 				'directory_for_default_language' => 0,
 				'show_on_root'                   => '',
 				'root_html_file_path'            => '',
 				'root_page'                      => 0,
-				'hide_language_switchers'        => 1
-			),
+				'hide_language_switchers'        => 1,
+			],
 			'xdomain_data'                       => $this->wp_api->constant( 'WPML_XDOMAIN_DATA_GET' ),
-			'custom_posts_sync_option'           => array(
+			'custom_posts_sync_option'           => [
 				'post' => WPML_CONTENT_TYPE_TRANSLATE,
-				'page' => WPML_CONTENT_TYPE_TRANSLATE
-			),
-			'taxonomies_sync_option'           => array(
+				'page' => WPML_CONTENT_TYPE_TRANSLATE,
+			],
+			'taxonomies_sync_option'             => [
 				'category' => WPML_CONTENT_TYPE_TRANSLATE,
-				'post_tag' => WPML_CONTENT_TYPE_TRANSLATE
-			),
-			'tm_block_retranslating_terms' => 1,
-		);
+				'post_tag' => WPML_CONTENT_TYPE_TRANSLATE,
+			],
+			'tm_block_retranslating_terms'       => 1,
+		];
 
 		//configured for three levels
 		$update_settings = false;
@@ -106,7 +108,7 @@ class WPML_Verify_SitePress_Settings {
 			}
 		}
 
-		return array( $settings, $update_settings );
+		return [ $settings, $update_settings ];
 
 	}
 

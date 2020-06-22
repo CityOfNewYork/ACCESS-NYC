@@ -3,7 +3,19 @@
 function build_language_links(data, $, container) {
 	"use strict";
 
-	var queryString;
+	const getNewQueryString = function(sourceUrl, newQueryArgs) {
+		const url = new URL(sourceUrl),
+			search = url.searchParams;
+
+		for (let key in newQueryArgs) {
+			if (Object.prototype.hasOwnProperty.call(newQueryArgs, key)) {
+				search.set(key, newQueryArgs[key]);
+			}
+		}
+
+		return search.toString();
+	};
+
 	var urlData;
 	if (data.hasOwnProperty('language_links')) {
 		var languages_container = $('<ul></ul>');
@@ -44,8 +56,8 @@ function build_language_links(data, $, container) {
 				if (statuses && statuses.length) {
 					urlData.post_status = statuses.join(',');
 				}
-				queryString = $.param(urlData);
-				current.attr('href', '?' + queryString);
+
+				current.attr('href', '?' + getNewQueryString(location.href, urlData));
 			} else {
 				current = $('<span></span>');
 			}

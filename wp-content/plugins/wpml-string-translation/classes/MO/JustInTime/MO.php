@@ -16,6 +16,9 @@ class MO extends \MO {
 	/** @var string $domain */
 	private $domain;
 
+	/** @var bool $isLoading */
+	private $isLoading = false;
+
 	/**
 	 * @param LoadedMODictionary $loaded_mo_dictionary
 	 * @param string             $locale
@@ -38,6 +41,10 @@ class MO extends \MO {
 	 * @return string
 	 */
 	public function translate( $singular, $context = null ) {
+		if ( $this->isLoading ) {
+			return $singular;
+		}
+
 		$this->load();
 		return _x( $singular, $context, $this->domain );
 	}
@@ -51,11 +58,16 @@ class MO extends \MO {
 	 * @return string
 	 */
 	public function translate_plural( $singular, $plural, $count, $context = null ) {
+		if ( $this->isLoading ) {
+			return $count > 1 ? $plural : $singular;
+		}
+
 		$this->load();
 		return _nx( $singular, $plural, $count, $context, $this->domain );
 	}
 
 	private function load() {
+		$this->isLoading = true;
 		$this->loadTextDomain();
 
 		if ( ! $this->isLoaded() ) {
@@ -67,6 +79,8 @@ class MO extends \MO {
 			 */
 			$GLOBALS['l10n'][ $this->domain ] = new NOOP_Translations();
 		}
+
+		$this->isLoading = false;
 	}
 
 	protected function loadTextDomain() {

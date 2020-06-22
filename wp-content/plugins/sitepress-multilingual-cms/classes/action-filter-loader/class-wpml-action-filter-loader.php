@@ -144,11 +144,15 @@ class WPML_Action_Filter_Loader {
 		$load_handlers = $factory->create();
 
 		if ( $load_handlers ) {
-			if ( ! is_array( $load_handlers ) ) {
+			if ( ! is_array( $load_handlers ) || is_callable( $load_handlers ) ) {
 				$load_handlers = array( $load_handlers );
 			}
 			foreach ( $load_handlers as $load_handler ) {
-				$load_handler->add_hooks();
+				if ( is_callable( $load_handler ) ) {
+					$load_handler();
+				} else {
+					$load_handler->add_hooks();
+				}
 			}
 		}
 	}

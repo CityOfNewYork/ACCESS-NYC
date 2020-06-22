@@ -1,5 +1,8 @@
 <?php
 
+use \WPML\FP\Relation;
+use \WPML\FP\Fns;
+
 class WPML_Term_Query_Filter {
 
 	/** @var WPML_Term_Translation $term_translation */
@@ -71,9 +74,11 @@ class WPML_Term_Query_Filter {
 			$args[ 'cache_domain' ] .= '_' . $this->current_language;
 		}
 
+		$isOrderByEqualTo = Relation::propEq( 'orderby', Fns::__, $args );
+
 		$params = array( 'include', 'exclude', 'exclude_tree' );
 		foreach ( $params as $param ) {
-			$adjusted_ids = $this->adjust_taxonomies_terms_ids( $args[ $param ] );
+			$adjusted_ids = $this->adjust_taxonomies_terms_ids( $args[ $param ],  $isOrderByEqualTo( $param ) );
 
 			if ( ! empty( $adjusted_ids ) ) {
 				$args[ $param ] = $adjusted_ids;
@@ -86,7 +91,7 @@ class WPML_Term_Query_Filter {
 				continue;
 			}
 
-			$adjusted_ids = $this->adjust_taxonomies_terms_ids( $args[ $param ] );
+			$adjusted_ids = $this->adjust_taxonomies_terms_ids( $args[ $param ],  $isOrderByEqualTo( $param ) );
 
 			if ( ! empty( $adjusted_ids ) ) {
 				$args[ $param ] = array_pop( $adjusted_ids );
@@ -108,17 +113,18 @@ class WPML_Term_Query_Filter {
 
 	/**
 	 * @param string|array $terms_ids
+	 * @param bool         $orderByTermId
 	 *
 	 * @return array
 	 */
-	private function adjust_taxonomies_terms_ids( $terms_ids ) {
+	private function adjust_taxonomies_terms_ids( $terms_ids, $orderByTermId ) {
 		$terms_ids = array_filter( array_unique( $this->explode_and_trim( $terms_ids ) ) );
 
 		if ( empty( $terms_ids ) ) {
 			return $terms_ids;
 		}
 
-		$terms          = $this->get_terms( $terms_ids );
+		$terms          = $this->get_terms( $terms_ids, $orderByTermId );
 		$translated_ids = array();
 
 		foreach ( $terms as $term ) {
@@ -167,14 +173,17 @@ class WPML_Term_Query_Filter {
 
 	/**
 	 * @param array $ids
+	 * @param bool  $orderByTermId
 	 *
 	 * @return stdClass[]
 	 */
-	private function get_terms( $ids ) {
-		return $this->wpdb->get_results(
-			"SELECT taxonomy, term_id FROM {$this->wpdb->term_taxonomy}
-			 WHERE term_id IN (" . wpml_prepare_in( $ids, '%d' ) . ")"
-		);
+	private function get_terms( $ids, $orderByTermId ) {
+		$safeIds = wpml_prepare_in( $ids, '%d' );
+		$sql = "SELECT taxonomy, term_id FROM {$this->wpdb->term_taxonomy}
+				 WHERE term_id IN ({$safeIds})
+				 ";
+		$sql .= $orderByTermId ? "ORDER BY FIELD(term_id, {$safeIds})" : "";
+		return $this->wpdb->get_results( $sql );
 	}
 
 	/**

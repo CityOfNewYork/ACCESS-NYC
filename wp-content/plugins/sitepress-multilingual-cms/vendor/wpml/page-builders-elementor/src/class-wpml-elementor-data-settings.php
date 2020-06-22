@@ -48,7 +48,7 @@ class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings 
 	}
 
 	public function save_post_body_as_plain_text( $type, $post_id, $original_post, $string_translations, $lang ) {
-		if ( get_post_meta( $post_id, $this->get_meta_field() ) ) {
+		if ( $this->is_handling_post( $post_id ) ) {
 			$this->elementor_db->save_plain_text( $post_id );
 		}
 	}
@@ -126,5 +126,15 @@ class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings 
 	public function add_data_custom_field_to_md5( array $custom_fields_values, $post_id ) {
 		$custom_fields_values[] = get_post_meta( $post_id, $this->get_meta_field(), true );
 		return $custom_fields_values;
+	}
+
+	/**
+	 * @param int $postId
+	 *
+	 * @return bool
+	 */
+	public function is_handling_post( $postId ) {
+		return (bool) get_post_meta( $postId, $this->get_meta_field(), true )
+			&& 'builder' === get_post_meta( $postId, '_elementor_edit_mode', true );
 	}
 }

@@ -20,7 +20,7 @@ class WPML_Non_Persistent_Cache {
 	 * @param bool   $found Whether the key was found in the cache (passed by reference).
 	 *                      Disambiguates a return of false, a storable value.
 	 *
-	 * @return bool
+	 * @return mixed|bool
 	 */
 	public static function get( $key, $group = 'default', &$found = null ) {
 		if (
@@ -52,6 +52,25 @@ class WPML_Non_Persistent_Cache {
 		self::$cache[ $group ][ $key ] = $data;
 
 		return true;
+	}
+
+	/**
+	 * Executes callback function and caches its result.
+	 *
+	 * @param string   $key      Cache key.
+	 * @param callable $callback Callback function.
+	 * @param string   $group    Cache group.
+	 *
+	 * @return bool
+	 */
+	public static function execute_and_cache( $key, $callback, $group = 'default' ) {
+		$data = self::get( $key, $group, $found );
+		if ( ! $found ) {
+			$data = $callback();
+			self::set( $key, $data, $group );
+		}
+
+		return $data;
 	}
 
 	/**

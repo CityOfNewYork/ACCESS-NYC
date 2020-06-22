@@ -2,7 +2,7 @@
 
 class WPML_Compatibility_Divi_Notice extends WPML_Notice {
 
-	const ID = 'wpml-compatibility-divi-editor-warning';
+	const ID    = 'wpml-compatibility-divi-editor-warning';
 	const GROUP = 'wpml-compatibility-divi';
 
 	public function __construct() {
@@ -28,6 +28,7 @@ class WPML_Compatibility_Divi_Notice extends WPML_Notice {
 		);
 
 		$msg .= ' ' . sprintf(
+			/* translators: %s will be replaced with a URL. */
 			esc_html_x(
 				'You can find more information here: %s',
 				'Use Translation Editor notice 2/3',

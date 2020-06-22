@@ -1,5 +1,7 @@
 <?php
 
+use WPML\PB\Elementor\DynamicContent\Strings as DynamicContentStrings;
+
 /**
  * Class WPML_Elementor_Translatable_Nodes
  */
@@ -67,7 +69,7 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 			}
 		}
 
-		return $strings;
+		return DynamicContentStrings::filter( $strings, $node_id, $element );
 	}
 
 	/**
@@ -117,7 +119,7 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 			}
 		}
 
-		return $element;
+		return DynamicContentStrings::updateNode( $element, $string );
 	}
 
 	/**
@@ -842,6 +844,23 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 					),
 				),
 			),
+			'table-of-contents' => array(
+				'conditions' => array( self::TYPE => 'table-of-contents' ),
+				'fields'     => array(
+					array(
+						'field'       => 'title',
+						'type'        => __( 'Table of Contents - Title', 'sitepress' ),
+						'editor_type' => 'LINE',
+					),
+				),
+			),
+			'media-carousel' => [
+				'conditions' => [ self::TYPE => 'media-carousel' ],
+				'fields'     => [],
+				'integration-class' => [
+					'\WPML\PB\Elementor\Modules\MediaCarousel',
+				]
+			]
 		);
 	}
 

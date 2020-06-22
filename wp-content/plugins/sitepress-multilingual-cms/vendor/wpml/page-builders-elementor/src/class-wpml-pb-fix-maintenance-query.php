@@ -1,6 +1,6 @@
 <?php
 
-class WPML_PB_Fix_Maintenance_Query {
+class WPML_PB_Fix_Maintenance_Query implements IWPML_Frontend_Action {
 
 	const AFTER_TEMPLATE_APPLY = 12;
 
