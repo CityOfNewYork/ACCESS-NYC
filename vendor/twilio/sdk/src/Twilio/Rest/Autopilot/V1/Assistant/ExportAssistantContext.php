@@ -21,33 +21,26 @@ class ExportAssistantContext extends InstanceContext {
     /**
      * Initialize the ExportAssistantContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $assistantSid The SID of the Assistant to export.
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\ExportAssistantContext
      */
     public function __construct(Version $version, $assistantSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('assistantSid' => $assistantSid, );
+        $this->solution = ['assistantSid' => $assistantSid, ];
 
         $this->uri = '/Assistants/' . \rawurlencode($assistantSid) . '/Export';
     }
 
     /**
-     * Fetch a ExportAssistantInstance
+     * Fetch the ExportAssistantInstance
      *
      * @return ExportAssistantInstance Fetched ExportAssistantInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): ExportAssistantInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new ExportAssistantInstance($this->version, $payload, $this->solution['assistantSid']);
     }
@@ -57,8 +50,8 @@ class ExportAssistantContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

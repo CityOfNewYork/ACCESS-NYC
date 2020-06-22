@@ -19,7 +19,7 @@ abstract class MessageOptions {
      *                           application-specific data
      * @return CreateMessageOptions Options builder
      */
-    public static function create($from = Values::NONE, $attributes = Values::NONE) {
+    public static function create(string $from = Values::NONE, string $attributes = Values::NONE): CreateMessageOptions {
         return new CreateMessageOptions($from, $attributes);
     }
 
@@ -27,7 +27,7 @@ abstract class MessageOptions {
      * @param string $order The sort order of the returned messages
      * @return ReadMessageOptions Options builder
      */
-    public static function read($order = Values::NONE) {
+    public static function read(string $order = Values::NONE): ReadMessageOptions {
         return new ReadMessageOptions($order);
     }
 
@@ -37,7 +37,7 @@ abstract class MessageOptions {
      *                           application-specific data
      * @return UpdateMessageOptions Options builder
      */
-    public static function update($body = Values::NONE, $attributes = Values::NONE) {
+    public static function update(string $body = Values::NONE, string $attributes = Values::NONE): UpdateMessageOptions {
         return new UpdateMessageOptions($body, $attributes);
     }
 }
@@ -48,7 +48,7 @@ class CreateMessageOptions extends Options {
      * @param string $attributes A valid JSON string that contains
      *                           application-specific data
      */
-    public function __construct($from = Values::NONE, $attributes = Values::NONE) {
+    public function __construct(string $from = Values::NONE, string $attributes = Values::NONE) {
         $this->options['from'] = $from;
         $this->options['attributes'] = $attributes;
     }
@@ -59,7 +59,7 @@ class CreateMessageOptions extends Options {
      * @param string $from The identity of the new message's author
      * @return $this Fluent Builder
      */
-    public function setFrom($from) {
+    public function setFrom(string $from): self {
         $this->options['from'] = $from;
         return $this;
     }
@@ -71,7 +71,7 @@ class CreateMessageOptions extends Options {
      *                           application-specific data
      * @return $this Fluent Builder
      */
-    public function setAttributes($attributes) {
+    public function setAttributes(string $attributes): self {
         $this->options['attributes'] = $attributes;
         return $this;
     }
@@ -81,14 +81,9 @@ class CreateMessageOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Chat.V1.CreateMessageOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Chat.V1.CreateMessageOptions ' . $options . ']';
     }
 }
 
@@ -96,7 +91,7 @@ class ReadMessageOptions extends Options {
     /**
      * @param string $order The sort order of the returned messages
      */
-    public function __construct($order = Values::NONE) {
+    public function __construct(string $order = Values::NONE) {
         $this->options['order'] = $order;
     }
 
@@ -106,7 +101,7 @@ class ReadMessageOptions extends Options {
      * @param string $order The sort order of the returned messages
      * @return $this Fluent Builder
      */
-    public function setOrder($order) {
+    public function setOrder(string $order): self {
         $this->options['order'] = $order;
         return $this;
     }
@@ -116,14 +111,9 @@ class ReadMessageOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Chat.V1.ReadMessageOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Chat.V1.ReadMessageOptions ' . $options . ']';
     }
 }
 
@@ -133,7 +123,7 @@ class UpdateMessageOptions extends Options {
      * @param string $attributes A valid JSON string that contains
      *                           application-specific data
      */
-    public function __construct($body = Values::NONE, $attributes = Values::NONE) {
+    public function __construct(string $body = Values::NONE, string $attributes = Values::NONE) {
         $this->options['body'] = $body;
         $this->options['attributes'] = $attributes;
     }
@@ -144,7 +134,7 @@ class UpdateMessageOptions extends Options {
      * @param string $body The message to send to the channel
      * @return $this Fluent Builder
      */
-    public function setBody($body) {
+    public function setBody(string $body): self {
         $this->options['body'] = $body;
         return $this;
     }
@@ -156,7 +146,7 @@ class UpdateMessageOptions extends Options {
      *                           application-specific data
      * @return $this Fluent Builder
      */
-    public function setAttributes($attributes) {
+    public function setAttributes(string $attributes): self {
         $this->options['attributes'] = $attributes;
         return $this;
     }
@@ -166,13 +156,8 @@ class UpdateMessageOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Chat.V1.UpdateMessageOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Chat.V1.UpdateMessageOptions ' . $options . ']';
     }
 }

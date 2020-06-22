@@ -11,6 +11,7 @@ namespace Twilio\Rest\Fax\V1;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Rest\Fax\V1\Fax\FaxMediaList;
 use Twilio\Values;
@@ -19,42 +20,35 @@ use Twilio\Version;
 /**
  * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  *
- * @property \Twilio\Rest\Fax\V1\Fax\FaxMediaList $media
+ * @property FaxMediaList $media
  * @method \Twilio\Rest\Fax\V1\Fax\FaxMediaContext media(string $sid)
  */
 class FaxContext extends InstanceContext {
-    protected $_media = null;
+    protected $_media;
 
     /**
      * Initialize the FaxContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Fax\V1\FaxContext
      */
     public function __construct(Version $version, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('sid' => $sid, );
+        $this->solution = ['sid' => $sid, ];
 
         $this->uri = '/Faxes/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a FaxInstance
+     * Fetch the FaxInstance
      *
      * @return FaxInstance Fetched FaxInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): FaxInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new FaxInstance($this->version, $payload, $this->solution['sid']);
     }
@@ -66,37 +60,30 @@ class FaxContext extends InstanceContext {
      * @return FaxInstance Updated FaxInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): FaxInstance {
         $options = new Values($options);
 
-        $data = Values::of(array('Status' => $options['status'], ));
+        $data = Values::of(['Status' => $options['status'], ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new FaxInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
-     * Deletes the FaxInstance
+     * Delete the FaxInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
      * Access the media
-     *
-     * @return \Twilio\Rest\Fax\V1\Fax\FaxMediaList
      */
-    protected function getMedia() {
+    protected function getMedia(): FaxMediaList {
         if (!$this->_media) {
             $this->_media = new FaxMediaList($this->version, $this->solution['sid']);
         }
@@ -108,10 +95,10 @@ class FaxContext extends InstanceContext {
      * Magic getter to lazy load subresources
      *
      * @param string $name Subresource to return
-     * @return \Twilio\ListResource The requested subresource
+     * @return ListResource The requested subresource
      * @throws TwilioException For unknown subresources
      */
-    public function __get($name) {
+    public function __get(string $name): ListResource {
         if (\property_exists($this, '_' . $name)) {
             $method = 'get' . \ucfirst($name);
             return $this->$method();
@@ -125,10 +112,10 @@ class FaxContext extends InstanceContext {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -142,8 +129,8 @@ class FaxContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

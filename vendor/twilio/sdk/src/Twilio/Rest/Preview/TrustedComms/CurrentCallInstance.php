@@ -12,6 +12,7 @@ namespace Twilio\Rest\Preview\TrustedComms;
 use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
+use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -37,15 +38,14 @@ class CurrentCallInstance extends InstanceResource {
     /**
      * Initialize the CurrentCallInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @return \Twilio\Rest\Preview\TrustedComms\CurrentCallInstance
      */
     public function __construct(Version $version, array $payload) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'bgColor' => Values::array_get($payload, 'bg_color'),
             'caller' => Values::array_get($payload, 'caller'),
             'createdAt' => Deserialize::dateTime(Values::array_get($payload, 'created_at')),
@@ -60,20 +60,18 @@ class CurrentCallInstance extends InstanceResource {
             'to' => Values::array_get($payload, 'to'),
             'url' => Values::array_get($payload, 'url'),
             'useCase' => Values::array_get($payload, 'use_case'),
-        );
+        ];
 
-        $this->solution = array();
+        $this->solution = [];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Preview\TrustedComms\CurrentCallContext Context for
-     *                                                              this
-     *                                                              CurrentCallInstance
+     * @return CurrentCallContext Context for this CurrentCallInstance
      */
-    protected function proxy() {
+    protected function proxy(): CurrentCallContext {
         if (!$this->context) {
             $this->context = new CurrentCallContext($this->version);
         }
@@ -82,13 +80,14 @@ class CurrentCallInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a CurrentCallInstance
+     * Fetch the CurrentCallInstance
      *
+     * @param array|Options $options Optional Arguments
      * @return CurrentCallInstance Fetched CurrentCallInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        return $this->proxy()->fetch();
+    public function fetch(array $options = []): CurrentCallInstance {
+        return $this->proxy()->fetch($options);
     }
 
     /**
@@ -98,7 +97,7 @@ class CurrentCallInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -116,8 +115,8 @@ class CurrentCallInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

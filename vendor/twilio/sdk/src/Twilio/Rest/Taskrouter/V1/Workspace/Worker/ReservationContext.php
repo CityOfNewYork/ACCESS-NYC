@@ -20,37 +20,30 @@ class ReservationContext extends InstanceContext {
     /**
      * Initialize the ReservationContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $workspaceSid The SID of the Workspace with the
      *                             WorkerReservation resource to fetch
      * @param string $workerSid The SID of the reserved Worker resource with the
      *                          WorkerReservation resource to fetch
      * @param string $sid The SID of the WorkerReservation resource to fetch
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\Worker\ReservationContext
      */
     public function __construct(Version $version, $workspaceSid, $workerSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('workspaceSid' => $workspaceSid, 'workerSid' => $workerSid, 'sid' => $sid, );
+        $this->solution = ['workspaceSid' => $workspaceSid, 'workerSid' => $workerSid, 'sid' => $sid, ];
 
         $this->uri = '/Workspaces/' . \rawurlencode($workspaceSid) . '/Workers/' . \rawurlencode($workerSid) . '/Reservations/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a ReservationInstance
+     * Fetch the ReservationInstance
      *
      * @return ReservationInstance Fetched ReservationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): ReservationInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new ReservationInstance(
             $this->version,
@@ -68,10 +61,10 @@ class ReservationContext extends InstanceContext {
      * @return ReservationInstance Updated ReservationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): ReservationInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'ReservationStatus' => $options['reservationStatus'],
             'WorkerActivitySid' => $options['workerActivitySid'],
             'Instruction' => $options['instruction'],
@@ -123,14 +116,9 @@ class ReservationContext extends InstanceContext {
             'PostWorkActivitySid' => $options['postWorkActivitySid'],
             'EndConferenceOnCustomerExit' => Serialize::booleanToString($options['endConferenceOnCustomerExit']),
             'BeepOnCustomerEntrance' => Serialize::booleanToString($options['beepOnCustomerEntrance']),
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new ReservationInstance(
             $this->version,
@@ -146,8 +134,8 @@ class ReservationContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

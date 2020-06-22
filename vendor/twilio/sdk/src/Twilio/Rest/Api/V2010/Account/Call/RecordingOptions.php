@@ -14,8 +14,8 @@ use Twilio\Values;
 
 abstract class RecordingOptions {
     /**
-     * @param string $recordingStatusCallbackEvent The recording status changes
-     *                                             that should generate a callback
+     * @param string[] $recordingStatusCallbackEvent The recording status changes
+     *                                               that should generate a callback
      * @param string $recordingStatusCallback The callback URL on each selected
      *                                        recording event
      * @param string $recordingStatusCallbackMethod The HTTP method we should use
@@ -26,7 +26,7 @@ abstract class RecordingOptions {
      *                                  recording will be configured with
      * @return CreateRecordingOptions Options builder
      */
-    public static function create($recordingStatusCallbackEvent = Values::NONE, $recordingStatusCallback = Values::NONE, $recordingStatusCallbackMethod = Values::NONE, $trim = Values::NONE, $recordingChannels = Values::NONE) {
+    public static function create(array $recordingStatusCallbackEvent = Values::ARRAY_NONE, string $recordingStatusCallback = Values::NONE, string $recordingStatusCallbackMethod = Values::NONE, string $trim = Values::NONE, string $recordingChannels = Values::NONE): CreateRecordingOptions {
         return new CreateRecordingOptions($recordingStatusCallbackEvent, $recordingStatusCallback, $recordingStatusCallbackMethod, $trim, $recordingChannels);
     }
 
@@ -35,7 +35,7 @@ abstract class RecordingOptions {
      *                              period.
      * @return UpdateRecordingOptions Options builder
      */
-    public static function update($pauseBehavior = Values::NONE) {
+    public static function update(string $pauseBehavior = Values::NONE): UpdateRecordingOptions {
         return new UpdateRecordingOptions($pauseBehavior);
     }
 
@@ -47,15 +47,15 @@ abstract class RecordingOptions {
      *                                 read
      * @return ReadRecordingOptions Options builder
      */
-    public static function read($dateCreatedBefore = Values::NONE, $dateCreated = Values::NONE, $dateCreatedAfter = Values::NONE) {
+    public static function read(string $dateCreatedBefore = Values::NONE, string $dateCreated = Values::NONE, string $dateCreatedAfter = Values::NONE): ReadRecordingOptions {
         return new ReadRecordingOptions($dateCreatedBefore, $dateCreated, $dateCreatedAfter);
     }
 }
 
 class CreateRecordingOptions extends Options {
     /**
-     * @param string $recordingStatusCallbackEvent The recording status changes
-     *                                             that should generate a callback
+     * @param string[] $recordingStatusCallbackEvent The recording status changes
+     *                                               that should generate a callback
      * @param string $recordingStatusCallback The callback URL on each selected
      *                                        recording event
      * @param string $recordingStatusCallbackMethod The HTTP method we should use
@@ -65,7 +65,7 @@ class CreateRecordingOptions extends Options {
      * @param string $recordingChannels The number of channels that the output
      *                                  recording will be configured with
      */
-    public function __construct($recordingStatusCallbackEvent = Values::NONE, $recordingStatusCallback = Values::NONE, $recordingStatusCallbackMethod = Values::NONE, $trim = Values::NONE, $recordingChannels = Values::NONE) {
+    public function __construct(array $recordingStatusCallbackEvent = Values::ARRAY_NONE, string $recordingStatusCallback = Values::NONE, string $recordingStatusCallbackMethod = Values::NONE, string $trim = Values::NONE, string $recordingChannels = Values::NONE) {
         $this->options['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
         $this->options['recordingStatusCallback'] = $recordingStatusCallback;
         $this->options['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
@@ -76,11 +76,11 @@ class CreateRecordingOptions extends Options {
     /**
      * The recording status events on which we should call the `recording_status_callback` URL. Can be: `in-progress`, `completed` and `absent` and the default is `completed`. Separate multiple event values with a space.
      *
-     * @param string $recordingStatusCallbackEvent The recording status changes
-     *                                             that should generate a callback
+     * @param string[] $recordingStatusCallbackEvent The recording status changes
+     *                                               that should generate a callback
      * @return $this Fluent Builder
      */
-    public function setRecordingStatusCallbackEvent($recordingStatusCallbackEvent) {
+    public function setRecordingStatusCallbackEvent(array $recordingStatusCallbackEvent): self {
         $this->options['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
         return $this;
     }
@@ -92,7 +92,7 @@ class CreateRecordingOptions extends Options {
      *                                        recording event
      * @return $this Fluent Builder
      */
-    public function setRecordingStatusCallback($recordingStatusCallback) {
+    public function setRecordingStatusCallback(string $recordingStatusCallback): self {
         $this->options['recordingStatusCallback'] = $recordingStatusCallback;
         return $this;
     }
@@ -105,7 +105,7 @@ class CreateRecordingOptions extends Options {
      *                                              `recording_status_callback`
      * @return $this Fluent Builder
      */
-    public function setRecordingStatusCallbackMethod($recordingStatusCallbackMethod) {
+    public function setRecordingStatusCallbackMethod(string $recordingStatusCallbackMethod): self {
         $this->options['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
         return $this;
     }
@@ -116,7 +116,7 @@ class CreateRecordingOptions extends Options {
      * @param string $trim Whether to trim the silence in the recording
      * @return $this Fluent Builder
      */
-    public function setTrim($trim) {
+    public function setTrim(string $trim): self {
         $this->options['trim'] = $trim;
         return $this;
     }
@@ -128,7 +128,7 @@ class CreateRecordingOptions extends Options {
      *                                  recording will be configured with
      * @return $this Fluent Builder
      */
-    public function setRecordingChannels($recordingChannels) {
+    public function setRecordingChannels(string $recordingChannels): self {
         $this->options['recordingChannels'] = $recordingChannels;
         return $this;
     }
@@ -138,14 +138,9 @@ class CreateRecordingOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.CreateRecordingOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.CreateRecordingOptions ' . $options . ']';
     }
 }
 
@@ -154,7 +149,7 @@ class UpdateRecordingOptions extends Options {
      * @param string $pauseBehavior Whether to record or not during the pause
      *                              period.
      */
-    public function __construct($pauseBehavior = Values::NONE) {
+    public function __construct(string $pauseBehavior = Values::NONE) {
         $this->options['pauseBehavior'] = $pauseBehavior;
     }
 
@@ -165,7 +160,7 @@ class UpdateRecordingOptions extends Options {
      *                              period.
      * @return $this Fluent Builder
      */
-    public function setPauseBehavior($pauseBehavior) {
+    public function setPauseBehavior(string $pauseBehavior): self {
         $this->options['pauseBehavior'] = $pauseBehavior;
         return $this;
     }
@@ -175,14 +170,9 @@ class UpdateRecordingOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.UpdateRecordingOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.UpdateRecordingOptions ' . $options . ']';
     }
 }
 
@@ -194,7 +184,7 @@ class ReadRecordingOptions extends Options {
      * @param string $dateCreatedAfter The `YYYY-MM-DD` value of the resources to
      *                                 read
      */
-    public function __construct($dateCreatedBefore = Values::NONE, $dateCreated = Values::NONE, $dateCreatedAfter = Values::NONE) {
+    public function __construct(string $dateCreatedBefore = Values::NONE, string $dateCreated = Values::NONE, string $dateCreatedAfter = Values::NONE) {
         $this->options['dateCreatedBefore'] = $dateCreatedBefore;
         $this->options['dateCreated'] = $dateCreated;
         $this->options['dateCreatedAfter'] = $dateCreatedAfter;
@@ -207,7 +197,7 @@ class ReadRecordingOptions extends Options {
      *                                  read
      * @return $this Fluent Builder
      */
-    public function setDateCreatedBefore($dateCreatedBefore) {
+    public function setDateCreatedBefore(string $dateCreatedBefore): self {
         $this->options['dateCreatedBefore'] = $dateCreatedBefore;
         return $this;
     }
@@ -218,7 +208,7 @@ class ReadRecordingOptions extends Options {
      * @param string $dateCreated The `YYYY-MM-DD` value of the resources to read
      * @return $this Fluent Builder
      */
-    public function setDateCreated($dateCreated) {
+    public function setDateCreated(string $dateCreated): self {
         $this->options['dateCreated'] = $dateCreated;
         return $this;
     }
@@ -230,7 +220,7 @@ class ReadRecordingOptions extends Options {
      *                                 read
      * @return $this Fluent Builder
      */
-    public function setDateCreatedAfter($dateCreatedAfter) {
+    public function setDateCreatedAfter(string $dateCreatedAfter): self {
         $this->options['dateCreatedAfter'] = $dateCreatedAfter;
         return $this;
     }
@@ -240,13 +230,8 @@ class ReadRecordingOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.ReadRecordingOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.ReadRecordingOptions ' . $options . ']';
     }
 }

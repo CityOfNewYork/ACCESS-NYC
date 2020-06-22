@@ -34,19 +34,18 @@ class MemberInstance extends InstanceResource {
     /**
      * Initialize the MemberInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid The SID of the Service that the resource is
      *                           associated with
      * @param string $channelSid The SID of the Channel for the member
      * @param string $sid The SID of the Member resource to fetch
-     * @return \Twilio\Rest\Chat\V2\Service\Channel\MemberInstance
      */
-    public function __construct(Version $version, array $payload, $serviceSid, $channelSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $serviceSid, string $channelSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'channelSid' => Values::array_get($payload, 'channel_sid'),
@@ -59,23 +58,22 @@ class MemberInstance extends InstanceResource {
             'lastConsumptionTimestamp' => Deserialize::dateTime(Values::array_get($payload, 'last_consumption_timestamp')),
             'url' => Values::array_get($payload, 'url'),
             'attributes' => Values::array_get($payload, 'attributes'),
-        );
+        ];
 
-        $this->solution = array(
+        $this->solution = [
             'serviceSid' => $serviceSid,
             'channelSid' => $channelSid,
             'sid' => $sid ?: $this->properties['sid'],
-        );
+        ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Chat\V2\Service\Channel\MemberContext Context for this
-     *                                                            MemberInstance
+     * @return MemberContext Context for this MemberInstance
      */
-    protected function proxy() {
+    protected function proxy(): MemberContext {
         if (!$this->context) {
             $this->context = new MemberContext(
                 $this->version,
@@ -89,23 +87,24 @@ class MemberInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a MemberInstance
+     * Fetch the MemberInstance
      *
      * @return MemberInstance Fetched MemberInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): MemberInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the MemberInstance
+     * Delete the MemberInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @param array|Options $options Optional Arguments
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->proxy()->delete();
+    public function delete(array $options = []): bool {
+        return $this->proxy()->delete($options);
     }
 
     /**
@@ -115,7 +114,7 @@ class MemberInstance extends InstanceResource {
      * @return MemberInstance Updated MemberInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): MemberInstance {
         return $this->proxy()->update($options);
     }
 
@@ -126,7 +125,7 @@ class MemberInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -144,8 +143,8 @@ class MemberInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

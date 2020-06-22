@@ -25,8 +25,8 @@ use Twilio\Version;
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
  * @property string $sid
- * @property string $audioSources
- * @property string $audioSourcesExcluded
+ * @property string[] $audioSources
+ * @property string[] $audioSourcesExcluded
  * @property array $videoLayout
  * @property string $resolution
  * @property bool $trim
@@ -39,16 +39,15 @@ class CompositionHookInstance extends InstanceResource {
     /**
      * Initialize the CompositionHookInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $sid The SID that identifies the resource to fetch
-     * @return \Twilio\Rest\Video\V1\CompositionHookInstance
      */
-    public function __construct(Version $version, array $payload, $sid = null) {
+    public function __construct(Version $version, array $payload, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'friendlyName' => Values::array_get($payload, 'friendly_name'),
             'enabled' => Values::array_get($payload, 'enabled'),
@@ -64,19 +63,18 @@ class CompositionHookInstance extends InstanceResource {
             'statusCallback' => Values::array_get($payload, 'status_callback'),
             'statusCallbackMethod' => Values::array_get($payload, 'status_callback_method'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array('sid' => $sid ?: $this->properties['sid'], );
+        $this->solution = ['sid' => $sid ?: $this->properties['sid'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Video\V1\CompositionHookContext Context for this
-     *                                                      CompositionHookInstance
+     * @return CompositionHookContext Context for this CompositionHookInstance
      */
-    protected function proxy() {
+    protected function proxy(): CompositionHookContext {
         if (!$this->context) {
             $this->context = new CompositionHookContext($this->version, $this->solution['sid']);
         }
@@ -85,22 +83,22 @@ class CompositionHookInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a CompositionHookInstance
+     * Fetch the CompositionHookInstance
      *
      * @return CompositionHookInstance Fetched CompositionHookInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): CompositionHookInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the CompositionHookInstance
+     * Delete the CompositionHookInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
@@ -112,7 +110,7 @@ class CompositionHookInstance extends InstanceResource {
      * @return CompositionHookInstance Updated CompositionHookInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($friendlyName, $options = array()) {
+    public function update(string $friendlyName, array $options = []): CompositionHookInstance {
         return $this->proxy()->update($friendlyName, $options);
     }
 
@@ -123,7 +121,7 @@ class CompositionHookInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -141,8 +139,8 @@ class CompositionHookInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

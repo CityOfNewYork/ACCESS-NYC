@@ -11,6 +11,7 @@ namespace Twilio\Rest\Autopilot\V1;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Rest\Autopilot\V1\Assistant\DefaultsList;
 use Twilio\Rest\Autopilot\V1\Assistant\DialogueList;
@@ -28,15 +29,15 @@ use Twilio\Version;
 /**
  * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
  *
- * @property \Twilio\Rest\Autopilot\V1\Assistant\FieldTypeList $fieldTypes
- * @property \Twilio\Rest\Autopilot\V1\Assistant\TaskList $tasks
- * @property \Twilio\Rest\Autopilot\V1\Assistant\ModelBuildList $modelBuilds
- * @property \Twilio\Rest\Autopilot\V1\Assistant\QueryList $queries
- * @property \Twilio\Rest\Autopilot\V1\Assistant\StyleSheetList $styleSheet
- * @property \Twilio\Rest\Autopilot\V1\Assistant\DefaultsList $defaults
- * @property \Twilio\Rest\Autopilot\V1\Assistant\DialogueList $dialogues
- * @property \Twilio\Rest\Autopilot\V1\Assistant\WebhookList $webhooks
- * @property \Twilio\Rest\Autopilot\V1\Assistant\ExportAssistantList $exportAssistant
+ * @property FieldTypeList $fieldTypes
+ * @property TaskList $tasks
+ * @property ModelBuildList $modelBuilds
+ * @property QueryList $queries
+ * @property StyleSheetList $styleSheet
+ * @property DefaultsList $defaults
+ * @property DialogueList $dialogues
+ * @property WebhookList $webhooks
+ * @property ExportAssistantList $exportAssistant
  * @method \Twilio\Rest\Autopilot\V1\Assistant\FieldTypeContext fieldTypes(string $sid)
  * @method \Twilio\Rest\Autopilot\V1\Assistant\TaskContext tasks(string $sid)
  * @method \Twilio\Rest\Autopilot\V1\Assistant\ModelBuildContext modelBuilds(string $sid)
@@ -48,46 +49,39 @@ use Twilio\Version;
  * @method \Twilio\Rest\Autopilot\V1\Assistant\ExportAssistantContext exportAssistant()
  */
 class AssistantContext extends InstanceContext {
-    protected $_fieldTypes = null;
-    protected $_tasks = null;
-    protected $_modelBuilds = null;
-    protected $_queries = null;
-    protected $_styleSheet = null;
-    protected $_defaults = null;
-    protected $_dialogues = null;
-    protected $_webhooks = null;
-    protected $_exportAssistant = null;
+    protected $_fieldTypes;
+    protected $_tasks;
+    protected $_modelBuilds;
+    protected $_queries;
+    protected $_styleSheet;
+    protected $_defaults;
+    protected $_dialogues;
+    protected $_webhooks;
+    protected $_exportAssistant;
 
     /**
      * Initialize the AssistantContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Autopilot\V1\AssistantContext
      */
     public function __construct(Version $version, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('sid' => $sid, );
+        $this->solution = ['sid' => $sid, ];
 
         $this->uri = '/Assistants/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a AssistantInstance
+     * Fetch the AssistantInstance
      *
      * @return AssistantInstance Fetched AssistantInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): AssistantInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new AssistantInstance($this->version, $payload, $this->solution['sid']);
     }
@@ -99,10 +93,10 @@ class AssistantContext extends InstanceContext {
      * @return AssistantInstance Updated AssistantInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): AssistantInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'FriendlyName' => $options['friendlyName'],
             'LogQueries' => Serialize::booleanToString($options['logQueries']),
             'UniqueName' => $options['uniqueName'],
@@ -111,34 +105,27 @@ class AssistantContext extends InstanceContext {
             'StyleSheet' => Serialize::jsonObject($options['styleSheet']),
             'Defaults' => Serialize::jsonObject($options['defaults']),
             'DevelopmentStage' => $options['developmentStage'],
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new AssistantInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
-     * Deletes the AssistantInstance
+     * Delete the AssistantInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
      * Access the fieldTypes
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\FieldTypeList
      */
-    protected function getFieldTypes() {
+    protected function getFieldTypes(): FieldTypeList {
         if (!$this->_fieldTypes) {
             $this->_fieldTypes = new FieldTypeList($this->version, $this->solution['sid']);
         }
@@ -148,10 +135,8 @@ class AssistantContext extends InstanceContext {
 
     /**
      * Access the tasks
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\TaskList
      */
-    protected function getTasks() {
+    protected function getTasks(): TaskList {
         if (!$this->_tasks) {
             $this->_tasks = new TaskList($this->version, $this->solution['sid']);
         }
@@ -161,10 +146,8 @@ class AssistantContext extends InstanceContext {
 
     /**
      * Access the modelBuilds
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\ModelBuildList
      */
-    protected function getModelBuilds() {
+    protected function getModelBuilds(): ModelBuildList {
         if (!$this->_modelBuilds) {
             $this->_modelBuilds = new ModelBuildList($this->version, $this->solution['sid']);
         }
@@ -174,10 +157,8 @@ class AssistantContext extends InstanceContext {
 
     /**
      * Access the queries
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\QueryList
      */
-    protected function getQueries() {
+    protected function getQueries(): QueryList {
         if (!$this->_queries) {
             $this->_queries = new QueryList($this->version, $this->solution['sid']);
         }
@@ -187,10 +168,8 @@ class AssistantContext extends InstanceContext {
 
     /**
      * Access the styleSheet
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\StyleSheetList
      */
-    protected function getStyleSheet() {
+    protected function getStyleSheet(): StyleSheetList {
         if (!$this->_styleSheet) {
             $this->_styleSheet = new StyleSheetList($this->version, $this->solution['sid']);
         }
@@ -200,10 +179,8 @@ class AssistantContext extends InstanceContext {
 
     /**
      * Access the defaults
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\DefaultsList
      */
-    protected function getDefaults() {
+    protected function getDefaults(): DefaultsList {
         if (!$this->_defaults) {
             $this->_defaults = new DefaultsList($this->version, $this->solution['sid']);
         }
@@ -213,10 +190,8 @@ class AssistantContext extends InstanceContext {
 
     /**
      * Access the dialogues
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\DialogueList
      */
-    protected function getDialogues() {
+    protected function getDialogues(): DialogueList {
         if (!$this->_dialogues) {
             $this->_dialogues = new DialogueList($this->version, $this->solution['sid']);
         }
@@ -226,10 +201,8 @@ class AssistantContext extends InstanceContext {
 
     /**
      * Access the webhooks
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\WebhookList
      */
-    protected function getWebhooks() {
+    protected function getWebhooks(): WebhookList {
         if (!$this->_webhooks) {
             $this->_webhooks = new WebhookList($this->version, $this->solution['sid']);
         }
@@ -239,10 +212,8 @@ class AssistantContext extends InstanceContext {
 
     /**
      * Access the exportAssistant
-     *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\ExportAssistantList
      */
-    protected function getExportAssistant() {
+    protected function getExportAssistant(): ExportAssistantList {
         if (!$this->_exportAssistant) {
             $this->_exportAssistant = new ExportAssistantList($this->version, $this->solution['sid']);
         }
@@ -254,10 +225,10 @@ class AssistantContext extends InstanceContext {
      * Magic getter to lazy load subresources
      *
      * @param string $name Subresource to return
-     * @return \Twilio\ListResource The requested subresource
+     * @return ListResource The requested subresource
      * @throws TwilioException For unknown subresources
      */
-    public function __get($name) {
+    public function __get(string $name): ListResource {
         if (\property_exists($this, '_' . $name)) {
             $method = 'get' . \ucfirst($name);
             return $this->$method();
@@ -271,10 +242,10 @@ class AssistantContext extends InstanceContext {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -288,8 +259,8 @@ class AssistantContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

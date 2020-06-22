@@ -19,34 +19,27 @@ class RoleContext extends InstanceContext {
     /**
      * Initialize the RoleContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Service to fetch the resource from
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Chat\V1\Service\RoleContext
      */
     public function __construct(Version $version, $serviceSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
+        $this->solution = ['serviceSid' => $serviceSid, 'sid' => $sid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Roles/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a RoleInstance
+     * Fetch the RoleInstance
      *
      * @return RoleInstance Fetched RoleInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): RoleInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new RoleInstance(
             $this->version,
@@ -57,31 +50,26 @@ class RoleContext extends InstanceContext {
     }
 
     /**
-     * Deletes the RoleInstance
+     * Delete the RoleInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
      * Update the RoleInstance
      *
-     * @param string $permission A permission the role should have
+     * @param string[] $permission A permission the role should have
      * @return RoleInstance Updated RoleInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($permission) {
-        $data = Values::of(array('Permission' => Serialize::map($permission, function($e) { return $e; }), ));
+    public function update(array $permission): RoleInstance {
+        $data = Values::of(['Permission' => Serialize::map($permission, function($e) { return $e; }), ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new RoleInstance(
             $this->version,
@@ -96,8 +84,8 @@ class RoleContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

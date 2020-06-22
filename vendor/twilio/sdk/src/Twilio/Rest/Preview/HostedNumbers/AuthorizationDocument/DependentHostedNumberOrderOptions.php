@@ -25,7 +25,7 @@ abstract class DependentHostedNumberOrderOptions {
      *                           HostedNumberOrder.
      * @return ReadDependentHostedNumberOrderOptions Options builder
      */
-    public static function read($status = Values::NONE, $phoneNumber = Values::NONE, $incomingPhoneNumberSid = Values::NONE, $friendlyName = Values::NONE, $uniqueName = Values::NONE) {
+    public static function read(string $status = Values::NONE, string $phoneNumber = Values::NONE, string $incomingPhoneNumberSid = Values::NONE, string $friendlyName = Values::NONE, string $uniqueName = Values::NONE): ReadDependentHostedNumberOrderOptions {
         return new ReadDependentHostedNumberOrderOptions($status, $phoneNumber, $incomingPhoneNumberSid, $friendlyName, $uniqueName);
     }
 }
@@ -39,7 +39,7 @@ class ReadDependentHostedNumberOrderOptions extends Options {
      * @param string $uniqueName A unique, developer assigned name of this
      *                           HostedNumberOrder.
      */
-    public function __construct($status = Values::NONE, $phoneNumber = Values::NONE, $incomingPhoneNumberSid = Values::NONE, $friendlyName = Values::NONE, $uniqueName = Values::NONE) {
+    public function __construct(string $status = Values::NONE, string $phoneNumber = Values::NONE, string $incomingPhoneNumberSid = Values::NONE, string $friendlyName = Values::NONE, string $uniqueName = Values::NONE) {
         $this->options['status'] = $status;
         $this->options['phoneNumber'] = $phoneNumber;
         $this->options['incomingPhoneNumberSid'] = $incomingPhoneNumberSid;
@@ -53,7 +53,7 @@ class ReadDependentHostedNumberOrderOptions extends Options {
      * @param string $status The Status of this HostedNumberOrder.
      * @return $this Fluent Builder
      */
-    public function setStatus($status) {
+    public function setStatus(string $status): self {
         $this->options['status'] = $status;
         return $this;
     }
@@ -64,7 +64,7 @@ class ReadDependentHostedNumberOrderOptions extends Options {
      * @param string $phoneNumber An E164 formatted phone number.
      * @return $this Fluent Builder
      */
-    public function setPhoneNumber($phoneNumber) {
+    public function setPhoneNumber(string $phoneNumber): self {
         $this->options['phoneNumber'] = $phoneNumber;
         return $this;
     }
@@ -75,7 +75,7 @@ class ReadDependentHostedNumberOrderOptions extends Options {
      * @param string $incomingPhoneNumberSid IncomingPhoneNumber sid.
      * @return $this Fluent Builder
      */
-    public function setIncomingPhoneNumberSid($incomingPhoneNumberSid) {
+    public function setIncomingPhoneNumberSid(string $incomingPhoneNumberSid): self {
         $this->options['incomingPhoneNumberSid'] = $incomingPhoneNumberSid;
         return $this;
     }
@@ -86,7 +86,7 @@ class ReadDependentHostedNumberOrderOptions extends Options {
      * @param string $friendlyName A human readable description of this resource.
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -98,7 +98,7 @@ class ReadDependentHostedNumberOrderOptions extends Options {
      *                           HostedNumberOrder.
      * @return $this Fluent Builder
      */
-    public function setUniqueName($uniqueName) {
+    public function setUniqueName(string $uniqueName): self {
         $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
@@ -108,13 +108,8 @@ class ReadDependentHostedNumberOrderOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.HostedNumbers.ReadDependentHostedNumberOrderOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.HostedNumbers.ReadDependentHostedNumberOrderOptions ' . $options . ']';
     }
 }

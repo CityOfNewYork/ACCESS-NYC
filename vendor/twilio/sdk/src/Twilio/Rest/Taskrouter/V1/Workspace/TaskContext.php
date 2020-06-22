@@ -11,49 +11,43 @@ namespace Twilio\Rest\Taskrouter\V1\Workspace;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Rest\Taskrouter\V1\Workspace\Task\ReservationList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
- * @property \Twilio\Rest\Taskrouter\V1\Workspace\Task\ReservationList $reservations
+ * @property ReservationList $reservations
  * @method \Twilio\Rest\Taskrouter\V1\Workspace\Task\ReservationContext reservations(string $sid)
  */
 class TaskContext extends InstanceContext {
-    protected $_reservations = null;
+    protected $_reservations;
 
     /**
      * Initialize the TaskContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $workspaceSid The SID of the Workspace with the Task to fetch
      * @param string $sid The SID of the resource to fetch
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\TaskContext
      */
     public function __construct(Version $version, $workspaceSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('workspaceSid' => $workspaceSid, 'sid' => $sid, );
+        $this->solution = ['workspaceSid' => $workspaceSid, 'sid' => $sid, ];
 
         $this->uri = '/Workspaces/' . \rawurlencode($workspaceSid) . '/Tasks/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a TaskInstance
+     * Fetch the TaskInstance
      *
      * @return TaskInstance Fetched TaskInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): TaskInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new TaskInstance(
             $this->version,
@@ -70,23 +64,18 @@ class TaskContext extends InstanceContext {
      * @return TaskInstance Updated TaskInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): TaskInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'Attributes' => $options['attributes'],
             'AssignmentStatus' => $options['assignmentStatus'],
             'Reason' => $options['reason'],
             'Priority' => $options['priority'],
             'TaskChannel' => $options['taskChannel'],
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new TaskInstance(
             $this->version,
@@ -97,21 +86,19 @@ class TaskContext extends InstanceContext {
     }
 
     /**
-     * Deletes the TaskInstance
+     * Delete the TaskInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
      * Access the reservations
-     *
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\Task\ReservationList
      */
-    protected function getReservations() {
+    protected function getReservations(): ReservationList {
         if (!$this->_reservations) {
             $this->_reservations = new ReservationList(
                 $this->version,
@@ -127,10 +114,10 @@ class TaskContext extends InstanceContext {
      * Magic getter to lazy load subresources
      *
      * @param string $name Subresource to return
-     * @return \Twilio\ListResource The requested subresource
+     * @return ListResource The requested subresource
      * @throws TwilioException For unknown subresources
      */
-    public function __get($name) {
+    public function __get(string $name): ListResource {
         if (\property_exists($this, '_' . $name)) {
             $method = 'get' . \ucfirst($name);
             return $this->$method();
@@ -144,10 +131,10 @@ class TaskContext extends InstanceContext {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -161,8 +148,8 @@ class TaskContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

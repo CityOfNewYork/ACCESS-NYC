@@ -23,7 +23,7 @@ abstract class SettingsOptions {
      *                                            otherwise `false`
      * @return UpdateSettingsOptions Options builder
      */
-    public static function update($dialingPermissionsInheritance = Values::NONE) {
+    public static function update(bool $dialingPermissionsInheritance = Values::NONE): UpdateSettingsOptions {
         return new UpdateSettingsOptions($dialingPermissionsInheritance);
     }
 }
@@ -35,7 +35,7 @@ class UpdateSettingsOptions extends Options {
      *                                            from the Master Project;
      *                                            otherwise `false`
      */
-    public function __construct($dialingPermissionsInheritance = Values::NONE) {
+    public function __construct(bool $dialingPermissionsInheritance = Values::NONE) {
         $this->options['dialingPermissionsInheritance'] = $dialingPermissionsInheritance;
     }
 
@@ -48,7 +48,7 @@ class UpdateSettingsOptions extends Options {
      *                                            otherwise `false`
      * @return $this Fluent Builder
      */
-    public function setDialingPermissionsInheritance($dialingPermissionsInheritance) {
+    public function setDialingPermissionsInheritance(bool $dialingPermissionsInheritance): self {
         $this->options['dialingPermissionsInheritance'] = $dialingPermissionsInheritance;
         return $this;
     }
@@ -58,13 +58,8 @@ class UpdateSettingsOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Voice.V1.UpdateSettingsOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Voice.V1.UpdateSettingsOptions ' . $options . ']';
     }
 }

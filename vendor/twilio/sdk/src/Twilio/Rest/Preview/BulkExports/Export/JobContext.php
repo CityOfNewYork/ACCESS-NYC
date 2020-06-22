@@ -21,45 +21,38 @@ class JobContext extends InstanceContext {
     /**
      * Initialize the JobContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $jobSid The job_sid
-     * @return \Twilio\Rest\Preview\BulkExports\Export\JobContext
      */
     public function __construct(Version $version, $jobSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('jobSid' => $jobSid, );
+        $this->solution = ['jobSid' => $jobSid, ];
 
         $this->uri = '/Exports/Jobs/' . \rawurlencode($jobSid) . '';
     }
 
     /**
-     * Fetch a JobInstance
+     * Fetch the JobInstance
      *
      * @return JobInstance Fetched JobInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): JobInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new JobInstance($this->version, $payload, $this->solution['jobSid']);
     }
 
     /**
-     * Deletes the JobInstance
+     * Delete the JobInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -67,8 +60,8 @@ class JobContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

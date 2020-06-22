@@ -39,19 +39,18 @@ class RecordingInstance extends InstanceResource {
     /**
      * Initialize the RecordingInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $accountSid The SID of the Account that created the resource
      * @param string $conferenceSid The Conference SID that identifies the
      *                              conference associated with the recording
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Api\V2010\Account\Conference\RecordingInstance
      */
-    public function __construct(Version $version, array $payload, $accountSid, $conferenceSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $accountSid, string $conferenceSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'apiVersion' => Values::array_get($payload, 'api_version'),
             'callSid' => Values::array_get($payload, 'call_sid'),
@@ -69,24 +68,22 @@ class RecordingInstance extends InstanceResource {
             'errorCode' => Values::array_get($payload, 'error_code'),
             'encryptionDetails' => Values::array_get($payload, 'encryption_details'),
             'uri' => Values::array_get($payload, 'uri'),
-        );
+        ];
 
-        $this->solution = array(
+        $this->solution = [
             'accountSid' => $accountSid,
             'conferenceSid' => $conferenceSid,
             'sid' => $sid ?: $this->properties['sid'],
-        );
+        ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Api\V2010\Account\Conference\RecordingContext Context
-     *                                                                    for this
-     *                                                                    RecordingInstance
+     * @return RecordingContext Context for this RecordingInstance
      */
-    protected function proxy() {
+    protected function proxy(): RecordingContext {
         if (!$this->context) {
             $this->context = new RecordingContext(
                 $this->version,
@@ -107,27 +104,27 @@ class RecordingInstance extends InstanceResource {
      * @return RecordingInstance Updated RecordingInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($status, $options = array()) {
+    public function update(string $status, array $options = []): RecordingInstance {
         return $this->proxy()->update($status, $options);
     }
 
     /**
-     * Fetch a RecordingInstance
+     * Fetch the RecordingInstance
      *
      * @return RecordingInstance Fetched RecordingInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): RecordingInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the RecordingInstance
+     * Delete the RecordingInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
@@ -138,7 +135,7 @@ class RecordingInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -156,8 +153,8 @@ class RecordingInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

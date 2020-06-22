@@ -24,20 +24,19 @@ class BulkCountryUpdateInstance extends InstanceResource {
     /**
      * Initialize the BulkCountryUpdateInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @return \Twilio\Rest\Voice\V1\DialingPermissions\BulkCountryUpdateInstance
      */
     public function __construct(Version $version, array $payload) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'updateCount' => Values::array_get($payload, 'update_count'),
             'updateRequest' => Values::array_get($payload, 'update_request'),
-        );
+        ];
 
-        $this->solution = array();
+        $this->solution = [];
     }
 
     /**
@@ -47,7 +46,7 @@ class BulkCountryUpdateInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -65,7 +64,7 @@ class BulkCountryUpdateInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Voice.V1.BulkCountryUpdateInstance]';
     }
 }

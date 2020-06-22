@@ -20,7 +20,7 @@ abstract class IpAddressOptions {
      *                              address is used.
      * @return CreateIpAddressOptions Options builder
      */
-    public static function create($cidrPrefixLength = Values::NONE) {
+    public static function create(int $cidrPrefixLength = Values::NONE): CreateIpAddressOptions {
         return new CreateIpAddressOptions($cidrPrefixLength);
     }
 
@@ -37,7 +37,7 @@ abstract class IpAddressOptions {
      *                              address is used.
      * @return UpdateIpAddressOptions Options builder
      */
-    public static function update($ipAddress = Values::NONE, $friendlyName = Values::NONE, $cidrPrefixLength = Values::NONE) {
+    public static function update(string $ipAddress = Values::NONE, string $friendlyName = Values::NONE, int $cidrPrefixLength = Values::NONE): UpdateIpAddressOptions {
         return new UpdateIpAddressOptions($ipAddress, $friendlyName, $cidrPrefixLength);
     }
 }
@@ -49,7 +49,7 @@ class CreateIpAddressOptions extends Options {
      *                              accepting traffic. By default the entire IP
      *                              address is used.
      */
-    public function __construct($cidrPrefixLength = Values::NONE) {
+    public function __construct(int $cidrPrefixLength = Values::NONE) {
         $this->options['cidrPrefixLength'] = $cidrPrefixLength;
     }
 
@@ -62,7 +62,7 @@ class CreateIpAddressOptions extends Options {
      *                              address is used.
      * @return $this Fluent Builder
      */
-    public function setCidrPrefixLength($cidrPrefixLength) {
+    public function setCidrPrefixLength(int $cidrPrefixLength): self {
         $this->options['cidrPrefixLength'] = $cidrPrefixLength;
         return $this;
     }
@@ -72,14 +72,9 @@ class CreateIpAddressOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.CreateIpAddressOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.CreateIpAddressOptions ' . $options . ']';
     }
 }
 
@@ -96,7 +91,7 @@ class UpdateIpAddressOptions extends Options {
      *                              accepting traffic. By default the entire IP
      *                              address is used.
      */
-    public function __construct($ipAddress = Values::NONE, $friendlyName = Values::NONE, $cidrPrefixLength = Values::NONE) {
+    public function __construct(string $ipAddress = Values::NONE, string $friendlyName = Values::NONE, int $cidrPrefixLength = Values::NONE) {
         $this->options['ipAddress'] = $ipAddress;
         $this->options['friendlyName'] = $friendlyName;
         $this->options['cidrPrefixLength'] = $cidrPrefixLength;
@@ -111,7 +106,7 @@ class UpdateIpAddressOptions extends Options {
      *                          only supported today.
      * @return $this Fluent Builder
      */
-    public function setIpAddress($ipAddress) {
+    public function setIpAddress(string $ipAddress): self {
         $this->options['ipAddress'] = $ipAddress;
         return $this;
     }
@@ -123,7 +118,7 @@ class UpdateIpAddressOptions extends Options {
      *                             resource, up to 64 characters long.
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -137,7 +132,7 @@ class UpdateIpAddressOptions extends Options {
      *                              address is used.
      * @return $this Fluent Builder
      */
-    public function setCidrPrefixLength($cidrPrefixLength) {
+    public function setCidrPrefixLength(int $cidrPrefixLength): self {
         $this->options['cidrPrefixLength'] = $cidrPrefixLength;
         return $this;
     }
@@ -147,13 +142,8 @@ class UpdateIpAddressOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.UpdateIpAddressOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.UpdateIpAddressOptions ' . $options . ']';
     }
 }

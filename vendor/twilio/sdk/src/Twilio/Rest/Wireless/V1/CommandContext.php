@@ -18,45 +18,38 @@ class CommandContext extends InstanceContext {
     /**
      * Initialize the CommandContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $sid The SID that identifies the resource to fetch
-     * @return \Twilio\Rest\Wireless\V1\CommandContext
      */
     public function __construct(Version $version, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('sid' => $sid, );
+        $this->solution = ['sid' => $sid, ];
 
         $this->uri = '/Commands/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a CommandInstance
+     * Fetch the CommandInstance
      *
      * @return CommandInstance Fetched CommandInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): CommandInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new CommandInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
-     * Deletes the CommandInstance
+     * Delete the CommandInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -64,8 +57,8 @@ class CommandContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

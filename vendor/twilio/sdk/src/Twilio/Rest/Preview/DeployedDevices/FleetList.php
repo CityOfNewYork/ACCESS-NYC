@@ -12,6 +12,7 @@ namespace Twilio\Rest\Preview\DeployedDevices;
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
 use Twilio\Options;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -23,35 +24,29 @@ class FleetList extends ListResource {
      * Construct the FleetList
      *
      * @param Version $version Version that contains the resource
-     * @return \Twilio\Rest\Preview\DeployedDevices\FleetList
      */
     public function __construct(Version $version) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array();
+        $this->solution = [];
 
         $this->uri = '/Fleets';
     }
 
     /**
-     * Create a new FleetInstance
+     * Create the FleetInstance
      *
      * @param array|Options $options Optional Arguments
-     * @return FleetInstance Newly created FleetInstance
+     * @return FleetInstance Created FleetInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($options = array()) {
+    public function create(array $options = []): FleetInstance {
         $options = new Values($options);
 
-        $data = Values::of(array('FriendlyName' => $options['friendlyName'], ));
+        $data = Values::of(['FriendlyName' => $options['friendlyName'], ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new FleetInstance($this->version, $payload);
     }
@@ -72,9 +67,9 @@ class FleetList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
         $page = $this->page($limits['pageSize']);
@@ -97,7 +92,7 @@ class FleetList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return FleetInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
+    public function read(int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($limit, $pageSize), false);
     }
 
@@ -108,20 +103,12 @@ class FleetList extends ListResource {
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of FleetInstance
+     * @return FleetPage Page of FleetInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page($pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): FleetPage {
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new FleetPage($this->version, $response, $this->solution);
     }
@@ -131,9 +118,9 @@ class FleetList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of FleetInstance
+     * @return FleetPage Page of FleetInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): FleetPage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -146,9 +133,8 @@ class FleetList extends ListResource {
      * Constructs a FleetContext
      *
      * @param string $sid A string that uniquely identifies the Fleet.
-     * @return \Twilio\Rest\Preview\DeployedDevices\FleetContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): FleetContext {
         return new FleetContext($this->version, $sid);
     }
 
@@ -157,7 +143,7 @@ class FleetList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Preview.DeployedDevices.FleetList]';
     }
 }

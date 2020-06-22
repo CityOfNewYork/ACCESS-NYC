@@ -11,6 +11,7 @@ namespace Twilio\Rest\Chat\V2\Service;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Rest\Chat\V2\Service\User\UserBindingList;
 use Twilio\Rest\Chat\V2\Service\User\UserChannelList;
@@ -18,46 +19,39 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * @property \Twilio\Rest\Chat\V2\Service\User\UserChannelList $userChannels
- * @property \Twilio\Rest\Chat\V2\Service\User\UserBindingList $userBindings
+ * @property UserChannelList $userChannels
+ * @property UserBindingList $userBindings
  * @method \Twilio\Rest\Chat\V2\Service\User\UserChannelContext userChannels(string $channelSid)
  * @method \Twilio\Rest\Chat\V2\Service\User\UserBindingContext userBindings(string $sid)
  */
 class UserContext extends InstanceContext {
-    protected $_userChannels = null;
-    protected $_userBindings = null;
+    protected $_userChannels;
+    protected $_userBindings;
 
     /**
      * Initialize the UserContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Service to fetch the resource from
      * @param string $sid The SID of the User resource to fetch
-     * @return \Twilio\Rest\Chat\V2\Service\UserContext
      */
     public function __construct(Version $version, $serviceSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
+        $this->solution = ['serviceSid' => $serviceSid, 'sid' => $sid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Users/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a UserInstance
+     * Fetch the UserInstance
      *
      * @return UserInstance Fetched UserInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): UserInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new UserInstance(
             $this->version,
@@ -68,13 +62,13 @@ class UserContext extends InstanceContext {
     }
 
     /**
-     * Deletes the UserInstance
+     * Delete the UserInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -84,21 +78,17 @@ class UserContext extends InstanceContext {
      * @return UserInstance Updated UserInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): UserInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'RoleSid' => $options['roleSid'],
             'Attributes' => $options['attributes'],
             'FriendlyName' => $options['friendlyName'],
-        ));
+        ]);
+        $headers = Values::of(['X-Twilio-Webhook-Enabled' => $options['xTwilioWebhookEnabled'], ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data, $headers);
 
         return new UserInstance(
             $this->version,
@@ -110,10 +100,8 @@ class UserContext extends InstanceContext {
 
     /**
      * Access the userChannels
-     *
-     * @return \Twilio\Rest\Chat\V2\Service\User\UserChannelList
      */
-    protected function getUserChannels() {
+    protected function getUserChannels(): UserChannelList {
         if (!$this->_userChannels) {
             $this->_userChannels = new UserChannelList(
                 $this->version,
@@ -127,10 +115,8 @@ class UserContext extends InstanceContext {
 
     /**
      * Access the userBindings
-     *
-     * @return \Twilio\Rest\Chat\V2\Service\User\UserBindingList
      */
-    protected function getUserBindings() {
+    protected function getUserBindings(): UserBindingList {
         if (!$this->_userBindings) {
             $this->_userBindings = new UserBindingList(
                 $this->version,
@@ -146,10 +132,10 @@ class UserContext extends InstanceContext {
      * Magic getter to lazy load subresources
      *
      * @param string $name Subresource to return
-     * @return \Twilio\ListResource The requested subresource
+     * @return ListResource The requested subresource
      * @throws TwilioException For unknown subresources
      */
-    public function __get($name) {
+    public function __get(string $name): ListResource {
         if (\property_exists($this, '_' . $name)) {
             $method = 'get' . \ucfirst($name);
             return $this->$method();
@@ -163,10 +149,10 @@ class UserContext extends InstanceContext {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -180,8 +166,8 @@ class UserContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

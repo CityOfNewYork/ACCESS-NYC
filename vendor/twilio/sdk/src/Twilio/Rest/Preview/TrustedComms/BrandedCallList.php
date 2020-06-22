@@ -23,43 +23,37 @@ class BrandedCallList extends ListResource {
      * Construct the BrandedCallList
      *
      * @param Version $version Version that contains the resource
-     * @return \Twilio\Rest\Preview\TrustedComms\BrandedCallList
      */
     public function __construct(Version $version) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array();
+        $this->solution = [];
 
         $this->uri = '/Business/BrandedCalls';
     }
 
     /**
-     * Create a new BrandedCallInstance
+     * Create the BrandedCallInstance
      *
      * @param string $from Twilio number from which to brand the call
      * @param string $to The terminating Phone Number
      * @param string $reason The business reason for this phone call
      * @param array|Options $options Optional Arguments
-     * @return BrandedCallInstance Newly created BrandedCallInstance
+     * @return BrandedCallInstance Created BrandedCallInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($from, $to, $reason, $options = array()) {
+    public function create(string $from, string $to, string $reason, array $options = []): BrandedCallInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'From' => $from,
             'To' => $to,
             'Reason' => $reason,
             'CallSid' => $options['callSid'],
-        ));
+        ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new BrandedCallInstance($this->version, $payload);
     }
@@ -69,7 +63,7 @@ class BrandedCallList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Preview.TrustedComms.BrandedCallList]';
     }
 }

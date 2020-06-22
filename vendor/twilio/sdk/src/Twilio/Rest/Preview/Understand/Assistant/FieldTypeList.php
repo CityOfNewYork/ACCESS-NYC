@@ -12,6 +12,7 @@ namespace Twilio\Rest\Preview\Understand\Assistant;
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
 use Twilio\Options;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -24,13 +25,12 @@ class FieldTypeList extends ListResource {
      *
      * @param Version $version Version that contains the resource
      * @param string $assistantSid The unique ID of the Assistant.
-     * @return \Twilio\Rest\Preview\Understand\Assistant\FieldTypeList
      */
-    public function __construct(Version $version, $assistantSid) {
+    public function __construct(Version $version, string $assistantSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('assistantSid' => $assistantSid, );
+        $this->solution = ['assistantSid' => $assistantSid, ];
 
         $this->uri = '/Assistants/' . \rawurlencode($assistantSid) . '/FieldTypes';
     }
@@ -51,9 +51,9 @@ class FieldTypeList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
         $page = $this->page($limits['pageSize']);
@@ -76,7 +76,7 @@ class FieldTypeList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return FieldTypeInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
+    public function read(int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($limit, $pageSize), false);
     }
 
@@ -87,20 +87,12 @@ class FieldTypeList extends ListResource {
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of FieldTypeInstance
+     * @return FieldTypePage Page of FieldTypeInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page($pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): FieldTypePage {
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new FieldTypePage($this->version, $response, $this->solution);
     }
@@ -110,9 +102,9 @@ class FieldTypeList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of FieldTypeInstance
+     * @return FieldTypePage Page of FieldTypeInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): FieldTypePage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -122,26 +114,21 @@ class FieldTypeList extends ListResource {
     }
 
     /**
-     * Create a new FieldTypeInstance
+     * Create the FieldTypeInstance
      *
      * @param string $uniqueName A user-provided string that uniquely identifies
      *                           this resource as an alternative to the sid. Unique
      *                           up to 64 characters long.
      * @param array|Options $options Optional Arguments
-     * @return FieldTypeInstance Newly created FieldTypeInstance
+     * @return FieldTypeInstance Created FieldTypeInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($uniqueName, $options = array()) {
+    public function create(string $uniqueName, array $options = []): FieldTypeInstance {
         $options = new Values($options);
 
-        $data = Values::of(array('UniqueName' => $uniqueName, 'FriendlyName' => $options['friendlyName'], ));
+        $data = Values::of(['UniqueName' => $uniqueName, 'FriendlyName' => $options['friendlyName'], ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new FieldTypeInstance($this->version, $payload, $this->solution['assistantSid']);
     }
@@ -150,9 +137,8 @@ class FieldTypeList extends ListResource {
      * Constructs a FieldTypeContext
      *
      * @param string $sid The sid
-     * @return \Twilio\Rest\Preview\Understand\Assistant\FieldTypeContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): FieldTypeContext {
         return new FieldTypeContext($this->version, $this->solution['assistantSid'], $sid);
     }
 
@@ -161,7 +147,7 @@ class FieldTypeList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Preview.Understand.FieldTypeList]';
     }
 }

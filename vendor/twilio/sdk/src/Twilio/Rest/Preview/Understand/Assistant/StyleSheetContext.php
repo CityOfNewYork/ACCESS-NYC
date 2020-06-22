@@ -23,33 +23,26 @@ class StyleSheetContext extends InstanceContext {
     /**
      * Initialize the StyleSheetContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $assistantSid The unique ID of the Assistant
-     * @return \Twilio\Rest\Preview\Understand\Assistant\StyleSheetContext
      */
     public function __construct(Version $version, $assistantSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('assistantSid' => $assistantSid, );
+        $this->solution = ['assistantSid' => $assistantSid, ];
 
         $this->uri = '/Assistants/' . \rawurlencode($assistantSid) . '/StyleSheet';
     }
 
     /**
-     * Fetch a StyleSheetInstance
+     * Fetch the StyleSheetInstance
      *
      * @return StyleSheetInstance Fetched StyleSheetInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): StyleSheetInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new StyleSheetInstance($this->version, $payload, $this->solution['assistantSid']);
     }
@@ -61,17 +54,12 @@ class StyleSheetContext extends InstanceContext {
      * @return StyleSheetInstance Updated StyleSheetInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): StyleSheetInstance {
         $options = new Values($options);
 
-        $data = Values::of(array('StyleSheet' => Serialize::jsonObject($options['styleSheet']), ));
+        $data = Values::of(['StyleSheet' => Serialize::jsonObject($options['styleSheet']), ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new StyleSheetInstance($this->version, $payload, $this->solution['assistantSid']);
     }
@@ -81,8 +69,8 @@ class StyleSheetContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

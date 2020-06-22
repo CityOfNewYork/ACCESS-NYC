@@ -21,7 +21,7 @@ abstract class KeyOptions {
      * @param string $deviceSid The unique identifier of a Key to be authenticated.
      * @return CreateKeyOptions Options builder
      */
-    public static function create($friendlyName = Values::NONE, $deviceSid = Values::NONE) {
+    public static function create(string $friendlyName = Values::NONE, string $deviceSid = Values::NONE): CreateKeyOptions {
         return new CreateKeyOptions($friendlyName, $deviceSid);
     }
 
@@ -29,7 +29,7 @@ abstract class KeyOptions {
      * @param string $deviceSid Find all Keys authenticating specified Device.
      * @return ReadKeyOptions Options builder
      */
-    public static function read($deviceSid = Values::NONE) {
+    public static function read(string $deviceSid = Values::NONE): ReadKeyOptions {
         return new ReadKeyOptions($deviceSid);
     }
 
@@ -38,7 +38,7 @@ abstract class KeyOptions {
      * @param string $deviceSid The unique identifier of a Key to be authenticated.
      * @return UpdateKeyOptions Options builder
      */
-    public static function update($friendlyName = Values::NONE, $deviceSid = Values::NONE) {
+    public static function update(string $friendlyName = Values::NONE, string $deviceSid = Values::NONE): UpdateKeyOptions {
         return new UpdateKeyOptions($friendlyName, $deviceSid);
     }
 }
@@ -48,7 +48,7 @@ class CreateKeyOptions extends Options {
      * @param string $friendlyName The human readable description for this Key.
      * @param string $deviceSid The unique identifier of a Key to be authenticated.
      */
-    public function __construct($friendlyName = Values::NONE, $deviceSid = Values::NONE) {
+    public function __construct(string $friendlyName = Values::NONE, string $deviceSid = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['deviceSid'] = $deviceSid;
     }
@@ -59,7 +59,7 @@ class CreateKeyOptions extends Options {
      * @param string $friendlyName The human readable description for this Key.
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -70,7 +70,7 @@ class CreateKeyOptions extends Options {
      * @param string $deviceSid The unique identifier of a Key to be authenticated.
      * @return $this Fluent Builder
      */
-    public function setDeviceSid($deviceSid) {
+    public function setDeviceSid(string $deviceSid): self {
         $this->options['deviceSid'] = $deviceSid;
         return $this;
     }
@@ -80,14 +80,9 @@ class CreateKeyOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.DeployedDevices.CreateKeyOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.DeployedDevices.CreateKeyOptions ' . $options . ']';
     }
 }
 
@@ -95,7 +90,7 @@ class ReadKeyOptions extends Options {
     /**
      * @param string $deviceSid Find all Keys authenticating specified Device.
      */
-    public function __construct($deviceSid = Values::NONE) {
+    public function __construct(string $deviceSid = Values::NONE) {
         $this->options['deviceSid'] = $deviceSid;
     }
 
@@ -105,7 +100,7 @@ class ReadKeyOptions extends Options {
      * @param string $deviceSid Find all Keys authenticating specified Device.
      * @return $this Fluent Builder
      */
-    public function setDeviceSid($deviceSid) {
+    public function setDeviceSid(string $deviceSid): self {
         $this->options['deviceSid'] = $deviceSid;
         return $this;
     }
@@ -115,14 +110,9 @@ class ReadKeyOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.DeployedDevices.ReadKeyOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.DeployedDevices.ReadKeyOptions ' . $options . ']';
     }
 }
 
@@ -131,7 +121,7 @@ class UpdateKeyOptions extends Options {
      * @param string $friendlyName The human readable description for this Key.
      * @param string $deviceSid The unique identifier of a Key to be authenticated.
      */
-    public function __construct($friendlyName = Values::NONE, $deviceSid = Values::NONE) {
+    public function __construct(string $friendlyName = Values::NONE, string $deviceSid = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['deviceSid'] = $deviceSid;
     }
@@ -142,7 +132,7 @@ class UpdateKeyOptions extends Options {
      * @param string $friendlyName The human readable description for this Key.
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -153,7 +143,7 @@ class UpdateKeyOptions extends Options {
      * @param string $deviceSid The unique identifier of a Key to be authenticated.
      * @return $this Fluent Builder
      */
-    public function setDeviceSid($deviceSid) {
+    public function setDeviceSid(string $deviceSid): self {
         $this->options['deviceSid'] = $deviceSid;
         return $this;
     }
@@ -163,13 +153,8 @@ class UpdateKeyOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.DeployedDevices.UpdateKeyOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.DeployedDevices.UpdateKeyOptions ' . $options . ']';
     }
 }

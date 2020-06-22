@@ -23,45 +23,38 @@ class CompositionHookContext extends InstanceContext {
     /**
      * Initialize the CompositionHookContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $sid The SID that identifies the resource to fetch
-     * @return \Twilio\Rest\Video\V1\CompositionHookContext
      */
     public function __construct(Version $version, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('sid' => $sid, );
+        $this->solution = ['sid' => $sid, ];
 
         $this->uri = '/CompositionHooks/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a CompositionHookInstance
+     * Fetch the CompositionHookInstance
      *
      * @return CompositionHookInstance Fetched CompositionHookInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): CompositionHookInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new CompositionHookInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
-     * Deletes the CompositionHookInstance
+     * Delete the CompositionHookInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -72,10 +65,10 @@ class CompositionHookContext extends InstanceContext {
      * @return CompositionHookInstance Updated CompositionHookInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($friendlyName, $options = array()) {
+    public function update(string $friendlyName, array $options = []): CompositionHookInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'FriendlyName' => $friendlyName,
             'Enabled' => Serialize::booleanToString($options['enabled']),
             'VideoLayout' => Serialize::jsonObject($options['videoLayout']),
@@ -86,14 +79,9 @@ class CompositionHookContext extends InstanceContext {
             'Resolution' => $options['resolution'],
             'StatusCallback' => $options['statusCallback'],
             'StatusCallbackMethod' => $options['statusCallbackMethod'],
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new CompositionHookInstance($this->version, $payload, $this->solution['sid']);
     }
@@ -103,8 +91,8 @@ class CompositionHookContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

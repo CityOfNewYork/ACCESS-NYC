@@ -35,18 +35,18 @@ class ParticipantInstance extends InstanceResource {
     /**
      * Initialize the ParticipantInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $accountSid The SID of the Account that created the resource
      * @param string $conferenceSid The SID of the conference the participant is in
-     * @param string $callSid The Call SID of the resource to fetch
-     * @return \Twilio\Rest\Api\V2010\Account\Conference\ParticipantInstance
+     * @param string $callSid The Call SID or URL encoded label of the participant
+     *                        to fetch
      */
-    public function __construct(Version $version, array $payload, $accountSid, $conferenceSid, $callSid = null) {
+    public function __construct(Version $version, array $payload, string $accountSid, string $conferenceSid, string $callSid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'callSid' => Values::array_get($payload, 'call_sid'),
             'callSidToCoach' => Values::array_get($payload, 'call_sid_to_coach'),
@@ -60,25 +60,22 @@ class ParticipantInstance extends InstanceResource {
             'startConferenceOnEnter' => Values::array_get($payload, 'start_conference_on_enter'),
             'status' => Values::array_get($payload, 'status'),
             'uri' => Values::array_get($payload, 'uri'),
-        );
+        ];
 
-        $this->solution = array(
+        $this->solution = [
             'accountSid' => $accountSid,
             'conferenceSid' => $conferenceSid,
             'callSid' => $callSid ?: $this->properties['callSid'],
-        );
+        ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Api\V2010\Account\Conference\ParticipantContext Context
-     *                                                                      for
-     *                                                                      this
-     *                                                                      ParticipantInstance
+     * @return ParticipantContext Context for this ParticipantInstance
      */
-    protected function proxy() {
+    protected function proxy(): ParticipantContext {
         if (!$this->context) {
             $this->context = new ParticipantContext(
                 $this->version,
@@ -92,12 +89,12 @@ class ParticipantInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a ParticipantInstance
+     * Fetch the ParticipantInstance
      *
      * @return ParticipantInstance Fetched ParticipantInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): ParticipantInstance {
         return $this->proxy()->fetch();
     }
 
@@ -108,17 +105,17 @@ class ParticipantInstance extends InstanceResource {
      * @return ParticipantInstance Updated ParticipantInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): ParticipantInstance {
         return $this->proxy()->update($options);
     }
 
     /**
-     * Deletes the ParticipantInstance
+     * Delete the ParticipantInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
@@ -129,7 +126,7 @@ class ParticipantInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -147,8 +144,8 @@ class ParticipantInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

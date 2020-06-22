@@ -18,34 +18,27 @@ class CountryContext extends InstanceContext {
     /**
      * Initialize the CountryContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $isoCountry The ISO country code of the pricing information to
      *                           fetch
-     * @return \Twilio\Rest\Pricing\V2\Voice\CountryContext
      */
     public function __construct(Version $version, $isoCountry) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('isoCountry' => $isoCountry, );
+        $this->solution = ['isoCountry' => $isoCountry, ];
 
         $this->uri = '/Voice/Countries/' . \rawurlencode($isoCountry) . '';
     }
 
     /**
-     * Fetch a CountryInstance
+     * Fetch the CountryInstance
      *
      * @return CountryInstance Fetched CountryInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): CountryInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new CountryInstance($this->version, $payload, $this->solution['isoCountry']);
     }
@@ -55,8 +48,8 @@ class CountryContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

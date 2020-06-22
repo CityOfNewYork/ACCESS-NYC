@@ -17,7 +17,7 @@ abstract class FeedbackOptions {
      * @param string $outcome Whether the feedback has arrived
      * @return CreateFeedbackOptions Options builder
      */
-    public static function create($outcome = Values::NONE) {
+    public static function create(string $outcome = Values::NONE): CreateFeedbackOptions {
         return new CreateFeedbackOptions($outcome);
     }
 }
@@ -26,7 +26,7 @@ class CreateFeedbackOptions extends Options {
     /**
      * @param string $outcome Whether the feedback has arrived
      */
-    public function __construct($outcome = Values::NONE) {
+    public function __construct(string $outcome = Values::NONE) {
         $this->options['outcome'] = $outcome;
     }
 
@@ -36,7 +36,7 @@ class CreateFeedbackOptions extends Options {
      * @param string $outcome Whether the feedback has arrived
      * @return $this Fluent Builder
      */
-    public function setOutcome($outcome) {
+    public function setOutcome(string $outcome): self {
         $this->options['outcome'] = $outcome;
         return $this;
     }
@@ -46,13 +46,8 @@ class CreateFeedbackOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.CreateFeedbackOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.CreateFeedbackOptions ' . $options . ']';
     }
 }

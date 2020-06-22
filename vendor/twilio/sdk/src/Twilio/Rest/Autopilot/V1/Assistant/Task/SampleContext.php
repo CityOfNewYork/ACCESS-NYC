@@ -22,37 +22,30 @@ class SampleContext extends InstanceContext {
     /**
      * Initialize the SampleContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $assistantSid The SID of the Assistant that is the parent of
      *                             the Task associated with the resource to fetch
      * @param string $taskSid The SID of the Task associated with the Sample
      *                        resource to create
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\Task\SampleContext
      */
     public function __construct(Version $version, $assistantSid, $taskSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('assistantSid' => $assistantSid, 'taskSid' => $taskSid, 'sid' => $sid, );
+        $this->solution = ['assistantSid' => $assistantSid, 'taskSid' => $taskSid, 'sid' => $sid, ];
 
         $this->uri = '/Assistants/' . \rawurlencode($assistantSid) . '/Tasks/' . \rawurlencode($taskSid) . '/Samples/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a SampleInstance
+     * Fetch the SampleInstance
      *
      * @return SampleInstance Fetched SampleInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): SampleInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new SampleInstance(
             $this->version,
@@ -70,21 +63,16 @@ class SampleContext extends InstanceContext {
      * @return SampleInstance Updated SampleInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): SampleInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'Language' => $options['language'],
             'TaggedText' => $options['taggedText'],
             'SourceChannel' => $options['sourceChannel'],
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new SampleInstance(
             $this->version,
@@ -96,13 +84,13 @@ class SampleContext extends InstanceContext {
     }
 
     /**
-     * Deletes the SampleInstance
+     * Delete the SampleInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -110,8 +98,8 @@ class SampleContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

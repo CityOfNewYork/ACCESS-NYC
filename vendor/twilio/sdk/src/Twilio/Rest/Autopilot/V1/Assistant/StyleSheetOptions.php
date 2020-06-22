@@ -21,7 +21,7 @@ abstract class StyleSheetOptions {
      *                          object
      * @return UpdateStyleSheetOptions Options builder
      */
-    public static function update($styleSheet = Values::NONE) {
+    public static function update(array $styleSheet = Values::ARRAY_NONE): UpdateStyleSheetOptions {
         return new UpdateStyleSheetOptions($styleSheet);
     }
 }
@@ -31,7 +31,7 @@ class UpdateStyleSheetOptions extends Options {
      * @param array $styleSheet The JSON string that describes the style sheet
      *                          object
      */
-    public function __construct($styleSheet = Values::NONE) {
+    public function __construct(array $styleSheet = Values::ARRAY_NONE) {
         $this->options['styleSheet'] = $styleSheet;
     }
 
@@ -42,7 +42,7 @@ class UpdateStyleSheetOptions extends Options {
      *                          object
      * @return $this Fluent Builder
      */
-    public function setStyleSheet($styleSheet) {
+    public function setStyleSheet(array $styleSheet): self {
         $this->options['styleSheet'] = $styleSheet;
         return $this;
     }
@@ -52,13 +52,8 @@ class UpdateStyleSheetOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Autopilot.V1.UpdateStyleSheetOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Autopilot.V1.UpdateStyleSheetOptions ' . $options . ']';
     }
 }

@@ -29,7 +29,7 @@ use Twilio\Version;
  * @property string $identity
  * @property string $bindingType
  * @property string $address
- * @property string $tags
+ * @property string[] $tags
  * @property string $url
  * @property array $links
  */
@@ -37,18 +37,17 @@ class BindingInstance extends InstanceResource {
     /**
      * Initialize the BindingInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid The SID of the Service that the resource is
      *                           associated with
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Notify\V1\Service\BindingInstance
      */
-    public function __construct(Version $version, array $payload, $serviceSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $serviceSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'serviceSid' => Values::array_get($payload, 'service_sid'),
@@ -63,19 +62,18 @@ class BindingInstance extends InstanceResource {
             'tags' => Values::array_get($payload, 'tags'),
             'url' => Values::array_get($payload, 'url'),
             'links' => Values::array_get($payload, 'links'),
-        );
+        ];
 
-        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid ?: $this->properties['sid'], );
+        $this->solution = ['serviceSid' => $serviceSid, 'sid' => $sid ?: $this->properties['sid'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Notify\V1\Service\BindingContext Context for this
-     *                                                       BindingInstance
+     * @return BindingContext Context for this BindingInstance
      */
-    protected function proxy() {
+    protected function proxy(): BindingContext {
         if (!$this->context) {
             $this->context = new BindingContext(
                 $this->version,
@@ -88,22 +86,22 @@ class BindingInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a BindingInstance
+     * Fetch the BindingInstance
      *
      * @return BindingInstance Fetched BindingInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): BindingInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the BindingInstance
+     * Delete the BindingInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
@@ -114,7 +112,7 @@ class BindingInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -132,8 +130,8 @@ class BindingInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

@@ -19,7 +19,7 @@ abstract class BucketOptions {
      *                      over.
      * @return UpdateBucketOptions Options builder
      */
-    public static function update($max = Values::NONE, $interval = Values::NONE) {
+    public static function update(int $max = Values::NONE, int $interval = Values::NONE): UpdateBucketOptions {
         return new UpdateBucketOptions($max, $interval);
     }
 }
@@ -30,7 +30,7 @@ class UpdateBucketOptions extends Options {
      * @param int $interval Number of seconds that the rate limit will be enforced
      *                      over.
      */
-    public function __construct($max = Values::NONE, $interval = Values::NONE) {
+    public function __construct(int $max = Values::NONE, int $interval = Values::NONE) {
         $this->options['max'] = $max;
         $this->options['interval'] = $interval;
     }
@@ -41,7 +41,7 @@ class UpdateBucketOptions extends Options {
      * @param int $max Max number of requests.
      * @return $this Fluent Builder
      */
-    public function setMax($max) {
+    public function setMax(int $max): self {
         $this->options['max'] = $max;
         return $this;
     }
@@ -53,7 +53,7 @@ class UpdateBucketOptions extends Options {
      *                      over.
      * @return $this Fluent Builder
      */
-    public function setInterval($interval) {
+    public function setInterval(int $interval): self {
         $this->options['interval'] = $interval;
         return $this;
     }
@@ -63,13 +63,8 @@ class UpdateBucketOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Verify.V2.UpdateBucketOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Verify.V2.UpdateBucketOptions ' . $options . ']';
     }
 }

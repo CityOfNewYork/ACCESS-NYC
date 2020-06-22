@@ -25,16 +25,18 @@ use Twilio\Version;
  * @property string $taskrouterWorkspaceSid
  * @property string $taskrouterTargetWorkflowSid
  * @property string $taskrouterTargetTaskqueueSid
- * @property array $taskrouterTaskqueues
- * @property array $taskrouterSkills
+ * @property array[] $taskrouterTaskqueues
+ * @property array[] $taskrouterSkills
  * @property array $taskrouterWorkerChannels
  * @property array $taskrouterWorkerAttributes
  * @property string $taskrouterOfflineActivitySid
  * @property string $runtimeDomain
  * @property string $messagingServiceInstanceSid
  * @property string $chatServiceInstanceSid
+ * @property string $flexServiceInstanceSid
  * @property string $uiLanguage
  * @property array $uiAttributes
+ * @property array $uiDependencies
  * @property string $uiVersion
  * @property string $serviceVersion
  * @property bool $callRecordingEnabled
@@ -47,24 +49,25 @@ use Twilio\Version;
  * @property array $publicAttributes
  * @property bool $pluginServiceEnabled
  * @property array $pluginServiceAttributes
- * @property array $integrations
+ * @property array[] $integrations
  * @property array $outboundCallFlows
- * @property string $serverlessServiceSids
+ * @property string[] $serverlessServiceSids
+ * @property array[] $wfmIntegrations
+ * @property array $queueStatsConfiguration
  * @property string $url
  */
 class ConfigurationInstance extends InstanceResource {
     /**
      * Initialize the ConfigurationInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @return \Twilio\Rest\FlexApi\V1\ConfigurationInstance
      */
     public function __construct(Version $version, array $payload) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
@@ -81,8 +84,10 @@ class ConfigurationInstance extends InstanceResource {
             'runtimeDomain' => Values::array_get($payload, 'runtime_domain'),
             'messagingServiceInstanceSid' => Values::array_get($payload, 'messaging_service_instance_sid'),
             'chatServiceInstanceSid' => Values::array_get($payload, 'chat_service_instance_sid'),
+            'flexServiceInstanceSid' => Values::array_get($payload, 'flex_service_instance_sid'),
             'uiLanguage' => Values::array_get($payload, 'ui_language'),
             'uiAttributes' => Values::array_get($payload, 'ui_attributes'),
+            'uiDependencies' => Values::array_get($payload, 'ui_dependencies'),
             'uiVersion' => Values::array_get($payload, 'ui_version'),
             'serviceVersion' => Values::array_get($payload, 'service_version'),
             'callRecordingEnabled' => Values::array_get($payload, 'call_recording_enabled'),
@@ -98,20 +103,21 @@ class ConfigurationInstance extends InstanceResource {
             'integrations' => Values::array_get($payload, 'integrations'),
             'outboundCallFlows' => Values::array_get($payload, 'outbound_call_flows'),
             'serverlessServiceSids' => Values::array_get($payload, 'serverless_service_sids'),
+            'wfmIntegrations' => Values::array_get($payload, 'wfm_integrations'),
+            'queueStatsConfiguration' => Values::array_get($payload, 'queue_stats_configuration'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array();
+        $this->solution = [];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\FlexApi\V1\ConfigurationContext Context for this
-     *                                                      ConfigurationInstance
+     * @return ConfigurationContext Context for this ConfigurationInstance
      */
-    protected function proxy() {
+    protected function proxy(): ConfigurationContext {
         if (!$this->context) {
             $this->context = new ConfigurationContext($this->version);
         }
@@ -120,23 +126,23 @@ class ConfigurationInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a ConfigurationInstance
+     * Fetch the ConfigurationInstance
      *
      * @param array|Options $options Optional Arguments
      * @return ConfigurationInstance Fetched ConfigurationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch($options = array()) {
+    public function fetch(array $options = []): ConfigurationInstance {
         return $this->proxy()->fetch($options);
     }
 
     /**
-     * Create a new ConfigurationInstance
+     * Create the ConfigurationInstance
      *
-     * @return ConfigurationInstance Newly created ConfigurationInstance
+     * @return ConfigurationInstance Created ConfigurationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create() {
+    public function create(): ConfigurationInstance {
         return $this->proxy()->create();
     }
 
@@ -146,7 +152,7 @@ class ConfigurationInstance extends InstanceResource {
      * @return ConfigurationInstance Updated ConfigurationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update() {
+    public function update(): ConfigurationInstance {
         return $this->proxy()->update();
     }
 
@@ -157,7 +163,7 @@ class ConfigurationInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -175,8 +181,8 @@ class ConfigurationInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

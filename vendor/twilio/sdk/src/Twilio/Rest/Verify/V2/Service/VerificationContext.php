@@ -18,17 +18,16 @@ class VerificationContext extends InstanceContext {
     /**
      * Initialize the VerificationContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the verification Service to fetch the
      *                           resource from
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Verify\V2\Service\VerificationContext
      */
     public function __construct(Version $version, $serviceSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
+        $this->solution = ['serviceSid' => $serviceSid, 'sid' => $sid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Verifications/' . \rawurlencode($sid) . '';
     }
@@ -40,15 +39,10 @@ class VerificationContext extends InstanceContext {
      * @return VerificationInstance Updated VerificationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($status) {
-        $data = Values::of(array('Status' => $status, ));
+    public function update(string $status): VerificationInstance {
+        $data = Values::of(['Status' => $status, ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new VerificationInstance(
             $this->version,
@@ -59,19 +53,13 @@ class VerificationContext extends InstanceContext {
     }
 
     /**
-     * Fetch a VerificationInstance
+     * Fetch the VerificationInstance
      *
      * @return VerificationInstance Fetched VerificationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): VerificationInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new VerificationInstance(
             $this->version,
@@ -86,8 +74,8 @@ class VerificationContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

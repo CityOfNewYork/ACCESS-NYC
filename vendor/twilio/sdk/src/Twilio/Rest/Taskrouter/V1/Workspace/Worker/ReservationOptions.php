@@ -18,7 +18,7 @@ abstract class ReservationOptions {
      *                                  worker with a specified ReservationStatus
      * @return ReadReservationOptions Options builder
      */
-    public static function read($reservationStatus = Values::NONE) {
+    public static function read(string $reservationStatus = Values::NONE): ReadReservationOptions {
         return new ReadReservationOptions($reservationStatus);
     }
 
@@ -69,8 +69,8 @@ abstract class ReservationOptions {
      *                               information to your application
      * @param string $statusCallbackMethod The HTTP method we should use to call
      *                                     status_callback
-     * @param string $statusCallbackEvent The call progress events that we will
-     *                                    send to status_callback
+     * @param string[] $statusCallbackEvent The call progress events that we will
+     *                                      send to status_callback
      * @param int $timeout The timeout for a call when executing a Conference
      *                     instruction
      * @param bool $record Whether to record the participant and their conferences
@@ -92,9 +92,9 @@ abstract class ReservationOptions {
      * @param string $conferenceStatusCallbackMethod HTTP method for requesting
      *                                               `conference_status_callback`
      *                                               URL
-     * @param string $conferenceStatusCallbackEvent The conference status events
-     *                                              that we will send to
-     *                                              conference_status_callback
+     * @param string[] $conferenceStatusCallbackEvent The conference status events
+     *                                                that we will send to
+     *                                                conference_status_callback
      * @param string $conferenceRecord Whether to record the conference the
      *                                 participant is joining
      * @param string $conferenceTrim Whether to trim leading and trailing silence
@@ -115,9 +115,9 @@ abstract class ReservationOptions {
      * @param string $region The region where we should mix the conference audio
      * @param string $sipAuthUsername The SIP username used for authentication
      * @param string $sipAuthPassword The SIP password for authentication
-     * @param string $dequeueStatusCallbackEvent The call progress events sent via
-     *                                           webhooks as a result of a Dequeue
-     *                                           instruction
+     * @param string[] $dequeueStatusCallbackEvent The call progress events sent
+     *                                             via webhooks as a result of a
+     *                                             Dequeue instruction
      * @param string $postWorkActivitySid The new worker activity SID after
      *                                    executing a Conference instruction
      * @param bool $endConferenceOnCustomerExit Whether to end the conference when
@@ -126,7 +126,7 @@ abstract class ReservationOptions {
      *                                     the customer joins
      * @return UpdateReservationOptions Options builder
      */
-    public static function update($reservationStatus = Values::NONE, $workerActivitySid = Values::NONE, $instruction = Values::NONE, $dequeuePostWorkActivitySid = Values::NONE, $dequeueFrom = Values::NONE, $dequeueRecord = Values::NONE, $dequeueTimeout = Values::NONE, $dequeueTo = Values::NONE, $dequeueStatusCallbackUrl = Values::NONE, $callFrom = Values::NONE, $callRecord = Values::NONE, $callTimeout = Values::NONE, $callTo = Values::NONE, $callUrl = Values::NONE, $callStatusCallbackUrl = Values::NONE, $callAccept = Values::NONE, $redirectCallSid = Values::NONE, $redirectAccept = Values::NONE, $redirectUrl = Values::NONE, $to = Values::NONE, $from = Values::NONE, $statusCallback = Values::NONE, $statusCallbackMethod = Values::NONE, $statusCallbackEvent = Values::NONE, $timeout = Values::NONE, $record = Values::NONE, $muted = Values::NONE, $beep = Values::NONE, $startConferenceOnEnter = Values::NONE, $endConferenceOnExit = Values::NONE, $waitUrl = Values::NONE, $waitMethod = Values::NONE, $earlyMedia = Values::NONE, $maxParticipants = Values::NONE, $conferenceStatusCallback = Values::NONE, $conferenceStatusCallbackMethod = Values::NONE, $conferenceStatusCallbackEvent = Values::NONE, $conferenceRecord = Values::NONE, $conferenceTrim = Values::NONE, $recordingChannels = Values::NONE, $recordingStatusCallback = Values::NONE, $recordingStatusCallbackMethod = Values::NONE, $conferenceRecordingStatusCallback = Values::NONE, $conferenceRecordingStatusCallbackMethod = Values::NONE, $region = Values::NONE, $sipAuthUsername = Values::NONE, $sipAuthPassword = Values::NONE, $dequeueStatusCallbackEvent = Values::NONE, $postWorkActivitySid = Values::NONE, $endConferenceOnCustomerExit = Values::NONE, $beepOnCustomerEntrance = Values::NONE) {
+    public static function update(string $reservationStatus = Values::NONE, string $workerActivitySid = Values::NONE, string $instruction = Values::NONE, string $dequeuePostWorkActivitySid = Values::NONE, string $dequeueFrom = Values::NONE, string $dequeueRecord = Values::NONE, int $dequeueTimeout = Values::NONE, string $dequeueTo = Values::NONE, string $dequeueStatusCallbackUrl = Values::NONE, string $callFrom = Values::NONE, string $callRecord = Values::NONE, int $callTimeout = Values::NONE, string $callTo = Values::NONE, string $callUrl = Values::NONE, string $callStatusCallbackUrl = Values::NONE, bool $callAccept = Values::NONE, string $redirectCallSid = Values::NONE, bool $redirectAccept = Values::NONE, string $redirectUrl = Values::NONE, string $to = Values::NONE, string $from = Values::NONE, string $statusCallback = Values::NONE, string $statusCallbackMethod = Values::NONE, array $statusCallbackEvent = Values::ARRAY_NONE, int $timeout = Values::NONE, bool $record = Values::NONE, bool $muted = Values::NONE, string $beep = Values::NONE, bool $startConferenceOnEnter = Values::NONE, bool $endConferenceOnExit = Values::NONE, string $waitUrl = Values::NONE, string $waitMethod = Values::NONE, bool $earlyMedia = Values::NONE, int $maxParticipants = Values::NONE, string $conferenceStatusCallback = Values::NONE, string $conferenceStatusCallbackMethod = Values::NONE, array $conferenceStatusCallbackEvent = Values::ARRAY_NONE, string $conferenceRecord = Values::NONE, string $conferenceTrim = Values::NONE, string $recordingChannels = Values::NONE, string $recordingStatusCallback = Values::NONE, string $recordingStatusCallbackMethod = Values::NONE, string $conferenceRecordingStatusCallback = Values::NONE, string $conferenceRecordingStatusCallbackMethod = Values::NONE, string $region = Values::NONE, string $sipAuthUsername = Values::NONE, string $sipAuthPassword = Values::NONE, array $dequeueStatusCallbackEvent = Values::ARRAY_NONE, string $postWorkActivitySid = Values::NONE, bool $endConferenceOnCustomerExit = Values::NONE, bool $beepOnCustomerEntrance = Values::NONE): UpdateReservationOptions {
         return new UpdateReservationOptions($reservationStatus, $workerActivitySid, $instruction, $dequeuePostWorkActivitySid, $dequeueFrom, $dequeueRecord, $dequeueTimeout, $dequeueTo, $dequeueStatusCallbackUrl, $callFrom, $callRecord, $callTimeout, $callTo, $callUrl, $callStatusCallbackUrl, $callAccept, $redirectCallSid, $redirectAccept, $redirectUrl, $to, $from, $statusCallback, $statusCallbackMethod, $statusCallbackEvent, $timeout, $record, $muted, $beep, $startConferenceOnEnter, $endConferenceOnExit, $waitUrl, $waitMethod, $earlyMedia, $maxParticipants, $conferenceStatusCallback, $conferenceStatusCallbackMethod, $conferenceStatusCallbackEvent, $conferenceRecord, $conferenceTrim, $recordingChannels, $recordingStatusCallback, $recordingStatusCallbackMethod, $conferenceRecordingStatusCallback, $conferenceRecordingStatusCallbackMethod, $region, $sipAuthUsername, $sipAuthPassword, $dequeueStatusCallbackEvent, $postWorkActivitySid, $endConferenceOnCustomerExit, $beepOnCustomerEntrance);
     }
 }
@@ -136,7 +136,7 @@ class ReadReservationOptions extends Options {
      * @param string $reservationStatus Returns the list of reservations for a
      *                                  worker with a specified ReservationStatus
      */
-    public function __construct($reservationStatus = Values::NONE) {
+    public function __construct(string $reservationStatus = Values::NONE) {
         $this->options['reservationStatus'] = $reservationStatus;
     }
 
@@ -147,7 +147,7 @@ class ReadReservationOptions extends Options {
      *                                  worker with a specified ReservationStatus
      * @return $this Fluent Builder
      */
-    public function setReservationStatus($reservationStatus) {
+    public function setReservationStatus(string $reservationStatus): self {
         $this->options['reservationStatus'] = $reservationStatus;
         return $this;
     }
@@ -157,14 +157,9 @@ class ReadReservationOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Taskrouter.V1.ReadReservationOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Taskrouter.V1.ReadReservationOptions ' . $options . ']';
     }
 }
 
@@ -216,8 +211,8 @@ class UpdateReservationOptions extends Options {
      *                               information to your application
      * @param string $statusCallbackMethod The HTTP method we should use to call
      *                                     status_callback
-     * @param string $statusCallbackEvent The call progress events that we will
-     *                                    send to status_callback
+     * @param string[] $statusCallbackEvent The call progress events that we will
+     *                                      send to status_callback
      * @param int $timeout The timeout for a call when executing a Conference
      *                     instruction
      * @param bool $record Whether to record the participant and their conferences
@@ -239,9 +234,9 @@ class UpdateReservationOptions extends Options {
      * @param string $conferenceStatusCallbackMethod HTTP method for requesting
      *                                               `conference_status_callback`
      *                                               URL
-     * @param string $conferenceStatusCallbackEvent The conference status events
-     *                                              that we will send to
-     *                                              conference_status_callback
+     * @param string[] $conferenceStatusCallbackEvent The conference status events
+     *                                                that we will send to
+     *                                                conference_status_callback
      * @param string $conferenceRecord Whether to record the conference the
      *                                 participant is joining
      * @param string $conferenceTrim Whether to trim leading and trailing silence
@@ -262,9 +257,9 @@ class UpdateReservationOptions extends Options {
      * @param string $region The region where we should mix the conference audio
      * @param string $sipAuthUsername The SIP username used for authentication
      * @param string $sipAuthPassword The SIP password for authentication
-     * @param string $dequeueStatusCallbackEvent The call progress events sent via
-     *                                           webhooks as a result of a Dequeue
-     *                                           instruction
+     * @param string[] $dequeueStatusCallbackEvent The call progress events sent
+     *                                             via webhooks as a result of a
+     *                                             Dequeue instruction
      * @param string $postWorkActivitySid The new worker activity SID after
      *                                    executing a Conference instruction
      * @param bool $endConferenceOnCustomerExit Whether to end the conference when
@@ -272,7 +267,7 @@ class UpdateReservationOptions extends Options {
      * @param bool $beepOnCustomerEntrance Whether to play a notification beep when
      *                                     the customer joins
      */
-    public function __construct($reservationStatus = Values::NONE, $workerActivitySid = Values::NONE, $instruction = Values::NONE, $dequeuePostWorkActivitySid = Values::NONE, $dequeueFrom = Values::NONE, $dequeueRecord = Values::NONE, $dequeueTimeout = Values::NONE, $dequeueTo = Values::NONE, $dequeueStatusCallbackUrl = Values::NONE, $callFrom = Values::NONE, $callRecord = Values::NONE, $callTimeout = Values::NONE, $callTo = Values::NONE, $callUrl = Values::NONE, $callStatusCallbackUrl = Values::NONE, $callAccept = Values::NONE, $redirectCallSid = Values::NONE, $redirectAccept = Values::NONE, $redirectUrl = Values::NONE, $to = Values::NONE, $from = Values::NONE, $statusCallback = Values::NONE, $statusCallbackMethod = Values::NONE, $statusCallbackEvent = Values::NONE, $timeout = Values::NONE, $record = Values::NONE, $muted = Values::NONE, $beep = Values::NONE, $startConferenceOnEnter = Values::NONE, $endConferenceOnExit = Values::NONE, $waitUrl = Values::NONE, $waitMethod = Values::NONE, $earlyMedia = Values::NONE, $maxParticipants = Values::NONE, $conferenceStatusCallback = Values::NONE, $conferenceStatusCallbackMethod = Values::NONE, $conferenceStatusCallbackEvent = Values::NONE, $conferenceRecord = Values::NONE, $conferenceTrim = Values::NONE, $recordingChannels = Values::NONE, $recordingStatusCallback = Values::NONE, $recordingStatusCallbackMethod = Values::NONE, $conferenceRecordingStatusCallback = Values::NONE, $conferenceRecordingStatusCallbackMethod = Values::NONE, $region = Values::NONE, $sipAuthUsername = Values::NONE, $sipAuthPassword = Values::NONE, $dequeueStatusCallbackEvent = Values::NONE, $postWorkActivitySid = Values::NONE, $endConferenceOnCustomerExit = Values::NONE, $beepOnCustomerEntrance = Values::NONE) {
+    public function __construct(string $reservationStatus = Values::NONE, string $workerActivitySid = Values::NONE, string $instruction = Values::NONE, string $dequeuePostWorkActivitySid = Values::NONE, string $dequeueFrom = Values::NONE, string $dequeueRecord = Values::NONE, int $dequeueTimeout = Values::NONE, string $dequeueTo = Values::NONE, string $dequeueStatusCallbackUrl = Values::NONE, string $callFrom = Values::NONE, string $callRecord = Values::NONE, int $callTimeout = Values::NONE, string $callTo = Values::NONE, string $callUrl = Values::NONE, string $callStatusCallbackUrl = Values::NONE, bool $callAccept = Values::NONE, string $redirectCallSid = Values::NONE, bool $redirectAccept = Values::NONE, string $redirectUrl = Values::NONE, string $to = Values::NONE, string $from = Values::NONE, string $statusCallback = Values::NONE, string $statusCallbackMethod = Values::NONE, array $statusCallbackEvent = Values::ARRAY_NONE, int $timeout = Values::NONE, bool $record = Values::NONE, bool $muted = Values::NONE, string $beep = Values::NONE, bool $startConferenceOnEnter = Values::NONE, bool $endConferenceOnExit = Values::NONE, string $waitUrl = Values::NONE, string $waitMethod = Values::NONE, bool $earlyMedia = Values::NONE, int $maxParticipants = Values::NONE, string $conferenceStatusCallback = Values::NONE, string $conferenceStatusCallbackMethod = Values::NONE, array $conferenceStatusCallbackEvent = Values::ARRAY_NONE, string $conferenceRecord = Values::NONE, string $conferenceTrim = Values::NONE, string $recordingChannels = Values::NONE, string $recordingStatusCallback = Values::NONE, string $recordingStatusCallbackMethod = Values::NONE, string $conferenceRecordingStatusCallback = Values::NONE, string $conferenceRecordingStatusCallbackMethod = Values::NONE, string $region = Values::NONE, string $sipAuthUsername = Values::NONE, string $sipAuthPassword = Values::NONE, array $dequeueStatusCallbackEvent = Values::ARRAY_NONE, string $postWorkActivitySid = Values::NONE, bool $endConferenceOnCustomerExit = Values::NONE, bool $beepOnCustomerEntrance = Values::NONE) {
         $this->options['reservationStatus'] = $reservationStatus;
         $this->options['workerActivitySid'] = $workerActivitySid;
         $this->options['instruction'] = $instruction;
@@ -332,7 +327,7 @@ class UpdateReservationOptions extends Options {
      * @param string $reservationStatus The new status of the reservation
      * @return $this Fluent Builder
      */
-    public function setReservationStatus($reservationStatus) {
+    public function setReservationStatus(string $reservationStatus): self {
         $this->options['reservationStatus'] = $reservationStatus;
         return $this;
     }
@@ -344,7 +339,7 @@ class UpdateReservationOptions extends Options {
      *                                  reservation
      * @return $this Fluent Builder
      */
-    public function setWorkerActivitySid($workerActivitySid) {
+    public function setWorkerActivitySid(string $workerActivitySid): self {
         $this->options['workerActivitySid'] = $workerActivitySid;
         return $this;
     }
@@ -355,7 +350,7 @@ class UpdateReservationOptions extends Options {
      * @param string $instruction The assignment instruction for the reservation
      * @return $this Fluent Builder
      */
-    public function setInstruction($instruction) {
+    public function setInstruction(string $instruction): self {
         $this->options['instruction'] = $instruction;
         return $this;
     }
@@ -368,7 +363,7 @@ class UpdateReservationOptions extends Options {
      *                                           instruction
      * @return $this Fluent Builder
      */
-    public function setDequeuePostWorkActivitySid($dequeuePostWorkActivitySid) {
+    public function setDequeuePostWorkActivitySid(string $dequeuePostWorkActivitySid): self {
         $this->options['dequeuePostWorkActivitySid'] = $dequeuePostWorkActivitySid;
         return $this;
     }
@@ -380,7 +375,7 @@ class UpdateReservationOptions extends Options {
      *                            executing a Dequeue instruction
      * @return $this Fluent Builder
      */
-    public function setDequeueFrom($dequeueFrom) {
+    public function setDequeueFrom(string $dequeueFrom): self {
         $this->options['dequeueFrom'] = $dequeueFrom;
         return $this;
     }
@@ -392,7 +387,7 @@ class UpdateReservationOptions extends Options {
      *                              executing a Dequeue instruction
      * @return $this Fluent Builder
      */
-    public function setDequeueRecord($dequeueRecord) {
+    public function setDequeueRecord(string $dequeueRecord): self {
         $this->options['dequeueRecord'] = $dequeueRecord;
         return $this;
     }
@@ -404,7 +399,7 @@ class UpdateReservationOptions extends Options {
      *                            instruction
      * @return $this Fluent Builder
      */
-    public function setDequeueTimeout($dequeueTimeout) {
+    public function setDequeueTimeout(int $dequeueTimeout): self {
         $this->options['dequeueTimeout'] = $dequeueTimeout;
         return $this;
     }
@@ -416,7 +411,7 @@ class UpdateReservationOptions extends Options {
      *                          Dequeue instruction
      * @return $this Fluent Builder
      */
-    public function setDequeueTo($dequeueTo) {
+    public function setDequeueTo(string $dequeueTo): self {
         $this->options['dequeueTo'] = $dequeueTo;
         return $this;
     }
@@ -429,7 +424,7 @@ class UpdateReservationOptions extends Options {
      *                                         instruction
      * @return $this Fluent Builder
      */
-    public function setDequeueStatusCallbackUrl($dequeueStatusCallbackUrl) {
+    public function setDequeueStatusCallbackUrl(string $dequeueStatusCallbackUrl): self {
         $this->options['dequeueStatusCallbackUrl'] = $dequeueStatusCallbackUrl;
         return $this;
     }
@@ -441,7 +436,7 @@ class UpdateReservationOptions extends Options {
      *                         Call instruction
      * @return $this Fluent Builder
      */
-    public function setCallFrom($callFrom) {
+    public function setCallFrom(string $callFrom): self {
         $this->options['callFrom'] = $callFrom;
         return $this;
     }
@@ -453,7 +448,7 @@ class UpdateReservationOptions extends Options {
      *                           executing a Call instruction
      * @return $this Fluent Builder
      */
-    public function setCallRecord($callRecord) {
+    public function setCallRecord(string $callRecord): self {
         $this->options['callRecord'] = $callRecord;
         return $this;
     }
@@ -465,7 +460,7 @@ class UpdateReservationOptions extends Options {
      *                         instruction
      * @return $this Fluent Builder
      */
-    public function setCallTimeout($callTimeout) {
+    public function setCallTimeout(int $callTimeout): self {
         $this->options['callTimeout'] = $callTimeout;
         return $this;
     }
@@ -477,7 +472,7 @@ class UpdateReservationOptions extends Options {
      *                       instruction
      * @return $this Fluent Builder
      */
-    public function setCallTo($callTo) {
+    public function setCallTo(string $callTo): self {
         $this->options['callTo'] = $callTo;
         return $this;
     }
@@ -489,7 +484,7 @@ class UpdateReservationOptions extends Options {
      *                        result of the Call instruction
      * @return $this Fluent Builder
      */
-    public function setCallUrl($callUrl) {
+    public function setCallUrl(string $callUrl): self {
         $this->options['callUrl'] = $callUrl;
         return $this;
     }
@@ -501,7 +496,7 @@ class UpdateReservationOptions extends Options {
      *                                      event when executing a Call instruction
      * @return $this Fluent Builder
      */
-    public function setCallStatusCallbackUrl($callStatusCallbackUrl) {
+    public function setCallStatusCallbackUrl(string $callStatusCallbackUrl): self {
         $this->options['callStatusCallbackUrl'] = $callStatusCallbackUrl;
         return $this;
     }
@@ -513,7 +508,7 @@ class UpdateReservationOptions extends Options {
      *                         Call instruction
      * @return $this Fluent Builder
      */
-    public function setCallAccept($callAccept) {
+    public function setCallAccept(bool $callAccept): self {
         $this->options['callAccept'] = $callAccept;
         return $this;
     }
@@ -525,7 +520,7 @@ class UpdateReservationOptions extends Options {
      *                                when executing a Redirect instruction
      * @return $this Fluent Builder
      */
-    public function setRedirectCallSid($redirectCallSid) {
+    public function setRedirectCallSid(string $redirectCallSid): self {
         $this->options['redirectCallSid'] = $redirectCallSid;
         return $this;
     }
@@ -537,7 +532,7 @@ class UpdateReservationOptions extends Options {
      *                             executing a Redirect instruction
      * @return $this Fluent Builder
      */
-    public function setRedirectAccept($redirectAccept) {
+    public function setRedirectAccept(bool $redirectAccept): self {
         $this->options['redirectAccept'] = $redirectAccept;
         return $this;
     }
@@ -549,7 +544,7 @@ class UpdateReservationOptions extends Options {
      *                            the Redirect instruction
      * @return $this Fluent Builder
      */
-    public function setRedirectUrl($redirectUrl) {
+    public function setRedirectUrl(string $redirectUrl): self {
         $this->options['redirectUrl'] = $redirectUrl;
         return $this;
     }
@@ -561,7 +556,7 @@ class UpdateReservationOptions extends Options {
      *                   instruction
      * @return $this Fluent Builder
      */
-    public function setTo($to) {
+    public function setTo(string $to): self {
         $this->options['to'] = $to;
         return $this;
     }
@@ -573,7 +568,7 @@ class UpdateReservationOptions extends Options {
      *                     Conference instruction
      * @return $this Fluent Builder
      */
-    public function setFrom($from) {
+    public function setFrom(string $from): self {
         $this->options['from'] = $from;
         return $this;
     }
@@ -585,7 +580,7 @@ class UpdateReservationOptions extends Options {
      *                               information to your application
      * @return $this Fluent Builder
      */
-    public function setStatusCallback($statusCallback) {
+    public function setStatusCallback(string $statusCallback): self {
         $this->options['statusCallback'] = $statusCallback;
         return $this;
     }
@@ -597,7 +592,7 @@ class UpdateReservationOptions extends Options {
      *                                     status_callback
      * @return $this Fluent Builder
      */
-    public function setStatusCallbackMethod($statusCallbackMethod) {
+    public function setStatusCallbackMethod(string $statusCallbackMethod): self {
         $this->options['statusCallbackMethod'] = $statusCallbackMethod;
         return $this;
     }
@@ -605,11 +600,11 @@ class UpdateReservationOptions extends Options {
     /**
      * The call progress events that we will send to `status_callback`. Can be: `initiated`, `ringing`, `answered`, or `completed`.
      *
-     * @param string $statusCallbackEvent The call progress events that we will
-     *                                    send to status_callback
+     * @param string[] $statusCallbackEvent The call progress events that we will
+     *                                      send to status_callback
      * @return $this Fluent Builder
      */
-    public function setStatusCallbackEvent($statusCallbackEvent) {
+    public function setStatusCallbackEvent(array $statusCallbackEvent): self {
         $this->options['statusCallbackEvent'] = $statusCallbackEvent;
         return $this;
     }
@@ -621,7 +616,7 @@ class UpdateReservationOptions extends Options {
      *                     instruction
      * @return $this Fluent Builder
      */
-    public function setTimeout($timeout) {
+    public function setTimeout(int $timeout): self {
         $this->options['timeout'] = $timeout;
         return $this;
     }
@@ -632,7 +627,7 @@ class UpdateReservationOptions extends Options {
      * @param bool $record Whether to record the participant and their conferences
      * @return $this Fluent Builder
      */
-    public function setRecord($record) {
+    public function setRecord(bool $record): self {
         $this->options['record'] = $record;
         return $this;
     }
@@ -643,7 +638,7 @@ class UpdateReservationOptions extends Options {
      * @param bool $muted Whether to mute the agent
      * @return $this Fluent Builder
      */
-    public function setMuted($muted) {
+    public function setMuted(bool $muted): self {
         $this->options['muted'] = $muted;
         return $this;
     }
@@ -655,7 +650,7 @@ class UpdateReservationOptions extends Options {
      *                     joins
      * @return $this Fluent Builder
      */
-    public function setBeep($beep) {
+    public function setBeep(string $beep): self {
         $this->options['beep'] = $beep;
         return $this;
     }
@@ -667,7 +662,7 @@ class UpdateReservationOptions extends Options {
      *                                     participant joins the conference
      * @return $this Fluent Builder
      */
-    public function setStartConferenceOnEnter($startConferenceOnEnter) {
+    public function setStartConferenceOnEnter(bool $startConferenceOnEnter): self {
         $this->options['startConferenceOnEnter'] = $startConferenceOnEnter;
         return $this;
     }
@@ -679,7 +674,7 @@ class UpdateReservationOptions extends Options {
      *                                  agent leaves
      * @return $this Fluent Builder
      */
-    public function setEndConferenceOnExit($endConferenceOnExit) {
+    public function setEndConferenceOnExit(bool $endConferenceOnExit): self {
         $this->options['endConferenceOnExit'] = $endConferenceOnExit;
         return $this;
     }
@@ -690,7 +685,7 @@ class UpdateReservationOptions extends Options {
      * @param string $waitUrl URL that hosts pre-conference hold music
      * @return $this Fluent Builder
      */
-    public function setWaitUrl($waitUrl) {
+    public function setWaitUrl(string $waitUrl): self {
         $this->options['waitUrl'] = $waitUrl;
         return $this;
     }
@@ -701,7 +696,7 @@ class UpdateReservationOptions extends Options {
      * @param string $waitMethod The HTTP method we should use to call `wait_url`
      * @return $this Fluent Builder
      */
-    public function setWaitMethod($waitMethod) {
+    public function setWaitMethod(string $waitMethod): self {
         $this->options['waitMethod'] = $waitMethod;
         return $this;
     }
@@ -713,7 +708,7 @@ class UpdateReservationOptions extends Options {
      *                         call
      * @return $this Fluent Builder
      */
-    public function setEarlyMedia($earlyMedia) {
+    public function setEarlyMedia(bool $earlyMedia): self {
         $this->options['earlyMedia'] = $earlyMedia;
         return $this;
     }
@@ -725,7 +720,7 @@ class UpdateReservationOptions extends Options {
      *                             participants
      * @return $this Fluent Builder
      */
-    public function setMaxParticipants($maxParticipants) {
+    public function setMaxParticipants(int $maxParticipants): self {
         $this->options['maxParticipants'] = $maxParticipants;
         return $this;
     }
@@ -737,7 +732,7 @@ class UpdateReservationOptions extends Options {
      *                                         events
      * @return $this Fluent Builder
      */
-    public function setConferenceStatusCallback($conferenceStatusCallback) {
+    public function setConferenceStatusCallback(string $conferenceStatusCallback): self {
         $this->options['conferenceStatusCallback'] = $conferenceStatusCallback;
         return $this;
     }
@@ -750,7 +745,7 @@ class UpdateReservationOptions extends Options {
      *                                               URL
      * @return $this Fluent Builder
      */
-    public function setConferenceStatusCallbackMethod($conferenceStatusCallbackMethod) {
+    public function setConferenceStatusCallbackMethod(string $conferenceStatusCallbackMethod): self {
         $this->options['conferenceStatusCallbackMethod'] = $conferenceStatusCallbackMethod;
         return $this;
     }
@@ -758,12 +753,12 @@ class UpdateReservationOptions extends Options {
     /**
      * The conference status events that we will send to `conference_status_callback`. Can be: `start`, `end`, `join`, `leave`, `mute`, `hold`, `speaker`.
      *
-     * @param string $conferenceStatusCallbackEvent The conference status events
-     *                                              that we will send to
-     *                                              conference_status_callback
+     * @param string[] $conferenceStatusCallbackEvent The conference status events
+     *                                                that we will send to
+     *                                                conference_status_callback
      * @return $this Fluent Builder
      */
-    public function setConferenceStatusCallbackEvent($conferenceStatusCallbackEvent) {
+    public function setConferenceStatusCallbackEvent(array $conferenceStatusCallbackEvent): self {
         $this->options['conferenceStatusCallbackEvent'] = $conferenceStatusCallbackEvent;
         return $this;
     }
@@ -775,7 +770,7 @@ class UpdateReservationOptions extends Options {
      *                                 participant is joining
      * @return $this Fluent Builder
      */
-    public function setConferenceRecord($conferenceRecord) {
+    public function setConferenceRecord(string $conferenceRecord): self {
         $this->options['conferenceRecord'] = $conferenceRecord;
         return $this;
     }
@@ -787,7 +782,7 @@ class UpdateReservationOptions extends Options {
      *                               from your recorded conference audio files
      * @return $this Fluent Builder
      */
-    public function setConferenceTrim($conferenceTrim) {
+    public function setConferenceTrim(string $conferenceTrim): self {
         $this->options['conferenceTrim'] = $conferenceTrim;
         return $this;
     }
@@ -798,7 +793,7 @@ class UpdateReservationOptions extends Options {
      * @param string $recordingChannels Specify `mono` or `dual` recording channels
      * @return $this Fluent Builder
      */
-    public function setRecordingChannels($recordingChannels) {
+    public function setRecordingChannels(string $recordingChannels): self {
         $this->options['recordingChannels'] = $recordingChannels;
         return $this;
     }
@@ -811,7 +806,7 @@ class UpdateReservationOptions extends Options {
      *                                        when the recording status changes
      * @return $this Fluent Builder
      */
-    public function setRecordingStatusCallback($recordingStatusCallback) {
+    public function setRecordingStatusCallback(string $recordingStatusCallback): self {
         $this->options['recordingStatusCallback'] = $recordingStatusCallback;
         return $this;
     }
@@ -824,7 +819,7 @@ class UpdateReservationOptions extends Options {
      *                                              `recording_status_callback`
      * @return $this Fluent Builder
      */
-    public function setRecordingStatusCallbackMethod($recordingStatusCallbackMethod) {
+    public function setRecordingStatusCallbackMethod(string $recordingStatusCallbackMethod): self {
         $this->options['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
         return $this;
     }
@@ -837,7 +832,7 @@ class UpdateReservationOptions extends Options {
      *                                                  `conference_recording_status_callback_method` when the conference recording is available
      * @return $this Fluent Builder
      */
-    public function setConferenceRecordingStatusCallback($conferenceRecordingStatusCallback) {
+    public function setConferenceRecordingStatusCallback(string $conferenceRecordingStatusCallback): self {
         $this->options['conferenceRecordingStatusCallback'] = $conferenceRecordingStatusCallback;
         return $this;
     }
@@ -850,7 +845,7 @@ class UpdateReservationOptions extends Options {
      *                                                        `conference_recording_status_callback`
      * @return $this Fluent Builder
      */
-    public function setConferenceRecordingStatusCallbackMethod($conferenceRecordingStatusCallbackMethod) {
+    public function setConferenceRecordingStatusCallbackMethod(string $conferenceRecordingStatusCallbackMethod): self {
         $this->options['conferenceRecordingStatusCallbackMethod'] = $conferenceRecordingStatusCallbackMethod;
         return $this;
     }
@@ -861,7 +856,7 @@ class UpdateReservationOptions extends Options {
      * @param string $region The region where we should mix the conference audio
      * @return $this Fluent Builder
      */
-    public function setRegion($region) {
+    public function setRegion(string $region): self {
         $this->options['region'] = $region;
         return $this;
     }
@@ -872,7 +867,7 @@ class UpdateReservationOptions extends Options {
      * @param string $sipAuthUsername The SIP username used for authentication
      * @return $this Fluent Builder
      */
-    public function setSipAuthUsername($sipAuthUsername) {
+    public function setSipAuthUsername(string $sipAuthUsername): self {
         $this->options['sipAuthUsername'] = $sipAuthUsername;
         return $this;
     }
@@ -883,7 +878,7 @@ class UpdateReservationOptions extends Options {
      * @param string $sipAuthPassword The SIP password for authentication
      * @return $this Fluent Builder
      */
-    public function setSipAuthPassword($sipAuthPassword) {
+    public function setSipAuthPassword(string $sipAuthPassword): self {
         $this->options['sipAuthPassword'] = $sipAuthPassword;
         return $this;
     }
@@ -891,12 +886,12 @@ class UpdateReservationOptions extends Options {
     /**
      * The call progress events sent via webhooks as a result of a Dequeue instruction.
      *
-     * @param string $dequeueStatusCallbackEvent The call progress events sent via
-     *                                           webhooks as a result of a Dequeue
-     *                                           instruction
+     * @param string[] $dequeueStatusCallbackEvent The call progress events sent
+     *                                             via webhooks as a result of a
+     *                                             Dequeue instruction
      * @return $this Fluent Builder
      */
-    public function setDequeueStatusCallbackEvent($dequeueStatusCallbackEvent) {
+    public function setDequeueStatusCallbackEvent(array $dequeueStatusCallbackEvent): self {
         $this->options['dequeueStatusCallbackEvent'] = $dequeueStatusCallbackEvent;
         return $this;
     }
@@ -908,7 +903,7 @@ class UpdateReservationOptions extends Options {
      *                                    executing a Conference instruction
      * @return $this Fluent Builder
      */
-    public function setPostWorkActivitySid($postWorkActivitySid) {
+    public function setPostWorkActivitySid(string $postWorkActivitySid): self {
         $this->options['postWorkActivitySid'] = $postWorkActivitySid;
         return $this;
     }
@@ -920,7 +915,7 @@ class UpdateReservationOptions extends Options {
      *                                          the customer leaves
      * @return $this Fluent Builder
      */
-    public function setEndConferenceOnCustomerExit($endConferenceOnCustomerExit) {
+    public function setEndConferenceOnCustomerExit(bool $endConferenceOnCustomerExit): self {
         $this->options['endConferenceOnCustomerExit'] = $endConferenceOnCustomerExit;
         return $this;
     }
@@ -932,7 +927,7 @@ class UpdateReservationOptions extends Options {
      *                                     the customer joins
      * @return $this Fluent Builder
      */
-    public function setBeepOnCustomerEntrance($beepOnCustomerEntrance) {
+    public function setBeepOnCustomerEntrance(bool $beepOnCustomerEntrance): self {
         $this->options['beepOnCustomerEntrance'] = $beepOnCustomerEntrance;
         return $this;
     }
@@ -942,13 +937,8 @@ class UpdateReservationOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Taskrouter.V1.UpdateReservationOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Taskrouter.V1.UpdateReservationOptions ' . $options . ']';
     }
 }
