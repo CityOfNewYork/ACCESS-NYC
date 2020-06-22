@@ -13,7 +13,7 @@
  *
  * @param array $providers Array of Core_Sitemap_Provider objects.
  */
-add_filter('core_sitemaps_register_providers', function($providers) {
+add_filter('wp_sitemaps_register_providers', function($providers) {
   unset($providers['taxonomies']);
   unset($providers['users']);
 
@@ -25,7 +25,7 @@ add_filter('core_sitemaps_register_providers', function($providers) {
  *
  * @param array $post_types List of registered object sub types.
  */
-add_filter('core_sitemaps_post_types', function($post_types) {
+add_filter('wp_sitemaps_post_types', function($post_types) {
   unset($post_types['post']);
   unset($post_types['homepage']);
   unset($post_types['homepage_tout']);
