@@ -78,7 +78,7 @@
     "gulp-hash-filename": "^1.2.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^6.2.0",
-    "gulp-postcss": "^7.0.0",
+    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^1.5.2",
