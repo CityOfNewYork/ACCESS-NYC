@@ -97,7 +97,7 @@
   "dependencies": {
     "@nycopportunity/access-patterns": "^0.15.10",
     "@nycopportunity/patterns-framework": "^1.0.0-5",
-    "cleave.js": "^0.7.23",
+    "cleave.js": "^1.6.0",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
     "js-cookie": "^3.0.0-rc.0",
