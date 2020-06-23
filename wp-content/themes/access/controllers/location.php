@@ -42,6 +42,34 @@ class Location extends Timber\Post {
   }
 
   /**
+   * Returns the phone number for the location shown.
+   * @return  Array  Phone number and extension.
+   */
+  public function getPhone() {
+    $phone = $this -> get_field('phone');
+    return $phone;
+  }
+
+  /**
+   * Returns the URL to a map of the location.
+   * @return  String  URL of the map location.
+   */
+  public function locationMapURL() {
+    $mapUrl = 'https://www.google.com/maps/dir//';
+    $address = $this -> address['address'];
+    return $mapUrl .= $address;
+  }
+
+  /**
+   * Returns the type of the location.
+   * @return  String  type of location.
+   */
+  public function locationType() {
+    $locationType = ($this -> type === 'Government Office') ? 'GovernmentOffice' : 'Organization';
+    return $locationType;
+  }
+
+  /**
    * Get the page meta description.
    *
    * @return  String

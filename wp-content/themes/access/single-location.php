@@ -37,11 +37,34 @@ $context = Timber::get_context();
 
 $context['post'] = $location;
 
+$context['schema'] = json_encode(
+  array(
+    "@context" => "https://schema.org",
+    "@type" => $location -> locationType(),
+    "name" => $location -> title,
+    "hasMap" => $location -> locationMapURL(),
+    "description" => $location -> getHelp(),
+    "address" => [
+      "@type" => "PostalAddress",
+      "streetAddress" => $location -> address_street,
+      "addressLocality" => $location -> city,
+      "postalCode" => $location -> zip
+    ],
+    "telephone" => $location -> getPhone(),
+    "sameAs" => $location -> website,
+    "spatialCoverage" => [
+      "type" => "City",
+      "name" => "New York"
+    ]
+  )
+);
+
 /**
  * Page Meta Description
  */
 
 $context['page_meta_description'] = $location->getPageMetaDescription();
+
 
 /**
  * Alerts
