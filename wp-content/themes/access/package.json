@@ -75,7 +75,7 @@
     "gulp-cache": "^0.2.10",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^3.0.1",
-    "gulp-hash-filename": "^1.2.0",
+    "gulp-hash-filename": "^3.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^6.2.0",
     "gulp-postcss": "^7.0.0",
