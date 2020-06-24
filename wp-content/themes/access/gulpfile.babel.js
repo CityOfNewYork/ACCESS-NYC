@@ -1,6 +1,6 @@
 'use strict';
 
-/****************
+/***************
  * Dependencies
  ***************/
 
@@ -36,9 +36,7 @@ import eslint from 'gulp-eslint';
 import webpack from 'webpack-stream';
 import named from 'vinyl-named';
 import VueLoaderPlugin from 'vue-loader/lib/plugin';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
-// import UnderscoreTemplateLoader f
-// import TerserPlugin from 'terser-webpack-plugin';
+import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 
 /**
  * Image Deps
@@ -54,7 +52,7 @@ import imagemin from 'gulp-imagemin';
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
 
-/*************
+/************
  * Constants
  ************/
 
@@ -68,11 +66,9 @@ const PATTERNS_ACCESS = `${NYCOPPORTUNITY}/access-patterns`;
 const PATTERNS_FRAMEWORK = `${NYCOPPORTUNITY}/patterns-framework`;
 const HASH_FORMAT = '{name}.{hash:8}{ext}';
 const HASH_FORMAT_WEBPACK = '[name].[chunkhash:8].js';
-const HASH_FILES = [
-  'manifest.json'
-];
+const HASH_FILES = ['manifest.json']; // more can be added
 
-/*********
+/********
  * Tasks
  ********/
 
@@ -90,15 +86,15 @@ gulp.task('clean:styles', callback => {
 
 gulpSass.compiler = sass;
 
-gulp.task('sass', () => gulp.src(`${ SRC }/scss/style-*.scss`)
+gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
   .pipe(sourcemaps.init())
   .pipe(gulpSass({
-    includePaths: ['node_modules', `${ PATTERNS_ACCESS }/src/`]
+    includePaths: ['node_modules', `${PATTERNS_ACCESS}/src/`]
     .concat(require('bourbon').includePaths)
   })
   .on('error', gulpSass.logError))
   .pipe(postcss([
-    autoprefixer('last 3 versions'),
+    autoprefixer(),
     mqpacker({sort: true}),
     cssnano()
   ]))
@@ -115,13 +111,13 @@ gulp.task('styles', gulp.series('clean:styles', 'sass'));
 
 gulp.task('clean:scripts', callback => {
   del([
-    `${ DIST }/js/*`
+    `${DIST}/js/*`
   ]);
   callback();
 });
 
 gulp.task('lint', () =>
-  gulp.src(`${ SRC }/js/**/*.js`)
+  gulp.src(`${SRC}/js/**/*.js`)
     .pipe(eslint({
       parser: 'babel-eslint',
       parserOptions: {
@@ -139,7 +135,7 @@ gulp.task('lint', () =>
 );
 
 gulp.task('webpack', () =>
-  gulp.src(`${ SRC }/js/*.js`)
+  gulp.src(`${SRC}/js/*.js`)
     .pipe(named())
     .pipe(webpack({
       output: {
@@ -149,7 +145,7 @@ gulp.task('webpack', () =>
       mode: NODE_ENV,
       devtool: 'source-map',
       target: 'web',
-      performance: { hints: false },
+      performance: {hints: false},
       watch: false,
       resolve: {
         modules: [
@@ -158,7 +154,7 @@ gulp.task('webpack', () =>
           `${PATTERNS_ACCESS}/dist`,
           `${PATTERNS_FRAMEWORK}/src`,
           `${PATTERNS_FRAMEWORK}/dist`,
-          `${ SRC }/js`
+          `${SRC}/js`
         ]
       },
       module: {
@@ -186,7 +182,7 @@ gulp.task('webpack', () =>
                 [
                   '@babel/preset-env',
                   {
-                    targets: { ie: '11' }
+                    targets: {ie: '11'}
                   }
                 ]
               ],
@@ -205,10 +201,10 @@ gulp.task('webpack', () =>
             loader: 'string-replace-loader',
             options: {
               multiple: [
-                 { search: 'SCREEN_DESKTOP', replace: '960' },
-                 { search: 'SCREEN_TABLET', replace: '768' },
-                 { search: 'SCREEN_MOBILE', replace: '480' },
-                 { search: 'SCREEN_SM_MOBILE', replace: '400' }
+                 {search: 'SCREEN_DESKTOP', replace: '960'},
+                 {search: 'SCREEN_TABLET', replace: '768'},
+                 {search: 'SCREEN_MOBILE', replace: '480'},
+                 {search: 'SCREEN_SM_MOBILE', replace: '400'}
               ]
             }
           }
@@ -217,22 +213,11 @@ gulp.task('webpack', () =>
       plugins: [
         new VueLoaderPlugin(),
         new CleanWebpackPlugin({
-          // if the next line is deleted the plugin will delete everything
-          // within the current working directory. yay.
-          cleanOnceBeforeBuildPatterns: [`${ DIST }/js/*`],
+          cleanOnceBeforeBuildPatterns: [`${DIST }/js/*`],
         }),
       ]
-      // optimization: (NODE_ENV === 'development') ? {} : {
-      //   minimizer: [
-      //     new TerserPlugin({
-      //       terserOptions: {
-      //         extractComments: /^\**!|@preserve|@license|@cc_on/i
-      //       }
-      //     })
-      //   ]
-      // }
     }))
-    .pipe(gulp.dest(`${ DIST }/js`))
+    .pipe(gulp.dest(`${DIST}/js`))
 );
 
 gulp.task('scripts', gulp.series('lint', 'webpack'));
@@ -244,7 +229,7 @@ gulp.task('scripts', gulp.series('lint', 'webpack'));
  * include string tags for content.
  */
 
-gulp.task('jst', () => gulp.src(`${ VIEWS }/**/*.jst.twig`)
+gulp.task('jst', () => gulp.src(`${VIEWS }/**/*.jst.twig`)
   .pipe((() => through.obj(function (file, encoding, callback) {
     file.basename = file.basename.replace('jst.twig', 'js');
 
@@ -260,7 +245,7 @@ gulp.task('jst', () => gulp.src(`${ VIEWS }/**/*.jst.twig`)
 
     callback(null, file);
   }))())
-  .pipe(gulp.dest(`${ VIEWS }/jst`))
+  .pipe(gulp.dest(`${VIEWS}/jst`))
 );
 
 /**
@@ -288,22 +273,22 @@ gulp.task('hashfiles', callback => {
 
 gulp.task('images', callback => {
   gulp.src([
-      `${ PATTERNS_ACCESS }/src/images/**/*.jpg`,
-      `${ PATTERNS_ACCESS }/src/images/**/*.png`,
-      `${ PATTERNS_ACCESS }/src/images/**/*.ico`,
-      `${ PATTERNS_ACCESS }/src/images/**/*.gif`
+      `${PATTERNS_ACCESS}/src/images/**/*.jpg`,
+      `${PATTERNS_ACCESS}/src/images/**/*.png`,
+      `${PATTERNS_ACCESS}/src/images/**/*.ico`,
+      `${PATTERNS_ACCESS}/src/images/**/*.gif`
     ])
     .pipe(cache(imagemin({
       optimizationLevel: 5,
       progressive: true,
       interlaced: true
     })))
-    .pipe(gulp.dest(`${ DIST }/img`));
+    .pipe(gulp.dest(`${DIST}/img`));
 
   gulp.src([
-      `${ PATTERNS_ACCESS }/dist/svg/**/*.svg`
+      `${PATTERNS_ACCESS}/dist/svg/**/*.svg`
     ])
-    .pipe(gulp.dest(`${ DIST }/svg`));
+    .pipe(gulp.dest(`${DIST}/svg`));
 
   callback();
 });
@@ -313,7 +298,7 @@ gulp.task('images', callback => {
  */
 
 gulp.task('svgs', () =>
-  gulp.src(`${ PATTERNS_ACCESS }/src/svg/*.svg`)
+  gulp.src(`${PATTERNS_ACCESS}/src/svg/*.svg`)
     .pipe(svgmin())
     .pipe(svgstore({
       inlineSvg: true
@@ -356,7 +341,7 @@ gulp.task('default', () => {
   });
 
   // Watch .scss files
-  gulp.watch(`${ SRC }/scss/**/*.scss`,
+  gulp.watch(`${SRC}/scss/**/*.scss`,
     gulp.series(
       'clean:styles',
       'styles',
@@ -365,18 +350,18 @@ gulp.task('default', () => {
 
   // Watch .js files. Watching is handled by Webpack
   if (NODE_ENV === 'production') {
-    gulp.watch(`${ SRC }/js/**/*.js`,
+    gulp.watch(`${SRC}/js/**/*.js`,
       gulp.series('lint')
     );
   }
 
-  gulp.watch(`${ SRC }/js/**/*.js`, gulp.series('webpack'));
+  gulp.watch(`${SRC}/js/**/*.js`, gulp.series('webpack'));
 
   // Watch changes to underscore templates to compile them
-  gulp.watch(`${ VIEWS }/**/*.underscore.twig`, gulp.series('jst'));
+  gulp.watch(`${VIEWS}/**/*.underscore.twig`, gulp.series('jst'));
 
   // Watch image files
-  gulp.watch(`${ SRC }/img/**/*`, gulp.series('images', reload));
+  gulp.watch(`${SRC}/img/**/*`, gulp.series('images', reload));
 
   // Watch hashed files
   gulp.watch(HASH_FILES, gulp.series('hashfiles', reload));

@@ -31,7 +31,6 @@ import Accordion from 'components/accordion/accordion';
 import Filter from 'components/filter/filter';
 import ShareForm from 'components/share-form/share-form';
 import Disclaimer from 'components/disclaimer/disclaimer';
-import WebShare from 'components/web-share/web-share';
 import AlertBanner from 'objects/alert-banner/alert-banner';
 import Newsletter from 'objects/newsletter/newsletter';
 import TextController from 'objects/text-controller/text-controller';
@@ -42,6 +41,7 @@ import Icons from 'utilities/icons/icons';
 import Toggle from 'utilities/toggle/toggle';
 import Copy from 'utilities/copy/copy';
 import localize from 'utilities/localize/localize';
+import WebShare from 'utilities/web-share/web-share';
 
 (function(window) {
   'use strict';
@@ -65,6 +65,11 @@ import localize from 'utilities/localize/localize';
       Utility.track('Web Share', [
         {action: 'web-share/shared'}
       ]);
+    },
+    fallback:() => {
+      new Toggle({
+        selector: WebShare.selector
+      });
     }
   });
 
