@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7217f71fe663b944c9f509b3cc3b6705",
+    "content-hash": "0a74138600265107004bfd6ef246090f",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2655,23 +2655,23 @@
         },
         {
             "name": "umutphp/wp-vulnerability-check",
-            "version": "0.1.1",
+            "version": "0.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/umutphp/wp-vulnerability-check.git",
-                "reference": "2a1ff6d4bc6657d5a927920e6168f02186d45038"
+                "reference": "69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/umutphp/wp-vulnerability-check/zipball/2a1ff6d4bc6657d5a927920e6168f02186d45038",
-                "reference": "2a1ff6d4bc6657d5a927920e6168f02186d45038",
+                "url": "https://api.github.com/repos/umutphp/wp-vulnerability-check/zipball/69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7",
+                "reference": "69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
                 "php": ">=5.4.0",
-                "symfony/yaml": "3.4"
+                "symfony/yaml": "*"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.5"
@@ -2696,7 +2696,7 @@
                 }
             ],
             "description": "Check the WPScan Vulnerability Database via API to identify the security issues on plugins and WordPress installed.",
-            "time": "2019-02-09T20:12:18+00:00"
+            "time": "2020-03-04T10:06:43+00:00"
         },
         {
             "name": "whoops/soap",
