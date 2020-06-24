@@ -175,11 +175,10 @@ class Programs extends Timber\Post {
   }
 
   /**
-   * Get the itemtype for structure data
+   * Get the type of the schema.
    *
    * @return  String  The itemtype
    */
-
   public function getItemScope() {
     if ($this->custom['program_status_type'] == 'covid-response') {
       $item_scope = 'SpecialAnnouncement';
@@ -188,6 +187,17 @@ class Programs extends Timber\Post {
     }
 
     return $item_scope;
+  }
+
+  /**
+   * Returns the disambiguating description for the schema.
+   *
+   * @return String disambiguating description.
+   */
+  public function disambiguatingDescription() {
+    $description = $this -> get_field('field_58912c1a8a81b') |
+      add_anyc_checklist | add_anyc_table_numeric;
+    return $description;
   }
 
   /**

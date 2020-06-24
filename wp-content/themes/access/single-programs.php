@@ -46,6 +46,66 @@ if (isset($_GET['step'])) {
 
 $context['post'] = $program;
 
+$context['schema'] = json_encode(
+  array(
+    "@context" => "https://schema.org",
+    "@type" => "GovernmentService",
+    "name" => $program -> name,
+    "alternateName" => $program -> plain_language_program_name,
+    "datePosted" => $program -> post_modified,
+    "expires" => $program -> custom['program_status_clear_date'],
+    "url" => $program -> get_permalink,
+    "serviceType" => $program -> category['name'],
+    "serviceOperator" => array(
+      "@type" => "GovernmentOrganization",
+      "name" => $program -> government_agency
+    ),
+    "availableChannel" => array(
+      "@type" => "ServiceChannel",
+      "description" => $program -> get_field(accordion)
+    ),
+    "spatialCoverage" => array(
+      "type" => "City",
+      "name" => "New York"
+    ),
+    "description" => $program -> get_field('program_description'),
+    "disambiguatingDescription" => $program -> disambiguatingDescription()
+  )
+);
+
+if ($program -> getItemScope() === 'SpecialAnnouncement') {
+  $context['schema'] .= json_encode(
+    array(
+      "@context" => "https://schema.org",
+      "@type" => "SpecialAnnouncement",
+      "name" => $program -> program_name,
+      "category" => "https://www.wikidata.org/wiki/Q81068910",
+      "governmentBenefitsInfo" => array(
+        "@type" => "GovernmentService",
+        "name" => $program -> program_name,
+        "url" => $program -> structured_data_url,
+        "provider" => array(
+          "@type" => "GovernmentOrganization",
+          "name" => $program -> government_agency
+        ),
+        "audience" => array(
+          "@type" => "Audience",
+          "name" => $program -> audience
+        ),
+        "serviceType" => $program -> category['name']
+      ),
+      "serviceOperator" => array(
+        "@type" => "GovernmentOrganization",
+        "name" => $program -> government_agency
+      ),
+      "spatialCoverage" => array(
+        "type" => "City",
+        "name" => "New York"
+      )
+    )
+  );
+}
+
 /**
  * Page Meta Description
  */
