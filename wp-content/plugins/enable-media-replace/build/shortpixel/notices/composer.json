@@ -1,7 +1,7 @@
 {
     "name": "shortpixel/notices",
     "description": "ShortPixel WordPress Notice System",
-    "version": "1.2",
+    "version": "1.5",
     "type": "library",
     "license": "MIT",
     "authors": [

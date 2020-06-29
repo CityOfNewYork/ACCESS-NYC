@@ -53,7 +53,7 @@ class FieldImage extends Field {
             $xpath  = $this->getOption('xpath');
             $search_in_gallery = empty($xpath['search_in_media']) ? 0 : 1;
             $search_in_files = empty($xpath['search_in_files']) ? 0 : 1;
-            $attachmentID = ACFService::import_image(parent::getFieldValue(), $this->getPostID(), $parsingData['logger'], $search_in_gallery, $search_in_files, $this->importData['articleData']);
+            $attachmentID = ACFService::import_image(parent::getFieldValue(), $this->getPostID(), $parsingData['logger'], $search_in_gallery, $search_in_files, $this->importData);
         }
         return $attachmentID;
     }

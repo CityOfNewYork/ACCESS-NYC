@@ -21,7 +21,7 @@ abstract class MetricOptions {
      * @param string $direction The direction
      * @return ReadMetricOptions Options builder
      */
-    public static function read($edge = Values::NONE, $direction = Values::NONE) {
+    public static function read(string $edge = Values::NONE, string $direction = Values::NONE): ReadMetricOptions {
         return new ReadMetricOptions($edge, $direction);
     }
 }
@@ -31,7 +31,7 @@ class ReadMetricOptions extends Options {
      * @param string $edge The edge
      * @param string $direction The direction
      */
-    public function __construct($edge = Values::NONE, $direction = Values::NONE) {
+    public function __construct(string $edge = Values::NONE, string $direction = Values::NONE) {
         $this->options['edge'] = $edge;
         $this->options['direction'] = $direction;
     }
@@ -42,7 +42,7 @@ class ReadMetricOptions extends Options {
      * @param string $edge The edge
      * @return $this Fluent Builder
      */
-    public function setEdge($edge) {
+    public function setEdge(string $edge): self {
         $this->options['edge'] = $edge;
         return $this;
     }
@@ -53,7 +53,7 @@ class ReadMetricOptions extends Options {
      * @param string $direction The direction
      * @return $this Fluent Builder
      */
-    public function setDirection($direction) {
+    public function setDirection(string $direction): self {
         $this->options['direction'] = $direction;
         return $this;
     }
@@ -63,13 +63,8 @@ class ReadMetricOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Insights.V1.ReadMetricOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Insights.V1.ReadMetricOptions ' . $options . ']';
     }
 }

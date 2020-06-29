@@ -23,7 +23,7 @@ abstract class ModelBuildOptions {
      *                           identifies the new resource
      * @return CreateModelBuildOptions Options builder
      */
-    public static function create($statusCallback = Values::NONE, $uniqueName = Values::NONE) {
+    public static function create(string $statusCallback = Values::NONE, string $uniqueName = Values::NONE): CreateModelBuildOptions {
         return new CreateModelBuildOptions($statusCallback, $uniqueName);
     }
 
@@ -32,7 +32,7 @@ abstract class ModelBuildOptions {
      *                           identifies the resource
      * @return UpdateModelBuildOptions Options builder
      */
-    public static function update($uniqueName = Values::NONE) {
+    public static function update(string $uniqueName = Values::NONE): UpdateModelBuildOptions {
         return new UpdateModelBuildOptions($uniqueName);
     }
 }
@@ -44,7 +44,7 @@ class CreateModelBuildOptions extends Options {
      * @param string $uniqueName An application-defined string that uniquely
      *                           identifies the new resource
      */
-    public function __construct($statusCallback = Values::NONE, $uniqueName = Values::NONE) {
+    public function __construct(string $statusCallback = Values::NONE, string $uniqueName = Values::NONE) {
         $this->options['statusCallback'] = $statusCallback;
         $this->options['uniqueName'] = $uniqueName;
     }
@@ -56,7 +56,7 @@ class CreateModelBuildOptions extends Options {
      *                               send status information to your application
      * @return $this Fluent Builder
      */
-    public function setStatusCallback($statusCallback) {
+    public function setStatusCallback(string $statusCallback): self {
         $this->options['statusCallback'] = $statusCallback;
         return $this;
     }
@@ -68,7 +68,7 @@ class CreateModelBuildOptions extends Options {
      *                           identifies the new resource
      * @return $this Fluent Builder
      */
-    public function setUniqueName($uniqueName) {
+    public function setUniqueName(string $uniqueName): self {
         $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
@@ -78,14 +78,9 @@ class CreateModelBuildOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Autopilot.V1.CreateModelBuildOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Autopilot.V1.CreateModelBuildOptions ' . $options . ']';
     }
 }
 
@@ -94,7 +89,7 @@ class UpdateModelBuildOptions extends Options {
      * @param string $uniqueName An application-defined string that uniquely
      *                           identifies the resource
      */
-    public function __construct($uniqueName = Values::NONE) {
+    public function __construct(string $uniqueName = Values::NONE) {
         $this->options['uniqueName'] = $uniqueName;
     }
 
@@ -105,7 +100,7 @@ class UpdateModelBuildOptions extends Options {
      *                           identifies the resource
      * @return $this Fluent Builder
      */
-    public function setUniqueName($uniqueName) {
+    public function setUniqueName(string $uniqueName): self {
         $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
@@ -115,13 +110,8 @@ class UpdateModelBuildOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Autopilot.V1.UpdateModelBuildOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Autopilot.V1.UpdateModelBuildOptions ' . $options . ']';
     }
 }

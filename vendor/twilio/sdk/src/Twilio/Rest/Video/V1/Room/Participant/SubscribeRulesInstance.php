@@ -20,7 +20,7 @@ use Twilio\Version;
  *
  * @property string $participantSid
  * @property string $roomSid
- * @property string $rules
+ * @property string[] $rules
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
  */
@@ -28,26 +28,25 @@ class SubscribeRulesInstance extends InstanceResource {
     /**
      * Initialize the SubscribeRulesInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $roomSid The SID of the Room resource for the Subscribe Rules
      * @param string $participantSid The SID of the Participant resource for the
      *                               Subscribe Rules
-     * @return \Twilio\Rest\Video\V1\Room\Participant\SubscribeRulesInstance
      */
-    public function __construct(Version $version, array $payload, $roomSid, $participantSid) {
+    public function __construct(Version $version, array $payload, string $roomSid, string $participantSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'participantSid' => Values::array_get($payload, 'participant_sid'),
             'roomSid' => Values::array_get($payload, 'room_sid'),
             'rules' => Values::array_get($payload, 'rules'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
-        );
+        ];
 
-        $this->solution = array('roomSid' => $roomSid, 'participantSid' => $participantSid, );
+        $this->solution = ['roomSid' => $roomSid, 'participantSid' => $participantSid, ];
     }
 
     /**
@@ -57,7 +56,7 @@ class SubscribeRulesInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -75,7 +74,7 @@ class SubscribeRulesInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Video.V1.SubscribeRulesInstance]';
     }
 }

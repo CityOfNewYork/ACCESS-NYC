@@ -36,7 +36,7 @@ Class WPML_ST_User_Fields {
 	public function add_get_the_author_field_filters() {
 		$translatable_fields = $this->get_translatable_meta_fields();
 		foreach ( $translatable_fields as $field ) {
-			add_filter( "get_the_author_{$field}", array( $this, 'get_the_author_field_filter' ), 10, 2 );
+			add_filter( "get_the_author_{$field}", array( $this, 'get_the_author_field_filter' ), 10, 3 );
 		}
 	}
 
@@ -72,30 +72,37 @@ Class WPML_ST_User_Fields {
 
 	/**
 	 * @param string $value
-	 * @param int $user_id
+	 * @param int    $user_id
+	 * @param int    $original_user_id
 	 *
 	 * @return string
 	 */
-	public function get_the_author_field_filter( $value, $user_id ) {
+	public function get_the_author_field_filter( $value, $user_id, $original_user_id ) {
 		if ( $this->lock_get_the_author_filter ) {
 			return $value;
 		}
 
 		$field = preg_replace( '/get_the_author_/', '', current_filter(), 1);
 		$value = $this->translate_user_meta_field( $field, $value, $user_id );
-		return $this->apply_filters_for_the_author_field_output( $value, $field, $user_id );
+		return $this->apply_filters_for_the_author_field_output( $value, $field, $user_id, $original_user_id );
 	}
 
 	/**
 	 * @param string $value
 	 * @param string $field
-	 * @param int $user_id
+	 * @param int    $user_id
+	 * @param int    $original_user_id
 	 *
 	 * @return string
 	 */
-	private function apply_filters_for_the_author_field_output( $value, $field, $user_id ) {
+	private function apply_filters_for_the_author_field_output( $value, $field, $user_id, $original_user_id ) {
 		$this->lock_get_the_author_filter = true;
-		$value = apply_filters( "get_the_author_$field", $value, $user_id );
+		/**
+		 * WP hook described in wp-includes/author-template.php
+		 *
+		 * @see get_the_author_meta
+		 */
+		$value = apply_filters( "get_the_author_$field", $value, $user_id, $original_user_id );
 		$this->lock_get_the_author_filter = false;
 		return $value;
 	}

@@ -75,7 +75,7 @@ class HTML extends Base {
 						ICL_TM_COMPLETE == $string_translations[ $string_id ][ $lang ]['status']
 					) {
 						$translation = $string_translations[ $string_id ][ $lang ]['value'];
-						$block       = $this->update_string_in_innerContent( $block, $element, $translation );
+						$block       = self::update_string_in_innerContent( $block, $element, $translation );
 						$dom_handle->setElementValue( $element, $translation );
 					}
 				}
@@ -118,7 +118,7 @@ class HTML extends Base {
 	 *
 	 * @return \WP_Block_Parser_Block
 	 */
-	private function update_string_in_innerContent( \WP_Block_Parser_Block $block, \DOMNode $element, $translation ) {
+	public static function update_string_in_innerContent( \WP_Block_Parser_Block $block, \DOMNode $element, $translation ) {
 		if ( empty( $block->innerContent ) ) {
 			return $block;
 		}
@@ -133,7 +133,7 @@ class HTML extends Base {
 
 		foreach ( $block->innerContent as &$inner_content ) {
 			if ( $inner_content ) {
-				$inner_content = preg_replace( $search, '$1' . $translation . '$3', $inner_content );
+				$inner_content = preg_replace( $search, '${1}' . $translation . '${3}', $inner_content );
 			}
 		}
 

@@ -9,15 +9,15 @@ Version: 2.1
 
 /** @noinspection PhpUndefinedClassInspection */
 class WPML_Dependencies {
-	private static $instance;
-	private        $admin_notice;
-	private        $current_product;
-	private        $current_version    = array();
-	private        $expected_versions  = array();
-	private        $installed_plugins  = array();
-	private        $invalid_plugins    = array();
-	private        $valid_plugins      = array();
-	private        $validation_results = array();
+	protected static $instance;
+	private $admin_notice;
+	private $current_product;
+	private $current_version = array();
+	private $expected_versions = array();
+	private $installed_plugins = array();
+	private $invalid_plugins = array();
+	private $valid_plugins = array();
+	private $validation_results = array();
 
 	public $data_key             = 'wpml_dependencies:';
 	public $needs_validation_key = 'wpml_dependencies:needs_validation';
@@ -37,7 +37,7 @@ class WPML_Dependencies {
 		}
 	}
 
-	private function remove_old_admin_notices() {
+	protected function remove_old_admin_notices() {
 		if ( class_exists( 'WPML_Bundle_Check' ) ) {
 			global $WPML_Bundle_Check;
 
@@ -167,10 +167,11 @@ class WPML_Dependencies {
 
 	private function add_installed_plugin( $plugin ) {
 		$data       = get_plugin_data( $plugin );
-		$plugin_dir = dirname( $plugin );
+		$plugin_dir = realpath( dirname( $plugin ) );
 
-		if ( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR !== $plugin_dir ) {
-			$plugin_folder = str_replace( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR, '', $plugin_dir );
+		$wp_plugin_dir = realpath( WP_PLUGIN_DIR ) . DIRECTORY_SEPARATOR;
+		if ( false !== $plugin_dir && $wp_plugin_dir !== $plugin_dir ) {
+			$plugin_folder = str_replace( $wp_plugin_dir, '', $plugin_dir );
 			$plugin_slug   = $this->guess_plugin_slug( $data, $plugin_folder );
 
 			if ( $this->is_valid_plugin( $plugin_slug ) ) {
@@ -317,10 +318,16 @@ class WPML_Dependencies {
 	}
 
 	private function get_invalid_plugins_report_list() {
+		/* translators: %s: Version number */
+		$required_version     = __( 'required version: %s', 'sitepress' );
 		$invalid_plugins_list = '<ul class="ul-disc">';
 		foreach ( $this->invalid_plugins as $invalid_plugin ) {
-			$plugin_name_html = '<li data-installed-version="' . $this->installed_plugins[ $invalid_plugin ] . '">';
-			$plugin_name_html .= $invalid_plugin;
+			$plugin_name_html        = '<li data-installed-version="' . $this->installed_plugins[ $invalid_plugin ] . '">';
+			$required_version_string = '';
+			if ( isset( $this->expected_versions[ $invalid_plugin ] ) ) {
+				$required_version_string = ' (' . sprintf( $required_version, $this->expected_versions[ $invalid_plugin ] ) . ')';
+			}
+			$plugin_name_html .= $invalid_plugin . $required_version_string;
 			$plugin_name_html .= '</li>';
 
 			$invalid_plugins_list .= $plugin_name_html;

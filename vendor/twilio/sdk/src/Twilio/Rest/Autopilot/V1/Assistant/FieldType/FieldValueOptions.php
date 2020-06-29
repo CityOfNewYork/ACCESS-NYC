@@ -21,7 +21,7 @@ abstract class FieldValueOptions {
      *                         language of the value
      * @return ReadFieldValueOptions Options builder
      */
-    public static function read($language = Values::NONE) {
+    public static function read(string $language = Values::NONE): ReadFieldValueOptions {
         return new ReadFieldValueOptions($language);
     }
 
@@ -30,7 +30,7 @@ abstract class FieldValueOptions {
      *                          field value is a synonym of
      * @return CreateFieldValueOptions Options builder
      */
-    public static function create($synonymOf = Values::NONE) {
+    public static function create(string $synonymOf = Values::NONE): CreateFieldValueOptions {
         return new CreateFieldValueOptions($synonymOf);
     }
 }
@@ -40,7 +40,7 @@ class ReadFieldValueOptions extends Options {
      * @param string $language The ISO language-country tag that identifies the
      *                         language of the value
      */
-    public function __construct($language = Values::NONE) {
+    public function __construct(string $language = Values::NONE) {
         $this->options['language'] = $language;
     }
 
@@ -51,7 +51,7 @@ class ReadFieldValueOptions extends Options {
      *                         language of the value
      * @return $this Fluent Builder
      */
-    public function setLanguage($language) {
+    public function setLanguage(string $language): self {
         $this->options['language'] = $language;
         return $this;
     }
@@ -61,14 +61,9 @@ class ReadFieldValueOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Autopilot.V1.ReadFieldValueOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Autopilot.V1.ReadFieldValueOptions ' . $options . ']';
     }
 }
 
@@ -77,7 +72,7 @@ class CreateFieldValueOptions extends Options {
      * @param string $synonymOf The string value that indicates which word the
      *                          field value is a synonym of
      */
-    public function __construct($synonymOf = Values::NONE) {
+    public function __construct(string $synonymOf = Values::NONE) {
         $this->options['synonymOf'] = $synonymOf;
     }
 
@@ -88,7 +83,7 @@ class CreateFieldValueOptions extends Options {
      *                          field value is a synonym of
      * @return $this Fluent Builder
      */
-    public function setSynonymOf($synonymOf) {
+    public function setSynonymOf(string $synonymOf): self {
         $this->options['synonymOf'] = $synonymOf;
         return $this;
     }
@@ -98,13 +93,8 @@ class CreateFieldValueOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Autopilot.V1.CreateFieldValueOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Autopilot.V1.CreateFieldValueOptions ' . $options . ']';
     }
 }

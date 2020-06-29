@@ -17,18 +17,18 @@ class AccessToken {
     /** @var string[] $customClaims */
     private $customClaims;
 
-    public function __construct($accountSid, $signingKeySid, $secret, $ttl = 3600, $identity = null) {
+    public function __construct(string $accountSid, string $signingKeySid, string $secret, int $ttl = 3600, string $identity = null) {
         $this->signingKeySid = $signingKeySid;
         $this->accountSid = $accountSid;
         $this->secret = $secret;
         $this->ttl = $ttl;
 
-        if (!\is_null($identity)) {
+        if ($identity !== null) {
             $this->identity = $identity;
         }
 
-        $this->grants = array();
-        $this->customClaims = array();
+        $this->grants = [];
+        $this->customClaims = [];
     }
 
     /**
@@ -38,7 +38,7 @@ class AccessToken {
      *
      * @return $this updated access token
      */
-    public function setIdentity($identity) {
+    public function setIdentity(string $identity): self {
         $this->identity = $identity;
         return $this;
     }
@@ -48,18 +48,18 @@ class AccessToken {
      *
      * @return string the identity
      */
-    public function getIdentity() {
+    public function getIdentity(): string {
         return $this->identity;
     }
 
     /**
      * Set the nbf of this access token
      *
-     * @param integer $nbf nbf in epoch seconds of the grant
+     * @param int $nbf nbf in epoch seconds of the grant
      *
      * @return $this updated access token
      */
-    public function setNbf($nbf) {
+    public function setNbf(int $nbf): self {
         $this->nbf = $nbf;
         return $this;
     }
@@ -67,9 +67,9 @@ class AccessToken {
     /**
      * Returns the nbf of the grant
      *
-     * @return integer the nbf in epoch seconds
+     * @return int the nbf in epoch seconds
      */
-    public function getNbf() {
+    public function getNbf(): int {
         return $this->nbf;
     }
 
@@ -80,7 +80,7 @@ class AccessToken {
      *
      * @return $this the updated access token
      */
-    public function addGrant(Grant $grant) {
+    public function addGrant(Grant $grant): self {
         $this->grants[] = $grant;
         return $this;
     }
@@ -91,19 +91,19 @@ class AccessToken {
      * @param string $name
      * @param string $value
      */
-    public function addClaim($name, $value) {
+    public function addClaim(string $name, string $value): void {
         $this->customClaims[$name] = $value;
     }
 
-    public function toJWT($algorithm = 'HS256') {
-        $header = array(
+    public function toJWT(string $algorithm = 'HS256'): string {
+        $header = [
             'cty' => 'twilio-fpa;v=1',
             'typ' => 'JWT'
-        );
+        ];
 
         $now = \time();
 
-        $grants = array();
+        $grants = [];
         if ($this->identity) {
             $grants['identity'] = $this->identity;
         }
@@ -121,22 +121,22 @@ class AccessToken {
             $grants = \json_decode('{}');
         }
 
-        $payload = \array_merge($this->customClaims, array(
+        $payload = \array_merge($this->customClaims, [
             'jti' => $this->signingKeySid . '-' . $now,
             'iss' => $this->signingKeySid,
             'sub' => $this->accountSid,
             'exp' => $now + $this->ttl,
             'grants' => $grants
-        ));
+        ]);
 
-        if (!\is_null($this->nbf)) {
+        if ($this->nbf !== null) {
             $payload['nbf'] = $this->nbf;
         }
 
         return JWT::encode($payload, $this->secret, $algorithm, $header);
     }
 
-    public function __toString() {
+    public function __toString(): string {
         return $this->toJWT();
     }
 }

@@ -43,7 +43,7 @@ class WPML_Gutenberg_Config_Option {
 			$block_name                     = $block_config['attr']['type'];
 			$blocks[ $block_name ]['xpath'] = array();
 
-			foreach ( $block_config['xpath'] as $xpaths ) {
+			foreach ( $this->normalize_key_data( $block_config['xpath'] ) as $xpaths ) {
 				$xpaths                         = XPath::normalize( $xpaths );
 				$blocks[ $block_name ]['xpath'] = array_merge( $blocks[ $block_name ]['xpath'], array_values( $xpaths ) );
 

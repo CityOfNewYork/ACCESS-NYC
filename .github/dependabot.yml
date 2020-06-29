@@ -10,10 +10,10 @@ updates:
     directory: /
     target-branch: env/accessnyctest
     schedule:
-      interval: daily
+      interval: monthly
 
   - package-ecosystem: npm
     directory: /wp-content/themes/access/
     target-branch: env/accessnyctest
     schedule:
-      interval: daily
+      interval: monthly

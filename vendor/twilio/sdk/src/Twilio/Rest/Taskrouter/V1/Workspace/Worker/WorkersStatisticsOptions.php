@@ -29,7 +29,7 @@ abstract class WorkersStatisticsOptions {
      * @param string $taskChannel Only calculate statistics on this TaskChannel
      * @return FetchWorkersStatisticsOptions Options builder
      */
-    public static function fetch($minutes = Values::NONE, $startDate = Values::NONE, $endDate = Values::NONE, $taskQueueSid = Values::NONE, $taskQueueName = Values::NONE, $friendlyName = Values::NONE, $taskChannel = Values::NONE) {
+    public static function fetch(int $minutes = Values::NONE, \DateTime $startDate = Values::NONE, \DateTime $endDate = Values::NONE, string $taskQueueSid = Values::NONE, string $taskQueueName = Values::NONE, string $friendlyName = Values::NONE, string $taskChannel = Values::NONE): FetchWorkersStatisticsOptions {
         return new FetchWorkersStatisticsOptions($minutes, $startDate, $endDate, $taskQueueSid, $taskQueueName, $friendlyName, $taskChannel);
     }
 }
@@ -50,7 +50,7 @@ class FetchWorkersStatisticsOptions extends Options {
      *                             that match this parameter
      * @param string $taskChannel Only calculate statistics on this TaskChannel
      */
-    public function __construct($minutes = Values::NONE, $startDate = Values::NONE, $endDate = Values::NONE, $taskQueueSid = Values::NONE, $taskQueueName = Values::NONE, $friendlyName = Values::NONE, $taskChannel = Values::NONE) {
+    public function __construct(int $minutes = Values::NONE, \DateTime $startDate = Values::NONE, \DateTime $endDate = Values::NONE, string $taskQueueSid = Values::NONE, string $taskQueueName = Values::NONE, string $friendlyName = Values::NONE, string $taskChannel = Values::NONE) {
         $this->options['minutes'] = $minutes;
         $this->options['startDate'] = $startDate;
         $this->options['endDate'] = $endDate;
@@ -67,7 +67,7 @@ class FetchWorkersStatisticsOptions extends Options {
      *                     past
      * @return $this Fluent Builder
      */
-    public function setMinutes($minutes) {
+    public function setMinutes(int $minutes): self {
         $this->options['minutes'] = $minutes;
         return $this;
     }
@@ -79,7 +79,7 @@ class FetchWorkersStatisticsOptions extends Options {
      *                             date
      * @return $this Fluent Builder
      */
-    public function setStartDate($startDate) {
+    public function setStartDate(\DateTime $startDate): self {
         $this->options['startDate'] = $startDate;
         return $this;
     }
@@ -91,7 +91,7 @@ class FetchWorkersStatisticsOptions extends Options {
      *                           and earlier
      * @return $this Fluent Builder
      */
-    public function setEndDate($endDate) {
+    public function setEndDate(\DateTime $endDate): self {
         $this->options['endDate'] = $endDate;
         return $this;
     }
@@ -103,7 +103,7 @@ class FetchWorkersStatisticsOptions extends Options {
      *                             Worker statistics
      * @return $this Fluent Builder
      */
-    public function setTaskQueueSid($taskQueueSid) {
+    public function setTaskQueueSid(string $taskQueueSid): self {
         $this->options['taskQueueSid'] = $taskQueueSid;
         return $this;
     }
@@ -115,7 +115,7 @@ class FetchWorkersStatisticsOptions extends Options {
      *                              fetch Worker statistics
      * @return $this Fluent Builder
      */
-    public function setTaskQueueName($taskQueueName) {
+    public function setTaskQueueName(string $taskQueueName): self {
         $this->options['taskQueueName'] = $taskQueueName;
         return $this;
     }
@@ -127,7 +127,7 @@ class FetchWorkersStatisticsOptions extends Options {
      *                             that match this parameter
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -138,7 +138,7 @@ class FetchWorkersStatisticsOptions extends Options {
      * @param string $taskChannel Only calculate statistics on this TaskChannel
      * @return $this Fluent Builder
      */
-    public function setTaskChannel($taskChannel) {
+    public function setTaskChannel(string $taskChannel): self {
         $this->options['taskChannel'] = $taskChannel;
         return $this;
     }
@@ -148,13 +148,8 @@ class FetchWorkersStatisticsOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Taskrouter.V1.FetchWorkersStatisticsOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Taskrouter.V1.FetchWorkersStatisticsOptions ' . $options . ']';
     }
 }

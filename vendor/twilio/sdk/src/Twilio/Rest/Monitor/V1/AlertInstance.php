@@ -40,16 +40,15 @@ class AlertInstance extends InstanceResource {
     /**
      * Initialize the AlertInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $sid The SID that identifies the resource to fetch
-     * @return \Twilio\Rest\Monitor\V1\AlertInstance
      */
-    public function __construct(Version $version, array $payload, $sid = null) {
+    public function __construct(Version $version, array $payload, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'alertText' => Values::array_get($payload, 'alert_text'),
             'apiVersion' => Values::array_get($payload, 'api_version'),
@@ -69,18 +68,18 @@ class AlertInstance extends InstanceResource {
             'url' => Values::array_get($payload, 'url'),
             'requestHeaders' => Values::array_get($payload, 'request_headers'),
             'serviceSid' => Values::array_get($payload, 'service_sid'),
-        );
+        ];
 
-        $this->solution = array('sid' => $sid ?: $this->properties['sid'], );
+        $this->solution = ['sid' => $sid ?: $this->properties['sid'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Monitor\V1\AlertContext Context for this AlertInstance
+     * @return AlertContext Context for this AlertInstance
      */
-    protected function proxy() {
+    protected function proxy(): AlertContext {
         if (!$this->context) {
             $this->context = new AlertContext($this->version, $this->solution['sid']);
         }
@@ -89,12 +88,12 @@ class AlertInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a AlertInstance
+     * Fetch the AlertInstance
      *
      * @return AlertInstance Fetched AlertInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): AlertInstance {
         return $this->proxy()->fetch();
     }
 
@@ -105,7 +104,7 @@ class AlertInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -123,8 +122,8 @@ class AlertInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

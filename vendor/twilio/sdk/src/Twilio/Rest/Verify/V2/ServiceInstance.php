@@ -13,6 +13,11 @@ use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
 use Twilio\Options;
+use Twilio\Rest\Verify\V2\Service\EntityList;
+use Twilio\Rest\Verify\V2\Service\MessagingConfigurationList;
+use Twilio\Rest\Verify\V2\Service\RateLimitList;
+use Twilio\Rest\Verify\V2\Service\VerificationCheckList;
+use Twilio\Rest\Verify\V2\Service\VerificationList;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -26,30 +31,32 @@ use Twilio\Version;
  * @property bool $skipSmsToLandlines
  * @property bool $dtmfInputRequired
  * @property string $ttsName
+ * @property bool $doNotShareWarningEnabled
+ * @property bool $customCodeEnabled
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
  * @property string $url
  * @property array $links
  */
 class ServiceInstance extends InstanceResource {
-    protected $_verifications = null;
-    protected $_verificationChecks = null;
-    protected $_rateLimits = null;
-    protected $_messagingConfigurations = null;
+    protected $_verifications;
+    protected $_verificationChecks;
+    protected $_rateLimits;
+    protected $_messagingConfigurations;
+    protected $_entities;
 
     /**
      * Initialize the ServiceInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Verify\V2\ServiceInstance
      */
-    public function __construct(Version $version, array $payload, $sid = null) {
+    public function __construct(Version $version, array $payload, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'friendlyName' => Values::array_get($payload, 'friendly_name'),
@@ -59,23 +66,24 @@ class ServiceInstance extends InstanceResource {
             'skipSmsToLandlines' => Values::array_get($payload, 'skip_sms_to_landlines'),
             'dtmfInputRequired' => Values::array_get($payload, 'dtmf_input_required'),
             'ttsName' => Values::array_get($payload, 'tts_name'),
+            'doNotShareWarningEnabled' => Values::array_get($payload, 'do_not_share_warning_enabled'),
+            'customCodeEnabled' => Values::array_get($payload, 'custom_code_enabled'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'url' => Values::array_get($payload, 'url'),
             'links' => Values::array_get($payload, 'links'),
-        );
+        ];
 
-        $this->solution = array('sid' => $sid ?: $this->properties['sid'], );
+        $this->solution = ['sid' => $sid ?: $this->properties['sid'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Verify\V2\ServiceContext Context for this
-     *                                               ServiceInstance
+     * @return ServiceContext Context for this ServiceInstance
      */
-    protected function proxy() {
+    protected function proxy(): ServiceContext {
         if (!$this->context) {
             $this->context = new ServiceContext($this->version, $this->solution['sid']);
         }
@@ -84,22 +92,22 @@ class ServiceInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a ServiceInstance
+     * Fetch the ServiceInstance
      *
      * @return ServiceInstance Fetched ServiceInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): ServiceInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the ServiceInstance
+     * Delete the ServiceInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
@@ -110,44 +118,43 @@ class ServiceInstance extends InstanceResource {
      * @return ServiceInstance Updated ServiceInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): ServiceInstance {
         return $this->proxy()->update($options);
     }
 
     /**
      * Access the verifications
-     *
-     * @return \Twilio\Rest\Verify\V2\Service\VerificationList
      */
-    protected function getVerifications() {
+    protected function getVerifications(): VerificationList {
         return $this->proxy()->verifications;
     }
 
     /**
      * Access the verificationChecks
-     *
-     * @return \Twilio\Rest\Verify\V2\Service\VerificationCheckList
      */
-    protected function getVerificationChecks() {
+    protected function getVerificationChecks(): VerificationCheckList {
         return $this->proxy()->verificationChecks;
     }
 
     /**
      * Access the rateLimits
-     *
-     * @return \Twilio\Rest\Verify\V2\Service\RateLimitList
      */
-    protected function getRateLimits() {
+    protected function getRateLimits(): RateLimitList {
         return $this->proxy()->rateLimits;
     }
 
     /**
      * Access the messagingConfigurations
-     *
-     * @return \Twilio\Rest\Verify\V2\Service\MessagingConfigurationList
      */
-    protected function getMessagingConfigurations() {
+    protected function getMessagingConfigurations(): MessagingConfigurationList {
         return $this->proxy()->messagingConfigurations;
+    }
+
+    /**
+     * Access the entities
+     */
+    protected function getEntities(): EntityList {
+        return $this->proxy()->entities;
     }
 
     /**
@@ -157,7 +164,7 @@ class ServiceInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -175,8 +182,8 @@ class ServiceInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

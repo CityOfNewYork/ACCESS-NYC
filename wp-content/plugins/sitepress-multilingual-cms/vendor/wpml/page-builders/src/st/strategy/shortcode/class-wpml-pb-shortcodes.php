@@ -70,8 +70,6 @@ class WPML_PB_Shortcodes {
 			return false;
 		}
 
-		$content_with_stripped_shortcode = preg_replace( '/\[([\S]*)[^\]]*\][\s\S]*\[\/(\1)\]|\[[^\]]*\]/', '', $content );
-		$content_with_stripped_shortcode = trim( $content_with_stripped_shortcode );
-		return ! empty( $content_with_stripped_shortcode ) && trim( $content ) !== $content_with_stripped_shortcode;
+		return WPML_PB_Shortcode_Content_Wrapper::isStrippedContentDifferent( $content );
 	}
 }

@@ -206,7 +206,23 @@ function pmxe_wp_loaded() {
 
 						die;
 					}
+
+                    if(apply_filters('wp_all_export_no_cache', false)) {
+
+                        // If we are doing a google merchants export, send the file as a download.
+                        header("Content-type: " . mime_content_type($filepath));
+                        header("Content-Disposition: attachment; filename=" . basename($filepath));
+                        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+                        header("Cache-Control: post-check=0, pre-check=0", false);
+                        header("Pragma: no-cache");
+
+                        readfile($filepath);
+
+                        die;
+                    }
+
 					$fileurl = str_replace( "\\", "/", $fileurl );
+
 					wp_redirect($fileurl);
 				}
 				else

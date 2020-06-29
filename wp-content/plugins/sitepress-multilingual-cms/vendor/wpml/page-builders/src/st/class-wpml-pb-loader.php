@@ -1,5 +1,7 @@
 <?php
 
+use function WPML\Container\make;
+
 class WPML_PB_Loader {
 
 	public function __construct(
@@ -35,7 +37,7 @@ class WPML_PB_Loader {
 			$strategy->add_shortcodes( $page_builder_config_import->get_settings() );
 			$page_builder_strategies[] = $strategy;
 
-			if ( is_admin() && defined( 'WPML_MEDIA_VERSION' ) && $page_builder_config_import->get_media_settings() ) {
+			if ( defined( 'WPML_MEDIA_VERSION' ) && $page_builder_config_import->get_media_settings() ) {
 				$shortcodes_media_hooks = new WPML_Page_Builders_Media_Hooks(
 					new WPML_Page_Builders_Media_Shortcodes_Update_Factory( $page_builder_config_import ),
 					'shortcodes'
@@ -44,15 +46,7 @@ class WPML_PB_Loader {
 			}
 		}
 
-		if ( class_exists( 'WPML_Config_Built_With_Page_Builders' ) ) {
-			$post_body_handler = new WPML_PB_Handle_Post_Body(
-				new WPML_Page_Builders_Page_Built(
-					new WPML_Config_Built_With_Page_Builders()
-				)
-			);
-
-			$post_body_handler->add_hooks();
-		}
+		self::load_hooks();
 
 		if ( $page_builder_strategies ) {
 			if ( $pb_integration ) {
@@ -68,5 +62,14 @@ class WPML_PB_Loader {
 			}
 		}
 
+	}
+
+	private static function load_hooks() {
+		$hooks = [
+			WPML_PB_Handle_Post_Body::class,
+			WPML\PB\Compatibility\Toolset\Layouts\HooksFactory::class,
+		];
+
+		make( WPML_Action_Filter_Loader::class )->load( $hooks );
 	}
 }

@@ -26,8 +26,11 @@ class WPML_Meta_Boxes_Post_Edit_Ajax implements IWPML_Action {
 	 * @param string $hook
 	 */
 	public function enqueue_scripts( $hook ) {
-		if ( in_array( $hook, array( 'post.php', 'post-new.php', 'edit.php' ) ) ) {
-			wp_enqueue_script( 'wpml-meta-box', ICL_PLUGIN_URL . '/dist/js/wpml-meta-box/wpml-meta-box.js' );
+		if (
+			in_array( $hook, [ 'post.php', 'post-new.php', 'edit.php' ], true ) ||
+			apply_filters( 'wpml_enable_language_meta_box', false )
+		) {
+			wp_enqueue_script( 'wpml-meta-box', ICL_PLUGIN_URL . '/dist/js/wpml-meta-box/wpml-meta-box.js', [], ICL_SITEPRESS_VERSION, true );
 		}
 	}
 

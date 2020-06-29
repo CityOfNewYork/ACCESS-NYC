@@ -43,6 +43,9 @@ class PMXE_Download
         if (php_sapi_name() != 'cli-server') {
             header($header);
             header("Content-Disposition: attachment; filename=\"" . basename($file_name) . "\"");
+            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache");
         }
         while (ob_get_level()) {
             ob_end_clean();

@@ -27,6 +27,8 @@ class Actions {
 			\WPML\ST\Troubleshooting\BackendHooks::class,
 			\WPML\ST\Troubleshooting\AjaxFactory::class,
 			\WPML\ST\MO\File\FailureHooksFactory::class,
+			\WPML\ST\DB\Mappers\Hooks::class,
+			\WPML\ST\Shortcode\Hooks::class,
 		);
 	}
 }

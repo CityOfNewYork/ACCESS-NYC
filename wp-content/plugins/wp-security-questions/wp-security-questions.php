@@ -3,7 +3,7 @@
  * WP Security Question class file.
  * @package Forms
  * @author Flipper Code <hello@flippercode.com>
- * @version 1.0.4
+ * @version 1.0.5
  */
 
 /*
@@ -12,7 +12,7 @@ Plugin URI: http://www.flippercode.com/
 Description:  Protect your wordpress account with security question. Ask security questions on login, forgot password and registration page.
 Author: flippercode
 Author URI: http://www.flippercode.com/
-Version: 1.0.4
+Version: 1.0.5
 Text Domain: wp_security_question
 Domain Path: /lang/
 */

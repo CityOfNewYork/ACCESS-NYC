@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Path Helpers
+ * Get Path Helpers
  *
  * @author NYC Opportunity
  */
@@ -14,7 +14,7 @@ require_once get_template_directory() . '/lib/paths.php';
  * @link /lib/functions.php
  */
 
-require_once Path\functions();
+require_once ACCESS\functions();
 
 /**
  * WordPress Gutenberg Blocks
@@ -23,14 +23,16 @@ require_once Path\functions();
  * @link https://developer.wordpress.org/block-editor
  */
 
-require_once Path\block('smnyc-email-button');
-// Path\require_blocks(); // Require all blocks
+ACCESS\require_blocks();
 
 /**
  * Shortcodes
+ *
+ * @link /shortcodes/
+ * @link https://codex.wordpress.org/Shortcode
  */
 
-Path\require_shortcodes(); // Require all shortcodes
+ACCESS\require_shortcodes();
 
 new Shortcode\Accordion();
 new Shortcode\Newsletter();
@@ -39,6 +41,7 @@ new Shortcode\NewsletterArchive();
 // phpcs:disable
 /**
  * Timber Site Controller
+ *
  * Only the site controller should be instantiated here. This adds variables
  * (context) to the Timber site object. Other controllers can be instantiated
  * in the views that use them. Ex; locations or programs post types.
@@ -49,13 +52,14 @@ new Shortcode\NewsletterArchive();
  */
 // phpcs:enable
 
-require_once Path\controller('site');
+require_once ACCESS\controller('site');
 
 new Controller\Site();
 
 // phpcs:disable
 /**
  * Extend Timber/Twig
+ *
  * Filters extending Timber's implementation of twig can be added in this file.
  *
  * @link /lib/filters.php
@@ -63,4 +67,4 @@ new Controller\Site();
  */
 // phpcs:enable
 
-require_once Path\lib('filters');
+require_once ACCESS\lib('filters');

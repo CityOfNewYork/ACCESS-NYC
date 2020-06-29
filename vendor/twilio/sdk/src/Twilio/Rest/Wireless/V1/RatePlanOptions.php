@@ -28,9 +28,9 @@ abstract class RatePlanOptions {
      * @param bool $nationalRoamingEnabled Whether SIMs can roam on networks other
      *                                     than the home network in the United
      *                                     States
-     * @param string $internationalRoaming The services that SIMs capable of using
-     *                                     GPRS/3G/4G/LTE data connectivity can use
-     *                                     outside of the United States
+     * @param string[] $internationalRoaming The services that SIMs capable of
+     *                                       using GPRS/3G/4G/LTE data connectivity
+     *                                       can use outside of the United States
      * @param int $nationalRoamingDataLimit The total data usage in Megabytes that
      *                                      the Network allows during one month on
      *                                      non-home networks in the United States
@@ -41,7 +41,7 @@ abstract class RatePlanOptions {
      *                                           United States
      * @return CreateRatePlanOptions Options builder
      */
-    public static function create($uniqueName = Values::NONE, $friendlyName = Values::NONE, $dataEnabled = Values::NONE, $dataLimit = Values::NONE, $dataMetering = Values::NONE, $messagingEnabled = Values::NONE, $voiceEnabled = Values::NONE, $nationalRoamingEnabled = Values::NONE, $internationalRoaming = Values::NONE, $nationalRoamingDataLimit = Values::NONE, $internationalRoamingDataLimit = Values::NONE) {
+    public static function create(string $uniqueName = Values::NONE, string $friendlyName = Values::NONE, bool $dataEnabled = Values::NONE, int $dataLimit = Values::NONE, string $dataMetering = Values::NONE, bool $messagingEnabled = Values::NONE, bool $voiceEnabled = Values::NONE, bool $nationalRoamingEnabled = Values::NONE, array $internationalRoaming = Values::ARRAY_NONE, int $nationalRoamingDataLimit = Values::NONE, int $internationalRoamingDataLimit = Values::NONE): CreateRatePlanOptions {
         return new CreateRatePlanOptions($uniqueName, $friendlyName, $dataEnabled, $dataLimit, $dataMetering, $messagingEnabled, $voiceEnabled, $nationalRoamingEnabled, $internationalRoaming, $nationalRoamingDataLimit, $internationalRoamingDataLimit);
     }
 
@@ -51,7 +51,7 @@ abstract class RatePlanOptions {
      * @param string $friendlyName A string to describe the resource
      * @return UpdateRatePlanOptions Options builder
      */
-    public static function update($uniqueName = Values::NONE, $friendlyName = Values::NONE) {
+    public static function update(string $uniqueName = Values::NONE, string $friendlyName = Values::NONE): UpdateRatePlanOptions {
         return new UpdateRatePlanOptions($uniqueName, $friendlyName);
     }
 }
@@ -72,9 +72,9 @@ class CreateRatePlanOptions extends Options {
      * @param bool $nationalRoamingEnabled Whether SIMs can roam on networks other
      *                                     than the home network in the United
      *                                     States
-     * @param string $internationalRoaming The services that SIMs capable of using
-     *                                     GPRS/3G/4G/LTE data connectivity can use
-     *                                     outside of the United States
+     * @param string[] $internationalRoaming The services that SIMs capable of
+     *                                       using GPRS/3G/4G/LTE data connectivity
+     *                                       can use outside of the United States
      * @param int $nationalRoamingDataLimit The total data usage in Megabytes that
      *                                      the Network allows during one month on
      *                                      non-home networks in the United States
@@ -84,7 +84,7 @@ class CreateRatePlanOptions extends Options {
      *                                           month when roaming outside the
      *                                           United States
      */
-    public function __construct($uniqueName = Values::NONE, $friendlyName = Values::NONE, $dataEnabled = Values::NONE, $dataLimit = Values::NONE, $dataMetering = Values::NONE, $messagingEnabled = Values::NONE, $voiceEnabled = Values::NONE, $nationalRoamingEnabled = Values::NONE, $internationalRoaming = Values::NONE, $nationalRoamingDataLimit = Values::NONE, $internationalRoamingDataLimit = Values::NONE) {
+    public function __construct(string $uniqueName = Values::NONE, string $friendlyName = Values::NONE, bool $dataEnabled = Values::NONE, int $dataLimit = Values::NONE, string $dataMetering = Values::NONE, bool $messagingEnabled = Values::NONE, bool $voiceEnabled = Values::NONE, bool $nationalRoamingEnabled = Values::NONE, array $internationalRoaming = Values::ARRAY_NONE, int $nationalRoamingDataLimit = Values::NONE, int $internationalRoamingDataLimit = Values::NONE) {
         $this->options['uniqueName'] = $uniqueName;
         $this->options['friendlyName'] = $friendlyName;
         $this->options['dataEnabled'] = $dataEnabled;
@@ -105,7 +105,7 @@ class CreateRatePlanOptions extends Options {
      *                           identifies the resource
      * @return $this Fluent Builder
      */
-    public function setUniqueName($uniqueName) {
+    public function setUniqueName(string $uniqueName): self {
         $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
@@ -116,7 +116,7 @@ class CreateRatePlanOptions extends Options {
      * @param string $friendlyName A string to describe the resource
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -128,7 +128,7 @@ class CreateRatePlanOptions extends Options {
      *                          connectivity
      * @return $this Fluent Builder
      */
-    public function setDataEnabled($dataEnabled) {
+    public function setDataEnabled(bool $dataEnabled): self {
         $this->options['dataEnabled'] = $dataEnabled;
         return $this;
     }
@@ -140,7 +140,7 @@ class CreateRatePlanOptions extends Options {
      *                       allows during one month on the home network
      * @return $this Fluent Builder
      */
-    public function setDataLimit($dataLimit) {
+    public function setDataLimit(int $dataLimit): self {
         $this->options['dataLimit'] = $dataLimit;
         return $this;
     }
@@ -151,7 +151,7 @@ class CreateRatePlanOptions extends Options {
      * @param string $dataMetering The model used to meter data usage
      * @return $this Fluent Builder
      */
-    public function setDataMetering($dataMetering) {
+    public function setDataMetering(string $dataMetering): self {
         $this->options['dataMetering'] = $dataMetering;
         return $this;
     }
@@ -163,7 +163,7 @@ class CreateRatePlanOptions extends Options {
      *                               using Commands
      * @return $this Fluent Builder
      */
-    public function setMessagingEnabled($messagingEnabled) {
+    public function setMessagingEnabled(bool $messagingEnabled): self {
         $this->options['messagingEnabled'] = $messagingEnabled;
         return $this;
     }
@@ -174,7 +174,7 @@ class CreateRatePlanOptions extends Options {
      * @param bool $voiceEnabled Whether SIMs can make and receive voice calls
      * @return $this Fluent Builder
      */
-    public function setVoiceEnabled($voiceEnabled) {
+    public function setVoiceEnabled(bool $voiceEnabled): self {
         $this->options['voiceEnabled'] = $voiceEnabled;
         return $this;
     }
@@ -187,7 +187,7 @@ class CreateRatePlanOptions extends Options {
      *                                     States
      * @return $this Fluent Builder
      */
-    public function setNationalRoamingEnabled($nationalRoamingEnabled) {
+    public function setNationalRoamingEnabled(bool $nationalRoamingEnabled): self {
         $this->options['nationalRoamingEnabled'] = $nationalRoamingEnabled;
         return $this;
     }
@@ -195,12 +195,12 @@ class CreateRatePlanOptions extends Options {
     /**
      * The list of services that SIMs capable of using GPRS/3G/4G/LTE data connectivity can use outside of the United States. Can be: `data`, `voice`, and `messaging`.
      *
-     * @param string $internationalRoaming The services that SIMs capable of using
-     *                                     GPRS/3G/4G/LTE data connectivity can use
-     *                                     outside of the United States
+     * @param string[] $internationalRoaming The services that SIMs capable of
+     *                                       using GPRS/3G/4G/LTE data connectivity
+     *                                       can use outside of the United States
      * @return $this Fluent Builder
      */
-    public function setInternationalRoaming($internationalRoaming) {
+    public function setInternationalRoaming(array $internationalRoaming): self {
         $this->options['internationalRoaming'] = $internationalRoaming;
         return $this;
     }
@@ -213,7 +213,7 @@ class CreateRatePlanOptions extends Options {
      *                                      non-home networks in the United States
      * @return $this Fluent Builder
      */
-    public function setNationalRoamingDataLimit($nationalRoamingDataLimit) {
+    public function setNationalRoamingDataLimit(int $nationalRoamingDataLimit): self {
         $this->options['nationalRoamingDataLimit'] = $nationalRoamingDataLimit;
         return $this;
     }
@@ -228,7 +228,7 @@ class CreateRatePlanOptions extends Options {
      *                                           United States
      * @return $this Fluent Builder
      */
-    public function setInternationalRoamingDataLimit($internationalRoamingDataLimit) {
+    public function setInternationalRoamingDataLimit(int $internationalRoamingDataLimit): self {
         $this->options['internationalRoamingDataLimit'] = $internationalRoamingDataLimit;
         return $this;
     }
@@ -238,14 +238,9 @@ class CreateRatePlanOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Wireless.V1.CreateRatePlanOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Wireless.V1.CreateRatePlanOptions ' . $options . ']';
     }
 }
 
@@ -255,7 +250,7 @@ class UpdateRatePlanOptions extends Options {
      *                           identifies the resource
      * @param string $friendlyName A string to describe the resource
      */
-    public function __construct($uniqueName = Values::NONE, $friendlyName = Values::NONE) {
+    public function __construct(string $uniqueName = Values::NONE, string $friendlyName = Values::NONE) {
         $this->options['uniqueName'] = $uniqueName;
         $this->options['friendlyName'] = $friendlyName;
     }
@@ -267,7 +262,7 @@ class UpdateRatePlanOptions extends Options {
      *                           identifies the resource
      * @return $this Fluent Builder
      */
-    public function setUniqueName($uniqueName) {
+    public function setUniqueName(string $uniqueName): self {
         $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
@@ -278,7 +273,7 @@ class UpdateRatePlanOptions extends Options {
      * @param string $friendlyName A string to describe the resource
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -288,13 +283,8 @@ class UpdateRatePlanOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Wireless.V1.UpdateRatePlanOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Wireless.V1.UpdateRatePlanOptions ' . $options . ']';
     }
 }

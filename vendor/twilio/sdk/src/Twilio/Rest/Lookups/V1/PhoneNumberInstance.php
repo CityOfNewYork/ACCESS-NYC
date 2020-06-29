@@ -28,16 +28,15 @@ class PhoneNumberInstance extends InstanceResource {
     /**
      * Initialize the PhoneNumberInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $phoneNumber The phone number to fetch in E.164 format
-     * @return \Twilio\Rest\Lookups\V1\PhoneNumberInstance
      */
-    public function __construct(Version $version, array $payload, $phoneNumber = null) {
+    public function __construct(Version $version, array $payload, string $phoneNumber = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'callerName' => Values::array_get($payload, 'caller_name'),
             'countryCode' => Values::array_get($payload, 'country_code'),
             'phoneNumber' => Values::array_get($payload, 'phone_number'),
@@ -45,19 +44,18 @@ class PhoneNumberInstance extends InstanceResource {
             'carrier' => Values::array_get($payload, 'carrier'),
             'addOns' => Values::array_get($payload, 'add_ons'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array('phoneNumber' => $phoneNumber ?: $this->properties['phoneNumber'], );
+        $this->solution = ['phoneNumber' => $phoneNumber ?: $this->properties['phoneNumber'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Lookups\V1\PhoneNumberContext Context for this
-     *                                                    PhoneNumberInstance
+     * @return PhoneNumberContext Context for this PhoneNumberInstance
      */
-    protected function proxy() {
+    protected function proxy(): PhoneNumberContext {
         if (!$this->context) {
             $this->context = new PhoneNumberContext($this->version, $this->solution['phoneNumber']);
         }
@@ -66,13 +64,13 @@ class PhoneNumberInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a PhoneNumberInstance
+     * Fetch the PhoneNumberInstance
      *
      * @param array|Options $options Optional Arguments
      * @return PhoneNumberInstance Fetched PhoneNumberInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch($options = array()) {
+    public function fetch(array $options = []): PhoneNumberInstance {
         return $this->proxy()->fetch($options);
     }
 
@@ -83,7 +81,7 @@ class PhoneNumberInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -101,8 +99,8 @@ class PhoneNumberInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

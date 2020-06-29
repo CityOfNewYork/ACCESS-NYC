@@ -50,20 +50,21 @@ abstract class WPML_Page_Builders_Register_Strings {
 
 		$this->string_location = 1;
 
-		$data = get_post_meta( $post->ID, $this->data_settings->get_meta_field(), false );
+		if ( $this->data_settings->is_handling_post( $post->ID ) ) {
+			$data = get_post_meta( $post->ID, $this->data_settings->get_meta_field(), false );
 
-		if ( $data ) {
-			$converted = $this->data_settings->convert_data_to_array( $data );
-			if ( is_array( $converted ) ) {
-				$this->register_strings_for_modules(
-					$converted,
-					$package
-				);
+			if ( $data ) {
+				$converted = $this->data_settings->convert_data_to_array( $data );
+				if ( is_array( $converted ) ) {
+					$this->register_strings_for_modules(
+						$converted,
+						$package
+					);
+				}
 			}
 		}
 
 		do_action( 'wpml_delete_unused_package_strings', $package );
-
 	}
 
 	/**

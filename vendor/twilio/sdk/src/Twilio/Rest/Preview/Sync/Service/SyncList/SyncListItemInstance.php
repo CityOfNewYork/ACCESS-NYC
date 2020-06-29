@@ -12,6 +12,7 @@ namespace Twilio\Rest\Preview\Sync\Service\SyncList;
 use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
+use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -33,18 +34,17 @@ class SyncListItemInstance extends InstanceResource {
     /**
      * Initialize the SyncListItemInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid The service_sid
      * @param string $listSid The list_sid
      * @param int $index The index
-     * @return \Twilio\Rest\Preview\Sync\Service\SyncList\SyncListItemInstance
      */
-    public function __construct(Version $version, array $payload, $serviceSid, $listSid, $index = null) {
+    public function __construct(Version $version, array $payload, string $serviceSid, string $listSid, int $index = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'index' => Values::array_get($payload, 'index'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'serviceSid' => Values::array_get($payload, 'service_sid'),
@@ -55,22 +55,22 @@ class SyncListItemInstance extends InstanceResource {
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'createdBy' => Values::array_get($payload, 'created_by'),
-        );
+        ];
 
-        $this->solution = array(
+        $this->solution = [
             'serviceSid' => $serviceSid,
             'listSid' => $listSid,
             'index' => $index ?: $this->properties['index'],
-        );
+        ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Preview\Sync\Service\SyncList\SyncListItemContext Context for this SyncListItemInstance
+     * @return SyncListItemContext Context for this SyncListItemInstance
      */
-    protected function proxy() {
+    protected function proxy(): SyncListItemContext {
         if (!$this->context) {
             $this->context = new SyncListItemContext(
                 $this->version,
@@ -84,34 +84,36 @@ class SyncListItemInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a SyncListItemInstance
+     * Fetch the SyncListItemInstance
      *
      * @return SyncListItemInstance Fetched SyncListItemInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): SyncListItemInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the SyncListItemInstance
+     * Delete the SyncListItemInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @param array|Options $options Optional Arguments
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->proxy()->delete();
+    public function delete(array $options = []): bool {
+        return $this->proxy()->delete($options);
     }
 
     /**
      * Update the SyncListItemInstance
      *
      * @param array $data The data
+     * @param array|Options $options Optional Arguments
      * @return SyncListItemInstance Updated SyncListItemInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($data) {
-        return $this->proxy()->update($data);
+    public function update(array $data, array $options = []): SyncListItemInstance {
+        return $this->proxy()->update($data, $options);
     }
 
     /**
@@ -121,7 +123,7 @@ class SyncListItemInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -139,8 +141,8 @@ class SyncListItemInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

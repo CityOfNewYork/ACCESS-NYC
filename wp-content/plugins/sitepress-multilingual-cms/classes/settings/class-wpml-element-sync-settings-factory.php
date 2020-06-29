@@ -14,7 +14,7 @@ class WPML_Element_Sync_Settings_Factory {
 	 * @return WPML_Element_Sync_Settings
 	 * @throws Exception
 	 */
-	public function create( $type ) {
+	public static function create( $type ) {
 		/** @var SitePress $sitepress */
 		global $sitepress;
 
@@ -27,5 +27,13 @@ class WPML_Element_Sync_Settings_Factory {
 		}
 
 		return new WPML_Element_Sync_Settings( $settings );
+	}
+
+	public static function createPost() {
+		return self::create( self::POST );
+	}
+
+	public static function createTax() {
+		return self::create( self::TAX );
 	}
 }

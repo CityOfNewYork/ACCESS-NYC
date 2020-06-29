@@ -14,8 +14,6 @@ class XPath {
 	 * @return array
 	 */
 	public static function normalize( $data ) {
-		$data = is_string( $data ) ? array( 'value' => $data ) : $data;
-
 		if ( isset( $data['attr']['type'] ) ) {
 			$data['value'] = [
 				'value' => $data['value'],

@@ -10,7 +10,7 @@ class WPML_Beaver_Builder_Integration_Factory {
 			array(
 				'WPML_PB_Beaver_Builder_Handle_Custom_Fields_Factory',
 				'WPML_Beaver_Builder_Media_Hooks_Factory',
-				'WPML_Beaver_Builder_Cleanup_Hooks_Factory',
+				\WPML\PB\BeaverBuilder\TranslationJob\Hooks::class,
 			)
 		);
 

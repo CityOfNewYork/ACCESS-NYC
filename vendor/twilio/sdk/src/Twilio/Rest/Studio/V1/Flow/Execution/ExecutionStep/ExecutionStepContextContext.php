@@ -18,39 +18,28 @@ class ExecutionStepContextContext extends InstanceContext {
     /**
      * Initialize the ExecutionStepContextContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $flowSid The SID of the Flow
      * @param string $executionSid The SID of the Execution
      * @param string $stepSid Step SID
-     * @return \Twilio\Rest\Studio\V1\Flow\Execution\ExecutionStep\ExecutionStepContextContext
      */
     public function __construct(Version $version, $flowSid, $executionSid, $stepSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'flowSid' => $flowSid,
-            'executionSid' => $executionSid,
-            'stepSid' => $stepSid,
-        );
+        $this->solution = ['flowSid' => $flowSid, 'executionSid' => $executionSid, 'stepSid' => $stepSid, ];
 
         $this->uri = '/Flows/' . \rawurlencode($flowSid) . '/Executions/' . \rawurlencode($executionSid) . '/Steps/' . \rawurlencode($stepSid) . '/Context';
     }
 
     /**
-     * Fetch a ExecutionStepContextInstance
+     * Fetch the ExecutionStepContextInstance
      *
      * @return ExecutionStepContextInstance Fetched ExecutionStepContextInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): ExecutionStepContextInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new ExecutionStepContextInstance(
             $this->version,
@@ -66,8 +55,8 @@ class ExecutionStepContextContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

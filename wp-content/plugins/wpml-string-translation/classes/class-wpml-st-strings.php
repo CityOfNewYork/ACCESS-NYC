@@ -75,6 +75,8 @@ class WPML_ST_Strings {
 		if ( $status_filter !== false ) {
 			if ( $status_filter == ICL_TM_COMPLETE ) {
 				$extra_cond .= " AND s.status = " . ICL_TM_COMPLETE;
+			} elseif ( $status_filter == ICL_STRING_TRANSLATION_PARTIAL ) {
+				$extra_cond .= " AND s.status = " . ICL_STRING_TRANSLATION_PARTIAL;
 			} elseif ( $status_filter != ICL_TM_WAITING_FOR_TRANSLATOR ) {
 				$extra_cond .= " AND s.status IN (" . ICL_STRING_TRANSLATION_PARTIAL . "," . ICL_TM_NEEDS_UPDATE . "," . ICL_TM_NOT_TRANSLATED . "," . ICL_TM_WAITING_FOR_TRANSLATOR . ")";
 			}

@@ -4,7 +4,7 @@ Contributors: johnbillion, scompt
 Tags: cron, wp-cron, crontrol, debug  
 Requires at least: 4.1  
 Tested up to: 5.4  
-Stable tag: 1.8.3  
+Stable tag: 1.8.5  
 Requires PHP: 5.3  
 
 WP Crontrol lets you view and control what's happening in the WP-Cron system.
@@ -32,17 +32,13 @@ The admin screen will show you a warning message if your cron system doesn't app
 
 Cron schedules are used by WordPress and plugins for scheduling events to be executed at regular intervals. Intervals must be provided by the WordPress core or a plugin in order to be used. As an example, many backup plugins provide support for periodic backups. In order to do a weekly backup, a weekly cron schedule must be entered into WP Crontrol first and then a backup plugin can take advantage of it as an interval.
 
-### How do I create a new PHP cron event? ###
-
-In the Tools → Cron Events admin panel, click on the "Add PHP Cron Event" tab underneath the cron event table. In the form that appears, enter the schedule and next run time in the boxes. The event schedule is how often your event will be executed. If you don't see a good interval, then add one in the Settings → Cron Schedules admin panel. In the "Hook code" area, enter the PHP code that should be run when your cron event is executed. You don't need to provide the PHP opening tag (`<?php`).
-
-### How do I create a new regular cron event? ###
+### How do I create a new cron event? ###
 
 There are two steps to getting a functioning cron event that executes regularly. The first step is telling WordPress about the hook. This is the part that WP Crontrol was created to provide. The second step is calling a function when your hook is executed.
 
 *Step One: Adding the hook*
 
-In the Tools → Cron Events admin panel, enter the details of the hook. You're best off having a hookname that conforms to normal PHP variable naming conventions. The event schedule is how often your hook will be executed. If you don't see a good interval, then add one in the Settings → Cron Schedules admin panel.
+In the Tools → Cron Events admin panel, click on the "Add Cron Event" tab and enter the details of the hook. You're best off having a hookname that conforms to normal PHP variable naming conventions. The event schedule is how often your hook will be executed. If you don't see a good interval, then add one in the Settings → Cron Schedules admin panel.
 
 *Step Two: Writing the function*
 
@@ -56,13 +52,21 @@ The next step is to write your function. Here's a simple example:
 		wp_mail( 'hello@example.com', 'WP Crontrol', 'WP Crontrol rocks!' );
 	}
 
+### How do I create a new PHP cron event? ###
+
+In the Tools → Cron Events admin panel, click on the "Add PHP Cron Event" tab. In the form that appears, enter the schedule and next run time in the boxes. The event schedule is how often your event will be executed. If you don't see a good interval, then add one in the Settings → Cron Schedules admin panel. In the "Hook code" area, enter the PHP code that should be run when your cron event is executed. You don't need to provide the PHP opening tag (`<?php`).
+
 ### Which users can manage cron events and schedules? ###
 
 Only users with the `manage_options` capability can manage cron events and schedules. By default, only Administrators have this capability.
 
-### Which users can manage PHP cron events? ###
+### Which users can manage PHP cron events? Is this dangerous? ###
 
-Only users with the `edit_files` capability can manage PHP cron events. By default, only Administrators have this capability, and with Multisite enabled only Super Admins have this capability.
+Only users with the `edit_files` capability can manage PHP cron events. This means if a user cannot edit files on the site (eg. through the Plugin Editor or Theme Editor) then they cannot edit or add a PHP cron event. By default, only Administrators have this capability, and with Multisite enabled only Super Admins have this capability.
+
+If file editing has been disabled via the `DISALLOW_FILE_MODS` or `DISALLOW_FILE_EDIT` configuration constants then no user will have the `edit_files` capability, which means editing or adding a PHP cron event will not be permitted.
+
+Therefore, the user access level required to execute arbitrary PHP code does not change with WP Crontrol activated.
 
 ### Are any WP-CLI commands available? ###
 
@@ -75,6 +79,15 @@ The cron commands which were previously included in WP Crontrol are now part of 
 2. New cron schedules can be added, giving plugin developers more options when scheduling events<br>![](.wordpress-org/screenshot-2.png)
 
 ## Changelog ##
+
+### 1.8.5 ###
+
+* Fix an issue with the tabs in 1.8.4.
+
+### 1.8.4 ###
+
+* Add a warning message if the default timezone has been changed. <a href="https://github.com/johnbillion/wp-crontrol/wiki/PHP-default-timezone-is-not-set-to-UTC">More information</a>.
+* Fixed string being passed to `strtotime()` function when the `Now` option is chosen when adding or editing an event.
 
 ### 1.8.3 ###
 

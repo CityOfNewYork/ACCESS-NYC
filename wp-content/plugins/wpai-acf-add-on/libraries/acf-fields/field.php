@@ -488,7 +488,7 @@ abstract class Field implements FieldInterface {
                 }
             }
         }
-        return $value;
+        return trim($value);
     }
 
     /**

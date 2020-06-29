@@ -3,8 +3,11 @@
 // Core-js is made available as a dependency of @babel/preset-env
 import 'core-js/features/array/includes';
 
-import Tooltips from 'elements/tooltips/tooltips';
+// Core Modules
 import Screener from 'modules/screener';
+
+// Patterns Framework
+import Tooltips from 'utilities/tooltips/tooltips';
 
 import 'main';
 

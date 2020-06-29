@@ -11,6 +11,7 @@ if (!current_user_can('upload_files'))
 	wp_die( esc_html__('You do not have permission to upload files.', 'enable-media-replace') );
 
 
+
 /*require_once('classes/replacer.php');
 require_once('classes/file.php'); */
 
@@ -21,28 +22,23 @@ global $wpdb;
 $table_name = $wpdb->prefix . "posts";
 $postmeta_table_name = $wpdb->prefix . "postmeta";
 
-
 // Starts processing.
 $uihelper = new UIHelper();
 
 // Get old guid and filetype from DB
 $post_id = intval($_POST['ID']); // sanitize, post_id.
-$replacer = new replacer($post_id);
+$replacer = new Replacer($post_id);
 
 // Massage a bunch of vars
 $ID = intval($_POST["ID"]); // legacy
 $replace_type = isset($_POST["replace_type"]) ? sanitize_text_field($_POST["replace_type"]) : false;
 $timestamp_replace = intval($_POST['timestamp_replace']);
 
-$current_file = get_attached_file($post_id, apply_filters( 'emr_unfiltered_get_attached_file', true ));
-$current_path = substr($current_file, 0, (strrpos($current_file, "/")));
-$current_file = preg_replace("|(?<!:)/{2,}|", "/", $current_file); // @todo what does this mean?
-$current_filename = wp_basename($current_file);
-$current_metadata = wp_get_attachment_metadata( $post_id );
-
-
 $redirect_error = $uihelper->getFailedRedirect($post_id);
 $redirect_success = $uihelper->getSuccesRedirect($post_id);
+
+$do_new_location  = isset($_POST['new_location']) ? sanitize_text_field($_POST['new_location']) : false;
+$new_location_dir = isset($_POST['location_dir']) ? sanitize_text_field($_POST['location_dir']) : null;
 
 switch($timestamp_replace)
 {
@@ -81,10 +77,22 @@ switch($timestamp_replace)
 if ($replace_type == 'replace')
 {
 	$replacer->setMode(\EnableMediaReplace\Replacer::MODE_REPLACE);
+	$mode = \EnableMediaReplace\Replacer::MODE_REPLACE;
 }
 elseif ( 'replace_and_search' == $replace_type && apply_filters( 'emr_enable_replace_and_search', true ) )
 {
 	$replacer->setMode(\EnableMediaReplace\Replacer::MODE_SEARCHREPLACE);
+	$mode = \EnableMediaReplace\Replacer::MODE_SEARCHREPLACE;
+
+	if ($do_new_location && ! is_null($new_location_dir))
+	{
+		 $result = $replacer->setNewTargetLocation($new_location_dir);
+		 if (! $result)
+		 {
+		 	 wp_safe_redirect($redirect_error);
+			 exit();
+		 }
+	}
 }
 
 $replacer->setTimeMode($timestamp_replace, $datetime);
@@ -106,7 +114,8 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		 exit();
 	}
 
-	if ($filedata["ext"] == "") {
+
+	if ($filedata["ext"] == false) {
 
 		Notices::addError(esc_html__("File type does not meet security guidelines. Try another.", 'enable-media-replace') );
 		wp_safe_redirect($redirect_error);
@@ -114,34 +123,38 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 	}
 
 	// Here we have the uploaded file
-
-	//$thumbUpdater = new ThumbnailUpdater($ID);
-	//$thumbUpdater->setOldMetadata($current_metadata);
-
 	$new_filename = $_FILES["userfile"]["name"];
 	//$new_filesize = $_FILES["userfile"]["size"]; // Seems not to be in use.
 	$new_filetype = $filedata["type"];
 
-	// save original file permissions
-	//$original_file_perms = fileperms($current_file) & 0777;
-
 	// Gather all functions that both options do.
 	do_action('wp_handle_replace', array('post_id' => $post_id));
 
+
+/*	if ($mode = \EnableMediaReplace\Replacer::MODE_SEARCHREPLACE && $do_new_location && ! is_null($new_location_dir))
+	{
+		exit($new_filename);
+		 $newdirfile = $replacer->newTargetLocation($new_location_dir);
+	}
+*/
 	try
 	{
-		$replacer->replaceWith($_FILES["userfile"]["tmp_name"], $new_filename);
+		$result = $replacer->replaceWith($_FILES["userfile"]["tmp_name"], $new_filename);
 	}
 	catch(\RunTimeException $e)
 	{
 		Log::addError($e->getMessage());
-	  exit($e->getMessage());
+	//  exit($e->getMessage());
 	}
 
-	$returnurl = admin_url("/post.php?post={$_POST["ID"]}&action=edit&message=1");
+	if (is_null($result))
+	{
+		 wp_safe_redirect($redirect_error);
+		 exit();
+  }
+//	$returnurl = admin_url("/post.php?post={$_POST["ID"]}&action=edit&message=1");
 
 	// Execute hook actions - thanks rubious for the suggestion!
-	//if (isset($new_guid)) { do_action("enable-media-replace-upload-done", $new_guid, $current_guid); }
 
 } else {
 	//TODO Better error handling when no file is selected.

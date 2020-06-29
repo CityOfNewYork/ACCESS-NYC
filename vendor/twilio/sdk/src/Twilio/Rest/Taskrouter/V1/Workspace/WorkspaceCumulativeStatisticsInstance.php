@@ -43,16 +43,15 @@ class WorkspaceCumulativeStatisticsInstance extends InstanceResource {
     /**
      * Initialize the WorkspaceCumulativeStatisticsInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $workspaceSid The SID of the Workspace
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\WorkspaceCumulativeStatisticsInstance
      */
-    public function __construct(Version $version, array $payload, $workspaceSid) {
+    public function __construct(Version $version, array $payload, string $workspaceSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'avgTaskAcceptanceTime' => Values::array_get($payload, 'avg_task_acceptance_time'),
             'startTime' => Deserialize::dateTime(Values::array_get($payload, 'start_time')),
@@ -74,19 +73,19 @@ class WorkspaceCumulativeStatisticsInstance extends InstanceResource {
             'tasksTimedOutInWorkflow' => Values::array_get($payload, 'tasks_timed_out_in_workflow'),
             'workspaceSid' => Values::array_get($payload, 'workspace_sid'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array('workspaceSid' => $workspaceSid, );
+        $this->solution = ['workspaceSid' => $workspaceSid, ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\WorkspaceCumulativeStatisticsContext Context for this
-     *                                                                                   WorkspaceCumulativeStatisticsInstance
+     * @return WorkspaceCumulativeStatisticsContext Context for this
+     *                                              WorkspaceCumulativeStatisticsInstance
      */
-    protected function proxy() {
+    protected function proxy(): WorkspaceCumulativeStatisticsContext {
         if (!$this->context) {
             $this->context = new WorkspaceCumulativeStatisticsContext(
                 $this->version,
@@ -98,14 +97,14 @@ class WorkspaceCumulativeStatisticsInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a WorkspaceCumulativeStatisticsInstance
+     * Fetch the WorkspaceCumulativeStatisticsInstance
      *
      * @param array|Options $options Optional Arguments
      * @return WorkspaceCumulativeStatisticsInstance Fetched
      *                                               WorkspaceCumulativeStatisticsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch($options = array()) {
+    public function fetch(array $options = []): WorkspaceCumulativeStatisticsInstance {
         return $this->proxy()->fetch($options);
     }
 
@@ -116,7 +115,7 @@ class WorkspaceCumulativeStatisticsInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -134,8 +133,8 @@ class WorkspaceCumulativeStatisticsInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

@@ -9,7 +9,7 @@
  * @author Blue State Digital
  */
 
-require_once Path\controller('alert');
+require_once ACCESS\controller('alert');
 
 /**
  * Enqueue

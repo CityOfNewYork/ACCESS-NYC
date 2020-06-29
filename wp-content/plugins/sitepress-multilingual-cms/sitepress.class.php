@@ -78,6 +78,9 @@ class SitePress extends WPML_WPDB_User implements
 	public $icl_term_taxonomy_cache;
 	private $wpml_helper;
 
+	/** @var WPML_Term_Adjust_Id */
+	private $wpml_term_adjust_id = null;
+
 	/**
 	 * @var array $current_request_data - Use to store temporary information during the current request
 	 */
@@ -575,7 +578,7 @@ class SitePress extends WPML_WPDB_User implements
 						 ->constant( 'DOING_AJAX' )
 			) {
 				add_filter( 'get_term', array( $this, 'get_term_adjust_id' ), 1, 1 );
-				add_filter( 'category_link', array( $this, 'category_link_adjust_id' ), 1, 2 );
+				add_action( 'edited_term', array( $this, 'edited_term_action' ) );
 				add_filter( 'get_pages', array( $this, 'get_pages_adjust_ids' ), 1, 2 );
 			}
 		}
@@ -1072,8 +1075,10 @@ class SitePress extends WPML_WPDB_User implements
 			$active_languages = $this->get_languages();
 		}
 
-		return isset( $active_languages[ $language ] ) || ( 'all' === $language && $this->get_wp_api()
-																						->is_admin() );
+		$is_wp_cli_request = defined( 'WP_CLI' ) && WP_CLI;
+		$is_admin          = $this->get_wp_api()->is_admin();
+
+		return isset( $active_languages[ $language ] ) || ( 'all' === $language && ( $is_admin || $is_wp_cli_request ) );
 	}
 
 	private function set_this_lang( $new_value ) {
@@ -1211,7 +1216,7 @@ class SitePress extends WPML_WPDB_User implements
 
 			$this->scripts_handler->add_admin_hooks();
 
-			if ( isset( $_SERVER['SCRIPT_NAME'] ) && ( strpos( $_SERVER['SCRIPT_NAME'], 'post-new.php' ) || strpos( $_SERVER['SCRIPT_NAME'], 'post.php' ) ) ) {
+			if ( $this->is_post_edit_script_allowed() ) {
 				wp_register_script( 'sitepress-post-edit-tags', ICL_PLUGIN_URL . '/res/js/post-edit-terms.js', array( 'jquery' ) );
 				$post_edit_messages = array(
 					'switch_language_title'   => __( 'You are about to change the language of {post_name}.', 'sitepress' ),
@@ -1292,6 +1297,14 @@ class SitePress extends WPML_WPDB_User implements
 			wp_enqueue_style( 'wpml-select-2', ICL_PLUGIN_URL . '/lib/select2/select2.css' );
 
 		}
+	}
+
+	private function is_post_edit_script_allowed() {
+		return (
+			isset( $_SERVER['SCRIPT_NAME'] ) &&
+			( strpos( $_SERVER['SCRIPT_NAME'], 'post-new.php' ) || strpos( $_SERVER['SCRIPT_NAME'], 'post.php' ) ) ||
+			apply_filters( 'wpml_enable_language_meta_box', false )
+		);
 	}
 
 	function backend_js( $setup_complete = true ) {
@@ -2946,7 +2959,7 @@ class SitePress extends WPML_WPDB_User implements
 		);
 		if ( $parameters_copied ) {
 			foreach ( $_GET as $k => $v ) {
-				if ( in_array( $k, $parameters_copied ) ) {
+				if ( in_array( $k, $parameters_copied, true ) ) {
 					$gets_passed[ $k ] = $v;
 				}
 			}
@@ -3133,15 +3146,23 @@ class SitePress extends WPML_WPDB_User implements
 	public function get_term_adjust_id( $term ) {
 		global $icl_adjust_id_url_filter_off, $wpml_term_translations, $wpml_post_translations;
 
-		$term_adjust_id = new WPML_Term_Adjust_Id(
-			new WPML_Debug_BackTrace( null, 15 ),
-			$wpml_term_translations,
-			$wpml_post_translations,
-			$icl_adjust_id_url_filter_off,
-			$this
-		);
+		if ( ! $this->wpml_term_adjust_id ) {
+			$this->wpml_term_adjust_id = new WPML_Term_Adjust_Id(
+				new WPML_Debug_BackTrace( null, 15 ),
+				$wpml_term_translations,
+				$wpml_post_translations,
+				$this
+			);
+		}
 
-		return $term_adjust_id->filter( $term );
+		return $this->wpml_term_adjust_id->filter(
+			$term,
+			$icl_adjust_id_url_filter_off
+		);
+	}
+
+	public function edited_term_action() {
+		WPML_Non_Persistent_Cache::flush_group( [ 'WPML_Term_Adjust_Id' ] );
 	}
 
 	function get_pages_adjust_ids( $pages, $args ) {
@@ -3197,23 +3218,6 @@ class SitePress extends WPML_WPDB_User implements
 		$args[ $index ] = implode( ',', $translated_ids );
 
 		return $args;
-	}
-
-	function category_link_adjust_id( $catlink, $cat_id ) {
-		/** @var WPML_Term_Translation $wpml_term_translations */
-		global $icl_adjust_id_url_filter_off, $wpml_term_translations;
-		if ( $icl_adjust_id_url_filter_off ) {
-			return $catlink; // special cases when we need the category in a different language
-		}
-
-		$translated_id = $wpml_term_translations->term_id_in( $cat_id, $this->this_lang );
-		if ( $translated_id && $translated_id != $cat_id ) {
-			remove_filter( 'category_link', array( $this, 'category_link_adjust_id' ), 1 );
-			$catlink = get_category_link( $translated_id );
-			add_filter( 'category_link', array( $this, 'category_link_adjust_id' ), 1, 2 );
-		}
-
-		return $catlink;
 	}
 
 	// feeds links

@@ -18,7 +18,7 @@ class PayloadContext extends InstanceContext {
     /**
      * Initialize the PayloadContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $accountSid The SID of the Account that created the resource
      *                           to fetch
      * @param string $referenceSid The SID of the recording to which the
@@ -27,36 +27,29 @@ class PayloadContext extends InstanceContext {
      * @param string $addOnResultSid The SID of the AddOnResult to which the
      *                               payload to fetch belongs
      * @param string $sid The unique string that identifies the resource to fetch
-     * @return \Twilio\Rest\Api\V2010\Account\Recording\AddOnResult\PayloadContext
      */
     public function __construct(Version $version, $accountSid, $referenceSid, $addOnResultSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
+        $this->solution = [
             'accountSid' => $accountSid,
             'referenceSid' => $referenceSid,
             'addOnResultSid' => $addOnResultSid,
             'sid' => $sid,
-        );
+        ];
 
         $this->uri = '/Accounts/' . \rawurlencode($accountSid) . '/Recordings/' . \rawurlencode($referenceSid) . '/AddOnResults/' . \rawurlencode($addOnResultSid) . '/Payloads/' . \rawurlencode($sid) . '.json';
     }
 
     /**
-     * Fetch a PayloadInstance
+     * Fetch the PayloadInstance
      *
      * @return PayloadInstance Fetched PayloadInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): PayloadInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new PayloadInstance(
             $this->version,
@@ -69,13 +62,13 @@ class PayloadContext extends InstanceContext {
     }
 
     /**
-     * Deletes the PayloadInstance
+     * Delete the PayloadInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -83,8 +76,8 @@ class PayloadContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

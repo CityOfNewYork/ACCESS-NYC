@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Collect\Support\Collection;
+
 class WPML_Display_As_Translated_Tax_Query implements IWPML_Action {
 
 	// Regex to find the term query.
@@ -14,9 +16,9 @@ class WPML_Display_As_Translated_Tax_Query implements IWPML_Action {
 	/** @var WPML_Term_Translation $term_translation */
 	private $term_translation;
 
-	public function __construct( SitePress $sitepress, WPML_Term_Translation $term_translatoin ) {
+	public function __construct( SitePress $sitepress, WPML_Term_Translation $term_translation ) {
 		$this->sitepress        = $sitepress;
-		$this->term_translation = $term_translatoin;
+		$this->term_translation = $term_translation;
 	}
 
 	public function add_hooks() {
@@ -35,7 +37,7 @@ class WPML_Display_As_Translated_Tax_Query implements IWPML_Action {
 			if ( $this->is_display_as_translated_mode( $post_types ) ) {
 				$terms          = $this->find_terms( $where );
 				$fallback_terms = $this->get_fallback_terms( $terms );
-				$where          = $this->add_fallback_terms_to_where_clause( $where, $fallback_terms );
+				$where          = $this->add_fallback_terms_to_where_clause( $where, $fallback_terms, $q );
 			}
 		}
 
@@ -125,15 +127,16 @@ class WPML_Display_As_Translated_Tax_Query implements IWPML_Action {
 	}
 
 	/**
-	 * @param string $where
-	 * @param $fallback_terms
+	 * @param string   $where
+	 * @param array    $fallback_terms
+	 * @param WP_Query $q
 	 *
 	 * @return string
 	 */
-	private function add_fallback_terms_to_where_clause( $where, $fallback_terms ) {
+	private function add_fallback_terms_to_where_clause( $where, $fallback_terms, WP_Query $q ) {
 		if ( preg_match_all( self::TERM_REGEX, $where, $matches ) ) {
 			foreach ( $matches[2] as $index => $terms_string ) {
-				$new_terms_string = $this->add_fallback_terms( $terms_string, $fallback_terms );
+				$new_terms_string = $this->add_fallback_terms( $terms_string, $fallback_terms, $q );
 				$original_block   = $matches[0][ $index ];
 				$new_block        = str_replace( '(' . $terms_string . ')', '(' . $new_terms_string . ')', $original_block );
 				$where            = str_replace( $original_block, $new_block, $where );
@@ -144,19 +147,32 @@ class WPML_Display_As_Translated_Tax_Query implements IWPML_Action {
 	}
 
 	/**
-	 * @param string $terms_string
-	 * @param array $fallback_terms
+	 * @param string   $terms_string
+	 * @param array    $fallback_terms
+	 * @param WP_Query $q
 	 *
 	 * @return string
 	 */
-	private function add_fallback_terms( $terms_string, $fallback_terms ) {
-		$terms = explode( ',', $terms_string );
-		foreach ( $terms as $term ) {
-			if ( isset( $fallback_terms[ $term ] ) ) {
-				$terms[] = $fallback_terms[ $term ];
-			}
-		}
+	private function add_fallback_terms( $terms_string, $fallback_terms, WP_Query $q ) {
+		$mergeFallbackTerms = function ( $term ) use ( $fallback_terms ) {
+			return isset( $fallback_terms[ $term ] ) ? [ $term, $fallback_terms[ $term ] ] : $term;
+		};
 
-		return implode( ',', $terms );
+		$queriedObject = $q->get_queried_object();
+		$taxonomy      = isset( $queriedObject->taxonomy ) ? $queriedObject->taxonomy : null;
+
+		$mergeChildren = $taxonomy ?
+			function ( $term ) use ( $taxonomy ) {
+				return [ $term, get_term_children( $term, $taxonomy ) ];
+			} :
+			function ( $term ) { return $term; };
+
+		return wpml_collect( explode( ',', $terms_string ) )
+			->map( $mergeFallbackTerms )
+			->flatten()
+			->map( $mergeChildren )
+			->flatten()
+			->unique()
+			->implode( ',' );
 	}
 }

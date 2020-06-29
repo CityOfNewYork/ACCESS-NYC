@@ -17,6 +17,9 @@ class WPML_Term_Clauses {
 	/** @var WPML_Debug_BackTrace $debug_backtrace */
 	private $debug_backtrace;
 
+	/** @var array  */
+	private $cache = null;
+
 	/**
 	 * WPML_Term_Clauses constructor.
 	 *
@@ -78,6 +81,8 @@ class WPML_Term_Clauses {
 		$clauses['join']  .= " LEFT JOIN {$this->wpdb->prefix}icl_translations icl_t
                                     ON icl_t.element_id = tt.term_taxonomy_id
                                         AND icl_t.element_type IN ({$icl_taxonomies})";
+
+		$clauses = $this->maybe_apply_count_adjustment( $clauses );
 		$clauses['where'] .= " AND ( ( icl_t.element_type IN ({$icl_taxonomies}) {$where_lang} )
                                     OR icl_t.element_type NOT IN ({$icl_taxonomies}) OR icl_t.element_type IS NULL ) ";
 
@@ -99,17 +104,54 @@ class WPML_Term_Clauses {
 	}
 
 	/**
+	 * @param array $clauses
+	 *
+	 * @return array
+	 */
+	private function maybe_apply_count_adjustment( $clauses ) {
+		if ( $this->should_apply_display_as_translated_adjustments() ) {
+			return $this->display_as_translated_query->update_count(
+				$clauses,
+				$this->sitepress->get_default_language()
+			);
+		}
+
+		return $clauses;
+	}
+
+	/**
 	 * @param string $current_language
 	 * @param string $fallback_language
 	 *
 	 * @return string
 	 */
 	private function get_display_as_translated_snippet( $current_language, $fallback_language ) {
-		$taxonomies = $this->sitepress->get_display_as_translated_taxonomies();
-		if ( $taxonomies && ( ! is_admin() || WPML_Ajax::is_frontend_ajax_request() ) ) {
-			return $this->display_as_translated_query->get_language_snippet( $current_language, $fallback_language, $taxonomies );
-		} else {
-			return '0';
+		if ( $this->should_apply_display_as_translated_adjustments() ) {
+			return $this->display_as_translated_query->get_language_snippet(
+				$current_language,
+				$fallback_language,
+				$this->get_display_as_translated_taxonomies()
+			);
 		}
+
+		return '0';
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function should_apply_display_as_translated_adjustments() {
+		return $this->get_display_as_translated_taxonomies() && ( ! is_admin() || WPML_Ajax::is_frontend_ajax_request() );
+	}
+
+	/**
+	 * @return array
+	 */
+	private function get_display_as_translated_taxonomies() {
+		if ( $this->cache === null ) {
+			$this->cache = $this->sitepress->get_display_as_translated_taxonomies();
+		}
+
+		return $this->cache;
 	}
 }

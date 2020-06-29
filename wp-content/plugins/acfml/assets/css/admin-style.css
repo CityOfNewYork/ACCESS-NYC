@@ -1,3 +1,8 @@
 .acfml-not-migrated {
     color: red;
 }
+
+.wpml_acf_original_value {
+    margin-top: 5px;
+    color: #999;
+}

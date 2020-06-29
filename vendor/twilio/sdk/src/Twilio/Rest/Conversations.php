@@ -21,14 +21,12 @@ use Twilio\Rest\Conversations\V1;
  * @method \Twilio\Rest\Conversations\V1\WebhookContext webhooks()
  */
 class Conversations extends Domain {
-    protected $_v1 = null;
+    protected $_v1;
 
     /**
      * Construct the Conversations Domain
      *
-     * @param \Twilio\Rest\Client $client Twilio\Rest\Client to communicate with
-     *                                    Twilio
-     * @return \Twilio\Rest\Conversations Domain for Conversations
+     * @param Client $client Client to communicate with Twilio
      */
     public function __construct(Client $client) {
         parent::__construct($client);
@@ -37,9 +35,9 @@ class Conversations extends Domain {
     }
 
     /**
-     * @return \Twilio\Rest\Conversations\V1 Version v1 of conversations
+     * @return V1 Version v1 of conversations
      */
-    protected function getV1() {
+    protected function getV1(): V1 {
         if (!$this->_v1) {
             $this->_v1 = new V1($this);
         }
@@ -53,7 +51,7 @@ class Conversations extends Domain {
      * @return \Twilio\Version The requested version
      * @throws TwilioException For unknown versions
      */
-    public function __get($name) {
+    public function __get(string $name) {
         $method = 'get' . \ucfirst($name);
         if (\method_exists($this, $method)) {
             return $this->$method();
@@ -70,42 +68,32 @@ class Conversations extends Domain {
      * @return \Twilio\InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments) {
         $method = 'context' . \ucfirst($name);
         if (\method_exists($this, $method)) {
-            return \call_user_func_array(array($this, $method), $arguments);
+            return \call_user_func_array([$this, $method], $arguments);
         }
 
         throw new TwilioException('Unknown context ' . $name);
     }
 
-    /**
-     * @return \Twilio\Rest\Conversations\V1\ConversationList
-     */
-    protected function getConversations() {
+    protected function getConversations(): \Twilio\Rest\Conversations\V1\ConversationList {
         return $this->v1->conversations;
     }
 
     /**
      * @param string $sid A 34 character string that uniquely identifies this
      *                    resource.
-     * @return \Twilio\Rest\Conversations\V1\ConversationContext
      */
-    protected function contextConversations($sid) {
+    protected function contextConversations(string $sid): \Twilio\Rest\Conversations\V1\ConversationContext {
         return $this->v1->conversations($sid);
     }
 
-    /**
-     * @return \Twilio\Rest\Conversations\V1\WebhookList
-     */
-    protected function getWebhooks() {
+    protected function getWebhooks(): \Twilio\Rest\Conversations\V1\WebhookList {
         return $this->v1->webhooks;
     }
 
-    /**
-     * @return \Twilio\Rest\Conversations\V1\WebhookContext
-     */
-    protected function contextWebhooks() {
+    protected function contextWebhooks(): \Twilio\Rest\Conversations\V1\WebhookContext {
         return $this->v1->webhooks();
     }
 
@@ -114,7 +102,7 @@ class Conversations extends Domain {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Conversations]';
     }
 }

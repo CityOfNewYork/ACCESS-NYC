@@ -19,3 +19,44 @@
     min-width: 243px;
   }
 }
+
+.llar-notice-review {
+  display: flex;
+  padding: 15px 20px 0 !important;
+  border-left: 4px solid #333 !important;
+
+  .llar-review-image {
+    img {
+      margin-top: 10px;
+    }
+  }
+  .llar-review-info {
+    flex: 1;
+    margin-left: 30px;
+
+    .llar-buttons {
+      display: flex;
+      align-items: center;
+
+      li {
+        margin-right: 10px;
+
+        .dashicons {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.llar-accordion {
+  .ui-accordion-header {
+    font-weight: bold;
+    background-color: #778899;
+    color: #fff;
+
+    &.ui-accordion-header-active {
+      background-color: #87CEFA;
+    }
+  }
+}

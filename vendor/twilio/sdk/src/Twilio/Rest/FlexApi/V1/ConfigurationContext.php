@@ -19,54 +19,42 @@ class ConfigurationContext extends InstanceContext {
     /**
      * Initialize the ConfigurationContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
-     * @return \Twilio\Rest\FlexApi\V1\ConfigurationContext
+     * @param Version $version Version that contains the resource
      */
     public function __construct(Version $version) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array();
+        $this->solution = [];
 
         $this->uri = '/Configuration';
     }
 
     /**
-     * Fetch a ConfigurationInstance
+     * Fetch the ConfigurationInstance
      *
      * @param array|Options $options Optional Arguments
      * @return ConfigurationInstance Fetched ConfigurationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch($options = array()) {
+    public function fetch(array $options = []): ConfigurationInstance {
         $options = new Values($options);
 
-        $params = Values::of(array('UiVersion' => $options['uiVersion'], ));
+        $params = Values::of(['UiVersion' => $options['uiVersion'], ]);
 
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $payload = $this->version->fetch('GET', $this->uri, $params);
 
         return new ConfigurationInstance($this->version, $payload);
     }
 
     /**
-     * Create a new ConfigurationInstance
+     * Create the ConfigurationInstance
      *
-     * @return ConfigurationInstance Newly created ConfigurationInstance
+     * @return ConfigurationInstance Created ConfigurationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create() {
-        $data = Values::of(array());
-
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+    public function create(): ConfigurationInstance {
+        $payload = $this->version->create('POST', $this->uri);
 
         return new ConfigurationInstance($this->version, $payload);
     }
@@ -77,15 +65,8 @@ class ConfigurationContext extends InstanceContext {
      * @return ConfigurationInstance Updated ConfigurationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update() {
-        $data = Values::of(array());
-
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+    public function update(): ConfigurationInstance {
+        $payload = $this->version->update('POST', $this->uri);
 
         return new ConfigurationInstance($this->version, $payload);
     }
@@ -95,8 +76,8 @@ class ConfigurationContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

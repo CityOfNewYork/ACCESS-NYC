@@ -33,20 +33,19 @@ class FieldValueInstance extends InstanceResource {
     /**
      * Initialize the FieldValueInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $assistantSid The SID of the Assistant that is the parent of
      *                             the FieldType associated with the resource
      * @param string $fieldTypeSid The SID of the Field Type associated with the
      *                             Field Value
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\FieldType\FieldValueInstance
      */
-    public function __construct(Version $version, array $payload, $assistantSid, $fieldTypeSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $assistantSid, string $fieldTypeSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
@@ -57,22 +56,22 @@ class FieldValueInstance extends InstanceResource {
             'value' => Values::array_get($payload, 'value'),
             'url' => Values::array_get($payload, 'url'),
             'synonymOf' => Values::array_get($payload, 'synonym_of'),
-        );
+        ];
 
-        $this->solution = array(
+        $this->solution = [
             'assistantSid' => $assistantSid,
             'fieldTypeSid' => $fieldTypeSid,
             'sid' => $sid ?: $this->properties['sid'],
-        );
+        ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Autopilot\V1\Assistant\FieldType\FieldValueContext Context for this FieldValueInstance
+     * @return FieldValueContext Context for this FieldValueInstance
      */
-    protected function proxy() {
+    protected function proxy(): FieldValueContext {
         if (!$this->context) {
             $this->context = new FieldValueContext(
                 $this->version,
@@ -86,22 +85,22 @@ class FieldValueInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a FieldValueInstance
+     * Fetch the FieldValueInstance
      *
      * @return FieldValueInstance Fetched FieldValueInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): FieldValueInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the FieldValueInstance
+     * Delete the FieldValueInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
@@ -112,7 +111,7 @@ class FieldValueInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -130,8 +129,8 @@ class FieldValueInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

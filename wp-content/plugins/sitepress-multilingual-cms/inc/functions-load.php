@@ -342,10 +342,13 @@ function wpml_get_hierarchy_sync_helper( $type = 'post' ) {
 function wpml_maybe_setup_post_edit() {
 	global $pagenow, $sitepress, $post_edit_screen;
 
-	if ( in_array( $pagenow, array( 'post.php', 'post-new.php', 'edit.php' ), true ) || defined( 'DOING_AJAX' )
+	if (
+		in_array( $pagenow, [ 'post.php', 'post-new.php', 'edit.php' ], true ) ||
+		defined( 'DOING_AJAX' ) ||
+		apply_filters( 'wpml_enable_language_meta_box', false )
 	) {
 		$post_edit_screen = new WPML_Post_Edit_Screen( $sitepress );
-		add_action( 'admin_head', array( $sitepress, 'post_edit_language_options' ) );
+		add_action( 'admin_head', [ $sitepress, 'post_edit_language_options' ] );
 	}
 }
 

@@ -12,9 +12,6 @@ namespace Twilio\Rest\Video\V1;
 use Twilio\Options;
 use Twilio\Values;
 
-/**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
- */
 abstract class CompositionSettingsOptions {
     /**
      * @param string $awsCredentialsSid The SID of the stored Credential resource
@@ -28,7 +25,7 @@ abstract class CompositionSettingsOptions {
      *                                an encrypted form
      * @return CreateCompositionSettingsOptions Options builder
      */
-    public static function create($awsCredentialsSid = Values::NONE, $encryptionKeySid = Values::NONE, $awsS3Url = Values::NONE, $awsStorageEnabled = Values::NONE, $encryptionEnabled = Values::NONE) {
+    public static function create(string $awsCredentialsSid = Values::NONE, string $encryptionKeySid = Values::NONE, string $awsS3Url = Values::NONE, bool $awsStorageEnabled = Values::NONE, bool $encryptionEnabled = Values::NONE): CreateCompositionSettingsOptions {
         return new CreateCompositionSettingsOptions($awsCredentialsSid, $encryptionKeySid, $awsS3Url, $awsStorageEnabled, $encryptionEnabled);
     }
 }
@@ -45,7 +42,7 @@ class CreateCompositionSettingsOptions extends Options {
      * @param bool $encryptionEnabled Whether all compositions should be stored in
      *                                an encrypted form
      */
-    public function __construct($awsCredentialsSid = Values::NONE, $encryptionKeySid = Values::NONE, $awsS3Url = Values::NONE, $awsStorageEnabled = Values::NONE, $encryptionEnabled = Values::NONE) {
+    public function __construct(string $awsCredentialsSid = Values::NONE, string $encryptionKeySid = Values::NONE, string $awsS3Url = Values::NONE, bool $awsStorageEnabled = Values::NONE, bool $encryptionEnabled = Values::NONE) {
         $this->options['awsCredentialsSid'] = $awsCredentialsSid;
         $this->options['encryptionKeySid'] = $encryptionKeySid;
         $this->options['awsS3Url'] = $awsS3Url;
@@ -59,7 +56,7 @@ class CreateCompositionSettingsOptions extends Options {
      * @param string $awsCredentialsSid The SID of the stored Credential resource
      * @return $this Fluent Builder
      */
-    public function setAwsCredentialsSid($awsCredentialsSid) {
+    public function setAwsCredentialsSid(string $awsCredentialsSid): self {
         $this->options['awsCredentialsSid'] = $awsCredentialsSid;
         return $this;
     }
@@ -71,19 +68,19 @@ class CreateCompositionSettingsOptions extends Options {
      *                                 for encryption
      * @return $this Fluent Builder
      */
-    public function setEncryptionKeySid($encryptionKeySid) {
+    public function setEncryptionKeySid(string $encryptionKeySid): self {
         $this->options['encryptionKeySid'] = $encryptionKeySid;
         return $this;
     }
 
     /**
-     * The URL of the AWS S3 bucket where the compositions should be stored. We only support DNS-compliant URLs like `http://<my-bucket>.s3-<aws-region>.amazonaws.com/compositions`, where `compositions` is the path in which you want the compositions to be stored.
+     * The URL of the AWS S3 bucket where the compositions should be stored. We only support DNS-compliant URLs like `https://<my-bucket>.s3-<aws-region>.amazonaws.com/compositions`, where `compositions` is the path in which you want the compositions to be stored. This URL accepts only URI-valid characters, as described in the <a href='https://tools.ietf.org/html/rfc3986#section-2'>RFC 3986</a>.
      *
      * @param string $awsS3Url The URL of the AWS S3 bucket where the compositions
      *                         should be stored
      * @return $this Fluent Builder
      */
-    public function setAwsS3Url($awsS3Url) {
+    public function setAwsS3Url(string $awsS3Url): self {
         $this->options['awsS3Url'] = $awsS3Url;
         return $this;
     }
@@ -95,7 +92,7 @@ class CreateCompositionSettingsOptions extends Options {
      *                                the aws_s3_url
      * @return $this Fluent Builder
      */
-    public function setAwsStorageEnabled($awsStorageEnabled) {
+    public function setAwsStorageEnabled(bool $awsStorageEnabled): self {
         $this->options['awsStorageEnabled'] = $awsStorageEnabled;
         return $this;
     }
@@ -107,7 +104,7 @@ class CreateCompositionSettingsOptions extends Options {
      *                                an encrypted form
      * @return $this Fluent Builder
      */
-    public function setEncryptionEnabled($encryptionEnabled) {
+    public function setEncryptionEnabled(bool $encryptionEnabled): self {
         $this->options['encryptionEnabled'] = $encryptionEnabled;
         return $this;
     }
@@ -117,13 +114,8 @@ class CreateCompositionSettingsOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Video.V1.CreateCompositionSettingsOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Video.V1.CreateCompositionSettingsOptions ' . $options . ']';
     }
 }

@@ -21,10 +21,12 @@ class EnableMediaReplacePlugin
       self::$instance = new EnableMediaReplacePlugin();
 
     $log = Log::getInstance();
-    $uploaddir =wp_upload_dir();
-    if (isset($uploaddir['basedir']))
-      $log->setLogPath($uploaddir['basedir'] . "/emr_log");
-      
+    if (Log::debugIsActive())
+    {
+      $uploaddir = wp_upload_dir(null, false, false);
+      if (isset($uploaddir['basedir']))
+        $log->setLogPath($uploaddir['basedir'] . "/emr_log");
+    }
     return self::$instance;
   }
 
@@ -51,7 +53,7 @@ class EnableMediaReplacePlugin
     add_action('wp_ajax_emr_dismiss_notices', array($this,'dismiss_notices'));
 
     // editors
-    add_action( 'add_meta_boxes', function () { add_meta_box('emr-eplace-box', __('Replace Image', 'enable-media-replace'), array($this, 'replace_meta_box'), 'attachment', 'side', 'low'); }  );
+    add_action( 'add_meta_boxes', function () { add_meta_box('emr-replace-box', __('Replace Media', 'enable-media-replace'), array($this, 'replace_meta_box'), 'attachment', 'side', 'low'); }  );
     add_filter('attachment_fields_to_edit', array($this, 'attachment_editor'), 10, 2);
 
     // shortcode
@@ -63,9 +65,10 @@ class EnableMediaReplacePlugin
       add_filter('wp_get_attachment_image_src',array($this, 'attempt_uncache_image'),  10, 4);
 
       // adds a metabox to list thumbnails. This is a cache reset hidden as feature.
-      add_action( 'add_meta_boxes', function () { add_meta_box('emr-replace-box', __('Replaced Thumbnails Preview', 'enable-media-replace'), array($this, 'show_thumbs_box'), 'attachment', 'side', 'low'); }  );
-      add_filter('postbox_classes_attachment_emr-replace-box', function($classes) { $classes[] = 'closed'; return $classes; });
+      add_action( 'add_meta_boxes', function () { add_meta_box('emr-showthumbs-box', __('Replaced Thumbnails Preview', 'enable-media-replace'), array($this, 'show_thumbs_box'), 'attachment', 'side', 'low'); }  );
+      add_filter('postbox_classes_attachment_emr-showthumbs-box', function($classes) { $classes[] = 'closed'; return $classes; });
     }
+
 
   }
 
@@ -75,7 +78,8 @@ class EnableMediaReplacePlugin
    */
   public function menu()
   {
-  	add_submenu_page(null, esc_html__("Replace media", "enable-media-replace"), esc_html__("Replace media", "enable-media-replace"), 'upload_files', 'enable-media-replace/enable-media-replace', array($this, 'route'));
+  	/* add_submenu_page(null, esc_html__("Replace media", "enable-media-replace"), esc_html__("Replace media", "enable-media-replace"), 'upload_files', 'enable-media-replace/enable-media-replace', array($this, 'route'));  */
+    add_submenu_page(null, esc_html__("Replace media", "enable-media-replace"), esc_html__("Replace media", "enable-media-replace"), 'upload_files', 'enable-media-replace/enable-media-replace', array($this, 'route'));
   }
 
   /**
@@ -133,6 +137,11 @@ class EnableMediaReplacePlugin
 
   }
 
+  public function getPluginURL($path = '')
+  {
+     return plugins_url($path, EMR_ROOT_FILE);
+  }
+
   /** register styles and scripts
   *
   * Nothing should ever by -enqueued- here, just registered.
@@ -149,10 +158,13 @@ class EnableMediaReplacePlugin
 
     wp_register_style('emr_edit-attachment', plugins_url('css/edit_attachment.css', EMR_ROOT_FILE));
 
-    wp_register_script('emr_admin', plugins_url('js/emr_admin.js', EMR_ROOT_FILE), array('jquery'), false, true );
+    $mimes = array_values(get_allowed_mime_types());
+
+    wp_register_script('emr_admin', plugins_url('js/emr_admin.js', EMR_ROOT_FILE), array('jquery'), EMR_VERSION, true );
     $emr_options = array(
         'dateFormat' => $this->convertdate(get_option( 'date_format' )),
         'maxfilesize' => wp_max_upload_size(),
+        'allowed_mime' => $mimes,
 
     );
 
@@ -203,6 +215,7 @@ class EnableMediaReplacePlugin
 
   public function replace_meta_box($post)
   {
+
     $url = $this->getMediaReplaceURL($post->ID);
 
     $action = "media_replace";
@@ -229,6 +242,20 @@ class EnableMediaReplacePlugin
       return false;
     }
 
+    if (function_exists('wp_get_original_image_url')) // indicating WP 5.3+
+    {
+      $source_url = wp_get_original_image_url($post->ID);
+      // oldway will give -scaled in case of scaling.
+      $source_url_oldway = wp_get_attachment_url($post->ID);
+
+      if ($source_url !== $source_url_oldway)
+      {
+        echo "<div class='original previewwrapper'><img src='" . $source_url_oldway . "'><span class='label'>" . __('Original') . "</span></div>";
+      }
+
+    }
+
+
     foreach($meta['sizes'] as $size => $data)
     {
       $display_size = ucfirst(str_replace("_", " ", $size));
@@ -239,6 +266,15 @@ class EnableMediaReplacePlugin
 
   public function attachment_editor($form_fields, $post)
   {
+      $screen = null;
+      if (function_exists('get_current_screen'))
+      {
+        $screen = get_current_screen();
+
+        if(! is_null($screen) && $screen->id == 'attachment') // hide on edit attachment screen.
+          return $form_fields;
+      }
+
       $url = $this->getMediaReplaceURL($post->ID);
       $action = "media_replace";
       $editurl = wp_nonce_url( $url, $action );
@@ -247,8 +283,9 @@ class EnableMediaReplacePlugin
       $form_fields["enable-media-replace"] = array(
               "label" => esc_html__("Replace media", "enable-media-replace"),
               "input" => "html",
-              "html" => "<p><a class='button-secondary' $link>" . esc_html__("Upload a new file", "enable-media-replace") . "</a></p>", "helps" => esc_html__("To replace the current file, click the link and upload a replacement.", "enable-media-replace")
+              "html" => "<a class='button-secondary' $link>" . esc_html__("Upload a new file", "enable-media-replace") . "</a>", "helps" => esc_html__("To replace the current file, click the link and upload a replacement.", "enable-media-replace")
             );
+
       return $form_fields;
   }
 
@@ -322,17 +359,28 @@ class EnableMediaReplacePlugin
       return false;
 
     $post_id = $post->ID;
-  	if ( $post->post_modified == $post->post_date ) {
-  		return;
-  	}
+  	if ( $post->post_modified !== $post->post_date ) {
 
-  	$modified = date_i18n( __( 'M j, Y @ H:i' ) , strtotime( $post->post_modified ) );
+    	$modified = date_i18n( __( 'M j, Y @ H:i' ) , strtotime( $post->post_modified ) );
+    	?>
+    	<div class="misc-pub-section curtime">
+    		<span id="timestamp"><?php echo esc_html__( 'Revised', 'enable-media-replace' ); ?>: <b><?php echo $modified; ?></b></span>
+    	</div>
 
-  	?>
-  	<div class="misc-pub-section curtime">
-  		<span id="timestamp"><?php echo esc_html__( 'Revised', 'enable-media-replace' ); ?>: <b><?php echo $modified; ?></b></span>
-  	</div>
   	<?php
+    }
+    $author_id = get_post_meta($post_id, '_emr_replace_author', true);
+
+    if ($author_id)
+    {
+      $display_name = get_the_author_meta('display_name', $author_id);
+      ?>
+      <div class="misc-pub-section replace_author">
+        <span><?php echo esc_html__( 'Replaced By', 'enable-media-replace' ); ?>: <b><?php echo $display_name; ?></b></span>
+      </div>
+      <?php
+    }
+
   }
 
   /** When an image is just replaced, it can stuck in the browser cache making a look like it was not replaced. Try

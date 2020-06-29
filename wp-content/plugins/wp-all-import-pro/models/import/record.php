@@ -307,9 +307,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 						do_action( 'pmxi_before_xml_import', $this->id );
 						
 					}					
-					
+
 					// compose data to look like result of wizard steps									
-					if( $this->queue_chunk_number and $this->processing == 0 ) {
+					if( ($this->queue_chunk_number or !empty($force_cron_processing)) and $this->processing == 0 ) {
 
                         $records = array();
 
@@ -335,14 +335,22 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 						@set_time_limit(0);
 
                         $processing_time_limit = (PMXI_Plugin::getInstance()->getOption('cron_processing_time_limit')) ? PMXI_Plugin::getInstance()->getOption('cron_processing_time_limit') : 59;
-                        $start_rocessing_time = time();
-
+                        // Do not limit process time on command line.
+                        if (PMXI_Plugin::getInstance()->isCli()) {
+                            $processing_time_limit = time();
+                        }
+                        $start_processing_time = time();
+                        $progress = NULL;
+                        if (PMXI_Plugin::getInstance()->isCli() && class_exists('WP_CLI')) {
+                            $custom_type = get_post_type_object( $this->options['custom_type'] );
+                            $progress = \WP_CLI\Utils\make_progress_bar( 'Importing ' . $custom_type->labels->name, $records_to_import );
+                        }
 						if ( (int) $this->imported + (int) $this->skipped <= (int) $records_to_import ) {
 							$file = new PMXI_Chunk($filePath, array('element' => $this->root_element, 'encoding' => $this->options['encoding'], 'pointer' => $this->queue_chunk_number));
 							$feed = "<?xml version=\"1.0\" encoding=\"". $this->options['encoding'] ."\"?>" . "\n" . "<pmxi_records>";
 						    $loop = 0;
 						    $chunk_number = $this->queue_chunk_number;
-						    while ($xml = $file->read() and $this->processing == 1 and (time() - $start_rocessing_time) <= $processing_time_limit ) {
+						    while ($xml = $file->read() and $this->processing == 1 and (time() - $start_processing_time) <= $processing_time_limit ) {
 						    	if (!empty($xml)) {
 						    		$chunk_number++;
 						    		$xml_chunk = "<?xml version=\"1.0\" encoding=\"". $this->options['encoding'] ."\"?>" . "\n" . $xml;
@@ -361,7 +369,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
 							    if ( $loop > 0 and ( $loop == (int) $this->options['records_per_request'] or $records_to_import == (int) $this->imported + (int) $this->skipped or $records_to_import == $loop + (int) $this->imported + (int) $this->skipped or $records_to_import == $chunk_number) ) { // skipping scheduled imports if any for the next hit
 							    	$feed .= "</pmxi_records>";
-                                    $this->process($feed, $logger, $chunk_number, $cron, '/pmxi_records', $loop);
+                                    $this->process($feed, $logger, $chunk_number, $cron, '/pmxi_records', $loop, $progress);
+
 							    	// set last update
 							    	$this->set(array(
 										'registered_on' => date('Y-m-d H:i:s'),
@@ -529,7 +538,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
                                             $count_deleted_missing_records += count($ids);
 
-                                            if ( (time() - $start_rocessing_time) > $processing_time_limit ) {
+                                            if ( (time() - $start_processing_time) > $processing_time_limit ) {
                                                 $this->set(array(
                                                     'processing' => 0
                                                 ))->update();
@@ -704,7 +713,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 	 * @return PMXI_Import_Record
 	 * @chainable
 	 */
-	public function process($xml, $logger = NULL, $chunk = false, $is_cron = false, $xpath_prefix = '', $loop = 0) {
+	public function process($xml, $logger = NULL, $chunk = false, $is_cron = false, $xpath_prefix = '', $loop = 0, $progress = NULL) {
 
 		add_filter('user_has_cap', array($this, '_filter_has_cap_unfiltered_html')); kses_init(); // do not perform special filtering for imported content
 
@@ -1555,6 +1564,11 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                 //$errorHandler = new PMXI_Error($this->imported + $this->skipped + $i + 1);
 
                 //set_error_handler( array($errorHandler, 'import_data_handler'), E_ALL | E_STRICT | E_WARNING );
+
+                // Handle CLI progress bar.
+                if ($progress) {
+                    $progress->tick();
+                }
 
                 switch ($this->options['custom_type']) {
                     case 'taxonomies':
@@ -2456,6 +2470,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                         update_option('wp_all_import_posts_hierarchy_' . $this->id, $parent_posts);
                     }
 
+                    $is_images_to_update = apply_filters('pmxi_is_images_to_update', true, $articleData, $current_xml_node, $pid);
+
 					if ("manual" != $this->options['duplicate_matching'] or empty($articleData['ID'])){
 						// associate post with import												
 						$product_key = (($post_type[$i] == "product" and PMXI_Admin_Addons::get_addon('PMWI_Plugin')) ? $addons_data['PMWI_Plugin']['single_product_ID'][$i] : '');
@@ -2519,13 +2535,17 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
                             $existing_meta = $existing_meta_keys;
 
-							/*$import_entry = ( $this->options['custom_type'] == 'import_users') ? 'user' : 'post';
-							$meta_table = _get_meta_table( $import_entry );*/
+                            $exclude_fields = ['_wp_old_slug'];
+                            // Do not delete post meta for features image.
+                            if (!$is_images_to_update || $this->options['is_keep_former_posts'] == 'yes' || $this->options['update_all_data'] == 'no' && (empty($this->options['is_update_images']) || $this->options['update_images_logic'] != 'full_update')) {
+                                $exclude_fields[] = '_thumbnail_id';
+                                $exclude_fields[] = '_product_image_gallery';
+                            }
+
 							// delete keys which are no longer correspond to import settings																														
 							foreach ($existing_meta_keys as $cur_meta_key => $cur_meta_val) {
-								
-								// Do not delete post meta for features image 
-								if ( in_array($cur_meta_key, array('_thumbnail_id', '_product_image_gallery', '_wp_old_slug')) ) continue;
+
+								if ( in_array($cur_meta_key, $exclude_fields) ) continue;
 								
 								$user_fields = array(
 									'first_name',
@@ -2577,7 +2597,6 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                             delete_post_meta($pid, $cur_meta_key);
                                             break;
                                     }
-                                    unset($existing_meta_keys[$cur_meta_key]);
 									$show_log and $logger and call_user_func($logger, sprintf(__('- Custom field %s has been deleted for `%s` attempted to `update all custom fields` setting ...', 'wp_all_import_plugin'), $cur_meta_key, $articleData['post_title']));
 								}
 								// Leave these fields alone, update all other Custom Fields
@@ -2596,7 +2615,6 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                 delete_post_meta($pid, $cur_meta_key);
                                                 break;
                                         }
-                                        unset($existing_meta_keys[$cur_meta_key]);
 										$show_log and $logger and call_user_func($logger, sprintf(__('- Custom field %s has been deleted for `%s` attempted to `leave these fields alone: %s, update all other Custom Fields` setting ...', 'wp_all_import_plugin'), $cur_meta_key, $articleData['post_title'], implode(',', $this->options['custom_fields_list'])));
 									}									
 								}
@@ -2616,7 +2634,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 						'is_cron' => $is_cron,
 						'logger' => $logger,
 						'xpath_prefix' => $xpath_prefix,
-						'post_type' => $post_type[$i]
+						'post_type' => $post_type[$i],
+                        'current_xml_node' => $current_xml_node
 					);
 
 					$import_functions = apply_filters('wp_all_import_addon_import', array());
@@ -2657,17 +2676,20 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 							);
 
 							$meta_fields = array();
-
+                            // get existing keys after add-ons import completed
                             switch ($this->options['custom_type']){
 								case 'import_users':
 								case 'shop_customer':
                                     $meta_type = 'user';
+                                    $existing_meta_keys = get_user_meta($pid, '');
                                     break;
                                 case 'taxonomies':
                                     $meta_type = 'term';
+                                    $existing_meta_keys = get_term_meta($pid, '');
                                     break;
                                 default:
                                     $meta_type = 'post';
+                                    $existing_meta_keys = get_post_meta($pid, '');
                                     break;
                             }
 
@@ -2943,7 +2965,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                     if ($image_info) {
                                         // Create an attachment.
                                         $file_mime_type = '';
-                                        if (!empty($image_info)) {
+                                        if (!empty($image_info) && is_array($image_info)) {
                                             $file_mime_type = image_type_to_mime_type($image_info[2]);
                                         }
                                         $file_mime_type = apply_filters('wp_all_import_image_mime_type', $file_mime_type, $image_filepath);
@@ -3006,7 +3028,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                         update_post_meta($attid, '_wp_attachment_image_alt', trim($image_alt));
                                         $this->wpdb->update( $this->wpdb->posts, $update_attachment_meta, array('ID' => $attid) );
                                     }
-                                    if (empty($featuredImage)) {
+                                    if (empty($featuredImage) && $is_images_to_update) {
                                         $featuredImage = $attid;
                                     }
                                 }
@@ -3015,8 +3037,6 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                             $this->wpdb->update( $this->wpdb->posts, array('post_content' => $articleData['post_content']), array('ID' => $pid) );
                         }
                     }
-
-					$is_images_to_update = apply_filters('pmxi_is_images_to_update', true, $articleData, $current_xml_node, $pid);
 
 					if ( ! in_array($this->options['custom_type'], array('shop_order', 'import_users', 'shop_customer')) ) {
 						$logger and call_user_func($logger, __('<b>IMAGES:</b>', 'wp_all_import_plugin'));
@@ -3372,7 +3392,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 													$file_mime_type = '';
 
 													if ($bundle_data['type'] == 'images') {
-														if ( ! empty($image_info) ) {
+														if ( ! empty($image_info) && is_array($image_info) ) {
 															$file_mime_type = image_type_to_mime_type($image_info[2]);
 														}														
 														$file_mime_type = apply_filters('wp_all_import_image_mime_type', $file_mime_type, $image_filepath);
@@ -3386,7 +3406,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 														'url'  => $targetUrl . '/' . $image_filename,
 														'type' => $file_mime_type
 													));
-													
+
 													$attid = $this->createAttachment($pid, $handle_image, $image_name, $post_author[$i], $post_type[$i], $is_cron, $logger, $bundle_data['type']);
 
                                                     // save image into images table

@@ -20,7 +20,7 @@ abstract class SubscribeRulesOptions {
      * @param array $rules A JSON-encoded array of subscribe rules
      * @return UpdateSubscribeRulesOptions Options builder
      */
-    public static function update($rules = Values::NONE) {
+    public static function update(array $rules = Values::ARRAY_NONE): UpdateSubscribeRulesOptions {
         return new UpdateSubscribeRulesOptions($rules);
     }
 }
@@ -29,7 +29,7 @@ class UpdateSubscribeRulesOptions extends Options {
     /**
      * @param array $rules A JSON-encoded array of subscribe rules
      */
-    public function __construct($rules = Values::NONE) {
+    public function __construct(array $rules = Values::ARRAY_NONE) {
         $this->options['rules'] = $rules;
     }
 
@@ -39,7 +39,7 @@ class UpdateSubscribeRulesOptions extends Options {
      * @param array $rules A JSON-encoded array of subscribe rules
      * @return $this Fluent Builder
      */
-    public function setRules($rules) {
+    public function setRules(array $rules): self {
         $this->options['rules'] = $rules;
         return $this;
     }
@@ -49,13 +49,8 @@ class UpdateSubscribeRulesOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Video.V1.UpdateSubscribeRulesOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Video.V1.UpdateSubscribeRulesOptions ' . $options . ']';
     }
 }

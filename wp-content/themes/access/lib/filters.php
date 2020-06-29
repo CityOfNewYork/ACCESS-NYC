@@ -6,8 +6,6 @@
  * @author NYC Opportunity
  */
 
-namespace Filters;
-
 use Timber;
 
 /**

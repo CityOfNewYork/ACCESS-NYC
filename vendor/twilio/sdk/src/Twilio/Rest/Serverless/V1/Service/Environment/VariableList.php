@@ -11,6 +11,7 @@ namespace Twilio\Rest\Serverless\V1\Service\Environment;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -26,13 +27,12 @@ class VariableList extends ListResource {
      *                           is associated with
      * @param string $environmentSid The SID of the environment in which the
      *                               variable exists
-     * @return \Twilio\Rest\Serverless\V1\Service\Environment\VariableList
      */
-    public function __construct(Version $version, $serviceSid, $environmentSid) {
+    public function __construct(Version $version, string $serviceSid, string $environmentSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'environmentSid' => $environmentSid, );
+        $this->solution = ['serviceSid' => $serviceSid, 'environmentSid' => $environmentSid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Environments/' . \rawurlencode($environmentSid) . '/Variables';
     }
@@ -53,9 +53,9 @@ class VariableList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
         $page = $this->page($limits['pageSize']);
@@ -78,7 +78,7 @@ class VariableList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return VariableInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
+    public function read(int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($limit, $pageSize), false);
     }
 
@@ -89,20 +89,12 @@ class VariableList extends ListResource {
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of VariableInstance
+     * @return VariablePage Page of VariableInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page($pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): VariablePage {
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new VariablePage($this->version, $response, $this->solution);
     }
@@ -112,9 +104,9 @@ class VariableList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of VariableInstance
+     * @return VariablePage Page of VariableInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): VariablePage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -124,22 +116,17 @@ class VariableList extends ListResource {
     }
 
     /**
-     * Create a new VariableInstance
+     * Create the VariableInstance
      *
      * @param string $key A string by which the Variable resource can be referenced
      * @param string $value A string that contains the actual value of the variable
-     * @return VariableInstance Newly created VariableInstance
+     * @return VariableInstance Created VariableInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($key, $value) {
-        $data = Values::of(array('Key' => $key, 'Value' => $value, ));
+    public function create(string $key, string $value): VariableInstance {
+        $data = Values::of(['Key' => $key, 'Value' => $value, ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new VariableInstance(
             $this->version,
@@ -153,9 +140,8 @@ class VariableList extends ListResource {
      * Constructs a VariableContext
      *
      * @param string $sid The SID of the Variable resource to fetch
-     * @return \Twilio\Rest\Serverless\V1\Service\Environment\VariableContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): VariableContext {
         return new VariableContext(
             $this->version,
             $this->solution['serviceSid'],
@@ -169,7 +155,7 @@ class VariableList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Serverless.V1.VariableList]';
     }
 }

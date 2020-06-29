@@ -11,6 +11,8 @@ namespace Twilio\Rest\Authy\V1;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
+use Twilio\Options;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -22,33 +24,31 @@ class ServiceList extends ListResource {
      * Construct the ServiceList
      *
      * @param Version $version Version that contains the resource
-     * @return \Twilio\Rest\Authy\V1\ServiceList
      */
     public function __construct(Version $version) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array();
+        $this->solution = [];
 
         $this->uri = '/Services';
     }
 
     /**
-     * Create a new ServiceInstance
+     * Create the ServiceInstance
      *
      * @param string $friendlyName A human readable description of this resource.
-     * @return ServiceInstance Newly created ServiceInstance
+     * @param array|Options $options Optional Arguments
+     * @return ServiceInstance Created ServiceInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($friendlyName) {
-        $data = Values::of(array('FriendlyName' => $friendlyName, ));
+    public function create(string $friendlyName, array $options = []): ServiceInstance {
+        $options = new Values($options);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $data = Values::of(['FriendlyName' => $friendlyName, 'Push' => $options['push'], ]);
+        $headers = Values::of(['Twilio-Sandbox-Mode' => $options['twilioSandboxMode'], ]);
+
+        $payload = $this->version->create('POST', $this->uri, [], $data, $headers);
 
         return new ServiceInstance($this->version, $payload);
     }
@@ -61,6 +61,7 @@ class ServiceList extends ListResource {
      * The results are returned as a generator, so this operation is memory
      * efficient.
      *
+     * @param array|Options $options Optional Arguments
      * @param int $limit Upper limit for the number of records to return. stream()
      *                   guarantees to never return more than limit.  Default is no
      *                   limit
@@ -69,12 +70,12 @@ class ServiceList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(array $options = [], int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
-        $page = $this->page($limits['pageSize']);
+        $page = $this->page($options, $limits['pageSize']);
 
         return $this->version->stream($page, $limits['limit'], $limits['pageLimit']);
     }
@@ -84,6 +85,7 @@ class ServiceList extends ListResource {
      * Unlike stream(), this operation is eager and will load `limit` records into
      * memory before returning.
      *
+     * @param array|Options $options Optional Arguments
      * @param int $limit Upper limit for the number of records to return. read()
      *                   guarantees to never return more than limit.  Default is no
      *                   limit
@@ -94,31 +96,27 @@ class ServiceList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return ServiceInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
-        return \iterator_to_array($this->stream($limit, $pageSize), false);
+    public function read(array $options = [], int $limit = null, $pageSize = null): array {
+        return \iterator_to_array($this->stream($options, $limit, $pageSize), false);
     }
 
     /**
      * Retrieve a single page of ServiceInstance records from the API.
      * Request is executed immediately
      *
+     * @param array|Options $options Optional Arguments
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of ServiceInstance
+     * @return ServicePage Page of ServiceInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page(array $options = [], $pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): ServicePage {
+        $options = new Values($options);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
+        $headers = Values::of(['Twilio-Sandbox-Mode' => $options['twilioSandboxMode'], ]);
+
+        $response = $this->version->page('GET', $this->uri, $params, [], $headers);
 
         return new ServicePage($this->version, $response, $this->solution);
     }
@@ -128,9 +126,9 @@ class ServiceList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of ServiceInstance
+     * @return ServicePage Page of ServiceInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): ServicePage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -143,9 +141,8 @@ class ServiceList extends ListResource {
      * Constructs a ServiceContext
      *
      * @param string $sid A string that uniquely identifies this Service.
-     * @return \Twilio\Rest\Authy\V1\ServiceContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): ServiceContext {
         return new ServiceContext($this->version, $sid);
     }
 
@@ -154,7 +151,7 @@ class ServiceList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Authy.V1.ServiceList]';
     }
 }

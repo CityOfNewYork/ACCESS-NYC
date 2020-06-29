@@ -17,10 +17,6 @@ class WPML_Compatibility_Factory implements IWPML_Frontend_Action_Loader, IWPML_
 
 		$hooks['jetpack'] = new WPML_Compatibility_Jetpack();
 
-		if ( defined( 'ELEMENTOR_VERSION' ) ) {
-			$hooks['elementor'] = new WPML_PB_Fix_Maintenance_Query();
-		}
-
 		return $hooks;
 	}
 }

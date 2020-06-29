@@ -23,18 +23,17 @@ class ParticipantContext extends InstanceContext {
     /**
      * Initialize the ParticipantContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $conversationSid The unique id of the Conversation for this
      *                                participant.
      * @param string $sid A 34 character string that uniquely identifies this
      *                    resource.
-     * @return \Twilio\Rest\Conversations\V1\Conversation\ParticipantContext
      */
     public function __construct(Version $version, $conversationSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('conversationSid' => $conversationSid, 'sid' => $sid, );
+        $this->solution = ['conversationSid' => $conversationSid, 'sid' => $sid, ];
 
         $this->uri = '/Conversations/' . \rawurlencode($conversationSid) . '/Participants/' . \rawurlencode($sid) . '';
     }
@@ -46,21 +45,18 @@ class ParticipantContext extends InstanceContext {
      * @return ParticipantInstance Updated ParticipantInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): ParticipantInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'DateCreated' => Serialize::iso8601DateTime($options['dateCreated']),
             'DateUpdated' => Serialize::iso8601DateTime($options['dateUpdated']),
             'Attributes' => $options['attributes'],
-        ));
+            'RoleSid' => $options['roleSid'],
+        ]);
+        $headers = Values::of(['X-Twilio-Webhook-Enabled' => $options['xTwilioWebhookEnabled'], ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data, $headers);
 
         return new ParticipantInstance(
             $this->version,
@@ -71,29 +67,28 @@ class ParticipantContext extends InstanceContext {
     }
 
     /**
-     * Deletes the ParticipantInstance
+     * Delete the ParticipantInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @param array|Options $options Optional Arguments
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(array $options = []): bool {
+        $options = new Values($options);
+
+        $headers = Values::of(['X-Twilio-Webhook-Enabled' => $options['xTwilioWebhookEnabled'], ]);
+
+        return $this->version->delete('DELETE', $this->uri, [], [], $headers);
     }
 
     /**
-     * Fetch a ParticipantInstance
+     * Fetch the ParticipantInstance
      *
      * @return ParticipantInstance Fetched ParticipantInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): ParticipantInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new ParticipantInstance(
             $this->version,
@@ -108,8 +103,8 @@ class ParticipantContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

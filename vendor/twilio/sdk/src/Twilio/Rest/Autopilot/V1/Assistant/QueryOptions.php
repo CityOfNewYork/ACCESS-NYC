@@ -22,10 +22,12 @@ abstract class QueryOptions {
      * @param string $modelBuild The SID or unique name of the Model Build to be
      *                           queried
      * @param string $status The status of the resources to read
+     * @param string $dialogueSid The SID of the
+     *                            [Dialogue](https://www.twilio.com/docs/autopilot/api/dialogue).
      * @return ReadQueryOptions Options builder
      */
-    public static function read($language = Values::NONE, $modelBuild = Values::NONE, $status = Values::NONE) {
-        return new ReadQueryOptions($language, $modelBuild, $status);
+    public static function read(string $language = Values::NONE, string $modelBuild = Values::NONE, string $status = Values::NONE, string $dialogueSid = Values::NONE): ReadQueryOptions {
+        return new ReadQueryOptions($language, $modelBuild, $status, $dialogueSid);
     }
 
     /**
@@ -34,7 +36,7 @@ abstract class QueryOptions {
      *                           queried
      * @return CreateQueryOptions Options builder
      */
-    public static function create($tasks = Values::NONE, $modelBuild = Values::NONE) {
+    public static function create(string $tasks = Values::NONE, string $modelBuild = Values::NONE): CreateQueryOptions {
         return new CreateQueryOptions($tasks, $modelBuild);
     }
 
@@ -44,7 +46,7 @@ abstract class QueryOptions {
      * @param string $status The new status of the resource
      * @return UpdateQueryOptions Options builder
      */
-    public static function update($sampleSid = Values::NONE, $status = Values::NONE) {
+    public static function update(string $sampleSid = Values::NONE, string $status = Values::NONE): UpdateQueryOptions {
         return new UpdateQueryOptions($sampleSid, $status);
     }
 }
@@ -56,11 +58,14 @@ class ReadQueryOptions extends Options {
      * @param string $modelBuild The SID or unique name of the Model Build to be
      *                           queried
      * @param string $status The status of the resources to read
+     * @param string $dialogueSid The SID of the
+     *                            [Dialogue](https://www.twilio.com/docs/autopilot/api/dialogue).
      */
-    public function __construct($language = Values::NONE, $modelBuild = Values::NONE, $status = Values::NONE) {
+    public function __construct(string $language = Values::NONE, string $modelBuild = Values::NONE, string $status = Values::NONE, string $dialogueSid = Values::NONE) {
         $this->options['language'] = $language;
         $this->options['modelBuild'] = $modelBuild;
         $this->options['status'] = $status;
+        $this->options['dialogueSid'] = $dialogueSid;
     }
 
     /**
@@ -70,7 +75,7 @@ class ReadQueryOptions extends Options {
      *                         language used by the Query resources to read
      * @return $this Fluent Builder
      */
-    public function setLanguage($language) {
+    public function setLanguage(string $language): self {
         $this->options['language'] = $language;
         return $this;
     }
@@ -82,7 +87,7 @@ class ReadQueryOptions extends Options {
      *                           queried
      * @return $this Fluent Builder
      */
-    public function setModelBuild($modelBuild) {
+    public function setModelBuild(string $modelBuild): self {
         $this->options['modelBuild'] = $modelBuild;
         return $this;
     }
@@ -93,8 +98,20 @@ class ReadQueryOptions extends Options {
      * @param string $status The status of the resources to read
      * @return $this Fluent Builder
      */
-    public function setStatus($status) {
+    public function setStatus(string $status): self {
         $this->options['status'] = $status;
+        return $this;
+    }
+
+    /**
+     * The SID of the [Dialogue](https://www.twilio.com/docs/autopilot/api/dialogue).
+     *
+     * @param string $dialogueSid The SID of the
+     *                            [Dialogue](https://www.twilio.com/docs/autopilot/api/dialogue).
+     * @return $this Fluent Builder
+     */
+    public function setDialogueSid(string $dialogueSid): self {
+        $this->options['dialogueSid'] = $dialogueSid;
         return $this;
     }
 
@@ -103,14 +120,9 @@ class ReadQueryOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Autopilot.V1.ReadQueryOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Autopilot.V1.ReadQueryOptions ' . $options . ']';
     }
 }
 
@@ -120,7 +132,7 @@ class CreateQueryOptions extends Options {
      * @param string $modelBuild The SID or unique name of the Model Build to be
      *                           queried
      */
-    public function __construct($tasks = Values::NONE, $modelBuild = Values::NONE) {
+    public function __construct(string $tasks = Values::NONE, string $modelBuild = Values::NONE) {
         $this->options['tasks'] = $tasks;
         $this->options['modelBuild'] = $modelBuild;
     }
@@ -131,7 +143,7 @@ class CreateQueryOptions extends Options {
      * @param string $tasks The list of tasks to limit the new query to
      * @return $this Fluent Builder
      */
-    public function setTasks($tasks) {
+    public function setTasks(string $tasks): self {
         $this->options['tasks'] = $tasks;
         return $this;
     }
@@ -143,7 +155,7 @@ class CreateQueryOptions extends Options {
      *                           queried
      * @return $this Fluent Builder
      */
-    public function setModelBuild($modelBuild) {
+    public function setModelBuild(string $modelBuild): self {
         $this->options['modelBuild'] = $modelBuild;
         return $this;
     }
@@ -153,14 +165,9 @@ class CreateQueryOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Autopilot.V1.CreateQueryOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Autopilot.V1.CreateQueryOptions ' . $options . ']';
     }
 }
 
@@ -170,7 +177,7 @@ class UpdateQueryOptions extends Options {
      *                          created from the query
      * @param string $status The new status of the resource
      */
-    public function __construct($sampleSid = Values::NONE, $status = Values::NONE) {
+    public function __construct(string $sampleSid = Values::NONE, string $status = Values::NONE) {
         $this->options['sampleSid'] = $sampleSid;
         $this->options['status'] = $status;
     }
@@ -182,7 +189,7 @@ class UpdateQueryOptions extends Options {
      *                          created from the query
      * @return $this Fluent Builder
      */
-    public function setSampleSid($sampleSid) {
+    public function setSampleSid(string $sampleSid): self {
         $this->options['sampleSid'] = $sampleSid;
         return $this;
     }
@@ -193,7 +200,7 @@ class UpdateQueryOptions extends Options {
      * @param string $status The new status of the resource
      * @return $this Fluent Builder
      */
-    public function setStatus($status) {
+    public function setStatus(string $status): self {
         $this->options['status'] = $status;
         return $this;
     }
@@ -203,13 +210,8 @@ class UpdateQueryOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Autopilot.V1.UpdateQueryOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Autopilot.V1.UpdateQueryOptions ' . $options . ']';
     }
 }

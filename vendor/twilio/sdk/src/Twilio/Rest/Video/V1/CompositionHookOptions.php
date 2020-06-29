@@ -29,7 +29,7 @@ abstract class CompositionHookOptions {
      *                             friendly names that match this string
      * @return ReadCompositionHookOptions Options builder
      */
-    public static function read($enabled = Values::NONE, $dateCreatedAfter = Values::NONE, $dateCreatedBefore = Values::NONE, $friendlyName = Values::NONE) {
+    public static function read(bool $enabled = Values::NONE, \DateTime $dateCreatedAfter = Values::NONE, \DateTime $dateCreatedBefore = Values::NONE, string $friendlyName = Values::NONE): ReadCompositionHookOptions {
         return new ReadCompositionHookOptions($enabled, $dateCreatedAfter, $dateCreatedBefore, $friendlyName);
     }
 
@@ -37,9 +37,9 @@ abstract class CompositionHookOptions {
      * @param bool $enabled Whether the composition hook is active
      * @param array $videoLayout An object that describes the video layout of the
      *                           composition hook
-     * @param string $audioSources An array of track names from the same group room
-     *                             to merge
-     * @param string $audioSourcesExcluded An array of track names to exclude
+     * @param string[] $audioSources An array of track names from the same group
+     *                               room to merge
+     * @param string[] $audioSourcesExcluded An array of track names to exclude
      * @param string $resolution A string that describes the rows (width) and
      *                           columns (height) of the generated composed video
      *                           in pixels
@@ -53,7 +53,7 @@ abstract class CompositionHookOptions {
      *                   media in the Compositions triggered by the composition hook
      * @return CreateCompositionHookOptions Options builder
      */
-    public static function create($enabled = Values::NONE, $videoLayout = Values::NONE, $audioSources = Values::NONE, $audioSourcesExcluded = Values::NONE, $resolution = Values::NONE, $format = Values::NONE, $statusCallback = Values::NONE, $statusCallbackMethod = Values::NONE, $trim = Values::NONE) {
+    public static function create(bool $enabled = Values::NONE, array $videoLayout = Values::ARRAY_NONE, array $audioSources = Values::ARRAY_NONE, array $audioSourcesExcluded = Values::ARRAY_NONE, string $resolution = Values::NONE, string $format = Values::NONE, string $statusCallback = Values::NONE, string $statusCallbackMethod = Values::NONE, bool $trim = Values::NONE): CreateCompositionHookOptions {
         return new CreateCompositionHookOptions($enabled, $videoLayout, $audioSources, $audioSourcesExcluded, $resolution, $format, $statusCallback, $statusCallbackMethod, $trim);
     }
 
@@ -61,9 +61,9 @@ abstract class CompositionHookOptions {
      * @param bool $enabled Whether the composition hook is active
      * @param array $videoLayout A JSON object that describes the video layout of
      *                           the composition hook
-     * @param string $audioSources An array of track names from the same group room
-     *                             to merge
-     * @param string $audioSourcesExcluded An array of track names to exclude
+     * @param string[] $audioSources An array of track names from the same group
+     *                               room to merge
+     * @param string[] $audioSourcesExcluded An array of track names to exclude
      * @param bool $trim Whether to clip the intervals where there is no active
      *                   media in the Compositions triggered by the composition hook
      * @param string $format The container format of the media files used by the
@@ -77,7 +77,7 @@ abstract class CompositionHookOptions {
      *                                     status_callback
      * @return UpdateCompositionHookOptions Options builder
      */
-    public static function update($enabled = Values::NONE, $videoLayout = Values::NONE, $audioSources = Values::NONE, $audioSourcesExcluded = Values::NONE, $trim = Values::NONE, $format = Values::NONE, $resolution = Values::NONE, $statusCallback = Values::NONE, $statusCallbackMethod = Values::NONE) {
+    public static function update(bool $enabled = Values::NONE, array $videoLayout = Values::ARRAY_NONE, array $audioSources = Values::ARRAY_NONE, array $audioSourcesExcluded = Values::ARRAY_NONE, bool $trim = Values::NONE, string $format = Values::NONE, string $resolution = Values::NONE, string $statusCallback = Values::NONE, string $statusCallbackMethod = Values::NONE): UpdateCompositionHookOptions {
         return new UpdateCompositionHookOptions($enabled, $videoLayout, $audioSources, $audioSourcesExcluded, $trim, $format, $resolution, $statusCallback, $statusCallbackMethod);
     }
 }
@@ -95,7 +95,7 @@ class ReadCompositionHookOptions extends Options {
      * @param string $friendlyName Read only CompositionHook resources with
      *                             friendly names that match this string
      */
-    public function __construct($enabled = Values::NONE, $dateCreatedAfter = Values::NONE, $dateCreatedBefore = Values::NONE, $friendlyName = Values::NONE) {
+    public function __construct(bool $enabled = Values::NONE, \DateTime $dateCreatedAfter = Values::NONE, \DateTime $dateCreatedBefore = Values::NONE, string $friendlyName = Values::NONE) {
         $this->options['enabled'] = $enabled;
         $this->options['dateCreatedAfter'] = $dateCreatedAfter;
         $this->options['dateCreatedBefore'] = $dateCreatedBefore;
@@ -109,7 +109,7 @@ class ReadCompositionHookOptions extends Options {
      *                      value that matches this parameter
      * @return $this Fluent Builder
      */
-    public function setEnabled($enabled) {
+    public function setEnabled(bool $enabled): self {
         $this->options['enabled'] = $enabled;
         return $this;
     }
@@ -122,7 +122,7 @@ class ReadCompositionHookOptions extends Options {
      *                                    datetime with time zone
      * @return $this Fluent Builder
      */
-    public function setDateCreatedAfter($dateCreatedAfter) {
+    public function setDateCreatedAfter(\DateTime $dateCreatedAfter): self {
         $this->options['dateCreatedAfter'] = $dateCreatedAfter;
         return $this;
     }
@@ -135,7 +135,7 @@ class ReadCompositionHookOptions extends Options {
      *                                     with time zone
      * @return $this Fluent Builder
      */
-    public function setDateCreatedBefore($dateCreatedBefore) {
+    public function setDateCreatedBefore(\DateTime $dateCreatedBefore): self {
         $this->options['dateCreatedBefore'] = $dateCreatedBefore;
         return $this;
     }
@@ -147,7 +147,7 @@ class ReadCompositionHookOptions extends Options {
      *                             friendly names that match this string
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -157,14 +157,9 @@ class ReadCompositionHookOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Video.V1.ReadCompositionHookOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Video.V1.ReadCompositionHookOptions ' . $options . ']';
     }
 }
 
@@ -173,9 +168,9 @@ class CreateCompositionHookOptions extends Options {
      * @param bool $enabled Whether the composition hook is active
      * @param array $videoLayout An object that describes the video layout of the
      *                           composition hook
-     * @param string $audioSources An array of track names from the same group room
-     *                             to merge
-     * @param string $audioSourcesExcluded An array of track names to exclude
+     * @param string[] $audioSources An array of track names from the same group
+     *                               room to merge
+     * @param string[] $audioSourcesExcluded An array of track names to exclude
      * @param string $resolution A string that describes the rows (width) and
      *                           columns (height) of the generated composed video
      *                           in pixels
@@ -188,7 +183,7 @@ class CreateCompositionHookOptions extends Options {
      * @param bool $trim Whether to clip the intervals where there is no active
      *                   media in the Compositions triggered by the composition hook
      */
-    public function __construct($enabled = Values::NONE, $videoLayout = Values::NONE, $audioSources = Values::NONE, $audioSourcesExcluded = Values::NONE, $resolution = Values::NONE, $format = Values::NONE, $statusCallback = Values::NONE, $statusCallbackMethod = Values::NONE, $trim = Values::NONE) {
+    public function __construct(bool $enabled = Values::NONE, array $videoLayout = Values::ARRAY_NONE, array $audioSources = Values::ARRAY_NONE, array $audioSourcesExcluded = Values::ARRAY_NONE, string $resolution = Values::NONE, string $format = Values::NONE, string $statusCallback = Values::NONE, string $statusCallbackMethod = Values::NONE, bool $trim = Values::NONE) {
         $this->options['enabled'] = $enabled;
         $this->options['videoLayout'] = $videoLayout;
         $this->options['audioSources'] = $audioSources;
@@ -206,7 +201,7 @@ class CreateCompositionHookOptions extends Options {
      * @param bool $enabled Whether the composition hook is active
      * @return $this Fluent Builder
      */
-    public function setEnabled($enabled) {
+    public function setEnabled(bool $enabled): self {
         $this->options['enabled'] = $enabled;
         return $this;
     }
@@ -218,7 +213,7 @@ class CreateCompositionHookOptions extends Options {
      *                           composition hook
      * @return $this Fluent Builder
      */
-    public function setVideoLayout($videoLayout) {
+    public function setVideoLayout(array $videoLayout): self {
         $this->options['videoLayout'] = $videoLayout;
         return $this;
     }
@@ -226,11 +221,11 @@ class CreateCompositionHookOptions extends Options {
     /**
      * An array of track names from the same group room to merge into the compositions created by the composition hook. Can include zero or more track names. A composition triggered by the composition hook includes all audio sources specified in `audio_sources` except those specified in `audio_sources_excluded`. The track names in this parameter can include an asterisk as a wild card character, which matches zero or more characters in a track name. For example, `student*` includes tracks named `student` as well as `studentTeam`.
      *
-     * @param string $audioSources An array of track names from the same group room
-     *                             to merge
+     * @param string[] $audioSources An array of track names from the same group
+     *                               room to merge
      * @return $this Fluent Builder
      */
-    public function setAudioSources($audioSources) {
+    public function setAudioSources(array $audioSources): self {
         $this->options['audioSources'] = $audioSources;
         return $this;
     }
@@ -238,10 +233,10 @@ class CreateCompositionHookOptions extends Options {
     /**
      * An array of track names to exclude. A composition triggered by the composition hook includes all audio sources specified in `audio_sources` except for those specified in `audio_sources_excluded`. The track names in this parameter can include an asterisk as a wild card character, which matches zero or more characters in a track name. For example, `student*` excludes `student` as well as `studentTeam`. This parameter can also be empty.
      *
-     * @param string $audioSourcesExcluded An array of track names to exclude
+     * @param string[] $audioSourcesExcluded An array of track names to exclude
      * @return $this Fluent Builder
      */
-    public function setAudioSourcesExcluded($audioSourcesExcluded) {
+    public function setAudioSourcesExcluded(array $audioSourcesExcluded): self {
         $this->options['audioSourcesExcluded'] = $audioSourcesExcluded;
         return $this;
     }
@@ -268,7 +263,7 @@ class CreateCompositionHookOptions extends Options {
      *                           in pixels
      * @return $this Fluent Builder
      */
-    public function setResolution($resolution) {
+    public function setResolution(string $resolution): self {
         $this->options['resolution'] = $resolution;
         return $this;
     }
@@ -280,7 +275,7 @@ class CreateCompositionHookOptions extends Options {
      *                       compositions created by the composition hook
      * @return $this Fluent Builder
      */
-    public function setFormat($format) {
+    public function setFormat(string $format): self {
         $this->options['format'] = $format;
         return $this;
     }
@@ -292,7 +287,7 @@ class CreateCompositionHookOptions extends Options {
      *                               information to your application
      * @return $this Fluent Builder
      */
-    public function setStatusCallback($statusCallback) {
+    public function setStatusCallback(string $statusCallback): self {
         $this->options['statusCallback'] = $statusCallback;
         return $this;
     }
@@ -304,7 +299,7 @@ class CreateCompositionHookOptions extends Options {
      *                                     status_callback
      * @return $this Fluent Builder
      */
-    public function setStatusCallbackMethod($statusCallbackMethod) {
+    public function setStatusCallbackMethod(string $statusCallbackMethod): self {
         $this->options['statusCallbackMethod'] = $statusCallbackMethod;
         return $this;
     }
@@ -316,7 +311,7 @@ class CreateCompositionHookOptions extends Options {
      *                   media in the Compositions triggered by the composition hook
      * @return $this Fluent Builder
      */
-    public function setTrim($trim) {
+    public function setTrim(bool $trim): self {
         $this->options['trim'] = $trim;
         return $this;
     }
@@ -326,14 +321,9 @@ class CreateCompositionHookOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Video.V1.CreateCompositionHookOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Video.V1.CreateCompositionHookOptions ' . $options . ']';
     }
 }
 
@@ -342,9 +332,9 @@ class UpdateCompositionHookOptions extends Options {
      * @param bool $enabled Whether the composition hook is active
      * @param array $videoLayout A JSON object that describes the video layout of
      *                           the composition hook
-     * @param string $audioSources An array of track names from the same group room
-     *                             to merge
-     * @param string $audioSourcesExcluded An array of track names to exclude
+     * @param string[] $audioSources An array of track names from the same group
+     *                               room to merge
+     * @param string[] $audioSourcesExcluded An array of track names to exclude
      * @param bool $trim Whether to clip the intervals where there is no active
      *                   media in the Compositions triggered by the composition hook
      * @param string $format The container format of the media files used by the
@@ -357,7 +347,7 @@ class UpdateCompositionHookOptions extends Options {
      * @param string $statusCallbackMethod The HTTP method we should use to call
      *                                     status_callback
      */
-    public function __construct($enabled = Values::NONE, $videoLayout = Values::NONE, $audioSources = Values::NONE, $audioSourcesExcluded = Values::NONE, $trim = Values::NONE, $format = Values::NONE, $resolution = Values::NONE, $statusCallback = Values::NONE, $statusCallbackMethod = Values::NONE) {
+    public function __construct(bool $enabled = Values::NONE, array $videoLayout = Values::ARRAY_NONE, array $audioSources = Values::ARRAY_NONE, array $audioSourcesExcluded = Values::ARRAY_NONE, bool $trim = Values::NONE, string $format = Values::NONE, string $resolution = Values::NONE, string $statusCallback = Values::NONE, string $statusCallbackMethod = Values::NONE) {
         $this->options['enabled'] = $enabled;
         $this->options['videoLayout'] = $videoLayout;
         $this->options['audioSources'] = $audioSources;
@@ -375,7 +365,7 @@ class UpdateCompositionHookOptions extends Options {
      * @param bool $enabled Whether the composition hook is active
      * @return $this Fluent Builder
      */
-    public function setEnabled($enabled) {
+    public function setEnabled(bool $enabled): self {
         $this->options['enabled'] = $enabled;
         return $this;
     }
@@ -387,7 +377,7 @@ class UpdateCompositionHookOptions extends Options {
      *                           the composition hook
      * @return $this Fluent Builder
      */
-    public function setVideoLayout($videoLayout) {
+    public function setVideoLayout(array $videoLayout): self {
         $this->options['videoLayout'] = $videoLayout;
         return $this;
     }
@@ -395,11 +385,11 @@ class UpdateCompositionHookOptions extends Options {
     /**
      * An array of track names from the same group room to merge into the compositions created by the composition hook. Can include zero or more track names. A composition triggered by the composition hook includes all audio sources specified in `audio_sources` except those specified in `audio_sources_excluded`. The track names in this parameter can include an asterisk as a wild card character, which matches zero or more characters in a track name. For example, `student*` includes tracks named `student` as well as `studentTeam`.
      *
-     * @param string $audioSources An array of track names from the same group room
-     *                             to merge
+     * @param string[] $audioSources An array of track names from the same group
+     *                               room to merge
      * @return $this Fluent Builder
      */
-    public function setAudioSources($audioSources) {
+    public function setAudioSources(array $audioSources): self {
         $this->options['audioSources'] = $audioSources;
         return $this;
     }
@@ -407,10 +397,10 @@ class UpdateCompositionHookOptions extends Options {
     /**
      * An array of track names to exclude. A composition triggered by the composition hook includes all audio sources specified in `audio_sources` except for those specified in `audio_sources_excluded`. The track names in this parameter can include an asterisk as a wild card character, which matches zero or more characters in a track name. For example, `student*` excludes `student` as well as `studentTeam`. This parameter can also be empty.
      *
-     * @param string $audioSourcesExcluded An array of track names to exclude
+     * @param string[] $audioSourcesExcluded An array of track names to exclude
      * @return $this Fluent Builder
      */
-    public function setAudioSourcesExcluded($audioSourcesExcluded) {
+    public function setAudioSourcesExcluded(array $audioSourcesExcluded): self {
         $this->options['audioSourcesExcluded'] = $audioSourcesExcluded;
         return $this;
     }
@@ -422,7 +412,7 @@ class UpdateCompositionHookOptions extends Options {
      *                   media in the Compositions triggered by the composition hook
      * @return $this Fluent Builder
      */
-    public function setTrim($trim) {
+    public function setTrim(bool $trim): self {
         $this->options['trim'] = $trim;
         return $this;
     }
@@ -434,7 +424,7 @@ class UpdateCompositionHookOptions extends Options {
      *                       compositions created by the composition hook
      * @return $this Fluent Builder
      */
-    public function setFormat($format) {
+    public function setFormat(string $format): self {
         $this->options['format'] = $format;
         return $this;
     }
@@ -461,7 +451,7 @@ class UpdateCompositionHookOptions extends Options {
      *                           pixels
      * @return $this Fluent Builder
      */
-    public function setResolution($resolution) {
+    public function setResolution(string $resolution): self {
         $this->options['resolution'] = $resolution;
         return $this;
     }
@@ -473,7 +463,7 @@ class UpdateCompositionHookOptions extends Options {
      *                               information to your application
      * @return $this Fluent Builder
      */
-    public function setStatusCallback($statusCallback) {
+    public function setStatusCallback(string $statusCallback): self {
         $this->options['statusCallback'] = $statusCallback;
         return $this;
     }
@@ -485,7 +475,7 @@ class UpdateCompositionHookOptions extends Options {
      *                                     status_callback
      * @return $this Fluent Builder
      */
-    public function setStatusCallbackMethod($statusCallbackMethod) {
+    public function setStatusCallbackMethod(string $statusCallbackMethod): self {
         $this->options['statusCallbackMethod'] = $statusCallbackMethod;
         return $this;
     }
@@ -495,13 +485,8 @@ class UpdateCompositionHookOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Video.V1.UpdateCompositionHookOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Video.V1.UpdateCompositionHookOptions ' . $options . ']';
     }
 }

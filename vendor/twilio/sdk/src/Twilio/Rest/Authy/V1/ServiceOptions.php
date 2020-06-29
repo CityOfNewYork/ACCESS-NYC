@@ -17,30 +17,78 @@ use Twilio\Values;
  */
 abstract class ServiceOptions {
     /**
+     * @param string $push Optional service level push factors configuration
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return CreateServiceOptions Options builder
+     */
+    public static function create(string $push = Values::NONE, string $twilioSandboxMode = Values::NONE): CreateServiceOptions {
+        return new CreateServiceOptions($push, $twilioSandboxMode);
+    }
+
+    /**
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return DeleteServiceOptions Options builder
+     */
+    public static function delete(string $twilioSandboxMode = Values::NONE): DeleteServiceOptions {
+        return new DeleteServiceOptions($twilioSandboxMode);
+    }
+
+    /**
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return FetchServiceOptions Options builder
+     */
+    public static function fetch(string $twilioSandboxMode = Values::NONE): FetchServiceOptions {
+        return new FetchServiceOptions($twilioSandboxMode);
+    }
+
+    /**
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return ReadServiceOptions Options builder
+     */
+    public static function read(string $twilioSandboxMode = Values::NONE): ReadServiceOptions {
+        return new ReadServiceOptions($twilioSandboxMode);
+    }
+
+    /**
      * @param string $friendlyName A human readable description of this resource.
+     * @param string $push Optional service level push factors configuration
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
      * @return UpdateServiceOptions Options builder
      */
-    public static function update($friendlyName = Values::NONE) {
-        return new UpdateServiceOptions($friendlyName);
+    public static function update(string $friendlyName = Values::NONE, string $push = Values::NONE, string $twilioSandboxMode = Values::NONE): UpdateServiceOptions {
+        return new UpdateServiceOptions($friendlyName, $push, $twilioSandboxMode);
     }
 }
 
-class UpdateServiceOptions extends Options {
+class CreateServiceOptions extends Options {
     /**
-     * @param string $friendlyName A human readable description of this resource.
+     * @param string $push Optional service level push factors configuration
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
      */
-    public function __construct($friendlyName = Values::NONE) {
-        $this->options['friendlyName'] = $friendlyName;
+    public function __construct(string $push = Values::NONE, string $twilioSandboxMode = Values::NONE) {
+        $this->options['push'] = $push;
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
     }
 
     /**
-     * A human readable description of this resource, up to 64 characters.
+     * The optional service level push factors configuration. If present it must be a json string with the following format: {"notify_service_sid": "ISXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "include_date": true}
      *
-     * @param string $friendlyName A human readable description of this resource.
+     * @param string $push Optional service level push factors configuration
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
-        $this->options['friendlyName'] = $friendlyName;
+    public function setPush(string $push): self {
+        $this->options['push'] = $push;
+        return $this;
+    }
+
+    /**
+     * The Twilio-Sandbox-Mode HTTP request header
+     *
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return $this Fluent Builder
+     */
+    public function setTwilioSandboxMode(string $twilioSandboxMode): self {
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
         return $this;
     }
 
@@ -49,13 +97,154 @@ class UpdateServiceOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Authy.V1.UpdateServiceOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Authy.V1.CreateServiceOptions ' . $options . ']';
+    }
+}
+
+class DeleteServiceOptions extends Options {
+    /**
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     */
+    public function __construct(string $twilioSandboxMode = Values::NONE) {
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
+    }
+
+    /**
+     * The Twilio-Sandbox-Mode HTTP request header
+     *
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return $this Fluent Builder
+     */
+    public function setTwilioSandboxMode(string $twilioSandboxMode): self {
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
+        return $this;
+    }
+
+    /**
+     * Provide a friendly representation
+     *
+     * @return string Machine friendly representation
+     */
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Authy.V1.DeleteServiceOptions ' . $options . ']';
+    }
+}
+
+class FetchServiceOptions extends Options {
+    /**
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     */
+    public function __construct(string $twilioSandboxMode = Values::NONE) {
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
+    }
+
+    /**
+     * The Twilio-Sandbox-Mode HTTP request header
+     *
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return $this Fluent Builder
+     */
+    public function setTwilioSandboxMode(string $twilioSandboxMode): self {
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
+        return $this;
+    }
+
+    /**
+     * Provide a friendly representation
+     *
+     * @return string Machine friendly representation
+     */
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Authy.V1.FetchServiceOptions ' . $options . ']';
+    }
+}
+
+class ReadServiceOptions extends Options {
+    /**
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     */
+    public function __construct(string $twilioSandboxMode = Values::NONE) {
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
+    }
+
+    /**
+     * The Twilio-Sandbox-Mode HTTP request header
+     *
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return $this Fluent Builder
+     */
+    public function setTwilioSandboxMode(string $twilioSandboxMode): self {
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
+        return $this;
+    }
+
+    /**
+     * Provide a friendly representation
+     *
+     * @return string Machine friendly representation
+     */
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Authy.V1.ReadServiceOptions ' . $options . ']';
+    }
+}
+
+class UpdateServiceOptions extends Options {
+    /**
+     * @param string $friendlyName A human readable description of this resource.
+     * @param string $push Optional service level push factors configuration
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     */
+    public function __construct(string $friendlyName = Values::NONE, string $push = Values::NONE, string $twilioSandboxMode = Values::NONE) {
+        $this->options['friendlyName'] = $friendlyName;
+        $this->options['push'] = $push;
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
+    }
+
+    /**
+     * A human readable description of this resource, up to 64 characters.
+     *
+     * @param string $friendlyName A human readable description of this resource.
+     * @return $this Fluent Builder
+     */
+    public function setFriendlyName(string $friendlyName): self {
+        $this->options['friendlyName'] = $friendlyName;
+        return $this;
+    }
+
+    /**
+     * The optional service level push factors configuration. If present it must be a json string with the following format: {"notify_service_sid": "ISXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "include_date": true}
+     *
+     * @param string $push Optional service level push factors configuration
+     * @return $this Fluent Builder
+     */
+    public function setPush(string $push): self {
+        $this->options['push'] = $push;
+        return $this;
+    }
+
+    /**
+     * The Twilio-Sandbox-Mode HTTP request header
+     *
+     * @param string $twilioSandboxMode The Twilio-Sandbox-Mode HTTP request header
+     * @return $this Fluent Builder
+     */
+    public function setTwilioSandboxMode(string $twilioSandboxMode): self {
+        $this->options['twilioSandboxMode'] = $twilioSandboxMode;
+        return $this;
+    }
+
+    /**
+     * Provide a friendly representation
+     *
+     * @return string Machine friendly representation
+     */
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Authy.V1.UpdateServiceOptions ' . $options . ']';
     }
 }

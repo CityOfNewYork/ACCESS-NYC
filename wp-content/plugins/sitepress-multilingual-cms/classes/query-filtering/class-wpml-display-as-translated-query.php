@@ -18,30 +18,33 @@ abstract class WPML_Display_As_Translated_Query {
 		$this->icl_translation_table_alias = $icl_translation_table_alias;
 	}
 
+
 	/**
 	 * @param string $current_language
 	 * @param string $fallback_language
 	 * @param array $content_types
+	 * @param bool $skip_content_type_check Ignore $content_types if true.
 	 *
 	 * @return string
 	 */
-	public function get_language_snippet( $current_language, $fallback_language, $content_types ) {
-		if ( $content_types && $fallback_language ) {
-			$content_types_query                 = $this->get_content_types_query( $content_types );
-			$sub_query_no_translation            = $this->get_query_for_no_translation( $current_language );
-			$sub_query_translation_not_published = $this->get_query_for_translation_not_published( $current_language );
-
-			return $this->wpdb->prepare(
-				"(
-					{$this->icl_translation_table_alias}.language_code = %s
-					AND {$content_types_query}
-					AND ( ( {$sub_query_no_translation} ) OR ( {$sub_query_translation_not_published} ) ) 
-				)",
-				$fallback_language
-			);
-		} else {
+	public function get_language_snippet( $current_language, $fallback_language, $content_types, $skip_content_type_check = false ) {
+		if ( ! $fallback_language || ( ! $skip_content_type_check && ! $content_types  ) ) {
 			return '0';
 		}
+
+		$content_types_query = $skip_content_type_check ? '' : 'AND ' . $this->get_content_types_query( $content_types );
+
+		$sub_query_no_translation = $this->get_query_for_no_translation( $current_language );
+		$sub_query_translation_not_published = $this->get_query_for_translation_not_published( $current_language );
+
+		return $this->wpdb->prepare(
+			"(
+					{$this->icl_translation_table_alias}.language_code = %s
+					{$content_types_query}
+					AND ( ( {$sub_query_no_translation} ) OR ( {$sub_query_translation_not_published} ) ) 
+				)",
+			$fallback_language
+		);
 	}
 
 	/**

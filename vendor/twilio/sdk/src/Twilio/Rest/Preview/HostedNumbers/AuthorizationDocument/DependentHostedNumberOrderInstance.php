@@ -33,28 +33,27 @@ use Twilio\Version;
  * @property \DateTime $dateUpdated
  * @property int $verificationAttempts
  * @property string $email
- * @property string $ccEmails
+ * @property string[] $ccEmails
  * @property string $verificationType
  * @property string $verificationDocumentSid
  * @property string $extension
  * @property int $callDelay
  * @property string $verificationCode
- * @property string $verificationCallSids
+ * @property string[] $verificationCallSids
  */
 class DependentHostedNumberOrderInstance extends InstanceResource {
     /**
      * Initialize the DependentHostedNumberOrderInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $signingDocumentSid LOA document sid.
-     * @return \Twilio\Rest\Preview\HostedNumbers\AuthorizationDocument\DependentHostedNumberOrderInstance
      */
-    public function __construct(Version $version, array $payload, $signingDocumentSid) {
+    public function __construct(Version $version, array $payload, string $signingDocumentSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'incomingPhoneNumberSid' => Values::array_get($payload, 'incoming_phone_number_sid'),
@@ -77,9 +76,9 @@ class DependentHostedNumberOrderInstance extends InstanceResource {
             'callDelay' => Values::array_get($payload, 'call_delay'),
             'verificationCode' => Values::array_get($payload, 'verification_code'),
             'verificationCallSids' => Values::array_get($payload, 'verification_call_sids'),
-        );
+        ];
 
-        $this->solution = array('signingDocumentSid' => $signingDocumentSid, );
+        $this->solution = ['signingDocumentSid' => $signingDocumentSid, ];
     }
 
     /**
@@ -89,7 +88,7 @@ class DependentHostedNumberOrderInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -107,7 +106,7 @@ class DependentHostedNumberOrderInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Preview.HostedNumbers.DependentHostedNumberOrderInstance]';
     }
 }

@@ -1,12 +1,14 @@
 <?php
 
+use WPML\PB\Cornerstone\Utils;
+
 class WPML_Cornerstone_Update_Translation extends WPML_Page_Builders_Update_Translation {
 
 	/** @param array $data_array */
 	public function update_strings_in_modules( array &$data_array ) {
 		foreach ( $data_array as $key => &$data ) {
-			if ( isset( $data['_type'] ) && ! in_array( $data['_type'], array( 'section', 'column', 'row' ) ) ) {
-				$data = $this->update_strings_in_node( $this->get_node_id( $data ), $data );
+			if ( isset( $data['_type'] ) && ! Utils::typeIsLayout( $data['_type'] ) ) {
+				$data = $this->update_strings_in_node( Utils::getNodeId( $data ), $data );
 			} elseif ( is_array( $data ) ) {
 				$this->update_strings_in_modules( $data );
 			}
@@ -29,7 +31,4 @@ class WPML_Cornerstone_Update_Translation extends WPML_Page_Builders_Update_Tran
 		return $settings;
 	}
 
-	private function get_node_id( $data ) {
-		return md5( serialize( $data ) );
-	}
 }

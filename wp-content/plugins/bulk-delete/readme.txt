@@ -3,7 +3,7 @@ Contributors: bulkwp, sudar
 Tags: mass, bulk, delete, post, user, meta fields, draft  
 Requires PHP: 5.3  
 Requires at least: 4.4  
-Tested up to: 5.1  
+Tested up to: 5.3  
 Stable tag: 6.0.2  
 
 Bulk delete posts, pages, users, attachments and meta fields based on different conditions and filters.

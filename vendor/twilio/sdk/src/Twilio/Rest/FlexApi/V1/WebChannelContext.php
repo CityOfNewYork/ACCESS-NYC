@@ -19,33 +19,26 @@ class WebChannelContext extends InstanceContext {
     /**
      * Initialize the WebChannelContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $sid The SID of the WebChannel resource to fetch
-     * @return \Twilio\Rest\FlexApi\V1\WebChannelContext
      */
     public function __construct(Version $version, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('sid' => $sid, );
+        $this->solution = ['sid' => $sid, ];
 
         $this->uri = '/WebChannels/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a WebChannelInstance
+     * Fetch the WebChannelInstance
      *
      * @return WebChannelInstance Fetched WebChannelInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): WebChannelInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new WebChannelInstance($this->version, $payload, $this->solution['sid']);
     }
@@ -57,32 +50,27 @@ class WebChannelContext extends InstanceContext {
      * @return WebChannelInstance Updated WebChannelInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): WebChannelInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'ChatStatus' => $options['chatStatus'],
             'PostEngagementData' => $options['postEngagementData'],
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new WebChannelInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
-     * Deletes the WebChannelInstance
+     * Delete the WebChannelInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -90,8 +78,8 @@ class WebChannelContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

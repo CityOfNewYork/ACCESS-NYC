@@ -11,6 +11,8 @@ namespace Twilio\Rest\Authy\V1\Service\Entity;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
+use Twilio\Options;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -24,39 +26,42 @@ class FactorList extends ListResource {
      * @param Version $version Version that contains the resource
      * @param string $serviceSid Service Sid.
      * @param string $identity Unique identity of the Entity
-     * @return \Twilio\Rest\Authy\V1\Service\Entity\FactorList
      */
-    public function __construct(Version $version, $serviceSid, $identity) {
+    public function __construct(Version $version, string $serviceSid, string $identity) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'identity' => $identity, );
+        $this->solution = ['serviceSid' => $serviceSid, 'identity' => $identity, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Entities/' . \rawurlencode($identity) . '/Factors';
     }
 
     /**
-     * Create a new FactorInstance
+     * Create the FactorInstance
      *
-     * @param string $binding A unique binding for this Factor
+     * @param string $binding A unique binding for this Factor as a json string
      * @param string $friendlyName The friendly name of this Factor
      * @param string $factorType The Type of this Factor
-     * @return FactorInstance Newly created FactorInstance
+     * @param string $config The config for this Factor as a json string
+     * @param array|Options $options Optional Arguments
+     * @return FactorInstance Created FactorInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($binding, $friendlyName, $factorType) {
-        $data = Values::of(array(
+    public function create(string $binding, string $friendlyName, string $factorType, string $config, array $options = []): FactorInstance {
+        $options = new Values($options);
+
+        $data = Values::of([
             'Binding' => $binding,
             'FriendlyName' => $friendlyName,
             'FactorType' => $factorType,
-        ));
+            'Config' => $config,
+        ]);
+        $headers = Values::of([
+            'Twilio-Sandbox-Mode' => $options['twilioSandboxMode'],
+            'Authorization' => $options['authorization'],
+        ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data, $headers);
 
         return new FactorInstance(
             $this->version,
@@ -74,6 +79,7 @@ class FactorList extends ListResource {
      * The results are returned as a generator, so this operation is memory
      * efficient.
      *
+     * @param array|Options $options Optional Arguments
      * @param int $limit Upper limit for the number of records to return. stream()
      *                   guarantees to never return more than limit.  Default is no
      *                   limit
@@ -82,12 +88,12 @@ class FactorList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(array $options = [], int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
-        $page = $this->page($limits['pageSize']);
+        $page = $this->page($options, $limits['pageSize']);
 
         return $this->version->stream($page, $limits['limit'], $limits['pageLimit']);
     }
@@ -97,6 +103,7 @@ class FactorList extends ListResource {
      * Unlike stream(), this operation is eager and will load `limit` records into
      * memory before returning.
      *
+     * @param array|Options $options Optional Arguments
      * @param int $limit Upper limit for the number of records to return. read()
      *                   guarantees to never return more than limit.  Default is no
      *                   limit
@@ -107,31 +114,27 @@ class FactorList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return FactorInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
-        return \iterator_to_array($this->stream($limit, $pageSize), false);
+    public function read(array $options = [], int $limit = null, $pageSize = null): array {
+        return \iterator_to_array($this->stream($options, $limit, $pageSize), false);
     }
 
     /**
      * Retrieve a single page of FactorInstance records from the API.
      * Request is executed immediately
      *
+     * @param array|Options $options Optional Arguments
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of FactorInstance
+     * @return FactorPage Page of FactorInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page(array $options = [], $pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): FactorPage {
+        $options = new Values($options);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
+        $headers = Values::of(['Twilio-Sandbox-Mode' => $options['twilioSandboxMode'], ]);
+
+        $response = $this->version->page('GET', $this->uri, $params, [], $headers);
 
         return new FactorPage($this->version, $response, $this->solution);
     }
@@ -141,9 +144,9 @@ class FactorList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of FactorInstance
+     * @return FactorPage Page of FactorInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): FactorPage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -156,9 +159,8 @@ class FactorList extends ListResource {
      * Constructs a FactorContext
      *
      * @param string $sid A string that uniquely identifies this Factor.
-     * @return \Twilio\Rest\Authy\V1\Service\Entity\FactorContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): FactorContext {
         return new FactorContext(
             $this->version,
             $this->solution['serviceSid'],
@@ -172,7 +174,7 @@ class FactorList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Authy.V1.FactorList]';
     }
 }

@@ -991,7 +991,7 @@ class PMXI_CsvParser
                 $buf_keys = $keys;
                 foreach ($keys as $key => $value) {
 
-                    if (!$create_new_headers and (preg_match('%\W(http:|https:|ftp:)$%i', $value) or is_numeric($value))) {
+                    if (!$create_new_headers and (preg_match('%\W(http:|https:|ftp:)$%i', $value))) {
                         $create_new_headers = true;
                     }
 

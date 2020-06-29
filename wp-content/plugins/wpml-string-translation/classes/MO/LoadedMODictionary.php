@@ -14,7 +14,7 @@ class LoadedMODictionary {
 	/** @var array */
 	private $domainsCache = [];
 
-	/** @var null|Collection $mo_files */
+	/** @var Collection $mo_files */
 	private $mo_files;
 
 	public function __construct() {
@@ -51,6 +51,7 @@ class LoadedMODictionary {
 		$entity = (object) [
 			'domain'         => $domain,
 			'mofile_pattern' => $mofile_pattern,
+			'mofile'         => $mofile,
 		];
 
 		$this->mo_files->put( $hash, $entity );
@@ -62,7 +63,7 @@ class LoadedMODictionary {
 	 *
 	 * @return array
 	 */
-	public function getDomains( array $excluded ) {
+	public function getDomains( array $excluded = [] ) {
 		$key = md5( implode( $excluded ) );
 		if ( isset( $this->domainsCache[ $key ] ) ) {
 			return $this->domainsCache[ $key ];
@@ -89,6 +90,13 @@ class LoadedMODictionary {
 			->filter( $this->byDomain( $domain ) )
 			->map( $this->getFile( $locale ) )
 			->values();
+	}
+
+	/**
+	 * @return Collection
+	 */
+	public function getEntities() {
+		return $this->mo_files;
 	}
 
 	/**

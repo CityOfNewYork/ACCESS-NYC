@@ -211,8 +211,6 @@ class WPML_WPSEO_XML_Sitemaps_Filter_Old {
 			remove_filter( 'terms_clauses', array( $this->sitepress, 'terms_clauses' ) );
 		}
 
-		remove_filter( 'category_link', array( $this->sitepress, 'category_link_adjust_id' ), 1 );
-
 		return $type;
 	}
 

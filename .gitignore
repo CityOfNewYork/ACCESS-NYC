@@ -21,10 +21,7 @@
 !/vendor/psr
 !/vendor/ralouphie
 !/vendor/soundasleep
-!/vendor/symfony/polyfill-ctype
-!/vendor/symfony/polyfill-mbstring
-!/vendor/symfony/translation
-!/vendor/symfony/translation-contracts
+!/vendor/symfony
 !/vendor/timber
 !/vendor/twig
 !/vendor/twilio

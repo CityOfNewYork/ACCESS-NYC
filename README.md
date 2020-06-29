@@ -54,7 +54,7 @@ The [ACCESS NYC Patterns ↗](https://github.com/cityofnewyork/access-nyc-patter
 
 ### Installation
 
-This won't cover everything for standing up a WordPress site given all of the options available but it can be done with instructions in the [NYCO WordPress Docker Boilerplate ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. *The following instructions assume you have a working environment ready to drop a WordPress site into, including a server and MySQL database*.
+This covers standing up the WordPress site after a virtualization method has been chosen with including a server running PHP and a MySQL database. Instructions in the [NYCO WordPress Docker Boilerplate ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) will cover this process.
 
 **$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository ↗](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/master/wp/wp-config.php) but you should still update the salts.
 
@@ -77,18 +77,18 @@ The theme for the site contains all of the php functions, templates, styling, an
 * **/acf-json** - [Advanced Custom Fields ↗](https://www.advancedcustomfields.com/pro/) JSON files for syncing custom fields between environments.
 * **/assets** - The source for image, style, and script files live in the [**src**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/src) and are compiled to the [**/assets**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/assets) directory. This is done with NPM Scripts in [**package.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/package.json) and tasks in the [GulpFile](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/gulpfile.babel.js). The theme relies heaviliy on the [ACCESS NYC Patterns ↗](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets and JavaScript modules. Refer to the [documentation ↗](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage.
 * **/blocks** - [Custom Gutenburg Block ↗](https://developer.wordpress.org/block-editor/developers/) source.
-* **/controllers** - Site and Post Type controllers for [extending Timber ↗](https://timber.github.io/docs/guides/extending-timber/) and for providing data to views.
-* **/lib** - Theme functions, filters, and helpers for rendering views.
+* **/controllers** - Site and Post Type controllers that [extend Timber ↗](https://timber.github.io/docs/guides/extending-timber/) and provide processed data to views.
+* **/lib** - Theme functions, filters, and other helpers that assist in rendering views.
 * **/shortcodes** - Theme [shortcodes ↗](https://codex.wordpress.org/Shortcode) available to the admin.
 * **/src** - JavaScript and stylesheet source (described below).
-* **/views** - View templates are generally organized on a component level and by site feature and include Twig, Underscore.js, and Vue.js.
+* **/views** - View templates are generally organized on a component level and by site feature and include [Twig](https://twig.symfony.com/), [Underscore.js](https://underscorejs.org/#template), and [Vue.js](https://vuejs.org/v2/guide/single-file-components.html) templates.
   * **/components** - Component pattern templates.
   * **/elements** - Element pattern templates.
   * **/emails** - Email view templates
-  * **/jst** - Underscore templates used by twig files are pre-rendered buy Gulp and stored here.
+  * **/jst** - [Underscore templates](https://underscorejs.org/#template) used by twig files are pre-rendered buy Gulp and stored here.
   * **/locations** - Locations feature templates.
   * **/objects** - Object pattern templates.
-  * **/partials** - Extraneous view templates
+  * **/partials** - Misc. view template partials.
   * **/programs** - Programs feature templates.
   * **/screener** - Screener feature templates.
 
@@ -104,17 +104,17 @@ Dependencies include [path helpers](#path-helpers), theme functions, WordPress G
 
 #### Path Helpers
 
-Path helpers are shorthand functions return path strings for including various dependencies within the theme. They are used throughout theme files and generally accept a single string parameter referencing the filename of the dependency.
+Path helpers are shorthand functions return path strings for including various dependencies within the theme. They are used throughout theme files and generally accept a single string parameter referencing the filename (without extension) of the dependency.
 
-    require_once Path\controller('programs');
+    require_once ACCESS\controller('programs');
 
-* `Path\lib` - Include a file from the **/lib** directory.
-* `Path\functions` - Include the **/lib/functions.php** file. No arguments required.
-* `Path\controller` - Include the site or a post type controller from **/controllers** directory.
-* `Path\block` - Include a Gutenburg Block from the **/blocks** directory.
-* `Path\require_blocks` - Require all Gutenburg Blocks. No arguments required.
-* `Path\shortcode` - Include a Shortcode from the **/shortcodes** directory.
-* `Path\require_shortcodes` - Include all shortcodes from the **/shortcodes**. No arguments required.
+* `ACCESS\lib` -  Return the path to a file in the **/lib** directory.
+* `ACCESS\functions` -  Return the path to the **/lib/functions.php** file. No arguments required.
+* `ACCESS\controller` -  Return the path to a the site or a post type controller from **/controllers** directory.
+* `ACCESS\block` -  Return the path to a Gutenburg Block from the **/blocks** directory.
+* `ACCESS\require_blocks` - Require all Gutenburg Blocks. No arguments required.
+* `ACCESS\shortcode` - Return the path to a shortcode in the **/shortcodes** directory.
+* `ACCESS\require_shortcodes` - Require all shortcodes from the **/shortcodes**. No arguments required.
 
 #### Controllers
 
@@ -122,8 +122,8 @@ Site and Post Type controllers [extend Timber functionality ↗](https://timber.
 
 Controllers are required using the controller path helper (described above):
 
-    require_once Path\controller('programs');
-    require_once Path\controller('alert');
+    require_once ACCESS\controller('programs');
+    require_once ACCESS\controller('alert');
 
 And instantiated (below in a single view):
 
@@ -245,7 +245,7 @@ The theme relies on the [ACCESS NYC Patterns ↗](https://accesspatterns.cityofn
 
 ## Security
 
-The team @ NYC Opportunity actively maintains and releases updates to ensure the security of this site using a combination of practices for insuring security for WordPress specifically. The [NYCO WordPress Docker Boilerplate README file ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) documents some of the tools and best practices.
+The team @ NYC Opportunity actively maintains and releases updates to ensure the security of this site using a combination of practices for WordPress specifically. The [NYCO WordPress Docker Boilerplate README file ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) documents some of the tools and best practices.
 
 ### Reporting a Vulnerability
 

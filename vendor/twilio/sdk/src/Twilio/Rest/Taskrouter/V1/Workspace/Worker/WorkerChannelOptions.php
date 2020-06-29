@@ -19,7 +19,7 @@ abstract class WorkerChannelOptions {
      * @param bool $available Whether the WorkerChannel is available
      * @return UpdateWorkerChannelOptions Options builder
      */
-    public static function update($capacity = Values::NONE, $available = Values::NONE) {
+    public static function update(int $capacity = Values::NONE, bool $available = Values::NONE): UpdateWorkerChannelOptions {
         return new UpdateWorkerChannelOptions($capacity, $available);
     }
 }
@@ -30,7 +30,7 @@ class UpdateWorkerChannelOptions extends Options {
      *                      for the TaskChannel type
      * @param bool $available Whether the WorkerChannel is available
      */
-    public function __construct($capacity = Values::NONE, $available = Values::NONE) {
+    public function __construct(int $capacity = Values::NONE, bool $available = Values::NONE) {
         $this->options['capacity'] = $capacity;
         $this->options['available'] = $available;
     }
@@ -42,7 +42,7 @@ class UpdateWorkerChannelOptions extends Options {
      *                      for the TaskChannel type
      * @return $this Fluent Builder
      */
-    public function setCapacity($capacity) {
+    public function setCapacity(int $capacity): self {
         $this->options['capacity'] = $capacity;
         return $this;
     }
@@ -53,7 +53,7 @@ class UpdateWorkerChannelOptions extends Options {
      * @param bool $available Whether the WorkerChannel is available
      * @return $this Fluent Builder
      */
-    public function setAvailable($available) {
+    public function setAvailable(bool $available): self {
         $this->options['available'] = $available;
         return $this;
     }
@@ -63,13 +63,8 @@ class UpdateWorkerChannelOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Taskrouter.V1.UpdateWorkerChannelOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Taskrouter.V1.UpdateWorkerChannelOptions ' . $options . ']';
     }
 }

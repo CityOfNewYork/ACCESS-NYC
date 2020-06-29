@@ -3,7 +3,7 @@
 Plugin Name: Redis Object Cache
 Plugin URI: https://wordpress.org/plugins/redis-cache/
 Description: A persistent object cache backend powered by Redis. Supports Predis, PhpRedis, HHVM, replication, clustering and WP-CLI.
-Version: 1.5.8
+Version: 1.6.3
 Text Domain: redis-cache
 Domain Path: /languages
 Author: Till Krüss
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'WP_REDIS_VERSION', '1.5.8' );
+define( 'WP_REDIS_VERSION', '1.6.2' );
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
     require_once dirname( __FILE__ ) . '/includes/wp-cli-commands.php';
@@ -49,6 +49,7 @@ class RedisObjectCache {
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
         add_action( 'load-' . $this->screen, array( $this, 'do_admin_actions' ) );
         add_action( 'load-' . $this->screen, array( $this, 'add_admin_page_notices' ) );
+        add_action( 'wp_head', array( $this, 'register_shutdown_hooks' ) );
         add_action( 'wp_ajax_roc_dismiss_notice', array( $this, 'dismiss_notice' ) );
 
         add_filter( sprintf(
@@ -211,7 +212,7 @@ class RedisObjectCache {
             return;
         }
 
-        if ( $this->validate_object_cache_dropin() ) {
+        if ( $this->validate_object_cache_dropin() && method_exists( $wp_object_cache, 'redis_status' ) ) {
             return $wp_object_cache->redis_status();
         }
 
@@ -475,6 +476,63 @@ class RedisObjectCache {
                 network_admin_url( $this->page )
             )
         );
+    }
+
+    public function register_shutdown_hooks()
+    {
+        if ( ! defined( 'WP_REDIS_DISABLE_COMMENT' ) || ! WP_REDIS_DISABLE_COMMENT ) {
+            add_action( 'shutdown', array( $this, 'maybe_print_comment' ), 0 );
+        }
+    }
+
+    public function maybe_print_comment() {
+        global $wp_object_cache;
+
+        if (
+            ( defined( 'DOING_CRON' ) && DOING_CRON ) ||
+            ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ||
+            ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
+            ( defined( 'JSON_REQUEST' ) && JSON_REQUEST ) ||
+            ( defined( 'IFRAME_REQUEST' ) && IFRAME_REQUEST ) ||
+            ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ||
+            ( defined( 'WC_API_REQUEST' ) && WC_API_REQUEST )
+        ) {
+            return;
+        }
+
+        if ( function_exists( 'wp_is_json_request' ) && wp_is_json_request() ) {
+            return;
+        }
+
+        if (
+            ! isset( $wp_object_cache->cache_hits ) ||
+            ! isset( $wp_object_cache->redis_client ) ||
+            ! is_array( $wp_object_cache->cache )
+        ) {
+            return;
+        }
+
+        $message = sprintf(
+            __( 'Performance optimized by Redis Object Cache. Learn more: %s', 'redis-cache' ),
+            'https://wprediscache.com'
+        );
+
+        if (! WP_DEBUG) {
+            printf("\n<!-- %s -->\n", $message);
+
+            return;
+        }
+
+        $bytes = strlen(serialize($wp_object_cache->cache));
+
+        $debug = sprintf(
+            __( 'Retrieved %d objects (%s) from Redis using %s.', 'redis-cache' ),
+            $wp_object_cache->cache_hits,
+            function_exists( 'size_format' ) ? size_format($bytes) : "{$bytes} bytes",
+            $wp_object_cache->redis_client
+        );
+
+        printf("<!--\n%s\n\n%s\n-->\n", $message, $debug);
     }
 
     public function initialize_filesystem( $url, $silent = false ) {

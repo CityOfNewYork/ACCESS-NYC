@@ -132,15 +132,15 @@ class WPML_Package_Helper {
 	 *
 	 * @return string
 	 */
-	final function register_string_for_translation( $string_value, $string_name, $package, $string_title, $string_type ) {
+	final public function register_string_for_translation( $string_value, $string_name, $package, $string_title, $string_type ) {
 		$package    = $this->package_factory->create( $package );
 		$package_id = $package->ID;
 		if ( ! $package_id ) {
-			// need to create a new record.
 
+			// Need to create a new record.
 			if ( $package->has_kind_and_name() ) {
 				$package_id = $this->create_new_package( $package );
-				$package    = $this->package_factory->create( $package_id );
+				$package    = $this->package_factory->create( $package );
 			}
 		}
 		if ( $package_id ) {

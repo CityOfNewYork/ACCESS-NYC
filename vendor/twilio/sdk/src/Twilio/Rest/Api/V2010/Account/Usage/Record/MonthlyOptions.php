@@ -24,7 +24,7 @@ abstract class MonthlyOptions {
      *                                 account and all its subaccounts
      * @return ReadMonthlyOptions Options builder
      */
-    public static function read($category = Values::NONE, $startDate = Values::NONE, $endDate = Values::NONE, $includeSubaccounts = Values::NONE) {
+    public static function read(string $category = Values::NONE, \DateTime $startDate = Values::NONE, \DateTime $endDate = Values::NONE, bool $includeSubaccounts = Values::NONE): ReadMonthlyOptions {
         return new ReadMonthlyOptions($category, $startDate, $endDate, $includeSubaccounts);
     }
 }
@@ -40,7 +40,7 @@ class ReadMonthlyOptions extends Options {
      * @param bool $includeSubaccounts Whether to include usage from the master
      *                                 account and all its subaccounts
      */
-    public function __construct($category = Values::NONE, $startDate = Values::NONE, $endDate = Values::NONE, $includeSubaccounts = Values::NONE) {
+    public function __construct(string $category = Values::NONE, \DateTime $startDate = Values::NONE, \DateTime $endDate = Values::NONE, bool $includeSubaccounts = Values::NONE) {
         $this->options['category'] = $category;
         $this->options['startDate'] = $startDate;
         $this->options['endDate'] = $endDate;
@@ -54,7 +54,7 @@ class ReadMonthlyOptions extends Options {
      *                         read
      * @return $this Fluent Builder
      */
-    public function setCategory($category) {
+    public function setCategory(string $category): self {
         $this->options['category'] = $category;
         return $this;
     }
@@ -66,7 +66,7 @@ class ReadMonthlyOptions extends Options {
      *                             this date
      * @return $this Fluent Builder
      */
-    public function setStartDate($startDate) {
+    public function setStartDate(\DateTime $startDate): self {
         $this->options['startDate'] = $startDate;
         return $this;
     }
@@ -78,7 +78,7 @@ class ReadMonthlyOptions extends Options {
      *                           date
      * @return $this Fluent Builder
      */
-    public function setEndDate($endDate) {
+    public function setEndDate(\DateTime $endDate): self {
         $this->options['endDate'] = $endDate;
         return $this;
     }
@@ -90,7 +90,7 @@ class ReadMonthlyOptions extends Options {
      *                                 account and all its subaccounts
      * @return $this Fluent Builder
      */
-    public function setIncludeSubaccounts($includeSubaccounts) {
+    public function setIncludeSubaccounts(bool $includeSubaccounts): self {
         $this->options['includeSubaccounts'] = $includeSubaccounts;
         return $this;
     }
@@ -100,13 +100,8 @@ class ReadMonthlyOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.ReadMonthlyOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.ReadMonthlyOptions ' . $options . ']';
     }
 }

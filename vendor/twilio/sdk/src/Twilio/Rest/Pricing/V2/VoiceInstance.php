@@ -23,21 +23,20 @@ class VoiceInstance extends InstanceResource {
     /**
      * Initialize the VoiceInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @return \Twilio\Rest\Pricing\V2\VoiceInstance
      */
     public function __construct(Version $version, array $payload) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'name' => Values::array_get($payload, 'name'),
             'url' => Values::array_get($payload, 'url'),
             'links' => Values::array_get($payload, 'links'),
-        );
+        ];
 
-        $this->solution = array();
+        $this->solution = [];
     }
 
     /**
@@ -47,7 +46,7 @@ class VoiceInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -65,7 +64,7 @@ class VoiceInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Pricing.V2.VoiceInstance]';
     }
 }

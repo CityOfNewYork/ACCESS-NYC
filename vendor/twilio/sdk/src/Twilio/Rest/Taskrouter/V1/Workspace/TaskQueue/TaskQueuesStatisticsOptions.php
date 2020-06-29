@@ -28,7 +28,7 @@ abstract class TaskQueuesStatisticsOptions {
      *                                statistics on
      * @return ReadTaskQueuesStatisticsOptions Options builder
      */
-    public static function read($endDate = Values::NONE, $friendlyName = Values::NONE, $minutes = Values::NONE, $startDate = Values::NONE, $taskChannel = Values::NONE, $splitByWaitTime = Values::NONE) {
+    public static function read(\DateTime $endDate = Values::NONE, string $friendlyName = Values::NONE, int $minutes = Values::NONE, \DateTime $startDate = Values::NONE, string $taskChannel = Values::NONE, string $splitByWaitTime = Values::NONE): ReadTaskQueuesStatisticsOptions {
         return new ReadTaskQueuesStatisticsOptions($endDate, $friendlyName, $minutes, $startDate, $taskChannel, $splitByWaitTime);
     }
 }
@@ -48,7 +48,7 @@ class ReadTaskQueuesStatisticsOptions extends Options {
      *                                describes the thresholds to calculate
      *                                statistics on
      */
-    public function __construct($endDate = Values::NONE, $friendlyName = Values::NONE, $minutes = Values::NONE, $startDate = Values::NONE, $taskChannel = Values::NONE, $splitByWaitTime = Values::NONE) {
+    public function __construct(\DateTime $endDate = Values::NONE, string $friendlyName = Values::NONE, int $minutes = Values::NONE, \DateTime $startDate = Values::NONE, string $taskChannel = Values::NONE, string $splitByWaitTime = Values::NONE) {
         $this->options['endDate'] = $endDate;
         $this->options['friendlyName'] = $friendlyName;
         $this->options['minutes'] = $minutes;
@@ -64,7 +64,7 @@ class ReadTaskQueuesStatisticsOptions extends Options {
      *                           date
      * @return $this Fluent Builder
      */
-    public function setEndDate($endDate) {
+    public function setEndDate(\DateTime $endDate): self {
         $this->options['endDate'] = $endDate;
         return $this;
     }
@@ -76,7 +76,7 @@ class ReadTaskQueuesStatisticsOptions extends Options {
      *                             read
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -88,7 +88,7 @@ class ReadTaskQueuesStatisticsOptions extends Options {
      *                     past
      * @return $this Fluent Builder
      */
-    public function setMinutes($minutes) {
+    public function setMinutes(int $minutes): self {
         $this->options['minutes'] = $minutes;
         return $this;
     }
@@ -100,7 +100,7 @@ class ReadTaskQueuesStatisticsOptions extends Options {
      *                             date
      * @return $this Fluent Builder
      */
-    public function setStartDate($startDate) {
+    public function setStartDate(\DateTime $startDate): self {
         $this->options['startDate'] = $startDate;
         return $this;
     }
@@ -111,7 +111,7 @@ class ReadTaskQueuesStatisticsOptions extends Options {
      * @param string $taskChannel Only calculate statistics on this TaskChannel.
      * @return $this Fluent Builder
      */
-    public function setTaskChannel($taskChannel) {
+    public function setTaskChannel(string $taskChannel): self {
         $this->options['taskChannel'] = $taskChannel;
         return $this;
     }
@@ -124,7 +124,7 @@ class ReadTaskQueuesStatisticsOptions extends Options {
      *                                statistics on
      * @return $this Fluent Builder
      */
-    public function setSplitByWaitTime($splitByWaitTime) {
+    public function setSplitByWaitTime(string $splitByWaitTime): self {
         $this->options['splitByWaitTime'] = $splitByWaitTime;
         return $this;
     }
@@ -134,13 +134,8 @@ class ReadTaskQueuesStatisticsOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Taskrouter.V1.ReadTaskQueuesStatisticsOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Taskrouter.V1.ReadTaskQueuesStatisticsOptions ' . $options . ']';
     }
 }

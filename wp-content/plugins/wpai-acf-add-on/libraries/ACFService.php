@@ -48,10 +48,11 @@ final class ACFService{
 
         switch ($field->getImportType()) {
             case 'import_users':
+            case 'shop_customer':
                 update_user_meta($pid, $name, $cf_value);
                 break;
             case 'taxonomies':
-                update_term_meta($pid, $name, $value);
+                update_term_meta($pid, $name, $cf_value);
                 break;
             default:
                 update_post_meta($pid, $name, $cf_value);
@@ -71,6 +72,7 @@ final class ACFService{
     public static function get_post_meta(Field $field, $pid, $name) {
         switch ($field->getImportType()) {
             case 'import_users':
+            case 'shop_customer':
                 $value = get_user_meta($pid, $name, TRUE);
                 break;
             case 'taxonomies':
@@ -151,10 +153,10 @@ final class ACFService{
      * @param bool $search_in_gallery
      * @param bool $search_in_files
      *
-     * @param array $articleData
+     * @param array $importData
      * @return bool|int|\WP_Error
      */
-    public static function import_image($img_url, $pid, $logger, $search_in_gallery = FALSE, $search_in_files = FALSE, $articleData = array()) {
+    public static function import_image($img_url, $pid, $logger, $search_in_gallery = FALSE, $search_in_files = FALSE, $importData = array()) {
 
         // Search image attachment by ID.
         if ($search_in_gallery and is_numeric($img_url)) {
@@ -182,7 +184,7 @@ final class ACFService{
             $fileName = $img_url;
         }
 
-        return PMXI_API::upload_image($pid, $img_url, $downloadFiles, $logger, true, $fileName, 'images', $search_in_gallery, $articleData);
+        return PMXI_API::upload_image($pid, $img_url, $downloadFiles, $logger, true, $fileName, 'images', $search_in_gallery, $importData['articleData'], $importData);
     }
 
     /**
@@ -193,9 +195,10 @@ final class ACFService{
      * @param bool $search_in_gallery
      * @param bool $search_in_files
      *
+     * @param array $importData
      * @return bool|int|\WP_Error
      */
-    public static function import_file($atch_url, $pid, $logger, $fast = FALSE, $search_in_gallery = FALSE, $search_in_files = FALSE, $articleData = array()) {
+    public static function import_file($atch_url, $pid, $logger, $fast = FALSE, $search_in_gallery = FALSE, $search_in_files = FALSE, $importData = array()) {
 
         // search file attachment by ID
         if ($search_in_gallery and is_numeric($atch_url)) {
@@ -223,7 +226,7 @@ final class ACFService{
             $fileName = $atch_url;
         }
 
-        return PMXI_API::upload_image($pid, $atch_url, $downloadFiles, $logger, true, $fileName, "files", $search_in_gallery, $articleData);
+        return PMXI_API::upload_image($pid, $atch_url, $downloadFiles, $logger, true, $fileName, "files", $search_in_gallery, $importData['articleData'], $importData);
     }
 
     /**

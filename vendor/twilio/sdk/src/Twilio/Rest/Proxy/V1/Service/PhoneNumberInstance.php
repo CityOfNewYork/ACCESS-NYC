@@ -36,18 +36,17 @@ class PhoneNumberInstance extends InstanceResource {
     /**
      * Initialize the PhoneNumberInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid The SID of the PhoneNumber resource's parent
      *                           Service resource
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Proxy\V1\Service\PhoneNumberInstance
      */
-    public function __construct(Version $version, array $payload, $serviceSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $serviceSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'serviceSid' => Values::array_get($payload, 'service_sid'),
@@ -60,19 +59,18 @@ class PhoneNumberInstance extends InstanceResource {
             'url' => Values::array_get($payload, 'url'),
             'isReserved' => Values::array_get($payload, 'is_reserved'),
             'inUse' => Values::array_get($payload, 'in_use'),
-        );
+        ];
 
-        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid ?: $this->properties['sid'], );
+        $this->solution = ['serviceSid' => $serviceSid, 'sid' => $sid ?: $this->properties['sid'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Proxy\V1\Service\PhoneNumberContext Context for this
-     *                                                          PhoneNumberInstance
+     * @return PhoneNumberContext Context for this PhoneNumberInstance
      */
-    protected function proxy() {
+    protected function proxy(): PhoneNumberContext {
         if (!$this->context) {
             $this->context = new PhoneNumberContext(
                 $this->version,
@@ -85,22 +83,22 @@ class PhoneNumberInstance extends InstanceResource {
     }
 
     /**
-     * Deletes the PhoneNumberInstance
+     * Delete the PhoneNumberInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
     /**
-     * Fetch a PhoneNumberInstance
+     * Fetch the PhoneNumberInstance
      *
      * @return PhoneNumberInstance Fetched PhoneNumberInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): PhoneNumberInstance {
         return $this->proxy()->fetch();
     }
 
@@ -111,7 +109,7 @@ class PhoneNumberInstance extends InstanceResource {
      * @return PhoneNumberInstance Updated PhoneNumberInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): PhoneNumberInstance {
         return $this->proxy()->update($options);
     }
 
@@ -122,7 +120,7 @@ class PhoneNumberInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -140,8 +138,8 @@ class PhoneNumberInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

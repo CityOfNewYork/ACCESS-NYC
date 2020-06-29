@@ -30,7 +30,7 @@ class SyncListPermissionInstance extends InstanceResource {
     /**
      * Initialize the SyncListPermissionInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid The SID of the Sync Service that the resource is
      *                           associated with
@@ -39,13 +39,12 @@ class SyncListPermissionInstance extends InstanceResource {
      * @param string $identity The application-defined string that uniquely
      *                         identifies the User's Sync List Permission resource
      *                         to fetch
-     * @return \Twilio\Rest\Sync\V1\Service\SyncList\SyncListPermissionInstance
      */
-    public function __construct(Version $version, array $payload, $serviceSid, $listSid, $identity = null) {
+    public function __construct(Version $version, array $payload, string $serviceSid, string $listSid, string $identity = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'serviceSid' => Values::array_get($payload, 'service_sid'),
             'listSid' => Values::array_get($payload, 'list_sid'),
@@ -54,22 +53,22 @@ class SyncListPermissionInstance extends InstanceResource {
             'write' => Values::array_get($payload, 'write'),
             'manage' => Values::array_get($payload, 'manage'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array(
+        $this->solution = [
             'serviceSid' => $serviceSid,
             'listSid' => $listSid,
             'identity' => $identity ?: $this->properties['identity'],
-        );
+        ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Sync\V1\Service\SyncList\SyncListPermissionContext Context for this SyncListPermissionInstance
+     * @return SyncListPermissionContext Context for this SyncListPermissionInstance
      */
-    protected function proxy() {
+    protected function proxy(): SyncListPermissionContext {
         if (!$this->context) {
             $this->context = new SyncListPermissionContext(
                 $this->version,
@@ -83,22 +82,22 @@ class SyncListPermissionInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a SyncListPermissionInstance
+     * Fetch the SyncListPermissionInstance
      *
      * @return SyncListPermissionInstance Fetched SyncListPermissionInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): SyncListPermissionInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the SyncListPermissionInstance
+     * Delete the SyncListPermissionInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
@@ -111,7 +110,7 @@ class SyncListPermissionInstance extends InstanceResource {
      * @return SyncListPermissionInstance Updated SyncListPermissionInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($read, $write, $manage) {
+    public function update(bool $read, bool $write, bool $manage): SyncListPermissionInstance {
         return $this->proxy()->update($read, $write, $manage);
     }
 
@@ -122,7 +121,7 @@ class SyncListPermissionInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -140,8 +139,8 @@ class SyncListPermissionInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

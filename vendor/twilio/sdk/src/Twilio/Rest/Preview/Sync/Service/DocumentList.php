@@ -13,6 +13,7 @@ use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Serialize;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -25,38 +26,32 @@ class DocumentList extends ListResource {
      *
      * @param Version $version Version that contains the resource
      * @param string $serviceSid The service_sid
-     * @return \Twilio\Rest\Preview\Sync\Service\DocumentList
      */
-    public function __construct(Version $version, $serviceSid) {
+    public function __construct(Version $version, string $serviceSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, );
+        $this->solution = ['serviceSid' => $serviceSid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Documents';
     }
 
     /**
-     * Create a new DocumentInstance
+     * Create the DocumentInstance
      *
      * @param array|Options $options Optional Arguments
-     * @return DocumentInstance Newly created DocumentInstance
+     * @return DocumentInstance Created DocumentInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($options = array()) {
+    public function create(array $options = []): DocumentInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'UniqueName' => $options['uniqueName'],
             'Data' => Serialize::jsonObject($options['data']),
-        ));
+        ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new DocumentInstance($this->version, $payload, $this->solution['serviceSid']);
     }
@@ -77,9 +72,9 @@ class DocumentList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
         $page = $this->page($limits['pageSize']);
@@ -102,7 +97,7 @@ class DocumentList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return DocumentInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
+    public function read(int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($limit, $pageSize), false);
     }
 
@@ -113,20 +108,12 @@ class DocumentList extends ListResource {
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of DocumentInstance
+     * @return DocumentPage Page of DocumentInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page($pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): DocumentPage {
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new DocumentPage($this->version, $response, $this->solution);
     }
@@ -136,9 +123,9 @@ class DocumentList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of DocumentInstance
+     * @return DocumentPage Page of DocumentInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): DocumentPage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -151,9 +138,8 @@ class DocumentList extends ListResource {
      * Constructs a DocumentContext
      *
      * @param string $sid The sid
-     * @return \Twilio\Rest\Preview\Sync\Service\DocumentContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): DocumentContext {
         return new DocumentContext($this->version, $this->solution['serviceSid'], $sid);
     }
 
@@ -162,7 +148,7 @@ class DocumentList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Preview.Sync.DocumentList]';
     }
 }

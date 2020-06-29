@@ -62,4 +62,14 @@ class WPML_Cornerstone_Data_Settings implements IWPML_Page_Builders_Data_Setting
 
 	public function add_hooks() {
 	}
+
+	/**
+	 * @param int $postId
+	 *
+	 * @return bool
+	 */
+	public function is_handling_post( $postId ) {
+		return get_post_meta( $postId, $this->get_meta_field(), true )
+			&& ! get_post_meta( $postId, '_cornerstone_override', true );
+	}
 }

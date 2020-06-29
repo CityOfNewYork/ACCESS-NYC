@@ -17,9 +17,6 @@ class WPML_Locale {
 	private $locale;
 	private $locale_cache;
 
-	/** @var bool $theme_locales_loaded */
-	private $theme_locales_loaded = false;
-
 	/** @var Collection $all_locales */
 	private $all_locales;
 
@@ -53,7 +50,6 @@ class WPML_Locale {
 	 */
 	public function reset_cached_data() {
 		$this->locale_cache         = null;
-		$this->theme_locales_loaded = false;
 		$this->all_locales          = null;
 	}
 
@@ -110,23 +106,6 @@ class WPML_Locale {
 				$locale_lang_code = $this->sitepress->get_current_language();
 			}
 			$locale = $this->get_locale( $locale_lang_code );
-			// theme localization
-			remove_filter( 'locale', array( $this->sitepress, 'locale_filter' ) ); //avoid infinite loop
-
-			$theme_folder_settings = $this->sitepress->get_setting( 'theme_language_folders' );
-			if ( ! $this->theme_locales_loaded
-			     && $theme_folder_settings
-			     && is_array( $theme_folder_settings )
-			     && (bool) $this->sitepress->get_setting( 'theme_localization_load_textdomain' ) === true
-			     && (bool) $this->sitepress->get_setting( 'gettext_theme_domain_name' ) === true
-			) {
-				/** @var array $theme_folder_settings */
-				foreach ( $theme_folder_settings as $folder ) {
-					$wp_api->load_textdomain( $this->sitepress->get_setting( 'gettext_theme_domain_name' ), $folder . '/' . $locale . '.mo' );
-				}
-				$this->theme_locales_loaded = true;
-			}
-			add_filter( 'locale', array( $this->sitepress, 'locale_filter' ) );
 
 			if ( did_action( 'plugins_loaded' ) ) {
 				$this->locale_cache = $locale;

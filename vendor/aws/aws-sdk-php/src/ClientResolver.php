@@ -13,6 +13,8 @@ use Aws\Endpoint\PartitionEndpointProvider;
 use Aws\EndpointDiscovery\ConfigurationInterface;
 use Aws\EndpointDiscovery\ConfigurationProvider;
 use Aws\EndpointDiscovery\EndpointDiscoveryMiddleware;
+use Aws\Retry\ConfigurationInterface as RetryConfigInterface;
+use Aws\Retry\ConfigurationProvider as RetryConfigProvider;
 use Aws\Signature\SignatureProvider;
 use Aws\Endpoint\EndpointProvider;
 use Aws\Credentials\CredentialProvider;
@@ -144,7 +146,7 @@ class ClientResolver
         'endpoint_discovery' => [
             'type'     => 'value',
             'valid'    => [ConfigurationInterface::class, CacheInterface::class, 'array', 'callable'],
-            'doc'      => 'Specifies settings for endpoint discovery. Provide an instance of Aws\EndpointDiscovery\ConfigurationInterface, an instance Aws\CacheInterface, a callable that provides a promise for a Configuration object, or an associative array with the following keys: enabled: (bool) Set to true to enable endpoint discovery. Defaults to false; cache_limit: (int) The maximum number of keys in the endpoints cache. Defaults to 1000.',
+            'doc'      => 'Specifies settings for endpoint discovery. Provide an instance of Aws\EndpointDiscovery\ConfigurationInterface, an instance Aws\CacheInterface, a callable that provides a promise for a Configuration object, or an associative array with the following keys: enabled: (bool) Set to true to enable endpoint discovery, false to explicitly disable it. Defaults to false; cache_limit: (int) The maximum number of keys in the endpoints cache. Defaults to 1000.',
             'fn'       => [__CLASS__, '_apply_endpoint_discovery'],
             'default'  => [__CLASS__, '_default_endpoint_discovery_provider']
         ],
@@ -157,10 +159,10 @@ class ClientResolver
         ],
         'retries' => [
             'type'    => 'value',
-            'valid'   => ['int'],
-            'doc'     => 'Configures the maximum number of allowed retries for a client (pass 0 to disable retries). ',
+            'valid'   => ['int', RetryConfigInterface::class, CacheInterface::class, 'callable', 'array'],
+            'doc'     => "Configures the retry mode and maximum number of allowed retries for a client (pass 0 to disable retries). Provide an integer for 'legacy' mode with the specified number of retries. Otherwise provide an instance of Aws\Retry\ConfigurationInterface, an instance of  Aws\CacheInterface, a callable function, or an array with the following keys: mode: (string) Set to 'legacy', 'standard' (uses retry quota management), or 'adapative' (an experimental mode that adds client-side rate limiting to standard mode); max_attempts: (int) The maximum number of attempts for a given request. ",
             'fn'      => [__CLASS__, '_apply_retries'],
-            'default' => 3,
+            'default' => [RetryConfigProvider::class, 'defaultProvider']
         ],
         'validate' => [
             'type'    => 'value',
@@ -399,12 +401,28 @@ class ClientResolver
 
     public static function _apply_retries($value, array &$args, HandlerList $list)
     {
+        // A value of 0 for the config option disables retries
         if ($value) {
-            $decider = RetryMiddleware::createDefaultDecider($value);
-            $list->appendSign(
-                Middleware::retry($decider, null, $args['stats']['retries']),
-                'retry'
-            );
+            $config = RetryConfigProvider::unwrap($value);
+
+            if ($config->getMode() === 'legacy') {
+                // # of retries is 1 less than # of attempts
+                $decider = RetryMiddleware::createDefaultDecider(
+                    $config->getMaxAttempts() - 1
+                );
+                $list->appendSign(
+                    Middleware::retry($decider, null, $args['stats']['retries']),
+                    'retry'
+                );
+            } else {
+                $list->appendSign(
+                    RetryMiddlewareV2::wrap(
+                        $config,
+                        ['collect_stats' => $args['stats']['retries']]
+                    ),
+                    'retry'
+                );
+            }
         }
     }
 

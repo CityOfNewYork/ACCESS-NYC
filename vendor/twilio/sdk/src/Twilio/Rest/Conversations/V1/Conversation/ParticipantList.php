@@ -13,6 +13,7 @@ use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Serialize;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -26,28 +27,27 @@ class ParticipantList extends ListResource {
      * @param Version $version Version that contains the resource
      * @param string $conversationSid The unique id of the Conversation for this
      *                                participant.
-     * @return \Twilio\Rest\Conversations\V1\Conversation\ParticipantList
      */
-    public function __construct(Version $version, $conversationSid) {
+    public function __construct(Version $version, string $conversationSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('conversationSid' => $conversationSid, );
+        $this->solution = ['conversationSid' => $conversationSid, ];
 
         $this->uri = '/Conversations/' . \rawurlencode($conversationSid) . '/Participants';
     }
 
     /**
-     * Create a new ParticipantInstance
+     * Create the ParticipantInstance
      *
      * @param array|Options $options Optional Arguments
-     * @return ParticipantInstance Newly created ParticipantInstance
+     * @return ParticipantInstance Created ParticipantInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($options = array()) {
+    public function create(array $options = []): ParticipantInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'Identity' => $options['identity'],
             'MessagingBinding.Address' => $options['messagingBindingAddress'],
             'MessagingBinding.ProxyAddress' => $options['messagingBindingProxyAddress'],
@@ -55,14 +55,11 @@ class ParticipantList extends ListResource {
             'DateUpdated' => Serialize::iso8601DateTime($options['dateUpdated']),
             'Attributes' => $options['attributes'],
             'MessagingBinding.ProjectedAddress' => $options['messagingBindingProjectedAddress'],
-        ));
+            'RoleSid' => $options['roleSid'],
+        ]);
+        $headers = Values::of(['X-Twilio-Webhook-Enabled' => $options['xTwilioWebhookEnabled'], ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data, $headers);
 
         return new ParticipantInstance($this->version, $payload, $this->solution['conversationSid']);
     }
@@ -83,9 +80,9 @@ class ParticipantList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
         $page = $this->page($limits['pageSize']);
@@ -108,7 +105,7 @@ class ParticipantList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return ParticipantInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
+    public function read(int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($limit, $pageSize), false);
     }
 
@@ -119,20 +116,12 @@ class ParticipantList extends ListResource {
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of ParticipantInstance
+     * @return ParticipantPage Page of ParticipantInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page($pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): ParticipantPage {
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new ParticipantPage($this->version, $response, $this->solution);
     }
@@ -142,9 +131,9 @@ class ParticipantList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of ParticipantInstance
+     * @return ParticipantPage Page of ParticipantInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): ParticipantPage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -158,9 +147,8 @@ class ParticipantList extends ListResource {
      *
      * @param string $sid A 34 character string that uniquely identifies this
      *                    resource.
-     * @return \Twilio\Rest\Conversations\V1\Conversation\ParticipantContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): ParticipantContext {
         return new ParticipantContext($this->version, $this->solution['conversationSid'], $sid);
     }
 
@@ -169,7 +157,7 @@ class ParticipantList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Conversations.V1.ParticipantList]';
     }
 }

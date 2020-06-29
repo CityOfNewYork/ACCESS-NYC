@@ -37,24 +37,7 @@ function wpml_st_filter_job_assignment( $assigned_correctly, $string_translation
 	return $tm_filter->job_assigned_to_filter( $assigned_correctly, $string_translation_id, $translator_id, $service );
 }
 
-/**
- * @param string $notice
- * @param array  $custom_posts
- *
- * @return string
- */
-function filter_tm_cpt_dashboard_notice( $notice, $custom_posts ) {
-	global $sitepress, $wpml_st_string_factory;
-
-	$post_slug_settings = new WPML_ST_Post_Slug_Translation_Settings( $sitepress );
-	$tm_filter          = new WPML_TM_Widget_Filter( $post_slug_settings, $wpml_st_string_factory );
-	$admin_notifier     = new WPML_Admin_Notifier();
-
-	return $tm_filter->filter_cpt_dashboard_notice( $notice, $custom_posts, $admin_notifier );
-}
-
 add_filter( 'wpml_tm_allowed_source_languages', 'filter_tm_source_langs', 10, 1 );
-add_filter( 'wpml_tm_dashboard_cpt_notice', 'filter_tm_cpt_dashboard_notice', 10, 3 );
 add_filter( 'wpml_job_assigned_to_after_assignment', 'wpml_st_filter_job_assignment', 10, 4 );
 
 /**

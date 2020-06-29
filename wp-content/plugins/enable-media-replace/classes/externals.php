@@ -25,11 +25,11 @@ class Externals
 
   protected function check()
   {
-      if (class_exists('FLBuilder'))
+      /*if (class_exists('FLBuilder'))
       {
         $this->replaceSearchType = false;
         $this->messages[] = __('Replace and Search feature is not compatible with Beaver Builder.', 'enable-media-replace');
-      }
+      } */
   }
 
   public function get_replace_type($bool)

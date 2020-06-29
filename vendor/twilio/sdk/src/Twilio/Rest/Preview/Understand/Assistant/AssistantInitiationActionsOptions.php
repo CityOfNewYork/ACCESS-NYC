@@ -20,7 +20,7 @@ abstract class AssistantInitiationActionsOptions {
      * @param array $initiationActions The initiation_actions
      * @return UpdateAssistantInitiationActionsOptions Options builder
      */
-    public static function update($initiationActions = Values::NONE) {
+    public static function update(array $initiationActions = Values::ARRAY_NONE): UpdateAssistantInitiationActionsOptions {
         return new UpdateAssistantInitiationActionsOptions($initiationActions);
     }
 }
@@ -29,7 +29,7 @@ class UpdateAssistantInitiationActionsOptions extends Options {
     /**
      * @param array $initiationActions The initiation_actions
      */
-    public function __construct($initiationActions = Values::NONE) {
+    public function __construct(array $initiationActions = Values::ARRAY_NONE) {
         $this->options['initiationActions'] = $initiationActions;
     }
 
@@ -39,7 +39,7 @@ class UpdateAssistantInitiationActionsOptions extends Options {
      * @param array $initiationActions The initiation_actions
      * @return $this Fluent Builder
      */
-    public function setInitiationActions($initiationActions) {
+    public function setInitiationActions(array $initiationActions): self {
         $this->options['initiationActions'] = $initiationActions;
         return $this;
     }
@@ -49,13 +49,8 @@ class UpdateAssistantInitiationActionsOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.Understand.UpdateAssistantInitiationActionsOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.Understand.UpdateAssistantInitiationActionsOptions ' . $options . ']';
     }
 }

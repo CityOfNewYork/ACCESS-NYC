@@ -9,17 +9,28 @@
 
 namespace Twilio\Rest\Pricing\V2\Voice;
 
+use Twilio\Http\Response;
 use Twilio\Page;
+use Twilio\Version;
 
 class NumberPage extends Page {
-    public function __construct($version, $response, $solution) {
+    /**
+     * @param Version $version Version that contains the resource
+     * @param Response $response Response from the API
+     * @param array $solution The context solution
+     */
+    public function __construct(Version $version, Response $response, array $solution) {
         parent::__construct($version, $response);
 
         // Path Solution
         $this->solution = $solution;
     }
 
-    public function buildInstance(array $payload) {
+    /**
+     * @param array $payload Payload response from the API
+     * @return NumberInstance \Twilio\Rest\Pricing\V2\Voice\NumberInstance
+     */
+    public function buildInstance(array $payload): NumberInstance {
         return new NumberInstance($this->version, $payload);
     }
 
@@ -28,7 +39,7 @@ class NumberPage extends Page {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Pricing.V2.NumberPage]';
     }
 }

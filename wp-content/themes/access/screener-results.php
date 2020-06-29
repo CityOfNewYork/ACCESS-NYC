@@ -24,8 +24,8 @@
  * @author Blue State Digital
  */
 
-require_once Path\controller('programs');
-require_once Path\controller('alert');
+require_once ACCESS\controller('programs');
+require_once ACCESS\controller('alert');
 
 /**
  * Enqueue

@@ -16,70 +16,55 @@ use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
- */
 class CompositionSettingsContext extends InstanceContext {
     /**
      * Initialize the CompositionSettingsContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
-     * @return \Twilio\Rest\Video\V1\CompositionSettingsContext
+     * @param Version $version Version that contains the resource
      */
     public function __construct(Version $version) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array();
+        $this->solution = [];
 
         $this->uri = '/CompositionSettings/Default';
     }
 
     /**
-     * Fetch a CompositionSettingsInstance
+     * Fetch the CompositionSettingsInstance
      *
      * @return CompositionSettingsInstance Fetched CompositionSettingsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): CompositionSettingsInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new CompositionSettingsInstance($this->version, $payload);
     }
 
     /**
-     * Create a new CompositionSettingsInstance
+     * Create the CompositionSettingsInstance
      *
      * @param string $friendlyName A descriptive string that you create to describe
      *                             the resource
      * @param array|Options $options Optional Arguments
-     * @return CompositionSettingsInstance Newly created CompositionSettingsInstance
+     * @return CompositionSettingsInstance Created CompositionSettingsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($friendlyName, $options = array()) {
+    public function create(string $friendlyName, array $options = []): CompositionSettingsInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'FriendlyName' => $friendlyName,
             'AwsCredentialsSid' => $options['awsCredentialsSid'],
             'EncryptionKeySid' => $options['encryptionKeySid'],
             'AwsS3Url' => $options['awsS3Url'],
             'AwsStorageEnabled' => Serialize::booleanToString($options['awsStorageEnabled']),
             'EncryptionEnabled' => Serialize::booleanToString($options['encryptionEnabled']),
-        ));
+        ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new CompositionSettingsInstance($this->version, $payload);
     }
@@ -89,8 +74,8 @@ class CompositionSettingsContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }
