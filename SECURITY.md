@@ -4,4 +4,4 @@ The team @ NYC Opportunity actively maintains and releases updates to ensure the
 
 ## Reporting a Vulnerability
 
-Please report any vunerabilities confidentially using the [GitHub Security Advisories Feature](https://github.com/CityOfNewYork/ACCESS-NYC/security/advisories).
+Please report any vulnerabilities confidentially using the [GitHub Security Advisories Feature](https://github.com/CityOfNewYork/ACCESS-NYC/security/advisories).
