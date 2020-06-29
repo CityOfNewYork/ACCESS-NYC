@@ -56,6 +56,13 @@ class Limit_Login_Attempts
 	public $_errors = array();
 
 	/**
+	* Additional login errors messages that we need to show
+	*
+	* @var array
+	*/
+	public $other_login_errors = array();
+
+	/**
 	 * @var null
 	 */
 	private $use_local_options = null;
@@ -140,7 +147,7 @@ class Limit_Login_Attempts
 		* later versions of WP.
 		*/
 		add_action( 'wp_authenticate', array( $this, 'track_credentials' ), 10, 2 );
-		add_action( 'authenticate', array( $this, 'authenticate_filter' ), 5, 3 );
+		add_action( 'authenticate', array( $this, 'authenticate_filter' ), 35, 3 );
 
 		if ( defined('XMLRPC_REQUEST') && XMLRPC_REQUEST )
 			add_action( 'init', array( $this, 'check_xmlrpc_lock' ) );
@@ -432,6 +439,11 @@ class Limit_Login_Attempts
 	public function authenticate_filter( $user, $username, $password ) {
 
 		if ( ! empty( $username ) && ! empty( $password ) ) {
+
+		    if(is_wp_error($user) && in_array('bp_account_not_activated', $user->get_error_codes()) ) {
+
+				$this->other_login_errors[] = $user->get_error_message('bp_account_not_activated');
+            }
 
 			$ip = $this->get_address();
 
@@ -735,6 +747,10 @@ class Limit_Login_Attempts
 	public function notify( $user ) {
 		$args = explode( ',', $this->get_option( 'lockout_notify' ) );
 
+		if( is_object( $user ) ) {
+            return false;
+		}
+
 		// TODO: Maybe temporarily
 		if(!in_array('log', $args)) {
 		    $args[] = 'log';
@@ -956,9 +972,17 @@ class Limit_Login_Attempts
 	*/
 	public function wp_authenticate_user( $user, $password ) {
 
+	    $user_login = '';
+
+	    if( is_a( $user, 'WP_User' ) ) {
+	        $user_login = $user->user_login;
+        } else if( !empty($user) && !is_wp_error($user) ) {
+            $user_login = $user;
+        }
+
 		if ( is_wp_error( $user ) ||
 			$this->check_whitelist_ips( false, $this->get_address() ) ||
-			$this->check_whitelist_usernames( false, $user->user_login ) ||
+			$this->check_whitelist_usernames( false, $user_login ) ||
 			$this->is_limit_login_ok()
 		) {
 
@@ -970,7 +994,7 @@ class Limit_Login_Attempts
 		global $limit_login_my_error_shown;
 		$limit_login_my_error_shown = true;
 
-		if ( $this->is_username_blacklisted( $user->user_login ) || $this->is_ip_blacklisted( $this->get_address() ) ) {
+		if ( $this->is_username_blacklisted( $user_login ) || $this->is_ip_blacklisted( $this->get_address() ) ) {
 			$error->add( 'username_blacklisted', "<strong>ERROR:</strong> Too many failed login attempts." );
 		} else {
 			// This error should be the same as in "shake it" filter below
@@ -1123,12 +1147,21 @@ class Limit_Login_Attempts
 
 		if ( $limit_login_nonempty_credentials && $count > $my_warn_count ) {
 
-			/* Replace error message, including ours if necessary */
-			if( !empty( $_REQUEST['log'] ) && is_email( $_REQUEST['log'] ) ) {
-				$content = __( '<strong>ERROR</strong>: Incorrect email address or password.', 'limit-login-attempts-reloaded' ) . "<br />\n";
-			} else{
-				$content = __( '<strong>ERROR</strong>: Incorrect username or password.', 'limit-login-attempts-reloaded' ) . "<br />\n";
-			}
+		    if($this->other_login_errors) {
+
+		        $content = '';
+                foreach ($this->other_login_errors as $msg) {
+                    $content .= $msg . "<br />\n";
+                }
+            } else {
+
+				/* Replace error message, including ours if necessary */
+				if( !empty( $_REQUEST['log'] ) && is_email( $_REQUEST['log'] ) ) {
+					$content = __( '<strong>ERROR</strong>: Incorrect email address or password.', 'limit-login-attempts-reloaded' ) . "<br />\n";
+				} else{
+					$content = __( '<strong>ERROR</strong>: Incorrect username or password.', 'limit-login-attempts-reloaded' ) . "<br />\n";
+				}
+            }
 
 			if ( $limit_login_my_error_shown || $this->get_message() ) {
 				$content .= "<br />\n" . $this->get_message() . "<br />\n";

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a74138600265107004bfd6ef246090f",
+    "content-hash": "eb97d01493416dfdbc496982a1814d07",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2167,15 +2167,15 @@
         },
         {
             "name": "wpackagist-plugin/acf-to-rest-api",
-            "version": "3.2.0",
+            "version": "3.3.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/acf-to-rest-api/",
-                "reference": "tags/3.2.0"
+                "reference": "tags/3.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/acf-to-rest-api.3.2.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/acf-to-rest-api.3.3.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -2347,15 +2347,15 @@
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.13.0",
+            "version": "2.14.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.13.0"
+                "reference": "tags/2.14.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.13.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.14.0.zip",
                 "reference": null,
                 "shasum": null
             },

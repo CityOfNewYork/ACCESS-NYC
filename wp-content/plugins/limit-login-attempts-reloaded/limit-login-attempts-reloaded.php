@@ -5,7 +5,7 @@ Description: Limit the rate of login attempts for each IP address.
 Author: WPChef
 Author URI: https://wpchef.org
 Text Domain: limit-login-attempts-reloaded
-Version: 2.13.0
+Version: 2.14.0
 
 Copyright 2008 - 2012 Johan Eenfeldt, 2016 - 2020 WPChef
 */
