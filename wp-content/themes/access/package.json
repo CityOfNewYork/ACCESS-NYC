@@ -99,7 +99,7 @@
   },
   "dependencies": {
     "@nycopportunity/access-patterns": "^0.15.13",
-    "@nycopportunity/patterns-framework": "^1.0.0-6",
+    "@nycopportunity/patterns-framework": "^1.0.0-8",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
     "smoothscroll-polyfill": "^0.4.3",
