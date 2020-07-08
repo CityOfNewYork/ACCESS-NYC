@@ -10,7 +10,11 @@
     {% endblock %}
 
     {% block scripts_head %}{% endblock %}
-    {% include 'partials/json-ld.twig' %}
+
+    <script type="application/ld+json">
+      {{ schema }}
+    </script>
+
     {% endblock %}
   </head>
 

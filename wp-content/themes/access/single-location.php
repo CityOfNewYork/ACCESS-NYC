@@ -37,7 +37,10 @@ $context = Timber::get_context();
 
 $context['post'] = $location;
 
-$context['schema'] = json_encode(
+/**
+ * Setup schema for Single Location
+ */
+$context['schema'] = [
   array(
     "@context" => "https://schema.org",
     "@type" => $location -> locationType(),
@@ -57,7 +60,13 @@ $context['schema'] = json_encode(
       "name" => "New York"
     ]
   )
-);
+];
+
+if ($context['alert_sitewide_schema']) {
+  array_push($context['schema'], $context['alert_sitewide_schema']);
+}
+
+$context['schema'] = json_encode($context['schema']);
 
 /**
  * Page Meta Description
