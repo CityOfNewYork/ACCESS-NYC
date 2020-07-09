@@ -1,6 +1,6 @@
-<article id="{{ this.id }}" class="c-accordion" {% if this.itemprop %}itemprop="{{ this.itemprop }}"{% endif %} {% if this.itemtype %}itemscope itemtype="{{ this.itemtype }}"{% endif %}>
+<article id="{{ this.id }}" class="c-accordion">
   <header class="c-accordion__header color-dark-background">
-    <p {% if this.itemtype %}itemprop="name"{% endif %} id="aria-lb-{{ this.id }}">
+    <p id="aria-lb-{{ this.id }}">
       {{ this.header }}
     </p>
 
@@ -21,7 +21,7 @@
 
       {% if this.cta %}
       <p class="print:hidden">
-        {% if this.itemtype %}<span class="hidden" aria-hidden="true" itemprop="url">{{ this.cta.href }}</span>{% endif %}
+        {% if this.itemtype %}<span class="hidden" aria-hidden="true">{{ this.cta.href }}</span>{% endif %}
         <a class="btn btn-secondary btn-next text-small" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
           {{ this.cta.text }}
         </a>

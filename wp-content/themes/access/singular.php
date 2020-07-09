@@ -66,6 +66,30 @@ $context['alerts'] = array_map(function($post) {
 $context['google_translate_element'] = true;
 
 /**
+ * Set up schema
+ */
+$context['schema'] = [
+  array(
+    "@context" => "http://schema.org",
+    "@type" => "WebPage",
+    "mainEntityOfPage" => [
+      "name" => $post->title,
+      "dateModified" => $post->post_modified
+    ],
+    "spatialCoverage" => [
+      "type" => "City",
+      "name" => "New York"
+    ]
+  )
+];
+
+if ($context['alert_sitewide_schema']) {
+  array_push($context['schema'], $context['alert_sitewide_schema']);
+}
+
+$context['schema'] = json_encode($context['schema']);
+
+/**
  * Render the view
  */
 

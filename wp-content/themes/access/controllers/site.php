@@ -94,6 +94,20 @@ class Site extends TimberSite {
       return $post->custom['alert_sitewide'];
     }));
 
+    /** Implement schema for sitewide alert */
+    $alert_sitewide = $context['alert_sitewide'];
+
+    if ($alert_sitewide->item_scope === 'SpecialAnnouncement') {
+      $context['alert_sitewide_schema'] = array(
+        "@context" => "https://schema.org",
+        "@type" => "SpecialAnnouncement",
+        "name" => $alert_sitewide->post_title,
+        "datePosted" => $alert_sitewide->post_modified,
+        "text" => $alert_sitewide->alert_content,
+        "category" => "https://www.wikidata.org/wiki/Q81068910"
+      );
+    }
+
     /** Determine if page is in print view */
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
 
