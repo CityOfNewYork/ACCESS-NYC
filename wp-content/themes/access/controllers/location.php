@@ -46,7 +46,7 @@ class Location extends Timber\Post {
    * @return  Array  Phone number and extension.
    */
   public function getPhone() {
-    $phone = $this -> get_field('phone');
+    $phone = $this->get_field('phone');
     return $phone;
   }
 
@@ -56,7 +56,7 @@ class Location extends Timber\Post {
    */
   public function locationMapURL() {
     $mapUrl = 'https://www.google.com/maps/dir//';
-    $address = $this -> address['address'];
+    $address = $this->address['address'];
     return $mapUrl .= $address;
   }
 
@@ -65,7 +65,7 @@ class Location extends Timber\Post {
    * @return  String  type of location.
    */
   public function locationType() {
-    $locationType = ($this -> type === 'Government Office') ? 'GovernmentOffice' : 'Organization';
+    $locationType = ($this->type === 'Government Office') ? 'GovernmentOffice' : 'Organization';
     return $locationType;
   }
 

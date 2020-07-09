@@ -97,7 +97,7 @@ class Site extends TimberSite {
     /** Implement schema for sitewide alert */
     $alert_sitewide = $context['alert_sitewide'];
 
-    if ($alert_sitewide -> item_scope === 'SpecialAnnouncement') {
+    if ($alert_sitewide->item_scope === 'SpecialAnnouncement') {
       $context['alert_sitewide_schema'] = array(
         "@context" => "https://schema.org",
         "@type" => "SpecialAnnouncement",

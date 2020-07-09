@@ -72,7 +72,7 @@ $context['schema'] = [
   )
 ];
 
-if ($program -> getItemScope() === 'SpecialAnnouncement') {
+if ($program->getItemScope() === 'SpecialAnnouncement') {
   $special_announcement = array(
     "@context" => "https://schema.org",
     "@type" => "SpecialAnnouncement",

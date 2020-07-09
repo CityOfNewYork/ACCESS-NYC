@@ -73,7 +73,7 @@ if (is_home()) {
  * Setup schema for homepage touts
  */
 $context['schema'] = array_map(function($tout) {
-  if ($tout -> item_scope) {
+  if ($tout->item_scope) {
     return array(
       "@context" => "https://schema.org",
       "@type" => $tout->item_scope,
