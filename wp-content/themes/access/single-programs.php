@@ -53,7 +53,6 @@ $context['schema'] = [
     "name" => $program->name,
     "alternateName" => $program->plain_language_program_name,
     "datePosted" => $program->post_modified,
-    "expires" => $program->custom['program_status_clear_date'],
     "url" => $program->get_permalink,
     "serviceType" => $program->category['name'],
     "serviceOperator" => array(
@@ -79,6 +78,8 @@ if ($program -> getItemScope() === 'SpecialAnnouncement') {
     "@type" => "SpecialAnnouncement",
     "name" => $program->program_name,
     "category" => "https://www.wikidata.org/wiki/Q81068910",
+    "expires" => ($program->custom['program_status_clear_date'] ?
+                    $program->custom['program_status_clear_date'] : ""),
     "governmentBenefitsInfo" => array(
       "@type" => "GovernmentService",
       "name" => $program->program_name,
