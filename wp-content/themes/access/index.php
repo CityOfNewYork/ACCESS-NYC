@@ -92,7 +92,45 @@ $context['schema'] = array_map(function($tout) {
   }
 }, $context['homepage_touts']);
 
-$context['schema'] = array_filter($context['schema']);
+$programSchema = array_values(array_filter(array_map(function($program) {
+  if ($program->getItemScope() === 'SpecialAnnouncement') {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => 'SpecialAnnouncement',
+      'name' => $program->program_name,
+      'category' => 'https://www.wikidata.org/wiki/Q81068910',
+      'datePosted' => $program->post_modified,
+      'expires' => ($program->custom['program_status_clear_date'] ?
+                      $program->custom['program_status_clear_date'] : ''),
+      'governmentBenefitsInfo' => array(
+        '@type' => 'GovernmentService',
+        'name' => $program->program_name,
+        'url' => $program->structured_data_url,
+        'provider' => array(
+          '@type' => 'GovernmentOrganization',
+          'name' => $program->government_agency
+        ),
+        'audience' => array(
+          '@type' => 'Audience',
+          'name' => $program->audience
+        ),
+        'serviceType' => $program->category['name']
+      ),
+      'serviceOperator' => array(
+        '@type' => 'GovernmentOrganization',
+        'name' => $program->government_agency
+      ),
+      'spatialCoverage' => array(
+        'type' => 'City',
+        'name' => 'New York'
+      )
+    );
+  }
+}, $context['featured_programs'])));
+
+$context['schema'] = array_merge($programSchema, $context['schema']);
+
+$context['schema'] = array_values(array_filter($context['schema']));
 
 if ($context['alert_sitewide_schema']) {
   array_push($context['schema'], $context['alert_sitewide_schema']);
