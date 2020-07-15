@@ -78,6 +78,7 @@ if ($program->getItemScope() === 'SpecialAnnouncement') {
     "@type" => "SpecialAnnouncement",
     "name" => $program->program_name,
     "category" => "https://www.wikidata.org/wiki/Q81068910",
+    "datePosted" => $program->post_modified,
     "expires" => ($program->custom['program_status_clear_date'] ?
                     $program->custom['program_status_clear_date'] : ""),
     "governmentBenefitsInfo" => array(
