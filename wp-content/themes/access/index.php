@@ -72,20 +72,21 @@ if (is_home()) {
 /**
  * Setup schema for homepage touts
  */
+
 $context['schema'] = array_map(function($tout) {
   if ($tout->item_scope) {
     return array(
-      "@context" => "https://schema.org",
-      "@type" => $tout->item_scope,
-      "name" => $tout->tout_title,
-      "newsUpdatesAndGuidelines" => $tout->link_url,
-      "datePosted" => $tout->post_modified,
-      "expires" => $tout->custom['tout_status_clear_date'],
-      "text" => $tout->link_text,
-      "category" => "https://www.wikidata.org/wiki/Q81068910",
-      "spatialCoverage" => [
-        "type" => "City",
-        "name" => "New York"
+      '@context' => 'https://schema.org',
+      '@type' => $tout->item_scope,
+      'name' => $tout->tout_title,
+      'newsUpdatesAndGuidelines' => $tout->link_url,
+      'datePosted' => $tout->post_modified,
+      'expires' => $tout->custom['tout_status_clear_date'],
+      'text' => $tout->link_text,
+      'category' => 'https://www.wikidata.org/wiki/Q81068910',
+      'spatialCoverage' => [
+        'type' => 'City',
+        'name' => 'New York'
       ]
     );
   }

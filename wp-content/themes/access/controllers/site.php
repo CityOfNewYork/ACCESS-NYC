@@ -99,12 +99,12 @@ class Site extends TimberSite {
 
     if ($alert_sitewide->item_scope === 'SpecialAnnouncement') {
       $context['alert_sitewide_schema'] = array(
-        "@context" => "https://schema.org",
-        "@type" => "SpecialAnnouncement",
-        "name" => $alert_sitewide->post_title,
-        "datePosted" => $alert_sitewide->post_modified,
-        "text" => $alert_sitewide->alert_content,
-        "category" => "https://www.wikidata.org/wiki/Q81068910"
+        '@context' => 'https://schema.org',
+        '@type' => 'SpecialAnnouncement',
+        'name' => $alert_sitewide->post_title,
+        'datePosted' => $alert_sitewide->post_modified,
+        'text' => $alert_sitewide->alert_content,
+        'category' => 'https://www.wikidata.org/wiki/Q81068910'
       );
     }
 
