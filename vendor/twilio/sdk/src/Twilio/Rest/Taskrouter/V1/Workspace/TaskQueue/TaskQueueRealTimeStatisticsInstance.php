@@ -17,9 +17,11 @@ use Twilio\Version;
 
 /**
  * @property string $accountSid
- * @property array $activityStatistics
+ * @property array[] $activityStatistics
  * @property int $longestTaskWaitingAge
  * @property string $longestTaskWaitingSid
+ * @property int $longestRelativeTaskAgeInQueue
+ * @property string $longestRelativeTaskSidInQueue
  * @property string $taskQueueSid
  * @property array $tasksByPriority
  * @property array $tasksByStatus
@@ -33,23 +35,24 @@ class TaskQueueRealTimeStatisticsInstance extends InstanceResource {
     /**
      * Initialize the TaskQueueRealTimeStatisticsInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $workspaceSid The SID of the Workspace that contains the
      *                             TaskQueue
      * @param string $taskQueueSid The SID of the TaskQueue from which these
      *                             statistics were calculated
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\TaskQueue\TaskQueueRealTimeStatisticsInstance
      */
-    public function __construct(Version $version, array $payload, $workspaceSid, $taskQueueSid) {
+    public function __construct(Version $version, array $payload, string $workspaceSid, string $taskQueueSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'activityStatistics' => Values::array_get($payload, 'activity_statistics'),
             'longestTaskWaitingAge' => Values::array_get($payload, 'longest_task_waiting_age'),
             'longestTaskWaitingSid' => Values::array_get($payload, 'longest_task_waiting_sid'),
+            'longestRelativeTaskAgeInQueue' => Values::array_get($payload, 'longest_relative_task_age_in_queue'),
+            'longestRelativeTaskSidInQueue' => Values::array_get($payload, 'longest_relative_task_sid_in_queue'),
             'taskQueueSid' => Values::array_get($payload, 'task_queue_sid'),
             'tasksByPriority' => Values::array_get($payload, 'tasks_by_priority'),
             'tasksByStatus' => Values::array_get($payload, 'tasks_by_status'),
@@ -58,19 +61,19 @@ class TaskQueueRealTimeStatisticsInstance extends InstanceResource {
             'totalTasks' => Values::array_get($payload, 'total_tasks'),
             'workspaceSid' => Values::array_get($payload, 'workspace_sid'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array('workspaceSid' => $workspaceSid, 'taskQueueSid' => $taskQueueSid, );
+        $this->solution = ['workspaceSid' => $workspaceSid, 'taskQueueSid' => $taskQueueSid, ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\TaskQueue\TaskQueueRealTimeStatisticsContext Context for this
-     *                                                                                           TaskQueueRealTimeStatisticsInstance
+     * @return TaskQueueRealTimeStatisticsContext Context for this
+     *                                            TaskQueueRealTimeStatisticsInstance
      */
-    protected function proxy() {
+    protected function proxy(): TaskQueueRealTimeStatisticsContext {
         if (!$this->context) {
             $this->context = new TaskQueueRealTimeStatisticsContext(
                 $this->version,
@@ -83,14 +86,14 @@ class TaskQueueRealTimeStatisticsInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a TaskQueueRealTimeStatisticsInstance
+     * Fetch the TaskQueueRealTimeStatisticsInstance
      *
      * @param array|Options $options Optional Arguments
      * @return TaskQueueRealTimeStatisticsInstance Fetched
      *                                             TaskQueueRealTimeStatisticsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch($options = array()) {
+    public function fetch(array $options = []): TaskQueueRealTimeStatisticsInstance {
         return $this->proxy()->fetch($options);
     }
 
@@ -101,7 +104,7 @@ class TaskQueueRealTimeStatisticsInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -119,8 +122,8 @@ class TaskQueueRealTimeStatisticsInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

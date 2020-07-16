@@ -199,7 +199,7 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
 
                 <div class="hidden">
                     <div id="connect_translations_dialog"
-                         title="<?php esc_attr_e( 'Choose a post to assign', 'sitepress' ); ?>"
+                         title="<?php esc_attr_e( sprintf( 'Choose a %s to assign', get_post_type_object( get_post_type( $this->post ) )->labels->singular_name ), 'sitepress' ); ?>"
                          data-set_as_source-text="<?php echo esc_attr( sprintf( __( 'Make %s the original language for this %s', 'sitepress' ), $language_name, $this->post->post_type ) ); ?>"
                          data-alert-text="<?php esc_attr_e( "Please make sure to save your post, if you've made any change, before proceeding with this action!", 'sitepress' ); ?>"
                          data-cancel-label="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>"

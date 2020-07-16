@@ -19,20 +19,24 @@ abstract class ServiceOptions {
     /**
      * @param bool $includeCredentials Whether to inject Account credentials into a
      *                                 function invocation context
+     * @param bool $uiEditable Whether the Service's properties and subresources
+     *                         can be edited via the UI
      * @return CreateServiceOptions Options builder
      */
-    public static function create($includeCredentials = Values::NONE) {
-        return new CreateServiceOptions($includeCredentials);
+    public static function create(bool $includeCredentials = Values::NONE, bool $uiEditable = Values::NONE): CreateServiceOptions {
+        return new CreateServiceOptions($includeCredentials, $uiEditable);
     }
 
     /**
      * @param bool $includeCredentials Whether to inject Account credentials into a
      *                                 function invocation context
      * @param string $friendlyName A string to describe the Service resource
+     * @param bool $uiEditable Whether the Service's properties and subresources
+     *                         can be edited via the UI
      * @return UpdateServiceOptions Options builder
      */
-    public static function update($includeCredentials = Values::NONE, $friendlyName = Values::NONE) {
-        return new UpdateServiceOptions($includeCredentials, $friendlyName);
+    public static function update(bool $includeCredentials = Values::NONE, string $friendlyName = Values::NONE, bool $uiEditable = Values::NONE): UpdateServiceOptions {
+        return new UpdateServiceOptions($includeCredentials, $friendlyName, $uiEditable);
     }
 }
 
@@ -40,9 +44,12 @@ class CreateServiceOptions extends Options {
     /**
      * @param bool $includeCredentials Whether to inject Account credentials into a
      *                                 function invocation context
+     * @param bool $uiEditable Whether the Service's properties and subresources
+     *                         can be edited via the UI
      */
-    public function __construct($includeCredentials = Values::NONE) {
+    public function __construct(bool $includeCredentials = Values::NONE, bool $uiEditable = Values::NONE) {
         $this->options['includeCredentials'] = $includeCredentials;
+        $this->options['uiEditable'] = $uiEditable;
     }
 
     /**
@@ -52,8 +59,20 @@ class CreateServiceOptions extends Options {
      *                                 function invocation context
      * @return $this Fluent Builder
      */
-    public function setIncludeCredentials($includeCredentials) {
+    public function setIncludeCredentials(bool $includeCredentials): self {
         $this->options['includeCredentials'] = $includeCredentials;
+        return $this;
+    }
+
+    /**
+     * Whether the Service's properties and subresources can be edited via the UI. The default value is `false`.
+     *
+     * @param bool $uiEditable Whether the Service's properties and subresources
+     *                         can be edited via the UI
+     * @return $this Fluent Builder
+     */
+    public function setUiEditable(bool $uiEditable): self {
+        $this->options['uiEditable'] = $uiEditable;
         return $this;
     }
 
@@ -62,14 +81,9 @@ class CreateServiceOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Serverless.V1.CreateServiceOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Serverless.V1.CreateServiceOptions ' . $options . ']';
     }
 }
 
@@ -78,10 +92,13 @@ class UpdateServiceOptions extends Options {
      * @param bool $includeCredentials Whether to inject Account credentials into a
      *                                 function invocation context
      * @param string $friendlyName A string to describe the Service resource
+     * @param bool $uiEditable Whether the Service's properties and subresources
+     *                         can be edited via the UI
      */
-    public function __construct($includeCredentials = Values::NONE, $friendlyName = Values::NONE) {
+    public function __construct(bool $includeCredentials = Values::NONE, string $friendlyName = Values::NONE, bool $uiEditable = Values::NONE) {
         $this->options['includeCredentials'] = $includeCredentials;
         $this->options['friendlyName'] = $friendlyName;
+        $this->options['uiEditable'] = $uiEditable;
     }
 
     /**
@@ -91,7 +108,7 @@ class UpdateServiceOptions extends Options {
      *                                 function invocation context
      * @return $this Fluent Builder
      */
-    public function setIncludeCredentials($includeCredentials) {
+    public function setIncludeCredentials(bool $includeCredentials): self {
         $this->options['includeCredentials'] = $includeCredentials;
         return $this;
     }
@@ -102,8 +119,20 @@ class UpdateServiceOptions extends Options {
      * @param string $friendlyName A string to describe the Service resource
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
+        return $this;
+    }
+
+    /**
+     * Whether the Service's properties and subresources can be edited via the UI. The default value is `false`.
+     *
+     * @param bool $uiEditable Whether the Service's properties and subresources
+     *                         can be edited via the UI
+     * @return $this Fluent Builder
+     */
+    public function setUiEditable(bool $uiEditable): self {
+        $this->options['uiEditable'] = $uiEditable;
         return $this;
     }
 
@@ -112,13 +141,8 @@ class UpdateServiceOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Serverless.V1.UpdateServiceOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Serverless.V1.UpdateServiceOptions ' . $options . ']';
     }
 }

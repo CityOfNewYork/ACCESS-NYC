@@ -7,10 +7,10 @@ class WPML_Cornerstone_Integration_Factory {
 	public function create() {
 		$action_filter_loader = new WPML_Action_Filter_Loader();
 		$action_filter_loader->load(
-			array(
+			[
 				'WPML_PB_Cornerstone_Handle_Custom_Fields_Factory',
 				'WPML_Cornerstone_Media_Hooks_Factory',
-			)
+			]
 		);
 
 		$nodes         = new WPML_Cornerstone_Translatable_Nodes();

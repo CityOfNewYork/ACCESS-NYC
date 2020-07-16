@@ -17,6 +17,57 @@ class WPML_Display_As_Translated_Taxonomy_Query extends WPML_Display_As_Translat
 	}
 
 	/**
+	 * If "display as translated" mode is enabled, we check whether a category has some assigned posts or
+	 * its equivalent in the default language.
+	 *
+	 * @param array $clauses
+	 * @param string $default_lang
+	 *
+	 * @return array
+	 */
+	public function update_count( $clauses, $default_lang ) {
+		$clauses['fields'] = $this->update_count_in_fields( $clauses['fields'], $default_lang );
+		$clauses['where']  = $this->update_count_in_where( $clauses['where'], $default_lang );
+
+		return $clauses;
+	}
+
+	private function update_count_in_fields( $fields, $default_lang ) {
+		$sql = "
+			tt.*,
+			GREATEST(
+				tt.count,
+				(
+			        SELECT term_taxonomy.count
+		            FROM {$this->wpdb->term_taxonomy} term_taxonomy
+		            INNER JOIN {$this->wpdb->prefix}icl_translations translations ON translations.element_id = term_taxonomy.term_taxonomy_id
+		            WHERE translations.trid = icl_t.trid AND translations.language_code = %s
+				)
+			) as `count`
+		";
+		$sql = $this->wpdb->prepare( $sql, $default_lang );
+
+		return str_replace( 'tt.*', $sql, $fields );
+	}
+
+	private function update_count_in_where( $where, $default_lang ) {
+		$sql = "
+		(
+	        tt.count > 0 
+	        OR (
+		        SELECT term_taxonomy.count
+		        FROM {$this->wpdb->term_taxonomy} term_taxonomy
+		        INNER JOIN {$this->wpdb->prefix}icl_translations translations ON translations.element_id = term_taxonomy.term_taxonomy_id
+		        WHERE translations.trid = icl_t.trid AND translations.language_code = %s
+	        ) > 0
+	    )
+		";
+		$sql = $this->wpdb->prepare( $sql, $default_lang );
+
+		return str_replace( 'tt.count > 0', $sql, $where );
+	}
+
+	/**
 	 * @param array $content_types
 	 *
 	 * @return string

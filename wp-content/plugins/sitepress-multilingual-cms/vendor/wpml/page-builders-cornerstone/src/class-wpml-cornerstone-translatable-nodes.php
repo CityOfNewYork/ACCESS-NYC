@@ -167,198 +167,232 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 	}
 
 	/**
-	 * Initialize translatable nodes.
+	 * @return array[]
 	 */
-	public function initialize_nodes_to_translate() {
-
-		$this->nodes_to_translate = array(
-			'alert'                   => array(
-				'conditions' => array( '_type' => 'alert' ),
-				'fields'     => array(
-					array(
+	public static function get_nodes_to_translate() {
+		return [
+			'card'                  => [
+				'conditions' => [ '_type' => 'card' ],
+				'fields'     => [
+					[
+						'field'       => 'card_front_text_content',
+						'type'        => __( 'Card: front text content', 'sitepress' ),
+						'editor_type' => 'VISUAL',
+					],
+					[
+						'field'       => 'card_back_text_content',
+						'type'        => __( 'Card: back text content', 'sitepress' ),
+						'editor_type' => 'VISUAL',
+					],
+					[
+						'field'       => 'anchor_text_primary_content',
+						'type'        => __( 'Card: anchor text primary content', 'sitepress' ),
+						'editor_type' => 'VISUAL',
+					],
+					[
+						'field'       => 'anchor_text_secondary_content',
+						'type'        => __( 'Card: anchor text secondary content', 'sitepress' ),
+						'editor_type' => 'LINE',
+					],
+					[
+						'field'       => 'anchor_href',
+						'type'        => __( 'Card: anchor link', 'sitepress' ),
+						'editor_type' => 'LINK',
+					],
+				],
+			],
+			'alert'                   => [
+				'conditions' => [ '_type' => 'alert' ],
+				'fields'     => [
+					[
 						'field'       => 'alert_content',
 						'type'        => __( 'Alert Content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
-					),
-				),
-			),
-			'text'                    => array(
-				'conditions' => array( '_type' => 'text' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'text'                    => [
+				'conditions' => [ '_type' => 'text' ],
+				'fields'     => [
+					[
 						'field'       => 'text_content',
 						'type'        => __( 'Text content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
-					),
-				),
-			),
-			'quote'                   => array(
-				'conditions' => array( '_type' => 'quote' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'quote'                   => [
+				'conditions' => [ '_type' => 'quote' ],
+				'fields'     => [
+					[
 						'field'       => 'quote_content',
 						'type'        => __( 'Quote content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
-					),
-					array(
+					],
+					[
 						'field'       => 'quote_cite_content',
 						'type'        => __( 'Quote: cite content', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-				),
-			),
-			'counter'                 => array(
-				'conditions' => array( '_type' => 'counter' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'counter'                 => [
+				'conditions' => [ '_type' => 'counter' ],
+				'fields'     => [
+					[
 						'field'       => 'counter_number_prefix_content',
 						'type'        => __( 'Counter: number prefix', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-					array(
+					],
+					[
 						'field'       => 'counter_number_suffix_content',
 						'type'        => __( 'Counter: number suffix', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-				),
-			),
-			'content-area'            => array(
-				'conditions' => array( '_type' => 'content-area' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'content-area'            => [
+				'conditions' => [ '_type' => 'content-area' ],
+				'fields'     => [
+					[
 						'field'       => 'content',
 						'type'        => __( 'Content Area: content', 'sitepress' ),
 						'editor_type' => 'AREA',
-					),
-				),
-			),
-			'breadcrumbs'             => array(
-				'conditions' => array( '_type' => 'breadcrumbs' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'breadcrumbs'             => [
+				'conditions' => [ '_type' => 'breadcrumbs' ],
+				'fields'     => [
+					[
 						'field'       => 'breadcrumbs_home_label_text',
 						'type'        => __( 'Breadcrumbs: home label text', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-				),
-			),
-			'audio'                   => array(
-				'conditions' => array( '_type' => 'audio' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'audio'                   => [
+				'conditions' => [ '_type' => 'audio' ],
+				'fields'     => [
+					[
 						'field'       => 'audio_embed_code',
 						'type'        => __( 'Audio: embed code', 'sitepress' ),
 						'editor_type' => 'VISUAL',
-					),
-				),
-			),
-			'headline'                => array(
-				'conditions' => array( '_type' => 'headline' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'headline'                => [
+				'conditions' => [ '_type' => 'headline' ],
+				'fields'     => [
+					[
 						'field'       => 'text_content',
 						'type'        => __( 'Headline text content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
-					),
-				),
-			),
-			'content-area-off-canvas' => array(
-				'conditions' => array( '_type' => 'content-area-off-canvas' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'content-area-off-canvas' => [
+				'conditions' => [ '_type' => 'content-area-off-canvas' ],
+				'fields'     => [
+					[
 						'field'       => 'off_canvas_content',
 						'type'        => __( 'Canvas content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
-					),
-				),
-			),
-			'content-area-modal'      => array(
-				'conditions' => array( '_type' => 'content-area-modal' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'content-area-modal'      => [
+				'conditions' => [ '_type' => 'content-area-modal' ],
+				'fields'     => [
+					[
 						'field'       => 'modal_content',
 						'type'        => __( 'Modal content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
-					),
-				),
-			),
-			'content-area-dropdown'   => array(
-				'conditions' => array( '_type' => 'content-area-dropdown' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'content-area-dropdown'   => [
+				'conditions' => [ '_type' => 'content-area-dropdown' ],
+				'fields'     => [
+					[
 						'field'       => 'dropdown_content',
 						'type'        => __( 'Dropdown content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
-					),
-				),
-			),
-			'button'                  => array(
-				'conditions' => array( '_type' => 'button' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'button'                  => [
+				'conditions' => [ '_type' => 'button' ],
+				'fields'     => [
+					[
 						'field'       => 'anchor_text_primary_content',
 						'type'        => __( 'Anchor text: primary content', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-					array(
+					],
+					[
 						'field'       => 'anchor_text_secondary_content',
 						'type'        => __( 'Anchor text: secondary content', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-				),
-			),
-			'video'                   => array(
-				'conditions' => array( '_type' => 'video' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'video'                   => [
+				'conditions' => [ '_type' => 'video' ],
+				'fields'     => [
+					[
 						'field'       => 'video_embed_code',
 						'type'        => __( 'Video: embed code', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-				),
-			),
-			'search-inline'           => array(
-				'conditions' => array( '_type' => 'search-inline' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'search-inline'           => [
+				'conditions' => [ '_type' => 'search-inline' ],
+				'fields'     => [
+					[
 						'field'       => 'search_placeholder',
 						'type'        => __( 'Search Inline: placeholder', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-				),
-			),
-			'search-modal'            => array(
-				'conditions' => array( '_type' => 'search-modal' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'search-modal'            => [
+				'conditions' => [ '_type' => 'search-modal' ],
+				'fields'     => [
+					[
 						'field'       => 'search_placeholder',
 						'type'        => __( 'Search Modal: placeholder', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-				),
-			),
-			'search-dropdown'         => array(
-				'conditions' => array( '_type' => 'search-dropdown' ),
-				'fields'     => array(
-					array(
+					],
+				],
+			],
+			'search-dropdown'         => [
+				'conditions' => [ '_type' => 'search-dropdown' ],
+				'fields'     => [
+					[
 						'field'       => 'search_placeholder',
 						'type'        => __( 'Search Dropdown: placeholder', 'sitepress' ),
 						'editor_type' => 'LINE',
-					),
-				),
-			),
-			'accordion'               => array(
-				'conditions'        => array( '_type' => 'accordion' ),
-				'fields'            => array(),
+					],
+				],
+			],
+			'accordion'               => [
+				'conditions'        => [ '_type' => 'accordion' ],
+				'fields'            => [],
 				'integration-class' => 'WPML_Cornerstone_Accordion',
-			),
-			'tabs'                    => array(
-				'conditions'        => array( '_type' => 'tabs' ),
-				'fields'            => array(),
+			],
+			'tabs'                    => [
+				'conditions'        => [ '_type' => 'tabs' ],
+				'fields'            => [],
 				'integration-class' => 'WPML_Cornerstone_Tabs',
-			),
-		);
+			],
+		];
+	}
 
-		$this->nodes_to_translate = apply_filters( 'wpml_cornerstone_modules_to_translate', $this->nodes_to_translate );
+	/**
+	 * Initialize translatable nodes.
+	 */
+	public function initialize_nodes_to_translate() {
+		$this->nodes_to_translate = apply_filters( 'wpml_cornerstone_modules_to_translate', self::get_nodes_to_translate() );
 	}
 }

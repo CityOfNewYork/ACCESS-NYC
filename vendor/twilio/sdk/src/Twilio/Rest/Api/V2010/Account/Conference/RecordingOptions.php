@@ -17,7 +17,7 @@ abstract class RecordingOptions {
      * @param string $pauseBehavior Whether to record during a pause
      * @return UpdateRecordingOptions Options builder
      */
-    public static function update($pauseBehavior = Values::NONE) {
+    public static function update(string $pauseBehavior = Values::NONE): UpdateRecordingOptions {
         return new UpdateRecordingOptions($pauseBehavior);
     }
 
@@ -29,7 +29,7 @@ abstract class RecordingOptions {
      *                                 read
      * @return ReadRecordingOptions Options builder
      */
-    public static function read($dateCreatedBefore = Values::NONE, $dateCreated = Values::NONE, $dateCreatedAfter = Values::NONE) {
+    public static function read(string $dateCreatedBefore = Values::NONE, string $dateCreated = Values::NONE, string $dateCreatedAfter = Values::NONE): ReadRecordingOptions {
         return new ReadRecordingOptions($dateCreatedBefore, $dateCreated, $dateCreatedAfter);
     }
 }
@@ -38,7 +38,7 @@ class UpdateRecordingOptions extends Options {
     /**
      * @param string $pauseBehavior Whether to record during a pause
      */
-    public function __construct($pauseBehavior = Values::NONE) {
+    public function __construct(string $pauseBehavior = Values::NONE) {
         $this->options['pauseBehavior'] = $pauseBehavior;
     }
 
@@ -48,7 +48,7 @@ class UpdateRecordingOptions extends Options {
      * @param string $pauseBehavior Whether to record during a pause
      * @return $this Fluent Builder
      */
-    public function setPauseBehavior($pauseBehavior) {
+    public function setPauseBehavior(string $pauseBehavior): self {
         $this->options['pauseBehavior'] = $pauseBehavior;
         return $this;
     }
@@ -58,14 +58,9 @@ class UpdateRecordingOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.UpdateRecordingOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.UpdateRecordingOptions ' . $options . ']';
     }
 }
 
@@ -77,7 +72,7 @@ class ReadRecordingOptions extends Options {
      * @param string $dateCreatedAfter The `YYYY-MM-DD` value of the resources to
      *                                 read
      */
-    public function __construct($dateCreatedBefore = Values::NONE, $dateCreated = Values::NONE, $dateCreatedAfter = Values::NONE) {
+    public function __construct(string $dateCreatedBefore = Values::NONE, string $dateCreated = Values::NONE, string $dateCreatedAfter = Values::NONE) {
         $this->options['dateCreatedBefore'] = $dateCreatedBefore;
         $this->options['dateCreated'] = $dateCreated;
         $this->options['dateCreatedAfter'] = $dateCreatedAfter;
@@ -90,7 +85,7 @@ class ReadRecordingOptions extends Options {
      *                                  read
      * @return $this Fluent Builder
      */
-    public function setDateCreatedBefore($dateCreatedBefore) {
+    public function setDateCreatedBefore(string $dateCreatedBefore): self {
         $this->options['dateCreatedBefore'] = $dateCreatedBefore;
         return $this;
     }
@@ -101,7 +96,7 @@ class ReadRecordingOptions extends Options {
      * @param string $dateCreated The `YYYY-MM-DD` value of the resources to read
      * @return $this Fluent Builder
      */
-    public function setDateCreated($dateCreated) {
+    public function setDateCreated(string $dateCreated): self {
         $this->options['dateCreated'] = $dateCreated;
         return $this;
     }
@@ -113,7 +108,7 @@ class ReadRecordingOptions extends Options {
      *                                 read
      * @return $this Fluent Builder
      */
-    public function setDateCreatedAfter($dateCreatedAfter) {
+    public function setDateCreatedAfter(string $dateCreatedAfter): self {
         $this->options['dateCreatedAfter'] = $dateCreatedAfter;
         return $this;
     }
@@ -123,13 +118,8 @@ class ReadRecordingOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.ReadRecordingOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.ReadRecordingOptions ' . $options . ']';
     }
 }

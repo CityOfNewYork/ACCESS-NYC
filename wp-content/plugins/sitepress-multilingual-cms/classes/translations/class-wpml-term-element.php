@@ -27,6 +27,10 @@ class WPML_Term_Element extends WPML_Translation_Element {
 		$has_filter = remove_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1 );
 
 		$term = get_term( $this->id, $this->taxonomy );
+		if ( ! $term || is_wp_error( $term ) ) {
+			$term = get_term_by( 'term_taxonomy_id', $this->id, $this->taxonomy );
+			$term = $term ?: null;
+		}
 
 		if ( $has_filter ) {
 			add_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1, 1 );

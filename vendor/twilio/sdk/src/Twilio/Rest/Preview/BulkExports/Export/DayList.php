@@ -10,6 +10,8 @@
 namespace Twilio\Rest\Preview\BulkExports\Export;
 
 use Twilio\ListResource;
+use Twilio\Options;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -21,14 +23,13 @@ class DayList extends ListResource {
      * Construct the DayList
      *
      * @param Version $version Version that contains the resource
-     * @param string $resourceType The resource_type
-     * @return \Twilio\Rest\Preview\BulkExports\Export\DayList
+     * @param string $resourceType The type of communication – Messages, Calls
      */
-    public function __construct(Version $version, $resourceType) {
+    public function __construct(Version $version, string $resourceType) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('resourceType' => $resourceType, );
+        $this->solution = ['resourceType' => $resourceType, ];
 
         $this->uri = '/Exports/' . \rawurlencode($resourceType) . '/Days';
     }
@@ -41,6 +42,7 @@ class DayList extends ListResource {
      * The results are returned as a generator, so this operation is memory
      * efficient.
      *
+     * @param array|Options $options Optional Arguments
      * @param int $limit Upper limit for the number of records to return. stream()
      *                   guarantees to never return more than limit.  Default is no
      *                   limit
@@ -49,12 +51,12 @@ class DayList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(array $options = [], int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
-        $page = $this->page($limits['pageSize']);
+        $page = $this->page($options, $limits['pageSize']);
 
         return $this->version->stream($page, $limits['limit'], $limits['pageLimit']);
     }
@@ -64,6 +66,7 @@ class DayList extends ListResource {
      * Unlike stream(), this operation is eager and will load `limit` records into
      * memory before returning.
      *
+     * @param array|Options $options Optional Arguments
      * @param int $limit Upper limit for the number of records to return. read()
      *                   guarantees to never return more than limit.  Default is no
      *                   limit
@@ -74,31 +77,32 @@ class DayList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return DayInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
-        return \iterator_to_array($this->stream($limit, $pageSize), false);
+    public function read(array $options = [], int $limit = null, $pageSize = null): array {
+        return \iterator_to_array($this->stream($options, $limit, $pageSize), false);
     }
 
     /**
      * Retrieve a single page of DayInstance records from the API.
      * Request is executed immediately
      *
+     * @param array|Options $options Optional Arguments
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of DayInstance
+     * @return DayPage Page of DayInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
+    public function page(array $options = [], $pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): DayPage {
+        $options = new Values($options);
+
+        $params = Values::of([
+            'NextToken' => $options['nextToken'],
+            'PreviousToken' => $options['previousToken'],
             'PageToken' => $pageToken,
             'Page' => $pageNumber,
             'PageSize' => $pageSize,
-        ));
+        ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new DayPage($this->version, $response, $this->solution);
     }
@@ -108,9 +112,9 @@ class DayList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of DayInstance
+     * @return DayPage Page of DayInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): DayPage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -120,11 +124,20 @@ class DayList extends ListResource {
     }
 
     /**
+     * Constructs a DayContext
+     *
+     * @param string $day The date of the data in the file
+     */
+    public function getContext(string $day): DayContext {
+        return new DayContext($this->version, $this->solution['resourceType'], $day);
+    }
+
+    /**
      * Provide a friendly representation
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Preview.BulkExports.DayList]';
     }
 }

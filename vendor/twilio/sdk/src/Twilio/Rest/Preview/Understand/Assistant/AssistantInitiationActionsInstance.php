@@ -27,33 +27,32 @@ class AssistantInitiationActionsInstance extends InstanceResource {
     /**
      * Initialize the AssistantInitiationActionsInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $assistantSid The assistant_sid
-     * @return \Twilio\Rest\Preview\Understand\Assistant\AssistantInitiationActionsInstance
      */
-    public function __construct(Version $version, array $payload, $assistantSid) {
+    public function __construct(Version $version, array $payload, string $assistantSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'assistantSid' => Values::array_get($payload, 'assistant_sid'),
             'url' => Values::array_get($payload, 'url'),
             'data' => Values::array_get($payload, 'data'),
-        );
+        ];
 
-        $this->solution = array('assistantSid' => $assistantSid, );
+        $this->solution = ['assistantSid' => $assistantSid, ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Preview\Understand\Assistant\AssistantInitiationActionsContext Context for this
-     *                                                                                     AssistantInitiationActionsInstance
+     * @return AssistantInitiationActionsContext Context for this
+     *                                           AssistantInitiationActionsInstance
      */
-    protected function proxy() {
+    protected function proxy(): AssistantInitiationActionsContext {
         if (!$this->context) {
             $this->context = new AssistantInitiationActionsContext(
                 $this->version,
@@ -65,13 +64,13 @@ class AssistantInitiationActionsInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a AssistantInitiationActionsInstance
+     * Fetch the AssistantInitiationActionsInstance
      *
      * @return AssistantInitiationActionsInstance Fetched
      *                                            AssistantInitiationActionsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): AssistantInitiationActionsInstance {
         return $this->proxy()->fetch();
     }
 
@@ -83,7 +82,7 @@ class AssistantInitiationActionsInstance extends InstanceResource {
      *                                            AssistantInitiationActionsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): AssistantInitiationActionsInstance {
         return $this->proxy()->update($options);
     }
 
@@ -94,7 +93,7 @@ class AssistantInitiationActionsInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -112,8 +111,8 @@ class AssistantInitiationActionsInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

@@ -28,35 +28,34 @@ class TaskStatisticsInstance extends InstanceResource {
     /**
      * Initialize the TaskStatisticsInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $assistantSid The unique ID of the parent Assistant.
      * @param string $taskSid The unique ID of the Task associated with this Field.
-     * @return \Twilio\Rest\Preview\Understand\Assistant\Task\TaskStatisticsInstance
      */
-    public function __construct(Version $version, array $payload, $assistantSid, $taskSid) {
+    public function __construct(Version $version, array $payload, string $assistantSid, string $taskSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'assistantSid' => Values::array_get($payload, 'assistant_sid'),
             'taskSid' => Values::array_get($payload, 'task_sid'),
             'samplesCount' => Values::array_get($payload, 'samples_count'),
             'fieldsCount' => Values::array_get($payload, 'fields_count'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array('assistantSid' => $assistantSid, 'taskSid' => $taskSid, );
+        $this->solution = ['assistantSid' => $assistantSid, 'taskSid' => $taskSid, ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Preview\Understand\Assistant\Task\TaskStatisticsContext Context for this TaskStatisticsInstance
+     * @return TaskStatisticsContext Context for this TaskStatisticsInstance
      */
-    protected function proxy() {
+    protected function proxy(): TaskStatisticsContext {
         if (!$this->context) {
             $this->context = new TaskStatisticsContext(
                 $this->version,
@@ -69,12 +68,12 @@ class TaskStatisticsInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a TaskStatisticsInstance
+     * Fetch the TaskStatisticsInstance
      *
      * @return TaskStatisticsInstance Fetched TaskStatisticsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): TaskStatisticsInstance {
         return $this->proxy()->fetch();
     }
 
@@ -85,7 +84,7 @@ class TaskStatisticsInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -103,8 +102,8 @@ class TaskStatisticsInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

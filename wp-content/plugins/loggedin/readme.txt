@@ -3,7 +3,7 @@ Contributors: joelcj91,duckdev
 Tags: active logins, loggedin, login, logout, limit active logins, login limit, concurrent logins
 Donate link: https://paypal.me/JoelCJ
 Requires at least: 4.0
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: 1.2.0
 Requires PHP: 5.6
 License: GPLv2 or later

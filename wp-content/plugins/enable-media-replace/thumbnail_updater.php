@@ -6,9 +6,6 @@ use EnableMediaReplace\ShortPixelLogger\ShortPixelLogger as Log;
 use EnableMediaReplace\Notices\NoticeController as Notices;
 
 /* Simple class for updating thumbnails.
-*
-*
-*
 */
 class ThumbnailUpdater
 {

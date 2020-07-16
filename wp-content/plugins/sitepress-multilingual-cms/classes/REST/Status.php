@@ -24,7 +24,8 @@ class Status {
 
 
 	public function isEnabled() {
-		if ( wpml_is_rest_request() ) { // check this condition first to avoid infinite loop in testing PING request made below
+		// Check this condition first to avoid infinite loop in testing PING request made below.
+		if ( wpml_is_rest_request() ) {
 			return true;
 		}
 
@@ -42,29 +43,13 @@ class Status {
 	 * @return bool
 	 */
 	private function is_rest_accessible() {
-		$value = $this->cacheInCookie( function () {
-			return $this->cacheInTransient( function () {
+		$value = $this->cacheInTransient(
+			function () {
 				return $this->pingRestEndpoint();
-			} );
-		} );
+			}
+		);
 
-		return $value !== self::DISABLED;
-	}
-
-	/**
-	 * @param callable $callback
-	 *
-	 * @return mixed
-	 */
-	private function cacheInCookie( callable $callback ) {
-		if ( ! isset( $_COOKIE[ self::PING_KEY ] ) ) {
-			$value = $callback();
-			setcookie( self::PING_KEY, $value, time() + self::CACHE_EXPIRATION_IN_SEC );
-
-			return $value;
-		}
-
-		return filter_var( $_COOKIE[ self::PING_KEY ], FILTER_SANITIZE_STRING );
+		return self::DISABLED !== $value;
 	}
 
 	/**

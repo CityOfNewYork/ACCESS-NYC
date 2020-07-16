@@ -27,31 +27,24 @@ class SubscribeRulesList extends ListResource {
      * @param string $roomSid The SID of the Room resource for the Subscribe Rules
      * @param string $participantSid The SID of the Participant resource for the
      *                               Subscribe Rules
-     * @return \Twilio\Rest\Video\V1\Room\Participant\SubscribeRulesList
      */
-    public function __construct(Version $version, $roomSid, $participantSid) {
+    public function __construct(Version $version, string $roomSid, string $participantSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('roomSid' => $roomSid, 'participantSid' => $participantSid, );
+        $this->solution = ['roomSid' => $roomSid, 'participantSid' => $participantSid, ];
 
         $this->uri = '/Rooms/' . \rawurlencode($roomSid) . '/Participants/' . \rawurlencode($participantSid) . '/SubscribeRules';
     }
 
     /**
-     * Fetch a SubscribeRulesInstance
+     * Fetch the SubscribeRulesInstance
      *
      * @return SubscribeRulesInstance Fetched SubscribeRulesInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): SubscribeRulesInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new SubscribeRulesInstance(
             $this->version,
@@ -68,17 +61,12 @@ class SubscribeRulesList extends ListResource {
      * @return SubscribeRulesInstance Updated SubscribeRulesInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): SubscribeRulesInstance {
         $options = new Values($options);
 
-        $data = Values::of(array('Rules' => Serialize::jsonObject($options['rules']), ));
+        $data = Values::of(['Rules' => Serialize::jsonObject($options['rules']), ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new SubscribeRulesInstance(
             $this->version,
@@ -93,7 +81,7 @@ class SubscribeRulesList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Video.V1.SubscribeRulesList]';
     }
 }

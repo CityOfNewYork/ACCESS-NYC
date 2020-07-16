@@ -10,42 +10,42 @@
 namespace Twilio\Rest\Preview\TrustedComms\Business;
 
 use Twilio\Exceptions\TwilioException;
+use Twilio\InstanceContext;
 use Twilio\ListResource;
-use Twilio\Rest\Preview\TrustedComms\Business\Insights\SuccessRateList;
+use Twilio\Rest\Preview\TrustedComms\Business\Insights\ImpressionsRateList;
 use Twilio\Version;
 
 /**
  * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
  *
- * @property \Twilio\Rest\Preview\TrustedComms\Business\Insights\SuccessRateList $successRate
- * @method \Twilio\Rest\Preview\TrustedComms\Business\Insights\SuccessRateContext successRate()
+ * @property ImpressionsRateList $impressionsRate
+ * @method \Twilio\Rest\Preview\TrustedComms\Business\Insights\ImpressionsRateContext impressionsRate()
  */
 class InsightsList extends ListResource {
-    protected $_successRate = null;
+    protected $_impressionsRate = null;
 
     /**
      * Construct the InsightsList
      *
      * @param Version $version Version that contains the resource
      * @param string $businessSid A string that uniquely identifies this Business.
-     * @return \Twilio\Rest\Preview\TrustedComms\Business\InsightsList
      */
-    public function __construct(Version $version, $businessSid) {
+    public function __construct(Version $version, string $businessSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('businessSid' => $businessSid, );
+        $this->solution = ['businessSid' => $businessSid, ];
     }
 
     /**
-     * Access the successRate
+     * Access the impressionsRate
      */
-    protected function getSuccessRate() {
-        if (!$this->_successRate) {
-            $this->_successRate = new SuccessRateList($this->version, $this->solution['businessSid']);
+    protected function getImpressionsRate(): ImpressionsRateList {
+        if (!$this->_impressionsRate) {
+            $this->_impressionsRate = new ImpressionsRateList($this->version, $this->solution['businessSid']);
         }
 
-        return $this->_successRate;
+        return $this->_impressionsRate;
     }
 
     /**
@@ -55,7 +55,7 @@ class InsightsList extends ListResource {
      * @return \Twilio\ListResource The requested subresource
      * @throws TwilioException For unknown subresources
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\property_exists($this, '_' . $name)) {
             $method = 'get' . \ucfirst($name);
             return $this->$method();
@@ -69,10 +69,10 @@ class InsightsList extends ListResource {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -86,7 +86,7 @@ class InsightsList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Preview.TrustedComms.InsightsList]';
     }
 }

@@ -92,7 +92,7 @@ class FieldGallery extends Field {
             $search_in_gallery = empty($xpath['search_in_media']) ? 0 : 1;
             $search_in_files = empty($xpath['search_in_files']) ? 0 : 1;
             foreach ($values[$this->getPostIndex()] as $url) {
-                if ("" != $url and $attid = ACFService::import_image(trim($url), $this->getPostID(), $parsingData['logger'], $search_in_gallery, $search_in_files, $this->importData['articleData']) and !in_array($attid, $gallery_ids)) {
+                if ("" != $url and $attid = ACFService::import_image(trim($url), $this->getPostID(), $parsingData['logger'], $search_in_gallery, $search_in_files, $this->importData) and !in_array($attid, $gallery_ids)) {
                     $gallery_ids[] = $attid;
                 }
             }

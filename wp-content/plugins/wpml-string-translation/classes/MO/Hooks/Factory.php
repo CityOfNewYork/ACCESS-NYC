@@ -22,6 +22,8 @@ class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Action_Lo
 			make( CustomTextDomains::class, [ ':file_manager' => ManagerFactory::create() ] ),
 			make( LanguageSwitch::class ),
 			make( LoadMissingMOFiles::class ),
+			make( PreloadThemeMoFile::class ),
+			make( DetectPrematurelyTranslatedStrings::class ),
 		];
 	}
 }

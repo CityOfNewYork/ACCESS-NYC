@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Advanced Custom Fields Multilingual
- * Description: This 'glue' plugin makes it easier to translate with WPML content provided in fields created with Advanced Custom Fields
+ * Description: Adds compatibility between WPML and Advanced Custom Fields | <a href="https://wpml.org/documentation/related-projects/translate-sites-built-with-acf/">Documentation</a>
  * Author: OnTheGoSystems
  * Plugin URI: https://wpml.org/
  * Author URI: http://www.onthegosystems.com/
- * Version: 1.5.0
+ * Version: 1.7.1
  *
  * @package WPML\ACF
  */

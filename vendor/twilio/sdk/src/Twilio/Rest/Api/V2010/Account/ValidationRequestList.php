@@ -21,43 +21,37 @@ class ValidationRequestList extends ListResource {
      *
      * @param Version $version Version that contains the resource
      * @param string $accountSid The SID of the Account that created the resource
-     * @return \Twilio\Rest\Api\V2010\Account\ValidationRequestList
      */
-    public function __construct(Version $version, $accountSid) {
+    public function __construct(Version $version, string $accountSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('accountSid' => $accountSid, );
+        $this->solution = ['accountSid' => $accountSid, ];
 
         $this->uri = '/Accounts/' . \rawurlencode($accountSid) . '/OutgoingCallerIds.json';
     }
 
     /**
-     * Create a new ValidationRequestInstance
+     * Create the ValidationRequestInstance
      *
      * @param string $phoneNumber The phone number to verify in E.164 format
      * @param array|Options $options Optional Arguments
-     * @return ValidationRequestInstance Newly created ValidationRequestInstance
+     * @return ValidationRequestInstance Created ValidationRequestInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($phoneNumber, $options = array()) {
+    public function create(string $phoneNumber, array $options = []): ValidationRequestInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'PhoneNumber' => $phoneNumber,
             'FriendlyName' => $options['friendlyName'],
             'CallDelay' => $options['callDelay'],
             'Extension' => $options['extension'],
             'StatusCallback' => $options['statusCallback'],
             'StatusCallbackMethod' => $options['statusCallbackMethod'],
-        ));
+        ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new ValidationRequestInstance($this->version, $payload, $this->solution['accountSid']);
     }
@@ -67,7 +61,7 @@ class ValidationRequestList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Api.V2010.ValidationRequestList]';
     }
 }

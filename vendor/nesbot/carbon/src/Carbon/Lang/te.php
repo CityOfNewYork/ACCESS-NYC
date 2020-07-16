@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-/**
+/*
  * Authors:
  * - Kunal Marwaha
  * - Josh Soref
@@ -41,6 +41,7 @@ return [
     'ago' => ':time క్రితం',
     'from_now' => ':time లో',
     'diff_now' => 'ప్రస్తుతం',
+    'diff_today' => 'నేడు',
     'diff_yesterday' => 'నిన్న',
     'diff_tomorrow' => 'రేపు',
     'formats' => [

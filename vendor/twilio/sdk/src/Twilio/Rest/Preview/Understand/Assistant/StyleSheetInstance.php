@@ -27,34 +27,31 @@ class StyleSheetInstance extends InstanceResource {
     /**
      * Initialize the StyleSheetInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $assistantSid The unique ID of the Assistant
-     * @return \Twilio\Rest\Preview\Understand\Assistant\StyleSheetInstance
      */
-    public function __construct(Version $version, array $payload, $assistantSid) {
+    public function __construct(Version $version, array $payload, string $assistantSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'assistantSid' => Values::array_get($payload, 'assistant_sid'),
             'url' => Values::array_get($payload, 'url'),
             'data' => Values::array_get($payload, 'data'),
-        );
+        ];
 
-        $this->solution = array('assistantSid' => $assistantSid, );
+        $this->solution = ['assistantSid' => $assistantSid, ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Preview\Understand\Assistant\StyleSheetContext Context
-     *                                                                     for this
-     *                                                                     StyleSheetInstance
+     * @return StyleSheetContext Context for this StyleSheetInstance
      */
-    protected function proxy() {
+    protected function proxy(): StyleSheetContext {
         if (!$this->context) {
             $this->context = new StyleSheetContext($this->version, $this->solution['assistantSid']);
         }
@@ -63,12 +60,12 @@ class StyleSheetInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a StyleSheetInstance
+     * Fetch the StyleSheetInstance
      *
      * @return StyleSheetInstance Fetched StyleSheetInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): StyleSheetInstance {
         return $this->proxy()->fetch();
     }
 
@@ -79,7 +76,7 @@ class StyleSheetInstance extends InstanceResource {
      * @return StyleSheetInstance Updated StyleSheetInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): StyleSheetInstance {
         return $this->proxy()->update($options);
     }
 
@@ -90,7 +87,7 @@ class StyleSheetInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -108,8 +105,8 @@ class StyleSheetInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

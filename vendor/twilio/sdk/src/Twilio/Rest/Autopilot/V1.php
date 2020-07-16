@@ -11,35 +11,42 @@ namespace Twilio\Rest\Autopilot;
 
 use Twilio\Domain;
 use Twilio\Exceptions\TwilioException;
+use Twilio\InstanceContext;
 use Twilio\Rest\Autopilot\V1\AssistantList;
+use Twilio\Rest\Autopilot\V1\RestoreAssistantList;
 use Twilio\Version;
 
 /**
- * @property \Twilio\Rest\Autopilot\V1\AssistantList $assistants
+ * @property AssistantList $assistants
+ * @property RestoreAssistantList $restoreAssistant
  * @method \Twilio\Rest\Autopilot\V1\AssistantContext assistants(string $sid)
  */
 class V1 extends Version {
-    protected $_assistants = null;
+    protected $_assistants;
+    protected $_restoreAssistant;
 
     /**
      * Construct the V1 version of Autopilot
      *
-     * @param \Twilio\Domain $domain Domain that contains the version
-     * @return \Twilio\Rest\Autopilot\V1 V1 version of Autopilot
+     * @param Domain $domain Domain that contains the version
      */
     public function __construct(Domain $domain) {
         parent::__construct($domain);
         $this->version = 'v1';
     }
 
-    /**
-     * @return \Twilio\Rest\Autopilot\V1\AssistantList
-     */
-    protected function getAssistants() {
+    protected function getAssistants(): AssistantList {
         if (!$this->_assistants) {
             $this->_assistants = new AssistantList($this);
         }
         return $this->_assistants;
+    }
+
+    protected function getRestoreAssistant(): RestoreAssistantList {
+        if (!$this->_restoreAssistant) {
+            $this->_restoreAssistant = new RestoreAssistantList($this);
+        }
+        return $this->_restoreAssistant;
     }
 
     /**
@@ -49,7 +56,7 @@ class V1 extends Version {
      * @return \Twilio\ListResource The requested resource
      * @throws TwilioException For unknown resource
      */
-    public function __get($name) {
+    public function __get(string $name) {
         $method = 'get' . \ucfirst($name);
         if (\method_exists($this, $method)) {
             return $this->$method();
@@ -63,10 +70,10 @@ class V1 extends Version {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -80,7 +87,7 @@ class V1 extends Version {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Autopilot.V1]';
     }
 }

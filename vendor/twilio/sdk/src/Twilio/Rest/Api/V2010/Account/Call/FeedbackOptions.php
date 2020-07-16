@@ -14,37 +14,37 @@ use Twilio\Values;
 
 abstract class FeedbackOptions {
     /**
-     * @param string $issue Issues experienced during the call
+     * @param string[] $issue Issues experienced during the call
      * @return CreateFeedbackOptions Options builder
      */
-    public static function create($issue = Values::NONE) {
+    public static function create(array $issue = Values::ARRAY_NONE): CreateFeedbackOptions {
         return new CreateFeedbackOptions($issue);
     }
 
     /**
-     * @param string $issue Issues experienced during the call
+     * @param string[] $issue Issues experienced during the call
      * @return UpdateFeedbackOptions Options builder
      */
-    public static function update($issue = Values::NONE) {
+    public static function update(array $issue = Values::ARRAY_NONE): UpdateFeedbackOptions {
         return new UpdateFeedbackOptions($issue);
     }
 }
 
 class CreateFeedbackOptions extends Options {
     /**
-     * @param string $issue Issues experienced during the call
+     * @param string[] $issue Issues experienced during the call
      */
-    public function __construct($issue = Values::NONE) {
+    public function __construct(array $issue = Values::ARRAY_NONE) {
         $this->options['issue'] = $issue;
     }
 
     /**
      * A list of one or more issues experienced during the call. Issues can be: `imperfect-audio`, `dropped-call`, `incorrect-caller-id`, `post-dial-delay`, `digits-not-captured`, `audio-latency`, `unsolicited-call`, or `one-way-audio`.
      *
-     * @param string $issue Issues experienced during the call
+     * @param string[] $issue Issues experienced during the call
      * @return $this Fluent Builder
      */
-    public function setIssue($issue) {
+    public function setIssue(array $issue): self {
         $this->options['issue'] = $issue;
         return $this;
     }
@@ -54,32 +54,27 @@ class CreateFeedbackOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.CreateFeedbackOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.CreateFeedbackOptions ' . $options . ']';
     }
 }
 
 class UpdateFeedbackOptions extends Options {
     /**
-     * @param string $issue Issues experienced during the call
+     * @param string[] $issue Issues experienced during the call
      */
-    public function __construct($issue = Values::NONE) {
+    public function __construct(array $issue = Values::ARRAY_NONE) {
         $this->options['issue'] = $issue;
     }
 
     /**
      * One or more issues experienced during the call. The issues can be: `imperfect-audio`, `dropped-call`, `incorrect-caller-id`, `post-dial-delay`, `digits-not-captured`, `audio-latency`, `unsolicited-call`, or `one-way-audio`.
      *
-     * @param string $issue Issues experienced during the call
+     * @param string[] $issue Issues experienced during the call
      * @return $this Fluent Builder
      */
-    public function setIssue($issue) {
+    public function setIssue(array $issue): self {
         $this->options['issue'] = $issue;
         return $this;
     }
@@ -89,13 +84,8 @@ class UpdateFeedbackOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.UpdateFeedbackOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.UpdateFeedbackOptions ' . $options . ']';
     }
 }

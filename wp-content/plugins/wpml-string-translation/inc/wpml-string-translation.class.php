@@ -104,7 +104,7 @@ class WPML_String_Translation
 		require WPML_ST_PATH . '/inc/wpml-localization.class.php';
 		require WPML_ST_PATH . '/inc/gettext/wpml-string-translation-mo-import.class.php';
 
-		$wpml_string_shortcode = new WPML_String_Shortcode( $wpdb );
+		$wpml_string_shortcode = new WPML\ST\Shortcode( $wpdb );
 		$wpml_string_shortcode->init_hooks();
 
 		wpml_st_load_admin_texts();
@@ -252,7 +252,7 @@ class WPML_String_Translation
 				$ts = icl_update_string_status( $data[ 'icl_st_string_id' ] );
 
 				if ( icl_st_is_translator() ) {
-					$ts = icl_get_relative_translation_status( $data['icl_st_string_id'] );
+					$ts = WPML\Container\make( WPML_ST_Relative_Translation_Status::class )->get( $data['icl_st_string_id'] );
 				}
 
 				echo WPML_ST_String_Statuses::get_status( $ts );
@@ -762,10 +762,9 @@ class WPML_String_Translation
 		global $wpdb;
 
 		$key         = md5( $domain . '_' . $name );
-		$found       = false;
-		$string_lang = $this->get_cache()->get( $key, $found );
+		list( $string_lang, $found ) = $this->get_cache()->get_with_found( $key );
 
-		if ( ! $string_lang ) {
+		if ( ! $found ) {
 			$string_query   = "SELECT language FROM {$wpdb->prefix}icl_strings WHERE context=%s AND name=%s";
 			$string_prepare = $wpdb->prepare( $string_query, $domain, $name );
 			$string_lang    = $wpdb->get_var( $string_prepare );

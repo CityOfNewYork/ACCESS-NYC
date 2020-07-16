@@ -32,17 +32,16 @@ class DeploymentInstance extends InstanceResource {
     /**
      * Initialize the DeploymentInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $fleetSid The unique identifier of the Fleet.
      * @param string $sid A string that uniquely identifies the Deployment.
-     * @return \Twilio\Rest\Preview\DeployedDevices\Fleet\DeploymentInstance
      */
-    public function __construct(Version $version, array $payload, $fleetSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $fleetSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'url' => Values::array_get($payload, 'url'),
             'friendlyName' => Values::array_get($payload, 'friendly_name'),
@@ -51,21 +50,18 @@ class DeploymentInstance extends InstanceResource {
             'syncServiceSid' => Values::array_get($payload, 'sync_service_sid'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
-        );
+        ];
 
-        $this->solution = array('fleetSid' => $fleetSid, 'sid' => $sid ?: $this->properties['sid'], );
+        $this->solution = ['fleetSid' => $fleetSid, 'sid' => $sid ?: $this->properties['sid'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Preview\DeployedDevices\Fleet\DeploymentContext Context
-     *                                                                      for
-     *                                                                      this
-     *                                                                      DeploymentInstance
+     * @return DeploymentContext Context for this DeploymentInstance
      */
-    protected function proxy() {
+    protected function proxy(): DeploymentContext {
         if (!$this->context) {
             $this->context = new DeploymentContext(
                 $this->version,
@@ -78,22 +74,22 @@ class DeploymentInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a DeploymentInstance
+     * Fetch the DeploymentInstance
      *
      * @return DeploymentInstance Fetched DeploymentInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): DeploymentInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Deletes the DeploymentInstance
+     * Delete the DeploymentInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
@@ -104,7 +100,7 @@ class DeploymentInstance extends InstanceResource {
      * @return DeploymentInstance Updated DeploymentInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): DeploymentInstance {
         return $this->proxy()->update($options);
     }
 
@@ -115,7 +111,7 @@ class DeploymentInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -133,8 +129,8 @@ class DeploymentInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

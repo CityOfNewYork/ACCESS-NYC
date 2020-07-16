@@ -64,7 +64,7 @@ class UIHelper
 
       $url = add_query_arg('SHORTPIXEL_DEBUG', $spdebug, $url);
     }
-    
+
     $url = apply_filters('emr_returnurl', $url);
     Log::addDebug('Success URL- ' . $url);
 
@@ -97,12 +97,16 @@ class UIHelper
 
   public function setSourceSizes($attach_id)
   {
-    $data = wp_get_attachment_image_src($attach_id, 'full');
+    $data = $this->getImageSizes($attach_id, 'full');  // wp_get_attachment_image_src($attach_id, 'full');
+    $file = get_attached_file($attach_id);
+
     if (is_array($data))
     {
+
       $this->full_width = $data[1];
       $this->full_height = $data[2];
     }
+
   }
 
   // Returns Preview Image HTML Output.
@@ -112,9 +116,10 @@ class UIHelper
 
       if ($attach_id > 0)
       {
-        $data = wp_get_attachment_image_src($attach_id, $this->preview_size);
+        $data = $this->getImageSizes($attach_id, $this->preview_size); //wp_get_attachment_image_src($attach_id, $this->preview_size);
         $file = get_attached_file($attach_id);
         Log::addDebug('Attached File '  . $file, $data);
+
 
       }
 
@@ -146,9 +151,13 @@ class UIHelper
       $url = $data[0];
       $width = $data[1];
       $height = $data[2];
+
+      // SVG's without any helpers return around 0 for width / height. Fix preview.
+
       // preview width, if source if found, should be set to source.
       $this->preview_width = $width;
       $this->preview_height = $height;
+
 
       if ($width > $this->preview_max_width)
         $width = $this->preview_max_width;
@@ -163,8 +172,41 @@ class UIHelper
         'image' => $image,
         'mime_type' => $mime_type,
       );
+
       $output = $this->getPlaceHolder($args);
       return $output;
+  }
+
+  protected function getImageSizes($attach_id, $size = 'thumbnail')
+  {
+    $data = wp_get_attachment_image_src($attach_id, $size);
+    $width = $data[1];
+    $mime_type = get_post_mime_type($attach_id);
+
+    if (strpos($mime_type, 'svg') !== false && $width <= 5)
+    {
+        $file = get_attached_file($attach_id);
+        $data = $this->fixSVGSize($data, $file);
+    }
+
+    return $data;
+  }
+
+  protected function fixSVGSize($data, $file)
+  {
+    if (! function_exists('simplexml_load_file'))
+      return $data;
+
+    $xml = simplexml_load_file($file);
+    if ($xml)
+    { // stolen from SVG Upload plugin
+      $attr = $xml->attributes();
+      $viewbox = explode(' ', $attr->viewBox);
+      $data[1] = isset($attr->width) && preg_match('/\d+/', $attr->width, $value) ? (int) $value[0] : (count($viewbox) == 4 ? (int) $viewbox[2] : null);
+      $data[2] = isset($attr->height) && preg_match('/\d+/', $attr->height, $value) ? (int) $value[0] : (count($viewbox) == 4 ? (int) $viewbox[3] : null);
+    }
+
+    return $data;
   }
 
   public function getPreviewError($attach_id)
@@ -304,6 +346,16 @@ class UIHelper
    }
 
    return $sizes;
+  }
+
+  /** For Location Dir replacement. Get the Subdir that is in use now.  */
+  public function getRelPathNow()
+  {
+      $uploadDir = wp_upload_dir();
+      if (isset($uploadDir['subdir']))
+        return ltrim($uploadDir['subdir'], '/'); 
+      else
+        return false;
   }
 
 } // class

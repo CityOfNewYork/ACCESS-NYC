@@ -24,22 +24,21 @@ class UsageRecordInstance extends InstanceResource {
     /**
      * Initialize the UsageRecordInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @return \Twilio\Rest\Wireless\V1\UsageRecordInstance
      */
     public function __construct(Version $version, array $payload) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'period' => Values::array_get($payload, 'period'),
             'commands' => Values::array_get($payload, 'commands'),
             'data' => Values::array_get($payload, 'data'),
-        );
+        ];
 
-        $this->solution = array();
+        $this->solution = [];
     }
 
     /**
@@ -49,7 +48,7 @@ class UsageRecordInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -67,7 +66,7 @@ class UsageRecordInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Wireless.V1.UsageRecordInstance]';
     }
 }

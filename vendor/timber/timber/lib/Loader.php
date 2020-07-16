@@ -54,6 +54,10 @@ class Loader {
 			}
 		}
 
+		if ( $expires === 0 ) {
+			$expires = false;
+		}
+
 		$key = null;
 		$output = false;
 		if ( false !== $expires ) {
@@ -178,6 +182,14 @@ class Loader {
 		$twig = apply_filters('timber/twig/functions', $twig);
 		$twig = apply_filters('timber/twig/escapers', $twig);
 		$twig = apply_filters('timber/loader/twig', $twig);
+
+		$twig = apply_filters('timber/twig', $twig);
+
+		/**
+		 * get_twig is deprecated, use timber/twig
+		 */
+		$twig = apply_filters('get_twig', $twig);
+
 		return $twig;
 	}
 

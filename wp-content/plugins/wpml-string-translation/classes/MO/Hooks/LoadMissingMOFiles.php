@@ -24,12 +24,17 @@ class LoadMissingMOFiles implements \IWPML_Action {
 	 */
 	private $optionManager;
 
+	/** @var \WPML_ST_Translations_File_Dictionary_Storage_Table */
+	private $moFilesDictionary;
+
 	public function __construct(
 		MissingMOFile $generateMissingMoFile,
-		OptionManager $optionManager
+		OptionManager $optionManager,
+		\WPML_ST_Translations_File_Dictionary_Storage_Table $moFilesDictionary
 	) {
 		$this->generateMissingMoFile = $generateMissingMoFile;
 		$this->optionManager         = $optionManager;
+		$this->moFilesDictionary     = $moFilesDictionary;
 	}
 
 	public function add_hooks() {
@@ -60,6 +65,10 @@ class LoadMissingMOFiles implements \IWPML_Action {
 				$this->saveMissing( $missing->forget( $domain ) );
 			}
 
+			return $mofile;
+		}
+
+		if ( ! $this->moFilesDictionary->find( $mofile ) ) {
 			return $mofile;
 		}
 

@@ -22,40 +22,29 @@ class SyncListPermissionContext extends InstanceContext {
     /**
      * Initialize the SyncListPermissionContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The service_sid
      * @param string $listSid Sync List SID or unique name.
      * @param string $identity Identity of the user to whom the Sync List
      *                         Permission applies.
-     * @return \Twilio\Rest\Preview\Sync\Service\SyncList\SyncListPermissionContext
      */
     public function __construct(Version $version, $serviceSid, $listSid, $identity) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'listSid' => $listSid,
-            'identity' => $identity,
-        );
+        $this->solution = ['serviceSid' => $serviceSid, 'listSid' => $listSid, 'identity' => $identity, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Lists/' . \rawurlencode($listSid) . '/Permissions/' . \rawurlencode($identity) . '';
     }
 
     /**
-     * Fetch a SyncListPermissionInstance
+     * Fetch the SyncListPermissionInstance
      *
      * @return SyncListPermissionInstance Fetched SyncListPermissionInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): SyncListPermissionInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new SyncListPermissionInstance(
             $this->version,
@@ -67,13 +56,13 @@ class SyncListPermissionContext extends InstanceContext {
     }
 
     /**
-     * Deletes the SyncListPermissionInstance
+     * Delete the SyncListPermissionInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -85,19 +74,14 @@ class SyncListPermissionContext extends InstanceContext {
      * @return SyncListPermissionInstance Updated SyncListPermissionInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($read, $write, $manage) {
-        $data = Values::of(array(
+    public function update(bool $read, bool $write, bool $manage): SyncListPermissionInstance {
+        $data = Values::of([
             'Read' => Serialize::booleanToString($read),
             'Write' => Serialize::booleanToString($write),
             'Manage' => Serialize::booleanToString($manage),
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new SyncListPermissionInstance(
             $this->version,
@@ -113,8 +97,8 @@ class SyncListPermissionContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

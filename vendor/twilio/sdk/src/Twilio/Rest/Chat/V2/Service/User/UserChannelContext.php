@@ -20,42 +20,31 @@ class UserChannelContext extends InstanceContext {
     /**
      * Initialize the UserChannelContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Service to fetch the User Channel
      *                           resource from
      * @param string $userSid The SID of the User to fetch the User Channel
      *                        resource from
      * @param string $channelSid The SID of the Channel that has the User Channel
      *                           to fetch
-     * @return \Twilio\Rest\Chat\V2\Service\User\UserChannelContext
      */
     public function __construct(Version $version, $serviceSid, $userSid, $channelSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'userSid' => $userSid,
-            'channelSid' => $channelSid,
-        );
+        $this->solution = ['serviceSid' => $serviceSid, 'userSid' => $userSid, 'channelSid' => $channelSid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Users/' . \rawurlencode($userSid) . '/Channels/' . \rawurlencode($channelSid) . '';
     }
 
     /**
-     * Fetch a UserChannelInstance
+     * Fetch the UserChannelInstance
      *
      * @return UserChannelInstance Fetched UserChannelInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): UserChannelInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new UserChannelInstance(
             $this->version,
@@ -67,13 +56,13 @@ class UserChannelContext extends InstanceContext {
     }
 
     /**
-     * Deletes the UserChannelInstance
+     * Delete the UserChannelInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -83,21 +72,16 @@ class UserChannelContext extends InstanceContext {
      * @return UserChannelInstance Updated UserChannelInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): UserChannelInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'NotificationLevel' => $options['notificationLevel'],
             'LastConsumedMessageIndex' => $options['lastConsumedMessageIndex'],
             'LastConsumptionTimestamp' => Serialize::iso8601DateTime($options['lastConsumptionTimestamp']),
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new UserChannelInstance(
             $this->version,
@@ -113,8 +97,8 @@ class UserChannelContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

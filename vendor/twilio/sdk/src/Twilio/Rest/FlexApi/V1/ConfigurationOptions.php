@@ -18,7 +18,7 @@ abstract class ConfigurationOptions {
      *                          to fetch
      * @return FetchConfigurationOptions Options builder
      */
-    public static function fetch($uiVersion = Values::NONE) {
+    public static function fetch(string $uiVersion = Values::NONE): FetchConfigurationOptions {
         return new FetchConfigurationOptions($uiVersion);
     }
 }
@@ -28,7 +28,7 @@ class FetchConfigurationOptions extends Options {
      * @param string $uiVersion The Pinned UI version of the Configuration resource
      *                          to fetch
      */
-    public function __construct($uiVersion = Values::NONE) {
+    public function __construct(string $uiVersion = Values::NONE) {
         $this->options['uiVersion'] = $uiVersion;
     }
 
@@ -39,7 +39,7 @@ class FetchConfigurationOptions extends Options {
      *                          to fetch
      * @return $this Fluent Builder
      */
-    public function setUiVersion($uiVersion) {
+    public function setUiVersion(string $uiVersion): self {
         $this->options['uiVersion'] = $uiVersion;
         return $this;
     }
@@ -49,13 +49,8 @@ class FetchConfigurationOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.FlexApi.V1.FetchConfigurationOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.FlexApi.V1.FetchConfigurationOptions ' . $options . ']';
     }
 }

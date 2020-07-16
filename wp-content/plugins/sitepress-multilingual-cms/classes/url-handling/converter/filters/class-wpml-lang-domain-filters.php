@@ -51,8 +51,15 @@ class WPML_Lang_Domain_Filters {
 	 * @return array
 	 */
 	public function upload_dir_filter_callback( $upload_dir ) {
-		$upload_dir['url'] = $this->wpml_url_converter->convert_url( $upload_dir['url'] );
-		$upload_dir['baseurl'] = $this->wpml_url_converter->convert_url( $upload_dir['baseurl'] );
+		$convertWithMatchingTrailingSlash = function ( $url ) {
+			$hasTrailingSlash = '/' === substr( $url , -1 );
+			$newUrl           = $this->wpml_url_converter->convert_url( $url );
+
+			return $hasTrailingSlash ? trailingslashit( $newUrl ) : untrailingslashit( $newUrl );
+		};
+
+		$upload_dir['url']     = $convertWithMatchingTrailingSlash( $upload_dir['url'] );
+		$upload_dir['baseurl'] = $convertWithMatchingTrailingSlash( $upload_dir['baseurl'] );
 
 		return $upload_dir;
 	}

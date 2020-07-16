@@ -18,38 +18,31 @@ class AuthCallsIpAccessControlListMappingContext extends InstanceContext {
     /**
      * Initialize the AuthCallsIpAccessControlListMappingContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $accountSid The SID of the Account that created the resource
      *                           to fetch
      * @param string $domainSid The SID of the SIP domain that contains the
      *                          resource to fetch
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Api\V2010\Account\Sip\Domain\AuthTypes\AuthTypeCalls\AuthCallsIpAccessControlListMappingContext
      */
     public function __construct(Version $version, $accountSid, $domainSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('accountSid' => $accountSid, 'domainSid' => $domainSid, 'sid' => $sid, );
+        $this->solution = ['accountSid' => $accountSid, 'domainSid' => $domainSid, 'sid' => $sid, ];
 
         $this->uri = '/Accounts/' . \rawurlencode($accountSid) . '/SIP/Domains/' . \rawurlencode($domainSid) . '/Auth/Calls/IpAccessControlListMappings/' . \rawurlencode($sid) . '.json';
     }
 
     /**
-     * Fetch a AuthCallsIpAccessControlListMappingInstance
+     * Fetch the AuthCallsIpAccessControlListMappingInstance
      *
      * @return AuthCallsIpAccessControlListMappingInstance Fetched
      *                                                     AuthCallsIpAccessControlListMappingInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): AuthCallsIpAccessControlListMappingInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new AuthCallsIpAccessControlListMappingInstance(
             $this->version,
@@ -61,13 +54,13 @@ class AuthCallsIpAccessControlListMappingContext extends InstanceContext {
     }
 
     /**
-     * Deletes the AuthCallsIpAccessControlListMappingInstance
+     * Delete the AuthCallsIpAccessControlListMappingInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -75,8 +68,8 @@ class AuthCallsIpAccessControlListMappingContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

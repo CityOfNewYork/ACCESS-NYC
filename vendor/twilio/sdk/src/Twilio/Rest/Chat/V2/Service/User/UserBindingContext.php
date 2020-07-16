@@ -18,35 +18,28 @@ class UserBindingContext extends InstanceContext {
     /**
      * Initialize the UserBindingContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Service to fetch the resource from
      * @param string $userSid The SID of the User with the binding
      * @param string $sid The SID of the User Binding resource to fetch
-     * @return \Twilio\Rest\Chat\V2\Service\User\UserBindingContext
      */
     public function __construct(Version $version, $serviceSid, $userSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'userSid' => $userSid, 'sid' => $sid, );
+        $this->solution = ['serviceSid' => $serviceSid, 'userSid' => $userSid, 'sid' => $sid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Users/' . \rawurlencode($userSid) . '/Bindings/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a UserBindingInstance
+     * Fetch the UserBindingInstance
      *
      * @return UserBindingInstance Fetched UserBindingInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): UserBindingInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new UserBindingInstance(
             $this->version,
@@ -58,13 +51,13 @@ class UserBindingContext extends InstanceContext {
     }
 
     /**
-     * Deletes the UserBindingInstance
+     * Delete the UserBindingInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -72,8 +65,8 @@ class UserBindingContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

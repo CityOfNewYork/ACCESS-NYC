@@ -17,7 +17,7 @@
 add_action('enqueue_block_editor_assets', function() {
   wp_enqueue_script(
     'access/smnyc-email-button',                                // theme/name
-    Path\block('smnyc-email-button/index.js', true),            // script uri
+    ACCESS\block('smnyc-email-button/index.js', true),            // script uri
     array('wp-blocks', 'wp-element', 'wp-editor'),              // dependencies
     ('development' === WP_ENV) ? null : wp_get_theme()->version // use theme version if not in development
   );

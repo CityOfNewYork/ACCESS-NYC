@@ -26,6 +26,7 @@ use Twilio\Version;
  * @property array $lookup
  * @property string $amount
  * @property string $payee
+ * @property array[] $sendCodeAttempts
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
  * @property string $url
@@ -34,18 +35,17 @@ class VerificationInstance extends InstanceResource {
     /**
      * Initialize the VerificationInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid The SID of the Service that the resource is
      *                           associated with
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Verify\V2\Service\VerificationInstance
      */
-    public function __construct(Version $version, array $payload, $serviceSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $serviceSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'serviceSid' => Values::array_get($payload, 'service_sid'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
@@ -56,22 +56,22 @@ class VerificationInstance extends InstanceResource {
             'lookup' => Values::array_get($payload, 'lookup'),
             'amount' => Values::array_get($payload, 'amount'),
             'payee' => Values::array_get($payload, 'payee'),
+            'sendCodeAttempts' => Values::array_get($payload, 'send_code_attempts'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid ?: $this->properties['sid'], );
+        $this->solution = ['serviceSid' => $serviceSid, 'sid' => $sid ?: $this->properties['sid'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Verify\V2\Service\VerificationContext Context for this
-     *                                                            VerificationInstance
+     * @return VerificationContext Context for this VerificationInstance
      */
-    protected function proxy() {
+    protected function proxy(): VerificationContext {
         if (!$this->context) {
             $this->context = new VerificationContext(
                 $this->version,
@@ -90,17 +90,17 @@ class VerificationInstance extends InstanceResource {
      * @return VerificationInstance Updated VerificationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($status) {
+    public function update(string $status): VerificationInstance {
         return $this->proxy()->update($status);
     }
 
     /**
-     * Fetch a VerificationInstance
+     * Fetch the VerificationInstance
      *
      * @return VerificationInstance Fetched VerificationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): VerificationInstance {
         return $this->proxy()->fetch();
     }
 
@@ -111,7 +111,7 @@ class VerificationInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -129,8 +129,8 @@ class VerificationInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

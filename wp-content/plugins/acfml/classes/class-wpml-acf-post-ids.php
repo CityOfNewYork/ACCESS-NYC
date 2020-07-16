@@ -1,15 +1,15 @@
 <?php
 class WPML_ACF_Post_Ids implements WPML_ACF_Convertable {
 	/** @var WPML_ACF_Post_Id[] $ids */
-	public function convert( WPML_ACF_Field $WPML_ACF_Field) {
+	public function convert( WPML_ACF_Field $acf_field) {
 
-		$came_serialized = is_serialized($WPML_ACF_Field->meta_value);
+		$came_serialized = is_serialized($acf_field->meta_value);
 
-		$ids_unpacked = (array) maybe_unserialize($WPML_ACF_Field->meta_value);
+		$ids_unpacked = (array) maybe_unserialize($acf_field->meta_value);
 		
 		$ids = array();
 		foreach ($ids_unpacked as $id) {
-			$ids[] = new WPML_ACF_Post_Id($id, $WPML_ACF_Field);
+			$ids[] = new WPML_ACF_Post_Id($id, $acf_field);
 		}
 		
 		$result = array_map(function($id) {return $id->convert()->id;}, $ids);

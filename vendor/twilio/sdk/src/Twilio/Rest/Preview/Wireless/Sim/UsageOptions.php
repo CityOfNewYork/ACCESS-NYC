@@ -21,7 +21,7 @@ abstract class UsageOptions {
      * @param string $start The start
      * @return FetchUsageOptions Options builder
      */
-    public static function fetch($end = Values::NONE, $start = Values::NONE) {
+    public static function fetch(string $end = Values::NONE, string $start = Values::NONE): FetchUsageOptions {
         return new FetchUsageOptions($end, $start);
     }
 }
@@ -31,7 +31,7 @@ class FetchUsageOptions extends Options {
      * @param string $end The end
      * @param string $start The start
      */
-    public function __construct($end = Values::NONE, $start = Values::NONE) {
+    public function __construct(string $end = Values::NONE, string $start = Values::NONE) {
         $this->options['end'] = $end;
         $this->options['start'] = $start;
     }
@@ -42,7 +42,7 @@ class FetchUsageOptions extends Options {
      * @param string $end The end
      * @return $this Fluent Builder
      */
-    public function setEnd($end) {
+    public function setEnd(string $end): self {
         $this->options['end'] = $end;
         return $this;
     }
@@ -53,7 +53,7 @@ class FetchUsageOptions extends Options {
      * @param string $start The start
      * @return $this Fluent Builder
      */
-    public function setStart($start) {
+    public function setStart(string $start): self {
         $this->options['start'] = $start;
         return $this;
     }
@@ -63,13 +63,8 @@ class FetchUsageOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.Wireless.FetchUsageOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.Wireless.FetchUsageOptions ' . $options . ']';
     }
 }

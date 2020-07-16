@@ -4,25 +4,25 @@ namespace Twilio;
 
 class Serialize {
 
-    private static function flatten($map, $result = array(), $previous = array()) {
+    private static function flatten(array $map, array $result = [], array $previous = []): array {
         foreach ($map as $key => $value) {
             if (\is_array($value)) {
-                $result = self::flatten($value, $result, \array_merge($previous, array($key)));
+                $result = self::flatten($value, $result, \array_merge($previous, [$key]));
             } else {
-                $result[\join(".", \array_merge($previous, array($key)))] = $value;
+                $result[\implode('.', \array_merge($previous, [$key]))] = $value;
             }
         }
 
         return $result;
     }
 
-    public static function prefixedCollapsibleMap($map, $prefix) {
-        if (\is_null($map) || $map == \Twilio\Values::NONE) {
-            return array();
+    public static function prefixedCollapsibleMap($map, string $prefix): array {
+        if ($map === null || $map === Values::NONE) {
+            return [];
         }
 
         $flattened = self::flatten($map);
-        $result = array();
+        $result = [];
         foreach ($flattened as $key => $value) {
             $result[$prefix . '.' . $key] = $value;
         }
@@ -30,9 +30,9 @@ class Serialize {
         return $result;
     }
 
-    public static function iso8601Date($dateTime) {
-        if (\is_null($dateTime) || $dateTime == \Twilio\Values::NONE) {
-            return \Twilio\Values::NONE;
+    public static function iso8601Date($dateTime): string {
+        if ($dateTime === null || $dateTime === Values::NONE) {
+            return Values::NONE;
         }
 
         if (\is_string($dateTime)) {
@@ -44,9 +44,9 @@ class Serialize {
         return $utcDate->format('Y-m-d');
     }
 
-    public static function iso8601DateTime($dateTime) {
-        if (\is_null($dateTime) || $dateTime == \Twilio\Values::NONE) {
-            return \Twilio\Values::NONE;
+    public static function iso8601DateTime($dateTime): string {
+        if ($dateTime === null || $dateTime === Values::NONE) {
+            return Values::NONE;
         }
 
         if (\is_string($dateTime)) {
@@ -59,16 +59,11 @@ class Serialize {
     }
 
     public static function booleanToString($boolOrStr) {
-        if (\is_null($boolOrStr) || \is_string($boolOrStr)) {
+        if ($boolOrStr === null || \is_string($boolOrStr)) {
             return $boolOrStr;
         }
 
         return $boolOrStr ? 'True' : 'False';
-    }
-
-    public static function json_object($object) {
-        \trigger_error("Serialize::json_object has been deprecated in favor of Serialize::jsonObject", E_USER_NOTICE);
-        return Serialize::jsonObject($object);
     }
 
     public static function jsonObject($object) {

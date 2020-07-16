@@ -21,7 +21,7 @@ abstract class ShortCodeOptions {
      *                         assignment to participants only
      * @return UpdateShortCodeOptions Options builder
      */
-    public static function update($isReserved = Values::NONE) {
+    public static function update(bool $isReserved = Values::NONE): UpdateShortCodeOptions {
         return new UpdateShortCodeOptions($isReserved);
     }
 }
@@ -31,7 +31,7 @@ class UpdateShortCodeOptions extends Options {
      * @param bool $isReserved Whether the short code should be reserved for manual
      *                         assignment to participants only
      */
-    public function __construct($isReserved = Values::NONE) {
+    public function __construct(bool $isReserved = Values::NONE) {
         $this->options['isReserved'] = $isReserved;
     }
 
@@ -42,7 +42,7 @@ class UpdateShortCodeOptions extends Options {
      *                         assignment to participants only
      * @return $this Fluent Builder
      */
-    public function setIsReserved($isReserved) {
+    public function setIsReserved(bool $isReserved): self {
         $this->options['isReserved'] = $isReserved;
         return $this;
     }
@@ -52,13 +52,8 @@ class UpdateShortCodeOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Proxy.V1.UpdateShortCodeOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Proxy.V1.UpdateShortCodeOptions ' . $options . ']';
     }
 }

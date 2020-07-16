@@ -17,7 +17,7 @@ abstract class MemberOptions {
      * @param string $method How to pass the update request data
      * @return UpdateMemberOptions Options builder
      */
-    public static function update($method = Values::NONE) {
+    public static function update(string $method = Values::NONE): UpdateMemberOptions {
         return new UpdateMemberOptions($method);
     }
 }
@@ -26,7 +26,7 @@ class UpdateMemberOptions extends Options {
     /**
      * @param string $method How to pass the update request data
      */
-    public function __construct($method = Values::NONE) {
+    public function __construct(string $method = Values::NONE) {
         $this->options['method'] = $method;
     }
 
@@ -36,7 +36,7 @@ class UpdateMemberOptions extends Options {
      * @param string $method How to pass the update request data
      * @return $this Fluent Builder
      */
-    public function setMethod($method) {
+    public function setMethod(string $method): self {
         $this->options['method'] = $method;
         return $this;
     }
@@ -46,13 +46,8 @@ class UpdateMemberOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Api.V2010.UpdateMemberOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Api.V2010.UpdateMemberOptions ' . $options . ']';
     }
 }

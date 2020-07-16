@@ -20,7 +20,7 @@ abstract class SyncListOptions {
      * @param string $uniqueName The unique_name
      * @return CreateSyncListOptions Options builder
      */
-    public static function create($uniqueName = Values::NONE) {
+    public static function create(string $uniqueName = Values::NONE): CreateSyncListOptions {
         return new CreateSyncListOptions($uniqueName);
     }
 }
@@ -29,7 +29,7 @@ class CreateSyncListOptions extends Options {
     /**
      * @param string $uniqueName The unique_name
      */
-    public function __construct($uniqueName = Values::NONE) {
+    public function __construct(string $uniqueName = Values::NONE) {
         $this->options['uniqueName'] = $uniqueName;
     }
 
@@ -39,7 +39,7 @@ class CreateSyncListOptions extends Options {
      * @param string $uniqueName The unique_name
      * @return $this Fluent Builder
      */
-    public function setUniqueName($uniqueName) {
+    public function setUniqueName(string $uniqueName): self {
         $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
@@ -49,13 +49,8 @@ class CreateSyncListOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.Sync.CreateSyncListOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.Sync.CreateSyncListOptions ' . $options . ']';
     }
 }

@@ -16,8 +16,6 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
- *
  * @property string $accountSid
  * @property string $friendlyName
  * @property string $awsCredentialsSid
@@ -31,15 +29,14 @@ class CompositionSettingsInstance extends InstanceResource {
     /**
      * Initialize the CompositionSettingsInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @return \Twilio\Rest\Video\V1\CompositionSettingsInstance
      */
     public function __construct(Version $version, array $payload) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'friendlyName' => Values::array_get($payload, 'friendly_name'),
             'awsCredentialsSid' => Values::array_get($payload, 'aws_credentials_sid'),
@@ -48,19 +45,19 @@ class CompositionSettingsInstance extends InstanceResource {
             'encryptionKeySid' => Values::array_get($payload, 'encryption_key_sid'),
             'encryptionEnabled' => Values::array_get($payload, 'encryption_enabled'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array();
+        $this->solution = [];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Video\V1\CompositionSettingsContext Context for this
-     *                                                          CompositionSettingsInstance
+     * @return CompositionSettingsContext Context for this
+     *                                    CompositionSettingsInstance
      */
-    protected function proxy() {
+    protected function proxy(): CompositionSettingsContext {
         if (!$this->context) {
             $this->context = new CompositionSettingsContext($this->version);
         }
@@ -69,25 +66,25 @@ class CompositionSettingsInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a CompositionSettingsInstance
+     * Fetch the CompositionSettingsInstance
      *
      * @return CompositionSettingsInstance Fetched CompositionSettingsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): CompositionSettingsInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Create a new CompositionSettingsInstance
+     * Create the CompositionSettingsInstance
      *
      * @param string $friendlyName A descriptive string that you create to describe
      *                             the resource
      * @param array|Options $options Optional Arguments
-     * @return CompositionSettingsInstance Newly created CompositionSettingsInstance
+     * @return CompositionSettingsInstance Created CompositionSettingsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($friendlyName, $options = array()) {
+    public function create(string $friendlyName, array $options = []): CompositionSettingsInstance {
         return $this->proxy()->create($friendlyName, $options);
     }
 
@@ -98,7 +95,7 @@ class CompositionSettingsInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -116,8 +113,8 @@ class CompositionSettingsInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

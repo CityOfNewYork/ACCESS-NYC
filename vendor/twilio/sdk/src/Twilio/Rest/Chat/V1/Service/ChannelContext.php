@@ -11,6 +11,7 @@ namespace Twilio\Rest\Chat\V1\Service;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Rest\Chat\V1\Service\Channel\InviteList;
 use Twilio\Rest\Chat\V1\Service\Channel\MemberList;
@@ -19,49 +20,42 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * @property \Twilio\Rest\Chat\V1\Service\Channel\MemberList $members
- * @property \Twilio\Rest\Chat\V1\Service\Channel\MessageList $messages
- * @property \Twilio\Rest\Chat\V1\Service\Channel\InviteList $invites
+ * @property MemberList $members
+ * @property MessageList $messages
+ * @property InviteList $invites
  * @method \Twilio\Rest\Chat\V1\Service\Channel\MemberContext members(string $sid)
  * @method \Twilio\Rest\Chat\V1\Service\Channel\MessageContext messages(string $sid)
  * @method \Twilio\Rest\Chat\V1\Service\Channel\InviteContext invites(string $sid)
  */
 class ChannelContext extends InstanceContext {
-    protected $_members = null;
-    protected $_messages = null;
-    protected $_invites = null;
+    protected $_members;
+    protected $_messages;
+    protected $_invites;
 
     /**
      * Initialize the ChannelContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Service to fetch the resource from
      * @param string $sid The unique string that identifies the resource
-     * @return \Twilio\Rest\Chat\V1\Service\ChannelContext
      */
     public function __construct(Version $version, $serviceSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
+        $this->solution = ['serviceSid' => $serviceSid, 'sid' => $sid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Channels/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a ChannelInstance
+     * Fetch the ChannelInstance
      *
      * @return ChannelInstance Fetched ChannelInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): ChannelInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new ChannelInstance(
             $this->version,
@@ -72,13 +66,13 @@ class ChannelContext extends InstanceContext {
     }
 
     /**
-     * Deletes the ChannelInstance
+     * Delete the ChannelInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
@@ -88,21 +82,16 @@ class ChannelContext extends InstanceContext {
      * @return ChannelInstance Updated ChannelInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): ChannelInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'FriendlyName' => $options['friendlyName'],
             'UniqueName' => $options['uniqueName'],
             'Attributes' => $options['attributes'],
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new ChannelInstance(
             $this->version,
@@ -114,10 +103,8 @@ class ChannelContext extends InstanceContext {
 
     /**
      * Access the members
-     *
-     * @return \Twilio\Rest\Chat\V1\Service\Channel\MemberList
      */
-    protected function getMembers() {
+    protected function getMembers(): MemberList {
         if (!$this->_members) {
             $this->_members = new MemberList(
                 $this->version,
@@ -131,10 +118,8 @@ class ChannelContext extends InstanceContext {
 
     /**
      * Access the messages
-     *
-     * @return \Twilio\Rest\Chat\V1\Service\Channel\MessageList
      */
-    protected function getMessages() {
+    protected function getMessages(): MessageList {
         if (!$this->_messages) {
             $this->_messages = new MessageList(
                 $this->version,
@@ -148,10 +133,8 @@ class ChannelContext extends InstanceContext {
 
     /**
      * Access the invites
-     *
-     * @return \Twilio\Rest\Chat\V1\Service\Channel\InviteList
      */
-    protected function getInvites() {
+    protected function getInvites(): InviteList {
         if (!$this->_invites) {
             $this->_invites = new InviteList(
                 $this->version,
@@ -167,10 +150,10 @@ class ChannelContext extends InstanceContext {
      * Magic getter to lazy load subresources
      *
      * @param string $name Subresource to return
-     * @return \Twilio\ListResource The requested subresource
+     * @return ListResource The requested subresource
      * @throws TwilioException For unknown subresources
      */
-    public function __get($name) {
+    public function __get(string $name): ListResource {
         if (\property_exists($this, '_' . $name)) {
             $method = 'get' . \ucfirst($name);
             return $this->$method();
@@ -184,10 +167,10 @@ class ChannelContext extends InstanceContext {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -201,8 +184,8 @@ class ChannelContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

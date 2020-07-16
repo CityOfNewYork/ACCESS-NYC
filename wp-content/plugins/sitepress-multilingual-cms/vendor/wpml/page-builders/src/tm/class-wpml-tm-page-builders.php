@@ -25,6 +25,7 @@ class WPML_TM_Page_Builders {
 	 */
 	public function translation_job_data_filter( array $translation_package, $post ) {
 		if ( self::PACKAGE_TYPE_EXTERNAL !== $translation_package['type'] && isset( $post->ID ) ) {
+
 			$post_element        = new WPML_Post_Element( $post->ID, $this->sitepress );
 			$source_post_id      = $post->ID;
 			$source_post_element = $post_element->get_source_element();
@@ -91,11 +92,15 @@ class WPML_TM_Page_Builders {
 	}
 
 	/**
-	 * @param int      $new_post_id
+	 * @param int      $new_element_id
 	 * @param array    $fields
 	 * @param stdClass $job
 	 */
-	public function pro_translation_completed_action( $new_post_id, array $fields, stdClass $job ) {
+	public function pro_translation_completed_action( $new_element_id, array $fields, stdClass $job ) {
+		if ( 'post' !== $job->element_type_prefix ) {
+			return;
+		}
+
 		foreach ( $fields as $field_id => $field ) {
 			$field_slug = isset( $field['field_type'] ) ? $field['field_type'] : $field_id;
 			$wrapper = $this->create_field_wrapper( $field_slug );
@@ -114,7 +119,7 @@ class WPML_TM_Page_Builders {
 			}
 		}
 
-		do_action( 'wpml_pb_finished_adding_string_translations', $new_post_id, $job->original_doc_id, $fields );
+		do_action( 'wpml_pb_finished_adding_string_translations', $new_element_id, $job->original_doc_id, $fields );
 	}
 
 	/**

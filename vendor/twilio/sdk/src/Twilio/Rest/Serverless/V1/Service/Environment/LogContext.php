@@ -21,41 +21,30 @@ class LogContext extends InstanceContext {
     /**
      * Initialize the LogContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Service to fetch the Log resource
      *                           from
      * @param string $environmentSid The SID of the environment with the Log
      *                               resource to fetch
      * @param string $sid The SID that identifies the Log resource to fetch
-     * @return \Twilio\Rest\Serverless\V1\Service\Environment\LogContext
      */
     public function __construct(Version $version, $serviceSid, $environmentSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'environmentSid' => $environmentSid,
-            'sid' => $sid,
-        );
+        $this->solution = ['serviceSid' => $serviceSid, 'environmentSid' => $environmentSid, 'sid' => $sid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Environments/' . \rawurlencode($environmentSid) . '/Logs/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a LogInstance
+     * Fetch the LogInstance
      *
      * @return LogInstance Fetched LogInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): LogInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new LogInstance(
             $this->version,
@@ -71,8 +60,8 @@ class LogContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

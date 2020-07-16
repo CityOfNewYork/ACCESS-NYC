@@ -16,33 +16,32 @@ use Twilio\Version;
 
 /**
  * @property string $accountSid
- * @property string $phoneNumber
- * @property string $friendlyName
- * @property int $validationCode
  * @property string $callSid
+ * @property string $friendlyName
+ * @property string $phoneNumber
+ * @property string $validationCode
  */
 class ValidationRequestInstance extends InstanceResource {
     /**
      * Initialize the ValidationRequestInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $accountSid The SID of the Account that created the resource
-     * @return \Twilio\Rest\Api\V2010\Account\ValidationRequestInstance
      */
-    public function __construct(Version $version, array $payload, $accountSid) {
+    public function __construct(Version $version, array $payload, string $accountSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
-            'phoneNumber' => Values::array_get($payload, 'phone_number'),
-            'friendlyName' => Values::array_get($payload, 'friendly_name'),
-            'validationCode' => Values::array_get($payload, 'validation_code'),
             'callSid' => Values::array_get($payload, 'call_sid'),
-        );
+            'friendlyName' => Values::array_get($payload, 'friendly_name'),
+            'phoneNumber' => Values::array_get($payload, 'phone_number'),
+            'validationCode' => Values::array_get($payload, 'validation_code'),
+        ];
 
-        $this->solution = array('accountSid' => $accountSid, );
+        $this->solution = ['accountSid' => $accountSid, ];
     }
 
     /**
@@ -52,7 +51,7 @@ class ValidationRequestInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -70,7 +69,7 @@ class ValidationRequestInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Api.V2010.ValidationRequestInstance]';
     }
 }

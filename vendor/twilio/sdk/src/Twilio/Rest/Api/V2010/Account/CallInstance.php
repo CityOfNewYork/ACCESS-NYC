@@ -13,93 +13,100 @@ use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
 use Twilio\Options;
+use Twilio\Rest\Api\V2010\Account\Call\FeedbackList;
+use Twilio\Rest\Api\V2010\Account\Call\NotificationList;
+use Twilio\Rest\Api\V2010\Account\Call\PaymentList;
+use Twilio\Rest\Api\V2010\Account\Call\RecordingList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
- * @property string $accountSid
- * @property string $annotation
- * @property string $answeredBy
- * @property string $apiVersion
- * @property string $callerName
+ * @property string $sid
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
- * @property string $direction
- * @property string $duration
- * @property \DateTime $endTime
- * @property string $forwardedFrom
- * @property string $from
- * @property string $fromFormatted
- * @property string $groupSid
  * @property string $parentCallSid
- * @property string $phoneNumberSid
- * @property string $price
- * @property string $priceUnit
- * @property string $sid
- * @property \DateTime $startTime
- * @property string $status
- * @property array $subresourceUris
+ * @property string $accountSid
  * @property string $to
  * @property string $toFormatted
+ * @property string $from
+ * @property string $fromFormatted
+ * @property string $phoneNumberSid
+ * @property string $status
+ * @property \DateTime $startTime
+ * @property \DateTime $endTime
+ * @property string $duration
+ * @property string $price
+ * @property string $priceUnit
+ * @property string $direction
+ * @property string $answeredBy
+ * @property string $annotation
+ * @property string $apiVersion
+ * @property string $forwardedFrom
+ * @property string $groupSid
+ * @property string $callerName
+ * @property string $queueTime
+ * @property string $trunkSid
  * @property string $uri
+ * @property array $subresourceUris
  */
 class CallInstance extends InstanceResource {
-    protected $_recordings = null;
-    protected $_notifications = null;
-    protected $_feedback = null;
+    protected $_recordings;
+    protected $_notifications;
+    protected $_feedback;
+    protected $_payments;
 
     /**
      * Initialize the CallInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $accountSid The SID of the Account that created this resource
      * @param string $sid The SID of the Call resource to fetch
-     * @return \Twilio\Rest\Api\V2010\Account\CallInstance
      */
-    public function __construct(Version $version, array $payload, $accountSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $accountSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
-            'accountSid' => Values::array_get($payload, 'account_sid'),
-            'annotation' => Values::array_get($payload, 'annotation'),
-            'answeredBy' => Values::array_get($payload, 'answered_by'),
-            'apiVersion' => Values::array_get($payload, 'api_version'),
-            'callerName' => Values::array_get($payload, 'caller_name'),
+        $this->properties = [
+            'sid' => Values::array_get($payload, 'sid'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
-            'direction' => Values::array_get($payload, 'direction'),
-            'duration' => Values::array_get($payload, 'duration'),
-            'endTime' => Deserialize::dateTime(Values::array_get($payload, 'end_time')),
-            'forwardedFrom' => Values::array_get($payload, 'forwarded_from'),
-            'from' => Values::array_get($payload, 'from'),
-            'fromFormatted' => Values::array_get($payload, 'from_formatted'),
-            'groupSid' => Values::array_get($payload, 'group_sid'),
             'parentCallSid' => Values::array_get($payload, 'parent_call_sid'),
-            'phoneNumberSid' => Values::array_get($payload, 'phone_number_sid'),
-            'price' => Values::array_get($payload, 'price'),
-            'priceUnit' => Values::array_get($payload, 'price_unit'),
-            'sid' => Values::array_get($payload, 'sid'),
-            'startTime' => Deserialize::dateTime(Values::array_get($payload, 'start_time')),
-            'status' => Values::array_get($payload, 'status'),
-            'subresourceUris' => Values::array_get($payload, 'subresource_uris'),
+            'accountSid' => Values::array_get($payload, 'account_sid'),
             'to' => Values::array_get($payload, 'to'),
             'toFormatted' => Values::array_get($payload, 'to_formatted'),
+            'from' => Values::array_get($payload, 'from'),
+            'fromFormatted' => Values::array_get($payload, 'from_formatted'),
+            'phoneNumberSid' => Values::array_get($payload, 'phone_number_sid'),
+            'status' => Values::array_get($payload, 'status'),
+            'startTime' => Deserialize::dateTime(Values::array_get($payload, 'start_time')),
+            'endTime' => Deserialize::dateTime(Values::array_get($payload, 'end_time')),
+            'duration' => Values::array_get($payload, 'duration'),
+            'price' => Values::array_get($payload, 'price'),
+            'priceUnit' => Values::array_get($payload, 'price_unit'),
+            'direction' => Values::array_get($payload, 'direction'),
+            'answeredBy' => Values::array_get($payload, 'answered_by'),
+            'annotation' => Values::array_get($payload, 'annotation'),
+            'apiVersion' => Values::array_get($payload, 'api_version'),
+            'forwardedFrom' => Values::array_get($payload, 'forwarded_from'),
+            'groupSid' => Values::array_get($payload, 'group_sid'),
+            'callerName' => Values::array_get($payload, 'caller_name'),
+            'queueTime' => Values::array_get($payload, 'queue_time'),
+            'trunkSid' => Values::array_get($payload, 'trunk_sid'),
             'uri' => Values::array_get($payload, 'uri'),
-        );
+            'subresourceUris' => Values::array_get($payload, 'subresource_uris'),
+        ];
 
-        $this->solution = array('accountSid' => $accountSid, 'sid' => $sid ?: $this->properties['sid'], );
+        $this->solution = ['accountSid' => $accountSid, 'sid' => $sid ?: $this->properties['sid'], ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Api\V2010\Account\CallContext Context for this
-     *                                                    CallInstance
+     * @return CallContext Context for this CallInstance
      */
-    protected function proxy() {
+    protected function proxy(): CallContext {
         if (!$this->context) {
             $this->context = new CallContext(
                 $this->version,
@@ -112,22 +119,22 @@ class CallInstance extends InstanceResource {
     }
 
     /**
-     * Deletes the CallInstance
+     * Delete the CallInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
+    public function delete(): bool {
         return $this->proxy()->delete();
     }
 
     /**
-     * Fetch a CallInstance
+     * Fetch the CallInstance
      *
      * @return CallInstance Fetched CallInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): CallInstance {
         return $this->proxy()->fetch();
     }
 
@@ -138,35 +145,36 @@ class CallInstance extends InstanceResource {
      * @return CallInstance Updated CallInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): CallInstance {
         return $this->proxy()->update($options);
     }
 
     /**
      * Access the recordings
-     *
-     * @return \Twilio\Rest\Api\V2010\Account\Call\RecordingList
      */
-    protected function getRecordings() {
+    protected function getRecordings(): RecordingList {
         return $this->proxy()->recordings;
     }
 
     /**
      * Access the notifications
-     *
-     * @return \Twilio\Rest\Api\V2010\Account\Call\NotificationList
      */
-    protected function getNotifications() {
+    protected function getNotifications(): NotificationList {
         return $this->proxy()->notifications;
     }
 
     /**
      * Access the feedback
-     *
-     * @return \Twilio\Rest\Api\V2010\Account\Call\FeedbackList
      */
-    protected function getFeedback() {
+    protected function getFeedback(): FeedbackList {
         return $this->proxy()->feedback;
+    }
+
+    /**
+     * Access the payments
+     */
+    protected function getPayments(): PaymentList {
+        return $this->proxy()->payments;
     }
 
     /**
@@ -176,7 +184,7 @@ class CallInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -194,8 +202,8 @@ class CallInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

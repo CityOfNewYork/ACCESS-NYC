@@ -49,12 +49,6 @@ namespace EnableMediaReplace\ShortPixelLogger;
       $ns = __NAMESPACE__;
       $this->namespace = substr($ns, 0, strpos($ns, '\\')); // try to get first part of namespace
 
-      if ($this->logPath === false)
-      {
-        $upload_dir = wp_upload_dir(null,false,false);
-        $this->logPath = $this->setLogPath($upload_dir['basedir'] . '/' . $this->namespace . ".log");
-      }
-
       if (isset($_REQUEST['SHORTPIXEL_DEBUG'])) // manual takes precedence over constants
       {
         $this->is_manual_request = true;
@@ -88,12 +82,14 @@ namespace EnableMediaReplace\ShortPixelLogger;
 
       }
 
-      /* On Early init, this function might not exist, then queue it when needed */
-      if (! function_exists('wp_get_current_user'))
-        add_action('plugins_loaded', array($this, 'initView'));
-      else
-       $this->initView();
-
+      if ($this->is_active)
+      {
+        /* On Early init, this function might not exist, then queue it when needed */
+        if (! function_exists('wp_get_current_user'))
+          add_action('init', array($this, 'initView'));
+        else
+         $this->initView();
+      }
 
       if ($this->is_active && count($this->hooks) > 0)
           $this->monitorHooks();
@@ -132,14 +128,21 @@ namespace EnableMediaReplace\ShortPixelLogger;
    {
       $this->logPath = $logPath;
    }
-   protected static function addLog($message, $level, $data = array())
+   protected function addLog($message, $level, $data = array())
    {
-     $log = self::getInstance();
+  //   $log = self::getInstance();
 
-     // don't log anything too low.
-     if ($log->logLevel < $level)
+     // don't log anything too low or when not active.
+     if ($this->logLevel < $level || ! $this->is_active)
      {
        return;
+     }
+
+     // Check where to log to.
+     if ($this->logPath === false)
+     {
+       $upload_dir = wp_upload_dir(null,false,false);
+       $this->logPath = $this->setLogPath($upload_dir['basedir'] . '/' . $this->namespace . ".log");
      }
 
      $arg = array();
@@ -147,11 +150,11 @@ namespace EnableMediaReplace\ShortPixelLogger;
      $args['data'] = $data;
 
      $newItem = new DebugItem($message, $args);
-     $log->items[] = $newItem;
+     $this->items[] = $newItem;
 
-      if ($log->is_active)
+      if ($this->is_active)
       {
-          $log->write($newItem);
+          $this->write($newItem);
       }
    }
 
@@ -225,22 +228,37 @@ namespace EnableMediaReplace\ShortPixelLogger;
    public static function addError($message, $args = array())
    {
       $level = DebugItem::LEVEL_ERROR;
-      static::addLog($message, $level, $args);
+      $log = self::getInstance();
+      $log->addLog($message, $level, $args);
    }
    public static function addWarn($message, $args = array())
    {
      $level = DebugItem::LEVEL_WARN;
-     static::addLog($message, $level, $args);
+     $log = self::getInstance();
+     $log->addLog($message, $level, $args);
+   }
+   // Alias, since it goes wrong so often. 
+   public static function addWarning($message, $args = array())
+   {
+      self::addWarn($message, $args);
    }
    public static function addInfo($message, $args = array())
    {
      $level = DebugItem::LEVEL_INFO;
-     static::addLog($message, $level, $args);
+     $log = self::getInstance();
+     $log->addLog($message, $level, $args);
    }
    public static function addDebug($message, $args = array())
    {
      $level = DebugItem::LEVEL_DEBUG;
-     static::addLog($message, $level, $args);
+     $log = self::getInstance();
+     $log->addLog($message, $level, $args);
+   }
+
+   /** These should be removed every release. They are temporary only for d'bugging the current release */
+   public static function addTemp($message, $args = array())
+   {
+     self::addDebug($message, $args);
    }
 
    public static function logLevel($level)

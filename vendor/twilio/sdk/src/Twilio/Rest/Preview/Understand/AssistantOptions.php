@@ -40,7 +40,7 @@ abstract class AssistantOptions {
      *                          assistant
      * @return CreateAssistantOptions Options builder
      */
-    public static function create($friendlyName = Values::NONE, $logQueries = Values::NONE, $uniqueName = Values::NONE, $callbackUrl = Values::NONE, $callbackEvents = Values::NONE, $fallbackActions = Values::NONE, $initiationActions = Values::NONE, $styleSheet = Values::NONE) {
+    public static function create(string $friendlyName = Values::NONE, bool $logQueries = Values::NONE, string $uniqueName = Values::NONE, string $callbackUrl = Values::NONE, string $callbackEvents = Values::NONE, array $fallbackActions = Values::ARRAY_NONE, array $initiationActions = Values::ARRAY_NONE, array $styleSheet = Values::ARRAY_NONE): CreateAssistantOptions {
         return new CreateAssistantOptions($friendlyName, $logQueries, $uniqueName, $callbackUrl, $callbackEvents, $fallbackActions, $initiationActions, $styleSheet);
     }
 
@@ -68,7 +68,7 @@ abstract class AssistantOptions {
      *                          assistant
      * @return UpdateAssistantOptions Options builder
      */
-    public static function update($friendlyName = Values::NONE, $logQueries = Values::NONE, $uniqueName = Values::NONE, $callbackUrl = Values::NONE, $callbackEvents = Values::NONE, $fallbackActions = Values::NONE, $initiationActions = Values::NONE, $styleSheet = Values::NONE) {
+    public static function update(string $friendlyName = Values::NONE, bool $logQueries = Values::NONE, string $uniqueName = Values::NONE, string $callbackUrl = Values::NONE, string $callbackEvents = Values::NONE, array $fallbackActions = Values::ARRAY_NONE, array $initiationActions = Values::ARRAY_NONE, array $styleSheet = Values::ARRAY_NONE): UpdateAssistantOptions {
         return new UpdateAssistantOptions($friendlyName, $logQueries, $uniqueName, $callbackUrl, $callbackEvents, $fallbackActions, $initiationActions, $styleSheet);
     }
 }
@@ -97,7 +97,7 @@ class CreateAssistantOptions extends Options {
      * @param array $styleSheet The JSON object that holds the style sheet for the
      *                          assistant
      */
-    public function __construct($friendlyName = Values::NONE, $logQueries = Values::NONE, $uniqueName = Values::NONE, $callbackUrl = Values::NONE, $callbackEvents = Values::NONE, $fallbackActions = Values::NONE, $initiationActions = Values::NONE, $styleSheet = Values::NONE) {
+    public function __construct(string $friendlyName = Values::NONE, bool $logQueries = Values::NONE, string $uniqueName = Values::NONE, string $callbackUrl = Values::NONE, string $callbackEvents = Values::NONE, array $fallbackActions = Values::ARRAY_NONE, array $initiationActions = Values::ARRAY_NONE, array $styleSheet = Values::ARRAY_NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['logQueries'] = $logQueries;
         $this->options['uniqueName'] = $uniqueName;
@@ -115,7 +115,7 @@ class CreateAssistantOptions extends Options {
      *                             non-unique and can up to 255 characters long.
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -130,7 +130,7 @@ class CreateAssistantOptions extends Options {
      *                         to true if no value is provided.
      * @return $this Fluent Builder
      */
-    public function setLogQueries($logQueries) {
+    public function setLogQueries(bool $logQueries): self {
         $this->options['logQueries'] = $logQueries;
         return $this;
     }
@@ -143,7 +143,7 @@ class CreateAssistantOptions extends Options {
      *                           up to 64 characters long.
      * @return $this Fluent Builder
      */
-    public function setUniqueName($uniqueName) {
+    public function setUniqueName(string $uniqueName): self {
         $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
@@ -154,7 +154,7 @@ class CreateAssistantOptions extends Options {
      * @param string $callbackUrl A user-provided URL to send event callbacks to.
      * @return $this Fluent Builder
      */
-    public function setCallbackUrl($callbackUrl) {
+    public function setCallbackUrl(string $callbackUrl): self {
         $this->options['callbackUrl'] = $callbackUrl;
         return $this;
     }
@@ -166,7 +166,7 @@ class CreateAssistantOptions extends Options {
      *                               will trigger callbacks.
      * @return $this Fluent Builder
      */
-    public function setCallbackEvents($callbackEvents) {
+    public function setCallbackEvents(string $callbackEvents): self {
         $this->options['callbackEvents'] = $callbackEvents;
         return $this;
     }
@@ -179,7 +179,7 @@ class CreateAssistantOptions extends Options {
      *                               Task.
      * @return $this Fluent Builder
      */
-    public function setFallbackActions($fallbackActions) {
+    public function setFallbackActions(array $fallbackActions): self {
         $this->options['fallbackActions'] = $fallbackActions;
         return $this;
     }
@@ -192,7 +192,7 @@ class CreateAssistantOptions extends Options {
      *                                 something first.
      * @return $this Fluent Builder
      */
-    public function setInitiationActions($initiationActions) {
+    public function setInitiationActions(array $initiationActions): self {
         $this->options['initiationActions'] = $initiationActions;
         return $this;
     }
@@ -204,7 +204,7 @@ class CreateAssistantOptions extends Options {
      *                          assistant
      * @return $this Fluent Builder
      */
-    public function setStyleSheet($styleSheet) {
+    public function setStyleSheet(array $styleSheet): self {
         $this->options['styleSheet'] = $styleSheet;
         return $this;
     }
@@ -214,14 +214,9 @@ class CreateAssistantOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.Understand.CreateAssistantOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.Understand.CreateAssistantOptions ' . $options . ']';
     }
 }
 
@@ -249,7 +244,7 @@ class UpdateAssistantOptions extends Options {
      * @param array $styleSheet The JSON object that holds the style sheet for the
      *                          assistant
      */
-    public function __construct($friendlyName = Values::NONE, $logQueries = Values::NONE, $uniqueName = Values::NONE, $callbackUrl = Values::NONE, $callbackEvents = Values::NONE, $fallbackActions = Values::NONE, $initiationActions = Values::NONE, $styleSheet = Values::NONE) {
+    public function __construct(string $friendlyName = Values::NONE, bool $logQueries = Values::NONE, string $uniqueName = Values::NONE, string $callbackUrl = Values::NONE, string $callbackEvents = Values::NONE, array $fallbackActions = Values::ARRAY_NONE, array $initiationActions = Values::ARRAY_NONE, array $styleSheet = Values::ARRAY_NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['logQueries'] = $logQueries;
         $this->options['uniqueName'] = $uniqueName;
@@ -267,7 +262,7 @@ class UpdateAssistantOptions extends Options {
      *                             non-unique and can up to 255 characters long.
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -282,7 +277,7 @@ class UpdateAssistantOptions extends Options {
      *                         to true if no value is provided.
      * @return $this Fluent Builder
      */
-    public function setLogQueries($logQueries) {
+    public function setLogQueries(bool $logQueries): self {
         $this->options['logQueries'] = $logQueries;
         return $this;
     }
@@ -295,7 +290,7 @@ class UpdateAssistantOptions extends Options {
      *                           up to 64 characters long.
      * @return $this Fluent Builder
      */
-    public function setUniqueName($uniqueName) {
+    public function setUniqueName(string $uniqueName): self {
         $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
@@ -306,7 +301,7 @@ class UpdateAssistantOptions extends Options {
      * @param string $callbackUrl A user-provided URL to send event callbacks to.
      * @return $this Fluent Builder
      */
-    public function setCallbackUrl($callbackUrl) {
+    public function setCallbackUrl(string $callbackUrl): self {
         $this->options['callbackUrl'] = $callbackUrl;
         return $this;
     }
@@ -318,7 +313,7 @@ class UpdateAssistantOptions extends Options {
      *                               will trigger callbacks.
      * @return $this Fluent Builder
      */
-    public function setCallbackEvents($callbackEvents) {
+    public function setCallbackEvents(string $callbackEvents): self {
         $this->options['callbackEvents'] = $callbackEvents;
         return $this;
     }
@@ -331,7 +326,7 @@ class UpdateAssistantOptions extends Options {
      *                               Task.
      * @return $this Fluent Builder
      */
-    public function setFallbackActions($fallbackActions) {
+    public function setFallbackActions(array $fallbackActions): self {
         $this->options['fallbackActions'] = $fallbackActions;
         return $this;
     }
@@ -344,7 +339,7 @@ class UpdateAssistantOptions extends Options {
      *                                 something first.
      * @return $this Fluent Builder
      */
-    public function setInitiationActions($initiationActions) {
+    public function setInitiationActions(array $initiationActions): self {
         $this->options['initiationActions'] = $initiationActions;
         return $this;
     }
@@ -356,7 +351,7 @@ class UpdateAssistantOptions extends Options {
      *                          assistant
      * @return $this Fluent Builder
      */
-    public function setStyleSheet($styleSheet) {
+    public function setStyleSheet(array $styleSheet): self {
         $this->options['styleSheet'] = $styleSheet;
         return $this;
     }
@@ -366,13 +361,8 @@ class UpdateAssistantOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.Understand.UpdateAssistantOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.Understand.UpdateAssistantOptions ' . $options . ']';
     }
 }

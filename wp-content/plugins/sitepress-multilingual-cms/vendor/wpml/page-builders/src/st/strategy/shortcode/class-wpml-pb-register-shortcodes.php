@@ -40,6 +40,7 @@ class WPML_PB_Register_Shortcodes {
 		$this->location_index = 1;
 
 		$content = apply_filters( 'wpml_pb_shortcode_content_for_translation', $content, $post_id );
+		$content = WPML_PB_Shortcode_Content_Wrapper::maybeWrap( $content, $this->shortcode_strategy->get_shortcodes() );
 
 		$shortcode_parser               = $this->shortcode_strategy->get_shortcode_parser();
 		$shortcodes                     = $shortcode_parser->get_shortcodes( $content );

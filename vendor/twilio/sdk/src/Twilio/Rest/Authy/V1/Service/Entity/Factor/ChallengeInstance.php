@@ -34,27 +34,25 @@ use Twilio\Version;
  * @property string $details
  * @property string $hiddenDetails
  * @property string $factorType
- * @property string $factorStrength
  * @property string $url
  */
 class ChallengeInstance extends InstanceResource {
     /**
      * Initialize the ChallengeInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid Service Sid.
      * @param string $identity Unique identity of the Entity
      * @param string $factorSid Factor Sid.
      * @param string $sid A string that uniquely identifies this Challenge, or
      *                    `latest`.
-     * @return \Twilio\Rest\Authy\V1\Service\Entity\Factor\ChallengeInstance
      */
-    public function __construct(Version $version, array $payload, $serviceSid, $identity, $factorSid, $sid = null) {
+    public function __construct(Version $version, array $payload, string $serviceSid, string $identity, string $factorSid, string $sid = null) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'serviceSid' => Values::array_get($payload, 'service_sid'),
@@ -70,28 +68,24 @@ class ChallengeInstance extends InstanceResource {
             'details' => Values::array_get($payload, 'details'),
             'hiddenDetails' => Values::array_get($payload, 'hidden_details'),
             'factorType' => Values::array_get($payload, 'factor_type'),
-            'factorStrength' => Values::array_get($payload, 'factor_strength'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array(
+        $this->solution = [
             'serviceSid' => $serviceSid,
             'identity' => $identity,
             'factorSid' => $factorSid,
             'sid' => $sid ?: $this->properties['sid'],
-        );
+        ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Authy\V1\Service\Entity\Factor\ChallengeContext Context
-     *                                                                      for
-     *                                                                      this
-     *                                                                      ChallengeInstance
+     * @return ChallengeContext Context for this ChallengeInstance
      */
-    protected function proxy() {
+    protected function proxy(): ChallengeContext {
         if (!$this->context) {
             $this->context = new ChallengeContext(
                 $this->version,
@@ -106,23 +100,25 @@ class ChallengeInstance extends InstanceResource {
     }
 
     /**
-     * Deletes the ChallengeInstance
+     * Delete the ChallengeInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @param array|Options $options Optional Arguments
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->proxy()->delete();
+    public function delete(array $options = []): bool {
+        return $this->proxy()->delete($options);
     }
 
     /**
-     * Fetch a ChallengeInstance
+     * Fetch the ChallengeInstance
      *
+     * @param array|Options $options Optional Arguments
      * @return ChallengeInstance Fetched ChallengeInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        return $this->proxy()->fetch();
+    public function fetch(array $options = []): ChallengeInstance {
+        return $this->proxy()->fetch($options);
     }
 
     /**
@@ -132,7 +128,7 @@ class ChallengeInstance extends InstanceResource {
      * @return ChallengeInstance Updated ChallengeInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): ChallengeInstance {
         return $this->proxy()->update($options);
     }
 
@@ -143,7 +139,7 @@ class ChallengeInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -161,8 +157,8 @@ class ChallengeInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

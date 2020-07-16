@@ -7,6 +7,7 @@ use WPML\ST\MO\File\makeDir;
 use WPML\ST\MO\Hooks\LoadMissingMOFiles;
 use WPML\ST\TranslationFile\StringsRetrieve;
 use WPML\WP\OptionManager;
+use function WPML\Container\make;
 
 class MissingMOFile {
 
@@ -52,8 +53,8 @@ class MissingMOFile {
 	 */
 	public function run( $generateMoPath, $domain ) {
 		$processed = $this->getProcessed();
-		if ( ! $processed->contains( $generateMoPath ) && $this->maybeCreateSubdir() ) {
-			$locale  = ( new \WPML_ST_Translations_File_Locale( $generateMoPath, $domain ) )->get();
+		if ( ! $processed->contains( basename( $generateMoPath ) ) && $this->maybeCreateSubdir() ) {
+			$locale = make( \WPML_ST_Translations_File_Locale::class )->get( $generateMoPath, $domain );
 			$strings = $this->stringsRetrieve->get(
 				$domain,
 				$this->languageRecords->get_language_code( $locale ),
@@ -73,7 +74,7 @@ class MissingMOFile {
 	}
 
 	public function isNotProcessed( $generateMoPath ) {
-		return ! $this->getProcessed()->contains( $generateMoPath );
+		return ! $this->getProcessed()->contains( basename($generateMoPath) );
 	}
 
 	public static function getSubdir() {
@@ -84,6 +85,9 @@ class MissingMOFile {
 	 * @return \WPML\Collect\Support\Collection
 	 */
 	private function getProcessed() {
-		return wpml_collect( $this->optionManager->get( self::OPTION_GROUP, self::OPTION_NAME, [] ) );
+		return wpml_collect( $this->optionManager->get( self::OPTION_GROUP, self::OPTION_NAME, [] ) )
+			->map( function ( $path ) {
+				return basename( $path );
+			} );
 	}
 }

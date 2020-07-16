@@ -37,17 +37,16 @@ class DataSessionInstance extends InstanceResource {
     /**
      * Initialize the DataSessionInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $simSid The SID of the Sim resource that the Data Session is
      *                       for
-     * @return \Twilio\Rest\Wireless\V1\Sim\DataSessionInstance
      */
-    public function __construct(Version $version, array $payload, $simSid) {
+    public function __construct(Version $version, array $payload, string $simSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'sid' => Values::array_get($payload, 'sid'),
             'simSid' => Values::array_get($payload, 'sim_sid'),
             'accountSid' => Values::array_get($payload, 'account_sid'),
@@ -64,9 +63,9 @@ class DataSessionInstance extends InstanceResource {
             'start' => Deserialize::dateTime(Values::array_get($payload, 'start')),
             'end' => Deserialize::dateTime(Values::array_get($payload, 'end')),
             'imei' => Values::array_get($payload, 'imei'),
-        );
+        ];
 
-        $this->solution = array('simSid' => $simSid, );
+        $this->solution = ['simSid' => $simSid, ];
     }
 
     /**
@@ -76,7 +75,7 @@ class DataSessionInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -94,7 +93,7 @@ class DataSessionInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Wireless.V1.DataSessionInstance]';
     }
 }

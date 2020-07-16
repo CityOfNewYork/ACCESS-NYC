@@ -1,8 +1,8 @@
 === Advanced Custom Fields Pro ===
 Contributors: elliotcondon
 Tags: acf, advanced, custom, field, fields, form, repeater, content
-Requires at least: 4.7.0
-Tested up to: 5.3.0
+Requires at least: 4.7
+Tested up to: 5.4
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -66,6 +66,61 @@ From your WordPress dashboard
 
 
 == Changelog ==
+
+= 5.8.12 =
+*Release Date - 10 June 2020*
+
+* Fix - Improved string escaping in Select2 drop-downs to address XSS concerns.
+* Fix - Fixed bug causing PHP error when updating the settings of a Checkbox field.
+* Fix - Fixed bug causing WYSIWYG field to hide when toggling between Document and Block tabs within the Block editor.
+* Fix - Fixed bug incorrectly validating the length of Text and Textarea field values that contained HTML entities.
+
+= 5.8.11 =
+*Release Date - 12 May 2020*
+
+* Fix - Fixed bug in ACF Blocks where "inserter examples" and "block templates" did not load the defined "data".
+* Fix - Reverted "fix" in 5.8.9 regarding Taxonomy fields saving terms to non "post" objects.
+* Fix - Fixed bug allowing the Image field to save the value of a deleted attachment.
+* Fix - Improved Select field `format_value()` behaviour to correctly cast value types depending on the "multiple" setting.
+* Tweak - Changed language fallback for "zh_HK" to "zh_TW".
+* Tweak - Changed Time Picker field settings to display in a localized format via `date_i18n()`.
+* Tweak - Improved CSS styling of menu item fields.
+* i18n - Updated Finnish translation thanks to Mikko Kekki
+* i18n - Updated French translation thanks to Maxime Bernard-Jacquet.
+* i18n - Updated Turkish translation thanks to Emre Erkan.
+
+= 5.8.10 =
+*Release Date - 12 May 2020*
+
+* See hotfix version 5.8.11 for release notes.
+
+= 5.8.9 =
+*Release Date - 26 March 2020*
+
+* Fix - Fixed bug in ACF Blocks causing default "align" property to be ignored.
+* Fix - Fixed bug allowing Taxonomy field to save terms to a non "post" object.
+* Tweak - Improved User field AJAX query performance.
+* Tweak - Improved logic that determines width of Range field input.
+* Tweak - Improved styling of ACF Blocks components.
+* Dev - Added new "acf/register_block_type_args" filter.
+* Dev - Added new generic ACF_Ajax_Query and ACF_Ajax_Query_Users classes.
+* i18n - Updated French Canadian translation thanks to Bérenger Zyla.
+* i18n - Updated Traditional Chinese translation thanks to Audi Lu.
+* i18n - Updated German translation thanks to Ralf Koller.
+* i18n - Updated Portuguese translation thanks to Pedro Mendonça.
+
+= 5.8.8 =
+*Release Date - 4 March 2020*
+
+* Fix - Fixed bug in `have_rows()` function causing a PHP warning when no value is found.
+* Fix - Fixed bug in Google Maps field causing marker to snap to nearest address.
+* Fix - Avoid Nav Menu items displaying twice in WordPress 5.4.
+* Tweak - Added place name data to Google Maps field value.
+* Tweak - Improved performance of PHP registered fields.
+* Dev - Added new "acf/prepare_field_group_for_import" filter.
+* i18n - Added Traditional Chinese translation thanks to Audi Lu.
+* i18n - Added Catalan translation thanks to Jordi Tarrida.
+* i18n - Updated French translation thanks to Maxime Bernard-Jacquet & Bérenger Zyla.
 
 = 5.8.7 =
 *Release Date - 12 November 2019*

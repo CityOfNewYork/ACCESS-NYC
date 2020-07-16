@@ -1,34 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main id="content" class="color-light-background" itemscope itemtype="http://schema.org/{{ post.item_scope }}">
-    <meta itemprop="datePosted" content="{{ post.post_modified }}" />
-
-    {% if post.custom.program_status_clear_date %}
-    <meta itemprop="expires" content="{{ post.custom.program_status_clear_date }}" />
-    {% endif %}
-
-    {% if post.item_scope == 'SpecialAnnouncement' %}
-    <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
-
-    <div itemprop="governmentBenefitsInfo" itemtype="http://schema.org/GovernmentService" itemscope>
-      <meta itemprop="name" content="{{ post.program_name }}" />
-
-      {% if post.structured_data_url %}
-      <meta itemprop="url" content="{{ post.structured_data_url }}" />
-      {% endif %}
-
-      <div itemprop="provider" itemtype="http://schema.org/GovernmentOrganization" itemscope>
-        <meta itemprop="name" content="{{ post.government_agency }}" />
-      </div>
-
-      <div itemprop="audience" itemtype="http://schema.org/Audience" itemscope>
-        <meta itemprop="name" content="{{ post.audience }}" />
-      </div>
-
-      <meta itemprop="serviceType" content="{{ post.category.name }}" />
-    </div>
-    {% endif %}
+  <main id="content" class="color-light-background">
 
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
@@ -43,12 +16,12 @@
     <p class="wrap m-0 pt-3 hidden print:block" aria-hidden="true">
       <strong>{{ __('Get back to this page', 'accessnyc-program-detail') }}:</strong>
 
-      <a href="{{ post.get_permalink }}" itemprop="url">{{ post.get_permalink|replace({'http://': ''})}}</a>
+      <a href="{{ post.get_permalink }}">{{ post.get_permalink }}</a>
     </p>
 
     <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
       <div class="c-header__icon">
-        <span class="hidden" aria-hidden="true" itemprop="serviceType">{{ post.category.name }}</span>
+        <span class="hidden" aria-hidden="true">{{ post.category.name }}</span>
 
         {% include 'elements/icon.twig' with {
           'icon': 'icon-card-' ~ post.category.slug ~ '-v' ~ post.icon.version,
@@ -58,7 +31,7 @@
       </div>
 
       <div>
-        <h1 class="c-header__descriptor" itemprop="alternateName">
+        <h1 class="c-header__descriptor">
           {% if post.status %}
           <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
           {% endif %}
@@ -67,19 +40,11 @@
         </h1>
 
         <h2 class="c-header__information color__alt mb-0">
-          <span itemprop="name">
+          <span>
             {{ post.program_name }}
           </span>
 
           {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}
-
-          {% if post.government_agency %} |
-            <span itemprop="serviceOperator" itemscope itemtype="http://schema.org/GovernmentOrganization">
-              <span itemprop="name">
-                {{ post.government_agency }}
-              </span>
-            </span>
-          {% endif %}
         </h2>
       </div>
     </header>

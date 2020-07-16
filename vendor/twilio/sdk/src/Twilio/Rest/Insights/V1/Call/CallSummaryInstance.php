@@ -34,7 +34,7 @@ use Twilio\Version;
  * @property array $clientEdge
  * @property array $sdkEdge
  * @property array $sipEdge
- * @property string $tags
+ * @property string[] $tags
  * @property string $url
  * @property array $attributes
  * @property array $properties
@@ -43,16 +43,15 @@ class CallSummaryInstance extends InstanceResource {
     /**
      * Initialize the CallSummaryInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $callSid The call_sid
-     * @return \Twilio\Rest\Insights\V1\Call\CallSummaryInstance
      */
-    public function __construct(Version $version, array $payload, $callSid) {
+    public function __construct(Version $version, array $payload, string $callSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'callSid' => Values::array_get($payload, 'call_sid'),
             'callType' => Values::array_get($payload, 'call_type'),
@@ -72,19 +71,18 @@ class CallSummaryInstance extends InstanceResource {
             'url' => Values::array_get($payload, 'url'),
             'attributes' => Values::array_get($payload, 'attributes'),
             'properties' => Values::array_get($payload, 'properties'),
-        );
+        ];
 
-        $this->solution = array('callSid' => $callSid, );
+        $this->solution = ['callSid' => $callSid, ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Insights\V1\Call\CallSummaryContext Context for this
-     *                                                          CallSummaryInstance
+     * @return CallSummaryContext Context for this CallSummaryInstance
      */
-    protected function proxy() {
+    protected function proxy(): CallSummaryContext {
         if (!$this->context) {
             $this->context = new CallSummaryContext($this->version, $this->solution['callSid']);
         }
@@ -93,13 +91,13 @@ class CallSummaryInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a CallSummaryInstance
+     * Fetch the CallSummaryInstance
      *
      * @param array|Options $options Optional Arguments
      * @return CallSummaryInstance Fetched CallSummaryInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch($options = array()) {
+    public function fetch(array $options = []): CallSummaryInstance {
         return $this->proxy()->fetch($options);
     }
 
@@ -110,7 +108,7 @@ class CallSummaryInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -128,8 +126,8 @@ class CallSummaryInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

@@ -16,13 +16,13 @@ class SchedulingApi
 
     public function checkConnection()
     {
-        if ( is_multisite() ) {
-            $siteUrl = get_site_url( get_current_blog_id() );
+        if (is_multisite()) {
+            $siteUrl = get_site_url(get_current_blog_id());
         } else {
             $siteUrl = get_site_url();
         }
 
-        $pingBackUrl = $this->getApiUrl('connection').'?url='.urlencode($siteUrl);
+        $pingBackUrl = $this->getApiUrl('connection') . '?url=' . urlencode($siteUrl);
 
         $response = wp_remote_request(
             $pingBackUrl,
@@ -31,7 +31,7 @@ class SchedulingApi
             )
         );
 
-        if($response instanceof \WP_Error) {
+        if ($response instanceof \WP_Error) {
             return false;
         }
 
@@ -46,16 +46,16 @@ class SchedulingApi
     {
         $response = wp_remote_request(
 
-            $this->getApiUrl('schedules?forElement='.$elementId.
-                '&type=' . $elementType.
-                '&endpoint='.urlencode(get_site_url())),
+            $this->getApiUrl('schedules?forElement=' . $elementId .
+                '&type=' . $elementType .
+                '&endpoint=' . urlencode(get_site_url())),
             array(
                 'method' => 'GET',
                 'headers' => $this->getHeaders()
             )
         );
 
-        if($response instanceof \WP_Error) {
+        if ($response instanceof \WP_Error) {
             return false;
         }
 
@@ -86,23 +86,48 @@ class SchedulingApi
             )
         );
 
-        if($response instanceof \WP_Error) {
+        if ($response instanceof \WP_Error) {
             throw new SchedulingHttpException('There was a problem saving the schedule');
         }
 
         return $response;
     }
 
-    public function deleteSchedule($scheduleId)
+    public function deleteSchedule($remoteScheduleId)
     {
+
         wp_remote_request(
-            $this->getApiUrl('schedules/' . $scheduleId),
+            $this->getApiUrl('schedules/' . $remoteScheduleId),
             array(
                 'method' => 'DELETE',
                 'headers' => $this->getHeaders()
             )
         );
     }
+
+    public function disableSchedule($remoteScheduleId)
+    {
+        wp_remote_request(
+            $this->getApiUrl('schedules/' . $remoteScheduleId . '/disable'),
+            array(
+                'method' => 'DELETE',
+                'headers' => $this->getHeaders()
+            )
+        );
+    }
+
+
+    public function enableSchedule($scheduleId)
+    {
+        wp_remote_request(
+            $this->getApiUrl('schedules/' . $scheduleId . '/enable'),
+            array(
+                'method' => 'POST',
+                'headers' => $this->getHeaders()
+            )
+        );
+    }
+
 
     public function updateSchedule($scheduleId, $scheduleTime)
     {
@@ -115,7 +140,7 @@ class SchedulingApi
                 'body' => json_encode($scheduleTime)
             ));
 
-        if($response instanceof \WP_Error) {
+        if ($response instanceof \WP_Error) {
             throw new SchedulingHttpException('There was a problem saving the schedule');
         }
 

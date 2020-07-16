@@ -16,8 +16,6 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
- *
  * @property string $accountSid
  * @property string $friendlyName
  * @property string $awsCredentialsSid
@@ -31,15 +29,14 @@ class RecordingSettingsInstance extends InstanceResource {
     /**
      * Initialize the RecordingSettingsInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @return \Twilio\Rest\Video\V1\RecordingSettingsInstance
      */
     public function __construct(Version $version, array $payload) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'friendlyName' => Values::array_get($payload, 'friendly_name'),
             'awsCredentialsSid' => Values::array_get($payload, 'aws_credentials_sid'),
@@ -48,19 +45,18 @@ class RecordingSettingsInstance extends InstanceResource {
             'encryptionKeySid' => Values::array_get($payload, 'encryption_key_sid'),
             'encryptionEnabled' => Values::array_get($payload, 'encryption_enabled'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array();
+        $this->solution = [];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Video\V1\RecordingSettingsContext Context for this
-     *                                                        RecordingSettingsInstance
+     * @return RecordingSettingsContext Context for this RecordingSettingsInstance
      */
-    protected function proxy() {
+    protected function proxy(): RecordingSettingsContext {
         if (!$this->context) {
             $this->context = new RecordingSettingsContext($this->version);
         }
@@ -69,24 +65,24 @@ class RecordingSettingsInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a RecordingSettingsInstance
+     * Fetch the RecordingSettingsInstance
      *
      * @return RecordingSettingsInstance Fetched RecordingSettingsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
+    public function fetch(): RecordingSettingsInstance {
         return $this->proxy()->fetch();
     }
 
     /**
-     * Create a new RecordingSettingsInstance
+     * Create the RecordingSettingsInstance
      *
      * @param string $friendlyName A string to describe the resource
      * @param array|Options $options Optional Arguments
-     * @return RecordingSettingsInstance Newly created RecordingSettingsInstance
+     * @return RecordingSettingsInstance Created RecordingSettingsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($friendlyName, $options = array()) {
+    public function create(string $friendlyName, array $options = []): RecordingSettingsInstance {
         return $this->proxy()->create($friendlyName, $options);
     }
 
@@ -97,7 +93,7 @@ class RecordingSettingsInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -115,8 +111,8 @@ class RecordingSettingsInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

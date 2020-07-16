@@ -6,7 +6,7 @@
  * @author NYC Opportunity
  */
 
-require_once Path\controller('alert');
+require_once ACCESS\controller('alert');
 
 /**
  * Enqueue
@@ -64,6 +64,25 @@ $context['alerts'] = array_map(function($post) {
  */
 
 $context['google_translate_element'] = true;
+
+/**
+ * Set up schema
+ */
+
+$context['schema'] = [
+  array(
+    '@context' => 'http://schema.org',
+    '@type' => 'WebPage',
+    'mainEntityOfPage' => [
+      'name' => $post->title,
+      'dateModified' => $post->post_modified
+    ],
+    'spatialCoverage' => [
+      'type' => 'City',
+      'name' => 'New York'
+    ]
+  )
+];
 
 /**
  * Render Template

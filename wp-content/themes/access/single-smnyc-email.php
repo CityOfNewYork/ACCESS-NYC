@@ -7,7 +7,7 @@
  */
 
 require_once get_template_directory() . '/lib/paths.php';
-require_once Path\controller('smnyc-email');
+require_once ACCESS\controller('smnyc-email');
 
 /**
  * Context

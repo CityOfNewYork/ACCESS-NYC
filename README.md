@@ -36,25 +36,25 @@ Learn more about ACCESS NYC at [nyc.gov/opportunity ↗](http://www1.nyc.gov/sit
 
 ## Tech
 
-ACCESS NYC is a publicly available [WordPress ↗](https://wordpress.org/) site hosted on [WP Engine ↗](https://wpengine.com/). Source code is available as in this repository. All benefit program information on ACCESS NYC is publicly available through the [Benefits and Programs API ↗](https://data.cityofnewyork.us/Social-Services/Benefits-and-Programs-API/2j8u-wtju) on the City of New York’s Open Data portal.
+ACCESS NYC is a publicly available [WordPress ↗](https://wordpress.org/) site hosted on [WP Engine ↗](https://wpengine.com/). Source code is available in this repository. All benefit program information on ACCESS NYC is publicly available through the [Benefits and Programs API ↗](https://data.cityofnewyork.us/Social-Services/Benefits-and-Programs-API/2j8u-wtju) on the City of New York’s Open Data portal.
 
 The ACCESS NYC eligibility screener is a single page web application powered by an API built on the [Drools Business Rules Management System ↗](https://www.drools.org/) hosted on [Amazon Web Services ↗](https://aws.amazon.com/) through the [NYC Department of Information Technology and Telecommunications ↗](http://www.nyc.gov/doitt). The [NYC Benefits Screening API ↗](https://screeningapidocs.cityofnewyork.us) is an open API that allows developers to utilize the rules engine that governs the ACCESS NYC Eligibility Screener.
 
-The [ACCESS NYC Patterns ↗](https://github.com/cityofnewyork/access-nyc-patterns) provide fonts, icons, and JavaScript enhanced components and utilities that support WCAG AA compliance, multi-lingual (right-to-left and left-to-right) layouts, mobile devices and Internet Explorer 11. They are distributed as an NPM Package which can be installed in any project.
+The [ACCESS NYC Patterns ↗](https://github.com/cityofnewyork/access-nyc-patterns) provide mobile first stylesheets, fonts, icons, and JavaScript-enhanced components that support WCAG AA compliance, and multi-lingual (right-to-left, and left-to-right) layouts. They are distributed as an NPM Package which can be installed in any project.
 
 ## Local Installation
 
 ### Requirements
 
-* **Virtualization** ([Docker ↗](https://docs.docker.com/compose/wordpress/), [Vagrant ↗](https://www.vagrantup.com/) + Virtualbox, [Local ↗](https://localwp.com/), or other). This WordPress repository can be run many ways. The product team at NYC Opportunity uses [Docker for Mac ↗](https://www.docker.com/docker-mac) and the [NYCO WordPress Docker Boilerplate ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally.
+* **Virtualization** ([Docker ↗](https://docs.docker.com/compose/wordpress/), [Vagrant ↗](https://www.vagrantup.com/) + Virtualbox, [Local ↗](https://localwp.com/), or other). This WordPress repository can be run in many ways. The product team at NYC Opportunity uses [Docker for Mac ↗](https://www.docker.com/docker-mac) and the [NYCO WordPress Docker Boilerplate ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally.
 
-* **Composer**. PHP and WordPress plugin dependencies for WordPress core and the ACCESS Theme are managed via Composer. [Learn more about Composer on it's website ↗](https://getcomposer.org/).
+* **Composer**. PHP and WordPress plugin dependencies for WordPress core and the ACCESS Theme are managed via Composer. [Learn more about Composer on its website ↗](https://getcomposer.org/).
 
 * **Node and NPM**. The ACCESS Theme uses Node with NPM to manage packages such as Gulp to compile assets for the front-end. Learn more about [Node ↗](https://nodejs.org), [NPM ↗](https://www.npmjs.com/), and [Gulp ↗](https://gulpjs.com/) at their respective websites.
 
 ### Installation
 
-This won't cover everything for standing up a WordPress site given all of the options available but it can be done with instructions in the [NYCO WordPress Docker Boilerplate ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) readme. *The following instructions assume you have a working environment ready to drop a WordPress site into, including a server and MySQL database*.
+This covers standing up the WordPress site after a virtualization method has been chosen with including a server running PHP and a MySQL database. Instructions in the [NYCO WordPress Docker Boilerplate ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) will cover this process.
 
 **$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository ↗](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/master/wp/wp-config.php) but you should still update the salts.
 
@@ -62,33 +62,33 @@ This won't cover everything for standing up a WordPress site given all of the op
 
     composer install
 
-**$3** This will install plugins included in the Composer package, including **NYCO WordPress Config** (see details in [Configuration](#configuration) below). This plugin includes a sample config which needs to be renamed from **mu-plugins/config/config-sample.yml** to **mu-plugins/config/config.yml**.
+**$3** This will install plugins included in the Composer package, including **NYCO WordPress Config** (see details in [Configuration](#configuration) below). This plugin includes a sample config that needs to be renamed from **mu-plugins/config/config-sample.yml** to **mu-plugins/config/config.yml**.
 
 ## WordPress Site Structure
 
 ### Configuration
 
-ACCESS NYC integrates the [NYCO WordPress Config plugin ↗](https://packagist.org/packages/nyco/wp-config) for determining configurations based on environment. This plugin will pull from an array of variables set in the **mu-plugins/config/config.yml** file and set the appropriate group to environment variables that can be accessed by site functions, templates, and plugins.
+ACCESS NYC integrates the [NYCO WordPress Config plugin ↗](https://packagist.org/packages/nyco/wp-config) for determining configurations based on the environment. This plugin will pull from an array of variables set in the **mu-plugins/config/config.yml** file and set the appropriate group to environment variables that can be accessed by site functions, templates, and plugins.
 
 ### ACCESS Theme
 
 The theme for the site contains all of the php functions, templates, styling, and scripts for the site front-end and can be found in the [**themes**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access) directory. This is the only WordPress theme that is compatible with the WordPress site.
 
 * **/acf-json** - [Advanced Custom Fields ↗](https://www.advancedcustomfields.com/pro/) JSON files for syncing custom fields between environments.
-* **/assets** - The source for image, style, and script files live in the [**src**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/src) and are compiled to the [**/assets**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/assets) directory. This is done with NPM Scripts in [**package.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/package.json) and tasks in the [GulpFile](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/gulpfile.babel.js). The theme relies heaviliy on the [ACCESS NYC Patterns ↗](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets and JavaScript modules. Refer to the [documentation ↗](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage.
+* **/assets** - The source for image, style, and script files live in the [**src**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/src) and are compiled to the [**/assets**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access/assets) directory. This is done with NPM Scripts in [**package.json**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/package.json) and tasks in the [GulpFile](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/gulpfile.babel.js). The theme relies on the [ACCESS NYC Patterns ↗](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets and JavaScript modules. Refer to the [documentation ↗](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage.
 * **/blocks** - [Custom Gutenburg Block ↗](https://developer.wordpress.org/block-editor/developers/) source.
-* **/controllers** - Site and Post Type controllers for [extending Timber ↗](https://timber.github.io/docs/guides/extending-timber/) and for providing data to views.
-* **/lib** - Theme functions, filters, and helpers for rendering views.
+* **/controllers** - Site and Post Type controllers that [extend Timber ↗](https://timber.github.io/docs/guides/extending-timber/) and provide processed data to views.
+* **/lib** - Theme functions, filters, and other helpers that assist in rendering views.
 * **/shortcodes** - Theme [shortcodes ↗](https://codex.wordpress.org/Shortcode) available to the admin.
 * **/src** - JavaScript and stylesheet source (described below).
-* **/views** - View templates are generally organized on a component level and by site feature and include Twig, Underscore.js, and Vue.js.
+* **/views** - View templates are generally organized on a component level and by site feature and include [Twig](https://twig.symfony.com/), [Underscore.js](https://underscorejs.org/#template), and [Vue.js](https://vuejs.org/v2/guide/single-file-components.html) templates.
   * **/components** - Component pattern templates.
   * **/elements** - Element pattern templates.
   * **/emails** - Email view templates
-  * **/jst** - Underscore templates used by twig files are pre-rendered buy Gulp and stored here.
+  * **/jst** - [Underscore templates](https://underscorejs.org/#template) used by twig files are pre-rendered buy Gulp and stored here.
   * **/locations** - Locations feature templates.
   * **/objects** - Object pattern templates.
-  * **/partials** - Extraneous view templates
+  * **/partials** - Misc. view template partials.
   * **/programs** - Programs feature templates.
   * **/screener** - Screener feature templates.
 
@@ -104,17 +104,17 @@ Dependencies include [path helpers](#path-helpers), theme functions, WordPress G
 
 #### Path Helpers
 
-Path helpers are shorthand functions return path strings for including various dependencies within the theme. They are used throughout theme files and generally accept a single string parameter referencing the filename of the dependency.
+Path helpers are shorthand functions return path strings for including various dependencies within the theme. They are used throughout theme files and generally accept a single string parameter referencing the filename (without extension) of the dependency.
 
-    require_once Path\controller('programs');
+    require_once ACCESS\controller('programs');
 
-* `Path\lib` - Include a file from the **/lib** directory.
-* `Path\functions` - Include the **/lib/functions.php** file. No arguments required.
-* `Path\controller` - Include the site or a post type controller from **/controllers** directory.
-* `Path\block` - Include a Gutenburg Block from the **/blocks** directory.
-* `Path\require_blocks` - Require all Gutenburg Blocks. No arguments required.
-* `Path\shortcode` - Include a Shortcode from the **/shortcodes** directory.
-* `Path\require_shortcodes` - Include all shortcodes from the **/shortcodes**. No arguments required.
+* `ACCESS\lib` -  Return the path to a file in the **/lib** directory.
+* `ACCESS\functions` -  Return the path to the **/lib/functions.php** file. No arguments required.
+* `ACCESS\controller` -  Return the path to the site or a post type controller from **/controllers** directory.
+* `ACCESS\block` -  Return the path to a Gutenburg Block from the **/blocks** directory.
+* `ACCESS\require_blocks` - Require all Gutenburg Blocks. No arguments required.
+* `ACCESS\shortcode` - Return the path to a shortcode in the **/shortcodes** directory.
+* `ACCESS\require_shortcodes` - Require all shortcodes from the **/shortcodes**. No arguments required.
 
 #### Controllers
 
@@ -122,8 +122,8 @@ Site and Post Type controllers [extend Timber functionality ↗](https://timber.
 
 Controllers are required using the controller path helper (described above):
 
-    require_once Path\controller('programs');
-    require_once Path\controller('alert');
+    require_once ACCESS\controller('programs');
+    require_once ACCESS\controller('alert');
 
 And instantiated (below in a single view):
 
@@ -175,7 +175,7 @@ For example:
 
 ## Using Composer
 
-In addition to WordPress Plugins, Composer is used to manage third party dependencies that some plugins rely on as well as provide developer tools for working with PHP applications. The Composer package comes with scripts that can be run via the command:
+In addition to WordPress Plugins, Composer is used to manage third-party dependencies that some plugins rely on as well as provide developer tools for working with PHP applications. The Composer package comes with scripts that can be run via the command:
 
     composer run {{ script }}
 
@@ -193,7 +193,7 @@ By default **/vendor** packages are not tracked by the repository. If a composer
 
 ## Using NPM
 
-NPM is used to manage the assets in the ACCESS Theme. To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access) theme in your terminal and and run:
+NPM is used to manage the assets in the ACCESS Theme. To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/CityOfNewYork/ACCESS-NYC/tree/master/wp-content/themes/access) theme in your terminal and run:
 
     npm install
 
@@ -205,7 +205,7 @@ Then run:
 
     npm run start
 
-To start the development server for asset managment. The NPM package comes scripts which can be run via the command:
+To start the development server for asset management. The NPM package comes scripts which can be run via the command:
 
     npm run {{ script }}
 
@@ -213,8 +213,8 @@ Script        | Description
 --------------|-
 `gulp`        | Gulp is included as a dependency so this proxy enables running gulp tasks in the [**gulpfile.babel.js**](https://github.com/CityOfNewYork/ACCESS-NYC/blob/master/wp-content/themes/access/gulpfile.babel.js) file if it is not globally installed. Any task in the GulpFile can be run with `npm run gulp {{ task name }}`.
 `start`       | This is a proxy script for the `development` script below.
-`development` | This runs the default Gulp task in development mode `NODE_ENV=development` which watches and compiles assets. Once it runs, will fire up a [BrowserSync ↗](https://www.browsersync.io/) server to watch for file changes and reload the proxy set to the package.json `config` object.
-`production`  | This runs the default Gulp task in production mode `NODE_ENV=production` which also watches, compiles assets, and creates a BrowserSync server. The main difference is that production mode uses [ESLint ↗](https://eslint.org/) and will enforce JavaScript writing style.
+`development` | This runs the default Gulp task in development mode `NODE_ENV=development` which watches and compiles assets. Once it runs, it will start a [BrowserSync ↗](https://www.browsersync.io/) server to watch for file changes and reload the proxy set in the package.json `config` object.
+`production`  | This runs the default Gulp task in production mode `NODE_ENV=production` which watches assets, compiles assets, and creates a BrowserSync server. The main difference is that production mode uses [ESLint ↗](https://eslint.org/) and will enforce JavaScript writing style.
 `predeploy`   | This runs a one-off compilation of assets in production mode.
 `scripts`     | This runs a one-off compilation of JavaScript assets in production mode.
 `styles`      | This runs a one-off compilation of stylesheet assets in production mode.
@@ -241,15 +241,15 @@ The main JavaScript dependencies used are [jQuery ↗](http://jquery.com/), [Und
 
 ### SCSS
 
-The theme relies on the [ACCESS NYC Patterns ↗](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets. Refer to the [documentation ↗](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage. The Pattern SCSS files are processed, concatenated, and minfied by the gulp styles task.
+The theme relies on the [ACCESS NYC Patterns ↗](https://accesspatterns.cityofnewyork.us) for sourcing Stylesheets. Refer to the [documentation ↗](https://accesspatterns.cityofnewyork.us) for details on the different patterns and their usage. The Pattern SCSS files are processed, concatenated, and minified by the gulp styles task.
 
 ## Security
 
-The team @ NYC Opportunity actively maintains and releases updates to ensure the security of this site using a combination of practices for insuring security for WordPress specifically. The [NYCO WordPress Docker Boilerplate README file ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) documents some of the tools and best practices.
+The team @ NYC Opportunity actively maintains and releases updates to ensure the security of this site using a combination of practices for WordPress specifically. The [NYCO WordPress Docker Boilerplate README file ↗](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) documents some of the tools and best practices.
 
 ### Reporting a Vulnerability
 
-Please report any vunerabilities confidentially using the [GitHub Security Advisories Feature](https://github.com/CityOfNewYork/ACCESS-NYC/security/advisories).
+Please report any vulnerabilities confidentially using the [GitHub Security Advisories Feature](https://github.com/CityOfNewYork/ACCESS-NYC/security/advisories).
 
 ---
 

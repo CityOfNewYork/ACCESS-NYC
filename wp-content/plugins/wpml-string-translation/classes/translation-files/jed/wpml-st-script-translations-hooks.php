@@ -68,7 +68,6 @@ class WPML_ST_Script_Translations_Hooks implements IWPML_Action {
 	 * @return string
 	 */
 	private function get_file_locale( $filepath, $domain ) {
-		$file_locale = new WPML_ST_Translations_File_Locale( $filepath, $domain );
-		return $file_locale->get();
+		return \WPML\Container\make( \WPML_ST_Translations_File_Locale::class )->get( $filepath, $domain );
 	}
 }

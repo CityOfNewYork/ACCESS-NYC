@@ -22,42 +22,36 @@ class VerificationCheckList extends ListResource {
      * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Service that the resource is
      *                           associated with
-     * @return \Twilio\Rest\Verify\V2\Service\VerificationCheckList
      */
-    public function __construct(Version $version, $serviceSid) {
+    public function __construct(Version $version, string $serviceSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, );
+        $this->solution = ['serviceSid' => $serviceSid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/VerificationCheck';
     }
 
     /**
-     * Create a new VerificationCheckInstance
+     * Create the VerificationCheckInstance
      *
      * @param string $code The verification string
      * @param array|Options $options Optional Arguments
-     * @return VerificationCheckInstance Newly created VerificationCheckInstance
+     * @return VerificationCheckInstance Created VerificationCheckInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($code, $options = array()) {
+    public function create(string $code, array $options = []): VerificationCheckInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'Code' => $code,
             'To' => $options['to'],
             'VerificationSid' => $options['verificationSid'],
             'Amount' => $options['amount'],
             'Payee' => $options['payee'],
-        ));
+        ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new VerificationCheckInstance($this->version, $payload, $this->solution['serviceSid']);
     }
@@ -67,7 +61,7 @@ class VerificationCheckList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Verify.V2.VerificationCheckList]';
     }
 }

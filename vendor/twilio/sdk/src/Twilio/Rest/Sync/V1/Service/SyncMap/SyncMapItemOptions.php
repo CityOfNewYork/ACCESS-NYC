@@ -17,13 +17,21 @@ use Twilio\Values;
  */
 abstract class SyncMapItemOptions {
     /**
+     * @param string $ifMatch The If-Match HTTP request header
+     * @return DeleteSyncMapItemOptions Options builder
+     */
+    public static function delete(string $ifMatch = Values::NONE): DeleteSyncMapItemOptions {
+        return new DeleteSyncMapItemOptions($ifMatch);
+    }
+
+    /**
      * @param int $ttl An alias for item_ttl
      * @param int $itemTtl How long, in seconds, before the Map Item expires
      * @param int $collectionTtl How long, in seconds, before the Map Item's parent
      *                           Sync Map expires and is deleted
      * @return CreateSyncMapItemOptions Options builder
      */
-    public static function create($ttl = Values::NONE, $itemTtl = Values::NONE, $collectionTtl = Values::NONE) {
+    public static function create(int $ttl = Values::NONE, int $itemTtl = Values::NONE, int $collectionTtl = Values::NONE): CreateSyncMapItemOptions {
         return new CreateSyncMapItemOptions($ttl, $itemTtl, $collectionTtl);
     }
 
@@ -34,7 +42,7 @@ abstract class SyncMapItemOptions {
      *                       parameter
      * @return ReadSyncMapItemOptions Options builder
      */
-    public static function read($order = Values::NONE, $from = Values::NONE, $bounds = Values::NONE) {
+    public static function read(string $order = Values::NONE, string $from = Values::NONE, string $bounds = Values::NONE): ReadSyncMapItemOptions {
         return new ReadSyncMapItemOptions($order, $from, $bounds);
     }
 
@@ -45,10 +53,41 @@ abstract class SyncMapItemOptions {
      * @param int $itemTtl How long, in seconds, before the Map Item expires
      * @param int $collectionTtl How long, in seconds, before the Map Item's parent
      *                           Sync Map expires and is deleted
+     * @param string $ifMatch The If-Match HTTP request header
      * @return UpdateSyncMapItemOptions Options builder
      */
-    public static function update($data = Values::NONE, $ttl = Values::NONE, $itemTtl = Values::NONE, $collectionTtl = Values::NONE) {
-        return new UpdateSyncMapItemOptions($data, $ttl, $itemTtl, $collectionTtl);
+    public static function update(array $data = Values::ARRAY_NONE, int $ttl = Values::NONE, int $itemTtl = Values::NONE, int $collectionTtl = Values::NONE, string $ifMatch = Values::NONE): UpdateSyncMapItemOptions {
+        return new UpdateSyncMapItemOptions($data, $ttl, $itemTtl, $collectionTtl, $ifMatch);
+    }
+}
+
+class DeleteSyncMapItemOptions extends Options {
+    /**
+     * @param string $ifMatch The If-Match HTTP request header
+     */
+    public function __construct(string $ifMatch = Values::NONE) {
+        $this->options['ifMatch'] = $ifMatch;
+    }
+
+    /**
+     * The If-Match HTTP request header
+     *
+     * @param string $ifMatch The If-Match HTTP request header
+     * @return $this Fluent Builder
+     */
+    public function setIfMatch(string $ifMatch): self {
+        $this->options['ifMatch'] = $ifMatch;
+        return $this;
+    }
+
+    /**
+     * Provide a friendly representation
+     *
+     * @return string Machine friendly representation
+     */
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Sync.V1.DeleteSyncMapItemOptions ' . $options . ']';
     }
 }
 
@@ -59,7 +98,7 @@ class CreateSyncMapItemOptions extends Options {
      * @param int $collectionTtl How long, in seconds, before the Map Item's parent
      *                           Sync Map expires and is deleted
      */
-    public function __construct($ttl = Values::NONE, $itemTtl = Values::NONE, $collectionTtl = Values::NONE) {
+    public function __construct(int $ttl = Values::NONE, int $itemTtl = Values::NONE, int $collectionTtl = Values::NONE) {
         $this->options['ttl'] = $ttl;
         $this->options['itemTtl'] = $itemTtl;
         $this->options['collectionTtl'] = $collectionTtl;
@@ -71,7 +110,7 @@ class CreateSyncMapItemOptions extends Options {
      * @param int $ttl An alias for item_ttl
      * @return $this Fluent Builder
      */
-    public function setTtl($ttl) {
+    public function setTtl(int $ttl): self {
         $this->options['ttl'] = $ttl;
         return $this;
     }
@@ -82,7 +121,7 @@ class CreateSyncMapItemOptions extends Options {
      * @param int $itemTtl How long, in seconds, before the Map Item expires
      * @return $this Fluent Builder
      */
-    public function setItemTtl($itemTtl) {
+    public function setItemTtl(int $itemTtl): self {
         $this->options['itemTtl'] = $itemTtl;
         return $this;
     }
@@ -94,7 +133,7 @@ class CreateSyncMapItemOptions extends Options {
      *                           Sync Map expires and is deleted
      * @return $this Fluent Builder
      */
-    public function setCollectionTtl($collectionTtl) {
+    public function setCollectionTtl(int $collectionTtl): self {
         $this->options['collectionTtl'] = $collectionTtl;
         return $this;
     }
@@ -104,14 +143,9 @@ class CreateSyncMapItemOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Sync.V1.CreateSyncMapItemOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Sync.V1.CreateSyncMapItemOptions ' . $options . ']';
     }
 }
 
@@ -122,7 +156,7 @@ class ReadSyncMapItemOptions extends Options {
      * @param string $bounds Whether to include the Map Item referenced by the from
      *                       parameter
      */
-    public function __construct($order = Values::NONE, $from = Values::NONE, $bounds = Values::NONE) {
+    public function __construct(string $order = Values::NONE, string $from = Values::NONE, string $bounds = Values::NONE) {
         $this->options['order'] = $order;
         $this->options['from'] = $from;
         $this->options['bounds'] = $bounds;
@@ -134,7 +168,7 @@ class ReadSyncMapItemOptions extends Options {
      * @param string $order How to order the Map Items returned by their key value
      * @return $this Fluent Builder
      */
-    public function setOrder($order) {
+    public function setOrder(string $order): self {
         $this->options['order'] = $order;
         return $this;
     }
@@ -145,7 +179,7 @@ class ReadSyncMapItemOptions extends Options {
      * @param string $from The index of the first Sync Map Item resource to read
      * @return $this Fluent Builder
      */
-    public function setFrom($from) {
+    public function setFrom(string $from): self {
         $this->options['from'] = $from;
         return $this;
     }
@@ -157,7 +191,7 @@ class ReadSyncMapItemOptions extends Options {
      *                       parameter
      * @return $this Fluent Builder
      */
-    public function setBounds($bounds) {
+    public function setBounds(string $bounds): self {
         $this->options['bounds'] = $bounds;
         return $this;
     }
@@ -167,14 +201,9 @@ class ReadSyncMapItemOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Sync.V1.ReadSyncMapItemOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Sync.V1.ReadSyncMapItemOptions ' . $options . ']';
     }
 }
 
@@ -186,12 +215,14 @@ class UpdateSyncMapItemOptions extends Options {
      * @param int $itemTtl How long, in seconds, before the Map Item expires
      * @param int $collectionTtl How long, in seconds, before the Map Item's parent
      *                           Sync Map expires and is deleted
+     * @param string $ifMatch The If-Match HTTP request header
      */
-    public function __construct($data = Values::NONE, $ttl = Values::NONE, $itemTtl = Values::NONE, $collectionTtl = Values::NONE) {
+    public function __construct(array $data = Values::ARRAY_NONE, int $ttl = Values::NONE, int $itemTtl = Values::NONE, int $collectionTtl = Values::NONE, string $ifMatch = Values::NONE) {
         $this->options['data'] = $data;
         $this->options['ttl'] = $ttl;
         $this->options['itemTtl'] = $itemTtl;
         $this->options['collectionTtl'] = $collectionTtl;
+        $this->options['ifMatch'] = $ifMatch;
     }
 
     /**
@@ -201,7 +232,7 @@ class UpdateSyncMapItemOptions extends Options {
      *                    object that the Map Item stores
      * @return $this Fluent Builder
      */
-    public function setData($data) {
+    public function setData(array $data): self {
         $this->options['data'] = $data;
         return $this;
     }
@@ -212,7 +243,7 @@ class UpdateSyncMapItemOptions extends Options {
      * @param int $ttl An alias for item_ttl
      * @return $this Fluent Builder
      */
-    public function setTtl($ttl) {
+    public function setTtl(int $ttl): self {
         $this->options['ttl'] = $ttl;
         return $this;
     }
@@ -223,7 +254,7 @@ class UpdateSyncMapItemOptions extends Options {
      * @param int $itemTtl How long, in seconds, before the Map Item expires
      * @return $this Fluent Builder
      */
-    public function setItemTtl($itemTtl) {
+    public function setItemTtl(int $itemTtl): self {
         $this->options['itemTtl'] = $itemTtl;
         return $this;
     }
@@ -235,8 +266,19 @@ class UpdateSyncMapItemOptions extends Options {
      *                           Sync Map expires and is deleted
      * @return $this Fluent Builder
      */
-    public function setCollectionTtl($collectionTtl) {
+    public function setCollectionTtl(int $collectionTtl): self {
         $this->options['collectionTtl'] = $collectionTtl;
+        return $this;
+    }
+
+    /**
+     * The If-Match HTTP request header
+     *
+     * @param string $ifMatch The If-Match HTTP request header
+     * @return $this Fluent Builder
+     */
+    public function setIfMatch(string $ifMatch): self {
+        $this->options['ifMatch'] = $ifMatch;
         return $this;
     }
 
@@ -245,13 +287,8 @@ class UpdateSyncMapItemOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Sync.V1.UpdateSyncMapItemOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Sync.V1.UpdateSyncMapItemOptions ' . $options . ']';
     }
 }

@@ -83,4 +83,13 @@ class WPML_Beaver_Builder_Data_Settings implements IWPML_Page_Builders_Data_Sett
 
 		return $data;
 	}
+
+	/**
+	 * @param int $postId
+	 *
+	 * @return bool
+	 */
+	public function is_handling_post( $postId ) {
+		return (bool) get_post_meta( $postId, '_fl_builder_enabled', true );
+	}
 }

@@ -20,7 +20,7 @@ abstract class BrandedCallOptions {
      * @param string $callSid The Call sid this Branded Call should link to
      * @return CreateBrandedCallOptions Options builder
      */
-    public static function create($callSid = Values::NONE) {
+    public static function create(string $callSid = Values::NONE): CreateBrandedCallOptions {
         return new CreateBrandedCallOptions($callSid);
     }
 }
@@ -29,7 +29,7 @@ class CreateBrandedCallOptions extends Options {
     /**
      * @param string $callSid The Call sid this Branded Call should link to
      */
-    public function __construct($callSid = Values::NONE) {
+    public function __construct(string $callSid = Values::NONE) {
         $this->options['callSid'] = $callSid;
     }
 
@@ -39,7 +39,7 @@ class CreateBrandedCallOptions extends Options {
      * @param string $callSid The Call sid this Branded Call should link to
      * @return $this Fluent Builder
      */
-    public function setCallSid($callSid) {
+    public function setCallSid(string $callSid): self {
         $this->options['callSid'] = $callSid;
         return $this;
     }
@@ -49,13 +49,8 @@ class CreateBrandedCallOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Preview.TrustedComms.CreateBrandedCallOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Preview.TrustedComms.CreateBrandedCallOptions ' . $options . ']';
     }
 }

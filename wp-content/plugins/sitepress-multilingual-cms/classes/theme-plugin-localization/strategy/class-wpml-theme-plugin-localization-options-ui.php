@@ -21,7 +21,7 @@ class WPML_Theme_Plugin_Localization_Options_UI implements IWPML_Theme_Plugin_Lo
 					'model'    => array(
 						'theme_localization_load_textdomain' => array(
 							'value' => 1,
-							'label' => __( "Automatically load the theme's .mo file using 'load_theme_textdomain'", 'sitepress' ),
+							'label' => __( "Automatically load the theme's .mo file using 'load_textdomain'", 'sitepress' ),
 							'checked' => checked( $this->sitepress->get_setting( 'theme_localization_load_textdomain' ), true, false ),
 						),
 						'gettext_theme_domain_name' => array(

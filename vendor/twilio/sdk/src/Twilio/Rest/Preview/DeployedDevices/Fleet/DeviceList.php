@@ -13,6 +13,7 @@ use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Serialize;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -25,41 +26,35 @@ class DeviceList extends ListResource {
      *
      * @param Version $version Version that contains the resource
      * @param string $fleetSid The unique identifier of the Fleet.
-     * @return \Twilio\Rest\Preview\DeployedDevices\Fleet\DeviceList
      */
-    public function __construct(Version $version, $fleetSid) {
+    public function __construct(Version $version, string $fleetSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('fleetSid' => $fleetSid, );
+        $this->solution = ['fleetSid' => $fleetSid, ];
 
         $this->uri = '/Fleets/' . \rawurlencode($fleetSid) . '/Devices';
     }
 
     /**
-     * Create a new DeviceInstance
+     * Create the DeviceInstance
      *
      * @param array|Options $options Optional Arguments
-     * @return DeviceInstance Newly created DeviceInstance
+     * @return DeviceInstance Created DeviceInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($options = array()) {
+    public function create(array $options = []): DeviceInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'UniqueName' => $options['uniqueName'],
             'FriendlyName' => $options['friendlyName'],
             'Identity' => $options['identity'],
             'DeploymentSid' => $options['deploymentSid'],
             'Enabled' => Serialize::booleanToString($options['enabled']),
-        ));
+        ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new DeviceInstance($this->version, $payload, $this->solution['fleetSid']);
     }
@@ -81,9 +76,9 @@ class DeviceList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($options = array(), $limit = null, $pageSize = null) {
+    public function stream(array $options = [], int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
         $page = $this->page($options, $limits['pageSize']);
@@ -107,7 +102,7 @@ class DeviceList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return DeviceInstance[] Array of results
      */
-    public function read($options = array(), $limit = null, $pageSize = null) {
+    public function read(array $options = [], int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($options, $limit, $pageSize), false);
     }
 
@@ -119,22 +114,19 @@ class DeviceList extends ListResource {
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of DeviceInstance
+     * @return DevicePage Page of DeviceInstance
      */
-    public function page($options = array(), $pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
+    public function page(array $options = [], $pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): DevicePage {
         $options = new Values($options);
-        $params = Values::of(array(
+
+        $params = Values::of([
             'DeploymentSid' => $options['deploymentSid'],
             'PageToken' => $pageToken,
             'Page' => $pageNumber,
             'PageSize' => $pageSize,
-        ));
+        ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new DevicePage($this->version, $response, $this->solution);
     }
@@ -144,9 +136,9 @@ class DeviceList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of DeviceInstance
+     * @return DevicePage Page of DeviceInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): DevicePage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -159,9 +151,8 @@ class DeviceList extends ListResource {
      * Constructs a DeviceContext
      *
      * @param string $sid A string that uniquely identifies the Device.
-     * @return \Twilio\Rest\Preview\DeployedDevices\Fleet\DeviceContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): DeviceContext {
         return new DeviceContext($this->version, $this->solution['fleetSid'], $sid);
     }
 
@@ -170,7 +161,7 @@ class DeviceList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Preview.DeployedDevices.DeviceList]';
     }
 }

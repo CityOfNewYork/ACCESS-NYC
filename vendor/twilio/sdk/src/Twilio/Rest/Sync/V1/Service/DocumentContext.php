@@ -11,6 +11,7 @@ namespace Twilio\Rest\Sync\V1\Service;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\ListResource;
 use Twilio\Options;
 use Twilio\Rest\Sync\V1\Service\Document\DocumentPermissionList;
 use Twilio\Serialize;
@@ -20,44 +21,37 @@ use Twilio\Version;
 /**
  * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  *
- * @property \Twilio\Rest\Sync\V1\Service\Document\DocumentPermissionList $documentPermissions
+ * @property DocumentPermissionList $documentPermissions
  * @method \Twilio\Rest\Sync\V1\Service\Document\DocumentPermissionContext documentPermissions(string $identity)
  */
 class DocumentContext extends InstanceContext {
-    protected $_documentPermissions = null;
+    protected $_documentPermissions;
 
     /**
      * Initialize the DocumentContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Sync Service with the Document
      *                           resource to fetch
      * @param string $sid The SID of the Document resource to fetch
-     * @return \Twilio\Rest\Sync\V1\Service\DocumentContext
      */
     public function __construct(Version $version, $serviceSid, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
+        $this->solution = ['serviceSid' => $serviceSid, 'sid' => $sid, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Documents/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a DocumentInstance
+     * Fetch the DocumentInstance
      *
      * @return DocumentInstance Fetched DocumentInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): DocumentInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new DocumentInstance(
             $this->version,
@@ -68,13 +62,18 @@ class DocumentContext extends InstanceContext {
     }
 
     /**
-     * Deletes the DocumentInstance
+     * Delete the DocumentInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @param array|Options $options Optional Arguments
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(array $options = []): bool {
+        $options = new Values($options);
+
+        $headers = Values::of(['If-Match' => $options['ifMatch'], ]);
+
+        return $this->version->delete('DELETE', $this->uri, [], [], $headers);
     }
 
     /**
@@ -84,20 +83,13 @@ class DocumentContext extends InstanceContext {
      * @return DocumentInstance Updated DocumentInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): DocumentInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
-            'Data' => Serialize::jsonObject($options['data']),
-            'Ttl' => $options['ttl'],
-        ));
+        $data = Values::of(['Data' => Serialize::jsonObject($options['data']), 'Ttl' => $options['ttl'], ]);
+        $headers = Values::of(['If-Match' => $options['ifMatch'], ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data, $headers);
 
         return new DocumentInstance(
             $this->version,
@@ -109,10 +101,8 @@ class DocumentContext extends InstanceContext {
 
     /**
      * Access the documentPermissions
-     *
-     * @return \Twilio\Rest\Sync\V1\Service\Document\DocumentPermissionList
      */
-    protected function getDocumentPermissions() {
+    protected function getDocumentPermissions(): DocumentPermissionList {
         if (!$this->_documentPermissions) {
             $this->_documentPermissions = new DocumentPermissionList(
                 $this->version,
@@ -128,10 +118,10 @@ class DocumentContext extends InstanceContext {
      * Magic getter to lazy load subresources
      *
      * @param string $name Subresource to return
-     * @return \Twilio\ListResource The requested subresource
+     * @return ListResource The requested subresource
      * @throws TwilioException For unknown subresources
      */
-    public function __get($name) {
+    public function __get(string $name): ListResource {
         if (\property_exists($this, '_' . $name)) {
             $method = 'get' . \ucfirst($name);
             return $this->$method();
@@ -145,10 +135,10 @@ class DocumentContext extends InstanceContext {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -162,8 +152,8 @@ class DocumentContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

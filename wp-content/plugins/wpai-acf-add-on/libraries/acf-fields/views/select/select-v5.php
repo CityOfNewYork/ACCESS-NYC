@@ -8,6 +8,7 @@
                 $field['key'] = 'multiple_value'. $field_name .'[' . $field['key'] . ']';
                 $field['value'] = $current_multiple_value;
                 $field['prefix'] = '';
+                $field['ui'] = 0;
                 $field['ajax'] = FALSE;
                 acf_render_field( $field );
                 $field['key'] = $tmp_key;

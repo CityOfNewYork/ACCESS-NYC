@@ -115,7 +115,8 @@ class WPML_Language_Resolution {
 
 		$this->maybe_reload();
 
-		if ( $lang === 'all' && is_admin() ) {
+		$is_wp_cli_request = defined( 'WP_CLI' ) && WP_CLI;
+		if ( $lang === 'all' && ( is_admin() || $is_wp_cli_request ) ) {
 			return 'all';
 		}
 

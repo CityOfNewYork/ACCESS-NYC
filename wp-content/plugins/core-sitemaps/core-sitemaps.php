@@ -1,14 +1,9 @@
 <?php
 /**
- * Main setup.
- *
- * @package         Core_Sitemaps
- */
-
-/**
  * Core Sitemaps Plugin.
  *
- * @package   Core_Sitemaps
+ * @package WordPress
+ * @subpackage Sitemaps
  * @copyright 2019 The Core Sitemaps Contributors
  * @license   GNU General Public License, version 2
  * @link      https://github.com/GoogleChromeLabs/wp-sitemaps
@@ -20,56 +15,61 @@
  * Author URI:        https://github.com/GoogleChromeLabs/wp-sitemaps/graphs/contributors
  * Text Domain:       core-sitemaps
  * Domain Path:       /languages
- * Requires at least: 5.3
+ * Requires at least: 5.4
  * Requires PHP:      5.6
- * Version:           0.2.0
+ * Version:           0.4.1
  */
 
-// The limit for how many sitemaps to include in an index.
-const CORE_SITEMAPS_MAX_SITEMAPS    = 50000;
-const CORE_SITEMAPS_REWRITE_VERSION = '2020-03-04';
-
-// Limit the number of URLs included in as sitemap.
-if ( ! defined( 'CORE_SITEMAPS_MAX_URLS' ) ) {
-	define( 'CORE_SITEMAPS_MAX_URLS', 2000 );
+// Do not load plugin if WordPress core already has sitemap support.
+if ( function_exists( 'wp_get_sitemaps' ) ) {
+	return;
 }
 
-require_once __DIR__ . '/inc/class-core-sitemaps.php';
-require_once __DIR__ . '/inc/class-core-sitemaps-provider.php';
-require_once __DIR__ . '/inc/class-core-sitemaps-index.php';
-require_once __DIR__ . '/inc/class-core-sitemaps-posts.php';
-require_once __DIR__ . '/inc/class-core-sitemaps-registry.php';
-require_once __DIR__ . '/inc/class-core-sitemaps-renderer.php';
-require_once __DIR__ . '/inc/class-core-sitemaps-stylesheet.php';
-require_once __DIR__ . '/inc/class-core-sitemaps-taxonomies.php';
-require_once __DIR__ . '/inc/class-core-sitemaps-users.php';
+// The limit for how many sitemaps to include in an index.
+const WP_SITEMAPS_MAX_SITEMAPS    = 50000;
+const WP_SITEMAPS_REWRITE_VERSION = '2020-04-29';
+
+// Limit the number of URLs included in a sitemap.
+if ( ! defined( 'WP_SITEMAPS_MAX_URLS' ) ) {
+	define( 'WP_SITEMAPS_MAX_URLS', 2000 );
+}
+
+require_once __DIR__ . '/inc/class-wp-sitemaps.php';
+require_once __DIR__ . '/inc/class-wp-sitemaps-provider.php';
+require_once __DIR__ . '/inc/class-wp-sitemaps-index.php';
+require_once __DIR__ . '/inc/class-wp-sitemaps-registry.php';
+require_once __DIR__ . '/inc/class-wp-sitemaps-renderer.php';
+require_once __DIR__ . '/inc/class-wp-sitemaps-stylesheet.php';
+require_once __DIR__ . '/inc/providers/class-wp-sitemaps-posts.php';
+require_once __DIR__ . '/inc/providers/class-wp-sitemaps-taxonomies.php';
+require_once __DIR__ . '/inc/providers/class-wp-sitemaps-users.php';
 require_once __DIR__ . '/inc/functions.php';
 
 // Boot the sitemaps system.
-add_action( 'init', 'core_sitemaps_get_server' );
+add_action( 'init', 'wp_sitemaps_get_server' );
 
 /**
  * Plugin activation hook.
  *
  * Adds and flushes rewrite rules.
  */
-function core_sitemaps_plugin_activation() {
-	$core_sitemaps = new Core_Sitemaps();
-	$core_sitemaps->register_rewrites();
+function wp_sitemaps_plugin_activation() {
+	$sitemaps = new WP_Sitemaps();
+	$sitemaps->register_rewrites();
 	flush_rewrite_rules( false );
 }
 
-register_activation_hook( __FILE__, 'core_sitemaps_plugin_activation' );
+register_activation_hook( __FILE__, 'wp_sitemaps_plugin_activation' );
 
 /**
  * Plugin deactivation hook.
  *
  * Adds and flushes rewrite rules.
  */
-function core_sitemaps_plugin_deactivation() {
-	$core_sitemaps = new Core_Sitemaps();
-	$core_sitemaps->unregister_rewrites();
+function wp_sitemaps_plugin_deactivation() {
+	$sitemaps = new WP_Sitemaps();
+	$sitemaps->unregister_rewrites();
 	flush_rewrite_rules( false );
 }
 
-register_deactivation_hook( __FILE__, 'core_sitemaps_plugin_deactivation' );
+register_deactivation_hook( __FILE__, 'wp_sitemaps_plugin_deactivation' );

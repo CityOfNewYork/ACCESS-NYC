@@ -20,7 +20,7 @@ use Twilio\Version;
  * @property string $accountSid
  * @property \DateTime $startTime
  * @property \DateTime $endTime
- * @property array $activityDurations
+ * @property array[] $activityDurations
  * @property int $reservationsCreated
  * @property int $reservationsAccepted
  * @property int $reservationsRejected
@@ -34,17 +34,16 @@ class WorkersCumulativeStatisticsInstance extends InstanceResource {
     /**
      * Initialize the WorkersCumulativeStatisticsInstance
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $workspaceSid The SID of the Workspace that contains the
      *                             Workers
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\Worker\WorkersCumulativeStatisticsInstance
      */
-    public function __construct(Version $version, array $payload, $workspaceSid) {
+    public function __construct(Version $version, array $payload, string $workspaceSid) {
         parent::__construct($version);
 
         // Marshaled Properties
-        $this->properties = array(
+        $this->properties = [
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'startTime' => Deserialize::dateTime(Values::array_get($payload, 'start_time')),
             'endTime' => Deserialize::dateTime(Values::array_get($payload, 'end_time')),
@@ -57,19 +56,19 @@ class WorkersCumulativeStatisticsInstance extends InstanceResource {
             'reservationsRescinded' => Values::array_get($payload, 'reservations_rescinded'),
             'workspaceSid' => Values::array_get($payload, 'workspace_sid'),
             'url' => Values::array_get($payload, 'url'),
-        );
+        ];
 
-        $this->solution = array('workspaceSid' => $workspaceSid, );
+        $this->solution = ['workspaceSid' => $workspaceSid, ];
     }
 
     /**
      * Generate an instance context for the instance, the context is capable of
      * performing various actions.  All instance actions are proxied to the context
      *
-     * @return \Twilio\Rest\Taskrouter\V1\Workspace\Worker\WorkersCumulativeStatisticsContext Context for this
-     *                                                                                        WorkersCumulativeStatisticsInstance
+     * @return WorkersCumulativeStatisticsContext Context for this
+     *                                            WorkersCumulativeStatisticsInstance
      */
-    protected function proxy() {
+    protected function proxy(): WorkersCumulativeStatisticsContext {
         if (!$this->context) {
             $this->context = new WorkersCumulativeStatisticsContext(
                 $this->version,
@@ -81,14 +80,14 @@ class WorkersCumulativeStatisticsInstance extends InstanceResource {
     }
 
     /**
-     * Fetch a WorkersCumulativeStatisticsInstance
+     * Fetch the WorkersCumulativeStatisticsInstance
      *
      * @param array|Options $options Optional Arguments
      * @return WorkersCumulativeStatisticsInstance Fetched
      *                                             WorkersCumulativeStatisticsInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch($options = array()) {
+    public function fetch(array $options = []): WorkersCumulativeStatisticsInstance {
         return $this->proxy()->fetch($options);
     }
 
@@ -99,7 +98,7 @@ class WorkersCumulativeStatisticsInstance extends InstanceResource {
      * @return mixed The requested property
      * @throws TwilioException For unknown properties
      */
-    public function __get($name) {
+    public function __get(string $name) {
         if (\array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
@@ -117,8 +116,8 @@ class WorkersCumulativeStatisticsInstance extends InstanceResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

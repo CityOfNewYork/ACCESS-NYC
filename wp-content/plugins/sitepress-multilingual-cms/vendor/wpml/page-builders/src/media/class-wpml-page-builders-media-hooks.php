@@ -19,7 +19,7 @@ class WPML_Page_Builders_Media_Hooks implements IWPML_Action {
 		$this->page_builder_slug    = $page_builder_slug;
 	}
 	public function add_hooks() {
-		add_filter( 'wmpl_pb_get_media_updaters', array( $this, 'add_media_updater' ) );
+		add_filter( 'wpml_pb_get_media_updaters', array( $this, 'add_media_updater' ) );
 		add_filter( 'wpml_media_content_for_media_usage', array( $this, 'add_package_strings_content' ), 10, 2 );
 	}
 	/**

@@ -10,6 +10,7 @@
 namespace Twilio\Rest\Video\V1\Room\Participant;
 
 use Twilio\ListResource;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -22,13 +23,12 @@ class PublishedTrackList extends ListResource {
      *                        published
      * @param string $participantSid The SID of the Participant resource with the
      *                               published track
-     * @return \Twilio\Rest\Video\V1\Room\Participant\PublishedTrackList
      */
-    public function __construct(Version $version, $roomSid, $participantSid) {
+    public function __construct(Version $version, string $roomSid, string $participantSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('roomSid' => $roomSid, 'participantSid' => $participantSid, );
+        $this->solution = ['roomSid' => $roomSid, 'participantSid' => $participantSid, ];
 
         $this->uri = '/Rooms/' . \rawurlencode($roomSid) . '/Participants/' . \rawurlencode($participantSid) . '/PublishedTracks';
     }
@@ -49,9 +49,9 @@ class PublishedTrackList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
         $page = $this->page($limits['pageSize']);
@@ -74,7 +74,7 @@ class PublishedTrackList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return PublishedTrackInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
+    public function read(int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($limit, $pageSize), false);
     }
 
@@ -85,20 +85,12 @@ class PublishedTrackList extends ListResource {
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of PublishedTrackInstance
+     * @return PublishedTrackPage Page of PublishedTrackInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page($pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): PublishedTrackPage {
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new PublishedTrackPage($this->version, $response, $this->solution);
     }
@@ -108,9 +100,9 @@ class PublishedTrackList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of PublishedTrackInstance
+     * @return PublishedTrackPage Page of PublishedTrackInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): PublishedTrackPage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -123,9 +115,8 @@ class PublishedTrackList extends ListResource {
      * Constructs a PublishedTrackContext
      *
      * @param string $sid The SID that identifies the resource to fetch
-     * @return \Twilio\Rest\Video\V1\Room\Participant\PublishedTrackContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): PublishedTrackContext {
         return new PublishedTrackContext(
             $this->version,
             $this->solution['roomSid'],
@@ -139,7 +130,7 @@ class PublishedTrackList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Video.V1.PublishedTrackList]';
     }
 }

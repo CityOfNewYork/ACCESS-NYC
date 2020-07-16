@@ -562,8 +562,7 @@ function icl_update_string_translation(
  * @return int
  */
 function icl_get_string_id( $string, $context, $name = false ) {
-
-    return wpml_st_load_string_factory()->get_string_id( $string, $context, $name );
+    return WPML\Container\make( 'WPML_ST_String_Factory' )->get_string_id( $string, $context, $name );
 }
 
 function icl_get_string_translations() {
@@ -625,15 +624,6 @@ function icl_get_string_translations_by_id( $string_id ) {
 
     return $translations;
 
-}
-
-function icl_get_relative_translation_status( $string_id ) {
-	global $wpdb, $sitepress;
-
-	$string_factory              = wpml_st_load_string_factory();
-	$relative_translation_status = new WPML_ST_Relative_Translation_Status( $wpdb, $sitepress, $string_factory );
-
-	return $relative_translation_status->get( $string_id );
 }
 
 function icl_get_strings_tracked_in_pages($string_translations){

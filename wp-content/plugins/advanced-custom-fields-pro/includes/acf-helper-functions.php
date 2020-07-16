@@ -303,7 +303,7 @@ function acf_maybe_idval( $value ) {
 }
 
 /**
- * acf_numericval
+ * acf_numval
  *
  * Casts the provided value as eiter an int or float using a simple hack.
  *
@@ -341,10 +341,11 @@ function acf_idify( $str = '' ) {
  * @since	5.6.5
  *
  * @param	string $str The string to convert.
+ * @param	string $glue The glue between each slug piece.
  * @return	string
  */
-function acf_slugify( $str = '' ) {
-	return str_replace(array('_', '/', ' '), '-', strtolower($str));
+function acf_slugify( $str = '', $glue = '-' ) {
+	return str_replace(array('_', '-', '/', ' '), $glue, strtolower($str));
 }
 
 /**
@@ -384,4 +385,23 @@ function acf_did( $name ) {
 		acf_set_data("acf_did_$name", true);
 		return false;
 	}
+}
+
+/**
+ * Returns the length of a string that has been submitted via $_POST.
+ *
+ * Uses the following process:
+ * 1. Unslash the string because posted values will be slashed.
+ * 2. Decode special characters because wp_kses() will normalize entities.
+ * 3. Treat line-breaks as a single character instead of two.
+ * 4. Use mb_strlen() to accomodate special characters.
+ * 
+ * @date	04/06/2020
+ * @since	5.9.0
+ *
+ * @param	string $str The string to review.
+ * @return	int
+ */
+function acf_strlen( $str ) {
+	return mb_strlen( str_replace("\r\n", "\n", wp_specialchars_decode( wp_unslash( $str ) ) ) );
 }

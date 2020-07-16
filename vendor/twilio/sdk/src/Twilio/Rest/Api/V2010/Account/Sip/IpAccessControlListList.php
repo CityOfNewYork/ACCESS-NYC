@@ -11,6 +11,7 @@ namespace Twilio\Rest\Api\V2010\Account\Sip;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
+use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -21,13 +22,12 @@ class IpAccessControlListList extends ListResource {
      * @param Version $version Version that contains the resource
      * @param string $accountSid A 34 character string that uniquely identifies
      *                           this resource.
-     * @return \Twilio\Rest\Api\V2010\Account\Sip\IpAccessControlListList
      */
-    public function __construct(Version $version, $accountSid) {
+    public function __construct(Version $version, string $accountSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('accountSid' => $accountSid, );
+        $this->solution = ['accountSid' => $accountSid, ];
 
         $this->uri = '/Accounts/' . \rawurlencode($accountSid) . '/SIP/IpAccessControlLists.json';
     }
@@ -49,9 +49,9 @@ class IpAccessControlListList extends ListResource {
      *                        page_size is defined but a limit is defined, stream()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return \Twilio\Stream stream of results
+     * @return Stream stream of results
      */
-    public function stream($limit = null, $pageSize = null) {
+    public function stream(int $limit = null, $pageSize = null): Stream {
         $limits = $this->version->readLimits($limit, $pageSize);
 
         $page = $this->page($limits['pageSize']);
@@ -74,7 +74,7 @@ class IpAccessControlListList extends ListResource {
      *                        efficient page size, i.e. min(limit, 1000)
      * @return IpAccessControlListInstance[] Array of results
      */
-    public function read($limit = null, $pageSize = null) {
+    public function read(int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($limit, $pageSize), false);
     }
 
@@ -85,20 +85,12 @@ class IpAccessControlListList extends ListResource {
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return \Twilio\Page Page of IpAccessControlListInstance
+     * @return IpAccessControlListPage Page of IpAccessControlListInstance
      */
-    public function page($pageSize = Values::NONE, $pageToken = Values::NONE, $pageNumber = Values::NONE) {
-        $params = Values::of(array(
-            'PageToken' => $pageToken,
-            'Page' => $pageNumber,
-            'PageSize' => $pageSize,
-        ));
+    public function page($pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): IpAccessControlListPage {
+        $params = Values::of(['PageToken' => $pageToken, 'Page' => $pageNumber, 'PageSize' => $pageSize, ]);
 
-        $response = $this->version->page(
-            'GET',
-            $this->uri,
-            $params
-        );
+        $response = $this->version->page('GET', $this->uri, $params);
 
         return new IpAccessControlListPage($this->version, $response, $this->solution);
     }
@@ -108,9 +100,9 @@ class IpAccessControlListList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of IpAccessControlListInstance
+     * @return IpAccessControlListPage Page of IpAccessControlListInstance
      */
-    public function getPage($targetUrl) {
+    public function getPage(string $targetUrl): IpAccessControlListPage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
@@ -120,21 +112,16 @@ class IpAccessControlListList extends ListResource {
     }
 
     /**
-     * Create a new IpAccessControlListInstance
+     * Create the IpAccessControlListInstance
      *
      * @param string $friendlyName A human readable description of this resource
-     * @return IpAccessControlListInstance Newly created IpAccessControlListInstance
+     * @return IpAccessControlListInstance Created IpAccessControlListInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create($friendlyName) {
-        $data = Values::of(array('FriendlyName' => $friendlyName, ));
+    public function create(string $friendlyName): IpAccessControlListInstance {
+        $data = Values::of(['FriendlyName' => $friendlyName, ]);
 
-        $payload = $this->version->create(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new IpAccessControlListInstance($this->version, $payload, $this->solution['accountSid']);
     }
@@ -143,9 +130,8 @@ class IpAccessControlListList extends ListResource {
      * Constructs a IpAccessControlListContext
      *
      * @param string $sid A string that identifies the resource to fetch
-     * @return \Twilio\Rest\Api\V2010\Account\Sip\IpAccessControlListContext
      */
-    public function getContext($sid) {
+    public function getContext(string $sid): IpAccessControlListContext {
         return new IpAccessControlListContext($this->version, $this->solution['accountSid'], $sid);
     }
 
@@ -154,7 +140,7 @@ class IpAccessControlListList extends ListResource {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Api.V2010.IpAccessControlListList]';
     }
 }

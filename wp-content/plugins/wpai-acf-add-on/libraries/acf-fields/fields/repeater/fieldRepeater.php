@@ -167,7 +167,7 @@ class FieldRepeater extends Field {
                             if (isset($rowFields[$subField->getFieldKey()])) {
                                 $subField->parse($rowFields[$subField->getFieldKey()], $parsingData, array(
                                     'field_path' => $this->getOption('field_path') . "[" . $this->getFieldKey() . "][rows][" . $key . "]",
-                                    'xpath_suffix' => '',
+                                    'xpath_suffix' => $args['xpath_suffix'],
                                     'repeater_count_rows' => 0,
                                     'inside_repeater' => true
                                 ));

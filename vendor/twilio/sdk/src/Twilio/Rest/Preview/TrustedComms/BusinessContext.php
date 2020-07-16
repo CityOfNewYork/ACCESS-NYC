@@ -11,6 +11,8 @@ namespace Twilio\Rest\Preview\TrustedComms;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\ListResource;
+use Twilio\Rest\Preview\TrustedComms\Business\BrandList;
 use Twilio\Rest\Preview\TrustedComms\Business\InsightsList;
 use Twilio\Values;
 use Twilio\Version;
@@ -18,51 +20,56 @@ use Twilio\Version;
 /**
  * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
  *
- * @property \Twilio\Rest\Preview\TrustedComms\Business\InsightsList $insights
+ * @property BrandList $brands
+ * @property InsightsList $insights
+ * @method \Twilio\Rest\Preview\TrustedComms\Business\BrandContext brands(string $sid)
  */
 class BusinessContext extends InstanceContext {
-    protected $_insights = null;
+    protected $_brands;
+    protected $_insights;
 
     /**
      * Initialize the BusinessContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $sid A string that uniquely identifies this Business.
-     * @return \Twilio\Rest\Preview\TrustedComms\BusinessContext
      */
     public function __construct(Version $version, $sid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('sid' => $sid, );
+        $this->solution = ['sid' => $sid, ];
 
         $this->uri = '/Businesses/' . \rawurlencode($sid) . '';
     }
 
     /**
-     * Fetch a BusinessInstance
+     * Fetch the BusinessInstance
      *
      * @return BusinessInstance Fetched BusinessInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): BusinessInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new BusinessInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
-     * Access the insights
-     *
-     * @return \Twilio\Rest\Preview\TrustedComms\Business\InsightsList
+     * Access the brands
      */
-    protected function getInsights() {
+    protected function getBrands(): BrandList {
+        if (!$this->_brands) {
+            $this->_brands = new BrandList($this->version, $this->solution['sid']);
+        }
+
+        return $this->_brands;
+    }
+
+    /**
+     * Access the insights
+     */
+    protected function getInsights(): InsightsList {
         if (!$this->_insights) {
             $this->_insights = new InsightsList($this->version, $this->solution['sid']);
         }
@@ -74,10 +81,10 @@ class BusinessContext extends InstanceContext {
      * Magic getter to lazy load subresources
      *
      * @param string $name Subresource to return
-     * @return \Twilio\ListResource The requested subresource
+     * @return ListResource The requested subresource
      * @throws TwilioException For unknown subresources
      */
-    public function __get($name) {
+    public function __get(string $name): ListResource {
         if (\property_exists($this, '_' . $name)) {
             $method = 'get' . \ucfirst($name);
             return $this->$method();
@@ -91,10 +98,10 @@ class BusinessContext extends InstanceContext {
      *
      * @param string $name Resource to return
      * @param array $arguments Context parameters
-     * @return \Twilio\InstanceContext The requested resource context
+     * @return InstanceContext The requested resource context
      * @throws TwilioException For unknown resource
      */
-    public function __call($name, $arguments) {
+    public function __call(string $name, array $arguments): InstanceContext {
         $property = $this->$name;
         if (\method_exists($property, 'getContext')) {
             return \call_user_func_array(array($property, 'getContext'), $arguments);
@@ -108,8 +115,8 @@ class BusinessContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

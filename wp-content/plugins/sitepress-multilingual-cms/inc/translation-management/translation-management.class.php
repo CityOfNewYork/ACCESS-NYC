@@ -33,7 +33,7 @@ class TranslationManagement {
 	/** @var WPML_Custom_Field_Setting_Factory $settings_factory */
 	private $settings_factory;
 
-	/** @var  WPML_Cache_Facotry */
+	/** @var  WPML_Cache_Factory */
 	private $cache_factory;
 
 	/**
@@ -57,7 +57,7 @@ class TranslationManagement {
 		add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-		add_action( 'delete_post', array( $this, 'delete_post_actions' ), 1, 1 ); // calling *before* the Sitepress actions
+		add_action( 'delete_post', array( $this, 'delete_post_actions' ), 1, 1 ); // Calling *before* the Sitepress actions.
 		add_action( 'icl_ajx_custom_call', array( $this, 'ajax_calls' ), 10, 2 );
 		add_action( 'wpml_tm_basket_add_message', array( $this, 'add_basket_message' ), 10, 3 );
 
@@ -411,19 +411,19 @@ class TranslationManagement {
 				break;
 			case 'dashboard_filter':
 				$cookie_data = http_build_query( $data['filter'] );
-				$this->set_cookie( 'translation_dashboard_filter', $cookie_data, time() + HOUR_IN_SECONDS );
+				$this->set_cookie( 'wp-translation_dashboard_filter', $cookie_data, time() + HOUR_IN_SECONDS );
 				wp_safe_redirect( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=dashboard' );
 				break;
 			case 'reset_dashboard_filters':
-				unset( $_COOKIE['translation_dashboard_filter'] );
-				$this->set_cookie( 'translation_dashboard_filter', '', time() - HOUR_IN_SECONDS );
+				unset( $_COOKIE['wp-translation_dashboard_filter'] );
+				$this->set_cookie( 'wp-translation_dashboard_filter', '', time() - HOUR_IN_SECONDS );
 				break;
 			case 'sort':
 				if ( isset( $data['sort_by'] ) ) {
-					$_SESSION['translation_dashboard_filter']['sort_by'] = $data['sort_by'];
+					$_SESSION['wp-translation_dashboard_filter']['sort_by'] = $data['sort_by'];
 				}
 				if ( isset( $data['sort_order'] ) ) {
-					$_SESSION['translation_dashboard_filter']['sort_order'] = $data['sort_order'];
+					$_SESSION['wp-translation_dashboard_filter']['sort_order'] = $data['sort_order'];
 				}
 				break;
 			case 'add_jobs':
@@ -438,8 +438,8 @@ class TranslationManagement {
 				break;
 			case 'ujobs_filter':
 				$cookie_data                         = http_build_query( $data['filter'] );
-				$_COOKIE['translation_ujobs_filter'] = $cookie_data;
-				$this->set_cookie( 'translation_ujobs_filter', $cookie_data, time() + HOUR_IN_SECONDS );
+				$_COOKIE['wp-translation_ujobs_filter'] = $cookie_data;
+				$this->set_cookie( 'wp-translation_ujobs_filter', $cookie_data, time() + HOUR_IN_SECONDS );
 				wp_safe_redirect( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php' );
 				break;
 			case 'save_translation':
@@ -629,8 +629,7 @@ class TranslationManagement {
 		}
 	}
 
-	/*
-	 TRANSLATORS */
+	/* TRANSLATORS */
 
 	/**
 	 * @deprecated use `WPML_TM_Blog_Translators::get_blog_translators` instead
@@ -638,9 +637,11 @@ class TranslationManagement {
 	 * @return bool
 	 */
 	public function has_translators() {
-		$translators = self::get_blog_translators();
+		if ( function_exists( 'wpml_tm_load_blog_translators' ) ) {
+			return wpml_tm_load_blog_translators()->has_translators();
+		}
 
-		return count( $translators ) > 0;
+		return false;
 	}
 
 	/**
@@ -700,9 +701,7 @@ class TranslationManagement {
 		return $url;
 	}
 
-	/*
-	 HOOKS */
-
+	/* HOOKS */
 
 	function make_duplicates( $data ) {
 		foreach ( $data['iclpost'] as $master_post_id ) {
@@ -900,27 +899,57 @@ class TranslationManagement {
 		return $this->comment_duplicator;
 	}
 
-	function delete_post_actions( $post_id ) {
+	/**
+	 * @param int $post_id Post ID.
+	 */
+	public function delete_post_actions( $post_id ) {
 		global $wpdb;
+
 		$post_type = $wpdb->get_var( $wpdb->prepare( "SELECT post_type FROM {$wpdb->posts} WHERE ID=%d", $post_id ) );
+
 		if ( ! empty( $post_type ) ) {
-			$translation_id = $wpdb->get_var( $wpdb->prepare( "SELECT translation_id FROM {$wpdb->prefix}icl_translations WHERE element_id=%d AND element_type=%s", $post_id, 'post_' . $post_type ) );
-			if ( $translation_id ) {
-				$rid = $wpdb->get_var( $wpdb->prepare( "SELECT rid FROM {$wpdb->prefix}icl_translation_status WHERE translation_id=%d", $translation_id ) );
-				$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_translation_status WHERE translation_id=%d", $translation_id ) );
-				if ( $rid ) {
-					$jobs = $wpdb->get_col( $wpdb->prepare( "SELECT job_id FROM {$wpdb->prefix}icl_translate_job WHERE rid=%d", $rid ) );
-					$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_translate_job WHERE rid=%d", $rid ) );
-					if ( ! empty( $jobs ) ) {
-						$wpdb->query( "DELETE FROM {$wpdb->prefix}icl_translate WHERE job_id IN (" . wpml_prepare_in( $jobs, '%d' ) . ')' );
+			$trid_subquery = $wpdb->prepare(
+				"SELECT trid FROM {$wpdb->prefix}icl_translations WHERE element_id=%d AND element_type=%s",
+				$post_id,
+				'post_' . $post_type
+			);
+
+			$translation_ids = $wpdb->get_col(
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				"SELECT translation_id FROM {$wpdb->prefix}icl_translations WHERE trid = (" . $trid_subquery . ')'
+			);
+
+			if ( $translation_ids ) {
+				$rids = $wpdb->get_col(
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+					"SELECT rid FROM {$wpdb->prefix}icl_translation_status WHERE translation_id IN (" . wpml_prepare_in( $translation_ids, '%d' ) . ')'
+				);
+				$wpdb->query(
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+					"DELETE FROM {$wpdb->prefix}icl_translation_status WHERE translation_id IN (" . wpml_prepare_in( $translation_ids, '%d' ) . ')'
+				);
+
+				if ( $rids ) {
+					$job_ids = $wpdb->get_col(
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+						"SELECT job_id FROM {$wpdb->prefix}icl_translate_job WHERE rid IN (" . wpml_prepare_in( $rids, '%d' ) . ')'
+					);
+					$wpdb->query(
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+						"DELETE FROM {$wpdb->prefix}icl_translate_job WHERE rid IN (" . wpml_prepare_in( $rids, '%d' ) . ')'
+					);
+					if ( $job_ids ) {
+						$wpdb->query(
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+							"DELETE FROM {$wpdb->prefix}icl_translate WHERE job_id IN (" . wpml_prepare_in( $job_ids, '%d' ) . ')'
+						);
 					}
 				}
 			}
 		}
 	}
 
-	/*
-	 TRANSLATIONS */
+	/* TRANSLATIONS */
 
 	/**
 	 * calculate post md5
@@ -1159,9 +1188,7 @@ class TranslationManagement {
 		);
 	}
 
-	/*
-	 TRANSLATION JOBS */
-
+	/* TRANSLATION JOBS */
 
 	/**
 	 * @param \WPML_TM_Translation_Batch $batch

@@ -13,7 +13,7 @@ class WPML_Config_Built_With_Page_Builders extends WPML_WP_Option implements IWP
 	}
 
 	public function get_default() {
-		return array();
+		return [ '/<!-- wp:/' ];
 	}
 
 	public function add_hooks() {

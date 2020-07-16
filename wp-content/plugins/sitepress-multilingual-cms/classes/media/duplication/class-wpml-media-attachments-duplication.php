@@ -155,6 +155,14 @@ class WPML_Media_Attachments_Duplication {
 				if ( $translation->element_id != $attachment_id ) {
 					$this->update_attachment_texts( $translation );
 
+					/**
+					 * Action to allow synchronise additional attachment data with translation.
+					 *
+					 * @param int    $attachment_id The ID of original attachment.
+					 * @param object $translation   The translated attachment.
+					 */
+					do_action( 'wpml_after_update_attachment_texts', $attachment_id, $translation );
+
 					$attachment_meta_data = get_post_meta( $translation->element_id, '_wp_attachment_metadata' );
 					if ( isset( $attachment_meta_data[0]['file'] ) ) {
 						continue;
@@ -215,7 +223,7 @@ class WPML_Media_Attachments_Duplication {
 		}
 
 		$language_details = $this->sitepress->get_element_language_details( $post_id, 'post_attachment' );
-		if ( isset( $language_details ) ) {
+		if ( isset( $language_details->language_code ) ) {
 			$this->translate_attachments( $post_id, $language_details->language_code );
 		}
 	}

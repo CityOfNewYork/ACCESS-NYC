@@ -6,8 +6,8 @@
  * @author Blue State Digital
  */
 
-require_once Path\controller('location');
-require_once Path\controller('alert');
+require_once ACCESS\controller('location');
+require_once ACCESS\controller('alert');
 
 /**
  * Enqueue
@@ -38,10 +38,43 @@ $context = Timber::get_context();
 $context['post'] = $location;
 
 /**
+ * Setup schema for Single Location
+ */
+
+$context['schema'] = [
+  array(
+    '@context' => 'https://schema.org',
+    '@type' => $location->locationType(),
+    'name' => $location->title,
+    'hasMap' => $location->locationMapURL(),
+    'description' => $location->getHelp(),
+    'address' => [
+      '@type' => 'PostalAddress',
+      'streetAddress' => $location->address_street,
+      'addressLocality' => $location->city,
+      'postalCode' => $location->zip
+    ],
+    'telephone' => $location->getPhone(),
+    'sameAs' => $location->website,
+    'spatialCoverage' => [
+      'type' => 'City',
+      'name' => 'New York'
+    ]
+  )
+];
+
+if ($context['alert_sitewide_schema']) {
+  array_push($context['schema'], $context['alert_sitewide_schema']);
+}
+
+$context['schema'] = json_encode($context['schema']);
+
+/**
  * Page Meta Description
  */
 
 $context['page_meta_description'] = $location->getPageMetaDescription();
+
 
 /**
  * Alerts

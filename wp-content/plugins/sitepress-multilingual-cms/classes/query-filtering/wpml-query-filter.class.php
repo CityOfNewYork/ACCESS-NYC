@@ -321,16 +321,29 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 		);
 	}
 
+
 	private function display_as_translated_snippet( $current_language, $fallback_language ) {
-		$post_types = $this->sitepress->get_display_as_translated_documents();
+		$content_types = null;
+		$skip_content_check = true;
 
-		if ( $post_types && apply_filters( 'wpml_should_use_display_as_translated_snippet', ! is_admin(), $post_types ) ) {
-			$display_as_translated_query = new WPML_Display_As_Translated_Posts_Query( $this->wpdb );
-
-			return $display_as_translated_query->get_language_snippet( $current_language, $fallback_language, array_keys( $post_types ) );
-		} else {
-			return '0';
+		/**
+		 * Filter wpml_should_force_display_as_translated_snippet.
+		 *
+		 * Force the "display as translated" mode for all post types. Implemented for
+		 * Toolset compatibility.
+		 */
+		if ( ! apply_filters( 'wpml_should_force_display_as_translated_snippet', false ) ) {
+			$post_types = $this->sitepress->get_display_as_translated_documents();
+			if ( ! $post_types || ! apply_filters( 'wpml_should_use_display_as_translated_snippet', ! is_admin(), $post_types ) ) {
+				return '0';
+			}
+			$content_types = array_keys( $post_types );
+			$skip_content_check = false;
 		}
+
+		$display_as_translated_query = new WPML_Display_As_Translated_Posts_Query( $this->wpdb );
+
+		return $display_as_translated_query->get_language_snippet( $current_language, $fallback_language, $content_types, $skip_content_check );
 	}
 
 	/**

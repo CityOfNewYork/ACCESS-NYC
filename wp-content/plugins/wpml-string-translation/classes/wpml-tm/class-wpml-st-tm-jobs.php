@@ -91,6 +91,11 @@ class WPML_ST_TM_Jobs extends WPML_WPDB_User {
 	 * @return string
 	 */
 	private function build_string_where( $args ) {
+		if ( isset( $args['overdue'] ) && $args['overdue'] ) {
+			// We do not save "deadline" for string jobs so we just want to exclude them in such case
+			return 'WHERE 1 = 0';
+		}
+
 		$string_where  = isset( $args['string_where'] ) ? $args['string_where'] : '';
 		$translator_id = isset( $args['translator_id'] ) ? $args['translator_id'] : '';
 		$from          = isset( $args['from'] ) ? $args['from'] : '';

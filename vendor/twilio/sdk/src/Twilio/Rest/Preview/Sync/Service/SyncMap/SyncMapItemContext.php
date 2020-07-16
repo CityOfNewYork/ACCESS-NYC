@@ -11,6 +11,7 @@ namespace Twilio\Rest\Preview\Sync\Service\SyncMap;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\Options;
 use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
@@ -22,35 +23,28 @@ class SyncMapItemContext extends InstanceContext {
     /**
      * Initialize the SyncMapItemContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
+     * @param Version $version Version that contains the resource
      * @param string $serviceSid The service_sid
      * @param string $mapSid The map_sid
      * @param string $key The key
-     * @return \Twilio\Rest\Preview\Sync\Service\SyncMap\SyncMapItemContext
      */
     public function __construct(Version $version, $serviceSid, $mapSid, $key) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('serviceSid' => $serviceSid, 'mapSid' => $mapSid, 'key' => $key, );
+        $this->solution = ['serviceSid' => $serviceSid, 'mapSid' => $mapSid, 'key' => $key, ];
 
         $this->uri = '/Services/' . \rawurlencode($serviceSid) . '/Maps/' . \rawurlencode($mapSid) . '/Items/' . \rawurlencode($key) . '';
     }
 
     /**
-     * Fetch a SyncMapItemInstance
+     * Fetch the SyncMapItemInstance
      *
      * @return SyncMapItemInstance Fetched SyncMapItemInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): SyncMapItemInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new SyncMapItemInstance(
             $this->version,
@@ -62,31 +56,35 @@ class SyncMapItemContext extends InstanceContext {
     }
 
     /**
-     * Deletes the SyncMapItemInstance
+     * Delete the SyncMapItemInstance
      *
-     * @return boolean True if delete succeeds, false otherwise
+     * @param array|Options $options Optional Arguments
+     * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete() {
-        return $this->version->delete('delete', $this->uri);
+    public function delete(array $options = []): bool {
+        $options = new Values($options);
+
+        $headers = Values::of(['If-Match' => $options['ifMatch'], ]);
+
+        return $this->version->delete('DELETE', $this->uri, [], [], $headers);
     }
 
     /**
      * Update the SyncMapItemInstance
      *
      * @param array $data The data
+     * @param array|Options $options Optional Arguments
      * @return SyncMapItemInstance Updated SyncMapItemInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($data) {
-        $data = Values::of(array('Data' => Serialize::jsonObject($data), ));
+    public function update(array $data, array $options = []): SyncMapItemInstance {
+        $options = new Values($options);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $data = Values::of(['Data' => Serialize::jsonObject($data), ]);
+        $headers = Values::of(['If-Match' => $options['ifMatch'], ]);
+
+        $payload = $this->version->update('POST', $this->uri, [], $data, $headers);
 
         return new SyncMapItemInstance(
             $this->version,
@@ -102,8 +100,8 @@ class SyncMapItemContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

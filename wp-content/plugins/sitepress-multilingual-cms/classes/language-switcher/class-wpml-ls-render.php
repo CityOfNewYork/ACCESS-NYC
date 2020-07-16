@@ -22,6 +22,9 @@ class WPML_LS_Render extends WPML_SP_User {
 	/* @var WPML_LS_Assets $assets */
 	private $assets;
 
+	/** @var bool */
+	private $wpml_ls_exclude_in_menu;
+
 	/**
 	 * WPML_Language_Switcher_Menu constructor.
 	 *
@@ -43,10 +46,8 @@ class WPML_LS_Render extends WPML_SP_User {
 	public function init_hooks() {
 		if ( $this->sitepress->get_setting( 'setup_complete' ) ) {
 
-			if ( ! is_admin() ) {
-				add_filter( 'wp_get_nav_menu_items', array( $this, 'wp_get_nav_menu_items_filter' ), 10, 2 );
-				add_filter( 'wp_setup_nav_menu_item', array( $this, 'maybe_repair_menu_item' ), PHP_INT_MAX );
-			}
+			add_filter( 'wp_get_nav_menu_items', array( $this, 'wp_get_nav_menu_items_filter' ), 10, 2 );
+			add_filter( 'wp_setup_nav_menu_item', array( $this, 'maybe_repair_menu_item' ), PHP_INT_MAX );
 
 			add_filter( 'the_content', array( $this, 'the_content_filter' ), self::THE_CONTENT_FILTER_PRIORITY );
 			add_action( 'wp_footer', array( $this, 'wp_footer_action' ), 19 );
@@ -106,19 +107,19 @@ class WPML_LS_Render extends WPML_SP_User {
 	 * @return array
 	 */
 	public function get_preview( $slot ) {
-		$ret  = array();
+		$ret = [];
 
 		if ( $slot->is_menu() ) {
 			$ret['html'] = $this->render_menu_preview( $slot );
-		} else if ( $slot->is_post_translations() ) {
+		} elseif ( $slot->is_post_translations() ) {
 			$ret['html'] = $this->post_translations_label( $slot );
 		} else {
 			$ret['html'] = $this->render( $slot );
 		}
 
-		$ret['css']      = $this->current_template->get_styles( true );
-		$ret['js']       = $this->current_template->get_scripts( true );
-		$ret['styles']   = $this->inline_styles->get_slots_inline_styles( array( $slot ) );
+		$ret['css']    = $this->current_template->get_styles( true );
+		$ret['js']     = $this->current_template->get_scripts( true );
+		$ret['styles'] = $this->inline_styles->get_slots_inline_styles( [ $slot ] );
 
 		return $ret;
 	}
@@ -130,6 +131,10 @@ class WPML_LS_Render extends WPML_SP_User {
 	 * @return array
 	 */
 	public function wp_get_nav_menu_items_filter( $items, $menu ) {
+		if ( $this->should_not_alter_menu() ) {
+			return $items;
+		}
+
 		if ( $this->is_for_menu_panel_in_customizer() ) {
 			return $items;
 		}
@@ -153,6 +158,15 @@ class WPML_LS_Render extends WPML_SP_User {
 	private function is_for_menu_panel_in_customizer() {
 		return is_customize_preview() && ! did_action( 'template_redirect' );
 	}
+
+	private function should_not_alter_menu() {
+		if ( null === $this->wpml_ls_exclude_in_menu ) {
+			$this->wpml_ls_exclude_in_menu = apply_filters( 'wpml_ls_exclude_in_menu', true );
+		}
+
+		return is_admin() && $this->wpml_ls_exclude_in_menu;
+	}
+
 
 	/**
 	 * @param WP_Post[]           $items
@@ -216,6 +230,10 @@ class WPML_LS_Render extends WPML_SP_User {
 	 * @return object $item
 	 */
 	public function maybe_repair_menu_item( $item ) {
+		if ( $this->should_not_alter_menu() ) {
+			return $item;
+		}
+
 		if ( ! $item instanceof WPML_LS_Menu_Item ) {
 			return $item;
 		}

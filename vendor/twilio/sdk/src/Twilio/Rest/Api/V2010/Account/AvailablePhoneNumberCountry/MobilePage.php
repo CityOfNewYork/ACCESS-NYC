@@ -9,17 +9,28 @@
 
 namespace Twilio\Rest\Api\V2010\Account\AvailablePhoneNumberCountry;
 
+use Twilio\Http\Response;
 use Twilio\Page;
+use Twilio\Version;
 
 class MobilePage extends Page {
-    public function __construct($version, $response, $solution) {
+    /**
+     * @param Version $version Version that contains the resource
+     * @param Response $response Response from the API
+     * @param array $solution The context solution
+     */
+    public function __construct(Version $version, Response $response, array $solution) {
         parent::__construct($version, $response);
 
         // Path Solution
         $this->solution = $solution;
     }
 
-    public function buildInstance(array $payload) {
+    /**
+     * @param array $payload Payload response from the API
+     * @return MobileInstance \Twilio\Rest\Api\V2010\Account\AvailablePhoneNumberCountry\MobileInstance
+     */
+    public function buildInstance(array $payload): MobileInstance {
         return new MobileInstance(
             $this->version,
             $payload,
@@ -33,7 +44,7 @@ class MobilePage extends Page {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
+    public function __toString(): string {
         return '[Twilio.Api.V2010.MobilePage]';
     }
 }

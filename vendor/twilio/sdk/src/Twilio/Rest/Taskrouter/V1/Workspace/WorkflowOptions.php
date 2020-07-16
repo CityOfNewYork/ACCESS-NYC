@@ -30,7 +30,7 @@ abstract class WorkflowOptions {
      * @param string $reEvaluateTasks Whether or not to re-evaluate Tasks
      * @return UpdateWorkflowOptions Options builder
      */
-    public static function update($friendlyName = Values::NONE, $assignmentCallbackUrl = Values::NONE, $fallbackAssignmentCallbackUrl = Values::NONE, $configuration = Values::NONE, $taskReservationTimeout = Values::NONE, $reEvaluateTasks = Values::NONE) {
+    public static function update(string $friendlyName = Values::NONE, string $assignmentCallbackUrl = Values::NONE, string $fallbackAssignmentCallbackUrl = Values::NONE, string $configuration = Values::NONE, int $taskReservationTimeout = Values::NONE, string $reEvaluateTasks = Values::NONE): UpdateWorkflowOptions {
         return new UpdateWorkflowOptions($friendlyName, $assignmentCallbackUrl, $fallbackAssignmentCallbackUrl, $configuration, $taskReservationTimeout, $reEvaluateTasks);
     }
 
@@ -39,7 +39,7 @@ abstract class WorkflowOptions {
      *                             read
      * @return ReadWorkflowOptions Options builder
      */
-    public static function read($friendlyName = Values::NONE) {
+    public static function read(string $friendlyName = Values::NONE): ReadWorkflowOptions {
         return new ReadWorkflowOptions($friendlyName);
     }
 
@@ -55,7 +55,7 @@ abstract class WorkflowOptions {
      *                                    Worker
      * @return CreateWorkflowOptions Options builder
      */
-    public static function create($assignmentCallbackUrl = Values::NONE, $fallbackAssignmentCallbackUrl = Values::NONE, $taskReservationTimeout = Values::NONE) {
+    public static function create(string $assignmentCallbackUrl = Values::NONE, string $fallbackAssignmentCallbackUrl = Values::NONE, int $taskReservationTimeout = Values::NONE): CreateWorkflowOptions {
         return new CreateWorkflowOptions($assignmentCallbackUrl, $fallbackAssignmentCallbackUrl, $taskReservationTimeout);
     }
 }
@@ -77,7 +77,7 @@ class UpdateWorkflowOptions extends Options {
      *                                    Worker
      * @param string $reEvaluateTasks Whether or not to re-evaluate Tasks
      */
-    public function __construct($friendlyName = Values::NONE, $assignmentCallbackUrl = Values::NONE, $fallbackAssignmentCallbackUrl = Values::NONE, $configuration = Values::NONE, $taskReservationTimeout = Values::NONE, $reEvaluateTasks = Values::NONE) {
+    public function __construct(string $friendlyName = Values::NONE, string $assignmentCallbackUrl = Values::NONE, string $fallbackAssignmentCallbackUrl = Values::NONE, string $configuration = Values::NONE, int $taskReservationTimeout = Values::NONE, string $reEvaluateTasks = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['assignmentCallbackUrl'] = $assignmentCallbackUrl;
         $this->options['fallbackAssignmentCallbackUrl'] = $fallbackAssignmentCallbackUrl;
@@ -93,7 +93,7 @@ class UpdateWorkflowOptions extends Options {
      *                             the Workflow resource
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -105,7 +105,7 @@ class UpdateWorkflowOptions extends Options {
      *                                      process task assignment events
      * @return $this Fluent Builder
      */
-    public function setAssignmentCallbackUrl($assignmentCallbackUrl) {
+    public function setAssignmentCallbackUrl(string $assignmentCallbackUrl): self {
         $this->options['assignmentCallbackUrl'] = $assignmentCallbackUrl;
         return $this;
     }
@@ -118,7 +118,7 @@ class UpdateWorkflowOptions extends Options {
      *                                              `assignment_callback_url` fails
      * @return $this Fluent Builder
      */
-    public function setFallbackAssignmentCallbackUrl($fallbackAssignmentCallbackUrl) {
+    public function setFallbackAssignmentCallbackUrl(string $fallbackAssignmentCallbackUrl): self {
         $this->options['fallbackAssignmentCallbackUrl'] = $fallbackAssignmentCallbackUrl;
         return $this;
     }
@@ -130,7 +130,7 @@ class UpdateWorkflowOptions extends Options {
      *                              to the Workflow
      * @return $this Fluent Builder
      */
-    public function setConfiguration($configuration) {
+    public function setConfiguration(string $configuration): self {
         $this->options['configuration'] = $configuration;
         return $this;
     }
@@ -144,7 +144,7 @@ class UpdateWorkflowOptions extends Options {
      *                                    Worker
      * @return $this Fluent Builder
      */
-    public function setTaskReservationTimeout($taskReservationTimeout) {
+    public function setTaskReservationTimeout(int $taskReservationTimeout): self {
         $this->options['taskReservationTimeout'] = $taskReservationTimeout;
         return $this;
     }
@@ -155,7 +155,7 @@ class UpdateWorkflowOptions extends Options {
      * @param string $reEvaluateTasks Whether or not to re-evaluate Tasks
      * @return $this Fluent Builder
      */
-    public function setReEvaluateTasks($reEvaluateTasks) {
+    public function setReEvaluateTasks(string $reEvaluateTasks): self {
         $this->options['reEvaluateTasks'] = $reEvaluateTasks;
         return $this;
     }
@@ -165,14 +165,9 @@ class UpdateWorkflowOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Taskrouter.V1.UpdateWorkflowOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Taskrouter.V1.UpdateWorkflowOptions ' . $options . ']';
     }
 }
 
@@ -181,7 +176,7 @@ class ReadWorkflowOptions extends Options {
      * @param string $friendlyName The friendly_name of the Workflow resources to
      *                             read
      */
-    public function __construct($friendlyName = Values::NONE) {
+    public function __construct(string $friendlyName = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
     }
 
@@ -192,7 +187,7 @@ class ReadWorkflowOptions extends Options {
      *                             read
      * @return $this Fluent Builder
      */
-    public function setFriendlyName($friendlyName) {
+    public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
         return $this;
     }
@@ -202,14 +197,9 @@ class ReadWorkflowOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Taskrouter.V1.ReadWorkflowOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Taskrouter.V1.ReadWorkflowOptions ' . $options . ']';
     }
 }
 
@@ -225,7 +215,7 @@ class CreateWorkflowOptions extends Options {
      *                                    application after it assigns a Task to a
      *                                    Worker
      */
-    public function __construct($assignmentCallbackUrl = Values::NONE, $fallbackAssignmentCallbackUrl = Values::NONE, $taskReservationTimeout = Values::NONE) {
+    public function __construct(string $assignmentCallbackUrl = Values::NONE, string $fallbackAssignmentCallbackUrl = Values::NONE, int $taskReservationTimeout = Values::NONE) {
         $this->options['assignmentCallbackUrl'] = $assignmentCallbackUrl;
         $this->options['fallbackAssignmentCallbackUrl'] = $fallbackAssignmentCallbackUrl;
         $this->options['taskReservationTimeout'] = $taskReservationTimeout;
@@ -238,7 +228,7 @@ class CreateWorkflowOptions extends Options {
      *                                      process task assignment events
      * @return $this Fluent Builder
      */
-    public function setAssignmentCallbackUrl($assignmentCallbackUrl) {
+    public function setAssignmentCallbackUrl(string $assignmentCallbackUrl): self {
         $this->options['assignmentCallbackUrl'] = $assignmentCallbackUrl;
         return $this;
     }
@@ -251,7 +241,7 @@ class CreateWorkflowOptions extends Options {
      *                                              `assignment_callback_url` fails
      * @return $this Fluent Builder
      */
-    public function setFallbackAssignmentCallbackUrl($fallbackAssignmentCallbackUrl) {
+    public function setFallbackAssignmentCallbackUrl(string $fallbackAssignmentCallbackUrl): self {
         $this->options['fallbackAssignmentCallbackUrl'] = $fallbackAssignmentCallbackUrl;
         return $this;
     }
@@ -265,7 +255,7 @@ class CreateWorkflowOptions extends Options {
      *                                    Worker
      * @return $this Fluent Builder
      */
-    public function setTaskReservationTimeout($taskReservationTimeout) {
+    public function setTaskReservationTimeout(int $taskReservationTimeout): self {
         $this->options['taskReservationTimeout'] = $taskReservationTimeout;
         return $this;
     }
@@ -275,13 +265,8 @@ class CreateWorkflowOptions extends Options {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $options = array();
-        foreach ($this->options as $key => $value) {
-            if ($value != Values::NONE) {
-                $options[] = "$key=$value";
-            }
-        }
-        return '[Twilio.Taskrouter.V1.CreateWorkflowOptions ' . \implode(' ', $options) . ']';
+    public function __toString(): string {
+        $options = \http_build_query(Values::of($this->options), '', ' ');
+        return '[Twilio.Taskrouter.V1.CreateWorkflowOptions ' . $options . ']';
     }
 }

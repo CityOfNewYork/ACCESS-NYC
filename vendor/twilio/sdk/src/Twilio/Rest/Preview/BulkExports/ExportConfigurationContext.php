@@ -23,33 +23,26 @@ class ExportConfigurationContext extends InstanceContext {
     /**
      * Initialize the ExportConfigurationContext
      *
-     * @param \Twilio\Version $version Version that contains the resource
-     * @param string $resourceType The resource_type
-     * @return \Twilio\Rest\Preview\BulkExports\ExportConfigurationContext
+     * @param Version $version Version that contains the resource
+     * @param string $resourceType The type of communication – Messages, Calls
      */
     public function __construct(Version $version, $resourceType) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array('resourceType' => $resourceType, );
+        $this->solution = ['resourceType' => $resourceType, ];
 
         $this->uri = '/Exports/' . \rawurlencode($resourceType) . '/Configuration';
     }
 
     /**
-     * Fetch a ExportConfigurationInstance
+     * Fetch the ExportConfigurationInstance
      *
      * @return ExportConfigurationInstance Fetched ExportConfigurationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch() {
-        $params = Values::of(array());
-
-        $payload = $this->version->fetch(
-            'GET',
-            $this->uri,
-            $params
-        );
+    public function fetch(): ExportConfigurationInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new ExportConfigurationInstance($this->version, $payload, $this->solution['resourceType']);
     }
@@ -61,21 +54,16 @@ class ExportConfigurationContext extends InstanceContext {
      * @return ExportConfigurationInstance Updated ExportConfigurationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($options = array()) {
+    public function update(array $options = []): ExportConfigurationInstance {
         $options = new Values($options);
 
-        $data = Values::of(array(
+        $data = Values::of([
             'Enabled' => Serialize::booleanToString($options['enabled']),
             'WebhookUrl' => $options['webhookUrl'],
             'WebhookMethod' => $options['webhookMethod'],
-        ));
+        ]);
 
-        $payload = $this->version->update(
-            'POST',
-            $this->uri,
-            array(),
-            $data
-        );
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new ExportConfigurationInstance($this->version, $payload, $this->solution['resourceType']);
     }
@@ -85,8 +73,8 @@ class ExportConfigurationContext extends InstanceContext {
      *
      * @return string Machine friendly representation
      */
-    public function __toString() {
-        $context = array();
+    public function __toString(): string {
+        $context = [];
         foreach ($this->solution as $key => $value) {
             $context[] = "$key=$value";
         }

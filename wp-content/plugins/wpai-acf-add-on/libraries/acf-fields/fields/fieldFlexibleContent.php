@@ -81,14 +81,37 @@ class FieldFlexibleContent extends Field {
         $layouts = array();
         foreach ($values as $layout_number => $layout) {
             if (!empty($layout['fields'])) {
-                $layouts[] = $layout['acf_fc_layout'];
-                /** @var Field $sub_field */
-                foreach ($layout['fields'] as $sub_field_key => $sub_field) {
-                    $sub_field->import($importData, array('container_name' => $this->getFieldName() . "_" . $layout_number . "_"));
+                /** @var Field $subField */
+                foreach ($layout['fields'] as $sub_field_key => $subField) {
+                    // Init importData in all sub fields.
+                    $subField->importData = $importData;
+                }
+                if ($this->isImportLayout($layout['fields'])) {
+                    $layouts[] = $layout['acf_fc_layout'];
+                    /** @var Field $subField */
+                    foreach ($layout['fields'] as $sub_field_key => $subField) {
+                        $subField->import($importData, array('container_name' => $this->getFieldName() . "_" . $layout_number . "_"));
+                    }
                 }
             }
         }
         ACFService::update_post_meta($this, $this->getPostID(), $this->getFieldName(), $layouts);
+    }
+
+    /**
+     * @param $fields
+     * @return bool
+     */
+    protected function isImportLayout($fields){
+        $isImportLayout = false;
+        /** @var Field $field */
+        foreach ($fields as $field){
+            if ($field->isNotEmpty()){
+                $isImportLayout = true;
+                break;
+            }
+        }
+        return $isImportLayout;
     }
 
     /**
