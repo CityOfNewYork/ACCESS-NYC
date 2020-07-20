@@ -45,6 +45,12 @@
           </span>
 
           {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}
+
+          {% if post.government_agency %} |
+            <span>
+              {{ post.government_agency }}
+            </span>
+          {% endif %}
         </h2>
       </div>
     </header>
