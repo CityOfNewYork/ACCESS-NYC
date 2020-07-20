@@ -68,12 +68,12 @@ $context['google_translate_element'] = true;
 /**
  * Set up schema
  */
-
 $context['schema'] = [
   array(
     '@context' => 'http://schema.org',
     '@type' => 'WebPage',
     'mainEntityOfPage' => [
+      '@type' => 'WebPage',
       'name' => $post->title,
       'dateModified' => $post->post_modified
     ],
