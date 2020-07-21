@@ -35,7 +35,9 @@ $context = Timber::get_context();
 
 $post = Timber::get_post();
 
-$context['post'] = $post;
+$page = new Controller\Page($post);
+
+$context['post'] = $page;
 
 /**
  * Set Alerts
@@ -69,20 +71,9 @@ $context['google_translate_element'] = true;
  * Set up schema
  */
 
-$context['schema'] = [
-  array(
-    '@context' => 'http://schema.org',
-    '@type' => 'WebPage',
-    'mainEntityOfPage' => [
-      'name' => $post->title,
-      'dateModified' => $post->post_modified
-    ],
-    'spatialCoverage' => [
-      'type' => 'City',
-      'name' => 'New York'
-    ]
-  )
-];
+$context['schema'][] = $page->getSchema();
+$context['schema'][] = $context['alert_sitewide_schema'];
+$context['schema'] = json_encode(array_filter($context['schema']));
 
 /**
  * Render Template
