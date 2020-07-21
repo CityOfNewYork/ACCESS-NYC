@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-<main class="color-light-background" id="content" itemscope itemtype="http://schema.org/WebPage">
+<main class="color-light-background" id="content">
   {% if alerts %}
   <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
     {% for alert in alerts %}
@@ -12,14 +12,14 @@
   </div>
   {% endif %}
 
-  <article itemprop="mainEntityOfPage">
+  <article>
     <header class="c-header mt-3 print:mt-0">
       <div>
-        <h1 itemprop="name" class="c-header__descriptor">{{ post.title }}</h1>
+        <h1 class="c-header__descriptor">{{ post.title }}</h1>
 
         {% set lead = post.get_field('field_58b480ca3081c') %} {# lead #}
 
-        <h2 class="c-header__information color__alt {% if lead %}mb-4{% endif %}" itemprop="dateModified">
+        <h2 class="c-header__information color__alt {% if lead %}mb-4{% endif %}">
           {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
         </h2>
 
@@ -64,7 +64,7 @@
         {% endfor %}
 
         <footer class="pb-3">
-          <p class="text-grey-mid m-0" itemprop="dateModified">
+          <p class="text-grey-mid m-0">
             {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
           </p>
         </footer>
