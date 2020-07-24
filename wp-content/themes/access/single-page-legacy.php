@@ -7,6 +7,7 @@
  */
 
 require_once ACCESS\controller('alert');
+require_once ACCESS\controller('page');
 
 /**
  * Enqueue

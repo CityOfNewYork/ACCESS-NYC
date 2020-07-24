@@ -36,6 +36,7 @@ class Page extends Timber\Post {
       '@context' => 'http://schema.org',
       '@type' => 'WebPage',
       'mainEntityOfPage' => array(
+        '@type' => 'WebPage',
         'name' => $this->title,
         'dateModified' => $this->post_modified
       ),
