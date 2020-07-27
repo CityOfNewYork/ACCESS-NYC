@@ -201,6 +201,19 @@ class Programs extends Timber\Post {
   }
 
   /**
+   * Returns the a description from the program's field section.
+   *
+   * @return String answer to FAQ.
+   */
+  public function faqAnswer($field) {
+    $answer = $this->get_field($field);
+
+    $answer = strip_tags($answer);
+
+    return $answer;
+  }
+
+  /**
    * Return the populations served names to use for Audience tag.
    *
    * @return String list of names used for Audience name tag
