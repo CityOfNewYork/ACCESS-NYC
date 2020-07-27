@@ -111,6 +111,50 @@ if ($program->getItemScope() === 'SpecialAnnouncement') {
   array_push($context['schema'], $special_announcement);
 }
 
+$faq = array(
+  '@context' => 'https://schema.org',
+  '@type' => 'FAQPage',
+  'mainEntity' => [
+    array(
+      '@type' => 'Question',
+      'name' => "How does $program->program_name work?",
+      'acceptedAnswer' => array(
+        '@type' => 'Answer',
+        'name' => $program->faqAnswer('field_58912c1a8a81b')
+      )
+    ),
+    array(
+      '@type' => 'Question',
+      'name' => "Am I eligible for $program->program_name?",
+      'acceptedAnswer' => array(
+        '@type' => 'Answer',
+        'name' => $program->faqAnswer('field_58912c1a8a82d')
+      )
+    ),
+    array(
+      '@type' => 'Question',
+      'name' => "What do I need in order to apply to $program->program_name?",
+      'acceptedAnswer' => array(
+        '@type' => 'Answer',
+        'name' => $program->faqAnswer('field_589de18fca4e0')
+      )
+    ),
+    array(
+      '@type' => 'Question',
+      'name' => "How do I Apply to $program->program_name?",
+      'acceptedAnswer' => array(
+        '@type' => 'Answer',
+        'name' => join('', [$program->faqAnswer('field_58912c1a8a850'),
+                            $program->faqAnswer('field_58912c1a8a885'),
+                            $program->faqAnswer('field_58912c1a8a900'),
+                            $program->faqAnswer('field_58912c1a8a8cb')])
+      )
+    )
+  ]
+);
+
+array_push($context['schema'], $faq);
+
 if ($context['alert_sitewide_schema']) {
   array_push($context['schema'], $context['alert_sitewide_schema']);
 }
