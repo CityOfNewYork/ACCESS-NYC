@@ -214,6 +214,19 @@ class Programs extends Timber\Post {
   }
 
   /**
+   * Add FAQ to schema only if sections are shown.
+   *
+   * @return Boolean weather to add FAQ to schema.
+   */
+  public function validateFaq() {
+    $sections = $this->get_field('field_589e43563c471');
+
+    (empty($sections)) ? $valid = false : $valid = true;
+
+    return $valid;
+  }
+
+  /**
    * Return the populations served names to use for Audience tag.
    *
    * @return String list of names used for Audience name tag
