@@ -70,6 +70,75 @@ if (is_home()) {
 }
 
 /**
+ * Setup schema for homepage touts
+ */
+
+$context['schema'] = array_map(function($tout) {
+  if ($tout->item_scope) {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => $tout->item_scope,
+      'name' => $tout->tout_title,
+      'newsUpdatesAndGuidelines' => $tout->link_url,
+      'datePosted' => $tout->post_modified,
+      'expires' => $tout->custom['tout_status_clear_date'],
+      'text' => $tout->link_text,
+      'category' => 'https://www.wikidata.org/wiki/Q81068910',
+      'spatialCoverage' => [
+        'type' => 'City',
+        'name' => 'New York'
+      ]
+    );
+  }
+}, $context['homepage_touts']);
+
+$programSchema = array_values(array_filter(array_map(function($program) {
+  if ($program->getItemScope() === 'SpecialAnnouncement') {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => 'SpecialAnnouncement',
+      'name' => $program->program_name,
+      'category' => 'https://www.wikidata.org/wiki/Q81068910',
+      'datePosted' => $program->post_modified,
+      'expires' => ($program->custom['program_status_clear_date'] ?
+                      $program->custom['program_status_clear_date'] : ''),
+      'governmentBenefitsInfo' => array(
+        '@type' => 'GovernmentService',
+        'name' => $program->program_name,
+        'url' => $program->structured_data_url,
+        'provider' => array(
+          '@type' => 'GovernmentOrganization',
+          'name' => $program->government_agency
+        ),
+        'audience' => array(
+          '@type' => 'Audience',
+          'name' => $program->audience
+        ),
+        'serviceType' => $program->category['name']
+      ),
+      'serviceOperator' => array(
+        '@type' => 'GovernmentOrganization',
+        'name' => $program->government_agency
+      ),
+      'spatialCoverage' => array(
+        'type' => 'City',
+        'name' => 'New York'
+      )
+    );
+  }
+}, $context['featured_programs'])));
+
+$context['schema'] = array_merge($programSchema, $context['schema']);
+
+$context['schema'] = array_values(array_filter($context['schema']));
+
+if ($context['alert_sitewide_schema']) {
+  array_push($context['schema'], $context['alert_sitewide_schema']);
+}
+
+$context['schema'] = json_encode($context['schema']);
+
+/**
  * Render the view
  */
 

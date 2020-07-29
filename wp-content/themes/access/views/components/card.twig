@@ -1,15 +1,4 @@
-<article itemscope itemtype="http://schema.org/{{ post.item_scope }}" class="c-card">
-  <meta itemprop="name" content="{{ post.program_name }}" />
-
-  <meta itemprop="datePosted" content="{{ post.post_modified }}" />
-
-  {% if post.program_status_clear_date %}
-  <meta itemprop="expires" content="{{ post.program_status_clear_date }}" />
-  {% endif %}
-
-  {% if post.item_scope == 'SpecialAnnouncement' %}
-  <meta itemprop="category" content="https://www.wikidata.org/wiki/Q81068910" />
-  {% endif %}
+<article class="c-card">
 
   <div class="c-card__icon">
     {% include 'elements/icon.twig' with {
@@ -20,7 +9,7 @@
   </div>
 
   <div class="c-card__body">
-    <h3 itemprop="alternateName" class="c-card__title">
+    <h3 class="c-card__title">
       {% if post.status %}
       <mark class="badge color-{{ post.status.type }}-status">{{ post.status.text }}</mark>
       {% endif %}
@@ -36,7 +25,7 @@
       {% if post.brief_excerpt and not short_post %}<p>{{ post.brief_excerpt }}</p>{% endif %}
 
       <p class="hide-for-print">
-        <a itemprop="url" href="{{ post.get_permalink }}" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>{{__('Learn more', 'accessnyctheme')}} <span class="sr-only">: {{ post.program_name }}</span></a>
+        <a href="{{ post.get_permalink }}" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>{{__('Learn more', 'accessnyctheme')}} <span class="sr-only">: {{ post.program_name }}</span></a>
       </p>
 
       {% if show_apply %}

@@ -10,6 +10,13 @@
     {% endblock %}
 
     {% block scripts_head %}{% endblock %}
+
+    {% if schema %}
+    <script type="application/ld+json">
+      {{ schema }}
+    </script>
+    {% endif %}
+
     {% endblock %}
   </head>
 
