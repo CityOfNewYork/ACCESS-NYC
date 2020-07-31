@@ -216,14 +216,25 @@ class Programs extends Timber\Post {
   /**
    * Add FAQ to schema only if sections are shown.
    *
-   * @return Boolean weather to add FAQ to schema.
+   * @return Array set of questions to be added to the schema.
    */
-  public function validateFaq() {
+  public function addQuestionsToSchemaFaq($questions) {
+    $schema_faq = [];
     $sections = $this->get_field('field_589e43563c471');
 
-    (empty($sections)) ? $valid = false : $valid = true;
+    foreach ($sections as &$section) {
+      if ($section['value'] === 'how-it-works') {
+        array_push($schema_faq, $questions[0]);
+      } elseif($section['value'] === 'determine-your-eligibility') {
+        array_push($schema_faq, $questions[1]);
+      } elseif($section['value'] === 'what-you-need-to-include') {
+        array_push($schema_faq, $questions[2]);
+      } elseif($section['value'] === 'how-to-apply') {
+        array_push($schema_faq, $questions[3]);
+      }
+    }
 
-    return $valid;
+    return $schema_faq;
   }
 
   /**
