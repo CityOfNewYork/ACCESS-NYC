@@ -49,118 +49,15 @@ $context['post'] = $program;
 /**
  * Schema
  */
-
-$context['schema'] = [
-  array(
-    '@context' => 'https://schema.org',
-    '@type' => 'GovernmentService',
-    'name' => $program->name,
-    'alternateName' => $program->plain_language_program_name,
-    'datePosted' => $program->post_modified,
-    'url' => $program->get_permalink,
-    'serviceType' => $program->category['name'],
-    'serviceOperator' => array(
-      '@type' => 'GovernmentOrganization',
-      'name' => $program->government_agency
-    ),
-    'availableChannel' => array(
-      '@type' => 'ServiceChannel',
-      'description' => $program->get_field(accordion)
-    ),
-    'spatialCoverage' => array(
-      'type' => 'City',
-      'name' => 'New York'
-    ),
-    'description' => $program->get_field('program_description'),
-    'disambiguatingDescription' => $program->disambiguatingDescription()
-  )
-];
+$context['schema'] = $program->getSchema();
 
 if ($program->getItemScope() === 'SpecialAnnouncement') {
-  $special_announcement = array(
-    '@context' => 'https://schema.org',
-    '@type' => 'SpecialAnnouncement',
-    'name' => $program->program_name,
-    'category' => 'https://www.wikidata.org/wiki/Q81068910',
-    'datePosted' => $program->post_modified,
-    'expires' => ($program->custom['program_status_clear_date'] ?
-                    $program->custom['program_status_clear_date'] : ''),
-    'governmentBenefitsInfo' => array(
-      '@type' => 'GovernmentService',
-      'name' => $program->program_name,
-      'url' => $program->structured_data_url,
-      'provider' => array(
-        '@type' => 'GovernmentOrganization',
-        'name' => $program->government_agency
-      ),
-      'audience' => array(
-        '@type' => 'Audience',
-        'name' => $program->audience
-      ),
-      'serviceType' => $program->category['name']
-    ),
-    'serviceOperator' => array(
-      '@type' => 'GovernmentOrganization',
-      'name' => $program->government_agency
-    ),
-    'spatialCoverage' => array(
-      'type' => 'City',
-      'name' => 'New York'
-    )
-  );
+  $special_announcement = $program->getSpecialAnnouncementSchema();
   array_push($context['schema'], $special_announcement);
 }
 
-/**
-* The array $questions has a set of elements that are the questions to be added
-* to the $faq variable which will be added to the schema as the `FAQPage`
-* section.
-*/
-$questions = [
-  array(
-    '@type' => 'Question',
-    'name' => "How does $program->program_name work?",
-    'acceptedAnswer' => array(
-      '@type' => 'Answer',
-      'text' => $program->faqAnswer('field_58912c1a8a81b')
-    )
-  ),
-  array(
-    '@type' => 'Question',
-    'name' => "Am I eligible for $program->program_name?",
-    'acceptedAnswer' => array(
-      '@type' => 'Answer',
-      'text' => $program->faqAnswer('field_58912c1a8a82d')
-    )
-  ),
-  array(
-    '@type' => 'Question',
-    'name' => "What do I need in order to apply to $program->program_name?",
-    'acceptedAnswer' => array(
-      '@type' => 'Answer',
-      'text' => $program->faqAnswer('field_589de18fca4e0')
-    )
-  ),
-  array(
-    '@type' => 'Question',
-    'name' => "How do I Apply to $program->program_name?",
-    'acceptedAnswer' => array(
-      '@type' => 'Answer',
-      'text' => join('', [$program->faqAnswer('field_58912c1a8a850'),
-                          $program->faqAnswer('field_58912c1a8a885'),
-                          $program->faqAnswer('field_58912c1a8a900'),
-                          $program->faqAnswer('field_58912c1a8a8cb')])
-    )
-  )
-];
-
-if ($program->addQuestionsToSchemaFaq($questions)) {
-  $faq = array(
-    '@context' => 'https://schema.org',
-    '@type' => 'FAQPage',
-    'mainEntity' => $program->addQuestionsToSchemaFaq($questions)
-  );
-
+if ($program->getFaqSchema()) {
+  $faq = $program->getFaqSchema();
   array_push($context['schema'], $faq);
 }
 

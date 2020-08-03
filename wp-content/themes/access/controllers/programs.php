@@ -201,43 +201,6 @@ class Programs extends Timber\Post {
   }
 
   /**
-   * Returns the a description from the program's field section.
-   *
-   * @return String answer to FAQ.
-   */
-  public function faqAnswer($field) {
-    $answer = $this->get_field($field);
-
-    $answer = strip_tags($answer);
-
-    return $answer;
-  }
-
-  /**
-   * Add FAQ to schema only if sections are shown.
-   *
-   * @return Array set of questions to be added to the schema.
-   */
-  public function addQuestionsToSchemaFaq($questions) {
-    $schema_faq = [];
-    $sections = $this->get_field('field_589e43563c471');
-
-    foreach ($sections as &$section) {
-      if ($section['value'] === 'how-it-works') {
-        array_push($schema_faq, $questions[0]);
-      } elseif($section['value'] === 'determine-your-eligibility') {
-        array_push($schema_faq, $questions[1]);
-      } elseif($section['value'] === 'what-you-need-to-include') {
-        array_push($schema_faq, $questions[2]);
-      } elseif($section['value'] === 'how-to-apply') {
-        array_push($schema_faq, $questions[3]);
-      }
-    }
-
-    return $schema_faq;
-  }
-
-  /**
    * Return the populations served names to use for Audience tag.
    *
    * @return String list of names used for Audience name tag
@@ -258,6 +221,183 @@ class Programs extends Timber\Post {
     } else {
       return array_pop($names);
     }
+  }
+
+  /**
+   * Returns the base schema for the program.
+   *
+   * @return Array base schema.
+   */
+  public function getSchema() {
+    $schema = [
+      array(
+        '@context' => 'https://schema.org',
+        '@type' => 'GovernmentService',
+        'name' => $this->name,
+        'alternateName' => $this->plain_language_program_name,
+        'datePosted' => $this->post_modified,
+        'url' => $this->get_permalink,
+        'serviceType' => $this->category['name'],
+        'serviceOperator' => array(
+          '@type' => 'GovernmentOrganization',
+          'name' => $this->government_agency
+        ),
+        'availableChannel' => array(
+          '@type' => 'ServiceChannel',
+          'description' => $this->get_field(accordion)
+        ),
+        'spatialCoverage' => array(
+          'type' => 'City',
+          'name' => 'New York'
+        ),
+        'description' => $this->get_field('program_description'),
+        'disambiguatingDescription' => $this->disambiguatingDescription()
+      )
+    ];
+
+    return $schema;
+  }
+
+  /**
+   * Returns the schema for Special Announcement.
+   *
+   * @return Obj Special Announcement schema.
+   */
+  public function getSpecialAnnouncementSchema() {
+      $special_announcement = array(
+        '@context' => 'https://schema.org',
+        '@type' => 'SpecialAnnouncement',
+        'name' => $this->program_name,
+        'category' => 'https://www.wikidata.org/wiki/Q81068910',
+        'datePosted' => $this->post_modified,
+        'expires' => ($this->custom['program_status_clear_date'] ?
+                        $this->custom['program_status_clear_date'] : ''),
+        'governmentBenefitsInfo' => array(
+          '@type' => 'GovernmentService',
+          'name' => $this->program_name,
+          'url' => $this->structured_data_url,
+          'provider' => array(
+            '@type' => 'GovernmentOrganization',
+            'name' => $this->government_agency
+          ),
+          'audience' => array(
+            '@type' => 'Audience',
+            'name' => $this->audience
+          ),
+          'serviceType' => $this->category['name']
+        ),
+        'serviceOperator' => array(
+          '@type' => 'GovernmentOrganization',
+          'name' => $this->government_agency
+        ),
+        'spatialCoverage' => array(
+          'type' => 'City',
+          'name' => 'New York'
+        )
+      );
+
+     return $special_announcement;
+  }
+
+  /**
+   * Returns the base schema for the FAQ.
+   *
+   * @return Obj base FAQ schema.
+   */
+  public function getFaqSchema() {
+    $faq = array(
+      '@context' => 'https://schema.org',
+      '@type' => 'FAQPage',
+      'mainEntity' => $this->addQuestionsToSchemaFaq($this->getQuestions())
+    );
+
+    return $faq;
+  }
+
+  /**
+  * The array $questions has a set of elements that are the questions to be added
+  * to the $faq variable which will be added to the schema as the `FAQPage`
+  * section.
+  *
+  * @return Array set of FAQ questions.
+  */
+  private function getQuestions() {
+    $questions = [
+        array(
+          '@type' => 'Question',
+          'name' => "How does $this->program_name work?",
+          'acceptedAnswer' => array(
+            '@type' => 'Answer',
+            'text' => $this->faqAnswer('field_58912c1a8a81b')
+          )
+        ),
+        array(
+          '@type' => 'Question',
+          'name' => "Am I eligible for $this->program_name?",
+          'acceptedAnswer' => array(
+            '@type' => 'Answer',
+            'text' => $this->faqAnswer('field_58912c1a8a82d')
+          )
+        ),
+        array(
+          '@type' => 'Question',
+          'name' => "What do I need in order to apply to $this->program_name?",
+          'acceptedAnswer' => array(
+            '@type' => 'Answer',
+            'text' => $this->faqAnswer('field_589de18fca4e0')
+          )
+        ),
+        array(
+          '@type' => 'Question',
+          'name' => "How do I Apply to $this->program_name?",
+          'acceptedAnswer' => array(
+            '@type' => 'Answer',
+            'text' => join('', [$this->faqAnswer('field_58912c1a8a850'),
+                                $this->faqAnswer('field_58912c1a8a885'),
+                                $this->faqAnswer('field_58912c1a8a900'),
+                                $this->faqAnswer('field_58912c1a8a8cb')])
+          )
+        )
+    ];
+
+    return $questions;
+  }
+
+  /**
+   * Returns the a description from the program's field section.
+   *
+   * @return String answer to FAQ.
+   */
+  private function faqAnswer($field) {
+    $answer = $this->get_field($field);
+
+    $answer = strip_tags($answer);
+
+    return $answer;
+  }
+
+  /**
+   * Add FAQ to schema only if sections are shown.
+   *
+   * @return Array set of questions to be added to the schema.
+   */
+  private function addQuestionsToSchemaFaq($questions) {
+    $schema_faq = [];
+    $sections = $this->get_field('field_589e43563c471');
+
+    foreach ($sections as &$section) {
+      if ($section['value'] === 'how-it-works') {
+        array_push($schema_faq, $questions[0]);
+      } elseif($section['value'] === 'determine-your-eligibility') {
+        array_push($schema_faq, $questions[1]);
+      } elseif($section['value'] === 'what-you-need-to-include') {
+        array_push($schema_faq, $questions[2]);
+      } elseif($section['value'] === 'how-to-apply') {
+        array_push($schema_faq, $questions[3]);
+      }
+    }
+
+    return $schema_faq;
   }
 
   /**
