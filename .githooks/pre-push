@@ -1,0 +1,6 @@
+#!/bin/sh
+
+composer development
+composer lint
+vendor/bin/wp-vulnerability-check --config wpscan.yml
+composer production

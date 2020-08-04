@@ -27,6 +27,7 @@ Learn more about ACCESS NYC at [nyc.gov/opportunity](http://www1.nyc.gov/site/op
         * [Composer Plugins](#composer-plugins)
 * [Using Composer](#using-composer)
 * [Using NPM](#using-npm)
+* [Git Hooks](#git-hooks)
 * [Debug Browsing](#debug-browsing)
 * [Coding Style](#coding-style)
     * [PHP](#php)
@@ -218,6 +219,14 @@ Script        | Description
 `predeploy`   | This runs a one-off compilation of assets in production mode.
 `scripts`     | This runs a one-off compilation of JavaScript assets in production mode.
 `styles`      | This runs a one-off compilation of stylesheet assets in production mode.
+
+## Git Hooks
+
+Before contributing, configure git hooks to use the repository's hooks.
+
+    git config core.hooksPath .githooks
+
+* `pre-push` Runs PHP linting and WP Vunerability Scanner.
 
 ## Debug Browsing
 
