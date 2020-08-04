@@ -37,6 +37,20 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "programs"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "location"
+            }
         ]
     ],
     "menu_order": 1,
@@ -47,5 +61,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591192456
+    "modified": 1596566624
 }
