@@ -1,6 +1,15 @@
 #!/bin/sh
 
+# WordPress Root, PHP and Composer Dependencies
+# TODO: This is a copy of the composer pre-deploy script. wp-vulnerability-check
+# returns an error when run through Composer so the shorthand `composer
+# predeploy` doesn't work.
 composer development
 composer lint
 vendor/bin/wp-vulnerability-check --config wpscan.yml
 composer production
+
+# Theme Dependencies
+# TODO: Fix linting issues, prevent push if it doesn't pass
+# cd 'wp-content/themes/access/'
+# npm run predeploy
