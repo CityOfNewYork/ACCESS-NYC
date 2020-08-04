@@ -226,7 +226,9 @@ Before contributing, configure git hooks to use the repository's hooks.
 
     git config core.hooksPath .githooks
 
-* `pre-push` Runs PHP linting and WP Vunerability Scanner.
+Hook       | Description
+-----------|-
+`pre-push` | Runs the Composer `predeploy` script. See [Using Composer](#using-composer)
 
 ## Debug Browsing
 
