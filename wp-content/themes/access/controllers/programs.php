@@ -296,7 +296,7 @@ class Programs extends Timber\Post {
         )
       );
 
-     return $special_announcement;
+      return $special_announcement;
   }
 
   /**
@@ -323,41 +323,42 @@ class Programs extends Timber\Post {
   */
   private function getQuestions() {
     $questions = [
-        array(
-          '@type' => 'Question',
-          'name' => "How does $this->program_name work?",
-          'acceptedAnswer' => array(
-            '@type' => 'Answer',
-            'text' => $this->faqAnswer('field_58912c1a8a81b')
-          )
-        ),
-        array(
-          '@type' => 'Question',
-          'name' => "Am I eligible for $this->program_name?",
-          'acceptedAnswer' => array(
-            '@type' => 'Answer',
-            'text' => $this->faqAnswer('field_58912c1a8a82d')
-          )
-        ),
-        array(
-          '@type' => 'Question',
-          'name' => "What do I need in order to apply to $this->program_name?",
-          'acceptedAnswer' => array(
-            '@type' => 'Answer',
-            'text' => $this->faqAnswer('field_589de18fca4e0')
-          )
-        ),
-        array(
-          '@type' => 'Question',
-          'name' => "How do I Apply to $this->program_name?",
-          'acceptedAnswer' => array(
-            '@type' => 'Answer',
-            'text' => join('', [$this->faqAnswer('field_58912c1a8a850'),
-                                $this->faqAnswer('field_58912c1a8a885'),
-                                $this->faqAnswer('field_58912c1a8a900'),
-                                $this->faqAnswer('field_58912c1a8a8cb')])
-          )
+      array(
+        '@type' => 'Question',
+        'name' => "How does $this->program_name work?",
+        'acceptedAnswer' => array(
+          '@type' => 'Answer',
+          'text' => $this->faqAnswer('field_58912c1a8a81b')
         )
+      ),
+      array(
+        '@type' => 'Question',
+        'name' => "Am I eligible for $this->program_name?",
+        'acceptedAnswer' => array(
+          '@type' => 'Answer',
+          'text' => $this->faqAnswer('field_58912c1a8a82d')
+        )
+      ),
+      array(
+        '@type' => 'Question',
+        'name' => "What do I need in order to apply to $this->program_name?",
+        'acceptedAnswer' => array(
+          '@type' => 'Answer',
+          'text' => $this->faqAnswer('field_589de18fca4e0')
+        )
+      ),
+      array(
+        '@type' => 'Question',
+        'name' => "How do I Apply to $this->program_name?",
+        'acceptedAnswer' => array(
+          '@type' => 'Answer',
+          'text' => join('', [$this->faqAnswer('field_58912c1a8a850'),
+            $this->faqAnswer('field_58912c1a8a885'),
+            $this->faqAnswer('field_58912c1a8a900'),
+            $this->faqAnswer('field_58912c1a8a8cb')
+          ])
+        )
+      )
     ];
 
     return $questions;
@@ -388,11 +389,11 @@ class Programs extends Timber\Post {
     foreach ($sections as &$section) {
       if ($section['value'] === 'how-it-works') {
         array_push($schema_faq, $questions[0]);
-      } elseif($section['value'] === 'determine-your-eligibility') {
+      } elseif ($section['value'] === 'determine-your-eligibility') {
         array_push($schema_faq, $questions[1]);
-      } elseif($section['value'] === 'what-you-need-to-include') {
+      } elseif ($section['value'] === 'what-you-need-to-include') {
         array_push($schema_faq, $questions[2]);
-      } elseif($section['value'] === 'how-to-apply') {
+      } elseif ($section['value'] === 'how-to-apply') {
         array_push($schema_faq, $questions[3]);
       }
     }
