@@ -184,10 +184,11 @@ Script        | Description
 --------------|-
 `development` | Rebuilds the autoloader including development dependencies.
 `production`  | Rebuilds the autoloader omitting development dependencies.
-`predeploy`   | Rebuilds the autoloader using the `production` script then runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) using the `lint` script (described below).
-`lint`        | Runs PHP Code Sniffer which will display violations of the standard defined in the [phpcs.xml](https://github.com/cityofnewyork/access-nyc/blob/main/phpcs.xml) file.
-`fix`         | Runs PHP Code Sniffer in fix mode which will attempt to fix violations automatically. It is not necessarily recommended to run this on large scripts because if it fails it will leave a script partially formatted and malformed.
-`version`     | Regenerates the **composer.lock** file and rebuilds the autoloader for production.
+`predeploy`   | Rebuilds the autoloader using the `production` script then runs the `lint` and `wpscan` scripts (described below).
+`lint`        | Runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) which will display violations of the standard defined in the [phpcs.xml](https://github.com/cityofnewyork/access-nyc/blob/main/phpcs.xml) file.
+`fix`         | Runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) in fix mode which will attempt to fix violations automatically. It is not necessarily recommended to run this on large scripts because if it fails it will leave a script partially formatted and malformed.
+`wpscan`      | Checks installed plugins against the [WordPress Vunerability Database](https://wpvulndb.com/).
+`version`     | Regenerates the **composer.lock** file and autoloader (used if the Composer.json package version is updated).
 `deps`        | This is a shorthand for `composer show --tree` for illustrating package dependencies.
 
 By default **/vendor** packages are not tracked by the repository. If a composer package is required by production it needs to be included in the repository so it can be deployed to WP Engine. The [**.gitignore**](https://github.com/cityofnewyork/access-nyc/blob/main/.gitignore) manually includes tracked repositories using the `!` prefix. This does not apply to WordPress plugins.
