@@ -21,7 +21,6 @@ if (class_exists('Whoops\Run')) {
  * @param   String   $str     The string to log.
  * @param   Boolean  $return  Wether to make it human readable.
  */
-// phpcs:disable
 function debug($str, $return = true) {
   $backtrace = debug_backtrace()[0];
 
@@ -30,7 +29,6 @@ function debug($str, $return = true) {
     $backtrace['file'] . ':' . $backtrace['line']
   );
 }
-// phpcs:enable
 
 /**
  * Include the plugins module
@@ -88,6 +86,7 @@ add_action('init_stat_collector', function($instance) {
 
 /**
  * Allow local development requests
+ * @author NYC Opportunity
  */
 
 header('Access-Control-Allow-Origin: *');
