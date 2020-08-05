@@ -7,7 +7,7 @@
             "label": "Alert",
             "name": "alert",
             "type": "relationship",
-            "instructions": "",
+            "instructions": "Select an alert to show at the top of the page.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,6 +16,7 @@
                 "id": ""
             },
             "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
             "post_type": [
                 "alert"
             ],
@@ -26,8 +27,7 @@
             "elements": "",
             "min": "",
             "max": "",
-            "return_format": "object",
-            "wpml_cf_preferences": 0
+            "return_format": "object"
         }
     ],
     "location": [
@@ -56,10 +56,10 @@
     "menu_order": 1,
     "position": "normal",
     "style": "default",
-    "label_placement": "top",
+    "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1596566624
+    "modified": 1596637788
 }
