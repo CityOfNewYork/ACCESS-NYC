@@ -90,6 +90,32 @@
             "append": ""
         },
         {
+            "key": "field_5f21c1d39f170",
+            "label": "Type of Link",
+            "name": "type_of_link",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "Internal": "Internal",
+                "External": "External"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_587806aacc2d5",
             "label": "Link Text",
             "name": "link_text",
@@ -115,14 +141,64 @@
             "type": "url",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f21c1d39f170",
+                        "operator": "==",
+                        "value": "External"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_5f21c38d9f171",
+            "label": "Link Content",
+            "name": "link_to_content",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f21c1d39f170",
+                        "operator": "==",
+                        "value": "Internal"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "post_type": [
+                "post",
+                "page",
+                "programs",
+                "location"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "object"
         },
         {
             "key": "field_587806aacc57d",
@@ -195,5 +271,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1587491698
+    "modified": 1596124702
 }

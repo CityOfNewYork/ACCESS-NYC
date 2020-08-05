@@ -71,7 +71,11 @@
                   {% endif %}
 
                   <p class='c-card__subtitle color__alt'>
-                    {{ __('Updated', 'accessnyctheme') }} {{ tout.post_modified|date('l, F jS, g:ia') }}
+                    {% if tout.link_to_content %}
+                      {{ __('Updated', 'accessnyctheme') }} {{ tout.get_field('link_to_content')[0].post_modified|date('l, F jS, g:ia') }}
+                    {% else %}
+                      {{ __('Updated', 'accessnyctheme') }} {{ tout.post_modified|date('l, F jS, g:ia') }}
+                    {% endif %}
                   </p>
 
                   {% if tout.link_text %}
