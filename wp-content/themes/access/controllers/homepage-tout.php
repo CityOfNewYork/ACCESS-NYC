@@ -27,11 +27,15 @@ class HomepageTout extends Timber\Post {
     }
 
     $this->status = $this->getStatus();
+
     /**
-     * Structure Data itemtype
+     * Structured Data
      */
+
     $this->item_scope = $this->getItemScope();
 
+    // Use the post permalink for the url if post relationship is present
+    $this->link_url = ($this->link_to_content) ? get_permalink($this->link_to_content[0]) : $this->link_url;
 
     return $this;
   }

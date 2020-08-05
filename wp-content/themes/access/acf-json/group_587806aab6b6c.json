@@ -3,6 +3,24 @@
     "title": "Homepage Tout Fields",
     "fields": [
         {
+            "key": "field_5f2abaedccefe",
+            "label": "Status",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
+        },
+        {
             "key": "field_5e9f1a9c257da",
             "label": "Tout Status",
             "name": "tout_status",
@@ -71,11 +89,11 @@
             "first_day": 0
         },
         {
-            "key": "field_587806aacc17e",
-            "label": "Tout Title",
-            "name": "tout_title",
-            "type": "text",
-            "instructions": "This is the title visible to the user.",
+            "key": "field_5f2abb70cceff",
+            "label": "Info",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -83,11 +101,70 @@
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 0,
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_587806aacc17e",
+            "label": "Tout Title",
+            "name": "tout_title",
+            "type": "text",
+            "instructions": "This is the title and link text visible to the user.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
             "default_value": "",
-            "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_587806aacc2d5",
+            "label": "Tout Description",
+            "name": "link_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5f2abad1ccefd",
+            "label": "Link",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
         },
         {
             "key": "field_5f21c1d39f170",
@@ -105,34 +182,15 @@
             "show_in_rest": 0,
             "wpml_cf_preferences": 0,
             "choices": {
-                "Internal": "Internal",
-                "External": "External"
+                "External": "External",
+                "Internal": "Internal"
             },
             "allow_null": 0,
             "other_choice": 0,
-            "default_value": "",
+            "default_value": "External",
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
-        },
-        {
-            "key": "field_587806aacc2d5",
-            "label": "Link Text",
-            "name": "link_text",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
         },
         {
             "key": "field_587806aacc42a",
@@ -184,7 +242,6 @@
             "show_in_rest": 0,
             "wpml_cf_preferences": 0,
             "post_type": [
-                "post",
                 "page",
                 "programs",
                 "location"
@@ -197,7 +254,7 @@
             ],
             "elements": "",
             "min": "",
-            "max": "",
+            "max": 1,
             "return_format": "object"
         },
         {
@@ -251,7 +308,7 @@
     "menu_order": 0,
     "position": "acf_after_title",
     "style": "default",
-    "label_placement": "top",
+    "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": [
         "permalink",
@@ -271,5 +328,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1596124702
+    "modified": 1596637405
 }
