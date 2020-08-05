@@ -372,8 +372,6 @@ class Programs extends Timber\Post {
   private function faqAnswer($field) {
     $answer = $this->get_field($field);
 
-    $answer = strip_tags($answer);
-
     return $answer;
   }
 
