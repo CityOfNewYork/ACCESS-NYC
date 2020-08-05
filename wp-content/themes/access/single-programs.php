@@ -65,6 +65,7 @@ if ($context['alert_sitewide_schema']) {
   array_push($context['schema'], $context['alert_sitewide_schema']);
 }
 
+$context['schema'] = mb_convert_encoding($context['schema'], 'UTF-8', 'auto');
 $context['schema'] = json_encode($context['schema']);
 
 /**
