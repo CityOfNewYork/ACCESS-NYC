@@ -3,23 +3,6 @@
     "title": "Program Fields",
     "fields": [
         {
-            "key": "field_5f29a7dc4fd65",
-            "label": "Status",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
             "key": "field_5e99f72991d3c",
             "label": "Program Status",
             "name": "program_status",
@@ -54,7 +37,7 @@
                 "id": ""
             },
             "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "choices": {
                 "info": "Info (blue)",
                 "warning": "Warning (yellow)",
@@ -83,28 +66,10 @@
                 "id": ""
             },
             "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "display_format": "F j, Y g:i a",
             "return_format": "Y-m-d H:i:s",
             "first_day": 0
-        },
-        {
-            "key": "field_5f29a7b14fd64",
-            "label": "Info",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "placement": "top",
-            "endpoint": 0
         },
         {
             "key": "field_58912c1a8a9f0",
@@ -276,24 +241,6 @@
             "maxlength": ""
         },
         {
-            "key": "field_5f29a7834fd63",
-            "label": "Heads Up",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
             "key": "field_58912c1a8a81b",
             "label": "Heads Up",
             "name": "heads_up",
@@ -353,24 +300,6 @@
             ]
         },
         {
-            "key": "field_5f29a72f4fd62",
-            "label": "Eligibility",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 0
-        },
-        {
             "key": "field_589d49b8ced1e",
             "label": "Display Screen for Eligibility Box",
             "name": "display_screen_for_eligibility_box",
@@ -407,24 +336,6 @@
             "media_upload": 0,
             "default_value": "",
             "delay": 0
-        },
-        {
-            "key": "field_5f29a6f84fd61",
-            "label": "Include",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "placement": "top",
-            "endpoint": 0
         },
         {
             "key": "field_589de18fca4e0",
@@ -503,24 +414,6 @@
                     "delay": 0
                 }
             ]
-        },
-        {
-            "key": "field_5f29a6c74fd60",
-            "label": "Apply",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "placement": "top",
-            "endpoint": 0
         },
         {
             "key": "field_58912c1a8a83e",
@@ -839,24 +732,6 @@
             "delay": 0
         },
         {
-            "key": "field_5f29a5ef3efaf",
-            "label": "Help",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
             "key": "field_58912c1a8a971",
             "label": "Get Help Summary",
             "name": "get_help_summary",
@@ -971,24 +846,6 @@
             "delay": 0
         },
         {
-            "key": "field_5f29a6583efb0",
-            "label": "Schema",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
             "key": "field_5eb2fb4b86d6c",
             "label": "Structured Data URL",
             "name": "structured_data_url",
@@ -1002,12 +859,39 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5e8633e3743f9",
+            "label": "Alert",
+            "name": "alert",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "post_type": [
+                "alert"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "object"
         }
     ],
     "location": [
@@ -1030,5 +914,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1596565768
+    "modified": 1597427465
 }
