@@ -274,7 +274,7 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "post_type": [
                 "programs"
             ],
@@ -433,5 +433,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1587492213
+    "modified": 1597678177
 }
