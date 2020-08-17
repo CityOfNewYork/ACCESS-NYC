@@ -54,7 +54,7 @@
                 "id": ""
             },
             "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "choices": {
                 "info": "Info (blue)",
                 "warning": "Warning (yellow)",
@@ -83,7 +83,7 @@
                 "id": ""
             },
             "show_in_rest": 1,
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "display_format": "F j, Y g:i a",
             "return_format": "Y-m-d H:i:s",
             "first_day": 0
@@ -1002,7 +1002,7 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -1030,5 +1030,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1596565768
+    "modified": 1597678128
 }
