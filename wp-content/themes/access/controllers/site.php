@@ -242,25 +242,15 @@ class Site extends TimberSite {
       'publisher' => array(
         '@id' => get_site_url() . '/#organization'
       ),
-      'potentialAction' => [
-        array(
-          '@type' => 'FindAction',
-          'target' => get_site_url() . '/eligibility'
-        ),
-        array(
-          '@type' => 'FindAction',
-          'target' => get_site_url() . '/programs'
-        ),
-        array(
-          '@type' => 'FindAction',
-          'target' => get_site_url() . '/locations'
-        ),
-        array(
-          '@type' => 'SearchAction',
-          'target' => get_site_url() . '/?s={search_term_string}',
-          'query-input' => 'required name=search_term_string'
-        )
-      ],
+      // TODO: Sitelinks search box
+      // @url https://developers.google.com/search/docs/data-types/sitelinks-searchbox
+      // 'potentialAction' => [
+      //   array(
+      //     '@type' => 'SearchAction',
+      //     'target' => get_site_url() . '/?s={search_term_string}',
+      //     'query-input' => 'required name=search_term_string'
+      //   )
+      // ],
       'inLanguage' => $this->getLanguageCode()
     );
   }
@@ -279,7 +269,11 @@ class Site extends TimberSite {
       'name' => $alert->post_title,
       'datePosted' => $alert->post_modified,
       'text' => $alert->alert_content,
-      'category' => 'https://www.wikidata.org/wiki/Q81068910'
+      'category' => 'https://www.wikidata.org/wiki/Q81068910',
+      'spatialCoverage' => array(
+        'type' => 'City',
+        'name' => 'New York'
+      )
     ) : false;
   }
 }
