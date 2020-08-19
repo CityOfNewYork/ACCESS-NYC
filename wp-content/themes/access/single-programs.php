@@ -11,6 +11,7 @@ require_once ACCESS\controller('alert');
 
 /**
  * Enqueue
+ * @author NYC Opportunity
  */
 
 // Main
@@ -35,7 +36,10 @@ $program = new Controller\Programs();
 
 $context = Timber::get_context();
 
-// Gets the url parameter on the page for navigating each section.
+/**
+ * Gets the url parameter on the page for navigating each section
+ * @author Blue State Digital
+ */
 if (isset($_GET['step'])) {
   $context['step'] = urlencode(
     validate_params('step', urldecode(htmlspecialchars($_GET['step'])))
@@ -47,23 +51,13 @@ if (isset($_GET['step'])) {
 $context['post'] = $program;
 
 /**
- * Schema
+ * Add to schema
+ * @author NYC Opportunity
  */
-$context['schema'] = $program->getSchema();
 
-if ($program->getItemScope() === 'SpecialAnnouncement') {
-  $special_announcement = $program->getSpecialAnnouncementSchema();
-  array_push($context['schema'], $special_announcement);
-}
-
-if ($program->getFaqSchema()) {
-  $faq = $program->getFaqSchema();
-  array_push($context['schema'], $faq);
-}
-
-if ($context['alert_sitewide_schema']) {
-  array_push($context['schema'], $context['alert_sitewide_schema']);
-}
+$context['schema'][] = $program->getSchema();
+$context['schema'][] = $program->getSpecialAnnouncementSchema();
+$context['schema'][] = $program->getFaqSchema();
 
 $context['schema'] = mb_convert_encoding($context['schema'], 'UTF-8', 'auto');
 $context['schema'] = json_encode($context['schema']);
