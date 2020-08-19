@@ -43,6 +43,7 @@ class Location extends Timber\Post {
 
   /**
    * Returns the phone number for the location shown.
+   *
    * @return  Array  Phone number and extension.
    */
   public function getPhone() {
@@ -52,6 +53,7 @@ class Location extends Timber\Post {
 
   /**
    * Returns the URL to a map of the location.
+   *
    * @return  String  URL of the map location.
    */
   public function locationMapURL() {
@@ -62,6 +64,7 @@ class Location extends Timber\Post {
 
   /**
    * Returns the type of the location.
+   *
    * @return  String  type of location.
    */
   public function locationType() {
@@ -95,7 +98,8 @@ class Location extends Timber\Post {
   /**
    * Fetches nearby stops using transient stops storied in the database
    * via the NYCO transients plugin.
-   * @return [array] Collection of nearby stops.
+   *
+   * @return  Array  Collection of nearby stops.
    */
   public function nearbyStops() {
     if (!class_exists('NYCO\Transients')) {
@@ -120,9 +124,11 @@ class Location extends Timber\Post {
    * This compares the latitude and longitude with the Subway Stops data, sorts
    * the data by distance from closest to farthest, and returns the stop and
    * distances of the stations.
-   * @param  {object} el    The DOM Component with the data attr options
-   * @param  {object} stops All of the stops data to compare to
-   * @return {object}       A collection of the closest stops with distances
+   *
+   * @param   Number  $lat  Latitude of location
+   * @param   Number  $lon  Longitude of location
+   *
+   * @return  Array         A collection of the closest stops with distances
    */
   private function nearbyStopsLocate($lat, $lon) {
     $geo = [];
@@ -164,11 +170,13 @@ class Location extends Timber\Post {
   /**
    * Returns distance in miles comparing the latitude and longitude of two
    * points using decimal degrees.
-   * @param  {float} lat1 Latitude of point 1 (in decimal degrees)
-   * @param  {float} lon1 Longitude of point 1 (in decimal degrees)
-   * @param  {float} lat2 Latitude of point 2 (in decimal degrees)
-   * @param  {float} lon2 Longitude of point 2 (in decimal degrees)
-   * @return {float}      The distance in miles between each coordinate.
+   *
+   * @param   Float  lat1  Latitude of point 1 (in decimal degrees)
+   * @param   Float  lon1  Longitude of point 1 (in decimal degrees)
+   * @param   Float  lat2  Latitude of point 2 (in decimal degrees)
+   * @param   Float  lon2  Longitude of point 2 (in decimal degrees)
+   *
+   * @return  Float        The distance in miles between each coordinate.
    */
   private function equirectangular($lat1, $lon1, $lat2, $lon2) {
     $alpha = abs($lon2) - abs($lon1);
@@ -182,8 +190,10 @@ class Location extends Timber\Post {
 
   /**
    * Assigns trunk slugs to the data using the TRUNKS dictionary.
-   * @param  {object} locations Object of closest locations
-   * @return {object}           Same object with colors assigned to each loc
+   *
+   * @param   Array  locations  Object of closest locations
+   *
+   * @return  Array             Same object with colors assigned to each loc
    */
   private function nearbyStopsColors($locations) {
     $trunk = 'shuttles';
@@ -210,6 +220,33 @@ class Location extends Timber\Post {
     }
 
     return $locations;
+  }
+
+  /**
+   * Get structured data for this location
+   *
+   * @return  Array  Structured data object
+   */
+  public function getSchema() {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => $this->locationType(),
+      'name' => $this->title,
+      'hasMap' => $this->locationMapURL(),
+      'description' => $this->getHelp(),
+      'address' => array(
+        '@type' => 'PostalAddress',
+        'streetAddress' => $this->address_street,
+        'addressLocality' => $this->city,
+        'postalCode' => $this->zip
+      ),
+      'telephone' => $this->getPhone(),
+      'sameAs' => $this->website,
+      'spatialCoverage' => array(
+        'type' => 'City',
+        'name' => 'New York'
+      )
+    );
   }
 
   /**

@@ -2,7 +2,6 @@
 
 /**
  * Template name: Legacy Page
- *
  * @author NYC Opportunity
  */
 
@@ -11,6 +10,7 @@ require_once ACCESS\controller('page');
 
 /**
  * Enqueue
+ * @author NYC Opportunity
  */
 
 // Main
@@ -42,6 +42,7 @@ $context['post'] = $page;
 
 /**
  * Set Alerts
+ * @author NYC Opportunity
  */
 
 if (get_field('alert')) {
@@ -64,16 +65,17 @@ $context['alerts'] = array_map(function($post) {
 
 /**
  * Show Google Translate
+ * @author NYC Opportunity
  */
 
 $context['google_translate_element'] = true;
 
 /**
- * Set up schema
+ * Add to Schema
+ * @author NYC Opportunity
  */
 
 $context['schema'][] = $page->getSchema();
-$context['schema'][] = $context['alert_sitewide_schema'];
 $context['schema'] = json_encode(array_filter($context['schema']));
 
 /**

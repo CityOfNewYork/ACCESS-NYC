@@ -9,6 +9,7 @@ require_once ACCESS\controller('homepage-tout');
 
 /**
  * Enqueue
+ * @author NYC Opportunity
  */
 
 // Main
@@ -44,10 +45,9 @@ if (is_home()) {
     'post_type' => 'homepage'
   ));
 
-  $context['homepage_touts'] = Timber::get_posts(array(
-    'post_type' => 'homepage_tout',
-    'numberposts' => 4
-  ));
+  /**
+   * Touts
+   */
 
   $context['homepage_touts'] = array_map(function($post) {
     return new Controller\HomepageTout($post);
@@ -56,87 +56,43 @@ if (is_home()) {
     'numberposts' => 4
   )));
 
+  /**
+   * Get the latest date of touts
+   * @author NYC Opportunity
+   */
+
   $context['homepage_touts_latest_update'] = max(array_map(function($post) {
     return $post->post_modified;
   }, $context['homepage_touts']));
 
+  // Alert
   $context['homepage_alert'] = Timber::get_post(array(
     'post_type' => 'alert'
   ));
 
+  // Featured Programs
   $context['featured_programs'] = array_map(function($id) {
     return new Controller\Programs($id);
   }, $context['post']->custom['featured_programs']);
-}
 
-/**
- * Setup schema for homepage touts
- */
+  /**
+   * Add to Schema
+   * @author NYC Opportunity
+   */
 
-$context['schema'] = array_map(function($tout) {
-  if ($tout->item_scope) {
-    return array(
-      '@context' => 'https://schema.org',
-      '@type' => $tout->item_scope,
-      'name' => $tout->tout_title,
-      'newsUpdatesAndGuidelines' => $tout->link_url,
-      'datePosted' => $tout->post_modified,
-      'expires' => $tout->custom['tout_status_clear_date'],
-      'text' => $tout->link_text,
-      'category' => 'https://www.wikidata.org/wiki/Q81068910',
-      'spatialCoverage' => [
-        'type' => 'City',
-        'name' => 'New York'
-      ]
-    );
+  foreach ($context['homepage_touts'] as $t) {
+    if ($t->item_scope) $context['schema'][] = $t->getSchema();
   }
-}, $context['homepage_touts']);
 
-$programSchema = array_values(array_filter(array_map(function($program) {
-  if ($program->getItemScope() === 'SpecialAnnouncement') {
-    return array(
-      '@context' => 'https://schema.org',
-      '@type' => 'SpecialAnnouncement',
-      'name' => $program->program_name,
-      'category' => 'https://www.wikidata.org/wiki/Q81068910',
-      'datePosted' => $program->post_modified,
-      'expires' => ($program->custom['program_status_clear_date'] ?
-                      $program->custom['program_status_clear_date'] : ''),
-      'governmentBenefitsInfo' => array(
-        '@type' => 'GovernmentService',
-        'name' => $program->program_name,
-        'url' => $program->structured_data_url,
-        'provider' => array(
-          '@type' => 'GovernmentOrganization',
-          'name' => $program->government_agency
-        ),
-        'audience' => array(
-          '@type' => 'Audience',
-          'name' => $program->audience
-        ),
-        'serviceType' => $program->category['name']
-      ),
-      'serviceOperator' => array(
-        '@type' => 'GovernmentOrganization',
-        'name' => $program->government_agency
-      ),
-      'spatialCoverage' => array(
-        'type' => 'City',
-        'name' => 'New York'
-      )
-    );
+  foreach ($context['featured_programs'] as $p) {
+    $context['schema'][] = $p->getSchemaTout();
+    $context['schema'][] = $p->getSpecialAnnouncementSchema();
   }
-}, $context['featured_programs'])));
 
-$context['schema'] = array_merge($programSchema, $context['schema']);
-
-$context['schema'] = array_values(array_filter($context['schema']));
-
-if ($context['alert_sitewide_schema']) {
-  array_push($context['schema'], $context['alert_sitewide_schema']);
+  // Flatten, filter null values and encode for LD+JSON spec
+  $context['schema'] = array_values(array_filter($context['schema']));
+  $context['schema'] = json_encode($context['schema']);
 }
-
-$context['schema'] = json_encode($context['schema']);
 
 /**
  * Render the view
