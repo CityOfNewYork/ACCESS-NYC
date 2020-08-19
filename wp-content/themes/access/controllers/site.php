@@ -242,7 +242,7 @@ class Site extends TimberSite {
       'publisher' => array(
         '@id' => get_site_url() . '/#organization'
       ),
-      // TODO: Sitelinks search box
+      // TODO: [AC-2996] Rich results Sitelinks Search Box
       // @url https://developers.google.com/search/docs/data-types/sitelinks-searchbox
       // 'potentialAction' => [
       //   array(
