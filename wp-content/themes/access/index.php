@@ -81,7 +81,9 @@ if (is_home()) {
    */
 
   foreach ($context['homepage_touts'] as $t) {
-    if ($t->item_scope) $context['schema'][] = $t->getSchema();
+    if ($t->item_scope) {
+      $context['schema'][] = $t->getSchema();
+    }
   }
 
   foreach ($context['featured_programs'] as $p) {
