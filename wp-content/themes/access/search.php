@@ -72,6 +72,7 @@ if (isset($_GET['lang'])) {
     } else {
       $urlBase = '';
     }
+
     wp_redirect($urlBase . '/?' . $newQuery);
   }
 }
@@ -83,8 +84,6 @@ if (isset($_GET['program_cat'])) {
 }
 
 $context['query'] = get_search_query();
-
-$context['title'] = 'Search results for ' . get_search_query();
 
 $context['posts'] = array_map(function($post) {
   return new Controller\Programs($post);
