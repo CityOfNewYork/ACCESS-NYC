@@ -273,33 +273,6 @@
             },
             "default_value": "",
             "placeholder": ""
-        },
-        {
-            "key": "field_5e84bc8092fa6",
-            "label": "Alert",
-            "name": "alert",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "post_type": [
-                "alert"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "object"
         }
     ],
     "location": [
@@ -332,5 +305,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1585944678
+    "modified": 1596566543
 }

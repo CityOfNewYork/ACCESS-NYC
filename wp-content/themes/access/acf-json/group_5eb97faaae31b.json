@@ -119,37 +119,27 @@
                 "param": "post_type",
                 "operator": "!=",
                 "value": "homepage_tout"
-            }
-        ],
-        [
+            },
             {
                 "param": "post_type",
                 "operator": "!=",
                 "value": "program_search_links"
-            }
-        ],
-        [
+            },
             {
                 "param": "post_type",
                 "operator": "!=",
                 "value": "alert"
-            }
-        ],
-        [
+            },
             {
                 "param": "post_type",
                 "operator": "!=",
                 "value": "smnyc-email"
-            }
-        ],
-        [
+            },
             {
                 "param": "post_type",
                 "operator": "!=",
                 "value": "smnyc-sms"
-            }
-        ],
-        [
+            },
             {
                 "param": "post_type",
                 "operator": "!=",
@@ -160,10 +150,10 @@
     "menu_order": 1,
     "position": "normal",
     "style": "default",
-    "label_placement": "top",
+    "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591903691
+    "modified": 1596637569
 }

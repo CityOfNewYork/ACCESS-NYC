@@ -4,8 +4,8 @@
   </header>
 
   {% if post.plain_language_eligibility | length %}
-    <div itemprop="audience" itemtype="http://schema.org/Audience" itemscope>
-      <div itemprop="name" class="o-content mb-4">
+    <div>
+      <div class="o-content mb-4">
         {{ post.get_field('field_58912c1a8a82d')|add_anyc_checklist|add_anyc_table_numeric }} {# plain_language_eligibility #}
       </div>
     </div>

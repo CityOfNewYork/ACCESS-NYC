@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.21.1",
+  "version": "3.23.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "homepage": "https://access.nyc.gov",
   "authors": [
@@ -65,10 +65,10 @@
       "composer dump-autoload --no-dev --optimize"
     ],
     "predeploy": [
-      "composer run development",
-      "composer run lint",
-      "composer run wpscan",
-      "composer run production"
+      "@development",
+      "@lint",
+      "@wpscan",
+      "@production"
     ],
     "lint": [
       "vendor/bin/phpcs --standard=phpcs.xml"
@@ -81,7 +81,7 @@
     ],
     "version": [
       "composer update nothing",
-      "composer run production"
+      "@production"
     ],
     "deps": [
       "composer show --tree"

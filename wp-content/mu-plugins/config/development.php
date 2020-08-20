@@ -88,6 +88,7 @@ add_action('init_stat_collector', function($instance) {
 
 /**
  * Allow local development requests
+ * @author NYC Opportunity
  */
 
 header('Access-Control-Allow-Origin: *');

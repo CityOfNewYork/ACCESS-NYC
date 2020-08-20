@@ -26,22 +26,17 @@ class Site extends TimberSite {
 
   /**
    * Make variables available globally to twig templates
-   * @param   object  $context  The timber site context variable
-   * @return  object            The modified timber site context variable
+   *
+   * @param   Object  $context  The timber site context variable
+   *
+   * @return  Object            The modified timber site context variable
    */
   public function addToContext($context) {
-    include_once ABSPATH . 'wp-admin/includes/plugin.php';
+    $lang = $this->getLanguageCode();
 
-    /**
-     * The current language code using the WPML constant.
-     * This will only change if WPML is activated.
-     */
-
-    $wpml = 'sitepress-multilingual-cms/sitepress.php';
-    $lang = is_plugin_active($wpml) ? ICL_LANGUAGE_CODE : 'en';
     $direction = ($lang === 'ar' || $lang === 'ur') ? 'rtl' : 'ltr';
 
-    $context['language_code'] = is_plugin_active($wpml) ? ICL_LANGUAGE_CODE : 'en';
+    $context['language_code'] = $lang;
 
     $context['direction'] = $direction;
 
@@ -97,17 +92,6 @@ class Site extends TimberSite {
     /** Implement schema for sitewide alert */
     $alert_sitewide = $context['alert_sitewide'];
 
-    if ($alert_sitewide->item_scope === 'SpecialAnnouncement') {
-      $context['alert_sitewide_schema'] = array(
-        '@context' => 'https://schema.org',
-        '@type' => 'SpecialAnnouncement',
-        'name' => $alert_sitewide->post_title,
-        'datePosted' => $alert_sitewide->post_modified,
-        'text' => $alert_sitewide->alert_content,
-        'category' => 'https://www.wikidata.org/wiki/Q81068910'
-      );
-    }
-
     /** Determine if page is in print view */
     $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
 
@@ -117,7 +101,28 @@ class Site extends TimberSite {
     /** Create nonce for allowed resources */
     $context['csp_script_nonce'] = (defined('CSP_SCRIPT_NONCE')) ? CSP_SCRIPT_NONCE : false;
 
+    /** Set Schema Base */
+    $context['schema'] = array_filter(array(
+      $this->getOrganizationSchema(),
+      $this->getWebsiteSchema(),
+      $this->getAlertSchema($alert_sitewide)
+    ));
+
     return $context;
+  }
+
+  /**
+   * The current language code using the WPML constant. This will only change
+   * if WPML is activated.
+   *
+   * @return  String  The current language code
+   */
+  public function getLanguageCode() {
+    include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+    $wpml = 'sitepress-multilingual-cms/sitepress.php';
+
+    return is_plugin_active($wpml) ? ICL_LANGUAGE_CODE : 'en';
   }
 
   /**
@@ -165,8 +170,8 @@ class Site extends TimberSite {
 
   /**
    * Get the default meta of the page if it exists.
-
-   * @return  string         The view description
+   *
+   * @return  String  The view description
    */
   public function getPageMetaDescription() {
     /**
@@ -196,5 +201,79 @@ class Site extends TimberSite {
     }
 
     return '';
+  }
+
+  /**
+   * Get the organization schema
+   *
+   * @return  Array  Schema object
+   */
+  public function getOrganizationSchema() {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => 'Organization',
+      '@id' => get_site_url() . '/#organization',
+      'name' => get_bloginfo('title'),
+      'url' => get_site_url(),
+      'logo' => array(
+        '@type' => 'ImageObject',
+        '@id' => get_site_url() . '/#logo',
+        'url' => get_stylesheet_directory_uri() . '/assets/img/apple-icon-precomposed.png',
+        'width' => 192,
+        'height' => 192,
+        'caption' => get_bloginfo('title')
+      ),
+    );
+  }
+
+  /**
+   * Get the Website Schema
+   *
+   * @return  Array  Schema object
+   */
+  public function getWebsiteSchema() {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => 'WebSite',
+      '@id' => get_site_url() . '/#website',
+      'url' => get_site_url(),
+      'name' => get_bloginfo('title'),
+      'description' => get_bloginfo('description'),
+      'publisher' => array(
+        '@id' => get_site_url() . '/#organization'
+      ),
+      // TODO: [AC-2996] Rich results Sitelinks Search Box
+      // @url https://developers.google.com/search/docs/data-types/sitelinks-searchbox
+      // 'potentialAction' => [
+      //   array(
+      //     '@type' => 'SearchAction',
+      //     'target' => get_site_url() . '/?s={search_term_string}',
+      //     'query-input' => 'required name=search_term_string'
+      //   )
+      // ],
+      'inLanguage' => $this->getLanguageCode()
+    );
+  }
+
+  /**
+   * Get the sitewide alert schema
+   *
+   * @param   Object         $alert  The alert object
+   *
+   * @return  Array/Boolean          If the alert is a special announcement
+   */
+  public function getAlertSchema($alert) {
+    return ($alert->item_scope === 'SpecialAnnouncement') ? array(
+      '@context' => 'https://schema.org',
+      '@type' => 'SpecialAnnouncement',
+      'name' => $alert->post_title,
+      'datePosted' => $alert->post_modified,
+      'text' => $alert->alert_content,
+      'category' => 'https://www.wikidata.org/wiki/Q81068910',
+      'spatialCoverage' => array(
+        'type' => 'City',
+        'name' => 'New York'
+      )
+    ) : false;
   }
 }

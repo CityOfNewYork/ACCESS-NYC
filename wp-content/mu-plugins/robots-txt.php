@@ -46,6 +46,7 @@ add_filter('robots_txt', function($output, $public) {
     $output .= "\nDisallow: /README.md";
     $output .= "\nAllow: /wp-admin/admin-ajax.php";
     $output .= "\nAllow: /wp-content/uploads/";
+    $output .= "\nAllow: /wp-includes/css/dist/block-library/";
     $output .= "\n";
   }
 

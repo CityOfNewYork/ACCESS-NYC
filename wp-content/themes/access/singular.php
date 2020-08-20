@@ -73,7 +73,6 @@ $context['google_translate_element'] = true;
  */
 
 $context['schema'][] = $page->getSchema();
-$context['schema'][] = $context['alert_sitewide_schema'];
 $context['schema'] = json_encode(array_filter($context['schema']));
 
 /**

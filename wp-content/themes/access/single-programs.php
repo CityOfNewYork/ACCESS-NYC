@@ -11,6 +11,7 @@ require_once ACCESS\controller('alert');
 
 /**
  * Enqueue
+ * @author NYC Opportunity
  */
 
 // Main
@@ -35,7 +36,10 @@ $program = new Controller\Programs();
 
 $context = Timber::get_context();
 
-// Gets the url parameter on the page for navigating each section.
+/**
+ * Gets the url parameter on the page for navigating each section
+ * @author Blue State Digital
+ */
 if (isset($_GET['step'])) {
   $context['step'] = urlencode(
     validate_params('step', urldecode(htmlspecialchars($_GET['step'])))
@@ -47,74 +51,15 @@ if (isset($_GET['step'])) {
 $context['post'] = $program;
 
 /**
- * Schema
+ * Add to schema
+ * @author NYC Opportunity
  */
 
-$context['schema'] = [
-  array(
-    '@context' => 'https://schema.org',
-    '@type' => 'GovernmentService',
-    'name' => $program->name,
-    'alternateName' => $program->plain_language_program_name,
-    'datePosted' => $program->post_modified,
-    'url' => $program->get_permalink,
-    'serviceType' => $program->category['name'],
-    'serviceOperator' => array(
-      '@type' => 'GovernmentOrganization',
-      'name' => $program->government_agency
-    ),
-    'availableChannel' => array(
-      '@type' => 'ServiceChannel',
-      'description' => $program->get_field(accordion)
-    ),
-    'spatialCoverage' => array(
-      'type' => 'City',
-      'name' => 'New York'
-    ),
-    'description' => $program->get_field('program_description'),
-    'disambiguatingDescription' => $program->disambiguatingDescription()
-  )
-];
+$context['schema'][] = $program->getSchema();
+$context['schema'][] = $program->getSpecialAnnouncementSchema();
+$context['schema'][] = $program->getFaqSchema();
 
-if ($program->getItemScope() === 'SpecialAnnouncement') {
-  $special_announcement = array(
-    '@context' => 'https://schema.org',
-    '@type' => 'SpecialAnnouncement',
-    'name' => $program->program_name,
-    'category' => 'https://www.wikidata.org/wiki/Q81068910',
-    'datePosted' => $program->post_modified,
-    'expires' => ($program->custom['program_status_clear_date'] ?
-                    $program->custom['program_status_clear_date'] : ''),
-    'governmentBenefitsInfo' => array(
-      '@type' => 'GovernmentService',
-      'name' => $program->program_name,
-      'url' => $program->structured_data_url,
-      'provider' => array(
-        '@type' => 'GovernmentOrganization',
-        'name' => $program->government_agency
-      ),
-      'audience' => array(
-        '@type' => 'Audience',
-        'name' => $program->audience
-      ),
-      'serviceType' => $program->category['name']
-    ),
-    'serviceOperator' => array(
-      '@type' => 'GovernmentOrganization',
-      'name' => $program->government_agency
-    ),
-    'spatialCoverage' => array(
-      'type' => 'City',
-      'name' => 'New York'
-    )
-  );
-  array_push($context['schema'], $special_announcement);
-}
-
-if ($context['alert_sitewide_schema']) {
-  array_push($context['schema'], $context['alert_sitewide_schema']);
-}
-
+$context['schema'] = mb_convert_encoding($context['schema'], 'UTF-8', 'auto');
 $context['schema'] = json_encode($context['schema']);
 
 /**

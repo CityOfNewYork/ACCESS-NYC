@@ -27,11 +27,13 @@ class HomepageTout extends Timber\Post {
     }
 
     $this->status = $this->getStatus();
-    /**
-     * Structure Data itemtype
-     */
-    $this->item_scope = $this->getItemScope();
 
+    /**
+     * Structured Data
+     */
+
+    // Use the post permalink for the url if post relationship is present
+    $this->link_url = ($this->link_to_content) ? get_permalink($this->link_to_content[0]) : $this->link_url;
 
     return $this;
   }
@@ -76,18 +78,25 @@ class HomepageTout extends Timber\Post {
   }
 
   /**
-   * Get the itemtype for structure data
+   * Get the special announcement schema if the tout
    *
-   * @return  String  The itemtype
+   * @return  Array/Boolean  Returns the schema object if covid-response else false
    */
-
-  public function getItemScope() {
-    $item_scope = false;
-
-    if ($this->custom['tout_status_type'] == 'covid-response') {
-      $item_scope = 'SpecialAnnouncement';
-    }
-
-    return $item_scope;
+  public function getSchema() {
+    return ($this->status_type === 'covid-response') ?
+      array(
+        '@context' => 'https://schema.org',
+        '@type' => 'SpecialAnnouncement',
+        'name' => $this->tout_title,
+        'newsUpdatesAndGuidelines' => $this->link_url,
+        'datePosted' => $this->post_modified,
+        'expires' => $this->custom['tout_status_clear_date'],
+        'text' => $this->link_text,
+        'category' => 'https://www.wikidata.org/wiki/Q81068910',
+        'spatialCoverage' => [
+          'type' => 'City',
+          'name' => 'New York'
+        ]
+      ) : false;
   }
 }

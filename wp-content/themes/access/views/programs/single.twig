@@ -75,7 +75,9 @@
             </svg>{{ __('Print the whole guide', 'accessnyc-program-detail') }}
           </a>
 
-          <button aria-controls="web-share-fallback" aria-expanded="false" class="c-share__link btn-link underline font-normal" data-js="web-share track" data-web-share='{{ post.web_share|json_encode }}' data-track-key="Web Share" data-track-data='[{"action": "web-share"}]'>
+          <button aria-controls="web-share-fallback" aria-expanded="false"
+            class="c-share__link btn-link underline font-normal"
+            data-js="web-share track" data-web-share='{{ post.web_share|json_encode|escape }}' data-track-key="Web Share" data-track-data='[{"action": "web-share"}]'>
             <svg class="c-share__icon icon-ui">
               <use xlink:href="#icon-ui-share-2"></use>
             </svg>{{ __('Share the guide', 'accessnyctheme') }}

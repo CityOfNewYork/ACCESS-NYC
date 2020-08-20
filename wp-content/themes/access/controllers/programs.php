@@ -37,6 +37,8 @@ class Programs extends Timber\Post {
 
     $this->status = $this->getStatus();
 
+    $this->status_type = $this->custom['program_status_type'];
+
     $this->icon = $this->getIcon();
 
     /**
@@ -59,14 +61,6 @@ class Programs extends Timber\Post {
         $web_share_text : strip_tags($this->custom['brief_excerpt']),
       'url' => wp_get_shortlink()
     );
-
-    /**
-     * Structure Data
-     */
-
-    $this->item_scope = $this->getItemScope();
-
-    $this->audience = $this->getAudience();
 
     return $this;
   }
@@ -137,7 +131,7 @@ class Programs extends Timber\Post {
   /**
    * Calculate and get the status of the Program
    *
-   * @return  Object/Null  Status. If cleared return null.
+   * @return  Object/Boolean  Status. If cleared return false.
    */
   public function getStatus() {
     $status = array(
@@ -175,24 +169,9 @@ class Programs extends Timber\Post {
   }
 
   /**
-   * Get the type of the schema.
-   *
-   * @return  String  The itemtype
-   */
-  public function getItemScope() {
-    if ($this->custom['program_status_type'] == 'covid-response') {
-      $item_scope = 'SpecialAnnouncement';
-    } else {
-      $item_scope = 'GovernmentService';
-    }
-
-    return $item_scope;
-  }
-
-  /**
    * Returns the disambiguating description for the schema.
    *
-   * @return String disambiguating description.
+   * @return  String  disambiguating description.
    */
   public function disambiguatingDescription() {
     $description = $this->get_field('field_58912c1a8a81b') |
@@ -203,7 +182,7 @@ class Programs extends Timber\Post {
   /**
    * Return the populations served names to use for Audience tag.
    *
-   * @return String list of names used for Audience name tag
+   * @return  String  list of names used for Audience name tag
    */
   public function getAudience() {
     $terms = array_filter($this->terms, function($term) {
@@ -221,6 +200,194 @@ class Programs extends Timber\Post {
     } else {
       return array_pop($names);
     }
+  }
+
+  /**
+   * Returns the base schema for the program
+   *
+   * @return  Array  Base program schema
+   */
+  public function getSchema() {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => 'GovernmentService',
+      'name' => $this->name,
+      'alternateName' => $this->plain_language_program_name,
+      'datePosted' => $this->post_modified,
+      'url' => $this->get_permalink,
+      'serviceType' => $this->category['name'],
+      'serviceOperator' => array(
+        '@type' => 'GovernmentOrganization',
+        'name' => $this->government_agency
+      ),
+      // TODO: [AC-2994] replace block with valid ServiceChannel using "How to apply" sections
+      // @url https://schema.org/ServiceChannel
+      // 'availableChannel' => array(
+      //   '@type' => 'ServiceChannel',
+      //   'description' => $this->get_field(accordion)
+      // ),
+      'spatialCoverage' => array(
+        'type' => 'City',
+        'name' => 'New York'
+      ),
+      'description' => $this->get_field('program_description'),
+      'disambiguatingDescription' => $this->disambiguatingDescription()
+    );
+  }
+
+  /**
+   * Get a tout version of the Government Service schema
+   *
+   * @return  Array  The Schema
+   */
+  public function getSchemaTout() {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => 'GovernmentService',
+      'name' => $this->name,
+      'alternateName' => $this->plain_language_program_name,
+      'url' => $this->get_permalink,
+      'serviceType' => $this->category['name']
+    );
+  }
+
+  /**
+   * Returns the schema for Special Announcement.
+   *
+   * @return  Array/Boolean  Special Announcement Schema,
+   *                         false if no status or expired.
+   */
+  public function getSpecialAnnouncementSchema() {
+    return ($this->status_type === 'covid-response') ?
+      array(
+        '@context' => 'https://schema.org',
+        '@type' => 'SpecialAnnouncement',
+        'name' => $this->program_name,
+        'category' => 'https://www.wikidata.org/wiki/Q81068910',
+        'datePosted' => $this->post_modified,
+        'expires' => $this->custom['program_status_clear_date'] ?
+          $this->custom['program_status_clear_date'] : '',
+        'governmentBenefitsInfo' => array(
+          '@type' => 'GovernmentService',
+          'name' => $this->program_name,
+          'url' => $this->structured_data_url,
+          'provider' => array(
+            '@type' => 'GovernmentOrganization',
+            'name' => $this->government_agency
+          ),
+          'audience' => array(
+            '@type' => 'Audience',
+            'name' => $this->getAudience()
+          ),
+          'serviceType' => $this->category['name']
+        ),
+        'serviceOperator' => array(
+          '@type' => 'GovernmentOrganization',
+          'name' => $this->government_agency
+        ),
+        'spatialCoverage' => array(
+          'type' => 'City',
+          'name' => 'New York'
+        )
+      ) : false;
+  }
+
+  /**
+   * Returns the base schema for the FAQ
+   *
+   * @return  Array  Base FAQ schema
+   */
+  public function getFaqSchema() {
+    return array(
+      '@context' => 'https://schema.org',
+      '@type' => 'FAQPage',
+      'mainEntity' => $this->addQuestionsToSchemaFaq($this->getQuestions())
+    );
+  }
+
+  /**
+  * The array $questions has a set of elements that are the questions to
+  * be added to the $faq variable which will be added to the schema as the
+  * `FAQPage` section.
+  *
+  * @return  Array  Set of FAQ questions
+  */
+  private function getQuestions() {
+    $questions = [
+      array(
+        '@type' => 'Question',
+        'name' => "How does $this->program_name work?",
+        'acceptedAnswer' => array(
+          '@type' => 'Answer',
+          'text' => $this->faqAnswer('field_58912c1a8a81b')
+        )
+      ),
+      array(
+        '@type' => 'Question',
+        'name' => "Am I eligible for $this->program_name?",
+        'acceptedAnswer' => array(
+          '@type' => 'Answer',
+          'text' => $this->faqAnswer('field_58912c1a8a82d')
+        )
+      ),
+      array(
+        '@type' => 'Question',
+        'name' => "What do I need in order to apply to $this->program_name?",
+        'acceptedAnswer' => array(
+          '@type' => 'Answer',
+          'text' => $this->faqAnswer('field_589de18fca4e0')
+        )
+      ),
+      array(
+        '@type' => 'Question',
+        'name' => "How do I Apply to $this->program_name?",
+        'acceptedAnswer' => array(
+          '@type' => 'Answer',
+          'text' => join('', [$this->faqAnswer('field_58912c1a8a850'),
+            $this->faqAnswer('field_58912c1a8a885'),
+            $this->faqAnswer('field_58912c1a8a900'),
+            $this->faqAnswer('field_58912c1a8a8cb')
+          ])
+        )
+      )
+    ];
+
+    return $questions;
+  }
+
+  /**
+   * Returns the a description from the program's field section.
+   *
+   * @return  String  Answer to FAQ.
+   */
+  private function faqAnswer($field) {
+    $answer = $this->get_field($field);
+
+    return $answer;
+  }
+
+  /**
+   * Add FAQ to schema only if sections are shown.
+   *
+   * @return  Array  Set of questions to be added to the schema.
+   */
+  private function addQuestionsToSchemaFaq($questions) {
+    $schema_faq = [];
+    $sections = $this->get_field('field_589e43563c471');
+
+    foreach ($sections as &$section) {
+      if ($section['value'] === 'how-it-works') {
+        array_push($schema_faq, $questions[0]);
+      } elseif ($section['value'] === 'determine-your-eligibility') {
+        array_push($schema_faq, $questions[1]);
+      } elseif ($section['value'] === 'what-you-need-to-include') {
+        array_push($schema_faq, $questions[2]);
+      } elseif ($section['value'] === 'how-to-apply') {
+        array_push($schema_faq, $questions[3]);
+      }
+    }
+
+    return $schema_faq;
   }
 
   /**
