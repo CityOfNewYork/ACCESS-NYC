@@ -126,6 +126,13 @@ $context['post']->alerts = array_map(function($post) {
 }, $context['post']->alerts);
 
 /**
+ * Add to Schema
+ * @author NYC Opportunity
+ */
+
+$context['schema'] = encode_schema($context['schema']);
+
+/**
  * Render the view
  */
 

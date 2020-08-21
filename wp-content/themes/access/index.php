@@ -90,11 +90,9 @@ if (is_home()) {
     $context['schema'][] = $p->getSchemaTout();
     $context['schema'][] = $p->getSpecialAnnouncementSchema();
   }
-
-  // Flatten, filter null values and encode for LD+JSON spec
-  $context['schema'] = array_values(array_filter($context['schema']));
-  $context['schema'] = json_encode($context['schema']);
 }
+
+$context['schema'] = encode_schema($context['schema']);
 
 /**
  * Render the view

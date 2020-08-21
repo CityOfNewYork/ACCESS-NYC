@@ -43,7 +43,8 @@ $context['post'] = $location;
  */
 
 $context['schema'][] = $location->getSchema();
-$context['schema'] = json_encode($context['schema']);
+$context['schema'] = encode_schema($context['schema']);
+
 
 /**
  * Page Meta Description

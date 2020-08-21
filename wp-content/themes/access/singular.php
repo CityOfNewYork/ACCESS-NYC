@@ -69,11 +69,12 @@ $context['alerts'] = array_map(function($post) {
 $context['google_translate_element'] = true;
 
 /**
- * Set Schema
+ * Add to Schema
+ * @author NYC Opportunity
  */
 
 $context['schema'][] = $page->getSchema();
-$context['schema'] = json_encode(array_filter($context['schema']));
+$context['schema'] = encode_schema($context['schema']);
 
 /**
  * Render the view

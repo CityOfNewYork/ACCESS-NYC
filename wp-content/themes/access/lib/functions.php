@@ -164,3 +164,18 @@ function share_data($params) {
 
   return array('url' => $url, 'hash' => $hash, 'query' => $query);
 }
+
+/**
+ * Filter null/false values, convert encoding, and encode php to JSON
+ *
+ * @param   Array  $schema  PHP Array interpretation of schema
+ *
+ * @return  String          JSON encoded schema
+ */
+function encode_schema($schema) {
+  $schema = array_values(array_filter($schema));
+  $schema = mb_convert_encoding($schema, 'UTF-8', 'auto');
+  $schema = json_encode($schema);
+
+  return $schema;
+}

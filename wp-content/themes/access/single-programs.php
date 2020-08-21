@@ -58,9 +58,7 @@ $context['post'] = $program;
 $context['schema'][] = $program->getSchema();
 $context['schema'][] = $program->getSpecialAnnouncementSchema();
 $context['schema'][] = $program->getFaqSchema();
-
-$context['schema'] = mb_convert_encoding($context['schema'], 'UTF-8', 'auto');
-$context['schema'] = json_encode($context['schema']);
+$context['schema'] = encode_schema($context['schema']);
 
 /**
  * Page Meta Description
