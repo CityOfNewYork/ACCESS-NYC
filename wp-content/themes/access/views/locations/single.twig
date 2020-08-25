@@ -14,10 +14,18 @@
     {% endif %}
 
     <section>
-      <iframe class="block bg-blue-light border border-grey-light print:hidden screen-desktop:hidden"
+      <iframe id="google-maps-container"
+        class="block bg-blue-light border border-grey-light print:hidden screen-desktop:hidden"
         width="100%" height="300" frameborder="0"
-        src="https://www.google.com/maps/embed/v1/place?&center={{ post.address.lat}},{{ post.address.lng }}&q={{ post.address.address|url_encode }}&key={{ function('constant', 'GOOGLE_MAPS_EMBED') }}&zoom=15"></iframe>
+        src="about:blank"></iframe>
     </section>
+
+    <script>
+      window.addEventListener('load', function(){
+        let el = document.getElementById('google-maps-container');
+        el.src = "https://www.google.com/maps/embed/v1/place?&center={{ post.address.lat}},{{ post.address.lng }}&q={{ post.address.address|url_encode }}&key={{ function('constant', 'GOOGLE_MAPS_EMBED') }}&zoom=15"
+      });
+    </script>
 
     {{ cspr_iframes_nonce }}
 
