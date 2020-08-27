@@ -13,6 +13,15 @@
     </div>
     {% endif %}
 
+    <section>
+      <div data-js="google-static-map"
+           data-google-static-map="https://www.google.com/maps/embed/v1/place?&center={{ post.address.lat}},{{ post.address.lng }}&q={{ post.address.address|url_encode }}&key={{ function('constant', 'GOOGLE_MAPS_EMBED') }}&zoom=15"
+           class="block bg-blue-light border border-grey-light print:hidden screen-desktop:hidden"
+           width="100%"
+           height="300" 
+           frameborder="0"></div>
+    </section>
+
     {{ cspr_iframes_nonce }}
 
     <header class="c-header p-2 screen-tablet:p-3 mb-3 mt-3 print:mt-0">

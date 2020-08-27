@@ -4,13 +4,11 @@ import 'main';
 
 (function() {
   'use strict';
+  (collection => {
+    // collection of selected elements is passed to this function
+    for (let i=0;i<collection.length;i++) {
+      const element = collection[i];
 
-  /**
-   * Google Static Map
-   */
-  (element => {
-    // Selected element is passed to this self-instantiating function
-    if (element) {
       window.addEventListener('load', () => {
         const iframe = document.createElement('iframe');
 
@@ -24,5 +22,5 @@ import 'main';
         element.replaceWith(iframe);
       });
     }
-  })(document.querySelector('[data-js="google-static-map"]'));
+  })(document.querySelectorAll('[data-js="google-static-map"]'));
 })();
