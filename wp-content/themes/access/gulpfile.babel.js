@@ -27,6 +27,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import mqpacker from 'css-mqpacker';
+import purgecss from '@fullhuman/postcss-purgecss';
 
 /**
  * Script Deps
@@ -94,6 +95,9 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
   })
   .on('error', gulpSass.logError))
   .pipe(postcss([
+    purgecss({
+      content: ['./views/**/*.twig']
+    }),
     autoprefixer(),
     mqpacker({sort: true}),
     cssnano()
