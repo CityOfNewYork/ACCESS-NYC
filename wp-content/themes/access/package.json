@@ -104,6 +104,6 @@
     "jquery": "^3.5.1",
     "smoothscroll-polyfill": "^0.4.3",
     "underscore": "^1.10.2",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "^3.4.0"
   }
 }
