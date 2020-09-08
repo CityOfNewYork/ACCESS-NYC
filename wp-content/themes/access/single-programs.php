@@ -26,7 +26,7 @@ enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 
 // Main
-enqueue_script('programs');
+enqueue_script('programs-detail');
 
 /**
  * Context

@@ -23,7 +23,6 @@ import CardVue from 'components/card/card.vue';
 import FilterMultiVue from 'components/filter/filter-multi.vue';
 
 import ProgramsArchive from '../../views/programs/archive.vue';
-import ProgramsDetail from 'modules/programs-detail';
 
 // Patterns Framework
 import localize from 'utilities/localize/localize';
@@ -98,17 +97,9 @@ import 'main';
         })
       }).$mount(`[data-js="${element.dataset.js}"]`);
     }
+
   })(document.querySelector('[data-js="programs"]'));
 
-  /**
-   * Programs Detail
-   */
-
-  (element => {
-    if (element) {
-      new ProgramsDetail();
-    }
-  })(document.querySelector(ProgramsDetail.selector));
 })(window, Vue);
 
 
