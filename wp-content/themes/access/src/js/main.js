@@ -252,8 +252,13 @@ import WebShare from 'utilities/web-share/web-share';
    * Add noopener attribute to new window links if it isn't there.
    */
   (elements => {
-    elements.forEach((element, index) => {
-      Utility.noopener(index, element);
+    elements.forEach((element) => {
+      let rel = (element.hasAttribute('rel'))
+        ? `${element.getAttribute('rel')} ` : '';
+
+      if (rel.indexOf('noopener') === -1) {
+        element.setAttribute('rel', `${rel}noopener`);
+      }
     });
   })(document.querySelectorAll('a[target="_blank"]'));
 
