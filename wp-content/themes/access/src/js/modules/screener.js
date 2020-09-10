@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
 import Utility from 'modules/utility';
+import Track from 'modules/track';
 import _ from 'underscore';
 
 /**
@@ -259,7 +260,7 @@ class Screener {
       let step = $(hash);
       key = step.data('trackKey');
       data = step.data('trackData');
-      Utility.trackView('Eligibility', key, data);
+      Track.view('Eligibility', key, data);
       if (hash === '#step-8') data = [];
     });
 
@@ -271,7 +272,7 @@ class Screener {
       if (typeof data === 'undefined') {
         data = $('#step-8-hoh').data('trackData');
       }
-      Utility.trackView('Eligibility', key, data);
+      Track.view('Eligibility', key, data);
     });
   }
 

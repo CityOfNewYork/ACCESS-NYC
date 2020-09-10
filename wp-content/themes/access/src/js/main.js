@@ -23,7 +23,9 @@ import 'utilities/element/remove';
 import 'utilities/nodelist/foreach';
 
 // Core Modules
-import Utility from 'modules/utility';
+// import Utility from 'modules/utility';
+import RollbarConfigure from 'modules/rollbar-configure';
+import Track from 'modules/track';
 import TranslateElement from 'modules/google-translate-element';
 
 // ACCESS Patterns
@@ -46,7 +48,10 @@ import WebShare from 'utilities/web-share/web-share';
 (function(window) {
   'use strict';
 
-  Utility.configErrorTracking(window);
+  /**
+   * Configure Rollbar
+   */
+  new RollbarConfigure();
 
   /**
    * Instantiate ACCESS NYC Patterns
@@ -62,7 +67,7 @@ import WebShare from 'utilities/web-share/web-share';
    */
   new WebShare({
     callback: () => {
-      Utility.track('Web Share', [
+      Track.event('Web Share', [
         {action: 'web-share/shared'}
       ]);
     },
@@ -139,7 +144,7 @@ import WebShare from 'utilities/web-share/web-share';
         let key = instance.type.charAt(0).toUpperCase() +
           instance.type.slice(1);
 
-        Utility.track(key, [
+        Track.event(key, [
           {'DCS.dcsuri': `share/${instance.type}`}
         ]);
       };
@@ -199,7 +204,7 @@ import WebShare from 'utilities/web-share/web-share';
     let key = event.target.dataset.trackKey;
     let data = JSON.parse(event.target.dataset.trackData);
 
-    Utility.track(key, data, event);
+    Track.event(key, data, event);
   });
 
   /**
@@ -211,7 +216,7 @@ import WebShare from 'utilities/web-share/web-share';
         let key = element.dataset.wtSearchKey;
         let data = JSON.parse(element.dataset.wtSearchData);
 
-        Utility.webtrends(key, data);
+        Track.webtrends(key, data);
       });
     }
   })(document.querySelector('[data-js="wt-search"]'));
@@ -261,11 +266,6 @@ import WebShare from 'utilities/web-share/web-share';
       }
     });
   })(document.querySelectorAll('a[target="_blank"]'));
-
-  /**
-   * Enable environment warnings
-   */
-  window.addEventListener('load', Utility.warnings);
 
   /**
    * Instantiate Google Translate Element

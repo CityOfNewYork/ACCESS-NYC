@@ -1,8 +1,6 @@
 /* eslint-env browser */
 import ProgramsDetail from 'modules/programs-detail';
 
-import 'main'
-
 /**
 * Programs Detail
 */

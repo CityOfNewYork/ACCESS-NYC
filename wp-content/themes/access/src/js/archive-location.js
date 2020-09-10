@@ -5,8 +5,6 @@ import 'core-js/features/url-search-params';
 
 import OfficeMap from 'modules/office-map';
 
-import 'main';
-
 (function() {
   'use strict';
 

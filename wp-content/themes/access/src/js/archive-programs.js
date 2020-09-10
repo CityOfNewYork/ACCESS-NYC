@@ -27,8 +27,6 @@ import ProgramsArchive from '../../views/programs/archive.vue';
 // Patterns Framework
 import localize from 'utilities/localize/localize';
 
-import 'main';
-
 ((window, Vue) => {
   'use strict';
 

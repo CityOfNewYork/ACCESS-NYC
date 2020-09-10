@@ -28,6 +28,7 @@ enqueue_inline('google-tag-manager');
 enqueue_inline('google-recaptcha');
 
 // Main
+enqueue_script('main');
 enqueue_script('screener');
 
 /**
