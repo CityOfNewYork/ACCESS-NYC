@@ -2,8 +2,6 @@
 
 import 'modules/polyfill-replace-with';
 
-import 'main';
-
 (function() {
   'use strict';
 
