@@ -96,7 +96,20 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
   .on('error', gulpSass.logError))
   .pipe(postcss([
     purgecss({
-      content: ['./views/**/*.twig']
+      content: ['./views/**/*.twig'],
+      whitelistPatterns: [
+        /wpml-[a-z-]*/g, // matches "wpml-{{ token }}"
+        /btn-[a-z-]*/g, // matches "btn-{{ token }}"
+        /color-[a-z-]*/g, // matches "color-{{ token }}"
+      ],
+      /**
+       * Tailwindcss Extractor
+       * @source https://tailwindcss.com/docs/controlling-file-size#setting-up-purge-css-manually
+       */
+      defaultExtractor: content => {
+        // Capture as liberally as possible, including things like `h-(screen-1.5)`
+        return content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
+      }
     }),
     autoprefixer(),
     mqpacker({sort: true}),
