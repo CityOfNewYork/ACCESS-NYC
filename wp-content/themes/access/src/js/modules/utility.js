@@ -6,8 +6,9 @@ import Cleave from 'cleave.js/dist/cleave.min';
 import 'cleave.js/dist/addons/cleave-phone.us';
 
 /**
- * Collection of utility functions.
+ * Collection of utility functions
  */
+
 const Utility = {};
 
 /**
@@ -244,134 +245,6 @@ Utility.camelToUpper = function(str) {
 };
 
 /**
- * Tracking function wrapper
- * @param  {string}     key   The key or event of the data
- * @param  {collection} data  The data to track
- * @param  {object}     event The original click event
- * @return {object}           The final data object
- */
-Utility.track = function(key, data) {
-  // eslint-disable-next-line no-undef
-  if (typeof Webtrends !== 'undefined')
-    Utility.webtrends(key, data);
-
-  return data;
-};
-
-/**
- * Data bus for tracking views in Webtrends and Google Analytics
- * @param  {string}     app  The name of the Single Page Application to track
- * @param  {string}     key  The key or event of the data
- * @param  {collection} data The data to track
- */
-Utility.trackView = function(app, key, data) {
-  // eslint-disable-next-line no-undef
-  if (typeof Webtrends !== 'undefined') Utility.webtrends(key, data);
-
-  // eslint-disable-next-line no-undef
-  if (typeof gtag !== 'undefined') Utility.gtagView(app, key, data);
-};
-
-/**
- * Push Events to Webtrends
- * @param  {string}     key   The key or event of the data
- * @param  {collection} data  The data to track
- */
-Utility.webtrends = function(key, data) {
-  // eslint-disable-next-line no-undef
-  if (typeof Webtrends === 'undefined' || typeof data === 'undefined') return;
-
-  let prefix = {};
-  prefix['WT.ti'] = key;
-  data.unshift(prefix);
-
-  // Format data for Webtrends
-  data = {
-    argsa: data.flatMap(value => {
-      return Object.entries(value);
-    }).flat()
-  };
-
-  // If 'action' is used as the key (for gtag.js), switch it to Webtrends
-  let action = data.argsa.indexOf('action');
-  if (action) data.argsa[action] = 'DCS.dcsuri';
-
-  // Webtrends doesn't send the page view for MultiTrack, add path to url
-  let dcsuri = data.argsa.indexOf('DCS.dcsuri');
-  if (dcsuri)
-    data.argsa[dcsuri + 1] = window.location.pathname + data.argsa[dcsuri + 1];
-
-  Webtrends.multiTrack(data); // eslint-disable-line no-undef
-
-  // eslint-disable-next-line no-console, no-debugger
-  if (Utility.debug()) console.dir(data);
-};
-
-/**
- * Push Click Events to Google Analytics
- * @param  {string}     key  The key or event of the data
- * @param  {collection} data The data to track
- */
-Utility.gtagClick = function(key, data) {
-  let params = {
-    'event_category': key
-  };
-
-  let google = data.find(value => value.hasOwnProperty('action'));
-  let webtrends = data.find(value => value.hasOwnProperty('DCS.dcsuri'));
-  let action = false;
-
-  if (typeof webtrends != 'undefined')
-    action = webtrends['DCS.dcsuri'];
-
-  if (typeof google != 'undefined')
-    action = google['action'];
-
-  if (!action) return;
-
-  gtag('event', action, params); // eslint-disable-line no-undef
-
-  // eslint-disable-next-line no-console, no-debugger
-  if (Utility.debug()) console.dir(['event', action, params]);
-};
-
-/**
- * Push Screen View Events to Google Analytics
- * @param  {string}     app  The name of the application
- * @param  {string}     key  The key or event of the data
- * @param  {collection} data The data to track
- */
-Utility.gtagView = function(app, key, data) {
-  let view = {
-    app_name: app,
-    screen_name: key
-  };
-
-  gtag('event', 'screen_view', view); // eslint-disable-line no-undef
-
-  // eslint-disable-next-line no-console, no-debugger
-  if (Utility.debug()) console.dir([`gtag: event, screen_view`, view]);
-};
-
-/**
- * Warnings to show for the environment
- */
-Utility.warnings = function() {
-  /* eslint-disable no-undef, no-console, no-debugger */
-  if (typeof Webtrends === 'undefined' && Utility.debug())
-    console.warn(Utility.CONFIG.MSG_WT_NONCONFIG);
-
-  /** Google Analytics */
-  if (typeof gtag === 'undefined' && Utility.debug())
-    console.warn(Utility.CONFIG.MSG_GA_NONCONFIG);
-
-  /** Rollbar */
-  if (typeof Rollbar === 'undefined' && Utility.debug())
-    console.warn(Utility.CONFIG.MSG_ROLLBAR_NONCONFIG);
-  /* eslint-enable no-undef, no-console, no-debugger */
-};
-
-/**
  * Set a timer based on user interaction
  * @param  {number}   time     The timing of the timeout
  * @param  {Function} callback The timer callback function
@@ -406,56 +279,6 @@ Utility.sessionTimeout = function(time, callback) {
 };
 
 /**
- * Sends the configuration object to Rollbar, the most important config is
- * the code_version which maps to the source maps version.
- * @param  {object} window The initial window object.
- * @return {object}        The configured Rollbar method.
- */
-Utility.configErrorTracking = function(window) {
-  // eslint-disable-next-line no-undef
-  if (typeof Rollbar === 'undefined') return false;
-
-  let scripts = document.getElementsByTagName('script');
-  let source = scripts[scripts.length - 1].src;
-  let path = source.split('/');
-  let basename = path[path.length - 1];
-  let hash = basename.split('.')[1];
-
-  let config = {
-    payload: {
-      client: {
-        javascript: {
-          // This is will be true by default if you have enabled
-          // this in settings.
-          source_map_enabled: true,
-          // This is transformed via envify in the scripts task.
-          code_version: hash,
-          // Optionally guess which frames the error was thrown from
-          // when the browser does not provide line and column numbers.
-          guess_uncaught_frames: true
-        }
-      }
-    }
-  };
-
-  $(window).on('load', () => {
-    // eslint-disable-next-line no-undef
-    let rollbarConfigure = Rollbar.configure(config);
-    let msg = `Configured Rollbar with ${hash}`;
-
-    if (Utility.debug()) {
-      // eslint-disable-next-line no-console
-      console.dir({
-        init: msg,
-        settings: rollbarConfigure
-      });
-
-      Rollbar.debug(msg); // eslint-disable-line no-undef
-    }
-  });
-};
-
-/**
  * Site constants.
  * @enum {string}
  */
@@ -468,9 +291,6 @@ Utility.CONFIG = {
   URL_PIN_BLUE_2X: '/wp-content/themes/access/assets/img/map-pin-blue-2x.png',
   URL_PIN_GREEN: '/wp-content/themes/access/assets/img/map-pin-green.png',
   URL_PIN_GREEN_2X: '/wp-content/themes/access/assets/img/map-pin-green-2x.png',
-  MSG_WT_NONCONFIG: 'Webtrends is not configured for this environment',
-  MSG_GA_NONCONFIG: 'Google Analytics is not configured for this environment',
-  MSG_ROLLBAR_NONCONFIG: 'Rollbar is not configured for this environment',
   IDLE_SESSION_TIMEOUT_KEY: 'IDLE_SESSION_TIMEOUT'
 };
 
