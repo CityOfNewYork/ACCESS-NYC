@@ -98,9 +98,11 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
     purgecss({
       content: ['./views/**/*.twig'],
       whitelistPatterns: [
+        /fill-[a-z-]*/, // matches "fill-{{ token }}"
+        /text-[a-z-]*/g, // matches "text-{{ token }}"
         /wpml-[a-z-]*/g, // matches "wpml-{{ token }}"
         /btn-[a-z-]*/g, // matches "btn-{{ token }}"
-        /color-[a-z-]*/g, // matches "color-{{ token }}"
+        /color-[a-z-]*/g // matches "color-{{ token }}"
       ],
       /**
        * Tailwindcss Extractor
