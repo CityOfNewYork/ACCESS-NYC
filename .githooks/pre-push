@@ -6,7 +6,8 @@
 # predeploy` doesn't work.
 composer development
 composer lint
-vendor/bin/wp-vulnerability-check --config wpscan.yml
+# Package currently hangs the push
+# vendor/bin/wp-vulnerability-check --config wpscan.yml
 composer production
 
 # Theme Dependencies
