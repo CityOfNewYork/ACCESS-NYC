@@ -1,12 +1,15 @@
 /* eslint-env browser */
 
+import 'modules/polyfill-replace-with';
+
 import 'main';
 
 (function() {
   'use strict';
+
   (collection => {
     // collection of selected elements is passed to this function
-    for (let i=0;i<collection.length;i++) {
+    for (let i = 0; i < collection.length; i++) {
       const element = collection[i];
 
       window.addEventListener('load', () => {

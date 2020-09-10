@@ -16,9 +16,11 @@
 use NYCO\WpAssets as WpAssets;
 
 /**
- * Return a localized reading friendly string of the enviroment.
- * @param  string $env The environment string to return if uknown.
- * @return string      The localized reading friendly string.
+ * Return a localized reading friendly string of the environment.
+ *
+ * @param   String  $env  The environment string to return if unknown.
+ *
+ * @return  String        The localized reading friendly string.
  */
 function environment_string($env = 'Unkown') {
   switch (WP_ENV) {
@@ -45,9 +47,9 @@ function environment_string($env = 'Unkown') {
 /**
  * Enqueue a hashed script based on it's name.
  * Enqueue the minified version based on debug mode.
- * @param  [string]  $name The name of the script source.
- * @param  [boolean] $cors Add the crossorigin="anonymous" attribute.
- * @return null
+ *
+ * @param  String   $name  The name of the script source.
+ * @param  Boolean  $cors  Add the crossorigin="anonymous" attribute.
  */
 function enqueue_script($name, $cors = false) {
   $WpAssets = new WpAssets();
@@ -62,8 +64,8 @@ function enqueue_script($name, $cors = false) {
 
 /**
  * Enqueue a hashed style based on it's name and language prefix.
- * @param  [string] $name the name of the stylesheet source
- * @return null
+ *
+ * @param  String  $name  The name of the stylesheet source
  */
 function enqueue_language_style($name) {
   $WpAssets = new WpAssets();
@@ -77,8 +79,8 @@ function enqueue_language_style($name) {
 
 /**
  * Enqueue a client-side integration.
- * @param  [string] $name Key of the integration in the mu-plugins/integrations.json
- * @return null
+ *
+ * @param  String  $name  Key of the integration in the mu-plugins/integrations.json
  */
 function enqueue_inline($name) {
   $WpAssets = new WpAssets();
@@ -92,9 +94,11 @@ function enqueue_inline($name) {
 
 /**
  * Validate params through regex
- * @param  string $namespace The namespace of the parameter
- * @param  string $subject   The string to validate
- * @return string            Returns blank string if false, parameter if valid
+ *
+ * @param   String  $namespace  The namespace of the parameter
+ * @param   String  $subject    The string to validate
+ *
+ * @return  String              Returns blank string if false, parameter if valid
  */
 function validate_params($namespace, $subject) {
   $patterns = array(
@@ -124,8 +128,10 @@ function url_decode($text) {
 
 /**
  * Creates a shareable url along with valid hash
- * @param  array $params Requires programs, categories, date, guid, share_link
- * @return array         0; the url 1; the hash
+ *
+ * @param   Array  $params  Requires programs, categories, date, guid, share_link
+ *
+ * @return  Array          0; the url 1; the hash
  */
 function share_data($params) {
   $query = array();
