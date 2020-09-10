@@ -25,6 +25,7 @@ enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 
 // Main
+enqueue_script('main');
 enqueue_script('single-location');
 
 /**
