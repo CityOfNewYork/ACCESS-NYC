@@ -96,13 +96,36 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
   .on('error', gulpSass.logError))
   .pipe(postcss([
     purgecss({
-      content: ['./views/**/*.twig'],
+      content: [
+        './views/**/*.twig',
+        './views/**/*.vue'
+      ],
       whitelistPatterns: [
-        /fill-[a-z-]*/, // matches "fill-{{ token }}"
-        /text-[a-z-]*/g, // matches "text-{{ token }}"
-        /wpml-[a-z-]*/g, // matches "wpml-{{ token }}"
-        /btn-[a-z-]*/g, // matches "btn-{{ token }}"
-        /color-[a-z-]*/g // matches "color-{{ token }}"
+        /** Patterns */
+        /o-[\S]*/g, // matches object patterns
+        /c-[\S]*/g, // matches component patterns
+        /** Button Patterns */
+        /btn[\S]*/g, // matches "btn{{ token }}"
+        // /[\S]*=btn[\S]*/g, //
+        // /\[class\*=btn-\]\[aria-pressed=false\][\S]*/g,
+        /** Utilities */
+        /error[\S]*/g, // matches "error{{ token }}"
+        /fill-[\S]*/g, // matches "fill-{{ token }}"
+        /text-[\S]*/g, // matches "text-{{ token }}"
+        /color-[\S]*/g, // matches "color-{{ token }}"
+        /** WPML Class */
+        /wpml-[\S]*/g, // matches "wpml-{{ token }}"
+        /** Subway Icon Trunks */
+        /bg-eighth-avenue/g,
+        /bg-sixth-avenue/g,
+        /bg-crosstown/g,
+        /bg-canarsie/g,
+        /bg-nassau/g,
+        /bg-broadway/g,
+        /bg-broadway-seventh-avenue/g,
+        /bg-lexington-avenue/g,
+        /bg-flushing/g,
+        /bg-shuttles/g
       ],
       /**
        * Tailwindcss Extractor
@@ -115,7 +138,7 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
     }),
     autoprefixer(),
     mqpacker({sort: true}),
-    cssnano()
+    // cssnano()
   ]))
   .pipe(hashFilename({format: HASH_FORMAT}))
   .pipe(sourcemaps.write('./'))
