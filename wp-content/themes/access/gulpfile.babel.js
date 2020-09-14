@@ -101,6 +101,8 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
         './views/**/*.vue',
         './src/**/*.scss'
       ],
+      fontFace: true,
+      keyframes: true,
       whitelistPatterns: [
         /** Patterns */
         /o-[\S]*/g, // matches object patterns
@@ -126,6 +128,10 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
         /bg-flushing/g,
         /bg-shuttles/g
       ],
+      // Example. Holds onto children of listed selectors
+      // whitelistPatternsChildren: [
+      //   /btn[\S]*/g
+      // ],
       /**
        * Tailwindcss Extractor
        * @source https://tailwindcss.com/docs/controlling-file-size#setting-up-purge-css-manually
@@ -134,7 +140,7 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
     }),
     autoprefixer(),
     mqpacker({sort: true}),
-    // cssnano()
+    cssnano()
   ]))
   .pipe(hashFilename({format: HASH_FORMAT}))
   .pipe(sourcemaps.write('./'))
