@@ -98,7 +98,8 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
     purgecss({
       content: [
         './views/**/*.twig',
-        './views/**/*.vue'
+        './views/**/*.vue',
+        './src/**/*.scss'
       ],
       whitelistPatterns: [
         /** Patterns */
@@ -106,11 +107,9 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
         /c-[\S]*/g, // matches component patterns
         /** Button Patterns */
         /btn[\S]*/g, // matches "btn{{ token }}"
-        // /[\S]*=btn[\S]*/g, //
-        // /\[class\*=btn-\]\[aria-pressed=false\][\S]*/g,
         /** Utilities */
         /error[\S]*/g, // matches "error{{ token }}"
-        /fill-[\S]*/g, // matches "fill-{{ token }}"
+        /fill-[\S]*/, // matches "fill-{{ token }}"
         /text-[\S]*/g, // matches "text-{{ token }}"
         /color-[\S]*/g, // matches "color-{{ token }}"
         /** WPML Class */
@@ -131,10 +130,7 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
        * Tailwindcss Extractor
        * @source https://tailwindcss.com/docs/controlling-file-size#setting-up-purge-css-manually
        */
-      defaultExtractor: content => {
-        // Capture as liberally as possible, including things like `h-(screen-1.5)`
-        return content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
-      }
+      defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
     }),
     autoprefixer(),
     mqpacker({sort: true}),
