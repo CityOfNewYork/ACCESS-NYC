@@ -126,12 +126,15 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
         /bg-broadway-seventh-avenue/g,
         /bg-lexington-avenue/g,
         /bg-flushing/g,
-        /bg-shuttles/g
+        /bg-shuttles/g,
+        /** spinner */
+        /success/g,
+        /processing/g
       ],
       // Example. Holds onto children of listed selectors
-      // whitelistPatternsChildren: [
-      //   /btn[\S]*/g
-      // ],
+      whitelistPatternsChildren: [
+        /c-share-form__success/g
+      ],
       /**
        * Tailwindcss Extractor
        * @source https://tailwindcss.com/docs/controlling-file-size#setting-up-purge-css-manually
