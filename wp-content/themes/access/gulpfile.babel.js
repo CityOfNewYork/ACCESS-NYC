@@ -52,7 +52,7 @@ import imagemin from 'gulp-imagemin';
 
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
-
+import PurgeSvg from 'purgesvg';
 /************
  * Constants
  ************/
@@ -344,8 +344,8 @@ gulp.task('images', callback => {
  * SVGs
  */
 
-gulp.task('svgs', () =>
-  gulp.src(`${PATTERNS_ACCESS}/src/svg/*.svg`)
+gulp.task('svgs', (done) => {
+  gulp.src(`${PATTERNS_ACCESS}/dist/svg/*.svg`)
     .pipe(svgmin())
     .pipe(svgstore({
       inlineSvg: true
@@ -353,9 +353,59 @@ gulp.task('svgs', () =>
     .pipe(rename('icons.svg'))
     .pipe(gulp.dest('assets/svg/'))
     .pipe(hashFilename({format: HASH_FORMAT}))
-    .pipe(gulp.dest('assets/svg/'))
+    .pipe(gulp.dest('assets/svg/'));
+
+    done();
+});
+
+let list = [];
+
+gulp.task('svgs:list', () => gulp.src([
+    `${VIEWS}/**/*.twig`,
+    `${VIEWS}/**/*.vue`
+  ]).pipe(through.obj((chunk, encoding, callback) => {
+    const regex = /xlink:href="([\S]*)#([\S]+)"/g
+    let content = chunk.contents.toString('utf8');
+    let m;
+    while ((m = regex.exec(content)) !== null) {
+      list.push(m[2]);
+    }
+    callback(null, chunk);
+  }))
 );
 
+gulp.task('svgs:purge', () => gulp.src('assets/svg/icons.svg')
+  .pipe(through.obj((chunk, encoding, callback) => {
+    console.dir(list);
+     new PurgeSvg({
+        content: [
+          './views/**/*.twig',
+          './views/**/*.vue'
+        ],
+        svgs: ['./assets/svg/icons.svg'],
+        whitelist: {
+          '*': new Set(list)
+        }
+    }).purge();
+
+    callback(null, chunk);
+  }))
+);
+
+gulp.task('svgs:hash', (done) => { gulp.src([
+    `${DIST}/svg/icons.purged.svg`])
+    .pipe(rename('icons.purged.svg'))
+    .pipe(gulp.dest('assets/svg/'))
+    .pipe(hashFilename({format: HASH_FORMAT}))
+    .pipe(gulp.dest('assets/svg/'));
+
+    done();
+});
+
+gulp.task('svgs:build', gulp.series('svgs',
+                                    'svgs:list',
+                                    'svgs:purge',
+                                    'svgs:hash'));
 /**
  * All tasks needed to build the app
  */
@@ -364,7 +414,7 @@ gulp.task('build', gulp.parallel(
   'styles',
   'scripts',
   'jst',
-  'svgs',
+  'svgs:build',
   'hashfiles'
 ));
 
