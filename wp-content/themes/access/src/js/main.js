@@ -56,7 +56,7 @@ import WebShare from 'utilities/web-share/web-share';
   /**
    * Instantiate ACCESS NYC Patterns
    */
-  new Icons('/wp-content/themes/access/assets/svg/icons.purged.de640c37.svg');
+  new Icons('/wp-content/themes/access/assets/svg/icons.purged.06a58834.svg');
   new Toggle();
   new Accordion();
   new Filter();

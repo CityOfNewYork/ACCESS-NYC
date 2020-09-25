@@ -344,7 +344,7 @@ gulp.task('images', callback => {
  * SVGs
  */
 
-gulp.task('svgs', (done) => {
+gulp.task('svgs:compile', (done) => {
   gulp.src(`${PATTERNS_ACCESS}/dist/svg/*.svg`)
     .pipe(svgmin())
     .pipe(svgstore({
@@ -376,7 +376,26 @@ gulp.task('svgs:list', () => gulp.src([
 
 gulp.task('svgs:purge', () => gulp.src('assets/svg/icons.svg')
   .pipe(through.obj((chunk, encoding, callback) => {
-    console.dir(list);
+     let iconsInUse = [
+      'icon-card-work-v2',
+      'icon-card-family-services-v2',
+      'icon-card-people-with-disabilities-v2',
+      'icon-card-PROGRAMS-v2',
+      'icon-card-cash-expenses-v2',
+      'icon-cash-expenses-v2',
+      'icon-card-food-v2',
+      'icon-card-housing-v2',
+      'icon-card-health-v2',
+      'icon-card-city-id-card-v2',
+      'icon-card-enrichment-v2',
+      'icon-card-education-v2',
+      'icon-card-child-care-v2'
+     ];
+
+    iconsInUse.forEach(icon => {
+      list.push(icon);
+    });
+
      new PurgeSvg({
         content: [
           './views/**/*.twig',
@@ -392,6 +411,14 @@ gulp.task('svgs:purge', () => gulp.src('assets/svg/icons.svg')
   }))
 );
 
+gulp.task('svgs:delete', (done) => {
+    del([
+      `${DIST}/svg/icons.purged.*.svg`,
+    ]);
+
+    done();
+});
+
 gulp.task('svgs:hash', (done) => { gulp.src([
     `${DIST}/svg/icons.purged.svg`])
     .pipe(rename('icons.purged.svg'))
@@ -402,10 +429,11 @@ gulp.task('svgs:hash', (done) => { gulp.src([
     done();
 });
 
-gulp.task('svgs:build', gulp.series('svgs',
-                                    'svgs:list',
-                                    'svgs:purge',
-                                    'svgs:hash'));
+gulp.task('svgs', gulp.series('svgs:compile',
+                              'svgs:list',
+                              'svgs:purge',
+                              'svgs:delete',
+                              'svgs:hash'));
 /**
  * All tasks needed to build the app
  */
@@ -414,7 +442,7 @@ gulp.task('build', gulp.parallel(
   'styles',
   'scripts',
   'jst',
-  'svgs:build',
+  'svgs',
   'hashfiles'
 ));
 
