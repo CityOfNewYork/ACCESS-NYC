@@ -52,7 +52,6 @@ import imagemin from 'gulp-imagemin';
 
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
-import PurgeSvg from 'purgesvg';
 /************
  * Constants
  ************/
@@ -343,22 +342,15 @@ gulp.task('images', callback => {
 /**
  * SVGs
  */
+let list = [];
 
-gulp.task('svgs:compile', (done) => {
-  gulp.src(`${PATTERNS_ACCESS}/dist/svg/*.svg`)
-    .pipe(svgmin())
-    .pipe(svgstore({
-      inlineSvg: true
-    }))
-    .pipe(rename('icons.svg'))
-    .pipe(gulp.dest('assets/svg/'))
-    .pipe(hashFilename({format: HASH_FORMAT}))
-    .pipe(gulp.dest('assets/svg/'));
+gulp.task('svgs:clean', (done) => {
+    del([
+      `${DIST}/svg/icons.*.svg`,
+    ]);
 
     done();
 });
-
-let list = [];
 
 gulp.task('svgs:list', () => gulp.src([
     `${VIEWS}/**/*.twig`,
@@ -374,13 +366,12 @@ gulp.task('svgs:list', () => gulp.src([
   }))
 );
 
-gulp.task('svgs:purge', () => gulp.src('assets/svg/icons.svg')
+gulp.task('svgs:add', () => gulp.src('assets/svg/icons.svg')
   .pipe(through.obj((chunk, encoding, callback) => {
      let iconsInUse = [
       'icon-card-work-v2',
       'icon-card-family-services-v2',
       'icon-card-people-with-disabilities-v2',
-      'icon-card-PROGRAMS-v2',
       'icon-card-cash-expenses-v2',
       'icon-cash-expenses-v2',
       'icon-card-food-v2',
@@ -389,39 +380,39 @@ gulp.task('svgs:purge', () => gulp.src('assets/svg/icons.svg')
       'icon-card-city-id-card-v2',
       'icon-card-enrichment-v2',
       'icon-card-education-v2',
-      'icon-card-child-care-v2'
+      'icon-card-child-care-v2',
+      'icon-child-care-v2',
+      'icon-city-id-card-v2',
+      'icon-education-v2',
+      'icon-enrichment-v2',
+      'icon-family-services-v2',
+      'icon-food-v2',
+      'icon-health-v2',
+      'icon-housing-v2',
+      'icon-people-with-disabilities-v2',
+      'icon-work-v2',
+      'icon-urgent'
      ];
 
     iconsInUse.forEach(icon => {
       list.push(icon);
     });
 
-     new PurgeSvg({
-        content: [
-          './views/**/*.twig',
-          './views/**/*.vue'
-        ],
-        svgs: ['./assets/svg/icons.svg'],
-        whitelist: {
-          '*': new Set(list)
-        }
-    }).purge();
+    list = list.map(item => {
+      return `${PATTERNS_ACCESS}/src/svg/${item}.svg`
+    });
 
     callback(null, chunk);
   }))
 );
 
-gulp.task('svgs:delete', (done) => {
-    del([
-      `${DIST}/svg/icons.purged.*.svg`,
-    ]);
-
-    done();
-});
-
-gulp.task('svgs:hash', (done) => { gulp.src([
-    `${DIST}/svg/icons.purged.svg`])
-    .pipe(rename('icons.purged.svg'))
+gulp.task('svgs:compile', (done) => {
+  gulp.src(list)
+    .pipe(svgmin())
+    .pipe(svgstore({
+      inlineSvg: true
+    }))
+    .pipe(rename('icons.svg'))
     .pipe(gulp.dest('assets/svg/'))
     .pipe(hashFilename({format: HASH_FORMAT}))
     .pipe(gulp.dest('assets/svg/'));
@@ -429,11 +420,10 @@ gulp.task('svgs:hash', (done) => { gulp.src([
     done();
 });
 
-gulp.task('svgs', gulp.series('svgs:compile',
+gulp.task('svgs', gulp.series('svgs:clean',
                               'svgs:list',
-                              'svgs:purge',
-                              'svgs:delete',
-                              'svgs:hash'));
+                              'svgs:add',
+                              'svgs:compile'));
 /**
  * All tasks needed to build the app
  */
