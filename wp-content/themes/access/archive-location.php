@@ -35,6 +35,22 @@ enqueue_script('main');
 enqueue_script('archive-location');
 
 /**
+ * Manually prefetch asset DNS
+ * @author NYC Opportunity
+ */
+
+add_action('wp_head', function(){
+  echo '<meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
+  <link rel="dns-prefetch" href="https://maps.googleapis.com" >
+  <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://maps.gstatic.com" >
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" >';
+}, 0);
+
+
+/**
  * Context
  */
 
