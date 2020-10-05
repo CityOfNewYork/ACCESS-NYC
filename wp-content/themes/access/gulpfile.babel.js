@@ -342,7 +342,24 @@ gulp.task('images', callback => {
 /**
  * SVGs
  */
-let list = [];
+let list = [
+  'icon-card-*-v2',
+  'icon-cash-expenses-v2',
+  'icon-child-care-v2',
+  'icon-city-id-card-v2',
+  'icon-education-v2',
+  'icon-enrichment-v2',
+  'icon-family-services-v2',
+  'icon-food-v2',
+  'icon-health-v2',
+  'icon-housing-v2',
+  'icon-people-with-disabilities-v2',
+  'icon-work-v2',
+  'icon-urgent',
+  'icon-info',
+  'icon-success',
+  'icon-warning'
+];
 
 gulp.task('svgs:clean', (done) => {
     del([
@@ -368,45 +385,15 @@ gulp.task('svgs:list', () => gulp.src([
 
 gulp.task('svgs:add', () => gulp.src('assets/svg/icons.svg')
   .pipe(through.obj((chunk, encoding, callback) => {
-     let iconsInUse = [
-      'icon-card-work-v2',
-      'icon-card-family-services-v2',
-      'icon-card-people-with-disabilities-v2',
-      'icon-card-cash-expenses-v2',
-      'icon-cash-expenses-v2',
-      'icon-card-food-v2',
-      'icon-card-housing-v2',
-      'icon-card-health-v2',
-      'icon-card-city-id-card-v2',
-      'icon-card-enrichment-v2',
-      'icon-card-education-v2',
-      'icon-card-child-care-v2',
-      'icon-child-care-v2',
-      'icon-city-id-card-v2',
-      'icon-education-v2',
-      'icon-enrichment-v2',
-      'icon-family-services-v2',
-      'icon-food-v2',
-      'icon-health-v2',
-      'icon-housing-v2',
-      'icon-people-with-disabilities-v2',
-      'icon-work-v2',
-      'icon-urgent'
-     ];
 
-    iconsInUse.forEach(icon => {
-      list.push(icon);
-    });
-
-    list = list.map(item => {
-      return `${PATTERNS_ACCESS}/src/svg/${item}.svg`
-    });
+    list = list.filter((item, index) => list.indexOf(item) === index)
+      .map(item => `${PATTERNS_ACCESS}/src/svg/${item}.svg`);
 
     callback(null, chunk);
   }))
 );
 
-gulp.task('svgs:compile', (done) => {
+gulp.task('svgs:compile', () =>
   gulp.src(list)
     .pipe(svgmin())
     .pipe(svgstore({
@@ -415,10 +402,8 @@ gulp.task('svgs:compile', (done) => {
     .pipe(rename('icons.svg'))
     .pipe(gulp.dest('assets/svg/'))
     .pipe(hashFilename({format: HASH_FORMAT}))
-    .pipe(gulp.dest('assets/svg/'));
-
-    done();
-});
+    .pipe(gulp.dest('assets/svg/'))
+);
 
 gulp.task('svgs', gulp.series('svgs:clean',
                               'svgs:list',
