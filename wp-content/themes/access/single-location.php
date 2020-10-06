@@ -29,19 +29,37 @@ enqueue_script('main');
 enqueue_script('single-location');
 
 /**
- * Manually prefetch asset DNS
+ * Manual DNS prefetch and preconnect headers
+ *
  * @author NYC Opportunity
  */
 
-add_action('wp_head', function(){
-  echo '<meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
-  <link rel="dns-prefetch" href="https://maps.googleapis.com" >
-  <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://maps.gstatic.com" >
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" >';
-}, 0);
+add_filter('wp_resource_hints', function($urls, $relation_type) {
+  switch ($relation_type) {
+    case 'preconnect':
+      $urls = array_merge($urls, [
+        'https://cdnjs.cloudflare.com',
+        'https://maps.gstatic.com',
+        'https://maps.googleapis.com'
+      ]);
+
+      break;
+
+    case 'dns-prefetch':
+      $urls = array_merge($urls, [
+        'https://s.webtrends.com',
+        'https://www.google-analytics.com',
+        'https://cdnjs.cloudflare.com',
+        'https://fonts.googleapis.com',
+        'https://maps.gstatic.com',
+        'https://maps.googleapis.com'
+      ]);
+
+      break;
+  }
+
+  return $urls;
+}, 10, 2);
 
 /**
  * Context
