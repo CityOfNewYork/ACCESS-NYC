@@ -52,7 +52,6 @@ import imagemin from 'gulp-imagemin';
 
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
-
 /************
  * Constants
  ************/
@@ -343,9 +342,59 @@ gulp.task('images', callback => {
 /**
  * SVGs
  */
+let list = [
+  'icon-card-*-v2',
+  'icon-cash-expenses-v2',
+  'icon-child-care-v2',
+  'icon-city-id-card-v2',
+  'icon-education-v2',
+  'icon-enrichment-v2',
+  'icon-family-services-v2',
+  'icon-food-v2',
+  'icon-health-v2',
+  'icon-housing-v2',
+  'icon-people-with-disabilities-v2',
+  'icon-work-v2',
+  'icon-urgent',
+  'icon-info',
+  'icon-success',
+  'icon-warning'
+];
 
-gulp.task('svgs', () =>
-  gulp.src(`${PATTERNS_ACCESS}/src/svg/*.svg`)
+gulp.task('svgs:clean', (done) => {
+    del([
+      `${DIST}/svg/icons.*.svg`,
+    ]);
+
+    done();
+});
+
+gulp.task('svgs:list', () => gulp.src([
+    `${VIEWS}/**/*.twig`,
+    `${VIEWS}/**/*.vue`
+  ]).pipe(through.obj((chunk, encoding, callback) => {
+    const regex = /xlink:href="([\S]*)#([\S]+)"/g
+    let content = chunk.contents.toString('utf8');
+    let m;
+    while ((m = regex.exec(content)) !== null) {
+      list.push(m[2]);
+    }
+    callback(null, chunk);
+  }))
+);
+
+gulp.task('svgs:add', () => gulp.src('assets/svg/icons.svg')
+  .pipe(through.obj((chunk, encoding, callback) => {
+
+    list = list.filter((item, index) => list.indexOf(item) === index)
+      .map(item => `${PATTERNS_ACCESS}/src/svg/${item}.svg`);
+
+    callback(null, chunk);
+  }))
+);
+
+gulp.task('svgs:compile', () =>
+  gulp.src(list)
     .pipe(svgmin())
     .pipe(svgstore({
       inlineSvg: true
@@ -356,6 +405,10 @@ gulp.task('svgs', () =>
     .pipe(gulp.dest('assets/svg/'))
 );
 
+gulp.task('svgs', gulp.series('svgs:clean',
+                              'svgs:list',
+                              'svgs:add',
+                              'svgs:compile'));
 /**
  * All tasks needed to build the app
  */
