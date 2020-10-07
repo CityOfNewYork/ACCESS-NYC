@@ -34,15 +34,6 @@ enqueue_script('main');
 
 add_filter('wp_resource_hints', function($urls, $relation_type) {
   switch ($relation_type) {
-    case 'preconnect':
-      $urls = array_merge($urls, [
-        'https://cdnjs.cloudflare.com',
-        'https://maps.gstatic.com',
-        'https://maps.googleapis.com'
-      ]);
-
-      break;
-
     case 'dns-prefetch':
       $urls = array_merge($urls, [
         'https://s.webtrends.com',

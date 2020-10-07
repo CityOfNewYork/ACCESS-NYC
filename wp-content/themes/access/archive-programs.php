@@ -29,6 +29,27 @@ enqueue_script('main');
 enqueue_script('archive-programs');
 
 /**
+ * Manual DNS prefetch and preconnect headers
+ *
+ * @author NYC Opportunity
+ */
+
+add_filter('wp_resource_hints', function($urls, $relation_type) {
+  switch ($relation_type) {
+    case 'dns-prefetch':
+      $urls = array_merge($urls, [
+        'https://s.webtrends.com',
+        'https://www.google-analytics.com',
+        'https://cdnjs.cloudflare.com'
+      ]);
+
+      break;
+  }
+
+  return $urls;
+}, 10, 2);
+
+/**
  * Context
  */
 
