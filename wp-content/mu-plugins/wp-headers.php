@@ -12,6 +12,13 @@ add_action('wp_headers', function() {
     return;
   }
 
+  // X-DNS-Prefetch-Control - Proactively perform domain name resolution on both
+  // links that the user may choose to follow as well as URLs for items
+  // eferenced by the document
+  if (defined('WP_HEADERS_DNS_PREFETCH_CONTROL') && WP_HEADERS_DNS_PREFETCH_CONTROL) {
+    header('X-DNS-Prefetch-Control: ' . WP_HEADERS_DNS_PREFETCH_CONTROL);
+  }
+
   // X-Frame-Options: SAMEORIGIN - Prevent web pages from being loaded inside iFrame
   if (defined('WP_HEADERS_SAMEORIGIN') && WP_HEADERS_SAMEORIGIN) {
     header('X-Frame-Options: SAMEORIGIN');
