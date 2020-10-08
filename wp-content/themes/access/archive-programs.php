@@ -29,6 +29,31 @@ enqueue_script('main');
 enqueue_script('archive-programs');
 
 /**
+ * Manual DNS prefetch and preconnect headers that are not added through
+ * enqueueing functions above. DNS prefetch is added automatically. Preconnect
+ * headers always need to be added manually.
+ *
+ * @link https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+ *
+ * @author NYC Opportunity
+ */
+
+add_filter('wp_resource_hints', function($urls, $relation_type) {
+  switch ($relation_type) {
+    case 'dns-prefetch':
+      $urls = array_merge($urls, [
+        '//s.webtrends.com',
+        '//www.google-analytics.com',
+        '//cdnjs.cloudflare.com'
+      ]);
+
+      break;
+  }
+
+  return $urls;
+}, 10, 2);
+
+/**
  * Context
  */
 
