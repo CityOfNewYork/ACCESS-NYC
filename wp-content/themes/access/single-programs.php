@@ -30,7 +30,11 @@ enqueue_script('main');
 enqueue_script('single-programs');
 
 /**
- * Manual DNS prefetch and preconnect headers
+ * Manual DNS prefetch and preconnect headers that are not added through
+ * enqueueing functions above. DNS prefetch is added automatically. Preconnect
+ * headers always need to be added manually.
+ *
+ * @link https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
  *
  * @author NYC Opportunity
  */
@@ -39,16 +43,17 @@ add_filter('wp_resource_hints', function($urls, $relation_type) {
   switch ($relation_type) {
     case 'preconnect':
       $urls = array_merge($urls, [
-        'access-nyc-s3-uploads.s3.amazonaws.com',
+        (defined('S3_UPLOADS_BUCKET'))
+          ? '//' . S3_UPLOADS_BUCKET . '.s3.amazonaws.com' : null
       ]);
 
       break;
 
     case 'dns-prefetch':
       $urls = array_merge($urls, [
-        'https://s.webtrends.com',
-        'https://www.google-analytics.com',
-        'https://cdnjs.cloudflare.com'
+        '//s.webtrends.com',
+        '//www.google-analytics.com',
+        '//cdnjs.cloudflare.com'
       ]);
 
       break;
