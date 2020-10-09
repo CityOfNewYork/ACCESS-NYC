@@ -59,6 +59,57 @@ $context = Timber::get_context();
 
 $template = 'index.twig';
 
+
+/**
+ * Context
+ */
+
+$context = Timber::get_context();
+
+$template = 'index.twig';
+
+switch ($context['language_code']) {
+  case "kr":
+    $fonts = [
+      "wp-content/themes/access/assets/fonts/noto-cjk-kr/NotoSansCJKkr-Regular.otf",
+      "wp-content/themes/access/assets/fonts/noto-cjk-kr/NotoSansCJKkr-Regular.otf"
+    ];
+    break;
+  case "tc":
+    $fonts = [
+      "wp-content/themes/access/assets/fonts/noto-cjk-tc/NotoSansCJKtc-Regular.otf",
+      "wp-content/themes/access/assets/fonts/noto-cjk-tc/noto-cjk-tc/NotoSansCJKtc-Bold.otf"
+    ];
+    break;
+  case "ar":
+    $fonts = [
+      "wp-content/themes/access/assets/fonts/noto-ar/NotoNaskhArabic-Regular.ttf",
+      "wp-content/themes/access/assets/fonts/noto-ar/NotoNaskhArabic-Bold.ttf"
+    ];
+    break;
+  case "ur":
+    $fonts = [
+      "wp-content/themes/access/assets/fonts/noto-ur/NotoNastaliqUrdu-Regular.ttf"
+    ];
+    break;
+  default:
+    $fonts = [
+      "wp-content/themes/access/assets/fonts/noto-serif/NotoSerif.woff2",
+      "wp-content/themes/access/assets/fonts/noto-sans/NotoSans-Italic.woff2",
+      "wp-content/themes/access/assets/fonts/noto-sans/NotoSans-Bold.woff2",
+      "wp-content/themes/access/assets/fonts/noto-sans/NotoSans-BoldItalic.woff2",
+    ];
+}
+
+add_action('wp_head', function() use ($fonts) {
+  $preload_links = array_map(function($font_path) {
+   return   '<link rel="preload" href=' .$font_path. ' as="font" crossorigin>';
+  }, $fonts);
+
+  $output = implode(" ", $preload_links);
+  echo $output;
+}, 2);
+
 /**
  * Homepage
  */
