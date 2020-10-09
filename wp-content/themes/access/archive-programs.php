@@ -59,6 +59,8 @@ add_filter('wp_resource_hints', function($urls, $relation_type) {
 
 $context = Timber::get_context();
 
+preload_fonts($context['language_code']);
+
 $context['posts'] = array_map(function($post) {
     return new Controller\Programs($post);
 }, Timber::get_posts());

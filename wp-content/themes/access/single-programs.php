@@ -70,6 +70,8 @@ $program = new Controller\Programs();
 
 $context = Timber::get_context();
 
+preload_fonts($context['language_code']);
+
 /**
  * Gets the url parameter on the page for navigating each section
  * @author Blue State Digital

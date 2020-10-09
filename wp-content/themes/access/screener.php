@@ -71,6 +71,8 @@ add_filter('wp_resource_hints', function($urls, $relation_type) {
 
 $context = Timber::get_context();
 
+preload_fonts($context['language_code']);
+
 // Get the program categories.
 $context['categories'] = get_categories(array(
   'post_type' => 'programs',

@@ -75,6 +75,8 @@ $context = Timber::get_context();
 
 $context['post'] = $location;
 
+preload_fonts($context['language_code']);
+
 /**
  * Add to Schema
  * @author NYC Opportunity

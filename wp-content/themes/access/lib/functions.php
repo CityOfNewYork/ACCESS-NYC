@@ -45,6 +45,67 @@ function environment_string($env = 'Unkown') {
 }
 
 /**
+ * Preloading fonts content with rel="preload"
+ * Using case statements to manage different language fonts
+ *
+ * @source https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
+ *
+ * @param  String  $language  The code of the language ex: 'kr'
+ */
+function preload_fonts($lang) {
+  $fonts = [
+    'noto-serif/NotoSerif.woff2',
+    'noto-sans/NotoSans-Italic.woff2',
+    'noto-sans/NotoSans-Bold.woff2',
+    'noto-sans/NotoSans-BoldItalic.woff2',
+  ];
+
+  switch ($lang) {
+    case 'ko':
+      $fonts = array_merge($fonts, [
+        'noto-cjk-kr/NotoSansCJKkr-Regular.otf',
+        'noto-cjk-kr/NotoSansCJKkr-Regular.otf'
+      ]);
+
+      break;
+
+    case 'zh-hant':
+      $fonts = array_merge($fonts, [
+        'noto-cjk-tc/NotoSansCJKtc-Regular.otf',
+        'noto-cjk-tc/NotoSansCJKtc-Bold.otf'
+      ]);
+
+      break;
+
+    case 'ar':
+      $fonts = array_merge($fonts, [
+        'noto-ar/NotoNaskhArabic-Regular.ttf',
+        'noto-ar/NotoNaskhArabic-Bold.ttf'
+      ]);
+
+      break;
+
+    case 'ur':
+      $fonts = array_merge($fonts, [
+        'noto-ur/NotoNastaliqUrdu-Regular.ttf'
+      ]);
+
+      break;
+  }
+
+  add_action('wp_head', function() use ($fonts) {
+    $preload_links = array_map(function($font_path) {
+      $dir = '/' . str_replace(ABSPATH, '', get_template_directory())
+        . '/assets/fonts/';
+
+      return '<link rel="preload" href=' . $dir . $font_path . ' as="font" crossorigin>';
+    }, $fonts);
+
+    echo implode("\n", $preload_links);
+  }, 2);
+}
+
+/**
  * Enqueue a hashed script based on it's name.
  * Enqueue the minified version based on debug mode.
  *

@@ -59,6 +59,17 @@ $context = Timber::get_context();
 
 $template = 'index.twig';
 
+
+/**
+ * Context
+ */
+
+$context = Timber::get_context();
+
+$template = 'index.twig';
+
+preload_fonts($context['language_code']);
+
 /**
  * Homepage
  */
