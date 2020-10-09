@@ -48,53 +48,61 @@ function environment_string($env = 'Unkown') {
  * Preloading fonts content with rel="preload"
  * Using case statements to manage different language fonts
  *
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
+ * @source https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
  *
- * @param  String   $language  The code of the language ex: 'kr'
+ * @param  String  $language  The code of the language ex: 'kr'
  */
-function preload_fonts($lang){
+function preload_fonts($lang) {
+  $fonts = [
+    'noto-serif/NotoSerif.woff2',
+    'noto-sans/NotoSans-Italic.woff2',
+    'noto-sans/NotoSans-Bold.woff2',
+    'noto-sans/NotoSans-BoldItalic.woff2',
+  ];
+
   switch ($lang) {
-    case "kr":
-      $fonts = [
-        "wp-content/themes/access/assets/fonts/noto-cjk-kr/NotoSansCJKkr-Regular.otf",
-        "wp-content/themes/access/assets/fonts/noto-cjk-kr/NotoSansCJKkr-Regular.otf"
-      ];
+    case 'ko':
+      $fonts = array_merge($fonts, [
+        'noto-cjk-kr/NotoSansCJKkr-Regular.otf',
+        'noto-cjk-kr/NotoSansCJKkr-Regular.otf'
+      ]);
+
       break;
-    case "tc":
-      $fonts = [
-        "wp-content/themes/access/assets/fonts/noto-cjk-tc/NotoSansCJKtc-Regular.otf",
-        "wp-content/themes/access/assets/fonts/noto-cjk-tc/noto-cjk-tc/NotoSansCJKtc-Bold.otf"
-      ];
+
+    case 'zh-hant':
+      $fonts = array_merge($fonts, [
+        'noto-cjk-tc/NotoSansCJKtc-Regular.otf',
+        'noto-cjk-tc/NotoSansCJKtc-Bold.otf'
+      ]);
+
       break;
-    case "ar":
-      $fonts = [
-        "wp-content/themes/access/assets/fonts/noto-ar/NotoNaskhArabic-Regular.ttf",
-        "wp-content/themes/access/assets/fonts/noto-ar/NotoNaskhArabic-Bold.ttf"
-      ];
+
+    case 'ar':
+      $fonts = array_merge($fonts, [
+        'noto-ar/NotoNaskhArabic-Regular.ttf',
+        'noto-ar/NotoNaskhArabic-Bold.ttf'
+      ]);
+
       break;
-    case "ur":
-      $fonts = [
-        "wp-content/themes/access/assets/fonts/noto-ur/NotoNastaliqUrdu-Regular.ttf"
-      ];
+
+    case 'ur':
+      $fonts = array_merge($fonts, [
+        'noto-ur/NotoNastaliqUrdu-Regular.ttf'
+      ]);
+
       break;
-    default:
-      $fonts = [
-        "wp-content/themes/access/assets/fonts/noto-serif/NotoSerif.woff2",
-        "wp-content/themes/access/assets/fonts/noto-sans/NotoSans-Italic.woff2",
-        "wp-content/themes/access/assets/fonts/noto-sans/NotoSans-Bold.woff2",
-        "wp-content/themes/access/assets/fonts/noto-sans/NotoSans-BoldItalic.woff2",
-      ];
   }
 
   add_action('wp_head', function() use ($fonts) {
     $preload_links = array_map(function($font_path) {
-    return   '<link rel="preload" href=' .get_site_url(). $font_path. ' as="font" crossorigin>';
+      $dir = '/' . str_replace(ABSPATH, '', get_template_directory())
+        . '/assets/fonts/';
+
+      return '<link rel="preload" href=' . $dir . $font_path . ' as="font" crossorigin>';
     }, $fonts);
 
-    $output = implode(" ", $preload_links);
-    echo $output;
+    echo implode("\n", $preload_links);
   }, 2);
-
 }
 
 /**
