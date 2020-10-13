@@ -1,0 +1,9 @@
+<div class="mb-4 p-3 screen-desktop:p-4 bg-white relative overflow-hidden">
+  <div class="h3">{{ __('Stay updated on benefits', 'accessnyctheme') }}</div>
+
+  {% include 'views/objects/newsletter.twig' with {'this': {
+    id: 'mc-embedded-subscribe-form',
+    mailchimp_account: fn('constant', 'MAILCHIMP_ACCOUNT'),
+    mailchimp_audience_id: fn('constant', 'MAILCHIMP_AUDIENCE_ID')
+  }} only %}
+</div>

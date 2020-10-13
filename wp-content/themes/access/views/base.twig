@@ -55,6 +55,10 @@
 
       {% block content %}{% endblock %}
 
+      {% if variant == 'nb' %}
+        {% include 'variants/newsletter-b.twig' %}
+      {% endif %}
+
       {% block footer %}
         <footer class="o-footer color-mid-background">
           {% include 'objects/footer.twig' %}

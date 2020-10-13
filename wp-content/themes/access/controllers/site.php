@@ -32,6 +32,10 @@ class Site extends TimberSite {
    * @return  Object            The modified timber site context variable
    */
   public function addToContext($context) {
+    /**
+     * Language
+     */
+
     $lang = $this->getLanguageCode();
 
     $direction = ($lang === 'ar' || $lang === 'ur') ? 'rtl' : 'ltr';
@@ -50,7 +54,10 @@ class Site extends TimberSite {
 
     $context['url_base'] = ($lang === 'en') ? '' : '/' . $lang;
 
-    /** Get the links that need to appear in the search dropdown */
+    /**
+     * Get the links that need to appear in the search dropdown
+     */
+
     $context['search_links'] = Timber::get_posts(array(
       'post_type' => 'program_search_links',
       'numberposts' => 1
@@ -70,7 +77,10 @@ class Site extends TimberSite {
 
     $context['footer_about_access_nyc_menu'] = new TimberMenu('about-access-nyc');
 
-    /** Gets object containing all program categories */
+    /**
+     * Gets object containing all program categories
+     */
+
     $context['categories'] = get_terms('programs');
 
     /**
@@ -84,28 +94,39 @@ class Site extends TimberSite {
       'posts_per_page' => -1
     )));
 
-    /** Get the first alert that is set to site wide */
+    // Get the first alert that is set to site wide
     $context['alert_sitewide'] = reset(array_filter($alerts, function($post) {
       return $post->custom['alert_sitewide'];
     }));
 
-    /** Implement schema for sitewide alert */
-    $alert_sitewide = $context['alert_sitewide'];
+    /**
+     * Query Vars
+     */
 
-    /** Determine if page is in print view */
-    $context['is_print'] = isset($_GET['print']) ? $_GET['print'] : false;
+    $context['is_print'] = get_query_var('print', false); // Print view
+    $context['variant'] = get_query_var('anyc_v', false); // A/B testing variant
 
-    /** Get the default page meta description for the page */
+    /**
+     * Get the default page meta description for the page
+     */
+
     $context['page_meta_description'] = $this->getPageMetaDescription();
 
-    /** Create nonce for allowed resources */
-    $context['csp_script_nonce'] = (defined('CSP_SCRIPT_NONCE')) ? CSP_SCRIPT_NONCE : false;
+    /**
+     * Create nonce for allowed resources
+     */
 
-    /** Set Schema Base */
+    $context['csp_script_nonce'] = (defined('CSP_SCRIPT_NONCE'))
+      ? CSP_SCRIPT_NONCE : false;
+
+    /**
+     * Set Schema Base
+     */
+
     $context['schema'] = array_filter(array(
       $this->getOrganizationSchema(),
       $this->getWebsiteSchema(),
-      $this->getAlertSchema($alert_sitewide)
+      $this->getAlertSchema($context['alert_sitewide'])
     ));
 
     return $context;
