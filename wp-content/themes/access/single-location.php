@@ -85,7 +85,6 @@ preload_fonts($context['language_code']);
 $context['schema'][] = $location->getSchema();
 $context['schema'] = encode_schema($context['schema']);
 
-
 /**
  * Page Meta Description
  */

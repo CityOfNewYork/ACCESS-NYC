@@ -129,6 +129,13 @@ class Site extends TimberSite {
       $this->getAlertSchema($context['alert_sitewide'])
     ));
 
+    /** Set Schema Base */
+    $context['schema'] = array_filter(array(
+      $this->getOrganizationSchema(),
+      $this->getWebsiteSchema(),
+      $this->getAlertSchema($context['alert_sitewide'])
+    ));
+
     return $context;
   }
 
