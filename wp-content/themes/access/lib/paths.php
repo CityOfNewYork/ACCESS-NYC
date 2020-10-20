@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Path helpers shortands for different files
+ * Path helpers shorthands for different files
  */
 
 namespace ACCESS;
@@ -18,7 +18,7 @@ function lib($name) {
 }
 
 /**
- * Returns the path of a controller file in the /controllers driectory.
+ * Returns the path of a controller file in the /controllers directory.
  *
  * @param   String  $name  The name of the controller to retrieve.
  *

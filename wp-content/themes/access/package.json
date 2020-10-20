@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.22.0",
+  "version": "3.25.0",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "repository": {
     "type": "git",
@@ -64,6 +64,7 @@
     "@babel/preset-env": "^7.10.3",
     "@babel/register": "^7.10.3",
     "@babel/runtime": "^7.10.3",
+    "@fullhuman/postcss-purgecss": "^2.3.0",
     "autoprefixer": "^9.8.4",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
@@ -102,7 +103,6 @@
     "@nycopportunity/patterns-framework": "^1.0.0-6",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
-    "smoothscroll-polyfill": "^0.4.3",
     "underscore": "^1.10.2",
     "whatwg-fetch": "^3.0.0"
   }

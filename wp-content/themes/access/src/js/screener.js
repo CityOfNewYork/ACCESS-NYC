@@ -9,8 +9,6 @@ import Screener from 'modules/screener';
 // Patterns Framework
 import Tooltips from 'utilities/tooltips/tooltips';
 
-import 'main';
-
 (function() {
   'use strict';
 

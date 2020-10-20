@@ -31,13 +31,53 @@ enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 
 // Main
-enqueue_script('locations');
+enqueue_script('main');
+enqueue_script('archive-location');
+
+/**
+ * Manual DNS prefetch and preconnect headers that are not added through
+ * enqueueing functions above. DNS prefetch is added automatically. Preconnect
+ * headers always need to be added manually.
+ *
+ * @link https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+ *
+ * @author NYC Opportunity
+ */
+
+add_filter('wp_resource_hints', function($urls, $relation_type) {
+  switch ($relation_type) {
+    case 'preconnect':
+      $urls = array_merge($urls, [
+        '//cdnjs.cloudflare.com',
+        '//maps.gstatic.com',
+        '//maps.googleapis.com'
+      ]);
+
+      break;
+
+    case 'dns-prefetch':
+      $urls = array_merge($urls, [
+        '//s.webtrends.com',
+        '//www.google-analytics.com',
+        '//cdnjs.cloudflare.com',
+        '//fonts.googleapis.com',
+        '//maps.gstatic.com',
+        '//maps.googleapis.com'
+      ]);
+
+      break;
+  }
+
+  return $urls;
+}, 10, 2);
 
 /**
  * Context
  */
 
 $context = Timber::get_context();
+
+preload_fonts($context['language_code']);
 
 // Get the program categories.
 $categories = get_categories(array(
@@ -124,6 +164,13 @@ $context['post']->alerts = array_filter($alerts, function($p) {
 $context['post']->alerts = array_map(function($post) {
   return new Controller\Alert($post);
 }, $context['post']->alerts);
+
+/**
+ * Add to Schema
+ * @author NYC Opportunity
+ */
+
+$context['schema'] = encode_schema($context['schema']);
 
 /**
  * Render the view

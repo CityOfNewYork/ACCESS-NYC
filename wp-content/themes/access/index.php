@@ -27,12 +27,48 @@ enqueue_inline('google-tag-manager');
 enqueue_script('main');
 
 /**
+ * Manual DNS prefetch and preconnect headers that are not added through
+ * enqueueing functions above. DNS prefetch is added automatically. Preconnect
+ * headers always need to be added manually.
+ *
+ * @link https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+ *
+ * @author NYC Opportunity
+ */
+
+add_filter('wp_resource_hints', function($urls, $relation_type) {
+  switch ($relation_type) {
+    case 'dns-prefetch':
+      $urls = array_merge($urls, [
+        '//s.webtrends.com',
+        '//www.google-analytics.com',
+        '//cdnjs.cloudflare.com'
+      ]);
+
+      break;
+  }
+
+  return $urls;
+}, 10, 2);
+
+/**
  * Context
  */
 
 $context = Timber::get_context();
 
 $template = 'index.twig';
+
+
+/**
+ * Context
+ */
+
+$context = Timber::get_context();
+
+$template = 'index.twig';
+
+preload_fonts($context['language_code']);
 
 /**
  * Homepage
@@ -90,11 +126,9 @@ if (is_home()) {
     $context['schema'][] = $p->getSchemaTout();
     $context['schema'][] = $p->getSpecialAnnouncementSchema();
   }
-
-  // Flatten, filter null values and encode for LD+JSON spec
-  $context['schema'] = array_values(array_filter($context['schema']));
-  $context['schema'] = json_encode($context['schema']);
 }
+
+$context['schema'] = encode_schema($context['schema']);
 
 /**
  * Render the view

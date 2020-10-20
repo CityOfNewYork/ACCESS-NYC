@@ -26,7 +26,41 @@ enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 
 // Main
-enqueue_script('programs');
+enqueue_script('main');
+enqueue_script('single-programs');
+
+/**
+ * Manual DNS prefetch and preconnect headers that are not added through
+ * enqueueing functions above. DNS prefetch is added automatically. Preconnect
+ * headers always need to be added manually.
+ *
+ * @link https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+ *
+ * @author NYC Opportunity
+ */
+
+add_filter('wp_resource_hints', function($urls, $relation_type) {
+  switch ($relation_type) {
+    case 'preconnect':
+      $urls = array_merge($urls, [
+        (defined('S3_UPLOADS_BUCKET'))
+          ? '//' . S3_UPLOADS_BUCKET . '.s3.amazonaws.com' : null
+      ]);
+
+      break;
+
+    case 'dns-prefetch':
+      $urls = array_merge($urls, [
+        '//s.webtrends.com',
+        '//www.google-analytics.com',
+        '//cdnjs.cloudflare.com'
+      ]);
+
+      break;
+  }
+
+  return $urls;
+}, 10, 2);
 
 /**
  * Context
@@ -35,6 +69,8 @@ enqueue_script('programs');
 $program = new Controller\Programs();
 
 $context = Timber::get_context();
+
+preload_fonts($context['language_code']);
 
 /**
  * Gets the url parameter on the page for navigating each section
@@ -58,9 +94,7 @@ $context['post'] = $program;
 $context['schema'][] = $program->getSchema();
 $context['schema'][] = $program->getSpecialAnnouncementSchema();
 $context['schema'][] = $program->getFaqSchema();
-
-$context['schema'] = mb_convert_encoding($context['schema'], 'UTF-8', 'auto');
-$context['schema'] = json_encode($context['schema']);
+$context['schema'] = encode_schema($context['schema']);
 
 /**
  * Page Meta Description
