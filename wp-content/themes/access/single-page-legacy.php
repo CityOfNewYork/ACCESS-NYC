@@ -13,6 +13,13 @@ require_once ACCESS\controller('page');
  * @author NYC Opportunity
  */
 
+// Load polyfills for IE
+$IE = 'Trident/7.0';
+$BROWSER_IE = strpos($_SERVER['HTTP_USER_AGENT'], $IE);
+if ($BROWSER_IE) {
+  enqueue_script('polyfill');
+}
+
 // Main
 enqueue_language_style('style');
 

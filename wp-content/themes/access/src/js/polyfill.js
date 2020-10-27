@@ -11,6 +11,10 @@ import 'core-js/features/object/assign';
 import 'core-js/features/object/from-entries';
 import 'core-js/features/object/entries';
 import 'core-js/features/string/includes';
+import 'core-js/features/url-search-params';
+import 'core-js/features/object/keys';
+import 'core-js/features/object/values';
+import 'core-js/features/object/is-extensible';
 
 // Fetch
 import 'whatwg-fetch';
@@ -21,4 +25,5 @@ import 'utilities/element/closest';
 import 'utilities/element/remove';
 import 'utilities/nodelist/foreach';
 
+import 'modules/polyfill-replace-with';
 

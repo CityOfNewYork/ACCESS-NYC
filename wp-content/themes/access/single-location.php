@@ -24,6 +24,13 @@ enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 
+// Load polyfills for IE
+$IE = 'Trident/7.0';
+$BROWSER_IE = strpos($_SERVER['HTTP_USER_AGENT'], $IE);
+if ($BROWSER_IE) {
+  enqueue_script('polyfill');
+}
+
 // Main
 enqueue_script('main');
 enqueue_script('single-location');

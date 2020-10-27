@@ -25,6 +25,13 @@ enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 enqueue_inline('google-translate-element');
 
+// Load polyfills for IE
+$IE = 'Trident/7.0';
+$BROWSER_IE = strpos($_SERVER['HTTP_USER_AGENT'], $IE);
+if ($BROWSER_IE) {
+  enqueue_script('polyfill');
+}
+
 // Main
 enqueue_script('main');
 
