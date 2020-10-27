@@ -49,6 +49,7 @@
   },
   "require-dev": {
     "filp/whoops": "^2.7.2",
+    "nielsdeblaauw/query-monitor-twig-profile": "^1.2",
     "squizlabs/php_codesniffer": "^3.5.3",
     "umutphp/wp-vulnerability-check": "^0.2.5",
     "whoops/soap": "^1.0",

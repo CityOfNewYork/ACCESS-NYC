@@ -81,9 +81,7 @@ deactivate_plugins('rollbar/rollbar-php-wordpress.php');
  * @author NYC Opportunity
  */
 
-if (null !== WP_REDIS_HOST) {
-  activate_plugin('redis-cache/redis-cache.php');
-}
+activate_plugin('redis-cache/redis-cache.php');
 
 /**
  * Enable Query Monitor for advanced Wordpress Query debug and other tooling.
@@ -92,6 +90,7 @@ if (null !== WP_REDIS_HOST) {
  */
 
 activate_plugin('query-monitor/query-monitor.php');
+activate_plugin('query-monitor-twig-profile/query-monitor-twig-profile.php');
 
 /**
  * Remove Stat Collector data logging actions

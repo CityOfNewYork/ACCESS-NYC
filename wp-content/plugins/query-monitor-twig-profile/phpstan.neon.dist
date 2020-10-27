@@ -1,0 +1,13 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+    level: max
+    inferPrivatePropertyTypeFromConstructor: true
+    scanDirectories:
+        - vendor/wpackagist-plugin/query-monitor/classes/
+        - vendor/wpackagist-plugin/query-monitor/output/
+    paths:
+        - query-monitor-twig-profile.php
+        - src/
+    ignoreErrors:
+    - '# no value type specified in iterable type Twig\\Profiler\\Profile\.#'

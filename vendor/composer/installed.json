@@ -1052,6 +1052,54 @@
         ]
     },
     {
+        "name": "nielsdeblaauw/query-monitor-twig-profile",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/NielsdeBlaauw/query-monitor-twig-profile.git",
+            "reference": "09dfab1f975765378502e5c421da3b32be72bb95"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/NielsdeBlaauw/query-monitor-twig-profile/zipball/09dfab1f975765378502e5c421da3b32be72bb95",
+            "reference": "09dfab1f975765378502e5c421da3b32be72bb95",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.0"
+        },
+        "require-dev": {
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+            "phpcompatibility/php-compatibility": "^9.3",
+            "szepeviktor/phpstan-wordpress": "^0.6.3",
+            "twig/twig": "^3.0",
+            "wp-coding-standards/wpcs": "^2.3",
+            "wpackagist-plugin/query-monitor": "^3.6"
+        },
+        "time": "2020-10-11T08:34:11+00:00",
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-paths": {
+                "vendor/wpackagist-plugin/{$name}/": [
+                    "type:wordpress-plugin"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Niels de Blaauw",
+                "email": "niels.de.blaauw@gmail.com"
+            }
+        ],
+        "description": "Displays Twig profiler output in Query Monitor"
+    },
+    {
         "name": "nyco/wp-assets",
         "version": "1.1.5",
         "version_normalized": "1.1.5.0",
