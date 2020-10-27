@@ -1,6 +1,5 @@
 /* eslint-env browser */
 // Core Modules
-import Utility from 'modules/utility';
 import RollbarConfigure from 'modules/rollbar-configure';
 import Track from 'modules/track';
 import TranslateElement from 'modules/google-translate-element';
