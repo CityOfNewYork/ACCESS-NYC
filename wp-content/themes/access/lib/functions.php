@@ -113,13 +113,16 @@ function preload_fonts($lang) {
  * @param  Boolean  $cors  Add the crossorigin="anonymous" attribute.
  */
 function enqueue_script($name, $cors = false) {
-  $WpAssets = new WpAssets();
-  $WpAssets->scripts = 'js/';
+  if (!isset($GLOBALS['wp_assets'])) {
+    $GLOBALS['wp_assets'] = new WpAssets();
+  }
 
-  $script = $WpAssets->addScript($name);
+  $GLOBALS['wp_assets']->scripts = 'js/';
+
+  $script = $GLOBALS['wp_assets']->addScript($name);
 
   if ($cors) {
-    $WpAssets->addCrossoriginAttr($name);
+    $GLOBALS['wp_assets']->addCrossoriginAttr($name);
   }
 }
 
@@ -129,27 +132,42 @@ function enqueue_script($name, $cors = false) {
  * @param  String  $name  The name of the stylesheet source
  */
 function enqueue_language_style($name) {
-  $WpAssets = new WpAssets();
+  if (!isset($GLOBALS['wp_assets'])) {
+    $GLOBALS['wp_assets'] = new WpAssets();
+  }
 
   $languages = array('ar', 'ko', 'ur', 'zh-hant');
-  $lang = (!in_array(ICL_LANGUAGE_CODE, $languages))
-    ? 'default' : ICL_LANGUAGE_CODE;
 
-  $style = $WpAssets->addStyle("$name-$lang");
+  $lang = (!in_array(constant('ICL_LANGUAGE_CODE'), $languages))
+    ? 'default' : constant('ICL_LANGUAGE_CODE');
+
+  $style = $GLOBALS['wp_assets']->addStyle($name . '-' . $lang);
 }
 
 /**
  * Enqueue a client-side integration.
  *
- * @param  String  $name  Key of the integration in the mu-plugins/integrations.json
+ * @param   String   $name  Key of the integration in the mu-plugins/integrations.json
+ *
+ * @return  Boolean
  */
 function enqueue_inline($name) {
-  $WpAssets = new WpAssets();
-  $integrations = $WpAssets->loadIntegrations();
+  if (!isset($GLOBALS['wp_assets'])) {
+    $GLOBALS['wp_assets'] = new WpAssets();
+  }
 
-  if ($integrations) {
-    $index = array_search($name, array_column($integrations, 'handle'));
-    $WpAssets->addInline($integrations[$index]);
+  if (!isset($GLOBALS['wp_integrations'])) {
+    $GLOBALS['wp_integrations'] = $GLOBALS['wp_assets']->loadIntegrations();
+  }
+
+  if ($GLOBALS['wp_integrations']) {
+    $index = array_search($name, array_column($GLOBALS['wp_integrations'], 'handle'));
+
+    $GLOBALS['wp_assets']->addInline($GLOBALS['wp_integrations'][$index]);
+
+    return true;
+  } else {
+    return false;
   }
 }
 
@@ -192,7 +210,7 @@ function url_decode($text) {
  *
  * @param   Array  $params  Requires programs, categories, date, guid, share_link
  *
- * @return  Array          0; the url 1; the hash
+ * @return  Array           0; the url 1; the hash
  */
 function share_data($params) {
   $query = array();
