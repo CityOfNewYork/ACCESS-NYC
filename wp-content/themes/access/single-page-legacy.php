@@ -14,9 +14,7 @@ require_once ACCESS\controller('page');
  */
 
 // Load polyfills for IE
-$IE = 'Trident/7.0';
-$BROWSER_IE = strpos($_SERVER['HTTP_USER_AGENT'], $IE);
-if ($BROWSER_IE) {
+if (is_ie()) {
   enqueue_script('polyfill');
 }
 
