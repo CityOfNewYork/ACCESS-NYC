@@ -51,7 +51,7 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 
 * **Composer**. PHP and WordPress plugin dependencies for WordPress core and the ACCESS Theme are managed via Composer. [Learn more about Composer on its website](https://getcomposer.org/).
 
-* **Node and NPM**. The ACCESS Theme uses Node with NPM to manage packages such as Gulp to compile assets for the front-end. Learn more about [Node](https://nodejs.org), [NPM](https://www.npmjs.com/), and [Gulp](https://gulpjs.com/) at their respective websites.
+* **Node and NPM**. The ACCESS Theme uses Node with NPM to manage packages such as Gulp to compile assets for the front-end. Learn more about [Node](https://nodejs.org), [NPM](https://www.npmjs.com/), and [Gulp](https://gulpjs.com/) at their respective websites. [NVM](https://github.com/nvm-sh/nvm) is a recommended tool for managing versions of Node. The supported Node version can be set in the theme using the **.nvmrc** file.
 
 ### Installation
 
@@ -195,7 +195,11 @@ By default **/vendor** packages are not tracked by the repository. If a composer
 
 ## Using NPM
 
-NPM is used to manage the assets in the ACCESS Theme. To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/cityofnewyork/access-nyc/tree/main/wp-content/themes/access) theme in your terminal and run:
+NPM is used to manage the assets in the ACCESS Theme. To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/cityofnewyork/access-nyc/tree/main/wp-content/themes/access) theme in your terminal. If using NVM, the **.nvmrc** will set the supported Node version for you by run the following command:
+
+    nvm use
+
+If not using NVM, refer to the file for the supported version and run:
 
     npm install
 
