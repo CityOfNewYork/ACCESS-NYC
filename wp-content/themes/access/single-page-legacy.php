@@ -13,6 +13,11 @@ require_once ACCESS\controller('page');
  * @author NYC Opportunity
  */
 
+// Load polyfills for IE
+if (is_ie()) {
+  enqueue_script('polyfill');
+}
+
 // Main
 enqueue_language_style('style');
 

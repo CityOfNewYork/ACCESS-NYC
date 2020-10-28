@@ -23,6 +23,11 @@ enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 
+// Load polyfills for IE
+if (is_ie()) {
+  enqueue_script('polyfill');
+}
+
 // Main
 enqueue_script('main');
 

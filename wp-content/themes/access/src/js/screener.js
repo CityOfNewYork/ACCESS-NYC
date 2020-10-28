@@ -1,7 +1,4 @@
 /* eslint-env browser */
-// Core-js polyfills.
-// Core-js is made available as a dependency of @babel/preset-env
-import 'core-js/features/array/includes';
 
 // Core Modules
 import Screener from 'modules/screener';

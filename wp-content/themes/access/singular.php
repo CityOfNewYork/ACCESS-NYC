@@ -25,6 +25,11 @@ enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 enqueue_inline('google-translate-element');
 
+// Load polyfills for IE
+if (is_ie()) {
+  enqueue_script('polyfill');
+}
+
 // Main
 enqueue_script('main');
 
