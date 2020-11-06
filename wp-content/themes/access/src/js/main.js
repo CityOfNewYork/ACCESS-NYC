@@ -14,7 +14,6 @@ import Newsletter from 'objects/newsletter/newsletter';
 import TextController from 'objects/text-controller/text-controller';
 
 // Patterns Framework
-// import Track from 'utilities/track/track'; TODO: modify src for compatibility
 import Icons from 'utilities/icons/icons';
 import Toggle from 'utilities/toggle/toggle';
 import Copy from 'utilities/copy/copy';
@@ -32,8 +31,9 @@ import WebShare from 'utilities/web-share/web-share';
   /**
    * Instantiate ACCESS NYC Patterns
    */
+
   new Icons('/wp-content/themes/access/assets/svg/icons.3fd5a989.svg');
-  new Toggle();
+  // new Toggle();
   new Accordion();
   new Filter();
   new Copy();

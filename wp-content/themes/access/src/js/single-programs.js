@@ -1,16 +1,16 @@
 /* eslint-env browser */
-import ProgramsDetail from 'modules/programs-detail';
 
-/**
-* Programs Detail
-*/
+import StepByStep from 'modules/step-by-step';
+
 (() => {
   'use strict';
 
+  /**
+   * Instantiate the Program Guide
+   */
+
   (element => {
-    if (element) {
-      new ProgramsDetail();
-    }
-  })(document.querySelector(ProgramsDetail.selector));
+    if (element) new StepByStep(element);
+  })(document.querySelector(StepByStep.selector));
 })();
 
