@@ -23,7 +23,5 @@ import 'whatwg-fetch';
 import 'utilities/element/matches';
 import 'utilities/element/closest';
 import 'utilities/element/remove';
-import 'utilities/nodelist/foreach';
-
-import 'modules/polyfill-replace-with';
-
+import 'utilities/element/replace-with';
+import 'utilities/node-list/for-each';

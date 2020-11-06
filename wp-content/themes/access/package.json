@@ -95,12 +95,13 @@
     "string-replace-loader": "^2.3.0",
     "vinyl-named": "^1.1.0",
     "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.6.12",
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "@nycopportunity/access-patterns": "^0.15.13",
+    "@nycopportunity/access-patterns": "^0.15.14",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
+    "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
     "underscore": "^1.10.2",
