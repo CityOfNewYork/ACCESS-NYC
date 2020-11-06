@@ -92,3 +92,7 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/utilities/text/text';
 @import '@nycopportunity/access-patterns/src/utilities/toggle/toggle';
 @import '@nycopportunity/access-patterns/src/utilities/typography/typography';
+
+.outline-none {
+  outline: none;
+}
