@@ -7,8 +7,6 @@ import TranslateElement from 'modules/google-translate-element';
 // ACCESS Patterns
 import Accordion from 'components/accordion/accordion';
 import Filter from 'components/filter/filter';
-import ShareForm from 'components/share-form/share-form';
-import Disclaimer from 'components/disclaimer/disclaimer';
 import AlertBanner from 'objects/alert-banner/alert-banner';
 import Newsletter from 'objects/newsletter/newsletter';
 import TextController from 'objects/text-controller/text-controller';
@@ -95,39 +93,6 @@ import WebShare from 'utilities/web-share/web-share';
       newsletter.form.strings = strings;
     });
   })(document.querySelectorAll(Newsletter.selector));
-
-  /**
-   * Initialize the Share Form and Disclaimer
-   */
-  (elements => {
-    elements.forEach(element => {
-      let shareForm = new ShareForm(element);
-      let strings = Object.fromEntries([
-        'SHARE_FORM_SERVER',
-        'SHARE_FORM_SERVER_TEL_INVALID',
-        'SHARE_FORM_VALID_REQUIRED',
-        'SHARE_FORM_VALID_EMAIL_INVALID',
-        'SHARE_FORM_VALID_TEL_INVALID'
-      ].map(i => [
-        i.replace('SHARE_FORM_', ''),
-        localize(i)
-      ]));
-
-      shareForm.strings = strings;
-      shareForm.form.strings = strings;
-
-      shareForm.sent = instance => {
-        let key = instance.type.charAt(0).toUpperCase() +
-          instance.type.slice(1);
-
-        Track.event(key, [
-          {'DCS.dcsuri': `share/${instance.type}`}
-        ]);
-      };
-    });
-
-    new Disclaimer();
-  })(document.querySelectorAll(ShareForm.selector));
 
   /**
    *
