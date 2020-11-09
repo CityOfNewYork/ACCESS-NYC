@@ -3,16 +3,16 @@
     {% if searchCategory.name | length %}{{ searchCategory.name }}{% else %}{{ __('All Programs', 'accessnyctheme') }}{% endif %}
   </button>
 
-  <ul id="aria-c-program-options" class="c-filter__list">
+  <ul id="aria-c-program-options" class="c-filter__list inactive" aria-hidden="true">
     <li>
-      <label class="c-filter__item">
-        <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="">{{__('All Programs', 'accessnyctheme')}}
+      <label class="c-filter__item" tabindex="-1">
+        <input class="js-filter-radio sr-only active" type="radio" name="program_cat" value="" checked="" tabindex="-1">{{ __('All Programs', 'accessnyctheme') }}
       </label>
     </li>
     {% for category in categories %}
     <li>
-      <label class="c-filter__item" for="filter-{{ category.slug }}">
-        <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" id="filter-{{ category.slug }}" value="{{ category.slug }}">{{ category.name }}
+      <label class="c-filter__item" for="filter-{{ category.slug }}" tabindex="-1">
+        <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" id="filter-{{ category.slug }}" value="{{ category.slug }}" tabindex="-1">{{ category.name }}
       </label>
     </li>
     {% endfor %}

@@ -17,12 +17,14 @@
     data: () => ({
       /**
        * Wether the app has been initialized or not.
+       *
        * @type {Boolean}
        */
       init: false,
 
       /**
        * The post type to query.
+       *
        * @type {String}
        */
       type: 'post',
@@ -32,6 +34,7 @@
        * object provided by a custom endpoint set in `register-rest-routes.php`.
        * This endpoint must be present for the app to provide filtering by
        * terms.
+       *
        * @type {Array}
        */
       terms: [],
@@ -40,6 +43,7 @@
        * Initial query and current query used to request posts via the WP REST
        * API. This JSON object maps directly to the URL query used by the WP
        * REST API.
+       *
        * @type {Object}
        */
       query: {
@@ -50,6 +54,7 @@
       /**
        * Initial headers and current headers of visible posts. Headers are used
        * to determine if there are additional pages surrounding a query.
+       *
        * @type {Object}
        */
       headers: {
@@ -62,8 +67,9 @@
        * Initial history and current history of visible posts. This is used to
        * configure how the URL of the page is rewritten. It can include
        * parameters to omit and a mapping object (params) that will convert WP
-       * Query vars to WP REST query vars. This  prevents conflicts with the
+       * Query vars to WP REST query vars. This prevents conflicts with the
        * original WP Query.
+       *
        * @type {Object}
        */
       history: {
@@ -81,6 +87,7 @@
        * should be visible. The first page will always be undefined. When the
        * query is modified by selecting taxonomies to filter on, this entire
        * history is rewritten.
+       *
        * @type {Array}
        */
       posts: [
@@ -126,7 +133,7 @@
         return (this.terms.find(t => t.active)) ? true : false;
       },
 
-      /** @type {string} The language of the document (and query). */
+      /** @type {String} The language of the document (and query). */
       lang: () => {
         let lang = document.querySelector('html').lang;
         return (lang !== 'en') ? {
@@ -141,12 +148,14 @@
     methods: {
       /**
        * Converts a JSON object to URL Query. Opposite of buildJsonQuery.
-       * @param   {object}  query  URL Query structured as JSON Object.
-       * @param   {array}   omit   Set of params as flags to not include them in
+       *
+       * @param   {Object}  query  URL Query structured as JSON Object.
+       * @param   {Array}   omit   Set of params as flags to not include them in
        *                           the returned query string.
-       * @param   {object}  rev    Set of parameter maps to replace provided
+       * @param   {Object}  rev    Set of parameter maps to replace provided
        *                           param names in the query.
-       * @return  {string}         The query string.
+       *
+       * @return  {String}         The query string.
        */
       buildUrlQuery: function(query, omit = false, rev = false) {
         let q = Object.keys(query)
@@ -165,8 +174,8 @@
 
       /**
        * Converts a URL Query String to a JSON Object. Opposite of buildUrlQuery.
-       * @param   {string}  query  URL Query String.
-       * @return  {object}         URL Query structured as JSON Object.
+       * @param   {String}  query  URL Query String.
+       * @return  {Object}         URL Query structured as JSON Object.
        */
       buildJsonQuery: function(query) {
         if (query === '') return false;
@@ -196,8 +205,10 @@
 
       /**
        * Set the URL Query
-       * @param   {object}  query  URL Query structured as JSON Object.
-       * @return  {object}         Vue instance
+       *
+       * @param   {Object}  query  URL Query structured as JSON Object.
+       *
+       * @return  {Object}         Vue instance
        */
       replaceState: function(query) {
         let state = this.buildUrlQuery(query, this.history.omit, this.history.params);
@@ -209,9 +220,11 @@
       /**
        * Basic fetch for retrieving data from an endpoint configured in the
        * data.endpoints property.
-       * @param   {object}  data  A key representing an endpoint configured in
+       *
+       * @param   {Object}  data  A key representing an endpoint configured in
        *                          the data.endpoints property.
-       * @return  {promise}       The fetch request for that endpoint.
+       *
+       * @return  {Promise}       The fetch request for that endpoint.
        */
       fetch: function(data = false) {
         if (!data) return data;
@@ -226,9 +239,11 @@
 
       /**
        * The click event to begin filtering.
-       * @param   {object}  event  The click event on the element that triggers
+       *
+       * @param   {Object}  event  The click event on the element that triggers
        *                           the filter.
-       * @return  {object}         Vue instance
+       *
+       * @return  {Object}         Vue instance
        */
       click: function(event) {
         let taxonomy = event.data.parent;
@@ -245,9 +260,11 @@
 
       /**
        * The reset event to toggle all filters.
-       * @param   {object}  event  The click event on the element that triggers
+       *
+       * @param   {Object}  event  The click event on the element that triggers
        *                           the filter.
-       * @return  {object}         Vue instance
+       *
+       * @return  {Object}         Vue instance
        */
       toggle: function(event) {
         let taxonomy = event.data.parent;
@@ -259,9 +276,11 @@
       /**
        * Single filter function. If the filter is already present in the query
        * it will add the filter to the query.
-       * @param   {string}  taxonomy  The taxonomy slug of the filter
-       * @param   {number}  term      The id of the term to filter on
-       * @return  {object}            Vue instance
+       *
+       * @param   {String}  taxonomy  The taxonomy slug of the filter
+       * @param   {Number}  term      The id of the term to filter on
+       *
+       * @return  {Object}            Vue instance
        */
       filter: function(taxonomy, term) {
         let terms = (this.query.hasOwnProperty(taxonomy)) ?
@@ -280,8 +299,10 @@
       /**
        * A control for filtering all of the terms in a particular taxonomy on
        * or off.
-       * @param   {string}  taxonomy  The taxonomy slug of the filter
-       * @return  {object}            Vue instance
+       *
+       * @param   {String}  taxonomy  The taxonomy slug of the filter
+       *
+       * @return  {Object}            Vue instance
        */
       filterAll: function(taxonomy) {
         let tax = this.terms.find(t => t.slug === taxonomy);
@@ -301,9 +322,11 @@
 
       /**
        * This updates the query property with the new filters.
-       * @param   {string}  taxonomy  The taxonomy slug of the filter
-       * @param   {array}   terms     Array of term ids
-       * @return  {promise}           Resolves when the terms are updated
+       *
+       * @param   {String}  taxonomy  The taxonomy slug of the filter
+       * @param   {Array}   terms     Array of term ids
+       *
+       * @return  {Promise}           Resolves when the terms are updated
        */
       updateQuery: function(taxonomy, terms) {
         return new Promise((resolve, reject) => { // eslint-disable-line no-undef
@@ -324,8 +347,10 @@
 
       /**
        * A function to reset the filters to "All Posts."
-       * @param   {object}  event  The taxonomy slug of the filter
-       * @return  {promise}        Resolves after resetting the filter
+       *
+       * @param   {Object}  event  The taxonomy slug of the filter
+       *
+       * @return  {Promise}        Resolves after resetting the filter
        */
       reset: function(event) {
         return new Promise(resolve => { // eslint-disable-line no-undef
@@ -340,8 +365,10 @@
       /**
        * A function to paginate up or down a post's list based on the change amount
        * assigned to the clicked element.
-       * @param   {object}  event  The click event of the pagination element
-       * @return  {promise}        Resolves after updating the pagination in the
+       *
+       * @param   {Object}  event  The click event of the pagination element
+       *
+       * @return  {Promise}        Resolves after updating the pagination in the
        *                           query
        */
       paginate: function(event) {
@@ -363,7 +390,8 @@
 
       /**
        * Wrapper for the queue promise
-       * @return  {promise} Returns the queue function.
+       *
+       * @return  {Promise} Returns the queue function.
        */
       wp: function() {
         return this.queue();
@@ -374,11 +402,13 @@
        * direction of pagination. It uses an Async method to retrieve the
        * requests in order so that we can determine if there are more posts to
        * show after the request for the current view.
-       * @param   {array}  queries  The amount of queries to make and which
+       *
+       * @param   {Array}  queries  The amount of queries to make and which
        *                            direction to make them in. 0 means the
        *                            current page, 1 means the next page. -1
        *                            would mean the previous page.
-       * @return  {object}          Vue instance.
+       *
+       * @return  {Object}          Vue instance.
        */
       queue: function(queries = [0, 1]) {
         // Set a benchmark query to compare the upcomming query to.
@@ -458,8 +488,10 @@
 
       /**
        * Builds the URL query from the provided query property.
-       * @param   {object}  query  A WordPress query written in JSON format
-       * @return  {promise}        The fetch request for the query
+       *
+       * @param   {Object}  query  A WordPress query written in JSON format
+       *
+       * @return  {Promise}        The fetch request for the query
        */
       wpQuery: function(query) {
         // Build the url query.
@@ -482,7 +514,8 @@
       /**
        * Handles the response, setting the headers of the query and returning
        * the response as JSON.
-       * @return The response object as JSON
+       *
+       * @return {Object} The response object as JSON
        */
       response: function(response) {
         let headers = {
@@ -509,9 +542,10 @@
       /**
        * Processes the posts and maps the data to data maps provided by the
        * data.maps property.
-       * @param   {object}  data     The post data retrieved from the WP REST API
-       * @param   {object}  query    The the query used to get the data
-       * @param   {object}  headers  The the headers of the request
+       *
+       * @param   {Object}  data     The post data retrieved from the WP REST API
+       * @param   {Object}  query    The the query used to get the data
+       * @param   {Object}  headers  The the headers of the request
        */
       process: function(data, query, headers) {
         // If there are posts for this query, map them to the template.
@@ -531,12 +565,20 @@
 
       /**
        * Error response thrown when there is an error in the WP REST AP request.
-       * @param   {object}  response  The error response
+       *
+       * @param  {Object}  response  The error response
        */
       error: function(response) {
         // console.dir(response);
       },
 
+      /**
+       * Convert the current Query or a passed query to JS readable format
+       *
+       * @param   {String}  query  An existing query to parse
+       *
+       * @return  {Object}         Query as a JSON object
+       */
       getState: function(query = false) {
         query = (query) ? query : this.buildJsonQuery(window.location.search);
 

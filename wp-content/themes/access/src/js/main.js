@@ -10,7 +10,6 @@ import Filter from 'components/filter/filter';
 import ShareForm from 'components/share-form/share-form';
 import Disclaimer from 'components/disclaimer/disclaimer';
 import AlertBanner from 'objects/alert-banner/alert-banner';
-import Newsletter from 'objects/newsletter/newsletter';
 import TextController from 'objects/text-controller/text-controller';
 
 // Patterns Framework
@@ -18,6 +17,7 @@ import Icons from 'utilities/icons/icons';
 import Toggle from 'utilities/toggle/toggle';
 import Copy from 'utilities/copy/copy';
 import localize from 'utilities/localize/localize';
+import Newsletter from 'utilities/newsletter/newsletter';
 import WebShare from 'utilities/web-share/web-share';
 
 (function(window) {
@@ -33,10 +33,13 @@ import WebShare from 'utilities/web-share/web-share';
    */
 
   new Icons('/wp-content/themes/access/assets/svg/icons.3fd5a989.svg');
-  // new Toggle();
-  new Accordion();
-  new Filter();
   new Copy();
+  new Filter();
+
+  // Disable the feature for setting the tabindex of potentially focusable
+  // elements within the component to prevent conflicts.
+  let accordion = new Accordion();
+  accordion._toggle.settings.focusable = false;
 
   /**
    * Instantiate Web Share and tracking callback
@@ -65,7 +68,13 @@ import WebShare from 'utilities/web-share/web-share';
    * Instantiate Text Controller
    */
   (element => {
-    if (element) new TextController(element);
+    if (element) {
+      let textController = new TextController(element);
+
+      // Disable the feature for setting the tabindex of potentially focusable
+      // elements within the component to prevent conflicts.
+      textController._toggle.settings.focusable = false;
+    }
   })(document.querySelector(TextController.selector));
 
   /**
