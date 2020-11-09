@@ -2,7 +2,7 @@
 
 // Core Modules
 import Screener from 'modules/screener';
-import ShareFormDisclaimer from 'modules/share-form';
+import 'modules/share-form';
 
 // Patterns Framework
 import Tooltips from 'utilities/tooltips/tooltips';
