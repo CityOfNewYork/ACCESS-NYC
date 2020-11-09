@@ -99,7 +99,7 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "@nycopportunity/access-patterns": "^0.15.14",
+    "@nycopportunity/access-patterns": "^0.16.0",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
     "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",

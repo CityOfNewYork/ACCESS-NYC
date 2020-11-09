@@ -7,30 +7,30 @@
 
   <div aria-hidden="true" class="c-web-share__fallback color-info-status hidden:fadeInUp animated hidden {{ this.fallback_class }}" style="{{ this.fallback_style }}" id="web-share-fallback" role="region">
     <div class="c-web-share__fallback-body">
-      <label class="c-web-share__label" for="web-share-url">
+      <label class="c-web-share__label" for="web-share-url" tabindex="-1">
         {{ __('Share this URL', 'accessnyctheme') }}
       </label>
 
-      <input class="c-web-share__url p-1 w-full mb-2" data-copy-target="web-share-url" id="web-share-url" name="web-share-url" type="text" value="{{ this.share.url }}" />
+      <input class="c-web-share__url p-1 w-full mb-2" data-copy-target="web-share-url" id="web-share-url" name="web-share-url" type="text" value="{{ this.share.url }}" tabindex="-1" />
 
-      <button aria-pressed="false" class="c-web-share__item c-web-share__copy btn btn-small btn-primary" data-copy="web-share-url" data-js="copy track" data-track-key="Web Share" data-track-data='[{"action": "web-share/copied"}]'>
-        <svg class="c-web-share__icon icon icon-ui">
+      <button aria-pressed="false" class="c-web-share__item c-web-share__copy btn btn-small btn-primary" data-copy="web-share-url" data-js="copy track" data-track-key="Web Share" data-track-data='[{"action": "web-share/copied"}]' tabindex="-1">
+        <svg class="c-web-share__icon icon icon-ui" tabindex="-1">
           <use xlink:href="#icon-ui-copy"></use>
         </svg>
 
-        <svg class="c-web-share__icon icon-pressed icon-ui me-1">
+        <svg class="c-web-share__icon icon-pressed icon-ui me-1" tabindex="-1">
           <use xlink:href="#icon-ui-check"></use>
         </svg>{{ __('Copy URL', 'accessnyctheme') }}
       </button>
 
-      <a class="c-web-share__item btn btn-small btn-primary" href="https://www.facebook.com/sharer/sharer.php?u={{ this.share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/facebook"}]'>
-        <svg class="c-web-share__icon icon-ui">
+      <a class="c-web-share__item btn btn-small btn-primary" href="https://www.facebook.com/sharer/sharer.php?u={{ this.share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/facebook"}]' tabindex="-1">
+        <svg class="c-web-share__icon icon-ui" tabindex="-1">
           <use xlink:href="#icon-ui-facebook"></use>
         </svg>{{ __('Facebook', 'accessnyctheme') }}
       </a>
 
-      <a class="c-web-share__item btn btn-small btn-primary me-0" href="https://twitter.com/intent/tweet?text={{ this.share.text|url_encode }}%20{{ this.share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/twitter"}]'>
-        <svg class="c-web-share__icon icon-ui">
+      <a class="c-web-share__item btn btn-small btn-primary me-0" href="https://twitter.com/intent/tweet?text={{ this.share.text|url_encode }}%20{{ this.share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/twitter"}]' tabindex="-1">
+        <svg class="c-web-share__icon icon-ui" tabindex="-1">
           <use xlink:href="#icon-ui-twitter"></use>
         </svg>{{ __('Twitter', 'accessnyctheme') }}
       </a>
