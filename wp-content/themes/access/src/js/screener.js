@@ -2,7 +2,7 @@
 
 // Core Modules
 import Screener from 'modules/screener';
-import ShareFormDisclaimer from 'modules/share-form-disclaimer';
+import ShareFormDisclaimer from 'modules/share-form';
 
 // Patterns Framework
 import Tooltips from 'utilities/tooltips/tooltips';
@@ -20,5 +20,4 @@ import Tooltips from 'utilities/tooltips/tooltips';
   (elements => {
     elements.forEach(element => new Tooltips(element));
   })(document.querySelectorAll(Tooltips.selector));
-
 })();

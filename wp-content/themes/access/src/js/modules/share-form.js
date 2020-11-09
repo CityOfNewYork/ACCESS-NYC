@@ -5,12 +5,10 @@ import Track from 'modules/track';
 import ShareForm from 'components/share-form/share-form';
 import Disclaimer from 'components/disclaimer/disclaimer';
 
-
 // Patterns Framework
 import localize from 'utilities/localize/localize';
 
-
-export default (function() {
+(() => {
   'use strict';
 
   /**
@@ -45,6 +43,5 @@ export default (function() {
 
     new Disclaimer();
   })(document.querySelectorAll(ShareForm.selector));
-
 })();
 

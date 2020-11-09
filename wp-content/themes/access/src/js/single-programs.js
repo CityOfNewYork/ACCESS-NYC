@@ -1,7 +1,7 @@
 /* eslint-env browser */
 
 import StepByStep from 'modules/step-by-step';
-import ShareFormDisclaimer from 'modules/share-form-disclaimer';
+import ShareFormDisclaimer from 'modules/share-form';
 
 (() => {
   'use strict';
@@ -12,6 +12,5 @@ import ShareFormDisclaimer from 'modules/share-form-disclaimer';
   (element => {
     if (element) new StepByStep(element);
   })(document.querySelector(StepByStep.selector));
-
 })();
 
