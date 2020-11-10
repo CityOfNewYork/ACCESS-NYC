@@ -35,6 +35,7 @@ ACCESS\require_blocks();
 ACCESS\require_shortcodes();
 
 new Shortcode\Accordion();
+new Shortcode\CovidScenarios();
 new Shortcode\Newsletter();
 new Shortcode\NewsletterArchive();
 

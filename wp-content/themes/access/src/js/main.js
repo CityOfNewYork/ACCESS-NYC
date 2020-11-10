@@ -30,7 +30,7 @@ import WebShare from 'utilities/web-share/web-share';
    * Instantiate ACCESS NYC Patterns
    */
 
-  new Icons('/wp-content/themes/access/assets/svg/icons.3fd5a989.svg');
+  new Icons('/wp-content/themes/access/assets/svg/icons.517db171.svg');
   new Copy();
   new Filter();
 
