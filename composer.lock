@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88812a8ac71744c4317ef67461a82d3e",
+    "content-hash": "72fa0b41e45517d602f96ba21f65b45b",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -967,30 +967,29 @@
         },
         {
             "name": "nyco/wp-assets",
-            "version": "1.1.5",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-                "reference": "47c074595ca8d21af46a4a8ec62a40b54a94f904"
+                "reference": "3e6a7bab714e6cd1911d20da02d452e05e951227"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/47c074595ca8d21af46a4a8ec62a40b54a94f904",
-                "reference": "47c074595ca8d21af46a4a8ec62a40b54a94f904",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/3e6a7bab714e6cd1911d20da02d452e05e951227",
+                "reference": "3e6a7bab714e6cd1911d20da02d452e05e951227",
                 "shasum": ""
             },
             "require": {
-                "composer/installers": "^1.7",
+                "composer/installers": "^1.9",
                 "mustangostang/spyc": "^0.6"
             },
             "require-dev": {
-                "codeception/codeception": "^2.3",
-                "squizlabs/php_codesniffer": "3.*"
+                "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "wordpress-muplugin",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0+"
+                "GPL-3.0-or-later"
             ],
             "authors": [
                 {
@@ -1010,26 +1009,32 @@
                 "integrations",
                 "javascript",
                 "nycopportunity",
+                "query-monitor",
+                "querymonitor",
                 "register",
                 "scripts",
                 "styles",
                 "theme",
                 "wordpress"
             ],
-            "time": "2020-04-09T20:46:50+00:00"
+            "support": {
+                "issues": "https://github.com/cityofnewyork/nyco-wp-assets/issues",
+                "source": "https://github.com/CityOfNewYork/nyco-wp-assets/tree/v1.2.2"
+            },
+            "time": "2020-10-30T17:04:52+00:00"
         },
         {
             "name": "nyco/wp-config",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-                "reference": "04d74c5b78030066e1c334943e0a10da2e78e2a9"
+                "reference": "443a2a8f35a2eaf236ce2261db1546598900b73b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/04d74c5b78030066e1c334943e0a10da2e78e2a9",
-                "reference": "04d74c5b78030066e1c334943e0a10da2e78e2a9",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/443a2a8f35a2eaf236ce2261db1546598900b73b",
+                "reference": "443a2a8f35a2eaf236ce2261db1546598900b73b",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1043,6 @@
                 "mustangostang/spyc": "^0.6"
             },
             "require-dev": {
-                "codeception/codeception": "^2.3",
                 "squizlabs/php_codesniffer": "3.*"
             },
             "type": "wordpress-muplugin",
@@ -1061,7 +1065,11 @@
                 "environment",
                 "wordpress"
             ],
-            "time": "2020-04-09T20:44:23+00:00"
+            "support": {
+                "issues": "https://github.com/cityofnewyork/nyco-wp-config/issues",
+                "source": "https://github.com/CityOfNewYork/nyco-wp-config/tree/v1.0.2"
+            },
+            "time": "2020-10-07T02:14:17+00:00"
         },
         {
             "name": "nyco/wp-open-data-transients",
@@ -2827,5 +2835,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

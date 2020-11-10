@@ -1,6 +1,40 @@
+# Default Options
+
+# WP_OPTION_ADMIN_EMAIL: ''
+WP_OPTION_BLOG_PUBLIC: false
+FORCE_SSL_ADMIN: true
+DISALLOW_FILE_EDIT: true
+
+# Local Environments
 
 development:
-  SOME_VAR: someVarHere
+  WP_SITEURL: http://localhost:8080
+  WP_HOME: http://localhost:8080
+  FORCE_SSL_ADMIN: false
+  QM_ENABLE_CAPS_PANEL: true
+  QM_DARK_MODE: true
+  WP_OPTION_BLOG_PUBLIC: true
 
-production:
-  SOME_VAR: someVarHere
+testing:
+  WP_SITEURL: http://localhost:8080
+  WP_HOME: http://localhost:8080
+  FORCE_SSL_ADMIN: false
+  QM_ENABLE_CAPS_PANEL: true
+  QM_DARK_MODE: true
+  WP_OPTION_BLOG_PUBLIC: true
+  DISALLOW_FILE_EDIT: true
+
+# Remote Environments
+
+test:
+  # WP_SITEURL:
+  # WP_HOME:
+
+stage:
+  # WP_SITEURL:
+  # WP_HOME:
+
+prod:
+  # WP_SITEURL:
+  # WP_HOME:
+  WP_OPTION_BLOG_PUBLIC: true

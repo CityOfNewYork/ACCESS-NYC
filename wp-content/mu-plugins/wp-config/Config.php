@@ -52,7 +52,7 @@ class Config {
      * Auto load environment file if it exits
      * Define WP_ENV in the root wp-config.php before the wp-settings.php include
      */
-    if (null !== WP_ENV && file_exists($this->path . WP_ENV . '.php')) {
+    if (defined('WP_ENV') && file_exists($this->path . WP_ENV . '.php')) {
       require_once $this->path . WP_ENV . '.php';
     }
 
@@ -70,13 +70,13 @@ class Config {
        */
 
       // Extract env specific variables
-      if (null !== WP_ENV && isset($config[WP_ENV])) {
+      if (defined('WP_ENV') && isset($config[WP_ENV])) {
         $this->envs = $config[WP_ENV];
       }
 
       // Merge env variables over root variables
       $this->set(array_merge($config, $this->envs));
-    } elseif (null !== WP_DEBUG && WP_DEBUG) {
+    } elseif (defined('WP_DEBUG') && WP_DEBUG) {
       throw new Exception(
         "The configuration file or secret could not be found at $this->path."
       );
@@ -94,6 +94,7 @@ class Config {
 
   /**
    * Set configuration to environment variables
+   *
    * @param  Array  $config  An array containing environment variables to set.
    *                         Variables containing arrays or objects are not set.
    */
@@ -116,8 +117,9 @@ class Config {
            */
 
           if (substr($name, 0, 10) === 'WP_OPTION_') {
-            update_option(strtolower(str_replace('WP_OPTION_', '', $name)),
-              $decrypted);
+            update_option(
+              strtolower(str_replace('WP_OPTION_', '', $name)), $decrypted
+            );
           }
 
           /**

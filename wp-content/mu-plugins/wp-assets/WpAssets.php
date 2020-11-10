@@ -5,25 +5,25 @@ namespace NYCO;
 use Spyc;
 
 class WpAssets {
-  /** @var String Will be set to the template driectory in the constructor */
+  /** @var String Will be set to the template directory in the constructor */
   public $templates;
 
-  /** @var String Will be set to the template driectory uri in the constructor */
+  /** @var String Will be set to the template directory uri in the constructor */
   public $uri;
 
-  /** @var String The directory within $templates for precompiled static assets */
+  /** @var String The directory within $templates for pre-compiled static assets */
   public $assets = 'assets/';
 
-  /** @var String The directory within $assets for stripts */
+  /** @var String The directory within $assets for scripts */
   public $scripts = 'scripts/';
 
-  /** @var String The directory within $assets for stripts */
+  /** @var String The directory within $assets for scripts */
   public $styles = 'styles/';
 
-  /** @var String The directory within mu for stripts */
+  /** @var String The directory within mu for scripts */
   public $config = 'config/integrations.yml';
 
-  /** @var String Script placeholder that is deregistered for adding inline scripts */
+  /** @var String Script placeholder that is de-registered for adding inline scripts */
   public $placeholder = 'donotprintthis.js';
 
   /** @var String Namespace for registering REST routes */
@@ -82,7 +82,7 @@ class WpAssets {
      * Add the script
      */
 
-    wp_register_script($handle, $src, $deps, $ver, $in_footer);
+    $registered = wp_register_script($handle, $src, $deps, $ver, $in_footer);
 
     if ($enqueue) {
       wp_enqueue_script($handle, $src, $deps, $ver, $in_footer);
@@ -94,7 +94,7 @@ class WpAssets {
     return array(
       'source' => $src,
       'registered' => $registered,
-      'enqueued' => $enqueued
+      'enqueued' => $enqueue
     );
   }
 
