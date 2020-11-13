@@ -385,15 +385,6 @@ private static $installed = array (
         0 => '1.0',
       ),
     ),
-    'symfony/yaml' => 
-    array (
-      'pretty_version' => 'v3.4.0',
-      'version' => '3.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'b3d0c9c11be3831b84825967dc6b52b5a7b84e04',
-    ),
     'timber/timber' => 
     array (
       'pretty_version' => '1.16.0',
@@ -420,15 +411,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '73fdd7e25547910ed339b6a8e7eef9e91a2deb41',
-    ),
-    'umutphp/wp-vulnerability-check' => 
-    array (
-      'pretty_version' => '0.2.5',
-      'version' => '0.2.5.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7',
     ),
     'upstatement/routes' => 
     array (
@@ -636,6 +618,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'tags/1.5.6',
+    ),
+    'wpackagist-plugin/wpscan' => 
+    array (
+      'pretty_version' => '1.11',
+      'version' => '1.11.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'tags/1.11',
     ),
   ),
 );

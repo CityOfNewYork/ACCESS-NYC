@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72fa0b41e45517d602f96ba21f65b45b",
+    "content-hash": "db9f271dad1940cf48498830d5718efa",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2459,6 +2459,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wps-hide-login/"
+        },
+        {
+            "name": "wpackagist-plugin/wpscan",
+            "version": "1.11",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wpscan/",
+                "reference": "tags/1.11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wpscan.1.11.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wpscan/"
         }
     ],
     "packages-dev": [
@@ -2615,109 +2633,6 @@
                 "psr-3"
             ],
             "time": "2020-03-23T09:12:05+00:00"
-        },
-        {
-            "name": "symfony/yaml",
-            "version": "v3.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "b3d0c9c11be3831b84825967dc6b52b5a7b84e04"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/b3d0c9c11be3831b84825967dc6b52b5a7b84e04",
-                "reference": "b3d0c9c11be3831b84825967dc6b52b5a7b84e04",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5.9|>=7.0.8"
-            },
-            "conflict": {
-                "symfony/console": "<3.4"
-            },
-            "require-dev": {
-                "symfony/console": "~3.4|~4.0"
-            },
-            "suggest": {
-                "symfony/console": "For validating YAML files using the lint command"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Yaml Component",
-            "homepage": "https://symfony.com",
-            "time": "2017-11-29T13:28:14+00:00"
-        },
-        {
-            "name": "umutphp/wp-vulnerability-check",
-            "version": "0.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/umutphp/wp-vulnerability-check.git",
-                "reference": "69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/umutphp/wp-vulnerability-check/zipball/69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7",
-                "reference": "69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "php": ">=5.4.0",
-                "symfony/yaml": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.5"
-            },
-            "bin": [
-                "wp-vulnerability-check"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "UmutPHP\\WPVulnerabilityCheck\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Umut Işık",
-                    "email": "umutphp@gmail.com"
-                }
-            ],
-            "description": "Check the WPScan Vulnerability Database via API to identify the security issues on plugins and WordPress installed.",
-            "time": "2020-03-04T10:06:43+00:00"
         },
         {
             "name": "whoops/soap",

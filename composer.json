@@ -17,7 +17,8 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "https://wpackagist.org"
+      "url": "https://wpackagist.org",
+      "only": ["wpackagist-plugin/*"]
     }
   ],
   "require": {
@@ -45,13 +46,13 @@
     "wpackagist-plugin/search-everything": "^8.1.9",
     "wpackagist-plugin/wp-all-export": "^1.2.6",
     "wpackagist-plugin/wp-security-questions": "^1.0.5",
-    "wpackagist-plugin/wps-hide-login": "^1.5.5"
+    "wpackagist-plugin/wps-hide-login": "^1.5.5",
+    "wpackagist-plugin/wpscan": "^1.11"
   },
   "require-dev": {
     "filp/whoops": "^2.7.2",
     "nielsdeblaauw/query-monitor-twig-profile": "^1.2",
     "squizlabs/php_codesniffer": "^3.5.3",
-    "umutphp/wp-vulnerability-check": "^0.2.5",
     "whoops/soap": "^1.0",
     "wpackagist-plugin/query-monitor": "^3.6.0",
     "wpackagist-plugin/redis-cache": "^1.6",
@@ -68,7 +69,6 @@
     "predeploy": [
       "@development",
       "@lint",
-      "@wpscan",
       "@production"
     ],
     "lint": [
@@ -76,9 +76,6 @@
     ],
     "fix": [
       "vendor/bin/phpcbf --standard=phpcs.xml"
-    ],
-    "wpscan": [
-      "vendor/bin/wp-vulnerability-check --config wpscan.yml"
     ],
     "version": [
       "composer update nothing",
