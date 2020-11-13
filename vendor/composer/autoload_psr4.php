@@ -6,8 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Whoops\\Handler\\' => array($vendorDir . '/whoops/soap/src'),
-    'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'Twilio\\' => array($vendorDir . '/twilio/sdk/src/Twilio'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Timber\\' => array($vendorDir . '/timber/timber/lib'),
@@ -19,7 +17,6 @@ return array(
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'Soundasleep\\' => array($vendorDir . '/soundasleep/html2text/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
