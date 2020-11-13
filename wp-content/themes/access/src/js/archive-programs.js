@@ -80,9 +80,7 @@ import localize from 'utilities/localize/localize';
         })
       }).$mount(`[data-js="${element.dataset.js}"]`);
     }
-
   })(document.querySelector('[data-js="programs"]'));
-
 })(window, Vue);
 
 

@@ -17,6 +17,7 @@
     "predeploy": "NODE_ENV='production' gulp build",
     "scripts": "NODE_ENV='production' gulp scripts",
     "styles": "NODE_ENV='production' gulp styles",
+    "svgs": "NODE_ENV='production' gulp svgs",
     "regen": "npm install --package-lock-only",
     "version": "echo \"No version task required\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -101,6 +102,7 @@
   "dependencies": {
     "@nycopportunity/access-patterns": "^0.16.0",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
+    "@nycopportunity/wp-archive-vue": "^1.1.2",
     "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
