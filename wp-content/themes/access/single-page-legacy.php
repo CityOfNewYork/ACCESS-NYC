@@ -2,6 +2,7 @@
 
 /**
  * Template name: Legacy Page
+ *
  * @author NYC Opportunity
  */
 
@@ -10,13 +11,9 @@ require_once ACCESS\controller('page');
 
 /**
  * Enqueue
+ *
  * @author NYC Opportunity
  */
-
-// Load polyfills for IE
-if (is_ie()) {
-  enqueue_script('polyfill');
-}
 
 // Main
 enqueue_language_style('style');
@@ -31,6 +28,8 @@ enqueue_inline('google-tag-manager');
 enqueue_inline('google-translate-element');
 
 // Main
+// TODO: Evaluate coverage of individual polyfills and load per browser
+enqueue_script('polyfill');
 enqueue_script('main');
 
 /**

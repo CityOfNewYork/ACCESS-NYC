@@ -9,6 +9,7 @@ require_once ACCESS\controller('homepage-tout');
 
 /**
  * Enqueue
+ *
  * @author NYC Opportunity
  */
 
@@ -23,12 +24,9 @@ enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 
-// Load polyfills for IE
-if (is_ie()) {
-  enqueue_script('polyfill');
-}
-
 // Main
+// TODO: Evaluate coverage of individual polyfills and load per browser
+enqueue_script('polyfill');
 enqueue_script('main');
 
 /**
