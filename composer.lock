@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db9f271dad1940cf48498830d5718efa",
+    "content-hash": "5e1f1d4d6a8e81b26bcf5d6305e4631c",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2750,6 +2750,5 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "platform-dev": []
 }
