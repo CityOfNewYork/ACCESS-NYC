@@ -129,10 +129,13 @@ class StepByStep {
     if (window[this.STEP_TOGGLING])
       return;
 
-    let hash = window.location.hash.replace('#', '');
+    const hash = window.location.hash.replace('#', '');
 
-    let step = Array.from(this.steps)
+    const step = Array.from(this.steps)
       .findIndex(s => s.dataset.step === hash);
+
+    // Return if hash is not found in steps
+    if (step === -1) return;
 
     // Prep symbolic anchor
     this.anchor.classList.remove(this.toggle.settings.activeClass);
