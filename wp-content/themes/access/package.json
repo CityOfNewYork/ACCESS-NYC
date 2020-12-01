@@ -107,6 +107,6 @@
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
     "underscore": "^1.10.2",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "^3.5.0"
   }
 }
