@@ -7,4 +7,8 @@
   inline:
     path: config/integrations/scripts/global-site-tag.js
     position: after
+  attrs:
+    crossorigin: 'anonymous'
+    async: true
+
 

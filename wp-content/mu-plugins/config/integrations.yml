@@ -8,6 +8,8 @@
   inline:
     path: config/integrations/scripts/rollbar.js
     position: before
+  attrs:
+    async: true
 
 - handle: webtrends
   path: https://www1.nyc.gov/assets/home/js/webtrends/webtrends_v10.js
@@ -48,6 +50,8 @@
   inline:
     path: config/integrations/scripts/google-analytics.js
     position: after
+  attrs:
+    async: true
 
 - handle: google-tag-manager
   dep: GOOGLE_TAG_MANAGER
@@ -66,6 +70,8 @@
 - handle: google-recaptcha
   path: https://www.google.com/recaptcha/api.js?onload=screenerCallback&render=explicit
   in_footer: false
+  attrs:
+    async: true
 
 - handle: google-translate-element
   path: https://translate.google.com/translate_a/element.js?cb=window.googleTranslateInit

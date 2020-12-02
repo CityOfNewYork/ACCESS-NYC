@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e1f1d4d6a8e81b26bcf5d6305e4631c",
+    "content-hash": "aeebb1e459a1dd18af0d7b95e30b88a2",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -967,16 +967,16 @@
         },
         {
             "name": "nyco/wp-assets",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-                "reference": "3e6a7bab714e6cd1911d20da02d452e05e951227"
+                "reference": "01b4e6ae23a097483b7ca2bdcf6809d52389eeb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/3e6a7bab714e6cd1911d20da02d452e05e951227",
-                "reference": "3e6a7bab714e6cd1911d20da02d452e05e951227",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/01b4e6ae23a097483b7ca2bdcf6809d52389eeb2",
+                "reference": "01b4e6ae23a097483b7ca2bdcf6809d52389eeb2",
                 "shasum": ""
             },
             "require": {
@@ -1017,11 +1017,7 @@
                 "theme",
                 "wordpress"
             ],
-            "support": {
-                "issues": "https://github.com/cityofnewyork/nyco-wp-assets/issues",
-                "source": "https://github.com/CityOfNewYork/nyco-wp-assets/tree/v1.2.2"
-            },
-            "time": "2020-10-30T17:04:52+00:00"
+            "time": "2020-11-30T21:47:25+00:00"
         },
         {
             "name": "nyco/wp-config",
