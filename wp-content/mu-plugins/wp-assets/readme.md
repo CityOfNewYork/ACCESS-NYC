@@ -57,7 +57,7 @@ The core of the plugin is a single class with several methods that are available
 
 * [Add Script](#add-script)
 * [Add Style](#add-style)
-* [Add Crossorigin Attr](#add-crossorigin-attr)
+* [Add Attribute](#add-attr)
 * [Load Integrations](#load-integrations)
 * [Add Inline](#add-inline)
 * [Register Rest Routes](#register-rest-routes)
@@ -130,19 +130,22 @@ This will scan the default style assets directory *assets/styles/* of the curren
 
 ---
 
-### Add Crossorigin Attr
+### Add Attr
 
-    ->addCrossoriginAttr( ...args )
+    ->addAttr( ...args )
 
-Uses the [`script_loader_tag`](https://developer.wordpress.org/reference/hooks/script_loader_tag/) filter to add `crossorigin="anonymous"` attribute to a specific script. For more details on this attribute see the following [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes).
+Uses the [`script_loader_tag`](https://developer.wordpress.org/reference/hooks/script_loader_tag/) filter to add an attribute and a value to a specific script. For example; crossorigin="anonymous". 
+Attribute values may be strings. To add a boolean attribute such as `async` or `defer` pass `true`."
 
 **...args**
 
 - `String  $name`  The name of the script.
+- `String  $attr`  The name of the attribute.
+- `String|Boolean $value` The value set for the attribute.
 
 #### Examples
 
-    $WpAssets->addCrossoriginAttr('script');
+    $WpAssets->addAttr('script', 'async', true);
 
 [Back to top](#documentation)
 
@@ -176,6 +179,10 @@ A configuration file may include multiple objects with the following parameters.
         position: before
       body_open:
         path: config/integrations/body/a-html-tag-to-include-in-the-body.html
+      attrs:
+        crossorigin: 'anonymous'
+        async: true
+
 
     - handle: google-analytics
       path: https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}
@@ -228,6 +235,9 @@ This will load the `'google-analytics'` integration. Below is the Google Analyti
       inline:
         path: config/integrations/scripts/google-analytics.js
         position: after
+      attrs:
+        async: true
+
 
 The *config/integrations/scripts/google-analytics.js* script should contain something like the following;
 
@@ -241,7 +251,7 @@ The constant `GOOGLE_ANALYTICS` should be defined somewhere in another part of y
 
 The following will be printed in the head of the document;
 
-    <script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=GTM-9A9A9A9">
+    <script async type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=GTM-9A9A9A9">
     <script>
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
