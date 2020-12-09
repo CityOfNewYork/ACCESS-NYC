@@ -2,6 +2,10 @@
 
 if( !defined( 'ABSPATH' ) ) exit();
 
+/**
+ * @var $this Limit_Login_Attempts
+ */
+
 $debug_info = '';
 
 $ips = $server = array();
@@ -9,7 +13,7 @@ foreach ($_SERVER as $key => $value) {
 
 	if(in_array($key, ['SERVER_ADDR'])) continue;
 
-	if(filter_var($value, FILTER_VALIDATE_IP)) {
+	if( $this->is_ip_valid( $value ) ) {
 
 	    if(!in_array($value, $ips)) {
 

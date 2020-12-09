@@ -98,7 +98,7 @@ class UIHelper
   public function setSourceSizes($attach_id)
   {
     $data = $this->getImageSizes($attach_id, 'full');  // wp_get_attachment_image_src($attach_id, 'full');
-    $file = get_attached_file($attach_id);
+  //  $file = get_attached_file($attach_id);
 
     if (is_array($data))
     {
@@ -110,22 +110,29 @@ class UIHelper
   }
 
   // Returns Preview Image HTML Output.
-  public function getPreviewImage($attach_id)
+  public function getPreviewImage($attach_id,$file)
   {
       $data = false;
 
       if ($attach_id > 0)
       {
         $data = $this->getImageSizes($attach_id, $this->preview_size); //wp_get_attachment_image_src($attach_id, $this->preview_size);
-        $file = get_attached_file($attach_id);
-        Log::addDebug('Attached File '  . $file, $data);
+        /*$file = get_attached_file($attach_id);
 
-
+        // If the file is relative, prepend upload dir.
+        if (! file_exists($file) && $file && 0 !== strpos( $file, '/' ) && ! preg_match( '|^.:\\\|', $file ) )
+        {
+          $file = get_post_meta( $attach_id, '_wp_attached_file', true );
+          $uploads = wp_get_upload_dir();
+          $file = $uploads['basedir'] . "/$file";
+        }
+        */
+        Log::addDebug('Attached File '  . $file->getFullFilePath(), $data);
       }
 
       $mime_type = get_post_mime_type($attach_id);
 
-      if (! is_array($data) || ! file_exists($file) )
+      if (! is_array($data) || ! $file->exists() )
       {
         // if attachid higher than zero ( exists ) but not the image, fail, that's an error state.
         $icon = ($attach_id < 0) ? '' : 'dashicons-no';
@@ -137,16 +144,20 @@ class UIHelper
             'is_image' => false,
             'is_document' => $is_document,
             'icon' => $icon,
+            'mime_type' => null,
         );
+
+
 
         // failed, it might be this server doens't support PDF thumbnails. Fallback to File preview.
         if ($mime_type == 'application/pdf')
         {
-            return $this->getPreviewFile($attach_id);
+            return $this->getPreviewFile($attach_id, $file);
         }
 
         return $this->getPlaceHolder($args);
       }
+
 
       $url = $data[0];
       $width = $data[1];
@@ -171,6 +182,7 @@ class UIHelper
         'height' => $height,
         'image' => $image,
         'mime_type' => $mime_type,
+        'file_size' => $file->getFileSize(),
       );
 
       $output = $this->getPlaceHolder($args);
@@ -221,18 +233,18 @@ class UIHelper
     return $output;
   }
 
-  public function getPreviewFile($attach_id)
+  public function getPreviewFile($attach_id, $file)
   {
     if ($attach_id > 0)
     {
-      $filepath = get_attached_file($attach_id);
-      $filename = basename($filepath);
+      //$filepath = get_attached_file($attach_id);
+      $filename = $file->getFileName();
     }
     else {
       $filename = false;
     }
 
-    $mime_type = get_post_mime_type($attach_id);
+    $mime_type = $file->getFileMime();
 
     $args = array(
       'width' => 300,
@@ -241,6 +253,7 @@ class UIHelper
       'is_document' => true,
       'layer' => $filename,
       'mime_type' => $mime_type,
+      'file_size' => $file->getFileSize(),
     );
     $output = $this->getPlaceHolder($args);
     return $output;
@@ -279,9 +292,11 @@ class UIHelper
         'is_image' => true,
         'is_document' => false,
         'mime_type' => false,
+        'file_size' => false,
     );
 
     $args = wp_parse_args($args, $defaults);
+
     $w = $args['width'];
     $h = $args['height'];
 
@@ -311,14 +326,24 @@ class UIHelper
       $filetype = 'data-filetype="' . $args['mime_type'] . '"';
     }
 
+    $filesize = ($args['file_size']) ? $args['file_size'] : '';
+
 
     $output = "<div class='image_placeholder $placeholder_class' $filetype style='width:" . $w . "px; height:". $h ."px'> ";
     $output .= $args['image'];
     $output .= "<div class='dashicons $icon'>&nbsp;</div>";
     $output .= "<span class='textlayer'>" . $args['layer'] . "</span>";
+    $output .= "<div class='image_size'>" . $this->convertFileSize($filesize). "</div>";
     $output .= "</div>";
 
+
+
     return $output;
+  }
+
+  private function convertFileSize($filesize)
+  {
+     return size_format($filesize);
   }
 
     /**
@@ -353,7 +378,7 @@ class UIHelper
   {
       $uploadDir = wp_upload_dir();
       if (isset($uploadDir['subdir']))
-        return ltrim($uploadDir['subdir'], '/'); 
+        return ltrim($uploadDir['subdir'], '/');
       else
         return false;
   }

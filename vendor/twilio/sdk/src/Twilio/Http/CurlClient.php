@@ -9,14 +9,12 @@ use Twilio\Exceptions\EnvironmentException;
 class CurlClient implements Client {
     public const DEFAULT_TIMEOUT = 60;
     protected $curlOptions = [];
-    protected $debugHttp = false;
 
     public $lastRequest;
     public $lastResponse;
 
     public function __construct(array $options = []) {
         $this->curlOptions = $options;
-        $this->debugHttp = \getenv('DEBUG_HTTP_TRAFFIC') === 'true';
     }
 
     public function request(string $method, string $url,
@@ -52,20 +50,6 @@ class CurlClient implements Client {
                 ? array($parts[1], $parts[2])
                 : array($parts[0], $parts[1]);
 
-            if ($this->debugHttp) {
-                $u = \parse_url($url);
-                $hdrLine = $method . ' ' . $u['path'];
-                if (isset($u['query']) && \strlen($u['query']) > 0) {
-                    $hdrLine = $hdrLine . '?' . $u['query'];
-                }
-                \error_log($hdrLine);
-                foreach ($headers as $key => $value) {
-                    \error_log("$key: $value");
-                }
-                if ($method === 'POST') {
-                    \error_log("\n" . $options[CURLOPT_POSTFIELDS] . "\n");
-                }
-            }
             $statusCode = \curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
             $responseHeaders = [];
@@ -78,16 +62,8 @@ class CurlClient implements Client {
 
             \curl_close($curl);
 
-            if (isset($buffer) && \is_resource($buffer)) {
-                \fclose($buffer);
-            }
-
-            if ($this->debugHttp) {
-                \error_log("HTTP/1.1 $statusCode");
-                foreach ($responseHeaders as $key => $value) {
-                    \error_log("$key: $value");
-                }
-                \error_log("\n$body");
+            if (isset($options[CURLOPT_INFILE]) && \is_resource($options[CURLOPT_INFILE])) {
+                \fclose($options[CURLOPT_INFILE]);
             }
 
             $this->lastResponse = new Response($statusCode, $body, $responseHeaders);
@@ -98,8 +74,8 @@ class CurlClient implements Client {
                 \curl_close($curl);
             }
 
-            if (isset($buffer) && \is_resource($buffer)) {
-                \fclose($buffer);
+            if (isset($options[CURLOPT_INFILE]) && \is_resource($options[CURLOPT_INFILE])) {
+                \fclose($options[CURLOPT_INFILE]);
             }
 
             throw $e;

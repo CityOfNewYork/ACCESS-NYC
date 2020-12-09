@@ -39911,7 +39911,7 @@ GoogleMerchants.directive('tipsy', ['$document', function($document) {
                     }
                     return ver + hor;
                 },
-                live: true,
+                live: '.wpallexport-help',
                 html: true,
                 opacity: 1
             });

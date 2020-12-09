@@ -15,7 +15,7 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  */
 class AssetVersionList extends ListResource {
     /**
@@ -25,7 +25,7 @@ class AssetVersionList extends ListResource {
      * @param string $serviceSid The SID of the Service that the Asset Version
      *                           resource is associated with
      * @param string $assetSid The SID of the Asset resource that is the parent of
-     *                         the asset version
+     *                         the Asset Version
      */
     public function __construct(Version $version, string $serviceSid, string $assetSid) {
         parent::__construct($version);

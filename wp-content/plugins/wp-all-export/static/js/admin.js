@@ -18,7 +18,17 @@
 		'hasVariations' : false,
 		'availableDataSelector': $('.right.template-sidebar .wpae_available_data'),
 		'availableDataSelectorInModal' : $('fieldset.optionsset .wpae_available_data'),
-		'modeEnabled' : true
+		'modeEnabled' : true,
+		'fixImageFieldNames' : function($clone) {
+
+            if ( $clone.find('input[name^=cc_type]').val().indexOf('attachment_') !== -1 )
+            {
+                $clone.find('.wpallexport-xml-element').html('Attachment ' + $clone.find('input[name^=cc_name]').val());
+                $clone.find('input[name^=cc_name]').val('Attachment ' + $clone.find('input[name^=cc_name]').val());
+            }
+
+            return $clone;
+		}
 	};
 
 	function processElementName($element, $elementName){
@@ -231,30 +241,29 @@
 		$('table.wpallexport-layout').length && $('table.wpallexport-layout td.left h2:first-child').css('margin-top',  $('.wrap').offset().top - $('table.wpallexport-layout').offset().top);
 	}, 10);
 
-	// help icons
-    $('.wpallexport-help, .help_scheduling').tipsy({
-		gravity: function() {
-			var ver = 'n';
-			if ($(document).scrollTop() < $(this).offset().top - $('.tipsy').height() - 2) {
-				ver = 's';
-			}
-			var hor = '';
-			if ($(this).offset().left + $('.tipsy').width() < $(window).width() + $(document).scrollLeft()) {
-				hor = 'w';
-			} else if ($(this).offset().left - $('.tipsy').width() > $(document).scrollLeft()) {
-				hor = 'e';
-			}
-	        return ver + hor;
-	    },
-		live: true,
-		html: true,
-		opacity: 1
-	}).live('click', function () {
-		return false;
-	}).each(function () { // fix tipsy title for IE
-		$(this).attr('original-title', $(this).attr('title'));
-		$(this).removeAttr('title');
-	});
+    // help icons
+    $('.wpallexport-help').tipsy({
+        gravity: function() {
+            var ver = 'n';
+            if ($(document).scrollTop() < $(this).offset().top - $('.tipsy').height() - 2) {
+                ver = 's';
+            }
+            var hor = '';
+            if ($(this).offset().left + $('.tipsy').width() < $(window).width() + $(document).scrollLeft()) {
+                hor = 'w';
+            } else if ($(this).offset().left - $('.tipsy').width() > $(document).scrollLeft()) {
+                hor = 'e';
+            }
+            return ver + hor;
+        },
+        html: true,
+        opacity: 1
+    }).click(function () {
+        return false;
+    }).each(function () { // fix tipsy title for IE
+        $(this).attr('original-title', $(this).attr('title'));
+        $(this).removeAttr('title');
+    });
 
 	if ($('#wp_all_export_code').length){
 		var editor = CodeMirror.fromTextArea(document.getElementById("wp_all_export_code"), {
@@ -317,7 +326,7 @@
 	}
 
 	// swither show/hide logic
-	$('input.switcher').live('change', function (e) {
+	$('input.switcher').change(function (e) {
 
 		if ($(this).is(':radio:checked')) {
 			$(this).parents('form').find('input.switcher:radio[name="' + $(this).attr('name') + '"]').not(this).change();
@@ -336,7 +345,7 @@
 	}).change();
 
 	// swither show/hide logic
-	$('input.switcher-horizontal').live('change', function (e) {
+	$('input.switcher-horizontal').change('change', function (e) {
 
 		if ($(this).is(':checked')) {
 			$(this).parents('form').find('input.switcher-horizontal[name="' + $(this).attr('name') + '"]').not(this).change();
@@ -353,7 +362,7 @@
 	}).change();
 
 	// autoselect input content on click
-	$('input.selectable').live('click', function () {
+	$(document).on('click', 'input.selectable', function () {
 		$(this).select();
 	});
 
@@ -375,7 +384,7 @@
 
 	});
 
-	$('.wpallexport-collapsed').find('.wpallexport-collapsed-header:not(.disable-jquery)').live('click', function(){
+    $(document).on('click', '.wpallexport-collapsed .wpallexport-collapsed-header:not(.disable-jquery)',function(){
 
 		var $parent = $(this).parents('.wpallexport-collapsed:first');
 
@@ -783,7 +792,7 @@
 
 			switch ($(this).attr('rel')){
 				case 'specific_type':
-					
+
 					$('.wpallexport-user-export-notice').hide();
 					$('.wpallexport-shop_customer-export-notice').hide();
 		    		$('.wpallexport-comments-export-notice').hide();
@@ -792,36 +801,36 @@
 					{
 						if (postType == 'users'){
 							$('.wpallexport-user-export-notice').show();
-							showImportType = false; 						
+							showImportType = false;
 							$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideDown();
-						}						
+						}
 						else if (postType == 'comments')
 						{
 							$('.wpallexport-comments-export-notice').show();
-							showImportType = false; 						
+							showImportType = false;
 							$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideDown();
 						}
 						else if (postType == 'shop_customer')
 						{
 							$('.wpallexport-customer-export-notice').show();
-							showImportType = false; 						
+							showImportType = false;
 							$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideDown();
 						}
 						else if (postType == 'taxonomies'){
-							showImportType = false; 						
+							showImportType = false;
 							$('.taxonomy_to_export_wrapper').slideDown();
 							$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideDown();
 						}
 						else
-						{							
-							showImportType = true; 						
+						{
+							showImportType = true;
 							$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideDown();
-						}						
-						
-						$('.wpallexport-filtering-wrapper').show();				
-					}											
+						}
+
+						$('.wpallexport-filtering-wrapper').show();
+					}
 					break;
-				case 'advanced_type':		
+				case 'advanced_type':
 
 					$('.wpallexport-user-export-notice').hide();
 		    		$('.wpallexport-comments-export-notice').hide();
@@ -830,20 +839,20 @@
 					if ($('input[name=wp_query_selector]').val() == 'wp_user_query')
 					{
 						$('.wpallexport-user-export-notice').show();
-						$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideUp();					
-						showImportType = false; 
+						$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideUp();
+						showImportType = false;
 					}
 					else if ($('input[name=wp_query_selector]').val() == 'wp_comment_query')
 					{
 						$('.wpallexport-comments-export-notice').show();
-						$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideUp();					
-						showImportType = false; 
+						$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideUp();
+						showImportType = false;
 					}
 					else
-					{						
-						$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideUp();					
-						showImportType = true; 
-					}										
+					{
+						$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideUp();
+						showImportType = true;
+					}
 					$('.wpallexport-filtering-wrapper').hide();
 					filtering();
 					break;
@@ -873,6 +882,7 @@
 
 				$('.wpallexport-user-export-notice').hide();
 		    	$('.wpallexport-comments-export-notice').hide();
+		    	$('.wpallexport-reviews-export-notice').hide();
 		    	$('.wpallexport-shop_customer-export-notice').hide();
 		    	$('.wpallexport-taxonomies-export-notice').hide();
 
@@ -896,15 +906,14 @@
 						}
 						else{
 							$('.wpallexport-choose-file').find('.wpallexport-filtering-wrapper').slideUp();
-							$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideUp();							
+							$('.wpallexport-choose-file').find('.wpallexport-upload-resource-step-two').slideUp();
 						}
 						$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
 					}
 					else{
 						$('.taxonomy_to_export_wrapper').slideUp();
 
-						if (postType == 'users' && !$('#pmxe_user_addon_free_installed').val()
-                    )
+						if (postType == 'users' && !$('#pmxe_user_addon_free_installed').val())
 						{
 							$('.wpallexport-user-export-notice').show();
 							$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
@@ -912,20 +921,24 @@
 						else if (postType == 'comments')
 						{
 							$('.wpallexport-comments-export-notice').show();
-							$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();	
+							$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
 						}
+						else if (postType == 'shop_review')
+						{
+                            $('.wpallexport-reviews-export-notice').show();
+                            $('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
+                        }
 						else if (postType == 'shop_customer')
 						{
 							$('.wpallexport-shop_customer-export-notice').show();
-							$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();	
-						}					
+							$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
+						}
 						else
-						{						
-							$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').show();	
-						}					
-
+						{
+							$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').show();
+						}
 						filtering(postType);
-					}																						
+					}
 		    	}
 		    	else
 		    	{
@@ -947,7 +960,7 @@
 		    }
 		});
 
-		$('a.auto-generate-template').live('click', function(){
+		$(document).on('click', 'a.auto-generate-template', function(){
 
 			var export_type = $('input[name="cpt"]').val();
 
@@ -988,14 +1001,14 @@
 		});
 
 		$('#wp_query_selector').ddslick({
-			width: 600,	
-			onSelected: function(selectedData){											
-				
+			width: 600,
+			onSelected: function(selectedData){
+
 				$('.wpallexport-user-export-notice').hide();
 		    	$('.wpallexport-comments-export-notice').hide();
 		    	$('.wpallexport-shop_customer-export-notice').hide();
 		    	$('.wpallexport-taxonomies-export-notice').hide();
-		    	
+
 		    	$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
 
 		    	if (selectedData.selectedData.value != ""){
@@ -1008,15 +1021,15 @@
 		    		}
 		    		if(queryType == 'wp_user_query')
 		    		{
-		    			$('.wpallexport-user-export-notice').show();		    			
+		    			$('.wpallexport-user-export-notice').show();
 		    			$('textarea[name=wp_query]').attr("placeholder", "'role' => 'Administrator'");
-		    			$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();	
-		    		}		    		
+		    			$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
+		    		}
 		    		else if(queryType == 'wp_comment_query')
-		    		{		    			
+		    		{
 		    			$('.wpallexport-comments-export-notice').show();
-		    			$('textarea[name=wp_query]').attr("placeholder", "'meta_key' => 'featured', 'meta_value' => '1'");		    			
-		    			$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();	
+		    			$('textarea[name=wp_query]').attr("placeholder", "'meta_key' => 'featured', 'meta_value' => '1'");
+		    			$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
 		    		}
 					$('input[name=wp_query_selector]').val(queryType);
 		    	}
@@ -1037,9 +1050,9 @@
 
 					$('#taxonomy_to_export').find('.dd-selected').css({'color':'#555'});
 					$('input[name=taxonomy_to_export]').val(selectedData.selectedData.value);
-					filtering($('input[name=cpt]').val());					
+					filtering($('input[name=cpt]').val());
 					$('.wpallexport-taxonomies-export-notice').show();
-					$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();	
+					$('.wpallexport-choose-file').find('.wpallexport-submit-buttons').hide();
 				}
 				else{
 					$('#taxonomy_to_export').find('.dd-selected').css({'color':'#cfceca'});
@@ -1471,7 +1484,7 @@
 		});
 
 		// Clicking on column for edit
-		$('#columns').find('.custom_column').live('click', function(){
+		$('#columns').on('click', '.custom_column', function(){
 
             $('.add-new-field-notice').hide();
 
@@ -1728,7 +1741,7 @@
 
 					$preview.parent('.wp-pointer-content').removeClass('wp-pointer-content').addClass('wpallexport-pointer-content');
 
-					$preview.find('.navigation a').unbind('click').die('click').live('click', function () {
+                    $preview.find('.navigation a').unbind('click').click(function () {
 
 						tagno += '#prev' == $(this).attr('href') ? -1 : 1;
 
@@ -1801,7 +1814,7 @@
 			if ($mode == '+') $(this).find('.wpae-expander').text('-'); else $(this).find('.wpae-expander').text('+');
 		});
 
-		$('.pmxe_remove_column').live('click', function(){
+		$(document).on('click', '.pmxe_remove_column', function(){
 			$(this).parents('li:first').remove();
 		});
 
@@ -1818,7 +1831,7 @@
 				$('.pmxe_date_format_wrapper').show();
 		});
 
-		$('.xml-expander').live('click', function () {
+		$(document).on('click', '.xml-expander', function () {
 			var method;
 			if ('-' == $(this).text()) {
 				$(this).text('+');
@@ -1902,6 +1915,19 @@
 	    		vm.availableDataSelector.find('li.wp_all_export_auto_generate, li.pmxe_cats').each(function(i, e){
 		    		var $clone = $(this).clone();
 		    		$clone.attr('rel', i);
+
+                    if ( $clone.find('input[name^=cc_type]').val().indexOf('image_') !== -1 )
+                    {
+                        $clone.find('.wpallexport-xml-element').html('Image ' + $clone.find('input[name^=cc_name]').val());
+                        $clone.find('input[name^=cc_name]').val('Image ' + $clone.find('input[name^=cc_name]').val());
+                    }
+
+                    if ( $clone.find('input[name^=cc_type]').val().indexOf('attachment_') !== -1 )
+                    {
+                        $clone.find('.wpallexport-xml-element').html('Attachment ' + $clone.find('input[name^=cc_name]').val());
+                        $clone.find('input[name^=cc_name]').val('Attachment ' + $clone.find('input[name^=cc_name]').val());
+                    }
+
 		    		$( "<li></li>" ).html( $clone.html() ).appendTo( $( "#columns_to_export ol" ) );
 		    	});
 	    	}
@@ -1932,7 +1958,7 @@
 
 	    });
 
-		$('.wp_all_export_clear_all_data').live('click', function(){
+		$(document).on('click', '.wp_all_export_clear_all_data', function(){
 			$('ol#columns').find('li:not(.placeholder)').remove();
 			$('ol#columns').find('li.placeholder').fadeIn();
 		});
@@ -2017,14 +2043,14 @@
 				} else {
 					submitButton.parents('form:first').submit();
 				}
-			});		
-    	}   	     	   
+			});
+    	}
 
     	if ( $('input[name=export_to]').val() == 'csv' && $('#export_to_sheet').val() == 'xls' && $('#export_to_sheet').val() == 'xlsx'){
     		$('.export_to_xls_upgrade_notice').show();
     		$('.wpallexport-submit-template').attr('disabled', 'disabled');
     		$('.wpallexport-submit-buttons').hide();
-    	} 
+    	}
     	else{
     		$('.export_to_xls_upgrade_notice').hide();
     		$('.wpallexport-submit-template').removeAttr('disabled');
@@ -2073,7 +2099,7 @@
 					$('.wpallexport-submit-template').removeAttr('disabled');
 					$('.wpallexport-submit-buttons').show();
 				}
-								
+
 				$('.custom_xml_upgrade_notice').hide();
     		}
     		else
@@ -2104,7 +2130,7 @@
     	});
 
     	// template form: auto submit when `load template` list value is picked
-		$(this).find('select[name="load_template"]').live('change', function () {
+        $(this).find('select[name="load_template"]').change(function () {
 
 			var template = $(this).find('option:selected').val();
 			var exportMode = $('.xml_template_type').find('option:selected').val();
@@ -2222,7 +2248,7 @@
     // [ Additional functionality ]
 
     // Add new filtering rule
-    $('#wp_all_export_add_rule').live('click', function(){
+    $(document).on('click', '#wp_all_export_add_rule', function(){
 
     	var $el   = $('#wp_all_export_xml_element');
     	var $rule = $('#wp_all_export_rule');
@@ -2268,10 +2294,10 @@
     });
 
 	// Re-count posts when clicking "OR" | "AND" clauses
-	$('input[name^=rule]').live('click', function(){
+	$(document).on('click', 'input[name^=rule]', function(){
 		liveFiltering();
 	});
-	$('input.wpml_lang').live('click', function(){
+	$(document).on('click', 'input.wpml_lang', function(){
 		var inputName = $(this).attr('name');
 		var value = $('input[name='+inputName +']:checked').val();
 		var $thisInput = $('.wpml_lang[value='+value +']');
@@ -2281,11 +2307,11 @@
 		liveFiltering();
 	});
 	// Re-count posts when changing product matching mode in filtering section
-	$('select[name^=product_matching_mode]').live('change', function(){
+	$(document).on('change', 'select[name^=product_matching_mode]', function(){
 		liveFiltering();
 	});
 	// Re-count posts when deleting a filtering rule
-	$('.wp_all_export_filtering_rules').find('.remove-ico').live('click', function(){
+    $(document).on('click', '.wp_all_export_filtering_rules > .remove-ico', function(){
 		$(this).parents('li:first').remove();
 		if ( ! $('.wp_all_export_filtering_rules').find('li').length)
 		{
@@ -2640,6 +2666,31 @@
                         if(!window.pmxeHasSchedulingSubscription) {
                             $('.save-changes ').addClass('disabled');
                         }
+
+
+                        // help icons
+                        $('.wpallexport-help').tipsy({
+                            gravity: function() {
+                                var ver = 'n';
+                                if ($(document).scrollTop() < $(this).offset().top - $('.tipsy').height() - 2) {
+                                    ver = 's';
+                                }
+                                var hor = '';
+                                if ($(this).offset().left + $('.tipsy').width() < $(window).width() + $(document).scrollLeft()) {
+                                    hor = 'w';
+                                } else if ($(this).offset().left - $('.tipsy').width() > $(document).scrollLeft()) {
+                                    hor = 'e';
+                                }
+                                return ver + hor;
+                            },
+                            html: true,
+                            opacity: 1
+                        }).click(function () {
+                            return false;
+                        }).each(function () { // fix tipsy title for IE
+                            $(this).attr('original-title', $(this).attr('title'));
+                            $(this).removeAttr('title');
+                        });
 
 						$(".save-changes").unbind('click').click(function () {
 							if($(this).hasClass('disabled')) {

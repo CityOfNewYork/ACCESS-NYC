@@ -2,10 +2,17 @@
 
 if( !defined( 'ABSPATH' ) ) exit();
 
-$active_tab = "dashboard";
-if(!empty($_GET["tab"]) && in_array($_GET["tab"], ['dashboard', 'settings', 'debug'])) {
+$active_tab = "settings";
+$active_app = $this->get_option( 'active_app' );
+if(!empty($_GET["tab"]) && in_array($_GET["tab"], ['logs-local', 'logs-custom', 'settings', 'debug'])) {
 
-    $active_tab = $_GET["tab"];
+	if(!$this->app && $_GET['tab'] === 'logs-custom') {
+
+		$active_tab = 'logs-local';
+	} else {
+
+		$active_tab = sanitize_text_field( $_GET["tab"] );
+	}
 }
 ?>
 
@@ -13,9 +20,17 @@ if(!empty($_GET["tab"]) && in_array($_GET["tab"], ['dashboard', 'settings', 'deb
     <h2><?php echo __( 'Limit Login Attempts Reloaded', 'limit-login-attempts-reloaded' ); ?></h2>
 
     <h2 class="nav-tab-wrapper">
-        <a href="<?php echo $this->get_options_page_uri(); ?>&tab=dashboard" class="nav-tab <?php if($active_tab == 'dashboard'){echo 'nav-tab-active';} ?> "><?php _e('Dashboard', 'limit-login-attempts-reloaded'); ?></a>
-        <a href="<?php echo $this->get_options_page_uri(); ?>&tab=settings" class="nav-tab <?php if($active_tab == 'settings'){echo 'nav-tab-active';} ?> "><?php _e('Settings', 'limit-login-attempts-reloaded'); ?></a>
-        <a href="<?php echo $this->get_options_page_uri(); ?>&tab=debug" class="nav-tab <?php if($active_tab == 'debug'){echo 'nav-tab-active';} ?>"><?php _e('Debug', 'limit-login-attempts-reloaded'); ?></a>
+        <a href="<?php echo $this->get_options_page_uri('settings'); ?>" class="nav-tab <?php if($active_tab == 'settings'){echo 'nav-tab-active';} ?> "><?php _e('Settings', 'limit-login-attempts-reloaded'); ?></a>
+        <?php if( $active_app === 'custom' ) : ?>
+            <a href="<?php echo $this->get_options_page_uri('logs-custom'); ?>" class="nav-tab <?php if($active_tab == 'logs-custom'){echo 'nav-tab-active';} ?> "><?php _e('Logs', 'limit-login-attempts-reloaded'); ?></a>
+        <?php else : ?>
+            <a href="<?php echo $this->get_options_page_uri('logs-local'); ?>" class="nav-tab <?php if($active_tab == 'logs-local'){echo 'nav-tab-active';} ?> "><?php _e('Logs', 'limit-login-attempts-reloaded'); ?></a>
+		<?php endif; ?>
+        <a href="<?php echo $this->get_options_page_uri('debug'); ?>" class="nav-tab <?php if($active_tab == 'debug'){echo 'nav-tab-active';} ?>"><?php _e('Debug', 'limit-login-attempts-reloaded'); ?></a>
+
+        <?php if($active_tab == 'logs-custom') : ?>
+        <a class="llar-failover-link" href="<?php echo $this->get_options_page_uri('logs-local'); ?>"><?php _e( 'Failover', 'limit-login-attempts-reloaded' ); ?></a>
+        <?php endif; ?>
     </h2>
 
     <?php include_once(LLA_PLUGIN_DIR.'views/tab-'.$active_tab.'.php'); ?>

@@ -17,7 +17,7 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  *
  * @property string $sid
  * @property string $accountSid
@@ -37,8 +37,8 @@ class VariableInstance extends InstanceResource {
      * @param mixed[] $payload The response payload
      * @param string $serviceSid The SID of the Service that the Variable resource
      *                           is associated with
-     * @param string $environmentSid The SID of the environment in which the
-     *                               variable exists
+     * @param string $environmentSid The SID of the Environment in which the
+     *                               Variable exists
      * @param string $sid The SID of the Variable resource to fetch
      */
     public function __construct(Version $version, array $payload, string $serviceSid, string $environmentSid, string $sid = null) {

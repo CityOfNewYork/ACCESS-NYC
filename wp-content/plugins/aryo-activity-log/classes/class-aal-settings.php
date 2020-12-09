@@ -165,7 +165,7 @@ class AAL_Settings {
 							'id'      => 'notification_transport',
 							'page'    => $this->slug,
 							'name' => "{$this->slug}[notification_handlers][{$handler_id}]",
-							'value' => (bool) ( 1 == $enabled_notification_handlers[ $handler_id ] ),
+							'value' => isset( $enabled_notification_handlers[ $handler_id ] ) && ( 1 == $enabled_notification_handlers[ $handler_id ] ),
 						)
 					);
 
@@ -194,10 +194,20 @@ class AAL_Settings {
 		$current_section = $this->get_setup_section();
 		$sections = array(
 			'general'       => __( 'General', 'aryo-activity-log' ),
-			'notifications' => __( 'Notifications', 'aryo-activity-log' ),
 		);
 
+		$enabled_notification_handlers = AAL_Main::instance()->settings->get_option( 'notification_handlers' );
+
+		// Hide notifications tab if not used before..
+		if ( ! empty( $enabled_notification_handlers ) ) {
+			$sections['notifications'] = __( 'Notifications', 'aryo-activity-log' );
+		}
+
 		$sections = apply_filters( 'aal_setup_sections', $sections );
+
+		if ( 1 >= count( $sections ) ) {
+			return;
+		}
 
 		foreach ( $sections as $section_key => $section_caption ) {
 			$active = $current_section === $section_key ? 'nav-tab-active' : '';
@@ -253,7 +263,7 @@ class AAL_Settings {
 		<script type="text/javascript">
 			jQuery( document ).ready( function( $ ) {
 				$( '#aal-delete-log-activities' ).on( 'click', function( e ) {
-					if ( ! confirm( '<?php echo __( 'Are you sure you want to do this action?', 'aryo-activity-log' ); ?>' ) ) {
+					if ( ! confirm( '<?php echo __( 'Attention: We are going to DELETE ALL ACTIVITIES from the database. Are you sure you want to do that?', 'aryo-activity-log' ); ?>' ) ) {
 						e.preventDefault();
 					}
 				} );

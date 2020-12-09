@@ -42,7 +42,14 @@ $uiHelper->setSourceSizes($attachment_id);
 
 $emr = EnableMediaReplacePlugin::get();
 
-
+$defaults = array(
+  'replace_type' => 'replace',
+  'timestamp_replace' => \EnableMediaReplace\Replacer::TIME_UPDATEMODIFIED,
+  'custom_date' => date("Y-m-d H:i:s"),
+  'new_location' => false,
+  'new_location_dir' => false,
+);
+$settings = get_option('enable_media_replace', $defaults);
 
 ?>
 
@@ -88,18 +95,19 @@ $url = $uiHelper->getFormUrl($attachment_id);
     <div class='image_previews'>
               <?php if (wp_attachment_is('image', $attachment_id) || $source_mime == 'application/pdf')
               {
-                  echo $uiHelper->getPreviewImage($attachment_id);
-                  echo $uiHelper->getPreviewImage(-1);
+                  echo $uiHelper->getPreviewImage($attachment_id, $file);
+                  echo $uiHelper->getPreviewImage(-1, $file);
               }
               else {
+
                     if (strlen($filepath) == 0) // check if image in error state.
                     {
                         echo $uiHelper->getPreviewError(-1);
-                        echo $uiHelper->getPreviewImage(-1);
+                        echo $uiHelper->getPreviewImage(-1, $file);
                     }
                     else {
-                        echo $uiHelper->getPreviewFile($attachment_id);
-                        echo $uiHelper->getPreviewFile(-1);
+                        echo $uiHelper->getPreviewFile($attachment_id, $file);
+                        echo $uiHelper->getPreviewFile(-1, $file);
                     }
 
               }
@@ -121,7 +129,7 @@ $url = $uiHelper->getFormUrl($attachment_id);
        $search_disabled = (! $enabled_search) ? 'disabled' : '';
     ?>
       <div class='option replace <?php echo $search_disabled ?>'>
-    		<label for="replace_type_1"  ><input CHECKED id="replace_type_1" type="radio" name="replace_type" value="replace" <?php echo $search_disabled ?> > <?php echo esc_html__("Just replace the file", "enable-media-replace"); ?>
+    		<label for="replace_type_1"  ><input <?php checked('replace', $settings['replace_type']) ?> id="replace_type_1" type="radio" name="replace_type" value="replace" <?php echo $search_disabled ?> > <?php echo esc_html__("Just replace the file", "enable-media-replace"); ?>
         </label>
 
     		<p class="howto">
@@ -136,10 +144,10 @@ $url = $uiHelper->getFormUrl($attachment_id);
       ?>
 
       <div class="option searchreplace <?php echo $searchreplace_disabled ?>">
-  		<label for="replace_type_2"><input id="replace_type_2" type="radio" name="replace_type" value="replace_and_search" <?php echo $searchreplace_disabled ?> > <?php echo __("Replace the file, use new file name and update all links", "enable-media-replace"); ?>
+  		<label for="replace_type_2"><input id="replace_type_2" <?php checked('replace_and_search', $settings['replace_type']) ?> type="radio" name="replace_type" value="replace_and_search" <?php echo $searchreplace_disabled ?> > <?php echo __("Replace the file, use new file name and update all links", "enable-media-replace"); ?>
       </label>
 
-  		<p class="howto"><?php printf( esc_html__("Note: If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file (%s) will be updated to point to the new file name.", "enable-media-replace"), $filename ); ?></p>
+  		<p class="howto"><?php printf( esc_html__("Note: If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file (%s) will be updated to point to the new file name. (If any other websites link to the file directly, those links will no longer work. Be careful.)", "enable-media-replace"), $filename ); ?></p>
 
   	<!--	<p class="howto"><?php echo esc_html__("Please note that if you upload a new image, only embeds/links of the original size image will be replaced in your posts.", "enable-media-replace"); ?></p> -->
 
@@ -154,12 +162,17 @@ $url = $uiHelper->getFormUrl($attachment_id);
           $attachment_current_date = date_i18n('d/M/Y H:i', strtotime($attachment->post_date) );
           $time = current_time('mysql');
           $date = new \dateTime($time);
+
+          if ($settings['timestamp_replace'] == \EnableMediaReplace\Replacer::TIME_CUSTOM)
+          {
+             $date = new \dateTime($settings['custom_date']);
+          }
         ?>
           <p><?php _e('When replacing the media, do you want to:', 'enable-media-replace'); ?></p>
           <ul>
-            <li><label><input type='radio' name='timestamp_replace' value='1' /><?php _e('Replace the date', 'enable-media-replace'); ?></label></li>
-            <li><label><input type='radio' name='timestamp_replace' value='2' checked /><?php printf(__('Keep the date %s(%s)%s', 'enable-media-replace'), "<span class='small'>", $attachment_current_date, "</span>"); ?></label></li>
-            <li><label><input type='radio' name='timestamp_replace' value='3' /><?php _e('Set a Custom Date', 'enable-media-replace'); ?></label></li>
+            <li><label><input type='radio' <?php checked('1', $settings['timestamp_replace']) ?> name='timestamp_replace' value='1' /><?php _e('Replace the date', 'enable-media-replace'); ?></label></li>
+            <li><label><input type='radio' <?php checked('2', $settings['timestamp_replace']) ?> name='timestamp_replace' value='2'  /><?php printf(__('Keep the date %s(%s)%s', 'enable-media-replace'), "<span class='small'>", $attachment_current_date, "</span>"); ?></label></li>
+            <li><label><input type='radio' <?php checked('3', $settings['timestamp_replace']) ?> name='timestamp_replace' value='3' /><?php _e('Set a Custom Date', 'enable-media-replace'); ?></label></li>
           </ul>
           <div class='custom_date'>
 
@@ -171,9 +184,13 @@ $url = $uiHelper->getFormUrl($attachment_id);
             <input type="text" name="custom_minute" class='emr_minute' value="<?php echo $date->format('i'); ?>" />
             <input type="hidden" name="custom_date_formatted" value="<?php echo $date->format('Y-m-d'); ?>" />
          </div>
-         <?php if ($subdir = $uiHelper->getRelPathNow()): ?>
+         <?php if ($subdir = $uiHelper->getRelPathNow()):
+
+            if ($settings['new_location'] !== false)
+               $subdir = $settings['new_location_dir'];
+          ?>
          <div class='location_option'>
-           <label><input type="checkbox" name="new_location" value="1" /> <?php _e('Put new Upload in Updated Folder: '); ?></label>
+           <label><input type="checkbox" name="new_location" value="1" <?php checked($settings['new_location'], 1); ?>  /> <?php _e('Put new Upload in Updated Folder: '); ?></label>
             <input type="text" name="location_dir" value="<?php echo $subdir ?>" />
           </div>
         <?php endif; ?>

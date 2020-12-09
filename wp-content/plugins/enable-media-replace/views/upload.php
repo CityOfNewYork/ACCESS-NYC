@@ -10,8 +10,6 @@ use EnableMediaReplace\Notices\NoticeController as Notices;
 if (!current_user_can('upload_files'))
 	wp_die( esc_html__('You do not have permission to upload files.', 'enable-media-replace') );
 
-
-
 /*require_once('classes/replacer.php');
 require_once('classes/file.php'); */
 
@@ -39,6 +37,12 @@ $redirect_success = $uihelper->getSuccesRedirect($post_id);
 
 $do_new_location  = isset($_POST['new_location']) ? sanitize_text_field($_POST['new_location']) : false;
 $new_location_dir = isset($_POST['location_dir']) ? sanitize_text_field($_POST['location_dir']) : null;
+
+$settings = array(); // save settings and show last loaded.
+$settings['replace_type'] = $replace_type;
+$settings['timestamp_replace'] = $timestamp_replace;
+$settings['new_location'] = $do_new_location;
+$settings['new_location_dir'] = $new_location_dir; 
 
 switch($timestamp_replace)
 {
@@ -70,8 +74,11 @@ switch($timestamp_replace)
 			exit();
 		}
  		$datetime  =  $custom_date->format("Y-m-d H:i:s");
+		$settings['custom_date'] = $datetime;
 	break;
 }
+
+update_option('enable_media_replace', $settings, false);
 
 // We have two types: replace / replace_and_search
 if ($replace_type == 'replace')

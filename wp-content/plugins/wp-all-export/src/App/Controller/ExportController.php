@@ -33,7 +33,12 @@ class ExportController extends BaseController
     {
         if(!$request->get('id')) {
             $sessionData = PMXE_Plugin::$session->get_session_data();
-            $exportData = unserialize($sessionData['google_merchants_post_data']);
+            if(isset($sessionData['google_merchants_post_data'])) {
+                $exportData = unserialize($sessionData['google_merchants_post_data']);
+            }
+            else {
+                $exportData = false;
+            }
         } else {
             $id = intval($_GET['id']);
             $export = new \PMXE_Export_Record();

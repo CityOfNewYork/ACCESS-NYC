@@ -17,8 +17,6 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- *
  * @property string $accountSid
  * @property string $conversationSid
  * @property string $sid
@@ -36,7 +34,7 @@ class ParticipantInstance extends InstanceResource {
      *
      * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @param string $conversationSid The unique id of the Conversation for this
+     * @param string $conversationSid The unique ID of the Conversation for this
      *                                participant.
      * @param string $sid A 34 character string that uniquely identifies this
      *                    resource.

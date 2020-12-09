@@ -13,11 +13,11 @@ use Twilio\Options;
 use Twilio\Values;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  */
 abstract class DeploymentOptions {
     /**
-     * @param string $buildSid The SID of the build for the deployment
+     * @param string $buildSid The SID of the Build for the Deployment
      * @return CreateDeploymentOptions Options builder
      */
     public static function create(string $buildSid = Values::NONE): CreateDeploymentOptions {
@@ -27,16 +27,16 @@ abstract class DeploymentOptions {
 
 class CreateDeploymentOptions extends Options {
     /**
-     * @param string $buildSid The SID of the build for the deployment
+     * @param string $buildSid The SID of the Build for the Deployment
      */
     public function __construct(string $buildSid = Values::NONE) {
         $this->options['buildSid'] = $buildSid;
     }
 
     /**
-     * The SID of the build for the deployment.
+     * The SID of the Build for the Deployment.
      *
-     * @param string $buildSid The SID of the build for the deployment
+     * @param string $buildSid The SID of the Build for the Deployment
      * @return $this Fluent Builder
      */
     public function setBuildSid(string $buildSid): self {

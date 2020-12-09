@@ -12,25 +12,28 @@ namespace Twilio\Rest\Conversations\V1;
 use Twilio\Options;
 use Twilio\Values;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 abstract class ConversationOptions {
     /**
      * @param string $friendlyName The human-readable name of this conversation.
+     * @param string $uniqueName An application-defined string that uniquely
+     *                           identifies the resource
      * @param \DateTime $dateCreated The date that this resource was created.
      * @param \DateTime $dateUpdated The date that this resource was last updated.
-     * @param string $messagingServiceSid The unique id of the SMS Service this
-     *                                    conversation belongs to.
+     * @param string $messagingServiceSid The unique ID of the Messaging Service
+     *                                    this conversation belongs to.
      * @param string $attributes An optional string metadata field you can use to
      *                           store any data you wish.
      * @param string $state Current state of this conversation.
+     * @param string $timersInactive ISO8601 duration when conversation will be
+     *                               switched to `inactive` state.
+     * @param string $timersClosed ISO8601 duration when conversation will be
+     *                             switched to `closed` state.
      * @param string $xTwilioWebhookEnabled The X-Twilio-Webhook-Enabled HTTP
      *                                      request header
      * @return CreateConversationOptions Options builder
      */
-    public static function create(string $friendlyName = Values::NONE, \DateTime $dateCreated = Values::NONE, \DateTime $dateUpdated = Values::NONE, string $messagingServiceSid = Values::NONE, string $attributes = Values::NONE, string $state = Values::NONE, string $xTwilioWebhookEnabled = Values::NONE): CreateConversationOptions {
-        return new CreateConversationOptions($friendlyName, $dateCreated, $dateUpdated, $messagingServiceSid, $attributes, $state, $xTwilioWebhookEnabled);
+    public static function create(string $friendlyName = Values::NONE, string $uniqueName = Values::NONE, \DateTime $dateCreated = Values::NONE, \DateTime $dateUpdated = Values::NONE, string $messagingServiceSid = Values::NONE, string $attributes = Values::NONE, string $state = Values::NONE, string $timersInactive = Values::NONE, string $timersClosed = Values::NONE, string $xTwilioWebhookEnabled = Values::NONE): CreateConversationOptions {
+        return new CreateConversationOptions($friendlyName, $uniqueName, $dateCreated, $dateUpdated, $messagingServiceSid, $attributes, $state, $timersInactive, $timersClosed, $xTwilioWebhookEnabled);
     }
 
     /**
@@ -39,15 +42,21 @@ abstract class ConversationOptions {
      * @param \DateTime $dateUpdated The date that this resource was last updated.
      * @param string $attributes An optional string metadata field you can use to
      *                           store any data you wish.
-     * @param string $messagingServiceSid The unique id of the SMS Service this
-     *                                    conversation belongs to.
+     * @param string $messagingServiceSid The unique ID of the Messaging Service
+     *                                    this conversation belongs to.
      * @param string $state Current state of this conversation.
+     * @param string $timersInactive ISO8601 duration when conversation will be
+     *                               switched to `inactive` state.
+     * @param string $timersClosed ISO8601 duration when conversation will be
+     *                             switched to `closed` state.
+     * @param string $uniqueName An application-defined string that uniquely
+     *                           identifies the resource
      * @param string $xTwilioWebhookEnabled The X-Twilio-Webhook-Enabled HTTP
      *                                      request header
      * @return UpdateConversationOptions Options builder
      */
-    public static function update(string $friendlyName = Values::NONE, \DateTime $dateCreated = Values::NONE, \DateTime $dateUpdated = Values::NONE, string $attributes = Values::NONE, string $messagingServiceSid = Values::NONE, string $state = Values::NONE, string $xTwilioWebhookEnabled = Values::NONE): UpdateConversationOptions {
-        return new UpdateConversationOptions($friendlyName, $dateCreated, $dateUpdated, $attributes, $messagingServiceSid, $state, $xTwilioWebhookEnabled);
+    public static function update(string $friendlyName = Values::NONE, \DateTime $dateCreated = Values::NONE, \DateTime $dateUpdated = Values::NONE, string $attributes = Values::NONE, string $messagingServiceSid = Values::NONE, string $state = Values::NONE, string $timersInactive = Values::NONE, string $timersClosed = Values::NONE, string $uniqueName = Values::NONE, string $xTwilioWebhookEnabled = Values::NONE): UpdateConversationOptions {
+        return new UpdateConversationOptions($friendlyName, $dateCreated, $dateUpdated, $attributes, $messagingServiceSid, $state, $timersInactive, $timersClosed, $uniqueName, $xTwilioWebhookEnabled);
     }
 
     /**
@@ -63,23 +72,32 @@ abstract class ConversationOptions {
 class CreateConversationOptions extends Options {
     /**
      * @param string $friendlyName The human-readable name of this conversation.
+     * @param string $uniqueName An application-defined string that uniquely
+     *                           identifies the resource
      * @param \DateTime $dateCreated The date that this resource was created.
      * @param \DateTime $dateUpdated The date that this resource was last updated.
-     * @param string $messagingServiceSid The unique id of the SMS Service this
-     *                                    conversation belongs to.
+     * @param string $messagingServiceSid The unique ID of the Messaging Service
+     *                                    this conversation belongs to.
      * @param string $attributes An optional string metadata field you can use to
      *                           store any data you wish.
      * @param string $state Current state of this conversation.
+     * @param string $timersInactive ISO8601 duration when conversation will be
+     *                               switched to `inactive` state.
+     * @param string $timersClosed ISO8601 duration when conversation will be
+     *                             switched to `closed` state.
      * @param string $xTwilioWebhookEnabled The X-Twilio-Webhook-Enabled HTTP
      *                                      request header
      */
-    public function __construct(string $friendlyName = Values::NONE, \DateTime $dateCreated = Values::NONE, \DateTime $dateUpdated = Values::NONE, string $messagingServiceSid = Values::NONE, string $attributes = Values::NONE, string $state = Values::NONE, string $xTwilioWebhookEnabled = Values::NONE) {
+    public function __construct(string $friendlyName = Values::NONE, string $uniqueName = Values::NONE, \DateTime $dateCreated = Values::NONE, \DateTime $dateUpdated = Values::NONE, string $messagingServiceSid = Values::NONE, string $attributes = Values::NONE, string $state = Values::NONE, string $timersInactive = Values::NONE, string $timersClosed = Values::NONE, string $xTwilioWebhookEnabled = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
+        $this->options['uniqueName'] = $uniqueName;
         $this->options['dateCreated'] = $dateCreated;
         $this->options['dateUpdated'] = $dateUpdated;
         $this->options['messagingServiceSid'] = $messagingServiceSid;
         $this->options['attributes'] = $attributes;
         $this->options['state'] = $state;
+        $this->options['timersInactive'] = $timersInactive;
+        $this->options['timersClosed'] = $timersClosed;
         $this->options['xTwilioWebhookEnabled'] = $xTwilioWebhookEnabled;
     }
 
@@ -91,6 +109,18 @@ class CreateConversationOptions extends Options {
      */
     public function setFriendlyName(string $friendlyName): self {
         $this->options['friendlyName'] = $friendlyName;
+        return $this;
+    }
+
+    /**
+     * An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL.
+     *
+     * @param string $uniqueName An application-defined string that uniquely
+     *                           identifies the resource
+     * @return $this Fluent Builder
+     */
+    public function setUniqueName(string $uniqueName): self {
+        $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
 
@@ -117,10 +147,10 @@ class CreateConversationOptions extends Options {
     }
 
     /**
-     * The unique id of the [SMS Service](https://www.twilio.com/docs/sms/services/api) this conversation belongs to.
+     * The unique ID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) this conversation belongs to.
      *
-     * @param string $messagingServiceSid The unique id of the SMS Service this
-     *                                    conversation belongs to.
+     * @param string $messagingServiceSid The unique ID of the Messaging Service
+     *                                    this conversation belongs to.
      * @return $this Fluent Builder
      */
     public function setMessagingServiceSid(string $messagingServiceSid): self {
@@ -148,6 +178,30 @@ class CreateConversationOptions extends Options {
      */
     public function setState(string $state): self {
         $this->options['state'] = $state;
+        return $this;
+    }
+
+    /**
+     * ISO8601 duration when conversation will be switched to `inactive` state. Minimum value for this timer is 1 minute.
+     *
+     * @param string $timersInactive ISO8601 duration when conversation will be
+     *                               switched to `inactive` state.
+     * @return $this Fluent Builder
+     */
+    public function setTimersInactive(string $timersInactive): self {
+        $this->options['timersInactive'] = $timersInactive;
+        return $this;
+    }
+
+    /**
+     * ISO8601 duration when conversation will be switched to `closed` state. Minimum value for this timer is 10 minutes.
+     *
+     * @param string $timersClosed ISO8601 duration when conversation will be
+     *                             switched to `closed` state.
+     * @return $this Fluent Builder
+     */
+    public function setTimersClosed(string $timersClosed): self {
+        $this->options['timersClosed'] = $timersClosed;
         return $this;
     }
 
@@ -181,19 +235,28 @@ class UpdateConversationOptions extends Options {
      * @param \DateTime $dateUpdated The date that this resource was last updated.
      * @param string $attributes An optional string metadata field you can use to
      *                           store any data you wish.
-     * @param string $messagingServiceSid The unique id of the SMS Service this
-     *                                    conversation belongs to.
+     * @param string $messagingServiceSid The unique ID of the Messaging Service
+     *                                    this conversation belongs to.
      * @param string $state Current state of this conversation.
+     * @param string $timersInactive ISO8601 duration when conversation will be
+     *                               switched to `inactive` state.
+     * @param string $timersClosed ISO8601 duration when conversation will be
+     *                             switched to `closed` state.
+     * @param string $uniqueName An application-defined string that uniquely
+     *                           identifies the resource
      * @param string $xTwilioWebhookEnabled The X-Twilio-Webhook-Enabled HTTP
      *                                      request header
      */
-    public function __construct(string $friendlyName = Values::NONE, \DateTime $dateCreated = Values::NONE, \DateTime $dateUpdated = Values::NONE, string $attributes = Values::NONE, string $messagingServiceSid = Values::NONE, string $state = Values::NONE, string $xTwilioWebhookEnabled = Values::NONE) {
+    public function __construct(string $friendlyName = Values::NONE, \DateTime $dateCreated = Values::NONE, \DateTime $dateUpdated = Values::NONE, string $attributes = Values::NONE, string $messagingServiceSid = Values::NONE, string $state = Values::NONE, string $timersInactive = Values::NONE, string $timersClosed = Values::NONE, string $uniqueName = Values::NONE, string $xTwilioWebhookEnabled = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['dateCreated'] = $dateCreated;
         $this->options['dateUpdated'] = $dateUpdated;
         $this->options['attributes'] = $attributes;
         $this->options['messagingServiceSid'] = $messagingServiceSid;
         $this->options['state'] = $state;
+        $this->options['timersInactive'] = $timersInactive;
+        $this->options['timersClosed'] = $timersClosed;
+        $this->options['uniqueName'] = $uniqueName;
         $this->options['xTwilioWebhookEnabled'] = $xTwilioWebhookEnabled;
     }
 
@@ -243,10 +306,10 @@ class UpdateConversationOptions extends Options {
     }
 
     /**
-     * The unique id of the [SMS Service](https://www.twilio.com/docs/sms/services/api) this conversation belongs to.
+     * The unique ID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) this conversation belongs to.
      *
-     * @param string $messagingServiceSid The unique id of the SMS Service this
-     *                                    conversation belongs to.
+     * @param string $messagingServiceSid The unique ID of the Messaging Service
+     *                                    this conversation belongs to.
      * @return $this Fluent Builder
      */
     public function setMessagingServiceSid(string $messagingServiceSid): self {
@@ -262,6 +325,42 @@ class UpdateConversationOptions extends Options {
      */
     public function setState(string $state): self {
         $this->options['state'] = $state;
+        return $this;
+    }
+
+    /**
+     * ISO8601 duration when conversation will be switched to `inactive` state. Minimum value for this timer is 1 minute.
+     *
+     * @param string $timersInactive ISO8601 duration when conversation will be
+     *                               switched to `inactive` state.
+     * @return $this Fluent Builder
+     */
+    public function setTimersInactive(string $timersInactive): self {
+        $this->options['timersInactive'] = $timersInactive;
+        return $this;
+    }
+
+    /**
+     * ISO8601 duration when conversation will be switched to `closed` state. Minimum value for this timer is 10 minutes.
+     *
+     * @param string $timersClosed ISO8601 duration when conversation will be
+     *                             switched to `closed` state.
+     * @return $this Fluent Builder
+     */
+    public function setTimersClosed(string $timersClosed): self {
+        $this->options['timersClosed'] = $timersClosed;
+        return $this;
+    }
+
+    /**
+     * An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL.
+     *
+     * @param string $uniqueName An application-defined string that uniquely
+     *                           identifies the resource
+     * @return $this Fluent Builder
+     */
+    public function setUniqueName(string $uniqueName): self {
+        $this->options['uniqueName'] = $uniqueName;
         return $this;
     }
 

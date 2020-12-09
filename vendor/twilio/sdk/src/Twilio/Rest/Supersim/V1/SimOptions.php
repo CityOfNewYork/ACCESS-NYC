@@ -22,10 +22,16 @@ abstract class SimOptions {
      * @param string $status The new status of the Super SIM
      * @param string $fleet The SID or unique name of the Fleet to which the SIM
      *                      resource should be assigned
+     * @param string $callbackUrl The URL we should call after the update has
+     *                            finished
+     * @param string $callbackMethod The HTTP method we should use to call
+     *                               callback_url
+     * @param string $accountSid The SID of the Account to which the Sim resource
+     *                           should belong
      * @return UpdateSimOptions Options builder
      */
-    public static function update(string $uniqueName = Values::NONE, string $status = Values::NONE, string $fleet = Values::NONE): UpdateSimOptions {
-        return new UpdateSimOptions($uniqueName, $status, $fleet);
+    public static function update(string $uniqueName = Values::NONE, string $status = Values::NONE, string $fleet = Values::NONE, string $callbackUrl = Values::NONE, string $callbackMethod = Values::NONE, string $accountSid = Values::NONE): UpdateSimOptions {
+        return new UpdateSimOptions($uniqueName, $status, $fleet, $callbackUrl, $callbackMethod, $accountSid);
     }
 
     /**
@@ -48,11 +54,20 @@ class UpdateSimOptions extends Options {
      * @param string $status The new status of the Super SIM
      * @param string $fleet The SID or unique name of the Fleet to which the SIM
      *                      resource should be assigned
+     * @param string $callbackUrl The URL we should call after the update has
+     *                            finished
+     * @param string $callbackMethod The HTTP method we should use to call
+     *                               callback_url
+     * @param string $accountSid The SID of the Account to which the Sim resource
+     *                           should belong
      */
-    public function __construct(string $uniqueName = Values::NONE, string $status = Values::NONE, string $fleet = Values::NONE) {
+    public function __construct(string $uniqueName = Values::NONE, string $status = Values::NONE, string $fleet = Values::NONE, string $callbackUrl = Values::NONE, string $callbackMethod = Values::NONE, string $accountSid = Values::NONE) {
         $this->options['uniqueName'] = $uniqueName;
         $this->options['status'] = $status;
         $this->options['fleet'] = $fleet;
+        $this->options['callbackUrl'] = $callbackUrl;
+        $this->options['callbackMethod'] = $callbackMethod;
+        $this->options['accountSid'] = $accountSid;
     }
 
     /**
@@ -68,7 +83,7 @@ class UpdateSimOptions extends Options {
     }
 
     /**
-     * The new status of the resource. Can be: `active` or `inactive`. See the [Super SIM Status Values](https://www.twilio.com/docs/iot/supersim/api/sim-resource#status-values) for more info.
+     * The new status of the resource. Can be: `ready`, `active`, or `inactive`. See the [Super SIM Status Values](https://www.twilio.com/docs/iot/supersim/api/sim-resource#status-values) for more info.
      *
      * @param string $status The new status of the Super SIM
      * @return $this Fluent Builder
@@ -87,6 +102,42 @@ class UpdateSimOptions extends Options {
      */
     public function setFleet(string $fleet): self {
         $this->options['fleet'] = $fleet;
+        return $this;
+    }
+
+    /**
+     * The URL we should call using the `callback_method` after an asynchronous update has finished.
+     *
+     * @param string $callbackUrl The URL we should call after the update has
+     *                            finished
+     * @return $this Fluent Builder
+     */
+    public function setCallbackUrl(string $callbackUrl): self {
+        $this->options['callbackUrl'] = $callbackUrl;
+        return $this;
+    }
+
+    /**
+     * The HTTP method we should use to call `callback_url`. Can be: `GET` or `POST` and the default is POST.
+     *
+     * @param string $callbackMethod The HTTP method we should use to call
+     *                               callback_url
+     * @return $this Fluent Builder
+     */
+    public function setCallbackMethod(string $callbackMethod): self {
+        $this->options['callbackMethod'] = $callbackMethod;
+        return $this;
+    }
+
+    /**
+     * The SID of the Account to which the Sim resource should belong. The Account SID can only be that of the requesting Account or that of a Subaccount of the requesting Account. Only valid when the Sim resource's status is new.
+     *
+     * @param string $accountSid The SID of the Account to which the Sim resource
+     *                           should belong
+     * @return $this Fluent Builder
+     */
+    public function setAccountSid(string $accountSid): self {
+        $this->options['accountSid'] = $accountSid;
         return $this;
     }
 
@@ -116,7 +167,7 @@ class ReadSimOptions extends Options {
     }
 
     /**
-     * The status of the Sim resources to read. Can be `new`, `active`, `inactive`, or `scheduled`.
+     * The status of the Sim resources to read. Can be `new`, `ready`, `active`, `inactive`, or `scheduled`.
      *
      * @param string $status The status of the Sim resources to read
      * @return $this Fluent Builder
