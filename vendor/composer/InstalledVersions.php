@@ -1,5 +1,15 @@
 <?php
 
+
+
+
+
+
+
+
+
+
+
 namespace Composer;
 
 use Composer\Semver\VersionParser;
@@ -14,8 +24,8 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '3.26.0',
-    'version' => '3.26.0.0',
+    'pretty_version' => '3.27.0',
+    'version' => '3.27.0.0',
     'aliases' => 
     array (
     ),
@@ -44,12 +54,12 @@ private static $installed = array (
     ),
     'aws/aws-sdk-php' => 
     array (
-      'pretty_version' => '3.142.7',
-      'version' => '3.142.7.0',
+      'pretty_version' => '3.168.1',
+      'version' => '3.168.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '42f1b348f28388233aa6a0c395f8adc29e8cb752',
+      'reference' => 'd648085cce7bfadc8973a8ded401921583c1e3f9',
     ),
     'composer/installers' => 
     array (
@@ -71,48 +81,48 @@ private static $installed = array (
     ),
     'filp/whoops' => 
     array (
-      'pretty_version' => '2.7.3',
-      'version' => '2.7.3.0',
+      'pretty_version' => '2.9.1',
+      'version' => '2.9.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5d5fe9bb3d656b514d455645b3addc5f7ba7714d',
+      'reference' => '307fb34a5ab697461ec4c9db865b20ff2fd40771',
     ),
     'guzzlehttp/guzzle' => 
     array (
-      'pretty_version' => '6.5.5',
-      'version' => '6.5.5.0',
+      'pretty_version' => '7.2.0',
+      'version' => '7.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9d4290de1cfd701f38099ef7e183b64b4b7b0c5e',
+      'reference' => '0aa74dfb41ae110835923ef10a9d803a22d50e79',
     ),
     'guzzlehttp/promises' => 
     array (
-      'pretty_version' => 'v1.3.1',
-      'version' => '1.3.1.0',
+      'pretty_version' => '1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a59da6cf61d80060647ff4d3eb2c03a2bc694646',
+      'reference' => '60d379c243457e073cff02bc323a2a86cb355631',
     ),
     'guzzlehttp/psr7' => 
     array (
-      'pretty_version' => '1.6.1',
-      'version' => '1.6.1.0',
+      'pretty_version' => '1.7.0',
+      'version' => '1.7.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '239400de7a173fe9901b9ac7c06497751f00727a',
+      'reference' => '53330f47520498c0ae1f61f7e2c90f55690c06a3',
     ),
     'humanmade/s3-uploads' => 
     array (
-      'pretty_version' => '2.2.1',
-      'version' => '2.2.1.0',
+      'pretty_version' => '2.2.2',
+      'version' => '2.2.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'bc1df42517c1ccbfbfc61fe4802008d22948a9b8',
+      'reference' => '577886b941438793a5721bbbb6eddc6872ee73cb',
     ),
     'illuminate/contracts' => 
     array (
@@ -143,12 +153,12 @@ private static $installed = array (
     ),
     'mtdowling/jmespath.php' => 
     array (
-      'pretty_version' => '2.5.0',
-      'version' => '2.5.0.0',
+      'pretty_version' => '2.6.0',
+      'version' => '2.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '52168cb9472de06979613d365c7f1ab8798be895',
+      'reference' => '42dae2cbd13154083ca6d70099692fef8ca84bfb',
     ),
     'mustangostang/spyc' => 
     array (
@@ -161,12 +171,12 @@ private static $installed = array (
     ),
     'nesbot/carbon' => 
     array (
-      'pretty_version' => '2.35.0',
-      'version' => '2.35.0.0',
+      'pretty_version' => '2.42.0',
+      'version' => '2.42.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4b9bd835261ef23d36397a46a76b496a458305e5',
+      'reference' => 'd0463779663437392fe42ff339ebc0213bd55498',
     ),
     'nielsdeblaauw/query-monitor-twig-profile' => 
     array (
@@ -179,8 +189,8 @@ private static $installed = array (
     ),
     'nyco/access-nyc' => 
     array (
-      'pretty_version' => '3.26.0',
-      'version' => '3.26.0.0',
+      'pretty_version' => '3.27.0',
+      'version' => '3.27.0.0',
       'aliases' => 
       array (
       ),
@@ -188,12 +198,12 @@ private static $installed = array (
     ),
     'nyco/wp-assets' => 
     array (
-      'pretty_version' => '1.2.2',
-      'version' => '1.2.2.0',
+      'pretty_version' => '1.3.0',
+      'version' => '1.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3e6a7bab714e6cd1911d20da02d452e05e951227',
+      'reference' => '01b4e6ae23a097483b7ca2bdcf6809d52389eeb2',
     ),
     'nyco/wp-config' => 
     array (
@@ -224,12 +234,12 @@ private static $installed = array (
     ),
     'nyco/wp-send-me-nyc' => 
     array (
-      'pretty_version' => '1.2.2',
-      'version' => '1.2.2.0',
+      'pretty_version' => '1.3.0',
+      'version' => '1.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b61c0ab0cae4c8111fc87b81d4e95ac08789f005',
+      'reference' => '34f8f03414981996276a5a7eee2888b13c027261',
     ),
     'nyco/wp-stat-collector' => 
     array (
@@ -248,6 +258,22 @@ private static $installed = array (
       array (
       ),
       'reference' => 'b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
+    ),
+    'psr/http-client' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2dfb5f6c5eff0e91e20e913f8c5452ed95b86621',
+    ),
+    'psr/http-client-implementation' => 
+    array (
+      'provided' => 
+      array (
+        0 => '1.0',
+      ),
     ),
     'psr/http-message' => 
     array (
@@ -317,100 +343,91 @@ private static $installed = array (
     ),
     'squizlabs/php_codesniffer' => 
     array (
-      'pretty_version' => '3.5.5',
-      'version' => '3.5.5.0',
+      'pretty_version' => '3.5.8',
+      'version' => '3.5.8.0',
       'aliases' => 
       array (
       ),
-      'reference' => '73e2e7f57d958e7228fce50dc0c61f58f017f9f6',
+      'reference' => '9d583721a7157ee997f235f327de038e7ea6dac4',
     ),
     'symfony/polyfill-ctype' => 
     array (
-      'pretty_version' => 'v1.17.1',
-      'version' => '1.17.1.0',
+      'pretty_version' => 'v1.20.0',
+      'version' => '1.20.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2edd75b8b35d62fd3eeabba73b26b8f1f60ce13d',
-    ),
-    'symfony/polyfill-intl-idn' => 
-    array (
-      'pretty_version' => 'v1.17.1',
-      'version' => '1.17.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'a57f8161502549a742a63c09f0a604997bf47027',
+      'reference' => 'f4ba089a5b6366e453971d3aad5fe8e897b37f41',
     ),
     'symfony/polyfill-mbstring' => 
     array (
-      'pretty_version' => 'v1.17.1',
-      'version' => '1.17.1.0',
+      'pretty_version' => 'v1.20.0',
+      'version' => '1.20.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7110338d81ce1cbc3e273136e4574663627037a7',
+      'reference' => '39d483bdf39be819deabf04ec872eb0b2410b531',
     ),
-    'symfony/polyfill-php72' => 
+    'symfony/polyfill-php80' => 
     array (
-      'pretty_version' => 'v1.17.0',
-      'version' => '1.17.0.0',
+      'pretty_version' => 'v1.20.0',
+      'version' => '1.20.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f048e612a3905f34931127360bdd2def19a5e582',
+      'reference' => 'e70aa8b064c5b72d3df2abd5ab1e90464ad009de',
     ),
     'symfony/translation' => 
     array (
-      'pretty_version' => 'v4.4.10',
-      'version' => '4.4.10.0',
+      'pretty_version' => 'v5.2.0',
+      'version' => '5.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '79d3ef9096a6a6047dbc69218b68c7b7f63193af',
+      'reference' => '52f486a707510884450df461b5a6429dd7a67379',
     ),
     'symfony/translation-contracts' => 
     array (
-      'pretty_version' => 'v2.1.2',
-      'version' => '2.1.2.0',
+      'pretty_version' => 'v2.3.0',
+      'version' => '2.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e5ca07c8f817f865f618aa072c2fe8e0e637340e',
+      'reference' => 'e2eaa60b558f26a4b0354e1bbb25636efaaad105',
     ),
     'symfony/translation-implementation' => 
     array (
       'provided' => 
       array (
-        0 => '1.0',
+        0 => '2.0',
       ),
     ),
     'timber/timber' => 
     array (
-      'pretty_version' => '1.16.0',
-      'version' => '1.16.0.0',
+      'pretty_version' => '1.18.2',
+      'version' => '1.18.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'cdae62c0108cd60c256e9bb00d634645eb0127c0',
+      'reference' => '18766d1af8650ca919534cc497e7f0e8d82423a3',
     ),
     'twig/twig' => 
     array (
-      'pretty_version' => 'v2.12.5',
-      'version' => '2.12.5.0',
+      'pretty_version' => 'v2.14.1',
+      'version' => '2.14.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '18772e0190734944277ee97a02a9a6c6555fcd94',
+      'reference' => '5eb9ac5dfdd20c3f59495c22841adc5da980d312',
     ),
     'twilio/sdk' => 
     array (
-      'pretty_version' => '6.7.0',
-      'version' => '6.7.0.0',
+      'pretty_version' => '6.15.0',
+      'version' => '6.15.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '73fdd7e25547910ed339b6a8e7eef9e91a2deb41',
+      'reference' => '5bea779890315fd46673b4e2e584eba761eb7027',
     ),
     'upstatement/routes' => 
     array (
@@ -441,26 +458,26 @@ private static $installed = array (
     ),
     'wpackagist-plugin/acf-to-rest-api' => 
     array (
-      'pretty_version' => '3.3.1',
-      'version' => '3.3.1.0',
+      'pretty_version' => '3.3.2',
+      'version' => '3.3.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/3.3.1',
+      'reference' => 'tags/3.3.2',
     ),
     'wpackagist-plugin/aryo-activity-log' => 
     array (
-      'pretty_version' => '2.5.2',
-      'version' => '2.5.2.0',
+      'pretty_version' => '2.6.0',
+      'version' => '2.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/2.5.2',
+      'reference' => 'trunk',
     ),
     'wpackagist-plugin/better-search-replace' => 
     array (
-      'pretty_version' => '1.3.3',
-      'version' => '1.3.3.0',
+      'pretty_version' => '1.3.4',
+      'version' => '1.3.4.0',
       'aliases' => 
       array (
       ),
@@ -477,30 +494,30 @@ private static $installed = array (
     ),
     'wpackagist-plugin/core-sitemaps' => 
     array (
-      'pretty_version' => '0.4.1',
-      'version' => '0.4.1.0',
+      'pretty_version' => '0.4.3',
+      'version' => '0.4.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/0.4.1',
+      'reference' => 'tags/0.4.3',
     ),
     'wpackagist-plugin/duplicate-post' => 
     array (
-      'pretty_version' => '3.2.4',
-      'version' => '3.2.4.0',
+      'pretty_version' => '3.2.6',
+      'version' => '3.2.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/3.2.4',
+      'reference' => 'tags/3.2.6',
     ),
     'wpackagist-plugin/enable-media-replace' => 
     array (
-      'pretty_version' => '3.4.1',
-      'version' => '3.4.1.0',
+      'pretty_version' => '3.5.0',
+      'version' => '3.5.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/3.4.1',
+      'reference' => 'tags/3.5.0',
     ),
     'wpackagist-plugin/gathercontent-import' => 
     array (
@@ -522,30 +539,30 @@ private static $installed = array (
     ),
     'wpackagist-plugin/limit-login-attempts-reloaded' => 
     array (
-      'pretty_version' => '2.14.0',
-      'version' => '2.14.0.0',
+      'pretty_version' => '2.17.2',
+      'version' => '2.17.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/2.14.0',
+      'reference' => 'tags/2.17.2',
     ),
     'wpackagist-plugin/loggedin' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.3.1',
+      'version' => '1.3.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/1.2.0',
+      'reference' => 'tags/1.3.1',
     ),
     'wpackagist-plugin/query-monitor' => 
     array (
-      'pretty_version' => '3.6.0',
-      'version' => '3.6.0.0',
+      'pretty_version' => '3.6.5',
+      'version' => '3.6.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/3.6.0',
+      'reference' => 'tags/3.6.5',
     ),
     'wpackagist-plugin/redis-cache' => 
     array (
@@ -576,12 +593,12 @@ private static $installed = array (
     ),
     'wpackagist-plugin/wp-all-export' => 
     array (
-      'pretty_version' => '1.2.6',
-      'version' => '1.2.6.0',
+      'pretty_version' => '1.2.7',
+      'version' => '1.2.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/1.2.6',
+      'reference' => 'tags/1.2.7',
     ),
     'wpackagist-plugin/wp-auto-login' => 
     array (
@@ -612,21 +629,21 @@ private static $installed = array (
     ),
     'wpackagist-plugin/wps-hide-login' => 
     array (
-      'pretty_version' => '1.5.6',
-      'version' => '1.5.6.0',
+      'pretty_version' => '1.6.1',
+      'version' => '1.6.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/1.5.6',
+      'reference' => 'tags/1.6.1',
     ),
     'wpackagist-plugin/wpscan' => 
     array (
-      'pretty_version' => '1.11',
-      'version' => '1.11.0.0',
+      'pretty_version' => '1.13',
+      'version' => '1.13.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'tags/1.11',
+      'reference' => 'tags/1.13',
     ),
   ),
 );
