@@ -17,15 +17,12 @@ use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class MessageList extends ListResource {
     /**
      * Construct the MessageList
      *
      * @param Version $version Version that contains the resource
-     * @param string $conversationSid The unique id of the Conversation for this
+     * @param string $conversationSid The unique ID of the Conversation for this
      *                                message.
      */
     public function __construct(Version $version, string $conversationSid) {

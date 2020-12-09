@@ -66,6 +66,11 @@ class emrFile
     @chmod($this->file, $permissions);
   }
 
+  public function getFileSize()
+  {
+      return filesize($this->file);
+  }
+
   public function getFilePath()
   {
     return $this->filePath;

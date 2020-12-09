@@ -61,6 +61,10 @@ An example of post content could include the following;
 
 The template tag `{{ BITLY_URL }}` will be replaced with a shortened Bitly url that is intended to be shared with the recipient. The SMNYC SMS post type does not require any specific templating.
 
+For more dynamic content, you can include an input for `sharetext` and include the template tag `{{ SHARE_TEXT }}` into the post content.
+
+> {{ SHARE_TEXT }} {{ BITLY_URL }}
+
 ### SMNYC Email
 
 An example of post content could be the same as the SMS, however, you may not need to use the Bitly shortener for the url. In this case, replace `{{ BITLY_URL }}` with `{{ URL }}`.
@@ -97,6 +101,7 @@ WordPress Admin Ajax is used to send data from the front-end to the plugin. When
       <input type="hidden" readonly name="url" value="https://mysite.com/my-url-to-share/" />
       <input type="hidden" readonly name="template" value="my-sms-post-template" />
       <input type="hidden" readonly name="lan" value="en" />
+      <input type="hidden" readonly name="sharetext" value="{{ message }}" />
       <input type="hidden" readonly name="hash" value="{{ hash }}" />
 
       <input name="to" placeholder="Phone Number" required="true" type="tel" />

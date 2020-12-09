@@ -13,7 +13,7 @@ use Twilio\Options;
 use Twilio\Values;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  */
 abstract class EnvironmentOptions {
     /**
@@ -36,7 +36,7 @@ class CreateEnvironmentOptions extends Options {
     }
 
     /**
-     * A URL-friendly name that represents the environment and forms part of the domain name. Must have fewer than 32 characters.
+     * A URL-friendly name that represents the environment and forms part of the domain name. It can be a maximum of 16 characters.
      *
      * @param string $domainSuffix A URL-friendly name that represents the
      *                             environment

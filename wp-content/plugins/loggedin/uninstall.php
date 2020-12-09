@@ -1,9 +1,8 @@
 <?php
-
 /**
  * Fired when the plugin is uninstalled.
  *
- * @link       https://thefoxe.com/products/loggedin
+ * @link       https://duckdev.com/products/loggedin-limit-active-logins/
  * @license    http://www.gnu.org/licenses/ GNU General Public License
  * @category   Core
  * @package    Loggedin
@@ -21,7 +20,12 @@ delete_option( 'loggedin_rating_notice' );
 global $wpdb;
 
 // Delete all meta values added by the plugin.
-$wpdb->delete( $wpdb->usermeta, [
-	// Review notice meta.
-	'meta_key' => 'loggedin_rating_notice_dismissed',
-] );
+// phpcs:ignore
+$wpdb->delete(
+	$wpdb->usermeta,
+	array(
+		// Review notice meta.
+		// phpcs:ignore
+		'meta_key' => 'loggedin_rating_notice_dismissed',
+	)
+);

@@ -1,8 +1,4 @@
 <?php
-
-// If this file is called directly, abort.
-defined( 'WPINC' ) || die( 'Well, get lost.' );
-
 /**
  * Admin side functionality of the plugin.
  *
@@ -12,6 +8,13 @@ defined( 'WPINC' ) || die( 'Well, get lost.' );
  * @package    Loggedin
  * @subpackage Admin
  * @author     Joel James <me@joelsays.com>
+ */
+
+// If this file is called directly, abort.
+defined( 'WPINC' ) || die( 'Well, get lost.' );
+
+/**
+ * Class Loggedin_Admin
  */
 class Loggedin_Admin {
 
@@ -66,7 +69,11 @@ class Loggedin_Admin {
 				add_settings_error(
 					'general',
 					'settings_updated', // Override the settings update message.
-					sprintf( __( 'User %s forcefully logged out from all devices.', 'loggedin' ), $user->user_login ),
+					sprintf(
+					// translators: %s User name of the logging out user.
+						__( 'User %s forcefully logged out from all devices.', 'loggedin' ),
+						$user->user_login
+					),
 					'updated'
 				);
 			} else {
@@ -74,7 +81,11 @@ class Loggedin_Admin {
 				add_settings_error(
 					'general',
 					'settings_updated', // Override the settings update message.
-					sprintf( __( 'Invalid user ID: %d', 'loggedin' ), $_REQUEST['loggedin_user'] )
+					sprintf(
+					// translators: %d User ID of the login user.
+						__( 'Invalid user ID: %d', 'loggedin' ),
+						intval( $_REQUEST['loggedin_user'] )
+					)
 				);
 			}
 		}
@@ -145,10 +156,10 @@ class Loggedin_Admin {
 		// Get settings value.
 		$value = get_option( 'loggedin_maximum', 3 );
 
-		echo '<p><input type="number" name="loggedin_maximum" id="loggedin_maximum" min="1" value="' . intval( $value ) . '" placeholder="' . __( 'Enter the limit in number', 'loggedin' ) . '" /></p>';
-		echo '<p class="description">' . __( 'Set the maximum no. of active logins a user account can have.', 'loggedin' ) . '</p>';
-		echo '<p class="description">' . __( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', 'loggedin' ) . '</p>';
-		echo '<p class="description"><strong>' . __( 'Note: ', 'loggedin' ) . '</strong>' . __( 'Even if the browser is closed, login session may exist.', 'loggedin' ) . '</p>';
+		echo '<p><input type="number" name="loggedin_maximum" id="loggedin_maximum" min="1" value="' . intval( $value ) . '" placeholder="' . esc_html__( 'Enter the limit in number', 'loggedin' ) . '" /></p>';
+		echo '<p class="description">' . esc_html__( 'Set the maximum no. of active logins a user account can have.', 'loggedin' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', 'loggedin' ) . '</p>';
+		echo '<p class="description"><strong>' . esc_html__( 'Note: ', 'loggedin' ) . '</strong>' . esc_html__( 'Even if the browser is closed, login session may exist.', 'loggedin' ) . '</p>';
 	}
 
 	/**
@@ -164,10 +175,10 @@ class Loggedin_Admin {
 		// Get settings value.
 		$value = get_option( 'loggedin_logic', 'allow' );
 
-		echo '<input type="radio" name="loggedin_logic" value="allow" ' . checked( $value, 'allow', false ) . '/> ' . __( 'Allow', 'loggedin' );
-		echo ' <input type="radio" name="loggedin_logic" value="block" ' . checked( $value, 'block', false ) . '/> ' . __( 'Block', 'loggedin' );
-		echo '<p class="description">' . __( '<strong>Allow:</strong> Allow new login by terminating <strong>all</strong> old sessions when the limit is reached.', 'loggedin' ) . '</p>';
-		echo '<p class="description">' . __( '<strong>Block:</strong> Do not allow new login if the limit is reached. Users needs to wait for the old login sessions to expire.', 'loggedin' ) . '</p>';
+		echo '<input type="radio" name="loggedin_logic" value="allow" ' . checked( $value, 'allow', false ) . '/> ' . esc_html__( 'Allow', 'loggedin' );
+		echo ' <input type="radio" name="loggedin_logic" value="block" ' . checked( $value, 'block', false ) . '/> ' . esc_html__( 'Block', 'loggedin' );
+		echo '<p class="description"><strong>' . esc_html__( 'Allow:', 'loggedin' ) . '</strong> ' . esc_html__( 'Allow new login by terminating all other old sessions when the limit is reached.', 'loggedin' ) . '</p>';
+		echo '<p class="description"><strong>' . esc_html__( 'Block:', 'loggedin' ) . '</strong> ' . esc_html__( ' Do not allow new login if the limit is reached. Users need to wait for the old login sessions to expire.', 'loggedin' ) . '</p>';
 	}
 
 	/**
@@ -180,9 +191,9 @@ class Loggedin_Admin {
 	 * @return void
 	 */
 	public function loggedin_logout() {
-		echo '<input type="number" name="loggedin_user" min="1" placeholder="' . __( 'Enter user ID', 'loggedin' ) . '" />';
-		echo '<input type="submit" name="loggedin_logout" id="loggedin_logout" class="button" value="Force Logout">';
-		echo '<p class="description">' . __( 'If you would like to force logout a user from all devices, enter the user ID.', 'loggedin' ) . '</p>';
+		echo '<input type="number" name="loggedin_user" min="1" placeholder="' . esc_html__( 'Enter user ID', 'loggedin' ) . '" />';
+		echo ' <input type="submit" name="loggedin_logout" id="loggedin_logout" class="button" value="' . esc_html__( 'Force Logout', 'loggedin' ) . '">';
+		echo '<p class="description">' . esc_html__( 'If you would like to force logout a user from all the devices, enter the user ID.', 'loggedin' ) . '</p>';
 	}
 
 	/**
@@ -224,21 +235,31 @@ class Loggedin_Admin {
 			if ( (int) $notice_time <= time() && ! $dismissed ) {
 				?>
                 <div class="notice notice-success">
-                    <p><?php printf( __( 'Hey %1$s, I noticed you\'ve been using %2$sLoggedin%3$s plugin for more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', 'loggedin' ),
-							empty( $current_user->display_name ) ? __( 'there', 'loggedin' ) : ucwords( $current_user->display_name ),
+                    <p>
+						<?php
+						printf(
+						    // translators: %1$s Current user's name. %2$s <strong> %3$s </strong>.
+							__( 'Hey %1$s, I noticed you\'ve been using %2$sLoggedin%3$s plugin for more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', 'loggedin' ),
+							empty( $current_user->display_name ) ? esc_html__( 'there', 'loggedin' ) : ucwords( $current_user->display_name ),
 							'<strong>',
 							'</strong>'
-						); ?>
+						);
+						?>
                     </p>
                     <p>
-                        <a href="https://wordpress.org/support/plugin/loggedin/reviews/#new-post"
-                           target="_blank"><?php esc_html_e( 'Ok, you deserve it', 'loggedin' ); ?></a>
+                        <a href="https://wordpress.org/support/plugin/loggedin/reviews/#new-post" target="_blank">
+							<?php esc_html_e( 'Ok, you deserve it', 'loggedin' ); ?>
+                        </a>
                     </p>
                     <p>
-                        <a href="<?php echo add_query_arg( 'loggedin_rating', 'later' ); // later. ?>"><?php esc_html_e( 'Nope, maybe later', 'loggedin' ); ?></a>
+                        <a href="<?php echo add_query_arg( 'loggedin_rating', 'later' ); // later. ?>">
+							<?php esc_html_e( 'Nope, maybe later', 'loggedin' ); ?>
+                        </a>
                     </p>
                     <p>
-                        <a href="<?php echo add_query_arg( 'loggedin_rating', 'dismiss' ); // dismiss link. ?>"><?php esc_html_e( 'I already did', 'loggedin' ); ?></a>
+                        <a href="<?php echo add_query_arg( 'loggedin_rating', 'dismiss' ); // dismiss link. ?>">
+							<?php esc_html_e( 'I already did', 'loggedin' ); ?>
+                        </a>
                     </p>
                 </div>
 				<?php
@@ -258,6 +279,7 @@ class Loggedin_Admin {
 	 */
 	public function review_action() {
 		// Get the current review action.
+		// phpcs:ignore
 		$action = isset( $_REQUEST['loggedin_rating'] ) ? $_REQUEST['loggedin_rating'] : '';
 
 		switch ( $action ) {

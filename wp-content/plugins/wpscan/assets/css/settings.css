@@ -1,0 +1,23 @@
+.wpscan-ignore-items-section {
+    display: block;
+    margin-bottom: 25px;
+    float: left;
+    width: 800px;
+}
+
+.wpscan-ignore-items-section label {
+    width: 30%;
+    float: left;
+    margin-bottom: 12px;
+    padding-right: 20px;
+    line-break: anywhere;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+.blur-on-lose-focus:not(:focus) {
+     color: transparent;
+     text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

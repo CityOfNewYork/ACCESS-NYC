@@ -15,10 +15,18 @@ use Twilio\Rest\Conversations\V1;
 
 /**
  * @property \Twilio\Rest\Conversations\V1 $v1
+ * @property \Twilio\Rest\Conversations\V1\ConfigurationList $configuration
  * @property \Twilio\Rest\Conversations\V1\ConversationList $conversations
- * @property \Twilio\Rest\Conversations\V1\WebhookList $webhooks
+ * @property \Twilio\Rest\Conversations\V1\CredentialList $credentials
+ * @property \Twilio\Rest\Conversations\V1\RoleList $roles
+ * @property \Twilio\Rest\Conversations\V1\ServiceList $services
+ * @property \Twilio\Rest\Conversations\V1\UserList $users
+ * @method \Twilio\Rest\Conversations\V1\ConfigurationContext configuration()
  * @method \Twilio\Rest\Conversations\V1\ConversationContext conversations(string $sid)
- * @method \Twilio\Rest\Conversations\V1\WebhookContext webhooks()
+ * @method \Twilio\Rest\Conversations\V1\CredentialContext credentials(string $sid)
+ * @method \Twilio\Rest\Conversations\V1\RoleContext roles(string $sid)
+ * @method \Twilio\Rest\Conversations\V1\ServiceContext services(string $sid)
+ * @method \Twilio\Rest\Conversations\V1\UserContext users(string $sid)
  */
 class Conversations extends Domain {
     protected $_v1;
@@ -77,6 +85,14 @@ class Conversations extends Domain {
         throw new TwilioException('Unknown context ' . $name);
     }
 
+    protected function getConfiguration(): \Twilio\Rest\Conversations\V1\ConfigurationList {
+        return $this->v1->configuration;
+    }
+
+    protected function contextConfiguration(): \Twilio\Rest\Conversations\V1\ConfigurationContext {
+        return $this->v1->configuration();
+    }
+
     protected function getConversations(): \Twilio\Rest\Conversations\V1\ConversationList {
         return $this->v1->conversations;
     }
@@ -89,12 +105,50 @@ class Conversations extends Domain {
         return $this->v1->conversations($sid);
     }
 
-    protected function getWebhooks(): \Twilio\Rest\Conversations\V1\WebhookList {
-        return $this->v1->webhooks;
+    protected function getCredentials(): \Twilio\Rest\Conversations\V1\CredentialList {
+        return $this->v1->credentials;
     }
 
-    protected function contextWebhooks(): \Twilio\Rest\Conversations\V1\WebhookContext {
-        return $this->v1->webhooks();
+    /**
+     * @param string $sid A 34 character string that uniquely identifies this
+     *                    resource.
+     */
+    protected function contextCredentials(string $sid): \Twilio\Rest\Conversations\V1\CredentialContext {
+        return $this->v1->credentials($sid);
+    }
+
+    protected function getRoles(): \Twilio\Rest\Conversations\V1\RoleList {
+        return $this->v1->roles;
+    }
+
+    /**
+     * @param string $sid The SID of the Role resource to fetch
+     */
+    protected function contextRoles(string $sid): \Twilio\Rest\Conversations\V1\RoleContext {
+        return $this->v1->roles($sid);
+    }
+
+    protected function getServices(): \Twilio\Rest\Conversations\V1\ServiceList {
+        return $this->v1->services;
+    }
+
+    /**
+     * @param string $sid A 34 character string that uniquely identifies this
+     *                    resource.
+     */
+    protected function contextServices(string $sid): \Twilio\Rest\Conversations\V1\ServiceContext {
+        return $this->v1->services($sid);
+    }
+
+    protected function getUsers(): \Twilio\Rest\Conversations\V1\UserList {
+        return $this->v1->users;
+    }
+
+    /**
+     * @param string $sid The SID of the User resource to fetch
+     */
+    protected function contextUsers(string $sid): \Twilio\Rest\Conversations\V1\UserContext {
+        return $this->v1->users($sid);
     }
 
     /**

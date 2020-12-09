@@ -174,6 +174,10 @@ class Loader {
 		$twig = new \Twig\Environment($loader, $params);
 		if ( WP_DEBUG ) {
 			$twig->addExtension(new \Twig\Extension\DebugExtension());
+		} else {
+			$twig->addFunction(new Twig_Function('dump', function() {
+				return null;
+			}));
 		}
 		$twig->addExtension($this->_get_cache_extension());
 
@@ -210,7 +214,10 @@ class Loader {
 
 	protected static function clear_cache_timber_database() {
 		global $wpdb;
-		$query = $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name LIKE '%s'", '_transient_timberloader_%');
+		$query = $wpdb->prepare(
+			"DELETE FROM $wpdb->options WHERE option_name LIKE '%s'",
+			'_transient%timberloader_%'
+		);
 		return $wpdb->query($query);
 	}
 

@@ -29,38 +29,54 @@
 
 /* Summary */
 
-#metabox-summary h2 { cursor: default; }
-#metabox-summary button.handlediv { display: none; }
-#metabox-summary .check-now { padding: 0; text-align: right; }
-#metabox-summary .spinner { float: none; margin-top: 0; }
+#wpscan-metabox-summary .check-now { padding: 0; text-align: right; }
+#wpscan-metabox-summary .spinner { float: none; margin-top: 0; }
 
 @media screen and (max-width: 850px) {
-  #metabox-summary { margin-top: 20px; }
+  #wpscan-metabox-summary { margin-top: 20px; }
 }
 
 /* Notification */
 
-#metabox-notification h2 { cursor: default; }
-#metabox-notification button.handlediv { display: none; }
-#metabox-notification table,
-#metabox-notification tbody,
-#metabox-notification tr,
-#metabox-notification th,
-#metabox-notification td { display: block; width: 100%; }
-#metabox-notification th { padding: .5em 0; }
-#metabox-notification td { padding: 0; }
-#metabox-notification th,
-#metabox-notification td,
-#metabox-notification td p { font-size: 13px; }
-#metabox-notification input[type="text"] { width: 100%; }
-#metabox-notification label { position: relative; display: block; padding-left: 25px; margin: 0 0 10px; }
-#metabox-notification label + br { display: none; }
-#metabox-notification input[type="checkbox"] { margin-left: -25px; }
-#metabox-notification .submit { padding: 0; text-align: right; }
+#wpscan-metabox-notification table,
+#wpscan-metabox-notification tbody,
+#wpscan-metabox-notification tr,
+#wpscan-metabox-notification th,
+#wpscan-metabox-notification td { display: block; width: 100%; }
+#wpscan-metabox-notification th { padding: .5em 0; }
+#wpscan-metabox-notification td { padding: 0; }
+#wpscan-metabox-notification th,
+#wpscan-metabox-notification td,
+#wpscan-metabox-notification td p { font-size: 13px; }
+#wpscan-metabox-notification input[type="text"] { width: 100%; }
+#wpscan-metabox-notification .submit { padding: 0; text-align: right; }
 
 @media screen and (max-width: 782px) {
-  #metabox-notification label { padding-left: 35px; }
-  #metabox-notification input[type="checkbox"] { margin-left: -35px; }
+  #wpscan-metabox-notification label { padding-left: 35px; }
+  #wpscan-metabox-notification input[type="checkbox"] { margin-left: -35px; }
+}
+
+/* Ignore vulnerabilities */
+
+#wpscan-metabox-ignore-vulnerabilities table,
+#wpscan-metabox-ignore-vulnerabilities tbody,
+#wpscan-metabox-ignore-vulnerabilities tr,
+#wpscan-metabox-ignore-vulnerabilities th,
+#wpscan-metabox-ignore-vulnerabilities td { display: block; width: 100%; }
+#wpscan-metabox-ignore-vulnerabilities th { padding: .5em 0; }
+#wpscan-metabox-ignore-vulnerabilities td { padding: 0; }
+#wpscan-metabox-ignore-vulnerabilities th,
+#wpscan-metabox-ignore-vulnerabilities td,
+#wpscan-metabox-ignore-vulnerabilities td p { font-size: 13px; }
+#wpscan-metabox-ignore-vulnerabilities input[type="text"] { width: 100%; }
+#wpscan-metabox-ignore-vulnerabilities label { position: relative; display: block; padding-left: 25px; margin: 0 0 10px; }
+#wpscan-metabox-ignore-vulnerabilities label + br { display: none; }
+#wpscan-metabox-ignore-vulnerabilities input[type="checkbox"] { margin-left: -25px; }
+#wpscan-metabox-ignore-vulnerabilities .submit { padding: 0; text-align: right; }
+
+@media screen and (max-width: 782px) {
+  #wpscan-metabox-ignore-vulnerabilities label { padding-left: 35px; }
+  #wpscan-metabox-ignore-vulnerabilities input[type="checkbox"] { margin-left: -35px; }
 }
 
 /* Account */
@@ -125,6 +141,7 @@
   float: left;
   width: 100%;
   line-height: 1.8;
+  line-height: 25px;
 }
 
 .vulnerability a {
@@ -140,6 +157,10 @@
   float: left;
   min-width: 60px;
   margin-right: 20px;
+}
+
+.vulnerability-title {
+  float: left;
 }
 
 .vulnerability-severity span {
@@ -199,7 +220,7 @@
   color: #66348a !important;  
 } 
 
-.vulnerabilities .wpscan-ignored {
+.wpscan-ignored {
   border-radius: 3px;
   padding: 0px 8px 0px 8px;
   line-height: 22px;
@@ -207,4 +228,23 @@
   float: left;
   background: #c1e3e6 !important;
   color: #304584 !important;
+}
+
+.security-check-actions .spinner {
+  float: none;
+  position: absolute;
+}
+
+.security-check-actions button {
+  margin-right: 5px !important;
+  margin-bottom: 5px !important;
+  width: 70px;
+}
+
+.ui-tooltip {
+  padding: 6px 12px;
+  border-radius: 3px;
+  max-width: 350px;
+  background: #d7dade;
+  color: #2a2c31;
 }
