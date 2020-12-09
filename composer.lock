@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dad535d642379b72b7bc6babd7564fcc",
+    "content-hash": "70c62c0506519260d0868da59a1ea730",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2405,15 +2405,15 @@
         },
         {
             "name": "wpackagist-plugin/duplicate-post",
-            "version": "3.2.4",
+            "version": "3.2.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/duplicate-post/",
-                "reference": "tags/3.2.4"
+                "reference": "tags/3.2.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.6.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
