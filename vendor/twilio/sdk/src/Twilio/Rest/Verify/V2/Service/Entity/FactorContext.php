@@ -11,27 +11,20 @@ namespace Twilio\Rest\Verify\V2\Service\Entity;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
-use Twilio\ListResource;
 use Twilio\Options;
-use Twilio\Rest\Verify\V2\Service\Entity\Factor\ChallengeList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
- *
- * @property ChallengeList $challenges
- * @method \Twilio\Rest\Verify\V2\Service\Entity\Factor\ChallengeContext challenges(string $sid)
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  */
 class FactorContext extends InstanceContext {
-    protected $_challenges;
-
     /**
      * Initialize the FactorContext
      *
      * @param Version $version Version that contains the resource
      * @param string $serviceSid Service Sid.
-     * @param string $identity Unique identity of the Entity
+     * @param string $identity Unique external identifier of the Entity
      * @param string $sid A string that uniquely identifies this Factor.
      */
     public function __construct(Version $version, $serviceSid, $identity, $sid) {
@@ -46,31 +39,21 @@ class FactorContext extends InstanceContext {
     /**
      * Delete the FactorInstance
      *
-     * @param array|Options $options Optional Arguments
      * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete(array $options = []): bool {
-        $options = new Values($options);
-
-        $headers = Values::of(['Twilio-Sandbox-Mode' => $options['twilioSandboxMode'], ]);
-
-        return $this->version->delete('DELETE', $this->uri, [], [], $headers);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
      * Fetch the FactorInstance
      *
-     * @param array|Options $options Optional Arguments
      * @return FactorInstance Fetched FactorInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch(array $options = []): FactorInstance {
-        $options = new Values($options);
-
-        $headers = Values::of(['Twilio-Sandbox-Mode' => $options['twilioSandboxMode'], ]);
-
-        $payload = $this->version->fetch('GET', $this->uri, [], [], $headers);
+    public function fetch(): FactorInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new FactorInstance(
             $this->version,
@@ -94,11 +77,11 @@ class FactorContext extends InstanceContext {
         $data = Values::of([
             'AuthPayload' => $options['authPayload'],
             'FriendlyName' => $options['friendlyName'],
-            'Config' => $options['config'],
+            'Config.NotificationToken' => $options['configNotificationToken'],
+            'Config.SdkVersion' => $options['configSdkVersion'],
         ]);
-        $headers = Values::of(['Twilio-Sandbox-Mode' => $options['twilioSandboxMode'], ]);
 
-        $payload = $this->version->update('POST', $this->uri, [], $data, $headers);
+        $payload = $this->version->update('POST', $this->uri, [], $data);
 
         return new FactorInstance(
             $this->version,
@@ -107,55 +90,6 @@ class FactorContext extends InstanceContext {
             $this->solution['identity'],
             $this->solution['sid']
         );
-    }
-
-    /**
-     * Access the challenges
-     */
-    protected function getChallenges(): ChallengeList {
-        if (!$this->_challenges) {
-            $this->_challenges = new ChallengeList(
-                $this->version,
-                $this->solution['serviceSid'],
-                $this->solution['identity'],
-                $this->solution['sid']
-            );
-        }
-
-        return $this->_challenges;
-    }
-
-    /**
-     * Magic getter to lazy load subresources
-     *
-     * @param string $name Subresource to return
-     * @return ListResource The requested subresource
-     * @throws TwilioException For unknown subresources
-     */
-    public function __get(string $name): ListResource {
-        if (\property_exists($this, '_' . $name)) {
-            $method = 'get' . \ucfirst($name);
-            return $this->$method();
-        }
-
-        throw new TwilioException('Unknown subresource ' . $name);
-    }
-
-    /**
-     * Magic caller to get resource contexts
-     *
-     * @param string $name Resource to return
-     * @param array $arguments Context parameters
-     * @return InstanceContext The requested resource context
-     * @throws TwilioException For unknown resource
-     */
-    public function __call(string $name, array $arguments): InstanceContext {
-        $property = $this->$name;
-        if (\method_exists($property, 'getContext')) {
-            return \call_user_func_array(array($property, 'getContext'), $arguments);
-        }
-
-        throw new TwilioException('Resource does not have a context');
     }
 
     /**

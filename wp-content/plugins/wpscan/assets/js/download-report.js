@@ -100,6 +100,7 @@ jQuery(document).ready(function($) {
    * Tables
    */
   $('.wpscan-report-section').each(function() { 
+    let is_security_checks = false;
 
     // Table title
     wpscanReport.content.push({
@@ -107,20 +108,38 @@ jQuery(document).ready(function($) {
       style: 'header'
     });
 
-    // Table setup
+    if ( $(this).hasClass('security-checks') ) {
+      is_security_checks = true;
+    }
+
+    /**
+     * Table setup
+     */
     let table = {
 			table: {
         headerRows: 1,
-        widths: [ 140, 70, '*' ],
-				body: [
-          [
-              {text: 'Name', style: 'tableHeader', borderColor},
-              {text: 'Version', style: 'tableHeader', borderColor},
-              {text: 'Vulnerabilities', style: 'tableHeader', borderColor}
-          ],
-				],
+        widths: [],
+				body: [[]],
 			},
 		};
+    
+    /**
+     * Table head
+     */
+
+    // name
+    table.table.body[0].push({text: 'Name', style: 'tableHeader', borderColor});
+    table.table.widths.push(140);
+    
+    // version
+    if (! is_security_checks) {
+      table.table.body[0].push({text: 'Version', style: 'tableHeader', borderColor});
+      table.table.widths.push(70);
+    }
+
+    // Vulnerabilities
+    table.table.body[0].push({text: 'Vulnerabilities', style: 'tableHeader', borderColor});
+    table.table.widths.push('*');
 
     // Add rows
     $(this).find('table tbody').children().each(function() {
@@ -136,7 +155,9 @@ jQuery(document).ready(function($) {
       row.push({text: itemTitle, style: 'resTable', borderColor, lineHeight: 2})
       
       // Item version
-      row.push({text: $(this).find('.plugin-title .item-version span').text(), style: 'resTable', borderColor});
+      if (! is_security_checks) {
+        row.push({text: $(this).find('.plugin-title .item-version span').text(), style: 'resTable', borderColor});
+      }
 
       // Item vulnerabilities
       if ( $(this).find('.vulnerabilities .vulnerability').length ) {
@@ -144,15 +165,11 @@ jQuery(document).ready(function($) {
 
         // for each vulnerability
         $(this).find('.vulnerabilities .vulnerability').each(function(){
-          let linkText = $(this).find('a').first().text();
-          
-          // Severity
-          if ( $(this).find('.vulnerability-severity span').length ) {
-            linkText = $(this).find('.vulnerability-severity span').text() + ' - ' + linkText;
-
-            // capitalize first Letter
-            linkText = linkText.charAt(0).toUpperCase() + linkText.slice(1);
-          }
+          let item = $(this).clone();
+          let linkText = item.find('.vulnerability-severity span').text() + ' - ';
+          item.find('.vulnerability-severity span').remove();
+          linkText = linkText + item.text();
+          linkText = linkText.charAt(0).toUpperCase() + linkText.slice(1);
 
           col.stack.push({text: linkText, link: $(this).attr('href'), style: 'resTable', lineHeight: 2, borderColor});
         });
@@ -185,7 +202,7 @@ jQuery(document).ready(function($) {
    * Date
    */
   wpscanReport.content.push({
-    text: $('#metabox-summary .dashicons-calendar-alt').parent().text(),
+    text: $('#wpscan-metabox-summary .dashicons-calendar-alt').parent().text(),
     style: 'metadata'
   });
 

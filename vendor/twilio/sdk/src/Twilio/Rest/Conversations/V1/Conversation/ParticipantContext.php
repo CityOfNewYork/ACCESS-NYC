@@ -16,15 +16,12 @@ use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class ParticipantContext extends InstanceContext {
     /**
      * Initialize the ParticipantContext
      *
      * @param Version $version Version that contains the resource
-     * @param string $conversationSid The unique id of the Conversation for this
+     * @param string $conversationSid The unique ID of the Conversation for this
      *                                participant.
      * @param string $sid A 34 character string that uniquely identifies this
      *                    resource.
@@ -53,6 +50,9 @@ class ParticipantContext extends InstanceContext {
             'DateUpdated' => Serialize::iso8601DateTime($options['dateUpdated']),
             'Attributes' => $options['attributes'],
             'RoleSid' => $options['roleSid'],
+            'MessagingBinding.ProxyAddress' => $options['messagingBindingProxyAddress'],
+            'MessagingBinding.ProjectedAddress' => $options['messagingBindingProjectedAddress'],
+            'Identity' => $options['identity'],
         ]);
         $headers = Values::of(['X-Twilio-Webhook-Enabled' => $options['xTwilioWebhookEnabled'], ]);
 

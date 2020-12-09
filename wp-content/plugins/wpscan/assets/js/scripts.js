@@ -3,12 +3,12 @@
 
 jQuery( document ).ready( function( $ ) {
 
-  let button_check = $( '#metabox-summary .check-now button' );
-  let spinner = $( '#metabox-summary .spinner' );
+  let button_check = $( '#wpscan-metabox-summary .check-now button' );
+  let spinner = $( '#wpscan-metabox-summary .spinner' );
 
   // Checks if a cron job is already running when the page loads
   
-  if ( local.doing_cron == 'YES' ) {
+  if ( wpscan.doing_cron == 'YES' ) {
     button_check.attr( 'disabled', true );
     spinner.css( 'visibility', 'visible' );
 
@@ -23,11 +23,11 @@ jQuery( document ).ready( function( $ ) {
     spinner.css( 'visibility', 'visible' );
 
     $.ajax( {
-      url: local.ajaxurl,
+      url: wpscan.ajaxurl,
       method: 'POST',
       data: {
-        action: local.action_check,
-        _ajax_nonce: local.ajax_nonce
+        action: wpscan.action_check,
+        _ajax_nonce: wpscan.ajax_nonce
       },
       success: function( ) {
         check_cron();
@@ -36,7 +36,7 @@ jQuery( document ).ready( function( $ ) {
 
   }
 
-  // Check every 10 seconds if cron has finished
+  // Check every X seconds if cron has finished
 
   function check_cron() {
 
@@ -45,8 +45,8 @@ jQuery( document ).ready( function( $ ) {
         url: ajaxurl,
         method: 'POST',
         data: {
-          action: local.action_cron,
-          _ajax_nonce: local.ajax_nonce
+          action: wpscan.action_cron,
+          _ajax_nonce: wpscan.ajax_nonce
         },
         success: function( data ) {
           if ( data === 'NO' )
@@ -58,7 +58,7 @@ jQuery( document ).ready( function( $ ) {
           check_cron();
         }
       } );
-    }, 1000 * 10);
+    }, 1000 * 2);
 
   }
 
@@ -66,4 +66,8 @@ jQuery( document ).ready( function( $ ) {
 
   button_check.on( 'click', do_check );
 
-} );
+    // close postboxes that should be closed
+    $('.if-js-closed').removeClass('if-js-closed').addClass('closed');
+    // postboxes setup
+    postboxes.add_postbox_toggles('wpscan');
+});

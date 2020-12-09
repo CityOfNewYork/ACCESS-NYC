@@ -13,11 +13,13 @@ use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
 use Twilio\Options;
+use Twilio\Rest\Verify\V2\Service\AccessTokenList;
 use Twilio\Rest\Verify\V2\Service\EntityList;
 use Twilio\Rest\Verify\V2\Service\MessagingConfigurationList;
 use Twilio\Rest\Verify\V2\Service\RateLimitList;
 use Twilio\Rest\Verify\V2\Service\VerificationCheckList;
 use Twilio\Rest\Verify\V2\Service\VerificationList;
+use Twilio\Rest\Verify\V2\Service\WebhookList;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -33,6 +35,7 @@ use Twilio\Version;
  * @property string $ttsName
  * @property bool $doNotShareWarningEnabled
  * @property bool $customCodeEnabled
+ * @property array $push
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
  * @property string $url
@@ -44,6 +47,8 @@ class ServiceInstance extends InstanceResource {
     protected $_rateLimits;
     protected $_messagingConfigurations;
     protected $_entities;
+    protected $_webhooks;
+    protected $_accessTokens;
 
     /**
      * Initialize the ServiceInstance
@@ -68,6 +73,7 @@ class ServiceInstance extends InstanceResource {
             'ttsName' => Values::array_get($payload, 'tts_name'),
             'doNotShareWarningEnabled' => Values::array_get($payload, 'do_not_share_warning_enabled'),
             'customCodeEnabled' => Values::array_get($payload, 'custom_code_enabled'),
+            'push' => Values::array_get($payload, 'push'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'url' => Values::array_get($payload, 'url'),
@@ -155,6 +161,20 @@ class ServiceInstance extends InstanceResource {
      */
     protected function getEntities(): EntityList {
         return $this->proxy()->entities;
+    }
+
+    /**
+     * Access the webhooks
+     */
+    protected function getWebhooks(): WebhookList {
+        return $this->proxy()->webhooks;
+    }
+
+    /**
+     * Access the accessTokens
+     */
+    protected function getAccessTokens(): AccessTokenList {
+        return $this->proxy()->accessTokens;
     }
 
     /**

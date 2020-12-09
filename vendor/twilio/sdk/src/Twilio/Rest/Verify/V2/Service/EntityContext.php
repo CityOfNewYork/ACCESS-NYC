@@ -12,29 +12,29 @@ namespace Twilio\Rest\Verify\V2\Service;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
 use Twilio\ListResource;
-use Twilio\Options;
-use Twilio\Rest\Verify\V2\Service\Entity\AccessTokenList;
+use Twilio\Rest\Verify\V2\Service\Entity\ChallengeList;
 use Twilio\Rest\Verify\V2\Service\Entity\FactorList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  *
  * @property FactorList $factors
- * @property AccessTokenList $accessTokens
+ * @property ChallengeList $challenges
  * @method \Twilio\Rest\Verify\V2\Service\Entity\FactorContext factors(string $sid)
+ * @method \Twilio\Rest\Verify\V2\Service\Entity\ChallengeContext challenges(string $sid)
  */
 class EntityContext extends InstanceContext {
     protected $_factors;
-    protected $_accessTokens;
+    protected $_challenges;
 
     /**
      * Initialize the EntityContext
      *
      * @param Version $version Version that contains the resource
      * @param string $serviceSid Service Sid.
-     * @param string $identity Unique identity of the Entity
+     * @param string $identity Unique external identifier of the Entity
      */
     public function __construct(Version $version, $serviceSid, $identity) {
         parent::__construct($version);
@@ -48,31 +48,21 @@ class EntityContext extends InstanceContext {
     /**
      * Delete the EntityInstance
      *
-     * @param array|Options $options Optional Arguments
      * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete(array $options = []): bool {
-        $options = new Values($options);
-
-        $headers = Values::of(['Twilio-Sandbox-Mode' => $options['twilioSandboxMode'], ]);
-
-        return $this->version->delete('DELETE', $this->uri, [], [], $headers);
+    public function delete(): bool {
+        return $this->version->delete('DELETE', $this->uri);
     }
 
     /**
      * Fetch the EntityInstance
      *
-     * @param array|Options $options Optional Arguments
      * @return EntityInstance Fetched EntityInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch(array $options = []): EntityInstance {
-        $options = new Values($options);
-
-        $headers = Values::of(['Twilio-Sandbox-Mode' => $options['twilioSandboxMode'], ]);
-
-        $payload = $this->version->fetch('GET', $this->uri, [], [], $headers);
+    public function fetch(): EntityInstance {
+        $payload = $this->version->fetch('GET', $this->uri);
 
         return new EntityInstance(
             $this->version,
@@ -98,18 +88,18 @@ class EntityContext extends InstanceContext {
     }
 
     /**
-     * Access the accessTokens
+     * Access the challenges
      */
-    protected function getAccessTokens(): AccessTokenList {
-        if (!$this->_accessTokens) {
-            $this->_accessTokens = new AccessTokenList(
+    protected function getChallenges(): ChallengeList {
+        if (!$this->_challenges) {
+            $this->_challenges = new ChallengeList(
                 $this->version,
                 $this->solution['serviceSid'],
                 $this->solution['identity']
             );
         }
 
-        return $this->_accessTokens;
+        return $this->_challenges;
     }
 
     /**

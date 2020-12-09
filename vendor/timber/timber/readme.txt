@@ -2,8 +2,8 @@
 Contributors: jarednova
 Tags: template engine, templates, twig
 Requires at least: 4.9.8
-Tested up to: 5.4.1
-Stable tag: 1.16.0
+Tested up to: 5.5.1
+Stable tag: 1.18.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -26,13 +26,52 @@ _Twig is the template language powering Timber; if you need a little background 
 * **[Video Tutorials](https://timber.github.io/docs/getting-started/video-tutorials/)**
 * [Overview / Getting Started Guide](https://timber.github.io/docs/getting-started/)
 
+### Need support?
+* [StackOverflow](https://stackoverflow.com/questions/tagged/timber) is for usage questions and troubleshooting
+* [GitHub issues](https://github.com/timber/timber/issues) are for reporting bugs and errors
+
 == Changelog ==
 
 = Develop (next release) =
 
+**Changes for Theme Developers**
+
 **Fixes and improvements**
 
+= 1.18.2 = 
+
+**Fixes and improvements**
+
+* Fixes an issue where images loaded from another domain/site weren't properly deleted from the tmp directory #2216 (thanks @oxyc)
+
+
+= 1.18.1 =
+
+**Fixes and improvements**
+
+* Corrects an issue where #2305 tested for arrays but not other Iterables (like `Timber\PostCollection`s) #2314 (thanks @nlemoine)
+
+= 1.18.0 =
+
 **Changes for Theme Developers**
+
+* Improves control over pagination stops #2302 (thanks @IJMacD)
+
+**Fixes and improvements**
+
+* Fixes an error with array_filter and later versions of Twig #2305
+
+= 1.17.0 =
+
+**Changes for Theme Developers**
+
+* Adds new filter: `timber/allow_fs_write` to ensure compatibility with WordPress VIP and other hosts with filewrite restrictions. #2250 (thanks @mjangda)
+
+**Fixes and improvements**
+
+* Add a catch so that `{{ dump() }}` when WP_DEBUG = FALSE doesn't cause a fatal error #2217, #2282
+* Performance improvement for the deletion of transients #2281 (thanks @opengeekv2)
+* Fix for "More" block issue with Gutenberg #2256
 
 = 1.16.0 =
 **Changes for Theme Developers**

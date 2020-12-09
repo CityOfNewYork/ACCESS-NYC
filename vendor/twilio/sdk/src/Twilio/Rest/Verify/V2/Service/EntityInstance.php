@@ -12,14 +12,13 @@ namespace Twilio\Rest\Verify\V2\Service;
 use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
-use Twilio\Options;
-use Twilio\Rest\Verify\V2\Service\Entity\AccessTokenList;
+use Twilio\Rest\Verify\V2\Service\Entity\ChallengeList;
 use Twilio\Rest\Verify\V2\Service\Entity\FactorList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  *
  * @property string $sid
  * @property string $identity
@@ -32,7 +31,7 @@ use Twilio\Version;
  */
 class EntityInstance extends InstanceResource {
     protected $_factors;
-    protected $_accessTokens;
+    protected $_challenges;
 
     /**
      * Initialize the EntityInstance
@@ -40,7 +39,7 @@ class EntityInstance extends InstanceResource {
      * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid Service Sid.
-     * @param string $identity Unique identity of the Entity
+     * @param string $identity Unique external identifier of the Entity
      */
     public function __construct(Version $version, array $payload, string $serviceSid, string $identity = null) {
         parent::__construct($version);
@@ -84,23 +83,21 @@ class EntityInstance extends InstanceResource {
     /**
      * Delete the EntityInstance
      *
-     * @param array|Options $options Optional Arguments
      * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete(array $options = []): bool {
-        return $this->proxy()->delete($options);
+    public function delete(): bool {
+        return $this->proxy()->delete();
     }
 
     /**
      * Fetch the EntityInstance
      *
-     * @param array|Options $options Optional Arguments
      * @return EntityInstance Fetched EntityInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch(array $options = []): EntityInstance {
-        return $this->proxy()->fetch($options);
+    public function fetch(): EntityInstance {
+        return $this->proxy()->fetch();
     }
 
     /**
@@ -111,10 +108,10 @@ class EntityInstance extends InstanceResource {
     }
 
     /**
-     * Access the accessTokens
+     * Access the challenges
      */
-    protected function getAccessTokens(): AccessTokenList {
-        return $this->proxy()->accessTokens;
+    protected function getChallenges(): ChallengeList {
+        return $this->proxy()->challenges;
     }
 
     /**

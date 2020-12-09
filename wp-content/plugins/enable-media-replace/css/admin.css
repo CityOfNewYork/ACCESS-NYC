@@ -836,6 +836,11 @@
         left: 50%;
         margin-left: -30px;
         opacity: 0.5; }
+      .emr_upload_form .image_chooser.wrapper .image_previews .image_placeholder .image_size {
+        text-align: center;
+        position: absolute;
+        bottom: -25px;
+        width: 100%; }
       .emr_upload_form .image_chooser.wrapper .image_previews .image_placeholder.is_image .dashicons::before, .emr_upload_form .image_chooser.wrapper .image_previews .image_placeholder.is_image .dashicons {
         display: none; }
       .emr_upload_form .image_chooser.wrapper .image_previews .image_placeholder.not_image img {

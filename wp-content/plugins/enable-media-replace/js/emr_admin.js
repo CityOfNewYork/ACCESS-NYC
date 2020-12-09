@@ -38,6 +38,9 @@
         source_type = $(source).data('filetype').trim();
         this.debug('detected type - ' + source_type);
       }
+      else
+        source_type = ''; // error state
+
       if (source.hasClass('is_image'))
       {
           source_is_image = true;
@@ -98,6 +101,7 @@
 
         var status = this.checkUpload(file);
         this.debug('check upload status ' + status);
+        this.debug('file size:' + file.size);
 
         if (status)
         {
@@ -143,6 +147,7 @@
               height = img.height;
             //  $(preview).find('.textlayer').text(img.naturalWidth + ' x ' + img.naturalHeight );
               self.updateTextLayer(preview, width + ' x ' + height);
+              self.updateFileSize(preview, file);
         });
 
         $(preview).prepend(img);
@@ -154,6 +159,7 @@
         $(preview).find('.dashicons').removeClass().addClass('dashicons dashicons-no');
         //$(preview).find('.textlayer').text('');
         this.updateTextLayer(preview, '');
+        this.updateFileSize(preview, null);
         this.debug('File is null');
       }
       else { // not an image
@@ -161,6 +167,7 @@
         $(preview).find('.dashicons').removeClass().addClass('dashicons dashicons-media-document');
         //$(preview).find('.textlayer').text(file.name);
         this.updateTextLayer(preview, file.name);
+        this.updateFileSize(preview, file);
         this.debug('Not image, media document');
       }
 
@@ -208,6 +215,20 @@
         }
 
     },
+    this.updateFileSize = function(preview, file)
+    {
+      if (file === null)
+      {
+        $(preview).find('.image_size').text('');
+        return;
+      }
+      var bytes = file.size;
+      if (bytes == 0) { return "0.00 B"; }
+      var e = Math.floor(Math.log(bytes) / Math.log(1024));
+      var size = (bytes/Math.pow(1024, e)).toFixed(2)+' '+' KMGTP'.charAt(e)+'B';
+
+      $(preview).find('.image_size').text(size);
+    }
     this.checkSubmit = function()
     {
        var check = ($('input[name="userfile"]').val().length > 0) ? true : false;

@@ -138,6 +138,17 @@ namespace EnableMediaReplace\ShortPixelLogger;
        return;
      }
 
+     // Force administrator on manuals.
+     if ( $this->is_manual_request )
+     {
+        if (! function_exists('wp_get_current_user')) // not loaded yet
+          return false;
+
+        $user_is_administrator = (current_user_can('manage_options')) ? true : false;
+        if (! $user_is_administrator)
+          return false;
+     }
+
      // Check where to log to.
      if ($this->logPath === false)
      {
@@ -237,7 +248,7 @@ namespace EnableMediaReplace\ShortPixelLogger;
      $log = self::getInstance();
      $log->addLog($message, $level, $args);
    }
-   // Alias, since it goes wrong so often. 
+   // Alias, since it goes wrong so often.
    public static function addWarning($message, $args = array())
    {
       self::addWarn($message, $args);
@@ -326,6 +337,7 @@ namespace EnableMediaReplace\ShortPixelLogger;
        $controller = $this;
 
        $template_path = __DIR__ . '/' . $this->template  . '.php';
+      // var_dump( $template_path);
        if (file_exists($template_path))
        {
 

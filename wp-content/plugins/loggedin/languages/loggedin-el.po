@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: LoggedIn - Limit Active Logins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-25 14:11+0000\n"
+"PO-Revision-Date: 2019-09-04 11:17+0300\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"X-Loco-Version: 2.2.0; wp-5.1\n"
+"Last-Translator: \n"
+"Language: el\n"
+
+#: includes/class-f-loggedin-admin.php:51
+msgid "Maximum Active Logins"
+msgstr "Μέγιστος Αριθμός Συνδέσεων"
+
+#: includes/class-f-loggedin-admin.php:71
+msgid "Set the maximum no. of active logins a user account can have."
+msgstr ""
+"Ορίστε τον μέγιστο αριθμός ενεργών συνδέσεων που μπορεί να έχει ένας "
+"χρήστης."
+
+#: includes/class-f-loggedin-admin.php:72
+msgid ""
+"If this limit reached, next login request will be failed and user will have "
+"to logout from one device to continue."
+msgstr ""
+"Εάν ξεπεραστεί αυτό το όριο, η σύνδεση δε θα είναι εφικτή και ο χρήστης θα "
+"πρέπει να αποσυνδεθεί από τη συσκευή του για να συνεχίσει."
+
+#: includes/class-f-loggedin-admin.php:73
+msgid "Note: "
+msgstr "Σημείωση: "
+
+#: includes/class-f-loggedin-admin.php:73
+msgid "Even if the browser is closed, login session may exist."
+msgstr ""
+"Ακόμη και αν ο broweser είναι κλειστός, η σύνδεση μπορεί να είναι ενεργή."
+
+#: includes/class-f-loggedin.php:117
+msgid ""
+"Maximum no. of active logins found for this account. Please logout from "
+"another device to continue."
+msgstr ""
+"Ο μέγιστος αριθμός συνδέσεων έχει ξεπεραστεί για αυτόν τον λογαριασμό. "
+"Παρακαλώ αποσυνδεθείτε από τις άλλες συσκευές σας για να συνεχίσετε."
+
+#. Name of the plugin
+msgid "LoggedIn - Limit Active Logins"
+msgstr "LoggedIn - Περιορισμός Ενεργών Συνδέσεων"
+
+#. Description of the plugin
+msgid ""
+"Light weight plugin to limit number of active logins from an account. Set "
+"maximum number of concurrent logins a user can have from multiple places."
+msgstr ""
+"Λογισμικό για να περιορίζεται τον αριθμό ενεργών συνδέσεων για κάθε "
+"λογαριασμό. Ορίστε τον μέγιστο αριθμό συνδέσεων ενός χρήστη από διαφορετικά "
+"σημεία."
+
+#. URI of the plugin
+msgid "https://wordpress.org/plugins/loggedin/"
+msgstr "https://wordpress.org/plugins/loggedin/"
+
+#. Author of the plugin
+msgid "Joel James"
+msgstr "Τζόελ Τζέημς"
+
+#. Author URI of the plugin
+msgid "https://thefoxe.com/"
+msgstr "https://thefoxe.com/"
