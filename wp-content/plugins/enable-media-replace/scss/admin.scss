@@ -111,6 +111,13 @@
           opacity: 0.5;
 
         }
+        .image_size
+        {
+           text-align: center;
+           position: absolute;
+           bottom: -25px;
+           width: 100%;
+        }
         &.is_image
         {
           .dashicons::before, .dashicons { display: none }

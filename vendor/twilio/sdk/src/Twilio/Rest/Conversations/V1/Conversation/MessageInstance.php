@@ -13,12 +13,11 @@ use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
 use Twilio\Options;
+use Twilio\Rest\Conversations\V1\Conversation\Message\DeliveryReceiptList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- *
  * @property string $accountSid
  * @property string $conversationSid
  * @property string $sid
@@ -31,14 +30,18 @@ use Twilio\Version;
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
  * @property string $url
+ * @property array $delivery
+ * @property array $links
  */
 class MessageInstance extends InstanceResource {
+    protected $_deliveryReceipts;
+
     /**
      * Initialize the MessageInstance
      *
      * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @param string $conversationSid The unique id of the Conversation for this
+     * @param string $conversationSid The unique ID of the Conversation for this
      *                                message.
      * @param string $sid A 34 character string that uniquely identifies this
      *                    resource.
@@ -60,6 +63,8 @@ class MessageInstance extends InstanceResource {
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'url' => Values::array_get($payload, 'url'),
+            'delivery' => Values::array_get($payload, 'delivery'),
+            'links' => Values::array_get($payload, 'links'),
         ];
 
         $this->solution = [
@@ -116,6 +121,13 @@ class MessageInstance extends InstanceResource {
      */
     public function fetch(): MessageInstance {
         return $this->proxy()->fetch();
+    }
+
+    /**
+     * Access the deliveryReceipts
+     */
+    protected function getDeliveryReceipts(): DeliveryReceiptList {
+        return $this->proxy()->deliveryReceipts;
     }
 
     /**

@@ -19,12 +19,12 @@
                     <div class="form-field wpallimport-radio-field wpallimport-realhomes_addonaddress_geocode_address_no_key">
                         <input type="radio" <?php if (empty($current_field['address_geocode']) or esc_attr( $current_field['address_geocode'] ) == 'address_no_key'):?>checked="checked"<?php endif;?> value="address_no_key" name="fields<?php echo $field_name; ?>[<?php echo $field['key'];?>][address_geocode]" class="switcher" id="<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_no_key">
                         <label for="<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_no_key">No API Key</label>
-                        <a style="position: relative; top: -2px;" class="wpallimport-help" href="#help" original-title="Limited number of requests.">?</a>
+                        <a style="position: relative; top: -2px;" class="wpallimport-help" href="#help" title="Limited number of requests.">?</a>
                     </div>
                     <div class="form-field wpallimport-radio-field wpallimport-<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_google_developers">
                         <input type="radio" value="address_google_developers" name="fields<?php echo $field_name; ?>[<?php echo $field['key'];?>][address_geocode]" class="switcher" id="<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_google_developers" <?php if (esc_attr( $current_field['address_geocode'] ) == 'address_google_developers'):?>checked="checked"<?php endif;?> >
                         <label for="<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_google_developers">Google Developers API Key - <a href="https://developers.google.com/maps/documentation/geocoding/#api_key">Get free API key</a></label>
-                        <a style="position: relative; top: -2px;" class="wpallimport-help" href="#help" original-title="Up to 2500 requests per day and 5 requests per second.">?</a>
+                        <a style="position: relative; top: -2px;" class="wpallimport-help" href="#help" title="Up to 2500 requests per day and 5 requests per second.">?</a>
                         <div class="switcher-target-<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_google_developers" style="display: block;">
                             <div class="input sub_input">
                                 <label for="<?php echo $field_name; ?>_<?php echo $field_name; ?>_google_developers_api_key">API Key</label>
@@ -37,7 +37,7 @@
                     <div class="form-field wpallimport-radio-field wpallimport-<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_google_for_work">
                         <input type="radio" value="address_google_for_work" name="fields<?php echo $field_name; ?>[<?php echo $field['key'];?>][address_geocode]" class="switcher" <?php if (esc_attr( $current_field['address_geocode'] ) == 'address_google_for_work'):?>checked="checked"<?php endif;?> id="<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_google_for_work">
                         <label for="<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_google_for_work">Google for Work Client ID &amp; Digital Signature - <a href="https://developers.google.com/maps/documentation/business">Sign up for Google for Work</a></label>
-                        <a style="position: relative; top: -2px;" class="wpallimport-help" href="#help" original-title="Up to 100,000 requests per day and 10 requests per second">?</a>
+                        <a style="position: relative; top: -2px;" class="wpallimport-help" href="#help" title="Up to 100,000 requests per day and 10 requests per second">?</a>
                         <div class="switcher-target-<?php echo $field_name; ?>_<?php echo $field_name; ?>_geocode_address_google_for_work" style="display: none;">
                             <div class="input sub_input">
                                 <label for="<?php echo $field_name; ?>_<?php echo $field_name; ?>_google_for_work_client_id">Google for Work Client ID</label>

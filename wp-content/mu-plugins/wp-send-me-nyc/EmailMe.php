@@ -56,11 +56,12 @@ class EmailMe extends ContactMe {
    * @param   String  $url_shortened  Shortened url that is being shared.
    * @param   String  $url            Full url that is being shared.
    * @param   String  $template       Slug of the template to retrieve.
+   * @param   String  $share_text     Full url that is being shared.
    * @param   String  $lang           Language of the template to retrieve.
    *
    * @return  Array                   Includes the subject, html, and text bodies
    */
-  protected function content($url_shortened, $url, $template, $lang) {
+  protected function content($url_shortened, $url, $share_text, $template, $lang) {
     $controller = get_stylesheet_directory() . '/' . $this->template_controller;
 
     if (file_exists($controller)) {

@@ -2,8 +2,8 @@
 Contributors: ethicalhack3r, xfirefartx, erwanlr
 Tags: wpscan, wpvulndb, security, vulnerability, hack, scan, exploit, secure, alerts
 Requires at least: 3.4
-Tested up to: 5.5.1
-Stable tag: 1.11
+Tested up to: 5.5.3
+Stable tag: 1.13.2
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -18,16 +18,26 @@ The [WPScan WordPress Vulnerability Database](https://wpscan.com/) is a WordPres
 
 To use the WPScan WordPress Security Plugin you will need to use a free API token by [registering here](https://wpscan.com/).
 
+The WPScan WordPress Security Plugin will also check for other security issues, which do not require an API token, such as:
+
+* Check for debug.log files
+* Check for wp-config.php backup files
+* Check if XML-RPC is enabled
+* Check for code repository files
+* Check if default secret keys are used
+* Check for exported database files
+
 = What does the plugin do? =
 
 * Scans the WordPress core, plugins and themes for known security vulnerabilities;
+* Does additional security checks;
 * Shows an icon on the Admin Toolbar with the total number of security vulnerabilities found;
 * Notifies you by mail when new security vulnerabilities are found.
 
 = Further Reading =
 
 * [WPScan WordPress Vulnerability Database](https://wpscan.com/)
-* [WPScan WordPress Security Scanner](https://wpscan.org/)
+* [WPScan WordPress Security Scanner](https://wpscan.com/wordpress-security-scanner)
 * [WPScan Twitter](https://twitter.com/_wpscan_)
 
 == Installation ==
@@ -51,7 +61,7 @@ To use the WPScan WordPress Security Plugin you will need to use a free API toke
 
   You can set the following PHP constant in the wp-config.php file to disable scanning; `define( 'WPSCAN_DISABLE_SCANNING_INTERVAL', true );`.
 
-* Why is the "Summary" section and the "Check Now" button not showing?
+* Why is the "Summary" section and the "Run All" button not showing?
 
   The cron job did not run, which can be due to:
     - The DISABLE_WP_CRON constant is set to true in the wp-config.php file, but no system cron has been set (crontab -e).
@@ -67,6 +77,48 @@ To use the WPScan WordPress Security Plugin you will need to use a free API toke
 3. Site health page.
 
 == Changelog ==
+
+= 1.13.2 =
+
+* Fix XML-RPC check false positive
+
+= 1.13.1 =
+
+* Fix potential WP_Error issue in XML-RPC check
+* Add version to client side CSS and JS
+* Work towards PHP WordPress coding standards
+
+= 1.13 =
+* Improve the XML-RPC security check
+* No longer run a scan when adding an API token
+* Other small improvements & bug fixes
+
+= 1.12.3 =
+* Improve WPScan API error handling
+* Add status URL on WPScan API errors
+* Delete doing_cron transient on plugin activation
+* Replace the xmlrpc_encode_request() PHP function
+* Blur API token setting input box
+
+= 1.12.2 =
+* Fix bug: case statement should 'break'
+
+= 1.12.1 =
+* Fix bug: Handle 404 API errors
+
+= 1.12 =
+* Code Refactoring
+* Adds Security Check System
+* Check for debug.log files
+* Check for wp-config.php backups
+* Check if XMLRPC is enabled
+* Check if default keys are used in wp-config.php
+* Check for code repo files .svn and .git
+* Create a Vulnerabilities to Ignore meta-box
+* Fixes Theme closed incorrect message and position in report
+* Show message if API is not working
+* Timeout cron jobs
+* Fix 404 error in devtools
 
 = 1.11 =
 * Change references of wpvulndb to wpscan.com

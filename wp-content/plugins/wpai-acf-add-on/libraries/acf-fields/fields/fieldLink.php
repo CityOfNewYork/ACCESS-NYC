@@ -106,8 +106,13 @@ class FieldLink extends Field {
                         if ($parentIndex !== false){
                             $value = $value[$parentIndex];
                         }
-                        $value = explode($parent['delimiter'], $value);
+                        if (!empty($parent['delimiter'])) {
+	                        $value = explode($parent['delimiter'], $value);
+                        }
                         $parentIndex = $parent['index'];
+                    }
+                    if (!is_array($value)) {
+	                    $value = [$value];
                     }
                     $value = array_filter($value);
                     if (count($value) > $count) {

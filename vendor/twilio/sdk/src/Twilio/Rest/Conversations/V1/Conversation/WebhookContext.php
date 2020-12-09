@@ -16,15 +16,12 @@ use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class WebhookContext extends InstanceContext {
     /**
      * Initialize the WebhookContext
      *
      * @param Version $version Version that contains the resource
-     * @param string $conversationSid The unique id of the Conversation for this
+     * @param string $conversationSid The unique ID of the Conversation for this
      *                                webhook.
      * @param string $sid A 34 character string that uniquely identifies this
      *                    resource.

@@ -3,8 +3,8 @@ Contributors: joelcj91,duckdev
 Tags: active logins, loggedin, login, logout, limit active logins, login limit, concurrent logins
 Donate link: https://paypal.me/JoelCJ
 Requires at least: 4.0
-Tested up to: 5.3
-Stable tag: 1.2.0
+Tested up to: 5.5
+Stable tag: 1.3.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -152,6 +152,18 @@ Bug reports are always welcome - [report here](https://duckdev.com/support/).
 
 == Changelog ==
 
+= 1.3.1 (19/09/2020) =
+
+**👌 Improvements**
+
+* Support ajax logins - Thanks [Carlos Faria](https://github.com/cfaria).
+
+= 1.3.0 (28/08/2020) =
+
+**👌 Improvements**
+
+* Improved "Allow" logic to check only after password check.
+
 = 1.2.0 (07/06/2019) =
 
 **📦 New**
@@ -185,8 +197,8 @@ Bug reports are always welcome - [report here](https://duckdev.com/support/).
 
 == Upgrade Notice ==
 
-= 1.2.0 (07/06/2019) =
+= 1.3.1 (19/09/2020) =
 
-**📦 New**
+**👌 Improvements**
 
-* Added ability to choose login logic.
+* Support ajax logins.

@@ -10,4 +10,4 @@ updates:
     directory: /
     target-branch: main
     schedule:
-      interval: daily
+      interval: monthly

@@ -103,9 +103,11 @@ class ContactMe {
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);
 
-      $guid = $_POST['GUID'];
-
+      $guid = isset($_POST['GUID']) ? $_POST['GUID']: '';
+      
       $url = $_POST['url'];
+      
+      $share_text = isset($_POST['sharetext']) ? $_POST['sharetext']: '';
 
       $url_shortened = $this->shorten($url);
 
@@ -113,7 +115,7 @@ class ContactMe {
 
       $lang = (!isset($_POST['lang']) || empty($_POST['lang'])) ? 'en' : $_POST['lang'];
 
-      $content = $this->content($url_shortened, $url, $template, $lang);
+      $content = $this->content($url_shortened, $url, $share_text, $template, $lang);
 
       $this->send($to, $content);
       $this->success($content, $to, $guid, $url);

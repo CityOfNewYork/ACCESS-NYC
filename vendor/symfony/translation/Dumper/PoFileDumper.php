@@ -23,7 +23,7 @@ class PoFileDumper extends FileDumper
     /**
      * {@inheritdoc}
      */
-    public function formatCatalogue(MessageCatalogue $messages, $domain, array $options = [])
+    public function formatCatalogue(MessageCatalogue $messages, string $domain, array $options = [])
     {
         $output = 'msgid ""'."\n";
         $output .= 'msgstr ""'."\n";
@@ -53,7 +53,7 @@ class PoFileDumper extends FileDumper
 
             $sourceRules = $this->getStandardRules($source);
             $targetRules = $this->getStandardRules($target);
-            if (2 == \count($sourceRules) && $targetRules !== []) {
+            if (2 == \count($sourceRules) && [] !== $targetRules) {
                 $output .= sprintf('msgid "%s"'."\n", $this->escape($sourceRules[0]));
                 $output .= sprintf('msgid_plural "%s"'."\n", $this->escape($sourceRules[1]));
                 foreach ($targetRules as $i => $targetRule) {

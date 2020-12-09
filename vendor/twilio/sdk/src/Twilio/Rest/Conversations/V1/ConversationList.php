@@ -17,9 +17,6 @@ use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class ConversationList extends ListResource {
     /**
      * Construct the ConversationList
@@ -47,11 +44,14 @@ class ConversationList extends ListResource {
 
         $data = Values::of([
             'FriendlyName' => $options['friendlyName'],
+            'UniqueName' => $options['uniqueName'],
             'DateCreated' => Serialize::iso8601DateTime($options['dateCreated']),
             'DateUpdated' => Serialize::iso8601DateTime($options['dateUpdated']),
             'MessagingServiceSid' => $options['messagingServiceSid'],
             'Attributes' => $options['attributes'],
             'State' => $options['state'],
+            'Timers.Inactive' => $options['timersInactive'],
+            'Timers.Closed' => $options['timersClosed'],
         ]);
         $headers = Values::of(['X-Twilio-Webhook-Enabled' => $options['xTwilioWebhookEnabled'], ]);
 

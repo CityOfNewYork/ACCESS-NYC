@@ -12,9 +12,6 @@ namespace Twilio\Rest\Conversations\V1\Conversation;
 use Twilio\Options;
 use Twilio\Values;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 abstract class WebhookOptions {
     /**
      * @param string $configurationUrl The absolute url the webhook request should
@@ -25,7 +22,7 @@ abstract class WebhookOptions {
      *                                       event for this Conversation.
      * @param string[] $configurationTriggers The list of keywords, firing webhook
      *                                        event for this Conversation.
-     * @param string $configurationFlowSid The studio flow sid, where the webhook
+     * @param string $configurationFlowSid The studio flow SID, where the webhook
      *                                     should be sent to.
      * @param int $configurationReplayAfter The message index for which and it's
      *                                      successors the webhook will be replayed.
@@ -44,7 +41,7 @@ abstract class WebhookOptions {
      *                                       event for this Conversation.
      * @param string[] $configurationTriggers The list of keywords, firing webhook
      *                                        event for this Conversation.
-     * @param string $configurationFlowSid The studio flow sid, where the webhook
+     * @param string $configurationFlowSid The studio flow SID, where the webhook
      *                                     should be sent to.
      * @return UpdateWebhookOptions Options builder
      */
@@ -63,7 +60,7 @@ class CreateWebhookOptions extends Options {
      *                                       event for this Conversation.
      * @param string[] $configurationTriggers The list of keywords, firing webhook
      *                                        event for this Conversation.
-     * @param string $configurationFlowSid The studio flow sid, where the webhook
+     * @param string $configurationFlowSid The studio flow SID, where the webhook
      *                                     should be sent to.
      * @param int $configurationReplayAfter The message index for which and it's
      *                                      successors the webhook will be replayed.
@@ -126,9 +123,9 @@ class CreateWebhookOptions extends Options {
     }
 
     /**
-     * The studio flow sid, where the webhook should be sent to.
+     * The studio flow SID, where the webhook should be sent to.
      *
-     * @param string $configurationFlowSid The studio flow sid, where the webhook
+     * @param string $configurationFlowSid The studio flow SID, where the webhook
      *                                     should be sent to.
      * @return $this Fluent Builder
      */
@@ -170,7 +167,7 @@ class UpdateWebhookOptions extends Options {
      *                                       event for this Conversation.
      * @param string[] $configurationTriggers The list of keywords, firing webhook
      *                                        event for this Conversation.
-     * @param string $configurationFlowSid The studio flow sid, where the webhook
+     * @param string $configurationFlowSid The studio flow SID, where the webhook
      *                                     should be sent to.
      */
     public function __construct(string $configurationUrl = Values::NONE, string $configurationMethod = Values::NONE, array $configurationFilters = Values::ARRAY_NONE, array $configurationTriggers = Values::ARRAY_NONE, string $configurationFlowSid = Values::NONE) {
@@ -230,9 +227,9 @@ class UpdateWebhookOptions extends Options {
     }
 
     /**
-     * The studio flow sid, where the webhook should be sent to.
+     * The studio flow SID, where the webhook should be sent to.
      *
-     * @param string $configurationFlowSid The studio flow sid, where the webhook
+     * @param string $configurationFlowSid The studio flow SID, where the webhook
      *                                     should be sent to.
      * @return $this Fluent Builder
      */
