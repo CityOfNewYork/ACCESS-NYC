@@ -5,10 +5,10 @@
 	
 	if ( ! $('body.wpallimport-plugin').length) return; // do not execute any code if we are not on plugin page
 
-	var pmai_repeater_clone = function($parent){
-		
-		var $clone = $parent.find('tbody:first').children('.row-clone:first').clone();
-		var $number = parseInt($parent.find('tbody:first').children().length);		
+	let pmai_repeater_clone = function($parent){
+
+		let $clone = $parent.find('tbody:first').children('.row-clone:first').clone();
+		let $number = parseInt($parent.find('tbody:first').children().length);
 
 		$clone.removeClass('row-clone').addClass('row').find('td.order').html($number);
 		$clone.find('.switcher').each(function(){
@@ -21,7 +21,7 @@
 			$(this).attr({'class':$(this).attr('class').replace('ROWNUMBER', $number)});
 		});
 		$clone.find('input, select, textarea').each(function(){
-			var name = $(this).attr('name');
+			let name = $(this).attr('name');
 			if (name != undefined) $(this).attr({'name':$(this).attr('name').replace('ROWNUMBER', $number)});
 		});
 		
@@ -39,29 +39,22 @@
 				    }
 			    });
 			}
-		
 		});
+
+		pmai_init($parent);
 	};
 
-	$('form.wpallimport-template:visible').find('.repeater').find('.add-row-end').live('click', function(){
+	$(document).on('click', '.add_layout_button', function(){
 
-		var $parent = $(this).parents('.repeater:first');
-		
-		pmai_repeater_clone($parent);
+		let $parent = $(this).parents('.acf-flexible-content:first');
 
-	});
-
-	$('.add_layout_button').live('click', function(){
-
-		var $parent = $(this).parents('.acf-flexible-content:first');
-
-		var $dropdown = $parent.children('.add_layout').children('select'); //$('.add_layout select');
+		let $dropdown = $parent.children('.add_layout').children('select'); //$('.add_layout select');
 
 		if ($dropdown.val() == "" || $dropdown.val() == "Select Layout") return;
 
-		var $clone = $parent.children('.clones:first').children('div.layout[data-layout = ' + $dropdown.val() + ']').clone();
+		let $clone = $parent.children('.clones:first').children('div.layout[data-layout = ' + $dropdown.val() + ']').clone();
 
-		var $number = parseInt($parent.children('.values:first').children().length) + 1;
+		let $number = parseInt($parent.children('.values:first').children().length) + 1;
 
 		$clone.find('.fc-layout-order:first').html($number);
 
@@ -75,7 +68,7 @@
 			$(this).attr({'class':$(this).attr('class').replace('ROWNUMBER', $number)});
 		});
 		$clone.find('input, select, textarea').each(function(){
-			var name = $(this).attr('name');
+			let name = $(this).attr('name');
 			if (name != undefined) $(this).attr({'name':$(this).attr('name').replace('ROWNUMBER', $number)});
 		});
 
@@ -85,25 +78,19 @@
 
 	});
 
-	$('.delete_layout_button').live('click', function(){
-
-		var $parent = $(this).parents('.acf-flexible-content:first');
-
+	$(document).on('click', '.delete_layout_button', function(){
+		let $parent = $(this).parents('.acf-flexible-content:first');
 		$parent.children('.values:first').children(':last').remove();
-
 	});
 
-	$('.delete_row').live('click', function(){
-
-		var $parent = $(this).parents('.repeater:first');
-		
+	$(document).on('click', '.delete_row', function(){
+		let $parent = $(this).parents('.repeater:first');
 		$parent.find('tbody:first').children('.row:last').remove();
-
 	});
 
-	var pmai_get_acf_group = function(ths){
+	let pmai_get_acf_group = function(ths){
 
-		var request = {
+		let request = {
 			action:'get_acf',		
 			security: wp_all_import_security,		
 			acf: ths.attr('rel')
@@ -111,7 +98,7 @@
 
 	    if (typeof import_id != "undefined") request.id = import_id;
 
-	    var $ths = ths.parents('.pmai_options:first');
+		let $ths = ths.parents('.pmai_options:first');
 
 	    $ths.find('.acf_groups').prepend('<div class="pmai_preloader"></div>');
 
@@ -129,7 +116,7 @@
 				// swither show/hide logic
 				$ths.find('.acf_groups').find('input.switcher').change();
 				$ths.find('.acf_groups').find('input, textarea').bind('focus', function() {
-					var selected = $('.xml-element.selected');
+					let selected = $('.xml-element.selected');
 					if (selected.length) {
 						$(this).val($(this).val() + selected.attr('title').replace(/\/[^\/]*\//, '{') + '}');
 						selected.removeClass('selected');
@@ -145,55 +132,46 @@
 		});
 	}
 
-	var pmai_reset_acf_groups = function(){
-		
+	let pmai_reset_acf_groups = function(){
 		$('.pmai_options').find('.acf_signle_group').remove();
-
 		$('.pmai_options:visible').find('.pmai_acf_group:checked').each(function(){
-			
 			pmai_get_acf_group($(this));
-
 		});
 	}
 
 	pmai_reset_acf_groups();
 
 	$('.pmxi_plugin').find('.nav-tab').click(function(){
-		
 		pmai_reset_acf_groups();
-
 	});
 
-	$('.pmai_acf_group').live('change', function(){
-
-		var acf = $(this).attr('rel');
-
+	$('.pmai_acf_group').on('change', function(){
+		let acf = $(this).attr('rel');
 		if ($(this).is(':checked')){
-
 			// if requsted ACF group doesn't exists
 			if ( ! $(this).parents('.pmai_options:first').find('.acf_signle_group[rel=' + acf + ']').length){
-
 				pmai_get_acf_group($(this));
 			}	
-		}
-		else{ 
-			if (confirm("Confirm removal?")) 
+		} else {
+			if (confirm("Confirm removal?")) {
 				$(this).parents('.pmai_options:first').find('.acf_signle_group[rel=' + acf + ']').remove();
-			else 
+			} else {
 				$(this).attr('checked','checked');
+			}
 		}
-
 	});	
 
 	function pmai_init(ths){
 
 		ths.find('input.datetimepicker').datetimepicker({
-			dateFormat: 'dd/mm/yy',
+			dateFormat: 'dd-mm-yy',
 			timeFormat: 'hh:mm TT',
 			ampm: true
 		});
 
-		ths.find('input.datepicker').datepicker();
+		ths.find('input.datepicker').datepicker({
+			dateFormat: 'dd-mm-yy'
+		});
 		
 		ths.find('.sortable').each(function(){
 			if ( ! $(this).parents('tr.row-clone').length ){
@@ -208,10 +186,27 @@
 			    });		    
 			} 
 		});
+
+		ths.find('.repeater').find('.add-row-end').on('click', function(){
+			let $parent = $(this).parents('.repeater:first');
+			pmai_repeater_clone($parent);
+		});
+
+		ths.find('input.switcher').on("change", function (e) {
+			if ($(this).is(':radio:checked')) {
+				$(this).parents('form').find('input.switcher:radio[name="' + $(this).attr('name') + '"]').not(this).change();
+			}
+			let $targets = $('.switcher-target-' + $(this).attr('id'));
+			let is_show = $(this).is(':checked'); if ($(this).is('.switcher-reversed')) is_show = ! is_show;
+			if (is_show) {
+				$targets.slideDown();
+			} else {
+				$targets.slideUp().find('.clear-on-switch').add($targets.filter('.clear-on-switch')).val('');
+			}
+		}).change();
 	}
 
-	$('.acf_signle_group').find('.switcher').live('click', function(){
-	
+	$('.acf_signle_group').find('.switcher').on('click', function(){
 		$(this).parents('div.acf-input-wrap:first').find('.sortable').each(function(){			
 			if ( ! $(this).hasClass('ui-sortable') && ! $(this).parents('tr.row-clone').length ){
 				$(this).pmxi_nestedSortable({
@@ -224,12 +219,10 @@
 				    }
 			    });
 			}
-		
 		});
-
 	});
 
-	$('.variable_repeater_mode').live('change', function(){
+	$(document).on('change', '.variable_repeater_mode', function() {
 		// if variable mode
 		if ($(this).is(':checked') && ($(this).val() == 'yes' || $(this).val() == 'csv')){
 			var $parent = $(this).parents('.repeater:first');

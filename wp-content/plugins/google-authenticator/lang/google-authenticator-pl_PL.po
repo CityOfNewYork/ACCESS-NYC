@@ -1,0 +1,304 @@
+# Copyright (C) 2017 Google Authenticator
+# This file is distributed under the same license as the Google Authenticator package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Authenticator 0.49\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/google-"
+"authenticator\n"
+"POT-Creation-Date: 2017-10-28 00:02:58+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2020-10-20 10:04+0200\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
+"Language: pl_PL\n"
+
+#. Plugin Name of the plugin/theme
+#: google-authenticator.php:190 google-authenticator.php:193
+msgid "Google Authenticator"
+msgstr "Google Authenticator"
+
+#: google-authenticator.php:268
+msgid ""
+"OTP code doesn't match supplied secret, please check you've configured "
+"Authenticator correctly."
+msgstr ""
+"Niepoprawny kod weryfikacyjny. Upewnij się czy poprawnie wprowadziłeś kod "
+"weryfikacyjny z aplikacji."
+
+#: google-authenticator.php:277
+msgid ""
+"Congratulations, you have successfully enabled Google Authenticator for your "
+"account "
+msgstr ""
+"Gratulacje, dwuetapowa weryfikacja została pomyślnie dodana do panelu "
+"logowania do Twojej strony "
+
+#: google-authenticator.php:298
+msgid "iOS: Authy"
+msgstr "iOS: Authy"
+
+#: google-authenticator.php:302
+msgid "iOS: Google Authenticator"
+msgstr "iOS: Google Authenticator"
+
+#: google-authenticator.php:306
+msgid "Android: Authy"
+msgstr "Urządzenia z Android: Authy"
+
+#: google-authenticator.php:310
+msgid "Android: Google Authenticator"
+msgstr "Urządzenia z Android: Google Authenticator"
+
+#: google-authenticator.php:314
+msgid "Windows Phone"
+msgstr "Windows Phone"
+
+#: google-authenticator.php:318
+msgid "Chrome Browser"
+msgstr "Przeglądarka Chrome"
+
+#: google-authenticator.php:322
+msgid "Desktop"
+msgstr "Aplikacja na komputer"
+
+#: google-authenticator.php:330 google-authenticator.php:415
+#: google-authenticator.php:693 google-authenticator.php:914
+msgid "Google Authenticator Settings"
+msgstr "Ustawienia aplikacji Google Authenticator"
+
+#: google-authenticator.php:334
+msgid ""
+"If you haven't already done so, please install the Authy or Google "
+"Authenticator app on your mobile device from the App Store:"
+msgstr ""
+"Jeśli jeszcze tego nie zrobiłeś, zainstaluj aplikację Authy lub Google "
+"Authenticator na swoim urządzeniu mobilnym z marketu aplikacji:"
+
+#: google-authenticator.php:340
+msgid ""
+"The easiest way to enable your account is to add an account by scanning the "
+"QR code using the app."
+msgstr ""
+"Najprostszym sposobem włączenia uwierzytelniania dwuskładnikowego jest "
+"dodanie konta przez skanowanie kodu QR za pomocą aplikacji."
+
+#: google-authenticator.php:342
+msgid ""
+"An account can also be added by typing in the secret. After you've added "
+"your account to the App, please type the code you see on the screen into the "
+"Authenticator Code field and press the Verify Authenticator Code button."
+msgstr ""
+"Konto do obsługi uwierzytelniania możesz założyć również przez podanie "
+"klucza bezpieczeństwa. Po dodaniu konta w aplikacji, wpisz klucz "
+"bezpieczeństwa w pole \"Twój klucz bezpieczeństwa - token\" i naciśnij "
+"\"dodaj i zweryfikuj konto\"."
+
+#: google-authenticator.php:345
+msgid ""
+"If the account setup was successful, you will be logged out, and will need "
+"to login again using your Username, Password and Authenticator code "
+"generated using the App on your mobile device."
+msgstr ""
+"Jeśli weryfikacja konta zakończy się sukcesem, zostaniesz wylogowany i "
+"będziesz musiał ponownie zalogować się z użyciem loginu, hasła i "
+"wygenerowanego w aplikacji telefonu kodu weryfikacyjnego."
+
+#: google-authenticator.php:417
+msgid "foo"
+msgstr "foo"
+
+#: google-authenticator.php:421
+msgid "Network Settings"
+msgstr "Ustawienia Sieci"
+
+#: google-authenticator.php:425
+msgid "Only use network-wide settings, ignoring site settings."
+msgstr ""
+"Korzystaj wyłącznie z globalnych ustawień sieci, ignorując ustawienia strony."
+
+#: google-authenticator.php:431
+msgid "Two Screen Signin"
+msgstr "Korzystaj z dodatkowego ekranu logowania"
+
+#: google-authenticator.php:435
+msgid "Ask for authenticator code on secondary login screen"
+msgstr ""
+"Pytaj o kod weryfikacyjny na drugim ekranie logowania (po podaniu loginu i "
+"hasła)"
+
+#: google-authenticator.php:439
+msgid "Roles requiring Google Authenticator Enabled"
+msgstr "Role użytkowników dla których Google Authenticator ma być aktywny"
+
+#: google-authenticator.php:447
+msgid "Network-wide settings in effect, only a super admin can modify them."
+msgstr ""
+"Globalne ustawienia sieci są aktywne, tylko Administrator może je zmienić."
+
+#: google-authenticator.php:449
+msgid "Change network wide Google Authenticator settings"
+msgstr "Zmień ustawienia globalne dla Google Authenticator"
+
+#: google-authenticator.php:489
+msgid ""
+"Sorry, you can't disable checks for this role as it's enabled at the network "
+"level."
+msgstr ""
+"Przepraszamy, nie możesz zmienić tych ustawień jeśli są one ustawione na "
+"poziomie globalnym."
+
+#: google-authenticator.php:491
+msgid ""
+"Sorry, this role is enabled at the network level and can only be disabled "
+"via the <a href=\"%s\">network settings</a>"
+msgstr ""
+"Przepraszamy, ta rola jest włączona na poziomie globalnym i może zostać "
+"wyłączona jedynie przez <a href=\"%s\">ustawienia sieci</a>"
+
+#: google-authenticator.php:520
+msgid ""
+"If you don't have Google Authenticator enabled for your WordPress account, "
+"leave this field empty."
+msgstr ""
+"Jeżeli nie masz włączonego Google Authenticator dla tego konta WordPress, "
+"pozostaw to pole puste."
+
+#: google-authenticator.php:520
+msgid "Google Authenticator code"
+msgstr "Kod weryfikacyjny z Google Authenticator"
+
+#: google-authenticator.php:593
+msgid "<strong>ERROR</strong>: The Google Authenticator password is incorrect."
+msgstr "<strong>BŁĄD</strong>: Hasło Google Authenticator jest niepoprawne."
+
+#: google-authenticator.php:597 google-authenticator.php:618
+msgid ""
+"<strong>ERROR</strong>: The Google Authenticator code is incorrect or has "
+"expired."
+msgstr ""
+"<strong>BŁĄD</strong>: Kod weryfikacyjny Google Authenticator jest "
+"nieprawidłowy lub wygasły."
+
+#: google-authenticator.php:616
+msgid "<strong>ERROR</strong>: The Google Authenticator code is missing."
+msgstr "<strong>BŁĄD</strong>: Nie wpisano kodu Google Authenticator code."
+
+#: google-authenticator.php:630
+msgid ""
+"Please enter the Google Authenticator code using the app on your device."
+msgstr ""
+"Wprowadzź proszę kod Google Authenticator używając aplikacji na swoim "
+"telefonie."
+
+#: google-authenticator.php:632
+msgid "Log In"
+msgstr "Zaloguj"
+
+#: google-authenticator.php:700 google-authenticator.php:926
+msgid "Active"
+msgstr "Włączony"
+
+#: google-authenticator.php:709
+msgid "Relaxed mode"
+msgstr "Tryb większej tolerancji"
+
+#: google-authenticator.php:711
+msgid ""
+" Relaxed mode allows for more time drifting on your phone clock (&#177;4 "
+"min)."
+msgstr ""
+" Ten tryb pozwala na większe przesunięcia czasowe w zegarze Twojego telefonu "
+"(&#177;4 min)."
+
+#: google-authenticator.php:718
+msgid "Description"
+msgstr "Opis"
+
+#: google-authenticator.php:719
+msgid ""
+" Description that you'll see in the Google Authenticator app on your phone."
+msgstr ""
+" Opis, który będziesz widział w aplikacji Google Authenticator na swoim "
+"telefonie."
+
+#: google-authenticator.php:723
+msgid "Secret"
+msgstr "Tajny klucz"
+
+#: google-authenticator.php:727
+msgid "Create new secret"
+msgstr "Utwórz nowy tajny klucz"
+
+#: google-authenticator.php:728
+msgid "Show/Hide QR code"
+msgstr "Pokaż/Ukryj kod QR"
+
+#: google-authenticator.php:740
+msgid "Scan this with the Google Authenticator app."
+msgstr "Zeskanuj kod używając aplikacji Google Authenticator."
+
+#: google-authenticator.php:752
+msgid "Enable App password"
+msgstr "Włącz hasło aplikacyjne"
+
+#: google-authenticator.php:754
+msgid " Enabling an App password will decrease your overall login security."
+msgstr ""
+" Włączenie hasła aplikacyjnego obniży ogólny poziom bezpieczeństwa logowania "
+"do strony."
+
+#: google-authenticator.php:762
+msgid "Create new password"
+msgstr "Utwórz nowy tajny klucz"
+
+#: google-authenticator.php:763
+msgid ""
+" Password is not stored in cleartext, this is your only chance to see it."
+msgstr ""
+" Hasło nie jest przechowywane w otwartym tekście, to jest Twoja jedyna "
+"szansa aby je zobaczyć."
+
+#: google-authenticator.php:771
+msgid "Authenticator Code"
+msgstr "Kod weryfikacyjny"
+
+#: google-authenticator.php:772
+msgid ""
+"After adding the site to your google authy account, add your authenticator "
+"code here."
+msgstr ""
+"Po dodaniu strony do Twojego konta Google Authy, wpisz tu swój kod "
+"weryfikacyjny."
+
+#: google-authenticator.php:778
+msgid "Verify Authenticator Code"
+msgstr "Weryfikuj wprowadzony kod"
+
+#: google-authenticator.php:919
+msgid "Hide settings from user"
+msgstr "Ukryj ustawienia przez użytkownikiem"
+
+#. Plugin URI of the plugin/theme
+msgid "http://henrik.schack.dk/google-authenticator-for-wordpress"
+msgstr "http://henrik.schack.dk/google-authenticator-for-wordpress"
+
+#. Description of the plugin/theme
+msgid ""
+"Two-Factor Authentication for WordPress using the Android/iPhone/Blackberry "
+"app as One Time Password generator."
+msgstr ""
+"Dwuetapowe uwierzytelnianie dla Twojego WordPressa używając aplikacji na "
+"telefonie Android/iPhone/BlackBerry jako jednorazowego hasła."
+
+#. Author of the plugin/theme
+msgid "Henrik Schack"
+msgstr "Henrik Schack"
+
+#. Author URI of the plugin/theme
+msgid "http://henrik.schack.dk/"
+msgstr "http://henrik.schack.dk/"

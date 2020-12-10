@@ -43,7 +43,14 @@ class PMAI_Import_Record extends PMAI_Model_Record {
                     if (!$status) {
                         continue;
                     }
-                    $this->groups[] = GroupFactory::create(array('ID' => $acfGroupID), $parsingData['import']->options);
+                    if ( ! is_numeric($acfGroupID) ) {
+                    	$group = pmai_get_acf_group_by_slug($acfGroupID);
+                    	if ( ! empty($group) ) {
+		                    $this->groups[] = GroupFactory::create(array('ID' => $group->ID), $parsingData['import']->options);
+	                    }
+                    } else {
+	                    $this->groups[] = GroupFactory::create(array('ID' => $acfGroupID), $parsingData['import']->options);
+                    }
                 }
             }
             foreach ($this->groups as $group){

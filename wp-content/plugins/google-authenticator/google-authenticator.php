@@ -4,16 +4,17 @@ Plugin Name: Google Authenticator
 Plugin URI: https://github.com/ivankruchkoff/google-authenticator
 Description: Two-Factor Authentication for WordPress using the Android/iPhone/Blackberry app as One Time Password generator.
 Author: Ivan Kruchkoff
-Version: 0.52
+Version: 0.53
 Author URI: https://github.com/ivankruchkoff
-Compatibility: WordPress 5.2
+Compatibility: WordPress 5.6
 Text Domain: google-authenticator
 Domain Path: /lang
 
 ----------------------------------------------------------------------------
 
 
-    Thanks to Fabio Zumbi for Portuguese translation.
+    Thanks to Paweł Nowacki for the Polish translation.
+    Thanks to Fabio Zumbi for the Portuguese translation.
     Thanks to Guido Schalkx for the Dutch translation.
 	Thanks to Henrik Schack for creating / maintaining versions 0.20 to 0.48
 	Thanks to Ivan Kruchkoff for his UX improvements in user signup.
@@ -545,6 +546,9 @@ function loginform() {
     echo "\t\t<label title=\"".__('If you don\'t have Google Authenticator enabled for your WordPress account, leave this field empty.','google-authenticator')."\">".__('Google Authenticator code','google-authenticator')."<span id=\"google-auth-info\"></span><br />\n";
     echo "\t\t<input type=\"text\" name=\"googleotp\" id=\"googleotp\" class=\"input\" value=\"\" size=\"20\" style=\"ime-mode: inactive;\" autocomplete=\"off\" /></label>\n";
     echo "\t</p>\n";
+    echo "\t<script type=\"text/javascript\">\n";
+    echo "\t\tdocument.getElementById(\"googleotp\").focus();\n";
+    echo "\t</script>\n";
 }
 
 /**

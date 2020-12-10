@@ -16,6 +16,14 @@ if(!empty($_GET["tab"]) && in_array($_GET["tab"], ['logs-local', 'logs-custom', 
 }
 ?>
 
+<?php if( $active_app === 'local' ) : ?>
+<div id="llar-header-upgrade-message">
+    <p><span class="dashicons dashicons-info"></span><?php echo sprintf( __( 'Upgrade to our <a href="%s" target="_blank">premium cloud app</a> for advanced protection.', 'limit-login-attempts-reloaded' ),
+            'https://www.limitloginattempts.com/features/?from=plugin-'.( ( substr( $active_tab, 0, 4 ) === 'logs' ) ? 'logs' : $active_tab )
+        ); ?></p>
+</div>
+<?php endif; ?>
+
 <div class="wrap limit-login-page-settings">
     <h2><?php echo __( 'Limit Login Attempts Reloaded', 'limit-login-attempts-reloaded' ); ?></h2>
 

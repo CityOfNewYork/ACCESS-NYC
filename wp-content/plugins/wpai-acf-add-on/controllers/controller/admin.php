@@ -43,29 +43,12 @@ abstract class PMAI_Controller_Admin extends PMAI_Controller {
 	/**
 	 * @see Controller::render()
 	 */
-	protected function render($viewPath = NULL)
-	{
+	protected function render($viewPath = NULL) {
 		// assume template file name depending on calling function
 		if (is_null($viewPath)) {
 			$trace = debug_backtrace();
 			$viewPath = str_replace('_', '/', preg_replace('%^' . preg_quote(PMAI_Plugin::PREFIX, '%') . '%', '', strtolower($trace[1]['class']))) . '/' . $trace[1]['function'];
 		}
-		
-		// render contextual help automatically
-		$viewHelpPath = $viewPath;
-		// append file extension if not specified
-		if ( ! preg_match('%\.php$%', $viewHelpPath)) {
-			$viewHelpPath .= '.php';
-		}
-		$viewHelpPath = preg_replace('%\.php$%', '-help.php', $viewHelpPath);
-		$fileHelpPath = PMAI_Plugin::ROOT_DIR . '/views/' . $viewHelpPath;
-				
-		if (is_file($fileHelpPath)) { // there is help file defined
-			ob_start();
-			include $fileHelpPath;
-			add_contextual_help(PMAI_Plugin::getInstance()->getAdminCurrentScreen()->id, ob_get_clean());
-		}
-		
 		parent::render($viewPath);
 	}
 	

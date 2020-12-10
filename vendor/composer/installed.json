@@ -2615,16 +2615,16 @@
     },
     {
         "name": "wpackagist-plugin/google-authenticator",
-        "version": "0.52",
-        "version_normalized": "0.52.0.0",
+        "version": "0.53",
+        "version_normalized": "0.53.0.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/google-authenticator/",
-            "reference": "tags/0.52"
+            "reference": "tags/0.53"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.52.zip"
+            "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.53.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2635,16 +2635,16 @@
     },
     {
         "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-        "version": "2.17.2",
-        "version_normalized": "2.17.2.0",
+        "version": "2.17.3",
+        "version_normalized": "2.17.3.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-            "reference": "tags/2.17.2"
+            "reference": "tags/2.17.3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.17.2.zip"
+            "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.17.3.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2855,16 +2855,16 @@
     },
     {
         "name": "wpackagist-plugin/wpscan",
-        "version": "1.13",
-        "version_normalized": "1.13.0.0",
+        "version": "1.13.2",
+        "version_normalized": "1.13.2.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/wpscan/",
-            "reference": "tags/1.13"
+            "reference": "tags/1.13.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wpscan.1.13.zip"
+            "url": "https://downloads.wordpress.org/plugin/wpscan.1.13.2.zip"
         },
         "require": {
             "composer/installers": "~1.0"

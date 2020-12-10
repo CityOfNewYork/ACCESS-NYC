@@ -6,6 +6,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'WPScan\\Plugin' => $baseDir . '/app/Plugin.php',
-    'WPScan\\Report' => $baseDir . '/app/Report.php',
 );

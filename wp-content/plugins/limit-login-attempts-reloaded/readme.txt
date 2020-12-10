@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate?hosted_button_id=FKD4MYFCMNVQQ
 Tags: brute force, login, security, GDPR, protection
 Requires at least: 3.0
 Tested up to: 5.6
-Stable tag: 2.17.2
+Stable tag: 2.17.3
 
 Reloaded version of the original Limit Login Attempts plugin for Login Protection by a team of WordPress developers. GDPR compliant.
 
@@ -90,10 +90,13 @@ Please follow this link: <a href="https://www.limitloginattempts.com/resources/"
 
 == Changelog ==
 
-= 2.17.2 ==
+= 2.17.3 =
+* Plugin pages message.
+
+= 2.17.2 =
 * Lockout notification refactored.
 
-= 2.17.1 ==
+= 2.17.1 =
 * CSS cache issue fixed.
 * Notification text updated.
 

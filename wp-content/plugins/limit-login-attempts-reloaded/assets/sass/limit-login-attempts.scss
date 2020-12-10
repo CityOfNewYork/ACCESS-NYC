@@ -330,3 +330,28 @@
     transition: width 0.4s;
   }
 }
+
+#llar-header-upgrade-message {
+  text-align: center;
+  background-color: #fff;
+  color: #222;
+  padding: 10px;
+  margin-left: -20px;
+  //margin-right: -20px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+
+  p {
+    margin: 0;
+
+    .dashicons {
+      color: #f2a64c;
+      margin-right: 5px;
+    }
+  }
+}
+
+.settings_page_limit-login-attempts {
+  .update-nag {
+    display: none;
+  }
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed099002dfd152f6494ba7615bdb3f25",
+    "content-hash": "273f81e4c4d4bb1a65732a05f184da17",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2331,15 +2331,15 @@
         },
         {
             "name": "wpackagist-plugin/google-authenticator",
-            "version": "0.52",
+            "version": "0.53",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/google-authenticator/",
-                "reference": "tags/0.52"
+                "reference": "tags/0.53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.52.zip"
+                "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.53.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2349,15 +2349,15 @@
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.17.2",
+            "version": "2.17.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.17.2"
+                "reference": "tags/2.17.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.17.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.17.3.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2475,15 +2475,15 @@
         },
         {
             "name": "wpackagist-plugin/wpscan",
-            "version": "1.13",
+            "version": "1.13.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wpscan/",
-                "reference": "tags/1.13"
+                "reference": "tags/1.13.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wpscan.1.13.zip"
+                "url": "https://downloads.wordpress.org/plugin/wpscan.1.13.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2760,7 +2760,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
