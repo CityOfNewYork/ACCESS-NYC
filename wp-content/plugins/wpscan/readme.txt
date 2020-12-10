@@ -3,7 +3,7 @@ Contributors: ethicalhack3r, xfirefartx, erwanlr
 Tags: wpscan, wpvulndb, security, vulnerability, hack, scan, exploit, secure, alerts
 Requires at least: 3.4
 Tested up to: 5.5.3
-Stable tag: 1.13
+Stable tag: 1.13.2
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -77,6 +77,16 @@ The WPScan WordPress Security Plugin will also check for other security issues, 
 3. Site health page.
 
 == Changelog ==
+
+= 1.13.2 =
+
+* Fix XML-RPC check false positive
+
+= 1.13.1 =
+
+* Fix potential WP_Error issue in XML-RPC check
+* Add version to client side CSS and JS
+* Work towards PHP WordPress coding standards
 
 = 1.13 =
 * Improve the XML-RPC security check

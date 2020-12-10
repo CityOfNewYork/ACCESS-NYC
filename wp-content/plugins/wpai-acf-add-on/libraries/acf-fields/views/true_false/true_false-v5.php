@@ -8,6 +8,8 @@
                 $field['key'] = 'multiple_value'. $field_name .'[' . $field['key'] . ']';
                 $field['value'] = $current_multiple_value;
                 $field['prefix'] = '';
+                $field['message'] = empty($field['ui_on_text']) ? 'Yes' : $field['ui_on_text'];
+                $field['ui'] = 0;
                 acf_render_field( $field );
                 $field['key'] = $tmp_key;
             ?>

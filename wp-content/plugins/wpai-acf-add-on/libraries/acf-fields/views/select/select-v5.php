@@ -2,7 +2,6 @@
     <div class="input sub_input">
         <div class="input">
             <?php
-                $field_class = 'acf_field_' . $field['type'];
                 $field['other_choice'] = false;
                 $tmp_key = $field['key'];
                 $field['key'] = 'multiple_value'. $field_name .'[' . $field['key'] . ']';

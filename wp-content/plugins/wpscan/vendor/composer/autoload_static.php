@@ -20,17 +20,11 @@ class ComposerStaticInit0c863ce01900e71a6f32c7e450b49179
         ),
     );
 
-    public static $classMap = array (
-        'WPScan\\Plugin' => __DIR__ . '/../..' . '/app/Plugin.php',
-        'WPScan\\Report' => __DIR__ . '/../..' . '/app/Report.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit0c863ce01900e71a6f32c7e450b49179::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit0c863ce01900e71a6f32c7e450b49179::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit0c863ce01900e71a6f32c7e450b49179::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -144,12 +144,20 @@ abstract class Field implements FieldInterface {
 
             $field_keys = str_replace(array('[',']'), array(''), str_replace('][', ':', $this->getData('field_name')));
 
+			$data['current_field'] = false;
             foreach (explode(":", $field_keys) as $n => $key) {
-
-                $data['current_field'] = empty($post['fields'][$key]) ? $data['current_field'][$key] : $post['fields'][$key];
+	            if (!empty($post['fields'][$key])) {
+		            $data['current_field'] = $post['fields'][$key];
+	            } elseif (isset($data['current_field'][$key])) {
+		            $data['current_field'] = $data['current_field'][$key];
+	            }
 
                 foreach ($options as $option){
-                    $data['current_' . $option] = isset($post[$option][$key]) ? $post[$option][$key] : $data['current_' . $option][$key];
+                    if (!empty($post[$option][$key])) {
+                        $data['current_' . $option] = $post[$option][$key];
+                    } elseif(!empty($data['current_' . $option][$key])) {
+                        $data['current_' . $option] = $data['current_' . $option][$key];
+                    }
                 }
             }
 
@@ -383,15 +391,18 @@ abstract class Field implements FieldInterface {
         $this->options[$option] = $value;
     }
 
-    /**
-     * @param $xpath
-     * @return array
-     */
-    public function getByXPath($xpath){
+	/**
+	 * @param $xpath
+	 * @param string $suffix
+	 *
+	 * @return array
+	 * @throws \XmlImportException
+	 */
+    public function getByXPath($xpath, $suffix = '') {
         $values = array_fill(0, $this->getOption('count'), "");
         if ($xpath != ""){
             $file = false;
-            $values = \XmlImportParser::factory($this->parsingData['xml'], $this->getOption('base_xpath'), $xpath, $file)->parse();
+            $values = \XmlImportParser::factory($this->parsingData['xml'], $this->getOption('base_xpath') . $suffix, $xpath, $file)->parse();
             @unlink($file);
         }
         return $values;
@@ -433,17 +444,16 @@ abstract class Field implements FieldInterface {
         if (empty($fieldName)) {
             if (function_exists('_acf_get_field_by_id')) {
                 $field = _acf_get_field_by_id($this->data['field']['ID']);
-            }
-            else {
+            } else {
                 $label = sanitize_title( $this->data['field']['label'] );
-                $fieldName = str_replace('-', '_', $label);
+	            $fieldName = str_replace('-', '_', $label);
             }
 
             if (!empty($field)) {
                 $fieldName = $this->data['field']['name'] = $field['name'];
             }
         }
-        return $this->importData['container_name'] . $fieldName;
+        return !isset($this->importData['container_name']) ? $fieldName : $this->importData['container_name'] . $fieldName;
     }
 
     /**
@@ -488,7 +498,7 @@ abstract class Field implements FieldInterface {
                 }
             }
         }
-        return trim($value);
+        return is_array($value) ? array_map('trim', $value) : trim($value);
     }
 
     /**

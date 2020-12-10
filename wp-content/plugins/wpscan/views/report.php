@@ -57,7 +57,7 @@
                 <td class="vulnerabilities">
                   <?php 
                     if ( !isset($ignored['wordpress']) ) {
-                      $this->list_vulnerabilities( 'wordpress', get_bloginfo( 'version' ) );
+                      $this->list_api_vulnerabilities( 'wordpress', get_bloginfo( 'version' ) );
                     } else {
                       echo $ignored_msg;
                     }
@@ -102,7 +102,7 @@
                   <td class="vulnerabilities">
                     <?php 
                       if ( ! isset($ignored['plugins'][$slug]) ){
-                        $this->list_vulnerabilities( 'plugins', $slug );
+                        $this->list_api_vulnerabilities( 'plugins', $slug );
                       }
                       else {
                         echo $ignored_msg;
@@ -147,7 +147,7 @@
                   <td class="vulnerabilities">
                     <?php 
                       if ( ! isset($ignored['themes'][$slug]) )
-                        $this->list_vulnerabilities( 'themes', $slug );
+                        $this->list_api_vulnerabilities( 'themes', $slug );
                       else {
                         echo $ignored_msg;
                       }
@@ -184,7 +184,7 @@
                                 </strong>
                             </td>
                             <td class="vulnerabilities">
-                              <?php $this->parent->classes['checks/system']->list_vulnerabilities($data['instance']) ?>
+                              <?php $this->parent->classes['checks/system']->list_check_vulnerabilities( $data['instance'] ) ?>
                             </td>
                             <td class="security-check-actions">
                                 <?php $this->parent->classes['checks/system']->list_actions($data['instance']) ?>                              
