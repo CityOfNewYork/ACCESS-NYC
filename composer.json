@@ -22,6 +22,7 @@
     }
   ],
   "require": {
+    "composer-runtime-api": "^2.0",
     "humanmade/s3-uploads": "^2.2.1",
     "nyco/wp-assets": "^1.3",
     "nyco/wp-config": "^1.0.2",

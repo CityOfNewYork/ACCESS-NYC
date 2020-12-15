@@ -1,9 +1,16 @@
 <?php
 
+use \Composer\InstalledVersions as InstalledVersions;
+
 /**
- * Reads/Writes composer.json and stores basename arrays for comparison
+ * Gets composer.json data and creates base name lists for comparison
  */
 class Package {
+  /**
+   * [__construct description]
+   *
+   * @return  [type]  [return description]
+   */
   public function __construct() {
     $this->get()->packages = array(
       'require' => $this->getBaseNames('require'),
@@ -14,6 +21,17 @@ class Package {
       $this->packages['require'],
       $this->packages['require-dev']
     );
+
+    $this->packages['vendors'] = array();
+    $this->packages['versions'] = array();
+
+    foreach (array_merge(
+      $this->data['require'],
+      $this->data['require-dev']
+    ) as $key => $value) {
+      $this->packages['vendors'][basename($key)] = dirname($key);
+      $this->packages['versions'][basename($key)] = $value;
+    }
 
     return $this;
   }
@@ -58,10 +76,10 @@ class Package {
 
     $required = false;
 
-    $required = (in_array($dirname, $this->baseNames['require']))
+    $required = (in_array($dirname, $this->packages['require']))
       ? 'require' : $required;
 
-    $required = (in_array($dirname, $this->baseNames['require-dev']))
+    $required = (in_array($dirname, $this->packages['require-dev']))
       ? 'require-dev' : $required;
 
     return $required;
@@ -86,31 +104,65 @@ class Package {
 }
 
 /**
- * Gets WordPress Plugin data and creates basenames for comparision
+ * Gets WordPress Plugin meta data and creates base names lists for comparison
  */
 class Plugins {
+  /**
+   * [__construct description]
+   *
+   * @return  [type]  [return description]
+   */
   public function __construct() {
-    $this->get();
-
-    $this->plugins = array(
-      'plugins' => array_map(function($plugin) {
-          return dirname($plugin);
-        }, array_keys(get_plugins())),
-      'mu-plugins' => array_map(function($plugin) {
-          return basename($plugin, '.php');
-        }, array_keys(get_mu_plugins()))
+    $this->get()->plugins = array(
+      'plugins' => $this->getBaseNames('plugins'),
+      'mu-plugins' => $this->getBaseNames('mu-plugins')
     );
 
     $this->plugins['all'] = array_merge(
       $this->plugins['plugins'],
       $this->plugins['mu-plugins']
     );
+
+    $this->plugins['versions'] = array();
+
+    foreach ($this->data as $key => $value) {
+      if ($value['Version'] !== '') {
+        $name = (strpos($key, '/')) ? dirname($key) : basename($key, '.php');
+
+        $this->plugins['versions'][$name] = $value['Version'];
+      }
+    }
   }
 
+  /**
+   * [get description]
+   *
+   * @return  [type]  [return description]
+   */
   public function get() {
     $this->data = array_merge(get_plugins(), get_mu_plugins());
 
     return $this;
+  }
+
+  /**
+   * [getBaseNames description]
+   *
+   * @param   [type]   $type  [$type description]
+   * @param   plugins         [ description]
+   *
+   * @return  [type]          [return description]
+   */
+  public function getBaseNames($type = 'plugins') {
+    if ($type === 'mu-plugins') {
+      return array_map(function($plugin) {
+        return basename($plugin, '.php');
+      }, array_keys(get_mu_plugins()));
+    } else {
+      return array_map(function($plugin) {
+        return dirname($plugin);
+      }, array_keys(get_plugins()));
+    }
   }
 }
 
@@ -119,28 +171,50 @@ class Plugins {
  */
 class WpComposerSync {
   public function __construct() {
-    $this->package = new Package();
-    $this->plugins = new Plugins();
+    $package = new Package();
+    $plugins = new Plugins();
+
+    $this->root = $package->data;
+    $this->packages = $package->packages;
+    $this->plugins = $plugins->plugins;
 
     // Which packages are plugins
-    $this->packages['plugins'] = array_map(function($plugin) {
+    $this->plugins = array_map(function($plugin) {
       return array(
         'name' => $plugin,
         'must-use' => in_array($plugin, $this->plugins['mu-plugins']),
         'require-dev' => in_array($plugin, $this->packages['require-dev']),
-        // composer vendor prefix (vendor + plugin name)
-        // current version
-        // composer required version
-        // available updates
+        'vendor' => $this->packages['vendors'][$plugin],
+        'version' => (isset($this->plugins['versions'][$plugin]))
+          ? $this->plugins['versions'][$plugin] : '',
+        'required' => $this->packages['versions'][$plugin]
       );
     }, array_intersect(
       $this->packages['all'],
       $this->plugins['all']
     ));
 
+    /**
+     * WP Hooks
+     */
+
     add_action('upgrader_process_complete', [$this, 'upgraderProcessComplete'], 10, 2);
     add_filter('manage_plugins_columns', [$this, 'managePluginsColumns']);
     add_filter('manage_plugins_custom_column', [$this, 'managePluginsCustomColumn'], 10, 3);
+
+    add_filter('admin_init', [$this, 'debug'], 999);
+  }
+
+  public function debug() {
+    // $installed = new InstalledVersions();
+    // $package = new PackageInterface();
+    // debug($installed->getRawData());
+    // debug($this->package->installed);
+    // debug($package->getRequired());
+    // debug(Composer);
+    // debug($this->package->packages['vendors']);
+    // debug($this->packages);
+    debug($this);
   }
 
   /**
@@ -242,7 +316,7 @@ class WpComposerSync {
 
     if ($column_name === 'composer') {
       // Composer Version
-      debug($this->package);
+      // debug($this->package);
     }
   }
 }
