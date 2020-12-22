@@ -156,42 +156,114 @@ Additional configuration and functions can be found in the ACCESS Theme.
 
 #### Composer Plugins
 
-The [**composer.json**](https://github.com/cityofnewyork/access-nyc/blob/main/composer.json) file illustrates which plugins can be managed by Composer. WordPress Plugins can be installed either from [WordPress Packagist](https://wpackagist.org/) or from Packagist via the [Composer Libray Installer](https://github.com/composer/installers). Other php packages that are not plugins and stored in the `/vendor` directory are tracked by git so they can be deployed with the code. See the [**.gitignore**](https://github.com/cityofnewyork/access-nyc/blob/main/.gitignore) file under the "Composer" section to see which ones.
-
-Before installing dependencies the development autoloader should be generated. This will include development dependencies in the autoloader:
-
-    composer run development
-
-Then, to update a single plugin run:
-
-    composer update {{ vendor }}/{{ package }}:{{ version }}
-
-For example:
-
-    composer update wpackagist-plugin/acf-to-rest-api:3.1.0
-
-... will update the *ACF to Rest API* plugin to version 3.1.0. **Once you are done developing generate the production autoloader which will remove development dependencies in the autoloader:**
-
-    composer run predeploy
+The [**composer.json**](composer.json) file illustrates which plugins can be managed by Composer. WordPress Plugins can be installed either from [WordPress Packagist](https://wpackagist.org/) or from [Packagist](https://packagist.org/) via the [Composer Libray Installer](https://github.com/composer/installers). Other php packages that are not plugins and stored in the **/vendor** directory are tracked by git so they can be deployed with the code. See the [**.gitignore**](.gitignore) file under the "Composer" block.
 
 ## Using Composer
 
-In addition to WordPress Plugins, Composer is used to manage third-party dependencies that some plugins rely on as well as provide developer tools for working with PHP applications. The Composer package comes with scripts that can be run via the command:
+* [Installer Paths](#installer-paths)
+* [/vendor and git](#vendor-and-git)
+* [Autoloader](#autoloader)
+* [Requiring Packages](#requiring-packages)
+* [Updating packages](#updating-packages)
+* [Composer scripts](#composer-scripts)
 
-    composer run {{ script }}
+### Installer Paths
+
+Composer will install packages in one of three directory locations in the site depending on the type of package it is.
+
+* **/vendor**; by default, Composer will install packages here. These may include helper libraries or SDKs used for php programming.
+
+Packages have the [Composer Library Installer](https://github.com/composer/installers) included as a dependency are able to reroute their installation to directories alternative to the **./vendor** directory. This is to support different php based application frameworks. For WordPress, there are four possible directories ([see the Composer Library Installer documentation for details](https://github.com/composer/installers#current-supported-package-types)), however, for the purposes of this site most packages are installed the two following directories:
+
+* **/wp-content/plugins**; packages that are WordPress plugins are installed in the WordPress plugin directory.
+* **/wp-content/mu-plugins**; packages that are Must Use WordPress plugins are installed in the Must Use plugin directory.
+
+### /vendor and git
+
+Normally, **/vendor** packages wouldn't be checked in to version control. They are installed on the server level in each environment. However, this site is deployed to WP Engine which does not support Composer so the packages need to be checked in and deployed to the site using git. By default **/vendor** packages are not tracked by the repository. If a composer package is required by production it needs to be included in the repository so it can be deployed to WP Engine. The [**.gitignore**](.gitignore) manually includes tracked repositories using the `!` prefix. This does not apply to WordPress plugins.
+
+```
+# Composer #
+############
+/vendor/*             # Exclude all /vendor packages
+!/vendor/autoload.php # Include the autoloader
+!/vendor/altorouter   # etc.
+...
+```
+
+### Autoloader
+
+The [autoloader](https://getcomposer.org/doc/01-basic-usage.md#autoloading) is what includes PHP package files in the application. It works by requiring package php files when the classnames they include are invoked. The autoloader needs to be required in every application before Composer packages can be run. The site loads requires the autoloader in [/wp-content/mu-plugins/config/default.php](wp-content/mu-plugins/config/default.php). This only applies to packages in the **/vendor** directory. WordPress Plugins and Must Use Plugins are not autoloaded.
+
+```php
+<?php
+
+require_once ABSPATH . '/vendor/autoload.php';
+```
+
+#### Development build
+
+Different types of autoloaders can be [generated](https://getcomposer.org/doc/03-cli.md#dump-autoload-dumpautoload-). The [**composer.json**](composer.json) includes scripts that will generate a "development" autoloader that requires packages defined in the `require` and `require-dev` json blocks (including [whoops](https://filp.github.io/whoops/)).
+
+```shell
+$ composer run development
+```
+
+#### Production build
+
+The "production" autoloader will only require packages in the `require` json block. **Once you are done developing and before deployment generate the production autoloader which will remove development dependencies in the autoloader**.
+
+```shell
+$ composer run production
+```
+
+### Requiring Packages
+
+The command to install new packages is `composer require`. See the [Composer docs for more details on the CLI](https://getcomposer.org/doc/03-cli.md#require). Packages can be installed from [Packagist](https://packagist.org/) or [WordPress Packagist](https://wpackagist.org/). To require a package run:
+
+```shell
+$ composer require {{ vendor }}/{{ package }}:{{ version constraint }}
+```
+
+For example:
+
+```shell
+$ composer require timber/timber:^1.18
+```
+
+... will require the **Timber** package and install the latest minor version, greater than `1.18` and less than `2.0.0`. The caret designates the version range. Version constraints can be read about in more detail in the [Composer documentation](https://getcomposer.org/doc/articles/versions.md).
+
+### Updating Packages
+
+The command to update packages is [`composer update`](https://getcomposer.org/doc/03-cli.md#update-u). Running it will install packages based on their version constraint in the [**composer.json**](composer.json) file. Individual packages can be updated by specifying the package name.
+
+```shell
+$ composer update {{ vendor }}/{{ package }}
+```
+
+For example:
+
+```shell
+$ composer update timber/timber
+```
+
+### Composer scripts
+
+The Composer package includes scripts that can be run via the command:
+
+```shell
+$ composer run {{ script }}
+```
 
 Script        | Description
 --------------|-
 `development` | Rebuilds the autoloader including development dependencies.
 `production`  | Rebuilds the autoloader omitting development dependencies.
-`predeploy`   | Rebuilds the autoloader using the `production` script then runs the `lint` and `wpscan` scripts (described below).
-`lint`        | Runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) which will display violations of the standard defined in the [phpcs.xml](https://github.com/cityofnewyork/access-nyc/blob/main/phpcs.xml) file.
-`fix`         | Runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) in fix mode which will attempt to fix violations automatically. It is not necessarily recommended to run this on large scripts because if it fails it will leave a script partially formatted and malformed.
-`wpscan`      | Checks installed plugins against the [WordPress Vunerability Database](https://wpvulndb.com/).
-`version`     | Regenerates the **composer.lock** file and autoloader (used if the Composer.json package version is updated).
+`predeploy`   | Rebuilds the autoloader using the `production` script then runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) using the `lint` script (described below).
+`lint`        | Runs PHP Code Sniffer which will display violations of the standard defined in the [phpcs.xml](phpcs.xml) file.
+`fix`         | Runs PHP Code Sniffer in fix mode which will attempt to fix violations automatically. It is not necessarily recommended to run this on large scripts because if it fails it will leave a script partially formatted and malformed.
+`version`     | Regenerates the **composer.lock** file and rebuilds the autoloader for production.
 `deps`        | This is a shorthand for `composer show --tree` for illustrating package dependencies.
-
-By default **/vendor** packages are not tracked by the repository. If a composer package is required by production it needs to be included in the repository so it can be deployed to WP Engine. The [**.gitignore**](https://github.com/cityofnewyork/access-nyc/blob/main/.gitignore) manually includes tracked repositories using the `!` prefix. This does not apply to WordPress plugins.
 
 ## Using NPM
 
@@ -233,7 +305,7 @@ Before contributing, configure git hooks to use the repository's hooks.
 
 Hook       | Description
 -----------|-
-`pre-push` | Runs the Composer `predeploy` script. See [Using Composer](#using-composer)
+`pre-push` | Runs the Composer `predeploy` script. See [composer scripts](#composer-scripts).
 
 ## Debug Browsing
 
