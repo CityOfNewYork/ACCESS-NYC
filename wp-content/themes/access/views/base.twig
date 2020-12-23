@@ -55,9 +55,21 @@
 
       {% block content %}{% endblock %}
 
-      {% if variant == 'nb' %}
-        {% include 'variants/newsletter-b.twig' %}
-      {% endif %}
+      <section class="color-dark-background layout-home-body">
+        <div>
+          <div class="mx-3">
+            <div class="h3">
+              {{ __('Stay updated on benefits', 'accessnyctheme') }}
+            </div>
+
+            {% include 'views/objects/newsletter.twig' with {'this': {
+              id: 'mc-embedded-subscribe-form',
+              mailchimp_account: fn('constant', 'MAILCHIMP_ACCOUNT'),
+              mailchimp_audience_id: fn('constant', 'MAILCHIMP_AUDIENCE_ID'),
+            }} only %}
+          </div>
+        </div>
+      </section>
 
       {% block footer %}
         <footer class="o-footer color-mid-background">
