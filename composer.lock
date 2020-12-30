@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ee75f9c6371823364fd2fd2418b81e4",
+    "content-hash": "3ebb8d4c7ac8fcbfd690d28fc0a411c7",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -326,6 +326,20 @@
                 "yawik",
                 "zend",
                 "zikula"
+            ],
+            "support": {
+                "issues": "https://github.com/composer/installers/issues",
+                "source": "https://github.com/composer/installers/tree/v1.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-04-07T06:57:05+00:00"
         },
@@ -2349,15 +2363,15 @@
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.17.3",
+            "version": "2.18.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.17.3"
+                "reference": "tags/2.18.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.17.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.18.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2763,5 +2777,6 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
