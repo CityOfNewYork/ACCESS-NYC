@@ -47,7 +47,7 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 
 ### Requirements
 
-* **Virtualization** ([Docker](https://docs.docker.com/compose/wordpress/), [Vagrant](https://www.vagrantup.com/) + Virtualbox, [Local](https://localwp.com/), or other). This WordPress repository can be run in many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally.
+* **Virtualization** ([Docker](https://docs.docker.com/compose/wordpress/), [Vagrant](https://www.vagrantup.com/) + Virtualbox, [Local](https://localwp.com/), or other). This WordPress repository can be run in many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WordPress Boilerplate](https://github.com/cityofnewyork/nyco-wp-boilerplate) for running and managing the application locally.
 
 * **Composer**. PHP and WordPress plugin dependencies for WordPress core and the ACCESS Theme are managed via Composer. [Learn more about Composer on its website](https://getcomposer.org/).
 
@@ -55,13 +55,15 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 
 ### Installation
 
-This covers standing up the WordPress site after a virtualization method has been chosen with including a server running PHP and a MySQL database. Instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) will cover this process.
+This covers standing up the WordPress site after a virtualization method has been chosen with including a server running PHP and a MySQL database. Instructions in the [NYCO WordPress Boilerplate](https://github.com/cityofnewyork/nyco-wp-boilerplate) will cover this process.
 
-**$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/main/wp/wp-config.php) but you should still update the salts.
+**$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-boilerplate/blob/main/wp/wp-config.php) but you should still update the salts.
 
 **$2** To get untracked composer packages when you install the site you will need to run the following in the root of the WordPress site where the [**composer.json**](https://github.com/cityofnewyork/access-nyc/blob/main/composer.json) file lives:
 
-    composer install
+```shell
+$ composer install
+```
 
 **$3** This will install plugins included in the Composer package, including **NYCO WordPress Config** (see details in [Configuration](#configuration) below). This plugin includes a sample config that needs to be renamed from **mu-plugins/config/config-sample.yml** to **mu-plugins/config/config.yml**.
 
@@ -107,7 +109,11 @@ Dependencies include [path helpers](#path-helpers), theme functions, WordPress G
 
 Path helpers are shorthand functions return path strings for including various dependencies within the theme. They are used throughout theme files and generally accept a single string parameter referencing the filename (without extension) of the dependency.
 
-    require_once ACCESS\controller('programs');
+```php
+<?php
+
+require_once ACCESS\controller('programs');
+```
 
 * `ACCESS\lib` -  Return the path to a file in the **/lib** directory.
 * `ACCESS\functions` -  Return the path to the **/lib/functions.php** file. No arguments required.
@@ -123,22 +129,34 @@ Site and Post Type controllers [extend Timber functionality](https://timber.gith
 
 Controllers are required using the controller path helper (described above):
 
-    require_once ACCESS\controller('programs');
-    require_once ACCESS\controller('alert');
+```php
+<?php
+
+require_once ACCESS\controller('programs');
+require_once ACCESS\controller('alert');
+```
 
 And instantiated (below in a single view):
 
-    $program = new Controller\Programs();
+```php
+<?php
 
-    $context = Timber::get_context();
+$program = new Controller\Programs();
 
-    $context['post'] = $program;
+$context = Timber::get_context();
+
+$context['post'] = $program;
+```
 
 Instantiated Controllers accept either a post object or post ID argument if used outside of their single view context. The following example intantiates a list of alert posts:
 
-    $context['alerts'] = array_map(function($post) {
-      return new Controller\Alert($post);
-    }, get_field('alert'));
+```php
+<?php
+
+$context['alerts'] = array_map(function($post) {
+  return new Controller\Alert($post);
+}, get_field('alert'));
+```
 
 ### Plugins
 
@@ -171,12 +189,12 @@ The [**composer.json**](composer.json) file illustrates which plugins can be man
 
 Composer will install packages in one of three directory locations in the site depending on the type of package it is.
 
-* **/vendor**; by default, Composer will install packages here. These may include helper libraries or SDKs used for php programming.
+* **/vendor** - By default, Composer will install packages here. These may include helper libraries or SDKs used for php programming.
 
 Packages have the [Composer Library Installer](https://github.com/composer/installers) included as a dependency are able to reroute their installation to directories alternative to the **./vendor** directory. This is to support different php based application frameworks. For WordPress, there are four possible directories ([see the Composer Library Installer documentation for details](https://github.com/composer/installers#current-supported-package-types)), however, for the purposes of this site most packages are installed the two following directories:
 
-* **/wp-content/plugins**; packages that are WordPress plugins are installed in the WordPress plugin directory.
-* **/wp-content/mu-plugins**; packages that are Must Use WordPress plugins are installed in the Must Use plugin directory.
+* **/wp-content/plugins** - Packages that are WordPress plugins are installed in the WordPress plugin directory.
+* **/wp-content/mu-plugins** - Packages that are Must Use WordPress plugins are installed in the Must Use plugin directory.
 
 ### /vendor and git
 
@@ -269,11 +287,15 @@ Script        | Description
 
 NPM is used to manage the assets in the ACCESS Theme. To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/cityofnewyork/access-nyc/tree/main/wp-content/themes/access) theme in your terminal. If using NVM, the **.nvmrc** will set the supported Node version for you by run the following command:
 
-    nvm use
+```shell
+$ nvm use
+```
 
 If not using NVM, refer to the file for the supported version and run:
 
-    npm install
+```shell
+$ npm install
+```
 
 This will install all node dependencies in the same directory.
 
@@ -281,11 +303,15 @@ The [**package.json**](https://github.com/cityofnewyork/access-nyc/blob/main/wp-
 
 Then run:
 
-    npm run start
+```shell
+$ npm run start
+```
 
 To start the development server for asset management. The NPM package comes scripts which can be run via the command:
 
-    npm run {{ script }}
+```
+$ npm run {{ script }}
+```
 
 Script        | Description
 --------------|-
@@ -301,7 +327,9 @@ Script        | Description
 
 Before contributing, configure git hooks to use the repository's hooks.
 
-    git config core.hooksPath .githooks
+```shell
+$ git config core.hooksPath .githooks
+```
 
 Hook       | Description
 -----------|-
@@ -317,7 +345,9 @@ The query parameter `?debug=1` to the site URL in any environment to help in deb
 
 PHP is linted using [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) with the [PSR-2 standard](https://www.php-fig.org/psr/psr-2/). The configuration can be found in the [phpcs.xml](https://github.com/cityofnewyork/access-nyc/blob/main/phpcs.xml). Linting must be done manually using the command:
 
-    composer run lint
+```shell
+$ composer run lint
+```
 
 PHP Code Sniffer can attempt to fix violations using `composer run fix` but it is not recommended for multiple files or large scripts as it can fail and leave malformed php files.
 
@@ -333,7 +363,7 @@ The theme relies on the [ACCESS NYC Patterns](https://accesspatterns.cityofnewyo
 
 ## Security
 
-The team @ NYC Opportunity actively maintains and releases updates to ensure the security of this site using a combination of practices for WordPress specifically. The [NYCO WordPress Docker Boilerplate README file](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) documents some of the tools and best practices.
+The team @NYCOpportunity actively maintains and releases updates to ensure the security of this site using a combination of practices for WordPress specifically. The [NYCO WordPress Boilerplate README file](https://github.com/cityofnewyork/nyco-wp-boilerplate) documents some of the tools and best practices.
 
 ### Reporting a Vulnerability
 
