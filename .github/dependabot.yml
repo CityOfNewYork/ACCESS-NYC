@@ -11,9 +11,13 @@ updates:
     target-branch: env/accessnyctest
     schedule:
       interval: monthly
+    allow:
+      - dependency-type: production
 
   - package-ecosystem: npm
     directory: /wp-content/themes/access/
     target-branch: env/accessnyctest
     schedule:
       interval: monthly
+    allow:
+      - dependency-type: production
