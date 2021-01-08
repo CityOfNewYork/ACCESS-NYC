@@ -19,7 +19,7 @@ $trusted_ip_origins = $this->get_option( 'trusted_ip_origins' );
 $trusted_ip_origins = ( is_array( $trusted_ip_origins ) && !empty( $trusted_ip_origins ) ) ? implode( ", ", $trusted_ip_origins ) : 'REMOTE_ADDR';
 
 $active_app = $this->get_option( 'active_app' );
-$app_setup_link = $this->get_option( 'app_setup_link' );
+$app_setup_code = $this->get_option( 'app_setup_code' );
 $active_app_config = $this->get_custom_app_config();
 
 ?>
@@ -160,15 +160,19 @@ $active_app_config = $this->get_custom_app_config();
 
                 <tr class="llar-app-field <?php echo ( $active_app === 'local' || !$active_app_config ) ? 'active' : ''; ?>">
                     <th scope="row"
-                        valign="top"><?php echo __( 'Setup Link', 'limit-login-attempts-reloaded' ); ?></th>
+                        valign="top"><?php echo __( 'Setup Code', 'limit-login-attempts-reloaded' ); ?></th>
                     <td>
-                        <input type="text" class="regular-text" id="limit-login-app-setup-link" value="<?php echo ( !empty( $app_setup_link ) ) ? esc_attr( $app_setup_link ) : ''; ?>">
+                        <input type="text" class="regular-text" id="limit-login-app-setup-link" value="<?php echo ( !empty( $app_setup_code ) ) ? esc_attr( $app_setup_code ) : ''; ?>">
                         <button class="button" id="limit-login-app-setup"><?php echo __( 'Submit', 'limit-login-attempts-reloaded' ); ?></button>
                         <span class="spinner llar-app-ajax-spinner"></span><br>
                         <span class="llar-app-ajax-msg"></span>
 
 						<?php if( $active_app === 'local' ) : ?>
-                        <p class="description"><?php echo sprintf( __( 'Use the <a href="%s" target="_blank">premium app</a> that we offer or follow the instructions on <a href="%s" target="_blank">how to</a> create your own one.', 'limit-login-attempts-reloaded' ), 'https://app.limitloginattempts.com/network/create?from=plugin-settings', 'https://www.limitloginattempts.com/app/?from=plugin-settings' ); ?></p>
+                        <p class="description"><?php echo sprintf(
+                                __( 'Use the <a href="%s" target="_blank">premium app</a> that we offer or follow the instructions on <a href="%s" target="_blank">how to</a> create your own one.', 'limit-login-attempts-reloaded' ),
+                                'https://www.limitloginattempts.com/info.php?from=plugin-settings',
+                                'https://www.limitloginattempts.com/app/?from=plugin-settings' );
+                        ?></p>
                         <div class="llar-why-use-premium-text">
                             <div class="title"><?php _e( 'Why Use Our Premium Cloud App?', 'limit-login-attempts-reloaded' ); ?></div>
                             <ul>

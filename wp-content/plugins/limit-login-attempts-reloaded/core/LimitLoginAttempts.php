@@ -190,13 +190,23 @@ class Limit_Login_Attempts {
 		add_action('wp_ajax_limit-login-unlock', array( $this, 'ajax_unlock' ) );
 
 		add_filter( 'plugin_action_links_' . LLA_PLUGIN_BASENAME, array( $this, 'add_action_links' ) );
+
+		/**
+		 * Transform setup link to setup code.
+		 */
+		if( ( $setup_link = $this->get_option( 'app_setup_link' ) ) && empty( $this->get_option( 'app_setup_code' ) ) ) {
+
+			$setup_link = str_replace( array( 'http://', 'https://' ), '', $setup_link );
+			$this->update_option( 'app_setup_code', strrev( $setup_link ) );
+			$this->delete_option( 'app_setup_link' );
+        }
 	}
 
 	public function add_action_links( $actions ) {
 
 		$actions = array_merge( array(
 			'<a href="' . $this->get_options_page_uri( 'settings' ) . '">' . __( 'Settings', 'limit-login-attempts-reloaded' ) . '</a>',
-			'<a href="https://www.limitloginattempts.com/community/?from=plugin-plugins" target="_blank" style="font-weight: bold;">' . __( 'Premium Support', 'limit-login-attempts-reloaded' ) . '</a>',
+			'<a href="https://www.limitloginattempts.com/info.php?from=plugin-plugins" target="_blank" style="font-weight: bold;">' . __( 'Premium Support', 'limit-login-attempts-reloaded' ) . '</a>',
 		), $actions );
 
 		return $actions;
@@ -214,7 +224,10 @@ class Limit_Login_Attempts {
 
 		wp_enqueue_script('jquery-ui-accordion');
 		wp_enqueue_style('llar-jquery-ui', LLA_PLUGIN_URL.'assets/css/jquery-ui.css');
-    }
+
+		wp_enqueue_style( 'llar-charts', LLA_PLUGIN_URL.'assets/css/Chart.min.css' );
+		wp_enqueue_script( 'llar-charts', LLA_PLUGIN_URL . 'assets/js/Chart.bundle.min.js' );
+	}
 
 	public function check_whitelist_ips( $allow, $ip ) {
 		return $this->ip_in_range( $ip, (array) $this->get_option( 'whitelist' ) );
@@ -446,7 +459,7 @@ class Limit_Login_Attempts {
 
 		foreach ( $_SERVER as $key => $value ) {
 
-			if( in_array( $key, ['SERVER_ADDR'] ) ) continue;
+			if( in_array( $key, array( 'SERVER_ADDR' ) ) ) continue;
 
 			if( filter_var( $value, FILTER_VALIDATE_IP ) ) {
 
@@ -881,10 +894,8 @@ class Limit_Login_Attempts {
         $message = __( '<p>Hello%1$s,</p>' .
                        '<p>%2$d failed login attempts (%3$d lockout(s)) from IP <b>%4$s</b> and it was blocked for %5$s<br>' .
                        'Last user attempted: <b>%6$s</b></p>' .
-                       '<p>Under Attack? Learn more about <a href="%7$s">brute force attacks</a>. ' .
-                       'Have Questions? Visit our <a href="%8$s" target="_blank">help section</a>.<br>' .
-                       '<a href="%9$s">Unsubscribe</a> from these notifications.</p>' .
-                       "<hr><p>This notification was sent automatically via <b>Limit Login Attempts Reloaded Plugin</b>.</p>", 'limit-login-attempts-reloaded' );
+                       '<p>Under Attack? <a href="%7$s" target="_blank">Learn more</a> about brute force attacks and how to enhance your protection.<br>' .
+                       '<a href="%8$s" target="_blank">Unsubscribe</a> from these notifications.</p>', 'limit-login-attempts-reloaded' );
 
         $message = sprintf(
             $message,
@@ -894,8 +905,7 @@ class Limit_Login_Attempts {
             $ip,
             $when,
 			$user,
-			'https://www.limitloginattempts.com/am-i-under-attack/?from=plugin-lockout-email',
-			'https://www.limitloginattempts.com/resources/?from=plugin-lockout-email',
+			'https://www.limitloginattempts.com/info.php?from=plugin-lockout-email',
             admin_url( 'options-general.php?page=limit-login-attempts&tab=settings' )
         );
 
@@ -1526,7 +1536,7 @@ class Limit_Login_Attempts {
 
                 if( !empty( $_POST['llar_app_settings'] ) && $this->app ) {
 
-                    if( ( $app_setup_link = $this->get_option( 'app_setup_link' ) ) && $setup_result = LLAR_App::setup( $app_setup_link ) ) {
+                    if( ( $app_setup_code = $this->get_option( 'app_setup_code' ) ) && $setup_result = LLAR_App::setup( strrev( $app_setup_code ) ) ) {
 
                         if( $setup_result['success'] && $active_app_config = $setup_result['app_config'] ) {
 
@@ -1875,7 +1885,8 @@ class Limit_Login_Attempts {
 
 		if( !empty( $_POST['link'] ) ) {
 
-			$link = sanitize_text_field( $_POST['link'] );
+			$setup_code = sanitize_text_field( $_POST['link'] );
+			$link = strrev( $setup_code );
 
 			if( $setup_result = LLAR_App::setup( $link ) ) {
 
@@ -1886,7 +1897,7 @@ class Limit_Login_Attempts {
 						$this->app_update_config( $setup_result['app_config'], true );
 						$this->update_option( 'active_app', 'custom' );
 
-						$this->update_option( 'app_setup_link', $link );
+						$this->update_option( 'app_setup_code', $setup_code );
 
 						wp_send_json_success(array(
 							'msg' => ( !empty( $setup_result['app_config']['messages']['setup_success'] ) )
@@ -1905,7 +1916,7 @@ class Limit_Login_Attempts {
 		}
 
 		wp_send_json_error(array(
-			'msg' => __( 'Please specify the Setup Link', 'limit-login-attempts-reloaded' )
+			'msg' => __( 'Please specify the Setup Code', 'limit-login-attempts-reloaded' )
 		));
     }
 

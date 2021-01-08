@@ -42,7 +42,7 @@
     "wpackagist-plugin/enable-media-replace": "^3.4.1",
     "wpackagist-plugin/gathercontent-import": "^3.1",
     "wpackagist-plugin/google-authenticator": "0.53",
-    "wpackagist-plugin/limit-login-attempts-reloaded": "2.17.3",
+    "wpackagist-plugin/limit-login-attempts-reloaded": "^2.0",
     "wpackagist-plugin/loggedin": "^1.2",
     "wpackagist-plugin/rollbar": "^2.6.1",
     "wpackagist-plugin/search-everything": "^8.1.9",

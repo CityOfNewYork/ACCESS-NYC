@@ -106,6 +106,10 @@ if( is_array( $log ) && ! empty( $log ) ) { ?>
         <p class="submit">
             <input class="button" name="submit" value="<?php echo __( 'Clear Log', 'limit-login-attempts-reloaded' ); ?>"
                    type="submit"/>
+            <span style="margin-left: 15px;"><?php echo sprintf(
+                    __( 'Receive enhanced logs and visual metrics when you <a href="%s" target="_blank">upgrade to our cloud app</a>', 'limit-login-attempts-reloaded' ),
+                    'https://www.limitloginattempts.com/info.php?from=plugin-clear-log' );
+            ?></span>
         </p>
     </form>
 

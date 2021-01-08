@@ -9,7 +9,77 @@ if( !defined( 'ABSPATH' ) ) exit();
 
 <div class="limit-login-app-dashboard">
 
-    <h3><?php _e( 'Lockouts', 'limit-login-attempts-reloaded' ); ?></h3>
+    <h3><?php _e( 'Statistics', 'limit-login-attempts-reloaded' ); ?></h3>
+
+    <?php
+    if( $api_stats = $this->app->stats() ) {
+
+		$stats_dates = array();
+		$stats_values = array();
+        $date_format = trim( get_option( 'date_format' ), ' yY,._:;-/\\' );
+		$date_format = str_replace( 'F', 'M', $date_format );
+
+        foreach ( $api_stats['requests']['at'] as $timest ) {
+
+            $stats_dates[] = get_date_from_gmt( date( 'Y-m-d H:i:s', $timest ), $date_format );
+        } ?>
+
+    <div class="llar-chart-wrap">
+        <canvas id="llar-api-requests-chart" style="width: 400px; height: auto;"></canvas>
+    </div>
+    <script type="text/javascript">
+        (function(){
+
+            var ctx = document.getElementById('llar-api-requests-chart').getContext('2d');
+            var llar_stat_chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: <?php echo json_encode( $stats_dates ); ?>,
+                    datasets: [{
+                        label: '<?php echo esc_js( __( 'Requests', 'limit-login-attempts-reloaded' ) ); ?>',
+                        data: <?php echo json_encode( $api_stats['requests']['count'] ); ?>,
+                        backgroundColor: 'rgb(54, 162, 235)',
+                        borderColor: 'rgb(54, 162, 235)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: '<?php echo esc_js( __( 'Date', 'limit-login-attempts-reloaded' ) ); ?>'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: '<?php echo esc_js( __( 'API Requests', 'limit-login-attempts-reloaded' ) ); ?>'
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+        })();
+    </script>
+    <?php } ?>
+
+    <h3><?php _e( 'Active Lockouts', 'limit-login-attempts-reloaded' ); ?></h3>
 
     <div class="llar-app-lockouts-pagination">
         <a class="llar-prev-page button disabled" href="#">

@@ -254,11 +254,11 @@
 .llar-accordion {
   .ui-accordion-header {
     font-weight: bold;
-    background-color: #778899;
+    background: #778899;
     color: #fff;
 
     &.ui-accordion-header-active {
-      background-color: #87CEFA;
+      background: #87CEFA;
     }
   }
 }
@@ -333,7 +333,7 @@
 
 #llar-header-upgrade-message {
   text-align: center;
-  background-color: #fff;
+  background-color: #f5f0c0;
   color: #222;
   padding: 10px;
   margin-left: -20px;
@@ -354,4 +354,11 @@
   .update-nag {
     display: none;
   }
+}
+
+.llar-chart-wrap {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  clear: both;
 }
