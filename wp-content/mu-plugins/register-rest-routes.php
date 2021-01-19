@@ -35,6 +35,7 @@ add_action('rest_api_init', function() {
     'populations-served' => 'rest_terms_json' . $lang
   );
 
+
   /**
    * Register REST Routes
    */
@@ -135,19 +136,20 @@ add_action('rest_api_init', function() {
   register_rest_route($v, '/locations/', array(
     'methods' => 'GET',
     'callback' => function(WP_REST_Request $request) use ($transients, $exp) {
-      $transient = $transients['location'];
+      $transient = $transients['locations'];
       $data = get_transient($transient);
+      global $sitepress;
+      $default_lang = $sitepress->get_default_language();
 
-      if (false === $data) {
-        global $sitepress;
-        $default_lang = $sitepress->get_default_language();
-        $data = [];
+      if (empty($data)) {
+        $data = array( );
 
-        $posts = get_posts(array(
+        $query = new WP_Query(array(
           'post_type' => 'location',
-          'numberposts' => -1,
-          'suppress_filters' => 0
+          'numberposts' => -1
         ));
+
+        $posts = $query->posts;
 
         foreach ($posts as $post) {
           $programs = [];
@@ -155,6 +157,8 @@ add_action('rest_api_init', function() {
 
           if ($related_programs) {
             foreach ($related_programs as $program) {
+              $program->program_name = get_field('program_name', $program->ID);
+
               array_push(
                 $programs,
                 icl_object_id($program->ID, 'post', true, $default_lang)
@@ -162,7 +166,7 @@ add_action('rest_api_init', function() {
             }
           }
 
-          $data[] = array(
+          $post_data = array(
             'id' => $post->ID,
             'title' => $post->post_title,
             'programs' => $programs,
@@ -174,6 +178,8 @@ add_action('rest_api_init', function() {
             'type' => $post->type,
             'link' => get_permalink($post)
           );
+
+          array_push($data, $post_data);
         }
 
         $bool = set_transient($transient, $data, $exp);
