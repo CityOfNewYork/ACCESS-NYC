@@ -1,5 +1,9 @@
 # Query monitor Twig profile
 
+[![CI](https://github.com/NielsdeBlaauw/query-monitor-twig-profile/workflows/Test/badge.svg)](https://github.com/NielsdeBlaauw/query-monitor-twig-profile/actions)
+[![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/query-monitor-twig-profile)](https://wordpress.org/plugins/query-monitor-twig-profile/)
+[![Query Monitor](https://img.shields.io/badge/Query%20Monitor-add--on-31C653)](https://github.com/johnbillion/query-monitor)
+
 **Query Monitor Twig profile is available in the [WordPress plugin repository](https://wordpress.org/plugins/query-monitor-twig-profile/)**.
 
 Displays [Twig](https://twig.symfony.com/) profiler output in [Query Monitor](https://github.com/johnbillion/query-monitor).
@@ -18,6 +22,7 @@ Automatically integrates with Timber.
 - Support for dark mode.
 - Clickable links to profiled templates in your preferred editor.
 - Downloadable blackfire.io profiles.
+- History mode. Save profiles so you can see the impact of your changes.
 
 ## Installation
 

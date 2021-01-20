@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  Query monitor Twig profile
  * Description:  Displays Twig profiler output in Query Monitor. Automatically works with Timber.
- * Version:      1.2.0
+ * Version:      1.3.1
  * Plugin URI:   https://github.com/NielsdeBlaauw/query-monitor-twig-profile
  * Author:       Niels de Blaauw
  * Author URI:   https://actd.nl/
@@ -62,6 +62,7 @@ function collect_timber( Environment $twig ):Environment {
 }
 
 add_filter( 'timber/twig', __NAMESPACE__ . '\\collect_timber' );
+add_filter( 'clarkson_twig_environment', __NAMESPACE__ . '\\collect_timber' );
 
 /**
  * Adds twig profile collection to a Twig instance.
@@ -95,6 +96,25 @@ function enqueue_scripts() {
 	}
 	$plugin_data = get_plugin_data( __FILE__ );
 	wp_enqueue_script( 'qm-twig-profile', plugin_dir_url( __FILE__ ) . 'assets/save.js', array(), $plugin_data['Version'], false );
+	wp_enqueue_script( 'qm-twig-profile-component', plugin_dir_url( __FILE__ ) . 'assets/twig-profile/dist/twig-profile.js', array(), $plugin_data['Version'], false );
+	wp_localize_script(
+		'qm-twig-profile-component',
+		'qm_twig_profile_l10n',
+		array(
+			'strings' => array(
+				'save_current'    => __( 'Save current request', 'ndb_qm_twig' ),
+				'saved'           => __( 'The current request has been saved!', 'ndb_qm_twig' ),
+				'controls'        => __( 'Controls', 'ndb_qm_twig' ),
+				'viewing_profile' => __( 'Viewing profile:', 'ndb_qm_twig' ),
+				'profile_name'    => __( 'Profile name', 'ndb_qm_twig' ),
+				'select_profile'  => __( 'Select a (saved) profile:', 'ndb_qm_twig' ),
+				'current_request' => __( 'Current request', 'ndb_qm_twig' ),
+				'view'            => __( 'View', 'ndb_qm_twig' ),
+				'remove'          => __( 'Remove', 'ndb_qm_twig' ),
+				'clear_all'       => __( 'Clear all saved profiles', 'ndb_qm_twig' ),
+			),
+		)
+	);
 }
 
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts', 110 );

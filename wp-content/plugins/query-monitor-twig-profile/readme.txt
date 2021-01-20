@@ -2,9 +2,9 @@
 Contributors: nielsdeblaauw
 Tags: timber, twig, query monitor, performance, profile, speed, template, theme, developer, development, debug
 Requires at least: 4.9.0
-Tested up to: 5.5.1
+Tested up to: 5.6.0
 Requires PHP: 7.0
-Stable tag: 1.2.0
+Stable tag: 1.3.1
 License: MIT
 License URI: https://raw.githubusercontent.com/NielsdeBlaauw/query-monitor-twig-profile/master/LICENSE
 
@@ -17,11 +17,12 @@ The Twig profile extension for Query Monitor helps you notice which templates ar
 
 Kind of like the ['What the file' plugin](https://wordpress.org/plugins/what-the-file/), but for Twig and with timing information.
 
-Automatically integrates with Timber.
-
 - Support for dark mode.
 - Clickable links to profiled templates in your preferred editor.
 - Downloadable blackfire.io profiles.
+- History mode. Save profiles so you can see the impact of your changes.
+- Color scheme for dark and light modes meet WCAG AA accessibility standards, and all controls are keyboard accessible. 
+- Automatically integrates with Timber.
 
 == Installation ==
 1. Install the plugin.
@@ -44,13 +45,20 @@ if ( function_exists( 'NdB\QM_Twig_Profile\collect' ) ) {
 `
 
 = Privacy Statement =
-Query Monitor Twig Profile is private by default and always will be. It does not persistently store any of the data that it collects. It does not send data to any third party, nor does it include any third party resources.
+Query Monitor Twig Profile data is private by default and always will be. It does not persistently store any of the data that it collects. It does not send data to any third party, nor does it include any third party resources.
 
 == Screenshots ==
-1. The Twig profile tab in Query Monitor (light mode)
-2. The Twig profile tab in Query Monitor (dark mode)
+1. The Twig profile tab in Query Monitor (dark mode)
+2. The Twig profile tab in Query Monitor (light mode)
 
 == Changelog ==
+1.3.1
+* Maintenance: Do not upload the `node_modules` folder of webcomponent to the plugin repository.
+
+1.3.0
+* Adds history mode. Save your profiles and view them later to see the impact of your changes. Compare profiles over multiple pages, and more.
+* Automatically integrates with clarkson-core:^1.0
+
 1.2.0
 * Adds blackfire.io profile downloads.
 

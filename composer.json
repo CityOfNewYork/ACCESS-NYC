@@ -52,14 +52,14 @@
     "wpackagist-plugin/wpscan": "1.13.2"
   },
   "require-dev": {
-    "filp/whoops": "2.9.1",
-    "nielsdeblaauw/query-monitor-twig-profile": "^1.2",
-    "squizlabs/php_codesniffer": "^3.5.3",
+    "filp/whoops": "^2.0",
+    "nielsdeblaauw/query-monitor-twig-profile": "^1.0",
+    "squizlabs/php_codesniffer": "^3.0",
     "whoops/soap": "^1.0",
-    "wpackagist-plugin/query-monitor": "^3.6.0",
-    "wpackagist-plugin/redis-cache": "^1.6",
+    "wpackagist-plugin/query-monitor": "^3.0",
+    "wpackagist-plugin/redis-cache": "^1.0",
     "wpackagist-plugin/wp-auto-login": "^1.0",
-    "wpackagist-plugin/wp-crontrol": "^1.8.5"
+    "wpackagist-plugin/wp-crontrol": "^1.0"
   },
   "scripts": {
     "development": [

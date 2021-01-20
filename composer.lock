@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18d2efa19d4b91609cd041fa8bb7129f",
+    "content-hash": "1da4ee9fc2c1f7c607aa22ba98565520",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2556,16 +2556,16 @@
         },
         {
             "name": "nielsdeblaauw/query-monitor-twig-profile",
-            "version": "1.2.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NielsdeBlaauw/query-monitor-twig-profile.git",
-                "reference": "09dfab1f975765378502e5c421da3b32be72bb95"
+                "reference": "cc5b1588154935168d783b72c8d1010d43b69ea5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NielsdeBlaauw/query-monitor-twig-profile/zipball/09dfab1f975765378502e5c421da3b32be72bb95",
-                "reference": "09dfab1f975765378502e5c421da3b32be72bb95",
+                "url": "https://api.github.com/repos/NielsdeBlaauw/query-monitor-twig-profile/zipball/cc5b1588154935168d783b72c8d1010d43b69ea5",
+                "reference": "cc5b1588154935168d783b72c8d1010d43b69ea5",
                 "shasum": ""
             },
             "require": {
@@ -2574,7 +2574,7 @@
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "phpcompatibility/php-compatibility": "^9.3",
-                "szepeviktor/phpstan-wordpress": "^0.6.3",
+                "szepeviktor/phpstan-wordpress": "^0.7.1",
                 "twig/twig": "^3.0",
                 "wp-coding-standards/wpcs": "^2.3",
                 "wpackagist-plugin/query-monitor": "^3.6"
@@ -2598,7 +2598,7 @@
                 }
             ],
             "description": "Displays Twig profiler output in Query Monitor",
-            "time": "2020-10-11T08:34:11+00:00"
+            "time": "2020-12-23T14:50:27+00:00"
         },
         {
             "name": "psr/log",
@@ -2686,15 +2686,15 @@
         },
         {
             "name": "wpackagist-plugin/query-monitor",
-            "version": "3.6.5",
+            "version": "3.6.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/query-monitor/",
-                "reference": "tags/3.6.5"
+                "reference": "tags/3.6.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.6.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.6.6.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2740,15 +2740,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-crontrol",
-            "version": "1.8.5",
+            "version": "1.9.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-crontrol/",
-                "reference": "tags/1.8.5"
+                "reference": "tags/1.9.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.8.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.9.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
