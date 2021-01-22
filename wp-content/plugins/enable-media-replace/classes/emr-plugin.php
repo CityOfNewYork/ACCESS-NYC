@@ -91,7 +91,7 @@ class EnableMediaReplacePlugin
     load_plugin_textdomain( 'enable-media-replace', false, basename(dirname(EMR_ROOT_FILE) ) . '/languages' );
 
     // Load Submodules
-    Log::addDebug('Plugin Init');
+    
     $notices = Notices::getInstance();
 
     // Enqueue notices

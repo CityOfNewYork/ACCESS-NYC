@@ -47,21 +47,23 @@ The [ACCESS NYC Patterns](https://github.com/cityofnewyork/access-nyc-patterns) 
 
 ### Requirements
 
-* **Virtualization** ([Docker](https://docs.docker.com/compose/wordpress/), [Vagrant](https://www.vagrantup.com/) + Virtualbox, [Local](https://localwp.com/), or other). This WordPress repository can be run in many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) for running and managing the application locally.
+* **Virtualization** ([Docker](https://docs.docker.com/compose/wordpress/), [Vagrant](https://www.vagrantup.com/) + Virtualbox, [Local](https://localwp.com/), or other). This WordPress repository can be run in many ways. The product team at NYC Opportunity uses [Docker for Mac](https://www.docker.com/docker-mac) and the [NYCO WordPress Boilerplate](https://github.com/cityofnewyork/nyco-wp-boilerplate) for running and managing the application locally.
 
 * **Composer**. PHP and WordPress plugin dependencies for WordPress core and the ACCESS Theme are managed via Composer. [Learn more about Composer on its website](https://getcomposer.org/).
 
-* **Node and NPM**. The ACCESS Theme uses Node with NPM to manage packages such as Gulp to compile assets for the front-end. Learn more about [Node](https://nodejs.org), [NPM](https://www.npmjs.com/), and [Gulp](https://gulpjs.com/) at their respective websites.
+* **Node and NPM**. The ACCESS Theme uses Node with NPM to manage packages such as Gulp to compile assets for the front-end. Learn more about [Node](https://nodejs.org), [NPM](https://www.npmjs.com/), and [Gulp](https://gulpjs.com/) at their respective websites. [NVM](https://github.com/nvm-sh/nvm) is a recommended tool for managing versions of Node. The supported Node version can be set in the theme using the **.nvmrc** file.
 
 ### Installation
 
-This covers standing up the WordPress site after a virtualization method has been chosen with including a server running PHP and a MySQL database. Instructions in the [NYCO WordPress Docker Boilerplate](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) will cover this process.
+This covers standing up the WordPress site after a virtualization method has been chosen with including a server running PHP and a MySQL database. Instructions in the [NYCO WordPress Boilerplate](https://github.com/cityofnewyork/nyco-wp-boilerplate) will cover this process.
 
-**$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Docker Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-docker-boilerplate/blob/main/wp/wp-config.php) but you should still update the salts.
+**$1** Rename **wp-config-sample.php** to **wp-config.php**. Modify the *MySQL settings*, *Authentication Unique Keys*, *Salts*, and *WordPress debugging mode*. If using the NYCO WordPress Boilerplate, you can use the [**wp-config.php** included in the repository](https://github.com/CityOfNewYork/nyco-wp-boilerplate/blob/main/wp/wp-config.php) but you should still update the salts.
 
 **$2** To get untracked composer packages when you install the site you will need to run the following in the root of the WordPress site where the [**composer.json**](https://github.com/cityofnewyork/access-nyc/blob/main/composer.json) file lives:
 
-    composer install
+```shell
+$ composer install
+```
 
 **$3** This will install plugins included in the Composer package, including **NYCO WordPress Config** (see details in [Configuration](#configuration) below). This plugin includes a sample config that needs to be renamed from **mu-plugins/config/config-sample.yml** to **mu-plugins/config/config.yml**.
 
@@ -107,7 +109,11 @@ Dependencies include [path helpers](#path-helpers), theme functions, WordPress G
 
 Path helpers are shorthand functions return path strings for including various dependencies within the theme. They are used throughout theme files and generally accept a single string parameter referencing the filename (without extension) of the dependency.
 
-    require_once ACCESS\controller('programs');
+```php
+<?php
+
+require_once ACCESS\controller('programs');
+```
 
 * `ACCESS\lib` -  Return the path to a file in the **/lib** directory.
 * `ACCESS\functions` -  Return the path to the **/lib/functions.php** file. No arguments required.
@@ -123,22 +129,34 @@ Site and Post Type controllers [extend Timber functionality](https://timber.gith
 
 Controllers are required using the controller path helper (described above):
 
-    require_once ACCESS\controller('programs');
-    require_once ACCESS\controller('alert');
+```php
+<?php
+
+require_once ACCESS\controller('programs');
+require_once ACCESS\controller('alert');
+```
 
 And instantiated (below in a single view):
 
-    $program = new Controller\Programs();
+```php
+<?php
 
-    $context = Timber::get_context();
+$program = new Controller\Programs();
 
-    $context['post'] = $program;
+$context = Timber::get_context();
+
+$context['post'] = $program;
+```
 
 Instantiated Controllers accept either a post object or post ID argument if used outside of their single view context. The following example intantiates a list of alert posts:
 
-    $context['alerts'] = array_map(function($post) {
-      return new Controller\Alert($post);
-    }, get_field('alert'));
+```php
+<?php
+
+$context['alerts'] = array_map(function($post) {
+  return new Controller\Alert($post);
+}, get_field('alert'));
+```
 
 ### Plugins
 
@@ -156,48 +174,128 @@ Additional configuration and functions can be found in the ACCESS Theme.
 
 #### Composer Plugins
 
-The [**composer.json**](https://github.com/cityofnewyork/access-nyc/blob/main/composer.json) file illustrates which plugins can be managed by Composer. WordPress Plugins can be installed either from [WordPress Packagist](https://wpackagist.org/) or from Packagist via the [Composer Libray Installer](https://github.com/composer/installers). Other php packages that are not plugins and stored in the `/vendor` directory are tracked by git so they can be deployed with the code. See the [**.gitignore**](https://github.com/cityofnewyork/access-nyc/blob/main/.gitignore) file under the "Composer" section to see which ones.
-
-Before installing dependencies the development autoloader should be generated. This will include development dependencies in the autoloader:
-
-    composer run development
-
-Then, to update a single plugin run:
-
-    composer update {{ vendor }}/{{ package }}:{{ version }}
-
-For example:
-
-    composer update wpackagist-plugin/acf-to-rest-api:3.1.0
-
-... will update the *ACF to Rest API* plugin to version 3.1.0. **Once you are done developing generate the production autoloader which will remove development dependencies in the autoloader:**
-
-    composer run predeploy
+The [**composer.json**](composer.json) file illustrates which plugins can be managed by Composer. WordPress Plugins can be installed either from [WordPress Packagist](https://wpackagist.org/) or from [Packagist](https://packagist.org/) via the [Composer Libray Installer](https://github.com/composer/installers). Other php packages that are not plugins and stored in the **/vendor** directory are tracked by git so they can be deployed with the code. See the [**.gitignore**](.gitignore) file under the "Composer" block.
 
 ## Using Composer
 
-In addition to WordPress Plugins, Composer is used to manage third-party dependencies that some plugins rely on as well as provide developer tools for working with PHP applications. The Composer package comes with scripts that can be run via the command:
+* [Installer Paths](#installer-paths)
+* [/vendor and git](#vendor-and-git)
+* [Autoloader](#autoloader)
+* [Requiring Packages](#requiring-packages)
+* [Updating packages](#updating-packages)
+* [Composer scripts](#composer-scripts)
 
-    composer run {{ script }}
+### Installer Paths
+
+Composer will install packages in one of three directory locations in the site depending on the type of package it is.
+
+* **/vendor** - By default, Composer will install packages here. These may include helper libraries or SDKs used for php programming.
+
+Packages have the [Composer Library Installer](https://github.com/composer/installers) included as a dependency are able to reroute their installation to directories alternative to the **./vendor** directory. This is to support different php based application frameworks. For WordPress, there are four possible directories ([see the Composer Library Installer documentation for details](https://github.com/composer/installers#current-supported-package-types)), however, for the purposes of this site most packages are installed the two following directories:
+
+* **/wp-content/plugins** - Packages that are WordPress plugins are installed in the WordPress plugin directory.
+* **/wp-content/mu-plugins** - Packages that are Must Use WordPress plugins are installed in the Must Use plugin directory.
+
+### /vendor and git
+
+Normally, **/vendor** packages wouldn't be checked in to version control. They are installed on the server level in each environment. However, this site is deployed to WP Engine which does not support Composer so the packages need to be checked in and deployed to the site using git. By default **/vendor** packages are not tracked by the repository. If a composer package is required by production it needs to be included in the repository so it can be deployed to WP Engine. The [**.gitignore**](.gitignore) manually includes tracked repositories using the `!` prefix. This does not apply to WordPress plugins.
+
+```
+# Composer #
+############
+/vendor/*             # Exclude all /vendor packages
+!/vendor/autoload.php # Include the autoloader
+!/vendor/altorouter   # etc.
+...
+```
+
+### Autoloader
+
+The [autoloader](https://getcomposer.org/doc/01-basic-usage.md#autoloading) is what includes PHP package files in the application. It works by requiring package php files when the classnames they include are invoked. The autoloader needs to be required in every application before Composer packages can be run. The site loads requires the autoloader in [/wp-content/mu-plugins/config/default.php](wp-content/mu-plugins/config/default.php). This only applies to packages in the **/vendor** directory. WordPress Plugins and Must Use Plugins are not autoloaded.
+
+```php
+<?php
+
+require_once ABSPATH . '/vendor/autoload.php';
+```
+
+#### Development build
+
+Different types of autoloaders can be [generated](https://getcomposer.org/doc/03-cli.md#dump-autoload-dumpautoload-). The [**composer.json**](composer.json) includes scripts that will generate a "development" autoloader that requires packages defined in the `require` and `require-dev` json blocks (including [whoops](https://filp.github.io/whoops/)).
+
+```shell
+$ composer run development
+```
+
+#### Production build
+
+The "production" autoloader will only require packages in the `require` json block. **Once you are done developing and before deployment generate the production autoloader which will remove development dependencies in the autoloader**.
+
+```shell
+$ composer run production
+```
+
+### Requiring Packages
+
+The command to install new packages is `composer require`. See the [Composer docs for more details on the CLI](https://getcomposer.org/doc/03-cli.md#require). Packages can be installed from [Packagist](https://packagist.org/) or [WordPress Packagist](https://wpackagist.org/). To require a package run:
+
+```shell
+$ composer require {{ vendor }}/{{ package }}:{{ version constraint }}
+```
+
+For example:
+
+```shell
+$ composer require timber/timber:^1.18
+```
+
+... will require the **Timber** package and install the latest minor version, greater than `1.18` and less than `2.0.0`. The caret designates the version range. Version constraints can be read about in more detail in the [Composer documentation](https://getcomposer.org/doc/articles/versions.md).
+
+### Updating Packages
+
+The command to update packages is [`composer update`](https://getcomposer.org/doc/03-cli.md#update-u). Running it will install packages based on their version constraint in the [**composer.json**](composer.json) file. Individual packages can be updated by specifying the package name.
+
+```shell
+$ composer update {{ vendor }}/{{ package }}
+```
+
+For example:
+
+```shell
+$ composer update timber/timber
+```
+
+### Composer scripts
+
+The Composer package includes scripts that can be run via the command:
+
+```shell
+$ composer run {{ script }}
+```
 
 Script        | Description
 --------------|-
 `development` | Rebuilds the autoloader including development dependencies.
 `production`  | Rebuilds the autoloader omitting development dependencies.
-`predeploy`   | Rebuilds the autoloader using the `production` script then runs the `lint` and `wpscan` scripts (described below).
-`lint`        | Runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) which will display violations of the standard defined in the [phpcs.xml](https://github.com/cityofnewyork/access-nyc/blob/main/phpcs.xml) file.
-`fix`         | Runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) in fix mode which will attempt to fix violations automatically. It is not necessarily recommended to run this on large scripts because if it fails it will leave a script partially formatted and malformed.
-`wpscan`      | Checks installed plugins against the [WordPress Vunerability Database](https://wpvulndb.com/).
-`version`     | Regenerates the **composer.lock** file and autoloader (used if the Composer.json package version is updated).
+`predeploy`   | Rebuilds the autoloader using the `production` script then runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) using the `lint` script (described below).
+`lint`        | Runs PHP Code Sniffer which will display violations of the standard defined in the [phpcs.xml](phpcs.xml) file.
+`fix`         | Runs PHP Code Sniffer in fix mode which will attempt to fix violations automatically. It is not necessarily recommended to run this on large scripts because if it fails it will leave a script partially formatted and malformed.
+`version`     | Regenerates the **composer.lock** file and rebuilds the autoloader for production.
 `deps`        | This is a shorthand for `composer show --tree` for illustrating package dependencies.
-
-By default **/vendor** packages are not tracked by the repository. If a composer package is required by production it needs to be included in the repository so it can be deployed to WP Engine. The [**.gitignore**](https://github.com/cityofnewyork/access-nyc/blob/main/.gitignore) manually includes tracked repositories using the `!` prefix. This does not apply to WordPress plugins.
 
 ## Using NPM
 
-NPM is used to manage the assets in the ACCESS Theme. To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/cityofnewyork/access-nyc/tree/main/wp-content/themes/access) theme in your terminal and run:
+NPM is used to manage the assets in the ACCESS Theme. To get started with modifying the theme front-end, navigate to the [**/wp-content/themes/access**](https://github.com/cityofnewyork/access-nyc/tree/main/wp-content/themes/access) theme in your terminal. If using NVM, the **.nvmrc** will set the supported Node version for you by run the following command:
 
-    npm install
+```shell
+$ nvm use
+```
+
+If not using NVM, refer to the file for the supported version and run:
+
+```shell
+$ npm install
+```
 
 This will install all node dependencies in the same directory.
 
@@ -205,11 +303,15 @@ The [**package.json**](https://github.com/cityofnewyork/access-nyc/blob/main/wp-
 
 Then run:
 
-    npm run start
+```shell
+$ npm run start
+```
 
 To start the development server for asset management. The NPM package comes scripts which can be run via the command:
 
-    npm run {{ script }}
+```
+$ npm run {{ script }}
+```
 
 Script        | Description
 --------------|-
@@ -225,11 +327,13 @@ Script        | Description
 
 Before contributing, configure git hooks to use the repository's hooks.
 
-    git config core.hooksPath .githooks
+```shell
+$ git config core.hooksPath .githooks
+```
 
 Hook       | Description
 -----------|-
-`pre-push` | Runs the Composer `predeploy` script. See [Using Composer](#using-composer)
+`pre-push` | Runs the Composer `predeploy` script. See [composer scripts](#composer-scripts).
 
 ## Debug Browsing
 
@@ -241,7 +345,9 @@ The query parameter `?debug=1` to the site URL in any environment to help in deb
 
 PHP is linted using [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) with the [PSR-2 standard](https://www.php-fig.org/psr/psr-2/). The configuration can be found in the [phpcs.xml](https://github.com/cityofnewyork/access-nyc/blob/main/phpcs.xml). Linting must be done manually using the command:
 
-    composer run lint
+```shell
+$ composer run lint
+```
 
 PHP Code Sniffer can attempt to fix violations using `composer run fix` but it is not recommended for multiple files or large scripts as it can fail and leave malformed php files.
 
@@ -257,7 +363,7 @@ The theme relies on the [ACCESS NYC Patterns](https://accesspatterns.cityofnewyo
 
 ## Security
 
-The team @ NYC Opportunity actively maintains and releases updates to ensure the security of this site using a combination of practices for WordPress specifically. The [NYCO WordPress Docker Boilerplate README file](https://github.com/cityofnewyork/nyco-wp-docker-boilerplate) documents some of the tools and best practices.
+The team @NYCOpportunity actively maintains and releases updates to ensure the security of this site using a combination of practices for WordPress specifically. The [NYCO WordPress Boilerplate README file](https://github.com/cityofnewyork/nyco-wp-boilerplate) documents some of the tools and best practices.
 
 ### Reporting a Vulnerability
 

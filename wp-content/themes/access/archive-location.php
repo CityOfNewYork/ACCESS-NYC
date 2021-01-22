@@ -17,6 +17,8 @@ require_once ACCESS\controller('alert');
 
 /**
  * Enqueue
+ *
+ * @author NYC Opportunity
  */
 
 // Main
@@ -31,6 +33,8 @@ enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
 
 // Main
+// TODO: Evaluate coverage of individual polyfills and load per browser
+enqueue_script('polyfill');
 enqueue_script('main');
 enqueue_script('archive-location');
 

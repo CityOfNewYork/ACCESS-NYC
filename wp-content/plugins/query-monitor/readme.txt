@@ -2,10 +2,11 @@
 Contributors: johnbillion
 Tags: debug, debug-bar, debugging, development, developer, performance, profiler, queries, query monitor, rest-api
 Requires at least: 3.7
-Tested up to: 5.4
-Stable tag: 3.6.0
+Tested up to: 5.6
+Stable tag: 3.6.6
 License: GPLv2 or later
 Requires PHP: 5.3
+Donate link: https://johnblackbourn.com/donations/
 
 Query Monitor is the developer tools panel for WordPress.
 
@@ -44,6 +45,13 @@ By default, Query Monitor's output is only shown to Administrators on single-sit
 
 In addition to this, you can set an authentication cookie which allows you to view Query Monitor output when you're not logged in (or if you're logged in as a non-Administrator). See the Settings panel for details.
 
+= Other Plugins =
+
+I maintain several other plugins for developers. Check them out:
+
+* [User Switching](https://wordpress.org/plugins/user-switching/) provides instant switching between user accounts in WordPress.
+* [WP Crontrol](https://wordpress.org/plugins/wp-crontrol/) lets you view and control what's happening in the WP-Cron system
+
 = Privacy Statement =
 
 Query Monitor is private by default and always will be. It does not persistently store any of the data that it collects. It does not send data to any third party, nor does it include any third party resources.
@@ -62,7 +70,11 @@ Query Monitor is private by default and always will be. It does not persistently
 
 == Frequently Asked Questions ==
 
-= Who can see Query Monitor's output? =
+= Does this plugin work with PHP 8? =
+
+Yes.
+
+= Who can access Query Monitor's output? =
 
 By default, Query Monitor's output is only shown to Administrators on single-site installations, and Super Admins on Multisite installations.
 
@@ -85,6 +97,10 @@ In addition, Query Monitor transparently supports add-ons for the Debug Bar plug
 = Where can I suggest a new feature or report a bug? =
 
 Please use [the issue tracker on Query Monitor's GitHub repo](https://github.com/johnbillion/query-monitor/issues) as it's easier to keep track of issues there, rather than on the wordpress.org support forums.
+
+= Is Query Monitor available on Altis? =
+
+Yes, the [Altis Developer Tools](https://www.altis-dxp.com/resources/developer-docs/dev-tools/) are built on top of Query Monitor.
 
 = Is Query Monitor available on WordPress.com VIP Go? =
 
@@ -109,9 +125,62 @@ Yes. You can enable this on the Settings panel.
 
 = Do you accept donations? =
 
-No, I do not accept donations. If you like the plugin, I'd love for you to [leave a review](https://wordpress.org/support/view/plugin-reviews/query-monitor). Tell all your friends about the plugin too!
+### Do you accept donations?
+
+[I am accepting sponsorships via the GitHub Sponsors program](https://johnblackbourn.com/donations/) and any support you can give will help me maintain this plugin and keep it free for everyone.
+
+In addition, if you like the plugin then I'd love for you to [leave a review](https://wordpress.org/support/view/plugin-reviews/query-monitor). Tell all your friends about it too!
 
 ## Changelog ##
+
+### 3.6.6 ###
+
+* PHP 8 fix.
+* Improve the display for various empty values when logging.
+* Don't display child menus until the parent menu is active. Makes the menu clearer.
+* Detect local host names in HTTP API requests and don't mark them as ignoring certificate verification.
+* Prevent the text in toggle buttons from being selected when selecting data in tables.
+* Remove support for the Dark Mode plugin which isn't Dark Mode any more.
+
+
+### 3.6.5 ###
+
+* Always show the Logs panel, with a link to help docs.
+* Whole bunch of improvements to QM's "broken" state handling.
+* Remove usage of deprecated jQuery methods.
+* Add support for Altis dependencies as components.
+* Add `innodb_buffer_pool_size` variable to the mysql environment list.
+* Preformat the Logger output
+* Fix the PHP version check.
+
+
+### 3.6.4 ###
+
+* Correct an error introduced in 3.6.2 with the extra early error handling (ironic).
+
+### 3.6.3 ###
+
+* Correct the size of the close icon.
+
+### 3.6.2 ###
+
+  * Capture and display the most recent PHP error that occurred before QM loaded.
+  * Add support for the environment type added in WP 5.5.
+  * Avoid a potentially blank translation for some plural forms.
+  * Increase some contrast in dark mode.
+  * Combine the response-related sections of the Request panel.
+  * Add extra sanity checking when attempting to fetch the posix user information.
+
+### 3.6.1 ###
+
+* Adjust the bottom margin when the QM panel is open so QM doesn't cover the bottom of the page. Works more often than not.
+* Prevent QM from triggering a fatal itself if a fatal occurs before the HTML dispatcher is loaded.
+* Add an informational message to the template output when template hooks are in use.
+* Fix errors caused by missing user or group IDs when collecting environment data.
+* Add TextMate to list of supported editors.
+* Demote some cache warnings to informational messages.
+* Support passing backtrace to `QM_Backtrace`.
+
 
 ### 3.6.0 ###
 
@@ -400,73 +469,4 @@ New features! Read about them here: https://querymonitor.com/blog/2019/02/new-fe
 * Improve the visual appearance of the column sorting controls.
 * Improved display for parameter values in call stacks.
 * Any files within `wp-content` which don't have a component are now grouped by the root directory or file name.
-
-
-### 2.15.0 ###
-
-* Reverse the order of stack traces so they're in natural order, and improve styling.
-* Enable query types to be clicked in the Overview.
-* Add a highlight to the currently applied table filter.
-* Improve table row highlighting when the row header spans multiple rows.
-* Expose a link to the main query from the Request panel.
-* Better stack traces for transient sets and HTTP API requests.
-* Group and sort the Languages output by textdomain.
-* Log and expose PHP extensions, and improve styling for error reporting level.
-* Better highlighting of PHP warnings and QM errors.
-* Add support for a `vendor` directory in the root of the `mu-plugins` directory when detecting components.
-* Log the size of the value of updated transients.
-* Add a help link when query components aren't available.
-* Make the Hooks table output reusable by other components.
-* Add a bit of vertical breathing room.
-* Various improvements to terminology.
-* Coding standards.
-
-### 2.14.0 ###
-
-* Some more inline documentation about clickable stack traces.
-* Output a more complete list of error levels and their status.
-* Internationalisation fixes.
-* Add some wrapping to the Request and Theme output so posts with long unbroken slugs don't break the layout.
-* PHP error handler: Add new hook `qm/collect/new_php_error`
-* Built-in collectors: Add new `qm/built-in-collectors` filter on files before including them
-* More defensive CSS.
-* Fix the size of the expand/contract buttons.
-* Avoid showing two unnecessary functions in the call stack for textdomain loading.
-
-### 2.13.4 ###
-
-* Highlight the main query to make it easier to find.
-* Allow filtering the db queries list to see just the main query.
-* Visual fixes for buttons, toggles, and filters.
-* Add some missing i18n.
-* Add some missing table row text.
-* Correct the Drop-in Plugins URL for network admin
-
-### 2.13.3 ###
-
-- Several RTL and i18n fixes
-- More compatibility with funky object cache controllers
-- Link to the Dropins screen when an object cache is in use
-- Always display the cache information in the overview
-- Correct filename output for Timber templates
-- Use latest HHVM on Trusty during Travis testing
-
-
-### 2.13.2 ###
-
-- Fix the layout of QM when the Twenty Seventeen theme is in use.
-- Display QM at the bottom of GlotPress' output.
-- Add support for logging queries made through HyperDB.
-- Display a more appropriate message when a conflicting db.php file is present.
-- `paged.php` is no longer part of the template hierarchy.
-- Some more CSS fixes to prevent themes having an effect.
-- Increase some contrast.
-- Correct the template hierarchy for templates that have a `theme-compat` version in core. Currently only affects `embed.php`.
-- Include a back-compat version of `wp_normalize_path()` for WordPress < 3.9.
-- Ensure the use of newer conditional functions such as `is_embed()` don't cause PHP warnings on older versions of WordPress.
-
-
-### 2.13.1 ###
-
-- Correct the filter names used for the template hierarchy collection. This corrects the hierarchy when `is_front_page()` is true.
 

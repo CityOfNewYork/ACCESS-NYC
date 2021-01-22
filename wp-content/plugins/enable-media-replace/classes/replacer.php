@@ -4,6 +4,8 @@ use \EnableMediaReplace\emrFile as File;
 use EnableMediaReplace\ShortPixelLogger\ShortPixelLogger as Log;
 use EnableMediaReplace\Notices\NoticeController as Notices;
 
+use EnableMediaReplace\Externals\Elementor as Elementor; // like Skeletor.
+
 class Replacer
 {
   protected $post_id;
@@ -49,6 +51,16 @@ class Replacer
       else
         $source_file = trim(get_attached_file($post_id, apply_filters( 'emr_unfiltered_get_attached_file', true )));
 
+      /* It happens that the SourceFile returns relative / incomplete when something messes up get_upload_dir with an error something.
+         This case shoudl be detected here and create a non-relative path anyhow..
+      */
+      if (! file_exists($source_file) && $source_file && 0 !== strpos( $source_file, '/' ) && ! preg_match( '|^.:\\\|', $source_file ) )
+      {
+        $file = get_post_meta( $post_id, '_wp_attached_file', true );
+        $uploads = wp_get_upload_dir();
+        $source_file = $uploads['basedir'] . "/$source_file";
+      }
+
       Log::addDebug('SourceFile ' . $source_file);
       $this->sourceFile = new File($source_file);
 
@@ -92,9 +104,7 @@ class Replacer
   public function replaceWith($file, $fileName)
   {
       global $wpdb;
-      //$this->targetFile = new File($file);
       $this->targetName = $fileName;
-      //$this->targetFile = new File($file); // this will point to /tmp!
 
       $targetFile = $this->getTargetFile();
 
@@ -104,8 +114,6 @@ class Replacer
       //  $ex = __('Target File could not be set. The source file might not be there. In case of search and replace, a filter might prevent this', "enable-media-replace");
       //  throw new \RuntimeException($ex);
       }
-
-
 
       $targetFileObj = new File($targetFile);
       $result = $targetFileObj->checkAndCreateFolder();
@@ -134,8 +142,11 @@ class Replacer
       }
 
       // update the file attached. This is required for wp_get_attachment_url to work.
-      update_attached_file($this->post_id, $this->targetFile->getFullFilePath() );
-      $this->target_url = wp_get_attachment_url($this->post_id);
+      $updated = update_attached_file($this->post_id, $this->targetFile->getFullFilePath() );
+      if (! $updated)
+        Log::addError('Update Attached File reports as not updated');
+
+      $this->target_url = $this->getTargetURL(); //wp_get_attachment_url($this->post_id);
 
       // Run the filter, so other plugins can hook if needed.
       $filtered = apply_filters( 'wp_handle_upload', array(
@@ -155,6 +166,7 @@ class Replacer
       $metadata = wp_generate_attachment_metadata( $this->post_id, $this->targetFile->getFullFilePath() );
       wp_update_attachment_metadata( $this->post_id, $metadata );
       $this->target_metadata = $metadata;
+
 
       /** If author is different from replacer, note this */
       $author_id = get_post_meta($this->post_id, '_emr_replace_author', true);
@@ -177,9 +189,10 @@ class Replacer
          $update_ar = array('ID' => $this->post_id);
          $update_ar['post_title'] = $title;
          $update_ar['post_name'] = sanitize_title($title);
-    //     $update_ar['guid'] = wp_get_attachment_url($this->post_id);
+         $update_ar['guid'] = $this->target_url; //wp_get_attachment_url($this->post_id);
          $update_ar['post_mime_type'] = $this->targetFile->getFileMime();
          $post_id = \wp_update_post($update_ar, true);
+
 
          // update post doesn't update GUID on updates.
          $wpdb->update( $wpdb->posts, array( 'guid' =>  $this->target_url), array('ID' => $this->post_id) );
@@ -224,7 +237,7 @@ class Replacer
       $cache = new emrCache();
       $cache->flushCache($cache_args);
 
-      do_action("enable-media-replace-upload-done", $this->target_url, $this->source_url);
+      do_action("enable-media-replace-upload-done", $this->target_url, $this->source_url, $this->post_id);
 
       return true;
   }
@@ -293,8 +306,19 @@ class Replacer
            }
            $path = $this->target_location; // if all went well.
         }
-        $unique = wp_unique_filename($path, $this->targetName);
+        //if ($this->sourceFile->getFileName() == $this->targetName)
+        $targetpath = $path . $this->targetName;
 
+        // If the source and target path AND filename are identical, user has wrong mode, just overwrite the sourceFile.
+        if ($targetpath == $this->sourceFile->getFullFilePath())
+        {
+            $unique = $this->sourceFile->getFileName();
+            $this->replaceMode == self::MODE_REPLACE;
+        }
+        else
+        {
+            $unique = wp_unique_filename($path, $this->targetName);
+        }
         $new_filename = apply_filters( 'emr_unique_filename', $unique, $path, $this->post_id );
         $targetFile = trailingslashit($path) . $new_filename;
     }
@@ -315,8 +339,35 @@ class Replacer
           return null;
         }
     }
-
     return $targetFile;
+  }
+
+  /** Since WP functions also can't be trusted here in certain cases, create the URL by ourselves */
+  protected function getTargetURL()
+  {
+    //$uploads['baseurl']
+    $url = wp_get_attachment_url($this->post_id);
+    $url_basename = basename($url);
+
+    // Seems all worked as normal.
+    if (strpos($url, '://') >= 0 && $this->targetFile->getFileName() == $url_basename)
+        return $url;
+
+    // Relative path for some reason
+    if (strpos($url, '://') === false)
+    {
+        $uploads = wp_get_upload_dir();
+        $url = str_replace($uploads['basedir'], $uploads['baseurl'], $this->targetFile->getFullFilePath());
+    }
+    // This can happen when WordPress is not taking from attached file, but wrong /old GUID. Try to replace it to the new one.
+    elseif ($this->targetFile->getFileName() != $url_basename)
+    {
+        $url = str_replace($url_basename, $this->targetFile->getFileName(), $url);
+    }
+
+    return $url;
+    //$this->targetFile
+
   }
 
   /** Tries to remove all of the old image, without touching the metadata in database
@@ -328,8 +379,16 @@ class Replacer
     $backup_sizes = get_post_meta( $this->post_id, '_wp_attachment_backup_sizes', true );
 
     // this must be -scaled if that exists, since wp_delete_attachment_files checks for original_files but doesn't recheck if scaled is included since that the one 'that exists' in WP . $this->source_file replaces original image, not the -scaled one.
-    $file = get_attached_file($this->post_id);
+    $file = $this->sourceFile->getFullFilePath();
     $result = \wp_delete_attachment_files($this->post_id, $meta, $backup_sizes, $file );
+
+    // If Attached file is not the same path as file, this indicates a -scaled images is in play.
+    $attached_file = get_attached_file($this->post_id);
+    if ($file !== $attached_file && file_exists($attached_file))
+    {
+       @unlink($attached_file);
+    }
+
 
   }
 
@@ -368,37 +427,26 @@ class Replacer
 
     $args = wp_parse_args($args, $defaults);
 
-    global $wpdb;
-
      // Search-and-replace filename in post database
      // @todo Check this with scaled images.
- 		$current_base_url = parse_url($this->source_url, PHP_URL_PATH);// emr_get_match_url( $this->source_url);
-    $current_base_url = str_replace('.' . pathinfo($current_base_url, PATHINFO_EXTENSION), '', $current_base_url);
+ 		$base_url = parse_url($this->source_url, PHP_URL_PATH);// emr_get_match_url( $this->source_url);
+    $base_url = str_replace('.' . pathinfo($base_url, PATHINFO_EXTENSION), '', $base_url);
 
 
     /** Fail-safe if base_url is a whole directory, don't go search/replace */
-    if (is_dir($current_base_url))
+    if (is_dir($base_url))
     {
-      Log::addError('Search Replace tried to replace to directory - ' . $current_base_url);
+      Log::addError('Search Replace tried to replace to directory - ' . $base_url);
       Notices::addError(__('Fail Safe :: Source Location seems to be a directory.', 'enable-media-replace'));
       return;
     }
 
-    if (strlen(trim($current_base_url)) == 0)
+    if (strlen(trim($base_url)) == 0)
     {
-      Log::addError('Current Base URL emtpy - ' . $current_base_url);
+      Log::addError('Current Base URL emtpy - ' . $base_url);
       Notices::addError(__('Fail Safe :: Source Location returned empty string. Not replacing content','enable-media-replace'));
       return;
     }
-
-
-    //$search_files = $this->getFilesFromMetadata($this->source_metadata);
-    //$replace_files = $this->getFilesFromMetadata($this->target_metadata);
-  //  $arr = $this->getRelativeURLS();
-
-    /*$search_urls  = emr_get_file_urls( $this->source_url, $this->source_metadata );
-    $replace_urls = emr_get_file_urls( $this->target_url, $this->target_metadata );
-    $replace_urls = array_values(emr_normalize_file_urls( $search_urls, $replace_urls ));*/
 
     // get relurls of both source and target.
     $urls = $this->getRelativeURLS();
@@ -433,6 +481,8 @@ class Replacer
       }
     }
 
+  //  Log::addDebug('Source', $this->source_metadata);
+  //  Log::addDebug('Target', $this->target_metadata);
     /* If on the other hand, some sizes are available in source, but not in target, try to replace them with something closeby.  */
     foreach($search_urls as $size => $url)
     {
@@ -459,7 +509,7 @@ class Replacer
     */
     foreach($search_urls as $size => $url)
     {
-        $replace_url = $replace_urls[$size];
+        $replace_url = isset($replace_urls[$size]) ? $replace_urls[$size] : false;
         if ($url == $replace_url) // if source and target as the same, no need for replacing.
         {
           unset($search_urls[$size]);
@@ -470,84 +520,151 @@ class Replacer
     // If the two sides are disbalanced, the str_replace part will cause everything that has an empty replace counterpart to replace it with empty. Unwanted.
     if (count($search_urls) !== count($replace_urls))
     {
-
       Log::addError('Unbalanced Replace Arrays, aborting', array($search_urls, $replace_urls, count($search_urls), count($replace_urls) ));
       Notices::addError(__('There was an issue with updating your image URLS: Search and replace have different amount of values. Aborting updating thumbnails', 'enable-media-replace'));
       return;
     }
 
     Log::addDebug('Doing meta search and replace -', array($search_urls, $replace_urls) );
-    Log::addDebug('Searching with BaseuRL' . $current_base_url);
+    Log::addDebug('Searching with BaseuRL ' . $base_url);
 
+    do_action('emr/replace_urls', $search_urls, $replace_urls);
+    $updated = 0;
+
+    $updated += $this->doReplaceQuery($base_url, $search_urls, $replace_urls);
+
+    $replaceRuns = apply_filters('emr/replacer/custom_replace_query', array(), $base_url, $search_urls, $replace_urls);
+    Log::addDebug("REPLACE RUNS", $replaceRuns);
+    foreach($replaceRuns as $component => $run)
+    {
+       Log::addDebug('Running additional replace for : '. $component, $run);
+       $updated += $this->doReplaceQuery($run['base_url'], $run['search_urls'], $run['replace_urls']);
+    }
+    //do_action('')
+
+    Log::addDebug("Updated Records : " . $updated);
+    return $updated;
+  } // doSearchReplace
+
+
+  private function doReplaceQuery($base_url, $search_urls, $replace_urls)
+  {
+    global $wpdb;
     /* Search and replace in WP_POSTS */
     // Removed $wpdb->remove_placeholder_escape from here, not compatible with WP 4.8
- 		$posts_sql = $wpdb->prepare(
- 			"SELECT ID, post_content FROM $wpdb->posts WHERE post_status = 'publish' AND post_content LIKE %s;",
- 			'%' . $current_base_url . '%');
+    $posts_sql = $wpdb->prepare(
+      "SELECT ID, post_content FROM $wpdb->posts WHERE post_status = 'publish' AND post_content LIKE %s",
+      '%' . $base_url . '%');
 
-    // json encodes it all differently. Catch json-like encoded urls
-    //$json_url = str_replace('/', '\/', ltrim($current_base_url, '/') );
+    $rs = $wpdb->get_results( $posts_sql, ARRAY_A );
+    $number_of_updates = 0;
 
-    $postmeta_sql = 'SELECT meta_id, post_id, meta_key, meta_value FROM ' . $wpdb->postmeta . '
-        WHERE post_id in (SELECT ID from '. $wpdb->posts . ' where post_status = "publish") AND meta_value like %s';
-    $postmeta_sql = $wpdb->prepare($postmeta_sql, '%' . $current_base_url . '%');
+    if ( ! empty( $rs ) ) {
+      foreach ( $rs AS $rows ) {
+        $number_of_updates = $number_of_updates + 1;
+        // replace old URLs with new URLs.
 
-    // This is a desparate solution. Can't find anyway for wpdb->prepare not the add extra slashes to the query, which messes up the query.
-//    $postmeta_sql = str_replace('[JSON_URL]', $json_url, $postmeta_sql);
-
-    $rsmeta = $wpdb->get_results($postmeta_sql, ARRAY_A);
-
- 		$rs = $wpdb->get_results( $posts_sql, ARRAY_A );
-
- 		$number_of_updates = 0;
-
-    Log::addDebug('Queries', array($postmeta_sql, $posts_sql));
-    Log::addDebug('Queries found '  . count($rs) . ' post rows and ' . count($rsmeta) . ' meta rows');
-
-
- 		if ( ! empty( $rs ) ) {
- 			foreach ( $rs AS $rows ) {
- 				$number_of_updates = $number_of_updates + 1;
- 				// replace old URLs with new URLs.
- 				$post_content = $rows["post_content"];
- 				//$post_content = str_replace( $search_urls, $replace_urls, $post_content );
-
+        $post_content = $rows["post_content"];
         $post_id = $rows['ID'];
-        $post_ar = array('ID' => $post_id);
-        $post_ar['post_content'] = $this->replaceContent($post_content, $search_urls, $replace_urls);
+        $replaced_content = $this->replaceContent($post_content, $search_urls, $replace_urls);
 
-        if ($post_ar['post_content'] !== $post_content)
+        if ($replaced_content !== $post_content)
         {
-          $result = wp_update_post($post_ar);
-          if (is_wp_error($result))
+          Log::addDebug('POST CONTENT TO SAVE', $replaced_content);
+
+        //  $result = wp_update_post($post_ar);
+          $sql = 'UPDATE ' . $wpdb->posts . ' SET post_content = %s WHERE ID = %d';
+          $sql = $wpdb->prepare($sql, $replaced_content, $post_id);
+
+  Log::addDebug("POSt update query " . $sql);
+          $result = $wpdb->query($sql);
+
+          if ($result === false)
           {
             Notice::addError('Something went wrong while replacing' .  $result->get_error_message() );
             Log::addError('WP-Error during post update', $result);
           }
         }
 
- 			}
-    }
-    if (! empty($rsmeta))
-    {
-      foreach ($rsmeta as $row)
-      {
-        $number_of_updates++;
-        $content = $row['meta_value'];
-        $meta_key = $row['meta_key'];
-        $post_id = $row['post_id'];
-        $content = $this->replaceContent($content, $search_urls, $replace_urls); //str_replace($search_urls, $replace_urls, $content);
-
-        update_post_meta($post_id, $meta_key, $content);
-    //    $sql = $wpdb->prepare('UPDATE ' . $wpdb->postmeta . ' SET meta_value = %s WHERE meta_id = %d', $content, $row['meta_id'] );
-    //    $wpdb->query($sql);
       }
     }
 
+    $number_of_updates += $this->handleMetaData($base_url, $search_urls, $replace_urls);
+    return $number_of_updates;
+  }
 
-  } // doSearchReplace
+  private function handleMetaData($url, $search_urls, $replace_urls)
+  {
+    global $wpdb;
 
-  private function replaceContent($content, $search, $replace)
+    $meta_options = apply_filters('emr/metadata_tables', array('post', 'comment', 'term', 'user'));
+    $number_of_updates = 0;
+
+    foreach($meta_options as $type)
+    {
+        switch($type)
+        {
+          case "post": // special case.
+              $sql = 'SELECT meta_id as id, meta_key, meta_value FROM ' . $wpdb->postmeta . '
+                WHERE post_id in (SELECT ID from '. $wpdb->posts . ' where post_status = "publish") AND meta_value like %s';
+              $type = 'post';
+
+              $update_sql = ' UPDATE ' . $wpdb->postmeta . ' SET meta_value = %s WHERE meta_id = %d';
+          break;
+          default:
+              $table = $wpdb->{$type . 'meta'};  // termmeta, commentmeta etc
+
+              $meta_id = 'meta_id';
+              if ($type == 'user')
+                $meta_id = 'umeta_id';
+
+              $sql = 'SELECT ' . $meta_id . ' as id, meta_value FROM ' . $table . '
+                WHERE meta_value like %s';
+
+              $update_sql = " UPDATE $table set meta_value = %s WHERE $meta_id  = %d ";
+          break;
+        }
+
+        $sql = $wpdb->prepare($sql, '%' . $url . '%');
+
+        // This is a desparate solution. Can't find anyway for wpdb->prepare not the add extra slashes to the query, which messes up the query.
+    //    $postmeta_sql = str_replace('[JSON_URL]', $json_url, $postmeta_sql);
+        $rsmeta = $wpdb->get_results($sql, ARRAY_A);
+
+        if (! empty($rsmeta))
+        {
+          foreach ($rsmeta as $row)
+          {
+            $number_of_updates++;
+            $content = $row['meta_value'];
+
+
+            $id = $row['id'];
+
+           $content = $this->replaceContent($content, $search_urls, $replace_urls); //str_replace($search_urls, $replace_urls, $content);
+
+           $prepared_sql = $wpdb->prepare($update_sql, $content, $id);
+
+           Log::addDebug('Update Meta SQl' . $prepared_sql);
+           $result = $wpdb->query($prepared_sql);
+
+          }
+        }
+    } // foreach
+
+    return $number_of_updates;
+  } // function
+
+
+
+  /**
+  * Replaces Content across several levels of possible data
+  * @param $content String The Content to replace
+  * @param $search String Search string
+  * @param $replace String Replacement String
+  * @param $in_deep Boolean.  This is use to prevent serialization of sublevels. Only pass back serialized from top.
+  */
+  private function replaceContent($content, $search, $replace, $in_deep = false)
   {
     //$is_serial = false;
     $content = maybe_unserialize($content);
@@ -557,10 +674,14 @@ class Replacer
     {
       Log::addDebug('Found JSON Content');
       $content = json_decode($content);
+      Log::addDebug('J/Son Content', $content);
+
     }
 
     if (is_string($content))  // let's check the normal one first.
     {
+      $content = apply_filters('emr/replace/content', $content, $search, $replace);
+
       $content = str_replace($search, $replace, $content);
     }
     elseif (is_wp_error($content)) // seen this.
@@ -571,28 +692,46 @@ class Replacer
     {
       foreach($content as $index => $value)
       {
-        $content[$index] = $this->replaceContent($value, $search, $replace); //str_replace($value, $search, $replace);
+        $content[$index] = $this->replaceContent($value, $search, $replace, true); //str_replace($value, $search, $replace);
+        if (is_string($index)) // If the key is the URL (sigh)
+        {
+           $index_replaced = $this->replaceContent($index, $search,$replace, true);
+           if ($index_replaced !== $index)
+             $content = $this->change_key($content, array($index => $index_replaced));
+        }
       }
-      //return $content;
     }
     elseif(is_object($content)) // metadata objects, they exist.
     {
       foreach($content as $key => $value)
       {
-        $content->{$key} = $this->replaceContent($value, $search, $replace); //str_replace($value, $search, $replace);
+        $content->{$key} = $this->replaceContent($value, $search, $replace, true); //str_replace($value, $search, $replace);
       }
-      //return $content;
     }
 
-    if ($isJson) // convert back to JSON, if this was JSON. Different than serialize which does WP automatically.
+    if ($isJson && $in_deep === false) // convert back to JSON, if this was JSON. Different than serialize which does WP automatically.
     {
       Log::addDebug('Value was found to be JSON, encoding');
       // wp-slash -> WP does stripslashes_deep which destroys JSON
-      $content = wp_slash(json_encode($content, JSON_UNESCAPED_SLASHES));
+      $content = json_encode($content, JSON_UNESCAPED_SLASHES);
       Log::addDebug('Content returning', array($content));
     }
+    elseif($in_deep === false && (is_array($content) || is_object($content)))
+      $content = maybe_serialize($content);
 
     return $content;
+  }
+
+  private function change_key($arr, $set) {
+        if (is_array($arr) && is_array($set)) {
+    		$newArr = array();
+    		foreach ($arr as $k => $v) {
+    		    $key = array_key_exists( $k, $set) ? $set[$k] : $k;
+    		    $newArr[$key] = is_array($v) ? $this->change_key($v, $set) : $v;
+    		}
+    		return $newArr;
+    	}
+    	return $arr;
   }
 
   private function getFilesFromMetadata($meta)
@@ -662,7 +801,12 @@ class Replacer
   */
   private function findNearestSize($sizeName)
   {
+     Log::addDebug('Find Nearest: '. $sizeName);
 
+      if (! isset($this->source_metadata['sizes'][$sizeName]) || ! isset($this->target_metadata['width'])) // This can happen with non-image files like PDF.
+      {
+        return false;
+      }
       $old_width = $this->source_metadata['sizes'][$sizeName]['width']; // the width from size not in new image
       $new_width = $this->target_metadata['width']; // default check - the width of the main image
 

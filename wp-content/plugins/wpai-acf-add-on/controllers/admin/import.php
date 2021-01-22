@@ -33,8 +33,7 @@ class PMAI_Admin_Import extends PMAI_Controller_Admin {
             if (empty($this->data['groups']) && function_exists('acf_get_local_field_groups')) {
                 $this->data['groups'] = acf_get_local_field_groups();
             }
-        }
-        else {
+        } else {
             $this->data['groups'] = apply_filters('acf/get_field_groups', array());
         }
 
@@ -56,8 +55,7 @@ class PMAI_Admin_Import extends PMAI_Controller_Admin {
                     if (in_array($post_type, array('taxonomies', 'import_users')) || acf_get_field_group_visibility($groupData, array('post_type' => $post_type)) || empty($groupData['location'][0])) {
                         $this->addGroup($group);
                     }
-                }
-                else {
+                } else {
                     $this->addGroup($group);
                 }
             }
@@ -67,8 +65,7 @@ class PMAI_Admin_Import extends PMAI_Controller_Admin {
             foreach ($this->data['groups'] as $key => $group) {
                 if (empty($this->data['groups'][$key]['ID']) && !empty($this->data['groups'][$key]['id'])) {
                     $this->data['groups'][$key]['ID'] = $this->data['groups'][$key]['id'];
-                }
-                elseif (empty($this->data['groups'][$key]['ID']) && !empty($this->data['groups'][$key]['key'])) {
+                } elseif (empty($this->data['groups'][$key]['ID']) && !empty($this->data['groups'][$key]['key'])) {
                     $this->data['groups'][$key]['ID'] = $this->data['groups'][$key]['key'];
                 }
             }
@@ -85,10 +82,10 @@ class PMAI_Admin_Import extends PMAI_Controller_Admin {
         if (!isset($this->data['groups'][$group->post_name])) {
             $this->data['groups'][] = array(
                 'ID' => $group->ID,
-                'title' => $group->post_title
+                'title' => $group->post_title,
+                'slug' => $group->post_excerpt
             );
-        }
-        else {
+        } else {
             $this->data['groups'][$group->post_name]['ID'] = $group->ID;
         }
     }

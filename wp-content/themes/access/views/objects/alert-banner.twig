@@ -1,14 +1,14 @@
 <article {% if static != true %}data-js="alert-banner" data-alert-name="{{ this.slug }}" id="aria-c-{{ this.slug }}" aria-hidden="{% if active %}false{% else %}true{% endif %}" role="dialog"{% else %}role="alert"{% endif %} class="c-alert-banner z-20 color-mid-background color-{{ this.status.type }}-status animated hidden:fadeInUp {% if active %}active{% else %}hidden{% endif %} print:hidden pointer-events-auto">
 
   <div class="c-alert-banner-wrapper">
-    <div class="c-alert-banner__content screen-mobile:flex">
-      <div class="c-alert-box__icon">
+    <div class="c-alert-banner__content flex">
+      <div class="flex-1 c-alert-box__icon">
         <svg aria-hidden="true" class="c-alert-box__svg icon-3 screen-tablet:icon-4">
           <use xlink:href="#icon-{{ this.alert_icon }}"></use>
         </svg>
       </div>
 
-      <div class="c-alert-banner__body">{{ this.alert_content }}</div>
+      <div class="flex-1 c-alert-banner__body">{{ this.alert_content }}</div>
     </div>
 
     {% if static != true %}<div class="c-alert-banner__closing">

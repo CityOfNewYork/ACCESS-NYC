@@ -12,30 +12,24 @@ namespace Twilio\Rest\Preview;
 use Twilio\Domain;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
-use Twilio\Rest\Preview\TrustedComms\BrandedCallList;
+use Twilio\Rest\Preview\TrustedComms\BrandedChannelList;
 use Twilio\Rest\Preview\TrustedComms\BrandsInformationList;
-use Twilio\Rest\Preview\TrustedComms\BusinessList;
 use Twilio\Rest\Preview\TrustedComms\CpsList;
 use Twilio\Rest\Preview\TrustedComms\CurrentCallList;
-use Twilio\Rest\Preview\TrustedComms\PhoneCallList;
 use Twilio\Version;
 
 /**
- * @property BrandedCallList $brandedCalls
+ * @property BrandedChannelList $brandedChannels
  * @property BrandsInformationList $brandsInformation
- * @property BusinessList $businesses
  * @property CpsList $cps
  * @property CurrentCallList $currentCalls
- * @property PhoneCallList $phoneCalls
- * @method \Twilio\Rest\Preview\TrustedComms\BusinessContext businesses(string $sid)
+ * @method \Twilio\Rest\Preview\TrustedComms\BrandedChannelContext brandedChannels(string $sid)
  */
 class TrustedComms extends Version {
-    protected $_brandedCalls;
+    protected $_brandedChannels;
     protected $_brandsInformation;
-    protected $_businesses;
     protected $_cps;
     protected $_currentCalls;
-    protected $_phoneCalls;
 
     /**
      * Construct the TrustedComms version of Preview
@@ -47,11 +41,11 @@ class TrustedComms extends Version {
         $this->version = 'TrustedComms';
     }
 
-    protected function getBrandedCalls(): BrandedCallList {
-        if (!$this->_brandedCalls) {
-            $this->_brandedCalls = new BrandedCallList($this);
+    protected function getBrandedChannels(): BrandedChannelList {
+        if (!$this->_brandedChannels) {
+            $this->_brandedChannels = new BrandedChannelList($this);
         }
-        return $this->_brandedCalls;
+        return $this->_brandedChannels;
     }
 
     protected function getBrandsInformation(): BrandsInformationList {
@@ -59,13 +53,6 @@ class TrustedComms extends Version {
             $this->_brandsInformation = new BrandsInformationList($this);
         }
         return $this->_brandsInformation;
-    }
-
-    protected function getBusinesses(): BusinessList {
-        if (!$this->_businesses) {
-            $this->_businesses = new BusinessList($this);
-        }
-        return $this->_businesses;
     }
 
     protected function getCps(): CpsList {
@@ -80,13 +67,6 @@ class TrustedComms extends Version {
             $this->_currentCalls = new CurrentCallList($this);
         }
         return $this->_currentCalls;
-    }
-
-    protected function getPhoneCalls(): PhoneCallList {
-        if (!$this->_phoneCalls) {
-            $this->_phoneCalls = new PhoneCallList($this);
-        }
-        return $this->_phoneCalls;
     }
 
     /**

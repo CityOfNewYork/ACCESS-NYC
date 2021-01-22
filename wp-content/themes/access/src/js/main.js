@@ -1,29 +1,5 @@
 /* eslint-env browser */
-// Core-js polyfills.
-// Core-js is made available as a dependency of @babel/preset-env
-import 'core-js/features/promise';
-import 'core-js/features/array/for-each';
-import 'core-js/features/array/find';
-import 'core-js/features/array/flat';
-import 'core-js/features/array/flat-map';
-import 'core-js/features/array/includes';
-import 'core-js/features/array/map';
-import 'core-js/features/object/assign';
-import 'core-js/features/object/from-entries';
-import 'core-js/features/object/entries';
-import 'core-js/features/string/includes';
-
-// Fetch
-import 'whatwg-fetch';
-
-// ACCESS Patterns Polyfills
-import 'utilities/element/matches';
-import 'utilities/element/closest';
-import 'utilities/element/remove';
-import 'utilities/nodelist/foreach';
-
 // Core Modules
-// import Utility from 'modules/utility';
 import RollbarConfigure from 'modules/rollbar-configure';
 import Track from 'modules/track';
 import TranslateElement from 'modules/google-translate-element';
@@ -31,18 +7,15 @@ import TranslateElement from 'modules/google-translate-element';
 // ACCESS Patterns
 import Accordion from 'components/accordion/accordion';
 import Filter from 'components/filter/filter';
-import ShareForm from 'components/share-form/share-form';
-import Disclaimer from 'components/disclaimer/disclaimer';
 import AlertBanner from 'objects/alert-banner/alert-banner';
-import Newsletter from 'objects/newsletter/newsletter';
 import TextController from 'objects/text-controller/text-controller';
 
 // Patterns Framework
-// import Track from 'utilities/track/track'; TODO: modify src for compatibility
 import Icons from 'utilities/icons/icons';
 import Toggle from 'utilities/toggle/toggle';
 import Copy from 'utilities/copy/copy';
 import localize from 'utilities/localize/localize';
+import Newsletter from 'utilities/newsletter/newsletter';
 import WebShare from 'utilities/web-share/web-share';
 
 (function(window) {
@@ -56,11 +29,15 @@ import WebShare from 'utilities/web-share/web-share';
   /**
    * Instantiate ACCESS NYC Patterns
    */
-  new Icons('/wp-content/themes/access/assets/svg/icons.3fd5a989.svg');
-  new Toggle();
-  new Accordion();
-  new Filter();
+
+  new Icons('/wp-content/themes/access/assets/svg/icons.517db171.svg');
   new Copy();
+  new Filter();
+
+  // Disable the feature for setting the tabindex of potentially focusable
+  // elements within the component to prevent conflicts.
+  let accordion = new Accordion();
+  accordion._toggle.settings.focusable = false;
 
   /**
    * Instantiate Web Share and tracking callback
@@ -89,7 +66,13 @@ import WebShare from 'utilities/web-share/web-share';
    * Instantiate Text Controller
    */
   (element => {
-    if (element) new TextController(element);
+    if (element) {
+      let textController = new TextController(element);
+
+      // Disable the feature for setting the tabindex of potentially focusable
+      // elements within the component to prevent conflicts.
+      textController._toggle.settings.focusable = false;
+    }
   })(document.querySelector(TextController.selector));
 
   /**
@@ -119,39 +102,6 @@ import WebShare from 'utilities/web-share/web-share';
       newsletter.form.strings = strings;
     });
   })(document.querySelectorAll(Newsletter.selector));
-
-  /**
-   * Initialize the Share Form and Disclaimer
-   */
-  (elements => {
-    elements.forEach(element => {
-      let shareForm = new ShareForm(element);
-      let strings = Object.fromEntries([
-        'SHARE_FORM_SERVER',
-        'SHARE_FORM_SERVER_TEL_INVALID',
-        'SHARE_FORM_VALID_REQUIRED',
-        'SHARE_FORM_VALID_EMAIL_INVALID',
-        'SHARE_FORM_VALID_TEL_INVALID'
-      ].map(i => [
-        i.replace('SHARE_FORM_', ''),
-        localize(i)
-      ]));
-
-      shareForm.strings = strings;
-      shareForm.form.strings = strings;
-
-      shareForm.sent = instance => {
-        let key = instance.type.charAt(0).toUpperCase() +
-          instance.type.slice(1);
-
-        Track.event(key, [
-          {'DCS.dcsuri': `share/${instance.type}`}
-        ]);
-      };
-    });
-
-    new Disclaimer();
-  })(document.querySelectorAll(ShareForm.selector));
 
   /**
    *

@@ -217,24 +217,22 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 				);
 				echo '</span></p>';
 			} else {
-				echo '<p><span class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>';
+				echo '<p>';
 				echo esc_html__( 'External object cache not in use', 'query-monitor' );
-				echo '</span></p>';
+				echo '</p>';
 
 				$potentials = array_filter( $cache_data['object_cache_extensions'] );
 
 				if ( ! empty( $potentials ) ) {
-					echo '<ul>';
 					foreach ( $potentials as $name => $value ) {
-						echo '<li><span class="qm-warn">';
+						echo '<p>';
 						echo esc_html( sprintf(
 							/* translators: %s: PHP extension name */
 							__( 'The %s extension for PHP is installed but is not in use by WordPress', 'query-monitor' ),
 							$name
 						) );
-						echo '</span></li>';
+						echo '</p>';
 					}
-					echo '</ul>';
 				}
 			}
 
@@ -256,7 +254,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 		$this->after_non_tabular_output();
 	}
 
-	public function admin_title( array $title ) {
+	public function admin_title( array $existing ) {
 
 		$data = $this->collector->get_data();
 
@@ -280,6 +278,8 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 		foreach ( $title as &$t ) {
 			$t = preg_replace( '#\s?([^0-9,\.]+)#', '<small>$1</small>', $t );
 		}
+
+		$title = array_merge( $existing, $title );
 
 		return $title;
 	}

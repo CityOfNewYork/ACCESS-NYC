@@ -2,6 +2,11 @@
 
 A developer plugin with helpers for managing assets in WordPress. It can be used to register and enqueue stylesheets with general defaults and hashed names as well as configure inline integrations such as Google Analytics, Rollbar, etc by using WordPress' native `wp_enqueue/register_style/script()` and `wp_add_inline_script()` methods. This properly loads them into the site, avoids conflicts, and exposes them to asset hooks for deeper configuration.
 
+* [Installation](#installation-using-composer)
+* [Usage](#usage)
+* [Documentation](#documentation)
+* [Query Monitor Add-on](#query-monitor-add-on)
+
 ## Installation using [Composer](https://getcomposer.org/)
 
 **$1** This package uses [Composer Installers](https://github.com/composer/installers) to install the package in the **Must Use** plugins directory (*/wp-content/mu-plugins*):
@@ -36,13 +41,30 @@ A developer plugin with helpers for managing assets in WordPress. It can be used
 
 Assuming `main.831f1593.js` is a compiled script file and `831f1593` is a hash based on the contents of the script, the filename will change if the contents of the file change. This is useful for cache busting without forcing a browser to load the script on every load using a query variable `?ver=831f1593`. However, WordPress won't be able to locate scripts without a hard-coded source. `->addScript('main')` will register and enqueue the first script file it finds with any hash contents between `main.` and `.js`.
 
-## Class NYCO\WpAssets
+**Note**. The autoloader sample sets an instance of `WpAssets` to the global scope which can be used as well;
 
-For a full description of methods refer to the [source](https://github.com/CityOfNewYork/nyco-wp-assets/blob/master/WpAssets.php).
+    $GLOBALS['wp_assets']->addScript();
 
----
+## Documentation
 
-### ->addScript( ...args )
+The core of the plugin is a single class with several methods that are available upon instantiation. For a full description of methods refer to the [source](https://github.com/CityOfNewYork/nyco-wp-assets/blob/master/WpAssets.php).
+
+### Class (including namespace)
+
+    NYCO\WpAssets
+
+### Methods
+
+* [Add Script](#add-script)
+* [Add Style](#add-style)
+* [Add Attribute](#add-attr)
+* [Load Integrations](#load-integrations)
+* [Add Inline](#add-inline)
+* [Register Rest Routes](#register-rest-routes)
+
+### Add Script
+
+    ->addScript( ...args )
 
 Register and/or enqueue a hashed script based on it's name. File name should match the pattern `script.{{ hash }}.js` by default. The separator between the filename and the hash can be configured.
 
@@ -75,9 +97,13 @@ This script will be loaded into the footer of the document and be available to t
       return $tag;
     });
 
+[Back to top](#documentation)
+
 ---
 
-### ->addStyle( ...args )
+### Add Style
+
+    ->addStyle( ...args )
 
 Register and/or enqueue a hashed style based on it's name. File name should match the pattern `styles.{{ hash }}.css`. The separator between the filename and the hash can be configured.
 
@@ -100,23 +126,34 @@ This will scan the default style assets directory *assets/styles/* of the curren
 
     $WpAssets->addStyle('site');
 
+[Back to top](#documentation)
+
 ---
 
-### ->addCrossoriginAttr( ...args )
+### Add Attr
 
-Uses the [`script_loader_tag`](https://developer.wordpress.org/reference/hooks/script_loader_tag/) filter to add `crossorigin="anonymous"` attribute to a specific script. For more details on this attribute see the following [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes).
+    ->addAttr( ...args )
+
+Uses the [`script_loader_tag`](https://developer.wordpress.org/reference/hooks/script_loader_tag/) filter to add an attribute and a value to a specific script. For example; crossorigin="anonymous". 
+Attribute values may be strings. To add a boolean attribute such as `async` or `defer` pass `true`."
 
 **...args**
 
 - `String  $name`  The name of the script.
+- `String  $attr`  The name of the attribute.
+- `String|Boolean $value` The value set for the attribute.
 
 #### Examples
 
-    $WpAssets->addCrossoriginAttr('script');
+    $WpAssets->addAttr('script', 'async', true);
+
+[Back to top](#documentation)
 
 ---
 
-### ->loadIntegrations( ...args )
+### Load Integrations
+
+    ->loadIntegrations( ...args )
 
 This retrieves an integration configuration file from the MU Plugins directory. By default it will look for a YAML file at *config/integrations.yml* that contains an array of individual configuration objects then it converts the YAML file to a PHP Array and returns it. This is meant to be used with the `->enqueueInline( ...args )` method.
 
@@ -142,6 +179,10 @@ A configuration file may include multiple objects with the following parameters.
         position: before
       body_open:
         path: config/integrations/body/a-html-tag-to-include-in-the-body.html
+      attrs:
+        crossorigin: 'anonymous'
+        async: true
+
 
     - handle: google-analytics
       path: https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}
@@ -153,9 +194,13 @@ A configuration file may include multiple objects with the following parameters.
         path: config/integrations/scripts/google-analytics.js
         position: after
 
+[Back to top](#documentation)
+
 ---
 
-### ->addInline( ...args )
+### Add Inline
+
+    ->addInline( ...args )
 
 Register and enqueue inline scripts and their source using `wp_register/enqueue_script()` and [`wp_add_inline_script()`](https://developer.wordpress.org/reference/functions/wp_add_inline_script/)
 
@@ -175,6 +220,7 @@ Also enqueues inline styles if required by the configuration. This is not possib
 
     if ($integrations) {
       $index = array_search('google-analytics', array_column($integrations, 'handle'));
+
       $WpAssets->addInline($integrations[$index]);
     }
 
@@ -189,6 +235,9 @@ This will load the `'google-analytics'` integration. Below is the Google Analyti
       inline:
         path: config/integrations/scripts/google-analytics.js
         position: after
+      attrs:
+        async: true
+
 
 The *config/integrations/scripts/google-analytics.js* script should contain something like the following;
 
@@ -202,16 +251,20 @@ The constant `GOOGLE_ANALYTICS` should be defined somewhere in another part of y
 
 The following will be printed in the head of the document;
 
-    <script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=GTM-9A9A9A9">
+    <script async type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=GTM-9A9A9A9">
     <script>
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
       gtag('config', 'GTM-9A9A9A9');
     </script>
 
+[Back to top](#documentation)
+
 ---
 
-### ->registerRestRoutes( ...args )
+### Register Rest Routes
+
+    ->registerRestRoutes( ...args )
 
 Uses an array of configuration objects to register WP Rest Routes that act as JavaScript files instead of inline scripts.
 
@@ -221,6 +274,14 @@ Uses an array of configuration objects to register WP Rest Routes that act as Ja
 - `Function  $auth` The authentication function to use for routes (passed to register_rest_route() as the `'permission_callback'` argument).
 
 **Returns** the Array of integrations objects with all rest route details.
+
+[Back to top](#documentation)
+
+## Query Monitor Add-on
+
+This plugin ships with an add-on for [Query Monitor](https://querymonitor.com/) that displays the *available* integrations to the [Load Integrations method](#load-integrations) and compares them to integrations that are registered. It uses the same method to display the details of the **config/integrations.yml** file.
+
+![Query Monitor Add-on preview](query-monitor.png)
 
 ---
 

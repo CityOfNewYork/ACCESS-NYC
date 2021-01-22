@@ -1,0 +1,250 @@
+
+/* Table list */
+
+.wpscan-report-section {
+  margin: 0px 0px 20px 0px;
+}
+
+.wp-list-table.plugins .plugin-title strong {
+  float: left;
+  margin-bottom: 5px;
+  margin-right: 12px;
+}
+
+.is-gray {
+  color: gray;
+}
+
+.is-green {
+  color: green;
+}
+
+.is-red {
+  color: crimson;
+}
+
+@media screen and (max-width: 782px) {
+  .wp-list-table.plugins tr th.check-column { padding: 0 0 0 10px; }
+}
+
+/* Summary */
+
+#wpscan-metabox-summary .check-now { padding: 0; text-align: right; }
+#wpscan-metabox-summary .spinner { float: none; margin-top: 0; }
+
+@media screen and (max-width: 850px) {
+  #wpscan-metabox-summary { margin-top: 20px; }
+}
+
+/* Notification */
+
+#wpscan-metabox-notification table,
+#wpscan-metabox-notification tbody,
+#wpscan-metabox-notification tr,
+#wpscan-metabox-notification th,
+#wpscan-metabox-notification td { display: block; width: 100%; }
+#wpscan-metabox-notification th { padding: .5em 0; }
+#wpscan-metabox-notification td { padding: 0; }
+#wpscan-metabox-notification th,
+#wpscan-metabox-notification td,
+#wpscan-metabox-notification td p { font-size: 13px; }
+#wpscan-metabox-notification input[type="text"] { width: 100%; }
+#wpscan-metabox-notification .submit { padding: 0; text-align: right; }
+
+@media screen and (max-width: 782px) {
+  #wpscan-metabox-notification label { padding-left: 35px; }
+  #wpscan-metabox-notification input[type="checkbox"] { margin-left: -35px; }
+}
+
+/* Ignore vulnerabilities */
+
+#wpscan-metabox-ignore-vulnerabilities table,
+#wpscan-metabox-ignore-vulnerabilities tbody,
+#wpscan-metabox-ignore-vulnerabilities tr,
+#wpscan-metabox-ignore-vulnerabilities th,
+#wpscan-metabox-ignore-vulnerabilities td { display: block; width: 100%; }
+#wpscan-metabox-ignore-vulnerabilities th { padding: .5em 0; }
+#wpscan-metabox-ignore-vulnerabilities td { padding: 0; }
+#wpscan-metabox-ignore-vulnerabilities th,
+#wpscan-metabox-ignore-vulnerabilities td,
+#wpscan-metabox-ignore-vulnerabilities td p { font-size: 13px; }
+#wpscan-metabox-ignore-vulnerabilities input[type="text"] { width: 100%; }
+#wpscan-metabox-ignore-vulnerabilities label { position: relative; display: block; padding-left: 25px; margin: 0 0 10px; }
+#wpscan-metabox-ignore-vulnerabilities label + br { display: none; }
+#wpscan-metabox-ignore-vulnerabilities input[type="checkbox"] { margin-left: -25px; }
+#wpscan-metabox-ignore-vulnerabilities .submit { padding: 0; text-align: right; }
+
+@media screen and (max-width: 782px) {
+  #wpscan-metabox-ignore-vulnerabilities label { padding-left: 35px; }
+  #wpscan-metabox-ignore-vulnerabilities input[type="checkbox"] { margin-left: -35px; }
+}
+
+/* Account */
+
+#wpscan-account-summary ul li span {
+  float: right;
+  text-transform: capitalize;
+  min-width: 30px;
+  text-align: center;
+  border-radius: 3px;
+  padding: 0px 11px 1px 11px;
+  word-spacing: 1px;
+  color: #4e645a;
+  background: #cbe0ec;
+}
+
+#wpscan-account-summary ul li {
+  width: 100%;
+  overflow: hidden;
+  line-height: 23px;
+  margin-bottom: 14px;
+}
+
+#wpscan-account-summary ul {
+  margin: 10px 0px;
+}
+
+#wpscan-account-summary .button {
+  float: right;
+  margin-top: 15px;
+}
+
+#wpscan-account-summary .inside {
+  overflow: hidden;
+}
+
+.wpscan-status-green {
+  background: #c3e6c1 !important;
+  color: #026624 !important;
+}
+
+.wpscan-status-orange {
+  background: #ffd2a3 !important;
+  color: #d95200 !important;
+}
+
+.wpscan-status-red {
+  background: #ffb6b6 !important;
+  color: #c00 !important;
+}
+
+/* download report */
+
+.toplevel_page_wpscan .download-report {
+  margin-top: 15px;
+}
+
+/* Extra info */
+
+.vulnerability {
+  margin-bottom: 12px;
+  float: left;
+  width: 100%;
+  line-height: 1.8;
+  line-height: 25px;
+}
+
+.vulnerability a {
+  float: left;
+  max-width: 80%;
+}
+
+.vulnerability:last-child {
+  margin-bottom: 5px;
+}
+
+.vulnerability-severity {
+  float: left;
+  min-width: 60px;
+  margin-right: 20px;
+}
+
+.vulnerability-title {
+  float: left;
+}
+
+.vulnerability-severity span {
+  float: left;
+  text-transform: capitalize;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 11px;
+  margin: 6px 0px 0px 0px;
+  line-height: 19px;
+  min-width: 60px;
+  color: #4e645a;
+  background: #c6e1d5;
+}
+
+.item-closed {
+  float: left;
+  text-transform: capitalize;
+  min-width: 30px;
+  text-align: center;
+  border-radius: 3px;
+  padding: 0px 8px 1px 8px;
+  line-height: 20px;
+  font-size: 11px;
+  margin-bottom: 3px;
+  margin-top: 10px;
+  background: #e1dfdf !important;
+}
+
+.item-version {
+  float: left;
+  width: 100%;
+}
+
+.wpscan-info {  
+  background: #c1e3e6 !important; 
+  color: #304584 !important;  
+} 
+
+.wpscan-low { 
+  background: #c3e6c1 !important; 
+  color: #026624 !important;  
+} 
+
+.wpscan-medium {  
+  background: #ffd2a3 !important; 
+  color: #d95200 !important;  
+} 
+
+.wpscan-high {  
+  background: #ffb6b6 !important; 
+  color: #c00 !important; 
+} 
+
+.wpscan-critical {  
+  background: #e1b8ff !important; 
+  color: #66348a !important;  
+} 
+
+.wpscan-ignored {
+  border-radius: 3px;
+  padding: 0px 8px 0px 8px;
+  line-height: 22px;
+  font-size: 12px;
+  float: left;
+  background: #c1e3e6 !important;
+  color: #304584 !important;
+}
+
+.security-check-actions .spinner {
+  float: none;
+  position: absolute;
+}
+
+.security-check-actions button {
+  margin-right: 5px !important;
+  margin-bottom: 5px !important;
+  width: 70px;
+}
+
+.ui-tooltip {
+  padding: 6px 12px;
+  border-radius: 3px;
+  max-width: 350px;
+  background: #d7dade;
+  color: #2a2c31;
+}

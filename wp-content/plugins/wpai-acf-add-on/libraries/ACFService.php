@@ -241,17 +241,19 @@ final class ACFService{
             $values = array_map('trim', $values);
             global $wpdb;
             foreach ($values as $ev) {
-
                 $relation = false;
                 if (ctype_digit($ev)) {
-                    $relation = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE ID = %s", $ev));
+                	if (empty($post_types)) {
+		                $relation = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE ID = %d", $ev));
+	                } else {
+		                $relation = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE ID = %d AND post_type IN ('" . implode("','", $post_types) . "')", $ev));
+	                }
                 }
-                if (empty($relation)){
-                    if (empty($post_types)){
+                if (empty($relation)) {
+                    if (empty($post_types)) {
                         $sql = "SELECT * FROM {$wpdb->posts} WHERE post_type != %s AND ( post_title = %s OR post_name = %s )";
                         $relation = $wpdb->get_row($wpdb->prepare($sql, 'revision', $ev, sanitize_title_for_query($ev)));
-                    }
-                    else{
+                    } else {
                         $sql = "SELECT * FROM {$wpdb->posts} WHERE post_type IN ('" . implode("','", $post_types) . "') AND ( post_title = %s OR post_name = %s )";
                         $relation = $wpdb->get_row($wpdb->prepare($sql, $ev, sanitize_title_for_query($ev)));
                     }

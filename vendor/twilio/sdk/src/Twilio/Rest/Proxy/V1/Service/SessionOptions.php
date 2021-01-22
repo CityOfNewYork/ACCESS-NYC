@@ -25,20 +25,26 @@ abstract class SessionOptions {
      * @param string $status Session status
      * @param array[] $participants The Participant objects to include in the new
      *                              session
+     * @param bool $failOnParticipantConflict An experimental parameter to override
+     *                                        the ProxyAllowParticipantConflict
+     *                                        account flag on a per-request basis.
      * @return CreateSessionOptions Options builder
      */
-    public static function create(string $uniqueName = Values::NONE, \DateTime $dateExpiry = Values::NONE, int $ttl = Values::NONE, string $mode = Values::NONE, string $status = Values::NONE, array $participants = Values::ARRAY_NONE): CreateSessionOptions {
-        return new CreateSessionOptions($uniqueName, $dateExpiry, $ttl, $mode, $status, $participants);
+    public static function create(string $uniqueName = Values::NONE, \DateTime $dateExpiry = Values::NONE, int $ttl = Values::NONE, string $mode = Values::NONE, string $status = Values::NONE, array $participants = Values::ARRAY_NONE, bool $failOnParticipantConflict = Values::NONE): CreateSessionOptions {
+        return new CreateSessionOptions($uniqueName, $dateExpiry, $ttl, $mode, $status, $participants, $failOnParticipantConflict);
     }
 
     /**
      * @param \DateTime $dateExpiry The ISO 8601 date when the Session should expire
      * @param int $ttl When the session will expire
      * @param string $status The new status of the resource
+     * @param bool $failOnParticipantConflict An experimental parameter to override
+     *                                        the ProxyAllowParticipantConflict
+     *                                        account flag on a per-request basis.
      * @return UpdateSessionOptions Options builder
      */
-    public static function update(\DateTime $dateExpiry = Values::NONE, int $ttl = Values::NONE, string $status = Values::NONE): UpdateSessionOptions {
-        return new UpdateSessionOptions($dateExpiry, $ttl, $status);
+    public static function update(\DateTime $dateExpiry = Values::NONE, int $ttl = Values::NONE, string $status = Values::NONE, bool $failOnParticipantConflict = Values::NONE): UpdateSessionOptions {
+        return new UpdateSessionOptions($dateExpiry, $ttl, $status, $failOnParticipantConflict);
     }
 }
 
@@ -52,14 +58,18 @@ class CreateSessionOptions extends Options {
      * @param string $status Session status
      * @param array[] $participants The Participant objects to include in the new
      *                              session
+     * @param bool $failOnParticipantConflict An experimental parameter to override
+     *                                        the ProxyAllowParticipantConflict
+     *                                        account flag on a per-request basis.
      */
-    public function __construct(string $uniqueName = Values::NONE, \DateTime $dateExpiry = Values::NONE, int $ttl = Values::NONE, string $mode = Values::NONE, string $status = Values::NONE, array $participants = Values::ARRAY_NONE) {
+    public function __construct(string $uniqueName = Values::NONE, \DateTime $dateExpiry = Values::NONE, int $ttl = Values::NONE, string $mode = Values::NONE, string $status = Values::NONE, array $participants = Values::ARRAY_NONE, bool $failOnParticipantConflict = Values::NONE) {
         $this->options['uniqueName'] = $uniqueName;
         $this->options['dateExpiry'] = $dateExpiry;
         $this->options['ttl'] = $ttl;
         $this->options['mode'] = $mode;
         $this->options['status'] = $status;
         $this->options['participants'] = $participants;
+        $this->options['failOnParticipantConflict'] = $failOnParticipantConflict;
     }
 
     /**
@@ -131,6 +141,19 @@ class CreateSessionOptions extends Options {
     }
 
     /**
+     * [Experimental] For accounts with the ProxyAllowParticipantConflict account flag, setting to true enables per-request opt-in to allowing Proxy to reject a Session create (with Participants) request that could cause the same Identifier/ProxyIdentifier pair to be active in multiple Sessions. Depending on the context, this could be a 409 error (Twilio error code 80623) or a 400 error (Twilio error code 80604). If not provided, requests will be allowed to succeed and a Debugger notification (80802) will be emitted. Having multiple, active Participants with the same Identifier/ProxyIdentifier pair causes calls and messages from affected Participants to be routed incorrectly. Please note, the default behavior for accounts without the ProxyAllowParticipantConflict flag is to reject the request as described.  This will eventually be the default for all accounts.
+     *
+     * @param bool $failOnParticipantConflict An experimental parameter to override
+     *                                        the ProxyAllowParticipantConflict
+     *                                        account flag on a per-request basis.
+     * @return $this Fluent Builder
+     */
+    public function setFailOnParticipantConflict(bool $failOnParticipantConflict): self {
+        $this->options['failOnParticipantConflict'] = $failOnParticipantConflict;
+        return $this;
+    }
+
+    /**
      * Provide a friendly representation
      *
      * @return string Machine friendly representation
@@ -146,11 +169,15 @@ class UpdateSessionOptions extends Options {
      * @param \DateTime $dateExpiry The ISO 8601 date when the Session should expire
      * @param int $ttl When the session will expire
      * @param string $status The new status of the resource
+     * @param bool $failOnParticipantConflict An experimental parameter to override
+     *                                        the ProxyAllowParticipantConflict
+     *                                        account flag on a per-request basis.
      */
-    public function __construct(\DateTime $dateExpiry = Values::NONE, int $ttl = Values::NONE, string $status = Values::NONE) {
+    public function __construct(\DateTime $dateExpiry = Values::NONE, int $ttl = Values::NONE, string $status = Values::NONE, bool $failOnParticipantConflict = Values::NONE) {
         $this->options['dateExpiry'] = $dateExpiry;
         $this->options['ttl'] = $ttl;
         $this->options['status'] = $status;
+        $this->options['failOnParticipantConflict'] = $failOnParticipantConflict;
     }
 
     /**
@@ -183,6 +210,19 @@ class UpdateSessionOptions extends Options {
      */
     public function setStatus(string $status): self {
         $this->options['status'] = $status;
+        return $this;
+    }
+
+    /**
+     * [Experimental] For accounts with the ProxyAllowParticipantConflict account flag, setting to true enables per-request opt-in to allowing Proxy to return a 400 error (Twilio error code 80604) when a request to set a Session to in-progress would cause Participants with the same Identifier/ProxyIdentifier pair to be active in multiple Sessions. If not provided, requests will be allowed to succeed, and a Debugger notification (80801) will be emitted. Having multiple, active Participants with the same Identifier/ProxyIdentifier pair causes calls and messages from affected Participants to be routed incorrectly. Please note, the default behavior for accounts without the ProxyAllowParticipantConflict flag is to reject the request as described.  This will eventually be the default for all accounts.
+     *
+     * @param bool $failOnParticipantConflict An experimental parameter to override
+     *                                        the ProxyAllowParticipantConflict
+     *                                        account flag on a per-request basis.
+     * @return $this Fluent Builder
+     */
+    public function setFailOnParticipantConflict(bool $failOnParticipantConflict): self {
+        $this->options['failOnParticipantConflict'] = $failOnParticipantConflict;
         return $this;
     }
 

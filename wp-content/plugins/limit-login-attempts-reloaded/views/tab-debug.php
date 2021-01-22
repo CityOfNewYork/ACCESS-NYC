@@ -2,21 +2,25 @@
 
 if( !defined( 'ABSPATH' ) ) exit();
 
+/**
+ * @var $this Limit_Login_Attempts
+ */
+
 $debug_info = '';
 
 $ips = $server = array();
 foreach ($_SERVER as $key => $value) {
 
-	if(in_array($key, ['SERVER_ADDR'])) continue;
+	if( in_array( $key, array( 'SERVER_ADDR' ) ) ) continue;
 
-	if(filter_var($value, FILTER_VALIDATE_IP)) {
+	if( $this->is_ip_valid( $value ) ) {
 
 	    if(!in_array($value, $ips)) {
 
 			$ips[] = $value;
 		}
 
-		if(in_array($value, ['127.0.0.1', '0.0.0.0']))
+		if( in_array( $value, array( '127.0.0.1', '0.0.0.0' ) ) )
 			$server[$key] = $value;
 		else
 			$server[$key] = 'IP'.array_search($value, $ips);

@@ -5,25 +5,25 @@ namespace NYCO;
 use Spyc;
 
 class WpAssets {
-  /** @var String Will be set to the template driectory in the constructor */
+  /** @var String Will be set to the template directory in the constructor */
   public $templates;
 
-  /** @var String Will be set to the template driectory uri in the constructor */
+  /** @var String Will be set to the template directory uri in the constructor */
   public $uri;
 
-  /** @var String The directory within $templates for precompiled static assets */
+  /** @var String The directory within $templates for pre-compiled static assets */
   public $assets = 'assets/';
 
-  /** @var String The directory within $assets for stripts */
+  /** @var String The directory within $assets for scripts */
   public $scripts = 'scripts/';
 
-  /** @var String The directory within $assets for stripts */
+  /** @var String The directory within $assets for scripts */
   public $styles = 'styles/';
 
-  /** @var String The directory within mu for stripts */
+  /** @var String The directory within mu for scripts */
   public $config = 'config/integrations.yml';
 
-  /** @var String Script placeholder that is deregistered for adding inline scripts */
+  /** @var String Script placeholder that is de-registered for adding inline scripts */
   public $placeholder = 'donotprintthis.js';
 
   /** @var String Namespace for registering REST routes */
@@ -82,7 +82,7 @@ class WpAssets {
      * Add the script
      */
 
-    wp_register_script($handle, $src, $deps, $ver, $in_footer);
+    $registered = wp_register_script($handle, $src, $deps, $ver, $in_footer);
 
     if ($enqueue) {
       wp_enqueue_script($handle, $src, $deps, $ver, $in_footer);
@@ -94,7 +94,7 @@ class WpAssets {
     return array(
       'source' => $src,
       'registered' => $registered,
-      'enqueued' => $enqueued
+      'enqueued' => $enqueue
     );
   }
 
@@ -169,14 +169,23 @@ class WpAssets {
   }
 
   /**
-   * Uses the script_loader_tag filter to add crossorigin="anonymous" attribute to a specific script.
+   * Uses the script_loader_tag filter to add attributes to a specific script.
+   * For example to add crossorigin="use-credentials" to a script.
+   *
+   * If the value of the the attribute is a boolean, only the attribute will be
+   * set for example if async: true only async will be added to the script.
    *
    * @param  String  $name  The name of the script.
+   * @param  String  $attr  The name of the attribute ex: crossorigin.
+   * @param  String or Boolean $value The value of the attribute ex: "anonymous"
    */
-  public function addCrossoriginAttr($name) {
-    add_filter('script_loader_tag', function ($tag, $handle) use ($name) {
+  public function addAttr($name, $attr, $value) {
+    add_filter('script_loader_tag', function ($tag, $handle) use ($name, $attr, $value) {
       if ($name === $handle) {
-        return preg_replace('/<script( )*/', '<script crossorigin="anonymous"$1', $tag);
+        $script = '<script ' . (is_bool($value) ? "$attr " : "$attr=$value " ) . '$1';
+        return preg_replace('/<script( )*/', $script, $tag);
+      } else {
+        return $tag;
       }
     }, 10, 2);
   }
@@ -233,6 +242,9 @@ class WpAssets {
    *     'inline' => array( // the inline script
    *       'path' => WPMU_PLUGIN_DIR . '/path/to/my-script.js',
    *       'position' => 'before' // wether it comes before or after the script
+   *     )
+   *     'attrs' => array(
+   *        'crossorigin' => 'anonymous'
    *     ),
    *     'style' => array(
    *       'path' => WPMU_PLUGIN_DIR . '/path/to/css.css'
@@ -323,6 +335,16 @@ class WpAssets {
         $s['body_open']['contents'] = self::getFileContents($s['body_open']['path'], $s['localize']);
         echo $s['body_open']['contents'];
       });
+    }
+
+    /**
+     * Add attributes to script tag
+     */
+
+    if ($s['attrs']) {
+      foreach ($s['attrs'] as $attr => $value) {
+        self::addAttr($s['handle'], $attr, $value);
+      }
     }
 
     return $s;

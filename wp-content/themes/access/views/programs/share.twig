@@ -1,0 +1,44 @@
+<div class="c-share print:hidden pb-2">{% apply spaceless %}
+  <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer" data-js="track" data-track-key="Print" data-track-data='[{"action": "print"}]'>
+    <svg class="c-share__icon icon-ui"  tabindex="-1">
+      <use xlink:href="#icon-ui-printer"></use>
+    </svg>{{ __('Print the whole guide', 'accessnyc-program-detail') }}
+  </a>
+
+  <button aria-controls="web-share-fallback" aria-expanded="false"
+    class="c-share__link btn-link underline font-normal"
+    data-js="web-share track" data-web-share='{{ post.web_share|json_encode|escape }}' data-track-key="Web Share" data-track-data='[{"action": "web-share"}]'>
+    <svg class="c-share__icon icon-ui" tabindex="-1">
+      <use xlink:href="#icon-ui-share-2"></use>
+    </svg>{{ __('Share the guide', 'accessnyctheme') }}
+  </button>
+
+  <div aria-hidden="true" class="c-share__section hidden:fadeInUp animated hidden" id="web-share-fallback" role="region">
+    <label class="block mb-1 sr-only" for="web-share-url" tabindex="-1">
+      <b>{{ __('Share the Guide', 'accessnyctheme') }}</b>
+    </label>
+
+    <input class="c-share__input" data-copy-target="web-share-url" id="web-share-url" name="web-share-url" type="text" value="{{ post.web_share.url }}" tabindex="-1" />
+
+    <button aria-pressed="false" class="c-share__link btn-link underline font-normal" data-copy="web-share-url" data-js="copy track" data-track-key="Web Share" data-track-data='[{"action": "web-share/copied"}]' tabindex="-1">
+      <svg class="c-share__icon icon icon-ui" tabindex="-1">
+        <use xlink:href="#icon-ui-copy"></use>
+      </svg>
+      <svg class="c-share__icon icon-pressed icon-ui me-1" tabindex="-1">
+        <use xlink:href="#icon-ui-check"></use>
+      </svg>{{ __('Copy URL', 'accessnyctheme') }}
+    </button>
+
+    <a class="c-share__link" href="https://www.facebook.com/sharer/sharer.php?u={{ post.web_share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/facebook"}]' tabindex="-1">
+      <svg class="c-share__icon icon-ui" tabindex="-1">
+        <use xlink:href="#icon-ui-facebook"></use>
+      </svg>{{ __('Share on Facebook', 'accessnyctheme') }}
+    </a>
+
+    <a class="c-share__link" href="https://twitter.com/intent/tweet?text={{ post.web_share.text|url_encode }}%20{{ post.web_share.url|url_encode }}" target="_blank" data-js="track" data-track-key="Web Share" data-track-data='[{"action": "web-share/twitter"}]' tabindex="-1">
+      <svg class="c-share__icon icon-ui" tabindex="-1">
+        <use xlink:href="#icon-ui-twitter"></use>
+      </svg>{{ __('Share on Twitter', 'accessnyctheme') }}
+    </a>
+  </div>
+{% endapply %}</div>

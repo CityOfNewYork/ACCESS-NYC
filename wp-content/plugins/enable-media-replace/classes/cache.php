@@ -1,6 +1,8 @@
 <?php
 namespace EnableMediaReplace;
 
+use EnableMediaReplace\ShortPixelLogger\ShortPixelLogger as Log;
+
 class emrCache
 {
     protected $has_supercache  = false; // supercache seems to replace quite fine, without our help. @todo Test if this is needed
@@ -8,6 +10,7 @@ class emrCache
     protected $has_wpengine = false;
     protected $has_fastestcache = false;
     protected $has_siteground = false;
+    protected $has_litespeed = false;
 
     public function __construct()
     {
@@ -33,6 +36,11 @@ class emrCache
       // SG SuperCacher
       if (function_exists('sg_cachepress_purge_cache')) {
 	        $this->has_siteground = true;
+      }
+
+      if (defined( 'LSCWP_DIR' ))
+      {
+          $this->has_litespeed = true;
       }
 
       // @todo WpRocket?
@@ -78,6 +86,10 @@ class emrCache
         if ($this->has_fastestcache)
             $this->removeFastestCache();
 
+        if ($this->has_litespeed)
+            $this->litespeedReset($post_id);
+
+        do_action('emr/cache/flush', $post_id);
     }
 
     protected function removeSuperCache()
@@ -116,6 +128,11 @@ class emrCache
     protected function removeSiteGround()
     {
     		sg_cachepress_purge_cache();
+    }
+
+    protected function litespeedReset($post_id)
+    {
+      do_action('litespeed_media_reset', $post_id);
     }
 
 }

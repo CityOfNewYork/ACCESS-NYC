@@ -1,0 +1,38 @@
+{
+    "name": "nielsdeblaauw/query-monitor-twig-profile",
+    "description": "Displays Twig profiler output in Query Monitor",
+    "type": "wordpress-plugin",
+    "config": {
+        "sort-packages": true
+    },
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org"
+        }
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Niels de Blaauw",
+            "email": "niels.de.blaauw@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "szepeviktor/phpstan-wordpress": "^0.7.1",
+        "twig/twig": "^3.0",
+        "wp-coding-standards/wpcs": "^2.3",
+        "wpackagist-plugin/query-monitor": "^3.6"
+    },
+    "extra": {
+        "installer-paths": {
+            "vendor/wpackagist-plugin/{$name}/": ["type:wordpress-plugin"]
+        }
+    }
+}

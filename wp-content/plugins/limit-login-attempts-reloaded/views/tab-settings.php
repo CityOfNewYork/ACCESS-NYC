@@ -17,11 +17,21 @@ $admin_email_placeholder = (!is_multisite()) ? get_option( 'admin_email' ) : get
 
 $trusted_ip_origins = $this->get_option( 'trusted_ip_origins' );
 $trusted_ip_origins = ( is_array( $trusted_ip_origins ) && !empty( $trusted_ip_origins ) ) ? implode( ", ", $trusted_ip_origins ) : 'REMOTE_ADDR';
+
+$active_app = $this->get_option( 'active_app' );
+$app_setup_code = $this->get_option( 'app_setup_code' );
+$active_app_config = $this->get_custom_app_config();
+
 ?>
+<?php if( isset( $_GET['activated'] ) ) : ?>
+<div class="llar-app-notice success">
+    <p><?php echo $active_app_config['messages']['setup_success']; ?></p>
+</div>
+<?php endif; ?>
 
 <h3><?php echo __( 'General Settings', 'limit-login-attempts-reloaded' ); ?></h3>
-<p><?php echo __( 'These settings are independent of the workers (see below).', 'limit-login-attempts-reloaded' ); ?></p>
-<form action="<?php echo $this->get_options_page_uri(); ?>" method="post">
+<p><?php echo __( 'These settings are independent of the apps (see below).', 'limit-login-attempts-reloaded' ); ?></p>
+<form action="<?php echo $this->get_options_page_uri('settings'); ?>" method="post">
 
     <?php wp_nonce_field( 'limit-login-attempts-options' ); ?>
 
@@ -49,6 +59,7 @@ $trusted_ip_origins = ( is_array( $trusted_ip_origins ) && !empty( $trusted_ip_o
     <?php endif ?>
 
     <table class="form-table">
+		<?php if( $active_app === 'local' ) : ?>
         <tr>
             <th scope="row"
                 valign="top"><?php echo __( 'GDPR compliance', 'limit-login-attempts-reloaded' ); ?></th>
@@ -57,6 +68,8 @@ $trusted_ip_origins = ( is_array( $trusted_ip_origins ) && !empty( $trusted_ip_o
 				<?php echo __( 'this makes the plugin <a href="https://gdpr-info.eu/" target="_blank" >GDPR</a> compliant', 'limit-login-attempts-reloaded' ); ?> <br/>
             </td>
         </tr>
+        <?php endif; ?>
+
         <tr>
             <th scope="row"
                 valign="top"><?php echo __( 'Notify on lockout', 'limit-login-attempts-reloaded' ); ?></th>
@@ -76,13 +89,28 @@ $trusted_ip_origins = ( is_array( $trusted_ip_origins ) && !empty( $trusted_ip_o
                        name="email_after"/> <?php echo __( 'lockouts', 'limit-login-attempts-reloaded' ); ?>
             </td>
         </tr>
+        <tr>
+            <th scope="row"
+                valign="top"><?php echo __( 'Active App', 'limit-login-attempts-reloaded' ); ?></th>
+            <td>
+                <select name="active_app" id="">
+                    <option value="local" <?php selected( $active_app, 'local' ); ?>><?php echo __( 'Local', 'limit-login-attempts-reloaded' ); ?></option>
+                    <?php if( $active_app_config ) : ?>
+                    <option value="custom" <?php selected( $active_app, 'custom' ); ?>><?php echo esc_html( $active_app_config['name'] ); ?></option>
+                    <?php endif; ?>
+                </select>
+                <?php if( $active_app === 'local' ) : ?>
+                <span class="llar-protect-notice"><?php _e( 'Get advanced protection by <a href="#" class="llar-upgrade-to-cloud">upgrading to our Cloud App.</a>', 'limit-login-attempts-reloaded' ); ?></span>
+                <?php endif; ?>
+            </td>
+        </tr>
     </table>
 
-    <h3><?php echo __( 'Worker Settings', 'limit-login-attempts-reloaded' ); ?></h3>
-    <p><?php echo __( 'The workers absorb the main load caused by brute-force attacks, analyse login attempts and block unwanted visitors. They might provide other service functions as well.', 'limit-login-attempts-reloaded' ); ?></p>
+    <h3><?php echo __( 'App Settings', 'limit-login-attempts-reloaded' ); ?></h3>
+    <p><?php echo __( 'The apps absorb the main load caused by brute-force attacks, analyse login attempts and block unwanted visitors. They might provide other service functions as well.', 'limit-login-attempts-reloaded' ); ?></p>
 
-    <div id="llar-workers-accordion" class="llar-accordion">
-        <h3>Local Worker</h3>
+    <div id="llar-apps-accordion" class="llar-accordion">
+        <h3><?php echo __( 'Local App', 'limit-login-attempts-reloaded' ); ?></h3>
         <div>
             <table class="form-table">
                 <tr>
@@ -121,20 +149,162 @@ $trusted_ip_origins = ( is_array( $trusted_ip_origins ) && !empty( $trusted_ip_o
             </table>
         </div>
 
-        <h3>Custom Worker</h3>
-        <div>
-            <p>
-                In the future versions of the plugin you will be able to create your own worker. This will allow you to share White/Black lists and lockout functionality across all your websites. Stay tuned.
-            </p>
+        <h3><?php echo ($active_app_config) ? $active_app_config['name'] : __('Custom App', 'limit-login-attempts-reloaded' ); ?></h3>
+        <div class="custom-app-tab">
+
+			<?php if( $active_app === 'custom' ) : ?>
+                <a class="dashicons dashicons-admin-generic llar-show-app-fields" href="#"></a>
+			<?php endif; ?>
+
+            <table class="form-table">
+
+                <tr class="llar-app-field <?php echo ( $active_app === 'local' || !$active_app_config ) ? 'active' : ''; ?>">
+                    <th scope="row"
+                        valign="top"><?php echo __( 'Setup Code', 'limit-login-attempts-reloaded' ); ?></th>
+                    <td>
+                        <input type="text" class="regular-text" id="limit-login-app-setup-link" value="<?php echo ( !empty( $app_setup_code ) ) ? esc_attr( $app_setup_code ) : ''; ?>">
+                        <button class="button" id="limit-login-app-setup"><?php echo __( 'Submit', 'limit-login-attempts-reloaded' ); ?></button>
+                        <span class="spinner llar-app-ajax-spinner"></span><br>
+                        <span class="llar-app-ajax-msg"></span>
+
+						<?php if( $active_app === 'local' ) : ?>
+                        <p class="description"><?php echo sprintf(
+                                __( 'Use the <a href="%s" target="_blank">premium app</a> that we offer or follow the instructions on <a href="%s" target="_blank">how to</a> create your own one.', 'limit-login-attempts-reloaded' ),
+                                'https://www.limitloginattempts.com/info.php?from=plugin-settings',
+                                'https://www.limitloginattempts.com/app/?from=plugin-settings' );
+                        ?></p>
+                        <div class="llar-why-use-premium-text">
+                            <div class="title"><?php _e( 'Why Use Our Premium Cloud App?', 'limit-login-attempts-reloaded' ); ?></div>
+                            <ul>
+                                <li><span class="dashicons dashicons-yes"></span><?php _e( 'Absorb site load caused by attacks', 'limit-login-attempts-reloaded' ); ?></li>
+                                <li><span class="dashicons dashicons-yes"></span><?php _e( 'Use intelligent IP blocking/unblocking technology', 'limit-login-attempts-reloaded' ); ?></li>
+                                <li><span class="dashicons dashicons-yes"></span><?php _e( 'Sync the allow/deny/pass lists between multiple domains', 'limit-login-attempts-reloaded' ); ?></li>
+                                <li><span class="dashicons dashicons-yes"></span><?php _e( 'Get premium support', 'limit-login-attempts-reloaded' ); ?></li>
+                                <li><span class="dashicons dashicons-yes"></span><?php _e( 'Run auto backups of access control lists, lockouts and logs', 'limit-login-attempts-reloaded' ); ?></li>
+                                <li><span class="dashicons dashicons-yes"></span><?php _e( 'Only pay $4.99/m per domain - cancel any time', 'limit-login-attempts-reloaded' ); ?></li>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+				<?php if( $active_app === 'custom' && $active_app_config ) : ?>
+                <tr class="llar-app-field">
+                    <th scope="row"
+                        valign="top"><?php echo __( 'Configuration', 'limit-login-attempts-reloaded' ); ?></th>
+                    <td>
+                        <div class="field-col">
+                            <textarea id="limit-login-app-config" readonly="readonly" name="limit-login-app-config" cols="60" rows="5"><?php echo esc_textarea( json_encode( $active_app_config ) ); ?></textarea><br>
+                        </div>
+                    </td>
+                </tr>
+                <?php endif; ?>
+
+                <?php if( $active_app === 'custom' && !empty( $active_app_config['settings'] ) ) : ?>
+                    <?php foreach( $active_app_config['settings'] as $setting_name => $setting_params ) : ?>
+                        <tr>
+                            <th scope="row" valign="top"><?php echo $setting_params['label']; ?></th>
+                            <td>
+                                <div class="field-col">
+                                    <?php if( !empty( $setting_params['options'] ) ) : ?>
+                                        <select name="llar_app_settings[<?php echo $setting_name; ?>]">
+                                            <?php foreach ( $setting_params['options'] as $option ) : ?>
+                                                <option value="<?php echo esc_attr( $option ); ?>" <?php selected( $option, $setting_params['value'] ); ?>><?php echo esc_html( $option ); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    <?php else : ?>
+                                        <input type="text" class="regular-text" name="llar_app_settings[<?php echo esc_attr( $setting_name ); ?>]" value="<?php echo esc_attr( $setting_params['value'] ); ?>">
+                                    <?php endif; ?>
+
+                                    <p class="description"><?php echo esc_html( $setting_params['description'] ); ?></p>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
         </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
         (function($){
 
             $(document).ready(function(){
 
-                $( "#llar-workers-accordion" ).accordion();
+                $( "#llar-apps-accordion" ).accordion({
+                    heightStyle: "content",
+                    active: <?php echo ( $active_app === 'local' ) ? 0 : 1; ?>
+                });
+
+                var $app_ajax_spinner = $('.llar-app-ajax-spinner'),
+                    $app_ajax_msg = $('.llar-app-ajax-msg'),
+                    $app_config_field = $('#limit-login-app-config');
+
+                if($app_config_field.val()) {
+                    var pretty = JSON.stringify(JSON.parse($app_config_field.val()), undefined, 2);
+                    $app_config_field.val(pretty);
+                }
+
+                $('#limit-login-app-setup').on('click', function(e) {
+                    e.preventDefault();
+
+                    $app_ajax_msg.text('').removeClass('success error');
+                    $app_ajax_spinner.css('visibility', 'visible');
+
+                    var setup_link = $('#limit-login-app-setup-link').val();
+
+                    $.post(ajaxurl, {
+                        action: 'app_setup',
+                        link: setup_link,
+                        sec: '<?php echo esc_js( wp_create_nonce( "llar-action" ) ); ?>'
+                    }, function(response){
+
+                        if(!response.success) {
+
+                            $app_ajax_msg.addClass('error');
+                        } else {
+
+                            $app_ajax_msg.addClass('success');
+
+                            setTimeout(function(){
+
+                                window.location = window.location + '&activated';
+
+                            }, 1000);
+                        }
+
+                        if(!response.success && response.data.msg) {
+
+                            $app_ajax_msg.text(response.data.msg);
+                        }
+
+                        $app_ajax_spinner.css('visibility', 'hidden');
+
+                        setTimeout(function(){
+
+                            $app_ajax_msg.text('').removeClass('success error');
+
+                        }, 5000);
+                    });
+
+                });
+
+                $('.llar-show-app-fields').on('click', function(e){
+                    e.preventDefault();
+
+                    $('.llar-app-field').toggleClass('active');
+
+                });
+
+                $('.llar-upgrade-to-cloud').on('click', function(e){
+                	e.preventDefault();
+
+					$("#ui-id-3").click();
+
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("#llar-apps-accordion").offset().top
+                    }, 500);
+                });
+
             });
 
         })(jQuery);

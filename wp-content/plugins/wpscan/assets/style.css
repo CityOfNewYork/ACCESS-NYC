@@ -1,0 +1,48 @@
+
+/* Table list */
+
+.wp-list-table.plugins .plugin-title { white-space: normal; }
+
+.is-gray { color: gray; }
+.is-green { color: green; }
+.is-red { color: crimson; }
+
+@media screen and (max-width: 782px) {
+  .wp-list-table.plugins tr th.check-column { padding: 0 0 0 10px; }
+}
+
+/* Summary */
+
+#metabox-summary h2 { cursor: default; }
+#metabox-summary button.handlediv { display: none; }
+#metabox-summary .check-now { padding: 0; text-align: right; }
+#metabox-summary .spinner { float: none; margin-top: 0; }
+
+@media screen and (max-width: 850px) {
+  #metabox-summary { margin-top: 20px; }
+}
+
+/* Notification */
+
+#metabox-notification h2 { cursor: default; }
+#metabox-notification button.handlediv { display: none; }
+#metabox-notification table,
+#metabox-notification tbody,
+#metabox-notification tr,
+#metabox-notification th,
+#metabox-notification td { display: block; width: 100%; }
+#metabox-notification th { padding: .5em 0; }
+#metabox-notification td { padding: 0; }
+#metabox-notification th,
+#metabox-notification td,
+#metabox-notification td p { font-size: 13px; }
+#metabox-notification input[type="text"] { width: 100%; }
+#metabox-notification label { position: relative; display: block; padding-left: 25px; margin: 0 0 10px; }
+#metabox-notification label + br { display: none; }
+#metabox-notification input[type="checkbox"] { margin-left: -25px; }
+#metabox-notification .submit { padding: 0; text-align: right; }
+
+@media screen and (max-width: 782px) {
+  #metabox-notification label { padding-left: 35px; }
+  #metabox-notification input[type="checkbox"] { margin-left: -35px; }
+}

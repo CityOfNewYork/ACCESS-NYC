@@ -13,7 +13,7 @@ use Twilio\Options;
 use Twilio\Values;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  */
 abstract class ServiceOptions {
     /**
@@ -31,8 +31,8 @@ abstract class ServiceOptions {
      * @param bool $includeCredentials Whether to inject Account credentials into a
      *                                 function invocation context
      * @param string $friendlyName A string to describe the Service resource
-     * @param bool $uiEditable Whether the Service's properties and subresources
-     *                         can be edited via the UI
+     * @param bool $uiEditable Whether the Service resource's properties and
+     *                         subresources can be edited via the UI
      * @return UpdateServiceOptions Options builder
      */
     public static function update(bool $includeCredentials = Values::NONE, string $friendlyName = Values::NONE, bool $uiEditable = Values::NONE): UpdateServiceOptions {
@@ -53,7 +53,7 @@ class CreateServiceOptions extends Options {
     }
 
     /**
-     * Whether to inject Account credentials into a function invocation context. The default value is `false`.
+     * Whether to inject Account credentials into a function invocation context. The default value is `true`.
      *
      * @param bool $includeCredentials Whether to inject Account credentials into a
      *                                 function invocation context
@@ -92,8 +92,8 @@ class UpdateServiceOptions extends Options {
      * @param bool $includeCredentials Whether to inject Account credentials into a
      *                                 function invocation context
      * @param string $friendlyName A string to describe the Service resource
-     * @param bool $uiEditable Whether the Service's properties and subresources
-     *                         can be edited via the UI
+     * @param bool $uiEditable Whether the Service resource's properties and
+     *                         subresources can be edited via the UI
      */
     public function __construct(bool $includeCredentials = Values::NONE, string $friendlyName = Values::NONE, bool $uiEditable = Values::NONE) {
         $this->options['includeCredentials'] = $includeCredentials;
@@ -114,7 +114,7 @@ class UpdateServiceOptions extends Options {
     }
 
     /**
-     * A descriptive string that you create to describe the Service resource. It can be up to 255 characters long.
+     * A descriptive string that you create to describe the Service resource. It can be a maximum of 255 characters.
      *
      * @param string $friendlyName A string to describe the Service resource
      * @return $this Fluent Builder
@@ -125,10 +125,10 @@ class UpdateServiceOptions extends Options {
     }
 
     /**
-     * Whether the Service's properties and subresources can be edited via the UI. The default value is `false`.
+     * Whether the Service resource's properties and subresources can be edited via the UI. The default value is `false`.
      *
-     * @param bool $uiEditable Whether the Service's properties and subresources
-     *                         can be edited via the UI
+     * @param bool $uiEditable Whether the Service resource's properties and
+     *                         subresources can be edited via the UI
      * @return $this Fluent Builder
      */
     public function setUiEditable(bool $uiEditable): self {

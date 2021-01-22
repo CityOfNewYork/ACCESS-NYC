@@ -116,17 +116,17 @@
     },
     {
         "name": "aws/aws-sdk-php",
-        "version": "3.142.7",
-        "version_normalized": "3.142.7.0",
+        "version": "3.168.1",
+        "version_normalized": "3.168.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/aws/aws-sdk-php.git",
-            "reference": "42f1b348f28388233aa6a0c395f8adc29e8cb752"
+            "reference": "d648085cce7bfadc8973a8ded401921583c1e3f9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/42f1b348f28388233aa6a0c395f8adc29e8cb752",
-            "reference": "42f1b348f28388233aa6a0c395f8adc29e8cb752",
+            "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d648085cce7bfadc8973a8ded401921583c1e3f9",
+            "reference": "d648085cce7bfadc8973a8ded401921583c1e3f9",
             "shasum": ""
         },
         "require": {
@@ -162,7 +162,7 @@
             "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
             "ext-sockets": "To use client-side monitoring"
         },
-        "time": "2020-06-22T18:15:41+00:00",
+        "time": "2020-12-09T19:17:01+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -412,37 +412,37 @@
     },
     {
         "name": "filp/whoops",
-        "version": "2.7.3",
-        "version_normalized": "2.7.3.0",
+        "version": "2.9.1",
+        "version_normalized": "2.9.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/filp/whoops.git",
-            "reference": "5d5fe9bb3d656b514d455645b3addc5f7ba7714d"
+            "reference": "307fb34a5ab697461ec4c9db865b20ff2fd40771"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/filp/whoops/zipball/5d5fe9bb3d656b514d455645b3addc5f7ba7714d",
-            "reference": "5d5fe9bb3d656b514d455645b3addc5f7ba7714d",
+            "url": "https://api.github.com/repos/filp/whoops/zipball/307fb34a5ab697461ec4c9db865b20ff2fd40771",
+            "reference": "307fb34a5ab697461ec4c9db865b20ff2fd40771",
             "shasum": ""
         },
         "require": {
-            "php": "^5.5.9 || ^7.0",
+            "php": "^5.5.9 || ^7.0 || ^8.0",
             "psr/log": "^1.0.1"
         },
         "require-dev": {
             "mockery/mockery": "^0.9 || ^1.0",
-            "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0",
+            "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.3",
             "symfony/var-dumper": "^2.6 || ^3.0 || ^4.0 || ^5.0"
         },
         "suggest": {
             "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
             "whoops/soap": "Formats errors as SOAP responses"
         },
-        "time": "2020-06-14T09:00:00+00:00",
+        "time": "2020-11-01T12:00:00+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.6-dev"
+                "dev-master": "2.7-dev"
             }
         },
         "installation-source": "dist",
@@ -475,39 +475,45 @@
     },
     {
         "name": "guzzlehttp/guzzle",
-        "version": "6.5.5",
-        "version_normalized": "6.5.5.0",
+        "version": "7.2.0",
+        "version_normalized": "7.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "9d4290de1cfd701f38099ef7e183b64b4b7b0c5e"
+            "reference": "0aa74dfb41ae110835923ef10a9d803a22d50e79"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/9d4290de1cfd701f38099ef7e183b64b4b7b0c5e",
-            "reference": "9d4290de1cfd701f38099ef7e183b64b4b7b0c5e",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0aa74dfb41ae110835923ef10a9d803a22d50e79",
+            "reference": "0aa74dfb41ae110835923ef10a9d803a22d50e79",
             "shasum": ""
         },
         "require": {
             "ext-json": "*",
-            "guzzlehttp/promises": "^1.0",
-            "guzzlehttp/psr7": "^1.6.1",
-            "php": ">=5.5",
-            "symfony/polyfill-intl-idn": "^1.17.0"
+            "guzzlehttp/promises": "^1.4",
+            "guzzlehttp/psr7": "^1.7",
+            "php": "^7.2.5 || ^8.0",
+            "psr/http-client": "^1.0"
+        },
+        "provide": {
+            "psr/http-client-implementation": "1.0"
         },
         "require-dev": {
             "ext-curl": "*",
-            "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
+            "php-http/client-integration-tests": "^3.0",
+            "phpunit/phpunit": "^8.5.5 || ^9.3.5",
             "psr/log": "^1.1"
         },
         "suggest": {
+            "ext-curl": "Required for CURL handler support",
+            "ext-intl": "Required for Internationalized Domain Name (IDN) support",
             "psr/log": "Required for using the Log middleware"
         },
-        "time": "2020-06-16T21:01:06+00:00",
+        "time": "2020-10-10T11:47:56+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "6.5-dev"
+                "dev-master": "7.1-dev"
             }
         },
         "installation-source": "dist",
@@ -528,6 +534,11 @@
                 "name": "Michael Dowling",
                 "email": "mtdowling@gmail.com",
                 "homepage": "https://github.com/mtdowling"
+            },
+            {
+                "name": "Márk Sági-Kazár",
+                "email": "mark.sagikazar@gmail.com",
+                "homepage": "https://sagikazarmark.hu"
             }
         ],
         "description": "Guzzle is a PHP HTTP client library",
@@ -538,32 +549,34 @@
             "framework",
             "http",
             "http client",
+            "psr-18",
+            "psr-7",
             "rest",
             "web service"
         ]
     },
     {
         "name": "guzzlehttp/promises",
-        "version": "v1.3.1",
-        "version_normalized": "1.3.1.0",
+        "version": "1.4.0",
+        "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/promises.git",
-            "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
+            "reference": "60d379c243457e073cff02bc323a2a86cb355631"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-            "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+            "url": "https://api.github.com/repos/guzzle/promises/zipball/60d379c243457e073cff02bc323a2a86cb355631",
+            "reference": "60d379c243457e073cff02bc323a2a86cb355631",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.5.0"
+            "php": ">=5.5"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.0"
+            "symfony/phpunit-bridge": "^4.4 || ^5.1"
         },
-        "time": "2016-12-20T10:07:11+00:00",
+        "time": "2020-09-30T07:37:28+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -597,17 +610,17 @@
     },
     {
         "name": "guzzlehttp/psr7",
-        "version": "1.6.1",
-        "version_normalized": "1.6.1.0",
+        "version": "1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/psr7.git",
-            "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
+            "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
-            "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/53330f47520498c0ae1f61f7e2c90f55690c06a3",
+            "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3",
             "shasum": ""
         },
         "require": {
@@ -620,16 +633,16 @@
         },
         "require-dev": {
             "ext-zlib": "*",
-            "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
+            "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
         },
         "suggest": {
-            "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
+            "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
         },
-        "time": "2019-07-01T23:21:34+00:00",
+        "time": "2020-09-30T07:37:11+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.6-dev"
+                "dev-master": "1.7-dev"
             }
         },
         "installation-source": "dist",
@@ -670,24 +683,24 @@
     },
     {
         "name": "humanmade/s3-uploads",
-        "version": "2.2.1",
-        "version_normalized": "2.2.1.0",
+        "version": "2.2.2",
+        "version_normalized": "2.2.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/humanmade/S3-Uploads.git",
-            "reference": "bc1df42517c1ccbfbfc61fe4802008d22948a9b8"
+            "reference": "577886b941438793a5721bbbb6eddc6872ee73cb"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/bc1df42517c1ccbfbfc61fe4802008d22948a9b8",
-            "reference": "bc1df42517c1ccbfbfc61fe4802008d22948a9b8",
+            "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/577886b941438793a5721bbbb6eddc6872ee73cb",
+            "reference": "577886b941438793a5721bbbb6eddc6872ee73cb",
             "shasum": ""
         },
         "require": {
             "aws/aws-sdk-php": "~3.18",
             "composer/installers": "~1.0"
         },
-        "time": "2019-11-18T16:44:45+00:00",
+        "time": "2020-07-08T12:09:08+00:00",
         "type": "wordpress-plugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -867,35 +880,35 @@
     },
     {
         "name": "mtdowling/jmespath.php",
-        "version": "2.5.0",
-        "version_normalized": "2.5.0.0",
+        "version": "2.6.0",
+        "version_normalized": "2.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/jmespath/jmespath.php.git",
-            "reference": "52168cb9472de06979613d365c7f1ab8798be895"
+            "reference": "42dae2cbd13154083ca6d70099692fef8ca84bfb"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/jmespath/jmespath.php/zipball/52168cb9472de06979613d365c7f1ab8798be895",
-            "reference": "52168cb9472de06979613d365c7f1ab8798be895",
+            "url": "https://api.github.com/repos/jmespath/jmespath.php/zipball/42dae2cbd13154083ca6d70099692fef8ca84bfb",
+            "reference": "42dae2cbd13154083ca6d70099692fef8ca84bfb",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.4.0",
-            "symfony/polyfill-mbstring": "^1.4"
+            "php": "^5.4 || ^7.0 || ^8.0",
+            "symfony/polyfill-mbstring": "^1.17"
         },
         "require-dev": {
-            "composer/xdebug-handler": "^1.2",
-            "phpunit/phpunit": "^4.8.36|^7.5.15"
+            "composer/xdebug-handler": "^1.4",
+            "phpunit/phpunit": "^4.8.36 || ^7.5.15"
         },
-        "time": "2019-12-30T18:03:34+00:00",
+        "time": "2020-07-31T21:01:56+00:00",
         "bin": [
             "bin/jp.php"
         ],
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.5-dev"
+                "dev-master": "2.6-dev"
             }
         },
         "installation-source": "dist",
@@ -978,17 +991,17 @@
     },
     {
         "name": "nesbot/carbon",
-        "version": "2.35.0",
-        "version_normalized": "2.35.0.0",
+        "version": "2.42.0",
+        "version_normalized": "2.42.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/briannesbitt/Carbon.git",
-            "reference": "4b9bd835261ef23d36397a46a76b496a458305e5"
+            "reference": "d0463779663437392fe42ff339ebc0213bd55498"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4b9bd835261ef23d36397a46a76b496a458305e5",
-            "reference": "4b9bd835261ef23d36397a46a76b496a458305e5",
+            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d0463779663437392fe42ff339ebc0213bd55498",
+            "reference": "d0463779663437392fe42ff339ebc0213bd55498",
             "shasum": ""
         },
         "require": {
@@ -1000,13 +1013,14 @@
         "require-dev": {
             "doctrine/orm": "^2.7",
             "friendsofphp/php-cs-fixer": "^2.14 || ^3.0",
-            "kylekatarnls/multi-tester": "^1.1",
-            "phpmd/phpmd": "^2.8",
-            "phpstan/phpstan": "^0.11",
+            "kylekatarnls/multi-tester": "^2.0",
+            "phpmd/phpmd": "^2.9",
+            "phpstan/extension-installer": "^1.0",
+            "phpstan/phpstan": "^0.12.54",
             "phpunit/phpunit": "^7.5 || ^8.0",
             "squizlabs/php_codesniffer": "^3.4"
         },
-        "time": "2020-05-24T18:27:52+00:00",
+        "time": "2020-11-28T14:25:28+00:00",
         "bin": [
             "bin/carbon"
         ],
@@ -1019,6 +1033,11 @@
             "laravel": {
                 "providers": [
                     "Carbon\\Laravel\\ServiceProvider"
+                ]
+            },
+            "phpstan": {
+                "includes": [
+                    "extension.neon"
                 ]
             }
         },
@@ -1052,34 +1071,81 @@
         ]
     },
     {
-        "name": "nyco/wp-assets",
-        "version": "1.1.5",
-        "version_normalized": "1.1.5.0",
+        "name": "nielsdeblaauw/query-monitor-twig-profile",
+        "version": "1.3.1",
+        "version_normalized": "1.3.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
-            "reference": "47c074595ca8d21af46a4a8ec62a40b54a94f904"
+            "url": "https://github.com/NielsdeBlaauw/query-monitor-twig-profile.git",
+            "reference": "cc5b1588154935168d783b72c8d1010d43b69ea5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/47c074595ca8d21af46a4a8ec62a40b54a94f904",
-            "reference": "47c074595ca8d21af46a4a8ec62a40b54a94f904",
+            "url": "https://api.github.com/repos/NielsdeBlaauw/query-monitor-twig-profile/zipball/cc5b1588154935168d783b72c8d1010d43b69ea5",
+            "reference": "cc5b1588154935168d783b72c8d1010d43b69ea5",
             "shasum": ""
         },
         "require": {
-            "composer/installers": "^1.7",
+            "php": ">=7.0"
+        },
+        "require-dev": {
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+            "phpcompatibility/php-compatibility": "^9.3",
+            "szepeviktor/phpstan-wordpress": "^0.7.1",
+            "twig/twig": "^3.0",
+            "wp-coding-standards/wpcs": "^2.3",
+            "wpackagist-plugin/query-monitor": "^3.6"
+        },
+        "time": "2020-12-23T14:50:27+00:00",
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-paths": {
+                "vendor/wpackagist-plugin/{$name}/": [
+                    "type:wordpress-plugin"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Niels de Blaauw",
+                "email": "niels.de.blaauw@gmail.com"
+            }
+        ],
+        "description": "Displays Twig profiler output in Query Monitor"
+    },
+    {
+        "name": "nyco/wp-assets",
+        "version": "1.3.0",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/CityOfNewYork/nyco-wp-assets.git",
+            "reference": "01b4e6ae23a097483b7ca2bdcf6809d52389eeb2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-assets/zipball/01b4e6ae23a097483b7ca2bdcf6809d52389eeb2",
+            "reference": "01b4e6ae23a097483b7ca2bdcf6809d52389eeb2",
+            "shasum": ""
+        },
+        "require": {
+            "composer/installers": "^1.9",
             "mustangostang/spyc": "^0.6"
         },
         "require-dev": {
-            "codeception/codeception": "^2.3",
-            "squizlabs/php_codesniffer": "3.*"
+            "squizlabs/php_codesniffer": "^3.5"
         },
-        "time": "2020-04-09T20:46:50+00:00",
+        "time": "2020-11-30T21:47:25+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "GPL-3.0+"
+            "GPL-3.0-or-later"
         ],
         "authors": [
             {
@@ -1099,6 +1165,8 @@
             "integrations",
             "javascript",
             "nycopportunity",
+            "query-monitor",
+            "querymonitor",
             "register",
             "scripts",
             "styles",
@@ -1108,17 +1176,17 @@
     },
     {
         "name": "nyco/wp-config",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-config.git",
-            "reference": "04d74c5b78030066e1c334943e0a10da2e78e2a9"
+            "reference": "443a2a8f35a2eaf236ce2261db1546598900b73b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/04d74c5b78030066e1c334943e0a10da2e78e2a9",
-            "reference": "04d74c5b78030066e1c334943e0a10da2e78e2a9",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-config/zipball/443a2a8f35a2eaf236ce2261db1546598900b73b",
+            "reference": "443a2a8f35a2eaf236ce2261db1546598900b73b",
             "shasum": ""
         },
         "require": {
@@ -1127,10 +1195,9 @@
             "mustangostang/spyc": "^0.6"
         },
         "require-dev": {
-            "codeception/codeception": "^2.3",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2020-04-09T20:44:23+00:00",
+        "time": "2020-10-07T02:14:17+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -1151,7 +1218,11 @@
             "constants",
             "environment",
             "wordpress"
-        ]
+        ],
+        "support": {
+            "issues": "https://github.com/cityofnewyork/nyco-wp-config/issues",
+            "source": "https://github.com/CityOfNewYork/nyco-wp-config/tree/v1.0.2"
+        }
     },
     {
         "name": "nyco/wp-open-data-transients",
@@ -1251,29 +1322,29 @@
     },
     {
         "name": "nyco/wp-send-me-nyc",
-        "version": "1.2.2",
-        "version_normalized": "1.2.2.0",
+        "version": "1.3.2",
+        "version_normalized": "1.3.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc.git",
-            "reference": "b61c0ab0cae4c8111fc87b81d4e95ac08789f005"
+            "reference": "9c1d580c38d4b45f1cb1a5250f2d335c6853e71f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/b61c0ab0cae4c8111fc87b81d4e95ac08789f005",
-            "reference": "b61c0ab0cae4c8111fc87b81d4e95ac08789f005",
+            "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/9c1d580c38d4b45f1cb1a5250f2d335c6853e71f",
+            "reference": "9c1d580c38d4b45f1cb1a5250f2d335c6853e71f",
             "shasum": ""
         },
         "require": {
-            "aws/aws-sdk-php": "^3.142.7",
+            "aws/aws-sdk-php": "^3.166.2",
             "composer/installers": "^1.9.0",
             "soundasleep/html2text": "^1.1",
-            "twilio/sdk": "^6.7.0"
+            "twilio/sdk": "^6.15.0"
         },
         "require-dev": {
-            "squizlabs/php_codesniffer": "^3.5"
+            "squizlabs/php_codesniffer": "^3.5.8"
         },
-        "time": "2020-06-22T18:30:50+00:00",
+        "time": "2020-12-09T22:14:11+00:00",
         "type": "wordpress-muplugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -1395,6 +1466,57 @@
             "container-interface",
             "container-interop",
             "psr"
+        ]
+    },
+    {
+        "name": "psr/http-client",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/http-client.git",
+            "reference": "2dfb5f6c5eff0e91e20e913f8c5452ed95b86621"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/http-client/zipball/2dfb5f6c5eff0e91e20e913f8c5452ed95b86621",
+            "reference": "2dfb5f6c5eff0e91e20e913f8c5452ed95b86621",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.0 || ^8.0",
+            "psr/http-message": "^1.0"
+        },
+        "time": "2020-06-29T06:28:15+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Http\\Client\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for HTTP clients",
+        "homepage": "https://github.com/php-fig/http-client",
+        "keywords": [
+            "http",
+            "http-client",
+            "psr",
+            "psr-18"
         ]
     },
     {
@@ -1644,17 +1766,17 @@
     },
     {
         "name": "squizlabs/php_codesniffer",
-        "version": "3.5.5",
-        "version_normalized": "3.5.5.0",
+        "version": "3.5.8",
+        "version_normalized": "3.5.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-            "reference": "73e2e7f57d958e7228fce50dc0c61f58f017f9f6"
+            "reference": "9d583721a7157ee997f235f327de038e7ea6dac4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/73e2e7f57d958e7228fce50dc0c61f58f017f9f6",
-            "reference": "73e2e7f57d958e7228fce50dc0c61f58f017f9f6",
+            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9d583721a7157ee997f235f327de038e7ea6dac4",
+            "reference": "9d583721a7157ee997f235f327de038e7ea6dac4",
             "shasum": ""
         },
         "require": {
@@ -1666,7 +1788,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
         },
-        "time": "2020-04-17T01:09:41+00:00",
+        "time": "2020-10-23T02:01:07+00:00",
         "bin": [
             "bin/phpcs",
             "bin/phpcbf"
@@ -1697,30 +1819,30 @@
     },
     {
         "name": "symfony/polyfill-ctype",
-        "version": "v1.17.1",
-        "version_normalized": "1.17.1.0",
+        "version": "v1.20.0",
+        "version_normalized": "1.20.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-ctype.git",
-            "reference": "2edd75b8b35d62fd3eeabba73b26b8f1f60ce13d"
+            "reference": "f4ba089a5b6366e453971d3aad5fe8e897b37f41"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/2edd75b8b35d62fd3eeabba73b26b8f1f60ce13d",
-            "reference": "2edd75b8b35d62fd3eeabba73b26b8f1f60ce13d",
+            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f4ba089a5b6366e453971d3aad5fe8e897b37f41",
+            "reference": "f4ba089a5b6366e453971d3aad5fe8e897b37f41",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "php": ">=7.1"
         },
         "suggest": {
             "ext-ctype": "For best performance"
         },
-        "time": "2020-06-06T08:46:27+00:00",
+        "time": "2020-10-23T14:02:19+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.17-dev"
+                "dev-main": "1.20-dev"
             },
             "thanks": {
                 "name": "symfony/polyfill",
@@ -1760,99 +1882,31 @@
         ]
     },
     {
-        "name": "symfony/polyfill-intl-idn",
-        "version": "v1.17.1",
-        "version_normalized": "1.17.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-intl-idn.git",
-            "reference": "a57f8161502549a742a63c09f0a604997bf47027"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/a57f8161502549a742a63c09f0a604997bf47027",
-            "reference": "a57f8161502549a742a63c09f0a604997bf47027",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "symfony/polyfill-mbstring": "^1.3",
-            "symfony/polyfill-php72": "^1.10"
-        },
-        "suggest": {
-            "ext-intl": "For best performance"
-        },
-        "time": "2020-06-06T08:46:27+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.17-dev"
-            },
-            "thanks": {
-                "name": "symfony/polyfill",
-                "url": "https://github.com/symfony/polyfill"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Intl\\Idn\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Laurent Bassin",
-                "email": "laurent@bassin.info"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "idn",
-            "intl",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
         "name": "symfony/polyfill-mbstring",
-        "version": "v1.17.1",
-        "version_normalized": "1.17.1.0",
+        "version": "v1.20.0",
+        "version_normalized": "1.20.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "7110338d81ce1cbc3e273136e4574663627037a7"
+            "reference": "39d483bdf39be819deabf04ec872eb0b2410b531"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7110338d81ce1cbc3e273136e4574663627037a7",
-            "reference": "7110338d81ce1cbc3e273136e4574663627037a7",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/39d483bdf39be819deabf04ec872eb0b2410b531",
+            "reference": "39d483bdf39be819deabf04ec872eb0b2410b531",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "php": ">=7.1"
         },
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2020-06-06T08:46:27+00:00",
+        "time": "2020-10-23T14:02:19+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.17-dev"
+                "dev-main": "1.20-dev"
             },
             "thanks": {
                 "name": "symfony/polyfill",
@@ -1893,37 +1947,44 @@
         ]
     },
     {
-        "name": "symfony/polyfill-php72",
-        "version": "v1.17.0",
-        "version_normalized": "1.17.0.0",
+        "name": "symfony/polyfill-php80",
+        "version": "v1.20.0",
+        "version_normalized": "1.20.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/polyfill-php72.git",
-            "reference": "f048e612a3905f34931127360bdd2def19a5e582"
+            "url": "https://github.com/symfony/polyfill-php80.git",
+            "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/f048e612a3905f34931127360bdd2def19a5e582",
-            "reference": "f048e612a3905f34931127360bdd2def19a5e582",
+            "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
+            "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "php": ">=7.1"
         },
-        "time": "2020-05-12T16:47:27+00:00",
+        "time": "2020-10-23T14:02:19+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.17-dev"
+                "dev-main": "1.20-dev"
+            },
+            "thanks": {
+                "name": "symfony/polyfill",
+                "url": "https://github.com/symfony/polyfill"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Symfony\\Polyfill\\Php72\\": ""
+                "Symfony\\Polyfill\\Php80\\": ""
             },
             "files": [
                 "bootstrap.php"
+            ],
+            "classmap": [
+                "Resources/stubs"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -1931,6 +1992,10 @@
             "MIT"
         ],
         "authors": [
+            {
+                "name": "Ion Bazan",
+                "email": "ion.bazan@gmail.com"
+            },
             {
                 "name": "Nicolas Grekas",
                 "email": "p@tchwork.com"
@@ -1940,7 +2005,7 @@
                 "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
+        "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
         "homepage": "https://symfony.com",
         "keywords": [
             "compatibility",
@@ -1951,58 +2016,58 @@
     },
     {
         "name": "symfony/translation",
-        "version": "v4.4.10",
-        "version_normalized": "4.4.10.0",
+        "version": "v5.2.0",
+        "version_normalized": "5.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/translation.git",
-            "reference": "79d3ef9096a6a6047dbc69218b68c7b7f63193af"
+            "reference": "52f486a707510884450df461b5a6429dd7a67379"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/translation/zipball/79d3ef9096a6a6047dbc69218b68c7b7f63193af",
-            "reference": "79d3ef9096a6a6047dbc69218b68c7b7f63193af",
+            "url": "https://api.github.com/repos/symfony/translation/zipball/52f486a707510884450df461b5a6429dd7a67379",
+            "reference": "52f486a707510884450df461b5a6429dd7a67379",
             "shasum": ""
         },
         "require": {
-            "php": ">=7.1.3",
+            "php": ">=7.2.5",
             "symfony/polyfill-mbstring": "~1.0",
-            "symfony/translation-contracts": "^1.1.6|^2"
+            "symfony/polyfill-php80": "^1.15",
+            "symfony/translation-contracts": "^2.3"
         },
         "conflict": {
-            "symfony/config": "<3.4",
-            "symfony/dependency-injection": "<3.4",
-            "symfony/http-kernel": "<4.4",
-            "symfony/yaml": "<3.4"
+            "symfony/config": "<4.4",
+            "symfony/dependency-injection": "<5.0",
+            "symfony/http-kernel": "<5.0",
+            "symfony/twig-bundle": "<5.0",
+            "symfony/yaml": "<4.4"
         },
         "provide": {
-            "symfony/translation-implementation": "1.0"
+            "symfony/translation-implementation": "2.0"
         },
         "require-dev": {
             "psr/log": "~1.0",
-            "symfony/config": "^3.4|^4.0|^5.0",
-            "symfony/console": "^3.4|^4.0|^5.0",
-            "symfony/dependency-injection": "^3.4|^4.0|^5.0",
-            "symfony/finder": "~2.8|~3.0|~4.0|^5.0",
-            "symfony/http-kernel": "^4.4",
-            "symfony/intl": "^3.4|^4.0|^5.0",
+            "symfony/config": "^4.4|^5.0",
+            "symfony/console": "^4.4|^5.0",
+            "symfony/dependency-injection": "^5.0",
+            "symfony/finder": "^4.4|^5.0",
+            "symfony/http-kernel": "^5.0",
+            "symfony/intl": "^4.4|^5.0",
             "symfony/service-contracts": "^1.1.2|^2",
-            "symfony/yaml": "^3.4|^4.0|^5.0"
+            "symfony/yaml": "^4.4|^5.0"
         },
         "suggest": {
             "psr/log-implementation": "To use logging capability in translator",
             "symfony/config": "",
             "symfony/yaml": ""
         },
-        "time": "2020-05-30T20:06:45+00:00",
+        "time": "2020-11-28T11:24:18+00:00",
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "4.4-dev"
-            }
-        },
         "installation-source": "dist",
         "autoload": {
+            "files": [
+                "Resources/functions.php"
+            ],
             "psr-4": {
                 "Symfony\\Component\\Translation\\": ""
             },
@@ -2029,17 +2094,17 @@
     },
     {
         "name": "symfony/translation-contracts",
-        "version": "v2.1.2",
-        "version_normalized": "2.1.2.0",
+        "version": "v2.3.0",
+        "version_normalized": "2.3.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/translation-contracts.git",
-            "reference": "e5ca07c8f817f865f618aa072c2fe8e0e637340e"
+            "reference": "e2eaa60b558f26a4b0354e1bbb25636efaaad105"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/e5ca07c8f817f865f618aa072c2fe8e0e637340e",
-            "reference": "e5ca07c8f817f865f618aa072c2fe8e0e637340e",
+            "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/e2eaa60b558f26a4b0354e1bbb25636efaaad105",
+            "reference": "e2eaa60b558f26a4b0354e1bbb25636efaaad105",
             "shasum": ""
         },
         "require": {
@@ -2048,11 +2113,15 @@
         "suggest": {
             "symfony/translation-implementation": ""
         },
-        "time": "2020-05-20T17:43:50+00:00",
+        "time": "2020-09-28T13:05:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.1-dev"
+                "dev-master": "2.3-dev"
+            },
+            "thanks": {
+                "name": "symfony/contracts",
+                "url": "https://github.com/symfony/contracts"
             }
         },
         "installation-source": "dist",
@@ -2087,78 +2156,18 @@
         ]
     },
     {
-        "name": "symfony/yaml",
-        "version": "v3.4.0",
-        "version_normalized": "3.4.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/yaml.git",
-            "reference": "b3d0c9c11be3831b84825967dc6b52b5a7b84e04"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/b3d0c9c11be3831b84825967dc6b52b5a7b84e04",
-            "reference": "b3d0c9c11be3831b84825967dc6b52b5a7b84e04",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8"
-        },
-        "conflict": {
-            "symfony/console": "<3.4"
-        },
-        "require-dev": {
-            "symfony/console": "~3.4|~4.0"
-        },
-        "suggest": {
-            "symfony/console": "For validating YAML files using the lint command"
-        },
-        "time": "2017-11-29T13:28:14+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Yaml\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Yaml Component",
-        "homepage": "https://symfony.com"
-    },
-    {
         "name": "timber/timber",
-        "version": "1.16.0",
-        "version_normalized": "1.16.0.0",
+        "version": "1.18.2",
+        "version_normalized": "1.18.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/timber/timber.git",
-            "reference": "cdae62c0108cd60c256e9bb00d634645eb0127c0"
+            "reference": "18766d1af8650ca919534cc497e7f0e8d82423a3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/timber/timber/zipball/cdae62c0108cd60c256e9bb00d634645eb0127c0",
-            "reference": "cdae62c0108cd60c256e9bb00d634645eb0127c0",
+            "url": "https://api.github.com/repos/timber/timber/zipball/18766d1af8650ca919534cc497e7f0e8d82423a3",
+            "reference": "18766d1af8650ca919534cc497e7f0e8d82423a3",
             "shasum": ""
         },
         "require": {
@@ -2180,7 +2189,7 @@
         "suggest": {
             "satooshi/php-coveralls": "1.0.* for code coverage"
         },
-        "time": "2020-05-18T19:28:12+00:00",
+        "time": "2020-10-11T15:08:40+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2215,33 +2224,33 @@
     },
     {
         "name": "twig/twig",
-        "version": "v2.12.5",
-        "version_normalized": "2.12.5.0",
+        "version": "v2.14.1",
+        "version_normalized": "2.14.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twigphp/Twig.git",
-            "reference": "18772e0190734944277ee97a02a9a6c6555fcd94"
+            "reference": "5eb9ac5dfdd20c3f59495c22841adc5da980d312"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/18772e0190734944277ee97a02a9a6c6555fcd94",
-            "reference": "18772e0190734944277ee97a02a9a6c6555fcd94",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/5eb9ac5dfdd20c3f59495c22841adc5da980d312",
+            "reference": "5eb9ac5dfdd20c3f59495c22841adc5da980d312",
             "shasum": ""
         },
         "require": {
-            "php": "^7.0",
+            "php": ">=7.2.5",
             "symfony/polyfill-ctype": "^1.8",
             "symfony/polyfill-mbstring": "^1.3"
         },
         "require-dev": {
             "psr/container": "^1.0",
-            "symfony/phpunit-bridge": "^4.4|^5.0"
+            "symfony/phpunit-bridge": "^4.4.9|^5.0.9"
         },
-        "time": "2020-02-11T15:31:23+00:00",
+        "time": "2020-10-27T19:25:29+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.12-dev"
+                "dev-master": "2.14-dev"
             }
         },
         "installation-source": "dist",
@@ -2282,31 +2291,31 @@
     },
     {
         "name": "twilio/sdk",
-        "version": "6.7.0",
-        "version_normalized": "6.7.0.0",
+        "version": "6.15.0",
+        "version_normalized": "6.15.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twilio/twilio-php.git",
-            "reference": "73fdd7e25547910ed339b6a8e7eef9e91a2deb41"
+            "reference": "5bea779890315fd46673b4e2e584eba761eb7027"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twilio/twilio-php/zipball/73fdd7e25547910ed339b6a8e7eef9e91a2deb41",
-            "reference": "73fdd7e25547910ed339b6a8e7eef9e91a2deb41",
+            "url": "https://api.github.com/repos/twilio/twilio-php/zipball/5bea779890315fd46673b4e2e584eba761eb7027",
+            "reference": "5bea779890315fd46673b4e2e584eba761eb7027",
             "shasum": ""
         },
         "require": {
             "php": ">=7.1.0"
         },
         "require-dev": {
-            "guzzlehttp/guzzle": "^6.3",
+            "guzzlehttp/guzzle": "^6.3 || ^7.0",
             "phpunit/phpunit": ">=4.5",
             "theseer/phpdox": "^0.12.0"
         },
         "suggest": {
             "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
         },
-        "time": "2020-06-10T21:28:38+00:00",
+        "time": "2020-12-08T20:38:42+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2331,53 +2340,6 @@
             "sms",
             "twilio"
         ]
-    },
-    {
-        "name": "umutphp/wp-vulnerability-check",
-        "version": "0.2.5",
-        "version_normalized": "0.2.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/umutphp/wp-vulnerability-check.git",
-            "reference": "69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/umutphp/wp-vulnerability-check/zipball/69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7",
-            "reference": "69be5f864fa1e71c3cce9cfbe585e8d7ca84fcb7",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "ext-json": "*",
-            "php": ">=5.4.0",
-            "symfony/yaml": "*"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.5"
-        },
-        "time": "2020-03-04T10:06:43+00:00",
-        "bin": [
-            "wp-vulnerability-check"
-        ],
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "UmutPHP\\WPVulnerabilityCheck\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-3.0-only"
-        ],
-        "authors": [
-            {
-                "name": "Umut Işık",
-                "email": "umutphp@gmail.com"
-            }
-        ],
-        "description": "Check the WPScan Vulnerability Database via API to identify the security issues on plugins and WordPress installed."
     },
     {
         "name": "upstatement/routes",
@@ -2493,16 +2455,16 @@
     },
     {
         "name": "wpackagist-plugin/acf-to-rest-api",
-        "version": "3.3.1",
-        "version_normalized": "3.3.1.0",
+        "version": "3.3.2",
+        "version_normalized": "3.3.2.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/acf-to-rest-api/",
-            "reference": "tags/3.3.1"
+            "reference": "tags/3.3.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/acf-to-rest-api.3.3.1.zip"
+            "url": "https://downloads.wordpress.org/plugin/acf-to-rest-api.3.3.2.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2513,16 +2475,16 @@
     },
     {
         "name": "wpackagist-plugin/aryo-activity-log",
-        "version": "2.5.2",
-        "version_normalized": "2.5.2.0",
+        "version": "2.6.0",
+        "version_normalized": "2.6.0.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/aryo-activity-log/",
-            "reference": "tags/2.5.2"
+            "reference": "trunk"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.2.5.2.zip"
+            "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.zip?timestamp=1606834750"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2533,8 +2495,8 @@
     },
     {
         "name": "wpackagist-plugin/better-search-replace",
-        "version": "1.3.3",
-        "version_normalized": "1.3.3.0",
+        "version": "1.3.4",
+        "version_normalized": "1.3.4.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/better-search-replace/",
@@ -2542,7 +2504,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/better-search-replace.zip?timestamp=1557317815"
+            "url": "https://downloads.wordpress.org/plugin/better-search-replace.zip?timestamp=1607361595"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2573,16 +2535,16 @@
     },
     {
         "name": "wpackagist-plugin/core-sitemaps",
-        "version": "0.4.1",
-        "version_normalized": "0.4.1.0",
+        "version": "0.4.3",
+        "version_normalized": "0.4.3.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/core-sitemaps/",
-            "reference": "tags/0.4.1"
+            "reference": "tags/0.4.3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/core-sitemaps.0.4.1.zip"
+            "url": "https://downloads.wordpress.org/plugin/core-sitemaps.0.4.3.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2593,16 +2555,16 @@
     },
     {
         "name": "wpackagist-plugin/duplicate-post",
-        "version": "3.2.4",
-        "version_normalized": "3.2.4.0",
+        "version": "3.2.6",
+        "version_normalized": "3.2.6.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/duplicate-post/",
-            "reference": "tags/3.2.4"
+            "reference": "tags/3.2.6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.4.zip"
+            "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.6.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2613,16 +2575,16 @@
     },
     {
         "name": "wpackagist-plugin/enable-media-replace",
-        "version": "3.4.1",
-        "version_normalized": "3.4.1.0",
+        "version": "3.5.0",
+        "version_normalized": "3.5.0.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/enable-media-replace/",
-            "reference": "tags/3.4.1"
+            "reference": "tags/3.5.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.4.1.zip"
+            "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.5.0.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2653,16 +2615,16 @@
     },
     {
         "name": "wpackagist-plugin/google-authenticator",
-        "version": "0.52",
-        "version_normalized": "0.52.0.0",
+        "version": "0.53",
+        "version_normalized": "0.53.0.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/google-authenticator/",
-            "reference": "tags/0.52"
+            "reference": "tags/0.53"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.52.zip"
+            "url": "https://downloads.wordpress.org/plugin/google-authenticator.0.53.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2673,16 +2635,16 @@
     },
     {
         "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-        "version": "2.14.0",
-        "version_normalized": "2.14.0.0",
+        "version": "2.18.0",
+        "version_normalized": "2.18.0.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-            "reference": "tags/2.14.0"
+            "reference": "tags/2.18.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.14.0.zip"
+            "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.18.0.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2693,16 +2655,16 @@
     },
     {
         "name": "wpackagist-plugin/loggedin",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
+        "version": "1.3.1",
+        "version_normalized": "1.3.1.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/loggedin/",
-            "reference": "tags/1.2.0"
+            "reference": "tags/1.3.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/loggedin.1.2.0.zip"
+            "url": "https://downloads.wordpress.org/plugin/loggedin.1.3.1.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2713,16 +2675,16 @@
     },
     {
         "name": "wpackagist-plugin/query-monitor",
-        "version": "3.6.0",
-        "version_normalized": "3.6.0.0",
+        "version": "3.6.6",
+        "version_normalized": "3.6.6.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/query-monitor/",
-            "reference": "tags/3.6.0"
+            "reference": "tags/3.6.6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/query-monitor.3.6.0.zip"
+            "url": "https://downloads.wordpress.org/plugin/query-monitor.3.6.6.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2793,16 +2755,16 @@
     },
     {
         "name": "wpackagist-plugin/wp-all-export",
-        "version": "1.2.6",
-        "version_normalized": "1.2.6.0",
+        "version": "1.2.7",
+        "version_normalized": "1.2.7.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/wp-all-export/",
-            "reference": "tags/1.2.6"
+            "reference": "tags/1.2.7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wp-all-export.1.2.6.zip"
+            "url": "https://downloads.wordpress.org/plugin/wp-all-export.1.2.7.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2833,16 +2795,16 @@
     },
     {
         "name": "wpackagist-plugin/wp-crontrol",
-        "version": "1.8.5",
-        "version_normalized": "1.8.5.0",
+        "version": "1.9.0",
+        "version_normalized": "1.9.0.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/wp-crontrol/",
-            "reference": "tags/1.8.5"
+            "reference": "tags/1.9.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.8.5.zip"
+            "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.9.0.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2873,16 +2835,16 @@
     },
     {
         "name": "wpackagist-plugin/wps-hide-login",
-        "version": "1.5.6",
-        "version_normalized": "1.5.6.0",
+        "version": "1.6.1",
+        "version_normalized": "1.6.1.0",
         "source": {
             "type": "svn",
             "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-            "reference": "tags/1.5.6"
+            "reference": "tags/1.6.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.5.6.zip"
+            "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.6.1.zip"
         },
         "require": {
             "composer/installers": "~1.0"
@@ -2890,5 +2852,25 @@
         "type": "wordpress-plugin",
         "installation-source": "dist",
         "homepage": "https://wordpress.org/plugins/wps-hide-login/"
+    },
+    {
+        "name": "wpackagist-plugin/wpscan",
+        "version": "1.13.2",
+        "version_normalized": "1.13.2.0",
+        "source": {
+            "type": "svn",
+            "url": "https://plugins.svn.wordpress.org/wpscan/",
+            "reference": "tags/1.13.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://downloads.wordpress.org/plugin/wpscan.1.13.2.zip"
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "homepage": "https://wordpress.org/plugins/wpscan/"
     }
 ]

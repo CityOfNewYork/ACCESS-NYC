@@ -1,7 +1,5 @@
 /* eslint-env browser */
 
-import 'modules/polyfill-replace-with';
-
 (function() {
   'use strict';
 

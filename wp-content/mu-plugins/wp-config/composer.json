@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "A WordPress package for environment configuration.",
@@ -27,8 +27,7 @@
     "illuminate/encryption": "^5.6"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "3.*",
-    "codeception/codeception": "^2.3"
+    "squizlabs/php_codesniffer": "3.*"
   },
   "scripts": {
     "lint": [

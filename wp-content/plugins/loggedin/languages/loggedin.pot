@@ -1,66 +1,149 @@
-#, fuzzy
+# Copyright (C) 2020 Joel James
+# This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: LoggedIn - Limit Active Logins\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 14:11+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Loggedin - Limit Active Logins 1.3.1\n"
+"Report-Msgid-Bugs-To: https://duckdev.com\n"
+"POT-Creation-Date: 2020-09-19 03:34:00+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.2.0; wp-5.1"
+"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Joel James <me@joelsays.com>\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: includes/class-f-loggedin-admin.php:51
+#: includes/class-loggedin-admin.php:74
+#. translators: %s User name of the logging out user.
+msgid "User %s forcefully logged out from all devices."
+msgstr ""
+
+#: includes/class-loggedin-admin.php:86
+#. translators: %d User ID of the login user.
+msgid "Invalid user ID: %d"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:121
 msgid "Maximum Active Logins"
 msgstr ""
 
-#: includes/class-f-loggedin-admin.php:71
+#: includes/class-loggedin-admin.php:130
+msgid "Login Logic"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:139 includes/class-loggedin-admin.php:195
+msgid "Force Logout"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:159
+msgid "Enter the limit in number"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:160
 msgid "Set the maximum no. of active logins a user account can have."
 msgstr ""
 
-#: includes/class-f-loggedin-admin.php:72
+#: includes/class-loggedin-admin.php:161
 msgid ""
 "If this limit reached, next login request will be failed and user will have "
 "to logout from one device to continue."
 msgstr ""
 
-#: includes/class-f-loggedin-admin.php:73
+#: includes/class-loggedin-admin.php:162
 msgid "Note: "
 msgstr ""
 
-#: includes/class-f-loggedin-admin.php:73
+#: includes/class-loggedin-admin.php:162
 msgid "Even if the browser is closed, login session may exist."
 msgstr ""
 
-#: includes/class-f-loggedin.php:117
+#: includes/class-loggedin-admin.php:178
+msgid "Allow"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:179
+msgid "Block"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:180
+msgid "Allow:"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:180
+msgid ""
+"Allow new login by terminating all other old sessions when the limit is "
+"reached."
+msgstr ""
+
+#: includes/class-loggedin-admin.php:181
+msgid "Block:"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:181
+msgid ""
+" Do not allow new login if the limit is reached. Users need to wait for the "
+"old login sessions to expire."
+msgstr ""
+
+#: includes/class-loggedin-admin.php:194
+msgid "Enter user ID"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:196
+msgid ""
+"If you would like to force logout a user from all the devices, enter the "
+"user ID."
+msgstr ""
+
+#: includes/class-loggedin-admin.php:242
+#. translators: %1$s Current user's name. %2$s <strong> %3$s </strong>.
+msgid ""
+"Hey %1$s, I noticed you've been using %2$sLoggedin%3$s plugin for more than "
+"1 week – that’s awesome! Could you please do me a BIG favor and give it a "
+"5-star rating on WordPress? Just to help us spread the word and boost our "
+"motivation."
+msgstr ""
+
+#: includes/class-loggedin-admin.php:243
+msgid "there"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:251
+msgid "Ok, you deserve it"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:256
+msgid "Nope, maybe later"
+msgstr ""
+
+#: includes/class-loggedin-admin.php:261
+msgid "I already did"
+msgstr ""
+
+#: includes/class-loggedin.php:186
 msgid ""
 "Maximum no. of active logins found for this account. Please logout from "
 "another device to continue."
 msgstr ""
 
-#. Name of the plugin
-msgid "LoggedIn - Limit Active Logins"
+#. Plugin Name of the plugin/theme
+msgid "Loggedin - Limit Active Logins"
 msgstr ""
 
-#. Description of the plugin
+#. Plugin URI of the plugin/theme
+msgid "https://duckdev.com/products/loggedin-limit-active-logins/"
+msgstr ""
+
+#. Description of the plugin/theme
 msgid ""
 "Light weight plugin to limit number of active logins from an account. Set "
 "maximum number of concurrent logins a user can have from multiple places."
 msgstr ""
 
-#. URI of the plugin
-msgid "https://wordpress.org/plugins/loggedin/"
-msgstr ""
-
-#. Author of the plugin
+#. Author of the plugin/theme
 msgid "Joel James"
 msgstr ""
 
-#. Author URI of the plugin
-msgid "https://thefoxe.com/"
+#. Author URI of the plugin/theme
+msgid "https://duckdev.com/"
 msgstr ""

@@ -560,4 +560,18 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
             return $friendly_name;
         }
     }
+
+    function insertAfter($input, $index, $newKey, $element) {
+        if (!array_key_exists($index, $input)) {
+            throw new Exception("Index not found");
+        }
+        $tmpArray = array();
+        foreach ($input as $key => $value) {
+            $tmpArray[$key] = $value;
+            if ($key === $index) {
+                $tmpArray[$newKey] = $element;
+            }
+        }
+        return $tmpArray;
+    }
 }

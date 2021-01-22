@@ -112,7 +112,9 @@ class FieldRepeater extends Field {
 
             $values = array();
 
-            $this->setIgnoreEmpties($xpath['is_ignore_empties']);
+            $is_ignore_empties = empty($xpath['is_ignore_empties']) ? false : true;
+
+            $this->setIgnoreEmpties($is_ignore_empties);
 
             switch ($xpath['is_variable']){
                 case 'yes':
@@ -167,7 +169,7 @@ class FieldRepeater extends Field {
                             if (isset($rowFields[$subField->getFieldKey()])) {
                                 $subField->parse($rowFields[$subField->getFieldKey()], $parsingData, array(
                                     'field_path' => $this->getOption('field_path') . "[" . $this->getFieldKey() . "][rows][" . $key . "]",
-                                    'xpath_suffix' => $args['xpath_suffix'],
+                                    'xpath_suffix' => empty($args['xpath_suffix']) ? '' : $args['xpath_suffix'],
                                     'repeater_count_rows' => 0,
                                     'inside_repeater' => true
                                 ));

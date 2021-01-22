@@ -1,0 +1,14 @@
+- handle: global-site-tag
+  path: https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_MEASUREMENT_ID }}
+  dep: GOOGLE_MEASUREMENT_ID
+  localize:
+    - GOOGLE_MEASUREMENT_ID
+  in_footer: false
+  inline:
+    path: config/integrations/scripts/global-site-tag.js
+    position: after
+  attrs:
+    crossorigin: 'anonymous'
+    async: true
+
+

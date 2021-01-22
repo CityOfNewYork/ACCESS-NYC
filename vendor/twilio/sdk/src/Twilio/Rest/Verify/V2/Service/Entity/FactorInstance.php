@@ -13,12 +13,11 @@ use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
 use Twilio\Options;
-use Twilio\Rest\Verify\V2\Service\Entity\Factor\ChallengeList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  *
  * @property string $sid
  * @property string $accountSid
@@ -32,18 +31,15 @@ use Twilio\Version;
  * @property string $factorType
  * @property array $config
  * @property string $url
- * @property array $links
  */
 class FactorInstance extends InstanceResource {
-    protected $_challenges;
-
     /**
      * Initialize the FactorInstance
      *
      * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
      * @param string $serviceSid Service Sid.
-     * @param string $identity Unique identity of the Entity
+     * @param string $identity Unique external identifier of the Entity
      * @param string $sid A string that uniquely identifies this Factor.
      */
     public function __construct(Version $version, array $payload, string $serviceSid, string $identity, string $sid = null) {
@@ -63,7 +59,6 @@ class FactorInstance extends InstanceResource {
             'factorType' => Values::array_get($payload, 'factor_type'),
             'config' => Values::array_get($payload, 'config'),
             'url' => Values::array_get($payload, 'url'),
-            'links' => Values::array_get($payload, 'links'),
         ];
 
         $this->solution = [
@@ -95,23 +90,21 @@ class FactorInstance extends InstanceResource {
     /**
      * Delete the FactorInstance
      *
-     * @param array|Options $options Optional Arguments
      * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function delete(array $options = []): bool {
-        return $this->proxy()->delete($options);
+    public function delete(): bool {
+        return $this->proxy()->delete();
     }
 
     /**
      * Fetch the FactorInstance
      *
-     * @param array|Options $options Optional Arguments
      * @return FactorInstance Fetched FactorInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch(array $options = []): FactorInstance {
-        return $this->proxy()->fetch($options);
+    public function fetch(): FactorInstance {
+        return $this->proxy()->fetch();
     }
 
     /**
@@ -123,13 +116,6 @@ class FactorInstance extends InstanceResource {
      */
     public function update(array $options = []): FactorInstance {
         return $this->proxy()->update($options);
-    }
-
-    /**
-     * Access the challenges
-     */
-    protected function getChallenges(): ChallengeList {
-        return $this->proxy()->challenges;
     }
 
     /**

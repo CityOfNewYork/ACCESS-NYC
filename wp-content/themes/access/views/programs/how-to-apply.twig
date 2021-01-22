@@ -1,4 +1,4 @@
-<section id="how-to-apply" data-js="program-detail-step" class="hidden:overflow{% if step in sectionArray | keys %} active{% endif %} print:active w-full">
+<section id="how-to-apply" data-step="how-to-apply" class="outline-none active hidden:overflow print:active w-full" aria-hidden="false">
   <header>
     <h3>{{ stepNumber }}. {{ __('How to apply', 'accessnyc-program-detail') }}</h3>
 
@@ -101,7 +101,7 @@
 
         <br/>
 
-        {{__('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail')}}</p>
+        {{ __('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail') }}</p>
 
         <div class="layout-gutter screen-tablet:layout-columns-gutter">
           {% include 'components/share-form.twig' with {this: {

@@ -17,7 +17,7 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  *
  * @property string $sid
  * @property string $accountSid
@@ -39,8 +39,8 @@ class FunctionVersionInstance extends InstanceResource {
      * @param mixed[] $payload The response payload
      * @param string $serviceSid The SID of the Service that the Function Version
      *                           resource is associated with
-     * @param string $functionSid The SID of the function that is the parent of the
-     *                            function version
+     * @param string $functionSid The SID of the Function resource that is the
+     *                            parent of the Function Version resource
      * @param string $sid The SID that identifies the Function Version resource to
      *                    fetch
      */

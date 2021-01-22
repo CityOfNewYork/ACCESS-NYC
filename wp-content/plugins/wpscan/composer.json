@@ -1,0 +1,9 @@
+{
+    "autoload": {
+        "psr-4": {
+            "WPScan\\": "app/"
+        }
+    },
+    "description": "",
+    "name": "wpscan/wpscan-wordpress-plugin"
+}

@@ -4,19 +4,19 @@
   </button>
 
   <form action="{{ this.post }}" aria-hidden="true" class="c-share-form__form hidden" id="aria-c-share-form__{{ this.type }}" method="post">
-    {% if this.action %}<input name="action" type="hidden" value="{{ this.action }}" />{% endif %}
-    {% if this.url %}<input name="url" readonly type="hidden" value="{{ this.url }}" />{% endif %}
-    {% if this.hash %}<input name="hash" readonly type="hidden" value="{{ this.hash }}" />{% endif %}
-    {% if this.guid %}<input maxlength="13" name="GUID" readonly type="hidden" value="{{ this.guid }}" />{% endif %}
-    {% if this.template %}<input name="template" readonly type="hidden" value="{{ this.template }}" />{% endif %}
+    {% if this.action %}<input name="action" type="hidden" value="{{ this.action }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
+    {% if this.url %}<input name="url" readonly type="hidden" value="{{ this.url }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
+    {% if this.hash %}<input name="hash" readonly type="hidden" value="{{ this.hash }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
+    {% if this.guid %}<input maxlength="13" name="GUID" readonly type="hidden" value="{{ this.guid }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
+    {% if this.template %}<input name="template" readonly type="hidden" value="{{ this.template }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
 
     <div class="c-share-form__fieldset">
       <div class="c-share-form__input {% if this.type == 'tel' %}input-phone-us{% endif %}">
-        <input data-js="share-form__input" name="to" placeholder="{{ __(this.placeholder, 'accessnyc-results') }}" required="true" type="{{ this.type }}" />
+        <input data-js="share-form__input" name="to" placeholder="{{ __(this.placeholder, 'accessnyc-results') }}" required="true" type="{{ this.type }}" tabindex="-1" />
       </div>
 
       <div class="c-share-form__button">
-        <button class="btn btn-primary btn-small" type="submit">
+        <button class="btn btn-primary btn-small" type="submit" tabindex="-1">
           {{ __('Send', 'accessnyc-results') }}
         </button>
 

@@ -16,7 +16,7 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  *
  * @property string $sid
  * @property string $accountSid
@@ -36,7 +36,7 @@ class AssetVersionInstance extends InstanceResource {
      * @param string $serviceSid The SID of the Service that the Asset Version
      *                           resource is associated with
      * @param string $assetSid The SID of the Asset resource that is the parent of
-     *                         the asset version
+     *                         the Asset Version
      * @param string $sid The SID that identifies the Asset Version resource to
      *                    fetch
      */

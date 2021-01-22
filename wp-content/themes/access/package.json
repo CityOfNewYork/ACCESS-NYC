@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.25.0",
+  "version": "3.29.2",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
     "predeploy": "NODE_ENV='production' gulp build",
     "scripts": "NODE_ENV='production' gulp scripts",
     "styles": "NODE_ENV='production' gulp styles",
+    "svgs": "NODE_ENV='production' gulp svgs",
     "regen": "npm install --package-lock-only",
     "version": "echo \"No version task required\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -95,12 +96,14 @@
     "string-replace-loader": "^2.3.0",
     "vinyl-named": "^1.1.0",
     "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.6.12",
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "@nycopportunity/access-patterns": "^0.15.13",
-    "@nycopportunity/patterns-framework": "^1.0.0-6",
+    "@nycopportunity/access-patterns": "^0.16.0",
+    "@nycopportunity/patterns-framework": "^1.0.0-15",
+    "@nycopportunity/wp-archive-vue": "^1.2.0",
+    "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
     "underscore": "^1.10.2",

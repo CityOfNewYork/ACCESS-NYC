@@ -15,7 +15,7 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  */
 class DeploymentContext extends InstanceContext {
     /**
@@ -24,7 +24,7 @@ class DeploymentContext extends InstanceContext {
      * @param Version $version Version that contains the resource
      * @param string $serviceSid The SID of the Service to fetch the Deployment
      *                           resource from
-     * @param string $environmentSid The SID of the environment used by the
+     * @param string $environmentSid The SID of the Environment used by the
      *                               Deployment to fetch
      * @param string $sid The SID that identifies the Deployment resource to fetch
      */

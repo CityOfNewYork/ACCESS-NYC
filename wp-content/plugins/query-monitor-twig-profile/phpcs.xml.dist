@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+    <description>The coding standard for Query Monitor Twig Profile.</description>
+
+    <file>query-monitor-twig-profile.php</file>
+    <file>src</file>
+
+    <arg name="colors"/>
+
+    <rule ref="WordPress" />
+    
+    <rule ref="PHPCompatibility"/>
+    <config name="testVersion" value="7.0-"/>
+
+</ruleset>
