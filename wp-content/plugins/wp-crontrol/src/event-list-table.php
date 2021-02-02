@@ -37,6 +37,8 @@ class Table extends \WP_List_Table {
 	 */
 	protected static $count_by_hook;
 
+	protected $all_events = array();
+
 	/**
 	 * Constructor.
 	 */
@@ -58,6 +60,7 @@ class Table extends \WP_List_Table {
 		self::$count_by_hook         = count_by_hook();
 
 		$events = get();
+		$this->all_events = $events;
 
 		if ( ! empty( $_GET['s'] ) ) {
 			$s = sanitize_text_field( wp_unslash( $_GET['s'] ) );
@@ -67,17 +70,68 @@ class Table extends \WP_List_Table {
 			} );
 		}
 
+		if ( ! empty( $_GET['hooks_type'] ) ) {
+			$hooks_type = sanitize_text_field( $_GET['hooks_type'] );
+			$filtered = $this->get_filtered_events( $events );
+
+			if ( isset( $filtered[ $hooks_type ] ) ) {
+				$events = $filtered[ $hooks_type ];
+			}
+		}
+
 		$count    = count( $events );
 		$per_page = 50;
 		$offset   = ( $this->get_pagenum() - 1 ) * $per_page;
 
 		$this->items = array_slice( $events, $offset, $per_page );
 
+		$has_late = (bool) array_filter( array_map( __NAMESPACE__ . '\\is_late', $this->items ) );
+
+		if ( $has_late ) {
+			add_action( 'admin_notices', function() {
+				printf(
+					'<div id="crontrol-late-message" class="notice notice-warning"><p>%1$s</p><p><a href="%2$s">%3$s</a></p></div>',
+					/* translators: %s: Help page URL. */
+					esc_html__( 'One or more cron events have missed their schedule.', 'wp-crontrol' ),
+					'https://github.com/johnbillion/wp-crontrol/wiki/Cron-events-that-have-missed-their-schedule',
+					esc_html__( 'More information', 'wp-crontrol' )
+				);
+			} );
+		}
+
 		$this->set_pagination_args( array(
 			'total_items' => $count,
 			'per_page'    => $per_page,
 			'total_pages' => ceil( $count / $per_page ),
 		) );
+	}
+
+	/**
+	 * Returns events filtered by various parameters
+	 *
+	 * @param array $events The list of all events.
+	 * @return array Array of filtered events keyed by parameter.
+	 */
+	protected function get_filtered_events( array $events ) {
+		$all_core_hooks = \Crontrol\get_all_core_hooks();
+		$filtered = array(
+			'all' => $events,
+		);
+
+		$filtered['noaction'] = array_filter( $events, function( $event ) {
+			$hook_callbacks = \Crontrol\get_hook_callbacks( $event->hook );
+			return empty( $hook_callbacks );
+		} );
+
+		$filtered['core'] = array_filter( $events, function( $event ) use ( $all_core_hooks ) {
+			return ( in_array( $event->hook, $all_core_hooks, true ) );
+		} );
+
+		$filtered['custom'] = array_filter( $events, function( $event ) use ( $all_core_hooks ) {
+			return ( ! in_array( $event->hook, $all_core_hooks, true ) );
+		} );
+
+		return $filtered;
 	}
 
 	/**
@@ -97,6 +151,18 @@ class Table extends \WP_List_Table {
 			),
 			'crontrol_actions'    => __( 'Action', 'wp-crontrol' ),
 			'crontrol_recurrence' => __( 'Recurrence', 'wp-crontrol' ),
+		);
+	}
+
+	/**
+	 * Columns to make sortable.
+	 *
+	 * @return array
+	 */
+	public function get_sortable_columns() {
+		return array(
+			'crontrol_hook' => array( 'crontrol_hook', true ),
+			'crontrol_next' => array( 'crontrol_next', false ),
 		);
 	}
 
@@ -124,6 +190,39 @@ class Table extends \WP_List_Table {
 	}
 
 	/**
+	 * Display the list of hook types.
+	 *
+	 * @return string[]
+	 */
+	public function get_views() {
+		$filtered = $this->get_filtered_events( $this->all_events );
+
+		$views = array();
+		$hooks_type = ( ! empty( $_GET['hooks_type'] ) ? $_GET['hooks_type'] : 'all' );
+
+		$types = array(
+			'all'      => __( 'All hooks', 'wp-crontrol' ),
+			'noaction' => __( 'Hooks with no action', 'wp-crontrol' ),
+			'core'     => __( 'WordPress core hooks', 'wp-crontrol' ),
+			'custom'   => __( 'Custom hooks', 'wp-crontrol' ),
+		);
+
+		$url = admin_url( 'tools.php?page=crontrol_admin_manage_page' );
+
+		foreach ( $types as $key => $type ) {
+			$views[ $key ] = sprintf(
+				'<a href="%1$s"%2$s>%3$s <span class="count">(%4$s)</span></a>',
+				'all' === $key ? $url : add_query_arg( 'hooks_type', $key, $url ),
+				$hooks_type === $key ? ' class="current"' : '',
+				$type,
+				count( $filtered[ $key ] )
+			);
+		}
+
+		return $views;
+	}
+
+	/**
 	 * Generates content for a single row of the table.
 	 *
 	 * @param object $event The current event.
@@ -141,8 +240,17 @@ class Table extends \WP_List_Table {
 			$classes[] = 'crontrol-error';
 		}
 
-		if ( ! \Crontrol\get_hook_callbacks( $event->hook ) ) {
+		$callbacks = \Crontrol\get_hook_callbacks( $event->hook );
+
+		if ( ! $callbacks ) {
 			$classes[] = 'crontrol-warning';
+		} else {
+			foreach ( $callbacks as $callback ) {
+				if ( ! empty( $callback['callback']['error'] ) ) {
+					$classes[] = 'crontrol-error';
+					break;
+				}
+			}
 		}
 
 		if ( is_late( $event ) ) {
@@ -422,7 +530,11 @@ class Table extends \WP_List_Table {
 	 * Outputs a message when there are no items to show in the table.
 	 */
 	public function no_items() {
-		esc_html_e( 'There are currently no scheduled cron events.', 'wp-crontrol' );
+		if ( empty( $_GET['s'] ) && empty( $_GET['hooks_type'] ) ) {
+			esc_html_e( 'There are currently no scheduled cron events.', 'wp-crontrol' );
+		} else {
+			esc_html_e( 'No matching cron events.', 'wp-crontrol' );
+		}
 	}
 
 }

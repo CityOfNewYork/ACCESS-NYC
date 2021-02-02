@@ -25,7 +25,7 @@
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "phpcompatibility/php-compatibility": "^9.3",
-        "szepeviktor/phpstan-wordpress": "^0.6.3",
+        "szepeviktor/phpstan-wordpress": "^0.7.1",
         "twig/twig": "^3.0",
         "wp-coding-standards/wpcs": "^2.3",
         "wpackagist-plugin/query-monitor": "^3.6"

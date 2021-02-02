@@ -34,3 +34,26 @@ function crontrolCheckHash() {
 		}
 	} );
 }
+
+jQuery(function($){
+	$('#next_run_date_local_custom_date,#next_run_date_local_custom_time').on('change', function() {
+		$('#next_run_date_local_custom').prop('checked',true);
+	});
+
+	if ( $('input[value="new_php_cron"]').length ) {
+		$('input[value="new_cron"]').on('click',function(){
+			$('.crontrol-edit-event').removeClass('crontrol-edit-event-php').addClass('crontrol-edit-event-standard');
+			$('#hookname').attr('required',true);
+		});
+		$('input[value="new_php_cron"]').on('click',function(){
+			$('.crontrol-edit-event').removeClass('crontrol-edit-event-standard').addClass('crontrol-edit-event-php');
+			$('#hookname').attr('required',false);
+			if ( ! $('#hookcode').hasClass('crontrol-editor-initialized') ) {
+				wp.codeEditor.initialize( 'hookcode', window.wpCrontrol.codeEditor );
+			}
+			$('#hookcode').addClass('crontrol-editor-initialized');
+		});
+	} else if ( $('#hookcode').length ) {
+		wp.codeEditor.initialize( 'hookcode', window.wpCrontrol.codeEditor );
+	}
+});
