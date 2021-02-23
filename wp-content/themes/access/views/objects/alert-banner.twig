@@ -2,13 +2,13 @@
 
   <div class="c-alert-banner-wrapper">
     <div class="c-alert-banner__content flex">
-      <div class="flex-1 c-alert-box__icon">
+      <div class="c-alert-box__icon pe-1 screen-tablet:pe-2">
         <svg aria-hidden="true" class="c-alert-box__svg icon-3 screen-tablet:icon-4">
           <use xlink:href="#icon-{{ this.alert_icon }}"></use>
         </svg>
       </div>
 
-      <div class="flex-1 c-alert-banner__body">{{ this.alert_content }}</div>
+      <div class="c-alert-banner__body">{{ this.alert_content }}</div>
     </div>
 
     {% if static != true %}<div class="c-alert-banner__closing">
