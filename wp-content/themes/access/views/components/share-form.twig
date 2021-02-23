@@ -16,7 +16,7 @@
       </div>
 
       <div class="c-share-form__button">
-        <button class="btn btn-primary btn-small" type="submit" tabindex="-1">
+        <button class="btn btn-primary btn-small" type="submit" tabindex="-1" data-gtm="share-form-{{ this.type }}__submit" data-track-key="Share {{ this.type|capitalize }}" data-track-data='[{"action": "share-{{ this.type }}"}]'>
           {{ __('Send', 'accessnyc-results') }}
         </button>
 
