@@ -13,14 +13,13 @@ import gulp from 'gulp';
 import rename from 'gulp-rename';
 import hashFilename from 'gulp-hash-filename';
 import through from 'through2';
-import _ from 'underscore';
+import underscore from 'underscore';
 
 /**
  * Style Deps
  */
 
-import sass from 'sass';
-import gulpSass from 'gulp-sass';
+import sass from 'gulp-dart-sass';
 import postcss from 'gulp-postcss';
 import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'autoprefixer';
@@ -84,15 +83,17 @@ gulp.task('clean:styles', callback => {
   callback();
 });
 
-gulpSass.compiler = sass;
-
 gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
   .pipe(sourcemaps.init())
-  .pipe(gulpSass({
-    includePaths: ['node_modules', `${PATTERNS_ACCESS}/src/`]
-    .concat(require('bourbon').includePaths)
+  .pipe(sass({
+    includePaths: [
+      'node_modules',
+      `${PATTERNS_ACCESS}/src/`
+    ].concat(
+      require('bourbon').includePaths
+    )
   })
-  .on('error', gulpSass.logError))
+  .on('error', sass.logError))
   .pipe(postcss([
     purgecss({
       content: [
@@ -284,7 +285,7 @@ gulp.task('jst', () => gulp.src(`${VIEWS }/**/*.jst.twig`)
         '// Compiled template. Do not edit.\n',
         'window.JST = window.JST || {};\n',
         'window.JST["' + file.relative.replace('.js', '') + '"] = ',
-        _.template(template).source]
+        underscore.template(template).source]
       .join('');
 
     file.contents = Buffer.from(compiled);
