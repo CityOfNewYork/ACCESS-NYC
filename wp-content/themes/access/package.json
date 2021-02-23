@@ -6,9 +6,6 @@
     "type": "git",
     "url": "https://github.com/cityofnewyork/access-nyc"
   },
-  "config": {
-    "proxy": "http://localhost:8080"
-  },
   "scripts": {
     "gulp": "gulp",
     "start": "npm run development",
