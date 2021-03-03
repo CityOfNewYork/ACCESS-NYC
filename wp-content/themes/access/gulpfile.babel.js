@@ -12,16 +12,14 @@ import del from 'del';
 import gulp from 'gulp';
 import rename from 'gulp-rename';
 import hashFilename from 'gulp-hash-filename';
-import browserSync from 'browser-sync';
 import through from 'through2';
-import _ from 'underscore';
+import underscore from 'underscore';
 
 /**
  * Style Deps
  */
 
-import sass from 'sass';
-import gulpSass from 'gulp-sass';
+import sass from 'gulp-dart-sass';
 import postcss from 'gulp-postcss';
 import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'autoprefixer';
@@ -52,6 +50,7 @@ import imagemin from 'gulp-imagemin';
 
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
+
 /************
  * Constants
  ************/
@@ -84,15 +83,17 @@ gulp.task('clean:styles', callback => {
   callback();
 });
 
-gulpSass.compiler = sass;
-
 gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
   .pipe(sourcemaps.init())
-  .pipe(gulpSass({
-    includePaths: ['node_modules', `${PATTERNS_ACCESS}/src/`]
-    .concat(require('bourbon').includePaths)
+  .pipe(sass({
+    includePaths: [
+      'node_modules',
+      `${PATTERNS_ACCESS}/src/`
+    ].concat(
+      require('bourbon').includePaths
+    )
   })
-  .on('error', gulpSass.logError))
+  .on('error', sass.logError))
   .pipe(postcss([
     purgecss({
       content: [
@@ -284,7 +285,7 @@ gulp.task('jst', () => gulp.src(`${VIEWS }/**/*.jst.twig`)
         '// Compiled template. Do not edit.\n',
         'window.JST = window.JST || {};\n',
         'window.JST["' + file.relative.replace('.js', '') + '"] = ',
-        _.template(template).source]
+        underscore.template(template).source]
       .join('');
 
     file.contents = Buffer.from(compiled);
@@ -405,10 +406,13 @@ gulp.task('svgs:compile', () =>
     .pipe(gulp.dest('assets/svg/'))
 );
 
-gulp.task('svgs', gulp.series('svgs:clean',
-                              'svgs:list',
-                              'svgs:add',
-                              'svgs:compile'));
+gulp.task('svgs', gulp.series(
+  'svgs:clean',
+  'svgs:list',
+  'svgs:add',
+  'svgs:compile'
+));
+
 /**
  * All tasks needed to build the app
  */
@@ -426,26 +430,15 @@ gulp.task('build', gulp.parallel(
  */
 
 gulp.task('default', () => {
-  let reload = () => {
-    browserSync.reload();
-  };
-
-  // Create a .env file in the theme directory to define this.
-  browserSync.init({
-    proxy: PROXY,
-    port: 3001,
-    ghostMode: {
-      scroll: true
-    },
-    open: false
-  });
-
   // Watch .scss files
-  gulp.watch(`${SRC}/scss/**/*.scss`,
+  gulp.watch([
+      `${SRC}/scss/**/*.scss`,
+      './views/**/*.twig',
+      './views/**/*.vue',
+    ],
     gulp.series(
       'clean:styles',
-      'styles',
-      reload
+      'styles'
     ));
 
   // Watch .js files. Watching is handled by Webpack
@@ -461,15 +454,8 @@ gulp.task('default', () => {
   gulp.watch(`${VIEWS}/**/*.underscore.twig`, gulp.series('jst'));
 
   // Watch image files
-  gulp.watch(`${SRC}/img/**/*`, gulp.series('images', reload));
+  gulp.watch(`${SRC}/img/**/*`, gulp.series('images'));
 
   // Watch hashed files
-  gulp.watch(HASH_FILES, gulp.series('hashfiles', reload));
-
-  gulp.watch([
-      'assets/**/*',
-      'views/**/*',
-      'includes/**/*'
-    ], {dot: true})
-      .on('change', reload);
+  gulp.watch(HASH_FILES, gulp.series('hashfiles'));
 });
