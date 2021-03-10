@@ -1,13 +1,13 @@
 {
-    "key": "group_604263615fb0d",
-    "title": "Google Optimize Integration Fields",
+    "key": "group_6048fc2140a33",
+    "title": "Google Translate Integration Fields",
     "fields": [
         {
-            "key": "field_60426381305bb",
-            "label": "Set Google Optimize",
-            "name": "set_google_optimize",
+            "key": "field_6048fc5b3c836",
+            "label": "Set Google Translate",
+            "name": "set_google_translate",
             "type": "radio",
-            "instructions": "To enable the creation, previewing, and running of active Optimize experiments use True. Use False when there is no active experiment to improve performance.",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -34,7 +34,7 @@
             {
                 "param": "options_page",
                 "operator": "==",
-                "value": "acf-options-google-optimize"
+                "value": "acf-options-google-translate"
             }
         ]
     ],
@@ -46,5 +46,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1615324396
+    "modified": 1615403365
 }

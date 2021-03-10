@@ -1,13 +1,13 @@
 {
-    "key": "group_604263615fb0d",
-    "title": "Google Optimize Integration Fields",
+    "key": "group_6048f82247194",
+    "title": "Webtrends Integration Fields",
     "fields": [
         {
-            "key": "field_60426381305bb",
-            "label": "Set Google Optimize",
-            "name": "set_google_optimize",
+            "key": "field_6048f8771d101",
+            "label": "Set Webtrends",
+            "name": "set_webtrends",
             "type": "radio",
-            "instructions": "To enable the creation, previewing, and running of active Optimize experiments use True. Use False when there is no active experiment to improve performance.",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,7 +16,6 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
             "choices": {
                 "true": "true",
                 "false": "false"
@@ -26,6 +25,7 @@
             "default_value": "true",
             "layout": "vertical",
             "return_format": "value",
+            "wpml_cf_preferences": 0,
             "save_other_choice": 0
         }
     ],
@@ -34,7 +34,7 @@
             {
                 "param": "options_page",
                 "operator": "==",
-                "value": "acf-options-google-optimize"
+                "value": "acf-options-webtrends"
             }
         ]
     ],
@@ -46,5 +46,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1615324396
+    "modified": 1615395348
 }
