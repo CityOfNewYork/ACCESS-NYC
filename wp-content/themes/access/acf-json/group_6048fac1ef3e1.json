@@ -5,7 +5,7 @@
         {
             "key": "field_6048facf4f835",
             "label": "Set Google Tag Manager",
-            "name": "set_google_tag_manager",
+            "name": "google-tag-manager",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -46,5 +46,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1615403307
+    "modified": 1615911095
 }

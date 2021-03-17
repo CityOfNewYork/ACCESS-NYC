@@ -5,7 +5,7 @@
         {
             "key": "field_6048f8771d101",
             "label": "Set Webtrends",
-            "name": "set_webtrends",
+            "name": "webtrends",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -16,6 +16,7 @@
                 "id": ""
             },
             "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
             "choices": {
                 "true": "true",
                 "false": "false"
@@ -25,7 +26,6 @@
             "default_value": "true",
             "layout": "vertical",
             "return_format": "value",
-            "wpml_cf_preferences": 0,
             "save_other_choice": 0
         }
     ],
@@ -46,5 +46,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1615395348
+    "modified": 1615911214
 }

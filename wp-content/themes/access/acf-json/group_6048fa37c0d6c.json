@@ -5,7 +5,7 @@
         {
             "key": "field_6048fa4cb742d",
             "label": "Set Google Analytics",
-            "name": "set_google_analytics",
+            "name": "google-analytics",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -46,5 +46,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1615403180
+    "modified": 1615910977
 }

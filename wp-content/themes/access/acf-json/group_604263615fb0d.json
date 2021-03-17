@@ -5,7 +5,7 @@
         {
             "key": "field_60426381305bb",
             "label": "Set Google Optimize",
-            "name": "set_google_optimize",
+            "name": "google-optimize",
             "type": "radio",
             "instructions": "To enable the creation, previewing, and running of active Optimize experiments use True. Use False when there is no active experiment to improve performance.",
             "required": 0,
@@ -46,5 +46,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1615324396
+    "modified": 1615911012
 }
