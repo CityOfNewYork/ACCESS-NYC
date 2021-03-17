@@ -1,11 +1,37 @@
 {
     "key": "group_6048ffeb5804c",
-    "title": "Data Layer Integration Fields",
+    "title": "Integration Fields",
     "fields": [
         {
             "key": "field_6048fffbd33ce",
             "label": "Set Data Layer",
             "name": "data-layer",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "true": "true",
+                "false": "false"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "true",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_6048fa4cb742d",
+            "label": "Set Google Analytics",
+            "name": "google-analytics",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -46,5 +72,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1615910445
+    "modified": 1616012871
 }
