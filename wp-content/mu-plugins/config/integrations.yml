@@ -23,7 +23,7 @@
     position: before
 
 - handle: data-layer
-  dep: GOOGLE_OPTIMIZE_ID
+  dep: DATA_LAYER
   in_footer: false
   inline:
     path: config/integrations/scripts/data-layer.js
