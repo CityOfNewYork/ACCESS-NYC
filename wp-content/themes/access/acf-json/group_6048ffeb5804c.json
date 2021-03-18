@@ -1,0 +1,162 @@
+{
+    "key": "group_6048ffeb5804c",
+    "title": "Integration Fields",
+    "fields": [
+        {
+            "key": "field_6047e2fa662cd",
+            "label": "Enable Rollbar",
+            "name": "rollbar",
+            "type": "radio",
+            "instructions": "Rollbar is used for exception (error) monitoring in production environments. Logs can be accessed at https:\/\/rollbar.com",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "true": "True",
+                "false": "False"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "True",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_6048f8771d101",
+            "label": "Enable Webtrends",
+            "name": "webtrends",
+            "type": "radio",
+            "instructions": "Webtrends is the default analytics solution provided by DoITT. This integration will only work on environments that are configured to work with the accounts maintained by DoITT (currently PROD and STAGE).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "true": "True",
+                "false": "False"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "True",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_6048fa4cb742d",
+            "label": "Enable Google Analytics",
+            "name": "google-analytics",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "true": "True",
+                "false": "False"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "True",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_60535dec923fb",
+            "label": "Enable Google Optimize",
+            "name": "google-optimize",
+            "type": "radio",
+            "instructions": "To enable the creation, previewing, and running of active Optimize experiments use True. Use False when there is no active experiment to improve performance. Google Optimize is integrated through the Google Analytics tag so that will need to be True as well in order for this integration to work.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6048fa4cb742d",
+                        "operator": "==",
+                        "value": "true"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "true": "True",
+                "false": "False"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "True",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_6048facf4f835",
+            "label": "Enable Google Tag Manager",
+            "name": "google-tag-manager",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "true": "True",
+                "false": "False"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "True",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-integrations"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1616078755
+}
