@@ -17,6 +17,7 @@ function my_acf_op_init() {
       'page_title'  => __('Integrations'),
       'menu_title'  => __('Integrations'),
       'redirect'    => false,
+      'position'    => '79'
     ));
   }
 }
