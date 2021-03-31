@@ -154,7 +154,7 @@
                         "tertiary": "Tertiary",
                         "covid-response": "COVID Response"
                     },
-                    "default_value": [],
+                    "default_value": false,
                     "allow_null": 0,
                     "multiple": 0,
                     "ui": 0,
@@ -274,7 +274,7 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "post_type": [
                 "programs"
             ],
@@ -431,7 +431,7 @@
         "tags",
         "send-trackbacks"
     ],
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1597678177
+    "modified": 1617199351
 }
