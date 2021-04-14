@@ -14,7 +14,10 @@
           <label class="type-small" for="search-field">{{ __('Search for programs or services', 'accessnyctheme') }}</label>
 
           <div class="input-search">
+            <input name="anyc_hash" type="hidden" value="{{ search_hash }}">
+
             <input name="s" type="text" value="" placeholder="{{ __('Search', 'accessnyctheme') }}" id="search-field">
+
             <button class="btn-text input-search__submit" type="submit">
               <svg class="icon icon-ui-search">
                 <use xlink:href="#icon-ui-search"></use>

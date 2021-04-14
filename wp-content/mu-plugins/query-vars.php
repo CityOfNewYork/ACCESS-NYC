@@ -27,6 +27,7 @@ add_filter('query_vars', function($vars) {
   $vars[] = $prefix . 'served'; // Population Served
   $vars[] = $prefix . 'print'; // Print Views
   $vars[] = $prefix . 'v'; // A/B Testing Variants
+  $vars[] = $prefix . 'hash'; // For passing NONCEs
 
   return $vars;
 });
