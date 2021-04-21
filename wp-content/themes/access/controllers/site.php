@@ -63,6 +63,8 @@ class Site extends TimberSite {
       'numberposts' => 1
     ));
 
+    $context['search_hash'] = wp_create_nonce('search_hash');
+
     /**
      * Add Menus
      */

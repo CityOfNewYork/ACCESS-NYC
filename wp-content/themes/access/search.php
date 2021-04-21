@@ -110,7 +110,20 @@ if (isset($_GET['program_cat'])) {
   $context['searchCategory'] = '';
 }
 
-$context['query'] = get_search_query();
+/**
+ * Prevent Spam in the Search Query
+ *
+ * @author NYC Opportunity
+ */
+
+$context['query'] = (wp_verify_nonce(get_query_var('anyc_hash'), 'search_hash'))
+  ? get_search_query() : '';
+
+/**
+ * Extend Programs through Timber Program Post
+ *
+ * @author NYC Opportunity
+ */
 
 $context['posts'] = array_map(function($post) {
   return new Controller\Programs($post);
