@@ -8,7 +8,7 @@
     <header class="c-header flex-col color-dark-background mb-3">
       <label class="type-small w-full mb-2" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
 
-      <div class="input-search w-full">
+      <div class="input-search w-full color-light-background">
         <input name="anyc_hash" type="hidden" value="{{ search_hash }}">
 
         <input name="s" type="text" value="{{ query }}" id="program-search-field" data-js="wt-search" data-wt-search-key="Search Results" data-wt-search-data='[{"WT.oss": "{{ query }}", "WT.oss_r": "{{ posts|length }}"}]'>
