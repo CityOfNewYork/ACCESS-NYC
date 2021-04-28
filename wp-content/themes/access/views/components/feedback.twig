@@ -1,0 +1,65 @@
+<div aria-describedby="aria-db-modal-body" aria-hidden="true"
+     aria-labelledby="aria-lb-modal-header" aria-modal="true" class="o-modal hidden" id="aria-c-modal" role="dialog" style="background-color: rgba(0,0,0,0.25)">
+  <div class="o-modal__layout">
+    <div class="o-modal__body bg-white animated fadeInUp">
+      <div class="flex justify-end">
+        <button aria-controls="aria-c-modal" aria-expanded="false" data-dialog="close" data-js="dialog" class="flex items-center active">
+          <svg class="icon-ui icon-4 text-blue-dark">
+            <use xlink:href="#icon-ui-x"></use>
+          </svg>
+          Dismiss
+        </button>
+      </div>
+      <div>
+        <div class="p-4">
+          <form id="feedback-form" action="{{ action }}" method="post" data-js="feedback-form">
+            <input name="action" type="hidden" value="feedback">
+            <input name="program" type="hidden" value="{{ this.program_name}}">
+            {{ fn('wp_nonce_field', 'feedback', 'feedback-nonce', true, false) }}
+            <fieldset class="c-question">
+              <legend class="c-question__label">Was this page helpful?</legend>
+              <div class="c-question__container">
+                <div>
+                  <label class="toggle">
+                    <input data-type="boolean" name="helpful" type="radio" value="Yes" />
+                    <span class="toggle__label">Yes</span>
+                  </label>
+                  <label class="toggle">
+                    <input checked="true" data-type="boolean" name="helpful" type="radio" value="No" />
+                    <span class="toggle__label">No</span>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="c-question">
+              <label class="c-question__label" for="description">Why or why not?</label>
+              <div class="c-question__container">
+                <div>
+                  <input name="description" required="true" type="text" maxlength="5000" />
+                </div>
+              </div>
+            </fieldset>
+            <div>
+              <button class="btn" type="button" value="Cancel" aria-controls="aria-c-modal" aria-expanded="false" data-dialog="close" data-js="dialog" >Cancel</button>
+              <button class="btn-primary" type="submit" value="Submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <article class="c-alert-box color-success-status animated hidden:fadeInUp active print:hidden hidden" data-alert-name="feedback" data-js="alert-banner" id="aria-c-alert-banner" role="dialog">
+        <div class="c-alert-box__icon">
+          <svg class="c-alert-box__svg icon icon-4 icon-success" role="img">
+            <title>Success Alert</title>
+            <use xlink:href="#icon-success"></use>
+          </svg>
+        </div>
+        <div class="c-alert-box__body">
+          <header>
+            <h1 class="type-h4 m-0">Thank you for your feedback.</h1>
+          </header>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

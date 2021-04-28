@@ -69,3 +69,4 @@ new Controller\Site();
 // phpcs:enable
 
 require_once ACCESS\lib('filters');
+require_once ACCESS\lib('feedback');

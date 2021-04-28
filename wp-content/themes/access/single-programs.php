@@ -31,6 +31,8 @@ enqueue_inline('google-tag-manager');
 enqueue_script('polyfill');
 enqueue_script('main');
 enqueue_script('single-programs');
+enqueue_script('feedback');
+
 
 /**
  * Manual DNS prefetch and preconnect headers that are not added through
@@ -104,6 +106,12 @@ $context['schema'] = encode_schema($context['schema']);
  */
 
 $context['page_meta_description'] = $program->getPageMetaDescription();
+
+/**
+ * Admin AJAX
+ *
+ */
+$context['shareAction'] = admin_url('admin-ajax.php');
 
 /**
  * Alerts
