@@ -27,7 +27,8 @@
 !/vendor/twilio
 !/vendor/upstatement
 !/vendor/sleiman
-
+!/vendor/davedevelopment/stiphle
+!/vendor/davedevelopment
 # WordPress #
 ############
 /.htaccess
