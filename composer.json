@@ -49,7 +49,8 @@
     "wpackagist-plugin/wp-all-export": "^1.2.6",
     "wpackagist-plugin/wp-security-questions": "^1.0.5",
     "wpackagist-plugin/wps-hide-login": "^1.5.5",
-    "wpackagist-plugin/wpscan": "1.13.2"
+    "wpackagist-plugin/wpscan": "1.13.2",
+    "sleiman/airtable-php": "^2.4"
   },
   "require-dev": {
     "filp/whoops": "^2.0",
