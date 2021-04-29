@@ -27,11 +27,15 @@ function feedbackHandler() {
  * Return the client to interact with the Airtable API.
  */
 function get_airtable_client() {
-  $airtable = new Airtable(array(
-    'api_key' => AIRTABLE_API_KEY,
-    'base'    => AIRTABLE_BASE_KEY
-  ));
-  return $airtable;
+  if (defined('AIRTABLE_API_KEY') && defined('AIRTABLE_BASE_KEY')) {
+    $airtable = new Airtable(array(
+      'api_key' => AIRTABLE_API_KEY,
+      'base'    => AIRTABLE_BASE_KEY
+    ));
+    return $airtable;
+  } else {
+    throw new Exception('Airtable API Keys are missing.');
+  }
 }
 
 /**
