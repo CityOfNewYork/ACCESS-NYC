@@ -129,10 +129,12 @@
     {% include 'components/feedback.twig' with {this: post, action: shareAction} only %}
 
     <div class="sticky bottom-0 z-10">
+      {% if fn('defined', 'AIRTABLE_BASE_KEY') and fn('defined', 'AIRTABLE_API_KEY') %}
       <div class="wrap text-end pb-3">
         <button aria-controls="aria-c-modal" aria-expanded="false" class="btn btn-small btn-tertiary"
-          data-dialog="open" data-dialog-lock="true" data-js="dialog">Feedback</button>
+                                                                   data-dialog="open" data-dialog-lock="true" data-js="dialog">Feedback</button>
       </div>
+      {% endif %}
 
       <div class="wrap text-end pb-3">
         <a href="#content" class="btn btn-small text-blue pointer-events-auto">{{ __('Back to top', 'accessnyctheme') }}</a>
