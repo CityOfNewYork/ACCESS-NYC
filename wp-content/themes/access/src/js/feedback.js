@@ -24,6 +24,7 @@ import serialize from 'for-cerial';
     // for available types.
   };
 
+  Form.selectors.ERROR_MESSAGE_PARENT = '.c-question__container';
   /**
    * This function automatically watches inputs within the form and displays
    * error messages on the blur event for each input.
@@ -56,15 +57,15 @@ import serialize from 'for-cerial';
       body: formData
     })
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
         let alert = document.querySelector('[data-alert-name="feedback"]');
         let form = document.getElementById('feedback-form');
         alert.classList.remove('hidden');
         form.classList.add('hidden');
       })
       .catch(error => {
+        let errorAlert = document.querySelector('[data-alert-name="feedback-error"]');
+        errorAlert.classList.remove('hidden');
+
         console.error('There has been a problem with your fetch operation:', error);
       });
   };
