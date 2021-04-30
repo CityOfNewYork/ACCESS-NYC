@@ -77,6 +77,9 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/objects/search-box/search-box';
 @import '@nycopportunity/access-patterns/src/objects/text-controller/text-controller';
 
+@import '@nycopportunity/pattern-attribution/src/attribution-tokens';
+@import '@nycopportunity/pattern-attribution/src/attribution';
+
 /***********
 * Utilities
 ************/
