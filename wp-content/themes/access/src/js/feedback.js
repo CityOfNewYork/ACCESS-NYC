@@ -11,20 +11,11 @@ import serialize from 'for-cerial';
    */
   const form = document.getElementById('feedback-form');
   const Form = new Forms(form);
-  const modal = new Modal();
 
-  /**
-   * A set of strings to override the
-   */
-  Form.strings = {
-    'VALID_REQUIRED': 'This is required', // A generic message for required
-    // inputs that are missing values.
-    'VALID_{{ TYPE }}_INVALID': 'Invalid' // A validation message for a specific
-    // type. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#%3Cinput%3E_types
-    // for available types.
-  };
+  new Modal();
 
   Form.selectors.ERROR_MESSAGE_PARENT = '.c-question__container';
+
   /**
    * This function automatically watches inputs within the form and displays
    * error messages on the blur event for each input.
@@ -55,18 +46,26 @@ import serialize from 'for-cerial';
     fetch(Form.FORM.getAttribute('action'), {
       method: Form.FORM.getAttribute('method'),
       body: formData
-    })
-      .then(response => {
-        let alert = document.querySelector('[data-alert-name="feedback"]');
-        let form = document.getElementById('feedback-form');
-        alert.classList.remove('hidden');
-        form.classList.add('hidden');
-      })
-      .catch(error => {
-        let errorAlert = document.querySelector('[data-alert-name="feedback-error"]');
-        errorAlert.classList.remove('hidden');
+    }).then(response => {
+      let alert = document.querySelector('[data-alert-name="feedback"]');
+      let form = document.getElementById('feedback-form');
 
+      alert.classList.remove('hidden');
+      alert.setAttribute('aria-hidden', 'false');
+
+      form.classList.add('hidden');
+      form.setAttribute('aria-hidden', 'true');
+
+      if (process.env.NODE_ENV === 'development')
+        console.dir(response);
+    }).catch(error => {
+      let errorAlert = document.querySelector('[data-alert-name="feedback-error"]');
+
+      errorAlert.classList.remove('hidden');
+      errorAlert.setAttribute('aria-hidden', 'false');
+
+      if (process.env.NODE_ENV === 'development')
         console.error('There has been a problem with your fetch operation:', error);
-      });
+    });
   };
 })();
