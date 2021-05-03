@@ -36,6 +36,8 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
     loading.classList.add('flex', 'justify-center', 'items-center', 'text-yellow-access');
     loading.id = 'spinner-container';
     loading.appendChild(spinner);
+    form.classList.add('hidden');
+    form.setAttribute('aria-hidden', 'true');
     container.appendChild(loading);
 
     // To send the data with the application/x-www-form-urlencoded header
@@ -58,15 +60,11 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
       body: formData
     }).then(response => {
       let alert = document.querySelector('[data-alert-name="feedback"]');
-      let form = document.getElementById('feedback-form');
       let spinnerEl = document.getElementById('spinner-container');
 
       spinnerEl.classList.add('hidden');
       alert.classList.remove('hidden');
       alert.setAttribute('aria-hidden', 'false');
-
-      form.classList.add('hidden');
-      form.setAttribute('aria-hidden', 'true');
 
       if (process.env.NODE_ENV === 'development')
         console.dir(response);
