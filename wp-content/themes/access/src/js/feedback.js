@@ -3,6 +3,7 @@
 import Forms from '@nycopportunity/patterns-framework/src/utilities/forms/forms';
 import Modal from 'pattern-modal/src/modal';
 import serialize from 'for-cerial';
+import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
 
 (() => {
   'use strict';
@@ -28,6 +29,15 @@ import serialize from 'for-cerial';
   Form.submit = (event) => {
     event.preventDefault();
 
+    let container = document.getElementById('modal-body');
+    let spinner = new Spinner();
+    let loading = document.createElement('div');
+
+    loading.classList.add('flex', 'justify-center', 'items-center', 'text-yellow-access');
+    loading.id = 'spinner-container';
+    loading.appendChild(spinner);
+    container.appendChild(loading);
+
     // To send the data with the application/x-www-form-urlencoded header
     // we need to use URLSearchParams(); instead of FormData(); which uses
     // multipart/form-data
@@ -49,7 +59,9 @@ import serialize from 'for-cerial';
     }).then(response => {
       let alert = document.querySelector('[data-alert-name="feedback"]');
       let form = document.getElementById('feedback-form');
+      let spinnerEl = document.getElementById('spinner-container');
 
+      spinnerEl.classList.add('hidden');
       alert.classList.remove('hidden');
       alert.setAttribute('aria-hidden', 'false');
 
