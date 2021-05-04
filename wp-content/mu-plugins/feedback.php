@@ -7,6 +7,11 @@ use \TANIOS\Airtable\Airtable;
 add_action('wp_ajax_feedback', 'FeedbackNYC\feedbackHandler');
 add_action('wp_ajax_nopriv_feedback', 'FeedbackNYC\feedbackHandler');
 
+/**
+ * Creates a record on an Airtable based on the feedback form submission.
+ *
+ * @return Array - If successful, returns a response from Airtable client.
+ */
 function feedbackHandler() {
   $nonce = $_POST['feedback-nonce'];
 
@@ -25,6 +30,8 @@ function feedbackHandler() {
 
 /**
  * Return the client to interact with the Airtable API.
+ *
+ * @return Array - The Airtable PHP client
  */
 function get_airtable_client() {
   if (defined('AIRTABLE_API_KEY') && defined('AIRTABLE_BASE_KEY')) {
@@ -40,6 +47,10 @@ function get_airtable_client() {
 
 /**
  * Creates a record in an Airtable table.
+ * @param Array $args - The form fields and values from the submission.
+ * @param Array $client - The Airtable PHP client.
+ *
+ * @return Array Response from Airtable regarding creation of a table record.
  */
 function create_record($args, $client) {
   $new_record = $client->saveContent(AIRTABLE_TABLE_NAME, $args);
@@ -48,6 +59,9 @@ function create_record($args, $client) {
 
 /**
  * Pass values from the submission inthe Airtable fields
+ * @param Array $submission - The POST request data from the feedback form.
+ *
+ * @return Array The fields and values from the feedback form submission.
  */
 function get_values_from_submission($submission) {
   $feedback_fields = array(
