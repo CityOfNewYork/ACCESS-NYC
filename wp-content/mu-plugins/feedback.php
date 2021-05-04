@@ -34,10 +34,10 @@ function feedbackHandler() {
  * @return Array - The Airtable PHP client
  */
 function get_airtable_client() {
-  if (defined('AIRTABLE_API_KEY') && defined('AIRTABLE_BASE_KEY')) {
+  if (defined('AIRTABLE_FEEDBACK_API_KEY') && defined('AIRTABLE_FEEDBACK_BASE_KEY')) {
     $airtable = new Airtable(array(
-      'api_key' => AIRTABLE_API_KEY,
-      'base'    => AIRTABLE_BASE_KEY
+      'api_key' => AIRTABLE_FEEDBACK_API_KEY,
+      'base'    => AIRTABLE_FEEDBACK_BASE_KEY
     ));
     return $airtable;
   } else {
@@ -53,7 +53,7 @@ function get_airtable_client() {
  * @return Array Response from Airtable regarding creation of a table record.
  */
 function create_record($args, $client) {
-  $new_record = $client->saveContent(AIRTABLE_TABLE_NAME, $args);
+  $new_record = $client->saveContent(AIRTABLE_FEEDBACK_TABLE_NAME, $args);
   return $new_record;
 }
 
