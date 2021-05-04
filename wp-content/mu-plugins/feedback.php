@@ -16,15 +16,16 @@ function feedbackHandler() {
   $nonce = $_POST['feedback-nonce'];
 
   if (wp_verify_nonce($nonce, 'feedback')) {
-    $client = get_airtable_client();
-
-    $feedback_fields = get_values_from_submission($_POST);
-
-    $airtable_record = create_record($feedback_fields, $client);
+    try {
+      $client = get_airtable_client();
+      $feedback_fields = get_values_from_submission($_POST);
+      $airtable_record = create_record($feedback_fields, $client);
+    } catch (Exception $e) {
+      debug($e->getMessage());
+    }
   } else {
-    $message = 'Error in lib/feedback.php file.';
+    $message = 'Feedback form nonce not verified';
     error_log($message);
-    die(__('Security check', 'textdomain'));
   };
 }
 
@@ -41,7 +42,7 @@ function get_airtable_client() {
     ));
     return $airtable;
   } else {
-    throw new Exception('Airtable API Keys are missing.');
+    throw new \Exception('Airtable API Keys are missing.');
   }
 }
 
@@ -54,6 +55,13 @@ function get_airtable_client() {
  */
 function create_record($args, $client) {
   $new_record = $client->saveContent(AIRTABLE_FEEDBACK_TABLE_NAME, $args);
+  $client_response = (array) $new_record;
+  foreach ($client_response as $key => $value) {
+    if (array_key_exists('error', $value)) {
+      throw new \Exception("{$value->error->message}");
+    }
+  }
+
   return $new_record;
 }
 
