@@ -97,6 +97,7 @@
     "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
+    "pattern-modal": "git+https://github.com/NYCOpportunity/pattern-modal.git",
     "underscore": "^1.10.2",
     "whatwg-fetch": "^3.0.0"
   }
