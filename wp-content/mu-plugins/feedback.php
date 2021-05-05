@@ -81,7 +81,8 @@ function get_values_from_submission($submission) {
   $feedback_fields = array(
     'helpful'        => $submission['helpful'],
     'description'    => $submission['description'],
-    'program'        => $submission['program']
+    'program'        => $submission['program'],
+    'browser'        => $_SERVER['HTTP_USER_AGENT']
   );
 
   return $feedback_fields;
