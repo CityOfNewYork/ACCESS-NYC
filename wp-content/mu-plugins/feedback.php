@@ -22,12 +22,13 @@ function feedbackHandler() {
       $airtable_record = create_record($feedback_fields, $client);
     } catch (Exception $e) {
       $message = $e->getMessage();
-      debug($message);
+
       failure(400, $message);
     }
   } else {
     $message = 'Feedback form nonce not verified';
-    error_log($message);
+
+    failure(400, $message);
   };
 }
 
@@ -44,12 +45,13 @@ function get_airtable_client() {
     ));
     return $airtable;
   } else {
-    throw new \Exception('Airtable API Keys are missing.');
+    failure(400, 'Airtable API Keys are missing.');
   }
 }
 
 /**
  * Creates a record in an Airtable table.
+ *
  * @param Array $args - The form fields and values from the submission.
  * @param Array $client - The Airtable PHP client.
  *
@@ -58,9 +60,10 @@ function get_airtable_client() {
 function create_record($args, $client) {
   $new_record = $client->saveContent(AIRTABLE_FEEDBACK_TABLE_NAME, $args);
   $client_response = (array) $new_record;
+
   foreach ($client_response as $key => $value) {
     if (array_key_exists('error', $value)) {
-      throw new \Exception("{$value->error->message}");
+      failure(400, "{$value->error->message}");
     }
   }
 
@@ -69,6 +72,7 @@ function create_record($args, $client) {
 
 /**
  * Pass values from the submission inthe Airtable fields
+ *
  * @param Array $submission - The POST request data from the feedback form.
  *
  * @return Array The fields and values from the feedback form submission.
@@ -79,12 +83,12 @@ function get_values_from_submission($submission) {
     'description'    => $submission['description'],
     'program'        => $submission['program']
   );
-  debug($feedback_fields);
+
   return $feedback_fields;
 }
 
 /**
- * Sends a failer notice to the request.
+ * Sends a failure notice to the request.
  *
  * @param   Number   $code     The specific error code
  * @param   String   $message  The feedback message
