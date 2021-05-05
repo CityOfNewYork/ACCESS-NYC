@@ -21,7 +21,9 @@ function feedbackHandler() {
       $feedback_fields = get_values_from_submission($_POST);
       $airtable_record = create_record($feedback_fields, $client);
     } catch (Exception $e) {
-      debug($e->getMessage());
+      $message = $e->getMessage();
+      debug($message);
+      failure(400, $message);
     }
   } else {
     $message = 'Feedback form nonce not verified';
@@ -77,5 +79,22 @@ function get_values_from_submission($submission) {
     'description'    => $submission['description'],
     'program'        => $submission['program']
   );
+  debug($feedback_fields);
   return $feedback_fields;
+}
+
+/**
+ * Sends a failer notice to the request.
+ *
+ * @param   Number   $code     The specific error code
+ * @param   String   $message  The feedback message
+ * @param   Boolean  $retry    Wether to retry
+ */
+function failure($code, $message, $retry = false) {
+  wp_send_json([
+    'success' => false,
+    'error' => $code,
+    'message' => $message,
+    'retry' => $retry
+  ]);
 }
