@@ -18,7 +18,7 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
  */
 class SubscriptionList extends ListResource {
     /**
@@ -128,7 +128,7 @@ class SubscriptionList extends ListResource {
      *
      * @param string $description Subscription description
      * @param string $sinkSid Sink SID.
-     * @param array[] $types Nested resource URLs.
+     * @param array[] $types Subscribed Event Types
      * @return SubscriptionInstance Created SubscriptionInstance
      * @throws TwilioException When an HTTP error occurs.
      */

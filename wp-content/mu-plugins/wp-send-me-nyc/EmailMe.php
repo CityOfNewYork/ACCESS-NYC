@@ -203,12 +203,20 @@ class EmailMe extends ContactMe {
   }
 
   /**
-   * Extend basic setting section in ContactMe Class to add display name and reply email.
+   * Extend basic setting section in ContactMe Class to add secret,
+   * display name and reply email.
    */
   public function createSettingsSection() {
     parent::createSettingsSection();
 
     $section = $this->prefix . '_section';
+
+    $this->registerSetting(array(
+      'id' => $this->prefix . '_secret',
+      'title' => $this->secret_label,
+      'section' => $section,
+      'private' => true
+    ));
 
     $this->registerSetting(array(
       'id' => $this->prefix . '_display_name',

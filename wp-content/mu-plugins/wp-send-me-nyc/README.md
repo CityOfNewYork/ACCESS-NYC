@@ -35,9 +35,10 @@ Each settings section corresponds to a specific service that needs to be configu
 
 ### SMS Settings (Twilio)
 
-- SID
-- Token
+- Account SID
 - Sender Phone Number
+- API Key SID
+- API Key Secret
 
 ### Email Settings (Amazon SES)
 
@@ -47,7 +48,7 @@ Each settings section corresponds to a specific service that needs to be configu
 - Email Display Name (optional)
 - Reply-To (optional)
 
-**Note:** This plugin workes nicely with the [nyco-wp-config](https://github.com/CityOfNewYork/nyco-wp-config) plugin.
+**Note:** This plugin works nicely with the [NYCO WordPress Config](https://github.com/CityOfNewYork/nyco-wp-config) plugin.
 
 ## Custom Post Types
 
@@ -79,7 +80,7 @@ The [sample email](https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/blob/mas
 
 **Customization**
 
-The path to the controller file and class contents can be used as is or modified as needed. By default, `SMNYC\EmailMe` requires a file called `smnyc-email.php` in the root of the activated WordPress theme that contains the the controller class. However, different path can be passed to the `SMNYC\EmailMe` class on instatiation in the [auto loader](#initialization);
+The path to the controller file and class contents can be used as is or modified as needed. By default, `SMNYC\EmailMe` requires a file called `smnyc-email.php` in the root of the activated WordPress theme that contains the the controller class. However, different path can be passed to the `SMNYC\EmailMe` class on instantiation in the [auto loader](#initialization);
 
     $email = new SMNYC\EmailMe('controllers/smnyc-email.php');
 

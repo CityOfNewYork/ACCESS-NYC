@@ -450,12 +450,12 @@ private static $installed = array (
     ),
     'twilio/sdk' => 
     array (
-      'pretty_version' => '6.22.0',
-      'version' => '6.22.0.0',
+      'pretty_version' => '6.23.0',
+      'version' => '6.23.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b24040f9bcd2237e4210dcafd9a287fad9759a8a',
+      'reference' => '4e69cc175512db9ef07e87e92c124aefa4d01360',
     ),
     'upstatement/routes' => 
     array (
