@@ -21,25 +21,6 @@
   },
   "author": "Blue State Digital | Maintained by NYC Opportunity",
   "license": "ISC",
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "google"
-    ],
-    "rules": {
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ]
-    },
-    "env": {
-      "browser": true
-    }
-  },
   "babel": {
     "presets": [
       [
@@ -93,12 +74,12 @@
   "dependencies": {
     "@nycopportunity/access-patterns": "^0.16.0",
     "@nycopportunity/pattern-attribution": "^1.0.1",
+    "@nycopportunity/pattern-modal": "^1.0.0",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
     "@nycopportunity/wp-archive-vue": "^1.2.0",
     "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
-    "pattern-modal": "git+https://github.com/NYCOpportunity/pattern-modal.git",
     "underscore": "^1.10.2",
     "whatwg-fetch": "^3.0.0"
   }
