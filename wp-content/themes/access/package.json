@@ -92,7 +92,7 @@
   },
   "dependencies": {
     "@nycopportunity/access-patterns": "^0.16.0",
-    "@nycopportunity/pattern-attribution": "file:../../../../../../nycopportunity/pattern-attribution",
+    "@nycopportunity/pattern-attribution": "^1.0.1",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
     "@nycopportunity/wp-archive-vue": "^1.2.0",
     "animate.scss": "0.0.6",

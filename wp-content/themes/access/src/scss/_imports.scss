@@ -19,8 +19,8 @@ $path-to-images: 'img/';
 @import 'pattern-modal/src/modal';
 
 /**********
-* Elements
-***********/
+ * Elements
+ ***********/
 
 @import '@nycopportunity/access-patterns/src/elements/base/base';
 @import '@nycopportunity/access-patterns/src/elements/badge/badge';
@@ -77,12 +77,12 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/objects/search-box/search-box';
 @import '@nycopportunity/access-patterns/src/objects/text-controller/text-controller';
 
-@import '@nycopportunity/pattern-attribution/src/attribution-tokens';
+@import '@nycopportunity/pattern-attribution/src/tokens';
 @import '@nycopportunity/pattern-attribution/src/attribution';
 
 /***********
-* Utilities
-************/
+ * Utilities
+ ************/
 
 @import '@nycopportunity/access-patterns/src/utilities/animate/animate';
 @import '@nycopportunity/access-patterns/src/utilities/color/color';
