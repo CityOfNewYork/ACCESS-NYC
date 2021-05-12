@@ -32,6 +32,8 @@ import Modal from 'pattern-modal/src/modal';
   /**
    * Instantiate ACCESS NYC Patterns
    */
+
+  new Toggle();
   new Icons('/wp-content/themes/access/assets/svg/icons.e876c3ad.svg');
   new Copy();
   new Filter();
