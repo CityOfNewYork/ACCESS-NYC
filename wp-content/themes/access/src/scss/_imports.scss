@@ -3,6 +3,17 @@
 $cdn: '../../assets/';
 $path-to-images: 'img/';
 
+/************************
+ * Custom Properties
+ ************************/
+
+@import '@nycopportunity/pattern-modal/src/tokens';
+@import '@nycopportunity/pattern-attribution/src/tokens';
+
+/************************
+ * Font Face Declaration
+ ************************/
+
 @import '@nycopportunity/access-patterns/src/elements/fonts/fonts';
 
 /************************
@@ -16,7 +27,6 @@ $path-to-images: 'img/';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeIn';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUpBig';
-@import 'pattern-modal/src/modal';
 
 /**********
  * Elements
@@ -76,8 +86,7 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/objects/mobile-nav/mobile-nav';
 @import '@nycopportunity/access-patterns/src/objects/search-box/search-box';
 @import '@nycopportunity/access-patterns/src/objects/text-controller/text-controller';
-
-@import '@nycopportunity/pattern-attribution/src/tokens';
+@import '@nycopportunity/pattern-modal/src/modal';
 @import '@nycopportunity/pattern-attribution/src/attribution';
 
 /***********

@@ -31,8 +31,6 @@ enqueue_inline('google-tag-manager');
 enqueue_script('polyfill');
 enqueue_script('main');
 enqueue_script('single-programs');
-enqueue_script('feedback');
-
 
 /**
  * Manual DNS prefetch and preconnect headers that are not added through

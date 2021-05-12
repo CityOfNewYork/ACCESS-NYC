@@ -18,9 +18,6 @@ import localize from 'utilities/localize/localize';
 import Newsletter from 'utilities/newsletter/newsletter';
 import WebShare from 'utilities/web-share/web-share';
 
-// External modules
-import Modal from 'pattern-modal/src/modal';
-
 (function(window) {
   'use strict';
 
