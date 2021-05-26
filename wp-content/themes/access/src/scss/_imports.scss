@@ -3,6 +3,17 @@
 $cdn: '../../assets/';
 $path-to-images: 'img/';
 
+/************************
+ * Custom Properties
+ ************************/
+
+@import '@nycopportunity/pattern-modal/src/tokens';
+@import '@nycopportunity/pattern-attribution/src/tokens';
+
+/************************
+ * Font Face Declaration
+ ************************/
+
 @import '@nycopportunity/access-patterns/src/elements/fonts/fonts';
 
 /************************
@@ -16,14 +27,14 @@ $path-to-images: 'img/';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeIn';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUp';
 @import 'animate.scss/vendor/assets/stylesheets/animate/fadeInUpBig';
-@import 'pattern-modal/src/modal';
 
 /**********
-* Elements
-***********/
+ * Elements
+ ***********/
 
 @import '@nycopportunity/access-patterns/src/elements/base/base';
 @import '@nycopportunity/access-patterns/src/elements/badge/badge';
+@import '@nycopportunity/access-patterns/src/elements/buttons/buttons';
 @import '@nycopportunity/access-patterns/src/elements/code/code';
 @import '@nycopportunity/access-patterns/src/elements/layouts/layouts';
 @import '@nycopportunity/access-patterns/src/elements/links/links';
@@ -31,7 +42,6 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/elements/overlay/overlay';
 @import '@nycopportunity/access-patterns/src/elements/forms/forms';
 @import '@nycopportunity/access-patterns/src/elements/labels/labels';
-@import '@nycopportunity/access-patterns/src/elements/buttons/buttons';
 @import '@nycopportunity/access-patterns/src/elements/icons/icons';
 @import '@nycopportunity/access-patterns/src/elements/spinner/spinner';
 @import '@nycopportunity/access-patterns/src/elements/checkboxes/checkboxes';
@@ -76,10 +86,12 @@ $path-to-images: 'img/';
 @import '@nycopportunity/access-patterns/src/objects/mobile-nav/mobile-nav';
 @import '@nycopportunity/access-patterns/src/objects/search-box/search-box';
 @import '@nycopportunity/access-patterns/src/objects/text-controller/text-controller';
+@import '@nycopportunity/pattern-modal/src/modal';
+@import '@nycopportunity/pattern-attribution/src/attribution';
 
 /***********
-* Utilities
-************/
+ * Utilities
+ ************/
 
 @import '@nycopportunity/access-patterns/src/utilities/animate/animate';
 @import '@nycopportunity/access-patterns/src/utilities/color/color';

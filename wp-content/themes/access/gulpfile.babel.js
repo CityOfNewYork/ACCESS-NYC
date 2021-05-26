@@ -166,16 +166,24 @@ gulp.task('clean:scripts', callback => {
 gulp.task('lint', () =>
   gulp.src(`${SRC}/js/**/*.js`)
     .pipe(eslint({
-      parser: 'babel-eslint',
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: {
-          modules: true
-        }
+      // Config from the NYCO Patterns Framework
+      'extends': 'google',
+      'env': {
+        'browser': true,
+        'es6': true
       },
-      rules: {
-        strict: 0
+      'parserOptions': {
+        'ecmaVersion': 6,
+        'sourceType': 'module'
+      },
+      'rules': {
+        'no-console': 1,
+        'one-var': 0,
+        'comma-dangle': 0,
+        // 'curly': [
+        //   'error',
+        //   'multi-or-nest'
+        // ]
       }
     }))
     .pipe(eslint.format())
