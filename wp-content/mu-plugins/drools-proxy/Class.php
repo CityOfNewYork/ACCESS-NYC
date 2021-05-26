@@ -4,7 +4,7 @@ namespace DroolsProxy;
 
 class DroolsProxy {
   /**
-   * [__construct description]
+   * Add AJAX action for logged in and non-logged in users.
    */
   public function __construct() {
     add_action('wp_ajax_drools', [$this, 'incoming']);
@@ -12,7 +12,7 @@ class DroolsProxy {
   }
 
   /**
-   * [incoming description]
+   * The request handler for the Drools Engine
    */
   public function incoming() {
     $url = get_option('drools_url');
@@ -24,10 +24,13 @@ class DroolsProxy {
     $pass = (!empty($pass)) ? $pass : DROOLS_PASS;
 
     if (empty($url) || empty($user) || empty($pass)) {
+      $this->notify(__('The configuration is missing information.'), true);
+
       wp_send_json([
         'status' => 'fail',
         'message' => 'invalid configuration'
       ], 412);
+
       wp_die();
     }
 
@@ -38,6 +41,9 @@ class DroolsProxy {
     $response = $this->request($url, json_encode($_POST['data']), $user, $pass);
 
     if ($response === false || empty($response)) {
+      $this->notify(__('The response is false or empty,') . ' "' .
+        var_export($response, true) . '"', true);
+
       wp_send_json(['status' => 'fail'], 500);
 
       wp_die();
@@ -54,12 +60,14 @@ class DroolsProxy {
   }
 
   /**
-   * [request description]
-   * @param   [type]  $url   [$url description]
-   * @param   [type]  $data  [$data description]
-   * @param   [type]  $user  [$user description]
-   * @param   [type]  $pass  [$pass description]
-   * @return  [type]         [return description]
+   * A wrapper around the PHP CURL request to the Drools Engine.
+   *
+   * @param   String  $url    The API endpoint of the Drools application
+   * @param   JSON    $data   A JSON encoded Drools Object
+   * @param   String  $user   The Drools account username
+   * @param   String  $pass   The Drools account password
+   *
+   * @return  String/Boolean  The Drools response or false if request failed
    */
   private function request($url, $data, $user, $pass) {
     $ch = curl_init();
@@ -81,16 +89,34 @@ class DroolsProxy {
     ]);
 
     $response = curl_exec($ch);
+
+    $code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+
+    if ($code >= 400) {
+      $this->notify(__('The request failed, response code ') . $code  . '.', true);
+
+      wp_send_json(['status' => 'fail'], $code);
+
+      curl_close($ch);
+
+      wp_die();
+    }
+
     curl_close($ch);
 
     return $response;
   }
 
   /**
-   * [createSettingsSection description]
+   * Create the settings for the Drools Proxy plugin
    */
   public function createSettingsSection() {
-    add_settings_section('drools_proxy', 'Drools Settings', [$this, 'settingsHeadingText'], 'drools_config');
+    add_settings_section(
+      'drools_proxy',
+      'Drools Settings',
+      '<p>Enter your Drools credentials here.</p>',
+      'drools_config'
+    );
 
     add_settings_field(
       'drools_url',                 // field name
@@ -131,21 +157,32 @@ class DroolsProxy {
       )
     );
 
+    add_settings_field(
+      'drools_notify',
+      'Notify',
+      [$this, 'settingsFieldCheckbox'],
+      'drools_config',
+      'drools_proxy',
+      array(
+        'id' => 'drools_notify',
+        'value' => '5',
+        'label' => 'Check to notify the admin if there is an
+          error. This will be disabled on the first instance of an error,
+          however, all errors are logged.',
+        'disabled' => false
+      )
+    );
+
     register_setting('drools_settings', 'drools_url');
     register_setting('drools_settings', 'drools_user');
     register_setting('drools_settings', 'drools_pass');
+    register_setting('drools_settings', 'drools_notify');
   }
 
   /**
-   * [settingsHeadingText description]
-   */
-  public function settingsHeadingText() {
-    echo '<p>Enter your Drools credentials here.</p>';
-  }
-
-  /**
-   * [settingsFieldHtml description]
-   * @param   [type]  $args  [$args description]
+   * WordPress settings field template function for input fields
+   *
+   * @param  Array  $args  An array containing [privacy, input ID, and placeholder text] for the input
    */
   public function settingsFieldHtml($args) {
     echo implode('', [
@@ -170,6 +207,61 @@ class DroolsProxy {
         '<code>' . $html . '</code>',
         '<p>'
       ]);
+    }
+  }
+
+  /**
+   * Callback for add_settings_field. Creates the checkbox markup for a given admin option.
+   * @link https://developer.wordpress.org/reference/functions/add_settings_field/
+   *
+   * @param   [type]  $args  Field arguments [ID, Value, Label, Disabled], of the text input
+   */
+  public function settingsFieldCheckbox($args) {
+    echo implode('', [
+      '<fieldset>',
+      '  <legend class="screen-reader-text"><span>' . __($args['label']) . '</span></legend>',
+      '  <label for="' . $args['id'] . '">',
+      '    <input type="checkbox" value="' . $args['value'] . '" name="' . $args['id'] . '" id="' . $args['id'] . '" ',
+      '    ' . checked($args['value'], get_option($args['id']), false) . ' ',
+      '    ' . disabled($args['disabled'], true, false) . ' >',
+      '    ' . __($args['label']) . '',
+      '  </label>',
+      '</fieldset>',
+    ]);
+
+    if (defined(strtoupper($args['id']))) {
+      echo implode([
+        '<p class="description">',
+        __('Environment currently set to '),
+        '<code>' . constant(strtoupper($args['id'])) . '</code>',
+        '<p>'
+      ], '');
+    }
+  }
+
+  /**
+   * Logs a message and sends notification via wp_mail email. The admin will need
+   * to reset the notify option once a message is sent to prevent continuous mailing.
+   *
+   * @param  String  $msg  The message to send.
+   */
+  public function notify($msg, $mail = false, $throttle = true) {
+    $msg = 'Drools Proxy: ' . $msg;
+
+    $notify = get_option('drools_notify');
+
+    error_log($msg);
+
+    if ($mail && $throttle && $notify === '5') {
+      $msg = $msg . __(' This is the first instance of the error. All ' .
+      'following instances will be logged to the server. Recheck the "Send ' .
+      'Notifications" option in the admin menu.');
+
+      wp_mail(get_option('admin_email'), 'Drools Proxy', $msg);
+
+      update_option('drools_notify', '0');
+    } elseif ($mail && !$throttle) {
+      wp_mail(get_option('admin_email'), 'Drools Proxy', $msg);
     }
   }
 }
