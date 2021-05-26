@@ -215,7 +215,7 @@ class Screener {
       this._initRecaptcha();
       viewCount = 0;
     } else {
-      window.screenerCallback = () => {};
+      window.reCaptchaCallback = () => {};
     }
 
     // `2/1440` sets the cookie to expire after two minutes.
@@ -318,7 +318,7 @@ class Screener {
    * @return {this} Screener
    */
   _initRecaptcha() {
-    window.screenerCallback = () => {
+    window.reCaptchaCallback = () => {
       window.grecaptcha.render(document.getElementById('screener-recaptcha'), {
         'sitekey': Utility.CONFIG.GRECAPTCHA_SITE_KEY,
         'callback': () => {

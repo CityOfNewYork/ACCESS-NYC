@@ -25,6 +25,7 @@ enqueue_inline('data-layer');
 enqueue_inline('google-optimize');
 enqueue_inline('google-analytics');
 enqueue_inline('google-tag-manager');
+enqueue_inline('google-recaptcha');
 
 // Main
 // TODO: Evaluate coverage of individual polyfills and load per browser

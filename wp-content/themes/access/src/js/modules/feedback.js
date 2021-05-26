@@ -7,39 +7,105 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
 
 (() => {
   'use strict';
+
   /**
-   * Pass the DOM element to the form.
+   * Instantiate Form and Modal modules
    */
-  const form = document.getElementById('feedback-form');
-  const Form = new Forms(form);
+
+  const Form = new Forms(document.getElementById('feedback-form'));
 
   new Modal();
 
   Form.selectors.ERROR_MESSAGE_PARENT = '.c-question__container';
 
-  /**
-   * This function automatically watches inputs within the form and displays
-   * error messages on the blur event for each input.
-   */
-  Form.watch();
+  Form.watch(); // Automatically watch for input errors on blur
+
+  window.reCaptchaCallback = () => { };
 
   /**
-   * The submit function for the form.
+   * The form submission handler
+   *
+   * @param   {Object}  event  Form submission event
    */
-  Form.submit = (event) => {
+   Form.submit = (event) => {
     event.preventDefault();
 
+    recaptcha();
+  };
+
+  /**
+   * Add loading spinner to the DOM
+   */
+  const loading = () => {
     let container = document.getElementById('modal-body');
     let spinner = new Spinner();
     let loading = document.createElement('div');
 
-    loading.classList.add('flex', 'justify-center', 'items-center', 'text-yellow-access');
-    loading.id = 'spinner-container';
-    loading.appendChild(spinner);
-    form.classList.add('hidden');
-    form.setAttribute('aria-hidden', 'true');
-    container.appendChild(loading);
+    Form.FORM.classList.add('hidden');
+    Form.FORM.setAttribute('aria-hidden', 'true');
 
+    loading.classList.add('flex', 'justify-center', 'items-center', 'text-yellow-access');
+    loading.id = 'feedback-spinner';
+    loading.appendChild(spinner);
+
+    container.appendChild(loading);
+  };
+
+  /**
+   * Add reCaptcha
+   */
+  const recaptcha = () => {
+    let questions = Form.FORM.querySelector('[data-js*="questions"]');
+    let questionRecaptcha = Form.FORM.querySelector('[data-js*="question-recaptcha"]');
+
+    questions.classList.add('hidden');
+    questions.setAttribute('aria-hidden', 'true');
+
+    questionRecaptcha.classList.remove('hidden');
+    questionRecaptcha.setAttribute('aria-hidden', 'false');
+
+    window.grecaptcha.render(Form.FORM.querySelector('[data-js="recaptcha"]'), {
+      'sitekey': '6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX',
+      'callback': () => {
+        loading();
+        submit();
+      },
+      'error-callback': () => {
+        failure();
+      }
+    });
+  };
+
+  /**
+   * Hide the Spinner and show the success message
+   */
+  const success = () => {
+    let alert = document.querySelector('[data-js="feedback-alert"]');
+    let spinnerEl = document.getElementById('feedback-spinner');
+
+    spinnerEl.classList.add('hidden');
+
+    alert.classList.remove('hidden');
+    alert.setAttribute('aria-hidden', 'false');
+  };
+
+  /**
+   * Hide the spinner and show the failure message
+   */
+  const failure = () => {
+    let alert = document.querySelector('[data-js="feedback-alert-error"]');
+    let spinnerEl = document.getElementById('feedback-spinner');
+
+    spinnerEl.classList.add('hidden');
+
+    alert.classList.remove('hidden');
+    alert.setAttribute('aria-hidden', 'false');
+  };
+
+  /**
+   * Use fetch to submit the request
+   */
+  const submit = () => {
     // To send the data with the application/x-www-form-urlencoded header
     // we need to use URLSearchParams(); instead of FormData(); which uses
     // multipart/form-data
@@ -58,21 +124,19 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
     fetch(Form.FORM.getAttribute('action'), {
       method: Form.FORM.getAttribute('method'),
       body: formData
-    }).then(response => {
-      let alert = document.querySelector('[data-alert-name="feedback"]');
-      let spinnerEl = document.getElementById('spinner-container');
-
-      spinnerEl.classList.add('hidden');
-      alert.classList.remove('hidden');
-      alert.setAttribute('aria-hidden', 'false');
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response.success) {
+        success();
+      } else {
+        failure();
+      }
 
       if (process.env.NODE_ENV === 'development')
         console.dir(response); // eslint-disable-line no-console
     }).catch(error => {
-      let errorAlert = document.querySelector('[data-alert-name="feedback-error"]');
-
-      errorAlert.classList.remove('hidden');
-      errorAlert.setAttribute('aria-hidden', 'false');
+      failure();
 
       if (process.env.NODE_ENV === 'development')
         console.error('There has been a problem with your fetch operation:', error); // eslint-disable-line no-console

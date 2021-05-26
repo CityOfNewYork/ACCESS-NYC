@@ -20,6 +20,13 @@ function feedbackHandler() {
       $client = get_airtable_client();
       $feedback_fields = get_values_from_submission($_POST);
       $airtable_record = create_record($feedback_fields, $client);
+
+      wp_send_json([
+        'success' => true,
+        'error' => 200,
+        'message' => __('Thank you for your feedback.'),
+        'retry' => false
+      ]);
     } catch (Exception $e) {
       $message = $e->getMessage();
 
@@ -62,7 +69,7 @@ function create_record($args, $client) {
   $client_response = (array) $new_record;
 
   foreach ($client_response as $key => $value) {
-    if (array_key_exists('error', $value)) {
+    if (isset($value->error)) {
       failure(400, "{$value->error->message}");
     }
   }
