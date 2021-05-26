@@ -18,9 +18,6 @@ import localize from 'utilities/localize/localize';
 import Newsletter from 'utilities/newsletter/newsletter';
 import WebShare from 'utilities/web-share/web-share';
 
-// External modules
-import Modal from 'pattern-modal/src/modal';
-
 (function(window) {
   'use strict';
 
@@ -32,6 +29,8 @@ import Modal from 'pattern-modal/src/modal';
   /**
    * Instantiate ACCESS NYC Patterns
    */
+
+  new Toggle();
   new Icons('/wp-content/themes/access/assets/svg/icons.e876c3ad.svg');
   new Copy();
   new Filter();

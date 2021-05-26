@@ -1,7 +1,7 @@
 /* eslint-env browser */
 
 import Forms from '@nycopportunity/patterns-framework/src/utilities/forms/forms';
-import Modal from 'pattern-modal/src/modal';
+import Modal from '@nycopportunity/pattern-modal/src/modal';
 import serialize from 'for-cerial';
 import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
 
@@ -67,7 +67,7 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
       alert.setAttribute('aria-hidden', 'false');
 
       if (process.env.NODE_ENV === 'development')
-        console.dir(response);
+        console.dir(response); // eslint-disable-line no-console
     }).catch(error => {
       let errorAlert = document.querySelector('[data-alert-name="feedback-error"]');
 
@@ -75,7 +75,7 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
       errorAlert.setAttribute('aria-hidden', 'false');
 
       if (process.env.NODE_ENV === 'development')
-        console.error('There has been a problem with your fetch operation:', error);
+        console.error('There has been a problem with your fetch operation:', error); // eslint-disable-line no-console
     });
   };
 })();
