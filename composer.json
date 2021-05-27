@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "humanmade/s3-uploads": "^2.2.1",
+    "humanmade/s3-uploads": "^3.0.0",
     "nyco/wp-assets": "^1.4",
     "nyco/wp-config": "^1.0.2",
     "nyco/wp-open-data-transients": "^0.1.1",
