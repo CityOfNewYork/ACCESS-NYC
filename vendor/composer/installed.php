@@ -1,8 +1,8 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '3.32.0',
-    'version' => '3.32.0.0',
+    'pretty_version' => '3.32.1',
+    'version' => '3.32.1.0',
     'aliases' => 
     array (
     ),
@@ -184,8 +184,8 @@
     ),
     'nyco/access-nyc' => 
     array (
-      'pretty_version' => '3.32.0',
-      'version' => '3.32.0.0',
+      'pretty_version' => '3.32.1',
+      'version' => '3.32.1.0',
       'aliases' => 
       array (
       ),
