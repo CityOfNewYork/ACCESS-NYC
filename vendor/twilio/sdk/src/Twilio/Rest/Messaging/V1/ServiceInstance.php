@@ -16,6 +16,8 @@ use Twilio\Options;
 use Twilio\Rest\Messaging\V1\Service\AlphaSenderList;
 use Twilio\Rest\Messaging\V1\Service\PhoneNumberList;
 use Twilio\Rest\Messaging\V1\Service\ShortCodeList;
+use Twilio\Rest\Messaging\V1\Service\UsAppToPersonList;
+use Twilio\Rest\Messaging\V1\Service\UsAppToPersonUsecaseList;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -42,11 +44,14 @@ use Twilio\Version;
  * @property int $validityPeriod
  * @property string $url
  * @property array $links
+ * @property bool $useInboundWebhookOnNumber
  */
 class ServiceInstance extends InstanceResource {
     protected $_phoneNumbers;
     protected $_shortCodes;
     protected $_alphaSenders;
+    protected $_usAppToPerson;
+    protected $_usAppToPersonUsecases;
 
     /**
      * Initialize the ServiceInstance
@@ -80,6 +85,7 @@ class ServiceInstance extends InstanceResource {
             'validityPeriod' => Values::array_get($payload, 'validity_period'),
             'url' => Values::array_get($payload, 'url'),
             'links' => Values::array_get($payload, 'links'),
+            'useInboundWebhookOnNumber' => Values::array_get($payload, 'use_inbound_webhook_on_number'),
         ];
 
         $this->solution = ['sid' => $sid ?: $this->properties['sid'], ];
@@ -149,6 +155,20 @@ class ServiceInstance extends InstanceResource {
      */
     protected function getAlphaSenders(): AlphaSenderList {
         return $this->proxy()->alphaSenders;
+    }
+
+    /**
+     * Access the usAppToPerson
+     */
+    protected function getUsAppToPerson(): UsAppToPersonList {
+        return $this->proxy()->usAppToPerson;
+    }
+
+    /**
+     * Access the usAppToPersonUsecases
+     */
+    protected function getUsAppToPersonUsecases(): UsAppToPersonUsecaseList {
+        return $this->proxy()->usAppToPersonUsecases;
     }
 
     /**

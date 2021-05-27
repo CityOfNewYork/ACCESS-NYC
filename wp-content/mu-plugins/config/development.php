@@ -93,24 +93,6 @@ activate_plugin('query-monitor/query-monitor.php');
 activate_plugin('query-monitor-twig-profile/query-monitor-twig-profile.php');
 
 /**
- * Remove Stat Collector data logging actions
- *
- * @param  Object  $instance  The instantiated StatCollector class
- *
- * @author NYC Opportunity
- */
-
-add_action('init_stat_collector', function($instance) {
-  remove_action('drools_request', [$instance, 'droolsRequest'], $instance->settings->priority);
-  remove_action('drools_response', [$instance, 'droolsResponse'], $instance->settings->priority);
-  remove_action('results_sent', [$instance, 'resultsSent'], $instance->settings->priority);
-  remove_action('peu_data', [$instance, 'peuData'], $instance->settings->priority);
-
-  remove_action('wp_ajax_response_update', [$instance, 'responseUpdate'], $instance->settings->priority);
-  remove_action('wp_ajax_nopriv_response_update', [$instance, 'responseUpdate'], $instance->settings->priority);
-});
-
-/**
  * Allow local development requests
  *
  * @author NYC Opportunity

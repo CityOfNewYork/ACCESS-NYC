@@ -17,9 +17,6 @@ use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class SyncListItemList extends ListResource {
     /**
      * Construct the SyncListItemList
@@ -131,7 +128,6 @@ class SyncListItemList extends ListResource {
             'Order' => $options['order'],
             'From' => $options['from'],
             'Bounds' => $options['bounds'],
-            'HideExpired' => $options['hideExpired'],
             'PageToken' => $pageToken,
             'Page' => $pageNumber,
             'PageSize' => $pageSize,

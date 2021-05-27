@@ -103,11 +103,11 @@ class ContactMe {
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);
 
-      $guid = isset($_POST['GUID']) ? $_POST['GUID']: '';
-      
+      $guid = isset($_POST['GUID']) ? $_POST['GUID'] : '';
+
       $url = $_POST['url'];
-      
-      $share_text = isset($_POST['sharetext']) ? $_POST['sharetext']: '';
+
+      $share_text = isset($_POST['sharetext']) ? $_POST['sharetext'] : '';
 
       $url_shortened = $this->shorten($url);
 
@@ -186,14 +186,15 @@ class ContactMe {
    */
   protected function validConfiguration($service) {
     $user = get_option('smnyc_' . $service . '_user');
-    $secret = get_option('smnyc_' . $service . '_secret');
     $from = get_option('smnyc_' . $service . '_from');
 
-    $user = (!empty($user)) ? $user : constant('SMNYC_' . strtoupper($service) . '_USER');
-    $secret = (!empty($secret)) ? $secret : constant('SMNYC_' . strtoupper($service) . '_SECRET');
-    $from = (!empty($from)) ? $from : constant('SMNYC_' . strtoupper($service) . '_FROM');
+    $user = (!empty($user)) ?
+      $user : constant('SMNYC_' . strtoupper($service) . '_USER');
 
-    if (empty($user) || empty($secret) || empty($from)) {
+    $from = (!empty($from)) ?
+      $from : constant('SMNYC_' . strtoupper($service) . '_FROM');
+
+    if (empty($user) || empty($from)) {
       $this->failure(-1, 'Invalid Configuration');
 
       return false;
@@ -302,13 +303,6 @@ class ContactMe {
       'id' => $this->prefix . '_user',
       'title' => $this->account_label,
       'section' => $section
-    ));
-
-    $this->registerSetting(array(
-      'id' => $this->prefix . '_secret',
-      'title' => $this->secret_label,
-      'section' => $section,
-      'private' => true
     ));
 
     $this->registerSetting(array(

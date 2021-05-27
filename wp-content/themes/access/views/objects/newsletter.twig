@@ -1,10 +1,7 @@
 <div data-js="newsletter">
   <form action="https://nyc.us18.list-manage.com/subscribe/post?u={{ this.mailchimp_account }}&id={{ this.mailchimp_audience_id }}" method="post" id="{{ this.id }}" name="{{ this.id }}" novalidate target="_blank">
     <div class="c-question">
-      <p class="c-question__label">
-        {{ __('Get occasional emails about benefits news, upcoming enrollment
-        periods, and deadlines. Translations are available in 11 languages.') }}
-      </p>
+      <p class="c-question__label">{{ __('Get occasional emails about benefits news, upcoming enrollment periods, and deadlines. Translations are available in 11 languages.', 'accessnyctheme') }}</p>
 
       <label class="sr-only" for="mce-email-{{ this.id }}">{{ __('Email address', 'accessnyctheme') }}</label>
 

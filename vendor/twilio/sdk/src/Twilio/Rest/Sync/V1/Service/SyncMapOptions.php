@@ -12,9 +12,6 @@ namespace Twilio\Rest\Sync\V1\Service;
 use Twilio\Options;
 use Twilio\Values;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 abstract class SyncMapOptions {
     /**
      * @param string $uniqueName An application-defined string that uniquely
@@ -36,14 +33,6 @@ abstract class SyncMapOptions {
      */
     public static function update(int $ttl = Values::NONE, int $collectionTtl = Values::NONE): UpdateSyncMapOptions {
         return new UpdateSyncMapOptions($ttl, $collectionTtl);
-    }
-
-    /**
-     * @param string $hideExpired Hide expired Sync Maps and show only active ones.
-     * @return ReadSyncMapOptions Options builder
-     */
-    public static function read(string $hideExpired = Values::NONE): ReadSyncMapOptions {
-        return new ReadSyncMapOptions($hideExpired);
     }
 }
 
@@ -85,7 +74,7 @@ class CreateSyncMapOptions extends Options {
     }
 
     /**
-     * How long, in seconds, before the Sync Map expires (time-to-live) and is deleted. Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Sync Map does not expire. The Sync Map will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+     * How long, [in seconds](https://www.twilio.com/docs/sync/limits#sync-payload-limits), before the Sync Map expires (time-to-live) and is deleted.
      *
      * @param int $collectionTtl How long, in seconds, before the Sync Map expires
      *                           and is deleted
@@ -130,7 +119,7 @@ class UpdateSyncMapOptions extends Options {
     }
 
     /**
-     * How long, in seconds, before the Sync Map expires (time-to-live) and is deleted. Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Sync Map does not expire. The Sync Map will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+     * How long, [in seconds](https://www.twilio.com/docs/sync/limits#sync-payload-limits), before the Sync Map expires (time-to-live) and is deleted.
      *
      * @param int $collectionTtl How long, in seconds, before the Sync Map expires
      *                           and is deleted
@@ -149,35 +138,5 @@ class UpdateSyncMapOptions extends Options {
     public function __toString(): string {
         $options = \http_build_query(Values::of($this->options), '', ' ');
         return '[Twilio.Sync.V1.UpdateSyncMapOptions ' . $options . ']';
-    }
-}
-
-class ReadSyncMapOptions extends Options {
-    /**
-     * @param string $hideExpired Hide expired Sync Maps and show only active ones.
-     */
-    public function __construct(string $hideExpired = Values::NONE) {
-        $this->options['hideExpired'] = $hideExpired;
-    }
-
-    /**
-     * The default list of Sync Maps will show both active and expired items. It is possible to filter only the active ones by hiding the expired ones.
-     *
-     * @param string $hideExpired Hide expired Sync Maps and show only active ones.
-     * @return $this Fluent Builder
-     */
-    public function setHideExpired(string $hideExpired): self {
-        $this->options['hideExpired'] = $hideExpired;
-        return $this;
-    }
-
-    /**
-     * Provide a friendly representation
-     *
-     * @return string Machine friendly representation
-     */
-    public function __toString(): string {
-        $options = \http_build_query(Values::of($this->options), '', ' ');
-        return '[Twilio.Sync.V1.ReadSyncMapOptions ' . $options . ']';
     }
 }

@@ -10,9 +10,11 @@ class SmsMe extends ContactMe {
 
   protected $service = 'Twilio';
 
-  protected $account_label = 'SID';
+  protected $account_label = 'Account SID';
 
-  protected $secret_label = 'Token';
+  protected $secret_sid = 'API Key SID';
+
+  protected $secret_label = 'API Key Secret';
 
   protected $from_label = 'Sender Phone Number';
 
@@ -85,14 +87,17 @@ class SmsMe extends ContactMe {
   protected function send($to, $msg) {
     try {
       $user = get_option('smnyc_twilio_user');
-      $secret = get_option('smnyc_twilio_secret');
+      $apiKeySid = get_option('smnyc_twilio_api_key_sid');
+      $apiKeySecret = get_option('smnyc_twilio_api_key_secret');
       $from = get_option('smnyc_twilio_from');
 
       $user = (!empty($user)) ? $user : SMNYC_TWILIO_USER;
-      $secret = (!empty($secret)) ? $secret : SMNYC_TWILIO_SECRET;
+      $apiKeySid = (!empty($apiKeySid)) ? $apiKeySid : SMNYC_TWILIO_API_KEY_SID;
+      $apiKeySecret = (!empty($apiKeySecret)) ? $apiKeySecret : SMNYC_TWILIO_API_KEY_SECRET;
       $from = (!empty($from)) ? $from : SMNYC_TWILIO_FROM;
 
-      $client = new Client($user, $secret);
+      $client = new Client($apiKeySid, $apiKeySecret, $user);
+
       $sms = $client->messages->create($to, ['from' => $from, 'body' => $msg]);
     } catch (TwilioErr $e) {
       return $this->parseError($e->getCode());
@@ -197,5 +202,27 @@ class SmsMe extends ContactMe {
     }
 
     $this->failure($code, $message, $retry);
+  }
+
+  /**
+   * Extend settings section from Contact Me to add API Key Credentials
+   */
+  public function createSettingsSection() {
+    parent::createSettingsSection();
+
+    $section = $this->prefix . '_section';
+
+    $this->registerSetting(array(
+      'id' => $this->prefix . '_api_key_sid',
+      'title' => $this->secret_sid,
+      'section' => $section
+    ));
+
+    $this->registerSetting(array(
+      'id' => $this->prefix . '_api_key_secret',
+      'title' => $this->secret_label,
+      'section' => $section,
+      'private' => true
+    ));
   }
 }

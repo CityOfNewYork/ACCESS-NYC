@@ -1,0 +1,89 @@
+<div aria-describedby="aria-db-modal-body" aria-hidden="true" aria-labelledby="aria-lb-modal-header" aria-modal="true" class="o-modal hidden" id="aria-c-modal" role="dialog" style="background-color: rgba(0,0,0,0.25)">
+  <div class="o-modal__layout">
+    <div id="modal-body" class="o-modal__body color-light-background animated fadeInUp p-4" style="max-width: 100%; width: 376px">
+      <div class="flex justify-end">
+        <button aria-controls="aria-c-modal" aria-expanded="false" data-dialog="close" data-js="dialog" class="btn btn-text text-small flex items-center" tabindex="-1">
+          <svg class="icon-ui icon-3 m-0 text-blue-dark" tabindex="-1">
+            <use xlink:href="#icon-ui-x"></use>
+          </svg>
+
+          {{ __('Dismiss', 'accessnyctheme') }}
+        </button>
+      </div>
+
+      <div>
+        <div class="pt-2">
+          <article class="c-alert-box color-success-status animated hidden:fadeInUp active print:hidden hidden" data-js="feedback-alert" id="aria-c-alert-banner" role="dialog" aria-hidden="true">
+            <div class="c-alert-box__icon">
+              <svg class="c-alert-box__svg icon icon-4 icon-success" aria-hidden="true" tabindex="-1">
+                <use xlink:href="#icon-success"></use>
+              </svg>
+            </div>
+
+            <div class="c-alert-box__body">
+              <header>
+                <p class="type-h4 m-0">{{ __('Thank you for your feedback.', 'accessnyctheme') }}</p>
+              </header>
+            </div>
+          </article>
+
+          <article class="text-red hidden" data-js="feedback-alert-error" aria-hidden="true">
+            <p class="m-0">{{ __('Something went wrong. Please try again later.', 'accessnyctheme') }}</p>
+          </article>
+
+          <form id="feedback-form" action="{{ action }}" method="post" data-js="feedback-form">
+            <input name="action" type="hidden" value="feedback">
+            <input name="program" type="hidden" value="{{ this.program_name}}">
+            {{ fn('wp_nonce_field', 'feedback', 'feedback-nonce', true, false) }}
+
+            <div data-js="questions">
+              <fieldset class="c-question" tabindex="-1">
+                <legend class="c-question__label" tabindex="-1">{{ __('Was this page helpful?', 'accessnyctheme') }}</legend>
+
+                <div class="c-question__container">
+                  <div>
+                    <label class="toggle" tabindex="-1">
+                      <input data-type="boolean" name="helpful" type="radio" value="Yes" tabindex="-1" />
+                      <span class="toggle__label">{{ __('Yes', 'accessnyctheme') }}</span>
+                    </label>
+
+                    <label class="toggle" tabindex="-1">
+                      <input checked="true" data-type="boolean" name="helpful" type="radio" value="No" tabindex="-1" />
+                      <span class="toggle__label">{{ __('No', 'accessnyctheme') }}</span>
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="c-question" tabindex="-1">
+                <label class="c-question__label" for="description" tabindex="-1">{{ __('Why or why not?', 'accessnyctheme') }}</label>
+
+                <div class="c-question__container">
+                  <div>
+                    <input name="description" required="true" type="text" class="w-full" maxlength="5000" tabindex="-1"/>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="flex justify-between">
+                <button class="btn-small screen-tablet:btn" type="reset" aria-controls="aria-c-modal" aria-expanded="false" data-js="dialog" tabindex="-1">{{ __('Cancel', 'accessnyctheme') }}</button>
+
+                <button class="btn-small screen-tablet:btn btn-primary" type="submit" value="Submit" tabindex="-1">{{ __('Submit', 'accessnyctheme') }}</button>
+              </div>
+            </div>
+
+            <fieldset class="c-question my-3 hidden" tabindex="-1" data-js="question-recaptcha" aria-hidden="true">
+              <label class="c-question__label" for="description" tabindex="-1">{{ __('Please check "I\'m not a robot"', 'accessnyctheme') }}</label>
+
+              <div class="c-question__container">
+                <div>
+                  <div data-js="recaptcha" class="flex justify-center"></div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

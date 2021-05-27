@@ -5,7 +5,7 @@
   <form class="js-filtered-search" method="get" action="/">
     {{ fn('do_action', 'wpml_add_language_form_field' ) }}
 
-    <header class="c-header flex-col color-dark-background mb-3">
+    {# <header class="c-header flex-col color-dark-background mb-3">
       <label class="type-small w-full mb-2" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
 
       <div class="input-search w-full">
@@ -18,10 +18,10 @@
           </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
         </button>
       </div>
-    </header>
+    </header> #}
 
     {% if alerts %}
-    <div class="px-2 screen-tablet:px-3 pb-2 screen-tablet:pb-3">
+    <div class="p-2 screen-tablet:p-3">
       {% for alert in alerts %}
         {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
 

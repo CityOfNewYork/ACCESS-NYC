@@ -68,11 +68,14 @@ abstract class CallOptions {
      *                                             async_amd_status_callback
      * @param string $byoc BYOC trunk SID (Beta)
      * @param string $callReason Reason for the call (Branded Calls Beta)
+     * @param string $callToken A token string needed to invoke a forwarded call
+     *                          with a caller-id recieved on a previous incoming
+     *                          call
      * @param string $recordingTrack Which track(s) to record
      * @return CreateCallOptions Options builder
      */
-    public static function create(string $url = Values::NONE, string $twiml = Values::NONE, string $applicationSid = Values::NONE, string $method = Values::NONE, string $fallbackUrl = Values::NONE, string $fallbackMethod = Values::NONE, string $statusCallback = Values::NONE, array $statusCallbackEvent = Values::ARRAY_NONE, string $statusCallbackMethod = Values::NONE, string $sendDigits = Values::NONE, int $timeout = Values::NONE, bool $record = Values::NONE, string $recordingChannels = Values::NONE, string $recordingStatusCallback = Values::NONE, string $recordingStatusCallbackMethod = Values::NONE, string $sipAuthUsername = Values::NONE, string $sipAuthPassword = Values::NONE, string $machineDetection = Values::NONE, int $machineDetectionTimeout = Values::NONE, array $recordingStatusCallbackEvent = Values::ARRAY_NONE, string $trim = Values::NONE, string $callerId = Values::NONE, int $machineDetectionSpeechThreshold = Values::NONE, int $machineDetectionSpeechEndThreshold = Values::NONE, int $machineDetectionSilenceTimeout = Values::NONE, string $asyncAmd = Values::NONE, string $asyncAmdStatusCallback = Values::NONE, string $asyncAmdStatusCallbackMethod = Values::NONE, string $byoc = Values::NONE, string $callReason = Values::NONE, string $recordingTrack = Values::NONE): CreateCallOptions {
-        return new CreateCallOptions($url, $twiml, $applicationSid, $method, $fallbackUrl, $fallbackMethod, $statusCallback, $statusCallbackEvent, $statusCallbackMethod, $sendDigits, $timeout, $record, $recordingChannels, $recordingStatusCallback, $recordingStatusCallbackMethod, $sipAuthUsername, $sipAuthPassword, $machineDetection, $machineDetectionTimeout, $recordingStatusCallbackEvent, $trim, $callerId, $machineDetectionSpeechThreshold, $machineDetectionSpeechEndThreshold, $machineDetectionSilenceTimeout, $asyncAmd, $asyncAmdStatusCallback, $asyncAmdStatusCallbackMethod, $byoc, $callReason, $recordingTrack);
+    public static function create(string $url = Values::NONE, string $twiml = Values::NONE, string $applicationSid = Values::NONE, string $method = Values::NONE, string $fallbackUrl = Values::NONE, string $fallbackMethod = Values::NONE, string $statusCallback = Values::NONE, array $statusCallbackEvent = Values::ARRAY_NONE, string $statusCallbackMethod = Values::NONE, string $sendDigits = Values::NONE, int $timeout = Values::NONE, bool $record = Values::NONE, string $recordingChannels = Values::NONE, string $recordingStatusCallback = Values::NONE, string $recordingStatusCallbackMethod = Values::NONE, string $sipAuthUsername = Values::NONE, string $sipAuthPassword = Values::NONE, string $machineDetection = Values::NONE, int $machineDetectionTimeout = Values::NONE, array $recordingStatusCallbackEvent = Values::ARRAY_NONE, string $trim = Values::NONE, string $callerId = Values::NONE, int $machineDetectionSpeechThreshold = Values::NONE, int $machineDetectionSpeechEndThreshold = Values::NONE, int $machineDetectionSilenceTimeout = Values::NONE, string $asyncAmd = Values::NONE, string $asyncAmdStatusCallback = Values::NONE, string $asyncAmdStatusCallbackMethod = Values::NONE, string $byoc = Values::NONE, string $callReason = Values::NONE, string $callToken = Values::NONE, string $recordingTrack = Values::NONE): CreateCallOptions {
+        return new CreateCallOptions($url, $twiml, $applicationSid, $method, $fallbackUrl, $fallbackMethod, $statusCallback, $statusCallbackEvent, $statusCallbackMethod, $sendDigits, $timeout, $record, $recordingChannels, $recordingStatusCallback, $recordingStatusCallbackMethod, $sipAuthUsername, $sipAuthPassword, $machineDetection, $machineDetectionTimeout, $recordingStatusCallbackEvent, $trim, $callerId, $machineDetectionSpeechThreshold, $machineDetectionSpeechEndThreshold, $machineDetectionSilenceTimeout, $asyncAmd, $asyncAmdStatusCallback, $asyncAmdStatusCallbackMethod, $byoc, $callReason, $callToken, $recordingTrack);
     }
 
     /**
@@ -166,9 +169,12 @@ class CreateCallOptions extends Options {
      *                                             async_amd_status_callback
      * @param string $byoc BYOC trunk SID (Beta)
      * @param string $callReason Reason for the call (Branded Calls Beta)
+     * @param string $callToken A token string needed to invoke a forwarded call
+     *                          with a caller-id recieved on a previous incoming
+     *                          call
      * @param string $recordingTrack Which track(s) to record
      */
-    public function __construct(string $url = Values::NONE, string $twiml = Values::NONE, string $applicationSid = Values::NONE, string $method = Values::NONE, string $fallbackUrl = Values::NONE, string $fallbackMethod = Values::NONE, string $statusCallback = Values::NONE, array $statusCallbackEvent = Values::ARRAY_NONE, string $statusCallbackMethod = Values::NONE, string $sendDigits = Values::NONE, int $timeout = Values::NONE, bool $record = Values::NONE, string $recordingChannels = Values::NONE, string $recordingStatusCallback = Values::NONE, string $recordingStatusCallbackMethod = Values::NONE, string $sipAuthUsername = Values::NONE, string $sipAuthPassword = Values::NONE, string $machineDetection = Values::NONE, int $machineDetectionTimeout = Values::NONE, array $recordingStatusCallbackEvent = Values::ARRAY_NONE, string $trim = Values::NONE, string $callerId = Values::NONE, int $machineDetectionSpeechThreshold = Values::NONE, int $machineDetectionSpeechEndThreshold = Values::NONE, int $machineDetectionSilenceTimeout = Values::NONE, string $asyncAmd = Values::NONE, string $asyncAmdStatusCallback = Values::NONE, string $asyncAmdStatusCallbackMethod = Values::NONE, string $byoc = Values::NONE, string $callReason = Values::NONE, string $recordingTrack = Values::NONE) {
+    public function __construct(string $url = Values::NONE, string $twiml = Values::NONE, string $applicationSid = Values::NONE, string $method = Values::NONE, string $fallbackUrl = Values::NONE, string $fallbackMethod = Values::NONE, string $statusCallback = Values::NONE, array $statusCallbackEvent = Values::ARRAY_NONE, string $statusCallbackMethod = Values::NONE, string $sendDigits = Values::NONE, int $timeout = Values::NONE, bool $record = Values::NONE, string $recordingChannels = Values::NONE, string $recordingStatusCallback = Values::NONE, string $recordingStatusCallbackMethod = Values::NONE, string $sipAuthUsername = Values::NONE, string $sipAuthPassword = Values::NONE, string $machineDetection = Values::NONE, int $machineDetectionTimeout = Values::NONE, array $recordingStatusCallbackEvent = Values::ARRAY_NONE, string $trim = Values::NONE, string $callerId = Values::NONE, int $machineDetectionSpeechThreshold = Values::NONE, int $machineDetectionSpeechEndThreshold = Values::NONE, int $machineDetectionSilenceTimeout = Values::NONE, string $asyncAmd = Values::NONE, string $asyncAmdStatusCallback = Values::NONE, string $asyncAmdStatusCallbackMethod = Values::NONE, string $byoc = Values::NONE, string $callReason = Values::NONE, string $callToken = Values::NONE, string $recordingTrack = Values::NONE) {
         $this->options['url'] = $url;
         $this->options['twiml'] = $twiml;
         $this->options['applicationSid'] = $applicationSid;
@@ -199,6 +205,7 @@ class CreateCallOptions extends Options {
         $this->options['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
         $this->options['byoc'] = $byoc;
         $this->options['callReason'] = $callReason;
+        $this->options['callToken'] = $callToken;
         $this->options['recordingTrack'] = $recordingTrack;
     }
 
@@ -557,7 +564,20 @@ class CreateCallOptions extends Options {
     }
 
     /**
-     * The tracks to record. Can be: `inbound`, `outbound`, or `both`. The default is `both`. `inbound` only records the audio received by Twilio, `outbound` only records audio generated by Twilio, and `both` mixes the inbound and outbound audio.
+     * A token string needed to invoke a forwarded call. A call_token is generated when an incoming call is received on a Twilio number. this field should be populated by the incoming call's call_token to make this outgoing call as a forwarded call of incoming call. A forwarded call should bear the same caller-id of incoming call.
+     *
+     * @param string $callToken A token string needed to invoke a forwarded call
+     *                          with a caller-id recieved on a previous incoming
+     *                          call
+     * @return $this Fluent Builder
+     */
+    public function setCallToken(string $callToken): self {
+        $this->options['callToken'] = $callToken;
+        return $this;
+    }
+
+    /**
+     * The audio track to record for the call. Can be: `inbound`, `outbound` or `both`. The default is `both`. `inbound` records the audio that is received by Twilio. `outbound` records the audio that is generated from Twilio. `both` records the audio that is received and generated by Twilio.
      *
      * @param string $recordingTrack Which track(s) to record
      * @return $this Fluent Builder

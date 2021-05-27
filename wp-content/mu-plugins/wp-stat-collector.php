@@ -13,6 +13,10 @@
  */
 
 add_action('statc_register', function($statc) {
+  if (defined('WP_ENV') && 'development' === WP_ENV) {
+    return;
+  }
+
   /**
    * Hook to save the Drools (eligibility screening) request
    *

@@ -14,15 +14,13 @@ use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class DayList extends ListResource {
     /**
      * Construct the DayList
      *
      * @param Version $version Version that contains the resource
-     * @param string $resourceType The type of communication – Messages, Calls
+     * @param string $resourceType The type of communication – Messages, Calls,
+     *                             Conferences, and Participants
      */
     public function __construct(Version $version, string $resourceType) {
         parent::__construct($version);

@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.30.1",
+  "version": "3.32.1",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "repository": {
     "type": "git",
@@ -21,25 +21,6 @@
   },
   "author": "Blue State Digital | Maintained by NYC Opportunity",
   "license": "ISC",
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "google"
-    ],
-    "rules": {
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ]
-    },
-    "env": {
-      "browser": true
-    }
-  },
   "babel": {
     "presets": [
       [
@@ -92,6 +73,8 @@
   },
   "dependencies": {
     "@nycopportunity/access-patterns": "^0.16.0",
+    "@nycopportunity/pattern-attribution": "^1.0.2",
+    "@nycopportunity/pattern-modal": "^1.0.0",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
     "@nycopportunity/wp-archive-vue": "^1.2.0",
     "animate.scss": "0.0.6",

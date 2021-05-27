@@ -1,6 +1,6 @@
 {
   "name": "nyco/access-nyc",
-  "version": "3.30.1",
+  "version": "3.32.1",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "homepage": "https://access.nyc.gov",
   "authors": [
@@ -29,8 +29,9 @@
     "nyco/wp-config": "^1.0.2",
     "nyco/wp-open-data-transients": "^0.1.1",
     "nyco/wp-s3-all-import-compatibility": "^0.0.3",
-    "nyco/wp-send-me-nyc": "^1.3.2",
+    "nyco/wp-send-me-nyc": "^1.4",
     "nyco/wp-stat-collector": "^v0.0.8",
+    "sleiman/airtable-php": "^2.4",
     "timber/timber": "^1.16.0",
     "wpackagist-plugin/acf-google-maps-radius-search": "^1.0",
     "wpackagist-plugin/acf-to-rest-api": "^3.3",
