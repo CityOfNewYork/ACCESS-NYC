@@ -9,22 +9,21 @@
 // phpcs:enable
 
 /**
- * Filters whether XML Sitemaps are enabled or not. This ensures that they are
- * even when the WordPress "Site Public" option is set to false.
- */
-add_filter('wp_sitemaps_is_enabled', '__return_true');
-
-/**
  * Filters the list of registered sitemap providers.
  *
  * @param  Array  $providers  Array of Core_Sitemap_Provider objects.
  */
-add_filter('wp_sitemaps_register_providers', function($providers) {
-  unset($providers['taxonomies']);
-  unset($providers['users']);
+add_filter('wp_sitemaps_add_provider', function($provider, $name) {
+  if ($name === 'users') {
+    return false;
+  }
 
-  return $providers;
-});
+  if ($name === 'taxonomies') {
+    return false;
+  }
+
+  return $provider;
+}, 10, 2);
 
 /**
  * Filter the list of post object sub types available within the sitemap.
