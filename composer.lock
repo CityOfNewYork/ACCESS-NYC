@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8bf7f472ff8354a837be50b012d9ffcd",
+    "content-hash": "4aeeec4efa22516ac9a8a9480866bbad",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -2782,15 +2782,15 @@
         },
         {
             "name": "wpackagist-plugin/wpscan",
-            "version": "1.13.2",
+            "version": "1.15.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wpscan/",
-                "reference": "tags/1.13.2"
+                "reference": "tags/1.15.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wpscan.1.13.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/wpscan.1.15.5.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
