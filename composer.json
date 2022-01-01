@@ -39,7 +39,7 @@
     "wpackagist-plugin/better-search-replace": "^1.3.3",
     "wpackagist-plugin/bulk-delete": "^6.0",
     "wpackagist-plugin/core-sitemaps": "^0.4.1",
-    "wpackagist-plugin/duplicate-post": "^3.2.6",
+    "wpackagist-plugin/duplicate-post": "^4.3",
     "wpackagist-plugin/enable-media-replace": "^3.4.1",
     "wpackagist-plugin/gathercontent-import": "^3.1",
     "wpackagist-plugin/google-authenticator": "0.53",
