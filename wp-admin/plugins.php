@@ -153,6 +153,7 @@ if ( $action ) {
 				$plugins = array();
 			}
 
+			// Used in the HTML title tag.
 			$title       = __( 'Update Plugins' );
 			$parent_file = 'plugins.php';
 
@@ -597,6 +598,7 @@ get_current_screen()->set_screen_reader_content(
 	)
 );
 
+// Used in the HTML title tag.
 $title       = __( 'Plugins' );
 $parent_file = 'plugins.php';
 
@@ -641,7 +643,9 @@ if ( isset( $_GET['error'] ) ) :
 	<div id="message" class="error"><p><?php echo $errmsg; ?></p>
 	<?php
 
-	if ( ! isset( $_GET['main'] ) && ! isset( $_GET['charsout'] ) && wp_verify_nonce( $_GET['_error_nonce'], 'plugin-activation-error_' . $plugin ) ) {
+	if ( ! isset( $_GET['main'] ) && ! isset( $_GET['charsout'] )
+		&& isset( $_GET['_error_nonce'] ) && wp_verify_nonce( $_GET['_error_nonce'], 'plugin-activation-error_' . $plugin )
+	) {
 		$iframe_url = add_query_arg(
 			array(
 				'action'   => 'error_scrape',

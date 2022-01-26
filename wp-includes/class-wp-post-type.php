@@ -40,7 +40,7 @@ final class WP_Post_Type {
 	 * @see get_post_type_labels()
 	 *
 	 * @since 4.6.0
-	 * @var object $labels
+	 * @var stdClass $labels
 	 */
 	public $labels;
 
@@ -117,13 +117,13 @@ final class WP_Post_Type {
 	 * Where to show the post type in the admin menu.
 	 *
 	 * To work, $show_ui must be true. If true, the post type is shown in its own top level menu. If false, no menu is
-	 * shown. If a string of an existing top level menu (eg. 'tools.php' or 'edit.php?post_type=page'), the post type
-	 * will be placed as a sub-menu of that.
+	 * shown. If a string of an existing top level menu ('tools.php' or 'edit.php?post_type=page', for example), the
+	 * post type will be placed as a sub-menu of that.
 	 *
 	 * Default is the value of $show_ui.
 	 *
 	 * @since 4.6.0
-	 * @var bool $show_in_menu
+	 * @var bool|string $show_in_menu
 	 */
 	public $show_in_menu = null;
 
@@ -158,7 +158,7 @@ final class WP_Post_Type {
 	public $menu_position = null;
 
 	/**
-	 * The URL to the icon to be used for this menu.
+	 * The URL or reference to the icon to be used for this menu.
 	 *
 	 * Pass a base64-encoded SVG using a data URI, which will be colored to match the color scheme.
 	 * This should begin with 'data:image/svg+xml;base64,'. Pass the name of a Dashicons helper class
@@ -317,7 +317,7 @@ final class WP_Post_Type {
 	 * Post type capabilities.
 	 *
 	 * @since 4.6.0
-	 * @var object $cap
+	 * @var stdClass $cap
 	 */
 	public $cap;
 
@@ -359,6 +359,14 @@ final class WP_Post_Type {
 	public $rest_base;
 
 	/**
+	 * The namespace for this post type's REST API endpoints.
+	 *
+	 * @since 5.9.0
+	 * @var string|bool $rest_namespace
+	 */
+	public $rest_namespace;
+
+	/**
 	 * The controller for this post type's REST API endpoints.
 	 *
 	 * Custom controllers must extend WP_REST_Controller.
@@ -381,6 +389,8 @@ final class WP_Post_Type {
 	/**
 	 * Constructor.
 	 *
+	 * See the register_post_type() function for accepted arguments for `$args`.
+	 *
 	 * Will populate object properties from the provided arguments and assign other
 	 * default properties based on that information.
 	 *
@@ -401,6 +411,8 @@ final class WP_Post_Type {
 	/**
 	 * Sets post type properties.
 	 *
+	 * See the register_post_type() function for accepted arguments for `$args`.
+	 *
 	 * @since 4.6.0
 	 *
 	 * @param array|string $args Array or string of arguments for registering a post type.
@@ -414,6 +426,7 @@ final class WP_Post_Type {
 		 * @since 4.4.0
 		 *
 		 * @param array  $args      Array of arguments for registering a post type.
+		 *                          See the register_post_type() function for accepted arguments.
 		 * @param string $post_type Post type key.
 		 */
 		$args = apply_filters( 'register_post_type_args', $args, $this->name );
@@ -447,6 +460,7 @@ final class WP_Post_Type {
 			'delete_with_user'      => null,
 			'show_in_rest'          => false,
 			'rest_base'             => false,
+			'rest_namespace'        => false,
 			'rest_controller_class' => false,
 			'template'              => array(),
 			'template_lock'         => false,
@@ -466,6 +480,11 @@ final class WP_Post_Type {
 		// If not set, default to the setting for 'public'.
 		if ( null === $args['show_ui'] ) {
 			$args['show_ui'] = $args['public'];
+		}
+
+		// If not set, default rest_namespace to wp/v2 if show_in_rest is true.
+		if ( false === $args['rest_namespace'] && ! empty( $args['show_in_rest'] ) ) {
+			$args['rest_namespace'] = 'wp/v2';
 		}
 
 		// If not set, default to the setting for 'show_ui'.
