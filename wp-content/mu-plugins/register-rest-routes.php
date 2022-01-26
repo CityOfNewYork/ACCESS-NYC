@@ -12,7 +12,6 @@ use NYCO\WpAssets as WpAssets;
 
 add_action('rest_api_init', function() {
   include_once ABSPATH . 'wp-admin/includes/plugin.php';
-  include_once WPMU_PLUGIN_DIR . '/rest/Auth.php';
 
   /**
    * Configuration
@@ -49,29 +48,6 @@ add_action('rest_api_init', function() {
    * At the bottom of the page are hooks for clearing the cache based on
    * certain actions such as saving posts or editing terms.
    */
-
-  /**
-   * Returns a shareable url and hash for the Send Me NYC plugin. This is used
-   * when program results of the PEU Screener are modified. It relies on a
-   * function in functions.php, share_data()
-   */
-  register_rest_route($v, '/shareurl/', array(
-    'methods' => 'GET',
-    'permission_callback' => [REST\Auth::class, 'smnycToken'],
-    'callback' => function (WP_REST_Request $request) {
-      $params = $request->get_params();
-      unset($params['url']);
-
-      // Create the url, share_data -> functions.php
-      $data = share_data($request->get_params());
-
-      // Create the response object and status code
-      $response = new WP_REST_Response($data);
-      $response->set_status(200);
-
-      return $response;
-    }
-  ));
 
   /**
    * Returns a list of public taxonomies and their terms. Public vs. private
@@ -185,13 +161,4 @@ add_action('rest_api_init', function() {
       return $response;
     }
   ));
-
-  /**
-   * Use NYCO WP Assets to build rest routes for inline scripts.
-   */
-  // $WpAssets = new WpAssets();
-  // $path = WPMU_PLUGIN_DIR . '/integrations/integrations.json';
-  // $integrations = json_decode(file_get_contents($path), true);
-
-  // $WpAssets->registerRestRoutes($integrations);
 });

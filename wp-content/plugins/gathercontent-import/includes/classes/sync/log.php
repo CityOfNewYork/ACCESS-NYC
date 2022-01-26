@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Sync;
+
 use GatherContent\Importer\Base as Plugin_Base;
 use WP_Error;
 
@@ -65,7 +66,7 @@ class Log extends Plugin_Base {
 			return;
 		}
 
-		$this->sync = $sync;
+		$this->sync  = $sync;
 		$this->error = $maybe_error;
 		$this->log_errors();
 	}

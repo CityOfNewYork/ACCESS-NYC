@@ -38,7 +38,13 @@ class emrFile
      $filedata = wp_check_filetype_and_ext($this->file, $this->fileName);
      // This will *not* be checked, is not meant for permission of validation!
      // Note: this function will work on non-existing file, but not on existing files containing wrong mime in file.
-     $this->fileMime = (isset($filedata['type'])) ? $filedata['type'] : false;
+     $this->fileMime = (isset($filedata['type']) && strlen($filedata['type']) > 0) ? $filedata['type'] : false;
+
+     if ($this->fileMime == false && strlen($this->file) > 0 && function_exists('mime_content_type') && $this->exists)
+		 {
+			  // If it's not a registered mimetype
+        $this->fileMime = mime_content_type($this->file);
+		 }
 
   }
 

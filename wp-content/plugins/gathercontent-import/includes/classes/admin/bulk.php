@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Admin;
+
 use GatherContent\Importer\General;
 use GatherContent\Importer\API;
 use GatherContent\Importer\Admin\Enqueue;
@@ -143,6 +144,7 @@ class Bulk extends Post_Base {
 	 * @return void
 	 */
 	public function column_display( $column_name, $post_id ) {
+
 		if ( 'gathercontent' !== $column_name ) {
 			return;
 		}
@@ -184,20 +186,23 @@ class Bulk extends Post_Base {
 			$item = $this->api->uncached()->get_item( $item_id );
 
 			if ( isset( $item->status->data ) ) {
-				$status_id = $item->status->data->id;
-				$status_name = $item->status->data->name;
+				$status_id    = $item->status->data->id;
+				$status_name  = $item->status->data->name;
 				$status_color = $item->status->data->color;
 			}
 		}
 
-		$this->view( 'gc-post-column-row', array(
-			'post_id'      => $post_id,
-			'item_id'      => $item_id,
-			'mapping_id'   => $mapping_id,
-			'status_id'    => $status_id,
-			'status_name'  => $status_name,
-			'status_color' => $status_color,
-		) );
+		$this->view(
+			'gc-post-column-row',
+			array(
+				'post_id'      => $post_id,
+				'item_id'      => $item_id,
+				'mapping_id'   => $mapping_id,
+				'status_id'    => $status_id,
+				'status_name'  => $status_name,
+				'status_color' => $status_color,
+			)
+		);
 	}
 
 	/**
@@ -233,9 +238,12 @@ class Bulk extends Post_Base {
 			return;
 		}
 
-		$this->view( 'bulk-edit-field', array(
-			'refresh_link' => \GatherContent\Importer\refresh_connection_link(),
-		) );
+		$this->view(
+			'bulk-edit-field',
+			array(
+				'refresh_link' => \GatherContent\Importer\refresh_connection_link(),
+			)
+		);
 	}
 
 	/**
@@ -255,8 +263,8 @@ class Bulk extends Post_Base {
 			|| ! ( $status_id = $this->_post_val( 'gc_status' ) )
 			|| ! ( $item_id = absint( \GatherContent\Importer\get_post_item_id( $post_id ) ) )
 			|| ! ( $mapping_id = absint( \GatherContent\Importer\get_post_mapping_id( $post_id ) ) )
-			|| ! ( $item = $this->api->get_item( $item_id ) )
-			|| ( isset( $item->status->data->id ) && absint( $status_id ) === absint( $item->status->data->id ) )
+			|| ! ( $item = $this->api->get_item( $item_id, true ) )
+			|| ( isset( $item->status_id ) && absint( $status_id ) === absint( $item->status_id ) )
 		) {
 			return;
 		}
@@ -283,7 +291,7 @@ class Bulk extends Post_Base {
 			'tmpl-gc-status-select2'  => array(),
 			'tmpl-gc-select2-item'    => array(),
 			'tmpl-gc-modal-window'    => array(
-				'nav' => array(
+				'nav'     => array(
 					$this->wizard->parent_url            => __( 'Settings', 'gathercontent-import' ),
 					$this->wizard->mappings->listing_url => $this->wizard->mappings->args->label,
 					$this->wizard->url                   => $this->wizard->mappings->args->labels->new_item,
@@ -296,7 +304,7 @@ class Bulk extends Post_Base {
 					'post_title'  => __( 'WordPress Title', 'gathercontent-import' ),
 				),
 			),
-			'tmpl-gc-item' => array(
+			'tmpl-gc-item'            => array(
 				'url' => General::get_instance()->admin->platform_url(),
 			),
 			'tmpl-gc-mapping-metabox' => array(
@@ -342,7 +350,7 @@ class Bulk extends Post_Base {
 
 		$data['_sure'] = array(
 			'push' => sprintf( __( 'Are you sure you want to push these %s to GatherContent? Any unsaved changes in GatherContent will be overwritten.', 'gathercontent-importer' ), $plural_label ),
-			'pull'  => sprintf( __( 'Are you sure you want to pull these %s from GatherContent? Any local changes will be overwritten.', 'gathercontent-importer' ), $plural_label ),
+			'pull' => sprintf( __( 'Are you sure you want to pull these %s from GatherContent? Any local changes will be overwritten.', 'gathercontent-importer' ), $plural_label ),
 		);
 
 		$data['_text'] = array(

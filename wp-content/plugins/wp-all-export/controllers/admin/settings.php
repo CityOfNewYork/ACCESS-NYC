@@ -15,8 +15,12 @@ class PMXE_Admin_Settings extends PMXE_Controller_Admin {
     }
 
 	public function index() {
-		
-		$this->data['post'] = $post = $this->input->post(PMXE_Plugin::getInstance()->getOption());
+
+        global $wp_roles;
+
+        $this->data['roles'] = $wp_roles->roles;
+
+        $this->data['post'] = $post = $this->input->post(PMXE_Plugin::getInstance()->getOption());
 
 		if ($this->input->post('is_settings_submitted')) { // save settings form	
 

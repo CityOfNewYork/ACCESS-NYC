@@ -30,9 +30,9 @@
   "require": {
     "php": ">=5.3.0|7.*",
     "twig/twig": "^1.41|^2.10",
-    "upstatement/routes": "0.5",
+    "upstatement/routes": "0.8.1",
     "composer/installers": "~1.0",
-    "asm89/twig-cache-extension": "~1.0"
+    "twig/cache-extension": "^1.5"
   },
   "require-dev": {
     "johnpbloch/wordpress": "*",
@@ -41,7 +41,8 @@
     "wp-coding-standards/wpcs": "^2.0",
     "wpackagist-plugin/advanced-custom-fields": "5.*",
     "wpackagist-plugin/co-authors-plus": "3.2.*|3.4.*",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0"
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+    "yoast/phpunit-polyfills": "^1.0"
   },
   "suggest": {
     "satooshi/php-coveralls": "1.0.* for code coverage"

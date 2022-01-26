@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: Routes
-Plugin URI: http://routes.upstatement.com
-Description: The WordPress Timber Library allows you to write themes using the power Twig templates
+Plugin URI: http://www.upstatement.com
+Description: Routes makes it easy to add custom routing to your WordPress site. That's why we call it Routes. That is all.
 Author: Jared Novack + Upstatement
-Version: 0.3.1
+Version: 0.8.1
 Author URI: http://upstatement.com/
 
 Usage:
@@ -63,6 +63,8 @@ class Routes {
 			} else {
 				$base_path = '/' . $base_path . '/';
 			}
+			// Clean any double slashes that have resulted
+			$base_path = str_replace( "//", "/", $base_path );
 			$upstatement_routes->router->setBasePath($base_path);
 		}
 		$route = self::convert_route($route);
@@ -90,7 +92,7 @@ class Routes {
 	}
 
 	/**
-	 * @param array $template           A php file to load (ex: 'single.php')
+	 * @param string $template           A php file to load (ex: 'single.php')
 	 * @param array|bool $tparams       An array of data to send to the php file. Inside the php file
 	 *                                  this data can be accessed via:
 	 *                                  global $params;

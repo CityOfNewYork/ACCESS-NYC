@@ -97,66 +97,69 @@ class Support extends Base {
 		// $sys_info = get_transient( 'gc_sys_info' );
 
 		// if ( ! $sys_info || $this->_get_val( 'flush_cache' ) ) {
-			$sys_info = $this->view( 'system-info', array(
-				'multisite'               => is_multisite() ? 'Yes' : 'No',
+			$sys_info = $this->view(
+				'system-info',
+				array(
+					'multisite'               => is_multisite() ? 'Yes' : 'No',
 
-				'site_url'                => site_url(),
-				'home_url'                => home_url(),
+					'site_url'                => site_url(),
+					'home_url'                => home_url(),
 
-				'gc_version'              => GATHERCONTENT_VERSION,
-				'wp_version'              => get_bloginfo( 'version' ),
-				'permalink_structure'     => get_option( 'permalink_structure' ),
-				'theme'                   => $this->theme(),
-				'host'                    => $this->host(),
-				'browser'                 => $browser,
+					'gc_version'              => GATHERCONTENT_VERSION,
+					'wp_version'              => get_bloginfo( 'version' ),
+					'permalink_structure'     => get_option( 'permalink_structure' ),
+					'theme'                   => $this->theme(),
+					'host'                    => $this->host(),
+					'browser'                 => $browser,
 
-				'php_version'             => PHP_VERSION,
-				'mysql_version'           => @$wpdb->db_version(),
-				'web_server_info'         => $_SERVER['SERVER_SOFTWARE'],
+					'php_version'             => PHP_VERSION,
+					'mysql_version'           => @$wpdb->db_version(),
+					'web_server_info'         => $_SERVER['SERVER_SOFTWARE'],
 
-				'wordpress_memory_limit'  => WP_MEMORY_LIMIT,
-				'php_safe_mode'           => ini_get( 'safe_mode' ) ? 'Yes' : 'No',
-				'php_memory_limit'        => ini_get( 'memory_limit' ),
-				'php_upload_max_size'     => ini_get( 'upload_max_filesize' ),
-				'php_post_max_size'       => ini_get( 'post_max_size' ),
-				'php_upload_max_filesize' => ini_get( 'upload_max_filesize' ),
-				'php_time_limit'          => ini_get( 'max_execution_time' ),
-				'php_max_input_vars'      => ini_get( 'max_input_vars' ),
-				'php_arg_separator'       => ini_get( 'arg_separator.output' ),
-				'php_allow_url_file_open' => ini_get( 'allow_url_fopen' ) ? 'Yes' : 'No',
+					'wordpress_memory_limit'  => WP_MEMORY_LIMIT,
+					'php_safe_mode'           => ini_get( 'safe_mode' ) ? 'Yes' : 'No',
+					'php_memory_limit'        => ini_get( 'memory_limit' ),
+					'php_upload_max_size'     => ini_get( 'upload_max_filesize' ),
+					'php_post_max_size'       => ini_get( 'post_max_size' ),
+					'php_upload_max_filesize' => ini_get( 'upload_max_filesize' ),
+					'php_time_limit'          => ini_get( 'max_execution_time' ),
+					'php_max_input_vars'      => ini_get( 'max_input_vars' ),
+					'php_arg_separator'       => ini_get( 'arg_separator.output' ),
+					'php_allow_url_file_open' => ini_get( 'allow_url_fopen' ) ? 'Yes' : 'No',
 
-				'debug'                   => defined( 'WP_DEBUG' ) ? WP_DEBUG ? 'Enabled' : 'Disabled' : 'Not set',
-				'script_debug'            => defined( 'SCRIPT_DEBUG' ) ? SCRIPT_DEBUG ? 'Enabled' : 'Disabled' : 'Not set',
+					'debug'                   => defined( 'WP_DEBUG' ) ? WP_DEBUG ? 'Enabled' : 'Disabled' : 'Not set',
+					'script_debug'            => defined( 'SCRIPT_DEBUG' ) ? SCRIPT_DEBUG ? 'Enabled' : 'Disabled' : 'Not set',
 
-				'pre_length'              => $this->pre_length(),
+					'pre_length'              => $this->pre_length(),
 
-				'show_on_front'           => get_option( 'show_on_front' ),
-				'page_on_front'           => $this->get_page( 'page_on_front' ),
-				'page_for_posts'          => $this->get_page( 'page_for_posts' ),
+					'show_on_front'           => get_option( 'show_on_front' ),
+					'page_on_front'           => $this->get_page( 'page_on_front' ),
+					'page_for_posts'          => $this->get_page( 'page_for_posts' ),
 
-				'wp_remote_post'          => $this->wp_remote_post(),
+					'wp_remote_post'          => $this->wp_remote_post(),
 
-				'session'                 => isset( $_SESSION ) ? 'Enabled' : 'Disabled',
-				'session'                 => esc_html( ini_get( 'session.name' ) ),
-				'session_name'            => esc_html( ini_get( 'session.name' ) ),
-				'cookie_path'             => esc_html( ini_get( 'session.cookie_path' ) ),
-				'save_path'               => esc_html( ini_get( 'session.save_path' ) ),
-				'use_cookies'             => ini_get( 'session.use_cookies' ) ? 'On' : 'Off',
-				'use_only_cookies'        => ini_get( 'session.use_only_cookies' ) ? 'On' : 'Off',
-				'display_errors'          => ini_get( 'display_errors' ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A',
-				'fsockopen'               => function_exists( 'fsockopen' ) ? 'Your server supports fsockopen.' : 'Your server does not support fsockopen.',
-				'curl'                    => function_exists( 'curl_init' ) ? 'Your server supports cURL.' : 'Your server does not support cURL.',
-				'soap_client'             => class_exists( 'SoapClient' ) ? 'Your server has the SOAP Client enabled.' : 'Your server does not have the SOAP Client enabled.',
-				'suhosin'                 => extension_loaded( 'suhosin' ) ? 'Your server has SUHOSIN installed.' : 'Your server does not have SUHOSIN installed.',
+					'session'                 => isset( $_SESSION ) ? 'Enabled' : 'Disabled',
+					'session'                 => esc_html( ini_get( 'session.name' ) ),
+					'session_name'            => esc_html( ini_get( 'session.name' ) ),
+					'cookie_path'             => esc_html( ini_get( 'session.cookie_path' ) ),
+					'save_path'               => esc_html( ini_get( 'session.save_path' ) ),
+					'use_cookies'             => ini_get( 'session.use_cookies' ) ? 'On' : 'Off',
+					'use_only_cookies'        => ini_get( 'session.use_only_cookies' ) ? 'On' : 'Off',
+					'display_errors'          => ini_get( 'display_errors' ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A',
+					'fsockopen'               => function_exists( 'fsockopen' ) ? 'Your server supports fsockopen.' : 'Your server does not support fsockopen.',
+					'curl'                    => function_exists( 'curl_init' ) ? 'Your server supports cURL.' : 'Your server does not support cURL.',
+					'soap_client'             => class_exists( 'SoapClient' ) ? 'Your server has the SOAP Client enabled.' : 'Your server does not have the SOAP Client enabled.',
+					'suhosin'                 => extension_loaded( 'suhosin' ) ? 'Your server has SUHOSIN installed.' : 'Your server does not have SUHOSIN installed.',
 
-
-				'active_plugins'          => $this->active_plugins(),
-				'network_active_plugins'  => $this->network_active_plugins(),
-				'gc_options'              => print_r( get_option( 'gathercontent_importer' ), 1 ),
-			), false );
+					'active_plugins'          => $this->active_plugins(),
+					'network_active_plugins'  => $this->network_active_plugins(),
+					'gc_options'              => print_r( get_option( 'gathercontent_importer' ), 1 ),
+				),
+				false
+			);
 
 			// Store for a bit.
-		// 	set_transient( 'gc_sys_info', $sys_info, 20 * MINUTE_IN_SECONDS );
+		// set_transient( 'gc_sys_info', $sys_info, 20 * MINUTE_IN_SECONDS );
 		// }
 
 		echo $sys_info;
@@ -188,29 +191,32 @@ class Support extends Base {
 
 	public function pre_length() {
 		$length = strlen( $GLOBALS['wpdb']->prefix );
-		return 'Length: '. $length .', Status: ' . ( $length > 16 ? 'ERROR: Too Long' : 'Acceptable' );
+		return 'Length: ' . $length . ', Status: ' . ( $length > 16 ? 'ERROR: Too Long' : 'Acceptable' );
 	}
 
 	public function wp_remote_post() {
 		$request['cmd'] = '_notify-validate';
-		$response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', array(
-			'sslverify'		=> false,
-			'timeout'		=> 60,
-			'body'			=> $request
-		) );
+		$response       = wp_remote_post(
+			'https://www.paypal.com/cgi-bin/webscr',
+			array(
+				'sslverify' => false,
+				'timeout'   => 60,
+				'body'      => $request,
+			)
+		);
 
 		if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
-			$works =  'wp_remote_post() works' . "\n";
+			$works = 'wp_remote_post() works' . "\n";
 		} else {
-			$works =  'wp_remote_post() does not work' . "\n";
+			$works = 'wp_remote_post() does not work' . "\n";
 		}
 
 		return $works;
 	}
 
 	public function active_plugins() {
-		$plugins = '';
-		$all_plugins = get_plugins();
+		$plugins        = '';
+		$all_plugins    = get_plugins();
 		$active_plugins = get_option( 'active_plugins', array() );
 
 		foreach ( $all_plugins as $plugin_path => $plugin ) {
@@ -219,7 +225,7 @@ class Support extends Base {
 				continue;
 			}
 
-			$plugins .= $plugin['Name'] . ': ' . $plugin['Version'] ."\n";
+			$plugins .= $plugin['Name'] . ': ' . $plugin['Version'] . "\n";
 		}
 
 		return $plugins;
@@ -230,8 +236,8 @@ class Support extends Base {
 			return false;
 		}
 
-		$plugins = '';
-		$all_plugins = wp_get_active_network_plugins();
+		$plugins        = '';
+		$all_plugins    = wp_get_active_network_plugins();
 		$active_plugins = get_site_option( 'active_sitewide_plugins', array() );
 
 		foreach ( $all_plugins as $plugin_path ) {
@@ -244,7 +250,7 @@ class Support extends Base {
 
 			$plugin = get_plugin_data( $plugin_path );
 
-			$plugins .= $plugin['Name'] . ': ' . $plugin['Version'] ."\n";
+			$plugins .= $plugin['Name'] . ': ' . $plugin['Version'] . "\n";
 		}
 
 		return $plugins;
@@ -252,7 +258,7 @@ class Support extends Base {
 	}
 
 	public function get_page( $option_key ) {
-		$id = get_option( $option_key );
+		$id    = get_option( $option_key );
 		$title = get_the_title( $id );
 		return ( $title ? $title : 'N/A' ) . ' (#' . $id . ')';
 	}

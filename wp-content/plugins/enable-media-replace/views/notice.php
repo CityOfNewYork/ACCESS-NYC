@@ -1,7 +1,7 @@
 <div class='notice' id='emr-news' style="padding-top: 7px">
     <div style="float:<?php echo (is_rtl()) ? 'left' : 'right' ?>;"><a href="javascript:emrDismissNews()" class="button" style="margin-top:10px;"><?php _e('Dismiss', 'enable-media-replace');?></a></div>
     <a href="https://shortpixel.com/wp/af/VKG6LYN28044" target="_blank" style="float: <?php echo (is_rtl()) ? 'right' : 'left' ?>;margin-<?php echo (is_rtl()) ? 'left' : 'right' ?>: 10px;">
-        <img src="<?php echo $this->plugin_url . 'img/sp.png' ?>" class="emr-sp"/>
+        <img width="30" height="30" src="<?php echo $this->plugin_url . 'img/sp-logo-regular.svg' ?>" class="emr-sp"/>
     </a>
     <h3 style="margin:10px;"><?php echo esc_html__('Enable Media Replace is now compatible with ShortPixel!','enable-media-replace');?></h3>
     <p style="margin-bottom:0px;">

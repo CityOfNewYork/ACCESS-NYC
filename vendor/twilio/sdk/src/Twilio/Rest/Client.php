@@ -27,9 +27,11 @@ use Twilio\VersionInfo;
  * @property Events $events
  * @property Fax $fax
  * @property FlexApi $flexApi
+ * @property FrontlineApi $frontlineApi
  * @property Insights $insights
  * @property IpMessaging $ipMessaging
  * @property Lookups $lookups
+ * @property Media $media
  * @property Messaging $messaging
  * @property Monitor $monitor
  * @property Notify $notify
@@ -118,9 +120,11 @@ class Client {
     protected $_events;
     protected $_fax;
     protected $_flexApi;
+    protected $_frontlineApi;
     protected $_insights;
     protected $_ipMessaging;
     protected $_lookups;
+    protected $_media;
     protected $_messaging;
     protected $_monitor;
     protected $_notify;
@@ -146,7 +150,7 @@ class Client {
      *
      * @param string $username Username to authenticate with
      * @param string $password Password to authenticate with
-     * @param string $accountSid Account Sid to authenticate with, defaults to
+     * @param string $accountSid Account SID to authenticate with, defaults to
      *                           $username
      * @param string $region Region to send requests to, defaults to 'us1' if Edge
      *                       provided
@@ -714,6 +718,18 @@ class Client {
     }
 
     /**
+     * Access the FrontlineApi Twilio Domain
+     *
+     * @return FrontlineApi FrontlineApi Twilio Domain
+     */
+    protected function getFrontlineApi(): FrontlineApi {
+        if (!$this->_frontlineApi) {
+            $this->_frontlineApi = new FrontlineApi($this);
+        }
+        return $this->_frontlineApi;
+    }
+
+    /**
      * Access the Insights Twilio Domain
      *
      * @return Insights Insights Twilio Domain
@@ -747,6 +763,18 @@ class Client {
             $this->_lookups = new Lookups($this);
         }
         return $this->_lookups;
+    }
+
+    /**
+     * Access the Media Twilio Domain
+     *
+     * @return Media Media Twilio Domain
+     */
+    protected function getMedia(): Media {
+        if (!$this->_media) {
+            $this->_media = new Media($this);
+        }
+        return $this->_media;
     }
 
     /**

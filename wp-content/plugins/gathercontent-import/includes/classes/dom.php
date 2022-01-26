@@ -1,5 +1,6 @@
 <?php
 namespace GatherContent\Importer;
+
 use DOMDocument;
 
 class Dom extends DOMDocument {
@@ -31,7 +32,7 @@ class Dom extends DOMDocument {
 	 * @return string  HTML content
 	 */
 	public function get_content() {
-		$body = $this->saveHTML( $this->getElementsByTagName( 'body' )->item(0) );
+		$body = $this->saveHTML( $this->getElementsByTagName( 'body' )->item( 0 ) );
 		return str_replace( array( '<body>', '</body>' ), '', $body );
 	}
 

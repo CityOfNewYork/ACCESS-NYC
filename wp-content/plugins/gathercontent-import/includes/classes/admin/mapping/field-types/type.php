@@ -1,5 +1,6 @@
 <?php
 namespace GatherContent\Importer\Admin\Mapping\Field_Types;
+
 use GatherContent\Importer\Views\View;
 
 interface Type {

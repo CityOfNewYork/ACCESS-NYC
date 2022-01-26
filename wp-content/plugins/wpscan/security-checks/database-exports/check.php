@@ -59,8 +59,9 @@ class databaseExports extends Check {
 	public function perform() {
 		$vulnerabilities = $this->get_vulnerabilities();
 
+    $host    = parse_url( get_site_url(), PHP_URL_HOST );
 		$text    = file_get_contents( $this->dir . '/assets/db_exports.txt' );
-		$exports = str_replace( '{domain_name}', $_SERVER['HTTP_HOST'], $text );
+		$exports = str_replace( '{domain_name}', $host, $text );
 		$names   = explode( PHP_EOL, $exports );
 
 		foreach ( $names as $name ) {
@@ -72,7 +73,7 @@ class databaseExports extends Check {
 				$code     = wp_remote_retrieve_response_code( $response );
 
 				if ( 200 === $code ) {
-					$this->add_vulnerability( __( 'A publicly accessible database file  was found in', 'wpscan' ) . " <a href='$url' target='_blank'>$url</a>", 'high', sanitize_title( $name ) );
+					$this->add_vulnerability( __( 'A publicly accessible database file  was found in', 'wpscan' ) . " <a href='$url' target='_blank'>$url</a>.", 'high', sanitize_title( $name ), 'https://blog.wpscan.com/wordpress-database-backup-files/' );
 				}
 			}
 		}
