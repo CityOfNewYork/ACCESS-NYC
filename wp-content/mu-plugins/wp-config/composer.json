@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-config",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "A WordPress package for environment configuration.",
@@ -22,12 +22,12 @@
     "issues": "https://github.com/cityofnewyork/nyco-wp-config/issues"
   },
   "require": {
-    "composer/installers": "~1.0",
+    "composer/installers": "^1",
     "mustangostang/spyc": "^0.6",
-    "illuminate/encryption": "^5.6"
+    "illuminate/encryption": "^9"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "3.*"
+    "squizlabs/php_codesniffer": "^3"
   },
   "scripts": {
     "lint": [
@@ -35,6 +35,9 @@
     ],
     "fix": [
       "vendor/bin/phpcbf --standard=phpcs.xml --extensions=php --ignore=vendor/ ."
+    ],
+    "publish": [
+      "git push && git push --tags"
     ]
   }
 }

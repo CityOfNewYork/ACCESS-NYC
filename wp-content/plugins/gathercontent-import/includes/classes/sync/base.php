@@ -6,8 +6,8 @@
  */
 
 namespace GatherContent\Importer\Sync;
+
 use GatherContent\Importer\Base as Plugin_Base;
-use GatherContent\Importer\Post_Types\Template_Mappings;
 use GatherContent\Importer\Exception as Base_Exception;
 use GatherContent\Importer\Mapping_Post;
 use GatherContent\Importer\API;
@@ -188,12 +188,15 @@ abstract class Base extends Plugin_Base {
 			if ( is_array( $data ) ) {
 				$data['sync_item_id'] = $id;
 			} else {
-				$data = array( 'data' => $data, 'sync_item_id' => $id );
+				$data = array(
+					'data'         => $data,
+					'sync_item_id' => $id,
+				);
 			}
 			$result = new WP_Error( "gc_{$this->direction}_item_fail_" . $e->getCode(), $e->getMessage(), $data );
 		}
 
-		$ids['complete'] = isset( $ids['complete'] ) ? $ids['complete'] : array();
+		$ids['complete']   = isset( $ids['complete'] ) ? $ids['complete'] : array();
 		$ids['complete'][] = $id;
 
 		$this->mapping->update_items_to_sync( $ids, $this->direction );
@@ -236,14 +239,15 @@ abstract class Base extends Plugin_Base {
 	 *
 	 * @since 3.0.0
 	 *
-	 * @param int $item_id Item id.
+	 * @param int  $item_id Item id.
+	 * @param  bool $exclude_status set this to true to avoid appending status data
 	 *
 	 * @throws Exception On failure.
 	 *
 	 * @return object Item object.
 	 */
-	protected function set_item( $item_id ) {
-		$this->item = $this->api->uncached()->get_item( $item_id );
+	protected function set_item( $item_id, $exclude_status = false ) {
+		$this->item = $this->api->uncached()->get_item( $item_id, $exclude_status );
 
 		if ( ! isset( $this->item->id ) ) {
 			// @todo maybe check if error was temporary.
@@ -266,7 +270,7 @@ abstract class Base extends Plugin_Base {
 		$items = $this->mapping->get_items_to_sync( $this->direction );
 
 		if ( empty( $items['pending'] ) ) {
-			throw new Exception( sprintf( __( 'No items to %s for: %s', 'gathercontent-import' ), $this->direction, $this->mapping->ID ), __LINE__ );
+			throw new Exception( sprintf( __( 'No items to %1$s for: %2$s', 'gathercontent-import' ), $this->direction, $this->mapping->ID ), __LINE__ );
 		}
 
 		return $items;
@@ -313,6 +317,10 @@ abstract class Base extends Plugin_Base {
 	protected function get_value_for_element( $element ) {
 		$val = false;
 
+		if ( true === $element->repeatable ) {
+			return $element->value;
+		}
+
 		switch ( $element->type ) {
 			case 'text':
 				$val = $element->value;
@@ -321,14 +329,18 @@ abstract class Base extends Plugin_Base {
 					$val = preg_replace_callback(
 						'#\<p\>(.+?)\<\/p\>#s',
 						function ( $matches ) {
-							return '<p>' . str_replace( array(
-								"\n    ",
-								"\r\n    ",
-								"\r    ",
-								"\n",
-								"\r\n",
-								"\r",
-							), '', $matches[1] ) . '</p>';
+							return '<p>' . str_replace(
+								array(
+									"\n    ",
+									"\r\n    ",
+									"\r    ",
+									"\n",
+									"\r\n",
+									"\r",
+								),
+								'',
+								$matches[1]
+							) . '</p>';
 						},
 						$val
 					);
@@ -341,7 +353,8 @@ abstract class Base extends Plugin_Base {
 							'<ul><li',
 							'</li><li>',
 							'</li></ul>',
-						), array(
+						),
+						array(
 							"<ul>\n\t<li",
 							"</li>\n\t<li>",
 							"</li>\n</ul>",
@@ -354,9 +367,13 @@ abstract class Base extends Plugin_Base {
 
 					// Replace encoded ampersands in html entities.
 					// http://regexr.com/3dpcf -- example.
-					$val = preg_replace_callback( '~(&amp;)(?:[a-z,A-Z,0-9]+|#\d+|#x[0-9a-f]+);~', function( $matches ) {
-						return str_replace( '&amp;', '&', $matches[0] );
-					}, $val );
+					$val = preg_replace_callback(
+						'~(&amp;)(?:[a-z,A-Z,0-9]+|#\d+|#x[0-9a-f]+);~',
+						function( $matches ) {
+							return str_replace( '&amp;', '&', $matches[0] );
+						},
+						$val
+					);
 
 				}
 				$val = wp_kses_post( $val );
@@ -382,22 +399,33 @@ abstract class Base extends Plugin_Base {
 						$val[] = sanitize_text_field( $option->label );
 					}
 				}
+				$val = ! empty( $val ) ? wp_json_encode( $val ) : $val;
 				break;
 
-			case 'files':
-				if ( is_array( $this->item->files ) && isset( $this->item->files[ $element->name ] ) ) {
-					$val = $this->item->files[ $element->name ];
+			case 'attachment':
+				$val           = array();
+				$element_value = is_array( $element->value ) ? $element->value : array();
+				$file_ids      = $element_value ? array_map(
+					function ( $v ) {
+						return $v->file_id;
+					},
+					$element_value
+				) : array();
+
+				if ( $file_ids ) {
+					$files = $this->api->uncached()->get_item_files( $this->item->project_id, $file_ids );
+					$val   = $files;
 				}
 				break;
 
 			default:
 				if ( isset( $element->value ) ) {
-					$val = sanitize_text_field( $option->label );
+					$val = sanitize_text_field( $element->label );
 				}
 				break;
 		}
 
-		return $val;
+			return $val;
 	}
 
 	/**
@@ -409,6 +437,135 @@ abstract class Base extends Plugin_Base {
 	 */
 	protected function set_element_value() {
 		$this->element->value = $this->get_element_value();
+	}
+
+	/**
+	 * Format the element's values to the required data format.
+	 *
+	 * @since  3.2.0
+	 *
+	 * @param mixed       $field object.
+	 * @param string|null $component_uuid optional component uuid only if the field is component.
+	 * @param bool        $append_component_id optional to append the component's id in the field, default is true
+	 * @param bool        $is_component_repeatable optional to tell that the field is a part of repeatable component
+	 *
+	 * @return array
+	 */
+	protected function format_element_data( $field, $component_uuid = '', $append_component_id = true, $is_component_repeatable = false ): array {
+
+
+		$metadata      = $field->metadata;
+		$field_name    = $field->uuid;
+		$is_repeatable = ( is_object( $metadata ) && isset( $metadata->repeatable ) ) ? $metadata->repeatable->isRepeatable : false;
+		$is_plain      = 'text' === $field->field_type && is_object( $metadata ) ? $metadata->is_plain : false;
+		$content       = isset( $this->item->content ) ? ( $component_uuid ? ( $this->item->content->$component_uuid ?? null ) : $this->item->content ) : null;
+		$field_value   = $content ? ( $content->$field_name ?? null ) : null;
+
+		if( ! $field_value && $component_uuid && $is_component_repeatable ){
+			$content_to_push = [];
+			foreach($content as $data) {
+				if( isset ( $data->$field_name ) ){
+					array_push($content_to_push, $data->$field_name );
+				}
+			}
+			$field_value = $content_to_push;
+		}
+
+		return array(
+			'name'       => $field_name . ( $append_component_id && $component_uuid ? '_component_' . $component_uuid : '' ),
+			'type'       => $field->field_type,
+			'label'      => $field->label,
+			'plain_text' => (bool) $is_plain,
+			'value'      => $this->format_field_value($field, $field_value, $is_component_repeatable, $is_repeatable),
+			'repeatable' => (bool) $is_repeatable,
+			'options'    => $this->format_selected_options_data( $metadata, $field_value ),
+		);
+	}
+
+	/**
+	 * Format the field's value.
+	 *
+	 * @since  3.2.0
+	 *
+	 * @param mixed $field object.
+	 * @param mixed $field_value object.
+	 * @param bool  $is_component_repeatable to tell that the field is a part of repeatable component
+	 * @param bool	$is_repeatable to tell that the field itself is a repeatable
+	 *
+	 * @return mixed
+	 */
+	protected function format_field_value( $field, $field_value, $is_component_repeatable, $is_repeatable) {
+
+		if( empty( $field_value ) ) {
+			return '';
+		}
+
+		// handle repeatables
+		if($is_component_repeatable || $is_repeatable) {
+
+			// handle attachment repeatables
+			if( 'attachment' === $field->field_type && $is_component_repeatable ){
+				$attachments = [];
+				foreach($field_value as $value){
+					foreach($value as $val){
+						array_push($attachments, $val);
+					}
+				}
+				return $attachments;
+			}
+
+			$field_value = wp_json_encode(
+				( is_array( $field_value ) ? array_values(
+					array_filter(
+						$field_value,
+						function( $val ) {
+							if(is_string($val)){
+								return trim( $val ) !== '';
+							} else {
+								return $val;
+							}
+						}
+					)
+			) : $field_value ));
+		}
+
+		return $field_value;
+	}
+
+
+	/**
+	 * Format the element's options.
+	 * This method only returns the selected options
+	 *
+	 * @since  3.2.0
+	 *
+	 * @param mixed $metadata object.
+	 * @param mixed $field_value object.
+	 *
+	 * @return array
+	 */
+	protected function format_selected_options_data( $metadata, $field_value ): array {
+
+		if ( ! is_object( $metadata ) ) {
+			return array();
+		}
+
+		$options      = array();
+		$options_meta = isset( $metadata->choice_fields ) ? $metadata->choice_fields->options : array();
+
+		foreach ( $options_meta as $option ) {
+			$matched_option = wp_list_filter( $field_value, array( 'id' => $option->optionId ) );
+
+			if ( count( $matched_option ) > 0 ) {
+				$options[] = (object) array(
+					'name'     => $option->optionId,
+					'label'    => $option->label,
+					'selected' => true,
+				);
+			}
+		}
+
+		return $options;
 	}
 
 	/**
@@ -439,19 +596,22 @@ abstract class Base extends Plugin_Base {
 	 * @return false|array     Array of attributes on success.
 	 */
 	public function get_media_shortcode_attributes( $content, $args ) {
-		$args = wp_parse_args( $args, array(
-			'position'     => 1,
-			'field_number' => '',
-		) );
+		$args = wp_parse_args(
+			$args,
+			array(
+				'position'     => 1,
+				'field_number' => '',
+			)
+		);
 		preg_match_all( '@\[([^<>&/\[\]\x00-\x20=]++)@', $content, $matches );
 
-		$suffix = $args['field_number'] > 1 ? '_' . $args['field_number'] : '';
-		$to_find = array( "media{$suffix}-{$args['position']}" );
+		$suffix   = $args['field_number'] > 1 ? '_' . $args['field_number'] : '';
+		$to_find  = array( "media{$suffix}-{$args['position']}" );
 		$tagnames = array_intersect( $to_find, $matches[1] );
 
 		if ( empty( $tagnames ) ) {
 			if ( ! $suffix ) {
-				$to_find = array( "media_1-{$args['position']}" );
+				$to_find  = array( "media_1-{$args['position']}" );
 				$tagnames = array_intersect( $to_find, $matches[1] );
 				if ( empty( $tagnames ) ) {
 					return false;
@@ -468,7 +628,7 @@ abstract class Base extends Plugin_Base {
 
 		if ( isset( $matches[3], $matches[0] ) && is_array( $matches[3] ) ) {
 			$matches[3] = wp_unslash( $matches[3] ); // Fixes quoted attributes.
-			$replace = array();
+			$replace    = array();
 			foreach ( $matches[0] as $index => $shortcode ) {
 				$replace[ $shortcode ] = shortcode_parse_atts( $matches[3][ $index ] );
 			}
@@ -493,13 +653,16 @@ abstract class Base extends Plugin_Base {
 	public function get_requested_media( $atts, $media_id, $attach_id ) {
 		$image = '';
 
-		$atts = wp_parse_args( $atts, array(
-			'size'   => 'full',
-			'align'  => '',
-			'linkto' => '',
-			'class'  => '',
-			'alt'    => '',
-		) );
+		$atts = wp_parse_args(
+			$atts,
+			array(
+				'size'   => 'full',
+				'align'  => '',
+				'linkto' => '',
+				'class'  => '',
+				'alt'    => '',
+			)
+		);
 
 		$atts = array_map( 'esc_attr', $atts );
 
@@ -531,7 +694,7 @@ abstract class Base extends Plugin_Base {
 
 		if ( is_array( $atts['size'] ) ) {
 			$atts['size'] = array_map( 'absint', $atts['size'] );
-			$size_class = join( 'x', $atts['size'] );
+			$size_class   = join( 'x', $atts['size'] );
 		} else {
 			$atts['size'] = $size_class = $atts['size'];
 			if ( 'full' === $atts['size'] ) {
@@ -603,7 +766,7 @@ abstract class Base extends Plugin_Base {
 			// Mark this gc media id.
 			$ids[ $gcid ] = 1;
 
-			$string = '';
+			$string          = '';
 			$node_to_replace = $dom->saveHTML( $img );
 
 			if ( ! empty( $data ) ) {
@@ -624,7 +787,7 @@ abstract class Base extends Plugin_Base {
 				}
 			}
 
-			$shortcode = "[media-$index$string]";
+			$shortcode                        = "[media-$index$string]";
 			$replacements[ $node_to_replace ] = $shortcode;
 		}
 

@@ -14,19 +14,19 @@ class ScheduledExport
         if ((int)$export->executing) {
             return new JsonResponse(array(
                 'status' => 403,
-                'message' => sprintf(__('Export #%s is currently in manually process. Request skipped.', 'wp_all_export_plugin'), $export->id)
+                'message' => sprintf(esc_html__('Export #%s is currently in manually process. Request skipped.', 'wp_all_export_plugin'), $export->id)
             ));
         }
         if ($export->processing and !$export->triggered) {
             return new JsonResponse(array(
                 'status' => 403,
-                'message' => sprintf(__('Export #%s currently in process. Request skipped.', 'wp_all_export_plugin'), $export->id)
+                'message' => sprintf(esc_html__('Export #%s currently in process. Request skipped.', 'wp_all_export_plugin'), $export->id)
             ));
         }
         if (!$export->processing and $export->triggered) {
             return new JsonResponse(array(
                 'status' => 403,
-                'message' => sprintf(__('Export #%s already triggered. Request skipped.', 'wp_all_export_plugin'), $export->id)
+                'message' => sprintf(esc_html__('Export #%s already triggered. Request skipped.', 'wp_all_export_plugin'), $export->id)
             ));
         }
 
@@ -38,7 +38,7 @@ class ScheduledExport
 
         return new JsonResponse(array(
             'status' => 200,
-            'message' => sprintf(__('#%s Cron job triggered.', 'wp_all_export_plugin'), $export->id)
+            'message' => sprintf(esc_html__('#%s Cron job triggered.', 'wp_all_export_plugin'), $export->id)
         ));
     }
 
@@ -60,13 +60,13 @@ class ScheduledExport
             if (!empty($export->parent_id) or empty($queue_exports)) {
                 wp_send_json(array(
                     'status' => 403,
-                    'message' => sprintf(__('Export #%s is not triggered. Request skipped.', 'wp_all_export_plugin'), $export->id)
+                    'message' => sprintf(esc_html__('Export #%s is not triggered. Request skipped.', 'wp_all_export_plugin'), $export->id)
                 ));
             }
         } elseif ((int)$export->executing) {
             wp_send_json(array(
                 'status' => 403,
-                'message' => sprintf(__('Export #%s is currently in manually process. Request skipped.', 'wp_all_export_plugin'), $export->id)
+                'message' => sprintf(esc_html__('Export #%s is currently in manually process. Request skipped.', 'wp_all_export_plugin'), $export->id)
             ));
         } elseif ((int)$export->triggered and !(int)$export->processing) {
             $response = $export->set(array('canceled' => 0))->execute($logger, true);
@@ -104,19 +104,19 @@ class ScheduledExport
 
                 wp_send_json(array(
                     'status' => 200,
-                    'message' => sprintf(__('Export #%s complete', 'wp_all_export_plugin'), $export->id)
+                    'message' => sprintf(esc_html__('Export #%s complete', 'wp_all_export_plugin'), $export->id)
                 ));
             } else {
                 wp_send_json(array(
                     'status' => 200,
-                    'message' => sprintf(__('Records Processed %s.', 'wp_all_export_plugin'), (int)$export->exported)
+                    'message' => sprintf(esc_html__('Records Processed %s.', 'wp_all_export_plugin'), (int)$export->exported)
                 ));
             }
 
         } else {
             wp_send_json(array(
                 'status' => 403,
-                'message' => sprintf(__('Export #%s already processing. Request skipped.', 'wp_all_export_plugin'), $export->id)
+                'message' => sprintf(esc_html__('Export #%s already processing. Request skipped.', 'wp_all_export_plugin'), $export->id)
             ));
         }
     }

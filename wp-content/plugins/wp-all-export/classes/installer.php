@@ -20,7 +20,7 @@ class PMXE_Installer
 
     private function error($message){
 
-        $message = __($message);
+        $message = __(esc_html($message));
         $error = <<<EOT
 <style type="text/css">
     body, html {
@@ -34,7 +34,7 @@ class PMXE_Installer
     </p>
 </div>
 EOT;
-        echo $error;
+        echo wp_kses_post($error);
         die;
     }
 }

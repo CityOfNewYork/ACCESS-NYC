@@ -1,11 +1,12 @@
 === GatherContent Plugin ===
-Contributors:      gathercontent, mathew-chapman, namshee, jtsternberg, justinsainton
+Contributors:      gathercontent, mathew-chapman, namshee, justinsainton
 Donate link:       http://www.gathercontent.com
 Tags               structured content, gather content, gathercontent, import, migrate, export, mapping, production, writing, collaboration, platform, connect, link, gather, client, word, production
-Requires at least: 3.8
-Tested up to:      5.2
-Stable tag:        3.1.14
+Requires at least: 5.6.0
+Tested up to:      5.9.0
+Stable tag:        3.2.0
 License:           GPL-2.0+
+Requires PHP:	   7.0
 License URI:       https://opensource.org/licenses/GPL-2.0
 
 Quickly transfer structured content to and from your GatherContent projects and your WordPress site.
@@ -63,6 +64,14 @@ Below the text box is a button that will allow you to simply save all of that in
 6. Or change the item's GatherContent status in quick-edit mode.
 
 == Changelog ==
+
+= 3.2.1 =
+* Resolve build process dependency error.
+
+= 3.2.0 =
+* Add ability to edit Alt Text on media
+* Update dependencies
+* Support Components and Repeatable fields
 
 = 3.1.14 =
 * Fix yoast integration

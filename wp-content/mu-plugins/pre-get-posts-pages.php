@@ -16,11 +16,11 @@ add_filter('pre_get_posts', function($query) {
   include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
   // Find out if the page name is set (path)
-  $ispage = (null !== $query->query['pagename']) ? true : false;
+  $ispage = get_query_var('pagename', false);
 
   // If it is a page but the post type is not set to page, modify it to be so.
-  if ($ispage && 'page' !== $query->query_vars['post_type']) {
-    $page = get_page_by_path($query->query['pagename']);
+  if ($ispage && 'page' !== get_query_var('post_type')) {
+    $page = get_page_by_path(get_query_var('pagename'));
 
     // We will need to get the translated ID of the parent page from WPML
     $wpml = 'sitepress-multilingual-cms/sitepress.php';

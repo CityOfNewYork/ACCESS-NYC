@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Admin\Mapping;
+
 use GatherContent\Importer\Base as Plugin_Base;
 
 /**
@@ -174,8 +175,8 @@ abstract class Base extends Plugin_Base {
 
 		switch ( $col ) {
 			case 'post_author':
-				$value = 1;
-				$user = $this->get_value( 'post_author' )
+				$value          = 1;
+				$user           = $this->get_value( 'post_author' )
 					? get_user_by( 'id', absint( $this->get_value( 'post_author' ) ) )
 					: wp_get_current_user();
 				$select_options = $user->user_login;
@@ -215,8 +216,8 @@ abstract class Base extends Plugin_Base {
 
 		global $wpdb;
 
-		$options = array();
-		$table_name = $wpdb->prefix . 'posts';
+		$options      = array();
+		$table_name   = $wpdb->prefix . 'posts';
 		$post_columns = $wpdb->get_col( "DESC {$wpdb->prefix}posts", 0 );
 
 		foreach ( $post_columns as $col ) {
@@ -242,12 +243,14 @@ abstract class Base extends Plugin_Base {
 
 		if ( ! $meta_keys || $this->_get_val( 'delete-trans' ) ) {
 			// Retrieve custom field keys to include in the Custom Fields weight table select.
-			$meta_keys = $wpdb->get_col( "
+			$meta_keys = $wpdb->get_col(
+				"
 				SELECT meta_key
 				FROM $wpdb->postmeta
 				WHERE meta_key NOT LIKE '_oembed_%'
 				GROUP BY meta_key
-			" );
+			"
+			);
 
 			set_transient( 'gathercontent_importer_custom_field_keys', $meta_keys, DAY_IN_SECONDS );
 		}
@@ -267,26 +270,29 @@ abstract class Base extends Plugin_Base {
 		 *
 		 * @var array
 		 */
-		$meta_keys_blacklist = apply_filters( 'gathercontent_importer_custom_field_keys_blacklist', array(
-			'_wp_attachment_image_alt' => 1,
-			'_wp_attachment_metadata'  => 1,
-			'_wp_attached_file'        => 1,
-			'_edit_lock'               => 1,
-			'_edit_last'               => 1,
-			'_thumbnail_id'            => 1,
-			'_wp_page_template'        => 1,
-			'_gc_account'              => 1,
-			'_gc_account_id'           => 1,
-			'_gc_project'              => 1,
-			'_gc_template'             => 1,
-			'_gc_pull_items'           => 1,
-			'_gc_push_items'           => 1,
-			'_gc_mapped_item_id'       => 1,
-			'_gc_mapping_id'           => 1,
-			'_gc_mapped_meta'          => 1,
-			// legacy.
-			'gc_file_id'               => 1,
-		) );
+		$meta_keys_blacklist = apply_filters(
+			'gathercontent_importer_custom_field_keys_blacklist',
+			array(
+				'_wp_attachment_image_alt' => 1,
+				'_wp_attachment_metadata'  => 1,
+				'_wp_attached_file'        => 1,
+				'_edit_lock'               => 1,
+				'_edit_last'               => 1,
+				'_thumbnail_id'            => 1,
+				'_wp_page_template'        => 1,
+				'_gc_account'              => 1,
+				'_gc_account_id'           => 1,
+				'_gc_project'              => 1,
+				'_gc_template'             => 1,
+				'_gc_pull_items'           => 1,
+				'_gc_push_items'           => 1,
+				'_gc_mapped_item_id'       => 1,
+				'_gc_mapping_id'           => 1,
+				'_gc_mapped_meta'          => 1,
+				// legacy.
+				'gc_file_id'               => 1,
+			)
+		);
 
 		$keys = array();
 		foreach ( array_values( $meta_keys ) as $column ) {
@@ -308,17 +314,21 @@ abstract class Base extends Plugin_Base {
 	 * @return bool        Whether column passed the blacklist check.
 	 */
 	protected function post_column_option_is_blacklisted( $col ) {
-		return in_array( $col, array(
-			'ID',
-			'to_ping',
-			'pinged',
-			'post_mime_type',
-			'comment_count',
-			'post_content_filtered',
-			'guid',
-			'post_type',
-			'post_type',
-		), true );
+		return in_array(
+			$col,
+			array(
+				'ID',
+				'to_ping',
+				'pinged',
+				'post_mime_type',
+				'comment_count',
+				'post_content_filtered',
+				'guid',
+				'post_type',
+				'post_type',
+			),
+			true
+		);
 	}
 
 	/**

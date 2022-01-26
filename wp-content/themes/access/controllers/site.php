@@ -96,7 +96,8 @@ class Site extends TimberSite {
 
     // Get the first alert that is set to site wide
     $context['alert_sitewide'] = reset(array_filter($alerts, function($post) {
-      return $post->custom['alert_sitewide'];
+      return (empty($post->custom['alert_sitewide']))
+        ? 0 : $post->custom['alert_sitewide'];
     }));
 
     /**

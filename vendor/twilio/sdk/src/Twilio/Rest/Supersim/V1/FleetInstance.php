@@ -35,6 +35,8 @@ use Twilio\Version;
  * @property string $smsCommandsUrl
  * @property string $smsCommandsMethod
  * @property string $networkAccessProfileSid
+ * @property string $ipCommandsUrl
+ * @property string $ipCommandsMethod
  */
 class FleetInstance extends InstanceResource {
     /**
@@ -65,6 +67,8 @@ class FleetInstance extends InstanceResource {
             'smsCommandsUrl' => Values::array_get($payload, 'sms_commands_url'),
             'smsCommandsMethod' => Values::array_get($payload, 'sms_commands_method'),
             'networkAccessProfileSid' => Values::array_get($payload, 'network_access_profile_sid'),
+            'ipCommandsUrl' => Values::array_get($payload, 'ip_commands_url'),
+            'ipCommandsMethod' => Values::array_get($payload, 'ip_commands_method'),
         ];
 
         $this->solution = ['sid' => $sid ?: $this->properties['sid'], ];

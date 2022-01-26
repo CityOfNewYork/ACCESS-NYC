@@ -1,0 +1,57 @@
+.wpscan-model {
+    position: fixed;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100000;
+    display: none;
+    background: rgba(0,0,0,0.6);
+}
+
+.wpscan-model.active {
+    display: block;
+}
+
+.wpscan-modal-dialog {
+    background: white;
+    z-index: 100001;
+    width: 500px;
+    margin: auto;
+    position: absolute;
+    top: -30px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 60px;
+}
+
+.wpscan-model-content {
+    background: #f2f2f2;
+    height: 100%;
+    padding: 15px 20px 20px 20px;
+    line-height: 1.6;
+}
+
+h4 {
+    border-bottom: #eeeeee solid 1px;
+    background: #fbfbfb;
+    padding: 15px 20px;
+    position: relative;
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #cacaca;
+    text-shadow: 1px 1px 1px #fff;
+    letter-spacing: 0.6px;
+}
+
+.wpscan-model-footer {
+    border: 0;
+    background: #fefefe;
+    padding: 10px;
+    border-top: #eeeeee solid 1px;
+    text-align: right;
+}

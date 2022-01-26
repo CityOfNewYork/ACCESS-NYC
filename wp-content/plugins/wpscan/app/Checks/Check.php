@@ -109,11 +109,12 @@ abstract class Check {
 	 * @access public
 	 * @return void
 	 */
-	final public function add_vulnerability( $title, $severity, $id ) {
+	final public function add_vulnerability( $title, $severity, $id, $remediation_url ) {
 		$vulnerability = array(
-			'id'       => $id,
-			'title'    => $title,
-			'severity' => $severity,
+			'title'           => $title,
+			'severity'        => $severity,
+			'id'              => $id,
+			'remediation_url' => $remediation_url,
 		);
 
 		$this->vulnerabilities[] = $vulnerability;
@@ -219,6 +220,8 @@ abstract class Check {
 
 		if ( is_array( $this->vulnerabilities ) ) {
 			$updated['security-checks'][ $this->id ]['vulnerabilities'] = $this->vulnerabilities;
+
+			$this->parent->maybe_fire_issue_found_action('security-check', $this->id, $updated['security-checks'][ $this->id ]);
 		} else {
 			$updated['security-checks'][ $this->id ]['vulnerabilities'] = array();
 		}

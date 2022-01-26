@@ -1,8 +1,8 @@
 === Export any WordPress data to XML/CSV ===
 Contributors: soflyy, wpallimport
-Requires at least: 4.1
-Tested up to: 5.4.2
-Stable tag: 1.2.7
+Requires at least: 5.0
+Tested up to: 5.8
+Stable tag: 1.3.3
 Tags: export, wordpress csv export, wordpress xml export, export woocommerce, migrate, export csv from wordpress, export xml from wordpress, advanced xml export, advanced csv export, export data, bulk csv export, export custom post type, export woocommerce products, export woocommerce orders, migrate woocommerce, csv export, export csv, xml export, export xml, csv exporter, datafeed
 
 Easily export any data from WordPress. Drag & drop to create a completely custom spreadsheet, CSV, or XML file.
@@ -90,6 +90,38 @@ Either: -
 * Unzip wp-all-export.zip and upload the contents to /wp-content/plugins/, and then activate the plugin from the Plugins page in WordPress
 
 == Changelog ==
+
+= 1.3.3 =
+* new feature: compatibility with the Gravity Forms Export Add-On
+* improvement: fallback to PclZip if ZipArchive isn't available
+* bugfix: some output not correctly escaped
+
+= 1.3.2 =
+* improvement: add support for exporting non-WooCommerce 'product' CPTs
+* improvement: initial PHP 8 support
+* improvement: only set max_execution_time on WPAE pages
+* bug fix
+
+= 1.3.1 =
+* improvement: only set max_execution_time on export pages
+* bugfix: error when using the ACF Export Add-On Pro
+
+= 1.3.0 =
+* improvement: added plugin version when loading tipsy JS file
+* improvement: moved ACF and WooCommerce support to add-ons
+
+= 1.2.10 =
+* bugfix: WP_Query Results export only works with the User Export Add-On active
+
+= 1.2.9 =
+* maintenance: compatibility with Elementor v3.3 JavaScript changes
+
+= 1.2.8 =
+* improvement: add more info about client mode on the settings page
+* improvement: remove unused deprecated function add_contextual_help()
+* improvement: use wp_salt() when AUTH_SALT is not available
+* bugfix: Google Merchants export notice appears and then immediately disappears
+* bugfix: warning in PHP 7.3 when using continue in switch statements
 
 = 1.2.7 =
 * maintenance: compatibility with WordPress v5.5 jQuery changes

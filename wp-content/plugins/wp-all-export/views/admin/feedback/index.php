@@ -1,3 +1,8 @@
+<?php
+if(!defined('ABSPATH')) {
+    die();
+}
+?>
 <div class="wrap">
 
 	<h2>Help make WP All Export better.</h2>

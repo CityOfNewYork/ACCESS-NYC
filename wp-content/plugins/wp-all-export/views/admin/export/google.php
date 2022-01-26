@@ -1,4 +1,7 @@
 <?php
+if(!defined('ABSPATH')) {
+    die();
+}
 wp_enqueue_script('pmxe-angular-app', PMXE_ROOT_URL . '/dist/app.min.js', array('jquery'), PMXE_VERSION);
 wp_enqueue_style('pmxe-angular-scss', PMXE_ROOT_URL . '/dist/styles.css', array(), PMXE_VERSION);
 
@@ -14,9 +17,9 @@ if(getenv('WPAE_DEV')) {
 
 <div ng-app="GoogleMerchants"
      ng-controller="mainController"
-     ng-init="init('<?php if (class_exists("WooCommerce")) echo get_woocommerce_currency_symbol(); ?>',
-     '<?php if (class_exists("WooCommerce")) echo  get_woocommerce_currency();?>',
-     <?php $is_template_loaded = PMXE_Plugin::$session->get('is_loaded_template'); if(!empty($is_template_loaded)) { echo PMXE_Plugin::$session->get('is_loaded_template'); } else { echo "false"; } ?>)"
+     ng-init="init('<?php if (class_exists("WooCommerce")) echo esc_attr(get_woocommerce_currency_symbol()); ?>',
+     '<?php if (class_exists("WooCommerce")) echo  esc_attr(get_woocommerce_currency());?>',
+     <?php $is_template_loaded = esc_js(PMXE_Plugin::$session->get('is_loaded_template')); if(!empty($is_template_loaded)) { echo esc_attr(PMXE_Plugin::$session->get('is_loaded_template')); } else { echo "false"; } ?>)"
      class="googleMerchants" id="googleMerchants">
     <?php
     if ($post['xml_template_type'] == XmlExportEngine::EXPORT_TYPE_GOOLE_MERCHANTS && $post['export_to'] == XmlExportEngine::EXPORT_TYPE_XML) {

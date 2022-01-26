@@ -8,76 +8,112 @@ namespace SMNYC;
  */
 class ContactMe {
   /** @property  String  Used in nonce hash and AJAX hook. */
-  protected $action;
+  public $action;
+
+  /** @property  String  Used in Admin Settings. */
+  public $action_label;
 
   /** @property  String  Used in settings/option verification. Must match the keyname used in settings eg. smnyc_SERVICE_user */
-  protected $service;
+  public $service;
+
+  /** @property  String  The service type. Used in admin setting strings */
+  public $type;
 
   /** @property  String  Settings input label text. */
-  protected $account_label;
+  public $account_label;
 
   /** @property  String  Settings input label text. */
-  protected $secret_label;
+  public $secret_label;
 
   /** @property  String  Settings input label text. */
-  protected $from_label;
-
-  /** @property  String  Settings input hint/placeholder text. */
-  protected $account_hint;
-
-  /** @property  String  Settings input hint/placeholder text. */
-  protected $secret_hint;
-
-  /** @property  String  Settings input hint/placeholder text. */
-  protected $from_hint;
+  public $from_label;
 
   /** @property  String  Pagename for add_settings_section() method. */
-  protected $pagename = 'smnyc_config';
+  public $pagename = 'smnyc_config';
 
   /** @property  String  Fieldgroup name for register_setting() method. */
-  protected $fieldgroup = 'smnyc_settings';
+  public $fieldgroup = 'smnyc_settings';
 
   /** @property  String  Prefix for field ids for add_settings_field() method. */
-  protected $prefix = 'smnyc';
+  public $prefix = 'smnyc';
 
   /** @property  String  Text domain for custom post type label localization. */
-  protected $text_domain = 'smnyc';
+  public $text_domain = 'smnyc';
 
   /** @property  String  The template controller for the class. */
-  protected $template_controller;
+  public $template_controller;
 
-  /** @property  String  The post type for class template. */
-  const POST_TYPE = 'smnyc';
+  /** @property  String  The post type for the template content. */
+  public $post_type = 'smnyc';
+
+  /** @property  String  The menu label for posts. */
+  public $post_type_label = 'SMNYC';
+
+  /** @property  String  The post type description. */
+  public $post_type_description = 'SMNYC';
+
+  /** @property  String  The menu label name for posts. */
+  public $post_type_name = 'SMNYC';
+
+  /** @property  String  The singular menu label name for posts. */
+  public $post_type_name_singular = 'SMNYC';
 
   /**
    * Constructor
    */
   public function __construct($template_controller = false) {
-    $this->createEndpoints();
-
     if ($template_controller) {
       $this->template_controller = $template_controller;
     }
   }
 
   /**
-   * Set up AJAX hooks to each child's ::submission method.
+   * Return option prefixes, ajax action names, and post type names for
+   * maintaining consistency across services
+   *
+   * @return  Array  An array of different option strings
    */
-  protected function createEndpoints() {
-    add_action('wp_ajax_' . strtolower($this->action) . '_send', [$this, 'submission']);
-    add_action('wp_ajax_nopriv_' . strtolower($this->action) . '_send', [$this, 'submission']);
+  public function info() {
+    $ajax = strtolower($this->action) . '_send';
+    $prefix = strtolower($this->prefix . '_' . $this->service . '_');
+
+    return array(
+      'actions' => array(
+        'private' => 'wp_ajax_' . $ajax,
+        'anonymous' => 'wp_ajax_nopriv_' . $ajax
+      ),
+      'post_type' => $this->post_type,
+      'settings_section' => $this->prefix . '_section',
+      'option_prefix' => $prefix,
+      'constant_prefix' => strtoupper($prefix)
+    );
   }
 
   /**
-   * Register post type for email content.
+   * Set up AJAX hooks to each child's ::submission method
+   *
+   * @return  Object  Instance of $this
+   */
+  public function createEndpoints() {
+    add_action($this->info()['actions']['private'], [$this, 'submission']);
+    add_action($this->info()['actions']['anonymous'], [$this, 'submission']);
+
+    return $this;
+  }
+
+  /**
+   * Register post type for template content
+   *
+   * @return  Object  Instance of $this
    */
   public function registerPostType() {
-    register_post_type(self::POST_TYPE, array(
-      'label' => __('SMNYC', 'text_domain'),
-      'description' => __('Content for Send Me NYC', 'text_domain'),
+    register_post_type($this->info()['post_type'], array(
+      'label' => __($this->post_type_label, $this->text_domain),
+      'description' => __($this->post_type_description, $this->text_domain),
       'labels' => array(
-        'name' => _x('SMNYC', 'Post Type General Name', 'text_domain'),
-        'singular_name' => _x('SMNYC', 'Post Type Singular Name', 'text_domain'),
+        'name' => __($this->post_type_name, $this->text_domain),
+        'singular_name' => __($this->post_type_name_singular, $this->text_domain),
+        'all_items' => __('All ' . $this->service . ' Templates', $this->text_domain),
       ),
       'hierarchical' => false,
       'public' => true,
@@ -86,6 +122,8 @@ class ContactMe {
       'has_archive' => false,
       'exclude_from_search' => true
     ));
+
+    return $this;
   }
 
   /**
@@ -97,7 +135,7 @@ class ContactMe {
     }
 
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
-    $valid = $this->validConfiguration(strtolower($this->service));
+    $valid = $this->validConfiguration();
     $valid = $this->validRecipient($_POST['to']);
 
     if ($valid) {
@@ -109,7 +147,7 @@ class ContactMe {
 
       $share_text = isset($_POST['sharetext']) ? $_POST['sharetext'] : '';
 
-      $url_shortened = $this->shorten($url);
+      $url_shortened = (is_plugin_active('wp-bitly/wp-bitly.php')) ? $this->shorten($url) : $url;
 
       $template = $_POST['template'];
 
@@ -118,41 +156,78 @@ class ContactMe {
       $content = $this->content($url_shortened, $url, $share_text, $template, $lang);
 
       $this->send($to, $content);
-      $this->success($content, $to, $guid, $url);
+      $this->success($to, $guid, $url, $content);
     }
   }
 
   /**
-   * Creates a bit.ly shortened link to provided url. Fails silently.
+   * Creates a bit.ly shortened link to provided url using settings from the
+   * WordPress Bit.ly plugin. Fails silently and returns the original URL.
+   * The Bit.ly API will only work for URLS with production level domains.
    *
    * @param  String  $url  The URL to shorten.
    *
    * @return String        Shortened URL on success, original URL on failure.
    */
   private function shorten($url) {
-    $bitly_shortener = get_option('smnyc_bitly_shortener');
-    $bitly_token = get_option('smnyc_bitly_token');
+    try {
+      /**
+       * TODO: Add method to retrieve existing shortlink from post meta storage (if it is a post).
+       */
 
-    $bitly_shortener = (!empty($bitly_shortener)) ? $bitly_shortener : SMNYC_BITLY_SHORTENER;
-    $bitly_token = (!empty($bitly_token)) ? $bitly_token : SMNYC_BITLY_TOKEN;
+      // Get WP Bit.ly Settings
+      $wpBitlyOptions = wp_parse_args(get_option(WPBITLY_OPTIONS, array(
+        'oauth_token' => '',
+        'default_domain' => '',
+        'default_group' => ''
+      )));
 
-    $encoded = urlencode($url);
+      $token = $wpBitlyOptions['oauth_token'];
+      $domain = $wpBitlyOptions['default_domain'];
+      $group = $wpBitlyOptions['default_group'];
 
-    $request = $bitly_shortener . '?access_token=' . $bitly_token . '&longUrl=' . $encoded;
+      $options = array('long_url' => $url);
 
-    $bitly = wp_remote_get($request);
+      if ($domain) {
+        $options['domain'] = $domain;
+      }
 
-    if (is_wp_error($bitly)) {
+      if ($group) {
+        $options['group_guid'] = $group;
+      }
+
+      $response = wp_remote_post(WPBITLY_BITLY_API . 'shorten', array(
+        'timeout' => '30',
+        'headers' => array(
+          'Authorization' => 'Bearer ' . $token,
+          'Content-Type' => 'application/json'
+        ),
+        'method'  => 'POST',
+        'body' => json_encode($options)
+      ));
+
+      if (is_array($response) && '200' === $response['response']['code']) {
+        $body = json_decode($response['body'], true);
+
+        /**
+         * TODO: Add method to store shortlink in post meta storage (if it is a post).
+         */
+
+        return $body['link'];
+      } else {
+        throw new Exception();
+      }
+    } catch (Exception $e) {
+      $msg = __('Send Me NYC: Bit.ly URL shortening skipped for ' . $url);
+
+      // WP debug.log
+      error_log($msg);
+
+      // Send log to Query Monitor
+      do_action('qm/debug', $msg);
+
       return $url;
     }
-
-    $j = json_decode(wp_remote_retrieve_body($bitly));
-
-    if ($j->status_code !== 200) {
-      return $url;
-    }
-
-    return $j->data->url;
   }
 
   /**
@@ -180,19 +255,17 @@ class ContactMe {
   /**
    * Just makes sure that the user, secret key, and from fields were filled out.
    *
-   * @param   String   $service  Email or SMS.
-   *
    * @return  Boolean            Wether the config is valid or not.
    */
-  protected function validConfiguration($service) {
-    $user = get_option('smnyc_' . $service . '_user');
-    $from = get_option('smnyc_' . $service . '_from');
+  protected function validConfiguration() {
+    $user = get_option($this->info()['option_prefix'] . 'user');
+    $from = get_option($this->info()['option_prefix'] . 'from');
 
-    $user = (!empty($user)) ?
-      $user : constant('SMNYC_' . strtoupper($service) . '_USER');
+    $user = (!empty($user))
+      ? $user : constant($this->info()['constant_prefix'] . 'USER');
 
-    $from = (!empty($from)) ?
-      $from : constant('SMNYC_' . strtoupper($service) . '_FROM');
+    $from = (!empty($from))
+      ? $from : constant($this->info()['constant_prefix'] . 'FROM');
 
     if (empty($user) || empty($from)) {
       $this->failure(-1, 'Invalid Configuration');
@@ -215,12 +288,12 @@ class ContactMe {
   /**
    * Action hook for Stat Collector and sends success response key/value array.
    *
-   * @param   String/Array  $content  Content sent in the email or sms.
    * @param   String        $to       Recipient of message.
    * @param   String        $guid     Session GUID.
    * @param   String        $url      URL to that has been shared.
+   * @param   String/Array  $content  Content sent in the email or sms.
    */
-  protected function success($content = null, $to, $guid, $url) {
+  protected function success($to, $guid, $url, $content = null) {
     /**
      * Action hook for Stat Collector to save message details to the DB
      *
@@ -260,55 +333,27 @@ class ContactMe {
   }
 
   /**
-   * Bitly Settings Section.
-   */
-  public function createBitlySection() {
-    $section = $this->prefix . '_bitly_section';
-
-    add_settings_section(
-      $section,
-      'Bitly Settings',
-      [$this, 'bitlyHeadingText'],
-      $this->pagename
-    );
-
-    $this->registerSetting(array(
-      'id' => $this->prefix . '_bitly_shortener',
-      'title' => 'Bitly Shortening API Link',
-      'section' => $section
-    ));
-
-    $this->registerSetting(array(
-      'id' => $this->prefix . '_bitly_token',
-      'title' => 'Bitly Access Token',
-      'section' => $section
-    ));
-  }
-
-  /**
    * Register settings for the form. Child classes can inherit this function
    * and create additional settings for their classes.
    */
   public function createSettingsSection() {
-    $section = $this->prefix . '_section';
-
     add_settings_section(
-      $section,
-      $this->action . ' Settings',
+      $this->info()['settings_section'],
+      $this->action_label . ' Settings',
       [$this, 'settingsHeadingText'],
       $this->pagename
     );
 
     $this->registerSetting(array(
-      'id' => $this->prefix . '_user',
+      'id' => $this->info()['option_prefix'] . 'user',
       'title' => $this->account_label,
-      'section' => $section
+      'section' => $this->info()['settings_section']
     ));
 
     $this->registerSetting(array(
-      'id' => $this->prefix . '_from',
+      'id' => $this->info()['option_prefix'] . 'from',
       'title' => $this->from_label,
-      'section' => $section
+      'section' => $this->info()['settings_section']
     ));
   }
 
@@ -353,7 +398,7 @@ class ContactMe {
    */
   public function settingsHeadingText() {
     echo '<p>';
-    echo '  Enter your ' . $this->service . ' credentials here. ';
+    echo '  Enter your ' . $this->service . ' ' . $this->type . ' credentials here. ';
     echo '</p>';
   }
 

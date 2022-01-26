@@ -42,18 +42,6 @@ if ( ! class_exists('XmlExportFiltering') )
 				$this->queryJoin = array();
 
 				$this->queryWhere = " $wpdb->posts.post_type = 'product' AND (($wpdb->posts.post_status <> 'trash' AND $wpdb->posts.post_status <> 'auto-draft'))";												
-				
-//				$where = $this->queryWhere;
-//				$join  = implode( ' ', array_unique( $this->queryJoin ) );
-//
-//				$this->queryWhere = $tmp_queryWhere;
-//				$this->queryJoin  = $tmp_queryJoin;
-//
-//				$this->queryWhere .= " AND $wpdb->posts.post_type = 'product' OR ($wpdb->posts.post_type = 'product_variation' AND $wpdb->posts.post_parent IN (
-//					SELECT DISTINCT $wpdb->posts.ID
-//					FROM $wpdb->posts $join
-//					WHERE $where
-//				)) GROUP BY $wpdb->posts.ID";
 
 				$where = $this->queryWhere;
 				$join  = implode( ' ', array_unique( $this->queryJoin ) );
@@ -73,7 +61,7 @@ if ( ! class_exists('XmlExportFiltering') )
 		public static function render_filtering_block( $engine, $isWizard, $post, $is_on_template_screen = false )
 		{
 			?>
-			<input type="hidden" class="hierarhy-output" name="filter_rules_hierarhy" value="<?php echo esc_html($post['filter_rules_hierarhy']);?>"/>
+			<input type="hidden" class="hierarhy-output" name="filter_rules_hierarhy" value="<?php echo esc_attr($post['filter_rules_hierarhy']);?>"/>
 			<?php
 
 			if ( $isWizard or $post['export_type'] != 'specific' ) return;
@@ -82,7 +70,7 @@ if ( ! class_exists('XmlExportFiltering') )
 			<div class="wpallexport-collapsed wpallexport-section closed">
 				<div class="wpallexport-content-section wpallexport-filtering-section" <?php if ($is_on_template_screen):?>style="margin-bottom: 10px;"<?php endif; ?>>
 					<div class="wpallexport-collapsed-header" style="padding-left: 25px;">
-						<h3><?php _e('Filtering Options','wp_all_export_plugin');?></h3>	
+						<h3><?php esc_html_e('Filtering Options','wp_all_export_plugin');?></h3>
 					</div>
 					<div class="wpallexport-collapsed-content" style="padding: 0;">
 						<div class="wpallexport-collapsed-content-inner">									

@@ -23,6 +23,7 @@
       $('input[name="timestamp_replace"]').on('change', $.proxy(this.checkCustomDate, this));
       $('input[name="replace_type"]').on('change', $.proxy(this.showReplaceOptions, this));
       $('input[name="userfile"]').on('change', $.proxy(this.handleImage, this));
+			$('.replace_custom_date').on('click', $.proxy(this.updateCustomDate, this));
 
       // DragDrop
       $('.wrap.emr_upload_form').on('dragover', $.proxy(this.dragOverArea, this));
@@ -176,7 +177,7 @@
         this.debug(target_type + ' not ' + source_type);
         var falsePositive = this.checkFalsePositiveType(source_type, target_type);
         if (! falsePositive)
-          this.warningFileType();
+          this.warningFileType(source_type, target_type);
       }
 
       if (! is_empty && emr_options.allowed_mime.indexOf(target_type) == -1)
@@ -229,6 +230,19 @@
 
       $(preview).find('.image_size').text(size);
     }
+		this.updateCustomDate = function(e)
+		{
+				var $target = $(e.target);
+				var min = $target.data('min');
+				var hour = $target.data('hour');
+				var date = $target.data('date');
+				var format = $target.data('format');
+
+				$('input[name="custom_date"]').val(date);
+				$('input[name="custom_hour"]').val(hour);
+				$('input[name="custom_minute"]').val(min);
+				$('input[name="custom_date_formatted"]').val(format);
+		}
     this.checkSubmit = function()
     {
        var check = ($('input[name="userfile"]').val().length > 0) ? true : false;
@@ -271,8 +285,10 @@
       $('.form-error.filesize').find('.fn').text(fileItem.name);
       $('.form-error.filesize').fadeIn();
     }
-    this.warningFileType = function(fileItem)
+    this.warningFileType = function(source_type, target_type)
     {
+      $('.form-warning.filetype').find('.source_type').text(source_type);
+      $('.form-warning.filetype').find('.target_type').text(target_type);
       $('.form-warning.filetype').fadeIn();
     }
     this.warningMimeType = function(fileItem)
