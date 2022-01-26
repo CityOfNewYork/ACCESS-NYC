@@ -39581,18 +39581,11 @@ function ColorPalette(_ref6) {
     enableAlpha: enableAlpha
   });
 
-  let dropdownPosition;
-
-  if (__experimentalIsRenderedInSidebar) {
-    dropdownPosition = 'bottom left';
-  }
-
   const colordColor = Object(colord["a" /* colord */])(value);
   return Object(external_wp_element_["createElement"])(v_stack_component, {
     spacing: 3,
     className: className
   }, !disableCustomColors && Object(external_wp_element_["createElement"])(CustomColorPickerDropdown, {
-    position: dropdownPosition,
     isRenderedInSidebar: __experimentalIsRenderedInSidebar,
     renderContent: renderCustomColorPicker,
     renderToggle: _ref7 => {
@@ -39883,7 +39876,8 @@ function GradientColorPickerDropdown(_ref2) {
 
     if (isRenderedInSidebar) {
       result.anchorRef = gradientPickerDomRef.current;
-      result.position = 'bottom left';
+      result.position = Object(external_wp_i18n_["isRTL"])() ? 'bottom right' : 'bottom left';
+      result.__unstableForcePosition = true;
     }
 
     return result;
@@ -41029,6 +41023,12 @@ function NavigableMenu(_ref, ref) {
 
 
 
+function mergeProps() {
+  let defaultProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  let props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  const mergedProps = { ...defaultProps,
+    ...props
+  };
 
 function mergeProps() {
   let defaultProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -42357,6 +42357,14 @@ function getElementProps(element) {
  * @param {String} propName the prop name
  */
 
+function isControlledProp(props, key) {
+  return props[key] !== undefined;
+}
+/**
+ * Normalizes the 'key' property of a KeyboardEvent in IE/Edge
+ * @param {Object} event a keyboardEvent object
+ * @return {String} keyboard key
+ */
 
 function requiredProp(fnName, propName) {
   // eslint-disable-next-line no-console
@@ -42421,6 +42429,7 @@ function isControlledProp(props, key) {
  * @return {String} keyboard key
  */
 
+  var newIndex = baseIndex + moveAmount;
 
 function normalizeArrowKey(event) {
   var key = event.key,
@@ -42498,6 +42507,12 @@ function getNextWrappingIndex(moveAmount, baseIndex, itemCount, getItemNodeFromI
  * @returns {number} The new index. Returns baseIndex if item is not disabled. Returns next non-disabled item otherwise. If no non-disabled found it will return -1.
  */
 
+function setStatus(status, documentProp) {
+  var div = getStatusDiv(documentProp);
+
+  if (!status) {
+    return;
+  }
 
 function getNextNonDisabledIndex(moveAmount, baseIndex, itemCount, getItemNodeFromIndex, circular) {
   var currentElementNode = getItemNodeFromIndex(baseIndex);
@@ -42578,6 +42593,9 @@ function setStatus(status, documentProp) {
  * @return {HTMLElement} the status node.
  */
 
+      _this.setItemCount = function (count) {
+        _this.itemCount = count;
+      };
 
 function getStatusDiv(documentProp) {
   if (documentProp === void 0) {
@@ -42795,6 +42813,11 @@ var downshift_esm_Downshift = /*#__PURE__*/function () {
             // But it enables users controlling the isOpen state to know when
             // the isOpen state changes due to mouseup events which is quite handy.
 
+        // this is used in the render to know whether the user has called getRootProps.
+        // It uses that to know whether to apply the props automatically
+        _this.getRootProps.called = true;
+        _this.getRootProps.refKey = refKey;
+        _this.getRootProps.suppressRefError = suppressRefError;
 
             if (key === 'type') {
               return;
@@ -42991,6 +43014,14 @@ var downshift_esm_Downshift = /*#__PURE__*/function () {
             return;
           } // get next non-disabled starting downwards from 0 if that's disabled.
 
+      _this.getToggleButtonProps = function (_temp3) {
+        var _ref3 = _temp3 === void 0 ? {} : _temp3,
+            onClick = _ref3.onClick;
+            _ref3.onPress;
+            var onKeyDown = _ref3.onKeyDown,
+            onKeyUp = _ref3.onKeyUp,
+            onBlur = _ref3.onBlur,
+            rest = objectWithoutPropertiesLoose_objectWithoutPropertiesLoose(_ref3, _excluded2$3);
 
           var newHighlightedIndex = getNextNonDisabledIndex(1, 0, itemCount, function (index) {
             return _this4.getItemNodeFromIndex(index);
@@ -43016,6 +43047,9 @@ var downshift_esm_Downshift = /*#__PURE__*/function () {
             return;
           } // get next non-disabled starting upwards from last index if that's disabled.
 
+      _this.buttonHandleClick = function (event) {
+        event.preventDefault(); // handle odd case for Safari and Firefox which
+        // don't give the button the focus properly.
 
           var newHighlightedIndex = getNextNonDisabledIndex(-1, itemCount - 1, itemCount, function (index) {
             return _this5.getItemNodeFromIndex(index);
@@ -43079,6 +43113,10 @@ var downshift_esm_Downshift = /*#__PURE__*/function () {
         // if the NODE_ENV is test. With the proper build system, this should be dead code eliminated
         // when building for production and should therefore have no impact on production code.
 
+        var _this$getState6 = _this.getState(),
+            inputValue = _this$getState6.inputValue,
+            isOpen = _this$getState6.isOpen,
+            highlightedIndex = _this$getState6.highlightedIndex;
 
         if (false) {} else {
           // Ensure that toggle of menu occurs after the potential blur event in iOS
@@ -43246,6 +43284,15 @@ var downshift_esm_Downshift = /*#__PURE__*/function () {
             // from under the user which is currently scrolling/moving the
             // cursor
 
+        var eventHandlers = rest.disabled ? {
+          onMouseDown: enabledEventHandlers.onMouseDown
+        } : enabledEventHandlers;
+        return Object(esm_extends["a" /* default */])({
+          id: _this.getItemId(index),
+          role: 'option',
+          'aria-selected': _this.getState().highlightedIndex === index
+        }, eventHandlers, rest);
+      };
 
             _this.avoidScrolling = true;
 
@@ -43527,6 +43574,9 @@ var downshift_esm_Downshift = /*#__PURE__*/function () {
       if (false) {}
       /* istanbul ignore if (react-native) */
 
+        var onMouseUp = function onMouseUp(event) {
+          _this7.isMouseDown = false; // if the target element or the activeElement is within a downshift node
+          // then we don't want to reset downshift
 
       {
         // this.isMouseDown helps us track whether the mouse is currently held down.
@@ -43558,6 +43608,9 @@ var downshift_esm_Downshift = /*#__PURE__*/function () {
         // If the user taps outside of Downshift, the component should be reset,
         // but not if the user is swiping
 
+        var onTouchMove = function onTouchMove() {
+          _this7.isTouchMove = true;
+        };
 
         var onTouchStart = function onTouchStart() {
           _this7.isTouchMove = false;
@@ -43627,6 +43680,9 @@ var downshift_esm_Downshift = /*#__PURE__*/function () {
       }
       /* istanbul ignore else (react-native) */
 
+    _proto.componentWillUnmount = function componentWillUnmount() {
+      this.cleanup(); // avoids memory leak
+    };
 
       {
         this.updateStatus();
@@ -50997,37 +51053,26 @@ function ToggleGroupControlBackdrop(_ref) {
       return;
     }
 
-    const computeDimensions = () => {
-      const {
-        width: offsetWidth,
-        x
-      } = targetNode.getBoundingClientRect();
-      const {
-        x: parentX
-      } = containerNode.getBoundingClientRect();
-      const borderWidth = 1;
-      const offsetLeft = x - parentX - borderWidth;
-      setLeft(offsetLeft);
-      setWidth(offsetWidth);
-    }; // Fix to make the component appear as expected inside popovers.
-    // If the targetNode width is 0 it means the element was not yet rendered we should allow
-    // some time for the render to happen.
-    // requestAnimationFrame instead of setTimeout with a small time does not seems to work.
-
-
-    const dimensionsRequestId = window.setTimeout(computeDimensions, 100);
-    let animationRequestId;
+    const {
+      x: parentX
+    } = containerNode.getBoundingClientRect();
+    const {
+      width: offsetWidth,
+      x
+    } = targetNode.getBoundingClientRect();
+    const borderWidth = 1;
+    const offsetLeft = x - parentX - borderWidth;
+    setLeft(offsetLeft);
+    setWidth(offsetWidth);
+    let requestId;
 
     if (!canAnimate) {
-      animationRequestId = window.requestAnimationFrame(() => {
+      requestId = window.requestAnimationFrame(() => {
         setCanAnimate(true);
       });
     }
 
-    return () => {
-      window.clearTimeout(dimensionsRequestId);
-      window.cancelAnimationFrame(animationRequestId);
-    };
+    return () => window.cancelAnimationFrame(requestId);
   }, [canAnimate, containerRef, containerWidth, state, isAdaptiveWidth]);
 
   if (!renderBackdrop) {
@@ -59452,7 +59497,7 @@ function TreeGrid(_ref, ref) {
 
           // Left:
           // If a row is focused, and it is expanded, collapses the current row.
-          if (activeRow.getAttribute('aria-expanded') === 'true') {
+          if ((activeRow === null || activeRow === void 0 ? void 0 : activeRow.ariaExpanded) === 'true') {
             onCollapseRow(activeRow);
             event.preventDefault();
             return;
@@ -59472,12 +59517,10 @@ function TreeGrid(_ref, ref) {
           }
 
           (_getRowFocusables = getRowFocusables(parentRow)) === null || _getRowFocusables === void 0 ? void 0 : (_getRowFocusables$ = _getRowFocusables[0]) === null || _getRowFocusables$ === void 0 ? void 0 : _getRowFocusables$.focus();
-        }
-
-        if (keyCode === external_wp_keycodes_["RIGHT"]) {
+        } else {
           // Right:
           // If a row is focused, and it is collapsed, expands the current row.
-          if (activeRow.getAttribute('aria-expanded') === 'false') {
+          if ((activeRow === null || activeRow === void 0 ? void 0 : activeRow.ariaExpanded) === 'false') {
             onExpandRow(activeRow);
             event.preventDefault();
             return;
@@ -59544,7 +59587,7 @@ function TreeGrid(_ref, ref) {
 
       event.preventDefault();
     }
-  }, [onExpandRow, onCollapseRow]);
+  }, []);
   /* Disable reason: A treegrid is implemented using a table element. */
 
   /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */

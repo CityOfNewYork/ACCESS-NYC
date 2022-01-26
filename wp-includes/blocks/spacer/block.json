@@ -7,11 +7,11 @@
 	"textdomain": "default",
 	"attributes": {
 		"height": {
-			"type": "string",
-			"default": "100px"
+			"type": "number",
+			"default": 100
 		},
 		"width": {
-			"type": "string"
+			"type": "number"
 		}
 	},
 	"usesContext": [ "orientation" ],

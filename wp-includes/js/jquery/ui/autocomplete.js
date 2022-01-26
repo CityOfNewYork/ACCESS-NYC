@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Autocomplete 1.13.1
+ * jQuery UI Autocomplete 1.13.0
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -36,7 +36,7 @@
 "use strict";
 
 $.widget( "ui.autocomplete", {
-	version: "1.13.1",
+	version: "1.13.0",
 	defaultElement: "<input>",
 	options: {
 		appendTo: null,
@@ -264,10 +264,8 @@ $.widget( "ui.autocomplete", {
 				// Announce the value in the liveRegion
 				label = ui.item.attr( "aria-label" ) || item.value;
 				if ( label && String.prototype.trim.call( label ).length ) {
-					clearTimeout( this.liveRegionTimer );
-					this.liveRegionTimer = this._delay( function() {
-						this.liveRegion.html( $( "<div>" ).text( label ) );
-					}, 100 );
+					this.liveRegion.children().hide();
+					$( "<div>" ).text( label ).appendTo( this.liveRegion );
 				}
 			},
 			menuselect: function( event, ui ) {

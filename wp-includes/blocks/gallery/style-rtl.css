@@ -287,7 +287,6 @@
   margin-top: auto;
   margin-bottom: auto;
   flex-direction: column;
-  max-width: 100%;
 }
 .wp-block-gallery.has-nested-images figure.wp-block-image > div,
 .wp-block-gallery.has-nested-images figure.wp-block-image > a {
@@ -298,7 +297,7 @@
 .wp-block-gallery.has-nested-images figure.wp-block-image img {
   display: block;
   height: auto;
-  max-width: 100% !important;
+  max-width: 100%;
   width: auto;
 }
 .wp-block-gallery.has-nested-images figure.wp-block-image figcaption {

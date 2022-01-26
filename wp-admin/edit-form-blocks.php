@@ -62,11 +62,10 @@ $preload_paths = array(
 	'/wp/v2/themes?status=active',
 	add_query_arg( 'context', 'edit', $rest_path ),
 	sprintf( '/wp/v2/types/%s?context=edit', $post_type ),
-	'/wp/v2/users/me',
+	sprintf( '/wp/v2/users/me?post_type=%s&context=edit', $post_type ),
 	array( rest_get_route_for_post_type_items( 'attachment' ), 'OPTIONS' ),
 	array( rest_get_route_for_post_type_items( 'wp_block' ), 'OPTIONS' ),
 	sprintf( '%s/autosaves?context=edit', $rest_path ),
-	'/wp/v2/settings',
 );
 
 block_editor_rest_api_preload( $preload_paths, $block_editor_context );
@@ -191,6 +190,7 @@ $editor_settings = array(
 	'titlePlaceholder'                     => apply_filters( 'enter_title_here', __( 'Add title' ), $post ),
 	'bodyPlaceholder'                      => $body_placeholder,
 	'autosaveInterval'                     => AUTOSAVE_INTERVAL,
+	'styles'                               => get_block_editor_theme_styles(),
 	'richEditingEnabled'                   => user_can_richedit(),
 	'postLock'                             => $lock_details,
 	'postLockUtils'                        => array(

@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Resizable 1.13.1
+ * jQuery UI Resizable 1.13.0
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -36,7 +36,7 @@
 "use strict";
 
 $.widget( "ui.resizable", $.ui.mouse, {
-	version: "1.13.1",
+	version: "1.13.0",
 	widgetEventPrefix: "resize",
 	options: {
 		alsoResize: false,
@@ -228,15 +228,15 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		this._super( key, value );
 
 		switch ( key ) {
-			case "handles":
-				this._removeHandles();
-				this._setupHandles();
-				break;
-			case "aspectRatio":
-				this._aspectRatio = !!value;
-				break;
-			default:
-				break;
+		case "handles":
+			this._removeHandles();
+			this._setupHandles();
+			break;
+		case "aspectRatio":
+			this._aspectRatio = !!value;
+			break;
+		default:
+			break;
 		}
 	},
 

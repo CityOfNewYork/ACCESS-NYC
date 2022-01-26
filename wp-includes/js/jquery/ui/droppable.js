@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Droppable 1.13.1
+ * jQuery UI Droppable 1.13.0
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -34,7 +34,7 @@
 "use strict";
 
 $.widget( "ui.droppable", {
-	version: "1.13.1",
+	version: "1.13.0",
 	widgetEventPrefix: "drop",
 	options: {
 		accept: "*",
@@ -366,7 +366,7 @@ $.ui.ddmanager = {
 				return;
 			}
 			if ( !this.options.disabled && this.visible &&
-				$.ui.intersect( draggable, this, this.options.tolerance, event ) ) {
+					$.ui.intersect( draggable, this, this.options.tolerance, event ) ) {
 				dropped = this._drop.call( this, event ) || dropped;
 			}
 

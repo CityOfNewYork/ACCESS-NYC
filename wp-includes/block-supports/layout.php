@@ -159,23 +159,33 @@ function wp_render_layout_support_flag( $block_content, $block ) {
 		$used_layout = $default_layout;
 	}
 
-	$class_name = wp_unique_id( 'wp-container-' );
-	$gap_value  = _wp_array_get( $block, array( 'attrs', 'style', 'spacing', 'blockGap' ) );
+	$id        = uniqid();
+	$gap_value = _wp_array_get( $block, array( 'attrs', 'style', 'spacing', 'blockGap' ) );
 	// Skip if gap value contains unsupported characters.
 	// Regex for CSS value borrowed from `safecss_filter_attr`, and used here
 	// because we only want to match against the value, not the CSS attribute.
 	$gap_value = preg_match( '%[\\\(&=}]|/\*%', $gap_value ) ? null : $gap_value;
-	$style     = wp_get_layout_style( ".$class_name", $used_layout, $has_block_gap_support, $gap_value );
+	$style     = wp_get_layout_style( ".wp-container-$id", $used_layout, $has_block_gap_support, $gap_value );
 	// This assumes the hook only applies to blocks with a single wrapper.
 	// I think this is a reasonable limitation for that particular hook.
 	$content = preg_replace(
 		'/' . preg_quote( 'class="', '/' ) . '/',
-		'class="' . esc_attr( $class_name ) . ' ',
+		'class="wp-container-' . $id . ' ',
 		$block_content,
 		1
 	);
 
-	wp_enqueue_block_support_styles( $style );
+	/*
+	 * Ideally styles should be loaded in the head, but blocks may be parsed
+	 * after that, so loading in the footer for now.
+	 * See https://core.trac.wordpress.org/ticket/53494.
+	 */
+	add_action(
+		'wp_footer',
+		static function () use ( $style ) {
+			echo '<style>' . $style . '</style>';
+		}
+	);
 
 	return $content;
 }

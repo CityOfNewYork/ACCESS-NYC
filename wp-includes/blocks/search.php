@@ -43,18 +43,16 @@ function render_block_core_search( $attributes ) {
 	// Border color classes need to be applied to the elements that have a border color.
 	$border_color_classes = get_border_color_classes_for_block_core_search( $attributes );
 
-	$label_inner_html = empty( $attributes['label'] ) ? __( 'Search' ) : wp_kses_post( $attributes['label'] );
-
 	$label_markup = sprintf(
 		'<label for="%1$s" class="wp-block-search__label screen-reader-text">%2$s</label>',
-		esc_attr( $input_id ),
-		$label_inner_html
+		$input_id,
+		empty( $attributes['label'] ) ? __( 'Search' ) : esc_html( $attributes['label'] )
 	);
 	if ( $show_label && ! empty( $attributes['label'] ) ) {
 		$label_markup = sprintf(
 			'<label for="%1$s" class="wp-block-search__label">%2$s</label>',
 			$input_id,
-			$label_inner_html
+			esc_html( $attributes['label'] )
 		);
 	}
 
@@ -73,17 +71,15 @@ function render_block_core_search( $attributes ) {
 	if ( $show_button ) {
 		$button_internal_markup = '';
 		$button_classes         = $color_classes;
-		$aria_label             = '';
 
 		if ( ! $is_button_inside ) {
 			$button_classes .= ' ' . $border_color_classes;
 		}
 		if ( ! $use_icon_button ) {
 			if ( ! empty( $attributes['buttonText'] ) ) {
-				$button_internal_markup = wp_kses_post( $attributes['buttonText'] );
+				$button_internal_markup = esc_html( $attributes['buttonText'] );
 			}
 		} else {
-			$aria_label             = sprintf( 'aria-label="%s"', esc_attr( wp_strip_all_tags( $attributes['label'] ) ) );
 			$button_classes        .= ' has-icon';
 			$button_internal_markup =
 				'<svg id="search-icon" class="search-icon" viewBox="0 0 24 24" width="24" height="24">
@@ -92,10 +88,9 @@ function render_block_core_search( $attributes ) {
 		}
 
 		$button_markup = sprintf(
-			'<button type="submit" class="wp-block-search__button %s" %s %s>%s</button>',
+			'<button type="submit" class="wp-block-search__button %s" %s>%s</button>',
 			esc_attr( $button_classes ),
 			$inline_styles['button'],
-			$aria_label,
 			$button_internal_markup
 		);
 	}
