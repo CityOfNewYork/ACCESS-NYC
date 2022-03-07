@@ -1,0 +1,225 @@
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-client-contact">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
+
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" data-js="question" href="#question-client-contact">
+        {{ __('Client Contact', translationID) }}
+        <svg class="{{ styles.questions.warning }}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+          v-if="errors.all('ClientContact').length > 0">
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
+      </a>
+
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
+            {{ __('Language Spoken', translationID) }}
+          </label>
+          <div class="c-question__container">
+            {% for language in languages %}
+            <label class="checkbox" for="client-language-{{ language.value }}">
+              <input id="client-language-{{ language.value }}" type="checkbox" value="{{ language.value }}"
+                data-object="client"
+                data-key="language"
+                v-on:change="push">
+              <span class="checkbox__label">{{ __(language.text, translationID) }}</span>
+            </label>
+            {% endfor %}
+          </div>
+          <div v-if="client._attrs.language.indexOf('other') > -1" class="c-question mt-4">
+            <label class="c-question__label {{ styles.inputs.label }}" for="client-language-other">
+              Please specify other language spoken
+            </label>
+            <div class="c-question__container"
+              v-bind:class="{'error': errors.has('Client.languageOther', 'ClientContact')}">
+              <div class="error-message"
+                v-if="errors.has('Client.languageOther', 'ClientContact')">
+                  {{ __('Please specify other language.', translationID) }}
+              </div>
+              <input id="client-language-other" type="text" name="Client.languageOther" value="" required
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('specify other language', translationID) }}"
+                v-model="client._attrs.languageOther"
+                v-validate="{required: true}">
+            </div>
+          </div>
+        </div>
+
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-phone">
+            {{ __('Phone Number', translationID) }}
+          </label>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('Client.phone', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.phone', 'ClientContact')">
+                v{ errors.first('Client.phone', 'ClientContact') }
+            </div>
+            <div class="input-phone-us">
+              <input id="client-phone" name="Client.phone" value="" type="tel"
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('phone number', translationID) }}"
+                data-js="calc-input"
+                data-js-regex="^([0-9]{0,3})(\-[0-9]{0,3})?(\-[0-9]{0,4})?$"
+                v-on:keydown="$event.target.value = filterPhone($event)"
+                v-on:blur="client._attrs.phone = filterPhone($event)"
+                v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+            </div>
+          </div>
+        </div>
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
+            {{ __('Phone Type', translationID) }}
+          </label>
+          <div class="c-question__container">
+            {% for option in phoneTypes %}
+            <label class="radio" for="client-phone-type-{{ option.value }}">
+              <input id="client-phone-type-{{ option.value }}" type="radio" value="{{ option.value }}" name="Client.phoneType"
+                data-object="client"
+                data-key="phoneType"
+                v-model="client._attrs.phoneType">
+              <span class="radio__label">{{ __(option.text, translationID) }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-phone-alt">
+            {{ __('Alternate Phone Number', translationID) }}
+          </label>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('Client.phoneAlt', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.phoneAlt', 'ClientContact')">
+                v{ errors.first('Client.phoneAlt', 'ClientContact') }
+            </div>
+            <div class="input-phone-us">
+              <input id="client-phone-alt" name="Client.phoneAlt" value="" type="tel"
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('alternate phone number', translationID) }}"
+                data-js="calc-input"
+                data-js-regex="^([0-9]{0,3})(\-[0-9]{0,3})?(\-[0-9]{0,4})?$"
+                v-on:keydown="$event.target.value = filterPhone($event)"
+                v-on:blur="client._attrs.phoneAlt = filterPhone($event)"
+                v-validate="{regex: '^([0-9]{3})\-([0-9]{3})\-([0-9]{4})$'}">
+            </div>
+          </div>
+        </div>
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
+            {{ __('Alternate Phone Type', translationID) }}
+          </label>
+          <div class="c-question__container">
+            {% for option in phoneTypes %}
+            <label class="radio" for="client-phone-alt-type-{{ option.value }}">
+              <input id="client-phone-alt-type-{{ option.value }}" type="radio" value="{{ option.value }}" name="Client.phoneAltType"
+                data-object="client"
+                data-key="phoneAltType"
+                v-model="client._attrs.phoneAltType">
+              <span class="radio__label">{{ __(option.text, translationID) }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
+            {{ __('Best time to contact you?', translationID) }}
+          </label>
+          <div class="c-question__container">
+            {% for option in contactTimes %}
+            <label class="checkbox" for="client-contact-type-{{ option.value }}">
+              <input id="client-contact-type-{{ option.value }}" type="checkbox" value="{{ option.value }}"
+                data-object="client"
+                data-key="contactTimes"
+                v-on:change="push">
+              <span class="checkbox__label">{{ __(option.text, translationID) }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-email">
+            {{ __('Email', translationID) }}
+          </label>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('Client.email', 'ClientContact')}">
+            <div class="error-message"
+              v-if="errors.has('Client.email', 'ClientContact')">
+                v{ errors.first('Client.email', 'ClientContact') }
+            </div>
+            <div class="screen-tablet:input-w-400px">
+              <input id="client-email" type="email" name="Client.email" value=""
+                data-vv-scope="ClientContact"
+                data-vv-as="{{ __('email', translationID) }}"
+                v-model="client._attrs.email"
+                v-validate="{email: true}">
+            </div>
+          </div>
+        </div>
+
+        <hr class="{{ styles.fieldset.divider }}">
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-address-1">
+            {{ __('Street #', translationID) }}
+          </label>
+          <div class="c-question__container">
+            <div class="screen-tablet:input-w-400px">
+              <input id="client-address-1" name="Client.streetNumber" value=""
+                v-model="client._attrs.streetNumber">
+            </div>
+          </div>
+        </div>
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-address-2">
+            {{ __('Street Name', translationID) }}
+          </label>
+          <div class="c-question__container">
+            <input id="client-address-2" name="Client.streetName" value=""
+              v-model="client._attrs.streetName">
+          </div>
+        </div>
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-unit">
+            {{ __('Unit #', translationID) }}
+          </label>
+          <div class="c-question__container">
+            <input id="client-unit" name="Client.unit" value=""
+              v-model="client._attrs.unit">
+          </div>
+        </div>
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-borough">
+            {{ __('Borough', translationID) }}
+          </label>
+          <div class="c-question__container">
+            <select class="select" id="client-borough" name="Client.borough" value=""
+              v-model="client._attrs.borough">
+              {% for location in locations %}
+              <option value="{{ location.value }}">{{ __(location.text, translationID) }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>

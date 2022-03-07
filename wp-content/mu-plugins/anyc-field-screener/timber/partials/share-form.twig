@@ -1,0 +1,31 @@
+<div class="c-share-form {{ this.class }}" data-js="share-form">
+  <button aria-controls="aria-c-share-form__{{ this.type }}" aria-describedby="aria-db-share-disclaimer" aria-expanded="false" class="btn btn-primary c-share-form__toggle" data-js="share-form__control disclaimer-control" data-scroll-offset="16">
+    {{ __(this.button, translationID) }}
+  </button>
+
+  <form action="{{ this.post }}" aria-hidden="true" class="c-share-form__form hidden" id="aria-c-share-form__{{ this.type }}" method="post">
+    {% if this.action %}<input name="action" type="hidden" value="{{ this.action }}" />{% endif %}
+    {% if this.url %}<input name="url" readonly type="hidden" value="{{ this.url }}" />{% endif %}
+    {% if this.hash %}<input name="hash" readonly type="hidden" value="{{ this.hash }}" />{% endif %}
+    {% if this.guid %}<input maxlength="13" name="GUID" readonly type="hidden" value="{{ this.guid }}" />{% endif %}
+    {% if this.template %}<input name="template" readonly type="hidden" value="{{ this.template }}" />{% endif %}
+
+    <div class="c-share-form__fieldset">
+      <div class="c-share-form__input {% if this.type == 'tel' %}input-phone-us{% endif %}">
+        <input data-js="share-form__input" name="to" placeholder="{{ __(this.placeholder, translationID) }}" required="true" type="{{ this.type }}" />
+      </div>
+
+      <div class="c-share-form__button">
+        <button class="btn btn-primary btn-small" type="submit">
+          {{ __('Send', translationID) }}
+        </button>
+
+        <div aria-hidden="true" class="c-share-form__spinner" data-js="spinner">
+          {% include 'timber/partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
+        </div>
+
+        <div class="c-share-form__success">{{ __('Sent!', translationID) }}</div>
+      </div>
+    </div>
+  </form>
+</div>

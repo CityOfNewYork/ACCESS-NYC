@@ -1,0 +1,102 @@
+<div class="c-question">
+  {% if (question.multipleOccupants.question) %}
+  <label class="c-question__label {{ styles.inputs.label }}">
+    {{ question.multipleOccupants.question }}
+  </label>
+  {% endif %}
+
+  <div class="c-question__container">
+    <label class="toggle" for="toggle-{{ question.dataKey }}-true"
+      data-js="toggle"
+      data-shows="#js-toggle-{{ question.dataKey }}">
+      <input class="sr-only" value="true" type="radio" name="toggle-{{ question.dataKey }}" id="toggle-{{ question.dataKey }}-true"
+        data-type="boolean">
+
+      <span class="toggle__label">{{ __('Yes', translationID) }}</span>
+    </label>
+
+    <label class="toggle" for="toggle-{{ question.dataKey }}-false"
+      data-js="toggle"
+      data-hides="#js-toggle-{{ question.dataKey }}">
+      <input class="sr-only" value="false" type="radio" name="toggle-{{ question.dataKey }}" id="toggle-{{ question.dataKey }}-false" checked
+        data-type="boolean"
+        data-object="people"
+        data-key="{{ question.dataKey }},{{ question.dataSubKey }}"
+        v-on:change="setAllAttr">
+
+      <span class="toggle__label">{{ __('No', translationID) }}</span>
+    </label>
+  </div>
+</div>
+
+<div id="js-toggle-{{ question.dataKey }}" class="hidden">
+  <div class="c-question mb-0">
+    <label class="c-question__label {{ styles.inputs.label }}">
+      {{ question.multipleOccupants.who }}
+    </label>
+
+    <div v-for="(p, personIndex) in people" class="c-question__container mb-4">
+      <div class="c-question">
+        <label class="checkbox" v-bind:for="'person' + personIndex + '-{{ question.dataKey }}'">
+          <input type="checkbox" value="1"
+            data-type="boolean"
+            data-object="people"
+            data-key="{{ question.dataKey }}"
+            v-bind:data-index="personIndex"
+            v-bind:name="'Person[' + personIndex + '].{{ question.dataKey }}'"
+            v-bind:id="'person' + personIndex + '-{{ question.dataKey }}'"
+            v-bind:checked="p._attrs.{{ question.dataKey }}"
+            v-on:change="setAttr">
+
+          <span class="checkbox__label">
+            <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+          </span>
+        </label>
+      </div>
+
+      {{ question.multipleOccupants.subProunoun }}
+
+      <div v-if="p._attrs.{{ question.dataKey }}" class="c-question mt-3 pb-2">
+        <label class="c-question__label">
+          <span v-if="personIndex == 0">
+            {{ question.multipleOccupants.subPronoun }}
+          </span><span v-else>
+            {{ question.singleOccupant.subPronoun }}
+          </span>
+
+          <personlabel v-bind:index="personIndex" v-bind:person="p._attrs"></personlabel>
+
+          {{ question.multipleOccupants.subQuestion }}
+        </label>
+
+        <div class="c-question__container">
+          <label class="toggle" v-bind:for="'person' + personIndex + '-{{ question.dataSubKey }}-true'">
+            <input type="radio" value="true" class="sr-only"
+              data-type="boolean"
+              data-object="people"
+              data-key="{{ question.dataSubKey }}"
+              v-bind:data-index="personIndex"
+              v-bind:name="'Person[' + personIndex + '].{{ question.dataSubKey }}'"
+              v-bind:id="'person' + personIndex + '-{{ question.dataSubKey }}-true'"
+              v-on:change="setAttr">
+
+            <span class="toggle__label">{{ __('Yes', translationID) }}</span>
+          </label>
+
+          <label class="toggle" v-bind:for="'person' + personIndex + '-{{ question.dataSubKey }}-false'">
+            <input class="sr-only" value="false" type="radio" checked
+              data-type="boolean"
+              data-object="people"
+              data-key="{{ question.dataSubKey }}"
+              v-bind:data-index="personIndex"
+              v-bind:name="'Person[' + personIndex + '].{{ question.dataSubKey }}'"
+              v-bind:id="'person' + personIndex + '-{{ question.dataSubKey }}-false'"
+              v-on:change="setAttr">
+
+            <span class="toggle__label">{{ __('No', translationID) }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

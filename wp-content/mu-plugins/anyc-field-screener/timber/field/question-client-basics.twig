@@ -1,0 +1,88 @@
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-client-basics">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
+
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" href="#question-client-basics" data-js="question">
+        {{ __('Client Basics', translationID) }}
+        <svg class="{{ styles.questions.warning }}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+          v-if="errors.all('ClientBasics').length > 0">
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
+      </a>
+
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-first-name">
+            {{ __('First Name', translationID) }} <span class="text-color-red">*</span>
+          </label>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('ClientBasics.Client[0].firstName')}">
+            <div class="error-message"
+              v-if="errors.has('ClientBasics.Client[0].firstName')">v{ errors.first('ClientBasics.Client[0].firstName') }</div>
+            <input id="client-first-name" name="Client[0].firstName" value="" required
+              data-vv-as="client's first name"
+              data-vv-scope="ClientBasics"
+              v-validate="{required: true}"
+              v-model="client._attrs.firstName">
+          </div>
+        </div>
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="client-last-name">
+            {{ __('Last Name', translationID) }} <span class="text-color-red">*</span>
+          </label>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('ClientBasics.Client[0].lastName')}">
+            <div class="error-message"
+              v-if="errors.has('ClientBasics.Client[0].lastName')">v{ errors.first('ClientBasics.Client[0].lastName') }</div>
+            <input id="client-last-name" name="Client[0].lastName" value="" required
+              data-vv-as="client's last name"
+              data-vv-scope="ClientBasics"
+              v-validate="{required: true}"
+              v-model="client._attrs.lastName">
+          </div>
+        </div>
+
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}" for="person-0-age">
+            {{ __('How old are you?', translationID) }} <span class="text-color-red">*</span>
+          </label>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('ClientBasics.Person[0].age')}">
+            <div class="error-message"
+              v-if="errors.has('ClientBasics.Person[0].age')">v{ errors.first('ClientBasics.Person[0].age') }</div>
+            <input id="person-0-age" name="Person[0].age" type="number" value="" min="0" maxlength="3" pattern="[0-9]" step="1" required
+              data-type="integer"
+              data-object="people"
+              data-key="age"
+              data-index="0"
+              data-vv-as="age"
+              data-vv-scope="ClientBasics"
+              v-validate="{required: true, max: 3, min: 0, regex: '[0-9]', numeric: true}"
+              v-on:change="setAttr">
+          </div>
+        </div>
+
+        <div class="c-question m-0">
+          <label class="c-question__label {{ styles.inputs.label }}" for="household-zip">
+            {{ __('Zip code?', translationID) }}
+            <span class="text-color-red">*</span>
+          </label>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('ClientBasics.Household.zip')}">
+            <div class="error-message"
+              v-if="errors.has('ClientBasics.Household.zip')">v{ errors.first('ClientBasics.Household.zip') }</div>
+            <input id="household-zip" name="Household.zip" type="number" maxlength="5" pattern="[0-9]" required
+              data-type="zip"
+              data-vv-as="zip code"
+              data-vv-scope="ClientBasics"
+              v-validate="{required: true, max: 5, regex: '[0-9]', numeric: true, zip: true}"
+              v-model="household._attrs.zip">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>

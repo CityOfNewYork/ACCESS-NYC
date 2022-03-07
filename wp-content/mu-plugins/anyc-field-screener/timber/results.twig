@@ -1,0 +1,180 @@
+{% extends 'timber/base.twig' %}
+
+{% block content %}
+{% set programResultTotal = selectedPrograms | length + additionalPrograms | length %}
+<div class="layout--topbar">
+  {% include 'timber/partials/header.twig' %}
+
+  <main class="block" id="content" data-js="results">
+    <div class="color-light-background">
+      <header class="c-header color-dark-background text-color-white font-smooth px-2">
+        <div class="c-header__icon print:hidden">
+          <svg class="icon icon-success rounded-full text-color-green bg-color-white">
+            <use xlink:href="#icon-success"></use>
+          </svg>
+        </div>
+
+        <div>
+          <h1 class="c-header__descriptor">
+            {% if programResultTotal == 0 %}
+              {{__('There are no programs for you to look at.', 'accessnyc-results')}}
+            {% elseif programResultTotal == 1 %}
+              <span data-js="programs-total">{{ programResultTotal }}</span> {{__('program for you to look at.', 'accessnyc-results')}}
+            {% else %}
+              <span data-js="programs-total">{{ programResultTotal }}</span> {{__('programs for you to look at.', 'accessnyc-results')}}
+            {% endif %}
+          </h1>
+          <p class="c-header__disclaimer">{{__('Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.', 'accessnyc-results')}}</p>
+        </div>
+      </header>
+
+      {% if env != 'Production' %}
+      <div class="screen-tablet:px-4 px-2 screen-tablet:pt-4 pt-2 print:hidden">
+        {% include 'timber/partials/alert-environment.twig' %}
+      </div>
+      {% endif %}
+
+      <form method="post" action="{{ adminAjax }}" class="w-full screen-tablet:px-4 px-2 screen-tablet:pt-4 pt-2 print:hidden" novalidate data-js="final-results">
+        <h4>{{__('Finalize your results.', translationID)}}</h4>
+
+        <button class="block btn btn-primary c-share-form__toggle" aria-controls="finalize-your-results" data-js="toggle" data-scroll-offset="20" aria-expanded="false">
+          {{ __('Finalize Your Results', translationID) }}
+        </button>
+
+        <div id="finalize-your-results" class="c-disclaimer m-0 hidden" aria-hidden="true">
+          <input type="hidden" name="url" value="{{ url }}" readonly>
+          <input type="hidden" name="programs" value="{{ programs }}" readonly>
+          <input type="hidden" name="GUID" value="{{ guid }}" maxlength="13" readonly>
+          <input type="hidden" name="hash" value="{{ hash }}" readonly>
+
+          <p>{{ __('Once you finalize your results, you won\'t be able to remove any more programs.', translationID) }}</p>
+
+          <div class="layout--columns-gutter">
+            <div>
+              <button type="submit" class="w-full btn btn-primary btn-small m-0"
+                      data-js="track"
+                      data-track-key="Finalize Results"
+                      data-track-data='[{"DCS.dcsuri": "finalize"}]'>
+                {{ __('Finalize', translationID) }}
+              </button>
+            </div><div>
+              <button class="w-full btn btn-secondary btn-small m-left" aria-controls="finalize-your-results" aria-expanded="false"
+                      data-js="track toggle"
+                      data-track-key="Keep Working"
+                      data-track-data='[{"DCS.dcsuri": "keep-working"}]'>
+                {{ __('Keep Working', translationID) }}
+              </button>
+            </div>
+          </div>
+          <div class="flex justify-center">
+            <div data-js="spinner" style="display: none;">
+              {% include 'timber/partials/spinner.twig' with {this: {class: 'icon-4 text-color-yellow-access'}} only %}
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="pt-4 screen-tablet:px-4 px-2 hidden print:hidden" aria-hidden="true" data-js="share-results">
+        <h4>{{__('Save your results.', translationID)}}</h4>
+
+        <div class="flex justify-center">
+          <div class="flex-1 pr-2">
+            <a class="block btn btn-primary" href="javascript:window.print()" data-js="track" data-track-key="Print" data-track-data='[{"DCS.dcsuri": "print"}]'>{{__('Print', translationID)}}</a>
+          </div>
+
+          {% include 'timber/partials/share-form.twig' with {this: {
+            class: 'flex-1 pr-2',
+            type: 'tel',
+            button: __('Text', translationID),
+            placeholder: __('Phone Number', translationID),
+            post: adminAjax,
+            action: 'sms_send',
+            url: url,
+            hash: hash,
+            template: 'screener-results'
+          }} only %}
+
+          {% include 'timber/partials/share-form.twig' with {this: {
+            class: 'flex-1',
+            type: 'email',
+            button: __('Email', translationID),
+            placeholder: __('Email Address', translationID),
+            post: adminAjax,
+            action: 'email_send',
+            url: url,
+            hash: hash,
+            template: 'screener-results'
+          }} only %}
+
+        </div>
+
+        <div class="hidden" aria-hidden="true" id="aria-db-share-disclaimer">
+          {% include 'timber/partials/disclaimer-small.twig' %}
+        </div>
+      </div>
+
+      <div class="content-body pt-4">
+        {% if selectedPrograms | length %}
+        <div class="m-0 screen-tablet:px-4 px-2 print:px-2" data-js="selected-programs">
+          <h3 class="text-color-blue-dark" data-js="programs-title">
+            <span data-js="programs-singular" {% if selectedPrograms | length > 1 %}class="hidden print:hidden" aria-hidden="true"{% endif %}>{{__('This is the program for you in the categories you selected.', translationID)}}</span>
+            <span data-js="programs-plural" {% if selectedPrograms | length == 1 %}class="hidden print:hidden" aria-hidden="true"{% endif %}>{{__('These are programs for you in the categories you selected.', translationID)}}</span>
+          </h3>
+
+          <div class="mb-4" data-js="programs-list">
+            {% for post in selectedPrograms %}
+            {% include 'timber/partials/card-removable.twig' with {'show_apply': true } %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if additionalPrograms | length %}
+        <div class="m-0 screen-tablet:px-4 px-2 print:px-2" data-js="additional-programs">
+          <h3 class="text-color-blue-dark" data-js="programs-title">
+            <span data-js="programs-length">{{ additionalPrograms | length }}</span>
+            <span data-js="programs-singular" {% if additionalPrograms | length > 1 %}class="hidden print:hidden" aria-hidden="true"{% endif %}>{{__('additional program', translationID)}}</span>
+            <span data-js="programs-plural" {% if additionalPrograms | length == 1 %}class="hidden print:hidden" aria-hidden="true"{% endif %}>{{__('additional programs', translationID)}}</span>
+          </h3>
+
+          <div class="mb-4" data-js="programs-list">
+            {% for post in additionalPrograms %}
+            {% include 'timber/partials/card-removable.twig' %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% include 'timber/partials/strings.twig' with {'translation_id': translationID, 'strings': [
+  {
+    'label': 'Something went wrong. Please try again later.',
+    'slug': 'SHARE_FORM_SERVER'
+  },
+  {
+    'label': 'Unable to send to number provided. Please use another number.',
+    'slug': 'SHARE_FORM_SERVER_TEL_INVALID'
+  },
+  {
+    'label': 'This is required.',
+    'slug': 'SHARE_FORM_VALID_REQUIRED'
+  },
+  {
+    'label': 'Please enter a valid email.',
+    'slug': 'SHARE_FORM_VALID_EMAIL_INVALID'
+  },
+  {
+    'label': 'Please provide 10-digit number with area code.',
+    'slug': 'SHARE_FORM_VALID_TEL_INVALID'
+  },
+  {
+    'label': 'Are you sure that you\'d like to enter information for a new client?\nThis will erase information that has been entered.',
+    'slug': 'MSG_RELOAD'
+  }
+]} only %}
+{% endblock %}

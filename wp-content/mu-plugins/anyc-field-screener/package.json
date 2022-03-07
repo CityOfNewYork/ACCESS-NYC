@@ -1,0 +1,109 @@
+{
+  "name": "access-nyc",
+  "version": "3.12.0",
+  "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CityOfNewYork/ACCESS-NYC"
+  },
+  "config": {
+    "proxy": "http://localhost:8080"
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "start": "npm run development",
+    "development": "NODE_ENV='development' PROXY=$npm_package_config_proxy gulp",
+    "production": "NODE_ENV='production' PROXY=$npm_package_config_proxy gulp",
+    "predeploy": "NODE_ENV='production' gulp build",
+    "scripts": "NODE_ENV='production' gulp scripts",
+    "styles": "NODE_ENV='production' gulp styles",
+    "regen": "npm install --package-lock-only",
+    "version": "echo \"No version task required\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Blue State Digital | Maintained by NYC Opportunity",
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "google"
+    ],
+    "rules": {
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ]
+    },
+    "env": {
+      "browser": true
+    }
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry",
+          "corejs": 3
+        }
+      ]
+    ],
+    "retainLines": true
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
+    "@babel/runtime": "^7.4.3",
+    "autoprefixer": "^7.1.6",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^8.0.5",
+    "browser-sync": "^2.24.7",
+    "clean-webpack-plugin": "^2.0.1",
+    "core-js": "^3.0.0",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^3.10.0",
+    "del": "^1.2.0",
+    "eslint": "3.8.1",
+    "eslint-config-google": "^0.7.1",
+    "gulp": "^4.0.0",
+    "gulp-cache": "^0.2.10",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^3.0.1",
+    "gulp-hash-filename": "^1.2.0",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-svgmin": "^1.2.3",
+    "gulp-svgstore": "^6.1.0",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "string-replace-loader": "^2.2.0",
+    "terser-webpack-plugin": "^1.2.3",
+    "vinyl-named": "^1.1.0",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.9",
+    "webpack-stream": "^5.2.1"
+  },
+  "dependencies": {
+    "@nycopportunity/access-patterns": "^0.11.11",
+    "@nycopportunity/patterns-framework": "0.0.16",
+    "cleave.js": "^0.7.23",
+    "es6-promise": "^4.2.5",
+    "jquery": "^3.1.1",
+    "js-cookie": "^3.0.0-beta.0",
+    "smoothscroll-polyfill": "^0.4.3",
+    "underscore": "^1.8.3",
+    "vee-validate": "^2.0.0-rc.18",
+    "vue": "^2.6.9",
+    "whatwg-fetch": "^3.0.0"
+  }
+}

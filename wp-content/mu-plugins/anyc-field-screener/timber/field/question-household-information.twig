@@ -1,0 +1,105 @@
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-household-information">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
+
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" href="#question-household-information" data-js="question">
+        {{ __('Household Information', translationID) }}
+        <svg class="{{ styles.questions.warning }}" role="img" aria-label="{{ __('Some fields are invalid', translationID) }}"
+          v-if="errors.all('HouseholdInformation').length > 0 || errors.all('HeadOfHousehold').length > 0">
+          <title>{{ __('Some fields are invalid', translationID) }}</title>
+          <use xlink:href="#icon-warning"></use>
+        </svg>
+      </a>
+
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class="c-question">
+          <label class="c-question__label {{ styles.inputs.label }}">
+            {{ __('Including you, how many people are in your household?', translationID) }}
+          </label>
+          <p>{{ __('This is usually family members who you both live with and share important resources like food and bills. Only count your roommates if you often buy and prepare food together.', translationID) }}</p>
+          <h4 class="{{ styles.inputs.explanation }}">
+            Number of People (max. 8)
+          </h4>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('HouseholdInformation.Household.members')}">
+            <div class="error-message"
+              v-if="errors.has('HouseholdInformation.Household.members')">v{ errors.first('HouseholdInformation.Household.members') }</div>
+            <input name="Household.members" pattern="\d*" value="1" required
+              data-type="integer"
+              data-object="household"
+              data-key="members"
+              data-js="calc-input"
+              data-js-regex="^[1-8]{1}$"
+              data-vv-as="household members"
+              data-vv-scope="HouseholdInformation"
+              v-validate="{required: true, min: 1, max_value: 8, min_value: 1, regex: '^[1-8]{1}$'}"
+              v-bind:value="people.length"
+              v-on:change="populate">
+          </div>
+        </div>
+
+        <div class="c-question m-0">
+          <label class="c-question__label {{ styles.inputs.label }}">
+            {{ __('Are you the head of household?', translationID) }}
+          </label>
+
+          <p>{{ __('The head of household is the person who can represent everyone in your family and pays most of the family’s expenses. If you pay more than half the cost for your home this year, you are the head of household.', translationID) }}</p>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('Person[0].headOfHousehold', 'HeadOfHousehold')}">
+            <div class="error-message"
+              v-if="errors.has('Person[0].headOfHousehold', 'HeadOfHousehold')">{{ __('At least one head of household is required.', translationID) }}</div>
+            <label class="toggle">
+              <input class="screener-radio-input sr-only" type="radio" name="Person[0].headOfHousehold" value="true"
+                data-object="people"
+                data-index="0"
+                data-key="headOfHousehold"
+                data-type="boolean"
+                data-vv-delay="1000"
+                data-vv-scope="HeadOfHousehold"
+                v-validate="{hoh: true}"
+                v-bind:checked="people[0]._attrs.headOfHousehold"
+                v-on:change="setAllAttr($event, false); setAttr($event, true); setAttr($event, '', 'headOfHouseholdRelation'); validate($event)">
+              <span class="toggle__label">{{ __('Yes', translationID) }}</span>
+            </label>
+            <label class="toggle">
+              <input class="screener-radio-input sr-only" type="radio" name="Person[0].headOfHousehold" value="false"
+                data-object="people"
+                data-index="0"
+                data-key="headOfHousehold"
+                data-type="boolean"
+                data-vv-scope="HeadOfHousehold"
+                v-bind:checked="!people[0]._attrs.headOfHousehold"
+                v-on:change="setAttr($event, false); validate($event)">
+              <span class="toggle__label">{{ __('No', translationID) }}</span>
+            </label>
+          </div>
+        </div>
+
+        <div v-if="!people[0]._attrs.headOfHousehold" class="c-question mt-4 mb-0">
+          <label class="c-question__label {{ styles.inputs.label }}" for="hoh-relation">
+            {{ __('What is your relationship to the head of the household? I am their:', translationID) }}
+            <span class="text-color-red">*</span>
+          </label>
+          <div class="c-question__container"
+            v-bind:class="{'error': errors.has('HouseholdInformation.Person[0].headOfHouseholdRelation')}">
+            <div class="error-message" v-if="errors.has('HouseholdInformation.Person[0].headOfHouseholdRelation')">
+              {{ __('Please select a your relationship to the head of household.', translationID) }}
+            </div>
+            <select class="select" name="Person[0].headOfHouseholdRelation" required
+              data-vv-as="head of household relation"
+              data-vv-scope="HouseholdInformation"
+              v-model="people[0]._attrs.headOfHouseholdRelation"
+              v-validate="{required: true}">
+              {% for option in headOfHouseholdRelationOptions %}
+              <option value="{{ option.value }}">
+                {{ __(option.text, translationID) }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>

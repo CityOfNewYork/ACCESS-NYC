@@ -1,0 +1,32 @@
+<article id="{{ this.id }}" class="c-accordion" {% if this.itemprop %}itemprop="{{ this.itemprop }}"{% endif %} {% if this.itemtype %}itemscope itemtype="{{ this.itemtype }}"{% endif %}>
+  <header class="c-accordion__header color-dark-background">
+    <p {% if this.itemtype %}itemprop="name"{% endif %} id="aria-lb-{{ this.id }}">
+      {{ this.header }}
+    </p>
+
+    <button data-js="accordion" aria-controls="aria-c-{{ this.id }}" aria-expanded="{{ this.active }}" class="c-accordion__toggle print:hidden {% if this.active %}active{% endif %}">
+      <span class="c-accordion__toggle-active">
+        {{ __('hide this list', translationID) }}
+      </span>
+
+      <span class="c-accordion__toggle-inactive">
+        {{ __('show this list', translationID) }}
+      </span>
+    </button>
+  </header>
+
+  <div id="aria-c-{{ this.id }}" aria-labelledby="aria-lb-{{ this.id }}" class="c-accordion__body color-mid-background text-font-size-small screen-tablet:text-font-size-normal print:active hidden:overflow animated {% if this.active %}active{% else %}hidden{% endif %}" aria-hidden="{% if this.active %}false{% else %}true{% endif %}">
+    <div class="c-accordion__padding">
+      {{ this.body }}
+
+      {% if this.cta %}
+      <p class="print:hidden">
+        {% if this.itemtype %}<span class="hidden" aria-hidden="true" itemprop="url">{{ this.cta.href }}</span>{% endif %}
+        <a class="btn btn-secondary btn-next btn-small" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
+          {{ this.cta.text }}
+        </a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</article>

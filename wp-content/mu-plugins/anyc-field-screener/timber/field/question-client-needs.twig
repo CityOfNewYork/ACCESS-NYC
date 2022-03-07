@@ -1,0 +1,43 @@
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-client-needs">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
+
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" data-js="question" href="#question-client-needs">
+        {{ __('Client Needs', translationID) }}
+      </a>
+
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class='c-question m-0'>
+          <label class="c-question__label {{ styles.inputs.label }}">
+            {{ __('What kind of help are you looking for?', translationID) }}
+          </label>
+          <div class="c-question__container screen-tablet:layout--columns-gutter">
+            {% for category in categories %}
+            {% if language_code != 'en' %}
+              {% set langLength = (language_code | length + 1) * -1 %}
+              {% set catSlug = category.slug | slice(0, langLength) %}
+            {% else %}
+              {% set catSlug = category.slug %}
+            {% endif %}
+            <label class="checkbox" for="client-needs-{{ category.slug }}">
+              <input id="client-needs-{{ category.slug }}" type="checkbox" name="category" value="{{ category.slug }}"
+                data-object="client"
+                data-key="programCategories"
+                v-on:change="push">
+              <span class="checkbox__label items-center">
+                <span class="checkbox__icon">
+                    <svg class="icon icon-{{ catSlug }}">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ catSlug }}"></use>
+                    </svg>
+                </span>
+                <span>{{ category.name }}</span>
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>

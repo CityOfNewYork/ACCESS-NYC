@@ -1,0 +1,53 @@
+<fieldset class="{{ styles.fieldset.main }}">
+  <div class="{{ styles.fieldset.inner }}" id="question-client-services">
+    <div class="{{ styles.fieldset.highlight }}" data-js="toggle-question"></div>
+
+    <div class="{{ styles.fieldset.content }}">
+      <a class="{{ styles.questions.main }}" data-js="question" href="#question-client-services">
+        {{ __('Client Services', translationID) }}
+      </a>
+
+      <div class="{{ styles.questions.toggle }}" data-js="toggle-question">
+        <div class='c-question m-0'>
+          <label class="c-question__label {{ styles.inputs.label }}">
+            {{ __('Is anyone in your household currently enrolled in these programs?', translationID) }}
+          </label>
+          <div class="c-question__container">
+            {% for program in programs %}
+
+            {# start of first column #}
+            {% if (program.value == 'snap' or program.value == 'cityfeps') %}
+            <div class="screen-tablet:layout--columns-gutter">
+              <div class="screen-tablet:layout--gutter mb-2 screen-tablet:mb-0">
+            {% endif %}
+            {# start of second column #}
+            {% if (program.value == 'scrie' or program.value == 'seps') %}
+              </div>
+              <div class="screen-tablet:layout--gutter mb-2 screen-tablet:mb-0">
+            {% endif %}
+                <label class="checkbox" for="client-programs-enrolled-{{ program.code }}">
+                  <input id="client-programs-enrolled-{{ program.code }}" type="checkbox"
+                    value="{{ program.code }}"
+                    data-object="client"
+                    data-key="programsEnrolled"
+                    v-bind:checked="client._attrs.programsEnrolled.indexOf('{{ program.code }}') > -1"
+                    v-on:change="push">
+                  <span class="checkbox__label">{{ __(program.text, translationID) }}</span>
+                </label>
+            {# end of last column #}
+            {% if (program.value == 'dhe' or program.value == 'tbra') %}
+              </div>
+            </div>
+            {% endif %}
+
+            {% if (program.value == 'dhe') %}
+            <hr class="{{ styles.fieldset.divider }}">
+            {% endif %}
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
