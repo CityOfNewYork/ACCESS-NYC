@@ -199,6 +199,15 @@
             'reference' => NULL,
             'dev_requirement' => false,
         ),
+        'nyco/anyc-field-screener' => array(
+            'pretty_version' => '1.0.2',
+            'version' => '1.0.2.0',
+            'type' => 'wordpress-muplugin',
+            'install_path' => __DIR__ . '/../../wp-content/mu-plugins/anyc-field-screener',
+            'aliases' => array(),
+            'reference' => '303fd74620d1926880ffd9a583f6f0075834e9ac',
+            'dev_requirement' => false,
+        ),
         'nyco/wp-assets' => array(
             'pretty_version' => '1.4.3',
             'version' => '1.4.3.0',

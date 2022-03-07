@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af3d74e5ccedeea7b77beedc01fba3a5",
+    "content-hash": "24d3d489e88904744afdc3421e09f4b3",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -1390,6 +1390,52 @@
                 }
             ],
             "time": "2022-02-13T18:13:33+00:00"
+        },
+        {
+            "name": "nyco/anyc-field-screener",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CityOfNewYork/ACCESS-NYC-field-screener.git",
+                "reference": "303fd74620d1926880ffd9a583f6f0075834e9ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CityOfNewYork/ACCESS-NYC-field-screener/zipball/303fd74620d1926880ffd9a583f6f0075834e9ac",
+                "reference": "303fd74620d1926880ffd9a583f6f0075834e9ac",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "~3.0"
+            },
+            "type": "wordpress-muplugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "NYC Opportunity",
+                    "email": "products@nycopportunity.nyc.gov",
+                    "homepage": "https://nyc.gov/opportunity"
+                }
+            ],
+            "description": "The ACCESS NYC Field Screener is a tablet optimized version of the ACCESS NYC benefits eligibility screener created for outreach caseworkers.",
+            "homepage": "https://github.com/cityofnewyork/nyco-anyc-field-screener",
+            "keywords": [
+                "eligibility",
+                "field-screener",
+                "screener",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/cityofnewyork/nyco-anyc-field-screener/issues",
+                "source": "https://github.com/CityOfNewYork/ACCESS-NYC-field-screener/tree/v1.0.2"
+            },
+            "time": "2022-03-07T20:50:00+00:00"
         },
         {
             "name": "nyco/wp-assets",
