@@ -5,14 +5,6 @@
     $.extend( rediscache, {
         metrics: {
             computed: null,
-            names: {
-                h: 'hits',
-                m: 'misses',
-                r: 'ratio',
-                b: 'bytes',
-                t: 'time',
-                c: 'calls',
-            },
         },
         chart: null,
         chart_defaults: {
@@ -50,7 +42,7 @@
             },
             chart: {
                 type: 'line',
-                height: '100%',
+                height: $( '#metrics-pane #widget-redis-stats' ).length ? '300px' : '100%',
                 toolbar: { show: false },
                 zoom: { enabled: false },
                 animations: { enabled: false },
@@ -228,24 +220,20 @@
         },
     } );
 
-    var compute_metrics = function ( raw_metrics, metric_names ) {
+    var compute_metrics = function ( raw_metrics ) {
         var metrics = {};
 
         // parse raw metrics in blocks of minutes
         for ( var entry in raw_metrics ) {
             var values = {};
-            var timestamp = raw_metrics[ entry ];
+            var timestamp = raw_metrics[ entry ].timestamp;
             var minute = ( timestamp - timestamp % 60 ) * 1000;
 
-            entry.split( ';' ).forEach(
-                function ( value ) {
-                    var metric = value.split( '=' );
-
-                    if ( metric_names[ metric[0] ] ) {
-                          values[ metric_names[ metric[0] ] ] = Number( metric[1] );
-                    }
+            for ( var key in raw_metrics[ entry ] ) {
+                if ( raw_metrics[ entry ].hasOwnProperty( key ) ) {
+                    values[ key ] = Number( raw_metrics[ entry ][ key ] );
                 }
-            );
+            }
 
             if ( ! metrics[ minute ] ) {
                 metrics[ minute ] = [];
@@ -263,16 +251,14 @@
 
             var medians = {};
 
-            for ( var key in metric_names ) {
-                var name = metric_names[ key ];
-
-                medians[ name ] = compute_median(
+            for ( var key in metrics[ entry ][0] ) {
+                medians[ key ] = compute_median(
                     metrics[ entry ].map(
                         function ( metric ) {
-                            return metric[ name ];
+                            return metric[ key ];
                         }
                     )
-                )
+                );
             }
 
             metrics[ entry ] = medians;
@@ -399,12 +385,19 @@
             }
         );
 
+        var firstRender = true;
+
         var show_tab = function ( name ) {
             $tabs.find( '.nav-tab-active' ).removeClass( 'nav-tab-active' );
             $panes.find( '.tab-pane.active' ).removeClass( 'active' );
 
             $( '#' + name + '-tab' ).addClass( 'nav-tab-active' );
             $( '#' + name + '-pane' ).addClass( 'active' );
+
+            if (name === 'metrics' && firstRender) {
+                firstRender = false;
+                render_chart( 'time' );
+            }
         };
 
         var show_current_tab = function () {
@@ -420,16 +413,13 @@
         $( window ).on( 'hashchange', show_current_tab );
 
         if ( $( '#widget-redis-stats' ).length ) {
-            rediscache.metrics.computed = compute_metrics(
-                root.rediscache_metrics,
-                rediscache.metrics.names
-            );
+            rediscache.metrics.computed = compute_metrics( root.rediscache_metrics );
 
             setup_charts();
             render_chart( 'time' );
         }
 
-        $( '#widget-redis-stats ul a' ).on(
+        $( '#widget-redis-stats ul a[data-chart]' ).on(
             'click.redis-cache',
             function ( event ) {
                 event.preventDefault();
@@ -458,6 +448,35 @@
                 } );
             }
         );
+
+        if ( $( '#redis-cache-copy-button' ).length ) {
+            if ( typeof ClipboardJS === 'undefined' ) {
+                $( '#redis-cache-copy-button' ).remove();
+            } else {
+                var successTimeout;
+                var clipboard = new ClipboardJS( '#redis-cache-copy-button .copy-button' );
+
+                clipboard.on( 'success', function( e ) {
+                    var triggerElement = $( e.trigger ),
+                        successElement = $( '.success', triggerElement.closest( 'div' ) );
+
+                    e.clearSelection();
+                    triggerElement.trigger( 'focus' );
+
+                    clearTimeout( successTimeout );
+                    successElement.removeClass( 'hidden' );
+
+                    successTimeout = setTimeout( function() {
+                        successElement.addClass( 'hidden' );
+
+                        if ( clipboard.clipboardAction.fakeElem && clipboard.clipboardAction.removeFake ) {
+                            clipboard.clipboardAction.removeFake();
+                        }
+                    }, 3000 );
+
+                } );
+            }
+        }
     });
 
 } ( window[ rediscache.jQuery ], window ) );

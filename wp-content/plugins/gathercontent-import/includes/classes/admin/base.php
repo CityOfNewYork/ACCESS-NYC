@@ -1,16 +1,17 @@
 <?php
 namespace GatherContent\Importer\Admin;
+
 use GatherContent\Importer\API;
 use GatherContent\Importer\Settings\Setting;
 
 abstract class Base extends Enqueue {
 
-	const SLUG = GATHERCONTENT_SLUG;
-	public $option_name        = '';
-	public $option_group       = '';
-	public $url                = '';
-	public $step               = 0;
-	public $menu_priority      = 9;
+	const SLUG            = GATHERCONTENT_SLUG;
+	public $option_name   = '';
+	public $option_group  = '';
+	public $url           = '';
+	public $step          = 0;
+	public $menu_priority = 9;
 
 	/**
 	 * The account id.
@@ -48,8 +49,8 @@ abstract class Base extends Enqueue {
 	 * @param $api API object
 	 */
 	public function __construct() {
-		$this->url = admin_url( 'admin.php?page='. static::SLUG );
-		$this->logo = '<img width="220px" height="39px" src="'. GATHERCONTENT_URL . 'images/logo.svg" alt="GatherContent" />';
+		$this->url  = admin_url( 'admin.php?page=' . static::SLUG );
+		$this->logo = '<img width="220px" height="39px" src="' . GATHERCONTENT_URL . 'images/logo.svg" alt="GatherContent" />';
 	}
 
 	/**
@@ -132,7 +133,7 @@ abstract class Base extends Enqueue {
 			'setting' => $setting,
 			'code'    => $code,
 			'message' => $message,
-			'type'    => $type
+			'type'    => $type,
 		);
 	}
 
@@ -179,7 +180,7 @@ abstract class Base extends Enqueue {
 
 	protected function api() {
 		if ( null === self::$api ) {
-			throw new \Exception( 'Must set the API object with '. get_class( $this ) .'::set_api( $api ).' );
+			throw new \Exception( 'Must set the API object with ' . get_class( $this ) . '::set_api( $api ).' );
 		}
 
 		return self::$api;
@@ -198,7 +199,7 @@ abstract class Base extends Enqueue {
 	 * @return  bool Whether account was successfully set.
 	 */
 	public function set_my_account() {
-		$accounts = $this->api()->get_accounts();
+		$accounts     = $this->api()->get_accounts();
 		$account_slug = $this->get_setting( 'platform_url_slug' );
 
 		if ( ! $accounts || ! $account_slug ) {
@@ -225,7 +226,7 @@ abstract class Base extends Enqueue {
 	 * @return string  The account platform url.
 	 */
 	public function platform_url( $path = '' ) {
-		return 'https://'. $this->_get_account_slug() .'.gathercontent.com/' . $path;
+		return 'https://' . $this->_get_account_slug() . '.gathercontent.com/' . $path;
 	}
 
 	protected function _get_account_slug() {

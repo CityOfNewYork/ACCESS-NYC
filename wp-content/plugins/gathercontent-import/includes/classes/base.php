@@ -20,7 +20,7 @@ abstract class Base {
 	 *
 	 * @var array|null
 	 */
-	protected static $_get  = null;
+	protected static $_get = null;
 
 	/**
 	 * The $_POST superglobal.
@@ -42,7 +42,7 @@ abstract class Base {
 	 */
 	protected function __construct( array $_get = null, array $_post = null ) {
 		if ( is_array( $_get ) ) {
-			self::$_get  = $_get;
+			self::$_get = $_get;
 		}
 
 		if ( is_array( $_post ) ) {

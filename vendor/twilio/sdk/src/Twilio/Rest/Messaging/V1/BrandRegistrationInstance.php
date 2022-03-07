@@ -12,6 +12,7 @@ namespace Twilio\Rest\Messaging\V1;
 use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
+use Twilio\Rest\Messaging\V1\BrandRegistration\BrandVettingList;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -24,12 +25,24 @@ use Twilio\Version;
  * @property string $a2PProfileBundleSid
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
+ * @property string $brandType
  * @property string $status
  * @property string $tcrId
  * @property string $failureReason
  * @property string $url
+ * @property int $brandScore
+ * @property string[] $brandFeedback
+ * @property string $identityStatus
+ * @property bool $russell3000
+ * @property bool $governmentEntity
+ * @property string $taxExemptStatus
+ * @property bool $skipAutomaticSecVet
+ * @property bool $mock
+ * @property array $links
  */
 class BrandRegistrationInstance extends InstanceResource {
+    protected $_brandVettings;
+
     /**
      * Initialize the BrandRegistrationInstance
      *
@@ -48,10 +61,20 @@ class BrandRegistrationInstance extends InstanceResource {
             'a2PProfileBundleSid' => Values::array_get($payload, 'a2p_profile_bundle_sid'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
+            'brandType' => Values::array_get($payload, 'brand_type'),
             'status' => Values::array_get($payload, 'status'),
             'tcrId' => Values::array_get($payload, 'tcr_id'),
             'failureReason' => Values::array_get($payload, 'failure_reason'),
             'url' => Values::array_get($payload, 'url'),
+            'brandScore' => Values::array_get($payload, 'brand_score'),
+            'brandFeedback' => Values::array_get($payload, 'brand_feedback'),
+            'identityStatus' => Values::array_get($payload, 'identity_status'),
+            'russell3000' => Values::array_get($payload, 'russell_3000'),
+            'governmentEntity' => Values::array_get($payload, 'government_entity'),
+            'taxExemptStatus' => Values::array_get($payload, 'tax_exempt_status'),
+            'skipAutomaticSecVet' => Values::array_get($payload, 'skip_automatic_sec_vet'),
+            'mock' => Values::array_get($payload, 'mock'),
+            'links' => Values::array_get($payload, 'links'),
         ];
 
         $this->solution = ['sid' => $sid ?: $this->properties['sid'], ];
@@ -79,6 +102,23 @@ class BrandRegistrationInstance extends InstanceResource {
      */
     public function fetch(): BrandRegistrationInstance {
         return $this->proxy()->fetch();
+    }
+
+    /**
+     * Update the BrandRegistrationInstance
+     *
+     * @return BrandRegistrationInstance Updated BrandRegistrationInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function update(): BrandRegistrationInstance {
+        return $this->proxy()->update();
+    }
+
+    /**
+     * Access the brandVettings
+     */
+    protected function getBrandVettings(): BrandVettingList {
+        return $this->proxy()->brandVettings;
     }
 
     /**

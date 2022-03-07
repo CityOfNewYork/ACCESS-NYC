@@ -13,17 +13,27 @@ use Twilio\Domain;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
 use Twilio\Rest\Insights\V1\CallList;
+use Twilio\Rest\Insights\V1\CallSummariesList;
+use Twilio\Rest\Insights\V1\ConferenceList;
 use Twilio\Rest\Insights\V1\RoomList;
+use Twilio\Rest\Insights\V1\SettingList;
 use Twilio\Version;
 
 /**
+ * @property SettingList $settings
  * @property CallList $calls
+ * @property CallSummariesList $callSummaries
+ * @property ConferenceList $conferences
  * @property RoomList $rooms
  * @method \Twilio\Rest\Insights\V1\CallContext calls(string $sid)
+ * @method \Twilio\Rest\Insights\V1\ConferenceContext conferences(string $conferenceSid)
  * @method \Twilio\Rest\Insights\V1\RoomContext rooms(string $roomSid)
  */
 class V1 extends Version {
+    protected $_settings;
     protected $_calls;
+    protected $_callSummaries;
+    protected $_conferences;
     protected $_rooms;
 
     /**
@@ -36,11 +46,32 @@ class V1 extends Version {
         $this->version = 'v1';
     }
 
+    protected function getSettings(): SettingList {
+        if (!$this->_settings) {
+            $this->_settings = new SettingList($this);
+        }
+        return $this->_settings;
+    }
+
     protected function getCalls(): CallList {
         if (!$this->_calls) {
             $this->_calls = new CallList($this);
         }
         return $this->_calls;
+    }
+
+    protected function getCallSummaries(): CallSummariesList {
+        if (!$this->_callSummaries) {
+            $this->_callSummaries = new CallSummariesList($this);
+        }
+        return $this->_callSummaries;
+    }
+
+    protected function getConferences(): ConferenceList {
+        if (!$this->_conferences) {
+            $this->_conferences = new ConferenceList($this);
+        }
+        return $this->_conferences;
     }
 
     protected function getRooms(): RoomList {

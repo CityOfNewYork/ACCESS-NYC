@@ -75,7 +75,8 @@ class Dashboard {
 		echo '<div>';
 
 		foreach ( $vulns as $vuln ) {
-			echo "<div><span class='dashicons dashicons-warning is-red'></span>&nbsp; " . esc_html($vuln) . "</div><br/>";
+			$vuln = wp_kses( $vuln, array( 'a' => array( 'href' => array() ) ) ); // Only allow a href HTML tags.
+			echo "<div><span class='dashicons dashicons-warning is-red'></span>&nbsp; " . $vuln . "</div><br/>";
 		}
 
 		echo '</div>';

@@ -209,7 +209,7 @@ if (!class_exists('XmlExportComment')) {
             }
         }
 
-        public static function prepare_data($comment, $exportOptions, $xmlWriter = false, $implode_delimiter, $preview)
+        public static function prepare_data($comment, $exportOptions, $xmlWriter, $implode_delimiter, $preview)
         {
             $article = array();
 

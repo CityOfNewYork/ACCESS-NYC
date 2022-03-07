@@ -21,48 +21,48 @@
 ## Please include this information when getting in touch with the GatherContent support team ##
 <?php do_action( 'gc_system_info_before' ); ?>
 
-Multisite:                <?php echo $this->get( 'multisite' ), "\n" ?>
+Multisite:                <?php echo $this->get( 'multisite' ), "\n"; ?>
 
-SITE_URL:                 <?php echo $this->get( 'site_url' ), "\n" ?>
-HOME_URL:                 <?php echo $this->get( 'home_url' ), "\n" ?>
+SITE_URL:                 <?php echo $this->get( 'site_url' ), "\n"; ?>
+HOME_URL:                 <?php echo $this->get( 'home_url' ), "\n"; ?>
 
-Plugin Version:           <?php echo $this->get( 'gc_version' ), "\n" ?>
-WordPress Version:        <?php echo $this->get( 'wp_version' ), "\n" ?>
-Permalink Structure:      <?php echo $this->get( 'permalink_structure' ), "\n" ?>
-Active Theme:             <?php echo $this->get( 'theme' ), "\n" ?>
+Plugin Version:           <?php echo $this->get( 'gc_version' ), "\n"; ?>
+WordPress Version:        <?php echo $this->get( 'wp_version' ), "\n"; ?>
+Permalink Structure:      <?php echo $this->get( 'permalink_structure' ), "\n"; ?>
+Active Theme:             <?php echo $this->get( 'theme' ), "\n"; ?>
 <?php if ( $this->get( 'host' ) ) : ?>
-Host:                     <?php echo $this->get( 'host' ), "\n" ?>
+Host:                     <?php echo $this->get( 'host' ), "\n"; ?>
 <?php endif; ?>
 
 <?php $this->output( 'browser' ); ?>
 
-PHP Version:              <?php echo $this->get( 'php_version' ), "\n" ?>
-MySQL Version:            <?php echo $this->get( 'mysql_version' ), "\n" ?>
-Web Server Info:          <?php echo $this->get( 'web_server_info' ), "\n" ?>
+PHP Version:              <?php echo $this->get( 'php_version' ), "\n"; ?>
+MySQL Version:            <?php echo $this->get( 'mysql_version' ), "\n"; ?>
+Web Server Info:          <?php echo $this->get( 'web_server_info' ), "\n"; ?>
 
-WordPress Memory Limit:   <?php echo $this->get( 'wordpress_memory_limit' ), "\n" ?>
-PHP Safe Mode:            <?php echo $this->get( 'php_safe_mode' ), "\n" ?>
-PHP Memory Limit:         <?php echo $this->get( 'php_memory_limit' ), "\n" ?>
-PHP Upload Max Size:      <?php echo $this->get( 'php_upload_max_size' ), "\n" ?>
-PHP Post Max Size:        <?php echo $this->get( 'php_post_max_size' ), "\n" ?>
-PHP Upload Max Filesize:  <?php echo $this->get( 'php_upload_max_filesize' ), "\n" ?>
-PHP Time Limit:           <?php echo $this->get( 'php_time_limit' ), "\n" ?>
-PHP Max Input Vars:       <?php echo $this->get( 'php_max_input_vars' ), "\n" ?>
-PHP Arg Separator:        <?php echo $this->get( 'php_arg_separator' ), "\n" ?>
-PHP Allow URL File Open:  <?php echo $this->get( 'php_allow_url_file_open' ), "\n" ?>
+WordPress Memory Limit:   <?php echo $this->get( 'wordpress_memory_limit' ), "\n"; ?>
+PHP Safe Mode:            <?php echo $this->get( 'php_safe_mode' ), "\n"; ?>
+PHP Memory Limit:         <?php echo $this->get( 'php_memory_limit' ), "\n"; ?>
+PHP Upload Max Size:      <?php echo $this->get( 'php_upload_max_size' ), "\n"; ?>
+PHP Post Max Size:        <?php echo $this->get( 'php_post_max_size' ), "\n"; ?>
+PHP Upload Max Filesize:  <?php echo $this->get( 'php_upload_max_filesize' ), "\n"; ?>
+PHP Time Limit:           <?php echo $this->get( 'php_time_limit' ), "\n"; ?>
+PHP Max Input Vars:       <?php echo $this->get( 'php_max_input_vars' ), "\n"; ?>
+PHP Arg Separator:        <?php echo $this->get( 'php_arg_separator' ), "\n"; ?>
+PHP Allow URL File Open:  <?php echo $this->get( 'php_allow_url_file_open' ), "\n"; ?>
 
-WP_DEBUG:                 <?php echo $this->get( 'debug' ), "\n" ?>
-SCRIPT_DEBUG:             <?php echo $this->get( 'script_debug' ), "\n" ?>
+WP_DEBUG:                 <?php echo $this->get( 'debug' ), "\n"; ?>
+SCRIPT_DEBUG:             <?php echo $this->get( 'script_debug' ), "\n"; ?>
 
-WP Table Prefix::         <?php echo $this->get( 'pre_length' ), "\n" ?>
+WP Table Prefix::         <?php echo $this->get( 'pre_length' ), "\n"; ?>
 
-Show On Front:            <?php echo $this->get( 'show_on_front' ), "\n" ?>
-Page On Front:            <?php echo $this->get( 'page_on_front' ), "\n" ?>
-Page For Posts:           <?php echo $this->get( 'page_for_posts' ), "\n" ?>
+Show On Front:            <?php echo $this->get( 'show_on_front' ), "\n"; ?>
+Page On Front:            <?php echo $this->get( 'page_on_front' ), "\n"; ?>
+Page For Posts:           <?php echo $this->get( 'page_for_posts' ), "\n"; ?>
 
-WP Remote Post:           <?php echo $this->get( 'wp_remote_post' ), "\n" ?>
+WP Remote Post:           <?php echo $this->get( 'wp_remote_post' ), "\n"; ?>
 
-Session:                  <?php echo $this->get( 'session' ), "\n" ?>
+Session:                  <?php echo $this->get( 'session' ), "\n"; ?>
 Session Name:             <?php echo $this->get( 'session_name' ), "\n"; ?>
 Cookie Path:              <?php echo $this->get( 'cookie_path' ), "\n"; ?>
 Save Path:                <?php echo $this->get( 'save_path' ), "\n"; ?>
@@ -78,18 +78,18 @@ SUHOSIN:                  <?php echo $this->get( 'suhosin' ), "\n"; ?>
 ACTIVE PLUGINS:
 
 <?php $this->output( 'active_plugins' ); ?>
-<?php if ( $this->get( 'network_active_plugins' ) ) :?>
+<?php if ( $this->get( 'network_active_plugins' ) ) : ?>
 
 NETWORK ACTIVE PLUGINS:
 
-<?php $this->output( 'network_active_plugins' ); ?>
+	<?php $this->output( 'network_active_plugins' ); ?>
 <?php endif; ?>
 
-Plugin Options:           <?php echo $this->get( 'gc_options' ), "\n" ?>
+Plugin Options:           <?php echo $this->get( 'gc_options' ), "\n"; ?>
 <?php do_action( 'gc_system_info_after' ); ?>
 
 ### End System Info ###</textarea>
-		<p><strong><?php  _e( 'For more information:', 'gathercontent-import' ); ?></strong></p>
+		<p><strong><?php _e( 'For more information:', 'gathercontent-import' ); ?></strong></p>
 		<p><a href="https://gathercontent.com/support/wordpress-integration/" target="_blank"><?php _e( 'Support for GatherContent WordPress Integration' ); ?></a></p>
 		<p><a href="https://wordpress.org/support/plugin/gathercontent-import" target="_blank"><?php _e( 'WordPress Plugin Support Forums' ); ?></a></p>
 

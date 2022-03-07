@@ -94,6 +94,7 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
             'wp_query_selector' => 'wp_query',
             'auto_generate' => 0,
             'taxonomy_to_export' => '',
+            'sub_post_type_to_export' => '',
             'created_at_version' => PMXE_VERSION
         );
 
@@ -119,9 +120,6 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
             }
         }
 
-        if (!class_exists('ZipArchive')) {
-            $this->errors->add('form-validation', __('ZipArchive class is missing on your server.<br/>Please contact your web hosting provider and ask them to install and activate ZipArchive.', 'wp_all_export_plugin'));
-        }
         if (!class_exists('XMLReader') or !class_exists('XMLWriter')) {
             $this->errors->add('form-validation', __('Required PHP components are missing.<br/><br/>WP All Export requires XMLReader, and XMLWriter PHP modules to be installed.<br/>These are standard features of PHP, and are necessary for WP All Export to write the files you are trying to export.<br/>Please contact your web hosting provider and ask them to install and activate the DOMDocument, XMLReader, and XMLWriter PHP modules.', 'wp_all_export_plugin'));
         }
@@ -134,9 +132,10 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
             PMXE_Plugin::$session->set('wp_query_selector', $post['wp_query_selector']);
             PMXE_Plugin::$session->set('taxonomy_to_export', $post['taxonomy_to_export']);
             PMXE_Plugin::$session->set('created_at_version', $post['created_at_version']);
+            PMXE_Plugin::$session->set('sub_post_type_to_export', $post['sub_post_type_to_export']);
 
             if (!empty($post['auto_generate'])) {
-                $auto_generate = XmlCsvExport::auto_genetate_export_fields($post, $this->errors);
+                $auto_generate = XmlCsvExport::auto_generate_export_fields($post, $this->errors);
 
                 foreach ($auto_generate as $key => $value) {
                     PMXE_Plugin::$session->set($key, $value);
@@ -337,7 +336,7 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
                 // prepare active languages list
                 $language_list = array('all' => 'All');
                 foreach ($langs as $code => $langInfo) {
-                    $language_list[$code] = "<img width='18' height='12' src='" . $sitepress->get_flag_url($code) . "' style='position:relative; top: 2px;'/> " . $langInfo['display_name'];
+                    $language_list[$code] = "<img width='18' height='12' src='" . esc_attr($sitepress->get_flag_url($code)) . "' style='position:relative; top: 2px;'/> " . esc_html($langInfo['display_name']);
                     if(isset($this->default_language)){
                         if ($code == $this->default_language) $language_list[$code] .= ' ( <strong>default</strong> )';
                     }
@@ -551,6 +550,11 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
                     return $friendly_name;
                 }
             } else {
+                $is_rapid_add_on_export = PMXE_Helper::is_rapid_export_addon($post_types);
+                if($is_rapid_add_on_export) {
+                    return 'Gravity Forms Entries Export - ' . date("Y F d H:i");
+                }
+
                 $post_type_details = get_post_type_object(array_shift($post_types));
                 $friendly_name = $post_type_details->labels->name . ' Export - ' . date("Y F d H:i");
                 return $friendly_name;

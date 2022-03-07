@@ -1,5 +1,6 @@
 <?php
 namespace GatherContent\Importer\Admin\Mapping;
+
 use GatherContent\Importer\Mapping_Post;
 
 /**
@@ -24,13 +25,14 @@ class Items_Sync extends Base {
 	protected $mapping;
 
 	protected $items = array();
-	protected $url = '';
+	protected $url   = '';
 
 	public function __construct( array $args ) {
 		parent::__construct( $args );
 		$this->mappings = $args['mappings'];
 		$this->items    = array_values( array_map( array( $this, 'prepare_for_js' ), $args['items'] ) );
-		$this->url      = $args['url'];
+
+		$this->url = $args['url'];
 
 		$this->mapping = Mapping_Post::get( $this->mapping_id );
 
@@ -42,14 +44,14 @@ class Items_Sync extends Base {
 			return;
 		}
 
-		$last_error = $this->mapping->get_meta( 'last_error' );
+		$last_error  = $this->mapping->get_meta( 'last_error' );
 		$item_errors = $this->mapping->get_meta( 'item_errors' );
 
 		if ( $last_error ) {
 			$msg = '';
 
 			$parts = $this->error_parts( $last_error );
-			$msg .= array_shift( $parts );
+			$msg  .= array_shift( $parts );
 			foreach ( $parts as $part ) {
 				$msg .= '</strong></p>';
 				$msg .= $part;
@@ -64,7 +66,7 @@ class Items_Sync extends Base {
 
 		if ( $item_errors ) {
 			if ( is_array( $item_errors ) ) {
-				$msg = '';
+				$msg  = '';
 				$main = __( 'There were some errors with the item import:', 'gathercontent-import' );
 				$msg .= '<ul>';
 				foreach ( $item_errors as $error ) {
@@ -101,7 +103,7 @@ class Items_Sync extends Base {
 
 		} else {
 			$msg_parts[] = __( 'Error!', 'gathercontent-import' );
-			$msg_parts[] = '<xmp style="display:none;"> '. print_r( $error, true ) .' </xmp>';
+			$msg_parts[] = '<xmp style="display:none;"> ' . print_r( $error, true ) . ' </xmp>';
 		}
 
 		return $msg_parts;
@@ -133,7 +135,11 @@ class Items_Sync extends Base {
 		// Output the markup for the JS to build on.
 		?>
 		<input type="hidden" name="mapping_id" id="gc-input-mapping_id" value="<?php echo $this->mapping_id; ?>"/>
-		<?php foreach ( $_GET as $key => $value ) : if ( 'mapping' === $key ) { continue; } ?>
+		<?php
+		foreach ( $_GET as $key => $value ) :
+			if ( 'mapping' === $key ) {
+				continue; }
+			?>
 			<input type="hidden" name="<?php echo esc_attr( $key ); ?>" id="gc-input-<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" />
 		<?php endforeach; ?>
 		<p class="gc-submit-top"><input type="submit" name="submit" id="gc-submit-2" class="button button-primary button-large" value="<?php esc_html_e( 'Import Selected Items', 'gathercontent-import' ); ?>"></p>
@@ -171,9 +177,9 @@ class Items_Sync extends Base {
 	 */
 	protected function get_underscore_templates() {
 		return array(
-			'tmpl-gc-table-search' => array(),
-			'tmpl-gc-table-nav' => array(),
-			'tmpl-gc-items-sync' => array(
+			'tmpl-gc-table-search'        => array(),
+			'tmpl-gc-table-nav'           => array(),
+			'tmpl-gc-items-sync'          => array(
 				'headers' => array(
 					'status'      => __( 'Status', 'gathercontent-import' ),
 					'itemName'    => __( 'Item', 'gathercontent-import' ),
@@ -182,7 +188,7 @@ class Items_Sync extends Base {
 					'post_title'  => __( 'WordPress Title', 'gathercontent-import' ),
 				),
 			),
-			'tmpl-gc-item' => array(
+			'tmpl-gc-item'                => array(
 				'url' => $this->url,
 			),
 			'tmpl-gc-items-sync-progress' => array(),

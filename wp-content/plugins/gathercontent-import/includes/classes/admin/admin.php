@@ -1,5 +1,6 @@
 <?php
 namespace GatherContent\Importer\Admin;
+
 use GatherContent\Importer\API;
 use GatherContent\Importer\General;
 use GatherContent\Importer\Settings\Setting;
@@ -68,7 +69,6 @@ class Admin extends Base {
 
 				$this->step = 0;
 			}
-
 		}
 
 		if (
@@ -122,7 +122,6 @@ class Admin extends Base {
 					break;
 			}
 
-
 			$settings[ $key ] = $value;
 		}
 
@@ -136,12 +135,15 @@ class Admin extends Base {
 
 			if ( isset( $settings['auth_username'], $settings['auth_pw'] ) ) {
 
-				$result = wp_remote_head( admin_url( 'admin-post.php' ), array(
-					'sslverify' => apply_filters( 'https_local_ssl_verify', true ),
-					'headers'   => array(
-						'Authorization' => 'Basic ' . base64_encode( $settings['auth_username'] . ':' . $settings['auth_pw'] ),
-					),
-				) );
+				$result = wp_remote_head(
+					admin_url( 'admin-post.php' ),
+					array(
+						'sslverify' => apply_filters( 'https_local_ssl_verify', true ),
+						'headers'   => array(
+							'Authorization' => 'Basic ' . base64_encode( $settings['auth_username'] . ':' . $settings['auth_pw'] ),
+						),
+					)
+				);
 
 				$settings['auth_verified'] = isset( $result['response']['code'] ) && 200 === $result['response']['code'];
 			}
@@ -172,7 +174,7 @@ class Admin extends Base {
 
 	}
 
- 	/**
+	/**
 	 * Add Settings page to plugin action links in the Plugins table.
 	 *
 	 * @since  3.0.3
@@ -197,11 +199,14 @@ class Admin extends Base {
 			update_option( 'gathercontent_version', GATHERCONTENT_VERSION );
 		}
 
-		$this->view( 'admin-page', array(
-			'logo'              => $this->logo,
-			'option_group'      => $this->option_group,
-			'settings_sections' => Form_Section::get_sections( self::SLUG ),
-		) );
+		$this->view(
+			'admin-page',
+			array(
+				'logo'              => $this->logo,
+				'option_group'      => $this->option_group,
+				'settings_sections' => Form_Section::get_sections( self::SLUG ),
+			)
+		);
 	}
 
 	/**
@@ -252,7 +257,7 @@ class Admin extends Base {
 			$section = new Form_Section(
 				'auth',
 				esc_html__( 'HTTP Authentication Credentials', 'gathercontent-import' ),
-				$this->view( 'auth-enabled-desc', array(), false),
+				$this->view( 'auth-enabled-desc', array(), false ),
 				self::SLUG
 			);
 
@@ -277,7 +282,6 @@ class Admin extends Base {
 			if ( $slug = get_option( $key . '_api_url' ) ) {
 				$this->settings()->options['platform_url_slug'] = $slug;
 			}
-
 		} else {
 			echo '<p>' . sprintf( __( 'Enter you GatherContent API credentials. Instructions for getting your API key can be found <a href="%s" target="_blank">here</a>.', 'gathercontent-import' ), 'https://gathercontent.com/developers/authentication/' ) . '</p>';
 		}
@@ -286,11 +290,14 @@ class Admin extends Base {
 	public function account_email_field_cb( $field ) {
 		$id = $field->param( 'id' );
 
-		$this->view( 'input', array(
-			'id' => $id,
-			'name' => $this->option_name .'['. $id .']',
-			'value' => esc_attr( $this->get_setting( $id ) ),
-		) );
+		$this->view(
+			'input',
+			array(
+				'id'    => $id,
+				'name'  => $this->option_name . '[' . $id . ']',
+				'value' => esc_attr( $this->get_setting( $id ) ),
+			)
+		);
 	}
 
 	public function platform_url_slug_field_cb( $field ) {
@@ -300,12 +307,15 @@ class Admin extends Base {
 
 		echo '<div class="platform-url-help gc-domain-prefix">https://</div>';
 
-		$this->view( 'input', array(
-			'id' => $id,
-			'name' => $this->option_name .'['. $id .']',
-			'value' => esc_attr( $this->get_setting( $id ) ),
-			'placeholder' => 'your-account',
-		) );
+		$this->view(
+			'input',
+			array(
+				'id'          => $id,
+				'name'        => $this->option_name . '[' . $id . ']',
+				'value'       => esc_attr( $this->get_setting( $id ) ),
+				'placeholder' => 'your-account',
+			)
+		);
 
 		echo '<div class="platform-url-help gc-domain">.gathercontent.com</div>';
 
@@ -315,50 +325,65 @@ class Admin extends Base {
 	public function api_key_field_cb( $field ) {
 		$id = $field->param( 'id' );
 
-		$this->view( 'input', array(
-			'id' => $id,
-			'name' => $this->option_name .'['. $id .']',
-			'value' => esc_attr( $this->get_setting( $id ) ),
-			'placeholder' => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-			'desc' => '<a href="https://gathercontent.com/developers/authentication/" target="_blank">'. __( 'How to get your API key', 'gathercontent-import' ) . '</a>',
-		) );
+		$this->view(
+			'input',
+			array(
+				'id'          => $id,
+				'name'        => $this->option_name . '[' . $id . ']',
+				'value'       => esc_attr( $this->get_setting( $id ) ),
+				'placeholder' => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+				'desc'        => '<a href="https://gathercontent.com/developers/authentication/" target="_blank">' . __( 'How to get your API key', 'gathercontent-import' ) . '</a>',
+			)
+		);
 
-		$this->view( 'input', array(
-			'type'    => 'hidden',
-			'id'      => 'gc-is-migrated',
-			'name'    => $this->option_name .'[migrated]',
-			'value'   => $this->get_setting( 'migrated' ),
-		) );
+		$this->view(
+			'input',
+			array(
+				'type'  => 'hidden',
+				'id'    => 'gc-is-migrated',
+				'name'  => $this->option_name . '[migrated]',
+				'value' => $this->get_setting( 'migrated' ),
+			)
+		);
 	}
 
 	public function auth_username_field_cb( $field ) {
 		$id = $field->param( 'id' );
 
 		$enabled = \GatherContent\Importer\auth_enabled();
-		$this->view( 'input', array(
-			'id'    => $id,
-			'name'  => $this->option_name .'['. $id .']',
-			'value' => esc_attr( $this->get_setting( $id ) ),
-			'placeholder' => is_string( $enabled ) ? esc_attr( $enabled ) : '',
-		) );
+		$this->view(
+			'input',
+			array(
+				'id'          => $id,
+				'name'        => $this->option_name . '[' . $id . ']',
+				'value'       => esc_attr( $this->get_setting( $id ) ),
+				'placeholder' => is_string( $enabled ) ? esc_attr( $enabled ) : '',
+			)
+		);
 	}
 
 	public function auth_pw_field_cb( $field ) {
 		$id = $field->param( 'id' );
 
-		$this->view( 'input', array(
-			'id'    => $id,
-			'name'  => $this->option_name .'['. $id .']',
-			'value' => esc_attr( $this->get_setting( $id ) ),
-			'type'  => 'password',
-		) );
+		$this->view(
+			'input',
+			array(
+				'id'    => $id,
+				'name'  => $this->option_name . '[' . $id . ']',
+				'value' => esc_attr( $this->get_setting( $id ) ),
+				'type'  => 'password',
+			)
+		);
 
-		$this->view( 'input', array(
-			'type'    => 'hidden',
-			'id'      => 'auth_verified',
-			'name'    => $this->option_name .'[auth_verified]',
-			'value'   => $this->get_setting( 'auth_verified' ),
-		) );
+		$this->view(
+			'input',
+			array(
+				'type'  => 'hidden',
+				'id'    => 'auth_verified',
+				'name'  => $this->option_name . '[auth_verified]',
+				'value' => $this->get_setting( 'auth_verified' ),
+			)
+		);
 	}
 
 	public function api_setup_complete() {
@@ -384,7 +409,7 @@ class Admin extends Base {
 
 				if ( $this->set_my_account() ) {
 
-					$data['message'] .= ' '. sprintf( esc_html__( "and the %s account.", 'gathercontent-import' ), '<a href="'. esc_url( $this->platform_url() ) .'" target="_blank">'. esc_html( $this->account->name ) .'</a>' );
+					$data['message'] .= ' ' . sprintf( esc_html__( 'and the %s account.', 'gathercontent-import' ), '<a href="' . esc_url( $this->platform_url() ) . '" target="_blank">' . esc_html( $this->account->name ) . '</a>' );
 				}
 
 				$this->view( 'user-profile', $data );

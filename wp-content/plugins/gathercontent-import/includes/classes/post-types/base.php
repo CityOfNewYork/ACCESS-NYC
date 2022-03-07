@@ -1,10 +1,11 @@
 <?php
 namespace GatherContent\Importer\Post_Types;
+
 use GatherContent\Importer\Base as Plugin_Base;
 
 abstract class Base extends Plugin_Base {
 
-	const SLUG = '';
+	const SLUG   = '';
 	public $args = array();
 
 	/**
@@ -15,7 +16,7 @@ abstract class Base extends Plugin_Base {
 	 * @param $api API object
 	 */
 	public function __construct( $labels, $args ) {
-		$this->args = $args;
+		$this->args           = $args;
 		$this->args['labels'] = $labels;
 
 		parent::__construct();
@@ -40,7 +41,7 @@ abstract class Base extends Plugin_Base {
 	 * @param  string $title Original placeholder text
 	 * @return string        Modifed placeholder text
 	 */
-	public function modify_title( $title ){
+	public function modify_title( $title ) {
 
 		$screen = get_current_screen();
 		if ( isset( $screen->post_type ) && $screen->post_type == static::SLUG ) {

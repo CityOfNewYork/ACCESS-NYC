@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Admin;
+
 use GatherContent\Importer\General;
 use GatherContent\Importer\API;
 use GatherContent\Importer\Admin\Mapping\Base as UI_Base;
@@ -58,14 +59,14 @@ abstract class Post_Base extends UI_Base {
 	 *
 	 * @since 3.0.0
 	 *
-	 * @param API             $api      API object.
+	 * @param API            $api      API object.
 	 * @param Mapping_Wizard $wizard Mapping_Wizard object.
 	 */
 	public function __construct( API $api, Mapping_Wizard $wizard ) {
 		$this->api        = $api;
-		$this->wizard    = $wizard;
+		$this->wizard     = $wizard;
 		$this->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
-		$this->enqueue    = new Post_Enqueue;
+		$this->enqueue    = new Post_Enqueue();
 	}
 
 	/**
@@ -77,17 +78,17 @@ abstract class Post_Base extends UI_Base {
 	 */
 	protected function get_localize_data() {
 		return array(
-			'_edit_nonce' => wp_create_nonce( General::get_instance()->admin->mapping_wizard->option_group . '-options' ),
-			'_statuses' => array(
+			'_edit_nonce'  => wp_create_nonce( General::get_instance()->admin->mapping_wizard->option_group . '-options' ),
+			'_statuses'    => array(
 				'starting' => __( 'Starting Sync', 'gathercontent-importer' ),
 				'syncing'  => __( 'Syncing', 'gathercontent-importer' ),
 				'complete' => __( 'Sync Complete', 'gathercontent-importer' ),
 				'failed'   => __( 'Sync Failed (review?)', 'gathercontent-importer' ),
 			),
-			'_errors' => array(
+			'_errors'      => array(
 				'unknown' => __( 'There was an unknown error', 'gathercontent-importer' ),
 			),
-			'_step_labels' => Utils::get_step_label( 'all'  ),
+			'_step_labels' => Utils::get_step_label( 'all' ),
 		);
 	}
 }

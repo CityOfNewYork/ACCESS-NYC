@@ -15,7 +15,7 @@ class Input extends Form_Element {
 	protected function element() {
 		$content = '<input';
 		foreach ( $this->attributes() as $attr => $attr_value ) {
-			$content .= ' ' . $attr . '="'. $attr_value .'"';
+			$content .= ' ' . $attr . '="' . $attr_value . '"';
 		}
 		$content .= ' />';
 

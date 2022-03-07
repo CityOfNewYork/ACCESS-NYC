@@ -1,0 +1,151 @@
+.btn {
+  display: inline-block;
+  margin: 0;
+  padding: 24px 60px 24px 16px;
+  position: relative;
+  color: #eb6123;
+  text-decoration: none;
+  line-height: 1;
+  -webkit-box-shadow: 0 0 0 transparent;
+          box-shadow: 0 0 0 transparent;
+  background-color: #fff;
+  border: 3px solid #eb6123;
+  border-radius: 8px;
+  overflow: hidden;
+  -webkit-transition: -webkit-box-shadow .25s;
+  transition: -webkit-box-shadow .25s;
+  transition: box-shadow .25s;
+  transition: box-shadow .25s, -webkit-box-shadow .25s;
+}
+
+.btn .btn-content {
+  font-size: 1em;
+  line-height: 1.2;
+  padding: 0 26px;
+  position: relative;
+  right: 0;
+  -webkit-transition: right 300ms ease;
+  transition: right 300ms ease;
+  display: block;
+  text-align: left;
+}
+
+.btn .icon {
+  border-left: 1px solid #eb6123;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 50%;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  -webkit-transform: translateY(-52%);
+          transform: translateY(-52%);
+  width: 68px;
+  height: 70%;
+}
+
+.btn .icon img {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  max-width: 40px;
+}
+
+.btn:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #eb6123;
+  opacity: 0;
+  -webkit-transition: opacity 300ms ease;
+  transition: opacity 300ms ease;
+  border-radius: 6px;
+}
+
+.btn:hover {
+  -webkit-box-shadow: 2px 6px 16px 3px rgba(0, 0, 0, 0.12), 0 0 1px 3px rgba(0, 0, 0, 0.06);
+          box-shadow: 2px 6px 16px 3px rgba(0, 0, 0, 0.12), 0 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.btn:hover .btn-content {
+  right: 100%;
+}
+
+.btn:hover .icon {
+  border-left: 0;
+  font-size: 1.8em;
+  width: 100%;
+}
+
+.btn:hover:after {
+  opacity: .1;
+}
+
+#wpbitly-meta .inside {
+  padding: 0;
+}
+
+#wpbitly-meta .inside p.error {
+  padding: 0 10px;
+}
+
+#wpbitly-actions {
+  padding: 10px;
+  clear: both;
+  border-top: 1px solid #ddd;
+  background: #f5f5f5;
+}
+
+#regenerate-action {
+  float: left;
+  line-height: 28px;
+}
+
+#getshortlink-action {
+  text-align: right;
+  float: right;
+  line-height: 23px;
+}
+
+.regeneratelink {
+  color: #a00;
+}
+
+.regeneratelink:hover {
+  color: #dc3232;
+  border: none;
+}
+
+.wpbitly-clicks {
+  margin: 1.6em 0 0;
+}
+
+.wpbitly-clicks p {
+  margin: 0 0 .35em;
+  font-size: 1.4em;
+  font-weight: 400;
+  text-align: center;
+}
+
+.wpbitly-clicks p:first-child {
+  font-size: 1.5em;
+}
+
+.wpbitly-clicks p span {
+  color: #0073aa;
+}
+
+.wpbitly-spacer {
+  margin: 1.5em auto;
+  width: 35%;
+  border-bottom: 1px solid #dedede;
+}
+
+#wpbitly-meta h4 {
+  font-weight: 300;
+  text-align: center;
+}

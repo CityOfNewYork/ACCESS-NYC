@@ -1,5 +1,6 @@
 <?php
 namespace GatherContent\Importer\Settings;
+
 use GatherContent\Importer\Base as Base;
 
 class Form_Section extends Base {
@@ -7,8 +8,8 @@ class Form_Section extends Base {
 	protected $page;
 	protected $id;
 	public $field;
-	public $title = '';
-	public $callback = null;
+	public $title     = '';
+	public $callback  = null;
 	protected $fields = array();
 	protected static $sections;
 
@@ -18,24 +19,24 @@ class Form_Section extends Base {
 		$section = compact( 'id', 'title', 'callback', 'is_current' );
 		$section = apply_filters( "gathercontent_importer_section_{$id}", $section, $this );
 
-		$this->id = $section['id'];
-		$this->title = $section['title'];
+		$this->id       = $section['id'];
+		$this->title    = $section['title'];
 		$this->callback = $section['callback'];
 
 		self::$sections[ $this->page ][ $this->id ] = $this;
 	}
 
 	public function get_section( $show ) {
-		$class = 'gc-section-'. $this->id . ( $show ? '' : ' hidden' );
-		$html  = '<div class="gc-setting-section '. $class .'">';
+		$class = 'gc-section-' . $this->id . ( $show ? '' : ' hidden' );
+		$html  = '<div class="gc-setting-section ' . $class . '">';
 
-			if ( $this->title ) {
-				$html .= "<h2>{$this->title}</h2>\n";
-			}
+		if ( $this->title ) {
+			$html .= "<h2>{$this->title}</h2>\n";
+		}
 
-			if ( $this->callback ) {
-				$html .= $this->do_desc_callback();
-			}
+		if ( $this->callback ) {
+			$html .= $this->do_desc_callback();
+		}
 
 			$html .= '<table class="form-table">';
 			$html .= $this->do_fields();
@@ -89,13 +90,16 @@ class Form_Section extends Base {
 	}
 
 	public function add_field( $id, $title, $callback, $args = array() ) {
-		$args = wp_parse_args( $args, array(
-			'label_for' => $title ? $id : '',
-			'class' => $id . '-row',
-		) );
+		$args = wp_parse_args(
+			$args,
+			array(
+				'label_for' => $title ? $id : '',
+				'class'     => $id . '-row',
+			)
+		);
 
-		$field = compact( 'id', 'title', 'callback', 'args' );
-		$field = apply_filters( "gathercontent_importer_field_{$this->id}_{$id}", $field, $this );
+		$field                        = compact( 'id', 'title', 'callback', 'args' );
+		$field                        = apply_filters( "gathercontent_importer_field_{$this->id}_{$id}", $field, $this );
 		$this->fields[ $field['id'] ] = $field;
 
 	}

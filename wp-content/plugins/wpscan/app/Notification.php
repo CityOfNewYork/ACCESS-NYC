@@ -234,7 +234,7 @@ class Notification {
 
 		$msg  = '<!doctype html><html><head><meta charset="utf-8"></head><body>';
 		$msg .= '<p>' . __( 'Hello,', 'wpscan' ) . '</p>';
-		$msg .= '<p>' . sprintf(__( 'Some vulnerabilities were found in %s, visit the site for more details.', 'wpscan' ), '<a href="' . get_bloginfo( 'url' ) . '">' . get_bloginfo( 'name' ) . '</a>' ) . '</p>';
+		$msg .= '<p>' . sprintf(__( 'The %s found some vulnerabilities in %s, listed below.', 'wpscan' ), '<a href="https://wordpress.org/plugins/wpscan/">WPScan WordPress security plugin</a>' , '<a href="' . get_bloginfo( 'url' ) . '">' . get_bloginfo( 'name' ) . '</a>' ) . '</p>';
 
 		// WordPress
 		$list = $this->email_vulnerabilities( 'wordpress' , get_bloginfo( 'version' ));
@@ -284,11 +284,15 @@ class Notification {
 			}
 		}
 
+		$msg .= '<p>' . sprintf(__( 'Found our WPScan security plugin helpful? Please %s', 'wpscan' ), '<a href="https://wordpress.org/support/plugin/wpscan/reviews/#new-post">leave a review.</a></p>');
+
+		$msg .= '<p>' . __( 'Thank you,', 'wpscan' ) . '<br/>' . __( 'The WPScan Team', 'wpscan' ) . '</p>';
+
 		$msg .= '</body></html>';
 
 		if ( $has_vulnerabilities ) {
 			$subject = sprintf(
-				__( 'Some vulnerabilities were found in %s', 'wpscan' ),
+				__( '[WPScan Alert] Some vulnerabilities were found in %s!', 'wpscan' ),
 				get_bloginfo( 'name' )
 			);
 
