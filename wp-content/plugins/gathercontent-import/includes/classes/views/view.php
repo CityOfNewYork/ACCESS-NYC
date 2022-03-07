@@ -30,18 +30,18 @@ class View {
 	/**
 	 * Render an HTML view with the given arguments and return the view's contents.
 	 *
-	 * @param string  $template The template file name, relative to the includes/templates/ folder - with or without .php extension
-	 * @param array   $args     An array of arguments to extract as variables into the template
+	 * @param string $template The template file name, relative to the includes/templates/ folder - with or without .php extension
+	 * @param array  $args     An array of arguments to extract as variables into the template
 	 *
 	 * @return void
 	 */
 	public function __construct( $template, array $args = array() ) {
 		if ( empty( $template ) ) {
-			throw new Exception( 'Template variable required for '. __CLASS__ .'.' );
+			throw new Exception( 'Template variable required for ' . __CLASS__ . '.' );
 		}
 
 		$this->template = $template;
-		$this->args = $args;
+		$this->args     = $args;
 	}
 
 	/**
@@ -57,7 +57,7 @@ class View {
 
 		// Filter args before outputting template.
 		$this->args = apply_filters( "gc_template_args_for_{$this->template}", $this->args, $this );
-		$id = md5( $this->template . serialize( $this->args ) );
+		$id         = md5( $this->template . serialize( $this->args ) );
 
 		if ( ! isset( self::$views[ $id ] ) ) {
 			try {
@@ -109,9 +109,9 @@ class View {
 	 *
 	 * @since  3.0.0
 	 *
-	 * @param  string  $arg     The $args key.
-	 * @param  mixed   $esc_cb  An escaping function callback.
-	 * @param  mixed   $default Mixed value.
+	 * @param  string $arg     The $args key.
+	 * @param  mixed  $esc_cb  An escaping function callback.
+	 * @param  mixed  $default Mixed value.
 	 *
 	 * @return mixed            Value or default.
 	 */

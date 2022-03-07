@@ -9,6 +9,12 @@
   float: left;
   margin-bottom: 5px;
   margin-right: 12px;
+  white-space: normal !important;
+}
+
+.column-name {
+  word-break: break-word;
+  width: 250px;
 }
 
 .is-gray {
@@ -155,11 +161,10 @@
 
 .vulnerability-severity {
   float: left;
-  min-width: 60px;
-  margin-right: 20px;
+  min-width: 100px;
 }
 
-.vulnerability-title {
+.vulnerability-title .vulnerability-status .vulnerability-link {
   float: left;
 }
 
@@ -169,9 +174,8 @@
   text-align: center;
   border-radius: 3px;
   font-size: 11px;
-  margin: 6px 0px 0px 0px;
   line-height: 19px;
-  min-width: 60px;
+  min-width: 100px;
   color: #4e645a;
   background: #c6e1d5;
 }

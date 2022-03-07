@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Compatibility;
+
 use GatherContent\Importer\Sync\Pull;
 use GatherContent\Importer\Sync\Push;
 use GatherContent\Importer\Base;
@@ -134,7 +135,7 @@ class WPML extends Base {
 
 				if ( $default_lang_term ) {
 					$terms[ $index ] = $default_lang_term;
-					$new_terms = true;
+					$new_terms       = true;
 				}
 			}
 		}
@@ -144,7 +145,7 @@ class WPML extends Base {
 
 			// Then update the push item config.
 			$term_names = wp_list_pluck( $terms, 'name' );
-			$updated = $push->set_taxonomy_field_value_from_names( $term_names );
+			$updated    = $push->set_taxonomy_field_value_from_names( $term_names );
 		}
 
 		return $updated;

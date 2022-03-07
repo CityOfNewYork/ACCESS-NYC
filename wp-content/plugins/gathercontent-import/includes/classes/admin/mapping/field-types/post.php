@@ -1,5 +1,6 @@
 <?php
 namespace GatherContent\Importer\Admin\Mapping\Field_Types;
+
 use GatherContent\Importer\Views\View;
 
 class Post extends Base implements Type {
@@ -16,7 +17,7 @@ class Post extends Base implements Type {
 		'choice_radio',
 	);
 
-	protected $type_id = 'wp-type-post';
+	protected $type_id      = 'wp-type-post';
 	protected $post_options = array();
 
 	/**

@@ -14,9 +14,9 @@
     <div class="save-text"
          style="display: block; position:absolute; <?php if($this->isWizard) {?> left: 70px; <?php } else { ?> left: 60px; <?php } ?> top:0; user-select: none;">
         <?php if($this->isWizard) {?>
-            <?php _e('Confirm & Run Export', 'wp_all_export_plugin'); ?>
+            <?php esc_html_e('Confirm & Run Export', 'wp_all_export_plugin'); ?>
         <?php } else { ?>
-            <?php _e('Save Export Configuration', 'wp_all_export_plugin'); ?>
+            <?php esc_html_e('Save Export Configuration', 'wp_all_export_plugin'); ?>
         <?php } ?>
     </div>
 </div>

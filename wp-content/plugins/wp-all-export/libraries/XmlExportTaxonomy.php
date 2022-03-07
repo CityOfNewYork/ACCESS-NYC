@@ -169,7 +169,7 @@ if ( ! class_exists('XmlExportTaxonomy') )
 			}
 		}
 
-		public static function prepare_data( $term, $xmlWriter = false, &$acfs, $implode_delimiter, $preview )
+		public static function prepare_data( $term, $xmlWriter, &$acfs, $implode_delimiter, $preview )
 		{
 			$article = array();					
 

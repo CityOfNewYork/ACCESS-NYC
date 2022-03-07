@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 class Report
 {
 	// Page slug.
-	private $page;
+	public $page;
 
 	/**
 	 * Class constructor.
@@ -64,6 +64,37 @@ class Report
 	}
 
 	/**
+	 * Get vulnerability status based on fixed_in
+	 *
+	 * @since 1.15.2
+	 * @access public
+	 * @return string
+	 */
+	public function status( $vulnerability ) {
+		return empty( $vulnerability->fixed_in )
+			? __( 'We are not aware of a fix for this vulnerability.', 'wpscan' )
+			: sprintf( __( 'This vulnerability was fixed in version %s. We recommend that you update as soon as possible.', 'wpscan' ), esc_html( $vulnerability->fixed_in ) );
+	}
+
+	/**
+	 * HTML markup for the vulnerability details
+	 *
+	 * @since 1.15.2
+	 * @access public
+	 * @return string
+	 */
+	public function vulnerability_output( $vulnerability ) {
+    $html  = '<div class="vulnerability">';
+		$html .= '<p class="vulnerability-title"><b>' . esc_html( $vulnerability->title ) . '</b></p>';
+		$html .= '<p class="vulnerability-status">' . $this->status( $vulnerability ) . '</p>';
+		$html .= $this->vulnerability_severity( $vulnerability );
+		$html .= '<br /><p class="vulnerability-link"><a href="' . esc_url( 'https://wpscan.com/vulnerability/' . $vulnerability->id ) . '" target="_blank">Click here for further details</a></p>';
+		$html .= '</div>';
+
+		return $html;
+	}
+
+	/**
 	 * List vulnerabilities on screen
 	 *
 	 * @since 1.0.0
@@ -80,7 +111,6 @@ class Report
 
 		$null_text        = __( 'No known vulnerabilities found to affect this version', 'wpscan' );
 		$not_checked_text = __( 'Not checked yet. Click the Run All button to run a scan', 'wpscan' );
-		$not_found_text   = __( 'Not found in database', 'wpscan' );
 
 		if ( empty( $report ) || ! isset( $report[ $type ] ) ) {
 			return null;
@@ -100,31 +130,69 @@ class Report
 
 			usort( $report['vulnerabilities'], array( 'self', 'sort_vulnerabilities' ) );
 
-			foreach ( $report['vulnerabilities'] as $item ) {
-				$id = 'security-checks' === $type ? $item['id'] : $item->id;
+			foreach ( $report['vulnerabilities'] as $vulnerability ) {
+				$id = 'security-checks' === $type ? $vulnerability['id'] : $vulnerability->id;
 
 				if ( in_array( $id, $ignored, true ) ) {
 					continue;
 				}
 
-				$html  = '<div class="vulnerability">';
-				$html .= $this->vulnerability_severity( $item );
-				$html .= '<a href="' . esc_url( 'https://wpscan.com/vulnerability/' . $item->id ) . '" target="_blank">';
-				$html .= $this->parent->get_sanitized_vulnerability_title( $item );
-				$html .= '</a>';
+				$list[] = $this->vulnerability_output( $vulnerability );
+			}
+
+			echo empty( $list ) ? $null_text : join( '<br>', $list );
+
+		} else {
+			echo esc_html( $null_text );
+		}
+	}
+
+	/**
+	 * List security check vulnerabilities in the report.
+	 * This should be merged with the list_api_vulnerabilities() function,
+	 * in the future, if anyone can figure out how...
+	 *
+	 * @param object $check - The check instance.
+	 *
+	 * @access public
+	 * @return string
+	 * @since 1.0.0
+	 *
+	 */
+	public function list_security_check_vulnerabilities( $instance ) {
+		$vulnerabilities = $instance->get_vulnerabilities();
+		$count           = $instance->get_vulnerabilities_count();
+		$ignored         = $this->parent->get_ignored_vulnerabilities();
+
+		$not_checked_text = __( 'Not checked yet. Click the Run button to run a scan', 'wpscan' );
+
+		if ( ! isset( $vulnerabilities ) ) {
+			echo esc_html( $not_checked_text );
+		} elseif ( empty( $vulnerabilities ) || 0 === $count ) {
+			echo esc_html( $instance->success_message() );
+		} else {
+			$list = array();
+
+			foreach ( $vulnerabilities as $vulnerability ) {
+				if ( in_array( $vulnerability['id'], $ignored, true ) ) {
+					continue;
+				}
+
+				$html  = "<div class='vulnerability'>";
+				$html .= "<p class='vulnerability-title'>" . wp_kses( $vulnerability['title'], array( 'a' => array( 'href' => array() ) ) ) . '</p><br />';
+				$html .= "<p class='vulnerability-severity'>";
+				$html .= "<span class='wpscan-" . esc_attr( $vulnerability['severity'] ) . "'>" . esc_html( $vulnerability['severity'] ) ." Severity</span>";
+				$html .= '</p>';
+				$html .= "<br /><br /><p class='vulnerability-link'><a href='" . esc_url( $vulnerability['remediation_url'] ) . "' target='_blank'>Click here for further details</a></p>";
 				$html .= '</div>';
 
 				$list[] = $html;
 			}
 
-			echo empty( $list ) ? $null_text : join( '<br>', $list );
-
-		} elseif ( $report['not_found'] ) {
-			echo esc_html( $not_found_text );
-		} else {
-			echo esc_html( $null_text );
+			echo join( '<br>', $list );
 		}
 	}
+
 
 	/**
 	 * Sort vulnerabilities by severity
@@ -158,7 +226,7 @@ class Report
 
 		if ( isset( $vulnerability->cvss->severity ) ) {
 			$severity = $vulnerability->cvss->severity;
-			$html    .= "<span class='wpscan-" . esc_attr( $severity ) . "'>" . esc_html( $severity ) . '</span>';
+			$html    .= "<span class='wpscan-" . esc_attr( $severity ) . "'>" . esc_html( $severity ) . ' Severity</span>';
 		}
 
 		$html .= '</div>';
@@ -283,7 +351,10 @@ class Report
 			$report = $report[ $type ][ $name ];
 		}
 
-		if ( ! isset( $report['vulnerabilities'] ) ) {
+
+		if ( array_key_exists( 'not_found', $report ) ) {
+			$icon = 'dashicons-yes is-green';
+		} elseif ( ! isset( $report['vulnerabilities'] ) ) {
 			$icon = 'dashicons-no-alt is-gray';
 		} elseif ( empty( $report['vulnerabilities'] ) ) {
 			$icon = 'dashicons-yes is-green';

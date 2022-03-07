@@ -136,4 +136,19 @@ class PMXE_Helper {
 		
 		return (boolean)preg_match($pattern, $string);
 	}
+
+    public static function is_rapid_export_addon($cpt)
+    {
+        if (is_array($cpt)) {
+            $cpt = $cpt[0];
+        }
+
+        $is_rapid_addon_export = true;
+
+        if (strpos($cpt, 'custom_') !== 0) {
+            $is_rapid_addon_export = false;
+        }
+
+        return $is_rapid_addon_export;
+    }
 }

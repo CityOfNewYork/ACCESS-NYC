@@ -3,7 +3,7 @@
 Plugin Name: WP All Export
 Plugin URI: http://www.wpallimport.com/upgrade-to-wp-all-export-pro/?utm_source=export-plugin-free&utm_medium=wp-plugins-page&utm_campaign=upgrade-to-pro
 Description: Export any post type to a CSV or XML file. Edit the exported data, and then re-import it later using WP All Import.
-Version: 1.2.7
+Version: 1.3.3
 Author: Soflyy
 */
 
@@ -37,7 +37,7 @@ if ( class_exists('PMXE_Plugin') and PMXE_EDITION == "paid"){
 		?>
 		<div class="error">
 			<p>
-			<?php printf(__('Please de-activate and remove the free version of the WP All Export before activating the paid version.', 'wp_all_export_plugin')); ?>			
+			<?php printf(esc_html__('Please de-activate and remove the free version of the WP All Export before activating the paid version.', 'wp_all_export_plugin')); ?>
 			</p>
 		</div>
 		<?php				
@@ -59,9 +59,9 @@ else {
 	 */
 	define('PMXE_PREFIX', 'pmxe_');
 
-	define('PMXE_VERSION', '1.2.7');
+	define('PMXE_VERSION', '1.3.3');
 
-    define('PMXE_ASSETS_VERSION', '-1.0.1');
+    define('PMXE_ASSETS_VERSION', '-1.0.2');
 
     define('PMXE_EDITION', 'free');
 
@@ -157,6 +157,9 @@ else {
 
         private static $hasActiveSchedulingLicense = null;
 
+        /** @var  \Wpae\App\Service\Addons\AddonService */
+        private $addons;
+
         public static $cache_key = '';
 
         /**
@@ -186,6 +189,8 @@ else {
                 require_once $filePath;
             }
 
+            $this->addons = new \Wpae\App\Service\Addons\AddonService();
+            
             // init plugin options
             $option_name = get_class($this) . '_Options';
             $options_default = PMXE_Config::createFromFile(self::ROOT_DIR . '/config/options.php')->toArray();
@@ -232,9 +237,9 @@ else {
             }
 
             // register admin page pre-dispatcher
-            add_action('admin_init', array($this, 'adminInit'));
-            add_action('admin_init', array($this, 'fix_db_schema'));
-            add_action('init', array($this, 'init'));
+            add_action('admin_init', array($this, 'adminInit'), 11);
+            add_action('admin_init', array($this, 'fix_db_schema'), 10);
+            add_action('init', array($this, 'init'), 10);
 
         }
 
@@ -347,10 +352,36 @@ else {
             $notice->render();
         }
 
+        public function showDismissibleNotice($message, $noticeId)
+        {
+            $notice = new \Wpae\WordPress\SitewideAdminDismissibleNotice($message, $noticeId);
+            if (!$notice->isDismissed()) {
+                $notice->render();
+            }
+        }
+
 		/**
 		 * pre-dispatching logic for admin page controllers
 		 */
 		public function adminInit() {
+
+            $addons_not_included = get_option('wp_all_export_free_addons_not_included',false);
+
+
+            if ( !get_option('wp_all_export_free_addons_not_included',false) && current_user_can( 'manage_options' ) && (!XmlExportEngine::get_addons_service()->isAcfAddonActive() || !XmlExportEngine::get_addons_service()->isWooCommerceAddonActive())){
+
+				$website = get_site_url();
+				$salt    = "datacaptain";
+				$hash    = base64_encode( $website . $salt );
+				$product = "wpae-free-upgrade";
+
+				$wpae_add_on_discount_link = "https://www.wpallimport.com?discount-site=" . urlencode( $website ) . "&discount-hash=" . $hash . "&discount-item=" . $product;
+
+				$this->showDismissibleNotice( '<h1 style="padding-top:0">Important Notice Regarding WP All Export</h1><br><strong>WP All Export now requires paid add-ons to export ACF and WooCommerce data.<br/>We are providing these Pro add-ons to everyone who was using WP All Export before the change, free of charge.
+<br/><br/>
+<a href="'.$wpae_add_on_discount_link.'&utm_source=export-plugin-free&utm_medium=wpae-addons-notice&utm_campaign=free-export-acf-woo-add-ons
+" target="_blank">Click here to download your free Pro add-ons.</a></strong>', 'wpae_free_export_addons_notice' );
+			}
 
 			// create history folder
 			$uploads = wp_upload_dir();
@@ -368,13 +399,26 @@ else {
 			}
 
             if ( ! is_dir($uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY) or ! is_writable($uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY)) {
-                $this->showNoticeAndDisablePlugin(sprintf(__('Uploads folder %s must be writable', 'wp_all_export_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY));
+                $this->showNoticeAndDisablePlugin(sprintf(esc_html__('Uploads folder %s must be writable', 'wp_all_export_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY));
             }
 
             if ( ! is_dir($uploads['basedir'] . DIRECTORY_SEPARATOR . self::UPLOADS_DIRECTORY) or ! is_writable($uploads['basedir'] . DIRECTORY_SEPARATOR . self::UPLOADS_DIRECTORY)) {
-                $this->showNoticeAndDisablePlugin(sprintf(__('Uploads folder %s must be writable', 'wp_all_export_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . self::UPLOADS_DIRECTORY));
+                $this->showNoticeAndDisablePlugin(sprintf(esc_html__('Uploads folder %s must be writable', 'wp_all_export_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . self::UPLOADS_DIRECTORY));
             }
 
+            if (!$addons_not_included && $this->addons->userExportsExistAndAddonNotInstalled() && current_user_can('manage_options')) {
+                $this->showDismissibleNotice(__('<strong style="font-size:16px">A Configured Export Requires the User Export Add-On</strong><p>Your User exports will not be able to run until you install the User Export Add-On. That add-on is available from <a href="https://wordpress.org/plugins/export-wp-users-xml-csv/" target="_blank">wordpress.org</a>.</p>', PMXE_Plugin::LANGUAGE_DOMAIN), 'wpae_user_addon_not_installed_notice');
+            }
+
+            if (!$addons_not_included && $this->addons->wooCommerceExportsExistAndAddonNotInstalled() && current_user_can('manage_options') && \class_exists('WooCommerce')) {
+                $this->showDismissibleNotice(__('<strong style="font-size:16px">A Configured Export Requires the WooCommerce Export Add-On Pro</strong><p>Your Products, Orders, and Coupons exports will not be able to run until you install the WooCommerce Export Add-On Pro. That add-on is available to those who were using WP All Export Free before this requirement.</p>', PMXE_Plugin::LANGUAGE_DOMAIN)
+                    . '<p><a class="button button-primary" href="https://wpallimport.com/portal/downloads" target="_blank">' . __('Download Add-On', PMXE_Plugin::LANGUAGE_DOMAIN) . '</a></p>', 'wpae_woocommerce_addon_not_installed_notice');
+            }
+
+            if (!$addons_not_included && $this->addons->acfExportsExistAndNotInstalled() && current_user_can('manage_options')) {
+                $this->showDismissibleNotice(__('<strong style="font-size:16px">A Configured Export Requires the ACF Export Add-On Pro</strong><p>Exports that contain ACF fields will not be able to run until you install the ACF Export Add-On Pro. That add-on is available to those who were using WP All Export Free before this requirement.</p>', PMXE_Plugin::LANGUAGE_DOMAIN)
+                    . '<p><a class="button button-primary" href="https://wpallimport.com/portal/downloads" target="_blank">' . __('Download Add-On', PMXE_Plugin::LANGUAGE_DOMAIN) . '</a></p>', 'wpae_acf_addon_not_installed_notice');
+            }
 
 			self::$session = new PMXE_Handler();						
 
@@ -429,11 +473,42 @@ else {
                                     $cpt = array($cpt);
                                 }
 
+                                if(isset($export->options['export_type']) && $export->options['export_type'] === 'advanced') {
+
+                                    if(!XmlExportEngine::get_addons_service()->isWooCommerceAddonActive() && strpos($export->options['wp_query'], 'product') !== false && \class_exists('WooCommerce')) {
+                                        die(\__('The WooCommerce Export Add-On Pro is required to run this export. If you already own it, you can download the add-on here: <a href="http://www.wpallimport.com/portal/downloads" target="_blank">http://www.wpallimport.com/portal/downloads</a>', \PMXE_Plugin::LANGUAGE_DOMAIN));
+                                    }
+                                    else if( (!XmlExportEngine::get_addons_service()->isWooCommerceAddonActive() || !XmlExportEngine::get_addons_service()->isWooCommerceOrderAddonActive() ) && strpos($export->options['wp_query'], 'shop_order') !== false) {
+                                        die(\__('The WooCommerce Export Add-On Pro is required to run this export. If you already own it, you can download the add-on here: <a href="http://www.wpallimport.com/portal/downloads" target="_blank">http://www.wpallimport.com/portal/downloads</a>', \PMXE_Plugin::LANGUAGE_DOMAIN));
+                                    }
+                                    else if(!XmlExportEngine::get_addons_service()->isWooCommerceAddonActive() && strpos($export->options['wp_query'], 'shop_coupon') !== false) {
+                                        die(\__('The WooCommerce Export Add-On Pro is required to run this export. If you already own it, you can download the add-on here: <a href="http://www.wpallimport.com/portal/downloads" target="_blank">http://www.wpallimport.com/portal/downloads</a>', \PMXE_Plugin::LANGUAGE_DOMAIN));
+                                    }
+                                }
+
                                 if (
                                     ((in_array('users', $cpt) || in_array('shop_customer', $cpt)) && !$addons->isUserAddonActive()) ||
                                     ($export->options['export_type'] == 'advanced' && $export->options['wp_query_selector'] == 'wp_user_query' && !$addons->isUserAddonActive())
                                 ) {
                                     die(\__('The User Export Add-On Pro is required to run this export. You can download the add-on here: <a href="http://www.wpallimport.com/portal/" target="_blank">http://www.wpallimport.com/portal/</a>', \PMXE_Plugin::LANGUAGE_DOMAIN));
+                                }
+
+                                if (
+		                            (
+			                            (
+				                            ( in_array( 'product', $cpt ) && \class_exists('WooCommerce') && ! XmlExportEngine::get_addons_service()->isWooCommerceProductAddonActive() ) ||
+				                            ( in_array( 'shop_order', $cpt ) && ! XmlExportEngine::get_addons_service()->isWooCommerceOrderAddonActive() ) ||
+				                            in_array( 'shop_review', $cpt ) || 
+                                            in_array( 'shop_coupon', $cpt ) 
+                                        ) && ! $addons->isWooCommerceAddonActive() 
+                                    ) ||
+		                            ( $export->options['export_type'] == 'advanced' && $export->options['wp_query_selector'] == 'wp_user_query' && ! $addons->isUserAddonActive() )
+	                            ) {
+		                            die( \__( 'The WooCommerce Export Add-On Pro is required to run this export. You can download the add-on here: <a href="http://www.wpallimport.com/portal/" target="_blank">http://www.wpallimport.com/portal/</a>', \PMXE_Plugin::LANGUAGE_DOMAIN ) );
+	                            }
+
+                                if(in_array('acf', $export->options['cc_type']) && !$addons->isAcfAddonActive()) {
+                                    die(\__('The ACF Export Add-On Pro is required to run this export. You can download the add-on here: <a href="http://www.wpallimport.com/portal/" target="_blank">http://www.wpallimport.com/portal/</a>', \PMXE_Plugin::LANGUAGE_DOMAIN));
                                 }
                             }
 
@@ -494,6 +569,7 @@ else {
 			if ('' === $page) {				
 				if ( ! is_null(self::$buffer)) {
 					echo '<div class="wrap">';
+					// Contents are sanitized at a lower level
 					echo self::$buffer;
 					do_action('wpallexport_action_after');
 					echo '</div>';
@@ -682,9 +758,20 @@ else {
 		public function fix_db_schema(){
 
 			global $wpdb;
-			$installed_ver = get_option( "wp_all_export_db_version" );
+
+			$db_version_old = get_option('wp_all_export_db_version');
+            $installed_ver = get_option('wp_all_export_free_db_version');
+
+            // We leave the old option so if it doesn't exist then this was installed after the export addons release.
+            // If it does exist we make sure it's not a Pro version.
+            if(!$db_version_old || version_compare($db_version_old, '1.2.10') == 1) {
+                update_option("wp_all_export_free_addons_not_included", true);
+            }
 
 			if ( $installed_ver == PMXE_VERSION ) return true;
+
+            // Declare variable to avoid nuisance notices when charset and collate aren't set.
+            $charset_collate = '';
 
 			if ( ! empty($wpdb->charset))
 				$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
@@ -738,7 +825,7 @@ else {
 				$wpdb->query("ALTER TABLE {$table} ADD `export_post_type` TEXT NOT NULL DEFAULT '';");
 			}
 
-			update_option( "wp_all_export_db_version", PMXE_VERSION );
+			update_option( "wp_all_export_free_db_version", PMXE_VERSION );
 		}
 
 		/**
@@ -875,22 +962,33 @@ else {
                 'scheduling_run_on' => 'weekly',
                 'scheduling_monthly_day' => '',
                 'scheduling_times' => array(),
-                'scheduling_timezone' => 'UTC'
-			);
+                'scheduling_timezone' => 'UTC',
+                'sub_post_type_to_export' => ''
+
+            );
 		}		
 
 		public static function is_ajax(){
 			return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') ? true : false ;
 		}
 
-        public static function encode( $value ){
-            return base64_encode(md5(AUTH_SALT) . $value . md5(md5(AUTH_SALT)));
+        /**
+         * @param $value
+         * @return string
+         */
+        public static function encode($value){
+            $salt = defined('AUTH_SALT') ? AUTH_SALT : wp_salt();
+            return base64_encode(md5($salt) . $value . md5(md5($salt)));
         }
 
-        public static function decode( $encoded ){
-            return preg_match('/^[a-f0-9]{32}$/', $encoded) ? $encoded : str_replace(array(md5(AUTH_SALT), md5(md5(AUTH_SALT))), '', base64_decode($encoded));
+        /**
+         * @param $encoded
+         * @return mixed
+         */
+        public static function decode($encoded){
+            $salt = defined('AUTH_SALT') ? AUTH_SALT : wp_salt();
+            return preg_match('/^[a-f0-9]{32}$/', $encoded) ? $encoded : str_replace(array(md5($salt), md5(md5($salt))), '', base64_decode($encoded));
         }
-
 
         /**
          * Replace last occurence of string

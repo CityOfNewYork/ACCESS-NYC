@@ -5,22 +5,20 @@
 By 
 [Jared Novack](https://github.com/jarednova) ([@jarednova](https://twitter.com/jarednova)), 
 [Lukas Gächter](https://github.com/gchtr) ([@lgaechter](https://twitter.com/lgaechter)), 
-[Pascal Knecht](https://github.com/pascalknecht) ([@pascalknecht](https://twitter.com/revenwo)), 
-[Maciej Palmowski](https://github.com/palmiak) ([@palmiak_fp](https://twitter.com/palmiak_fp)),
 [Coby Tamayo](https://github.com/acobster) ([@cobytamayo](https://keybase.io/acobster)),
+[Maciej Palmowski](https://github.com/palmiak) ([@palmiak_fp](https://twitter.com/palmiak_fp)),
+[Nicolas Lemoine](https://github.com/nlemoine) ([@nlemoine](https://niconico.fr/))
 [Upstatement](https://twitter.com/upstatement) and [hundreds of other GitHub contributors](https://github.com/timber/timber/graphs/contributors)
 
-[![Build Status](https://img.shields.io/travis/timber/timber/master.svg?style=flat-square)](https://travis-ci.com/github/timber/timber)
+[![Build Status](https://img.shields.io/travis/timber/timber/master?style=flat-square)](https://app.travis-ci.com/github/timber/timber/branches)
 [![Coverage Status](https://img.shields.io/coveralls/timber/timber.svg?style=flat-square)](https://coveralls.io/github/timber/timber)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/timber/timber.svg?style=flat-square)](https://scrutinizer-ci.com/g/timber/timber/?branch=master)
 [![Latest Stable Version](https://img.shields.io/packagist/v/timber/timber.svg?style=flat-square)](https://packagist.org/packages/timber/timber)
 [![WordPress Download Count](https://img.shields.io/wordpress/plugin/dt/timber-library.svg?style=flat-square)](https://wordpress.org/plugins/timber-library/)
-[![Join the chat at https://gitter.im/timber/timber](https://img.shields.io/gitter/room/timber/timber.svg?style=flat-square)](https://gitter.im/timber/timber?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![WordPress Rating](https://img.shields.io/wordpress/plugin/r/timber-library.svg?style=flat-square)](https://wordpress.org/support/plugin/timber-library/reviews/)
 
-
 ### Because WordPress is awesome, but the_loop isn't
-Timber helps you create fully-customized WordPress themes faster with more sustainable code. With Timber, you write your HTML using the [Twig Template Engine](http://twig.sensiolabs.org/) separate from your PHP files.
+Timber helps you create fully-customized WordPress themes faster with more sustainable code. With Timber, you write your HTML using the [Twig Template Engine](https://twig.symfony.com/) separate from your PHP files.
 
 This cleans up your theme code so, for example, your PHP file can focus on being the data/logic, while your Twig file can focus 100% on the HTML and display.
 
@@ -93,7 +91,10 @@ Timber is great for any WordPress developer who cares about writing good, mainta
 * [**Timber Debug Bar**](https://github.com/timber/debug-bar-timber) Adds a debug bar panel that will show you which template is in-use and the data sent to your twig file.
 
 #### Related Timber Projects
+* [**Editor for Timber**](https://wordpress.org/plugins/editor-for-timber/) Edit your Twig files from the WordPress admin
 * [**Pine**](https://github.com/azeemhassni/pine) A CLI _installer_ for Timber
+* [**Query Monitor Twig Profile**](https://github.com/NielsdeBlaauw/query-monitor-twig-profile) An add-on for [Query Monitor](https://wordpress.org/plugins/query-monitor/) to see what's going on inside your Twig files (automatically works with Timber!)
+* [**Timber ACF WP Blocks**](https://github.com/palmiak/timber-acf-wp-blocks) Easy ACF Gutenberg blocks creation
 * [**Timber CLI**](https://github.com/nclud/wp-timber-cli) A CLI for Timber
 * [**Timber Commented Include**](https://github.com/djboris88/timber-commented-include) Debug output via HTML comments before and after each include statement in Twig
 * [**Timber Debugger**](https://github.com/djboris88/timber-debugger) Package that provides extra debugging options for Timber
@@ -103,13 +104,15 @@ Timber is great for any WordPress developer who cares about writing good, mainta
 * [**Timber Sugar**](https://github.com/timber/sugar) A catch-all for goodies to use w Timber
 * [**Timber WebLink Extension**](https://github.com/nlemoine/timber-weblink-extension) Provides Twig functions to manage the Link HTTP header needed for Web Linking when using HTTP/2 Server Push as well as Resource Hints
 * [**Timmy**](https://github.com/MINDKomm/Timmy) Advanced image manipulation for Timber
-* [**Timber ACF WP Blocks**](https://github.com/palmiak/timber-acf-wp-blocks) Easy ACF Gutenberg blocks creation
+
+
 
 #### Projects that use Timber
 * [**Branch**](https://github.com/JeyKeu/branch/) Bootstrap 3 + Timber = Branch starter theme!
 * [**Flynt**](https://flyntwp.com/) a component based WordPress starter theme built on Timber and ACF Pro
 * [**Gantry5**](https://wordpress.org/plugins/gantry5/) a framework for theme development
-* [**Seedling**](https://github.com/maxdmyers/seedling) A starter theme using Bootstrap 4
+* [**Hozokit**](https://github.com/csalmeida/hozokit) a component based starter theme
+* [**Seedling**](https://github.com/maxdmyers/seedling) a starter theme using Bootstrap 4
 
 
 #### Helpful Links
@@ -123,8 +126,8 @@ Please post on [StackOverflow under the "Timber" tag](http://stackoverflow.com/q
 #### Should I use it?
 It's MIT-licensed, so please use in personal or commercial work. Just don't re-sell it. Timber is used on [tens of thousands of sites](https://www.upstatement.com/timber/#showcase) (and tons more we don't know about)
 
-#### Contributing
-We love PRs! Read the [Contributor Guidelines](https://github.com/timber/timber/blob/master/CONTRIBUTING.md) for more info.
+#### Contributing & Community
+We love PRs! Read the [Contributor Guidelines](https://github.com/timber/timber/blob/master/CONTRIBUTING.md) for more info. Say hello, share your tips/work, and spread the love on Twitter at [@TimberWP](https://twitter.com/TimberWP).
 
 ## Documentation
 

@@ -1,19 +1,21 @@
 <?php
 if( !defined( 'ABSPATH' ) ) exit();
 ?>
-
-<h3><?php _e( 'Event Log', 'limit-login-attempts-reloaded' ); ?></h3>
-
-<div class="llar-app-log-pagination">
-    <a class="llar-prev-page button disabled" href="#">
-        <span aria-hidden="true">‹</span>
-    </a>
-    <a class="llar-next-page button disabled" href="#">
-        <span aria-hidden="true">›</span>
-    </a>
+<?php
+$app_config = $this->get_custom_app_config();
+?>
+<div class="llar-table-header">
+    <h3><?php _e( 'Event Log', 'limit-login-attempts-reloaded' ); ?></h3>
+	<?php if( !empty( $app_config['key'] ) ): ?>
+        <span class="right-link"><a href="https://my.limitloginattempts.com/logs?key=<?php echo esc_attr( $app_config['key'] ); ?>" target="_blank"><?php _e( 'Full Logs', 'limit-login-attempts-reloaded' ); ?></a>
+        <i class="llar-tooltip" data-text="<?php esc_attr_e( 'All attempts blocked by access rules are hidden by default. You can see the full log at this link.' ); ?>">
+            <span class="dashicons dashicons-editor-help"></span>
+        </i>
+    </span>
+	<?php endif; ?>
 </div>
 
-<div class="llar-table-scroll-wrap">
+<div class="llar-table-scroll-wrap llar-app-log-infinity-scroll">
     <table class="form-table llar-table-app-log">
         <tr>
             <th scope="col"><?php _e( "Time", 'limit-login-attempts-reloaded' ); ?></th>
@@ -35,24 +37,19 @@ if( !defined( 'ABSPATH' ) ) exit();
 		$(document).ready(function () {
 
 			var $log_table = $('.llar-table-app-log'),
-				current_page = 0,
-				page_offsets = [''];
+                $infinity_box = $('.llar-app-log-infinity-scroll'),
+                loading_data = false,
+				page_offset = '',
+                page_limit = 10,
+                total_loaded = 0;
+
+            $infinity_box.on('scroll', function (){
+                if (!loading_data && $infinity_box.get(0).scrollTop + $infinity_box.get(0).clientHeight >= $infinity_box.get(0).scrollHeight - 1) {
+                    load_log_data();
+                }
+            });
 
 			load_log_data();
-
-			$('.llar-app-log-pagination').on('click', '.llar-prev-page:not(.disabled)', function(e){
-				e.preventDefault();
-
-				load_log_data(page_offsets[--current_page]);
-
-				toggle_next_btn(true);
-			});
-
-			$('.llar-app-log-pagination').on('click', '.llar-next-page:not(.disabled)', function(e){
-				e.preventDefault();
-
-				load_log_data(page_offsets[++current_page]);
-			});
 
 			$log_table.on('click', '.js-app-log-action', function (e) {
 				e.preventDefault();
@@ -74,41 +71,29 @@ if( !defined( 'ABSPATH' ) ) exit();
 
 					llar.progressbar.stop();
 
-					console.log(response);
 					if(response.success) {
 
-
+                        if(method === 'lockout/delete') {
+                            $('.llar-table-app-lockouts').trigger('llar:refresh');
+                        }
 					}
 
 				});
 			});
 
-			function toggle_prev_btn(enable) {
-				if(enable) {
+			function load_log_data() {
 
-					$('.llar-app-log-pagination .llar-prev-page').removeClass('disabled');
-				} else {
-
-					$('.llar-app-log-pagination .llar-prev-page').addClass('disabled');
-				}
-			}
-			function toggle_next_btn(enable) {
-				if(enable) {
-
-					$('.llar-app-log-pagination .llar-next-page').removeClass('disabled');
-				} else {
-
-					$('.llar-app-log-pagination .llar-next-page').addClass('disabled');
-				}
-			}
-
-			function load_log_data(offset) {
+			    if(page_offset === false) {
+			        return;
+                }
 
 				llar.progressbar.start();
+				loading_data = true;
 
 				$.post(ajaxurl, {
 					action: 'app_load_log',
-					offset: offset,
+					offset: page_offset,
+                    limit: page_limit,
 					sec: '<?php echo wp_create_nonce( "llar-action" ); ?>'
 				}, function(response){
 
@@ -116,22 +101,23 @@ if( !defined( 'ABSPATH' ) ) exit();
 
 					if(response.success) {
 
-						$log_table.html(response.data.html);
+						$log_table.append(response.data.html);
 
-						if(current_page > 0) {
-							toggle_prev_btn(true);
+                        total_loaded += response.data.total_items;
+
+                        if(response.data.offset) {
+                            page_offset = response.data.offset;
+
+                            if(response.data.total_items < page_limit && total_loaded < page_limit) {
+                                console.log('extra load');
+                                load_log_data();
+                            }
+
 						} else {
-							toggle_prev_btn(false);
+						    page_offset = false;
+                        }
 
-						}
-
-						if(response.data.offset) {
-							page_offsets.push(response.data.offset);
-							toggle_next_btn(true);
-						} else {
-							toggle_next_btn(false);
-						}
-
+                        loading_data = false;
 					}
 
 				});

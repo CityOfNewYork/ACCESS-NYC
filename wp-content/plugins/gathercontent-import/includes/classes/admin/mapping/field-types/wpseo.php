@@ -1,5 +1,6 @@
 <?php
 namespace GatherContent\Importer\Admin\Mapping\Field_Types;
+
 use GatherContent\Importer\Views\View;
 
 class WPSEO extends Base implements Type {
@@ -15,8 +16,8 @@ class WPSEO extends Base implements Type {
 		'text_plain',
 	);
 
-	protected $type_id = 'wp-type-meta--seo';
-	protected $post_types = array();
+	protected $type_id           = 'wp-type-meta--seo';
+	protected $post_types        = array();
 	protected $yoast_field_types = array(
 		'text',
 		'textarea',
@@ -49,8 +50,8 @@ class WPSEO extends Base implements Type {
 	 * @since 3.0.0
 	 */
 	public function __construct( array $post_types ) {
-		$this->post_types = $post_types;
-		$this->seo_options = $this->get_seo_options();
+		$this->post_types   = $post_types;
+		$this->seo_options  = $this->get_seo_options();
 		$this->option_label = __( 'SEO', 'gathercontent-import' );
 
 		add_filter( 'gathercontent_importer_custom_field_keys_blacklist', array( $this, 'remove_wpseo_keys' ) );
@@ -63,12 +64,12 @@ class WPSEO extends Base implements Type {
 
 		global $post;
 
-		if ( !$post ) {
-			$post = (object)array('post_type' => 'post');
+		if ( ! $post ) {
+			$post = (object) array( 'post_type' => 'post' );
 		}
 
-		$advanced_fields = \WPSEO_Meta::get_meta_field_defs( 'advanced' );
-		$filtered_fields = apply_filters( 'wpseo_save_metaboxes', array() );
+		$advanced_fields  = \WPSEO_Meta::get_meta_field_defs( 'advanced' );
+		$filtered_fields  = apply_filters( 'wpseo_save_metaboxes', array() );
 		$universal_fields = array_merge( $advanced_fields, $filtered_fields );
 
 		$options = $this->build_options( $universal_fields, 'all_types', $options );
@@ -106,7 +107,7 @@ class WPSEO extends Base implements Type {
 					? '_yoast_wpseo_focuskw'
 					: '_yoast_wpseo_' . esc_attr( $field_name );
 
-				$this->seo_keys[ $seo_key ] = $seo_key;
+				$this->seo_keys[ $seo_key ]  = $seo_key;
 				$options[ $key ][ $seo_key ] = esc_html( $field['title'] );
 			}
 		}
@@ -115,7 +116,7 @@ class WPSEO extends Base implements Type {
 	}
 
 	protected function initialize_wpseo() {
-		if ( !isset($GLOBALS['wpseo_admin']) ) {
+		if ( ! isset( $GLOBALS['wpseo_admin'] ) ) {
 			wpseo_init();
 			wpseo_admin_init();
 			wpseo_load_textdomain();
@@ -123,11 +124,11 @@ class WPSEO extends Base implements Type {
 
 		$options = \WPSEO_Options::get_all();
 
-		new \WPSEO_Metabox;
+		new \WPSEO_Metabox();
 		\WPSEO_Metabox::translate_meta_boxes();
 
 		if ( $options['opengraph'] === true || $options['twitter'] === true || $options['googleplus'] === true ) {
-			new \WPSEO_Social_Admin;
+			new \WPSEO_Social_Admin();
 			\WPSEO_Social_Admin::translate_meta_boxes();
 		}
 	}
@@ -141,7 +142,7 @@ class WPSEO extends Base implements Type {
 
 	public function underscore_template( View $view ) {
 		$seo_options = $this->seo_options;
-		$all = $seo_options['all_types'];
+		$all         = $seo_options['all_types'];
 		unset( $seo_options['all_types'] );
 		?>
 		<# if ( '<?php $this->e_type_id(); ?>' === data.field_type ) { #>

@@ -1,0 +1,193 @@
+.wpallexport-plugin {
+	.wpallexport-upgrade-notice {
+		text-align: center;
+		padding: 60px 20px 20px 20px;
+
+		h1 {
+			font-size: 32px;
+	    	font-weight: 700;
+		}
+
+		a.custom-close {
+			content: '';
+			height: 12px;
+			width: 12px;
+			position: absolute;
+			background-image: url('../img/upgrade-notice/dismiss.svg');
+			background-repeat: no-repeat;
+			background-size: 12px;
+			top: 25px;
+			right: 35px;
+		}
+
+		.upgrade {
+			h2 {
+				font-size: 20px;
+			    color: #41515F;
+			    font-weight: 400;
+			    width: 70%;
+			    margin: auto;
+			    line-height: 1.2;
+			}
+
+			> .perks {
+				display: flex;
+				justify-content: center;
+				margin: 40px 0;
+
+				> li {
+					padding: 0;
+					list-style-type: none;
+					padding: 0 20px;
+
+					> span {
+						&:before {
+							content: '';
+							display: inline-flex;
+							height: 64px;
+							width: 64px;
+							background-size: 64px 64px;
+							background-repeat: no-repeat;
+							padding-bottom: 15px;
+						}
+
+						display: flex;
+					    flex-direction: column;
+					    justify-content: center;
+					    align-items: center;
+					    font-size: 14px;
+					    font-weight: 900;
+					    color: #02182B;
+					}
+
+					> small {
+						font-size: 14px;
+						color: #41515F;
+						line-height: 1.5;
+					}
+
+					&.guarantee {
+						> span {
+							&:before {
+								background-image: url('../img/upgrade-notice/guarantee.svg');
+							}
+						}
+					}
+
+					&.updates {
+						> span {
+							&:before {
+								background-image: url('../img/upgrade-notice/updates.svg');
+							}
+						}
+					}
+
+					&.support {
+						> span {
+							&:before {
+								background-image: url('../img/upgrade-notice/support.svg');
+							}
+						}
+					}
+
+					&.license {
+						> span {
+							&:before {
+								background-image: url('../img/upgrade-notice/license.svg');
+							}
+						}
+					}
+				}
+			}
+
+			> .features {
+				display: flex;
+				justify-content: center;
+				padding: 35px 0;
+
+				.column {
+				    width: 40%;
+				    display: flex;
+				    flex-direction: column;
+				    align-items: flex-start;
+
+				    &.list {
+					    > span {
+					    	display: flex;
+		    				align-items: center;
+		    				margin: 6px 0;
+		    				font-size: 16px;
+
+					    	&:before {
+								content: '';
+								display: inline-flex;
+								height: 16px;
+								width: 16px;
+					    		background-image: url('../img/upgrade-notice/check.svg');
+					    		background-size: 16px;
+					    		margin-right: 12px;
+					    	}
+					    }
+					}
+
+					&.cta {
+						justify-content: flex-end;
+	    				align-items: center;
+	    				padding-bottom: 10px;
+
+						> span {
+							color: #41515F;
+							font-size: 13px;
+							margin-top: 10px;
+						}
+					}
+				}
+			}
+
+			.trusted {
+				display: block;
+			}
+
+			p.already-have {
+				margin: 0;
+
+				a {
+					color: rgba(65, 81, 95, 0.61);
+					font-size: 13px;
+					cursor: pointer;
+				}
+			}
+
+			.upgrade-button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #fff;
+				background-color: #00B3B6;
+				font-size: 20px;
+				font-weight: 600;
+				border-radius: 7px;
+				width: 100%;
+				height: 64px;
+				border: none;
+			}
+		}
+
+		.install {
+			display: none;
+
+			p {
+				margin-top: 30px;
+				font-size: 16px;
+			}
+
+			a {
+				font-size: 16px;
+			}
+		}
+
+		.wp-pointer-buttons {
+			display: none;
+		}
+	}
+}

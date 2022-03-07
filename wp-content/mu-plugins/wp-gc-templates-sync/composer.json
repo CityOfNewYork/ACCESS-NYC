@@ -1,0 +1,42 @@
+{
+  "name": "nyco/wp-gc-templates-sync",
+  "version": "0.0.2",
+  "type": "wordpress-muplugin",
+  "license": "GPL-3.0+",
+  "description": "A developer plugin for WordPress that saves template mappings created by the Gather Content WordPress integration to local JSON files.",
+  "homepage": "https://github.com/cityofnewyork/nyco-wp-gc-templates-sync",
+  "authors": [
+    {
+      "name": "NYC Opportunity",
+      "email": "products@nycopportunity.nyc.gov",
+      "homepage": "https://nyc.gov/opportunity"
+    }
+  ],
+  "keywords": [
+    "wordpress",
+    "gather-content",
+    "local",
+    "json",
+    "sync"
+  ],
+  "support": {
+    "issues": "https://github.com/cityofnewyork/nyco-wp-gc-templates-sync/issues"
+  },
+  "require": {
+    "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "~3.0"
+  },
+  "scripts": {
+    "lint": [
+      "vendor/bin/phpcs --standard=phpcs.xml --extensions=php --ignore=vendor/ ."
+    ],
+    "fix": [
+      "vendor/bin/phpcbf --standard=phpcs.xml --extensions=php --ignore=vendor/ ."
+    ],
+    "publish": [
+      "git push && git push --tags"
+    ]
+  }
+}

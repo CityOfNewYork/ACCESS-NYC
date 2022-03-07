@@ -2,8 +2,8 @@
 Contributors: ethicalhack3r, xfirefartx, erwanlr
 Tags: wpscan, wpvulndb, security, vulnerability, hack, scan, exploit, secure, alerts
 Requires at least: 3.4
-Tested up to: 5.5.3
-Stable tag: 1.13.2
+Tested up to: 5.8
+Stable tag: 1.15.5
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -12,11 +12,21 @@ WPScan WordPress Security Scanner - Scans your system for security vulnerabiliti
 
 == Description ==
 
-The WPScan WordPress Security Scanner plugin scans your system on a daily basis to find security vulnerabilities listed in the [WPScan WordPress Vulnerability Database](https://wpscan.com/). It shows an icon on the Admin Toolbar with the total number of security vulnerabilities found.
+The WPScan WordPress security plugin is unique in that it uses its own manually curated [WPScan WordPress Vulnerability Database](https://wpscan.com/). The vulnerability database has been around since 2014 and is updated on a daily basis by dedicated WordPress security specialists and the community at large. The database includes more than 21,000 known security vulnerabilities. The plugin uses this database to scan for [WordPress vulnerabilities](https://wpscan.com/wordpresses), [plugin vulnerabilities](https://wpscan.com/plugins) and [theme vulnerabilities](https://wpscan.com/themes), and has the options to schedule automated daily scans and to send email notifications.
 
-The [WPScan WordPress Vulnerability Database](https://wpscan.com/) is a WordPress vulnerability database, which includes WordPress core vulnerabilities, plugin vulnerabilities and theme vulnerabilities. The database is maintained by the WPScan Team, who are 100% focused on WordPress security.
+[youtube https://www.youtube.com/watch?v=Fa3lTIvBx10]
 
-To use the WPScan WordPress Security Plugin you will need to use a free API token by [registering here](https://wpscan.com/).
+WPScan has a Free API plan that should be suitable for most WordPress websites, however, also has paid plans for users who may need more API calls. To use the WPScan WordPress Security Plugin you will need to use a free API token by [registering here](https://wpscan.com/).
+
+<strong>The Free plan allows 25 API requests per day. View the different available [API plans](https://wpscan.com/api).</strong>
+
+= How many API requests do you need? =
+
+* Our WordPress scanner makes one API request for the WordPress version, one request per installed plugin and one request per installed theme.
+* On average, a WordPress website has 22 installed plugins.
+* The Free plan should cover around 50% of all WordPress websites.
+
+= Security Checks =
 
 The WPScan WordPress Security Plugin will also check for other security issues, which do not require an API token, such as:
 
@@ -26,10 +36,12 @@ The WPScan WordPress Security Plugin will also check for other security issues, 
 * Check for code repository files
 * Check if default secret keys are used
 * Check for exported database files
+* Weak passwords
+* HTTPS enabled
 
 = What does the plugin do? =
 
-* Scans the WordPress core, plugins and themes for known security vulnerabilities;
+* Scans for known WordPress vulnerabilities, plugin vulnerabilities and theme vulnerabilities;
 * Does additional security checks;
 * Shows an icon on the Admin Toolbar with the total number of security vulnerabilities found;
 * Notifies you by mail when new security vulnerabilities are found.
@@ -47,21 +59,21 @@ The WPScan WordPress Security Plugin will also check for other security issues, 
 3. [Register](https://wpscan.com/register) for a free API token
 4. Save the API token to the WPScan settings page or within the wp-config.php file
 
-== FAQ ==
+== Frequently Asked Questions ==
 
-* How many API calls are made?
+= How many API calls are made? =
 
   There is one API call made for the WordPress version, one call for each installed plugin and one for each theme. By default there is one scan per day. The number of daily scans can be configured when configuring notifications.
 
-* How can I configure the API token in the wp-config.php file?
+= How can I configure the API token in the wp-config.php file? =
 
   To configure your API token in the wp-config.php file, use the following PHP code: `define( 'WPSCAN_API_TOKEN', '$your_api_token' );`
 
-* How do I disable vulnerability scanning altogether?
+= How do I disable vulnerability scanning altogether? =
 
   You can set the following PHP constant in the wp-config.php file to disable scanning; `define( 'WPSCAN_DISABLE_SCANNING_INTERVAL', true );`.
 
-* Why is the "Summary" section and the "Run All" button not showing?
+= Why is the "Summary" section and the "Run All" button not showing? =
 
   The cron job did not run, which can be due to:
     - The DISABLE_WP_CRON constant is set to true in the wp-config.php file, but no system cron has been set (crontab -e).
@@ -78,12 +90,62 @@ The WPScan WordPress Security Plugin will also check for other security issues, 
 
 == Changelog ==
 
-= 1.13.2 =
+= 1.15.5 =
+* Update "Tested up to"
+* Some minor text changes
+* Fix API conflict
 
+= 1.15.4 =
+* Fix images not loading on some hosted websites
+* Update remediation links
+
+= 1.15.3 =
+* Fix fatal error in security checks
+
+= 1.15.2 =
+* Improve HTML and PDF report output
+* Disable security checks setting
+* Some refactoring
+
+= 1.15.1 =
+* Improved email alert text
+* Improved PDF report download layout
+
+= 1.15 =
+* Fix memory_limit when using list_files()
+* Use Action Scheduler
+* Add security check remediation links
+
+= 1.14.4 =
+* Use new free API defaults
+* Remove "Not found in database" message
+
+= 1.14.3 =
+* Don't use HTTP_HOST in db exports check
+
+= 1.14.2 =
+* Revert DISABLE_WP_CRON check
+* Fix HTTPS check
+
+= 1.14.1 =
+* Use the wp_check_password() function to check for weak passwords
+
+= 1.14 =
+* Uses the status endpoint to get account data
+* Fixes the account status not being updated unless a scan is performed when the API token is updated/set
+* Adds vulnerability found hook
+* New security check: Check for weak user passwords
+* New security check: HTTPS
+* Clear plan info if API Token set to null
+* Fixes automated scanning when plugin deactivated and reactivated
+* Fixes cron job not being created when using the WPSCAN_API_TOKEN constant
+* Change default scanning time to the current time
+* Many other small improvements
+
+= 1.13.2 =
 * Fix XML-RPC check false positive
 
 = 1.13.1 =
-
 * Fix potential WP_Error issue in XML-RPC check
 * Add version to client side CSS and JS
 * Work towards PHP WordPress coding standards

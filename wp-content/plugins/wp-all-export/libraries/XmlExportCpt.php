@@ -8,7 +8,7 @@ final class XmlExportCpt
     private static $userData = array();
 
     public static function prepare_data($entry, $exportOptions,
-                                        $xmlWriter = false, &$acfs, &$woo, &$woo_order, $implode_delimiter, $preview, $is_item_data = false, $subID = false)
+                                        $xmlWriter, &$acfs, &$woo, &$woo_order, $implode_delimiter, $preview, $is_item_data = false, $subID = false)
     {
         $variationOptionsFactory = new  VariationOptionsFactory();
         $variationOptions = $variationOptionsFactory->createVariationOptions(PMXE_EDITION);
@@ -18,6 +18,7 @@ final class XmlExportCpt
 
         // associate exported post with import
         if (!$is_item_data and wp_all_export_is_compatible() && isset($exportOptions['is_generate_import']) && isset($exportOptions['import_id'])) {
+
             $postRecord = new PMXI_Post_Record();
             $postRecord->clear();
             $postRecord->getBy(array(
@@ -305,7 +306,9 @@ final class XmlExportCpt
 
                     case 'acf':
 
-                        if (!empty($fieldLabel) and class_exists('acf')) {
+                        if(XmlExportEngine::get_addons_service()->isAcfAddonActive()) {
+
+                            if (!empty($fieldLabel) and class_exists('acf')) {
 
                             global $acf;
 
@@ -334,20 +337,21 @@ final class XmlExportCpt
                                 $field_value = get_field($fieldLabel, $entry->ID);
                             }
 
-                            XmlExportACF::export_acf_field(
-                                $field_value,
-                                $exportOptions,
-                                $ID,
-                                $entry->ID,
-                                $article,
-                                $xmlWriter,
-                                $acfs,
-                                $element_name,
-                                $element_name_ns,
-                                $fieldSnippet,
-                                $field_options['group_id'],
-                                $preview
-                            );
+                                XmlExportACF::export_acf_field(
+                                    $field_value,
+                                    $exportOptions,
+                                    $ID,
+                                    $entry->ID,
+                                    $article,
+                                    $xmlWriter,
+                                    $acfs,
+                                    $element_name,
+                                    $element_name_ns,
+                                    $fieldSnippet,
+                                    $field_options['group_id'],
+                                    $preview
+                                );
+                            }
                         }
 
                         break;
@@ -355,9 +359,13 @@ final class XmlExportCpt
                     case 'woo':
 
                         if ($is_xml_export) {
-                            XmlExportEngine::$woo_export->export_xml($xmlWriter, $entry, $exportOptions, $ID);
+                            if (XmlExportEngine::get_addons_service()->isWooCommerceAddonActive() || XmlExportEngine::get_addons_service()->isWooCommerceProductAddonActive()) {
+                                XmlExportEngine::$woo_export->export_xml($xmlWriter, $entry, $exportOptions, $ID);
+                            }
                         } else {
-                            XmlExportEngine::$woo_export->export_csv($article, $woo, $entry, $exportOptions, $ID);
+                            if (XmlExportEngine::get_addons_service()->isWooCommerceAddonActive() || XmlExportEngine::get_addons_service()->isWooCommerceProductAddonActive()) {
+                                XmlExportEngine::$woo_export->export_csv($article, $woo, $entry, $exportOptions, $ID);
+                            }
                         }
 
                         break;
@@ -365,9 +373,13 @@ final class XmlExportCpt
                     case 'woo_order':
 
                         if ($is_xml_export) {
-                            XmlExportEngine::$woo_order_export->export_xml($xmlWriter, $entry, $exportOptions, $ID, $preview);
+                            if (XmlExportEngine::get_addons_service()->isWooCommerceAddonActive() || XmlExportEngine::get_addons_service()->isWooCommerceOrderAddonActive()) {
+                                XmlExportEngine::$woo_order_export->export_xml($xmlWriter, $entry, $exportOptions, $ID, $preview);
+                            }
                         } else {
-                            XmlExportEngine::$woo_order_export->export_csv($article, $woo_order, $entry, $exportOptions, $ID, $preview);
+                            if (XmlExportEngine::get_addons_service()->isWooCommerceAddonActive() || XmlExportEngine::get_addons_service()->isWooCommerceOrderAddonActive()) {
+                                XmlExportEngine::$woo_order_export->export_csv($article, $woo_order, $entry, $exportOptions, $ID, $preview);
+                            }
                         }
 
                         break;
@@ -613,7 +625,7 @@ final class XmlExportCpt
                 $templateOptions['is_update_status'] = 1;
                 break;
             case 'comment_status':
-                $templateOptions['comment_status_xpath'] = '{'.$element_name.'[1]}';
+                $templateOptions['comment_status_xpath'] = '{' . $element_name . '[1]}';
                 $templateOptions['is_update_comment_status'] = 1;
                 break;
             case 'date':
@@ -715,3 +727,4 @@ final class XmlExportCpt
         return self::$userData[$userId];
     }
 }
+

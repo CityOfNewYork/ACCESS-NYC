@@ -151,7 +151,7 @@ class Debug extends Base {
 		$section = new Form_Section(
 			'debug',
 			__( 'Debug Mode', 'gathercontent-import' ),
-			sprintf( __( 'Debug file location: %s', 'gathercontent-import' ), '<code>wp-content/'. self::$log_file .'</code>' ),
+			sprintf( __( 'Debug file location: %s', 'gathercontent-import' ), '<code>wp-content/' . self::$log_file . '</code>' ),
 			Admin::SLUG
 		);
 
@@ -206,9 +206,9 @@ class Debug extends Base {
 		$id = $field->param( 'id' );
 
 		$args = array(
-			'id' => $id,
-			'name' => $this->admin->option_name .'[debug]['. $id .']',
-			'type' => 'checkbox',
+			'id'    => $id,
+			'name'  => $this->admin->option_name . '[debug][' . $id . ']',
+			'type'  => 'checkbox',
 			'class' => '',
 			'value' => 1,
 		);
@@ -225,7 +225,7 @@ class Debug extends Base {
 	 *
 	 * @since  3.0.1
 	 *
-	 * @param  array  $settings Array of settings.
+	 * @param  array $settings Array of settings.
 	 *
 	 * @return void
 	 */
@@ -241,19 +241,22 @@ class Debug extends Base {
 		}
 
 		$orig_settings = $settings;
-		$settings = wp_parse_args( $settings['debug'], array(
-			'log_importer_requests' => false,
-			'review_stuck_status'   => false,
-			'delete_stuck_status'   => false,
-			'view_gc_log_file'      => false,
-			'delete_gc_log_file'    => false,
-			'disable_debug_mode'    => false,
-		) );
+		$settings      = wp_parse_args(
+			$settings['debug'],
+			array(
+				'log_importer_requests' => false,
+				'review_stuck_status'   => false,
+				'delete_stuck_status'   => false,
+				'view_gc_log_file'      => false,
+				'delete_gc_log_file'    => false,
+				'disable_debug_mode'    => false,
+			)
+		);
 
-		$back_url = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
-		$back_button = $back_url ? '<p><a href="'. $back_url . '">'. __( 'Go Back', 'gathercontent-import' ) .'</a></p>' : '';
+		$back_url    = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
+		$back_button = $back_url ? '<p><a href="' . $back_url . '">' . __( 'Go Back', 'gathercontent-import' ) . '</a></p>' : '';
 
-		if ( $settings['review_stuck_status'] || $settings['delete_stuck_status']  ) {
+		if ( $settings['review_stuck_status'] || $settings['delete_stuck_status'] ) {
 
 			return $this->handle_stuck_statuses( $settings, $back_button );
 
@@ -276,7 +279,7 @@ class Debug extends Base {
 			return $orig_settings;
 		}
 
-		wp_die( '<xmp>'. __LINE__ .') $settings: '. print_r( $settings, true ) .'</xmp>' . $back_button, __( 'Debug Mode', 'gathercontent-import' ) );
+		wp_die( '<xmp>' . __LINE__ . ') $settings: ' . print_r( $settings, true ) . '</xmp>' . $back_button, __( 'Debug Mode', 'gathercontent-import' ) );
 	}
 
 	/**
@@ -292,13 +295,13 @@ class Debug extends Base {
 	public function handle_stuck_statuses( $settings, $back_button ) {
 		global $wpdb;
 
-		$sql = "SELECT `option_name` FROM `$wpdb->options` WHERE `option_name` LIKE ('gc_pull_item_%') OR `option_name` LIKE ('gc_push_item_%');";
+		$sql     = "SELECT `option_name` FROM `$wpdb->options` WHERE `option_name` LIKE ('gc_pull_item_%') OR `option_name` LIKE ('gc_push_item_%');";
 		$options = $wpdb->get_results( $sql );
 
 		if ( ! empty( $options ) ) {
 			foreach ( $options as $key => $option ) {
 				$options[ $key ] = array(
-					'name' => $option->option_name,
+					'name'  => $option->option_name,
 					'value' => get_option( $option->option_name ),
 				);
 			}
@@ -312,7 +315,7 @@ class Debug extends Base {
 			}
 		}
 
-		wp_die( '<xmp>'. __LINE__ .') $options: '. print_r( $options, true ) .'</xmp>' . $back_button, __( 'Debug Mode', 'gathercontent-import' ) );
+		wp_die( '<xmp>' . __LINE__ . ') $options: ' . print_r( $options, true ) . '</xmp>' . $back_button, __( 'Debug Mode', 'gathercontent-import' ) );
 	}
 
 	/**
@@ -348,7 +351,7 @@ class Debug extends Base {
 			wp_die( __( 'GatherContent log file is empty.', 'gathercontent-import' ) . $back_button, __( 'Debug Mode', 'gathercontent-import' ) );
 		}
 
-		die( '<html><body>'. $back_button .'<pre><textarea style="width:100%;height:100%;min-height:1000px;font-size:14px;font-family:monospace;padding:.5em;">'. print_r( $log_contents, true ) .'</textarea></pre></body></html>' );
+		die( '<html><body>' . $back_button . '<pre><textarea style="width:100%;height:100%;min-height:1000px;font-size:14px;font-family:monospace;padding:.5em;">' . print_r( $log_contents, true ) . '</textarea></pre></body></html>' );
 	}
 
 	/**
@@ -378,7 +381,7 @@ class Debug extends Base {
 	 *
 	 * @since  3.0.1
 	 *
-	 * @param  bool  $debug_enabled Enable/Disable
+	 * @param  bool $debug_enabled Enable/Disable
 	 *
 	 * @return bool                 Whether it has been enabled.
 	 */
@@ -412,8 +415,8 @@ class Debug extends Base {
 	 *
 	 * @since  3.0.1
 	 *
-	 * @param  string  $message Message to write to log file.
-	 * @param  string  $title   Describes what is being logged.
+	 * @param  string $message Message to write to log file.
+	 * @param  string $title   Describes what is being logged.
 	 *
 	 * @return void
 	 */
@@ -428,7 +431,7 @@ class Debug extends Base {
 	 *
 	 * @since  3.0.1
 	 *
-	 * @param  string  $message Message to write to log file.
+	 * @param  string $message Message to write to log file.
 	 *
 	 * @return void
 	 */
@@ -437,7 +440,7 @@ class Debug extends Base {
 		if ( $title ) {
 			$message = print_r( $title, 1 ) . ': ' . $message;
 		}
-		error_log( date('Y-m-d H:i:s') .': '. $message ."\r\n", 3, self::$log_path );
+		error_log( date( 'Y-m-d H:i:s' ) . ': ' . $message . "\r\n", 3, self::$log_path );
 	}
 
 }

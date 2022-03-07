@@ -27,6 +27,9 @@ function wp_all_export_get_cpt_name($cpt = array(), $count = 2, $post = array())
                 $cptName = ($count > 1) ? __('Taxonomy Terms', 'wp_all_export_plugin') : __('Taxonomy Term', 'wp_all_export_plugin');
             }
         }
+        elseif (in_array('custom_wpae-gf-addon', $cpt)) {
+            $cptName = ($count > 1) ? __('Entries', 'wp_all_export_plugin') : __('Entry', 'wp_all_export_plugin');
+        }
         else
 		{
 			if (count($cpt) === 1 and in_array('product_variation', $cpt) and class_exists('WooCommerce')){

@@ -1,9 +1,8 @@
 <?php
 namespace GatherContent\Importer\Sync;
+
 use GatherContent\Importer\General;
 use GatherContent\Importer\Debug;
-
-require_once GATHERCONTENT_INC . 'vendor/wp-async-task/wp-async-task.php';
 
 abstract class Async_Base extends \WP_Async_Task {
 
@@ -71,10 +70,9 @@ abstract class Async_Base extends \WP_Async_Task {
 			$request_args['headers']['Authorization'] = 'Basic ' . base64_encode( $username . ':' . $password );
 		}
 
-
 		if ( $debug_requests ) {
 			unset( $request_args['timeout'] );
-			$request_args['blocking'] = true;
+			$request_args['blocking']  = true;
 			$request_args['sslverify'] = false;
 		}
 
@@ -82,11 +80,14 @@ abstract class Async_Base extends \WP_Async_Task {
 
 		if ( $debug_requests ) {
 			Debug::debug_log( $request_args, 'async request args' );
-			Debug::debug_log( array(
-				'code'    => wp_remote_retrieve_response_code( $response ),
-				'headers' => wp_remote_retrieve_headers( $response ),
-				'body'    => wp_remote_retrieve_body( $response ),
-			), 'async request response' );
+			Debug::debug_log(
+				array(
+					'code'    => wp_remote_retrieve_response_code( $response ),
+					'headers' => wp_remote_retrieve_headers( $response ),
+					'body'    => wp_remote_retrieve_body( $response ),
+				),
+				'async request response'
+			);
 		}
 	}
 
@@ -125,7 +126,12 @@ abstract class Async_Base extends \WP_Async_Task {
 		}
 
 		if ( ! General::get_instance()->admin->get_setting( 'log_importer_requests' ) ) {
-			add_filter( 'wp_die_handler', function() { die(); } );
+			add_filter(
+				'wp_die_handler',
+				function() {
+					die();
+				}
+			);
 			wp_die();
 		}
 
@@ -141,7 +147,7 @@ abstract class Async_Base extends \WP_Async_Task {
 	 *
 	 * @return array
 	 */
-	protected function prepare_data( $data ){
+	protected function prepare_data( $data ) {
 		return array( 'mapping_id' => isset( $data[0]->ID ) ? $data[0]->ID : 0 );
 	}
 

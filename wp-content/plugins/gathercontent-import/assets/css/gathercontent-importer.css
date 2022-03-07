@@ -49,6 +49,7 @@
   margin-bottom: .5em; }
 
 .wp-core-ui p .gc-refresh-connection {
+  line-height: 1.3;
   vertical-align: bottom; }
 
 .description.gc-radio-desc {
@@ -266,6 +267,14 @@ ul.gc-radio-desc li, ul.gc-reveal-items-list li {
   padding-left: 32px;
   width: auto;
   line-height: 1.5em; }
+
+.gc-status-warning {
+  color: orange;
+  font-size: 10px;
+  display: none; }
+
+.gc-status-warning.not-current {
+  display: block; }
 
 /*
 	The styles below were ripped from the Media Modal in WordPress 3.5
