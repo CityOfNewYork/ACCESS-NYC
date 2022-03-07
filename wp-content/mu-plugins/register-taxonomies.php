@@ -47,4 +47,35 @@ add_action('init', function() {
       'show_in_rest' => true
     )
   );
+
+  /**
+   * Taxonomy: Agency
+   *
+   * @author NYC Opportunity
+   */
+  register_taxonomy('agency', ['programs', 'location'], array(
+    'label' => __('Agency', 'accessnyctheme'),
+    'labels' => array(
+      'name' => __('Agencies', 'accessnyctheme'),
+      'singular_name' => __('Agency', 'accessnyctheme'),
+    ),
+    'public' => false, // Will determine if shown in archive pages
+    'publicly_queryable' => true,
+    'hierarchical' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'show_in_nav_menus' => true,
+    'query_var' => true,
+    'rewrite' => array(
+      'slug' => 'agencies',
+      'with_front' => true
+    ),
+    'show_admin_column' => false,
+    'show_in_rest' => true,
+    'show_tagcloud' => true,
+    'rest_base' => 'agencies',
+    'rest_controller_class' => 'WP_REST_Terms_Controller',
+    'show_in_quick_edit' => false,
+    'show_in_graphql' => false
+  ));
 });
