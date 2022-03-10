@@ -210,7 +210,8 @@ class Programs extends Timber\Post {
    * program has assigned categories from the agency taxonomy.
    */
   public function setGovernmentAgency() {
-    $agencies = implode(', ',
+    $agencies = implode(
+      ', ',
       array_map(function($term) {
         return $term->name;
       }, $this->terms('agency'))
