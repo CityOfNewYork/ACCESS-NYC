@@ -578,12 +578,12 @@
             'dev_requirement' => false,
         ),
         'wpackagist-plugin/gathercontent-import' => array(
-            'pretty_version' => '3.2.1.4',
-            'version' => '3.2.1.4',
+            'pretty_version' => '3.1.14',
+            'version' => '3.1.14.0',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../wp-content/plugins/gathercontent-import',
             'aliases' => array(),
-            'reference' => 'tags/3.2.1.4',
+            'reference' => 'tags/3.1.14',
             'dev_requirement' => false,
         ),
         'wpackagist-plugin/google-authenticator' => array(
@@ -657,15 +657,6 @@
             'aliases' => array(),
             'reference' => 'tags/1.3.3',
             'dev_requirement' => false,
-        ),
-        'wpackagist-plugin/wp-auto-login' => array(
-            'pretty_version' => '1.0.1',
-            'version' => '1.0.1.0',
-            'type' => 'wordpress-plugin',
-            'install_path' => __DIR__ . '/../../wp-content/plugins/wp-auto-login',
-            'aliases' => array(),
-            'reference' => 'tags/1.0.1',
-            'dev_requirement' => true,
         ),
         'wpackagist-plugin/wp-bitly' => array(
             'pretty_version' => '2.6.0',

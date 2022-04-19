@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af3d74e5ccedeea7b77beedc01fba3a5",
+    "content-hash": "3944e7fcd36aa40eec8e1f36b6b279a7",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -3238,15 +3238,15 @@
         },
         {
             "name": "wpackagist-plugin/gathercontent-import",
-            "version": "3.2.1.4",
+            "version": "3.1.14",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gathercontent-import/",
-                "reference": "tags/3.2.1.4"
+                "reference": "tags/3.1.14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.2.1.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.1.14.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -3689,24 +3689,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/redis-cache/"
-        },
-        {
-            "name": "wpackagist-plugin/wp-auto-login",
-            "version": "1.0.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-auto-login/",
-                "reference": "tags/1.0.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-auto-login.1.0.1.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-auto-login/"
         },
         {
             "name": "wpackagist-plugin/wp-crontrol",

@@ -3606,16 +3606,16 @@
         },
         {
             "name": "wpackagist-plugin/gathercontent-import",
-            "version": "3.2.1.4",
-            "version_normalized": "3.2.1.4",
+            "version": "3.1.14",
+            "version_normalized": "3.1.14.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gathercontent-import/",
-                "reference": "tags/3.2.1.4"
+                "reference": "tags/3.1.14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.2.1.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.1.14.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -3794,27 +3794,6 @@
             "install-path": "../../wp-content/plugins/wp-all-export"
         },
         {
-            "name": "wpackagist-plugin/wp-auto-login",
-            "version": "1.0.1",
-            "version_normalized": "1.0.1.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-auto-login/",
-                "reference": "tags/1.0.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-auto-login.1.0.1.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "installation-source": "dist",
-            "homepage": "https://wordpress.org/plugins/wp-auto-login/",
-            "install-path": "../../wp-content/plugins/wp-auto-login"
-        },
-        {
             "name": "wpackagist-plugin/wp-bitly",
             "version": "2.6.0",
             "version_normalized": "2.6.0.0",
@@ -3928,7 +3907,6 @@
         "whoops/soap",
         "wpackagist-plugin/query-monitor",
         "wpackagist-plugin/redis-cache",
-        "wpackagist-plugin/wp-auto-login",
         "wpackagist-plugin/wp-crontrol"
     ]
 }
