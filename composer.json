@@ -41,7 +41,7 @@
     "wpackagist-plugin/bulk-delete": "*",
     "wpackagist-plugin/duplicate-post": "*",
     "wpackagist-plugin/enable-media-replace": "*",
-    "wpackagist-plugin/gathercontent-import": "*",
+    "wpackagist-plugin/gathercontent-import": "3.1.14",
     "wpackagist-plugin/google-authenticator": "*",
     "wpackagist-plugin/limit-login-attempts-reloaded": "*",
     "wpackagist-plugin/loggedin": "*",
@@ -59,15 +59,14 @@
     "whoops/soap": "*",
     "wpackagist-plugin/query-monitor": "*",
     "wpackagist-plugin/redis-cache": "*",
-    "wpackagist-plugin/wp-auto-login": "*",
     "wpackagist-plugin/wp-crontrol": "*"
   },
   "scripts": {
     "development": [
-      "composer dump-autoload  --ignore-platform-req=php"
+      "composer dump-autoload --ignore-platform-req=php"
     ],
     "production": [
-      "composer dump-autoload --no-dev --optimize  --ignore-platform-req=php"
+      "composer dump-autoload --no-dev --optimize --ignore-platform-req=php"
     ],
     "predeploy": [
       "@development",
