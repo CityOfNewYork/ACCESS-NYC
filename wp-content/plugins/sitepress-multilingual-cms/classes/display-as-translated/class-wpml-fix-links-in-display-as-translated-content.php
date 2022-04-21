@@ -6,7 +6,7 @@
  * Time: 5:07 PM
  */
 
-class WPML_Fix_Links_In_Display_As_Translated_Content implements IWPML_Action {
+class WPML_Fix_Links_In_Display_As_Translated_Content implements IWPML_Action, IWPML_Frontend_Action, IWPML_DIC_Action {
 
 	/** @var SitePress $sitepress */
 	private $sitepress;
@@ -20,18 +20,22 @@ class WPML_Fix_Links_In_Display_As_Translated_Content implements IWPML_Action {
 	}
 
 	public function add_hooks() {
-		add_filter( 'the_content', array(
-			$this,
-			'fix_fallback_links'
-		), WPML_LS_Render::THE_CONTENT_FILTER_PRIORITY - 1 );
+		add_filter(
+			'the_content',
+			array(
+				$this,
+				'fix_fallback_links',
+			),
+			WPML_LS_Render::THE_CONTENT_FILTER_PRIORITY - 1
+		);
 	}
 
 	public function fix_fallback_links( $content ) {
 		if ( stripos( $content, '<a' ) !== false ) {
 			if ( $this->is_display_as_translated_content_type() ) {
 				list( $content, $encoded_ls_links ) = $this->encode_language_switcher_links( $content );
-				$content = $this->translate_link_targets->convert_text( $content );
-				$content = $this->decode_language_switcher_links( $content, $encoded_ls_links );
+				$content                            = $this->translate_link_targets->convert_text( $content );
+				$content                            = $this->decode_language_switcher_links( $content, $encoded_ls_links );
 			}
 		}
 
@@ -68,8 +72,6 @@ class WPML_Fix_Links_In_Display_As_Translated_Content implements IWPML_Action {
 		foreach ( $encoded_ls_links as $encoded => $link ) {
 			$content = str_replace( $encoded, $link, $content );
 		}
-
-		$this->encoded_ls_links = array();
 
 		return $content;
 	}

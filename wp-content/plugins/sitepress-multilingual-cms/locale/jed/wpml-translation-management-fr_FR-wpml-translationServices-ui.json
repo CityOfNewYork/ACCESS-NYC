@@ -1,0 +1,49 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Connect this site to your %s account": [
+            "Connectez ce site à votre compte %s"
+         ],
+         "Error": [
+            "Erreur"
+         ],
+         "« Use a different Translation Service": [
+            "« Utiliser un autre service de traduction"
+         ],
+         "Authenticate": [
+            "Authentifier"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "Consultez <link_to_service /> pour demander un jeton API. Ce jeton permet à WPML de se connecter à <service_name /> pour envoyer et recevoir des travaux."
+         ],
+         "Search": [
+            "Recherche"
+         ],
+         "Settings": [
+            "Paramètres"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "Il n'est actuellement pas possible d’établir une connexion avec un service de traduction quand WPML est configuré pour traduire les contenus de votre site automatiquement. Pour avoir recours à un service de traduction, veuillez modifier le mode de traduction sur la page <LinkToSettingsPage />."
+         ],
+         "Documentation": [
+            "Documentation"
+         ],
+         "Activate": [
+            "Activer"
+         ],
+         "Name": [
+            "Intitulé"
+         ],
+         "Description": [
+            "Description"
+         ],
+         "Ranking": [
+            "Classement"
+         ]
+      }
+   }
+}

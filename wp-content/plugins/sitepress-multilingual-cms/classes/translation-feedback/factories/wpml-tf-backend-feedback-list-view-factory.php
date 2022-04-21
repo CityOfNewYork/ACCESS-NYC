@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_TF_Backend_Feedback_List_View_Factory
+ *
  * @author OnTheGoSystems
  */
 class WPML_TF_Backend_Feedback_List_View_Factory {
@@ -11,7 +12,8 @@ class WPML_TF_Backend_Feedback_List_View_Factory {
 		global $sitepress;
 
 		$template_loader = new WPML_Twig_Template_Loader(
-			array( WPML_PLUGIN_PATH . WPML_TF_Backend_Feedback_List_View::TEMPLATE_FOLDER ) );
+			array( WPML_PLUGIN_PATH . WPML_TF_Backend_Feedback_List_View::TEMPLATE_FOLDER )
+		);
 
 		$feedback_query = new WPML_TF_Feedback_Query(
 			new WPML_TF_Data_Object_Storage( new WPML_TF_Feedback_Post_Convert() ),

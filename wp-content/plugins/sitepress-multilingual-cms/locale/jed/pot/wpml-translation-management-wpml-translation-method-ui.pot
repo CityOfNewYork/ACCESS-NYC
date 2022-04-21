@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/translation/TranslationMethod.js:110
+msgid "Translate Some"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:112
+msgid "I want to choose which content to translate"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:128
+msgid "Your pending automatic translations will be canceled."
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:132
+msgid "Save"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:138
+msgid "Go to the <a>Translation Management Dashboard</a> to translate your content."
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:155
+msgid "Review the translations before publishing"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:156
+msgid "Publish translations and review them later"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:157
+msgid "Publish translations without reviewing"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:162
+msgid "When automatic translation completes:"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:72
+msgid "Translate Everything"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:74
+msgid "WPML will automatically translate content that you publish or update"
+msgstr ""
+
+#: src/js/components/translation/TranslationMethod.js:77
+msgid "How do you want to translate this site?"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:111
+msgid ""
+"Yes, automatically translate all of my <s>existing posts and pages</s> "
+"right now, plus <s>new content</s> as I create it."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:112
+msgid ""
+"Automatically translate all of my <s>existing content</s> right now, plus "
+"<s>new content</s> as I create it."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:117
+msgid "No, only automatically translate <s>new content</s>."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:118
+msgid "Only automatically translate <s>new content</s>."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:122
+msgid "Should WPML automatically translate your existing content?"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:123
+msgid "Which content do you want to translate automatically?"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:126
+msgid "Start translating automatically"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:127
+msgid "Create an account to start translating"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:142
+msgid ""
+"WPML will use credits from your automatic translation account to translate "
+"your site immediately as you publish new content or update existing content."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:157
+msgid ""
+"You can translate existing content from the Translation Management "
+"Dashboard."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:162
+msgid "Cancel"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:46
+msgid ""
+"You must use the <s>Advanced Translation Editor</s> if you want to "
+"translate your content automatically."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translation-method/compontents/TranslationMethodSettings.js:47
+msgid ""
+"You currently use a translation service to translate your content. To "
+"translate your site automatically, first disconnect your translation "
+"service in your <a><s>Translation Management settings</s></a>."
+msgstr ""

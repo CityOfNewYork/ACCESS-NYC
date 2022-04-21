@@ -1,2 +1,2 @@
 <?php
-delete_option('category_children');
+delete_option( 'category_children' );

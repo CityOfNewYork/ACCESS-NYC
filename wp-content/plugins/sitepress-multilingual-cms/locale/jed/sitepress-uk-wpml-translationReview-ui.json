@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Прийнято"
+         ],
+         "Reviewing the next translation...": [
+            "Перевірка наступного перекладу..."
+         ],
+         "Back": [
+            "Назад"
+         ],
+         "Edit Translation": [
+            "Змінити переклад"
+         ],
+         "There was an error in applying translation.": [
+            "Під час застосування перекладу сталася помилка."
+         ],
+         "Please wait, applying translation..": [
+            "Зачекайте, триває застосування перекладу."
+         ],
+         "Publish this translation": [
+            "Опублікувати цей переклад"
+         ],
+         "Accept this translation": [
+            "Прийняти цей переклад"
+         ],
+         "Approved!": [
+            "Затверджено!"
+         ],
+         "Loading the next translation for review...": [
+            "Завантаження наступного перекладу для перевірки..."
+         ]
+      }
+   }
+}

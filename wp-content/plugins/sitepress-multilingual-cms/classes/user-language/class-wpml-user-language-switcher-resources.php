@@ -10,6 +10,9 @@ class WPML_User_Language_Switcher_Resources {
 	public function __construct() {
 	}
 
+	/**
+	 * @param array<string,mixed> $data
+	 */
 	public function enqueue_scripts( $data ) {
 		wp_register_script( 'wpml-user-language', ICL_PLUGIN_URL . '/res/js/wpml-user-language.js', array( 'jquery' ) );
 

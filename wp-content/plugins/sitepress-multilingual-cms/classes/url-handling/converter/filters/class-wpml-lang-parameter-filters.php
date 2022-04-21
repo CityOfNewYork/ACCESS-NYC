@@ -35,7 +35,7 @@ class WPML_Lang_Parameter_Filters {
 		if ( '' !== $last_part && strpos( $url, '?' . $last_part ) === false ) {
 			$url .= '&' . $last_part;
 		}
-		$parts     = explode( '?', $url );
+		$parts = explode( '?', $url );
 
 		if ( isset( $parts[1] ) ) {
 			// Maybe remove duplicated lang param

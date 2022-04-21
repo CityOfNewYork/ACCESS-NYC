@@ -5,15 +5,15 @@ class WPML_ST_Scan_Dir {
 
 	/**
 	 * @param string $folder
-	 * @param array $extensions
-	 * @param bool $single_file
-	 * @param array $ignore_folders
+	 * @param array  $extensions
+	 * @param bool   $single_file
+	 * @param array  $ignore_folders
 	 *
 	 * @return array
 	 */
 	public function scan( $folder, array $extensions = array(), $single_file = false, $ignore_folders = array() ) {
 
-		$files = array();
+		$files         = array();
 		$scanned_files = array();
 
 		if ( is_dir( $folder ) ) {
@@ -27,7 +27,7 @@ class WPML_ST_Scan_Dir {
 
 			if ( in_array( $file->getExtension(), $extensions, true ) ) {
 
-				foreach( $ignore_folders as $ignore_folder ) {
+				foreach ( $ignore_folders as $ignore_folder ) {
 					if ( false !== strpos( $file->getPathname(), str_replace( self::PLACEHOLDERS_ROOT, $folder, $ignore_folder ) ) ) {
 						$ignore_file = true;
 					}

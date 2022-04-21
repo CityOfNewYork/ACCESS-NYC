@@ -1,84 +1,112 @@
 <?php
 
-class WPML_Remove_Pages_Not_In_Current_Language extends WPML_WPDB_And_SP_User {
-	private $posts_from_ids = array();
-	private $posts_in_other_languages = array();
+use WPML\FP\Logic;
+use WPML\FP\Obj;
+use WPML\FP\Fns;
+use WPML\FP\Lst;
+use function WPML\FP\pipe;
+use WPML\API\PostTypes;
+
+class WPML_Remove_Pages_Not_In_Current_Language {
+	/** @var \wpdb */
+	private $wpdb;
+	/** @var \SitePress */
+	private $sitepress;
 
 	/**
-	 * @param array $arr Array of posts to filter
+	 * @param wpdb $wpdb
+	 * @param SitePress $sitepress
+	 */
+	public function __construct( wpdb $wpdb, SitePress $sitepress ) {
+		$this->wpdb      = $wpdb;
+		$this->sitepress = $sitepress;
+	}
+
+
+	/**
+	 * @param array $posts Array of posts to filter
 	 * @param array $get_page_arguments Arguments passed to the `get_pages` function
+	 * @param \WP_Post[]|array[]|int[] $posts Array of posts or post IDs to filter (post IDs are required in tests but it might not be a real case)
 	 *
 	 * @return array
 	 */
-	function filter_pages( $arr, $get_page_arguments ) {
-		$new_arr          = $arr;
+	function filter_pages( $posts, $get_page_arguments ) {
+		$filtered_posts   = $posts;
 		$current_language = $this->sitepress->get_current_language();
 
-		if ( 'all' !== $current_language && 0 !== count( $new_arr ) ) {
-			$cache_key = md5( serialize( $new_arr ) );
-			if ( $this->is_cached( $cache_key ) ) {
-				$new_arr = $this->posts_from_ids[ $current_language ][ $cache_key ];
-			} else {
-				$post_type = $this->find_post_type( $get_page_arguments, $new_arr );
+		if ( 'all' !== $current_language && 0 !== count( $posts ) ) {
+			$post_type = $this->find_post_type( $get_page_arguments, $posts );
 
-				$filtered_pages = array();
-				// grab list of pages NOT in the current language
-				$excl_pages = $this->get_posts_in_other_languages( $post_type, $current_language );
-				foreach ( $new_arr as $page ) {
-					$post_id = false;
-					if ( is_numeric( $page ) ) {
-						$post_id = $page;
-					} elseif ( isset( $page->ID ) ) {
-						$post_id = $page->ID;
-					} elseif ( isset( $page['ID'] ) ) {
-						$post_id = $page['ID'];
-					}
-
-					if ( false !== $post_id && ! in_array( $post_id, $excl_pages, false ) ) {
-						$filtered_pages[] = $page;
-					}
+			if ( Lst::includes( $post_type, PostTypes::getTranslatable() ) ) {
+				$white_list = $this->get_posts_in_current_languages( $post_type, $current_language );
+				if ( $this->sitepress->is_display_as_translated_post_type( $post_type ) ) {
+					$original_posts_in_other_language = $this->get_original_posts_in_other_languages( $post_type, $current_language );
+					$white_list                       = Lst::concat( $white_list, $original_posts_in_other_language );
 				}
-				$new_arr                                                 = $filtered_pages;
-				$this->posts_from_ids[ $current_language ][ $cache_key ] = $new_arr;
+				$get_post_id          = Logic::ifElse( 'is_numeric', Fns::identity(), Obj::prop( 'ID' ) );
+				$filter_not_belonging = Fns::filter( pipe( $get_post_id, Lst::includes( Fns::__, $white_list ) ) );
+				$filtered_posts       = $filter_not_belonging( $posts );
 			}
 		}
 
-		return $new_arr;
+		return $filtered_posts;
 	}
 
-
 	/**
-	 * @param $post_type
-	 * @param $current_language
+	 * @param string $post_type
+	 * @param string $current_language
 	 *
 	 * @return array
 	 */
-	private function get_posts_in_other_languages( $post_type, $current_language ) {
-		if ( isset( $this->posts_in_other_languages[ $current_language ][ $post_type ] ) ) {
-			$excl_pages = $this->posts_in_other_languages[ $current_language ][ $post_type ];
-		} else {
-			$excl_pages_query = "
-								SELECT p.ID FROM {$this->wpdb->posts} p
-								JOIN {$this->wpdb->prefix}icl_translations wpml_translations ON p.ID = wpml_translations.element_id
-								WHERE wpml_translations.element_type=%s AND p.post_type=%s AND wpml_translations.language_code <> %s
-								";
+	private function get_posts_in_current_languages( $post_type, $current_language ) {
+		$query = "
+				SELECT p.ID FROM {$this->wpdb->posts} p
+				JOIN {$this->wpdb->prefix}icl_translations wpml_translations ON p.ID = wpml_translations.element_id
+				WHERE wpml_translations.element_type=%s AND p.post_type=%s AND wpml_translations.language_code = %s
+			";
 
-			$excl_pages_args                                                   = array(
-				'post_' . $post_type,
-				$post_type,
-				$current_language
-			);
-			$excl_pages_prepare                                                = $this->wpdb->prepare( $excl_pages_query, $excl_pages_args );
-			$excl_pages                                                        = $this->wpdb->get_col( $excl_pages_prepare );
-			$this->posts_in_other_languages[ $current_language ][ $post_type ] = $excl_pages;
-		}
+		$args = [ 'post_' . $post_type, $post_type, $current_language ];
 
-		return $excl_pages;
+		return $this->get_post_ids( $this->wpdb->prepare( $query, $args ) );
 	}
 
 	/**
-	 * @param $get_page_arguments
-	 * @param $new_arr
+	 * @param string $post_type
+	 * @param string $current_language
+	 *
+	 * @return array
+	 */
+	private function get_original_posts_in_other_languages( $post_type, $current_language ) {
+		$query = "
+				SELECT p.ID FROM {$this->wpdb->posts} p
+				JOIN {$this->wpdb->prefix}icl_translations wpml_translations ON p.ID = wpml_translations.element_id
+				WHERE wpml_translations.element_type=%s 
+				  AND p.post_type=%s 
+				  AND wpml_translations.language_code <> %s 
+				  AND wpml_translations.source_language_code IS NULL
+				  AND NOT EXISTS (
+				      SELECT translation_id FROM {$this->wpdb->prefix}icl_translations as other_translation
+				      WHERE other_translation.trid = wpml_translations.trid AND other_translation.language_code = %s
+			      )
+			";
+
+		$args = [ 'post_' . $post_type, $post_type, $current_language, $current_language ];
+
+		return $this->get_post_ids( $this->wpdb->prepare( $query, $args ) );
+	}
+
+	/**
+	 * @param string $query
+	 *
+	 * @return int[]
+	 */
+	private function get_post_ids( $query ) {
+		return Fns::map( Fns::unary( 'intval' ), $this->wpdb->get_col( $query ) );
+	}
+
+	/**
+	 * @param array<string,string> $get_page_arguments
+	 * @param array<string,string> $new_arr
 	 *
 	 * @return false|string
 	 */
@@ -115,15 +143,4 @@ class WPML_Remove_Pages_Not_In_Current_Language extends WPML_WPDB_And_SP_User {
 			return $post_type;
 		}
 	}
-
-	/**
-	 * @param $cache_key
-	 *
-	 * @return bool
-	 */
-	private function is_cached( $cache_key ) {
-		$current_language = $this->sitepress->get_current_language();
-		return array_key_exists( $current_language, $this->posts_from_ids ) && array_key_exists( $cache_key, $this->posts_from_ids[ $current_language ] ) && 0 !== count( $this->posts_from_ids[ $current_language ] );
-}
-
 }

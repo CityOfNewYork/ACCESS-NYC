@@ -24,8 +24,8 @@ class Settings extends Base {
 						'key'   => [ 'required' => true ],
 						'data'  => [ 'required' => true ],
 					],
-				]
-			]
+				],
+			],
 		];
 	}
 

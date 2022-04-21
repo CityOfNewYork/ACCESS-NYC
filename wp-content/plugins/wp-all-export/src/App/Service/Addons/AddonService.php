@@ -9,7 +9,6 @@ class AddonService
 		return defined('PMUE_EDITION');
 	}
 
-
     public function isWooCommerceAddonActive() {
         return defined('PMWE_EDITION');
     }

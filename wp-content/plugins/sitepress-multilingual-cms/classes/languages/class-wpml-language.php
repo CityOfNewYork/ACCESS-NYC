@@ -11,8 +11,8 @@ class WPML_Language {
 	private $lang_details;
 
 	public function __construct( SitePress $sitepress, $code ) {
-		$this->sitepress = $sitepress;
-		$this->code = $code;
+		$this->sitepress    = $sitepress;
+		$this->code         = $code;
 		$this->lang_details = $sitepress->get_language_details( $code );
 	}
 

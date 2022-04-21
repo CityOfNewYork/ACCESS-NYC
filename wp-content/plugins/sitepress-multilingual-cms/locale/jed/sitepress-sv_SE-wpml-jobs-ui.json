@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Insufficient funds": [
+            "Otillräckliga medel"
+         ],
+         "Complete": [
+            "Färdig"
+         ],
+         "Pending review": [
+            "Väntar på granskning"
+         ]
+      }
+   }
+}

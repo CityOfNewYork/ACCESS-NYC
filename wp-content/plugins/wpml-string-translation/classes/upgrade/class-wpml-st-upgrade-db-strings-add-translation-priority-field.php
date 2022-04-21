@@ -33,6 +33,8 @@ class WPML_ST_Upgrade_DB_Strings_Add_Translation_Priority_Field implements IWPML
 					";
 
 					$result = false !== $this->wpdb->query( $sql );
+				} else {
+					$result = true;
 				}
 			}
 		}

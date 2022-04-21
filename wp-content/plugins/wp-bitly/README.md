@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/watermelon503/bitly.svg?token=uPXx2RMyux8y6zxLL8f6&branch=main)](https://travis-ci.com/watermelon503/bitly)
 # WordPress Bitly Integration Plugin #
-This plugin is used to integrate WordPress posts with [Bitly](https://bitly.com/) by generating a Bitly shortlink for selected post types. It has been tested up to WordPress version 5.6.
+This plugin is used to integrate WordPress posts with [Bitly](https://bitly.com/) by generating a Bitly shortlink for selected post types. It has been tested up to WordPress version 5.8.
 ##  Installation ##
 Note: you must have a Bitly account in order to use this plugin. Any level of account will work.
 * Either install automatically through the WordPress admin, or download the .zip file, unzip to a folder, and upload the folder to your /wp-content/plugins/ directory. Read Installing Plugins in the WordPress Codex for details.

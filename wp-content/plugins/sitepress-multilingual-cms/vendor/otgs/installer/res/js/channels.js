@@ -10,7 +10,7 @@
             .on('change', '.installer-channel-selector', maybeShowPrompt);
 
         $('.otgs_wp_installer_table')
-            .on('click', '.installer-channel-retry', retryChannelSwitch)
+            .on('click', '.installer-channel-retry', retryChannelSwitch);
 
         $('.installer-switch-confirmation')
             .on('click', '.js-cancel', cancelSwitch)
@@ -64,8 +64,8 @@
             channel: select.val(),
             nonce: select.parent().find('.nonce').val(),
             noprompt: selectorContainer.find('.js-remember').length ?
-                selectorContainer.find('.js-remember').attr('checked') == 'checked' : 0
-        }
+                selectorContainer.find('.js-remember').prop('checked') : 0
+        };
 
         resetUpdateErrors();
         otgs_wp_installer.reset_errors();
@@ -80,7 +80,7 @@
             success: function (ret) {
                 if( ret.status == 'OK'){
                     var tableSelector = '#installer_repo_' +  select.data('repository-id')  + ' .installer-table-wrap';
-                    $(tableSelector).load( location.href + ' ' + tableSelector + ' table.widefat', function(){
+                    $(tableSelector).load( otgs_wp_installer.sanitize(location.href) + ' ' + tableSelector + ' table.widefat', function(){
 
                         var upgradesCount = $(tableSelector).find('tr .installer-red-text').length
                             || select.val() == 1 && $(tableSelector).find('td.installer_version_installed .unstable').length;
@@ -146,7 +146,7 @@
 
         var select = $(this)
             .closest('.otgs_wp_installer_table')
-            .find('.installer-channel-selector')
+            .find('.installer-channel-selector');
 
         if(select.val() > 1 && !hasUpdateErrors()){
 
@@ -251,11 +251,11 @@
     function resetUpdateErrors(){
         updateErrors = [];
     }
-    
+
     function hasUpdateErrors() {
         return updateErrors.length;
     }
 
     $(document).ready( channelSelectorInit );
 
-})(jQuery)
+})(jQuery);

@@ -17,6 +17,9 @@ class Relation {
 
 	use Macroable;
 
+	/**
+	 * @return void
+	 */
 	public static function init() {
 
 		self::macro( 'equals', curryN( 2, function ( $a, $b ) {

@@ -93,7 +93,7 @@ class FieldLink extends Field {
     /**
      * @return int
      */
-    public function getCountValues() {
+    public function getCountValues($parentIndex = false) {
         $parents = $this->getParents();
         $count = 0;
         if (!empty($parents)){

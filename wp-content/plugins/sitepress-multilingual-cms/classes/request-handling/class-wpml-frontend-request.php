@@ -1,19 +1,40 @@
 <?php
 
-/**
- * Class WPML_Frontend_Request
+use WPML\Language\Detection\Frontend;
+
+/*
+ * @deprecated deprecated since version 4.4.0
+ * This class has been replaced by WPML\Language\Detection\Frontend and is going to be removed in the next major release.
+ *
  *
  * @package    wpml-core
  * @subpackage wpml-requests
+ *
  */
 class WPML_Frontend_Request extends WPML_Request {
-	const COOKIE_NAME = 'wp-wpml_current_language';
+	/** @var \WPML\Language\Detection\Frontend */
+	private $frontend;
+
+	public function __construct( $url_converter, $active_languages, $default_language, $cookieLanguage, $wp_api ) {
+		parent::__construct( $url_converter, $active_languages, $default_language, $cookieLanguage );
+		$this->frontend = new Frontend(
+			$url_converter,
+			$active_languages,
+			$default_language,
+			$cookieLanguage,
+			$wp_api
+		);
+	}
+
+	/**
+	 * @deprecated deprecated since version 4.4.0
+	 * @return false|string
+	 */
 	public function get_requested_lang() {
-		return $this->wp_api->is_comments_post_page() ? $this->get_comment_language() : $this->get_request_uri_lang();
+		return $this->frontend->get_requested_lang();
 	}
 
 	protected function get_cookie_name() {
-
-		return self::COOKIE_NAME;
+		return $this->cookieLanguage->getFrontendCookieName();
 	}
 }

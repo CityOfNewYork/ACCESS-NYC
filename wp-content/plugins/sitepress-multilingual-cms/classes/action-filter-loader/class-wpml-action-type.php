@@ -4,6 +4,7 @@ namespace WPML\Action;
 
 /**
  * Class Type
+ *
  * @package WPML\Action
  *
  * Determines the type of action that a class implements. Can be
@@ -15,12 +16,30 @@ namespace WPML\Action;
 
 class Type {
 
-	private $backend_actions = [ 'IWPML_Backend_Action_Loader', 'IWPML_Backend_Action' ];
+	/**
+	 * @var string[] Resolved by \WPML\Action\Type::is
+	 */
+	private $backend_actions  = [ 'IWPML_Backend_Action_Loader', 'IWPML_Backend_Action' ];
+	/**
+	 * @var string[] Resolved by \WPML\Action\Type::is
+	 */
 	private $frontend_actions = [ 'IWPML_Frontend_Action_Loader', 'IWPML_Frontend_Action' ];
-	private $ajax_actions = [ 'IWPML_AJAX_Action_Loader', 'IWPML_AJAX_Action' ];
-	private $rest_actions = [ 'IWPML_REST_Action_Loader', 'IWPML_REST_Action' ];
-	private $cli_actions = [ 'IWPML_CLI_Action_Loader', 'IWPML_CLI_Action' ];
-	private $dic_actions = [ 'IWPML_DIC_Action' ];
+	/**
+	 * @var string[] Resolved by \WPML\Action\Type::is
+	 */
+	private $ajax_actions     = [ 'IWPML_AJAX_Action_Loader', 'IWPML_AJAX_Action' ];
+	/**
+	 * @var string[] Resolved by \WPML\Action\Type::is
+	 */
+	private $rest_actions     = [ 'IWPML_REST_Action_Loader', 'IWPML_REST_Action' ];
+	/**
+	 * @var string[] Resolved by \WPML\Action\Type::is
+	 */
+	private $cli_actions      = [ 'IWPML_CLI_Action_Loader', 'IWPML_CLI_Action' ];
+	/**
+	 * @var string[] Resolved by \WPML\Action\Type::is
+	 */
+	private $dic_actions      = [ 'IWPML_DIC_Action' ];
 
 	/** @var array */
 	private $implementations;
@@ -35,7 +54,7 @@ class Type {
 	}
 
 	/**
-	 * @param $type The type of action 'backend', 'frontend', 'ajax', 'rest', 'cli' or 'dic'
+	 * @param string $type The type of action 'backend', 'frontend', 'ajax', 'rest', 'cli' or 'dic'
 	 *
 	 * @return bool
 	 */

@@ -133,7 +133,7 @@ class WPML_TF_Feedback_Page_Filter {
 	 */
 	public function get_statuses_data() {
 		foreach ( $this->statuses as $status => $data ) {
-			$this->statuses[ $status ]['url'] = $this->get_filter_url( 'status', $status );
+			$this->statuses[ $status ]['url']     = $this->get_filter_url( 'status', $status );
 			$this->statuses[ $status ]['current'] = false;
 
 			if ( $this->is_current_filter( 'status', $status ) ) {
@@ -149,7 +149,7 @@ class WPML_TF_Feedback_Page_Filter {
 	 */
 	public function get_languages_data() {
 		foreach ( $this->languages as $language_code => $data ) {
-			$this->languages[ $language_code ]['url'] = $this->get_filter_url( 'language', $language_code );
+			$this->languages[ $language_code ]['url']     = $this->get_filter_url( 'language', $language_code );
 			$this->languages[ $language_code ]['current'] = false;
 
 			if ( $this->is_current_filter( 'language', $language_code ) ) {
@@ -181,7 +181,7 @@ class WPML_TF_Feedback_Page_Filter {
 		$query_args        = $this->get_url_args();
 
 		if ( array_key_exists( $filter_key, $query_args )
-		     && ( ! $filter_value || $query_args[ $filter_key ] === $filter_value )
+			 && ( ! $filter_value || $query_args[ $filter_key ] === $filter_value )
 		) {
 			$is_current_filter = true;
 		}
@@ -211,7 +211,7 @@ class WPML_TF_Feedback_Page_Filter {
 	private function get_url_args() {
 		if ( ! $this->url_args ) {
 			$this->url_args = array();
-			$url_query  = wpml_parse_url( $this->get_current_url(), PHP_URL_QUERY );
+			$url_query      = wpml_parse_url( $this->get_current_url(), PHP_URL_QUERY );
 			parse_str( $url_query, $this->url_args );
 		}
 

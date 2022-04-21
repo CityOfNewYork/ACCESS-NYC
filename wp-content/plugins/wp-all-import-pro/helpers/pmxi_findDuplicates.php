@@ -4,104 +4,112 @@
  * Find duplicates according to settings
  */
 function pmxi_findDuplicates($articleData, $custom_duplicate_name = '', $custom_duplicate_value = '', $duplicate_indicator = 'title', $indicator_value = '') {
+
     global $wpdb;
 
     if ('custom field' == $duplicate_indicator) {
-
-        $duplicate_ids = array();
-
+        $duplicate_ids = [];
         if (!empty($articleData['post_type'])) {
-
             switch ($articleData['post_type']) {
-
                 case 'taxonomies':
-                    $args = array(
+                    $args = [
                         'hide_empty' => FALSE,
                         // also retrieve terms which are not used yet
-                        'meta_query' => array(
-                            array(
+                        'meta_query' => [
+                            [
                                 'key' => $custom_duplicate_name,
                                 'value' => $custom_duplicate_value,
                                 'compare' => '='
-                            )
-                        )
-                    );
-
+                            ]
+                        ]
+                    ];
                     $terms = get_terms($articleData['taxonomy'], $args);
-
                     if (!empty($terms) && !is_wp_error($terms)) {
                         foreach ($terms as $term) {
                             $duplicate_ids[] = $term->term_id;
                         }
                     }
-
                     break;
-
+                case 'woo_reviews':
+                case 'comments':
+                    $args = [
+                        'hide_empty' => FALSE,
+                        // also retrieve terms which are not used yet
+                        'meta_query' => [
+                            [
+                                'key' => $custom_duplicate_name,
+                                'value' => $custom_duplicate_value,
+                                'compare' => '='
+                            ]
+                        ]
+                    ];
+                    $comments = get_comments($args);
+                    if (!empty($comments) && !is_wp_error($comments)) {
+                        foreach ($comments as $comment) {
+                            $duplicate_ids[] = $comment->comment_ID;
+                        }
+                    }
+                    break;
                 default:
-
-                    $post_types = (class_exists('PMWI_Plugin') and $articleData['post_type'] == 'product') ? array(
+                    $post_types = (class_exists('PMWI_Plugin') and $articleData['post_type'] == 'product') ? [
                         'product',
                         'product_variation'
-                    ) : array($articleData['post_type']);
+                    ] : [$articleData['post_type']];
 
-                    $sql = $wpdb->prepare("SELECT " . $wpdb->posts . ".ID FROM " . $wpdb->posts . " INNER JOIN " . $wpdb->postmeta . " ON ( " . $wpdb->posts . ".ID = " . $wpdb->postmeta . ".post_id ) WHERE 1=1 AND ( ( " . $wpdb->postmeta . ".meta_key = %s AND (" . $wpdb->postmeta . ".meta_value = %s OR " . $wpdb->postmeta . ".meta_value = %s OR REPLACE(REPLACE(REPLACE(" . $wpdb->postmeta . ".meta_value, ' ', ''), '\\t', ''), '\\n', '') = %s) ) ) AND " . $wpdb->posts . ".post_type IN ('" . implode("','", $post_types) . "') AND ((" . $wpdb->posts . ".post_status <> 'trash' AND " . $wpdb->posts . ".post_status <> 'auto-draft')) GROUP BY " . $wpdb->posts . ".ID ORDER BY " . $wpdb->posts . ".ID ASC LIMIT 0, 15", trim($custom_duplicate_name), trim($custom_duplicate_value), htmlspecialchars(trim($custom_duplicate_value)), preg_replace('%[ \\t\\n]%', '', trim($custom_duplicate_value)));
-
-                    $query = $wpdb->get_results($sql);
-
-                    if (!empty($query)) {
-                        foreach ($query as $p) {
-                            $duplicate_ids[] = $p->ID;
-                        }
+                    // We should search for the product ID to update using the native WooCommerce function.
+                    if (trim($custom_duplicate_name) == '_sku' && function_exists('wc_get_product_id_by_sku')) {
+                        $id = wc_get_product_id_by_sku(trim($custom_duplicate_value));
+                    } else {
+                        $id = $wpdb->get_var(
+                            $wpdb->prepare(
+                                "
+                            SELECT posts.ID
+                            FROM {$wpdb->posts} as posts
+                            INNER JOIN {$wpdb->postmeta} AS lookup ON posts.ID = lookup.post_id
+                            WHERE
+                            posts.post_type IN ( '" . implode("','", $post_types) . "' )                            
+                            AND lookup.meta_key = %s
+                            AND lookup.meta_value = %s
+                            LIMIT 1
+                            ",
+                                trim($custom_duplicate_name),
+                                trim($custom_duplicate_value)
+                            )
+                        );
                     }
 
-                    if (empty($duplicate_ids)) {
-
-                        $query = $wpdb->get_results($wpdb->prepare("SELECT " . $wpdb->posts . ".ID FROM " . $wpdb->posts . " INNER JOIN " . $wpdb->postmeta . " ON (" . $wpdb->posts . ".ID = " . $wpdb->postmeta . ".post_id) WHERE 1=1 AND " . $wpdb->posts . ".post_type IN ('" . implode("','", $post_types) . "') AND (" . $wpdb->posts . ".post_status = 'publish' OR " . $wpdb->posts . ".post_status = 'future' OR " . $wpdb->posts . ".post_status = 'draft' OR " . $wpdb->posts . ".post_status = 'pending' OR " . $wpdb->posts . ".post_status = 'trash' OR " . $wpdb->posts . ".post_status = 'private') AND ( (" . $wpdb->postmeta . ".meta_key = '%s' AND (" . $wpdb->postmeta . ".meta_value = '%s' OR " . $wpdb->postmeta . ".meta_value = '%s' OR " . $wpdb->postmeta . ".meta_value = '%s') ) ) GROUP BY " . $wpdb->posts . ".ID ORDER BY " . $wpdb->posts . ".ID ASC LIMIT 0, 20", trim($custom_duplicate_name), trim($custom_duplicate_value), htmlspecialchars(trim($custom_duplicate_value)), esc_attr(trim($custom_duplicate_value))));
-
-                        if (!empty($query)) {
-                            foreach ($query as $p) {
-                                $duplicate_ids[] = $p->ID;
-                            }
-                        }
+                    if ($id) {
+                        $duplicate_ids[] = $id;
                     }
                     break;
             }
+        } else {
+	        $args = [
+		        'meta_query' => [
+			        0 => [
+				        'key' => $custom_duplicate_name,
+				        'value' => $custom_duplicate_value,
+				        'compare' => '='
+			        ]
+		        ]
+	        ];
+	        $user_query = new WP_User_Query($args);
 
+	        if (!empty($user_query->results)) {
+		        foreach ($user_query->results as $user) {
+			        $duplicate_ids[] = $user->ID;
+		        }
+	        } else {
+		        $query = $wpdb->get_results($wpdb->prepare("SELECT SQL_CALC_FOUND_ROWS " . $wpdb->users . ".ID FROM " . $wpdb->users . " INNER JOIN " . $wpdb->usermeta . " ON (" . $wpdb->users . ".ID = " . $wpdb->usermeta . ".user_id) WHERE 1=1 AND ( (" . $wpdb->usermeta . ".meta_key = '%s' AND " . $wpdb->usermeta . ".meta_value = '%s') ) GROUP BY " . $wpdb->users . ".ID ORDER BY " . $wpdb->users . ".ID ASC LIMIT 0, 20", $custom_duplicate_name, $custom_duplicate_value));
+		        if (!empty($query)) {
+			        foreach ($query as $p) {
+				        $duplicate_ids[] = $p->ID;
+			        }
+		        }
+	        }
         }
-        else {
-
-            $args = array(
-                'meta_query' => array(
-                    0 => array(
-                        'key' => $custom_duplicate_name,
-                        'value' => $custom_duplicate_value,
-                        'compare' => '='
-                    )
-                )
-            );
-            $user_query = new WP_User_Query($args);
-
-            if (!empty($user_query->results)) {
-                foreach ($user_query->results as $user) {
-                    $duplicate_ids[] = $user->ID;
-                }
-            }
-            else {
-                $query = $wpdb->get_results($wpdb->prepare("SELECT SQL_CALC_FOUND_ROWS " . $wpdb->users . ".ID FROM " . $wpdb->users . " INNER JOIN " . $wpdb->usermeta . " ON (" . $wpdb->users . ".ID = " . $wpdb->usermeta . ".user_id) WHERE 1=1 AND ( (" . $wpdb->usermeta . ".meta_key = '%s' AND " . $wpdb->usermeta . ".meta_value = '%s') ) GROUP BY " . $wpdb->users . ".ID ORDER BY " . $wpdb->users . ".ID ASC LIMIT 0, 20", $custom_duplicate_name, $custom_duplicate_value));
-
-                if (!empty($query)) {
-                    foreach ($query as $p) {
-                        $duplicate_ids[] = $p->ID;
-                    }
-                }
-            }
-        }
-
         return $duplicate_ids;
-
-    }
-    elseif ('parent' == $duplicate_indicator) {
-
+    } elseif ('parent' == $duplicate_indicator) {
         $field = 'post_title'; // post_title or post_content
         return $wpdb->get_col($wpdb->prepare("
 			SELECT ID FROM " . $wpdb->posts . "
@@ -116,9 +124,7 @@ function pmxi_findDuplicates($articleData, $custom_duplicate_name = '', $custom_
             (!empty($articleData['post_parent'])) ? $articleData['post_parent'] : 0,
             preg_replace('%[ \\t\\n]%', '', $articleData[$field])
         ));
-    }
-    else {
-
+    } else {
         if (!empty($articleData['post_type'])) {
             switch ($articleData['post_type']) {
                 case 'taxonomies':
@@ -143,6 +149,18 @@ function pmxi_findDuplicates($articleData, $custom_duplicate_name = '', $custom_
                         preg_replace('%[ \\t\\n]%', '', $indicator_value)
                     ));
                     break;
+                case 'comments':
+                    $field = 'comment_' . $duplicate_indicator; // post_title or post_content
+                    return $wpdb->get_col($wpdb->prepare("
+            SELECT comment_ID FROM " . $wpdb->comments . "
+            WHERE                
+                AND comment_ID != %s
+                AND REPLACE(REPLACE(REPLACE($field, ' ', ''), '\\t', ''), '\\n', '') = %s
+            ",
+                        isset($articleData['ID']) ? $articleData['ID'] : 0,
+                        preg_replace('%[ \\t\\n]%', '', $articleData[$field])
+                    ));
+                    break;
                 default:
                     $field = 'post_' . $duplicate_indicator; // post_title or post_content
                     return $wpdb->get_col($wpdb->prepare("
@@ -158,14 +176,12 @@ function pmxi_findDuplicates($articleData, $custom_duplicate_name = '', $custom_
                     ));
                     break;
             }
-        }
-        else {
+        } else {
             if ($duplicate_indicator == 'title') {
                 $field = 'user_login';
                 $u = get_user_by('login', $articleData[$field]);
                 return (!empty($u)) ? array($u->ID) : FALSE;
-            }
-            else {
+            } else {
                 $field = 'user_email';
                 $u = get_user_by('email', $articleData[$field]);
                 return (!empty($u)) ? array($u->ID) : FALSE;

@@ -55,6 +55,7 @@
   },
   "require-dev": {
     "filp/whoops": "*",
+    "nyco/wp-login": "^0.0.1",
     "squizlabs/php_codesniffer": "*",
     "whoops/soap": "*",
     "wpackagist-plugin/query-monitor": "*",

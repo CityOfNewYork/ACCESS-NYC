@@ -35,7 +35,7 @@ class WPML_User_Admin_Language {
 	}
 
 	/**
-	 * @param $user_id
+	 * @param int $user_id
 	 *
 	 * @return null|false|string
 	 */

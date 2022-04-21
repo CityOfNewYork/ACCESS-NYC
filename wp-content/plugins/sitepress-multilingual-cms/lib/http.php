@@ -1,1 +1,1 @@
-<?php //legacy ?>
+<?php // legacy

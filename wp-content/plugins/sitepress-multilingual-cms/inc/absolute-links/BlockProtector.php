@@ -2,7 +2,6 @@
 
 namespace WPML\AbsoluteLinks;
 
-
 class BlockProtector {
 
 	private $protectedBlocks = [];
@@ -14,7 +13,9 @@ class BlockProtector {
 
 		$integrationClass = \WPML_Gutenberg_Integration::class;
 
-		$decodeForwardSlashes = function ( $str ) { return str_replace( '\\/', '/', $str ); };
+		$decodeForwardSlashes = function ( $str ) {
+			return str_replace( '\\/', '/', $str );
+		};
 
 		$replaceBlockWithPlaceholder = function ( $text, $block ) {
 			$key                           = md5( $block );

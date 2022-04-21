@@ -1,6 +1,4 @@
 <?php
-require_once WPML_PLUGIN_PATH . '/menu/wpml-language-filter-bar.class.php';
-
 class WPML_Term_Language_Filter extends WPML_Language_Filter_Bar {
 
 	function terms_language_filter( $echo = true ) {
@@ -26,15 +24,15 @@ class WPML_Term_Language_Filter extends WPML_Language_Filter_Bar {
 	private function lang_element( $languages, $code, $taxonomy, $post_type ) {
 		$count = isset( $languages[ $code ] ) ? $languages[ $code ] : 0;
 		if ( $code === $this->current_language ) {
-			list($px, $sx) = $this->strong_lang_span_cover($code, $count);
+			list($px, $sx) = $this->strong_lang_span_cover( $code, $count );
 		} else {
-			$px = '<a href="?taxonomy=' . esc_attr( $taxonomy ) . '&amp;lang=' . esc_attr( $code );
+			$px  = '<a href="?taxonomy=' . esc_attr( $taxonomy ) . '&amp;lang=' . esc_attr( $code );
 			$px .= $post_type !== '' ? '&amp;post_type=' . esc_attr( $post_type ) : '';
 			$px .= '">';
-			$sx = '</a>' . $this->lang_span( $code, $count );
+			$sx  = '</a>' . $this->lang_span( $code, $count );
 		}
 
-		return $px . esc_html( $this->active_languages[ $code ][ 'display_name' ] ) . $sx;
+		return $px . esc_html( $this->active_languages[ $code ]['display_name'] ) . $sx;
 	}
 
 	protected function get_count_data( $taxonomy ) {
@@ -48,6 +46,6 @@ class WPML_Term_Language_Filter extends WPML_Language_Filter_Bar {
 						WHERE tt.taxonomy = %s
 						" . $this->extra_conditions_snippet();
 
-		return $this->wpdb->get_results ( $this->wpdb->prepare ( $res_query, $taxonomy ) );
+		return $this->wpdb->get_results( $this->wpdb->prepare( $res_query, $taxonomy ) );
 	}
 }

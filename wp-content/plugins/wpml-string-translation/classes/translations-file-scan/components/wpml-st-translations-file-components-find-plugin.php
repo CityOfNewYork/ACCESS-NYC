@@ -15,7 +15,7 @@ class WPML_ST_Translations_File_Components_Find_Plugin implements WPML_ST_Transl
 	 */
 	public function __construct( WPML_Debug_BackTrace $debug_backtrace ) {
 		$this->debug_backtrace = $debug_backtrace;
-		$this->plugin_dir = realpath( WP_PLUGIN_DIR );
+		$this->plugin_dir = realpath( WPML_PLUGINS_DIR );
 	}
 
 	public function find_id( $file ) {
@@ -57,9 +57,9 @@ class WPML_ST_Translations_File_Components_Find_Plugin implements WPML_ST_Transl
 	}
 
 	/**
-	 * @param $file_path
+	 * @param string $file_path
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	private function extract_plugin_directory( $file_path ) {
 		$dir = ltrim( str_replace( $this->plugin_dir, '', $file_path ), DIRECTORY_SEPARATOR );

@@ -56,13 +56,18 @@ class WPML_ST_Admin_Option_Translation extends WPML_SP_User {
 
 		foreach ( $new_value as $index => $value ) {
 			if ( is_array( $value ) ) {
-				$name      = "[" . $option_name . "][" . $index . "]";
-				$result    = $this->update_option( $name, $value, $status,
-					$translator_id, $rec_level + 1 );
-				$updated[] = array_sum( explode( ",", $result ) );
+				$name      = '[' . $option_name . '][' . $index . ']';
+				$result    = $this->update_option(
+					$name,
+					$value,
+					$status,
+					$translator_id,
+					$rec_level + 1
+				);
+				$updated[] = array_sum( explode( ',', $result ) );
 			} else {
 				if ( is_string( $index ) ) {
-					$name = ( $rec_level == 0 ? "[" . $option_name . "]" : $option_name ) . $index;
+					$name = ( $rec_level == 0 ? '[' . $option_name . ']' : $option_name ) . $index;
 				} else {
 					$name = $option_name;
 				}
@@ -70,9 +75,12 @@ class WPML_ST_Admin_Option_Translation extends WPML_SP_User {
 				$string_id = $string->string_id();
 				if ( $string_id ) {
 					if ( $this->language !== $string->get_language() ) {
-						$updated[] = $string->set_translation( $this->language,
-							$value, $status,
-							$translator_id );
+						$updated[] = $string->set_translation(
+							$this->language,
+							$value,
+							$status,
+							$translator_id
+						);
 					} else {
 						$string->update_value( $value );
 					}
@@ -80,6 +88,6 @@ class WPML_ST_Admin_Option_Translation extends WPML_SP_User {
 			}
 		}
 
-		return array_sum( $updated ) > 0 ? join( ",", $updated ) : false;
+		return array_sum( $updated ) > 0 ? join( ',', $updated ) : false;
 	}
 }

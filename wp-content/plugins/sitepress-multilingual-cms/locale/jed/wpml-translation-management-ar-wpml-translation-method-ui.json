@@ -1,0 +1,85 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Translate Some": [
+            "ترجمة البعض"
+         ],
+         "I want to choose which content to translate": [
+            "أرغب في تحديد المحتوى المراد ترجمته"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "سيتم إلغاء ترجماتك الآلية المعلقة."
+         ],
+         "Save": [
+            "حفظ"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "اذهب إلى <a>لوحة أدوات إدارة الترجمة</a> لترجمة محتواك."
+         ],
+         "Review the translations before publishing": [
+            "مراجعة الترجمات قبل النشر"
+         ],
+         "Publish translations and review them later": [
+            "نشر الترجمات ومراجعتهم لاحقًا"
+         ],
+         "Publish translations without reviewing": [
+            "نشر الترجمات بدون مراجعة"
+         ],
+         "When automatic translation completes:": [
+            "عند اكتمال الترجمة الآلية:"
+         ],
+         "Translate Everything": [
+            "ترجمة كل شيء"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "سيقوم WPML آليًا بترجمة المحتوى الذي تقوم بنشره أو تحديثه."
+         ],
+         "How do you want to translate this site?": [
+            "كيف ترغب في ترجمة هذا الموقع؟"
+         ],
+         "Yes, automatically translate all of my <s>existing posts and pages</s> right now, plus <s>new content</s> as I create it.": [
+            "نعم، ترجمة جميع <s>مقالاتي وصفحاتي الحالية</s> آليًا على الفور، بالإضافة إلى <s>المحتوى الجديد</s> بمجرد إنشائي له."
+         ],
+         "Automatically translate all of my <s>existing content</s> right now, plus <s>new content</s> as I create it.": [
+            "ترجمة جميع <s>محتوياتي الحالية</s> آليًا على الفور، بالإضافة إلى <s>المحتوى الجديد</s> بمجرد إنشائي له."
+         ],
+         "No, only automatically translate <s>new content</s>.": [
+            "لا، ترجمة <s>المحتوى الجديد</s> فقط آليًا."
+         ],
+         "Only automatically translate <s>new content</s>.": [
+            "ترجمة <s>المحتوى الجديد</s> فقط آليًا."
+         ],
+         "Should WPML automatically translate your existing content?": [
+            "هل يجب على WPML ترجمة محتواك الحالي آليًا؟"
+         ],
+         "Which content do you want to translate automatically?": [
+            "ما هو المحتوى الذي ترغب في ترجمته آليًا؟"
+         ],
+         "Start translating automatically": [
+            "بدء الترجمة الآلية"
+         ],
+         "Create an account to start translating": [
+            "إنشاء حساب لبدء الترجمة"
+         ],
+         "WPML will use credits from your automatic translation account to translate your site immediately as you publish new content or update existing content.": [
+            "سيستهلك WPML نقاط الرصيد من حساب الترجمة الآلية الخاص بك لترجمة موقعك على الفور بمجرد نشرك للمحتوى الجديد أو تحديث المحتوى الحالي."
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "يمكنك ترجمة المحتوى الحالي من خلال لوحة أدوات إدارة الترجمة."
+         ],
+         "Cancel": [
+            "الغ"
+         ],
+         "You must use the <s>Advanced Translation Editor</s> if you want to translate your content automatically.": [
+            "يجب عليك استخدام <s>محرر الترجمة المتقدم</s> إذا كنت ترغب في ترجمة محتواك آليًا."
+         ],
+         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your <a><s>Translation Management settings</s></a>.": [
+            "أنت تستخدم حاليًا خدمة ترجمة من أجل ترجمة محتواك. لترجمة موقعك آليًا، قم أولًا بفصل خدمة الترجمة من خلال <a><s>إعدادات إدارة الترجمة</s></a>."
+         ]
+      }
+   }
+}

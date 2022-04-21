@@ -21,7 +21,7 @@ class WPML_Cookie_Admin_UI {
 	/**
 	 * WPML_Cookie_Admin_UI constructor.
 	 *
-	 * @param WPML_Twig_Template $template_service
+	 * @param WPML_Twig_Template  $template_service
 	 * @param WPML_Cookie_Setting $cookie_setting
 	 */
 	public function __construct( WPML_Twig_Template $template_service, WPML_Cookie_Setting $cookie_setting ) {
@@ -42,7 +42,7 @@ class WPML_Cookie_Admin_UI {
 	 */
 	private function get_model() {
 		return array(
-			'strings' => array(
+			'strings'          => array(
 				'title'       => __( 'Language filtering for AJAX operations', 'sitepress' ),
 				'field_name'  => WPML_Cookie_Setting::COOKIE_SETTING_FIELD,
 				'field_label' => __( 'Store a language cookie to support language filtering for AJAX', 'sitepress' ),

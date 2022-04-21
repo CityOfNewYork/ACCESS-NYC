@@ -27,7 +27,7 @@ class WPML_Download_Localization {
 				/** WordPress Administration File API */
 				require_once ABSPATH . 'wp-admin/includes/file.php';
 			}
-			
+
 			$translation_install_file = get_home_path() . 'wp-admin/includes/translation-install.php';
 
 			if ( ! file_exists( $translation_install_file ) ) {

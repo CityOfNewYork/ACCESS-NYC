@@ -40,6 +40,16 @@ class WPML_Upgrade_Schema {
 
 	/**
 	 * @param string $table_name
+	 * @param string $key_name
+	 *
+	 * @return bool
+	 */
+	public function does_key_exist( $table_name, $key_name ) {
+		return (bool) count( $this->wpdb->get_results( "SHOW KEYS FROM {$this->wpdb->prefix}{$table_name} WHERE key_name = '{$key_name}'" ) );
+	}
+
+	/**
+	 * @param string $table_name
 	 * @param string $column_name
 	 * @param string $attribute_string
 	 *
@@ -69,6 +79,26 @@ class WPML_Upgrade_Schema {
 	 */
 	public function add_index( $table_name, $index_name, $attribute_string ) {
 		return $this->wpdb->query( "ALTER TABLE {$this->wpdb->prefix}{$table_name} ADD INDEX `{$index_name}` {$attribute_string}" );
+	}
+
+	/**
+	 * @param string $table_name
+	 * @param array  $key_columns
+	 *
+	 * @return false|int
+	 */
+	public function add_primary_key( $table_name, $key_columns ) {
+		return $this->wpdb->query( "ALTER TABLE {$this->wpdb->prefix}{$table_name} ADD PRIMARY KEY (`" . implode( '`, `', $key_columns ) . '`)' );
+	}
+
+	/**
+	 * @param string $table_name
+	 * @param string $index_name
+	 *
+	 * @return false|int
+	 */
+	public function drop_index( $table_name, $index_name ) {
+		return $this->wpdb->query( "ALTER TABLE {$this->wpdb->prefix}{$table_name} DROP INDEX `{$index_name}`" );
 	}
 
 	/**
@@ -127,7 +157,7 @@ class WPML_Upgrade_Schema {
 	 */
 	public function get_table_charset( $table_name ) {
 		try {
-			$table_charset = $this->wpdb->get_row(
+			return $this->wpdb->get_var(
 				$this->wpdb->prepare(
 					'SELECT CCSA.character_set_name 
 					FROM information_schema.`TABLES` T, 
@@ -139,13 +169,9 @@ class WPML_Upgrade_Schema {
 					$table_name
 				)
 			);
-		} catch ( Exception $e ) {}
-
-		if ( isset ( $table_charset->character_set_name ) ) {
-			return $table_charset->character_set_name;
+		} catch ( Exception $e ) {
+			return null;
 		}
-
-		return null;
 	}
 
 	/**

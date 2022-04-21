@@ -1,8 +1,8 @@
 === Export any WordPress data to XML/CSV ===
 Contributors: soflyy, wpallimport
 Requires at least: 5.0
-Tested up to: 5.8
-Stable tag: 1.3.3
+Tested up to: 5.9.2
+Stable tag: 1.3.4
 Tags: export, wordpress csv export, wordpress xml export, export woocommerce, migrate, export csv from wordpress, export xml from wordpress, advanced xml export, advanced csv export, export data, bulk csv export, export custom post type, export woocommerce products, export woocommerce orders, migrate woocommerce, csv export, export csv, xml export, export xml, csv exporter, datafeed
 
 Easily export any data from WordPress. Drag & drop to create a completely custom spreadsheet, CSV, or XML file.
@@ -59,7 +59,7 @@ For technical support from the developers, please consider purchasing WP All Exp
 
 = Automatic Scheduling =
 
-A new service from Soflyy, Automatic Scheduling provides a simple interface for setting exports to run on a schedule. The service will make sure that your exports start on time and that they successfully complete without the need to set up individual cron jobs. 
+A new service from Soflyy, Automatic Scheduling provides a simple interface for setting exports to run on a schedule. The service will make sure that your exports start on time and that they successfully complete without the need to set up individual cron jobs.
 
 It costs $9/mo and can be used with WP All Export and WP All Import. You can set up as many exports and imports on as many sites as you like.
 
@@ -90,6 +90,11 @@ Either: -
 * Unzip wp-all-export.zip and upload the contents to /wp-content/plugins/, and then activate the plugin from the Plugins page in WordPress
 
 == Changelog ==
+
+
+= 1.3.4 =
+* improvement: UI updates
+* bug fix: PHP 8 compatibility
 
 = 1.3.3 =
 * new feature: compatibility with the Gravity Forms Export Add-On

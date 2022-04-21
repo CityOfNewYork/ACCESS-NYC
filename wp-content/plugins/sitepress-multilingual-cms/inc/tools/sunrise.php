@@ -1,6 +1,7 @@
 <?php
 /**
  * WPML Sunrise Script - START
+ *
  * @author OnTheGoSystems
  * @version 3.7.0
  *
@@ -12,6 +13,7 @@
 
 /**
  * Class WPML_Sunrise_Lang_In_Domains
+ *
  * @author OnTheGoSystems
  */
 class WPML_Sunrise_Lang_In_Domains {
@@ -69,7 +71,7 @@ class WPML_Sunrise_Lang_In_Domains {
 	private function set_private_properties() {
 		global $wpdb, $table_prefix, $current_blog;
 
-		$this->wpdb = $wpdb;
+		$this->wpdb         = $wpdb;
 		$this->table_prefix = $table_prefix;
 		$this->current_blog = $current_blog;
 
@@ -81,8 +83,8 @@ class WPML_Sunrise_Lang_In_Domains {
 	 * @return array
 	 */
 	private function extract_variables_from_query( $query, $field ) {
-		$variables  = array();
-		$patterns = array(
+		$variables = array();
+		$patterns  = array(
 			'#WHERE\s+' . $field . '\s+IN\s*\(([^\)]+)\)#',
 			'#WHERE\s+' . $field . '\s*=\s*([^\s]+)#',
 			'#AND\s+' . $field . '\s+IN\s*\(([^\)]+)\)#',
@@ -119,7 +121,7 @@ class WPML_Sunrise_Lang_In_Domains {
 	 * @return string
 	 */
 	private function transpose_query_if_one_domain_is_matching( $q, $domains ) {
-		$paths        = $this->extract_variables_from_query( $q, 'path' );
+		$paths = $this->extract_variables_from_query( $q, 'path' );
 
 		// Create as many placeholders as $paths we have.
 		$placeholders = implode( ',', array_fill( 0, sizeof( $paths ), '%s' ) );
@@ -129,10 +131,12 @@ class WPML_Sunrise_Lang_In_Domains {
 		$parameters[] = BLOG_ID_CURRENT_SITE;
 
 		// The ORDER is there to get the default site at the end of the results.
-		$blogs        = $this->wpdb->get_col( $this->wpdb->prepare(
-			"SELECT blog_id FROM {$this->wpdb->blogs} WHERE path IN ($placeholders) ORDER BY blog_id = %d",
-			$parameters
-		) );
+		$blogs = $this->wpdb->get_col(
+			$this->wpdb->prepare(
+				"SELECT blog_id FROM {$this->wpdb->blogs} WHERE path IN ($placeholders) ORDER BY blog_id = %d",
+				$parameters
+			)
+		);
 
 		$found_blog_id = null;
 		foreach ( (array) $blogs as $blog_id ) {
@@ -163,7 +167,7 @@ class WPML_Sunrise_Lang_In_Domains {
 	/**
 	 * @param array $domains
 	 * @param array $wpml_settings
-	 * @param       $blog_id
+	 * @param int   $blog_id
 	 *
 	 * @return mixed
 	 */

@@ -18,7 +18,7 @@ class WPML_Package_ST {
 
 
 	public function get_string_title( $title, $string_details ) {
-		$string_title = $this->get_string_element( $string_details[ 'string_id' ], 'title' );
+		$string_title = $this->get_string_element( $string_details['string_id'], 'title' );
 		if ( $string_title ) {
 			return $string_title;
 		} else {

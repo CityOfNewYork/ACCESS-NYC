@@ -96,7 +96,7 @@ class PMXI_Handler extends PMXI_Session {
 	    		add_option( $session_option, $this->_data, '', 'no' );
 		    	add_option( $session_expiry_option, $this->_session_expiration, '', 'no' );
 	    	} else {
-		    	update_option( $session_option, $this->_data );
+		    	update_option( $session_option, $this->_data, false );
 	    	}
 	    }	    
     }
@@ -120,7 +120,7 @@ class PMXI_Handler extends PMXI_Session {
 		$parser_type = get_option('wpai_parser_type_0');
 
 		if ( ! empty($parser_type) ){
-			update_option('wpai_parser_type_' . $import_id, $parser_type);
+			update_option('wpai_parser_type_' . $import_id, $parser_type, false);
 			delete_option('wpai_parser_type_0');
 		}
     }

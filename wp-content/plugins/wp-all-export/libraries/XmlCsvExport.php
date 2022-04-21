@@ -802,6 +802,9 @@ final Class XmlCsvExport
         foreach ($available_sections as $slug => $section) {
             if (!empty($section['content']) and !empty($available_data[$section['content']])) {
                 foreach ($available_data[$section['content']] as $field) {
+                    if(is_string($post['cpt'])) {
+                        $post['cpt'] = [$post['cpt']];
+                    }
                     if (is_array($field) and (isset($field['auto']) or (!in_array('product', $post['cpt']) || !\class_exists('WooCommerce')))) {
                         $auto_generate['ids'][] = 1;
                         $auto_generate['cc_label'][] = is_array($field) ? $field['label'] : $field;

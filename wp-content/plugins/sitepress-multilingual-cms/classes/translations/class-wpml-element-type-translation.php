@@ -7,17 +7,17 @@
 
 class WPML_Element_Type_Translation {
 
-	/** @var WPDB $wpdb */
+	/** @var wpdb $wpdb */
 	private $wpdb;
 	/** @var  WPML_Cache_Factory $cache_factory */
 	private $cache_factory;
 	/** @var  string $element_type */
 	private $element_type;
 
-	public function __construct( WPDB $wpdb, WPML_Cache_Factory $cache_factory, $element_type ) {
-		$this->wpdb = $wpdb;
+	public function __construct( wpdb $wpdb, WPML_Cache_Factory $cache_factory, $element_type ) {
+		$this->wpdb          = $wpdb;
 		$this->cache_factory = $cache_factory;
-		$this->element_type = $element_type;
+		$this->element_type  = $element_type;
 	}
 
 	function get_element_lang_code( $element_id ) {

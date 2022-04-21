@@ -167,6 +167,9 @@ class Wp_Bitly_Metabox {
         }else{
             if("publish" == $post->post_status){
                 require(WPBITLY_DIR . '/admin/partials/wp-bitly-admin-metabox-regenerate.php');
+            } else {
+                echo '<label class="screen-reader-text">WP Bitly Statistics &amp; Administration</label>';
+                echo '<div class="wpbitly-clicks" style="margin:1em;"><p>Once this post is published, you will see click performance.</p></div>';
             }
         }
 

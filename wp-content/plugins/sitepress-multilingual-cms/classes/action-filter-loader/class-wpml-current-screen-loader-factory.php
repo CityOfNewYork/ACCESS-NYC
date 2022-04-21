@@ -33,7 +33,7 @@ abstract class WPML_Current_Screen_Loader_Factory implements IWPML_Backend_Actio
 
 		foreach ( array( 'id', 'base' ) as $property ) {
 			if ( isset( $current_screen->{$property} )
-			     && preg_match( $this->get_screen_regex(), $current_screen->{$property} )
+				 && preg_match( $this->get_screen_regex(), $current_screen->{$property} )
 			) {
 				return true;
 			}

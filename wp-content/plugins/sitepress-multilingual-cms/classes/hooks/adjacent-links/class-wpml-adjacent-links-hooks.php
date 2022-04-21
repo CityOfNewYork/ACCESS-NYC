@@ -19,8 +19,8 @@ class WPML_Adjacent_Links_Hooks implements IWPML_Action {
 	/**
 	 * WPML_Adjacent_Links_Hooks constructor.
 	 *
-	 * @param SitePress $sitepress
-	 * @param wpdb $wpdb
+	 * @param SitePress                  $sitepress
+	 * @param wpdb                       $wpdb
 	 * @param WPML_Language_Where_Clause $language_where_clause
 	 */
 	public function __construct( SitePress $sitepress, wpdb $wpdb, WPML_Language_Where_Clause $language_where_clause ) {
@@ -70,7 +70,7 @@ class WPML_Adjacent_Links_Hooks implements IWPML_Action {
 	 * @return string
 	 */
 	function get_adjacent_post_where( $where_clause ) {
-		$post_type = $this->get_current_post_type();
+		$post_type    = $this->get_current_post_type();
 		$current_lang = $this->sitepress->get_current_language();
 
 		$cache_key    = md5( wp_json_encode( array( $post_type, $where_clause, $current_lang ) ) );
@@ -90,16 +90,6 @@ class WPML_Adjacent_Links_Hooks implements IWPML_Action {
 
 	/** @return string */
 	private function get_current_post_type() {
-		$post_type = get_query_var( 'post_type' );
-
-		if ( ! $post_type ) {
-			$post_type = get_post_type();
-		}
-
-		if ( ! $post_type ) {
-			$post_type = 'post';
-		}
-
-		return $post_type;
+		return get_post_type() ?: 'post';
 	}
 }

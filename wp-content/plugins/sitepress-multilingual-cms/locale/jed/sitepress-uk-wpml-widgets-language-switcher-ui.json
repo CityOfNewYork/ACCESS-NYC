@@ -1,0 +1,16 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "All": [
+            "Усі"
+         ],
+         "Display on language": [
+            "Відображати мовою"
+         ]
+      }
+   }
+}

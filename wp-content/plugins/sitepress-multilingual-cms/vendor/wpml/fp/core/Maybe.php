@@ -2,26 +2,71 @@
 
 namespace WPML\FP;
 
-use Exception;
 use WPML\Collect\Support\Traits\Macroable;
 use WPML\FP\Functor\Functor;
+use WPML\FP\Functor\Pointed;
 
 /**
  * Class Maybe
  * @package WPML\FP
  * @method static callable|Just|Nothing fromNullable( ...$value ) - Curried :: a → Nothing | Just a
+ *
+ * if $value is null or false it returns a Nothing otherwise returns a Just containing the value
+ *
+ * @method static callable safe( ...$fn ) - Curried :: ( a → b ) → ( a → Maybe b )
+ *
+ * returns a function that when called will run the passed in function and put the result into a Maybe
+ *
+ * @method static callable safeAfter( ...$predicate, ...$fn ) - Curried :: ( b → bool ) → ( a → b ) → ( a → Maybe b )
+ *
+ * returns a function that when called will run the passed in function and pass the result of the function
+ * to the predicate. If the predicate returns true the result will be a Just containing the result of the function.
+ * Otherwise it returns a Nothing if the predicate returns false.
+ *
+ * @method static callable safeBefore( ...$predicate, ...$fn ) - Curried :: ( a → bool ) → ( a → b ) → ( a → Maybe b )
+ *
+ * returns a function that when called will pass the given value to the predicate.
+ * If the predicate returns true the value will be lifted into a Just instance and
+ * the passed in function will then be mapped.
+ * Otherwise it returns a Nothing if the predicate returns false.
+ *
+ * @method static callable|Just just( ...$value ) - Curried :: a → Just a
+ *
+ * returns a Just containing the value.
+ *
+ * @method static callable|Just of( ...$value ) - Curried :: a → Just a
+ *
+ * returns a Just containing the value.
+ *
  */
 class Maybe {
 
 	use Macroable;
 
 	/**
-	 * @param $value
-	 *
-	 * @return Just
+	 * @return void
 	 */
-	public static function just( $value ) {
-		return new Just( $value );
+	public static function init() {
+		self::macro( 'just', Just::of() );
+
+		self::macro( 'of', Just::of() );
+
+		self::macro( 'fromNullable', curryN( 1, function( $value ) {
+			return is_null( $value ) || $value === false ? self::nothing() : self::just( $value );
+		} ) );
+
+		Maybe::macro( 'safe', curryN( 1, function( $fn ) {
+			return pipe( $fn, self::fromNullable() );
+		} ) );
+
+		Maybe::macro( 'safeAfter', curryN( 2, function( $predicate, $fn ) {
+			return pipe( $fn, Logic::ifElse( $predicate, self::just(), [ self::class, 'nothing' ] ) );
+		} ) );
+
+		Maybe::macro( 'safeBefore', curryN( 2, function( $predicate, $fn ) {
+			return pipe( Logic::ifElse( $predicate, self::just(), [ self::class, 'nothing' ] ), Fns::map( $fn ) );
+		} ) );
+
 	}
 
 	/**
@@ -29,15 +74,6 @@ class Maybe {
 	 */
 	public static function nothing() {
 		return new Nothing();
-	}
-
-	/**
-	 * @param $value
-	 *
-	 * @return Just
-	 */
-	public static function of( $value ) {
-		return self::just( $value );
 	}
 
 	/**
@@ -55,18 +91,10 @@ class Maybe {
 	}
 }
 
-/**
- * @param mixed $value
- *
- * @return Just|Nothing
- */
-Maybe::macro( 'fromNullable', curryN( 1, function( $value ) {
-	return is_null( $value ) || $value === false ? Maybe::nothing() : Maybe::just( $value );
-} ) );
-
 
 class Just extends Maybe {
 	use Functor;
+	use Pointed;
 	use Applicative;
 
 	/**
@@ -93,8 +121,18 @@ class Just extends Maybe {
 	 * @return Just|Nothing
 	 */
 	public function filter( $fn = null ) {
-		$fn = $fn ?: FP::identity();
+		$fn = $fn ?: Fns::identity();
 		return Maybe::fromNullable( $fn( $this->value ) ? $this->value : null );
+	}
+
+	/**
+	 * @param callable $fn
+	 *
+	 * @return Just|Nothing
+	 */
+	public function reject( $fn = null ) {
+		$fn = $fn ?: Fns::identity();
+		return $this->filter( Logic::complement( $fn ) );
 	}
 
 	/**
@@ -118,7 +156,7 @@ class Nothing extends Maybe {
 	use ConstApplicative;
 
 	/**
-	 * @param callable
+	 * @param callable $fn
 	 *
 	 * @return Nothing
 	 */
@@ -126,8 +164,12 @@ class Nothing extends Maybe {
 		return $this;
 	}
 
+	/**
+	 * @return void
+	 * @throws \Exception
+	 */
 	public function get() {
-		throw new Exception( "Can't extract the value of Nothing" );
+		throw new \Exception( "Can't extract the value of Nothing" );
 	}
 
 	/**
@@ -153,6 +195,15 @@ class Nothing extends Maybe {
 	 *
 	 * @return Nothing
 	 */
+	public function reject( callable $fn ) {
+		return $this;
+	}
+
+	/**
+	 * @param callable $fn
+	 *
+	 * @return Nothing
+	 */
 	public function chain( callable $fn ) {
 		return $this;
 	}
@@ -165,3 +216,5 @@ class Nothing extends Maybe {
 	}
 
 }
+
+Maybe::init();

@@ -127,7 +127,7 @@ class Wp_Bitly_Settings {
             $wp_bitly_options = $args[0];
 
             $current_post_types = $wp_bitly_options->get_option('post_types');
-            foreach ($post_types as $label) {
+            foreach( $post_types as $label ) {
                 $output .= '<label for "' . $label . '>' . '<input type="checkbox" name="wpbitly-options[post_types][]" value="' . $label . '" ' . checked(in_array($label, $current_post_types), true,
                         false) . '>' . $label . '</label><br>';
             }
@@ -146,15 +146,15 @@ class Wp_Bitly_Settings {
             $wp_bitly_settings = $args[1];
 
             
-            if(!$wp_bitly_options->get_option('oauth_token')){
+            if( !$wp_bitly_options->get_option( 'oauth_token' ) ) {
                 $style = "style = 'display:none;'";       
-            }else{
+            } else {
                 $style = "";
             }
  
-            $output .= "<a id = 'bitly_selections'></a><fieldset class = 'wpbitly_default_org_fieldset' $style ><legend class='screen-reader-text'><span>Default Organization</span></legend>";
+            $output = "<a id = 'bitly_selections'></a><fieldset class = 'wpbitly_default_org_fieldset' $style ><legend class='screen-reader-text'><span>Default Organization</span></legend>";
             $output .= "<select name='wpbitly-options[default_org]' id='wpbitly_default_org' >";
-            $output .= $wp_bitly_settings->get_domain_options($wp_bitly_options->get_option('oauth_token'));
+            $output .= $wp_bitly_settings->get_org_options($wp_bitly_options->get_option('oauth_token'));
             $output .= "</select>";
             $output .= '</fieldset>';
             echo $output;
@@ -239,31 +239,31 @@ class Wp_Bitly_Settings {
     
     public function get_org_options($current_token){
 
-        if(wp_doing_ajax()){
+        if( wp_doing_ajax() ) {
             $token = sanitize_text_field( $_POST['token'] );
-        }else{
+        } else {
             $token = $current_token;
         }
         $output = '';
-        $current_default_org = $this->wp_bitly_options->get_option('default_org');
-        $organization_url = $this->wp_bitly_api->wpbitly_api('organizations');
-        $organization_response = $this->wp_bitly_api->wpbitly_get($organization_url,$token);
-        
-        foreach($organization_response['organizations'] as $org){
-            $guid=$org['guid'];
-            $name=$org['name'];
+        $current_default_org = $this->wp_bitly_options->get_option( 'default_org' );
+        $organization_url = $this->wp_bitly_api->wpbitly_api( 'organizations' );
+        $organization_response = $this->wp_bitly_api->wpbitly_get( $organization_url, $token );
 
-            if($guid == $current_default_org){
+        foreach( (array) $organization_response['organizations'] as $org ) {
+            $guid = $org['guid'];
+            $name = $org['name'];
+
+            if( $guid == $current_default_org ) {
                 $selected = "selected";
-            }else{
+            } else {
                 $selected = "";
             }
             $output .= "<option value = '$guid' $selected >$name</option>";
         }
-        if(wp_doing_ajax()){
+        if( wp_doing_ajax() ) {
             echo $output;
             die();
-        }else{
+        } else {
             return $output;
         }
 }
@@ -281,47 +281,46 @@ class Wp_Bitly_Settings {
 * @return string $output The html options available for the group selector based on the Bitly group id
 */
     
-    public function get_group_options($current_default_org = ''){
+    public function get_group_options( $current_default_org = '' ) {
 
-        if(wp_doing_ajax()){
+        if( wp_doing_ajax() ) {
             $org = sanitize_text_field( $_POST['curr_org'] );
-            
-        }else{
+        } else {
             $org = $current_default_org;
         }
         $output = '';
-        $current_default_group = $this->wp_bitly_options->get_option('default_group');
+        $current_default_group = $this->wp_bitly_options->get_option( 'default_group' );
         //first we need to find the organization guid.
         if($org){
             $current_org_guid = $org;
         }else{
             //get the first result for now.
-            $organization_url = $this->wp_bitly_api->wpbitly_api('organizations');
-            $organization_response = $this->wp_bitly_api->wpbitly_get($organization_url,$this->wp_bitly_options->get_option('oauth_token'));
+            $organization_url = $this->wp_bitly_api->wpbitly_api( 'organizations' );
+            $organization_response = $this->wp_bitly_api->wpbitly_get( $organization_url, $this->wp_bitly_options->get_option( 'oauth_token' ) );
             $current_org_guid = $organization_response['organizations'][0]['guid'];
         }
         //now with the organization guid, get the group
-        $groups_url=sprintf($this->wp_bitly_api->wpbitly_api('groups').'?organization_guid=%1$s',$current_org_guid);
-        $response_groups = $this->wp_bitly_api->wpbitly_get($groups_url,$this->wp_bitly_options->get_option('oauth_token'));
+        $groups_url = sprintf( $this->wp_bitly_api->wpbitly_api( 'groups' ) . '?organization_guid=%1$s', $current_org_guid );
+        $response_groups = $this->wp_bitly_api->wpbitly_get( $groups_url,$this->wp_bitly_options->get_option( 'oauth_token' ) );
 
-        if(count($response_groups['groups'])>1){
+        if( count( (array) $response_groups['groups'] ) > 1 ) {
             $output .= "<option value=''>- select -</option>";
         }
         
-        foreach($response_groups['groups'] as $group){
-            $group_guid=$group['guid'];
-            $group_name=$group['name'];
-            if($current_default_group == $group_guid){
+        foreach( (array) $response_groups['groups'] as $group ) {
+            $group_guid = $group['guid'];
+            $group_name = $group['name'];
+            if( $current_default_group == $group_guid ) {
                 $selected = 'selected';
-            }else{
+            } else {
                 $selected = '';
             }
             $output .= "<option value='$group_guid' $selected >$group_name</option>";
         }
-        if(wp_doing_ajax()){
+        if( wp_doing_ajax() ) {
             echo $output;
             die();
-        }else{
+        } else {
             return $output;
         }
 }
@@ -341,39 +340,39 @@ class Wp_Bitly_Settings {
     
     public function get_domain_options($current_default_group = ''){
 
-        if(wp_doing_ajax()){
+        if( wp_doing_ajax() ) {
             $group_id = sanitize_text_field( $_POST['curr_group'] );
-        }else{
+        } else {
             $group_id = $current_default_group;
         }
-        $current_default_domain = $this->wp_bitly_options->get_option('default_domain');
-        if(!$group_id){
+        $current_default_domain = $this->wp_bitly_options->get_option( 'default_domain' );
+        if( !$group_id ) {
             $output = "<option value=''>bit.ly</option>";
-            if(wp_doing_ajax()){
+            if( wp_doing_ajax() ) {
                 echo $output;
                 die(); 
-            }else{
+            } else {
                 return $output;
             }
         }
-        $group_url=$this->wp_bitly_api->wpbitly_api('groups')."/".$group_id;
-        $response_group = $this->wp_bitly_api->wpbitly_get($group_url,$this->wp_bitly_options->get_option('oauth_token'));
+        $group_url = $this->wp_bitly_api->wpbitly_api( 'groups') . "/" . $group_id;
+        $response_group = $this->wp_bitly_api->wpbitly_get( $group_url, $this->wp_bitly_options->get_option( 'oauth_token' ) );
         $output = "<option value=''>bit.ly</option>";
-        if(count($response_group['bsds'])>0){
-            foreach($response_group['bsds'] as $domain){
-                if($current_default_domain==$domain){
+        if( count( (array) $response_group['bsds'] ) > 0 ) {
+            foreach( $response_group['bsds'] as $domain ) {
+                if( $current_default_domain == $domain ) {
                     $selected = 'selected';
-                }else{
+                } else {
                     $selected = '';
                 }
                 $output .= "<option value='$domain' $selected >$domain</option>";
             }
             
         }
-        if(wp_doing_ajax()){
+        if( wp_doing_ajax() ) {
             echo $output;
             die();
-        }else{
+        } else {
             return $output;
         }
         

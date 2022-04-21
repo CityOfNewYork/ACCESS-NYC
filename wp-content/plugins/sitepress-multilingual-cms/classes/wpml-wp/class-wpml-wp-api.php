@@ -1,9 +1,10 @@
 <?php
 
-use WPML\Core\Twig_LoaderInterface;
 use WPML\Core\Twig_Environment;
 use WPML\Core\Twig_Loader_Filesystem;
 use WPML\Core\Twig_Loader_String;
+use WPML\Core\Twig_LoaderInterface;
+use function WPML\Container\make;
 
 class WPML_WP_API extends WPML_PHP_Functions {
 	/**
@@ -29,7 +30,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * @param string     $option
 	 * @param bool|false $default
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	public function get_option( $option, $default = false ) {
 
@@ -37,15 +38,15 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	}
 
 	public function is_url( $value ) {
-		$regex = "((https?|ftp)\:\/\/)?"; // SCHEME
-		$regex .= "([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?"; // User and Pass
-		$regex .= "([a-z0-9-.]*)\.([a-z]{2,3})"; // Host or IP
-		$regex .= "(\:[0-9]{2,5})?"; // Port
-		$regex .= "(\/([a-z0-9+\$_-]\.?)+)*\/?"; // Path
-		$regex .= "(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?"; // GET Query
-		$regex .= "(#[a-z_.-][a-z0-9+\$_.-]*)?"; // Anchor
+		$regex  = '((https?|ftp)\:\/\/)?'; // SCHEME
+		$regex .= '([a-z0-9+!*(),;?&=$_.-]+(\:[a-z0-9+!*(),;?&=$_.-]+)?@)?'; // User and Pass
+		$regex .= '([a-z0-9-.]*)\.([a-z]{2,3})'; // Host or IP
+		$regex .= '(\:[0-9]{2,5})?'; // Port
+		$regex .= '(\/([a-z0-9+$_-]\.?)+)*\/?'; // Path
+		$regex .= '(\?[a-z+&$_.-][a-z0-9;:@&%=+\/$_.-]*)?'; // GET Query
+		$regex .= '(#[a-z_.-][a-z0-9+$_.-]*)?'; // Anchor
 
-		return preg_match("/^$regex$/", $value);
+		return preg_match( "/^$regex$/", $value );
 	}
 
 	public function get_transient( $transient ) {
@@ -72,15 +73,15 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 *
 	 * @return false|string
 	 */
-	public function get_post_status( $ID = ''  ) {
-		return get_post_status($ID);
+	public function get_post_status( $ID = '' ) {
+		return get_post_status( $ID );
 	}
 
 	/**
 	 * Wrapper for \get_term_link
 	 *
 	 * @param  object|int|string $term
-	 * @param string             $taxonomy
+	 * @param string            $taxonomy
 	 *
 	 * @return string|WP_Error
 	 */
@@ -107,11 +108,11 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	/**
 	 * Wrapper for \add_submenu_page
 	 *
-	 * @param              $parent_slug
-	 * @param              $page_title
-	 * @param              $menu_title
-	 * @param              $capability
-	 * @param              $menu_slug
+	 * @param string       $parent_slug
+	 * @param string       $page_title
+	 * @param string       $menu_title
+	 * @param string       $capability
+	 * @param string       $menu_slug
 	 * @param array|string $function
 	 *
 	 * @return false|string
@@ -122,10 +123,10 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	}
 
 	/**
-	 * @param              $page_title
-	 * @param              $menu_title
-	 * @param              $capability
-	 * @param              $menu_slug
+	 * @param string       $page_title
+	 * @param string       $menu_title
+	 * @param string       $capability
+	 * @param string       $menu_slug
 	 * @param array|string $function
 	 * @param string       $icon_url
 	 * @param null         $position
@@ -279,8 +280,8 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 *
 	 * @return bool
 	 */
-	public function is_page($page = '' ) {
-		return is_page($page);
+	public function is_page( $page = '' ) {
+		return is_page( $page );
 	}
 
 	public function is_paged() {
@@ -292,8 +293,8 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 *
 	 * @return int|string|array $post Optional. Post ID, title, slug, or array of such. Default empty.
 	 */
-	public function is_single($post = '') {
-		return is_single($post);
+	public function is_single( $post = '' ) {
+		return is_single( $post );
 	}
 
 	/**
@@ -318,6 +319,13 @@ class WPML_WP_API extends WPML_PHP_Functions {
 
 	/**
 	 * Wrapper for add_filter
+	 *
+	 * @param string   $tag
+	 * @param callable $function_to_add
+	 * @param int      $priority
+	 * @param int      $accepted_args
+	 *
+	 * @return bool|mixed|true|void
 	 */
 	public function add_filter( $tag, $function_to_add, $priority = 10, $accepted_args = 1 ) {
 
@@ -326,6 +334,12 @@ class WPML_WP_API extends WPML_PHP_Functions {
 
 	/**
 	 * Wrapper for remove_filter
+	 *
+	 * @param string   $tag
+	 * @param callable $function_to_remove
+	 * @param int      $priority
+	 *
+	 * @return bool
 	 */
 	public function remove_filter( $tag, $function_to_remove, $priority = 10 ) {
 
@@ -339,6 +353,12 @@ class WPML_WP_API extends WPML_PHP_Functions {
 		return current_filter();
 	}
 
+	/**
+	 * @param null|string $tab
+	 * @param null|string $hash
+	 *
+	 * @return string
+	 */
 	public function get_tm_url( $tab = null, $hash = null ) {
 		$tm_url = menu_page_url( $this->constant( 'WPML_TM_FOLDER' ) . '/menu/main.php', false );
 
@@ -389,8 +409,8 @@ class WPML_WP_API extends WPML_PHP_Functions {
 		}
 
 		$result = is_admin()
-		          && isset( $_GET['page'] )
-		          && $_GET['page'] == $this->constant( 'WPML_TM_FOLDER' ) . $page_suffix;
+				  && isset( $_GET['page'] )
+				  && $_GET['page'] == $this->constant( 'WPML_TM_FOLDER' ) . $page_suffix;
 
 		if ( $tab ) {
 			if ( $tab == $default_tab && ! isset( $_GET['sm'] ) ) {
@@ -419,10 +439,15 @@ class WPML_WP_API extends WPML_PHP_Functions {
 		return $this->is_core_page( 'troubleshooting.php' );
 	}
 
+	/**
+	 * @param string $page
+	 *
+	 * @return bool
+	 */
 	public function is_core_page( $page = '' ) {
 		$result = is_admin()
-		          && isset( $_GET['page'] )
-		          && stripos( $_GET['page'], $this->constant( 'ICL_PLUGIN_FOLDER' ) . '/menu/' . $page ) !== false;
+				  && isset( $_GET['page'] )
+				  && stripos( $_GET['page'], $this->constant( 'ICL_PLUGIN_FOLDER' ) . '/menu/' . $page ) !== false;
 		return $result;
 	}
 
@@ -431,7 +456,10 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	}
 
 	public function is_front_end() {
-		return ! is_admin() && ! $this->is_ajax() && ! $this->is_cron_job();
+		return ! is_admin() &&
+		       ! $this->is_ajax() &&
+		       ! $this->is_cron_job() &&
+		       ! wpml_is_rest_request();
 	}
 
 	public function is_ajax() {
@@ -514,8 +542,8 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	/**
 	 * Wrapper for \wp_update_term_count
 	 *
-	 * @param  int[]     $terms given by their term_taxonomy_ids
-	 * @param  string    $taxonomy
+	 * @param int[]      $terms given by their term_taxonomy_ids
+	 * @param string     $taxonomy
 	 * @param bool|false $do_deferred
 	 *
 	 * @return bool
@@ -541,10 +569,10 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * Wrapper for \wp_set_object_terms
 	 *
 	 * @param int              $object_id The object to relate to.
-	 * @param array|int|string $terms A single term slug, single term id, or array of either term slugs or ids.
+	 * @param array|int|string $terms     A single term slug, single term id, or array of either term slugs or ids.
 	 *                                    Will replace all existing related terms in this taxonomy.
-	 * @param string           $taxonomy The context in which to relate the term to the object.
-	 * @param bool             $append Optional. If false will delete difference of terms. Default false.
+	 * @param string           $taxonomy  The context in which to relate the term to the object.
+	 * @param bool             $append    Optional. If false will delete difference of terms. Default false.
 	 *
 	 * @return array|WP_Error Affected Term IDs.
 	 */
@@ -587,6 +615,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 
 	/**
 	 * Wrapper for \get_current_user_id
+	 *
 	 * @return int
 	 */
 	public function get_current_user_id() {
@@ -731,8 +760,9 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	}
 
 	public function wp_safe_redirect( $redir_target, $status = 302 ) {
-		wp_safe_redirect( $redir_target, $status );
-		exit;
+		if ( wp_safe_redirect( $redir_target, $status, 'WPML' ) ) {
+			exit;
+		}
 	}
 
 	/**
@@ -828,9 +858,9 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	/**
 	 * Wrapper for wp_get_post_terms
 	 *
-	 * @param int $post_id
+	 * @param int    $post_id
 	 * @param string $taxonomy
-	 * @param array $args
+	 * @param array  $args
 	 *
 	 * @return array|WP_Error
 	 */
@@ -1002,6 +1032,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 
 	/**
 	 * Compare version in their "naked" form
+	 *
 	 * @see \WPML_WP_API::get_naked_version
 	 * @see \WPML_WP_API::version_compare
 	 * @see \version_compare
@@ -1027,26 +1058,26 @@ class WPML_WP_API extends WPML_PHP_Functions {
 
 		$elements = explode( '.', str_replace( '..', '.', preg_replace( '/([^0-9\.]+)/', '.$1.', str_replace( array( '-', '_', '+' ), '.', trim( $version ) ) ) ) );
 
-		$naked_elements = array('0', '0', '0');
+		$naked_elements = array( '0', '0', '0' );
 
 		$elements_count = 0;
 		foreach ( $elements as $element ) {
 			if ( $elements_count === 3 || ! is_numeric( $element ) ) {
 				break;
 			}
-			$naked_elements[$elements_count] = $element;
+			$naked_elements[ $elements_count ] = $element;
 			$elements_count ++;
 		}
 
 		return implode( $naked_elements );
 	}
 
-	public function has_filter($tag, $function_to_check = false) {
+	public function has_filter( $tag, $function_to_check = false ) {
 		return has_filter( $tag, $function_to_check );
 	}
 
 	public function add_action( $tag, $function_to_add, $priority = 10, $accepted_args = 1 ) {
-		return  add_action( $tag, $function_to_add, $priority, $accepted_args );
+		return add_action( $tag, $function_to_add, $priority, $accepted_args );
 	}
 
 	public function get_current_screen() {
@@ -1073,7 +1104,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	}
 
 	public function get_raw_post_data() {
-		$raw_post_data = @file_get_contents( "php://input" );
+		$raw_post_data = @file_get_contents( 'php://input' );
 		if ( ! $raw_post_data && array_key_exists( 'HTTP_RAW_POST_DATA', $GLOBALS ) ) {
 			$raw_post_data = $GLOBALS['HTTP_RAW_POST_DATA'];
 		}
@@ -1117,7 +1148,6 @@ class WPML_WP_API extends WPML_PHP_Functions {
 
 	/**
 	 * Wrapper for $wp_taxonomies global variable
-	 *
 	 */
 	public function get_wp_taxonomies() {
 		global $wp_taxonomies;
@@ -1133,7 +1163,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * @return string
 	 */
 	public function get_category_link( $category_id ) {
-		return get_category_link(  $category_id );
+		return get_category_link( $category_id );
 	}
 
 	/**
@@ -1154,7 +1184,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 *
 	 * @return array
 	 */
-	public function get_backtrace($limit = 0, $provide_object = false, $ignore_args = true) {
+	public function get_backtrace( $limit = 0, $provide_object = false, $ignore_args = true ) {
 		$options = false;
 
 		if ( version_compare( $this->phpversion(), '5.3.6' ) < 0 ) {
@@ -1176,9 +1206,9 @@ class WPML_WP_API extends WPML_PHP_Functions {
 		// phpcs:disable PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection -- It has a version check
 		// phpcs:disable PHPCompatibility.FunctionUse.NewFunctionParameters.debug_backtrace_limitFound -- It has a version check
 		if ( version_compare( $this->phpversion(), '5.4.0' ) >= 0 ) {
-			$debug_backtrace = debug_backtrace( $options, $limit ); //add one item to include the current frame
+			$debug_backtrace = debug_backtrace( $options, $limit ); // add one item to include the current frame
 		} elseif ( version_compare( $this->phpversion(), '5.2.4' ) >= 0 ) {
-			//@link https://core.trac.wordpress.org/ticket/20953
+			// @link https://core.trac.wordpress.org/ticket/20953
 			$debug_backtrace = debug_backtrace();
 		} else {
 			$debug_backtrace = debug_backtrace( $options );
@@ -1186,9 +1216,9 @@ class WPML_WP_API extends WPML_PHP_Functions {
 		// phpcs:enable PHPCompatibility.FunctionUse.NewFunctionParameters.debug_backtrace_limitFound
 		// phpcs:enable PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection
 
-		//Remove the current frame
-		if($debug_backtrace) {
-			array_shift($debug_backtrace);
+		// Remove the current frame
+		if ( $debug_backtrace ) {
+			array_shift( $debug_backtrace );
 		}
 		return $debug_backtrace;
 	}
@@ -1199,7 +1229,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	public function get_wp_filesystem_direct() {
 		global $wp_filesystem;
 
-		require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		require_once ABSPATH . 'wp-admin/includes/file.php';
 
 		/**
 		 * We need to make sure that `WP_Filesystem` has been called
@@ -1210,8 +1240,8 @@ class WPML_WP_API extends WPML_PHP_Functions {
 			WP_Filesystem();
 		}
 
-		require_once( ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php' );
-		require_once( ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php' );
+		require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+		require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
 
 		return new WP_Filesystem_Direct( null );
 	}
@@ -1243,14 +1273,14 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	/**
 	 * @param array $template_paths
 	 *
-	 * @return Twig_Loader_Filesystem
+	 * @return Twig_Loader_Filesystem|\WPML\Core\Twig_LoaderInterface
 	 */
 	public function get_twig_loader_filesystem( $template_paths ) {
 		return new Twig_Loader_Filesystem( $template_paths );
 	}
 
 	/**
-	 * @return Twig_Loader_String
+	 * @return \WPML\Core\Twig_Loader_String|\WPML\Core\Twig_LoaderInterface
 	 */
 	public function get_twig_loader_string() {
 		return new Twig_Loader_String();

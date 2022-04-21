@@ -46,7 +46,7 @@ add_filter( 'wpml_job_assigned_to_after_assignment', 'wpml_st_filter_job_assignm
  * @param string $val
  *
  * @return string
- * @throws \Auryn\InjectionException
+ * @throws \WPML\Auryn\InjectionException
  */
 function wpml_st_blog_title_filter( $val ) {
 	/** @var WPML_ST_Blog_Name_And_Description_Hooks $filter */
@@ -60,7 +60,7 @@ function wpml_st_blog_title_filter( $val ) {
  * @param string $val
  *
  * @return string
- * @throws \Auryn\InjectionException
+ * @throws \WPML\Auryn\InjectionException
  */
 function wpml_st_blog_description_filter( $val ) {
 	/** @var WPML_ST_Blog_Name_And_Description_Hooks $filter */

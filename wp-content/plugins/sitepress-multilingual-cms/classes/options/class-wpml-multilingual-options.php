@@ -113,9 +113,9 @@ class WPML_Multilingual_Options {
 	}
 
 	/**
-	 * @param $new_value
-	 * @param $old_value
-	 * @param $option_name
+	 * @param array<mixed>|mixed $new_value
+	 * @param array<mixed>|mixed $old_value
+	 * @param string $option_name
 	 *
 	 * @return array
 	 */

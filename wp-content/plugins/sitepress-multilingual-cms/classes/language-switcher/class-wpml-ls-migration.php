@@ -19,9 +19,9 @@ class WPML_LS_Migration {
 	/**
 	 * WPML_LS_Migration constructor.
 	 *
-	 * @param WPML_LS_Settings $settings
-	 * @param SitePress                       $sitepress
-	 * @param WPML_LS_Slot_Factory            $slot_factory
+	 * @param WPML_LS_Settings     $settings
+	 * @param SitePress            $sitepress
+	 * @param WPML_LS_Slot_Factory $slot_factory
 	 */
 	public function __construct( $settings, $sitepress, $slot_factory ) {
 		$this->settings     = $settings;
@@ -57,7 +57,7 @@ class WPML_LS_Migration {
 	 * @return array
 	 */
 	private function get_converted_global_settings() {
-		$new_settings['additional_css'] = isset( $this->old_settings['icl_additional_css'] )
+		$new_settings['additional_css']  = isset( $this->old_settings['icl_additional_css'] )
 			? $this->old_settings['icl_additional_css'] : '';
 		$new_settings['copy_parameters'] = isset( $this->old_settings['icl_lang_sel_copy_parameters'] )
 			? $this->old_settings['icl_lang_sel_copy_parameters'] : '';
@@ -132,7 +132,8 @@ class WPML_LS_Migration {
 
 				$s = array_merge( $s, $this->get_color_picker_settings_for( 'sidebars' ) );
 
-				$sidebars_settings[ $sidebar_slug ] = $this->slot_factory->get_slot( $s );;
+				$sidebars_settings[ $sidebar_slug ] = $this->slot_factory->get_slot( $s );
+
 			}
 		}
 
@@ -212,14 +213,14 @@ class WPML_LS_Migration {
 		$map = array(
 			'font-current-normal'       => 'font_current_normal',
 			'font-current-hover'        => 'font_current_hover',
-            'background-current-normal' => 'background_current_normal',
-            'background-current-hover'  => 'background_current_hover',
-            'font-other-normal'         => 'font_other_normal',
-            'font-other-hover'          => 'font_other_hover',
-            'background-other-normal'   => 'background_other_normal',
-            'background-other-hover'    => 'background_other_hover',
-            'border'                    => 'border_normal',
-            'background'                => 'background_normal',
+			'background-current-normal' => 'background_current_normal',
+			'background-current-hover'  => 'background_current_hover',
+			'font-other-normal'         => 'font_other_normal',
+			'font-other-hover'          => 'font_other_hover',
+			'background-other-normal'   => 'background_other_normal',
+			'background-other-hover'    => 'background_other_hover',
+			'border'                    => 'border_normal',
+			'background'                => 'background_normal',
 		);
 
 		$key      = $context !== 'footer' ? 'icl_lang_sel_config' : 'icl_lang_sel_footer_config';
@@ -237,7 +238,7 @@ class WPML_LS_Migration {
 	 *
 	 * @return mixed|string|int|null
 	 */
-	private function get_old_setting($key ) {
+	private function get_old_setting( $key ) {
 		return isset( $this->old_settings[ $key ] ) ? $this->old_settings[ $key ] : null;
 	}
 
@@ -255,13 +256,13 @@ class WPML_LS_Migration {
 
 		if ( $slot_type === 'menus' ) {
 			$type = 'menu-item';
-		} else if ( $slot_type === 'sidebars' ) {
+		} elseif ( $slot_type === 'sidebars' ) {
 			$type = $old_type === 'dropdown' ? 'dropdown' : ( $old_orientation === 'vertical' ? 'list-vertical' : 'list-horizontal' );
-		} else if ( $slot_type === 'shortcode_actions' ) {
+		} elseif ( $slot_type === 'shortcode_actions' ) {
 			$type = $old_type === 'dropdown' ? 'dropdown' : ( $old_orientation === 'vertical' ? 'list-vertical' : 'list-horizontal' );
-		} else if ( $slot_type === 'footer' ) {
+		} elseif ( $slot_type === 'footer' ) {
 			$type = 'list-horizontal';
-		} else if ( $slot_type === 'post_translations' ) {
+		} elseif ( $slot_type === 'post_translations' ) {
 			$type = 'post-translations';
 		}
 
@@ -319,11 +320,11 @@ class WPML_LS_Migration {
 
 					$current_lang = $this->sitepress->get_current_language();
 					$this->sitepress->switch_lang( $this->sitepress->get_default_language() );
-					$menu      = wp_get_nav_menu_object( $slug );
-					$new_id    = $menu->term_id;
-					$slot_args = $menu_slot->get_model();
+					$menu                   = wp_get_nav_menu_object( $slug );
+					$new_id                 = $menu->term_id;
+					$slot_args              = $menu_slot->get_model();
 					$slot_args['slot_slug'] = $new_id;
-					$new_slot = $this->slot_factory->get_slot( $slot_args );
+					$new_slot               = $this->slot_factory->get_slot( $slot_args );
 					unset( $settings['menus'][ $slug ] );
 					$settings['menus'][ $new_id ] = $new_slot;
 					$this->sitepress->switch_lang( $current_lang );

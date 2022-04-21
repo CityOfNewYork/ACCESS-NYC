@@ -25,7 +25,7 @@ class WPML_TF_Backend_Notices {
 		if ( 'trash' === $action ) {
 			$permanent_trash_delay = defined( 'EMPTY_TRASH_DAYS' ) ? EMPTY_TRASH_DAYS : 30;
 
-			$message = _n( '%d feedback was trashed.', '%d feedback were trashed.', $count_feedback, 'sitepress' );
+			$message  = _n( '%d feedback was trashed.', '%d feedback were trashed.', $count_feedback, 'sitepress' );
 			$message .= ' ' . sprintf(
 				__( 'The trashed feedback will be permanently deleted after %d days.', 'sitepress' ),
 				$permanent_trash_delay

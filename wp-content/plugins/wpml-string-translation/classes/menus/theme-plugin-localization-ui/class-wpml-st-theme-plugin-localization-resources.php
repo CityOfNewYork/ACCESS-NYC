@@ -24,7 +24,7 @@ class WPML_ST_Theme_Plugin_Localization_Resources {
 		wp_localize_script(
 			'wpml-theme-plugin-localization-scan',
 			'wpml_groups_to_scan',
-			get_option( WPML_ST_Themes_And_Plugins_Updates::WPML_ST_ITEMS_TO_SCAN )
+			get_option( WPML_ST_Themes_And_Plugins_Updates::WPML_ST_ITEMS_TO_SCAN, [] )
 		);
 
 		wp_localize_script(

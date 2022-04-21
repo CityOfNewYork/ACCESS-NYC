@@ -67,8 +67,12 @@ class FieldGallery extends Field {
         if (!empty($parents)){
             $value = '';
             foreach ($parents as $parent) {
-                $value = explode($parent['delimiter'], $values[$this->getPostIndex()]);
-                $value = $value[$parent['index']];
+            	if (empty($parent['delimiter'])) {
+		            $value = $values[$this->getPostIndex()];
+	            } else {
+		            $value = explode($parent['delimiter'], $values[$this->getPostIndex()]);
+		            $value = $value[$parent['index']];
+	            }
             }
             $values[$this->getPostIndex()] = $value;
         }

@@ -96,7 +96,7 @@ if(is_admin() || defined('XMLRPC_REQUEST')):
         function save_settings(){
             global $sitepress;
             $iclsettings['modules']['caching-plugins-integration'] = $this->settings;
-            remove_action('icl_save_settings', array($this, 'icl_save_settings_cb'), 10, 1);
+            remove_action('icl_save_settings', array($this, 'icl_save_settings_cb'), 10);
             $sitepress->save_settings($iclsettings);
             add_action('icl_save_settings', array($this, 'icl_save_settings_cb'), 10, 1);
         }

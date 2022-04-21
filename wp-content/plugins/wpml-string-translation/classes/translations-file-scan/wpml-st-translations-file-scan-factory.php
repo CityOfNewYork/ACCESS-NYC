@@ -40,7 +40,7 @@ class WPML_ST_Translations_File_Scan_Factory {
 	 */
 	public function create_hooks() {
 		$st_upgrade = WPML\Container\make( 'WPML_ST_Upgrade' );
-		if ( $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning') ) {
+		if ( $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning' ) ) {
 			return [
 				'stats-update'         => $this->get_stats_update(),
 				'string-status-update' => $this->get_string_status_update(),
@@ -97,7 +97,7 @@ class WPML_ST_Translations_File_Scan_Factory {
 			$table_storage = make( WPML_ST_Translations_File_Dictionary_Storage_Table::class );
 
 			$st_upgrade = new WPML_ST_Upgrade( $sitepress );
-			if ( $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning') ) {
+			if ( $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning' ) ) {
 				$table_storage->add_hooks();
 			}
 
@@ -187,7 +187,7 @@ class WPML_ST_Translations_File_Scan_Factory {
 	private function get_string_status_update() {
 		global  $wpdb;
 		$num_of_secondary_languages = count( $this->get_sitepress()->get_active_languages() ) - 1;
-		$status_update = new WPML_ST_Translations_File_String_Status_Update( $num_of_secondary_languages, $wpdb );
+		$status_update              = new WPML_ST_Translations_File_String_Status_Update( $num_of_secondary_languages, $wpdb );
 		$status_update->add_hooks();
 
 		return $status_update;

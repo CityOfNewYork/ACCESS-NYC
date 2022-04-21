@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "Väj innehåll att automatiskt översätta till"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Spara ändringar och aktivera automatisk översättning"
+         ],
+         "Cancel Language Changes": [
+            "Avbryt språkändringar"
+         ],
+         "Save": [
+            "Spara"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "Välj innehåll att automatiskt översätta till ett nytt språk"
+         ],
+         "Add languages and start translating": [
+            "Lägg till språk och börja översätta"
+         ],
+         "Add language and start translating": [
+            "Lägg till språk och börja översätta"
+         ],
+         "Never mind. Don't add new languages": [
+            "Strunta i det. Lägg inte till nya språk"
+         ],
+         "Never mind. Don't add new language": [
+            "Strunta i det. Lägg inte till nytt språk"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "Översätt automatiskt alla mina inlägg och sidor direkt, plus nytt innehåll när jag skapar det."
+         ],
+         "Only automatically translate new content.": [
+            "Översätt bara nytt innehåll automatiskt."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "Du använder läget <a>Översätt allt</a> som översätter webbplatsens innehåll automatiskt."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "Vilket innehåll vill du översätta automatiskt till det nyligen tillagda språket?"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Du kan översätta befintligt innehåll från instrumentpanelen Översättningshantering."
+         ]
+      }
+   }
+}

@@ -21,7 +21,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * The items contained in the collection.
      *
-     * @var array
+     * @var mixed[]
      */
     protected $items = [];
 
@@ -39,7 +39,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * Create a new collection instance if the value isn't one already.
      *
-     * @param  mixed  $items
+     * @param  mixed[]  $items
      * @return static
      */
     public static function make($items = [])
@@ -50,7 +50,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * Get all of the items in the collection.
      *
-     * @return array
+     * @return mixed[]
      */
     public function all()
     {
@@ -61,7 +61,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * Get the average value of a given key.
      *
      * @param  callable|string|null  $callback
-     * @return mixed
+     * @return float|void
      */
     public function avg($callback = null)
     {
@@ -74,7 +74,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * Alias for the "avg" method.
      *
      * @param  callable|string|null  $callback
-     * @return mixed
+     * @return float|void
      */
     public function average($callback = null)
     {
@@ -85,7 +85,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * Get the median of a given key.
      *
      * @param  null $key
-     * @return mixed|null
+     * @return float|void
      */
     public function median($key = null)
     {
@@ -113,7 +113,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * Get the mode of a given key.
      *
      * @param  null $key
-     * @return array
+     * @return mixed[]|void
      */
     public function mode($key = null)
     {
@@ -1217,6 +1217,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return array
      */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array_map(function ($value) {
@@ -1248,6 +1249,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return \ArrayIterator
      */
+	#[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->items);
@@ -1269,6 +1271,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return int
      */
+	#[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->items);
@@ -1290,6 +1293,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * @param  mixed  $key
      * @return bool
      */
+	#[\ReturnTypeWillChange]
     public function offsetExists($key)
     {
         return array_key_exists($key, $this->items);
@@ -1301,6 +1305,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * @param  mixed  $key
      * @return mixed
      */
+	#[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         return $this->items[$key];
@@ -1313,6 +1318,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * @param  mixed  $value
      * @return void
      */
+	#[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         if (is_null($key)) {
@@ -1328,6 +1334,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * @param  string  $key
      * @return void
      */
+	#[\ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         unset($this->items[$key]);
@@ -1485,5 +1492,16 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
 		return  ! empty($this->items);
 	}
 
-
+	/**
+	 * Cross join with the given lists, returning all possible permutations.
+	 *
+	 * @param  mixed  ...$lists
+	 * @return static
+	 */
+	public function crossJoin(...$lists)
+	{
+		return new static(Arr::crossJoin(
+			$this->items, ...array_map([$this, 'getArrayableItems'], $lists)
+		));
+	}
 }

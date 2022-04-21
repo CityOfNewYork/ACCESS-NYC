@@ -121,7 +121,8 @@ class WP_Installer_Channels{
 
 		if ( $available_channels ) {
 			$args = array(
-				'can_switch'      => $this->can_use_unstable_channels( $downloads ) || $this->get_channel( $repository_id ) > 1,
+				'can_switch'      => $this->can_use_unstable_channels( $downloads )
+				                     || $this->get_channel( $repository_id ) != self::CHANNEL_PRODUCTION,
 				'channels'        => $available_channels,
 				'repository_id'   => $repository_id,
 				'current_channel' => $this->get_channel( $repository_id ),

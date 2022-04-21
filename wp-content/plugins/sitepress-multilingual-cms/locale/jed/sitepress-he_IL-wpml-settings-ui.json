@@ -1,0 +1,37 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
+            "תוכל לבחור איזה פוסטים לתרגם מ<strong>לוח הבקרה של ניהול התרגום</strong>."
+         ],
+         "Yes, translate all of these posts automatically": [
+            "כן, תרגם את כל הפוסטים האלו באופן אוטומטי."
+         ],
+         "No, I want to translate some of these posts, but not all": [
+            "לא, אני רוצה לתרגם חלק מהפוסטים האלו, אבל לא את כולם."
+         ],
+         "Save": [
+            "שמור"
+         ],
+         "Please confirm this translation setting": [
+            "אשר זאת בהגדרת התרגום"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the <NumberOfItems /> existing items.": [
+            "האתר שלך מוגדר לתרגום של כל הפוסטיםב אופן אוטומטי. כאשר תהפוך את <PostTypesNames /> לברי-תרגום, WPML יתרגם באופן אוטומטי את <NumberOfItems /> הפריטים הקיימים."
+         ],
+         "Are you OK with paying for this?": [
+            "האם אתה מסכים לשלם עבור זה?"
+         ],
+         "Cancel": [
+            "בטל"
+         ],
+         "Make translatable": [
+            "הפוך לברי-תרגום"
+         ]
+      }
+   }
+}

@@ -1,5 +1,7 @@
 <?php
 
+use ACFML\Convertable\LinkFieldData;
+
 class WPML_ACF_Duplicated_Post {
 
 	/**
@@ -32,6 +34,8 @@ class WPML_ACF_Duplicated_Post {
 					$field = new WPML_ACF_Taxonomy_Field( $processed_data, new WPML_ACF_Term_Ids() );
 				} elseif ( 'gallery' ===  $acf_field_object['type'] ) {
 					$field = new WPML_ACF_Post_Object_Field( $processed_data, new WPML_ACF_Post_Ids() );
+				} elseif ( 'link' === $acf_field_object['type'] ) {
+					$field = new WPML_ACF_Link_Field( $processed_data, new LinkFieldData() );
 				}
 			}
 		}

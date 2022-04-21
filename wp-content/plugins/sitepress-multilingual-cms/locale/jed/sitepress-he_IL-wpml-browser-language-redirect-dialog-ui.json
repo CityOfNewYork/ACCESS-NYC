@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "כיצד ניתוב מחדש של שפת הדפדפן משפיע על יצירת האינדקסים של Google"
+         ],
+         "Documentation": [
+            "תיעוד"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "ניתוב מחדש משפיע על יצירת האינדקסים של Google ועל תוצאות החיפוש"
+         ],
+         "Got it, activate anyway": [
+            "הבנתי, הפעל בכל זאת"
+         ],
+         "Cancel": [
+            "בטל"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "כאשר אתה מנתב אורחים מחדש בהתאם לשפה שלהם, אתה גם מנתב מחדש את Google. Google רוצה לראות את האתר שלך בדיוק כפי שאורחים רואים אותו, כולל כל ניתוב מחדש שאתה מחיל."
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "זה בסדר לנתב מחדש אורחים על בסיס השפה שלהם, אבל עליך להבין שזה משפיע על SEO."
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "לפני שתמשיך, אנו ממליצים שתקרא שני עמודים אלו:"
+         ]
+      }
+   }
+}

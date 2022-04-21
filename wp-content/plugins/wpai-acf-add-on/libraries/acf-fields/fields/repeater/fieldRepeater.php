@@ -304,11 +304,16 @@ class FieldRepeater extends Field {
      */
     protected function getCountRows($fields){
         $countRows = 0;
+        $parentIndex = 0;
         /** @var Field $field */
-        foreach ($fields as $field){
-            if ($field->getType() == 'repeater') continue;
-            $field->importData = $this->getImportData();
-            $count = $field->getCountValues();
+        foreach ($fields as $field) {
+	        $field->importData = $this->getImportData();
+            if ($field->getType() == 'repeater') {
+	            $count = $field->getCountValues($parentIndex);
+            } else {
+	            $count = $field->getCountValues();
+            }
+
             if ($count > $countRows){
                 $countRows = $count;
             }
@@ -316,15 +321,17 @@ class FieldRepeater extends Field {
         return $countRows;
     }
 
-    /**
-     * @return int
-     */
-    public function getCountValues() {
+	/**
+	 * @param bool $parentIndex
+	 *
+	 * @return int
+	 */
+    public function getCountValues($parentIndex = false) {
         $countRows = 0;
         /** @var Field $field */
         foreach ($this->getSubFields() as $field){
             $field->importData = $this->getImportData();
-            $count = $field->getCountValues();
+            $count = $field->getCountValues($parentIndex);
             if ($count > $countRows){
                 $countRows = $count;
             }

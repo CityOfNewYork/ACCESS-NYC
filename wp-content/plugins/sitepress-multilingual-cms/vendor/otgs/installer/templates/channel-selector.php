@@ -57,7 +57,7 @@
     </div>
     <?php endif; ?>
 
-    <div class="installer-warn-text" <?php if( WP_Installer_Channels()->get_channel( $repository_id ) <= 1 ): ?>style="display:none" <?php endif; ?>>
+    <div class="installer-warn-text" <?php if( WP_Installer_Channels()->get_channel( $repository_id ) === WP_Installer_Channels::CHANNEL_PRODUCTION ): ?>style="display:none" <?php endif; ?>>
         <?php printf(
                 __("You are using a potentially less stable channel for %s. If you didn't enable this on purpose, you should switch to the 'Production' channel.", 'installer'),
 	            WP_Installer()->get_generic_product_name( $repository_id )

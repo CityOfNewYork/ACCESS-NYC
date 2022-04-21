@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "Jeśli chcesz tłumaczyć treści automatycznie, musisz użyć Zaawansowanego edytora tłumaczeń."
+         ],
+         "Synchronize translators and translation managers with ATE": [
+            "Synchronizuj tłumaczy i menedżerów tłumaczenia z Zaawansowanym edytorem tłumaczeń"
+         ],
+         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "Spróbuj ponownie za kilka minut. Jeśli problem dalej będzie występować, skontaktuj się z %sWPML support%s."
+         ]
+      }
+   }
+}

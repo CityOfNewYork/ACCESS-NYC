@@ -8,7 +8,7 @@ class WPML_Display_As_Translated_Taxonomy_Query extends WPML_Display_As_Translat
 	/**
 	 * WPML_Display_As_Translated_Posts_Query constructor.
 	 *
-	 * @param wpdb $wpdb
+	 * @param wpdb   $wpdb
 	 * @param string $term_taxonomy_table_alias
 	 */
 	public function __construct( wpdb $wpdb, $term_taxonomy_table_alias = null ) {
@@ -20,7 +20,7 @@ class WPML_Display_As_Translated_Taxonomy_Query extends WPML_Display_As_Translat
 	 * If "display as translated" mode is enabled, we check whether a category has some assigned posts or
 	 * its equivalent in the default language.
 	 *
-	 * @param array $clauses
+	 * @param array  $clauses
 	 * @param string $default_lang
 	 *
 	 * @return array
@@ -68,7 +68,7 @@ class WPML_Display_As_Translated_Taxonomy_Query extends WPML_Display_As_Translat
 	}
 
 	/**
-	 * @param array $content_types
+	 * @param array<string> $taxonomies
 	 *
 	 * @return string
 	 */

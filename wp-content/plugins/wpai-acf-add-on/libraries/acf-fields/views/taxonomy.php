@@ -16,6 +16,7 @@
                     $tmp_key = $field['key'];
                     $field['key'] = 'multiple_value'. $field_name .'[' . $field['key'] . ']';
                     $field['value'] = $current_multiple_value;
+                    $field['prefix'] = '';
 
                     if( $field['field_type'] == 'select' ) {
                         $field['multiple'] = 0;

@@ -1,0 +1,508 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "Từ:"
+         ],
+         "--Choose language--": [
+            "--Chọn ngôn ngữ--"
+         ],
+         "to:": [
+            "đến:"
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "Thiết lập (các) cặp ngôn ngữ cho Người dịch %s:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ Thêm các cặp ngôn ngữ cho người dịch này"
+         ],
+         "First Name": [
+            "Tên"
+         ],
+         "Last Name": [
+            "Họ"
+         ],
+         "Role": [
+            "Quyền hạn"
+         ],
+         "(required)": [
+            "(bắt buộc)"
+         ],
+         "Make sure that you have provided a correct email address e.g. name@domain.com": [
+            "Đảm bảo rằng bạn đã cung cấp chính xác địa chỉ email, ví dụ như name@domain.com"
+         ],
+         "This field is required": [
+            "Trường dữ liệu này là bắt buộc"
+         ],
+         "A translator can be any WordPress role.": [
+            "Một người dịch có thể đảm nhận vai trò WordPress bất kỳ."
+         ],
+         "Username": [
+            "Tên người dùng"
+         ],
+         "Email": [
+            "Email"
+         ],
+         "Search": [
+            "Tìm kiếm"
+         ],
+         "user": [
+            "người dùng"
+         ],
+         "Editor": [
+            "Trình soạn thảo"
+         ],
+         "Select an existing %s and set as Translation Manager": [
+            "Chọn một %s có sẵn và đặt làm Quản lý Dịch thuật"
+         ],
+         "Create a new %s and set as Translation Manager": [
+            "Tạo một %s mới và đặt làm Quản lý Dịch thuật"
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "Add Translation Manager": [
+            "Thêm Quản lý Dịch thuật"
+         ],
+         "Translate Some": [
+            "Dịch một số"
+         ],
+         "I want to choose which content to translate": [
+            "Tôi muốn chọn nội dung cần dịch"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "Các bản dịch tự động đang chờ xử lý của bạn sẽ bị hủy."
+         ],
+         "Save": [
+            "Lưu"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Đi đến mục <a>Bảng điều khiển Quản lý Dịch thuật</a> để dịch nội dung của bạn."
+         ],
+         "Review the translations before publishing": [
+            "Rà soát bản dịch trước khi đăng tải"
+         ],
+         "Publish translations and review them later": [
+            "Đăng tải các bản dịch và rà soát sau"
+         ],
+         "Publish translations without reviewing": [
+            "Đăng tải các bản dịch mà không cần rà soát"
+         ],
+         "When automatic translation completes:": [
+            "Khi quá trình dịch tự động hoàn tất:"
+         ],
+         "Translate Everything": [
+            "Dịch mọi thứ"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML sẽ tự động dịch nội dung mà bạn đăng tải hoặc cập nhật"
+         ],
+         "How do you want to translate this site?": [
+            "Cách thức bạn muốn dịch trang web này?"
+         ],
+         "Select an existing user and set as Translator": [
+            "Chọn một người dùng có sẵn và đặt thành Biên dịch viên (Người dịch)"
+         ],
+         "Create a new user and set as Translator": [
+            "Tạo người dùng mới và đặt làm Biên dịch viên"
+         ],
+         "Set language pair(s)": [
+            "Thiết lập (các) cặp ngôn ngữ"
+         ],
+         "Previous": [
+            "Trước đó"
+         ],
+         "Add a Translator": [
+            "Thêm người dịch"
+         ],
+         "Edit language pair(s) for translator": [
+            "Chỉnh sửa (các) cặp ngôn ngữ dành cho biên dịch viên"
+         ],
+         "Name": [
+            "Tên"
+         ],
+         "Language Pairs": [
+            "Các cặp ngôn ngữ"
+         ],
+         "You can translate to and from all languages": [
+            "Bạn có thể dịch từ và sang từ tất cả các ngôn ngữ"
+         ],
+         "%s file upload failed.": [
+            "Tải lên tập tin %s không thành công."
+         ],
+         "Flag": [
+            "Lá cờ"
+         ],
+         "Flag file": [
+            "Gắn cờ cho tập tin"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "Bạn vừa thêm ngôn ngữ. Tiếp theo, chọn ngôn ngữ làm ngôn ngữ mặc định của trang web hoặc ngôn ngữ dịch thuật."
+         ],
+         "Language added": [
+            "Đã thêm ngôn ngữ"
+         ],
+         "The value \"%s\" already exists": [
+            "Giá trị \"%s\" đã tồn tại"
+         ],
+         "Add a new language": [
+            "Thêm một ngôn ngữ mới"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "Tạo một ngôn ngữ cụ thể theo quốc gia bằng cách chọn ngôn ngữ chung từ danh sách dưới đây. Rồi chọn quốc gia ngôn ngữ sẽ được bản địa hóa."
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "Bằng cách chọn tổ hợp đã tồn tại trong cơ sở dữ liệu, WPML có thể giúp lọc các trường cần thiết. Đọc thêm về <AddingACustomLanguageLink />."
+         ],
+         "Cannot find?": [
+            "Không thể tìm thấy?"
+         ],
+         "Click here": [
+            "Nhấn vào đây"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "Tên ngôn ngữ của bạn sẽ xuất hiện trên trình chuyển đổi ngôn ngữ của trang web của bạn."
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "Định dạng không chính xác. Có thể chỉ bao gồm các chữ cái viết thường và \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\""
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Một giá trị duy nhất định danh ngôn ngữ trong cơ sở dữ liệu và URL. Khi đã lưu, không thể thay đổi mã ngôn ngữ."
+         ],
+         "Language": [
+            "Ngôn ngữ"
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Nếu ngôn ngữ tùy chỉnh của bạn tương tự như một ngôn ngữ có sẵn, bạn có thể sử dụng công cụ kiểm tra chính tả và quá trình dịch tự động của ngôn ngữ có sẵn. Ví dụ, nếu ngôn ngữ tùy chỉnh của bạn là tiếng Đức-Thụy Sĩ, bạn có thể ánh xạ với tiếng Đức như ngôn ngữ cần sử dụng cho công cụ kiểm tra chính tả và quá trình dịch tự động. Nếu bạn không ánh xạ ngôn ngữ tùy chỉnh của mình với một ngôn ngữ có sẵn, các tính năng kiểm tra chính tả và dịch tự động sẽ không khả dụng trong ngôn ngữ đó."
+         ],
+         "Location": [
+            "Địa điểm"
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "Giá trì WPML kiểm tra khi tải các bản dịch từ các tập tin MO và PO. Vị trí mặc định sẽ có trong các tên tập tin trong thưu mục /wp-content/languages/ trong mục thiết lập WordPress của bạn."
+         ],
+         "Code": [
+            "Mã"
+         ],
+         "The language will not be supported by automatic translations": [
+            "Ngôn ngữ sẽ không được các bản dịch tự động hỗ trợ"
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Google sử dụng thuộc tính hreflang để hướng người dùng đến các trang web theo ngôn ngữ và địa điểm liên quan. Ví dụ:"
+         ],
+         "Language mapping": [
+            "Ánh xạ ngôn ngữ"
+         ],
+         "All English-speaking users: en": [
+            "Tất cả người dùng nói tiếng Anh: en"
+         ],
+         "Don't map this language": [
+            "Không ánh xạ ngôn ngữ này"
+         ],
+         "English for UK users: en-gb": [
+            "Tiếng Anh cho người dùng tại Vương Quốc Anh: en-gb"
+         ],
+         "Default locale": [
+            "Locale mặc định"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "Định dạng không đúng. Chỉ có thể chứa các chữ cái thường và \"_\". Ví dụ: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "English for US users: en-us": [
+            "Tiếng Anh cho người dùng tại Mỹ: en-us"
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "Mã hóa url?"
+         ],
+         "NO": [
+            "KHÔNG"
+         ],
+         "YES": [
+            "CÓ"
+         ],
+         " (required)": [
+            "(bắt buộc)"
+         ],
+         "Please fill in the field": [
+            "Hãy điền vào mục này"
+         ],
+         "Save language": [
+            "Lưu ngôn ngữ"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "Quyết định liệu các URL trong ngôn ngữ này được mã hóa hay sử dụng các ký tự ASCII (nếu không chắc chắn, hãy để là \"Không\")."
+         ],
+         "adding a custom language": [
+            "đang thêm một ngôn ngữ tùy chỉnh"
+         ],
+         "Learn more about required server settings to use a different domain per language": [
+            "Tìm hiểu thêm về cài đặt máy chủ bắt buộc để sử dụng một tên miền khác cho từng ngôn ngữ"
+         ],
+         "Language name added as a parameter": [
+            "Tên ngôn ngữ được thêm như là một tham số"
+         ],
+         "I will set up the domains for my secondary languages later.": [
+            "Tôi sẽ thiết lập các tên miền cho các ngôn ngữ thứ hai của tôi sau."
+         ],
+         "The domain you have entered is invalid.": [
+            "Tên miền bạn đã nhập không hợp lệ."
+         ],
+         "The domain you have entered must be unique.": [
+            "Tên miền bạn đã nhập phải là duy nhất."
+         ],
+         "Please Note: Your site won't work in your secondary languages until this is successfully set up or you switch to a different URL option.": [
+            "Vui lòng lưu ý: Trang web của bạn sẽ không hoạt động ở các ngôn ngữ thứ hai cho đến khi mục này được thiết lập thành công hoặc bạn chuyển sang tùy chọn URL khác."
+         ],
+         "Learn more about Language URL Options": [
+            "Tìm hiểu thêm về các Tùy chọn URL ngôn ngữ."
+         ],
+         "How would you like to format your site's URL?": [
+            "Bạn muốn định dạng URL trang web của mình như thế nào?"
+         ],
+         "Different languages in directories": [
+            "Các ngôn ngữ khác nhau trong các thư mục"
+         ],
+         "The URL rewrite is not configured in your server.": [
+            "Việc ghi lại URL không được cấu hình trong máy chủ của bạn."
+         ],
+         "Learn more about required server settings to display languages in directories": [
+            "Tìm hiểu thêm về cài đặt máy chủ bắt buộc để hiển thị các ngôn ngữ trong các thư mục"
+         ],
+         "I will fix my server settings to display languages in directories later.": [
+            "Tôi sẽ sửa lỗi cài đặt máy chủ để hiển thị các ngôn ngữ trong các thư mục sau."
+         ],
+         "Your server settings do not allow for languages in directories. ": [
+            "Cài đặt máy chủ của bạn không cho phép các ngôn ngữ trong các thư mục."
+         ],
+         "Learn more about the required server settings.": [
+            "Tìm hiểu thêm về cài đặt máy chủ bắt buộc."
+         ],
+         "A different domain per language": [
+            "Tên miền khác nhau cho mỗi ngôn ngữ"
+         ],
+         "There was a critical error setting up WPML. Please contact our <LinkToSupportForum /> to resolve it.": [
+            "Đã có lỗi nghiêm trọng khi thiết lập WPML. Hãy liên hệ với <LinkToSupportForum /> của chúng tôi để xử lý."
+         ],
+         "Hide error message": [
+            "Ẩn tin nhắn lỗi"
+         ],
+         "Show error message": [
+            "Hiển thị tin nhắn lỗi"
+         ],
+         "View the status of the translations in <s>WPML → Translation Management</s>.": [
+            "Xem trạng thái của bản dịch trong <s>WPML → Quản lý Dịch thuật</s>."
+         ],
+         "WPML has started translating your site": [
+            "WPML vừa bắt đầu dịch trang web của bạn"
+         ],
+         "Go to <s>WPML → Translation Management</s> to choose what to translate.": [
+            "Đi đến <s>WPML → Quản lý Dịch thuật</s> để chọn nội dung cần dịch."
+         ],
+         "You are ready to start translating": [
+            "Bạn đã sẵn sàng để bắt đầu dịch"
+         ],
+         "Right now, your site has a nice language switcher in its footer. To enable other styles of language switchers, go to <s>WPML → Languages</s>.": [
+            "Hiện tại, trang web của bạn đã có trình chuyển đổi ngôn ngữ tuyệt đẹp ở chân trang. Để kích hoạt các phong cách khác của trình chuyển đổi ngôn ngữ, truy cập <s>WPML → Ngôn ngữ</s>."
+         ],
+         "Language switcher customization": [
+            "Tùy chỉnh trình chuyển đổi ngôn ngữ"
+         ],
+         "support forum": [
+            "diễn đàn hỗ trợ"
+         ],
+         "Default language": [
+            "Ngôn ngữ mặc định"
+         ],
+         "What is the current language of your website?": [
+            "Ngôn ngữ hiện thời trên trang web của bạn là gì?"
+         ],
+         "Translation languages": [
+            "Các ngôn ngữ dịch"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "Bạn muốn dịch trang web của bạn sang những ngôn ngữ nào?"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "Nếu bạn không thể tìm thấy ngôn ngữ bạn cần trong danh sách"
+         ],
+         "create a custom language": [
+            "tạo một ngôn ngữ tùy chỉnh"
+         ],
+         "What are the languages of your site?": [
+            "Trang web của bạn có những ngôn ngữ nào?"
+         ],
+         "If you don't have a WPML.org account or a valid subscription, %1$spurchase one%2$s to get automatic updates, full support, and a 30-day money-back guarantee.": [
+            "Nếu bạn không có tài khoản WPML.org hoặc gói thuê bao hiệu lực, hãy %1$smua ngay%2$s để nhận các bản cập nhật tự động, hỗ trợ toàn diện và đảm bảo hoàn tiền trong 30 ngày."
+         ],
+         "Already purchased WPML?": [
+            "Bạn đã mua WPML?"
+         ],
+         "Enter your site key from your WPML account to receive automatic updates.": [
+            "Nhập mã khóa trang web của bạn từ tài khoản WPML để nhận các bản cập nhật tự động."
+         ],
+         "Site key": [
+            "Mã khóa của trang web"
+         ],
+         "Get a key for this site": [
+            "Nhận mã khóa cho trang web này"
+         ],
+         "Improve your site’s translations using helpful plugins": [
+            "Cải thiện các bản dịch trên trang web của bạn bằng các plugin hữu ích"
+         ],
+         "Based on the themes and other plugins running on your site, we recommend that you enable the following WPML components. These are included with your WPML purchase and allow you to translate strings, media, admin texts, and more.": [
+            "Dựa trên các giao diện và các plugin khác đang chạy trên trang web của bạn, chúng tôi gợi ý bạn nên kích hoạt các thành phần WPML sau. Các thành phần này có sẵn trong gói mua WPML của bạn và cho phép bạn dịch các chuỗi ký tự, đa phương tiện, văn bản quản trị và hơn thế nữa."
+         ],
+         "Error in activating plugin.": [
+            "Lỗi khi kích hoạt plugin."
+         ],
+         "Error in installing plugin.": [
+            "Lỗi khi cài đặt plugin."
+         ],
+         "Yes, send theme and plugins information, in order to get faster support and compatibility alerts": [
+            "Có, gửi thông tin giao diện và plugin, để nhận được hỗ trợ và cảnh báo tương thích nhanh hơn"
+         ],
+         "No, don't send this information and skip compatibility alerts": [
+            "Không, không gửi thông tin này và bỏ qua cảnh báo tương thích"
+         ],
+         "Do you want to get better and faster support?": [
+            "Bạn có muốn nhận hỗ trợ tốt hơn và nhanh hơn?"
+         ],
+         "The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.": [
+            "Plugin WPML có thể gửi danh sách các plugin và giao diện đang hoạt động được sử dụng trong trang web của bạn đến wpml.org. Điều này cho phép đội ngũ hỗ trợ của chúng tôi trợ giúp bạn nhanh hơn và liên hệ với bạn trước về các lỗi tương thích tiềm ẩn và giải pháp của họ."
+         ],
+         "Privacy and data usage policy": [
+            "Chính sách bảo mật và sử dụng dữ liệu"
+         ],
+         "Only myself (%s)": [
+            "Chỉ mình tôi (%s)"
+         ],
+         "You will be the sole translator for this site. You will be able to translate any document between any language pair. If you want to do some of the translations and allow others to translate as well, select the \"Users of this site\" option instead.": [
+            "Bạn sẽ là người dịch duy nhất của trang web này. Bạn sẽ có thể dịch tài liệu bất kỳ theo cặp ngôn ngữ bất kỳ. Nếu bạn muốn làm một phần công việc dịch thuật và cho phép những người khác cũng dịch, hãy chọn tùy chọn \"Người dùng của trang web này\"."
+         ],
+         "Individual translators": [
+            "Những người dịch là cá nhân"
+         ],
+         "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
+            "Bạn sẽ chọn hoặc tạo người dùng mới cho trang web WordPress này với tư cách người dịch. Bạn cũng có thể tự chọn mình. Việc này cho phép bạn thiết lập một nhóm người dịch làm việc với các cặp ngôn ngữ khác nhau."
+         ],
+         "A Professional Translation Service": [
+            "Dịch vụ Dịch thuật Chuyên nghiệp"
+         ],
+         "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
+            "WPML cung cấp quá trình tích hợp mạnh mẽ với hơn 70 dịch vụ dịch thuật. Bạn sẽ chọn dịch vụ dịch thuật mà bạn muốn và tận hưởng quá trình mượt mà khi gửi công việc và nhận các bản dịch được hoàn thiện."
+         ],
+         "I want to set a \"Translation Manager\" who will choose the translators for this site": [
+            "Tôi muốn thiết lập một \"Quản lý Dịch thuật\" - người sẽ chọn những người dịch cho trang web này"
+         ],
+         "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
+            "Bạn sẽ chọn người dùng của trang web này và ủy quyền việc chỉ định các biên dịch cho anh/cô ấy. Chọn tùy chọn này khi bạn đang xây dựng trang web cho khách hàng, người sẽ chỉ định người dùng là biên dịch hoặc chọn dịch vụ dịch thuật."
+         ],
+         "Learn more about <LinkToTheDifferentWaysYouCanTranslateYourSite/>.": [
+            "Tìm hiểu thêm về <LinkToTheDifferentWaysYouCanTranslateYourSite/>."
+         ],
+         "the different ways you can translate your site with WPML": [
+            "các cách thức khác nhau bạn có thể dịch trang web của mình với WPML"
+         ],
+         "Who will translate?": [
+            "Ai sẽ dịch?"
+         ],
+         "Connect this site to <service_name />": [
+            "Kết nối trang web với <service_name />"
+         ],
+         "Error: %s": [
+            "Lỗi: %s"
+         ],
+         "Use a different Translation Service": [
+            "Sử dụng một Dịch vụ Dịch thuật khác"
+         ],
+         "Authenticate": [
+            "Xác thực"
+         ],
+         "Choose a Translation Service": [
+            "Chọn Dịch vụ Dịch thuật"
+         ],
+         "Loading": [
+            "Đang tải"
+         ],
+         "+ Add a Translation Manager": [
+            "+ Thêm một Quản lý Dịch thuật"
+         ],
+         "+ Add a Translator": [
+            "+ Thêm một người dịch"
+         ],
+         "A new language could not be added correctly": [
+            "Không thể thêm chính xác một ngôn ngữ mới"
+         ],
+         "Languages": [
+            "Ngôn ngữ"
+         ],
+         "URL Format": [
+            "Định dạng URL"
+         ],
+         "Register WPML": [
+            "Đăng ký WPML"
+         ],
+         "Translation": [
+            "Bản dịch"
+         ],
+         "Support": [
+            "Hỗ trợ"
+         ],
+         "Plugins": [
+            "Các plugin"
+         ],
+         "Finished": [
+            "Đã hoàn tất"
+         ],
+         "Back": [
+            "Quay lại"
+         ],
+         "Continue": [
+            "Tiếp tục"
+         ],
+         "Skip": [
+            "Bỏ qua"
+         ],
+         "Install and activate": [
+            "Cài đặt và kích hoạt"
+         ],
+         "Finish": [
+            "Hoàn thành"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "Truy cập <link_to_service /> để yêu cầu một API Token. Token này cho phép WPML két nối với <service_name /> để gửi và nhận việc."
+         ],
+         "Settings": [
+            "Cài đặt"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "Hiện không thể kết nối với một dịch vụ dịch thuật khi WPML được thiết lập để dịch tự động nội dung trang web của bạn. Để sử dụng một dịch vụ dịch thuật, hãy thay đổi chế độ dịch thuật của bạn trên trang <LinkToSettingsPage />."
+         ],
+         "Error: ": [
+            "Lỗi:"
+         ],
+         "Documentation": [
+            "Tài liệu"
+         ],
+         "Deactivate": [
+            "Tắt (vô hiệu hóa)"
+         ],
+         "Activate": [
+            "Kích hoạt"
+         ],
+         "Description": [
+            "Miêu tả"
+         ],
+         "Ranking": [
+            "Xếp hạng"
+         ]
+      }
+   }
+}

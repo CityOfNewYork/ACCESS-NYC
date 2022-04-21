@@ -26,7 +26,7 @@ class WPML_Language_Records {
 	}
 
 	/**
-	 * @param $lang_code
+	 * @param string $lang_code
 	 *
 	 * @return string|null
 	 */

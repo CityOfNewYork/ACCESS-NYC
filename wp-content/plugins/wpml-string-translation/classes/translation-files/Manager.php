@@ -104,10 +104,10 @@ abstract class Manager {
 	}
 
 	/**
- * @param string $domain
- *
- * @return bool
- */
+	 * @param string $domain
+	 *
+	 * @return bool
+	 */
 	public function handles( $domain ) {
 		return $this->getDomains()->contains( $domain );
 	}

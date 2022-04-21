@@ -10,46 +10,47 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		$package = $this->package;
 
 		$post_trid = $this->get_trid();
-        $items = array();
-        if ( $post_trid ) {
-            $translation_element_type = $package->get_translation_element_type();
-            $post_translations        = $sitepress->get_element_translations( $post_trid, $translation_element_type );
-            foreach ( $post_translations as $lang => $translation ) {
-                $translation->trid = $post_trid;
-                $item[ ]           = $this->set_translation_status( $package, $translation, $lang );
-            }
-        } else {
-            $items[ ] = $package;
-        }
+		$items     = array();
+		if ( $post_trid ) {
+			$translation_element_type = $package->get_translation_element_type();
+			$post_translations        = $sitepress->get_element_translations( $post_trid, $translation_element_type );
+			foreach ( $post_translations as $lang => $translation ) {
+				$translation->trid = $post_trid;
+				$item[]            = $this->set_translation_status( $package, $translation, $lang );
+			}
+		} else {
+			$items[] = $package;
+		}
 
-        return $items;
-    }
+		return $items;
+	}
 
 	/**
-	 * @param $package WPML_Package
-	 * @param $translation
-	 * @param $lang
-	 * @return mixed
+	 * @param \WPML_Package $package
+	 * @param \stdClass     $translation
+	 * @param string        $lang
+	 *
+	 * @return \WPML_Package
 	 */
 	private function set_translation_status( $package, $translation, $lang ) {
 		global $wpdb;
 
-        if ( !$package->trid ) {
-            $package->trid = $translation->trid;
-        }
+		if ( ! $package->trid ) {
+			$package->trid = $translation->trid;
+		}
 
-		$res_query = "SELECT status, needs_update, md5 FROM {$wpdb->prefix}icl_translation_status WHERE translation_id=%d";
-		$res_args = array( $translation->translation_id );
+		$res_query   = "SELECT status, needs_update, md5 FROM {$wpdb->prefix}icl_translation_status WHERE translation_id=%d";
+		$res_args    = array( $translation->translation_id );
 		$res_prepare = $wpdb->prepare( $res_query, $res_args );
-		$res = $wpdb->get_row( $res_prepare );
-		$_suffix = str_replace( '-', '_', $lang );
-		$status = ICL_TM_NOT_TRANSLATED;
+		$res         = $wpdb->get_row( $res_prepare );
+		$_suffix     = str_replace( '-', '_', $lang );
+		$status      = ICL_TM_NOT_TRANSLATED;
 		if ( $res ) {
-			$status = $res->status;
-			$index = 'needs_update_' . $_suffix;
+			$status          = $res->status;
+			$index           = 'needs_update_' . $_suffix;
 			$package->$index = $res->needs_update;
 		}
-		$index = 'status_' . $_suffix;
+		$index           = 'status_' . $_suffix;
 		$package->$index = apply_filters( 'wpml_translation_status', $status, $translation->trid, $lang, 'package' );
 
 		return $package;
@@ -92,7 +93,7 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		$trid    = $this->get_trid();
 
 		if ( $is_new_package ) {
-			$this->set_language_details( );
+			$this->set_language_details();
 
 			return true;
 		}
@@ -100,9 +101,9 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		$item_md5_translations = $this->get_item_md5_translations( $trid );
 
 		if ( $item_md5_translations ) {
-			$md5     = $iclTranslationManagement->post_md5( $this->package );
+			$md5 = $iclTranslationManagement->post_md5( $this->package );
 
-			if ( $md5 != $item_md5_translations[ 0 ]->md5 ) { //all translations need update
+			if ( $md5 != $item_md5_translations[0]->md5 ) { // all translations need update
 
 				$translation_package = $iclTranslationManagement->create_translation_package( $this->package );
 
@@ -112,7 +113,7 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 
 					$data = array();
 					if ( ! empty( $previous_state ) ) {
-						$data[ 'previous_state' ] = serialize( $previous_state );
+						$data['previous_state'] = serialize( $previous_state );
 					}
 					$data = array(
 						'translation_id'      => $translation_id,
@@ -121,16 +122,16 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 					);
 
 					if ( $needs_update ) {
-						$data[ 'needs_update' ] = 1;
+						$data['needs_update'] = 1;
 					}
 
 					$update_result = $iclTranslationManagement->update_translation_status( $data );
 
-					$rid = $update_result[ 0 ];
+					$rid = $update_result[0];
 
 					$this->update_translation_job( $rid, $this->package );
 
-					//change job status only when needs update
+					// change job status only when needs update
 					if ( $needs_update ) {
 						$job_id = $this->get_translation_job_id( $rid );
 						if ( $job_id ) {
@@ -189,13 +190,13 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 	}
 
 	private function duplicate_package( $package_id ) {
-		//TODO: [WPML 3.3] duplication to be done
-		//						$this->make_duplicate( $package_id, $language_code );
+		// TODO: [WPML 3.3] duplication to be done
+		// $this->make_duplicate( $package_id, $language_code );
 	}
 
 	/**
-	 * @param $translation_action
-	 * @param $source_language
+	 * @param int    $translation_action
+	 * @param string $source_language
 	 *
 	 * @return bool
 	 */
@@ -209,11 +210,16 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		$basket_source_language = TranslationProxy_Basket::get_source_language();
 		if ( $basket && $basket_source_language ) {
 			if ( $source_language != $basket_source_language ) {
-				TranslationProxy_Basket::add_message( array(
-					                                      'type' => 'update',
-					                                      'text' => __( 'You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!
-					Either submit the current basket and then add the post or delete the posts of differing language in the current basket', 'wpml-string-translation' )
-				                                      ) );
+				TranslationProxy_Basket::add_message(
+					array(
+						'type' => 'update',
+						'text' => __(
+							'You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!
+					Either submit the current basket and then add the post or delete the posts of differing language in the current basket',
+							'wpml-string-translation'
+						),
+					)
+				);
 				TranslationProxy_Basket::update_basket();
 
 				$package_is_valid = false;
@@ -223,10 +229,12 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		$select_one_lang_message = __( 'Please select at least one language to translate into.', 'wpml-string-translation' );
 
 		if ( ! $translation_action ) {
-			TranslationProxy_Basket::add_message( array(
-				'type' => 'error',
-				'text' => $select_one_lang_message,
-			) );
+			TranslationProxy_Basket::add_message(
+				array(
+					'type' => 'error',
+					'text' => $select_one_lang_message,
+				)
+			);
 
 			$package_is_valid = false;
 		} else {
@@ -234,10 +242,12 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		}
 
 		if ( ! $package_id ) {
-			TranslationProxy_Basket::add_message( array(
-				                                      'type' => 'error',
-				                                      'text' => __( 'Please select at least one document to translate.', 'wpml-string-translation' )
-			                                      ) );
+			TranslationProxy_Basket::add_message(
+				array(
+					'type' => 'error',
+					'text' => __( 'Please select at least one document to translate.', 'wpml-string-translation' ),
+				)
+			);
 
 			$package_is_valid = false;
 
@@ -262,8 +272,8 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		// end then remove it
 		// check if we have this post in wp_options
 		// end remove
-		if ( isset( $basket[ 'package' ][ $package_id ][ 'to_langs' ][ $target_language ] ) ) {
-			unset( $basket[ 'package' ][ $package_id ][ 'to_langs' ][ $target_language ] );
+		if ( isset( $basket['package'][ $package_id ]['to_langs'][ $target_language ] ) ) {
+			unset( $basket['package'][ $package_id ]['to_langs'][ $target_language ] );
 			TranslationProxy_Basket::update_basket( $basket );
 		}
 		// if user want to duplicate this post, lets do this
@@ -273,8 +283,8 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 	}
 
 	/**
-	 * @param     $source_language
-	 * @param     $target_language
+	 * @param string $source_language
+	 * @param string $target_language
 	 *
 	 * @throws WPML_Package_Exception
 	 */
@@ -300,23 +310,22 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		}
 
 		if ( $send_to_basket ) {
-			$basket[ 'package' ][ $package_id ][ 'from_lang' ]                    = $source_language;
-			$basket[ 'package' ][ $package_id ][ 'to_langs' ][ $target_language ] = 1;
+			$basket['package'][ $package_id ]['from_lang']                    = $source_language;
+			$basket['package'][ $package_id ]['to_langs'][ $target_language ] = 1;
 			// set basket language if not already set
-			if ( ! isset( $basket[ 'source_language' ] ) ) {
-				$basket[ 'source_language' ] = $source_language;
+			if ( ! isset( $basket['source_language'] ) ) {
+				$basket['source_language'] = $source_language;
 			}
 		}
 		TranslationProxy_Basket::update_basket( $basket );
 	}
 
 	/**
-	 * @param $job_details
-	 * @param $post_title
-	 * @param $language_name
+	 * @param \stdClass $job_details
+	 * @param string    $post_title
+	 * @param string    $language_name
 	 *
 	 * @return bool
-	 * @throws WPML_Package_Exception
 	 */
 	private function validate_package_status( $job_details, $post_title, $language_name ) {
 		$send_to_basket = true;
@@ -326,15 +335,27 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 			if ( $job_details->status == ICL_TM_IN_PROGRESS ) {
 				$message_args   = array(
 					'type' => 'update',
-					'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already in progress.',
-						'wpml-string-translation' ), $post_title, $language_name )
+					'text' => sprintf(
+						__(
+							'Post "%1$s" will be ignored for %2$s, because translation is already in progress.',
+							'wpml-string-translation'
+						),
+						$post_title,
+						$language_name
+					),
 				);
 				$send_to_basket = false;
 			} elseif ( $job_details->status == ICL_TM_WAITING_FOR_TRANSLATOR ) {
 				$message_args   = array(
 					'type' => 'update',
-					'text' => sprintf( __( 'Post "%s" will be ignored for %s, because translation is already waiting for translator.',
-						'wpml-string-translation' ), $post_title, $language_name )
+					'text' => sprintf(
+						__(
+							'Post "%1$s" will be ignored for %2$s, because translation is already waiting for translator.',
+							'wpml-string-translation'
+						),
+						$post_title,
+						$language_name
+					),
 				);
 				$send_to_basket = false;
 			}
@@ -346,14 +367,14 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 
 		return $send_to_basket;
 	}
-	
+
 	public function is_in_basket( $target_lang ) {
-		if ( class_exists( 'TranslationProxy_Basket') ) {
+		if ( class_exists( 'TranslationProxy_Basket' ) ) {
 			$basket = TranslationProxy_Basket::get_basket();
-			return isset( $basket[ 'package' ][ $this->package->ID ][ 'to_langs' ][ $target_lang ] );
+			return isset( $basket['package'][ $this->package->ID ]['to_langs'][ $target_lang ] );
 		} else {
 			return false;
 		}
-		
+
 	}
 }

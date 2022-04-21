@@ -77,10 +77,10 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 			}
 		}
 
-		return array($page_query, isset($pid) ? $pid : false);
+		return array( $page_query, isset( $pid ) ? $pid : false );
 	}
 
-	protected abstract function select_best_match( $pages_with_name );
+	abstract protected function select_best_match( $pages_with_name );
 
 	/**
 	 * @param WP_Query $page_query
@@ -91,20 +91,20 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 	 */
 	protected function maybe_adjust_query_by_pid( $page_query, $pid, $index ) {
 		if ( ! ( isset( $page_query->queried_object )
-		         && isset( $page_query->queried_object->ID )
-		         && (int) $page_query->queried_object->ID === (int) $pid )
+				 && isset( $page_query->queried_object->ID )
+				 && (int) $page_query->queried_object->ID === (int) $pid )
 		) {
-			if ( isset( $page_query->query[ 'page_id' ] ) ) {
-				$page_query->query[ 'page_id' ]        = (int) $pid;
+			if ( isset( $page_query->query['page_id'] ) ) {
+				$page_query->query['page_id'] = (int) $pid;
 			}
-			$page_query->query_vars[ 'page_id' ]       = null;
+			$page_query->query_vars['page_id']         = null;
 			$page_query->query_vars[ $this->id_index ] = (int) $pid;
 			if ( isset( $page_query->query[ $this->id_index ] ) ) {
-				$page_query->query[ $this->id_index ]  = (int) $pid;
+				$page_query->query[ $this->id_index ] = (int) $pid;
 			}
-			$page_query->is_page                       = false;
+			$page_query->is_page = false;
 			if ( isset( $page_query->query_vars[ $this->post_type ] )
-			     && $this->post_type !== 'page'
+				 && $this->post_type !== 'page'
 			) {
 				$this->set_query_var_to_restore( $this->post_type, $page_query );
 				unset( $page_query->query_vars[ $this->post_type ] );
@@ -120,18 +120,18 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 
 		return $page_query;
 	}
-	
+
 	/**
 	 * Called when the post id is being adjusted. Can be overridden.
-	 * 
+	 *
 	 * @param WP_Query $page_query
 	 *
 	 * @return WP_Query
 	 */
-	
+
 	protected function adjusting_id( $page_query ) {
 		$page_query->is_single = true;
-		
+
 		return $page_query;
 	}
 
@@ -141,7 +141,7 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 	 *
 	 * @return string
 	 */
-	protected abstract function get_from_join_snippet();
+	abstract protected function get_from_join_snippet();
 
 	/**
 	 * Generates a regular expression matcher for matching language slugs in a URI
@@ -212,9 +212,9 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 	 * @return array
 	 */
 	private function get_single_slug_adjusted_IDs( $page_name_for_query, $post_parent ) {
-		$cache = new WPML_WP_Cache( get_class( $this ) );
-		$cache_key =  'get_single_slug_adjusted_IDs' . $this->post_type . $page_name_for_query . $post_parent;
-		$found = false;
+		$cache     = new WPML_WP_Cache( get_class( $this ) );
+		$cache_key = 'get_single_slug_adjusted_IDs' . $this->post_type . $page_name_for_query . $post_parent;
+		$found     = false;
 
 		$pages_with_name = $cache->get( $cache_key, $found );
 
@@ -235,12 +235,12 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 	private function get_single_slug_adjusted_IDs_from_DB( $page_name_for_query, $post_parent ) {
 		$pages_with_name = $this->wpdb->get_col(
 			$this->wpdb->prepare(
-				"
+				'
 				SELECT ID
-				" . $this->get_from_join_snippet()
-				. $this->get_where_snippet() . " p.post_name = %s
+				' . $this->get_from_join_snippet()
+				. $this->get_where_snippet() . ' p.post_name = %s
 				ORDER BY p.post_parent = %d DESC
-				",
+				',
 				$page_name_for_query,
 				$post_parent
 			)
@@ -260,25 +260,24 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 	 * @used-by \WPML_Page_Name_Query_Filter::filter_page_name to find the correct page_id corresponding to a set of slugs,
 	 *                                                         by filtering the results of this function by language of the
 	 *                                                         returned page_ids.
-	 *
 	 */
 	private function get_multiple_slug_adjusted_IDs( $slugs ) {
 		$parent_slugs    = array_slice( $slugs, 0, - 1 );
 		$pages_with_name = $this->wpdb->get_results(
-			"   SELECT p.ID, p.post_name, p.post_parent, par.post_name as parent_name
-			" . $this->get_from_join_snippet() . "
+			'   SELECT p.ID, p.post_name, p.post_parent, par.post_name as parent_name
+			' . $this->get_from_join_snippet() . "
 			LEFT JOIN {$this->wpdb->posts} par
 				ON par.ID = p.post_parent
-			" . $this->get_where_snippet() . " p.post_name IN (" . wpml_prepare_in( $slugs ) . ")
-			ORDER BY par.post_name IN (" . wpml_prepare_in( $parent_slugs ) . ") DESC"
+			" . $this->get_where_snippet() . ' p.post_name IN (' . wpml_prepare_in( $slugs ) . ')
+			ORDER BY par.post_name IN (' . wpml_prepare_in( $parent_slugs ) . ') DESC'
 		);
-		$query_scorer = new WPML_Score_Hierarchy( $pages_with_name, $slugs );
+		$query_scorer    = new WPML_Score_Hierarchy( $pages_with_name, $slugs );
 
 		return $query_scorer->get_possible_ids_ordered();
 	}
 
 	private function get_where_snippet() {
 
-		return $this->wpdb->prepare( " WHERE p.post_type = %s AND ", $this->post_type );
+		return $this->wpdb->prepare( ' WHERE p.post_type = %s AND ', $this->post_type );
 	}
 }

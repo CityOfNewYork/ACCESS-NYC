@@ -49,7 +49,6 @@ class WPML_TF_Settings_Read extends WPML_TF_Settings_Handler {
 				if ( isset( $settings_properties[ $property_name ] ) ) {
 					call_user_func( array( $settings, 'set_' . $property_name ), $settings_properties[ $property_name ] );
 				}
-
 			} else {
 				throw new BadMethodCallException( 'The method set_' . $property_name . ' is required in ' . get_class( $settings ) . '.' );
 			}

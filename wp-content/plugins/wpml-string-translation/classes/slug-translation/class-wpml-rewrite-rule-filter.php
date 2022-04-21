@@ -55,7 +55,6 @@ class WPML_Rewrite_Rule_Filter implements IWPML_ST_Rewrite_Rule_Filter {
 			$types[] = $repository->get();
 		}
 
-
-		return call_user_func_array( "array_merge", $types );
+		return call_user_func_array( 'array_merge', $types );
 	}
 }

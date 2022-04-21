@@ -38,8 +38,8 @@ class WPML_ST_Settings {
 
 	/**
 	 * @param string $key
-	 * @param mixed $value
-	 * @param bool $save
+	 * @param mixed  $value
+	 * @param bool   $save
 	 */
 	public function update_setting( $key, $value, $save = false ) {
 		$this->get_settings();
@@ -54,14 +54,14 @@ class WPML_ST_Settings {
 	public function delete_settings() {
 		delete_option( self::SETTINGS_KEY );
 	}
-	
+
 	public function save_settings() {
 		$settings = $this->get_settings();
 
 		update_option( self::SETTINGS_KEY, $settings );
 		do_action( 'icl_save_settings', $this->updated_settings );
-		
+
 		$this->updated_settings = array();
-		$this->settings = $settings;
+		$this->settings         = $settings;
 	}
 }

@@ -116,10 +116,7 @@ class LanguageSwitch implements \IWPML_Action {
 	 * @param string $new_locale
 	 */
 	private function changeMoObjects( $new_locale ) {
-		if ( function_exists( '_get_path_to_translation' ) ) {
-			// Reset translation availability information.
-			_get_path_to_translation( null, true );
-		}
+		$this->resetTranslationAvailabilityInformation();
 
 		$cachedMoObjects = isset( self::$globals_cache[ $new_locale ]['l10n'] )
 			? self::$globals_cache[ $new_locale ]['l10n']
@@ -133,6 +130,16 @@ class LanguageSwitch implements \IWPML_Action {
 		 * "wp-content/languages" folder.
 		 */
 		$GLOBALS['l10n'] = $this->jit_mo_factory->get( $new_locale, $this->getUnloadedDomains(), $cachedMoObjects );
+	}
+
+	private function resetTranslationAvailabilityInformation() {
+		global $wp_textdomain_registry;
+
+		if ( $wp_textdomain_registry ) {
+			$wp_textdomain_registry->reset();
+		} elseif ( function_exists( '_get_path_to_translation' ) ) {
+			_get_path_to_translation( null, true );
+		}
 	}
 
 	/**

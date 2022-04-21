@@ -2,9 +2,8 @@
 
 /**
  * class WPML_Taxonomy_Translation
- * 
- * Used by WCML so be careful about modifications to the contructor
  *
+ * Used by WCML so be careful about modifications to the contructor
  */
 
 class WPML_Taxonomy_Translation {
@@ -14,10 +13,10 @@ class WPML_Taxonomy_Translation {
 	/**
 	 * WPML_Taxonomy_Translation constructor.
 	 *
-	 * @param string $taxonomy if given renders a specific taxonomy,
-	 *                         otherwise renders a placeholder
-	 * @param bool[] $args array with possible indices:
-	 *                     'taxonomy_selector' => bool .. whether or not to show the taxonomy selector
+	 * @param string                         $taxonomy if given renders a specific taxonomy,
+	 *                                                 otherwise renders a placeholder
+	 * @param bool[]                         $args array with possible indices:
+	 *                                             'taxonomy_selector' => bool .. whether or not to show the taxonomy selector
 	 * @param WPML_UI_Screen_Options_Factory $screen_options_factory
 	 */
 	public function __construct( $taxonomy = '', $args = array(), $screen_options_factory = null ) {
@@ -32,5 +31,5 @@ class WPML_Taxonomy_Translation {
 	public function render() {
 		$this->ui->render();
 	}
-	
+
 }

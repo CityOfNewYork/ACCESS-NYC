@@ -1,0 +1,508 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "翻訳前："
+         ],
+         "--Choose language--": [
+            "--言語選択--"
+         ],
+         "to:": [
+            "翻訳後："
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "言語ペアを次の翻訳者%sに設定:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ この翻訳者に他の言語ペアを追加"
+         ],
+         "First Name": [
+            "名"
+         ],
+         "Last Name": [
+            "姓"
+         ],
+         "Role": [
+            "役割"
+         ],
+         "(required)": [
+            "(必要)"
+         ],
+         "Make sure that you have provided a correct email address e.g. name@domain.com": [
+            "正しいメールアドレスであることを確認してください。例、name@domain.com"
+         ],
+         "This field is required": [
+            "このフィールドは必要です"
+         ],
+         "A translator can be any WordPress role.": [
+            "翻訳者はいかなるWordPressの役割にも設定できます。"
+         ],
+         "Username": [
+            "ユーザーネーム"
+         ],
+         "Email": [
+            "メール"
+         ],
+         "Search": [
+            "検索"
+         ],
+         "user": [
+            "ユーザー"
+         ],
+         "Editor": [
+            "エディター"
+         ],
+         "Select an existing %s and set as Translation Manager": [
+            "既存の%sを選択し、Translation Managerとして設定する"
+         ],
+         "Create a new %s and set as Translation Manager": [
+            "新規の%sを作成し、Translation Managerとして設定する"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
+         "Add Translation Manager": [
+            "Translation Managerを追加"
+         ],
+         "Translate Some": [
+            "一部翻訳する"
+         ],
+         "I want to choose which content to translate": [
+            "翻訳コンテンツを選択する"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "保留中の自動翻訳はキャンセルされます。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "コンテンツを翻訳するには、<a>Translation Management ダッシュボード</a>を開いてください。"
+         ],
+         "Review the translations before publishing": [
+            "公開する前に、翻訳をレビュー"
+         ],
+         "Publish translations and review them later": [
+            "翻訳を公開し、後でレビューする"
+         ],
+         "Publish translations without reviewing": [
+            "レビューなしで翻訳を公開する"
+         ],
+         "When automatic translation completes:": [
+            "自動翻訳が完了するとき："
+         ],
+         "Translate Everything": [
+            "全て翻訳"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPMLは、公開または更新されるコンテンツを自動的に翻訳します"
+         ],
+         "How do you want to translate this site?": [
+            "このサイトをどのように翻訳しますか？"
+         ],
+         "Select an existing user and set as Translator": [
+            "既存のユーザーをトランスレーターとして設定"
+         ],
+         "Create a new user and set as Translator": [
+            "新ユーザーを作成し、トランスレーターとして設定する"
+         ],
+         "Set language pair(s)": [
+            "言語ペアを設定"
+         ],
+         "Previous": [
+            "前"
+         ],
+         "Add a Translator": [
+            "翻訳者を追加"
+         ],
+         "Edit language pair(s) for translator": [
+            "トランスレーターの言語ペアを編集"
+         ],
+         "Name": [
+            "名前"
+         ],
+         "Language Pairs": [
+            "言語ペア"
+         ],
+         "You can translate to and from all languages": [
+            "全ての言語から全ての言語に翻訳できます。"
+         ],
+         "%s file upload failed.": [
+            "%sファイルのアップロード失敗。"
+         ],
+         "Flag": [
+            "国旗"
+         ],
+         "Flag file": [
+            "ファイルをフラッグ"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "言語が追加されました。次に、サイトのデフォルト言語または翻訳言語を選択してください。"
+         ],
+         "Language added": [
+            "言語が追加されました"
+         ],
+         "The value \"%s\" already exists": [
+            "値、\"%s\"は既に存在します。"
+         ],
+         "Add a new language": [
+            "新しい言語を追加してください"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "下のリストから一般的な言語を選択することで、国指定の言語を作成します。その後ローカライズの対象国を選びます。"
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "データベースに既に存在する組み合わせを選択すると、 WPMLが必要なフィールドを入力します。 詳しくは<AddingACustomLanguageLink />をお読みください。"
+         ],
+         "Cannot find?": [
+            "見つかりませんか？"
+         ],
+         "Click here": [
+            "ここをクリック"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "サイトの言語スイッチャーに表示される言語名。"
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "フォーマットに誤りがあります。小文字と \"-\"のみを含むことができます。例: \"fr\" , \"pt-br\", \"zh-hans\""
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "データベースとURLの言語を識別する独自の値。保存すると、言語コードは変更できません。"
+         ],
+         "Language": [
+            "言語"
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "カスタム言語が既存の言語に似ている場合、既存の言語のスペルチェックと自動翻訳を使用できます。例えば、あなたのカスタム言語がスイスドイツ語の場合、スペルチェックと自動翻訳の言語には、地図上でドイツ語を指定できます。地図上でカスタム言語を既存の言語として指定しない場合、スペルチェックと自動翻訳機能はその言語で利用できなくなります。"
+         ],
+         "Location": [
+            "位置"
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "MOとPOファイルから翻訳を読み込むとき、WPMLがチェックする値。デフォルトロケールは、あなたのWordPress 設定の/wp-content/languages/フォルダのファイル名に含まれています。"
+         ],
+         "Code": [
+            "コード"
+         ],
+         "The language will not be supported by automatic translations": [
+            "この言語は自動翻訳にサポートされていません"
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Googleは、ユーザーを彼らの関連言語と位置のサイトにダイレクトする際、hreflang属性を使用します。例："
+         ],
+         "Language mapping": [
+            "言語マッピング"
+         ],
+         "All English-speaking users: en": [
+            "全ての英語を話すユーザー: en"
+         ],
+         "Don't map this language": [
+            "この言語は地図上で指定しないでください"
+         ],
+         "English for UK users: en-gb": [
+            "イギリスユーザーの英語: en-gb"
+         ],
+         "Default locale": [
+            "初期設定ロケール"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "誤ったフォーマットです。小文字と\"_\"のみを含むことができます。 例: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "English for US users: en-us": [
+            "アメリカユーザーの英語: en-us"
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "URLをエンコードしますか？\r\n"
+         ],
+         "NO": [
+            "いいえ"
+         ],
+         "YES": [
+            "はい"
+         ],
+         " (required)": [
+            " (必要)"
+         ],
+         "Please fill in the field": [
+            "フィールドに入力してください"
+         ],
+         "Save language": [
+            "言語を保存"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "この言語のURLがエンコードされているか、ASCII 文字を使用するかを決定します(はっきりしない場合は、\"No\"として残します)。"
+         ],
+         "adding a custom language": [
+            "カスタム言語を追加"
+         ],
+         "Learn more about required server settings to use a different domain per language": [
+            "言語毎に異なるドメインを使用するために必要なサーバー設定についてお読みください"
+         ],
+         "Language name added as a parameter": [
+            "言語名がパラメーターとして追加されました"
+         ],
+         "I will set up the domains for my secondary languages later.": [
+            "私の第2言語のドメインを後で設定します。"
+         ],
+         "The domain you have entered is invalid.": [
+            "入力されたドメインは無効です。"
+         ],
+         "The domain you have entered must be unique.": [
+            "入力されたドメインは独自でなければなりません。"
+         ],
+         "Please Note: Your site won't work in your secondary languages until this is successfully set up or you switch to a different URL option.": [
+            "注意：この設定が成功するまで、または他のURLオプションに切り替えるまで、サイトは第2言語を使用できません。\r\n"
+         ],
+         "Learn more about Language URL Options": [
+            "言語URLオプションについて学ぶ"
+         ],
+         "How would you like to format your site's URL?": [
+            "サイトのURLをどのようにフォーマットしますか？\r\n"
+         ],
+         "Different languages in directories": [
+            "ディレクトリ内の異なる言語"
+         ],
+         "The URL rewrite is not configured in your server.": [
+            "サーバーでURLリライトが設定されていません。"
+         ],
+         "Learn more about required server settings to display languages in directories": [
+            "ディレクトリで言語を表示するために必要なサーバー設定について学ぶ。"
+         ],
+         "I will fix my server settings to display languages in directories later.": [
+            "ディレクトリで言語を表示するためのサーバー設定を後で修正します。"
+         ],
+         "Your server settings do not allow for languages in directories. ": [
+            "あなたのサーバー設定は、ディレクトリ内での言語表示を許可しません。"
+         ],
+         "Learn more about the required server settings.": [
+            "必要なサーバー設定について学ぶ。"
+         ],
+         "A different domain per language": [
+            "言語毎の異なるドメイン"
+         ],
+         "There was a critical error setting up WPML. Please contact our <LinkToSupportForum /> to resolve it.": [
+            "WPML設定で重大なエラーが発生しました。これを解決するには、<LinkToSupportForum /> にお問い合わせください。"
+         ],
+         "Hide error message": [
+            "エラーメッセージを非表示にする"
+         ],
+         "Show error message": [
+            "エラーメッセージを表示する"
+         ],
+         "View the status of the translations in <s>WPML → Translation Management</s>.": [
+            "翻訳ステータスは、<s>WPML → Translation Management</s>でご覧ください。"
+         ],
+         "WPML has started translating your site": [
+            "WPMLはサイトの翻訳を開始しました"
+         ],
+         "Go to <s>WPML → Translation Management</s> to choose what to translate.": [
+            "翻訳するものを選択するには、<s>WPML → Translation Management</s>を開いてください。"
+         ],
+         "You are ready to start translating": [
+            "翻訳開始の準備が完了しました"
+         ],
+         "Right now, your site has a nice language switcher in its footer. To enable other styles of language switchers, go to <s>WPML → Languages</s>.": [
+            "現在、あなたのサイトにはフッターに素敵な言語スイッチャーがあります。他の言語スイッチャーのスタイルを有効にするには、<s>WPML → 言語</s>を開いてください。"
+         ],
+         "Language switcher customization": [
+            "言語スイッチャーカスタマイゼーション"
+         ],
+         "support forum": [
+            "サポートフォーラム"
+         ],
+         "Default language": [
+            "デフォルト言語"
+         ],
+         "What is the current language of your website?": [
+            "あなたのウェブサイトの現在の言語は何ですか？"
+         ],
+         "Translation languages": [
+            "翻訳言語"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "サイト用にどの言語に翻訳したいですか？"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "リストに必要な言語がない場合"
+         ],
+         "create a custom language": [
+            "カスタム言語を作成できます"
+         ],
+         "What are the languages of your site?": [
+            "サイトにどの言語を使用していますか？"
+         ],
+         "If you don't have a WPML.org account or a valid subscription, %1$spurchase one%2$s to get automatic updates, full support, and a 30-day money-back guarantee.": [
+            "WPML.orgアカウントか有効なサブスクリプションをお持ちではない場合、%1$s１つお買い上げください%2$s 。自動アップデート、フルサポート、30日返金保証付きです。"
+         ],
+         "Already purchased WPML?": [
+            "すでにWPMLを購入されましたか？"
+         ],
+         "Enter your site key from your WPML account to receive automatic updates.": [
+            "WPMLアカウントからサイトキーを入力し、自動アップデートを受け取ってください。\r\n"
+         ],
+         "Site key": [
+            "サイトキー"
+         ],
+         "Get a key for this site": [
+            "このサイト用のキーを取得"
+         ],
+         "Improve your site’s translations using helpful plugins": [
+            "便利なプラグインを使ってサイトの翻訳を改善"
+         ],
+         "Based on the themes and other plugins running on your site, we recommend that you enable the following WPML components. These are included with your WPML purchase and allow you to translate strings, media, admin texts, and more.": [
+            "サイトで実行中のテーマとその他のプラグインに基づいて、以下のWPMLコンポーネントを有効にすることをお勧めします。これらはご購入されたWPMLに含まれ、文字列、メディア、管理テキスト、その他の翻訳を可能にします。\r\n\r\n"
+         ],
+         "Error in activating plugin.": [
+            "プラグインの起動エラー"
+         ],
+         "Error in installing plugin.": [
+            "プラグインのインストールエラー。"
+         ],
+         "Yes, send theme and plugins information, in order to get faster support and compatibility alerts": [
+            "はい、迅速なサポートと互換性アラートを受け取るには、テーマとプラグインの情報を送ってください。"
+         ],
+         "No, don't send this information and skip compatibility alerts": [
+            "いいえ、この情報は送らず、互換性アラートをスキップしてください"
+         ],
+         "Do you want to get better and faster support?": [
+            "より優れた迅速なサポートを受け取りたいですか？"
+         ],
+         "The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.": [
+            "WPMLプラグインは、あなたのサイトで使用される有効なプラグインとテーマのリストをwpml.orgに送ります。これによりサポートチームが迅速にサポートを行い、互換性問題とそのソリューションについて事前にお知らせします。"
+         ],
+         "Privacy and data usage policy": [
+            "プライバシーとデータ使用ポリシー"
+         ],
+         "Only myself (%s)": [
+            "私のみ (%s)"
+         ],
+         "You will be the sole translator for this site. You will be able to translate any document between any language pair. If you want to do some of the translations and allow others to translate as well, select the \"Users of this site\" option instead.": [
+            "あなたはこのサイトの唯一の翻訳者です。いかなる言語ペアの文書も翻訳できます。一部の翻訳を行い、他の人にも翻訳させる場合、\"このサイトのユーザー\"オプションを選択してください。"
+         ],
+         "Individual translators": [
+            "個々の翻訳者"
+         ],
+         "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
+            "このWordPressサイトのユーザーを翻訳者として選択するか、新しいユーザーを作成します。これにより、色々な言語ペアに取り組む翻訳者チームを設定できます。"
+         ],
+         "A Professional Translation Service": [
+            "専門的な翻訳サービス"
+         ],
+         "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
+            "WPMLは70以上の翻訳サービスを統合しています。自分が好きな翻訳サービスを選び、ジョブの送信、翻訳の受信などのプロセスを効率化することが可能です。"
+         ],
+         "I want to set a \"Translation Manager\" who will choose the translators for this site": [
+            "このサイトの翻訳者を選ぶ \"Translation Manager\" を設定する"
+         ],
+         "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
+            "このサイトのユーザーを選択し、その人に翻訳者設定の責任を譲渡することができます。クライアントためにウェブサイトを構築するとき、そのクライアントが翻訳者ユーザーを設定する、または翻訳サービスを選択する場合、このオプションをお選びください。"
+         ],
+         "Learn more about <LinkToTheDifferentWaysYouCanTranslateYourSite/>.": [
+            "<LinkToTheDifferentWaysYouCanTranslateYourSite/>で詳細をお読みください。"
+         ],
+         "the different ways you can translate your site with WPML": [
+            "WPMLでサイトを翻訳する様々な方法"
+         ],
+         "Who will translate?": [
+            "誰が翻訳しますか？"
+         ],
+         "Connect this site to <service_name />": [
+            "このサイトを<service_name />に接続する"
+         ],
+         "Error: %s": [
+            "エラー: %s"
+         ],
+         "Use a different Translation Service": [
+            "他の翻訳サービスを使用"
+         ],
+         "Authenticate": [
+            "認証する"
+         ],
+         "Choose a Translation Service": [
+            "翻訳サービスを選択"
+         ],
+         "Loading": [
+            "読み込み中"
+         ],
+         "+ Add a Translation Manager": [
+            "+ Translation Managerを追加"
+         ],
+         "+ Add a Translator": [
+            "+ 翻訳者を追加"
+         ],
+         "A new language could not be added correctly": [
+            "新しい言語が正しく追加されません"
+         ],
+         "Languages": [
+            "言語"
+         ],
+         "URL Format": [
+            "URL形式"
+         ],
+         "Register WPML": [
+            "WPMLを登録"
+         ],
+         "Translation": [
+            "翻訳"
+         ],
+         "Support": [
+            "サポート"
+         ],
+         "Plugins": [
+            "プラグイン"
+         ],
+         "Finished": [
+            "終了済み"
+         ],
+         "Back": [
+            "戻る"
+         ],
+         "Continue": [
+            "続ける"
+         ],
+         "Skip": [
+            "スキップ"
+         ],
+         "Install and activate": [
+            "インストールおよび認証"
+         ],
+         "Finish": [
+            "終了する"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "Visit  to request an APIトークンをリクエストするには、<link_to_service />を開いてください。このトークンは、ジョブを送受信するために、WPMLが<service_name />に接続することを可能にします。"
+         ],
+         "Settings": [
+            "設定"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "WPMLがサイトコンテンツの自動翻訳に設定されている場合、翻訳サービスに接続することはできません。翻訳サービスを利用するには、<LinkToSettingsPage />ページで翻訳モードを変更してください。\r\n"
+         ],
+         "Error: ": [
+            "エラー："
+         ],
+         "Documentation": [
+            "資料"
+         ],
+         "Deactivate": [
+            "無効にする"
+         ],
+         "Activate": [
+            "有効にする"
+         ],
+         "Description": [
+            "内容"
+         ],
+         "Ranking": [
+            "ランキング"
+         ]
+      }
+   }
+}

@@ -36,10 +36,8 @@ class WPML_ST_Translations_File_Locale {
 		switch ( $this->get_extension( $filepath ) ) {
 			case 'mo':
 				return $this->get_from_mo_file( $filepath );
-
 			case 'json':
 				return $this->get_from_json_file( $filepath, $domain );
-
 			default:
 				return '';
 		}
@@ -61,9 +59,12 @@ class WPML_ST_Translations_File_Locale {
 	 */
 	private function get_from_mo_file( $filepath ) {
 		return $this->get_locales()
-		            ->first( function ( $locale ) use ( $filepath ) {
-			            return strpos( $filepath, $locale . '.mo' );
-		            }, '' );
+					->first(
+						function ( $locale ) use ( $filepath ) {
+							return strpos( $filepath, $locale . '.mo' );
+						},
+						''
+					);
 	}
 
 	/**
@@ -75,15 +76,15 @@ class WPML_ST_Translations_File_Locale {
 	private function get_from_json_file( $filepath, $domain ) {
 		$original_domain = $this->get_original_domain_for_json( $filepath, $domain );
 		$domain_replace  = 'default' === $original_domain ? '' : $original_domain . '-';
+		$locales         = $this->get_locales()->implode( '|' );
 
-		$search = str_replace( 'DOMAIN_PLACEHOLDER', $domain_replace, self::PATTERN_SEARCH_LANG_JSON );
+		$searches['native-file'] = '#' . $domain_replace . '(' . $locales . ')-[-_a-z0-9]+\.json$#i';
+		$searches['wpml-file']   = '#' . $domain . '-(' . $locales . ').json#i';
 
-		$locales = $this->get_locales()->implode( '|' );
-		$search  = str_replace( 'LOCALES_PLACEHOLDER', $locales, $search );
-
-		$i = preg_match( $search, $filepath, $matches );
-		if ( $i && isset( $matches[1] ) ) {
-			return $matches[1];
+		foreach ( $searches as $search ) {
+			if ( preg_match( $search, $filepath, $matches ) && isset( $matches[1] ) ) {
+				return $matches[1];
+			}
 		}
 
 		return '';

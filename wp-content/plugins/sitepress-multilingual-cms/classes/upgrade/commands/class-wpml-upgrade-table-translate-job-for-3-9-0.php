@@ -18,7 +18,7 @@ class WPML_Upgrade_Table_Translate_Job_For_3_9_0 implements IWPML_Upgrade_Comman
 		$columns = array(
 			'title'          => 'VARCHAR(160) NULL',
 			'deadline_date'  => 'DATETIME NULL',
-			'completed_date' => 'DATETIME NULL'
+			'completed_date' => 'DATETIME NULL',
 		);
 
 		if ( $this->upgrade_schema->does_table_exist( $table ) ) {

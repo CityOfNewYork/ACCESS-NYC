@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Ter vertalingen versturen"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Verbinden met WPML's Geavanceerde Vertaal Editor..."
+         ],
+         "Try again": [
+            "Opnieuw proberen"
+         ],
+         "You don't have the rights to review this language": [
+            "Je hebt niet de rechten om deze taal te controleren."
+         ],
+         "pages & posts": [
+            "pagina's & berichten"
+         ],
+         "left to translate": [
+            "nog te vertalen"
+         ],
+         "Translate on hold": [
+            "Vertalen in wachtstand"
+         ],
+         "All translated": [
+            "Alles is vertaald"
+         ],
+         "%d translations left": [
+            "%d resterende vertalingen"
+         ],
+         "Credits used:": [
+            "Gebruikte credits:"
+         ],
+         "Credits left:": [
+            "Resterende credits:"
+         ],
+         "Calculating": [
+            "Berekenen..."
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Resterende prepaid credits die zijn toegewezen aan deze site op WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Resterende prepaid credits"
+         ],
+         "Account credits used": [
+            "Gebruikte accountcredits"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Zodra u al je prepaid credits hebt gebruikt, factureren we je voor alle extra credits die je gebruikt na het einde van de maand"
+         ],
+         "Payment limit:": [
+            "Betalingslimiet:"
+         ],
+         "%s credits": [
+            "%s credits"
+         ],
+         "Preparing more content for translation": [
+            "Voorbereiden van meer inhoud voor vertaling..."
+         ],
+         "Preparing content for translation": [
+            "Voorbereiden van inhoud voor vertaling..."
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Er is een probleem met de automatische vertaling dat je aandacht nodig heeft. Los het op om verder te gaan."
+         ],
+         "%d translations waiting for review": [
+            "%d vertalingen die wachten op controle"
+         ],
+         "Draft — Pending review": [
+            "Concept - in afwachting van controle"
+         ],
+         "Complete": [
+            "Voltooien"
+         ],
+         "Insufficient funds": [
+            "Onvoldoende saldo"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Lees meer over hoe je je inhoud kunt vertalen in de <a>Getting Started Guide</a>"
+         ],
+         "Let's Start Translating!": [
+            "Laten we beginnen met vertalen!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Kies je inhoud uit het Vertaaldashboard hieronder en creëer je eerste vertaalopdracht!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Wijzig je <a>automatic translation settings</a> (lopende vertaaltaken zullen worden voltooid met de huidige instellingen)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Lees meer over het automatisch vertalen van je site."
+         ],
+         "Your site is being automatically translated!": [
+            "Je site wordt automatisch vertaald!"
+         ],
+         "Automatic Translation Status": [
+            "Status automatische vertaling"
+         ],
+         "Calculating...": [
+            "Berekenen..."
+         ],
+         "Do not close WP admin!": [
+            "Sluit WP admin niet!"
+         ],
+         "The number of translations": [
+            "Het aantal vertalingen"
+         ],
+         "Delete Translations": [
+            "Verwijder vertalingen"
+         ],
+         "Keep Translations as Draft": [
+            "Bewaar vertalingen als concept"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Geeft niet. Ik wil deze vertalingen controleren."
+         ],
+         "Cancel": [
+            "Annuleren"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Je hebt geen taken geselecteerd die gecontroleerd moeten worden."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Selecteer de uitstaande beoordelingstaken die je wilt afbreken."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Hierdoor worden de geselecteerde taken uit de Wachtrij Vertalingen verwijderd zonder ze te publiceren. Wat wil je met de vertalingen doen?"
+         ],
+         "Cancel Translation Review": [
+            "Vertaalcontrole annuleren"
+         ],
+         "Edit": [
+            "Bewerken"
+         ],
+         "Updating": [
+            "Updaten"
+         ],
+         "Translate": [
+            "Vertalen"
+         ],
+         "Take and translate": [
+            "Aannemen en vertalen"
+         ],
+         "Review": [
+            "Bekijken"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Bent u zeker dat u deze opdracht wilt opgeven?"
+         ],
+         "Resign": [
+            "Opgeven"
+         ],
+         "View": [
+            "Bekijken"
+         ]
+      }
+   }
+}

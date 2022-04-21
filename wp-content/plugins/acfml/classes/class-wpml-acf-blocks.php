@@ -3,6 +3,20 @@
 class WPML_ACF_Blocks {
 
 	/**
+	 * @var WPML_Post_Translation
+	 */
+	private $wpml_post_translations;
+
+	/**
+	 * WPML_ACF_Blocks constructor.
+	 *
+	 * @param WPML_Post_Translation $wpml_post_translations
+	 */
+	public function __construct( WPML_Post_Translation $wpml_post_translations ) {
+		$this->wpml_post_translations = $wpml_post_translations;
+	}
+
+	/**
 	 * Initialize hooks.
 	 */
 	public function init_hooks() {
@@ -71,25 +85,35 @@ class WPML_ACF_Blocks {
 	 * @return WP_Block_Parser_Block
 	 */
 	public function update_block_data_attribute( WP_Block_Parser_Block $block, array $string_translations, $lang ) {
-
 		if ( $this->is_acf_block( $block ) && isset( $block->attrs['data'] ) ) {
-
 			foreach ( $block->attrs['data'] as $field_name => $text ) {
-
 				if ( $this->is_system_field( $field_name ) ) {
 					continue;
 				}
-
-				if ( is_array( $text ) ) {
-					foreach ( $text as $inner_field_name => $inner_text ) {
-						$block = $this->get_block_field_translation( $block, $string_translations, $lang, $inner_text, $field_name, $inner_field_name );
-					}
-				} else {
-					$block = $this->get_block_field_translation( $block, $string_translations, $lang, $text, $field_name );
-				}
+				$block = $this->get_block_field_translation_recursive( $block, $string_translations, $lang, $text, $field_name );
 			}
 		}
+		return $block;
+	}
 
+	/**
+	 * @param WP_Block_Parser_Block $block
+	 * @param array                 $string_translations
+	 * @param string                $lang
+	 * @param string|array          $text
+	 * @param string                $field_name
+	 * @param null|string           $inner_field_name
+	 *
+	 * @return mixed
+	 */
+	private function get_block_field_translation_recursive( $block, $string_translations, $lang, $text, $field_name, $inner_field_name = null ) {
+		if ( is_array( $text ) ) {
+			foreach ( $text as $inner_field_name => $inner_text ) {
+				$block = $this->get_block_field_translation_recursive( $block, $string_translations, $lang, $inner_text, $field_name, $inner_field_name );
+			}
+		} else {
+			$block = $this->get_block_field_translation( $block, $string_translations, $lang, $text, $field_name, $inner_field_name );
+		}
 		return $block;
 	}
 
@@ -159,7 +183,7 @@ class WPML_ACF_Blocks {
 	}
 
 	/**
-	 * @param string $text ACF field value.
+	 * @param string|array $text ACF field value.
 	 *
 	 * @return string
 	 */
@@ -167,25 +191,72 @@ class WPML_ACF_Blocks {
 		$type = 'LINE';
 		if ( is_array( $text ) ) {
 			$type = 'array';
+		} elseif ( strip_tags( $text ) !== $text ) {
+			$type = 'VISUAL';
 		} elseif ( strpos( $text, "\n" ) !== false ) {
 			$type = 'AREA';
-		} elseif ( strpos( $text, '<' ) !== false ) {
-			$type = 'VISUAL';
 		}
 		return $type;
 	}
 	/**
-	 * @param string $field_name ACF field name.
+	 * @param string $fieldName ACF field name.
 	 * @param string $text       ACF field value.
 	 *
 	 * @return bool
 	 */
-	private function must_skip( $field_name, $text ) {
-		return $this->is_system_field( $field_name ) ||
-				(
-					! is_string( $text ) &&
-					! is_numeric( $text ) &&
-					! is_array( $text )
-				);
+	private function must_skip( $fieldName, $text ) {
+		return $this->is_system_field( $fieldName ) ||
+			$this->valueIsNotTranslatable( $text ) ||
+			! $this->isTranslatableInPreferences( $fieldName );
 	}
+
+	/**
+	 * Checks if ACF field translation preferences is set to Translate or Copy once.
+	 *
+	 * @param string $fieldName ACF field name.
+	 *
+	 * @return bool
+	 */
+	private function isTranslatableInPreferences( $fieldName ) {
+		$acfField = acf_get_field( $fieldName );
+		if ( ! $acfField ) {
+			$acfField = $this->maybeGetSubfield( $fieldName );
+		}
+		if ( isset( $acfField['wpml_cf_preferences'] ) ) {
+			return (int) $acfField['wpml_cf_preferences'] === WPML_TRANSLATE_CUSTOM_FIELD;
+		}
+		return true;
+	}
+
+	/**
+	 * Split field name by "_(digit)_" and try to return ACF field object for last part.
+	 *
+	 * Handles cases for repeater and flexible subfields.
+	 *
+	 * @param string $fieldName      Processed field name.
+	 *
+	 * @return array|false ACF field object (array) or false.
+	 */
+	private function maybeGetSubfield( $fieldName ) {
+		$fieldNameParts = preg_split( '/_\d_/', $fieldName );
+		if ( is_array( $fieldNameParts ) && 1 < count( $fieldNameParts ) ) {
+			return acf_get_field( end( $fieldNameParts ) );
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if field value is in the format supported by Translation Editor.
+	 *
+	 * @param mixed $text
+	 *
+	 * @return bool
+	 */
+	private function valueIsNotTranslatable( $text ) {
+		return ! is_string( $text ) &&
+				! is_numeric( $text ) &&
+				! is_array( $text );
+	}
+
 }
+

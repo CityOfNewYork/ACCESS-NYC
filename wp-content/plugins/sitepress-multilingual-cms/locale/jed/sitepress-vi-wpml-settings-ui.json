@@ -1,0 +1,37 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
+            "Bạn có thể chọn bài đăng nào cần dịch <strong>Bảng điều khiển Quản lý Dịch thuật</strong>."
+         ],
+         "Yes, translate all of these posts automatically": [
+            "Có, tự động dịch tất cả các bài đăng này"
+         ],
+         "No, I want to translate some of these posts, but not all": [
+            "Không, tôi muốn dịch một vài bài đăng trong số này, nhưng không phải tất cả"
+         ],
+         "Save": [
+            "Lưu"
+         ],
+         "Please confirm this translation setting": [
+            "Vui lòng xác nhận cài đặt bản dịch này"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the <NumberOfItems /> existing items.": [
+            "Trang web của bạn được thiết lập để dịch tự động tất cả nội dung. Khi bạn cho phép <PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch  <NumberOfItems /> hạng mục có sẵn."
+         ],
+         "Are you OK with paying for this?": [
+            "Bạn cảm thấy ổn khi thanh toán cho việc này?"
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "Make translatable": [
+            "Cho phép có thể dịch"
+         ]
+      }
+   }
+}

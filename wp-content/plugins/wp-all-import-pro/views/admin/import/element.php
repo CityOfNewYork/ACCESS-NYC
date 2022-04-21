@@ -5,8 +5,7 @@
 	<div class="wpallimport-header">
 		<div class="wpallimport-logo"></div>
 		<div class="wpallimport-title">
-			<p><?php _e('WP All Import', 'wp_all_import_plugin'); ?></p>
-			<h2><?php _e('Import XML / CSV', 'wp_all_import_plugin'); ?></h2>					
+			<h2><?php _e('Review Import File', 'wp_all_import_plugin'); ?></h2>
 		</div>
 		<div class="wpallimport-links">
 			<a href="http://www.wpallimport.com/support/" target="_blank"><?php _e('Support', 'wp_all_import_plugin'); ?></a> | <a href="http://www.wpallimport.com/documentation/" target="_blank"><?php _e('Documentation', 'wp_all_import_plugin'); ?></a>
@@ -21,6 +20,12 @@
 			$custom_type->labels->singular_name = empty($tx->labels->singular_name) ? __('Taxonomy Term', 'wp_all_import_plugin') : $tx->labels->singular_name;
 			$custom_type->labels->name = empty($tx->labels->name) ? __('Taxonomy Terms', 'wp_all_import_plugin') : $tx->labels->name;
 			break;
+        case 'comments':
+            $custom_type = new stdClass();
+            $custom_type->labels = new stdClass();
+            $custom_type->labels->singular_name = __('Comments', 'wp_all_import_plugin');
+            $custom_type->labels->name = __('Comment', 'wp_all_import_plugin');
+            break;
 		default:
 			$custom_type = get_post_type_object( PMXI_Plugin::$session->custom_type );
 			break;
@@ -196,7 +201,7 @@
 			</div>
 		</div>	
 		<div id="wpallimport-filters" class="wpallimport-collapsed-content" style="padding:0;">
-			<table style="width: 100%; font-weight: bold; padding: 20px;">
+			<table style="width: 100%; font-weight: bold; padding: 20px 20px 0 20px;">
 				<tr>					
 					<td style="width: 30%; padding-left: 30px;"><?php _e('Element', 'wp_all_import_plugin'); ?></td>
 					<td style="width:20%;"><?php _e('Rule', 'wp_all_import_plugin'); ?></td>
@@ -226,7 +231,6 @@
 		<?php wp_nonce_field('choose-elements', '_wpnonce_choose-elements') ?>
 		<input type="submit" class="button button-primary button-hero wpallimport-large-button" value="<?php _e('Continue to Step 3', 'wp_all_import_plugin'); ?>" />
 	</p>
-
 	<a href="http://soflyy.com/" target="_blank" class="wpallimport-created-by"><?php _e('Created by', 'wp_all_import_plugin'); ?> <span></span></a>
 	
 </form>

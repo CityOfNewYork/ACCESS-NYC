@@ -2,29 +2,24 @@
 
 class WPML_ST_Theme_Localization_UI implements IWPML_Theme_Plugin_Localization_UI_Strategy {
 
-	/** @var WPML_ST_Theme_Localization_UI */
 	private $utils;
-
-	/** @var string */
 	private $template_path;
-
-	/** @var WPML_Localization */
 	private $localization;
 
 	/**
 	 * WPML_ST_Theme_Localization_UI constructor.
 	 *
-	 * @param WPML_Localization $localization
-	 * @param WPML_ST_Theme_Localization_Utils $utils
-	 * @param string $template_path
+	 * @param \WPML_Localization                $localization
+	 * @param \WPML_ST_Theme_Localization_Utils $utils
+	 * @param string                            $template_path
 	 */
 	public function __construct(
 		WPML_Localization $localization,
 		WPML_ST_Theme_Localization_Utils $utils,
 		$template_path ) {
 
-		$this->localization = $localization;
-		$this->utils = $utils;
+		$this->localization  = $localization;
+		$this->utils         = $utils;
 		$this->template_path = $template_path;
 	}
 
@@ -71,7 +66,7 @@ class WPML_ST_Theme_Localization_UI implements IWPML_Theme_Plugin_Localization_U
 
 	/** @return array */
 	private function get_components() {
-		$components = array();
+		$components                = array();
 		$theme_localization_status = $this->localization->get_localization_stats( 'theme' );
 
 		$status_counters = array(
@@ -107,20 +102,32 @@ class WPML_ST_Theme_Localization_UI implements IWPML_Theme_Plugin_Localization_U
 
 	/**
 	 * @param string $domain
-	 * @param array $stats
+	 * @param array  $stats
 	 *
 	 * @return array
 	 */
 	private function get_component( $domain, array $stats ) {
 		$base_st_url = admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php' );
 		return array(
-			'translated'   => $stats['complete'],
-			'needs_update' => $stats['incomplete'],
-			'needs_update_link' => add_query_arg( array( 'context' => $domain, 'status' => ICL_STRING_TRANSLATION_NOT_TRANSLATED ), $base_st_url ),
-			'translated_link' => add_query_arg( array( 'context' => $domain, 'status' => ICL_STRING_TRANSLATION_COMPLETE ), $base_st_url ),
-			'domain_link' => add_query_arg( array( 'context' => $domain), $base_st_url ),
-			'title_needs_translation' => sprintf( __( 'Translate strings in %s', 'wpml-string-translation' ), $domain),
-			'title_all_strings' => sprintf( __( 'All strings in %s', 'wpml-string-translation' ), $domain),
+			'translated'              => $stats['complete'],
+			'needs_update'            => $stats['incomplete'],
+			'needs_update_link'       => add_query_arg(
+				array(
+					'context' => $domain,
+					'status'  => ICL_STRING_TRANSLATION_NOT_TRANSLATED,
+				),
+				$base_st_url
+			),
+			'translated_link'         => add_query_arg(
+				array(
+					'context' => $domain,
+					'status'  => ICL_STRING_TRANSLATION_COMPLETE,
+				),
+				$base_st_url
+			),
+			'domain_link'             => add_query_arg( array( 'context' => $domain ), $base_st_url ),
+			'title_needs_translation' => sprintf( __( 'Translate strings in %s', 'wpml-string-translation' ), $domain ),
+			'title_all_strings'       => sprintf( __( 'All strings in %s', 'wpml-string-translation' ), $domain ),
 		);
 	}
 

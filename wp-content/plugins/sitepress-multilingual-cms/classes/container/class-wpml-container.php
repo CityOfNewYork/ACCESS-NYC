@@ -1,14 +1,15 @@
 <?php
+
 namespace WPML\Container;
 
-use Auryn\Injector as AurynInjector;
+use WPML\Auryn\Injector as AurynInjector;
 
 class Container {
 
 	/** @var Container $instance */
 	private static $instance = null;
 
-	/** @var AurynInjector|null  */
+	/** @var AurynInjector|null */
 	private $injector = null;
 
 	private function __construct() {
@@ -18,8 +19,8 @@ class Container {
 	/**
 	 * @return Container
 	 */
-	static public function get_instance() {
-		if( ! self::$instance ) {
+	public static function get_instance() {
+		if ( ! self::$instance ) {
 			self::$instance = new Container();
 		}
 
@@ -31,13 +32,17 @@ class Container {
 	 * Shared means that only one instance is ever created when calling the make function.
 	 *
 	 * @param array $names_or_instances
+	 *
+	 * @throws \WPML\Auryn\ConfigException
 	 */
-	static public function share( array $names_or_instances ) {
+	public static function share( array $names_or_instances ) {
 		$injector = self::get_instance()->injector;
 
-		wpml_collect( $names_or_instances )->each( function ( $name_or_instance ) use ( $injector ) {
-			$injector->share( $name_or_instance );
-		});
+		wpml_collect( $names_or_instances )->each(
+			function ( $name_or_instance ) use ( $injector ) {
+				$injector->share( $name_or_instance );
+			}
+		);
 	}
 
 	/**
@@ -48,13 +53,17 @@ class Container {
 	 *      ]
 	 *
 	 * @param array $aliases
+	 *
+	 * @throws \WPML\Auryn\ConfigException
 	 */
-	static public function alias( array $aliases ) {
+	public static function alias( array $aliases ) {
 		$injector = self::get_instance()->injector;
 
-		wpml_collect( $aliases )->each( function ( $alias, $original ) use ( $injector ) {
-			$injector->alias( $original, $alias );
-		});
+		wpml_collect( $aliases )->each(
+			function ( $alias, $original ) use ( $injector ) {
+				$injector->alias( $original, $alias );
+			}
+		);
 	}
 
 	/**
@@ -62,13 +71,17 @@ class Container {
 	 * It can be any kind of callable (class or function).
 	 *
 	 * @param array $delegated [ $class_name => $instantiator ]
+	 *
+	 * @throws \WPML\Auryn\ConfigException
 	 */
-	static public function delegate( array $delegated ) {
+	public static function delegate( array $delegated ) {
 		$injector = self::get_instance()->injector;
 
-		wpml_collect( $delegated )->each( function ( $instantiator, $class_name ) use ( $injector ) {
-			$injector->delegate( $class_name, $instantiator );
-		});
+		wpml_collect( $delegated )->each(
+			function ( $instantiator, $class_name ) use ( $injector ) {
+				$injector->delegate( $class_name, $instantiator );
+			}
+		);
 	}
 
 	/**
@@ -76,13 +89,24 @@ class Container {
 	 * class_name or an instance is set as shared using the share function
 	 *
 	 * @param string $class_name
-	 * @param array $args
+	 * @param array  $args
 	 *
 	 * @return mixed
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
-	static public function make( $class_name, array $args = array() ) {
+	public static function make( $class_name, array $args = array() ) {
 		return self::get_instance()->injector->make( $class_name, $args );
 	}
 
+	/**
+	 * Invoke the specified callable or class::method string, provisioning dependencies along the way
+	 *
+	 * @param mixed $callableOrMethodStr A valid PHP callable or a provisionable ClassName::methodName string
+	 * @param array $args Optional array specifying params with which to invoke the provisioned callable
+	 * @throws \WPML\Auryn\InjectionException
+	 * @return mixed Returns the invocation result returned from calling the generated executable
+	 */
+	public static function execute( $callableOrMethodStr, array $args = [] ) {
+		return self::get_instance()->injector->execute( $callableOrMethodStr, $args );
+	}
 }

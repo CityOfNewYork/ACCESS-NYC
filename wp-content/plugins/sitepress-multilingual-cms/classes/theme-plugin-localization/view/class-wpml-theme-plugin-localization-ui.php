@@ -8,7 +8,7 @@ class WPML_Theme_Plugin_Localization_UI {
 	 * @return IWPML_Template_Service
 	 */
 	private function get_template_service() {
-		$paths = array();
+		$paths   = array();
 		$paths[] = WPML_PLUGIN_PATH . self::TEMPLATE_PATH;
 
 		if ( defined( 'WPML_ST_PATH' ) ) {

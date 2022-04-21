@@ -31,17 +31,23 @@ class StringsRetrieve {
 	 */
 	public function get( $domain, $language, $modified_mo_only ) {
 		return $this->loadFromDb( $language, $domain, $modified_mo_only )
-		            ->filter( function ( $string ) {
-			            return (bool) $string['translation'];
-		            } )
-		            ->mapToGroups( function ( array $string ) {
-			            return $this->groupPluralFormsOfSameString( $string );
-		            } )
-		            ->map( function ( Collection $strings, $key ) {
-			            return $this->buildStringEntity( $strings, $key );
-		            } )
-		            ->values()
-		            ->toArray();
+					->filter(
+						function ( $string ) {
+							return (bool) $string['translation'];
+						}
+					)
+					->mapToGroups(
+						function ( array $string ) {
+							return $this->groupPluralFormsOfSameString( $string );
+						}
+					)
+					->map(
+						function ( Collection $strings, $key ) {
+							return $this->buildStringEntity( $strings, $key );
+						}
+					)
+					->values()
+					->toArray();
 	}
 
 	/**
@@ -54,9 +60,11 @@ class StringsRetrieve {
 	private function loadFromDb( $language, $domain, $modified_mo_only = false ) {
 		$result = \wpml_collect( $this->string_retrieve->get( $language, $domain, $modified_mo_only ) );
 
-		return $result->map( function ( $row ) {
-			return $this->parseResult( $row );
-		} );
+		return $result->map(
+			function ( $row ) {
+				return $this->parseResult( $row );
+			}
+		);
 	}
 
 	/**
@@ -109,7 +117,7 @@ class StringsRetrieve {
 		}
 
 		return [
-			$string['original'] . self::KEY_JOIN . $string['context'] . self::KEY_JOIN . $groupKey => $string
+			$string['original'] . self::KEY_JOIN . $string['context'] . self::KEY_JOIN . $groupKey => $string,
 		];
 	}
 
@@ -139,9 +147,9 @@ class StringsRetrieve {
 	 * @return StringEntity
 	 */
 	private function buildStringEntity( Collection $strings, $key ) {
-		$translations = $strings->sortBy( 'index' )->pluck( 'translation' )->toArray();
+		$translations               = $strings->sortBy( 'index' )->pluck( 'translation' )->toArray();
 		list( $original, $context ) = explode( self::KEY_JOIN, $key );
-		$stringEntity = new StringEntity( $original, $translations, $context );
+		$stringEntity               = new StringEntity( $original, $translations, $context );
 		$stringEntity->set_name( $strings->first()['name'] );
 
 		return $stringEntity;

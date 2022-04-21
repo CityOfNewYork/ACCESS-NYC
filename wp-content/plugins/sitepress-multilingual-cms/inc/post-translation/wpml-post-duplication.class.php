@@ -319,10 +319,10 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 	}
 
 	/**
-	 * @param $lang
-	 * @param $master_post
+	 * @param string   $lang
+	 * @param \WP_Post $master_post
 	 *
-	 * @return mixed|void
+	 * @return array<string,mixed>
 	 */
 	private function duplicate_post_content( $lang, $master_post ) {
 		$duplicated_post_content_meta = array(
@@ -338,10 +338,10 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 	}
 
 	/**
-	 * @param $lang
-	 * @param $master_post
+	 * @param string   $lang
+	 * @param \WP_Post $master_post
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	private function duplicate_post_title( $lang, $master_post ) {
 		$duplicated_post_title_meta = array(
@@ -360,7 +360,7 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 	 * @param string $lang
 	 * @param WP_Post $master_post
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	private function duplicate_post_excerpt( $lang, $master_post ) {
 		$duplicated_post_excerpt_meta = array(

@@ -34,6 +34,6 @@ abstract class Builder {
 	 * @param StringEntity[] $strings
 	 * @return string
 	 */
-	abstract public function get_content(array $strings);
+	abstract public function get_content( array $strings);
 
 }

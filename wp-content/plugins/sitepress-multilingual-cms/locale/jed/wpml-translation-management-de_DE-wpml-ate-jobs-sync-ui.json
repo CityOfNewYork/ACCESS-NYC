@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Einsenden zur Übersetzung"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Verbindung zu WPMLs erweitertem Übersetzungs-Editor wird hergestellt"
+         ],
+         "Try again": [
+            "Erneut versuchen"
+         ],
+         "You don't have the rights to review this language": [
+            "Sie haben nicht die Rechte, um diese Sprache zu überprüfen"
+         ],
+         "pages & posts": [
+            "Seiten & Beiträge"
+         ],
+         "left to translate": [
+            "übrig zur Übersetzung"
+         ],
+         "Translate on hold": [
+            "Übersetzung pausiert"
+         ],
+         "All translated": [
+            "Alles übersetzt"
+         ],
+         "%d translations left": [
+            "%d Übersetzungen übrig"
+         ],
+         "Credits used:": [
+            "Benutzte Credits:"
+         ],
+         "Credits left:": [
+            "Übrige Credits:"
+         ],
+         "Calculating": [
+            "Berechnung"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Verbleibende vorausbezahlte Credits, die dieser Website auf WPML.org zugeordnet sind."
+         ],
+         "Prepaid credits left": [
+            "Übrige vorausbezahlte Credits"
+         ],
+         "Account credits used": [
+            "Benutzte Account-Credits"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Sobald Sie Ihre vorausbezahlten Credits aufgebraucht haben, stellen wir Ihnen nach Monatsende die zusätzlich benutzten Credits in Rechnung"
+         ],
+         "Payment limit:": [
+            "Zahlungslimit:"
+         ],
+         "%s credits": [
+            "%s Credits"
+         ],
+         "Preparing more content for translation": [
+            "Weitere Inhalte werden zur Übersetzung vorbereitet"
+         ],
+         "Preparing content for translation": [
+            "Inhalte werden zur Übersetzung vorbereitet"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Es gibt ein Problem mit der automatischen Übersetzung, das Ihre Aufmerksamkeit erfordert. Beheben Sie es, um fortzufahren."
+         ],
+         "%d translations waiting for review": [
+            "%d Übersetzungen warten auf Überprüfung"
+         ],
+         "Draft — Pending review": [
+            "Entwurf — Überprüfung steht aus"
+         ],
+         "Complete": [
+            "Fertig"
+         ],
+         "Insufficient funds": [
+            "Nicht genug Geldmittel"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Lesen Sie im <a>Einstiegsratgeber</a> mehr darüber, wie Sie Ihre Inhalte übersetzen"
+         ],
+         "Let's Start Translating!": [
+            "Starten wir mit der Übersetzung!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Wählen Sie Ihre Inhalte aus dem Übersetzungs-Dashboard unten aus und erstellen Sie Ihren ersten Übersetzungsauftrag!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Ändern Sie Ihre <a>Einstellungen für automatische Übersetzung</a> (Übersetzungen in Verlauf werden mit den aktuellen Einstellungen fertiggestellt)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Lesen Sie mehr über die automatische Übersetzung Ihrer Website"
+         ],
+         "Your site is being automatically translated!": [
+            "Ihre Website wird aktuell automatisch übersetzt!"
+         ],
+         "Automatic Translation Status": [
+            "Status der automatischen Übersetzung"
+         ],
+         "Calculating...": [
+            "Berechnung ..."
+         ],
+         "Do not close WP admin!": [
+            "Schließen Sie nicht den WP-Adminbereich!"
+         ],
+         "The number of translations": [
+            "Die Anzahl der Übersetzungen"
+         ],
+         "Delete Translations": [
+            "Übersetzungen löschen"
+         ],
+         "Keep Translations as Draft": [
+            "Alle Übersetzungen als Entwurf behalten"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Schon gut. Ich möchte diese Übersetzungen überprüfen."
+         ],
+         "Cancel": [
+            "Abbrechen"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Sie haben noch keine Aufträge ausgewählt, die eine Überprüfung benötigen."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Bitte wählen Sie die ausstehenden Überprüfungsaufträge, um diese abzubrechen."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Dies wird die ausgewählten Aufträge aus der Übersetzungsschlange entfernen, ohne sie zu veröffentlichen. Was möchten Sie mit diesen Übersetzungen tun?"
+         ],
+         "Cancel Translation Review": [
+            "Überprüfung der Übersetzung stornieren"
+         ],
+         "Edit": [
+            "Bearbeiten"
+         ],
+         "Updating": [
+            "Aktualisierung"
+         ],
+         "Translate": [
+            "Übersetzen"
+         ],
+         "Take and translate": [
+            "Annehmen und übersetzen"
+         ],
+         "Review": [
+            "Überprüfung"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Sind Sie sicher, dass Sie diesen Auftrag kündigen möchten?"
+         ],
+         "Resign": [
+            "Zurücktreten"
+         ],
+         "View": [
+            "Anzeigen"
+         ]
+      }
+   }
+}

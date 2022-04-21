@@ -17,7 +17,7 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 	 * @param wpdb $wpdb
 	 */
 	public function __construct( wpdb $wpdb ) {
-		$this->wpdb  = $wpdb;
+		$this->wpdb = $wpdb;
 	}
 
 	public function add_hooks() {
@@ -115,7 +115,7 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 	private function load_data() {
 		if ( null === $this->data ) {
 			$this->data = array();
-			$sql = "SELECT * FROM {$this->wpdb->prefix}icl_mo_files_domains";
+			$sql        = "SELECT * FROM {$this->wpdb->prefix}icl_mo_files_domains";
 			$rowset     = $this->wpdb->get_results( $sql );
 
 			foreach ( $rowset as $row ) {

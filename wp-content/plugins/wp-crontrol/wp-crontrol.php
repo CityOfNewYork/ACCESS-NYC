@@ -5,7 +5,7 @@
  * Description:  WP Crontrol enables you to view and control what's happening in the WP-Cron system.
  * Author:       John Blackbourn & crontributors
  * Author URI:   https://github.com/johnbillion/wp-crontrol/graphs/contributors
- * Version:      1.12.0
+ * Version:      1.12.1
  * Text Domain:  wp-crontrol
  * Domain Path:  /languages/
  * Requires PHP: 5.3.6
@@ -26,7 +26,7 @@
  *
  * @package    wp-crontrol
  * @author     John Blackbourn <john@johnblackbourn.com> & Edward Dale <scompt@scompt.com>
- * @copyright  Copyright 2008 Edward Dale, 2012-2021 John Blackbourn
+ * @copyright  Copyright 2008 Edward Dale, 2012-2022 John Blackbourn
  * @license    http://www.gnu.org/licenses/gpl.txt GPL 2.0
  * @link       https://wordpress.org/plugins/wp-crontrol/
  * @since      0.2
@@ -1795,6 +1795,17 @@ function populate_callback( array $callback ) {
 		$callback['name'] = $callback['function'] . '()';
 	}
 
+	if ( ! method_exists( '\QM_Util', 'populate_callback' ) && ! is_callable( $callback['function'] ) ) {
+		$callback['error'] = new WP_Error(
+			'not_callable',
+			sprintf(
+				/* translators: %s: Function name */
+				__( 'Function %s does not exist', 'wp-crontrol' ),
+				$callback['name']
+			)
+		);
+	}
+
 	return $callback;
 }
 
@@ -2008,6 +2019,7 @@ function get_persistent_core_hooks() {
 		'recovery_mode_clean_expired_keys', // 5.2.0
 		'wp_site_health_scheduled_check', // 5.4.0
 		'wp_https_detection', // 5.7.0
+		'wp_update_user_counts', // 6.0.0
 	);
 }
 

@@ -2,8 +2,8 @@
 
 class WPML_ST_Slug_Translation_UI_Factory {
 
-	const POST = 'post';
-	const TAX  = 'taxonomy';
+	const POST          = 'post';
+	const TAX           = 'taxonomy';
 	const TEMPLATE_PATH = 'templates/slug-translation';
 
 	public function create( $type ) {
@@ -12,7 +12,7 @@ class WPML_ST_Slug_Translation_UI_Factory {
 		$sync_settings_factory = new WPML_Element_Sync_Settings_Factory();
 		$records_factory       = new WPML_Slug_Translation_Records_Factory();
 
-		if (  WPML_Slug_Translation_Factory::POST === $type ) {
+		if ( WPML_Slug_Translation_Factory::POST === $type ) {
 			$settings = new WPML_ST_Post_Slug_Translation_Settings( $sitepress );
 		} elseif ( WPML_Slug_Translation_Factory::TAX === $type ) {
 			$settings = new WPML_ST_Tax_Slug_Translation_Settings();

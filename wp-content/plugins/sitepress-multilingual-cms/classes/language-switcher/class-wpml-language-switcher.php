@@ -13,7 +13,7 @@ class WPML_Language_Switcher extends WPML_SP_User {
 	/**
 	 * WPML_Language_Switcher constructor.
 	 *
-	 * @param Sitepress $sitepress
+	 * @param SitePress                    $sitepress
 	 * @param WPML_LS_Dependencies_Factory $dependencies
 	 */
 	public function __construct( SitePress $sitepress, WPML_LS_Dependencies_Factory $dependencies = null ) {

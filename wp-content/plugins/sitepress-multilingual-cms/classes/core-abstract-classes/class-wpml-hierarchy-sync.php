@@ -1,6 +1,6 @@
 <?php
 
-abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
+abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User {
 
 	const CACHE_GROUP = __CLASS__;
 
@@ -97,7 +97,7 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 	 */
 	abstract public function is_hierarchical( $element_type );
 
-	private final function update_hierarchy_for_element( $row ) {
+	private function update_hierarchy_for_element( $row ) {
 		$update = $this->validate_parent_synchronization( $row );
 
 		if ( $update ) {
@@ -118,9 +118,9 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 			global $sitepress;
 
 			$target_element_id = $row->translated_id;
-			$target_post                = get_post( $target_element_id );
+			$target_post       = get_post( $target_element_id );
 			if ( $target_post ) {
-				$parent_must_empty = false;
+				$parent_must_empty       = false;
 				$post_type               = $target_post->post_type;
 				$element_type            = 'post_' . $post_type;
 				$target_element_language = $sitepress->get_element_language_details( $target_element_id, $element_type );
@@ -153,7 +153,7 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 		return $is_valid;
 	}
 
-	private final function get_source_element_join() {
+	private function get_source_element_join() {
 
 		return "JOIN {$this->lang_info_table} {$this->original_elements_language_table_alias}
 					ON {$this->original_elements_table_alias}.{$this->element_id_column}
@@ -162,19 +162,19 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 	                        = CONCAT('{$this->element_type_prefix}', {$this->original_elements_table_alias}.{$this->element_type_column})";
 	}
 
-	private final function get_translated_element_join() {
+	private function get_translated_element_join() {
 
 		return "JOIN {$this->elements_table} {$this->translated_elements_table_alias}
 					ON {$this->translated_elements_table_alias}.{$this->element_id_column}
 					= {$this->translated_elements_language_table_alias}.element_id ";
 	}
 
-	private final function get_source_element_table() {
+	private function get_source_element_table() {
 
 		return " {$this->elements_table} {$this->original_elements_table_alias} ";
 	}
 
-	private function get_join_translation_language_data($ref_language_code) {
+	private function get_join_translation_language_data( $ref_language_code ) {
 
 		$res = " JOIN {$this->lang_info_table} {$this->translated_elements_language_table_alias}
 	               ON {$this->translated_elements_language_table_alias}.trid
@@ -196,14 +196,14 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 						 , IFNULL({$this->correct_parent_table_alias}.{$this->parent_element_id_column}, 0) AS correct_parent ";
 	}
 
-	private final function get_original_parent_join() {
+	private function get_original_parent_join() {
 
 		return " LEFT JOIN {$this->elements_table} {$this->original_parent_table_alias}
 	                ON {$this->original_parent_table_alias}.{$this->parent_element_id_column}
 	                    = {$this->original_elements_table_alias}.{$this->parent_id_column} ";
 	}
 
-	private final function get_original_parent_language_join() {
+	private function get_original_parent_language_join() {
 
 		return " LEFT JOIN {$this->lang_info_table} {$this->original_parent_language_table_alias}
 	               ON {$this->original_parent_table_alias}.{$this->element_id_column}
@@ -212,7 +212,7 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 	                     = CONCAT('{$this->element_type_prefix}', {$this->original_parent_table_alias}.{$this->element_type_column}) ";
 	}
 
-	private final function get_correct_parent_language_join() {
+	private function get_correct_parent_language_join() {
 
 		return " LEFT JOIN {$this->lang_info_table} {$this->correct_parent_language_table_alias}
 	              ON {$this->correct_parent_language_table_alias}.language_code
@@ -221,18 +221,18 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User{
 	                    = {$this->correct_parent_language_table_alias}.trid ";
 	}
 
-	private final function get_correct_parent_element_join() {
+	private function get_correct_parent_element_join() {
 
 		return " LEFT JOIN {$this->elements_table} {$this->correct_parent_table_alias}
 	              ON {$this->correct_parent_table_alias}.{$this->element_id_column}
 	                = {$this->correct_parent_language_table_alias}.element_id ";
 	}
 
-	private final function get_where_statement( $element_types, $ref_lang_code ) {
+	private function get_where_statement( $element_types, $ref_lang_code ) {
 
 		$filter_originals_snippet = $ref_lang_code
-			? $this->wpdb->prepare( " AND {$this->original_elements_language_table_alias}.language_code = %s ", $ref_lang_code)
-			:  " AND {$this->translated_elements_language_table_alias}.source_language_code IS NOT NULL ";
+			? $this->wpdb->prepare( " AND {$this->original_elements_language_table_alias}.language_code = %s ", $ref_lang_code )
+			: " AND {$this->translated_elements_language_table_alias}.source_language_code IS NOT NULL ";
 
 		return " WHERE {$this->original_elements_table_alias}.{$this->element_type_column}
 					IN (" . wpml_prepare_in( $element_types ) . ")

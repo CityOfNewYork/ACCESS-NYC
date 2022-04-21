@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate/AutoTranslate.js:19
+msgid "Sending for translation"
+msgstr ""
+
+#: src/js/ate/enable/init.js:53
+msgid "Connecting to WPML’s Advanced Translation Editor"
+msgstr ""
+
+#: src/js/ate/enable/init.js:67
+msgid "Try again"
+msgstr ""
+
+#: src/js/ate/review/init.js:17
+msgid "You don't have the rights to review this language"
+msgstr ""
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:42
+msgid "pages & posts"
+msgstr ""
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:43
+msgid "left to translate"
+msgstr ""
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:52
+msgid "Translate on hold"
+msgstr ""
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:54
+msgid "All translated"
+msgstr ""
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:59
+msgid "%d translations left"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:101
+msgid "Credits used:"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:105
+msgid "Credits left:"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:115
+msgid "Calculating"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:50
+msgid "Remaining prepaid credits that are assigned to this site on WPML.org."
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:64
+msgid "Prepaid credits left"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:84
+msgid "Account credits used"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:92
+msgid ""
+"Once you’ve used all your prepaid credits, we’ll invoice you for any "
+"additional credits you use after the end of the month"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:97
+msgid "Payment limit:"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:98
+msgid "%s credits"
+msgstr ""
+
+#: src/js/ate/status-bar/components/sending/index.js:10
+msgid "Preparing more content for translation"
+msgstr ""
+
+#: src/js/ate/status-bar/components/sending/index.js:11
+msgid "Preparing content for translation"
+msgstr ""
+
+#: src/js/ate/status-bar/model/NoticeManager.js:17
+msgid ""
+"There is an issue with automatic translation that needs your attention. Fix "
+"it to continue."
+msgstr ""
+
+#: src/js/ate/status-bar/model/NoticeManager.js:9
+msgid "%d translations waiting for review"
+msgstr ""
+
+#: src/js/ate/status-icons/TranslationQueue.js:47
+msgid "Draft — Pending review"
+msgstr ""
+
+#: src/js/ate/status-icons/TranslationQueue.js:49
+msgid "Complete"
+msgstr ""
+
+#: src/js/ate/status-icons/TranslationQueue.js:59
+msgid "Insufficient funds"
+msgstr ""
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:23
+msgid ""
+"Read more about how to translate your content in the <a>Getting Started "
+"Guide</a>"
+msgstr ""
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:33
+msgid "Let's Start Translating!"
+msgstr ""
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:35
+msgid ""
+"Choose your content from the Translation Dashboard below and create your "
+"first translation job!"
+msgstr ""
+
+#: src/js/ate/translate-everything/components/Status/index.js:107
+msgid ""
+"Change your <a>automatic translation settings</a> (in-progress translation "
+"jobs will be completed with the current settings)."
+msgstr ""
+
+#: src/js/ate/translate-everything/components/Status/index.js:117
+msgid "Read more about translating your site automatically."
+msgstr ""
+
+#: src/js/ate/translate-everything/components/Status/index.js:41
+msgid "Your site is being automatically translated!"
+msgstr ""
+
+#: src/js/ate/translate-everything/components/Status/index.js:42
+msgid "Automatic Translation Status"
+msgstr ""
+
+#: src/js/ate/translate-everything/components/Status/index.js:50
+msgid "Calculating..."
+msgstr ""
+
+#: src/js/ate/translate-everything/components/Status/index.js:90
+msgid "Do not close WP admin!"
+msgstr ""
+
+#: src/js/ate/translate-everything/components/Status/index.js:98
+msgid "The number of translations"
+msgstr ""
+
+#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:34
+msgid "Delete Translations"
+msgstr ""
+
+#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:42
+msgid "Keep Translations as Draft"
+msgstr ""
+
+#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:51
+msgid "Never mind. I want to review these translations."
+msgstr ""
+
+#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:62
+msgid "Cancel"
+msgstr ""
+
+#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:68
+msgid "You haven't selected any jobs that need review."
+msgstr ""
+
+#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:71
+msgid "Please select the pending review jobs to abort."
+msgstr ""
+
+#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:75
+msgid ""
+"This will remove the selected jobs from the Translations Queue without "
+"publishing them. What would you like to do with the translations?"
+msgstr ""
+
+#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:79
+msgid "Cancel Translation Review"
+msgstr ""
+
+#: src/js/translationQueue/ActionButtons.js:150
+msgid "Edit"
+msgstr ""
+
+#: src/js/translationQueue/ActionButtons.js:152
+msgid "Updating"
+msgstr ""
+
+#: src/js/translationQueue/ActionButtons.js:154
+msgid "Translate"
+msgstr ""
+
+#: src/js/translationQueue/ActionButtons.js:156
+msgid "Take and translate"
+msgstr ""
+
+#: src/js/translationQueue/ActionButtons.js:43
+msgid "Review"
+msgstr ""
+
+#: src/js/translationQueue/ActionButtons.js:71
+msgid "Are you sure you want to resign from this job?"
+msgstr ""
+
+#: src/js/translationQueue/ActionButtons.js:82
+msgid "Resign"
+msgstr ""
+
+#: src/js/translationQueue/ActionButtons.js:91
+msgid "View"
+msgstr ""

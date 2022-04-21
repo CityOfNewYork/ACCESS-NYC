@@ -45,8 +45,8 @@ class WPML_Copy_Once_Custom_Field implements IWPML_Action {
 			 *
 			 * @since 4.1
 			 *
-			 * @param array $values Custom fields values as they are in the database
-			 * @param array {
+			 * @param array<mixed> $values Custom fields values as they are in the database
+			 * @param array<int|string> $args {
 			 *      @type int $post_id ID of post associated with custom field
 			 *      @type string $meta_key custom fields meta key
 			 *      @type int $custom_fields_translation field translation option

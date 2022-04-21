@@ -1,0 +1,365 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/admin-strings/texts.js:10
+msgid "Not included in String Translation"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:11
+msgid "Registered and locked"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:13
+msgid "Text"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:14
+msgid "Numeric"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:15
+msgid "All Types"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:17
+#: src/js/strings-cleanup/components/CleanupModal.js:66
+msgid "Search"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:19
+msgid "Communication error"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:20
+msgid "The action failed."
+msgstr ""
+
+#: src/js/admin-strings/texts.js:22
+msgid "All (%d)"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:23
+msgid "Included in String Translation (%d)"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:24
+msgid "Not included in String Translation (%d)"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:26
+msgid "This setting is locked by a WPML configuration file."
+msgstr ""
+
+#: src/js/admin-strings/texts.js:28
+msgid "Option"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:29
+msgid "Value"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:30
+msgid "Type"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:31
+msgid "State"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:34
+msgid "Export as a WPML configuration file"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:35
+#: src/js/strings-cleanup/components/CleanupModal.js:51
+msgid "Cancel"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:36
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgstr ""
+
+#: src/js/admin-strings/texts.js:38
+msgid "No options found."
+msgstr ""
+
+#: src/js/admin-strings/texts.js:39
+msgid ""
+"Make sure you saved your theme options at least once. Some themes only add "
+"these to the wp_options table after the user explicitly saves changes to "
+"the theme defaults."
+msgstr ""
+
+#: src/js/admin-strings/texts.js:6
+msgid "Add to String Translation"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:7
+msgid "Remove from String Translation"
+msgstr ""
+
+#: src/js/admin-strings/texts.js:9
+msgid "Included in String Translation"
+msgstr ""
+
+#: src/js/main-ui/components/Actions.js:46
+msgid "Edit"
+msgstr ""
+
+#: src/js/main-ui/components/Actions.js:57
+msgid "Shift+Tab"
+msgstr ""
+
+#: src/js/main-ui/components/Actions.js:62
+msgid "Tab"
+msgstr ""
+
+#: src/js/main-ui/components/EditTranslationPopup.js:102
+msgid "Translation to:"
+msgstr ""
+
+#: src/js/main-ui/components/EditTranslationPopup.js:121
+msgid "Copy from original"
+msgstr ""
+
+#: src/js/main-ui/components/EditTranslationPopup.js:136
+msgid "Use Shift+Enter to add a new line."
+msgstr ""
+
+#: src/js/main-ui/components/EditTranslationPopup.js:95
+msgid "Original:"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:165
+msgid "Add %s translation"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:184
+msgid "Edit %s translation"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:61
+msgid "Original language %s"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:68
+msgid "Waiting for translator to %s"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:75
+msgid "Translation in progress to %s"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:82
+msgid "In basket for translation to %s"
+msgstr ""
+
+#: src/js/main-ui/components/notification.js:13
+msgid "Translation saved."
+msgstr ""
+
+#: src/js/main-ui/components/notification.js:17
+msgid "Translation update failed."
+msgstr ""
+
+#: src/js/mo-scan/LocalizationPageUI.js:20
+msgid "WPML has detected changed or new MO files"
+msgstr ""
+
+#: src/js/mo-scan/LocalizationPageUI.js:26
+msgid ""
+"There are new or updated .mo files. WPML needs to scan them to find strings "
+"for translation."
+msgstr ""
+
+#: src/js/mo-scan/LocalizationPageUI.js:30
+#: src/js/mo-scan/texts.js:14
+msgid "Scan translation files"
+msgstr ""
+
+#: src/js/mo-scan/LocalizationPageUI.js:31
+#: src/js/mo-scan/texts.js:15
+msgid "Scanned %1$d of %2$d files..."
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/UI.js:41
+msgid "Generated files for %1$d of %2$d sites..."
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/UI.js:42
+msgid "Generated %1$d of %2$d files..."
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/UI.js:46
+msgid "WPML needs to generate .mo files"
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:10
+msgid ""
+"WPML String Translation uses .mo files instead of database calls. WPML "
+"needs to generate these .mo files in order for translations to appear on "
+"the front-end. However, the folder that should hold these .mo files is not "
+"open for writing."
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:13
+msgid ""
+"Please use your admin control panel or an FTP program to make the following "
+"folder writeable:"
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:23
+msgid "There was a problem creating the .mo files"
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:26
+msgid "You can try again now or try again later by going to "
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:34
+msgid "Translations are missing from the front-end until you generate .mo files"
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:37
+msgid ""
+"Your site doesn't have the .mo files that WPML needs in order to display "
+"translated strings on the front-end. To generate these .mo files, remember "
+"to go to "
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:38
+msgid "WPML->Theme and plugins localization."
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:43
+msgid ""
+"WPML String Translation uses .mo files instead of database calls. WPML "
+"needs to generate these .mo files in order for translations to appear on "
+"the front-end."
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:51
+msgid "Try again"
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:54
+msgid "Generate .mo files"
+msgstr ""
+
+#: src/js/mo-scan/pre-generate/textProvider.js:59
+msgid "Close this message"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:10
+msgid ""
+"Find additional texts that WordPress, the theme and plugins created and "
+"choose which ones to translate"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:11
+msgid "Choose texts for translation"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:12
+msgid "Some of the translations have changed"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:13
+msgid "Scan the selected components to make new texts available for translation."
+msgstr ""
+
+#: src/js/mo-scan/texts.js:3
+msgid "Select all"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:4
+msgid "Plugins:"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:5
+msgid "Themes:"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:6
+msgid "Core:"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:7
+msgid "Can't find the strings you're looking to translate?"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:8
+msgid "Most likely you cannot see the strings you want to translate because:"
+msgstr ""
+
+#: src/js/mo-scan/texts.js:9
+msgid "Texts are not selected for translation"
+msgstr ""
+
+#: src/js/strings-cleanup/App.js:16
+#: src/js/strings-cleanup/components/CleanupModal.js:38
+msgid "Remove strings by domain"
+msgstr ""
+
+#: src/js/strings-cleanup/App.js:18
+msgid ""
+"Clean up the String Translation table by removing untranslated strings by "
+"domain."
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupButton.js:12
+msgid "Remove strings"
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupModal.js:55
+msgid "Remove"
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupModal.js:61
+msgid ""
+"The String Translation table currently contains strings from the domains "
+"listed below. If you do not plan to translate strings from a particular "
+"domain, select it below to remove its untranslated strings from the String "
+"Translation table. Any strings that already have translations will still be "
+"available."
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupProgress.js:21
+msgid "Removing strings from String Translation table"
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:27
+msgid ""
+"To add strings back to the String Translation table, you may need to rescan "
+"translation files or register strings as translatable."
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:29
+msgid "Read more about "
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:31
+msgid "scanning your site for strings and registering them as translatable."
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:40
+msgid "Successfully removed strings"
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:44
+msgid "OK, Great"
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupTable.js:14
+msgid "Domain"
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupTable.js:18
+msgid "Strings count"
+msgstr ""
+
+#: src/js/strings-cleanup/components/CleanupTable.js:24
+msgid "Translated strings"
+msgstr ""
